@@ -1,0 +1,195 @@
+name: Affiliate Performance CPU Hardtest
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cpu_similarity_patch.py'
+      - 'AFFILIATE_HOBBYRAUM/performance-cache/test_ebay_similarity_cpu_v672146.php'
+      - '.github/workflows/affiliate-performance-cpu-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cpu-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare isolated affiliate source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/affiliate-perf
+          mkdir -p /tmp/affiliate-perf
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/affiliate-perf/affiliate-portal-router
+
+      - name: Apply proven 6.72.144 + 6.72.145 deltas and CPU rootfix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/affiliate-perf/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_batch_patch.py /tmp/affiliate-perf/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cpu_similarity_patch.py /tmp/affiliate-perf/affiliate-portal-router
+
+      - name: Assert CPU delta touches only eBay runtime code
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base145
+          mkdir -p /tmp/base145
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/base145/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/base145/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_batch_patch.py /tmp/base145/affiliate-portal-router
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base=Path('/tmp/base145/affiliate-portal-router')
+          work=Path('/tmp/affiliate-perf/affiliate-portal-router')
+          def h(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          rels=sorted(set([p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()]+[p.relative_to(work).as_posix() for p in work.rglob('*') if p.is_file()]))
+          changed=[r for r in rels if not (base/r).is_file() or not (work/r).is_file() or h(base/r)!=h(work/r)]
+          print('CPU_CHANGED',changed)
+          if changed!=['includes/trait-ppar-ebay.php']:
+              raise SystemExit(f'FAIL unexpected CPU patch scope {changed}')
+          print('PASS CPU patch scope exactly eBay runtime trait')
+          PY
+
+      - name: PHP syntax all plugin files
+        shell: bash
+        run: |
+          set -euo pipefail
+          find /tmp/affiliate-perf/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Exact 92-percent decision equivalence and worst-case CPU gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AFFILIATE_HOBBYRAUM/performance-cache/test_ebay_similarity_cpu_v672146.php /tmp/affiliate-perf/test_ebay_similarity_cpu_v672146.php
+          cd /tmp/affiliate-perf
+          php test_ebay_similarity_cpu_v672146.php
+
+      - name: Preserve 6.72.145 distinct-key batch contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AFFILIATE_HOBBYRAUM/performance-cache/test_request_local_batch_cache.php /tmp/affiliate-perf/test_request_local_batch_cache.php
+          cd /tmp/affiliate-perf
+          php test_request_local_batch_cache.php
+
+      - name: Existing banner distribution regression
+        run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+      - name: Assert global path coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "ebay_filter_ranked_product_candidates_provider_cohort" /tmp/affiliate-perf/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "ranked_campaigns_for_slot($context, 'post_bottom_products')" /tmp/affiliate-perf/affiliate-portal-router/includes/trait-ppar-article-plans.php
+          grep -F "category_product_" pferde-template-kit_V1.50.421.php
+          echo "PASS central product ranking path is shared by category/leaf and single-post product delivery"
+
+  real-wordpress-mariadb:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Install WP-CLI and WordPress 7.1.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site /tmp/plugin-work
+          mkdir -p /tmp/wp-site /tmp/plugin-work
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate CPU CI' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+
+      - name: Build and activate exact chained test source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/plugin-work/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/plugin-work/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_batch_patch.py /tmp/plugin-work/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cpu_similarity_patch.py /tmp/plugin-work/affiliate-portal-router
+          cp -a /tmp/plugin-work/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+      - name: Re-run real DB batch gate from 6.72.145
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cp AFFILIATE_HOBBYRAUM/performance-cache/real_wordpress_mariadb_batch_gate.php /tmp/wp-site/wp-content/mu-plugins/ppar-performance-batch-gate.php
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS 'http://127.0.0.1:8080/?ppar_perf_batch_gate=1' | tee /tmp/batch.txt
+          grep -F 'REAL_WORDPRESS_MARIADB_PERFORMANCE_BATCH_PASS' /tmp/batch.txt
+
+      - name: WordPress-loaded exact similarity CPU gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/wp-site/wp-content/mu-plugins/ppar-cpu-gate.php <<'PHP'
+          <?php
+          add_action('template_redirect', static function(){
+            if ((string)($_GET['ppar_cpu_gate'] ?? '') !== '1') return;
+            header('Content-Type: text/plain; charset=utf-8');
+            $o=Pferdeportal_Affiliate_Router::instance();
+            $m=new ReflectionMethod($o,'ebay_topic_titles_duplicate_v672146');
+            $m->setAccessible(true);
+            $titles=[];
+            for($i=0;$i<792;$i++){
+              $x=hash('sha256','worst-'.$i);
+              $titles[]='produkt '.substr($x,0,8).' '.substr($x,8,8).' '.substr($x,16,8).' '.substr($x,24,8).' pferd angebot';
+            }
+            $t=microtime(true); $dups=0;
+            for($i=0;$i<count($titles);$i++){
+              for($j=0;$j<$i;$j++){
+                if($m->invoke($o,$titles[$i],$titles[$j])) $dups++;
+              }
+            }
+            $elapsed=microtime(true)-$t;
+            if($dups!==0 || $elapsed>=3.0){ status_header(500); echo "FAIL dups={$dups} seconds={$elapsed}\n"; exit; }
+            echo "PASS 792-title WordPress-loaded CPU gate seconds={$elapsed}\n";
+            echo "REAL_WORDPRESS_MARIADB_PERFORMANCE_CPU_PASS\n";
+            exit;
+          },0);
+          PHP
+          curl -fsS 'http://127.0.0.1:8080/?ppar_cpu_gate=1' | tee /tmp/cpu.txt
+          grep -F 'REAL_WORDPRESS_MARIADB_PERFORMANCE_CPU_PASS' /tmp/cpu.txt
+
+      - name: Dump server log on failure
+        if: failure()
+        run: cat /tmp/wp-server.log || true
