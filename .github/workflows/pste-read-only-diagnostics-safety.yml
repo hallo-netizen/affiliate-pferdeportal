@@ -107,10 +107,8 @@ jobs:
           grep -q 'PSTE Diagnose' /tmp/diag-page.html
           NONCE="$(php -r '$h=file_get_contents("/tmp/diag-page.html"); if(!preg_match("/const nonce=(\"[^\"]+\");/",$h,$m)) exit(2); echo json_decode($m[1]);')"
           test -n "$NONCE"
-          for i in $(seq 1 40); do
-            curl -fsS -b /tmp/diag-cookies.txt               --data-urlencode 'action=pste_read_only_diag_snapshot'               --data-urlencode "nonce=$NONCE"               http://127.0.0.1:8091/wp-admin/admin-ajax.php >"/tmp/diag-$i.json" &
-          done
-          wait
+          export NONCE
+          seq 1 40 | xargs -P 20 -I{} bash -c 'curl -fsS -b /tmp/diag-cookies.txt --data-urlencode "action=pste_read_only_diag_snapshot" --data-urlencode "nonce=$NONCE" http://127.0.0.1:8091/wp-admin/admin-ajax.php >"/tmp/diag-{}.json"'
           for i in $(seq 1 40); do
             grep -q '"success":true' "/tmp/diag-$i.json"
             grep -q '"read_only":true' "/tmp/diag-$i.json"
