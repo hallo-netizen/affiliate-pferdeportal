@@ -320,3 +320,20 @@ jobs:
           grep -R -n -C 8 "control_provider_access_disabled\|provider_access_disabled\|ebay.*enabled\|enabled.*ebay" /tmp/p130/affiliate-portal-router/includes /tmp/p130/affiliate-portal-router/pferdeportal-affiliate-router.php || true
           echo '=== CATEGORY SLOTS ==='
           grep -R -n -C 8 "category_product_1\|category_product_2\|category_product_3\|article_plan_revision\|rebuild_worker" /tmp/p130/affiliate-portal-router/includes /tmp/p130/affiliate-portal-router/pferdeportal-affiliate-router.php || true
+
+  inspect-130-recovery-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact 6.72.130 recovery core
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/p130 && mkdir /tmp/p130
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/p130
+          P=/tmp/p130/affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo '=== RECOVERY CORE ==='
+          sed -n '1460,1585p' "$P"
+          echo '=== CONTROL BLOCKER DEFINITIONS ==='
+          grep -R -n -C 4 "control_provider_access_disabled" /tmp/p130/affiliate-portal-router || true
+          echo '=== EBAY OPTION CONSTANTS ==='
+          grep -n -E "OPTION_.*EBAY|EBAY_.*OPTION|AFF039_RECOVERY" "$P" | head -80
