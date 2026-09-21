@@ -1,21 +1,35 @@
 <?php
 if (!defined('ABSPATH')) { fwrite(STDERR,"NO_WP\n"); exit(2); }
-$fixture = getenv('AFF_E2E_FIXTURE') ?: dirname(__FILE__) . '/fixtures/real-wxr-product-campaigns-20260915.json.gz';
-$raw = file_get_contents('compress.zlib://' . $fixture);
-if ($raw === false) { fwrite(STDERR,"FIXTURE_READ_FAIL\n"); exit(3); }
-$d = json_decode($raw, true);
-if (!is_array($d) || ($d['schema'] ?? '') !== 'PFERDE_ATELIER_REAL_WXR_PRODUCT_CAMPAIGNS_V1') { fwrite(STDERR,"FIXTURE_SCHEMA_FAIL\n"); exit(4); }
-$pages=array(95=>array(0,'ausruestung','Ausrüstung'),107=>array(95,'ausruestung-reiterbedarf','Reiterbedarf'),186=>array(107,'reithelme','Reithelme'),187=>array(107,'reithandschuhe','Reithandschuhe'),188=>array(107,'reitstiefel','Reitstiefel'),189=>array(107,'sicherheitswesten','Sicherheitswesten'),190=>array(107,'gerten','Gerten'),191=>array(107,'sporen','Sporen'),105=>array(95,'ausruestung-halfter-und-stricke','Halfter & Stricke'),174=>array(105,'halfter-und-stricke-stallhalfter','Stallhalfter'));
-foreach($pages as $id=>$v){$content='<!--E2E_SLOT_1_START-->[pp_affiliate_slot type="category_product_1" intent="portal_context"]<!--E2E_SLOT_1_END--><!--E2E_SLOT_2_START-->[pp_affiliate_slot type="category_product_2" intent="portal_context"]<!--E2E_SLOT_2_END--><!--E2E_SLOT_3_START-->[pp_affiliate_slot type="category_product_3" intent="portal_context"]<!--E2E_SLOT_3_END-->';if(get_post($id)){wp_update_post(array('ID'=>$id,'post_content'=>$content));continue;}$r=wp_insert_post(array('import_id'=>$id,'post_type'=>'page','post_status'=>'publish','post_parent'=>$v[0],'post_name'=>$v[1],'post_title'=>$v[2],'post_content'=>$content),true);if(is_wp_error($r)){fwrite(STDERR,'PAGE_FAIL '.$id.' '.$r->get_error_message()."\n");exit(5);}}
-$count=0;$active_ebay=array();$network_counts=array();
-foreach((array)$d['rows'] as $row){$id=absint($row['post_id']??0);$c=is_array($row['campaign']??null)?$row['campaign']:array();if($id<=0||!$c)continue;if(!get_post($id)){$r=wp_insert_post(array('import_id'=>$id,'post_type'=>'ap_campaign','post_status'=>'publish','post_name'=>sanitize_title((string)($row['post_name']??'')),'post_title'=>(string)($row['post_title']??('Campaign '.$id))),true);if(is_wp_error($r)){fwrite(STDERR,'CAMPAIGN_POST_FAIL '.$id.' '.$r->get_error_message()."\n");exit(6);}}update_post_meta($id,'ppar_campaign_data',$c);foreach((array)($row['meta']??array()) as $k=>$v){if($k==='ppar_campaign_data')continue;update_post_meta($id,(string)$k,$v);}$n=sanitize_key((string)($c['network']??''));$network_counts[$n]=($network_counts[$n]??0)+1;if($n==='ebay'&&!empty($c['active']))$active_ebay[]=$id;$count++;}
-update_option('ppar_enabled','1',false);update_option('ppar_assignments_v1',array(),false);
-$idealo=get_option('ppar_network_idealo_v1',array());if(!is_array($idealo))$idealo=array();$idealo=array_merge($idealo,array('enabled'=>1,'api_key'=>'E2E-NONLIVE-DUMMY','adspace_id'=>'568313','feed_id'=>'2901','output_mode'=>'automatic','link_strategy'=>'products','last_import_at'=>time()));update_option('ppar_network_idealo_v1',$idealo,false);
-$ebay=get_option('ppar_network_ebay_v1',array());if(!is_array($ebay))$ebay=array();$ebay=array_merge($ebay,array('enabled'=>1,'client_id'=>'E2E-NONLIVE-DUMMY','client_secret'=>'E2E-NONLIVE-DUMMY','epn_campaign_id'=>'1234567890','environment'=>'production','marketplace_id'=>'EBAY_DE','business_enabled'=>1,'api_terms_confirmed'=>1,'privacy_policy_confirmed'=>1));update_option('ppar_network_ebay_v1',$ebay,false);
-update_option('ppar_provider_access_state_v1',array('ebay'=>array('status'=>'connected','last_checked'=>time(),'message'=>'E2E local contract only','updated_at'=>time()),'idealo'=>array('status'=>'connected','last_checked'=>time(),'message'=>'E2E local contract only','updated_at'=>time())),false);
-update_option('permalink_structure','/%postname%/',false);flush_rewrite_rules(false);
-if(class_exists('Pferdeportal_Affiliate_Router')){$o=Pferdeportal_Affiliate_Router::instance();foreach(array('maybe_install_ebay_schema','maybe_install_network_sync_schema','maybe_install_output_objects_schema') as $m){if(method_exists($o,$m))$o->$m();}}
-global $wpdb;$table=$wpdb->prefix.'ppar_ebay_items';
-foreach((array)$d['rows'] as $row){$id=absint($row['post_id']??0);$c=is_array($row['campaign']??null)?$row['campaign']:array();if($id<=0||sanitize_key((string)($c['network']??''))!=='ebay'||empty($c['active']))continue;if(absint(get_post_meta($id,'_ppar_ebay_business_auto',true))!==1)continue;$hash=strtolower(sanitize_text_field((string)get_post_meta($id,'_ppar_creative_identity_hash',true)));if(!preg_match('/^[a-f0-9]{64}$/',$hash))continue;$item=(string)($c['external_id']??$id);$seller=(string)($c['advertiser_id']??'');$now=time();$wpdb->replace($table,array('portal_key'=>'pferde-atelier-de','item_id'=>$item,'legacy_item_id'=>'','seller_account_type'=>'BUSINESS','seller_username'=>$seller,'route_mode'=>'business','rule_id'=>'e2e-real-wxr','target_term_id'=>0,'listing_post_id'=>0,'creative_identity_hash'=>$hash,'title'=>(string)($c['title']??''),'short_description'=>(string)($c['description']??''),'condition_text'=>'Neu','price_value'=>(string)($c['price']??''),'currency'=>(string)($c['currency']??'EUR'),'shipping_value'=>'','location_text'=>'','affiliate_url'=>(string)($c['url']??''),'item_web_url'=>(string)($c['destination_url']??$c['url']??''),'image_url'=>(string)($c['image_url']??''),'item_end_at'=>0,'source_hash'=>hash('sha256',$item.'|'.$hash),'source_payload'=>'{}','status'=>'active','source_state'=>'available','policy_state'=>'allowed','route_state'=>'ready','output_state'=>'active','policy_version'=>'e2e','classifier_version'=>'e2e','source_checked_at'=>$now,'rejection_reason'=>'','last_seen'=>$now,'fresh_until'=>$now+7*DAY_IN_SECONDS,'created_at'=>$now,'updated_at'=>$now));}
-$active_ebay=array_values(array_unique(array_map('absint',$active_ebay)));sort($active_ebay,SORT_NUMERIC);update_option('ppar_ebay_public_checkpoint_v1',array('schema'=>'1.0','status'=>'safe','checkpoint_id'=>'e2e-real-wxr-20260915','business_campaign_ids'=>$active_ebay,'private_listing_ids'=>array(),'updated_at'=>time()),false);
-echo 'SEEDED_CAMPAIGNS='.$count."\n";echo 'NETWORK_EBAY='.($network_counts['ebay']??0)."\n";echo 'NETWORK_IDEALO='.($network_counts['idealo']??0)."\n";echo 'ACTIVE_EBAY_CHECKPOINT='.count($active_ebay)."\n";
+$root = getenv('GITHUB_WORKSPACE');
+if (!$root) { fwrite(STDERR,"NO_GITHUB_WORKSPACE\n"); exit(3); }
+$hashes = array(
+ '108'=>'d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3',
+ '109'=>'878060d12bea49e930d22c8ea97404c4adc23e249a3c02314af78fc5c0380e8a',
+ '110'=>'52e40af351c079cc6aa8d4acbcc65638d443a491a21f0682b27882a2f9d3ac95',
+ '111'=>'19b20be69ed4c31ab9153428418477f6c916020b3f4ad18bb6b1c63bbbc1cf17',
+ '112'=>'844d5271f41222ac9763126d75ab9ffae26a209fc6c64219f09af7e215351d90',
+ '113'=>'8ad61f8ae1124b1e0474728e7466044e976141152912c51db197c7f049be2ba4',
+ '114'=>'41d3a23bc95449046e28376961555b84e47fc181f1ac03ed5a666fb793c28622',
+ '115'=>'77a6fade17876c0def0f2221e019eb84fb348ddf418f4813e762bea223880d52',
+ '116'=>'faf8681ffe42887f35bb86e7c649deceedbfc16eee1b3d5bd90d5d2cfb9e85e1',
+ '117'=>'ddfde12a96a81ce840ffbf732ab3bc7ab591a244642871f6978cc6659f099384',
+);
+@mkdir('/tmp/history-zips',0777,true);
+foreach ($hashes as $v=>$want) {
+  $src=$root.'/e2e/history-fixtures/v6.72.'.$v.'.zip.b64';
+  $raw=base64_decode(file_get_contents($src),true);
+  if ($raw===false) { fwrite(STDERR,"HISTORY_B64_FAIL=$v\n"); exit(4); }
+  $zip='/tmp/history-zips/v6.72.'.$v.'.zip';
+  file_put_contents($zip,$raw);
+  $got=hash_file('sha256',$zip);
+  if (!hash_equals($want,$got)) { fwrite(STDERR,"HISTORY_HASH_FAIL=$v:$got\n"); exit(5); }
+  echo "HISTORY_FIXTURE_OK=6.72.$v:$got\n";
+}
+$plugin='/tmp/wp/wp-content/plugins/affiliate-portal-router';
+$cmd='rm -rf '.escapeshellarg($plugin).' && unzip -q '.escapeshellarg('/tmp/history-zips/v6.72.108.zip').' -d '.escapeshellarg('/tmp/wp/wp-content/plugins');
+passthru($cmd,$rc);
+if ($rc!==0) { fwrite(STDERR,"V108_INSTALL_FAIL\n"); exit(6); }
+$fixture=getenv('AFF_E2E_FIXTURE');
+$child='AFF_E2E_FIXTURE='.escapeshellarg($fixture).' wp eval-file '.escapeshellarg($root.'/e2e/seed_real_state_inner.php').' --path=/tmp/wp';
+passthru($child,$rc);
+exit($rc);
