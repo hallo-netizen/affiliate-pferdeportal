@@ -2,46 +2,59 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "FAIL_REAL_SITE_0573_STEP_OVERDUE_FINALIZE_PREPARE_AND_BLIND_START_UI",
+  "status": "PASS_GITHUB_0574_FULL_STRESS_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "b6f074c56530de6213aac8ae73b3e78c31e1fb1c",
+    "technical_head": "623a449b265aa4ae9a157856f678f1b02a22deb6",
+    "branch_head_freshness": "e2f13056013bab8ab6dca84b56f03fad16024b17",
+    "branch_head_delta_from_technical_head": "PROOF_SCRIPT_ONLY_FAIL_FAST_HARDENING_NO_PRODUCT_CODE_CHANGE",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35639057946,
-    "run_result": "SUCCESS_BUT_NOT_LIVE_REPRESENTATIVE_FOR_FINALIZE_LOAD_AND_START_UI",
-    "evidence_artifact_id": 10658065057,
-    "candidate": "0.57.3-HOBBYROOM",
-    "candidate_sha256": "85a14d4af9d79833bd10ac0b29217e4ba614bd9260d1c5c58ffc784455b75a75",
+    "run_id": 35645482192,
+    "run_result": "SUCCESS",
+    "evidence_artifact_id": 10659823699,
+    "evidence_digest": "sha256:f5da0cc4dde3cc5de1eed0ae64f6381f574f676b0792912c4082f015da2ff171",
+    "candidate": "0.57.4-HOBBYROOM",
+    "candidate_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "BLOCKED_BY_REAL_SITE_ACCEPTANCE"
+    "release": "GITHUB_FULL_STRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
   },
   "proven": {
-    "exact_0573_bytes_installed_for_live_attempt": "USER_LIVE_ATTEMPT",
-    "github_stale_queue_browser_race_fix": "PASS",
-    "github_single": "PASS",
-    "github_breadth_40": "PASS_TARGET_REACHED",
-    "github_provider_counts": "PASS_EXACT_26_EACH",
-    "real_site_started_breadth": "PASS",
-    "real_site_reached": "FINALIZE_PREPARE",
-    "real_site_driver_then": "PSTE_DRIVER_STEP_OVERDUE",
-    "real_site_browser_start_without_reload_shows_active_progress": "FAIL",
-    "real_site_browser_requires_reload_to_show_active_queue": "OBSERVED"
+    "package_total_files": "PASS_131",
+    "package_php_files": "PASS_76",
+    "package_version": "PASS_0.57.4",
+    "single": "PASS_15_CANDIDATES_5_USABLE",
+    "persisted_prior_queue_state": "PASS",
+    "browser_start_without_reload_live_progress": "PASS",
+    "stale_old_queue_status_ignored_after_new_start": "PASS",
+    "stress_prepare_multi_request": "PASS_TOTAL_303",
+    "stress_prepare_intermediate_progress_visible": "PASS",
+    "no_step_overdue_in_stress_prepare": "PASS",
+    "breadth_target": "PASS_TARGET_REACHED_41_USABLE_79_RAW_26_ITEMS_22_COMPLETE_4_DOMAIN_PARKED",
+    "technical_park_errors": "ZERO",
+    "provider_counts": "PASS_EXACT_25_EACH",
+    "driver_terminal_state": "PASS_IDLE",
+    "real_wordpress_full_stress_e2e": "PASS_RUN_35645482192",
+    "final_zip_full_workflow": "PASS",
+    "separate_process_full_system": "PASS",
+    "complete_system_simulation": "PASS",
+    "exact_tested_zip_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c"
+  },
+  "fixed_live_failures": {
+    "PSTE_DRIVER_STEP_OVERDUE_FINALIZE_PREPARE": "FIXED_IN_HOBBYROOM_BY_PERSISTED_BOUNDED_PREPARE_STEPS_AND_STRESS_PROOF",
+    "BLIND_START_UI_REQUIRES_RELOAD": "FIXED_IN_HOBBYROOM_BY_ALWAYS_RENDERED_LIVE_STATUS_CONTAINER_AND_NO_RELOAD_BROWSER_PROOF",
+    "STALE_BREADTH_STATUS_AFTER_NEW_START": "FIXED_AND_REPROVEN"
   },
   "first_blocker": {
-    "code": "REAL_SITE_FINALIZE_PREPARE_EXCEEDS_BOUNDED_STEP_CONTRACT",
-    "detail": "On the real site the breadth child reached DataForSEO 3/3, PAA COMPLETE and FINALIZE PREPARE, then the driver became PSTE_DRIVER_STEP_OVERDUE. Code review of the exact 0.57.3 bytes shows PREPARE calls PSTE_Runner::prepareResearchFinalizeJob(), which performs full-source merge/dedup, family membership evaluation, candidate creation, duplicate handling, title diversity, queue attachment and candidate persistence in one server request. The GitHub provider mock and seeded site did not prove this step under live-scale data."
-  },
-  "second_blocker": {
-    "code": "REAL_SITE_START_UI_HAS_NO_LIVE_PROGRESS_CONTAINER_UNTIL_RELOAD",
-    "detail": "When the page loads without an active breadth queue, the active breadth HTML elements are not rendered. After AJAX START, renderQueue() can only update elements that do not exist, so the start controls remain and useful queue progress is invisible until a full page reload."
+    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_0574_EXACT_TESTED_BYTES",
+    "detail": "The exact 0.57.4 ZIP from successful full-stress Real WordPress E2E run 35645482192 has not yet been accepted on the user's real WordPress installation."
   },
   "next_action": {
-    "id": "BUILD_0574_BOUNDED_PREPARE_PLUS_NO_RELOAD_PROGRESS_THEN_FULL_STRESS_E2E",
-    "action": "Do not raise timeouts. Split FINALIZE PREPARE into persisted bounded steps with no data loss, render/toggle the active production-wave status UI immediately after START without reload, show current child/finalize progress continuously, and add a stress acceptance that uses a materially larger candidate/site state. Then run the entire single + persisted prior state + browser start + breadth 40 + negative paths in one real WordPress/MySQL/multiworker workflow.",
-    "success": "EXACT_0574_ZIP_FULL_STRESS_REAL_WORDPRESS_E2E_PASS",
-    "until_then": "NO_NEW_LIVE_PLUGIN_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
+    "id": "INSTALL_EXACT_0574_STRESS_TESTED_BYTES_AND_RUN_REAL_SITE_ACCEPTANCE",
+    "action": "Install only the exact 0.57.4 ZIP from artifact 10659823699 with SHA-256 8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c over the real plugin path Portal SEO Topic Engine/portal-seo-topic-engine.php. Then start a production wave on the real site and verify without page reload: immediate RUNNING state, visible current family/finalize progress, continuing progress, no PSTE_DRIVER_STEP_OVERDUE, no stale PSTE_BREADTH_QUEUE_NOT_FOUND overriding the new run, no duplicate plugin root, and no technical parked errors.",
+    "success": "REAL_SITE_0574_START_PROGRESS_AND_CONTINUATION_PASS",
+    "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
   },
   "rules": [
     "KISS",
