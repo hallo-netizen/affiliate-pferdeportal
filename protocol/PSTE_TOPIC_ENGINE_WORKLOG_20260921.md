@@ -66,3 +66,13 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Exakt getestete ZIP SHA-256 `962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0`.
 - Nachholprüfung entdeckte, dass eine später separat ausgegebene Nutzer-ZIP SHA-256 `30e89d7afd683a2b8bddb5cb6fef1a21d32f5c29ce7ee4c1083e44c306020799` nicht byteidentisch mit dem getesteten Artefakt war. Diese Datei ist gesperrt.
 - Nächster zulässiger Schritt: ausschließlich die exakten `962684fe...`-Bytes aus Artifact 10652182930 bereitstellen/installieren und den echten Nutzer-WordPress-Start/Progress prüfen. Bis dahin kein Live-PASS und keine PPA-005-CURRENT.zip-Promotion.
+
+
+## Nachtrag – echter 0.57.3-Live-Fail nach GitHub-PASS
+- Exakte 0.57.3 wurde live gestartet.
+- Stale-Queue-Fehler aus 0.57.2 trat zunächst nicht erneut auf; der Lauf erreichte FINALIZE PREPARE.
+- Live danach BLOCKED mit PSTE_DRIVER_STEP_OVERDUE.
+- Prüfung der Produktbytes zeigt: FINALIZE PREPARE ist noch nicht request-bounded, obwohl spätere FINALIZE-Stufen bereits in Batches arbeiten.
+- Zusätzlich bestätigt: Die Browseroberfläche kann nach AJAX-Start ohne Reload keinen aktiven Fortschrittsblock anzeigen, weil dieser bei initial inaktiver Queue serverseitig nicht gerendert wurde.
+- Damit war der bisherige Real-WordPress-E2E nicht 1:1 bezüglich live-repräsentativer PREPARE-Last und unmittelbarem Browserzustand nach START.
+- Nächster Arbeitsweg: kein Timeout-Tuning; PREPARE persistent/bounded machen + Start/Progress-UI ohne Reload + Stress-E2E im kompletten Ablauf.
