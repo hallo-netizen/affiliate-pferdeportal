@@ -3,7 +3,6 @@ if(!defined('ABSPATH')){fwrite(STDERR,"ABSPATH missing\n");exit(1);}
 if(!class_exists('PSTE_Plugin')){fwrite(STDERR,"PSTE not loaded\n");exit(1);}
 
 PSTE_Repository::createSchema();
-
 update_option(PSTE_OPTION_SCHEMA,'12',false);
 update_option(PSTE_OPTION_EDITORIAL_REBUILD_MARKER,PSTE_Editorializer::RULESET,false);
 update_option(PSTE_OPTION_EDITORIAL_REBUILD_REPORT,[
@@ -18,6 +17,7 @@ update_option(PSTE_OPTION_BOOT_STATUS,[
     'contract'=>'PSTE_SAFE_BOOT_STATUS_V1','status'=>'READY','stage'=>'READY','error_code'=>'','message'=>'E2E READY',
     'version'=>PSTE_VERSION,'schema'=>'12','updated_at_utc'=>gmdate('c'),'details'=>[]
 ],false);
+
 $settings=PSTE_Plugin::defaults();
 $settings['feature_enabled']=true;
 $settings['environment']='sandbox';
@@ -39,17 +39,23 @@ foreach($fixture['entries'] as $e){
     $byProduct[$p][]=$e;
 }
 $wanted=['heutaschen'];
-foreach(array_keys($byProduct) as $p){if(count($wanted)>=18)break;if(!in_array($p,$wanted,true))$wanted[]=$p;}
+foreach(array_keys($byProduct) as $p){
+    if(count($wanted)>=18)break;
+    if(!in_array($p,$wanted,true))$wanted[]=$p;
+}
 
 $pageIds=[];
 $ensurePage=function(string $slug,string $name,int $parent=0) use (&$pageIds){
-    $key=$slug.'|'.$parent;if(isset($pageIds[$key]))return $pageIds[$key];
+    $key=$slug.'|'.$parent;
+    if(isset($pageIds[$key]))return $pageIds[$key];
     $existing=get_page_by_path($slug,OBJECT,'page');
     if($existing){$pageIds[$key]=(int)$existing->ID;return (int)$existing->ID;}
     $id=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>$name,'post_name'=>$slug,'post_parent'=>$parent],true);
     if(is_wp_error($id))throw new RuntimeException('PAGE_CREATE_'.$id->get_error_code());
-    $pageIds[$key]=(int)$id;return (int)$id;
+    $pageIds[$key]=(int)$id;
+    return (int)$id;
 };
+
 foreach($wanted as $product){
     foreach($byProduct[$product] as $e){
         $main=$ensurePage((string)$e['main_hub_slug'],(string)$e['main_hub_name'],0);
@@ -65,19 +71,27 @@ foreach($wanted as $product){
 
 $baseline=PSTE_Runner::captureSiteBaseline();
 if(($baseline['status']??'')!=='CURRENT')throw new RuntimeException('BASELINE_NOT_CURRENT_'.($baseline['status']??''));
+
 $contextStart=PSTE_Context_Refresh::start($baseline,'E2E_REAL_WORDPRESS');
-if(!in_array((string)($contextStart['status']??''),['RUNNING','COMPLETE'],true))throw new RuntimeException('CONTEXT_START_FAILED_'.(string)($contextStart['error_code']??$contextStart['status']??''));
+if(!in_array((string)($contextStart['status']??''),['PENDING','RUNNING','COMPLETE'],true)){
+    throw new RuntimeException('CONTEXT_START_FAILED_'.(string)($contextStart['error_code']??$contextStart['status']??''));
+}
+
 for($i=0;$i<500;$i++){
     $s=PSTE_Context_Refresh::status();
     if(($s['status']??'')==='COMPLETE')break;
-    if(($s['status']??'')==='BLOCKED')throw new RuntimeException('CONTEXT_BLOCKED_'.(string)($s['error_code']??'').'__'.(string)($s['error_message']??''));
+    if(($s['status']??'')==='BLOCKED'){
+        throw new RuntimeException('CONTEXT_BLOCKED_'.(string)($s['error_code']??'').'__'.(string)($s['error_message']??''));
+    }
     PSTE_Context_Refresh::processBatch();
 }
+
 $ctx=PSTE_Context_Refresh::status();
 if(($ctx['status']??'')!=='COMPLETE')throw new RuntimeException('CONTEXT_NOT_COMPLETE_'.($ctx['status']??''));
 
 $term=get_term_by('slug','heutaschen-beratung','category');
 if(!$term)throw new RuntimeException('HEUTASCHEN_TERM_MISSING');
+
 update_option('pste_e2e_heutaschen_term_id',(int)$term->term_id,false);
 delete_option(PSTE_OPTION_ACTIVE_RESEARCH_JOB);
 delete_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE);
@@ -88,4 +102,11 @@ delete_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK);
 delete_option('pste_e2e_provider_counts');
 delete_option('pste_e2e_paa_ready_count');
 update_option('pste_e2e_provider_mode','normal',false);
-echo wp_json_encode(['ready'=>PSTE_Plugin::isReady(),'baseline_status'=>$baseline['status'],'context_status'=>$ctx['status'],'term_id'=>(int)$term->term_id,'family_count'=>count($wanted)],JSON_UNESCAPED_SLASHES)."\n";
+
+echo wp_json_encode([
+    'ready'=>PSTE_Plugin::isReady(),
+    'baseline_status'=>$baseline['status'],
+    'context_status'=>$ctx['status'],
+    'term_id'=>(int)$term->term_id,
+    'family_count'=>count($wanted)
+],JSON_UNESCAPED_SLASHES)."\n";
