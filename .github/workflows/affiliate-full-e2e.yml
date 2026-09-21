@@ -159,6 +159,76 @@ jobs:
           unzip -q /tmp/117.zip -d /tmp/v117
           diff -qr /tmp/v116 /tmp/v117 || true
           grep -R -n "idealo_only" /tmp/v116 /tmp/v117 || true
+      - name: Build direct 6.72.116-based provider restore fix
+        if: always()
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/fixbuild
+          mkdir -p /tmp/fixbuild
+          base64 --decode e2e/history-fixtures/v6.72.116.zip.b64 > /tmp/base116.zip
+          unzip -q /tmp/base116.zip -d /tmp/fixbuild
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('/tmp/fixbuild/affiliate-portal-router/pferdeportal-affiliate-router.php')
+          s = p.read_text()
+          s = s.replace('Version: 6.72.116', 'Version: 6.72.131', 1)
+          s = s.replace("const VERSION = '6.72.116';", "const VERSION = '6.72.131';", 1)
+          needle = "if (!defined('ABSPATH')) {\n    exit;\n}\n"
+          patch = """if (!defined('ABSPATH')) {
+              exit;
+          }
+
+          function ppar_v672131_restore_provider_state() {
+              $idealo = get_option('ppar_network_idealo_v1', array());
+              if (!is_array($idealo)) {
+                  $idealo = array();
+              }
+              if (($idealo['output_mode'] ?? '') === 'idealo_only') {
+                  $idealo['output_mode'] = 'automatic';
+                  update_option('ppar_network_idealo_v1', $idealo, false);
+              }
+
+              delete_option('ppar_multiprovider_category_repair_v672115');
+              delete_option('ppar_multiprovider_category_repair_v672117');
+              delete_option('ppar_article_plan_rebuild_state_v1');
+
+              $revision = (int) get_option('ppar_article_plan_revision_v1', 0);
+              update_option('ppar_article_plan_revision_v1', $revision + 1, false);
+
+              if (!wp_next_scheduled('ppar_article_plan_rebuild_worker')) {
+                  wp_schedule_single_event(time() + 1, 'ppar_article_plan_rebuild_worker');
+              }
+
+              update_option('ppar_v672131_restore_done', '1', false);
+          }
+
+          register_activation_hook(__FILE__, 'ppar_v672131_restore_provider_state');
+          add_action('admin_init', function () {
+              if (get_option('ppar_v672131_restore_done', '0') !== '1') {
+                  ppar_v672131_restore_provider_state();
+              }
+          }, 1);
+          """
+          if needle not in s:
+              raise SystemExit('ABSPATH insertion point missing')
+          s = s.replace(needle, patch, 1)
+          p.write_text(s)
+          PY
+          php -l /tmp/fixbuild/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -R -n "idealo_only" /tmp/fixbuild/affiliate-portal-router | head -20 || true
+          cd /tmp/fixbuild
+          zip -qr "$GITHUB_WORKSPACE/AFFILIATE_ZENTRALE_V6.72.131_EXACT116_PROVIDER_RESTORE.zip" affiliate-portal-router
+          cd "$GITHUB_WORKSPACE"
+          sha256sum AFFILIATE_ZENTRALE_V6.72.131_EXACT116_PROVIDER_RESTORE.zip
+
+      - name: Upload direct provider restore fix
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-672131-exact116-provider-restore
+          path: AFFILIATE_ZENTRALE_V6.72.131_EXACT116_PROVIDER_RESTORE.zip
+          if-no-files-found: error
+
       - name: Prove display assets untouched
         if: always()
         run: |
