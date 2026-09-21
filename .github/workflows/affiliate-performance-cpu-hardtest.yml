@@ -168,7 +168,7 @@ jobs:
             header('Content-Type: text/plain; charset=utf-8');
             $o=Pferdeportal_Affiliate_Router::instance();
             $m=new ReflectionMethod($o,'ebay_topic_titles_duplicate_v672146');
-            $m->setAccessible(true);
+            $duplicate=$m->getClosure($o);
             $titles=[];
             for($i=0;$i<792;$i++){
               $x=hash('sha256','worst-'.$i);
@@ -177,7 +177,7 @@ jobs:
             $t=microtime(true); $dups=0;
             for($i=0;$i<count($titles);$i++){
               for($j=0;$j<$i;$j++){
-                if($m->invoke($o,$titles[$i],$titles[$j])) $dups++;
+                if($duplicate($titles[$i],$titles[$j])) $dups++;
               }
             }
             $elapsed=microtime(true)-$t;
