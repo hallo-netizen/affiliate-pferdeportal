@@ -1,0 +1,74 @@
+name: Saturday 6.72.96 vs 6.72.133 category selection proof
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-saturday96-vs-133.yml'
+      - 'e2e/saturday96_selection_compare.php'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - name: Build exact 6.72.133
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base130 /tmp/candidate132 /tmp/candidate133
+          mkdir -p /tmp/base130 /tmp/candidate132
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/base130
+          cp -a /tmp/base130/affiliate-portal-router /tmp/candidate132/
+          base64 --decode e2e/fixtures/aff043_into_130.patch.gz.b64 | gzip -dc >/tmp/aff043.patch
+          (cd /tmp/candidate132/affiliate-portal-router && patch -p5 </tmp/aff043.patch)
+          mkdir -p /tmp/candidate132/affiliate-portal-router/recovery
+          base64 --decode e2e/fixtures/aff043-historical-product-state-20260915.json.gz.b64 | gzip -dc > /tmp/candidate132/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json
+          sed -i "s/Version: 6.72.130/Version: 6.72.131/" /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i "s/const VERSION = '6.72.130';/const VERSION = '6.72.131';/" /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          python3 e2e/build_v132.py
+          cp -a /tmp/candidate132 /tmp/candidate133
+          python3 e2e/build_v133.py
+          php -l /tmp/candidate133/affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo BUILD_133_PASS
+      - name: Install WordPress
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.de --title=Sat96Compare --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          cp -a /tmp/candidate133/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+      - name: Seed exact historical 15.09 product inventory only
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp | tee /tmp/seed.log
+          grep -Fx 'SEEDED_CAMPAIGNS=2012' /tmp/seed.log
+          grep -Fx 'NETWORK_EBAY=922' /tmp/seed.log
+          grep -Fx 'NETWORK_IDEALO=1090' /tmp/seed.log
+      - name: Compare exact Saturday selection path against 6.72.133
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/saturday96_selection_compare.php" --path=/tmp/wp | tee /tmp/compare.log
+          grep -E '^(HYBRID|PRODUCTS|COMPARISON)=' /tmp/compare.log
