@@ -129,3 +129,15 @@ RESULT
 - exact revert delta: NOT YET PROVEN
 - display change: FORBIDDEN / NOT REQUIRED BY CURRENT EVIDENCE
 - new plugin build/install: FORBIDDEN UNTIL FIRST EXACT DELTA IS PROVEN
+
+CURRENT FRESHNESS CORRECTION RESULT
+- CURRENT generation 85 was corrected to generation 86 without changing canonical plugin source.
+- Immutable objective-control values were restored to the release_guard contract.
+- The single bound action is now the full-history E2E gate under authorized_next_action=RUN_BOUND_RELEASE_GATES.
+- GitHub Actions freshness audit run 35566467185, attempt 2:
+  - checked affiliate-release-current HEAD 2824f3493d2429cd1f19570e677e2e5699077505
+  - AFFILIATE_RELEASE_GOVERNANCE_PASS
+  - AFFILIATE_RELEASE_SOURCE_PASS
+  - AFFILIATE_RELEASE_TREE_PASS
+  - AFFILIATE_RELEASE_START_PASS
+- Result: CURRENT authority is structurally fresh again at this correction point.
