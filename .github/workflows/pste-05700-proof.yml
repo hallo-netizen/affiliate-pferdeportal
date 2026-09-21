@@ -1,4 +1,4 @@
-name: PSTE 0.57 Exact Server Step Driver Proof
+name: PSTE 0.57 Final ZIP Full Workflow Proof
 
 on:
   push:
@@ -7,13 +7,14 @@ on:
   pull_request:
     paths:
       - 'proof/pste-05700-control-sim/**'
+      - 'proof/pste-05700-final-zip/**'
       - '.github/workflows/pste-05700-proof.yml'
   workflow_dispatch:
 
 jobs:
-  exact-simulation:
+  full-final-zip-proof:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Setup PHP
@@ -21,57 +22,140 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
-      - name: Reconstruct exact control bundle
+
+      - name: Reconstruct exact control proof
         shell: bash
         run: |
           set -euo pipefail
-          cat proof/pste-05700-control-sim/bundle.b64.part* | base64 -d > /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip
-          echo "06f690b741670f0fb51149ab818d0e54c8f1d1f1283d39ad0e7b33259eba3ed2  /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip" | sha256sum -c -
-          rm -rf /tmp/pste05700-proof
-          mkdir -p /tmp/pste05700-proof
-          unzip -q /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip -d /tmp/pste05700-proof
-      - name: Exact positive and negative simulation
+          cat proof/pste-05700-control-sim/bundle.b64.part* | base64 -d > /tmp/PSTE-0.57.0-CONTROL.zip
+          echo "06f690b741670f0fb51149ab818d0e54c8f1d1f1283d39ad0e7b33259eba3ed2  /tmp/PSTE-0.57.0-CONTROL.zip" | sha256sum -c -
+          rm -rf /tmp/pste-control
+          mkdir -p /tmp/pste-control
+          unzip -q /tmp/PSTE-0.57.0-CONTROL.zip -d /tmp/pste-control
+
+      - name: Core positive and negative control
         shell: bash
         run: |
           set -euo pipefail
-          cd /tmp/pste05700-proof/pste05700_github_control
+          cd /tmp/pste-control/pste05700_github_control
           bash ./run.sh
-      - name: Upload exact tested control bundle
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: PSTE-0.57.0-EXACT-TESTED-CONTROL-BUNDLE
-          path: /tmp/PSTE-0.57.0-GITHUB-CONTROL-SIM.zip
-          if-no-files-found: error
-          retention-days: 30
-      - name: Locate and verify exact fresh ZIP candidate
-        id: fresh_zip
+
+      - name: Reconstruct exact final ZIP bytes
         shell: bash
         run: |
           set -euo pipefail
-          expected="2ce8640b12e71c3fd028c28841aa5acf5b978284def399a5ec3e0bd4ea49d255"
-          found=""
-          while IFS= read -r -d '' file; do
-            actual="$(sha256sum "$file" | awk '{print $1}')"
-            if [ "$actual" = "$expected" ]; then
-              found="$file"
-              break
-            fi
-          done < <(find /tmp/pste05700-proof -type f -name '*.zip' -print0)
-          if [ -z "$found" ]; then
-            echo "FRESH_ZIP_CANDIDATE_NOT_FOUND"
-            echo "=== PROOF_BUNDLE_FILE_INVENTORY ==="
-            find /tmp/pste05700-proof -type f -printf "%P\t%s bytes\n" | sort
-            echo "=== END_PROOF_BUNDLE_FILE_INVENTORY ==="
-            exit 1
+          cat proof/pste-05700-final-zip/finalzip.b64.part* | base64 -d > /tmp/Portal-SEO-Themenengine-0.57.0-FINAL.zip
+          echo "4093fdb3c9cb1eca1691ceec9a2f1e9a97675982b01f2e440e99fba290b40f06  /tmp/Portal-SEO-Themenengine-0.57.0-FINAL.zip" | sha256sum -c -
+          unzip -tq /tmp/Portal-SEO-Themenengine-0.57.0-FINAL.zip
+          rm -rf /tmp/pste-final
+          mkdir -p /tmp/pste-final
+          unzip -q /tmp/Portal-SEO-Themenengine-0.57.0-FINAL.zip -d /tmp/pste-final
+          test -f /tmp/pste-final/portal-seo-topic-engine/portal-seo-topic-engine.php
+
+      - name: Verify exact proven core bytes inside final ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in             class-pste-breadth-research-queue.php             class-pste-normal-metadata-path.php             class-pste-planning-readiness-gate.php             class-pste-repository.php             class-pste-research-archive.php             class-pste-research-driver.php             class-pste-research-job.php             class-pste-topic-policy.php
+          do
+            cmp "/tmp/pste-control/pste05700_github_control/plugin/includes/$f" "/tmp/pste-final/portal-seo-topic-engine/includes/$f"
+          done
+
+      - name: Final ZIP complete PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          count="$(find /tmp/pste-final/portal-seo-topic-engine -type f -name '*.php' | wc -l)"
+          test "$count" -eq 76
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find /tmp/pste-final/portal-seo-topic-engine -type f -name '*.php' | sort)
+          echo "PHP_SYNTAX_PASS $count/76"
+
+      - name: Final ZIP real bootstrap integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/pste-bootstrap.php <<'PHP'
+          <?php
+          declare(strict_types=1);
+          define('ABSPATH', __DIR__.'/');
+          $GLOBALS['pste_hooks']=[];
+          function add_action($hook,$cb,$priority=10,$args=1){$GLOBALS['pste_hooks'][]=$hook;return true;}
+          function register_activation_hook($file,$cb){$GLOBALS['pste_activation']=$cb;return true;}
+          function is_admin(){return false;}
+          require '/tmp/pste-final/portal-seo-topic-engine/portal-seo-topic-engine.php';
+          foreach(['PSTE_Research_Archive','PSTE_Research_Job','PSTE_Breadth_Research_Queue','PSTE_Research_Driver','PSTE_Plugin'] as $c){
+            if(!class_exists($c,false)){fwrite(STDERR,"MISSING_CLASS $c\n");exit(1);}
+          }
+          foreach(['PSTE_OPTION_RESEARCH_PARKED_INDEX','PSTE_RESEARCH_PARKED_PREFIX','PSTE_RESEARCH_DRIVER_LOOPBACK_ACTION','PSTE_RESEARCH_DRIVER_CRON_HOOK'] as $c){
+            if(!defined($c)){fwrite(STDERR,"MISSING_CONSTANT $c\n");exit(1);}
+          }
+          foreach([PSTE_RESEARCH_DRIVER_CRON_HOOK,'wp_ajax_'.PSTE_RESEARCH_DRIVER_LOOPBACK_ACTION,'wp_ajax_nopriv_'.PSTE_RESEARCH_DRIVER_LOOPBACK_ACTION,'init'] as $h){
+            if(!in_array($h,$GLOBALS['pste_hooks'],true)){fwrite(STDERR,"MISSING_HOOK $h\n");exit(1);}
+          }
+          echo "PASS FULL_PLUGIN_BOOTSTRAP\n";
+          PHP
+          php /tmp/pste-bootstrap.php
+
+      - name: Final ZIP full positive and negative workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pste05700
+          mkdir -p /tmp/pste05700
+          cp -a /tmp/pste-final/portal-seo-topic-engine /tmp/pste05700/plugin
+          cp -a /tmp/pste-control/pste05700_github_control/tests /tmp/pste05700/tests
+          cd /tmp/pste05700/tests
+          for f in             data_preservation_full_harness.php             driver_crash_atomicity_harness.php             driver_e2e_full40.php             driver_lifecycle_harness.php             driver_negative_matrix.php             transport_recovery_mode_harness.php
+          do
+            echo "=== FINAL ZIP $f ==="
+            php "$f"
+          done
+
+      - name: Final ZIP mutation guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=/tmp/pste-final/portal-seo-topic-engine
+          TESTS=/tmp/pste-control/pste05700_github_control/tests
+          rm -rf /tmp/pste-mut && mkdir -p /tmp/pste-mut
+
+          cp -a "$BASE" /tmp/pste-mut/plugin
+          python3 - <<'PY'
+          p='/tmp/pste-mut/plugin/includes/class-pste-research-archive.php'
+          s=open(p).read()
+          old="if(!hash_equals(hash('sha256',self::json((array)($existing['job']??[]))),hash('sha256',self::json($job))))throw new RuntimeException('PSTE_RESEARCH_ARCHIVE_IMMUTABLE_CONFLICT');"
+          assert old in s
+          open(p,'w').write(s.replace(old,"/* MUTATION: immutable conflict disabled */"))
+          PY
+          rm -rf /tmp/pste05700 && mkdir -p /tmp/pste05700
+          cp -a /tmp/pste-mut/plugin /tmp/pste05700/plugin
+          cp -a "$TESTS" /tmp/pste05700/tests
+          if php /tmp/pste05700/tests/driver_crash_atomicity_harness.php >/tmp/mut1.log 2>&1; then
+            cat /tmp/mut1.log; echo "MUTATION_NOT_CAUGHT archive_immutable"; exit 1
           fi
-          cp "$found" /tmp/PSTE-0.57.0-FRESH.zip
-          echo "$expected  /tmp/PSTE-0.57.0-FRESH.zip" | sha256sum -c -
-          echo "candidate=/tmp/PSTE-0.57.0-FRESH.zip" >> "$GITHUB_OUTPUT"
-      - name: Upload exact fresh ZIP candidate
+          echo "PASS MUTATION_CAUGHT archive_immutable"
+
+          rm -rf /tmp/pste-mut && mkdir -p /tmp/pste-mut
+          cp -a "$BASE" /tmp/pste-mut/plugin
+          python3 - <<'PY'
+          p='/tmp/pste-mut/plugin/includes/class-pste-research-driver.php'
+          s=open(p).read()
+          old="if($count<3){$state['status']='RUNNING';"
+          assert old in s
+          open(p,'w').write(s.replace(old,"if($count<999){$state['status']='RUNNING';"))
+          PY
+          rm -rf /tmp/pste05700 && mkdir -p /tmp/pste05700
+          cp -a /tmp/pste-mut/plugin /tmp/pste05700/plugin
+          cp -a "$TESTS" /tmp/pste05700/tests
+          if php /tmp/pste05700/tests/driver_lifecycle_harness.php >/tmp/mut2.log 2>&1; then
+            cat /tmp/mut2.log; echo "MUTATION_NOT_CAUGHT retry_bound"; exit 1
+          fi
+          echo "PASS MUTATION_CAUGHT retry_bound"
+
+      - name: Upload only fully proven final ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: PSTE-0.57.0-FRESH
-          path: ${{ steps.fresh_zip.outputs.candidate }}
+          name: PSTE-0.57.0-FINAL-FULL-WORKFLOW-PASS
+          path: /tmp/Portal-SEO-Themenengine-0.57.0-FINAL.zip
           if-no-files-found: error
           retention-days: 30
