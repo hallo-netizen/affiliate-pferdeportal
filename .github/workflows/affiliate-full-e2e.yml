@@ -337,3 +337,22 @@ jobs:
           grep -R -n -C 4 "control_provider_access_disabled" /tmp/p130/affiliate-portal-router || true
           echo '=== EBAY OPTION CONSTANTS ==='
           grep -n -E "OPTION_.*EBAY|EBAY_.*OPTION|AFF039_RECOVERY" "$P" | head -80
+
+  inspect-130-recovery-start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact 6.72.130 recovery start and eBay enable field
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/p130 && mkdir /tmp/p130
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/p130
+          P=/tmp/p130/affiliate-portal-router/pferdeportal-affiliate-router.php
+          C=/tmp/p130/affiliate-portal-router/includes/trait-ppar-control-contract.php
+          E=/tmp/p130/affiliate-portal-router/includes/trait-ppar-ebay.php
+          echo '=== RECOVERY START ==='
+          sed -n '1318,1410p' "$P"
+          echo '=== CONTROL ACCESS ==='
+          sed -n '250,310p' "$C"
+          echo '=== EBAY DEFAULTS ==='
+          grep -n -A35 -B5 "function ebay_settings_defaults" "$E" || true
