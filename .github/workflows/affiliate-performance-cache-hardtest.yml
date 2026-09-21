@@ -1,0 +1,149 @@
+name: Affiliate Performance Cache Hardtest
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-cache/**'
+      - '.github/workflows/affiliate-performance-cache-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-cache-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare isolated affiliate source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/affiliate-perf
+          mkdir -p /tmp/affiliate-perf
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/affiliate-perf/affiliate-portal-router
+
+      - name: Apply exact request-cache delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/affiliate-perf/affiliate-portal-router
+
+      - name: Assert patch scope is limited
+        shell: bash
+        run: |
+          set -euo pipefail
+          diff -qr release/affiliate-zentrale/current/affiliate-portal-router /tmp/affiliate-perf/affiliate-portal-router             | sed -E 's#^Files .*/affiliate-portal-router/([^ ]+) and .* differ$#\1#'             | sort > /tmp/changed.txt
+          cat >/tmp/expected.txt <<'EOF'
+          includes/trait-ppar-control-contract.php
+          includes/trait-ppar-ebay-account-deletion.php
+          includes/trait-ppar-ebay.php
+          includes/trait-ppar-output-objects.php
+          EOF
+          diff -u /tmp/expected.txt /tmp/changed.txt
+
+      - name: PHP syntax all plugin files
+        shell: bash
+        run: |
+          set -euo pipefail
+          find /tmp/affiliate-perf/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Run positive-negative N+1 cache hardtest
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AFFILIATE_HOBBYRAUM/performance-cache/test_request_local_query_cache.php /tmp/affiliate-perf/test_request_local_query_cache.php
+          cd /tmp/affiliate-perf
+          php test_request_local_query_cache.php
+
+      - name: Existing banner distribution regression
+        run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+  real-wordpress-mariadb:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Install WP-CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          /tmp/wp --info
+
+      - name: Install exact WordPress 7.1.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Perf CI' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+
+      - name: Prepare exact cache delta on isolated plugin copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/plugin-work
+          mkdir -p /tmp/plugin-work
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/plugin-work/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/plugin-work/affiliate-portal-router
+          cp -a /tmp/plugin-work/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+
+      - name: Activate plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+      - name: Install ephemeral performance gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cp AFFILIATE_HOBBYRAUM/performance-cache/real_wordpress_mariadb_gate.php /tmp/wp-site/wp-content/mu-plugins/ppar-performance-cache-gate.php
+
+      - name: Run real WordPress MariaDB gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS 'http://127.0.0.1:8080/?ppar_perf_cache_gate=1' | tee /tmp/perf-gate.txt
+          grep -F 'REAL_WORDPRESS_MARIADB_PERFORMANCE_CACHE_PASS' /tmp/perf-gate.txt
+
+      - name: Dump server log on failure
+        if: failure()
+        run: cat /tmp/wp-server.log || true
