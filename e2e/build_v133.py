@@ -16,14 +16,6 @@ new="""    private function category_product_provider_mix_v672133($candidates, $
         if (!$candidates || !preg_match('/^category_product_[123]$/', sanitize_key((string) $slot_type))) {
             return $candidates;
         }
-        $idealo = method_exists($this, 'idealo_settings') ? $this->idealo_settings() : get_option(self::OPTION_NETWORK_IDEALO, array());
-        $idealo = is_array($idealo) ? $idealo : array();
-        $mode = method_exists($this, 'idealo_sanitize_output_mode')
-            ? $this->idealo_sanitize_output_mode($idealo['output_mode'] ?? 'ebay_only')
-            : sanitize_key((string) ($idealo['output_mode'] ?? 'ebay_only'));
-        if (empty($idealo['enabled']) || $mode !== 'automatic') {
-            return $candidates;
-        }
 
         $best_specificity = (int) ($candidates[0]['specificity'] ?? 0);
         $best_matches = (int) ($candidates[0]['matches'] ?? 0);
@@ -38,31 +30,35 @@ new="""    private function category_product_provider_mix_v672133($candidates, $
             }
         }
 
-        $ebay = array();
-        $idealo_candidates = array();
-        $other = array();
+        $provider_buckets = array();
+        $provider_order = array();
         foreach ($equal as $candidate) {
             $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
-            $network = sanitize_key((string) ($campaign['network'] ?? ''));
-            if ($network === 'ebay') { $ebay[] = $candidate; }
-            elseif ($network === 'idealo') { $idealo_candidates[] = $candidate; }
-            else { $other[] = $candidate; }
+            $provider = sanitize_key((string) ($campaign['network'] ?? ''));
+            if ($provider === '') { $provider = '_unknown'; }
+            if (!isset($provider_buckets[$provider])) {
+                $provider_buckets[$provider] = array();
+                $provider_order[] = $provider;
+            }
+            $provider_buckets[$provider][] = $candidate;
         }
 
-        if (!$ebay || !$idealo_candidates) {
+        if (count($provider_order) < 2) {
             return $candidates;
         }
 
         $mixed = array();
-        $mixed[] = array_shift($ebay);
-        $mixed[] = array_shift($idealo_candidates);
-        if ($ebay) { $mixed[] = array_shift($ebay); }
-        elseif ($idealo_candidates) { $mixed[] = array_shift($idealo_candidates); }
-        elseif ($other) { $mixed[] = array_shift($other); }
-
-        foreach (array($ebay, $idealo_candidates, $other, $rest) as $bucket) {
-            foreach ($bucket as $candidate) { $mixed[] = $candidate; }
+        while (true) {
+            $added = false;
+            foreach ($provider_order as $provider) {
+                if (!empty($provider_buckets[$provider])) {
+                    $mixed[] = array_shift($provider_buckets[$provider]);
+                    $added = true;
+                }
+            }
+            if (!$added) { break; }
         }
+        foreach ($rest as $candidate) { $mixed[] = $candidate; }
         return array_values($mixed);
     }
 
