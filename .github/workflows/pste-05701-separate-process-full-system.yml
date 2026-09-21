@@ -1,0 +1,168 @@
+name: PSTE 0.57.1 Separate Process Full System Proof
+
+on:
+  push:
+    branches:
+      - pste-05700-server-step-driver-proof
+  workflow_dispatch:
+
+jobs:
+  full-process-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Reconstruct exact 0.57 base ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat proof/pste-05700-final-zip/finalzip.b64.part* | base64 -d > /tmp/PSTE-0.57.0-BASE.zip
+          echo "4093fdb3c9cb1eca1691ceec9a2f1e9a97675982b01f2e440e99fba290b40f06  /tmp/PSTE-0.57.0-BASE.zip" | sha256sum -c -
+          rm -rf /tmp/pste05701
+          mkdir -p /tmp/pste05701/base
+          unzip -q /tmp/PSTE-0.57.0-BASE.zip -d /tmp/pste05701/base
+          test -f /tmp/pste05701/base/portal-seo-topic-engine/portal-seo-topic-engine.php
+
+      - name: Reconstruct exact process proof bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d proof/pste-05701-process-e2e/bundle.b64 > /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip
+          echo "310994956f711999777d0fc5f614875689435ab8e3eb010a716669dd15a499b6  /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip" | sha256sum -c -
+          mkdir -p /tmp/pste05701/proof
+          unzip -q /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip -d /tmp/pste05701/proof
+
+      - name: Apply only bounded provider retry patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste05701/base/portal-seo-topic-engine
+          patch -p1 < /tmp/pste05701/proof/pste-05701-step-retry.patch
+          grep -q "PROVIDER_SAFE_RETRY_LIMIT=1" includes/class-pste-research-job.php
+          grep -q "keywordSuggestionsDriverStep" includes/class-pste-dataforseo-client.php
+          grep -q "'timeout' => 45" includes/class-pste-dataforseo-client.php
+          if grep -q "'timeout' => 20" includes/class-pste-dataforseo-client.php; then
+            echo "UNEXPECTED_PROVIDER_TIMEOUT_CHANGE"
+            exit 1
+          fi
+
+      - name: Full candidate PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          PLUGIN=/tmp/pste05701/base/portal-seo-topic-engine
+          count="$(find "$PLUGIN" -type f -name '*.php' | wc -l)"
+          test "$count" -eq 76
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find "$PLUGIN" -type f -name '*.php' | sort)
+          echo "PASS PHP_SYNTAX 76/76"
+
+      - name: Reconstruct original exact control matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat proof/pste-05700-control-sim/bundle.b64.part* | base64 -d > /tmp/PSTE-0.57-CONTROL.zip
+          echo "06f690b741670f0fb51149ab818d0e54c8f1d1f1283d39ad0e7b33259eba3ed2  /tmp/PSTE-0.57-CONTROL.zip" | sha256sum -c -
+          mkdir -p /tmp/pste05701/control
+          unzip -q /tmp/PSTE-0.57-CONTROL.zip -d /tmp/pste05701/control
+          cp /tmp/pste05701/base/portal-seo-topic-engine/includes/class-pste-research-job.php /tmp/pste05701/control/pste05700_github_control/plugin/includes/class-pste-research-job.php
+          cd /tmp/pste05701/control/pste05700_github_control
+          bash ./run.sh
+
+      - name: Prepare separate-process harness with exact candidate core
+        shell: bash
+        run: |
+          set -euo pipefail
+          C=/tmp/pste05701/base/portal-seo-topic-engine/includes
+          for target in proc retry; do
+            mkdir -p "/tmp/pste05701/proof/$target/plugin/includes"
+            cp "$C/class-pste-research-archive.php" "/tmp/pste05701/proof/$target/plugin/includes/"
+            cp "$C/class-pste-research-job.php" "/tmp/pste05701/proof/$target/plugin/includes/"
+            cp "$C/class-pste-breadth-research-queue.php" "/tmp/pste05701/proof/$target/plugin/includes/"
+            cp "$C/class-pste-research-driver.php" "/tmp/pste05701/proof/$target/plugin/includes/"
+          done
+          cp "$C/class-pste-dataforseo-client.php" /tmp/pste05701/proof/retry/plugin/includes/
+
+      - name: Safe retry and unknown transport across real PHP processes
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste05701/proof
+          bash ./run_retry.sh
+
+      - name: Reproduce hard process death without browser authority
+        shell: bash
+        run: |
+          set -euo pipefail
+          H=/tmp/pste05701/proof/proc
+          S=/tmp/pste05701/proof/hardkill.json
+          rm -f "$S" "$S.lock"
+          PSTE_PROC_STORE="$S" php "$H/request.php" start-single >/dev/null
+          set +e
+          PSTE_PROC_STORE="$S" PSTE_PROVIDER_SLEEP=30 php "$H/request.php" tick >/tmp/pste-hardkill.log 2>&1 &
+          pid=$!
+          sleep 1
+          kill -9 "$pid" 2>/dev/null
+          wait "$pid" 2>/dev/null
+          set -e
+          status="$(PSTE_PROC_STORE="$S" php "$H/request.php" status)"
+          php -r '$x=json_decode($argv[1],true);$d=$x["driver"]??[];$j=$x["job"]??[];$s=$x["store"]??[];if(($d["status"]??"")!=="RUNNING"||($d["health_code"]??"")!=="PSTE_DRIVER_STEP_RUNNING"||($j["phase_state"]??"")!=="IN_FLIGHT"||(($s["provider"]["classic"]??0))!==1)exit(1);echo "PASS HARDKILL_PERSISTS_STEP_AND_JOB_EXACTLY\n";' "$status"
+          python3 - "$S" <<'PY'
+          import json,sys,datetime,time
+          p=sys.argv[1]
+          x=json.load(open(p))
+          old=(datetime.datetime.now(datetime.timezone.utc)-datetime.timedelta(seconds=90)).isoformat(timespec="seconds")
+          d=x["opts"]["pste_driver"]; d["step_started_at_utc"]=old; d["updated_at_utc"]=old
+          lock=x["opts"].get("pste_driver_lock",{}); lock["expires_at"]=int(time.time())-1
+          j=x["opts"]["pste_active_job"]; j["updated_at_utc"]=old
+          with open(p,"w") as f: json.dump(x,f,separators=(",",":"))
+          PY
+          overdue="$(PSTE_PROC_STORE="$S" php "$H/request.php" status)"
+          php -r '$x=json_decode($argv[1],true);$d=$x["driver"]??[];$s=$x["store"]??[];if(($d["status"]??"")!=="BLOCKED"||($d["health_code"]??"")!=="PSTE_DRIVER_STEP_OVERDUE"||(($s["provider"]["classic"]??0))!==1)exit(1);echo "PASS HARDKILL_OVERDUE_VISIBLE_NO_REPLAY\n";' "$overdue"
+
+      - name: Extract exact real PSERC compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  control/startmaster0107/runtime_packages/PSERC-FIX.zip" | sha256sum -c -
+          mkdir -p /tmp/pste05701/pserc-outer
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pste05701/pserc-outer
+          inner="$(find /tmp/pste05701/pserc-outer -type f -name 'portal-seo-editorial-plan-compiler_*.zip' | head -1)"
+          test -n "$inner"
+          mkdir -p /tmp/pste05701/pserc-inner
+          unzip -q "$inner" -d /tmp/pste05701/pserc-inner
+          test -f /tmp/pste05701/pserc-inner/portal-seo-editorial-plan-compiler/includes/class-pserc-compiler.php
+
+      - name: Complete separate-process PSTE to real PSERC plan-slot workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste05701/proof
+          PSERC_PROOF_DIR=/tmp/pste05701/pserc-inner/portal-seo-editorial-plan-compiler bash ./run_combined.sh
+
+      - name: Mutation guard retry must not happen in same PHP request
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLIENT=/tmp/pste05701/base/portal-seo-topic-engine/includes/class-pste-dataforseo-client.php
+          JOB=/tmp/pste05701/base/portal-seo-topic-engine/includes/class-pste-research-job.php
+          grep -q "requestCached.*allowSafeRetry = true" "$CLIENT"
+          grep -q "86400,false" "$CLIENT"
+          grep -q "phase_state']='RETRY_PENDING" "$JOB"
+          grep -q "PSTE_PROVIDER_TRANSPORT_OUTCOME_UNKNOWN" "$JOB"
+          echo "PASS RETRY_SPLIT_HARDLOCK"
+
+      - name: Build test-only candidate hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste05701/base
+          zip -qr /tmp/PSTE-0.57.1-TEST-ONLY.zip portal-seo-topic-engine
+          sha256sum /tmp/PSTE-0.57.1-TEST-ONLY.zip | tee /tmp/PSTE-0.57.1-TEST-ONLY.sha256
+          echo "TEST_ONLY_NOT_RELEASED"
