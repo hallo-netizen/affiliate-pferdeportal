@@ -1,0 +1,131 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE
+AFF-ERR-039 – GITHUB FULL WORDPRESS/MARIADB E2E STATUS
+Stand: 2026-09-21
+ROLE: Evidence only. Not CURRENT. Not NEXT-ACTION authority.
+
+AUTHORITATIVE CURRENT REF AT CAPTURE
+- Repository: hallo-netizen/affiliate-pferdeportal
+- Branch: affiliate-release-current
+- HEAD before status correction: 924df488db3a6c0ad1fc4f0200de5f78bfec0bc2
+- Single CURRENT authority: control/release-governance/CURRENT_RELEASE.json
+- Entrance: release/affiliate-zentrale/AGENTS.md
+
+LIVE FACTS SINCE THE LAST CURRENT BINDING
+- 6.72.125 restored visible product cards, but product assignments remained wrong.
+- Reithelme visibly showed wrong product families; Stallhalfter could show only one product.
+- eBay was absent from visible product cards while idealo remained visible.
+- 6.72.126, 6.72.127, 6.72.128 and 6.72.129 did not restore the required live behavior.
+- 6.72.130 was installed/tested and is LIVE FAIL: wrong products remain and eBay is still absent.
+- Therefore the previous CURRENT state "6.72.130 LIVE pending" is stale.
+
+USER HARD RULE
+- Fully diff the historical package chain.
+- Find the first exact package/state delta where product assignment and/or eBay output breaks.
+- Revert only that exact delta.
+- Do not change product-card display, renderer, CSS or JS.
+- No new plugin/version before the first exact failing delta is proven by the complete workflow.
+
+GITHUB FULL E2E EXECUTION AREA
+- Temporary evidence branch only: affiliate-e2e-repro-20260920
+- This branch is NOT CURRENT, NOT release authority and must not be promoted as source truth.
+- E2E HEAD at completed diagnostic run: 87674127909dd7f33905d991c8c660357fbf03d1
+- Workflow: Affiliate full WordPress MariaDB E2E
+- Run: 35536312242
+- Job: 106145866451
+- Result: FAILURE (correctly fail-closed; no SYSTEM PASS claimed)
+
+BOUND TEST ENVIRONMENT
+- WordPress 7.1
+- MariaDB 10.11
+- PHP 8.3
+- Exact 6.72.130 ZIP SHA-256:
+  435f798b76eadc428f7a18bb6b56fda6f67feedbb8f72aec913791b1ed12efd4
+- Hash-bound real 2026-09-15 WXR-derived product campaign state.
+- Seeded campaigns: 2012
+  - eBay: 922
+  - idealo: 1090
+- Active eBay public checkpoint IDs: 428
+
+PROVEN SELECTION-PATH FINDING – REITHELME
+Historical exact active candidates in the bound fixture:
+- eBay exact candidates: 69
+- idealo exact candidates: 26
+
+The eBay candidates PASS these stages before control:
+- complete
+- current
+- program
+- seller
+- slot
+- rank
+They also PASS source/checkpoint/image checks in the diagnostic.
+
+FIRST PROVEN E2E eBay FAILURE
+- Stage: control
+- Error code: control_provider_access_disabled
+- provider_access_snapshot:
+  state=active
+  configured=true
+  enabled=false
+  status=credentials_saved
+  message="eBay Production wurde bis zur vollständigen Marketplace-Account-Deletion-Compliance hart deaktiviert."
+- eBay channel itself:
+  status=automatic
+  paused=false
+  veto=false
+- After control filtering, only idealo candidates remain.
+
+IMPORTANT LIMIT
+A dedicated test mutation opened the obvious eBay options/state, but eBay was still absent in the rendered frontend.
+Therefore the exact remaining compliance/control subcondition is NOT YET PROVEN.
+Do not guess it.
+
+PRODUCT-ASSIGNMENT REPRODUCTION
+- healthy historical fixture: topic-correct product families can render as three real cards, but eBay is blocked by the control gate.
+- missing_exact_reithelme: reproduces cross-topic leakage into Reithelme.
+- one_exact_stallhalfter: reproduces exactly one visible Stallhalfter product card.
+- live_damage scenario: reproduces eBay absent plus one-card Stallhalfter behavior.
+These are evidence that both persisted exact-target supply and provider control state matter to the complete workflow.
+
+DISPLAY HARDLOCK
+No display fix was made in this E2E work.
+6.72.130 display assets:
+- assets/frontend.css SHA-256:
+  305f7954047fbde080a52cff57f286ca817757efacf1a9738612403fb60e7f7c
+- assets/frontend.js SHA-256:
+  203acdc463075c90d307c6bc7798d4ce56c5d0c4ab9d2a090c7197dcc4b50ae6
+Product-card display/renderer/CSS/JS remain protected from speculative changes.
+
+HISTORY-CHAIN STATUS
+Exact package fixtures already committed into the GitHub E2E execution branch:
+- 6.72.108
+- 6.72.109
+- 6.72.110
+- 6.72.111
+Exact local/library package bytes for 6.72.112–6.72.117 exist, but the complete sequential 112→117 full-workflow GitHub E2E has NOT YET been completed.
+Therefore the first exact package delta in the full runtime chain is still OPEN.
+No exact revert is authorized yet.
+
+CODEX
+An independent @codex audit was requested in issue #356.
+Codex stopped fail-closed because its checkout/environment did not contain the required package bytes/current branch state and System4 parent-start was blocked.
+No independent Codex PASS exists and none is claimed.
+
+CURRENT FRESHNESS GUARD CHECK
+GitHub Actions workflow "Affiliate current freshness audit":
+- run: 35566467185
+- checked exact affiliate-release-current HEAD:
+  924df488db3a6c0ad1fc4f0200de5f78bfec0bc2
+- governance-check: BLOCKED
+- start --branch affiliate-release-current: BLOCKED
+- exact blocker:
+  AFFILIATE_RELEASE_GUARD_BLOCKED:OBJECTIVE_CONTROL_WEAKENED:microfix_policy
+This proves CURRENT generation 85 is internally inconsistent with its immutable release_guard contract and must be corrected before it can again be treated as a valid fresh start binding.
+
+RESULT
+- LIVE 6.72.130: FAIL
+- GitHub complete-workflow diagnostic: FAIL (useful first blocker proven)
+- full 108→117 sequential runtime history proof: OPEN
+- exact revert delta: NOT YET PROVEN
+- display change: FORBIDDEN / NOT REQUIRED BY CURRENT EVIDENCE
+- new plugin build/install: FORBIDDEN UNTIL FIRST EXACT DELTA IS PROVEN
