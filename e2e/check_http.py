@@ -14,10 +14,14 @@ targets={
   'gerten':190,'sporen':191,'halfter-und-stricke-stallhalfter':174,
 }
 base=os.environ.get('AFF_E2E_BASE_URL','http://127.0.0.1:8080').rstrip('/')
+host_header=os.environ.get('AFF_E2E_HOST_HEADER','').strip()
 results={}
 for slug,pid in targets.items():
     url=f'{base}/?page_id={pid}&e2e={scenario}-{pid}'
-    req=urllib.request.Request(url,headers={'Cache-Control':'no-store','User-Agent':'affiliate-e2e'})
+    headers={'Cache-Control':'no-store','User-Agent':'affiliate-e2e'}
+    if host_header:
+        headers['Host']=host_header
+    req=urllib.request.Request(url,headers=headers)
     body=urllib.request.urlopen(req,timeout=30).read().decode('utf-8','replace')
     slots=[]
     for i in (1,2,3):
