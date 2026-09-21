@@ -807,3 +807,36 @@ Belegt im E2E:
 **Autoritätshinweis:** Alle in älteren AFF-ERR-039-Nachträgen enthaltenen damaligen „NEXT ACTION“-Zeilen sind ausschließlich historische Momentaufnahmen. Die **einzige aktuelle** Status-/Blocker-/NEXT-ACTION-Wahrheit ist `control/release-governance/CURRENT_RELEASE.json`.
 
 **Status:** OPEN / FULL_HISTORY_E2E_FIRST_REGRESSION_NOT_YET_PROVEN.
+
+
+## AFF-ERR-040 — Awin-Programmlisten-Transportregression in 6.72.141
+
+**Datum / Live-Befund:** 21.09.2026.
+
+**Symptom:** 6.72.141 meldete live: `Awin-Programmliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten.`
+
+**Belegte Ursache:** 6.72.141 wich erneut vom zuvor live bewiesenen 6.72.108-Awin-Transport ab, indem zusätzlich `includeHidden` und `accessToken` in den Programmlistenaufruf aufgenommen wurden. Der frühere live bewiesene KISS-Pfad ist `relationship=joined` plus OAuth2-Bearer.
+
+**Rootfix:** 6.72.142 stellt ausschließlich den bewiesenen Awin-Programmlisten-Transport wieder her. Der Nutzer bestätigte danach für diesen Punkt ausdrücklich PASS.
+
+**Nicht wiederholen:** Kein neuer Awin-Auth-/Parameterweg aus Dokumentationsfragmenten ableiten, solange der bereits live bewiesene Transport funktioniert. Verbindungstest und Programme-Refresh müssen denselben real bewiesenen Requestpfad verwenden.
+
+**Status:** LIVE_PASS_6_72_142 / KEIN GESAMT-RELEASE-PASS.
+
+## AFF-ERR-041 — Kategorie-Banner nutzt Ziel-/Deeplink-Evidenz für exakte Themenrelevanz noch nicht belastbar
+
+**Datum / Arbeitsbindung:** 21.09.2026.
+
+**Referenzseite:** `https://pferde-atelier.de/ausruestung/ausruestung-reiterbedarf/reithelme/`
+
+**Zielabweichung:** Für die Reithelm-Kategorien soll ein technisch passender Banner, dessen reale Ziel-/Deeplink-Zielseite die Shop-Kategorie Reithelme ist, als fachlich exakter Kandidat vor einem allgemeinen Pferde-/Shop-Banner gewinnen. Die bestehende Office-Regel erlaubt und verlangt genau diese Zielseiten-Evidenz. Der tatsächliche aktuelle Auswahlverlust ist noch nicht read-only bis zur ersten exakten Selektionsstufe bewiesen.
+
+**HARD RULE:** Keine neue Pluginversion und kein State-Write, bevor für die Referenzseite der aktuelle Banner, alle technisch geeigneten Kandidaten, deren reale Ziel-/Deeplinks und die erste konkrete Auswahl-/Rankingstufe erfasst sind, an der ein exakter Reithelm-Kandidat gegen einen breiteren Fallback verliert.
+
+**POSITIV-Ziel:** technisch gültiger Reithelm-Zielbanner wird als Exact-Topic erkannt und darf einen allgemeinen Banner fachlich überstimmen.
+
+**NEGATIV-Ziel:** unklare, widersprüchliche oder fachfremde Zielseite erzeugt keinen Exact-Match und fällt auf eine breitere Relevanzstufe zurück.
+
+**Evidence / Arbeitsbindung:** `release/affiliate-zentrale/evidence/awin_672142_live_pass_banner_targeturl_next_20260921.txt`.
+
+**Status:** OPEN / READ_ONLY_ROOTCAUSE_PROOF_REQUIRED.
