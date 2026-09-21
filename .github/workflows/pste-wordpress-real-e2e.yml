@@ -232,7 +232,7 @@ jobs:
             --data-urlencode "nonce=$NONCE" \
             --data-urlencode "queue_uuid=$QUEUE_UUID" \
             http://127.0.0.1:8090/wp-admin/admin-ajax.php > /tmp/breadth-current-status-after-stale.json
-          php -r '$x=json_decode(file_get_contents("/tmp/breadth-current-status-after-stale.json"),true); if(!is_array($x)||empty($x["success"])||(($x["data"]["queue"]["queue_uuid"]??"")!==getenv("QUEUE_UUID"))) exit(2); echo "PASS_CURRENT_QUEUE_SURVIVES_STALE_STATUS\n";' QUEUE_UUID="$QUEUE_UUID"
+          QUEUE_UUID="$QUEUE_UUID" php -r '$x=json_decode(file_get_contents("/tmp/breadth-current-status-after-stale.json"),true); if(!is_array($x)||empty($x["success"])||(($x["data"]["queue"]["queue_uuid"]??"")!==getenv("QUEUE_UUID"))) exit(2); echo "PASS_CURRENT_QUEUE_SURVIVES_STALE_STATUS\n";'
 
           # Browser disappears again; server must continue alone.
           sleep 20
