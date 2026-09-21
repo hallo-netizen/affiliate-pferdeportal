@@ -31,7 +31,15 @@ for i in $(seq 1 480); do
     cat /tmp/stress-breadth-status.json
     exit 1
   fi
+  if [ "$QSTATE" = "PAUSED_ERROR" ] || [ "$QSTATE" = "OUTCOME_UNKNOWN" ] || [ "$QSTATE" = "CANCELLED" ]; then
+    echo STRESS_PREPARE_QUEUE_TERMINAL_ERROR_"$QSTATE"
+    cat /tmp/stress-breadth-status.json
+    exit 1
+  fi
   if [ "$QSTATE" = "COMPLETE" ]; then terminal=1; break; fi
+  if [ $((i % 20)) -eq 0 ]; then
+    echo "STRESS_PROGRESS i=$i q=$QSTATE d=$DSTATE stage=$STAGE cursor=$CURSOR total=$TOTAL"
+  fi
   sleep 0.5
 done
 
