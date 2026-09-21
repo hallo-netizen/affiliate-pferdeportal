@@ -120,4 +120,31 @@ for rel, needles in unsafe.items():
         if needle in text:
             raise SystemExit(rel+"_UNSAFE_LOCK_DELETE_REMAINS_"+needle)
 
+
+# Diagnostic only: trace ownership of the three existing execution locks.
+for rel, acquire_sig, release_sig, label in [
+    ("includes/class-pste-research-driver.php","private static function acquireLock(): string {","private static function releaseLock(string $token): void {","DRIVER"),
+    ("includes/class-pste-research-job.php","private static function acquireStepLock(): string {","private static function releaseStepLock(string $token): void {","JOB"),
+    ("includes/class-pste-breadth-research-queue.php","private static function acquireQueueLock(): string {","private static function releaseQueueLock(string $token): void {","QUEUE"),
+]:
+    p=root/rel
+    s=p.read_text(encoding="utf-8")
+    if acquire_sig not in s or release_sig not in s:
+        raise SystemExit(label+"_LOCKTRACE_ANCHOR_MISSING")
+    s=s.replace(acquire_sig,acquire_sig+"error_log('PSTE_LOCKTRACE "+label+"_ACQUIRE_ENTER t='.sprintf('%.6f',microtime(true)).' pid='.getmypid());",1)
+    if label=="DRIVER":
+        needle="if(add_option(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$v,'',false))return $token;"
+        repl="if(add_option(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$v,'',false)){error_log('PSTE_LOCKTRACE DRIVER_ACQUIRED t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);return $token;}"
+    elif label=="JOB":
+        needle="if(add_option(PSTE_OPTION_RESEARCH_STEP_LOCK,$payload,'',false))return $token;"
+        repl="if(add_option(PSTE_OPTION_RESEARCH_STEP_LOCK,$payload,'',false)){error_log('PSTE_LOCKTRACE JOB_ACQUIRED t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);return $token;}"
+    else:
+        needle="if(add_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$payload,'',false)){self::$activeQueueFenceToken=$token;return $token;}"
+        repl="if(add_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$payload,'',false)){self::$activeQueueFenceToken=$token;error_log('PSTE_LOCKTRACE QUEUE_ACQUIRED t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);return $token;}"
+    if needle not in s:
+        raise SystemExit(label+"_LOCKTRACE_ACQUIRED_ANCHOR_MISSING")
+    s=s.replace(needle,repl,1)
+    s=s.replace(release_sig,release_sig+"error_log('PSTE_LOCKTRACE "+label+"_RELEASE_ENTER t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);",1)
+    p.write_text(s,encoding="utf-8")
+
 print("PASS ATOMIC_LOCK_ROOTFIX_INJECTED_AND_VERIFIED")
