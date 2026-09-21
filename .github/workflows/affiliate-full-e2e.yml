@@ -356,3 +356,90 @@ jobs:
           sed -n '250,310p' "$C"
           echo '=== EBAY DEFAULTS ==='
           grep -n -A35 -B5 "function ebay_settings_defaults" "$E" || true
+
+  build-repair-bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build one-time 6.72.130 recovery bridge
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/repair && mkdir -p /tmp/repair/affiliate-aff039-repair
+          cat > /tmp/repair/affiliate-aff039-repair/affiliate-aff039-repair.php <<'PHP'
+          <?php
+          /*
+          Plugin Name: Affiliate AFF-039 Reparatur
+          Description: Einmalige Reparaturbrücke für Affiliate-Zentrale 6.72.130: eBay aktivieren, Idealo auf automatic, vorhandenen AFF-039-Recovery-Worker starten.
+          Version: 1.0.0
+          Author: OpenAI
+          */
+          if (!defined('ABSPATH')) { exit; }
+
+          function ppar_aff039_bridge_run_once() {
+              if (get_option('ppar_aff039_bridge_done_v1', '') === '1') {
+                  return;
+              }
+
+              $ebay = get_option('ppar_network_ebay_v1', array());
+              $ebay = is_array($ebay) ? $ebay : array();
+              $ebay['enabled'] = true;
+              $ebay['business_enabled'] = true;
+              update_option('ppar_network_ebay_v1', $ebay, false);
+
+              $idealo = get_option('ppar_network_idealo_v1', array());
+              $idealo = is_array($idealo) ? $idealo : array();
+              if (!empty($idealo['enabled'])) {
+                  $idealo['output_mode'] = 'automatic';
+                  update_option('ppar_network_idealo_v1', $idealo, false);
+              }
+
+              delete_transient('ppar_aff039_dual_layer_recovery_lock_v1');
+              if (function_exists('wp_clear_scheduled_hook')) {
+                  wp_clear_scheduled_hook('ppar_aff039_dual_layer_recovery_worker_v1');
+              }
+
+              $state = array(
+                  'schema' => '1.0',
+                  'status' => 'running',
+                  'phase' => 'normalize',
+                  'started_at' => time(),
+                  'started_by' => get_current_user_id(),
+                  'evidence' => array('manual_repair_bridge' => true),
+                  'errors' => array(),
+                  'stats' => array(),
+                  'backup' => array(
+                      'idealo_sha256' => hash('sha256', serialize($idealo)),
+                      'ebay_sha256' => hash('sha256', serialize($ebay)),
+                  ),
+                  'ebay_scan_cursor' => 0,
+                  'ebay_candidate_ids' => array(),
+                  'ebay_repair_cursor' => 0,
+                  'idealo_scan_cursor' => 0,
+                  'article_cursor' => 0,
+              );
+              update_option('ppar_aff039_dual_layer_recovery_v1', $state, false);
+
+              if (has_action('ppar_aff039_dual_layer_recovery_worker_v1')) {
+                  do_action('ppar_aff039_dual_layer_recovery_worker_v1');
+              }
+              if (function_exists('wp_schedule_single_event') && !wp_next_scheduled('ppar_aff039_dual_layer_recovery_worker_v1')) {
+                  wp_schedule_single_event(time() + 2, 'ppar_aff039_dual_layer_recovery_worker_v1');
+              }
+
+              update_option('ppar_aff039_bridge_done_v1', '1', false);
+          }
+
+          register_activation_hook(__FILE__, 'ppar_aff039_bridge_run_once');
+          add_action('admin_init', 'ppar_aff039_bridge_run_once', 1);
+          PHP
+          php -l /tmp/repair/affiliate-aff039-repair/affiliate-aff039-repair.php
+          cd /tmp/repair
+          zip -qr "$GITHUB_WORKSPACE/AFFILIATE_AFF039_REPAIR_1.0.0.zip" affiliate-aff039-repair
+          cd "$GITHUB_WORKSPACE"
+          sha256sum AFFILIATE_AFF039_REPAIR_1.0.0.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-aff039-repair-1-0-0
+          path: AFFILIATE_AFF039_REPAIR_1.0.0.zip
+          if-no-files-found: error
