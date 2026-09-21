@@ -76,7 +76,7 @@ if helper_anchor not in s:
 s=s.replace(helper_anchor,helper_anchor+"\\n"+helper,1)
 
 # rawJob() is the authoritative active-job option read. Log the exact value returned.
-read_pattern = r"(\\$([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*get_option\\s*\\(\\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*(?:,\\s*[^\\)]*)?\\)\\s*;)"
+read_pattern = r"(\$([A-Za-z_][A-Za-z0-9_]*)\s*=\s*get_option\s*\(\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\s*(?:,\s*[^\)]*)?\)\s*;)"
 matches=list(re.finditer(read_pattern,s))
 if not matches:
     lines=s.splitlines()
@@ -97,8 +97,8 @@ for idx,m in enumerate(matches,1):
 
 # Mark entry into the two public read/progression paths.
 for label, pattern in [
-    ("CURRENT_ENTER", r"(function\\s+current\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)"),
-    ("ADVANCE_ENTER", r"(function\\s+advance\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)")
+    ("CURRENT_ENTER", r"(function\s+current\s*\([^)]*\)\s*(?::\s*[^\{]+)?\s*\{)"),
+    ("ADVANCE_ENTER", r"(function\s+advance\s*\([^)]*\)\s*(?::\s*[^\{]+)?\s*\{)")
 ]:
     m=re.search(pattern,s)
     if not m:
