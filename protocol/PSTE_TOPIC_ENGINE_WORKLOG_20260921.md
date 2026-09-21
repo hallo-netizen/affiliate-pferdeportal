@@ -89,3 +89,11 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Exakte getestete ZIP: SHA-256 `8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c`.
 - Nach diesem Produkt-PASS wurde nur das Proof-Skript `prove-stress-prepare.sh` fail-fast gehärtet; kein Produktcode geändert.
 - Nächster zulässiger Schritt ausschließlich echter Nutzer-Live-Test mit genau diesen ZIP-Bytes. Bis dahin bleibt PPA-005 CURRENT.zip unverändert.
+
+
+### Finaler fail-fast Nachlauf
+- Run `35646020136` auf technischem Head `e2f13056013bab8ab6dca84b56f03fad16024b17` komplett SUCCESS.
+- PREPARE-Stress zeigt fortlaufend `PREPARE_CANDIDATES` 50/303, 160/303, 265/303, anschließend `PREPARE_COMMIT`, Sandbox- und Context-Batches; kein STEP_OVERDUE.
+- Danach normale Produktionswelle im selben Lauf bis `TARGET_REACHED`: 41 nutzbare / 79 rohe Kandidaten, 26 Items, 22 COMPLETE, 4 fachlich geparkt, Driver IDLE, Provider exakt 25 je Stufe.
+- Final getestete ZIP SHA-256: `ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3`.
+- Nur diese finalen Bytes sind für den nächsten echten Nutzer-Live-Test zulässig.
