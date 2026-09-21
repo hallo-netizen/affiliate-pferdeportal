@@ -2,20 +2,21 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "PASS_EXACT_LIVE_PLUGIN_PATH_FULL_PACKAGE_PROOF",
+  "status": "PASS_GITHUB_EXACT_PACKAGE_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "f2d3d02a94aaed2eefee53197edbe0107ef7cab3",
+    "technical_head": "9aa8b1e22679ef0e528e7cd45e9617c880dadd8a",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35624344588,
+    "run_id": 35626042769,
     "run_result": "SUCCESS",
-    "evidence_digest": "sha256:6a154bc6df01b83fac789207615d40e99d04530adea2fa70e659dc401879d8f0",
+    "evidence_artifact_id": 10652182930,
+    "evidence_digest": "sha256:24e7a54a7d962bd14637de7d2530feaef1d5682700340472e48d9d48b8326db1",
     "candidate": "0.57.2-HOBBYROOM",
-    "candidate_sha256": "77dcd0da6fc5d2196b25750eb9c1c093e4d844ad89de9fb538586242f297da69",
+    "candidate_sha256": "962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "READY_EXACT_TESTED_BYTES"
+    "release": "GITHUB_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
   },
   "proven": {
     "exact_plugin_root": "PASS_Portal SEO Topic Engine",
@@ -25,21 +26,27 @@
     "wrong_lowercase_root_absent": "PASS",
     "nested_duplicate_root_absent": "PASS",
     "strict_serial_driver_positive_negative": "PASS",
-    "real_admin_ajax_single": "PASS",
-    "breadth_target_40": "PASS",
+    "real_admin_ajax_single": "PASS_15_CANDIDATES_5_USABLE",
+    "breadth_target_40": "PASS_TARGET_REACHED_40_USABLE_81_RAW_27_ITEMS_25_COMPLETE_2_DOMAIN_PARKED",
     "technical_park_errors": "ZERO",
-    "real_wordpress_http_e2e": "PASS_RUN_35624344588",
-    "separate_process_full_system": "PASS_RUN_35624344623",
-    "final_zip_full_workflow": "PASS_RUN_35624344640",
-    "complete_system_simulation": "PASS_RUN_35624344506",
-    "exact_tested_zip_sha256": "77dcd0da6fc5d2196b25750eb9c1c093e4d844ad89de9fb538586242f297da69"
+    "provider_counts": "PASS_EXACT_26_EACH",
+    "real_wordpress_http_e2e": "PASS_RUN_35626042769",
+    "separate_process_full_system": "PASS_RUN_35626042840",
+    "final_zip_full_workflow": "PASS_RUN_35626042703",
+    "complete_system_simulation": "PASS_RUN_35626042739",
+    "exact_tested_zip_sha256": "962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0",
+    "previously_supplied_user_zip_sha256": "30e89d7afd683a2b8bddb5cb6fef1a21d32f5c29ce7ee4c1083e44c306020799",
+    "previously_supplied_user_zip_matches_tested_bytes": false
   },
-  "first_blocker": null,
+  "first_blocker": {
+    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_EXACT_TESTED_BYTES",
+    "detail": "The exact GitHub-tested ZIP SHA-256 962684fe... has not yet been confirmed installed and running on the user's real WordPress site. A previously supplied user-facing ZIP had different bytes and must not be used as evidence."
+  },
   "next_action": {
-    "id": "REAL_SITE_INSTALL_EXACT_TESTED_PACKAGE",
-    "action": "Install only the exact tested ZIP with plugin root 'Portal SEO Topic Engine'. Do not use any earlier PSTE ZIP.",
-    "success": "REAL_SITE_PLUGIN_REPLACEMENT_AND_START_PASS",
-    "until_then": "NO_REAL_SITE_PASS_CLAIM"
+    "id": "DELIVER_AND_INSTALL_EXACT_GITHUB_TESTED_BYTES_THEN_REAL_SITE_ACCEPTANCE",
+    "action": "Use only the exact ZIP from artifact 10652182930 with SHA-256 962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0. Install/replace the real plugin path 'Portal SEO Topic Engine/portal-seo-topic-engine.php', then verify the real site starts a single run and a breadth run without STEP_OVERDUE, BREADTH_QUEUE_NOT_FOUND, duplicate plugin roots, or technical parked errors.",
+    "success": "REAL_SITE_PLUGIN_REPLACEMENT_AND_START_PROGRESS_PASS",
+    "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
   },
   "freshness": "ON_NEW_CHAT_READ_START_HERE_THEN_THIS_FILE; IF_TECHNICAL_HEAD_AND_REAL_RUN_UNCHANGED_DO_NOT_RECONSTRUCT_HISTORY; IF_CHANGED_INSPECT_ONLY_DELTA",
   "rules": [
@@ -51,8 +58,9 @@
     "NO_RELEASE_BEFORE_REAL_BREADTH_PASS"
   ],
   "plugin": {
-    "release_blocked": false,
-    "current_zip_replace": true
+    "release_blocked": true,
+    "current_zip_replace": false,
+    "plugin_id": "PPA-005"
   },
   "refs": {
     "door": "control/pste-topic-engine/START_HERE.json",

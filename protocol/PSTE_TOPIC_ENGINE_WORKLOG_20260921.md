@@ -53,3 +53,16 @@ Letzter echter WordPress-Lauf:
 `35595789702` — FAILURE im Breadth-Schritt.
 
 Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.json`.
+
+
+## Nachtrag – exakter Live-Paketpfad und getestete Bytes – 2026-09-21
+- Bestehenden realen Plugin-Basename aus WordPress belegt: `Portal SEO Topic Engine/portal-seo-topic-engine.php`.
+- Fehlerhafte Paketierung mit Root `portal-seo-topic-engine` erzeugte eine zweite Plugininstallation statt eines Ersatzes; Live-Seite wurde nach parallelen Pluginordnern zeitweise unzugänglich. Recovery ohne Datenlöschung: zusätzliche Pluginordner deaktiviert/umbenannt, Seite wieder erreichbar.
+- Paketbuild auf exakten Root `Portal SEO Topic Engine` umgestellt.
+- Paketprüfung im Workflow: 131 Dateien, 76 PHP-Dateien, Hauptdatei/Admin/Plugin-Kern vorhanden, falscher Lowercase-Root abwesend, verschachtelter Doppelroot abwesend.
+- Head `9aa8b1e22679ef0e528e7cd45e9617c880dadd8a`: alle vier Workflows SUCCESS.
+- Real WordPress HTTP E2E Run `35626042769`: Single PASS, Breadth `TARGET_REACHED` 40 nutzbare Themen, 25 COMPLETE, 2 ausschließlich fachlich `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` geparkt, 0 technische Parkfehler, Providercounts exakt 26 je Stufe.
+- Evidence artifact `10652182930`, Digest `sha256:24e7a54a7d962bd14637de7d2530feaef1d5682700340472e48d9d48b8326db1`.
+- Exakt getestete ZIP SHA-256 `962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0`.
+- Nachholprüfung entdeckte, dass eine später separat ausgegebene Nutzer-ZIP SHA-256 `30e89d7afd683a2b8bddb5cb6fef1a21d32f5c29ce7ee4c1083e44c306020799` nicht byteidentisch mit dem getesteten Artefakt war. Diese Datei ist gesperrt.
+- Nächster zulässiger Schritt: ausschließlich die exakten `962684fe...`-Bytes aus Artifact 10652182930 bereitstellen/installieren und den echten Nutzer-WordPress-Start/Progress prüfen. Bis dahin kein Live-PASS und keine PPA-005-CURRENT.zip-Promotion.

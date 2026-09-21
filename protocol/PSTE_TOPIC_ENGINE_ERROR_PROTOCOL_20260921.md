@@ -70,3 +70,14 @@ Keine Vermutung als Root Cause übernehmen.
 
 ## Nicht als Fehler werten
 Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` geparkt. Diese sind fachliche Fail-Closed-Ergebnisse und werden **nicht** ohne eigenen Beweis als Ursache des aktuellen Systemfehlers gewertet.
+
+
+## PSTE-ERR-REAL-005 – Live-Paketpfad / Doppelinstallation / nicht identische Downloadbytes
+- Reale WordPress-Pluginliste belegte den bestehenden Plugin-Basename `Portal SEO Topic Engine/portal-seo-topic-engine.php`.
+- Eine zuvor erzeugte ZIP verwendete den Root `portal-seo-topic-engine`; WordPress behandelte sie dadurch als separate Plugininstallation statt als Ersatz des bestehenden Ordners.
+- Reale Folge: zwei Pluginordner lagen parallel; nach Aktivierungs-/Umbenennungsversuchen war die Seite zeitweise nicht erreichbar. Wiederherstellung gelang durch Deaktivieren/Umbenennen der zusätzlichen Pluginordner; keine Datenlöschung als Reparatur.
+- Der Paketbuild wurde danach auf den exakten Root `Portal SEO Topic Engine` umgestellt und negativ gegen falschen Lowercase-Root sowie verschachtelten Doppelroot geprüft.
+- Neuer Real-WordPress-E2E-PASS: Head `9aa8b1e22679ef0e528e7cd45e9617c880dadd8a`, Run `35626042769`, Artifact `10652182930`, Artifact-Digest `sha256:24e7a54a7d962bd14637de7d2530feaef1d5682700340472e48d9d48b8326db1`.
+- Exakt im PASS-Lauf getestete Plugin-ZIP: SHA-256 `962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0`.
+- Kritischer Nachholbefund: die anschließend an den Nutzer ausgegebene ZIP mit SHA-256 `30e89d7afd683a2b8bddb5cb6fef1a21d32f5c29ce7ee4c1083e44c306020799` ist **nicht** byteidentisch mit der im PASS-Lauf getesteten ZIP und darf nicht als getesteter Releasekandidat gelten.
+- Status: GitHub-/Real-WordPress-Hobbyraum PASS für die exakten `962684fe...`-Bytes; echter Nutzer-WordPress-Live-PASS mit genau diesen Bytes noch offen. PPA-005 CURRENT.zip darf bis dahin nicht ersetzt werden.
