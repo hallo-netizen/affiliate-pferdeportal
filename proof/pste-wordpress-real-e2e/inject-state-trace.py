@@ -79,6 +79,13 @@ s=s.replace(helper_anchor,helper_anchor+"\\n"+helper,1)
 read_pattern = r"(\\$([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*get_option\\s*\\(\\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*(?:,\\s*[^\\)]*)?\\)\\s*;)"
 matches=list(re.finditer(read_pattern,s))
 if not matches:
+    lines=s.splitlines()
+    for i,line in enumerate(lines):
+        if "rawJob" in line or "function current" in line or "function advance" in line or "PSTE_OPTION_ACTIVE_RESEARCH_JOB" in line:
+            lo=max(0,i-2); hi=min(len(lines),i+3)
+            print("READTRACE_SOURCE_BEGIN")
+            for x in lines[lo:hi]: print(x)
+            print("READTRACE_SOURCE_END")
     raise SystemExit("READTRACE_ACTIVE_JOB_OPTION_READ_MISSING")
 offset=0
 for idx,m in enumerate(matches,1):
