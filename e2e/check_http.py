@@ -13,7 +13,8 @@ targets={
   'reithelme':186,'reithandschuhe':187,'reitstiefel':188,'sicherheitswesten':189,
   'gerten':190,'sporen':191,'halfter-und-stricke-stallhalfter':174,
 }
-base=os.environ.get('AFF_E2E_BASE_URL','http://127.0.0.1:8080').rstrip('/')\nresults={}
+base=os.environ.get('AFF_E2E_BASE_URL','http://127.0.0.1:8080').rstrip('/')
+results={}
 for slug,pid in targets.items():
     url=f'{base}/?page_id={pid}&e2e={scenario}-{pid}'
     req=urllib.request.Request(url,headers={'Cache-Control':'no-store','User-Agent':'affiliate-e2e'})
