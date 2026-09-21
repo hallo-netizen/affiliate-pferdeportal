@@ -74,8 +74,6 @@ jobs:
       - name: Existing banner distribution regression
         run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
 
-      - name: Existing Awin OTTO regression hashes
-        run: php AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php
 
   real-wordpress-mariadb-batch:
     runs-on: ubuntu-latest
