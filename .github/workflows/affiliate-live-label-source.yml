@@ -1,0 +1,24 @@
+name: Affiliate live idealo label source probe
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths: ['.github/workflows/affiliate-live-label-source.yml']
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Locate providerFrom source in live HTML
+        run: |
+          set -euo pipefail
+          curl -L --max-time 30 -fsS "https://pferde-atelier.de/category/reithelme-beratung/" -o /tmp/page.html
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('/tmp/page.html').read_text(errors='ignore')
+          i=s.find('function providerFrom')
+          print('INDEX',i)
+          if i<0: raise SystemExit(2)
+          a=max(0,i-4000); b=min(len(s),i+5000)
+          print(s[a:b])
+          PY
