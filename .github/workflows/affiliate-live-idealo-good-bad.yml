@@ -1,0 +1,35 @@
+name: Affiliate live idealo good-vs-bad label probe
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths: ['.github/workflows/affiliate-live-idealo-good-bad.yml']
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Compare correctly and generically labeled idealo cards
+        run: |
+          set -euo pipefail
+          curl -L --max-time 30 -fsS "https://pferde-atelier.de/category/reithelme-beratung/" -o /tmp/page.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, html
+          s=Path('/tmp/page.html').read_text(errors='ignore')
+          cards=re.findall(r'<a class="ppar-banner-link"[^>]*>.*?</a>',s,re.I|re.S)
+          print("CARD_COUNT",len(cards))
+          for idx,c in enumerate(cards,1):
+              plain=html.unescape(re.sub(r'<[^>]+>',' ',c))
+              plain=re.sub(r'\s+',' ',plain).strip()
+              hrefm=re.search(r'href="([^"]+)"',c,re.I)
+              href=html.unescape(hrefm.group(1)) if hrefm else ''
+              if re.search(r'idealo|Zum Angebot|Bei idealo vergleichen',plain,re.I) or 'idealo' in href.lower():
+                  print("CARD",idx)
+                  print("HREF",href[:500])
+                  print("TEXT",plain[:1200])
+                  for attr in re.findall(r'data-[a-z0-9_-]+="[^"]*"',c,re.I):
+                      if 'provider' in attr.lower() or 'affiliate' in attr.lower():
+                          print("ATTR",attr)
+                  print("---")
+          PY
