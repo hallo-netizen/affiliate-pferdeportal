@@ -46,6 +46,58 @@ if delete_old not in s:
     raise SystemExit("JOB_DELETE_ANCHOR_MISSING")
 s=s.replace(delete_old,delete_new,1)
 
+
+# Diagnostic only: trace every active-job read and its caller/lock timing.
+# No product behavior is changed here.
+helper_anchor = "    private static string $activeStepFenceToken='';"
+helper = """    private static function traceActiveJobRead(string $event,$job=null): void {
+        $driver=get_option(PSTE_OPTION_RESEARCH_DRIVER_LOCK,[]);
+        $queue=get_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,[]);
+        $step=get_option(PSTE_OPTION_RESEARCH_STEP_LOCK,[]);
+        $frames=array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS),1,7);
+        $stack=[];foreach($frames as $f){$stack[]=(isset($f['class'])?$f['class'].'::':'').(string)($f['function']??'');}
+        $uri=(string)($_SERVER['REQUEST_URI']??'CLI');
+        error_log('PSTE_READTRACE event='.$event.' t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().
+            ' uuid='.(is_array($job)?(string)($job['job_uuid']??''):'NONE').
+            ' sha='.(is_array($job)?(string)($job['sha256']??''):'NONE').
+            ' phase='.(is_array($job)?(string)($job['phase']??''):'NONE').
+            ' phase_state='.(is_array($job)?(string)($job['phase_state']??''):'NONE').
+            ' status='.(is_array($job)?(string)($job['status']??''):'NONE').
+            ' uri='.base64_encode($uri).
+            ' driver_lock='.(is_array($driver)?(string)($driver['token']??''):'NONE').
+            ' queue_lock='.(is_array($queue)?(string)($queue['token']??''):'NONE').
+            ' job_lock='.(is_array($step)?(string)($step['token']??''):'NONE').
+            ' stack='.base64_encode(implode('>',$stack)));
+    }
+"""
+if helper_anchor not in s:
+    raise SystemExit("READTRACE_HELPER_ANCHOR_MISSING")
+s=s.replace(helper_anchor,helper_anchor+"\\n"+helper,1)
+
+# rawJob() is the authoritative active-job option read. Log the exact value returned.
+raw_pattern = r"(private static function rawJob\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{\\s*\\$v\\s*=\\s*get_option\\(PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*,\\s*null\\s*\\)\\s*;)"
+m=re.search(raw_pattern,s)
+if not m:
+    raise SystemExit("READTRACE_RAWJOB_ANCHOR_MISSING")
+s=s[:m.end()]+"self::traceActiveJobRead('RAW_JOB_READ',$v);"+s[m.end():]
+
+# Mark entry into the two public read/progression paths.
+for label, pattern in [
+    ("CURRENT_ENTER", r"(public static function current\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)"),
+    ("ADVANCE_ENTER", r"(public static function advance\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)")
+]:
+    m=re.search(pattern,s)
+    if not m:
+        raise SystemExit("READTRACE_"+label+"_ANCHOR_MISSING")
+    s=s[:m.end()]+"self::traceActiveJobRead('"+label+"',null);"+s[m.end():]
+
+# Existing lock trace gives acquire timestamps; add an immediate post-acquire marker in advance().
+needle="$token=self::acquireStepLock();"
+if needle not in s:
+    raise SystemExit("READTRACE_ADVANCE_LOCK_ANCHOR_MISSING")
+s=s.replace(needle,needle+"self::traceActiveJobRead('ADVANCE_AFTER_JOB_LOCK',null);",1)
+
+
 job.write_text(s,encoding="utf-8")
 
 print("PASS STATE_TRACE_INJECTED")
