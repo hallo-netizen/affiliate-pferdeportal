@@ -134,8 +134,8 @@ for rel, acquire_sig, release_sig, label in [
         raise SystemExit(label+"_LOCKTRACE_ANCHOR_MISSING")
     s=s.replace(acquire_sig,acquire_sig+"error_log('PSTE_LOCKTRACE "+label+"_ACQUIRE_ENTER t='.sprintf('%.6f',microtime(true)).' pid='.getmypid());",1)
     if label=="DRIVER":
-        needle="if(add_option(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$v,'',false))return $token;"
-        repl="if(add_option(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$v,'',false)){error_log('PSTE_LOCKTRACE DRIVER_ACQUIRED t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);return $token;}"
+        needle="if(self::insertLockIfAbsent(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$v))return $token;"
+        repl="if(self::insertLockIfAbsent(PSTE_OPTION_RESEARCH_DRIVER_LOCK,$v)){error_log('PSTE_LOCKTRACE DRIVER_ACQUIRED t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);return $token;}"
     elif label=="JOB":
         needle="if(add_option(PSTE_OPTION_RESEARCH_STEP_LOCK,$payload,'',false))return $token;"
         repl="if(add_option(PSTE_OPTION_RESEARCH_STEP_LOCK,$payload,'',false)){error_log('PSTE_LOCKTRACE JOB_ACQUIRED t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' token='.$token);return $token;}"
