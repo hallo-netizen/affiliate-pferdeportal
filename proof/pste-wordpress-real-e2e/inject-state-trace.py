@@ -76,23 +76,17 @@ if helper_anchor not in s:
 s=s.replace(helper_anchor,helper_anchor+"\\n"+helper,1)
 
 # rawJob() is the authoritative active-job option read. Log the exact value returned.
-raw_fn = re.search(r"function\\s+rawJob\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{",s)
-if not raw_fn:
-    raise SystemExit("READTRACE_RAWJOB_FUNCTION_MISSING")
-start=raw_fn.end()
-depth=1
-i=start
-while i < len(s) and depth:
-    if s[i]=='{': depth+=1
-    elif s[i]=='}': depth-=1
-    i+=1
-body=s[start:i-1]
-read=re.search(r"(\\$([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*get_option\\s*\\(\\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*(?:,\\s*[^\\)]*)?\\)\\s*;)",body)
-if not read:
-    raise SystemExit("READTRACE_RAWJOB_OPTION_READ_MISSING")
-var=read.group(2)
-at=start+read.end()
-s=s[:at]+"self::traceActiveJobRead('RAW_JOB_READ',$"+var+");"+s[at:]
+read_pattern = r"(\\$([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*get_option\\s*\\(\\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*(?:,\\s*[^\\)]*)?\\)\\s*;)"
+matches=list(re.finditer(read_pattern,s))
+if not matches:
+    raise SystemExit("READTRACE_ACTIVE_JOB_OPTION_READ_MISSING")
+offset=0
+for idx,m in enumerate(matches,1):
+    at=m.end()+offset
+    var=m.group(2)
+    ins="self::traceActiveJobRead('ACTIVE_JOB_OPTION_READ_"+str(idx)+"',$"+var+");"
+    s=s[:at]+ins+s[at:]
+    offset+=len(ins)
 
 # Mark entry into the two public read/progression paths.
 for label, pattern in [
