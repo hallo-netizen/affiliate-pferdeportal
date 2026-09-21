@@ -36,3 +36,31 @@ jobs:
           set -euo pipefail
           cd /tmp/pste05700-proof/pste05700_github_control
           bash ./run.sh
+      - name: Locate and verify exact fresh ZIP candidate
+        id: fresh_zip
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="2ce8640b12e71c3fd028c28841aa5acf5b978284def399a5ec3e0bd4ea49d255"
+          found=""
+          while IFS= read -r -d '' file; do
+            actual="$(sha256sum "$file" | awk '{print $1}')"
+            if [ "$actual" = "$expected" ]; then
+              found="$file"
+              break
+            fi
+          done < <(find /tmp/pste05700-proof -type f -name '*.zip' -print0)
+          if [ -z "$found" ]; then
+            echo "FRESH_ZIP_CANDIDATE_NOT_FOUND"
+            exit 1
+          fi
+          cp "$found" /tmp/PSTE-0.57.0-FRESH.zip
+          echo "$expected  /tmp/PSTE-0.57.0-FRESH.zip" | sha256sum -c -
+          echo "candidate=/tmp/PSTE-0.57.0-FRESH.zip" >> "$GITHUB_OUTPUT"
+      - name: Upload exact fresh ZIP candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSTE-0.57.0-FRESH
+          path: ${{ steps.fresh_zip.outputs.candidate }}
+          if-no-files-found: error
+          retention-days: 30
