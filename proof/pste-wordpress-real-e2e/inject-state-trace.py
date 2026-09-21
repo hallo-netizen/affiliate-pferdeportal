@@ -73,7 +73,7 @@ helper = """    private static function traceActiveJobRead(string $event,$job=nu
 """
 if helper_anchor not in s:
     raise SystemExit("READTRACE_HELPER_ANCHOR_MISSING")
-s=s.replace(helper_anchor,helper_anchor+"\\n"+helper,1)
+s=s.replace(helper_anchor,helper_anchor+"\n"+helper,1)
 
 # rawJob() is the authoritative active-job option read. Log the exact value returned.
 read_pattern = r"(\$([A-Za-z_][A-Za-z0-9_]*)\s*=\s*get_option\s*\(\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\s*(?:,\s*[^\)]*)?\)\s*;)"
