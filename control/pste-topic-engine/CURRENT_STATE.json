@@ -2,21 +2,21 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "FAIL_REAL_SITE_ACCEPTANCE_BREADTH_QUEUE_NOT_FOUND_DIAGNOSIS_ACTIVE",
+  "status": "PASS_GITHUB_0573_REAL_WORDPRESS_PERSISTED_STATE_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "9aa8b1e22679ef0e528e7cd45e9617c880dadd8a",
+    "technical_head": "b6f074c56530de6213aac8ae73b3e78c31e1fb1c",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35626042769,
+    "run_id": 35639057946,
     "run_result": "SUCCESS",
-    "evidence_artifact_id": 10652182930,
-    "evidence_digest": "sha256:24e7a54a7d962bd14637de7d2530feaef1d5682700340472e48d9d48b8326db1",
-    "candidate": "0.57.2-HOBBYROOM",
-    "candidate_sha256": "962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0",
+    "evidence_artifact_id": 10658065057,
+    "evidence_digest": "sha256:a3ceb4349c307b5e27e04d1b7bef8511ca853aa59695c45be647f14b3b087407",
+    "candidate": "0.57.3-HOBBYROOM",
+    "candidate_sha256": "85a14d4af9d79833bd10ac0b29217e4ba614bd9260d1c5c58ffc784455b75a75",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
+    "release": "GITHUB_PERSISTED_STATE_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
   },
   "proven": {
     "exact_plugin_root": "PASS_Portal SEO Topic Engine",
@@ -27,34 +27,41 @@
     "nested_duplicate_root_absent": "PASS",
     "strict_serial_driver_positive_negative": "PASS",
     "real_admin_ajax_single": "PASS_15_CANDIDATES_5_USABLE",
+    "persisted_terminal_prior_queue_preserved": "PASS",
+    "stale_old_queue_status_rejected": "PASS_EXPECTED_PSTE_BREADTH_QUEUE_NOT_FOUND",
+    "browser_stale_status_ignored_after_new_start": "PASS",
+    "new_queue_survives_stale_status": "PASS",
     "breadth_target_40": "PASS_TARGET_REACHED_40_USABLE_81_RAW_27_ITEMS_25_COMPLETE_2_DOMAIN_PARKED",
     "technical_park_errors": "ZERO",
     "provider_counts": "PASS_EXACT_26_EACH",
-    "real_wordpress_http_e2e": "PASS_RUN_35626042769",
-    "separate_process_full_system": "PASS_RUN_35626042840",
-    "final_zip_full_workflow": "PASS_RUN_35626042703",
-    "complete_system_simulation": "PASS_RUN_35626042739",
-    "exact_tested_zip_sha256": "962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0",
-    "previously_supplied_user_zip_sha256": "30e89d7afd683a2b8bddb5cb6fef1a21d32f5c29ce7ee4c1083e44c306020799",
-    "previously_supplied_user_zip_matches_tested_bytes": false
+    "real_wordpress_http_e2e": "PASS_RUN_35639057946",
+    "separate_process_full_system": "PASS_RUN_35639057957",
+    "final_zip_full_workflow": "PASS_RUN_35639058163",
+    "complete_system_simulation": "PASS_RUN_35639057878",
+    "exact_tested_zip_sha256": "85a14d4af9d79833bd10ac0b29217e4ba614bd9260d1c5c58ffc784455b75a75",
+    "superseded_0572_zip_sha256": "962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0"
+  },
+  "root_cause": {
+    "code": "STALE_BROWSER_BREADTH_STATUS_RESPONSE_AFTER_NEW_QUEUE_START",
+    "detail": "The live PSTE_BREADTH_QUEUE_NOT_FOUND was reproduced as a stale read-only browser status response for the previous terminal queue arriving after START had installed a new queue. Real WordPress/MySQL/multiworker proof showed the new canonical queue remains present and progresses. Version 0.57.3 ignores a status result when the queue UUID changed while that request was in flight."
   },
   "first_blocker": {
-    "code": "REAL_SITE_BREADTH_QUEUE_NOT_FOUND_AFTER_START",
-    "detail": "The real-site acceptance attempt displayed PSTE_BREADTH_QUEUE_NOT_FOUND while the server-driver UI showed RUNNING / PSTE_DRIVER_STEP_SAVED. It is not yet proven whether the canonical queue is actually missing or whether an in-flight read-only status request for the previous queue UUID is being surfaced after START. The prior GitHub E2E reset transient execution state before breadth and therefore did not prove this persisted-state transition."
+    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_0573_EXACT_TESTED_BYTES",
+    "detail": "The exact 0.57.3 GitHub-tested ZIP SHA-256 85a14d4a... has passed the persisted-state Real WordPress E2E, but has not yet been accepted on the user's real WordPress installation."
   },
   "next_action": {
-    "id": "PROVE_PERSISTED_STATE_START_STATUS_RACE_BEFORE_PRODUCT_CHANGE",
-    "action": "Run the real WordPress/MySQL/multiworker proof without deleting prior driver execution state, seed a terminal prior breadth queue, START a new breadth queue, then prove both sides: the old queue UUID is rejected with PSTE_BREADTH_QUEUE_NOT_FOUND while the new queue UUID remains canonical and progresses. Only after this proof decide whether the fix belongs to backend queue persistence or browser stale-status handling.",
-    "success": "ROOT_CAUSE_BOUND_TO_BACKEND_OR_BROWSER_WITH_REAL_WORDPRESS_PROOF",
-    "until_then": "NO_NEW_LIVE_PLUGIN_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
+    "id": "INSTALL_EXACT_0573_GITHUB_TESTED_BYTES_THEN_REAL_SITE_ACCEPTANCE",
+    "action": "Install only the exact ZIP from artifact 10658065057 with SHA-256 85a14d4af9d79833bd10ac0b29217e4ba614bd9260d1c5c58ffc784455b75a75 over the real plugin path 'Portal SEO Topic Engine/portal-seo-topic-engine.php'. Then start the real production wave and verify START -> new queue -> driver -> progress without a stale PSTE_BREADTH_QUEUE_NOT_FOUND overriding the new run, without STEP_OVERDUE, without duplicate plugin roots, and without technical parked errors.",
+    "success": "REAL_SITE_0573_START_PROGRESS_PASS",
+    "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
   },
-  "freshness": "LIVE_FAIL_OBSERVED_AFTER_BOUND_GITHUB_PASS; INSPECT ONLY DELTA FROM TECHNICAL_HEAD_AND_PERSISTED_STATE_ACCEPTANCE_PROOF; DO_NOT RECONSTRUCT HISTORY",
+  "freshness": "ON_NEW_CHAT_READ_START_HERE_THEN_THIS_FILE; COMPARE BRANCH ONLY AFTER BOUND_TECHNICAL_HEAD; DO_NOT RECONSTRUCT HISTORY WHEN PRODUCT BYTES ARE UNCHANGED",
   "rules": [
     "KISS",
     "NO_NEW_ARCHITECTURE",
     "NO_COST_LEDGER_SOFTENING",
     "NO_DATA_DELETION_AS_FIX",
-    "FULL_REAL_WORDPRESS_SINGLE_AND_BREADTH_RETEST_AFTER_ANY_PRODUCT_CHANGE",
+    "FULL_REAL_WORDPRESS_SINGLE_AND_BREADTH_RETEST_AFTER_ANY PRODUCT_CHANGE",
     "NO_RELEASE_BEFORE_REAL_BREADTH_PASS"
   ],
   "plugin": {
