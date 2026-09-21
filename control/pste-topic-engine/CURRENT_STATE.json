@@ -2,7 +2,7 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "PASS_GITHUB_EXACT_PACKAGE_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
+  "status": "FAIL_REAL_SITE_ACCEPTANCE_BREADTH_QUEUE_NOT_FOUND_DIAGNOSIS_ACTIVE",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
@@ -39,16 +39,16 @@
     "previously_supplied_user_zip_matches_tested_bytes": false
   },
   "first_blocker": {
-    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_EXACT_TESTED_BYTES",
-    "detail": "The exact GitHub-tested ZIP SHA-256 962684fe... has not yet been confirmed installed and running on the user's real WordPress site. A previously supplied user-facing ZIP had different bytes and must not be used as evidence."
+    "code": "REAL_SITE_BREADTH_QUEUE_NOT_FOUND_AFTER_START",
+    "detail": "The real-site acceptance attempt displayed PSTE_BREADTH_QUEUE_NOT_FOUND while the server-driver UI showed RUNNING / PSTE_DRIVER_STEP_SAVED. It is not yet proven whether the canonical queue is actually missing or whether an in-flight read-only status request for the previous queue UUID is being surfaced after START. The prior GitHub E2E reset transient execution state before breadth and therefore did not prove this persisted-state transition."
   },
   "next_action": {
-    "id": "DELIVER_AND_INSTALL_EXACT_GITHUB_TESTED_BYTES_THEN_REAL_SITE_ACCEPTANCE",
-    "action": "Use only the exact ZIP from artifact 10652182930 with SHA-256 962684fe7a3d3d22e677684ab69d9e23771c6000490071a3836993677c8ec2e0. Install/replace the real plugin path 'Portal SEO Topic Engine/portal-seo-topic-engine.php', then verify the real site starts a single run and a breadth run without STEP_OVERDUE, BREADTH_QUEUE_NOT_FOUND, duplicate plugin roots, or technical parked errors.",
-    "success": "REAL_SITE_PLUGIN_REPLACEMENT_AND_START_PROGRESS_PASS",
-    "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
+    "id": "PROVE_PERSISTED_STATE_START_STATUS_RACE_BEFORE_PRODUCT_CHANGE",
+    "action": "Run the real WordPress/MySQL/multiworker proof without deleting prior driver execution state, seed a terminal prior breadth queue, START a new breadth queue, then prove both sides: the old queue UUID is rejected with PSTE_BREADTH_QUEUE_NOT_FOUND while the new queue UUID remains canonical and progresses. Only after this proof decide whether the fix belongs to backend queue persistence or browser stale-status handling.",
+    "success": "ROOT_CAUSE_BOUND_TO_BACKEND_OR_BROWSER_WITH_REAL_WORDPRESS_PROOF",
+    "until_then": "NO_NEW_LIVE_PLUGIN_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
   },
-  "freshness": "ON_NEW_CHAT_READ_START_HERE_THEN_THIS_FILE; IF_TECHNICAL_HEAD_AND_REAL_RUN_UNCHANGED_DO_NOT_RECONSTRUCT_HISTORY; IF_CHANGED_INSPECT_ONLY_DELTA",
+  "freshness": "LIVE_FAIL_OBSERVED_AFTER_BOUND_GITHUB_PASS; INSPECT ONLY DELTA FROM TECHNICAL_HEAD_AND_PERSISTED_STATE_ACCEPTANCE_PROOF; DO_NOT RECONSTRUCT HISTORY",
   "rules": [
     "KISS",
     "NO_NEW_ARCHITECTURE",
