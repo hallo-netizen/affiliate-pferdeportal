@@ -66,6 +66,7 @@ jobs:
           cd /tmp/pste-candidate/portal-seo-topic-engine
           patch -p1 < /tmp/pste-proof/pste-05701-step-retry.patch
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/empty-sandbox-migration.patch"
+          patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/driver-coordination-wait.patch"
           sed -i 's/Version: 0\.57\.0/Version: 0.57.2/' portal-seo-topic-engine.php
           sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.2');/" portal-seo-topic-engine.php
           grep -q 'Version: 0.57.2' portal-seo-topic-engine.php
