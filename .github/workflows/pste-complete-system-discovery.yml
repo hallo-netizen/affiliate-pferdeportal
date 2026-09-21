@@ -97,3 +97,11 @@ jobs:
           grep -RIn -E 'plan_slot|plan_slot_sha256|READY|PSTE|handoff|compile|generation|retention|production_plan|canonical_article' /tmp/pserc-inner --include='*.php' || true
           echo "=== INNER PSERC TESTS ==="
           find /tmp/pserc-inner -type f | grep -Ei 'test|workflow|fixture' || true
+
+      - name: Upload exact inner PSERC compiler for combined harness
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSERC-0.28.18-EXACT-INNER-COMPILER
+          path: /tmp/pserc-inner/portal-seo-editorial-plan-compiler
+          if-no-files-found: error
+          retention-days: 7
