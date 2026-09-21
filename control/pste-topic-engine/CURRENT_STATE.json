@@ -1,47 +1,57 @@
 {
-  "contract":"PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
-  "scope":"PFERDE_ATELIER_SEO_TOPIC_ENGINE",
-  "authority_role":"SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status":"BLOCKED_REAL_WORDPRESS_BREADTH_STALE_JOB_SNAPSHOT_SOURCE_UNPROVEN",
-  "binding":{
-    "repo":"hallo-netizen/affiliate-pferdeportal",
-    "branch":"pste-05700-server-step-driver-proof",
-    "technical_head":"f2cc6c058b0a52b4cf3df77cd83dd1144a63849a",
-    "workflow":"PSTE Real WordPress HTTP E2E",
-    "run_id":35595789702,
-    "run_result":"FAILURE",
-    "evidence_digest":"sha256:9be70b2ad78b811f90115e6be69c05cabc1075c02242233f621b5bcd617b8fe7",
-    "candidate":"0.57.2-HOBBYROOM",
-    "candidate_sha256":"49d972e1569e5d6cd09668a2817265c53ddf39d32a10c72cfea35830abb39da3",
-    "release":"NOT_RELEASED"
+  "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
+  "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
+  "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
+  "status": "PASS_REAL_WORDPRESS_SYSTEM_RELEASE_BYTES_NOT_YET_CAPTURED",
+  "binding": {
+    "repo": "hallo-netizen/affiliate-pferdeportal",
+    "branch": "pste-05700-server-step-driver-proof",
+    "technical_head": "64e868dd113475dcb20273dbfa6c6ea9cd1e0776",
+    "workflow": "PSTE Real WordPress HTTP E2E",
+    "run_id": 35613932903,
+    "run_result": "SUCCESS",
+    "evidence_digest": "sha256:2676d2eea65ecfa1906eaffe291118942836879b958ef57f9b694cc12699f427",
+    "candidate": "0.57.2-HOBBYROOM",
+    "candidate_sha256": "4c4ede7a8db0422159fde01ad270006d3e90e03ba28d4090ea5eba92c1dd842a",
+    "release": "NOT_RELEASED"
   },
-  "proven":{
-    "real_wp_mysql_multiworker":"PASS",
-    "real_admin_ajax_single":"PASS_15_CANDIDATES_5_USABLE_PROVIDER_COUNTS_EXACT",
-    "breadth_target":"TARGET_REACHED_40_USABLE_84_RAW_28_ITEMS_22_COMPLETE_6_PARKED",
-    "breadth_verifier":"FAIL_PROVIDER_COUNT_MISMATCH_KEYWORD_SUGGESTIONS_27_ACTUAL_22_EXPECTED"
+  "proven": {
+    "real_wp_mysql_multiworker": "PASS",
+    "strict_serial_driver_positive_negative": "PASS",
+    "real_admin_ajax_single": "PASS_15_CANDIDATES_5_USABLE_PROVIDER_COUNTS_EXACT",
+    "breadth_target": "PASS_TARGET_REACHED_40_USABLE_87_RAW_27_ITEMS_24_COMPLETE_3_PARKED",
+    "breadth_verifier": "PASS_PROVIDER_COUNTS_EXACT_26_EACH",
+    "same_head_workflows": {
+      "real_wordpress_http_e2e": "PASS_RUN_35613932903",
+      "separate_process_full_system": "PASS_RUN_35613932941",
+      "final_zip_full_workflow": "PASS_RUN_35613932913",
+      "complete_system_simulation": "PASS_RUN_35613932949"
+    }
   },
-  "first_blocker":{
-    "code":"PSTE_STALE_ACTIVE_JOB_SNAPSHOT_REENTRY",
-    "job_uuid":"4ef084fb-24b6-4675-aa55-c43197941eee",
-    "family":"Boxenmatten",
-    "failure":"PSTE_COST_LEDGER_ATTEMPT_MISMATCH",
-    "proven":"QUESTIONS_TASK_PENDING_WAS_PERSISTED_THEN_A_LATER_REQUEST_WROTE_RELATED_KEYWORDS_PERSISTING_AND_REACCOUNTED_THE_ENDPOINT; DELETE_IF_SAME_RAN_ONLY_AFTER_PAUSED_ERROR",
-    "root_cause":"NOT_YET_PROVEN"
+  "first_blocker": null,
+  "next_action": {
+    "id": "CAPTURE_EXACT_TESTED_RELEASE_BYTES",
+    "action": "Add the exact built /tmp/PSTE-0.57.2-HOBBYROOM.zip to the Real WordPress evidence artifact, rerun the unchanged full real WordPress E2E from zero, require strict serial positive/negative + real single + breadth target 40 + exact provider counts to PASS, then bind and release only that uploaded ZIP whose SHA-256 is emitted by the same successful run.",
+    "success": "EXACT_TESTED_PLUGIN_ZIP_CAPTURED_FROM_SUCCESSFUL_REAL_SYSTEM_RUN",
+    "until_then": "NO_RELEASE"
   },
-  "next_action":{
-    "id":"TRACE_FIRST_STALE_ACTIVE_JOB_READ",
-    "action":"Instrument only active-job reads in Research_Job current/rawJob/advance with pid, uuid, sha, phase, phase_state, URI, compact call stack and timing versus existing DRIVER/QUEUE/JOB lock acquisition; rerun the unchanged full real WordPress E2E from zero; identify the first read that returns RELATED_KEYWORDS:PERSISTING after QUESTIONS:TASK_PENDING was already persisted.",
-    "success":"FIRST_STALE_READ_SOURCE_AND_LOCK_TIMING_PROVEN",
-    "until_then":"NO_FURTHER_PRODUCT_FIX"
+  "freshness": "ON_NEW_CHAT_READ_START_HERE_THEN_THIS_FILE; IF_TECHNICAL_HEAD_AND_REAL_RUN_UNCHANGED_DO_NOT_RECONSTRUCT_HISTORY; IF_CHANGED_INSPECT_ONLY_DELTA",
+  "rules": [
+    "KISS",
+    "NO_NEW_ARCHITECTURE",
+    "NO_COST_LEDGER_SOFTENING",
+    "NO_DATA_DELETION_AS_FIX",
+    "FULL_REAL_WORDPRESS_SINGLE_AND_BREADTH_RETEST_AFTER_ANY_PRODUCT_CHANGE",
+    "NO_RELEASE_BEFORE_REAL_BREADTH_PASS"
+  ],
+  "plugin": {
+    "release_blocked": true,
+    "current_zip_replace": false
   },
-  "freshness":"ON_NEW_CHAT_READ_START_HERE_THEN_THIS_FILE; IF_TECHNICAL_HEAD_AND_REAL_RUN_UNCHANGED_DO_NOT_RECONSTRUCT_HISTORY; IF_CHANGED_INSPECT_ONLY_DELTA",
-  "rules":["KISS","NO_NEW_ARCHITECTURE","NO_COST_LEDGER_SOFTENING","NO_DATA_DELETION_AS_FIX","FULL_REAL_WORDPRESS_SINGLE_AND_BREADTH_RETEST_AFTER_ANY_PRODUCT_CHANGE","NO_RELEASE_BEFORE_REAL_BREADTH_PASS"],
-  "plugin":{"release_blocked":true,"current_zip_replace":false},
-  "refs":{
-    "door":"control/pste-topic-engine/START_HERE.json",
-    "target":"control/pste-topic-engine/ZIELVERTRAG.json",
-    "errors":"protocol/PSTE_TOPIC_ENGINE_ERROR_PROTOCOL_20260921.md",
-    "worklog":"protocol/PSTE_TOPIC_ENGINE_WORKLOG_20260921.md"
+  "refs": {
+    "door": "control/pste-topic-engine/START_HERE.json",
+    "target": "control/pste-topic-engine/ZIELVERTRAG.json",
+    "errors": "protocol/PSTE_TOPIC_ENGINE_ERROR_PROTOCOL_20260921.md",
+    "worklog": "protocol/PSTE_TOPIC_ENGINE_WORKLOG_20260921.md"
   }
 }
