@@ -57,30 +57,48 @@ add_filter('pre_http_request', function($pre,$args,$url){
     $base=['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'tasks_count'=>1,'tasks_error'=>0];
 
     if(str_ends_with($path,'/keyword_suggestions/live')){
-        $body=$base;$body['tasks']=[['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'result'=>[['items'=>[
-            $kw($family.' richtig auswählen',90),
-            $kw($family.' sicher verwenden',70),
-            $kw($family.' Größen vergleichen',60),
-            $kw('Welche '.$family.' sind für Pferde geeignet?',50)
-        ]]]]];
+        $items=[];
+        if($mode==='stress_prepare_100'){
+            for($i=1;$i<=100;$i++)$items[]=$kw($family.' Auswahl Aspekt '.sprintf('%03d',$i),max(1,201-$i));
+        }else{
+            $items=[
+                $kw($family.' richtig auswählen',90),
+                $kw($family.' sicher verwenden',70),
+                $kw($family.' Größen vergleichen',60),
+                $kw('Welche '.$family.' sind für Pferde geeignet?',50)
+            ];
+        }
+        $body=$base;$body['tasks']=[['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'result'=>[['items'=>$items]]]];
         return $ok($body);
     }
     if(str_ends_with($path,'/related_keywords/live')){
-        $body=$base;$body['tasks']=[['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'result'=>[['items'=>[
-            $kw($family.' kaufen worauf achten',80),
-            $kw($family.' Vorteile Nachteile',65),
-            $kw($family.' Pflege und Reinigung',55),
-            $kw('Wie verwendet man '.$family.' richtig?',45)
-        ]]]]];
+        $items=[];
+        if($mode==='stress_prepare_100'){
+            for($i=1;$i<=100;$i++)$items[]=$kw($family.' Nutzung Aspekt '.sprintf('%03d',$i),max(1,191-$i));
+        }else{
+            $items=[
+                $kw($family.' kaufen worauf achten',80),
+                $kw($family.' Vorteile Nachteile',65),
+                $kw($family.' Pflege und Reinigung',55),
+                $kw('Wie verwendet man '.$family.' richtig?',45)
+            ];
+        }
+        $body=$base;$body['tasks']=[['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'result'=>[['items'=>$items]]]];
         return $ok($body);
     }
     if(str_ends_with($path,'/keyword_ideas/live')){
-        $body=$base;$body['tasks']=[['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'result'=>[['items'=>[
-            $kw($family.' Test und Vergleich',75),
-            $kw($family.' Kosten',58),
-            $kw($family.' Sicherheit',52),
-            $kw('Was muss man bei '.$family.' beachten?',48)
-        ]]]]];
+        $items=[];
+        if($mode==='stress_prepare_100'){
+            for($i=1;$i<=100;$i++)$items[]=$kw($family.' Wissen Aspekt '.sprintf('%03d',$i),max(1,181-$i));
+        }else{
+            $items=[
+                $kw($family.' Test und Vergleich',75),
+                $kw($family.' Kosten',58),
+                $kw($family.' Sicherheit',52),
+                $kw('Was muss man bei '.$family.' beachten?',48)
+            ];
+        }
+        $body=$base;$body['tasks']=[['status_code'=>20000,'status_message'=>'Ok.','cost'=>0.001,'result'=>[['items'=>$items]]]];
         return $ok($body);
     }
     if(str_ends_with($path,'/task_post')){
