@@ -1,0 +1,30 @@
+<?php
+if (!defined('ABSPATH')) { exit(2); }
+$now=time();
+update_option('ppar_ebay_deletion_state_v1',array(
+  'challenge_answered_at'=>$now,
+  'last_notification_at'=>$now,
+  'last_notification_status'=>'verified',
+  'last_notification_hash'=>'',
+  'last_deleted_items'=>0,
+  'last_deleted_creatives'=>0,
+  'last_deleted_outputs'=>0,
+  'last_error'=>''
+),false);
+$e=get_option('ppar_network_ebay_v1',array());
+$e=is_array($e)?$e:array();
+$e['enabled']=1;
+$e['business_enabled']=1;
+$e['api_terms_confirmed']=1;
+$e['privacy_policy_confirmed']=1;
+update_option('ppar_network_ebay_v1',$e,false);
+$i=get_option('ppar_network_idealo_v1',array());
+$i=is_array($i)?$i:array();
+$i['enabled']=1;
+$i['output_mode']='automatic';
+update_option('ppar_network_idealo_v1',$i,false);
+update_option('ppar_provider_access_state_v1',array(
+ 'ebay'=>array('status'=>'connected','last_checked'=>$now,'message'=>'office-pass'),
+ 'idealo'=>array('status'=>'connected','last_checked'=>$now,'message'=>'office-pass'),
+),false);
+echo "OFFICE_STATE_READY\n";
