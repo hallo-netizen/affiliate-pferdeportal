@@ -63,6 +63,32 @@ if old not in s: raise SystemExit("SAFE_RELEASE_ANCHOR_MISSING")
 p.write_text(s.replace(old,new,1),encoding="utf-8")
 
 
+
+# Fence breadth queue writes with the already existing queue lock.
+p=root/"includes/class-pste-breadth-research-queue.php"
+s=p.read_text(encoding="utf-8")
+class_anchor="final class PSTE_Breadth_Research_Queue {"
+if class_anchor not in s:
+    raise SystemExit("QUEUE_CLASS_ANCHOR_MISSING")
+if "activeQueueFenceToken" not in s:
+    s=s.replace(class_anchor,class_anchor+"\n    private static string $activeQueueFenceToken='';",1)
+old="private static function acquireQueueLock(): string {$token=hash('sha256',microtime(true).'|'.wp_generate_uuid4());$payload=['token'=>$token,'expires_at'=>time()+self::QUEUE_LOCK_TTL];if(add_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$payload,'',false))return $token;$existing=get_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,[]);if(is_array($existing)&&(int)($existing['expires_at']??0)<time()){self::deleteExpiredOptionLockAtomically(PSTE_OPTION_BREADTH_RESEARCH_LOCK);if(add_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$payload,'',false))return $token;}throw new RuntimeException('PSTE_BREADTH_QUEUE_STEP_ALREADY_RUNNING');}"
+new="private static function acquireQueueLock(): string {$token=hash('sha256',microtime(true).'|'.wp_generate_uuid4());$payload=['token'=>$token,'expires_at'=>time()+self::QUEUE_LOCK_TTL];if(add_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$payload,'',false)){self::$activeQueueFenceToken=$token;return $token;}$existing=get_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,[]);if(is_array($existing)&&(int)($existing['expires_at']??0)<time()){self::deleteExpiredOptionLockAtomically(PSTE_OPTION_BREADTH_RESEARCH_LOCK);if(add_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$payload,'',false)){self::$activeQueueFenceToken=$token;return $token;}}throw new RuntimeException('PSTE_BREADTH_QUEUE_STEP_ALREADY_RUNNING');}"
+if old not in s:
+    raise SystemExit("QUEUE_ACQUIRE_FENCE_ANCHOR_MISSING")
+s=s.replace(old,new,1)
+old="private static function releaseQueueLock(string $token): void {self::deleteOwnedOptionLockAtomically(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$token);}"
+new="private static function releaseQueueLock(string $token): void {self::deleteOwnedOptionLockAtomically(PSTE_OPTION_BREADTH_RESEARCH_LOCK,$token);if(self::$activeQueueFenceToken!==''&&hash_equals(self::$activeQueueFenceToken,$token))self::$activeQueueFenceToken='';}"
+if old not in s:
+    raise SystemExit("QUEUE_RELEASE_FENCE_ANCHOR_MISSING")
+s=s.replace(old,new,1)
+old="private static function save(array $q): void {$q=self::withHash($q);update_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE,$q,false);"
+new="private static function save(array $q): void {if(self::$activeQueueFenceToken!==''){$lock=get_option(PSTE_OPTION_BREADTH_RESEARCH_LOCK,[]);if(!is_array($lock)||!hash_equals(self::$activeQueueFenceToken,(string)($lock['token']??'')))throw new RuntimeException('PSTE_BREADTH_QUEUE_FENCE_LOST');}$q=self::withHash($q);update_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE,$q,false);"
+if old not in s:
+    raise SystemExit("QUEUE_SAVE_FENCE_ANCHOR_MISSING")
+s=s.replace(old,new,1)
+p.write_text(s,encoding="utf-8")
+
 # Hard postconditions: no silent partial application.
 checks = {
     "includes/class-pste-research-driver.php": [
