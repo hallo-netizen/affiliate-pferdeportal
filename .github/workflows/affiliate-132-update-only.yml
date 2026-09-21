@@ -1,0 +1,129 @@
+name: Affiliate 132 update-only state repair proof
+
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-132-update-only.yml'
+      - 'e2e/build_v132.py'
+  workflow_dispatch:
+
+jobs:
+  update-only-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Build 6.72.132 from proven 6.72.131 source
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base130 /tmp/candidate132
+          mkdir -p /tmp/base130 /tmp/candidate132
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/base130
+          cp -a /tmp/base130/affiliate-portal-router /tmp/candidate132/
+          base64 --decode e2e/fixtures/aff043_into_130.patch.gz.b64 | gzip -dc >/tmp/aff043.patch
+          (cd /tmp/candidate132/affiliate-portal-router && patch -p5 </tmp/aff043.patch)
+          mkdir -p /tmp/candidate132/affiliate-portal-router/recovery
+          base64 --decode e2e/fixtures/aff043-historical-product-state-20260915.json.gz.b64 | gzip -dc > /tmp/candidate132/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json
+          sed -i "s/Version: 6.72.130/Version: 6.72.131/" /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i "s/const VERSION = '6.72.130';/const VERSION = '6.72.131';/" /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i '1s/^V6\.72\.130 /V6.72.131 /' /tmp/candidate132/affiliate-portal-router/readme.txt
+          python3 e2e/build_v132.py
+          php -l /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -q "Version: 6.72.132" /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -q "maybe_aff043_automatic_state_restore" /tmp/candidate132/affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo BUILD_132_PASS
+
+      - name: Install WordPress and create one damaged DB
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+          AFF_E2E_SCENARIO: live_damage
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.de --title=AutoRepair --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          cp -a /tmp/candidate132/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp
+          rm -f /tmp/aff-history-stop
+          wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp
+          delete_option_cmd="wp option delete ppar_aff043_historical_product_state_restore_v1 --path=/tmp/wp >/dev/null 2>&1 || true"
+          bash -lc "$delete_option_cmd"
+          wp db export /tmp/damaged.sql --path=/tmp/wp
+          echo DAMAGE_READY
+
+      - name: Positive update-only repair with real compliance already complete
+        run: |
+          set -euo pipefail
+          wp db reset --yes --path=/tmp/wp
+          wp db import /tmp/damaged.sql --path=/tmp/wp
+          rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+          cp -a /tmp/candidate132/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp option update ppar_ebay_deletion_token_v1 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef1234567890' --path=/tmp/wp >/dev/null
+          wp option update ppar_ebay_deletion_state_v1 '{"challenge_answered_at":1700000000,"last_notification_at":1700000001,"last_notification_status":"verified","last_notification_hash":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","last_deleted_items":0,"last_deleted_creatives":0,"last_deleted_outputs":0,"last_error":""}' --format=json --path=/tmp/wp >/dev/null
+          wp eval '
+            $e=get_option("ppar_network_ebay_v1",array());$e=is_array($e)?$e:array();$e["enabled"]=0;update_option("ppar_network_ebay_v1",$e,false);
+            $a=get_option("ppar_provider_access_state_v1",array());$a=is_array($a)?$a:array();$a["ebay"]=array("status"=>"credentials_saved","last_checked"=>time(),"message"=>"eBay Production wurde bis zur vollständigen Marketplace-Account-Deletion-Compliance hart deaktiviert.","updated_at"=>time());update_option("ppar_provider_access_state_v1",$a,false);
+          ' --path=/tmp/wp
+          wp eval 'echo "TRIGGER\n";' --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/state_ab_probe.php" --path=/tmp/wp | tee /tmp/positive.log
+          grep -Fx 'EXACT_reithelme={"total":95,"ebay":69,"idealo":26}' /tmp/positive.log
+          grep -Fx 'EXACT_halfter-und-stricke-stallhalfter={"total":25,"ebay":5,"idealo":20}' /tmp/positive.log
+          grep -Fx 'IDEALO_MODE=automatic' /tmp/positive.log
+          grep -Fx 'EBAY_ENABLED=1' /tmp/positive.log
+          wp option get ppar_aff043_historical_product_state_restore_v1 --format=json --path=/tmp/wp | tee /tmp/state.json
+          grep -q '"status":"complete"' /tmp/state.json
+          echo UPDATE_ONLY_POSITIVE_PASS
+
+      - name: Negative proof incomplete compliance never faked
+        run: |
+          set -euo pipefail
+          wp db reset --yes --path=/tmp/wp
+          wp db import /tmp/damaged.sql --path=/tmp/wp
+          rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+          cp -a /tmp/candidate132/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp option delete ppar_ebay_deletion_state_v1 --path=/tmp/wp >/dev/null 2>&1 || true
+          wp eval '
+            $e=get_option("ppar_network_ebay_v1",array());$e=is_array($e)?$e:array();$e["enabled"]=0;update_option("ppar_network_ebay_v1",$e,false);
+            $a=get_option("ppar_provider_access_state_v1",array());$a=is_array($a)?$a:array();$a["ebay"]=array("status"=>"credentials_saved","last_checked"=>time(),"message"=>"eBay Production wurde bis zur vollständigen Marketplace-Account-Deletion-Compliance hart deaktiviert.","updated_at"=>time());update_option("ppar_provider_access_state_v1",$a,false);
+          ' --path=/tmp/wp
+          wp eval 'echo "TRIGGER_NEG\n";' --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/state_ab_probe.php" --path=/tmp/wp | tee /tmp/negative.log
+          grep -Fx 'EXACT_reithelme={"total":95,"ebay":69,"idealo":26}' /tmp/negative.log
+          grep -Fx 'EXACT_halfter-und-stricke-stallhalfter={"total":25,"ebay":5,"idealo":20}' /tmp/negative.log
+          grep -Fx 'IDEALO_MODE=automatic' /tmp/negative.log
+          grep -Fx 'EBAY_ENABLED=0' /tmp/negative.log
+          echo INCOMPLETE_COMPLIANCE_FAIL_CLOSED_PASS
+
+      - name: Protected frontend and package checks
+        run: |
+          set -euo pipefail
+          test "$(sha256sum /tmp/base130/affiliate-portal-router/assets/frontend.css | cut -d' ' -f1)" = "$(sha256sum /tmp/candidate132/affiliate-portal-router/assets/frontend.css | cut -d' ' -f1)"
+          test "$(sha256sum /tmp/base130/affiliate-portal-router/assets/frontend.js | cut -d' ' -f1)" = "$(sha256sum /tmp/candidate132/affiliate-portal-router/assets/frontend.js | cut -d' ' -f1)"
+          cd /tmp/candidate132
+          zip -qr /tmp/AFFILIATE_ZENTRALE_V6.72.132_AUTO_STATE_RESTORE_HARDTEST.zip affiliate-portal-router
+          unzip -tq /tmp/AFFILIATE_ZENTRALE_V6.72.132_AUTO_STATE_RESTORE_HARDTEST.zip >/dev/null
+          sha256sum /tmp/AFFILIATE_ZENTRALE_V6.72.132_AUTO_STATE_RESTORE_HARDTEST.zip
+          echo UPDATE_ONLY_132_FULL_PASS
