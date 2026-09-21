@@ -103,13 +103,9 @@ jobs:
           grep -q '"provider":"ebay"' /tmp/restored-probe.log
           grep -q '"provider":"idealo"' /tmp/restored-probe.log
 
-      - name: Assert visible restored output
+      - name: Assert complete Template-Kit frontend hook output
         run: |
           set -euo pipefail
-          wp server --host=127.0.0.1 --port=8080 --path=/tmp/wp >/tmp/wp-server.log 2>&1 &
-          for n in $(seq 1 30); do
-            if curl -fsS --max-time 2 -H 'Host: pferde-atelier.de' 'http://127.0.0.1:8080/' >/dev/null; then break; fi
-            sleep 1
-          done
-          AFF_E2E_BASE_URL='http://127.0.0.1:8080' AFF_E2E_HOST_HEADER='pferde-atelier.de' python3 "$GITHUB_WORKSPACE/e2e/check_http.py" healthy | tee /tmp/restored-http.log
+          wp eval-file "$GITHUB_WORKSPACE/e2e/frontend_hook_probe.php" --path=/tmp/wp | tee /tmp/frontend-hook.log
+          grep -Fx 'FRONTEND_HOOK_FULL_PASS' /tmp/frontend-hook.log
           echo AFF043_VISIBLE_RECOVERY_PASS
