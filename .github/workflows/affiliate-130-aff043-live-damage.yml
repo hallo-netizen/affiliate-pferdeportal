@@ -57,6 +57,11 @@ jobs:
           test "$(sha256sum /tmp/base130/affiliate-portal-router/assets/frontend.js | cut -d' ' -f1)" = "$(sha256sum /tmp/candidate/affiliate-portal-router/assets/frontend.js | cut -d' ' -f1)"
           grep -q "private function aff043_state()" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
           grep -q "private function aff044_apply_clean_restore()" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i "s/Version: 6.72.130/Version: 6.72.131/" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i "s/const VERSION = '6.72.130';/const VERSION = '6.72.131';/" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i '1s/^V6\.72\.130 /V6.72.131 /' /tmp/candidate/affiliate-portal-router/readme.txt
+          grep -q "Version: 6.72.131" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -q "const VERSION = '6.72.131';" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
           echo CANDIDATE_SCOPE_PASS
 
       - name: Install WordPress and candidate
@@ -123,7 +128,10 @@ jobs:
         run: |
           set -euo pipefail
           cd /tmp/candidate
-          zip -qr /tmp/AFFILIATE_ZENTRALE_V6.72.130_PLUS_AFF043_E2E_CANDIDATE.zip affiliate-portal-router
-          unzip -tq /tmp/AFFILIATE_ZENTRALE_V6.72.130_PLUS_AFF043_E2E_CANDIDATE.zip >/dev/null
-          sha256sum /tmp/AFFILIATE_ZENTRALE_V6.72.130_PLUS_AFF043_E2E_CANDIDATE.zip
+          zip -qr /tmp/AFFILIATE_ZENTRALE_V6.72.131_AFF043_ROOTFIX_HARDTEST.zip affiliate-portal-router
+          unzip -tq /tmp/AFFILIATE_ZENTRALE_V6.72.131_AFF043_ROOTFIX_HARDTEST.zip >/dev/null
+          sha256sum /tmp/AFFILIATE_ZENTRALE_V6.72.131_AFF043_ROOTFIX_HARDTEST.zip
           sha256sum affiliate-portal-router/assets/frontend.css affiliate-portal-router/assets/frontend.js
+          echo '=== SOURCE_MANIFEST_BEGIN ==='
+          find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum
+          echo '=== SOURCE_MANIFEST_END ==='
