@@ -40,6 +40,12 @@ new = """    private static function save(array $job): void {if(self::$activeSte
 if old not in s:
     raise SystemExit("JOB_SAVE_ANCHOR_MISSING")
 s=s.replace(old,new,1)
+delete_old = """    private static function deleteIfSame(array $job): void {$stored=self::rawJob();if($stored!==null&&hash_equals((string)$job['job_uuid'],(string)($stored['job_uuid']??'')))delete_option(PSTE_OPTION_ACTIVE_RESEARCH_JOB);}"""
+delete_new = """    private static function deleteIfSame(array $job): void {$stored=self::rawJob();$lock=get_option(PSTE_OPTION_RESEARCH_STEP_LOCK,[]);error_log('PSTE_STATETRACE JOB_DELETE_CHECK t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' uuid='.(string)($job['job_uuid']??'').' phase='.(string)($job['phase']??'').' status='.(string)($job['status']??'').' phase_state='.(string)($job['phase_state']??'').' stored_uuid='.(is_array($stored)?(string)($stored['job_uuid']??''):'NONE').' step_lock='.(is_array($lock)?(string)($lock['token']??''):'NONE'));if($stored!==null&&hash_equals((string)$job['job_uuid'],(string)($stored['job_uuid']??''))){$ok=delete_option(PSTE_OPTION_ACTIVE_RESEARCH_JOB);error_log('PSTE_STATETRACE JOB_DELETE_DONE t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' uuid='.(string)($job['job_uuid']??'').' phase='.(string)($job['phase']??'').' status='.(string)($job['status']??'').' ok='.($ok?'1':'0'));}}"""
+if delete_old not in s:
+    raise SystemExit("JOB_DELETE_ANCHOR_MISSING")
+s=s.replace(delete_old,delete_new,1)
+
 job.write_text(s,encoding="utf-8")
 
 print("PASS STATE_TRACE_INJECTED")
