@@ -6,14 +6,15 @@ on:
       - pste-05700-server-step-driver-proof
     paths:
       - 'proof/pste-wordpress-real-e2e/**'
+      - 'proof/pste-05701-process-e2e/**'
       - '.github/workflows/pste-wordpress-real-e2e.yml'
       - 'proof/pste-05700-final-zip/**'
   workflow_dispatch:
 
 jobs:
-  real-wordpress-single:
+  real-wordpress-system:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     services:
       mysql:
         image: mysql:8.0
@@ -27,15 +28,18 @@ jobs:
           --health-interval=5s
           --health-timeout=5s
           --health-retries=20
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           extensions: mysqli, mbstring, curl, json
           coverage: none
-      - name: Install WP-CLI and WordPress
+
+      - name: Install WP-CLI and fresh WordPress
         shell: bash
         run: |
           set -euo pipefail
@@ -46,18 +50,38 @@ jobs:
           wp core download --path=/tmp/wordpress --quiet
           wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
-      - name: Install exact 0.57 ZIP
+
+      - name: Build exact test candidate from proven 0.57.1 plus empty-sandbox rootfix
         shell: bash
         run: |
           set -euo pipefail
-          cat proof/pste-05700-final-zip/finalzip.b64.part* | base64 -d > /tmp/PSTE-0.57.0-FINAL.zip
-          echo "4093fdb3c9cb1eca1691ceec9a2f1e9a97675982b01f2e440e99fba290b40f06  /tmp/PSTE-0.57.0-FINAL.zip" | sha256sum -c -
-          unzip -tq /tmp/PSTE-0.57.0-FINAL.zip
-          unzip -q /tmp/PSTE-0.57.0-FINAL.zip -d /tmp/wordpress/wp-content/plugins
+          cat proof/pste-05700-final-zip/finalzip.b64.part* | base64 -d > /tmp/PSTE-0.57.0-BASE.zip
+          echo "4093fdb3c9cb1eca1691ceec9a2f1e9a97675982b01f2e440e99fba290b40f06  /tmp/PSTE-0.57.0-BASE.zip" | sha256sum -c -
+          rm -rf /tmp/pste-candidate /tmp/pste-proof
+          mkdir -p /tmp/pste-candidate /tmp/pste-proof
+          unzip -q /tmp/PSTE-0.57.0-BASE.zip -d /tmp/pste-candidate
+          base64 -d proof/pste-05701-process-e2e/bundle.b64 > /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip
+          echo "310994956f711999777d0fc5f614875689435ab8e3eb010a716669dd15a499b6  /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip" | sha256sum -c -
+          unzip -q /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip -d /tmp/pste-proof
+          cd /tmp/pste-candidate/portal-seo-topic-engine
+          patch -p1 < /tmp/pste-proof/pste-05701-step-retry.patch
+          patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/empty-sandbox-migration.patch"
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.2/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.2');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.2' portal-seo-topic-engine.php
+          grep -q "PROVIDER_SAFE_RETRY_LIMIT=1" includes/class-pste-research-job.php
+          grep -q "if(!\$ids)" includes/class-pste-sandbox-record-store.php
+          count="$(find . -type f -name '*.php' | wc -l)"
+          test "$count" -eq 76
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find . -type f -name '*.php' | sort)
+          cd /tmp/pste-candidate
+          zip -qr /tmp/PSTE-0.57.2-HOBBYROOM.zip portal-seo-topic-engine
+          sha256sum /tmp/PSTE-0.57.2-HOBBYROOM.zip | tee /tmp/PSTE-0.57.2-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.2-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
-          cp proof/pste-wordpress-real-e2e/dataforseo-mock.php /tmp/wordpress/wp-content/mu-plugins/pste-dataforseo-e2e.php
-          wp plugin activate portal-seo-topic-engine --path=/tmp/wordpress --quiet
-      - name: Seed real portal structure and PSTE state
+          cp "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/dataforseo-mock.php" /tmp/wordpress/wp-content/mu-plugins/pste-dataforseo-e2e.php
+
+      - name: Seed exact real portal state through plugin code
         shell: bash
         run: |
           set -euo pipefail
@@ -65,7 +89,9 @@ jobs:
           wp eval-file proof/pste-wordpress-real-e2e/setup-site-v2.php --path=/tmp/wordpress | tee /tmp/setup.json
           grep -q '"ready":true' /tmp/setup.json
           grep -q '"context_status":"COMPLETE"' /tmp/setup.json
-      - name: Start real multi-worker WordPress HTTP server
+          wp eval 'if(!PSTE_Sandbox_Record_Store::isComplete())throw new RuntimeException("SANDBOX_RECORD_STORE_NOT_COMPLETE"); echo "PASS EMPTY_SANDBOX_REAL_MIGRATION\n";' --path=/tmp/wordpress
+
+      - name: Start real multi-worker WordPress plus independent server cron
         shell: bash
         run: |
           set -euo pipefail
@@ -73,52 +99,117 @@ jobs:
           PHP_CLI_SERVER_WORKERS=6 php -S 127.0.0.1:8090 -t /tmp/wordpress >/tmp/pste-wp-server.log 2>&1 &
           echo $! >/tmp/pste-wp-server.pid
           for i in $(seq 1 30); do
-            curl -fsS http://127.0.0.1:8090/ >/dev/null && exit 0
+            curl -fsS http://127.0.0.1:8090/ >/dev/null && break
             sleep 1
           done
-          cat /tmp/pste-wp-server.log
-          exit 1
-      - name: Start manual single exactly through production driver
+          curl -fsS http://127.0.0.1:8090/ >/dev/null
+          (
+            while true; do
+              wp cron event run --due-now --path=/tmp/wordpress >/tmp/pste-cron-last.log 2>&1 || true
+              sleep 1
+            done
+          ) &
+          echo $! >/tmp/pste-cron-runner.pid
+
+      - name: Login as real admin and obtain real page nonce
         shell: bash
         run: |
           set -euo pipefail
-          wp eval-file proof/pste-wordpress-real-e2e/start-single.php --path=/tmp/wordpress | tee /tmp/single-start.json
-          grep -q '"status":"RUNNING"' /tmp/single-start.json
-      - name: Advance only through real HTTP loopback and WP-Cron
+          curl -fsS -c /tmp/pste-cookies.txt http://127.0.0.1:8090/wp-login.php >/tmp/login.html
+          curl -fsS -L -b /tmp/pste-cookies.txt -c /tmp/pste-cookies.txt             --data-urlencode 'log=admin'             --data-urlencode 'pwd=e2e-pass-12345'             --data-urlencode 'wp-submit=Log In'             --data-urlencode 'redirect_to=http://127.0.0.1:8090/wp-admin/admin.php?page=portal-seo-topic-engine-settings'             --data-urlencode 'testcookie=1'             http://127.0.0.1:8090/wp-login.php >/tmp/admin-login-result.html
+          curl -fsS -b /tmp/pste-cookies.txt 'http://127.0.0.1:8090/wp-admin/admin.php?page=portal-seo-topic-engine-settings' >/tmp/settings.html
+          python3 - <<'PY' >/tmp/nonce
+          import re
+          s=open('/tmp/settings.html',encoding='utf-8').read()
+          m=re.search(r'"nonce":"([^"]+)"',s)
+          if not m: raise SystemExit('NONCE_NOT_FOUND')
+          print(m.group(1))
+          PY
+          test -s /tmp/nonce
+
+      - name: Positive manual single through real admin-ajax and real loopbacks
         shell: bash
         run: |
           set -euo pipefail
+          NONCE="$(cat /tmp/nonce)"
+          TERM_ID="$(wp option get pste_e2e_heutaschen_term_id --path=/tmp/wordpress)"
+          curl -fsS -b /tmp/pste-cookies.txt -c /tmp/pste-cookies.txt             --data-urlencode 'action=pste_research_start'             --data-urlencode "nonce=$NONCE"             --data-urlencode "category_id=$TERM_ID"             --data-urlencode 'seed=Heutaschen'             --data-urlencode 'confirm_cost=1'             http://127.0.0.1:8090/wp-admin/admin-ajax.php | tee /tmp/single-start.json
+          JOB_UUID="$(php -r '$x=json_decode(file_get_contents("/tmp/single-start.json"),true);if(!is_array($x)||empty($x["success"]))exit(2);echo $x["data"]["job"]["job_uuid"]??"";')"
+          test -n "$JOB_UUID"
+          wp option update pste_e2e_single_job_uuid "$JOB_UUID" --path=/tmp/wordpress >/dev/null
+
+          # Browser disappears here. Only server loopbacks + independent cron may progress.
+          sleep 15
+
           terminal=0
-          for i in $(seq 1 180); do
-            curl -fsS http://127.0.0.1:8090/ >/dev/null || true
-            wp cron event run --due-now --path=/tmp/wordpress >/dev/null 2>&1 || true
-            wp eval-file proof/pste-wordpress-real-e2e/status.php --path=/tmp/wordpress > /tmp/status.json
-            cat /tmp/status.json
-            if grep -q '"status":"IDLE"' /tmp/status.json; then terminal=1; break; fi
-            if grep -q '"status":"BLOCKED"' /tmp/status.json; then
-              echo "REAL_DRIVER_BLOCKED"
+          for i in $(seq 1 90); do
+            curl -fsS -b /tmp/pste-cookies.txt               --data-urlencode 'action=pste_research_status'               --data-urlencode "nonce=$NONCE"               --data-urlencode "job_uuid=$JOB_UUID"               http://127.0.0.1:8090/wp-admin/admin-ajax.php > /tmp/single-status.json
+            cat /tmp/single-status.json
+            STATE="$(php -r '$x=json_decode(file_get_contents("/tmp/single-status.json"),true);echo $x["data"]["driver"]["status"]??"INVALID";')"
+            if [ "$STATE" = "BLOCKED" ]; then
+              echo REAL_SINGLE_BLOCKED
               cat /tmp/pste-wp-server.log
               exit 1
             fi
-            sleep 1
+            if [ "$STATE" = "IDLE" ]; then terminal=1; break; fi
+            sleep 2
           done
-          test "$terminal" -eq 1 || { echo "REAL_DRIVER_TIMEOUT"; cat /tmp/status.json; cat /tmp/pste-wp-server.log; exit 1; }
-      - name: Verify real manual single terminal result
+          test "$terminal" -eq 1 || { echo REAL_SINGLE_TIMEOUT; cat /tmp/pste-wp-server.log; exit 1; }
+          wp eval-file proof/pste-wordpress-real-e2e/verify-single.php --path=/tmp/wordpress | tee /tmp/verify-single.json
+          grep -q 'PASS_REAL_WORDPRESS_SINGLE' /tmp/verify-single.json
+
+      - name: Reset only transient research execution state
         shell: bash
         run: |
           set -euo pipefail
-          wp eval-file proof/pste-wordpress-real-e2e/verify-single.php --path=/tmp/wordpress | tee /tmp/verify-single.json
-          grep -q 'PASS_REAL_WORDPRESS_SINGLE' /tmp/verify-single.json
-      - name: Upload logs
+          wp eval 'foreach([PSTE_OPTION_ACTIVE_RESEARCH_JOB,PSTE_OPTION_BREADTH_RESEARCH_QUEUE,PSTE_OPTION_RESEARCH_DRIVER_STATE,PSTE_OPTION_RESEARCH_DRIVER_LOCK,PSTE_OPTION_RESEARCH_STEP_LOCK,PSTE_OPTION_BREADTH_RESEARCH_LOCK] as $k)delete_option($k);delete_option("pste_e2e_provider_counts");delete_option("pste_e2e_paa_ready_count");update_option("pste_e2e_provider_mode","normal",false);' --path=/tmp/wordpress
+
+      - name: Positive production wave 40 through real admin-ajax and real loopbacks
+        shell: bash
+        run: |
+          set -euo pipefail
+          NONCE="$(cat /tmp/nonce)"
+          curl -fsS -b /tmp/pste-cookies.txt -c /tmp/pste-cookies.txt             --data-urlencode 'action=pste_breadth_research_start'             --data-urlencode "nonce=$NONCE"             --data-urlencode 'target_usable=40'             --data-urlencode 'max_items=40'             --data-urlencode 'confirm_cost=1'             http://127.0.0.1:8090/wp-admin/admin-ajax.php | tee /tmp/breadth-start.json
+          QUEUE_UUID="$(php -r '$x=json_decode(file_get_contents("/tmp/breadth-start.json"),true);if(!is_array($x)||empty($x["success"]))exit(2);echo $x["data"]["queue"]["queue_uuid"]??"";')"
+          test -n "$QUEUE_UUID"
+
+          # Browser disappears again; server must continue alone.
+          sleep 20
+
+          terminal=0
+          for i in $(seq 1 180); do
+            curl -fsS -b /tmp/pste-cookies.txt               --data-urlencode 'action=pste_breadth_research_status'               --data-urlencode "nonce=$NONCE"               --data-urlencode "queue_uuid=$QUEUE_UUID"               http://127.0.0.1:8090/wp-admin/admin-ajax.php > /tmp/breadth-status.json
+            cat /tmp/breadth-status.json
+            QSTATE="$(php -r '$x=json_decode(file_get_contents("/tmp/breadth-status.json"),true);echo $x["data"]["queue"]["status"]??"INVALID";')"
+            DSTATE="$(php -r '$x=json_decode(file_get_contents("/tmp/breadth-status.json"),true);echo $x["data"]["driver"]["status"]??"INVALID";')"
+            if [ "$DSTATE" = "BLOCKED" ]; then
+              echo REAL_BREADTH_DRIVER_BLOCKED
+              cat /tmp/pste-wp-server.log
+              exit 1
+            fi
+            if [ "$QSTATE" = "COMPLETE" ]; then terminal=1; break; fi
+            sleep 2
+          done
+          test "$terminal" -eq 1 || { echo REAL_BREADTH_TIMEOUT; cat /tmp/pste-wp-server.log; exit 1; }
+          wp eval-file proof/pste-wordpress-real-e2e/verify-breadth.php --path=/tmp/wordpress | tee /tmp/verify-breadth.json
+          grep -q 'PASS_REAL_WORDPRESS_BREADTH' /tmp/verify-breadth.json
+
+      - name: Upload complete real WordPress evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pste-real-wordpress-http-e2e-single
+          name: pste-real-wordpress-http-e2e-system
           path: |
+            /tmp/PSTE-0.57.2-HOBBYROOM.sha256
             /tmp/setup.json
+            /tmp/settings.html
             /tmp/single-start.json
-            /tmp/status.json
+            /tmp/single-status.json
             /tmp/verify-single.json
+            /tmp/breadth-start.json
+            /tmp/breadth-status.json
+            /tmp/verify-breadth.json
             /tmp/pste-wp-server.log
+            /tmp/pste-cron-last.log
           if-no-files-found: ignore
           retention-days: 7
