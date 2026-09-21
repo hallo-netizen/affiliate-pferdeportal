@@ -187,13 +187,195 @@ jobs:
           set -euo pipefail
           cd /tmp/pste05701/base
           zip -qr /tmp/PSTE-0.57.1-CANDIDATE.zip portal-seo-topic-engine
-          sha256sum /tmp/PSTE-0.57.1-CANDIDATE.zip | tee /tmp/PSTE-0.57.1-CANDIDATE.sha256
+          (cd /tmp && sha256sum PSTE-0.57.1-CANDIDATE.zip > PSTE-0.57.1-CANDIDATE.sha256)
+          cat /tmp/PSTE-0.57.1-CANDIDATE.sha256
           echo "CANDIDATE_NOT_RELEASED"
 
       - name: Upload candidate only after full proof
         uses: actions/upload-artifact@v4
         with:
           name: PSTE-0.57.1-CANDIDATE-AFTER-FULL-PROOF
-          path: /tmp/PSTE-0.57.1-CANDIDATE.zip
+          path: |
+            /tmp/PSTE-0.57.1-CANDIDATE.zip
+            /tmp/PSTE-0.57.1-CANDIDATE.sha256
           if-no-files-found: error
           retention-days: 7
+
+
+  exact-artifact-retest:
+    needs: full-process-proof
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Download exact candidate artifact from first proof job
+        uses: actions/download-artifact@v4
+        with:
+          name: PSTE-0.57.1-CANDIDATE-AFTER-FULL-PROOF
+          path: /tmp/pste0571-exact
+
+      - name: Verify exact candidate bytes and unpack
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste0571-exact
+          sha256sum -c PSTE-0.57.1-CANDIDATE.sha256
+          unzip -tq PSTE-0.57.1-CANDIDATE.zip
+          rm -rf /tmp/pste0571-retest
+          mkdir -p /tmp/pste0571-retest/plugin
+          unzip -q PSTE-0.57.1-CANDIDATE.zip -d /tmp/pste0571-retest/plugin
+          MAIN=/tmp/pste0571-retest/plugin/portal-seo-topic-engine/portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.1' "$MAIN"
+          grep -q "define('PSTE_VERSION', '0.57.1');" "$MAIN"
+
+      - name: Exact ZIP PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          PLUGIN=/tmp/pste0571-retest/plugin/portal-seo-topic-engine
+          count="$(find "$PLUGIN" -type f -name '*.php' | wc -l)"
+          test "$count" -eq 76
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find "$PLUGIN" -type f -name '*.php' | sort)
+          echo "PASS EXACT_ZIP_PHP_SYNTAX 76/76"
+
+      - name: Reconstruct proof harnesses for exact ZIP retest
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d proof/pste-05701-process-e2e/bundle.b64 > /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip
+          echo "310994956f711999777d0fc5f614875689435ab8e3eb010a716669dd15a499b6  /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip" | sha256sum -c -
+          mkdir -p /tmp/pste0571-retest/proof
+          unzip -q /tmp/PSTE-05701-PROCESS-PROOF-BUNDLE.zip -d /tmp/pste0571-retest/proof
+          cat proof/pste-05700-control-sim/bundle.b64.part* | base64 -d > /tmp/PSTE-0.57-CONTROL.zip
+          echo "06f690b741670f0fb51149ab818d0e54c8f1d1f1283d39ad0e7b33259eba3ed2  /tmp/PSTE-0.57-CONTROL.zip" | sha256sum -c -
+          mkdir -p /tmp/pste0571-retest/control
+          unzip -q /tmp/PSTE-0.57-CONTROL.zip -d /tmp/pste0571-retest/control
+
+      - name: Exact ZIP original positive-negative matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          C=/tmp/pste0571-retest/plugin/portal-seo-topic-engine/includes
+          cp "$C/class-pste-research-job.php" /tmp/pste0571-retest/control/pste05700_github_control/plugin/includes/class-pste-research-job.php
+          cd /tmp/pste0571-retest/control/pste05700_github_control
+          bash ./run.sh
+
+      - name: Prepare exact ZIP separate-process harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          C=/tmp/pste0571-retest/plugin/portal-seo-topic-engine/includes
+          for target in proc retry; do
+            mkdir -p "/tmp/pste0571-retest/proof/$target/plugin/includes"
+            for f in \
+              class-pste-research-archive.php \
+              class-pste-research-job.php \
+              class-pste-breadth-research-queue.php \
+              class-pste-research-driver.php \
+              class-pste-repository.php \
+              class-pste-normal-metadata-path.php \
+              class-pste-planning-readiness-gate.php \
+              class-pste-topic-policy.php
+            do
+              cp "$C/$f" "/tmp/pste0571-retest/proof/$target/plugin/includes/"
+            done
+          done
+          cp "$C/class-pste-dataforseo-client.php" /tmp/pste0571-retest/proof/retry/plugin/includes/
+
+      - name: Exact ZIP safe retry and unknown transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste0571-retest/proof
+          bash ./run_retry.sh
+
+      - name: Exact ZIP hard process death
+        shell: bash
+        run: |
+          set -euo pipefail
+          H=/tmp/pste0571-retest/proof/proc
+          S=/tmp/pste0571-retest/hardkill.json
+          rm -f "$S" "$S.lock"
+          PSTE_PROC_STORE="$S" php "$H/request.php" start-single >/dev/null
+          set +e
+          PSTE_PROC_STORE="$S" PSTE_PROVIDER_SLEEP=30 php "$H/request.php" tick >/tmp/pste0571-hardkill.log 2>&1 &
+          pid=$!
+          sleep 1
+          kill -9 "$pid" 2>/dev/null
+          wait "$pid" 2>/dev/null
+          set -e
+          status="$(PSTE_PROC_STORE="$S" php "$H/request.php" status)"
+          php -r '$x=json_decode($argv[1],true);$d=$x["driver"]??[];$j=$x["job"]??[];$s=$x["store"]??[];if(($d["status"]??"")!=="RUNNING"||($d["health_code"]??"")!=="PSTE_DRIVER_STEP_RUNNING"||($j["phase_state"]??"")!=="IN_FLIGHT"||(($s["provider"]["classic"]??0))!==1)exit(1);echo "PASS EXACT_ZIP_HARDKILL_PERSISTS\n";' "$status"
+          python3 - "$S" <<'PY'
+          import json,sys,datetime,time,hashlib
+          p=sys.argv[1]
+          x=json.load(open(p))
+          old=(datetime.datetime.now(datetime.timezone.utc)-datetime.timedelta(seconds=90)).isoformat(timespec="seconds")
+          d=x["opts"]["pste_driver"]
+          d["step_started_at_utc"]=old
+          d["updated_at_utc"]=old
+          d.pop("sha256",None)
+          raw=json.dumps(d,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+          d["sha256"]=hashlib.sha256(raw.encode("utf-8")).hexdigest()
+          lock=x["opts"].get("pste_driver_lock",{})
+          lock["expires_at"]=int(time.time())-1
+          with open(p,"w") as f: json.dump(x,f,separators=(",",":"))
+          PY
+          overdue="$(PSTE_PROC_STORE="$S" php "$H/request.php" status)"
+          php -r '$x=json_decode($argv[1],true);$d=$x["driver"]??[];$s=$x["store"]??[];if(($d["status"]??"")!=="BLOCKED"||($d["health_code"]??"")!=="PSTE_DRIVER_STEP_OVERDUE"||(($s["provider"]["classic"]??0))!==1)exit(1);echo "PASS EXACT_ZIP_HARDKILL_OVERDUE_NO_REPLAY\n";' "$overdue"
+
+      - name: Extract exact PSERC for exact ZIP retest
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  control/startmaster0107/runtime_packages/PSERC-FIX.zip" | sha256sum -c -
+          mkdir -p /tmp/pste0571-retest/pserc-outer
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pste0571-retest/pserc-outer
+          inner="$(find /tmp/pste0571-retest/pserc-outer -type f -name 'portal-seo-editorial-plan-compiler_*.zip' | head -1)"
+          test -n "$inner"
+          mkdir -p /tmp/pste0571-retest/pserc-inner
+          unzip -q "$inner" -d /tmp/pste0571-retest/pserc-inner
+
+      - name: Exact ZIP complete PSTE to PSERC plan-slot workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste0571-retest/proof
+          PSERC_PROOF_DIR=/tmp/pste0571-retest/pserc-inner/portal-seo-editorial-plan-compiler bash ./run_combined.sh
+
+      - name: Exact ZIP retry hardlock mutation guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLIENT=/tmp/pste0571-retest/plugin/portal-seo-topic-engine/includes/class-pste-dataforseo-client.php
+          JOB=/tmp/pste0571-retest/plugin/portal-seo-topic-engine/includes/class-pste-research-job.php
+          grep -q "requestCached.*allowSafeRetry = true" "$CLIENT"
+          grep -q "86400,false" "$CLIENT"
+          grep -q "phase_state']='RETRY_PENDING" "$JOB"
+          grep -q "PSTE_PROVIDER_TRANSPORT_OUTCOME_UNKNOWN" "$JOB"
+          echo "PASS EXACT_ZIP_RETRY_SPLIT_HARDLOCK"
+
+      - name: Mark exact ZIP full workflow proven
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/pste0571-exact
+          echo "PASS EXACT_ZIP_FULL_POSITIVE_NEGATIVE_WORKFLOW"
+          cat PSTE-0.57.1-CANDIDATE.sha256
+
+      - name: Upload exact ZIP only after second full proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSTE-0.57.1-EXACT-ZIP-FULL-WORKFLOW-PASS
+          path: |
+            /tmp/pste0571-exact/PSTE-0.57.1-CANDIDATE.zip
+            /tmp/pste0571-exact/PSTE-0.57.1-CANDIDATE.sha256
+          if-no-files-found: error
+          retention-days: 30
