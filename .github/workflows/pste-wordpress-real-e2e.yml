@@ -182,11 +182,30 @@ jobs:
           wp eval-file proof/pste-wordpress-real-e2e/verify-single.php --path=/tmp/wordpress | tee /tmp/verify-single.json
           grep -q 'PASS_REAL_WORDPRESS_SINGLE' /tmp/verify-single.json
 
-      - name: Reset only transient research execution state
+      - name: Preserve prior server state and seed a terminal breadth queue
         shell: bash
         run: |
           set -euo pipefail
-          wp eval 'foreach([PSTE_OPTION_ACTIVE_RESEARCH_JOB,PSTE_OPTION_BREADTH_RESEARCH_QUEUE,PSTE_OPTION_RESEARCH_DRIVER_STATE,PSTE_OPTION_RESEARCH_DRIVER_LOCK,PSTE_OPTION_RESEARCH_STEP_LOCK,PSTE_OPTION_BREADTH_RESEARCH_LOCK] as $k)delete_option($k);delete_option("pste_e2e_provider_counts");delete_option("pste_e2e_paa_ready_count");update_option("pste_e2e_provider_mode","normal",false);' --path=/tmp/wordpress
+          # Do NOT delete driver/job/queue state here. The live site is an upgrade with persisted state,
+          # so the proof must cross the same boundary instead of manufacturing a fresh execution state.
+          wp eval '
+            if(PSTE_Research_Job::peek()!==null) throw new RuntimeException("PSTE_E2E_SINGLE_LEFT_ACTIVE_JOB");
+            $driver=PSTE_Research_Driver::status();
+            if((string)($driver["status"]??"")!=="IDLE") throw new RuntimeException("PSTE_E2E_SINGLE_DRIVER_NOT_IDLE");
+            $q=PSTE_Breadth_Research_Queue::startUntil(1,1,PSTE_Plugin::settings());
+            $old=(string)($q["queue_uuid"]??"");
+            if($old==="") throw new RuntimeException("PSTE_E2E_OLD_QUEUE_UUID_MISSING");
+            PSTE_Breadth_Research_Queue::requestCancel($old);
+            PSTE_Breadth_Research_Queue::advance($old,PSTE_Plugin::settings(),false);
+            $terminal=PSTE_Breadth_Research_Queue::peek();
+            if(!is_array($terminal)||(string)($terminal["queue_uuid"]??"")!==$old||(string)($terminal["status"]??"")!=="CANCELLED") throw new RuntimeException("PSTE_E2E_OLD_QUEUE_NOT_TERMINAL");
+            update_option("pste_e2e_previous_queue_uuid",$old,false);
+            echo "PASS_PERSISTED_TERMINAL_QUEUE ".$old."\n";
+          ' --path=/tmp/wordpress
+          # Reset only deterministic mock counters, never product execution state.
+          wp option delete pste_e2e_provider_counts --path=/tmp/wordpress >/dev/null 2>&1 || true
+          wp option delete pste_e2e_paa_ready_count --path=/tmp/wordpress >/dev/null 2>&1 || true
+          wp option update pste_e2e_provider_mode normal --path=/tmp/wordpress >/dev/null
 
       - name: Positive production wave 40 through real admin-ajax and real loopbacks
         shell: bash
@@ -196,6 +215,24 @@ jobs:
           curl -fsS -b /tmp/pste-cookies.txt -c /tmp/pste-cookies.txt             --data-urlencode 'action=pste_breadth_research_start'             --data-urlencode "nonce=$NONCE"             --data-urlencode 'target_usable=40'             --data-urlencode 'max_items=40'             --data-urlencode 'confirm_cost=1'             http://127.0.0.1:8090/wp-admin/admin-ajax.php | tee /tmp/breadth-start.json
           QUEUE_UUID="$(php -r '$x=json_decode(file_get_contents("/tmp/breadth-start.json"),true);if(!is_array($x)||empty($x["success"]))exit(2);echo $x["data"]["queue"]["queue_uuid"]??"";')"
           test -n "$QUEUE_UUID"
+
+          # Exact live-race proof: the settings page may still have one read-only status request
+          # for the previous terminal queue in flight while START installs the new queue.
+          OLD_QUEUE_UUID="$(wp option get pste_e2e_previous_queue_uuid --path=/tmp/wordpress)"
+          test -n "$OLD_QUEUE_UUID"
+          test "$OLD_QUEUE_UUID" != "$QUEUE_UUID"
+          curl -sS -b /tmp/pste-cookies.txt \
+            --data-urlencode 'action=pste_breadth_research_status' \
+            --data-urlencode "nonce=$NONCE" \
+            --data-urlencode "queue_uuid=$OLD_QUEUE_UUID" \
+            http://127.0.0.1:8090/wp-admin/admin-ajax.php > /tmp/breadth-stale-status.json
+          php -r '$x=json_decode(file_get_contents("/tmp/breadth-stale-status.json"),true); if(!is_array($x)||!empty($x["success"])||(($x["data"]["error_code"]??"")!=="PSTE_BREADTH_QUEUE_NOT_FOUND")) exit(2); echo "PASS_EXPECTED_STALE_QUEUE_STATUS_REJECTED\n";'
+          curl -fsS -b /tmp/pste-cookies.txt \
+            --data-urlencode 'action=pste_breadth_research_status' \
+            --data-urlencode "nonce=$NONCE" \
+            --data-urlencode "queue_uuid=$QUEUE_UUID" \
+            http://127.0.0.1:8090/wp-admin/admin-ajax.php > /tmp/breadth-current-status-after-stale.json
+          php -r '$x=json_decode(file_get_contents("/tmp/breadth-current-status-after-stale.json"),true); if(!is_array($x)||empty($x["success"])||(($x["data"]["queue"]["queue_uuid"]??"")!==getenv("QUEUE_UUID"))) exit(2); echo "PASS_CURRENT_QUEUE_SURVIVES_STALE_STATUS\n";' QUEUE_UUID="$QUEUE_UUID"
 
           # Browser disappears again; server must continue alone.
           sleep 20
@@ -232,6 +269,8 @@ jobs:
             /tmp/single-status.json
             /tmp/verify-single.json
             /tmp/breadth-start.json
+            /tmp/breadth-stale-status.json
+            /tmp/breadth-current-status-after-stale.json
             /tmp/breadth-status.json
             /tmp/verify-breadth.json
             /tmp/pste-wp-server.log
