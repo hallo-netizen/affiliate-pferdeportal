@@ -1,0 +1,74 @@
+name: eBay compliance state simulation
+on:
+  workflow_dispatch:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths: [.github/workflows/affiliate-ebay-compliance-sim.yml]
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - name: Prepare exact 6.72.130 isolated WordPress
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp && sudo mv /tmp/wp /usr/local/bin/wp
+          rm -rf /tmp/wpsim && mkdir /tmp/wpsim
+          wp core download --version=7.1 --path=/tmp/wpsim
+          wp config create --path=/tmp/wpsim --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --dbprefix=wpsim_ --skip-check
+          wp core install --path=/tmp/wpsim --url=https://sim.example.test --title=SIM --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/wpsim/wp-content/plugins
+          wp plugin activate affiliate-portal-router --path=/tmp/wpsim
+          mysql -h127.0.0.1 -uwp -pwp wordpress -e "ALTER TABLE wpsim_ppar_creative_portal_decisions ADD COLUMN IF NOT EXISTS payload LONGTEXT NULL;"
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wpsim
+          wp db export /tmp/base.sql --path=/tmp/wpsim
+
+      - name: Scenario A complete compliance
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          wp db import /tmp/base.sql --path=/tmp/wpsim
+          wp option update ppar_ebay_deletion_token_v1 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef1234567890' --path=/tmp/wpsim
+          wp option update ppar_ebay_deletion_state_v1 '{"challenge_answered_at":1789977600,"last_notification_at":1789977600,"last_notification_status":"verified","last_notification_hash":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","last_deleted_items":0,"last_deleted_creatives":0,"last_deleted_outputs":0,"last_error":""}' --format=json --path=/tmp/wpsim
+          wp eval '$s=get_option("ppar_network_ebay_v1",array());$s["enabled"]=true;$s["business_enabled"]=true;update_option("ppar_network_ebay_v1",$s,false);$a=get_option("ppar_provider_access_state_v1",array());$a["ebay"]=array("status"=>"connected","last_checked"=>time(),"message"=>"SIM complete","updated_at"=>time());update_option("ppar_provider_access_state_v1",$a,false);' --path=/tmp/wpsim
+          echo '=== COMPLETE SNAPSHOT ==='
+          wp eval '$o=Pferdeportal_Affiliate_Router::instance();$r=(new ReflectionClass($o))->getMethod("provider_access_snapshot");$r->setAccessible(true);var_export($r->invoke($o,"ebay"));echo PHP_EOL;var_export($o->ebay_deletion_compliance_snapshot());echo PHP_EOL;' --path=/tmp/wpsim
+          echo '=== COMPLETE PROBE ==='
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wpsim | tee /tmp/complete_probe.log
+
+      - name: Scenario B incomplete compliance
+        if: always()
+        run: |
+          set -euo pipefail
+          wp db import /tmp/base.sql --path=/tmp/wpsim
+          wp option update ppar_ebay_deletion_token_v1 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef1234567890' --path=/tmp/wpsim
+          wp option update ppar_ebay_deletion_state_v1 '{"challenge_answered_at":0,"last_notification_at":0,"last_notification_status":"","last_notification_hash":"","last_deleted_items":0,"last_deleted_creatives":0,"last_deleted_outputs":0,"last_error":""}' --format=json --path=/tmp/wpsim
+          wp eval '$s=get_option("ppar_network_ebay_v1",array());$s["enabled"]=true;$s["business_enabled"]=true;update_option("ppar_network_ebay_v1",$s,false);' --path=/tmp/wpsim
+          echo '=== BEFORE INCOMPLETE INIT ==='
+          wp option get ppar_network_ebay_v1 --format=json --path=/tmp/wpsim
+          echo '=== TRIGGER INIT / AFTER ==='
+          wp eval 'echo "INIT_TRIGGERED\n";' --path=/tmp/wpsim
+          wp option get ppar_network_ebay_v1 --format=json --path=/tmp/wpsim
+          wp eval '$o=Pferdeportal_Affiliate_Router::instance();var_export($o->ebay_deletion_compliance_snapshot());echo PHP_EOL;' --path=/tmp/wpsim
