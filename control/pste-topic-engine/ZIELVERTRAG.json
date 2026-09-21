@@ -1,0 +1,62 @@
+{
+  "contract": "PSTE_TOPIC_ENGINE_TARGET_CONTRACT_V1",
+  "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
+  "status_role": "TARGET_ONLY_NOT_CURRENT",
+  "goal": "STABLE_SERVER_SIDE_END_TO_END_TOPIC_RESEARCH_AND_EDITORIAL_PLAN_HANDOFF",
+  "required_flow": [
+    "START_SINGLE_OR_START_BREADTH",
+    "THREE_CLASSIC_DATAFORSEO_SOURCES",
+    "PAA_QUESTIONS",
+    "PREPARE",
+    "SANDBOX",
+    "CONTEXT",
+    "CATEGORY_CLOSE_AND_SEO_EXHAUSTION_COVERAGE_RULES",
+    "EXISTING_SINGLE_EDITORIAL_PLAN_GATE",
+    "READY_FOR_METADATA_HANDOFF_WITH_PLAN_SLOT"
+  ],
+  "execution_contract": {
+    "browser_authority": ["START", "STATUS", "CANCEL"],
+    "browser_progression_authority": false,
+    "server_driver": "ONE_BOUNDED_PERSISTED_STEP_PER_REQUEST",
+    "state_persistence_required_before_next_step": true,
+    "browser_may_disappear_after_start": true,
+    "no_unbounded_step": true,
+    "no_silent_infinite_run": true
+  },
+  "provider_contract": {
+    "classic_sources": 3,
+    "paa_required": true,
+    "safe_retry": "PERSIST_RETRY_PENDING_AND_RETRY_IN_A_LATER_SERVER_REQUEST",
+    "unknown_transport_outcome": "NO_BLIND_REPLAY",
+    "historical_provider_timeout_seconds": 45
+  },
+  "data_contract": {
+    "preserve_existing_research_and_intermediate_state": true,
+    "preserve_data_on_block_or_crash": true,
+    "no_fix_by_deletion": true,
+    "single_and_breadth_use_same_central_driver": true
+  },
+  "proof_contract": {
+    "real_wordpress_mysql_multiworker_required": true,
+    "real_admin_ajax_required": true,
+    "real_loopback_and_cron_required": true,
+    "manual_single_positive_required": true,
+    "breadth_target_40_positive_required": true,
+    "negative_paths_required": [
+      "PROCESS_HARDKILL",
+      "PROVIDER_SAFE_RETRY",
+      "UNKNOWN_TRANSPORT_NO_REPLAY",
+      "LOCK_COORDINATION",
+      "BROWSER_ABSENT",
+      "STATE_INTEGRITY",
+      "NO_DATA_LOSS"
+    ],
+    "release_rule": "NO_RELEASE_UNTIL_THE_EXACT_PLUGIN_BYTES_PASS_THE_REQUIRED_REAL_SYSTEM_PROOF"
+  },
+  "non_goals": [
+    "NO_SECOND_EDITORIAL_QUEUE",
+    "NO_AUTO_PUBLISH",
+    "NO_DOMAIN_QUALITY_RULE_CHANGE",
+    "NO_ARCHITECTURE_REBUILD_WHEN_A_MINIMAL_ROOT_FIX_SUFFICES"
+  ]
+}
