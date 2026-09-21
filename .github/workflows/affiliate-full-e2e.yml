@@ -482,10 +482,10 @@ jobs:
           AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
         run: |
           set -euo pipefail
-          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wp108; CREATE DATABASE wp108;"
+          mysql -h127.0.0.1 -uroot -proot wordpress -e "DROP TABLE IF EXISTS wp108_options,wp108_posts,wp108_postmeta,wp108_users,wp108_usermeta,wp108_terms,wp108_term_taxonomy,wp108_term_relationships,wp108_termmeta,wp108_comments,wp108_commentmeta,wp108_links;"
           rm -rf /tmp/wp108 && mkdir /tmp/wp108
           wp core download --version=7.1 --path=/tmp/wp108
-          wp config create --path=/tmp/wp108 --dbname=wp108 --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp config create --path=/tmp/wp108 --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --dbprefix=wp108_ --skip-check
           wp core install --path=/tmp/wp108 --url=http://127.0.0.1:8081 --title=AB108 --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
           unzip -q /tmp/108.zip -d /tmp/wp108/wp-content/plugins
           wp plugin activate affiliate-portal-router --path=/tmp/wp108
@@ -501,10 +501,10 @@ jobs:
           AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
         run: |
           set -euo pipefail
-          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wp130; CREATE DATABASE wp130;"
+          mysql -h127.0.0.1 -uroot -proot wordpress -e "DROP TABLE IF EXISTS wp130_options,wp130_posts,wp130_postmeta,wp130_users,wp130_usermeta,wp130_terms,wp130_term_taxonomy,wp130_term_relationships,wp130_termmeta,wp130_comments,wp130_commentmeta,wp130_links;"
           rm -rf /tmp/wp130 && mkdir /tmp/wp130
           wp core download --version=7.1 --path=/tmp/wp130
-          wp config create --path=/tmp/wp130 --dbname=wp130 --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp config create --path=/tmp/wp130 --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --dbprefix=wp130_ --skip-check
           wp core install --path=/tmp/wp130 --url=http://127.0.0.1:8082 --title=AB130 --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
           unzip -q /tmp/130.zip -d /tmp/wp130/wp-content/plugins
           wp plugin activate affiliate-portal-router --path=/tmp/wp130
