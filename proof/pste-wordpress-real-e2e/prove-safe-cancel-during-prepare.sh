@@ -49,4 +49,4 @@ php -r '$x=json_decode(file_get_contents("/tmp/cancel-status.json"),true);$q=$x[
 
 wp option delete pste_e2e_provider_counts --path=/tmp/wordpress >/dev/null 2>&1 || true
 wp option delete pste_e2e_paa_ready_count --path=/tmp/wordpress >/dev/null 2>&1 || true
-wp option update pste_e2e_provider_mode normal --path=/tmp/wordpress >/dev/null
+wp option update pste_e2e_provider_mode stress_prepare_100 --path=/tmp/wordpress >/dev/null
