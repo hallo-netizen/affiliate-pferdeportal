@@ -46,6 +46,7 @@ add_filter('pre_http_request', function($pre,$args,$url){
     }
     if($seed==='')$seed='Heutaschen';
     $family=preg_replace('/\s+/u',' ',trim($seed));
+    error_log('PSTE_PROVIDERTRACE t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' path='.$path.' count='.(int)($counts[$path]??0).' seed_b64='.base64_encode($family).' uri_b64='.base64_encode((string)($_SERVER['REQUEST_URI']??'CLI')));
 
     $ok=function(array $body){
         return ['headers'=>[],'body'=>wp_json_encode($body,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),'response'=>['code'=>200,'message'=>'OK'],'cookies'=>[],'filename'=>null];
