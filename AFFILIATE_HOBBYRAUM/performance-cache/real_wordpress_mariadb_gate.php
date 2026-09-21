@@ -1,5 +1,8 @@
 <?php
 /**
+ * Plugin Name: Affiliate Performance Cache RealDB Gate
+ * Description: Ephemeral GitHub-Hobbyraum gate. Never installed on production.
+ * Version: 1.0.0
  * Ephemeral GitHub-Hobbyraum gate. Never installed on production.
  * Runs only for ?ppar_perf_cache_gate=1 on the isolated CI WordPress.
  */
