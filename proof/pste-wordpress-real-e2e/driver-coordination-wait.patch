@@ -14,7 +14,5 @@
 +                if($count<3){$state['status']='RUNNING';$state['health_code']='PSTE_DRIVER_STEP_RETRY_PENDING';$continue=true;$delay=1000;$state['next_run_at_utc']=gmdate('c',time()+1);}else{$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_STEP_EXCEPTION_BLOCKED';$state['next_run_at_utc']='';$continue=false;}
 +            }
              self::save($state);
--        }finally{self::releaseLock($lock);}
--        if($continue){$state=self::loadOrDefault();self::dispatchLoopback((string)($state['loopback_token']??''),$delay);}
-+        }finally{self::releaseLock($lock);}
-+        if($continue){$state=self::loadOrDefault();$loopbackToken=(string)($state['loopback_token']??'');register_shutdown_function(static function() use ($loopbackToken,$delay): void {self::dispatchLoopback($loopbackToken,$delay);});}
+         }finally{self::releaseLock($lock);}
+         if($continue){$state=self::loadOrDefault();self::dispatchLoopback((string)($state['loopback_token']??''),$delay);}
