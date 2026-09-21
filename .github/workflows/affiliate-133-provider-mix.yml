@@ -7,6 +7,7 @@ on:
       - '.github/workflows/affiliate-133-provider-mix.yml'
       - 'e2e/build_v133.py'
       - 'e2e/provider_mix_v133_probe.php'
+      - 'e2e/saturday96_selection_compare.php'
   workflow_dispatch:
 
 jobs:
@@ -108,6 +109,12 @@ jobs:
           grep -q '"slot":"category_product_2".*"provider":"idealo"' /tmp/history.log
           grep -q '"slot":"category_product_3","post_id":15986,"provider":"ebay"' /tmp/history.log
           echo REAL_PROVIDER_MIX_PASS
+
+      - name: Compare Saturday 6.72.96 selection path against 6.72.133
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/saturday96_selection_compare.php" --path=/tmp/wp | tee /tmp/saturday96-compare.log
+          cat /tmp/saturday96-compare.log
 
       - name: Fresh package and protected frontend
         run: |
