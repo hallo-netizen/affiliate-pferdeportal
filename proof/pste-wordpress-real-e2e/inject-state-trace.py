@@ -5,6 +5,7 @@ import re
 
 repo = Path(sys.argv[1])
 job = Path(sys.argv[2])
+queue = Path(sys.argv[3])
 
 s = repo.read_text(encoding="utf-8")
 old = """    public static function recordCostOnce(string $runUuid,string $endpoint,float $estimated,float $actual): bool {
@@ -113,5 +114,15 @@ s=s.replace(needle,needle+"self::traceActiveJobRead('ADVANCE_AFTER_JOB_LOCK',nul
 
 
 job.write_text(s,encoding="utf-8")
+
+
+# Diagnostic only: trace breadth queue save/readback races.
+qs = queue.read_text(encoding="utf-8")
+needle = "$q=self::withHash($q);update_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE,$q,false);$stored=get_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE,null);if(!is_array($stored)||!hash_equals((string)$q['sha256'],(string)($stored['sha256']??'')))throw new RuntimeException('PSTE_BREADTH_QUEUE_READBACK_MISMATCH');"
+repl = "$q=self::withHash($q);error_log('PSTE_QUEUETRACE SAVE_ENTER t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' uuid='.(string)($q['queue_uuid']??'').' idx='.(string)($q['current_index']??'').' completed='.(string)($q['completed_count']??'').' items='.(string)($q['item_count']??'').' sha='.(string)($q['sha256']??'').' fence='.self::$activeQueueFenceToken);$updateResult=update_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE,$q,false);global $wpdb;$directRaw=$wpdb->get_var($wpdb->prepare(\\\"SELECT option_value FROM {$wpdb->options} WHERE option_name=%s\\\",PSTE_OPTION_BREADTH_RESEARCH_QUEUE));$direct=is_string($directRaw)?maybe_unserialize($directRaw):null;error_log('PSTE_QUEUETRACE WRITE_RESULT t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' update_result='.($updateResult?'1':'0').' direct_sha='.(is_array($direct)?(string)($direct['sha256']??''):'NON_ARRAY').' direct_idx='.(is_array($direct)?(string)($direct['current_index']??''):'').' direct_completed='.(is_array($direct)?(string)($direct['completed_count']??''):'').' fence='.self::$activeQueueFenceToken);$stored=get_option(PSTE_OPTION_BREADTH_RESEARCH_QUEUE,null);$storedSha=is_array($stored)?(string)($stored['sha256']??''):'NON_ARRAY';if(!is_array($stored)||!hash_equals((string)$q['sha256'],$storedSha)){error_log('PSTE_QUEUETRACE READBACK_MISMATCH t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' wanted='.(string)($q['sha256']??'').' got='.$storedSha.' wanted_idx='.(string)($q['current_index']??'').' got_idx='.(is_array($stored)?(string)($stored['current_index']??''):'').' wanted_completed='.(string)($q['completed_count']??'').' got_completed='.(is_array($stored)?(string)($stored['completed_count']??''):'').' fence='.self::$activeQueueFenceToken);throw new RuntimeException('PSTE_BREADTH_QUEUE_READBACK_MISMATCH');}"
+if needle not in qs:
+    raise SystemExit("QUEUETRACE_SAVE_ANCHOR_MISSING")
+qs=qs.replace(needle,repl,1)
+queue.write_text(qs,encoding="utf-8")
 
 print("PASS STATE_TRACE_INJECTED")
