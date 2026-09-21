@@ -1,0 +1,31 @@
+name: Affiliate live card read-only probe
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths: ['.github/workflows/affiliate-live-card-probe.yml']
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch live HTML and show affiliate card contexts
+        run: |
+          set -euo pipefail
+          url="https://pferde-atelier.de/category/reithelme-beratung/"
+          curl -L --max-time 30 -fsS "$url" -o /tmp/page.html
+          echo "HTTP_LIVE_BYTES=$(wc -c </tmp/page.html)"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,html
+          s=Path('/tmp/page.html').read_text(errors='ignore')
+          plain=re.sub(r'\s+',' ',s)
+          for pat in ['eBay-Angebot','idealo','Affiliate']:
+              print('COUNT',pat,len(re.findall(pat,plain,re.I)))
+          for m in re.finditer(r'(eBay-Angebot|idealo)',plain,re.I):
+              a=max(0,m.start()-700); b=min(len(plain),m.end()+1200)
+              chunk=plain[a:b]
+              chunk=re.sub(r'<[^>]+>',' ',chunk)
+              chunk=html.unescape(re.sub(r'\s+',' ',chunk))
+              print('CTX',chunk[:1800])
+          PY
