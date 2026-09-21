@@ -211,6 +211,7 @@ jobs:
           name: pste-real-wordpress-http-e2e-system
           path: |
             /tmp/PSTE-0.57.2-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.2-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
             /tmp/single-start.json
