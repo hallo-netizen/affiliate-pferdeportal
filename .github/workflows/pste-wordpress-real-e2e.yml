@@ -86,7 +86,7 @@ jobs:
           zip -qr /tmp/PSTE-0.57.2-HOBBYROOM.zip "Portal SEO Topic Engine"
           test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -E '\\.php$' | wc -l)" -eq 76
+          test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
           unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
           unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
           unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
