@@ -114,13 +114,18 @@ jobs:
           status="$(PSTE_PROC_STORE="$S" php "$H/request.php" status)"
           php -r '$x=json_decode($argv[1],true);$d=$x["driver"]??[];$j=$x["job"]??[];$s=$x["store"]??[];if(($d["status"]??"")!=="RUNNING"||($d["health_code"]??"")!=="PSTE_DRIVER_STEP_RUNNING"||($j["phase_state"]??"")!=="IN_FLIGHT"||(($s["provider"]["classic"]??0))!==1)exit(1);echo "PASS HARDKILL_PERSISTS_STEP_AND_JOB_EXACTLY\n";' "$status"
           python3 - "$S" <<'PY'
-          import json,sys,datetime,time
+          import json,sys,datetime,time,hashlib
           p=sys.argv[1]
           x=json.load(open(p))
           old=(datetime.datetime.now(datetime.timezone.utc)-datetime.timedelta(seconds=90)).isoformat(timespec="seconds")
-          d=x["opts"]["pste_driver"]; d["step_started_at_utc"]=old; d["updated_at_utc"]=old
-          lock=x["opts"].get("pste_driver_lock",{}); lock["expires_at"]=int(time.time())-1
-          j=x["opts"]["pste_active_job"]; j["updated_at_utc"]=old
+          d=x["opts"]["pste_driver"]
+          d["step_started_at_utc"]=old
+          d["updated_at_utc"]=old
+          d.pop("sha256",None)
+          raw=json.dumps(d,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+          d["sha256"]=hashlib.sha256(raw.encode("utf-8")).hexdigest()
+          lock=x["opts"].get("pste_driver_lock",{})
+          lock["expires_at"]=int(time.time())-1
           with open(p,"w") as f: json.dump(x,f,separators=(",",":"))
           PY
           overdue="$(PSTE_PROC_STORE="$S" php "$H/request.php" status)"
