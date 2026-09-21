@@ -61,7 +61,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          wp eval-file proof/pste-wordpress-real-e2e/setup-site.php --path=/tmp/wordpress | tee /tmp/setup.json
+          wp eval-file proof/pste-wordpress-real-e2e/setup-site-v2.php --path=/tmp/wordpress | tee /tmp/setup.json
           grep -q '"ready":true' /tmp/setup.json
           grep -q '"context_status":"COMPLETE"' /tmp/setup.json
       - name: Start real multi-worker WordPress HTTP server
