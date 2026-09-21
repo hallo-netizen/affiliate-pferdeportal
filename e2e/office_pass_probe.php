@@ -22,6 +22,24 @@ foreach($want as $slot=>$expected){
   if($provider!==$expected['provider'])$fail[]=$slot.':PROVIDER:'.$provider;
   if(!$real)$fail[]=$slot.':NOT_REAL_CARD';
 }
+
+$pair=array();
+$pairctx=$ctx; $pairctx['slot_type']='category_product_2';
+foreach(office_call($o,'get_campaigns') as $pc){
+  if(!is_array($pc))continue;
+  $pid=absint($pc['post_id']??0);
+  if(!in_array($pid,array(16283,16299),true))continue;
+  $pair[$pid]=array(
+    'title'=>(string)($pc['title']??''),
+    'network'=>sanitize_key((string)($pc['network']??'')),
+    'priority'=>absint($pc['priority']??0),
+    'targets'=>array_values((array)($pc['automation_target_keys']??array())),
+    'keywords'=>array_values((array)($pc['keywords']??array())),
+    'rank'=>office_call($o,'campaign_match_rank',$pc,$pairctx),
+  );
+}
+echo 'OFFICE_PAIR='.wp_json_encode($pair,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)."\n";
+
 $ids=array_column($got,'id');
 if(count(array_unique($ids))!==3)$fail[]='NOT_3_DISTINCT';
 echo 'OFFICE_PASS_GOT='.wp_json_encode($got,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)."\n";
