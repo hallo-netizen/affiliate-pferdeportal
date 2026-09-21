@@ -1,0 +1,63 @@
+AFFILIATE-ZENTRALE – LIVE STATUS / NEXT WORK BINDING
+Date: 2026-09-21
+Workstream: AFFILIATE_ZENTRALE
+Branch: affiliate-release-current
+
+CURRENT REPOSITORY AUTHORITY BEFORE THIS STATUS UPDATE
+- Branch HEAD observed: de6841838e241b175dd53c4f6598c7d797ee349b
+- Canonical plugin source remains 6.72.105.
+- Canonical source manifest remains ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29.
+- This repository source is NOT the same as the currently live-tested operational plugin line. No release is authorized from the later local/live ZIPs.
+
+LIVE AWIN RESULT
+- 6.72.141: LIVE FAIL.
+- User-provided run log: 2026-09-21 16:54, Awin, connection, failed, message:
+  "Awin-Programmliste konnte nicht aktualisiert werden; Last-Known-Good bleibt erhalten."
+- Root comparison against the previously live-proven 6.72.108 Awin transport showed that 6.72.141 had reintroduced extra includeHidden/accessToken URL parameters.
+- 6.72.142 restored the previously live-proven Awin programme-list transport:
+  GET /publishers/{publisherId}/programmes?relationship=joined
+  Authorization: Bearer <token>
+- User live verdict after 6.72.142: "für diesen punkt PASS".
+- Therefore the Awin partner/programme import point is LIVE PASS for the current operational line.
+- No claim is made that 6.72.142 is a canonical release or that the complete Affiliate-Zentrale is PASS.
+
+NEXT USER-SELECTED WORK ITEM
+Banner/category relevance by real target/deeplink evidence.
+
+Binding reference page:
+https://pferde-atelier.de/ausruestung/ausruestung-reiterbedarf/reithelme/
+
+Existing office rule (WERBEPLATZ_REGISTER):
+1. technically valid for the actual slot;
+2. exact topical match for page/category/article;
+3. extended topical match;
+4. general horse/shop fallback;
+5. last technically valid active banner.
+
+Existing target/deeplink rule:
+- real provider target/deeplinks are local relevance evidence and must be inspected without generating artificial affiliate clicks;
+- target page + provider category + title/description/tags + safe target edges are evaluated together;
+- an exact target path such as a real Reithelm target path may outrank a generic banner;
+- unclear/conflicting evidence must not create an invented exact match.
+
+EXACT NEXT ACTION
+READ-ONLY only:
+1. Capture the banner currently selected on the Reithelme reference page and the exact slot.
+2. Capture all technically eligible active banner candidates for that slot.
+3. For each relevant candidate, capture its real provider target/deeplink and the already stored/normalised destination evidence.
+4. Resolve the target page locally without generating a tracked affiliate click and record the page/category meaning.
+5. Prove whether a banner whose real target is the shop category "Reithelme" is an exact-topic candidate and whether the currently shown generic banner is only a broader fallback.
+6. Stop at the first exact selection/ranking stage where the exact Reithelm candidate loses to the broader banner.
+
+NO FIX / NO ZIP / NO STATE WRITE until the above negative case is reproduced and the exact cause is proven.
+
+NOT TO TOUCH
+- Awin programme import transport that is now live PASS.
+- Journal, Glossar, Pferderassen and other previously protected output paths.
+- Product cards / eBay / idealo product selection.
+- Partner & Einnahmen statistics work.
+- CSS/JS/frontend renderer unless the banner relevance proof specifically reaches that layer.
+
+STATUS
+AWIN_PARTNER_IMPORT_LIVE_PASS_6_72_142
+NEXT: BANNER_TARGET_URL_RELEVANCE_REITHELME_READONLY_PROOF
