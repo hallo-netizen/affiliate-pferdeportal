@@ -1,0 +1,34 @@
+name: Affiliate live read-only baseline and performance
+
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-live-readonly-performance.yml'
+  workflow_dispatch:
+
+jobs:
+  live-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Measure public live pages read-only
+        run: |
+          set -euo pipefail
+          urls=(
+            "https://pferde-atelier.de/category/reithelme-beratung/"
+            "https://pferde-atelier.de/category/halfter-und-stricke-stallhalfter-faq/"
+          )
+          for url in "${urls[@]}"; do
+            echo "URL=$url"
+            for i in 1 2 3 4 5; do
+              curl -L --max-time 30 -sS -o "/tmp/page-${i}.html"                 -w "RUN=${i} HTTP=%{http_code} DNS=%{time_namelookup} CONNECT=%{time_connect} TLS=%{time_appconnect} TTFB=%{time_starttransfer} TOTAL=%{time_total} SIZE=%{size_download}\n"                 "$url"
+            done
+            cp /tmp/page-5.html /tmp/current.html
+            echo "EBAY_LABELS=$(grep -oi 'eBay-Angebot[^<]*' /tmp/current.html | wc -l | tr -d ' ')"
+            echo "IDEALO_LABELS=$(grep -oi 'idealo[^<]*Affiliate' /tmp/current.html | wc -l | tr -d ' ')"
+            echo "PRODUCT_CARD_MARKERS=$(grep -oi 'data-pftk-affiliate-real-card' /tmp/current.html | wc -l | tr -d ' ')"
+            echo "HTML_SHA256=$(sha256sum /tmp/current.html | cut -d' ' -f1)"
+            echo "---"
+          done
+          echo LIVE_READONLY_PERFORMANCE_DONE
