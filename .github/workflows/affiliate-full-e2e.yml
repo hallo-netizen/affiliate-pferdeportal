@@ -85,6 +85,55 @@ jobs:
           done
           cat /tmp/e2e-results.txt
           exit $rc
+      - name: Run exact 6.72.108 to 6.72.117 sequential history gate
+        if: always()
+        run: |
+          set -euo pipefail
+          test -s /tmp/healthy.sql
+          mkdir -p /tmp/history-pkgs /tmp/history-logs
+          for v in 108 109 110 111 112 113 114 115 116 117; do
+            src="e2e/history-fixtures/v6.72.$v.zip.b64"
+            test -s "$src"
+            base64 --decode "$src" > "/tmp/history-pkgs/AFFILIATE_ZENTRALE_V6.72.$v.zip"
+            unzip -tq "/tmp/history-pkgs/AFFILIATE_ZENTRALE_V6.72.$v.zip" >/dev/null
+            sha256sum "/tmp/history-pkgs/AFFILIATE_ZENTRALE_V6.72.$v.zip"
+          done
+
+          # One common historical database start. From here on state is preserved
+          # across 108 -> 117; only the plugin package changes in sequence.
+          wp db import /tmp/healthy.sql --path=/tmp/wp >/dev/null
+
+          first_break=""
+          for v in 108 109 110 111 112 113 114 115 116 117; do
+            echo "===== HISTORY 6.72.$v ====="
+            rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+            unzip -q "/tmp/history-pkgs/AFFILIATE_ZENTRALE_V6.72.$v.zip" -d /tmp/wp/wp-content/plugins
+
+            # The plugin stays logically active, matching a real in-place update.
+            # Trigger the admin lifecycle as well so version-bound persistent
+            # migrations cannot be skipped by the CLI-only probe.
+            wp eval 'do_action("admin_init");' --path=/tmp/wp               >"/tmp/history-logs/6.72.$v-admin-init.log" 2>&1 || {
+                cat "/tmp/history-logs/6.72.$v-admin-init.log"
+                first_break="6.72.$v:ADMIN_INIT"
+                break
+              }
+
+            set +e
+            wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp               2>&1 | tee "/tmp/history-logs/6.72.$v-probe.log"
+            probe_rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$probe_rc" -ne 0 ]; then
+              first_break="6.72.$v:HISTORY_PROBE"
+              break
+            fi
+          done
+
+          if [ -n "$first_break" ]; then
+            echo "FIRST_HISTORY_BREAK=$first_break"
+            exit 1
+          fi
+
+          echo "HISTORY_108_TO_117_NO_BREAK"
       - name: Prove display assets untouched
         if: always()
         run: |
