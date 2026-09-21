@@ -61,6 +61,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          wp eval 'update_option("pste_semantic_review_sandbox_v1",["contract"=>"PSTE_SEMANTIC_REVIEW_SANDBOX_V1","version"=>"1.5.0","review_policy_version"=>"EVIDENCE_BEFORE_SHARED_NORMAL_PATH_REENTRY_V9_CANONICAL_DATAFLOW","records"=>[],"binding"=>[],"last_sync_at_utc"=>"","last_sync_counts"=>[],"job"=>null,"updated_at_utc"=>"","sha256"=>"","source_data_write_attempted"=>false,"published_or_draft_article_write_attempted"=>false,"production_handoff_attempted"=>false],false);' --path=/tmp/wordpress
           wp eval-file proof/pste-wordpress-real-e2e/setup-site-v2.php --path=/tmp/wordpress | tee /tmp/setup.json
           grep -q '"ready":true' /tmp/setup.json
           grep -q '"context_status":"COMPLETE"' /tmp/setup.json
