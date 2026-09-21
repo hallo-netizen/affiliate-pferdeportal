@@ -106,13 +106,10 @@ jobs:
       - name: Assert visible restored output
         run: |
           set -euo pipefail
-          echo '127.0.0.1 pferde-atelier.de' | sudo tee -a /etc/hosts >/dev/null
-          wp option update home 'http://pferde-atelier.de:8080' --path=/tmp/wp >/dev/null
-          wp option update siteurl 'http://pferde-atelier.de:8080' --path=/tmp/wp >/dev/null
           wp server --host=127.0.0.1 --port=8080 --path=/tmp/wp >/tmp/wp-server.log 2>&1 &
           for n in $(seq 1 30); do
-            if curl -fsS --noproxy '*' --max-time 2 'http://pferde-atelier.de:8080/' >/dev/null; then break; fi
+            if curl -fsS --max-time 2 -H 'Host: pferde-atelier.de' 'http://127.0.0.1:8080/' >/dev/null; then break; fi
             sleep 1
           done
-          AFF_E2E_BASE_URL='http://pferde-atelier.de:8080' NO_PROXY='*' no_proxy='*' python3 "$GITHUB_WORKSPACE/e2e/check_http.py" healthy | tee /tmp/restored-http.log
+          AFF_E2E_BASE_URL='http://127.0.0.1:8080' AFF_E2E_HOST_HEADER='pferde-atelier.de' python3 "$GITHUB_WORKSPACE/e2e/check_http.py" healthy | tee /tmp/restored-http.log
           echo AFF043_VISIBLE_RECOVERY_PASS
