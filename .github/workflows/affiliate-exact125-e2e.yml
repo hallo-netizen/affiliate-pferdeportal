@@ -95,7 +95,7 @@ jobs:
           set -euo pipefail
           wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_state.php" --path=/tmp/wp
 
-      - name: Assert historical documented 3 of 3 PASS
+      - name: Dump full slot ordering\n        run: wp eval-file "$GITHUB_WORKSPACE/e2e/full_slot_probe.php" --path=/tmp/wp\n\n      - name: Assert historical documented 3 of 3 PASS
         run: |
           set -euo pipefail
           wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_probe.php" --path=/tmp/wp
