@@ -1,0 +1,25 @@
+name: Affiliate current freshness audit
+on:
+  push:
+    branches:
+      - affiliate-e2e-repro-20260920
+permissions:
+  contents: read
+jobs:
+  current-freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: affiliate-release-current
+          fetch-depth: 1
+      - name: Exact current identity
+        run: |
+          set -euo pipefail
+          echo "CURRENT_HEAD=$(git rev-parse HEAD)"
+          echo "CURRENT_BRANCH=affiliate-release-current"
+      - name: Governance check
+        run: python3 control/release-governance/release_guard.py governance-check
+      - name: Start check
+        if: always()
+        run: python3 control/release-governance/release_guard.py start --branch affiliate-release-current
