@@ -76,16 +76,28 @@ if helper_anchor not in s:
 s=s.replace(helper_anchor,helper_anchor+"\\n"+helper,1)
 
 # rawJob() is the authoritative active-job option read. Log the exact value returned.
-raw_pattern = r"(private static function rawJob\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{\\s*\\$v\\s*=\\s*get_option\\(PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*,\\s*null\\s*\\)\\s*;)"
-m=re.search(raw_pattern,s)
-if not m:
-    raise SystemExit("READTRACE_RAWJOB_ANCHOR_MISSING")
-s=s[:m.end()]+"self::traceActiveJobRead('RAW_JOB_READ',$v);"+s[m.end():]
+raw_fn = re.search(r"function\\s+rawJob\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{",s)
+if not raw_fn:
+    raise SystemExit("READTRACE_RAWJOB_FUNCTION_MISSING")
+start=raw_fn.end()
+depth=1
+i=start
+while i < len(s) and depth:
+    if s[i]=='{': depth+=1
+    elif s[i]=='}': depth-=1
+    i+=1
+body=s[start:i-1]
+read=re.search(r"(\\$([A-Za-z_][A-Za-z0-9_]*)\\s*=\\s*get_option\\s*\\(\\s*PSTE_OPTION_ACTIVE_RESEARCH_JOB\\s*(?:,\\s*[^\\)]*)?\\)\\s*;)",body)
+if not read:
+    raise SystemExit("READTRACE_RAWJOB_OPTION_READ_MISSING")
+var=read.group(2)
+at=start+read.end()
+s=s[:at]+"self::traceActiveJobRead('RAW_JOB_READ',$"+var+");"+s[at:]
 
 # Mark entry into the two public read/progression paths.
 for label, pattern in [
-    ("CURRENT_ENTER", r"(public static function current\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)"),
-    ("ADVANCE_ENTER", r"(public static function advance\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)")
+    ("CURRENT_ENTER", r"(function\\s+current\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)"),
+    ("ADVANCE_ENTER", r"(function\\s+advance\\s*\\([^)]*\\)\\s*(?::\\s*[^\\{]+)?\\s*\\{)")
 ]:
     m=re.search(pattern,s)
     if not m:
