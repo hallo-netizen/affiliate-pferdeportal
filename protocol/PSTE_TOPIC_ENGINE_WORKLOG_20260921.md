@@ -76,3 +76,16 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Zusätzlich bestätigt: Die Browseroberfläche kann nach AJAX-Start ohne Reload keinen aktiven Fortschrittsblock anzeigen, weil dieser bei initial inaktiver Queue serverseitig nicht gerendert wurde.
 - Damit war der bisherige Real-WordPress-E2E nicht 1:1 bezüglich live-repräsentativer PREPARE-Last und unmittelbarem Browserzustand nach START.
 - Nächster Arbeitsweg: kein Timeout-Tuning; PREPARE persistent/bounded machen + Start/Progress-UI ohne Reload + Stress-E2E im kompletten Ablauf.
+
+
+## Nachtrag – 0.57.4 vollständiger Stress-Gesamtlauf PASS
+- 0.57.4 baut auf dem 0.57.3-Stale-Status-Fix auf und korrigiert zusätzlich die zwei real belegten Lücken: monolithisches FINALIZE PREPARE und fehlende Live-Fortschrittsanzeige nach START ohne Reload.
+- PREPARE läuft jetzt persistent in begrenzten Teilstücken; keine Timeout-Erhöhung als Reparatur.
+- UI-Test verlangt unmittelbar nach START ohne Reload RUNNING, Fortschritt, aktuelle Familie und sichtbaren Finalize-/PREPARE-Stand.
+- Provider-Stress erzeugt 303 PREPARE-Kandidaten in einer echten Breadth-Familie; Zwischenstand muss innerhalb PREPARE_CANDIDATES sichtbar sein.
+- Run `35645482192`: kompletter Real-WordPress/MySQL/Multiworker-Ablauf SUCCESS:
+  Single -> persistierter Altzustand -> Browser-Start ohne Reload -> stale Status Race -> PREPARE-Stress -> normale 40er Produktionswelle -> TARGET_REACHED -> Evidence.
+- Normale Welle im selben Run: 41 nutzbare Themen, 79 rohe, 26 Items, 22 COMPLETE, 4 fachlich geparkt, 0 technische Parkfehler, Provider exakt 25 je Stufe, Driver terminal IDLE.
+- Exakte getestete ZIP: SHA-256 `8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c`.
+- Nach diesem Produkt-PASS wurde nur das Proof-Skript `prove-stress-prepare.sh` fail-fast gehärtet; kein Produktcode geändert.
+- Nächster zulässiger Schritt ausschließlich echter Nutzer-Live-Test mit genau diesen ZIP-Bytes. Bis dahin bleibt PPA-005 CURRENT.zip unverändert.
