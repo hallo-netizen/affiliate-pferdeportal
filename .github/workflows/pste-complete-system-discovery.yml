@@ -75,6 +75,8 @@ jobs:
           mkdir -p /tmp/pserc
           unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc
           echo "=== PSERC ENTRYPOINTS ==="
-          grep -RIn -E 'plan_slot|READY|PSTE|handoff|compile|generation|retention|production_plan' /tmp/pserc --include='*.php' | sed -n '1,1200p'
+          find /tmp/pserc -type f | sort | sed -n '1,1200p'
+          echo "=== PSERC PHP SYMBOLS ==="
+          grep -RIn -E 'plan_slot|READY|PSTE|handoff|compile|generation|retention|production_plan' /tmp/pserc --include='*.php' || true
           echo "=== PSERC TESTS ==="
-          find /tmp/pserc -type f | grep -Ei 'test|workflow|fixture' | sort | sed -n '1,1200p'
+          find /tmp/pserc -type f | grep -Ei 'test|workflow|fixture' || true
