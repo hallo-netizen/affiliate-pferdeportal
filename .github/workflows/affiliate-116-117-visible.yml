@@ -1,0 +1,153 @@
+name: Affiliate exact 116 vs 117 visible delta
+
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-116-117-visible.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-visible-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install wp-cli and WordPress
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=http://127.0.0.1:8080 --title=AffiliateE2E --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+
+      - name: Prepare exact 108 to 117 packages
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/history-pkgs
+          for v in 108 109 110 111 112 113 114 115 116 117; do
+            base64 --decode "e2e/history-fixtures/v6.72.$v.zip.b64" > "/tmp/history-pkgs/v6.72.$v.zip"
+            unzip -tq "/tmp/history-pkgs/v6.72.$v.zip" >/dev/null
+          done
+
+      - name: Install 108 and seed exact historical inventory
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          unzip -q /tmp/history-pkgs/v6.72.108.zip -d /tmp/wp/wp-content/plugins
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp
+
+      - name: Restore historical live-working eBay gate before upgrade chain
+        run: |
+          set -euo pipefail
+          wp option update home 'https://pferde-atelier.de' --path=/tmp/wp >/dev/null
+          wp option update siteurl 'https://pferde-atelier.de' --path=/tmp/wp >/dev/null
+          wp eval '
+            $t=str_repeat("A",40);
+            update_option("ppar_ebay_deletion_token_v1",$t,false);
+            update_option("ppar_ebay_deletion_state_v1",array(
+              "challenge_answered_at"=>time(),
+              "last_notification_at"=>time(),
+              "last_notification_status"=>"verified",
+              "last_notification_hash"=>str_repeat("a",64),
+              "last_deleted_items"=>0,"last_deleted_creatives"=>0,"last_deleted_outputs"=>0,"last_error"=>""
+            ),false);
+            $s=get_option("ppar_network_ebay_v1",array()); $s["enabled"]=1; $s["business_enabled"]=1; update_option("ppar_network_ebay_v1",$s,false);
+            $a=get_option("ppar_provider_access_state_v1",array()); $a["ebay"]=array("status"=>"connected","last_checked"=>time(),"message"=>"historical live working state","updated_at"=>time()); update_option("ppar_provider_access_state_v1",$a,false);
+          ' --path=/tmp/wp
+
+      - name: Replay exact persistent upgrade chain through 116
+        run: |
+          set -euo pipefail
+          for v in 109 110 111 112 113 114 115 116; do
+            rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+            unzip -q "/tmp/history-pkgs/v6.72.$v.zip" -d /tmp/wp/wp-content/plugins
+            timeout 60s wp eval 'do_action("admin_init");' --path=/tmp/wp
+          done
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp | tee /tmp/116-probe.log
+          grep -Fx 'HISTORY_IDEALO_MODE=automatic' /tmp/116-probe.log
+          grep -Fx 'HISTORY_EBAY_CONTROL=PASS' /tmp/116-probe.log
+          wp db export /tmp/state116.sql --path=/tmp/wp
+
+      - name: Start frontend server
+        run: |
+          set -euo pipefail
+          wp option update home 'http://127.0.0.1:8080' --path=/tmp/wp >/dev/null
+          wp option update siteurl 'http://127.0.0.1:8080' --path=/tmp/wp >/dev/null
+          wp server --host=127.0.0.1 --port=8080 --path=/tmp/wp >/tmp/wp-server.log 2>&1 &
+          for n in $(seq 1 30); do
+            if curl -fsS --max-time 2 'http://127.0.0.1:8080/' >/dev/null; then break; fi
+            sleep 1
+          done
+
+      - name: Assert visible 6.72.116 output
+        run: |
+          set -euo pipefail
+          rm -f /tmp/aff-history-stop
+          python3 "$GITHUB_WORKSPACE/e2e/check_http.py" ebay_control_open | tee /tmp/116-http.log
+          grep -q '"provider":"ebay"' /tmp/116-http.log
+          grep -q '"provider":"idealo"' /tmp/116-http.log
+          echo V116_VISIBLE_PASS
+
+      - name: Upgrade same persistent state to exact 6.72.117
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+          unzip -q /tmp/history-pkgs/v6.72.117.zip -d /tmp/wp/wp-content/plugins
+          timeout 60s wp eval 'do_action("admin_init");' --path=/tmp/wp
+          set +e
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp | tee /tmp/117-probe.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          test "$rc" -ne 0
+          grep -Fx 'HISTORY_IDEALO_MODE=idealo_only' /tmp/117-probe.log
+
+      - name: Assert visible 117 regression on same database
+        run: |
+          set -euo pipefail
+          rm -f /tmp/aff-history-stop
+          python3 "$GITHUB_WORKSPACE/e2e/check_http.py" idealo_only | tee /tmp/117-http.log
+          if grep -q '"provider":"ebay"' /tmp/117-http.log; then
+            echo UNEXPECTED_EBAY_VISIBLE_AFTER_117
+            exit 1
+          fi
+          grep -q '"provider":"idealo"' /tmp/117-http.log
+          echo V117_VISIBLE_IDEALO_ONLY_REPRODUCED
+
+      - name: Report exact delta result
+        if: always()
+        run: |
+          echo '=== 116 probe ==='
+          cat /tmp/116-probe.log || true
+          echo '=== 116 HTTP ==='
+          cat /tmp/116-http.log || true
+          echo '=== 117 probe ==='
+          cat /tmp/117-probe.log || true
+          echo '=== 117 HTTP ==='
+          cat /tmp/117-http.log || true
