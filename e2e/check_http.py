@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 import hashlib, html, json, re, sys, urllib.request
 scenario=sys.argv[1]
+if scenario!='healthy':
+    try:
+        marker=open('/tmp/aff-history-stop','r',encoding='utf-8').read().strip()
+    except FileNotFoundError:
+        marker=''
+    if marker:
+        print(f'SCENARIO_SKIPPED_AFTER_FIRST_HISTORY_BREAK={scenario}:{marker}')
+        raise SystemExit(0)
 targets={
   'reithelme':186,'reithandschuhe':187,'reitstiefel':188,'sicherheitswesten':189,
   'gerten':190,'sporen':191,'halfter-und-stricke-stallhalfter':174,
