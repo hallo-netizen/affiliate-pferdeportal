@@ -304,3 +304,19 @@ jobs:
           name: affiliate-672131-exact116-provider-restore
           path: AFFILIATE_ZENTRALE_V6.72.131_EXACT116_PROVIDER_RESTORE.zip
           if-no-files-found: error
+
+  inspect-130-fix-keys:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect exact 6.72.130 repair keys
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/p130 && mkdir /tmp/p130
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/p130
+          echo '=== IDEALO_ONLY ==='
+          grep -R -n -C 6 "idealo_only" /tmp/p130/affiliate-portal-router || true
+          echo '=== EBAY CONTROL ==='
+          grep -R -n -C 8 "control_provider_access_disabled\|provider_access_disabled\|ebay.*enabled\|enabled.*ebay" /tmp/p130/affiliate-portal-router/includes /tmp/p130/affiliate-portal-router/pferdeportal-affiliate-router.php || true
+          echo '=== CATEGORY SLOTS ==='
+          grep -R -n -C 8 "category_product_1\|category_product_2\|category_product_3\|article_plan_revision\|rebuild_worker" /tmp/p130/affiliate-portal-router/includes /tmp/p130/affiliate-portal-router/pferdeportal-affiliate-router.php || true
