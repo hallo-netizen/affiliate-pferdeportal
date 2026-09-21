@@ -1,0 +1,25 @@
+--- a/includes/class-pste-repository.php
++++ b/includes/class-pste-repository.php
+@@ -384,6 +384,9 @@
+     private static function quarantineCorruptedTopicRow(array &$poolRows,int $index,array $row,string $reasonCode): string {
++        global $wpdb;
+         $table=self::table('topic_pool');$topic=(string)($row['pool_key']??'');
+         if($topic==='')throw new RuntimeException('PSTE_PAYLOAD_RECOVERY_TOPIC_KEY_EMPTY');
++        $traceBefore=$wpdb->get_row($wpdb->prepare("SELECT id,pool_key,normalized_key,candidate_id,LENGTH(payload_json) AS payload_len FROM ".$table." WHERE id=%d",(int)$row['id']),ARRAY_A);error_log('PSTE_QUARTRACE BEFORE t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' id='.(int)$row['id'].' stale_pool_key='.$topic.' reason='.$reasonCode.' db_row_b64='.base64_encode(wp_json_encode($traceBefore,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
+         $storedNormalized=(string)($row['normalized_key']??'');$storedCandidate=(string)($row['candidate_id']??'');$raw=(string)($row['payload_json']??'');
+         $normalized=preg_match('/^[a-f0-9]{64}$/',$storedNormalized)?$storedNormalized:hash('sha256','PSTE_RECOVERY_QUARANTINE|'.$topic.'|'.$storedCandidate);
+         $candidateId=$storedCandidate!==''?$storedCandidate:hash('sha256','PSTE_RECOVERY_QUARANTINE_CANDIDATE|'.$topic);
+@@ -432,6 +435,9 @@
+             'last_seen_at'=>gmdate('Y-m-d H:i:s'),
+         ];
+         self::checkedUpdate($table,$updated,['id'=>(int)$row['id']],['%s','%s','%s','%s','%s','%s','%s','%s','%s','%d','%s'],['%d'],'PSTE_PAYLOAD_RECOVERY_QUARANTINE_UPDATE_FAILED');
++        $traceById=$wpdb->get_row($wpdb->prepare("SELECT id,pool_key,normalized_key,candidate_id,LENGTH(payload_json) AS payload_len FROM ".$table." WHERE id=%d",(int)$row['id']),ARRAY_A);
++        $traceByKey=$wpdb->get_row($wpdb->prepare("SELECT id,pool_key,normalized_key,candidate_id,LENGTH(payload_json) AS payload_len FROM ".$table." WHERE pool_key=%s",$topic),ARRAY_A);
++        error_log('PSTE_QUARTRACE AFTER_UPDATE t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' id='.(int)$row['id'].' expected_pool_key='.$topic.' by_id_b64='.base64_encode(wp_json_encode($traceById,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)).' by_key_b64='.base64_encode(wp_json_encode($traceByKey,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
+         self::assertTopicPayloadPersisted($topic,$encoded,'PSTE_PAYLOAD_RECOVERY_QUARANTINE');
+         $poolRows[$index]=array_merge($row,$updated);
+         return $topic;
+@@ -749,6 +755,7 @@
+     public static function repairInvalidTopicPayloads(): array {
++        error_log('PSTE_QUARTRACE REPAIR_ENTER t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' uri='.(string)($_SERVER['REQUEST_URI']??'CLI'));
+         self::assertOwnJsonStorageReady();global $wpdb;$table=self::table('topic_pool');$rows=$wpdb->get_results("SELECT * FROM ".$table." ORDER BY id ASC",ARRAY_A);if(!is_array($rows))throw new RuntimeException('PSTE_PAYLOAD_RECOVERY_READ_FAILED:'.self::dbError());if(!$rows)return ['repaired'=>0,'quarantined'=>0,'quarantine_keys'=>[],'invalid_candidate_rows'=>0];
