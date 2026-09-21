@@ -1,0 +1,15 @@
+{
+  "contract": "PSTE_TOPIC_ENGINE_START_HERE_V1",
+  "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
+  "role": "NAVIGATION_ONLY",
+  "current_authority": "control/pste-topic-engine/CURRENT_STATE.json",
+  "target_authority": "control/pste-topic-engine/ZIELVERTRAG.json",
+  "error_history": "protocol/PSTE_TOPIC_ENGINE_ERROR_PROTOCOL_20260921.md",
+  "worklog": "protocol/PSTE_TOPIC_ENGINE_WORKLOG_20260921.md",
+  "freshness_rule": "READ_CURRENT_STATE_AND_COMPARE_ONLY_DELTA_AFTER_BOUND_TECHNICAL_HEAD",
+  "forbidden": [
+    "DO_NOT_USE_THIS_FILE_AS_CURRENT_STATUS",
+    "DO_NOT_DERIVE_STATUS_FROM_HANDOFF_OR_HOBBYROOM",
+    "DO_NOT_RECONSTRUCT_FULL_HISTORY_IF_TECHNICAL_BINDING_IS_UNCHANGED"
+  ]
+}
