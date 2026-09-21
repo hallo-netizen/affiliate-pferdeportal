@@ -443,3 +443,89 @@ jobs:
           name: affiliate-aff039-repair-1-0-0
           path: AFFILIATE_AFF039_REPAIR_1.0.0.zip
           if-no-files-found: error
+
+  clean-ab-108-vs-130:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - name: Install wp-cli
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+      - name: Prepare exact packages
+        run: |
+          set -euo pipefail
+          base64 --decode e2e/history-fixtures/v6.72.108.zip.b64 > /tmp/108.zip
+          cp e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip /tmp/130.zip
+          sha256sum /tmp/108.zip /tmp/130.zip
+      - name: Run clean 108 baseline
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wp108; CREATE DATABASE wp108;"
+          rm -rf /tmp/wp108 && mkdir /tmp/wp108
+          wp core download --version=7.1 --path=/tmp/wp108
+          wp config create --path=/tmp/wp108 --dbname=wp108 --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp108 --url=http://127.0.0.1:8081 --title=AB108 --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
+          unzip -q /tmp/108.zip -d /tmp/wp108/wp-content/plugins
+          wp plugin activate affiliate-portal-router --path=/tmp/wp108
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state.php" --path=/tmp/wp108 | tee /tmp/seed108.log
+          echo "=== 108 EBAY OPTION ==="
+          wp option get ppar_network_ebay_v1 --format=json --path=/tmp/wp108 || true
+          echo "=== 108 IDEALO OPTION ==="
+          wp option get ppar_network_idealo_v1 --format=json --path=/tmp/wp108 || true
+          echo "=== 108 HISTORY PROBE ==="
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp108 | tee /tmp/probe108.log
+      - name: Run clean 130 comparison
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wp130; CREATE DATABASE wp130;"
+          rm -rf /tmp/wp130 && mkdir /tmp/wp130
+          wp core download --version=7.1 --path=/tmp/wp130
+          wp config create --path=/tmp/wp130 --dbname=wp130 --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp130 --url=http://127.0.0.1:8082 --title=AB130 --admin_user=admin --admin_password='e2e-pass-123!' --admin_email=e2e@example.test
+          unzip -q /tmp/130.zip -d /tmp/wp130/wp-content/plugins
+          wp plugin activate affiliate-portal-router --path=/tmp/wp130
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state.php" --path=/tmp/wp130 | tee /tmp/seed130.log
+          echo "=== 130 EBAY OPTION ==="
+          wp option get ppar_network_ebay_v1 --format=json --path=/tmp/wp130 || true
+          echo "=== 130 IDEALO OPTION ==="
+          wp option get ppar_network_idealo_v1 --format=json --path=/tmp/wp130 || true
+          echo "=== 130 HISTORY PROBE ==="
+          set +e
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp130 | tee /tmp/probe130.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          echo "PROBE130_RC=$rc"
+      - name: Compare provider control implementation 108 vs 130
+        if: always()
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/s108 /tmp/s130 && mkdir /tmp/s108 /tmp/s130
+          unzip -q /tmp/108.zip -d /tmp/s108
+          unzip -q /tmp/130.zip -d /tmp/s130
+          diff -u /tmp/s108/affiliate-portal-router/includes/trait-ppar-provider-registry.php /tmp/s130/affiliate-portal-router/includes/trait-ppar-provider-registry.php || true
+          diff -u /tmp/s108/affiliate-portal-router/includes/trait-ppar-control-contract.php /tmp/s130/affiliate-portal-router/includes/trait-ppar-control-contract.php || true
+          grep -R -n -C 5 "Marketplace-Account-Deletion-Compliance\|credentials_saved\|provider_access_snapshot" /tmp/s108/affiliate-portal-router /tmp/s130/affiliate-portal-router || true
