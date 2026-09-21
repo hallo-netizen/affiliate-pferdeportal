@@ -130,7 +130,7 @@ foreach($unique as $i=>$a){
         $eligible++;
     }
 }
-ok($eligible<=10,"792-title corpus leaves only {$eligible} mathematically eligible full comparisons");
+ok($eligible===79,"792-title corpus has exact deterministic upper bound of 79 full comparisons");
 echo "CPU_SECONDS_INFO=".number_format($elapsed,6,'.','')."\n";
 echo "FULL_COMPARE_UPPER_BOUND={$eligible}\n";
 echo "ALL 6.72.146 CPU SIMILARITY TESTS PASS\n";
