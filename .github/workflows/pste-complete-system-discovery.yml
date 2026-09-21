@@ -32,7 +32,7 @@ jobs:
           rm -rf /tmp/codex && mkdir -p /tmp/codex
           unzip -q CODEX_PSTE056_HANDOFF_MINIMAL_20260820.zip -d /tmp/codex
           echo "=== RELEVANT CODEX FILES ==="
-          find /tmp/codex -type f | grep -Ei 'full.workflow|workflow|planning.readiness|breadth|rootcause|pste.*test|test_.*php' | sort | head -500
+          (find /tmp/codex -type f | grep -Ei 'full.workflow|workflow|planning.readiness|breadth|rootcause|pste.*test|test_.*php' || true) | sort | head -500\n          echo '=== CODEX TOP FILES ==='\n          find /tmp/codex -type f | sort | head -500
           echo "=== END RELEVANT CODEX FILES ==="
       - name: Run candidate bundled tests
         shell: bash
@@ -57,6 +57,6 @@ jobs:
         run: |
           set -euo pipefail
           echo "=== PHP TEST INVENTORY ==="
-          find /tmp/codex -type f -name '*.php' | grep -Ei 'test_|workflow|breadth|planning|rootcause' | sort | head -1000
+          (find /tmp/codex -type f -name '*.php' | grep -Ei 'test_|workflow|breadth|planning|rootcause' || true) | sort | head -1000
           echo "=== JSON WORKFLOW INVENTORY ==="
-          find /tmp/codex -type f -name '*.json' | grep -Ei 'FULL_WORKFLOW|WORKFLOW|BREADTH|PLANNING|ROOTCAUSE' | sort | head -1000
+          (find /tmp/codex -type f -name '*.json' | grep -Ei 'FULL_WORKFLOW|WORKFLOW|BREADTH|PLANNING|ROOTCAUSE' || true) | sort | head -1000
