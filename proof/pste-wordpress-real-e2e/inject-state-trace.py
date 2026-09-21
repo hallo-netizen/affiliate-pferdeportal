@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import sys
+import re
 
 repo = Path(sys.argv[1])
 job = Path(sys.argv[2])
