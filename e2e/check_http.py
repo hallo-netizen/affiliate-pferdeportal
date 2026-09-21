@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import hashlib, html, json, re, sys, urllib.request
+import hashlib, html, json, os, re, sys, urllib.request
 scenario=sys.argv[1]
 if scenario!='healthy':
     try:
@@ -13,9 +13,9 @@ targets={
   'reithelme':186,'reithandschuhe':187,'reitstiefel':188,'sicherheitswesten':189,
   'gerten':190,'sporen':191,'halfter-und-stricke-stallhalfter':174,
 }
-results={}
+base=os.environ.get('AFF_E2E_BASE_URL','http://127.0.0.1:8080').rstrip('/')\nresults={}
 for slug,pid in targets.items():
-    url=f'http://127.0.0.1:8080/?page_id={pid}&e2e={scenario}-{pid}'
+    url=f'{base}/?page_id={pid}&e2e={scenario}-{pid}'
     req=urllib.request.Request(url,headers={'Cache-Control':'no-store','User-Agent':'affiliate-e2e'})
     body=urllib.request.urlopen(req,timeout=30).read().decode('utf-8','replace')
     slots=[]
