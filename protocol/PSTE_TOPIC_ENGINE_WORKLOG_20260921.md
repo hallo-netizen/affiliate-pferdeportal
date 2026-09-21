@@ -97,3 +97,15 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Danach normale Produktionswelle im selben Lauf bis `TARGET_REACHED`: 41 nutzbare / 79 rohe Kandidaten, 26 Items, 22 COMPLETE, 4 fachlich geparkt, Driver IDLE, Provider exakt 25 je Stufe.
 - Final getestete ZIP SHA-256: `ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3`.
 - Nur diese finalen Bytes sind für den nächsten echten Nutzer-Live-Test zulässig.
+
+
+## Nachtrag – Read-only Diagnosetool hart isoliert geprüft
+- Ziel: echten Live-Hänger beobachten, ohne PSTE zu starten, fortzusetzen, abzubrechen, zu reparieren oder Zustand zu schreiben.
+- Diagnoseplugin: `PSTE Read Only Diagnostics 0.1.0`, SHA-256 `cc103ac7469a8207536aba12864d44fdf2c7fec990d6210002b06fee28aa5d95`.
+- Getesteter PSTE-Goldstand unverändert: 0.57.4 ZIP SHA-256 `ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3`.
+- Isolierter echter WordPress/MySQL-Sicherheitslauf: `35650768014` — SUCCESS.
+- Beweise: echte Admin-Seite PASS; 40 parallele echte AJAX-Leseabrufe PASS; PSTE-Dateibaum vorher/nachher identisch; alle `pste*`-Optionswerte vorher/nachher identisch.
+- Rückbauprobe: Diagnoseplugin deaktiviert und gelöscht; PSTE-Dateibaum und `pste*`-Optionswerte weiterhin byteidentisch zum Ausgangszustand; PSTE-Einstellungsseite danach HTTP 200.
+- Negativ: PSTE deaktiviert/fehlend sowie absichtlich beschädigter gespeicherter PSTE-Zustand verursachen keinen Fatal im Diagnoseplugin.
+- Harte Rückfallregel: Bei irgendeiner Auffälligkeit ausschließlich Diagnoseplugin deaktivieren/löschen. Kein PSTE-Fix, kein Datenbank-Rollback, keine Architekturänderung. Nur falls PSTE-Dateien wider Erwarten beschädigt erscheinen, exakt den Goldstand SHA `ae4fde45...` erneut einsetzen.
+- Safety Artifact: `10662345593`, Digest `sha256:0970ba58dcca31b8cdf49ffab96ecb08691aaa20fff41494e2108c66ab6c7153`.
