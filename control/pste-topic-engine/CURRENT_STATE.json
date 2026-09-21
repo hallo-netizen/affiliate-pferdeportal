@@ -2,23 +2,23 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "PASS_GITHUB_0574_FULL_STRESS_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
+  "status": "PASS_GITHUB_0574_FINAL_FULL_STRESS_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "623a449b265aa4ae9a157856f678f1b02a22deb6",
-    "branch_head_freshness": "e2f13056013bab8ab6dca84b56f03fad16024b17",
-    "branch_head_delta_from_technical_head": "PROOF_SCRIPT_ONLY_FAIL_FAST_HARDENING_NO_PRODUCT_CODE_CHANGE",
+    "technical_head": "e2f13056013bab8ab6dca84b56f03fad16024b17",
+    "branch_head_freshness": "76effd52a40a0b4ec0b6948649ea052fe8a6fdd9",
+    "branch_head_delta_from_technical_head": "CURRENT_AND_PROTOCOL_DOCUMENTATION_ONLY_NO_PRODUCT_CODE_CHANGE",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35645482192,
+    "run_id": 35646020136,
     "run_result": "SUCCESS",
-    "evidence_artifact_id": 10659823699,
-    "evidence_digest": "sha256:f5da0cc4dde3cc5de1eed0ae64f6381f574f676b0792912c4082f015da2ff171",
+    "evidence_artifact_id": 10659844649,
+    "evidence_digest": "sha256:76ca13601f85aba81fabd1eaa311fd20f6607264b4c18a0496aef3be055a0967",
     "candidate": "0.57.4-HOBBYROOM",
-    "candidate_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c",
+    "candidate_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_FULL_STRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
+    "release": "GITHUB_FINAL_FULL_STRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN"
   },
   "proven": {
     "package_total_files": "PASS_131",
@@ -35,11 +35,12 @@
     "technical_park_errors": "ZERO",
     "provider_counts": "PASS_EXACT_25_EACH",
     "driver_terminal_state": "PASS_IDLE",
-    "real_wordpress_full_stress_e2e": "PASS_RUN_35645482192",
+    "real_wordpress_full_stress_e2e": "PASS_RUN_35646020136",
     "final_zip_full_workflow": "PASS",
     "separate_process_full_system": "PASS",
     "complete_system_simulation": "PASS",
-    "exact_tested_zip_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c"
+    "exact_tested_zip_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
+    "superseded_first_0574_pass_zip_sha256": "8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c"
   },
   "fixed_live_failures": {
     "PSTE_DRIVER_STEP_OVERDUE_FINALIZE_PREPARE": "FIXED_IN_HOBBYROOM_BY_PERSISTED_BOUNDED_PREPARE_STEPS_AND_STRESS_PROOF",
@@ -47,13 +48,13 @@
     "STALE_BREADTH_STATUS_AFTER_NEW_START": "FIXED_AND_REPROVEN"
   },
   "first_blocker": {
-    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_0574_EXACT_TESTED_BYTES",
-    "detail": "The exact 0.57.4 ZIP from successful full-stress Real WordPress E2E run 35645482192 has not yet been accepted on the user's real WordPress installation."
+    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_FINAL_0574_EXACT_TESTED_BYTES",
+    "detail": "The exact final 0.57.4 ZIP from fail-fast-hardened full-stress Real WordPress E2E run 35646020136 has not yet been accepted on the user's real WordPress installation."
   },
   "next_action": {
-    "id": "INSTALL_EXACT_0574_STRESS_TESTED_BYTES_AND_RUN_REAL_SITE_ACCEPTANCE",
-    "action": "Install only the exact 0.57.4 ZIP from artifact 10659823699 with SHA-256 8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c over the real plugin path Portal SEO Topic Engine/portal-seo-topic-engine.php. Then start a production wave on the real site and verify without page reload: immediate RUNNING state, visible current family/finalize progress, continuing progress, no PSTE_DRIVER_STEP_OVERDUE, no stale PSTE_BREADTH_QUEUE_NOT_FOUND overriding the new run, no duplicate plugin root, and no technical parked errors.",
-    "success": "REAL_SITE_0574_START_PROGRESS_AND_CONTINUATION_PASS",
+    "id": "INSTALL_EXACT_FINAL_0574_STRESS_TESTED_BYTES_AND_RUN_REAL_SITE_ACCEPTANCE",
+    "action": "Install only the exact 0.57.4 ZIP from artifact 10659844649 with SHA-256 ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3 over the real plugin path Portal SEO Topic Engine/portal-seo-topic-engine.php. Then start a production wave on the real site and verify without page reload: immediate RUNNING state, visible current family/finalize progress, continuing progress, no PSTE_DRIVER_STEP_OVERDUE, no stale PSTE_BREADTH_QUEUE_NOT_FOUND overriding the new run, no duplicate plugin root, and no technical parked errors.",
+    "success": "REAL_SITE_FINAL_0574_START_PROGRESS_AND_CONTINUATION_PASS",
     "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
   },
   "rules": [
