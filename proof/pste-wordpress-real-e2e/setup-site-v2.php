@@ -69,6 +69,7 @@ foreach($wanted as $product){
     }
 }
 
+update_option(PSTE_OPTION_EDITORIAL_PLAN_IMPORT,['items'=>[]],false);
 $baseline=PSTE_Runner::captureSiteBaseline();
 if(($baseline['status']??'')!=='CURRENT')throw new RuntimeException('BASELINE_NOT_CURRENT_'.($baseline['status']??''));
 
