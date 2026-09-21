@@ -1,0 +1,97 @@
+PFERDE ATELIER – AFFILIATE-ZENTRALE
+AFF-ERR-039 – LIVE IDEALO PROVIDER-SELECTION DELTA STATUS
+Stand: 2026-09-21
+ROLE: Evidence only. Not CURRENT. Not NEXT-ACTION authority.
+
+AUTHORITATIVE ROUTE AT CAPTURE
+- Repository: hallo-netizen/affiliate-pferdeportal
+- Branch: affiliate-release-current
+- HEAD at freshness read: 14f8bef14e7a6c3eac00c1008142b6ceed1ca8a6
+- Entrance: release/affiliate-zentrale/AGENTS.md
+- Single CURRENT authority: control/release-governance/CURRENT_RELEASE.json
+- Canonical committed source remains release/affiliate-zentrale/current/affiliate-portal-router/
+- Plugin-office PPA-001 CURRENT.zip is not replaced by this evidence.
+
+BOUND TARGET / HARDLOCKS
+- Restore the complete affiliate workflow, including persisted WordPress state and plugin code.
+- Product relevance comes first.
+- Provider selection must remain provider-neutral/future-provider-capable; no fixed provider weights.
+- Product tiles, renderer, frontend.css and frontend.js remain hardlocked.
+- No PASS from synthetic state that differs materially from live state.
+
+PROVEN HISTORY DELTA
+GitHub full same-DB history run:
+- Run: 35570161667
+- Job: 106239919285
+- 6.72.108 through 6.72.116: HISTORY_PROBE_PASS with idealo output_mode=automatic.
+- First exact history break: 6.72.117.
+- Exact delta: 6.72.116 -> 6.72.117.
+- 6.72.117: HISTORY_IDEALO_MODE=idealo_only.
+Therefore the former CURRENT statement "full 112->117 chain incomplete / first exact delta open" is stale.
+
+PROVEN PERSISTED-STATE FACT
+Same damaged DB A/B run:
+- Run/job: job 106306813529
+- Historical 6.72.108 on the same damaged DB: V108_SAME_DB_STILL_DAMAGED.
+- 6.72.131 update-only on the same damaged DB: V131_UPDATE_ONLY_STILL_DAMAGED.
+- AFF043 on that same DB restored target supply: SAME_DB_STATE_ROOTCAUSE_PROVEN.
+Conclusion: file/code downgrade alone does not restore the damaged product-target state.
+
+PROVEN 6.72.132 TEST FACT
+- Job: 106308959419
+- UPDATE_ONLY_POSITIVE_PASS.
+- INCOMPLETE_COMPLIANCE_FAIL_CLOSED_PASS.
+- UPDATE_ONLY_132_FULL_PASS.
+This proves the bounded test harness can auto-restore known target-state damage and keeps incomplete eBay compliance fail-closed.
+It is not, by itself, a live Idealo-provider-mix PASS.
+
+LATEST USER LIVE READBACK
+After the later live test line, the user reports:
+- exactly three product cards are visible;
+- all three products are thematically appropriate;
+- all three visible cards are eBay;
+- no Idealo card is visible.
+This is the current live visual truth supplied by the user.
+A baseline evidence file for this good-product-match / wrong-provider-mix state was committed on the temporary evidence branch:
+- branch: affiliate-e2e-repro-20260920
+- commit: a26804ecb56ee21611f7a39148a55e785b3e782d
+- file: release/affiliate-zentrale/evidence/live_baseline_good_match_ebay_only_20260921.md
+The temporary branch is evidence execution only and is not release authority.
+
+6.72.133 TEST LIMIT – MATERIAL
+The real-provider-mix E2E job 106314155274 reported HISTORY_PROBE_PASS / REAL_PROVIDER_MIX_PASS.
+However the bound seed used by that harness explicitly writes:
+- idealo enabled=1
+- output_mode=automatic
+- link_strategy=products
+- last_import_at=time()
+Therefore that E2E does NOT prove that the current live WordPress state has the same Idealo settings and cannot be used as a live explanation for why Idealo is absent.
+The later 6.72.134 hypothesis was not live-proven and must not be promoted as current truth.
+
+WHAT IS NOT PROVEN
+- The exact current live value of ppar_network_idealo_v1.link_strategy has not been read back in this evidence.
+- It is not proven that hybrid/products is the live root cause.
+- It is not proven that a particular 6.72.129->6.72.130 ranking/filter change is the live root cause.
+- 6.72.134 is not a proven live fix.
+- No new PPA-001 CURRENT.zip promotion is authorized.
+
+FIRST OPEN BLOCKER
+Why the current live state selects three topic-correct eBay cards while no Idealo card reaches category_product_1..3 is not yet proven from the exact live persisted provider state.
+
+EXACT NEXT PROOF REQUIRED
+1. Read-only capture on the current live installation:
+   - exact ppar_network_idealo_v1 values needed for delivery decision: enabled, output_mode, link_strategy, last_import_at and relevant activation state;
+   - exact eBay/Idealo candidate counts for one affected category;
+   - candidate list after each existing eligibility/filter/rank stage for category_product_1..3.
+2. No writes and no plugin build during this capture.
+3. Replay the exact captured state against the historical 6.72.129 and 6.72.130 selection paths.
+4. Stop at the first exact code/state divergence that removes Idealo from the top-three visible result.
+5. Only after that divergence is proven may CURRENT authorize an inverse delta.
+
+DO NOT TOUCH
+- product relevance/classification;
+- product cards/renderer/CSS/JS;
+- Awin/ADCELL side work;
+- performance work;
+- PPA-001 CURRENT.zip;
+- live provider state before the read-only capture.
