@@ -641,8 +641,10 @@ jobs:
           rm -rf /tmp/v119 && mkdir -p /tmp/v119
           base64 --decode e2e/history-fixtures/v6.72.108.zip.b64 > /tmp/v108.zip
           unzip -q /tmp/v108.zip -d /tmp/v119
+          cat "$GITHUB_WORKSPACE/e2e/fixtures/v119_patch_chunk_00.b64" "$GITHUB_WORKSPACE/e2e/fixtures/v119_patch_chunk_01.b64" "$GITHUB_WORKSPACE/e2e/fixtures/v119_patch_chunk_02.b64" | base64 --decode > /tmp/v119_exact.patch
+          cd /tmp/v119
+          patch -p1 < /tmp/v119_exact.patch
           cd /tmp/v119/affiliate-portal-router
-          patch -p1 < "$GITHUB_WORKSPACE/e2e/fixtures/v108_to_v119.patch"
           echo "=== VERIFY ORIGINAL 6.72.119 FILE MANIFEST ==="
           sha256sum -c "$GITHUB_WORKSPACE/e2e/fixtures/v119_manifest.sha256"
           grep -n "Version: 6.72.119" pferdeportal-affiliate-router.php
