@@ -1,0 +1,31 @@
+name: Affiliate live idealo link-label probe
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths: ['.github/workflows/affiliate-live-idealo-link-label.yml']
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: List live idealo hrefs and labels
+        run: |
+          set -euo pipefail
+          curl -L --max-time 30 -fsS "https://pferde-atelier.de/category/reithelme-beratung/" -o /tmp/page.html
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, html
+          s=Path('/tmp/page.html').read_text(errors='ignore')
+          for n,m in enumerate(re.finditer(r'<a\b([^>]*)href="([^"]+)"([^>]*)>(.*?)</a>',s,re.I|re.S),1):
+              href=html.unescape(m.group(2))
+              txt=html.unescape(re.sub(r'<[^>]+>',' ',m.group(4)))
+              txt=re.sub(r'\s+',' ',txt).strip()
+              if 'idealo' in href.lower() or 'idealo' in txt.lower() or txt.lower()=='zum angebot':
+                  attrs=(m.group(1)+' '+m.group(3)).strip()
+                  print('LINK',n)
+                  print('TEXT',txt[:400])
+                  print('HREF',href[:800])
+                  print('ATTRS',attrs[:800])
+                  print('---')
+          PY
