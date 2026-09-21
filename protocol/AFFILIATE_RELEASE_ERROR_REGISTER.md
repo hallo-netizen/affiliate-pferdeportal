@@ -771,3 +771,39 @@ Sie enthalten unterschiedliche Recovery-Logik. Für keines ist ein Nutzer-LIVE-P
 **Genau eine NEXT ACTION:** Außerhalb von WordPress-Admin den aktiven Pluginordner `affiliate-portal-router` deaktivieren/umbenennen, damit WordPress ohne 6.72.123 bootet. Kein anderes Affiliate-ZIP installieren/aktivieren. Abschlussbedingung: `/wp-admin/` und eine öffentliche Seite laden wieder. Erst danach read-only Live-State erfassen; vor diesem Readback kein weiterer Recovery-Build.
 
 **Status:** OPEN / CURRENT_FIRST_BLOCKER / CRITICAL_SITE_UNREACHABLE_AFTER_6_72_123.
+
+
+### AFF-ERR-039 – Nachtrag 21.09.2026: 6.72.125–6.72.130 und GitHub-Gesamtworkflow
+
+**Live-Nachholung:**
+- 6.72.125 stellte die sichtbaren Produktkarten wieder her, aber die Produktzuordnungen blieben falsch.
+- 6.72.126–6.72.129 stellten den geforderten Livezustand nicht wieder her.
+- 6.72.130 ist **LIVE FAIL**: weiterhin falsche Produkte; eBay weiterhin nicht in den sichtbaren Produktkarten.
+- Keines der Pakete 6.72.125–6.72.130 ist dadurch ein neuer belastbarer Gesamt-LIVE-PASS oder ein freigegebener Release-Stand.
+
+**Harte Arbeitsregel des Nutzers:** Die Paket-/GitHub-Historie ist vollständig gegen den kompletten Workflow zu prüfen. Der **erste** exakte produkt-/eBay-wirksame Delta ist zu beweisen und anschließend ausschließlich dieser Delta zurückzunehmen. Produktkacheln, Renderer, CSS und JS sind dabei gesperrt.
+
+**GitHub-E2E-Nachweis:** Auf der ausschließlich temporären Evidence-Ausführungsbranch `affiliate-e2e-repro-20260920` wurde ein echter WordPress-7.1-/MariaDB-10.11-Workflow mit dem exakten 6.72.130-ZIP und einem hashgebundenen, aus dem realen WordPress-Export 15.09.2026 abgeleiteten Kampagnenzustand ausgeführt. Run `35536312242` ist absichtlich **FAIL**, nicht PASS.
+
+Belegt im E2E:
+- 2012 reale historische Produktkampagnen: eBay 922, idealo 1090;
+- eBay-Public-Checkpoint: 428 aktive IDs;
+- Reithelme: 69 exakte eBay- und 26 exakte idealo-Kandidaten;
+- eBay passiert Complete/Current/Program/Seller/Slot/Rank sowie Source/Checkpoint/Image;
+- erster belegter eBay-Ausfall ist der **Control-Gate** mit `control_provider_access_disabled`;
+- danach bleiben nur idealo-Kandidaten;
+- ein separater Versuch, die offensichtlichen eBay-Control-Optionen im Testzustand zu öffnen, reicht noch nicht: eBay bleibt im gerenderten Frontend abwesend. Die verbleibende konkrete Control-/Compliance-Unterbedingung ist deshalb **noch offen und darf nicht geraten werden**;
+- das Entfernen exakter Reithelme-Ziele reproduziert fachfremde Produktlecks;
+- nur ein exakter Stallhalfter-Kandidat reproduziert genau eine sichtbare Kachel.
+
+**Noch nicht erledigt:** Die exakten Pakete 6.72.108–6.72.111 sind im GitHub-E2E gebunden. Die vollständige sequenzielle 6.72.112→6.72.117-Gesamtworkflow-Ausführung ist noch offen. Damit ist der erste exakte Paket-Delta noch **nicht vollständig bewiesen** und es ist noch kein Rückbau autorisiert.
+
+**Display-Hardlock:** kein Displayfix im E2E; `assets/frontend.css` SHA-256 `305f7954047fbde080a52cff57f286ca817757efacf1a9738612403fb60e7f7c`, `assets/frontend.js` SHA-256 `203acdc463075c90d307c6bc7798d4ce56c5d0c4ab9d2a090c7197dcc4b50ae6`.
+
+**Current-Frischecheck:** Der vorgeschriebene Guard gegen `affiliate-release-current` HEAD `924df488db3a6c0ad1fc4f0200de5f78bfec0bc2` wurde in GitHub Actions ausgeführt und blockiert generation 85 mit `AFFILIATE_RELEASE_GUARD_BLOCKED:OBJECTIVE_CONTROL_WEAKENED:microfix_policy`. Die Current-Bindung muss deshalb auf den unveränderlichen Governance-Vertrag zurückgeführt werden.
+
+**Evidence:** `release/affiliate-zentrale/evidence/aff039_github_full_e2e_status_20260921.txt`.
+
+**Autoritätshinweis:** Alle in älteren AFF-ERR-039-Nachträgen enthaltenen damaligen „NEXT ACTION“-Zeilen sind ausschließlich historische Momentaufnahmen. Die **einzige aktuelle** Status-/Blocker-/NEXT-ACTION-Wahrheit ist `control/release-governance/CURRENT_RELEASE.json`.
+
+**Status:** OPEN / FULL_HISTORY_E2E_FIRST_REGRESSION_NOT_YET_PROVEN.
