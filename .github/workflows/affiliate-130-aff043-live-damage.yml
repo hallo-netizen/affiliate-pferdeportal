@@ -1,0 +1,129 @@
+name: Affiliate 130 plus AFF043 live damage proof
+
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-130-aff043-live-damage.yml'
+      - 'e2e/aff043_restore_probe.php'
+      - 'e2e/fixtures/aff043_into_130.patch.gz.b64'
+      - 'e2e/fixtures/aff043-historical-product-state-20260915.json.gz.b64'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-damage-restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Build exact 6.72.130 plus historical AFF043 only
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base130 /tmp/candidate
+          mkdir -p /tmp/base130 /tmp/candidate
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/base130
+          cp -a /tmp/base130/affiliate-portal-router /tmp/candidate/
+          base64 --decode e2e/fixtures/aff043_into_130.patch.gz.b64 | gzip -dc >/tmp/aff043.patch
+          (
+            cd /tmp/candidate/affiliate-portal-router
+            patch -p4 </tmp/aff043.patch
+          )
+          mkdir -p /tmp/candidate/affiliate-portal-router/recovery
+          base64 --decode e2e/fixtures/aff043-historical-product-state-20260915.json.gz.b64 | gzip -dc > /tmp/candidate/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json
+          echo '72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8  /tmp/candidate/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json' | sha256sum -c -
+          php -l /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          test "$(sha256sum /tmp/base130/affiliate-portal-router/assets/frontend.css | cut -d' ' -f1)" = "$(sha256sum /tmp/candidate/affiliate-portal-router/assets/frontend.css | cut -d' ' -f1)"
+          test "$(sha256sum /tmp/base130/affiliate-portal-router/assets/frontend.js | cut -d' ' -f1)" = "$(sha256sum /tmp/candidate/affiliate-portal-router/assets/frontend.js | cut -d' ' -f1)"
+          grep -q "private function aff043_state()" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -q "private function aff044_apply_clean_restore()" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo CANDIDATE_SCOPE_PASS
+
+      - name: Install WordPress and candidate
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.de --title=AffiliateE2E --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          cp -a /tmp/candidate/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+
+      - name: Seed exact historical product inventory
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp | tee /tmp/seed.log
+          grep -Fx 'SEEDED_CAMPAIGNS=2012' /tmp/seed.log
+          grep -Fx 'NETWORK_EBAY=922' /tmp/seed.log
+          grep -Fx 'NETWORK_IDEALO=1090' /tmp/seed.log
+
+      - name: Reproduce exact live damage
+        env:
+          AFF_E2E_SCENARIO: live_damage
+        run: |
+          set -euo pipefail
+          rm -f /tmp/aff-history-stop
+          wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp
+          wp eval '
+            $e=get_option("ppar_network_ebay_v1",array()); $e=is_array($e)?$e:array();
+            $e["enabled"]=1; $e["business_enabled"]=1; $e["api_terms_confirmed"]=1; $e["privacy_policy_confirmed"]=1;
+            update_option("ppar_network_ebay_v1",$e,false);
+            update_option("ppar_ebay_deletion_state_v1",array(
+              "challenge_answered_at"=>time()-60,
+              "last_notification_at"=>time()-30,
+              "last_notification_status"=>"verified",
+              "last_notification_hash"=>str_repeat("a",64),
+              "last_deleted_items"=>0,"last_deleted_creatives"=>0,"last_deleted_outputs"=>0,"last_error"=>""
+            ),false);
+            $a=get_option("ppar_provider_access_state_v1",array()); $a=is_array($a)?$a:array();
+            $a["ebay"]=array("status"=>"connected","last_checked"=>time(),"message"=>"E2E full compliance","updated_at"=>time());
+            update_option("ppar_provider_access_state_v1",$a,false);
+          ' --path=/tmp/wp
+          wp eval 'do_action("init");' --path=/tmp/wp
+          wp eval '$e=get_option("ppar_network_ebay_v1",array()); echo "EBAY_AFTER_INIT=".(!empty($e["enabled"])?"1":"0")."\n";' --path=/tmp/wp | tee /tmp/ebay-init.log
+          grep -Fx 'EBAY_AFTER_INIT=1' /tmp/ebay-init.log
+
+      - name: Restore live damage with historical AFF043 and prove final render
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/aff043_restore_probe.php" --path=/tmp/wp | tee /tmp/aff043.log
+          grep -Fx 'AFF043_LIVE_DAMAGE_RESTORE_PASS' /tmp/aff043.log
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp | tee /tmp/history.log
+          grep -Fx 'HISTORY_PROBE_PASS' /tmp/history.log
+          grep -Fx 'HISTORY_IDEALO_MODE=automatic' /tmp/history.log
+          grep -Fx 'HISTORY_EBAY_CONTROL=PASS' /tmp/history.log
+          echo FULL_130_AFF043_RESTORE_PASS
+
+      - name: Fresh package identity and protected frontend proof
+        run: |
+          set -euo pipefail
+          cd /tmp/candidate
+          zip -qr /tmp/AFFILIATE_ZENTRALE_V6.72.130_PLUS_AFF043_E2E_CANDIDATE.zip affiliate-portal-router
+          unzip -tq /tmp/AFFILIATE_ZENTRALE_V6.72.130_PLUS_AFF043_E2E_CANDIDATE.zip >/dev/null
+          sha256sum /tmp/AFFILIATE_ZENTRALE_V6.72.130_PLUS_AFF043_E2E_CANDIDATE.zip
+          sha256sum affiliate-portal-router/assets/frontend.css affiliate-portal-router/assets/frontend.js
