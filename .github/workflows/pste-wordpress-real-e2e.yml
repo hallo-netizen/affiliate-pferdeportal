@@ -69,6 +69,7 @@ jobs:
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/locktrace.patch"
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/driver-coordination-wait.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
+          python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php
           sed -i 's/Version: 0\.57\.0/Version: 0.57.2/' portal-seo-topic-engine.php
           sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.2');/" portal-seo-topic-engine.php
           grep -q 'Version: 0.57.2' portal-seo-topic-engine.php
