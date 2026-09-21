@@ -109,3 +109,19 @@ Evidence:
 Lokale Abnahme: Original-118-Fehlernachweis 12/12 PASS; Recovery statisch 55/55 PASS; Runtime 30/30 PASS; Banner-Mutationsprobe fail-closed PASS; PHP 21/21; Fresh-Unpack 26/26 byteidentisch.
 
 **Neue einzige operative NEXT ACTION:** genau den oben genannten SHA einmal installieren und anschließend die zuvor beschädigten realen Ausgaben visuell prüfen. Kein LIVE-PASS vor diesem Readback. Beide alten 6.72.118 bleiben gesperrt. Keine Featurearbeit.
+
+## Korrektur 21.09.2026 – vollständige Historie zuerst, kein weiterer Rateschuss
+
+Der Recovery-Zielvertrag wird um folgende verbindliche Arbeitsregel präzisiert; das fachliche Langfristziel bleibt unverändert:
+
+1. Vor jedem weiteren Recovery-Plugin ist die tatsächlich verwendete Paketkette ab dem letzten belastbaren 6.72.108-Verhalten vollständig zu vergleichen und im kompletten WordPress-/MariaDB-Workflow auszuführen.
+2. Maßgeblich ist der **erste exakt bewiesene** produkt-/eBay-wirksame Delta. Nur dieser Delta darf anschließend zurückgenommen werden.
+3. Kein Minifix aus einer vermuteten Ursache, kein Kombinieren mehrerer historischer Änderungen und keine neue Architektur.
+4. Produktkacheln, sichtbares Layout, Renderer, Frontend-CSS und Frontend-JS sind Recovery-Hardlocks. Sie dürfen nur geändert werden, wenn der vollständige Workflow ausgerechnet dort den ersten Fehler beweist. Bis dahin: nicht anfassen.
+5. Der Prüfweg muss mindestens binden:
+   `persistenter WordPress-Zustand -> Provider/Kampagne -> Zielbindung -> category_product_1..3 -> eBay/idealo-Auswahl -> render_affiliate_slot -> finales Produktkarten-HTML -> Template-is_real -> sichtbare Kategorie`.
+6. Positive und negative/fail-closed Fälle müssen im selben gebundenen Workflow laufen. Eine isolierte Methodenprobe oder ein synthetischer Zustand ist kein System-PASS.
+7. Eine temporäre GitHub-Ausführungsbranch darf nur Evidence/Hobbyraum sein. Sie ist weder Current-, Release- noch Source-Autorität und darf nicht als neue Produktwahrheit promoted werden.
+8. Kein neuer Installer und keine neue Versionsnummer, bevor der erste exakte Fehler in dieser vollständigen Kette belegt ist.
+
+Diese Ergänzung beschreibt ausschließlich den Recovery-Ziel-/Arbeitsvertrag. Aktueller Status, Blocker und NEXT ACTION werden weiterhin ausschließlich durch `control/release-governance/CURRENT_RELEASE.json` bestimmt.
