@@ -1,4 +1,18 @@
 <?php
+add_filter('query', static function($sql){
+    if (stripos((string)$sql, 'pste_research_driver_lock_v1') === false) return $sql;
+    $bt = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 12);
+    $frames = [];
+    foreach ($bt as $f) {
+        $fn = (isset($f['class']) ? $f['class'].'::' : '').($f['function'] ?? '');
+        $file = isset($f['file']) ? basename((string)$f['file']) : '';
+        $line = (int)($f['line'] ?? 0);
+        $frames[] = $fn.'@'.$file.':'.$line;
+    }
+    error_log('PSTE_LOCKSQL t='.sprintf('%.6f',microtime(true)).' pid='.getmypid().' uri='.(string)($_SERVER['REQUEST_URI']??'CLI').' sql_b64='.base64_encode((string)$sql).' bt_b64='.base64_encode(implode('>', $frames)));
+    return $sql;
+});
+
 /**
  * External-provider-only deterministic mock.
  * NEVER intercept localhost / WordPress loopback. Internal PSTE runs unmodified.
