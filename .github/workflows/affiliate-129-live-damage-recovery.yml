@@ -1,0 +1,118 @@
+name: Affiliate exact 129 live-damage recovery E2E
+
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-129-live-damage-recovery.yml'
+  workflow_dispatch:
+
+jobs:
+  exact-129-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Install wp-cli
+        run: |
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+
+      - name: Reconstruct exact 6.72.129
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v129 && mkdir -p /tmp/v129
+          base64 --decode e2e/history-fixtures/v6.72.108.zip.b64 > /tmp/v108.zip
+          unzip -q /tmp/v108.zip -d /tmp/v129
+          base64 --decode e2e/fixtures/v125_patch_exact.diff.gz.b64 | gzip -dc > /tmp/v125.abs.diff
+          sed -e 's#--- /mnt/data/v108_exact/#--- #g' -e 's#+++ /mnt/data/v125_exact/#+++ #g' /tmp/v125.abs.diff > /tmp/v125.rel.diff
+          cd /tmp/v129
+          patch -p0 < /tmp/v125.rel.diff
+          base64 --decode "$GITHUB_WORKSPACE/e2e/fixtures/v125_to_v129.patch.gz.b64" | gzip -dc > /tmp/v129.patch
+          patch -p1 < /tmp/v129.patch
+          mkdir -p affiliate-portal-router/recovery
+          cp "$GITHUB_WORKSPACE/e2e/fixtures/aff043-historical-product-state-20260915.json" affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json
+          test "$(sha256sum affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json | awk '{print $1}')" = "72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8"
+          grep -q "Version: 6.72.129" affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo V129_EXACT_RECONSTRUCTION_PASS
+
+      - name: Install WordPress and exact 129
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.de --title=Affiliate129 --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          cp -a /tmp/v129/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+
+      - name: Seed historical inventory and complete eBay control
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/office_pass_state.php" --path=/tmp/wp
+
+      - name: Reproduce exact live damage
+        env:
+          AFF_E2E_SCENARIO: live_damage
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp || true
+
+      - name: Run original AFF043 historical product-state restore
+        run: |
+          set -euo pipefail
+          wp option update ppar_aff043_historical_product_state_restore_v1 '{"schema":"1.0","status":"running","phase":"augment","cursor":0,"started_at":1,"started_by":1,"snapshot_sha256":"72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8","source_sha256":"","stats":{},"errors":{}}' --format=json --path=/tmp/wp >/dev/null
+          for i in $(seq 1 120); do
+            wp eval '$o=Pferdeportal_Affiliate_Router::instance();$o->run_aff043_recovery_worker();' --path=/tmp/wp >/dev/null
+            status=$(wp option get ppar_aff043_historical_product_state_restore_v1 --format=json --path=/tmp/wp | php -r '$j=json_decode(stream_get_contents(STDIN),true);echo $j["status"]??"";')
+            phase=$(wp option get ppar_aff043_historical_product_state_restore_v1 --format=json --path=/tmp/wp | php -r '$j=json_decode(stream_get_contents(STDIN),true);echo $j["phase"]??"";')
+            echo "AFF043_ITER=$i STATUS=$status PHASE=$phase"
+            if [ "$status" = "complete" ] || [ "$status" = "blocked" ]; then break; fi
+          done
+          wp option get ppar_aff043_historical_product_state_restore_v1 --format=json --path=/tmp/wp | tee /tmp/aff043-state.json
+          php -r '$j=json_decode(file_get_contents("/tmp/aff043-state.json"),true); if(($j["status"]??"")!=="complete"){fwrite(STDERR,"AFF043_NOT_COMPLETE\n");exit(1);}'
+
+      - name: Assert restored selection
+        run: |
+          set -euo pipefail
+          wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp | tee /tmp/restored-probe.log
+          grep -Fx 'HISTORY_EBAY_CONTROL=PASS' /tmp/restored-probe.log
+          grep -Fx 'HISTORY_IDEALO_MODE=automatic' /tmp/restored-probe.log
+          grep -q '"provider":"ebay"' /tmp/restored-probe.log
+          grep -q '"provider":"idealo"' /tmp/restored-probe.log
+
+      - name: Assert visible restored output
+        run: |
+          set -euo pipefail
+          echo '127.0.0.1 pferde-atelier.de' | sudo tee -a /etc/hosts >/dev/null
+          wp option update home 'http://pferde-atelier.de:8080' --path=/tmp/wp >/dev/null
+          wp option update siteurl 'http://pferde-atelier.de:8080' --path=/tmp/wp >/dev/null
+          wp server --host=127.0.0.1 --port=8080 --path=/tmp/wp >/tmp/wp-server.log 2>&1 &
+          for n in $(seq 1 30); do
+            if curl -fsS --noproxy '*' --max-time 2 'http://pferde-atelier.de:8080/' >/dev/null; then break; fi
+            sleep 1
+          done
+          AFF_E2E_BASE_URL='http://pferde-atelier.de:8080' NO_PROXY='*' no_proxy='*' python3 "$GITHUB_WORKSPACE/e2e/check_http.py" healthy | tee /tmp/restored-http.log
+          echo AFF043_VISIBLE_RECOVERY_PASS
