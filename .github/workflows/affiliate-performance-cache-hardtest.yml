@@ -1,0 +1,126 @@
+name: Affiliate Performance Cache Hardtest
+
+on:
+  push:
+    branches:
+      - affiliate-performance-cache-hardtest-20260921
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-cache/**'
+      - '.github/workflows/affiliate-performance-cache-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-wordpress-mariadb:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+          MARIADB_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli, pdo_mysql
+          coverage: none
+
+      - name: Build isolated cache candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="$GITHUB_WORKSPACE/release/affiliate-zentrale/current/affiliate-portal-router"
+          CAND="/tmp/affiliate-portal-router"
+          cp -a "$SRC" "$CAND"
+          python "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py" "$CAND"
+          export REPO_ROOT="$GITHUB_WORKSPACE"
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, os
+          src=Path(os.environ['REPO_ROOT'])/'release/affiliate-zentrale/current/affiliate-portal-router'
+          cand=Path('/tmp/affiliate-portal-router')
+          def h(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          a={p.relative_to(src).as_posix():h(p) for p in src.rglob('*') if p.is_file()}
+          b={p.relative_to(cand).as_posix():h(p) for p in cand.rglob('*') if p.is_file()}
+          changed=sorted(k for k in sorted(set(a)|set(b)) if a.get(k)!=b.get(k))
+          expected=sorted([
+            'includes/trait-ppar-control-contract.php',
+            'includes/trait-ppar-ebay-account-deletion.php',
+            'includes/trait-ppar-ebay.php',
+            'includes/trait-ppar-output-objects.php',
+          ])
+          print('CHANGED', changed)
+          if changed != expected:
+              raise SystemExit(f'unexpected diff scope: {changed}')
+          Path('/tmp/changed-files.txt').write_text('\n'.join(changed)+'\n')
+          PY
+          find "$CAND" -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.txt
+
+      - name: Existing banner behavior regression gate
+        run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+      - name: Install WP-CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          chmod +x /tmp/wp
+          sudo mv /tmp/wp /usr/local/bin/wp
+          wp --info
+
+      - name: Install WordPress 7.1.1 on MariaDB 10.11
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wordpress
+          wp core download --version=7.1.1 --path=/tmp/wordpress --allow-root
+          wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check --allow-root
+          wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8080 --title='Affiliate Cache CI' --admin_user=admin --admin_password='ci-admin-pass-123' --admin_email=ci@example.test --skip-email --allow-root
+          rm -rf /tmp/wordpress/wp-content/plugins/affiliate-portal-router
+          cp -a /tmp/affiliate-portal-router /tmp/wordpress/wp-content/plugins/affiliate-portal-router
+          mkdir -p /tmp/wordpress/wp-content/plugins/affiliate-performance-cache-realdb-gate
+          cp AFFILIATE_HOBBYRAUM/performance-cache/real_wordpress_mariadb_gate.php /tmp/wordpress/wp-content/plugins/affiliate-performance-cache-realdb-gate/affiliate-performance-cache-realdb-gate.php
+          wp plugin activate affiliate-portal-router affiliate-performance-cache-realdb-gate --path=/tmp/wordpress --allow-root
+
+      - name: Real frontend HTTP request against WordPress and MariaDB
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/wordpress
+          php -S 127.0.0.1:8080 > /tmp/php-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS 'http://127.0.0.1:8080/?ppar_perf_cache_gate=1' | tee /tmp/performance-cache-result.txt
+          grep -q 'REAL_WORDPRESS_MARIADB_PERFORMANCE_CACHE_PASS' /tmp/performance-cache-result.txt
+
+      - name: Upload hardtest evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-performance-cache-hardtest
+          path: |
+            /tmp/performance-cache-result.txt
+            /tmp/php-server.log
+            /tmp/changed-files.txt
+            /tmp/php-lint.txt
+          if-no-files-found: warn
