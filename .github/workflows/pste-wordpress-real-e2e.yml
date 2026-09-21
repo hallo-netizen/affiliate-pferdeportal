@@ -219,6 +219,10 @@ jobs:
           curl -fsS -b /tmp/pste-cookies.txt 'http://127.0.0.1:8090/wp-admin/admin.php?page=portal-seo-topic-engine-settings' >/tmp/settings-stale-race.html
           node proof/pste-wordpress-real-e2e/prove-stale-browser-status.js /tmp/settings-stale-race.html
 
+      - name: Stress one real breadth family through multi-request PREPARE
+        shell: bash
+        run: bash proof/pste-wordpress-real-e2e/prove-stress-prepare.sh
+
       - name: Positive production wave 40 through real admin-ajax and real loopbacks
         shell: bash
         run: |
@@ -281,6 +285,9 @@ jobs:
             /tmp/single-start.json
             /tmp/single-status.json
             /tmp/verify-single.json
+            /tmp/stress-breadth-start.json
+            /tmp/stress-prepare-intermediate.json
+            /tmp/stress-breadth-final.json
             /tmp/breadth-start.json
             /tmp/breadth-stale-status.json
             /tmp/breadth-current-status-after-stale.json
