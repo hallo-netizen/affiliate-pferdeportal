@@ -84,7 +84,9 @@ jobs:
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
           zip -qr /tmp/PSTE-0.57.2-HOBBYROOM.zip "Portal SEO Topic Engine"
+          echo PACKAGE_ZIP_BUILT
           test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          echo PACKAGE_ROOT_PASS
           test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
           test "$(unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
           unzip -Z1 /tmp/PSTE-0.57.2-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
