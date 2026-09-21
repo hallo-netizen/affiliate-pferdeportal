@@ -1,0 +1,333 @@
+--- a/pferdeportal-affiliate-router.php	2026-09-19 16:40:03.000000000 +0000
++++ b/pferdeportal-affiliate-router.php	2026-09-20 09:33:47.000000000 +0000
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.72.108
++ * Version: 6.72.119
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -45,7 +45,7 @@
+     use PPAR_Idealo_Trait;
+     use PPAR_Digistore24_Trait;
+     use PPAR_Housekeeping_Trait;
+-    const VERSION = '6.72.108';
++    const VERSION = '6.72.119';
+     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+@@ -107,6 +107,8 @@
+     const OPTION_PORTAL_REGISTRY = 'ppar_portal_registry_v1';
+     const OPTION_NETWORK_EBAY = 'ppar_network_ebay_v1';
+     const OPTION_NETWORK_IDEALO = 'ppar_network_idealo_v1';
++    const OPTION_V672119_RECOVERY = 'ppar_v672119_visibility_restore_v1';
++    const V672119_RECOVERY_HOOK = 'ppar_v672119_visibility_restore_worker';
+     const OPTION_EBAY_SCHEMA_VERSION = 'ppar_ebay_schema_version';
+     const OPTION_EBAY_SYNC_JOB = 'ppar_ebay_sync_job_v1';
+     const OPTION_EBAY_REFRESH_JOB = 'ppar_ebay_refresh_job_v1';
+@@ -192,7 +194,10 @@
+     }
+ 
+     private function __construct() {
++        $this->prepare_v672119_schema_guard();
+         $this->idealo_register_hooks();
++        add_action('init', array($this, 'maybe_restore_v672119_visibility'), 6);
++        add_action(self::V672119_RECOVERY_HOOK, array($this, 'run_v672119_visibility_worker'));
+         $this->digistore24_register_hooks();
+         add_action('init', array($this, 'register_campaign_post_type'), 5);
+         add_action('init', array($this, 'register_shortcodes'));
+@@ -1293,6 +1298,325 @@
+      * products in every article. Enable it once on upgrade, queue the plans, and
+      * then respect any later explicit administrator change normally.
+      */
++    /**
++     * V6.72.119 – KISS emergency restore on the exact 6.72.108 codebase.
++     *
++     * This is deliberately a state repair, not a feature change. It accepts the
++     * original 6.72.115/116/117 evidence OR either already-attempted 6.72.118
++     * recovery marker, so an earlier recovery cannot erase the proof required by
++     * the next one.
++     */
++    private function v672119_incident_evidence() {
++        $restore118 = get_option('ppar_v672118_restore_108_state_v1', array());
++        $product118 = get_option('ppar_v672118_product_state_recovery_v1', array());
++        return array(
++            'v115' => (string) get_option('ppar_multiprovider_category_repair_v672115', '') === '1',
++            'v116' => (string) get_option('ppar_v672115_article_revision_recovery_v1', '') === '1',
++            'v117' => (string) get_option('ppar_v672117_product_visibility_recovery_v1', '') === '1',
++            'v118_restore' => is_array($restore118) && !empty($restore118),
++            'v118_product' => is_array($product118) && !empty($product118),
++        );
++    }
++
++    private function v672119_incident_proven($evidence) {
++        foreach ((array) $evidence as $value) {
++            if ($value) { return true; }
++        }
++        return false;
++    }
++
++    private function prepare_v672119_schema_guard() {
++        $evidence = $this->v672119_incident_evidence();
++        if (!$this->v672119_incident_proven($evidence)) { return; }
++        if ((string) get_option(self::OPTION_CREATIVE_LIBRARY_SCHEMA_VERSION, '') === '3.1') {
++            update_option(self::OPTION_CREATIVE_LIBRARY_SCHEMA_VERSION, self::CREATIVE_LIBRARY_SCHEMA_VERSION, false);
++        }
++    }
++
++    private function v672119_stop_only_118_full_rebuild() {
++        $state = get_option(self::OPTION_ARTICLE_REBUILD_STATE, array());
++        $state = is_array($state) ? $state : array();
++        if (sanitize_key((string) ($state['status'] ?? '')) !== 'running'
++            || (string) ($state['reason'] ?? '') !== 'v672118_restore_exact_672108_runtime') {
++            return false;
++        }
++        $state['status'] = 'superseded_recovery';
++        $state['completed_at'] = time();
++        update_option(self::OPTION_ARTICLE_REBUILD_STATE, $state, false);
++        if (function_exists('wp_clear_scheduled_hook')) {
++            wp_clear_scheduled_hook(self::ARTICLE_REBUILD_HOOK);
++        }
++        return true;
++    }
++
++    private function v672119_restore_awin_destination_state() {
++        global $wpdb;
++        $table = $this->creative_library_table();
++        if (!is_object($wpdb) || empty($table) || !method_exists($wpdb, 'get_results') || !method_exists($wpdb, 'update')) {
++            return array('scanned'=>0, 'changed'=>0);
++        }
++        $rows = $wpdb->get_results("SELECT id, tracking_url, destination_url, payload FROM {$table} WHERE provider='awin' AND creative_type='banner' AND payload LIKE '%\"_destination_state\"%'", ARRAY_A);
++        $scanned = 0; $changed = 0;
++        foreach ((array) $rows as $row) {
++            $scanned++;
++            $payload = json_decode((string) ($row['payload'] ?? ''), true);
++            if (!is_array($payload)) { continue; }
++            $state = sanitize_key((string) ($payload['_destination_state'] ?? ''));
++            $update = array();
++            if ($state === 'resolved') {
++                $tracking = esc_url_raw((string) ($row['tracking_url'] ?? ''));
++                if ($tracking !== '' && wp_http_validate_url($tracking)) {
++                    $update['destination_url'] = $tracking;
++                }
++            }
++            unset($payload['_destination_state'], $payload['_destination_checked_at'], $payload['_destination_error']);
++            $update['payload'] = wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
++            if ($wpdb->update($table, $update, array('id'=>absint($row['id']))) !== false) { $changed++; }
++        }
++        return array('scanned'=>$scanned, 'changed'=>$changed);
++    }
++
++    private function v672119_repair_article_products_only($post_id) {
++        $post_id = absint($post_id);
++        $post = get_post($post_id);
++        if (!$post || $post->post_type !== 'post' || $post->post_status !== 'publish') {
++            return new WP_Error('invalid_post', 'Kein veröffentlichter Beitrag.');
++        }
++        $stored_plan = get_post_meta($post_id, self::ARTICLE_PLAN_META, true);
++        if (!is_array($stored_plan) || empty($stored_plan)) {
++            return array('status'=>'skipped_no_plan', 'count'=>0);
++        }
++        $plan = wp_parse_args($stored_plan, $this->article_plan_default());
++        $banner_before = wp_json_encode(array(
++            'banner'=>$plan['banner'] ?? array(),
++            'banner_2'=>$plan['banner_2'] ?? array(),
++        ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
++
++        $context = $this->get_content_context($post_id);
++        $reports = array();
++        $product_ids = array();
++        $seen = array();
++        $selected_titles = array();
++        $exact_requirements = $this->article_plan_exact_product_requirements($post_id, $context);
++
++        if ($exact_requirements) {
++            foreach ($exact_requirements as $requirement) {
++                if (count($product_ids) >= 3) { break; }
++                $identifiers = (array) ($requirement['identifiers'] ?? array());
++                if (!$identifiers) {
++                    $reports[] = array(
++                        'campaign_post_id'=>0,
++                        'name'=>sanitize_text_field((string) ($requirement['subject_id'] ?? '')),
++                        'overall'=>'fail',
++                        'checks'=>array('exact_identity'=>'fail'),
++                        'specificity'=>0,
++                        'reason'=>'Exact-Product-Anforderung besitzt keine belastbare Kennung; kein Ersatzprodukt erlaubt.',
++                    );
++                    continue;
++                }
++                $exact_context = $context;
++                $exact_context['exact_product_identifiers'] = $identifiers;
++                $matched = false;
++                foreach ($this->ranked_campaigns_for_slot($exact_context, 'post_bottom_products') as $candidate) {
++                    $campaign = $candidate['campaign'] ?? null;
++                    if (!is_array($campaign)) { continue; }
++                    $report = $this->article_product_quality_report($campaign, $exact_context, $candidate);
++                    $report['checks']['exact_identity'] = 'pass';
++                    $reports[] = $report;
++                    if ($report['overall'] !== 'pass') { continue; }
++                    $dedupe = $this->article_plan_product_dedupe_key($campaign);
++                    if ($dedupe === 'title:' || isset($seen[$dedupe]) || $this->article_plan_product_title_is_near_duplicate($campaign, $selected_titles)) { continue; }
++                    $seen[$dedupe] = true;
++                    $selected_titles[] = $this->article_plan_product_title_key($campaign);
++                    $product_ids[] = absint($campaign['post_id'] ?? 0);
++                    $matched = true;
++                    break;
++                }
++                if (!$matched) {
++                    $reports[] = array(
++                        'campaign_post_id'=>0,
++                        'name'=>sanitize_text_field((string) ($requirement['subject_id'] ?? '')),
++                        'overall'=>'fail',
++                        'checks'=>array('exact_identity'=>'fail'),
++                        'specificity'=>0,
++                        'reason'=>'Kein exakt angefordertes Produkt besteht die Produktqualitätsprüfung.',
++                    );
++                }
++            }
++        } else {
++            foreach ($this->ranked_campaigns_for_slot($context, 'post_bottom_products') as $candidate) {
++                if (count($product_ids) >= 3) { break; }
++                $campaign = $candidate['campaign'] ?? null;
++                if (!is_array($campaign)) { continue; }
++                $report = $this->article_product_quality_report($campaign, $context, $candidate);
++                $reports[] = $report;
++                if ($report['overall'] !== 'pass') { continue; }
++                $dedupe = $this->article_plan_product_dedupe_key($campaign);
++                if ($dedupe === 'title:' || isset($seen[$dedupe]) || $this->article_plan_product_title_is_near_duplicate($campaign, $selected_titles)) { continue; }
++                $seen[$dedupe] = true;
++                $selected_titles[] = $this->article_plan_product_title_key($campaign);
++                $product_ids[] = absint($campaign['post_id'] ?? 0);
++            }
++        }
++        $product_ids = array_values(array_filter(array_unique(array_map('absint', $product_ids))));
++        $plan['products'] = array_slice($product_ids, 0, 3);
++        $plan['status'] = $product_ids ? 'ready' : 'products_none';
++        $plan['product_reports'] = $reports;
++
++        $banner_after = wp_json_encode(array(
++            'banner'=>$plan['banner'] ?? array(),
++            'banner_2'=>$plan['banner_2'] ?? array(),
++        ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
++        if (!hash_equals(hash('sha256', (string) $banner_before), hash('sha256', (string) $banner_after))) {
++            return new WP_Error('banner_mutation_blocked', 'Recovery darf Bannerfelder nicht verändern.');
++        }
++        update_post_meta($post_id, self::ARTICLE_PLAN_META, $plan);
++        return array('status'=>$plan['status'], 'count'=>count($plan['products']));
++    }
++
++    private function v672119_post_ids_after($cursor, $limit=10) {
++        global $wpdb;
++        $cursor = absint($cursor);
++        $limit = max(1, min(10, absint($limit)));
++        return array_map('absint', (array) $wpdb->get_col($wpdb->prepare(
++            "SELECT p.ID FROM {$wpdb->posts} p INNER JOIN {$wpdb->postmeta} pm ON pm.post_id=p.ID AND pm.meta_key=%s
++             WHERE p.post_type='post' AND p.post_status='publish' AND p.ID>%d ORDER BY p.ID ASC LIMIT %d",
++            self::ARTICLE_PLAN_META, $cursor, $limit
++        )));
++    }
++
++    public function run_v672119_visibility_worker() {
++        $state = get_option(self::OPTION_V672119_RECOVERY, array());
++        $state = is_array($state) ? $state : array();
++        if (sanitize_key((string) ($state['status'] ?? '')) !== 'running') { return $state; }
++
++        $ids = $this->v672119_post_ids_after(absint($state['cursor'] ?? 0), 10);
++        foreach ($ids as $post_id) {
++            $state['cursor'] = max(absint($state['cursor'] ?? 0), absint($post_id));
++            $state['scanned'] = absint($state['scanned'] ?? 0) + 1;
++            $result = $this->v672119_repair_article_products_only($post_id);
++            if (is_wp_error($result)) {
++                $state['errors'] = absint($state['errors'] ?? 0) + 1;
++                continue;
++            }
++            if (($result['status'] ?? '') === 'skipped_no_plan') {
++                $state['skipped_no_plan'] = absint($state['skipped_no_plan'] ?? 0) + 1;
++                continue;
++            }
++            $state['repaired'] = absint($state['repaired'] ?? 0) + 1;
++            if (($result['status'] ?? '') === 'ready') { $state['products_ready'] = absint($state['products_ready'] ?? 0) + 1; }
++            else { $state['products_none'] = absint($state['products_none'] ?? 0) + 1; }
++        }
++
++        if (count($ids) < 10) {
++            $state['status'] = absint($state['errors'] ?? 0) > 0 ? 'failed' : 'complete';
++            $state['completed_at'] = time();
++        } else {
++            $state['last_at'] = time();
++        }
++        update_option(self::OPTION_V672119_RECOVERY, $state, false);
++        if (($state['status'] ?? '') === 'running' && function_exists('wp_schedule_single_event')) {
++            if (!function_exists('wp_next_scheduled') || !wp_next_scheduled(self::V672119_RECOVERY_HOOK)) {
++                wp_schedule_single_event(time() + 5, self::V672119_RECOVERY_HOOK);
++            }
++        }
++        return $state;
++    }
++
++    public function maybe_restore_v672119_visibility() {
++        $state = get_option(self::OPTION_V672119_RECOVERY, array());
++        $state = is_array($state) ? $state : array();
++        $status = sanitize_key((string) ($state['status'] ?? ''));
++        if ($status === 'complete' || $status === 'not_applicable' || $status === 'failed') { return false; }
++        if ($status === 'running') {
++            $this->run_v672119_visibility_worker();
++            return true;
++        }
++
++        $evidence = $this->v672119_incident_evidence();
++        if (!$this->v672119_incident_proven($evidence)) {
++            update_option(self::OPTION_V672119_RECOVERY, array(
++                'status'=>'not_applicable', 'checked_at'=>time(), 'evidence'=>$evidence,
++            ), false);
++            return false;
++        }
++
++        $stopped_118_rebuild = $this->v672119_stop_only_118_full_rebuild();
++        if (function_exists('wp_clear_scheduled_hook')) {
++            wp_clear_scheduled_hook('ppar_v672118_product_state_recovery_worker');
++        }
++        $creative_restore = $this->v672119_restore_awin_destination_state();
++        update_option(self::OPTION_CREATIVE_LIBRARY_SCHEMA_VERSION, self::CREATIVE_LIBRARY_SCHEMA_VERSION, false);
++
++        $settings = get_option(self::OPTION_NETWORK_IDEALO, array());
++        $settings = is_array($settings) ? $settings : array();
++        $mode = method_exists($this, 'idealo_sanitize_output_mode')
++            ? $this->idealo_sanitize_output_mode($settings['output_mode'] ?? 'ebay_only')
++            : sanitize_key((string) ($settings['output_mode'] ?? 'ebay_only'));
++        $mode_changed = false;
++        if (!empty($settings['enabled']) && $mode === 'idealo_only') {
++            $settings['output_mode'] = 'automatic';
++            update_option(self::OPTION_NETWORK_IDEALO, $settings, false);
++            $mode = 'automatic';
++            $mode_changed = true;
++        }
++        if (!empty($settings['enabled']) && $mode === 'automatic' && method_exists($this, 'idealo_sync_campaign_activation')) {
++            $this->idealo_sync_campaign_activation();
++        }
++
++        $state = array(
++            'status'=>'running', 'started_at'=>time(), 'completed_at'=>0,
++            'cursor'=>0, 'scanned'=>0, 'repaired'=>0, 'skipped_no_plan'=>0, 'products_ready'=>0,
++            'products_none'=>0, 'errors'=>0, 'evidence'=>$evidence,
++            'observed_mode'=>$mode, 'mode_changed'=>$mode_changed ? 1 : 0,
++            'stopped_118_full_rebuild'=>$stopped_118_rebuild ? 1 : 0,
++            'creative_restore'=>$creative_restore, 'banner_fields_written'=>0,
++        );
++        update_option(self::OPTION_V672119_RECOVERY, $state, false);
++        $this->run_v672119_visibility_worker();
++        return true;
++    }
++
+     public function maybe_apply_article_products_upgrade() {
+         $done = (string) get_option(self::OPTION_ARTICLE_PRODUCTS_UPGRADE, '');
+         if ($done === '6.36.0') { return false; }
+--- a/readme.txt	2026-09-19 16:40:03.000000000 +0000
++++ b/readme.txt	2026-09-20 09:32:44.000000000 +0000
+@@ -1,3 +1,4 @@
++V6.72.119 KISS EMERGENCY RESTORE: Fachcode exakt 6.72.108. Repariert die belegte 6.72.115-118 Sichtbarkeitskette auch dann, wenn ein frueherer 6.72.118-Versuch die 115/117-Marker bereits entfernt hat. 6.72.117-idealo_only wird nur im belegten Incident auf automatic zurueckgesetzt; andere gueltige manuelle Modi bleiben unangetastet. Awin-Zielauflosungsfelder aus 6.72.114 werden auf 6.72.108-Semantik zurueckgefuehrt. Ein noch laufender Voll-Rebuild wird nur dann gestoppt, wenn sein Grund exakt der erste 6.72.118-Recoverylauf ist. Bestehende Artikelplaene erhalten nur neu berechnete Produktteile; Banner und Banner_2 bleiben bytegleich. Recovery laeuft in kleinen Paketen bei normalen Requests weiter und haengt nicht ausschliesslich an WP-Cron. Keine neue Fachlogik, keine Inventarloeschung, kein globaler Revisionssprung und kein neuer Voll-Rebuild.
+ V6.72.108 AWIN PARTNER-DROPDOWN ROOTFIX: Die in 6.72.107 bereits korrekt zusammengefuehrte Cleos-/Awin-Partnerliste wird im Sammelimport jetzt auch sichtbar an die vorausgefuellten Partnerdaten gebunden: der tatsaechlich geladene Partner ist im Dropdown 'Aufgenommener Partner' selected. Keine Partnerdaten-, Creative-, Ausspiel-, Journal-, Glossar-, Rassen-, Kategorie-, Produkt- oder Layoutlogik geaendert.
+ V6.72.107 AWIN PARTNER-SICHTBARKEIT: Banner & Werbemittel verwendet fuer die Partnerauswahl jetzt neben bestehenden Partneraufnahme-Snapshots auch die aktuell synchronisierten joined-Awin-Programme. Das bestehende Cleos-Verhalten bleibt Autoritaet: vorhandene Snapshots gewinnen; neue Awin-Programme werden nur als fehlende Partnerauswahl ergaenzt. Keine Creative-, Ausspiel-, Journal-, Glossar-, Rassen-, Kategorie- oder Layoutlogik geaendert.
+ V6.72.106 AWIN TRANSPORT ROOTFIX ON LIVE-PASS 6.72.104 BASE: Nur der Awin-Programmlisten-Transport wurde geändert: relationship=joined + OAuth2 Bearer; HTTP-/JSON-Fehler bleiben fail-closed und erhalten Last-Known-Good. Sämtliche Journal-/Glossar-/Rassen-/Kategorie-/Produkt-/Layoutlogik aus 6.72.104 bleibt unverändert.
