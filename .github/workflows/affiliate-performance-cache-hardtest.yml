@@ -35,14 +35,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          diff -qr release/affiliate-zentrale/current/affiliate-portal-router /tmp/affiliate-perf/affiliate-portal-router             | sed -E 's#^Files .*/affiliate-portal-router/([^ ]+) and .* differ$#\1#'             | sort > /tmp/changed.txt
-          cat >/tmp/expected.txt <<'EOF'
-          includes/trait-ppar-control-contract.php
-          includes/trait-ppar-ebay-account-deletion.php
-          includes/trait-ppar-ebay.php
-          includes/trait-ppar-output-objects.php
-          EOF
-          diff -u /tmp/expected.txt /tmp/changed.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base = Path('release/affiliate-zentrale/current/affiliate-portal-router')
+          work = Path('/tmp/affiliate-perf/affiliate-portal-router')
+          def digest(p):
+              return hashlib.sha256(p.read_bytes()).hexdigest()
+          rels = sorted(set(
+              [p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()] +
+              [p.relative_to(work).as_posix() for p in work.rglob('*') if p.is_file()]
+          ))
+          changed = [r for r in rels if not (base/r).is_file() or not (work/r).is_file() or digest(base/r) != digest(work/r)]
+          expected = sorted([
+              'includes/trait-ppar-control-contract.php',
+              'includes/trait-ppar-ebay-account-deletion.php',
+              'includes/trait-ppar-ebay.php',
+              'includes/trait-ppar-output-objects.php',
+          ])
+          print('CHANGED', changed)
+          if changed != expected:
+              raise SystemExit(f'FAIL unexpected patch scope: {changed}')
+          print('PASS patch scope limited to four read/cache paths')
+          PY
 
       - name: PHP syntax all plugin files
         shell: bash
