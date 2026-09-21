@@ -82,10 +82,18 @@ jobs:
           C=/tmp/pste05701/base/portal-seo-topic-engine/includes
           for target in proc retry; do
             mkdir -p "/tmp/pste05701/proof/$target/plugin/includes"
-            cp "$C/class-pste-research-archive.php" "/tmp/pste05701/proof/$target/plugin/includes/"
-            cp "$C/class-pste-research-job.php" "/tmp/pste05701/proof/$target/plugin/includes/"
-            cp "$C/class-pste-breadth-research-queue.php" "/tmp/pste05701/proof/$target/plugin/includes/"
-            cp "$C/class-pste-research-driver.php" "/tmp/pste05701/proof/$target/plugin/includes/"
+            for f in \
+              class-pste-research-archive.php \
+              class-pste-research-job.php \
+              class-pste-breadth-research-queue.php \
+              class-pste-research-driver.php \
+              class-pste-repository.php \
+              class-pste-normal-metadata-path.php \
+              class-pste-planning-readiness-gate.php \
+              class-pste-topic-policy.php
+            do
+              cp "$C/$f" "/tmp/pste05701/proof/$target/plugin/includes/"
+            done
           done
           cp "$C/class-pste-dataforseo-client.php" /tmp/pste05701/proof/retry/plugin/includes/
 
