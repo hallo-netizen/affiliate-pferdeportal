@@ -86,6 +86,10 @@ jobs:
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
           cp "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/dataforseo-mock.php" /tmp/wordpress/wp-content/mu-plugins/pste-dataforseo-e2e.php
 
+      - name: Prove strict serial driver positive and negative
+        shell: bash
+        run: bash proof/pste-wordpress-real-e2e/prove-strict-serial-driver.sh
+
       - name: Seed exact real portal state through plugin code
         shell: bash
         run: |
