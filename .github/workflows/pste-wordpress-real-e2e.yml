@@ -66,7 +66,7 @@ jobs:
           cd /tmp/pste-candidate/portal-seo-topic-engine
           patch -p1 < /tmp/pste-proof/pste-05701-step-retry.patch
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/empty-sandbox-migration.patch"
-          patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/locktrace.patch"
+          patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/atomic-lock-rootfix.patch"
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/driver-coordination-wait.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php
