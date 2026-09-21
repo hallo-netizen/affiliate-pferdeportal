@@ -111,3 +111,11 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Evidence Artifact: `10659823699`, Digest `sha256:f5da0cc4dde3cc5de1eed0ae64f6381f574f676b0792912c4082f015da2ff171`.
 - Exakt getestete Plugin-ZIP: `PSTE-0.57.4-HOBBYROOM.zip`, SHA-256 `8695cc5514d19805db8025db7b92097493ed4a2218a0a71c87b090bf7ee0461c`.
 - Status: Hobbyraum-PASS. Echter Nutzer-Live-PASS mit exakt diesen Bytes bleibt offen; keine PPA-005-Promotion vorher.
+
+
+### Finaler Nachlauf derselben 0.57.4-Produktbytes
+- Nach dem ersten vollständigen Stress-PASS wurde ausschließlich das Proof-Skript fail-fast gehärtet; kein Produktcode geändert.
+- Finaler Real-WordPress-E2E: Run `35646020136` — SUCCESS.
+- Finales Evidence Artifact: `10659844649`, Digest `sha256:76ca13601f85aba81fabd1eaa311fd20f6607264b4c18a0496aef3be055a0967`.
+- Final exakt getestete ZIP: SHA-256 `ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3`.
+- Die frühere 0.57.4-PASS-ZIP `8695cc55...` ist als Installationskandidat überholt; für den Live-Test gilt ausschließlich `ae4fde45...`.
