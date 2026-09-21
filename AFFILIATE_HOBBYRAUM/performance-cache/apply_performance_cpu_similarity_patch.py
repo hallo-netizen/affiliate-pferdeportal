@@ -35,35 +35,50 @@ rep(Path('includes/trait-ppar-ebay.php'),
             if (!isset($freq[$char])) { $freq[$char] = 0; }
             $freq[$char]++;
         }
+        asort($freq, SORT_NUMERIC);
         return $this->ebay_topic_similarity_signature_cache[$value] = array('length'=>$length, 'freq'=>$freq);
     }
 
-    private function ebay_topic_titles_duplicate_v672146($title, $known) {
+    private function ebay_topic_titles_duplicate_v672146($title, $known, $title_signature = null, $known_signature = null) {
         $title = (string) $title;
         $known = (string) $known;
         if ($title === '' || $known === '') { return false; }
         if ($title === $known) { return true; }
-        $a = $this->ebay_topic_similarity_signature($title);
-        $b = $this->ebay_topic_similarity_signature($known);
-        $la = absint($a['length'] ?? 0);
-        $lb = absint($b['length'] ?? 0);
+        $a = is_array($title_signature) ? $title_signature : $this->ebay_topic_similarity_signature($title);
+        $b = is_array($known_signature) ? $known_signature : $this->ebay_topic_similarity_signature($known);
+        $la = (int) ($a['length'] ?? 0);
+        $lb = (int) ($b['length'] ?? 0);
         if ($la <= 0 || $lb <= 0) { return false; }
+        $sum_len = $la + $lb;
         $min_len = min($la, $lb);
-        if ((200.0 * $min_len / ($la + $lb)) < 92.0) { return false; }
+        if ((50 * $min_len) < (23 * $sum_len)) { return false; }
         $fa = is_array($a['freq'] ?? null) ? $a['freq'] : array();
         $fb = is_array($b['freq'] ?? null) ? $b['freq'] : array();
-        if (count($fa) > count($fb)) { $tmp=$fa; $fa=$fb; $fb=$tmp; }
+        $remaining = $la;
+        if (count($fa) > count($fb)) {
+            $tmp=$fa; $fa=$fb; $fb=$tmp;
+            $remaining = $lb;
+        }
+        $required_common = intdiv((23 * $sum_len) + 49, 50);
         $common = 0;
         foreach ($fa as $char=>$count) {
-            if (isset($fb[$char])) { $common += min(absint($count), absint($fb[$char])); }
+            $count = (int) $count;
+            $remaining -= $count;
+            if (isset($fb[$char])) { $common += min($count, (int) $fb[$char]); }
+            if (($common + $remaining) < $required_common) { return false; }
         }
-        if ((200.0 * $common / ($la + $lb)) < 92.0) { return false; }
+        if ($common < $required_common) { return false; }
         similar_text($title, $known, $pct);
         return $pct >= 92.0;
     }
 
 """,
 'ebay exact-safe similarity prefilter')
+
+rep(Path('includes/trait-ppar-ebay.php'),
+"$out = array(); $deferred = array(); $seen_sellers = array(); $seen_titles = array();",
+"$out = array(); $deferred = array(); $seen_sellers = array(); $seen_titles = array(); $seen_title_signatures = array();",
+'ebay seen-title signature list')
 
 oldloop="""            $duplicate = false;
             foreach ($seen_titles as $known) {
@@ -72,10 +87,18 @@ oldloop="""            $duplicate = false;
                 if ($pct >= 92.0) { $duplicate = true; break; }
             }
 """
-newloop="""            $duplicate = false;
-            foreach ($seen_titles as $known) {
-                if ($this->ebay_topic_titles_duplicate_v672146($title, $known)) { $duplicate = true; break; }
+newloop="""            $title_signature = $title !== '' ? $this->ebay_topic_similarity_signature($title) : null;
+            $duplicate = false;
+            foreach ($seen_titles as $known_index => $known) {
+                $known_signature = $seen_title_signatures[$known_index] ?? null;
+                if ($this->ebay_topic_titles_duplicate_v672146($title, $known, $title_signature, $known_signature)) { $duplicate = true; break; }
             }
 """
 rep(Path('includes/trait-ppar-ebay.php'),oldloop,newloop,'both quadratic similar_text loops',2)
+
+rep(Path('includes/trait-ppar-ebay.php'),
+"if ($title !== '') { $seen_titles[] = $title; }",
+"if ($title !== '') { $seen_titles[] = $title; $seen_title_signatures[] = $title_signature; }",
+'ebay retain signatures beside accepted titles',2)
+
 print('PERFORMANCE_CPU_SIMILARITY_PATCH_PASS')
