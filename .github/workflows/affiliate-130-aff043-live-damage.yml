@@ -47,7 +47,7 @@ jobs:
           base64 --decode e2e/fixtures/aff043_into_130.patch.gz.b64 | gzip -dc >/tmp/aff043.patch
           (
             cd /tmp/candidate/affiliate-portal-router
-            patch -p4 </tmp/aff043.patch
+            patch -p5 </tmp/aff043.patch
           )
           mkdir -p /tmp/candidate/affiliate-portal-router/recovery
           base64 --decode e2e/fixtures/aff043-historical-product-state-20260915.json.gz.b64 | gzip -dc > /tmp/candidate/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json
