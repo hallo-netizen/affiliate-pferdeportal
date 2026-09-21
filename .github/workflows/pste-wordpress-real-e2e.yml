@@ -71,7 +71,7 @@ jobs:
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/driver-coordination-wait.patch"
           patch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/stale-status-browser-fix.patch"
           cat "$GITHUB_WORKSPACE"/proof/pste-wordpress-real-e2e/pste0574-bounded-prepare-live-ui.patch.gz.b64.part* | base64 -d | gzip -d > /tmp/pste0574-bounded-prepare-live-ui.patch
-          patch -p1 < /tmp/pste0574-bounded-prepare-live-ui.patch
+          patch --no-backup-if-mismatch -p1 < /tmp/pste0574-bounded-prepare-live-ui.patch
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
           sed -i 's/Version: 0\.57\.0/Version: 0.57.4/' portal-seo-topic-engine.php
