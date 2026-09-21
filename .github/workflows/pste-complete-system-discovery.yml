@@ -80,3 +80,20 @@ jobs:
           grep -RIn -E 'plan_slot|READY|PSTE|handoff|compile|generation|retention|production_plan' /tmp/pserc --include='*.php' || true
           echo "=== PSERC TESTS ==="
           find /tmp/pserc -type f | grep -Ei 'test|workflow|fixture' || true
+
+      - name: Inspect exact inner PSERC compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          inner="$(find /tmp/pserc -type f -name 'portal-seo-editorial-plan-compiler_*.zip' | head -1)"
+          test -n "$inner"
+          sha256sum "$inner"
+          rm -rf /tmp/pserc-inner
+          mkdir -p /tmp/pserc-inner
+          unzip -q "$inner" -d /tmp/pserc-inner
+          echo "=== INNER PSERC FILES ==="
+          find /tmp/pserc-inner -type f | sort | sed -n '1,1600p'
+          echo "=== INNER PSERC SYMBOLS ==="
+          grep -RIn -E 'plan_slot|plan_slot_sha256|READY|PSTE|handoff|compile|generation|retention|production_plan|canonical_article' /tmp/pserc-inner --include='*.php' || true
+          echo "=== INNER PSERC TESTS ==="
+          find /tmp/pserc-inner -type f | grep -Ei 'test|workflow|fixture' || true
