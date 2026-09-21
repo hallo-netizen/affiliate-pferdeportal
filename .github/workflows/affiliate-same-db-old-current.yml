@@ -1,0 +1,116 @@
+name: Affiliate same DB old vs current proof
+
+on:
+  push:
+    branches: [affiliate-e2e-repro-20260920]
+    paths:
+      - '.github/workflows/affiliate-same-db-old-current.yml'
+      - 'e2e/state_ab_probe.php'
+  workflow_dispatch:
+
+jobs:
+  same-db-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wp
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Build exact 6.72.131 candidate
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base130 /tmp/candidate131
+          mkdir -p /tmp/base130 /tmp/candidate131
+          unzip -q e2e/fixtures/AFFILIATE_ZENTRALE_V6.72.130_EXACT.zip -d /tmp/base130
+          cp -a /tmp/base130/affiliate-portal-router /tmp/candidate131/
+          base64 --decode e2e/fixtures/aff043_into_130.patch.gz.b64 | gzip -dc >/tmp/aff043.patch
+          (cd /tmp/candidate131/affiliate-portal-router && patch -p5 </tmp/aff043.patch)
+          mkdir -p /tmp/candidate131/affiliate-portal-router/recovery
+          base64 --decode e2e/fixtures/aff043-historical-product-state-20260915.json.gz.b64 | gzip -dc > /tmp/candidate131/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json
+          sed -i "s/Version: 6.72.130/Version: 6.72.131/" /tmp/candidate131/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i "s/const VERSION = '6.72.130';/const VERSION = '6.72.131';/" /tmp/candidate131/affiliate-portal-router/pferdeportal-affiliate-router.php
+          sed -i '1s/^V6\.72\.130 /V6.72.131 /' /tmp/candidate131/affiliate-portal-router/readme.txt
+          php -l /tmp/candidate131/affiliate-portal-router/pferdeportal-affiliate-router.php
+          base64 --decode e2e/history-fixtures/v6.72.108.zip.b64 >/tmp/v108.zip
+          unzip -tq /tmp/v108.zip >/dev/null
+
+      - name: Install WordPress and create damaged DB once
+        env:
+          AFF_E2E_FIXTURE: ${{ github.workspace }}/e2e/fixtures/real-wxr-product-campaigns-20260915.json.gz
+          AFF_E2E_SCENARIO: live_damage
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp-cli.phar
+          sudo mv /tmp/wp-cli.phar /usr/local/bin/wp
+          rm -rf /tmp/wp && mkdir /tmp/wp
+          wp core download --version=7.1 --path=/tmp/wp
+          wp config create --path=/tmp/wp --dbname=wordpress --dbuser=wp --dbpass=wp --dbhost=127.0.0.1:3306 --skip-check
+          wp core install --path=/tmp/wp --url=https://pferde-atelier.de --title=AB --admin_user=admin --admin_password=e2etest --admin_email=e2e@example.test
+          cp -a /tmp/candidate131/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp plugin activate affiliate-portal-router --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/seed_real_state_inner.php" --path=/tmp/wp
+          rm -f /tmp/aff-history-stop
+          wp eval-file "$GITHUB_WORKSPACE/e2e/run_scenario.php" --path=/tmp/wp
+          wp db export /tmp/damaged.sql --path=/tmp/wp
+          echo DAMAGE_CREATED
+          wp eval-file "$GITHUB_WORKSPACE/e2e/state_ab_probe.php" --path=/tmp/wp | tee /tmp/damaged-before.log
+
+      - name: Test same damaged DB with historical 6.72.108
+        run: |
+          set -euo pipefail
+          wp db reset --yes --path=/tmp/wp
+          wp db import /tmp/damaged.sql --path=/tmp/wp
+          rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+          unzip -q /tmp/v108.zip -d /tmp/wp/wp-content/plugins
+          wp eval-file "$GITHUB_WORKSPACE/e2e/state_ab_probe.php" --path=/tmp/wp | tee /tmp/v108.log
+          grep -Fx 'EXACT_reithelme={"total":0,"ebay":0,"idealo":0}' /tmp/v108.log
+          grep -Fx 'EXACT_halfter-und-stricke-stallhalfter={"total":1,"ebay":0,"idealo":1}' /tmp/v108.log
+          echo V108_SAME_DB_STILL_DAMAGED
+
+      - name: Test same damaged DB with 6.72.131 update only no restore
+        run: |
+          set -euo pipefail
+          wp db reset --yes --path=/tmp/wp
+          wp db import /tmp/damaged.sql --path=/tmp/wp
+          rm -rf /tmp/wp/wp-content/plugins/affiliate-portal-router
+          cp -a /tmp/candidate131/affiliate-portal-router /tmp/wp/wp-content/plugins/
+          wp eval-file "$GITHUB_WORKSPACE/e2e/state_ab_probe.php" --path=/tmp/wp | tee /tmp/v131-no-restore.log
+          grep -Fx 'EXACT_reithelme={"total":0,"ebay":0,"idealo":0}' /tmp/v131-no-restore.log
+          grep -Fx 'EXACT_halfter-und-stricke-stallhalfter={"total":1,"ebay":0,"idealo":1}' /tmp/v131-no-restore.log
+          echo V131_UPDATE_ONLY_STILL_DAMAGED
+
+      - name: Run AFF043 on same damaged DB and prove repair
+        run: |
+          set -euo pipefail
+          wp eval '
+            $o=Pferdeportal_Affiliate_Router::instance();
+            $m=new ReflectionMethod($o,"aff043_snapshot");$m->setAccessible(true);$snap=$m->invoke($o);
+            if(is_wp_error($snap)){fwrite(STDERR,$snap->get_error_code());exit(2);}
+            update_option("ppar_aff043_historical_product_state_restore_v1",array(
+              "schema"=>"1.0","status"=>"running","phase"=>"augment","cursor"=>0,
+              "started_at"=>time(),"started_by"=>0,
+              "snapshot_sha256"=>$snap["sha256"],"source_sha256"=>$snap["source_sha256"],
+              "stats"=>array(),"errors"=>array()
+            ),false);
+            for($i=0;$i<100;$i++){ $s=$o->run_aff043_recovery_worker(); if(sanitize_key((string)($s["status"]??""))!=="running") break; }
+          ' --path=/tmp/wp
+          wp eval-file "$GITHUB_WORKSPACE/e2e/state_ab_probe.php" --path=/tmp/wp | tee /tmp/v131-restored.log
+          grep -Fx 'EXACT_reithelme={"total":95,"ebay":69,"idealo":26}' /tmp/v131-restored.log
+          grep -Fx 'EXACT_halfter-und-stricke-stallhalfter={"total":25,"ebay":5,"idealo":20}' /tmp/v131-restored.log
+          echo SAME_DB_STATE_ROOTCAUSE_PROVEN
