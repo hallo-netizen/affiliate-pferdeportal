@@ -120,14 +120,14 @@ jobs:
             # The plugin stays logically active, matching a real in-place update.
             # Trigger the admin lifecycle as well so version-bound persistent
             # migrations cannot be skipped by the CLI-only probe.
-            wp eval 'do_action("admin_init");' --path=/tmp/wp               >"/tmp/history-logs/6.72.$v-admin-init.log" 2>&1 || {
+            timeout 60s wp eval 'do_action("admin_init");' --path=/tmp/wp >"/tmp/history-logs/6.72.$v-admin-init.log" 2>&1 || {
                 cat "/tmp/history-logs/6.72.$v-admin-init.log"
                 first_break="6.72.$v:ADMIN_INIT"
                 break
               }
 
             set +e
-            wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp               2>&1 | tee "/tmp/history-logs/6.72.$v-probe.log"
+            timeout 60s wp eval-file "$GITHUB_WORKSPACE/e2e/history_probe.php" --path=/tmp/wp 2>&1 | tee "/tmp/history-logs/6.72.$v-probe.log"
             probe_rc=${PIPESTATUS[0]}
             set -e
             if [ "$probe_rc" -ne 0 ]; then
