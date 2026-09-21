@@ -7,9 +7,7 @@ require __DIR__.'/affiliate-portal-router/includes/trait-ppar-ebay.php';
 class PPAR_Similarity_Harness {
     use PPAR_Ebay_Trait;
     public function duplicate($a,$b){
-        $m=new ReflectionMethod($this,'ebay_topic_titles_duplicate_v672146');
-        $m->setAccessible(true);
-        return $m->invoke($this,$a,$b);
+        return $this->ebay_topic_titles_duplicate_v672146($a,$b);
     }
 }
 function old_duplicate($a,$b): bool {
