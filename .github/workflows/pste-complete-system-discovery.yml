@@ -1,0 +1,62 @@
+name: PSTE Complete System Simulation Discovery
+
+on:
+  push:
+    branches:
+      - pste-05700-server-step-driver-proof
+  workflow_dispatch:
+
+jobs:
+  discover-and-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - name: Reconstruct current final candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat proof/pste-05700-final-zip/finalzip.b64.part* | base64 -d > /tmp/PSTE-0.57.0-FINAL.zip
+          echo "4093fdb3c9cb1eca1691ceec9a2f1e9a97675982b01f2e440e99fba290b40f06  /tmp/PSTE-0.57.0-FINAL.zip" | sha256sum -c -
+          rm -rf /tmp/pste57 && mkdir -p /tmp/pste57
+          unzip -q /tmp/PSTE-0.57.0-FINAL.zip -d /tmp/pste57
+      - name: Extract historical Codex full-workflow pack
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/codex && mkdir -p /tmp/codex
+          unzip -q CODEX_PSTE056_HANDOFF_MINIMAL_20260820.zip -d /tmp/codex
+          echo "=== RELEVANT CODEX FILES ==="
+          find /tmp/codex -type f | grep -Ei 'full.workflow|workflow|planning.readiness|breadth|rootcause|pste.*test|test_.*php' | sort | head -500
+          echo "=== END RELEVANT CODEX FILES ==="
+      - name: Run candidate bundled tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          PLUGIN=/tmp/pste57/portal-seo-topic-engine
+          php_count="$(find "$PLUGIN" -type f -name '*.php' | wc -l)"
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find "$PLUGIN" -type f -name '*.php' | sort)
+          echo "PASS CANDIDATE_PHP_LINT $php_count"
+          if [ -d "$PLUGIN/tests" ]; then
+            found=0
+            for f in "$PLUGIN"/tests/*.php; do
+              [ -f "$f" ] || continue
+              found=1
+              echo "=== CANDIDATE_TEST $(basename "$f") ==="
+              php "$f"
+            done
+            echo "CANDIDATE_BUNDLED_TESTS_FOUND=$found"
+          fi
+      - name: Inventory exact historical full workflow tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "=== PHP TEST INVENTORY ==="
+          find /tmp/codex -type f -name '*.php' | grep -Ei 'test_|workflow|breadth|planning|rootcause' | sort | head -1000
+          echo "=== JSON WORKFLOW INVENTORY ==="
+          find /tmp/codex -type f -name '*.json' | grep -Ei 'FULL_WORKFLOW|WORKFLOW|BREADTH|PLANNING|ROOTCAUSE' | sort | head -1000
