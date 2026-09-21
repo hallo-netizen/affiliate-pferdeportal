@@ -217,3 +217,4 @@ jobs:
             /tmp/pste-cron-last.log
           if-no-files-found: ignore
           retention-days: 7
+# diagnostic trace trigger 2026-09-21
