@@ -90,7 +90,7 @@ jobs:
         run: |
           set -euo pipefail
           test -s /tmp/healthy.sql
-          mkdir -p /tmp/history-pkgs /tmp/history-logs
+          mkdir -p /tmp/history-pkgs /tmp/history-zips /tmp/history-logs
           for v in 108 109 110 111 112 113 114 115 116 117; do
             src="e2e/history-fixtures/v6.72.$v.zip.b64"
             test -s "$src"
@@ -124,6 +124,18 @@ jobs:
             set -e
             if [ "$probe_rc" -ne 0 ]; then
               first_break="6.72.$v:HISTORY_PROBE"
+              printf '%s\n' "$first_break" >/tmp/aff-history-stop
+              break
+            fi
+
+            # Prove the same version through the actual frontend HTML path.
+            set +e
+            python3 "$GITHUB_WORKSPACE/e2e/check_http.py" healthy               2>&1 | tee "/tmp/history-logs/6.72.$v-http.log"
+            http_rc=${PIPESTATUS[0]}
+            set -e
+            if [ "$http_rc" -ne 0 ]; then
+              first_break="6.72.$v:HTTP_RENDER"
+              printf '%s\n' "$first_break" >/tmp/aff-history-stop
               break
             fi
           done
