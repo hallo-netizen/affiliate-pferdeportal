@@ -16,6 +16,12 @@ add_filter('pre_http_request', function($pre,$args,$url){
     if($mode==='transport_unknown_once' && str_contains($path,'keyword_suggestions') && (int)$counts[$path]===1){
         return new WP_Error('pste_e2e_transport_unknown','forced unknown provider outcome');
     }
+    if($mode==='safe_503_once' && str_contains($path,'keyword_suggestions') && (int)$counts[$path]===1){
+        return ['headers'=>[],'body'=>wp_json_encode(['status_code'=>50300,'status_message'=>'forced 503','cost'=>0.003]),'response'=>['code'=>503,'message'=>'Service Unavailable'],'cookies'=>[],'filename'=>null];
+    }
+    if($mode==='sleep_once' && str_contains($path,'keyword_suggestions') && (int)$counts[$path]===1){
+        sleep(30);
+    }
 
     $bodyRaw=(string)($args['body']??'');
     $req=json_decode($bodyRaw,true);
