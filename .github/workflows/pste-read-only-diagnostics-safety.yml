@@ -1,0 +1,179 @@
+name: PSTE Read Only Diagnostics Safety Proof
+
+on:
+  push:
+    branches:
+      - pste-05700-server-step-driver-proof
+    paths:
+      - 'proof/pste-read-only-diagnostics/**'
+      - '.github/workflows/pste-read-only-diagnostics-safety.yml'
+  workflow_dispatch:
+
+jobs:
+  read-only-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mysqli, mbstring, curl, json
+          coverage: none
+
+      - name: Install fresh WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          chmod +x /tmp/wp
+          sudo mv /tmp/wp /usr/local/bin/wp
+          rm -rf /tmp/wordpress && mkdir -p /tmp/wordpress
+          wp core download --path=/tmp/wordpress --quiet
+          wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
+          wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8091 --title='PSTE Diagnostics Safety' --admin_user=admin --admin_password='diag-pass-12345' --admin_email=diag@example.invalid --skip-email --quiet
+
+      - name: Install exact current PSTE 0.57.4 goldstand
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pste-artifact && mkdir -p /tmp/pste-artifact
+          gh run download 35646020136 -R "${GITHUB_REPOSITORY}" -n pste-real-wordpress-http-e2e-system -D /tmp/pste-artifact
+          test -f /tmp/pste-artifact/PSTE-0.57.4-HOBBYROOM.zip
+          echo "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3  /tmp/pste-artifact/PSTE-0.57.4-HOBBYROOM.zip" | sha256sum -c -
+          wp plugin install /tmp/pste-artifact/PSTE-0.57.4-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
+
+      - name: Install exact read-only diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d proof/pste-read-only-diagnostics/diagnostic-0.1.0.zip.b64 > /tmp/PSTE-Read-Only-Diagnostics-0.1.0.zip
+          echo "cc103ac7469a8207536aba12864d44fdf2c7fec990d6210002b06fee28aa5d95  /tmp/PSTE-Read-Only-Diagnostics-0.1.0.zip" | sha256sum -c -
+          unzip -p /tmp/PSTE-Read-Only-Diagnostics-0.1.0.zip 'PSTE Read Only Diagnostics/pste-read-only-diagnostics.php' >/tmp/diag.php
+          php -l /tmp/diag.php >/dev/null
+          if grep -Eq 'register_(activation|deactivation|uninstall)_hook|update_option[[:space:]]*\(|add_option[[:space:]]*\(|delete_option[[:space:]]*\(|set_transient[[:space:]]*\(|delete_transient[[:space:]]*\(|wp_schedule_(single_)?event[[:space:]]*\(|wp_clear_scheduled_hook[[:space:]]*\(|wp_remote_(post|get)[[:space:]]*\(' /tmp/diag.php; then
+            echo DIAGNOSTIC_WRITE_SURFACE_FOUND
+            exit 1
+          fi
+          wp plugin install /tmp/PSTE-Read-Only-Diagnostics-0.1.0.zip --activate --path=/tmp/wordpress --quiet
+          test -f "/tmp/wordpress/wp-content/plugins/PSTE Read Only Diagnostics/pste-read-only-diagnostics.php"
+
+      - name: Seed inert PSTE diagnostic state
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp option update pste_research_driver_state_v1 '{"status":"BLOCKED","health_code":"PSTE_DRIVER_STEP_OVERDUE","last_step":"BREADTH:0:FINALIZE:PREPARE","step_number":521,"step_started_at_utc":"2026-09-21T20:00:00+00:00","last_progress_at_utc":"2026-09-21T20:00:00+00:00","updated_at_utc":"2026-09-21T20:00:00+00:00"}' --format=json --path=/tmp/wordpress --skip-plugins
+          wp option update pste_breadth_research_queue_v1 '{"queue_uuid":"diag-q","status":"RUNNING","target_usable":40,"usable_candidate_count":7,"raw_usable_candidate_count":9,"current_index":2,"item_count":8,"completed_count":2,"blocked_count":0,"cancel_requested":false,"items":[],"updated_at_utc":"2026-09-21T20:00:00+00:00"}' --format=json --path=/tmp/wordpress --skip-plugins
+          wp option update pste_active_longtail_research_job_v2 '{"job_uuid":"diag-j","status":"RUNNING","phase":"FINALIZE","phase_state":"IDLE","finalize_stage":"PREPARE_CANDIDATES","finalize_prepare_cursor":42,"finalize_prepare_total":100,"finalize_prepare_commit_cursor":0,"updated_at_utc":"2026-09-21T20:00:00+00:00"}' --format=json --path=/tmp/wordpress --skip-plugins
+
+      - name: Snapshot exact PSTE files and state before diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          find "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine" -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/pste-files-before.sha256
+          mysql -h127.0.0.1 -uroot -proot wordpress -N -B -e "SELECT option_name,HEX(option_value) FROM wp_options WHERE option_name LIKE 'pste%' ORDER BY option_name" >/tmp/pste-options-before.txt
+          sha256sum /tmp/pste-options-before.txt >/tmp/pste-options-before.sha256
+
+      - name: Real admin page and repeated real AJAX reads
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/wordpress
+          php -S 127.0.0.1:8091 -t /tmp/wordpress >/tmp/diag-wp-server.log 2>&1 &
+          echo $! >/tmp/diag-server.pid
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8091/wp-login.php >/dev/null && break; sleep 1; done
+          curl -fsS -c /tmp/diag-cookies.txt -b /tmp/diag-cookies.txt             -d 'log=admin' -d 'pwd=diag-pass-12345' -d 'wp-submit=Log In' -d 'redirect_to=http://127.0.0.1:8091/wp-admin/' -d 'testcookie=1'             http://127.0.0.1:8091/wp-login.php >/tmp/login.html
+          code="$(curl -sS -o /tmp/diag-page.html -w '%{http_code}' -b /tmp/diag-cookies.txt 'http://127.0.0.1:8091/wp-admin/tools.php?page=pste-read-only-diagnostics')"
+          test "$code" = "200"
+          grep -q 'PSTE Diagnose' /tmp/diag-page.html
+          NONCE="$(php -r '$h=file_get_contents("/tmp/diag-page.html"); if(!preg_match("/const nonce=(\"[^\"]+\");/",$h,$m)) exit(2); echo json_decode($m[1]);')"
+          test -n "$NONCE"
+          for i in $(seq 1 40); do
+            curl -fsS -b /tmp/diag-cookies.txt               --data-urlencode 'action=pste_read_only_diag_snapshot'               --data-urlencode "nonce=$NONCE"               http://127.0.0.1:8091/wp-admin/admin-ajax.php >"/tmp/diag-$i.json" &
+          done
+          wait
+          for i in $(seq 1 40); do
+            grep -q '"success":true' "/tmp/diag-$i.json"
+            grep -q '"read_only":true' "/tmp/diag-$i.json"
+          done
+          echo PASS_REAL_HTTP_DIAGNOSTIC_40_READS
+
+      - name: Prove diagnostics changed no PSTE file or PSTE option
+        shell: bash
+        run: |
+          set -euo pipefail
+          find "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine" -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/pste-files-after.sha256
+          diff -u /tmp/pste-files-before.sha256 /tmp/pste-files-after.sha256
+          mysql -h127.0.0.1 -uroot -proot wordpress -N -B -e "SELECT option_name,HEX(option_value) FROM wp_options WHERE option_name LIKE 'pste%' ORDER BY option_name" >/tmp/pste-options-after.txt
+          diff -u /tmp/pste-options-before.txt /tmp/pste-options-after.txt
+          echo PASS_ZERO_PSTE_STATE_MUTATION
+
+      - name: Prove rollback is only deactivate and remove diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval 'require_once ABSPATH."wp-admin/includes/plugin.php"; deactivate_plugins("PSTE Read Only Diagnostics/pste-read-only-diagnostics.php", true);' --path=/tmp/wordpress --skip-plugins='Portal SEO Topic Engine'
+          rm -rf "/tmp/wordpress/wp-content/plugins/PSTE Read Only Diagnostics"
+          test ! -e "/tmp/wordpress/wp-content/plugins/PSTE Read Only Diagnostics"
+          find "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine" -type f -print0 | sort -z | xargs -0 sha256sum >/tmp/pste-files-rollback.sha256
+          diff -u /tmp/pste-files-before.sha256 /tmp/pste-files-rollback.sha256
+          mysql -h127.0.0.1 -uroot -proot wordpress -N -B -e "SELECT option_name,HEX(option_value) FROM wp_options WHERE option_name LIKE 'pste%' ORDER BY option_name" >/tmp/pste-options-rollback.txt
+          diff -u /tmp/pste-options-before.txt /tmp/pste-options-rollback.txt
+          code="$(curl -sS -o /tmp/pste-settings-after-rollback.html -w '%{http_code}' -b /tmp/diag-cookies.txt 'http://127.0.0.1:8091/wp-admin/admin.php?page=portal-seo-topic-engine-settings')"
+          test "$code" = "200"
+          echo PASS_ONE_STEP_DIAGNOSTIC_ROLLBACK
+
+      - name: Prove diagnostic survives PSTE absent and corrupt stored state
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp plugin install /tmp/PSTE-Read-Only-Diagnostics-0.1.0.zip --activate --path=/tmp/wordpress --quiet
+          wp eval 'require_once ABSPATH."wp-admin/includes/plugin.php"; deactivate_plugins("Portal SEO Topic Engine/portal-seo-topic-engine.php", true);' --path=/tmp/wordpress --skip-plugins='Portal SEO Topic Engine'
+          mysql -h127.0.0.1 -uroot -proot wordpress -e "UPDATE wp_options SET option_value='not-serialized-garbage' WHERE option_name='pste_research_driver_state_v1'"
+          code="$(curl -sS -o /tmp/diag-page-pste-off.html -w '%{http_code}' -b /tmp/diag-cookies.txt 'http://127.0.0.1:8091/wp-admin/tools.php?page=pste-read-only-diagnostics')"
+          test "$code" = "200"
+          grep -q 'PSTE Diagnose' /tmp/diag-page-pste-off.html
+          NONCE="$(php -r '$h=file_get_contents("/tmp/diag-page-pste-off.html"); if(!preg_match("/const nonce=(\"[^\"]+\");/",$h,$m)) exit(2); echo json_decode($m[1]);')"
+          curl -fsS -b /tmp/diag-cookies.txt --data-urlencode 'action=pste_read_only_diag_snapshot' --data-urlencode "nonce=$NONCE" http://127.0.0.1:8091/wp-admin/admin-ajax.php >/tmp/diag-corrupt.json
+          grep -q '"success":true' /tmp/diag-corrupt.json
+          grep -q '"read_only":true' /tmp/diag-corrupt.json
+          echo PASS_PSTE_ABSENT_OR_CORRUPT_NO_FATAL
+
+      - name: Upload safety evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pste-read-only-diagnostics-safety
+          path: |
+            /tmp/PSTE-Read-Only-Diagnostics-0.1.0.zip
+            /tmp/pste-files-before.sha256
+            /tmp/pste-files-after.sha256
+            /tmp/pste-files-rollback.sha256
+            /tmp/pste-options-before.txt
+            /tmp/pste-options-after.txt
+            /tmp/pste-options-rollback.txt
+            /tmp/diag-page.html
+            /tmp/diag-1.json
+            /tmp/diag-corrupt.json
+            /tmp/diag-wp-server.log
+          if-no-files-found: ignore
+          retention-days: 7
