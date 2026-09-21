@@ -34,12 +34,6 @@ function sat96_apply_candidate_fix($o,$ranked,$slot,$strategy){
         $strict[]=$candidate;
         if($k>0)$seen[$k]=1;
     }
-    usort($strict,static function($a,$b){
-        $sa=(int)($a['specificity']??0);$sb=(int)($b['specificity']??0);
-        if($sa!==$sb)return $sb<=>$sa;
-        $ma=(int)($a['matches']??0);$mb=(int)($b['matches']??0);
-        return $ma<=>$mb;
-    });
     return array_values($strict);
 }
 function sat96_pickfix($o,$ctx,$slot,$strategy){
