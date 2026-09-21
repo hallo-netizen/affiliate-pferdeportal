@@ -1,0 +1,123 @@
+name: PSTE Real WordPress HTTP E2E
+
+on:
+  push:
+    branches:
+      - pste-05700-server-step-driver-proof
+    paths:
+      - 'proof/pste-wordpress-real-e2e/**'
+      - '.github/workflows/pste-wordpress-real-e2e.yml'
+      - 'proof/pste-05700-final-zip/**'
+  workflow_dispatch:
+
+jobs:
+  real-wordpress-single:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mysqli, mbstring, curl, json
+          coverage: none
+      - name: Install WP-CLI and WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          chmod +x /tmp/wp
+          sudo mv /tmp/wp /usr/local/bin/wp
+          rm -rf /tmp/wordpress && mkdir -p /tmp/wordpress
+          wp core download --path=/tmp/wordpress --quiet
+          wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
+          wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
+      - name: Install exact 0.57 ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat proof/pste-05700-final-zip/finalzip.b64.part* | base64 -d > /tmp/PSTE-0.57.0-FINAL.zip
+          echo "4093fdb3c9cb1eca1691ceec9a2f1e9a97675982b01f2e440e99fba290b40f06  /tmp/PSTE-0.57.0-FINAL.zip" | sha256sum -c -
+          unzip -tq /tmp/PSTE-0.57.0-FINAL.zip
+          unzip -q /tmp/PSTE-0.57.0-FINAL.zip -d /tmp/wordpress/wp-content/plugins
+          mkdir -p /tmp/wordpress/wp-content/mu-plugins
+          cp proof/pste-wordpress-real-e2e/dataforseo-mock.php /tmp/wordpress/wp-content/mu-plugins/pste-dataforseo-e2e.php
+          wp plugin activate portal-seo-topic-engine --path=/tmp/wordpress --quiet
+      - name: Seed real portal structure and PSTE state
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval-file proof/pste-wordpress-real-e2e/setup-site.php --path=/tmp/wordpress | tee /tmp/setup.json
+          grep -q '"ready":true' /tmp/setup.json
+          grep -q '"context_status":"COMPLETE"' /tmp/setup.json
+      - name: Start real multi-worker WordPress HTTP server
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/wordpress
+          PHP_CLI_SERVER_WORKERS=6 php -S 127.0.0.1:8090 -t /tmp/wordpress >/tmp/pste-wp-server.log 2>&1 &
+          echo $! >/tmp/pste-wp-server.pid
+          for i in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:8090/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/pste-wp-server.log
+          exit 1
+      - name: Start manual single exactly through production driver
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval-file proof/pste-wordpress-real-e2e/start-single.php --path=/tmp/wordpress | tee /tmp/single-start.json
+          grep -q '"status":"RUNNING"' /tmp/single-start.json
+      - name: Advance only through real HTTP loopback and WP-Cron
+        shell: bash
+        run: |
+          set -euo pipefail
+          terminal=0
+          for i in $(seq 1 180); do
+            curl -fsS http://127.0.0.1:8090/ >/dev/null || true
+            wp cron event run --due-now --path=/tmp/wordpress >/dev/null 2>&1 || true
+            wp eval-file proof/pste-wordpress-real-e2e/status.php --path=/tmp/wordpress > /tmp/status.json
+            cat /tmp/status.json
+            if grep -q '"status":"IDLE"' /tmp/status.json; then terminal=1; break; fi
+            if grep -q '"status":"BLOCKED"' /tmp/status.json; then
+              echo "REAL_DRIVER_BLOCKED"
+              cat /tmp/pste-wp-server.log
+              exit 1
+            fi
+            sleep 1
+          done
+          test "$terminal" -eq 1 || { echo "REAL_DRIVER_TIMEOUT"; cat /tmp/status.json; cat /tmp/pste-wp-server.log; exit 1; }
+      - name: Verify real manual single terminal result
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval-file proof/pste-wordpress-real-e2e/verify-single.php --path=/tmp/wordpress | tee /tmp/verify-single.json
+          grep -q 'PASS_REAL_WORDPRESS_SINGLE' /tmp/verify-single.json
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pste-real-wordpress-http-e2e-single
+          path: |
+            /tmp/setup.json
+            /tmp/single-start.json
+            /tmp/status.json
+            /tmp/verify-single.json
+            /tmp/pste-wp-server.log
+          if-no-files-found: ignore
+          retention-days: 7
