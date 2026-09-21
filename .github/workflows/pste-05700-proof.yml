@@ -52,6 +52,9 @@ jobs:
           done < <(find /tmp/pste05700-proof -type f -name '*.zip' -print0)
           if [ -z "$found" ]; then
             echo "FRESH_ZIP_CANDIDATE_NOT_FOUND"
+            echo "=== PROOF_BUNDLE_FILE_INVENTORY ==="
+            find /tmp/pste05700-proof -type f -printf "%P\t%s bytes\n" | sort
+            echo "=== END_PROOF_BUNDLE_FILE_INVENTORY ==="
             exit 1
           fi
           cp "$found" /tmp/PSTE-0.57.0-FRESH.zip
