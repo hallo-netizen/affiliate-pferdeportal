@@ -1,0 +1,86 @@
+name: Design Brand Menu Performance Hardtest
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-design/**'
+      - '.github/workflows/design-brand-menu-performance-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply semantic design patch to reference source
+        run: |
+          set -euo pipefail
+          cp pferde-template-kit_V1.50.421.php /tmp/pferde-template-kit.php
+          python3 AFFILIATE_HOBBYRAUM/performance-design/apply_brand_menu_setup_cache_patch.py /tmp/pferde-template-kit.php
+          php -l /tmp/pferde-template-kit.php
+          grep -F "brand_menu_setup_cache_begin_v150556" /tmp/pferde-template-kit.php
+          grep -F "brand_menu_setup_cache_end_v150556" /tmp/pferde-template-kit.php
+          test "$(grep -c "wp_nav_menu(" /tmp/pferde-template-kit.php)" -eq "$(grep -c "wp_nav_menu(" pferde-template-kit_V1.50.421.php)"
+          echo "PASS both original wp_nav_menu calls preserved"
+
+  real-wordpress-menu:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Install WordPress 7.1.1
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Design Perf CI' --admin_user=admin --admin_password='test-only-pass' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cp AFFILIATE_HOBBYRAUM/performance-design/real_wordpress_brand_menu_cache_gate.php /tmp/wp-site/wp-content/mu-plugins/pftk-menu-cache-gate.php
+      - name: Compare baseline and cached double-menu rendering
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-design-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?pftk_menu_cache_gate=baseline' > /tmp/baseline.json
+          curl -fsS 'http://127.0.0.1:8080/?pftk_menu_cache_gate=cached' > /tmp/cached.json
+          python3 - <<'PY'
+          import json
+          b=json.load(open('/tmp/baseline.json'))
+          c=json.load(open('/tmp/cached.json'))
+          print('BASELINE',b)
+          print('CACHED',c)
+          assert b['desktop_sha256']==c['desktop_sha256'], 'desktop HTML changed'
+          assert b['mobile_sha256']==c['mobile_sha256'], 'mobile HTML changed'
+          assert c['desktop_has_marker'] and c['mobile_has_marker'], 'desktop/mobile object filters not preserved'
+          assert c['meta_second'] < b['meta_second'], 'second menu metadata work not reduced'
+          assert c['meta_second'] <= max(5, b['meta_second']//10), 'second menu metadata work not eliminated enough'
+          print('PASS desktop HTML byte-identical')
+          print('PASS mobile HTML byte-identical')
+          print('PASS desktop/mobile filters preserved')
+          print('PASS second menu metadata hooks reduced from',b['meta_second'],'to',c['meta_second'])
+          PY
