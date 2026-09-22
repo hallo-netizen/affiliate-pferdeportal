@@ -141,3 +141,8 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Begleitläufe am selben Head: Final ZIP Full Workflow `35693065308` PASS; Complete System Simulation `35693065236` PASS; Separate Process Full System `35693065350` PASS.
 - Lokaler Paketcheck gegen 0.57.4-Goldstand: 131 Dateien, 76 PHP; 76/76 PHP-Lint PASS; nur 4 Produktdateien geändert: `class-pste-breadth-research-queue.php`, `class-pste-repository.php`, `class-pste-runner.php`, `portal-seo-topic-engine.php`.
 - Real-Site-Freigabe bleibt offen. 0.57.6 wird erst nach Installation exakt dieser Bytes und Live-Abnahme promotet; 0.57.4 bleibt bis dahin Rollback-Goldstand.
+
+
+### Klarstellung zu Begleitworkflows
+- Die am selben Head grünen Workflows `PSTE 0.57 Final ZIP Full Workflow Proof`, `PSTE Complete System Simulation Discovery` und `PSTE 0.57.1 Separate Process Full System Proof` rekonstruieren historische 0.57.0/0.57.1-Basen. Sie sind Regression-/Infrastrukturbeweise, **kein** exakter 0.57.6-Bytebeweis.
+- Autoritativer 0.57.6-Produktbeweis ist ausschließlich Real WordPress HTTP E2E Run `35693065234` mit ZIP SHA-256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`, ergänzt um lokalen Check dieser exakten ZIP: 131 Dateien, 76 PHP, 76/76 Lint PASS, vier geänderte Produktdateien gegenüber 0.57.4 und keine neu hinzugefügten Timeout-/Delete-/Remote-/Scheduling-/Sleep-/destruktiven SQL-Flächen.
