@@ -18,7 +18,6 @@
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
     "release": "GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
     "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_1d641e12;_NO_PRODUCT_OR_PROOF_CHANGE",
-    "branch_head_at_freshness_check": "daa9374036d63ce88a22e727f5463b5ed729e26d",
     "live_candidate": "0.57.6",
     "live_candidate_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
   },
