@@ -76,13 +76,22 @@ echo "PASS_CANCELLED_WAVE_PROGRESS_CONTINUED old=".$old." new=".(int)$q["usable_
 # Leave the fixture terminal and clean for the following stress proof.
 curl -fsS -b /tmp/pste-cookies.txt   --data-urlencode 'action=pste_breadth_research_cancel'   --data-urlencode "nonce=$NONCE"   --data-urlencode "queue_uuid=$Q2"   http://127.0.0.1:8090/wp-admin/admin-ajax.php >/tmp/continue-final-cancel.json
 
+final_settled=0
 for i in $(seq 1 120); do
   curl -fsS -b /tmp/pste-cookies.txt     --data-urlencode 'action=pste_breadth_research_status'     --data-urlencode "nonce=$NONCE"     --data-urlencode "queue_uuid=$Q2"     http://127.0.0.1:8090/wp-admin/admin-ajax.php >/tmp/continue-final-status.json
   QSTATE="$(php -r '$x=json_decode(file_get_contents("/tmp/continue-final-status.json"),true);echo $x["data"]["queue"]["status"]??"INVALID";')"
   DSTATE="$(php -r '$x=json_decode(file_get_contents("/tmp/continue-final-status.json"),true);echo $x["data"]["driver"]["status"]??"INVALID";')"
+  DERR="$(php -r '$x=json_decode(file_get_contents("/tmp/continue-final-status.json"),true);echo $x["data"]["driver"]["last_error"]??"";')"
+  if [ "$DSTATE" = "BLOCKED" ]; then
+    echo "CONTINUATION_FINAL_CANCEL_DRIVER_BLOCKED $DERR"
+    cat /tmp/continue-final-status.json
+    exit 1
+  fi
   if [ "$QSTATE" = "CANCELLED" ] && [ "$DSTATE" = "IDLE" ]; then
+    final_settled=1
     echo PASS_CONTINUATION_PROOF_TERMINAL_CLEAN
     break
   fi
   sleep 0.25
 done
+test "$final_settled" -eq 1
