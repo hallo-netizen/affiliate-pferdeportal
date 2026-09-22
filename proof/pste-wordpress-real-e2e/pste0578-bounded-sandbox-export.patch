@@ -10,8 +10,8 @@
 +     */
 +    public static function hashLogicalObjectWithCurrentRecords(array $fields): string {
 +        if(array_key_exists('records',$fields))throw new RuntimeException('PSTE_SANDBOX_STREAM_FIELDS_RECORDS_FORBIDDEN');
-+        self::requireComplete();$keys=array_keys($fields);$keys[]='records';sort($keys,SORT_STRING);$ctx=hash_init('sha256');hash_update($ctx,'{');$first=true;
-+        foreach($keys as $key){if(!$first)hash_update($ctx,',');hash_update($ctx,self::json((string)$key));hash_update($ctx,':');if($key==='records'){hash_update($ctx,'{');$firstRecord=true;self::forEachRecord(static function(array $record,string $id) use($ctx,&$firstRecord): bool {if(!$firstRecord)hash_update($ctx,',');hash_update($ctx,self::json($id));hash_update($ctx,':');self::streamCanonicalValue($ctx,$record);$firstRecord=false;return true;});hash_update($ctx,'}');}else self::streamCanonicalValue($ctx,$fields[$key]);$first=false;}hash_update($ctx,'}');return hash_final($ctx);
++        self::requireComplete();$recordCount=self::authoritativeRecordCount();$keys=array_keys($fields);$keys[]='records';sort($keys,SORT_STRING);$ctx=hash_init('sha256');hash_update($ctx,'{');$first=true;
++        foreach($keys as $key){if(!$first)hash_update($ctx,',');hash_update($ctx,self::json((string)$key));hash_update($ctx,':');if($key==='records'){if($recordCount===0){hash_update($ctx,'[]');}else{hash_update($ctx,'{');$firstRecord=true;self::forEachRecord(static function(array $record,string $id) use($ctx,&$firstRecord): bool {if(!$firstRecord)hash_update($ctx,',');hash_update($ctx,self::json($id));hash_update($ctx,':');self::streamCanonicalValue($ctx,$record);$firstRecord=false;return true;});hash_update($ctx,'}');}}else self::streamCanonicalValue($ctx,$fields[$key]);$first=false;}hash_update($ctx,'}');return hash_final($ctx);
 +    }
 +
 +    /**
@@ -19,10 +19,10 @@
 +     * The caller may provide a per-part safety guard. No full Sandbox array is created.
 +     */
 +    public static function writeLogicalObjectWithCurrentRecords($handle,array $fields,?callable $guard=null): int {
-+        if(!is_resource($handle))throw new RuntimeException('PSTE_SANDBOX_STREAM_HANDLE_INVALID');if(array_key_exists('records',$fields))throw new RuntimeException('PSTE_SANDBOX_STREAM_FIELDS_RECORDS_FORBIDDEN');self::requireComplete();$written=0;
++        if(!is_resource($handle))throw new RuntimeException('PSTE_SANDBOX_STREAM_HANDLE_INVALID');if(array_key_exists('records',$fields))throw new RuntimeException('PSTE_SANDBOX_STREAM_FIELDS_RECORDS_FORBIDDEN');self::requireComplete();$recordCount=self::authoritativeRecordCount();$written=0;
 +        $write=static function(string $chunk) use($handle,&$written): void {$n=fwrite($handle,$chunk);if($n===false||$n!==strlen($chunk))throw new RuntimeException('PSTE_SANDBOX_STREAM_WRITE_FAILED');$written+=$n;};
 +        $keys=array_keys($fields);sort($keys,SORT_STRING);$write('{');$first=true;foreach($keys as $key){if(strcmp((string)$key,'records')>=0)continue;if($guard)$guard([(string)$key=>$fields[$key]]);if(!$first)$write(',');$write(self::json((string)$key).':'.self::json($fields[$key]));$first=false;}
-+        if(!$first)$write(',');$write(self::json('records').':{');$firstRecord=true;self::forEachRecord(static function(array $record,string $id) use($guard,$write,&$firstRecord): bool {if($guard)$guard([$id=>$record]);if(!$firstRecord)$write(',');$write(self::json($id).':'.self::json($record));$firstRecord=false;return true;});$write('}');$first=false;
++        if(!$first)$write(',');$write(self::json('records').':');if($recordCount===0){$write('[]');}else{$write('{');$firstRecord=true;self::forEachRecord(static function(array $record,string $id) use($guard,$write,&$firstRecord): bool {if($guard)$guard([$id=>$record]);if(!$firstRecord)$write(',');$write(self::json($id).':'.self::json($record));$firstRecord=false;return true;});$write('}');}$first=false;
 +        foreach($keys as $key){if(strcmp((string)$key,'records')<=0)continue;if($guard)$guard([(string)$key=>$fields[$key]]);$write(','.self::json((string)$key).':'.self::json($fields[$key]));}$write('}');return $written;
 +    }
 +
