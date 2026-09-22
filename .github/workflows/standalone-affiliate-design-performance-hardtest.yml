@@ -1,0 +1,141 @@
+name: Standalone Affiliate Design Performance Hardtest
+on:
+  push:
+    branches: [design-performance-standalone-hardtest-20260922]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-design/standalone-plugin/**'
+      - '.github/workflows/standalone-affiliate-design-performance-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Verify exact plugin source
+        run: |
+          set -euo pipefail
+          FILE='AFFILIATE_HOBBYRAUM/performance-design/standalone-plugin/pa-affiliate-design-performance.php'
+          php -l "$FILE"
+          test "$(sha256sum "$FILE" | awk '{print $1}')" = "f35bdefe46d59abcfb7ff7c31cd38e73ae7f51db7d676fa618d2bc2644004e13"
+      - name: Install WordPress 7.1.1 and plugin
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Standalone Design Perf CI' --admin_user=admin --admin_password='test-only-pass' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance
+          cp AFFILIATE_HOBBYRAUM/performance-design/standalone-plugin/pa-affiliate-design-performance.php /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance/
+          /tmp/wp plugin activate pa-affiliate-design-performance --path=/tmp/wp-site
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat > /tmp/wp-site/wp-content/mu-plugins/pa-design-perf-gate.php <<'PHP'
+          <?php
+          if (!defined('ABSPATH')) exit;
+          final class PA_Design_Perf_Gate {
+              public static int $meta=0;
+              public static function count_meta($v){ self::$meta++; return $v; }
+              public static function objects($items,$args){
+                  foreach((array)$items as $item){
+                      if(!is_object($item)) continue;
+                      $item->classes=array_values((array)($item->classes??array()));
+                      if(($args->menu_class??'')==='pftk-brand-menu-v15065') $item->classes[]='desktop-proof';
+                      if(($args->menu_class??'')==='pftk-mobile-menu-v15074') $item->classes[]='mobile-proof';
+                  }
+                  return $items;
+              }
+          }
+          add_action('template_redirect', static function(){
+              $mode=sanitize_key((string)($_GET['pa_design_perf_gate']??''));
+              if(!in_array($mode,array('baseline','cached'),true)) return;
+              header('Content-Type: application/json; charset=utf-8');
+              if($mode==='baseline' && class_exists('PA_Affiliate_Design_Performance')){
+                  remove_filter('wp_nav_menu_args',[PA_Affiliate_Design_Performance::class,'on_menu_args'],-999999);
+                  remove_filter('wp_nav_menu',[PA_Affiliate_Design_Performance::class,'on_menu_html'],999999);
+              }
+              $menu=wp_get_nav_menu_object('pa-standalone-perf-gate');
+              if(!$menu){
+                  $menu_id=wp_create_nav_menu('pa-standalone-perf-gate');
+                  for($i=0;$i<120;$i++){
+                      wp_update_nav_menu_item($menu_id,0,array(
+                          'menu-item-title'=>'Gate Item '.$i,
+                          'menu-item-url'=>home_url('/gate-'.$i.'/'),
+                          'menu-item-status'=>'publish',
+                          'menu-item-parent-id'=>0,
+                      ));
+                  }
+                  $menu=wp_get_nav_menu_object($menu_id);
+              }
+              $menu_id=absint($menu->term_id??0);
+              add_filter('wp_nav_menu_objects',[PA_Design_Perf_Gate::class,'objects'],500,2);
+              add_filter('get_post_metadata',[PA_Design_Perf_Gate::class,'count_meta'],-999999,5);
+              PA_Design_Perf_Gate::$meta=0;
+              $desktop=wp_nav_menu(array(
+                  'menu'=>$menu_id,'theme_location'=>'primary',
+                  'container'=>'nav','container_class'=>'pftk-brand-nav-inner-v15065',
+                  'menu_class'=>'pftk-brand-menu-v15065','fallback_cb'=>false,'depth'=>3,'echo'=>false
+              ));
+              $after=PA_Design_Perf_Gate::$meta;
+              $mobile=wp_nav_menu(array(
+                  'menu'=>$menu_id,'theme_location'=>'primary',
+                  'container'=>'nav','container_class'=>'pftk-mobile-nav-v15074',
+                  'menu_class'=>'pftk-mobile-menu-v15074','fallback_cb'=>false,'depth'=>3,'echo'=>false
+              ));
+              echo wp_json_encode(array(
+                  'mode'=>$mode,
+                  'desktop_sha256'=>hash('sha256',(string)$desktop),
+                  'mobile_sha256'=>hash('sha256',(string)$mobile),
+                  'desktop_marker'=>strpos((string)$desktop,'desktop-proof')!==false,
+                  'mobile_marker'=>strpos((string)$mobile,'mobile-proof')!==false,
+                  'meta_after_desktop'=>$after,
+                  'meta_total'=>PA_Design_Perf_Gate::$meta,
+                  'meta_second'=>PA_Design_Perf_Gate::$meta-$after,
+              ));
+              exit;
+          },0);
+          PHP
+      - name: Compare baseline and standalone plugin
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?pa_design_perf_gate=baseline' > /tmp/b.json
+          curl -fsS 'http://127.0.0.1:8080/?pa_design_perf_gate=cached' > /tmp/c.json
+          python3 - <<'PY'
+          import json
+          b=json.load(open('/tmp/b.json')); c=json.load(open('/tmp/c.json'))
+          print('BASELINE',b); print('CACHED',c)
+          assert b['desktop_sha256']==c['desktop_sha256']
+          assert b['mobile_sha256']==c['mobile_sha256']
+          assert c['desktop_marker'] and c['mobile_marker']
+          assert c['meta_second'] < b['meta_second']
+          assert c['meta_second'] <= b['meta_second']//4
+          assert b['meta_second']==2520
+          assert c['meta_second']==360
+          print('PASS exact 2520 -> 360, output unchanged')
+          PY
