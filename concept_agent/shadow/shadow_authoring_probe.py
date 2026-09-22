@@ -34,8 +34,11 @@ def main():
  if not jar.is_file(): raise SystemExit("LT_JAR_MISSING")
  jarsha=sha(jar)
  if jarsha!="2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8": raise SystemExit("LT_JAR_HASH_MISMATCH")
- dst=OUT/"languagetool-commandline.jar"; shutil.copyfile(jar,dst)
- rows.append({"ref":"languagetool-commandline.jar","sha256":jarsha,"bytes":dst.stat().st_size})
+ ltroot=OUT/"LanguageTool-6.8"
+ shutil.copytree(jar.parent,ltroot,dirs_exist_ok=True)
+ dst=ltroot/"languagetool-commandline.jar"
+ if sha(dst)!="2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8": raise SystemExit("LT_COPIED_JAR_HASH_MISMATCH")
+ rows.append({"ref":"LanguageTool-6.8/","sha256":"6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d","bytes":sum(p.stat().st_size for p in ltroot.rglob("*") if p.is_file())})
  proof={"contract":"CONCEPT_AGENT_VALIDATOR_BUNDLE_V1","status":"PASS","files":rows,"publish_allowed":False}
  (OUT/"VALIDATOR_BUNDLE_PROOF.json").write_text(json.dumps(proof,indent=2)+"\n",encoding="utf-8")
  print(json.dumps(proof,sort_keys=True))
