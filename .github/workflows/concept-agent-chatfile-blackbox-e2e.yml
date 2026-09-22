@@ -381,7 +381,7 @@ jobs:
               manifest_ref=end.build(str(req_path.relative_to(ROOT)))
               result=final.finalize(manifest_ref)
               final_path=ROOT/result['final_ref']
-              finals=list(final_path.parent.glob('PSERC_APPROVED_PRODUCTION_PACKAGE_FINAL.json'))
+              finals=[p for p in final_path.parent.glob('*.json') if p.is_file()]
               pkg=json.loads(final_path.read_text(encoding='utf-8'))
               ok=(result['status']=='GITHUB_FINAL_RELEASE_PASS' and result['article_count']==n and
                   len(finals)==1 and pkg['status']=='ENDSTEMPEL_PASS' and pkg['publish_allowed'] is False)
@@ -394,6 +394,7 @@ jobs:
 
               # Downstream negative: approved body bytes may not change after release.
               bad=copy.deepcopy(er)
+              bad['runtime_generation']=generation+1000
               bad['articles'][0]['content_utf8'] += '<p>tamper</p>'
               bad_path=ROOT/f'concept_agent/production_ready/blackbox-e2e-{n}-negative.json'
               bad_path.write_text(json.dumps(bad,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
