@@ -31,7 +31,7 @@
  
 --- a/includes/class-pste-semantic-review-sandbox.php
 +++ b/includes/class-pste-semantic-review-sandbox.php
-@@ -907,6 +907,18 @@
+@@ -907,6 +907,19 @@
      /** @return array<string,mixed> */
      public static function exportPayload(): array {$r=self::stored();$r['exported_at_utc']=gmdate('c');$r['export_statement']='SANDBOX_ONLY_NO_SOURCE_OR_ARTICLE_WRITES_NO_PRODUCTION_HANDOFF';$r['stored_registry_sha256']=(string)($r['sha256']??'');unset($r['export_sha256']);$r['export_sha256']=self::hash($r);return $r;}
  
@@ -54,18 +54,18 @@
 --- a/includes/class-pste-admin.php
 +++ b/includes/class-pste-admin.php
 @@ -548,7 +548,10 @@
-     public static function contextRefresh(): void {PSTE_Auth::assertAdmin('pste_context_refresh',(string)($_POST['_wpnonce']??''));$r=PSTE_Context_Snapshot_Job::start();self::redirect('portal-seo-topic-engine-context','info','Kontext-Neuaufbau gestartet: '.$r['job_uuid']);}
-     public static function contextDiagnosticsExport(): void {PSTE_Auth::assertAdmin('pste_context_diagnostics_export',(string)($_POST['_wpnonce']??''));self::jsonDownload(PSTE_Context_Snapshot_Job::diagnosticsExportPayload(),'pste-context-diagnostics-'.gmdate('Ymd-His').'-utc.json');}
+     public static function exportOverlay(): void {PSTE_Auth::assertAdmin('pste_export_overlay',(string)($_POST['_wpnonce']??''));$run=PSTE_Repository::latestRun();if(!$run)wp_die('PSTE_NO_RUN_AVAILABLE');self::jsonDownload(PSTE_Overlay::build($run,PSTE_Repository::candidatesForRun($run['run_uuid'])),'pste-seo-topic-overlay-'.gmdate('Ymd-His').'-utc.json');}
+     public static function exportTopicMap(): void {PSTE_Auth::assertAdmin('pste_export_topic_map',(string)($_POST['_wpnonce']??''));$baseline=get_option(PSTE_OPTION_SITE_BASELINE,[]);if(!is_array($baseline)||($baseline['contract']??'')!=='PSTE_SITE_BASELINE_V1')wp_die('PSTE_SITE_BASELINE_REQUIRED');self::jsonDownload(PSTE_Overlay::buildGlobalMap($baseline,PSTE_Repository::categoryProgress($baseline['leaf_categories']??[]),PSTE_Repository::allCandidates()),'pste-global-seo-topic-map-'.gmdate('Ymd-His').'-utc.json');}
  
 -    public static function sandboxExport(): void {PSTE_Auth::assertAdmin('pste_sandbox_export',(string)($_POST['_wpnonce']??''));$payload=PSTE_Semantic_Review_Sandbox::exportPayload();self::assertCredentialFreeArtifact($payload);self::jsonDownload($payload,'pste-semantic-review-sandbox-'.gmdate('Ymd-His').'-utc.json',false);}
 +    public static function sandboxExport(): void {
 +        PSTE_Auth::assertAdmin('pste_sandbox_export',(string)($_POST['_wpnonce']??''));$guard=self::credentialFreeArtifactGuard();$tmp=tmpfile();if($tmp===false)throw new RuntimeException('PSTE_SANDBOX_EXPORT_TEMPFILE_FAILED');
 +        try{$info=PSTE_Semantic_Review_Sandbox::streamExportToResource($tmp,$guard);$size=ftell($tmp);if($size===false||(int)$size!==(int)$info['bytes'])throw new RuntimeException('PSTE_SANDBOX_EXPORT_SIZE_MISMATCH');rewind($tmp);nocache_headers();header('Content-Type: application/json; charset=utf-8');header('Content-Disposition: attachment; filename="pste-semantic-review-sandbox-'.gmdate('Ymd-His').'-utc.json"');header('Content-Length: '.(string)$size);fpassthru($tmp);exit;}finally{fclose($tmp);}
 +    }
-     public static function sandboxReviewRelevance(): void {PSTE_Auth::assertAdmin('pste_sandbox_review_relevance',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$decision=sanitize_text_field((string)($_POST['decision']??''));$note=sanitize_textarea_field((string)($_POST['review_note']??''));$expected=sanitize_text_field((string)($_POST['expected_decision_sha256']??''));$r=PSTE_Semantic_Review_Sandbox::reviewRelevance($id,$decision,$note,get_current_user_id(),$expected);self::redirect('portal-seo-topic-engine-sandbox','success','Sandbox-Relevanz gespeichert: '.(string)($r['status']??''));}
-     public static function sandboxConfirmInternal(): void {PSTE_Auth::assertAdmin('pste_sandbox_confirm_internal',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$note=sanitize_textarea_field((string)($_POST['review_note']??''));$sha=sanitize_text_field((string)($_POST['expected_proposal_sha256']??''));$r=PSTE_Semantic_Review_Sandbox::confirmInternalProposal($id,$note,get_current_user_id(),$sha);self::redirect('portal-seo-topic-engine-sandbox','success','Interner Vorschlag für normalen Reentry vorgemerkt: '.(string)($r['status']??''));}
- 
-@@ -724,13 +727,14 @@
+     public static function sandboxReviewRelevance(): void {try{PSTE_Auth::assertAdmin('pste_sandbox_review_relevance',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$decision=sanitize_text_field((string)($_POST['relevance_decision']??''));$expected=strtolower(sanitize_text_field((string)($_POST['expected_response_sha256']??'')));$expectedCurrent=strtolower(sanitize_text_field((string)($_POST['expected_current_decision_sha256']??'')));$note=sanitize_text_field((string)($_POST['review_note']??''));if($note==='')throw new RuntimeException('PSTE_SANDBOX_EXPLICIT_REVIEW_NOTE_REQUIRED');PSTE_Semantic_Review_Sandbox::reviewOrReviseRelevance($id,$decision,$expected,$expectedCurrent,$note,get_current_user_id());self::redirect('sandbox','sandbox_relevance_reviewed=1');}catch(Throwable $e){self::blocked('sandbox',$e);}}
+     public static function sandboxConfirmInternal(): void {try{PSTE_Auth::assertAdmin('pste_sandbox_confirm_internal',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$expected=strtolower(sanitize_text_field((string)($_POST['expected_proposal_sha256']??'')));$note=sanitize_text_field((string)($_POST['review_note']??''));if($note==='')throw new RuntimeException('PSTE_SANDBOX_INTERNAL_REVIEW_NOTE_REQUIRED');PSTE_Semantic_Review_Sandbox::confirmInternalProposalForNormalReentry($id,$expected,$note,get_current_user_id());self::redirect('sandbox','sandbox_internal_confirmed=1');}catch(Throwable $e){self::blocked('sandbox',$e);}}
+     public static function sandboxStartAjax(): void {
+@@ -724,13 +727,13 @@
          }
          return $out;
      }
