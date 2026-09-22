@@ -21,9 +21,7 @@
   "pserc_modified": false,
   "endstempel_modified": false,
   "plugin_code_modified": false,
-  "last_full_acceptance_run": 35761165068,
-  "last_full_acceptance_status": "PASS",
-  "historical_real16_fail_closed_run": 35761341673,
-  "historical_real16_result": "BLOCKED_EXACT_CROSS_CHAT_TRANSPORT_MISSING",
-  "publish_allowed": false
+  "publish_allowed": false,
+  "current_authority_ref": "concept-agent/production-control:concept_agent/CONTROL_STATE.json",
+  "freshness_rule": "READ_CURRENT_AUTHORITY_AND_ONLY_CHECK_DELTA"
 }
