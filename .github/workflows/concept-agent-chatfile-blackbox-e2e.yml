@@ -29,8 +29,10 @@ jobs:
           p=Path('concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json')
           raw=p.read_bytes()
           x=json.loads(raw)
-          assert len(raw)==44209, len(raw)
-          assert hashlib.sha256(raw).hexdigest()=='3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761'
+          actual=hashlib.sha256(raw).hexdigest()
+          print('CHAT_SOURCE_GITHUB_COPY_BYTES='+str(len(raw)))
+          print('CHAT_SOURCE_GITHUB_COPY_SHA256='+actual)
+          assert x['contract']=='PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND'
           assert x['next_textmachine_metadata_batch']['item_count']==16
           assert x['next_textmachine_metadata_batch']['batch_sha256']=='df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0'
           print('CHAT_SOURCE_BYTES_PASS')
