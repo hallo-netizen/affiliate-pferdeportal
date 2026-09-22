@@ -194,25 +194,7 @@ jobs:
                   | tee /tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json
                 REQUIRED_ACTION="$(python3 -c "import json;print(json.load(open('/tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json',encoding='utf-8'))['required_action'])")"
                 if [[ "$REQUIRED_ACTION" == 'RESTART_BATCH_FROM_INTAKE' ]]; then
-                  python3 - <<'PY'
-                  import json
-                  from pathlib import Path
-                  Path('/tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTION_BLOCKED_V1.json').write_text(
-                      json.dumps({
-                          'contract':'CONCEPT_AGENT_RESTART_EXECUTION_BLOCKED_V1',
-                          'status':'BLOCKED',
-                          'selected_action':'RESTART_BATCH_FROM_INTAKE',
-                          'reason':'AUTHORITATIVE_PSERC_EXACT_FIVE_INTAKE_SOURCE_NOT_DURABLY_BOUND',
-                          'following_blocker':'PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT',
-                          'required_exact_five_fields':['title','target_keyword','category','article_type','plan_slot'],
-                          'chat_may_choose_action':False,
-                          'reconstruction_allowed':False,
-                          'metadata_synthesis_allowed':False,
-                          'publish_allowed':False
-                      },ensure_ascii=False,indent=2)+'\\n',
-                      encoding='utf-8'
-                  )
-                  PY
+                  printf '%s\\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTION_BLOCKED_V1","status":"BLOCKED","selected_action":"RESTART_BATCH_FROM_INTAKE","reason":"AUTHORITATIVE_PSERC_EXACT_FIVE_INTAKE_SOURCE_NOT_DURABLY_BOUND","following_blocker":"PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT","required_exact_five_fields":["title","target_keyword","category","article_type","plan_slot"],"chat_may_choose_action":false,"reconstruction_allowed":false,"metadata_synthesis_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTION_BLOCKED_V1.json
                   exit 20
                 fi
                 if [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
