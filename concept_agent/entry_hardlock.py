@@ -160,5 +160,19 @@ def main():
         print(json.dumps(d,sort_keys=True))
         return 0 if d["status"]=="READY" else 20
     except Exception as e:
-        print("CONCEPT_AGENT_ENTRY_HARDLOCK_BLOCKED:"+str(e),file=sys.stderr); return 2
+        reason=str(e)
+        blocked={
+            "contract":"CONCEPT_AGENT_ENTRY_HARDLOCK_DECISION_V1",
+            "status":"BLOCKED",
+            "reason":reason,
+            "chat_may_choose_action":False,
+            "reconstruction_allowed":False,
+            "publish_allowed":False,
+        }
+        try:
+            Path(a.out).parent.mkdir(parents=True,exist_ok=True)
+            Path(a.out).write_text(json.dumps(blocked,indent=2)+"\\n",encoding="utf-8")
+        except Exception:
+            pass
+        print("CONCEPT_AGENT_ENTRY_HARDLOCK_BLOCKED:"+reason,file=sys.stderr); return 2
 if __name__=="__main__": raise SystemExit(main())
