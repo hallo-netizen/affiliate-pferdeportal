@@ -572,12 +572,101 @@ def verify_current_entry(pointer_path: Path, current_state_path: Path, outdir: P
     return proof
 
 
+
+def verify_current_negative(pointer_path: Path, current_state_path: Path, outdir: Path) -> dict[str, Any]:
+    pointer = _load_json(pointer_path)
+    current = _load_json(current_state_path)
+    cases: list[dict[str, Any]] = []
+
+    def expect_block(name: str, mutate_pointer=None, mutate_current=None) -> None:
+        p = json.loads(json.dumps(pointer))
+        s = json.loads(json.dumps(current))
+        if mutate_pointer is not None:
+            mutate_pointer(p)
+        if mutate_current is not None:
+            mutate_current(s)
+        tmp = outdir / ("case-" + name)
+        tmp.mkdir(parents=True, exist_ok=True)
+        pp = tmp / "pointer.json"
+        sp = tmp / "current.json"
+        pp.write_text(json.dumps(p, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        sp.write_text(json.dumps(s, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        try:
+            verify_current_entry(pp, sp, tmp)
+        except Blocked as exc:
+            cases.append({"case": name, "blocked": True, "reason": str(exc)})
+        else:
+            raise Blocked("REAL_CURRENT_NEGATIVE_NOT_BLOCKED:" + name)
+
+    expect_block(
+        "batch-mismatch",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "batch_sha256", "0" * 64
+        ),
+    )
+    expect_block(
+        "transport-hash-mismatch",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "cross_chat_transport_sha256", "0" * 64
+        ),
+    )
+    expect_block(
+        "skip-article-index",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "next_article_index", 5
+        ),
+    )
+    expect_block(
+        "fake-pserc-before-articles",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "pserc_batch_completed", True
+        ),
+    )
+    expect_block(
+        "fake-endstempel-before-pserc",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "endstempel_completed", True
+        ),
+    )
+    expect_block(
+        "fake-final-file-before-endstempel",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "final_wordpress_import_file_present", True
+        ),
+    )
+    expect_block(
+        "publish-true",
+        mutate_current=lambda s: s["concept_agent_current_batch"].__setitem__(
+            "publish_allowed", True
+        ),
+    )
+
+    proof = {
+        "contract": "CONCEPT_AGENT_REAL_CURRENT_ENTRY_NEGATIVE_V1",
+        "status": "PASS",
+        "case_count": len(cases),
+        "cases": cases,
+        "source": "REAL_CURRENT_STATE_MUTATION_TEST",
+        "publish_allowed": False,
+    }
+    proof["proof_sha256"] = stable(proof)
+    outdir.mkdir(parents=True, exist_ok=True)
+    (outdir / "CONCEPT_AGENT_REAL_CURRENT_ENTRY_NEGATIVE_V1.json").write_text(
+        json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return proof
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("simulate-all-entries")
     p.add_argument("--out", required=True)
     p = sub.add_parser("verify-current-entry")
+    p.add_argument("--pointer", required=True)
+    p.add_argument("--current-state", required=True)
+    p.add_argument("--out", required=True)
+    p = sub.add_parser("verify-current-negative")
     p.add_argument("--pointer", required=True)
     p.add_argument("--current-state", required=True)
     p.add_argument("--out", required=True)
@@ -590,6 +679,15 @@ def main(argv: list[str] | None = None) -> int:
                 "status": proof["status"],
                 "validated_completed_stages": proof["validated_completed_stages"],
                 "next_stage": proof["next_stage"],
+                "proof_sha256": proof["proof_sha256"],
+            }, sort_keys=True))
+            return 0
+        if args.cmd == "verify-current-negative":
+            proof = verify_current_negative(Path(args.pointer), Path(args.current_state), Path(args.out))
+            print(json.dumps({
+                "ok": True,
+                "status": proof["status"],
+                "negative_case_count": proof["case_count"],
                 "proof_sha256": proof["proof_sha256"],
             }, sort_keys=True))
             return 0
