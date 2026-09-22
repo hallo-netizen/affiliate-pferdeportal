@@ -119,3 +119,18 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Finales Evidence Artifact: `10659844649`, Digest `sha256:76ca13601f85aba81fabd1eaa311fd20f6607264b4c18a0496aef3be055a0967`.
 - Final exakt getestete ZIP: SHA-256 `ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3`.
 - Die frühere 0.57.4-PASS-ZIP `8695cc55...` ist als Installationskandidat überholt; für den Live-Test gilt ausschließlich `ae4fde45...`.
+
+
+## PSTE-ERR-REAL-009 – 0.57.6 schließt Safe-Cancel-/Fortsetzungs-Lücke im Hobbyraum
+- Reale Ausgangsfehler: Live-Hänger in FINALIZE/PREPARE, sicherer Abbruch ließ Driver hängen, Neustart definierte den Wellenfortschritt neu und zeigte wieder 0/40.
+- 0.57.5 entfernt die schwere Admin-Inventory-Hydration aus PREPARE und beweist Safe-Cancel im echten WordPress-E2E.
+- 0.57.6 ergänzt ausschließlich die persistente Fortsetzung einer bewusst abgebrochenen Zielwelle: ursprüngliche PASS-Baseline bleibt erhalten; bereits erreichte PASS-Themen werden beim Neustart wieder eingezählt; abgeschlossene lokale Bestandsprüfung wird weiterverwendet.
+- Finaler Real-WordPress/MySQL/Multiworker/Server-Cron-Lauf: `35693065234` — SUCCESS.
+- Safe Cancel exakt in PREPARE: `PASS_CANCEL_PROOF_REACHED_PREPARE cursor=0 total=303` -> `PASS_SAFE_CANCEL_DURING_PREPARE_SETTLES_CLEANLY`.
+- Fortschritt vor Abbruch: `usable=2 complete=1`.
+- Neustart: `PASS_CANCELLED_WAVE_PROGRESS_CONTINUED old=2 new=2`; neuer Queue-Status trägt `continued_usable_candidate_count=2`, `local_backlog_complete=true`, `local_backlog_reused=true`.
+- PREPARE-Stress danach: `PASS_STRESS_PREPARE_MULTI_REQUEST total=303`.
+- Abschließende 40er Welle im selben Run: `TARGET_REACHED`, 40 nutzbare / 123 rohe Kandidaten, 27 Familien, Driver terminal IDLE, Provider-Stufen exakt 26.
+- Exakt getestete ZIP: `PSTE-0.57.6-HOBBYROOM.zip`, SHA-256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
+- Evidence Artifact: `10679790400`, Digest `sha256:dfb41d91aaa6b485bef8c0497e2ed6888dec514ce4144286177439fd282d3cab`.
+- Status: Hobbyraum vollständig PASS; echter Nutzer-Live-PASS mit exakt diesen Bytes bleibt offen. Keine PPA-005-Promotion vorher.
