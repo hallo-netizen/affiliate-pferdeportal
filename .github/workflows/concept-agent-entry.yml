@@ -1,0 +1,117 @@
+name: Concept Agent Entry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'concept_agent/entry_requests/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: concept-agent-entry
+  cancel-in-progress: false
+
+jobs:
+  enter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact main commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+
+      - name: Resolve exactly one entry request
+        id: request
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t reqs < <(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^concept_agent/entry_requests/[A-Za-z0-9._-]+\.json$' || true)
+          [ "${#reqs[@]}" -eq 1 ] || { echo "EXACTLY_ONE_ENTRY_REQUEST_REQUIRED:${#reqs[@]}"; exit 2; }
+          python3 - "${reqs[0]}" <<'PY'
+          import json,re,sys
+          p=sys.argv[1]
+          x=json.load(open(p,encoding='utf-8'))
+          if set(x)!={'contract','request_id','publish_allowed'}:
+              raise SystemExit('ENTRY_REQUEST_FIELDS_INVALID')
+          if x['contract']!='CONCEPT_AGENT_ENTRY_REQUEST_V1':
+              raise SystemExit('ENTRY_REQUEST_CONTRACT_INVALID')
+          if x['publish_allowed'] is not False:
+              raise SystemExit('ENTRY_REQUEST_PUBLISH_MUST_BE_FALSE')
+          if not re.fullmatch(r'[A-Za-z0-9._-]{8,120}',str(x['request_id'])):
+              raise SystemExit('ENTRY_REQUEST_ID_INVALID')
+          print('ENTRY_REQUEST_PASS')
+          PY
+
+      - name: Enter only through front door
+        id: gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/concept-agent-entry
+          python3 concept_agent/full_workflow_gate.py verify-current-entry \
+            --pointer control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+            --current-state control/startmaster0107/CURRENT_STATE.json \
+            --out /tmp/concept-agent-entry/current
+          python3 - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('/tmp/concept-agent-entry/current/CONCEPT_AGENT_CURRENT_ENTRY_PROOF.json')
+          x=json.loads(p.read_text(encoding='utf-8'))
+          result={
+            'contract':'CONCEPT_AGENT_ENTRY_DECISION_V1',
+            'status':'PASS',
+            'workflow_entry':'ALWAYS_FROM_STAGE_0',
+            'validated_completed_stages':x['validated_completed_stages'],
+            'next_stage':x['next_stage'],
+            'batch_sha256':x['batch_sha256'],
+            'publish_allowed':False,
+          }
+          pathlib.Path('/tmp/concept-agent-entry/ENTRY_DECISION.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('NEXT_STAGE='+x['next_stage'])
+          PY
+
+      - name: Enforce exact transport before article production
+        shell: bash
+        run: |
+          set -euo pipefail
+          next_stage="$(python3 -c "import json;print(json.load(open('/tmp/concept-agent-entry/ENTRY_DECISION.json'))['next_stage'])")"
+          if [ "$next_stage" != "ARTICLE_PRODUCTION" ]; then
+            echo "TRANSPORT_CHECK_NOT_REQUIRED_FOR_STAGE:$next_stage"
+            exit 0
+          fi
+          transport='concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
+          set +e
+          if [ -f "$transport" ]; then
+            python3 concept_agent/entry_hardlock.py probe \
+              --pointer control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+              --current-state control/startmaster0107/CURRENT_STATE.json \
+              --transport "$transport" \
+              --out /tmp/concept-agent-entry/ARTICLE_ENTRY_DECISION.json
+          else
+            python3 concept_agent/entry_hardlock.py probe \
+              --pointer control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+              --current-state control/startmaster0107/CURRENT_STATE.json \
+              --out /tmp/concept-agent-entry/ARTICLE_ENTRY_DECISION.json
+          fi
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            cp /tmp/concept-agent-entry/ARTICLE_ENTRY_DECISION.json /tmp/concept-agent-entry/ENTRY_DECISION.json 2>/dev/null || true
+            echo "ENTRY_BLOCKED"
+            exit 20
+          fi
+          cp /tmp/concept-agent-entry/ARTICLE_ENTRY_DECISION.json /tmp/concept-agent-entry/ENTRY_DECISION.json
+          echo "ARTICLE_ENTRY_READY"
+
+      - name: Upload exact entry decision
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: concept-agent-entry-${{ github.run_id }}
+          path: /tmp/concept-agent-entry/
+          if-no-files-found: error
+          retention-days: 7
