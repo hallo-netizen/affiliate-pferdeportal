@@ -40,16 +40,14 @@ jobs:
           [ "${#reqs[@]}" -eq 1 ] || { echo "EXACTLY_ONE_RUN_REQUEST_REQUIRED:${#reqs[@]}"; exit 2; }
           test -f "${reqs[0]}"
           echo "request_ref=${reqs[0]}" >> "$GITHUB_OUTPUT"
-      - name: Validate request and run fixed route
-        id: run
+      - name: Validate request
+        id: parsed
         env:
           REQUEST_REF: ${{ steps.request.outputs.request_ref }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/concept-agent-return
-          python3 - <<'PY' > /tmp/request.env
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json, os, re
           from pathlib import Path
           p=Path('control-branch')/os.environ['REQUEST_REF']
@@ -59,10 +57,17 @@ jobs:
           if x['publish_allowed'] is not False: raise SystemExit('REQUEST_PUBLISH_MUST_BE_FALSE')
           if x['mode'] not in {'simulate-all','run-current'}: raise SystemExit('REQUEST_MODE_INVALID')
           if not re.fullmatch(r'[A-Za-z0-9._-]{8,120}',x['request_id']): raise SystemExit('REQUEST_ID_INVALID')
-          print('MODE='+x['mode'])
-          print('REQUEST_ID='+x['request_id'])
+          print('mode='+x['mode'])
+          print('request_id='+x['request_id'])
           PY
-          source /tmp/request.env
+      - name: Run fixed route
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODE: ${{ steps.parsed.outputs.mode }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/concept-agent-return
           if [[ "$MODE" == 'simulate-all' ]]; then
             python3 project-main/concept_agent/runner.py simulate-one --out /tmp/concept-agent-return/one
             python3 project-main/concept_agent/runner.py simulate-multi --out /tmp/concept-agent-return/multi
@@ -71,25 +76,12 @@ jobs:
             BINDING='project-main/concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
             POINTER='project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json'
             if [[ ! -f "$BINDING" ]]; then
-              python3 - <<'PY'
-              import json
-              from pathlib import Path
-              Path('/tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json').write_text(json.dumps({
-                'contract':'CONCEPT_AGENT_RUN_BLOCKED_V1',
-                'status':'BLOCKED',
-                'reason':'CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB',
-                'publish_allowed':False
-              },ensure_ascii=False,indent=2)+'\n')
-              PY
-              echo 'CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB'
+              printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
               exit 20
             fi
             EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
             cd project-main
-            python3 concept_agent/runner.py run \
-              --binding concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json \
-              --binding-sha256 "$EXPECTED" \
-              --out /tmp/concept-agent-return/production
+            python3 concept_agent/runner.py run --binding concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production
           fi
       - name: Upload exact return package
         if: always()
