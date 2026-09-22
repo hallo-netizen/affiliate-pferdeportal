@@ -47,16 +47,30 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p /tmp/concept-agent-return
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
-          import json, os, re
+          import json, os, re, sys
           from pathlib import Path
-          p=Path('control-branch')/os.environ['REQUEST_REF']
-          x=json.loads(p.read_text(encoding='utf-8'))
-          if set(x) != {'contract','mode','publish_allowed','request_id'}: raise SystemExit('REQUEST_FIELDS_INVALID')
-          if x['contract']!='CONCEPT_AGENT_GITHUB_RUN_REQUEST_V1': raise SystemExit('REQUEST_CONTRACT_INVALID')
-          if x['publish_allowed'] is not False: raise SystemExit('REQUEST_PUBLISH_MUST_BE_FALSE')
-          if x['mode'] not in {'simulate-all','run-current'}: raise SystemExit('REQUEST_MODE_INVALID')
-          if not re.fullmatch(r'[A-Za-z0-9._-]{8,120}',x['request_id']): raise SystemExit('REQUEST_ID_INVALID')
+          out=Path('/tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json')
+          def block(reason):
+              out.write_text(json.dumps({
+                  'contract':'CONCEPT_AGENT_RUN_BLOCKED_V1',
+                  'status':'BLOCKED',
+                  'reason':reason,
+                  'publish_allowed':False
+              },ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              print(reason,file=sys.stderr)
+              raise SystemExit(20)
+          try:
+              p=Path('control-branch')/os.environ['REQUEST_REF']
+              x=json.loads(p.read_text(encoding='utf-8'))
+          except Exception:
+              block('REQUEST_JSON_INVALID')
+          if set(x) != {'contract','mode','publish_allowed','request_id'}: block('REQUEST_FIELDS_INVALID')
+          if x['contract']!='CONCEPT_AGENT_GITHUB_RUN_REQUEST_V1': block('REQUEST_CONTRACT_INVALID')
+          if x['publish_allowed'] is not False: block('REQUEST_PUBLISH_MUST_BE_FALSE')
+          if x['mode'] not in {'simulate-all','run-current'}: block('REQUEST_MODE_INVALID')
+          if not re.fullmatch(r'[A-Za-z0-9._-]{8,120}',x['request_id']): block('REQUEST_ID_INVALID')
           print('mode='+x['mode'])
           print('request_id='+x['request_id'])
           PY
