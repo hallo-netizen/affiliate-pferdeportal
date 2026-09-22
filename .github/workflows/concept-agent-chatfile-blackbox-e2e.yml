@@ -252,6 +252,156 @@ jobs:
               raise SystemExit(1)
           PY
 
+      - name: Exact chat snapshot full-chain simulation to one final file
+        id: fullchain
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64, copy, hashlib, json, os, stat, sys
+          from pathlib import Path
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+
+          ROOT=Path('.').resolve()
+          sys.path.insert(0,str(ROOT/'concept_agent'))
+          sys.path.insert(0,str(ROOT/'control/startmaster0107'))
+          import intake_bridge as intake
+          import runner
+          import endstempel_bridge as end
+          import GITHUB_FINAL_RELEASE as final
+
+          OUT=Path('/tmp/concept-agent-blackbox')
+          SNAP=json.loads((ROOT/'concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json').read_text(encoding='utf-8'))
+
+          def canon(v):
+              return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
+          def stable(v):
+              return hashlib.sha256(canon(v)).hexdigest()
+          def subset(n):
+              x=copy.deepcopy(SNAP)
+              b=x['next_textmachine_metadata_batch']
+              b['items']=b['items'][:n]; b['item_count']=n
+              core=dict(b); core.pop('batch_sha256',None); b['batch_sha256']=stable(core)
+              return x
+          def research(req):
+              rows=[]
+              for a in req['items']:
+                  ev=f'Gebundene deterministische Simulationsevidenz für {a["title"]}; ausschließlich für den isolierten End-to-End-Ablauftest.'
+                  rows.append({
+                      'item_index':a['item_index'],'plan_slot':a['plan_slot'],
+                      'sources':[{
+                          'source_id':f'blackbox-{a["item_index"]}',
+                          'source_title':'Gebundene Blackbox-Testquelle',
+                          'source_url':f'https://example.test/concept-agent-blackbox/{a["item_index"]}',
+                          'evidence':ev,
+                          'snapshot_sha256':hashlib.sha256(ev.encode()).hexdigest(),
+                      }]
+                  })
+              return {'contract':intake.RESEARCH_SUBMISSION_CONTRACT,'batch_sha256':req['batch_sha256'],'item_count':req['item_count'],'items':rows}
+          def binding(req,bound):
+              items=[]
+              for a,r in zip(req['items'],bound['items']):
+                  items.append({
+                      'item_index':a['item_index'],'plan_slot':a['plan_slot'],'title':a['title'],
+                      'target_keyword':a['target_keyword'],'category':a['category'],'article_type':a['article_type'],
+                      'research_binding':{'status':'BOUND','sources':r['sources'],'source_pool_sha256':r['source_pool_sha256']},
+                      'authoring_binding':{'status':'BOUND','internal_links':['/pferde/','/ratgeber/','/wissen/'],'rules':'ISOLATED_E2E_SIMULATION_ONLY'},
+                  })
+              return {'contract':'CONCEPT_AGENT_WORK_BINDING_E2E_SIM_V1','batch_sha256':req['batch_sha256'],'item_count':req['item_count'],'items':items,'publish_allowed':False}
+          def end_request(req,handoff,generation):
+              release_items=[]; plan_items=[]; articles=[]
+              for a in handoff['articles']:
+                  cid='article:blackbox-'+str(a['item_index'])+'-'+a['plan_slot'][:12]
+                  release_items.append({'plan_slot':a['plan_slot'],'canonical_article_id':cid})
+                  plan_items.append({'canonical_article_id':cid,'canonical_article':{'body_html':a['body_html']}})
+                  articles.append({'plan_slot':a['plan_slot'],'content_utf8':a['body_html']})
+              env={
+                  'contract':end.PACKAGE_CONTRACT,
+                  'fact_pack_bundle':{},
+                  'production_plan':{'items':plan_items},
+                  'workflow_release':{
+                      'contract':'WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED','status':'PASS',
+                      'wordpress_write_performed':False,'exact_five_batch_sha256':req['batch_sha256'],
+                      'items':release_items,
+                  },
+              }
+              return {'contract':end.REQ_CONTRACT,'batch_sha256':req['batch_sha256'],'runtime_generation':generation,
+                      'import_envelope':env,'articles':articles,'publish_allowed':False,'content_mutation_performed':False}
+
+          # Isolated deterministic ENDSTEMPEL signer. Production key is never read.
+          seed=b'\x11'*32
+          key=Ed25519PrivateKey.from_private_bytes(seed)
+          pub=key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
+          pub_b64=base64.b64encode(pub).decode(); pub_sha=hashlib.sha256(pub).hexdigest()
+          key_id='isolated-e2e-'+pub_sha[:16]
+          signer=Path('/tmp/concept-agent-e2e-signer.py')
+          signer.write_text("""#!/usr/bin/env python3
+          import base64,hashlib,json,sys
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          key=Ed25519PrivateKey.from_private_bytes(bytes.fromhex('""" + seed.hex() + """'))
+          pub=key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
+          req=json.loads(sys.stdin.read())
+          out={'signing_key_id':'""" + key_id + """','signing_public_key_sha256':hashlib.sha256(pub).hexdigest(),'public_key_b64':base64.b64encode(pub).decode(),'signature_b64':base64.b64encode(key.sign(req['manifest_sha256'].encode('ascii'))).decode()}
+          print(json.dumps(out,separators=(',',':')))
+          """,encoding='utf-8')
+          signer.chmod(signer.stat().st_mode | stat.S_IXUSR)
+          os.environ['ENDSTEMPEL_HSM_CMD']=str(signer)
+          os.environ['ENDSTEMPEL_TRUSTED_KEY_ID']=key_id
+          os.environ['ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256']=pub_sha
+          os.environ['ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64']=pub_b64
+
+          proof={'contract':'CONCEPT_AGENT_EXACT_CHAT_FULL_CHAIN_SIM_V1','cases':[],'publish_allowed':False}
+          for n,generation in ((1,101),(3,103)):
+              case=OUT/f'fullchain-positive-{n}'; case.mkdir(exist_ok=True)
+              snap=subset(n)
+              req=intake.prepare(snap)
+              bound=intake.bind_research(req,research(req))
+              work=binding(req,bound)
+              handoff=runner.execute(work,case/'runner','simulation',force_repair_index=(1 if n==3 else None))
+              er=end_request(req,handoff,generation)
+              req_path=ROOT/f'concept_agent/production_ready/blackbox-e2e-{n}.json'
+              req_path.parent.mkdir(parents=True,exist_ok=True)
+              req_path.write_text(json.dumps(er,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              manifest_ref=end.build(str(req_path.relative_to(ROOT)))
+              result=final.finalize(manifest_ref)
+              final_path=ROOT/result['final_ref']
+              finals=list(final_path.parent.glob('PSERC_APPROVED_PRODUCTION_PACKAGE_FINAL.json'))
+              pkg=json.loads(final_path.read_text(encoding='utf-8'))
+              ok=(result['status']=='GITHUB_FINAL_RELEASE_PASS' and result['article_count']==n and
+                  len(finals)==1 and pkg['status']=='ENDSTEMPEL_PASS' and pkg['publish_allowed'] is False)
+              proof['cases'].append({
+                  'case':f'positive-{n}','pass':ok,'article_count':n,'runner_status':handoff['status'],
+                  'revisions':[a['revision_count'] for a in handoff['articles']],
+                  'manifest_ref':manifest_ref,'final_ref':result['final_ref'],'final_sha256':result['final_sha256'],
+                  'final_file_count':len(finals),
+              })
+
+              # Downstream negative: approved body bytes may not change after release.
+              bad=copy.deepcopy(er)
+              bad['articles'][0]['content_utf8'] += '<p>tamper</p>'
+              bad_path=ROOT/f'concept_agent/production_ready/blackbox-e2e-{n}-negative.json'
+              bad_path.write_text(json.dumps(bad,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              blocked=False; reason=''
+              try:
+                  end.build(str(bad_path.relative_to(ROOT)))
+              except end.Blocked as exc:
+                  blocked=True; reason=str(exc)
+              proof['cases'].append({
+                  'case':f'negative-{n}-postapproval-content-tamper',
+                  'pass':blocked and reason.startswith('IMPORT_ENVELOPE_ARTICLE_MISMATCH:'),
+                  'blocked':blocked,'reason':reason,
+              })
+
+          proof['status']='PASS' if all(x['pass'] for x in proof['cases']) else 'FAIL'
+          proof['proof_sha256']=stable(proof)
+          (OUT/'CONCEPT_AGENT_EXACT_CHAT_FULL_CHAIN_SIM_V1.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(proof,ensure_ascii=False,indent=2))
+          if proof['status']!='PASS':
+              raise SystemExit(1)
+          PY
+
       - name: Upload hard proof
         if: always()
         uses: actions/upload-artifact@v4
@@ -262,7 +412,7 @@ jobs:
           retention-days: 7
 
       - name: Enforce overall PASS
-        if: steps.blackbox.outcome != 'success' || steps.reentry.outcome != 'success'
+        if: steps.blackbox.outcome != 'success' || steps.reentry.outcome != 'success' || steps.fullchain.outcome != 'success'
         run: |
           echo 'CONCEPT_AGENT_CHATFILE_BLACKBOX_E2E_FAILED'
           exit 1
