@@ -35,7 +35,7 @@ jobs:
           set -euo pipefail
           F='AFFILIATE_HOBBYRAUM/performance-diagnose-safe-2.1/pa-performance-diagnose-safe.php'
           php -l "$F"
-          test "$(sha256sum "$F" | awk '{print $1}')" = "a3105d93ad2f4f13f547218b97c5d6ffd5090c90d7870b12329089d7bf6b865d"
+          test "$(git hash-object "$F")" = "e9c9296bd78d66155e20969837b019042111ca2d"
           ! grep -F "add_action('all'" "$F"
           grep -F "'targeted_trace'=>pads_targeted_trace()" "$F"
           grep -F "'design_performance_probe'=>" "$F"
