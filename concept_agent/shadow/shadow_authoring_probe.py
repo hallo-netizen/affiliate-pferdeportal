@@ -9,7 +9,7 @@ sys.path.insert(0,str(REPO/"isolated_system4"))
 import intake_bridge as intake
 import production_checks_engine as checks
 
-TITLE="Hindernisstangen sicher aufbauen: worauf es vor dem Training ankommt"
+TITLE="Hindernisstangen sicher aufbauen und vor dem Training prüfen"
 KEYWORD="Hindernisstangen sicher aufbauen"
 CATEGORY="hindernisstangen-beratung"
 ARTICLE_TYPE="Beratung"
