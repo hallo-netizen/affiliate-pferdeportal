@@ -53,7 +53,19 @@ final class PRG_Baseline {
         return $this->normalize_registry($raw);
     }
 }
-final class PRG_ExactCandidate { use PPAR_Provider_Registry_Trait; const PROVIDER_CONTRACT_VERSION='2.0'; }
+final class PRG_ExactCandidate {
+    use PPAR_Provider_Registry_Trait;
+    const PROVIDER_CONTRACT_VERSION='2.0';
+    public function gate($provider){
+        $provider=sanitize_key((string)$provider);
+        if(!$this->provider_exists($provider)) return false;
+        $definition=$this->provider_definition($provider);
+        $state=is_array($definition)?sanitize_key((string)($definition['state']??'prepared')):'prepared';
+        if($state!=='active') return false;
+        if($this->provider_supports($provider,'credentials')) return 'credentials';
+        return true;
+    }
+}
 
 $GLOBALS['prg_phase']='';
 $GLOBALS['prg_filter_hits']=array('baseline'=>0,'candidate'=>0,'admin'=>0);
