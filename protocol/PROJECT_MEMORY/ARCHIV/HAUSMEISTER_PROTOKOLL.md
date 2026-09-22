@@ -115,3 +115,29 @@ Hausmeister darf laut verbindlichem Prozess Dateien nicht löschen. Außerdem is
 
 ERGEBNISSTATUS:
 PASS / sicherer Auditlauf / keine aktive Wahrheit verändert.
+
+
+## HM-004 – Neun Repository-Kandidaten ins Sammelarchiv verschoben
+
+DATUM:
+2026-09-22
+
+AUFTRAG:
+Die in HM-003 identifizierten neun Kandidaten vorerst gesammelt archivieren; aktuelle Einträge und Plugins zwingend nicht anfassen.
+
+AUSFÜHRUNG:
+- byteidentische Verschiebung nach `archive/repository-loeschkandidaten/2026-09-22/`;
+- keine endgültige Löschung;
+- PR #360;
+- Merge `78d02baf8f830e82b1f9e59ef7df458a5d367fee`.
+
+PRÜFUNG:
+- `hardlock` PASS;
+- `hardlock-base` PASS;
+- Post-Merge: alte Root-Pfade 0/9 vorhanden;
+- Archivpfade 9/9 vorhanden;
+- Git-Blob-SHAs 9/9 unverändert;
+- aktuelle Plugin-/Current-Autoritäten nicht angefasst.
+
+ERGEBNIS:
+PASS / sicher archiviert / spätere Sammelprüfung vor endgültiger Entfernung weiterhin erforderlich.
