@@ -122,6 +122,136 @@ jobs:
               raise SystemExit(1)
           PY
 
+      - name: Mid-workflow chat handoff and abort re-entry
+        id: reentry
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import copy, hashlib, json, sys
+          from pathlib import Path
+          sys.path.insert(0,'concept_agent')
+          import full_workflow_gate as gate
+
+          OUT=Path('/tmp/concept-agent-blackbox')
+          OUT.mkdir(parents=True,exist_ok=True)
+          SNAP=json.loads(Path('concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json').read_text(encoding='utf-8'))
+
+          def h(label):
+              return hashlib.sha256(label.encode()).hexdigest()
+
+          def base_pair(n, body_count, lt_count, ppm_count, next_index):
+              items=SNAP['next_textmachine_metadata_batch']['items'][:n]
+              core={
+                  'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2',
+                  'status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE',
+                  'item_count':n,
+                  'maximum_articles':0,
+                  'maximum_articles_per_type':0,
+                  'publish_allowed':False,
+                  'content_or_format_payload_present':False,
+                  'items':items,
+              }
+              batch=gate.stable(core)
+              pointer={
+                  'contract':'PFERDE_ATELIER_CONCEPT_AGENT_WORK_BINDING_POINTER_V1',
+                  'workflow':'PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT',
+                  'batch_sha256':batch,
+                  'item_count':n,
+                  'intake_sha256':h('intake-'+batch),
+                  'research_binding_sha256':h('research-'+batch),
+                  'authoring_bindings_file_sha256':h('authoring-'+batch),
+                  'cross_chat_transport_sha256':h('transport-file-'+batch),
+                  'cross_chat_transport_binding_sha256':h('transport-binding-'+batch),
+                  'cross_chat_transport_required':True,
+                  'publish_allowed':False,
+              }
+              current={
+                  'concept_agent_current_batch':{
+                      'workflow':'PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT',
+                      'batch_sha256':batch,
+                      'item_count':n,
+                      'intake_status':'PASS',
+                      'research_binding_status':'PASS',
+                      'authoring_binding_status':'PASS',
+                      'cross_chat_transport_sha256':pointer['cross_chat_transport_sha256'],
+                      'article_bodies_completed':body_count,
+                      'languagetool_6_8_completed':lt_count,
+                      'ppm_6_7_9_completed':ppm_count,
+                      'next_article_index':next_index,
+                      'pserc_batch_completed':False,
+                      'endstempel_completed':False,
+                      'final_wordpress_import_file_present':False,
+                      'publish_allowed':False,
+                  }
+              }
+              return pointer,current
+
+          cases=[]
+
+          # 1 article: chat starts after all pre-writing bindings, before article body.
+          p,s=base_pair(1,0,0,0,0)
+          root=OUT/'reentry-positive-1'; root.mkdir()
+          pp=root/'pointer.json'; sp=root/'current.json'
+          pp.write_text(json.dumps(p),encoding='utf-8'); sp.write_text(json.dumps(s),encoding='utf-8')
+          proof=gate.verify_current_entry(pp,sp,root)
+          ok=(proof['workflow_entry']=='ALWAYS_FROM_STAGE_0' and
+              proof['validated_completed_stages']==['INTAKE','RESEARCH','RESEARCH_BOUND','AUTHORING_BOUND'] and
+              proof['next_stage']=='ARTICLE_PRODUCTION' and
+              s['concept_agent_current_batch']['next_article_index']==0)
+          cases.append({'case':'reentry-positive-1-before-article','pass':ok,'proof':proof})
+
+          # 3 articles: article 0 persisted, abort/chat switch, continuation must remain article index 1.
+          p,s=base_pair(3,1,1,1,1)
+          root=OUT/'reentry-positive-3-after-article-0'; root.mkdir()
+          pp=root/'pointer.json'; sp=root/'current.json'
+          pp.write_text(json.dumps(p),encoding='utf-8'); sp.write_text(json.dumps(s),encoding='utf-8')
+          proof=gate.verify_current_entry(pp,sp,root)
+          ok=(proof['workflow_entry']=='ALWAYS_FROM_STAGE_0' and
+              proof['validated_completed_stages']==['INTAKE','RESEARCH','RESEARCH_BOUND','AUTHORING_BOUND'] and
+              proof['next_stage']=='ARTICLE_PRODUCTION' and
+              s['concept_agent_current_batch']['next_article_index']==1)
+          cases.append({'case':'reentry-positive-3-resume-at-article-1','pass':ok,'saved_next_article_index':1,'proof':proof})
+
+          # Negative: forged skip from persisted article 1 to article 2.
+          p,s=base_pair(3,1,1,1,2)
+          root=OUT/'reentry-negative-skip-index'; root.mkdir()
+          pp=root/'pointer.json'; sp=root/'current.json'
+          pp.write_text(json.dumps(p),encoding='utf-8'); sp.write_text(json.dumps(s),encoding='utf-8')
+          blocked=False; reason=''
+          try:
+              gate.verify_current_entry(pp,sp,root)
+          except gate.Blocked as exc:
+              blocked=True; reason=str(exc)
+          cases.append({'case':'reentry-negative-forged-next-article-2','pass':blocked and reason=='CURRENT_NEXT_ARTICLE_INDEX_MISMATCH','blocked':blocked,'reason':reason})
+
+          # Negative: transport binding changed across chat handoff.
+          p,s=base_pair(3,1,1,1,1)
+          s['concept_agent_current_batch']['cross_chat_transport_sha256']='0'*64
+          root=OUT/'reentry-negative-transport'; root.mkdir()
+          pp=root/'pointer.json'; sp=root/'current.json'
+          pp.write_text(json.dumps(p),encoding='utf-8'); sp.write_text(json.dumps(s),encoding='utf-8')
+          blocked=False; reason=''
+          try:
+              gate.verify_current_entry(pp,sp,root)
+          except gate.Blocked as exc:
+              blocked=True; reason=str(exc)
+          cases.append({'case':'reentry-negative-transport-tamper','pass':blocked and reason=='CURRENT_TRANSPORT_POINTER_STATE_MISMATCH','blocked':blocked,'reason':reason})
+
+          result={
+              'contract':'CONCEPT_AGENT_CHAT_REENTRY_BLACKBOX_V1',
+              'status':'PASS' if all(x['pass'] for x in cases) else 'FAIL',
+              'cases':cases,
+              'rule':'NEW_CHAT_AND_CONTINUATION_REENTER_AT_STAGE_0_VALIDATE_AND_FAST_FORWARD_ONLY',
+              'publish_allowed':False,
+          }
+          result['proof_sha256']=gate.stable(result)
+          (OUT/'CONCEPT_AGENT_CHAT_REENTRY_BLACKBOX_V1.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          if result['status']!='PASS':
+              raise SystemExit(1)
+          PY
+
       - name: Upload hard proof
         if: always()
         uses: actions/upload-artifact@v4
@@ -132,7 +262,7 @@ jobs:
           retention-days: 7
 
       - name: Enforce overall PASS
-        if: steps.blackbox.outcome != 'success'
+        if: steps.blackbox.outcome != 'success' || steps.reentry.outcome != 'success'
         run: |
           echo 'CONCEPT_AGENT_CHATFILE_BLACKBOX_E2E_FAILED'
           exit 1
