@@ -183,6 +183,29 @@ with zipfile.ZipFile(PPM) as z:
                         break
 checks["ppm_runtime_references"]=references
 
+# Exact callers and full implementation around complete category source.
+caller_patterns=[
+ "PPM679_Three_Type_Complete_Category_Source::",
+ "Three_Type_Complete_Category_Source::",
+ "class PPM679_Three_Type_Complete_Category_Source",
+]
+callers=[]
+with zipfile.ZipFile(PPM) as z:
+    for member in z.namelist():
+        if member.endswith("/") or not member.lower().endswith((".php",".json",".txt",".md")):
+            continue
+        try: txt=z.read(member).decode("utf-8")
+        except Exception: continue
+        lines=txt.splitlines()
+        for idx,line in enumerate(lines):
+            if any(pat in line for pat in caller_patterns):
+                callers.append({
+                    "member":member,
+                    "line":idx+1,
+                    "context":"\n".join(lines[max(0,idx-12):min(len(lines),idx+26)])
+                })
+checks["ppm_complete_category_source_callers"]=callers
+
 out={
  "status":"PASS_READ_ONLY_BASELINE_AUDIT",
  "rules":{
