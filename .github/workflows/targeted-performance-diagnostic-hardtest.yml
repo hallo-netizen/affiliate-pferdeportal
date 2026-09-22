@@ -74,7 +74,7 @@ jobs:
           $u=get_user_by('login','admin'); wp_set_current_user($u->ID);
           $post_id=wp_insert_post(array('post_title'=>'PADS Fixture Post','post_status'=>'publish','post_type'=>'post'));
           update_post_meta($post_id,'pads_fixture_meta','fixture-value');
-          if(sanitize_key('Ab C')!=='ab-c') fail_gate('sanitize neutrality before');
+          if(sanitize_key('Ab C')!=='abc') fail_gate('sanitize neutrality before');
           if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality before');
           $menu=wp_get_nav_menu_object('pads-menu');
           if(!$menu){
@@ -98,7 +98,7 @@ jobs:
           $d1=wp_nav_menu($desktop_args); $m1=wp_nav_menu($mobile_args);
           if(hash('sha256',$d0)!==hash('sha256',$d1)) fail_gate('desktop changed');
           if(hash('sha256',$m0)!==hash('sha256',$m1)) fail_gate('mobile changed');
-          if(sanitize_key('Ab C')!=='ab-c') fail_gate('sanitize neutrality after');
+          if(sanitize_key('Ab C')!=='abc') fail_gate('sanitize neutrality after');
           if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality after');
           $trace=pads_targeted_trace();
           if(($trace['sanitize_key']['fires']??0)<10000) fail_gate('sanitize count missing');
