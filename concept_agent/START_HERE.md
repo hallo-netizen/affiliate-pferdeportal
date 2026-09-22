@@ -30,6 +30,20 @@ Chat-/GitHub-Kontrollbefehle:
 - `/concept-agent simulate-all`
 - `/concept-agent run-current`
 
+## Übergabe / Chatwechsel
+
+Eine Übergabe ist erst vollständig, wenn der exakt gebundene Arbeitsauftrag bytegenau unter `concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json` auf dem Control-Zweig gespeichert wurde.
+
+Die Speicherung läuft durch `concept_agent/binding_transport_gate.py` und akzeptiert nur:
+- exakt den im Pointer erwarteten Datei-SHA-256;
+- exakt den erwarteten internen `binding_sha256`;
+- denselben Batch und dieselbe Artikelanzahl;
+- `publish_allowed=false`.
+
+Fehlt diese dauerhafte Datei oder stimmt ein Hash nicht: `BLOCKED`. Rekonstruktion, Ersatzdatei und freies Weiterarbeiten sind verboten.
+
+Bei jedem neuen Chat oder jeder Fortsetzung läuft anschließend wieder der GitHub-Eingang: Stufe 0 prüfen → gültige erledigte Stufen nur durchwinken → genau eine nächste Stufe freigeben.
+
 ## Harte Grenze
 
 - Eingang ist ausschließlich der aktuelle `PSERC_TEXTMACHINE_METADATA_BATCH_V2` aus dem Metadaten-Snapshot.
