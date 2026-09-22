@@ -69,8 +69,12 @@ jobs:
           contract=x.get('contract')
           mode=x.get('mode')
           if contract=='CONCEPT_AGENT_GITHUB_RUN_REQUEST_V1':
-              if set(x) != {'contract','mode','publish_allowed','request_id'}: block('REQUEST_FIELDS_INVALID')
+              allowed={'contract','mode','publish_allowed','request_id'}
+              if mode=='run-current':
+                  allowed.add('intake_snapshot_b64')
+              if set(x) not in ({'contract','mode','publish_allowed','request_id'}, allowed): block('REQUEST_FIELDS_INVALID')
               if mode not in {'simulate-all','run-current'}: block('REQUEST_MODE_INVALID')
+              if 'intake_snapshot_b64' in x and (not isinstance(x.get('intake_snapshot_b64'),str) or not x['intake_snapshot_b64']): block('INTAKE_SNAPSHOT_B64_INVALID')
           elif contract=='CONCEPT_AGENT_BINDING_PERSIST_REQUEST_V1':
               if set(x) != {'contract','mode','publish_allowed','request_id','transport_b64'}: block('REQUEST_FIELDS_INVALID')
               if mode!='persist-binding': block('REQUEST_MODE_INVALID')
@@ -195,8 +199,10 @@ jobs:
                 REQUIRED_ACTION="$(python3 -c "import json;print(json.load(open('/tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json',encoding='utf-8'))['required_action'])")"
                 if [[ "$REQUIRED_ACTION" == 'RESTART_BATCH_FROM_INTAKE' ]]; then
                   python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/CONCEPT_AGENT_FIXED_BLOCK_ROUTE_V1.json',encoding='utf-8')); assert x.get('required_action')=='RESTART_BATCH_FROM_INTAKE' and x.get('next_stage')=='INTAKE'; assert x.get('chat_may_choose_action') is False and x.get('reconstruction_allowed') is False and x.get('publish_allowed') is False"
-                  printf '%s\n' '{"contract":"CONCEPT_AGENT_STAGE_ROUTE_V1","status":"PASS","next_stage":"INTAKE","authority":"EXISTING_CONCEPT_AGENT_INTAKE","entry_ref":"concept_agent/intake_bridge.py","allowed_operation":"PREPARE_INTAKE_ONLY","selected_action":"RESTART_BATCH_FROM_INTAKE","chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_STAGE_ROUTE_V1.json
-                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTED_V1","status":"PASS","selected_action":"RESTART_BATCH_FROM_INTAKE","next_stage":"INTAKE","entry_ref":"concept_agent/intake_bridge.py","allowed_operation":"PREPARE_INTAKE_ONLY","chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json
+                  python3 -c "import base64,json,os,pathlib,sys; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); raw=req.get('intake_snapshot_b64'); raw or sys.exit('RESTART_INTAKE_SNAPSHOT_MISSING'); pathlib.Path('/tmp/concept-agent-intake-snapshot.json').write_bytes(base64.b64decode(raw,validate=True))"
+                  python3 project-main/concept_agent/intake_bridge.py prepare                     /tmp/concept-agent-intake-snapshot.json                     /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE.json                     | tee /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE_RESULT.json
+                  python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/CONCEPT_AGENT_INTAKE_RESULT.json',encoding='utf-8')); assert x.get('status')=='CONCEPT_AGENT_INTAKE_READY' and isinstance(x.get('item_count'),int) and x['item_count']>=1 and x.get('publish_allowed') is False"
+                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTED_V1","status":"PASS","selected_action":"RESTART_BATCH_FROM_INTAKE","next_stage":"INTAKE","entry_ref":"concept_agent/intake_bridge.py","allowed_operation":"PREPARE_INTAKE_ONLY","intake_executed":true,"chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json
                 elif [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
                   exit 2
                 else
