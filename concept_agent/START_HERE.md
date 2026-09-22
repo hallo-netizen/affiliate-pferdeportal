@@ -22,6 +22,10 @@ Der Runner:
 
 GitHub-Startpunkt: `.github/workflows/concept-agent-production.yml`.
 
+Autoritativer Control-Status: `concept_agent/CONTROL_STATE.json`.
+
+**Jeder neue Chat und jede Fortsetzung startet immer hier neu.** Der Chat darf keinen Zwischenstand selbst rekonstruieren und keine Workflow-Stufe auswählen. GitHub prüft den realen Stand von Stufe 0 an, fast-forwardet ausschließlich bereits nachgewiesene Stufen und erzeugt danach genau ein `CONCEPT_AGENT_STAGE_ROUTE_V1` für die einzige erlaubte nächste Stufe.
+
 Chat-/GitHub-Kontrollbefehle:
 - `/concept-agent simulate-all`
 - `/concept-agent run-current`
