@@ -26,14 +26,15 @@ final class PRG_Ranking_Gate {
     private function auto_rank_old($campaign, $context) {
         $wanted = array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($campaign['automation_target_keys'] ?? array()))));
         if (!$wanted) { return null; }
-        $primary = sanitize_key((string) ($context['primary_slug'] ?? ''));
-        $post_type = sanitize_key((string) ($context['post_type'] ?? ''));
+        $primary = isset($context['_ppar_norm_primary_slug']) ? (string)$context['_ppar_norm_primary_slug'] : sanitize_key((string) ($context['primary_slug'] ?? ''));
+        $post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
         $available = array();
         $semantic_primary = $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? ''));
         $semantic_ancestors = array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array()))));
         if ($semantic_primary !== '') { $available[] = $semantic_primary; }
         foreach ($semantic_ancestors as $semantic_key) { $available[] = $semantic_key; }
-        $slot_type = sanitize_key((string) ($context['slot_type'] ?? ''));
+        $slot_type = isset($context['slot_type']) ? (string)$context['slot_type'] : '';
+        $slot_type = isset($context['_ppar_norm_post_type']) ? $slot_type : sanitize_key($slot_type);
         if ($post_type === 'page' && $slot_type === 'anzeigenmarkt_top_banner') { $available[] = 'market:anzeigenmarkt'; }
         if ($primary !== '') {
             if ($post_type === 'page') { $available[] = 'page:' . $primary; $available[] = 'journal:' . $primary; }
@@ -44,8 +45,9 @@ final class PRG_Ranking_Gate {
             elseif ($post_type === 'uge_group_archive') { $available[] = 'uge_group:' . $primary; }
             elseif ($post_type === 'pa_breed_group_archive') { $available[] = 'pa_breed_group:' . $primary; }
         }
-        foreach ((array) ($context['direct_term_slugs'] ?? array()) as $slug) {
-            $slug = sanitize_key((string) $slug);
+        $direct_term_slugs = isset($context['_ppar_norm_direct_term_slugs']) && is_array($context['_ppar_norm_direct_term_slugs']) ? $context['_ppar_norm_direct_term_slugs'] : (array)($context['direct_term_slugs'] ?? array());
+        foreach ($direct_term_slugs as $slug) {
+            $slug = isset($context['_ppar_norm_direct_term_slugs']) ? (string)$slug : sanitize_key((string) $slug);
             if ($slug === '') { continue; }
             if ($post_type === 'post') { $available[] = 'category:' . $slug; $available[] = 'journal:' . $slug; }
             elseif ($post_type === 'hp_listing') { $available[] = 'market:' . $slug; }
@@ -59,8 +61,9 @@ final class PRG_Ranking_Gate {
             $primary_key=$hierarchy_prefix.$primary;
             if (in_array($primary_key,$wanted,true)) return array('specificity'=>520,'matches'=>1,'reason'=>'Exakte Zielkante: '.$primary_key.'.');
             $ancestor_keys=array();
-            foreach ((array)($context['slugs']??array()) as $slug) {
-                $slug=sanitize_key((string)$slug);
+            $context_slugs = isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs']) ? $context['_ppar_norm_slugs'] : (array)($context['slugs']??array());
+            foreach ($context_slugs as $slug) {
+                $slug=isset($context['_ppar_norm_slugs']) ? (string)$slug : sanitize_key((string)$slug);
                 if ($slug!=='' && $slug!==$primary) { $ancestor_keys[]=$hierarchy_prefix.$slug; }
             }
             $ancestor_matches=array_values(array_intersect(array_unique($wanted),array_unique($ancestor_keys)));
@@ -122,9 +125,12 @@ final class PRG_Ranking_Gate {
     private function prep_context($context, $slot_type) {
         $r=$context;
         $r['slot_type']=sanitize_key((string)$slot_type);
+        $r['_ppar_norm_primary_slug']=sanitize_key((string)($context['primary_slug']??''));
+        $r['_ppar_norm_post_type']=sanitize_key((string)($context['post_type']??''));
         $r['_ppar_norm_ancestor_ids']=isset($context['ancestor_ids'])&&is_array($context['ancestor_ids'])?array_map('intval',$context['ancestor_ids']):array();
         $r['_ppar_norm_slugs']=isset($context['slugs'])&&is_array($context['slugs'])?array_map('sanitize_key',$context['slugs']):array();
         $r['_ppar_norm_term_ids']=isset($context['term_ids'])&&is_array($context['term_ids'])?array_map('intval',$context['term_ids']):array();
+        $r['_ppar_norm_direct_term_slugs']=isset($context['direct_term_slugs'])&&is_array($context['direct_term_slugs'])?array_values(array_filter(array_map('sanitize_key',$context['direct_term_slugs']))):array();
         $r['_ppar_norm_semantic_primary_target_key']=$this->automation_normalize_target_key((string)($context['semantic_primary_target_key']??''));
         $r['_ppar_norm_semantic_ancestor_target_keys']=array_values(array_filter(array_map(array($this,'automation_normalize_target_key'),(array)($context['semantic_ancestor_target_keys']??array()))));
         return $r;
