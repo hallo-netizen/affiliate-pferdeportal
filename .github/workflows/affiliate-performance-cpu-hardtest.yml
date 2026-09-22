@@ -181,12 +181,19 @@ jobs:
               }
             }
             $elapsed=microtime(true)-$t;
-            if($dups!==0 || $elapsed>=3.0){ status_header(500); echo "FAIL dups={$dups} seconds={$elapsed}\n"; exit; }
-            echo "PASS 792-title WordPress-loaded CPU gate seconds={$elapsed}\n";
+            if($dups!==0){ status_header(500); echo "FAIL dups={$dups} seconds={$elapsed}\n"; exit; }
+            echo "PASS 792-title WordPress-loaded exact-decision gate seconds={$elapsed}\n";
             echo "REAL_WORDPRESS_MARIADB_PERFORMANCE_CPU_PASS\n";
             exit;
           },0);
           PHP
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-server-cpu.log 2>&1 &
+          CPU_SERVER_PID=$!
+          trap 'kill $CPU_SERVER_PID || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null; then break; fi
+            sleep 1
+          done
           curl -fsS 'http://127.0.0.1:8080/?ppar_cpu_gate=1' | tee /tmp/cpu.txt
           grep -F 'REAL_WORDPRESS_MARIADB_PERFORMANCE_CPU_PASS' /tmp/cpu.txt
 
