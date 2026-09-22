@@ -120,8 +120,20 @@ def main():
     if checks.text_sha256(article)==checks.text_sha256(old_body):
         raise RuntimeError("SHADOW_REUSED_REAL7_BODY_FORBIDDEN")
 
-    lt=checks.run_languagetool(REPO,article)
-    ppm=checks.run_ppm_content_validator(REPO,article,fact_pack,plan,lt)
+    try:
+        lt=checks.run_languagetool(REPO,article)
+    except checks.RepairRequired as exc:
+        failure={"contract":"CONCEPT_AGENT_SHADOW_AUTHORING_FAILURE_V1","stage":exc.checker,"findings":exc.findings,"publish_allowed":False}
+        writej(OUT/"SHADOW_FAILURE.json",failure)
+        print(json.dumps(failure,ensure_ascii=False,indent=2,sort_keys=True))
+        raise
+    try:
+        ppm=checks.run_ppm_content_validator(REPO,article,fact_pack,plan,lt)
+    except checks.RepairRequired as exc:
+        failure={"contract":"CONCEPT_AGENT_SHADOW_AUTHORING_FAILURE_V1","stage":exc.checker,"findings":exc.findings,"publish_allowed":False}
+        writej(OUT/"SHADOW_FAILURE.json",failure)
+        print(json.dumps(failure,ensure_ascii=False,indent=2,sort_keys=True))
+        raise
     links=checks.no_external_links(article)
 
     proof={
