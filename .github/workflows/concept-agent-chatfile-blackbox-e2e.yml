@@ -21,11 +21,11 @@ jobs:
         run: |
           set -euo pipefail
           test -f concept_agent/CONTROL_ENTRY_POINTER.json
-          test -f concept_agent/current/PSERC_METADATA_SNAPSHOT.json
+          test -f concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json
           python3 - <<'PY'
           import json,hashlib
           from pathlib import Path
-          p=Path('concept_agent/current/PSERC_METADATA_SNAPSHOT.json')
+          p=Path('concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json')
           raw=p.read_bytes()
           x=json.loads(raw)
           assert len(raw)==44209, len(raw)
@@ -45,7 +45,7 @@ jobs:
           from pathlib import Path
 
           ROOT=Path('.').resolve()
-          SNAP=ROOT/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json'
+          SNAP=ROOT/'concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json'
           WORKFLOW=ROOT/'.github/workflows/concept-agent-production.yml'
           OUT=Path('/tmp/concept-agent-blackbox')
           OUT.mkdir(parents=True,exist_ok=True)
