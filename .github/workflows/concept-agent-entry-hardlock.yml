@@ -1,0 +1,88 @@
+name: Concept Agent Entry Hardlock
+
+on:
+  push:
+    branches:
+      - 'concept-agent/entry-hardlock-v1'
+    paths:
+      - 'concept_agent/entry_requests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  entry-hardlock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout hardlock branch
+        uses: actions/checkout@v4
+        with:
+          ref: concept-agent/entry-hardlock-v1
+          path: hardlock
+          fetch-depth: 1
+
+      - name: Checkout unchanged main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: project-main
+          fetch-depth: 1
+
+      - name: Positive and negative hardlock simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/entry-hardlock
+          python3 hardlock/concept_agent/entry_hardlock.py simulate --out /tmp/entry-hardlock/simulation
+
+      - name: Real 16-article pre-chat-switch handoff probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/entry-hardlock/real16
+          set +e
+          python3 hardlock/concept_agent/entry_hardlock.py probe \
+            --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+            --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
+            --out /tmp/entry-hardlock/real16/REAL16_ENTRY_DECISION.json
+          rc=$?
+          set -e
+          [ "$rc" -eq 20 ] || { echo "REAL16_EXPECTED_FAIL_CLOSED_NOT_OBSERVED:$rc"; exit 2; }
+          python3 - <<'PY'
+          import json
+          p='/tmp/entry-hardlock/real16/REAL16_ENTRY_DECISION.json'
+          x=json.load(open(p,encoding='utf-8'))
+          assert x['status']=='BLOCKED'
+          assert x['reason']=='EXACT_CROSS_CHAT_TRANSPORT_MISSING'
+          assert x['next_stage']=='ARTICLE_PRODUCTION'
+          assert x['next_article_index']==0
+          assert [r['stage'] for r in x['validated_fast_forward']] == [
+              'INTAKE','RESEARCH_HASH_BINDING','AUTHORING_LINK_BINDING'
+          ]
+          print('REAL16_ENTRY_FAIL_CLOSED_PASS')
+          PY
+
+      - name: Verify existing workflow files untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in \
+            concept_agent/intake_bridge.py \
+            concept_agent/runner.py \
+            concept_agent/endstempel_bridge.py \
+            isolated_system4/production_checks_engine.py \
+            control/startmaster0107/GITHUB_FINAL_RELEASE.py
+          do
+            cmp "hardlock/$f" "project-main/$f"
+          done
+          echo "EXISTING_WORKFLOW_BYTE_IDENTICAL_PASS"
+
+      - name: Upload proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: concept-agent-entry-hardlock-${{ github.run_id }}
+          path: /tmp/entry-hardlock/
+          if-no-files-found: error
+          retention-days: 7
