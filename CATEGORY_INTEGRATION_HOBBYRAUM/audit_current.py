@@ -113,15 +113,24 @@ with zipfile.ZipFile(PPM) as z:
         raw=z.read(member)
         value=json.loads(raw.decode("utf-8"))
         summary={"sha256":hashlib.sha256(raw).hexdigest(),"bytes":len(raw),"top_keys":list(value.keys())}
+        summary["contract"]=value.get("contract")
+        summary["version"]=value.get("version")
+        for meta_key in ("scope","source_type","source_reference","source_export_filename","source_export_sha256","counts","mapping_rule","absolute_completeness_claimed","known_limits","required_roles","runtime_read_only_revalidation_required_before_any_write","automatic_replacement_forbidden","portal_structure_contract","portal_structure_snapshot_hash","wordpress_taxonomy_contract","wordpress_taxonomy_snapshot_hash"):
+            if meta_key in value:
+                summary[meta_key]=value.get(meta_key)
         if "categories" in value and isinstance(value["categories"],list):
             summary["categories_count"]=len(value["categories"])
             summary["category_sample"]=value["categories"][:2]
+            summary["category_slugs"]=[
+              str(x.get("slug") or x.get("category_slug") or "") for x in value["categories"] if isinstance(x,dict)
+            ]
             summary["new_category_hits"]=[
               x for x in value["categories"] if isinstance(x,dict) and (x.get("slug") in new_cat_slugs or x.get("category_slug") in new_cat_slugs)
             ]
         if "targets" in value and isinstance(value["targets"],list):
             summary["targets_count"]=len(value["targets"])
             summary["target_sample"]=value["targets"][:3]
+            summary["targets_all"]=value["targets"]
             summary["new_page_hits"]=[
               x for x in value["targets"] if isinstance(x,dict) and x.get("slug") in new_page_slugs
             ]
