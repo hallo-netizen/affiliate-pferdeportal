@@ -1,0 +1,116 @@
+name: Targeted Performance Diagnostic 2.1 Hardtest
+on:
+  push:
+    branches: [design-performance-standalone-hardtest-20260922]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-diagnose-safe-2.1/**'
+      - '.github/workflows/targeted-performance-diagnostic-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Verify exact diagnostic source
+        run: |
+          set -euo pipefail
+          F='AFFILIATE_HOBBYRAUM/performance-diagnose-safe-2.1/pa-performance-diagnose-safe.php'
+          php -l "$F"
+          test "$(sha256sum "$F" | awk '{print $1}')" = "a3105d93ad2f4f13f547218b97c5d6ffd5090c90d7870b12329089d7bf6b865d"
+          ! grep -F "add_action('all'" "$F"
+          grep -F "'targeted_trace'=>pads_targeted_trace()" "$F"
+          grep -F "'design_performance_probe'=>" "$F"
+      - name: Install WordPress 7.1.1 and plugins
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Targeted Diagnostic CI' --admin_user=admin --admin_password='test-only-pass' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/plugins/pa-performance-diagnose-safe
+          cp AFFILIATE_HOBBYRAUM/performance-diagnose-safe-2.1/pa-performance-diagnose-safe.php /tmp/wp-site/wp-content/plugins/pa-performance-diagnose-safe/
+          mkdir -p /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance
+          cp AFFILIATE_HOBBYRAUM/performance-design/standalone-plugin/pa-affiliate-design-performance.php /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance/
+          mkdir -p /tmp/wp-site/wp-content/plugins/pads-fixture
+          cat > /tmp/wp-site/wp-content/plugins/pads-fixture/pads-fixture.php <<'PHP'
+          <?php
+          /*
+           * Plugin Name: PADS Fixture
+           */
+          function pads_fixture_burn($post_id){
+              for($i=0;$i<10000;$i++){ sanitize_key('Fixture Key '.$i); }
+              for($i=0;$i<2500;$i++){ sanitize_text_field('Fixture Text '.$i); }
+              for($i=0;$i<2500;$i++){ get_post_meta($post_id,'pads_fixture_meta',true); }
+          }
+          PHP
+          /tmp/wp plugin activate pa-performance-diagnose-safe pa-affiliate-design-performance pads-fixture --path=/tmp/wp-site
+      - name: Prove neutrality callsites and live menu shortcut probe
+        run: |
+          set -euo pipefail
+          cat > /tmp/gate.php <<'PHP'
+          <?php
+          function fail_gate($m){ fwrite(STDERR,"FAIL ".$m."\n"); exit(1); }
+          $u=get_user_by('login','admin'); wp_set_current_user($u->ID);
+          $post_id=wp_insert_post(array('post_title'=>'PADS Fixture Post','post_status'=>'publish','post_type'=>'post'));
+          update_post_meta($post_id,'pads_fixture_meta','fixture-value');
+          if(sanitize_key('Ab C')!=='ab-c') fail_gate('sanitize neutrality before');
+          if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality before');
+          $menu=wp_get_nav_menu_object('pads-menu');
+          if(!$menu){
+              $menu_id=wp_create_nav_menu('pads-menu');
+              for($i=0;$i<120;$i++){
+                  wp_update_nav_menu_item($menu_id,0,array(
+                      'menu-item-title'=>'Item '.$i,
+                      'menu-item-url'=>home_url('/item-'.$i.'/'),
+                      'menu-item-status'=>'publish'
+                  ));
+              }
+              $menu=wp_get_nav_menu_object($menu_id);
+          }
+          $menu_id=(int)$menu->term_id;
+          $desktop_args=array('menu'=>$menu_id,'theme_location'=>'primary','container'=>'nav','menu_class'=>'pftk-brand-menu-v15065','fallback_cb'=>false,'depth'=>3,'echo'=>false);
+          $mobile_args=array('menu'=>$menu_id,'theme_location'=>'primary','container'=>'nav','menu_class'=>'pftk-mobile-menu-v15074','fallback_cb'=>false,'depth'=>3,'echo'=>false);
+          $GLOBALS['pads_measure']=false;
+          $d0=wp_nav_menu($desktop_args); $m0=wp_nav_menu($mobile_args);
+          $GLOBALS['pads_measure']=true;
+          pads_fixture_burn($post_id);
+          $d1=wp_nav_menu($desktop_args); $m1=wp_nav_menu($mobile_args);
+          if(hash('sha256',$d0)!==hash('sha256',$d1)) fail_gate('desktop changed');
+          if(hash('sha256',$m0)!==hash('sha256',$m1)) fail_gate('mobile changed');
+          if(sanitize_key('Ab C')!=='ab-c') fail_gate('sanitize neutrality after');
+          if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality after');
+          $trace=pads_targeted_trace();
+          if(($trace['sanitize_key']['fires']??0)<10000) fail_gate('sanitize count missing');
+          if(($trace['get_post_metadata']['fires']??0)<2500) fail_gate('meta count missing');
+          $flat=wp_json_encode($trace);
+          if(strpos($flat,'pads-fixture')===false) fail_gate('fixture callsite missing');
+          $probe=(array)$GLOBALS['pads_menu_probe'];
+          if(($probe['desktop_args']??0)!==1 || ($probe['mobile_args']??0)!==1) fail_gate('menu classes not hit');
+          if(($probe['desktop_perf_filter_seen']??0)!==1 || ($probe['mobile_perf_filter_seen']??0)!==1) fail_gate('performance filter not seen');
+          if(($probe['mobile_pre_nonnull']??0)<100) fail_gate('mobile shortcut not observed');
+          echo "TRACE ".wp_json_encode($trace)."\n";
+          echo "PROBE ".wp_json_encode($probe)."\n";
+          echo "PASS targeted diagnostic neutral; caller attribution works; design shortcut observed\n";
+          PHP
+          /tmp/wp eval-file /tmp/gate.php --path=/tmp/wp-site
