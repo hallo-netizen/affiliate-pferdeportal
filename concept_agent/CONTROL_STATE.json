@@ -1,6 +1,6 @@
 {
   "contract": "CONCEPT_AGENT_CONTROL_STATE_V1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "PASS",
   "scope": "ENTRANCE_AND_REENTRY_CONTROL_ONLY",
   "control_branch": "concept-agent/production-control",
@@ -8,9 +8,12 @@
   "domain_state_ref": "main:control/startmaster0107/CURRENT_STATE.json",
   "work_binding_pointer_ref": "main:control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json",
   "full_workflow_gate_ref": "concept_agent/full_workflow_gate.py",
+  "entry_hardlock_ref": "concept_agent/entry_hardlock.py",
+  "binding_transport_gate_ref": "concept_agent/binding_transport_gate.py",
   "resumable_runner_ref": "concept_agent/resumable_runner.py",
   "article_runner_ref": "main:concept_agent/runner.py",
   "entry_policy": "ALWAYS_FROM_STAGE_0_VALIDATE_AND_FAST_FORWARD",
+  "handoff_policy": "NO_HANDOFF_COMPLETE_WITHOUT_EXACT_DURABLE_BINDING",
   "chat_may_choose_stage": false,
   "alternate_route_allowed": false,
   "stages": [
@@ -24,8 +27,9 @@
     "CHAT_FILE_RETURN"
   ],
   "acceptance": {
-    "all_stage_route_matrix_run": 35758398205,
-    "all_stage_route_matrix_status": "PASS",
+    "full_acceptance_run": 35761165068,
+    "full_acceptance_status": "PASS",
+    "full_acceptance_artifact_sha256": "f33c5fe6e596723ae449673ea05c34a3d2ea759e5ab3c13f7b265c880bc93d27",
     "route_positive_count": 9,
     "route_negative_count": 9,
     "full_reentry_positive_count": 9,
@@ -35,29 +39,50 @@
       3
     ],
     "chat_to_final_negative_cases": 2,
-    "real16_generic_reentry_run": 35758540485,
-    "real16_entry_status": "PASS_TO_ARTICLE_PRODUCTION",
-    "real16_validated_completed_stages": [
+    "mid_run_positive_status": "PASS",
+    "mid_run_negative_status": "PASS",
+    "exact_binding_hardlock_run": 35760829042,
+    "exact_binding_hardlock_status": "PASS",
+    "historical_real16_run": 35761341673,
+    "historical_real16_entry_status": "PASS_TO_ARTICLE_PRODUCTION",
+    "historical_real16_validated_completed_stages": [
       "INTAKE",
       "RESEARCH",
       "RESEARCH_BOUND",
       "AUTHORING_BOUND"
     ],
-    "real16_route_authority": "CONCEPT_AGENT_RESUMABLE_RUNNER",
-    "real16_terminal_status": "EXPECTED_BLOCK",
-    "real16_terminal_reason": "CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB"
+    "historical_real16_route_authority": "CONCEPT_AGENT_RESUMABLE_RUNNER",
+    "historical_real16_terminal_status": "EXPECTED_BLOCK",
+    "historical_real16_terminal_reason": "EXACT_CROSS_CHAT_TRANSPORT_MISSING",
+    "invalid_binding_persistence_run": 35761479213,
+    "invalid_binding_persistence_status": "EXPECTED_BLOCK",
+    "invalid_binding_persistence_reason": "TRANSPORT_SHA_MISMATCH"
+  },
+  "durable_binding_policy": {
+    "durable_ref": "concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json",
+    "persist_request_contract": "CONCEPT_AGENT_BINDING_PERSIST_REQUEST_V1",
+    "persist_request_mode": "persist-binding",
+    "exact_bytes_required": true,
+    "file_sha256_must_match_pointer": true,
+    "internal_binding_sha256_must_match_pointer": true,
+    "reconstruction_allowed": false,
+    "handoff_complete_without_durable_binding": false,
+    "missing_or_mismatched_binding_policy": "BLOCKED"
   },
   "current_real16_required_transport": {
     "filename": "CONCEPT_AGENT_16_WORK_BINDING.json",
     "expected_sha256": "f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4",
+    "expected_binding_sha256": "f9384dddb5135860ebe5d1c3f7daf5f446ae3d0d52acafc4973ecaee14b44b1f",
     "available_in_github": false,
-    "reconstruction_allowed": false
+    "reconstruction_allowed": false,
+    "safe_result": "BLOCKED_BEFORE_ARTICLE_PRODUCTION"
   },
   "domain_workflow_modified": false,
   "language_tool_6_8_modified": false,
   "ppm_6_7_9_modified": false,
   "pserc_modified": false,
   "endstempel_modified": false,
+  "plugin_code_modified": false,
   "publish_allowed": false,
-  "control_state_sha256": "08f738bd5454282edb395369a65a59de5a4fcbbf6a170c6866a80834b5ddcd3b"
+  "control_state_sha256": "8f93a9c3fc27172c94905bb0fe4bd4015f720956307fbb93c45ec713fdd212d9"
 }
