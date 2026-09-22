@@ -8,7 +8,7 @@ on:
       - 'concept_agent/run_requests/**'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: concept-agent-production-control
@@ -77,7 +77,10 @@ jobs:
       - name: Run fixed route
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           MODE: ${{ steps.parsed.outputs.mode }}
+          CONCEPT_AGENT_STATE_BRANCH: concept-agent/production-control
         shell: bash
         run: |
           set -euo pipefail
@@ -86,16 +89,29 @@ jobs:
             python3 project-main/concept_agent/runner.py simulate-one --out /tmp/concept-agent-return/one
             python3 project-main/concept_agent/runner.py simulate-multi --out /tmp/concept-agent-return/multi
             python3 project-main/concept_agent/runner.py simulate-negative --out /tmp/concept-agent-return/negative
+
+            python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-return/mid-positive
+            python3 control-branch/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/concept-agent-return/mid-negative
+
+            CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
+            CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/SIMULATION_CURRENT_STATE.json \
+            python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-return/mid-positive-github
           else
             BINDING='project-main/concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
             POINTER='project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json'
+            STATE='control-branch/concept_agent/runtime/CURRENT_STATE.json'
             if [[ ! -f "$BINDING" ]]; then
               printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
               exit 20
             fi
             EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
-            cd project-main
-            python3 concept_agent/runner.py run --binding concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production
+            args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
+            if [[ -f "$STATE" ]]; then
+              args+=(--state "$STATE")
+            fi
+            CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
+            CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
+            python3 control-branch/concept_agent/resumable_runner.py "${args[@]}"
           fi
       - name: Upload exact return package
         if: always()
