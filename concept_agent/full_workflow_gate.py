@@ -722,6 +722,10 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
     proof_sha = str(proof.get("proof_sha256") or "")
     if not SHA_RE.fullmatch(proof_sha):
         raise Blocked("ENTRY_PROOF_HASH_INVALID_FOR_ROUTE")
+    proof_core = dict(proof)
+    proof_core.pop("proof_sha256", None)
+    if proof_sha != stable(proof_core):
+        raise Blocked("ENTRY_PROOF_HASH_MISMATCH_FOR_ROUTE")
     ticket = {
         "contract": STAGE_ROUTE_CONTRACT,
         "status": "PASS",
