@@ -71,6 +71,10 @@ jobs:
           if contract=='CONCEPT_AGENT_GITHUB_RUN_REQUEST_V1':
               if set(x) != {'contract','mode','publish_allowed','request_id'}: block('REQUEST_FIELDS_INVALID')
               if mode not in {'simulate-all','run-current'}: block('REQUEST_MODE_INVALID')
+          elif contract=='CONCEPT_AGENT_SLOT_RESOLVE_REQUEST_V1':
+              if set(x) != {'contract','mode','publish_allowed','request_id','slots'}: block('REQUEST_FIELDS_INVALID')
+              if mode!='resolve-slots': block('REQUEST_MODE_INVALID')
+              if not isinstance(x.get('slots'),list) or not x['slots']: block('SLOTS_REQUIRED')
           elif contract=='CONCEPT_AGENT_BINDING_PERSIST_REQUEST_V1':
               if set(x) != {'contract','mode','publish_allowed','request_id','transport_b64'}: block('REQUEST_FIELDS_INVALID')
               if mode!='persist-binding': block('REQUEST_MODE_INVALID')
@@ -94,7 +98,13 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/concept-agent-return
-          if [[ "$MODE" == 'persist-binding' ]]; then
+          if [[ "$MODE" == 'resolve-slots' ]]; then
+            python3 -c "import json,os,pathlib; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); pathlib.Path('/tmp/concept-agent-slots.json').write_text(json.dumps(req['slots'])+'\\n',encoding='utf-8')"
+            python3 control-branch/concept_agent/slot_metadata_export.py \
+              --repo project-main \
+              --slots /tmp/concept-agent-slots.json \
+              --out /tmp/concept-agent-return/CONCEPT_AGENT_SLOT_METADATA_EXPORT_V1.json
+          elif [[ "$MODE" == 'persist-binding' ]]; then
             python3 -c "import base64,json,os,pathlib; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); pathlib.Path('/tmp/concept-agent-binding-candidate.json').write_bytes(base64.b64decode(req['transport_b64'],validate=True))"
             set +e
             python3 control-branch/concept_agent/binding_transport_gate.py accept \
