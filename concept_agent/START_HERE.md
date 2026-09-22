@@ -21,7 +21,15 @@ Der Runner:
 6. setzt niemals `publish_allowed=true`.
 
 Der automatische GitHub-Start liegt getrennt auf dem Ausführungszweig `concept-agent/production-control`.
-Ein neuer Lauf wird dort ausschließlich durch genau eine Datei unter `concept_agent/run_requests/` angestoßen.
+Autoritativer Wegweiser auf `main`: `concept_agent/CONTROL_ENTRY_POINTER.json`.
+
+**Jeder neue Chat und jede Fortsetzung muss vor jeder fachlichen Arbeit zuerst diesen Wegweiser lesen und den GitHub-Eingang auf `concept-agent/production-control` anstoßen.** Der Chat darf keinen Zwischenstand selbst rekonstruieren, keine Workflow-Stufe auswählen und keinen direkten Ersatzweg benutzen.
+
+GitHub prüft den gespeicherten Workflow immer von Stufe 0 an, winkt nur bereits nachgewiesene Stufen durch und gibt danach genau eine nächste Stufe frei.
+
+Eine Übergabe gilt erst als vollständig, wenn der exakt gebundene Arbeitsauftrag bytegenau dauerhaft in GitHub gespeichert und gegen Datei-SHA-256 sowie internen Binding-SHA-256 geprüft wurde. Fehlt diese Datei oder stimmt ein Hash nicht: `BLOCKED`, keine Rekonstruktion.
+
+Ein neuer Lauf wird auf dem Control-Zweig ausschließlich durch genau eine Datei unter `concept_agent/run_requests/` angestoßen.
 
 ## Harte Grenze
 
