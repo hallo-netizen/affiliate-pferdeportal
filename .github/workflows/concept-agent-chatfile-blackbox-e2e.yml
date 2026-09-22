@@ -316,16 +316,30 @@ jobs:
                   release_items.append({'plan_slot':a['plan_slot'],'canonical_article_id':cid})
                   plan_items.append({'canonical_article_id':cid,'canonical_article':{'body_html':a['body_html']}})
                   articles.append({'plan_slot':a['plan_slot'],'content_utf8':a['body_html']})
+              fact_pack_bundle={}
+              production_plan={'items':plan_items}
+              workflow_release={
+                  'contract':'WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED','status':'PASS',
+                  'wordpress_write_performed':False,'exact_five_batch_sha256':req['batch_sha256'],
+                  'items':release_items,
+              }
               env={
                   'contract':end.PACKAGE_CONTRACT,
-                  'fact_pack_bundle':{},
-                  'production_plan':{'items':plan_items},
-                  'workflow_release':{
-                      'contract':'WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED','status':'PASS',
-                      'wordpress_write_performed':False,'exact_five_batch_sha256':req['batch_sha256'],
-                      'items':release_items,
-                  },
+                  'source':'CONCEPT_AGENT_EXACT_CHAT_FULL_CHAIN_SIM_V1',
+                  'fact_pack_bundle':fact_pack_bundle,
+                  'fact_pack_bundle_sha256':stable(fact_pack_bundle),
+                  'production_plan':production_plan,
+                  'production_plan_sha256':stable(production_plan),
+                  'workflow_release':workflow_release,
+                  'workflow_release_sha256':stable(workflow_release),
               }
+              env['package_id']=stable({
+                  'contract':end.PACKAGE_CONTRACT,
+                  'fact_pack_bundle_sha256':env['fact_pack_bundle_sha256'],
+                  'production_plan_sha256':env['production_plan_sha256'],
+                  'workflow_release_sha256':env['workflow_release_sha256'],
+              })
+              env['package_payload_sha256']=stable(env)
               return {'contract':end.REQ_CONTRACT,'batch_sha256':req['batch_sha256'],'runtime_generation':generation,
                       'import_envelope':env,'articles':articles,'publish_allowed':False,'content_mutation_performed':False}
 
