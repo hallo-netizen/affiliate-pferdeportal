@@ -221,7 +221,7 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "STOP_BEFORE_CODEX_RESTART_RECOVERY_AND_PRECODEX_HARDLOCK_INTEGRATED",
+  "current_work_status": "CONCEPT_AGENT_16_DRAFT_READY_ARTICLE_0_NOT_STARTED",
   "current_execution_blocker": {
     "code": "RESOLVED",
     "error_class": false,
@@ -232,14 +232,16 @@
     "validated_head_sha": "2634e7137de96567e04ab941c4715938274b60bb",
     "acceptance_run": 35435860769,
     "codex_start_allowed": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "applies_to_concept_agent": false
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT",
     "evidence": "PR #342 terminal comment 5740160115",
     "classification": "EXTERNAL_AVAILABILITY_BLOCKER_NOT_PROJECT_FAILURE",
     "effect": "Even after technical integration, no real Codex run may start until capacity is available and a fresh PASS receipt is created.",
-    "resolved": false
+    "resolved": false,
+    "applies_to_concept_agent": false
   },
   "superseded_live_findings": [
     {
@@ -287,19 +289,20 @@
   },
   "last_safe_main_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
   "last_safe_change": "Restart-recovery and pre-Codex start hardlock integrated by PR #352 after exact-head PASS of Deterministic Entrance Gate 35435850207, Immutable Base Hardlock 35435849529 and full System4A acceptance 35435860769. CURRENT closeout stops before Codex. No production text, PPM 6.7.9, LanguageTool 6.8, design or quality threshold changed.",
-  "hobbyroom_status": "REAL7_EXTERNAL_USAGE_LIMIT_STOP",
+  "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "CODEX_USAGE_LIMIT; ARTICLE0_METADATA_DURABLE_BUT_ARTICLE_BYTES_NOT_DURABLE",
+  "hobbyroom_blocker": "NONE_FOR_CONCEPT_AGENT_AUTHORING; CROSS_CHAT_REQUIRES_EXACT_WORK_BINDING_TRANSPORT",
   "next_action": {
-    "goal": "STOP_BEFORE_CODEX",
-    "action": "Do not start Codex. Restart recovery and the pre-Codex start hardlock are integrated on current main. Before any later real Codex start, first resolve the external CODEX_USAGE_LIMIT, synchronize dispatcher PR #342 to the then-current main, require a fresh hardlock-base PASS, create a fresh PASS pre-Codex receipt, and require explicit user authorization for that real start.",
-    "why": "The requested integration and all codex-free proofs are complete. The handoff explicitly requires stopping before Codex, and the external capacity blocker is still recorded as unresolved.",
+    "goal": "AUTHOR_CONCEPT_AGENT_16_ARTICLE_0_FROM_BOUND_INPUT",
+    "action": "Load the exact CONCEPT_AGENT_16_WORK_BINDING.json transport and verify SHA-256 f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4. Continue exclusively in concept_agent. Author item_index 0 from its bound research and authoring bindings. Then run LanguageTool 6.8 and PPM 6.7.9 on that same article. If a validator returns repair-required, repair the same article only and re-run the same validator path. Do not start item_index 1 before article 0 PASS.",
+    "why": "The 16-item intake, research binding and authoring/link bindings are validated. No 16-item article body exists yet, so authoring article 0 is the first open production step.",
     "forbidden": [
-      "start Codex",
-      "change production text rules or quality thresholds",
-      "change PPM 6.7.9 or LanguageTool 6.8",
-      "reuse historical/recovery article bodies as NEW",
+      "reselect or mutate bound research sources",
+      "change the three bound internal links",
+      "change batch order, metadata or plan_slot",
+      "use legacy System4 SOURCE_REQUESTS as Concept Agent authority",
+      "skip LanguageTool 6.8 or PPM 6.7.9",
       "publish or write to WordPress"
     ]
   },
@@ -501,5 +504,26 @@
     "production_main_contains_hardlock": true,
     "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
     "acceptance_run": 35435860769
+  },
+  "concept_agent_current_batch": {
+    "workflow": "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT",
+    "entry_ref": "concept_agent/START_HERE.md",
+    "work_binding_pointer_ref": "control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json",
+    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+    "item_count": 16,
+    "intake_status": "PASS",
+    "research_binding_status": "PASS",
+    "authoring_binding_status": "PASS",
+    "article_bodies_completed": 0,
+    "next_article_index": 0,
+    "languagetool_6_8_completed": 0,
+    "ppm_6_7_9_completed": 0,
+    "pserc_batch_completed": false,
+    "endstempel_completed": false,
+    "final_wordpress_import_file_present": false,
+    "publish_allowed": false,
+    "cross_chat_transport_filename": "CONCEPT_AGENT_16_WORK_BINDING.json",
+    "cross_chat_transport_sha256": "f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4",
+    "missing_or_hash_mismatched_transport_policy": "BLOCKED"
   }
 }
