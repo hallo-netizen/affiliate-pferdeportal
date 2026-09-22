@@ -2,7 +2,7 @@
   "contract": "CONCEPT_AGENT_DURABLE_RUN_STATE_V1",
   "state_version": "1.0.0",
   "status": "IN_PROGRESS",
-  "phase": "REPAIR_REQUIRED",
+  "phase": "DRAFTED",
   "batch_sha256": "157a4ba1fae088e967540e6e9528e3592b315d7781ba2071fae40ff86ff9ce03",
   "binding_file_sha256": "a7494ba1224d4fb037c8e9042c7d917f5e0f62474bc43c45d743c636a7b332bc",
   "item_count": 3,
@@ -45,15 +45,10 @@
     "item_index": 1,
     "plan_slot": "7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874",
     "bound_work_sha256": "ce0cd10a62c34f59bb8d7c94c95b9e414eac83ea9cf386a12dc47363401f0f1c",
-    "revision": 1,
-    "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 2 behandelt das fest gebundene Thema Konzept 5 Testkeyword 2. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 2 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
-    "body_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30",
-    "findings": [
-      {
-        "error_code": "SIMULATED_REPAIR_REQUIRED",
-        "reason": "Geplanter Reparaturfall für Sequenztest."
-      }
-    ]
+    "revision": 2,
+    "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 2 behandelt das fest gebundene Thema Konzept 5 Testkeyword 2. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes. Nach der gezielten Korrektur ist dieser Testtext freigegeben.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 2 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
+    "body_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427",
+    "findings": []
   },
   "event_log": [
     {
@@ -97,8 +92,14 @@
       "revision": 1,
       "status": "REPAIR_REQUIRED",
       "content_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30"
+    },
+    {
+      "event": "DRAFT",
+      "item_index": 1,
+      "revision": 2,
+      "body_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427"
     }
   ],
   "publish_allowed": false,
-  "state_sha256": "2c8fd9b92490dad8342369290a68d4b6f5ab4a80a71f1d8e67ec4c6910fac6c0"
+  "state_sha256": "96d7866e852ceac2613b2439a4180415674e2e00a9c5affd474cc71789bf3d9a"
 }
