@@ -91,6 +91,16 @@ jobs:
             python3 project-main/concept_agent/runner.py simulate-negative --out /tmp/concept-agent-return/negative
             python3 control-branch/concept_agent/full_workflow_gate.py simulate-all-entries --out /tmp/concept-agent-return/full-workflow-reentry
             python3 control-branch/concept_agent/full_workflow_gate.py simulate-route-matrix --out /tmp/concept-agent-return/stage-route-matrix
+            python3 control-branch/concept_agent/entry_hardlock.py simulate --out /tmp/concept-agent-return/entry-hardlock
+            set +e
+            python3 control-branch/concept_agent/entry_hardlock.py probe \
+              --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+              --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
+              --out /tmp/concept-agent-return/real16-entry-hardlock-missing.json
+            REAL16_HARDLOCK_RC=$?
+            set -e
+            [ "$REAL16_HARDLOCK_RC" -eq 20 ] || { echo "REAL16_MISSING_TRANSPORT_MUST_BLOCK:$REAL16_HARDLOCK_RC"; exit 2; }
+            python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/real16-entry-hardlock-missing.json')); assert x.get('status')=='BLOCKED'; assert x.get('reason')=='EXACT_CROSS_CHAT_TRANSPORT_MISSING'; assert x.get('expected_transport_sha256')=='f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4'"
             python3 control-branch/concept_agent/full_workflow_gate.py verify-current-entry \
               --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
               --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
@@ -128,9 +138,16 @@ jobs:
 
             case "$NEXT_STAGE" in
               ARTICLE_PRODUCTION)
-                if [[ ! -f "$BINDING" ]]; then
-                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
-                  exit 20
+                HARDLOCK_ARGS=(probe --pointer "$POINTER" --current-state "$CURRENT" --out /tmp/concept-agent-return/CONCEPT_AGENT_ENTRY_HARDLOCK_DECISION_V1.json)
+                if [[ -f "$BINDING" ]]; then
+                  HARDLOCK_ARGS+=(--transport "$BINDING")
+                fi
+                set +e
+                python3 control-branch/concept_agent/entry_hardlock.py "${HARDLOCK_ARGS[@]}"
+                HARDLOCK_RC=$?
+                set -e
+                if [[ "$HARDLOCK_RC" -ne 0 ]]; then
+                  exit "$HARDLOCK_RC"
                 fi
                 EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
                 args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
