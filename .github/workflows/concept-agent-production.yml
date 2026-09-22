@@ -157,7 +157,7 @@ jobs:
               --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
               --out /tmp/concept-agent-return/real16-current-negative
             python3 control-branch/concept_agent/full_e2e_simulation.py --repo project-main --out /tmp/concept-agent-return/chat-to-final-file
-            PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:$PYTHONPATH" \
+            PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:${PYTHONPATH:-}" \
             python3 control-branch/concept_agent/fixed_block_route.py acceptance \
               --repo project-main \
               --out /tmp/concept-agent-return/fixed-block-route
@@ -197,7 +197,7 @@ jobs:
                 python3 control-branch/concept_agent/entry_hardlock.py "${HARDLOCK_ARGS[@]}"
                 HARDLOCK_RC=$?
                 set -e
-                PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:$PYTHONPATH" \
+                PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:${PYTHONPATH:-}" \
                 python3 control-branch/concept_agent/fixed_block_route.py route \
                   --decision /tmp/concept-agent-return/CONCEPT_AGENT_ENTRY_HARDLOCK_DECISION_V1.json \
                   --out /tmp/concept-agent-return/CONCEPT_AGENT_FIXED_BLOCK_ROUTE_V1.json \
