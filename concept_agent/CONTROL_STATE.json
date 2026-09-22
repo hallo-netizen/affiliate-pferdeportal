@@ -86,7 +86,8 @@
     "internal_binding_sha256_must_match_pointer": true,
     "reconstruction_allowed": false,
     "handoff_complete_without_durable_binding": false,
-    "missing_or_mismatched_binding_policy": "BLOCKED"
+    "missing_transport_policy": "RESTART_BATCH_FROM_INTAKE",
+    "mismatched_transport_policy": "TERMINAL_SECURITY_BLOCK"
   },
   "current_real16_required_transport": {
     "filename": "CONCEPT_AGENT_16_WORK_BINDING.json",
@@ -111,5 +112,6 @@
     "chat_may_choose_action": false,
     "reconstruction_allowed": false,
     "publish_allowed": false
-  }
+  },
+  "control_state_sha256": "ccf5ae6197f340c15f0673696d064401c635de552a73198af69bfa3922c9d60f"
 }
