@@ -205,10 +205,23 @@ def run(repo: Path, out: Path) -> dict[str, Any]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", required=True)
-    ap.add_argument("--out", required=True)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    a = sub.add_parser("acceptance")
+    a.add_argument("--repo", required=True)
+    a.add_argument("--out", required=True)
+    r = sub.add_parser("route")
+    r.add_argument("--decision", required=True)
+    r.add_argument("--out", required=True)
     args = ap.parse_args()
     try:
+        if args.cmd == "route":
+            decision = json.loads(Path(args.decision).read_text(encoding="utf-8"))
+            result = route_from_decision(decision)
+            out = Path(args.out)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            print(json.dumps(result, sort_keys=True))
+            return 0
         proof = run(Path(args.repo).resolve(), Path(args.out).resolve())
         print(json.dumps({
             "ok": True,
