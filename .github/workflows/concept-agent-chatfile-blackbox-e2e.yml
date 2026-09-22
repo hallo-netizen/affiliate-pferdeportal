@@ -32,6 +32,9 @@ jobs:
           actual=hashlib.sha256(raw).hexdigest()
           print('CHAT_SOURCE_GITHUB_COPY_BYTES='+str(len(raw)))
           print('CHAT_SOURCE_GITHUB_COPY_SHA256='+actual)
+          print('CHAT_SOURCE_CONTRACT='+str(x.get('contract')))
+          print('CHAT_SOURCE_ITEM_COUNT='+str((x.get('next_textmachine_metadata_batch') or {}).get('item_count')))
+          print('CHAT_SOURCE_BATCH_SHA256='+str((x.get('next_textmachine_metadata_batch') or {}).get('batch_sha256')))
           assert x['contract']=='PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND'
           assert x['next_textmachine_metadata_batch']['item_count']==16
           assert x['next_textmachine_metadata_batch']['batch_sha256']=='df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0'
