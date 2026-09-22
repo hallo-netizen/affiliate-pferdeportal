@@ -146,6 +146,11 @@ search_terms=[
  "external category",
  "user supplied",
  "source_export",
+ "load($override",
+ "EXPECTED_SOURCE_COUNT",
+ "Three_Type_Complete_Category_Source::load",
+ "PPM679_Three_Type_Complete_Category_Source::load",
+ "override",
 ]
 references={term:[] for term in search_terms}
 with zipfile.ZipFile(PPM) as z:
