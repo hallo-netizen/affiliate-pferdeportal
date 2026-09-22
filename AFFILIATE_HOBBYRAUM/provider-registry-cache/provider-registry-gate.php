@@ -3,6 +3,7 @@
  * Plugin Name: Provider Registry Gate
  */
 if (!defined('ABSPATH')) { exit; }
+require_once __DIR__ . '/provider-registry-core-6.72.148.php';
 
 trait PRG_Common {
     private function provider_registry_defaults() {
@@ -52,23 +53,7 @@ final class PRG_Baseline {
         return $this->normalize_registry($raw);
     }
 }
-final class PRG_Candidate {
-    use PRG_Common;
-    const PROVIDER_CONTRACT_VERSION='2.0';
-    private $provider_registry_request_cache=null;
-    private function provider_registry_request_cache_allowed(){
-        if((function_exists('is_admin')&&is_admin()) || (defined('DOING_CRON')&&DOING_CRON) || (defined('REST_REQUEST')&&REST_REQUEST) || (defined('WP_CLI')&&WP_CLI) || (function_exists('wp_doing_ajax')&&wp_doing_ajax())) return false;
-        return true;
-    }
-    public function provider_registry(){
-        $cache_allowed=$this->provider_registry_request_cache_allowed();
-        if($cache_allowed&&is_array($this->provider_registry_request_cache)) return $this->provider_registry_request_cache;
-        $raw=apply_filters('ppar_affiliate_provider_registry',$this->provider_registry_defaults(),self::PROVIDER_CONTRACT_VERSION);
-        $safe=$this->normalize_registry($raw);
-        if($cache_allowed) $this->provider_registry_request_cache=$safe;
-        return $safe;
-    }
-}
+final class PRG_ExactCandidate { use PPAR_Provider_Registry_Trait; const PROVIDER_CONTRACT_VERSION='2.0'; }
 
 $GLOBALS['prg_phase']='';
 $GLOBALS['prg_filter_hits']=array('baseline'=>0,'candidate'=>0,'admin'=>0);
@@ -85,7 +70,7 @@ add_filter('sanitize_key',function($v,$raw){$p=(string)($GLOBALS['prg_phase']??'
 add_filter('sanitize_text_field',function($v,$raw){$p=(string)($GLOBALS['prg_phase']??'');if(isset($GLOBALS['prg_sanitize_text'][$p]))$GLOBALS['prg_sanitize_text'][$p]++;return $v;},PHP_INT_MAX,2);
 
 function prg_run_public(){
-    $n=5000; $b=new PRG_Baseline(); $c=new PRG_Candidate();
+    $n=5000; $b=new PRG_Baseline(); $c=new PRG_ExactCandidate();
     $GLOBALS['prg_phase']='baseline'; $b_registry=$b->provider_registry(); $b_results=array();
     for($i=0;$i<$n;$i++) $b_results[]=$b->gate('manual');
     $GLOBALS['prg_phase']='candidate'; $c_registry=$c->provider_registry(); $c_results=array();
@@ -103,7 +88,7 @@ function prg_run_public(){
     )); exit;
 }
 function prg_run_admin(){
-    $GLOBALS['prg_phase']='admin'; $c=new PRG_Candidate(); $r=array();
+    $GLOBALS['prg_phase']='admin'; $c=new PRG_ExactCandidate(); $r=array();
     for($i=0;$i<50;$i++) $r[]=$c->gate('manual');
     header('Content-Type: application/json');
     echo wp_json_encode(array('result_hash'=>hash('sha256',serialize($r)),'filter_hits'=>$GLOBALS['prg_filter_hits']['admin'],'sanitize_key'=>$GLOBALS['prg_sanitize_key']['admin'])); exit;
