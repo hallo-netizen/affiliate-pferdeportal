@@ -1,0 +1,73 @@
+name: Provider Registry Frontend Cache Hardtest
+on:
+  workflow_dispatch:
+  push:
+    branches: [design-performance-standalone-hardtest-20260922]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/provider-registry-cache/**'
+      - '.github/workflows/provider-registry-cache-hardtest.yml'
+permissions:
+  contents: read
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Install WordPress 7.1.1 and fixture
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Provider Registry Gate' --admin_user=admin --admin_password='fixture-12345' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/plugins/provider-registry-gate
+          cp AFFILIATE_HOBBYRAUM/provider-registry-cache/provider-registry-gate.php /tmp/wp-site/wp-content/plugins/provider-registry-gate/
+          php -l /tmp/wp-site/wp-content/plugins/provider-registry-gate/provider-registry-gate.php
+          /tmp/wp plugin activate provider-registry-gate --path=/tmp/wp-site
+      - name: Prove frontend cache and unchanged semantics
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/prg-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?prg_public=1' > /tmp/public.json
+          curl -fsS 'http://127.0.0.1:8080/wp-admin/admin-post.php?action=prg_admin' > /tmp/admin.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('/tmp/public.json')); a=json.load(open('/tmp/admin.json'))
+          print('PUBLIC',p)
+          print('ADMIN',a)
+          assert p['baseline_registry_hash']==p['candidate_registry_hash']
+          assert p['result_hash_baseline']==p['result_hash_candidate']
+          assert p['filter_hits']['baseline']==15001, p['filter_hits']
+          assert p['filter_hits']['candidate']==1, p['filter_hits']
+          assert p['sanitize_key']['candidate'] < p['sanitize_key']['baseline']/1000, p['sanitize_key']
+          assert p['sanitize_text_field']['candidate'] < p['sanitize_text_field']['baseline']/1000, p['sanitize_text_field']
+          ext=p['candidate_extension']
+          assert ext['key']=='myprovider'
+          assert ext['state']=='prepared'
+          assert ext['specialist_slug']=='myproviderpage'
+          assert ext['capabilities']==['outputs','veto']
+          assert a['filter_hits']==150, a
+          print('PASS provider registry frontend cache: semantic hashes identical, 15001->1 registry builds; admin remains uncached')
+          PY
