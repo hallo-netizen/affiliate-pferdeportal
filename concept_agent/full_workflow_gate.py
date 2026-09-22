@@ -1,0 +1,415 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+FULL_STATE_CONTRACT = "CONCEPT_AGENT_FULL_WORKFLOW_STATE_V1"
+ENTRY_PROOF_CONTRACT = "CONCEPT_AGENT_FULL_REENTRY_PROOF_V1"
+STAGES = [
+    "INTAKE",
+    "RESEARCH",
+    "RESEARCH_BOUND",
+    "AUTHORING_BOUND",
+    "ARTICLE_PRODUCTION",
+    "PSERC_PACKAGE",
+    "ENDSTEMPEL",
+    "CHAT_FILE_RETURN",
+]
+SHA_RE = __import__("re").compile(r"^[0-9a-f]{64}$")
+
+
+class Blocked(RuntimeError):
+    pass
+
+
+def canon(value: Any) -> bytes:
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def stable(value: Any) -> str:
+    return hashlib.sha256(canon(value)).hexdigest()
+
+
+def seal_record(stage: str, payload: dict[str, Any]) -> dict[str, Any]:
+    rec = {"stage": stage, "payload": payload}
+    rec["payload_sha256"] = stable(payload)
+    rec["record_sha256"] = stable(rec)
+    return rec
+
+
+def validate_record(rec: Any, expected_stage: str) -> None:
+    if not isinstance(rec, dict) or rec.get("stage") != expected_stage:
+        raise Blocked("STAGE_RECORD_INVALID:" + expected_stage)
+    payload = rec.get("payload")
+    if not isinstance(payload, dict):
+        raise Blocked("STAGE_PAYLOAD_INVALID:" + expected_stage)
+    if rec.get("payload_sha256") != stable(payload):
+        raise Blocked("STAGE_PAYLOAD_HASH_MISMATCH:" + expected_stage)
+    copy = dict(rec)
+    declared = copy.pop("record_sha256", None)
+    if declared != stable(copy):
+        raise Blocked("STAGE_RECORD_HASH_MISMATCH:" + expected_stage)
+
+
+def initial_state(batch_sha256: str, item_count: int) -> dict[str, Any]:
+    if not SHA_RE.fullmatch(batch_sha256):
+        raise Blocked("BATCH_SHA_INVALID")
+    if isinstance(item_count, bool) or not isinstance(item_count, int) or item_count < 1:
+        raise Blocked("ITEM_COUNT_INVALID")
+    state = {
+        "contract": FULL_STATE_CONTRACT,
+        "batch_sha256": batch_sha256,
+        "item_count": item_count,
+        "next_stage_index": 0,
+        "completed_stages": [],
+        "status": "IN_PROGRESS",
+        "publish_allowed": False,
+    }
+    state["state_sha256"] = stable(state)
+    return state
+
+
+def validate_state(state: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(state, dict) or state.get("contract") != FULL_STATE_CONTRACT:
+        raise Blocked("FULL_STATE_CONTRACT_INVALID")
+    if state.get("publish_allowed") is not False:
+        raise Blocked("PUBLISH_MUST_BE_FALSE")
+    copy = dict(state)
+    declared = copy.pop("state_sha256", None)
+    if declared != stable(copy):
+        raise Blocked("FULL_STATE_HASH_MISMATCH")
+    batch = state.get("batch_sha256")
+    if not isinstance(batch, str) or not SHA_RE.fullmatch(batch):
+        raise Blocked("FULL_STATE_BATCH_INVALID")
+    count = state.get("item_count")
+    if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+        raise Blocked("FULL_STATE_ITEM_COUNT_INVALID")
+    completed = state.get("completed_stages")
+    if not isinstance(completed, list):
+        raise Blocked("FULL_STATE_COMPLETED_INVALID")
+    idx = state.get("next_stage_index")
+    if not isinstance(idx, int) or idx != len(completed) or idx < 0 or idx > len(STAGES):
+        raise Blocked("FULL_STATE_STAGE_SEQUENCE_INVALID")
+    for pos, rec in enumerate(completed):
+        validate_record(rec, STAGES[pos])
+        p = rec["payload"]
+        if p.get("batch_sha256") != batch:
+            raise Blocked("STAGE_BATCH_MISMATCH:" + STAGES[pos])
+        if p.get("item_count") != count:
+            raise Blocked("STAGE_ITEM_COUNT_MISMATCH:" + STAGES[pos])
+        if p.get("publish_allowed") is not False:
+            raise Blocked("STAGE_PUBLISH_INVALID:" + STAGES[pos])
+    if idx == len(STAGES):
+        if state.get("status") != "PASS":
+            raise Blocked("FULL_STATE_FINAL_STATUS_INVALID")
+    elif state.get("status") != "IN_PROGRESS":
+        raise Blocked("FULL_STATE_PROGRESS_STATUS_INVALID")
+    _validate_cross_stage_bindings(state)
+    return state
+
+
+def _validate_cross_stage_bindings(state: dict[str, Any]) -> None:
+    rows = state["completed_stages"]
+    if not rows:
+        return
+    by = {r["stage"]: r["payload"] for r in rows}
+    batch = state["batch_sha256"]
+
+    if "INTAKE" in by:
+        p = by["INTAKE"]
+        if p.get("intake_status") != "PASS" or not SHA_RE.fullmatch(str(p.get("intake_sha256") or "")):
+            raise Blocked("INTAKE_NOT_BOUND")
+
+    if "RESEARCH" in by:
+        p = by["RESEARCH"]
+        if p.get("research_status") != "COMPLETE" or not SHA_RE.fullmatch(str(p.get("research_payload_sha256") or "")):
+            raise Blocked("RESEARCH_NOT_COMPLETE")
+
+    if "RESEARCH_BOUND" in by:
+        p = by["RESEARCH_BOUND"]
+        if p.get("research_binding_status") != "PASS":
+            raise Blocked("RESEARCH_BINDING_NOT_PASS")
+        if p.get("research_payload_sha256") != by["RESEARCH"]["research_payload_sha256"]:
+            raise Blocked("RESEARCH_BINDING_SOURCE_HASH_MISMATCH")
+        if not SHA_RE.fullmatch(str(p.get("research_binding_sha256") or "")):
+            raise Blocked("RESEARCH_BINDING_HASH_INVALID")
+
+    if "AUTHORING_BOUND" in by:
+        p = by["AUTHORING_BOUND"]
+        if p.get("authoring_binding_status") != "PASS":
+            raise Blocked("AUTHORING_BINDING_NOT_PASS")
+        if p.get("research_binding_sha256") != by["RESEARCH_BOUND"]["research_binding_sha256"]:
+            raise Blocked("AUTHORING_RESEARCH_BINDING_MISMATCH")
+        if not SHA_RE.fullmatch(str(p.get("authoring_binding_sha256") or "")):
+            raise Blocked("AUTHORING_BINDING_HASH_INVALID")
+
+    if "ARTICLE_PRODUCTION" in by:
+        p = by["ARTICLE_PRODUCTION"]
+        if p.get("article_status") != "PASS":
+            raise Blocked("ARTICLE_PRODUCTION_NOT_PASS")
+        if p.get("authoring_binding_sha256") != by["AUTHORING_BOUND"]["authoring_binding_sha256"]:
+            raise Blocked("ARTICLE_AUTHORING_BINDING_MISMATCH")
+        if p.get("article_pass_count") != state["item_count"]:
+            raise Blocked("ARTICLE_PASS_COUNT_MISMATCH")
+        if not SHA_RE.fullmatch(str(p.get("article_bundle_sha256") or "")):
+            raise Blocked("ARTICLE_BUNDLE_HASH_INVALID")
+        if p.get("lt68_all_pass") is not True or p.get("ppm679_all_pass") is not True:
+            raise Blocked("ARTICLE_VALIDATORS_NOT_PASS")
+
+    if "PSERC_PACKAGE" in by:
+        p = by["PSERC_PACKAGE"]
+        if p.get("pserc_status") != "PASS":
+            raise Blocked("PSERC_NOT_PASS")
+        if p.get("article_bundle_sha256") != by["ARTICLE_PRODUCTION"]["article_bundle_sha256"]:
+            raise Blocked("PSERC_ARTICLE_BUNDLE_MISMATCH")
+        if not SHA_RE.fullmatch(str(p.get("pserc_package_sha256") or "")):
+            raise Blocked("PSERC_PACKAGE_HASH_INVALID")
+
+    if "ENDSTEMPEL" in by:
+        p = by["ENDSTEMPEL"]
+        if p.get("endstempel_status") != "ENDSTEMPEL_PASS":
+            raise Blocked("ENDSTEMPEL_NOT_PASS")
+        if p.get("pserc_package_sha256") != by["PSERC_PACKAGE"]["pserc_package_sha256"]:
+            raise Blocked("ENDSTEMPEL_PSERC_MISMATCH")
+        if not SHA_RE.fullmatch(str(p.get("final_file_sha256") or "")):
+            raise Blocked("ENDSTEMPEL_FINAL_FILE_HASH_INVALID")
+
+    if "CHAT_FILE_RETURN" in by:
+        p = by["CHAT_FILE_RETURN"]
+        if p.get("chat_return_status") != "PASS":
+            raise Blocked("CHAT_FILE_RETURN_NOT_PASS")
+        if p.get("final_file_sha256") != by["ENDSTEMPEL"]["final_file_sha256"]:
+            raise Blocked("CHAT_RETURN_FILE_HASH_MISMATCH")
+        if p.get("file_count") != 1:
+            raise Blocked("CHAT_RETURN_EXACTLY_ONE_FILE_REQUIRED")
+        if not p.get("filename"):
+            raise Blocked("CHAT_RETURN_FILENAME_MISSING")
+        if p.get("batch_sha256") != batch:
+            raise Blocked("CHAT_RETURN_BATCH_MISMATCH")
+
+
+def reseal(state: dict[str, Any]) -> dict[str, Any]:
+    x = dict(state)
+    x.pop("state_sha256", None)
+    x["state_sha256"] = stable(x)
+    return x
+
+
+def enter(state: dict[str, Any]) -> dict[str, Any]:
+    state = validate_state(state)
+    proof = {
+        "contract": ENTRY_PROOF_CONTRACT,
+        "status": "PASS",
+        "batch_sha256": state["batch_sha256"],
+        "workflow_entry": "ALWAYS_FROM_STAGE_0",
+        "fast_forward_mode": "VALIDATE_ONLY",
+        "validated_completed_stages": [],
+        "next_stage": STAGES[state["next_stage_index"]] if state["next_stage_index"] < len(STAGES) else "COMPLETE",
+        "chat_may_choose_stage": False,
+        "publish_allowed": False,
+    }
+    for pos, rec in enumerate(state["completed_stages"]):
+        validate_record(rec, STAGES[pos])
+        _validate_cross_stage_bindings({
+            **state,
+            "completed_stages": state["completed_stages"][:pos+1],
+            "next_stage_index": pos+1,
+            "status": "PASS" if pos+1 == len(STAGES) else "IN_PROGRESS",
+        })
+        proof["validated_completed_stages"].append(STAGES[pos])
+    proof["proof_sha256"] = stable(proof)
+    return proof
+
+
+def complete_stage(state: dict[str, Any], stage: str, payload: dict[str, Any]) -> dict[str, Any]:
+    validate_state(state)
+    idx = state["next_stage_index"]
+    if idx >= len(STAGES):
+        raise Blocked("WORKFLOW_ALREADY_COMPLETE")
+    expected = STAGES[idx]
+    if stage != expected:
+        raise Blocked(f"STAGE_OUT_OF_ORDER:{stage}:EXPECTED:{expected}")
+    if payload.get("batch_sha256") != state["batch_sha256"]:
+        raise Blocked("STAGE_BATCH_MISMATCH:" + stage)
+    if payload.get("item_count") != state["item_count"]:
+        raise Blocked("STAGE_ITEM_COUNT_MISMATCH:" + stage)
+    if payload.get("publish_allowed") is not False:
+        raise Blocked("STAGE_PUBLISH_INVALID:" + stage)
+    new = json.loads(json.dumps(state))
+    new["completed_stages"].append(seal_record(stage, payload))
+    new["next_stage_index"] += 1
+    if new["next_stage_index"] == len(STAGES):
+        new["status"] = "PASS"
+    new = reseal(new)
+    validate_state(new)
+    return new
+
+
+def sim_hash(label: str, batch: str) -> str:
+    return hashlib.sha256((label + ":" + batch).encode("utf-8")).hexdigest()
+
+
+def payload_for(stage: str, state: dict[str, Any]) -> dict[str, Any]:
+    batch = state["batch_sha256"]
+    count = state["item_count"]
+    base = {"batch_sha256": batch, "item_count": count, "publish_allowed": False}
+    by = {r["stage"]: r["payload"] for r in state["completed_stages"]}
+    if stage == "INTAKE":
+        return {**base, "intake_status": "PASS", "intake_sha256": sim_hash("intake", batch)}
+    if stage == "RESEARCH":
+        return {**base, "research_status": "COMPLETE", "research_payload_sha256": sim_hash("research", batch)}
+    if stage == "RESEARCH_BOUND":
+        return {
+            **base, "research_binding_status": "PASS",
+            "research_payload_sha256": by["RESEARCH"]["research_payload_sha256"],
+            "research_binding_sha256": sim_hash("research-bound", batch),
+        }
+    if stage == "AUTHORING_BOUND":
+        return {
+            **base, "authoring_binding_status": "PASS",
+            "research_binding_sha256": by["RESEARCH_BOUND"]["research_binding_sha256"],
+            "authoring_binding_sha256": sim_hash("authoring-bound", batch),
+        }
+    if stage == "ARTICLE_PRODUCTION":
+        return {
+            **base, "article_status": "PASS",
+            "authoring_binding_sha256": by["AUTHORING_BOUND"]["authoring_binding_sha256"],
+            "article_pass_count": count, "lt68_all_pass": True, "ppm679_all_pass": True,
+            "article_bundle_sha256": sim_hash("articles", batch),
+        }
+    if stage == "PSERC_PACKAGE":
+        return {
+            **base, "pserc_status": "PASS",
+            "article_bundle_sha256": by["ARTICLE_PRODUCTION"]["article_bundle_sha256"],
+            "pserc_package_sha256": sim_hash("pserc", batch),
+        }
+    if stage == "ENDSTEMPEL":
+        return {
+            **base, "endstempel_status": "ENDSTEMPEL_PASS",
+            "pserc_package_sha256": by["PSERC_PACKAGE"]["pserc_package_sha256"],
+            "final_file_sha256": sim_hash("final-file", batch),
+        }
+    if stage == "CHAT_FILE_RETURN":
+        return {
+            **base, "chat_return_status": "PASS",
+            "final_file_sha256": by["ENDSTEMPEL"]["final_file_sha256"],
+            "file_count": 1,
+            "filename": "PSERC_APPROVED_PRODUCTION_PACKAGE_FINAL.json",
+        }
+    raise Blocked("UNKNOWN_STAGE:" + stage)
+
+
+def build_to(batch: str, item_count: int, stage_count: int) -> dict[str, Any]:
+    state = initial_state(batch, item_count)
+    for stage in STAGES[:stage_count]:
+        state = complete_stage(state, stage, payload_for(stage, state))
+    return state
+
+
+def simulate_all_entries(outdir: Path) -> dict[str, Any]:
+    outdir.mkdir(parents=True, exist_ok=True)
+    batch = sim_hash("full-workflow-batch", "x" * 64)
+    positives = []
+    negatives = []
+
+    for stage_count in range(len(STAGES) + 1):
+        state = build_to(batch, 3, stage_count)
+        proof = enter(state)
+        expected = STAGES[stage_count] if stage_count < len(STAGES) else "COMPLETE"
+        if proof["next_stage"] != expected:
+            raise Blocked("POSITIVE_REENTRY_WRONG_NEXT_STAGE:" + expected)
+        if proof["validated_completed_stages"] != STAGES[:stage_count]:
+            raise Blocked("POSITIVE_REENTRY_FAST_FORWARD_INVALID:" + expected)
+        positives.append({
+            "entry_after_completed_count": stage_count,
+            "validated_from_entrance": True,
+            "fast_forwarded_stages": proof["validated_completed_stages"],
+            "next_stage": expected,
+            "status": "PASS",
+        })
+
+    # Negative: try to skip every next stage.
+    for stage_count in range(len(STAGES) - 1):
+        state = build_to(batch, 3, stage_count)
+        wrong = STAGES[stage_count + 1]
+        try:
+            complete_stage(state, wrong, {"batch_sha256": batch, "item_count": 3, "publish_allowed": False})
+        except Blocked as exc:
+            negatives.append({"case": "skip-" + STAGES[stage_count] + "-to-" + wrong, "blocked": True, "reason": str(exc)})
+        else:
+            raise Blocked("NEGATIVE_STAGE_SKIP_NOT_BLOCKED:" + wrong)
+
+    # Negative: tamper each completed stage hash, then re-enter through entrance.
+    for stage_count in range(1, len(STAGES) + 1):
+        state = build_to(batch, 3, stage_count)
+        bad = json.loads(json.dumps(state))
+        bad["completed_stages"][-1]["payload"]["item_count"] = 99
+        bad = reseal(bad)
+        try:
+            enter(bad)
+        except Blocked as exc:
+            negatives.append({"case": "tamper-" + STAGES[stage_count-1], "blocked": True, "reason": str(exc)})
+        else:
+            raise Blocked("NEGATIVE_TAMPER_NOT_BLOCKED:" + STAGES[stage_count-1])
+
+    # Negative: validly reseal a forged state that claims completed later stage but breaks cross-stage binding.
+    state = build_to(batch, 3, 6)  # through PSERC
+    bad = json.loads(json.dumps(state))
+    bad["completed_stages"][5]["payload"]["article_bundle_sha256"] = sim_hash("forged", batch)
+    rec = bad["completed_stages"][5]
+    rec["payload_sha256"] = stable(rec["payload"])
+    rec_copy = dict(rec); rec_copy.pop("record_sha256", None); rec["record_sha256"] = stable(rec_copy)
+    bad = reseal(bad)
+    try:
+        enter(bad)
+    except Blocked as exc:
+        negatives.append({"case": "forged-pserc-cross-binding", "blocked": True, "reason": str(exc)})
+    else:
+        raise Blocked("NEGATIVE_CROSS_BINDING_NOT_BLOCKED")
+
+    proof = {
+        "contract": "CONCEPT_AGENT_FULL_WORKFLOW_REENTRY_ACCEPTANCE_V1",
+        "status": "PASS",
+        "stages": STAGES,
+        "positive_entry_count": len(positives),
+        "negative_case_count": len(negatives),
+        "positive": positives,
+        "negative": negatives,
+        "rule": "EVERY_CHAT_ENTERS_AT_STAGE_0_AND_FAST_FORWARDS_ONLY_AFTER_VALIDATION",
+        "publish_allowed": False,
+    }
+    proof["proof_sha256"] = stable(proof)
+    (outdir / "CONCEPT_AGENT_FULL_WORKFLOW_REENTRY_ACCEPTANCE_V1.json").write_text(
+        json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return proof
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    p = sub.add_parser("simulate-all-entries")
+    p.add_argument("--out", required=True)
+    args = ap.parse_args(argv)
+    try:
+        proof = simulate_all_entries(Path(args.out))
+        print(json.dumps({
+            "ok": True,
+            "status": proof["status"],
+            "positive_entry_count": proof["positive_entry_count"],
+            "negative_case_count": proof["negative_case_count"],
+            "proof_sha256": proof["proof_sha256"],
+        }, sort_keys=True))
+        return 0
+    except Blocked as exc:
+        print("CONCEPT_AGENT_FULL_WORKFLOW_GATE_BLOCKED:" + str(exc), file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
