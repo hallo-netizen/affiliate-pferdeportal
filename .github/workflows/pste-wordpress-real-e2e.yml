@@ -155,6 +155,8 @@ jobs:
             if(!hash_equals((string)($payload["stored_registry_sha256"]??""),(string)($payload["sha256"]??""))) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_STORED_HASH_MISMATCH");
             $decl=(string)($payload["export_sha256"]??""); unset($payload["export_sha256"]);
             $h=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","hash"); $h->setAccessible(true); $actual=(string)$h->invoke(null,$payload);
+            $directFields=$payload; unset($directFields["records"]); $direct=PSTE_Sandbox_Record_Store::hashLogicalObjectWithCurrentRecords($directFields);
+            echo "SANDBOX_EXPORT_HASH_DEBUG decl=".$decl." actual=".$actual." direct=".$direct."\n";
             if(!preg_match("/^[a-f0-9]{64}$/",$decl)||!hash_equals($decl,$actual)) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_SELF_HASH_MISMATCH");
             echo "PASS_BOUNDED_SANDBOX_EXPORT records=".$info["record_count"]." bytes=".$info["bytes"]." legacy_full_reads=".$metrics["legacy_full_reads"]."\n";
           ' --path=/tmp/wordpress
