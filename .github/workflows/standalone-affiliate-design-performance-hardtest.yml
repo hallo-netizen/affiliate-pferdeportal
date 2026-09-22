@@ -139,3 +139,33 @@ jobs:
           assert c['meta_second']==360
           print('PASS exact 2520 -> 360, output unchanged')
           PY
+
+      - name: Prove zero-fix rollback by real deactivation
+        run: |
+          set -euo pipefail
+          /tmp/wp plugin deactivate pa-affiliate-design-performance --path=/tmp/wp-site
+          test "$(/tmp/wp plugin is-active pa-affiliate-design-performance --path=/tmp/wp-site >/dev/null 2>&1; echo $?)" = "1"
+
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-rollback-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?pa_design_perf_gate=cached' > /tmp/d.json
+
+          python3 - <<'PY'
+          import json
+          b=json.load(open('/tmp/b.json'))
+          d=json.load(open('/tmp/d.json'))
+          print('BASELINE',b)
+          print('DEACTIVATED',d)
+          assert d['desktop_sha256']==b['desktop_sha256']
+          assert d['mobile_sha256']==b['mobile_sha256']
+          assert d['desktop_marker'] and d['mobile_marker']
+          assert d['meta_after_desktop']==b['meta_after_desktop']==2520
+          assert d['meta_total']==b['meta_total']==5040
+          assert d['meta_second']==b['meta_second']==2520
+          print('PASS deactivate -> exact baseline restored, no fix required')
+          PY
+
+          test -z "$(/tmp/wp db query --skip-column-names --path=/tmp/wp-site "SELECT option_name FROM wp_options WHERE option_name LIKE '%affiliate_design_performance%' OR option_name LIKE '%pa_design_perf%';")"
+          echo "PASS no plugin-specific persistent options"
