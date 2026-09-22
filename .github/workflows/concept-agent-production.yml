@@ -1,0 +1,132 @@
+name: Concept Agent Production Runner
+
+on:
+  push:
+    branches:
+      - 'concept-agent/**'
+    paths:
+      - 'concept_agent/**'
+      - '.github/workflows/concept-agent-production.yml'
+  pull_request:
+    paths:
+      - 'concept_agent/**'
+      - '.github/workflows/concept-agent-production.yml'
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'simulate-all or run-current'
+        required: true
+        default: 'simulate-all'
+        type: choice
+        options:
+          - simulate-all
+          - run-current
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  verify-runner:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Concept Agent existing tests plus runner tests
+        run: python3 -m unittest discover -v -s concept_agent/tests -p 'test_*.py'
+      - name: One article positive simulation
+        run: python3 concept_agent/runner.py simulate-one --out /tmp/concept-agent/one
+      - name: Multiple article positive simulation with isolated repair
+        run: python3 concept_agent/runner.py simulate-multi --out /tmp/concept-agent/multi
+      - name: Negative simulations
+        run: python3 concept_agent/runner.py simulate-negative --out /tmp/concept-agent/negative
+      - name: Verify final handoff files
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          one=json.loads(Path('/tmp/concept-agent/one/CONCEPT_AGENT_CHAT_HANDOFF_V1.json').read_text())
+          multi=json.loads(Path('/tmp/concept-agent/multi/CONCEPT_AGENT_CHAT_HANDOFF_V1.json').read_text())
+          neg=json.loads(Path('/tmp/concept-agent/negative/CONCEPT_AGENT_NEGATIVE_PROOF.json').read_text())
+          assert one['status']=='PASS' and one['item_count']==1
+          assert multi['status']=='PASS' and multi['item_count']==3
+          assert [x['revision_count'] for x in multi['articles']]==[1,2,1]
+          assert neg['status']=='PASS' and all(x['blocked'] for x in neg['cases'])
+          assert one['publish_allowed'] is False and multi['publish_allowed'] is False and neg['publish_allowed'] is False
+          print('CONCEPT_AGENT_GITHUB_RUNNER_ACCEPTANCE_PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: concept-agent-runner-simulation-${{ github.sha }}
+          path: /tmp/concept-agent/
+          if-no-files-found: error
+          retention-days: 7
+
+  control:
+    if: >-
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.title == 'Pferde Atelier - Concept Agent Production Control' &&
+       (github.event.comment.body == '/concept-agent simulate-all' || github.event.comment.body == '/concept-agent run-current')) ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve exact requested mode
+        id: mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ '${{ github.event_name }}' == 'issue_comment' ]]; then
+            case '${{ github.event.comment.body }}' in
+              '/concept-agent simulate-all') echo 'mode=simulate-all' >> "$GITHUB_OUTPUT" ;;
+              '/concept-agent run-current') echo 'mode=run-current' >> "$GITHUB_OUTPUT" ;;
+              *) echo 'UNSUPPORTED_CONCEPT_AGENT_COMMAND'; exit 2 ;;
+            esac
+          else
+            echo 'mode=${{ inputs.mode }}' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Run exact Concept Agent route
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/concept-agent-control
+          if [[ '${{ steps.mode.outputs.mode }}' == 'simulate-all' ]]; then
+            python3 concept_agent/runner.py simulate-one --out /tmp/concept-agent-control/one
+            python3 concept_agent/runner.py simulate-multi --out /tmp/concept-agent-control/multi
+            python3 concept_agent/runner.py simulate-negative --out /tmp/concept-agent-control/negative
+          else
+            BINDING='concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
+            POINTER='control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json'
+            test -f "$POINTER"
+            if [[ ! -f "$BINDING" ]]; then
+              python3 - <<'PY'
+              import json
+              from pathlib import Path
+              p=Path('/tmp/concept-agent-control/CONCEPT_AGENT_BLOCKED.json')
+              p.write_text(json.dumps({
+                'contract':'CONCEPT_AGENT_RUN_BLOCKED_V1',
+                'status':'BLOCKED',
+                'reason':'CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB',
+                'publish_allowed':False
+              },ensure_ascii=False,indent=2)+'\n')
+              PY
+              exit 20
+            fi
+            EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
+            python3 concept_agent/runner.py run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-control/production
+          fi
+      - name: Upload chat-return artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: concept-agent-chat-return-${{ github.run_id }}
+          path: /tmp/concept-agent-control/
+          if-no-files-found: error
+          retention-days: 7
