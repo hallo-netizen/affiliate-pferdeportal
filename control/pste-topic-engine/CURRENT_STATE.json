@@ -2,7 +2,7 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "PASS_GITHUB_0576_FULL_REAL_WORDPRESS_E2E_SAFE_CANCEL_CONTINUATION_LIVE_SITE_ACCEPTANCE_OPEN",
+  "status": "PASS_GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
@@ -16,42 +16,43 @@
     "candidate_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_FULL_REAL_WORDPRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
-    "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD"
+    "release": "GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
+    "post_pass_branch_delta": "CURRENT_STATE_AND_WORKLOG_DOCUMENTATION_ONLY_EXPECTED"
   },
   "proven": {
     "package_total_files": "PASS_131",
     "package_php_files": "PASS_76",
     "package_version": "PASS_0.57.6",
-    "strict_serial_driver_positive_negative": "PASS",
-    "real_wordpress_single": "PASS",
-    "workflow_inventory_projection_without_relation_hydration": "PASS",
-    "persisted_prior_queue_state": "PASS",
+    "plugin_constant": "PASS_0.57.6",
+    "single": "PASS_15_CANDIDATES_5_USABLE",
     "browser_start_without_reload_live_progress": "PASS",
     "stale_old_queue_status_ignored_after_new_start": "PASS",
-    "safe_cancel_during_prepare": "PASS_CURSOR_0_TOTAL_303_THEN_CANCELLED_DRIVER_IDLE",
-    "cancelled_wave_progress_continuation": "PASS_OLD_2_NEW_2",
-    "cancelled_wave_local_backlog_preserved": "PASS_COMPLETE_AND_REUSED",
-    "cancelled_wave_zero_line_not_redefined": "PASS_NO_0_OF_40_RESTART",
+    "safe_cancel_during_prepare": "PASS_CANCEL_PROOF_REACHED_PREPARE_0_OF_303_AND_SETTLED_CLEANLY",
+    "cancelled_wave_progress_continuation": "PASS_OLD_2_NEW_2_NO_ZERO_RESTART",
+    "cancelled_wave_local_audit_continuation": "PASS",
+    "cancelled_wave_terminal_cleanup": "PASS_DRIVER_IDLE",
     "stress_prepare_multi_request": "PASS_TOTAL_303",
-    "stress_prepare_intermediate_progress_visible": "PASS_CURSOR_300_OF_303_CAPTURED",
-    "breadth_target": "PASS_TARGET_REACHED_40_USABLE_123_RAW_27_FAMILIES",
-    "provider_counts": "PASS_EXACT_26_PER_STAGE",
+    "stress_prepare_intermediate_progress_visible": "PASS_300_OF_303_OBSERVED",
+    "no_step_overdue_in_stress_prepare": "PASS",
+    "breadth_target": "PASS_TARGET_REACHED_40_USABLE_123_RAW_27_ITEMS_27_COMPLETE_0_BLOCKED",
+    "technical_park_errors": "ZERO",
+    "provider_counts": "PASS_EXACT_26_EACH",
     "driver_terminal_state": "PASS_IDLE",
     "real_wordpress_full_e2e": "PASS_RUN_35693065234",
     "final_zip_full_workflow": "PASS_RUN_35693065308",
     "separate_process_full_system": "PASS_RUN_35693065350",
     "complete_system_simulation": "PASS_RUN_35693065236",
-    "exact_tested_zip_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
+    "exact_tested_zip_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
+    "previous_live_0574_rollback_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3"
   },
   "first_blocker": {
-    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_EXACT_0576_TESTED_BYTES",
+    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_FINAL_0576_EXACT_TESTED_BYTES",
     "detail": "The exact 0.57.6 ZIP from successful Real WordPress E2E run 35693065234 has not yet been accepted on the user's real WordPress installation."
   },
   "next_action": {
-    "id": "INSTALL_EXACT_0576_TESTED_BYTES_AND_RUN_REAL_SITE_ACCEPTANCE",
-    "action": "Install only the exact 0.57.6 ZIP with SHA-256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f. On the real site verify the formerly failing path FINALIZE/PREPARE progresses, safe cancel settles to CANCELLED plus driver IDLE, and a restarted 40-target wave preserves already reached PASS count and completed local inventory audit instead of restarting at 0.",
-    "success": "REAL_SITE_0576_PREPARE_CANCEL_CONTINUATION_PASS",
+    "id": "INSTALL_EXACT_FINAL_0576_BYTES_AND_RUN_REAL_SITE_ACCEPTANCE",
+    "action": "Install only the exact 0.57.6 ZIP from artifact 10679790400 with SHA-256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f. On the real site verify normal production progress, safe cancel while work is active, and restart continuation without resetting prior usable progress or repeating the completed local audit. Keep the read-only diagnostic plugin available for snapshots only.",
+    "success": "REAL_SITE_0576_PROGRESS_SAFE_CANCEL_AND_CONTINUATION_PASS",
     "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
   },
   "rules": [
@@ -111,5 +112,19 @@
     "LOCAL_BACKLOG_RECHECK_AFTER_CANCEL": "0.57.6 continuation preserves completed local backlog audit; proof restart reports local_backlog_complete=true and local_backlog_reused=true.",
     "BLIND_START_UI_REQUIRES_RELOAD": "Previously fixed and re-proven.",
     "STALE_BREADTH_STATUS_AFTER_NEW_START": "Previously fixed and re-proven."
+  },
+  "fixed_live_failures": {
+    "PSTE_DRIVER_STEP_OVERDUE_FINALIZE_PREPARE": "FIXED_BY_0575_WORKFLOW_INVENTORY_PROJECTION_PLUS_BOUNDED_PREPARE;_0576_REPROVEN_UNDER_303_STRESS",
+    "SAFE_CANCEL_DOES_NOT_SETTLE": "FIXED_AND_REAL_WORDPRESS_PROVEN_DURING_PREPARE",
+    "CANCELLED_WAVE_RESTARTS_AT_ZERO": "FIXED_AND_PROVEN_OLD_2_NEW_2",
+    "LOCAL_AUDIT_RESTART_AFTER_CANCEL": "FIXED_AND_PROVEN_CONTINUED",
+    "BLIND_START_UI_REQUIRES_RELOAD": "FIXED_AND_REPROVEN",
+    "STALE_BREADTH_STATUS_AFTER_NEW_START": "FIXED_AND_REPROVEN",
+    "VERSION_READBACK_MISMATCH_0576": "FIXED_BY_BINDING_BOTH_PLUGIN_HEADER_AND_PSTE_VERSION_TO_0_57_6"
+  },
+  "rollback": {
+    "last_known_live_installable_goldstand_version": "0.57.4",
+    "last_known_live_installable_goldstand_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
+    "candidate_0576_not_promoted_until_real_site_acceptance": true
   }
 }
