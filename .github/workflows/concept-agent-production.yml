@@ -96,11 +96,20 @@ jobs:
           mkdir -p /tmp/concept-agent-return
           if [[ "$MODE" == 'persist-binding' ]]; then
             python3 -c "import base64,json,os,pathlib; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); pathlib.Path('/tmp/concept-agent-binding-candidate.json').write_bytes(base64.b64decode(req['transport_b64'],validate=True))"
+            set +e
             python3 control-branch/concept_agent/binding_transport_gate.py accept \
               --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
               --candidate /tmp/concept-agent-binding-candidate.json \
               --durable control-branch/concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json \
-              --receipt /tmp/concept-agent-return/CONCEPT_AGENT_DURABLE_BINDING_RECEIPT_V1.json
+              --receipt /tmp/concept-agent-return/CONCEPT_AGENT_DURABLE_BINDING_RECEIPT_V1.json \
+              2> /tmp/concept-agent-return/BINDING_PERSIST_ERROR.txt
+            PERSIST_RC=$?
+            set -e
+            if [[ "$PERSIST_RC" -ne 0 ]]; then
+              PERSIST_REASON="$(tail -n 1 /tmp/concept-agent-return/BINDING_PERSIST_ERROR.txt | sed 's/^CONCEPT_AGENT_BINDING_TRANSPORT_BLOCKED://')"
+              PERSIST_REASON="$PERSIST_REASON" python3 -c "import json,os,pathlib; pathlib.Path('/tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json').write_text(json.dumps({'contract':'CONCEPT_AGENT_RUN_BLOCKED_V1','status':'BLOCKED','reason':os.environ.get('PERSIST_REASON') or 'BINDING_PERSISTENCE_REJECTED','publish_allowed':False},indent=2)+'\\n')"
+              exit 20
+            fi
             cd control-branch
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
