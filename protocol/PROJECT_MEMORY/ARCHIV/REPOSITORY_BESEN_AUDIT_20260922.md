@@ -71,3 +71,29 @@ Insbesondere nicht anfassen:
 - alle im Pferde-Atelier-Pluginregister als aktuell/synchronisiert geführten Plugins;
 - `/Campus-Plugins/PFERDE_ATELIER/**/CURRENT.zip`;
 - alles mit Status AKTIV, BLOCKED oder UNGEKLÄRT.
+
+
+## AUSFÜHRUNG NACH NUTZERFREIGABE
+
+Die neun Kandidaten wurden anschließend **nicht gelöscht**, sondern byteidentisch aus dem Repository-Root nach
+`archive/repository-loeschkandidaten/2026-09-22/`
+verschoben.
+
+GitHub PR:
+`#360`
+
+Merge:
+`78d02baf8f830e82b1f9e59ef7df458a5d367fee`
+
+Pflichtchecks auf finalem PR-Head:
+- `hardlock` PASS;
+- `hardlock-base` PASS.
+
+Post-Merge geprüft:
+- alle neun alten Root-Pfade fehlen;
+- alle neun Archivpfade vorhanden;
+- jeder Archivpfad besitzt exakt denselben Git-Blob-SHA wie vorher;
+- kein aktuelles Plugin, keine CURRENT-/Fach-/Ziel-/Fehlerautorität wurde verschoben.
+
+STATUS DER NEUN DATEIEN:
+**ARCHIVIERT / SAMMELPRÜFUNG OFFEN / KEIN LÖSCH-PASS.**
