@@ -110,14 +110,7 @@ jobs:
               --out /tmp/concept-agent-return/current-entry \
               | tee /tmp/concept-agent-return/CURRENT_ENTRY_RESULT.json
 
-            python3 - <<'PY'
-            import json
-            x=json.load(open('/tmp/concept-agent-return/CURRENT_ENTRY_RESULT.json',encoding='utf-8'))
-            if x.get('ok') is not True or x.get('status')!='PASS':
-                raise SystemExit('CURRENT_ENTRY_NOT_PASS')
-            if x.get('next_stage')!='ARTICLE_PRODUCTION':
-                raise SystemExit('CURRENT_ENTRY_WRONG_NEXT_STAGE:'+str(x.get('next_stage')))
-            PY
+            python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/CURRENT_ENTRY_RESULT.json',encoding='utf-8')); assert x.get('ok') is True and x.get('status')=='PASS', 'CURRENT_ENTRY_NOT_PASS'; assert x.get('next_stage')=='ARTICLE_PRODUCTION', 'CURRENT_ENTRY_WRONG_NEXT_STAGE:'+str(x.get('next_stage'))"
 
             if [[ ! -f "$BINDING" ]]; then
               printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
