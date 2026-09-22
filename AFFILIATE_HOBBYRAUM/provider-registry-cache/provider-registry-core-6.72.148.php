@@ -96,6 +96,7 @@ trait PPAR_Provider_Registry_Trait {
             $key = sanitize_key((string) $key);
             if ($key === '' || !is_array($provider)) { continue; }
             $caps = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($provider['capabilities'] ?? array())))));
+            // Chef-Veto ist Bestandteil des Kernvertrags und darf von keinem Adapter entfernt werden.
             if (!in_array('veto', $caps, true)) { $caps[] = 'veto'; }
             $state = sanitize_key((string) ($provider['state'] ?? 'prepared'));
             if (!in_array($state, array('active','prepared','disabled'), true)) { $state = 'prepared'; }
