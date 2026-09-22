@@ -1,0 +1,77 @@
+name: Category Integration Candidate Hardtest
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'CATEGORY_INTEGRATION_HOBBYRAUM/build_candidate.py'
+      - '.github/workflows/category-integration-candidate-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-hardtest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Governance gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py start --branch "$(git branch --show-current)"
+
+      - name: Build and hard-test candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf CATEGORY_INTEGRATION_HOBBYRAUM/candidate
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/build_candidate.py | tee /tmp/category-candidate.log
+          grep -F 'CATEGORY_INTEGRATION_CANDIDATE_HARDTEST_PASS' /tmp/category-candidate.log
+          python3 - <<'PY'
+          import json, pathlib
+          r=json.loads(pathlib.Path('CATEGORY_INTEGRATION_HOBBYRAUM/candidate/candidate-hardtest-report.json').read_text())
+          assert r['status']=='PASS'
+          assert len(r['delta']['new_pages'])==5
+          assert len(r['delta']['new_categories'])==25
+          assert len(r['negative_tests'])==8
+          assert all(x['pass'] for x in r['negative_tests'])
+          assert r['candidate']['counts']['produktseiten']==334
+          assert r['candidate']['counts']['themenkategorien']==1149
+          assert r['candidate']['counts']['menu_items_total']==1550
+          assert r['candidate']['catalog_counts']['product_pages']==334
+          assert r['candidate']['catalog_counts']['article_categories']==1149
+          assert r['candidate']['catalog_counts']['business_concepts']==321
+          assert r['candidate']['catalog_counts']['business_routable_concepts']==380
+          assert r['candidate']['supply_required_count']==316
+          print('CANDIDATE_REPORT_ASSERTIONS_PASS')
+          PY
+
+      - name: JSON parse and deterministic rebuild
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m json.tool CATEGORY_INTEGRATION_HOBBYRAUM/candidate/portal-structure-v279.CANDIDATE.json >/dev/null
+          python3 -m json.tool CATEGORY_INTEGRATION_HOBBYRAUM/candidate/ebay-portal-catalog-v2.CANDIDATE.json >/dev/null
+          cp CATEGORY_INTEGRATION_HOBBYRAUM/candidate/candidate-hardtest-report.json /tmp/report1.json
+          sha256sum CATEGORY_INTEGRATION_HOBBYRAUM/candidate/*.json | sort > /tmp/sha1.txt
+          rm -rf CATEGORY_INTEGRATION_HOBBYRAUM/candidate
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/build_candidate.py >/tmp/rebuild.log
+          sha256sum CATEGORY_INTEGRATION_HOBBYRAUM/candidate/*.json | sort > /tmp/sha2.txt
+          diff -u /tmp/sha1.txt /tmp/sha2.txt
+          echo CATEGORY_INTEGRATION_DETERMINISTIC_REBUILD_PASS
+
+      - name: Upload candidate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-integration-candidate-hardtest
+          path: |
+            CATEGORY_INTEGRATION_HOBBYRAUM/candidate/
+            /tmp/category-candidate.log
+            /tmp/sha1.txt
+          if-no-files-found: error
