@@ -167,21 +167,46 @@ Regel:
 - Canonical-Slot-/Strukturprüfungen müssen weiter fail-closed bleiben.
 
 ### F. Portal Production Machine / PPM 6.7.9 / System4
-**MUSS aktualisiert werden.**
+**HARTER AUDIT 2026-09-22: differenzierte Behandlung; nicht alle drei Dateien sind Vollregister.**
 
-Gebundene Strukturverträge:
-- `portal-production-machine/contracts/complete-portal-category-source-v1.json`
-- `portal-production-machine/contracts/category-hierarchy-snapshot-v1.json`
-- `portal-production-machine/contracts/wordpress-link-target-snapshot-v1.json`
+Hashgebundene PPM-Autorität:
+- Paket: `control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip`
+- SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`
+- GitHub-Actions-Hard-Audit Run `35783744612`: Paket-SHA PASS.
 
-System4 `machine_point0.py` bindet vor der Texterstellung zusätzlich `affiliate-portal-router/assets/portal-structure-v279.json`.
+Gebundene Dateien im Paket:
 
-Erforderlich:
-- alle 25 neuen Produktionskategorien in Category Source und Hierarchy Snapshot,
-- die fünf neuen Produktseiten als gültige Hierarchie-/Linkziele,
-- Link Snapshot neu aus echter WordPress-Struktur,
-- Artikeltyp muss zur jeweiligen Blattkategorie passen,
-- keine numerische Identität erfinden; semantische Bindings + echte WordPress-Snapshots beibehalten.
+1. `portal-production-machine/contracts/complete-portal-category-source-v1.json`
+   - Contract: `PPM679_COMPLETE_PORTAL_CATEGORY_SOURCE_V1`
+   - aktueller SHA256: `316135b57b9c6edbd620250cd88adfbe46d9060fbdaf1e38130933f985b10fbd`
+   - enthält aktuell **1124** WordPress-Zielkategorien,
+   - Counts binden 329 Produktseiten / 1124 Zielkategorien / 1520 Menüeinträge,
+   - Mappingregel leitet die Produktseite aus dem Kategorie-Slug ab.
+   - **Hier müssen die 25 neuen Produktionskategorien in den vollständigen Kategorienbestand aufgenommen werden**, sofern der vorgesehene Runtime-Refreshweg nicht bereits einen externen Ersatz erlaubt. Dieser Refreshweg wird vor Paketänderung noch hart geprüft.
+
+2. `portal-production-machine/contracts/category-hierarchy-snapshot-v1.json`
+   - Contract: `PPM679_CATEGORY_HIERARCHY_SNAPSHOT_V1`
+   - aktueller SHA256: `cebfe0a6a7583d8829154c74f61d38b2b2d8f8094e1308165cef1ff122f17ad2`
+   - enthält nur **6** Kategorien.
+   - `known_limits` sagt ausdrücklich: **„This bundled snapshot is a controlled current test subset. A future complete user-supplied hierarchy file replaces it without source-code changes.“**
+   - **Daher NICHT pauschal um 25 Kategorien erweitern.**
+   - Für einen echten neuen Lauf muss der aktuelle Hierarchie-Snapshot aus der realen WordPress-/Portalstruktur neu erzeugt bzw. als aktueller user-supplied Snapshot gebunden werden.
+
+3. `portal-production-machine/contracts/wordpress-link-target-snapshot-v1.json`
+   - Contract: `WORDPRESS_LINK_TARGET_SNAPSHOT_V1`
+   - aktueller SHA256: `14b79bd4de494f5b66b20686f6a271c132fa11ac2824ddf06e849dd50c240bf2`
+   - enthält nur die **3 Pflichtrollen** `parent_category`, `semantic_related`, `further_information`.
+   - Scope ist ausdrücklich der aktuelle **G9 FAQ candidate link target**-Satz.
+   - `runtime_read_only_revalidation_required_before_any_write=true`
+   - `automatic_replacement_forbidden=true`
+   - **Daher NICHT pauschal fünf neue Seiten hineinschreiben.** Für einen neuen Artikel/Lauf müssen die drei echten Linkziele aus dem aktuellen Kontext neu gebunden und vor jedem Write read-only revalidiert werden.
+
+System4 `machine_point0.py` bindet vor der Texterstellung zusätzlich die statische `affiliate-portal-router/assets/portal-structure-v279.json`. Dort müssen die 25 neuen Level-4-Ziele vorhanden sein, damit ein Artikel in einer neuen Kategorie überhaupt sauber vorgebunden werden kann.
+
+HARD RULE:
+- PPM-Paket selbst erst ändern, wenn der vorgesehene externe Refresh-/Replacement-Weg für `complete-portal-category-source-v1.json` hart geprüft ist.
+- Keine plan-/laufbezogenen Snapshots zu Vollregistern umfunktionieren.
+- Term IDs bleiben Runtime-Kontrollwerte, nie semantische Identitäten.
 
 ### G. Interne Links / Link Policy
 **MUSS neu aus aktualisierten Autoritäten erzeugt/readback-geprüft werden.**
@@ -374,11 +399,23 @@ Status:
 ### Risiko H – Affiliate alter Repo-Stand
 Befund:
 - `release/affiliate-zentrale/current` ist 6.72.105,
-- späterer belegter Performance-Stand 6.72.145.
+- späterer belegter Performance-Stand wurde als 6.72.145 dokumentiert.
 Risiko:
 - Strukturupdate auf altem Baum würde Performance-/Fachänderungen rückbauen.
 Hardlock:
-- vor Änderung exakten 6.72.145-Baum beschaffen/verifizieren; sonst Affiliate-Apply BLOCKED.
+- vor Änderung exakten aktuellen Live-Baum beschaffen/verifizieren; sonst Affiliate-Apply BLOCKED.
+
+### Fehler I – historischer 6.72.145-Hardtest war nicht sauber an 6.72.142 gebunden
+Harter Audit 2026-09-22:
+- Workflow `.github/workflows/affiliate-performance-batch-hardtest.yml` kopiert als Ausgangspunkt `release/affiliate-zentrale/current/affiliate-portal-router`.
+- Dieser Repo-Baum steht aktuell/prüfbar auf **6.72.105**, nicht 6.72.142.
+- Die beiden Performance-Patchskripte wurden darauf angewendet; der Workflowtext bezeichnete das anschließend als 6.72.144/145.
+Folge:
+- der alte Workflow-SUCCESS ist **kein ausreichender Beweis für einen vollständigen echten 6.72.142→145-Quellbaum**.
+- dieser Nachweis wird für die jetzige Kategorieintegration ausdrücklich **nicht** als Source-Basis akzeptiert.
+Prävention:
+- jeder künftige Plugin-Hardtest muss Ausgangsversion **und kompletten Ausgangsbaum-Hash** vor dem Patch hart prüfen.
+- WordPress-Dry-Run muss vor Affiliate-Apply den tatsächlich aktiven Live-Baum bzw. mindestens alle betroffenen Dateien vollständig hashen.
 
 ## 9. Aktueller Ablauf für diese Änderung
 
@@ -412,3 +449,30 @@ Hardlock:
 - offen: vollständige 1:1 Positiv-/Negativ-Evidence.
 - offen: WordPress Dry-Run.
 - **keine Produktionsabnahme ohne diese Nachweise.**
+
+
+## 11. Harte Baseline-Evidence 2026-09-22
+
+GitHub Actions Workflow:
+- `Category Integration Hard Baseline`
+- Run `35783612898`: SUCCESS
+- Run `35783744612`: SUCCESS
+
+Beide Runs führten vor dem Audit real aus:
+- `release_guard.py governance-check` -> PASS
+- `release_guard.py start --branch affiliate-release-current` -> PASS
+- exaktes PPM-6.7.9-Paket aus `main` -> SHA256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1` PASS
+- read-only Portal-/Affiliate-/PPM-Baseline-Audit -> PASS
+
+Belegte Basis:
+- Portalstruktur SHA256: `b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0`
+- Portal: 329 Produktseiten / 1124 Themenkategorien / 1520 Menüeinträge
+- eBay-Katalog SHA256: `4eecef55a3033a4691f8a832eba5fb1657cdb15826ee47d366dccbaabfbb1fa2`
+- eBay-Katalog: 329 Produktziele / 1124 Artikelziele / 316 Business Concepts / 59 Hub Concepts / 375 routable Concepts
+- die 5 neuen Produktseiten und 25 neuen Artikelkategorien fehlen in beiden statischen Basen noch erwartungsgemäß
+- für keinen der fünf neuen Titel existiert bereits ein gleichnamiger normalisierter Business-Concept; ein unbeabsichtigtes Concept-Merge ist damit nicht vorgegeben
+- aktueller Repo-Releasebaum der Affiliate-Zentrale meldet 6.72.105 und ist deshalb nicht als Live-Plugin-Ersatz freigegeben.
+
+Evidence-Artefakte:
+- Run 35783612898 Artifact ID `10719280682`
+- Run 35783744612 Artifact ID `10719391536`
