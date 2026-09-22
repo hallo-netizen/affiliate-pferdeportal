@@ -1,0 +1,16 @@
+{
+  "contract": "PFERDE_ATELIER_CONCEPT_AGENT_WORK_BINDING_POINTER_V1",
+  "workflow": "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT",
+  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "item_count": 16,
+  "intake_sha256": "b6ce8dd1d43a757ee985c85ad5196570434fbc2b2d8ef50c49ed91774f4fe104",
+  "research_binding_sha256": "1328cbe6dbdab0411dff38050eb1a3ba610ca2d4ed80fa3b8b2d97427a9f3701",
+  "authoring_bindings_file_sha256": "6b52258d1bd81c571b22ae68802450d51e7e1eb89873cddd7745b357ba5b4cf1",
+  "cross_chat_transport_filename": "CONCEPT_AGENT_16_WORK_BINDING.json",
+  "cross_chat_transport_sha256": "f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4",
+  "cross_chat_transport_binding_sha256": "f9384dddb5135860ebe5d1c3f7daf5f446ae3d0d52acafc4973ecaee14b44b1f",
+  "cross_chat_transport_required": true,
+  "article_bodies_present": false,
+  "next_article_index": 0,
+  "publish_allowed": false
+}
