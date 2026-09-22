@@ -1,6 +1,6 @@
 {
   "contract": "CONCEPT_AGENT_CONTROL_STATE_V1",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "PASS",
   "scope": "ENTRANCE_AND_REENTRY_CONTROL_ONLY",
   "control_branch": "concept-agent/production-control",
@@ -56,7 +56,26 @@
     "historical_real16_terminal_reason": "EXACT_CROSS_CHAT_TRANSPORT_MISSING",
     "invalid_binding_persistence_run": 35761479213,
     "invalid_binding_persistence_status": "EXPECTED_BLOCK",
-    "invalid_binding_persistence_reason": "TRANSPORT_SHA_MISMATCH"
+    "invalid_binding_persistence_reason": "TRANSPORT_SHA_MISMATCH",
+    "fixed_block_final_run": 35770259944,
+    "fixed_block_final_status": "PASS",
+    "fixed_block_proof_sha256": "36318454d7ff5d01908a3c9727cc8ef6bdf09dc6ce5f7940dea614d1c90cce2f",
+    "fixed_block_positive_article_counts": [
+      1,
+      3
+    ],
+    "fixed_block_restart_article_counts": [
+      1,
+      3
+    ],
+    "fixed_block_negative_article_counts": [
+      1,
+      3
+    ],
+    "fixed_block_exactly_one_final_file": true,
+    "current_real16_fixed_route_run": 35770433508,
+    "current_real16_fixed_route_status": "EXPECTED_RESTART",
+    "current_real16_required_action": "RESTART_BATCH_FROM_INTAKE"
   },
   "durable_binding_policy": {
     "durable_ref": "concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json",
@@ -75,7 +94,8 @@
     "expected_binding_sha256": "f9384dddb5135860ebe5d1c3f7daf5f446ae3d0d52acafc4973ecaee14b44b1f",
     "available_in_github": false,
     "reconstruction_allowed": false,
-    "safe_result": "BLOCKED_BEFORE_ARTICLE_PRODUCTION"
+    "safe_result": "RESTART_REQUIRED_FROM_INTAKE",
+    "chat_may_choose_action": false
   },
   "domain_workflow_modified": false,
   "language_tool_6_8_modified": false,
@@ -84,5 +104,12 @@
   "endstempel_modified": false,
   "plugin_code_modified": false,
   "publish_allowed": false,
-  "control_state_sha256": "8f93a9c3fc27172c94905bb0fe4bd4015f720956307fbb93c45ec713fdd212d9"
+  "fixed_block_policy": {
+    "contract": "CONCEPT_AGENT_FIXED_BLOCK_ROUTE_V1",
+    "missing_exact_transport": "RESTART_BATCH_FROM_INTAKE",
+    "transport_hash_or_binding_mismatch": "TERMINAL_SECURITY_BLOCK",
+    "chat_may_choose_action": false,
+    "reconstruction_allowed": false,
+    "publish_allowed": false
+  }
 }
