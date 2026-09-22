@@ -1,6 +1,6 @@
 {
   "contract": "CONCEPT_AGENT_CONTROL_STATE_V1",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "status": "PASS",
   "scope": "ENTRANCE_AND_REENTRY_CONTROL_ONLY",
   "control_branch": "concept-agent/production-control",
@@ -75,7 +75,20 @@
     "fixed_block_exactly_one_final_file": true,
     "current_real16_fixed_route_run": 35770433508,
     "current_real16_fixed_route_status": "EXPECTED_RESTART",
-    "current_real16_required_action": "RESTART_BATCH_FROM_INTAKE"
+    "current_real16_required_action": "RESTART_BATCH_FROM_INTAKE",
+    "historical_slot_binding_run": 35715881357,
+    "historical_slot_binding_status": "PASS",
+    "historical_slot_binding_item_count": 16,
+    "historical_slot_binding_proved_fields": [
+      "plan_slot",
+      "canonical_article_id",
+      "category_slug"
+    ],
+    "ppm16_authoritative_metadata_diagnostic_run": 35775376505,
+    "ppm16_authoritative_metadata_diagnostic_status": "PASS",
+    "ppm16_all_canonical_ids_present": true,
+    "ppm16_target_keyword_node_count": 0,
+    "ppm16_all_items_have_target_keyword": false
   },
   "durable_binding_policy": {
     "durable_ref": "concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json",
@@ -113,15 +126,43 @@
     "reconstruction_allowed": false,
     "publish_allowed": false
   },
-  "current_status": "BLOCKED_FIXED_RESTART_EXECUTION_NOT_BOUND",
+  "current_status": "BLOCKED_RESTART_FROM_INTAKE_PREREQUISITES_NOT_PRESENT",
   "first_open_blocker": {
-    "code": "FIXED_RESTART_ACTION_NOT_EXECUTED",
-    "detail": "The production workflow resolves RESTART_BATCH_FROM_INTAKE but currently writes CONCEPT_AGENT_RESTART_REQUIRED_V1.json and exits 20 instead of executing the restart itself.",
-    "evidence_run": 35770433508
+    "code": "AUTHORITATIVE_PSERC_EXACT_FIVE_INTAKE_SOURCE_NOT_DURABLY_BOUND",
+    "detail": "RESTART_BATCH_FROM_INTAKE cannot be executed as a real fresh batch because the current exact-five PSERC metadata snapshot is not durably available. The bound PPM 6.7.9 registry proves all 16 canonical article identities but contains zero target_keyword nodes for those items, so title/target_keyword may not be reconstructed or guessed.",
+    "evidence_runs": [
+      35715881357,
+      35775376505
+    ]
   },
   "next_action": {
-    "action": "Bind RESTART_BATCH_FROM_INTAKE to the actual GitHub intake/restart execution so the workflow continues without chat choice; then rerun the same 1-article and multi-article positive/negative acceptance and the current real16 entrance.",
+    "action": "Bind the current authoritative PSERC metadata-only exact-five snapshot as durable GitHub input, then bind a productive fresh-batch executor to the existing unchanged intake/research/authoring path. Do not reconstruct the missing historical work transport and do not synthesize title or target_keyword from PPM working_title/primary_subject. After that rerun 1-article positive/negative, multi-article positive/negative, and the real 16-item entrance.",
     "chat_may_choose_action": false
   },
-  "control_state_sha256": "f9676363e661a0b603018e7af9c468fddbc51ae9c841cd0a0d185b12fa554763"
+  "restart_execution_assessment": {
+    "status": "BLOCKED",
+    "selected_action": "RESTART_BATCH_FROM_INTAKE",
+    "fixed_action_selection_proven": true,
+    "productive_restart_executor_present": false,
+    "authoritative_exact_five_pserc_intake_source_durably_available": false,
+    "required_exact_five_fields": [
+      "title",
+      "target_keyword",
+      "category",
+      "article_type",
+      "plan_slot"
+    ],
+    "ppm_6_7_9_can_resolve_all_16_canonical_ids": true,
+    "ppm_6_7_9_contains_target_keyword_for_current_16": false,
+    "historical_slot_binding_is_not_a_valid_exact_five_intake": true,
+    "old_work_transport_reconstruction_allowed": false,
+    "chat_may_synthesize_missing_metadata": false,
+    "publish_allowed": false
+  },
+  "following_open_blocker": {
+    "code": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT",
+    "detail": "Repository verification found no productive Concept Agent caller that turns intake into research submission/research binding/authoring binding. The only bind_research callers outside intake_bridge itself are tests. The fixed restart path proven for 1/3 articles is simulation-only.",
+    "chat_may_choose_action": false
+  },
+  "control_state_sha256": "df7e800c1d16b2f14e393cf85fac83078a35f6a827bbc8a253b40cf080059c22"
 }
