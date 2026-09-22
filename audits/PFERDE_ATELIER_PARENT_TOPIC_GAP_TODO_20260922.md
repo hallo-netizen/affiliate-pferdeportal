@@ -26,12 +26,12 @@ Boxen & Türen ausdrücklich ausgeschlossen.
 ## To-do / Prüfliste
 
 ### 1. Ist-Bestand und Kollisionsprüfung
-- [ ] exakte Parent-ID und Parent-Slug je der fünf Fälle bestätigen
-- [ ] vorhandene direkte Kinder je Parent bestätigen
-- [ ] vorgeschlagene neue Namen gegen bestehende Seiten/Kategorien prüfen
-- [ ] vorgeschlagene Slugs gegen bestehende Seiten/Kategorien prüfen
-- [ ] bestehende Links/Artikelzuordnungen der Parents prüfen
-- [ ] festlegen, welche Parent-Namen sichtbar geändert werden und welche nicht
+- [x] exakte Parent-ID und Parent-Slug je der fünf Fälle bestätigen
+- [x] vorhandene direkte Kinder je Parent bestätigen
+- [x] vorgeschlagene neue Namen gegen bestehenden Snapshot prüfen
+- [x] vorgeschlagene Slugs gegen bestehenden Snapshot prüfen
+- [x] direkte bestehende Artikel-/Produktionsfamilien der Parents prüfen: 0 bei allen fünf; Link-Readback folgt vor Deployment
+- [x] Namensregel festgelegt: nur Sattel -> Sattel & Zubehör; vier andere Parents bleiben sichtbar unverändert
 
 ### 2. Allgemeingültige Kategorie-Workflow-Regel
 - [ ] PARENT_TOPIC_GAP als echte Prüfregel in den Kategorie-Workflow integrieren
@@ -84,3 +84,14 @@ Boxen & Türen ausdrücklich ausgeschlossen.
 - [ ] WordPress-Readback
 - [ ] Design/Kacheln/Text/SEO/Redaktionsplan zusammen prüfen
 - [ ] erst danach Live-Freigabe
+
+
+## Schritt-1-Nachweis
+
+- Sattel: ID 108, Slug `ausruestung-sattel`; direkte Kinder: Satteldecken, Schabracken, Sattelgurte, Steigbügel, Sattelschränke, Satteltransport.
+- Trensen & Gebisse: ID 109, Slug `ausruestung-trensen-und-gebisse`; direkte Kinder: Englische Trensen, Gebisse, Gebisslose Zäumungen, Zügel, Sperrriemen, Reithalfter.
+- Offenstall: ID 110, Slug `stall-offenstall`; direkte Kinder: Offenstallraufen, Liegeflächen im Offenstall, Offenstalltore, Offenstall-Bodenbefestigung, Fressständer im Offenstall, Trennwände im Offenstall.
+- Paddock: ID 119, Slug `weide-paddock`; direktes Kind: Paddockzäune.
+- Reitplatz: ID 120, Slug `weide-reitplatz`; direkte Kinder: Reitplatzboden, Reitplatzdrainage, Reitplatzumrandung, Reitplatzbeleuchtung, Reitplatzbewässerung, Reitplatzspiegel.
+- Direkte Produktions-/Artikelkategorien an den fünf Parent-IDs: jeweils 0.
+- Im geprüften Live-Snapshot keine exakten Kollisionen für `pferdesaettel`, `trensen`, `offenstallbau`, `paddockbau`, `reitplatzbau`.
