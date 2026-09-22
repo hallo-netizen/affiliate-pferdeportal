@@ -2,7 +2,7 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "PASS_GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_LIVE_SITE_ACCEPTANCE_OPEN",
+  "status": "LIVE_0576_RUNNING_ACCEPTANCE_PARTIAL_SAFE_CANCEL_FAIL_YIELD_ANALYSIS_PENDING",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
@@ -17,7 +17,10 @@
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
     "release": "GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
-    "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_1d641e12;_NO_PRODUCT_OR_PROOF_CHANGE"
+    "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_1d641e12;_NO_PRODUCT_OR_PROOF_CHANGE",
+    "branch_head_at_freshness_check": "e4ada809f71a34cafc5d41d5c5eaf34828abf060",
+    "live_candidate": "0.57.6",
+    "live_candidate_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
   },
   "proven": {
     "package_total_files": "PASS_131",
@@ -50,14 +53,14 @@
     "local_exact_zip_new_forbidden_surfaces": "ZERO_TIMEOUT_ZERO_DELETE_OPTION_ZERO_REMOTE_ZERO_SCHEDULING_ZERO_SLEEP_ZERO_SCHEMA_DESTRUCTIVE_SQL"
   },
   "first_blocker": {
-    "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_FINAL_0576_EXACT_TESTED_BYTES",
-    "detail": "The exact 0.57.6 ZIP from successful Real WordPress E2E run 35693065234 has not yet been accepted on the user's real WordPress installation."
+    "code": "LIVE_0576_SAFE_CANCEL_NOT_PROMPT_AND_JOB_NOT_FOUND_VISIBLE",
+    "detail": "Live 0.57.6 progresses stably, but safe cancel did not settle promptly during active FINALIZE and UI showed PSTE_RESEARCH_JOB_NOT_FOUND. Full live acceptance therefore remains open."
   },
   "next_action": {
-    "id": "INSTALL_EXACT_FINAL_0576_BYTES_AND_RUN_REAL_SITE_ACCEPTANCE",
-    "action": "Install only the exact 0.57.6 ZIP from artifact 10679790400 with SHA-256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f. On the real site verify normal production progress, safe cancel while work is active, and restart continuation without resetting prior usable progress or repeating the completed local audit. Keep the read-only diagnostic plugin available for snapshots only.",
-    "success": "REAL_SITE_0576_PROGRESS_SAFE_CANCEL_AND_CONTINUATION_PASS",
-    "until_then": "NO_LIVE_PASS_AND_NO_PPA005_CURRENT_ZIP_PROMOTION"
+    "id": "LET_CURRENT_LIVE_0576_WAVE_FINISH_UNTOUCHED_THEN_ANALYZE_SANDBOX",
+    "action": "Do not modify filters, code, timeouts, queue state, or current live run. Let the currently running exact 0.57.6 production wave continue to terminal state. After terminal state, capture the final wave status and analyze the Semantic Sandbox only to determine candidate counts and rejection reasons before any yield-related change. Keep the safe-cancel live failure recorded for a separate minimal repair after the running wave is no longer active.",
+    "success": "CURRENT_LIVE_WAVE_TERMINAL_WITH_FINAL_STATUS_CAPTURED_AND_SANDBOX_YIELD_ANALYSIS_COMPLETED",
+    "until_then": "NO_PPA005_CURRENT_ZIP_PROMOTION_NO_FILTER_FIX_NO_CANCEL_RETRY"
   },
   "rules": [
     "KISS",
@@ -131,5 +134,35 @@
     "last_known_live_installable_goldstand_version": "0.57.4",
     "last_known_live_installable_goldstand_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
     "candidate_0576_not_promoted_until_real_site_acceptance": true
+  },
+  "live_observation": {
+    "source": "USER_LIVE_WORDPRESS_SCREENSHOTS_2026-09-22",
+    "execution": "RUNNING_STABLE",
+    "previous_prepare_step_overdue_recurrence_observed": false,
+    "observed_progress": [
+      "FINALIZE_PREPARE_CANDIDATES progressed",
+      "PREPARE_COMMIT progressed",
+      "SANDBOX_BATCH progressed",
+      "CONTEXT_BATCH progressed",
+      "family completed and next family started"
+    ],
+    "latest_visible_wave": {
+      "usable_pass_topics": 5,
+      "target_usable": 40,
+      "family_index_visible": 2,
+      "max_families": 40,
+      "parked_blocked_steps_visible": 2,
+      "ui_error": "PSTE_RESEARCH_JOB_NOT_FOUND"
+    },
+    "safe_cancel": {
+      "result": "FAIL_LIVE_ACCEPTANCE",
+      "symptom": "After user requested safe cancel, current FINALIZE work continued through later substages and another family became visible before stop took effect / did not settle promptly.",
+      "test_gap": "Previous 0.57.6 proof cancelled between bounded requests; it did not prove user click during an already active FINALIZE request / inherited live execution race."
+    },
+    "topic_yield": {
+      "status": "NOT_YET_CLASSIFIED",
+      "reason": "Current wave is still running; user explicitly requires later analysis only from Semantic Sandbox evidence.",
+      "forbidden_until_terminal": "NO_FILTER_CHANGE_NO_YIELD_FIX_NO_GUESSING"
+    }
   }
 }
