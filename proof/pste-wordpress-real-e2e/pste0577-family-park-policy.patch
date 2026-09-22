@@ -1,0 +1,28 @@
+--- a/includes/class-pste-research-driver.php
++++ b/includes/class-pste-research-driver.php
+@@ -72,8 +72,12 @@
+             if($completedNow>$completedBefore){$state['same_blocked_code_count']=0;$state['last_blocked_code']='';}
+             if(str_starts_with($resultCode,'CHILD_PARKED_CONTINUE|')){
+                 $blockedCode=substr($resultCode,strlen('CHILD_PARKED_CONTINUE|'));$prior=(string)($state['last_blocked_code']??'');
+-                $state['same_blocked_code_count']=($prior!==''&&hash_equals($prior,$blockedCode))?(int)($state['same_blocked_code_count']??0)+1:1;$state['last_blocked_code']=$blockedCode;
+-                if((int)$state['same_blocked_code_count']>=3){$continue=false;$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_REPEATED_SYSTEM_FAILURE';$state['last_error']='PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:'.$blockedCode;}
++                if(self::countsAsRepeatedSystemFailure($blockedCode)){
++                    $state['same_blocked_code_count']=($prior!==''&&hash_equals($prior,$blockedCode))?(int)($state['same_blocked_code_count']??0)+1:1;$state['last_blocked_code']=$blockedCode;
++                    if((int)$state['same_blocked_code_count']>=3){$continue=false;$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_REPEATED_SYSTEM_FAILURE';$state['last_error']='PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:'.$blockedCode;}
++                }else{
++                    $state['same_blocked_code_count']=0;$state['last_blocked_code']='';
++                }
+             }
+             if($continue&&!$expectedWait&&(int)$state['no_progress_count']>=self::MAX_NO_PROGRESS){$continue=false;$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_NO_PROGRESS_BLOCKED';$state['last_error']='PSTE_DRIVER_NO_PROGRESS_BLOCKED';}
+             elseif((string)($state['status']??'')!=='BLOCKED'){$state['status']=$continue?'RUNNING':'IDLE';$state['health_code']=$continue?'PSTE_DRIVER_STEP_SAVED':'PSTE_DRIVER_NO_ACTIVE_WORK';$state['last_error']='';}
+@@ -140,6 +144,10 @@
+         return [false,0,'NO_ACTIVE_WORK'];
+     }
+ 
++    private static function countsAsRepeatedSystemFailure(string $code): bool {
++        return !in_array(self::code($code),['PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN'],true);
++    }
++
+     private static function markSystemBlock(string $code): void {$state=self::loadOrDefault();$state['status']='BLOCKED';$state['health_code']='PSTE_DRIVER_GLOBAL_BLOCK';$state['last_error']=self::code($code);$state['updated_at_utc']=gmdate('c');self::save($state);}
+ 
+     public static function status(): array {return self::publicStatus(self::loadOrDefault());}
