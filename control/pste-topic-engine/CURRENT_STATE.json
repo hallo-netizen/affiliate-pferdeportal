@@ -2,30 +2,30 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "LIVE_0576_RUNNING_ACCEPTANCE_PARTIAL_SAFE_CANCEL_FAIL_YIELD_ANALYSIS_PENDING",
+  "status": "GITHUB_0577_REAL_WORDPRESS_PASS_LIVE_0576_STOPPED_SANDBOX_ANALYSIS_PENDING",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "1d641e12c9d23e510044fc745d7cf0fe969d8c7f",
+    "technical_head": "5d199990230b397fb732fe012cfb07250f7835db",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35693065234,
+    "run_id": 35705551530,
     "run_result": "SUCCESS",
-    "evidence_artifact_id": 10679790400,
-    "evidence_digest": "sha256:dfb41d91aaa6b485bef8c0497e2ed6888dec514ce4144286177439fd282d3cab",
-    "candidate": "0.57.6-HOBBYROOM",
-    "candidate_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
+    "evidence_artifact_id": 10684138953,
+    "evidence_digest": "sha256:2ecf1dce45c5ea360b3921b99957885de596b37c58445ebd80ba74aa2cb85c53",
+    "candidate": "0.57.7-HOBBYROOM",
+    "candidate_sha256": "62a2523768c205dfaad50167cd19a892d113ba1acfd09cb6db3ad8b77c6b7382",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
-    "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_1d641e12;_NO_PRODUCT_OR_PROOF_CHANGE",
+    "release": "GITHUB_0577_REAL_WORDPRESS_E2E_PASS_REAL_SITE_RETEST_OPEN",
+    "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_5d199990;_NO_PRODUCT_OR_PROOF_CHANGE",
     "live_candidate": "0.57.6",
     "live_candidate_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
   },
   "proven": {
     "package_total_files": "PASS_131",
     "package_php_files": "PASS_76",
-    "package_version": "PASS_0.57.6",
-    "plugin_constant": "PASS_0.57.6",
+    "package_version": "PASS_0.57.7",
+    "plugin_constant": "PASS_0.57.7",
     "single": "PASS_15_CANDIDATES_5_USABLE",
     "browser_start_without_reload_live_progress": "PASS",
     "stale_old_queue_status_ignored_after_new_start": "PASS",
@@ -40,26 +40,28 @@
     "technical_park_errors": "ZERO",
     "provider_counts": "PASS_EXACT_26_EACH",
     "driver_terminal_state": "PASS_IDLE",
-    "real_wordpress_full_e2e": "PASS_RUN_35693065234",
+    "real_wordpress_full_e2e": "PASS_RUN_35705551530",
     "final_zip_full_workflow": "LEGACY_0.57.0_WORKFLOW_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
     "separate_process_full_system": "LEGACY_0.57.1_WORKFLOW_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
     "complete_system_simulation": "LEGACY_0.57.0_DISCOVERY_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
-    "exact_tested_zip_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
+    "exact_tested_zip_sha256": "62a2523768c205dfaad50167cd19a892d113ba1acfd09cb6db3ad8b77c6b7382",
     "previous_live_0574_rollback_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
     "exact_0576_authoritative_proof": "REAL_WORDPRESS_HTTP_E2E_RUN_35693065234_PLUS_EXACT_LOCAL_BYTE_LINT_DIFF_CHECK",
     "local_exact_zip_php_lint": "PASS_76_OF_76",
     "local_exact_zip_vs_0574_changed_product_files": "PASS_4_ONLY",
-    "local_exact_zip_new_forbidden_surfaces": "ZERO_TIMEOUT_ZERO_DELETE_OPTION_ZERO_REMOTE_ZERO_SCHEDULING_ZERO_SLEEP_ZERO_SCHEMA_DESTRUCTIVE_SQL"
+    "local_exact_zip_new_forbidden_surfaces": "ZERO_TIMEOUT_ZERO_DELETE_OPTION_ZERO_REMOTE_ZERO_SCHEDULING_ZERO_SLEEP_ZERO_SCHEMA_DESTRUCTIVE_SQL",
+    "family_category_exhaustion_park_policy": "PASS_PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN_DOES_NOT_COUNT_AS_REPEATED_SYSTEM_FAILURE",
+    "technical_repeated_failure_guard_preserved": "PASS"
   },
   "first_blocker": {
-    "code": "LIVE_0576_SAFE_CANCEL_NOT_PROMPT_AND_JOB_NOT_FOUND_VISIBLE",
-    "detail": "Live 0.57.6 progresses stably, but safe cancel did not settle promptly during active FINALIZE and UI showed PSTE_RESEARCH_JOB_NOT_FOUND. Full live acceptance therefore remains open."
+    "code": "LIVE_0576_SAFE_CANCEL_NOT_PROMPT_AND_SANDBOX_PARK_CAUSES_PENDING_REVIEW",
+    "detail": "0.57.7 fixes the proven false global escalation of repeated PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN family parks. Real-site 0.57.7 retest is still open. Separately, the earlier 0.57.6 safe-cancel race remains unresolved, and the 10 live parked families still require Semantic Sandbox cause analysis before any yield-rule change."
   },
   "next_action": {
-    "id": "LET_CURRENT_LIVE_0576_WAVE_FINISH_UNTOUCHED_THEN_ANALYZE_SANDBOX",
-    "action": "Do not modify filters, code, timeouts, queue state, or current live run. Let the currently running exact 0.57.6 production wave continue to terminal state. After terminal state, capture the final wave status and analyze the Semantic Sandbox only to determine candidate counts and rejection reasons before any yield-related change. Keep the safe-cancel live failure recorded for a separate minimal repair after the running wave is no longer active.",
-    "success": "CURRENT_LIVE_WAVE_TERMINAL_WITH_FINAL_STATUS_CAPTURED_AND_SANDBOX_YIELD_ANALYSIS_COMPLETED",
-    "until_then": "NO_PPA005_CURRENT_ZIP_PROMOTION_NO_FILTER_FIX_NO_CANCEL_RETRY"
+    "id": "ANALYZE_STOPPED_LIVE_WAVE_SEMANTIC_SANDBOX_THEN_LIVE_RETEST_0577",
+    "action": "Keep the stopped 0.57.6 live wave stopped. Analyze the Semantic Sandbox for the 10 parked families and their candidate-level rejection/review reasons without changing filters or topic-quality rules. After classification, install only the exact tested 0.57.7 bytes and run the next live production-wave acceptance with preserved data. Keep the separate safe-cancel live race recorded for its own minimal repair.",
+    "success": "SANDBOX_PARK_REASONS_CLASSIFIED_AND_EXACT_0577_LIVE_WAVE_NO_FALSE_REPEATED_SYSTEM_BLOCK",
+    "until_then": "NO_FILTER_CHANGE_NO_PPA005_CURRENT_PROMOTION_NO_BLIND_RESEARCH_RESTART"
   },
   "rules": [
     "KISS",
@@ -118,7 +120,8 @@
     "CANCELLED_WAVE_RESTARTS_AT_ZERO": "0.57.6 preserves original wave baseline and carries already reached PASS count into restarted wave; proof old=2 new=2.",
     "LOCAL_BACKLOG_RECHECK_AFTER_CANCEL": "0.57.6 continuation preserves completed local backlog audit; proof restart reports local_backlog_complete=true and local_backlog_reused=true.",
     "BLIND_START_UI_REQUIRES_RELOAD": "Previously fixed and re-proven.",
-    "STALE_BREADTH_STATUS_AFTER_NEW_START": "Previously fixed and re-proven."
+    "STALE_BREADTH_STATUS_AFTER_NEW_START": "Previously fixed and re-proven.",
+    "REPEATED_CATEGORY_EXHAUSTION_PARKS_STOP_WHOLE_WAVE": "0.57.7 excludes only PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN from the repeated-system-failure counter; the family remains parked and technical repeated failures still hard-block."
   },
   "fixed_live_failures": {
     "PSTE_DRIVER_STEP_OVERDUE_FINALIZE_PREPARE": "FIXED_BY_0575_WORKFLOW_INVENTORY_PROJECTION_PLUS_BOUNDED_PREPARE;_0576_REPROVEN_UNDER_303_STRESS",
@@ -127,41 +130,45 @@
     "LOCAL_AUDIT_RESTART_AFTER_CANCEL": "FIXED_AND_PROVEN_CONTINUED",
     "BLIND_START_UI_REQUIRES_RELOAD": "FIXED_AND_REPROVEN",
     "STALE_BREADTH_STATUS_AFTER_NEW_START": "FIXED_AND_REPROVEN",
-    "VERSION_READBACK_MISMATCH_0576": "FIXED_BY_BINDING_BOTH_PLUGIN_HEADER_AND_PSTE_VERSION_TO_0_57_6"
+    "VERSION_READBACK_MISMATCH_0576": "FIXED_BY_BINDING_BOTH_PLUGIN_HEADER_AND_PSTE_VERSION_TO_0_57_6",
+    "REPEATED_CATEGORY_EXHAUSTION_PARKS_STOP_WHOLE_WAVE": "FIXED_IN_0577_REAL_WORDPRESS_E2E_RUN_35705551530;_LIVE_RETEST_OPEN"
   },
   "rollback": {
     "last_known_live_installable_goldstand_version": "0.57.4",
     "last_known_live_installable_goldstand_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
-    "candidate_0576_not_promoted_until_real_site_acceptance": true
+    "candidate_0576_not_promoted_until_real_site_acceptance": true,
+    "candidate_0577_not_promoted_until_real_site_acceptance": true
   },
   "live_observation": {
-    "source": "USER_LIVE_WORDPRESS_SCREENSHOTS_2026-09-22",
-    "execution": "RUNNING_STABLE",
+    "source": "USER_LIVE_WORDPRESS_SCREENSHOTS_AND_READ_ONLY_DIAGNOSTIC_2026-09-22",
+    "execution": "STOPPED_BY_USER_AFTER_DRIVER_BLOCKED",
+    "installed_version": "0.57.6",
     "previous_prepare_step_overdue_recurrence_observed": false,
-    "observed_progress": [
-      "FINALIZE_PREPARE_CANDIDATES progressed",
-      "PREPARE_COMMIT progressed",
-      "SANDBOX_BATCH progressed",
-      "CONTEXT_BATCH progressed",
-      "family completed and next family started"
-    ],
     "latest_visible_wave": {
-      "usable_pass_topics": 5,
+      "usable_pass_topics": 29,
       "target_usable": 40,
-      "family_index_visible": 2,
-      "max_families": 40,
-      "parked_blocked_steps_visible": 2,
-      "ui_error": "PSTE_RESEARCH_JOB_NOT_FOUND"
+      "completed_count": 10,
+      "blocked_count": 10,
+      "current_index": 20,
+      "current_family": "Verladehilfen",
+      "queue_status_before_user_stop": "RUNNING",
+      "driver_status_before_user_stop": "BLOCKED",
+      "driver_health_code": "PSTE_DRIVER_REPEATED_SYSTEM_FAILURE",
+      "driver_last_error": "PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN"
+    },
+    "root_cause_proven": {
+      "queue_behavior": "BLOCKED_CHILD_IS_LOSSLESSLY_PARKED_AND_QUEUE_CONTINUES",
+      "false_escalation": "DRIVER_COUNTED_REPEATED_FAMILY_PARK_CODE_AS_SYSTEM_FAILURE_AND_BLOCKED_AFTER_THREE",
+      "fix": "0.57.7_EXCLUDES_ONLY_PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN_FROM_REPEATED_SYSTEM_FAILURE_COUNTER"
     },
     "safe_cancel": {
-      "result": "FAIL_LIVE_ACCEPTANCE",
-      "symptom": "After user requested safe cancel, current FINALIZE work continued through later substages and another family became visible before stop took effect / did not settle promptly.",
-      "test_gap": "Previous 0.57.6 proof cancelled between bounded requests; it did not prove user click during an already active FINALIZE request / inherited live execution race."
+      "result": "STILL_OPEN_FROM_LIVE_0576",
+      "symptom": "Earlier 0.57.6 cancel during active FINALIZE was not prompt and UI showed PSTE_RESEARCH_JOB_NOT_FOUND.",
+      "fix_in_0577": false
     },
     "topic_yield": {
-      "status": "NOT_YET_CLASSIFIED",
-      "reason": "Current wave is still running; user explicitly requires later analysis only from Semantic Sandbox evidence.",
-      "forbidden_until_terminal": "NO_FILTER_CHANGE_NO_YIELD_FIX_NO_GUESSING"
+      "status": "SANDBOX_ANALYSIS_NOW_ALLOWED_AFTER_STOP",
+      "rule": "ANALYZE_ONLY_SEMANTIC_SANDBOX_EVIDENCE_BEFORE_ANY_FILTER_OR_YIELD_CHANGE"
     }
   }
 }

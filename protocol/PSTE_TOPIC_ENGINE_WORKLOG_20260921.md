@@ -157,3 +157,14 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Nutzerentscheidung: 40er Lauf nicht erneut abbrechen; stabilen Lauf weiterlaufen lassen.
 - Themenausbeute nicht aus Zwischenstand bewerten. Nach terminalem Lauf ausschließlich Semantic Sandbox auswerten: Anzahl Kandidaten, PASS, Ablehnungen und konkrete Ablehnungsgründe. Vorher keine Filteränderung.
 - Safe-Cancel-Fehler bleibt separat offen und wird erst nach Ende der laufenden Welle minimal repariert/retestet.
+
+
+## Nachtrag 2026-09-22 – 0.57.7 Familien-Park bleibt fachlich, stoppt aber nicht mehr global
+- Ausgang Live 0.57.6: 29/40, 10 COMPLETE, 10 fachlich geparkte Familien; Queue war weiterhin RUNNING, Driver blockierte global mit `PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN`.
+- Root Cause: Breadth-Queue besitzt bereits den vorgesehenen verlustfreien `parkBlockedCurrentAndContinue()`-Pfad. Der Driver behandelte drei gleiche Familien-Parkcodes dennoch als wiederholten Systemfehler.
+- 0.57.7 ändert nur diese Steuerungsregel: `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` zählt nicht mehr zum globalen Wiederholungs-Systemfehler. Parken/Fail-Closed bleibt unverändert; technische Fehler bleiben hart.
+- Voller Real-WordPress/MySQL/Multiworker/Admin-AJAX/Loopback/Cron-Retest: Run `35705551530` SUCCESS auf Head `5d199990230b397fb732fe012cfb07250f7835db`.
+- Exakter Kandidat: `PSTE-0.57.7-HOBBYROOM.zip`, SHA-256 `62a2523768c205dfaad50167cd19a892d113ba1acfd09cb6db3ad8b77c6b7382`.
+- Evidence Artifact `10684138953`, Digest `sha256:2ecf1dce45c5ea360b3921b99957885de596b37c58445ebd80ba74aa2cb85c53`.
+- Nachweise: gezielter Familien-Park-Policy-Test PASS; Single PASS; Safe-Cancel-PREPARE-Hobbyraum PASS; Fortsetzung PASS; 303er PREPARE-Stress PASS; finale 40er Zielwelle 40/40, 123 raw, 27 COMPLETE, Driver IDLE.
+- Reale 0.57.6-Welle wurde vom Nutzer nach dem Blockzustand gestoppt. Nächster Arbeitsschritt: Semantic Sandbox der 10 geparkten Familien auswerten; keine Filteränderung vorher. Danach exakt 0.57.7 live testen.

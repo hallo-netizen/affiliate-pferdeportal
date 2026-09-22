@@ -167,3 +167,17 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Dieser Zwischenstand beweist weder „zu wenige Provider-Themen“ noch „zu harte Filter“.
 - Nutzerregel: Themenausbeute erst nach terminalem Lauf **ausschließlich anhand der Semantic Sandbox** analysieren.
 - Bis dahin: keine Filteränderung und keine fachliche Yield-Reparatur.
+
+
+## PSTE-ERR-REAL-012 – 0.57.6 Live: fachliche Kategorie-Parks fälschlich als wiederholter Systemfehler eskaliert
+- Live-Diagnose nach 0.57.6: Queue weiter `RUNNING`, 29/40 nutzbare Themen, 10 COMPLETE, 10 BLOCKED_PARKED, aktueller Index 20 / Familie `Verladehilfen`; kein aktiver Child-Job und keine aktiven Locks.
+- Driver gleichzeitig `BLOCKED` mit `PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN`.
+- Codebeweis: `parkBlockedCurrentAndContinue()` ist ausdrücklich der verlustfreie Familien-Park-/Weiterlaufpfad. Der Driver zählte jedoch jeden `CHILD_PARKED_CONTINUE|<code>` gleich und eskalierte nach drei gleichen Codes global auf `PSTE_DRIVER_REPEATED_SYSTEM_FAILURE`.
+- `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` ist ein fachlicher Fail-Closed-Familienzustand; die Familie muss geparkt bleiben, darf aber nicht allein die gesamte Breadth-Welle als technischen Systemfehler stoppen.
+- Minimalfix 0.57.7: ausschließlich `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` wird aus dem Wiederholungs-Systemfehlerzähler ausgenommen. Die Familie bleibt blockiert/geparkt; echte technische Wiederholungsfehler zählen unverändert weiter und blockieren weiterhin hart.
+- Technischer Head: `5d199990230b397fb732fe012cfb07250f7835db`.
+- Real WordPress HTTP E2E Run `35705551530`: SUCCESS. Zielwelle `TARGET_REACHED`, 40 usable / 123 raw, 27 COMPLETE, 0 technische BLOCKED, Driver terminal IDLE.
+- Gezielt: `PASS_FAMILY_PARK_POLICY`; technischer Negativfall bleibt zählend.
+- Exakte 0.57.7-ZIP SHA-256: `62a2523768c205dfaad50167cd19a892d113ba1acfd09cb6db3ad8b77c6b7382`.
+- Evidence Artifact: `10684138953`, Digest `sha256:2ecf1dce45c5ea360b3921b99957885de596b37c58445ebd80ba74aa2cb85c53`.
+- Live-Retest 0.57.7 bleibt offen. Vor Filter-/Yield-Änderungen zuerst die 10 geparkten Live-Familien ausschließlich über die Semantic Sandbox klassifizieren.
