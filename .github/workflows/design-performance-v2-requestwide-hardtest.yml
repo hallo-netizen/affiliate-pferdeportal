@@ -1,0 +1,34 @@
+name: Design Performance V2 Requestwide Hardtest
+on:
+  push:
+    branches: [design-performance-standalone-hardtest-20260922]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-design-v2/**'
+      - '.github/workflows/design-performance-v2-requestwide-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Run hardtest
+        run: bash AFFILIATE_HOBBYRAUM/performance-design-v2/run-hardtest.sh
