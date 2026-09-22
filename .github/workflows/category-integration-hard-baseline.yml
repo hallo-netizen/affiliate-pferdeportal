@@ -1,0 +1,58 @@
+name: Category Integration Hard Baseline
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'CATEGORY_INTEGRATION_HOBBYRAUM/**'
+      - 'protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md'
+      - 'control/release-governance/CURRENT_RELEASE.json'
+      - '.github/workflows/category-integration-hard-baseline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  governance-and-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Affiliate governance check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py start --branch "$(git branch --show-current)"
+
+      - name: Bind exact PPM 6.7.9 package from main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          git show origin/main:control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip > /tmp/ppm679.zip
+          ACTUAL="$(sha256sum /tmp/ppm679.zip | awk '{print $1}')"
+          EXPECTED="acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+          test "$ACTUAL" = "$EXPECTED"
+          echo "PPM679_PACKAGE_SHA_PASS $ACTUAL"
+
+      - name: Run read-only category baseline hard audit
+        shell: bash
+        env:
+          PPM_ZIP: /tmp/ppm679.zip
+        run: |
+          set -euo pipefail
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/audit_current.py | tee /tmp/category-baseline.log
+          grep -F 'CATEGORY_INTEGRATION_READ_ONLY_BASELINE_PASS' /tmp/category-baseline.log
+
+      - name: Upload exact audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-integration-baseline-evidence
+          path: |
+            CATEGORY_INTEGRATION_HOBBYRAUM/out/current_audit.json
+            /tmp/category-baseline.log
+          if-no-files-found: error
