@@ -42,6 +42,17 @@ jobs:
           set -euo pipefail
           python3 CATEGORY_INTEGRATION_HOBBYRAUM/audit_pserc.py | tee /tmp/pserc-category-audit.log
           grep -F 'PSERC_CATEGORY_READ_ONLY_AUDIT_PASS' /tmp/pserc-category-audit.log
+      - name: Exact PSERC dynamic-category positive-negative test
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pserc-inner /tmp/pserc-inner.zip
+          mkdir -p /tmp/pserc-inner
+          unzip -p /tmp/pserc.zip 'PSERC-FIX/portal-seo-editorial-plan-compiler_0.28.18_ENDSTEMPEL_IMPORT_ENVELOPE_BINDING.zip' > /tmp/pserc-inner.zip
+          unzip -q /tmp/pserc-inner.zip -d /tmp/pserc-inner
+          PSERC_EXTRACTED_ROOT=/tmp/pserc-inner/portal-seo-editorial-plan-compiler php CATEGORY_INTEGRATION_HOBBYRAUM/test_pserc_dynamic.php | tee /tmp/pserc-dynamic-test.log
+          grep -F 'PSERC_DYNAMIC_CATEGORY_POSITIVE_NEGATIVE_PASS' /tmp/pserc-dynamic-test.log
+
       - name: Upload evidence
         uses: actions/upload-artifact@v4
         with:
@@ -49,4 +60,5 @@ jobs:
           path: |
             CATEGORY_INTEGRATION_HOBBYRAUM/out/pserc-category-audit.json
             /tmp/pserc-category-audit.log
+            /tmp/pserc-dynamic-test.log
           if-no-files-found: error
