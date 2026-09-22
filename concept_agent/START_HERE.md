@@ -27,7 +27,7 @@ Autoritativer Wegweiser auf `main`: `concept_agent/CONTROL_ENTRY_POINTER.json`.
 
 GitHub prüft den gespeicherten Workflow immer von Stufe 0 an, winkt nur bereits nachgewiesene Stufen durch und gibt danach genau eine nächste Stufe frei.
 
-Eine Übergabe gilt erst als vollständig, wenn der exakt gebundene Arbeitsauftrag bytegenau dauerhaft in GitHub gespeichert und gegen Datei-SHA-256 sowie internen Binding-SHA-256 geprüft wurde. Fehlt diese Datei oder stimmt ein Hash nicht: `BLOCKED`, keine Rekonstruktion.
+Eine Übergabe gilt erst als vollständig, wenn der exakt gebundene Arbeitsauftrag bytegenau dauerhaft in GitHub gespeichert und gegen Datei-SHA-256 sowie internen Binding-SHA-256 geprüft wurde. Fehlt diese Datei oder stimmt ein Hash nicht, entscheidet ausschließlich die aktuelle Control-Autorität `concept-agent/production-control:concept_agent/CONTROL_STATE.json` über die fest gebundene Folgeaktion. Der Chat darf keine Folgeaktion wählen und keine Rekonstruktion vornehmen.
 
 Ein neuer Lauf wird auf dem Control-Zweig ausschließlich durch genau eine Datei unter `concept_agent/run_requests/` angestoßen.
 
@@ -41,4 +41,4 @@ Ein neuer Lauf wird auf dem Control-Zweig ausschließlich durch genau eine Datei
 - ENDSTEMPEL-Einstieg bleibt `concept_agent/endstempel_bridge.py`.
 - Kein Publish.
 
-Fehlt der aktuelle gebundene Arbeitsauftrag in GitHub oder stimmt dessen SHA-256 nicht: `BLOCKED`, kein Ersatzpfad.
+Bei fehlendem oder abweichendem Arbeitsauftrag gilt ausschließlich die in `concept-agent/production-control:concept_agent/CONTROL_STATE.json` gebundene Fixed-Block-Policy. Diese Datei ist die einzige Current-Autorität für Eingang, Re-Entry und Folgeaktion.

@@ -221,7 +221,7 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_16_DRAFT_READY_ARTICLE_0_NOT_STARTED",
+  "current_work_status": "CONCEPT_AGENT_16_RESTART_REQUIRED_FROM_INTAKE_BY_CONTROL_STATE",
   "current_execution_blocker": {
     "code": "RESOLVED",
     "error_class": false,
@@ -292,17 +292,16 @@
   "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "NONE_FOR_CONCEPT_AGENT_AUTHORING; CROSS_CHAT_REQUIRES_EXACT_WORK_BINDING_TRANSPORT",
+  "hobbyroom_blocker": "NONE_FOR_CONCEPT_AGENT_CONTROL; CONTROL_STATE_IS_AUTHORITATIVE_FOR_FIXED_RESTART",
   "next_action": {
-    "goal": "AUTHOR_CONCEPT_AGENT_16_ARTICLE_0_FROM_BOUND_INPUT",
-    "action": "Load the exact CONCEPT_AGENT_16_WORK_BINDING.json transport and verify SHA-256 f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4. Continue exclusively in concept_agent. Author item_index 0 from its bound research and authoring bindings. Then run LanguageTool 6.8 and PPM 6.7.9 on that same article. If a validator returns repair-required, repair the same article only and re-run the same validator path. Do not start item_index 1 before article 0 PASS.",
-    "why": "The 16-item intake, research binding and authoring/link bindings are validated. No 16-item article body exists yet, so authoring article 0 is the first open production step.",
+    "goal": "RUN_CONCEPT_AGENT_FIXED_RESTART_FROM_INTAKE",
+    "action": "Start only through main:concept_agent/CONTROL_ENTRY_POINTER.json and the bound control-branch GitHub entry. The freshly proven fixed action for the current 16-item state is RESTART_BATCH_FROM_INTAKE. Do not recover or reconstruct the missing historical transport. Do not choose an alternate route. Continue the fresh batch through the fixed Concept Agent path.",
+    "why": "The exact historical 16-item transport is absent. Control run 35770433508 entered through the authoritative front door, validated INTAKE, RESEARCH, RESEARCH_BOUND and AUTHORING_BOUND, then the fixed-block controller selected RESTART_BATCH_FROM_INTAKE with chat_may_choose_action=false.",
     "forbidden": [
-      "reselect or mutate bound research sources",
-      "change the three bound internal links",
-      "change batch order, metadata or plan_slot",
-      "use legacy System4 SOURCE_REQUESTS as Concept Agent authority",
-      "skip LanguageTool 6.8 or PPM 6.7.9",
+      "reconstruct or search for the missing historical transport as a production path",
+      "choose a workflow stage or alternate route in chat",
+      "use legacy 7-item artifacts as authority",
+      "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL or article quality rules",
       "publish or write to WordPress"
     ]
   },
@@ -524,6 +523,9 @@
     "publish_allowed": false,
     "cross_chat_transport_filename": "CONCEPT_AGENT_16_WORK_BINDING.json",
     "cross_chat_transport_sha256": "f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4",
-    "missing_or_hash_mismatched_transport_policy": "BLOCKED"
+    "control_authority_ref": "concept-agent/production-control:concept_agent/CONTROL_STATE.json",
+    "missing_transport_policy": "RESTART_BATCH_FROM_INTAKE",
+    "mismatched_transport_policy": "TERMINAL_SECURITY_BLOCK",
+    "chat_may_choose_action": false
   }
 }
