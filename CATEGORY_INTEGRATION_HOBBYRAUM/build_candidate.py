@@ -148,12 +148,21 @@ def hard_validate_catalog(c,portal_sha):
     if int(c["business_supply_contract"]["required_count"])!=316 or len(required)!=316: fail("SUPPLY_REQUIRED_COUNT",field=c["business_supply_contract"]["required_count"],unique=len(required))
     for f in FAMILIES:
         if f["slug"] not in prod: fail("NEW_PRODUCT_TARGET_MISSING",slug=f["slug"])
+        if prod[f["slug"]].get("private_bucket_slug")!=f["bucket"]:
+            fail("NEW_PRODUCT_BUCKET_MISMATCH",slug=f["slug"],actual=prod[f["slug"]].get("private_bucket_slug"),expected=f["bucket"])
         for t in f["types"]:
             s=f["slug"]+"-"+SUFFIX[t]
             if s not in arts: fail("NEW_ARTICLE_TARGET_MISSING",slug=s)
         cid=concept_id(f["title"])
         if cid not in required: fail("NEW_CONCEPT_NOT_SUPPLY_BOUND",id=cid)
         if covered.get(f["slug"])!=[cid]: fail("NEW_CONCEPT_ROUTING",slug=f["slug"],covered=covered.get(f["slug"]),expected=cid)
+        concept=next((x for x in concepts if x.get("id")==cid),None)
+        if not concept: fail("NEW_CONCEPT_MISSING",id=cid)
+        if concept.get("private_bucket_slug")!=f["bucket"] or concept.get("private_bucket_slugs")!=[f["bucket"]]:
+            fail("NEW_CONCEPT_BUCKET_MISMATCH",id=cid,actual=concept.get("private_bucket_slug"),expected=f["bucket"])
+        targets=concept.get("target_pages") or []
+        if len(targets)!=1 or targets[0].get("private_bucket_slug")!=f["bucket"]:
+            fail("NEW_CONCEPT_TARGET_BUCKET_MISMATCH",id=cid,targets=targets,expected=f["bucket"])
     if len(c.get("search_rules") or [])!=8: fail("SEARCH_RULE_COUNT_CHANGED")
     return True
 
