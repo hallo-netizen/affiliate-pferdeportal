@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 92,
+  "generation": 93,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -56,7 +56,7 @@
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
     "current_focus": "PPA013_CATEGORY_STRUCTURE_PRESENTATION_TEXT_COMPLETION",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_PPA013_CATEGORY_COMPLETION_TARGET_20260922.md",
-    "current_focus_reason": "USER EXPLICITLY PRIORITIZED CATEGORY COMPLETION AFTER LIVE PPA-013 1.50.556 APPLY PASS: CONFIRM STRUCTURE/MENU ORDER, THEN COMPLETE HUB-2 TILE ICONS, EXACT-SEVEN DESKTOP 3/4 GRID, AND FIVE NEW CATEGORY TEXTS UNDER THE BOUND 150-200 WORD QUALITY RULES. PPA-001, KUBIO, ASTRA/THEME, BANNER SEMANTICS AND THE SEPARATE PERFORMANCE HELPER REMAIN OUT OF SCOPE.",
+    "current_focus_reason": "USER CLARIFIED FINAL SCOPE AFTER FAILED POST-GEN92 PLUGINS: CATEGORY STRUCTURE IS PRESENT LIVE; CONTINUE WITH PRESENTATION/TEXT CORRECTION. NEW 3/4 TILE CONCEPT MAY APPLY ONLY TO HUB-2 WITH EXACTLY SEVEN DIRECT SUBCATEGORIES AND ONLY ON DESKTOP >900PX. ALL OTHER TILE COUNTS, TABLET AND MOBILE REMAIN UNCHANGED. FIVE NEW TOPIC TILES REQUIRE EXPLICIT TOPIC ICON BINDINGS. FIVE NEW CATEGORY TEXTS REQUIRE 150-200 WORD MANUAL-SOURCE COPY. PPA-001, PERFORMANCE HELPER, KUBIO, ASTRA/THEME AND AFFILIATE/BANNER LOGIC REMAIN OUT OF SCOPE.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -669,15 +669,15 @@
   },
   "operational_observation": {
     "checked_at": "2026-09-22",
-    "live_plugin_version": "PPA-013 1.50.556 LIVE APPLY PASS; PPA-001 LAST USER-CONFIRMED LIVE 6.72.145; PPA-001 6.72.147 HARDTESTED NOT LIVE",
-    "live_status": "PPA-013 MAIN FILE 1.50.555->1.50.556 LIVE APPLY PASS WITH PERFORMANCE HELPER SHA UNCHANGED. PARENT-TOPIC GAP MIGRATION LIVE PASS. STRUCTURE-ORDER FIX WORDPRESS DRY_RUN PASS BUT APPLY/POST-APPLY READBACK IS NOT EVIDENCED. PPA-013 1.50.557 ICONS/EXACT-SEVEN 3/4 GRID PATCHER 1.0.1 IS BUILT AND HASH-BOUND TO LIVE 1.50.556 BUT HAS NOT BEEN WORDPRESS DRY-RUN/APPLIED. FIVE NEW CATEGORY TEXTS REMAIN OPEN UNDER THE BOUND 150-200 WORD QUALITY RULES. PREVIOUS PPA-001 PERFORMANCE STATUS IS UNCHANGED.",
+    "live_plugin_version": "PPA-013 LAST HASH-BOUND LIVE AUTHORITY 1.50.556; POST-GEN92 FAILED PLUGINS NOT PROMOTED AS PASS; PPA-001 LAST USER-CONFIRMED LIVE 6.72.145",
+    "live_status": "LIVE FRONTEND CHECK CONFIRMS NEW CATEGORY NODES AND REQUIRED AUSRUestung ORDER ARE VISIBLE. USER REPORT + LIVE FRONTEND SHOW PRESENTATION/TEXT COMPLETION IS NOT PASS: 7-TILE DESKTOP 3/4 NOT ACHIEVED, FIVE NEW TILE ICONS ABSENT, FIVE NEW CATEGORY TEXTS STILL GENERIC/AUTO. ROOT CAUSES VERIFIED IN PPA-013 SOURCE FAMILY: HUB-2 STRUCTURAL ICONS FAIL CLOSED FOR UNMAPPED NEW SLUGS; CATEGORY INTRO SOURCE AUTO IS DYNAMICALLY REGENERATED. CORRECTIVE CANDIDATE 1.50.556->1.50.558 BUILT AND LOCAL HARDTEST PASS; LIVE PREFLIGHT/APPLY/POST-READBACK NOT YET RUN.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "PPA013_CATEGORY_STRUCTURE_ORDER_POST_APPLY_READBACK_NOT_EVIDENCED",
+    "first_blocker": "PPA013_CATEGORY_COMPLETION_CORRECTIVE_LIVE_PREFLIGHT_NOT_YET_RUN",
     "evidence_ref": "release/affiliate-zentrale/evidence/ppa013_category_completion_delta_20260922.md",
     "recovery_target_ref": "protocol/AFFILIATE_RELEASE_PERFORMANCE_CLEANUP_PROTOCOL_20260922.md",
     "previous_blocker_after_recovery": "AFF-ERR-035",
@@ -703,6 +703,52 @@
       "github_e2e_result": "FAIL",
       "first_proven_ebay_stage_blocker": "control_provider_access_disabled",
       "exact_revert_authorized": false
+    },
+    "ppa013_category_completion_corrective": {
+      "status": "LOCAL_HARDTEST_PASS_LIVE_NOT_RUN",
+      "prior_1_50_557_candidate": "INVALIDATED_BY_USER_LIVE_RESULT_NOT_PASS",
+      "artifact": "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.0_HARDTEST.zip",
+      "artifact_sha256": "fb55a16c66e1f1c3c1bc3401330b0e124b7204ab69f2a713ea8dd83338f67138",
+      "patcher_php_sha256": "be1ca862ba0fca0d83b22e9da9f2bffaf3a0b51c098096137674188b5c805d98",
+      "hard_binding": {
+        "expected_ppa013_version": "1.50.556",
+        "expected_main_sha256": "33451736b0215e4f2b60e62555f697f9a2d94c2925e894882f261dbea3929119",
+        "expected_performance_helper_sha256": "2b74db4f0e599f5200a9faaa08b08e4a7cf7c7b951ce55ec62939f96fa890b92",
+        "target_version": "1.50.558"
+      },
+      "scope": {
+        "exact_seven_desktop_only": "min-width 901px; 3 top / 4 bottom only when direct published child count is exactly 7",
+        "other_counts": "UNCHANGED_BY_NEW_GRID_RULE",
+        "tablet_mobile": "UNCHANGED_BY_NEW_GRID_RULE",
+        "icons": [
+          "pferdesaettel",
+          "trensen",
+          "offenstallbau",
+          "paddockbau",
+          "reitplatzbau"
+        ],
+        "texts": {
+          "Pferdesättel": 155,
+          "Trensen": 156,
+          "Offenstallbau": 160,
+          "Paddockbau": 164,
+          "Reitplatzbau": 158
+        },
+        "text_source": "manual"
+      },
+      "local_checks": {
+        "patcher_php_lint": "PASS",
+        "transformed_fixture_php_lint": "PASS",
+        "exact7_negative_6": "PASS_NO_NEW_GRID",
+        "exact7_positive_7": "PASS_NEW_GRID",
+        "exact7_negative_8": "PASS_NO_NEW_GRID",
+        "desktop_min_901": "PASS",
+        "tablet_mobile_new_rule_absent": "PASS",
+        "five_icon_family_assets_present": "PASS",
+        "text_word_ranges": "PASS"
+      },
+      "next_action": "RUN THIS CORRECTIVE PATCHER PREFLIGHT ON WORDPRESS. IF AND ONLY IF EXACT 1.50.556 MAIN SHA + PERFORMANCE HELPER SHA + FIVE PAGE STRUCTURE BINDINGS PASS, APPLY THEN RUN ITS POST-READBACK. DO NOT RE-RUN THE OLD STRUCTURE-ORDER DRY-RUN.",
+      "library_upload": "FAILED_LIBRARY_STORAGE_LIMIT; CURRENT CHAT SANDBOX ARTIFACT AVAILABLE"
     }
   }
 }
