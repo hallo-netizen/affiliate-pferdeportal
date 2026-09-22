@@ -18,3 +18,5 @@ Menge:
 - zusammen 70,249,702 Bytes.
 
 Dieser Beleg ist **keine Current-Autorität**.
+
+PR-BINDUNG: #360 – Abschlussprüfung im PR-Body gebunden.
