@@ -1,5 +1,6 @@
 name: Concept Agent Chatfile Blackbox E2E
 # exact-chat-blob-trigger
+# pointer-bound-trigger
 
 on:
   push:
