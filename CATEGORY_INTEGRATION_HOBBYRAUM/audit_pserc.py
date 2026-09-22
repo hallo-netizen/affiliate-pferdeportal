@@ -25,6 +25,15 @@ with zipfile.ZipFile(io.BytesIO(raw)) as z:
       "taxonomy",
       "structure",
       "current",
+      "LIVE_DYNAMIC_REGISTERED",
+      "STATIC_AND_LIVE_VALIDATED",
+      "runtime_registry_status",
+      "dynamic_live_category_count",
+      "missing_protected_category_count",
+      "missing_protected_category_slugs",
+      "static_drift_count",
+      "PORTAL_STRUCTURE_PASS",
+      "PORTAL_STRUCTURE_BLOCKED",
     ]
     hits={t:[] for t in terms}
     headers=[]
