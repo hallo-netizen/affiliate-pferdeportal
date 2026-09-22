@@ -194,23 +194,61 @@ jobs:
                   | tee /tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json
                 REQUIRED_ACTION="$(python3 -c "import json;print(json.load(open('/tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json',encoding='utf-8'))['required_action'])")"
                 if [[ "$REQUIRED_ACTION" == 'RESTART_BATCH_FROM_INTAKE' ]]; then
-                  printf '%s\\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTION_BLOCKED_V1","status":"BLOCKED","selected_action":"RESTART_BATCH_FROM_INTAKE","reason":"AUTHORITATIVE_PSERC_EXACT_FIVE_INTAKE_SOURCE_NOT_DURABLY_BOUND","following_blocker":"PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT","required_exact_five_fields":["title","target_keyword","category","article_type","plan_slot"],"chat_may_choose_action":false,"reconstruction_allowed":false,"metadata_synthesis_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTION_BLOCKED_V1.json
-                  exit 20
-                fi
-                if [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
+                  python3 - <<'PY'
+                  import json
+                  from pathlib import Path
+
+                  route_path=Path('/tmp/concept-agent-return/CONCEPT_AGENT_FIXED_BLOCK_ROUTE_V1.json')
+                  route=json.loads(route_path.read_text(encoding='utf-8'))
+                  if route.get('required_action')!='RESTART_BATCH_FROM_INTAKE' or route.get('next_stage')!='INTAKE':
+                      raise SystemExit('RESTART_ROUTE_INVALID')
+                  if route.get('chat_may_choose_action') is not False or route.get('reconstruction_allowed') is not False or route.get('publish_allowed') is not False:
+                      raise SystemExit('RESTART_ROUTE_POLICY_INVALID')
+
+                  stage_route={
+                      'contract':'CONCEPT_AGENT_STAGE_ROUTE_V1',
+                      'status':'PASS',
+                      'next_stage':'INTAKE',
+                      'authority':'EXISTING_CONCEPT_AGENT_INTAKE',
+                      'entry_ref':'concept_agent/intake_bridge.py',
+                      'allowed_operation':'PREPARE_INTAKE_ONLY',
+                      'selected_action':'RESTART_BATCH_FROM_INTAKE',
+                      'chat_may_choose_action':False,
+                      'reconstruction_allowed':False,
+                      'publish_allowed':False,
+                  }
+                  Path('/tmp/concept-agent-return/CONCEPT_AGENT_STAGE_ROUTE_V1.json').write_text(
+                      json.dumps(stage_route,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8'
+                  )
+                  Path('/tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json').write_text(
+                      json.dumps({
+                          'contract':'CONCEPT_AGENT_RESTART_EXECUTED_V1',
+                          'status':'PASS',
+                          'selected_action':'RESTART_BATCH_FROM_INTAKE',
+                          'next_stage':'INTAKE',
+                          'entry_ref':'concept_agent/intake_bridge.py',
+                          'allowed_operation':'PREPARE_INTAKE_ONLY',
+                          'chat_may_choose_action':False,
+                          'reconstruction_allowed':False,
+                          'publish_allowed':False,
+                      },ensure_ascii=False,indent=2)+'\\n',encoding='utf-8'
+                  )
+                  PY
+                elif [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
                   exit 2
+                else
+                  if [[ "$HARDLOCK_RC" -ne 0 || "$REQUIRED_ACTION" != 'CONTINUE_CURRENT_BATCH' ]]; then
+                    exit 2
+                  fi
+                  EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
+                  args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
+                  if [[ -f "$STATE" ]]; then
+                    args+=(--state "$STATE")
+                  fi
+                  CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
+                  CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
+                  python3 control-branch/concept_agent/resumable_runner.py "${args[@]}"
                 fi
-                if [[ "$HARDLOCK_RC" -ne 0 || "$REQUIRED_ACTION" != 'CONTINUE_CURRENT_BATCH' ]]; then
-                  exit 2
-                fi
-                EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
-                args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
-                if [[ -f "$STATE" ]]; then
-                  args+=(--state "$STATE")
-                fi
-                CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
-                CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
-                python3 control-branch/concept_agent/resumable_runner.py "${args[@]}"
                 ;;
               COMPLETE)
                 printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_COMPLETE_V1","status":"PASS","reason":"WORKFLOW_ALREADY_COMPLETE","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_COMPLETE.json
