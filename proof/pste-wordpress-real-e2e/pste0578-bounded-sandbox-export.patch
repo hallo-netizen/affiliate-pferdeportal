@@ -1,0 +1,84 @@
+--- a/includes/class-pste-sandbox-record-store.php
++++ b/includes/class-pste-sandbox-record-store.php
+@@ -115,6 +115,28 @@
+     /** Cheap header data only; never materializes records or the legacy registry. */
+     public static function legacyHeader(): array {$m=self::requireComplete();return (array)($m['legacy_header']??[]);}
+ 
++    /**
++     * Canonical hash of one logical top-level object whose `records` member is the current
++     * record-local Sandbox store. The full registry is never materialized in PHP memory.
++     */
++    public static function hashLogicalObjectWithCurrentRecords(array $fields): string {
++        if(array_key_exists('records',$fields))throw new RuntimeException('PSTE_SANDBOX_STREAM_FIELDS_RECORDS_FORBIDDEN');
++        self::requireComplete();$keys=array_keys($fields);$keys[]='records';sort($keys,SORT_STRING);$ctx=hash_init('sha256');hash_update($ctx,'{');$first=true;
++        foreach($keys as $key){if(!$first)hash_update($ctx,',');hash_update($ctx,self::json((string)$key));hash_update($ctx,':');if($key==='records'){hash_update($ctx,'{');$firstRecord=true;self::forEachRecord(static function(array $record,string $id) use($ctx,&$firstRecord): bool {if(!$firstRecord)hash_update($ctx,',');hash_update($ctx,self::json($id));hash_update($ctx,':');self::streamCanonicalValue($ctx,$record);$firstRecord=false;return true;});hash_update($ctx,'}');}else self::streamCanonicalValue($ctx,$fields[$key]);$first=false;}hash_update($ctx,'}');return hash_final($ctx);
++    }
++
++    /**
++     * Stream one complete JSON object with the current record-local Sandbox `records` member.
++     * The caller may provide a per-part safety guard. No full Sandbox array is created.
++     */
++    public static function writeLogicalObjectWithCurrentRecords($handle,array $fields,?callable $guard=null): int {
++        if(!is_resource($handle))throw new RuntimeException('PSTE_SANDBOX_STREAM_HANDLE_INVALID');if(array_key_exists('records',$fields))throw new RuntimeException('PSTE_SANDBOX_STREAM_FIELDS_RECORDS_FORBIDDEN');self::requireComplete();$written=0;
++        $write=static function(string $chunk) use($handle,&$written): void {$n=fwrite($handle,$chunk);if($n===false||$n!==strlen($chunk))throw new RuntimeException('PSTE_SANDBOX_STREAM_WRITE_FAILED');$written+=$n;};
++        $keys=array_keys($fields);sort($keys,SORT_STRING);$write('{');$first=true;foreach($keys as $key){if(strcmp((string)$key,'records')>=0)continue;if($guard)$guard([(string)$key=>$fields[$key]]);if(!$first)$write(',');$write(self::json((string)$key).':'.self::json($fields[$key]));$first=false;}
++        if(!$first)$write(',');$write(self::json('records').':{');$firstRecord=true;self::forEachRecord(static function(array $record,string $id) use($guard,$write,&$firstRecord): bool {if($guard)$guard([$id=>$record]);if(!$firstRecord)$write(',');$write(self::json($id).':'.self::json($record));$firstRecord=false;return true;});$write('}');$first=false;
++        foreach($keys as $key){if(strcmp((string)$key,'records')<=0)continue;if($guard)$guard([(string)$key=>$fields[$key]]);$write(','.self::json((string)$key).':'.self::json($fields[$key]));}$write('}');return $written;
++    }
++
+     /** @return array<string,mixed> */
+     public static function getRecord(string $id): array {$m=self::requireComplete();$allowed=array_fill_keys(self::recordIds(),true);if(!isset($allowed[$id]))throw new RuntimeException('PSTE_SANDBOX_RECORD_STORE_RECORD_MISSING');$env=self::readRecordEnvelope($id,(string)$m['generation']);return (array)$env['record'];}
+ 
+--- a/includes/class-pste-semantic-review-sandbox.php
++++ b/includes/class-pste-semantic-review-sandbox.php
+@@ -907,6 +907,18 @@
+     /** @return array<string,mixed> */
+     public static function exportPayload(): array {$r=self::stored();$r['exported_at_utc']=gmdate('c');$r['export_statement']='SANDBOX_ONLY_NO_SOURCE_OR_ARTICLE_WRITES_NO_PRODUCTION_HANDOFF';$r['stored_registry_sha256']=(string)($r['sha256']??'');unset($r['export_sha256']);$r['export_sha256']=self::hash($r);return $r;}
+ 
++    /**
++     * Memory-bounded canonical export for migrated/live Sandboxes. It preserves the exact
++     * logical export shape and self-hash without loading the complete legacy option.
++     * @return array{bytes:int,stored_registry_sha256:string,export_sha256:string,record_count:int}
++     */
++    public static function streamExportToResource($handle,?callable $guard=null): array {
++        if(!is_resource($handle))throw new RuntimeException('PSTE_SANDBOX_EXPORT_STREAM_HANDLE_INVALID');
++        if(!class_exists('PSTE_Sandbox_Record_Store')||!PSTE_Sandbox_Record_Store::isComplete())throw new RuntimeException('PSTE_SANDBOX_EXPORT_RECORD_STORE_REQUIRED');
++        $header=PSTE_Sandbox_Record_Store::legacyHeader();unset($header['records'],$header['sha256'],$header['export_sha256'],$header['exported_at_utc'],$header['export_statement'],$header['stored_registry_sha256']);
++        $storedSha=PSTE_Sandbox_Record_Store::hashLogicalObjectWithCurrentRecords($header);$fields=$header;$fields['sha256']=$storedSha;$fields['exported_at_utc']=gmdate('c');$fields['export_statement']='SANDBOX_ONLY_NO_SOURCE_OR_ARTICLE_WRITES_NO_PRODUCTION_HANDOFF';$fields['stored_registry_sha256']=$storedSha;$exportSha=PSTE_Sandbox_Record_Store::hashLogicalObjectWithCurrentRecords($fields);$fields['export_sha256']=$exportSha;
++        $bytes=PSTE_Sandbox_Record_Store::writeLogicalObjectWithCurrentRecords($handle,$fields,$guard);return ['bytes'=>$bytes,'stored_registry_sha256'=>$storedSha,'export_sha256'=>$exportSha,'record_count'=>PSTE_Sandbox_Record_Store::authoritativeRecordCount()];
++    }
++
+     /** @return array<string,mixed> */
+     private static function sourceSummary(string $poolKey): array {
+         global $wpdb;$table=PSTE_Repository::table('topic_pool');$row=$wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE pool_key=%s",$poolKey),ARRAY_A);if(trim((string)($wpdb->last_error??''))!=='')throw new RuntimeException('PSTE_SANDBOX_SOURCE_DB_READ_FAILED');if(!is_array($row))throw new RuntimeException('PSTE_SANDBOX_SOURCE_POOL_ROW_MISSING');$stringRow=self::stringifyRow($row);$payload=json_decode((string)($row['payload_json']??''),true);if(!is_array($payload))throw new RuntimeException('PSTE_SANDBOX_SOURCE_PAYLOAD_INVALID');
+--- a/includes/class-pste-admin.php
++++ b/includes/class-pste-admin.php
+@@ -548,7 +548,10 @@
+     public static function contextRefresh(): void {PSTE_Auth::assertAdmin('pste_context_refresh',(string)($_POST['_wpnonce']??''));$r=PSTE_Context_Snapshot_Job::start();self::redirect('portal-seo-topic-engine-context','info','Kontext-Neuaufbau gestartet: '.$r['job_uuid']);}
+     public static function contextDiagnosticsExport(): void {PSTE_Auth::assertAdmin('pste_context_diagnostics_export',(string)($_POST['_wpnonce']??''));self::jsonDownload(PSTE_Context_Snapshot_Job::diagnosticsExportPayload(),'pste-context-diagnostics-'.gmdate('Ymd-His').'-utc.json');}
+ 
+-    public static function sandboxExport(): void {PSTE_Auth::assertAdmin('pste_sandbox_export',(string)($_POST['_wpnonce']??''));$payload=PSTE_Semantic_Review_Sandbox::exportPayload();self::assertCredentialFreeArtifact($payload);self::jsonDownload($payload,'pste-semantic-review-sandbox-'.gmdate('Ymd-His').'-utc.json',false);}
++    public static function sandboxExport(): void {
++        PSTE_Auth::assertAdmin('pste_sandbox_export',(string)($_POST['_wpnonce']??''));$guard=self::credentialFreeArtifactGuard();$tmp=tmpfile();if($tmp===false)throw new RuntimeException('PSTE_SANDBOX_EXPORT_TEMPFILE_FAILED');
++        try{$info=PSTE_Semantic_Review_Sandbox::streamExportToResource($tmp,$guard);$size=ftell($tmp);if($size===false||(int)$size!==(int)$info['bytes'])throw new RuntimeException('PSTE_SANDBOX_EXPORT_SIZE_MISMATCH');rewind($tmp);nocache_headers();header('Content-Type: application/json; charset=utf-8');header('Content-Disposition: attachment; filename="pste-semantic-review-sandbox-'.gmdate('Ymd-His').'-utc.json"');header('Content-Length: '.(string)$size);fpassthru($tmp);exit;}finally{fclose($tmp);}
++    }
+     public static function sandboxReviewRelevance(): void {PSTE_Auth::assertAdmin('pste_sandbox_review_relevance',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$decision=sanitize_text_field((string)($_POST['decision']??''));$note=sanitize_textarea_field((string)($_POST['review_note']??''));$expected=sanitize_text_field((string)($_POST['expected_decision_sha256']??''));$r=PSTE_Semantic_Review_Sandbox::reviewRelevance($id,$decision,$note,get_current_user_id(),$expected);self::redirect('portal-seo-topic-engine-sandbox','success','Sandbox-Relevanz gespeichert: '.(string)($r['status']??''));}
+     public static function sandboxConfirmInternal(): void {PSTE_Auth::assertAdmin('pste_sandbox_confirm_internal',(string)($_POST['_wpnonce']??''));$id=sanitize_text_field((string)($_POST['sandbox_id']??''));$note=sanitize_textarea_field((string)($_POST['review_note']??''));$sha=sanitize_text_field((string)($_POST['expected_proposal_sha256']??''));$r=PSTE_Semantic_Review_Sandbox::confirmInternalProposal($id,$note,get_current_user_id(),$sha);self::redirect('portal-seo-topic-engine-sandbox','success','Interner Vorschlag für normalen Reentry vorgemerkt: '.(string)($r['status']??''));}
+ 
+@@ -724,13 +727,14 @@
+         }
+         return $out;
+     }
+-    private static function assertCredentialFreeArtifact(array $payload): void {
++    private static function credentialFreeArtifactGuard(): callable {
+         $badKey='/(?:^|_)(?:password|passwd|secret|authorization|api[_-]?key|api[_-]?login|credentials?|dataforseo[_-]?(?:login|password)|client_secret|access_token|refresh_token|oauth_token)(?:$|_)/i';
+-        $walk=function($item)use(&$walk,$badKey):void{if(!is_array($item))return;foreach($item as $k=>$v){if(preg_match($badKey,(string)$k))throw new RuntimeException('PSTE_EXPORT_SENSITIVE_KEY_PRESENT');if(is_array($v))$walk($v);}};$walk($payload);
+         try{$dfs=PSTE_Credentials::resolve();$gsc=PSTE_GSC_Credentials::client();$tok=PSTE_GSC_Credentials::tokenBundle();}catch(Throwable $e){throw new RuntimeException('PSTE_EXPORT_CREDENTIAL_SAFETY_CHECK_FAILED');}
+         $secrets=array_values(array_filter([(string)($dfs['login']??''),(string)($dfs['password']??''),(string)($gsc['client_id']??''),(string)($gsc['client_secret']??''),(string)($tok['access_token']??''),(string)($tok['refresh_token']??'')],static fn($v)=>$v!==''));
+-        $raw=wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRESERVE_ZERO_FRACTION);if(!is_string($raw))throw new RuntimeException('PSTE_EXPORT_CREDENTIAL_SCAN_JSON_FAILED');foreach($secrets as $secret)if(str_contains($raw,$secret))throw new RuntimeException('PSTE_EXPORT_SECRET_VALUE_PRESENT');
++        return static function(array $payload) use($badKey,$secrets): void {$walk=function($item)use(&$walk,$badKey):void{if(!is_array($item))return;foreach($item as $k=>$v){if(preg_match($badKey,(string)$k))throw new RuntimeException('PSTE_EXPORT_SENSITIVE_KEY_PRESENT');if(is_array($v))$walk($v);}};$walk($payload);$raw=wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRESERVE_ZERO_FRACTION);if(!is_string($raw))throw new RuntimeException('PSTE_EXPORT_CREDENTIAL_SCAN_JSON_FAILED');foreach($secrets as $secret)if(str_contains($raw,$secret))throw new RuntimeException('PSTE_EXPORT_SECRET_VALUE_PRESENT');};
+     }
++    private static function assertCredentialFreeArtifact(array $payload): void {$guard=self::credentialFreeArtifactGuard();$guard($payload);}
+ 
+     private static function jsonDownload(array $payload,string $filename,bool $scrub=true): void {nocache_headers();header('Content-Type: application/json; charset=utf-8');header('Content-Disposition: attachment; filename="'.$filename.'"');$out=$scrub?PSTE_GSC_Credentials::scrub(PSTE_Credentials::scrub($payload)):$payload;echo wp_json_encode($out,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRESERVE_ZERO_FRACTION);exit;}
+     private static function notices(): void {

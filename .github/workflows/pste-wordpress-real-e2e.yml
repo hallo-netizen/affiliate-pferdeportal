@@ -52,7 +52,7 @@ jobs:
           wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
 
-      - name: Build exact 0.57.7 candidate with family-park continuation
+      - name: Build exact 0.57.8 candidate with bounded Sandbox export
         shell: bash
         run: |
           set -euo pipefail
@@ -75,12 +75,13 @@ jobs:
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0575-workflow-inventory-projection.patch"
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0576-cancelled-wave-progress-continuation.patch"
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0577-family-park-policy.patch"
+          patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0578-bounded-sandbox-export.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
-          sed -i 's/Version: 0\.57\.0/Version: 0.57.7/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.7');/" portal-seo-topic-engine.php
-          grep -q 'Version: 0.57.7' portal-seo-topic-engine.php
-          grep -q "define('PSTE_VERSION', '0.57.7');" portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.8/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.8');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.8' portal-seo-topic-engine.php
+          grep -q "define('PSTE_VERSION', '0.57.8');" portal-seo-topic-engine.php
           grep -q 'Workflow projection only' includes/class-pste-repository.php
           grep -q 'finalize_prepare_cursor' includes/class-pste-research-job.php
           grep -q 'pste-breadth-status' includes/class-pste-admin.php
@@ -93,19 +94,19 @@ jobs:
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
-          zip -qr /tmp/PSTE-0.57.7-HOBBYROOM.zip "Portal SEO Topic Engine"
+          zip -qr /tmp/PSTE-0.57.8-HOBBYROOM.zip "Portal SEO Topic Engine"
           echo PACKAGE_ZIP_BUILT
-          test "$(unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          test "$(unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           echo PACKAGE_ROOT_PASS
-          test "$(unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
-          unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
-          unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
-          unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
-          if unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
-          if unzip -Z1 /tmp/PSTE-0.57.7-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
-          sha256sum /tmp/PSTE-0.57.7-HOBBYROOM.zip | tee /tmp/PSTE-0.57.7-HOBBYROOM.sha256
-          wp plugin install /tmp/PSTE-0.57.7-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test "$(unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
+          test "$(unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
+          unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
+          unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
+          unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
+          if unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
+          if unzip -Z1 /tmp/PSTE-0.57.8-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
+          sha256sum /tmp/PSTE-0.57.8-HOBBYROOM.zip | tee /tmp/PSTE-0.57.8-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.8-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
           test ! -d /tmp/wordpress/wp-content/plugins/portal-seo-topic-engine
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
@@ -121,6 +122,27 @@ jobs:
             if($m->invoke(null,"PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN")!==false) throw new RuntimeException("FAMILY_PARK_WRONGLY_COUNTS_AS_SYSTEM_FAILURE");
             if($m->invoke(null,"PSTE_RESEARCH_SOURCE_INCOMPLETE_PAA")!==true) throw new RuntimeException("TECHNICAL_FAILURE_MUST_STILL_COUNT");
             echo "PASS_FAMILY_PARK_POLICY\n";
+          ' --path=/tmp/wordpress
+
+      - name: Prove bounded Sandbox export stays off legacy full-read path
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval '
+            PSTE_Sandbox_Record_Store::resetMetrics();
+            $tmp=tmpfile(); if($tmp===false) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_TMP_FAILED");
+            $info=PSTE_Semantic_Review_Sandbox::streamExportToResource($tmp,null);
+            $metrics=PSTE_Sandbox_Record_Store::metrics();
+            if((int)($metrics["legacy_full_reads"]??-1)!==0) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_LEGACY_FULL_READ");
+            rewind($tmp); $raw=stream_get_contents($tmp); fclose($tmp);
+            if(!is_string($raw)||$raw==="") throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_EMPTY");
+            $payload=json_decode($raw,true); if(!is_array($payload)) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_JSON_INVALID");
+            if((int)($info["record_count"]??-1)!==count((array)($payload["records"]??[]))) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_RECORD_COUNT_MISMATCH");
+            if(!hash_equals((string)($payload["stored_registry_sha256"]??""),(string)($payload["sha256"]??""))) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_STORED_HASH_MISMATCH");
+            $decl=(string)($payload["export_sha256"]??""); unset($payload["export_sha256"]);
+            $h=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","hash"); $h->setAccessible(true); $actual=(string)$h->invoke(null,$payload);
+            if(!preg_match("/^[a-f0-9]{64}$/",$decl)||!hash_equals($decl,$actual)) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_SELF_HASH_MISMATCH");
+            echo "PASS_BOUNDED_SANDBOX_EXPORT records=".$info["record_count"]." bytes=".$info["bytes"]." legacy_full_reads=".$metrics["legacy_full_reads"]."\n";
           ' --path=/tmp/wordpress
 
       - name: Prove strict serial driver positive and negative
@@ -313,8 +335,8 @@ jobs:
         with:
           name: pste-real-wordpress-http-e2e-system
           path: |
-            /tmp/PSTE-0.57.7-HOBBYROOM.sha256
-            /tmp/PSTE-0.57.7-HOBBYROOM.zip
+            /tmp/PSTE-0.57.8-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.8-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
             /tmp/settings-stale-race.html
