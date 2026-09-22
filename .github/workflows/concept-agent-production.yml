@@ -157,6 +157,10 @@ jobs:
               --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
               --out /tmp/concept-agent-return/real16-current-negative
             python3 control-branch/concept_agent/full_e2e_simulation.py --repo project-main --out /tmp/concept-agent-return/chat-to-final-file
+            PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:$PYTHONPATH" \
+            python3 control-branch/concept_agent/fixed_block_route.py acceptance \
+              --repo project-main \
+              --out /tmp/concept-agent-return/fixed-block-route
 
             python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-return/mid-positive
             python3 control-branch/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/concept-agent-return/mid-negative
@@ -193,8 +197,21 @@ jobs:
                 python3 control-branch/concept_agent/entry_hardlock.py "${HARDLOCK_ARGS[@]}"
                 HARDLOCK_RC=$?
                 set -e
-                if [[ "$HARDLOCK_RC" -ne 0 ]]; then
-                  exit "$HARDLOCK_RC"
+                PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:$PYTHONPATH" \
+                python3 control-branch/concept_agent/fixed_block_route.py route \
+                  --decision /tmp/concept-agent-return/CONCEPT_AGENT_ENTRY_HARDLOCK_DECISION_V1.json \
+                  --out /tmp/concept-agent-return/CONCEPT_AGENT_FIXED_BLOCK_ROUTE_V1.json \
+                  | tee /tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json
+                REQUIRED_ACTION="$(python3 -c "import json;print(json.load(open('/tmp/concept-agent-return/FIXED_BLOCK_ROUTE_RESULT.json',encoding='utf-8'))['required_action'])")"
+                if [[ "$REQUIRED_ACTION" == 'RESTART_BATCH_FROM_INTAKE' ]]; then
+                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_REQUIRED_V1","status":"RESTART_REQUIRED","next_stage":"INTAKE","chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_REQUIRED_V1.json
+                  exit 20
+                fi
+                if [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
+                  exit 2
+                fi
+                if [[ "$HARDLOCK_RC" -ne 0 || "$REQUIRED_ACTION" != 'CONTINUE_CURRENT_BATCH' ]]; then
+                  exit 2
                 fi
                 EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
                 args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
