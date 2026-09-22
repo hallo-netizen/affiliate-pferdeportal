@@ -1,111 +1,22 @@
 {
   "contract": "CONCEPT_AGENT_DURABLE_RUN_STATE_V1",
   "state_version": "1.0.0",
-  "status": "PASS",
-  "phase": "COMPLETE",
+  "status": "IN_PROGRESS",
+  "phase": "DRAFTED",
   "batch_sha256": "157a4ba1fae088e967540e6e9528e3592b315d7781ba2071fae40ff86ff9ce03",
   "binding_file_sha256": "a7494ba1224d4fb037c8e9042c7d917f5e0f62474bc43c45d743c636a7b332bc",
   "item_count": 3,
-  "next_item_index": 3,
-  "completed_articles": [
-    {
-      "item_index": 0,
-      "plan_slot": "c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e",
-      "title": "Fiktiver Konzept-5-Testartikel 1",
-      "target_keyword": "Konzept 5 Testkeyword 1",
-      "category": "test-beratung",
-      "article_type": "Beratung",
-      "revision_count": 1,
-      "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 1 behandelt das fest gebundene Thema Konzept 5 Testkeyword 1. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 1 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
-      "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0",
-      "checks": {
-        "status": "PASS",
-        "simulation": true,
-        "languagetool": {
-          "version": "6.8",
-          "status": "PASS",
-          "finding_count": 0,
-          "simulation": true
-        },
-        "ppm": {
-          "version": "6.7.9",
-          "status": "PASS",
-          "technical_status": "TECHNICAL_CHECK_OK",
-          "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
-          "fail_closed_aggregate_status": "PASS",
-          "content_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0",
-          "simulation": true
-        },
-        "content_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
-      },
-      "bound_work_sha256": "d03b762d14412f63856eef6fff6ca90f815f3b8fb534434c35dd546c13ed92c1"
-    },
-    {
-      "item_index": 1,
-      "plan_slot": "7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874",
-      "title": "Fiktiver Konzept-5-Testartikel 2",
-      "target_keyword": "Konzept 5 Testkeyword 2",
-      "category": "test-beratung",
-      "article_type": "Beratung",
-      "revision_count": 2,
-      "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 2 behandelt das fest gebundene Thema Konzept 5 Testkeyword 2. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes. Nach der gezielten Korrektur ist dieser Testtext freigegeben.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 2 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
-      "body_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427",
-      "checks": {
-        "status": "PASS",
-        "simulation": true,
-        "languagetool": {
-          "version": "6.8",
-          "status": "PASS",
-          "finding_count": 0,
-          "simulation": true
-        },
-        "ppm": {
-          "version": "6.7.9",
-          "status": "PASS",
-          "technical_status": "TECHNICAL_CHECK_OK",
-          "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
-          "fail_closed_aggregate_status": "PASS",
-          "content_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427",
-          "simulation": true
-        },
-        "content_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427"
-      },
-      "bound_work_sha256": "ce0cd10a62c34f59bb8d7c94c95b9e414eac83ea9cf386a12dc47363401f0f1c"
-    },
-    {
-      "item_index": 2,
-      "plan_slot": "0c80dc61be7954b698c3d4c53008a64e7e224c6c4c840be4774fb870d07f2238",
-      "title": "Fiktiver Konzept-5-Testartikel 3",
-      "target_keyword": "Konzept 5 Testkeyword 3",
-      "category": "test-beratung",
-      "article_type": "Beratung",
-      "revision_count": 1,
-      "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"0c80dc61be7954b698c3d4c53008a64e7e224c6c4c840be4774fb870d07f2238\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 3 behandelt das fest gebundene Thema Konzept 5 Testkeyword 3. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 3 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
-      "body_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae",
-      "checks": {
-        "status": "PASS",
-        "simulation": true,
-        "languagetool": {
-          "version": "6.8",
-          "status": "PASS",
-          "finding_count": 0,
-          "simulation": true
-        },
-        "ppm": {
-          "version": "6.7.9",
-          "status": "PASS",
-          "technical_status": "TECHNICAL_CHECK_OK",
-          "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
-          "fail_closed_aggregate_status": "PASS",
-          "content_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae",
-          "simulation": true
-        },
-        "content_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae"
-      },
-      "bound_work_sha256": "30d63521b8e3429102d9d3a33d9967abd054df4e7b19d23f21d69068a0f89b81"
-    }
-  ],
-  "current": null,
+  "next_item_index": 0,
+  "completed_articles": [],
+  "current": {
+    "item_index": 0,
+    "plan_slot": "c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e",
+    "bound_work_sha256": "d03b762d14412f63856eef6fff6ca90f815f3b8fb534434c35dd546c13ed92c1",
+    "revision": 1,
+    "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 1 behandelt das fest gebundene Thema Konzept 5 Testkeyword 1. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 1 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
+    "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0",
+    "findings": []
+  },
   "event_log": [
     {
       "event": "ITEM_START",
@@ -117,82 +28,8 @@
       "item_index": 0,
       "revision": 1,
       "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
-    },
-    {
-      "event": "CHECK",
-      "item_index": 0,
-      "revision": 1,
-      "status": "PASS",
-      "content_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
-    },
-    {
-      "event": "ITEM_PASS",
-      "item_index": 0,
-      "revision": 1,
-      "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
-    },
-    {
-      "event": "ITEM_START",
-      "item_index": 1,
-      "plan_slot": "7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874"
-    },
-    {
-      "event": "DRAFT",
-      "item_index": 1,
-      "revision": 1,
-      "body_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30"
-    },
-    {
-      "event": "CHECK",
-      "item_index": 1,
-      "revision": 1,
-      "status": "REPAIR_REQUIRED",
-      "content_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30"
-    },
-    {
-      "event": "DRAFT",
-      "item_index": 1,
-      "revision": 2,
-      "body_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427"
-    },
-    {
-      "event": "CHECK",
-      "item_index": 1,
-      "revision": 2,
-      "status": "PASS",
-      "content_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427"
-    },
-    {
-      "event": "ITEM_PASS",
-      "item_index": 1,
-      "revision": 2,
-      "body_sha256": "7fc46a6004e0f8205f0a56ade77eb692f9b2755f7b374fcaaac2552c09ba1427"
-    },
-    {
-      "event": "ITEM_START",
-      "item_index": 2,
-      "plan_slot": "0c80dc61be7954b698c3d4c53008a64e7e224c6c4c840be4774fb870d07f2238"
-    },
-    {
-      "event": "DRAFT",
-      "item_index": 2,
-      "revision": 1,
-      "body_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae"
-    },
-    {
-      "event": "CHECK",
-      "item_index": 2,
-      "revision": 1,
-      "status": "PASS",
-      "content_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae"
-    },
-    {
-      "event": "ITEM_PASS",
-      "item_index": 2,
-      "revision": 1,
-      "body_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae"
     }
   ],
   "publish_allowed": false,
-  "state_sha256": "a01a59c10cea8eb4bc531acc45b707c4aefc76f4da1de1605b17b5c8955b1678"
+  "state_sha256": "b8961b2a88b12b9e25b48c78b37778203db6c8db8613cc321c58468a3261412e"
 }
