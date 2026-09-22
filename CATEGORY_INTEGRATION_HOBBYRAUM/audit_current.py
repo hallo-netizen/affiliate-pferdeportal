@@ -137,6 +137,47 @@ with zipfile.ZipFile(PPM) as z:
         ppm[member]=summary
 checks["ppm_contracts"]=ppm
 
+# Hard audit: how PPM runtime references/replaces the three category/link authorities.
+search_terms=[
+ "complete-portal-category-source-v1.json",
+ "category-hierarchy-snapshot-v1.json",
+ "wordpress-link-target-snapshot-v1.json",
+ "USER_SUPPLIED_CATEGORY_HIERARCHY_FILE_COMPATIBLE",
+ "external category",
+ "user supplied",
+ "source_export",
+]
+references={term:[] for term in search_terms}
+with zipfile.ZipFile(PPM) as z:
+    for member in z.namelist():
+        if member.endswith("/") or member.lower().endswith((".png",".jpg",".jpeg",".gif",".webp",".zip",".woff",".woff2",".ttf",".ico")):
+            continue
+        try:
+            raw=z.read(member)
+        except Exception:
+            continue
+        if len(raw)>3_000_000:
+            continue
+        try:
+            txt=raw.decode("utf-8")
+        except Exception:
+            continue
+        lines=txt.splitlines()
+        low=txt.lower()
+        for term in search_terms:
+            if term.lower() not in low:
+                continue
+            for idx,line in enumerate(lines):
+                if term.lower() in line.lower():
+                    references[term].append({
+                        "member":member,
+                        "line":idx+1,
+                        "context":"\n".join(lines[max(0,idx-4):min(len(lines),idx+5)])
+                    })
+                    if len(references[term])>=30:
+                        break
+checks["ppm_runtime_references"]=references
+
 out={
  "status":"PASS_READ_ONLY_BASELINE_AUDIT",
  "rules":{
