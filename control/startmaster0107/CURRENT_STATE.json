@@ -221,7 +221,7 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_16_RESTART_REQUIRED_FROM_INTAKE_BY_CONTROL_STATE",
+  "current_work_status": "CONCEPT_AGENT_16_BLOCKED_FIXED_RESTART_EXECUTION_NOT_BOUND",
   "current_execution_blocker": {
     "code": "RESOLVED",
     "error_class": false,
@@ -292,11 +292,11 @@
   "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "NONE_FOR_CONCEPT_AGENT_CONTROL; CONTROL_STATE_IS_AUTHORITATIVE_FOR_FIXED_RESTART",
+  "hobbyroom_blocker": "FIXED_RESTART_ACTION_NOT_EXECUTED; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "RUN_CONCEPT_AGENT_FIXED_RESTART_FROM_INTAKE",
-    "action": "Start only through main:concept_agent/CONTROL_ENTRY_POINTER.json and the bound control-branch GitHub entry. The freshly proven fixed action for the current 16-item state is RESTART_BATCH_FROM_INTAKE. Do not recover or reconstruct the missing historical transport. Do not choose an alternate route. Continue the fresh batch through the fixed Concept Agent path.",
-    "why": "The exact historical 16-item transport is absent. Control run 35770433508 entered through the authoritative front door, validated INTAKE, RESEARCH, RESEARCH_BOUND and AUTHORING_BOUND, then the fixed-block controller selected RESTART_BATCH_FROM_INTAKE with chat_may_choose_action=false.",
+    "goal": "BIND_FIXED_RESTART_EXECUTION",
+    "action": "In concept-agent/production-control, bind RESTART_BATCH_FROM_INTAKE to the actual GitHub intake/restart execution instead of writing RESTART_REQUIRED and exiting 20. Then rerun the same 1-article and multi-article positive/negative acceptance and the current real16 entrance. Do not change the article workflow or quality rules.",
+    "why": "The fixed controller already chooses RESTART_BATCH_FROM_INTAKE correctly, but the production workflow currently stops after writing CONCEPT_AGENT_RESTART_REQUIRED_V1.json. Therefore the no-chat-choice end-to-end restart is not yet executed automatically.",
     "forbidden": [
       "reconstruct or search for the missing historical transport as a production path",
       "choose a workflow stage or alternate route in chat",
@@ -526,6 +526,8 @@
     "control_authority_ref": "concept-agent/production-control:concept_agent/CONTROL_STATE.json",
     "missing_transport_policy": "RESTART_BATCH_FROM_INTAKE",
     "mismatched_transport_policy": "TERMINAL_SECURITY_BLOCK",
-    "chat_may_choose_action": false
+    "chat_may_choose_action": false,
+    "restart_execution_bound": false,
+    "first_open_blocker": "FIXED_RESTART_ACTION_NOT_EXECUTED"
   }
 }
