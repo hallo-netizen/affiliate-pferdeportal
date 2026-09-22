@@ -1,0 +1,62 @@
+name: Ranking Context 6.72.149 Hardtest
+on:
+  push:
+    branches: [design-performance-standalone-hardtest-20260922]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/ranking-context-672149/**'
+      - '.github/workflows/ranking-context-672149-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Install WordPress 7.1.1 and gate
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Ranking Context Gate' --admin_user=admin --admin_password='fixture-12345' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/plugins/ranking-context-gate
+          cp AFFILIATE_HOBBYRAUM/ranking-context-672149/ranking-context-gate.php /tmp/wp-site/wp-content/plugins/ranking-context-gate/
+          php -l /tmp/wp-site/wp-content/plugins/ranking-context-gate/ranking-context-gate.php
+          /tmp/wp plugin activate ranking-context-gate --path=/tmp/wp-site
+      - name: Prove semantic identity and sanitizer reduction
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?ranking_gate=1' > /tmp/out.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/out.json'))
+          print(x)
+          assert x['old_hash']==x['new_hash'], x
+          assert x['rows']==15000, x
+          assert x['new_sanitize_key'] < x['old_sanitize_key']/10, x
+          print('PASS ranking context 6.72.149: result hash identical; sanitize_key reduced >10x in hot target-key path')
+          PY
