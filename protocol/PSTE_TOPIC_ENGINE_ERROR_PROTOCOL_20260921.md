@@ -150,3 +150,20 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Negativschutz: Fortsetzung wird bei abweichendem Status, Ziel, Max-Items oder Context-Binding verweigert.
 - Safe-Cancel selbst: `PASS_SAFE_CANCEL_DURING_PREPARE_SETTLES_CLEANLY`; terminal Driver IDLE.
 - Status: FIXED_AND_REPROVEN im finalen 0.57.6 Run `35693065234`.
+
+
+## PSTE-ERR-REAL-011 – 0.57.6 Live: Safe-Cancel greift während aktivem FINALIZE nicht prompt
+- Reale Nutzer-WordPress-Beobachtung mit dem final getesteten 0.57.6-Kandidaten.
+- Positiv: Der frühere PREPARE/STEP_OVERDUE-Hänger trat im beobachteten Lauf nicht erneut auf; der Lauf schreitet durch PREPARE_CANDIDATES, PREPARE_COMMIT, SANDBOX_BATCH und CONTEXT_BATCH fort.
+- Negativ: Nach Klick auf „Produktionswelle sicher abbrechen“ lief der aktuelle FINALIZE-Pfad sichtbar weiter. Anschließend wurde sogar eine weitere Familie sichtbar.
+- Gleichzeitig erschien im UI `PSTE_RESEARCH_JOB_NOT_FOUND`.
+- Damit ist der bisherige Hobbyraum-PASS `PASS_SAFE_CANCEL_DURING_PREPARE_SETTLES_CLEANLY` **kein ausreichender Live-Beweis** für den Fall „Cancel-Klick während bereits aktivem FINALIZE-Request / realem Race“.
+- Noch NICHT bewiesen: exakte interne Race-Ursache des `PSTE_RESEARCH_JOB_NOT_FOUND`; keine Root-Cause-Behauptung aus Chatbeobachtung.
+- Status: OPEN / LIVE ACCEPTANCE FAIL FOR SAFE CANCEL.
+- Nicht als Reparatur zulässig: Timeout erhöhen, Daten löschen, laufende Welle gewaltsam zurücksetzen oder neue Cancel-Architektur bauen.
+
+### Themenausbeute – ausdrücklich noch KEIN Fehler
+- Im weiterlaufenden Live-Lauf waren zuletzt 5 neue eindeutige PASS-Themen von Ziel 40 sichtbar; Familie 2 von max. 40 und 2 geparkte blockierte Schritte wurden angezeigt.
+- Dieser Zwischenstand beweist weder „zu wenige Provider-Themen“ noch „zu harte Filter“.
+- Nutzerregel: Themenausbeute erst nach terminalem Lauf **ausschließlich anhand der Semantic Sandbox** analysieren.
+- Bis dahin: keine Filteränderung und keine fachliche Yield-Reparatur.
