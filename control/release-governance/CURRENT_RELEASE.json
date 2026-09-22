@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 94,
+  "generation": 95,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -670,14 +670,14 @@
   "operational_observation": {
     "checked_at": "2026-09-22",
     "live_plugin_version": "PPA-013 LAST HASH-BOUND LIVE AUTHORITY 1.50.556; POST-GEN92 FAILED PLUGINS NOT PROMOTED AS PASS; PPA-001 LAST USER-CONFIRMED LIVE 6.72.145",
-    "live_status": "PPA-013 REMAINS EXACT 1.50.556 AFTER CORRECTIVE PATCHER 1.0.0 APPLY FAILED AND AUTOMATIC ROLLBACK. USER-SUPPLIED APPLY READBACK: VERIFY SAW HEADER/CONST 1.50.556, MAIN SHA 33451736...9119, ALL NEW SOURCE MARKERS ABSENT, FIVE TEXT SOURCES STILL AUTO; STRUCTURE PASS; PERFORMANCE HELPER SHA UNCHANGED. 1.0.0 IS INVALIDATED. CORRECTIVE PATCHER 1.0.1 BUILT WITH STAGED IMMEDIATE SOURCE/METADATA READBACK, PROVEN ATOMIC-WRITE CACHE INVALIDATION, NO GLOBAL CACHE FLUSH, AND FAIL-STAGE-SPECIFIC ROLLBACK.",
+    "live_status": "PPA-013 REMAINS EXACT 1.50.556 AFTER CORRECTIVE 1.0.1 APPLY FAILED AT FIRST CATEGORY-TEXT POST-META READBACK AND ROLLED BACK. USER-SUPPLIED OUTPUT PROVES SOURCE WRITE ITSELF REACHED THE EXACT 1.50.558 CANDIDATE SHA BEFORE ROLLBACK; FAILURE WAS ONLY THE NEW POST-META TEXT-WRITE PATH. HISTORY AUDIT OF FULL PPA-013 SOURCE CONFIRMS EXISTING EDITORIAL CATEGORY-TEXT MECHANISM V1.50.470-472. CORRECTIVE 1.0.2 REMOVES CATEGORY-TEXT META WRITES ENTIRELY AND BINDS THE FIVE NEW TEXTS THROUGH THAT EXISTING EDITORIAL CATALOG PATH. GRID/ICON SOURCE CHANGES REMAIN HARD-SCOPED.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "PPA013_CORRECTIVE_1_0_1_LIVE_PREFLIGHT_NOT_YET_RUN",
+    "first_blocker": "PPA013_CORRECTIVE_1_0_2_HISTORY_BOUND_LIVE_PREFLIGHT_NOT_YET_RUN",
     "evidence_ref": "release/affiliate-zentrale/evidence/ppa013_category_completion_delta_20260922.md",
     "recovery_target_ref": "protocol/AFFILIATE_RELEASE_PERFORMANCE_CLEANUP_PROTOCOL_20260922.md",
     "previous_blocker_after_recovery": "AFF-ERR-035",
@@ -705,58 +705,70 @@
       "exact_revert_authorized": false
     },
     "ppa013_category_completion_corrective": {
-      "status": "V1_0_0_LIVE_APPLY_FAIL_ROLLED_BACK__V1_0_1_LOCAL_HARDTEST_PASS_LIVE_NOT_RUN",
-      "invalidated_artifact": "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.0_HARDTEST.zip",
-      "failed_apply": {
-        "code": "POST_APPLY_READBACK_FAILED_ROLLBACK_ATTEMPTED",
-        "restored_version": "1.50.556",
+      "status": "V1_0_1_LIVE_APPLY_FAIL_ROLLED_BACK__V1_0_2_HISTORY_BOUND_LOCAL_HARDTEST_PASS_LIVE_NOT_RUN",
+      "invalidated_artifacts": [
+        "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.0_HARDTEST.zip",
+        "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.1_HARDTEST.zip"
+      ],
+      "failed_1_0_1": {
+        "code": "TEXT_WRITE_IMMEDIATE_READBACK_FAILED_ROLLBACK_ATTEMPTED",
+        "source_candidate_write_before_failure": "PASS",
+        "candidate_sha256": "2eeb3811ea28ed65a703ea146ae6b6f56191f0831d924e05418724a3de2985e8",
+        "failed_id": 972134,
+        "wp_source_after_meta_write": "manual",
+        "db_source_after_meta_write": "manual",
+        "text_hash_mismatch": true,
+        "restored_live_version": "1.50.556",
         "restored_main_sha256": "33451736b0215e4f2b60e62555f697f9a2d94c2925e894882f261dbea3929119",
-        "performance_helper_unchanged": true,
-        "structure_pass": true,
-        "source_markers_after_failed_apply": false,
-        "text_sources_after_failed_apply": "auto"
+        "performance_helper_unchanged": true
       },
-      "artifact": "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.1_HARDTEST.zip",
-      "artifact_sha256": "0f8af5f274fa8b9c886da7faefc5a0372dccd000dfd4d475e9a468e3d66b38b4",
+      "artifact": "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.2_HISTORY_BOUND_HARDTEST.zip",
+      "artifact_sha256": "f22b5e59b7f3a026ef94201b1a2192a4f60ecdaca7e1d61bc0967ddb5738fbf1",
       "hard_binding": {
         "expected_ppa013_version": "1.50.556",
         "expected_main_sha256": "33451736b0215e4f2b60e62555f697f9a2d94c2925e894882f261dbea3929119",
         "expected_performance_helper_sha256": "2b74db4f0e599f5200a9faaa08b08e4a7cf7c7b951ce55ec62939f96fa890b92",
         "target_version": "1.50.558"
       },
-      "write_path_correction": {
-        "atomic_write_immediate_sha_readback": true,
-        "clearstatcache": true,
-        "opcache_invalidate": true,
-        "global_cache_flush": false,
-        "each_text_wp_meta_readback": true,
-        "each_text_direct_db_readback": true,
-        "source_recheck_after_texts": true,
-        "source_recheck_after_plugin_cache_clean": true,
-        "source_recheck_after_tree_audit": true,
-        "fail_stage_specific_rollback": true
+      "history_reuse": {
+        "text_mechanism": "PPA-013 category_intro_editorial_batch1440_v150472 -> generate_category_intro_text; same mechanism family used by V1.50.470-472",
+        "post_meta_text_writes": false,
+        "hub2_count_class_existing": true,
+        "structural_icon_catalog_existing": true
       },
       "scope": {
-        "exact_seven_desktop_only": "min-width 901px; 3 top / 4 bottom only when direct published child count is exactly 7",
-        "other_counts": "UNCHANGED_BY_NEW_GRID_RULE",
-        "tablet_mobile": "UNCHANGED_BY_NEW_GRID_RULE",
+        "exact_seven_desktop_only": "min-width 901px; exact direct count 7 only",
+        "exact7_tests": {
+          "6": "NO_NEW_LAYOUT",
+          "7": "3_TOP_4_BOTTOM",
+          "8": "NO_NEW_LAYOUT"
+        },
+        "tablet_mobile": "UNCHANGED_BY_NEW_RULE",
+        "other_tile_counts": "UNCHANGED_BY_NEW_RULE",
         "icons": [
-          "pferdesaettel",
-          "trensen",
-          "offenstallbau",
-          "paddockbau",
-          "reitplatzbau"
+          "pferdesaettel=>ausruestung-sattel",
+          "trensen=>ausruestung-trensen-gebisse",
+          "offenstallbau=>stall-offenstall",
+          "paddockbau=>weide-paddock",
+          "reitplatzbau=>weide-reitplatz"
         ],
-        "texts": [
-          972134,
-          972141,
-          972148,
-          972155,
-          972162
-        ],
-        "text_source": "manual"
+        "text_word_counts": {
+          "Pferdesättel": 155,
+          "Trensen": 156,
+          "Offenstallbau": 160,
+          "Paddockbau": 164,
+          "Reitplatzbau": 158
+        }
       },
-      "next_action": "REPLACE HELPER PATCHER 1.0.0 WITH 1.0.1 IN THE SAME PLUGIN SLOT. RUN PREFLIGHT. ONLY IF PASS RUN APPLY. RETURN THE APPLY JSON; 1.0.1 WILL IDENTIFY THE EXACT WRITE STAGE IF HOST/WORDPRESS REVERTS ANYTHING AGAIN."
+      "local_checks": {
+        "full_historical_ppa_source_transform": "PASS",
+        "transformed_ppa_php_lint": "PASS",
+        "helper_php_lint": "PASS",
+        "zip_integrity": "PASS",
+        "five_reused_icon_assets_exist": "PASS",
+        "no_executable_update_post_meta_in_helper": "PASS"
+      },
+      "next_action": "REPLACE HELPER 1.0.1 WITH 1.0.2 IN THE SAME PLUGIN SLOT. RUN PREFLIGHT. ONLY IF PASS RUN APPLY. THEN RUN READBACK IN A NEW REQUEST; READBACK USES THE REAL PPA-013 generate_category_intro_text() FOR THE FIVE PAGES. DO NOT USE 1.0.0 OR 1.0.1."
     }
   }
 }
