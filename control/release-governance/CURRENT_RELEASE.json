@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 95,
+  "generation": 96,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -669,15 +669,15 @@
   },
   "operational_observation": {
     "checked_at": "2026-09-22",
-    "live_plugin_version": "PPA-013 LAST HASH-BOUND LIVE AUTHORITY 1.50.556; POST-GEN92 FAILED PLUGINS NOT PROMOTED AS PASS; PPA-001 LAST USER-CONFIRMED LIVE 6.72.145",
-    "live_status": "PPA-013 REMAINS EXACT 1.50.556 AFTER CORRECTIVE 1.0.1 APPLY FAILED AT FIRST CATEGORY-TEXT POST-META READBACK AND ROLLED BACK. USER-SUPPLIED OUTPUT PROVES SOURCE WRITE ITSELF REACHED THE EXACT 1.50.558 CANDIDATE SHA BEFORE ROLLBACK; FAILURE WAS ONLY THE NEW POST-META TEXT-WRITE PATH. HISTORY AUDIT OF FULL PPA-013 SOURCE CONFIRMS EXISTING EDITORIAL CATEGORY-TEXT MECHANISM V1.50.470-472. CORRECTIVE 1.0.2 REMOVES CATEGORY-TEXT META WRITES ENTIRELY AND BINDS THE FIVE NEW TEXTS THROUGH THAT EXISTING EDITORIAL CATALOG PATH. GRID/ICON SOURCE CHANGES REMAIN HARD-SCOPED.",
+    "live_plugin_version": "PPA-013 1.50.558 SOURCE APPLY PASS; PPA-001 LAST USER-CONFIRMED LIVE 6.72.145",
+    "live_status": "CORRECTIVE 1.0.2 HISTORY-BOUND APPLY PASSED. PPA-013 SOURCE MOVED 1.50.556 -> 1.50.558 WITH MAIN SHA 840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1. ONLY pferde-template-kit.php CHANGED; NO FILES ADDED/REMOVED. PERFORMANCE HELPER SHA REMAINED IDENTICAL 2b74db4f0e599f5200a9faaa08b08e4a7cf7c7b951ce55ec62939f96fa890b92. NO DATABASE TEXT META WAS WRITTEN. TEXTS NOW USE EXISTING PPA-013 EDITORIAL CATALOG HISTORY PATH V1.50.470-472. FINAL LIVE READBACK IN A NEW REQUEST IS STILL REQUIRED.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "PPA013_CORRECTIVE_1_0_2_HISTORY_BOUND_LIVE_PREFLIGHT_NOT_YET_RUN",
+    "first_blocker": "PPA013_1_50_558_FINAL_READBACK_REQUIRED",
     "evidence_ref": "release/affiliate-zentrale/evidence/ppa013_category_completion_delta_20260922.md",
     "recovery_target_ref": "protocol/AFFILIATE_RELEASE_PERFORMANCE_CLEANUP_PROTOCOL_20260922.md",
     "previous_blocker_after_recovery": "AFF-ERR-035",
@@ -705,7 +705,7 @@
       "exact_revert_authorized": false
     },
     "ppa013_category_completion_corrective": {
-      "status": "V1_0_1_LIVE_APPLY_FAIL_ROLLED_BACK__V1_0_2_HISTORY_BOUND_LOCAL_HARDTEST_PASS_LIVE_NOT_RUN",
+      "status": "V1_0_2_SOURCE_APPLY_PASS_READBACK_REQUIRED",
       "invalidated_artifacts": [
         "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.0_HARDTEST.zip",
         "PFERDE_ATELIER_PPA013_1.50.556_TO_1.50.558_CATEGORY_COMPLETION_CORRECTIVE_1.0.1_HARDTEST.zip"
@@ -768,7 +768,26 @@
         "five_reused_icon_assets_exist": "PASS",
         "no_executable_update_post_meta_in_helper": "PASS"
       },
-      "next_action": "REPLACE HELPER 1.0.1 WITH 1.0.2 IN THE SAME PLUGIN SLOT. RUN PREFLIGHT. ONLY IF PASS RUN APPLY. THEN RUN READBACK IN A NEW REQUEST; READBACK USES THE REAL PPA-013 generate_category_intro_text() FOR THE FIVE PAGES. DO NOT USE 1.0.0 OR 1.0.1."
+      "next_action": "RUN THE 1.0.2 READBACK IN A NEW WORDPRESS REQUEST. DO NOT APPLY AGAIN. READBACK MUST CONFIRM VERSION/SHA, FIVE REAL generate_category_intro_text() OUTPUTS, FIVE ICON BINDINGS, EXACT-7 DESKTOP-ONLY 3/4 MARKERS, STRUCTURE, AND PERFORMANCE HELPER SHA.",
+      "apply": {
+        "from_version": "1.50.556",
+        "to_version": "1.50.558",
+        "main_before_sha256": "33451736b0215e4f2b60e62555f697f9a2d94c2925e894882f261dbea3929119",
+        "main_after_sha256": "840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1",
+        "candidate_sha256": "840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1",
+        "plugin_tree_diff": {
+          "changed": [
+            "pferde-template-kit.php"
+          ],
+          "added": [],
+          "removed": []
+        },
+        "performance_helper_unchanged": true,
+        "database_text_meta_written": false,
+        "text_mechanism": "PPA-013 editorial catalog history path V1.50.470-472",
+        "backup_manifest": "ppa013-category-completion-manifest-20260922-194858-33451736b021.json",
+        "backup_main": "ppa013-category-completion-main-20260922-194858-33451736b021.php.bak"
+      }
     }
   }
 }
