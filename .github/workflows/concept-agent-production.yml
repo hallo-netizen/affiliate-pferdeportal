@@ -95,13 +95,7 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/concept-agent-return
           if [[ "$MODE" == 'persist-binding' ]]; then
-            python3 - <<'PY'
-            import base64,json,os
-            from pathlib import Path
-            req=json.loads((Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8'))
-            raw=base64.b64decode(req['transport_b64'], validate=True)
-            Path('/tmp/concept-agent-binding-candidate.json').write_bytes(raw)
-            PY
+            python3 -c "import base64,json,os,pathlib; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); pathlib.Path('/tmp/concept-agent-binding-candidate.json').write_bytes(base64.b64decode(req['transport_b64'],validate=True))"
             python3 control-branch/concept_agent/binding_transport_gate.py accept \
               --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
               --candidate /tmp/concept-agent-binding-candidate.json \
