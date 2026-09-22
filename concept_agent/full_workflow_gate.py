@@ -390,13 +390,209 @@ def simulate_all_entries(outdir: Path) -> dict[str, Any]:
     return proof
 
 
+
+def _load_json(path: Path) -> dict[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise Blocked("CURRENT_ENTRY_JSON_INVALID:" + str(path)) from exc
+    if not isinstance(value, dict):
+        raise Blocked("CURRENT_ENTRY_OBJECT_REQUIRED:" + str(path))
+    return value
+
+
+def _require_sha(value: Any, code: str) -> str:
+    text = str(value or "")
+    if not SHA_RE.fullmatch(text):
+        raise Blocked(code)
+    return text
+
+
+def verify_current_entry(pointer_path: Path, current_state_path: Path, outdir: Path) -> dict[str, Any]:
+    pointer = _load_json(pointer_path)
+    current = _load_json(current_state_path)
+
+    if pointer.get("contract") != "PFERDE_ATELIER_CONCEPT_AGENT_WORK_BINDING_POINTER_V1":
+        raise Blocked("CURRENT_POINTER_CONTRACT_INVALID")
+    if pointer.get("workflow") != "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT":
+        raise Blocked("CURRENT_POINTER_WORKFLOW_INVALID")
+    if pointer.get("publish_allowed") is not False or pointer.get("cross_chat_transport_required") is not True:
+        raise Blocked("CURRENT_POINTER_FLAGS_INVALID")
+
+    batch = _require_sha(pointer.get("batch_sha256"), "CURRENT_BATCH_SHA_INVALID")
+    count = pointer.get("item_count")
+    if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+        raise Blocked("CURRENT_ITEM_COUNT_INVALID")
+
+    ca = current.get("concept_agent_current_batch")
+    if not isinstance(ca, dict):
+        raise Blocked("CURRENT_CONCEPT_AGENT_BATCH_MISSING")
+    if ca.get("workflow") != "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT":
+        raise Blocked("CURRENT_CONCEPT_AGENT_WORKFLOW_INVALID")
+    if ca.get("batch_sha256") != batch or ca.get("item_count") != count:
+        raise Blocked("CURRENT_POINTER_STATE_BINDING_MISMATCH")
+    if ca.get("publish_allowed") is not False:
+        raise Blocked("CURRENT_STATE_PUBLISH_INVALID")
+
+    completed: list[str] = []
+
+    if ca.get("intake_status") == "PASS":
+        _require_sha(pointer.get("intake_sha256"), "CURRENT_INTAKE_SHA_INVALID")
+        completed.append("INTAKE")
+    else:
+        next_stage = "INTAKE"
+        proof = {
+            "contract": ENTRY_PROOF_CONTRACT,
+            "status": "PASS",
+            "batch_sha256": batch,
+            "workflow_entry": "ALWAYS_FROM_STAGE_0",
+            "fast_forward_mode": "VALIDATE_ONLY",
+            "validated_completed_stages": completed,
+            "next_stage": next_stage,
+            "chat_may_choose_stage": False,
+            "source": "REAL_CURRENT_STATE",
+            "publish_allowed": False,
+        }
+        proof["proof_sha256"] = stable(proof)
+        outdir.mkdir(parents=True, exist_ok=True)
+        (outdir / "CONCEPT_AGENT_CURRENT_ENTRY_PROOF.json").write_text(json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return proof
+
+    research_pass = ca.get("research_binding_status") == "PASS"
+    if research_pass:
+        _require_sha(pointer.get("research_binding_sha256"), "CURRENT_RESEARCH_BINDING_SHA_INVALID")
+        completed.extend(["RESEARCH", "RESEARCH_BOUND"])
+    else:
+        next_stage = "RESEARCH"
+        proof = {
+            "contract": ENTRY_PROOF_CONTRACT,
+            "status": "PASS",
+            "batch_sha256": batch,
+            "workflow_entry": "ALWAYS_FROM_STAGE_0",
+            "fast_forward_mode": "VALIDATE_ONLY",
+            "validated_completed_stages": completed,
+            "next_stage": next_stage,
+            "chat_may_choose_stage": False,
+            "source": "REAL_CURRENT_STATE",
+            "publish_allowed": False,
+        }
+        proof["proof_sha256"] = stable(proof)
+        outdir.mkdir(parents=True, exist_ok=True)
+        (outdir / "CONCEPT_AGENT_CURRENT_ENTRY_PROOF.json").write_text(json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return proof
+
+    authoring_pass = ca.get("authoring_binding_status") == "PASS"
+    if authoring_pass:
+        _require_sha(pointer.get("authoring_bindings_file_sha256"), "CURRENT_AUTHORING_BINDING_SHA_INVALID")
+        _require_sha(pointer.get("cross_chat_transport_sha256"), "CURRENT_TRANSPORT_SHA_INVALID")
+        _require_sha(pointer.get("cross_chat_transport_binding_sha256"), "CURRENT_TRANSPORT_BINDING_SHA_INVALID")
+        if ca.get("cross_chat_transport_sha256") != pointer.get("cross_chat_transport_sha256"):
+            raise Blocked("CURRENT_TRANSPORT_POINTER_STATE_MISMATCH")
+        completed.append("AUTHORING_BOUND")
+    else:
+        next_stage = "AUTHORING_BOUND"
+        proof = {
+            "contract": ENTRY_PROOF_CONTRACT,
+            "status": "PASS",
+            "batch_sha256": batch,
+            "workflow_entry": "ALWAYS_FROM_STAGE_0",
+            "fast_forward_mode": "VALIDATE_ONLY",
+            "validated_completed_stages": completed,
+            "next_stage": next_stage,
+            "chat_may_choose_stage": False,
+            "source": "REAL_CURRENT_STATE",
+            "publish_allowed": False,
+        }
+        proof["proof_sha256"] = stable(proof)
+        outdir.mkdir(parents=True, exist_ok=True)
+        (outdir / "CONCEPT_AGENT_CURRENT_ENTRY_PROOF.json").write_text(json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return proof
+
+    body_count = ca.get("article_bodies_completed")
+    lt_count = ca.get("languagetool_6_8_completed")
+    ppm_count = ca.get("ppm_6_7_9_completed")
+    next_article = ca.get("next_article_index")
+    for name, value in (("ARTICLE", body_count), ("LT68", lt_count), ("PPM679", ppm_count), ("NEXT_ARTICLE", next_article)):
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0 or value > count:
+            raise Blocked("CURRENT_" + name + "_COUNT_INVALID")
+    if lt_count > body_count or ppm_count > body_count:
+        raise Blocked("CURRENT_VALIDATOR_COUNT_AHEAD_OF_ARTICLES")
+    if next_article != min(body_count, count):
+        raise Blocked("CURRENT_NEXT_ARTICLE_INDEX_MISMATCH")
+
+    article_stage_pass = body_count == count and lt_count == count and ppm_count == count
+    if article_stage_pass:
+        completed.append("ARTICLE_PRODUCTION")
+
+    pserc = ca.get("pserc_batch_completed")
+    endstempel = ca.get("endstempel_completed")
+    final_file = ca.get("final_wordpress_import_file_present")
+    if not all(isinstance(x, bool) for x in (pserc, endstempel, final_file)):
+        raise Blocked("CURRENT_DOWNSTREAM_FLAGS_INVALID")
+    if pserc and not article_stage_pass:
+        raise Blocked("CURRENT_PSERC_BEFORE_ARTICLES_PASS")
+    if endstempel and not pserc:
+        raise Blocked("CURRENT_ENDSTEMPEL_BEFORE_PSERC")
+    if final_file and not endstempel:
+        raise Blocked("CURRENT_FINAL_FILE_BEFORE_ENDSTEMPEL")
+
+    if not article_stage_pass:
+        next_stage = "ARTICLE_PRODUCTION"
+    elif not pserc:
+        next_stage = "PSERC_PACKAGE"
+    else:
+        completed.append("PSERC_PACKAGE")
+        if not endstempel:
+            next_stage = "ENDSTEMPEL"
+        else:
+            completed.append("ENDSTEMPEL")
+            if not final_file:
+                next_stage = "CHAT_FILE_RETURN"
+            else:
+                completed.append("CHAT_FILE_RETURN")
+                next_stage = "COMPLETE"
+
+    proof = {
+        "contract": ENTRY_PROOF_CONTRACT,
+        "status": "PASS",
+        "batch_sha256": batch,
+        "workflow_entry": "ALWAYS_FROM_STAGE_0",
+        "fast_forward_mode": "VALIDATE_ONLY",
+        "validated_completed_stages": completed,
+        "next_stage": next_stage,
+        "chat_may_choose_stage": False,
+        "source": "REAL_CURRENT_STATE",
+        "publish_allowed": False,
+    }
+    proof["proof_sha256"] = stable(proof)
+    outdir.mkdir(parents=True, exist_ok=True)
+    (outdir / "CONCEPT_AGENT_CURRENT_ENTRY_PROOF.json").write_text(
+        json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return proof
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("simulate-all-entries")
     p.add_argument("--out", required=True)
+    p = sub.add_parser("verify-current-entry")
+    p.add_argument("--pointer", required=True)
+    p.add_argument("--current-state", required=True)
+    p.add_argument("--out", required=True)
     args = ap.parse_args(argv)
     try:
+        if args.cmd == "verify-current-entry":
+            proof = verify_current_entry(Path(args.pointer), Path(args.current_state), Path(args.out))
+            print(json.dumps({
+                "ok": True,
+                "status": proof["status"],
+                "validated_completed_stages": proof["validated_completed_stages"],
+                "next_stage": proof["next_stage"],
+                "proof_sha256": proof["proof_sha256"],
+            }, sort_keys=True))
+            return 0
         proof = simulate_all_entries(Path(args.out))
         print(json.dumps({
             "ok": True,
