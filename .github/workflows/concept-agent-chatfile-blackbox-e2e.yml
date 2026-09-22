@@ -1,0 +1,131 @@
+name: Concept Agent Chatfile Blackbox E2E
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+    paths:
+      - '.github/workflows/concept-agent-chatfile-blackbox-e2e.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  blackbox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Exact source and control entry
+        run: |
+          set -euo pipefail
+          test -f concept_agent/CONTROL_ENTRY_POINTER.json
+          test -f concept_agent/current/PSERC_METADATA_SNAPSHOT.json
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path('concept_agent/current/PSERC_METADATA_SNAPSHOT.json')
+          raw=p.read_bytes()
+          x=json.loads(raw)
+          assert len(raw)==44209, len(raw)
+          assert hashlib.sha256(raw).hexdigest()=='3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761'
+          assert x['next_textmachine_metadata_batch']['item_count']==16
+          assert x['next_textmachine_metadata_batch']['batch_sha256']=='df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0'
+          print('CHAT_SOURCE_BYTES_PASS')
+          PY
+
+      - name: Run exact 1 and 3 article positive-negative restart blackbox
+        id: blackbox
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import copy,hashlib,json,subprocess,sys,tempfile
+          from pathlib import Path
+
+          ROOT=Path('.').resolve()
+          SNAP=ROOT/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json'
+          WORKFLOW=ROOT/'.github/workflows/concept-agent-production.yml'
+          OUT=Path('/tmp/concept-agent-blackbox')
+          OUT.mkdir(parents=True,exist_ok=True)
+
+          def canon(v):
+              return json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
+          def stable(v):
+              return hashlib.sha256(canon(v)).hexdigest()
+          def make(n, negative=None):
+              x=json.loads(SNAP.read_text(encoding='utf-8'))
+              b=x['next_textmachine_metadata_batch']
+              b['items']=b['items'][:n]
+              b['item_count']=n
+              if negative=='bad-batch-hash':
+                  b['batch_sha256']='0'*64
+              elif negative=='duplicate-slot':
+                  b['items'][1]['plan_slot']=b['items'][0]['plan_slot']
+                  core=dict(b); core.pop('batch_sha256',None); b['batch_sha256']=stable(core)
+              else:
+                  core=dict(b); core.pop('batch_sha256',None); b['batch_sha256']=stable(core)
+              return x
+
+          cases=[
+              ('positive-1',1,None,True),
+              ('negative-1-batch-hash',1,'bad-batch-hash',False),
+              ('positive-3',3,None,True),
+              ('negative-3-duplicate-slot',3,'duplicate-slot',False),
+          ]
+          proof={'contract':'CONCEPT_AGENT_CHATFILE_BLACKBOX_E2E_V1','source_sha256':hashlib.sha256(SNAP.read_bytes()).hexdigest(),'cases':[],'publish_allowed':False}
+          yaml=WORKFLOW.read_text(encoding='utf-8')
+          stop_present='"allowed_operation":"PREPARE_INTAKE_ONLY"' in yaml
+          for name,n,neg,positive in cases:
+              case=OUT/name; case.mkdir()
+              snap=case/'snapshot.json'
+              intake=case/'CONCEPT_AGENT_INTAKE.json'
+              snap.write_text(json.dumps(make(n,neg),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              cp=subprocess.run([sys.executable,'concept_agent/intake_bridge.py','prepare',str(snap),str(intake)],cwd=ROOT,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+              row={'case':name,'article_count':n,'positive':positive,'intake_rc':cp.returncode,'stdout':cp.stdout.strip(),'stderr':cp.stderr.strip(),'final_file_count':0}
+              if positive:
+                  row['intake_pass']=cp.returncode==0 and 'CONCEPT_AGENT_INTAKE_READY' in cp.stdout
+                  # Exact current control behavior after successful restart intake:
+                  # production workflow writes PREPARE_INTAKE_ONLY and returns without a final file.
+                  row['control_prepare_intake_only']=stop_present
+                  finals=list(case.glob('PSERC_APPROVED_PRODUCTION_PACKAGE_FINAL.json'))
+                  row['final_file_count']=len(finals)
+                  row['end_to_end_pass']=row['intake_pass'] and (not stop_present) and len(finals)==1
+                  if not row['end_to_end_pass']:
+                      row['failure']='CONTROL_STOP_AFTER_INTAKE' if stop_present else 'FINAL_FILE_NOT_PRODUCED'
+              else:
+                  row['blocked_as_required']=cp.returncode!=0
+                  if neg=='bad-batch-hash':
+                      row['expected_reason']='BATCH_SHA_MISMATCH'
+                      row['reason_match']='BATCH_SHA_MISMATCH' in cp.stderr
+                  else:
+                      row['expected_reason']='PLAN_SLOT_DUPLICATE:1'
+                      row['reason_match']='PLAN_SLOT_DUPLICATE:1' in cp.stderr
+              proof['cases'].append(row)
+
+          proof['positive_all_pass']=all(r.get('end_to_end_pass') is True for r in proof['cases'] if r['positive'])
+          proof['negative_all_pass']=all(r.get('blocked_as_required') is True and r.get('reason_match') is True for r in proof['cases'] if not r['positive'])
+          proof['status']='PASS' if proof['positive_all_pass'] and proof['negative_all_pass'] else 'FAIL'
+          raw=canon(proof)
+          proof['proof_sha256']=hashlib.sha256(raw).hexdigest()
+          (OUT/'CONCEPT_AGENT_CHATFILE_BLACKBOX_E2E_V1.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(proof,ensure_ascii=False,indent=2))
+          if proof['status']!='PASS':
+              raise SystemExit(1)
+          PY
+
+      - name: Upload hard proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: concept-agent-chatfile-blackbox-e2e-${{ github.sha }}
+          path: /tmp/concept-agent-blackbox/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Enforce overall PASS
+        if: steps.blackbox.outcome != 'success'
+        run: |
+          echo 'CONCEPT_AGENT_CHATFILE_BLACKBOX_E2E_FAILED'
+          exit 1
