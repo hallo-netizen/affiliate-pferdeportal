@@ -2,7 +2,7 @@
   "contract": "CONCEPT_AGENT_DURABLE_RUN_STATE_V1",
   "state_version": "1.0.0",
   "status": "IN_PROGRESS",
-  "phase": "READY",
+  "phase": "DRAFTED",
   "batch_sha256": "157a4ba1fae088e967540e6e9528e3592b315d7781ba2071fae40ff86ff9ce03",
   "binding_file_sha256": "a7494ba1224d4fb037c8e9042c7d917f5e0f62474bc43c45d743c636a7b332bc",
   "item_count": 3,
@@ -41,7 +41,15 @@
       "bound_work_sha256": "d03b762d14412f63856eef6fff6ca90f815f3b8fb534434c35dd546c13ed92c1"
     }
   ],
-  "current": null,
+  "current": {
+    "item_index": 1,
+    "plan_slot": "7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874",
+    "bound_work_sha256": "ce0cd10a62c34f59bb8d7c94c95b9e414eac83ea9cf386a12dc47363401f0f1c",
+    "revision": 1,
+    "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 2 behandelt das fest gebundene Thema Konzept 5 Testkeyword 2. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 2 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
+    "body_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30",
+    "findings": []
+  },
   "event_log": [
     {
       "event": "ITEM_START",
@@ -66,8 +74,19 @@
       "item_index": 0,
       "revision": 1,
       "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
+    },
+    {
+      "event": "ITEM_START",
+      "item_index": 1,
+      "plan_slot": "7f9bd0ce6a037d2bff4613606b7d411176802d145bb5959d613d96adfe56c874"
+    },
+    {
+      "event": "DRAFT",
+      "item_index": 1,
+      "revision": 1,
+      "body_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30"
     }
   ],
   "publish_allowed": false,
-  "state_sha256": "4c79024e0c0222e6b0330bec0e7106084ff01bdb5ef95e900e279bb7b0ee0682"
+  "state_sha256": "636377b7702f2ea2fc8f71d2415dffa91535a385d7471f564119bc9a30a3cc26"
 }
