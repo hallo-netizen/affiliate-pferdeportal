@@ -17,7 +17,7 @@
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
     "release": "GITHUB_0576_FINAL_REAL_WORDPRESS_E2E_PASS_REAL_SITE_ACCEPTANCE_OPEN",
-    "post_pass_branch_delta": "CURRENT_STATE_AND_WORKLOG_DOCUMENTATION_ONLY_EXPECTED"
+    "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_1d641e12;_NO_PRODUCT_OR_PROOF_CHANGE"
   },
   "proven": {
     "package_total_files": "PASS_131",
@@ -39,11 +39,15 @@
     "provider_counts": "PASS_EXACT_26_EACH",
     "driver_terminal_state": "PASS_IDLE",
     "real_wordpress_full_e2e": "PASS_RUN_35693065234",
-    "final_zip_full_workflow": "PASS_RUN_35693065308",
-    "separate_process_full_system": "PASS_RUN_35693065350",
-    "complete_system_simulation": "PASS_RUN_35693065236",
+    "final_zip_full_workflow": "LEGACY_0.57.0_WORKFLOW_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
+    "separate_process_full_system": "LEGACY_0.57.1_WORKFLOW_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
+    "complete_system_simulation": "LEGACY_0.57.0_DISCOVERY_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
     "exact_tested_zip_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
-    "previous_live_0574_rollback_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3"
+    "previous_live_0574_rollback_sha256": "ae4fde45bdd42310fae148777701f17067bd3eefde69b8acb54a526a7ccf64e3",
+    "exact_0576_authoritative_proof": "REAL_WORDPRESS_HTTP_E2E_RUN_35693065234_PLUS_EXACT_LOCAL_BYTE_LINT_DIFF_CHECK",
+    "local_exact_zip_php_lint": "PASS_76_OF_76",
+    "local_exact_zip_vs_0574_changed_product_files": "PASS_4_ONLY",
+    "local_exact_zip_new_forbidden_surfaces": "ZERO_TIMEOUT_ZERO_DELETE_OPTION_ZERO_REMOTE_ZERO_SCHEDULING_ZERO_SLEEP_ZERO_SCHEMA_DESTRUCTIVE_SQL"
   },
   "first_blocker": {
     "code": "REAL_SITE_ACCEPTANCE_NOT_YET_PROVEN_FOR_FINAL_0576_EXACT_TESTED_BYTES",
@@ -74,7 +78,8 @@
     "door": "control/pste-topic-engine/START_HERE.json",
     "target": "control/pste-topic-engine/ZIELVERTRAG.json",
     "errors": "protocol/PSTE_TOPIC_ENGINE_ERROR_PROTOCOL_20260921.md",
-    "worklog": "protocol/PSTE_TOPIC_ENGINE_WORKLOG_20260921.md"
+    "worklog": "protocol/PSTE_TOPIC_ENGINE_WORKLOG_20260921.md",
+    "legacy_companion_note": "The green 0.57.0/0.57.1 companion workflows are historical regression proofs only; they must not be cited as exact 0.57.6 package proof."
   },
   "diagnostics": {
     "status": "PASS_ISOLATED_REAL_WORDPRESS_MYSQL_NO_WRITE_ROLLBACK_PROOF",
