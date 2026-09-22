@@ -1,0 +1,70 @@
+name: Router CPU Batch 6.72.150 Hardtest
+on:
+  push:
+    branches: [design-performance-standalone-hardtest-20260922]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/router-cpu-batch-672150/**'
+      - '.github/workflows/router-cpu-batch-672150-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: Install WordPress 7.1.1 and combined gate
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.1 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Router CPU Batch' --admin_user=admin --admin_password='fixture-12345' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/plugins/ppar150-gate
+          cp AFFILIATE_HOBBYRAUM/router-cpu-batch-672150/combined-gate.php /tmp/wp-site/wp-content/plugins/ppar150-gate/
+          php -l /tmp/wp-site/wp-content/plugins/ppar150-gate/combined-gate.php
+          /tmp/wp plugin activate ppar150-gate --path=/tmp/wp-site
+      - name: Public semantics, cache and invalidation
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?ppar150_public=1' > /tmp/public.json
+          curl -fsS 'http://127.0.0.1:8080/wp-admin/admin-post.php?action=ppar150_admin' > /tmp/admin.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('/tmp/public.json')); a=json.load(open('/tmp/admin.json'))
+          print('PUBLIC',p)
+          print('ADMIN',a)
+          assert p['old_hash']==p['new_hash'], p
+          assert p['old_rules_hash']==p['new_rules_hash'], p
+          assert p['fallback_old']==p['fallback_new'], p
+          assert p['control_before']=='approved' and p['control_after']=='veto', p
+          assert p['sanitize_new'] < p['sanitize_old']/8, p
+          assert p['new_rule_normalize_calls'] <= 2, p
+          assert p['new_settings_normalize_calls']==1, p
+          # Admin path must remain uncached.
+          assert a['rule_calls']==50, a
+          print('PASS 6.72.150 combined router CPU batch: semantic hashes identical, fallback preserved, control invalidation works, frontend caches active, admin uncached')
+          PY
