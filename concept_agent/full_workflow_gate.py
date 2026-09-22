@@ -657,6 +657,147 @@ def verify_current_negative(pointer_path: Path, current_state_path: Path, outdir
     return proof
 
 
+
+STAGE_ROUTE_CONTRACT = "CONCEPT_AGENT_STAGE_ROUTE_V1"
+STAGE_ROUTES = {
+    "INTAKE": {
+        "authority": "EXISTING_CONCEPT_AGENT_INTAKE",
+        "entry_ref": "concept_agent/intake_bridge.py",
+        "allowed_operation": "PREPARE_INTAKE_ONLY",
+    },
+    "RESEARCH": {
+        "authority": "EXISTING_CONCEPT_AGENT_RESEARCH",
+        "entry_ref": "CONCEPT_AGENT_RESEARCH_PROCESS",
+        "allowed_operation": "RESEARCH_CURRENT_BOUND_ITEM_ONLY",
+    },
+    "RESEARCH_BOUND": {
+        "authority": "EXISTING_CONCEPT_AGENT_RESEARCH_BINDING",
+        "entry_ref": "concept_agent/intake_bridge.py:bind_research",
+        "allowed_operation": "BIND_EXISTING_RESEARCH_ONLY",
+    },
+    "AUTHORING_BOUND": {
+        "authority": "EXISTING_CONCEPT_AGENT_AUTHORING_BINDING",
+        "entry_ref": "CONCEPT_AGENT_AUTHORING_BINDING",
+        "allowed_operation": "BIND_AUTHORING_AND_LINKS_ONLY",
+    },
+    "ARTICLE_PRODUCTION": {
+        "authority": "CONCEPT_AGENT_RESUMABLE_RUNNER",
+        "entry_ref": "concept_agent/resumable_runner.py",
+        "allowed_operation": "AUTHOR_REPAIR_VALIDATE_CURRENT_ARTICLE_ONLY",
+    },
+    "PSERC_PACKAGE": {
+        "authority": "EXISTING_PSERC_PIPELINE",
+        "entry_ref": "PSERC_EXISTING_PRODUCTION_PACKAGE_ROUTE",
+        "allowed_operation": "BUILD_PSERC_PACKAGE_ONLY",
+    },
+    "ENDSTEMPEL": {
+        "authority": "EXISTING_CONCEPT_AGENT_ENDSTEMPEL",
+        "entry_ref": "concept_agent/endstempel_bridge.py",
+        "allowed_operation": "ENDSTEMPEL_ONLY",
+    },
+    "CHAT_FILE_RETURN": {
+        "authority": "GITHUB_FINAL_ARTIFACT_RETURN",
+        "entry_ref": ".github/workflows/pferde-atelier-endstempel.yml",
+        "allowed_operation": "RETURN_EXACTLY_ONE_FINAL_FILE_ONLY",
+    },
+    "COMPLETE": {
+        "authority": "NONE",
+        "entry_ref": "NONE",
+        "allowed_operation": "NO_WORK_ALREADY_COMPLETE",
+    },
+}
+
+
+def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(proof, dict) or proof.get("contract") != ENTRY_PROOF_CONTRACT or proof.get("status") != "PASS":
+        raise Blocked("ENTRY_PROOF_INVALID_FOR_ROUTE")
+    if proof.get("workflow_entry") != "ALWAYS_FROM_STAGE_0" or proof.get("fast_forward_mode") != "VALIDATE_ONLY":
+        raise Blocked("ENTRY_PROOF_ROUTE_POLICY_INVALID")
+    if proof.get("chat_may_choose_stage") is not False or proof.get("publish_allowed") is not False:
+        raise Blocked("ENTRY_PROOF_ROUTE_FLAGS_INVALID")
+    stage = str(proof.get("next_stage") or "")
+    route = STAGE_ROUTES.get(stage)
+    if route is None:
+        raise Blocked("NEXT_STAGE_ROUTE_UNKNOWN:" + stage)
+    proof_sha = str(proof.get("proof_sha256") or "")
+    if not SHA_RE.fullmatch(proof_sha):
+        raise Blocked("ENTRY_PROOF_HASH_INVALID_FOR_ROUTE")
+    ticket = {
+        "contract": STAGE_ROUTE_CONTRACT,
+        "status": "PASS",
+        "batch_sha256": proof["batch_sha256"],
+        "entry_proof_sha256": proof_sha,
+        "validated_completed_stages": proof.get("validated_completed_stages", []),
+        "next_stage": stage,
+        "authority": route["authority"],
+        "entry_ref": route["entry_ref"],
+        "allowed_operation": route["allowed_operation"],
+        "chat_may_choose_stage": False,
+        "alternate_route_allowed": False,
+        "publish_allowed": False,
+    }
+    ticket["route_sha256"] = stable(ticket)
+    return ticket
+
+
+def write_stage_route(entry_proof_path: Path, out_path: Path) -> dict[str, Any]:
+    proof = _load_json(entry_proof_path)
+    ticket = stage_route_from_entry_proof(proof)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(ticket, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return ticket
+
+
+def simulate_route_matrix(outdir: Path) -> dict[str, Any]:
+    outdir.mkdir(parents=True, exist_ok=True)
+    batch = sim_hash("route-matrix-batch", "x" * 64)
+    positive = []
+    negative = []
+    for stage_count in range(len(STAGES) + 1):
+        state = build_to(batch, 3, stage_count)
+        entry = enter(state)
+        ticket = stage_route_from_entry_proof(entry)
+        expected = STAGES[stage_count] if stage_count < len(STAGES) else "COMPLETE"
+        if ticket["next_stage"] != expected:
+            raise Blocked("ROUTE_MATRIX_WRONG_STAGE:" + expected)
+        if ticket["chat_may_choose_stage"] is not False or ticket["alternate_route_allowed"] is not False:
+            raise Blocked("ROUTE_MATRIX_NOT_HARD_BOUND:" + expected)
+        positive.append({
+            "next_stage": expected,
+            "authority": ticket["authority"],
+            "allowed_operation": ticket["allowed_operation"],
+            "status": "PASS",
+        })
+
+        bad = json.loads(json.dumps(entry))
+        bad["next_stage"] = "COMPLETE" if expected != "COMPLETE" else "INTAKE"
+        # Keep the old proof hash on purpose; route must reject the forged ticket source.
+        try:
+            stage_route_from_entry_proof(bad)
+        except Blocked as exc:
+            negative.append({"case": "forged-next-stage-" + expected, "blocked": True, "reason": str(exc)})
+        else:
+            # A forged proof with stale hash must never be accepted.
+            if bad.get("proof_sha256") == stable({k:v for k,v in bad.items() if k!="proof_sha256"}):
+                raise Blocked("ROUTE_MATRIX_TEST_SETUP_INVALID")
+            raise Blocked("ROUTE_MATRIX_FORGED_STAGE_NOT_BLOCKED:" + expected)
+
+    proof = {
+        "contract": "CONCEPT_AGENT_STAGE_ROUTE_MATRIX_V1",
+        "status": "PASS",
+        "positive_count": len(positive),
+        "negative_count": len(negative),
+        "positive": positive,
+        "negative": negative,
+        "publish_allowed": False,
+    }
+    proof["proof_sha256"] = stable(proof)
+    (outdir / "CONCEPT_AGENT_STAGE_ROUTE_MATRIX_V1.json").write_text(
+        json.dumps(proof, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return proof
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -669,6 +810,11 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("verify-current-negative")
     p.add_argument("--pointer", required=True)
     p.add_argument("--current-state", required=True)
+    p.add_argument("--out", required=True)
+    p = sub.add_parser("stage-route")
+    p.add_argument("--entry-proof", required=True)
+    p.add_argument("--out", required=True)
+    p = sub.add_parser("simulate-route-matrix")
     p.add_argument("--out", required=True)
     args = ap.parse_args(argv)
     try:
@@ -688,6 +834,26 @@ def main(argv: list[str] | None = None) -> int:
                 "ok": True,
                 "status": proof["status"],
                 "negative_case_count": proof["case_count"],
+                "proof_sha256": proof["proof_sha256"],
+            }, sort_keys=True))
+            return 0
+        if args.cmd == "stage-route":
+            ticket = write_stage_route(Path(args.entry_proof), Path(args.out))
+            print(json.dumps({
+                "ok": True,
+                "status": ticket["status"],
+                "next_stage": ticket["next_stage"],
+                "authority": ticket["authority"],
+                "route_sha256": ticket["route_sha256"],
+            }, sort_keys=True))
+            return 0
+        if args.cmd == "simulate-route-matrix":
+            proof = simulate_route_matrix(Path(args.out))
+            print(json.dumps({
+                "ok": True,
+                "status": proof["status"],
+                "positive_count": proof["positive_count"],
+                "negative_count": proof["negative_count"],
                 "proof_sha256": proof["proof_sha256"],
             }, sort_keys=True))
             return 0
