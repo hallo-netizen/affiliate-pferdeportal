@@ -66,12 +66,20 @@ jobs:
               x=json.loads(p.read_text(encoding='utf-8'))
           except Exception:
               block('REQUEST_JSON_INVALID')
-          if set(x) != {'contract','mode','publish_allowed','request_id'}: block('REQUEST_FIELDS_INVALID')
-          if x['contract']!='CONCEPT_AGENT_GITHUB_RUN_REQUEST_V1': block('REQUEST_CONTRACT_INVALID')
+          contract=x.get('contract')
+          mode=x.get('mode')
+          if contract=='CONCEPT_AGENT_GITHUB_RUN_REQUEST_V1':
+              if set(x) != {'contract','mode','publish_allowed','request_id'}: block('REQUEST_FIELDS_INVALID')
+              if mode not in {'simulate-all','run-current'}: block('REQUEST_MODE_INVALID')
+          elif contract=='CONCEPT_AGENT_BINDING_PERSIST_REQUEST_V1':
+              if set(x) != {'contract','mode','publish_allowed','request_id','transport_b64'}: block('REQUEST_FIELDS_INVALID')
+              if mode!='persist-binding': block('REQUEST_MODE_INVALID')
+              if not isinstance(x.get('transport_b64'),str) or not x['transport_b64']: block('TRANSPORT_B64_MISSING')
+          else:
+              block('REQUEST_CONTRACT_INVALID')
           if x['publish_allowed'] is not False: block('REQUEST_PUBLISH_MUST_BE_FALSE')
-          if x['mode'] not in {'simulate-all','run-current'}: block('REQUEST_MODE_INVALID')
           if not re.fullmatch(r'[A-Za-z0-9._-]{8,120}',x['request_id']): block('REQUEST_ID_INVALID')
-          print('mode='+x['mode'])
+          print('mode='+mode)
           print('request_id='+x['request_id'])
           PY
       - name: Run fixed route
@@ -80,18 +88,42 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           MODE: ${{ steps.parsed.outputs.mode }}
+          REQUEST_REF: ${{ steps.request.outputs.request_ref }}
           CONCEPT_AGENT_STATE_BRANCH: concept-agent/production-control
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p /tmp/concept-agent-return
-          if [[ "$MODE" == 'simulate-all' ]]; then
+          if [[ "$MODE" == 'persist-binding' ]]; then
+            python3 - <<'PY'
+            import base64,json,os
+            from pathlib import Path
+            req=json.loads((Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8'))
+            raw=base64.b64decode(req['transport_b64'], validate=True)
+            Path('/tmp/concept-agent-binding-candidate.json').write_bytes(raw)
+            PY
+            python3 control-branch/concept_agent/binding_transport_gate.py accept \
+              --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+              --candidate /tmp/concept-agent-binding-candidate.json \
+              --durable control-branch/concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json \
+              --receipt /tmp/concept-agent-return/CONCEPT_AGENT_DURABLE_BINDING_RECEIPT_V1.json
+            cd control-branch
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json
+            if ! git diff --cached --quiet; then
+              git commit -m "Concept Agent: persist exact current work binding [skip ci]"
+              git push origin HEAD:concept-agent/production-control
+            fi
+            cd ..
+          elif [[ "$MODE" == 'simulate-all' ]]; then
             python3 project-main/concept_agent/runner.py simulate-one --out /tmp/concept-agent-return/one
             python3 project-main/concept_agent/runner.py simulate-multi --out /tmp/concept-agent-return/multi
             python3 project-main/concept_agent/runner.py simulate-negative --out /tmp/concept-agent-return/negative
             python3 control-branch/concept_agent/full_workflow_gate.py simulate-all-entries --out /tmp/concept-agent-return/full-workflow-reentry
             python3 control-branch/concept_agent/full_workflow_gate.py simulate-route-matrix --out /tmp/concept-agent-return/stage-route-matrix
             python3 control-branch/concept_agent/entry_hardlock.py simulate --out /tmp/concept-agent-return/entry-hardlock
+            python3 control-branch/concept_agent/binding_transport_gate.py simulate --out /tmp/concept-agent-return/binding-transport
             set +e
             python3 control-branch/concept_agent/entry_hardlock.py probe \
               --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
@@ -118,7 +150,7 @@ jobs:
             CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/SIMULATION_CURRENT_STATE.json \
             python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-return/mid-positive-github
           else
-            BINDING='project-main/concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
+            BINDING='control-branch/concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
             POINTER='project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json'
             CURRENT='project-main/control/startmaster0107/CURRENT_STATE.json'
             STATE='control-branch/concept_agent/runtime/CURRENT_STATE.json'
