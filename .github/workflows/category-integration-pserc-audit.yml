@@ -1,0 +1,52 @@
+name: Category Integration PSERC Audit
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'CATEGORY_INTEGRATION_HOBBYRAUM/audit_pserc.py'
+      - '.github/workflows/category-integration-pserc-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pserc-readonly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Governance gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py start --branch "$(git branch --show-current)"
+      - name: Bind exact PSERC package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          git show origin/main:control/startmaster0107/runtime_packages/PSERC-FIX.zip > /tmp/pserc.zip
+          ACTUAL="$(sha256sum /tmp/pserc.zip | awk '{print $1}')"
+          EXPECTED="77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
+          test "$ACTUAL" = "$EXPECTED"
+          echo "PSERC_PACKAGE_SHA_PASS $ACTUAL"
+      - name: Read-only PSERC category audit
+        shell: bash
+        env:
+          PSERC_ZIP: /tmp/pserc.zip
+        run: |
+          set -euo pipefail
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/audit_pserc.py | tee /tmp/pserc-category-audit.log
+          grep -F 'PSERC_CATEGORY_READ_ONLY_AUDIT_PASS' /tmp/pserc-category-audit.log
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-integration-pserc-readonly
+          path: |
+            CATEGORY_INTEGRATION_HOBBYRAUM/out/pserc-category-audit.json
+            /tmp/pserc-category-audit.log
+          if-no-files-found: error
