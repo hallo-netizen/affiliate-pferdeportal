@@ -37,6 +37,38 @@ jobs:
           mkdir -p /tmp/entry-hardlock
           python3 hardlock/concept_agent/entry_hardlock.py simulate --out /tmp/entry-hardlock/simulation
 
+      - name: All workflow re-entry positions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 hardlock/concept_agent/full_workflow_gate.py simulate-all-entries --out /tmp/entry-hardlock/all-entry-positions
+
+      - name: Mid-article and mid-repair re-entry
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=hardlock/concept_agent python3 hardlock/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/entry-hardlock/mid-positive
+          PYTHONPATH=hardlock/concept_agent python3 hardlock/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/entry-hardlock/mid-negative
+
+      - name: Chat to exact final file end-to-end
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 hardlock/concept_agent/full_e2e_simulation.py --repo project-main --out /tmp/entry-hardlock/chat-to-final-file
+
+      - name: Real current state re-entry verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 hardlock/concept_agent/full_workflow_gate.py verify-current-entry \
+            --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+            --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
+            --out /tmp/entry-hardlock/current-entry
+          python3 hardlock/concept_agent/full_workflow_gate.py verify-current-negative \
+            --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
+            --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
+            --out /tmp/entry-hardlock/current-negative
+
       - name: Real 16-article pre-chat-switch handoff probe
         shell: bash
         run: |
