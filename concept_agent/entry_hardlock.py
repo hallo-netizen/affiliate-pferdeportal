@@ -43,8 +43,14 @@ def probe(pointer_path:Path,current_state_path:Path,transport_path:Path|None):
     if c.get("intake_status")!="PASS": raise Blocked("INTAKE_NOT_PASS")
     if c.get("research_binding_status")!="PASS": raise Blocked("RESEARCH_BINDING_NOT_PASS")
     if c.get("authoring_binding_status")!="PASS": raise Blocked("AUTHORING_BINDING_NOT_PASS")
-    if c.get("article_bodies_completed")!=0 or c.get("next_article_index")!=0:
-        raise Blocked("HISTORIC_HANDOFF_NOT_PRE_ARTICLE_STATE")
+    completed=c.get("article_bodies_completed")
+    next_index=c.get("next_article_index")
+    if isinstance(completed,bool) or not isinstance(completed,int) or completed<0 or completed>count:
+        raise Blocked("ARTICLE_PROGRESS_INVALID")
+    if isinstance(next_index,bool) or not isinstance(next_index,int) or next_index<0 or next_index>count:
+        raise Blocked("NEXT_ARTICLE_INDEX_INVALID")
+    if next_index!=completed:
+        raise Blocked("ARTICLE_PROGRESS_SEQUENCE_MISMATCH")
 
     decision={
         "contract":"CONCEPT_AGENT_ENTRY_HARDLOCK_DECISION_V1",
@@ -59,7 +65,7 @@ def probe(pointer_path:Path,current_state_path:Path,transport_path:Path|None):
             {"stage":"AUTHORING_LINK_BINDING","status":"PASS","sha256":p["authoring_bindings_file_sha256"]},
         ],
         "next_stage":"ARTICLE_PRODUCTION",
-        "next_article_index":0,
+        "next_article_index":next_index,
         "publish_allowed":False,
     }
     if transport_path is None:
@@ -96,25 +102,26 @@ def sim_transport(pointer:dict)->bytes:
 
 def simulation(out:Path):
     out.mkdir(parents=True,exist_ok=True)
-    batch=hashlib.sha256(b"real16-positive-control").hexdigest()
+    count=5
+    batch=hashlib.sha256(b"generic-positive-control").hexdigest()
     base={
-      "contract":POINTER_CONTRACT,"workflow":WORKFLOW,"batch_sha256":batch,"item_count":16,
+      "contract":POINTER_CONTRACT,"workflow":WORKFLOW,"batch_sha256":batch,"item_count":count,
       "intake_sha256":hashlib.sha256(b"intake").hexdigest(),
       "research_binding_sha256":hashlib.sha256(b"research").hexdigest(),
       "authoring_bindings_file_sha256":hashlib.sha256(b"authoring").hexdigest(),
-      "cross_chat_transport_filename":"CONCEPT_AGENT_16_WORK_BINDING.json",
+      "cross_chat_transport_filename":"CONCEPT_AGENT_CURRENT_WORK_BINDING.json",
       "cross_chat_transport_sha256":"0"*64,"cross_chat_transport_binding_sha256":"0"*64,
       "cross_chat_transport_required":True,"article_bodies_present":False,"next_article_index":0,"publish_allowed":False
     }
-    tval={"contract":"CONCEPT_AGENT_WORK_BINDING_TEST_V1","batch_sha256":batch,"item_count":16,"items":[],"publish_allowed":False}
+    tval={"contract":"CONCEPT_AGENT_WORK_BINDING_TEST_V1","batch_sha256":batch,"item_count":count,"items":[],"publish_allowed":False}
     core=dict(tval); core["binding_sha256"]=hashlib.sha256(json.dumps(tval,sort_keys=True,separators=(",",":")).encode()).hexdigest()
     raw=(json.dumps(core,ensure_ascii=False,sort_keys=True,separators=(",",":"))+"\n").encode()
     base["cross_chat_transport_sha256"]=sha(raw)
     base["cross_chat_transport_binding_sha256"]=core["binding_sha256"]
     cur={"concept_agent_current_batch":{
-      "workflow":WORKFLOW,"batch_sha256":batch,"item_count":16,
+      "workflow":WORKFLOW,"batch_sha256":batch,"item_count":count,
       "intake_status":"PASS","research_binding_status":"PASS","authoring_binding_status":"PASS",
-      "article_bodies_completed":0,"next_article_index":0,
+      "article_bodies_completed":2,"next_article_index":2,
       "intake_sha256":base["intake_sha256"],"research_binding_sha256":base["research_binding_sha256"],
       "authoring_bindings_file_sha256":base["authoring_bindings_file_sha256"],
       "cross_chat_transport_filename":base["cross_chat_transport_filename"],
@@ -123,7 +130,7 @@ def simulation(out:Path):
     pp=out/"pointer.json"; sp=out/"current.json"; tp=out/base["cross_chat_transport_filename"]
     pp.write_text(json.dumps(base,indent=2)+"\n"); sp.write_text(json.dumps(cur,indent=2)+"\n"); tp.write_bytes(raw)
     pos=probe(pp,sp,tp)
-    if pos.get("status")!="READY" or pos.get("next_stage")!="ARTICLE_PRODUCTION" or pos.get("next_article_index")!=0:
+    if pos.get("status")!="READY" or pos.get("next_stage")!="ARTICLE_PRODUCTION" or pos.get("next_article_index")!=2:
         raise Blocked("POSITIVE_NOT_READY")
     neg=[]
     # Missing transport must block.
