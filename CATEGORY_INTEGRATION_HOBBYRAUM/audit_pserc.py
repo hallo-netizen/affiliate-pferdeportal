@@ -43,7 +43,28 @@ with zipfile.ZipFile(io.BytesIO(raw)) as z:
                 if t.lower() in line.lower():
                     hits[t].append({"member":name,"line":i+1,"context":"\n".join(lines[max(0,i-6):min(len(lines),i+12)])})
                     if len(hits[t])>=40: break
-    out={"status":"PASS_READ_ONLY","outer_sha256":sha,"inner_sha256":hashlib.sha256(raw).hexdigest(),"inner_files":len(names),"headers":headers,"hits":hits}
+    registry_name="portal-seo-editorial-plan-compiler/contracts/portal-structure-registry-v1.json"
+    registry=json.loads(z.read(registry_name).decode("utf-8"))
+    registry_summary={
+      "contract":registry.get("contract"),
+      "version":registry.get("version"),
+      "source":registry.get("source"),
+      "entry_count":len(registry.get("entries") or []),
+      "registry_sha256":registry.get("registry_sha256"),
+      "top_keys":list(registry.keys()),
+      "first_entries":(registry.get("entries") or [])[:3],
+      "last_entries":(registry.get("entries") or [])[-3:],
+    }
+    integrity=[]
+    for name in names:
+        if name.endswith("/") or not name.lower().endswith((".json",".php",".txt",".md")): continue
+        try: txt=z.read(name).decode("utf-8")
+        except Exception: continue
+        if "portal-structure-registry-v1.json" in txt or registry.get("registry_sha256","") in txt or (registry.get("source") or {}).get("raw_sha256","") in txt:
+            integrity.append({"member":name,"contains_registry_path":"portal-structure-registry-v1.json" in txt,"contains_registry_hash":registry.get("registry_sha256","") in txt,"contains_source_hash":(registry.get("source") or {}).get("raw_sha256","") in txt})
+    gate_name="portal-seo-editorial-plan-compiler/includes/class-pserc-portal-structure-gate.php"
+    gate_text=z.read(gate_name).decode("utf-8")
+    out={"status":"PASS_READ_ONLY","outer_sha256":sha,"inner_sha256":hashlib.sha256(raw).hexdigest(),"inner_files":len(names),"headers":headers,"registry":registry_summary,"registry_integrity_references":integrity,"portal_structure_gate_full":gate_text,"hits":hits}
     (OUT/"pserc-category-audit.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps(out,ensure_ascii=False,indent=2))
     print("PSERC_CATEGORY_READ_ONLY_AUDIT_PASS")
