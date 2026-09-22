@@ -1,0 +1,36 @@
+name: Affiliate Ranking Memo Hardtest
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_ranking_memo_patch.py'
+      - 'AFFILIATE_HOBBYRAUM/performance-cache/test_ranking_memo_source.py'
+      - '.github/workflows/affiliate-ranking-memo-hardtest.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ranking-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build baseline and candidate
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/base /tmp/candidate
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/base/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/base/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_batch_patch.py /tmp/base/affiliate-portal-router
+          cp -a /tmp/base/affiliate-portal-router /tmp/candidate/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_ranking_memo_patch.py /tmp/candidate/affiliate-portal-router
+      - name: Exact source equivalence
+        run: python3 AFFILIATE_HOBBYRAUM/performance-cache/test_ranking_memo_source.py /tmp/base/affiliate-portal-router /tmp/candidate/affiliate-portal-router
+      - name: PHP syntax
+        run: find /tmp/candidate/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Preserve batch contract
+        run: |
+          cp AFFILIATE_HOBBYRAUM/performance-cache/test_request_local_batch_cache.php /tmp/candidate/test_request_local_batch_cache.php
+          cd /tmp/candidate
+          php test_request_local_batch_cache.php
+      - name: Preserve banner regression
+        run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
