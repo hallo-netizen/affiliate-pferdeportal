@@ -77,8 +77,9 @@ jobs:
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
           sed -i 's/Version: 0\.57\.0/Version: 0.57.6/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.5');/" portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.6');/" portal-seo-topic-engine.php
           grep -q 'Version: 0.57.6' portal-seo-topic-engine.php
+          grep -q "define('PSTE_VERSION', '0.57.6');" portal-seo-topic-engine.php
           grep -q 'Workflow projection only' includes/class-pste-repository.php
           grep -q 'finalize_prepare_cursor' includes/class-pste-research-job.php
           grep -q 'pste-breadth-status' includes/class-pste-admin.php
