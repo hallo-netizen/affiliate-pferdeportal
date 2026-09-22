@@ -123,3 +123,21 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Danach 303er PREPARE-Stress PASS und komplette 40er Produktionswelle bis TARGET_REACHED PASS.
 - Exakt getestete installierbare ZIP SHA-256: `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
 - PPA-005 CURRENT.zip bleibt bis echter Live-Abnahme unverändert.
+
+
+## Nachtrag 2026-09-22 – 0.57.6 finaler Safe-Stop-/Fortsetzungs-PASS
+- Diagnose auf Live 0.57.4: FINALIZE/PREPARE_CANDIDATES stand bei Cursor 0/96; Driver/Queue/Step-Locks aktiv; kein Fortschritt bis STEP_OVERDUE.
+- Ursache im Produktpfad eingegrenzt: PREPARE baute `previousCandidateInventory()` bislang über den globalen Kandidatenbestand mit Relation-Hydrierung auf, obwohl der Readiness/Duplicate-Pfad nur die aktuelle Themenfamilie benötigt. 0.57.5 ersetzt dies durch eine familienbezogene Workflow-Projektion ohne Occurrence-/Assignment-Hydrierung.
+- 0.57.6 ergänzt ausschließlich die sichere Fortsetzung nach bewusstem Abbruch: ursprüngliche Baseline bleibt erhalten, vorhandener PASS-Fortschritt wird weitergezählt und ein bereits abgeschlossenes lokales Audit wird wiederverwendet.
+- Finaler technischer Head: `1d641e12c9d23e510044fc745d7cf0fe969d8c7f`.
+- Real WordPress HTTP E2E Run `35693065234`: SUCCESS.
+- Exakte Kandidaten-ZIP SHA-256: `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
+- Evidence Artifact: `10679790400`, Digest `sha256:dfb41d91aaa6b485bef8c0497e2ed6888dec514ce4144286177439fd282d3cab`.
+- Safe-Cancel-Beweis: PREPARE bei 0/303 erreicht; danach `PASS_SAFE_CANCEL_DURING_PREPARE_SETTLES_CLEANLY`.
+- Fortsetzungsbeweis: vor Abbruch 2 brauchbare PASS-Themen, nach Neustart wieder 2; `PASS_CANCELLED_WAVE_PROGRESS_CONTINUED old=2 new=2`; kein Neustart bei 0.
+- Fortsetzung endet sauber: `PASS_CONTINUATION_PROOF_TERMINAL_CLEAN`, Driver IDLE.
+- PREPARE-Stress: 303 Kandidaten über mehrere Requests bis COMPLETE; kein STEP_OVERDUE.
+- Vollständige Produktionswelle: TARGET_REACHED, 40 usable / 123 raw, 27/27 Familien COMPLETE, 0 BLOCKED, Driver IDLE.
+- Begleitläufe am selben Head: Final ZIP Full Workflow `35693065308` PASS; Complete System Simulation `35693065236` PASS; Separate Process Full System `35693065350` PASS.
+- Lokaler Paketcheck gegen 0.57.4-Goldstand: 131 Dateien, 76 PHP; 76/76 PHP-Lint PASS; nur 4 Produktdateien geändert: `class-pste-breadth-research-queue.php`, `class-pste-repository.php`, `class-pste-runner.php`, `portal-seo-topic-engine.php`.
+- Real-Site-Freigabe bleibt offen. 0.57.6 wird erst nach Installation exakt dieser Bytes und Live-Abnahme promotet; 0.57.4 bleibt bis dahin Rollback-Goldstand.
