@@ -29,3 +29,11 @@ Der vorherige Zustand konnte nach einem korrekten Hardlock-BLOCK wieder Entschei
 
 Die aktuelle Wahrheit für Eingang/Re-Entry/Folgeaktion bleibt ausschließlich:
 `concept-agent/production-control:concept_agent/CONTROL_STATE.json`.
+
+## OFFENER PUNKT AUS ABSCHLUSSPRÜFUNG
+
+Der echte GitHub-Workflow führt die fest gewählte Aktion `RESTART_BATCH_FROM_INTAKE` derzeit noch **nicht selbst aus**. Er erzeugt `CONCEPT_AGENT_RESTART_REQUIRED_V1.json` und beendet den Lauf mit Exit 20. Damit ist die Entscheidungsfreiheit des Chats beseitigt, aber der automatische Neustart im produktiven Workflow noch nicht vollständig verdrahtet.
+
+Erster offener Blocker: `FIXED_RESTART_ACTION_NOT_EXECUTED`.
+
+Exakt nächste Arbeit: Die bereits gewählte Restart-Aktion im bestehenden GitHub-Workflow ausführbar verdrahten und danach denselben 1-/Mehrartikel-Positiv-/Negativtest sowie den realen 16er-Einstieg erneut fahren.
