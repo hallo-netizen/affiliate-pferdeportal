@@ -109,3 +109,17 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 - Negativ: PSTE deaktiviert/fehlend sowie absichtlich beschädigter gespeicherter PSTE-Zustand verursachen keinen Fatal im Diagnoseplugin.
 - Harte Rückfallregel: Bei irgendeiner Auffälligkeit ausschließlich Diagnoseplugin deaktivieren/löschen. Kein PSTE-Fix, kein Datenbank-Rollback, keine Architekturänderung. Nur falls PSTE-Dateien wider Erwarten beschädigt erscheinen, exakt den Goldstand SHA `ae4fde45...` erneut einsetzen.
 - Safety Artifact: `10662345593`, Digest `sha256:0970ba58dcca31b8cdf49ffab96ecb08691aaa20fff41494e2108c66ab6c7153`.
+
+
+## Nachtrag – 0.57.6 vollständiger Real-WordPress-Lauf PASS
+- Technischer Head: `1d641e12c9d23e510044fc745d7cf0fe969d8c7f`.
+- Alle vier Workflows auf diesem Head PASS:
+  - Real WordPress HTTP E2E `35693065234`
+  - Final ZIP Full Workflow Proof `35693065308`
+  - Separate Process Full System Proof `35693065350`
+  - Complete System Simulation Discovery `35693065236`
+- Neue harte Pflichtprobe: echte Zielwelle bis zu messbarem Fortschritt -> sicher abbrechen -> Queue CANCELLED + Driver IDLE -> gleiche 40er Zielwelle neu starten -> bereits erreichte PASS-Themen müssen erhalten bleiben -> lokale vollständige Bestandsprüfung darf nicht erneut bei null beginnen.
+- Gemessener Beweis: vor Abbruch 2 PASS / 1 Familie COMPLETE; Neustart übernimmt 2 PASS; `continued_from_queue_uuid` ist gesetzt; `continued_usable_candidate_count=2`; `local_backlog_complete=true`; `local_backlog_reused=true`.
+- Danach 303er PREPARE-Stress PASS und komplette 40er Produktionswelle bis TARGET_REACHED PASS.
+- Exakt getestete installierbare ZIP SHA-256: `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
+- PPA-005 CURRENT.zip bleibt bis echter Live-Abnahme unverändert.
