@@ -1,0 +1,45 @@
+{
+  "contract": "CONCEPT_AGENT_WORKFLOW_STATE_V1",
+  "version": "1.0.0",
+  "status": "IN_PROGRESS",
+  "phase": "AUTHORING_HASH_BOUND",
+  "allowed_action": "AUTHORING_START",
+  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "item_count": 16,
+  "evidence": {
+    "INTAKE_REQUIRED": {
+      "action": "INTAKE_PASS",
+      "sha256": "b6ce8dd1d43a757ee985c85ad5196570434fbc2b2d8ef50c49ed91774f4fe104"
+    },
+    "RESEARCH_REQUIRED": {
+      "action": "RESEARCH_HASH_BIND_PASS",
+      "sha256": "1328cbe6dbdab0411dff38050eb1a3ba610ca2d4ed80fa3b8b2d97427a9f3701"
+    },
+    "RESEARCH_HASH_BOUND": {
+      "action": "AUTHORING_HASH_BIND_PASS",
+      "sha256": "6b52258d1bd81c571b22ae68802450d51e7e1eb89873cddd7745b357ba5b4cf1"
+    }
+  },
+  "transition_log": [
+    {
+      "from": "INTAKE_REQUIRED",
+      "action": "INTAKE_PASS",
+      "evidence_sha256": "b6ce8dd1d43a757ee985c85ad5196570434fbc2b2d8ef50c49ed91774f4fe104",
+      "to": "RESEARCH_REQUIRED"
+    },
+    {
+      "from": "RESEARCH_REQUIRED",
+      "action": "RESEARCH_HASH_BIND_PASS",
+      "evidence_sha256": "1328cbe6dbdab0411dff38050eb1a3ba610ca2d4ed80fa3b8b2d97427a9f3701",
+      "to": "RESEARCH_HASH_BOUND"
+    },
+    {
+      "from": "RESEARCH_HASH_BOUND",
+      "action": "AUTHORING_HASH_BIND_PASS",
+      "evidence_sha256": "6b52258d1bd81c571b22ae68802450d51e7e1eb89873cddd7745b357ba5b4cf1",
+      "to": "AUTHORING_HASH_BOUND"
+    }
+  ],
+  "publish_allowed": false,
+  "state_sha256": "fcc5f8effb8a73f1dfd31487c4986b97fbdceed0448306e6e58ac8cd5948cb68"
+}
