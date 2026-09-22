@@ -90,6 +90,7 @@ jobs:
             python3 project-main/concept_agent/runner.py simulate-multi --out /tmp/concept-agent-return/multi
             python3 project-main/concept_agent/runner.py simulate-negative --out /tmp/concept-agent-return/negative
             python3 control-branch/concept_agent/full_workflow_gate.py simulate-all-entries --out /tmp/concept-agent-return/full-workflow-reentry
+            python3 control-branch/concept_agent/full_workflow_gate.py simulate-route-matrix --out /tmp/concept-agent-return/stage-route-matrix
             python3 control-branch/concept_agent/full_workflow_gate.py verify-current-entry \
               --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
               --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
@@ -118,20 +119,40 @@ jobs:
               --out /tmp/concept-agent-return/current-entry \
               | tee /tmp/concept-agent-return/CURRENT_ENTRY_RESULT.json
 
-            python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/CURRENT_ENTRY_RESULT.json',encoding='utf-8')); assert x.get('ok') is True and x.get('status')=='PASS', 'CURRENT_ENTRY_NOT_PASS'; assert x.get('next_stage')=='ARTICLE_PRODUCTION', 'CURRENT_ENTRY_WRONG_NEXT_STAGE:'+str(x.get('next_stage'))"
+            python3 control-branch/concept_agent/full_workflow_gate.py stage-route \
+              --entry-proof /tmp/concept-agent-return/current-entry/CONCEPT_AGENT_CURRENT_ENTRY_PROOF.json \
+              --out /tmp/concept-agent-return/CONCEPT_AGENT_STAGE_ROUTE_V1.json \
+              | tee /tmp/concept-agent-return/STAGE_ROUTE_RESULT.json
 
-            if [[ ! -f "$BINDING" ]]; then
-              printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
-              exit 20
-            fi
-            EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
-            args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
-            if [[ -f "$STATE" ]]; then
-              args+=(--state "$STATE")
-            fi
-            CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
-            CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
-            python3 control-branch/concept_agent/resumable_runner.py "${args[@]}"
+            NEXT_STAGE="$(python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/STAGE_ROUTE_RESULT.json',encoding='utf-8')); assert x.get('ok') is True and x.get('status')=='PASS'; print(x['next_stage'])")"
+
+            case "$NEXT_STAGE" in
+              ARTICLE_PRODUCTION)
+                if [[ ! -f "$BINDING" ]]; then
+                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"CURRENT_WORK_BINDING_NOT_PERSISTED_IN_GITHUB","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
+                  exit 20
+                fi
+                EXPECTED="$(python3 -c "import json;print(json.load(open('$POINTER'))['cross_chat_transport_sha256'])")"
+                args=(run --binding "$BINDING" --binding-sha256 "$EXPECTED" --out /tmp/concept-agent-return/production)
+                if [[ -f "$STATE" ]]; then
+                  args+=(--state "$STATE")
+                fi
+                CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
+                CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
+                python3 control-branch/concept_agent/resumable_runner.py "${args[@]}"
+                ;;
+              COMPLETE)
+                printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_COMPLETE_V1","status":"PASS","reason":"WORKFLOW_ALREADY_COMPLETE","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_COMPLETE.json
+                ;;
+              INTAKE|RESEARCH|RESEARCH_BOUND|AUTHORING_BOUND|PSERC_PACKAGE|ENDSTEMPEL|CHAT_FILE_RETURN)
+                # The entrance has bound the existing workflow stage. The domain executor remains unchanged.
+                # The chat may receive only CONCEPT_AGENT_STAGE_ROUTE_V1.json and may not select another stage.
+                ;;
+              *)
+                printf '%s\n' '{"contract":"CONCEPT_AGENT_RUN_BLOCKED_V1","status":"BLOCKED","reason":"UNKNOWN_NEXT_STAGE","publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_BLOCKED.json
+                exit 20
+                ;;
+            esac
           fi
       - name: Upload exact return package
         if: always()
