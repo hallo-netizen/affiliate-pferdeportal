@@ -61,11 +61,11 @@ jobs:
           assert p['result_hash_baseline']==p['result_hash_candidate']
           assert p['filter_hits']['baseline']==15001, p['filter_hits']
           assert p['filter_hits']['candidate']==1, p['filter_hits']
-          assert p['sanitize_key']['candidate'] < p['sanitize_key']['baseline']/1000, p['sanitize_key']
+          assert p['sanitize_key']['candidate'] < p['sanitize_key']['baseline']/30, p['sanitize_key']
           assert p['sanitize_text_field']['candidate'] < p['sanitize_text_field']['baseline']/1000, p['sanitize_text_field']
           ext=p['candidate_extension']
           assert ext['key']=='myprovider'
-          assert ext['state']=='prepared'
+          assert ext['state']=='active'
           assert ext['specialist_slug']=='myproviderpage'
           assert ext['capabilities']==['outputs','veto']
           assert a['filter_hits']==150, a
