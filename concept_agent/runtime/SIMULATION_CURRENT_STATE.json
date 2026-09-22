@@ -2,21 +2,46 @@
   "contract": "CONCEPT_AGENT_DURABLE_RUN_STATE_V1",
   "state_version": "1.0.0",
   "status": "IN_PROGRESS",
-  "phase": "DRAFTED",
+  "phase": "READY",
   "batch_sha256": "157a4ba1fae088e967540e6e9528e3592b315d7781ba2071fae40ff86ff9ce03",
   "binding_file_sha256": "a7494ba1224d4fb037c8e9042c7d917f5e0f62474bc43c45d743c636a7b332bc",
   "item_count": 3,
-  "next_item_index": 0,
-  "completed_articles": [],
-  "current": {
-    "item_index": 0,
-    "plan_slot": "c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e",
-    "bound_work_sha256": "d03b762d14412f63856eef6fff6ca90f815f3b8fb534434c35dd546c13ed92c1",
-    "revision": 1,
-    "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 1 behandelt das fest gebundene Thema Konzept 5 Testkeyword 1. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 1 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
-    "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0",
-    "findings": []
-  },
+  "next_item_index": 1,
+  "completed_articles": [
+    {
+      "item_index": 0,
+      "plan_slot": "c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e",
+      "title": "Fiktiver Konzept-5-Testartikel 1",
+      "target_keyword": "Konzept 5 Testkeyword 1",
+      "category": "test-beratung",
+      "article_type": "Beratung",
+      "revision_count": 1,
+      "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"c73931e234df58a454743c7d289ef02f78e89ae3f1c4fb361b0556167ae5ee9e\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 1 behandelt das fest gebundene Thema Konzept 5 Testkeyword 1. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 1 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
+      "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0",
+      "checks": {
+        "status": "PASS",
+        "simulation": true,
+        "languagetool": {
+          "version": "6.8",
+          "status": "PASS",
+          "finding_count": 0,
+          "simulation": true
+        },
+        "ppm": {
+          "version": "6.7.9",
+          "status": "PASS",
+          "technical_status": "TECHNICAL_CHECK_OK",
+          "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+          "fail_closed_aggregate_status": "PASS",
+          "content_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0",
+          "simulation": true
+        },
+        "content_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
+      },
+      "bound_work_sha256": "d03b762d14412f63856eef6fff6ca90f815f3b8fb534434c35dd546c13ed92c1"
+    }
+  ],
+  "current": null,
   "event_log": [
     {
       "event": "ITEM_START",
@@ -28,8 +53,21 @@
       "item_index": 0,
       "revision": 1,
       "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
+    },
+    {
+      "event": "CHECK",
+      "item_index": 0,
+      "revision": 1,
+      "status": "PASS",
+      "content_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
+    },
+    {
+      "event": "ITEM_PASS",
+      "item_index": 0,
+      "revision": 1,
+      "body_sha256": "c22ce6075239be6eb2a2af3a6ee9d35a6daec22c7cfddbc49da3cac28c223eb0"
     }
   ],
   "publish_allowed": false,
-  "state_sha256": "b8961b2a88b12b9e25b48c78b37778203db6c8db8613cc321c58468a3261412e"
+  "state_sha256": "4c79024e0c0222e6b0330bec0e7106084ff01bdb5ef95e900e279bb7b0ee0682"
 }
