@@ -124,6 +124,20 @@ jobs:
             echo "PASS_FAMILY_PARK_POLICY\n";
           ' --path=/tmp/wordpress
 
+      - name: Prove strict serial driver positive and negative
+        shell: bash
+        run: bash proof/pste-wordpress-real-e2e/prove-strict-serial-driver.sh
+
+      - name: Seed exact real portal state through plugin code
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval '$e=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","emptyRegistry");$e->setAccessible(true);$v=$e->invoke(null);$p=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","persistRegistry");$p->setAccessible(true);$p->invoke(null,$v);' --path=/tmp/wordpress
+          wp eval-file proof/pste-wordpress-real-e2e/setup-site-v3.php --path=/tmp/wordpress | tee /tmp/setup.json
+          grep -q '"ready":true' /tmp/setup.json
+          grep -q '"context_status":"COMPLETE"' /tmp/setup.json
+          wp eval 'if(!PSTE_Sandbox_Record_Store::isComplete())throw new RuntimeException("SANDBOX_RECORD_STORE_NOT_COMPLETE"); echo "PASS EMPTY_SANDBOX_REAL_MIGRATION\n";' --path=/tmp/wordpress
+
       - name: Prove bounded Sandbox export stays off legacy full-read path
         shell: bash
         run: |
@@ -144,20 +158,6 @@ jobs:
             if(!preg_match("/^[a-f0-9]{64}$/",$decl)||!hash_equals($decl,$actual)) throw new RuntimeException("PSTE_E2E_SANDBOX_EXPORT_SELF_HASH_MISMATCH");
             echo "PASS_BOUNDED_SANDBOX_EXPORT records=".$info["record_count"]." bytes=".$info["bytes"]." legacy_full_reads=".$metrics["legacy_full_reads"]."\n";
           ' --path=/tmp/wordpress
-
-      - name: Prove strict serial driver positive and negative
-        shell: bash
-        run: bash proof/pste-wordpress-real-e2e/prove-strict-serial-driver.sh
-
-      - name: Seed exact real portal state through plugin code
-        shell: bash
-        run: |
-          set -euo pipefail
-          wp eval '$e=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","emptyRegistry");$e->setAccessible(true);$v=$e->invoke(null);$p=new ReflectionMethod("PSTE_Semantic_Review_Sandbox","persistRegistry");$p->setAccessible(true);$p->invoke(null,$v);' --path=/tmp/wordpress
-          wp eval-file proof/pste-wordpress-real-e2e/setup-site-v3.php --path=/tmp/wordpress | tee /tmp/setup.json
-          grep -q '"ready":true' /tmp/setup.json
-          grep -q '"context_status":"COMPLETE"' /tmp/setup.json
-          wp eval 'if(!PSTE_Sandbox_Record_Store::isComplete())throw new RuntimeException("SANDBOX_RECORD_STORE_NOT_COMPLETE"); echo "PASS EMPTY_SANDBOX_REAL_MIGRATION\n";' --path=/tmp/wordpress
 
       - name: Start real multi-worker WordPress plus independent server cron
         shell: bash
