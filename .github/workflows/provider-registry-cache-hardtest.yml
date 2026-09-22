@@ -41,6 +41,8 @@ jobs:
           /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Provider Registry Gate' --admin_user=admin --admin_password='fixture-12345' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/plugins/provider-registry-gate
           cp AFFILIATE_HOBBYRAUM/provider-registry-cache/provider-registry-gate.php /tmp/wp-site/wp-content/plugins/provider-registry-gate/
+          cp AFFILIATE_HOBBYRAUM/provider-registry-cache/provider-registry-core-6.72.148.php /tmp/wp-site/wp-content/plugins/provider-registry-gate/
+          php -l /tmp/wp-site/wp-content/plugins/provider-registry-gate/provider-registry-core-6.72.148.php
           php -l /tmp/wp-site/wp-content/plugins/provider-registry-gate/provider-registry-gate.php
           /tmp/wp plugin activate provider-registry-gate --path=/tmp/wp-site
       - name: Prove frontend cache and unchanged semantics
