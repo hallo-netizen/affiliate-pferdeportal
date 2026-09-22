@@ -90,6 +90,7 @@ jobs:
             python3 project-main/concept_agent/runner.py simulate-multi --out /tmp/concept-agent-return/multi
             python3 project-main/concept_agent/runner.py simulate-negative --out /tmp/concept-agent-return/negative
             python3 control-branch/concept_agent/full_workflow_gate.py simulate-all-entries --out /tmp/concept-agent-return/full-workflow-reentry
+            python3 control-branch/concept_agent/full_e2e_simulation.py --repo project-main --out /tmp/concept-agent-return/chat-to-final-file
 
             python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-return/mid-positive
             python3 control-branch/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/concept-agent-return/mid-negative
