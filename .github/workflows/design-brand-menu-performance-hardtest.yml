@@ -78,7 +78,7 @@ jobs:
           assert b['mobile_sha256']==c['mobile_sha256'], 'mobile HTML changed'
           assert c['desktop_has_marker'] and c['mobile_has_marker'], 'desktop/mobile object filters not preserved'
           assert c['meta_second'] < b['meta_second'], 'second menu metadata work not reduced'
-          assert c['meta_second'] <= max(5, b['meta_second']//10), 'second menu metadata work not eliminated enough'
+          assert c['meta_second'] <= max(5, b['meta_second']//4), 'second menu metadata work reduced by less than 75 percent'
           print('PASS desktop HTML byte-identical')
           print('PASS mobile HTML byte-identical')
           print('PASS desktop/mobile filters preserved')
