@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 97,
+  "generation": 98,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -670,14 +670,14 @@
   "operational_observation": {
     "checked_at": "2026-09-22",
     "live_plugin_version": "PPA-013 1.50.558 SOURCE APPLY PASS; FINAL 30-TEXT CORRECTION NOT YET APPLIED",
-    "live_status": "PPA-013 1.50.558 REMAINS THE LIVE BASE. USER REJECTED THE FIVE NEW PAGE TEXTS AS TOO GENERIC AND CORRECTED SCOPE TO ALL 30 NEW TEXT TARGETS: 5 NEW PAGES + 25 NEW ARTICLE CATEGORIES. AUTHORITATIVE CATEGORY PLAN CONFIRMS 25 CHILD ARTICLE CATEGORIES: PFERDESAETTEL/TRNSEN EACH FAQ-BERATUNG-VERGLEICH-PFLEGE-KOSTEN; OFFENSTALLBAU/PADDOCKBAU/REITPLATZBAU EACH FAQ-BERATUNG-VERGLEICH-INSTALLATION-KOSTEN. SINGLE REPLACEMENT HELPER 1.0.3 BUILT AGAINST EXACT LIVE 1.50.558 SHA. IT CHANGES ONLY THE PPA-013 EDITORIAL OVERLAY TO 30 INDIVIDUAL TEXTS; EXISTING V150558 GRID AND ICON IMPLEMENTATION ARE VERIFY-ONLY.",
+    "live_status": "USER CONFIRMED TEXTS PASS, ICONS PASS, EXACT-7 3/4 LAYOUT PASS. REMAINING PPA-013 DEFECT: FIVE NEW TOP-LEVEL PRODUCT-PAGE TILES HAVE NO SHORT PREVIEW TEXT. ROOTCAUSE VERIFIED: PAGE NAV CARDS READ post_excerpt/post_content AND TRIM TO 18 WORDS. CROSS-SYSTEM AUDIT ALSO PROVES STATIC PORTAL STRUCTURE + AFFILIATE CATALOG + PPM679 CATEGORY/HIERARCHY/LINK SNAPSHOTS MUST INCLUDE THE 5 NEW PRODUCT PAGES AND 25 NEW ARTICLE CATEGORIES. PSTE DISCOVERS WORDPRESS PAGE TREE + FLAT CATEGORIES DYNAMICALLY BUT REQUIRES A FRESH SNAPSHOT/TOPIC MAP; PSERC/LINK REGISTRIES REQUIRE REGENERATION FROM THE UPDATED AUTHORITIES.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "PPA013_TEXT30_1_0_3_LIVE_PREFLIGHT_NOT_YET_RUN",
+    "first_blocker": "PPA013_PREVIEW5_AND_CROSSSYSTEM_CATEGORY_BINDINGS_NOT_YET_UPDATED",
     "evidence_ref": "release/affiliate-zentrale/evidence/ppa013_category_completion_delta_20260922.md",
     "recovery_target_ref": "protocol/AFFILIATE_RELEASE_PERFORMANCE_CLEANUP_PROTOCOL_20260922.md",
     "previous_blocker_after_recovery": "AFF-ERR-035",
@@ -864,6 +864,76 @@
         "affiliate_banner_logic": "NO_WRITE"
       },
       "next_action": "REPLACE HELPER 1.0.2 WITH 1.0.3 IN THE SAME PLUGIN SLOT. RUN PREFLIGHT. PREFLIGHT MUST CONFIRM EXACT 1.50.558 SHA, ALL 5 PAGE NODES, ALL 25 ARTICLE CATEGORY TERMS, 30/30 TEXT QUALITY, EXISTING GRID/ICON MARKERS, AND PERFORMANCE HELPER SHA. ONLY THEN APPLY ONCE AND RUN READBACK."
-    }
+    },
+    "cross_system_category_audit": {
+      "status": "HARD_AUDIT_PARTIAL_COMPLETE_ACTIONS_IDENTIFIED",
+      "scope": {
+        "new_product_pages": [
+          "pferdesaettel",
+          "trensen",
+          "offenstallbau",
+          "paddockbau",
+          "reitplatzbau"
+        ],
+        "new_article_categories_total": 25,
+        "total_new_nodes": 30
+      },
+      "preview_tile_fix": {
+        "affected_pages": 5,
+        "root_cause": "PPA-013 item_excerpt() uses page post_excerpt/post_content for page navigation cards; new five pages have no such preview source",
+        "existing_limit": "clean_excerpt() trims page navigation preview to 18 words",
+        "action": "add five short page preview excerpts in existing PPA-013 path; do not change 30 long editorial category texts",
+        "proposed_texts": {
+          "pferdesaettel": "Sättel für unterschiedliche Reitweisen, Pferderücken und Anforderungen an Passform, Druckverteilung und Komfort.",
+          "trensen": "Zäumungen für feine Hilfengebung, passende Verschnallung und eine pferdegerechte Einwirkung beim Reiten.",
+          "offenstallbau": "Planung und Bau von Offenställen mit passenden Laufwegen, Liegeflächen, Fressplätzen, Boden und Wetterschutz.",
+          "paddockbau": "Paddocks mit tragfähigem Aufbau, sicherer Einzäunung, guter Entwässerung und alltagstauglicher Flächenplanung.",
+          "reitplatzbau": "Reitplätze mit abgestimmtem Unterbau, Tretschicht, Entwässerung und Pflege für dauerhaft gute Nutzbarkeit."
+        }
+      },
+      "must_update_static_authorities": {
+        "affiliate_portal_structure": {
+          "path": "affiliate-portal-router/assets/portal-structure-v279.json",
+          "reason": "PPAR eBay catalog and System4 machine_point0 both bind to this static portal structure",
+          "expected_delta": "+5 product pages, +25 article categories"
+        },
+        "affiliate_ebay_catalog": {
+          "path": "affiliate-portal-router/assets/ebay-portal-catalog-v2.json",
+          "reason": "trait-ppar-ebay.php validates source hash and fixed target counts against portal structure; new targets require catalog regeneration and count/hash update"
+        },
+        "ppm679_contracts": {
+          "paths": [
+            "portal-production-machine/contracts/complete-portal-category-source-v1.json",
+            "portal-production-machine/contracts/category-hierarchy-snapshot-v1.json",
+            "portal-production-machine/contracts/wordpress-link-target-snapshot-v1.json"
+          ],
+          "reason": "System4 prewrite hard-validates category, hierarchy and link authority before article production"
+        }
+      },
+      "refresh_regenerate_no_hardcoded_source_proven": {
+        "pste": {
+          "plugin": "Portal SEO Topic Engine",
+          "reason": "diagnostic proves WORDPRESS_PAGE_TREE_PLUS_FLAT_CATEGORY_READ_ONLY hierarchy discovery",
+          "action": "fresh taxonomy/portal snapshot + topic map/research planning from current WordPress structure"
+        },
+        "pserc": {
+          "plugin": "Portal SEO Redaktionsplan Compiler",
+          "reason": "production contracts include PSERC_PORTAL_STRUCTURE_REGISTRY_V1 and consume SEO/structure authority",
+          "action": "regenerate editorial-plan/structure registry after PSTE refresh; do not manually invent category bindings"
+        },
+        "link_registry": {
+          "contracts": [
+            "portal_link_registry_snapshot_v2",
+            "WORDPRESS_LINK_TARGET_SNAPSHOT_V1"
+          ],
+          "action": "regenerate after structure update so new pages are eligible parent/semantic/further-information link targets"
+        }
+      },
+      "verified_already_contains_category_changes": {
+        "ppa013": "icons + exact7 desktop grid + 30 editorial long texts PASS per user; five short top-level tile previews remain missing"
+      },
+      "no_change_claim_not_made_for_uninspected_plugins": true
+    },
+    "next_action": "BUILD ONE CONSOLIDATED CATEGORY-INTEGRATION CHANGESET: (1) add five short PPA-013 tile preview texts using existing <=18-word card style, (2) update portal-structure-v279 and regenerate ebay-portal-catalog-v2 with new hash/counts/targets, (3) rebuild PPM679 category/hierarchy/link snapshots for all 30 nodes, (4) refresh PSTE from live WordPress structure, (5) regenerate PSERC/link registries, (6) hard positive/negative E2E before any live plugin replacement. DO NOT CREATE SEPARATE MICRO-PATCHERS."
   }
 }
