@@ -134,3 +134,19 @@ Im Run wurden fünf weitere Items mit `PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN` gepa
 - Exakt getestete ZIP: `PSTE-0.57.6-HOBBYROOM.zip`, SHA-256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
 - Evidence Artifact: `10679790400`, Digest `sha256:dfb41d91aaa6b485bef8c0497e2ed6888dec514ce4144286177439fd282d3cab`.
 - Status: Hobbyraum vollständig PASS; echter Nutzer-Live-PASS mit exakt diesen Bytes bleibt offen. Keine PPA-005-Promotion vorher.
+
+
+## PSTE-ERR-REAL-009 – Live PREPARE vor erstem Cursor durch globales Workflow-Inventory überladen
+- Live-Nachweis 0.57.4: `FINALIZE/PREPARE_CANDIDATES`, Cursor `0/96`, Driver/Queue/Step-Locks aktiv, anschließend `PSTE_DRIVER_STEP_OVERDUE`.
+- Technische Ursache: `previousCandidateInventory()` erzeugte für PREPARE eine globale Kandidatenprojektion über `allCandidates()` inklusive Relation-Hydrierung. Für den konkreten Duplicate-/Readiness-Pfad besitzt jedoch nur die aktuelle Themenfamilie Entscheidungsautorität.
+- Reparatur 0.57.5: familienbezogene Topic-Pool-Projektion; keine Occurrence-/Assignment-Hydrierung im Workflow-Inventory. Semantik wurde separat gegen Legacy-Projektion geprüft.
+- Gegenprobe: PREPARE-Stress mit 303 Kandidaten läuft mehrschrittig vollständig durch; kein STEP_OVERDUE.
+- Status: FIXED_AND_REPROVEN im finalen 0.57.6 Run `35693065234`.
+
+## PSTE-ERR-REAL-010 – Sicherer Abbruch verlor Wellenfortschritt / Neustart bei Null
+- Fehlerbild: bewusst abgebrochene Produktionswelle wurde bei erneutem Start als neue Baseline behandelt; bereits erzielte PASS-Themen und abgeschlossenes lokales Audit wurden nicht als Fortsetzung der gleichen Zielwelle übernommen.
+- Reparatur 0.57.6: Fortsetzung nur für kompatible, bewusst `CANCELLED_BY_USER` beendete TARGET_USABLE_CANDIDATES-Welle mit identischem Target, Max-Items und identischer Context-Binding-Hashbasis. Ursprüngliche Baseline und lokaler Audit-Zustand werden übernommen.
+- Positivbeweis: `PASS_CANCELLED_WAVE_PROGRESS_CONTINUED old=2 new=2`.
+- Negativschutz: Fortsetzung wird bei abweichendem Status, Ziel, Max-Items oder Context-Binding verweigert.
+- Safe-Cancel selbst: `PASS_SAFE_CANCEL_DURING_PREPARE_SETTLES_CLEANLY`; terminal Driver IDLE.
+- Status: FIXED_AND_REPROVEN im finalen 0.57.6 Run `35693065234`.
