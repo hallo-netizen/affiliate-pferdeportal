@@ -146,3 +146,14 @@ Nächste Arbeit ausschließlich nach `control/pste-topic-engine/CURRENT_STATE.js
 ### Klarstellung zu Begleitworkflows
 - Die am selben Head grünen Workflows `PSTE 0.57 Final ZIP Full Workflow Proof`, `PSTE Complete System Simulation Discovery` und `PSTE 0.57.1 Separate Process Full System Proof` rekonstruieren historische 0.57.0/0.57.1-Basen. Sie sind Regression-/Infrastrukturbeweise, **kein** exakter 0.57.6-Bytebeweis.
 - Autoritativer 0.57.6-Produktbeweis ist ausschließlich Real WordPress HTTP E2E Run `35693065234` mit ZIP SHA-256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`, ergänzt um lokalen Check dieser exakten ZIP: 131 Dateien, 76 PHP, 76/76 Lint PASS, vier geänderte Produktdateien gegenüber 0.57.4 und keine neu hinzugefügten Timeout-/Delete-/Remote-/Scheduling-/Sleep-/destruktiven SQL-Flächen.
+
+
+## Nachtrag 2026-09-22 – echter Nutzer-Live-Lauf 0.57.6
+- Exakter final getesteter Kandidat: 0.57.6, SHA-256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
+- Live positiv beobachtet: Produktionswelle läuft stabil über den früheren 0.57.4-PREPARE-Hänger hinaus. Sichtbare FINALIZE-Fortschritte durch PREPARE_CANDIDATES, PREPARE_COMMIT, SANDBOX_BATCH und CONTEXT_BATCH; kein erneuter STEP_OVERDUE im beobachteten Zeitraum.
+- Live negativ beobachtet: Safe-Cancel reagiert während aktivem FINALIZE nicht prompt. Nach Cancel-Klick wurden weitere FINALIZE-Unterstufen verarbeitet und danach eine weitere Familie sichtbar; UI meldete `PSTE_RESEARCH_JOB_NOT_FOUND`.
+- Damit ist die Live-Abnahme von Safe-Cancel NICHT bestanden; 0.57.6 darf noch nicht nach PPA-005 CURRENT.zip promoviert werden.
+- Aktueller laufender Zwischenstand laut UI: 5/40 neue eindeutige PASS-Themen, Familie 2 von max. 40, 2 geparkte blockierte Schritte, `PSTE_RESEARCH_JOB_NOT_FOUND` sichtbar.
+- Nutzerentscheidung: 40er Lauf nicht erneut abbrechen; stabilen Lauf weiterlaufen lassen.
+- Themenausbeute nicht aus Zwischenstand bewerten. Nach terminalem Lauf ausschließlich Semantic Sandbox auswerten: Anzahl Kandidaten, PASS, Ablehnungen und konkrete Ablehnungsgründe. Vorher keine Filteränderung.
+- Safe-Cancel-Fehler bleibt separat offen und wird erst nach Ende der laufenden Welle minimal repariert/retestet.
