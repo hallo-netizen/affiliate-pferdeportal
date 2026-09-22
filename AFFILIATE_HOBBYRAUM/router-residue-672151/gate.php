@@ -211,6 +211,7 @@ final class PPAR151_Residue_Gate {
 
 $GLOBALS['ppar151_gate']=new PPAR151_Residue_Gate();
 add_action('init',function(){
+    if(!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category','post',array('public'=>false));
     if(!term_exists('private-anzeigen','hp_listing_category')){
         wp_insert_term('Private Anzeigen','hp_listing_category',array('slug'=>'private-anzeigen'));
     }
