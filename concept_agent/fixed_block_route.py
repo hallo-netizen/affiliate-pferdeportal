@@ -8,6 +8,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+import binding_transport_gate
 import entry_hardlock
 import full_e2e_simulation
 import resumable_runner
@@ -63,26 +64,18 @@ def route_from_exception(exc: Exception) -> dict[str, Any]:
 
 
 def _fixture(root: Path, count: int) -> tuple[Path, Path, Path]:
-    binding = runner.simulation_binding(count)
-    binding_raw = (json.dumps(binding, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
-    transport = root / "CONCEPT_AGENT_CURRENT_WORK_BINDING.json"
+    base_pointer, binding_raw = binding_transport_gate.fixture(count)
+    binding = json.loads(binding_raw.decode("utf-8"))
+    transport = root / base_pointer["cross_chat_transport_filename"]
     transport.write_bytes(binding_raw)
 
     pointer = {
-        "contract": entry_hardlock.POINTER_CONTRACT,
-        "workflow": entry_hardlock.WORKFLOW,
-        "batch_sha256": binding["batch_sha256"],
-        "item_count": count,
+        **base_pointer,
         "intake_sha256": hashlib.sha256(("intake-"+str(count)).encode()).hexdigest(),
         "research_binding_sha256": hashlib.sha256(("research-"+str(count)).encode()).hexdigest(),
         "authoring_bindings_file_sha256": hashlib.sha256(("authoring-"+str(count)).encode()).hexdigest(),
-        "cross_chat_transport_filename": transport.name,
-        "cross_chat_transport_sha256": hashlib.sha256(binding_raw).hexdigest(),
-        "cross_chat_transport_binding_sha256": binding["binding_sha256"],
-        "cross_chat_transport_required": True,
         "article_bodies_present": False,
         "next_article_index": 0,
-        "publish_allowed": False,
     }
     current = {
         "concept_agent_current_batch": {
