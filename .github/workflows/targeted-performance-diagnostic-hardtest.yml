@@ -68,14 +68,16 @@ jobs:
       - name: Prove neutrality callsites and live menu shortcut probe
         run: |
           set -euo pipefail
-          cat > /tmp/gate.php <<'PHP'
+          cat > /tmp/menu-gate.php <<'PHP'
           <?php
           function fail_gate($m){ fwrite(STDERR,"FAIL ".$m."\n"); exit(1); }
+          $mode=(string)getenv('PADS_MODE');
           $u=get_user_by('login','admin'); wp_set_current_user($u->ID);
-          $post_id=wp_insert_post(array('post_title'=>'PADS Fixture Post','post_status'=>'publish','post_type'=>'post'));
+          $post=get_page_by_title('PADS Fixture Post',OBJECT,'post');
+          $post_id=$post ? (int)$post->ID : wp_insert_post(array('post_title'=>'PADS Fixture Post','post_status'=>'publish','post_type'=>'post'));
           update_post_meta($post_id,'pads_fixture_meta','fixture-value');
-          if(sanitize_key('Ab C')!=='abc') fail_gate('sanitize neutrality before');
-          if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality before');
+          if(sanitize_key('Ab C')!=='abc') fail_gate('sanitize neutrality');
+          if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality');
           $menu=wp_get_nav_menu_object('pads-menu');
           if(!$menu){
               $menu_id=wp_create_nav_menu('pads-menu');
@@ -91,26 +93,45 @@ jobs:
           $menu_id=(int)$menu->term_id;
           $desktop_args=array('menu'=>$menu_id,'theme_location'=>'primary','container'=>'nav','menu_class'=>'pftk-brand-menu-v15065','fallback_cb'=>false,'depth'=>3,'echo'=>false);
           $mobile_args=array('menu'=>$menu_id,'theme_location'=>'primary','container'=>'nav','menu_class'=>'pftk-mobile-menu-v15074','fallback_cb'=>false,'depth'=>3,'echo'=>false);
-          $GLOBALS['pads_measure']=false;
-          $d0=wp_nav_menu($desktop_args); $m0=wp_nav_menu($mobile_args);
-          $GLOBALS['pads_measure']=true;
-          pads_fixture_burn($post_id);
-          $d1=wp_nav_menu($desktop_args); $m1=wp_nav_menu($mobile_args);
-          if(hash('sha256',$d0)!==hash('sha256',$d1)) fail_gate('desktop changed');
-          if(hash('sha256',$m0)!==hash('sha256',$m1)) fail_gate('mobile changed');
-          if(sanitize_key('Ab C')!=='abc') fail_gate('sanitize neutrality after');
-          if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality after');
-          $trace=pads_targeted_trace();
-          if(($trace['sanitize_key']['fires']??0)<10000) fail_gate('sanitize count missing');
-          if(($trace['get_post_metadata']['fires']??0)<2500) fail_gate('meta count missing');
-          $flat=wp_json_encode($trace);
-          if(strpos($flat,'pads-fixture')===false) fail_gate('fixture callsite missing');
-          $probe=(array)$GLOBALS['pads_menu_probe'];
-          if(($probe['desktop_args']??0)!==1 || ($probe['mobile_args']??0)!==1) fail_gate('menu classes not hit');
-          if(($probe['desktop_perf_filter_seen']??0)!==1 || ($probe['mobile_perf_filter_seen']??0)!==1) fail_gate('performance filter not seen');
-          if(($probe['mobile_pre_nonnull']??0)<100) fail_gate('mobile shortcut not observed');
-          echo "TRACE ".wp_json_encode($trace)."\n";
-          echo "PROBE ".wp_json_encode($probe)."\n";
-          echo "PASS targeted diagnostic neutral; caller attribution works; design shortcut observed\n";
+          if($mode==='measured'){
+              $GLOBALS['pads_measure']=true;
+              pads_fixture_burn($post_id);
+          }
+          $desktop=wp_nav_menu($desktop_args);
+          $mobile=wp_nav_menu($mobile_args);
+          $out=array(
+              'desktop_sha256'=>hash('sha256',(string)$desktop),
+              'mobile_sha256'=>hash('sha256',(string)$mobile)
+          );
+          if($mode==='measured'){
+              if(sanitize_key('Ab C')!=='abc') fail_gate('sanitize neutrality after');
+              if(get_post_meta($post_id,'pads_fixture_meta',true)!=='fixture-value') fail_gate('meta neutrality after');
+              $trace=pads_targeted_trace();
+              if(($trace['sanitize_key']['fires']??0)<10000) fail_gate('sanitize count missing');
+              if(($trace['get_post_metadata']['fires']??0)<2500) fail_gate('meta count missing');
+              if(strpos(wp_json_encode($trace),'pads-fixture')===false) fail_gate('fixture callsite missing');
+              $probe=(array)$GLOBALS['pads_menu_probe'];
+              if(($probe['desktop_args']??0)!==1 || ($probe['mobile_args']??0)!==1) fail_gate('menu classes not hit');
+              if(($probe['desktop_perf_filter_seen']??0)!==1 || ($probe['mobile_perf_filter_seen']??0)!==1) fail_gate('performance filter not seen');
+              if(($probe['mobile_pre_nonnull']??0)<100) fail_gate('mobile shortcut not observed');
+              $out['trace']=$trace; $out['probe']=$probe;
+          }
+          echo wp_json_encode($out)."\n";
           PHP
-          /tmp/wp eval-file /tmp/gate.php --path=/tmp/wp-site
+
+          /tmp/wp plugin deactivate pa-performance-diagnose-safe --path=/tmp/wp-site
+          PADS_MODE=baseline /tmp/wp eval-file /tmp/menu-gate.php --path=/tmp/wp-site > /tmp/baseline.json
+          /tmp/wp plugin activate pa-performance-diagnose-safe --path=/tmp/wp-site
+          PADS_MODE=measured /tmp/wp eval-file /tmp/menu-gate.php --path=/tmp/wp-site > /tmp/measured.json
+
+          python3 - <<'PY'
+          import json
+          b=json.load(open('/tmp/baseline.json'))
+          m=json.load(open('/tmp/measured.json'))
+          print('BASELINE',b)
+          print('MEASURED',m)
+          assert b['desktop_sha256']==m['desktop_sha256'], 'desktop output changed'
+          assert b['mobile_sha256']==m['mobile_sha256'], 'mobile output changed'
+          assert m['probe']['mobile_pre_nonnull'] >= 100
+          print('PASS targeted diagnostic neutral across fresh requests; caller attribution works; design shortcut observed')
+          PY
