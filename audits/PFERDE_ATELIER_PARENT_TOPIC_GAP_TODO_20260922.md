@@ -34,10 +34,10 @@ Boxen & Türen ausdrücklich ausgeschlossen.
 - [x] Namensregel festgelegt: nur Sattel -> Sattel & Zubehör; vier andere Parents bleiben sichtbar unverändert
 
 ### 2. Allgemeingültige Kategorie-Workflow-Regel
-- [ ] PARENT_TOPIC_GAP als echte Prüfregel in den Kategorie-Workflow integrieren
-- [ ] Positivfälle testen
-- [ ] Negativfälle testen: Decken, Hufe, Boxen & Türen, Halfter & Stricke
-- [ ] kein automatisches Schreiben allein aufgrund der Erkennung
+- [x] PARENT_TOPIC_GAP als verbindliches Final-Sichtprüfungs-Gate in Kategorie-Workflow 1.8.1 integrieren
+- [x] Positivfälle lokal 1:1 gegen Live-Snapshot testen: Sattel, Trensen & Gebisse, Offenstall, Paddock, Reitplatz
+- [x] Negativfälle lokal 1:1 testen: Decken, Hufe, Boxen & Türen, Halfter & Stricke
+- [x] kein automatisches Schreiben allein aufgrund der Erkennung; Admin/Validator enthalten 0 Struktur-Write-APIs
 
 ### 3. Delta für Pferde Atelier
 - [ ] exakt fünf neue Produkt-/Themenknoten planen
@@ -95,3 +95,18 @@ Boxen & Türen ausdrücklich ausgeschlossen.
 - Reitplatz: ID 120, Slug `weide-reitplatz`; direkte Kinder: Reitplatzboden, Reitplatzdrainage, Reitplatzumrandung, Reitplatzbeleuchtung, Reitplatzbewässerung, Reitplatzspiegel.
 - Direkte Produktions-/Artikelkategorien an den fünf Parent-IDs: jeweils 0.
 - Im geprüften Live-Snapshot keine exakten Kollisionen für `pferdesaettel`, `trensen`, `offenstallbau`, `paddockbau`, `reitplatzbau`.
+
+
+## Erster Plugin-Build
+
+- Kandidat: Affiliate-Portal Kategorie-Workflow 1.8.1
+- Änderung: ausschließlich PARENT_TOPIC_GAP-Finalprüfung + serverseitiges Bestätigungsgate + signierte Bestätigung; keine automatische Strukturanlage.
+- Vorab-Live-Simulation: 994/994 PASS auf dem 1124-Zeilen-PSTE-Live-Struktursnapshot.
+- Positiv: Sattel, Trensen & Gebisse, Offenstall, Paddock, Reitplatz.
+- Negativ: Decken, Hufe, Boxen & Türen, Halfter & Stricke.
+- Bestehende Seiten-Slugs/Parents unverändert; 1124/1124 bestehende Artikelkategorien in der Simulation unverändert.
+- Vollständige Plugin-Regression: 220/220 PASS.
+- PHP-Lint: 15/15 PASS.
+- Installierbares ZIP nach Neu-Extraktion erneut getestet: 220/220 PASS.
+- ZIP SHA-256: 1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b
+- Live noch nicht installiert.
