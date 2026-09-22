@@ -82,3 +82,36 @@ Manifest-Hash und Größe gegen inneres LanguageTool-ZIP PASS; 2.051 ZIP-Einträ
 
 ERGEBNIS:
 GELB / archiviert / keine Allgemeingültigkeits- oder Aktivfreigabe.
+
+
+## HM-003 – Repository-Besen-Audit 2026-09-22
+
+DATUM:
+2026-09-22
+
+AUFTRAG:
+Einmaliger Hausmeisterdurchlauf über den aktiven GitHub-`main` mit harter Sperre:
+aktuelle Einträge und aktuelle Plugins niemals löschen oder verschieben.
+
+PRÜFUNG:
+- Hausmeister-Regel frisch gelesen;
+- Autoritätsplan frisch gelesen;
+- Pferde-Atelier-PLUGINS Current + Register frisch gelesen;
+- kompletter `main`-Tree frisch vermessen;
+- große ZIP-Blöcke nach Größe identifiziert;
+- neun historische/diagnostische Root-ZIPs nach exaktem Namen auf aktive Referenzen im Default-Branch geprüft;
+- Ursprungscommits dieser neun Dateien frisch gelesen.
+
+ERGEBNIS:
+- **0 Dateien gelöscht**;
+- **0 aktuelle Pluginartefakte angefasst**;
+- **0 aktive Current-/Ziel-/Fehler-/Routingautoritäten verschoben**;
+- neun große Dateien als `ARCHIVKANDIDAT / NO DELETE` klassifiziert;
+- Kandidatenvolumen ca. 70.25 MB;
+- Detailbeleg: `ARCHIV/REPOSITORY_BESEN_AUDIT_20260922.md`.
+
+WARUM KEINE LÖSCHUNG:
+Hausmeister darf laut verbindlichem Prozess Dateien nicht löschen. Außerdem ist fehlender aktueller Dateinamensverweis allein kein ausreichender Löschbeweis.
+
+ERGEBNISSTATUS:
+PASS / sicherer Auditlauf / keine aktive Wahrheit verändert.
