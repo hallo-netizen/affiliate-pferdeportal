@@ -1,0 +1,15 @@
+{
+  "id":"term-ganasche",
+  "begriff":"Ganasche",
+  "synonyme":["Backenpartie"],
+  "oberbereich":"Exterieur",
+  "unterbereich":"Kopf",
+  "kurzdefinition":"Bezeichnung für die seitliche Unterkiefer-/Backenpartie des Pferdekopfes.",
+  "facherklaerung":"In Zuchtbeschreibungen wird die Ausprägung der Ganaschen zusammen mit Kehlgang und Ganaschenfreiheit beurteilt. Zu starke oder enge Ganaschen können als unerwünschtes Exterieurmerkmal beschrieben werden.",
+  "abgrenzung":"Ganasche bezeichnet nicht den gesamten Unterkiefer und nicht den Kehlgang selbst.",
+  "verwandte_begriffe":["Ganaschenfreiheit","Kehlgang","Kopf"],
+  "seo_status":"NICHT_GEPRUEFT",
+  "quellen":[{"organisation":"Deutsche Reiterliche Vereinigung (FN)","titel":"Merkblatt – Körpermerkmale des Reitpferdes","url":"https://www.pferd-aktuell.de/shop/downloadable/download/sample/sample_id/342/","trust":"A","beleg":"Ganasche als bewertetes Merkmal des Kopfes"},{"organisation":"Deutsche Reiterliche Vereinigung (FN)","titel":"Islandpferd – Zuchtziel","url":"https://app.pferd-aktuell.de/pferdezucht/ponys/ponyrassen/islandpferd","trust":"A","beleg":"Ganaschen und Ganaschenfreiheit im Kopfstandard"}],
+  "recherche_status":"GEPRUEFT",
+  "letzte_pruefung":"2026-09-12"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "breed-cheval-sport-anglo-normand",
+  "schema_version": "1.1",
+  "rassename_de": "Cheval de Sport Anglo-Normand",
+  "originalname": "Cheval de Sport Anglo-Normand",
+  "synonyme": ["CSAN"],
+  "formaler_status": "eigenständiges französisches Sportpferde-Zuchtprogramm mit eigenem Livre Généalogique",
+  "anerkennungsquelle": "IFCE / Stud-book Cheval de Sport Anglo-Normand",
+  "typ": "Pferd",
+  "rassegruppen": ["Sportpferd", "Warmblut"],
+  "herkunft_land": "Frankreich",
+  "herkunft_region": "Normandie / Frankreich",
+  "geschichte_entstehung": "Französisches Sportpferde-Zuchtprogramm mit anglo-normannischem Bezug und eigenem genealogischen Register.",
+  "urspruengliche_nutzung": ["Reit- und Sportpferd"],
+  "heutiger_einsatz": ["Sport", "Zucht"],
+  "stockmass": "nicht_recherchiert",
+  "gewicht": "nicht_recherchiert",
+  "exterieur_gesamt": "Sportpferdetyp; Detailstandard noch nachzurecherchieren",
+  "charakter_temperament": "nicht_recherchiert",
+  "gesundheit_genetik": "nicht_recherchiert",
+  "zucht_zuchtziel": "leistungsorientiertes Sportpferd innerhalb des eigenständigen französischen Zuchtprogramms",
+  "bestand_gefaehrdungsstatus": "nicht_recherchiert",
+  "besondere_fakten": [],
+  "quellen": [
+    {"organisation":"IFCE","titel":"Programmes de sélection et règlements des livres généalogiques – Cheval de Sport Anglo-Normand","url":"https://www.ifce.fr/ifce/sire-demarches/reglementation/reglements-et-programmes-de-selection/","trust":"A","felder":["formaler_status","anerkennungsquelle","zucht_zuchtziel"]},
+    {"organisation":"IFCE","titel":"Quels papiers pour mon cheval ?","url":"https://www.ifce.fr/ifce/sire-demarches/infos-tarifs-sire/quels-papiers-pour-mon-cheval/","trust":"A","felder":["formaler_status","herkunft_land","herkunft_region"]}
+  ],
+  "recherche_status": "GEPRUEFT_MIT_OFFENEN_FELDERN",
+  "letzte_pruefung": "2026-09-13"
+}

@@ -1,0 +1,224 @@
+# BAUCONTAINER – BAUPLAN
+
+STAND: 2026-09-08
+STATUS: V1
+
+## Grundmodell
+
+```
+CAMPUS
+├── HAUPTPFÖRTNER
+├── PB ONE – gemeinsame Agenturzentrale
+│   ├── AKTENSCHRANK
+│   │   ├── PLUGINS
+│   │   ├── PREISE
+│   │   ├── VERTRIEB
+│   │   └── TODO
+│   ├── IDEENWERKSTATT
+│   ├── ENTWICKLUNGSRAUM
+│   ├── ARBEITSDOKUMENTE
+│   └── PRÄSENTATION & WERBUNG / ANGEBOTE & FLYER
+├── PROJEKTGEBÄUDE
+│   └── BÜRO
+│       └── HOBBYRAUM
+└── ALLGEMEINGÜLTIGE BAUSTEINE
+    └── MODULREGISTER
+```
+
+Seitlich:
+- Handlungsverzeichnis
+- WordPress-Register (Technologieindex, keine zweite Wahrheit)
+- Fehlerregister
+- Änderungs-/Erklärungsregister
+- Zielverträge
+- Archiv
+- Baucontainer
+- Hausmeister
+- Maschinenraum
+- Paul
+- Notfall-Tresor
+
+## Campus-Haupteingang
+
+`../START_HERE.md` → `../HAUPTPFOERTNER.md`
+
+Alltagssprache ist zulässig; Routing bleibt trotzdem deterministisch.
+
+## Verbindlicher Eingangsstandard
+
+Siehe:
+`EINGANGSSTANDARD.md`
+
+Campus-, Gebäude-, Büro- und Paul-Eingänge müssen oben sofort erklären:
+**Was ist das? Wo bin ich richtig? Was darf ich? Was darf ich nicht? Wo geht es weiter?**
+
+Grundsatz:
+**Ein Klick = alles klar.**
+
+## Verwaltungsrollen – harte Grenze
+
+### Hauptpförtner
+Nur:
+- lesen;
+- orientieren;
+- routen;
+- Stand zurückmelden.
+
+Nie:
+- Fachinhalt ändern;
+- Architektur ändern;
+- technische Arbeit ausführen.
+
+### Hausmeister
+Nur:
+- unveränderte historische Akten ordnen/verschieben;
+- Archiv-/Hausmeister-Indizes pflegen;
+- Hashes/Dubletten dokumentieren;
+- Aufräumbedarf melden.
+
+Nie:
+- Fachinhalte editieren;
+- CURRENT_STATE/START_HERE/HOBBYRAUM umschreiben;
+- Status fachlich neu bewerten;
+- reparieren;
+- löschen.
+
+## Rollentrennung
+
+Ein Chat darf mehrere Rollen nacheinander haben.
+
+Aber:
+**Rolle bestimmt Rechte.**
+
+Beispiel:
+Pförtner liest/routet → Pförtnerrolle endet → erst danach beginnt Facharbeit.
+
+Architekturänderung:
+Pförtner-/Hausmeisterrolle verlassen → ausdrücklich Baucontainer-Rolle → Bauprotokoll + Änderungsregister.
+
+## Organischer Grundsatz
+
+Der Campus ist ein wachsender Prozess.
+
+Jeder Chat darf bei echtem Arbeitsbedarf die Architektur verbessern, aber nur in der Baucontainer-Rolle und mit KISS/Protokollpflicht.
+
+Keine Räume auf Vorrat.
+
+## Architektur beobachtet sich selbst
+
+- `BAUPLAN.md` → aktuelle Architektur
+- `BAUAENDERUNGEN.md` → dauerhafte Umbauten
+- `BAUPROTOKOLL.md` → chronologisches Baugeschehen
+- `ENTWICKLUNGSPROTOKOLL.md` → Ideen, Einwände, verworfene Varianten und offene Architekturgedanken
+- `ARCHITEKTUR_FEHLERKISTE.md` → Architekturfehler
+- `HAUSMEISTER.md` → reine Ordnungsverwaltung
+- `EINGANGSSTANDARD.md` → 1-Klick-Orientierung
+- `HOBBYRAUM_STANDARD.md` → ein Arbeitsraum pro Büro / FREI-AKTIV-BLOCKED
+- `BAUABNAHME_20260905.md` → letzter harter Abnahmebeleg
+
+## PB ONE – gemeinsame Agentur
+
+PB ONE ist der zentrale nicht-technische Agenturknoten.
+
+Nutzer und Paul haben dort dieselben redaktionellen Rechte.
+
+Arbeitslogik:
+- dauerhafte Referenzen → `PB_ONE/AKTENSCHRANK/`;
+- Rohideen → `PB_ONE/IDEENWERKSTATT/`;
+- belastbare Konzepte → `PB_ONE/ENTWICKLUNGSRAUM/`;
+- laufende Unterlagen → `PB_ONE/ARBEITSDOKUMENTE/`;
+- Angebote/Flyer → `PB_ONE/ANGEBOTE_FLYER/`.
+
+Harte Grenze:
+Keine Programmierung in PB ONE.
+Technische/projektspezifische Umsetzung wird bewusst an ein Projekt-/Fachbüro übergeben.
+
+## Hauptwahrheit
+
+Für jede Wahrheit möglichst ein Hauptort.
+
+Allgemeiner Modul-Kern:
+ALLGEMEINGÜLTIGE BAUSTEINE.
+
+Projektbezogene Nutzung:
+Projektbüro.
+
+## WordPress-Register
+
+`WORDPRESS_REGISTER.md` ist ein campusweiter Technologieindex.
+
+Es zeigt:
+- vorhandene Plugin-/Installer-Artefakte;
+- Dateibelege/Versionen;
+- zuständige Hauptquelle.
+
+Es entscheidet NICHT:
+- Modulklasse;
+- LIVE-/Release-Status;
+- Fachwahrheit.
+
+Damit bleibt es ein Wegweiser und erzeugt keine zweite Wahrheit.
+
+## Projektstart
+
+Hauptpförtner → Ziel/Anforderungen → Modulregister → passende Module → minimales Projektgebäude.
+
+Neue Projektgebäude zusätzlich:
+- `NEUES_PROJEKT_VORLAGE.md`;
+- jedes neue Verzeichnis mit `START_HERE.md`;
+- jedes Büro mit CURRENT_STATE + genau einem HOBBYRAUM;
+- Arbeitsleitungen zu Handlungs-/Fehler-/Änderungs-/Zielregister;
+- abschließende Positiv-/Negativ-Bauabnahme.
+
+## Masterdateien
+
+Alles vollständig inventarisieren.
+Default bei unklarer Modulzuordnung:
+**UNGEKLÄRT.**
+
+## Zugriffsschutz
+
+Campus-Prototyp aktuell unter `protocol/PROJECT_MEMORY/`.
+
+Offene Empfehlung:
+später eigener privater Campus-Repository.
+
+## Notfall-Tresor
+
+Eingang:
+`../TRESOR/START_HERE.md`
+
+Verbindliche Sicherungsarchitektur für den aktuellen Auftrag:
+**eine GitHub-Backupfachlogik → zwei unabhängige Sicherungswege.**
+
+- Tresor automatisch + extern;
+- lokales Backup manuell + Mac.
+
+WordPress, Website und Projektarchiv sind ausdrücklich nicht Bestandteil dieses Backupauftrags.
+
+Nur ein real restore-geprüfter Stand darf als GitHub-PASS bezeichnet werden.
+
+## Umbauprinzip
+
+Unklarer Bestand:
+**nicht verschieben, nicht löschen, nicht umdeuten.**
+
+
+## Sicherungsarchitektur – Zuständigkeit
+
+**Baucontainer definiert. Tresor führt aus.**
+
+Baucontainer:
+- genau eine gemeinsame Backupfachlogik;
+- KISS;
+- zwei ausdrücklich gebundene unabhängige Auslöser/Speicherorte, keine dritte Parallelarchitektur.
+
+Tresor:
+- GitHub vollständig sichern;
+- automatischen externen Wochenweg betreiben;
+- lokalen Doppelklick-Weg als zweite unabhängige Sicherung führen;
+- je Lauf genau eine geprüfte Sicherungsdatei bilden;
+- Git-/Ref-/Campus-Restore real prüfen;
+- Providergrenzen für nicht exportierbare GitHub-Daten fail-closed ausweisen.
+
+Der Tresor ist nie Arbeitsquelle.

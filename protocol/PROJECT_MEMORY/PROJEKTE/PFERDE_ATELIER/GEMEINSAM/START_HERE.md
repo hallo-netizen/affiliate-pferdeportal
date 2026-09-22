@@ -1,0 +1,72 @@
+# BÜRO GEMEINSAM
+
+<!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
+
+## HARD RULE – EINE CURRENT-AUTORITÄT
+
+Diese Tür ist **nur Navigation**.
+
+Pflichtweg:
+`START_HERE → protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION`.
+
+Eine Ausführungsfläche/Hobbyraum ist niemals Current-Autorität.
+Bei frischer unveränderter Bindung: keine Vollrekonstruktion.
+Bei Änderung: nur Delta prüfen.
+
+
+## 1-KLICK-ÜBERSICHT
+
+**WAS IST DAS?**  
+Der Raum für echte fachübergreifende Regeln und gemeinsame Referenzen innerhalb des Pferde-Ateliers.
+
+**HIER BIST DU RICHTIG, WENN …**  
+eine Regel nachweislich mehrere Pferde-Atelier-Büros gemeinsam betrifft.
+
+**DU DARFST …**  
+gemeinsame Referenzen und ausdrücklich fachübergreifende Projektregeln verwalten.
+
+**DU DARFST NICHT …**  
+Unklares hier abladen, Fachzuständigkeiten verwischen oder fremde Büroinhalte ersetzen.
+
+**ALS NÄCHSTES …**  
+`AUTORITAETSPLAN.json` → Current-Autorität → Frischecheck → NEXT ACTION → ggf. `HOBBYRAUM.md`.
+
+
+## SCHNELLWEGWEISER – EINE WAHRHEIT
+
+- **CURRENT-AUTORITÄT:** ausschließlich über `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` auflösen
+- **NEXT ACTION:** aus derselben Current-Autorität; Hobbyraum nur Ausführung
+- **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
+- **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
+- **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+- **HISTORIE / ROHARCHIV:** `protocol/PROJECT_MEMORY/ARCHIV/REGISTER.md`
+
+**Regel:** Diese Bürotür wiederholt keinen aktuellen Blocker, keine aktuelle Version und keinen Zielinhalt als zweite Wahrheit.
+
+## Regel
+
+Unklare Zuständigkeit bleibt:
+**UNGEKLÄRT**, bis sie geklärt ist.
+
+## Arbeitsfreigabe bei echter Arbeit
+
+Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
+
+Vor jeder Änderung:
+1. `protocol/PROJECT_MEMORY/AUTORITAETSPLAN.json` lesen;
+2. zuständige Current-Autorität frisch prüfen und deren NEXT ACTION lesen;
+3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
+4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
+5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
+6. aktiven Zielvertrag über `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md`;
+7. erst danach gebundene Arbeitsrolle/Branch.
+
+Lesen/Orientieren allein erzeugt keine Schreibbefugnis.
+
+## Globale Arbeitsort-Sperre
+
+**Tresor, Archiv, Backup und Git-Mirror sind niemals Werkbank oder Runner-Quelle.**
+
+Autorität:
+`protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
+

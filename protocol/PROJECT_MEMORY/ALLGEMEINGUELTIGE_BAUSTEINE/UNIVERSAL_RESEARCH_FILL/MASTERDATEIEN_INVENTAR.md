@@ -1,0 +1,46 @@
+# UNIVERSAL RESEARCH & FILL – MASTERDATEIEN-INVENTAR
+
+STAND: 2026-09-05
+MODUS: SORTIERUNG / KEINE FACHINHALTSÄNDERUNG
+
+## URF-001 – Plugin 1.9.9
+Datei: `universal-research-fill-v1.9.9.zip`
+SHA-256: `154102215a0ef4bf7de3362dbf835f05dc5c10b870e3507dbf173c62fb7079e0`
+Größe: 78.228 Bytes
+ZIP-Einträge: 28
+STATUS: AKTUELLER PLUGIN-DATEIBELEG.
+
+## URF-002 – Master 1.9.9
+Datei: `UNIVERSAL_RESEARCH_FILL_MASTER_V1.9.9.zip`
+SHA-256: `452fe76c60f770fa95b9e10bcfa50e23f37efe8051a6c194700b7237d502dcbd`
+Größe: 3.059.811 Bytes
+ZIP-Einträge: 243
+STATUS: AKTUELLE MASTERAKTE.
+ARTEFAKTKLASSE: GEMISCHTE MASTERAKTE.
+
+## Plugin ↔ Master
+Im Master: `CURRENT_PLUGIN/universal-research-fill-v1.9.9.zip`
+Ergebnis: byte-identisch zum externen Plugin-ZIP.
+
+## Historisch
+Plugin 1.9.5:
+SHA-256 `df1fbef24b9f9cf1863548a86508edf4bc24d6ed85d54dd56c4f66322063c9b0`
+
+Master 1.9.5:
+SHA-256 `ff3381c3f4ca8922b149e4fd337f5158fe02c42f1128634f224c13a4dcb982f5`
+
+## Projektbezug
+Strukturell vorhanden:
+`config/pferde-atelier.php`
+
+Zuordnung:
+Pferde-Atelier-Anwendung → `PROJEKTE/PFERDE_ATELIER/HIVEPRESS/`
+
+## Archiv
+Aktuell:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/2026-09-05/`
+
+Historisch:
+`/Campus-Archiv/ALLGEMEINGUELTIGE_BAUSTEINE/UNIVERSAL_RESEARCH_FILL/HISTORISCH/`
+
+LOKALE_KOPIE_ENTBEHRLICH: NEIN

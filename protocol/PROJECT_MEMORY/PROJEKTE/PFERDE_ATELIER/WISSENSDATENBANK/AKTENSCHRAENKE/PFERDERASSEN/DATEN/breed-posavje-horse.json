@@ -1,0 +1,32 @@
+{
+  "id":"breed-posavje-horse",
+  "schema_version":"1.1",
+  "rassename_de":"Posavje-Pferd",
+  "originalname":"Posavski konj",
+  "synonyme":["Posavje Horse","Posavina Horse"],
+  "formaler_status":"anerkannte slowenische Pferderasse mit anerkanntem Zuchtprogramm",
+  "anerkennungsquelle":"Government of Slovenia / anerkannte Züchterorganisation",
+  "typ":"Pferd",
+  "rassegruppen":["Kaltblut","Landrasse","slowenische einheimische Rasse"],
+  "herkunft_land":"Slowenien / grenzüberschreitender Posavina-Raum",
+  "herkunft_region":"Posavje / Save-Tal",
+  "geschichte_entstehung":"Traditionelle Pferderasse des Posavje-/Posavina-Raums; in Slowenien als eigene indigene Pferderasse mit anerkanntem Zuchtprogramm geführt.",
+  "urspruenglicher_lebensraum":"Fluss- und Agrarlandschaften entlang der Save",
+  "anpassungen_aus_lebensraum":["Robustheit","Arbeitsfähigkeit"],
+  "urspruengliche_nutzung":["Landwirtschaft","Zugarbeit","Transport"],
+  "heutiger_einsatz":["Zucht","Erhaltungszucht","Freizeit","Zugarbeit"],
+  "stockmass":"nicht_recherchiert","gewicht":"nicht_recherchiert","exterieur_gesamt":"nicht_recherchiert","kopf":"nicht_recherchiert","hals":"nicht_recherchiert","ruecken_rumpf":"nicht_recherchiert","kruppe_hinterhand":"nicht_recherchiert","gliedmassen_fundament":"nicht_recherchiert",
+  "fellfarben":"nicht_recherchiert","zeichnungen_besonderheiten":"nicht_recherchiert","maehne_schweif_behang":"nicht_recherchiert","bewegung_gangarten":"nicht_recherchiert","charakter_temperament":"nicht_recherchiert","lernverhalten_arbeitsbereitschaft":"nicht_recherchiert","robustheit_klimaanpassung":"nicht_recherchiert",
+  "haltung_besonderheiten":"nicht_recherchiert","fuetterung_besonderheiten":"nicht_recherchiert","gesundheit_genetik":"nicht_recherchiert","lebenserwartung":"nicht_belegt",
+  "heutige_verbreitung":"Slowenien; verwandte/benachbarte Bestände im kroatischen Posavina-Raum fachlich separat zu prüfen",
+  "zucht_zuchtziel":"Erhaltung und züchterische Betreuung der Posavje-Population.",
+  "bestand_gefaehrdungsstatus":"indigene slowenische Rasse; aktueller Bestand im nationalen Biodiversitätsmonitoring erfasst",
+  "besondere_fakten":[],
+  "quellen":[
+    {"organisation":"Government of Slovenia","titel":"Konjereja","url":"https://www.gov.si/teme/konjereja/","trust":"A","felder":["formaler_status","anerkennungsquelle","zucht_zuchtziel"]},
+    {"organisation":"Environmental Agency of Slovenia / Ministry of Agriculture","titel":"Genetic diversity - domestic animals","url":"https://kazalci.arso.gov.si/en/content/genetic-diversity-domestic-animals-4?tid=1","trust":"A","felder":["bestand_gefaehrdungsstatus","heutige_verbreitung"]}
+  ],
+  "recherche_status":"GEPRUEFT_MIT_OFFENEN_FELDERN",
+  "letzte_pruefung":"2026-09-13",
+  "zusatzfelder":{}
+}
