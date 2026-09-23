@@ -1,7 +1,0 @@
-{
-  "contract": "CONCEPT_AGENT_BINDING_PERSIST_REQUEST_V1",
-  "mode": "persist-binding",
-  "publish_allowed": false,
-  "request_id": "negative-binding-persist-20260922-1944",
-  "transport_b64": "e30K"
-}

@@ -188,7 +188,6 @@ def m21():
                 "status":"PREPARED_NOT_VISIBLE",
                 "source_step_id":"RUN_NEW_ARTICLE_BATCH_NO_STOP",
                 "source_sequence":107007,
-                "runtime_generation":1,
                 "publish_allowed":False,
                 "staged_outputs":[{"source_ref":"q/"+article.name,"staged_ref":"staged/"+article.name,"sha256":sha(article)}],
             }
