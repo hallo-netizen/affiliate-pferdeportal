@@ -40,22 +40,33 @@ Hart verboten:
 
 Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`.
 
-### Harte Wiedereinstiegsregel
+### Harte Wiedereinstiegsregel – alle Phasen
 
-Sobald derselbe Batch `MACHINE_READY` erreicht hat und die Produktionsbindung erzeugt wurde, ist **nur noch der letzte gültige Produktionscheckpoint** Fortsetzungsautorität.
+Sobald derselbe Batch `MACHINE_READY` erreicht hat, gilt nach **jeder** Unterbrechung ausschließlich:
 
-Nach jeder Unterbrechung muss zuerst `progress_guard.py resume BINDING CHECKPOINT` erfolgreich sein. Der hashgebundene Wert `allowed_action` ist die **einzige** erlaubte nächste Produktionsaktion.
+`concept_agent/universal_reentry_guard.py`
+
+Der normale Produktionscheckpoint bestimmt weiterhin Artikel und äußeren Schritt. Der Universal-Reentry-Checkpoint bindet zusätzlich den **vollständigen echten Arbeitszustand** des aktuell laufenden Artikels.
+
+Das gilt unabhängig davon, ob die Unterbrechung bei Recherche, Faktenprüfung, Kontext, Schreiben, Fullcheck, LT/PPM-Reparatur, Output-Gate, Signatur, Artikelabschluss, PSERC oder ENDSTEMPEL passiert.
 
 Hart:
-- fehlt der Checkpoint: **STOP**,
-- passt Batch, Binding, Hash oder `allowed_action` nicht exakt: **STOP**,
+- fehlt der gültige Produktionscheckpoint: **STOP**,
+- läuft bereits ein Artikel und fehlt seine gültige Recovery-Kapsel: **STOP**,
+- falscher Batch, Artikel, Plan-Slot, Phase, Text-Hash, Prüfbefund, Revision oder Kapsel-Hash: **STOP**,
+- Phasensprung oder Artikelwechsel ohne erlaubten Übergang: **STOP**,
+- der Chat besitzt **keine freie Ausführungsautorität**,
+- der Chat darf beim Wiedereinstieg **weder Repository noch Prüferdateien/Binaries frei suchen**,
 - kein Wiederaufbau aus Chat-Erinnerung,
-- kein Ableiten des nächsten Schritts aus alten Zuständen oder Recovery-Dateien,
-- kein Batch-Import bereits vorhandener Artikel,
-- immer nur genau **ein** vom Checkpoint freigegebener Artikel,
-- nach LT-/PPM-Reparatur bleibt derselbe Artikel gebunden,
+- kein Ableiten aus alten Zuständen, Recovery-Artikeln oder historischen Wegen,
+- nur der exakt gebundene nächste Worker-/Prüfschritt ist zulässig,
+- Reparatur bleibt beim selben Artikel,
+- PSERC und ENDSTEMPEL liegen ebenfalls hinter derselben Wiedereinstiegssperre,
+- nach ENDSTEMPEL-PASS ist ausschließlich STOP erlaubt,
 - nach `MACHINE_READY` desselben Batches darf `text-start` nicht erneut ausgelöst werden.
 
-`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Für die Fortsetzung eines bereits gestarteten Produktionslaufs ist danach der gültige Produktionscheckpoint maßgeblich.
+Ein Wiedereinstieg ohne vollständigen beweisbaren Zustand darf daher **niemals** durch Suchen, Raten oder einen Ersatzweg repariert werden.
+
+`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Danach bestimmen ausschließlich die gültig verketteten Produktions-/Reentry-Checkpoints die Fortsetzung.
 
 `text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
