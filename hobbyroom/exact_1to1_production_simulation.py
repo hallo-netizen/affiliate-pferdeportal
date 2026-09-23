@@ -199,7 +199,7 @@ def build_sim_worker(repo: Path) -> Path:
     srcp=repo/"isolated_system4/deterministic_test_worker.py"
     text=srcp.read_text(encoding="utf-8")
     old="direct = html.escape(str(bound.get('faq_direct_answer') or '').strip())"
-    new="title_text=str(state['article']['title']).strip(); direct = html.escape(('Dieser Simulationsartikel behandelt das gebundene Thema „' + title_text + '“. Die Darstellung stützt sich auf die zugeordneten Fakten, Quellen und Prüfkriterien. Sie beschreibt die relevanten Auswahl- und Kontrollpunkte und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln des aktuellen Produktionslaufs.').strip()); direct = html.escape(('Nach dem sprachlichen Prüfhinweis wurde die Einleitung dieses gebundenen Artikels gezielt überarbeitet. Das Thema „' + title_text + '“ bleibt unverändert. Die Darstellung stützt sich weiterhin auf dieselben Fakten, Quellen und Prüfkriterien und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln.').strip()) if repair else direct"
+    new="title_text=str(state['article']['title']).strip(); direct = html.escape(('Dieser Simulationsartikel behandelt das gebundene Thema „' + title_text + '“. Die Darstellung stützt sich auf die zugeordneten Fakten, Quellen und Prüfkriterien. Sie beschreibt die relevanten Auswahl- und Kontrollpunkte und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln des aktuellen Produktionslaufs.').strip()); round_terms=('gezielt','sorgfältig','präzise','erneut','abschließend'); round_term=round_terms[(int(state.get('revision') or 1)-1)%len(round_terms)]; direct = html.escape(('Nach dem sprachlichen Prüfhinweis wurde die Einleitung dieses gebundenen Artikels ' + round_term + ' überarbeitet. Das Thema „' + title_text + '“ bleibt unverändert. Die Darstellung stützt sich weiterhin auf dieselben Fakten, Quellen und Prüfkriterien und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln.').strip()) if repair else direct"
     if old not in text:
         raise SimBlocked("SIM_WORKER_DIRECT_PATCH_POINT_MISSING")
     text=text.replace(old,new,1)
@@ -285,6 +285,7 @@ def execute_workspace(repo: Path, workspace: Path, worker: Path, env: dict, inde
                     raise SimBlocked("FULLCHECK_HARD_BLOCK:"+cp.stdout+cp.stderr)
         elif phase=="REPAIR_REQUIRED":
             repairs+=1
+            print("SIM_REPAIR_FINDINGS:"+json.dumps({"index":index,"revision":s.get("revision"),"checker":(s.get("checks") or {}).get("checker"),"findings":(s.get("checks") or {}).get("findings")},ensure_ascii=False,sort_keys=True),flush=True)
             before=str(s.get("draft_markdown") or "")
             p=generated/f"repair-{s.get('revision',0)}.html"; produce("repair",p)
             after=p.read_text(encoding="utf-8")
