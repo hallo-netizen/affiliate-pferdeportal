@@ -2,7 +2,7 @@
   "contract": "CONCEPT_AGENT_DURABLE_RUN_STATE_V1",
   "state_version": "1.0.0",
   "status": "IN_PROGRESS",
-  "phase": "READY",
+  "phase": "DRAFTED",
   "batch_sha256": "157a4ba1fae088e967540e6e9528e3592b315d7781ba2071fae40ff86ff9ce03",
   "binding_file_sha256": "a7494ba1224d4fb037c8e9042c7d917f5e0f62474bc43c45d743c636a7b332bc",
   "item_count": 3,
@@ -73,7 +73,17 @@
       "bound_work_sha256": "ce0cd10a62c34f59bb8d7c94c95b9e414eac83ea9cf386a12dc47363401f0f1c"
     }
   ],
-  "current": null,
+  "current": {
+    "item_index": 2,
+    "plan_slot": "0c80dc61be7954b698c3d4c53008a64e7e224c6c4c840be4774fb870d07f2238",
+    "bound_work_sha256": "30d63521b8e3429102d9d3a33d9967abd054df4e7b19d23f21d69068a0f89b81",
+    "revision": 1,
+    "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-plan-slot=\"0c80dc61be7954b698c3d4c53008a64e7e224c6c4c840be4774fb870d07f2238\"><section data-block=\"intro\"><p>Fiktiver Konzept-5-Testartikel 3 behandelt das fest gebundene Thema Konzept 5 Testkeyword 3. Dieser Text dient ausschließlich der Eins-zu-eins-Simulation des Ablaufes.</p></section><section data-block=\"details\"><h2>Konzept 5 Testkeyword 3 im gebundenen Ablauf</h2><p>Der Runner gibt immer nur den aktuellen Artikel frei. Erst nach der Prüfung darf der nächste Artikel beginnen.</p></section></article>",
+    "body_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae",
+    "findings": [],
+    "previous_body_html": null,
+    "prior_findings": []
+  },
   "event_log": [
     {
       "event": "ITEM_START",
@@ -122,8 +132,19 @@
       "item_index": 1,
       "revision": 1,
       "body_sha256": "3bbe78dce7f002d299df436791c6d0d4f116231abf65d8ec0ed514a516509a30"
+    },
+    {
+      "event": "ITEM_START",
+      "item_index": 2,
+      "plan_slot": "0c80dc61be7954b698c3d4c53008a64e7e224c6c4c840be4774fb870d07f2238"
+    },
+    {
+      "event": "DRAFT",
+      "item_index": 2,
+      "revision": 1,
+      "body_sha256": "fc6460e80a28cb3234b7c07b883c84f0013f3083542218410da4d25013ab10ae"
     }
   ],
   "publish_allowed": false,
-  "state_sha256": "eecefc947061780732f895a60e2e01216bcac8a78ce2f45dcc4cf2b21ca8aa02"
+  "state_sha256": "41dc60107fcc395b2d1f4039a504920d423744578126767f218f9147c5bfa7d7"
 }
