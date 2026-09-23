@@ -18,7 +18,6 @@ STAGES = [
     "ARTICLE_PRODUCTION",
     "PSERC_PACKAGE",
     "ENDSTEMPEL",
-    "CHAT_FILE_RETURN",
 ]
 SHA_RE = __import__("re").compile(r"^[0-9a-f]{64}$")
 
@@ -179,18 +178,6 @@ def _validate_cross_stage_bindings(state: dict[str, Any]) -> None:
         if not SHA_RE.fullmatch(str(p.get("final_file_sha256") or "")):
             raise Blocked("ENDSTEMPEL_FINAL_FILE_HASH_INVALID")
 
-    if "CHAT_FILE_RETURN" in by:
-        p = by["CHAT_FILE_RETURN"]
-        if p.get("chat_return_status") != "PASS":
-            raise Blocked("CHAT_FILE_RETURN_NOT_PASS")
-        if p.get("final_file_sha256") != by["ENDSTEMPEL"]["final_file_sha256"]:
-            raise Blocked("CHAT_RETURN_FILE_HASH_MISMATCH")
-        if p.get("file_count") != 1:
-            raise Blocked("CHAT_RETURN_EXACTLY_ONE_FILE_REQUIRED")
-        if not p.get("filename"):
-            raise Blocked("CHAT_RETURN_FILENAME_MISSING")
-        if p.get("batch_sha256") != batch:
-            raise Blocked("CHAT_RETURN_BATCH_MISMATCH")
 
 
 def reseal(state: dict[str, Any]) -> dict[str, Any]:
@@ -293,13 +280,6 @@ def payload_for(stage: str, state: dict[str, Any]) -> dict[str, Any]:
             **base, "endstempel_status": "ENDSTEMPEL_PASS",
             "pserc_package_sha256": by["PSERC_PACKAGE"]["pserc_package_sha256"],
             "final_file_sha256": sim_hash("final-file", batch),
-        }
-    if stage == "CHAT_FILE_RETURN":
-        return {
-            **base, "chat_return_status": "PASS",
-            "final_file_sha256": by["ENDSTEMPEL"]["final_file_sha256"],
-            "file_count": 1,
-            "filename": "PSERC_APPROVED_PRODUCTION_PACKAGE_FINAL.json",
         }
     raise Blocked("UNKNOWN_STAGE:" + stage)
 
@@ -547,10 +527,8 @@ def verify_current_entry(pointer_path: Path, current_state_path: Path, outdir: P
         else:
             completed.append("ENDSTEMPEL")
             if not final_file:
-                next_stage = "CHAT_FILE_RETURN"
-            else:
-                completed.append("CHAT_FILE_RETURN")
-                next_stage = "COMPLETE"
+                raise Blocked("CURRENT_ENDSTEMPEL_FINAL_FILE_MISSING")
+            next_stage = "COMPLETE"
 
     proof = {
         "contract": ENTRY_PROOF_CONTRACT,
@@ -676,14 +654,14 @@ STAGE_ROUTES = {
         "allowed_operation": "BIND_EXISTING_RESEARCH_ONLY",
     },
     "AUTHORING_BOUND": {
-        "authority": "EXISTING_CONCEPT_AGENT_AUTHORING_BINDING",
-        "entry_ref": "CONCEPT_AGENT_AUTHORING_BINDING",
+        "authority": "CURRENT_CONCEPT_AGENT_PRODUCTION_BINDING",
+        "entry_ref": "concept_agent/production_bridge.py",
         "allowed_operation": "BIND_AUTHORING_AND_LINKS_ONLY",
     },
     "ARTICLE_PRODUCTION": {
-        "authority": "CONCEPT_AGENT_RESUMABLE_RUNNER",
-        "entry_ref": "concept_agent/resumable_runner.py",
-        "allowed_operation": "AUTHOR_REPAIR_VALIDATE_CURRENT_ARTICLE_ONLY",
+        "authority": "CURRENT_CONCEPT_AGENT_PROGRESS_GUARD",
+        "entry_ref": "concept_agent/progress_guard.py",
+        "allowed_operation": "EXECUTE_ONLY_HASH_BOUND_CURRENT_ACTION",
     },
     "PSERC_PACKAGE": {
         "authority": "EXISTING_PSERC_PIPELINE",
@@ -694,11 +672,6 @@ STAGE_ROUTES = {
         "authority": "EXISTING_CONCEPT_AGENT_ENDSTEMPEL",
         "entry_ref": "concept_agent/endstempel_bridge.py",
         "allowed_operation": "ENDSTEMPEL_ONLY",
-    },
-    "CHAT_FILE_RETURN": {
-        "authority": "GITHUB_FINAL_ARTIFACT_RETURN",
-        "entry_ref": ".github/workflows/pferde-atelier-endstempel.yml",
-        "allowed_operation": "RETURN_EXACTLY_ONE_FINAL_FILE_ONLY",
     },
     "COMPLETE": {
         "authority": "NONE",
