@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -11,9 +12,12 @@ MANIFEST = HERE / "PRE_CODEX_START_HARDLOCK.json"
 RECEIPT = HERE / "PRE_CODEX_START_RECEIPT.json"
 STATE = HERE / "CURRENT_STATE.json"
 ROOT = HERE / "PFERDE_ATELIER_START_HERE.json"
+TEXT_START_AUTH = REPO / ".text-start-receiver-auth.json"
 
 CONTRACT = "PFERDE_ATELIER_PRE_CODEX_START_HARDLOCK_V1"
 RECEIPT_CONTRACT = "PFERDE_ATELIER_PRE_CODEX_START_RECEIPT_V1"
+TEXT_START_CONTRACT = "PFERDE_ATELIER_TEXT_START_AUTH_V1"
+TEXT_START_PREFLIGHT_CONTRACT = "PFERDE_ATELIER_TEXT_START_PREFLIGHT_V1"
 REQUIRED_GUARDS = {
     "STALE_MAIN_HASH",
     "DISPATCHER_HEAD_DRIFT",
@@ -37,6 +41,10 @@ class PreCodexStartBlocked(RuntimeError):
     pass
 
 
+class StartAuthorizationBlocked(RuntimeError):
+    pass
+
+
 def _load(path: Path) -> dict:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -44,6 +52,16 @@ def _load(path: Path) -> dict:
         raise PreCodexStartBlocked("PRECODEX_JSON_INVALID:" + path.name) from exc
     if not isinstance(value, dict):
         raise PreCodexStartBlocked("PRECODEX_OBJECT_REQUIRED:" + path.name)
+    return value
+
+
+def _load_auth(path: Path) -> dict:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise StartAuthorizationBlocked("TEXT_START_AUTH_JSON_INVALID") from exc
+    if not isinstance(value, dict):
+        raise StartAuthorizationBlocked("TEXT_START_AUTH_OBJECT_REQUIRED")
     return value
 
 
@@ -67,6 +85,70 @@ def _git_head(repo: Path) -> str:
     if len(value) != 40:
         raise PreCodexStartBlocked("PRECODEX_GIT_HEAD_INVALID")
     return value
+
+
+def _validate_text_start(repo: Path) -> dict | None:
+    if not TEXT_START_AUTH.is_file():
+        return None
+
+    auth = _load_auth(TEXT_START_AUTH)
+    state_raw = STATE.read_bytes()
+    state = json.loads(state_raw)
+    root = _load(ROOT)
+    head = _git_head(repo)
+
+    if os.environ.get("GITHUB_REPOSITORY") != "hallo-netizen/affiliate-pferdeportal":
+        raise StartAuthorizationBlocked("TEXT_START_GITHUB_REPOSITORY_INVALID")
+    if os.environ.get("GITHUB_REF_NAME") != "main":
+        raise StartAuthorizationBlocked("TEXT_START_GITHUB_REF_INVALID")
+    if os.environ.get("GITHUB_EVENT_NAME") != "workflow_dispatch":
+        raise StartAuthorizationBlocked("TEXT_START_GITHUB_EVENT_INVALID")
+
+    expected = {
+        "contract": TEXT_START_CONTRACT,
+        "status": "PASS",
+        "source_repository": "hallo-netizen/text-start",
+        "target_repository": "hallo-netizen/affiliate-pferdeportal",
+        "target_ref": "main",
+        "canonical_start_command": "python3 isolated_system4/parent_start.py start-current-bound",
+        "publish_allowed": False,
+        "article_content_rules_changed": False,
+        "quality_rules_changed": False,
+        "production_logic_changed": False,
+    }
+    for key, value in expected.items():
+        if auth.get(key) != value:
+            raise StartAuthorizationBlocked("TEXT_START_AUTH_FIELD_INVALID:" + key)
+
+    run_id = auth.get("source_run_id")
+    issue_number = auth.get("source_issue_number")
+    if isinstance(run_id, bool) or not isinstance(run_id, int) or run_id < 1:
+        raise StartAuthorizationBlocked("TEXT_START_SOURCE_RUN_ID_INVALID")
+    if isinstance(issue_number, bool) or not isinstance(issue_number, int) or issue_number < 1:
+        raise StartAuthorizationBlocked("TEXT_START_SOURCE_ISSUE_INVALID")
+    if auth.get("target_head_sha") != head:
+        raise StartAuthorizationBlocked("TEXT_START_TARGET_HEAD_DRIFT")
+
+    gate = state.get("execution_gate") or {}
+    if state.get("next_allowed_step") != "RUN_NEW_ARTICLE_BATCH_NO_STOP":
+        raise StartAuthorizationBlocked("TEXT_START_STEP_NOT_107007")
+    if gate.get("step_id") != "RUN_NEW_ARTICLE_BATCH_NO_STOP" or int(gate.get("sequence", -1)) != 107007:
+        raise StartAuthorizationBlocked("TEXT_START_GATE_NOT_107007")
+    if state.get("publish_allowed") is not False:
+        raise StartAuthorizationBlocked("TEXT_START_PUBLISH_NOT_FALSE")
+    if root.get("current_state_sha256") != _sha_bytes(state_raw):
+        raise StartAuthorizationBlocked("TEXT_START_STATE_HASH_BINDING_MISMATCH")
+    if root.get("next_allowed_step") != state.get("next_allowed_step"):
+        raise StartAuthorizationBlocked("TEXT_START_ROOT_STATE_STEP_MISMATCH")
+
+    return {
+        "contract": TEXT_START_PREFLIGHT_CONTRACT,
+        "status": "TEXT_START_PREFLIGHT_PASS",
+        "head": head,
+        "source_run_id": run_id,
+        "source_issue_number": issue_number,
+        "publish_allowed": False,
+    }
 
 
 def validate_payload(
@@ -170,6 +252,10 @@ def validate_payload(
 
 def validate(repo: Path = REPO) -> dict:
     repo = Path(repo).resolve()
+    text_start = _validate_text_start(repo)
+    if text_start is not None:
+        return text_start
+
     state_raw = STATE.read_bytes()
     return validate_payload(
         head=_git_head(repo),
@@ -188,7 +274,7 @@ if __name__ == "__main__":
     except Exception as exc:
         print(json.dumps({
             "ok": False,
-            "status": "PRE_CODEX_START_HARDLOCK_BLOCKED",
+            "status": "START_HARDLOCK_BLOCKED",
             "reason": str(exc),
             "publish_allowed": False,
         }, ensure_ascii=False, sort_keys=True))
