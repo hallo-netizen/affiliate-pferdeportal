@@ -1,0 +1,54 @@
+name: Category Central Hardtest
+on:
+  push:
+    branches: [category-central-office-v1]
+    paths:
+      - 'CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0/**'
+      - 'CATEGORY_CENTRAL_HOBBYRAUM/FALLBACK_MATRIX.md'
+      - '.github/workflows/category-central-hardtest.yml'
+permissions:
+  contents: read
+jobs:
+  hardtest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Candidate PHP lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          find CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0 -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Exact fallback regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          php CATEGORY_CENTRAL_HOBBYRAUM/base_v1.6.1/tests/run-tests.php | tee /tmp/base-regression.log
+          grep -E 'PASS|OK' /tmp/base-regression.log >/dev/null
+      - name: Candidate legacy regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          php CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0/tests/run-tests.php | tee /tmp/candidate-regression.log
+          grep -E 'PASS|OK' /tmp/candidate-regression.log >/dev/null
+      - name: Central registry 1-to-1 positive negative rollback simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          php CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0/tests/run-central-category-tests.php | tee /tmp/central.log
+          grep -F 'CENTRAL_CATEGORY_REGISTRY_POSITIVE_NEGATIVE_ROLLBACK_PASS' /tmp/central.log
+      - name: No silent WordPress content writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RniE 'wp_insert_post|wp_update_post|wp_delete_post|wp_insert_term|wp_update_term|wp_delete_term'             CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0/includes/class-apkw-central-*.php; then
+            echo 'FORBIDDEN_CONTENT_WRITE_FOUND'
+            exit 1
+          fi
+          grep -F "define('APKW_CONTENT_WRITE_CAPABILITY', false)" CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0/affiliate-portal-kategorie-workflow.php
+          echo NO_SILENT_WORDPRESS_WRITE_PASS
+      - name: Fallback exact hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'c0572951a5672e04fbad87f27ff6bb4990072db55500c6ad865c4d8193719c55  QUELLCODE_KATEGORIE_WORKFLOW_V1.6.1_WORKFLOW_HARDLOCK.zip' | sha256sum -c -
+          echo CATEGORY_FALLBACK_HASH_PASS
