@@ -98,7 +98,7 @@ def _api_json(url: str):
 
 def _discover_issue(batch_sha256: str) -> int:
     title = "TEXT_START_BATCH_CLAIM:" + batch_sha256
-    query = 'repo:hallo-netizen/affiliate-pferdeportal in:title "' + title + '"'
+    query = 'repo:hallo-netizen/affiliate-pferdeportal is:issue in:title "' + title + '"'
     url = (
         "https://api.github.com/search/issues?q="
         + urllib.parse.quote(query, safe="")
