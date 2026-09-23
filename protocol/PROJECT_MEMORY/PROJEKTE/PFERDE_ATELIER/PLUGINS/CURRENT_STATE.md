@@ -1,7 +1,7 @@
 # PLUGINS – CURRENT STATE
 
-STAND: 2026-09-12
-STATUS: BÜRO-KANDIDAT EINGERICHTET / INVENTARBASIS ERFASST / OFFIZIELLE CAMPUS-INTEGRATION NOCH NICHT FREIGEGEBEN
+STAND: 2026-09-23
+STATUS: INVENTARBASIS + KATEGORIE-SCOPE-INVENTARDELTA ERFASST / KEINE FACH-/RELEASE-WAHRHEIT
 
 ## AUTORITÄT
 
@@ -25,6 +25,24 @@ Quelle: sechs vom Nutzer bereitgestellte Screenshots der WordPress-Seite `Plugin
 - **4 sichtbar inaktive Pluginzeilen**: HivePress Geolocation, HivePress Messages, Minimal Coming Soon & Maintenance Mode, Portal SEO Redaktionsplan Compiler 0.28.16.
 - Es wurde in diesem Inventarlauf **kein Plugin aktualisiert, deaktiviert, aktiviert oder gelöscht**.
 
+## INVENTARDELTA 2026-09-23 – NUR KATEGORIE-SCOPE
+
+Quelle: Nutzer-Readback der real installierten WordPress-Plugins am 23.09.2026. Dieses Delta aktualisiert **nur** die für die Pferdeportal-Kategorieintegration relevanten beobachteten Versionen. Es ist keine Release-/LIVE-Freigabe.
+
+Beobachtet:
+- Affiliate Portal Template Kit (Pferde-kompatibel): **1.50.559**
+- Affiliate-Zentrale (Portal-kompatibel): **6.72.152**
+- Allgemeine Bildzentrale: **2.7.6**
+- Portal Link Policy Runtime Verifier: **1.0.0**
+- Portal Production Center: **1.1.1**
+- Portal Production Link Policy Gate: **1.0.1**
+- Portal Production Machine: **6.7.9**
+- Portal SEO Redaktionsplan Compiler: **0.28.23**
+- Portal SEO Themenengine: **0.57.6**
+- Portal Category Structure Repair Guard: **1.0.1**
+
+Für Fach-/Release-/LIVE-Status weiterhin zwingend zum zuständigen Fachbüro bzw. zur technischen Hauptquelle routen. Die Kategorieintegration selbst hat ihre technische Current-Autorität auf `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+
 ## SICHTBARE UPDATE-HINWEISE IM SNAPSHOT
 
 Nur als Beobachtung, **keine Update-Freigabe**:
@@ -36,7 +54,7 @@ Nur als Beobachtung, **keine Update-Freigabe**:
 - WordPress Importer: installiert 0.9.5 → Hinweis auf 0.9.6.
 - WPvivid Backup Plugin: installiert 0.9.132 → Hinweis auf 0.9.135.
 
-## ABGLEICH ERFORDERLICH – KEINE STILLE STATUSKORREKTUR
+## HISTORISCHER ABGLEICH AUS SNAPSHOT 2026-09-12 – DURCH DELTA OBEN TEILWEISE ÜBERHOLT
 
 Der WordPress-Snapshot zeigt bei mehreren Eigenentwicklungen neuere installierte Versionen als ältere Campus-/Artefaktbelege. Dieses Büro überschreibt die Fachwahrheit deshalb **nicht automatisch**.
 

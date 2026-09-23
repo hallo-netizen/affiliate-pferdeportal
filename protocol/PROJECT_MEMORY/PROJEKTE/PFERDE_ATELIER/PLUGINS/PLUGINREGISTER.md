@@ -1,8 +1,27 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-12
+STAND: 2026-09-23
 QUELLE: WordPress-Screenshotinventur des Nutzers + bereits vorhandene Campus-/Fachbelege
 REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Autorität.
+
+## INVENTARDELTA 2026-09-23 – KATEGORIE-SCOPE
+
+Quelle: Nutzer-Readback der real installierten WordPress-Plugins. Nur diese beobachteten Versionswerte superseden für den Kategorieauftrag die entsprechenden 12.09.-Zeilen; alle anderen Registerzeilen bleiben auf ihrem bisherigen Beobachtungsstand.
+
+| ID | Plugin | Beobachtete Version 23.09.2026 | Fachbüro |
+|---|---|---:|---|
+| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.559** | DESIGN |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | **6.72.152** | AFFILIATE |
+| PA-E-004 | Allgemeine Bildzentrale | **2.7.6** | BILD |
+| PA-E-013 | Portal Link Policy Runtime Verifier | **1.0.0** | TEXT |
+| PA-E-014 | Portal Production Center | **1.1.1** | TEXT |
+| PA-E-015 | Portal Production Link Policy Gate | **1.0.1** | TEXT |
+| PA-E-016 | Portal Production Machine | **6.7.9** | TEXT |
+| PA-E-017 | Portal SEO Redaktionsplan Compiler | **0.28.23** | TEXT |
+| PA-E-019 | Portal SEO Themenengine | **0.57.6** | TEXT |
+| PA-E-027 | Portal Category Structure Repair Guard | **1.0.1** | GEMEINSAM |
+
+**Regel:** Dies ist nur Installationsinventar. Fach-/Release-/LIVE-Wahrheit bleibt im jeweiligen Fachbüro/technischen Original. Keine automatische Updatefreigabe.
 
 ## LEGENDE
 
