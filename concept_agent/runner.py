@@ -355,6 +355,7 @@ def execute(binding: dict[str, Any], outdir: Path, mode: str, force_repair_index
         current_body: str | None = None
         findings: list[dict[str, Any]] = []
         while True:
+            previous_body = current_body
             if mode == "simulation":
                 writer = _sim_writer(item, revision, findings)
             else:
@@ -378,7 +379,15 @@ def execute(binding: dict[str, Any], outdir: Path, mode: str, force_repair_index
             if mode == "simulation":
                 result = _sim_check(item, body, revision, force_repair_index == idx)
             else:
-                result = _external_check(checker_cmd, item, body, revision)
+                result = _external_check(
+                    checker_cmd,
+                    item,
+                    body,
+                    revision,
+                    batch_sha256=run["batch_sha256"],
+                    previous_body_html=previous_body,
+                    prior_findings=findings if revision > 1 else [],
+                )
             events.append({"event": "CHECK", "item_index": idx, "revision": revision, "status": result["status"], "content_sha256": result["content_sha256"]})
 
             if result["status"] == "REPAIR_REQUIRED":
