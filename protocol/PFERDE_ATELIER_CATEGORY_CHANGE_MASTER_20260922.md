@@ -731,3 +731,21 @@ Nach abgeschlossenem signiertem PPM-Delta wurden die übrigen Verbraucher bis zu
 
 Evidence:
 `release/affiliate-zentrale/evidence/category_remaining_consumers_20260923.md`.
+
+
+## 18. PSERC 25er-Real-ID-Delta PASS (2026-09-23)
+
+Die 25 neuen Kategorien wurden mit ihren echten WordPress-Term-IDs 1577–1601 und den echten Produktseiten-/Elternketten aus der aktuellen WordPress-XML durch den vorhandenen `PSERC_Portal_Structure_Gate` geprüft.
+
+Ergebnis:
+- 25/25 dynamisch registriert;
+- `PSERC_PORTAL_STRUCTURE_PASS`;
+- `write_attempted=false`;
+- keine PSERC-Codeänderung;
+- keine 25er-Hardcodierung;
+- Altbestand nicht erneut voll geprüft.
+
+Der sichtbare 0.28.23-Metadaten-Snapshot bindet weiterhin 1124 Kategorien; offen ist nur der reale vollständige PSTE/PSERC-Runtime-Refresh auf 1149.
+
+Evidence:
+`release/affiliate-zentrale/evidence/pserc_current25_real_id_dynamic_20260923.md`.
