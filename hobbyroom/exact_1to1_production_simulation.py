@@ -208,6 +208,19 @@ def build_sim_worker(repo: Path) -> Path:
     if old2 not in text:
         raise SimBlocked("SIM_WORKER_RENDER_PATCH_POINT_MISSING")
     text=text.replace(old2,new2,1)
+    # Real bound web pages can repeat identical sentences (navigation/teasers). A real
+    # writer would not emit the same fact twice. The simulated external worker therefore
+    # deduplicates candidate fact statements before handing them to the unchanged guard.
+    old3="    claims = []\n    number = 0\n"
+    new3="    claims = []\n    number = 0\n    seen_statements = set()\n"
+    if old3 not in text:
+        raise SimBlocked("SIM_WORKER_FACT_DEDUPE_INIT_PATCH_POINT_MISSING")
+    text=text.replace(old3,new3,1)
+    old4="            if len(statement) < 20:\n                continue\n            number += 1\n"
+    new4="            if len(statement) < 20:\n                continue\n            folded=' '.join(statement.casefold().split())\n            if folded in seen_statements:\n                continue\n            seen_statements.add(folded)\n            number += 1\n"
+    if old4 not in text:
+        raise SimBlocked("SIM_WORKER_FACT_DEDUPE_BODY_PATCH_POINT_MISSING")
+    text=text.replace(old4,new4,1)
     out=repo/"isolated_system4/.exact_1to1_sim_worker.py"
     out.write_text(text,encoding="utf-8")
     return out
