@@ -72,32 +72,47 @@ Damit kann ein neuer Chat den Arbeitsstand weder aus Erinnerung rekonstruieren n
 
 ## Dauerhafter Maschinenzustand nach MACHINE_READY
 
-`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`.
+`control/startmaster0107/CURRENT_STATE.json` bleibt die einzige Current-Autorität dafür, **welcher Batch und welcher dauerhafte Ereignisweg gelten**.
 
-Nach `MACHINE_READY` gehört der laufende Arbeitszustand ausschließlich der Zentralmaschine. Fester Speicherort:
+Nach `MACHINE_READY` wird der laufende Produktionsfortschritt ausschließlich aus dem append-only Maschinenprotokoll abgeleitet:
 
-- Branch: `runtime/concept-agent-current`
-- Datei: `concept_agent/runtime/CURRENT_PRODUCTION_STATE.json`
-- Vertrag: `CONCEPT_AGENT_DURABLE_RUNTIME_STATE_V1`
+`concept_agent/durable_event_log.py`
 
-Der Chat darf diesen Ort weder wählen noch beschreiben, überschreiben oder als neue Entscheidungsebene benutzen. Der Chat darf nur die Fortsetzung anstoßen. Die Maschine liest und prüft ihren Zustand selbst.
+Autoritative Fortschrittsquelle sind nur gültige `CONCEPT_AGENT_DURABLE_EVENT_V1`-Kommentare des
+`chatgpt-codex-connector[bot]` im in `CURRENT_STATE.json` fest gebundenen Batch-Issue.
 
-Vor jeder Fortsetzung gilt zwingend:
+Der Chat darf:
+- die Fortsetzung anstoßen;
+- den abgeleiteten Zustand anzeigen.
 
-1. festen dauerhaften Zustand lesen;
-2. Hash, Batch, MACHINE_READY-Bindung und erlaubte Aktion prüfen;
-3. genau den gebundenen Schritt ausführen;
-4. vollständigen neuen Zustand **außerhalb des Workers** speichern;
-5. denselben gespeicherten Zustand erneut lesen und bytegenau prüfen;
-6. erst danach darf der nächste Worker starten.
+Der Chat darf **nicht**:
+- Stufe, Artikel, Prüfer oder Reparaturweg auswählen;
+- einen Produktionsfortschritt behaupten;
+- ein autoritatives Event schreiben;
+- einen fehlenden Schritt aus Erinnerung rekonstruieren;
+- einen anderen Speicherort oder Ersatzpfad wählen.
 
-`concept_agent/production_bridge.py` aktiviert die Artikelproduktion erst, nachdem Produktions-Binding und initialer Checkpoint extern gespeichert und zurückgelesen wurden.
+Die Maschine macht vor jeder Aktion immer dasselbe:
 
-`concept_agent/progress_guard.py` akzeptiert produktive Fortschritte nur noch als erfolgreich, wenn der neue Checkpoint zuerst im festen dauerhaften Zustand gespeichert und zurückgelesen wurde.
+1. festen `MACHINE_READY`-Anker prüfen;
+2. alle Bot-Events ab Event 1 vollständig und hashverkettet wiederholen;
+3. daraus genau **eine** erlaubte nächste Aktion ableiten;
+4. genau diese Aktion ausführen;
+5. das Ergebnis als neues hashgebundenes Bot-Event zurückgeben;
+6. erst dieses außerhalb des Workers vorhandene Bot-Event erlaubt den nächsten Schritt.
 
-Fehlt Schreib-/Lesezugriff auf diesen festen Zustand: **STOP**. Kein lokaler Ersatz, kein Chat-Recovery, keine Suche nach einem anderen Speicherort.
+Textbytes werden im jeweiligen Draft-/Repair-Event komprimiert, Base64-kodiert und zusätzlich an SHA-256 und Bytegröße gebunden. Beim Wiedereinstieg rekonstruiert die Maschine den Produktionscheckpoint ausschließlich aus der vollständigen Eventkette und den vorhandenen unveränderten Prüfern.
 
-Für den bereits MACHINE_READY befindlichen 16er-Batch gilt aktuell fail-closed:
-`RESEARCH_BOUND_REQUIRED`. Es wurde kein aktuelles dauerhaftes `CONCEPT_AGENT_RESEARCH_BOUND_V1` gefunden. Deshalb wird nichts aus alten Drafts, Recovery-Archiven oder Chat-Erinnerung rekonstruiert. Die Zentralmaschine muss für denselben Batch den vorhandenen freigegebenen Research-Schritt ausführen und danach den Produktionszustand binden.
+Damit gilt:
+- Worker-Abbruch **vor** Bot-Event → alter sicherer Zustand bleibt aktuell;
+- Worker-Abbruch **nach** Bot-Event → neuer Chat kann exakt daraus fortsetzen;
+- fehlendes, manipuliertes, nicht vom Bot stammendes oder mehrdeutiges Event → **STOP**;
+- kein `GH_TOKEN`, kein `git push`, kein `git remote` als Voraussetzung für Produktionsfortschritt;
+- kein zweites `text-start` für denselben MACHINE_READY-Batch;
+- alte Drafts, Recovery-Archive und historische Produktionszweige bleiben als NEW-Quelle verboten;
+- LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL und Publish-Regeln bleiben unverändert.
 
-`text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert. Für denselben MACHINE_READY-Batch bleibt ein zweites `text-start` verboten.
+Für den aktuellen 16er-Batch existiert noch kein gültiges Produktions-Event. Deshalb ist die einzige abgeleitete nächste Aktion:
+`RESEARCH_ITEM` für Artikelindex 0.
+
+`text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
