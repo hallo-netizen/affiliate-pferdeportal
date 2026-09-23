@@ -778,3 +778,31 @@ PPA-013-Inhaltsarbeit ist ausdrücklich **außerhalb dieses Kategorie-Scopes**.
 
 Aktueller erster offener Kategorieblocker:
 exakter Affiliate-6.72.145-Vollstand für die bereits hart getestete **zwei-JSON-Kategorieintegration**. Kein Neuaufbau aus 6.72.105.
+
+
+## 20. Affiliate-Kategorieartefakt original wiedergewonnen (2026-09-23)
+
+Keine Rekonstruktion.
+
+Originales GitHub-Actions-Artefakt aus dem bereits abgeschlossenen Hardtest:
+- Run: `35784852533`
+- Artifact: `10719063406` / `category-integration-candidate-hardtest`
+
+Darin exakt:
+- `portal-structure-v279.CANDIDATE.json`
+  - SHA256: `ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed`
+- `ebay-portal-catalog-v2.CANDIDATE.json`
+  - SHA256: `6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2`
+
+Belegte Kandidatenzahlen:
+- Produktseiten: 334
+- Artikelkategorien: 1149
+- Menüeinträge: 1550
+
+Diese beiden Dateien sind **technische Kategorieableitungen**, keine zweite Kategorienquelle. Fachliche Wahrheit bleibt ausschließlich `KATEGORIEN.tsv`.
+
+Wichtig:
+Der historische Checkout des Performance-Hardtests enthält unter `release/affiliate-zentrale/current` die Version **6.72.105**. Er darf ausdrücklich **nicht** als Ersatz für den fehlenden exakten 6.72.145-Vollstand benutzt werden.
+
+Damit ist nichts mehr an der Kategorieableitung zu bauen oder erneut zu testen. Offen ist nur:
+**exakten 6.72.145-Vollbaum beschaffen/binden und darin ausschließlich diese zwei JSON-Dateien bytegenau ersetzen.**
