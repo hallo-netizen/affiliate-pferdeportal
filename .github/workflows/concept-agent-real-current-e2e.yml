@@ -46,6 +46,62 @@ jobs:
           echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Real current binding positive-negative matrix
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import copy,sys
+          from pathlib import Path
+          ROOT=Path('.').resolve()
+          sys.path.insert(0,str(ROOT/'concept_agent'))
+          sys.path.insert(0,str(ROOT/'concept_agent/tests'))
+          import intake_bridge
+          import real_current_e2e_driver as d
+
+          def must_block(label,fn,prefix=None):
+              try:
+                  fn()
+              except Exception as exc:
+                  reason=str(exc)
+                  if prefix and not reason.startswith(prefix):
+                      raise AssertionError(label+':WRONG_REASON:'+reason)
+                  print(label+':PASS:'+reason)
+                  return
+              raise AssertionError(label+':DID_NOT_BLOCK')
+
+          snap=d.subset_one()
+          req=intake_bridge.prepare(copy.deepcopy(snap))
+          research=d.research_submission(req)
+          bound=intake_bridge.bind_research(req,copy.deepcopy(research))
+          authoring=d.authoring_submission(req,bound)
+          work=intake_bridge.build_work_binding(req,bound,copy.deepcopy(authoring))
+          assert work['item_count']==1 and work['publish_allowed'] is False
+          assert work['items'][0]['authoring_binding']['authoring_contract']['contract']=='SYSTEM4_AUTHORING_CONTRACT_V1'
+          print('REAL_CURRENT_BINDING_POSITIVE_PASS')
+
+          bad=copy.deepcopy(snap); bad['next_textmachine_metadata_batch']['batch_sha256']='0'*64
+          must_block('NEG_BATCH_HASH',lambda:intake_bridge.prepare(bad),'BATCH_SHA_MISMATCH')
+
+          bad=copy.deepcopy(research); bad['items'][0]['sources'][0]['snapshot_sha256']='0'*64
+          must_block('NEG_RESEARCH_EVIDENCE_HASH',lambda:intake_bridge.bind_research(req,bad),'SOURCE_EVIDENCE_HASH_MISMATCH')
+
+          bad=copy.deepcopy(authoring); bad['items'][0]['title']='Manipuliert'
+          must_block('NEG_AUTHORING_METADATA_DRIFT',lambda:intake_bridge.build_work_binding(req,bound,bad),'AUTHORING_METADATA_DRIFT')
+
+          bad=copy.deepcopy(authoring)
+          q=bad['items'][0]['production_plan_item']['quality_binding']
+          q['link_bindings'][0]['href']='https://evil.invalid/'
+          bad['items'][0]['production_plan_item']['quality_binding_hash']=d.stable(q)
+          must_block('NEG_EXTERNAL_INTERNAL_LINK',lambda:intake_bridge.build_work_binding(req,bound,bad),'AUTHORING_INTERNAL_LINK_INVALID')
+
+          bad=copy.deepcopy(authoring); bad['items'][0]['production_plan_item']['quality_binding_hash']='0'*64
+          must_block('NEG_QUALITY_HASH',lambda:intake_bridge.build_work_binding(req,bound,bad),'AUTHORING_QUALITY_BINDING_HASH_INVALID')
+
+          bad=copy.deepcopy(authoring)
+          bad['items'][0]['fact_pack']['sources'][0]['source_id']='NOT_RESEARCH_BOUND'
+          must_block('NEG_FACT_SOURCE_NOT_BOUND',lambda:intake_bridge.build_work_binding(req,bound,bad),'AUTHORING_SOURCE_NOT_RESEARCH_BOUND')
+          print('REAL_CURRENT_BINDING_NEGATIVE_MATRIX_PASS')
+          PY
       - name: Require real writer secret
         run: test -n "${OPENAI_API_KEY:-}"
       - name: Run one uninterrupted real current article chain
