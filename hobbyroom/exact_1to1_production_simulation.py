@@ -267,6 +267,11 @@ def build_sim_worker(repo: Path) -> Path:
     if old8 not in text:
         raise SimBlocked("SIM_WORKER_CONCLUSION_TARGET_PATCH_POINT_MISSING")
     text=text.replace(old8,new8,1)
+    old9="    if len(claims) < 4:\n        raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')\n    value = {'contract': 'SYSTEM4_FACTS_EVIDENCE_V1', 'claims': claims}\n"
+    new9="    claims = claims[:12]\n    if len(claims) < 4:\n        raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')\n    value = {'contract': 'SYSTEM4_FACTS_EVIDENCE_V1', 'claims': claims}\n"
+    if old9 not in text:
+        raise SimBlocked("SIM_WORKER_FACT_COVERAGE_CAP_PATCH_POINT_MISSING")
+    text=text.replace(old9,new9,1)
     old6="    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]\n    if not post_table_ids:\n        raise RuntimeError('TESTWORKER_POST_TABLE_FACT_POOL_EMPTY')\n"
     new6="    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]\n    if not post_table_ids:\n        post_table_ids = list(ids)\n"
     if old6 not in text:
