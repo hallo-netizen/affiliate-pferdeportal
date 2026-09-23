@@ -1,15 +1,15 @@
 {
   "schema": "2.0",
   "source_file": "portal-structure-v279.json",
-  "source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+  "source_sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
   "counts": {
     "main_hubs": 8,
     "hub_pages": 59,
-    "product_pages": 329,
-    "article_categories": 1124,
-    "business_concepts": 316,
+    "product_pages": 334,
+    "article_categories": 1149,
+    "business_concepts": 321,
     "business_hub_concepts": 59,
-    "business_routable_concepts": 375
+    "business_routable_concepts": 380
   },
   "horse_markers": [
     "pferd",
@@ -585,68 +585,68 @@
     {
       "slug": "satteldecken",
       "title": "Satteldecken",
-      "description": "Produktseite zu Satteldecken im Bereich Ausrüstung / Sattel. Beiträge werden nicht importiert.",
-      "hub": "Sattel",
+      "description": "Produktseite zu Satteldecken im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "private_bucket_slug": "sattel-zaumzeug",
-      "normalized": "satteldecken satteldecken produktseite zu satteldecken im bereich ausrustung sattel beitrage werden nicht importiert sattel ausrustung"
+      "normalized": "satteldecken produktseite zu satteldecken im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
     },
     {
       "slug": "schabracken",
       "title": "Schabracken",
-      "description": "Produktseite zu Schabracken im Bereich Ausrüstung / Sattel. Beiträge werden nicht importiert.",
-      "hub": "Sattel",
+      "description": "Produktseite zu Schabracken im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "private_bucket_slug": "sattel-zaumzeug",
-      "normalized": "schabracken schabracken produktseite zu schabracken im bereich ausrustung sattel beitrage werden nicht importiert sattel ausrustung"
+      "normalized": "schabracken produktseite zu schabracken im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
     },
     {
       "slug": "sattelgurte",
       "title": "Sattelgurte",
-      "description": "Produktseite zu Sattelgurte im Bereich Ausrüstung / Sattel. Beiträge werden nicht importiert.",
-      "hub": "Sattel",
+      "description": "Produktseite zu Sattelgurte im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "private_bucket_slug": "sattel-zaumzeug",
-      "normalized": "sattelgurte sattelgurte produktseite zu sattelgurte im bereich ausrustung sattel beitrage werden nicht importiert sattel ausrustung"
+      "normalized": "sattelgurte produktseite zu sattelgurte im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
     },
     {
       "slug": "steigbuegel",
       "title": "Steigbügel",
-      "description": "Produktseite zu Steigbügel im Bereich Ausrüstung / Sattel. Beiträge werden nicht importiert.",
-      "hub": "Sattel",
+      "description": "Produktseite zu Steigbügel im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "private_bucket_slug": "sattel-zaumzeug",
-      "normalized": "steigbugel steigbuegel produktseite zu steigbugel im bereich ausrustung sattel beitrage werden nicht importiert sattel ausrustung"
+      "normalized": "steigbugel produktseite zu steigbugel im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
     },
     {
       "slug": "sattelschraenke",
       "title": "Sattelschränke",
-      "description": "Produktseite zu Sattelschränke im Bereich Ausrüstung / Sattel. Beiträge werden nicht importiert.",
-      "hub": "Sattel",
+      "description": "Produktseite zu Sattelschränke im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "private_bucket_slug": "sattel-zaumzeug",
-      "normalized": "sattelschranke sattelschraenke produktseite zu sattelschranke im bereich ausrustung sattel beitrage werden nicht importiert sattel ausrustung"
+      "normalized": "sattelschranke produktseite zu sattelschranke im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
     },
     {
       "slug": "satteltransport",
       "title": "Satteltransport",
-      "description": "Produktseite zu Satteltransport im Bereich Ausrüstung / Sattel. Beiträge werden nicht importiert.",
-      "hub": "Sattel",
+      "description": "Produktseite zu Satteltransport im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "private_bucket_slug": "sattel-zaumzeug",
-      "normalized": "satteltransport satteltransport produktseite zu satteltransport im bereich ausrustung sattel beitrage werden nicht importiert sattel ausrustung"
+      "normalized": "satteltransport produktseite zu satteltransport im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
     },
     {
       "slug": "englische-trensen",
@@ -3870,6 +3870,61 @@
       "main_slug": "wissen",
       "private_bucket_slug": "sonstiges",
       "normalized": "hufberatung hufberatung produktseite zu hufberatung im bereich wissen beratung und partner beitrage werden nicht importiert beratung und partner wissen"
+    },
+    {
+      "slug": "pferdesaettel",
+      "title": "Pferdesättel",
+      "description": "Produktseite zu Pferdesättel im Bereich Ausrüstung / Sattel & Zubehör. Beiträge werden nicht importiert.",
+      "hub": "Sattel & Zubehör",
+      "hub_slug": "ausruestung-sattel",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "private_bucket_slug": "sattel-zaumzeug",
+      "normalized": "pferdesattel produktseite zu pferdesattel im bereich ausrustung sattel und zubehor beitrage werden nicht importiert sattel und zubehor ausrustung"
+    },
+    {
+      "slug": "trensen",
+      "title": "Trensen",
+      "description": "Produktseite zu Trensen im Bereich Ausrüstung / Trensen & Gebisse. Beiträge werden nicht importiert.",
+      "hub": "Trensen & Gebisse",
+      "hub_slug": "ausruestung-trensen-und-gebisse",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "private_bucket_slug": "sattel-zaumzeug",
+      "normalized": "trensen produktseite zu trensen im bereich ausrustung trensen und gebisse beitrage werden nicht importiert trensen und gebisse ausrustung"
+    },
+    {
+      "slug": "offenstallbau",
+      "title": "Offenstallbau",
+      "description": "Produktseite zu Offenstallbau im Bereich Stall / Offenstall. Beiträge werden nicht importiert.",
+      "hub": "Offenstall",
+      "hub_slug": "stall-offenstall",
+      "main_hub": "Stall",
+      "main_slug": "stall",
+      "private_bucket_slug": "stall-weide-haltung",
+      "normalized": "offenstallbau produktseite zu offenstallbau im bereich stall offenstall beitrage werden nicht importiert offenstall stall"
+    },
+    {
+      "slug": "paddockbau",
+      "title": "Paddockbau",
+      "description": "Produktseite zu Paddockbau im Bereich Weide / Paddock. Beiträge werden nicht importiert.",
+      "hub": "Paddock",
+      "hub_slug": "weide-paddock",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "private_bucket_slug": "stall-weide-haltung",
+      "normalized": "paddockbau produktseite zu paddockbau im bereich weide paddock beitrage werden nicht importiert paddock weide"
+    },
+    {
+      "slug": "reitplatzbau",
+      "title": "Reitplatzbau",
+      "description": "Produktseite zu Reitplatzbau im Bereich Weide / Reitplatz. Beiträge werden nicht importiert.",
+      "hub": "Reitplatz",
+      "hub_slug": "weide-reitplatz",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "private_bucket_slug": "stall-weide-haltung",
+      "normalized": "reitplatzbau produktseite zu reitplatzbau im bereich weide reitplatz beitrage werden nicht importiert reitplatz weide"
     }
   ],
   "article_targets": [
@@ -4718,312 +4773,312 @@
       "category_name": "FAQ Satteldecken",
       "product": "Satteldecken",
       "product_slug": "satteldecken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "FAQ",
-      "path": "Ausrüstung > Sattel > Satteldecken > FAQ Satteldecken"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteldecken > FAQ Satteldecken"
     },
     {
       "category_slug": "satteldecken-beratung",
       "category_name": "Beratung Satteldecken",
       "product": "Satteldecken",
       "product_slug": "satteldecken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Beratung",
-      "path": "Ausrüstung > Sattel > Satteldecken > Beratung Satteldecken"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteldecken > Beratung Satteldecken"
     },
     {
       "category_slug": "satteldecken-vergleich",
       "category_name": "Vergleich Satteldecken",
       "product": "Satteldecken",
       "product_slug": "satteldecken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Vergleich",
-      "path": "Ausrüstung > Sattel > Satteldecken > Vergleich Satteldecken"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteldecken > Vergleich Satteldecken"
     },
     {
       "category_slug": "satteldecken-pflege",
       "category_name": "Pflege Satteldecken",
       "product": "Satteldecken",
       "product_slug": "satteldecken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Pflege",
-      "path": "Ausrüstung > Sattel > Satteldecken > Pflege Satteldecken"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteldecken > Pflege Satteldecken"
     },
     {
       "category_slug": "satteldecken-kosten",
       "category_name": "Kosten Satteldecken",
       "product": "Satteldecken",
       "product_slug": "satteldecken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Kosten",
-      "path": "Ausrüstung > Sattel > Satteldecken > Kosten Satteldecken"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteldecken > Kosten Satteldecken"
     },
     {
       "category_slug": "schabracken-faq",
       "category_name": "FAQ Schabracken",
       "product": "Schabracken",
       "product_slug": "schabracken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "FAQ",
-      "path": "Ausrüstung > Sattel > Schabracken > FAQ Schabracken"
+      "path": "Ausrüstung > Sattel & Zubehör > Schabracken > FAQ Schabracken"
     },
     {
       "category_slug": "schabracken-beratung",
       "category_name": "Beratung Schabracken",
       "product": "Schabracken",
       "product_slug": "schabracken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Beratung",
-      "path": "Ausrüstung > Sattel > Schabracken > Beratung Schabracken"
+      "path": "Ausrüstung > Sattel & Zubehör > Schabracken > Beratung Schabracken"
     },
     {
       "category_slug": "schabracken-vergleich",
       "category_name": "Vergleich Schabracken",
       "product": "Schabracken",
       "product_slug": "schabracken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Vergleich",
-      "path": "Ausrüstung > Sattel > Schabracken > Vergleich Schabracken"
+      "path": "Ausrüstung > Sattel & Zubehör > Schabracken > Vergleich Schabracken"
     },
     {
       "category_slug": "schabracken-pflege",
       "category_name": "Pflege Schabracken",
       "product": "Schabracken",
       "product_slug": "schabracken",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Pflege",
-      "path": "Ausrüstung > Sattel > Schabracken > Pflege Schabracken"
+      "path": "Ausrüstung > Sattel & Zubehör > Schabracken > Pflege Schabracken"
     },
     {
       "category_slug": "sattelgurte-faq",
       "category_name": "FAQ Sattelgurte",
       "product": "Sattelgurte",
       "product_slug": "sattelgurte",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "FAQ",
-      "path": "Ausrüstung > Sattel > Sattelgurte > FAQ Sattelgurte"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelgurte > FAQ Sattelgurte"
     },
     {
       "category_slug": "sattelgurte-beratung",
       "category_name": "Beratung Sattelgurte",
       "product": "Sattelgurte",
       "product_slug": "sattelgurte",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Beratung",
-      "path": "Ausrüstung > Sattel > Sattelgurte > Beratung Sattelgurte"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelgurte > Beratung Sattelgurte"
     },
     {
       "category_slug": "sattelgurte-vergleich",
       "category_name": "Vergleich Sattelgurte",
       "product": "Sattelgurte",
       "product_slug": "sattelgurte",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Vergleich",
-      "path": "Ausrüstung > Sattel > Sattelgurte > Vergleich Sattelgurte"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelgurte > Vergleich Sattelgurte"
     },
     {
       "category_slug": "sattelgurte-pflege",
       "category_name": "Pflege Sattelgurte",
       "product": "Sattelgurte",
       "product_slug": "sattelgurte",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Pflege",
-      "path": "Ausrüstung > Sattel > Sattelgurte > Pflege Sattelgurte"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelgurte > Pflege Sattelgurte"
     },
     {
       "category_slug": "sattelgurte-kosten",
       "category_name": "Kosten Sattelgurte",
       "product": "Sattelgurte",
       "product_slug": "sattelgurte",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Kosten",
-      "path": "Ausrüstung > Sattel > Sattelgurte > Kosten Sattelgurte"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelgurte > Kosten Sattelgurte"
     },
     {
       "category_slug": "steigbuegel-faq",
       "category_name": "FAQ Steigbügel",
       "product": "Steigbügel",
       "product_slug": "steigbuegel",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "FAQ",
-      "path": "Ausrüstung > Sattel > Steigbügel > FAQ Steigbügel"
+      "path": "Ausrüstung > Sattel & Zubehör > Steigbügel > FAQ Steigbügel"
     },
     {
       "category_slug": "steigbuegel-beratung",
       "category_name": "Beratung Steigbügel",
       "product": "Steigbügel",
       "product_slug": "steigbuegel",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Beratung",
-      "path": "Ausrüstung > Sattel > Steigbügel > Beratung Steigbügel"
+      "path": "Ausrüstung > Sattel & Zubehör > Steigbügel > Beratung Steigbügel"
     },
     {
       "category_slug": "steigbuegel-vergleich",
       "category_name": "Vergleich Steigbügel",
       "product": "Steigbügel",
       "product_slug": "steigbuegel",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Vergleich",
-      "path": "Ausrüstung > Sattel > Steigbügel > Vergleich Steigbügel"
+      "path": "Ausrüstung > Sattel & Zubehör > Steigbügel > Vergleich Steigbügel"
     },
     {
       "category_slug": "steigbuegel-pflege",
       "category_name": "Pflege Steigbügel",
       "product": "Steigbügel",
       "product_slug": "steigbuegel",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Pflege",
-      "path": "Ausrüstung > Sattel > Steigbügel > Pflege Steigbügel"
+      "path": "Ausrüstung > Sattel & Zubehör > Steigbügel > Pflege Steigbügel"
     },
     {
       "category_slug": "sattelschraenke-faq",
       "category_name": "FAQ Sattelschränke",
       "product": "Sattelschränke",
       "product_slug": "sattelschraenke",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "FAQ",
-      "path": "Ausrüstung > Sattel > Sattelschränke > FAQ Sattelschränke"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelschränke > FAQ Sattelschränke"
     },
     {
       "category_slug": "sattelschraenke-beratung",
       "category_name": "Beratung Sattelschränke",
       "product": "Sattelschränke",
       "product_slug": "sattelschraenke",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Beratung",
-      "path": "Ausrüstung > Sattel > Sattelschränke > Beratung Sattelschränke"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelschränke > Beratung Sattelschränke"
     },
     {
       "category_slug": "sattelschraenke-vergleich",
       "category_name": "Vergleich Sattelschränke",
       "product": "Sattelschränke",
       "product_slug": "sattelschraenke",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Vergleich",
-      "path": "Ausrüstung > Sattel > Sattelschränke > Vergleich Sattelschränke"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelschränke > Vergleich Sattelschränke"
     },
     {
       "category_slug": "sattelschraenke-pflege",
       "category_name": "Pflege Sattelschränke",
       "product": "Sattelschränke",
       "product_slug": "sattelschraenke",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Pflege",
-      "path": "Ausrüstung > Sattel > Sattelschränke > Pflege Sattelschränke"
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelschränke > Pflege Sattelschränke"
     },
     {
       "category_slug": "satteltransport-faq",
       "category_name": "FAQ Satteltransport",
       "product": "Satteltransport",
       "product_slug": "satteltransport",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "FAQ",
-      "path": "Ausrüstung > Sattel > Satteltransport > FAQ Satteltransport"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteltransport > FAQ Satteltransport"
     },
     {
       "category_slug": "satteltransport-beratung",
       "category_name": "Beratung Satteltransport",
       "product": "Satteltransport",
       "product_slug": "satteltransport",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Beratung",
-      "path": "Ausrüstung > Sattel > Satteltransport > Beratung Satteltransport"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteltransport > Beratung Satteltransport"
     },
     {
       "category_slug": "satteltransport-vergleich",
       "category_name": "Vergleich Satteltransport",
       "product": "Satteltransport",
       "product_slug": "satteltransport",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Vergleich",
-      "path": "Ausrüstung > Sattel > Satteltransport > Vergleich Satteltransport"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteltransport > Vergleich Satteltransport"
     },
     {
       "category_slug": "satteltransport-sicherheit",
       "category_name": "Sicherheit Satteltransport",
       "product": "Satteltransport",
       "product_slug": "satteltransport",
-      "hub": "Sattel",
+      "hub": "Sattel & Zubehör",
       "hub_slug": "ausruestung-sattel",
       "main_hub": "Ausrüstung",
       "main_slug": "ausruestung",
       "theme": "Sicherheit",
-      "path": "Ausrüstung > Sattel > Satteltransport > Sicherheit Satteltransport"
+      "path": "Ausrüstung > Sattel & Zubehör > Satteltransport > Sicherheit Satteltransport"
     },
     {
       "category_slug": "englische-trensen-faq",
@@ -17360,6 +17415,306 @@
       "main_slug": "wissen",
       "theme": "Sicherheit",
       "path": "Wissen > Vorlagen & Planung > Trainingsplan Vorlage > Sicherheit Trainingsplan Vorlage"
+    },
+    {
+      "category_slug": "pferdesaettel-faq",
+      "category_name": "FAQ Pferdesättel",
+      "product": "Pferdesättel",
+      "product_slug": "pferdesaettel",
+      "hub": "Sattel & Zubehör",
+      "hub_slug": "ausruestung-sattel",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "FAQ",
+      "path": "Ausrüstung > Sattel & Zubehör > Pferdesättel > FAQ Pferdesättel"
+    },
+    {
+      "category_slug": "pferdesaettel-beratung",
+      "category_name": "Beratung Pferdesättel",
+      "product": "Pferdesättel",
+      "product_slug": "pferdesaettel",
+      "hub": "Sattel & Zubehör",
+      "hub_slug": "ausruestung-sattel",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Beratung",
+      "path": "Ausrüstung > Sattel & Zubehör > Pferdesättel > Beratung Pferdesättel"
+    },
+    {
+      "category_slug": "pferdesaettel-vergleich",
+      "category_name": "Vergleich Pferdesättel",
+      "product": "Pferdesättel",
+      "product_slug": "pferdesaettel",
+      "hub": "Sattel & Zubehör",
+      "hub_slug": "ausruestung-sattel",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Vergleich",
+      "path": "Ausrüstung > Sattel & Zubehör > Pferdesättel > Vergleich Pferdesättel"
+    },
+    {
+      "category_slug": "pferdesaettel-pflege",
+      "category_name": "Pflege Pferdesättel",
+      "product": "Pferdesättel",
+      "product_slug": "pferdesaettel",
+      "hub": "Sattel & Zubehör",
+      "hub_slug": "ausruestung-sattel",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Pflege",
+      "path": "Ausrüstung > Sattel & Zubehör > Pferdesättel > Pflege Pferdesättel"
+    },
+    {
+      "category_slug": "pferdesaettel-kosten",
+      "category_name": "Kosten Pferdesättel",
+      "product": "Pferdesättel",
+      "product_slug": "pferdesaettel",
+      "hub": "Sattel & Zubehör",
+      "hub_slug": "ausruestung-sattel",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Kosten",
+      "path": "Ausrüstung > Sattel & Zubehör > Pferdesättel > Kosten Pferdesättel"
+    },
+    {
+      "category_slug": "trensen-faq",
+      "category_name": "FAQ Trensen",
+      "product": "Trensen",
+      "product_slug": "trensen",
+      "hub": "Trensen & Gebisse",
+      "hub_slug": "ausruestung-trensen-und-gebisse",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "FAQ",
+      "path": "Ausrüstung > Trensen & Gebisse > Trensen > FAQ Trensen"
+    },
+    {
+      "category_slug": "trensen-beratung",
+      "category_name": "Beratung Trensen",
+      "product": "Trensen",
+      "product_slug": "trensen",
+      "hub": "Trensen & Gebisse",
+      "hub_slug": "ausruestung-trensen-und-gebisse",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Beratung",
+      "path": "Ausrüstung > Trensen & Gebisse > Trensen > Beratung Trensen"
+    },
+    {
+      "category_slug": "trensen-vergleich",
+      "category_name": "Vergleich Trensen",
+      "product": "Trensen",
+      "product_slug": "trensen",
+      "hub": "Trensen & Gebisse",
+      "hub_slug": "ausruestung-trensen-und-gebisse",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Vergleich",
+      "path": "Ausrüstung > Trensen & Gebisse > Trensen > Vergleich Trensen"
+    },
+    {
+      "category_slug": "trensen-pflege",
+      "category_name": "Pflege Trensen",
+      "product": "Trensen",
+      "product_slug": "trensen",
+      "hub": "Trensen & Gebisse",
+      "hub_slug": "ausruestung-trensen-und-gebisse",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Pflege",
+      "path": "Ausrüstung > Trensen & Gebisse > Trensen > Pflege Trensen"
+    },
+    {
+      "category_slug": "trensen-kosten",
+      "category_name": "Kosten Trensen",
+      "product": "Trensen",
+      "product_slug": "trensen",
+      "hub": "Trensen & Gebisse",
+      "hub_slug": "ausruestung-trensen-und-gebisse",
+      "main_hub": "Ausrüstung",
+      "main_slug": "ausruestung",
+      "theme": "Kosten",
+      "path": "Ausrüstung > Trensen & Gebisse > Trensen > Kosten Trensen"
+    },
+    {
+      "category_slug": "offenstallbau-faq",
+      "category_name": "FAQ Offenstallbau",
+      "product": "Offenstallbau",
+      "product_slug": "offenstallbau",
+      "hub": "Offenstall",
+      "hub_slug": "stall-offenstall",
+      "main_hub": "Stall",
+      "main_slug": "stall",
+      "theme": "FAQ",
+      "path": "Stall > Offenstall > Offenstallbau > FAQ Offenstallbau"
+    },
+    {
+      "category_slug": "offenstallbau-beratung",
+      "category_name": "Beratung Offenstallbau",
+      "product": "Offenstallbau",
+      "product_slug": "offenstallbau",
+      "hub": "Offenstall",
+      "hub_slug": "stall-offenstall",
+      "main_hub": "Stall",
+      "main_slug": "stall",
+      "theme": "Beratung",
+      "path": "Stall > Offenstall > Offenstallbau > Beratung Offenstallbau"
+    },
+    {
+      "category_slug": "offenstallbau-vergleich",
+      "category_name": "Vergleich Offenstallbau",
+      "product": "Offenstallbau",
+      "product_slug": "offenstallbau",
+      "hub": "Offenstall",
+      "hub_slug": "stall-offenstall",
+      "main_hub": "Stall",
+      "main_slug": "stall",
+      "theme": "Vergleich",
+      "path": "Stall > Offenstall > Offenstallbau > Vergleich Offenstallbau"
+    },
+    {
+      "category_slug": "offenstallbau-installation",
+      "category_name": "Installation Offenstallbau",
+      "product": "Offenstallbau",
+      "product_slug": "offenstallbau",
+      "hub": "Offenstall",
+      "hub_slug": "stall-offenstall",
+      "main_hub": "Stall",
+      "main_slug": "stall",
+      "theme": "Installation",
+      "path": "Stall > Offenstall > Offenstallbau > Installation Offenstallbau"
+    },
+    {
+      "category_slug": "offenstallbau-kosten",
+      "category_name": "Kosten Offenstallbau",
+      "product": "Offenstallbau",
+      "product_slug": "offenstallbau",
+      "hub": "Offenstall",
+      "hub_slug": "stall-offenstall",
+      "main_hub": "Stall",
+      "main_slug": "stall",
+      "theme": "Kosten",
+      "path": "Stall > Offenstall > Offenstallbau > Kosten Offenstallbau"
+    },
+    {
+      "category_slug": "paddockbau-faq",
+      "category_name": "FAQ Paddockbau",
+      "product": "Paddockbau",
+      "product_slug": "paddockbau",
+      "hub": "Paddock",
+      "hub_slug": "weide-paddock",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "FAQ",
+      "path": "Weide > Paddock > Paddockbau > FAQ Paddockbau"
+    },
+    {
+      "category_slug": "paddockbau-beratung",
+      "category_name": "Beratung Paddockbau",
+      "product": "Paddockbau",
+      "product_slug": "paddockbau",
+      "hub": "Paddock",
+      "hub_slug": "weide-paddock",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Beratung",
+      "path": "Weide > Paddock > Paddockbau > Beratung Paddockbau"
+    },
+    {
+      "category_slug": "paddockbau-vergleich",
+      "category_name": "Vergleich Paddockbau",
+      "product": "Paddockbau",
+      "product_slug": "paddockbau",
+      "hub": "Paddock",
+      "hub_slug": "weide-paddock",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Vergleich",
+      "path": "Weide > Paddock > Paddockbau > Vergleich Paddockbau"
+    },
+    {
+      "category_slug": "paddockbau-installation",
+      "category_name": "Installation Paddockbau",
+      "product": "Paddockbau",
+      "product_slug": "paddockbau",
+      "hub": "Paddock",
+      "hub_slug": "weide-paddock",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Installation",
+      "path": "Weide > Paddock > Paddockbau > Installation Paddockbau"
+    },
+    {
+      "category_slug": "paddockbau-kosten",
+      "category_name": "Kosten Paddockbau",
+      "product": "Paddockbau",
+      "product_slug": "paddockbau",
+      "hub": "Paddock",
+      "hub_slug": "weide-paddock",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Kosten",
+      "path": "Weide > Paddock > Paddockbau > Kosten Paddockbau"
+    },
+    {
+      "category_slug": "reitplatzbau-faq",
+      "category_name": "FAQ Reitplatzbau",
+      "product": "Reitplatzbau",
+      "product_slug": "reitplatzbau",
+      "hub": "Reitplatz",
+      "hub_slug": "weide-reitplatz",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "FAQ",
+      "path": "Weide > Reitplatz > Reitplatzbau > FAQ Reitplatzbau"
+    },
+    {
+      "category_slug": "reitplatzbau-beratung",
+      "category_name": "Beratung Reitplatzbau",
+      "product": "Reitplatzbau",
+      "product_slug": "reitplatzbau",
+      "hub": "Reitplatz",
+      "hub_slug": "weide-reitplatz",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Beratung",
+      "path": "Weide > Reitplatz > Reitplatzbau > Beratung Reitplatzbau"
+    },
+    {
+      "category_slug": "reitplatzbau-vergleich",
+      "category_name": "Vergleich Reitplatzbau",
+      "product": "Reitplatzbau",
+      "product_slug": "reitplatzbau",
+      "hub": "Reitplatz",
+      "hub_slug": "weide-reitplatz",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Vergleich",
+      "path": "Weide > Reitplatz > Reitplatzbau > Vergleich Reitplatzbau"
+    },
+    {
+      "category_slug": "reitplatzbau-installation",
+      "category_name": "Installation Reitplatzbau",
+      "product": "Reitplatzbau",
+      "product_slug": "reitplatzbau",
+      "hub": "Reitplatz",
+      "hub_slug": "weide-reitplatz",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Installation",
+      "path": "Weide > Reitplatz > Reitplatzbau > Installation Reitplatzbau"
+    },
+    {
+      "category_slug": "reitplatzbau-kosten",
+      "category_name": "Kosten Reitplatzbau",
+      "product": "Reitplatzbau",
+      "product_slug": "reitplatzbau",
+      "hub": "Reitplatz",
+      "hub_slug": "weide-reitplatz",
+      "main_hub": "Weide",
+      "main_slug": "weide",
+      "theme": "Kosten",
+      "path": "Weide > Reitplatz > Reitplatzbau > Kosten Reitplatzbau"
     }
   ],
   "content_policy": {
@@ -22966,6 +23321,32 @@
       "private_bucket_slug": "stall-weide-haltung"
     },
     {
+      "id": "concept-offenstallbau",
+      "title": "Offenstallbau",
+      "normalized_title": "offenstallbau",
+      "target_pages": [
+        {
+          "slug": "offenstallbau",
+          "title": "Offenstallbau",
+          "hub": "Offenstall",
+          "hub_slug": "stall-offenstall",
+          "main_hub": "Stall",
+          "main_slug": "stall",
+          "private_bucket_slug": "stall-weide-haltung"
+        }
+      ],
+      "private_bucket_slugs": [
+        "stall-weide-haltung"
+      ],
+      "hub_slugs": [
+        "stall-offenstall"
+      ],
+      "main_slugs": [
+        "stall"
+      ],
+      "private_bucket_slug": "stall-weide-haltung"
+    },
+    {
       "id": "concept-offenstallraufen",
       "title": "Offenstallraufen",
       "normalized_title": "offenstallraufen",
@@ -23042,6 +23423,32 @@
         "fuetterung"
       ],
       "private_bucket_slug": "anhaenger-transport"
+    },
+    {
+      "id": "concept-paddockbau",
+      "title": "Paddockbau",
+      "normalized_title": "paddockbau",
+      "target_pages": [
+        {
+          "slug": "paddockbau",
+          "title": "Paddockbau",
+          "hub": "Paddock",
+          "hub_slug": "weide-paddock",
+          "main_hub": "Weide",
+          "main_slug": "weide",
+          "private_bucket_slug": "stall-weide-haltung"
+        }
+      ],
+      "private_bucket_slugs": [
+        "stall-weide-haltung"
+      ],
+      "hub_slugs": [
+        "weide-paddock"
+      ],
+      "main_slugs": [
+        "weide"
+      ],
+      "private_bucket_slug": "stall-weide-haltung"
     },
     {
       "id": "concept-paddockzaune",
@@ -23250,6 +23657,32 @@
         "transport"
       ],
       "private_bucket_slug": "anhaenger-transport"
+    },
+    {
+      "id": "concept-pferdesattel",
+      "title": "Pferdesättel",
+      "normalized_title": "pferdesattel",
+      "target_pages": [
+        {
+          "slug": "pferdesaettel",
+          "title": "Pferdesättel",
+          "hub": "Sattel & Zubehör",
+          "hub_slug": "ausruestung-sattel",
+          "main_hub": "Ausrüstung",
+          "main_slug": "ausruestung",
+          "private_bucket_slug": "sattel-zaumzeug"
+        }
+      ],
+      "private_bucket_slugs": [
+        "sattel-zaumzeug"
+      ],
+      "hub_slugs": [
+        "ausruestung-sattel"
+      ],
+      "main_slugs": [
+        "ausruestung"
+      ],
+      "private_bucket_slug": "sattel-zaumzeug"
     },
     {
       "id": "concept-putzboxen-furs-turnier",
@@ -23572,6 +24005,32 @@
         "ausruestung"
       ],
       "private_bucket_slug": "reitbekleidung-zubehoer"
+    },
+    {
+      "id": "concept-reitplatzbau",
+      "title": "Reitplatzbau",
+      "normalized_title": "reitplatzbau",
+      "target_pages": [
+        {
+          "slug": "reitplatzbau",
+          "title": "Reitplatzbau",
+          "hub": "Reitplatz",
+          "hub_slug": "weide-reitplatz",
+          "main_hub": "Weide",
+          "main_slug": "weide",
+          "private_bucket_slug": "stall-weide-haltung"
+        }
+      ],
+      "private_bucket_slugs": [
+        "stall-weide-haltung"
+      ],
+      "hub_slugs": [
+        "weide-reitplatz"
+      ],
+      "main_slugs": [
+        "weide"
+      ],
+      "private_bucket_slug": "stall-weide-haltung"
     },
     {
       "id": "concept-reitplatzbeleuchtung",
@@ -23971,7 +24430,7 @@
         {
           "slug": "satteldecken",
           "title": "Satteldecken",
-          "hub": "Sattel",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -23997,7 +24456,7 @@
         {
           "slug": "sattelgurte",
           "title": "Sattelgurte",
-          "hub": "Sattel",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -24023,7 +24482,7 @@
         {
           "slug": "sattelschraenke",
           "title": "Sattelschränke",
-          "hub": "Sattel",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -24049,7 +24508,7 @@
         {
           "slug": "satteltransport",
           "title": "Satteltransport",
-          "hub": "Sattel",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -24075,7 +24534,7 @@
         {
           "slug": "schabracken",
           "title": "Schabracken",
-          "hub": "Sattel",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -24915,7 +25374,7 @@
         {
           "slug": "steigbuegel",
           "title": "Steigbügel",
-          "hub": "Sattel",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -25400,6 +25859,32 @@
         "stall"
       ],
       "private_bucket_slug": "stall-weide-haltung"
+    },
+    {
+      "id": "concept-trensen",
+      "title": "Trensen",
+      "normalized_title": "trensen",
+      "target_pages": [
+        {
+          "slug": "trensen",
+          "title": "Trensen",
+          "hub": "Trensen & Gebisse",
+          "hub_slug": "ausruestung-trensen-und-gebisse",
+          "main_hub": "Ausrüstung",
+          "main_slug": "ausruestung",
+          "private_bucket_slug": "sattel-zaumzeug"
+        }
+      ],
+      "private_bucket_slugs": [
+        "sattel-zaumzeug"
+      ],
+      "hub_slugs": [
+        "ausruestung-trensen-und-gebisse"
+      ],
+      "main_slugs": [
+        "ausruestung"
+      ],
+      "private_bucket_slug": "sattel-zaumzeug"
     },
     {
       "id": "concept-turnierboxen",
@@ -27688,13 +28173,13 @@
     {
       "id": "hub-concept-ausruestung-sattel",
       "concept_kind": "hub",
-      "title": "Sattel",
-      "normalized_title": "sattel",
+      "title": "Sattel & Zubehör",
+      "normalized_title": "sattel zubehor",
       "target_pages": [
         {
           "slug": "ausruestung-sattel",
-          "title": "Sattel",
-          "hub": "Sattel",
+          "title": "Sattel & Zubehör",
+          "hub": "Sattel & Zubehör",
           "hub_slug": "ausruestung-sattel",
           "main_hub": "Ausrüstung",
           "main_slug": "ausruestung",
@@ -28181,7 +28666,7 @@
   ],
   "business_supply_contract": {
     "schema": "1.0",
-    "required_count": 311,
+    "required_count": 316,
     "required_product_concept_ids": [
       "concept-1-5er-pferdeanhanger",
       "concept-2er-pferdeanhanger",
@@ -28349,9 +28834,11 @@
       "concept-notfallsets-fur-fahrten",
       "concept-notfalltafeln",
       "concept-offenstall-bodenbefestigung",
+      "concept-offenstallbau",
       "concept-offenstallraufen",
       "concept-offenstalltore",
       "concept-ole-fur-pferde",
+      "concept-paddockbau",
       "concept-paddockzaune",
       "concept-parasitenmittel-stall",
       "concept-pellets",
@@ -28359,6 +28846,7 @@
       "concept-pferdebursten",
       "concept-pferdehaftpflicht",
       "concept-pferdepass-mappen",
+      "concept-pferdesattel",
       "concept-putzboxen-furs-turnier",
       "concept-putzboxhalter",
       "concept-putzplatzmatten",
@@ -28371,6 +28859,7 @@
       "concept-reithalfter",
       "concept-reithandschuhe",
       "concept-reithelme",
+      "concept-reitplatzbau",
       "concept-reitplatzbeleuchtung",
       "concept-reitplatzbewasserung",
       "concept-reitplatzbewasserung-mobil",
@@ -28440,6 +28929,7 @@
       "concept-transportrecht-pferde",
       "concept-transporttaschen",
       "concept-trennwande-im-offenstall",
+      "concept-trensen",
       "concept-turnierboxen",
       "concept-turniercheckliste",
       "concept-turnierplaner",
