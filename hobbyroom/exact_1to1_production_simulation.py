@@ -236,6 +236,11 @@ def build_sim_worker(repo: Path) -> Path:
     if old5 not in text:
         raise SimBlocked("SIM_WORKER_FACT_PARAPHRASE_PATCH_POINT_MISSING")
     text=text.replace(old5,new5,1)
+    old6="    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]\n    if not post_table_ids:\n        raise RuntimeError('TESTWORKER_POST_TABLE_FACT_POOL_EMPTY')\n"
+    new6="    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]\n    if not post_table_ids:\n        post_table_ids = list(ids)\n"
+    if old6 not in text:
+        raise SimBlocked("SIM_WORKER_POST_TABLE_REUSE_PATCH_POINT_MISSING")
+    text=text.replace(old6,new6,1)
     out=repo/"isolated_system4/.exact_1to1_sim_worker.py"
     out.write_text(text,encoding="utf-8")
     return out
