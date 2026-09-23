@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 110,
+  "generation": 111,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -233,11 +233,11 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_LIVE_INSTALLED_BASELINE_BOUND",
+    "state": "CATEGORY_INTEGRATION_GITHUB_OFFICE_SOURCE_BINDING",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. LIVE WORDPRESS PLUGIN INVENTORY FROM 2026-09-23 IS NOW THE VERSION BASELINE. DO NOT USE OLDER REPO ASSUMPTIONS WHEN THEY CONFLICT WITH INSTALLED WORDPRESS. INSTALLED: Affiliate-Zentrale (Portal-kompatibel) 6.72.152; Affiliate Portal Template Kit (Pferde-kompatibel) 1.50.559; Portal Production Machine 6.7.9; Portal SEO Redaktionsplan Compiler 0.28.23; Portal SEO Themenengine 0.57.6; Portal Category Structure Repair Guard 1.0.1; Portal Production Center 1.1.1; Portal Production Link Policy Gate 1.0.1; Portal Link Policy Runtime Verifier 1.0.0; Allgemeine Bildzentrale 2.7.6. HARD SCOPE REMAINS CATEGORY/STRUCTURE ONLY. NO TEXTS, DESIGN CONTENT, PLUGIN CONCEPTS, PERFORMANCE, PROVIDER, RANKING OR BANNER LOGIC. DO NOT REPEAT COMPLETED PROOFS. CENTRAL KATEGORIEN.tsv REMAINS SOLE CATEGORY AUTHORITY. NEXT: SOURCE-BIND THE CURRENT INSTALLED PLUGIN TREES USING EXISTING READ-ONLY EXPORTERS/LIVE SOURCES, THEN CHECK ONLY FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES.",
-    "completion_condition": "FOR EACH LIVE INSTALLED CATEGORY-CANDIDATE PLUGIN, AN EXACT CURRENT SOURCE IS HASH-BOUND OR THE PLUGIN IS EXPLICITLY MARKED SOURCE-UNAVAILABLE; CATEGORY/STRUCTURE DEPENDENCY IS CLASSIFIED WITHOUT TOUCHING NON-CATEGORY BEHAVIOR. ANY NEEDED CHANGE IS LIMITED TO CATEGORY/STRUCTURE DATA ONLY.",
-    "after_completion_action": "ONLY AFTER CATEGORY-ONLY CONSUMERS ARE CURRENT-BOUND: CATEGORY E2E + WORDPRESS DRY-RUN. NO APPLY BEFORE DRY-RUN PASS.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. USE GITHUB OFFICES/PLUGIN OFFICE AND TECHNICAL GITHUB SOURCES ONLY; DO NOT USE SERVER OR LIBRARY AS SOURCE. CENTRAL KATEGORIEN.tsv IS THE SOLE CATEGORY AUTHORITY. COMPLETED: PPM679 SIGNED CATEGORY/SLOT DELTA BUILD-INTEGRITY PASS; PSERC 0.28.23 DYNAMIC ACCEPTANCE OF REAL TERM IDS 1577-1601 PASS WITH NO 25-CATEGORY CODE HARDCODING; PSTE 0.57.6 EXACT GITHUB PASS SOURCE BOUND TO RUN 35693065234 / ARTIFACT 10679790400 / ZIP SHA256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f AND ITS STATIC fixtures/portal-category-map-v1.json IS CONFIRMED AT 1124 ENTRIES, SO PSTE CATEGORY DELTA IS EXACTLY +25 TO 1149 IN THAT ONE TECHNICAL MAP ONLY. AFFILIATE CATEGORY CANDIDATE JSON BYTES REMAIN ALREADY HARDTESTED AND MUST NOT BE REBUILT. FIRST OPEN BLOCKER/NEXT ACTION: BIND THE EXACT CURRENT AFFILIATE-ZENTRALE 6.72.152 FULL SOURCE FROM PLUGINS-BUERO -> AFFILIATE FACHBUERO -> TECHNICAL GITHUB SOURCE. ONCE HASH-BOUND, REPLACE ONLY portal-structure-v279.json AND ebay-portal-catalog-v2.json WITH THE RECOVERED HARDTESTED CATEGORY BYTES; ALL OTHER FILES MUST REMAIN BYTE-IDENTICAL. DO NOT TOUCH TEXTS, TILE PREVIEWS, DESIGN, PLUGIN CONCEPTS, PERFORMANCE, PROVIDER, RANKING OR BANNER LOGIC. DO NOT REPEAT COMPLETED PROOFS. NO WORDPRESS WRITE.",
+    "completion_condition": "EXACT AFFILIATE-ZENTRALE 6.72.152 FULL GITHUB SOURCE IS HASH-BOUND; ONLY THE TWO ALREADY-HARDTESTED CATEGORY JSON FILES ARE REPLACED; ALL OTHER 6.72.152 FILES ARE BYTE-IDENTICAL; FOCUSED CATEGORY DELTA POSITIVE/NEGATIVE/UNCHANGED-REGRESSION PASSES WITHOUT RE-RUNNING UNRELATED PROOFS.",
+    "after_completion_action": "NEXT, APPLY THE PSTE 0.57.6 CATEGORY-ONLY +25 DELTA TO fixtures/portal-category-map-v1.json (1124->1149) AGAINST THE EXACT GITHUB PASS SOURCE; THEN CLASSIFY THE REMAINING INSTALLED PLUGINS FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES ONLY. PSERC REQUIRES ONLY FRESH STRUCTURE/PLAN REGENERATION AFTER PSTE; NO 25-CATEGORY CODE PATCH. NO WORDPRESS APPLY BEFORE CATEGORY E2E + DRY-RUN PASS.",
     "no_optional_detours": true,
     "sequence": 32,
     "authorized_change_prefixes": [
@@ -1031,9 +1031,9 @@
     "authority": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
     "rule": "READ BEFORE ANY FUTURE CATEGORY STRUCTURE CHANGE; THIS FILE CENTRALIZES REQUIREMENTS, CONSUMERS, TEST CONTRACT, DRY-RUN RULE, FALLBACK AND ERROR HISTORY",
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
-    "last_audit_commit": "91a84b19f5ecd3281816105e265ce27d334f64b7",
+    "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-23",
-    "current_first_blocker": "LIVE_CURRENT_PLUGIN_SOURCE_BINDING_FOR_CATEGORY_CONSUMERS",
+    "current_first_blocker": "AFFILIATE_6_72_152_EXACT_GITHUB_FULL_SOURCE_BINDING",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1227,6 +1227,94 @@
       },
       "scope": "CATEGORY_STRUCTURE_ONLY",
       "sole_category_authority": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
+    },
+    "closeout_fresh_check_20260923": {
+      "status": "PASS_DELTA_CHECK",
+      "checked_head": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
+      "hard_baseline_run_id": 35855777737,
+      "hard_baseline_result": "SUCCESS",
+      "current_authority": "control/release-governance/CURRENT_RELEASE.json",
+      "target_authority": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md#0A",
+      "office_route": "PLUGINS_BUERO -> FACHBUERO -> TECHNICAL_GITHUB_SOURCE",
+      "library_used": false,
+      "server_source_used": false
+    },
+    "current_category_scope": {
+      "allowed": "CATEGORY_STRUCTURE_ONLY",
+      "forbidden": [
+        "texts",
+        "tile_previews",
+        "design_content",
+        "plugin_concepts",
+        "performance_logic",
+        "provider_logic",
+        "ranking",
+        "banners",
+        "other_non_category_behavior"
+      ],
+      "general_category_workflow_related": false,
+      "sole_category_authority": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
+    },
+    "consumer_status": {
+      "affiliate_672152": {
+        "status": "FIRST_BLOCKER_EXACT_GITHUB_FULL_SOURCE_BINDING_PENDING",
+        "version": "6.72.152",
+        "portal_candidate_sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
+        "ebay_candidate_sha256": "6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2",
+        "allowed_delta_files": [
+          "affiliate-portal-router/assets/portal-structure-v279.json",
+          "affiliate-portal-router/assets/ebay-portal-catalog-v2.json"
+        ]
+      },
+      "ppm_679": {
+        "status": "CLOSED_SIGNED_BUILD_INTEGRITY_PASS",
+        "version": "6.7.9",
+        "signed_candidate_sha256": "cb64d1ee7fcf9c3bc4ff5aa9e2e8cb948763c2c2c1a7ad956b90f980da9e40fa"
+      },
+      "pste_0576": {
+        "status": "EXACT_GITHUB_SOURCE_BOUND_CATEGORY_MAP_DELTA_PENDING",
+        "version": "0.57.6",
+        "proof_run_id": 35693065234,
+        "proof_artifact_id": 10679790400,
+        "proof_zip_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
+        "static_category_map": "fixtures/portal-category-map-v1.json",
+        "current_entries": 1124,
+        "target_entries": 1149,
+        "allowed_delta_files": [
+          "fixtures/portal-category-map-v1.json"
+        ]
+      },
+      "pserc_02823": {
+        "status": "DYNAMIC_CATEGORY_GATE_PASS_REFRESH_ONLY",
+        "version": "0.28.23",
+        "code_patch_required": false,
+        "live_delta25_gate_pass": true
+      },
+      "template_kit_150559": {
+        "status": "CATEGORY_DEPENDENCY_CLASSIFICATION_PENDING",
+        "version": "1.50.559",
+        "non_category_scope_forbidden": true
+      },
+      "category_repair_guard_101": {
+        "status": "CATEGORY_DEPENDENCY_CLASSIFICATION_PENDING",
+        "version": "1.0.1"
+      },
+      "production_center_111": {
+        "status": "CATEGORY_DEPENDENCY_CLASSIFICATION_PENDING",
+        "version": "1.1.1"
+      },
+      "production_link_policy_gate_101": {
+        "status": "CATEGORY_DEPENDENCY_CLASSIFICATION_PENDING",
+        "version": "1.0.1"
+      },
+      "link_policy_runtime_verifier_100": {
+        "status": "CATEGORY_DEPENDENCY_CLASSIFICATION_PENDING",
+        "version": "1.0.0"
+      },
+      "image_center_276": {
+        "status": "CATEGORY_DEPENDENCY_CLASSIFICATION_PENDING",
+        "version": "2.7.6"
+      }
     }
   }
 }

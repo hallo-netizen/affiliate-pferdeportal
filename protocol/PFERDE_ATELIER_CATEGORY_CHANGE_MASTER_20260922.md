@@ -19,19 +19,27 @@ HARD RULE:
 - Jeder Apply braucht exakten Ausgangs-Hash/Version, Readback und dokumentierten Fallback.
 - PASS darf nur ein echter Prüfer/Readback behaupten, nie der Worker selbst.
 
-## 0A. Verbindlicher Zielvertrag / Definition of Done
+## 0A. Verbindlicher Zielvertrag / Definition of Done – KATEGORIE/STRUKTUR ONLY
 
-Die Kategorieänderung ist erst abgeschlossen, wenn **alle** folgenden Punkte gemeinsam belegt sind:
+**Gültig ab 2026-09-23.** Dieser Zielvertrag ersetzt den früher breiteren Scope mit Text-/Designaufgaben für die laufende Kategorieintegration.
 
-1. Die 5 neuen Produktseiten und 25 neuen Artikelkategorien sind als exakt 30 neue Knoten korrekt gebunden; bestehende Eltern/Kinder bleiben unverändert.
-2. PPA-013 liefert für diese Struktur die bereits bestätigten 30 individuellen Langtexte, die fünf passenden Icons und das Exact-7-Desktop-Raster sowie zusätzlich die fünf noch fehlenden kurzen Kachelvorschauen im bestehenden Kartenmechanismus.
-3. Die Affiliate-Zentrale verwendet eine aus dem exakt gebundenen aktuellen Vollbaum abgeleitete Portalstruktur und einen dazu hash-/count-konsistenten eBay-Zielkatalog. Performance-, Provider-, Ranking-, Banner- und Fachlogik bleiben außerhalb des Struktur-Deltas byte-/verhaltensgleich.
-4. PSTE liest die reale WordPress-Struktur frisch ein; PSERC akzeptiert die neuen Kategorien über seinen bestehenden dynamischen Strukturpfad; keine manuell erfundenen Kategoriebindungen.
-5. PPM 6.7.9 kennt die 25 neuen Produktionskategorien **und** besitzt für sie die vollständigen kanonischen Produktionsslots. Lauf-/testbezogene Hierarchie- oder Link-Snapshots werden nicht zu Vollregistern umfunktioniert.
-6. Interne Linkziele werden aus den aktualisierten Autoritäten read-only neu gebunden; NEW-Linkbindung vor Texterstellung bleibt Pflicht.
-7. Jede tatsächlich geänderte Komponente hat lokalen/CI-Positivtest, Negativtest, Regressionstest, Fresh-Unpack/Hashbeleg und einen dokumentierten Fallback.
-8. Vor jedem schreibenden WordPress-Schritt läuft ein echter Dry-Run/Preflight mit `writes_performed=false`. Erst bei vollständigem PASS genau ein Apply, danach neuer Request + Readback.
-9. Keine Produktionsfreigabe, solange ein Pflichtnachweis offen ist.
+Die Kategorieintegration ist erst abgeschlossen, wenn **alle** folgenden Punkte gemeinsam belegt sind:
+
+1. Einzige fachliche Kategorien-Wahrheit bleibt `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv`, erzeugt aus dem aktuellen WordPress-Export vom 23.09.2026. Keine Automatik, kein Kategorieplugin, keine zweite Kategorienquelle.
+2. Für jedes tatsächlich installierte Plugin, das Pferdeportal-Kategorien oder Portalstruktur konsumiert, wird die **exakte aktuelle GitHub-Quelle über PLUGINS-Büro → zuständiges Fachbüro → technische Hauptquelle** gebunden. Kein Serverabruf und keine Rekonstruktion aus veralteten Ständen.
+3. Erlaubt sind ausschließlich Kategorie-/Strukturänderungen: IDs, Slugs, Namen, Parent-/Portalzuordnungen, technische Kategorie-Kopien/Ableitungen, ausschließlich kategorienbedingte Count-/Hash-Bindungen und read-only Strukturrefreshes.
+4. **Nicht Teil dieses Zielvertrags:** Texte, Kachelvorschauen, Designinhalte, Plugin-Konzepte, Performance-, Provider-, Ranking-, Banner- oder sonstige fachfremde Logik. PPA-013 darf nur auf eine statische Kategorien-/Portalstrukturbindung geprüft werden; Inhalte/Design bleiben unangetastet.
+5. PPM 6.7.9 muss die 25 neuen Produktionskategorien und 125 neuen kanonischen Slots konsistent enthalten. Dieser Punkt ist mit signiertem Build-Integrity-PASS bereits geschlossen.
+6. Affiliate-Zentrale muss im **installierten aktuellen Stand 6.72.152** ausschließlich die bereits hart getestete Portalstruktur und den bereits hart getesteten eBay-Katalog als technische Kategorienableitung erhalten; alle übrigen Dateien bleiben unverändert.
+7. PSTE muss im **installierten aktuellen Stand 0.57.6** seine technische Kategorieableitung auf 1149 Produktionskategorien nachziehen. PSERC 0.28.23 nutzt den bestehenden dynamischen Strukturpfad; kein 25er-Hardcoding.
+8. Portal-/Link-Verbraucher werden nur auf tatsächliche statische Kategorie-/Strukturkopien geprüft. Dynamische Leser erhalten ausschließlich den notwendigen read-only Refresh/Readback.
+9. Bereits gültige, hash-identische Altbeweise werden nicht vollständig wiederholt. Nur das neue Delta wird positiv, negativ und auf unveränderten Altbestand geprüft, soweit für die konkrete Änderung erforderlich.
+10. Vor jedem späteren schreibenden WordPress-Schritt: echter Dry-Run/Preflight mit `writes_performed=false`; erst danach genau ein Apply + neuer Request + Readback.
+11. Keine Produktionsfreigabe, solange ein Kategorie-/Strukturverbraucher noch ungeklärt oder nicht auf die zentrale Kategorienwahrheit gebunden ist.
+
+## 0B. Scope-Hinweis zu historischen Abschnitten
+
+Die nachfolgenden Abschnitte zu früheren Text-/Design-/Kachelaufgaben bleiben ausschließlich **Historie/Nachweis des früher breiteren Auftrags**. Sie sind **kein aktueller Zielvertrag und keine aktuelle NEXT ACTION**. Für den laufenden Auftrag gilt ausschließlich Abschnitt 0A plus die aktuelle Status-/NEXT-ACTION-Autorität `control/release-governance/CURRENT_RELEASE.json`.
 
 ## 1. Aktuelle Strukturänderung
 
@@ -716,10 +724,10 @@ Der in Abschnitt 15 gebaute exakte Kandidat wurde mit dem vorhandenen autorisier
 - `PPM679_Build_Integrity`: **PASS**
 - kein WordPress-Write.
 
-Damit ist der PPM-Blocker geschlossen. Nächster Verbraucher gemäß KISS-Reihenfolge: exakten aktuellen PPA-013-Vollstand aus dem Design-Büro binden und ausschließlich die fünf noch fehlenden kurzen Kachelvorschauen ergänzen; bestehende Performance-/Text-/Icon-/Grid-Änderungen bleiben unangetastet.
+Damit war der PPM-Blocker geschlossen. **Historischer Hinweis:** der damals genannte PPA-013-Inhaltsschritt wurde später durch den verbindlichen KATEGORIE/STRUKTUR-ONLY-Scope in Abschnitt 0A abgelöst und ist keine aktuelle NEXT ACTION.
 
 
-## 17. Verbleibende Kategorie-Verbraucher – echter Stand 2026-09-23
+## 17. Verbleibende Kategorie-Verbraucher – historischer Zwischenstand 2026-09-23
 
 Nach abgeschlossenem signiertem PPM-Delta wurden die übrigen Verbraucher bis zur jeweils verfügbaren aktuellen Quelle geprüft.
 
@@ -776,8 +784,7 @@ Bereits abgeschlossene Kategoriebeweise werden nicht erneut ausgeführt.
 
 PPA-013-Inhaltsarbeit ist ausdrücklich **außerhalb dieses Kategorie-Scopes**.
 
-Aktueller erster offener Kategorieblocker:
-exakter Affiliate-6.72.145-Vollstand für die bereits hart getestete **zwei-JSON-Kategorieintegration**. Kein Neuaufbau aus 6.72.105.
+Historischer damaliger Blocker: exakter Affiliate-6.72.145-Vollstand. **Abgelöst:** die reale installierte Basis wurde später als **6.72.152** festgestellt. Aktueller Blocker/NEXT ACTION steht ausschließlich in `CURRENT_RELEASE.json`.
 
 
 ## 20. Affiliate-Kategorieartefakt original wiedergewonnen (2026-09-23)
@@ -804,8 +811,7 @@ Diese beiden Dateien sind **technische Kategorieableitungen**, keine zweite Kate
 Wichtig:
 Der historische Checkout des Performance-Hardtests enthält unter `release/affiliate-zentrale/current` die Version **6.72.105**. Er darf ausdrücklich **nicht** als Ersatz für den fehlenden exakten 6.72.145-Vollstand benutzt werden.
 
-Damit ist nichts mehr an der Kategorieableitung zu bauen oder erneut zu testen. Offen ist nur:
-**exakten 6.72.145-Vollbaum beschaffen/binden und darin ausschließlich diese zwei JSON-Dateien bytegenau ersetzen.**
+Die beiden Kategorieableitungen selbst bleiben als geprüfte Bytes gültig und werden nicht neu gebaut. **Historischer Hinweis:** die damalige 6.72.145-Basis wurde später durch den real installierten Stand **6.72.152** als Zielbasis abgelöst. Die aktuelle Bindung steht ausschließlich in `CURRENT_RELEASE.json`.
 
 
 ## 21. Live installierter Plugin-Stand als Kategorie-Basis (2026-09-23)
@@ -832,3 +838,78 @@ HARD SCOPE:
 nur Kategorien/Portalstruktur. Keine Texte, kein Designinhalt, keine Plugin-Konzepte, keine Performance-/Provider-/Ranking-/Bannerlogik.
 
 Einzige Kategorienwahrheit bleibt `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv`.
+
+
+## 22. Abschluss-/Nachholprüfung 2026-09-23 – Kategorieintegration
+
+Rolle: **Historie/Nachweis**, keine zweite CURRENT-/NEXT-ACTION-Wahrheit.
+
+### Frischecheck
+- zuständige technische Current-Autorität: `control/release-governance/CURRENT_RELEASE.json`
+- Branch: `affiliate-release-current`
+- vor dieser Nachholung geprüfter Head: `5f5d5b320327ecf4aff33fea132932f194dc53c4`
+- `Category Integration Hard Baseline` Run `35855777737`: **SUCCESS** auf genau diesem Head.
+- keine Vollrekonstruktion des bereits bewiesenen Altbestands.
+
+### Routing / Büros
+- PLUGINS-Büro: `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/START_HERE.md`
+- dortige Regel bestätigt: Inventar/Routing im PLUGINS-Büro; Fach-/Release-/LIVE-Wahrheit im zuständigen Fachbüro bzw. technischer Originalquelle.
+- allgemeingültiges `KATEGORIENMODELL` ist **nicht** die Pferdeportal-Kategorienquelle und bleibt unberührt.
+- für diese Arbeit gilt: **GitHub-Büro/Fachquelle, nicht Server und nicht Bibliothek.**
+
+### Belastbarer Kategorienstand
+- einzige Kategorien-Wahrheit: `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv`
+- 1160 WordPress-Kategorien insgesamt; 1149 Produktionskategorien + 11 sonstige Kategorien.
+- PPM 6.7.9: Kategorie-/Slot-Delta signiert, Build-Integrity PASS; abgeschlossen.
+- PSERC 0.28.23: 25 neue reale Kategorien 1577–1601 über bestehenden dynamischen Gate-Pfad PASS; **kein 25er-Code-Hardcoding**.
+- Affiliate-Zentrale: real installiert **6.72.152**. Die bereits hart getesteten Kategorieableitungen bleiben:
+  - `portal-structure-v279.CANDIDATE.json` SHA256 `ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed`
+  - `ebay-portal-catalog-v2.CANDIDATE.json` SHA256 `6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2`
+  Aktueller 6.72.152-Vollbaum ist noch exakt über das AFFILIATE-/PLUGINS-Büro zu binden; 6.72.105/6.72.145 dürfen nicht als Zielbasis angenommen werden.
+- PSTE: real installiert **0.57.6**. Exakter GitHub-PASS-Nachweis:
+  - Workflow `PSTE Real WordPress HTTP E2E`
+  - Run `35693065234`
+  - Artifact `10679790400`
+  - getestete ZIP SHA256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`
+  - exakte Quellprüfung zeigt statische technische Ableitung `fixtures/portal-category-map-v1.json` mit **1124** Einträgen.
+  - Kategorie-Delta deshalb: ausschließlich diese Map **+25 -> 1149**; keine PSTE-Recherche-/Provider-/Workflowlogik ändern.
+- noch auf Kategorieabhängigkeit gegen ihre exakten GitHub-Quellen zu klassifizieren:
+  - Affiliate Portal Template Kit (Pferde-kompatibel) 1.50.559
+  - Portal Category Structure Repair Guard 1.0.1
+  - Portal Production Center 1.1.1
+  - Portal Production Link Policy Gate 1.0.1
+  - Portal Link Policy Runtime Verifier 1.0.0
+  - Allgemeine Bildzentrale 2.7.6
+
+### Fehler-/Korrektur-Nachtrag
+
+**Fehler P – falscher Quellenweg Server/Bibliothek**
+- Es wurde zwischenzeitlich angenommen, aktuelle Pluginquellen müssten vom Server bzw. aus einer Dateiablage beschafft werden.
+- Korrektur: Nutzerregel bestätigt: Pluginstände liegen in GitHub-Büros/Plugin-Büro. Aktueller Arbeitsweg ist ausschließlich PLUGINS-Büro -> Fachbüro -> technische GitHub-Hauptquelle.
+- Prävention: nie wieder Server/Bibliothek als ersten Quellenweg für diese Pluginarbeit verwenden.
+
+**Fehler Q – veraltete Affiliate-Zielbasis 6.72.145**
+- Zwischenzeitlich wurde 6.72.145 als aktueller Integrationsbaum behandelt.
+- Nutzer-Readback belegt real installiert **6.72.152**.
+- Korrektur: 6.72.145 bleibt Historie; Kategorieintegration darf nur gegen exakt gebundenen 6.72.152-Vollstand erfolgen.
+
+**Fehler R – Scope-Drift in Inhalte/Design**
+- Kategoriearbeit driftete zeitweise zu PPA-Kacheltexten/Design-/Plugininhalten.
+- Korrektur: HARD SCOPE in Abschnitt 0A: ausschließlich Kategorien/Struktur. Inhalte/Design/Konzepte/Performance/Provider/Ranking/Banner sind verboten.
+
+**Fehler S – unnötiges Wiederholen bereits bewiesener Prüfungen**
+- Mehrfach wurden bereits belegte Altstände erneut untersucht.
+- Korrektur: KISS-Frischecheck; bei unveränderter Bindung nur Delta prüfen und vorhandene PASS-Evidence wiederverwenden.
+
+**Fehler T – PSTE zunächst fälschlich als rein dynamischer Kategorienleser eingestuft**
+- Frühere Prüfung sagte „keine statische Kategorie-Codeänderung nötig“.
+- Exakte 0.57.6-GitHub-Quelle zeigt zusätzlich `fixtures/portal-category-map-v1.json` mit 1124 Einträgen.
+- Korrektur: genau diese technische Ableitung muss +25 auf 1149 nachgezogen werden; übriger PSTE-Code bleibt unberührt.
+
+### Exakter statischer Einstieg für den nächsten Chat
+1. `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/START_HERE.md` als Bürotür lesen.
+2. Für den Kategorieauftrag auf `protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md` Abschnitt 0A routen.
+3. Danach **ausschließlich** `control/release-governance/CURRENT_RELEASE.json` als aktuelle Status-/Blocker-/NEXT-ACTION-Autorität lesen.
+4. Branch `affiliate-release-current` gegen Head und neuesten `Category Integration Hard Baseline`-Run frisch prüfen.
+5. Bindung unverändert -> **keine Vollrekonstruktion**, direkt die dortige NEXT ACTION ausführen.
+
