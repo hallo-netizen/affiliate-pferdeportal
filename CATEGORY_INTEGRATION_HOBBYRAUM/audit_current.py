@@ -44,9 +44,26 @@ checks["portal_counts"]=portal.get("counts")
 checks["catalog_counts"]=catalog.get("counts")
 checks["portal_lengths"]={"pages":len(portal.get("pages",[])),"categories":len(portal.get("categories",[])),"menu":len(portal.get("menu",[]))}
 
-expected_counts={"produktseiten":329,"themenkategorien":1124,"menu_items_total":1520}
+BASE_PORTAL_SHA="b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+BASE_CATALOG_SHA="4eecef55a3033a4691f8a832eba5fb1657cdb15826ee47d366dccbaabfbb1fa2"
+APPLIED_PORTAL_SHA="ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed"
+APPLIED_CATALOG_SHA="6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2"
+
+pair=(checks["portal_sha256"],checks["catalog_sha256"])
+if pair==(BASE_PORTAL_SHA,BASE_CATALOG_SHA):
+    mode="BASE"
+    expected_counts={"produktseiten":329,"themenkategorien":1124,"menu_items_total":1520}
+    expected_products,expected_articles=329,1124
+elif pair==(APPLIED_PORTAL_SHA,APPLIED_CATALOG_SHA):
+    mode="APPLIED"
+    expected_counts={"produktseiten":334,"themenkategorien":1149,"menu_items_total":1550}
+    expected_products,expected_articles=334,1149
+else:
+    fail("CATEGORY_JSON_PAIR_UNBOUND",portal_sha256=pair[0],catalog_sha256=pair[1])
+
+checks["affiliate_category_state"]=mode
 for k,v in expected_counts.items():
-    if int((portal.get("counts") or {}).get(k,-1))!=v: fail("BASE_PORTAL_COUNT_DRIFT",key=k,actual=(portal.get("counts") or {}).get(k),expected=v)
+    if int((portal.get("counts") or {}).get(k,-1))!=v: fail("PORTAL_COUNT_DRIFT",state=mode,key=k,actual=(portal.get("counts") or {}).get(k),expected=v)
 
 page_slugs=[str(x.get("slug") or "") for x in portal.get("pages",[]) if isinstance(x,dict)]
 cat_slugs=[str(x.get("category_slug") or "") for x in portal.get("categories",[]) if isinstance(x,dict)]
@@ -59,12 +76,16 @@ new_page_slugs=[f["slug"] for f in families]
 new_cat_slugs=[f["slug"]+"-"+suffix[t] for f in families for t in f["types"]]
 checks["new_page_slugs"]=new_page_slugs
 checks["new_category_slugs"]=new_cat_slugs
-checks["new_nodes_absent_in_base"]={
+checks["new_nodes_absent"]={
  "pages":[s for s in new_page_slugs if s not in page_slugs],
  "categories":[s for s in new_cat_slugs if s not in cat_slugs],
 }
-if len(checks["new_nodes_absent_in_base"]["pages"])!=5: fail("NEW_PAGE_ALREADY_PRESENT_OR_COLLISION",value=checks["new_nodes_absent_in_base"])
-if len(checks["new_nodes_absent_in_base"]["categories"])!=25: fail("NEW_CATEGORY_ALREADY_PRESENT_OR_COLLISION",value=checks["new_nodes_absent_in_base"])
+if mode=="BASE":
+    if len(checks["new_nodes_absent"]["pages"])!=5 or len(checks["new_nodes_absent"]["categories"])!=25:
+        fail("BASE_NEW_NODE_COLLISION",value=checks["new_nodes_absent"])
+else:
+    if checks["new_nodes_absent"]["pages"] or checks["new_nodes_absent"]["categories"]:
+        fail("APPLIED_NEW_NODE_MISSING",value=checks["new_nodes_absent"])
 
 pages_by_slug={x["slug"]:x for x in portal["pages"] if isinstance(x,dict) and x.get("slug")}
 for f in families:
@@ -74,7 +95,8 @@ for f in families:
 
 prod=catalog.get("product_targets") or []
 arts=catalog.get("article_targets") or []
-if len(prod)!=329 or len(arts)!=1124: fail("BASE_CATALOG_TARGET_COUNT_DRIFT",products=len(prod),articles=len(arts))
+if len(prod)!=expected_products or len(arts)!=expected_articles:
+    fail("CATALOG_TARGET_COUNT_DRIFT",state=mode,products=len(prod),articles=len(arts),expected_products=expected_products,expected_articles=expected_articles)
 if len({x.get("slug") for x in prod})!=len(prod): fail("BASE_CATALOG_DUPLICATE_PRODUCT")
 if len({x.get("category_slug") for x in arts})!=len(arts): fail("BASE_CATALOG_DUPLICATE_ARTICLE")
 
