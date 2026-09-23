@@ -3,6 +3,7 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parents[1]
@@ -13,10 +14,30 @@ import full_workflow_gate
 import intake_bridge
 import production_bridge
 import progress_guard
+import runtime_environment_guard
 import universal_reentry_guard
 
 
 class CurrentProductionGuardTests(unittest.TestCase):
+    def setUp(self):
+        runtime = {
+            "contract": runtime_environment_guard.CONTRACT,
+            "status": "PASS",
+            "toolbox_manifest_sha256": hashlib.sha256(b"toolbox").hexdigest(),
+            "languagetool_jar_sha256": hashlib.sha256(b"lt").hexdigest(),
+            "ppm679_package_sha256": hashlib.sha256(b"ppm").hexdigest(),
+            "pserc_fix_package_sha256": hashlib.sha256(b"pserc").hexdigest(),
+            "free_tool_selection": False,
+            "free_binary_lookup": False,
+            "fallback_runtime_allowed": False,
+            "publish_allowed": False,
+        }
+        runtime["binding_sha256"] = runtime_environment_guard.stable(runtime)
+        self.runtime = runtime
+        patcher = mock.patch.object(runtime_environment_guard, "current_binding", return_value=runtime)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_own_domain_is_always_forbidden(self):
         self.assertTrue(intake_bridge._forbidden_research_url("https://pferde-atelier.de/test"))
         self.assertTrue(intake_bridge._forbidden_research_url("https://www.pferde-atelier.de/test"))
