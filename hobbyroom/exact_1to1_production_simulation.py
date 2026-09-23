@@ -269,8 +269,16 @@ def execute_workspace(repo: Path, workspace: Path, worker: Path, env: dict, inde
             p=generated/f"repair-{s.get('revision',0)}.html"; produce("repair",p)
             after=p.read_text(encoding="utf-8")
             if after==before and (s.get("checks") or {}).get("checker")=="languagetool":
-                if str(repo/"isolated_system4") not in sys.path: sys.path.insert(0,str(repo/"isolated_system4"))
-                import production_checks_engine as pce
+                import importlib.util
+                system4_dir=repo/"isolated_system4"
+                if str(system4_dir) not in sys.path:
+                    sys.path.insert(0,str(system4_dir))
+                pce_path=system4_dir/"production_checks_engine.py"
+                spec=importlib.util.spec_from_file_location("exact_sim_production_checks_engine",pce_path)
+                if spec is None or spec.loader is None:
+                    raise SimBlocked("SIM_LT_ENGINE_MODULE_LOAD_FAILED")
+                pce=importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(pce)
                 plain=pce._plain_text(before)
                 report,_,_=pce._run_languagetool_text(repo,plain)
                 changed=False
