@@ -36,6 +36,13 @@ def run(args, *, cwd: Path, env: dict, ok=(0,)):
     return cp
 
 def last_json(text: str) -> dict:
+    stripped=text.strip()
+    try:
+        value=json.loads(stripped)
+        if isinstance(value,dict):
+            return value
+    except Exception:
+        pass
     for line in reversed(text.splitlines()):
         line=line.strip()
         if line.startswith("{"):
