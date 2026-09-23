@@ -90,3 +90,41 @@ Weiter bestehende Beweisgrenze:
 - Das Artefakt enthält nicht den vollständigen installierten 1.50.559-Vollquellbaum.
 - Deshalb ist allein damit nicht bewiesen, ob eine bereits vor 1.50.558 vorhandene statische Vollstruktur irgendwo im unveränderten restlichen Template-Kit-Quellcode existiert.
 - Kein Ersatz-Vollbaum wird aus 1.50.558 rekonstruiert.
+
+
+## Template Kit – statischer Kategorieverbraucher hart gefunden
+
+Direkter Altquellcode-Beleg:
+- Datei: `pferde-template-kit_V1.50.421.php`
+- Blob SHA: `bd26b65d033160ada9f98d249794b9911ab1fb2c`
+- vollständig gelesen: 1.569.800 Bytes.
+
+Gefundener statischer Verbraucher:
+- `assets/breadcrumb-portal-map-v150310.json`
+- Loadervertrag: `PFTK_BREADCRUMB_PORTAL_MAP_V150310`
+- harter erwarteter `category_count`: **1124**
+- harter `count(categories)`: **1124**
+- der Loader liest diese Datei als statische Breadcrumb-Kategorienkarte.
+
+Weitere harte Altquellprüfung:
+- keine Referenz auf `portal-structure-v279.json`
+- keine Referenz auf `KATEGORIEN.tsv`
+- keine Referenz auf `category-map`
+- keine Referenz auf `complete-portal-category-source`
+- keine Referenz auf `category-hierarchy`
+- keine Referenz auf `wordpress-link-target`
+- keine hart codierten Blattkategorie-Slugs der neuen 25 Kategorien im Altquellcode.
+- die zahlreichen `term_id`-Vorkommen sind überwiegend Runtime-Termzugriffe bzw. die kleine separate Journal-Konfiguration; sie sind **nicht** die 1124er Portalvollstruktur.
+
+Delta-Beweise:
+- 1.50.556 -> 1.50.558: dokumentierter Apply änderte ausschließlich `pferde-template-kit.php`; keine Datei hinzugefügt/entfernt.
+- 1.50.558 -> 1.50.559: hochgeladenes 1.0.3-Hardtest-Artefakt erzwingt ebenfalls ausschließlich `pferde-template-kit.php` als geänderte Datei; keine Datei hinzugefügt/entfernt.
+- Der 1.0.3-Transform selbst verändert nur Editorial-Overlay + Versionsmarker; keine Asset-Datei.
+- Damit wurde die Breadcrumb-Map durch diese beiden Deltas jedenfalls nicht neu erzeugt oder entfernt.
+
+Beweisgrenze / aktueller echter Blocker:
+- Die aktuelle 1.50.559-Vollquelle bzw. die reale aktuelle Datei `assets/breadcrumb-portal-map-v150310.json` ist weiterhin nicht direkt gebunden.
+- Deshalb darf die alte 1124er Map **nicht aus einer anderen Kategorienquelle rekonstruiert und als aktuelle 1.50.559-Datei ausgegeben** werden.
+- Der Verbraucher ist aber nicht mehr ungeklärt: **statische Kategorieabhängigkeit = JA**.
+- Nächste technische Bindung innerhalb des Template-Kits: exakte aktuelle `assets/breadcrumb-portal-map-v150310.json` aus dem echten 1.50.559-Pluginbaum beschaffen/hashbinden und gegen die autoritative `KATEGORIEN.tsv` prüfen.
+- Falls sie weiterhin 1124 enthält, ausschließlich dieses Breadcrumb-Kategorieasset plus notwendige Count-/Hash-Bindungen auf die neue Kategorienwahrheit nachziehen; sonst nichts am Template-Kit ändern.
