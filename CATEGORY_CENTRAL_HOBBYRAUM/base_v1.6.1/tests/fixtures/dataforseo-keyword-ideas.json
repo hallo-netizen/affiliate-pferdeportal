@@ -1,0 +1,29 @@
+{
+  "version": "0.1.test",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "cost": 0.0103,
+  "tasks": [{
+    "id": "test-task-1",
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "cost": 0.0103,
+    "result": [{
+      "total_count": 2,
+      "items": [
+        {
+          "keyword": "hauswasserfilter",
+          "keyword_info": {"search_volume": 1000, "cpc": 1.2, "competition": 0.5, "competition_level": "MEDIUM", "monthly_searches": [], "last_updated_time": "2026-08-01 00:00:00 +00:00"},
+          "search_intent_info": {"main_intent": "commercial", "foreign_intent": ["transactional"]},
+          "keyword_properties": {"core_keyword": "hauswasserfilter", "keyword_difficulty": 31, "detected_language": "de"}
+        },
+        {
+          "keyword": "wasserfilter fürs haus",
+          "keyword_info": {"search_volume": 500, "cpc": 0.9, "competition": 0.4, "competition_level": "MEDIUM", "monthly_searches": [], "last_updated_time": "2026-08-01 00:00:00 +00:00"},
+          "search_intent_info": {"main_intent": "informational", "foreign_intent": ["commercial"]},
+          "keyword_properties": {"core_keyword": "hauswasserfilter", "keyword_difficulty": 28, "detected_language": "de"}
+        }
+      ]
+    }]
+  }]
+}

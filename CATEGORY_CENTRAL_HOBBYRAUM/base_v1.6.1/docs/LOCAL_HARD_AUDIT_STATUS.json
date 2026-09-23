@@ -1,0 +1,17 @@
+{
+  "version": "1.6.1",
+  "status": "LOCAL_SOURCE_AND_FRESH_PASS_LIVE_RUN_PENDING",
+  "source_tests": "112/112 PASS",
+  "fresh_tests": "112/112 PASS",
+  "content_write_capability": false,
+  "workflow_hardlock": [
+    "master_contract_id_bound",
+    "initial_visible_scope_hash_plus_server_signature_before_global_paid",
+    "global_gap_visible_scope_hash_plus_server_signature_before_detail_paid",
+    "final_visible_scope_hash_plus_server_signature_before_final",
+    "market_and_language_bound_end_to_end",
+    "global_similarity_never_auto_closes",
+    "deferred_blocks_progress"
+  ],
+  "note": "Source und Fresh-Unpack lokal PASS. Echte WordPress/DataForSEO-Stagingausführung bleibt Live-Nachweis."
+}

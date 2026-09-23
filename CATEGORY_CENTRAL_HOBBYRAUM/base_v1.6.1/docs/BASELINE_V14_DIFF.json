@@ -1,0 +1,43 @@
+{
+  "baseline": "V1.4.0",
+  "candidate": "V1.6.1",
+  "changed_files": [
+    "README.txt",
+    "SHA256SUMS.txt",
+    "affiliate-portal-kategorie-workflow.php",
+    "docs/ARCHITECTURE_MUTATION_SCAN.json",
+    "docs/BASELINE_V13_DIFF.json",
+    "docs/CHANGELOG.md",
+    "docs/CODEX_AUFTRAG.md",
+    "docs/CONTENT_WRITE_API_SCAN.json",
+    "docs/DATAFORSEO_CONTRACT.md",
+    "docs/EXTERNAL_ENDPOINT_AUDIT.json",
+    "docs/INTERFACE_CONTRACT.md",
+    "docs/JSON_PARSE_AUDIT.json",
+    "docs/KNOWN_LIMITATIONS.md",
+    "docs/LOCAL_HARD_AUDIT_STATUS.json",
+    "docs/PHP_LINT.txt",
+    "docs/TESTPROTOKOLL.md",
+    "docs/TEST_RESULTS.txt",
+    "docs/WORKFLOW.md",
+    "docs/WORKFLOW_HARD_AUDIT.md",
+    "includes/class-apkw-admin.php",
+    "includes/class-apkw-research-evidence.php",
+    "includes/class-apkw-research.php",
+    "includes/class-apkw-validator.php",
+    "schema-global-coverage-v1.0.json",
+    "tests/run-tests.php"
+  ],
+  "changed_count": 25,
+  "unchanged_count": 6,
+  "removed": [
+    "schema-category-v1.3.json",
+    "schema-research-v1.3.json"
+  ],
+  "added": [
+    "docs/BASELINE_V14_DIFF.json",
+    "docs/BASELINE_V160_CODEX_DIFF.json",
+    "schema-category-v1.4.json",
+    "schema-research-v1.4.json"
+  ]
+}
