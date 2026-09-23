@@ -1,0 +1,30 @@
+name: Category Central Inspect
+on:
+  push:
+    branches: [category-central-office-v1]
+    paths:
+      - 'CATEGORY_CENTRAL_HOBBYRAUM/**'
+      - '.github/workflows/category-central-inspect.yml'
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Inspect exact existing category workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/cat && mkdir -p /tmp/cat
+          sha256sum "QUELLCODE_KATEGORIE_WORKFLOW_V1.6.1_WORKFLOW_HARDLOCK.zip"
+          unzip -q "QUELLCODE_KATEGORIE_WORKFLOW_V1.6.1_WORKFLOW_HARDLOCK.zip" -d /tmp/cat/workflow
+          echo "=== FILES ==="
+          find /tmp/cat/workflow -type f | sort
+          echo "=== HEADERS / VERSION / PURPOSE ==="
+          grep -RniE --include='*.php' --include='*.json' --include='*.md' --include='*.txt' 'Plugin Name:|Version:|category|kategorie|taxonomy|workflow|hardlock|manifest|fallback' /tmp/cat/workflow | head -n 500 || true
+          echo "=== MASTER ZIP INVENTORY ==="
+          sha256sum "ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK (1).zip"
+          unzip -l "ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK (1).zip" | head -n 300
+          echo CATEGORY_CENTRAL_INSPECT_PASS
