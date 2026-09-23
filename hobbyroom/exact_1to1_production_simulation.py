@@ -87,7 +87,7 @@ def setup_simulation_external_conditions(repo: Path) -> dict:
         "hardlock_base_head_sha":head,
         "user_approval":True,
         "codex_capacity_status":"AVAILABLE",
-        "approved_article_count":int(load(repo/"control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json").get("generation") and load(repo/"control/startmaster0107/runtime_inbox/generations/000001/SOURCE_SNAPSHOT.json")["next_textmachine_metadata_batch"]["item_count"]),
+        "approved_article_count":int(load(repo/load(repo/"control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json")["source_snapshot_ref"])["next_textmachine_metadata_batch"]["item_count"]),
         "new_article_policy":"COMPLETELY_NEW_NO_RECOVERY_BODY",
         "sequential_advance_policy":"PASS_ONLY",
         "repair_policy":"SAME_ARTICLE_SAME_WORKSPACE_UNTIL_PASS",
@@ -338,24 +338,35 @@ def main() -> int:
     a=ap.parse_args()
     repo=Path(a.repo).resolve(); out=Path(a.out).resolve(); out.mkdir(parents=True,exist_ok=True)
     env=os.environ.copy(); env["PYTHONDONTWRITEBYTECODE"]="1"; env["PYTHONPATH"]=str(repo/"isolated_system4")
-    proof={"contract":"PFERDE_ATELIER_EXACT_1TO1_PRODUCTION_SIMULATION_V1","status":"RUNNING","production_code_source":"main","production_files_modified":False,"publish_allowed":False,"stages":[]}
+    proof={"contract":"PFERDE_ATELIER_EXACT_1TO1_PRODUCTION_SIMULATION_V1","status":"RUNNING","production_code_source":"main","production_code_modified":False,"temporary_external_state_simulation":True,"publish_allowed":False,"stages":[]}
     try:
-        sim=setup_simulation_external_conditions(repo); proof["simulation_external_conditions"]=sim
-        td,server=localize_bound_sources(repo)
-        hidden=hide_simulation_data_from_git_status(repo)
-        proof["simulation_git_hidden_data_paths"]=hidden
+        # First prove and enter the real 107007 runtime on a byte-clean current-main checkout.
         jar=write_lt_runtime_proof(repo); env["SYSTEM4_LANGUAGETOOL_JAR"]=str(jar)
         cp=run([sys.executable,repo/"control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"],cwd=repo,env=env)
         preflight=last_json(cp.stdout); proof["stages"].append({"stage":"PRODUCTION_PREFLIGHT","status":preflight["status"]})
+        outer=last_json(run([sys.executable,repo/"control/output-quarantine/runtime_entry_gate.py","start"],cwd=repo,env=env).stdout)
+        if outer.get("status")!="OFFICIAL_RUNTIME_ENTRY_PASS" or outer.get("sequence")!=107007:
+            raise SimBlocked("OUTER_107007_START_NOT_PASS:"+json.dumps(outer))
+        proof["stages"].append({"stage":"107007_OUTER_ENTRY","status":"PASS","ticket_id":outer["ticket_id"]})
 
+        # Simulate only the external pre-Codex conditions. These three state files are
+        # restored byte-for-byte immediately after the unchanged production parent starts.
+        simulated_paths=[
+            repo/"control/startmaster0107/CURRENT_STATE.json",
+            repo/"control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
+            repo/"control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
+        ]
+        original={p:p.read_bytes() for p in simulated_paths}
         try:
-            outer=last_json(run([sys.executable,repo/"control/output-quarantine/runtime_entry_gate.py","start"],cwd=repo,env=env).stdout)
-            if outer.get("status")!="OFFICIAL_RUNTIME_ENTRY_PASS" or outer.get("sequence")!=107007:
-                raise SimBlocked("OUTER_107007_START_NOT_PASS:"+json.dumps(outer))
-            proof["stages"].append({"stage":"107007_OUTER_ENTRY","status":"PASS","ticket_id":outer["ticket_id"]})
+            sim=setup_simulation_external_conditions(repo)
+            proof["simulation_external_conditions"]=sim
             parent=last_json(run([sys.executable,repo/"isolated_system4/parent_start.py","start-current-bound"],cwd=repo,env=env).stdout)
         finally:
-            server.shutdown(); server.server_close(); td.cleanup()
+            for p,raw in original.items():
+                p.write_bytes(raw)
+        dirty=run(["git","status","--porcelain","--untracked-files=no"],cwd=repo,env=env).stdout.strip()
+        if dirty:
+            raise SimBlocked("TRACKED_STATE_ROLLBACK_NOT_BYTE_CLEAN:"+dirty)
         if parent.get("status")!="SYSTEM4_PARENT_ROOT_READY_STOP":
             raise SimBlocked("PARENT_START_NOT_PASS:"+json.dumps(parent))
         proof["stages"].append({"stage":"CHAT_TO_POINT0_PARENT_START","status":"PASS","batch_sha256":parent["batch_sha256"],"article_count":parent["item_count"]})
