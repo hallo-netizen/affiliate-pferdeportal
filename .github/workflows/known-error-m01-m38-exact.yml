@@ -1,0 +1,36 @@
+name: Known Error M01-M38 Exact Regression
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+    paths:
+      - '.github/workflows/known-error-m01-m38-exact.yml'
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact M01-M38
+        run: |
+          set -euo pipefail
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py | tee /tmp/m01-m38.log
+          grep -F 'GESAMT PASS' /tmp/m01-m38.log
+      - name: Hardlock
+        run: |
+          set -euo pipefail
+          python3 control/startmaster0107/hardlock.py
+      - name: Hardlock base
+        run: |
+          set -euo pipefail
+          python3 control/startmaster0107/hardlock-base.py
+      - name: Upload proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: known-error-m01-m38-${{ github.sha }}
+          path: /tmp/m01-m38.log
+          if-no-files-found: error
+          retention-days: 7
