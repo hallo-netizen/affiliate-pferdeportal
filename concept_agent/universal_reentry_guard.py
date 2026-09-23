@@ -72,6 +72,91 @@ def _binding_item(binding: dict, index: int) -> dict:
         raise Blocked("ITEM_INDEX_INVALID")
     return items[index]
 
+def _checks_sha(state: dict) -> str:
+    return hashlib.sha256(canon(state.get("checks") or {})).hexdigest()
+
+def _capsule_identity(state: dict) -> dict:
+    article = state.get("article") or {}
+    return {
+        "canonical_article_id": article.get("canonical_article_id"),
+        "plan_slot": article.get("plan_slot"),
+        "title": article.get("title"),
+        "target_keyword": article.get("target_keyword"),
+        "phase": state.get("phase"),
+        "revision": state.get("revision"),
+        "draft_sha256": state.get("draft_sha256"),
+        "checks_sha256": _checks_sha(state),
+        "last_error": state.get("last_error"),
+    }
+
+def _verify_state_integrity(state: dict) -> None:
+    if state.get("contract") != STATE_CONTRACT:
+        raise Blocked("WORKSPACE_STATE_CONTRACT_INVALID")
+    article = state.get("article")
+    if not isinstance(article, dict):
+        raise Blocked("WORKSPACE_ARTICLE_INVALID")
+    immutable = {
+        "contract": state.get("contract"),
+        "source_snapshot_sha256": state.get("source_snapshot_sha256"),
+        "batch_sha256": state.get("batch_sha256"),
+        "article": article,
+    }
+    if state.get("immutable_core_sha256") != stable(immutable):
+        raise Blocked("WORKSPACE_IMMUTABLE_CORE_TAMPERED")
+    if state.get("publish_allowed") is not False:
+        raise Blocked("WORKSPACE_STATE_PUBLISH_INVALID")
+
+    for field in ("research", "facts"):
+        value = state.get(field)
+        if value is not None:
+            if not isinstance(value, dict) or not isinstance(value.get("text"), str):
+                raise Blocked("WORKSPACE_" + field.upper() + "_INVALID")
+            if hashlib.sha256(value["text"].encode("utf-8")).hexdigest() != value.get("sha256"):
+                raise Blocked("WORKSPACE_" + field.upper() + "_HASH_MISMATCH")
+
+    draft = state.get("draft_markdown")
+    if draft is not None:
+        if not isinstance(draft, str):
+            raise Blocked("WORKSPACE_DRAFT_INVALID")
+        if hashlib.sha256(draft.encode("utf-8")).hexdigest() != state.get("draft_sha256"):
+            raise Blocked("WORKSPACE_DRAFT_HASH_MISMATCH")
+
+    context = state.get("production_context")
+    if context is not None:
+        if not isinstance(context, dict) or set(context) != {"fact_pack", "production_plan_item", "sha256"}:
+            raise Blocked("WORKSPACE_CONTEXT_INVALID")
+        if stable({
+            "fact_pack": context["fact_pack"],
+            "production_plan_item": context["production_plan_item"],
+        }) != context.get("sha256"):
+            raise Blocked("WORKSPACE_CONTEXT_HASH_MISMATCH")
+
+    phase = str(state.get("phase") or "")
+    if phase not in INNER_PHASE_ACTIONS:
+        raise Blocked("WORKSPACE_PHASE_INVALID")
+    if phase == "FACT_CHECK_REQUIRED" and state.get("research") is None:
+        raise Blocked("WORKSPACE_PHASE_STATE_MISMATCH")
+    if phase in {"CONTEXT_REQUIRED","DRAFT_REQUIRED","CHECK_REQUIRED","REPAIR_REQUIRED","OUTPUT_GATE_REQUIRED","SIGNATURE_REQUIRED","RELEASED"}:
+        if state.get("research") is None or state.get("facts") is None:
+            raise Blocked("WORKSPACE_PHASE_STATE_MISMATCH")
+    if phase in {"DRAFT_REQUIRED","CHECK_REQUIRED","REPAIR_REQUIRED","OUTPUT_GATE_REQUIRED","SIGNATURE_REQUIRED","RELEASED"}:
+        if state.get("production_context") is None or not isinstance(state.get("authoring_contract"), dict):
+            raise Blocked("WORKSPACE_PHASE_STATE_MISMATCH")
+    if phase in {"CHECK_REQUIRED","REPAIR_REQUIRED","OUTPUT_GATE_REQUIRED","SIGNATURE_REQUIRED","RELEASED"} and not draft:
+        raise Blocked("WORKSPACE_PHASE_STATE_MISMATCH")
+    if phase == "REPAIR_REQUIRED":
+        checks = state.get("checks") or {}
+        if checks.get("status") != "FAIL" or not state.get("last_error"):
+            raise Blocked("WORKSPACE_REPAIR_STATE_MISMATCH")
+    if phase in {"OUTPUT_GATE_REQUIRED","SIGNATURE_REQUIRED","RELEASED"}:
+        checks = state.get("checks") or {}
+        if checks.get("status") != "PASS" or checks.get("checked_draft_sha256") != state.get("draft_sha256"):
+            raise Blocked("WORKSPACE_PASS_STATE_MISMATCH")
+    if phase == "SIGNATURE_REQUIRED" and not isinstance(state.get("release_prepared"), dict):
+        raise Blocked("WORKSPACE_SIGNATURE_STATE_MISMATCH")
+    if phase == "RELEASED" and state.get("released") is not True:
+        raise Blocked("WORKSPACE_RELEASE_STATE_MISMATCH")
+
 def verify_capsule(capsule: dict) -> tuple[dict, dict]:
     if not isinstance(capsule, dict) or capsule.get("contract") != CAPSULE_CONTRACT:
         raise Blocked("CAPSULE_CONTRACT_INVALID")
@@ -115,6 +200,9 @@ def verify_capsule(capsule: dict) -> tuple[dict, dict]:
     identity = capsule.get("workspace_identity")
     if not isinstance(identity, dict):
         raise Blocked("CAPSULE_IDENTITY_MISSING")
+    _verify_state_integrity(state)
+    if identity != _capsule_identity(state):
+        raise Blocked("CAPSULE_IDENTITY_MISMATCH")
     return capsule, state
 
 def verify_state_against_current_item(binding: dict, outer: dict, state: dict) -> dict:
@@ -125,10 +213,7 @@ def verify_state_against_current_item(binding: dict, outer: dict, state: dict) -
     item = _binding_item(binding, index)
     identity = item.get("identity")
     article = state.get("article")
-    if state.get("contract") != STATE_CONTRACT:
-        raise Blocked("WORKSPACE_STATE_CONTRACT_INVALID")
-    if state.get("publish_allowed") is not False:
-        raise Blocked("WORKSPACE_STATE_PUBLISH_INVALID")
+    _verify_state_integrity(state)
     if state.get("batch_sha256") != binding.get("batch_sha256"):
         raise Blocked("WORKSPACE_BATCH_MISMATCH")
     if not isinstance(identity, dict) or not isinstance(article, dict):
@@ -169,6 +254,16 @@ def _outer_action(binding: dict, outer: dict) -> dict:
         return {
             "action": "RUN_BOUND_PSERC",
             "item_count": action["item_count"],
+        }
+    if name == "RUN_ENDSTEMPEL":
+        return {
+            "action": "RUN_BOUND_ENDSTEMPEL",
+            "item_count": action["item_count"],
+        }
+    if name == "STOP":
+        return {
+            "action": "STOP",
+            "reason": action.get("reason"),
         }
     raise Blocked("OUTER_ACTION_NOT_SUPPORTED")
 
