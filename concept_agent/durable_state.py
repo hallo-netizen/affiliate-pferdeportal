@@ -17,15 +17,14 @@ REPOSITORY = "hallo-netizen/affiliate-pferdeportal"
 BRANCH = "runtime/concept-agent-current"
 STATE_PATH = "concept_agent/runtime/CURRENT_PRODUCTION_STATE.json"
 API_ROOT = "https://api.github.com"
-SHA_RE = re.compile(r"^[0-9a-f]{40,64}$")
-HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
+MAX_STATE_BYTES = 950_000
+BOOTSTRAP_STATE_SHA256 = "fb5d51ea35e71dcc69e565f1173ca0210b2cd081b8c943246adced9619997416"
+RECEIPT_CONTRACT = "CONCEPT_AGENT_DURABLE_STATE_RECEIPT_V1"
 TRUSTED_RECEIPT_WRITERS = {
     "chatgpt-codex-connector[bot]",
     "github-actions[bot]",
 }
-BOOTSTRAP_STATE_SHA256 = "fb5d51ea35e71dcc69e565f1173ca0210b2cd081b8c943246adced9619997416"
-BOOTSTRAP_HEAD_SHA = "e76633f22460683bacea407df7146e036ab0eb31"
-RECEIPT_CONTRACT = "CONCEPT_AGENT_DURABLE_STATE_RECEIPT_V1"
+HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 class Blocked(RuntimeError):
@@ -52,15 +51,15 @@ def seal(value: dict) -> dict:
     return out
 
 
-def _verify_hash_bound_object(value: dict, field: str, contract: str) -> None:
+def _verify_bound(value: dict, hash_field: str, contract: str) -> None:
     if not isinstance(value, dict) or value.get("contract") != contract:
-        raise Blocked(field.upper() + "_CONTRACT_INVALID")
+        raise Blocked(hash_field.upper() + "_CONTRACT_INVALID")
     core = dict(value)
-    declared = core.pop(field, None)
+    declared = core.pop(hash_field, None)
     if not isinstance(declared, str) or not HEX64_RE.fullmatch(declared):
-        raise Blocked(field.upper() + "_HASH_INVALID")
+        raise Blocked(hash_field.upper() + "_HASH_INVALID")
     if stable(core) != declared:
-        raise Blocked(field.upper() + "_HASH_MISMATCH")
+        raise Blocked(hash_field.upper() + "_HASH_MISMATCH")
 
 
 def verify(state: dict) -> dict:
@@ -87,13 +86,12 @@ def verify(state: dict) -> dict:
         raise Blocked("DURABLE_STATE_CHAT_ACTION_INVALID")
     if state.get("chat_may_write_state") is not False:
         raise Blocked("DURABLE_STATE_CHAT_WRITE_INVALID")
+
     ready = state.get("machine_ready")
-    if not isinstance(ready, dict):
-        raise Blocked("DURABLE_STATE_MACHINE_READY_MISSING")
-    if not isinstance(ready.get("run_id"), int) or ready["run_id"] < 1:
-        raise Blocked("DURABLE_STATE_MACHINE_READY_RUN_INVALID")
-    if ready.get("second_text_start_allowed") is not False:
-        raise Blocked("DURABLE_STATE_SECOND_TEXT_START_INVALID")
+    if not isinstance(ready, dict) or not isinstance(ready.get("run_id"), int):
+        raise Blocked("DURABLE_STATE_MACHINE_READY_INVALID")
+    if ready["run_id"] < 1 or ready.get("second_text_start_allowed") is not False:
+        raise Blocked("DURABLE_STATE_MACHINE_READY_INVALID")
 
     binding = state.get("production_binding")
     checkpoint = state.get("checkpoint")
@@ -108,19 +106,19 @@ def verify(state: dict) -> dict:
             raise Blocked("DURABLE_STATE_PREPRODUCTION_ACTION_INVALID")
         return state
 
-    _verify_hash_bound_object(
+    _verify_bound(
         binding,
         "binding_sha256",
         "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1",
     )
-    _verify_hash_bound_object(
+    _verify_bound(
         checkpoint,
         "checkpoint_sha256",
         "CONCEPT_AGENT_CURRENT_PROGRESS_V1",
     )
-    if binding.get("batch_sha256") != state.get("batch_sha256"):
+    if binding.get("batch_sha256") != state["batch_sha256"]:
         raise Blocked("DURABLE_STATE_BINDING_BATCH_MISMATCH")
-    if checkpoint.get("batch_sha256") != state.get("batch_sha256"):
+    if checkpoint.get("batch_sha256") != state["batch_sha256"]:
         raise Blocked("DURABLE_STATE_CHECKPOINT_BATCH_MISMATCH")
     if binding.get("item_count") != count or checkpoint.get("item_count") != count:
         raise Blocked("DURABLE_STATE_PRODUCTION_COUNT_MISMATCH")
@@ -148,19 +146,18 @@ class GitHubBackend:
         if not self.token:
             raise Blocked("DURABLE_STATE_GITHUB_TOKEN_MISSING")
 
-    def _json(self, method: str, path: str, payload: dict | None = None) -> dict:
-        url = API_ROOT + path
+    def _request(self, method: str, path: str, payload=None):
         data = None
         if payload is not None:
             data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         req = urllib.request.Request(
-            url,
+            API_ROOT + path,
             data=data,
             method=method,
             headers={
                 "Accept": "application/vnd.github+json",
                 "Authorization": "Bearer " + self.token,
-                "User-Agent": "pferdeatelier-concept-agent-durable-state",
+                "User-Agent": "pferdeatelier-durable-state",
                 "X-GitHub-Api-Version": "2022-11-28",
                 "Content-Type": "application/json",
             },
@@ -178,227 +175,120 @@ class GitHubBackend:
         if not raw:
             return {}
         try:
-            value = json.loads(raw.decode("utf-8"))
+            return json.loads(raw.decode("utf-8"))
         except Exception as exc:
             raise Blocked("DURABLE_STATE_GITHUB_JSON_INVALID") from exc
-        if not isinstance(value, dict):
-            raise Blocked("DURABLE_STATE_GITHUB_RESPONSE_INVALID")
-        return value
 
-    def _list_json(self, path: str) -> list:
-        url = API_ROOT + path
-        req = urllib.request.Request(
-            url,
-            method="GET",
-            headers={
-                "Accept": "application/vnd.github+json",
-                "Authorization": "Bearer " + self.token,
-                "User-Agent": "pferdeatelier-concept-agent-durable-state",
-                "X-GitHub-Api-Version": "2022-11-28",
-            },
+    @staticmethod
+    def _contents_path() -> str:
+        return (
+            "/repos/" + REPOSITORY + "/contents/"
+            + urllib.parse.quote(STATE_PATH, safe="/")
+            + "?ref=" + urllib.parse.quote(BRANCH, safe="")
         )
-        try:
-            with urllib.request.urlopen(req, timeout=30) as fh:
-                raw = fh.read()
-        except urllib.error.HTTPError as exc:
-            detail = exc.read().decode("utf-8", "replace")
-            raise Blocked(
-                f"DURABLE_STATE_GITHUB_HTTP_{exc.code}:{detail[:500]}"
-            ) from exc
-        except Exception as exc:
-            raise Blocked("DURABLE_STATE_GITHUB_IO:" + str(exc)) from exc
-        try:
-            value = json.loads(raw.decode("utf-8"))
-        except Exception as exc:
-            raise Blocked("DURABLE_STATE_GITHUB_JSON_INVALID") from exc
-        if not isinstance(value, list):
-            raise Blocked("DURABLE_STATE_GITHUB_LIST_INVALID")
-        return value
 
-    def _verify_machine_receipt(self, state: dict, head_sha: str) -> None:
-        state_sha = state["state_sha256"]
-        if state_sha == BOOTSTRAP_STATE_SHA256 and head_sha == BOOTSTRAP_HEAD_SHA:
-            return
+    def _receipt_exists(self, state: dict) -> bool:
+        if state["state_sha256"] == BOOTSTRAP_STATE_SHA256:
+            return True
         issue = (state.get("machine_ready") or {}).get("issue_number")
         if not isinstance(issue, int) or issue < 1:
             raise Blocked("DURABLE_STATE_RECEIPT_ISSUE_INVALID")
         exact = (
             RECEIPT_CONTRACT
-            + "\nSTATE_SHA256: " + state_sha
-            + "\nBRANCH_HEAD: " + head_sha
+            + "\nSTATE_SHA256: " + state["state_sha256"]
             + "\nBATCH_SHA256: " + state["batch_sha256"]
             + "\nPUBLISH: NO"
         )
         page = 1
         while True:
-            rows = self._list_json(
+            rows = self._request(
+                "GET",
                 "/repos/" + REPOSITORY + "/issues/" + str(issue)
-                + "/comments?per_page=100&page=" + str(page)
+                + "/comments?per_page=100&page=" + str(page),
             )
+            if not isinstance(rows, list):
+                raise Blocked("DURABLE_STATE_RECEIPT_LIST_INVALID")
             for row in rows:
                 if str(row.get("body") or "") != exact:
                     continue
                 login = str(((row.get("user") or {}).get("login")) or "")
                 if login not in TRUSTED_RECEIPT_WRITERS:
-                    raise Blocked(
-                        "DURABLE_STATE_RECEIPT_WRITER_INVALID:" + login
-                    )
-                return
+                    raise Blocked("DURABLE_STATE_RECEIPT_WRITER_INVALID:" + login)
+                return True
             if len(rows) < 100:
-                break
+                return False
             page += 1
-        raise Blocked("DURABLE_STATE_MACHINE_RECEIPT_MISSING")
 
-    def _post_machine_receipt(self, state: dict, head_sha: str) -> None:
+    def _post_receipt(self, state: dict) -> None:
         issue = (state.get("machine_ready") or {}).get("issue_number")
         if not isinstance(issue, int) or issue < 1:
             raise Blocked("DURABLE_STATE_RECEIPT_ISSUE_INVALID")
         body = (
             RECEIPT_CONTRACT
             + "\nSTATE_SHA256: " + state["state_sha256"]
-            + "\nBRANCH_HEAD: " + head_sha
             + "\nBATCH_SHA256: " + state["batch_sha256"]
             + "\nPUBLISH: NO"
         )
-        row = self._json(
+        row = self._request(
             "POST",
             "/repos/" + REPOSITORY + "/issues/" + str(issue) + "/comments",
             {"body": body},
         )
+        if not isinstance(row, dict):
+            raise Blocked("DURABLE_STATE_RECEIPT_RESPONSE_INVALID")
         login = str(((row.get("user") or {}).get("login")) or "")
         if login not in TRUSTED_RECEIPT_WRITERS:
             raise Blocked("DURABLE_STATE_WRITER_IDENTITY_INVALID:" + login)
 
-    @staticmethod
-    def _ref_path() -> str:
-        return "/repos/" + REPOSITORY + "/git/ref/heads/" + urllib.parse.quote(
-            BRANCH, safe=""
-        )
-
-    @staticmethod
-    def _contents_path() -> str:
-        return (
-            "/repos/"
-            + REPOSITORY
-            + "/contents/"
-            + urllib.parse.quote(STATE_PATH, safe="/")
-            + "?ref="
-            + urllib.parse.quote(BRANCH, safe="")
-        )
-
     def load(self) -> dict:
-        ref = self._json("GET", self._ref_path())
-        head_sha = str(((ref.get("object") or {}).get("sha")) or "")
-        if not SHA_RE.fullmatch(head_sha):
-            raise Blocked("DURABLE_STATE_BRANCH_HEAD_INVALID")
-
-        row = self._json("GET", self._contents_path())
+        row = self._request("GET", self._contents_path())
+        if not isinstance(row, dict):
+            raise Blocked("DURABLE_STATE_CONTENTS_INVALID")
         blob_sha = str(row.get("sha") or "")
-        if not SHA_RE.fullmatch(blob_sha):
-            raise Blocked("DURABLE_STATE_BLOB_SHA_INVALID")
         content = row.get("content")
-        encoding = row.get("encoding")
-        if encoding == "base64" and isinstance(content, str):
-            raw = base64.b64decode(content, validate=False)
-        else:
-            blob = self._json(
-                "GET",
-                "/repos/" + REPOSITORY + "/git/blobs/" + blob_sha,
-            )
-            if blob.get("encoding") != "base64" or not isinstance(blob.get("content"), str):
-                raise Blocked("DURABLE_STATE_BLOB_CONTENT_INVALID")
-            raw = base64.b64decode(blob["content"], validate=False)
+        if row.get("encoding") != "base64" or not isinstance(content, str):
+            raise Blocked("DURABLE_STATE_CONTENTS_ENCODING_INVALID")
         try:
+            raw = base64.b64decode(content, validate=False)
             state = json.loads(raw.decode("utf-8"))
         except Exception as exc:
-            raise Blocked("DURABLE_STATE_FILE_JSON_INVALID") from exc
+            raise Blocked("DURABLE_STATE_FILE_INVALID") from exc
         verify(state)
-        self._verify_machine_receipt(state, head_sha)
-        return {
-            "state": state,
-            "raw": raw,
-            "head_sha": head_sha,
-            "blob_sha": blob_sha,
-        }
+        if not self._receipt_exists(state):
+            raise Blocked("DURABLE_STATE_MACHINE_RECEIPT_MISSING")
+        return {"state": state, "raw": raw, "blob_sha": blob_sha}
 
-    def write(self, state: dict, expected_head_sha: str) -> dict:
+    def write(self, state: dict, expected_state_sha256: str) -> dict:
         verify(state)
-        current_ref = self._json("GET", self._ref_path())
-        current_head = str(((current_ref.get("object") or {}).get("sha")) or "")
-        if current_head != expected_head_sha:
-            raise Blocked("DURABLE_STATE_BRANCH_MOVED")
+        raw = (json.dumps(state, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        if len(raw) > MAX_STATE_BYTES:
+            raise Blocked("DURABLE_STATE_TOO_LARGE")
 
-        commit = self._json(
-            "GET",
-            "/repos/" + REPOSITORY + "/git/commits/" + current_head,
-        )
-        tree_sha = str(((commit.get("tree") or {}).get("sha")) or "")
-        if not SHA_RE.fullmatch(tree_sha):
-            raise Blocked("DURABLE_STATE_BASE_TREE_INVALID")
+        current = self.load()
+        if current["state"]["state_sha256"] != expected_state_sha256:
+            raise Blocked("DURABLE_STATE_MOVED")
 
-        raw = (
-            json.dumps(state, ensure_ascii=False, indent=2) + "\n"
-        ).encode("utf-8")
-        blob = self._json(
-            "POST",
-            "/repos/" + REPOSITORY + "/git/blobs",
+        result = self._request(
+            "PUT",
+            "/repos/" + REPOSITORY + "/contents/"
+            + urllib.parse.quote(STATE_PATH, safe="/"),
             {
+                "message": "Persist Concept Agent durable state " + state["state_sha256"][:12],
                 "content": base64.b64encode(raw).decode("ascii"),
-                "encoding": "base64",
+                "sha": current["blob_sha"],
+                "branch": BRANCH,
             },
         )
-        blob_sha = str(blob.get("sha") or "")
-        if not SHA_RE.fullmatch(blob_sha):
-            raise Blocked("DURABLE_STATE_NEW_BLOB_INVALID")
+        if not isinstance(result, dict):
+            raise Blocked("DURABLE_STATE_WRITE_RESPONSE_INVALID")
 
-        tree = self._json(
-            "POST",
-            "/repos/" + REPOSITORY + "/git/trees",
-            {
-                "base_tree": tree_sha,
-                "tree": [
-                    {
-                        "path": STATE_PATH,
-                        "mode": "100644",
-                        "type": "blob",
-                        "sha": blob_sha,
-                    }
-                ],
-            },
-        )
-        new_tree = str(tree.get("sha") or "")
-        if not SHA_RE.fullmatch(new_tree):
-            raise Blocked("DURABLE_STATE_NEW_TREE_INVALID")
+        # A freely written state is not accepted. The writer must prove that
+        # this exact state hash came from an allowed machine identity.
+        self._post_receipt(state)
 
-        new_commit = self._json(
-            "POST",
-            "/repos/" + REPOSITORY + "/git/commits",
-            {
-                "message": "Persist Concept Agent durable state "
-                + state["state_sha256"][:12],
-                "tree": new_tree,
-                "parents": [current_head],
-            },
-        )
-        new_commit_sha = str(new_commit.get("sha") or "")
-        if not SHA_RE.fullmatch(new_commit_sha):
-            raise Blocked("DURABLE_STATE_NEW_COMMIT_INVALID")
-
-        # The state commit is created first, but it is not made current until
-        # the authenticated writer proves it is an allowed machine identity.
-        self._post_machine_receipt(state, new_commit_sha)
-        self._json(
-            "PATCH",
-            self._ref_path(),
-            {"sha": new_commit_sha, "force": False},
-        )
         reread = self.load()
-        if reread["head_sha"] != new_commit_sha:
-            raise Blocked("DURABLE_STATE_READBACK_HEAD_MISMATCH")
         if reread["raw"] != raw:
             raise Blocked("DURABLE_STATE_READBACK_BYTES_MISMATCH")
-        if reread["state"].get("state_sha256") != state.get("state_sha256"):
-            raise Blocked("DURABLE_STATE_READBACK_HASH_MISMATCH")
         return reread
 
 
@@ -411,8 +301,7 @@ def load_current(backend=None) -> dict:
 
 
 def assert_current(binding: dict, checkpoint: dict, backend=None) -> dict:
-    detail = _backend(backend).load()
-    state = detail["state"]
+    state = load_current(backend)
     if state.get("production_binding") != binding:
         raise Blocked("DURABLE_STATE_BINDING_NOT_CURRENT")
     if state.get("checkpoint") != checkpoint:
@@ -421,19 +310,10 @@ def assert_current(binding: dict, checkpoint: dict, backend=None) -> dict:
 
 
 def activate_production(binding: dict, checkpoint: dict, backend=None) -> dict:
-    _verify_hash_bound_object(
-        binding,
-        "binding_sha256",
-        "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1",
-    )
-    _verify_hash_bound_object(
-        checkpoint,
-        "checkpoint_sha256",
-        "CONCEPT_AGENT_CURRENT_PROGRESS_V1",
-    )
+    _verify_bound(binding, "binding_sha256", "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1")
+    _verify_bound(checkpoint, "checkpoint_sha256", "CONCEPT_AGENT_CURRENT_PROGRESS_V1")
     be = _backend(backend)
-    detail = be.load()
-    current = detail["state"]
+    current = be.load()["state"]
     if current.get("status") != "WAITING_FOR_RESEARCH_BOUND":
         raise Blocked("DURABLE_STATE_ALREADY_ACTIVATED")
     if current.get("phase") != "RESEARCH_BOUND_REQUIRED":
@@ -460,7 +340,7 @@ def activate_production(binding: dict, checkpoint: dict, backend=None) -> dict:
         "checkpoint_sha256": checkpoint["checkpoint_sha256"],
     }
     new = seal(new)
-    return be.write(new, detail["head_sha"])["state"]
+    return be.write(new, current["state_sha256"])["state"]
 
 
 def persist_checkpoint_transition(
@@ -469,29 +349,14 @@ def persist_checkpoint_transition(
     new_checkpoint: dict,
     backend=None,
 ) -> dict:
-    _verify_hash_bound_object(
-        binding,
-        "binding_sha256",
-        "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1",
-    )
-    _verify_hash_bound_object(
-        previous,
-        "checkpoint_sha256",
-        "CONCEPT_AGENT_CURRENT_PROGRESS_V1",
-    )
-    _verify_hash_bound_object(
-        new_checkpoint,
-        "checkpoint_sha256",
-        "CONCEPT_AGENT_CURRENT_PROGRESS_V1",
-    )
-    if new_checkpoint.get("previous_checkpoint_sha256") != previous.get(
-        "checkpoint_sha256"
-    ):
+    _verify_bound(binding, "binding_sha256", "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1")
+    _verify_bound(previous, "checkpoint_sha256", "CONCEPT_AGENT_CURRENT_PROGRESS_V1")
+    _verify_bound(new_checkpoint, "checkpoint_sha256", "CONCEPT_AGENT_CURRENT_PROGRESS_V1")
+    if new_checkpoint.get("previous_checkpoint_sha256") != previous.get("checkpoint_sha256"):
         raise Blocked("DURABLE_STATE_TRANSITION_CHAIN_INVALID")
 
     be = _backend(backend)
-    detail = be.load()
-    current = detail["state"]
+    current = be.load()["state"]
     if current.get("production_binding") != binding:
         raise Blocked("DURABLE_STATE_TRANSITION_BINDING_STALE")
     if current.get("checkpoint") != previous:
@@ -513,7 +378,7 @@ def persist_checkpoint_transition(
         "checkpoint_sha256": new_checkpoint["checkpoint_sha256"],
     }
     new = seal(new)
-    return be.write(new, detail["head_sha"])["state"]
+    return be.write(new, current["state_sha256"])["state"]
 
 
 def materialize_current(binding_path: Path, checkpoint_path: Path, backend=None) -> dict:
@@ -521,19 +386,11 @@ def materialize_current(binding_path: Path, checkpoint_path: Path, backend=None)
     binding = state.get("production_binding")
     checkpoint = state.get("checkpoint")
     if not isinstance(binding, dict) or not isinstance(checkpoint, dict):
-        raise Blocked(
-            "DURABLE_STATE_PRODUCTION_NOT_ACTIVE:" + str(state.get("phase"))
-        )
+        raise Blocked("DURABLE_STATE_PRODUCTION_NOT_ACTIVE:" + str(state.get("phase")))
     binding_path.parent.mkdir(parents=True, exist_ok=True)
     checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
-    binding_path.write_text(
-        json.dumps(binding, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    checkpoint_path.write_text(
-        json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    binding_path.write_text(json.dumps(binding, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    checkpoint_path.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
         "status": state["status"],
         "phase": state["phase"],
@@ -549,28 +406,20 @@ def main(argv: list[str]) -> int:
     try:
         if len(argv) == 2 and argv[1] == "status":
             state = load_current()
-            print(
-                json.dumps(
-                    {
-                        "status": state["status"],
-                        "phase": state["phase"],
-                        "batch_sha256": state["batch_sha256"],
-                        "state_sha256": state["state_sha256"],
-                        "next_action": state["next_action"],
-                        "publish_allowed": False,
-                    },
-                    ensure_ascii=False,
-                    sort_keys=True,
-                )
-            )
+            print(json.dumps({
+                "status": state["status"],
+                "phase": state["phase"],
+                "batch_sha256": state["batch_sha256"],
+                "state_sha256": state["state_sha256"],
+                "next_action": state["next_action"],
+                "publish_allowed": False,
+            }, ensure_ascii=False, sort_keys=True))
             return 0
         if len(argv) == 4 and argv[1] == "materialize":
             result = materialize_current(Path(argv[2]), Path(argv[3]))
             print(json.dumps(result, ensure_ascii=False, sort_keys=True))
             return 0
-        raise Blocked(
-            "USE: durable_state.py status | materialize OUT_BINDING OUT_CHECKPOINT"
-        )
+        raise Blocked("USE: durable_state.py status | materialize OUT_BINDING OUT_CHECKPOINT")
     except Exception as exc:
         print("CONCEPT_AGENT_DURABLE_STATE_BLOCKED:" + str(exc), file=sys.stderr)
         return 2
