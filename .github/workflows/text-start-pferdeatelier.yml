@@ -69,9 +69,20 @@ jobs:
               raise SystemExit("TEXT_START_SOURCE_EVENT_INVALID")
           if run.get("display_title") != "START:pferdeatelier":
               raise SystemExit("TEXT_START_SOURCE_TITLE_INVALID")
+          if ((run.get("actor") or {}).get("login") != "hallo-netizen"
+              or (run.get("triggering_actor") or {}).get("login") != "hallo-netizen"):
+              raise SystemExit("TEXT_START_SOURCE_ACTOR_INVALID")
           repo = (run.get("repository") or {}).get("full_name")
           if repo != "hallo-netizen/text-start":
               raise SystemExit("TEXT_START_SOURCE_REPOSITORY_INVALID")
+
+          source_issue = get(
+              f"https://api.github.com/repos/hallo-netizen/text-start/issues/{issue}"
+          )
+          if source_issue.get("title") != "START:pferdeatelier":
+              raise SystemExit("TEXT_START_SOURCE_ISSUE_TITLE_INVALID")
+          if (source_issue.get("user") or {}).get("login") != "hallo-netizen":
+              raise SystemExit("TEXT_START_SOURCE_ISSUE_AUTHOR_INVALID")
 
           comments = get(
               f"https://api.github.com/repos/hallo-netizen/text-start/issues/{issue}/comments?per_page=100"
