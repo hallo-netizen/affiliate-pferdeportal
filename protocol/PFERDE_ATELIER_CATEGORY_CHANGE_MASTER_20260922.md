@@ -913,3 +913,47 @@ Rolle: **Historie/Nachweis**, keine zweite CURRENT-/NEXT-ACTION-Wahrheit.
 4. Branch `affiliate-release-current` gegen Head und neuesten `Category Integration Hard Baseline`-Run frisch prüfen.
 5. Bindung unverändert -> **keine Vollrekonstruktion**, direkt die dortige NEXT ACTION ausführen.
 
+
+
+---
+
+## 23. Abschluss-/Nachholprüfung 2026-09-23 – Fehlerprotokoll der letzten Kategorie-Delta-Läufe
+
+Rolle: **Historie/Nachweis**, keine zweite CURRENT-/Status-/NEXT-ACTION-Wahrheit. Aktueller Status und genau eine NEXT ACTION bleiben ausschließlich in `control/release-governance/CURRENT_RELEASE.json`.
+
+### Fehler U – Affiliate-Delta war korrekt, Read-only-Audit zunächst noch auf alten Basiszustand gebunden
+
+1. Run `35889536574` FAIL:
+   - `BASE_CATALOG_TARGET_COUNT_DRIFT`
+   - beobachtet: `articles=1149`, `products=334`
+   - Ursache: Nach dem exakten Zwei-JSON-Delta prüfte der Baseline-Audit noch Annahmen des alten Basiszustands statt sauber zwischen Basis und angewendetem Kandidaten zu unterscheiden.
+2. Nach erster Korrektur Run `35889748251` weiterhin FAIL:
+   - `CATEGORY_JSON_PAIR_UNBOUND`
+   - Katalog war bereits Kandidat `6513ce4e...`, der Audit las die Portalstruktur aber noch aus dem falschen/alten Pfad `b86a160e...`.
+3. Korrektur:
+   - Commit `41f8145765fb0626d27bba8aa0f30b1cd0aa12e9`: Audit für Basis- und angewendeten Affiliate-Zustand getrennt.
+   - Commit `923c8fb73a3d3cf212c1a84b25779f23190a7825`: Audit-Portalstruktur an die kanonische Affiliate-Current-Quelle gebunden.
+4. Abschlussnachweis:
+   - Affiliate Category Gate / Hard Baseline auf dem korrigierten Stand: Run `35889920034` SUCCESS.
+   - Späterer Current bindet Affiliate 6.72.152 als `CLOSED_CATEGORY_DELTA_PASS`.
+   - Keine WordPress-Schreiboperation.
+
+### Fehler V – PSTE-Delta-Skript zunächst an falschen zentralen TSV-Hash gebunden
+
+1. Run `35890838624` FAIL:
+   - `CENTRAL_CATEGORY_SHA_DRIFT`
+   - tatsächlicher zentraler Kategorienhash: `3e5f32755e09b79c3ac266d5987716dd91866dd21f77b3a522099eae7f962d69`.
+2. Ursache:
+   - Der neue PSTE-Delta-Prüfweg hatte einen nicht zum tatsächlich committed `KATEGORIEN.tsv` passenden erwarteten Hash fest verdrahtet und stoppte deshalb korrekt fail-closed, bevor ein Kandidat akzeptiert wurde.
+3. Korrektur:
+   - Commit `4d23e7ff53229d004405576e922e6758650c66df`: PSTE-Map-Delta an die exakten committed Bytes der zentralen TSV gebunden.
+4. Abschlussnachweis:
+   - Run `35891142282` SUCCESS.
+   - PSTE 0.57.6 danach `1124 -> 1149`, exakt eine geänderte Datei `fixtures/portal-category-map-v1.json`, 130 Dateien unverändert, kein WordPress-Write.
+   - Abschluss-/Weiterbindungscommit `79e9bee186cbb531f376ea9d9b451b068e483d91`.
+
+### Prävention aus U/V
+
+- Nach einem gültigen Delta muss der Audit ausdrücklich den **aktuellen kanonischen Sourcepfad** lesen; kein Root-/Altpfad darf still als Basis weiterlaufen.
+- Hashbindungen technischer Ableitungen müssen aus den **tatsächlich committed autoritativen Bytes** stammen; kein aus Erinnerung/älterem Stand übernommener Erwartungshash.
+- Fail-closed bleibt richtig: Ein fehlgeschlagener Zwischenlauf ist kein PASS und wird erst nach nachgewiesenem korrigiertem SUCCESS geschlossen.
