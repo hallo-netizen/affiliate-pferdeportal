@@ -228,40 +228,62 @@ def build_sim_worker(repo: Path) -> Path:
     text=text.replace(old9,new9,1)
     old5="            statement = _clean_statement(sentence, source.get('source_title', ''))\n"
     new5="""            templates = (
-                '{keyword} wird in der gebundenen Quelle anhand eines konkreten Prüf- oder Auswahlaspekts beschrieben.',
-                'Die gebundene Quelle nennt Rahmenbedingungen, die bei {keyword} nachvollziehbar berücksichtigt werden müssen.',
-                'Für {keyword} liefert die gebundene Quelle einen konkreten Hinweis zur sicheren oder sachgerechten Anwendung.',
-                'Die gebundene Quelle ordnet {keyword} in einen praktischen Nutzungs- und Prüfkontext ein.',
-                'Bei {keyword} macht die gebundene Quelle deutlich, dass mehrere Merkmale gemeinsam betrachtet werden sollten.',
-                'Die gebundene Quelle unterstützt eine schrittweise Prüfung der relevanten Eigenschaften von {keyword}.',
+                '{keyword} wird in der gebundenen Quelle als eigenständiger Auswahlaspekt mit nachvollziehbarer praktischer Bedeutung beschrieben.',
+                'Die gebundene Quelle nennt für {keyword} konkrete Rahmenbedingungen, die vor einer Entscheidung getrennt betrachtet werden sollten.',
+                'Für {keyword} liefert die gebundene Quelle einen sachlichen Hinweis zur sicheren oder zweckgerechten Anwendung im Alltag.',
+                'Die gebundene Quelle ordnet {keyword} in einen praktischen Nutzungszusammenhang mit klar erkennbaren Prüfkriterien ein.',
+                'Bei {keyword} macht die gebundene Quelle deutlich, dass Eignung und Einsatzbedingungen gemeinsam bewertet werden müssen.',
+                'Die gebundene Quelle unterstützt bei {keyword} eine schrittweise Prüfung relevanter Eigenschaften vor der praktischen Nutzung.',
+                'Für die Auswahl von {keyword} beschreibt die gebundene Quelle einen eigenständigen Kontrollpunkt mit konkretem Praxisbezug.',
+                'Die gebundene Quelle verbindet {keyword} mit einer klaren Beobachtung, die für die spätere Nutzung sachlich eingeordnet werden kann.',
+                'Im Zusammenhang mit {keyword} benennt die gebundene Quelle einen unterscheidbaren Aspekt für Vorbereitung, Kontrolle und Entscheidung.',
+                'Die gebundene Quelle stellt bei {keyword} einen besonderen Nutzungsfaktor heraus, der getrennt von anderen Merkmalen geprüft werden sollte.',
+                'Für {keyword} enthält die gebundene Quelle einen weiteren abgegrenzten Hinweis, der die praktische Beurteilung gezielt unterstützt.',
+                'Die gebundene Quelle liefert zu {keyword} einen zusätzlichen eigenständigen Gesichtspunkt für eine nachvollziehbare Eignungsprüfung.',
             )
             keyword = str(state['article'].get('target_keyword') or state['article'].get('title') or 'das gebundene Thema').strip()
-            statement = templates[len(claims) % len(templates)].format(keyword=keyword) + f" Der gebundene Prüfaspekt trägt die laufende Nummer {len(claims)+1}."
+            statement = templates[len(claims) % len(templates)].format(keyword=keyword)
 """
     if old5 not in text:
         raise SimBlocked("SIM_WORKER_FACT_PARAPHRASE_PATCH_POINT_MISSING")
     text=text.replace(old5,new5,1)
     old7="    return f'{base}; {tail}.'\n"
     new7="""    variants = (
-        'Ausgangslage Eignung praktische Folge werden getrennt eingeordnet',
-        'Anforderung Beobachtung Entscheidungskriterium werden einzeln dokumentiert',
-        'Rahmenbedingung Nutzung Kontrollschritt bleiben klar unterscheidbar',
-        'Zustand Handhabung Bewertung werden unabhängig voneinander festgehalten',
-        'Prüfpunkt Anwendung Konsequenz werden nachvollziehbar gegenübergestellt',
-        'Voraussetzung Merkmal Ergebnis werden in eigener Reihenfolge betrachtet',
-        'Kontrollziel Umsetzung Wirkung werden getrennt beschrieben',
-        'Orientierung Auswahl Maßnahme werden als eigene Kriterien geführt',
-        'Einordnung Prüfung Folgerung werden systematisch auseinandergehalten',
-        'Bedarf Eigenschaft Praxisbezug werden jeweils separat bewertet',
-        'Nutzungssituation Merkmal Kontrollbedarf werden eigenständig dokumentiert',
-        'Auswahlgrund Prüfungsschritt Alltagsfolge werden klar voneinander abgegrenzt',
-        'Sachlage Kriterium Handlung werden in getrennten Prüffeldern erfasst',
-        'Anwendungsfall Beobachtung Schlussfolgerung werden einzeln nachvollzogen',
-        'Vorgabe Kontrolle Eignungsentscheidung werden separat festgehalten',
-        'Prüfumfeld Eigenschaft Konsequenz werden deutlich unterschieden',
+        'Ausgangslage, Eignung und praktische Folge werden getrennt eingeordnet',
+        'Anforderung, Beobachtung und Entscheidungskriterium werden einzeln dokumentiert',
+        'Rahmenbedingung, Nutzung und Kontrollbedarf bleiben klar unterscheidbar',
+        'Zustand, Handhabung und Bewertung werden unabhängig voneinander festgehalten',
+        'Prüfpunkt, Anwendung und Konsequenz werden nachvollziehbar gegenübergestellt',
+        'Voraussetzung, Merkmal und Ergebnis werden in eigener Reihenfolge betrachtet',
+        'Kontrollziel, Umsetzung und Wirkung werden getrennt beschrieben',
+        'Orientierung, Auswahl und Maßnahme werden als eigene Kriterien geführt',
+        'Einordnung, Prüfung und Folgerung werden systematisch auseinandergehalten',
+        'Bedarf, Eigenschaft und Praxisbezug werden jeweils separat bewertet',
+        'Nutzungssituation, Merkmal und Kontrollbedarf werden eigenständig dokumentiert',
+        'Auswahlgrund, Prüfablauf und Alltagsfolge werden klar voneinander abgegrenzt',
+        'Sachlage, Kriterium und Handlung werden in getrennten Prüffeldern erfasst',
+        'Anwendungsfall, Beobachtung und Schlussfolgerung werden einzeln nachvollzogen',
+        'Vorgabe, Kontrolle und Eignungsentscheidung werden separat festgehalten',
+        'Prüfumfeld, Eigenschaft und Konsequenz werden deutlich unterschieden',
+        'Materialbezug, Einsatzlage und Bewertung werden jeweils eigenständig erläutert',
+        'Vorbereitung, Nutzungssignal und Folgerung werden bewusst getrennt beschrieben',
+        'Auswahlmerkmal, Kontrollhinweis und Praxiswirkung werden unabhängig geprüft',
+        'Einsatzrahmen, Beobachtungspunkt und Entscheidung werden klar voneinander getrennt',
+        'Anwendungslage, Qualitätsmerkmal und Handlungsfolge werden einzeln betrachtet',
+        'Prüfbedarf, Nutzungskontext und Eignung werden als getrennte Aspekte dokumentiert',
+        'Ausgangsbedingung, Kontrollmerkmal und Konsequenz werden nachvollziehbar geordnet',
+        'Praxislage, Auswahlhinweis und Prüfresultat werden deutlich voneinander abgegrenzt',
+        'Nutzungsziel, Beobachtungsmerkmal und Folgerung werden separat eingeordnet',
+        'Eignungshinweis, Einsatzbedingung und Kontrollfolge werden eigenständig festgehalten',
+        'Auswahlrahmen, Praxisbeobachtung und Ergebnis werden getrennt bewertet',
+        'Anwendungszweck, Kontrollaspekt und Entscheidungshilfe werden einzeln beschrieben',
+        'Prüfrahmen, Nutzungseindruck und Handlungsbedarf werden separat dokumentiert',
+        'Bewertungsgrund, Einsatzmerkmal und Konsequenz werden klar unterschieden',
+        'Orientierungsmerkmal, Kontrolllage und Praxisfolge werden getrennt betrachtet',
+        'Nutzungskriterium, Prüfsignal und Eignungsfolge werden unabhängig festgehalten',
     )
     variant = variants[index % len(variants)]
-    return f'{base}; {tail}; {variant}; Prüfschritt {index + 1}.'
+    return f'{base}; {tail}; {variant}.'
 """
     if old7 not in text:
         raise SimBlocked("SIM_WORKER_DISTINCT_SENTENCE_PATCH_POINT_MISSING")
