@@ -265,7 +265,30 @@ def execute_workspace(repo: Path, workspace: Path, worker: Path, env: dict, inde
                     raise SimBlocked("FULLCHECK_HARD_BLOCK:"+cp.stdout+cp.stderr)
         elif phase=="REPAIR_REQUIRED":
             repairs+=1
+            before=str(s.get("draft_markdown") or "")
             p=generated/f"repair-{s.get('revision',0)}.html"; produce("repair",p)
+            after=p.read_text(encoding="utf-8")
+            if after==before and (s.get("checks") or {}).get("checker")=="languagetool":
+                import production_checks_engine as pce
+                plain=pce._plain_text(before)
+                report,_,_=pce._run_languagetool_text(repo,plain)
+                changed=False
+                for match in report.get("matches") or []:
+                    if not isinstance(match,dict):
+                        continue
+                    off=match.get("offset"); length=match.get("length")
+                    reps=match.get("replacements") if isinstance(match.get("replacements"),list) else []
+                    if not isinstance(off,int) or not isinstance(length,int) or length<1 or not reps:
+                        continue
+                    bad=plain[off:off+length]
+                    replacement=str((reps[0] or {}).get("value") or "") if isinstance(reps[0],dict) else ""
+                    if bad and replacement and bad in after:
+                        after=after.replace(bad,replacement,1)
+                        changed=True
+                if changed:
+                    p.write_text(after,encoding="utf-8")
+                else:
+                    raise SimBlocked("SIM_WORKER_LT_REPAIR_NO_APPLICABLE_REPLACEMENT:"+json.dumps((s.get("checks") or {}).get("findings"),ensure_ascii=False))
             run([sys.executable,repo/"isolated_system4/controller.py","repair",workspace,p],cwd=repo,env=env)
         elif phase=="OUTPUT_GATE_REQUIRED":
             if (s.get("checks") or {}).get("status")!="PASS":
