@@ -250,6 +250,11 @@ def one_complete_run(repo: Path, out: Path, count: int) -> dict:
             "publish_allowed": False,
         }
 
+
+def run_positive(repo: Path, outdir: Path, count: int) -> dict:
+    """Backward-compatible acceptance entry. Uses the same generic 1..N complete route."""
+    return one_complete_run(Path(repo).resolve(), Path(outdir).resolve(), int(count))
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
