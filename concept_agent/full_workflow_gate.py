@@ -392,6 +392,10 @@ def verify_current_entry(pointer_path: Path, current_state_path: Path, outdir: P
     pointer = _load_json(pointer_path)
     current = _load_json(current_state_path)
 
+    durable = current.get("durable_runtime_state")
+    if isinstance(durable, dict) and isinstance(durable.get("machine_ready_run_id"), int):
+        raise Blocked("CURRENT_STATE_PRE_MACHINE_READY_ONLY_USE_DURABLE_RUNTIME_STATE")
+
     if pointer.get("contract") != "PFERDE_ATELIER_CONCEPT_AGENT_WORK_BINDING_POINTER_V1":
         raise Blocked("CURRENT_POINTER_CONTRACT_INVALID")
     if pointer.get("workflow") != "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT":
