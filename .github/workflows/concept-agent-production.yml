@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'concept-agent/production-control'
-      - 'concept-agent/fresh-batch-executor-fix-20260923'
     paths:
       - 'concept_agent/run_requests/**'
 
