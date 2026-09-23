@@ -38,6 +38,24 @@ Hart verboten:
 - freie Regelsuche während der Artikelproduktion,
 - freie Auswahl anderer interner Links.
 
-Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`. Ein abgeschlossener Schritt darf erst nach neuem hashverkettetem Checkpoint fortgesetzt werden. Reparaturen bleiben beim selben Artikel.
+Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`.
+
+### Harte Wiedereinstiegsregel
+
+Sobald derselbe Batch `MACHINE_READY` erreicht hat und die Produktionsbindung erzeugt wurde, ist **nur noch der letzte gültige Produktionscheckpoint** Fortsetzungsautorität.
+
+Nach jeder Unterbrechung muss zuerst `progress_guard.py resume BINDING CHECKPOINT` erfolgreich sein. Der hashgebundene Wert `allowed_action` ist die **einzige** erlaubte nächste Produktionsaktion.
+
+Hart:
+- fehlt der Checkpoint: **STOP**,
+- passt Batch, Binding, Hash oder `allowed_action` nicht exakt: **STOP**,
+- kein Wiederaufbau aus Chat-Erinnerung,
+- kein Ableiten des nächsten Schritts aus alten Zuständen oder Recovery-Dateien,
+- kein Batch-Import bereits vorhandener Artikel,
+- immer nur genau **ein** vom Checkpoint freigegebener Artikel,
+- nach LT-/PPM-Reparatur bleibt derselbe Artikel gebunden,
+- nach `MACHINE_READY` desselben Batches darf `text-start` nicht erneut ausgelöst werden.
+
+`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Für die Fortsetzung eines bereits gestarteten Produktionslaufs ist danach der gültige Produktionscheckpoint maßgeblich.
 
 `text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
