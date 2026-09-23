@@ -96,13 +96,14 @@ class AcceptanceHistoryHardlockTests(unittest.TestCase):
 
         # Worker-owned upstream findings must stay inside the same article/workspace:
         # rollback to the earliest responsible producer, invalidate downstream proof,
-        # re-enter that phase, and fail closed after a bounded number of attempts.
+        # re-enter that phase, and keep returning the same article until a real PASS.
+        self.assertNotIn('MAX_UPSTREAM_REPAIR_RETURNS', controller)
+        self.assertNotIn('REPAIR_RETURN_LIMIT_EXHAUSTED', controller)
+
         for needle in (
             "ROUTE_CONTRACT = 'SYSTEM4_CANONICAL_ARTICLE_ROUTE_V1'",
             'ARTICLE_ROUTE = (',
-            'MAX_UPSTREAM_REPAIR_RETURNS = 2',
             'def _rollback_upstream_worker(',
-            "raise Fail('REPAIR_RETURN_LIMIT_EXHAUSTED:' + target)",
             "raise Fail('REPAIR_RETURN_SAME_ARTICLE_VIOLATION')",
             "state['route_progress'] = list(CANONICAL_COMPLETION_TRACE[:target_index])",
             "state['phase'] = target_phase",
