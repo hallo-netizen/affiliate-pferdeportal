@@ -16,7 +16,6 @@ import machine_point0  # type: ignore
 import production_checks  # type: ignore
 import intake_bridge
 import progress_guard
-import durable_state
 
 CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
 CHECKPOINT_CONTRACT = progress_guard.CHECKPOINT_CONTRACT
@@ -216,12 +215,6 @@ def main(argv: list[str]) -> int:
             raise Blocked("USE: production_bridge.py bind SNAPSHOT INTAKE RESEARCH_BOUND OUT_BINDING OUT_CHECKPOINT")
         result = build(load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4])))
         checkpoint = initial_checkpoint(result)
-
-        # The production binding is not considered active until the complete
-        # binding + initial checkpoint has been persisted outside this worker
-        # and read back byte-exactly by the fixed durable state store.
-        durable = durable_state.activate_production(result, checkpoint)
-
         write_json(Path(argv[5]), result)
         write_json(Path(argv[6]), checkpoint)
         print(json.dumps({
@@ -230,7 +223,6 @@ def main(argv: list[str]) -> int:
             "item_count": result["item_count"],
             "binding_sha256": result["binding_sha256"],
             "checkpoint_sha256": checkpoint["checkpoint_sha256"],
-            "durable_state_sha256": durable["state_sha256"],
             "publish_allowed": False,
         }, ensure_ascii=False, sort_keys=True))
         return 0
