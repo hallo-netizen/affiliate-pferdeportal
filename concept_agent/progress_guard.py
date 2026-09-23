@@ -8,6 +8,7 @@ BINDING_CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
 CHECKPOINT_CONTRACT = "CONCEPT_AGENT_CURRENT_PROGRESS_V1"
 BATCH_STAGE_RESULT_CONTRACT = "CONCEPT_AGENT_BOUND_BATCH_STAGE_RESULT_V1"
 REENTRY_GATE = "CONCEPT_AGENT_UNIVERSAL_REENTRY_CHECKPOINT_V1"
+REENTRY_DECISION_CONTRACT = "CONCEPT_AGENT_UNIVERSAL_REENTRY_DECISION_V2"
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 
 class Blocked(RuntimeError):
@@ -157,6 +158,54 @@ def verify_checkpoint(binding: dict, state: dict) -> None:
     if state.get("allowed_action") != expected_action(binding, state):
         raise Blocked("CHECKPOINT_ALLOWED_ACTION_MISMATCH")
 
+def verify_reentry_decision(binding: dict, state: dict, decision: dict) -> None:
+    verify_checkpoint(binding, state)
+    if not isinstance(decision, dict) or decision.get("contract") != REENTRY_DECISION_CONTRACT:
+        raise Blocked("REENTRY_DECISION_CONTRACT_INVALID")
+    core = dict(decision)
+    declared = core.pop("decision_sha256", None)
+    if not isinstance(declared, str) or declared != stable(core):
+        raise Blocked("REENTRY_DECISION_HASH_MISMATCH")
+    if decision.get("status") != "PASS":
+        raise Blocked("REENTRY_DECISION_NOT_PASS")
+    if decision.get("batch_sha256") != state.get("batch_sha256"):
+        raise Blocked("REENTRY_DECISION_BATCH_MISMATCH")
+    if decision.get("production_binding_sha256") != binding.get("binding_sha256"):
+        raise Blocked("REENTRY_DECISION_BINDING_MISMATCH")
+    if decision.get("checkpoint_sha256") != state.get("checkpoint_sha256"):
+        raise Blocked("REENTRY_DECISION_CHECKPOINT_MISMATCH")
+    if decision.get("allowed_action") != state.get("allowed_action"):
+        raise Blocked("REENTRY_DECISION_ACTION_MISMATCH")
+    if decision.get("publish_allowed") is not False:
+        raise Blocked("REENTRY_DECISION_PUBLISH_INVALID")
+    policy = decision.get("policy")
+    expected_policy = {
+        "always_enter_at_stage_0": True,
+        "fast_forward_validate_only": True,
+        "chat_may_choose_stage": False,
+        "chat_may_choose_article": False,
+        "free_chat_execution": False,
+        "free_repo_search": False,
+        "free_binary_lookup": False,
+        "alternate_route_allowed": False,
+        "missing_canonical_execution_environment": "STOP",
+        "resume_from_exact_checkpoint_only": True,
+    }
+    if policy != expected_policy:
+        raise Blocked("REENTRY_DECISION_POLICY_INVALID")
+    stage = decision.get("outer_stage")
+    action = state["allowed_action"].get("action")
+    if stage == "ARTICLE_PRODUCTION" and action not in {"WRITE_DRAFT", "RUN_CHECKER", "REPAIR_DRAFT"}:
+        raise Blocked("REENTRY_DECISION_STAGE_ACTION_MISMATCH")
+    if stage == "PSERC_PACKAGE" and action != "RUN_PSERC":
+        raise Blocked("REENTRY_DECISION_STAGE_ACTION_MISMATCH")
+    if stage == "ENDSTEMPEL" and action != "RUN_ENDSTEMPEL":
+        raise Blocked("REENTRY_DECISION_STAGE_ACTION_MISMATCH")
+    if stage == "COMPLETE" and action != "STOP":
+        raise Blocked("REENTRY_DECISION_STAGE_ACTION_MISMATCH")
+    if stage not in {"ARTICLE_PRODUCTION", "PSERC_PACKAGE", "ENDSTEMPEL", "COMPLETE"}:
+        raise Blocked("REENTRY_DECISION_STAGE_INVALID")
+
 def _seal_new_state(binding: dict, previous: dict, new: dict) -> dict:
     prev_sha = previous.get("checkpoint_sha256")
     if not isinstance(prev_sha, str) or not SHA_RE.fullmatch(prev_sha):
@@ -176,8 +225,8 @@ def attach_drafts(binding: dict, state: dict, draft_dir: Path) -> dict:
     verify_checkpoint(binding, state)
     raise Blocked("BATCH_DRAFT_ATTACH_FORBIDDEN")
 
-def record_draft(binding: dict, state: dict, index: int, draft_path: Path) -> dict:
-    verify_checkpoint(binding, state)
+def record_draft(binding: dict, state: dict, decision: dict, index: int, draft_path: Path) -> dict:
+    verify_reentry_decision(binding, state, decision)
     action = state["allowed_action"]
     if action.get("action") != "WRITE_DRAFT" or action.get("item_index") != index:
         raise Blocked("RECORD_DRAFT_NOT_ALLOWED")
@@ -224,8 +273,8 @@ def _check_result(result: dict, draft_sha: str) -> str:
         raise Blocked("CHECK_RESULT_DRAFT_HASH_MISMATCH")
     return status
 
-def record_check(binding: dict, state: dict, index: int, checker: str, result: dict, draft_path: Path) -> dict:
-    verify_checkpoint(binding, state)
+def record_check(binding: dict, state: dict, decision: dict, index: int, checker: str, result: dict, draft_path: Path) -> dict:
+    verify_reentry_decision(binding, state, decision)
     checker = checker.upper()
     action = state["allowed_action"]
     if (
@@ -285,8 +334,8 @@ def record_check(binding: dict, state: dict, index: int, checker: str, result: d
             out["phase"] = "AUTHORING_REQUIRED"
     return _seal_new_state(binding, state, out)
 
-def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> dict:
-    verify_checkpoint(binding, state)
+def replace_draft(binding: dict, state: dict, decision: dict, index: int, draft_path: Path) -> dict:
+    verify_reentry_decision(binding, state, decision)
     action = state["allowed_action"]
     if action.get("action") != "REPAIR_DRAFT" or action.get("item_index") != index:
         raise Blocked("REPAIR_DRAFT_NOT_ALLOWED")
@@ -317,8 +366,8 @@ def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> d
     }
     return _seal_new_state(binding, state, out)
 
-def materialize_current_draft(binding: dict, state: dict, out_dir: Path) -> dict:
-    verify_checkpoint(binding, state)
+def materialize_current_draft(binding: dict, state: dict, decision: dict, out_dir: Path) -> dict:
+    verify_reentry_decision(binding, state, decision)
     action = state["allowed_action"]
     if action.get("action") not in {"RUN_CHECKER", "REPAIR_DRAFT"}:
         raise Blocked("CURRENT_DRAFT_MATERIALIZE_NOT_ALLOWED")
@@ -369,8 +418,8 @@ def _validate_batch_stage_result(state: dict, stage: str, result: dict) -> None:
     if not SHA_RE.fullmatch(artifact):
         raise Blocked("BATCH_STAGE_RESULT_ARTIFACT_HASH_INVALID:" + artifact_field)
 
-def record_batch_stage(binding: dict, state: dict, stage: str, result: dict) -> dict:
-    verify_checkpoint(binding, state)
+def record_batch_stage(binding: dict, state: dict, decision: dict, stage: str, result: dict) -> dict:
+    verify_reentry_decision(binding, state, decision)
     stage = stage.upper()
     action = state["allowed_action"]
     if stage == "PSERC":
@@ -395,8 +444,8 @@ def record_batch_stage(binding: dict, state: dict, stage: str, result: dict) -> 
         return _seal_new_state(binding, state, out)
     raise Blocked("BATCH_STAGE_INVALID")
 
-def resume(binding: dict, state: dict) -> dict:
-    verify_checkpoint(binding, state)
+def resume(binding: dict, state: dict, decision: dict) -> dict:
+    verify_reentry_decision(binding, state, decision)
     return {
         "status": "RESUME_ALLOWED",
         "batch_sha256": state["batch_sha256"],
@@ -410,40 +459,42 @@ def main(argv: list[str]) -> int:
         if len(argv) < 2:
             raise Blocked("COMMAND_REQUIRED")
         cmd = argv[1]
-        if cmd == "resume" and len(argv) == 4:
-            result = resume(load(Path(argv[2])), load(Path(argv[3])))
+        if cmd == "resume" and len(argv) == 5:
+            result = resume(load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4])))
             print(json.dumps(result, ensure_ascii=False, sort_keys=True))
             return 0
         if cmd == "attach-drafts":
             raise Blocked("BATCH_DRAFT_ATTACH_FORBIDDEN")
-        if cmd == "record-draft" and len(argv) == 7:
-            binding, state = load(Path(argv[2])), load(Path(argv[3]))
-            result = record_draft(binding, state, int(argv[4]), Path(argv[5]))
-            write(Path(argv[6]), result)
-        elif cmd == "record-check" and len(argv) == 9:
-            binding, state = load(Path(argv[2])), load(Path(argv[3]))
-            result = record_check(binding, state, int(argv[4]), argv[5], load(Path(argv[6])), Path(argv[7]))
-            write(Path(argv[8]), result)
-        elif cmd == "replace-draft" and len(argv) == 7:
-            binding, state = load(Path(argv[2])), load(Path(argv[3]))
-            result = replace_draft(binding, state, int(argv[4]), Path(argv[5]))
-            write(Path(argv[6]), result)
-        elif cmd == "record-batch-stage" and len(argv) == 7:
-            binding, state = load(Path(argv[2])), load(Path(argv[3]))
-            result = record_batch_stage(binding, state, argv[4], load(Path(argv[5])))
-            write(Path(argv[6]), result)
-        elif cmd == "materialize-current-draft" and len(argv) == 5:
-            result = materialize_current_draft(load(Path(argv[2])), load(Path(argv[3])), Path(argv[4]))
+        if cmd == "record-draft" and len(argv) == 8:
+            binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
+            result = record_draft(binding, state, decision, int(argv[5]), Path(argv[6]))
+            write(Path(argv[7]), result)
+        elif cmd == "record-check" and len(argv) == 10:
+            binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
+            result = record_check(binding, state, decision, int(argv[5]), argv[6], load(Path(argv[7])), Path(argv[8]))
+            write(Path(argv[9]), result)
+        elif cmd == "replace-draft" and len(argv) == 8:
+            binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
+            result = replace_draft(binding, state, decision, int(argv[5]), Path(argv[6]))
+            write(Path(argv[7]), result)
+        elif cmd == "record-batch-stage" and len(argv) == 8:
+            binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
+            result = record_batch_stage(binding, state, decision, argv[5], load(Path(argv[6])))
+            write(Path(argv[7]), result)
+        elif cmd == "materialize-current-draft" and len(argv) == 6:
+            result = materialize_current_draft(
+                load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4])), Path(argv[5])
+            )
             print(json.dumps(result, ensure_ascii=False, sort_keys=True))
             return 0
         else:
             raise Blocked(
-                "USE: progress_guard.py resume BINDING CHECKPOINT | "
-                "record-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
-                "record-check BINDING CHECKPOINT INDEX LT68|PPM679 RESULT_JSON DRAFT OUT | "
-                "replace-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
-                "record-batch-stage BINDING CHECKPOINT PSERC|ENDSTEMPEL RESULT_JSON OUT | "
-                "materialize-current-draft BINDING CHECKPOINT OUT_DIR"
+                "USE: progress_guard.py resume BINDING CHECKPOINT REENTRY_DECISION | "
+                "record-draft BINDING CHECKPOINT REENTRY_DECISION INDEX DRAFT OUT | "
+                "record-check BINDING CHECKPOINT REENTRY_DECISION INDEX LT68|PPM679 RESULT_JSON DRAFT OUT | "
+                "replace-draft BINDING CHECKPOINT REENTRY_DECISION INDEX DRAFT OUT | "
+                "record-batch-stage BINDING CHECKPOINT REENTRY_DECISION PSERC|ENDSTEMPEL RESULT_JSON OUT | "
+                "materialize-current-draft BINDING CHECKPOINT REENTRY_DECISION OUT_DIR"
             )
         print(json.dumps({
             "status": result["phase"],
