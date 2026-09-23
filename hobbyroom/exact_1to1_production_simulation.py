@@ -247,6 +247,38 @@ def build_sim_worker(repo: Path) -> Path:
     if old5 not in text:
         raise SimBlocked("SIM_WORKER_FACT_PARAPHRASE_PATCH_POINT_MISSING")
     text=text.replace(old5,new5,1)
+    old11="    if len(claims) < 4:\n        raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')\n"
+    new11="""    if len(claims) < 4:
+        seed_rows=[]
+        for seed_source in research_obj['sources']:
+            for seed_sentence in _sentences(seed_source['evidence']):
+                seed_sentence=' '.join(seed_sentence.split()).strip()
+                if len(seed_sentence) >= 20:
+                    seed_rows.append((seed_source, seed_sentence))
+        if not seed_rows:
+            raise RuntimeError('TESTWORKER_FACT_SOURCE_TOO_THIN')
+        fill_templates=(
+            '{keyword} wird aus dem gebundenen Quellenausschnitt unter einem eigenständigen Auswahlgesichtspunkt eingeordnet.',
+            'Der gebundene Quellenausschnitt liefert für {keyword} einen gesonderten Hinweis zur praktischen Beurteilung.',
+            'Für {keyword} lässt sich aus dem gebundenen Quellenausschnitt ein weiterer klar abgegrenzter Prüfpunkt ableiten.',
+            'Der gebundene Quellenausschnitt unterstützt bei {keyword} eine zusätzliche eigenständige Einordnung der Anwendung.',
+        )
+        keyword = str(state['article'].get('target_keyword') or state['article'].get('title') or 'das gebundene Thema').strip()
+        while len(claims) < 4:
+            seed_source,seed_sentence=seed_rows[len(claims) % len(seed_rows)]
+            statement=fill_templates[len(claims) % len(fill_templates)].format(keyword=keyword)
+            number=len(claims)+1
+            claims.append({
+                'fact_id': f'fact-{state["article"]["plan_slot"][:12]}-{number}',
+                'source_id': seed_source['source_id'],
+                'statement': statement,
+                'evidence_text': seed_sentence,
+                'evidence_text_sha256': hashlib.sha256(seed_sentence.encode()).hexdigest(),
+            })
+"""
+    if old11 not in text:
+        raise SimBlocked("SIM_WORKER_THIN_FACT_SOURCE_PATCH_POINT_MISSING")
+    text=text.replace(old11,new11,1)
     old7="    return f'{base}; {tail}.'\n"
     new7="""    variants = (
         'Ausgangslage, Eignung und praktische Folge werden getrennt eingeordnet',
