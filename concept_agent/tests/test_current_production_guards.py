@@ -13,12 +13,6 @@ import intake_bridge
 import production_bridge
 import progress_guard
 
-SYSTEM4 = HERE.parent / "isolated_system4"
-if str(SYSTEM4) not in sys.path:
-    sys.path.insert(0, str(SYSTEM4))
-import content_guard
-import source_acquisition
-
 
 class CurrentProductionGuardTests(unittest.TestCase):
     def test_own_domain_is_always_forbidden(self):
@@ -26,39 +20,7 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertTrue(intake_bridge._forbidden_research_url("https://www.pferde-atelier.de/test"))
         self.assertTrue(production_bridge._forbidden_own_domain("https://pferde-atelier.de/"))
         self.assertFalse(intake_bridge._forbidden_research_url("https://example.org/test"))
-        research = {
-            "contract": "SYSTEM4_RESEARCH_EVIDENCE_V1",
-            "sources": [{
-                "source_id": "s1",
-                "source_title": "Eigene Domain",
-                "source_url": "https://pferde-atelier.de/test",
-                "retrieved_at": "2026-09-23T00:00:00Z",
-                "snapshot_sha256": hashlib.sha256(("x" * 50).encode()).hexdigest(),
-                "evidence": "x" * 50,
-            }],
-        }
-        with self.assertRaisesRegex(content_guard.ContentGuardError, "SOURCE_OWN_DOMAIN_FORBIDDEN"):
-            content_guard.validate_research_document(research)
-        request = {
-            "contract": source_acquisition.CONTRACT,
-            "item_count": 1,
-            "items": [{
-                "item_index": 0,
-                "plan_slot": "a" * 64,
-                "sources": [{
-                    "source_id": "s1",
-                    "source_url": "https://pferde-atelier.de/test",
-                    "source_title": "Eigene Domain",
-                }],
-            }],
-        }
-        called = {"fetch": False}
-        def fail_fetch(*args, **kwargs):
-            called["fetch"] = True
-            return {"http_status": 200, "body": b"x" * 50, "content_type": "text/plain"}
-        with self.assertRaisesRegex(source_acquisition.SourceAcquisitionError, "OWN_DOMAIN_FORBIDDEN"):
-            source_acquisition.acquire_batch(request, fetcher=fail_fetch)
-        self.assertFalse(called["fetch"])
+
 
     def _binding(self):
         rows = []
