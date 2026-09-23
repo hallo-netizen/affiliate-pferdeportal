@@ -202,6 +202,7 @@ def record_draft(binding: dict, state: dict, index: int, draft_path: Path) -> di
         "filename": draft_path.name,
         "draft_sha256": hashlib.sha256(raw).hexdigest(),
         "size_bytes": len(raw),
+        "content_utf8": raw.decode("utf-8"),
         "revision": 1,
         "lt68": "PENDING",
         "ppm679": "PENDING",
@@ -297,8 +298,14 @@ def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> d
     new_sha = file_sha(draft_path)
     if new_sha == target["draft_sha256"]:
         raise Blocked("REPAIR_DRAFT_UNCHANGED")
+    raw = draft_path.read_bytes()
+    try:
+        content = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise Blocked("REPAIR_DRAFT_UTF8_REQUIRED") from exc
     target["draft_sha256"] = new_sha
-    target["size_bytes"] = draft_path.stat().st_size
+    target["size_bytes"] = len(raw)
+    target["content_utf8"] = content
     target["revision"] = int(target.get("revision") or 1) + 1
     target["lt68"] = "PENDING"
     target["ppm679"] = "PENDING"
@@ -309,6 +316,37 @@ def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> d
         "draft_sha256": new_sha,
     }
     return _seal_new_state(binding, state, out)
+
+def materialize_current_draft(binding: dict, state: dict, out_dir: Path) -> dict:
+    verify_checkpoint(binding, state)
+    action = state["allowed_action"]
+    if action.get("action") not in {"RUN_CHECKER", "REPAIR_DRAFT"}:
+        raise Blocked("CURRENT_DRAFT_MATERIALIZE_NOT_ALLOWED")
+    index = action.get("item_index")
+    if not isinstance(index, int) or isinstance(index, bool):
+        raise Blocked("CURRENT_DRAFT_INDEX_INVALID")
+    row = _find_draft(state, index)
+    content = row.get("content_utf8")
+    if not isinstance(content, str) or not content:
+        raise Blocked("CURRENT_DRAFT_BYTES_NOT_DURABLE")
+    raw = content.encode("utf-8")
+    if hashlib.sha256(raw).hexdigest() != row.get("draft_sha256"):
+        raise Blocked("CURRENT_DRAFT_DURABLE_HASH_MISMATCH")
+    if len(raw) != row.get("size_bytes"):
+        raise Blocked("CURRENT_DRAFT_DURABLE_SIZE_MISMATCH")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / row["filename"]
+    path.write_bytes(raw)
+    if file_sha(path) != row["draft_sha256"]:
+        raise Blocked("CURRENT_DRAFT_MATERIALIZE_HASH_MISMATCH")
+    return {
+        "status": "CURRENT_DRAFT_MATERIALIZED",
+        "item_index": index,
+        "path": str(path),
+        "draft_sha256": row["draft_sha256"],
+        "revision": row["revision"],
+        "publish_allowed": False,
+    }
 
 def _validate_batch_stage_result(state: dict, stage: str, result: dict) -> None:
     if result.get("contract") != BATCH_STAGE_RESULT_CONTRACT:
@@ -326,6 +364,10 @@ def _validate_batch_stage_result(state: dict, stage: str, result: dict) -> None:
     evidence = str(result.get("evidence_sha256") or "")
     if not SHA_RE.fullmatch(evidence):
         raise Blocked("BATCH_STAGE_RESULT_EVIDENCE_HASH_INVALID")
+    artifact_field = "pserc_package_sha256" if stage == "PSERC" else "final_file_sha256"
+    artifact = str(result.get(artifact_field) or "")
+    if not SHA_RE.fullmatch(artifact):
+        raise Blocked("BATCH_STAGE_RESULT_ARTIFACT_HASH_INVALID:" + artifact_field)
 
 def record_batch_stage(binding: dict, state: dict, stage: str, result: dict) -> dict:
     verify_checkpoint(binding, state)
@@ -339,6 +381,7 @@ def record_batch_stage(binding: dict, state: dict, stage: str, result: dict) -> 
         out["phase"] = "PSERC_PASS_ENDSTEMPEL_REQUIRED"
         out["status"] = "IN_PROGRESS"
         out["pserc_result_sha256"] = stable(result)
+        out["pserc_package_sha256"] = result["pserc_package_sha256"]
         return _seal_new_state(binding, state, out)
     if stage == "ENDSTEMPEL":
         if action.get("action") != "RUN_ENDSTEMPEL" or state.get("phase") != "PSERC_PASS_ENDSTEMPEL_REQUIRED":
@@ -348,6 +391,7 @@ def record_batch_stage(binding: dict, state: dict, stage: str, result: dict) -> 
         out["phase"] = "ENDSTEMPEL_PASS_STOP"
         out["status"] = "PASS"
         out["endstempel_result_sha256"] = stable(result)
+        out["endstempel_final_file_sha256"] = result["final_file_sha256"]
         return _seal_new_state(binding, state, out)
     raise Blocked("BATCH_STAGE_INVALID")
 
@@ -388,13 +432,18 @@ def main(argv: list[str]) -> int:
             binding, state = load(Path(argv[2])), load(Path(argv[3]))
             result = record_batch_stage(binding, state, argv[4], load(Path(argv[5])))
             write(Path(argv[6]), result)
+        elif cmd == "materialize-current-draft" and len(argv) == 5:
+            result = materialize_current_draft(load(Path(argv[2])), load(Path(argv[3])), Path(argv[4]))
+            print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+            return 0
         else:
             raise Blocked(
                 "USE: progress_guard.py resume BINDING CHECKPOINT | "
                 "record-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
                 "record-check BINDING CHECKPOINT INDEX LT68|PPM679 RESULT_JSON DRAFT OUT | "
                 "replace-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
-                "record-batch-stage BINDING CHECKPOINT PSERC|ENDSTEMPEL RESULT_JSON OUT"
+                "record-batch-stage BINDING CHECKPOINT PSERC|ENDSTEMPEL RESULT_JSON OUT | "
+                "materialize-current-draft BINDING CHECKPOINT OUT_DIR"
             )
         print(json.dumps({
             "status": result["phase"],
