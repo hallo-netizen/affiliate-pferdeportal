@@ -231,7 +231,7 @@ def build_sim_worker(repo: Path) -> Path:
                 'Die gebundene Quelle unterstützt eine schrittweise Prüfung der relevanten Eigenschaften von {keyword}.',
             )
             keyword = str(state['article'].get('target_keyword') or state['article'].get('title') or 'das gebundene Thema').strip()
-            statement = templates[len(claims) % len(templates)].format(keyword=keyword)
+            statement = templates[len(claims) % len(templates)].format(keyword=keyword) + f" Der gebundene Prüfaspekt trägt die laufende Nummer {len(claims)+1}."
 """
     if old5 not in text:
         raise SimBlocked("SIM_WORKER_FACT_PARAPHRASE_PATCH_POINT_MISSING")
