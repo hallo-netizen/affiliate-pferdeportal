@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   governance-and-baseline:
@@ -57,3 +58,76 @@ jobs:
             /tmp/category-baseline.log
             /tmp/ppm679.zip
           if-no-files-found: error
+
+      - name: Bind exact PSTE 0.57.6 proof artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/10679790400/zip > /tmp/pste-proof.zip
+          unzip -p /tmp/pste-proof.zip 'PSTE-0.57.6-HOBBYROOM.zip' > /tmp/pste-0576.zip
+          ACTUAL="$(sha256sum /tmp/pste-0576.zip | awk '{print $1}')"
+          EXPECTED="71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
+          test "$ACTUAL" = "$EXPECTED"
+          echo "PSTE_0576_BASE_SHA_PASS $ACTUAL"
+
+      - name: Build and hard-test PSTE 0.57.6 category map delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p CATEGORY_INTEGRATION_HOBBYRAUM/pste_0576_out
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/pste_0576_category_map_delta.py \
+            --base /tmp/pste-0576.zip \
+            --out CATEGORY_INTEGRATION_HOBBYRAUM/pste_0576_out/PSTE_0.57.6_CATEGORY_MAP_1149_CANDIDATE.zip \
+            --report CATEGORY_INTEGRATION_HOBBYRAUM/pste_0576_out/report.json | tee /tmp/pste-0576-category.log
+          grep -F 'PSTE_0576_CATEGORY_MAP_DELTA_PASS' /tmp/pste-0576-category.log
+          rm -rf /tmp/pste-candidate
+          unzip -q CATEGORY_INTEGRATION_HOBBYRAUM/pste_0576_out/PSTE_0.57.6_CATEGORY_MAP_1149_CANDIDATE.zip -d /tmp/pste-candidate
+          find '/tmp/pste-candidate/Portal SEO Topic Engine' -name '*.php' -print0 | xargs -0 -n1 php -l > /tmp/pste-php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/pste-php-lint.log)" = "76"
+
+          cat > /tmp/pste-loader-test.php <<'PHP'
+          <?php
+          define('ABSPATH', __DIR__.'/');
+          define('PSTE_DIR','/tmp/pste-candidate/Portal SEO Topic Engine/');
+          class PSTE_Diagnostic_Exception extends Exception { public array $ctx=[]; public function __construct($m,$ctx=[]){parent::__construct($m);$this->ctx=$ctx;} }
+          require '/tmp/pste-candidate/Portal SEO Topic Engine/includes/class-pste-normalizer.php';
+          require '/tmp/pste-candidate/Portal SEO Topic Engine/includes/class-pste-portal-category-map.php';
+          if(PSTE_Portal_Category_Map::protectedCount()!==1149){fwrite(STDERR,"COUNT_FAIL\n");exit(2);}
+          $term=(object)['slug'=>'pferdesaettel-faq','name'=>'FAQ Pferdesättel'];
+          $hit=PSTE_Portal_Category_Map::match($term);
+          if(!is_array($hit)||($hit['product_page_slug']??'')!=='pferdesaettel'||($hit['article_type']??'')!=='FAQ'){fwrite(STDERR,"MATCH_FAIL\n");exit(2);}
+          echo "PSTE_LOADER_POSITIVE_PASS ".($hit['match_mode']??'')."\n";
+          PHP
+          php /tmp/pste-loader-test.php | tee /tmp/pste-loader-positive.log
+
+          cp '/tmp/pste-candidate/Portal SEO Topic Engine/fixtures/portal-category-map-v1.json' /tmp/pste-map-good.json
+          python3 - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('/tmp/pste-candidate/Portal SEO Topic Engine/fixtures/portal-category-map-v1.json')
+          o=json.loads(p.read_text(encoding='utf-8'))
+          o['map_sha256']='0'*64
+          p.write_text(json.dumps(o,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          set +e
+          php /tmp/pste-loader-test.php > /tmp/pste-loader-negative.log 2>&1
+          RC=$?
+          set -e
+          test "$RC" -ne 0
+          grep -F 'PSTE_PORTAL_CATEGORY_MAP_HASH_MISMATCH' /tmp/pste-loader-negative.log
+          cp /tmp/pste-map-good.json '/tmp/pste-candidate/Portal SEO Topic Engine/fixtures/portal-category-map-v1.json'
+          echo PSTE_LOADER_NEGATIVE_FAIL_CLOSED_PASS
+
+      - name: Upload PSTE 0.57.6 category map evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: pste-0576-category-map-1149-hardtest
+          path: |
+            CATEGORY_INTEGRATION_HOBBYRAUM/pste_0576_out/
+            /tmp/pste-0576-category.log
+            /tmp/pste-php-lint.log
+            /tmp/pste-loader-positive.log
+            /tmp/pste-loader-negative.log
+          if-no-files-found: error
+
