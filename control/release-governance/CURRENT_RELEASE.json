@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 114,
+  "generation": 115,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -233,13 +233,13 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_PSTE_0576_CATEGORY_MAP_DELTA_PENDING",
+    "state": "CATEGORY_INTEGRATION_REMAINING_PLUGIN_STATIC_COPY_CLASSIFICATION",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. AFFILIATE-ZENTRALE 6.72.152 CATEGORY DELTA IS CLOSED PASS: EXACT 27-FILE SOURCE BOUND; ONLY portal-structure-v279.json AND ebay-portal-catalog-v2.json CHANGED; 25 OTHER FILES BYTE-IDENTICAL; HARD BASELINE RUN 35889920034 SUCCESS. NEXT AND ONLY BLOCKER: APPLY PSTE 0.57.6 CATEGORY-ONLY +25 DELTA TO fixtures/portal-category-map-v1.json (1124->1149) AGAINST EXACT GITHUB PASS SOURCE FROM RUN 35693065234 / ARTIFACT 10679790400 / ZIP SHA256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f. NO OTHER PSTE FILE MAY CHANGE. NO WORDPRESS WRITE.",
-    "completion_condition": "PSTE 0.57.6 EXACT PASS SOURCE IS PRESERVED; ONLY fixtures/portal-category-map-v1.json CHANGES FROM 1124 TO 1149 USING THE CENTRAL KATEGORIEN.tsv; POSITIVE/NEGATIVE/UNCHANGED-REGRESSION AND FRESH-UNPACK BYTE IDENTITY PASS.",
-    "after_completion_action": "CLASSIFY THE REMAINING INSTALLED PLUGINS FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES ONLY. PSERC 0.28.23 REQUIRES ONLY FRESH STRUCTURE/PLAN REGENERATION; NO 25-CATEGORY CODE PATCH. NO WORDPRESS APPLY BEFORE CATEGORY E2E + DRY-RUN PASS.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. AFFILIATE-ZENTRALE 6.72.152 CATEGORY DELTA CLOSED PASS. PSTE 0.57.6 CATEGORY MAP DELTA CLOSED PASS: EXACT BASE RUN 35693065234 / ARTIFACT 10679790400 / BASE ZIP SHA256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f; CATEGORY HARDTEST RUN 35891142282 SUCCESS / ARTIFACT 10764831507; ONLY fixtures/portal-category-map-v1.json CHANGED; 130/130 OTHER FILES BYTE-IDENTICAL; 1124 OLD ENTRIES IDENTICAL; 25 NEW -> 1149; LOADER POSITIVE/NEGATIVE PASS; NO WORDPRESS WRITE. NEXT AND ONLY BLOCKER: CLASSIFY THE REMAINING INSTALLED PLUGINS FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES ONLY. IF NO STATIC COPY EXISTS, CHANGE NOTHING. DO NOT TOUCH CONTENT, DESIGN, PERFORMANCE, PROVIDER, RANKING, BANNERS OR OTHER LOGIC.",
+    "completion_condition": "EACH REMAINING INSTALLED PLUGIN IS BOUND TO ITS EXACT GITHUB SOURCE/PASS ARTIFACT AND CLASSIFIED FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES. ONLY PROVEN STATIC COPIES MAY RECEIVE CATEGORY-ONLY DELTAS; PLUGINS WITHOUT STATIC COPIES REMAIN BYTE-IDENTICAL.",
+    "after_completion_action": "RUN CATEGORY E2E + DRY-RUN/PREFLIGHT WITH writes_performed=false. PSERC 0.28.23 REQUIRES ONLY FRESH STRUCTURE/PLAN REGENERATION; NO 25-CATEGORY CODE PATCH. NO WORDPRESS APPLY BEFORE E2E + DRY-RUN PASS.",
     "no_optional_detours": true,
-    "sequence": 33,
+    "sequence": 34,
     "authorized_change_prefixes": [
       "CATEGORY_INTEGRATION_HOBBYRAUM/",
       ".github/workflows/category-integration-",
@@ -247,7 +247,7 @@
       "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_672152_category_delta_apply_20260923.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/pste_0576_category_map_delta_20260923.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-23",
-    "current_first_blocker": "PSTE_0_57_6_CATEGORY_MAP_DELTA_1124_TO_1149",
+    "current_first_blocker": "REMAINING_PLUGIN_STATIC_CATEGORY_COPY_CLASSIFICATION",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1283,17 +1283,31 @@
         "signed_candidate_sha256": "cb64d1ee7fcf9c3bc4ff5aa9e2e8cb948763c2c2c1a7ad956b90f980da9e40fa"
       },
       "pste_0576": {
-        "status": "EXACT_GITHUB_SOURCE_BOUND_CATEGORY_MAP_DELTA_PENDING",
+        "status": "CLOSED_CATEGORY_MAP_DELTA_HARDTEST_PASS",
         "version": "0.57.6",
         "proof_run_id": 35693065234,
         "proof_artifact_id": 10679790400,
         "proof_zip_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
         "static_category_map": "fixtures/portal-category-map-v1.json",
-        "current_entries": 1124,
+        "current_entries": 1149,
         "target_entries": 1149,
         "allowed_delta_files": [
           "fixtures/portal-category-map-v1.json"
-        ]
+        ],
+        "category_gate_run": 35891142282,
+        "category_gate_result": "SUCCESS",
+        "category_gate_head": "4d23e7ff53229d004405576e922e6758650c66df",
+        "category_gate_artifact_id": 10764831507,
+        "category_gate_artifact_digest": "sha256:926d64020e44119fda606e52914c4c7ddc6323289ae900248d604dde3d581d6e",
+        "candidate_zip_sha256": "04d908dccbc46309c95cde03969e3558b87087074b8e54fdb7ef69e47e75f776",
+        "map_file_sha256": "935a9bef8ceceab9f8f48dc1a0ef0463e98684c77117c465c60859da908840ad",
+        "map_self_sha256": "518a8d7e7f548503845790ed1a2d5d63278773c66164d13edf1b66af3bcd871b",
+        "central_category_sha256": "3e5f32755e09b79c3ac266d5987716dd91866dd21f77b3a522099eae7f962d69",
+        "changed_files": [
+          "fixtures/portal-category-map-v1.json"
+        ],
+        "unchanged_files": 130,
+        "wordpress_write_performed": false
       },
       "pserc_02823": {
         "status": "DYNAMIC_CATEGORY_GATE_PASS_REFRESH_ONLY",
