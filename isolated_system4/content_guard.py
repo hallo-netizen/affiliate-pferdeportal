@@ -13,6 +13,7 @@ RESEARCH_CONTRACT = "SYSTEM4_RESEARCH_EVIDENCE_V1"
 FACTS_CONTRACT = "SYSTEM4_FACTS_EVIDENCE_V1"
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 URL_RE = re.compile(r"^https?://", re.I)
+FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
 
 MIN_SOURCES = 1
 MIN_SOURCE_EVIDENCE_CHARS = 40
@@ -64,6 +65,11 @@ def _source_metadata(source: Mapping[str, Any], index: int, prefix: str) -> dict
     _require(URL_RE.match(url) is not None, f"{prefix}_SOURCE_URL_INVALID:{index}")
     parsed = urlparse(url)
     _require(bool(parsed.netloc and "." in parsed.netloc), f"{prefix}_SOURCE_URL_INVALID:{index}")
+    host = (parsed.hostname or "").strip().rstrip(".").casefold()
+    _require(
+        host != FORBIDDEN_RESEARCH_HOST and not host.endswith("." + FORBIDDEN_RESEARCH_HOST),
+        f"{prefix}_SOURCE_OWN_DOMAIN_FORBIDDEN:{index}",
+    )
     _require(SHA_RE.fullmatch(snapshot) is not None, f"{prefix}_SOURCE_HASH_INVALID:{index}")
     _require(title.casefold() != sid.casefold(), f"{prefix}_SOURCE_TITLE_SYNTHETIC:{index}")
     out = {
