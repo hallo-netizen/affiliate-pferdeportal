@@ -1,0 +1,25 @@
+{
+  "contract": "CONCEPT_AGENT_DURABLE_RUNTIME_STATE_V1",
+  "repository": "hallo-netizen/affiliate-pferdeportal",
+  "state_branch": "runtime/concept-agent-current",
+  "state_path": "concept_agent/runtime/CURRENT_PRODUCTION_STATE.json",
+  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "item_count": 16,
+  "machine_ready": {
+    "run_id": 35909503205,
+    "issue_number": 382,
+    "source_run_id": 35909486065,
+    "second_text_start_allowed": false
+  },
+  "status": "WAITING_FOR_RESEARCH_BOUND",
+  "phase": "RESEARCH_BOUND_REQUIRED",
+  "next_action": "RUN_EXISTING_RESEARCH_FOR_CURRENT_BATCH",
+  "production_binding": null,
+  "checkpoint": null,
+  "chat_may_choose_action": false,
+  "chat_may_write_state": false,
+  "publish_allowed": false,
+  "source_main_sha": "8e631176b4de923247ad6545f75e150e0df4c4de",
+  "note": "No current durable RESEARCH_BOUND or production checkpoint was found. Do not reconstruct from chat, historical drafts, recovery archives, or old branches.",
+  "state_sha256": "fb5d51ea35e71dcc69e565f1173ca0210b2cd081b8c943246adced9619997416"
+}
