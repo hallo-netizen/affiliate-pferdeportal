@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 99,
+  "generation": 100,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "PPA013_CATEGORY_STRUCTURE_PRESENTATION_TEXT_COMPLETION",
+    "current_focus": "CATEGORY_INTEGRATION_30_NODE_PROPAGATION",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_PPA013_CATEGORY_COMPLETION_TARGET_20260922.md",
-    "current_focus_reason": "USER CORRECTED TEXT SCOPE: THE FIVE NEW TOPIC PAGES PLUS ALL 25 NEWLY CREATED ARTICLE CATEGORIES REQUIRE NEW INDIVIDUAL CATEGORY TEXTS. TOTAL TEXT SCOPE IS 30, NOT 5. TEXTS MUST FOLLOW EXISTING PPA-013 EDITORIAL RULES: 150-200 WORDS, TOPIC/INTENT-SPECIFIC SUBSTANCE, NATURAL KEYWORD USE WITHOUT STUFFING, NO GENERATOR/TEMPLATE LANGUAGE, NO PADDING OR GENERIC CLOSINGS. KEEP LIVE 1.50.558 GRID/ICONS BEHAVIOR UNCHANGED EXCEPT VERIFY IT.",
+    "current_focus_reason": "30-NODE CATEGORY INTEGRATION AFTER USER-CONFIRMED TEXT/ICON/EXACT7 PASS. CURRENT DELTA AUDIT 2026-09-23 HARD-BOUND AFFILIATE 6.72.145 FULL PACKAGE FROM AFFILIATE OFFICE WITH 6.72.142 GOLDMASTER FALLBACK; PORTAL/CATALOG CANDIDATE HARDTEST PASS; PSERC DYNAMIC CATEGORY POS/NEG PASS; EXACT PPM679 PACKAGE REBOUND. FIRST OPEN BLOCKER IS NOW PPM679 ADD-ONLY EXTENSION FOR 25 NEW PRODUCTION CATEGORIES PLUS 125 CANONICAL PORTAL SLOTS. NO WORDPRESS WRITE BEFORE COMPLETE LOCAL/CI EVIDENCE AND DRY-RUN.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -233,19 +233,21 @@
     }
   },
   "execution_state": {
-    "state": "PPA013_CATEGORY_STRUCTURE_ORDER_READBACK_PENDING",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY COMPLETION ONLY: FIRST RE-RUN 'Pferde Atelier – Struktur-Reihenfolge Fix' IN DRY-RUN MODE AS A READBACK. IT MUST SHOW current_page_ids AND current_menu_object_ids EQUAL desired_page_ids FOR ALL SIX GROUPS. DO NOT WRITE OR TOUCH PPA-013, PPA-001, THE PERFORMANCE HELPER, KUBIO OR THEME UNTIL THIS READBACK IS EVIDENCED. IF THE FIX PLUGIN WAS ALREADY DELETED, REINSTALL THE HASH-BOUND 1.0.0 ARTIFACT AND RUN DRY-RUN ONLY.",
-    "completion_condition": "STRUCTURE/MENU ORDER POST-APPLY READBACK PASS; THEN PPA-013 1.50.556->1.50.557 PATCHER WORDPRESS DRY-RUN PASS BEFORE APPLY; APPLY/POST-READBACK AND RESPONSIVE ICON/3-4 GRID REGRESSION PASS; FIVE NEW CATEGORY TEXTS 150-200 WORD QUALITY RULES PASS; TEMPORARY HELPERS REMOVED ONLY AFTER THEIR TASKS ARE CLOSED.",
-    "after_completion_action": "RETURN TO THE PREVIOUS PERFORMANCE CLEANUP WORKSTREAM: PPA-001 6.72.147 LIVE RETEST AND THE STILL-OPEN EXACT FULL-SOURCE/INSTALLABLE-PACKAGE BINDING FOR PPA-013. KUBIO AND THEME REMAIN PAUSED UNTIL THAT WORKSTREAM IS RESUMED AND CLEARED.",
+    "state": "CATEGORY_INTEGRATION_PPM679_ADD_PLAN_PENDING",
+    "authorized_next_action": "BUILD_AND_HARDTEST_PPM679_25_CATEGORY_ADD_125_SLOT_CANDIDATE",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. START FROM EXACT PPM679 PACKAGE SHA acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1. BUILD ONE ADD-ONLY CANDIDATE FOR 25 NEW PRODUCTION CATEGORIES + 125 CANONICAL SLOTS. KEEP 6-CATEGORY TEST HIERARCHY AND 3-ROLE LINK SNAPSHOT RUN-SCOPED. UPDATE DEPENDENT HASH/COUNT CONTRACTS. RUN 1:1 POSITIVE/NEGATIVE/REGRESSION. NO WORDPRESS WRITE.",
+    "completion_condition": "PPM679 ADD-ONLY CANDIDATE HARD PASS INCLUDING 25/25 NEW CATEGORIES, 125/125 NEW CANONICAL SLOTS, ALL SELF/BINDING HASHES, RECONCILIATION COUNTS, EXISTING 1124-CATEGORY REGRESSION AND CANONICAL_SLOT_MISSING NEGATIVE/POSITIVE PROOFS.",
+    "after_completion_action": "NEXT IN SAME CATEGORY MASTER ORDER: BIND REAL CURRENT PPA-013 FULL SOURCE AND ADD ONLY FIVE TILE PREVIEWS; THEN INTEGRATE THE TWO HARDTESTED PORTAL/CATALOG JSONS INTO EXACT 6.72.145 TREE; COMPLETE PSTE/LINK REFRESH PLAN; ONLY AFTER ALL LOCAL/CI PROOFS PREPARE WORDPRESS DRY-RUN.",
     "no_optional_detours": true,
-    "sequence": 31,
+    "sequence": 32,
     "authorized_change_prefixes": [
-      "release/affiliate-zentrale/evidence/",
+      "CATEGORY_INTEGRATION_HOBBYRAUM/",
+      ".github/workflows/category-integration-",
       "control/release-governance/CURRENT_RELEASE.json",
-      "protocol/AFFILIATE_RELEASE_"
+      "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
+      "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/ppa013_category_completion_delta_20260922.md"
+    "evidence_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -668,18 +670,18 @@
     "checked_at": "2026-09-07"
   },
   "operational_observation": {
-    "checked_at": "2026-09-22",
-    "live_plugin_version": "PPA-013 1.50.558 SOURCE APPLY PASS; FINAL 30-TEXT CORRECTION NOT YET APPLIED",
-    "live_status": "USER CONFIRMED TEXTS PASS, ICONS PASS, EXACT-7 3/4 LAYOUT PASS. REMAINING PPA-013 DEFECT: FIVE NEW TOP-LEVEL PRODUCT-PAGE TILES HAVE NO SHORT PREVIEW TEXT. ROOTCAUSE VERIFIED: PAGE NAV CARDS READ post_excerpt/post_content AND TRIM TO 18 WORDS. CROSS-SYSTEM AUDIT ALSO PROVES STATIC PORTAL STRUCTURE + AFFILIATE CATALOG + PPM679 CATEGORY/HIERARCHY/LINK SNAPSHOTS MUST INCLUDE THE 5 NEW PRODUCT PAGES AND 25 NEW ARTICLE CATEGORIES. PSTE DISCOVERS WORDPRESS PAGE TREE + FLAT CATEGORIES DYNAMICALLY BUT REQUIRES A FRESH SNAPSHOT/TOPIC MAP; PSERC/LINK REGISTRIES REQUIRE REGENERATION FROM THE UPDATED AUTHORITIES. CENTRAL CATEGORY CHANGE MASTER CREATED AND BOUND; ALL FUTURE CATEGORY WORK MUST READ IT FIRST.",
+    "checked_at": "2026-09-23",
+    "live_plugin_version": "PPA-013: functional user readback says 30 texts/icons/exact-7 PASS; exact post-text version/main-SHA not independently read back. Last exact hash-bound source apply remains 1.50.558 / 840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1. PPA-001 category-integration working source is exact 6.72.145 full package SHA a5d6bccb11d41005be0f0db40b2dcdb32b8e40e73a772411b44039adedc548de; 6.72.142 Goldmaster is rollback only.",
+    "live_status": "30 NEW NODES EXIST IN WORDPRESS. USER CONFIRMED 30 LONG TEXTS PASS, FIVE ICONS PASS, EXACT-7 3/4 PASS. FIVE SHORT TOP-LEVEL TILE PREVIEWS REMAIN OPEN. AFFILIATE OFFICE SOURCE BINDING IS RESOLVED: EXACT 6.72.145 FULL PACKAGE AND 6.72.142 GOLDMASTER VERIFIED; PORTAL STRUCTURE AND EBAY CATALOG ARE BYTEIDENTICAL BETWEEN THEM. CATEGORY PORTAL/CATALOG CANDIDATE HARDTEST RUN 35784852533 SUCCESS AFTER NEGATIVE BUCKET GATE FIX. PSERC DYNAMIC CATEGORY AUDIT RUN 35785760506 SUCCESS. PPM679 EXACT PACKAGE SHA acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1 REBOUND BY RUN 35824322686 SUCCESS / ARTIFACT 10734567188. PPM AUDIT CORRECTED SCOPE: FULL 1124 CATEGORY SOURCE + FULL 1124 THREE-TYPE HIERARCHY + CANONICAL PLAN 1124 PORTAL CATEGORIES/5620 PORTAL SLOTS; 25 NEW CATEGORIES REQUIRE 125 NEW CANONICAL PORTAL SLOTS. SMALL 6-CATEGORY HIERARCHY AND 3-ROLE LINK SNAPSHOTS ARE RUN/TEST-SCOPED AND MUST NOT BE TURNED INTO FULL REGISTRIES.",
     "last_known_good_operational_version": "6.72.108",
     "last_known_good_artifact_sha256": "d8aeb69bd67a18072996da9ca8101923e6ff6765a40c5d0d6a6f74bde3be5bb3",
     "last_known_good_source_manifest_sha256": "d7771d6f2d7816217b0ccd576580bf722a22a40f5d1e19b333e29b5775719b8e",
     "canonical_plugin_version": "6.72.105",
     "canonical_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
     "source_drift": "LAST_KNOWN_GOOD_6_72_108_VS_CANONICAL_6_72_105_REMAINS_OPEN_BUT IS SECONDARY TO LIVE RECOVERY",
-    "first_blocker": "CATEGORY_INTEGRATION_EXACT_SOURCE_BIND_AND_HARDTEST_NOT_YET_COMPLETE",
-    "evidence_ref": "release/affiliate-zentrale/evidence/ppa013_category_completion_delta_20260922.md",
-    "recovery_target_ref": "protocol/AFFILIATE_RELEASE_PERFORMANCE_CLEANUP_PROTOCOL_20260922.md",
+    "first_blocker": "PPM679_25_CATEGORY_ADD_125_CANONICAL_SLOTS_NOT_YET_BUILT_HARDTESTED",
+    "evidence_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
+    "recovery_target_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
     "previous_blocker_after_recovery": "AFF-ERR-035",
     "awin_functional_blocker_after_reconciliation": "AFF-ERR-038",
     "locked_live_pass_ref": "AFF-ERR-034",
@@ -866,7 +868,7 @@
       "next_action": "REPLACE HELPER 1.0.2 WITH 1.0.3 IN THE SAME PLUGIN SLOT. RUN PREFLIGHT. PREFLIGHT MUST CONFIRM EXACT 1.50.558 SHA, ALL 5 PAGE NODES, ALL 25 ARTICLE CATEGORY TERMS, 30/30 TEXT QUALITY, EXISTING GRID/ICON MARKERS, AND PERFORMANCE HELPER SHA. ONLY THEN APPLY ONCE AND RUN READBACK."
     },
     "cross_system_category_audit": {
-      "status": "HARD_AUDIT_PARTIAL_COMPLETE_ACTIONS_IDENTIFIED",
+      "status": "HARD_AUDIT_ADVANCED_PPM_CANONICAL_PLAN_BLOCKER_IDENTIFIED",
       "scope": {
         "new_product_pages": [
           "pferdesaettel",
@@ -904,10 +906,15 @@
         "ppm679_contracts": {
           "paths": [
             "portal-production-machine/contracts/complete-portal-category-source-v1.json",
+            "portal-production-machine/contracts/three-type-complete-category-hierarchy-snapshot-v2.json",
+            "portal-production-machine/contracts/canonical-complete-editorial-plan-v1.json",
+            "plus all dependent editorial governance/reconciliation self-hash and binding fields proven by exact package validation"
+          ],
+          "do_not_mass_extend": [
             "portal-production-machine/contracts/category-hierarchy-snapshot-v1.json",
             "portal-production-machine/contracts/wordpress-link-target-snapshot-v1.json"
           ],
-          "reason": "System4 prewrite hard-validates category, hierarchy and link authority before article production"
+          "reason": "Exact PPM679 package audit proves full category source + full three-type hierarchy + canonical editorial plan are the complete authorities. 25 new production categories require 125 canonical slots or later PPM find_slot() can fail CANONICAL_SLOT_MISSING."
         }
       },
       "refresh_regenerate_no_hardcoded_source_proven": {
@@ -919,7 +926,8 @@
         "pserc": {
           "plugin": "Portal SEO Redaktionsplan Compiler",
           "reason": "production contracts include PSERC_PORTAL_STRUCTURE_REGISTRY_V1 and consume SEO/structure authority",
-          "action": "regenerate editorial-plan/structure registry after PSTE refresh; do not manually invent category bindings"
+          "action": "After PSTE/live structure refresh regenerate/readback real plan/registry from updated authority; no manual 25-category hardcoding.",
+          "status": "GITHUB_ACTIONS_DYNAMIC_CATEGORY_POSNEG_PASS_RUN_35785760506"
         },
         "link_registry": {
           "contracts": [
@@ -934,11 +942,97 @@
       },
       "no_change_claim_not_made_for_uninspected_plugins": true
     },
-    "next_action": "CONTINUE CATEGORY INTEGRATION FROM MASTER: HARD-BIND EXACT CURRENT SOURCES; DO NOT PATCH AFFILIATE FROM STALE 6.72.105 RELEASE TREE; BUILD/TEST 30-NODE PROPAGATION + FIVE TILE PREVIEWS; REQUIRE 1:1 POSITIVE/NEGATIVE SIMULATION, DOCUMENTED FALLBACK, THEN WORDPRESS DRY-RUN BEFORE ANY APPLY."
+    "next_action": "BUILD AND HARD-TEST ONE ADD-ONLY PPM 6.7.9 CATEGORY-INTEGRATION CANDIDATE FROM EXACT PACKAGE SHA acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1: ADD THE 25 NEW PRODUCTION CATEGORIES TO THE COMPLETE CATEGORY SOURCE AND FULL THREE-TYPE HIERARCHY; ADD EXACTLY 125 CANONICAL PORTAL SLOTS UNDER THE EXISTING FIVE-SLOTS-PER-CATEGORY RULE; UPDATE ALL DEPENDENT SELF/BINDING HASHES AND RECONCILIATION COUNTS DETERMINISTICALLY; RUN POSITIVE/NEGATIVE/REGRESSION CI. DO NOT TOUCH WORDPRESS.",
+    "category_integration_20260923": {
+      "status": "PPM_FIRST_BLOCKER_OPEN_AFFILIATE_AND_PSERC_PROOFS_PASS",
+      "master_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
+      "master_audit_commit": "2d022715dfd439a4ed2f195f0f70a893b6787be4",
+      "affiliate_source_binding": {
+        "working_base_version": "6.72.145",
+        "working_base_zip": "AFFILIATE_ZENTRALE_V6.72.145_PERFORMANCE_BATCH_READ_ROOTFIX_HARDTEST.zip",
+        "working_base_sha256": "a5d6bccb11d41005be0f0db40b2dcdb32b8e40e73a772411b44039adedc548de",
+        "working_base_file_count": 27,
+        "rollback_version": "6.72.142",
+        "rollback_zip": "AFFILIATE_ZENTRALE_V6.72.142_GOLDMASTER_ROLLBACK_DO_NOT_OVERWRITE.zip",
+        "rollback_sha256": "8c25b833bb9c6a017cf83e767ac86bf221468c790445062077991f17462b5b6d",
+        "rollback_file_count": 27,
+        "portal_structure_same_sha_both": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+        "ebay_catalog_same_sha_both": "4eecef55a3033a4691f8a832eba5fb1657cdb15826ee47d366dccbaabfbb1fa2"
+      },
+      "portal_catalog_candidate": {
+        "workflow_run": 35784852533,
+        "result": "SUCCESS",
+        "portal_sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
+        "catalog_sha256": "6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2",
+        "counts": {
+          "product_pages": 334,
+          "article_categories": 1149,
+          "menu_items": 1550,
+          "product_targets": 334,
+          "article_targets": 1149,
+          "business_concepts": 321,
+          "business_routable_concepts": 380,
+          "supply_required": 316
+        },
+        "negative_tests": "8_OF_8_PASS",
+        "previous_failed_run": {
+          "run": 35784782645,
+          "reason": "wrong_private_bucket negative case did not fail",
+          "corrected_by_commit": "ad90791538fbb2a0f42b5d89edd430afdd3c8d91"
+        }
+      },
+      "pserc": {
+        "workflow_run": 35785760506,
+        "result": "SUCCESS",
+        "exact_package_sha256": "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314",
+        "dynamic_category_posneg": "PASS",
+        "manual_25_category_hardcoding_required": false
+      },
+      "ppm679": {
+        "exact_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "baseline_run": 35824322686,
+        "baseline_result": "SUCCESS",
+        "baseline_artifact_id": 10734567188,
+        "complete_category_source_count": 1124,
+        "full_three_type_hierarchy_count": 1124,
+        "current_portal_categories": 1124,
+        "current_portal_slots": 5620,
+        "current_total_slots": 5665,
+        "slots_per_category": 5,
+        "new_categories_required": 25,
+        "new_portal_slots_required": 125,
+        "target_portal_categories_if_candidate_validates": 1149,
+        "target_portal_slots_if_candidate_validates": 5745,
+        "target_total_slots_if_candidate_validates": 5790,
+        "small_category_hierarchy_snapshot": "6_CATEGORY_CONTROLLED_TEST_SUBSET_DO_NOT_MASS_EXTEND",
+        "wordpress_link_target_snapshot": "3_ROLE_RUN_SCOPED_DO_NOT_MASS_EXTEND",
+        "reimport_add_status": "REGISTERED_PENDING_RESEARCH_AND_OWNERSHIP_REVIEW",
+        "automatic_migration_allowed": false
+      },
+      "ppa013": {
+        "functional_user_readback": {
+          "texts30": "PASS",
+          "icons5": "PASS",
+          "exact7_grid": "PASS"
+        },
+        "preview_texts5": "OPEN",
+        "exact_post_text_version_sha_readback": "NOT_PROVIDED_IN_CHAT",
+        "last_exact_hash_bound_apply": {
+          "version": "1.50.558",
+          "main_sha256": "840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1"
+        },
+        "rule": "BEFORE PREVIEW APPLY BIND REAL CURRENT LIVE FULL SOURCE; DO NOT GUESS 1.50.558 OR 1.50.559"
+      },
+      "wordpress_write_status": "NONE_IN_2026_09_23_INTEGRATION_AUDIT",
+      "dry_run_status": "NOT_REACHED"
+    }
   },
   "category_change_master": {
     "authority": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
     "rule": "READ BEFORE ANY FUTURE CATEGORY STRUCTURE CHANGE; THIS FILE CENTRALIZES REQUIREMENTS, CONSUMERS, TEST CONTRACT, DRY-RUN RULE, FALLBACK AND ERROR HISTORY",
-    "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b"
+    "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
+    "last_audit_commit": "2d022715dfd439a4ed2f195f0f70a893b6787be4",
+    "last_audit_date": "2026-09-23",
+    "current_first_blocker": "PPM679_25_CATEGORY_ADD_125_CANONICAL_SLOTS_NOT_YET_BUILT_HARDTESTED"
   }
 }
