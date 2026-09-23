@@ -106,12 +106,11 @@ jobs:
           set -euo pipefail
           python3 -m unittest -v \
             control-branch/concept_agent/tests/test_runner.py \
-            control-branch/concept_agent/tests/test_fresh_batch_executor.py
           python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-regression-mid-positive
           python3 control-branch/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/concept-agent-regression-mid-negative
       - name: Run fixed route
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           MODE: ${{ steps.parsed.outputs.mode }}
@@ -229,31 +228,7 @@ jobs:
                   python3 -c "import base64,json,os,pathlib,sys; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); raw=req.get('intake_snapshot_b64'); raw or sys.exit('RESTART_INTAKE_SNAPSHOT_MISSING'); pathlib.Path('/tmp/concept-agent-intake-snapshot.json').write_bytes(base64.b64decode(raw,validate=True))"
                   python3 project-main/concept_agent/intake_bridge.py prepare                     /tmp/concept-agent-intake-snapshot.json                     /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE.json                     | tee /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE_RESULT.json
                   python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/CONCEPT_AGENT_INTAKE_RESULT.json',encoding='utf-8')); assert x.get('status')=='CONCEPT_AGENT_INTAKE_READY' and isinstance(x.get('item_count'),int) and x['item_count']>=1 and x.get('publish_allowed') is False"
-                  python3 control-branch/concept_agent/fresh_batch_executor.py \
-                    --snapshot /tmp/concept-agent-intake-snapshot.json \
-                    --intake /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE.json \
-                    --out /tmp/concept-agent-return/CONCEPT_AGENT_CURRENT_WORK_BINDING.json \
-                    | tee /tmp/concept-agent-return/CONCEPT_AGENT_FRESH_BATCH_BINDING_RESULT.json
-                  BINDING='/tmp/concept-agent-return/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
-                  BINDING_SHA="$(sha256sum "$BINDING" | awk '{print $1}')"
-                  cp "$BINDING" control-branch/concept_agent/runtime/CURRENT_WORK_BINDING.json
-                  cd control-branch
-                  git config user.name "github-actions[bot]"
-                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  git add concept_agent/runtime/CURRENT_WORK_BINDING.json
-                  if ! git diff --cached --quiet; then
-                    git commit -m "Concept Agent: persist fresh productive work binding [skip ci]"
-                    git push origin HEAD:"${GITHUB_REF_NAME}"
-                  fi
-                  cd ..
-                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTED_V1","status":"PASS","selected_action":"RESTART_BATCH_FROM_INTAKE","next_stage":"ARTICLE_PRODUCTION","entry_ref":"concept_agent/fresh_batch_executor.py","allowed_operation":"PRODUCTIVE_EXISTING_ROUTE","intake_executed":true,"fresh_binding_executed":true,"chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json
-                  CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
-                  CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
-                  python3 control-branch/concept_agent/resumable_runner.py run \
-                    --binding "$BINDING" \
-                    --binding-sha256 "$BINDING_SHA" \
-                    --out /tmp/concept-agent-return/production
-                  cp /tmp/concept-agent-return/production/CONCEPT_AGENT_CHAT_HANDOFF_V1.json /tmp/concept-agent-return/CONCEPT_AGENT_ARTICLE_PRODUCTION_HANDOFF.json
+                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTED_V1","status":"PASS","selected_action":"RESTART_BATCH_FROM_INTAKE","next_stage":"INTAKE","entry_ref":"concept_agent/intake_bridge.py","allowed_operation":"PREPARE_INTAKE_ONLY","intake_executed":true,"chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json
                 elif [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
                   exit 2
                 else
