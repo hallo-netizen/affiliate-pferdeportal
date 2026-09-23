@@ -749,3 +749,32 @@ Der sichtbare 0.28.23-Metadaten-Snapshot bindet weiterhin 1124 Kategorien; offen
 
 Evidence:
 `release/affiliate-zentrale/evidence/pserc_current25_real_id_dynamic_20260923.md`.
+
+
+## 19. HARD SCOPE – nur Kategorien/Struktur (2026-09-23)
+
+Für die laufende Kategorieintegration gilt ab hier verbindlich:
+
+**Erlaubt**
+- zentrale Kategorienliste;
+- IDs, Slugs, Namen, Parent-/Portalzuordnungen;
+- technische Kategorie-Kopien/Ableitungen;
+- category-only Portalstruktur/eBay-Katalog;
+- Count-/Hash-Bindungen, die ausschließlich durch Kategorien geändert werden;
+- read-only PSTE/PSERC-Strukturrefresh;
+- aus der Kategorie-/Portalstruktur abgeleitete Linkziel-Eignung.
+
+**Verboten**
+- Texte;
+- Kachelvorschauen;
+- Designinhalte;
+- fachliche Plugin-Konzepte;
+- Performance-, Provider-, Ranking- oder Bannerlogik;
+- sonstige nicht-kategoriebezogene Änderungen.
+
+Bereits abgeschlossene Kategoriebeweise werden nicht erneut ausgeführt.
+
+PPA-013-Inhaltsarbeit ist ausdrücklich **außerhalb dieses Kategorie-Scopes**.
+
+Aktueller erster offener Kategorieblocker:
+exakter Affiliate-6.72.145-Vollstand für die bereits hart getestete **zwei-JSON-Kategorieintegration**. Kein Neuaufbau aus 6.72.105.
