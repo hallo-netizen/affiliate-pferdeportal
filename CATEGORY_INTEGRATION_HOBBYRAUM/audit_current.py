@@ -310,6 +310,9 @@ structure_terms=[
     "term_id",
     "portal_structure",
     "category_map",
+    "breadcrumb-portal-map-v150310.json",
+    "breadcrumb_portal_map",
+    "v150310",
 ]
 structure_term_counts={term:hist_txt.lower().count(term.lower()) for term in structure_terms}
 
@@ -327,6 +330,14 @@ wp_structure_call_counts={term:len(re.findall(r"\b"+re.escape(term)+r"\s*\(",his
 
 json_refs=sorted(set(re.findall(r"['\"]([^'\"]+\.json)['\"]",hist_txt)))
 category_json_refs=[x for x in json_refs if re.search(r"category|kategorie|portal|taxonomy|hierarchy|link-target",x,re.I)]
+
+json_ref_contexts=[]
+for ref in category_json_refs:
+    for m in list(re.finditer(re.escape(ref),hist_txt))[:8]:
+        lo=max(0,hist_txt.rfind("\n",0,m.start()-5000))
+        hi=hist_txt.find("\n",m.end()+5000)
+        if hi<0: hi=min(len(hist_txt),m.end()+8000)
+        json_ref_contexts.append({"ref":ref,"context":hist_txt[lo:hi].strip()[:12000]})
 
 # Extract compact contexts for any structural-key occurrence; capped to keep evidence readable.
 struct_contexts=[]
@@ -352,7 +363,8 @@ checks["ppa013_historical_150469"]={
     "structure_term_counts":structure_term_counts,
     "wp_structure_call_counts":wp_structure_call_counts,
     "category_or_portal_json_refs":category_json_refs,
-    "structure_contexts":struct_contexts[:60],
+    "category_or_portal_json_ref_contexts":json_ref_contexts[:20],
+    "structure_contexts":struct_contexts[:100],
     "hard_boundary":"Historical evidence only. Never use this source as a reconstructed substitute for current 1.50.559."
 }
 print("PPA013_HISTORICAL_150469_SOURCE_SHA_PASS",hist_sha)
