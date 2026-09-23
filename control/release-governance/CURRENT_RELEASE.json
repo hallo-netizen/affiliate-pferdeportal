@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 120,
+  "generation": 121,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -1398,6 +1398,15 @@
       "exact_tree_chain": "1.50.556_TREE -> ONLY_MAIN_CHANGED_TO_1.50.558 -> ONLY_MAIN_CHANGED_TO_1.50.559",
       "minimal_delta_if_current_map_is_1124": "MAP 1124->1149 PLUS SYNCHRONOUS PHP COUNT BINDING 1124->1149 ONLY",
       "delta_build_forbidden_until_exact_current_asset_bound": true
+    },
+    "retrieval_exhaustion": {
+      "status": "EXHAUSTED_AVAILABLE_SOURCES_NO_RECONSTRUCTION",
+      "exact_missing_object": "assets/breadcrumb-portal-map-v150310.json OR ppa013-category-completion-manifest-20260922-194858-33451736b021.json OR COMPLETE_1_50_559_PLUGIN_TREE",
+      "github_direct_path_history": "NONE",
+      "library_or_conversation_full_source": "NONE",
+      "public_live_asset_access": "UNAVAILABLE_FROM_CURRENT_ENVIRONMENT",
+      "evidence_exporter_route": "NOT_DOCUMENTED_OR_PUBLICLY_REACHABLE",
+      "wordpress_write": "NONE"
     }
   },
   "template_kit_150559_static_structure_consumer": {
