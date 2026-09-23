@@ -9,6 +9,7 @@ from pathlib import Path
 
 import full_workflow_gate
 import progress_guard
+import runtime_environment_guard
 
 CONTRACT = "CONCEPT_AGENT_UNIVERSAL_REENTRY_DECISION_V2"
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -217,6 +218,7 @@ def _assert_route_matches_checkpoint(route: dict, checkpoint: dict) -> None:
         raise Blocked("UNEXPECTED_REENTRY_STAGE:" + str(stage))
 
 def build(binding: dict, checkpoint: dict) -> dict:
+    runtime_binding = runtime_environment_guard.current_binding()
     outer_state = _outer_state(binding, checkpoint)
     entry = full_workflow_gate.enter(outer_state)
     route = full_workflow_gate.stage_route_from_entry_proof(entry)
@@ -235,6 +237,7 @@ def build(binding: dict, checkpoint: dict) -> dict:
         "outer_entry_ref": route["entry_ref"],
         "outer_allowed_operation": route["allowed_operation"],
         "allowed_action": checkpoint["allowed_action"],
+        "runtime_binding": runtime_binding,
         "policy": {
             "always_enter_at_stage_0": True,
             "fast_forward_validate_only": True,
