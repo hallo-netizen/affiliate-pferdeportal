@@ -52,3 +52,20 @@ jobs:
           set -euo pipefail
           echo 'c0572951a5672e04fbad87f27ff6bb4990072db55500c6ad865c4d8193719c55  QUELLCODE_KATEGORIE_WORKFLOW_V1.6.1_WORKFLOW_HARDLOCK.zip' | sha256sum -c -
           echo CATEGORY_FALLBACK_HASH_PASS
+
+      - name: Package candidate artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f /tmp/AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.7.0_CENTRAL_CATEGORY_CANDIDATE.zip
+          cd CATEGORY_CENTRAL_HOBBYRAUM/candidate_v1.7.0
+          zip -qr /tmp/AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.7.0_CENTRAL_CATEGORY_CANDIDATE.zip .
+          sha256sum /tmp/AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.7.0_CENTRAL_CATEGORY_CANDIDATE.zip | tee /tmp/candidate-zip.sha256
+      - name: Upload candidate artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-central-v1.7.0-candidate
+          path: |
+            /tmp/AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.7.0_CENTRAL_CATEGORY_CANDIDATE.zip
+            /tmp/candidate-zip.sha256
+          if-no-files-found: error
