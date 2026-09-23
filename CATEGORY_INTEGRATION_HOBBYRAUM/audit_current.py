@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"CATEGORY_INTEGRATION_HOBBYRAUM"/"out"
 OUT.mkdir(parents=True,exist_ok=True)
 
-PORTAL=ROOT/"affiliate-portal-router/assets/portal-structure-v279.json"
+PORTAL=ROOT/"release/affiliate-zentrale/current/affiliate-portal-router/assets/portal-structure-v279.json"
 CATALOG=ROOT/"release/affiliate-zentrale/current/affiliate-portal-router/assets/ebay-portal-catalog-v2.json"
 AFF_MAIN=ROOT/"release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php"
 PPM=Path(os.environ.get("PPM_ZIP","/tmp/ppm679.zip"))
