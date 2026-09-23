@@ -72,12 +72,10 @@ def _control() -> dict[str, Any]:
         raise Blocked("DURABLE_EVENT_CURRENT_COUNT_MISMATCH")
     if batch.get("publish_allowed") is not False or log.get("publish_allowed") is not False:
         raise Blocked("DURABLE_EVENT_PUBLISH_INVALID")
-    if log.get("issue_number") != 382:
-        raise Blocked("DURABLE_EVENT_ISSUE_INVALID")
-    if log.get("machine_ready_run_id") != 35909503205:
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_INVALID")
-    if log.get("machine_ready_comment_id") != 5801466924:
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_COMMENT_INVALID")
+    for key in ("issue_number", "machine_ready_run_id", "machine_ready_comment_id"):
+        value = log.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or value < 1:
+            raise Blocked("DURABLE_EVENT_" + key.upper() + "_INVALID")
     if log.get("chat_may_choose_action") is not False:
         raise Blocked("DURABLE_EVENT_CHAT_ACTION_INVALID")
     if log.get("second_text_start_allowed") is not False:
@@ -139,15 +137,22 @@ def _anchor(rows: list[dict[str, Any]], cfg: dict[str, Any]) -> str:
     if _login(row) != TRUSTED_START_AUTHOR:
         raise Blocked("DURABLE_EVENT_MACHINE_READY_AUTHOR_INVALID")
     body = str(row.get("body") or "")
-    required = (
-        "TEXT_START_MACHINE_READY\n"
-        "TARGET_ACTION_RUN_ID: 35909503205\n"
-        "SOURCE_RUN_ID: 35909486065\n"
-        "BATCH_SHA256: " + cfg["batch_sha256"] + "\n"
-        "PUBLISH: NO"
-    )
-    if body.strip() != required:
+    lines = body.strip().splitlines()
+    fields = {}
+    if not lines or lines[0] != "TEXT_START_MACHINE_READY":
         raise Blocked("DURABLE_EVENT_MACHINE_READY_BODY_INVALID")
+    for line in lines[1:]:
+        if ": " in line:
+            key, value = line.split(": ", 1)
+            fields[key] = value
+    if fields.get("TARGET_ACTION_RUN_ID") != str(cfg["machine_ready_run_id"]):
+        raise Blocked("DURABLE_EVENT_MACHINE_READY_RUN_MISMATCH")
+    if not str(fields.get("SOURCE_RUN_ID") or "").isdigit():
+        raise Blocked("DURABLE_EVENT_MACHINE_READY_SOURCE_RUN_INVALID")
+    if fields.get("BATCH_SHA256") != cfg["batch_sha256"]:
+        raise Blocked("DURABLE_EVENT_MACHINE_READY_BATCH_MISMATCH")
+    if fields.get("PUBLISH") != "NO":
+        raise Blocked("DURABLE_EVENT_MACHINE_READY_PUBLISH_INVALID")
     return stable(
         {
             "comment_id": wanted,
