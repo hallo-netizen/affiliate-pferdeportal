@@ -4,6 +4,8 @@ from __future__ import annotations
 import hashlib, json, re, sys
 from pathlib import Path
 
+import runtime_environment_guard
+
 BINDING_CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
 CHECKPOINT_CONTRACT = "CONCEPT_AGENT_CURRENT_PROGRESS_V1"
 BATCH_STAGE_RESULT_CONTRACT = "CONCEPT_AGENT_BOUND_BATCH_STAGE_RESULT_V1"
@@ -220,6 +222,10 @@ def verify_reentry_decision(binding: dict, state: dict, decision: dict) -> None:
         raise Blocked("REENTRY_DECISION_ACTION_MISMATCH")
     if decision.get("publish_allowed") is not False:
         raise Blocked("REENTRY_DECISION_PUBLISH_INVALID")
+    try:
+        runtime_environment_guard.verify(decision.get("runtime_binding"))
+    except Exception as exc:
+        raise Blocked("REENTRY_CANONICAL_RUNTIME_NOT_READY:" + str(exc)) from exc
     policy = decision.get("policy")
     expected_policy = {
         "always_enter_at_stage_0": True,
