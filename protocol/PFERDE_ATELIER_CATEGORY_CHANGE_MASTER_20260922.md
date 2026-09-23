@@ -19,6 +19,20 @@ HARD RULE:
 - Jeder Apply braucht exakten Ausgangs-Hash/Version, Readback und dokumentierten Fallback.
 - PASS darf nur ein echter Prüfer/Readback behaupten, nie der Worker selbst.
 
+## 0A. Verbindlicher Zielvertrag / Definition of Done
+
+Die Kategorieänderung ist erst abgeschlossen, wenn **alle** folgenden Punkte gemeinsam belegt sind:
+
+1. Die 5 neuen Produktseiten und 25 neuen Artikelkategorien sind als exakt 30 neue Knoten korrekt gebunden; bestehende Eltern/Kinder bleiben unverändert.
+2. PPA-013 liefert für diese Struktur die bereits bestätigten 30 individuellen Langtexte, die fünf passenden Icons und das Exact-7-Desktop-Raster sowie zusätzlich die fünf noch fehlenden kurzen Kachelvorschauen im bestehenden Kartenmechanismus.
+3. Die Affiliate-Zentrale verwendet eine aus dem exakt gebundenen aktuellen Vollbaum abgeleitete Portalstruktur und einen dazu hash-/count-konsistenten eBay-Zielkatalog. Performance-, Provider-, Ranking-, Banner- und Fachlogik bleiben außerhalb des Struktur-Deltas byte-/verhaltensgleich.
+4. PSTE liest die reale WordPress-Struktur frisch ein; PSERC akzeptiert die neuen Kategorien über seinen bestehenden dynamischen Strukturpfad; keine manuell erfundenen Kategoriebindungen.
+5. PPM 6.7.9 kennt die 25 neuen Produktionskategorien **und** besitzt für sie die vollständigen kanonischen Produktionsslots. Lauf-/testbezogene Hierarchie- oder Link-Snapshots werden nicht zu Vollregistern umfunktioniert.
+6. Interne Linkziele werden aus den aktualisierten Autoritäten read-only neu gebunden; NEW-Linkbindung vor Texterstellung bleibt Pflicht.
+7. Jede tatsächlich geänderte Komponente hat lokalen/CI-Positivtest, Negativtest, Regressionstest, Fresh-Unpack/Hashbeleg und einen dokumentierten Fallback.
+8. Vor jedem schreibenden WordPress-Schritt läuft ein echter Dry-Run/Preflight mit `writes_performed=false`. Erst bei vollständigem PASS genau ein Apply, danach neuer Request + Readback.
+9. Keine Produktionsfreigabe, solange ein Pflichtnachweis offen ist.
+
 ## 1. Aktuelle Strukturänderung
 
 ### 1.1 Fünf neue Produkt-/Hub-2-Seiten
@@ -476,3 +490,128 @@ Belegte Basis:
 Evidence-Artefakte:
 - Run 35783612898 Artifact ID `10719280682`
 - Run 35783744612 Artifact ID `10719391536`
+
+
+## 12. Abschluss-/Nachholprüfung 2026-09-23 – belastbares Delta seit Generation 99
+
+Dieser Abschnitt ist **Protokoll/Evidence-Zusammenfassung**, keine zweite CURRENT-Wahrheit. Dynamischer Status und genau eine NEXT ACTION bleiben ausschließlich in `control/release-governance/CURRENT_RELEASE.json`.
+
+### 12.1 Affiliate-Zentrale – exakte Quellbindung aus dem Affiliatebüro nachgeholt
+
+Persistente Fachablage geprüft:
+- `/Pferde-Atelier/Affiliate-Zentrale/SICHERUNG/AFFILIATE_ZENTRALE_V6.72.142_GOLDMASTER_ROLLBACK_DO_NOT_OVERWRITE.zip`
+  - SHA256 `8c25b833bb9c6a017cf83e767ac86bf221468c790445062077991f17462b5b6d`
+  - 27 Dateien
+  - Rolle: unveränderlicher Rollbackanker.
+- `/Pferde-Atelier/Affiliate-Zentrale/TESTKANDIDATEN/AFFILIATE_ZENTRALE_V6.72.145_PERFORMANCE_BATCH_READ_ROOTFIX_HARDTEST.zip`
+  - SHA256 `a5d6bccb11d41005be0f0db40b2dcdb32b8e40e73a772411b44039adedc548de`
+  - 27 Dateien
+  - Rolle: live-getestete Performance-Arbeitsbasis für die Kategorieintegration; kein Goldmaster.
+
+Harter Baumvergleich 6.72.142 -> 6.72.145:
+- nur 6 Dateien unterscheiden sich: `includes/trait-ppar-control-contract.php`, `includes/trait-ppar-ebay-account-deletion.php`, `includes/trait-ppar-ebay.php`, `includes/trait-ppar-output-objects.php`, `pferdeportal-affiliate-router.php`, `readme.txt`.
+- `assets/portal-structure-v279.json` ist in beiden byteidentisch, SHA256 `b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0`.
+- `assets/ebay-portal-catalog-v2.json` ist in beiden byteidentisch, SHA256 `4eecef55a3033a4691f8a832eba5fb1657cdb15826ee47d366dccbaabfbb1fa2`.
+
+Damit ist Risiko H für die **Ausgangsquelle der Kategorieintegration** aufgelöst: nicht 6.72.105 rekonstruieren; 6.72.145 ist die exakt gebundene Arbeitsbasis, 6.72.142 ausschließlich Fallback.
+
+### 12.2 Portalstruktur/eBay-Katalog – Candidate-Hardtest PASS
+
+GitHub Actions:
+- Workflow: `Category Integration Candidate Hardtest`
+- erster Lauf `35784782645`: FAIL, weil der Negativfall `wrong_private_bucket` noch nicht fail-closed war.
+- Korrekturcommit `ad90791538fbb2a0f42b5d89edd430afdd3c8d91`: Affiliate-Bucket-Negativgate gehärtet.
+- Run `35784852533`: **SUCCESS**.
+
+Geprüfter Kandidat:
+- Portalstruktur SHA256 `ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed`
+- eBay-Katalog SHA256 `6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2`
+- 334 Produktseiten
+- 1149 Artikel-/Themenkategorien
+- 1550 Menüeinträge
+- 334 Produktziele
+- 1149 Artikelziele
+- 321 Business Concepts
+- 380 routable Concepts
+- 316 supply-required Ziele
+
+Acht Negativfälle PASS/fail-closed:
+1. doppelter neuer Produktseiten-Slug,
+2. falscher Parent,
+3. falscher Artikeltyp,
+4. falsche Ausrüstungsreihenfolge,
+5. veralteter Katalog-Source-SHA,
+6. fehlende Business-Concept-Abdeckung,
+7. falscher Private-Bucket,
+8. falscher Katalog-Count.
+
+Für die reale Affiliate-Pluginintegration gilt weiterhin: nur diese zwei Kandidaten-JSONs in den exakt gebundenen 6.72.145-Vollbaum übernehmen; alle anderen Dateien müssen unverändert bleiben. Noch **keine** WordPress-Installation/Promotion.
+
+### 12.3 PSERC – dynamische neue Kategorien hart bewiesen
+
+GitHub Actions:
+- Workflow: `Category Integration PSERC Audit`
+- Head `7d9a11e6353ed070624e676f73817d5ddb84c4fe`
+- Run `35785760506`: **SUCCESS**.
+
+Der Run bindet exakt das PSERC-Paket SHA256 `77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314` und führt zusätzlich den dynamischen Kategorie-Positiv-/Negativtest aus. Ergebnis: neue Kategorien können über den bestehenden dynamischen Strukturpfad akzeptiert werden; falscher Parent/Ancestor/Dublette bleiben blockiert. Kein statisches manuelles 25-Kategorien-Hardcoding in PSERC erforderlich.
+
+### 12.4 PPM 6.7.9 – exakte Paketbindung und korrigierter tatsächlicher Scope
+
+Der Hard-Baseline-Workflow wurde nur für Evidence erweitert, damit das exakt geprüfte PPM-ZIP selbst als Workflow-Artefakt erhalten bleibt.
+
+- Commit: `5ba4b5aa694050a0b575e35a988d277c2516b4eb`
+- Workflow: `Category Integration Hard Baseline`
+- Run `35824322686`: **SUCCESS**
+- Artifact ID `10734567188`
+- PPM-Paket SHA256: `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1` PASS.
+
+Exakter Paket-Audit:
+- `complete-portal-category-source-v1.json`: 1124 vollständige WordPress-Zielkategorien.
+- `three-type-complete-category-hierarchy-snapshot-v2.json`: ebenfalls 1124 vollständige semantische Kategorien; dies ist der bisher im Integrationsscope übersehene Voll-Hierarchie-Snapshot.
+- `category-hierarchy-snapshot-v1.json`: nur 6 Kategorien, ausdrücklich kontrollierter Test-Subset -> **nicht** pauschal erweitern.
+- `wordpress-link-target-snapshot-v1.json`: laufbezogener 3-Rollen-Linkziel-Snapshot -> **nicht** pauschal erweitern.
+- `canonical-complete-editorial-plan-v1.json`: 1124 Portal-Kategorien, 5620 Portal-Slots, 5665 Gesamtslots inklusive Journal. Jede Kategorie besitzt exakt 5 kanonische Slots.
+
+Neuer erster PPM-Blocker:
+- Die 25 neuen Produktionskategorien benötigen deshalb **125 neue kanonische Portal-Slots**.
+- Nur Kategorien in die Vollquelle/Hirarchie aufzunehmen würde später erneut `CANONICAL_SLOT_MISSING` erzeugen.
+- Zielcounts aus der bestehenden 5-Slot-Regel sind damit 1149 Portal-Kategorien / 5745 Portal-Slots / 5790 Gesamtslots, **aber diese Counts sind noch kein PASS**; sie müssen durch einen generierten, vollständig hashgebundenen PPM-Kandidaten bewiesen werden.
+- Der vorhandene Reimportvertrag erlaubt `ADD`; neue Kategorien starten als `REGISTERED_PENDING_RESEARCH_AND_OWNERSHIP_REVIEW`. Automatische stille Migration ist verboten.
+
+### 12.5 PPA-013 – belastbare und nicht belastbare Aussagen trennen
+
+Belastbar:
+- Nutzer bestätigt 30 Langtexte PASS.
+- Nutzer bestätigt fünf Icons PASS.
+- Nutzer bestätigt Exact-7 3/4-Raster PASS.
+- fünf kurze Kachelvorschauen fehlen weiterhin.
+
+Nicht als neuer Hash-PASS belegt:
+- Nach dem 30-Text-Lauf wurde im Chat kein vollständiger neuer PPA-013 Versions-/Main-SHA-Readback geliefert. Der letzte exakt hashgebundene Source-Apply bleibt daher 1.50.558 / `840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1`; der funktionale Nutzer-PASS für die 30 Texte wird separat geführt.
+- Vor dem späteren 5-Kachel-Vorschautext-Apply muss deshalb erneut die **wirklich aktuelle** PPA-013-Version/Source gebunden werden. Nicht aus 1.50.558/1.50.559 raten.
+
+### 12.6 Aktuell noch offen
+
+- PPM: 25 ADD-Kategorien + vollständiger Hierarchie-Snapshot + 125 kanonische Slots + abhängige Hash-/Governance-/Reconciliation-Bindungen als ein konsistenter 6.7.9-Kandidat; 1:1 Positiv/Negativ/Regression.
+- PPA-013: exakten aktuellen Live-Vollstand binden und nur fünf Kachelvorschauen ergänzen; vorhandene PASS-Funktionen schützen.
+- Affiliate-Zentrale: zwei geprüfte Candidate-JSONs in exakten 6.72.145-Vollbaum integrieren; übrige 25 Dateien byteidentisch; noch keine CURRENT-/Live-Promotion.
+- PSTE: nach späterer Live-Strukturänderung echter frischer WordPress-Snapshot/Topic-Refresh.
+- PSERC: dynamische Fähigkeit ist bewiesen; nach PSTE-Refresh echten neuen Plan-/Registry-Stand erzeugen/readbacken.
+- Links: echte Linkziele pro Lauf read-only neu binden.
+- Gesamt-E2E, vollständige Fallback-Dokumentation und WordPress-Dry-Run vor jedem Apply bleiben Pflicht.
+
+### 12.7 Fehlernachtrag
+
+**Fehler J – Affiliate Candidate Negativgate zunächst zu schwach**  
+Run `35784782645` ließ den manipulierten `wrong_private_bucket`-Fall durch. Korrektur: Validator gehärtet. Run `35784852533` danach SUCCESS mit allen 8 Negativfällen.
+
+**Fehler K – Affiliate-Quelle zunächst nur aus veraltetem Repo-Stand betrachtet**  
+Die Fach-/Pluginbüro-Ablage wurde zu spät als Primärquelle geprüft. Korrektur: 6.72.145 und 6.72.142 aus der persistenten Affiliate-Ablage materialisiert und vollständig hash-/baumverglichen. Prävention: bei Pluginarbeit immer zuerst Pluginbüro + Fachbüro + CURRENT lesen.
+
+**Fehler L – PPM-Scope zunächst unvollständig**  
+Zunächst wurden nur `complete-portal-category-source-v1.json`, kleiner Hierarchie-Snapshot und Link-Snapshot betrachtet. Exakter Paket-Audit zeigt zusätzlich den vollständigen `three-type-complete-category-hierarchy-snapshot-v2.json` und den kanonischen Gesamtredaktionsplan. Korrektur: PPM-Integration muss alle wirklich gebundenen Vollautoritäten samt 125 neuen Slots berücksichtigen; kleine laufbezogene Snapshots bleiben laufbezogen.
+
+### 12.8 Exakter nächster fachtechnischer Schritt
+
+**PPM 6.7.9 zuerst vollständig schließen:** aus dem exakt gebundenen Paket SHA `acbda93b…` einen ADD-only-Kandidaten für die 25 neuen Kategorien erzeugen, der die Voll-Kategoriequelle, den vollständigen Hierarchie-Snapshot und exakt 125 neue kanonische Slots konsistent nachzieht; alle abhängigen Self-/Binding-Hashes und Reconciliation-Counts deterministisch aktualisieren; danach lokaler/CI-Positiv-, Negativ- und Regressionstest. Keine WordPress-Schreiboperation.
