@@ -19,6 +19,13 @@ STATE_PATH = "concept_agent/runtime/CURRENT_PRODUCTION_STATE.json"
 API_ROOT = "https://api.github.com"
 SHA_RE = re.compile(r"^[0-9a-f]{40,64}$")
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
+TRUSTED_RECEIPT_WRITERS = {
+    "chatgpt-codex-connector[bot]",
+    "github-actions[bot]",
+}
+BOOTSTRAP_STATE_SHA256 = "fb5d51ea35e71dcc69e565f1173ca0210b2cd081b8c943246adced9619997416"
+BOOTSTRAP_HEAD_SHA = "e76633f22460683bacea407df7146e036ab0eb31"
+RECEIPT_CONTRACT = "CONCEPT_AGENT_DURABLE_STATE_RECEIPT_V1"
 
 
 class Blocked(RuntimeError):
@@ -178,6 +185,90 @@ class GitHubBackend:
             raise Blocked("DURABLE_STATE_GITHUB_RESPONSE_INVALID")
         return value
 
+    def _list_json(self, path: str) -> list:
+        url = API_ROOT + path
+        req = urllib.request.Request(
+            url,
+            method="GET",
+            headers={
+                "Accept": "application/vnd.github+json",
+                "Authorization": "Bearer " + self.token,
+                "User-Agent": "pferdeatelier-concept-agent-durable-state",
+                "X-GitHub-Api-Version": "2022-11-28",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as fh:
+                raw = fh.read()
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", "replace")
+            raise Blocked(
+                f"DURABLE_STATE_GITHUB_HTTP_{exc.code}:{detail[:500]}"
+            ) from exc
+        except Exception as exc:
+            raise Blocked("DURABLE_STATE_GITHUB_IO:" + str(exc)) from exc
+        try:
+            value = json.loads(raw.decode("utf-8"))
+        except Exception as exc:
+            raise Blocked("DURABLE_STATE_GITHUB_JSON_INVALID") from exc
+        if not isinstance(value, list):
+            raise Blocked("DURABLE_STATE_GITHUB_LIST_INVALID")
+        return value
+
+    def _verify_machine_receipt(self, state: dict, head_sha: str) -> None:
+        state_sha = state["state_sha256"]
+        if state_sha == BOOTSTRAP_STATE_SHA256 and head_sha == BOOTSTRAP_HEAD_SHA:
+            return
+        issue = (state.get("machine_ready") or {}).get("issue_number")
+        if not isinstance(issue, int) or issue < 1:
+            raise Blocked("DURABLE_STATE_RECEIPT_ISSUE_INVALID")
+        exact = (
+            RECEIPT_CONTRACT
+            + "\nSTATE_SHA256: " + state_sha
+            + "\nBRANCH_HEAD: " + head_sha
+            + "\nBATCH_SHA256: " + state["batch_sha256"]
+            + "\nPUBLISH: NO"
+        )
+        page = 1
+        while True:
+            rows = self._list_json(
+                "/repos/" + REPOSITORY + "/issues/" + str(issue)
+                + "/comments?per_page=100&page=" + str(page)
+            )
+            for row in rows:
+                if str(row.get("body") or "") != exact:
+                    continue
+                login = str(((row.get("user") or {}).get("login")) or "")
+                if login not in TRUSTED_RECEIPT_WRITERS:
+                    raise Blocked(
+                        "DURABLE_STATE_RECEIPT_WRITER_INVALID:" + login
+                    )
+                return
+            if len(rows) < 100:
+                break
+            page += 1
+        raise Blocked("DURABLE_STATE_MACHINE_RECEIPT_MISSING")
+
+    def _post_machine_receipt(self, state: dict, head_sha: str) -> None:
+        issue = (state.get("machine_ready") or {}).get("issue_number")
+        if not isinstance(issue, int) or issue < 1:
+            raise Blocked("DURABLE_STATE_RECEIPT_ISSUE_INVALID")
+        body = (
+            RECEIPT_CONTRACT
+            + "\nSTATE_SHA256: " + state["state_sha256"]
+            + "\nBRANCH_HEAD: " + head_sha
+            + "\nBATCH_SHA256: " + state["batch_sha256"]
+            + "\nPUBLISH: NO"
+        )
+        row = self._json(
+            "POST",
+            "/repos/" + REPOSITORY + "/issues/" + str(issue) + "/comments",
+            {"body": body},
+        )
+        login = str(((row.get("user") or {}).get("login")) or "")
+        if login not in TRUSTED_RECEIPT_WRITERS:
+            raise Blocked("DURABLE_STATE_WRITER_IDENTITY_INVALID:" + login)
+
     @staticmethod
     def _ref_path() -> str:
         return "/repos/" + REPOSITORY + "/git/ref/heads/" + urllib.parse.quote(
@@ -222,6 +313,7 @@ class GitHubBackend:
         except Exception as exc:
             raise Blocked("DURABLE_STATE_FILE_JSON_INVALID") from exc
         verify(state)
+        self._verify_machine_receipt(state, head_sha)
         return {
             "state": state,
             "raw": raw,
@@ -292,6 +384,9 @@ class GitHubBackend:
         if not SHA_RE.fullmatch(new_commit_sha):
             raise Blocked("DURABLE_STATE_NEW_COMMIT_INVALID")
 
+        # The state commit is created first, but it is not made current until
+        # the authenticated writer proves it is an allowed machine identity.
+        self._post_machine_receipt(state, new_commit_sha)
         self._json(
             "PATCH",
             self._ref_path(),
