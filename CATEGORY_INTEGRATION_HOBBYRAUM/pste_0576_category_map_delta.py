@@ -5,7 +5,7 @@ import argparse, copy, hashlib, json, pathlib, zipfile
 MAP="Portal SEO Topic Engine/fixtures/portal-category-map-v1.json"
 CENTRAL=pathlib.Path("CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv")
 PORTAL=pathlib.Path("release/affiliate-zentrale/current/affiliate-portal-router/assets/portal-structure-v279.json")
-CENTRAL_SHA="b1e2bfdab2a07bd1049b972763e8d5a3fc17cf4fe95ad09276a43c77ffca94a3"
+CENTRAL_SHA="3e5f32755e09b79c3ac266d5987716dd91866dd21f77b3a522099eae7f962d69"
 BASE_ZIP_SHA="71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
 
 def sha_bytes(b:bytes)->str:return hashlib.sha256(b).hexdigest()
