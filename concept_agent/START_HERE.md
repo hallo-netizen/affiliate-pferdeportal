@@ -106,7 +106,7 @@ Textbytes werden im jeweiligen Draft-/Repair-Event komprimiert, Base64-kodiert u
 Damit gilt:
 - Worker-Abbruch **vor** Bot-Event → alter sicherer Zustand bleibt aktuell;
 - Worker-Abbruch **nach** Bot-Event → neuer Chat kann exakt daraus fortsetzen;
-- fehlendes, manipuliertes, nicht vom Bot stammendes oder mehrdeutiges Event → **STOP**;
+- fehlendes, manipuliertes oder mehrdeutiges **Bot-Event** → **STOP**;\n- Nicht-Bot-Kommentare werden ignoriert und sind niemals Autorität;
 - kein `GH_TOKEN`, kein `git push`, kein `git remote` als Voraussetzung für Produktionsfortschritt;
 - kein zweites `text-start` für denselben MACHINE_READY-Batch;
 - alte Drafts, Recovery-Archive und historische Produktionszweige bleiben als NEW-Quelle verboten;
