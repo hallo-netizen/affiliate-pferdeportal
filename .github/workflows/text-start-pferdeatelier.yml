@@ -111,6 +111,34 @@ jobs:
         with:
           script: |
             const fs = require('fs');
+            const sourceRunId = String(process.env.SOURCE_RUN_ID || '');
+            const sourceIssueNumber = String(process.env.SOURCE_ISSUE_NUMBER || '');
+            if (!/^[1-9][0-9]*$/.test(sourceRunId) || !/^[1-9][0-9]*$/.test(sourceIssueNumber)) {
+              core.setFailed('TEXT_START_SOURCE_ID_INVALID');
+              return;
+            }
+
+            const sourceTitle = 'TEXT_START_SOURCE_CONSUMED:' + sourceRunId;
+            const sourceQuery = 'repo:' + context.repo.owner + '/' + context.repo.repo + ' in:title "' + sourceTitle + '"';
+            const priorSource = await github.rest.search.issuesAndPullRequests({q: sourceQuery, per_page: 100});
+            if (priorSource.data.items.some(x => x.title === sourceTitle)) {
+              core.setFailed('TEXT_START_SOURCE_ALREADY_CONSUMED');
+              return;
+            }
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: sourceTitle,
+              body:
+                'SOURCE_REPOSITORY: hallo-netizen/text-start\n' +
+                'SOURCE_RUN_ID: ' + sourceRunId + '\n' +
+                'SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
+                'TARGET_HEAD: ' + context.sha + '\n' +
+                'ONE_TIME_AUTHORIZATION: CONSUMED\n' +
+                'PUBLISH: NO'
+            });
+
             const runtime = JSON.parse(fs.readFileSync('control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json', 'utf8'));
             if (runtime.status !== 'EXECUTION_READY' || runtime.publish_allowed !== false) {
               core.setFailed('TEXT_START_RUNTIME_NOT_READY');
@@ -134,8 +162,8 @@ jobs:
               title,
               body:
                 'SOURCE_REPOSITORY: hallo-netizen/text-start\n' +
-                'SOURCE_RUN_ID: ' + process.env.SOURCE_RUN_ID + '\n' +
-                'SOURCE_ISSUE_NUMBER: ' + process.env.SOURCE_ISSUE_NUMBER + '\n' +
+                'SOURCE_RUN_ID: ' + sourceRunId + '\n' +
+                'SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
                 'TARGET_HEAD: ' + context.sha + '\n' +
                 'PUBLISH: NO'
             });
