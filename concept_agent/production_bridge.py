@@ -165,7 +165,11 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
         "progress_policy": {
             "checkpoint_required_before_every_action": True,
             "checkpoint_contract": CHECKPOINT_CONTRACT,
+            "universal_reentry_decision_required_before_every_action": True,
+            "universal_reentry_gate_ref": "concept_agent/universal_reentry_guard.py",
+            "outer_stage_gate_ref": "concept_agent/full_workflow_gate.py",
             "allowed_action_is_hash_bound": True,
+            "durable_draft_bytes_required_in_checkpoint": True,
             "batch_draft_attach_forbidden": True,
             "single_checkpoint_selected_article_only": True,
             "same_article_on_repair": True,
