@@ -146,6 +146,33 @@ jobs:
           print('STRUCTURE_PAGE_MATCHES',len(structure_page_matches))
           PY
 
+      - name: Inspect public WordPress REST routes read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://pferde-atelier.de/wp-json/'
+          STATUS="$(curl -A 'Mozilla/5.0' -L --silent --show-error --connect-timeout 15 --max-time 45 -o out/wp-json-index.json -w '%{http_code}' "$URL" || true)"
+          printf '%s\n' "$STATUS" > out/wp-json-status.txt
+          echo "WP_JSON_HTTP_STATUS=$STATUS"
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          status=Path('out/wp-json-status.txt').read_text().strip()
+          report={'http_status':status,'matching_routes':[],'namespaces':[]}
+          if status=='200':
+              obj=json.loads(Path('out/wp-json-index.json').read_text(encoding='utf-8-sig'))
+              report['namespaces']=obj.get('namespaces',[])
+              routes=obj.get('routes',{})
+              rx=re.compile(r'(evidence|export|server|template|pftk|plugin|ppa|category)',re.I)
+              for route,meta in routes.items():
+                  if rx.search(route) or rx.search(json.dumps(meta,ensure_ascii=False)):
+                      report['matching_routes'].append({'route':route,'meta':meta})
+          Path('out/wp-json-route-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print('MATCHING_ROUTES',len(report['matching_routes']))
+          for row in report['matching_routes']:
+              print(row['route'])
+          PY
+
       - name: Upload read-only evidence
         if: always()
         uses: actions/upload-artifact@v4
