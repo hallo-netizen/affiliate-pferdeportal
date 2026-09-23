@@ -88,7 +88,19 @@
     "ppm16_authoritative_metadata_diagnostic_status": "PASS",
     "ppm16_all_canonical_ids_present": true,
     "ppm16_target_keyword_node_count": 0,
-    "ppm16_all_items_have_target_keyword": false
+    "ppm16_all_items_have_target_keyword": false,
+    "latest_authoritative_real16_run": 35824073396,
+    "latest_authoritative_real16_status": "PASS_TO_RESTART_INTAKE_READY",
+    "latest_authoritative_real16_validated_completed_stages": [
+      "INTAKE",
+      "RESEARCH",
+      "RESEARCH_BOUND",
+      "AUTHORING_BOUND"
+    ],
+    "latest_authoritative_real16_next_stage": "ARTICLE_PRODUCTION",
+    "latest_authoritative_real16_restart_action": "RESTART_BATCH_FROM_INTAKE",
+    "latest_authoritative_real16_restart_intake_status": "CONCEPT_AGENT_INTAKE_READY",
+    "latest_authoritative_real16_item_count": 16
   },
   "durable_binding_policy": {
     "durable_ref": "concept_agent/current/CONCEPT_AGENT_CURRENT_WORK_BINDING.json",
@@ -126,25 +138,29 @@
     "reconstruction_allowed": false,
     "publish_allowed": false
   },
-  "current_status": "BLOCKED_RESTART_FROM_INTAKE_PREREQUISITES_NOT_PRESENT",
+  "current_status": "BLOCKED_AFTER_RESTART_INTAKE_READY_PRODUCTIVE_CONTINUATION_NOT_BOUND",
   "first_open_blocker": {
-    "code": "AUTHORITATIVE_PSERC_EXACT_FIVE_INTAKE_SOURCE_NOT_DURABLY_BOUND",
-    "detail": "RESTART_BATCH_FROM_INTAKE cannot be executed as a real fresh batch because the current exact-five PSERC metadata snapshot is not durably available. The bound PPM 6.7.9 registry proves all 16 canonical article identities but contains zero target_keyword nodes for those items, so title/target_keyword may not be reconstructed or guessed.",
+    "code": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT",
+    "detail": "The authoritative exact-five PSERC snapshot is now durably bound and accepted. Real control run 35824073396 validates INTAKE, RESEARCH, RESEARCH_BOUND and AUTHORING_BOUND from stage 0, selects ARTICLE_PRODUCTION, chooses RESTART_BATCH_FROM_INTAKE because the historical transport is missing, and executes intake successfully to CONCEPT_AGENT_INTAKE_READY for all 16 items. The production control workflow then stops at PREPARE_INTAKE_ONLY; no productive restart continuation is bound from successful intake through the existing research/authoring path into the existing Concept Agent runner.",
     "evidence_runs": [
-      35715881357,
-      35775376505
+      35824073396
     ]
   },
   "next_action": {
-    "action": "Bind the current authoritative PSERC metadata-only exact-five snapshot as durable GitHub input, then bind a productive fresh-batch executor to the existing unchanged intake/research/authoring path. Do not reconstruct the missing historical work transport and do not synthesize title or target_keyword from PPM working_title/primary_subject. After that rerun 1-article positive/negative, multi-article positive/negative, and the real 16-item entrance.",
+    "action": "On concept-agent/production-control, replace only the PREPARE_INTAKE_ONLY stop after successful RESTART_BATCH_FROM_INTAKE with the productive continuation through the existing unchanged intake/research/authoring path into the existing Concept Agent runner. Do not reconstruct the missing historical transport and do not change article workflow, LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, plugins or quality rules. Then rerun the unchanged end-to-end acceptance from chat snapshot to exactly one final file for 1 article and multiple articles, including negative and mid-workflow re-entry cases, and rerun the current real16 entrance.",
     "chat_may_choose_action": false
   },
   "restart_execution_assessment": {
-    "status": "BLOCKED",
+    "status": "BLOCKED_AFTER_INTAKE_READY",
     "selected_action": "RESTART_BATCH_FROM_INTAKE",
     "fixed_action_selection_proven": true,
+    "restart_intake_execution_present": true,
+    "restart_intake_execution_status": "CONCEPT_AGENT_INTAKE_READY",
     "productive_restart_executor_present": false,
-    "authoritative_exact_five_pserc_intake_source_durably_available": false,
+    "authoritative_exact_five_pserc_intake_source_durably_available": true,
+    "authoritative_exact_five_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
+    "authoritative_exact_five_snapshot_sha256": "3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761",
+    "authoritative_exact_five_batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
     "required_exact_five_fields": [
       "title",
       "target_keyword",
@@ -152,17 +168,9 @@
       "article_type",
       "plan_slot"
     ],
-    "ppm_6_7_9_can_resolve_all_16_canonical_ids": true,
-    "ppm_6_7_9_contains_target_keyword_for_current_16": false,
-    "historical_slot_binding_is_not_a_valid_exact_five_intake": true,
     "old_work_transport_reconstruction_allowed": false,
     "chat_may_synthesize_missing_metadata": false,
     "publish_allowed": false
   },
-  "following_open_blocker": {
-    "code": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT",
-    "detail": "Repository verification found no productive Concept Agent caller that turns intake into research submission/research binding/authoring binding. The only bind_research callers outside intake_bridge itself are tests. The fixed restart path proven for 1/3 articles is simulation-only.",
-    "chat_may_choose_action": false
-  },
-  "control_state_sha256": "df7e800c1d16b2f14e393cf85fac83078a35f6a827bbc8a253b40cf080059c22"
+  "control_state_sha256": "77b7004cd9837a7b83688ad529395dd5cab549cb8feb96aa126d33fde2e10a1f"
 }
