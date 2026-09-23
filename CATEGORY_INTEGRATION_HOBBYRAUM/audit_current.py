@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import hashlib, json, os, re, sys, zipfile
+import base64, hashlib, json, lzma, os, re, subprocess, sys, zipfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -227,6 +227,135 @@ with zipfile.ZipFile(PPM) as z:
                     "context":"\n".join(lines[max(0,idx-12):min(len(lines),idx+26)])
                 })
 checks["ppm_complete_category_source_callers"]=callers
+
+
+# Read-only historical PPA-013 evidence audit.
+# This reconstructs the exact stored V1.50.469 fixture only as historical evidence.
+# It is NOT a substitute/current source for 1.50.559 and is never written back to WordPress.
+HIST_DESIGN_COMMIT="e4c5decc28e292cd1349bd5fc59e8cecfa2db5cd"
+HIST_DESIGN_BRANCH="hobbyroom/design-journal-wissen-v150477-20260913"
+HIST_FIXTURE="protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/fixtures/design-1.50.469"
+HIST_SOURCE_SHA="580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5"
+HIST_SOURCE_BYTES=1650857
+
+try:
+    subprocess.run(
+        ["git","fetch","origin",HIST_DESIGN_BRANCH,"--no-tags","--depth=1"],
+        cwd=ROOT, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    fetched=subprocess.check_output(["git","rev-parse","FETCH_HEAD"],cwd=ROOT,text=True).strip()
+except Exception as exc:
+    fail("PPA013_HISTORICAL_FIXTURE_FETCH_FAILED",error=str(exc))
+if fetched != HIST_DESIGN_COMMIT:
+    fail("PPA013_HISTORICAL_FIXTURE_HEAD_DRIFT",actual=fetched,expected=HIST_DESIGN_COMMIT)
+
+parts=[]
+for i in range(22):
+    rel=f"{HIST_FIXTURE}/pferde-template-kit.php.xz.b64.part{i:02d}"
+    try:
+        raw=subprocess.check_output(["git","show",f"{HIST_DESIGN_COMMIT}:{rel}"],cwd=ROOT)
+    except Exception as exc:
+        fail("PPA013_HISTORICAL_FIXTURE_PART_MISSING",part=i,path=rel,error=str(exc))
+    parts.append(raw)
+try:
+    packed=base64.b64decode(b"".join(parts),validate=False)
+    source=lzma.decompress(packed)
+except Exception as exc:
+    fail("PPA013_HISTORICAL_FIXTURE_DECODE_FAILED",error=str(exc))
+hist_sha=hashlib.sha256(source).hexdigest()
+if len(source)!=HIST_SOURCE_BYTES:
+    fail("PPA013_HISTORICAL_SOURCE_SIZE_DRIFT",actual=len(source),expected=HIST_SOURCE_BYTES)
+if hist_sha!=HIST_SOURCE_SHA:
+    fail("PPA013_HISTORICAL_SOURCE_SHA_DRIFT",actual=hist_sha,expected=HIST_SOURCE_SHA)
+try:
+    hist_txt=source.decode("utf-8")
+except UnicodeDecodeError as exc:
+    fail("PPA013_HISTORICAL_SOURCE_UTF8_INVALID",error=str(exc))
+if "Version: 1.50.469" not in hist_txt or "final class Pferde_Template_Kit" not in hist_txt:
+    fail("PPA013_HISTORICAL_SOURCE_IDENTITY_INVALID")
+
+tsv=ROOT/"CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
+tsv_rows=[]
+for idx,line in enumerate(tsv.read_text(encoding="utf-8").splitlines()):
+    if idx==0 or not line.strip():
+        continue
+    cols=line.split("\t")
+    if len(cols)<3:
+        fail("CENTRAL_TSV_ROW_INVALID",line=idx+1)
+    tsv_rows.append({"term_id":cols[0],"slug":cols[1],"name":cols[2],"parent_slug":cols[3] if len(cols)>3 else ""})
+
+quoted_slug_hits=[]
+arrow_slug_hits=[]
+for row in tsv_rows:
+    slug=row["slug"]
+    if not slug:
+        continue
+    # Exact quoted literal only, so incidental prose fragments do not count.
+    qpat=re.compile(r"(['\"])" + re.escape(slug) + r"\1")
+    if qpat.search(hist_txt):
+        quoted_slug_hits.append(slug)
+    apat=re.compile(r"(['\"])" + re.escape(slug) + r"\1\s*=>")
+    if apat.search(hist_txt):
+        arrow_slug_hits.append(slug)
+
+structure_terms=[
+    "portal-structure-v279.json",
+    "ebay-portal-catalog-v2.json",
+    "complete-portal-category-source-v1.json",
+    "category-hierarchy-snapshot",
+    "wordpress-link-target-snapshot",
+    "KATEGORIEN.tsv",
+    "parent_slug",
+    "parent_id",
+    "term_id",
+    "portal_structure",
+    "category_map",
+]
+structure_term_counts={term:hist_txt.lower().count(term.lower()) for term in structure_terms}
+
+wp_structure_calls=[
+    "wp_insert_term",
+    "wp_update_term",
+    "wp_delete_term",
+    "wp_set_object_terms",
+    "get_terms",
+    "get_term_by",
+    "get_term",
+    "get_categories",
+]
+wp_structure_call_counts={term:len(re.findall(r"\b"+re.escape(term)+r"\s*\(",hist_txt)) for term in wp_structure_calls}
+
+json_refs=sorted(set(re.findall(r"['\"]([^'\"]+\.json)['\"]",hist_txt)))
+category_json_refs=[x for x in json_refs if re.search(r"category|kategorie|portal|taxonomy|hierarchy|link-target",x,re.I)]
+
+# Extract compact contexts for any structural-key occurrence; capped to keep evidence readable.
+struct_contexts=[]
+for term,count in structure_term_counts.items():
+    if count<=0:
+        continue
+    for m in list(re.finditer(re.escape(term),hist_txt,re.I))[:8]:
+        lo=max(0,hist_txt.rfind("\n",0,m.start()-250))
+        hi=hist_txt.find("\n",m.end()+250)
+        if hi<0: hi=min(len(hist_txt),m.end()+500)
+        struct_contexts.append({"term":term,"context":hist_txt[lo:hi].strip()[:1200]})
+
+checks["ppa013_historical_150469"]={
+    "role":"HISTORICAL_READ_ONLY_EVIDENCE_NOT_CURRENT_SOURCE",
+    "source_commit":HIST_DESIGN_COMMIT,
+    "source_sha256":hist_sha,
+    "source_bytes":len(source),
+    "central_tsv_rows":len(tsv_rows),
+    "quoted_central_tsv_slug_hits_count":len(quoted_slug_hits),
+    "quoted_central_tsv_slug_hits_sample":quoted_slug_hits[:80],
+    "array_key_central_tsv_slug_hits_count":len(arrow_slug_hits),
+    "array_key_central_tsv_slug_hits_sample":arrow_slug_hits[:80],
+    "structure_term_counts":structure_term_counts,
+    "wp_structure_call_counts":wp_structure_call_counts,
+    "category_or_portal_json_refs":category_json_refs,
+    "structure_contexts":struct_contexts[:60],
+    "hard_boundary":"Historical evidence only. Never use this source as a reconstructed substitute for current 1.50.559."
+}
+print("PPA013_HISTORICAL_150469_SOURCE_SHA_PASS",hist_sha)
 
 out={
  "status":"PASS_READ_ONLY_BASELINE_AUDIT",
