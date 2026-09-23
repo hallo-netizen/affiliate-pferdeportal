@@ -236,3 +236,11 @@ Erlaubter nächster Beleg:
 - exaktes bestehendes Tree-Manifest `ppa013-category-completion-manifest-20260922-194858-33451736b021.json`, oder
 - exakte aktuelle 1.50.559-Datei `assets/breadcrumb-portal-map-v150310.json`, oder
 - vollständiger aktueller 1.50.559-Pluginbaum.
+
+
+### Korrektur der SHA-Bezeichnung
+
+- `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5` ist nach dem Campus-Rekonstruktionsskript der SHA256 der vollständigen historischen Hauptdatei `pferde-template-kit.php` 1.50.469.
+- Dieser SHA ist **kein** Hash der Datei `assets/breadcrumb-portal-map-v150310.json`.
+- Der exakte Hash/Inhalt der aktuellen 1.50.559-Breadcrumb-Map bleibt ungebunden.
+- Präziser erster Blocker: `TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING`.
