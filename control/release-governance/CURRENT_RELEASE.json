@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 121,
+  "generation": 122,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-23",
-    "current_first_blocker": "TEMPLATE_KIT_1_50_559_EXACT_GITHUB_SOURCE_BINDING",
+    "current_first_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1076,9 +1076,9 @@
     },
     "remaining_consumers_20260923": {
       "ppa013": {
-        "status": "OUT_OF_CATEGORY_SCOPE_DO_NOT_TOUCH_CONTENT",
-        "open_delta": "NONE_IN_CATEGORY_SCOPE",
-        "forbidden": "NO_RECONSTRUCTION_FROM_OLD_1_50_3XX_OR_ASSUMED_1_50_558_1_50_559",
+        "status": "IN_CATEGORY_SCOPE_STATIC_BREADCRUMB_CONSUMER_CURRENT_ASSET_BINDING_OPEN",
+        "open_delta": "EXACT_CURRENT_1_50_559_BREADCRUMB_MAP_SHA_SCHEMA_COUNT_BINDING_ONLY",
+        "forbidden": "NO CONTENT/DESIGN CHANGE; NO RECONSTRUCTION FROM OLD SOURCE; NO WORDPRESS WRITE BEFORE REQUIRED DRY-RUN",
         "performance_helper": "MUST_REMAIN_UNCHANGED"
       },
       "affiliate_672145": {
@@ -1316,7 +1316,7 @@
         "live_delta25_gate_pass": true
       },
       "template_kit_150559": {
-        "status": "BLOCKED_EXACT_GITHUB_SOURCE_NOT_BOUND",
+        "status": "BLOCKED_EXACT_CURRENT_BREADCRUMB_MAP_NOT_BOUND",
         "version": "1.50.559",
         "non_category_scope_forbidden": true
       },
@@ -1353,7 +1353,6 @@
     "target_version": "1.50.559",
     "proven_delta_boundary": "ONLY pferde-template-kit.php MAY CHANGE; NO FILE ADD/REMOVE; 1.50.559 TRANSFORM REPLACES EDITORIAL OVERLAY + VERSION MARKERS; NO NEW SEPARATE CATEGORY/PORTAL-STRUCTURE FILE INTRODUCED BY THIS DELTA",
     "proof_limit": "NO COMPLETE 1.50.559 MAIN SHA/FULL TREE READBACK IS BOUND; DO NOT RECONSTRUCT A SUBSTITUTE FULL SOURCE FROM 1.50.558",
-    "blocker_unchanged": "TEMPLATE_KIT_1_50_559_EXACT_GITHUB_SOURCE_BINDING",
     "wordpress_write": "NONE",
     "central_category_truth_check": {
       "tsv_rows": 1160,
@@ -1397,7 +1396,8 @@
       "exact_tree_manifest_candidate": "ppa013-category-completion-manifest-20260922-194858-33451736b021.json",
       "exact_tree_chain": "1.50.556_TREE -> ONLY_MAIN_CHANGED_TO_1.50.558 -> ONLY_MAIN_CHANGED_TO_1.50.559",
       "minimal_delta_if_current_map_is_1124": "MAP 1124->1149 PLUS SYNCHRONOUS PHP COUNT BINDING 1124->1149 ONLY",
-      "delta_build_forbidden_until_exact_current_asset_bound": true
+      "delta_build_forbidden_until_exact_current_asset_bound": true,
+      "current_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING"
     },
     "retrieval_exhaustion": {
       "status": "EXHAUSTED_AVAILABLE_SOURCES_NO_RECONSTRUCTION",
@@ -1407,18 +1407,21 @@
       "public_live_asset_access": "UNAVAILABLE_FROM_CURRENT_ENVIRONMENT",
       "evidence_exporter_route": "NOT_DOCUMENTED_OR_PUBLICLY_REACHABLE",
       "wordpress_write": "NONE"
-    }
+    },
+    "current_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING"
   },
   "template_kit_150559_static_structure_consumer": {
     "status": "HISTORICAL_STATIC_CONSUMER_CONFIRMED_CURRENT_ASSET_BINDING_OPEN",
     "consumer_path": "assets/breadcrumb-portal-map-v150310.json",
     "contract": "PFTK_BREADCRUMB_PORTAL_MAP_V150310",
     "historical_required_category_count": 1124,
-    "historical_source_sha256": "580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5",
     "hard_baseline_run": 35904805135,
     "evidence_ref": "release/affiliate-zentrale/evidence/remaining_plugins_category_source_binding_20260923.md",
     "current_binding_required": "EXACT_CURRENT_1_50_559_ASSET_SHA_SCHEMA_COUNT",
     "if_current_still_1124": "UPDATE_THIS_STATIC_BREADCRUMB_DERIVATION_TO_1149_ONLY",
-    "wordpress_write": "NONE"
+    "wordpress_write": "NONE",
+    "historical_loader_php_sha256": "580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5",
+    "historical_asset_sha256": "UNBOUND_NOT_CLAIMED",
+    "current_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING"
   }
 }
