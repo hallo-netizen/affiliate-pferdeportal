@@ -957,3 +957,22 @@ Rolle: **Historie/Nachweis**, keine zweite CURRENT-/Status-/NEXT-ACTION-Wahrheit
 - Nach einem gültigen Delta muss der Audit ausdrücklich den **aktuellen kanonischen Sourcepfad** lesen; kein Root-/Altpfad darf still als Basis weiterlaufen.
 - Hashbindungen technischer Ableitungen müssen aus den **tatsächlich committed autoritativen Bytes** stammen; kein aus Erinnerung/älterem Stand übernommener Erwartungshash.
 - Fail-closed bleibt richtig: Ein fehlgeschlagener Zwischenlauf ist kein PASS und wird erst nach nachgewiesenem korrigiertem SUCCESS geschlossen.
+
+
+### Fehler W – Template Kit zunächst zu früh als ohne statischen Kategorieverbraucher eingeordnet
+
+- Ursache: Der zuerst geprüfte 1.50.558→1.50.559-Hardtest belegt nur das Delta und enthält keinen vollständigen Pluginbaum.
+- Späterer historischer Vollquell-Audit fand den realen statischen Verbraucher `assets/breadcrumb-portal-map-v150310.json` mit Vertrag `PFTK_BREADCRUMB_PORTAL_MAP_V150310` und hartem 1124er Count.
+- Korrektur: Template Kit bleibt Kategorieverbraucher; der aktuelle 1.50.559-Assetstand muss exakt read-only gebunden werden. Keine Rekonstruktion.
+
+### Fehler X – Laufzeitrolle der Breadcrumb-Map zwischenzeitlich zu eng beschrieben
+
+- Zwischenannahme: Die Map sei ausschließlich Breadcrumb-Fallback.
+- Harte Quellprüfung zeigt zusätzlich `leaf_category_hub_context_v150396()`: dieselbe Map wird für den Hub-Kontext des Leaf-Fallback-Introtexts gelesen; bei fehlendem Map-Eintrag fällt die Funktion auf den echten Taxonomie-Parent zurück.
+- Korrektur: Runtime-Rolle = Breadcrumb-Fallback/Menu-Validierung **plus** Leaf-Hub-Kontext für automatischen Fallbacktext. Die 25 fest gebundenen Editorialtexte bleiben davon getrennt.
+
+### Fehler Y – SHA `580fa6c7…` falsch als Breadcrumb-Asset-SHA bezeichnet
+
+- Das Campus-Rekonstruktionsskript `reconstruct-design-1.50.469.sh` belegt: `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5` ist der SHA256 der vollständigen historischen `pferde-template-kit.php` 1.50.469.
+- Es ist **nicht** der SHA der Breadcrumb-JSON.
+- Korrektur: historischer Loader-PHP-SHA wird entsprechend bezeichnet; der exakte SHA der aktuellen 1.50.559-`assets/breadcrumb-portal-map-v150310.json` bleibt offen und ist der erste Blocker.
