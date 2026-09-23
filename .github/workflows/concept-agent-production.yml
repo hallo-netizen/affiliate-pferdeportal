@@ -105,7 +105,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest -v \
-            control-branch/concept_agent/tests/test_runner.py \
+            control-branch/concept_agent/tests/test_runner.py
           python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-regression-mid-positive
           python3 control-branch/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/concept-agent-regression-mid-negative
       - name: Run fixed route
