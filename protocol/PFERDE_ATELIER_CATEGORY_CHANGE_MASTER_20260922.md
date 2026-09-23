@@ -704,3 +704,16 @@ Build-Manifest SHA256: `7ec6966c7c1a9c921bcaa6061cbdeb91b229f508bc93ef59e20a617d
 Die bestehende Signatur gehört zum alten unveränderten Build. Sie darf nicht nachgebaut, umgangen oder erfunden werden. Der nächste Schritt ist ausschließlich eine autorisierte Ed25519-Signatur des exakt gebundenen neuen Manifests; danach nur Build-Integrity-Readback.
 
 Evidence: `release/affiliate-zentrale/evidence/ppm679_category_delta_candidate_20260923.md`.
+
+
+## 16. PPM 6.7.9 Signaturabschluss (2026-09-23)
+
+Der in Abschnitt 15 gebaute exakte Kandidat wurde mit dem vorhandenen autorisierten PPM-Ed25519-Schlüssel `ppm679-ed25519-3614e3fc87ba2767` signiert.
+
+- Manifest SHA256 unverändert: `7ec6966c7c1a9c921bcaa6061cbdeb91b229f508bc93ef59e20a617d7d7d6482`
+- Public-Key SHA256: `3614e3fc87ba2767d669d573f388e2fa99fda3f1aa0741465adc79a341311dd7`
+- signierter Kandidat SHA256: `cb64d1ee7fcf9c3bc4ff5aa9e2e8cb948763c2c2c1a7ad956b90f980da9e40fa`
+- `PPM679_Build_Integrity`: **PASS**
+- kein WordPress-Write.
+
+Damit ist der PPM-Blocker geschlossen. Nächster Verbraucher gemäß KISS-Reihenfolge: exakten aktuellen PPA-013-Vollstand aus dem Design-Büro binden und ausschließlich die fünf noch fehlenden kurzen Kachelvorschauen ergänzen; bestehende Performance-/Text-/Icon-/Grid-Änderungen bleiben unangetastet.

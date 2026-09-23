@@ -80,3 +80,16 @@ Nächster zulässiger Schritt:
 
 WordPress:
 **keine Schreiboperation durchgeführt.**
+
+
+## Signaturabschluss
+
+- autorisierter externer PPM-Build-Schlüssel verwendet: `ppm679-ed25519-3614e3fc87ba2767`
+- Public-Key SHA256: `3614e3fc87ba2767d669d573f388e2fa99fda3f1aa0741465adc79a341311dd7`
+- signierter Manifeststand unverändert: `7ec6966c7c1a9c921bcaa6061cbdeb91b229f508bc93ef59e20a617d7d7d6482`
+- signierter Kandidat SHA256: `cb64d1ee7fcf9c3bc4ff5aa9e2e8cb948763c2c2c1a7ad956b90f980da9e40fa`
+- echter PPM-Test `tests/test-build-integrity-only.php`: **PASS**
+- keine Inhaltsänderung zwischen funktionalem Kandidatenstand und Signatur außer `certification/build-manifest-v1.sig`
+- WordPress weiterhin nicht angefasst.
+
+PPM-Kategorie-Delta ist damit abgeschlossen.
