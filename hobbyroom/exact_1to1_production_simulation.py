@@ -254,7 +254,7 @@ def execute_workspace(repo: Path, workspace: Path, worker: Path, env: dict, inde
             cp=run([sys.executable,repo/"isolated_system4/controller.py","draft",workspace,p],cwd=repo,env=env,ok=(0,4))
             if cp.returncode==4: owner_returns.append(cp.stdout.strip()); continue
         elif phase=="CHECK_REQUIRED":
-            cp=run([sys.executable,repo/"isolated_system4/controller.py","fullcheck",workspace],cwd=repo,env=env,ok=(0,2,4))
+            cp=run([sys.executable,repo/"isolated_system4/controller.py","fullcheck",workspace],cwd=repo,env=env,ok=(0,3,4))
             if cp.returncode==4:
                 state=load(workspace/"state.json")
                 if (state.get("checks") or {}).get("return_required") is True:
