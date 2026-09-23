@@ -679,3 +679,28 @@ Verbindlich:
 ### Fehler O – Kategorieverwaltung unnötig als Plugin/Automatik aufgebaut
 
 Der zwischenzeitliche Kandidat `PFERDEPORTAL_KATEGORIEN_V0.2.0_CANDIDATE_MIN.zip` und sein eigener Workflow waren zu komplex und widersprachen dem KISS-Ziel. Beide wurden entfernt. Verbleibend sind ausschließlich zentrale Liste + Änderungsprotokoll.
+
+
+## 15. PPM 6.7.9 Kategorie-Delta – funktional fertig, Signatur offen (2026-09-23)
+
+Der PPM-interne, aus der alleinigen `KATEGORIEN.tsv` abgeleitete Kategorie-/Planstand wurde als isolierter Kandidat gebaut.
+
+Belegt:
+- 1149 Produktionskategorien;
+- 5745 Portalslots;
+- 5790 Gesamtslots;
+- 25 neue Kategorien / 125 neue Slots;
+- alte 1124 Kategorien, 5620 Portalslots und 45 Journal-Slots value-identical;
+- fokussierte Category-Source-, Editorial-Registry-, System-Inventory- und Hard-Rule-Prüfung jeweils 0 Fehler;
+- Positivfall neuer Slot PASS;
+- Negativfall fehlender Slot PASS;
+- kein WordPress-Write.
+
+Kandidatenarchiv: `PORTAL_PRODUCTION_MACHINE_V6.7.9_CATEGORY_25_SLOT125_UNSIGNED_CANDIDATE.zip`
+SHA256: `3063c150f551d0743425b7364248113f6dfd6fc0fc1e63272da85db93d07dc35`
+Build-Manifest SHA256: `7ec6966c7c1a9c921bcaa6061cbdeb91b229f508bc93ef59e20a617d7d7d6482`
+
+**Einziger verbleibender PPM-Kandidatenblocker:** `BLOCKED_BUILD_SIGNATURE_INVALID`.
+Die bestehende Signatur gehört zum alten unveränderten Build. Sie darf nicht nachgebaut, umgangen oder erfunden werden. Der nächste Schritt ist ausschließlich eine autorisierte Ed25519-Signatur des exakt gebundenen neuen Manifests; danach nur Build-Integrity-Readback.
+
+Evidence: `release/affiliate-zentrale/evidence/ppm679_category_delta_candidate_20260923.md`.
