@@ -1,21 +1,23 @@
 # Pferde Atelier — Konzept 5 / Concept Agent
 
-Autoritativer Einstieg für neue Artikel-Batches: `concept_agent/intake_bridge.py`.
+Diese Datei ist nur die Bürotür.
 
-## Start
+## Einzige Current-Autorität
 
-`python3 concept_agent/intake_bridge.py prepare <PSERC_METADATA_SNAPSHOT.json> <CONCEPT_AGENT_INTAKE.json>`
+`control/startmaster0107/CURRENT_STATE.json` auf dem geschützten `main`.
 
-Nur `CONCEPT_AGENT_INTAKE_READY` erlaubt den nächsten Schritt.
+Ablauf:
+1. `concept_agent/CONTROL_ENTRY_POINTER.json` lesen.
+2. Genau die dort genannte Current-Autorität lesen.
+3. Frischecheck nur auf Delta.
+4. Ausschließlich die eine dort gespeicherte `next_action` ausführen.
 
-## Harte Grenze
+Diese Datei enthält bewusst keine eigene Produktionsaktion und keine zweite Statuswahrheit.
 
-- Eingang ist ausschließlich der aktuelle `PSERC_TEXTMACHINE_METADATA_BATCH_V2` aus dem Metadaten-Snapshot.
-- Der Concept Agent recherchiert artikelbezogen und bindet Quellen/Evidenz **vor** dem Draft.
-- Alte `control/startmaster0107/runtime_inbox/**`-Zustände und `SOURCE_REQUESTS.json` sind **keine** Startvoraussetzung für Konzept 5 und dürfen einen neuen Concept-Agent-Lauf weder bestimmen noch blockieren.
-- Batch, Reihenfolge, fünf Metadatenfelder und `plan_slot` bleiben unverändert.
-- Kein Publish.
-- Nach Authoring bleiben LT 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL unverändert zuständig.
-- ENDSTEMPEL-Einstieg bleibt `concept_agent/endstempel_bridge.py`; diese Datei ersetzt keine downstream Prüfung.
+Nicht als Current-/Startautorität verwenden:
+- alte `control/startmaster0107/runtime_inbox/**`-Batchzustände,
+- historische Concept-Agent-Runner oder Produktionsworkflows,
+- alte Cross-Chat-Transportdateien oder Run-Requests,
+- historische Branches oder Protokolle.
 
-Bei jeder Abweichung: `BLOCKED`, kein Ersatzpfad.
+Recherche- und Artikelqualität, LanguageTool 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL bleiben unverändert. Kein Publish. Keine Alternativroute.
