@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'concept-agent/production-control'
+      - 'concept-agent/fresh-batch-executor-fix-20260923'
     paths:
       - 'concept_agent/run_requests/**'
 
@@ -86,6 +87,28 @@ jobs:
           print('mode='+mode)
           print('request_id='+x['request_id'])
           PY
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Regression tests for productive binder and runner
+        env:
+          PYTHONPATH: control-branch/concept_agent:control-branch/isolated_system4
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v \
+            control-branch/concept_agent/tests/test_runner.py \
+            control-branch/concept_agent/tests/test_fresh_batch_executor.py
+          python3 control-branch/concept_agent/resumable_runner.py simulate-mid-positive --out /tmp/concept-agent-regression-mid-positive
+          python3 control-branch/concept_agent/resumable_runner.py simulate-mid-negative --out /tmp/concept-agent-regression-mid-negative
       - name: Run fixed route
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -93,7 +116,10 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           MODE: ${{ steps.parsed.outputs.mode }}
           REQUEST_REF: ${{ steps.request.outputs.request_ref }}
-          CONCEPT_AGENT_STATE_BRANCH: concept-agent/production-control
+          CONCEPT_AGENT_STATE_BRANCH: ${{ github.ref_name }}
+          CONCEPT_AGENT_MODEL: gpt-5.6-sol
+          CONCEPT_AGENT_CHECKER_CMD: python3 control-branch/concept_agent/system4_checker.py
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
         shell: bash
         run: |
           set -euo pipefail
@@ -202,7 +228,31 @@ jobs:
                   python3 -c "import base64,json,os,pathlib,sys; req=json.loads((pathlib.Path('control-branch')/os.environ['REQUEST_REF']).read_text(encoding='utf-8')); raw=req.get('intake_snapshot_b64'); raw or sys.exit('RESTART_INTAKE_SNAPSHOT_MISSING'); pathlib.Path('/tmp/concept-agent-intake-snapshot.json').write_bytes(base64.b64decode(raw,validate=True))"
                   python3 project-main/concept_agent/intake_bridge.py prepare                     /tmp/concept-agent-intake-snapshot.json                     /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE.json                     | tee /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE_RESULT.json
                   python3 -c "import json; x=json.load(open('/tmp/concept-agent-return/CONCEPT_AGENT_INTAKE_RESULT.json',encoding='utf-8')); assert x.get('status')=='CONCEPT_AGENT_INTAKE_READY' and isinstance(x.get('item_count'),int) and x['item_count']>=1 and x.get('publish_allowed') is False"
-                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTED_V1","status":"PASS","selected_action":"RESTART_BATCH_FROM_INTAKE","next_stage":"INTAKE","entry_ref":"concept_agent/intake_bridge.py","allowed_operation":"PREPARE_INTAKE_ONLY","intake_executed":true,"chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json
+                  python3 control-branch/concept_agent/fresh_batch_executor.py \
+                    --snapshot /tmp/concept-agent-intake-snapshot.json \
+                    --intake /tmp/concept-agent-return/CONCEPT_AGENT_INTAKE.json \
+                    --out /tmp/concept-agent-return/CONCEPT_AGENT_CURRENT_WORK_BINDING.json \
+                    | tee /tmp/concept-agent-return/CONCEPT_AGENT_FRESH_BATCH_BINDING_RESULT.json
+                  BINDING='/tmp/concept-agent-return/CONCEPT_AGENT_CURRENT_WORK_BINDING.json'
+                  BINDING_SHA="$(sha256sum "$BINDING" | awk '{print $1}')"
+                  cp "$BINDING" control-branch/concept_agent/runtime/CURRENT_WORK_BINDING.json
+                  cd control-branch
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add concept_agent/runtime/CURRENT_WORK_BINDING.json
+                  if ! git diff --cached --quiet; then
+                    git commit -m "Concept Agent: persist fresh productive work binding [skip ci]"
+                    git push origin HEAD:"${GITHUB_REF_NAME}"
+                  fi
+                  cd ..
+                  printf '%s\n' '{"contract":"CONCEPT_AGENT_RESTART_EXECUTED_V1","status":"PASS","selected_action":"RESTART_BATCH_FROM_INTAKE","next_stage":"ARTICLE_PRODUCTION","entry_ref":"concept_agent/fresh_batch_executor.py","allowed_operation":"PRODUCTIVE_EXISTING_ROUTE","intake_executed":true,"fresh_binding_executed":true,"chat_may_choose_action":false,"reconstruction_allowed":false,"publish_allowed":false}' > /tmp/concept-agent-return/CONCEPT_AGENT_RESTART_EXECUTED_V1.json
+                  CONCEPT_AGENT_PERSIST_GITHUB_STATE=1 \
+                  CONCEPT_AGENT_STATE_PATH=concept_agent/runtime/CURRENT_STATE.json \
+                  python3 control-branch/concept_agent/resumable_runner.py run \
+                    --binding "$BINDING" \
+                    --binding-sha256 "$BINDING_SHA" \
+                    --out /tmp/concept-agent-return/production
+                  cp /tmp/concept-agent-return/production/CONCEPT_AGENT_CHAT_HANDOFF_V1.json /tmp/concept-agent-return/CONCEPT_AGENT_ARTICLE_PRODUCTION_HANDOFF.json
                 elif [[ "$REQUIRED_ACTION" == 'TERMINAL_SECURITY_BLOCK' ]]; then
                   exit 2
                 else
