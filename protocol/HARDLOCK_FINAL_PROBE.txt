@@ -1,2 +1,0 @@
-positive probe only
-second trigger after clean hardlock restore
