@@ -1,0 +1,66 @@
+name: Category Integration Template Source Readonly
+
+on:
+  push:
+    branches:
+      - category-integration-template-source-readonly-20260923
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-current-template-asset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch exact installed public asset path read-only
+        shell: bash
+        run: |
+          set -u
+          mkdir -p out
+          URL='https://pferde-atelier.de/wp-content/plugins/affiliate-portal-template-kit/assets/breadcrumb-portal-map-v150310.json'
+          printf '%s\n' "$URL" > out/url.txt
+          STATUS="$(curl -A 'Mozilla/5.0' -L --silent --show-error --connect-timeout 15 --max-time 45 -D out/headers.txt -o out/breadcrumb-portal-map-v150310.json -w '%{http_code}' "$URL" || true)"
+          printf '%s\n' "$STATUS" > out/http_status.txt
+          echo "HTTP_STATUS=$STATUS"
+          if [ "$STATUS" = "200" ]; then
+            python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          p=Path('out/breadcrumb-portal-map-v150310.json')
+          raw=p.read_bytes()
+          result={
+              'status':'FETCHED',
+              'sha256':hashlib.sha256(raw).hexdigest(),
+              'bytes':len(raw),
+          }
+          try:
+              obj=json.loads(raw.decode('utf-8'))
+              result['json_valid']=True
+              result['contract']=obj.get('contract')
+              result['category_count']=obj.get('category_count')
+              cats=obj.get('categories')
+              result['categories_actual_count']=len(cats) if isinstance(cats,list) else None
+              result['top_keys']=list(obj.keys()) if isinstance(obj,dict) else None
+          except Exception as exc:
+              result['json_valid']=False
+              result['parse_error']=str(exc)
+          Path('out/summary.json').write_text(json.dumps(result,ensure_ascii=False,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+          print(json.dumps(result,ensure_ascii=False,sort_keys=True))
+          PY
+          else
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+          status=Path('out/http_status.txt').read_text().strip()
+          Path('out/summary.json').write_text(json.dumps({'status':'HTTP_BLOCKED','http_status':status},indent=2)+'\n')
+          print('HTTP_BLOCKED',status)
+          PY
+          fi
+
+      - name: Upload read-only evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: template-kit-150559-breadcrumb-readonly-evidence
+          path: out/
+          if-no-files-found: error
