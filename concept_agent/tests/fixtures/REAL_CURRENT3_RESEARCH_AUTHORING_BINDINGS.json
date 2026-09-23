@@ -1,0 +1,263 @@
+{
+  "contract": "CONCEPT_AGENT_REAL_CURRENT3_RESEARCH_AUTHORING_BINDINGS_V1",
+  "source_snapshot_sha256": "3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761",
+  "items": [
+    {
+      "canonical_article_id": "article:277289349b5a5091767a01b1",
+      "slug": "reitplatzplaner-fuer-pferde",
+      "search_intent": "DECISION_SUPPORT",
+      "hierarchy": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+      "category_name": "Beratung Reitplatzplaner",
+      "intent_terms": [
+        "Reitplatzplaner für Pferde",
+        "Reitplatzplaner",
+        "Reitplatzpflege",
+        "Weide"
+      ],
+      "table_value_statement": "Die Tabelle ordnet Auswahlkriterien für Reitplatzplaner nach Bodenwirkung, Einstellbarkeit, Zugfahrzeug und praktischer Handhabung nachvollziehbar ein.",
+      "links": [
+        {
+          "role": "parent_category",
+          "anchor": "Weide",
+          "href": "/weide/",
+          "reason": "Gebundener Portal-Hauptbereich",
+          "section_id": "criteria"
+        },
+        {
+          "role": "semantic_related",
+          "anchor": "Reitplatzpflege",
+          "href": "/weide/weide-reitplatzpflege/",
+          "reason": "Gebundener Portal-Bereich",
+          "section_id": "decision"
+        },
+        {
+          "role": "further_information",
+          "anchor": "Reitplatzplaner",
+          "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+          "reason": "Gebundene Portal-Produktseite",
+          "section_id": "further_information"
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "RP_INT_BERATUNG",
+          "source_title": "Beratung Reitplatzplaner - Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/category/reitplatzplaner-beratung/",
+          "evidence": "Ein Reitplatzplaner sollte passend zum vorhandenen Boden und Zugfahrzeug ausgewählt werden."
+        },
+        {
+          "source_id": "RP_MAINT",
+          "source_title": "Arena Maintenance: What to Remember - The Horse",
+          "source_url": "https://thehorse.com/112571/arena-maintenance-what-to-remember/",
+          "evidence": "The amount and type of arena grooming required often depends on what type of surface you have."
+        },
+        {
+          "source_id": "RP_FOOTING",
+          "source_title": "Horse Arena Footing Facts - The Horse",
+          "source_url": "https://thehorse.com/188622/horse-arena-footing-facts/",
+          "evidence": "Harrowing and rolling can make a huge difference in both water content and consistency."
+        },
+        {
+          "source_id": "RP_HAZARDS",
+          "source_title": "Troubleshooting Horse Arena Hazards - The Horse",
+          "source_url": "https://thehorse.com/19061/troubleshooting-horse-arena-hazards/",
+          "evidence": "Regular arena maintenance can help maintain an even surface and reduce your horses' risk of injury."
+        }
+      ],
+      "claims": [
+        {
+          "fact_id": "RP_F1",
+          "source_id": "RP_INT_BERATUNG",
+          "statement": "Die Auswahl eines Reitplatzplaners muss zum vorhandenen Boden und Zugfahrzeug passen."
+        },
+        {
+          "fact_id": "RP_F2",
+          "source_id": "RP_MAINT",
+          "statement": "Art und Umfang der Reitplatzpflege hängen von der jeweiligen Oberfläche ab."
+        },
+        {
+          "fact_id": "RP_F3",
+          "source_id": "RP_FOOTING",
+          "statement": "Abziehen und Walzen beeinflussen Feuchtigkeit und Gleichmäßigkeit der Oberfläche."
+        },
+        {
+          "fact_id": "RP_F4",
+          "source_id": "RP_HAZARDS",
+          "statement": "Regelmäßige Pflege unterstützt eine gleichmäßige Reitplatzoberfläche."
+        }
+      ]
+    },
+    {
+      "canonical_article_id": "article:6f12ebc079953babff75fe00",
+      "slug": "frieren-pferde-unter-regendecken",
+      "search_intent": "INFORMATIONAL_DIRECT_QUESTION",
+      "hierarchy": "Ausrüstung > Decken > Regendecken > FAQ Regendecken",
+      "category_name": "FAQ Regendecken",
+      "intent_terms": [
+        "Frieren Pferde unter Regendecken",
+        "Regendecken",
+        "Nässe",
+        "Thermoregulation"
+      ],
+      "faq_direct_answer": "Ein Pferd friert unter einer Regendecke nicht automatisch. Entscheidend sind Wetter, Nässe, Wind, Fell, Schur, Körperzustand, Bewegung und die passende Decke. Feuchtes Fell isoliert schlechter, während eine ungeeignete oder zu warme Decke ebenfalls Probleme verursachen kann.",
+      "table_value_statement": "Die Tabelle ordnet Wetter, Fellzustand, Schur und Deckenwirkung so ein, dass sich das individuelle Risiko von Auskühlung oder Überwärmung nachvollziehbar prüfen lässt.",
+      "links": [
+        {
+          "role": "parent_category",
+          "anchor": "Decken",
+          "href": "/ausruestung/ausruestung-decken/",
+          "reason": "Gebundener Portal-Hauptbereich",
+          "section_id": "criteria"
+        },
+        {
+          "role": "semantic_related",
+          "anchor": "Regendecken",
+          "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+          "reason": "Gebundener Portal-Bereich",
+          "section_id": "decision"
+        },
+        {
+          "role": "further_information",
+          "anchor": "FAQ Regendecken",
+          "href": "/category/pferdedecken-regendecken-faq/",
+          "reason": "Gebundener FAQ-Bereich",
+          "section_id": "further_information"
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "RD_INT_FAQ",
+          "source_title": "FAQ Regendecken - Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/category/pferdedecken-regendecken-faq/",
+          "evidence": "Regen, Wind, Luftaustausch, Sitz und Außenmaterial müssen bei Regendecken gemeinsam betrachtet werden."
+        },
+        {
+          "source_id": "RD_PSU",
+          "source_title": "When to Blanket a Horse - Penn State Extension",
+          "source_url": "https://extension.psu.edu/when-to-blanket-a-horse",
+          "evidence": "The insulating value of the horse hair coat is reduced when the coat becomes wet or muddy."
+        },
+        {
+          "source_id": "RD_TEMP",
+          "source_title": "Effect of Different Blanket Weights on Surface Temperature of Horses in Cold Climates",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/31952637/",
+          "evidence": "Blankets increased lumbar surface temperature during cold exposure compared with the nonblanketed condition."
+        },
+        {
+          "source_id": "RD_PREF",
+          "source_title": "Weather conditions and horses' preference for blankets",
+          "source_url": "https://www.sciencedirect.com/science/article/pii/S0168159118306361",
+          "evidence": "Horses showed a preference for blankets at moderate temperatures when rain or strong wind occurred."
+        }
+      ],
+      "claims": [
+        {
+          "fact_id": "RD_F1",
+          "source_id": "RD_PSU",
+          "statement": "Nasses oder stark verschmutztes Fell verliert einen Teil seiner isolierenden Wirkung."
+        },
+        {
+          "fact_id": "RD_F2",
+          "source_id": "RD_TEMP",
+          "statement": "Eine Decke kann die Oberflächentemperatur des Pferderückens bei starker Kälte erhöhen."
+        },
+        {
+          "fact_id": "RD_F3",
+          "source_id": "RD_PREF",
+          "statement": "Regen und starker Wind beeinflussen den Bedarf beziehungsweise die Präferenz für eine Decke."
+        },
+        {
+          "fact_id": "RD_F4",
+          "source_id": "RD_INT_FAQ",
+          "statement": "Bei Regendecken müssen Wetterschutz, Luftaustausch und Passform gemeinsam betrachtet werden."
+        }
+      ]
+    },
+    {
+      "canonical_article_id": "article:40e70bdf41f7ebc44ca0c188",
+      "slug": "reitplatzbewaesserung-von-unten",
+      "search_intent": "INFORMATIONAL_DIRECT_QUESTION",
+      "hierarchy": "Weide > Reitplatz > Reitplatzbewässerung > FAQ Reitplatzbewässerung",
+      "category_name": "FAQ Reitplatzbewässerung",
+      "intent_terms": [
+        "Reitplatzbewässerung von unten",
+        "Reitplatzbewässerung",
+        "Ebb and Flood",
+        "Tretschicht"
+      ],
+      "faq_direct_answer": "Ja, eine Reitplatzbewässerung von unten ist technisch möglich. Bei sogenannten Ebb-and-Flood- beziehungsweise Unterflursystemen wird Wasser über Leitungen unter der Reitfläche zugeführt oder abgeführt. Ob das sinnvoll ist, hängt vom kompletten Bodenaufbau, der Wasserführung und der gewünschten Feuchteregelung ab.",
+      "table_value_statement": "Die Tabelle zeigt, wie Unterflurbewässerung, klassische Beregnung, Wasserführung und Bodenkontrolle zusammenwirken und welche technischen Voraussetzungen jeweils vor einer Entscheidung geprüft werden müssen.",
+      "links": [
+        {
+          "role": "parent_category",
+          "anchor": "Reitplatz",
+          "href": "/weide/weide-reitplatz/",
+          "reason": "Gebundener Portal-Hauptbereich",
+          "section_id": "criteria"
+        },
+        {
+          "role": "semantic_related",
+          "anchor": "Reitplatzbewässerung",
+          "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+          "reason": "Gebundener Portal-Bereich",
+          "section_id": "decision"
+        },
+        {
+          "role": "further_information",
+          "anchor": "FAQ Reitplatzbewässerung",
+          "href": "/category/reitplatzbewaesserung-faq/",
+          "reason": "Gebundener FAQ-Bereich",
+          "section_id": "further_information"
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "BW_INT",
+          "source_title": "Reitplatzbewässerung im Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/weide/weide-reitplatz/reitplatzbewaesserung/",
+          "evidence": "Gleichmäßige Wasserverteilung unterstützt einen gleichmäßigeren Feuchtebereich der Tretschicht."
+        },
+        {
+          "source_id": "BW_FEI",
+          "source_title": "Equestrian Surfaces - A Guide",
+          "source_url": "https://inside.fei.org/system/files/Equestrian_Surfaces-A_Guide.pdf",
+          "evidence": "Subsurface Ebb and Flood systems can add or remove water through pipes below the arena surface."
+        },
+        {
+          "source_id": "BW_FAQ",
+          "source_title": "FAQ Reitplatzbewässerung - Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/category/reitplatzbewaesserung-faq/",
+          "evidence": "Eine feste Bewässerungsdauer passt nicht zu jedem Boden, Wetter und Wassersystem."
+        },
+        {
+          "source_id": "BW_PLACE",
+          "source_title": "Reitplatz im Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/weide/weide-reitplatz/",
+          "evidence": "Bodenaufbau, Wasserführung und Pflege müssen bei einem Reitplatz aufeinander abgestimmt sein."
+        }
+      ],
+      "claims": [
+        {
+          "fact_id": "BW_F1",
+          "source_id": "BW_FEI",
+          "statement": "Eine Bewässerung von unten ist mit Ebb-and-Flood- beziehungsweise Unterflursystemen technisch möglich."
+        },
+        {
+          "fact_id": "BW_F2",
+          "source_id": "BW_FEI",
+          "statement": "Unterirdische Leitungen können je nach Bedarf Wasser zuführen oder überschüssiges Wasser abführen."
+        },
+        {
+          "fact_id": "BW_F3",
+          "source_id": "BW_INT",
+          "statement": "Eine möglichst gleichmäßige Wasserverteilung ist für einen gleichmäßigen Feuchtebereich der Tretschicht wichtig."
+        },
+        {
+          "fact_id": "BW_F4",
+          "source_id": "BW_PLACE",
+          "statement": "Unterbau, Wasserführung und Pflege müssen als Gesamtsystem betrachtet werden."
+        }
+      ]
+    }
+  ]
+}
