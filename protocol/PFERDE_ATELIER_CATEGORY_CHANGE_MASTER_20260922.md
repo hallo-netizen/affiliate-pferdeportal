@@ -717,3 +717,17 @@ Der in Abschnitt 15 gebaute exakte Kandidat wurde mit dem vorhandenen autorisier
 - kein WordPress-Write.
 
 Damit ist der PPM-Blocker geschlossen. Nächster Verbraucher gemäß KISS-Reihenfolge: exakten aktuellen PPA-013-Vollstand aus dem Design-Büro binden und ausschließlich die fünf noch fehlenden kurzen Kachelvorschauen ergänzen; bestehende Performance-/Text-/Icon-/Grid-Änderungen bleiben unangetastet.
+
+
+## 17. Verbleibende Kategorie-Verbraucher – echter Stand 2026-09-23
+
+Nach abgeschlossenem signiertem PPM-Delta wurden die übrigen Verbraucher bis zur jeweils verfügbaren aktuellen Quelle geprüft.
+
+- **PPA-013:** aktueller Vollstand fehlt; nur fünf Kachelvorschauen offen; kein Rückgriff auf alte Vollstände.
+- **Affiliate 6.72.145:** Hardtest und exakter SHA belegt, Voll-ZIP aktuell nicht verfügbar; Kategorien-Delta bleibt fertig, Integration in 6.72.105 ist verboten.
+- **PSTE:** keine Kategorie-Codeänderung; frischer WordPress-Struktur-Readback erforderlich.
+- **PSERC:** vorhandener Compiler-0.28.23-Snapshot bindet noch 1124 Kategorien; nach PSTE-Refresh neu erzeugen.
+- WordPress weiterhin ohne Write.
+
+Evidence:
+`release/affiliate-zentrale/evidence/category_remaining_consumers_20260923.md`.
