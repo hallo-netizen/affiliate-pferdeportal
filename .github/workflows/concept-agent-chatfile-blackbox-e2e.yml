@@ -122,6 +122,24 @@ jobs:
               raise SystemExit(1)
           PY
 
+      - name: Reject any simulated binding in claimed production restart
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          workflow=Path('.github/workflows/concept-agent-production.yml').read_text(encoding='utf-8')
+          fixed=Path('concept_agent/fixed_block_route.py').read_text(encoding='utf-8')
+          restart_block=workflow.split("if [[ \"$REQUIRED_ACTION\" == 'RESTART_BATCH_FROM_INTAKE' ]]")[1].split("elif [[ \"$REQUIRED_ACTION\" == 'TERMINAL_SECURITY_BLOCK' ]]")[0]
+          forbidden=['simulation_binding','simulate-one','simulate-multi','SIMULATION_ONLY_DO_NOT_TREAT_AS_PRODUCTION_RULES']
+          found=[x for x in forbidden if x in restart_block]
+          if found:
+              raise SystemExit('PRODUCTIVE_RESTART_USES_SIMULATION:'+','.join(found))
+          if '_run_article_pipeline(root / "fresh-batch", count)' in fixed and 'runner.simulation_binding(count)' in fixed:
+              print('HISTORICAL_ACCEPTANCE_SIMULATION_ONLY_CONFIRMED')
+          print('PRODUCTIVE_RESTART_NO_SIMULATION_MARKER_PASS')
+          PY
+
       - name: Mid-workflow chat handoff and abort re-entry
         id: reentry
         continue-on-error: true
