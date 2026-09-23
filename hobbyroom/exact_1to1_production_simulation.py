@@ -521,7 +521,7 @@ def main() -> int:
             workspace=batch_root/f"item-{index:06d}"
             item_results.append(execute_workspace(repo,workspace,worker,env,index))
             advanced=last_json(run([sys.executable,repo/"control/startmaster0107/system4_107007_batch.py","advance",point0,batch_root],cwd=repo,env=env).stdout)
-            if advanced.get("status") not in {"SYSTEM4_107007_BATCH_ACTIVE","SYSTEM4_107007_BATCH_ITEMS_COMPLETE"}:
+            if advanced.get("status") not in {"SYSTEM4_107007_BATCH_ROOT_READY_STOP","SYSTEM4_107007_BATCH_ACTIVE","SYSTEM4_107007_BATCH_ITEMS_COMPLETE"}:
                 raise SimBlocked("BATCH_ADVANCE_NOT_PASS:"+json.dumps(advanced))
         bs=load(batch_root/"SYSTEM4_107007_BATCH_STATE.json")
         if bs.get("status")!="ITEMS_COMPLETE" or (bs.get("batch_collect") or {}).get("status")!="SYSTEM4_BATCH_FULL_PASS_COLLECTED":
