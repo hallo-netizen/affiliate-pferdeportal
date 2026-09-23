@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "CONCEPT_AGENT_MACHINE_READY_DURABLE_RUNTIME_STATE_BOUND",
+  "status": "CONCEPT_AGENT_MACHINE_READY_APPEND_ONLY_DURABLE_EVENT_LOG_BOUND",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -121,7 +121,7 @@
     "UPSTREAM_REPAIR_FIXED_RETURN_LIMIT_REMOVED",
     "TEXT_START_CENTRAL_BINDING_SYNCED",
     "TEXT_START_MACHINE_READY_RUN_35909503205",
-    "CONCEPT_AGENT_DURABLE_RUNTIME_BOOTSTRAP_E76633F22460683BACEA407DF7146E036AB0EB31"
+    "CONCEPT_AGENT_APPEND_ONLY_EVENT_LOG_PREPARED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -227,12 +227,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_MACHINE_READY_DURABLE_RUNTIME_RESEARCH_BOUND_REQUIRED",
+  "current_work_status": "CONCEPT_AGENT_MACHINE_READY_DURABLE_EVENT_LOG_RESEARCH_ITEM_0_REQUIRED",
   "current_execution_blocker": {
-    "code": "CURRENT_RESEARCH_BOUND_NOT_DURABLE",
-    "error_class": true,
-    "classification": "BLOCKED_FAIL_CLOSED",
-    "detail": "The current 16-item batch already reached MACHINE_READY in run 35909503205. A fixed durable runtime state now exists outside the worker, but no current durable CONCEPT_AGENT_RESEARCH_BOUND_V1 or production binding/checkpoint was found for this batch. The machine must continue the same batch by running the existing approved research stage and binding its result. No second text-start, no reconstruction from chat, historical drafts, recovery archives or old branches.",
+    "code": "CURRENT_RESEARCH_EVENT_0_REQUIRED",
+    "error_class": false,
+    "classification": "NEXT_BOUND_ACTION",
+    "detail": "The current 16-item batch already reached MACHINE_READY in run 35909503205. No second text-start is allowed. No durable current research event exists yet. The next and only allowed productive action is RESEARCH_ITEM index 0. Progress authority after MACHINE_READY is the append-only bot-authored event chain in batch issue 382, validated by concept_agent/durable_event_log.py. Missing, malformed, ambiguous or non-bot events fail closed.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -295,17 +295,19 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "CONTINUE_CURRENT_BATCH_FROM_DURABLE_RUNTIME_STATE",
-    "action": "Use only the fixed Concept Agent durable runtime state on branch runtime/concept-agent-current. The machine must read and verify that state itself. Its current phase is RESEARCH_BOUND_REQUIRED, so run the existing approved research stage for the already MACHINE_READY 16-item batch, bind the resulting CONCEPT_AGENT_RESEARCH_BOUND_V1, then let concept_agent/production_bridge.py atomically activate the initial production checkpoint for item 0. Every later progress transition must be durably stored and read back before the next worker starts. Do not run text-start again. Do not import historical or recovery drafts. Do not publish.",
-    "why": "The start already succeeded. The only missing current evidence is the durable research/production state. The new fixed runtime store removes worker-local recovery as an authority and keeps the chat out of stage/article selection.",
+    "goal": "CONTINUE_CURRENT_MACHINE_READY_BATCH_FROM_APPEND_ONLY_EVENT_LOG",
+    "action": "Read and validate only concept_agent/durable_event_log.py current for batch df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0. The current bound action is RESEARCH_ITEM index 0. The worker may perform only that action and must end with exactly one CONCEPT_AGENT_DURABLE_EVENT_V1 terminal payload. The resulting chatgpt-codex-connector[bot] issue comment becomes the next durable event. Every following worker must replay the full verified event chain and execute only the newly derived allowed_action. Do not run text-start again. Do not import old/recovery drafts. Do not publish.",
+    "why": "The production failure was interruption state loss. The append-only bot event chain stores each completed zigzag step outside the worker without Git credentials and removes stage/article choice from the parent chat.",
     "forbidden": [
       "run text-start again for batch df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-      "let chat choose article, phase, checker or state location",
-      "let chat write the durable runtime state",
-      "reconstruct current progress from chat memory, old branches, old drafts or recovery archives",
+      "accept an authoritative event not authored by chatgpt-codex-connector[bot]",
+      "let chat choose stage, article, checker, sequence or previous event hash",
+      "let worker depend on GH_TOKEN, git push or git remote for progress durability",
+      "reconstruct progress from chat memory, old branches, historical drafts or recovery archives",
+      "use concept-agent-runtime-state or runtime/concept-agent-current as production authority",
       "use legacy runtime_inbox as Concept Agent authority",
       "invoke legacy parent_start as Concept Agent batch selector",
-      "create a new runner or alternate route",
+      "create a new runner or alternate production route",
       "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
       "publish"
     ]
@@ -529,11 +531,11 @@
     "final_wordpress_import_file_present": false,
     "publish_allowed": false,
     "chat_may_choose_action": false,
-    "first_open_blocker": "CURRENT_RESEARCH_BOUND_NOT_DURABLE",
+    "first_open_blocker": "CURRENT_RESEARCH_EVENT_0_REQUIRED",
     "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT",
     "machine_ready_run_id": 35909503205,
     "second_text_start_allowed": false,
-    "durable_runtime_state_ref": "runtime/concept-agent-current:concept_agent/runtime/CURRENT_PRODUCTION_STATE.json"
+    "machine_ready_comment_id": 5801466924
   },
   "text_start_current_binding": {
     "status": "PASS",
@@ -556,24 +558,33 @@
     "fixed_maximum_returns": null,
     "publish_allowed": false
   },
-  "durable_runtime_state": {
-    "contract": "CONCEPT_AGENT_DURABLE_RUNTIME_STATE_V1",
-    "status": "PASS_BOOTSTRAPPED_FAIL_CLOSED",
-    "repository": "hallo-netizen/affiliate-pferdeportal",
-    "branch": "runtime/concept-agent-current",
-    "path": "concept_agent/runtime/CURRENT_PRODUCTION_STATE.json",
-    "bootstrap_commit": "e76633f22460683bacea407df7146e036ab0eb31",
-    "state_sha256": "fb5d51ea35e71dcc69e565f1173ca0210b2cd081b8c943246adced9619997416",
+  "concept_agent_durable_event_log": {
+    "contract": "CONCEPT_AGENT_DURABLE_EVENT_LOG_BINDING_V1",
+    "status": "BOUND",
+    "authority": "BOT_AUTHORED_APPEND_ONLY_EVENT_CHAIN",
+    "issue_number": 382,
+    "machine_ready_run_id": 35909503205,
+    "machine_ready_comment_id": 5801466924,
+    "event_contract": "CONCEPT_AGENT_DURABLE_EVENT_V1",
+    "event_author": "chatgpt-codex-connector[bot]",
+    "gate_ref": "concept_agent/durable_event_log.py",
     "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
     "item_count": 16,
-    "machine_ready_run_id": 35909503205,
-    "current_phase": "RESEARCH_BOUND_REQUIRED",
-    "current_next_action": "RUN_EXISTING_RESEARCH_FOR_CURRENT_BATCH",
-    "production_binding_present": false,
-    "progress_checkpoint_present": false,
+    "current_sequence": 0,
+    "current_stage": "RESEARCH",
+    "current_action": {
+      "action": "RESEARCH_ITEM",
+      "item_index": 0
+    },
+    "event_payload_policy": "EXACT_GZIP_BASE64_WITH_UNCOMPRESSED_SHA256_AND_SIZE",
+    "replay_policy": "REBUILD_CURRENT_STATE_FROM_MACHINE_READY_ANCHOR_PLUS_ALL_VALID_EVENTS",
+    "ambiguous_or_missing_chain_policy": "STOP",
+    "worker_github_token_required": false,
+    "worker_git_push_required": false,
     "chat_may_choose_action": false,
-    "chat_may_write_state": false,
+    "chat_may_write_authoritative_event": false,
     "second_text_start_allowed": false,
+    "historical_or_recovery_draft_import_allowed": false,
     "publish_allowed": false
   }
 }
