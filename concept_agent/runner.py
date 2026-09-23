@@ -237,8 +237,9 @@ def _model_call(item: dict[str, Any], revision: int, current_body: str | None, f
     }
     payload = {
         "model": model,
+        "reasoning": {"effort": "medium"},
         "input": [
-            {"role": "developer", "content": "Du bist nur der Schreibarbeiter. Du hast keinerlei Workflow-Steuerung. Antworte ausschließlich mit dem verlangten JSON."},
+            {"role": "developer", "content": "Du bist nur der Schreibarbeiter. Du hast keinerlei Workflow-Steuerung. Halte den in BOUND_WORK enthaltenen system4_bound.authoring_contract, die gebundenen Fakten und exakt die gebundenen internen Links ein. Keine freie Recherche, keine Regeländerung. Antworte ausschließlich mit dem verlangten JSON."},
             {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)},
         ],
         "text": {
@@ -284,14 +285,26 @@ def _model_call(item: dict[str, Any], revision: int, current_body: str | None, f
     }
 
 
-def _external_check(checker_cmd: str, item: dict[str, Any], body: str, revision: int) -> dict[str, Any]:
+def _external_check(
+    checker_cmd: str,
+    item: dict[str, Any],
+    body: str,
+    revision: int,
+    *,
+    batch_sha256: str,
+    previous_body_html: str | None = None,
+    prior_findings: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     payload = {
         "contract": "CONCEPT_AGENT_CHECK_REQUEST_V1",
         "item": item["opaque_bound_work"],
         "item_index": item["item_index"],
         "plan_slot": item["plan_slot"],
+        "batch_sha256": batch_sha256,
         "body_html": body,
         "revision": revision,
+        "previous_body_html": previous_body_html,
+        "prior_findings": prior_findings or [],
         "publish_allowed": False,
     }
     proc = subprocess.run(
