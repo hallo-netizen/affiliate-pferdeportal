@@ -221,6 +221,11 @@ def build_sim_worker(repo: Path) -> Path:
     if old4 not in text:
         raise SimBlocked("SIM_WORKER_FACT_DEDUPE_BODY_PATCH_POINT_MISSING")
     text=text.replace(old4,new4,1)
+    old9="    if len(claims) < 4:\n"
+    new9="    claims = claims[:12]\n    if len(claims) < 4:\n"
+    if old9 not in text:
+        raise SimBlocked("SIM_WORKER_FACT_SELECTION_PATCH_POINT_MISSING")
+    text=text.replace(old9,new9,1)
     old5="            statement = _clean_statement(sentence, source.get('source_title', ''))\n"
     new5="""            templates = (
                 '{keyword} wird in der gebundenen Quelle anhand eines konkreten Prüf- oder Auswahlaspekts beschrieben.',
