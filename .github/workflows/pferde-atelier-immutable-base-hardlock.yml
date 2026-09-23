@@ -34,7 +34,7 @@ jobs:
           changed = pathlib.Path('/tmp/changed.txt').read_text(encoding='utf-8').splitlines()
           head_ref = os.environ['HEAD_REF']
 
-          immutable = re.compile(r'^(\.github/workflows/|AGENTS\.md$|AGENTS\.override\.md$|control/CURRENT_STARTMASTER\.json$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/paul-scope-gate/|control/output-quarantine/|control/single-door-boundary/|isolated_system4/|control/startmaster0107/ENDSTEMPEL_|control/startmaster0107/system4_107007_|control/startmaster0107/system4_107008_|control/startmaster0107/pre_codex_start_hardlock\.py$|control/startmaster0107/PRE_CODEX_START_HARDLOCK\.json$|control/startmaster0107/PRE_CODEX_START_RECEIPT\.json$|control/startmaster0107/PFERDE_ATELIER_START_HERE\.json$|control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP\.json$|control/startmaster0107/GITHUB_FINAL_RELEASE\.py$|control/startmaster0107/chat_delivery_payload\.py$|control/startmaster0107/runtime_packages/|control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107\.txt$|control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107\.json$)')
+          immutable = re.compile(r'^(\.github/workflows/|AGENTS\.md$|AGENTS\.override\.md$|control/CURRENT_STARTMASTER\.json$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/paul-scope-gate/|control/output-quarantine/|control/single-door-boundary/|concept_agent/|isolated_system4/|control/startmaster0107/ENDSTEMPEL_|control/startmaster0107/system4_107007_|control/startmaster0107/system4_107008_|control/startmaster0107/pre_codex_start_hardlock\.py$|control/startmaster0107/PRE_CODEX_START_HARDLOCK\.json$|control/startmaster0107/PRE_CODEX_START_RECEIPT\.json$|control/startmaster0107/PFERDE_ATELIER_START_HERE\.json$|control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP\.json$|control/startmaster0107/GITHUB_FINAL_RELEASE\.py$|control/startmaster0107/chat_delivery_payload\.py$|control/startmaster0107/runtime_packages/|control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107\.txt$|control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107\.json$)')
 
           def decision(ref, paths):
               if ref.startswith('paul/') and any(p.startswith('protocol/PROJECT_MEMORY/') for p in paths):
@@ -49,6 +49,7 @@ jobs:
           assert decision('feature/test', ['protocol/PROJECT_MEMORY/START_HERE.md']) == 'PASS'
           assert decision('feature/test', ['.github/workflows/x.yml']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
           assert decision('feature/test', ['isolated_system4/controller.py']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
+          assert decision('feature/test', ['concept_agent/intake_bridge.py']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
           assert decision('feature/test', ['control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
           assert decision('feature/test', ['control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json']) == 'PASS'
           print('PATH_GUARD_SELFTEST_PASS')
