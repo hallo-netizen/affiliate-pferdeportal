@@ -128,3 +128,43 @@ Beweisgrenze / aktueller echter Blocker:
 - Der Verbraucher ist aber nicht mehr ungeklärt: **statische Kategorieabhängigkeit = JA**.
 - Nächste technische Bindung innerhalb des Template-Kits: exakte aktuelle `assets/breadcrumb-portal-map-v150310.json` aus dem echten 1.50.559-Pluginbaum beschaffen/hashbinden und gegen die autoritative `KATEGORIEN.tsv` prüfen.
 - Falls sie weiterhin 1124 enthält, ausschließlich dieses Breadcrumb-Kategorieasset plus notwendige Count-/Hash-Bindungen auf die neue Kategorienwahrheit nachziehen; sonst nichts am Template-Kit ändern.
+
+
+## PPA-013 historischer Vollquell-Audit – statischer Breadcrumb-Strukturverbraucher identifiziert
+
+Hard-Baseline:
+- Run `35904805135` → SUCCESS
+- geprüfter Head: `f1d3225593f5221695bf2770fce5de23e5db8ff4`
+- historischer Originalquellstand wurde ausschließlich read-only aus dem bereits gespeicherten 1.50.469-Fixture rekonstruiert.
+- exakter historischer PHP-SHA256: `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5`
+- Größe: 1,650,857 Bytes.
+- Rolle dieses historischen Quellstands: EVIDENCE ONLY, niemals Ersatz-/Current-Quelle für 1.50.559.
+
+Entscheidender Befund:
+- PPA-013 referenziert statisch `assets/breadcrumb-portal-map-v150310.json`.
+- Vertrag im Quellcode: `PFTK_BREADCRUMB_PORTAL_MAP_V150310`.
+- Quellcode verlangt hart:
+  - `category_count == 1124`
+  - `count(categories) == 1124`.
+- Kommentar im Originalquellcode beschreibt die Datei ausdrücklich als vollständigen, sluggebundenen Strukturvertrag für 1.124 Kategorien.
+- Nutzung: fachlicher Breadcrumbpfad für technisch flache Artikelkategorien.
+- sichtbare Kategorienamen kommen dynamisch aus aktuellem `WP_Term`.
+- IDs, Slugs, URLs und Taxonomie-Parents werden durch diesen Vertrag nicht geschrieben/verändert.
+- historische Runtime ist read-only gegenüber WordPress:
+  - `wp_insert_term`: 0
+  - `wp_update_term`: 0
+  - `wp_delete_term`: 0
+  - `wp_set_object_terms`: 0
+  - dynamische Leser vorhanden: `get_terms`, `get_term_by`, `get_term`.
+
+Abgrenzung:
+- keine Referenz auf `portal-structure-v279.json`, `ebay-portal-catalog-v2.json`, `KATEGORIEN.tsv`, PPM hierarchy/link snapshots.
+- die relevante statische Kopie im Template Kit ist damit **nicht** die komplette Affiliate-/PPM-Struktur, sondern der eigene Breadcrumb-Strukturvertrag `assets/breadcrumb-portal-map-v150310.json`.
+
+Folgerung für den laufenden Kategorieauftrag:
+- Die frühere Aussage „im Template Kit keine statische Kategorie-/Portalstruktur-Kopie gefunden“ ist überholt.
+- Es existiert mindestens dieser statische 1124er-Verbraucher.
+- Der 1.50.558→1.50.559-Hardtest beweist nur, dass dieses Delta keine neue Datei anlegt/entfernt und nur `pferde-template-kit.php` verändert; er bindet den unveränderten Assetbestand nicht vollständig.
+- Deshalb bleibt fail-closed offen, ob die aktuell installierte 1.50.559-Datei dieses Assets noch exakt den 1124er-Vertrag enthält.
+- Nächster enger Bindungspunkt ist ausschließlich die aktuell installierte 1.50.559-Datei `assets/breadcrumb-portal-map-v150310.json` samt SHA/Count/Schema.
+- Falls Current weiterhin 1124 enthält, ist genau diese statische Ableitung auf 1149 gegen die autoritative zentrale Kategorienwahrheit zu aktualisieren; keine Text-/Designarbeit und kein WordPress-Write vor dem vorgeschriebenen Dry-Run.
