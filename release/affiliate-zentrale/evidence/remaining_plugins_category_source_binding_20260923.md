@@ -63,3 +63,30 @@ Beweisgrenze:
 - Der spätere Nutzer-Readback bestätigte funktional 30 Texte, Icons und Exact-7; historisch wurde danach jedoch kein vollständiger neuer 1.50.559-Main-SHA-/Vollbaum-Readback dokumentiert.
 - Deshalb darf aus dem exakten 1.50.558-Stand plus Patcher **kein Ersatz-Vollbaum rekonstruiert** und nicht behauptet werden, der gesamte 1.50.559-Bestand enthalte keine geerbte statische Kategorie-/Portalstrukturkopie.
 - Ergebnis bleibt daher fail-closed: `TEMPLATE_KIT_1_50_559_EXACT_GITHUB_SOURCE_BINDING` offen.
+
+
+### Harte Kategorieprüfung des hochgeladenen 1.0.3-Hardtest-Artefakts
+
+Direkt geprüftes Artefakt:
+- `PFERDE_ATELIER_PPA013_1.50.558_TO_1.50.559_TEXT30_FINAL_CORRECTIVE_1.0.3_HARDTEST.zip`
+- ZIP enthält genau drei Dateien: README, HARDTEST_EVIDENCE und den Corrective-Helper.
+- Der Helper enthält als reale Kategorie-Slugs ausschließlich die 25 neuen Produktionskategorien der fünf Familien.
+- Abgleich gegen die autoritative `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv`:
+  - TSV-Gesamtzeilen: 1160
+  - geprüfte neue Produktionskategorien: 25
+  - Treffer: 25/25
+  - fehlend: 0
+  - reale Term-IDs: exakt 1577–1601.
+- Zusätzlich werden genau die fünf neuen Produktseiten `pferdesaettel`, `trensen`, `offenstallbau`, `paddockbau`, `reitplatzbau` mit den dokumentierten Seiten-IDs 972134/972141/972148/972155/972162 geprüft.
+- Im gesamten Helper kommen keine Referenzen auf `portal-structure`, `ebay-portal-catalog`, `category-map`, `KATEGORIEN.tsv`, `complete-portal`, `category-hierarchy`, `wordpress-link-target` oder die Vollcounts 1124/1149/1160/5745/5790 vor.
+- Der Preflight bindet den exakten 1.50.558-Main-SHA und prüft die 30 realen Knoten; der Apply erlaubt ausschließlich die Änderung von `pferde-template-kit.php`, keine hinzugefügte oder entfernte Plugin-Datei.
+- Der 1.50.558→1.50.559-Transform ersetzt nur den bestehenden Editorial-Overlayblock und Versionsmarker; Grid/Icon-Logik ist VERIFY_ONLY.
+
+Belastbare Aussage:
+- Das 1.50.559-Delta selbst führt **keine neue statische Vollkopie** der Pferdeportal-Kategorien oder Portalstruktur ein.
+- Das hochgeladene Hardtest-Artefakt enthält **keine zweite 1149/1160-Kategorienwahrheit**, sondern ausschließlich die 30 zielgerichteten Prüfknoten der damaligen Kategorieergänzung.
+
+Weiter bestehende Beweisgrenze:
+- Das Artefakt enthält nicht den vollständigen installierten 1.50.559-Vollquellbaum.
+- Deshalb ist allein damit nicht bewiesen, ob eine bereits vor 1.50.558 vorhandene statische Vollstruktur irgendwo im unveränderten restlichen Template-Kit-Quellcode existiert.
+- Kein Ersatz-Vollbaum wird aus 1.50.558 rekonstruiert.
