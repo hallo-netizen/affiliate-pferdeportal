@@ -64,7 +64,7 @@
             "contracts/article-type-extension-manifest-v1.json": "755b709ebfea6e6279cad1e064ae896a68246147c09c523e1747fbf7e81e62c4",
             "contracts/article-type-extension-manifest-v1.sig": "824e18cb3fe33f6d87ccda844580ce8e8b40eb75191551f23a63931ac3271328",
             "contracts/editorial-plan-governance-v1.json": "5b87316a469e02a051592563a4fba1a7728e09d3ada992ccfb49d4bfc2d31271",
-            "contracts/canonical-complete-editorial-plan-v1.json": "85e223c7c82c02aae0853526b9521c38113311a21e8c4dcd1cdb88fa9b5df0b4",
+            "contracts/canonical-complete-editorial-plan-v1.json": "85e223c7c82c02aae0853526b9521c38113311a21e8c4cd1cdb88fa9b5df0b44",
             "contracts/normal-draft-release-v1.json": "5214575a71a5e4b77f62fce98d52b36e0b6d8b7af340b186051bd0ca85fa858e",
             "contracts/production-plan-v4.json": "c6d4f816218b283eb37977ae340ffb5d345f723ab772f5cc1a355fb4b27682eb",
             "contracts/production-plan-v5.json": "d6809c6d75205dbc6402c52445935eac85b35908d8db27d59edac4ffca2d6e15",
