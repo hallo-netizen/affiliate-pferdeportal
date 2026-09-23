@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 109,
+  "generation": 110,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -233,10 +233,10 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_AFFILIATE_EXACT_SOURCE_BLOCKED",
+    "state": "CATEGORY_INTEGRATION_LIVE_INSTALLED_BASELINE_BOUND",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. HARD CATEGORY-ONLY SCOPE REMAINS. DO NOT TOUCH TEXTS, DESIGN CONTENT, PLUGIN CONCEPTS OR PERFORMANCE/PROVIDER/RANKING/BANNER LOGIC. DO NOT REPEAT COMPLETED PROOFS. THE ORIGINAL HARDTESTED AFFILIATE CATEGORY ARTIFACT HAS BEEN RECOVERED FROM WORKFLOW RUN 35784852533 / ARTIFACT 10719063406. EXACT DERIVED FILES: portal-structure-v279.CANDIDATE.json SHA256 ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed; ebay-portal-catalog-v2.CANDIDATE.json SHA256 6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2. COUNTS: 334 PRODUCT PAGES, 1149 ARTICLE CATEGORIES, 1550 MENU ITEMS. THESE ARE DERIVED CATEGORY ARTIFACTS, NOT A SECOND CATEGORY AUTHORITY; KATEGORIEN.tsv REMAINS SOLE AUTHORITY. DO NOT REBUILD THESE JSONS. ONLY REMAINING AFFILIATE CATEGORY STEP IS BYTE-REPLACE THESE TWO FILES INSIDE THE EXACT AFFILIATE 6.72.145 FULL TREE. EXACT 6.72.145 FULL SOURCE IS CURRENTLY NOT AVAILABLE; THE HISTORICAL HARDTEST CHECKOUT release/affiliate-zentrale/current IS VERSION 6.72.105 AND IS FORBIDDEN AS A BASE. NO WORDPRESS WRITE.",
-    "completion_condition": "EXACT AFFILIATE 6.72.145 FULL TREE IS AVAILABLE AND HASH-BOUND TO EXPECTED PACKAGE SHA256 a5d6bccb11d41005be0f0db40b2dcdb32b8e40e73a772411b44039adedc548de OR AN EQUIVALENT EXACT FRESH-UNPACK SOURCE; ONLY portal-structure-v279.json AND ebay-portal-catalog-v2.json ARE REPLACED BY THE RECOVERED HARDTESTED CATEGORY ARTIFACT BYTES; ALL OTHER AFFILIATE FILES REMAIN BYTE-IDENTICAL. NO NON-CATEGORY CHANGE.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. LIVE WORDPRESS PLUGIN INVENTORY FROM 2026-09-23 IS NOW THE VERSION BASELINE. DO NOT USE OLDER REPO ASSUMPTIONS WHEN THEY CONFLICT WITH INSTALLED WORDPRESS. INSTALLED: Affiliate-Zentrale (Portal-kompatibel) 6.72.152; Affiliate Portal Template Kit (Pferde-kompatibel) 1.50.559; Portal Production Machine 6.7.9; Portal SEO Redaktionsplan Compiler 0.28.23; Portal SEO Themenengine 0.57.6; Portal Category Structure Repair Guard 1.0.1; Portal Production Center 1.1.1; Portal Production Link Policy Gate 1.0.1; Portal Link Policy Runtime Verifier 1.0.0; Allgemeine Bildzentrale 2.7.6. HARD SCOPE REMAINS CATEGORY/STRUCTURE ONLY. NO TEXTS, DESIGN CONTENT, PLUGIN CONCEPTS, PERFORMANCE, PROVIDER, RANKING OR BANNER LOGIC. DO NOT REPEAT COMPLETED PROOFS. CENTRAL KATEGORIEN.tsv REMAINS SOLE CATEGORY AUTHORITY. NEXT: SOURCE-BIND THE CURRENT INSTALLED PLUGIN TREES USING EXISTING READ-ONLY EXPORTERS/LIVE SOURCES, THEN CHECK ONLY FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES.",
+    "completion_condition": "FOR EACH LIVE INSTALLED CATEGORY-CANDIDATE PLUGIN, AN EXACT CURRENT SOURCE IS HASH-BOUND OR THE PLUGIN IS EXPLICITLY MARKED SOURCE-UNAVAILABLE; CATEGORY/STRUCTURE DEPENDENCY IS CLASSIFIED WITHOUT TOUCHING NON-CATEGORY BEHAVIOR. ANY NEEDED CHANGE IS LIMITED TO CATEGORY/STRUCTURE DATA ONLY.",
     "after_completion_action": "ONLY AFTER CATEGORY-ONLY CONSUMERS ARE CURRENT-BOUND: CATEGORY E2E + WORDPRESS DRY-RUN. NO APPLY BEFORE DRY-RUN PASS.",
     "no_optional_detours": true,
     "sequence": 32,
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "91a84b19f5ecd3281816105e265ce27d334f64b7",
     "last_audit_date": "2026-09-23",
-    "current_first_blocker": "AFFILIATE_6_72_145_EXACT_FULL_SOURCE_NOT_AVAILABLE_FOR_TWO_JSON_CATEGORY_REPLACEMENT",
+    "current_first_blocker": "LIVE_CURRENT_PLUGIN_SOURCE_BINDING_FOR_CATEGORY_CONSUMERS",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1167,6 +1167,65 @@
         "menu_items": 1550
       },
       "rebuild_forbidden": true,
+      "sole_category_authority": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
+    },
+    "live_installed_plugin_baseline_20260923": {
+      "source": "WordPress installed-plugins inventory supplied by user",
+      "exact": {
+        "affiliate_zentrale": {
+          "name": "Affiliate-Zentrale (Portal-kompatibel)",
+          "version": "6.72.152"
+        },
+        "template_kit": {
+          "name": "Affiliate Portal Template Kit (Pferde-kompatibel)",
+          "version": "1.50.559"
+        },
+        "ppm": {
+          "name": "Portal Production Machine",
+          "version": "6.7.9"
+        },
+        "pserc": {
+          "name": "Portal SEO Redaktionsplan Compiler",
+          "version": "0.28.23"
+        },
+        "pste": {
+          "name": "Portal SEO Themenengine",
+          "version": "0.57.6"
+        },
+        "category_repair_guard": {
+          "name": "Portal Category Structure Repair Guard",
+          "version": "1.0.1"
+        },
+        "production_center": {
+          "name": "Portal Production Center",
+          "version": "1.1.1"
+        },
+        "production_link_policy_gate": {
+          "name": "Portal Production Link Policy Gate",
+          "version": "1.0.1"
+        },
+        "link_policy_runtime_verifier": {
+          "name": "Portal Link Policy Runtime Verifier",
+          "version": "1.0.0"
+        },
+        "image_center": {
+          "name": "Allgemeine Bildzentrale",
+          "version": "2.7.6"
+        }
+      },
+      "source_exporters": {
+        "ppm": {
+          "name": "PPM-Quellpaket Exporter",
+          "version": "1.0.0",
+          "purpose": "exports exact active Portal Production Machine source read-only"
+        },
+        "seo": {
+          "name": "SEO-Quellpaket Exporter",
+          "version": "1.0.0",
+          "purpose": "exports exact installed Portal SEO Themenengine + Portal SEO Redaktionsplan Compiler sources read-only"
+        }
+      },
+      "scope": "CATEGORY_STRUCTURE_ONLY",
       "sole_category_authority": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv"
     }
   }

@@ -806,3 +806,29 @@ Der historische Checkout des Performance-Hardtests enthält unter `release/affil
 
 Damit ist nichts mehr an der Kategorieableitung zu bauen oder erneut zu testen. Offen ist nur:
 **exakten 6.72.145-Vollbaum beschaffen/binden und darin ausschließlich diese zwei JSON-Dateien bytegenau ersetzen.**
+
+
+## 21. Live installierter Plugin-Stand als Kategorie-Basis (2026-09-23)
+
+Die reale WordPress-Pluginliste wurde als Versionsbasis gebunden. Alte Repository-Annahmen dürfen diesen Live-Stand nicht überschreiben.
+
+Kategorie-/Strukturkandidaten:
+- Affiliate-Zentrale (Portal-kompatibel) **6.72.152**
+- Affiliate Portal Template Kit (Pferde-kompatibel) **1.50.559**
+- Portal Production Machine **6.7.9**
+- Portal SEO Redaktionsplan Compiler **0.28.23**
+- Portal SEO Themenengine **0.57.6**
+- Portal Category Structure Repair Guard **1.0.1**
+- Portal Production Center **1.1.1**
+- Portal Production Link Policy Gate **1.0.1**
+- Portal Link Policy Runtime Verifier **1.0.0**
+- Allgemeine Bildzentrale **2.7.6**
+
+Vorhandene read-only Quellwege:
+- PPM-Quellpaket Exporter **1.0.0** -> exakter aktiver PPM-Quellstand
+- SEO-Quellpaket Exporter **1.0.0** -> exakte installierte PSTE-/PSERC-Quellen
+
+HARD SCOPE:
+nur Kategorien/Portalstruktur. Keine Texte, kein Designinhalt, keine Plugin-Konzepte, keine Performance-/Provider-/Ranking-/Bannerlogik.
+
+Einzige Kategorienwahrheit bleibt `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv`.
