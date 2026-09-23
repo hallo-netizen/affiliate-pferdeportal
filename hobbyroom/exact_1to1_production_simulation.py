@@ -269,6 +269,7 @@ def execute_workspace(repo: Path, workspace: Path, worker: Path, env: dict, inde
             p=generated/f"repair-{s.get('revision',0)}.html"; produce("repair",p)
             after=p.read_text(encoding="utf-8")
             if after==before and (s.get("checks") or {}).get("checker")=="languagetool":
+                if str(repo/"isolated_system4") not in sys.path: sys.path.insert(0,str(repo/"isolated_system4"))
                 import production_checks_engine as pce
                 plain=pce._plain_text(before)
                 report,_,_=pce._run_languagetool_text(repo,plain)
