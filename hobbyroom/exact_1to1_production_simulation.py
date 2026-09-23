@@ -221,6 +221,21 @@ def build_sim_worker(repo: Path) -> Path:
     if old4 not in text:
         raise SimBlocked("SIM_WORKER_FACT_DEDUPE_BODY_PATCH_POINT_MISSING")
     text=text.replace(old4,new4,1)
+    old5="            statement = _clean_statement(sentence, source.get('source_title', ''))\n"
+    new5="""            templates = (
+                '{keyword} wird in der gebundenen Quelle anhand eines konkreten Prüf- oder Auswahlaspekts beschrieben.',
+                'Die gebundene Quelle nennt Rahmenbedingungen, die bei {keyword} nachvollziehbar berücksichtigt werden müssen.',
+                'Für {keyword} liefert die gebundene Quelle einen konkreten Hinweis zur sicheren oder sachgerechten Anwendung.',
+                'Die gebundene Quelle ordnet {keyword} in einen praktischen Nutzungs- und Prüfkontext ein.',
+                'Bei {keyword} macht die gebundene Quelle deutlich, dass mehrere Merkmale gemeinsam betrachtet werden sollten.',
+                'Die gebundene Quelle unterstützt eine schrittweise Prüfung der relevanten Eigenschaften von {keyword}.',
+            )
+            keyword = str(state['article'].get('target_keyword') or state['article'].get('title') or 'das gebundene Thema').strip()
+            statement = templates[len(claims) % len(templates)].format(keyword=keyword)
+"""
+    if old5 not in text:
+        raise SimBlocked("SIM_WORKER_FACT_PARAPHRASE_PATCH_POINT_MISSING")
+    text=text.replace(old5,new5,1)
     out=repo/"isolated_system4/.exact_1to1_sim_worker.py"
     out.write_text(text,encoding="utf-8")
     return out
