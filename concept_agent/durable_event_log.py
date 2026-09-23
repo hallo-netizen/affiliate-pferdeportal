@@ -9,6 +9,7 @@ import json
 import re
 import sys
 import tempfile
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -27,7 +28,7 @@ import universal_reentry_guard
 EVENT_CONTRACT = "CONCEPT_AGENT_DURABLE_EVENT_V1"
 TRUSTED_EVENT_AUTHOR = "chatgpt-codex-connector[bot]"
 TRUSTED_START_AUTHOR = "github-actions[bot]"
-CONTROL_STATE = REPO / "control/startmaster0107/CURRENT_STATE.json"
+SNAPSHOT_REF = "concept_agent/current/PSERC_METADATA_SNAPSHOT.json"
 MAX_COMMENT_BYTES = 60000
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 
@@ -60,27 +61,65 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def _control() -> dict[str, Any]:
-    current = load_json(CONTROL_STATE)
-    batch = current.get("concept_agent_current_batch")
-    log = current.get("concept_agent_durable_event_log")
-    if not isinstance(batch, dict) or not isinstance(log, dict):
-        raise Blocked("DURABLE_EVENT_CURRENT_BINDING_MISSING")
-    if batch.get("batch_sha256") != log.get("batch_sha256"):
-        raise Blocked("DURABLE_EVENT_CURRENT_BATCH_MISMATCH")
-    if batch.get("item_count") != log.get("item_count"):
-        raise Blocked("DURABLE_EVENT_CURRENT_COUNT_MISMATCH")
-    if batch.get("publish_allowed") is not False or log.get("publish_allowed") is not False:
-        raise Blocked("DURABLE_EVENT_PUBLISH_INVALID")
-    for key in ("issue_number", "machine_ready_run_id", "machine_ready_comment_id"):
-        value = log.get(key)
-        if not isinstance(value, int) or isinstance(value, bool) or value < 1:
-            raise Blocked("DURABLE_EVENT_" + key.upper() + "_INVALID")
-    if log.get("chat_may_choose_action") is not False:
-        raise Blocked("DURABLE_EVENT_CHAT_ACTION_INVALID")
-    if log.get("second_text_start_allowed") is not False:
-        raise Blocked("DURABLE_EVENT_SECOND_START_INVALID")
-    return {"current": current, "batch": batch, "log": log}
+def _current_batch() -> dict[str, Any]:
+    snapshot = load_json(REPO / SNAPSHOT_REF)
+    intake = intake_bridge.prepare(snapshot)
+    batch = str(intake.get("batch_sha256") or "")
+    count = intake.get("item_count")
+    if not SHA_RE.fullmatch(batch):
+        raise Blocked("DURABLE_EVENT_CURRENT_BATCH_INVALID")
+    if not isinstance(count, int) or isinstance(count, bool) or count < 1:
+        raise Blocked("DURABLE_EVENT_CURRENT_COUNT_INVALID")
+    if intake.get("publish_allowed") is not False:
+        raise Blocked("DURABLE_EVENT_CURRENT_PUBLISH_INVALID")
+    return {
+        "batch_sha256": batch,
+        "item_count": count,
+        "metadata_snapshot_ref": SNAPSHOT_REF,
+        "publish_allowed": False,
+    }
+
+
+def _api_json(url: str):
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "pferdeatelier-concept-agent-durable-event",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as fh:
+            return json.load(fh)
+    except Exception as exc:
+        raise Blocked("DURABLE_EVENT_GITHUB_READ_FAILED:" + str(exc)) from exc
+
+
+def _discover_issue(batch_sha256: str) -> int:
+    title = "TEXT_START_BATCH_CLAIM:" + batch_sha256
+    query = 'repo:hallo-netizen/affiliate-pferdeportal in:title "' + title + '"'
+    url = (
+        "https://api.github.com/search/issues?q="
+        + urllib.parse.quote(query, safe="")
+        + "&per_page=100"
+    )
+    value = _api_json(url)
+    items = value.get("items") if isinstance(value, dict) else None
+    if not isinstance(items, list):
+        raise Blocked("DURABLE_EVENT_CLAIM_SEARCH_INVALID")
+    exact = [
+        row for row in items
+        if isinstance(row, dict)
+        and row.get("title") == title
+        and "pull_request" not in row
+    ]
+    if len(exact) != 1:
+        raise Blocked("DURABLE_EVENT_CLAIM_NOT_EXACT:" + str(len(exact)))
+    number = exact[0].get("number")
+    if not isinstance(number, int) or isinstance(number, bool) or number < 1:
+        raise Blocked("DURABLE_EVENT_CLAIM_NUMBER_INVALID")
+    return number
 
 
 def _api_comments(issue_number: int) -> list[dict[str, Any]]:
@@ -93,19 +132,7 @@ def _api_comments(issue_number: int) -> list[dict[str, Any]]:
             + "/comments?per_page=100&page="
             + str(page)
         )
-        req = urllib.request.Request(
-            url,
-            headers={
-                "Accept": "application/vnd.github+json",
-                "User-Agent": "pferdeatelier-concept-agent-durable-event",
-                "X-GitHub-Api-Version": "2022-11-28",
-            },
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=30) as fh:
-                value = json.load(fh)
-        except Exception as exc:
-            raise Blocked("DURABLE_EVENT_COMMENT_FETCH_FAILED:" + str(exc)) from exc
+        value = _api_json(url)
         if not isinstance(value, list):
             raise Blocked("DURABLE_EVENT_COMMENT_LIST_INVALID")
         rows.extend(x for x in value if isinstance(x, dict))
@@ -129,35 +156,34 @@ def _login(row: dict[str, Any]) -> str:
 
 
 def _anchor(rows: list[dict[str, Any]], cfg: dict[str, Any]) -> str:
-    wanted = cfg["machine_ready_comment_id"]
-    matches = [x for x in rows if x.get("id") == wanted]
+    matches = []
+    for row in rows:
+        if _login(row) != TRUSTED_START_AUTHOR:
+            continue
+        body = str(row.get("body") or "")
+        lines = body.strip().splitlines()
+        if not lines or lines[0] != "TEXT_START_MACHINE_READY":
+            continue
+        fields = {}
+        for line in lines[1:]:
+            if ": " in line:
+                key, value = line.split(": ", 1)
+                fields[key] = value
+        if (
+            str(fields.get("TARGET_ACTION_RUN_ID") or "").isdigit()
+            and str(fields.get("SOURCE_RUN_ID") or "").isdigit()
+            and fields.get("BATCH_SHA256") == cfg["batch_sha256"]
+            and fields.get("PUBLISH") == "NO"
+        ):
+            matches.append((row, body.strip()))
     if len(matches) != 1:
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_ANCHOR_MISSING")
-    row = matches[0]
-    if _login(row) != TRUSTED_START_AUTHOR:
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_AUTHOR_INVALID")
-    body = str(row.get("body") or "")
-    lines = body.strip().splitlines()
-    fields = {}
-    if not lines or lines[0] != "TEXT_START_MACHINE_READY":
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_BODY_INVALID")
-    for line in lines[1:]:
-        if ": " in line:
-            key, value = line.split(": ", 1)
-            fields[key] = value
-    if fields.get("TARGET_ACTION_RUN_ID") != str(cfg["machine_ready_run_id"]):
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_RUN_MISMATCH")
-    if not str(fields.get("SOURCE_RUN_ID") or "").isdigit():
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_SOURCE_RUN_INVALID")
-    if fields.get("BATCH_SHA256") != cfg["batch_sha256"]:
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_BATCH_MISMATCH")
-    if fields.get("PUBLISH") != "NO":
-        raise Blocked("DURABLE_EVENT_MACHINE_READY_PUBLISH_INVALID")
+        raise Blocked("DURABLE_EVENT_MACHINE_READY_ANCHOR_NOT_EXACT:" + str(len(matches)))
+    row, body = matches[0]
     return stable(
         {
-            "comment_id": wanted,
+            "comment_id": row.get("id"),
             "author": TRUSTED_START_AUTHOR,
-            "body": body.strip(),
+            "body": body,
         }
     )
 
@@ -407,10 +433,8 @@ def replay_production(
     return state
 
 
-def derive(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    control = _control()
-    cfg = dict(control["log"])
-    cfg["metadata_snapshot_ref"] = control["batch"]["metadata_snapshot_ref"]
+def derive(rows: list[dict[str, Any]], cfg: dict[str, Any] | None = None) -> dict[str, Any]:
+    cfg = dict(cfg or _current_batch())
     anchor, events = event_chain(rows, cfg)
     _, intake = _snapshot_and_intake(cfg)
 
@@ -493,9 +517,13 @@ def make_event(current: dict[str, Any], action: dict[str, Any], kind: str, raw: 
 
 
 def _current(comments_path: Path | None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    control = _control()
-    rows = _comments(comments_path, control["log"]["issue_number"])
-    return rows, derive(rows)
+    cfg = _current_batch()
+    if comments_path is None:
+        issue_number = _discover_issue(cfg["batch_sha256"])
+        rows = _comments(None, issue_number)
+    else:
+        rows = _comments(comments_path, 0)
+    return rows, derive(rows, cfg)
 
 
 def _write_current(out: Path, current: dict[str, Any]) -> None:
