@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 116,
+  "generation": 117,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -1341,5 +1341,19 @@
         "version": "2.7.6"
       }
     }
+  },
+  "template_kit_150559_source_binding_evidence": {
+    "status": "EXACT_1_0_3_HARDTEST_RECOVERED_FULL_SOURCE_STILL_BLOCKED",
+    "evidence_ref": "release/affiliate-zentrale/evidence/remaining_plugins_category_source_binding_20260923.md",
+    "artifact": "PFERDE_ATELIER_PPA013_1.50.558_TO_1.50.559_TEXT30_FINAL_CORRECTIVE_1.0.3_HARDTEST.zip",
+    "artifact_sha256": "3600de85fc1a577d8c80ba06c306270c92eafac1144b41b1277b330323778f85",
+    "patcher_php_sha256": "428840f989328d9a7bc92b2929498b7a7bff49fca0ba1c000f9ed44f0c7a0878",
+    "exact_base_version": "1.50.558",
+    "exact_base_main_sha256": "840130139597c6152a385475c05b2786c96d08bd137785e127280d9aabe979f1",
+    "target_version": "1.50.559",
+    "proven_delta_boundary": "ONLY pferde-template-kit.php MAY CHANGE; NO FILE ADD/REMOVE; 1.50.559 TRANSFORM REPLACES EDITORIAL OVERLAY + VERSION MARKERS; NO NEW SEPARATE CATEGORY/PORTAL-STRUCTURE FILE INTRODUCED BY THIS DELTA",
+    "proof_limit": "NO COMPLETE 1.50.559 MAIN SHA/FULL TREE READBACK IS BOUND; DO NOT RECONSTRUCT A SUBSTITUTE FULL SOURCE FROM 1.50.558",
+    "blocker_unchanged": "TEMPLATE_KIT_1_50_559_EXACT_GITHUB_SOURCE_BINDING",
+    "wordpress_write": "NONE"
   }
 }
