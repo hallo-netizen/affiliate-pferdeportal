@@ -199,7 +199,7 @@ def build_sim_worker(repo: Path) -> Path:
     srcp=repo/"isolated_system4/deterministic_test_worker.py"
     text=srcp.read_text(encoding="utf-8")
     old="direct = html.escape(str(bound.get('faq_direct_answer') or '').strip())"
-    new="title_text=str(state['article']['title']).strip(); direct = html.escape(('Dieser Simulationsartikel behandelt das gebundene Thema „' + title_text + '“. Die Darstellung stützt sich auf die zugeordneten Fakten, Quellen und Prüfkriterien. Sie beschreibt die relevanten Auswahl- und Kontrollpunkte und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln des aktuellen Produktionslaufs.').strip()); round_terms=('gezielt','sorgfältig','präzise','erneut','abschließend'); round_term=round_terms[(int(state.get('revision') or 1)-1)%len(round_terms)]; direct = html.escape(('Nach dem sprachlichen Prüfhinweis wurde die Einleitung dieses gebundenen Artikels ' + round_term + ' überarbeitet. Das Thema „' + title_text + '“ bleibt unverändert. Die Darstellung stützt sich weiterhin auf dieselben Fakten, Quellen und Prüfkriterien und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln.').strip()) if repair else direct"
+    new="keyword_text=str(state['article'].get('target_keyword') or 'das gebundene Thema').strip(); direct = html.escape(('Dieser Simulationsartikel behandelt den gebundenen Suchbegriff „' + keyword_text + '“. Die Darstellung stützt sich auf die zugeordneten Fakten, Quellen und Prüfkriterien. Sie beschreibt relevante Auswahl- und Kontrollpunkte und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln des aktuellen Produktionslaufs.').strip()); round_terms=('gezielt','sorgfältig','präzise','erneut','abschließend'); round_term=round_terms[(int(state.get('revision') or 1)-1)%len(round_terms)]; direct = html.escape(('Nach dem sprachlichen Prüfhinweis wurde die Einleitung dieses gebundenen Artikels ' + round_term + ' überarbeitet. Der Suchbegriff „' + keyword_text + '“ bleibt unverändert. Die Darstellung stützt sich weiterhin auf dieselben Fakten, Quellen und Prüfkriterien und folgt vollständig den vorgegebenen Struktur-, Qualitäts- und Nachweisregeln.').strip()) if repair else direct"
     if old not in text:
         raise SimBlocked("SIM_WORKER_DIRECT_PATCH_POINT_MISSING")
     text=text.replace(old,new,1)
@@ -236,6 +236,37 @@ def build_sim_worker(repo: Path) -> Path:
     if old5 not in text:
         raise SimBlocked("SIM_WORKER_FACT_PARAPHRASE_PATCH_POINT_MISSING")
     text=text.replace(old5,new5,1)
+    old7="    return f'{base}; {tail}.'\n"
+    new7="""    variants = (
+        'Ausgangslage Eignung praktische Folge werden getrennt eingeordnet',
+        'Anforderung Beobachtung Entscheidungskriterium werden einzeln dokumentiert',
+        'Rahmenbedingung Nutzung Kontrollschritt bleiben klar unterscheidbar',
+        'Zustand Handhabung Bewertung werden unabhängig voneinander festgehalten',
+        'Prüfpunkt Anwendung Konsequenz werden nachvollziehbar gegenübergestellt',
+        'Voraussetzung Merkmal Ergebnis werden in eigener Reihenfolge betrachtet',
+        'Kontrollziel Umsetzung Wirkung werden getrennt beschrieben',
+        'Orientierung Auswahl Maßnahme werden als eigene Kriterien geführt',
+        'Einordnung Prüfung Folgerung werden systematisch auseinandergehalten',
+        'Bedarf Eigenschaft Praxisbezug werden jeweils separat bewertet',
+        'Nutzungssituation Merkmal Kontrollbedarf werden eigenständig dokumentiert',
+        'Auswahlgrund Prüfungsschritt Alltagsfolge werden klar voneinander abgegrenzt',
+        'Sachlage Kriterium Handlung werden in getrennten Prüffeldern erfasst',
+        'Anwendungsfall Beobachtung Schlussfolgerung werden einzeln nachvollzogen',
+        'Vorgabe Kontrolle Eignungsentscheidung werden separat festgehalten',
+        'Prüfumfeld Eigenschaft Konsequenz werden deutlich unterschieden',
+    )
+    variant = variants[index % len(variants)]
+    return f'{base}; {tail}; {variant}; Prüfschritt {index + 1}.'
+"""
+    if old7 not in text:
+        raise SimBlocked("SIM_WORKER_DISTINCT_SENTENCE_PATCH_POINT_MISSING")
+    text=text.replace(old7,new7,1)
+
+    old8="    conclusion_target = 0.10 if os.environ.get('SYSTEM4_TEST_REAL7_PPM_MULTIFINDING', '').strip() == '1' else 0.09\n"
+    new8="    conclusion_target = 0.12\n"
+    if old8 not in text:
+        raise SimBlocked("SIM_WORKER_CONCLUSION_TARGET_PATCH_POINT_MISSING")
+    text=text.replace(old8,new8,1)
     old6="    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]\n    if not post_table_ids:\n        raise RuntimeError('TESTWORKER_POST_TABLE_FACT_POOL_EMPTY')\n"
     new6="    post_table_ids = [fact_id for fact_id in ids if fact_id not in table_fact_ids]\n    if not post_table_ids:\n        post_table_ids = list(ids)\n"
     if old6 not in text:
