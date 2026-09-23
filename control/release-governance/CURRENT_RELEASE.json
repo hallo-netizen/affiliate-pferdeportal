@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 118,
+  "generation": 119,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -1371,6 +1371,19 @@
       "hardtest_contains_full_category_copy": false,
       "hardtest_static_full_structure_refs_found": 0,
       "proven_statement": "THE 1.50.558_TO_1.50.559 DELTA INTRODUCES NO NEW STATIC FULL CATEGORY/PORTAL-STRUCTURE COPY"
+    },
+    "static_category_consumer": {
+      "status": "FOUND",
+      "path": "assets/breadcrumb-portal-map-v150310.json",
+      "contract": "PFTK_BREADCRUMB_PORTAL_MAP_V150310",
+      "historical_expected_category_count": 1124,
+      "historical_loader_source": "pferde-template-kit_V1.50.421.php",
+      "historical_loader_blob_sha": "bd26b65d033160ada9f98d249794b9911ab1fb2c",
+      "delta_150556_to_150558": "ONLY pferde-template-kit.php changed; no add/remove",
+      "delta_150558_to_150559": "ONLY pferde-template-kit.php changed; no add/remove",
+      "current_asset_exact_binding": "OPEN",
+      "next_required_binding": "EXACT_CURRENT_1_50_559_assets/breadcrumb-portal-map-v150310.json",
+      "wordpress_write": "NONE"
     }
   }
 }
