@@ -317,6 +317,69 @@ def _external_check(checker_cmd: str, item: dict[str, Any], body: str, revision:
     return result
 
 
+def checker_request(payload: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(payload,dict) or payload.get("contract")!="CONCEPT_AGENT_CHECK_REQUEST_V1":
+        raise Blocked("CHECK_REQUEST_INVALID")
+    if payload.get("publish_allowed") is not False:
+        raise Blocked("CHECK_REQUEST_PUBLISH_FORBIDDEN")
+    item=payload.get("item")
+    body=payload.get("body_html")
+    if not isinstance(item,dict) or not isinstance(body,str) or not body.strip():
+        raise Blocked("CHECK_REQUEST_PAYLOAD_INVALID")
+    idx=payload.get("item_index")
+    slot=str(payload.get("plan_slot") or "")
+    if item.get("item_index")!=idx or item.get("plan_slot")!=slot:
+        raise Blocked("CHECK_REQUEST_IDENTITY_MISMATCH")
+    authoring=item.get("authoring_binding")
+    if not isinstance(authoring,dict) or authoring.get("status")!="BOUND":
+        raise Blocked("CHECK_AUTHORING_BINDING_MISSING")
+    fact=authoring.get("fact_pack"); plan=authoring.get("production_plan_item")
+    if not isinstance(fact,dict) or not isinstance(plan,dict):
+        raise Blocked("CHECK_CONTEXT_MISSING")
+    system4=(Path(__file__).resolve().parent.parent/"isolated_system4")
+    if str(system4) not in sys.path:
+        sys.path.insert(0,str(system4))
+    import authoring_contract, content_guard, design_guard, production_checks
+    source_id=str(fact.get("source_snapshot_id") or "")
+    state={
+        "article":{k:item.get(k) for k in ("title","target_keyword","category","article_type","plan_slot")},
+        "source_snapshot_sha256":source_id,
+        "draft_markdown":body,
+        "draft_sha256":sha_bytes(body.encode("utf-8")),
+        "production_context":{"fact_pack":fact,"production_plan_item":plan},
+    }
+    try:
+        contract=authoring_contract.build(Path(__file__).resolve().parent.parent,state,fact,plan)
+        state["authoring_contract"]=contract
+        authoring_contract.validate_candidate(body,contract)
+        content_guard.validate_single_article(body,fact)
+        design_guard.validate_design_neutrality(body,str(item.get("article_type") or ""))
+        evidence=production_checks.run_all(Path(__file__).resolve().parent.parent,state,fact,plan)
+    except production_checks.RepairRequired as exc:
+        return {"status":"REPAIR_REQUIRED","checker":exc.checker,"findings":exc.findings,"content_sha256":state["draft_sha256"],"publish_allowed":False}
+    except (authoring_contract.AuthoringContractError,content_guard.ContentGuardError,design_guard.DesignGuardError) as exc:
+        code=str(exc)
+        return {"status":"REPAIR_REQUIRED","checker":"prewrite_guard","findings":[{"error_code":code,"reason":code,"repair_owner":"DRAFT_WORKER"}],"content_sha256":state["draft_sha256"],"publish_allowed":False}
+    except production_checks.ProductionCheckError as exc:
+        raise Blocked("CHECK_HARD_BLOCK:"+str(exc)) from exc
+    return {
+        "status":"PASS",
+        "content_sha256":state["draft_sha256"],
+        "languagetool":evidence["evidence"]["languagetool"],
+        "ppm":evidence["evidence"]["ppm679"],
+        "production_evidence":evidence,
+        "publish_allowed":False,
+    }
+
+def checker_stdio() -> int:
+    try:
+        payload=json.loads(sys.stdin.read())
+        print(json.dumps(checker_request(payload),ensure_ascii=False,separators=(",",":")))
+        return 0
+    except Exception as exc:
+        print("CONCEPT_AGENT_CHECKER_BLOCKED:"+str(exc),file=sys.stderr)
+        return 2
+
 def execute(binding: dict[str, Any], outdir: Path, mode: str, force_repair_index: int | None = None, negative_case: str | None = None) -> dict[str, Any]:
     run = normalize_binding(binding)
     outdir.mkdir(parents=True, exist_ok=True)
@@ -453,6 +516,7 @@ def main(argv: list[str] | None = None) -> int:
         p = sub.add_parser(name)
         p.add_argument("--out", required=True)
     run = sub.add_parser("run")
+    check = sub.add_parser("check")
     run.add_argument("--binding", required=True)
     run.add_argument("--binding-sha256")
     run.add_argument("--out", required=True)
