@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 119,
+  "generation": 120,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -1373,7 +1373,7 @@
       "proven_statement": "THE 1.50.558_TO_1.50.559 DELTA INTRODUCES NO NEW STATIC FULL CATEGORY/PORTAL-STRUCTURE COPY"
     },
     "static_category_consumer": {
-      "status": "FOUND",
+      "status": "FOUND_SECONDARY_RUNTIME_CONSUMER",
       "path": "assets/breadcrumb-portal-map-v150310.json",
       "contract": "PFTK_BREADCRUMB_PORTAL_MAP_V150310",
       "historical_expected_category_count": 1124,
@@ -1383,7 +1383,21 @@
       "delta_150558_to_150559": "ONLY pferde-template-kit.php changed; no add/remove",
       "current_asset_exact_binding": "OPEN",
       "next_required_binding": "EXACT_CURRENT_1_50_559_assets/breadcrumb-portal-map-v150310.json",
-      "wordpress_write": "NONE"
+      "wordpress_write": "NONE",
+      "runtime_role": {
+        "breadcrumb_primary": "REAL_WORDPRESS_MENU_STRUCTURE",
+        "breadcrumb_secondary": "STATIC_MAP_FALLBACK_AND_MENU_CHAIN_VALIDATION",
+        "leaf_hub_context": "STATIC_MAP_FIRST_THEN_TAXONOMY_PARENT",
+        "new_25_editorial_overlay": "25_OF_25_FIXED_EDITORIAL_LEAF_TEXTS_BOUND_IN_1_50_559"
+      },
+      "current_visible_failure": "NONE_CONFIRMED",
+      "current_hard_gate_failure": "NONE",
+      "master_0A_binding_required": true,
+      "exact_current_asset_binding": "OPEN",
+      "exact_tree_manifest_candidate": "ppa013-category-completion-manifest-20260922-194858-33451736b021.json",
+      "exact_tree_chain": "1.50.556_TREE -> ONLY_MAIN_CHANGED_TO_1.50.558 -> ONLY_MAIN_CHANGED_TO_1.50.559",
+      "minimal_delta_if_current_map_is_1124": "MAP 1124->1149 PLUS SYNCHRONOUS PHP COUNT BINDING 1124->1149 ONLY",
+      "delta_build_forbidden_until_exact_current_asset_bound": true
     }
   },
   "template_kit_150559_static_structure_consumer": {
