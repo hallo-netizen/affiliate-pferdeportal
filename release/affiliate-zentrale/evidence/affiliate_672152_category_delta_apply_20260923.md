@@ -1,6 +1,6 @@
 # Affiliate-Zentrale 6.72.152 – Kategorie-Delta – 2026-09-23
 
-Status: TWO_JSON_DELTA_COMMITTED_GATE_PENDING
+Status: PASS
 
 ## Gebundene Basis
 - Exakte 6.72.152-Basis: 27 Dateien
@@ -25,5 +25,10 @@ Alle übrigen 25 Source-Dateien bleiben byteidentisch zur exakt gebundenen 6.72.
 
 Kandidaten-Manifest SHA256: `28f6409a442bd966d921a60fb4a9f2e86a8454c5bed348f44f3f13825f86f821`
 Lokaler Kandidaten-ZIP SHA256: `b6dcf0231f96abe7d534d4368ea2cb4cb979483e38dd7bcff222829f8c5ca215`
+
+## Gebundener Abschluss-Gate
+- Category Integration Hard Baseline Run: `35889920034` -> SUCCESS
+- Geprüfter GitHub-HEAD: `923c8fb73a3d3cf212c1a84b25779f23190a7825`
+- Affiliate-Kategorieintegration 6.72.152: CLOSED PASS
 
 Kein WordPress-Write.
