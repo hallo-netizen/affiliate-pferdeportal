@@ -179,6 +179,22 @@ def localize_bound_sources(repo: Path):
     dump(runtimep,runtime)
     return td,server
 
+def hide_simulation_data_from_git_status(repo: Path) -> list[str]:
+    runtime=load(repo/"control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json")
+    paths=[
+        "control/startmaster0107/CURRENT_STATE.json",
+        "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
+        "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
+        "control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json",
+        str(runtime.get("source_requests_ref") or ""),
+    ]
+    paths=[p for p in paths if p]
+    run(["git","update-index","--assume-unchanged",*paths],cwd=repo,env=os.environ.copy())
+    dirty=run(["git","status","--porcelain","--untracked-files=no"],cwd=repo,env=os.environ.copy()).stdout.strip()
+    if dirty:
+        raise SimBlocked("SIMULATION_TRACKED_DIRTY_REMAINS:"+dirty)
+    return paths
+
 def build_sim_worker(repo: Path) -> Path:
     srcp=repo/"isolated_system4/deterministic_test_worker.py"
     text=srcp.read_text(encoding="utf-8")
@@ -325,11 +341,13 @@ def main() -> int:
     proof={"contract":"PFERDE_ATELIER_EXACT_1TO1_PRODUCTION_SIMULATION_V1","status":"RUNNING","production_code_source":"main","production_files_modified":False,"publish_allowed":False,"stages":[]}
     try:
         sim=setup_simulation_external_conditions(repo); proof["simulation_external_conditions"]=sim
+        td,server=localize_bound_sources(repo)
+        hidden=hide_simulation_data_from_git_status(repo)
+        proof["simulation_git_hidden_data_paths"]=hidden
         jar=write_lt_runtime_proof(repo); env["SYSTEM4_LANGUAGETOOL_JAR"]=str(jar)
         cp=run([sys.executable,repo/"control/startmaster0107/codex-production-runtime/codex_environment_preflight.py"],cwd=repo,env=env)
         preflight=last_json(cp.stdout); proof["stages"].append({"stage":"PRODUCTION_PREFLIGHT","status":preflight["status"]})
 
-        td,server=localize_bound_sources(repo)
         try:
             outer=last_json(run([sys.executable,repo/"control/output-quarantine/runtime_entry_gate.py","start"],cwd=repo,env=env).stdout)
             if outer.get("status")!="OFFICIAL_RUNTIME_ENTRY_PASS" or outer.get("sequence")!=107007:
