@@ -1,5 +1,10 @@
 # PPA-013 Kategorieabschluss – Zielvertrag 2026-09-22
 
+> **STATUS: ALS AKTUELLE ZIELQUELLE ABGELÖST.**  
+> Diese Datei bleibt ausschließlich der historische PPA-013-Teilzielvertrag vom 22.09.2026.  
+> Der verbindliche Zielvertrag für die laufende 30-Knoten-Kategorieintegration steht ausschließlich in `protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md`, Abschnitt **0A – Verbindlicher Zielvertrag / Definition of Done**.  
+> Dynamischer Status und NEXT ACTION stehen ausschließlich in `control/release-governance/CURRENT_RELEASE.json`.
+
 Rolle: autoritative Zielquelle für den ausdrücklich beauftragten Kategorie-/Darstellungsabschluss am Pferde Atelier.
 Diese Datei ist KEINE Status-/CURRENT-/NEXT-ACTION-Quelle. Dynamischer Stand ausschließlich in `control/release-governance/CURRENT_RELEASE.json`.
 
