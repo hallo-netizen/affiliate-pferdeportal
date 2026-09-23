@@ -115,7 +115,8 @@
     "SYSTEM4_RESTART_RECOVERY_PRECODEX_HARDLOCK_PR352_MERGED_B594FE069765B2BFD879459E12E92C04A883874C",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ENTRANCE_RUN_35435850207_PASS",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_HARDLOCK_RUN_35435849529_PASS",
-    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ACCEPTANCE_RUN_35435860769_PASS"
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ACCEPTANCE_RUN_35435860769_PASS",
+    "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -221,19 +222,14 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_16_BLOCKED_AFTER_RESTART_INTAKE_READY_PRODUCTIVE_CONTINUATION_NOT_BOUND",
+  "current_work_status": "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED_TEXT_START_LEGACY_RUNTIME_BINDING_OPEN",
   "current_execution_blocker": {
-    "code": "RESOLVED",
-    "error_class": false,
-    "classification": "RESOLVED",
-    "detail": "REAL7_CROSS_TASK_RESTART_RECOVERY_NOT_INTEGRATED is resolved. The validated restart-recovery transport and pre-Codex start hardlock were integrated by PR #352 on main b594fe069765b2bfd879459e12e92c04a883874c. Exact PR head 2634e7137de96567e04ab941c4715938274b60bb passed Deterministic Entrance Gate 35435850207, Immutable Base Hardlock 35435849529 and full System4A acceptance 35435860769. No Codex start and no publish occurred.",
-    "resolved_blocker": "REAL7_CROSS_TASK_RESTART_RECOVERY_NOT_INTEGRATED",
-    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
-    "validated_head_sha": "2634e7137de96567e04ab941c4715938274b60bb",
-    "acceptance_run": 35435860769,
-    "codex_start_allowed": false,
-    "publish_allowed": false,
-    "applies_to_concept_agent": false
+    "code": "TEXT_START_LEGACY_RUNTIME_BINDING_ACTIVE",
+    "error_class": true,
+    "classification": "OPEN",
+    "detail": "The text-start receiver still selects control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json and invokes python3 isolated_system4/parent_start.py start-current-bound. That can select the legacy runtime batch instead of the current Concept Agent metadata batch.",
+    "applies_to_concept_agent": true,
+    "publish_allowed": false
   },
   "external_execution_blocker": {
     "code": "CODEX_USAGE_LIMIT",
@@ -294,15 +290,15 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "BIND_PRODUCTIVE_RESTART_CONTINUATION_AFTER_INTAKE_READY",
-    "action": "In concept-agent/production-control, replace only the PREPARE_INTAKE_ONLY stop after successful RESTART_BATCH_FROM_INTAKE with the productive continuation through the existing unchanged intake/research/authoring path into the existing Concept Agent runner. Then rerun the unchanged one-article and multi-article positive/negative end-to-end acceptance, the mid-workflow re-entry cases, and the current real16 entrance. Do not change the article workflow or quality rules.",
-    "why": "The fixed controller now chooses RESTART_BATCH_FROM_INTAKE and the production workflow executes the restart intake successfully to CONCEPT_AGENT_INTAKE_READY. It still stops immediately afterward at PREPARE_INTAKE_ONLY, so the real end-to-end restart is not yet connected to productive article continuation.",
+    "goal": "REMOVE_TEXT_START_LEGACY_RUNTIME_BINDING",
+    "action": "Change only the existing text-start Pferdeatelier receiver so the current Concept Agent batch is selected from control/startmaster0107/CURRENT_STATE.json and its hash-bound concept_agent/current/PSERC_METADATA_SNAPSHOT.json. The Concept Agent path must no longer read control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json or invoke isolated_system4/parent_start.py start-current-bound as its batch selector. Preserve the existing text-start authorization proof, retry-until-MACHINE_READY rule, duplicate-start protection, protected-main checkout, no-publish rule, and all unchanged research/article quality and downstream LT 6.8 / PPM 6.7.9 / PSERC / ENDSTEMPEL rules. Then run positive and negative receiver tests. Do not create a new runner or alternate route.",
+    "why": "The single Current authority is now consolidated around the current 16-item metadata snapshot, but text-start still selects the legacy runtime inbox batch.",
     "forbidden": [
-      "reconstruct or search for the missing historical transport as a production path",
-      "choose a workflow stage or alternate route in chat",
-      "use legacy 7-item artifacts as authority",
-      "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL or article quality rules",
-      "publish or write to WordPress"
+      "start an article before this binding is corrected",
+      "use legacy 7-item runtime artifacts as Concept Agent authority",
+      "create a new workflow or runner",
+      "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
+      "publish"
     ]
   },
   "hobbyroom_pr": 331,
@@ -506,13 +502,15 @@
   },
   "concept_agent_current_batch": {
     "workflow": "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT",
-    "entry_ref": "concept_agent/START_HERE.md",
-    "work_binding_pointer_ref": "control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json",
+    "entry_ref": "concept_agent/CONTROL_ENTRY_POINTER.json",
+    "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
+    "current_authority_branch": "main",
+    "metadata_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
+    "metadata_snapshot_sha256": "3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761",
+    "metadata_snapshot_manifest_sha256": "2d1335445273c4ffc8946f25b67b4192ee2ebd669a90be97c67932325a98f789",
     "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
     "item_count": 16,
-    "intake_status": "PASS",
-    "research_binding_status": "PASS",
-    "authoring_binding_status": "PASS",
+    "metadata_snapshot_status": "PASS",
     "article_bodies_completed": 0,
     "next_article_index": 0,
     "languagetool_6_8_completed": 0,
@@ -521,14 +519,7 @@
     "endstempel_completed": false,
     "final_wordpress_import_file_present": false,
     "publish_allowed": false,
-    "cross_chat_transport_filename": "CONCEPT_AGENT_16_WORK_BINDING.json",
-    "cross_chat_transport_sha256": "f513387f54c44e70e7d8b6a9be34bb305e6e559a1689c5f88168d31d4b4611c4",
-    "control_authority_ref": "concept-agent/production-control:concept_agent/CONTROL_STATE.json",
-    "missing_transport_policy": "RESTART_BATCH_FROM_INTAKE",
-    "mismatched_transport_policy": "TERMINAL_SECURITY_BLOCK",
     "chat_may_choose_action": false,
-    "restart_execution_bound": false,
-    "first_open_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT",
-    "restart_intake_execution_status": "CONCEPT_AGENT_INTAKE_READY"
+    "first_open_blocker": "TEXT_START_LEGACY_RUNTIME_BINDING_ACTIVE"
   }
 }
