@@ -4,8 +4,6 @@ from __future__ import annotations
 import hashlib, json, re, sys
 from pathlib import Path
 
-import durable_state
-
 BINDING_CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
 CHECKPOINT_CONTRACT = "CONCEPT_AGENT_CURRENT_PROGRESS_V1"
 BATCH_STAGE_RESULT_CONTRACT = "CONCEPT_AGENT_BOUND_BATCH_STAGE_RESULT_V1"
@@ -504,9 +502,7 @@ def main(argv: list[str]) -> int:
             raise Blocked("COMMAND_REQUIRED")
         cmd = argv[1]
         if cmd == "resume" and len(argv) == 5:
-            binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
-            durable_state.assert_current(binding, state)
-            result = resume(binding, state, decision)
+            result = resume(load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4])))
             print(json.dumps(result, ensure_ascii=False, sort_keys=True))
             return 0
         if cmd == "attach-drafts":
@@ -514,27 +510,23 @@ def main(argv: list[str]) -> int:
         if cmd == "record-draft" and len(argv) == 8:
             binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
             result = record_draft(binding, state, decision, int(argv[5]), Path(argv[6]))
-            durable_state.persist_checkpoint_transition(binding, state, result)
             write(Path(argv[7]), result)
         elif cmd == "record-check" and len(argv) == 10:
             binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
             result = record_check(binding, state, decision, int(argv[5]), argv[6], load(Path(argv[7])), Path(argv[8]))
-            durable_state.persist_checkpoint_transition(binding, state, result)
             write(Path(argv[9]), result)
         elif cmd == "replace-draft" and len(argv) == 8:
             binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
             result = replace_draft(binding, state, decision, int(argv[5]), Path(argv[6]))
-            durable_state.persist_checkpoint_transition(binding, state, result)
             write(Path(argv[7]), result)
         elif cmd == "record-batch-stage" and len(argv) == 8:
             binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
             result = record_batch_stage(binding, state, decision, argv[5], load(Path(argv[6])))
-            durable_state.persist_checkpoint_transition(binding, state, result)
             write(Path(argv[7]), result)
         elif cmd == "materialize-current-draft" and len(argv) == 6:
-            binding, state, decision = load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4]))
-            durable_state.assert_current(binding, state)
-            result = materialize_current_draft(binding, state, decision, Path(argv[5]))
+            result = materialize_current_draft(
+                load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4])), Path(argv[5])
+            )
             print(json.dumps(result, ensure_ascii=False, sort_keys=True))
             return 0
         else:
