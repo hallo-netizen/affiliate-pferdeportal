@@ -221,7 +221,7 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_16_BLOCKED_FIXED_RESTART_EXECUTION_NOT_BOUND",
+  "current_work_status": "CONCEPT_AGENT_16_BLOCKED_AFTER_RESTART_INTAKE_READY_PRODUCTIVE_CONTINUATION_NOT_BOUND",
   "current_execution_blocker": {
     "code": "RESOLVED",
     "error_class": false,
@@ -292,11 +292,11 @@
   "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "FIXED_RESTART_ACTION_NOT_EXECUTED; CONTROL_STATE_IS_AUTHORITY",
+  "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "BIND_FIXED_RESTART_EXECUTION",
-    "action": "In concept-agent/production-control, bind RESTART_BATCH_FROM_INTAKE to the actual GitHub intake/restart execution instead of writing RESTART_REQUIRED and exiting 20. Then rerun the same 1-article and multi-article positive/negative acceptance and the current real16 entrance. Do not change the article workflow or quality rules.",
-    "why": "The fixed controller already chooses RESTART_BATCH_FROM_INTAKE correctly, but the production workflow currently stops after writing CONCEPT_AGENT_RESTART_REQUIRED_V1.json. Therefore the no-chat-choice end-to-end restart is not yet executed automatically.",
+    "goal": "BIND_PRODUCTIVE_RESTART_CONTINUATION_AFTER_INTAKE_READY",
+    "action": "In concept-agent/production-control, replace only the PREPARE_INTAKE_ONLY stop after successful RESTART_BATCH_FROM_INTAKE with the productive continuation through the existing unchanged intake/research/authoring path into the existing Concept Agent runner. Then rerun the unchanged one-article and multi-article positive/negative end-to-end acceptance, the mid-workflow re-entry cases, and the current real16 entrance. Do not change the article workflow or quality rules.",
+    "why": "The fixed controller now chooses RESTART_BATCH_FROM_INTAKE and the production workflow executes the restart intake successfully to CONCEPT_AGENT_INTAKE_READY. It still stops immediately afterward at PREPARE_INTAKE_ONLY, so the real end-to-end restart is not yet connected to productive article continuation.",
     "forbidden": [
       "reconstruct or search for the missing historical transport as a production path",
       "choose a workflow stage or alternate route in chat",
@@ -528,6 +528,7 @@
     "mismatched_transport_policy": "TERMINAL_SECURITY_BLOCK",
     "chat_may_choose_action": false,
     "restart_execution_bound": false,
-    "first_open_blocker": "FIXED_RESTART_ACTION_NOT_EXECUTED"
+    "first_open_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT",
+    "restart_intake_execution_status": "CONCEPT_AGENT_INTAKE_READY"
   }
 }
