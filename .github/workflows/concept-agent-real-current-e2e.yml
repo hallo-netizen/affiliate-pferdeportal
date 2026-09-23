@@ -83,7 +83,7 @@ jobs:
           must_block('NEG_BATCH_HASH',lambda:intake_bridge.prepare(bad),'BATCH_SHA_MISMATCH')
 
           bad=copy.deepcopy(research); bad['items'][0]['sources'][0]['snapshot_sha256']='0'*64
-          must_block('NEG_RESEARCH_EVIDENCE_HASH',lambda:intake_bridge.bind_research(req,bad),'SOURCE_EVIDENCE_HASH_MISMATCH')
+          must_block('NEG_RESEARCH_EVIDENCE_HASH',lambda:intake_bridge.bind_research(req,bad),'RESEARCH_EVIDENCE_HASH_MISMATCH')
 
           bad=copy.deepcopy(authoring); bad['items'][0]['title']='Manipuliert'
           must_block('NEG_AUTHORING_METADATA_DRIFT',lambda:intake_bridge.build_work_binding(req,bound,bad),'AUTHORING_METADATA_DRIFT')
