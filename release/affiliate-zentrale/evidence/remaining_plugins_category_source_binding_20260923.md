@@ -168,3 +168,42 @@ Folgerung für den laufenden Kategorieauftrag:
 - Deshalb bleibt fail-closed offen, ob die aktuell installierte 1.50.559-Datei dieses Assets noch exakt den 1124er-Vertrag enthält.
 - Nächster enger Bindungspunkt ist ausschließlich die aktuell installierte 1.50.559-Datei `assets/breadcrumb-portal-map-v150310.json` samt SHA/Count/Schema.
 - Falls Current weiterhin 1124 enthält, ist genau diese statische Ableitung auf 1149 gegen die autoritative zentrale Kategorienwahrheit zu aktualisieren; keine Text-/Designarbeit und kein WordPress-Write vor dem vorgeschriebenen Dry-Run.
+
+
+### Rolle der Breadcrumb-Map im tatsächlichen Runtimepfad
+
+Direkt aus dem historischen, hashgebundenen Template-Kit-Quellcode geprüft:
+
+1. Breadcrumbs:
+- Primärquelle ist `breadcrumb_menu_page_chain_v150310()`, also die reale WordPress-Menüstruktur.
+- Nur wenn dieser Menüpfad leer bleibt, fällt `breadcrumb_portal_page_chain_v150310()` auf `breadcrumb_contract_page_chain_v150310()` und damit auf `assets/breadcrumb-portal-map-v150310.json` zurück.
+- Für einen Slug, der nicht in der Map steht, liefert `breadcrumb_expected_page_slugs_v150310()` eine leere Erwartung; der Menüpfad wird dadurch **nicht** blockiert.
+- Das erklärt den Nutzer-Readback: Breadcrumbs funktionieren auch für die neuen Kategorien, obwohl eine alte 1124er Map möglich ist.
+
+2. Leaf-/Hub-Kontext:
+- `leaf_category_hub_context_v150396()` liest dieselbe Breadcrumb-Map, um den übergeordneten Hubtitel abzuleiten.
+- Fehlt der Slug in der Map, wird nur auf den echten Taxonomie-Parent zurückgefallen.
+- Die Portal-Leaf-Kategorien sind im alten Vertrag technisch flach; bei `parent=0` kann dieser Fallback leer bleiben.
+- Für die 25 neuen Kategorien ist das im aktuellen 1.50.559-Stand jedoch ohne sichtbare Auswirkung auf den Introtext, weil das 1.0.3-Artefakt 25/25 feste Editorial-Leaftexte in den bestehenden PPA-013-Katalog schreibt und der Hub-Kontext nur für den automatisch generierten Fallback-Introtext verwendet wird.
+
+3. Bestehende Hard-Gates:
+- `CATEGORY_INTEGRATION_HOBBYRAUM/audit_current.py` kennt `breadcrumb-portal-map-v150310.json` ausdrücklich als historische Strukturreferenz.
+- Der aktuelle Hard-Audit verlangt **keinen** 1124->1149-Countwechsel dieser Datei; er protokolliert die Referenz nur im historischen read-only Template-Kit-Beleg.
+- Somit liegt aktuell kein Produktionsfehler und kein bereits vorhandener Gate-FAIL wegen dieser Datei vor.
+
+4. Warum der Verbraucher trotzdem offen bleibt:
+- Abschnitt 0A des Category Change Masters verlangt für **jedes tatsächlich installierte Plugin**, das Kategorien/Portalstruktur konsumiert, die exakte aktuelle Quelle.
+- Die Breadcrumb-Map ist eine tatsächliche statische Kategorie-/Strukturkopie und damit innerhalb dieses Zielvertrags ein Verbraucher, auch wenn sie nur sekundär verwendet wird.
+- Deshalb darf sie nicht allein aufgrund funktionierender Live-Breadcrumbs ignoriert werden.
+
+5. Minimaler möglicher Delta, falls die exakte aktuelle 1.50.559-Datei weiterhin 1124 Kategorien enthält:
+- `assets/breadcrumb-portal-map-v150310.json`: 1124 -> 1149 Produktionskategorien.
+- die zugehörige harte PHP-Prüfung `category_count === 1124` und `count(categories) === 1124` müsste synchron auf 1149 gebunden werden.
+- keine sonstige Design-/Text-/Breadcrumb-Logik ändern.
+- Dieser Delta darf **nicht** gebaut werden, bevor die exakte aktuelle 1.50.559-Quelle/Map hashgebunden ist.
+
+6. Exakter Tree-Nachweis:
+- Governance-Apply 1.50.556 -> 1.50.558: `plugin_tree_diff.changed = ["pferde-template-kit.php"]`, `added=[]`, `removed=[]`.
+- gespeichertes Backup-Manifest: `ppa013-category-completion-manifest-20260922-194858-33451736b021.json`.
+- 1.50.558 -> 1.50.559 erzwingt ebenfalls ausschließlich `pferde-template-kit.php` als geänderte Datei.
+- Damit ist jede unveränderte Asset-Datei zwischen 1.50.556 und 1.50.559 byteidentisch; der noch fehlende Punkt ist ausschließlich der exakte Hash/Inhalt der aktuellen Breadcrumb-Map aus dem 1.50.556-Tree-Manifest oder einem aktuellen Vollquellbaum.
