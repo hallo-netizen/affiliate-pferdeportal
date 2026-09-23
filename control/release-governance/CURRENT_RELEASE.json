@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 111,
+  "generation": 112,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,8 +8,8 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
-    "source_file_count": 26,
+    "manifest_sha256": "719cd6ce7b435977b114af3a97ace544a3d8e6b1094fea1c87e785284a79f372",
+    "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
     "guard_role": "VERIFY_ONLY"
@@ -35,15 +35,15 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.105",
-    "status": "CANONICAL_6_72_105_STALE_VS_LIVE_TESTED_6_72_145_AND_HARDTESTED_6_72_147_NO_RELEASE",
+    "version": "6.72.152",
+    "status": "CATEGORY_INTEGRATION_6_72_152_EXACT_BASE_SOURCE_COMMITTED_GATE_PENDING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "ab1f4f54a7b0743e00ccbde5e1c11aa278a790ca47e5f72348bd125be9eabf29",
-    "source_file_count": 26,
-    "candidate_reference_artifact_sha256": null,
+    "current_source_manifest_sha256": "719cd6ce7b435977b114af3a97ace544a3d8e6b1094fea1c87e785284a79f372",
+    "source_file_count": 27,
+    "candidate_reference_artifact_sha256": "32443719e5254ac82e0ebe290d7b52c6790f87951c3b2597874b6d477e80e95c",
     "final_artifact_ref": null,
     "final_artifact_sha256": null
   },
@@ -233,9 +233,9 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_GITHUB_OFFICE_SOURCE_BINDING",
+    "state": "CATEGORY_INTEGRATION_AFFILIATE_672152_BASE_BOUND_GATE_PENDING",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. USE GITHUB OFFICES/PLUGIN OFFICE AND TECHNICAL GITHUB SOURCES ONLY; DO NOT USE SERVER OR LIBRARY AS SOURCE. CENTRAL KATEGORIEN.tsv IS THE SOLE CATEGORY AUTHORITY. COMPLETED: PPM679 SIGNED CATEGORY/SLOT DELTA BUILD-INTEGRITY PASS; PSERC 0.28.23 DYNAMIC ACCEPTANCE OF REAL TERM IDS 1577-1601 PASS WITH NO 25-CATEGORY CODE HARDCODING; PSTE 0.57.6 EXACT GITHUB PASS SOURCE BOUND TO RUN 35693065234 / ARTIFACT 10679790400 / ZIP SHA256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f AND ITS STATIC fixtures/portal-category-map-v1.json IS CONFIRMED AT 1124 ENTRIES, SO PSTE CATEGORY DELTA IS EXACTLY +25 TO 1149 IN THAT ONE TECHNICAL MAP ONLY. AFFILIATE CATEGORY CANDIDATE JSON BYTES REMAIN ALREADY HARDTESTED AND MUST NOT BE REBUILT. FIRST OPEN BLOCKER/NEXT ACTION: BIND THE EXACT CURRENT AFFILIATE-ZENTRALE 6.72.152 FULL SOURCE FROM PLUGINS-BUERO -> AFFILIATE FACHBUERO -> TECHNICAL GITHUB SOURCE. ONCE HASH-BOUND, REPLACE ONLY portal-structure-v279.json AND ebay-portal-catalog-v2.json WITH THE RECOVERED HARDTESTED CATEGORY BYTES; ALL OTHER FILES MUST REMAIN BYTE-IDENTICAL. DO NOT TOUCH TEXTS, TILE PREVIEWS, DESIGN, PLUGIN CONCEPTS, PERFORMANCE, PROVIDER, RANKING OR BANNER LOGIC. DO NOT REPEAT COMPLETED PROOFS. NO WORDPRESS WRITE.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. EXACT AFFILIATE-ZENTRALE 6.72.152 BASE SOURCE HAS BEEN DIRECTLY COMMITTED FROM THE USER-SUPPLIED INSTALLER SHA256 32443719e5254ac82e0ebe290d7b52c6790f87951c3b2597874b6d477e80e95c. RUN THE EXISTING BOUND GOVERNANCE/SOURCE/TREE GATE. DO NOT MODIFY PERFORMANCE, PROVIDER, RANKING, BANNER, TEXT OR DESIGN LOGIC. AFTER HASH PASS, REPLACE ONLY portal-structure-v279.json AND ebay-portal-catalog-v2.json WITH THE ALREADY-HARDTESTED RECOVERED CATEGORY BYTES. NO WORDPRESS WRITE.",
     "completion_condition": "EXACT AFFILIATE-ZENTRALE 6.72.152 FULL GITHUB SOURCE IS HASH-BOUND; ONLY THE TWO ALREADY-HARDTESTED CATEGORY JSON FILES ARE REPLACED; ALL OTHER 6.72.152 FILES ARE BYTE-IDENTICAL; FOCUSED CATEGORY DELTA POSITIVE/NEGATIVE/UNCHANGED-REGRESSION PASSES WITHOUT RE-RUNNING UNRELATED PROOFS.",
     "after_completion_action": "NEXT, APPLY THE PSTE 0.57.6 CATEGORY-ONLY +25 DELTA TO fixtures/portal-category-map-v1.json (1124->1149) AGAINST THE EXACT GITHUB PASS SOURCE; THEN CLASSIFY THE REMAINING INSTALLED PLUGINS FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES ONLY. PSERC REQUIRES ONLY FRESH STRUCTURE/PLAN REGENERATION AFTER PSTE; NO 25-CATEGORY CODE PATCH. NO WORDPRESS APPLY BEFORE CATEGORY E2E + DRY-RUN PASS.",
     "no_optional_detours": true,
@@ -247,7 +247,7 @@
       "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_672152_exact_base_source_binding_20260923.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-23",
-    "current_first_blocker": "AFFILIATE_6_72_152_EXACT_GITHUB_FULL_SOURCE_BINDING",
+    "current_first_blocker": "AFFILIATE_6_72_152_BASE_SOURCE_BOUND_GATE_PENDING",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1257,14 +1257,18 @@
     },
     "consumer_status": {
       "affiliate_672152": {
-        "status": "FIRST_BLOCKER_EXACT_GITHUB_FULL_SOURCE_BINDING_PENDING",
+        "status": "EXACT_6_72_152_BASE_SOURCE_COMMITTED_GATE_PENDING",
         "version": "6.72.152",
         "portal_candidate_sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
         "ebay_candidate_sha256": "6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2",
         "allowed_delta_files": [
           "affiliate-portal-router/assets/portal-structure-v279.json",
           "affiliate-portal-router/assets/ebay-portal-catalog-v2.json"
-        ]
+        ],
+        "base_source_zip_sha256": "32443719e5254ac82e0ebe290d7b52c6790f87951c3b2597874b6d477e80e95c",
+        "base_source_manifest_sha256": "719cd6ce7b435977b114af3a97ace544a3d8e6b1094fea1c87e785284a79f372",
+        "base_source_file_count": 27,
+        "category_json_applied": false
       },
       "ppm_679": {
         "status": "CLOSED_SIGNED_BUILD_INTEGRITY_PASS",

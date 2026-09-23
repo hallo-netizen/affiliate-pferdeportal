@@ -189,6 +189,13 @@ trait PPAR_Housekeeping_Trait {
         try {
             $db=$this->housekeeping_db_pass();
             $disk=$this->housekeeping_disk_pass();
+            // V6.72.71: Derselbe zentrale Tageslauf aktualisiert die belegten
+            // Provider-Originalstatistiken. Keine Provider-Cron-Inseln.
+            if (method_exists($this,'partner_analytics_refresh_all_reports')) {
+                try { $this->partner_analytics_refresh_all_reports(); } catch (Throwable $analytics_error) {
+                    update_option('ppar_partner_analytics_last_error_v1',array('at'=>time(),'message'=>sanitize_text_field($analytics_error->getMessage())),false);
+                }
+            }
             $state['db_deleted']=absint($db['deleted']??0);
             $state['db_compacted']=absint($db['compacted']??0);
             $state['files_deleted']=absint($disk['deleted']??0);

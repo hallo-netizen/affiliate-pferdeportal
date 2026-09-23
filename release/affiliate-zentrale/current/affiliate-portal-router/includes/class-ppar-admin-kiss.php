@@ -31,7 +31,7 @@ final class PPAR_Affiliate_Admin_KISS {
 
     private static function hidden_legacy_slugs() {
         return array(
-            'affiliate-portal-creative-library','affiliate-portal-outputs','affiliate-portal-control',
+            'affiliate-portal-outputs','affiliate-portal-control',
             'affiliate-portal-creatives','affiliate-portal-assignments','affiliate-portal-preview',
             'affiliate-portal-ebay-business','affiliate-portal-coverage','affiliate-portal-article-hybrid',
             'affiliate-portal-networks','affiliate-portal-provider-awin','affiliate-portal-provider-adcell',
@@ -96,7 +96,7 @@ final class PPAR_Affiliate_Admin_KISS {
         if (class_exists('PPAR_Affiliate_Source_Plan')) { self::source_cards(PPAR_Affiliate_Source_Plan::product_sources()); }
         echo '<p style="display:flex;gap:8px;flex-wrap:wrap">';
         echo self::button('Produktquellen & Deal-Radar','affiliate-portal-deals',true);
-        echo self::button('Import & Auswahl','affiliate-portal-creative-library');
+        echo self::button('Banner & Werbemittel','affiliate-portal-creative-library');
         echo self::button('eBay Produktzuordnung','affiliate-portal-ebay-business');
         echo self::button('Portalabdeckung','affiliate-portal-coverage');
         echo self::button('Vorschau','affiliate-portal-preview');
@@ -114,7 +114,7 @@ final class PPAR_Affiliate_Admin_KISS {
             self::source_cards(array_merge((array)PPAR_Affiliate_Source_Plan::product_sources(),(array)PPAR_Affiliate_Source_Plan::banner_networks()));
         }
         echo '<p style="display:flex;gap:8px;flex-wrap:wrap">';
-        echo self::button('Partner & Einnahmen','affiliate-portal-stats',true);
+        echo self::button('Partner & Einnahmen','affiliate-portal-kiss-partners',true);
         echo self::button('Partner','affiliate-portal-partners');
         echo self::button('Werbemittel','affiliate-portal-creatives');
         echo self::button('Digistore24','affiliate-portal-provider-digistore24');

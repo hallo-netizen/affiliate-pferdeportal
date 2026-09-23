@@ -16,6 +16,111 @@ if (!defined('ABSPATH')) {
  *   Verkäuferkontotypen und andere Marktplätze werden fail-closed blockiert.
  */
 trait PPAR_Ebay_Trait {
+    private $ebay_topic_similarity_signature_cache = array();
+
+    private function ebay_topic_similarity_signature($value) {
+        $value = (string) $value;
+        if (isset($this->ebay_topic_similarity_signature_cache[$value])) {
+            return $this->ebay_topic_similarity_signature_cache[$value];
+        }
+        $length = strlen($value);
+        $freq = array();
+        for ($i = 0; $i < $length; $i++) {
+            $char = $value[$i];
+            if (!isset($freq[$char])) { $freq[$char] = 0; }
+            $freq[$char]++;
+        }
+        asort($freq, SORT_NUMERIC);
+        return $this->ebay_topic_similarity_signature_cache[$value] = array('length'=>$length, 'freq'=>$freq);
+    }
+
+    private function ebay_topic_titles_duplicate_v672146($title, $known, $title_signature = null, $known_signature = null) {
+        $title = (string) $title;
+        $known = (string) $known;
+        if ($title === '' || $known === '') { return false; }
+        if ($title === $known) { return true; }
+        $a = is_array($title_signature) ? $title_signature : $this->ebay_topic_similarity_signature($title);
+        $b = is_array($known_signature) ? $known_signature : $this->ebay_topic_similarity_signature($known);
+        $la = (int) ($a['length'] ?? 0);
+        $lb = (int) ($b['length'] ?? 0);
+        if ($la <= 0 || $lb <= 0) { return false; }
+        $sum_len = $la + $lb;
+        $min_len = min($la, $lb);
+        if ((50 * $min_len) < (23 * $sum_len)) { return false; }
+        $fa = is_array($a['freq'] ?? null) ? $a['freq'] : array();
+        $fb = is_array($b['freq'] ?? null) ? $b['freq'] : array();
+        $remaining = $la;
+        if (count($fa) > count($fb)) { $tmp=$fa; $fa=$fb; $fb=$tmp; $remaining=$lb; }
+        $required_common = intdiv((23 * $sum_len) + 49, 50);
+        $common = 0;
+        foreach ($fa as $char=>$count) {
+            $count=(int)$count; $remaining-=$count;
+            if (isset($fb[$char])) { $common += min($count,(int)$fb[$char]); }
+            if (($common+$remaining) < $required_common) { return false; }
+        }
+        if ($common < $required_common) { return false; }
+        similar_text($title,$known,$pct);
+        return $pct >= 92.0;
+    }
+
+    private $ebay_business_campaign_source_row_cache = array();
+    private $ebay_business_campaign_source_row_cache_primed = false;
+    private $ebay_catalog_rules_request_cache = null;
+    private $ebay_settings_request_cache = null;
+
+    private function ebay_request_local_read_cache_allowed() {
+        if ((function_exists('is_admin') && is_admin())
+            || (defined('DOING_CRON') && DOING_CRON)
+            || (defined('REST_REQUEST') && REST_REQUEST)
+            || (defined('WP_CLI') && WP_CLI)
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+            return false;
+        }
+        return true;
+    }
+
+    private function ebay_prime_business_campaign_source_row_cache() {
+        if ($this->ebay_business_campaign_source_row_cache_primed || !$this->ebay_request_local_read_cache_allowed() || !method_exists($this, 'get_campaigns')) {
+            return;
+        }
+        $hashes = array();
+        foreach ((array) $this->get_campaigns() as $campaign) {
+            if (!is_array($campaign) || sanitize_key((string) ($campaign['network'] ?? '')) !== 'ebay') { continue; }
+            $post_id = absint($campaign['post_id'] ?? 0);
+            if ($post_id <= 0 || absint(get_post_meta($post_id, '_ppar_ebay_business_auto', true)) !== 1) { continue; }
+            $hash = strtolower(sanitize_text_field((string) get_post_meta($post_id, '_ppar_creative_identity_hash', true)));
+            if (preg_match('/^[a-f0-9]{64}$/', $hash)) { $hashes[$hash] = true; }
+        }
+        $hashes = array_keys($hashes);
+        if (!$hashes) {
+            $this->ebay_business_campaign_source_row_cache_primed = true;
+            return;
+        }
+        global $wpdb;
+        $table = $this->ebay_items_table();
+        $all_ok = true;
+        foreach (array_chunk($hashes, 1000) as $chunk) {
+            $placeholders = implode(',', array_fill(0, count($chunk), '%s'));
+            $sql = $wpdb->prepare("SELECT * FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC", $chunk);
+            $rows = $wpdb->get_results($sql, ARRAY_A);
+            if (!is_array($rows)) { $all_ok = false; continue; }
+            foreach ($chunk as $hash) {
+                $this->ebay_business_campaign_source_row_cache['BUSINESS|' . $hash] = array();
+            }
+            foreach ($rows as $row) {
+                if (!is_array($row)) { continue; }
+                $hash = strtolower(sanitize_text_field((string) ($row['creative_identity_hash'] ?? '')));
+                $cache_key = 'BUSINESS|' . $hash;
+                if (preg_match('/^[a-f0-9]{64}$/', $hash)
+                    && array_key_exists($cache_key, $this->ebay_business_campaign_source_row_cache)
+                    && !$this->ebay_business_campaign_source_row_cache[$cache_key]) {
+                    $this->ebay_business_campaign_source_row_cache[$cache_key] = $row;
+                }
+            }
+        }
+        if ($all_ok) { $this->ebay_business_campaign_source_row_cache_primed = true; }
+    }
+
 
     /**
      * Request-local source cache. Public listing queries already resolve eBay
@@ -97,9 +202,15 @@ trait PPAR_Ebay_Trait {
     }
 
     private function ebay_catalog_rules() {
+        $cache_allowed = $this->ebay_request_local_read_cache_allowed();
+        if ($cache_allowed && is_array($this->ebay_catalog_rules_request_cache)) {
+            return $this->ebay_catalog_rules_request_cache;
+        }
         $catalog = $this->ebay_portal_catalog();
         if (is_wp_error($catalog)) { return array(); }
-        return $this->ebay_normalize_rules((array) ($catalog['search_rules'] ?? array()));
+        $rules = $this->ebay_normalize_rules((array) ($catalog['search_rules'] ?? array()));
+        if ($cache_allowed) { $this->ebay_catalog_rules_request_cache = $rules; }
+        return $rules;
     }
 
     private function ebay_catalog_integrity() {
@@ -1231,6 +1342,10 @@ trait PPAR_Ebay_Trait {
         if (isset($this->ebay_run_settings_override) && is_array($this->ebay_run_settings_override)) {
             return $this->ebay_normalize_settings($this->ebay_run_settings_override, true);
         }
+        $cache_allowed = $this->ebay_request_local_read_cache_allowed();
+        if ($cache_allowed && is_array($this->ebay_settings_request_cache)) {
+            return $this->ebay_settings_request_cache;
+        }
         $stored = get_option(self::OPTION_NETWORK_EBAY, array());
         $stored = is_array($stored) ? $stored : array();
         $settings = $this->ebay_normalize_settings(array_merge($this->ebay_settings_defaults(), $stored), true);
@@ -1254,6 +1369,7 @@ trait PPAR_Ebay_Trait {
             $campaign = preg_replace('/\D+/', '', (string) PPAR_EBAY_EPN_CAMPAIGN_ID);
             if (strlen($campaign) === 10) { $settings['epn_campaign_id'] = $campaign; }
         }
+        if ($cache_allowed) { $this->ebay_settings_request_cache = $settings; }
         return $settings;
     }
 
@@ -2640,12 +2756,24 @@ trait PPAR_Ebay_Trait {
         if (absint(get_post_meta($post_id, '_ppar_ebay_business_auto', true)) !== 1) { return array(); }
         $hash = strtolower(sanitize_text_field((string) get_post_meta($post_id, '_ppar_creative_identity_hash', true)));
         if (!preg_match('/^[a-f0-9]{64}$/', $hash)) { return array(); }
+        $cache_key = 'BUSINESS|' . $hash;
+        $use_cache = $this->ebay_request_local_read_cache_allowed();
+        if ($use_cache) {
+            $this->ebay_prime_business_campaign_source_row_cache();
+            if (array_key_exists($cache_key, $this->ebay_business_campaign_source_row_cache)) {
+                return $this->ebay_business_campaign_source_row_cache[$cache_key];
+            }
+        }
         global $wpdb;
         $row = $wpdb->get_row($wpdb->prepare(
             "SELECT * FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",
             $hash
         ), ARRAY_A);
-        return is_array($row) ? $row : array();
+        $result = is_array($row) ? $row : array();
+        if ($use_cache) {
+            $this->ebay_business_campaign_source_row_cache[$cache_key] = $result;
+        }
+        return $result;
     }
 
     /**
@@ -2754,7 +2882,7 @@ trait PPAR_Ebay_Trait {
         // Pass 1 keeps the best offer per seller. Pass 2 appends further valid
         // offers from an already represented seller if otherwise a 3-card block
         // would stay needlessly empty. Near-identical products remain suppressed.
-        $out = array(); $deferred = array(); $seen_sellers = array(); $seen_titles = array();
+        $out = array(); $deferred = array(); $seen_sellers = array(); $seen_titles = array(); $seen_title_signatures = array();
         foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign) || sanitize_key((string) ($campaign['network'] ?? '')) !== 'ebay') {
@@ -2765,11 +2893,11 @@ trait PPAR_Ebay_Trait {
                 $seller = $this->ebay_business_curation_key((string) get_post_meta(absint($campaign['_post_id'] ?? $campaign['post_id'] ?? 0), '_ppar_ebay_seller_username', true));
             }
             $title = $this->ebay_topic_text((string) ($campaign['title'] ?? $campaign['name'] ?? ''));
+            $title_signature = $title !== '' ? $this->ebay_topic_similarity_signature($title) : null;
             $duplicate = false;
-            foreach ($seen_titles as $known) {
-                if ($title === '' || $known === '') { continue; }
-                similar_text($title, $known, $pct);
-                if ($pct >= 92.0) { $duplicate = true; break; }
+            foreach ($seen_titles as $known_index => $known) {
+                $known_signature = $seen_title_signatures[$known_index] ?? null;
+                if ($this->ebay_topic_titles_duplicate_v672146($title, $known, $title_signature, $known_signature)) { $duplicate = true; break; }
             }
             if ($duplicate) { continue; }
             if ($seller !== '' && isset($seen_sellers[$seller])) {
@@ -2777,21 +2905,21 @@ trait PPAR_Ebay_Trait {
                 continue;
             }
             if ($seller !== '') { $seen_sellers[$seller] = true; }
-            if ($title !== '') { $seen_titles[] = $title; }
+            if ($title !== '') { $seen_titles[] = $title; $seen_title_signatures[] = $title_signature; }
             $out[] = $candidate;
         }
         foreach ($deferred as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign)) { continue; }
             $title = $this->ebay_topic_text((string) ($campaign['title'] ?? $campaign['name'] ?? ''));
+            $title_signature = $title !== '' ? $this->ebay_topic_similarity_signature($title) : null;
             $duplicate = false;
-            foreach ($seen_titles as $known) {
-                if ($title === '' || $known === '') { continue; }
-                similar_text($title, $known, $pct);
-                if ($pct >= 92.0) { $duplicate = true; break; }
+            foreach ($seen_titles as $known_index => $known) {
+                $known_signature = $seen_title_signatures[$known_index] ?? null;
+                if ($this->ebay_topic_titles_duplicate_v672146($title, $known, $title_signature, $known_signature)) { $duplicate = true; break; }
             }
             if ($duplicate) { continue; }
-            if ($title !== '') { $seen_titles[] = $title; }
+            if ($title !== '') { $seen_titles[] = $title; $seen_title_signatures[] = $title_signature; }
             $out[] = $candidate;
         }
         $out = array_values($out);
@@ -8975,9 +9103,15 @@ trait PPAR_Ebay_Trait {
      */
     /** Resolve the exact HivePress parent term without relying on global query state. */
     private function ebay_private_parent_term() {
+        static $resolved = false;
+        static $cached_term = null;
+        $cache_allowed = method_exists($this, 'ebay_request_local_read_cache_allowed') && $this->ebay_request_local_read_cache_allowed();
+        if ($cache_allowed && $resolved) { return $cached_term; }
         if (!function_exists('get_term_by')) { return null; }
         $term = get_term_by('slug', 'private-anzeigen', 'hp_listing_category');
-        return is_object($term) ? $term : null;
+        $term = is_object($term) ? $term : null;
+        if ($cache_allowed) { $cached_term = $term; $resolved = true; }
+        return $term;
     }
 
     /** Check whether the passed WP_Query actually targets Private Anzeigen. */

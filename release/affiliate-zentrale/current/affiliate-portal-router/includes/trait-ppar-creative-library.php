@@ -26,6 +26,12 @@ trait PPAR_Creative_Library_Trait {
         if ($installed === self::CREATIVE_LIBRARY_SCHEMA_VERSION) {
             return;
         }
+        // AFF-ERR-039: 6.72.114 wrote marker 3.1 without a table-contract change.
+        // Treat it as compatible here; recovery of its destination metadata is explicit,
+        // never a mass asset re-verification on admin_init.
+        if ($installed === '3.1' && self::CREATIVE_LIBRARY_SCHEMA_VERSION === '3.0') {
+            return;
+        }
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         global $wpdb;
         $table = $this->creative_library_table();
@@ -563,7 +569,7 @@ trait PPAR_Creative_Library_Trait {
             return '';
         }
         parse_str($query, $params);
-        foreach (array('ued','url','destination','destination_url','desturl','redirect','redirect_url','target') as $key) {
+        foreach (array('param0','ued','url','destination','destination_url','desturl','redirect','redirect_url','target') as $key) {
             if (!isset($params[$key]) || !is_scalar($params[$key])) {
                 continue;
             }
@@ -988,11 +994,11 @@ trait PPAR_Creative_Library_Trait {
         $ids = array_values(array_filter(array_map('absint', (array) ($_POST['creative_ids'] ?? array()))));
         $mode = sanitize_key((string) ($_POST['selection_mode'] ?? 'selected'));
         $portal_key = sanitize_key((string) ($_POST['portal_key'] ?? ''));
-        $allowed = array('selected','unselected','plan_all','prepare_all','portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic');
+        $allowed = array('selected','unselected','plan_all','prepare_all','portal_use_auto','portal_remove_auto','portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic');
         if (!in_array($mode, $allowed, true)) {
             $mode = 'selected';
         }
-        if (in_array($mode, array('portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic'), true)) {
+        if (in_array($mode, array('portal_use_auto','portal_remove_auto','portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic'), true)) {
             $portal = method_exists($this, 'output_portal_by_key') ? $this->output_portal_by_key($portal_key, true) : new WP_Error('portal_model_missing', 'Portalmodell fehlt.');
             if (is_wp_error($portal)) {
                 $this->creative_library_redirect('failed', $portal->get_error_message());
@@ -1020,8 +1026,40 @@ trait PPAR_Creative_Library_Trait {
                 $updated++;
                 continue;
             }
+            if ($mode === 'portal_remove_auto') {
+                $portal_key = sanitize_key((string) wp_unslash($_POST['portal_key'] ?? ''));
+                $requested_slot_filter = sanitize_text_field((string) wp_unslash($_POST['slot_filter'] ?? ''));
+                $requested_werbeplatz_scope = '';
+                if ($requested_slot_filter !== '' && method_exists($this, 'creative_library_slot_filter_options')) {
+                    $slot_options = $this->creative_library_slot_filter_options($this->output_portal_registry());
+                    if (isset($slot_options[$requested_slot_filter]) && sanitize_key((string)($slot_options[$requested_slot_filter]['portal_key'] ?? '')) === $portal_key) {
+                        $requested_werbeplatz_scope = sanitize_key((string)($slot_options[$requested_slot_filter]['group_key'] ?? ''));
+                    }
+                }
+                $wpdb->update($table, array('selected'=>0), array('id'=>$id));
+                // selected ist ab V6.72.82 nur noch eine Backend-Markierung. Ein
+                // echtes Entfernen aus der Vollautomatik muss deshalb als Veto
+                // gespeichert werden, sonst wuerde der Poolplaner es erneut aufnehmen.
+                if (method_exists($this,'output_set_portal_decision')) {
+                    $this->output_set_portal_decision($portal_key,(string)($row['identity_hash']??''),'veto','Manuell aus der Vollautomatik entfernt.',array());
+                }
+                if (!method_exists($this, 'output_remove_creative_from_automation')) {
+                    $blocked++;
+                    $errors['remove_automation_missing'] = 'Entfernen-Funktion ist nicht verfügbar.';
+                    continue;
+                }
+                $removed = $this->output_remove_creative_from_automation((string)($row['identity_hash'] ?? ''), $portal_key, $requested_werbeplatz_scope);
+                if (is_wp_error($removed)) {
+                    $blocked++;
+                    $errors[$removed->get_error_code()] = $removed->get_error_message();
+                    continue;
+                }
+                $updated++;
+                continue;
+            }
             if (strpos($mode, 'portal_') === 0) {
                 $decision = array(
+                    'portal_use_auto'=>'automatic',
                     'portal_approve'=>'approved',
                     'portal_approve_fixed'=>'approved',
                     'portal_review'=>'review',
@@ -1029,12 +1067,32 @@ trait PPAR_Creative_Library_Trait {
                     'portal_automatic'=>'automatic',
                 )[$mode];
                 $decision_reason = sanitize_text_field((string) wp_unslash($_POST['decision_reason'] ?? ''));
-                if ($decision_reason === '') {
+                // V6.72.48: Payload MUSS vor der KISS-Scope-Bindung existieren.
+                // 6.72.46 schrieb werbeplatz_scope hinein und leerte das Array direkt
+                // danach wieder; dadurch kam der sichtbare Glossar-Werbeplatz nie beim
+                // Planer an und die Frontend-Automatik blieb trotz Klick leer.
+                $decision_payload = array();
+                $requested_werbeplatz_scope = '';
+                if ($mode === 'portal_use_auto') {
+                    // Ab V6.72.82 ist kein Klick mehr Voraussetzung. Dieser Button
+                    // setzt nur ein frueheres Veto/Review wieder auf normale Automatik.
+                    // selected bleibt eine reine Backend-Markierung ohne Laufzeitwirkung.
+                    $decision_reason = 'Normale Vollautomatik aus dem kompletten aktiven Pool.';
+                    $requested_slot_filter = sanitize_text_field((string) wp_unslash($_POST['slot_filter'] ?? ''));
+                    if ($requested_slot_filter !== '' && method_exists($this, 'creative_library_slot_filter_options')) {
+                        $slot_options = $this->creative_library_slot_filter_options($this->output_portal_registry());
+                        if (isset($slot_options[$requested_slot_filter]) && sanitize_key((string)($slot_options[$requested_slot_filter]['portal_key'] ?? '')) === $portal_key) {
+                            $requested_werbeplatz_scope = sanitize_key((string)($slot_options[$requested_slot_filter]['group_key'] ?? ''));
+                            if ($requested_werbeplatz_scope !== '') {
+                                $decision_payload['werbeplatz_scope'] = $requested_werbeplatz_scope;
+                            }
+                        }
+                    }
+                } elseif ($decision_reason === '') {
                     $blocked++;
-                    $errors['manual_reason_required'] = 'Für jede Chefentscheidung ist eine Begründung erforderlich.';
+                    $errors['manual_reason_required'] = 'Für jede manuelle Chefentscheidung ist eine Begründung erforderlich.';
                     continue;
                 }
-                $decision_payload = array();
                 if ($mode === 'portal_approve_fixed') {
                     $fixed_target_key = sanitize_text_field((string) wp_unslash($_POST['fixed_target_key'] ?? ''));
                     $fixed_slot_id = sanitize_key((string) wp_unslash($_POST['fixed_slot_id'] ?? ''));
@@ -1078,9 +1136,25 @@ trait PPAR_Creative_Library_Trait {
                         $errors[$saved->get_error_code()] = $saved->get_error_message();
                         continue;
                     }
+                    // Maschinenfester Positiv-Readback: ein sichtbarer Werbeplatz-Scope
+                    // darf nicht nur im POST existieren. Er muss exakt aus der
+                    // autoritativen Portalentscheidung zurückkommen, sonst wird NICHT
+                    // geplant/materialisiert.
+                    if ($mode === 'portal_use_auto' && $requested_werbeplatz_scope !== '') {
+                        $saved_decision = $this->output_portal_decision($portal_key, (string) ($row['identity_hash'] ?? ''));
+                        $saved_payload = is_array($saved_decision['payload'] ?? null) ? $saved_decision['payload'] : array();
+                        if (sanitize_key((string) ($saved_payload['werbeplatz_scope'] ?? '')) !== $requested_werbeplatz_scope) {
+                            $blocked++;
+                            $errors['werbeplatz_scope_readback_failed'] = 'Werbeplatz-Scope wurde nicht maschinenfest gespeichert; Automatiklauf abgebrochen.';
+                            continue;
+                        }
+                    }
                 }
                 if (in_array($decision, array('approved','automatic'), true) && method_exists($this, 'output_plan_creative')) {
-                    $result = $this->output_plan_creative($row, true);
+                    // V6.72.50: Eine Portalentscheidung plant nur das explizit
+                    // gewaehlte Portal. Vorher lief derselbe schwere Planer fuer
+                    // alle aktivierten Portale und vervielfachte den Request.
+                    $result = $this->output_plan_creative($row, true, $portal_key);
                     if (is_wp_error($result)) {
                         $blocked++;
                         $errors[$result->get_error_code()] = $result->get_error_message();
@@ -1136,7 +1210,87 @@ trait PPAR_Creative_Library_Trait {
                 $out[$provider . ':' . $external_id] = array('provider'=>$provider,'external_id'=>$external_id,'name'=>$name);
             }
         }
+
+        // Same partner source used by the existing Cleos intake path, but without
+        // requiring a separate manual probe for every newly joined Awin programme.
+        // Existing intake snapshots win because they may contain a confirmed name
+        // and richer partner metadata. The programme list only fills missing rows.
+        if (method_exists($this, 'partner_intake_joined_awin_programmes')) {
+            foreach ((array) $this->partner_intake_joined_awin_programmes() as $external_id => $name) {
+                $external_id = absint($external_id);
+                $name = sanitize_text_field((string) $name);
+                if ($external_id <= 0 || $name === '') {
+                    continue;
+                }
+                $external_id = (string) $external_id;
+                $key = 'awin:' . $external_id;
+                if (!isset($out[$key])) {
+                    $out[$key] = array('provider'=>'awin','external_id'=>$external_id,'name'=>$name);
+                }
+            }
+        }
+
+        uasort($out, static function ($left, $right) {
+            $provider_cmp = strnatcasecmp((string) ($left['provider'] ?? ''), (string) ($right['provider'] ?? ''));
+            return $provider_cmp !== 0 ? $provider_cmp : strnatcasecmp((string) ($left['name'] ?? ''), (string) ($right['name'] ?? ''));
+        });
         return $out;
+    }
+
+    /**
+     * Inhaltstypfilter aus der aktiven Slotmatrix. Technische Einzel-Slot-IDs
+     * bleiben intern; im Backend werden nur verstaendliche gemeinsame
+     * Inhaltstypen angeboten. Die technische Eignung bleibt dieselbe zentrale
+     * Slot-Pruefung wie im produktiven Planer.
+     */
+    private function creative_library_slot_filter_options($portals) {
+        $out = array();
+        foreach ((array) $portals as $portal_key => $portal) {
+            if (!is_array($portal) || empty($portal['enabled'])) { continue; }
+            $portal_key = sanitize_key((string) $portal_key);
+            if ($portal_key === '' || !method_exists($this, 'output_werbeplatz_filter_profiles')) { continue; }
+            $profiles = $this->output_werbeplatz_filter_profiles($portal);
+            foreach ((array) $profiles as $profile_key => $profile) {
+                if (!is_array($profile) || empty($profile['rules'])) { continue; }
+                $profile_key = sanitize_key((string) $profile_key);
+                if ($profile_key === '') { continue; }
+                $out[$portal_key . '|' . $profile_key] = array(
+                    'portal_key'=>$portal_key,
+                    'group_key'=>$profile_key,
+                    'label'=>sanitize_text_field((string) ($profile['label'] ?? $profile_key)),
+                    'rules'=>(array) $profile['rules'],
+                );
+            }
+        }
+        return $out;
+    }
+
+    private function creative_library_row_matches_slot_filter($row, $slot_filter, $slot_options) {
+        if ($slot_filter === '') { return true; }
+        if (!isset($slot_options[$slot_filter]) || !is_array($slot_options[$slot_filter])) { return false; }
+        $rules = is_array($slot_options[$slot_filter]['rules'] ?? null) ? $slot_options[$slot_filter]['rules'] : array();
+        if (!$rules || !method_exists($this, 'output_row_matches_slot_rule')) { return false; }
+        $row_type = sanitize_key((string) ($row['creative_type'] ?? 'banner'));
+        foreach ($rules as $rule) {
+            if (!is_array($rule)) { continue; }
+            $creative_type = sanitize_key((string) ($rule['creative_type'] ?? 'banner'));
+            if ($row_type !== $creative_type) { continue; }
+            if ($this->output_row_matches_slot_rule($row, $rule, $creative_type)) { return true; }
+        }
+        return false;
+    }
+
+    private function creative_library_slot_suitability_summary($row, $slot_filter, $slot_options) {
+        if (!isset($slot_options[$slot_filter]) || !is_array($slot_options[$slot_filter])) { return ''; }
+        $option = $slot_options[$slot_filter];
+        if (sanitize_key((string) ($option['group_key'] ?? '')) !== 'glossarartikel' || !is_array($option['rules'] ?? null)) { return ''; }
+        $labels = array();
+        foreach ($option['rules'] as $slot_id => $rule) {
+            if (!$this->output_row_matches_slot_rule($row, $rule, 'banner')) { continue; }
+            if ($slot_id === 'glossary_single_desktop_banner') { $labels[] = 'Desktop'; }
+            if ($slot_id === 'glossary_single_mobile_banner') { $labels[] = 'Mobil'; }
+        }
+        return $labels ? 'Glossar geeignet: ' . implode(' + ', $labels) : 'Glossar: technisch ungeeignet';
     }
 
     private function creative_library_query_rows($filters, $limit = 500) {
@@ -1144,10 +1298,17 @@ trait PPAR_Creative_Library_Trait {
         $table = $this->creative_library_table();
         $where = array("creative_type<>'native_partner'", "external_id NOT LIKE 'native-%'", "availability_state<>'inactive_missing'");
         $args = array();
+        $slot_filter = sanitize_text_field((string) ($filters['slot_filter'] ?? ''));
+        $slot_options = is_array($filters['slot_options'] ?? null) ? $filters['slot_options'] : array();
         if (!empty($filters['provider'])) {
             $where[] = 'provider=%s';
             $args[] = $filters['provider'];
-            if (sanitize_key((string) $filters['provider']) === 'awin') { $where[] = "creative_type='banner'"; }
+            // Awin product-feed rows belong to Produkte & Deals, never to the
+            // Banner-&-Werbemittel surface. Keep historical OTTO products stored;
+            // this is a view separation only, not a destructive cleanup.
+            if (sanitize_key((string) $filters['provider']) === 'awin') {
+                $where[] = "creative_type='banner'";
+            }
         }
         if (!empty($filters['partner_external_id'])) {
             $where[] = 'partner_external_id=%s';
@@ -1160,8 +1321,25 @@ trait PPAR_Creative_Library_Trait {
         if (!empty($filters['selected'])) {
             $where[] = 'selected=1';
         }
-        $sql = "SELECT * FROM {$table} WHERE " . implode(' AND ', $where) . ' ORDER BY partner_name ASC, width DESC, height DESC, id DESC LIMIT ' . absint($limit);
-        return $args ? $wpdb->get_results($wpdb->prepare($sql, $args), ARRAY_A) : $wpdb->get_results($sql, ARRAY_A);
+        $base_sql = "SELECT * FROM {$table} WHERE " . implode(' AND ', $where) . ' ORDER BY partner_name ASC, width DESC, height DESC, id DESC';
+        if ($slot_filter === '') {
+            $sql = $base_sql . ' LIMIT ' . absint($limit);
+            return $args ? $wpdb->get_results($wpdb->prepare($sql, $args), ARRAY_A) : $wpdb->get_results($sql, ARRAY_A);
+        }
+        $filtered = array();
+        $batch_size = max(500, absint($limit));
+        $offset = 0;
+        do {
+            $sql = $base_sql . ' LIMIT ' . absint($batch_size) . ' OFFSET ' . absint($offset);
+            $batch = $args ? $wpdb->get_results($wpdb->prepare($sql, $args), ARRAY_A) : $wpdb->get_results($sql, ARRAY_A);
+            foreach ((array) $batch as $row) {
+                if (!$this->creative_library_row_matches_slot_filter($row, $slot_filter, $slot_options)) { continue; }
+                $filtered[] = $row;
+                if (count($filtered) >= absint($limit)) { break 2; }
+            }
+            $offset += count((array) $batch);
+        } while (count((array) $batch) === $batch_size);
+        return $filtered;
     }
 
     private function creative_library_count_rows() {
@@ -1196,18 +1374,32 @@ trait PPAR_Creative_Library_Trait {
         $partner_external_id = preg_replace('/[^0-9A-Za-z._-]/', '', rawurldecode((string) ($_GET['partner_external_id'] ?? '')));
         $topic_status = sanitize_key((string) ($_GET['topic_status'] ?? ''));
         $selected = !empty($_GET['selected']);
-        $rows = $this->creative_library_query_rows(compact('provider','partner_external_id','topic_status','selected'));
         $counts = $this->creative_library_count_rows();
         $notice = sanitize_key((string) ($_GET['ppar_library'] ?? ''));
         $message = rawurldecode((string) ($_GET['ppar_message'] ?? ''));
         $provider_registry = method_exists($this,'provider_registry') ? $this->provider_registry() : array();
-        $default = array('provider'=>'manual','external_id'=>'','name'=>'');
-        if ($provider !== '' && $partner_external_id !== '' && isset($snapshots[$provider . ':' . $partner_external_id])) {
-            $default = $snapshots[$provider . ':' . $partner_external_id];
-        } elseif ($snapshots) {
-            $default = reset($snapshots);
-        }
         $portals = method_exists($this, 'output_portal_registry') ? $this->output_portal_registry() : array();
+        $slot_options = $this->creative_library_slot_filter_options($portals);
+        $slot_filter = sanitize_text_field((string) ($_GET['slot_filter'] ?? ''));
+        if ($slot_filter !== '' && !isset($slot_options[$slot_filter])) { $slot_filter = ''; }
+        $rows = $this->creative_library_query_rows(compact('provider','partner_external_id','topic_status','selected','slot_filter','slot_options'));
+        $default = array('provider'=>'manual','external_id'=>'','name'=>'');
+        $default_snapshot_key = '';
+        if ($provider !== '' && $partner_external_id !== '' && isset($snapshots[$provider . ':' . $partner_external_id])) {
+            $default_snapshot_key = $provider . ':' . $partner_external_id;
+            $default = $snapshots[$default_snapshot_key];
+        } elseif ($provider !== '' && $snapshots) {
+            foreach ($snapshots as $snapshot_key => $snapshot_option) {
+                if ((string) ($snapshot_option['provider'] ?? '') !== $provider) { continue; }
+                $default_snapshot_key = (string) $snapshot_key;
+                $default = $snapshot_option;
+                break;
+            }
+        }
+        if ($default_snapshot_key === '' && $snapshots) {
+            $default = reset($snapshots);
+            $default_snapshot_key = (string) key($snapshots);
+        }
         $fixed_targets = array();
         $fixed_slots = array();
         foreach ((array) $portals as $portal_key_option => $portal_option) {
@@ -1237,8 +1429,8 @@ trait PPAR_Creative_Library_Trait {
             <style>
                 .ppar-library-kpis{display:flex;flex-wrap:wrap;gap:10px}.ppar-library-kpi,.ppar-library-panel{background:#fff;border:1px solid #c3c4c7;padding:12px}.ppar-library-kpi{min-width:130px}.ppar-library-kpi span{display:block;color:#646970}.ppar-library-kpi strong{font-size:22px}.ppar-library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;align-items:start}.ppar-library-card{box-sizing:border-box;min-width:0;padding:12px;border:1px solid #c3c4c7;background:#fff}.ppar-library-card>img{display:block;width:100%;height:112px;margin:10px 0;object-fit:contain;background:#f6f7f7}.ppar-library-card h3{margin:8px 0;font-size:14px;line-height:1.3}.ppar-library-meta,.ppar-library-topic{font-size:12px;line-height:1.45}.ppar-library-decision{margin-top:8px;padding:8px;background:#f6f7f7;border-left:3px solid #2271b1}.ppar-chief-fields{display:grid;grid-template-columns:minmax(260px,1fr) minmax(260px,1fr);gap:12px;max-width:1000px;margin:10px 0}.ppar-chief-fields label{display:block}.ppar-chief-fields select,.ppar-chief-fields input{width:100%}@media(max-width:780px){.ppar-chief-fields{grid-template-columns:1fr}}
             </style>
-            <h1>Import &amp; Auswahl</h1>
-            <p>Werbemittel werden einmal importiert und danach automatisch je aktiviertem Portal gegen dessen Fachprofil, Zielbaum und Ausgabeplätze geprüft. Ein manuelles Veto gilt nur für das gewählte Portal.</p>
+            <h1>Werbemittel &amp; Ausspielung</h1>
+            <p>Zentrale für Import, Werbeplatz-Eignung und automatische Ausspielung. „Automatik verwenden“ aktiviert; „Aus Automatik entfernen“ nimmt ein Werbemittel wieder sauber aus der Ausgabe.</p>
             <?php if ($notice === 'success') : ?><div class="notice notice-success inline"><p><?php echo esc_html($message); ?></p></div><?php endif; ?>
             <?php if ($notice === 'failed') : ?><div class="notice notice-error inline"><p><?php echo esc_html($message); ?></p></div><?php endif; ?>
             <div class="ppar-library-kpis">
@@ -1255,7 +1447,7 @@ trait PPAR_Creative_Library_Trait {
                     <input type="hidden" name="action" value="ppar_creative_library_import">
                     <?php wp_nonce_field('ppar_creative_library_import', 'ppar_creative_library_nonce'); ?>
                     <div class="ppar-library-import"><div>
-                        <p><label><strong>Aufgenommener Partner</strong><br><select id="ppar-library-snapshot"><option value="">Manuell eingeben</option><?php foreach ($snapshots as $key => $snapshot) : ?><option value="<?php echo esc_attr($key); ?>" data-provider="<?php echo esc_attr($snapshot['provider']); ?>" data-external="<?php echo esc_attr($snapshot['external_id']); ?>" data-name="<?php echo esc_attr($snapshot['name']); ?>"><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . $snapshot['name'] . ($snapshot['external_id'] !== '' ? ' · ' . $snapshot['external_id'] : '')); ?></option><?php endforeach; ?></select></label></p>
+                        <p><label><strong>Aufgenommener Partner</strong><br><select id="ppar-library-snapshot"><option value="" <?php selected($default_snapshot_key, ''); ?>>Manuell eingeben</option><?php foreach ($snapshots as $key => $snapshot) : ?><option value="<?php echo esc_attr($key); ?>" <?php selected($default_snapshot_key, (string) $key); ?> data-provider="<?php echo esc_attr($snapshot['provider']); ?>" data-external="<?php echo esc_attr($snapshot['external_id']); ?>" data-name="<?php echo esc_attr($snapshot['name']); ?>"><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . $snapshot['name'] . ($snapshot['external_id'] !== '' ? ' · ' . $snapshot['external_id'] : '')); ?></option><?php endforeach; ?></select></label></p>
                         <p><label><strong>Provider</strong><br><select id="ppar-library-provider" name="provider" required><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected((string)$default['provider'],$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select></label></p>
                         <p><label><strong>Partner-ID</strong><br><input id="ppar-library-external" type="text" name="partner_external_id" maxlength="191" value="<?php echo esc_attr($default['external_id']); ?>"></label></p>
                         <p><label><strong>Partnername</strong><br><input id="ppar-library-name" type="text" name="partner_name" required maxlength="180" value="<?php echo esc_attr($default['name']); ?>"></label></p>
@@ -1269,26 +1461,32 @@ trait PPAR_Creative_Library_Trait {
             </details>
             <form method="get" style="margin-top:18px"><input type="hidden" name="page" value="affiliate-portal-creative-library">
                 <select name="provider"><option value="">Alle Provider</option><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected($provider,$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select>
-                <input type="text" name="partner_external_id" value="<?php echo esc_attr($partner_external_id); ?>" placeholder="Partner-ID">
+                <select name="partner_external_id"><option value="">Alle Partner</option><?php foreach($snapshots as $snapshot_key=>$snapshot): if($provider!=='' && (string)$snapshot['provider']!==$provider) continue; ?><option value="<?php echo esc_attr((string)$snapshot['external_id']); ?>" <?php selected($partner_external_id,(string)$snapshot['external_id']); ?>><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . (string)$snapshot['name'] . ((string)$snapshot['external_id']!=='' ? ' · ' . (string)$snapshot['external_id'] : '')); ?></option><?php endforeach; ?><?php if($partner_external_id!=='' && !array_filter($snapshots,static function($snapshot) use ($partner_external_id){ return (string)($snapshot['external_id']??'')===$partner_external_id; })): ?><option value="<?php echo esc_attr($partner_external_id); ?>" selected><?php echo esc_html('Partner-ID ' . $partner_external_id); ?></option><?php endif; ?></select>
+                <select name="slot_filter"><option value="">Alle Werbeplätze</option><?php foreach($slot_options as $slot_filter_key=>$slot_filter_option): ?><option value="<?php echo esc_attr($slot_filter_key); ?>" <?php selected($slot_filter,$slot_filter_key); ?>><?php echo esc_html((string)($slot_filter_option['label'] ?? $slot_filter_key)); ?></option><?php endforeach; ?></select>
                 <select name="topic_status"><option value="">Alle technischen Zustände</option><option value="format_pending" <?php selected($topic_status,'format_pending'); ?>>Bildprüfung offen</option><option value="auto_verified" <?php selected($topic_status,'auto_verified'); ?>>Bild geprüft</option><option value="format_blocked" <?php selected($topic_status,'format_blocked'); ?>>Bild/Format blockiert</option></select>
                 <label><input type="checkbox" name="selected" value="1" <?php checked($selected); ?>> nur ausgewählte</label>
                 <?php submit_button('Filtern','secondary','',false); ?>
             </form>
             <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
                 <input type="hidden" name="action" value="ppar_creative_library_selection">
+                <input type="hidden" name="slot_filter" value="<?php echo esc_attr($slot_filter); ?>">
                 <?php wp_nonce_field('ppar_creative_library_selection', 'ppar_creative_library_selection_nonce'); ?>
                 <p><label><strong>Portal für manuelle Entscheidung</strong> <select id="ppar-chief-portal" name="portal_key"><?php foreach ($portals as $key => $portal) : ?><option value="<?php echo esc_attr($key); ?>"><?php echo esc_html((string) ($portal['label'] ?? $key) . (empty($portal['enabled']) ? ' · deaktiviert' : '')); ?></option><?php endforeach; ?></select></label></p>
-                <p><select id="ppar-chief-mode" name="selection_mode">
-                    <option value="prepare_all">Alle aktivierten Portale automatisch prüfen und nur sichere Entwürfe vorbereiten</option>
-                    <option value="plan_all">Alle aktivierten Portale automatisch prüfen, noch keine Entwürfe erzeugen</option>
-                    <option value="portal_approve">Chefentscheidung: fachlich freigeben, Ziel und Slot automatisch</option>
-                    <option value="portal_approve_fixed">Chefentscheidung: fachlich freigeben, Ziel und optional Slot fest vorgeben</option>
-                    <option value="portal_review">Chefentscheidung: zur Prüfung zurückstellen</option>
-                    <option value="portal_veto">Chefentscheidung: Creative für dieses Portal sperren (Veto)</option>
-                    <option value="portal_automatic">Chefentscheidung zurücknehmen; Automatik wiederherstellen</option>
-                    <option value="selected">Nur auswählen</option>
-                    <option value="unselected">Markierung entfernen</option>
-                </select></p>
+                <p><label><strong>Aktion</strong> <select id="ppar-chief-mode" name="selection_mode">
+                    <option value="portal_use_auto">Automatik verwenden</option>
+                    <option value="portal_remove_auto">Aus Automatik entfernen</option>
+                    <option value="portal_veto">Sperren</option>
+                    <optgroup label="Erweitert">
+                        <option value="prepare_all">Nur prüfen und sichere Entwürfe vorbereiten</option>
+                        <option value="plan_all">Nur prüfen, noch nichts erzeugen</option>
+                        <option value="portal_approve">Fachlich freigeben, Ziel und Slot automatisch</option>
+                        <option value="portal_approve_fixed">Fachlich freigeben, Ziel/Slot fest vorgeben</option>
+                        <option value="portal_review">Zur Prüfung zurückstellen</option>
+                        <option value="portal_automatic">Manuelle Entscheidung zurücknehmen</option>
+                        <option value="selected">Nur markieren</option>
+                        <option value="unselected">Markierung entfernen</option>
+                    </optgroup>
+                </select></label></p>
                 <div class="ppar-chief-fields">
                     <label><strong>Begründung der Chefentscheidung</strong><input type="text" name="decision_reason" placeholder="z. B. Zielgruppe Pferdehalter besitzt häufig weitere Hoftiere"></label>
                     <label class="ppar-fixed-field"><strong>Festes Portalziel</strong><select id="ppar-fixed-target" name="fixed_target_key"><option value="">Portalziel auswählen</option><?php foreach ($fixed_targets as $target_option) : ?><option data-portal="<?php echo esc_attr($target_option['portal_key']); ?>" value="<?php echo esc_attr($target_option['key']); ?>"><?php echo esc_html($target_option['label'] . ' · ' . $target_option['type']); ?></option><?php endforeach; ?></select></label>
@@ -1304,6 +1502,7 @@ trait PPAR_Creative_Library_Trait {
                             <?php if (!empty($row['image_url'])) : ?><img loading="lazy" src="<?php echo esc_url($row['image_url']); ?>" alt=""><?php endif; ?>
                             <h3><?php echo esc_html((string) $row['title']); ?></h3>
                             <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?></p>
+                            <?php $slot_suitability=$this->creative_library_slot_suitability_summary($row,$slot_filter,$slot_options); if($slot_suitability!==''): ?><p class="ppar-library-meta"><strong><?php echo esc_html($slot_suitability); ?></strong></p><?php endif; ?>
                             <div class="ppar-library-topic"><strong>Portalstatus</strong><br><?php echo esc_html($this->creative_library_target_summary($row)); ?></div>
                             <?php if ($portals) : foreach ($portals as $decision_portal_key => $decision_portal) : $chief_decision=$this->output_portal_decision((string)$decision_portal_key,(string)($row['identity_hash']??'')); $chief_payload=is_array($chief_decision['payload']??null)?$chief_decision['payload']:array(); ?>
                             <div class="ppar-library-decision" data-portal-key="<?php echo esc_attr((string)$decision_portal_key); ?>"><strong>Chefentscheidung · <?php echo esc_html((string)($decision_portal['label']??$decision_portal_key)); ?></strong><br><?php echo esc_html((string) ($chief_decision['manual_status'] ?? 'automatic')); ?><?php if (!empty($chief_decision['reason'])) : ?><br><?php echo esc_html((string) $chief_decision['reason']); ?><?php endif; ?><?php if(!empty($chief_payload['target_label'])): ?><br>Ziel: <?php echo esc_html((string)$chief_payload['target_label']); ?><?php endif; ?><?php if(!empty($chief_payload['slot_id'])): ?><br>Slot: <?php echo esc_html((string)$chief_payload['slot_id']); ?><?php endif; ?></div>

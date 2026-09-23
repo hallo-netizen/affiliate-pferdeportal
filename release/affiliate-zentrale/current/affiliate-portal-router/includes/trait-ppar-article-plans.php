@@ -17,6 +17,12 @@ trait PPAR_Article_Plans_Trait {
                 'reason' => '',
                 'anchor' => array(),
             ),
+            'banner_2' => array(
+                'status' => 'none',
+                'campaign_post_id' => 0,
+                'reason' => '',
+                'anchor' => array(),
+            ),
             'products' => array(
                 'status' => 'none',
                 'campaign_post_ids' => array(),
@@ -236,46 +242,54 @@ trait PPAR_Article_Plans_Trait {
         return (string) $content;
     }
 
-    private function article_plan_find_anchor($content) {
-        $content = (string) $content;
-        $candidates = $this->article_h2_insertion_candidates($content);
-        if (empty($candidates)) {
-            return array();
-        }
-        $target = 0.50;
-        usort($candidates, function($a, $b) use ($target) {
-            $da = abs((float) ($a['ratio'] ?? 0) - $target);
-            $db = abs((float) ($b['ratio'] ?? 0) - $target);
-            if ($da === $db) {
-                return (int) ($a['offset'] ?? 0) <=> (int) ($b['offset'] ?? 0);
-            }
-            return $da < $db ? -1 : 1;
-        });
-        $chosen = $candidates[0];
-        $key = $this->article_plan_normalize_heading((string) ($chosen['heading'] ?? ''));
-        $level = in_array((int) ($chosen['heading_level'] ?? 2), array(2, 3), true) ? (int) $chosen['heading_level'] : 2;
-        if ($key === '') {
-            return array();
-        }
-        $occurrence = 0;
-        if (preg_match_all('/<h([23])\b[^>]*>(.*?)<\/h\1>/is', $content, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
+    private function article_plan_word_count_html($content) {
+        $text=html_entity_decode(wp_strip_all_tags((string)$content),ENT_QUOTES | ENT_HTML5,'UTF-8');
+        if (!preg_match_all('/[\p{L}\p{N}]+(?:[-’\'][\p{L}\p{N}]+)*/u',$text,$matches)) { return 0; }
+        return count($matches[0]);
+    }
+
+    private function article_plan_anchor_from_candidate($content, $chosen) {
+        $key=$this->article_plan_normalize_heading((string)($chosen['heading'] ?? ''));
+        $level=in_array((int)($chosen['heading_level'] ?? 2),array(2,3),true)?(int)$chosen['heading_level']:2;
+        if ($key==='') { return array(); }
+        $occurrence=0;
+        if (preg_match_all('/<h([23])\b[^>]*>(.*?)<\/h\1>/is',(string)$content,$matches,PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             foreach ($matches as $match) {
-                if ((int) $match[0][1] > (int) ($chosen['heading_offset'] ?? $chosen['offset'] ?? 0)) {
-                    break;
-                }
-                if ((int) $match[1][0] === $level && $this->article_plan_normalize_heading((string) $match[2][0]) === $key) {
-                    $occurrence++;
-                }
+                if ((int)$match[0][1] > (int)($chosen['heading_offset'] ?? $chosen['offset'] ?? 0)) { break; }
+                if ((int)$match[1][0] === $level && $this->article_plan_normalize_heading((string)$match[2][0]) === $key) { $occurrence++; }
             }
         }
         return array(
-            'heading' => sanitize_text_field((string) ($chosen['heading'] ?? '')),
-            'heading_key' => $key,
-            'heading_level' => $level,
-            'occurrence' => max(1, $occurrence),
-            'previous_heading' => sanitize_text_field((string) ($chosen['previous_heading'] ?? '')),
-            'ratio' => round((float) ($chosen['ratio'] ?? 0), 4),
+            'heading'=>sanitize_text_field((string)($chosen['heading'] ?? '')),
+            'heading_key'=>$key,
+            'heading_level'=>$level,
+            'occurrence'=>max(1,$occurrence),
+            'previous_heading'=>sanitize_text_field((string)($chosen['previous_heading'] ?? '')),
+            'ratio'=>round((float)($chosen['ratio'] ?? 0),4),
         );
+    }
+
+    private function article_plan_find_anchor($content, $target = 0.3333, $after_offset = 0, $minimum_words_after = 0) {
+        $content=(string)$content;
+        $candidates=$this->article_h2_insertion_candidates($content);
+        if (empty($candidates)) { return array(); }
+        $eligible=array();
+        foreach ($candidates as $candidate) {
+            $offset=(int)($candidate['offset'] ?? 0);
+            if ($after_offset > 0 && $offset <= $after_offset) { continue; }
+            if ($after_offset > 0 && $minimum_words_after > 0) {
+                $between=substr($content,$after_offset,max(0,$offset-$after_offset));
+                if ($this->article_plan_word_count_html($between) < (int)$minimum_words_after) { continue; }
+            }
+            $eligible[]=$candidate;
+        }
+        if (!$eligible) { return array(); }
+        usort($eligible,function($a,$b) use($target){
+            $da=abs((float)($a['ratio'] ?? 0)-(float)$target); $db=abs((float)($b['ratio'] ?? 0)-(float)$target);
+            if ($da === $db) { return (int)($a['offset'] ?? 0) <=> (int)($b['offset'] ?? 0); }
+            return $da < $db ? -1 : 1;
+        });
+        return $this->article_plan_anchor_from_candidate($content,$eligible[0]);
     }
 
     private function article_plan_find_render_offset($content, $anchor) {
@@ -493,15 +507,19 @@ trait PPAR_Article_Plans_Trait {
         }
         $selected_banner = null;
         foreach ($banner_candidates as $candidate) {
-            if ((int) ($candidate['specificity'] ?? 0) < 200 || !$this->article_plan_program_verified((array) ($candidate['campaign'] ?? array()))) {
-                continue;
-            }
+            $campaign=(array)($candidate['campaign'] ?? array());
+            if (!$this->article_plan_campaign_publicly_usable($campaign,'post_inline_banner','banner')) { continue; }
             $selected_banner = $candidate;
             break;
         }
+        if (!$selected_banner && empty($assigned_banner['disabled'])) {
+            $selected_banner = $this->article_plan_find_mandatory_banner($post_id);
+        }
         if (!$selected_banner) {
             $plan['banner']['status'] = 'none';
-            $plan['banner']['reason'] = 'Kein ausreichend passendes Banner mit verifiziert aktivem Programmstatus.';
+            $plan['banner']['reason'] = !empty($assigned_banner['disabled'])
+                ? sanitize_text_field((string)($assigned_banner['reason'] ?? 'Banner manuell deaktiviert.'))
+                : 'Kein technisch gültiger aktiver Banner verfügbar.';
         } elseif (empty($anchor)) {
             $plan['banner'] = array(
                 'status' => 'pending_anchor',
@@ -610,7 +628,43 @@ trait PPAR_Article_Plans_Trait {
                 : 'Keine Produkte mit PASS-Qualität.';
         }
 
-        $has_banner = $plan['banner']['status'] === 'ready';
+        // V6.72.71: Untere Vertragslogik. Produktboxen haben unten Vorrang.
+        // Gibt es keine freigegebenen Produktboxen, wird ein ZWEITER, vom ersten
+        // verschiedener Banner am Beitragsende geplant. Keine Wortzahl-Schwelle.
+        // Identische Banner auf derselben Seite sind hart ausgeschlossen.
+        if ($plan['products']['status'] !== 'ready'
+            && empty($assigned_banner['disabled'])
+            && in_array((string)($plan['banner']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+            $first_id=absint($plan['banner']['campaign_post_id'] ?? 0);
+            $second_candidate=null;
+            foreach ($this->ranked_campaigns_for_slot($context,'post_inline_banner') as $candidate) {
+                $campaign=(array)($candidate['campaign'] ?? array());
+                $candidate_id=absint($campaign['post_id'] ?? 0);
+                if ($candidate_id <= 0 || $candidate_id === $first_id) { continue; }
+                if (!$this->article_plan_campaign_publicly_usable($campaign,'post_inline_banner','banner')) { continue; }
+                $second_candidate=$candidate;
+                break;
+            }
+            if (!$second_candidate) {
+                $second_candidate=$this->article_plan_find_mandatory_banner($post_id,array($first_id));
+            }
+            if (is_array($second_candidate) && !empty($second_candidate['campaign'])) {
+                $second_id=absint($second_candidate['campaign']['post_id'] ?? 0);
+                if ($second_id > 0 && $second_id !== $first_id) {
+                    $plan['banner_2']=array(
+                        'status'=>'ready',
+                        'campaign_post_id'=>$second_id,
+                        'reason'=>sanitize_text_field((string)($second_candidate['reason'] ?? 'Unterer Ersatzbanner, weil keine Produktboxen verfuegbar sind.')),
+                        'anchor'=>array(),
+                    );
+                }
+            }
+            if (($plan['banner_2']['status'] ?? 'none') !== 'ready') {
+                $plan['banner_2']['reason']='Kein zweiter, vom Hauptbanner verschiedener technisch gueltiger Banner verfuegbar; Doppelung bleibt gesperrt.';
+            }
+        }
+
+        $has_banner = in_array((string)($plan['banner']['status'] ?? ''), array('ready','pending_anchor'), true);
         $has_products = $plan['products']['status'] === 'ready';
         $plan['status'] = ($has_banner || $has_products) ? 'ready' : 'no_output';
         update_post_meta($post_id, self::ARTICLE_PLAN_META, $plan);
@@ -618,6 +672,7 @@ trait PPAR_Article_Plans_Trait {
             'reason' => sanitize_text_field((string) $reason),
             'status' => $plan['status'],
             'banner_status' => $plan['banner']['status'],
+            'banner_2_status' => $plan['banner_2']['status'],
             'product_count' => count($plan['products']['campaign_post_ids']),
         ));
         return $plan;
@@ -699,6 +754,52 @@ trait PPAR_Article_Plans_Trait {
     }
 
     /**
+     * V6.72.67: Letzte Pflicht-Fallbackstufe für klassische Einzelbeiträge.
+     * Nur die historische Placement-Zuordnung darf fehlen. Aktivstatus,
+     * Programm-/Quell-/Veto-/Health-Gates und die reale Slot-Geometrie bleiben hart.
+     */
+    private function article_plan_campaign_publicly_usable_mandatory_banner($campaign) {
+        if (!is_array($campaign) || sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== 'banner') { return false; }
+        return $this->campaign_is_complete($campaign)
+            && !empty($campaign['active'])
+            && $this->rule_is_current($campaign)
+            && $this->campaign_program_allows_delivery($campaign)
+            && $this->campaign_source_allows_delivery($campaign)
+            && $this->campaign_control_allows_delivery($campaign, 'post_inline_banner')
+            && $this->campaign_health_allows_delivery($campaign)
+            && $this->campaign_matches_contract_slot_rule($campaign, 'post_inline_banner');
+    }
+
+    private function article_plan_find_mandatory_banner($post_id, $excluded_post_ids = array()) {
+        $excluded_post_ids = array_values(array_unique(array_filter(array_map('absint', (array)$excluded_post_ids))));
+        $context = $this->get_content_context($post_id);
+        $candidates = array();
+        foreach ($this->get_campaigns() as $campaign) {
+            if (!is_array($campaign)) { continue; }
+            $campaign_id = absint($campaign['post_id'] ?? 0);
+            if ($campaign_id <= 0 || in_array($campaign_id, $excluded_post_ids, true)) { continue; }
+            if (!$this->article_plan_campaign_publicly_usable_mandatory_banner($campaign)) { continue; }
+            $rank_context = $context;
+            $rank_context['slot_type'] = 'post_inline_banner';
+            $rank = $this->campaign_match_rank($campaign, $rank_context);
+            $candidates[] = array(
+                'campaign' => $campaign,
+                'specificity' => is_array($rank) ? (int)($rank['specificity'] ?? 0) : 0,
+                'matches' => is_array($rank) ? (int)($rank['matches'] ?? 0) : 0,
+                'priority' => (int)($campaign['priority'] ?? 0),
+                'reason' => is_array($rank) ? (string)($rank['reason'] ?? 'Passender Banner.') : 'Pflicht-Fallback: technisch gültiger aktiver Banner.',
+            );
+        }
+        usort($candidates, function($a, $b) {
+            foreach (array('specificity','matches','priority') as $key) {
+                if ($a[$key] !== $b[$key]) { return ($a[$key] > $b[$key]) ? -1 : 1; }
+            }
+            return strcmp((string)($a['campaign']['id'] ?? ''), (string)($b['campaign']['id'] ?? ''));
+        });
+        return $candidates ? $candidates[0] : null;
+    }
+
+    /**
      * V2.7.5: Fällt ein fest geplanter Beitragsplatz wegen Link-Quarantäne oder
      * kritischer Sperre aus, wird nur innerhalb desselben vorhandenen Slots ein
      * bereits freigegebenes, passendes Ersatzwerbemittel gewählt. Position und
@@ -716,11 +817,7 @@ trait PPAR_Article_Plans_Trait {
             if (!$this->article_plan_campaign_publicly_usable($campaign, $slot_type, $creative_type)) {
                 continue;
             }
-            if ($creative_type === 'banner') {
-                if ((int) ($candidate['specificity'] ?? 0) < 200 || !$this->article_plan_program_verified($campaign)) {
-                    continue;
-                }
-            } else {
+            if ($creative_type !== 'banner') {
                 $report = $this->article_product_quality_report($campaign, $context, $candidate);
                 if (($report['overall'] ?? 'fail') !== 'pass') {
                     continue;
@@ -731,8 +828,10 @@ trait PPAR_Article_Plans_Trait {
         return null;
     }
 
-    private function article_plan_render_banner_campaign($post_id, $campaign_post_id, $admin_test = false) {
+    private function article_plan_render_banner_campaign($post_id, $campaign_post_id, $admin_test = false, $instance = 1, $excluded_campaign_post_ids = array()) {
         $campaign_post_id = absint($campaign_post_id);
+        $excluded_campaign_post_ids=array_values(array_unique(array_filter(array_map('absint',(array)$excluded_campaign_post_ids))));
+        if (in_array($campaign_post_id,$excluded_campaign_post_ids,true)) { return ''; }
         $campaign = $this->campaign_from_post(get_post($campaign_post_id));
         // Der Administrator-Test prüft ausschließlich Position und dynamische
         // Bannerfläche. Er darf nicht an Gruppen-Konvertierung, Aktivstatus oder
@@ -747,25 +846,34 @@ trait PPAR_Article_Plans_Trait {
                 'image_url' => (string) ($campaign['image_url'] ?? ''),
             ), 1);
         }
-        if (!$this->article_plan_campaign_publicly_usable($campaign, 'post_inline_banner', 'banner')) {
-            $campaign = $this->article_plan_find_fallback_campaign($post_id, 'post_inline_banner', 'banner', array($campaign_post_id));
+        // V6.72.69: Ein bereits nach der globalen Pflicht-Hierarchie gewaehlter
+        // Banner darf beim Rendern nicht erneut an einer historischen Placement-
+        // Liste scheitern. Sicherheits-, Aktiv-, Health- und Slot-Geometrie-Gates
+        // bleiben identisch hart.
+        if (!$this->article_plan_campaign_publicly_usable($campaign, 'post_inline_banner', 'banner')
+            && !$this->article_plan_campaign_publicly_usable_mandatory_banner($campaign)) {
+            $campaign = $this->article_plan_find_fallback_campaign($post_id, 'post_inline_banner', 'banner', array_values(array_unique(array_merge(array($campaign_post_id),$excluded_campaign_post_ids))));
             if (!$campaign) {
-                return '';
+                $fallback = $this->article_plan_find_mandatory_banner($post_id, array_values(array_unique(array_merge(array($campaign_post_id),$excluded_campaign_post_ids))));
+                $campaign = is_array($fallback) ? ($fallback['campaign'] ?? null) : null;
             }
+            if (!$campaign) { return ''; }
         }
         list($group, $banner) = $this->campaign_to_group_banner($campaign);
         if (!$group || !$banner) {
             return '';
         }
         $resolved_campaign_post_id = absint($campaign['post_id'] ?? 0);
+        if ($resolved_campaign_post_id <= 0 || in_array($resolved_campaign_post_id,$excluded_campaign_post_ids,true)) { return ''; }
         $banner['url'] = $this->build_click_tracking_url($resolved_campaign_post_id, $post_id, 'post_inline_banner');
         $html = $this->render_banner($banner, $post_id, $this->get_content_context($post_id), $group, 'post_inline_banner');
         if (trim((string) $html) === '') {
             return '';
         }
-        return '<div class="ppar-affiliate-slot ppar-slot-post_inline_banner ppar-article-inline-banner ppar-article-inline-banner-1" data-ppar-slot="post_inline_banner">'
+        return '<div class="ppar-affiliate-slot ppar-slot-post_inline_banner ppar-article-inline-banner ppar-article-inline-banner-' . max(1,min(2,(int)$instance)) . '" data-ppar-slot="post_inline_banner">'
+            . '<div class="ppar-affiliate-content">' . $html . '</div>'
             . $this->get_disclosure_html($post_id)
-            . '<div class="ppar-affiliate-content">' . $html . '</div></div>';
+            . '</div>';
     }
 
     /**
@@ -972,9 +1080,17 @@ trait PPAR_Article_Plans_Trait {
 
         $plan = $this->article_plan_get($post_id);
         if (!$this->article_plan_is_current($post_id, $plan)) {
-            $this->article_plan_log_event('render_skipped_stale', $post_id, array('status' => $plan['status'] ?? 'missing'));
-            return $content;
+            // Schemawechsel wird zentral im Hintergrund nachgezogen; der gerade
+            // besuchte Beitrag wird einmalig sofort neu gebaut, damit der Nutzer
+            // beim Test nicht auf WP-Cron warten muss.
+            $rebuilt=$this->article_plan_build($post_id,'render_stale_schema_refresh');
+            if (is_wp_error($rebuilt)) {
+                $this->article_plan_log_event('render_skipped_stale', $post_id, array('status' => $plan['status'] ?? 'missing'));
+                return $content;
+            }
+            $plan=$rebuilt;
         }
+        $main_banner_rendered_at_bottom = false;
         if (in_array((string) ($plan['banner']['status'] ?? ''), array('ready', 'pending_anchor'), true)) {
             $anchor = (array) ($plan['banner']['anchor'] ?? array());
             $offset = !empty($anchor) ? $this->article_plan_find_render_offset($content, $anchor) : 0;
@@ -992,8 +1108,27 @@ trait PPAR_Article_Plans_Trait {
             $banner_html = $this->article_plan_render_banner_campaign($post_id, absint($plan['banner']['campaign_post_id'] ?? 0), false);
             if ($offset > 0 && $banner_html !== '') {
                 $content = $this->insert_at_offset($content, $banner_html, $offset);
+            } elseif ($banner_html !== '') {
+                // V6.72.69 Bannerpflicht: Gibt die echte Artikelstruktur keinen
+                // sicheren Drittel-Anker her, wird NICHT mitten in Absatz/Liste/
+                // Tabelle erzwungen. Der Banner kommt stattdessen ans Ende des
+                // redaktionellen Inhalts; der Produktblock wird danach angehaengt.
+                $content .= "\n" . $banner_html;
+                $main_banner_rendered_at_bottom = true;
+                $this->article_plan_log_event('banner_anchor_fallback_bottom', $post_id, array('offset' => $offset));
             } else {
-                $this->article_plan_log_event('banner_render_skipped', $post_id, array('offset' => $offset, 'has_html' => $banner_html !== ''));
+                $this->article_plan_log_event('banner_render_skipped', $post_id, array('offset' => $offset, 'has_html' => false));
+            }
+        }
+        if (!$main_banner_rendered_at_bottom && ($plan['products']['status'] ?? '') !== 'ready' && in_array((string)($plan['banner_2']['status'] ?? ''),array('ready','pending_anchor'),true)) {
+            $first_banner_id=absint($plan['banner']['campaign_post_id'] ?? 0);
+            $second_banner_id=absint($plan['banner_2']['campaign_post_id'] ?? 0);
+            if ($second_banner_id > 0 && $second_banner_id !== $first_banner_id) {
+                $banner2_html=$this->article_plan_render_banner_campaign($post_id,$second_banner_id,false,2,array($first_banner_id));
+                if ($banner2_html !== '') {
+                    // Der zweite Banner ersetzt fehlende Produktboxen am Beitragsende.
+                    $content .= "\n" . $banner2_html;
+                }
             }
         }
         if (($plan['products']['status'] ?? '') === 'ready') {

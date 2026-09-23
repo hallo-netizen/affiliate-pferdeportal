@@ -4,15 +4,14 @@ if (!defined('ABSPATH')) { exit; }
 /**
  * Zentrales, provideruebergreifendes Partner-/Einnahmen-Cockpit.
  *
- * Es werden niemals Umsatz, Bestellungen oder Provisionen geschaetzt. Lokale
- * Klicks stammen aus der bestehenden Affiliate-Zentrale; externe Kennzahlen
- * duerfen nur ueber den normierten Report-Adapter eingespeist werden.
+ * Es werden niemals Klicks, Umsatz, Bestellungen oder Provisionen geschaetzt.
+ * Das Cockpit zeigt ausschliesslich Originalwerte aus verifizierten Provider-
+ * Reports/APIs. Lokale Redirect-Zaehler gehoeren ausdruecklich nicht hierher.
  */
 final class PPAR_Partner_Analytics_Admin {
     const OPTION_REPORT_CACHE = 'ppar_partner_analytics_report_cache_v1';
     const CONTRACT_VERSION = '1.0';
     const CAMPAIGN_POST_TYPE = 'ap_campaign';
-    const DEAL_CLICK_DAILY_OPTION = 'ppar_deal_click_daily_v1';
 
     private static $booted = false;
 
@@ -99,64 +98,6 @@ final class PPAR_Partner_Analytics_Admin {
         return sanitize_key((string)$key);
     }
 
-    private static function local_clicks_for_post($post_id, $range) {
-        $post_id = absint($post_id);
-        if ($post_id <= 0) { return 0; }
-        if ($range === 'all') { return absint(get_post_meta($post_id, 'ppar_click_total', true)); }
-        $daily = get_post_meta($post_id, 'ppar_click_daily', true);
-        if (!is_array($daily)) { return 0; }
-        $days = $range === 'today' ? 1 : max(1, absint($range));
-        $now = current_time('timestamp');
-        $min = strtotime('-' . max(0, $days - 1) . ' days', $now);
-        $sum = 0;
-        foreach ($daily as $date => $count) {
-            $ts = strtotime((string)$date);
-            if ($ts !== false && $ts >= $min) { $sum += absint($count); }
-        }
-        return $sum;
-    }
-
-    private static function local_deal_clicks_by_provider($range) {
-        $stored = get_option(self::DEAL_CLICK_DAILY_OPTION, array());
-        $stored = is_array($stored) ? $stored : array();
-        $out = array();
-        $days = $range === 'today' ? 1 : ($range === 'all' ? 0 : max(1, absint($range)));
-        $min = $days > 0 ? strtotime('-' . max(0, $days - 1) . ' days', current_time('timestamp')) : 0;
-        foreach ($stored as $provider => $record) {
-            $provider = sanitize_key((string)$provider);
-            if ($provider === '' || !is_array($record)) { continue; }
-            if ($range === 'all') {
-                $out[$provider] = absint($record['total'] ?? 0);
-                continue;
-            }
-            $sum = 0;
-            foreach ((array)($record['daily'] ?? array()) as $date => $count) {
-                $ts = strtotime((string)$date);
-                if ($ts !== false && $ts >= $min) { $sum += absint($count); }
-            }
-            $out[$provider] = $sum;
-        }
-        return $out;
-    }
-
-    private static function local_clicks_by_provider($range) {
-        $totals = array();
-        foreach (self::campaign_posts() as $post) {
-            if (!is_object($post) || empty($post->ID)) { continue; }
-            $campaign = self::campaign_data($post->ID);
-            if (!$campaign) { continue; }
-            $provider = self::campaign_provider_key($campaign);
-            if ($provider === '') { $provider = 'direct'; }
-            if (!isset($totals[$provider])) { $totals[$provider] = 0; }
-            $totals[$provider] += self::local_clicks_for_post($post->ID, $range);
-        }
-        foreach (self::local_deal_clicks_by_provider($range) as $provider => $count) {
-            if (!isset($totals[$provider])) { $totals[$provider] = 0; }
-            $totals[$provider] += absint($count);
-        }
-        return $totals;
-    }
-
     private static function report_cache() {
         $cache = get_option(self::OPTION_REPORT_CACHE, array());
         return is_array($cache) ? $cache : array();
@@ -174,6 +115,7 @@ final class PPAR_Partner_Analytics_Admin {
                 'orders' => array_key_exists('orders', $row) && is_numeric($row['orders']) ? max(0, (int)$row['orders']) : null,
                 'sales' => array_key_exists('sales', $row) && is_numeric($row['sales']) ? max(0, (float)$row['sales']) : null,
                 'commission' => array_key_exists('commission', $row) && is_numeric($row['commission']) ? (float)$row['commission'] : null,
+                'conversion' => array_key_exists('conversion', $row) && is_numeric($row['conversion']) ? (float)$row['conversion'] : null,
             );
         }
         $currency = strtoupper((string)($report['currency'] ?? 'EUR'));
@@ -199,77 +141,79 @@ final class PPAR_Partner_Analytics_Admin {
             'orders' => array_key_exists('orders', $period) ? $period['orders'] : null,
             'sales' => array_key_exists('sales', $period) ? $period['sales'] : null,
             'commission' => array_key_exists('commission', $period) ? $period['commission'] : null,
+            'conversion' => array_key_exists('conversion', $period) ? $period['conversion'] : null,
             'currency' => (string)($entry['currency'] ?? 'EUR'),
             'source' => (string)($entry['source'] ?? ''),
             'updated_at' => absint($entry['updated_at'] ?? 0),
         );
     }
 
-    private static function na($value, $format = 'number') {
+    private static function na($value, $format = 'number', $currency = 'EUR') {
         if ($value === null) { return '<span class="description">nicht verfügbar</span>'; }
-        if ($format === 'money') { return esc_html(number_format_i18n((float)$value, 2) . ' €'); }
+        if ($format === 'percent') {
+            return esc_html(number_format_i18n((float)$value, 2) . ' %');
+        }
+        if ($format === 'money') {
+            $currency = strtoupper((string)$currency);
+            if (!preg_match('/^[A-Z]{3}$/', $currency)) { $currency = 'EUR'; }
+            return esc_html(number_format_i18n((float)$value, 2) . ' ' . $currency);
+        }
         return esc_html(number_format_i18n((float)$value, 0));
+    }
+
+    private static function money_summary($totals) {
+        if (!is_array($totals) || !$totals) { return '<span class="description">nicht verfügbar</span>'; }
+        $parts = array();
+        foreach ($totals as $currency => $value) {
+            $currency = strtoupper((string)$currency);
+            if (!preg_match('/^[A-Z]{3}$/', $currency)) { continue; }
+            $parts[] = esc_html(number_format_i18n((float)$value, 2) . ' ' . $currency);
+        }
+        return $parts ? implode('<br>', $parts) : '<span class="description">nicht verfügbar</span>';
     }
 
     public static function render_page() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         $range = self::normalize_range($_GET['range'] ?? '30');
         $providers = self::provider_defaults();
-        $local = self::local_clicks_by_provider($range);
         $rows = array();
-        $totals = array('local_clicks'=>0,'orders'=>0,'sales'=>0.0,'commission'=>0.0);
-        $best = array('provider'=>'','commission'=>null);
         foreach ($providers as $key => $provider) {
             $report = self::provider_report($key, $range);
-            $local_clicks = absint($local[$key] ?? 0);
-            $conversion = null;
-            if ($report['orders'] !== null && $report['clicks'] !== null && (int)$report['clicks'] > 0) {
-                $conversion = ((float)$report['orders'] / (float)$report['clicks']) * 100;
-            }
-            $rows[$key] = array('provider'=>$provider,'local_clicks'=>$local_clicks,'report'=>$report,'conversion'=>$conversion);
-            $totals['local_clicks'] += $local_clicks;
-            if ($report['orders'] !== null) { $totals['orders'] += (int)$report['orders']; }
-            if ($report['sales'] !== null) { $totals['sales'] += (float)$report['sales']; }
-            if ($report['commission'] !== null) {
-                $totals['commission'] += (float)$report['commission'];
-                if ($best['commission'] === null || (float)$report['commission'] > (float)$best['commission']) {
-                    $best = array('provider'=>(string)$provider['label'],'commission'=>(float)$report['commission']);
-                }
-            }
+            $has_report = $report['updated_at'] > 0 && (
+                $report['clicks'] !== null || $report['orders'] !== null ||
+                $report['sales'] !== null || $report['commission'] !== null ||
+                $report['conversion'] !== null
+            );
+            $rows[$key] = array('provider'=>$provider,'report'=>$report,'has_report'=>$has_report);
         }
-        $base = admin_url('admin.php?page=affiliate-portal-stats');
+        // Die sichtbare KISS-Seite ist die kanonische Navigation. Zeitraumlinks
+        // duerfen nicht auf den historischen, aus dem Menue entfernten Stats-Slug springen.
+        $base = admin_url('admin.php?page=affiliate-portal-kiss-partners');
         ?>
         <div class="wrap" style="max-width:1240px">
             <h1>Partner &amp; Einnahmen</h1>
-            <p>Eine zentrale Sicht auf alle Affiliate-Quellen. Fehlende Netzwerkdaten werden nicht geschätzt.</p>
+            <p><strong>Nur Originaldaten der Partnerportale.</strong> Klicks, Verkäufe/Leads, Umsatz, Provision und Conversion erscheinen ausschließlich dann, wenn der jeweilige Provider sie selbst im verifizierten Report/API liefert. Keine eigenen Ersatzwerte, keine selbst berechnete Conversion und keine providerübergreifend errechneten Geschäftssummen.</p>
             <p class="subsubsub" style="float:none;margin:12px 0 18px">
                 <?php foreach (array('today'=>'Heute','7'=>'7 Tage','30'=>'30 Tage','all'=>'Gesamt') as $value=>$label) : ?>
                     <a href="<?php echo esc_url(add_query_arg('range',$value,$base)); ?>" <?php echo $range===$value?'style="font-weight:700"':''; ?>><?php echo esc_html($label); ?></a><?php echo $value!=='all'?' &nbsp;|&nbsp; ':''; ?>
                 <?php endforeach; ?>
             </p>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:0 0 18px">
-                <div class="postbox" style="padding:16px"><strong>Lokale Klicks</strong><div style="font-size:28px;margin-top:6px"><?php echo esc_html(number_format_i18n($totals['local_clicks'])); ?></div></div>
-                <div class="postbox" style="padding:16px"><strong>Verkäufe/Leads gemeldet</strong><div style="font-size:28px;margin-top:6px"><?php echo esc_html(number_format_i18n($totals['orders'])); ?></div></div>
-                <div class="postbox" style="padding:16px"><strong>Provision gemeldet</strong><div style="font-size:28px;margin-top:6px"><?php echo esc_html(number_format_i18n($totals['commission'],2)); ?> €</div></div>
-                <div class="postbox" style="padding:16px"><strong>Bester Partner</strong><div style="font-size:20px;margin-top:8px"><?php echo esc_html($best['provider'] !== '' ? $best['provider'] : 'noch keine Daten'); ?></div></div>
-            </div>
             <h2><?php echo esc_html(self::range_label($range)); ?></h2>
-            <table class="widefat striped"><thead><tr><th>Partner / Quelle</th><th>Rolle</th><th>Lokale Klicks</th><th>Partner-Klicks</th><th>Verkäufe/Leads</th><th>Umsatz</th><th>Provision</th><th>Conversion</th><th>Datenstand</th></tr></thead><tbody>
+            <table class="widefat striped"><thead><tr><th>Partner / Quelle</th><th>Rolle</th><th>Provider-Klicks</th><th>Verkäufe/Leads</th><th>Umsatz</th><th>Provision</th><th>Conversion</th><th>Datenstand</th></tr></thead><tbody>
             <?php foreach ($rows as $row) : $p=$row['provider']; $r=$row['report']; ?>
                 <tr>
                     <td><strong><?php echo esc_html((string)$p['label']); ?></strong><?php if (($p['label']??'')==='OTTO') : ?><br><span class="description">technisch über Awin möglich</span><?php endif; ?></td>
                     <td><?php echo esc_html((string)$p['type']); ?></td>
-                    <td><?php echo esc_html(number_format_i18n($row['local_clicks'])); ?></td>
                     <td><?php echo self::na($r['clicks']); ?></td>
                     <td><?php echo self::na($r['orders']); ?></td>
-                    <td><?php echo self::na($r['sales'],'money'); ?></td>
-                    <td><?php echo self::na($r['commission'],'money'); ?></td>
-                    <td><?php echo $row['conversion']===null?'<span class="description">nicht verfügbar</span>':esc_html(number_format_i18n($row['conversion'],2).' %'); ?></td>
+                    <td><?php echo self::na($r['sales'],'money',$r['currency']); ?></td>
+                    <td><?php echo self::na($r['commission'],'money',$r['currency']); ?></td>
+                    <td><?php echo self::na($r['conversion'],'percent'); ?></td>
                     <td><?php if ($r['updated_at']>0) { echo esc_html(wp_date('d.m.Y H:i',$r['updated_at'])); if ($r['source']!=='') { echo '<br><span class="description">'.esc_html($r['source']).'</span>'; } } else { echo '<span class="description">noch kein Report</span>'; } ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody></table>
-            <p class="description" style="margin-top:12px">Verkäufe, Umsatz und Provision erscheinen erst, wenn der jeweilige Provider einen verifizierten Report über den zentralen Adapter liefert.</p>
+            <p class="description" style="margin-top:12px">Wichtig: Diese Übersicht zeigt ausschließlich Originalwerte der jeweiligen Partnerportale. Fehlende Providerwerte werden nicht als Null ersetzt; unterschiedliche Währungen werden nicht vermischt.</p>
         </div>
         <?php
     }

@@ -77,91 +77,6 @@
     }
 }
 
-/* V6.72.73 – ein Bannerprinzip fuer Startseite, alle Seitenebenen und Kategorien:
-   volle verfuegbare Breite, kein Kartenrahmen, kein Linktext. */
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot {
-    box-sizing: border-box !important;
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 2rem 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    overflow: visible !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    text-align: center !important;
-}
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel {
-    display: block !important;
-    margin: 0 0 6px !important;
-    padding: 0 !important;
-    font-size: 10px !important;
-    line-height: 1.2 !important;
-    font-weight: 400 !important;
-    text-align: center !important;
-    text-transform: none !important;
-    opacity: .58 !important;
-}
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
-    box-sizing: border-box !important;
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-}
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link {
-    line-height: 0 !important;
-    text-decoration: none !important;
-}
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
-    height: auto !important;
-    object-fit: contain !important;
-    object-position: center center !important;
-}
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-disclosure {
-    margin: 8px 0 0 !important;
-    padding: 0 !important;
-    font-size: 10px !important;
-    line-height: 1.35 !important;
-    text-align: center !important;
-    opacity: .76 !important;
-    background: transparent !important;
-}
-.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label {
-    display: none !important;
-}
-.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot),
-.pa255-network:has(.ppar-overview-wide-banner-slot),
-.pa266-network:has(.ppar-overview-wide-banner-slot) {
-    box-sizing: border-box !important;
-    display: block !important;
-    grid-column: 1 / -1 !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-}
-.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot) > .pa356-ad-label,
-.pa255-network:has(.ppar-overview-wide-banner-slot) > header,
-.pa266-network:has(.ppar-overview-wide-banner-slot) > header {
-    display: none !important;
-}
-
 /* Portal-Template-Router: Auswahl + vollständige Übersicht */
 .ppar-template-router {
     margin: 2.5rem 0;
@@ -1225,3 +1140,925 @@
     max-height: 40px !important;
     margin-top: 9px !important;
 }
+
+/* V6.72.77 – Startseite sowie grosse Bannerplaetze aller Seiten-/Kategorieebenen:
+   sichtbarer Banner ueber die volle verfuegbare Breite, ohne Kartenrahmen,
+   Creative-Text oder Extra-CTA. Kein post-load Invalid-Hide fuer diesen Renderer. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot {
+    box-sizing: border-box !important;
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 2rem 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-align: center !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel {
+    display: block !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    opacity: .58 !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link {
+    line-height: 0 !important;
+    text-decoration: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image {
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-disclosure {
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    text-align: center !important;
+    opacity: .76 !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-banner-text,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-banner-button {
+    display: none !important;
+}
+.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot),
+.pa255-network:has(.ppar-overview-wide-banner-slot),
+.pa266-network:has(.ppar-overview-wide-banner-slot),
+.ppar-overview-banner-v67266:has(.ppar-overview-wide-banner-slot) {
+    box-sizing: border-box !important;
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+.pa356-partner.pa359-partner:has(.ppar-overview-wide-banner-slot) > .pa356-ad-label,
+.pa255-network:has(.ppar-overview-wide-banner-slot) > header,
+.pa266-network:has(.ppar-overview-wide-banner-slot) > header {
+    display: none !important;
+}
+
+/* V6.72.37 – grosser Kategorie-Querbanner auf allen Kategorieebenen.
+   Keine Karte, kein Rahmen, keine Text-/CTA-Spalte. Proportional, bevorzugt
+   Downscale; maximal +10 % Upscale wird nur vom Laufzeitpruefer zugelassen. */
+.ppar-affiliate-slot.ppar-category-large-banner-slot {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 2rem 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    text-align: center !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot .ppar-category-large-banner-adlabel {
+    display: block !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.02em !important;
+    text-align: center !important;
+    text-transform: none !important;
+    opacity: 0.58 !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot > .ppar-affiliate-content {
+    box-sizing: border-box !important;
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot .ppar-category-large-banner-link {
+    box-sizing: border-box !important;
+    display: inline-block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    line-height: 0 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot .ppar-category-large-banner-image {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+.ppar-affiliate-slot.ppar-category-large-banner-slot[data-ppar-large-banner-invalid="1"] {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hub-1 legt historisch noch eine externe Partnerueberschrift um denselben Slot.
+   Fuer den KISS-Querbanner ist nur die kleine Anzeige-Kennzeichnung zulaessig. */
+.pa356-partner.pa359-partner:has(.ppar-category-large-banner-slot) > .pa356-ad-label {
+    display: none !important;
+}
+
+.pa255-network:has(.ppar-category-large-banner-slot) > header,
+.pa266-network:has(.ppar-category-large-banner-slot) > header {
+    display: none !important;
+}
+
+/* V6.72.33 – Hub-2 only: compact cards using the proven equal-height mechanics
+   from the functioning category levels. Keep the compact geometry, but let the
+   visible shell stretch exactly like the proven .pa266/.pa272/.pa273 cards. */
+body .pa255-hub2 .pa255-products .pa255-product-grid {
+    margin-bottom: 0 !important;
+}
+body .pa255-hub2 .pa255-products + .pa255-direct {
+    margin-top: 48px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] {
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-clean-shell-v150414="1"] > [data-pftk-affiliate-clean-link-v150414="1"] {
+    flex: 1 1 auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-image-v150414="1"] {
+    box-sizing: border-box !important;
+    flex: 0 0 150px !important;
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    margin: 0 auto !important;
+    padding: 10px 14px 6px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-title-v150414="1"] {
+    margin: 10px 14px 4px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] [data-pftk-affiliate-price-v150414="1"] {
+    margin: 0 14px 10px !important;
+}
+body .pa255-hub2 .pa255-product-grid > .pa255-product.is-real[data-pftk-affiliate-card-v150414="1"] > [data-pftk-affiliate-cta-v150414="1"] {
+    margin-top: 0 !important;
+}
+
+
+/* V6.72.44 – Glossar-Single: ein fachlicher Werbeplatz, getrennte technische Desktop-/Mobil-Slots. */
+body.single-uge_term .ppar-glossary-rail-v67244{grid-column:2;grid-row:2 / span 2;margin-top:24px;display:flex;min-width:0;flex-direction:column;gap:40px;align-self:start}
+body.single-uge_term .ppar-glossary-rail-v67244>.pftk-gsingle-aside-v150490{grid-column:auto;grid-row:auto;margin-top:0;display:grid;gap:40px;align-self:auto}
+body.single-uge_term .ppar-glossary-banner-v67244>.ppar-affiliate-slot{margin:0;padding:0;border:0;border-radius:0;background:transparent;overflow:visible}
+body.single-uge_term .ppar-glossary-banner-v67244 .ppar-banner-link{display:block}
+body.single-uge_term .ppar-glossary-banner-desktop-v67244{display:block;min-width:0}
+body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image-wrap{display:block;max-width:310px;margin:0}
+body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{display:block;width:100%;max-width:310px;height:auto;border-radius:0}
+body.single-uge_term .ppar-glossary-banner-mobile-v67244{display:none}
+@media(max-width:840px){
+ body.single-uge_term .ppar-glossary-rail-v67244{display:contents}
+ body.single-uge_term .ppar-glossary-banner-desktop-v67244{display:none!important}
+ body.single-uge_term .ppar-glossary-banner-mobile-v67244{display:block;grid-column:1;grid-row:auto;margin:22px 0 0}
+ body.single-uge_term .ppar-glossary-banner-mobile-v67244 .ppar-banner-image-wrap,body.single-uge_term .ppar-glossary-banner-mobile-v67244 .ppar-banner-image{display:block;width:100%;max-width:100%;height:auto}
+}
+
+/* V6.72.51 – Glossar-Werbeblock im bestaetigten Pferde-Atelier-Design. */
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251{
+  box-sizing:border-box!important;
+  width:100%!important;
+  padding:19px 20px 17px!important;
+  border:0!important;
+  border-top:2px solid var(--o)!important;
+  border-radius:0!important;
+  background:var(--cream)!important;
+  overflow:hidden!important;
+}
+body.single-uge_term .ppar-glossary-adhead-v67251{
+  display:flex!important;align-items:center!important;gap:10px!important;
+  margin:0 0 12px!important;color:var(--g)!important;
+  font-family:var(--pa-global-title-font,"Cormorant Garamond",Georgia,serif)!important;
+  font-size:25px!important;line-height:1.1!important;font-weight:600!important;
+}
+body.single-uge_term .ppar-glossary-adicon-v67251{display:inline-flex!important;width:26px!important;height:26px!important;flex:0 0 26px!important;align-items:center!important;justify-content:center!important;color:var(--g)!important}
+body.single-uge_term .ppar-glossary-adicon-v67251 svg{display:block!important;width:23px!important;height:23px!important;fill:currentColor!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251>.ppar-affiliate-content{margin:0!important;padding:0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-link{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;color:inherit!important;text-decoration:none!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-image-wrap{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;line-height:0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-image{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;margin:0!important;border-radius:0!important;object-fit:contain!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-title,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-description,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251>.ppar-affiliate-label{display:none!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251>.ppar-affiliate-disclosure{margin:10px 0 0!important;font-size:11px!important;line-height:1.35!important;opacity:.76!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-text{display:block!important;margin:12px 0 0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-button{
+  box-sizing:border-box!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  width:auto!important;min-width:0!important;max-width:none!important;height:40px!important;min-height:40px!important;max-height:40px!important;
+  margin:0!important;padding:0 16px!important;border:1px solid var(--g)!important;border-radius:0!important;
+  background:var(--g)!important;color:#fff!important;font-size:11px!important;line-height:1!important;font-weight:700!important;
+  letter-spacing:.06em!important;text-transform:uppercase!important;text-decoration:none!important;
+}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-link:hover .ppar-banner-button,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-link:focus-visible .ppar-banner-button{background:var(--o)!important;border-color:var(--o)!important;color:#fff!important}
+@media(max-width:840px){
+ body.single-uge_term .ppar-glossary-affiliate-slot-v67251{padding:15px 14px 14px!important}
+ body.single-uge_term .ppar-glossary-adhead-v67251{font-size:22px!important}
+}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-media-v67251{display:block!important;width:100%!important;margin:0!important;padding:0!important;text-decoration:none!important;line-height:0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-cta-wrap-v67251{margin:12px 0 0!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251{display:inline-flex!important;text-decoration:none!important}
+\n\n/* V6.72.53 – Glossar LIVE geometry/design rootfix. */
+@media(min-width:841px){
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{display:block!important;min-width:0!important;margin:0!important}
+  body.single-uge_term .pftk-gsingle-aside-v150490>.ppar-glossary-banner-desktop-v67244{grid-column:auto!important;grid-row:auto!important;align-self:auto!important}
+}
+body.single-uge_term .ppar-glossary-adhead-v67251{font-size:25px!important;line-height:1.1!important}
+body.single-uge_term .ppar-glossary-adicon-v67251 svg{fill:none!important;stroke:currentColor!important;stroke-width:1.7!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-cta-wrap-v67251,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-button{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251{display:flex!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-banner-button{display:flex!important}
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251:hover .ppar-banner-button,
+body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-cta-v67251:focus-visible .ppar-banner-button{background:var(--o)!important;border-color:var(--o)!important;color:#fff!important}
+@media(max-width:840px){
+  body.single-uge_term .pftk-gsingle-aside-v150490{display:grid!important;gap:22px!important;margin-top:22px!important}
+  body.single-uge_term .ppar-glossary-banner-mobile-v67244{margin:22px 0 0!important}
+  body.single-uge_term .ppar-glossary-adhead-v67251{font-size:25px!important}
+}
+
+
+
+/* V6.72.87 KISS – Glossar Desktop bleibt normal im vorhandenen Aside-Flow. */
+@media(min-width:841px){
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{position:static!important;right:auto!important;top:auto!important;transform:none!important;width:100%!important;max-width:100%!important;margin:0!important}
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{width:auto!important;max-width:310px!important;max-height:310px!important;height:auto!important;margin:0 auto!important;object-fit:contain!important}
+}
+
+/* V6.72.59 Pferderassenartikel: Affiliate besitzt die einzige produktive Werbeflaeche. */
+body.single-pa_breed .pftk-breed-affiliate-v150511{display:none!important}
+body.single-pa_breed .ppar-breed-banner-mobile-v67259{display:none!important}
+body.single-pa_breed .ppar-breed-banner-v67259{min-width:0;max-width:100%}
+body.single-pa_breed .ppar-breed-banner-v67259 .ppar-affiliate-card{width:100%!important;max-width:100%!important;margin:0!important;box-sizing:border-box!important}
+body.single-pa_breed .ppar-breed-banner-desktop-v67259 img{display:block!important;width:auto!important;max-width:100%!important;height:auto!important;max-height:none!important;margin-left:auto!important;margin-right:auto!important;object-fit:contain!important}
+@media(max-width:820px){
+ body.single-pa_breed .pftk-breed-grid-v150506{grid-template-areas:"facts" "copy" "affiliate" "tail"!important}
+ body.single-pa_breed .ppar-breed-banner-desktop-v67259{display:none!important}
+ body.single-pa_breed .ppar-breed-banner-mobile-v67259{display:block!important;grid-area:affiliate;margin:0!important}
+ body.single-pa_breed .ppar-breed-banner-mobile-v67259 img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;object-fit:contain!important}
+}
+
+
+/* V6.72.60 – Glossar Desktop banner media centered like confirmed pre-block-change layout. */
+@media(min-width:841px){
+  body.single-uge_term .ppar-glossary-affiliate-slot-v67251 .ppar-glossary-banner-media-v67251{
+    display:flex!important;justify-content:center!important;align-items:flex-start!important;width:100%!important;
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image-wrap{
+    display:flex!important;justify-content:center!important;width:100%!important;max-width:100%!important;margin:0 auto!important;
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{
+    display:block!important;width:auto!important;max-width:100%!important;max-height:310px!important;height:auto!important;margin:0 auto!important;object-fit:contain!important;
+  }
+}
+
+
+/* V6.72.61 – Pferderassen verwenden exakt das bestätigte Glossar-Anzeigenkonzept. */
+body.single-pa_breed .ppar-breed-banner-v67259{min-width:0!important;max-width:100%!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261{
+  box-sizing:border-box!important;
+  width:100%!important;
+  padding:19px 20px 17px!important;
+  border:0!important;
+  border-top:2px solid var(--o)!important;
+  border-radius:0!important;
+  background:var(--cream)!important;
+  overflow:hidden!important;
+}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261>.ppar-affiliate-content{margin:0!important;padding:0!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-link,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-link-static,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-banner-media-v67251{display:block!important;width:100%!important;margin:0!important;padding:0!important;text-decoration:none!important;line-height:0!important;color:inherit!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-image-wrap{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;line-height:0!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-image{display:block!important;width:auto!important;max-width:100%!important;height:auto!important;max-height:none!important;margin-left:auto!important;margin-right:auto!important;border-radius:0!important;object-fit:contain!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-title,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-description,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-meta,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-seller,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261>.ppar-affiliate-label{display:none!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261>.ppar-affiliate-disclosure{margin:10px 0 0!important;font-size:11px!important;line-height:1.35!important;opacity:.76!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-cta-wrap-v67251,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-banner-cta-v67251,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-button{width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-banner-cta-v67251{display:flex!important;text-decoration:none!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-banner-button{
+  box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;height:40px!important;min-height:40px!important;max-height:40px!important;
+  margin:0!important;padding:0 16px!important;border:1px solid var(--g)!important;border-radius:0!important;
+  background:var(--g)!important;color:#fff!important;font-size:11px!important;line-height:1!important;font-weight:700!important;
+  letter-spacing:.06em!important;text-transform:uppercase!important;text-decoration:none!important;
+}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-banner-cta-v67251:hover .ppar-banner-button,
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-banner-cta-v67251:focus-visible .ppar-banner-button{background:var(--o)!important;border-color:var(--o)!important;color:#fff!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-adhead-v67251{
+  display:flex!important;align-items:center!important;gap:10px!important;
+  margin:0 0 12px!important;color:var(--g)!important;
+  font-family:var(--pa-global-title-font,"Cormorant Garamond",Georgia,serif)!important;
+  font-size:25px!important;line-height:1.1!important;font-weight:600!important;
+}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-adicon-v67251{display:inline-flex!important;width:26px!important;height:26px!important;flex:0 0 26px!important;align-items:center!important;justify-content:center!important;color:var(--g)!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-adicon-v67251 svg{display:block!important;width:23px!important;height:23px!important;fill:none!important;stroke:currentColor!important;stroke-width:1.7!important}
+@media(max-width:840px){
+  body.single-pa_breed .ppar-breed-affiliate-slot-v67261{padding:15px 14px 14px!important}
+  body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-adhead-v67251{font-size:22px!important}
+}
+
+
+/* V6.72.62 – disclosure size normalization + full-width category product cards.
+   Disclosure text follows the proven small centered size from the product-grid
+   example. Product suggestion cards must stretch to the same usable body width
+   as the surrounding content instead of collapsing to narrower card widths. */
+body :is(.pa255-products,.pa266-products,.pa272-products,.pa273-products,.pa255-direct,.pa266-direct,.pa272-direct,.pa273-direct) .ppar-affiliate-disclosure{
+    box-sizing:border-box !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+    font-size:10px !important;
+    line-height:1.35 !important;
+    text-align:center !important;
+    opacity:.76 !important;
+}
+
+body :is(.pa255-products,.pa266-products,.pa272-products,.pa273-products,.pa255-network,.pa266-network,.pa272-network,.pa273-network){
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:100% !important;
+}
+body :is(.pa255-product-grid,.pa266-product-grid,.pa272-product-grid,.pa273-product-grid){
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    align-items:stretch !important;
+}
+@media (min-width:901px){
+    body .pa255-product-grid.count-3,
+    body .pa266-product-grid.count-3,
+    body .pa272-product-grid.count-3,
+    body .pa273-product-grid.count-3{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+    body .pa255-product-grid.count-2,
+    body .pa266-product-grid.count-2,
+    body .pa272-product-grid.count-2,
+    body .pa273-product-grid.count-2{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media (max-width:900px) and (min-width:621px){
+    body .pa255-product-grid.count-3,
+    body .pa266-product-grid.count-3,
+    body .pa272-product-grid.count-3,
+    body .pa273-product-grid.count-3{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+    body .pa255-product-grid.count-3 > :last-child,
+    body .pa266-product-grid.count-3 > :last-child,
+    body .pa272-product-grid.count-3 > :last-child,
+    body .pa273-product-grid.count-3 > :last-child{grid-column:1 / -1 !important;justify-self:stretch !important;width:100% !important;max-width:none !important}
+    body .pa255-product-grid.count-2,
+    body .pa266-product-grid.count-2,
+    body .pa272-product-grid.count-2,
+    body .pa273-product-grid.count-2{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media (max-width:620px){
+    body .pa255-product-grid.count-2,
+    body .pa255-product-grid.count-3,
+    body .pa266-product-grid.count-2,
+    body .pa266-product-grid.count-3,
+    body .pa272-product-grid.count-2,
+    body .pa272-product-grid.count-3,
+    body .pa273-product-grid.count-2,
+    body .pa273-product-grid.count-3{grid-template-columns:minmax(0,1fr) !important}
+}
+body :is(.pa255-product-grid,.pa266-product-grid,.pa272-product-grid,.pa273-product-grid) > .is-real,
+body .pa255-product-grid > .pa255-product.is-real,
+body .pa266-product-grid > .pa266-product.is-real,
+body .pa272-product-grid > .pa266-product.is-real,
+body .pa273-product-grid > .pa266-product.is-real{
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    justify-self:stretch !important;
+}
+
+
+/* V6.72.63 – canonical disclosure, breed spacing, true full-body product grids. */
+.ppar-affiliate-disclosure{
+  font-size:10px!important;
+  line-height:1.35!important;
+  text-align:center!important;
+  opacity:.76!important;
+}
+body.single-pa_breed .pftk-breed-left-v150506{gap:16px!important}
+body.single-pa_breed .ppar-breed-banner-v67259{margin:0!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261{margin:0!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261>.ppar-affiliate-disclosure{margin:10px 0 0!important}
+body.single-pa_breed .ppar-breed-affiliate-slot-v67261 .ppar-glossary-cta-wrap-v67251{margin:18px 0 0!important}
+
+/* Product grids: the group itself always occupies the complete surrounding content width. */
+body .pa333-leaf-page .pa272-product-grid,
+body .pa273-product-grid,
+body .pa272-product-grid,
+body .pa266-product-grid,
+body .pa255-product-grid,
+body .pa255-product-grid[data-pftk-affiliate-real-grid-v150414="1"],
+body .pa266-product-grid[data-pftk-affiliate-real-grid-v150414="1"],
+body .pa272-product-grid[data-pftk-affiliate-real-grid-v150414="1"],
+body .pa273-product-grid[data-pftk-affiliate-real-grid-v150414="1"]{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  justify-content:stretch!important;
+}
+@media(min-width:901px){
+ body .pa333-leaf-page .pa272-product-grid.count-1,
+ body .pa255-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa266-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa272-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa273-product-grid.count-1[data-pftk-affiliate-real-grid-v150414="1"]{grid-template-columns:minmax(0,1fr)!important}
+ body .pa333-leaf-page .pa272-product-grid.count-2,
+ body .pa255-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa266-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa272-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa273-product-grid.count-2[data-pftk-affiliate-real-grid-v150414="1"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body .pa333-leaf-page .pa272-product-grid.count-3,
+ body .pa255-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa266-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa272-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"],
+ body .pa273-product-grid.count-3[data-pftk-affiliate-real-grid-v150414="1"]{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+body :is(.pa255-product-grid,.pa266-product-grid,.pa272-product-grid,.pa273-product-grid) > :is(.pa255-product,.pa266-product,.is-real){
+  min-width:0!important;
+  width:100%!important;
+  max-width:none!important;
+  justify-self:stretch!important;
+}
+
+/* V6.72.66 – festgelegte Uebersichts-Werbebloecke. */
+.ppar-overview-banner-v67266{display:block;width:100%;max-width:none;margin:24px 0;clear:both}
+.ppar-overview-banner-v67266[hidden]{display:none!important}
+.ppar-overview-banner-v67266>.ppar-affiliate-slot{width:100%;max-width:none;margin:0}
+
+
+/* V6.72.68 – klassische Einzelbeitraege: reduzierter Querformat-Werbeblock wie die
+   anderen redaktionellen Einzeltypen; weiss, rahmenlos, ohne Creative-Linktext. */
+body.single-post .ppar-slot-post_inline_banner.ppar-article-inline-banner{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:2.25rem 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+body.single-post .ppar-slot-post_inline_banner>.ppar-affiliate-content{
+  margin:0!important;
+  padding:0!important;
+  background:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-media-v67251,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-image-wrap{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:0!important;
+  text-decoration:none!important;
+  background:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-image{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  background:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-title,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-description,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-meta,
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-seller,
+body.single-post .ppar-slot-post_inline_banner>.ppar-affiliate-label{
+  display:none!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251{
+  box-sizing:border-box!important;
+  display:flex!important;
+  justify-content:flex-end!important;
+  width:100%!important;
+  margin:12px 0 0!important;
+  padding:0!important;
+  text-decoration:none!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-banner-button{
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:0!important;
+  height:40px!important;
+  min-height:40px!important;
+  max-height:40px!important;
+  margin:0!important;
+  padding:0 16px!important;
+  border:1px solid #35422A!important;
+  border-radius:0!important;
+  background:#35422A!important;
+  color:#fff!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:.06em!important;
+  text-transform:uppercase!important;
+  text-decoration:none!important;
+}
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251:hover .ppar-banner-button,
+body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251:focus-visible .ppar-banner-button{
+  background:#C89214!important;
+  border-color:#C89214!important;
+  color:#fff!important;
+}
+body.single-post .ppar-slot-post_inline_banner>.ppar-affiliate-disclosure{
+  margin:8px 0 0!important;
+  padding:0!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+  text-align:center!important;
+  opacity:.76!important;
+  background:#fff!important;
+}
+@media(max-width:640px){
+  body.single-post .ppar-slot-post_inline_banner .ppar-glossary-banner-cta-v67251,
+  body.single-post .ppar-slot-post_inline_banner .ppar-banner-button{
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
+
+
+/* V6.72.78 – nur niedrige Querbanner; CTA im Seitenstil; Journal-Altdesign neutralisiert. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta-wrap{
+    display:flex!important;
+    justify-content:flex-end!important;
+    width:100%!important;
+    margin:12px 0 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta{
+    box-sizing:border-box!important;
+    display:inline-flex!important;
+    min-height:42px!important;
+    padding:10px 18px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border:1px solid #35422A!important;
+    border-radius:4px!important;
+    background:#35422A!important;
+    color:#fff!important;
+    font-size:11px!important;
+    line-height:1!important;
+    font-weight:700!important;
+    letter-spacing:.04em!important;
+    text-transform:uppercase!important;
+    text-decoration:none!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:hover,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:focus-visible{
+    background:#C89214!important;
+    border-color:#C89214!important;
+    color:#fff!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner){
+    box-sizing:border-box!important;
+    display:block!important;
+    min-height:0!important;
+    width:100%!important;
+    margin:2rem 0!important;
+    padding:0!important;
+    border:0!important;
+    border-top:0!important;
+    border-bottom:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    gap:0!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)>span,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)>header,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)>h2,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)>header{
+    display:none!important;
+}
+
+
+/* V6.72.79 – FINAL: alle grossen Uebersichts-Banner wirklich ueber die volle Inhaltsbreite. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link{
+    display:block!important;
+    margin-left:0!important;
+    margin-right:0!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    display:block!important;
+    height:auto!important;
+    object-fit:contain!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta-wrap{
+    justify-content:flex-end!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:hover,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:focus-visible{
+    background:#C89214!important;
+    border-color:#C89214!important;
+    color:#fff!important;
+}
+
+
+/* V6.72.80 – DESIGN ONLY. Keine Auswahl-/Filter-/Zuordnungslogik geaendert. */
+/* Der Werbeblock nutzt die komplette Breite seines realen Inhaltscontainers. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-content,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-link,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    box-sizing:border-box!important;
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:0!important;
+    padding-right:0!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-image{
+    height:auto!important;
+    object-fit:fill!important;
+    object-position:center center!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+}
+/* Redundantes \"Anzeige\" ist komplett entfernt/unterdrueckt. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-adlabel,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-label{
+    display:none!important;
+}
+/* Pflichttext direkt unter dem Bild, damit keine unnoetige Hoehe entsteht. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot > .ppar-affiliate-disclosure{
+    display:block!important;
+    margin:3px 0 0!important;
+    padding:0!important;
+    min-height:0!important;
+    font-size:10px!important;
+    line-height:1.25!important;
+    text-align:center!important;
+    opacity:.72!important;
+    border:0!important;
+    background:transparent!important;
+}
+/* CTA rechts unter dem Pflichttext; Seitenstil + Hover. */
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta-wrap{
+    display:flex!important;
+    width:100%!important;
+    justify-content:flex-end!important;
+    margin:6px 0 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta{
+    display:inline-flex!important;
+    min-height:40px!important;
+    padding:9px 18px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border:1px solid #35422A!important;
+    border-radius:2px!important;
+    background:#35422A!important;
+    color:#fff!important;
+    font-size:11px!important;
+    line-height:1!important;
+    font-weight:700!important;
+    letter-spacing:.04em!important;
+    text-transform:uppercase!important;
+    text-decoration:none!important;
+    transition:background-color .18s ease,border-color .18s ease,color .18s ease!important;
+}
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:hover,
+.ppar-affiliate-slot.ppar-overview-wide-banner-slot .ppar-overview-wide-banner-cta:focus-visible{
+    background:#C89214!important;
+    border-color:#C89214!important;
+    color:#fff!important;
+}
+/* Alte Journal-Chrome komplett neutralisieren: kein gruener Rand, kein Alt-Header, keine Pseudolinie. */
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner),
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > *,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner){
+    box-shadow:none!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner){
+    box-sizing:border-box!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    margin:2rem 0!important;
+    padding:0!important;
+    border:0!important;
+    border-top:0!important;
+    border-right:0!important;
+    border-bottom:0!important;
+    border-left:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+    outline:0!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)::before,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner)::after,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)::before,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner)::after{
+    content:none!important;
+    display:none!important;
+    border:0!important;
+    background:none!important;
+}
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > span,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > header,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > h2,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > strong,
+body [class*="pftk-journal-banner"]:has(.ppar-slot-journal_banner) > p,
+body .pftk-journal-section-v150280:has(.ppar-slot-journal_banner) > header{
+    display:none!important;
+}
+/* Falls das Journal-Design eine Linie direkt vor/nach dem Banner erzeugt: ebenfalls neutralisieren. */
+body .pftk-journal-v150280 [class*="pftk-journal-banner"]{
+    border-color:transparent!important;
+}
+
+
+/* V6.72.82 – Pferde Journal ONLY: bestehender Werbeblock mittig zwischen den Themenkacheln. */
+.pftk-journal-category-grid-v150280 > .ppar-journal-midgrid-v67282{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:8px 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+}
+
+
+/* V6.72.83 – Journal-Position ROOTFIX: der echte bestehende Bannerblock sitzt als volle Zeile nach der Haelfte der Themenkarten. */
+.ppar-journal-midgrid-v67283{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:12px 0 18px!important;
+    padding:0!important;
+    border:0!important;
+    border-top:0!important;
+    border-bottom:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+    align-self:stretch!important;
+}
+.ppar-journal-midgrid-v67283::before,
+.ppar-journal-midgrid-v67283::after{
+    content:none!important;
+    display:none!important;
+}
+.ppar-journal-midgrid-v67283 > header,
+.ppar-journal-midgrid-v67283 > h2,
+.ppar-journal-midgrid-v67283 > h3,
+.ppar-journal-midgrid-v67283 > span:first-child{
+    display:none!important;
+}
+.ppar-journal-midgrid-v67283 .ppar-affiliate-slot{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+}
+
+
+/* V6.72.99 RESTORE – Journal Desktop: 8 Themenkarten strikt 4 / Banner / 4.
+   Nur visuelle Reihenfolge im bestehenden Grid; Designplugin bleibt unangetastet. */
+@media (min-width:768px){
+  .pftk-journal-category-grid-v150280 > a.pftk-journal-tile-v150478{order:1!important}
+  .pftk-journal-category-grid-v150280 > a.pftk-journal-tile-v150478:nth-of-type(n+5){order:3!important}
+  .pftk-journal-category-grid-v150280 > .ppar-journal-midgrid-v67283{order:2!important}
+}
+
+/* V6.72.100 PASS-RESTORE – exakt belegter Glossar-LIVE-PASS aus 6.72.60/57.
+   Desktop-Anzeige bleibt ausserhalb der Grid-Hoehenberechnung; linker Textfluss
+   darf durch den Werbeblock nicht nach unten gedrueckt werden. */
+@media(min-width:841px){
+  body.single-uge_term .pftk-gsingle-grid-v150490{position:relative!important}
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{
+    display:block!important;position:absolute!important;right:0!important;top:0!important;
+    width:310px!important;max-width:310px!important;margin:0!important;z-index:1!important
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image-wrap{
+    display:flex!important;justify-content:center!important;width:100%!important;max-width:100%!important;margin:0 auto!important
+  }
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244 .ppar-banner-image{
+    display:block!important;width:auto!important;max-width:100%!important;max-height:310px!important;height:auto!important;
+    margin:0 auto!important;object-fit:contain!important
+  }
+  body.single-uge_term .pftk-gsingle-topic-v150490{will-change:transform}
+}
+@media(max-width:840px){
+  body.single-uge_term .ppar-glossary-banner-desktop-v67244{position:static!important;right:auto!important;top:auto!important;transform:none!important}
+}
+
+/* V6.72.100 – Spezial-Uebersichten nutzen wieder exakt eine volle Querzeile. */
+.ppar-overview-banner-v672100{display:block!important;width:100%!important;max-width:none!important;clear:both!important;margin:24px 0!important}
+.ppar-overview-banner-v672100[hidden]{display:none!important}

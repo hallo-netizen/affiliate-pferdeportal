@@ -11,6 +11,70 @@ if (!defined('ABSPATH')) {
  * Vorgaben, Notabschaltung und Protokollierung liegen zentral in diesem Kern.
  */
 trait PPAR_Control_Contract_Trait {
+    private $control_decision_cache = array();
+    private $control_decision_raw_cache = array();
+    private $control_decision_portal_cache_loaded = array();
+
+    private function control_request_local_read_cache_allowed() {
+        if ((function_exists('is_admin') && is_admin())
+            || (defined('DOING_CRON') && DOING_CRON)
+            || (defined('REST_REQUEST') && REST_REQUEST)
+            || (defined('WP_CLI') && WP_CLI)
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+            return false;
+        }
+        return true;
+    }
+
+    private function control_default_decision() {
+        return array('exists'=>false,'status'=>'automatic','reason'=>'','payload'=>array(),'user_id'=>0,'created_at'=>0,'updated_at'=>0);
+    }
+
+    private function control_normalize_decision_row($row) {
+        if (!is_array($row)) { return $this->control_default_decision(); }
+        $payload = json_decode((string) ($row['payload'] ?? ''), true);
+        return array(
+            'exists'=>true,
+            'id'=>absint($row['id'] ?? 0),
+            'status'=>sanitize_key((string) ($row['status'] ?? 'automatic')),
+            'reason'=>sanitize_text_field((string) ($row['reason'] ?? '')),
+            'payload'=>is_array($payload) ? $payload : array(),
+            'user_id'=>absint($row['user_id'] ?? 0),
+            'created_at'=>absint($row['created_at'] ?? 0),
+            'updated_at'=>absint($row['updated_at'] ?? 0),
+        );
+    }
+
+    private function control_prime_portal_decision_cache($portal_key) {
+        $portal_key = sanitize_key((string) $portal_key);
+        if ($portal_key === '' || !$this->control_request_local_read_cache_allowed()) { return false; }
+        if (!empty($this->control_decision_portal_cache_loaded[$portal_key])) { return true; }
+        global $wpdb;
+        $rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->control_decisions_table()} WHERE portal_key=%s", $portal_key), ARRAY_A);
+        if (!is_array($rows)) { return false; }
+        foreach ($rows as $row) {
+            if (!is_array($row)) { continue; }
+            $key = strtolower(sanitize_text_field((string) ($row['decision_key'] ?? '')));
+            if (!preg_match('/^[a-f0-9]{64}$/', $key)) { continue; }
+            $this->control_decision_cache[$key] = $this->control_normalize_decision_row($row);
+        }
+        $this->control_decision_portal_cache_loaded[$portal_key] = 1;
+        return true;
+    }
+
+    private function control_clear_decision_cache($portal_key = '', $scope_type = '', $scope_key = '') {
+        if ($portal_key === '' || $scope_type === '' || $scope_key === '') {
+            $this->control_decision_cache = array();
+            $this->control_decision_raw_cache = array();
+            $this->control_decision_portal_cache_loaded = array();
+            return;
+        }
+        $portal_key = sanitize_key((string) $portal_key);
+        $key = $this->control_decision_key($portal_key, $scope_type, $scope_key);
+        unset($this->control_decision_cache[$key], $this->control_decision_portal_cache_loaded[$portal_key]);
+        $this->control_decision_raw_cache = array();
+    }
+
     private function control_decisions_table() {
         global $wpdb;
         return $wpdb->base_prefix . 'ppar_control_decisions';
@@ -101,7 +165,7 @@ trait PPAR_Control_Contract_Trait {
     private function control_clean_payload($payload) {
         $payload = is_array($payload) ? $payload : array();
         $safe = array();
-        foreach (array('target_type','target_key','target_label','target_context','slot_id','provider','partner_external_id','output_id') as $field) {
+        foreach (array('target_type','target_key','target_label','target_context','slot_id','werbeplatz_scope','provider','partner_external_id','output_id') as $field) {
             if (!array_key_exists($field, $payload)) {
                 continue;
             }
@@ -118,28 +182,34 @@ trait PPAR_Control_Contract_Trait {
 
     public function control_get_decision($portal_key, $scope_type, $scope_key) {
         global $wpdb;
+        $raw_cache_key = (string) $portal_key . "\x1f" . (string) $scope_type . "\x1f" . (string) $scope_key;
+        if (array_key_exists($raw_cache_key, $this->control_decision_raw_cache)) {
+            return $this->control_decision_raw_cache[$raw_cache_key];
+        }
         $portal_key = sanitize_key((string) $portal_key);
         $scope_type = sanitize_key((string) $scope_type);
         $scope_key = sanitize_text_field((string) $scope_key);
         if (!in_array($scope_type, $this->control_allowed_scope_types(), true) || $scope_key === '') {
-            return array('exists'=>false,'status'=>'automatic','reason'=>'','payload'=>array(),'user_id'=>0,'created_at'=>0,'updated_at'=>0);
+            return $this->control_decision_raw_cache[$raw_cache_key] = $this->control_default_decision();
         }
         $key = $this->control_decision_key($portal_key, $scope_type, $scope_key);
-        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->control_decisions_table()} WHERE decision_key=%s", $key), ARRAY_A);
-        if (!is_array($row)) {
-            return array('exists'=>false,'status'=>'automatic','reason'=>'','payload'=>array(),'user_id'=>0,'created_at'=>0,'updated_at'=>0);
+        if (array_key_exists($key, $this->control_decision_cache)) {
+            return $this->control_decision_raw_cache[$raw_cache_key] = $this->control_decision_cache[$key];
         }
-        $payload = json_decode((string) ($row['payload'] ?? ''), true);
-        return array(
-            'exists'=>true,
-            'id'=>absint($row['id'] ?? 0),
-            'status'=>sanitize_key((string) ($row['status'] ?? 'automatic')),
-            'reason'=>sanitize_text_field((string) ($row['reason'] ?? '')),
-            'payload'=>is_array($payload) ? $payload : array(),
-            'user_id'=>absint($row['user_id'] ?? 0),
-            'created_at'=>absint($row['created_at'] ?? 0),
-            'updated_at'=>absint($row['updated_at'] ?? 0),
-        );
+        if ($this->control_prime_portal_decision_cache($portal_key)) {
+            if (array_key_exists($key, $this->control_decision_cache)) {
+                return $this->control_decision_raw_cache[$raw_cache_key] = $this->control_decision_cache[$key];
+            }
+            $result = $this->control_default_decision();
+            $this->control_decision_cache[$key] = $result;
+            $this->control_decision_raw_cache[$raw_cache_key] = $result;
+            return $result;
+        }
+        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->control_decisions_table()} WHERE decision_key=%s", $key), ARRAY_A);
+        $result = is_array($row) ? $this->control_normalize_decision_row($row) : $this->control_default_decision();
+        $this->control_decision_cache[$key] = $result;
+        $this->control_decision_raw_cache[$raw_cache_key] = $result;
+        return $result;
     }
 
     public function control_set_decision($portal_key, $scope_type, $scope_key, $status, $reason, $payload = array(), $event_type = 'manual_decision') {
@@ -182,6 +252,7 @@ trait PPAR_Control_Contract_Trait {
         if ($id <= 0) {
             return new WP_Error('control_decision_save_failed', 'Chefentscheidung konnte nicht gespeichert werden.');
         }
+        $this->control_clear_decision_cache($portal_key, $scope_type, $scope_key);
         $this->control_log_event($event_type, $portal_key, $scope_type, $scope_key, (string) ($existing['status'] ?? 'automatic'), $status, $reason, $payload, $user_id);
         return $id;
     }

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.105
+ * Version: 6.72.152
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -30,6 +30,27 @@ require_once __DIR__ . '/includes/trait-ppar-digistore24.php';
 require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
 
 final class Pferdeportal_Affiliate_Router {
+    private $ranked_campaigns_request_cache = array();
+
+    private function ranked_campaigns_request_cache_allowed() {
+        if ((function_exists('is_admin') && is_admin())
+            || (defined('DOING_CRON') && DOING_CRON)
+            || (defined('REST_REQUEST') && REST_REQUEST)
+            || (defined('WP_CLI') && WP_CLI)
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+            return false;
+        }
+        return true;
+    }
+
+    private function ranked_campaigns_request_cache_key($context, $slot_type, $forced_campaign_id) {
+        return hash('sha256', serialize(array(
+            is_array($context) ? $context : array(),
+            (string) $slot_type,
+            (string) $forced_campaign_id,
+        )));
+    }
+
     use PPAR_Article_Plans_Trait;
     use PPAR_Network_Sync_Trait;
     use PPAR_Provider_Intake_Trait;
@@ -45,7 +66,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.105';
+    const VERSION = '6.72.152';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -85,6 +106,8 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_AUTOMATION_SAFETY_VERSION = 'ppar_automation_safety_version';
     const OPTION_AUTOMATION_LAST_DISPATCH = 'ppar_automation_last_dispatch_v1';
     const OPTION_AUTOMATION_CYCLE = 'ppar_automation_cycle_v1';
+    const OPTION_FULL_POOL_AUTOMATION_VERSION = 'ppar_full_pool_automation_version_v1';
+    const OPTION_FULL_POOL_AUTOMATION_CURSOR = 'ppar_full_pool_automation_cursor_v1';
     const OPTION_ASSIGNMENTS = 'ppar_assignments_v1';
     const OPTION_BANNER_DISTRIBUTION = 'ppar_banner_distribution_v1';
     const OPTION_HEALTH_SETTINGS = 'ppar_health_settings_v1';
@@ -96,6 +119,7 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_ARTICLE_PLAN_LOG = 'ppar_article_plan_log_v1';
     const OPTION_ARTICLE_REBUILD_STATE = 'ppar_article_plan_rebuild_state_v1';
     const OPTION_ARTICLE_PRODUCTS_UPGRADE = 'ppar_article_products_upgrade_v1';
+    const OPTION_ARTICLE_PLAN_SCHEMA_UPGRADE = 'ppar_article_plan_schema_upgrade_v1';
     const OPTION_OUTPUT_SCHEMA_VERSION = 'ppar_output_schema_version';
     const OPTION_CONTROL_SCHEMA_VERSION = 'ppar_control_schema_version';
     const OPTION_CONTROL_SETTINGS = 'ppar_control_settings_v1';
@@ -119,16 +143,30 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_EBAY_DELETION_STATE = 'ppar_ebay_deletion_state_v1';
     const OPTION_EBAY_DELETION_RECEIPTS = 'ppar_ebay_deletion_receipts_v1';
     const OPTION_HOUSEKEEPING_STATE = 'ppar_housekeeping_state_v1';
+    const OPTION_AFF039_RECOVERY = 'ppar_aff039_dual_layer_recovery_v1';
+    const AFF039_RECOVERY_HOOK = 'ppar_aff039_dual_layer_recovery_worker_v1';
+    const AFF039_RECOVERY_LOCK = 'ppar_aff039_dual_layer_recovery_lock_v1';
+    const OPTION_AFF043_RECOVERY = 'ppar_aff043_historical_product_state_restore_v1';
+    const AFF043_RECOVERY_HOOK = 'ppar_aff043_historical_product_state_restore_worker_v1';
+    const AFF043_RECOVERY_LOCK = 'ppar_aff043_historical_product_state_restore_lock_v1';
+    const AFF043_SNAPSHOT_REL = 'recovery/aff043-historical-product-state-20260915.json';
+    const AFF043_SNAPSHOT_SHA256 = '72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8';
+    const OPTION_AFF044_RESTORE = 'ppar_aff044_clean_114_115_restore_v1';
     const ARTICLE_PLAN_META = 'ppar_article_delivery_plan_v1';
-    const ARTICLE_PLAN_SCHEMA = '1.2';
+    const ARTICLE_PLAN_SCHEMA = '1.5';
     const HEALTH_META = 'ppar_health_data_v1';
     const HEALTH_CRON_HOOK = 'ppar_daily_health_check';
     const ARTICLE_REBUILD_HOOK = 'ppar_article_plan_rebuild_worker';
     const AUTOMATION_CRON_HOOK = 'ppar_partner_automation_sync';
     const AUTOMATION_WORKER_HOOK = 'ppar_partner_automation_worker';
-    const AWIN_PROGRAMME_REFRESH_CRON_HOOK = 'ppar_awin_programme_inventory_refresh_hourly_v1';
+    const ADCELL_BATCH_WORKER_HOOK = 'ppar_adcell_batch_worker_v1';
+    const ADCELL_SELF_DRIVE_ACTION = 'ppar_adcell_self_drive_v1';
+    const ADCELL_SELF_DRIVE_TOKEN_TTL = 180;
     const ASSET_VERIFY_HOOK = 'ppar_verify_creative_assets';
-    const HEALTH_SCHEMA_VERSION = '2.1';
+    const FULL_POOL_WORKER_HOOK = 'ppar_full_pool_automation_worker_v1';
+    const PARTNER_ANALYTICS_CRON_HOOK = 'ppar_partner_analytics_refresh_daily_v1';
+    const AWIN_PROGRAMME_REFRESH_CRON_HOOK = 'ppar_awin_programme_inventory_refresh_hourly_v1';
+    const HEALTH_SCHEMA_VERSION = '2.2';
     const OPTION_SYNC_SCHEMA_VERSION = 'ppar_sync_schema_version';
     const SYNC_SCHEMA_VERSION = '1.0';
     const AUTOMATION_SCHEMA_VERSION = '1.2';
@@ -191,13 +229,30 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'maybe_upgrade_health_checker'), 6);
         add_action('init', array($this, 'ensure_health_cron_schedule'), 20);
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
+        // V6.72.104: Breadcrumb-Geometrie gehoert wieder ausschliesslich dem
+        // Designplugin. Affiliate reserviert keinen Layoutplatz mehr. Der bestehende
+        // Journal-Hero-Preload bleibt als reiner Bildhinweis erhalten.
+        add_action('wp_head', array($this, 'print_journal_hero_preload_v672104'), 1);
         // Muss auch ausserhalb des Adminbereichs erreichbar sein: eBay validiert
         // diesen HTTPS-Endpunkt per GET-Challenge und sendet danach signierte POSTs.
         add_action('rest_api_init', array($this, 'register_ebay_account_deletion_routes'));
         add_action('rest_api_init', array($this, 'register_ebay_external_tick_route'));
         add_action('admin_post_' . self::EBAY_SELF_DRIVE_ACTION, array($this, 'handle_ebay_self_drive_worker'));
         add_action('admin_post_nopriv_' . self::EBAY_SELF_DRIVE_ACTION, array($this, 'handle_ebay_self_drive_worker'));
+        add_action('admin_post_' . self::ADCELL_SELF_DRIVE_ACTION, array($this, 'handle_adcell_self_drive_worker'));
+        add_action('admin_post_nopriv_' . self::ADCELL_SELF_DRIVE_ACTION, array($this, 'handle_adcell_self_drive_worker'));
         add_filter('the_content', array($this, 'filter_the_content'), 20);
+        // V6.72.42: Glossar-Einzelbanner wird nach dem Designrenderer in die
+        // reale Glossar-Single-Struktur eingesetzt. Design/Text bleiben unveraendert.
+        add_filter('the_content', array($this, 'inject_glossary_single_banner'), 40);
+        // V6.72.60: Pferderassenartikel erhalten denselben echten Automatikpfad.
+        add_filter('the_content', array($this, 'inject_breed_single_banner'), 41);
+        // V6.72.87 KISS: Uebersichts-Banner werden serverseitig direkt vor dem Hauptloop ausgegeben.
+        add_action('wp_footer', array($this, 'inject_overview_banner_footer'), 20);
+        // V6.72.90 KISS: Journal am final gerenderten Seiteninhalt einsortieren.
+        // Die reale /journal/-Seite enthaelt [pferde_journal]; bei Prioritaet 99
+        // ist der Shortcode bereits gerendert. Kein JavaScript/Observer/Timer.
+        add_filter('the_content', array($this, 'reposition_journal_banner_final_content'), 99);
         add_filter('pftk_hub_grid_affiliate_data', array($this, 'provide_hub_grid_affiliate_data'), 10, 3);
         add_filter('pftk_leaf_category_affiliate_slot_html', array($this, 'provide_leaf_category_affiliate_slot_html'), 10, 4);
         add_filter('pftk_leaf_page_affiliate_slot_html', array($this, 'provide_leaf_page_affiliate_slot_html'), 10, 4);
@@ -213,15 +268,33 @@ final class Pferdeportal_Affiliate_Router {
         add_action(self::HEALTH_CRON_HOOK, array($this, 'run_scheduled_health_check'));
         add_action(self::AUTOMATION_CRON_HOOK, array($this, 'run_scheduled_partner_sync'));
         add_action(self::AUTOMATION_WORKER_HOOK, array($this, 'run_automation_worker'));
+        add_action(self::ADCELL_BATCH_WORKER_HOOK, array($this, 'run_adcell_batch_worker'));
+        add_action('init', array($this, 'maybe_resume_adcell_batch_worker'), 28);
+        add_action('init', array($this, 'maybe_restore_v67294_banner_state'), 26);
+        add_action('init', array($this, 'maybe_restore_published_banner_campaign_consistency_v672100'), 27);
+        add_action('init', array($this, 'ensure_full_pool_automation'), 29);
+        add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30);
+        add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31);
+        add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
+        add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
+        add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
+        add_action(self::PARTNER_ANALYTICS_CRON_HOOK, array($this, 'run_partner_analytics_refresh'));
+        // AFF-ERR-039: recovery work is isolated to its dedicated worker.
+        // Never bind state repair to normal init/frontend/REST requests.
+        add_action(self::AFF039_RECOVERY_HOOK, array($this, 'run_aff039_recovery_worker'));
+        // AFF-ERR-043: exact historical product-state restore is explicit/bounded only.
+        // Never run it on init/frontend/REST.
+        add_action(self::AFF043_RECOVERY_HOOK, array($this, 'run_aff043_recovery_worker'));
         add_action(self::AWIN_PROGRAMME_REFRESH_CRON_HOOK, array($this, 'run_awin_programme_inventory_refresh'));
         add_action('init', array($this, 'ensure_awin_programme_inventory_schedule'), 23);
-        add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::HOUSEKEEPING_CRON_HOOK, array($this, 'run_housekeeping'));
         add_action('init', array($this, 'ensure_housekeeping_schedule'), 27);
         add_filter('cron_schedules', array($this, 'automation_cron_schedules'));
+        add_action('init', array($this, 'maybe_apply_article_plan_schema_v13_upgrade'), 12);
         add_action('save_post_post', array($this, 'handle_article_plan_post_save'), 40, 3);
         add_action(self::ARTICLE_REBUILD_HOOK, array($this, 'run_article_plan_rebuild_worker'));
         add_action('init', array($this, 'maybe_apply_automation_safety_upgrade'), 7);
+        add_action('init', array($this, 'maybe_upgrade_background_schedule_v67264'), 7);
         add_action('init', array($this, 'maybe_install_control_contract_schema'), 8);
         add_action('init', array($this, 'maybe_install_output_objects_schema'), 9);
         add_action('init', array($this, 'maybe_install_ebay_schema'), 10);
@@ -231,6 +304,7 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'maybe_adopt_stalled_zero_tick_ebay_run_v6638'), 3);
         add_action('init', array($this, 'maybe_close_incompatible_ebay_run_for_checkpoint_restart'), 4);
         add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11);
+        add_action('init', array($this, 'maybe_aff043_automatic_state_restore'), 12);
         add_action('init', array($this, 'ensure_automation_schedule'), 21);
         add_action('init', array($this, 'retire_ebay_legacy_cron_transport'), 22);
         add_action('init', array($this, 'ensure_ebay_maintenance_schedule'), 24);
@@ -338,6 +412,13 @@ final class Pferdeportal_Affiliate_Router {
             add_action('wp_ajax_ppar_ebay_canonical_tick', array($this, 'handle_ebay_canonical_tick'));
             add_action('admin_post_ppar_ebay_review_decision', array($this, 'handle_ebay_review_decision'));
             add_action('admin_post_ppar_ebay_business_curation', array($this, 'handle_ebay_business_curation'));
+            add_action('admin_post_ppar_aff039_recovery_start', array($this, 'handle_aff039_recovery_start'));
+            add_action('admin_post_ppar_aff039_recovery_step', array($this, 'handle_aff039_recovery_step'));
+            add_action('admin_post_ppar_aff039_recovery_stop', array($this, 'handle_aff039_recovery_stop'));
+            add_action('admin_post_ppar_aff043_recovery_start', array($this, 'handle_aff043_recovery_start'));
+            add_action('admin_post_ppar_aff043_recovery_step', array($this, 'handle_aff043_recovery_step'));
+            add_action('admin_post_ppar_aff043_recovery_stop', array($this, 'handle_aff043_recovery_stop'));
+            add_action('admin_post_ppar_aff044_clean_restore', array($this, 'handle_aff044_clean_restore'));
             add_action('admin_init', array($this, 'maybe_install_network_sync_schema'));
             add_action('admin_init', array($this, 'maybe_install_creative_library_schema'));
             add_action('admin_init', array($this, 'maybe_install_automation_schema'));
@@ -367,7 +448,7 @@ final class Pferdeportal_Affiliate_Router {
             update_option(self::OPTION_AUTO_SLOTS, array(), false);
         }
         if (get_option(self::OPTION_DISCLOSURE, null) === null) {
-            update_option(self::OPTION_DISCLOSURE, 'Hinweis: Einige Links auf dieser Seite sind Affiliate-Links. Wenn Sie darüber kaufen, erhalten wir ggf. eine Provision. Für Sie entstehen keine Mehrkosten.', false);
+            update_option(self::OPTION_DISCLOSURE, 'Werbelink: Bei Kauf erhalten wir ggf. eine Provision.', false);
         }
         if (get_option(self::OPTION_DEBUG, null) === null) {
             update_option(self::OPTION_DEBUG, '0', false);
@@ -591,7 +672,7 @@ final class Pferdeportal_Affiliate_Router {
     public function provide_market_affiliate_slot_html($html, $page_id, $slot_type, $design_context = array()) {
         $page_id = absint($page_id);
         $slot_type = sanitize_key((string) $slot_type);
-        if ($slot_type !== 'anzeigenmarkt_top_banner' || $page_id <= 0 || !$this->is_enabled()) {
+        if ($slot_type !== 'anzeigenmarkt_top_banner' || !$this->is_enabled()) {
             return '';
         }
         if (is_array($design_context)) {
@@ -600,6 +681,25 @@ final class Pferdeportal_Affiliate_Router {
                 return '';
             }
         }
+
+        // V6.72.85 – HivePress-Unterkategorien benutzen den bereits vorhandenen
+        // Anzeigenmarkt-Designslot. Auf Taxonomie-Seiten ist get_queried_object_id()
+        // eine TERM-ID und keine Seiten-ID; die alte Page-Pruefung liess deshalb
+        // oeffentlich leer und zeigte Admins nur die Design-Pruefflaeche.
+        $queried = function_exists('get_queried_object') ? get_queried_object() : null;
+        if ($queried instanceof WP_Term && !is_wp_error($queried)
+            && (string) $queried->taxonomy === 'hp_listing_category') {
+            $context = $this->affiliate_overview_term_context($queried, 'hp_listing_category', 'hp_listing_category_archive');
+            return $this->render_affiliate_slot_for_context(
+                'term_' . absint($queried->term_id),
+                $context,
+                'anzeigenmarkt_category_banner',
+                'portal_context',
+                ''
+            );
+        }
+
+        if ($page_id <= 0) { return ''; }
         $post = get_post($page_id);
         if (!$post instanceof WP_Post || $post->post_type !== 'page' || $post->post_status !== 'publish') {
             return '';
@@ -627,6 +727,28 @@ final class Pferdeportal_Affiliate_Router {
                 ? ($this->is_enabled() ? 'Automatische Bannerzuordnung ist aktiv.' : 'Verbindung steht; die Affiliate-Automatik ist zentral deaktiviert.')
                 : 'Schnittstellenversion passt nicht. Aus Sicherheitsgründen wird keine sechste Kachel ausgegeben.',
         );
+    }
+
+    /**
+     * V6.72.104: reiner Journal-Hero-Preload. Keine Breadcrumb-, Margin-, Spacer-
+     * oder First-Paint-Geometrie im Affiliate-Plugin. Diese gehoert dem Designplugin.
+     */
+    public function print_journal_hero_preload_v672104() {
+        if (is_admin() || is_feed() || !(function_exists('is_page') && is_page('journal')) || !class_exists('Pferde_Template_Kit')) {
+            return;
+        }
+        try {
+            $ref = new ReflectionClass('Pferde_Template_Kit');
+            $design_file = $ref->getFileName();
+            if (is_string($design_file) && $design_file !== '') {
+                $hero = plugins_url('assets/journal-v150478/hero.webp', $design_file);
+                if (is_string($hero) && $hero !== '') {
+                    echo '<link rel="preload" as="image" href="' . esc_url($hero) . '" fetchpriority="high">' . "\n";
+                }
+            }
+        } catch (Throwable $e) {
+            // Reiner Performance-Hinweis. Rendering darf davon nie abhaengen.
+        }
     }
 
     public function enqueue_frontend_assets() {
@@ -672,14 +794,128 @@ final class Pferdeportal_Affiliate_Router {
       if(label&&cta.textContent!==label){cta.textContent=label;cta.setAttribute('data-ppar-provider-cta-v66116','1');}
     });
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){scan(document);},{once:true});else scan(document);
-  if(window.MutationObserver)new MutationObserver(function(mutations){
-    mutations.forEach(function(m){Array.prototype.forEach.call(m.addedNodes||[],function(n){if(n&&n.nodeType===1){if(n.matches&&n.matches('[data-pftk-affiliate-cta-v150414="1"]'))scan(n.parentNode||document);else scan(n);}});});
-  }).observe(document.documentElement,{childList:true,subtree:true});
+  function run(){scan(document);setTimeout(function(){scan(document);},0);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
 JS;
             wp_add_inline_script('ppar-frontend', $cta_script, 'after');
         }
+
+    }
+
+    /**
+     * V6.72.85 – Journal server-side ROOTFIX.
+     * WordPress hat do_shortcode bereits vor diesem Filter ausgefuehrt. Daher
+     * verschieben wir den real gerenderten journal_banner im finalen Content
+     * direkt nach die Haelfte der Themenkacheln. Keine Design-Klassen-Version
+     * wird hart vorausgesetzt; entscheidend sind Journal-Karten und der echte
+     * data-/slot-Marker. Der existierende Block wird verschoben, nie kopiert.
+     */
+    /**
+     * V6.72.90 – KISS: Der finale, bereits gerenderte Journal-Seiteninhalt wird
+     * serverseitig genau einmal einsortiert. Kein spaeter DOM-Eingriff.
+     */
+    public function reposition_journal_banner_final_content($content) {
+        if (!is_string($content) || $content === '') { return $content; }
+        if (stripos($content, 'pftk-journal-category-grid-v150280') === false) { return $content; }
+        if (stripos($content, 'pftk-journal-banner-v150280') === false && stripos($content, 'journal_banner') === false) { return $content; }
+        // V6.72.99 RESTORE: Ein alter Positionsmarker darf eine falsche 5/3-
+        // Position nicht konservieren. Den bestehenden Block auf jedem finalen
+        // Render idempotent herausnehmen und anhand der aktuellen Karten neu setzen.
+        return $this->reposition_journal_banner_in_content($content);
+    }
+
+    private function ppar_balanced_html_block_end($html, $open_pos, $tag) {
+        $html = (string)$html;
+        $tag = strtolower(trim((string)$tag));
+        $open_pos = (int)$open_pos;
+        if ($html === '' || $open_pos < 0 || !in_array($tag, array('div','section'), true)) { return false; }
+        $pattern = '~</?' . preg_quote($tag, '~') . '\\b[^>]*>~i';
+        if (!preg_match_all($pattern, $html, $matches, PREG_OFFSET_CAPTURE, $open_pos)) { return false; }
+        $depth = 0;
+        foreach ($matches[0] as $match) {
+            $token = (string)$match[0];
+            $pos = (int)$match[1];
+            if ($pos < $open_pos) { continue; }
+            if (preg_match('~^</~', $token)) {
+                $depth--;
+                if ($depth === 0) { return $pos + strlen($token); }
+            } else {
+                $depth++;
+            }
+        }
+        return false;
+    }
+
+    public function reposition_journal_banner_in_content($content) {
+        if (is_admin() || !is_string($content) || $content === '') { return $content; }
+        if (stripos($content, 'pftk-journal-category-grid-v150280') === false) { return $content; }
+
+        // 6.72.90: aktuelle Journalstruktur direkt und serverseitig lesen.
+        $block_start = false;
+        $block_end = false;
+        $wrapper_pos = stripos($content, 'pftk-journal-banner-v150280');
+        if ($wrapper_pos !== false) {
+            $before = substr($content, 0, $wrapper_pos);
+            $block_start = strripos($before, '<section');
+            if ($block_start !== false) { $block_end = $this->ppar_balanced_html_block_end($content, $block_start, 'section'); }
+        }
+        if ($block_start === false || $block_end === false) {
+            $slot_pos = stripos($content, 'journal_banner');
+            if ($slot_pos !== false) {
+                $before = substr($content, 0, $slot_pos);
+                $section_start = strripos($before, '<section');
+                if ($section_start !== false) {
+                    $section_end = $this->ppar_balanced_html_block_end($content, $section_start, 'section');
+                    if ($section_end !== false) { $block_start = $section_start; $block_end = $section_end; }
+                }
+                if ($block_start === false || $block_end === false) {
+                    if (preg_match_all("~<div\\b[^>]*class=([\"'])[^\"']*journal[^\"']*banner[^\"']*\\1[^>]*>~i", $before, $m, PREG_OFFSET_CAPTURE)) {
+                        $last = end($m[0]);
+                        $div_start = (int)$last[1];
+                        $div_end = $this->ppar_balanced_html_block_end($content, $div_start, 'div');
+                        if ($div_end !== false) { $block_start = $div_start; $block_end = $div_end; }
+                    }
+                }
+            }
+        }
+        if ($block_start === false || $block_end === false || $block_end <= $block_start) { return $content; }
+        $block = substr($content, $block_start, $block_end - $block_start);
+        if (stripos($block, 'pftk-journal-banner-v150280') === false && stripos($block, 'journal_banner') === false) { return $content; }
+
+        $without = substr($content, 0, $block_start) . substr($content, $block_end);
+        $grid_marker = stripos($without, 'pftk-journal-category-grid-v150280');
+        if ($grid_marker === false) { return $content; }
+        $grid_start = strripos(substr($without, 0, $grid_marker), '<div');
+        if ($grid_start === false) { return $content; }
+        $grid_end = $this->ppar_balanced_html_block_end($without, $grid_start, 'div');
+        if ($grid_end === false || $grid_end <= $grid_start) { return $content; }
+
+        $grid_html = substr($without, $grid_start, $grid_end - $grid_start);
+        $pattern = "~<a\\b[^>]*class=([\"'])[^\"']*(?:pftk-journal-tile-v\\d+|journal-(?:category|topic)[^\"']*card)[^\"']*\\1[^>]*>.*?</a>~is";
+        if (!preg_match_all($pattern, $grid_html, $cards, PREG_OFFSET_CAPTURE) || count($cards[0]) < 2) { return $content; }
+
+        $mid = (int)ceil(count($cards[0]) / 2);
+        $anchor_card = $cards[0][$mid - 1];
+        $insert_at = $grid_start + (int)$anchor_card[1] + strlen((string)$anchor_card[0]);
+
+        // Ganzen bestehenden Bannerblock als eine Grid-Zeile einsetzen. Keine Kopie,
+        // kein JS, kein Observer, kein Timer.
+        if (preg_match('/^<section\\b[^>]*>/i', $block, $opening)) {
+            $tag = $opening[0];
+            if (stripos($tag, 'ppar-journal-midgrid-v67283') === false) {
+                if (preg_match("~\\bclass=([\"'])(.*?)\\1~i", $tag, $cm)) {
+                    $replacement = 'class=' . $cm[1] . trim($cm[2] . ' ppar-journal-midgrid-v67283') . $cm[1];
+                    $new_tag = preg_replace("~\\bclass=([\"'])(.*?)\\1~i", $replacement, $tag, 1);
+                } else {
+                    $new_tag = rtrim(substr($tag, 0, -1)) . ' class="ppar-journal-midgrid-v67283">';
+                }
+                $block = $new_tag . substr($block, strlen($tag));
+            }
+            $block = preg_replace("~\\sdata-ppar-journal-position=([\"']).*?\\1~i", '', $block, 1);
+            $block = preg_replace('/^<section\\b/i', '<section data-ppar-journal-position="mid-categories"', $block, 1);
+        }
+        return substr($without, 0, $insert_at) . $block . substr($without, $insert_at);
     }
 
     public function register_shortcodes() {
@@ -1102,6 +1338,596 @@ JS;
      * products in every article. Enable it once on upgrade, queue the plans, and
      * then respect any later explicit administrator change normally.
      */
+    /** AFF-ERR-039 dual-layer recovery. Explicit admin start + isolated worker only. */
+    private function aff039_incident_evidence() {
+        $r118 = get_option('ppar_v672118_restore_108_state_v1', array());
+        $p118 = get_option('ppar_v672118_product_state_recovery_v1', array());
+        $r119 = get_option('ppar_v672119_visibility_restore_v1', array());
+        $r123 = get_option('ppar_category_product_structure_restore_v672123', array());
+        $r124 = get_option('ppar_category_product_workflow_restore_v672124', array());
+        return array(
+            'v115'=>(string)get_option('ppar_multiprovider_category_repair_v672115','')==='1',
+            'v116'=>(string)get_option('ppar_v672115_article_revision_recovery_v1','')==='1',
+            'v117'=>(string)get_option('ppar_v672117_product_visibility_recovery_v1','')==='1',
+            'v118_restore'=>is_array($r118)&&!empty($r118),
+            'v118_product'=>is_array($p118)&&!empty($p118),
+            'v119'=>is_array($r119)&&!empty($r119),
+            'v123'=>is_array($r123)&&!empty($r123),
+            'v124'=>is_array($r124)&&!empty($r124),
+        );
+    }
+
+    private function aff039_incident_proven($evidence) {
+        foreach ((array)$evidence as $value) { if ($value) { return true; } }
+        return false;
+    }
+
+    private function aff039_recovery_state() {
+        $state=get_option(self::OPTION_AFF039_RECOVERY,array());
+        return is_array($state)?$state:array();
+    }
+
+    private function aff039_save_state($state) {
+        $state=is_array($state)?$state:array();
+        $state['updated_at']=time();
+        update_option(self::OPTION_AFF039_RECOVERY,$state,false);
+        return $state;
+    }
+
+    private function aff039_schedule_next($delay=3) {
+        $state=$this->aff039_recovery_state();
+        if (sanitize_key((string)($state['status']??''))!=='running') { return false; }
+        if (!function_exists('wp_schedule_single_event')) { return false; }
+        if (!function_exists('wp_next_scheduled') || !wp_next_scheduled(self::AFF039_RECOVERY_HOOK)) {
+            return (bool)wp_schedule_single_event(time()+max(1,absint($delay)),self::AFF039_RECOVERY_HOOK);
+        }
+        return true;
+    }
+
+    private function aff039_redirect($notice='') {
+        $url=admin_url('admin.php?page=affiliate-portal-kontrollzentrum');
+        if ($notice!=='') { $url=add_query_arg('ppar_aff039',sanitize_key((string)$notice),$url); }
+        wp_safe_redirect($url); exit;
+    }
+
+    public function handle_aff039_recovery_start() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_aff039_recovery_start','ppar_aff039_nonce');
+        $existing=$this->aff039_recovery_state();
+        if (sanitize_key((string)($existing['status']??''))==='running') { $this->aff039_schedule_next(1); $this->aff039_redirect('running'); }
+        $evidence=$this->aff039_incident_evidence();
+        if (!$this->aff039_incident_proven($evidence)) {
+            $this->aff039_save_state(array('schema'=>'1.0','status'=>'blocked','phase'=>'preflight','reason'=>'incident_evidence_missing','evidence'=>$evidence,'started_at'=>time()));
+            $this->aff039_redirect('blocked');
+        }
+        $checkpoint=method_exists($this,'ebay_public_checkpoint_load')?$this->ebay_public_checkpoint_load():array();
+        $state=array(
+            'schema'=>'1.0','status'=>'running','phase'=>'normalize','started_at'=>time(),'started_by'=>get_current_user_id(),
+            'evidence'=>$evidence,'errors'=>array(),'stats'=>array(),
+            'backup'=>array(
+                'idealo_sha256'=>hash('sha256',serialize(get_option(self::OPTION_NETWORK_IDEALO,array()))),
+                'assignments_sha256'=>hash('sha256',serialize(get_option(self::OPTION_ASSIGNMENTS,array()))),
+                'ebay_checkpoint_sha256'=>hash('sha256',serialize(is_array($checkpoint)?$checkpoint:array())),
+                'article_rebuild_sha256'=>hash('sha256',serialize(get_option(self::OPTION_ARTICLE_REBUILD_STATE,array()))),
+            ),
+            'ebay_scan_cursor'=>0,'ebay_candidate_ids'=>array(),'ebay_repair_cursor'=>0,
+            'idealo_scan_cursor'=>0,'article_cursor'=>0,
+        );
+        $this->aff039_save_state($state);
+        $this->aff039_schedule_next(1);
+        $this->aff039_redirect('started');
+    }
+
+    public function handle_aff039_recovery_stop() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_aff039_recovery_stop','ppar_aff039_nonce');
+        $state=$this->aff039_recovery_state();
+        $state['status']='stopped'; $state['phase']='stopped'; $state['stopped_at']=time(); $state['stopped_by']=get_current_user_id();
+        $this->aff039_save_state($state);
+        if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::AFF039_RECOVERY_HOOK); }
+        $this->aff039_redirect('stopped');
+    }
+
+    public function handle_aff039_recovery_step() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_aff039_recovery_step','ppar_aff039_nonce');
+        $this->run_aff039_recovery_worker();
+        $this->aff039_redirect('stepped');
+    }
+
+    private function aff039_stop_incident_rebuild() {
+        $state=get_option(self::OPTION_ARTICLE_REBUILD_STATE,array());
+        $state=is_array($state)?$state:array();
+        if (sanitize_key((string)($state['status']??''))!=='running') { return false; }
+        $reason=sanitize_key((string)($state['reason']??''));
+        $incident=array('v672118_restore_exact_672108_runtime','v672117_emergency_visibility_rollback','v672117_restore_pre115_visible_products','v672115_multiprovider_category_repair');
+        if (!in_array($reason,$incident,true)) { return false; }
+        $state['status']='superseded_recovery'; $state['completed_at']=time(); $state['failure_reason']='aff039_dual_layer_rootfix_stopped_incident_rebuild';
+        update_option(self::OPTION_ARTICLE_REBUILD_STATE,$state,false);
+        if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::ARTICLE_REBUILD_HOOK); }
+        return true;
+    }
+
+    private function aff039_restore_awin_destination_state() {
+        global $wpdb; $table=$this->creative_library_table();
+        if (!is_object($wpdb)||empty($table)||!method_exists($wpdb,'get_results')||!method_exists($wpdb,'update')) { return array('scanned'=>0,'changed'=>0); }
+        $rows=$wpdb->get_results("SELECT id,tracking_url,destination_url,payload FROM {$table} WHERE provider='awin' AND creative_type='banner' AND payload LIKE '%\"_destination_state\"%' LIMIT 500",ARRAY_A);
+        $scanned=0; $changed=0;
+        foreach ((array)$rows as $row) {
+            $scanned++; $payload=json_decode((string)($row['payload']??''),true); if(!is_array($payload)){continue;}
+            $state=sanitize_key((string)($payload['_destination_state']??'')); $update=array();
+            if($state==='resolved') { $tracking=esc_url_raw((string)($row['tracking_url']??'')); if($tracking!==''&&wp_http_validate_url($tracking)){$update['destination_url']=$tracking;} }
+            unset($payload['_destination_state'],$payload['_destination_checked_at'],$payload['_destination_error']);
+            $update['payload']=wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            if($wpdb->update($table,$update,array('id'=>absint($row['id'])))!==false){$changed++;}
+        }
+        return array('scanned'=>$scanned,'changed'=>$changed);
+    }
+
+    private function aff039_campaign_ids_after($meta_key,$cursor,$limit) {
+        global $wpdb; $cursor=absint($cursor); $limit=max(1,min(100,absint($limit)));
+        if(!is_object($wpdb)||empty($wpdb->posts)||empty($wpdb->postmeta)||!method_exists($wpdb,'get_col')||!method_exists($wpdb,'prepare')){return array();}
+        $sql=$wpdb->prepare("SELECT DISTINCT p.ID FROM {$wpdb->posts} p INNER JOIN {$wpdb->postmeta} pm ON pm.post_id=p.ID WHERE p.post_type=%s AND p.post_status IN ('publish','draft','private') AND p.ID>%d AND pm.meta_key=%s AND pm.meta_value='1' ORDER BY p.ID ASC LIMIT %d",self::CAMPAIGN_POST_TYPE,$cursor,(string)$meta_key,$limit);
+        return array_values(array_filter(array_map('absint',(array)$wpdb->get_col($sql))));
+    }
+
+    private function aff039_article_ids_after($cursor,$limit) {
+        global $wpdb; $cursor=absint($cursor); $limit=max(1,min(25,absint($limit)));
+        if(!is_object($wpdb)||empty($wpdb->posts)||!method_exists($wpdb,'get_col')||!method_exists($wpdb,'prepare')){return array();}
+        return array_values(array_filter(array_map('absint',(array)$wpdb->get_col($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type='post' AND post_status='publish' AND ID>%d ORDER BY ID ASC LIMIT %d",$cursor,$limit)))));
+    }
+
+    private function aff039_checkpoint_candidate($old_checkpoint,$eligible) {
+        $eligible=array_values(array_unique(array_filter(array_map('absint',(array)$eligible)))); sort($eligible,SORT_NUMERIC);
+        if(count($eligible)<3){return new WP_Error('aff039_ebay_candidate_insufficient','Weniger als drei fachlich gueltige eBay-Kandidaten; Checkpoint bleibt unveraendert.');}
+        $old=is_array($old_checkpoint)?$old_checkpoint:array();
+        $old_business=array_values(array_unique(array_filter(array_map('absint',(array)($old['business_campaign_ids']??array())))));
+        $business=array_values(array_unique(array_merge($old_business,$eligible))); sort($business,SORT_NUMERIC);
+        $private=array_values(array_unique(array_filter(array_map('absint',(array)($old['private_listing_ids']??array()))))); sort($private,SORT_NUMERIC);
+        return array('schema'=>'1.0','status'=>'safe','checkpoint_id'=>'','business_campaign_ids'=>$business,'private_listing_ids'=>$private,'restore_reason'=>'aff039_dual_layer_rootfix_672125');
+    }
+
+    private function aff039_repair_article_products_only($post_id) {
+        $post_id=absint($post_id); $post=get_post($post_id);
+        if(!$post||$post->post_type!=='post'||$post->post_status!=='publish'){return new WP_Error('invalid_post','Kein veroeffentlichter Beitrag.');}
+        $stored=get_post_meta($post_id,self::ARTICLE_PLAN_META,true);
+        if(!is_array($stored)||empty($stored)){return array('status'=>'skipped_no_plan','count'=>0);}
+        $plan=wp_parse_args($stored,$this->article_plan_default());
+        $banner_before=wp_json_encode(array('banner'=>$plan['banner']??array(),'banner_2'=>$plan['banner_2']??array()),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        $context=$this->get_content_context($post_id); $reports=array(); $product_ids=array(); $seen=array(); $titles=array();
+        $requirements=$this->article_plan_exact_product_requirements($post_id,$context);
+        if($requirements){
+            foreach($requirements as $requirement){
+                if(count($product_ids)>=3){break;} $identifiers=(array)($requirement['identifiers']??array()); if(!$identifiers){continue;}
+                $exact_context=$context; $exact_context['exact_product_identifiers']=$identifiers;
+                foreach($this->ranked_campaigns_for_slot($exact_context,'post_bottom_products') as $candidate){
+                    $campaign=$candidate['campaign']??null; if(!is_array($campaign)){continue;}
+                    $report=$this->article_product_quality_report($campaign,$exact_context,$candidate); $report['checks']['exact_identity']='pass'; $reports[]=$report;
+                    if(($report['overall']??'')!=='pass'){continue;} $dedupe=$this->article_plan_product_dedupe_key($campaign);
+                    if($dedupe==='title:'||isset($seen[$dedupe])||$this->article_plan_product_title_is_near_duplicate($campaign,$titles)){continue;}
+                    $seen[$dedupe]=true; $titles[]=$this->article_plan_product_title_key($campaign); $product_ids[]=absint($campaign['post_id']??0); break;
+                }
+            }
+        } else {
+            foreach($this->ranked_campaigns_for_slot($context,'post_bottom_products') as $candidate){
+                $campaign=$candidate['campaign']??null; if(!is_array($campaign)){continue;}
+                $report=$this->article_product_quality_report($campaign,$context,$candidate); $reports[]=$report; if(($report['overall']??'')!=='pass'){continue;}
+                $dedupe=$this->article_plan_product_dedupe_key($campaign); if($dedupe==='title:'||isset($seen[$dedupe])||$this->article_plan_product_title_is_near_duplicate($campaign,$titles)){continue;}
+                $seen[$dedupe]=true; $titles[]=$this->article_plan_product_title_key($campaign); $product_ids[]=absint($campaign['post_id']??0); if(count($product_ids)>=3){break;}
+            }
+        }
+        $plan['products']['reports']=array_slice($reports,0,20); $plan['products']['campaign_post_ids']=array_values(array_filter($product_ids));
+        $plan['products']['status']=$product_ids?'ready':'none'; $plan['products']['reason']=$product_ids?count($product_ids).' freigegebene Produkte nach AFF-ERR-039-Recovery.':'Keine Produkte mit PASS-Qualitaet.';
+        $plan['generated_at']=time(); $plan['campaign_revision']=$this->article_plan_campaign_revision(); $plan['schema']=self::ARTICLE_PLAN_SCHEMA; $plan['content_hash']=$this->article_plan_content_hash($post_id);
+        $has_banner=in_array((string)($plan['banner']['status']??''),array('ready','pending_anchor'),true); $plan['status']=($has_banner||$plan['products']['status']==='ready')?'ready':'no_output';
+        $banner_after=wp_json_encode(array('banner'=>$plan['banner']??array(),'banner_2'=>$plan['banner_2']??array()),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        if(!hash_equals(hash('sha256',(string)$banner_before),hash('sha256',(string)$banner_after))){return new WP_Error('banner_mutation_detected','Recovery wuerde Bannerfelder veraendern; abgebrochen.');}
+        update_post_meta($post_id,self::ARTICLE_PLAN_META,$plan);
+        return array('status'=>$plan['products']['status'],'count'=>count($plan['products']['campaign_post_ids']));
+    }
+
+    public function run_aff039_recovery_worker() {
+        $state=$this->aff039_recovery_state();
+        if(sanitize_key((string)($state['status']??''))!=='running'){return $state;}
+        if(get_transient(self::AFF039_RECOVERY_LOCK)){return $state;}
+        set_transient(self::AFF039_RECOVERY_LOCK,'1',90);
+        try {
+            $phase=sanitize_key((string)($state['phase']??'normalize'));
+            if($phase==='normalize'){
+                if(function_exists('wp_clear_scheduled_hook')){wp_clear_scheduled_hook('ppar_v672118_product_state_recovery_worker');wp_clear_scheduled_hook('ppar_v672119_visibility_restore_worker');}
+                $state['stats']['stale_rebuild_stopped']=$this->aff039_stop_incident_rebuild()?1:0;
+                $state['stats']['awin_destination_restore']=$this->aff039_restore_awin_destination_state();
+                $idealo=get_option(self::OPTION_NETWORK_IDEALO,array()); $idealo=is_array($idealo)?$idealo:array();
+                $mode=method_exists($this,'idealo_sanitize_output_mode')?$this->idealo_sanitize_output_mode($idealo['output_mode']??'ebay_only'):sanitize_key((string)($idealo['output_mode']??'ebay_only'));
+                if(!empty($idealo['enabled'])&&$mode==='idealo_only'){$idealo['output_mode']='automatic';update_option(self::OPTION_NETWORK_IDEALO,$idealo,false);$state['stats']['idealo_mode_restored']=1;}
+                $assign=get_option(self::OPTION_ASSIGNMENTS,array()); $assign=is_array($assign)?$assign:array(); $changed=0;
+                foreach($assign as $key=>$row){if(!is_array($row)){continue;} $m=sanitize_key((string)($row['products_mode']??'automatic')); if(!in_array($m,array('automatic','fixed','none'),true)){$row['products_mode']='automatic';$row['product_ids']=array();$assign[$key]=$row;$changed++;}}
+                if($changed){update_option(self::OPTION_ASSIGNMENTS,$assign,false);} $state['stats']['invalid_assignment_modes_restored']=$changed;
+                $state['phase']='idealo_scan'; $state['idealo_scan_cursor']=0;
+            } elseif($phase==='idealo_scan'){
+                $ids=$this->aff039_campaign_ids_after('_ppar_idealo_auto',absint($state['idealo_scan_cursor']??0),50); $changed=0; $valid=0;
+                $settings=$this->idealo_settings(); $enabled=!empty($settings['enabled'])&&in_array($this->idealo_sanitize_output_mode($settings['output_mode']??''),array('idealo_only','separate','combined','automatic'),true);
+                foreach($ids as $id){$state['idealo_scan_cursor']=max(absint($state['idealo_scan_cursor']??0),$id);$campaign=$this->campaign_from_post(get_post($id));if(!is_array($campaign)){continue;}$desired=$enabled&&$this->idealo_campaign_publicly_allowed(array_merge($campaign,array('active'=>true)));if($desired){$valid++;}if((bool)($campaign['active']??false)!==$desired){$campaign['active']=$desired;$saved=$this->save_campaign_record($campaign,$id);if(!is_wp_error($saved)&&$saved){$changed++;}}}
+                $state['stats']['idealo_valid']=absint($state['stats']['idealo_valid']??0)+$valid; $state['stats']['idealo_activation_changes']=absint($state['stats']['idealo_activation_changes']??0)+$changed;
+                if(count($ids)<50){$state['phase']='ebay_scan';$state['ebay_scan_cursor']=0;}
+            } elseif($phase==='ebay_scan'){
+                $ids=$this->aff039_campaign_ids_after('_ppar_ebay_business_auto',absint($state['ebay_scan_cursor']??0),40); $eligible=(array)($state['ebay_candidate_ids']??array());
+                foreach($ids as $id){$state['ebay_scan_cursor']=max(absint($state['ebay_scan_cursor']??0),$id);$campaign=$this->campaign_from_post(get_post($id));if(!is_array($campaign)||sanitize_key((string)($campaign['network']??''))!=='ebay'||sanitize_key((string)($campaign['creative_type']??''))!=='product'){continue;}if(!$this->ebay_business_campaign_source_allows_delivery_base($campaign)){continue;}if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign)){continue;}$eligible[]=$id;}
+                $eligible=array_values(array_unique(array_filter(array_map('absint',$eligible)))); sort($eligible,SORT_NUMERIC); $state['ebay_candidate_ids']=$eligible; $state['stats']['ebay_candidates']=count($eligible);
+                if(count($ids)<40){
+                    $old=method_exists($this,'ebay_public_checkpoint_load')?$this->ebay_public_checkpoint_load():array(); $candidate=$this->aff039_checkpoint_candidate($old,$eligible);
+                    if(is_wp_error($candidate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['ebay_checkpoint']=$candidate->get_error_code();}
+                    else{$saved=$this->ebay_public_checkpoint_save($candidate);if($saved===false){$state['status']='blocked';$state['phase']='blocked';$state['errors']['ebay_checkpoint']='persistence_failed';}else{$state['stats']['ebay_checkpoint_business_ids']=count((array)$saved['business_campaign_ids']);$state['phase']='ebay_repair';$state['ebay_repair_cursor']=0;}}
+                }
+            } elseif($phase==='ebay_repair'){
+                $eligible=(array)($state['ebay_candidate_ids']??array()); $cursor=absint($state['ebay_repair_cursor']??0); $end=min(count($eligible),$cursor+12);
+                for($i=$cursor;$i<$end;$i++){$id=absint($eligible[$i]??0);if(!$id){continue;}$campaign=$this->campaign_from_post(get_post($id));if(!is_array($campaign)||!$this->ebay_business_campaign_source_allows_delivery_base($campaign)){continue;}if(empty($campaign['active'])&&!in_array(sanitize_key((string)($campaign['programme_status']??'unknown')),array('paused','ended'),true)){$campaign['active']=true;$campaign['programme_status']='active';$saved=$this->save_campaign_record($campaign,$id);if(!is_wp_error($saved)&&$saved){$state['stats']['ebay_reactivated']=absint($state['stats']['ebay_reactivated']??0)+1;}}
+                    $hash=strtolower(sanitize_text_field((string)get_post_meta($id,'_ppar_creative_identity_hash',true)));if(preg_match('/^[a-f0-9]{64}$/',$hash)&&method_exists($this,'output_creative_row')&&method_exists($this,'output_plan_creative')){$creative=$this->output_creative_row($hash);if(is_array($creative)&&sanitize_key((string)($creative['provider']??''))==='ebay'&&sanitize_key((string)($creative['creative_type']??''))==='product'){$plan=$this->output_plan_creative($creative,true);if(is_array($plan)){$state['stats']['ebay_replanned']=absint($state['stats']['ebay_replanned']??0)+1;$state['stats']['ebay_replanned_active']=absint($state['stats']['ebay_replanned_active']??0)+absint($plan['active']??0);if(!empty($plan['errors'])){$state['stats']['ebay_replan_errors']=absint($state['stats']['ebay_replan_errors']??0)+count((array)$plan['errors']);}}}}
+                }
+                $state['ebay_repair_cursor']=$end; $this->campaigns_request_cache=null;
+                if($end>=count($eligible)){$state['phase']='article_repair';$state['article_cursor']=0;}
+            } elseif($phase==='article_repair'){
+                $ids=$this->aff039_article_ids_after(absint($state['article_cursor']??0),10);
+                foreach($ids as $id){$state['article_cursor']=max(absint($state['article_cursor']??0),$id);$result=$this->aff039_repair_article_products_only($id);$state['stats']['articles_scanned']=absint($state['stats']['articles_scanned']??0)+1;if(is_wp_error($result)){$state['stats']['article_errors']=absint($state['stats']['article_errors']??0)+1;}elseif(($result['status']??'')==='skipped_no_plan'){$state['stats']['articles_skipped_no_plan']=absint($state['stats']['articles_skipped_no_plan']??0)+1;}else{$state['stats']['articles_repaired']=absint($state['stats']['articles_repaired']??0)+1;}}
+                if(count($ids)<10){$state['phase']='verify';}
+            } elseif($phase==='verify'){
+                $ebay=count((array)($state['ebay_candidate_ids']??array())); $idealo=absint($state['stats']['idealo_valid']??0); $errors=absint($state['stats']['article_errors']??0)+absint($state['stats']['ebay_replan_errors']??0);
+                if($ebay<3||$idealo<1||$errors>0){$state['status']='blocked';$state['phase']='blocked';$state['errors']['verification']='supply_or_repair_gate_failed';}
+                else{$state['status']='complete';$state['phase']='complete';$state['completed_at']=time();}
+            }
+            $this->aff039_save_state($state);
+        } finally { delete_transient(self::AFF039_RECOVERY_LOCK); }
+        $state=$this->aff039_recovery_state(); if(sanitize_key((string)($state['status']??''))==='running'){$this->aff039_schedule_next(2);} return $state;
+    }
+
+    /** AFF-ERR-044: exact clean composition of 6.72.114 product tier + safe 6.72.115 multiprovider mode. */
+    private function aff044_safe_ebay_supply_count() {
+        if (!method_exists($this, 'ebay_public_checkpoint_load')) { return 0; }
+        $checkpoint = $this->ebay_public_checkpoint_load();
+        $ids = is_array($checkpoint) ? array_values(array_unique(array_filter(array_map('absint', (array)($checkpoint['business_campaign_ids'] ?? array()))))) : array();
+        $safe = 0;
+        foreach ($ids as $id) {
+            $post = get_post($id);
+            $campaign = $post ? $this->campaign_from_post($post) : null;
+            if (!is_array($campaign) || empty($campaign['active'])) { continue; }
+            if (sanitize_key((string)($campaign['network'] ?? '')) !== 'ebay' || sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { continue; }
+            if (method_exists($this, 'ebay_business_campaign_source_allows_delivery_base') && !$this->ebay_business_campaign_source_allows_delivery_base($campaign)) { continue; }
+            if (!$this->campaign_is_complete($campaign) || !$this->product_campaign_public_image_ready($campaign)) { continue; }
+            $safe++;
+            if ($safe >= 3) { break; }
+        }
+        return $safe;
+    }
+
+    private function aff044_apply_clean_restore() {
+        $ebay_gate = method_exists($this, 'provider_channel_pause_gate') ? $this->provider_channel_pause_gate('ebay') : true;
+        if (is_wp_error($ebay_gate)) { return $ebay_gate; }
+        $idealo_gate = method_exists($this, 'provider_channel_pause_gate') ? $this->provider_channel_pause_gate('idealo') : true;
+        if (is_wp_error($idealo_gate)) { return $idealo_gate; }
+        $settings = get_option(self::OPTION_NETWORK_IDEALO, array());
+        $settings = is_array($settings) ? $settings : array();
+        if (empty($settings['enabled'])) { return new WP_Error('aff044_idealo_disabled','idealo ist nicht aktiv; keine Zustandsaenderung.'); }
+        $before = method_exists($this, 'idealo_sanitize_output_mode') ? $this->idealo_sanitize_output_mode($settings['output_mode'] ?? 'ebay_only') : sanitize_key((string)($settings['output_mode'] ?? 'ebay_only'));
+        $before_active_products = 0;
+        if (method_exists($this, 'get_campaigns')) {
+            foreach ((array) $this->get_campaigns() as $campaign) {
+                if (!is_array($campaign) || empty($campaign['active'])) { continue; }
+                if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { continue; }
+                $network = sanitize_key((string)($campaign['network'] ?? ''));
+                if (in_array($network, array('ebay','idealo'), true)) { $before_active_products++; }
+            }
+        }
+        $settings['output_mode'] = 'automatic';
+        update_option(self::OPTION_NETWORK_IDEALO, $settings, false);
+        if (method_exists($this, 'idealo_sync_campaign_activation')) { $this->idealo_sync_campaign_activation(); }
+        $after_settings = get_option(self::OPTION_NETWORK_IDEALO, array());
+        $after_settings = is_array($after_settings) ? $after_settings : array();
+        $after = method_exists($this, 'idealo_sanitize_output_mode') ? $this->idealo_sanitize_output_mode($after_settings['output_mode'] ?? '') : sanitize_key((string)($after_settings['output_mode'] ?? ''));
+        $this->campaigns_request_cache = null;
+        $after_active_products = 0;
+        if (method_exists($this, 'get_campaigns')) {
+            foreach ((array) $this->get_campaigns() as $campaign) {
+                if (!is_array($campaign) || empty($campaign['active'])) { continue; }
+                if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { continue; }
+                $network = sanitize_key((string)($campaign['network'] ?? ''));
+                if (in_array($network, array('ebay','idealo'), true)) { $after_active_products++; }
+            }
+        }
+        if ($after !== 'automatic' || $after_active_products < $before_active_products) {
+            $settings['output_mode'] = $before;
+            update_option(self::OPTION_NETWORK_IDEALO, $settings, false);
+            if (method_exists($this, 'idealo_sync_campaign_activation')) { $this->idealo_sync_campaign_activation(); }
+            $this->campaigns_request_cache = null;
+            return new WP_Error('aff044_no_loss_gate_failed','Mehrprovider-Umschaltung wurde zurueckgerollt, weil der Produktbestand kleiner geworden waere.');
+        }
+        $safe_ebay = $this->aff044_safe_ebay_supply_count();
+        $state = array('schema'=>'1.0','status'=>'complete','before_mode'=>$before,'after_mode'=>'automatic','active_products_before'=>$before_active_products,'active_products_after'=>$after_active_products,'safe_ebay_campaigns'=>$safe_ebay,'completed_at'=>time());
+        update_option(self::OPTION_AFF044_RESTORE, $state, false);
+        return $state;
+    }
+
+    public function handle_aff044_clean_restore() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_aff044_clean_restore','ppar_aff044_nonce');
+        $result = $this->aff044_apply_clean_restore();
+        $status = is_wp_error($result) ? 'blocked' : 'complete';
+        if (is_wp_error($result)) {
+            update_option(self::OPTION_AFF044_RESTORE, array('schema'=>'1.0','status'=>'blocked','error'=>$result->get_error_code(),'message'=>$result->get_error_message(),'checked_at'=>time()), false);
+        }
+        $url = add_query_arg(array('page'=>'affiliate-portal-kontrollzentrum','ppar_aff044'=>$status), admin_url('admin.php'));
+        wp_safe_redirect($url);
+        exit;
+    }
+
+    private function render_aff044_clean_restore_panel() {
+        $state = get_option(self::OPTION_AFF044_RESTORE, array());
+        $state = is_array($state) ? $state : array();
+        $status = sanitize_key((string)($state['status'] ?? 'not_started'));
+        ?>
+        <div class="notice notice-info inline" style="padding:12px 14px;margin:14px 0;max-width:980px;">
+            <p><strong>Produktzustand 6.72.114/115 sauber wiederherstellen</strong> · Status: <?php echo esc_html($status); ?></p>
+            <p>Nur Kategorieprodukt-Tier 520/510/500 + Mehrprovider automatic. Kein Rebuild, keine Revision, kein Checkpoint-Write, keine Anzeige-/Kachel-Aenderung.</p>
+            <?php if (!empty($state['message'])): ?><p><?php echo esc_html((string)$state['message']); ?></p><?php endif; ?>
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                <input type="hidden" name="action" value="ppar_aff044_clean_restore">
+                <?php wp_nonce_field('ppar_aff044_clean_restore','ppar_aff044_nonce'); ?>
+                <button class="button button-primary">Produktzustand 114/115 sauber wiederherstellen</button>
+            </form>
+        </div>
+        <?php
+    }
+
+    public function maybe_aff043_automatic_state_restore() {
+        if (method_exists($this, 'ebay_settings') && method_exists($this, 'ebay_deletion_compliance_complete') && $this->ebay_deletion_compliance_complete()) {
+            $ebay = $this->ebay_settings();
+            if (empty($ebay['enabled']) && (string)($ebay['environment'] ?? 'production') === 'production') {
+                $access = method_exists($this, 'provider_access_state') ? $this->provider_access_state('ebay') : array();
+                $message = (string)($access['message'] ?? '');
+                if (strpos($message, 'Marketplace-Account-Deletion-Compliance hart deaktiviert') !== false) {
+                    $ebay['enabled'] = true;
+                    update_option(self::OPTION_NETWORK_EBAY, $this->ebay_normalize_settings($ebay, true), false);
+                    if (method_exists($this, 'provider_set_access_state')) {
+                        $this->provider_set_access_state('ebay', 'connected', 'eBay nach bereits vollstaendiger Marketplace-Account-Deletion-Compliance wieder aktiviert.');
+                    }
+                }
+            }
+        }
+        $state = $this->aff043_state();
+        $status = sanitize_key((string)($state['status'] ?? 'not_started'));
+        if (in_array($status, array('complete','blocked','stopped'), true)) { return; }
+        if ($status !== 'running') {
+            $reithelme = $this->aff043_current_supply_for_key('page:reithelme');
+            $stallhalfter = $this->aff043_current_supply_for_key('page:halfter-und-stricke-stallhalfter');
+            $idealo = get_option(self::OPTION_NETWORK_IDEALO, array());
+            $idealo = is_array($idealo) ? $idealo : array();
+            $mode = $this->idealo_sanitize_output_mode($idealo['output_mode'] ?? 'ebay_only');
+            $known_damage = $mode === 'idealo_only' || absint($reithelme['total'] ?? 0) < 3 || absint($stallhalfter['total'] ?? 0) < 3;
+            if (!$known_damage) { return; }
+            $snap = $this->aff043_snapshot();
+            if (is_wp_error($snap)) {
+                $this->aff043_save_state(array('schema'=>'1.0','status'=>'blocked','phase'=>'preflight','errors'=>array('snapshot'=>$snap->get_error_code()),'message'=>$snap->get_error_message(),'updated_at'=>time()));
+                return;
+            }
+            $state = array('schema'=>'1.0','status'=>'running','phase'=>'augment','cursor'=>0,'started_at'=>time(),'started_by'=>0,'snapshot_sha256'=>$snap['sha256'],'source_sha256'=>$snap['source_sha256'],'stats'=>array(),'errors'=>array(),'automatic_start'=>1);
+            $this->aff043_save_state($state);
+        }
+        $started = microtime(true);
+        for ($i=0; $i<40 && (microtime(true)-$started)<20.0; $i++) {
+            $state = $this->run_aff043_recovery_worker();
+            if (sanitize_key((string)($state['status'] ?? '')) !== 'running') { break; }
+        }
+    }
+
+    private function aff043_state() {
+        $state=get_option(self::OPTION_AFF043_RECOVERY,array());
+        return is_array($state)?$state:array();
+    }
+
+    private function aff043_save_state($state) {
+        $state=is_array($state)?$state:array(); $state['updated_at']=time();
+        update_option(self::OPTION_AFF043_RECOVERY,$state,false);
+        return $state;
+    }
+
+    private function aff043_redirect($notice='') {
+        $url=admin_url('admin.php?page=affiliate-portal-kontrollzentrum');
+        if($notice!==''){$url=add_query_arg(array('ppar_aff043_notice'=>sanitize_key((string)$notice)),$url);}
+        wp_safe_redirect($url); exit;
+    }
+
+    private function aff043_snapshot() {
+        $path=__DIR__.DIRECTORY_SEPARATOR.str_replace('/',DIRECTORY_SEPARATOR,self::AFF043_SNAPSHOT_REL);
+        if(!is_file($path)||!is_readable($path)){return new WP_Error('aff043_snapshot_missing','Historischer Produktzustand fehlt.');}
+        $raw=file_get_contents($path); if(!is_string($raw)){return new WP_Error('aff043_snapshot_read_failed','Historischer Produktzustand ist nicht lesbar.');}
+        if(!hash_equals(self::AFF043_SNAPSHOT_SHA256,hash('sha256',$raw))){return new WP_Error('aff043_snapshot_hash_mismatch','Historischer Produktzustand stimmt nicht mit dem gebundenen Hash ueberein.');}
+        $data=json_decode($raw,true); if(!is_array($data)||($data['schema']??'')!=='1.0'||!is_array($data['rows']??null)){return new WP_Error('aff043_snapshot_invalid','Historischer Produktzustand ist ungueltig.');}
+        $rows=array_values($data['rows']);
+        if(count($rows)!==2012){return new WP_Error('aff043_snapshot_count','Historischer Produktzustand hat nicht 2012 Produktkampagnen.');}
+        $ebay=0;$idealo=0;$ebay_active=0;$idealo_active=0;
+        foreach($rows as $row){if(!is_array($row)){return new WP_Error('aff043_snapshot_row_invalid','Historische Produktzeile ist ungueltig.');}$n=sanitize_key((string)($row['network']??''));if($n==='ebay'){$ebay++;if(!empty($row['active']))$ebay_active++;}elseif($n==='idealo'){$idealo++;if(!empty($row['active']))$idealo_active++;}else{return new WP_Error('aff043_snapshot_provider','Unerwarteter Provider im historischen Produktzustand.');}}
+        if($ebay!==922||$idealo!==1090||$ebay_active!==428||$idealo_active!==1090){return new WP_Error('aff043_snapshot_contract','Historische Providerzahlen stimmen nicht mit dem belegten 15.09.-Stand ueberein.');}
+        return array('rows'=>$rows,'sha256'=>self::AFF043_SNAPSHOT_SHA256,'source_sha256'=>(string)($data['source_sha256']??''));
+    }
+
+    private function aff043_schedule_next($delay=2) {
+        if(function_exists('wp_next_scheduled')&&wp_next_scheduled(self::AFF043_RECOVERY_HOOK)){return;}
+        if(function_exists('wp_schedule_single_event')){wp_schedule_single_event(time()+max(1,absint($delay)),self::AFF043_RECOVERY_HOOK);}
+    }
+
+    private function aff043_target_keys($row) {
+        $out=array(); foreach((array)($row['automation_target_keys']??array()) as $key){$key=$this->automation_normalize_target_key($key);if($key!=='')$out[]=$key;}
+        return array_values(array_unique($out));
+    }
+
+    private function aff043_placements($row) {
+        return array_values(array_unique(array_filter(array_map('sanitize_key',(array)($row['placements']??array())))));
+    }
+
+    private function aff043_provider_paused_or_vetoed($provider) {
+        if(!method_exists($this,'provider_channel_pause_gate')){return false;}
+        $gate=$this->provider_channel_pause_gate($provider);
+        return is_wp_error($gate);
+    }
+
+    private function aff043_can_reactivate_historical($campaign,$network) {
+        if(!is_array($campaign)||sanitize_key((string)($campaign['creative_type']??''))!=='product'){return false;}
+        if($this->aff043_provider_paused_or_vetoed($network)){return false;}
+        $status=sanitize_key((string)($campaign['programme_status']??''));
+        if(in_array($status,array('paused','ended'),true)){return false;}
+        if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign)){return false;}
+        if($network==='ebay'){
+            return method_exists($this,'ebay_business_campaign_source_allows_delivery_base') && $this->ebay_business_campaign_source_allows_delivery_base($campaign);
+        }
+        if($network==='idealo'){
+            return $this->campaign_program_allows_delivery(array_merge($campaign,array('active'=>true)));
+        }
+        return false;
+    }
+
+    private function aff043_apply_row($row,$phase) {
+        $id=absint($row['post_id']??0); if($id<=0){return array('status'=>'skip');}
+        $post=get_post($id); if(!$post||$post->post_type!==self::CAMPAIGN_POST_TYPE){return array('status'=>'missing');}
+        $campaign=$this->campaign_from_post($post); if(!is_array($campaign)){return array('status'=>'invalid');}
+        $network=sanitize_key((string)($row['network']??''));
+        if(sanitize_key((string)($campaign['network']??''))!==$network||sanitize_key((string)($campaign['creative_type']??''))!=='product'){return array('status'=>'mismatch');}
+        $before=serialize($campaign); $historical_keys=$this->aff043_target_keys($row); $historical_places=$this->aff043_placements($row);
+        if($phase==='augment'){
+            $current_keys=array_values((array)($campaign['automation_target_keys']??array()));
+            $campaign['automation_target_keys']=array_values(array_unique(array_merge($current_keys,$historical_keys)));
+            $current_places=array_values((array)($campaign['placements']??array()));
+            $campaign['placements']=array_values(array_unique(array_merge($current_places,$historical_places)));
+        } else {
+            $campaign['automation_target_keys']=$historical_keys;
+            $campaign['placements']=$historical_places;
+            $mode=sanitize_key((string)($row['assignment_mode']??'page_tree'));
+            if(in_array($mode,array('page_tree','auto_topic','exact_page','keywords','fallback'),true)){$campaign['assignment_mode']=$mode;}
+            $campaign['page_id']=absint($row['page_id']??0);
+            $campaign['match_descendants']=!empty($row['match_descendants']);
+        }
+        $reactivated=0;
+        if(!empty($row['active'])&&empty($campaign['active'])&&$this->aff043_can_reactivate_historical($campaign,$network)){
+            $campaign['active']=true;
+            if(!in_array(sanitize_key((string)($campaign['programme_status']??'')),array('paused','ended'),true)){$campaign['programme_status']='active';}
+            $reactivated=1;
+        }
+        if(serialize($campaign)===$before){return array('status'=>'same','reactivated'=>$reactivated);}
+        $saved=$this->save_campaign_record($campaign,$id);
+        if(is_wp_error($saved)||!$saved){return array('status'=>'save_error','reactivated'=>0);}
+        return array('status'=>'changed','reactivated'=>$reactivated);
+    }
+
+    private function aff043_historical_gate_keys($rows) {
+        $parents=array('page:ausruestung-reiterbedarf'); $counts=array(); $nets=array();
+        foreach($rows as $row){if(empty($row['active']))continue;$keys=$this->aff043_target_keys($row);if(!array_intersect($parents,$keys))continue;$network=sanitize_key((string)($row['network']??''));foreach($keys as $key){if(strpos($key,'page:')!==0||in_array($key,array('page:ausruestung','page:ausruestung-reiterbedarf'),true))continue;$counts[$key]=absint($counts[$key]??0)+1;$nets[$key][$network]=absint($nets[$key][$network]??0)+1;}}
+        // Stallhalfter liegt ausserhalb Reiterbedarf, ist aber ausdruecklich Teil des Livefehlers.
+        $stall='page:halfter-und-stricke-stallhalfter';
+        foreach($rows as $row){if(empty($row['active']))continue;$keys=$this->aff043_target_keys($row);if(!in_array($stall,$keys,true))continue;$network=sanitize_key((string)($row['network']??''));$counts[$stall]=absint($counts[$stall]??0)+1;$nets[$stall][$network]=absint($nets[$stall][$network]??0)+1;}
+        ksort($counts); return array('counts'=>$counts,'networks'=>$nets);
+    }
+
+    private function aff043_current_supply_for_key($target_key) {
+        $target_key=$this->automation_normalize_target_key($target_key);$out=array('total'=>0,'ebay'=>0,'idealo'=>0,'ids'=>array());
+        foreach($this->get_campaigns() as $campaign){if(!is_array($campaign)||empty($campaign['active'])||sanitize_key((string)($campaign['creative_type']??''))!=='product')continue;$network=sanitize_key((string)($campaign['network']??''));if(!in_array($network,array('ebay','idealo'),true))continue;$keys=array_values((array)($campaign['automation_target_keys']??array()));if(!in_array($target_key,$keys,true))continue;if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign))continue;if($network==='ebay' && (!$this->ebay_business_campaign_source_allows_delivery_base($campaign)))continue;if($this->aff043_provider_paused_or_vetoed($network))continue;$out['total']++;$out[$network]++;$out['ids'][]=absint($campaign['post_id']??0);}
+        $out['ids']=array_values(array_unique(array_filter($out['ids'])));return $out;
+    }
+
+    private function aff043_supply_gate($rows) {
+        $hist=$this->aff043_historical_gate_keys($rows);$result=array();$fail=array();
+        foreach((array)$hist['counts'] as $key=>$historical_count){if($historical_count<3)continue;$cur=$this->aff043_current_supply_for_key($key);$result[$key]=$cur;$need_ebay=absint($hist['networks'][$key]['ebay']??0)>0;if($cur['total']<3||($need_ebay&&$cur['ebay']<1)){$fail[$key]=array('historical'=>$historical_count,'historical_networks'=>$hist['networks'][$key]??array(),'current'=>$cur);}}
+        if($fail){return new WP_Error('aff043_supply_gate_failed','Historische exakte Produktsupply ist noch nicht sicher wiederhergestellt.',array('failed'=>$fail,'supply'=>$result));}
+        return $result;
+    }
+
+    private function aff043_maybe_undo_aff042() {
+        $state=get_option('ppar_aff042_exact_assignment_restore_v1',array());$state=is_array($state)?$state:array();
+        if(sanitize_key((string)($state['status']??''))!=='complete'){return array('status'=>'not_applicable');}
+        $backup=get_option('ppar_aff042_assignments_before_exact_restore_v1',array());$backup=is_array($backup)?$backup:array();$old=is_array($backup['assignments']??null)?$backup['assignments']:null;
+        if($old===null){return array('status'=>'blocked','error'=>'aff042_backup_missing');}
+        $current=get_option(self::OPTION_ASSIGNMENTS,array());$current=is_array($current)?$current:array();$after_hash=(string)($state['after_sha256']??'');
+        if($after_hash===''||!hash_equals($after_hash,hash('sha256',serialize($current)))){return array('status'=>'preserved','reason'=>'current_assignments_changed_after_aff042');}
+        update_option(self::OPTION_ASSIGNMENTS,$old,false);$read=get_option(self::OPTION_ASSIGNMENTS,array());
+        if(!is_array($read)||!hash_equals(hash('sha256',serialize($old)),hash('sha256',serialize($read)))){return array('status'=>'blocked','error'=>'aff042_rollback_readback');}
+        return array('status'=>'restored','sha256'=>hash('sha256',serialize($old)));
+    }
+
+    private function aff043_safe_ebay_ids() {
+        $ids=array();foreach($this->get_campaigns() as $campaign){if(!is_array($campaign)||empty($campaign['active'])||sanitize_key((string)($campaign['network']??''))!=='ebay'||sanitize_key((string)($campaign['creative_type']??''))!=='product')continue;if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign))continue;if(!$this->ebay_business_campaign_source_allows_delivery_base($campaign))continue;$ids[]=absint($campaign['post_id']??0);} $ids=array_values(array_unique(array_filter($ids)));sort($ids,SORT_NUMERIC);return $ids;
+    }
+
+    public function handle_aff043_recovery_start() {
+        if(!current_user_can('manage_options')){wp_die('Keine Berechtigung.');}check_admin_referer('ppar_aff043_recovery_start','ppar_aff043_nonce');
+        $snap=$this->aff043_snapshot();if(is_wp_error($snap)){$this->aff043_save_state(array('schema'=>'1.0','status'=>'blocked','phase'=>'preflight','errors'=>array('snapshot'=>$snap->get_error_code()),'message'=>$snap->get_error_message()));$this->aff043_redirect('blocked');}
+        $state=array('schema'=>'1.0','status'=>'running','phase'=>'augment','cursor'=>0,'started_at'=>time(),'started_by'=>get_current_user_id(),'snapshot_sha256'=>$snap['sha256'],'source_sha256'=>$snap['source_sha256'],'stats'=>array(),'errors'=>array());
+        $this->aff043_save_state($state);$this->run_aff043_recovery_worker();$this->aff043_redirect('started');
+    }
+
+    public function handle_aff043_recovery_step() {if(!current_user_can('manage_options')){wp_die('Keine Berechtigung.');}check_admin_referer('ppar_aff043_recovery_step','ppar_aff043_nonce');$this->run_aff043_recovery_worker();$this->aff043_redirect('stepped');}
+    public function handle_aff043_recovery_stop() {if(!current_user_can('manage_options')){wp_die('Keine Berechtigung.');}check_admin_referer('ppar_aff043_recovery_stop','ppar_aff043_nonce');$state=$this->aff043_state();$state['status']='stopped';$state['phase']='stopped';$state['stopped_at']=time();$this->aff043_save_state($state);if(function_exists('wp_clear_scheduled_hook'))wp_clear_scheduled_hook(self::AFF043_RECOVERY_HOOK);$this->aff043_redirect('stopped');}
+
+    public function run_aff043_recovery_worker() {
+        $state=$this->aff043_state();if(sanitize_key((string)($state['status']??''))!=='running')return $state;if(get_transient(self::AFF043_RECOVERY_LOCK))return $state;set_transient(self::AFF043_RECOVERY_LOCK,'1',90);
+        try{
+            $snap=$this->aff043_snapshot();if(is_wp_error($snap)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['snapshot']=$snap->get_error_code();$state['message']=$snap->get_error_message();$this->aff043_save_state($state);return $state;}
+            $rows=$snap['rows'];$phase=sanitize_key((string)($state['phase']??'augment'));
+            if(in_array($phase,array('augment','normalize'),true)){
+                $cursor=absint($state['cursor']??0);$end=min(count($rows),$cursor+60);$changed=0;$same=0;$missing=0;$errors=0;$reactivated=0;
+                for($i=$cursor;$i<$end;$i++){$r=$this->aff043_apply_row($rows[$i],$phase);$st=(string)($r['status']??'');if($st==='changed')$changed++;elseif($st==='same')$same++;elseif($st==='missing')$missing++;elseif(in_array($st,array('save_error','mismatch','invalid'),true))$errors++;$reactivated+=absint($r['reactivated']??0);}
+                $state['cursor']=$end;$state['stats'][$phase.'_changed']=absint($state['stats'][$phase.'_changed']??0)+$changed;$state['stats'][$phase.'_same']=absint($state['stats'][$phase.'_same']??0)+$same;$state['stats'][$phase.'_missing']=absint($state['stats'][$phase.'_missing']??0)+$missing;$state['stats'][$phase.'_errors']=absint($state['stats'][$phase.'_errors']??0)+$errors;$state['stats'][$phase.'_reactivated']=absint($state['stats'][$phase.'_reactivated']??0)+$reactivated;$this->campaigns_request_cache=null;
+                if($end>=count($rows)){$state['cursor']=0;$state['phase']=$phase==='augment'?'supply_gate':'finalize';}
+            } elseif($phase==='supply_gate'){
+                $gate=$this->aff043_supply_gate($rows);if(is_wp_error($gate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['supply']=$gate->get_error_code();$state['supply_gate']=$gate->get_error_data();}
+                else{$state['supply_gate']=$gate;$state['aff042_rollback']=$this->aff043_maybe_undo_aff042();$state['phase']='normalize';$state['cursor']=0;}
+            } elseif($phase==='finalize'){
+                $gate=$this->aff043_supply_gate($rows);if(is_wp_error($gate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['final_supply']=$gate->get_error_code();$state['supply_gate']=$gate->get_error_data();}
+                elseif($this->aff043_provider_paused_or_vetoed('ebay')){$state['status']='blocked';$state['phase']='blocked';$state['errors']['ebay_provider']='paused_or_vetoed';}
+                else{
+                    $settings=get_option(self::OPTION_NETWORK_IDEALO,array());$settings=is_array($settings)?$settings:array();$mode=$this->idealo_sanitize_output_mode($settings['output_mode']??'ebay_only');
+                    if(!empty($settings['enabled'])&&$mode==='idealo_only'){$settings['output_mode']='automatic';update_option(self::OPTION_NETWORK_IDEALO,$settings,false);$state['stats']['idealo_mode_restored']=1;}
+                    $this->campaigns_request_cache=null;$ebay_ids=$this->aff043_safe_ebay_ids();$old=$this->ebay_public_checkpoint_load();$candidate=$this->aff039_checkpoint_candidate($old,$ebay_ids);
+                    if(is_wp_error($candidate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['checkpoint']=$candidate->get_error_code();}
+                    else{$saved=$this->ebay_public_checkpoint_save($candidate);if($saved===false){$state['status']='blocked';$state['phase']='blocked';$state['errors']['checkpoint']='persistence_failed';}else{$state['stats']['ebay_checkpoint_business_ids']=count((array)($saved['business_campaign_ids']??array()));$state['status']='complete';$state['phase']='complete';$state['completed_at']=time();$state['supply_gate']=$gate;}}
+                }
+            }
+            $this->aff043_save_state($state);
+        } finally {delete_transient(self::AFF043_RECOVERY_LOCK);}
+        $state=$this->aff043_state();if(sanitize_key((string)($state['status']??''))==='running')$this->aff043_schedule_next(2);return $state;
+    }
+
+    private function render_aff043_recovery_panel() {
+        $state=$this->aff043_state();$status=sanitize_key((string)($state['status']??'not_started'));$phase=sanitize_key((string)($state['phase']??''));$stats=is_array($state['stats']??null)?$state['stats']:array();
+        ?>
+        <div class="postbox" style="max-width:1100px;padding:18px;margin-top:18px;border-left:4px solid #2271b1;">
+            <h2>AFF-ERR-043 Historischen Produktzustand wiederherstellen</h2>
+            <p><strong>Status:</strong> <code><?php echo esc_html($status); ?></code><?php if($phase!==''): ?> · <strong>Phase:</strong> <code><?php echo esc_html($phase); ?></code><?php endif; ?></p>
+            <p>Stellt ausschliesslich die am 15.09. real exportierten eBay-/idealo-Produkt-Zielbindungen und sichere Supply wieder her. Kacheln, Renderer, Rangfolge, Artikelplaene und Banner bleiben unveraendert. Zuerst wird Supply nur ergaenzt; bereinigt wird erst nach dem Positiv-Gate.</p>
+            <?php if($stats): ?><p><small><?php echo esc_html(wp_json_encode($stats)); ?></small></p><?php endif; ?>
+            <?php if(!empty($state['errors'])): ?><p><strong>BLOCK:</strong> <?php echo esc_html(wp_json_encode($state['errors'])); ?></p><?php endif; ?>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff043_recovery_start"><?php wp_nonce_field('ppar_aff043_recovery_start','ppar_aff043_nonce'); ?><button class="button button-primary">Historischen Produktzustand wiederherstellen</button></form>
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff043_recovery_step"><?php wp_nonce_field('ppar_aff043_recovery_step','ppar_aff043_nonce'); ?><button class="button">Einen sicheren Batch ausfuehren</button></form>
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff043_recovery_stop"><?php wp_nonce_field('ppar_aff043_recovery_stop','ppar_aff043_nonce'); ?><button class="button">Batch sicher beenden</button></form>
+            </div>
+        </div>
+        <?php
+    }
+
+    private function render_aff039_recovery_panel() {
+        $state=$this->aff039_recovery_state(); $status=sanitize_key((string)($state['status']??'not_started')); $phase=sanitize_key((string)($state['phase']??'')); $stats=is_array($state['stats']??null)?$state['stats']:array();
+        ?>
+        <div class="postbox" style="max-width:1100px;padding:18px;margin-top:18px;border-left:4px solid #b32d2e;">
+            <h2>AFF-ERR-039 Zweiebenen-Recovery</h2>
+            <p><strong>Status:</strong> <code><?php echo esc_html($status); ?></code><?php if($phase!==''): ?> · <strong>Phase:</strong> <code><?php echo esc_html($phase); ?></code><?php endif; ?></p>
+            <p>Recovery laeuft ausschließlich im gebundenen Worker. Normale Frontend-, REST- und eBay-Notification-Requests starten oder setzen sie niemals fort.</p>
+            <?php if($stats): ?><p><small><?php echo esc_html(wp_json_encode($stats)); ?></small></p><?php endif; ?>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff039_recovery_start"><?php wp_nonce_field('ppar_aff039_recovery_start','ppar_aff039_nonce'); ?><button class="button button-primary">AFF-ERR-039 Recovery starten</button></form>
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff039_recovery_step"><?php wp_nonce_field('ppar_aff039_recovery_step','ppar_aff039_nonce'); ?><button class="button">Einen sicheren Batch ausfuehren</button></form>
+                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff039_recovery_stop"><?php wp_nonce_field('ppar_aff039_recovery_stop','ppar_aff039_nonce'); ?><button class="button">Batch sicher beenden</button></form>
+            </div>
+        </div>
+        <?php
+    }
+
     public function maybe_apply_article_products_upgrade() {
         $done = (string) get_option(self::OPTION_ARTICLE_PRODUCTS_UPGRADE, '');
         if ($done === '6.36.0') { return false; }
@@ -1112,6 +1938,17 @@ JS;
         update_option(self::OPTION_ARTICLE_PRODUCTS_UPGRADE, '6.36.0', false);
         if (method_exists($this, 'article_plan_rebuild_request')) {
             $this->article_plan_rebuild_request('v636_article_products_upgrade', $this->article_plan_campaign_revision());
+        }
+        return true;
+    }
+
+    /** V6.72.71 – Unterer Ersatzbanner/No-Duplicate macht alte Artikelplaene stale. */
+    public function maybe_apply_article_plan_schema_v13_upgrade() {
+        $done=(string)get_option(self::OPTION_ARTICLE_PLAN_SCHEMA_UPGRADE,'');
+        if ($done === self::ARTICLE_PLAN_SCHEMA) { return false; }
+        update_option(self::OPTION_ARTICLE_PLAN_SCHEMA_UPGRADE,self::ARTICLE_PLAN_SCHEMA,false);
+        if ($this->article_hybrid_enabled() && method_exists($this,'article_plan_rebuild_request')) {
+            $this->article_plan_rebuild_request('v67271_article_plan_schema_1_5',$this->article_plan_campaign_revision());
         }
         return true;
     }
@@ -1203,12 +2040,9 @@ JS;
         return count($matches[0]);
     }
 
-    /**
-     * Verbindliche Obergrenze: pro Beitrag höchstens eine Banneranzeige.
-     * Die Wortzahl erhöht die Bannerzahl nicht.
-     */
+    /** V6.72.67 – Einzelbeitrag: 1 Banner; ab 1.800 Woertern max. 2. */
     private function article_banner_limit_for_words($word_count) {
-        return 1;
+        return ((int) $word_count >= 1800) ? 2 : 1;
     }
 
     /**
@@ -1602,6 +2436,151 @@ JS;
         return $result;
     }
 
+    public function inject_glossary_single_banner($content) {
+        if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
+        if (!function_exists('is_singular') || !is_singular('uge_term') || !in_the_loop() || !is_main_query()) { return $content; }
+        if (strpos((string) $content, 'pftk-gsingle-v150490') === false || strpos((string) $content, 'ppar-glossary-banner-v67244') !== false) { return $content; }
+        $post_id = absint(get_the_ID());
+        if ($post_id <= 0 || get_post_type($post_id) !== 'uge_term' || post_password_required($post_id)) { return $content; }
+
+        // Ein fachlicher Werbeplatz, zwei technische Zielslots. Desktop und Mobil
+        // teilen Kontext/Ranking, aber niemals dieselbe Formatregel.
+        $desktop_slot = $this->render_affiliate_slot($post_id, 'glossary_single_desktop_banner', 'portal_context', '');
+        $mobile_slot = $this->render_affiliate_slot($post_id, 'glossary_single_mobile_banner', 'portal_context', '');
+        if (trim((string) $desktop_slot) === '' && trim((string) $mobile_slot) === '') { return $content; }
+
+        $desktop_banner = trim((string) $desktop_slot) !== ''
+            ? '<div class="ppar-glossary-banner-v67244 ppar-glossary-banner-desktop-v67244" data-ppar-glossary-banner="desktop">' . $desktop_slot . '</div>'
+            : '';
+        $mobile_banner = trim((string) $mobile_slot) !== ''
+            ? '<div class="ppar-glossary-banner-v67244 ppar-glossary-banner-mobile-v67244" data-ppar-glossary-banner="mobile">' . $mobile_slot . '</div>'
+            : '';
+
+        $pattern = '#(<aside\s+class="[^"]*pftk-gsingle-aside-v150490[^"]*"[^>]*>.*?</aside>)#is';
+        if (!preg_match($pattern, (string) $content)) { return $content; }
+        // V6.72.100 RESTORE: exakt der belegte LIVE-PASS-Pfad aus 6.72.60/57.
+        // Mobil steht vor dem Aside. Desktop ist bewusst ein Geschwisterblock NACH
+        // dem Aside und wird ausserhalb der Grid-Hoehenberechnung positioniert.
+        $replaced = preg_replace($pattern, $mobile_banner . '$1' . $desktop_banner, (string) $content, 1);
+        return is_string($replaced) && $replaced !== '' ? $replaced : $content;
+    }
+
+    public function inject_breed_single_banner($content) {
+        if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return $content; }
+        if (!function_exists('is_singular') || !is_singular('pa_breed') || !in_the_loop() || !is_main_query()) { return $content; }
+        if (strpos((string)$content, 'pftk-breed-single-v150506') === false || strpos((string)$content, 'ppar-breed-banner-v67259') !== false) { return $content; }
+        $post_id=absint(get_the_ID());
+        if ($post_id<=0 || get_post_type($post_id)!=='pa_breed' || post_password_required($post_id)) { return $content; }
+        $desktop_slot=$this->render_affiliate_slot($post_id,'breed_single_desktop_banner','portal_context','');
+        $mobile_slot=$this->render_affiliate_slot($post_id,'breed_single_mobile_banner','portal_context','');
+        if (trim((string)$desktop_slot)==='' && trim((string)$mobile_slot)==='') { return $content; }
+        $desktop=trim((string)$desktop_slot)!=='' ? '<div class="ppar-breed-banner-v67259 ppar-breed-banner-desktop-v67259" data-ppar-breed-banner="desktop">'.$desktop_slot.'</div>' : '';
+        $mobile=trim((string)$mobile_slot)!=='' ? '<div class="ppar-breed-banner-v67259 ppar-breed-banner-mobile-v67259" data-ppar-breed-banner="mobile">'.$mobile_slot.'</div>' : '';
+        // Exakt nach dem bestehenden Faktenblock. Desktop bleibt damit in der linken
+        // Rail; mobil wird derselbe DOM-Punkt ueber die bestehende Grid-Reihenfolge
+        // nach dem Lesetext und vor dem mobilen Tail angeordnet.
+        $pattern='#(<section\\s+class="[^"]*pftk-breed-facts-box-v150506[^"]*"[^>]*>.*?</section>)#is';
+        if (!preg_match($pattern,(string)$content)) { return $content; }
+        $replaced=preg_replace($pattern,'$1'.$desktop.$mobile,(string)$content,1);
+        return is_string($replaced)&&$replaced!=='' ? $replaced : $content;
+    }
+
+    /** V6.72.67 – Query-Kontext fuer bereits definierte Uebersichts-Werbeplaetze. */
+    private function affiliate_overview_term_context($term, $taxonomy, $post_type) {
+        if (!$term instanceof WP_Term || is_wp_error($term)) { return array(); }
+        $slugs=array((string)$term->slug); $names=array((string)$term->name); $term_ids=array((int)$term->term_id);
+        foreach ((array)get_ancestors((int)$term->term_id, $taxonomy, 'taxonomy') as $ancestor_id) {
+            $ancestor=get_term($ancestor_id,$taxonomy);
+            if (!$ancestor || is_wp_error($ancestor)) { continue; }
+            $term_ids[]=(int)$ancestor->term_id; $slugs[]=(string)$ancestor->slug; $names[]=(string)$ancestor->name;
+        }
+        $description=(string)($term->description ?? '');
+        return array(
+            'slugs'=>array_values(array_unique(array_map('sanitize_key',$slugs))),
+            'names'=>array_values(array_unique($names)),
+            'primary_slug'=>sanitize_key((string)$term->slug),
+            'primary_name'=>(string)$term->name,
+            'post_type'=>sanitize_key((string)$post_type),
+            'haystack'=>strtolower(wp_strip_all_tags((string)$term->name.' '.(string)$term->slug.' '.implode(' ',$slugs).' '.implode(' ',$names).' '.$description)),
+            'post_id'=>0,
+            'ancestor_ids'=>array(),
+            'term_ids'=>array_values(array_unique(array_map('intval',$term_ids))),
+            'direct_term_slugs'=>array(sanitize_key((string)$term->slug)),
+        );
+    }
+
+    private function affiliate_is_breed_overview_category($term) {
+        if (!$term instanceof WP_Term || is_wp_error($term) || (string)$term->taxonomy !== 'category') { return false; }
+        $term_id=absint($term->term_id);
+        if ($term_id === 1482) { return true; }
+        return $term_id > 0 && in_array(1482,array_map('absint',(array)get_ancestors($term_id,'category','taxonomy')),true);
+    }
+
+    private function affiliate_is_journal_category($term) {
+        if (!$term instanceof WP_Term || is_wp_error($term) || (string)$term->taxonomy !== 'category') { return false; }
+        $id=absint($term->term_id);
+        $slug=sanitize_title((string)$term->slug);
+        // Exakt aus dem aktuell gebundenen Journal-Design 1.50.552 abgeleitet.
+        // Glossar und Pferderassen besitzen eigene Werbeplatz-Vertraege und
+        // werden deshalb in inject_overview_banner_footer vorher abgefangen.
+        $ids=array(1481,1483,1484,1485,1486,1487,1488);
+        $slugs=array(
+            'pferde-verstehen','recht-finanzen-und-organisation','reiterleben-und-community',
+            'alltags-pferde-haltungsformen','pferdegesundheit-verstehen',
+            'pferdeernaehrung-verstehen','ausbildung-und-reitweisen','pferdewissen-grundlagen'
+        );
+        return in_array($id,$ids,true) || in_array($slug,$slugs,true);
+    }
+
+    /**
+     * V6.72.100 RESTORE – echte Design-Zielpunkte statt Loop-Position.
+     * Der Banner wird erst im Footer an die bereits gerenderte, stabile
+     * Designstruktur montiert. Damit bleiben Glossar-/Rassen-/Journal-Layouts
+     * unveraendert und der Banner sitzt wieder am frueheren PASS-Punkt.
+     */
+    public function inject_overview_banner_footer() {
+        if (!$this->is_enabled() || is_admin() || is_feed() || is_preview()) { return; }
+        $term=function_exists('get_queried_object') ? get_queried_object() : null;
+        if (!$term instanceof WP_Term || is_wp_error($term)) { return; }
+        $slot=''; $selector=''; $context=array(); $mode='before';
+        if (function_exists('is_tax') && is_tax('uge_group')) {
+            $slot='glossary_overview_banner';
+            $selector='.pftk-glossar-group-content-v150481';
+            $context=$this->affiliate_overview_term_context($term,'uge_group','uge_group_archive');
+        } elseif (function_exists('is_tax') && is_tax('pa_breed_group')) {
+            $slot='breed_overview_banner';
+            $selector='#pftk-rassen-liste';
+            $context=$this->affiliate_overview_term_context($term,'pa_breed_group','pa_breed_group_archive');
+        } elseif (function_exists('is_category') && is_category()) {
+            if (sanitize_key((string)$term->slug) === 'glossar') {
+                $slot='glossary_overview_banner';
+                $selector='#pftk-glossar-liste';
+                $context=$this->get_category_archive_context($term);
+            } elseif ($this->affiliate_is_breed_overview_category($term)) {
+                $slot='breed_overview_banner';
+                $selector='#pftk-rassen-liste';
+                $context=$this->get_category_archive_context($term);
+            } elseif ($this->affiliate_is_journal_category($term)) {
+                // Exakt der alte Kategorie-Bannerpfad, nur an den echten aktuellen
+                // Journal-DOM gebunden: nach Karten, vor dem unteren Journalblock.
+                $slot='product_after_category_tiles';
+                $selector='[data-pa433-journal-bottom="1"]';
+                $context=$this->get_category_archive_context($term);
+                $mode='journal_before_bottom';
+            }
+        }
+        if ($slot === '' || $selector === '' || !$context) { return; }
+        $html=$this->render_affiliate_slot_for_context('term_'.absint($term->term_id),$context,$slot,'portal_context','');
+        if (trim((string)$html)==='' || strpos((string)$html,'data-ppar-placeholder')!==false || strpos((string)$html,'ppar-affiliate-slot')===false) { return; }
+        $id='ppar-overview-banner-v672100-'.absint($term->term_id).'-'.sanitize_key($slot);
+        echo '<div id="'.esc_attr($id).'" class="ppar-overview-banner-v67266 ppar-overview-banner-v672100" hidden>'.$html.'</div>';
+        if ($mode === 'journal_before_bottom') {
+            echo '<script>(function(){function m(){var n=document.getElementById('.wp_json_encode($id).');if(!n)return;var main=document.querySelector("main#main.site-main")||document.querySelector("main#main")||document.querySelector(".site-main");if(!main)return;var t=main.querySelector('.wp_json_encode($selector).');if(t&&t.parentNode){t.parentNode.insertBefore(n,t);}else{main.appendChild(n);}n.hidden=false;}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",m,{once:true});}else{m();}}());</script>';
+        } else {
+            echo '<script>(function(){function m(){var n=document.getElementById('.wp_json_encode($id).'),t=document.querySelector('.wp_json_encode($selector).');if(!n||!t||!t.parentNode)return;t.parentNode.insertBefore(n,t);n.hidden=false;}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",m,{once:true});}else{m();}}());</script>';
+        }
+    }
+
     public function auto_inject_category_archive_slots($query) {
         if (!$this->is_enabled() || !$this->is_category_archive_enabled()) {
             return;
@@ -1620,6 +2599,14 @@ JS;
 
         $term = get_queried_object();
         if (!$term || empty($term->term_id) || empty($term->slug)) {
+            return;
+        }
+
+        // V6.72.100: diese Designflaechen besitzen wieder einen einzigen
+        // festen Footer-Mount. Der generische loop_end darf dort nicht doppeln.
+        if (sanitize_key((string)$term->slug) === 'glossar'
+            || $this->affiliate_is_breed_overview_category($term)
+            || $this->affiliate_is_journal_category($term)) {
             return;
         }
 
@@ -1647,20 +2634,6 @@ JS;
     private function render_affiliate_slot($post_id, $slot_type, $intent, $forced_group_id = '') {
         $context = $this->get_content_context($post_id);
         return $this->render_affiliate_slot_for_context($post_id, $context, $slot_type, $intent, $forced_group_id);
-    }
-
-    /**
-     * Einheitliche sichtbare Bannerform fuer Startseite, alle Hub-/Seitentiefen
-     * sowie Kategorie-/Leaf-Ausgaben. Die funktionierende 6.72.19-Auswahl-
-     * und Relevanzlogik bleibt unveraendert; nur die Ausgabe wird vereinheitlicht.
-     */
-    private function overview_wide_banner_slot($slot_type) {
-        return in_array(sanitize_key((string) $slot_type), array(
-            'start_after_topics',
-            'hub_after_cards',
-            'product_after_category_tiles',
-            'category_recommendation',
-        ), true);
     }
     /**
      * Soft target shares for banner *places*, never a relevance override.
@@ -1698,6 +2671,186 @@ JS;
         return $out;
     }
 
+    /**
+     * V6.72.77 – ein sichtbares Vollbreitenprinzip fuer alle grossen
+     * Uebersichts-Bannerplaetze. Auswahl, Provider, Relevanz und bestehende
+     * Slotregeln bleiben unveraendert; nur das bereits ausgewaehlte Creative
+     * wird ohne Karten-Chrome als verlinktes Bild ausgegeben.
+     */
+    private function overview_wide_banner_slot($slot_type) {
+        return in_array(sanitize_key((string) $slot_type), array(
+            'start_after_topics',
+            'hub_after_cards',
+            'product_after_category_tiles',
+            'category_recommendation',
+            'glossary_overview_banner',
+            'breed_overview_banner',
+            'journal_banner',
+            'anzeigenmarkt_top_banner',
+            'anzeigenmarkt_category_banner',
+        ), true);
+    }
+
+
+    /** V6.72.78 – harte Niedrigbanner-Grenze aus der kanonischen Slotmatrix. */
+    private function overview_wide_banner_contract_slot($slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        return $slot_type === 'category_recommendation' ? 'product_after_category_tiles' : $slot_type;
+    }
+
+    private function overview_wide_banner_campaign_eligible($campaign, $slot_type) {
+        if (!$this->overview_wide_banner_slot($slot_type)) { return true; }
+        if (!is_array($campaign)) { return false; }
+        list($width, $height, $dimension_source) = $this->article_banner_dimensions($campaign);
+        // V6.72.81: keine unbekannte Bildaufloesung als 728x90 erraten.
+        // Vollbreite braucht belegte Pixelmasse; sonst fail closed und naechster Banner.
+        if ($dimension_source === 'fallback' || absint($width) <= 0 || absint($height) <= 0) { return false; }
+        $contract_slot = $this->overview_wide_banner_contract_slot($slot_type);
+        return $contract_slot !== '' && $this->campaign_matches_contract_slot_rule($campaign, $contract_slot);
+    }
+
+    /**
+     * V6.72.37 – ein Kategorie-Querbannervertrag fuer alle Kategorieebenen.
+     * Dieselbe Regel ist Quelle fuer Slot-Matrix, automatische Freigabe,
+     * Frontend-Auswahl und Laufzeit-Toleranz. Provider bleiben neutral.
+     */
+    private function category_large_banner_rule($slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        if ($slot_type === 'hub_after_cards') {
+            return array(
+                'creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,
+                'min_width'=>800,'min_height'=>60,'crop'=>'contain',
+                'target_types'=>array('page'),'target_contexts'=>array('hub1','hub2'),
+                'upscale_max'=>1.10,'min_fill'=>0.60,
+            );
+        }
+        if ($slot_type === 'product_after_category_tiles') {
+            return array(
+                'creative_type'=>'banner','ratio_min'=>5.00,'ratio_max'=>12.00,
+                'min_width'=>800,'min_height'=>60,'crop'=>'contain',
+                'target_types'=>array('page','category'),'target_contexts'=>array('category','leaf','leaf_category'),
+                'upscale_max'=>1.10,'min_fill'=>0.60,
+            );
+        }
+        return array();
+    }
+
+    private function category_large_banner_slot($slot_type) {
+        return !empty($this->category_large_banner_rule($slot_type));
+    }
+
+    private function category_large_banner_campaign_eligible($campaign, $slot_type = 'hub_after_cards') {
+        $rule = $this->category_large_banner_rule($slot_type);
+        if (!$rule || !is_array($campaign)
+            || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner'
+            || sanitize_key((string) ($campaign['render_mode'] ?? 'image_link')) === 'html'
+            || trim((string) ($campaign['image_url'] ?? '')) === '') {
+            return false;
+        }
+        list($width, $height, $dimension_source) = $this->article_banner_dimensions($campaign);
+        $width = absint($width);
+        $height = absint($height);
+        // V6.72.81: Vollbreitenbanner duerfen nie auf der 728x90-Fallbackannahme
+        // freigegeben werden. Fuer die Scharfzeichnung muss eine echte, gespeicherte
+        // Creative-Groesse (dimensions/html) vorliegen.
+        if ($dimension_source === 'fallback' || $width <= 0 || $height <= 0) { return false; }
+        $ratio = $width / $height;
+        if ($ratio < (float)$rule['ratio_min'] || $ratio > (float)$rule['ratio_max']) { return false; }
+        $scale = max(
+            1.0,
+            absint($rule['min_width']) / $width,
+            absint($rule['min_height']) / $height
+        );
+        return $scale <= ((float)$rule['upscale_max'] + 0.00001);
+    }
+
+    private function category_large_banner_rotate_candidates($candidates, $context, $slot_type) {
+        $candidates = array_values((array) $candidates);
+        if (!$this->category_large_banner_slot($slot_type) || count($candidates) < 2) { return $candidates; }
+
+        $top = $candidates[0];
+        $specificity = (int) ($top['specificity'] ?? 0);
+        $matches = (int) ($top['matches'] ?? 0);
+        // V6.72.93: Prioritaet darf innerhalb derselben fachlichen Relevanz
+        // nicht einen allgemeinen Banner auf allen Kategorien festnageln.
+        // Die Verteilung erfolgt innerhalb derselben Relevanz + Geometrie.
+        $best_geometry = $this->banner_candidate_geometry($top);
+        $best_ratio = (float)($best_geometry['ratio'] ?? 0.0);
+        $equal = array();
+        $rest = array();
+        foreach ($candidates as $candidate) {
+            $candidate_geometry = $this->banner_candidate_geometry($candidate);
+            if ((int) ($candidate['specificity'] ?? 0) === $specificity
+                && (int) ($candidate['matches'] ?? 0) === $matches
+                && abs((float)($candidate_geometry['ratio'] ?? 0.0) - $best_ratio) < 0.05) {
+                $equal[] = $candidate;
+            } else {
+                $rest[] = $candidate;
+            }
+        }
+        if (count($equal) < 2) { return $candidates; }
+
+        $seed = implode('|', array(
+            gmdate('o-W'),
+            (string) absint($context['post_id'] ?? 0),
+            sanitize_key((string) $slot_type),
+            sanitize_key((string) ($context['primary_slug'] ?? '')),
+        ));
+        $offset = (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % count($equal));
+        $equal = array_merge(array_slice($equal, $offset), array_slice($equal, 0, $offset));
+        return array_values(array_merge($equal, $rest));
+    }
+
+    /**
+     * V6.72.82 – innerhalb derselben fachlichen Relevanz gewinnt bei Bannern
+     * zuerst die niedrigste Form (groesstes Breite/Hoehe-Verhaeltnis). Bei
+     * derselben Creative-Variante und Formatfamilie bleibt nur die groesste
+     * belegte Aufloesung im Rennen. Relevanz wird dadurch niemals ueberstimmt.
+     */
+    private function banner_candidate_geometry($candidate) {
+        $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+        if (!is_array($campaign) || sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== 'banner') {
+            return array('ratio'=>0.0,'pixels'=>0,'width'=>0,'height'=>0);
+        }
+        list($width,$height,$source) = $this->article_banner_dimensions($campaign);
+        $width=absint($width); $height=absint($height);
+        if ($source === 'fallback' || $width<=0 || $height<=0) { return array('ratio'=>0.0,'pixels'=>0,'width'=>0,'height'=>0); }
+        return array('ratio'=>$width/$height,'pixels'=>$width*$height,'width'=>$width,'height'=>$height);
+    }
+
+    private function banner_candidate_variant_signature($candidate) {
+        $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+        if (!is_array($campaign)) { return ''; }
+        $g=$this->banner_candidate_geometry($candidate);
+        if ($g['ratio']<=0) { return ''; }
+        $provider=sanitize_key((string)($campaign['network'] ?? ''));
+        $partner=strtolower(trim(sanitize_text_field((string)($campaign['advertiser_id'] ?? $campaign['partner'] ?? ''))));
+        $destination=esc_url_raw((string)($campaign['destination_url'] ?? ''));
+        if ($destination==='') { $destination=esc_url_raw((string)($campaign['url'] ?? '')); }
+        $parts=wp_parse_url($destination);
+        $destination_key='';
+        if (is_array($parts)) {
+            $destination_key=strtolower((string)($parts['host'] ?? '') . (string)($parts['path'] ?? ''));
+            $destination_key=rtrim($destination_key,'/');
+        }
+        $title=strtolower(trim(preg_replace('/\s+/', ' ', sanitize_text_field((string)($campaign['title'] ?? $campaign['name'] ?? '')))));
+        // Formfamilien bleiben getrennt; innerhalb einer Familie gewinnt die
+        // groesste Pixelversion desselben Motiv-/Ziel-/Partnerverbunds.
+        $ratio_family=number_format(round($g['ratio']*2)/2,1,'.','');
+        return hash('sha256',implode('|',array($provider,$partner,$destination_key,$title,$ratio_family)));
+    }
+
+    private function banner_dedupe_resolution_variants($candidates) {
+        $out=array(); $seen=array();
+        foreach ((array)$candidates as $candidate) {
+            $signature=$this->banner_candidate_variant_signature($candidate);
+            if ($signature!=='' && isset($seen[$signature])) { continue; }
+            if ($signature!=='') { $seen[$signature]=true; }
+            $out[]=$candidate;
+        }
+        return array_values($out);
+    }
+
     private function banner_distribution_slot($slot_type) {
         $slot_type = sanitize_key((string) $slot_type);
         if ($this->slot_required_creative_type($slot_type) === 'banner') { return true; }
@@ -1708,7 +2861,7 @@ JS;
             'hub_top_cta','hub_after_cards','hub_grid_card','hub_mid_banner',
             'category_recommendation','product_after_category_tiles',
             'template_top','template_after_intro','template_after_selected','template_mid','template_mid_banner','template_bottom',
-            'journal_banner','anzeigenmarkt_top_banner',
+            'journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
         ), true);
     }
 
@@ -1753,22 +2906,39 @@ JS;
         return (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
     }
 
+    /** V6.72.55: Innerhalb exakt gleich guter Banner desselben Provider-Buckets
+     * wird seitenstabil rotiert. So zeigt nicht jeder Glossarartikel denselben
+     * allgemeinen Banner, waehrend ein fachlich besserer Treffer unveraendert gewinnt. */
+    private function banner_distribution_rotate_equal_group($indexes, $candidates, $context, $slot_type, $provider_key) {
+        $indexes = array_values((array) $indexes);
+        if (count($indexes) < 2) { return $indexes; }
+        $seed = implode('|', array(
+            'equal-campaign-v1',
+            gmdate('o-W'),
+            (string) absint($context['post_id'] ?? 0),
+            sanitize_key((string) ($context['primary_slug'] ?? '')),
+            sanitize_key((string) $slot_type),
+            sanitize_key((string) $provider_key),
+            (string) max(1, absint($context['banner_distribution_position'] ?? 1)),
+        ));
+        $offset = (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % count($indexes));
+        return array_merge(array_slice($indexes, $offset), array_slice($indexes, 0, $offset));
+    }
+
     private function banner_distribution_reorder_candidates($candidates, $context, $slot_type) {
         $candidates = array_values((array) $candidates);
         if (!$candidates) { return $candidates; }
         $settings = $this->banner_distribution_settings();
         if (empty($settings['enabled'])) { return $candidates; }
 
-        // Weight 0 is an automatic exclusion, not merely "no bonus".
-        // Manual fixed assignments bypass this function and remain the repair layer.
+        // V6.72.82: Gewichte sind nur weiche Verteilungsanteile und niemals ein
+        // Teilnahme-Gate. Jeder technisch und fachlich gueltige aktive Banner aus
+        // dem kompletten Pool bleibt im Rennen. Harte Ausschluesse erfolgen nur
+        // ueber Provider-/Creative-Status, Sicherheitsgates oder ein echtes Veto.
         $automatic_banner_candidates = array();
         foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') {
-                continue;
-            }
-            $key = $this->banner_distribution_provider_key($campaign);
-            if (absint($settings['weights'][$key] ?? 0) <= 0) {
                 continue;
             }
             $automatic_banner_candidates[] = $candidate;
@@ -1780,20 +2950,27 @@ JS;
             return $automatic_banner_candidates;
         }
 
-        $best_band = 0;
-        foreach ($automatic_banner_candidates as $candidate) {
-            $best_band = max($best_band, $this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)));
-        }
+        // Verteilung ist niemals ein Relevanz-Override. Nur fachlich exakt
+        // gleich gute Treffer duerfen nach Provideranteil rotiert werden.
+        // Die Kandidaten sind bereits specificity -> matches -> priority sortiert.
+        $best_specificity = (int) ($automatic_banner_candidates[0]['specificity'] ?? 0);
+        $best_matches = (int) ($automatic_banner_candidates[0]['matches'] ?? 0);
+        $best_priority = (int) ($automatic_banner_candidates[0]['priority'] ?? 0);
+        $best_geometry = $this->banner_candidate_geometry($automatic_banner_candidates[0]);
+        $best_ratio = (float)($best_geometry['ratio'] ?? 0.0);
         $groups = array();
         foreach ($automatic_banner_candidates as $index=>$candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign)) { continue; }
-            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) !== $best_band) {
+            $candidate_geometry = $this->banner_candidate_geometry($candidate);
+            if ((int) ($candidate['specificity'] ?? 0) !== $best_specificity
+                || (int) ($candidate['matches'] ?? 0) !== $best_matches
+                || (int) ($candidate['priority'] ?? 0) !== $best_priority
+                || abs((float)($candidate_geometry['ratio'] ?? 0.0) - $best_ratio) >= 0.05) {
                 continue;
             }
             $key = $this->banner_distribution_provider_key($campaign);
-            $weight = absint($settings['weights'][$key] ?? 0);
-            if ($weight <= 0) { continue; }
+            $weight = max(1, absint($settings['weights'][$key] ?? 0));
             if (!isset($groups[$key])) { $groups[$key] = array(); }
             $groups[$key][] = $index;
         }
@@ -1803,8 +2980,7 @@ JS;
         $total = 0;
         foreach ($ordered_keys as $key) {
             if (empty($groups[$key])) { continue; }
-            $weight = absint($settings['weights'][$key] ?? 0);
-            if ($weight <= 0) { continue; }
+            $weight = max(1, absint($settings['weights'][$key] ?? 0));
             $eligible[$key] = $weight;
             $total += $weight;
         }
@@ -1814,6 +2990,7 @@ JS;
         }
         if (count($eligible) === 1) {
             $only = array_key_first($eligible);
+            $groups[$only] = $this->banner_distribution_rotate_equal_group($groups[$only], $automatic_banner_candidates, $context, $slot_type, $only);
             $selected_indexes = array_fill_keys($groups[$only], true);
             $out = array();
             foreach ($groups[$only] as $index) { $out[] = $automatic_banner_candidates[$index]; }
@@ -1834,6 +3011,7 @@ JS;
             return $automatic_banner_candidates;
         }
 
+        $groups[$selected] = $this->banner_distribution_rotate_equal_group($groups[$selected], $automatic_banner_candidates, $context, $slot_type, $selected);
         $selected_indexes = array_fill_keys($groups[$selected], true);
         $out = array();
         foreach ($groups[$selected] as $index) {
@@ -1873,6 +3051,7 @@ JS;
         if (!$campaign || empty($campaign['active']) || !$this->campaign_is_complete($campaign) || !$this->rule_is_current($campaign) || !$this->campaign_program_allows_delivery($campaign) || !$this->campaign_source_allows_delivery($campaign) || !$this->campaign_control_allows_delivery($campaign, $slot_type) || !$this->campaign_health_allows_delivery($campaign)) { return null; }
         $required = $this->slot_required_creative_type($slot_type);
         if ($required !== '' && sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== $required) { return null; }
+        if ($this->overview_wide_banner_slot($slot_type) && !$this->overview_wide_banner_campaign_eligible($campaign, $slot_type)) { return null; }
         if ($required === 'product' && !$this->product_campaign_public_image_ready($campaign)) { return null; }
         return array('campaign'=>$campaign,'specificity'=>1000,'matches'=>1,'priority'=>1000,'reason'=>$reason);
     }
@@ -1908,6 +3087,7 @@ JS;
             if ($mode === 'fixed') {
                 $fixed_id = absint($data['banner_id'] ?? 0);
                 $selection = $this->fixed_campaign_selection($fixed_id, $slot_type, 'Fest zugeordnet, ' . $suffix . '.');
+                if (!$selection && $this->overview_wide_banner_slot($slot_type)) { return array('handled'=>false,'fallback_reason'=>'Fest zugeordnetes Creative verletzt den niedrigen Querbannervertrag; Automatik nimmt den nächsten gültigen Querbanner.'); }
                 if (!$selection && $this->fixed_campaign_provider_is_paused($fixed_id)) { return array('handled'=>false,'fallback_reason'=>'Fest zugeordneter Provider ist pausiert; Automatik übernimmt vorübergehend.'); }
                 return array('handled'=>true,'selection'=>$selection);
             }
@@ -1952,9 +3132,24 @@ JS;
                         if (!empty($group['id'])) { $classes[] = 'ppar-group-' . sanitize_html_class($group['id']); }
                         if (!empty($context['post_type'])) { $classes[] = 'ppar-context-' . sanitize_html_class($context['post_type']); }
                         $label = !empty($banner['label']) ? sanitize_text_field($banner['label']) : '';
-                        $disclosure = $this->get_disclosure_html($content_id);
-                        $is_category_product_slot = preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
+                        $is_category_large_banner_slot = $this->category_large_banner_slot($slot_type);
                         $is_overview_wide_banner_slot = $this->overview_wide_banner_slot($slot_type);
+                        $is_glossary_single_slot = in_array(sanitize_key((string)$slot_type), array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+                        $is_breed_single_slot = in_array(sanitize_key((string)$slot_type), array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
+                        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot;
+                        if ($is_overview_wide_banner_slot) {
+                            $disclosure = $this->get_disclosure_html($content_id);
+                        } elseif ($uses_editorial_single_chrome) {
+                            // Glossar und Pferderassen erhalten denselben kompakten
+                            // Pflichtblock: Bild, Pflichttext darunter, danach CTA.
+                            // Desktop und Mobil werden technisch parallel gerendert,
+                            // deshalb braucht jeder Slot seinen eigenen Pflichttext.
+                            $editorial_disclosure_text = 'Werbelink: Bei Kauf erhalten wir ggf. eine Provision.';
+                            $disclosure = '<div class="ppar-affiliate-disclosure">' . esc_html($editorial_disclosure_text) . '</div>';
+                        } else {
+                            $disclosure = $this->get_disclosure_html($content_id);
+                        }
+                        $is_category_product_slot = preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
                         // V6.61.8: Provider labels must never change category-product card geometry.
                         // The provider remains represented by its offer button/link; the external
                         // label row is suppressed for these three fixed product slots only.
@@ -1966,11 +3161,22 @@ JS;
                             ? ' style="box-sizing:border-box!important;display:grid!important;grid-template-rows:56px minmax(360px,1fr)!important;width:100%!important;height:auto!important;min-height:416px!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;overflow:visible!important"'
                             : '';
                         if ($is_overview_wide_banner_slot) { $classes[] = 'ppar-overview-wide-banner-slot'; }
+                        if ($is_glossary_single_slot) { $classes[] = 'ppar-glossary-affiliate-slot-v67251'; $classes[] = 'pftk-gsingle-box-v150490'; $label = ''; }
+                        if ($is_breed_single_slot) { $classes[] = 'ppar-breed-affiliate-slot-v67261'; $label = ''; }
                         $out = '<div class="' . esc_attr(implode(' ', $classes)) . '" data-ppar-slot="' . esc_attr($slot_type) . '" data-ppar-group="' . esc_attr($group['id'] ?? '') . '"' . $category_product_slot_style . '>';
-                        if ($is_overview_wide_banner_slot) {
-                            $out .= '<div class="ppar-overview-wide-banner-adlabel">Anzeige</div>';
-                            $out .= '<div class="ppar-affiliate-content">' . $html . '</div>';
+                        if ($uses_editorial_single_chrome) {
+                            $out .= '<h2 class="ppar-glossary-adhead-v67251"><span class="ppar-glossary-adicon-v67251 pftk-gsingle-icon-v150490" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h3l8 5V6l-8 5H4z"/><path d="M7 13l1.5 5h3"/><path d="M18 9.5c1.2 1.4 1.2 3.6 0 5"/></svg></span><span>Anzeige</span></h2>';
+                            $editorial_parts = explode('<!--ppar-glossary-cta-v67251-->', (string)$html, 2);
+                            $out .= '<div class="ppar-affiliate-content">' . (string)($editorial_parts[0] ?? '') . '</div>';
                             $out .= $disclosure;
+                            if (!empty($editorial_parts[1])) { $out .= '<div class="ppar-glossary-cta-wrap-v67251">' . (string)$editorial_parts[1] . '</div>'; }
+                        } elseif ($is_overview_wide_banner_slot) {
+                            // V6.72.80 DESIGN ONLY: kein redundantes "Anzeige". Reihenfolge fest:
+                            // Banner -> kurzer Werbelink-Hinweis -> CTA rechts darunter.
+                            $overview_parts = explode('<!--ppar-overview-cta-v67280-->', (string)$html, 2);
+                            $out .= '<div class="ppar-affiliate-content">' . (string)($overview_parts[0] ?? '') . '</div>';
+                            $out .= $disclosure;
+                            if (!empty($overview_parts[1])) { $out .= (string)$overview_parts[1]; }
                         } else {
                             $out .= $disclosure;
                             if ($label !== '') { $out .= '<div class="ppar-affiliate-label">' . esc_html($label) . '</div>'; }
@@ -2052,10 +3258,7 @@ JS;
     }
 
     private function get_disclosure_html($post_id) {
-        $text = trim((string) get_option(self::OPTION_DISCLOSURE, ''));
-        if ($text === '') {
-            return '';
-        }
+        $text = 'Werbelink: Bei Kauf erhalten wir ggf. eine Provision.';
 
         if (isset($this->disclosure_printed[$post_id])) {
             return '';
@@ -2078,9 +3281,6 @@ JS;
         );
 
         if ($mode === 'html') {
-            if ($this->overview_wide_banner_slot($slot_type)) {
-                return '';
-            }
             $raw = isset($banner['html']) ? (string) $banner['html'] : '';
             $raw = strtr($raw, $replacements);
             return $this->filter_allowed_banner_html($raw);
@@ -2099,6 +3299,18 @@ JS;
         $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';
         $seller_name = isset($banner['seller_name']) ? trim(strtr((string)$banner['seller_name'], $replacements)) : '';
         $creative_type = sanitize_key((string)($banner['creative_type'] ?? 'banner'));
+        $is_glossary_single_slot = in_array(sanitize_key((string)$slot_type), array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+        $is_breed_single_slot = in_array(sanitize_key((string)$slot_type), array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
+        $is_classic_post_slot = sanitize_key((string)$slot_type) === 'post_inline_banner';
+        $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot || $is_classic_post_slot;
+        if ($uses_editorial_single_chrome) {
+            // Redaktionelle Einzeltypen verwenden denselben reduzierten Werbeblock:
+            // nur Creative + portaltypischer CTA; kein Bannername, Partner-/Gueltigkeits-
+            // oder sonstiger Creative-Text. Der Pflicht-Werbehinweis sitzt ausserhalb.
+            $title = '';
+            $description = '';
+            $button = 'Mehr erfahren';
+        }
         $category_product_slot = (bool) preg_match('/^category_product_[123]$/', sanitize_key((string)$slot_type));
         $category_product_wrap_attr = $category_product_slot
             ? ' data-ppar-category-product-image-frame="150" style="box-sizing:border-box!important;display:flex!important;flex:0 0 150px!important;align-items:center!important;justify-content:center!important;width:150px!important;height:150px!important;min-width:150px!important;min-height:150px!important;max-width:150px!important;max-height:150px!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;background:#fff!important;line-height:0!important"'
@@ -2113,15 +3325,41 @@ JS;
 
         $target = (($banner['target'] ?? '_blank') === '_self') ? '_self' : '_blank';
         $rel = $target === '_blank' ? 'sponsored nofollow noopener noreferrer' : 'sponsored nofollow';
-
         if ($this->overview_wide_banner_slot($slot_type)) {
-            if ($url === '' || $image_url === '') {
-                return '';
-            }
+            if ($image_url === '' || !$this->overview_wide_banner_campaign_eligible($banner, $slot_type)) { return ''; }
+            list($overview_width, $overview_height) = $this->article_banner_dimensions($banner);
+            $overview_width = max(1, absint($overview_width));
+            $overview_height = max(1, absint($overview_height));
             return '<a class="ppar-overview-wide-banner-link" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">' .
-                '<img class="ppar-overview-wide-banner-image" src="' . esc_url($image_url) . '" alt="Anzeige" loading="lazy" decoding="async">' .
+                '<img class="ppar-overview-wide-banner-image" src="' . esc_url($image_url) . '" alt="Werbebanner" width="' . $overview_width . '" height="' . $overview_height . '" loading="lazy" decoding="async">' .
+                '</a>' .
+                '<!--ppar-overview-cta-v67280-->' .
+                '<div class="ppar-overview-wide-banner-cta-wrap"><a class="ppar-overview-wide-banner-cta" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">Mehr erfahren</a></div>';
+        }
+        if ($this->category_large_banner_slot($slot_type)) {
+            if (!$this->category_large_banner_campaign_eligible($banner, $slot_type) || $image_url === '') { return ''; }
+            list($banner_width, $banner_height) = $this->article_banner_dimensions($banner);
+            $banner_width = absint($banner_width);
+            $banner_height = absint($banner_height);
+            $large_rule = $this->category_large_banner_rule($slot_type);
+            $min_fill = isset($large_rule['min_fill']) ? (float)$large_rule['min_fill'] : 0.60;
+            $upscale_max = isset($large_rule['upscale_max']) ? (float)$large_rule['upscale_max'] : 1.00;
+            return '<a class="ppar-category-large-banner-link" data-ppar-large-banner="1" data-ppar-min-fill="' . esc_attr(number_format($min_fill, 2, '.', '')) . '" data-ppar-upscale-max="' . esc_attr(number_format($upscale_max, 2, '.', '')) . '" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">' .
+                '<img class="ppar-category-large-banner-image" src="' . esc_url($image_url) . '" alt="' . esc_attr($title !== '' ? $title : 'Anzeige') . '" width="' . $banner_width . '" height="' . $banner_height . '" loading="lazy" decoding="async">' .
                 '</a>';
         }
+
+        if ($uses_editorial_single_chrome) {
+            if ($image_url === '') { return ''; }
+            list($editorial_width, $editorial_height) = $this->article_banner_dimensions($banner);
+            $editorial_width = max(1, absint($editorial_width));
+            $editorial_height = max(1, absint($editorial_height));
+            $media = '<a class="ppar-glossary-banner-media-v67251" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '">'
+                . '<span class="ppar-banner-image-wrap"><img class="ppar-banner-image" src="' . esc_url($image_url) . '" alt="Anzeige" width="' . $editorial_width . '" height="' . $editorial_height . '" loading="lazy" decoding="async"></span></a>';
+            $cta = '<a class="ppar-glossary-banner-cta-v67251" href="' . esc_url($url) . '" target="' . esc_attr($target) . '" rel="' . esc_attr($rel) . '"><span class="ppar-banner-button">Mehr erfahren</span></a>';
+            return $media . '<!--ppar-glossary-cta-v67251-->' . $cta;
+        }
+
         $offers = array();
         if ($creative_type === 'product' && $category_product_slot && method_exists($this, 'multiprovider_matching_offers_for_banner')) {
             $offers = $this->multiprovider_matching_offers_for_banner($banner, $context, $slot_type);
@@ -2247,6 +3485,8 @@ JS;
         $direct_term_slugs = array();
         $primary_slug = '';
         $primary_name = '';
+        $semantic_primary_target_key = '';
+        $semantic_ancestor_target_keys = array();
 
         $title = (string) get_the_title($post_id);
         $post_slug = (string) get_post_field('post_name', $post_id);
@@ -2309,6 +3549,81 @@ JS;
             }
         }
 
+        if ($post_type === 'uge_term') {
+            // Glossar-Bedeutungshierarchie aus dem autoritativen UGE-Bestand:
+            // Themenwelt/Oberthema -> verwandte Begriffe -> passende Hauptseite.
+            // Die Hauptseite ist die staerkste bereits gepflegte Monetarisierungsachse;
+            // Themenwelt/Related erweitern nur den semantischen Kontext.
+            if (taxonomy_exists('uge_group')) {
+                $terms = get_the_terms($post_id, 'uge_group');
+                if (!is_wp_error($terms) && is_array($terms)) {
+                    foreach ($terms as $term) {
+                        $term_ids[] = (int) $term->term_id;
+                        $direct_term_slugs[] = (string) $term->slug;
+                        $slugs[] = (string) $term->slug;
+                        $names[] = (string) $term->name;
+                    }
+                }
+            }
+            $related_raw = (string) get_post_meta($post_id, '_uge_related_slugs', true);
+            foreach (preg_split('/[\s,;]+/', $related_raw) as $related_slug) {
+                $related_slug = sanitize_key((string) $related_slug);
+                if ($related_slug !== '') { $slugs[] = $related_slug; }
+            }
+            $target_type = sanitize_key((string) get_post_meta($post_id, '_uge_primary_category_type', true));
+            $target_id = absint(get_post_meta($post_id, '_uge_primary_category_id', true));
+            if ($target_type === 'page' && $target_id > 0) {
+                $target_slug = sanitize_key((string) get_post_field('post_name', $target_id));
+                $target_name = (string) get_the_title($target_id);
+                if ($target_slug !== '') {
+                    $semantic_primary_target_key = 'page:' . $target_slug;
+                    $slugs[] = $target_slug;
+                }
+                if ($target_name !== '') { $names[] = $target_name; }
+                foreach ((array) get_post_ancestors($target_id) as $ancestor_id) {
+                    $ancestor_slug = sanitize_key((string) get_post_field('post_name', $ancestor_id));
+                    $ancestor_name = (string) get_the_title($ancestor_id);
+                    if ($ancestor_slug !== '') {
+                        $semantic_ancestor_target_keys[] = 'page:' . $ancestor_slug;
+                        $slugs[] = $ancestor_slug;
+                    }
+                    if ($ancestor_name !== '') { $names[] = $ancestor_name; }
+                }
+            } elseif ($target_type === 'category' && $target_id > 0) {
+                $target_term = get_term($target_id, 'category');
+                if ($target_term && !is_wp_error($target_term)) {
+                    $target_slug = sanitize_key((string) $target_term->slug);
+                    if ($target_slug !== '') {
+                        $semantic_primary_target_key = 'category:' . $target_slug;
+                        $slugs[] = $target_slug;
+                    }
+                    $names[] = (string) $target_term->name;
+                    $term_ids[] = (int) $target_term->term_id;
+                    foreach ((array) get_ancestors($target_id, 'category') as $ancestor_id) {
+                        $ancestor = get_term($ancestor_id, 'category');
+                        if (!$ancestor || is_wp_error($ancestor)) { continue; }
+                        $ancestor_slug = sanitize_key((string) $ancestor->slug);
+                        if ($ancestor_slug !== '') {
+                            $semantic_ancestor_target_keys[] = 'category:' . $ancestor_slug;
+                            $slugs[] = $ancestor_slug;
+                        }
+                        $names[] = (string) $ancestor->name;
+                        $term_ids[] = (int) $ancestor->term_id;
+                    }
+                }
+            }
+        }
+
+        if ($post_type === 'pa_breed' && taxonomy_exists('pa_breed_group')) {
+            $terms=get_the_terms($post_id,'pa_breed_group');
+            if (!is_wp_error($terms) && is_array($terms)) {
+                foreach($terms as $term){
+                    $term_ids[]=(int)$term->term_id; $direct_term_slugs[]=(string)$term->slug;
+                    $slugs[]=(string)$term->slug; $names[]=(string)$term->name;
+                }
+            }
+        }
+
         if ($post_type === 'page') {
             $ancestors = get_post_ancestors($post_id);
             if (is_array($ancestors)) {
@@ -2340,7 +3655,33 @@ JS;
             'ancestor_ids' => $ancestor_ids,
             'term_ids' => array_values(array_unique(array_map('intval', $term_ids))),
             'direct_term_slugs' => array_values(array_unique(array_map('sanitize_key', $direct_term_slugs))),
+            'semantic_primary_target_key' => sanitize_text_field($semantic_primary_target_key),
+            'semantic_ancestor_target_keys' => array_values(array_unique(array_filter(array_map('sanitize_text_field', $semantic_ancestor_target_keys)))),
         );
+    }
+
+    private function portal_structure_product_family_for_category($category_slug) {
+        static $map = null;
+        static $result_cache = array();
+        $raw_category_slug = (string) $category_slug;
+        if (array_key_exists($raw_category_slug, $result_cache)) {
+            return $result_cache[$raw_category_slug];
+        }
+        $category_slug = sanitize_key($raw_category_slug);
+        if ($category_slug === '') { return $result_cache[$raw_category_slug] = ''; }
+        if ($map === null) {
+            $map = array();
+            $path = __DIR__ . '/assets/portal-structure-v279.json';
+            $raw = is_readable($path) ? file_get_contents($path) : '';
+            $data = $raw !== '' ? json_decode($raw, true) : null;
+            foreach ((array)($data['categories'] ?? array()) as $row) {
+                if (!is_array($row)) { continue; }
+                $slug = sanitize_key((string)($row['category_slug'] ?? ''));
+                $product = sanitize_key((string)($row['product_slug'] ?? ''));
+                if ($slug !== '' && $product !== '') { $map[$slug] = $product; }
+            }
+        }
+        return $result_cache[$raw_category_slug] = (string) ($map[$category_slug] ?? '');
     }
 
     private function get_category_archive_context($term) {
@@ -2357,6 +3698,8 @@ JS;
         }
 
         $description = isset($term->description) ? (string) $term->description : '';
+        $product_family_slug = $this->portal_structure_product_family_for_category((string)$term->slug);
+        if ($product_family_slug !== '') { $slugs[] = $product_family_slug; }
         $haystack = strtolower(wp_strip_all_tags((string) $term->name . ' ' . (string) $term->slug . ' ' . implode(' ', $slugs) . ' ' . implode(' ', $names) . ' ' . $description));
 
         return array(
@@ -2370,6 +3713,7 @@ JS;
             'ancestor_ids' => array(),
             'term_ids' => array_values(array_unique(array_map('intval', array_merge(array((int) $term->term_id), $ancestors)))),
             'direct_term_slugs' => array(sanitize_key((string) $term->slug)),
+            'product_family_slug' => $product_family_slug,
         );
     }
 
@@ -2761,27 +4105,339 @@ JS;
         return $groups;
     }
 
+    private function runtime_contract_slot_rule($slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        if ($slot_type === '' || !method_exists($this, 'output_portal_registry') || !method_exists($this, 'output_slot_matrix')) { return array(); }
+        foreach ((array) $this->output_portal_registry() as $portal) {
+            if (!is_array($portal) || empty($portal['enabled'])) { continue; }
+            $matrix = $this->output_slot_matrix($portal);
+            if (is_array($matrix) && !empty($matrix[$slot_type]) && is_array($matrix[$slot_type])) { return $matrix[$slot_type]; }
+        }
+        return array();
+    }
+
+    private function campaign_matches_contract_slot_rule($campaign, $slot_type) {
+        $rule = $this->runtime_contract_slot_rule($slot_type);
+        $campaign_creative_type = isset($campaign['_ppar_norm_creative_type']) ? (string)$campaign['_ppar_norm_creative_type'] : sanitize_key((string) ($campaign['creative_type'] ?? 'banner'));
+        $campaign_render_mode = isset($campaign['_ppar_norm_render_mode']) ? (string)$campaign['_ppar_norm_render_mode'] : sanitize_key((string) ($campaign['render_mode'] ?? 'image_link'));
+        if (!$rule || !is_array($campaign)
+            || $campaign_creative_type !== sanitize_key((string) ($rule['creative_type'] ?? 'banner'))
+            || $campaign_render_mode === 'html'
+            || trim((string) ($campaign['image_url'] ?? '')) === '') { return false; }
+        list($width, $height, $dimension_source) = $this->article_banner_dimensions($campaign);
+        $width = absint($width); $height = absint($height);
+        // V6.72.82: Auch Inline-Banner in normalen Einzelartikeln duerfen nicht
+        // auf der historischen 728x90-Fallbackannahme beruhen. Format/Resolution
+        // muessen real belegt sein, damit der Niedrigbannerfilter belastbar bleibt.
+        if ($width <= 0 || $height <= 0 || (sanitize_key((string)$slot_type) === 'post_inline_banner' && $dimension_source === 'fallback')) { return false; }
+        $ratio = $width / $height;
+        if ($ratio < (float) ($rule['ratio_min'] ?? 0) || $ratio > (float) ($rule['ratio_max'] ?? 999)) { return false; }
+        $scale = max(
+            1.0,
+            absint($rule['min_width'] ?? 0) > 0 ? absint($rule['min_width']) / $width : 1.0,
+            absint($rule['min_height'] ?? 0) > 0 ? absint($rule['min_height']) / $height : 1.0
+        );
+        return $scale <= (max(1.0, min(1.10, (float) ($rule['upscale_max'] ?? 1.0))) + 0.00001);
+    }
+
     private function campaign_slot_allowed($campaign, $slot_type) {
-        $placements = isset($campaign['placements']) && is_array($campaign['placements']) ? array_map('sanitize_key', $campaign['placements']) : array();
+        $slot_type = !empty($campaign['_ppar_runtime_normalized_slot_type'])
+            ? (string) $slot_type
+            : sanitize_key((string) $slot_type);
+        $placements = !empty($campaign['_ppar_runtime_normalized'])
+            ? (isset($campaign['placements']) && is_array($campaign['placements']) ? $campaign['placements'] : array())
+            : (isset($campaign['placements']) && is_array($campaign['placements']) ? array_map('sanitize_key', $campaign['placements']) : array());
         $accepted = $this->equivalent_slot_names($slot_type);
-        return !empty(array_intersect($accepted, $placements)) || in_array('*', $placements, true);
+        if (!empty(array_intersect($accepted, $placements)) || in_array('*', $placements, true)) { return true; }
+        // V6.72.69: Alle Bannerplaetze nutzen denselben zentralen Bannerbestand.
+        // Historische/manuelle Placement-Listen duerfen die Vollautomatik nicht
+        // blockieren. Wiederverwendung ist aber nur erlaubt, wenn die kanonische
+        // Slotmatrix Creative-Typ, Format, Mindestgroesse und Upscale hart akzeptiert.
+        if ($this->slot_required_creative_type($slot_type) === 'banner') {
+            return $this->campaign_matches_contract_slot_rule($campaign, $slot_type);
+        }
+        return false;
+    }
+
+    /**
+     * V6.72.55 – Stabile Partneridentitaet fuer Glossar-Formatvarianten.
+     * Bevorzugt die provider-eigene Partner-/Advertiser-ID. Bei historischen
+     * Kampagnen ohne diese ID darf innerhalb desselben Providers auf den bereits
+     * materialisierten Programmnamen/Partnernamen zurueckgefallen werden.
+     * Dadurch werden keine provideruebergreifenden Partner zusammengelegt.
+     */
+    private function glossary_campaign_partner_identity($campaign) {
+        if (!is_array($campaign)) { return ''; }
+        $provider = sanitize_key((string) ($campaign['network'] ?? ''));
+        if ($provider === '') { return ''; }
+        $advertiser = trim(sanitize_text_field((string) ($campaign['advertiser_id'] ?? '')));
+        if ($advertiser !== '') { return $provider . ':id:' . strtolower($advertiser); }
+        $label = trim(sanitize_text_field((string) ($campaign['programme_name'] ?? '')));
+        if ($label === '') { $label = trim(sanitize_text_field((string) ($campaign['partner'] ?? ''))); }
+        if ($label === '') { return ''; }
+        $label = strtolower(preg_replace('/\s+/', ' ', $label));
+        return $provider . ':name:' . $label;
+    }
+
+    /**
+     * V6.72.53 – Glossar: Formatvarianten desselben Partners teilen eine sichere
+     * exakte Themenbindung. So kann z.B. ein Desktop-Format eines Futterpartners
+     * dieselbe exakte Futter-Zielkante nutzen, die an seiner mobilen Formatvariante
+     * erkannt wurde. Technische Slot-Eignung bleibt davor zwingend; allgemeine
+     * Partner-/Marketplace-Namen erzeugen hier keine neue Themenkante.
+     */
+    private function glossary_partner_inherited_exact_rank($campaign, $context) {
+        if (sanitize_key((string) ($context['post_type'] ?? '')) !== 'uge_term'
+            || !method_exists($this, 'automation_campaign_exact_target_rank')) { return null; }
+        $partner_identity = $this->glossary_campaign_partner_identity($campaign);
+        if ($partner_identity === '') { return null; }
+        $best = null;
+        foreach ((array) $this->get_campaigns() as $sibling) {
+            if (!is_array($sibling) || empty($sibling['active'])) { continue; }
+            if (absint($sibling['post_id'] ?? 0) === absint($campaign['post_id'] ?? 0)) { continue; }
+            if (sanitize_key((string) ($sibling['creative_type'] ?? 'banner')) !== 'banner') { continue; }
+            if ($this->glossary_campaign_partner_identity($sibling) !== $partner_identity) { continue; }
+            if (empty($sibling['automation_target_keys'])) { continue; }
+            $rank = $this->automation_campaign_exact_target_rank($sibling, $context);
+            if (!$rank || (int) ($rank['specificity'] ?? 0) < 520) { continue; }
+            if ($best === null || (int) $rank['specificity'] > (int) $best['specificity']
+                || ((int) $rank['specificity'] === (int) $best['specificity'] && (int) ($rank['matches'] ?? 0) > (int) ($best['matches'] ?? 0))) {
+                $best = $rank;
+            }
+        }
+        if ($best) {
+            $best['reason'] = 'Glossar-Partner-Themenbindung aus anderer technisch passender Formatvariante: ' . (string) ($best['reason'] ?? 'exakte Zielkante');
+        }
+        return $best;
+    }
+
+    /**
+     * V6.72.58 – Laufzeit-Themenrang fuer bereits materialisierte Glossar-Banner.
+     * Dadurch wirkt die neue semantische Zuordnung sofort nach Plugin-Update und
+     * verlangt keinen erneuten Backend-Automatiklauf. Exakte Begriffstreffer sind
+     * staerker als breiter Kontext; generische Pferd-/Bannerwoerter zaehlen nicht.
+     */
+    private function glossary_campaign_runtime_semantic_rank($campaign, $context) {
+        if (!is_array($campaign) || sanitize_key((string)($context['post_type'] ?? '')) !== 'uge_term') { return null; }
+        $slot = sanitize_key((string)($context['slot_type'] ?? ''));
+        if (!in_array($slot, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true)) { return null; }
+        $provider = sanitize_key((string)($campaign['network'] ?? ''));
+        $external_id = preg_replace('/[^0-9A-Za-z._-]/','',(string)($campaign['advertiser_id'] ?? ''));
+        $profile = ($provider !== '' && $external_id !== '' && method_exists($this,'partner_profile_get')) ? $this->partner_profile_get($provider,$external_id) : array();
+        $profile = is_array($profile) && !empty($profile['enabled']) ? $profile : array();
+        $evidence = implode(' ', array_filter(array(
+            (string)($campaign['name'] ?? ''), (string)($campaign['title'] ?? ''),
+            (string)($campaign['description'] ?? ''), (string)($campaign['partner'] ?? ''),
+            (string)($campaign['programme_name'] ?? ''), (string)($campaign['auto_topic_label'] ?? ''),
+            implode(' ',(array)($campaign['match_keywords'] ?? array())),
+            (string)($profile['business_label'] ?? ''), implode(' ',(array)($profile['keywords'] ?? array())),
+        )));
+        $tokens = array_values(array_diff($this->output_tokens($evidence), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        if (!$tokens) { return null; }
+        $primary = $this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug'] ?? '')));
+        if ($primary !== '' && $this->output_term_present($evidence,$primary)) {
+            return array('specificity'=>520,'matches'=>1,'reason'=>'Glossar-Laufzeit: exakter Begriffstreffer im Werbemittel/Partnerprofil.');
+        }
+        $context_text = implode(' ', array_filter(array(
+            (string)($context['primary_name'] ?? ''),
+            implode(' ',(array)($context['names'] ?? array())),
+            implode(' ',array_map(static function($v){return str_replace(array('-','_'),' ',(string)$v);},(array)($context['direct_term_slugs'] ?? array()))),
+            (string)($context['haystack'] ?? ''),
+        )));
+        $context_tokens = array_values(array_diff($this->output_tokens($context_text), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        if (!$context_tokens) { return null; }
+        $hits=array(); $strong=0;
+        foreach($tokens as $et){
+            foreach($context_tokens as $ct){
+                if($et===$ct){$hits[$ct]=true;$strong+=2;continue;}
+                if(strlen($et)>=5 && strlen($ct)>=5 && (strpos($et,$ct)!==false || strpos($ct,$et)!==false)){$hits[$ct]=true;$strong+=1;continue;}
+                $et5=substr($et,0,5);$ct5=substr($ct,0,5);
+                if(($et5!==''&&strpos($ct,$et5)!==false)||($ct5!==''&&strpos($et,$ct5)!==false)){$hits[$ct]=true;$strong+=1;}
+            }
+        }
+        $count=count($hits);
+        if($count>=3 || $strong>=5){return array('specificity'=>430,'matches'=>$count,'reason'=>'Glossar-Laufzeit: klar passender groesserer Themenbereich.');}
+        if($count>=2 || $strong>=3){return array('specificity'=>320,'matches'=>$count,'reason'=>'Glossar-Laufzeit: passender breiter Themenkontext.');}
+        if($count>=1 && $strong>=2){return array('specificity'=>220,'matches'=>$count,'reason'=>'Glossar-Laufzeit: schwacher, aber realer Themenbezug.');}
+        return null;
+    }
+
+    private function breed_campaign_runtime_semantic_rank($campaign,$context) {
+        if(!is_array($campaign)||sanitize_key((string)($context['post_type']??''))!=='pa_breed'){return null;}
+        $slot=sanitize_key((string)($context['slot_type']??''));
+        if(!in_array($slot,array('breed_single_desktop_banner','breed_single_mobile_banner'),true)){return null;}
+        $evidence=implode(' ',array_filter(array((string)($campaign['name']??''),(string)($campaign['title']??''),(string)($campaign['description']??''),(string)($campaign['partner']??''),(string)($campaign['programme_name']??''),implode(' ',(array)($campaign['match_keywords']??array())))));
+        $tokens=array_values(array_diff($this->output_tokens($evidence),array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        if(!$tokens){return null;}
+        $primary=$this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug']??'')));
+        if($primary!==''&&$this->output_term_present($evidence,$primary)){return array('specificity'=>520,'matches'=>1,'reason'=>'Pferderasse: exakter Rassenbezug im Werbemittel.');}
+        $context_text=implode(' ',array_filter(array((string)($context['primary_name']??''),implode(' ',(array)($context['names']??array())),implode(' ',array_map(static function($v){return str_replace(array('-','_'),' ',(string)$v);},(array)($context['direct_term_slugs']??array()))),(string)($context['haystack']??''))));
+        $ct=array_values(array_diff($this->output_tokens($context_text),array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
+        $hits=array();$strong=0;foreach($tokens as $et){foreach($ct as $c){if($et===$c){$hits[$c]=true;$strong+=2;}elseif(strlen($et)>=5&&strlen($c)>=5&&(strpos($et,$c)!==false||strpos($c,$et)!==false)){$hits[$c]=true;$strong++;}}}
+        if(count($hits)>=2||$strong>=3){return array('specificity'=>320,'matches'=>count($hits),'reason'=>'Pferderasse: passender Rassen-/Nutzungsbereich.');}
+        return null;
+    }
+
+    /**
+     * V6.72.85 – Ziel-URL ist fachliche Evidenz. Ein Banner, dessen echte
+     * Zieladresse direkt auf den aktuellen Portalbegriff zeigt (z.B. /reithelme/),
+     * gewinnt vor einem nur breiten Themen- oder allgemeinen Fallback. Tracking-
+     * URLs werden nur lokal dekodiert; es wird hier kein externer Request gemacht.
+     */
+    private function banner_destination_semantic_text($campaign) {
+        if (!is_array($campaign)) { return ''; }
+        $urls=array();
+        foreach(array('destination_url','url') as $key){
+            $u=trim((string)($campaign[$key]??''));
+            if($u!==''){$urls[]=$u;}
+        }
+        $parts_out=array();
+        foreach($urls as $url){
+            $candidate=$url;
+            if(method_exists($this,'creative_library_destination_from_tracking')){
+                $decoded=(string)$this->creative_library_destination_from_tracking($url);
+                if($decoded!==''){$candidate=$decoded;}
+            }
+            for($i=0;$i<3;$i++){
+                $d=rawurldecode(html_entity_decode($candidate,ENT_QUOTES,'UTF-8'));
+                if($d===$candidate){break;}$candidate=$d;
+            }
+            $p=wp_parse_url($candidate);
+            if(is_array($p)){
+                $parts_out[]=str_replace(array('-','_'), ' ', (string)($p['path']??''));
+                $parts_out[]=str_replace(array('-','_','&','='), ' ', (string)($p['query']??''));
+            }
+        }
+        return strtolower(trim(preg_replace('/\s+/', ' ', implode(' ',array_filter($parts_out)))));
+    }
+
+    private function banner_destination_semantic_rank($campaign, $context) {
+        if (!is_array($campaign) || (isset($campaign['_ppar_norm_creative_type']) ? (string)$campaign['_ppar_norm_creative_type'] : sanitize_key((string)($campaign['creative_type']??'banner'))) !== 'banner') { return null; }
+        $evidence=$this->banner_destination_semantic_text($campaign);
+        if($evidence===''){return null;}
+        $primary_slug=isset($context['_ppar_norm_primary_slug']) ? (string)$context['_ppar_norm_primary_slug'] : sanitize_key((string)($context['primary_slug']??''));
+        $primary_name=sanitize_text_field((string)($context['primary_name']??''));
+        $needles=array_values(array_unique(array_filter(array($primary_slug,$primary_name))));
+        foreach($needles as $needle){
+            $needle=str_replace(array('-','_'),' ',strtolower((string)$needle));
+            $tokens=array_values(array_filter(preg_split('/[^a-z0-9]+/',remove_accents($needle))));
+            if(!$tokens){continue;}
+            $all=true;
+            foreach($tokens as $tok){if(strlen($tok)<3){continue;}if(strpos(' '.$evidence.' ',' '.$tok.' ')===false){$all=false;break;}}
+            if($all){return array('specificity'=>570,'matches'=>count($tokens),'reason'=>'Exakte Zielseiten-URL passt zum aktuellen Thema.');}
+        }
+        $context_slugs = isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs']) ? $context['_ppar_norm_slugs'] : (array)($context['slugs']??array());
+        $context_slugs_normalized = isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs']);
+        foreach($context_slugs as $slug){
+            $slug=$context_slugs_normalized ? (string)$slug : sanitize_key((string)$slug);
+            if($slug===''||$slug===$primary_slug){continue;}
+            $tok=str_replace(array('-','_'),' ',strtolower($slug));
+            $parts=array_values(array_filter(preg_split('/[^a-z0-9]+/',remove_accents($tok))));
+            if(!$parts){continue;}
+            $all=true;foreach($parts as $p){if(strlen($p)<3){continue;}if(strpos(' '.$evidence.' ',' '.$p.' ')===false){$all=false;break;}}
+            if($all){return array('specificity'=>440,'matches'=>count($parts),'reason'=>'Zielseiten-URL passt zum uebergeordneten Themenkreis.');}
+        }
+        return null;
+    }
+
+    /**
+     * V6.72.93 – normale Portal-Kategorieseiten sind WordPress-Seiten. Ein
+     * konkretes Banner darf deshalb nicht auf eine alte/materialisierte Zielkante
+     * angewiesen sein: Titel/Beschreibung/ADCELL-Werbemittelkategorie und lokal
+     * dekodierte Zielseite werden direkt gegen das aktuelle Seitenthema geprüft.
+     * Nur der aktuelle Seitenbegriff darf die exakte Stufe auslösen; allgemeine
+     * Pferde-/Shopbegriffe reichen ausdrücklich nicht.
+     */
+    private function banner_runtime_topic_stem($token) {
+        $token = strtolower(remove_accents((string) $token));
+        $token = preg_replace('/[^a-z0-9]+/', '', $token);
+        if ($token === '') { return ''; }
+        foreach (array('ern','er','en','es','e','n','s') as $ending) {
+            if (strlen($token) >= 7 && substr($token, -strlen($ending)) === $ending) {
+                $token = substr($token, 0, -strlen($ending));
+                break;
+            }
+        }
+        return $token;
+    }
+
+    private function banner_runtime_page_topic_rank($campaign, $context) {
+        $campaign_creative_type = isset($campaign['_ppar_norm_creative_type']) ? (string)$campaign['_ppar_norm_creative_type'] : sanitize_key((string)($campaign['creative_type'] ?? 'banner'));
+        $post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string)($context['post_type'] ?? ''));
+        if (!is_array($campaign)
+            || $campaign_creative_type !== 'banner'
+            || $post_type !== 'page') {
+            return null;
+        }
+        $evidence = implode(' ', array_filter(array(
+            (string)($campaign['title'] ?? ''),
+            (string)($campaign['name'] ?? ''),
+            (string)($campaign['description'] ?? ''),
+            (string)($campaign['auto_topic_label'] ?? ''),
+            $this->banner_destination_semantic_text($campaign),
+            implode(' ', (array)($campaign['automation_target_keys'] ?? array())),
+        )));
+        $evidence_tokens = array_values(array_filter(preg_split('/[^a-z0-9]+/', strtolower(remove_accents($evidence)))));
+        if (!$evidence_tokens) { return null; }
+        $evidence_stems = array_values(array_unique(array_filter(array_map(array($this,'banner_runtime_topic_stem'), $evidence_tokens))));
+        if (!$evidence_stems) { return null; }
+
+        $generic = array_fill_keys(array(
+            'pferd','pferde','reiter','reiten','ausrustung','ausruestung','reiterbedarf',
+            'shop','online','banner','anzeige','partner','affiliate','angebot','angebote'
+        ), true);
+        $primary_text = trim((string)($context['primary_slug'] ?? '') . ' ' . (string)($context['primary_name'] ?? ''));
+        $primary_tokens = array_values(array_unique(array_filter(preg_split('/[^a-z0-9]+/', strtolower(remove_accents(str_replace(array('-','_'),' ',$primary_text)))))));
+        $wanted = array();
+        foreach ($primary_tokens as $token) {
+            if (isset($generic[$token]) || strlen($token) < 5) { continue; }
+            $stem = $this->banner_runtime_topic_stem($token);
+            if ($stem !== '' && strlen($stem) >= 4) { $wanted[$stem] = true; }
+        }
+        if (!$wanted) { return null; }
+        $hits = array_values(array_intersect(array_keys($wanted), $evidence_stems));
+        if (count($hits) === count($wanted)) {
+            return array('specificity'=>560,'matches'=>count($hits),'reason'=>'Konkretes Werbemittel passt direkt zum aktuellen Portalthema.');
+        }
+        return null;
     }
 
     private function campaign_match_rank($campaign, $context) {
-        $mode = sanitize_key((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+        $mode = isset($campaign['_ppar_norm_assignment_mode']) ? (string) $campaign['_ppar_norm_assignment_mode'] : sanitize_key((string) ($campaign['assignment_mode'] ?? 'page_tree'));
         $post_id = isset($context['post_id']) ? (int) $context['post_id'] : 0;
-        $ancestors = isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array();
-        $slugs = isset($context['slugs']) && is_array($context['slugs']) ? array_map('sanitize_key', $context['slugs']) : array();
-        $term_ids = isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array();
+        $ancestors = isset($context['_ppar_norm_ancestor_ids']) && is_array($context['_ppar_norm_ancestor_ids']) ? $context['_ppar_norm_ancestor_ids'] : (isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array());
+        $slugs = isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs']) ? $context['_ppar_norm_slugs'] : (isset($context['slugs']) && is_array($context['slugs']) ? array_map('sanitize_key', $context['slugs']) : array());
+        $term_ids = isset($context['_ppar_norm_term_ids']) && is_array($context['_ppar_norm_term_ids']) ? $context['_ppar_norm_term_ids'] : (isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array());
         $haystack = strtolower((string) ($context['haystack'] ?? ''));
         $page_id = isset($campaign['page_id']) ? (int) $campaign['page_id'] : 0;
 
+        $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
+        if ($destination_rank) { return $destination_rank; }
+        $runtime_page_topic_rank = $this->banner_runtime_page_topic_rank($campaign, $context);
+        if ($runtime_page_topic_rank) { return $runtime_page_topic_rank; }
+
         if ($mode === 'fallback') {
-            return array('specificity' => 10, 'matches' => 1, 'reason' => 'Allgemeiner Fallback.');
+            // V6.72.69: globale Banner-Hierarchie. Ein ausdrücklich allgemeiner
+            // Shop-/Portal-Fallback kommt nach exakten/breiten Themen-Treffern,
+            // aber vor dem letzten rein technischen Pflicht-Fallback.
+            return array('specificity' => 100, 'matches' => 1, 'reason' => 'Allgemeiner Shop-/Portal-Fallback.');
         }
         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
-            return $this->automation_campaign_exact_target_rank($campaign, $context);
+            $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
+            if ($automation_rank) { return $automation_rank; }
+            // Banner duerfen nach einer fehlenden exakten Zielkante immer
+            // in die naechste Stufe (Themenkreis/allgemeiner/technischer Fallback)
+            // weiterlaufen. Produkt-Creatives bleiben dagegen fail-closed.
+            $fill_post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
+            if ($this->slot_required_creative_type((string)($context['slot_type'] ?? '')) !== 'banner'
+                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) { return null; }
         }
+        $runtime_semantic_rank = $this->glossary_campaign_runtime_semantic_rank($campaign, $context);
+        if ($runtime_semantic_rank) { return $runtime_semantic_rank; }
+        $breed_runtime_rank = $this->breed_campaign_runtime_semantic_rank($campaign, $context);
+        if ($breed_runtime_rank) { return $breed_runtime_rank; }
+        $partner_exact_rank = $this->glossary_partner_inherited_exact_rank($campaign, $context);
+        if ($partner_exact_rank) { return $partner_exact_rank; }
         if ($mode === 'exact_page') {
             return ($page_id > 0 && $post_id === $page_id)
                 ? array('specificity' => 500, 'matches' => 1, 'reason' => 'Direkt ausgewählte Seite.')
@@ -2793,6 +4449,12 @@ JS;
                 return array('specificity' => $mode === 'auto_topic' ? 480 : 500, 'matches' => 1, 'reason' => $mode === 'auto_topic' ? 'Automatisch erkannter Themenbereich „' . $auto_label . '“.' : 'Direkt ausgewählter Hub/Bereich.');
             }
             if ($page_id > 0 && !empty($campaign['match_descendants']) && in_array($page_id, $ancestors, true)) {
+                if ($this->category_large_banner_slot((string) ($context['slot_type'] ?? ''))) {
+                    $distance_index = array_search($page_id, $ancestors, true);
+                    $distance = $distance_index === false ? count($ancestors) : ((int) $distance_index + 1);
+                    $specificity = max(401, 470 - (($distance - 1) * 20));
+                    return array('specificity'=>$specificity, 'matches'=>1, 'reason'=>'Passender uebergeordneter Themenbereich, Distanz ' . $distance . '.');
+                }
                 return array('specificity' => $mode === 'auto_topic' ? 430 : 450, 'matches' => 1, 'reason' => $mode === 'auto_topic' ? 'Unterseite des automatisch erkannten Themenbereichs „' . $auto_label . '“.' : 'Unterseite des ausgewählten Hubs/Bereichs.');
             }
         }
@@ -2803,7 +4465,8 @@ JS;
             return array('specificity' => 400, 'matches' => $term_matches, 'reason' => 'Passende Kategorie oder Taxonomie.');
         }
 
-        $wanted_slugs = isset($campaign['match_slugs']) && is_array($campaign['match_slugs']) ? array_map('sanitize_key', $campaign['match_slugs']) : array();
+        // campaign_from_post() already normalizes match_slugs once when the immutable request snapshot is built.
+        $wanted_slugs = isset($campaign['match_slugs']) && is_array($campaign['match_slugs']) ? $campaign['match_slugs'] : array();
         $slug_matches = count(array_intersect($wanted_slugs, $slugs));
         if ($slug_matches > 0) {
             return array('specificity' => 350, 'matches' => $slug_matches, 'reason' => 'Passender Seiten- oder Bereichs-Slug.');
@@ -2821,13 +4484,25 @@ JS;
                 return array('specificity' => 200, 'matches' => $keyword_matches, 'reason' => 'Passender definierter Themenbegriff.');
             }
         }
+
+        // V6.72.69: eine globale Zuordnungsregel fuer alle Bannerplaetze:
+        // 1 fachlich exakt, 2 erweiterter Themenkreis, 3 allgemeiner Shop/Portal-
+        // Fallback (oben specificity 100), 4 letzter technisch gueltiger Banner.
+        // Die reale Slotmatrix bleibt dabei zwingend; ein ungeeignetes Format wird
+        // niemals durch die Pflichtstufe erzwungen.
+        if ($this->slot_required_creative_type((string)($context['slot_type'] ?? '')) === 'banner') {
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Letzter globaler Banner-Fallback: technisch freigegeben, ohne Themenzwang.');
+        }
         return null;
     }
     private function slot_required_creative_type($slot_type) {
-        $slot_type = sanitize_key((string)$slot_type);
-        if ($slot_type === 'category_product' || preg_match('/^(?:hub_product|category_product|journal_product)_[123]$/', $slot_type) || $slot_type === 'post_bottom_products') { return 'product'; }
-        if (in_array($slot_type, array('product_after_category_tiles', 'post_inline_banner', 'anzeigenmarkt_top_banner', 'journal_banner'), true)) { return 'banner'; }
-        return '';
+        static $cache = array();
+        $raw = (string) $slot_type;
+        if (array_key_exists($raw, $cache)) { return $cache[$raw]; }
+        $slot_type = sanitize_key($raw);
+        if ($slot_type === 'category_product' || preg_match('/^(?:hub_product|category_product|journal_product)_[123]$/', $slot_type) || $slot_type === 'post_bottom_products') { return $cache[$raw] = 'product'; }
+        if (in_array($slot_type, array('hub_after_cards', 'product_after_category_tiles', 'post_inline_banner', 'anzeigenmarkt_top_banner', 'anzeigenmarkt_category_banner', 'journal_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner', 'breed_single_banner', 'breed_single_desktop_banner', 'breed_single_mobile_banner', 'glossary_overview_banner', 'breed_overview_banner', 'start_after_topics'), true)) { return $cache[$raw] = 'banner'; }
+        return $cache[$raw] = '';
     }
 
     private function category_product_slot_index($slot_type) {
@@ -2842,9 +4517,11 @@ JS;
      * from historical dimension/hash metadata stored during materialisation.
      */
     private function ebay_product_public_source_row($campaign) {
+        $creative_type = isset($campaign['_ppar_norm_creative_type']) ? (string)$campaign['_ppar_norm_creative_type'] : sanitize_key((string)($campaign['creative_type'] ?? ''));
+        $network = isset($campaign['_ppar_norm_network']) ? (string)$campaign['_ppar_norm_network'] : sanitize_key((string)($campaign['network'] ?? ''));
         if (!is_array($campaign)
-            || sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product'
-            || sanitize_key((string)($campaign['network'] ?? '')) !== 'ebay'
+            || $creative_type !== 'product'
+            || $network !== 'ebay'
             || sanitize_key((string)($campaign['source'] ?? '')) !== 'output_object_v4') { return false; }
 
         $post_id = absint($campaign['post_id'] ?? 0);
@@ -2992,9 +4669,11 @@ JS;
     }
 
     private function otto_awin_product_campaign_seller_ready($campaign) {
+        $creative_type = isset($campaign['_ppar_norm_creative_type']) ? (string)$campaign['_ppar_norm_creative_type'] : sanitize_key((string) ($campaign['creative_type'] ?? ''));
+        $network = isset($campaign['_ppar_norm_network']) ? (string)$campaign['_ppar_norm_network'] : sanitize_key((string) ($campaign['network'] ?? ''));
         if (!is_array($campaign)
-            || sanitize_key((string) ($campaign['creative_type'] ?? '')) !== 'product'
-            || sanitize_key((string) ($campaign['network'] ?? '')) !== 'awin'
+            || $creative_type !== 'product'
+            || $network !== 'awin'
             || absint($campaign['advertiser_id'] ?? 0) !== self::OTTO_AWIN_ADVERTISER_ID) {
             return true;
         }
@@ -3049,26 +4728,110 @@ JS;
         return false;
     }
 
+    /**
+     * Incident-only read path for category_product_1..3.
+     * A stale active=0 may be ignored only when the hash-bound 2026-09-15
+     * snapshot proves that this exact auto-managed eBay/idealo campaign was
+     * active before the 6.72.115-6.72.119 incident chain. No state is rewritten.
+     */
+    private function category_product_incident_historical_active_lookup() {
+        static $lookup = null;
+        if (is_array($lookup)) { return $lookup; }
+        $lookup = array();
+        $snapshot = $this->aff043_snapshot();
+        if (is_wp_error($snapshot)) { return $lookup; }
+        foreach ((array)($snapshot['rows'] ?? array()) as $row) {
+            if (!is_array($row) || empty($row['active'])) { continue; }
+            $network = sanitize_key((string)($row['network'] ?? ''));
+            $auto = $network === 'ebay' ? !empty($row['ebay_auto']) : ($network === 'idealo' ? !empty($row['idealo_auto']) : false);
+            $post_id = absint($row['post_id'] ?? 0);
+            if ($auto && $post_id > 0) { $lookup[$post_id] = $network; }
+        }
+        return $lookup;
+    }
+
+    private function category_product_incident_inactive_auto_allowed($campaign, $slot_type) {
+        if (!is_array($campaign) || !empty($campaign['active'])) { return false; }
+        $slot_type = !empty($campaign['_ppar_runtime_normalized_slot_type']) ? (string) $slot_type : sanitize_key((string) $slot_type);
+        if (!preg_match('/^category_product_[123]$/', $slot_type)) { return false; }
+        $creative_type = isset($campaign['_ppar_norm_creative_type']) ? (string) $campaign['_ppar_norm_creative_type'] : sanitize_key((string)($campaign['creative_type'] ?? ''));
+        if ($creative_type !== 'product') { return false; }
+        $network = isset($campaign['_ppar_norm_network']) ? (string) $campaign['_ppar_norm_network'] : sanitize_key((string)($campaign['network'] ?? ''));
+        if (!in_array($network, array('ebay','idealo'), true)) { return false; }
+        if (!$this->aff039_incident_proven($this->aff039_incident_evidence())) { return false; }
+        $post_id = absint($campaign['post_id'] ?? $campaign['_post_id'] ?? 0);
+        if ($post_id <= 0) { return false; }
+        $historical = $this->category_product_incident_historical_active_lookup();
+        return isset($historical[$post_id]) && $historical[$post_id] === $network;
+    }
+
     private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
+        if (!$this->ranked_campaigns_request_cache_allowed()) {
+            return $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
+        }
+        $cache_key = $this->ranked_campaigns_request_cache_key($context, $slot_type, $forced_campaign_id);
+        if (array_key_exists($cache_key, $this->ranked_campaigns_request_cache)) {
+            return $this->ranked_campaigns_request_cache[$cache_key];
+        }
+        $result = $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
+        $this->ranked_campaigns_request_cache[$cache_key] = $result;
+        return $result;
+    }
+
+    private function ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id = '') {
         $candidates = array();
+        $slot_type = sanitize_key((string) $slot_type);
+        $required_type = $this->slot_required_creative_type($slot_type);
+        $forced_campaign_id_norm = $forced_campaign_id !== '' ? sanitize_key((string) $forced_campaign_id) : '';
         $exact_identifiers = $this->affiliate_normalize_product_identifiers((array) ($context['exact_product_identifiers'] ?? array()));
-        $exact_mode = $this->slot_required_creative_type($slot_type) === 'product' && !empty($exact_identifiers);
+        $exact_mode = $required_type === 'product' && !empty($exact_identifiers);
+        // V6.72.150: Ranking context and repeated campaign scalars are immutable for the complete campaign
+        // loop. Normalize its repeated scalar/list fields once instead of again
+        // for every campaign candidate. Fallback paths inside the rank helpers
+        // remain for callers outside this hot loop.
+        $rank_context = $context;
+        $rank_context['slot_type'] = $slot_type;
+        $rank_context['_ppar_norm_primary_slug'] = sanitize_key((string) ($context['primary_slug'] ?? ''));
+        $rank_context['_ppar_norm_post_type'] = sanitize_key((string) ($context['post_type'] ?? ''));
+        $rank_context['_ppar_norm_ancestor_ids'] = isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array();
+        $rank_context['_ppar_norm_slugs'] = isset($context['slugs']) && is_array($context['slugs']) ? array_map('sanitize_key', $context['slugs']) : array();
+        $rank_context['_ppar_norm_term_ids'] = isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array();
+        $rank_context['_ppar_norm_direct_term_slugs'] = isset($context['direct_term_slugs']) && is_array($context['direct_term_slugs']) ? array_values(array_filter(array_map('sanitize_key', $context['direct_term_slugs']))) : array();
+        $rank_context['_ppar_norm_semantic_primary_target_key'] = method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '';
+        $rank_context['_ppar_norm_semantic_ancestor_target_keys'] = method_exists($this, 'automation_normalize_target_key') ? array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array())))) : array();
+        $rank_context['_ppar_norm_product_family_slug'] = sanitize_key((string) ($context['product_family_slug'] ?? ''));
         foreach ($this->get_campaigns() as $campaign) {
             // Cheap eligibility/match checks first. V6.19 evaluated control and
             // health gates for the entire BUSINESS campaign inventory on every
             // product slot even when a campaign could not match the current page.
             // Preserve the same gates, but execute their DB/meta work only for
             // campaigns that are actually eligible for this context.
-            if (!is_array($campaign) || empty($campaign['active']) || !$this->campaign_is_complete($campaign) || !$this->rule_is_current($campaign) || !$this->campaign_program_allows_delivery($campaign) || !$this->otto_awin_product_campaign_seller_ready($campaign)) {
+            if (!is_array($campaign)) {
                 continue;
             }
-            if ($forced_campaign_id !== '' && sanitize_key((string) ($campaign['id'] ?? '')) !== sanitize_key($forced_campaign_id)) {
+            $runtime_campaign = $campaign;
+            $runtime_campaign['_ppar_runtime_normalized'] = 1;
+            $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+            $runtime_campaign['_ppar_norm_id'] = sanitize_key((string) ($campaign['id'] ?? ''));
+            $runtime_campaign['_ppar_norm_network'] = sanitize_key((string) ($campaign['network'] ?? 'manual'));
+            $runtime_campaign['_ppar_norm_creative_type'] = sanitize_key((string) ($campaign['creative_type'] ?? 'banner'));
+            $runtime_campaign['_ppar_norm_render_mode'] = sanitize_key((string) ($campaign['render_mode'] ?? 'image_link'));
+            $runtime_campaign['_ppar_norm_programme_status'] = sanitize_key((string) ($campaign['programme_status'] ?? 'unknown'));
+            $runtime_campaign['_ppar_norm_assignment_mode'] = sanitize_key((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+            $active_allowed = !empty($runtime_campaign['active']) || $this->category_product_incident_inactive_auto_allowed($runtime_campaign, $slot_type);
+            if (!$active_allowed || !$this->campaign_is_complete($runtime_campaign) || !$this->rule_is_current($runtime_campaign) || !$this->campaign_program_allows_delivery($runtime_campaign) || !$this->otto_awin_product_campaign_seller_ready($runtime_campaign)) {
                 continue;
             }
-            $required_type = $this->slot_required_creative_type($slot_type);
-            if ($required_type !== '' && sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== $required_type) { continue; }
+            if ($forced_campaign_id_norm !== '' && $runtime_campaign['_ppar_norm_id'] !== $forced_campaign_id_norm) {
+                continue;
+            }
+            if ($required_type !== '' && $runtime_campaign['_ppar_norm_creative_type'] !== $required_type) { continue; }
+            if ($this->overview_wide_banner_slot($slot_type) && !$this->overview_wide_banner_campaign_eligible($runtime_campaign, $slot_type)) { continue; }
+            if ($this->category_large_banner_slot($slot_type) && !$this->category_large_banner_campaign_eligible($runtime_campaign, $slot_type)) { continue; }
+            if (in_array($slot_type, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true) && !$this->campaign_matches_contract_slot_rule($runtime_campaign, $slot_type)) { continue; }
+            if (in_array($slot_type, array('breed_single_desktop_banner','breed_single_mobile_banner'), true) && !$this->campaign_matches_contract_slot_rule($runtime_campaign, $slot_type)) { continue; }
             if ($exact_mode) {
-                if (!$this->affiliate_campaign_matches_exact_identifiers($campaign, $exact_identifiers)) { continue; }
+                if (!$this->affiliate_campaign_matches_exact_identifiers($runtime_campaign, $exact_identifiers)) { continue; }
                 // Productwissen exact identity is the fachliche target decision.
                 // Keep all existing public/safety/health gates, but do not require
                 // a broad topic edge or provider placement to rediscover the same
@@ -3076,13 +4839,11 @@ JS;
                 // fuzzy substitute.
                 $rank = array('specificity'=>1000, 'matches'=>count($exact_identifiers), 'reason'=>'Exakte Produktidentität aus fachlicher Produktbindung.');
             } else {
-                if (!$this->campaign_slot_allowed($campaign, $slot_type)) { continue; }
-                $rank_context = $context;
-                $rank_context['slot_type'] = sanitize_key((string) $slot_type);
-                $rank = $this->campaign_match_rank($campaign, $rank_context);
+                if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }
+                $rank = $this->campaign_match_rank($runtime_campaign, $rank_context);
                 if (!$rank) { continue; }
             }
-            if (!$this->campaign_control_allows_delivery($campaign, $slot_type ?? '') || !$this->campaign_health_allows_delivery($campaign)) { continue; }
+            if (!$this->campaign_control_allows_delivery($runtime_campaign, $slot_type) || !$this->campaign_health_allows_delivery($runtime_campaign)) { continue; }
             $candidates[] = array(
                 'campaign' => $campaign,
                 'specificity' => (int) $rank['specificity'],
@@ -3091,30 +4852,41 @@ JS;
                 'reason' => (string) $rank['reason'],
             );
         }
-        usort($candidates, function($a, $b) {
-            foreach (array('specificity', 'matches', 'priority') as $key) {
+        usort($candidates, function($a, $b) use ($required_type) {
+            foreach (array('specificity', 'matches') as $key) {
                 if ($a[$key] !== $b[$key]) {
                     return ($a[$key] > $b[$key]) ? -1 : 1;
                 }
             }
+            if ($required_type === 'banner') {
+                $ga=$this->banner_candidate_geometry($a); $gb=$this->banner_candidate_geometry($b);
+                if (abs((float)$ga['ratio']-(float)$gb['ratio']) >= 0.0001) { return $ga['ratio']>$gb['ratio'] ? -1 : 1; }
+                if ((int)$ga['pixels'] !== (int)$gb['pixels']) { return $ga['pixels']>$gb['pixels'] ? -1 : 1; }
+            }
+            if ($a['priority'] !== $b['priority']) { return ($a['priority'] > $b['priority']) ? -1 : 1; }
             return strcmp((string) ($a['campaign']['id'] ?? ''), (string) ($b['campaign']['id'] ?? ''));
         });
-        if ($forced_campaign_id === '' && $this->banner_distribution_slot($slot_type)) {
+        if ($required_type === 'banner') {
+            $candidates = $this->banner_dedupe_resolution_variants($candidates);
+        }
+        if ($forced_campaign_id === '' && $this->category_large_banner_slot($slot_type)) {
+            $candidates = $this->category_large_banner_rotate_candidates($candidates, $context, $slot_type);
+        } elseif ($forced_campaign_id === '' && $this->banner_distribution_slot($slot_type)) {
             $candidates = $this->banner_distribution_reorder_candidates($candidates, $context, $slot_type);
         }
         // Exact Productwissen identity outranks legacy provider cohorts/strategies.
         // Those strategies decide generic merchandising, never which model a
         // fachlich exact-bound article is allowed to monetize.
-        if (!$exact_mode && $this->slot_required_creative_type($slot_type) === 'product' && method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
+        if (!$exact_mode && $required_type === 'product' && method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
             $candidates = $this->ebay_filter_ranked_product_candidates_provider_cohort($candidates);
         }
-        if (!$exact_mode && $this->slot_required_creative_type($slot_type) === 'product' && method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
+        if (!$exact_mode && $required_type === 'product' && method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
             $candidates = $this->multiprovider_filter_candidates_by_strategy($candidates);
         }
         // V6.61.5: verify structural image readiness only after final provider
         // strategy. This remains a cheap URL/source check: page rendering must not
         // hot-fetch provider images and thereby make whole eBay cohorts vanish.
-        if ($this->slot_required_creative_type($slot_type) === 'product') {
+        if ($required_type === 'product') {
             $image_ready = array();
             foreach ($candidates as $candidate) {
                 $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
@@ -3125,8 +4897,87 @@ JS;
         }
         return $candidates;
     }
+    /**
+     * V6.72.104: Nummerierte Kategorie-Produkte duerfen nicht in einen schwaecheren
+     * Themenkreis abrutschen, nur um Platz 3 zwangsweise zu fuellen. Die bereits
+     * sortierte beste Relevanzstufe ist fuer category_product_1..3 bindend.
+     * Gibt es darin nur zwei Produkte, bleibt Platz 3 leer statt fachfremd zu werden.
+     * Hub-/Journal-/Artikel-Produkte bleiben unveraendert.
+     */
+    private function category_product_strict_relevance_tier_v672104($candidates, $slot_type) {
+        $candidates = array_values((array) $candidates);
+        if (!$candidates || !preg_match('/^category_product_[123]$/', sanitize_key((string) $slot_type))) {
+            return $candidates;
+        }
+        $best_specificity = (int) ($candidates[0]['specificity'] ?? 0);
+        if ($best_specificity >= 500 && $best_specificity < 1000) {
+            return array_values(array_filter($candidates, static function($candidate) {
+                $specificity = is_array($candidate) ? (int) ($candidate['specificity'] ?? 0) : 0;
+                return $specificity >= 500 && $specificity < 1000;
+            }));
+        }
+        return array_values(array_filter($candidates, static function($candidate) use ($best_specificity) {
+            return is_array($candidate) && (int) ($candidate['specificity'] ?? 0) === $best_specificity;
+        }));
+    }
+
+    private function category_product_provider_mix_v672133($candidates, $slot_type) {
+        $candidates = array_values((array) $candidates);
+        if (!$candidates || !preg_match('/^category_product_[123]$/', sanitize_key((string) $slot_type))) {
+            return $candidates;
+        }
+
+        $best_specificity = (int) ($candidates[0]['specificity'] ?? 0);
+        $best_matches = (int) ($candidates[0]['matches'] ?? 0);
+        $equal = array();
+        $rest = array();
+        foreach ($candidates as $candidate) {
+            if ((int) ($candidate['specificity'] ?? 0) === $best_specificity
+                && (int) ($candidate['matches'] ?? 0) === $best_matches) {
+                $equal[] = $candidate;
+            } else {
+                $rest[] = $candidate;
+            }
+        }
+
+        $provider_buckets = array();
+        $provider_order = array();
+        foreach ($equal as $candidate) {
+            $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
+            $provider = sanitize_key((string) ($campaign['network'] ?? ''));
+            if ($provider === '') { $provider = '_unknown'; }
+            if (!isset($provider_buckets[$provider])) {
+                $provider_buckets[$provider] = array();
+                $provider_order[] = $provider;
+            }
+            $provider_buckets[$provider][] = $candidate;
+        }
+
+        if (count($provider_order) < 2) {
+            return $candidates;
+        }
+
+        $mixed = array();
+        while (true) {
+            $added = false;
+            foreach ($provider_order as $provider) {
+                if (!empty($provider_buckets[$provider])) {
+                    $mixed[] = array_shift($provider_buckets[$provider]);
+                    $added = true;
+                }
+            }
+            if (!$added) { break; }
+        }
+        foreach ($rest as $candidate) { $mixed[] = $candidate; }
+        return array_values($mixed);
+    }
+
     private function select_campaign_for_slot($context, $slot_type, $forced_campaign_id = '') {
         $candidates = $this->ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id);
+        $candidates = $this->category_product_strict_relevance_tier_v672104($candidates, $slot_type);
+        if ($forced_campaign_id === '') {
+            $candidates = $this->category_product_provider_mix_v672133($candidates, $slot_type);
+        }
         if (empty($candidates)) { return null; }
         $index = $this->category_product_slot_index($slot_type);
         return $index > 0 ? ($candidates[$index - 1] ?? null) : $candidates[0];
@@ -3213,9 +5064,12 @@ JS;
         return !empty(array_intersect($active_slots, $aliases));
     }
     private function equivalent_slot_names($slot_type) {
-        $slot_type = sanitize_key($slot_type);
+        static $cache = array();
+        $raw = (string) $slot_type;
+        if (array_key_exists($raw, $cache)) { return $cache[$raw]; }
+        $slot_type = sanitize_key($raw);
         if (preg_match('/^category_product_[123]$/', $slot_type)) {
-            return array($slot_type, 'category_product');
+            return $cache[$raw] = array($slot_type, 'category_product');
         }
         $groups = array(
             array('top_info', 'post_after_intro'),
@@ -3226,9 +5080,11 @@ JS;
             array('hub_grid_card'),
             array('hub_mid_banner', 'template_mid_banner'),
             array('category_recommendation', 'produkt_recommendation', 'template_bottom', 'product_after_category_tiles'),
+            array('glossary_single_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner'),
+            array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'),
         );
-        foreach ($groups as $group) { if (in_array($slot_type, $group, true)) { return $group; } }
-        return array($slot_type);
+        foreach ($groups as $group) { if (in_array($slot_type, $group, true)) { return $cache[$raw] = $group; } }
+        return $cache[$raw] = array($slot_type);
     }
 
     private function allowed_match_modes() {
@@ -5008,7 +6864,7 @@ JS;
     public function admin_menu() {
         add_menu_page('Affiliate-Zentrale','Affiliate-Zentrale','manage_options','affiliate-portal-zentrale',array($this,'render_dashboard_page'),'dashicons-megaphone',59);
         add_submenu_page('affiliate-portal-zentrale','Übersicht','Übersicht','manage_options','affiliate-portal-zentrale',array($this,'render_dashboard_page'));
-        add_submenu_page('affiliate-portal-zentrale','Import & Auswahl','Import & Auswahl','manage_options','affiliate-portal-creative-library',array($this,'render_creative_library_page'));
+        add_submenu_page('affiliate-portal-zentrale','Banner & Werbemittel','Banner & Werbemittel','manage_options','affiliate-portal-creative-library',array($this,'render_creative_library_page'));
         add_submenu_page('affiliate-portal-zentrale','Ausgaben & Freigabe','Ausgaben & Freigabe','manage_options','affiliate-portal-outputs',array($this,'render_output_objects_page'));
         add_submenu_page('affiliate-portal-zentrale','Steuerung & Veto','Steuerung & Veto','manage_options','affiliate-portal-control',array($this,'render_control_page'));
         add_submenu_page('affiliate-portal-zentrale','Werbemittel','Werbemittel','manage_options','affiliate-portal-creatives',array($this,'render_creatives_page'));
@@ -5411,28 +7267,9 @@ JS;
         if ($publisher === '' || $token === '') {
             return array('status'=>'pending','message'=>'Publisher-ID und API-Zugriffstoken fehlen.','programme_count'=>0,'feed_status'=>'not_configured','feed_count'=>0);
         }
-        $url = 'https://api.awin.com/publishers/' . rawurlencode($publisher) . '/programmes?relationship=joined';
-        $args = array('timeout'=>20,'redirection'=>2,'headers'=>array('Accept'=>'application/json','Authorization'=>'Bearer ' . $token),'limit_response_size'=>1048576);
-        $parsed = $this->api_response(wp_remote_get($url, $args));
-        if (!$parsed['ok'] && in_array($parsed['code'], array(401,403), true)) {
-            $fallback = add_query_arg('accessToken', rawurlencode($token), $url);
-            $parsed = $this->api_response(wp_remote_get($fallback, array('timeout'=>20,'redirection'=>2,'headers'=>array('Accept'=>'application/json'),'limit_response_size'=>1048576)));
-        }
-        if (!$parsed['ok']) {
-            return array('status'=>'failed','message'=>'Programmliste nicht erreichbar: ' . $parsed['message'],'programme_count'=>0,'feed_status'=>'not_tested','feed_count'=>0);
-        }
-        $json = json_decode($parsed['body'], true);
-        if (!is_array($json)) {
-            return array('status'=>'failed','message'=>'Awin lieferte keine gültige JSON-Programmliste.','programme_count'=>0,'feed_status'=>'not_tested','feed_count'=>0);
-        }
-        $safe = array();
-        foreach (array_slice(array_values($json), 0, 5000) as $programme) {
-            if (!is_array($programme)) { continue; }
-            $safe[] = array(
-                'id' => absint($programme['id'] ?? $programme['advertiserId'] ?? 0),
-                'name' => sanitize_text_field((string)($programme['name'] ?? $programme['advertiserName'] ?? '')),
-                'relationship' => sanitize_key((string)($programme['relationship'] ?? 'joined')),
-            );
+        $safe = $this->awin_fetch_current_joined_programmes($settings);
+        if (is_wp_error($safe)) {
+            return array('status'=>'failed','message'=>$safe->get_error_message(),'programme_count'=>0,'feed_status'=>'not_tested','feed_count'=>0);
         }
         update_option(self::OPTION_NETWORK_AWIN_PROGRAMMES, $safe, false);
         $feed_status = 'not_configured';
@@ -5605,8 +7442,8 @@ JS;
     private static function health_defaults() {
         return array(
             'automatic_enabled' => true,
-            'schedule' => 'daily',
-            'batch_size' => 25,
+            'schedule' => 'ppar_three_weeks',
+            'batch_size' => 100,
             'timeout' => 8,
             'failure_threshold' => 3,
         );
@@ -5614,26 +7451,20 @@ JS;
 
     private static function health_schedule_options() {
         return array(
-            'daily' => 'Einmal täglich (empfohlen)',
-            'twicedaily' => 'Alle 12 Stunden',
-            'hourly' => 'Stündlich',
+            'ppar_three_weeks' => 'Alle 3 Wochen (Standard)',
+            'ppar_two_weeks' => 'Alle 2 Wochen',
         );
     }
 
     private static function sanitize_health_schedule($schedule) {
         $schedule = sanitize_key((string) $schedule);
-        return array_key_exists($schedule, self::health_schedule_options()) ? $schedule : 'daily';
+        return array_key_exists($schedule, self::health_schedule_options()) ? $schedule : 'ppar_three_weeks';
     }
 
     private static function health_schedule_delay($schedule) {
         $schedule = self::sanitize_health_schedule($schedule);
-        if ($schedule === 'hourly') {
-            return defined('HOUR_IN_SECONDS') ? HOUR_IN_SECONDS : 3600;
-        }
-        if ($schedule === 'twicedaily') {
-            return 12 * (defined('HOUR_IN_SECONDS') ? HOUR_IN_SECONDS : 3600);
-        }
-        return defined('DAY_IN_SECONDS') ? DAY_IN_SECONDS : 86400;
+        $day = defined('DAY_IN_SECONDS') ? DAY_IN_SECONDS : 86400;
+        return $schedule === 'ppar_two_weeks' ? 14 * $day : 21 * $day;
     }
 
     /**
@@ -5649,8 +7480,8 @@ JS;
         $stored = get_option(self::OPTION_HEALTH_SETTINGS, array());
         $settings = wp_parse_args(is_array($stored) ? $stored : array(), self::health_defaults());
         $settings['automatic_enabled'] = !empty($settings['automatic_enabled']);
-        $settings['schedule'] = self::sanitize_health_schedule($settings['schedule'] ?? 'daily');
-        $settings['batch_size'] = max(1, min(100, (int) ($settings['batch_size'] ?? 25)));
+        $settings['schedule'] = self::sanitize_health_schedule($settings['schedule'] ?? 'ppar_three_weeks');
+        $settings['batch_size'] = max(1, min(100, (int) ($settings['batch_size'] ?? 100)));
         $settings['timeout'] = max(3, min(20, (int) ($settings['timeout'] ?? 8)));
         $settings['failure_threshold'] = 3;
         update_option(self::OPTION_HEALTH_SETTINGS, $settings, false);
@@ -5689,7 +7520,7 @@ JS;
         $stored = get_option(self::OPTION_HEALTH_SETTINGS, array());
         $settings = wp_parse_args(is_array($stored) ? $stored : array(), self::health_defaults());
         $settings['automatic_enabled'] = !empty($settings['automatic_enabled']);
-        $settings['schedule'] = self::sanitize_health_schedule($settings['schedule'] ?? 'daily');
+        $settings['schedule'] = self::sanitize_health_schedule($settings['schedule'] ?? 'ppar_three_weeks');
         $settings['batch_size'] = max(1, min(100, (int) $settings['batch_size']));
         $settings['timeout'] = max(3, min(20, (int) $settings['timeout']));
         // Die Sicherheitsstufen 1/2/3 bleiben fest und sind nicht frei konfigurierbar.
@@ -5729,7 +7560,7 @@ JS;
         if (!method_exists($this, 'control_get_decision')) { return true; }
         $portal_key = method_exists($this, 'output_local_portal_key') ? sanitize_key((string) $this->output_local_portal_key()) : '';
         if ($portal_key === '') { return true; }
-        $provider = sanitize_key((string) ($campaign['network'] ?? 'manual'));
+        $provider = isset($campaign['_ppar_norm_network']) ? (string) $campaign['_ppar_norm_network'] : sanitize_key((string) ($campaign['network'] ?? 'manual'));
         if ($provider !== '' && method_exists($this, 'control_provider_gate')) {
             $provider_gate = $this->control_provider_gate($provider, $portal_key);
             if (is_wp_error($provider_gate)) { return false; }
@@ -5750,12 +7581,12 @@ JS;
             $output_gate = $this->control_output_gate($portal_key, $output_id);
             if (is_wp_error($output_gate)) { return false; }
         }
-        $targets = array_values(array_filter(array_map('sanitize_text_field', (array) ($campaign['automation_target_keys'] ?? array()))));
+        $targets = !empty($campaign['_ppar_runtime_normalized']) ? array_values((array) ($campaign['automation_target_keys'] ?? array())) : array_values(array_filter(array_map('sanitize_text_field', (array) ($campaign['automation_target_keys'] ?? array()))));
         if (count($targets) === 1 && method_exists($this, 'control_target_gate')) {
             $target_gate = $this->control_target_gate($portal_key, $targets[0]);
             if (is_wp_error($target_gate)) { return false; }
         }
-        $slot_type = sanitize_key((string) $slot_type);
+        $slot_type = !empty($campaign['_ppar_runtime_normalized_slot_type']) ? (string) $slot_type : sanitize_key((string) $slot_type);
         if ($slot_type !== '' && method_exists($this, 'control_slot_gate')) {
             $slot_gate = $this->control_slot_gate($portal_key, $slot_type);
             if (is_wp_error($slot_gate)) { return false; }
@@ -5773,11 +7604,12 @@ JS;
     }
 
     private function campaign_program_allows_delivery($campaign) {
-        $status = sanitize_key((string) ($campaign['programme_status'] ?? 'unknown'));
+        $status = isset($campaign['_ppar_norm_programme_status']) ? (string) $campaign['_ppar_norm_programme_status'] : sanitize_key((string) ($campaign['programme_status'] ?? 'unknown'));
         if (in_array($status, array('paused', 'ended'), true)) {
             return false;
         }
-        if (sanitize_key((string) ($campaign['network'] ?? '')) === 'awin') {
+        $network = isset($campaign['_ppar_norm_network']) ? (string) $campaign['_ppar_norm_network'] : sanitize_key((string) ($campaign['network'] ?? ''));
+        if ($network === 'awin') {
             $advertiser_id = absint($campaign['advertiser_id'] ?? 0);
             $portal_key = method_exists($this, 'output_local_portal_key') ? $this->output_local_portal_key() : '';
             return $this->awin_programme_gate_is_allowed($advertiser_id, $portal_key);
@@ -6007,7 +7839,9 @@ JS;
         if (empty($settings['automatic_enabled'])) {
             return array('checked' => 0, 'ok' => 0, 'warning' => 0, 'quarantine' => 0, 'critical' => 0);
         }
-        return $this->run_health_check_batch(false);
+        $summary = $this->run_health_check_batch(false);
+        update_option('ppar_background_health_last_v1', array('at'=>time(),'summary'=>$summary), false);
+        return $summary;
     }
 
     private function run_health_check_batch($force_all = false) {
@@ -6066,7 +7900,7 @@ JS;
         $raw = isset($_POST['ppar_health']) && is_array($_POST['ppar_health']) ? wp_unslash($_POST['ppar_health']) : array();
         $settings = array(
             'automatic_enabled' => !empty($raw['automatic_enabled']),
-            'schedule' => self::sanitize_health_schedule($raw['schedule'] ?? 'daily'),
+            'schedule' => self::sanitize_health_schedule($raw['schedule'] ?? 'ppar_three_weeks'),
             'batch_size' => max(1, min(100, (int) ($raw['batch_size'] ?? 25))),
             'timeout' => max(3, min(20, (int) ($raw['timeout'] ?? 8))),
             'failure_threshold' => 3,
@@ -6097,7 +7931,21 @@ JS;
             $counts[$state]++;
         }
         ?>
+        <?php
+        $auto_settings = method_exists($this, 'automation_settings') ? $this->automation_settings() : array();
+        $auto_last = absint(get_option(self::OPTION_AUTOMATION_LAST_DISPATCH, 0));
+        $health_last = get_option('ppar_background_health_last_v1', array());
+        $health_last = is_array($health_last) ? $health_last : array();
+        $next_sync = function_exists('wp_next_scheduled') ? absint(wp_next_scheduled(self::AUTOMATION_CRON_HOOK)) : 0;
+        $next_health = function_exists('wp_next_scheduled') ? absint(wp_next_scheduled(self::HEALTH_CRON_HOOK)) : 0;
+        ?>
         <div class="wrap"><h1>Prüfzentrum</h1>
+        <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:20px;max-width:1180px">
+            <h2>Automatikstatus</h2>
+            <p><strong>Bestands-/Partnersync:</strong> <?php echo !empty($auto_settings['enabled']) ? 'aktiv' : 'inaktiv'; ?> · Rhythmus: <?php echo esc_html((string)($auto_settings['schedule'] ?? '')); ?> · letzter Start: <?php echo $auto_last ? esc_html(wp_date('d.m.Y H:i',$auto_last)) : 'noch nie'; ?> · nächster Lauf: <?php echo $next_sync ? esc_html(wp_date('d.m.Y H:i',$next_sync)) : 'nicht geplant'; ?></p>
+            <p><strong>Integritäts-/Linkprüfung:</strong> aktiv · letzter Lauf: <?php echo !empty($health_last['at']) ? esc_html(wp_date('d.m.Y H:i',absint($health_last['at']))) : 'noch nie'; ?> · nächster Lauf: <?php echo $next_health ? esc_html(wp_date('d.m.Y H:i',$next_health)) : 'nicht geplant'; ?></p>
+            <p class="description">Normalbetrieb vollautomatisch. Manuelle Sofortprüfung und Veto bleiben jederzeit möglich.</p>
+        </section>
         <section style="background:#fff;border:1px solid #c3c4c7;padding:20px;margin-bottom:20px;max-width:1180px">
             <h2>Systemprüfung</h2>
             <p>Read-only-Prüfung der Pluginversion, Sicherheitsgrenzen, Datenstrukturen und bestehenden Design-Schnittstellen. Es wird nichts angelegt oder verändert. <strong>Diese Systemprüfung ist keine WordPress-/HivePress-Frontend-End-to-End-Abnahme.</strong></p>
@@ -6112,10 +7960,9 @@ JS;
         <div style="display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:20px;align-items:start">
         <?php
         $schedule_options = self::health_schedule_options();
-        $runs_per_day = $settings['schedule'] === 'hourly' ? 24 : ($settings['schedule'] === 'twicedaily' ? 2 : 1);
-        $daily_capacity = (int) $settings['batch_size'] * $runs_per_day;
+        $daily_capacity = (int) $settings['batch_size'];
         ?>
-        <form style="background:#fff;border:1px solid #c3c4c7;padding:20px" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_save_health_settings"><?php wp_nonce_field('ppar_save_health_settings', 'ppar_health_settings_nonce'); ?><h2>Automatische Linkprüfung</h2><p><label><input type="checkbox" name="ppar_health[automatic_enabled]" value="1" <?php checked(!empty($settings['automatic_enabled'])); ?>> Automatische Linkprüfung aktivieren</label></p><p><label>Prüfrhythmus<br><select name="ppar_health[schedule]"><?php foreach ($schedule_options as $schedule_key => $schedule_label): ?><option value="<?php echo esc_attr($schedule_key); ?>" <?php selected($settings['schedule'], $schedule_key); ?>><?php echo esc_html($schedule_label); ?></option><?php endforeach; ?></select></label></p><p><label>Werbemittel je Lauf<br><input type="number" min="1" max="100" name="ppar_health[batch_size]" value="<?php echo esc_attr((string) $settings['batch_size']); ?>"></label></p><p><label>Zeitlimit je Anfrage in Sekunden<br><input type="number" min="3" max="20" name="ppar_health[timeout]" value="<?php echo esc_attr((string) $settings['timeout']); ?>"></label></p><p class="description">Empfohlen: einmal täglich. Mit der aktuellen Einstellung werden bis zu <?php echo absint($daily_capacity); ?> Werbemittel pro Tag geprüft. Weiterleitungen können mehrere HTTP-Anfragen pro Werbemittel auslösen. Kritische und quarantänisierte Links bleiben in der Prüfung, damit eine Wiederherstellung erkannt wird.</p><?php submit_button('Prüfeinstellungen speichern'); ?></form>
+        <form style="background:#fff;border:1px solid #c3c4c7;padding:20px" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_save_health_settings"><?php wp_nonce_field('ppar_save_health_settings', 'ppar_health_settings_nonce'); ?><h2>Automatische Linkprüfung</h2><p><label><input type="checkbox" name="ppar_health[automatic_enabled]" value="1" <?php checked(!empty($settings['automatic_enabled'])); ?>> Automatische Linkprüfung aktivieren</label></p><p><label>Prüfrhythmus<br><select name="ppar_health[schedule]"><?php foreach ($schedule_options as $schedule_key => $schedule_label): ?><option value="<?php echo esc_attr($schedule_key); ?>" <?php selected($settings['schedule'], $schedule_key); ?>><?php echo esc_html($schedule_label); ?></option><?php endforeach; ?></select></label></p><p><label>Werbemittel je Lauf<br><input type="number" min="1" max="100" name="ppar_health[batch_size]" value="<?php echo esc_attr((string) $settings['batch_size']); ?>"></label></p><p><label>Zeitlimit je Anfrage in Sekunden<br><input type="number" min="3" max="20" name="ppar_health[timeout]" value="<?php echo esc_attr((string) $settings['timeout']); ?>"></label></p><p class="description">Standard: alle 3 Wochen. Der Lauf prüft bis zu <?php echo absint($settings['batch_size']); ?> Werbemittel; zusätzlich kann jederzeit manuell geprüft werden. Weiterleitungen können mehrere HTTP-Anfragen pro Werbemittel auslösen. Kritische und quarantänisierte Links bleiben in der Prüfung, damit eine Wiederherstellung erkannt wird.</p><?php submit_button('Prüfeinstellungen speichern'); ?></form>
         <div><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin-bottom:14px"><input type="hidden" name="action" value="ppar_run_health_check"><?php wp_nonce_field('ppar_run_health_check', 'ppar_health_nonce'); ?><button class="button button-primary">Bis zu 200 aktive Werbemittel jetzt prüfen</button></form><table class="widefat striped"><thead><tr><th>Werbemittel</th><th>Netzwerk / Programm</th><th>Prüfstatus</th><th>Letzte Prüfung</th><th>Ergebnis</th></tr></thead><tbody><?php if (!$rows): ?><tr><td colspan="5">Noch keine Werbemittel vorhanden.</td></tr><?php else: foreach ($rows as $campaign): $health = $this->campaign_health_data($campaign); $programme = sanitize_key((string) ($campaign['programme_status'] ?? 'unknown')); ?><tr><td><strong><?php echo esc_html((string) ($campaign['name'] ?? '')); ?></strong><br><?php echo !empty($campaign['active']) ? 'aktiv' : 'inaktiv'; ?></td><td><?php echo esc_html($this->provider_label((string)($campaign['network']??'manual'))); ?><br><?php echo esc_html((string) ($campaign['programme_name'] ?? $campaign['partner'] ?? '')); ?><?php if ($programme !== 'unknown'): ?><br>Programm: <?php echo esc_html($programme); ?><?php endif; ?></td><td><strong><?php echo esc_html(strtoupper((string) $health['state'])); ?></strong><br>Harte Fehler: <?php echo absint($health['consecutive_failures']); ?> · temporär: <?php echo absint($health['temporary_failures']); ?></td><td><?php echo !empty($health['checked_at']) ? esc_html(wp_date('d.m.Y H:i', (int) $health['checked_at'])) : 'nie'; ?></td><td><?php echo esc_html((string) $health['message']); ?><?php if (!empty($health['http_code'])): ?><br>HTTP <?php echo absint($health['http_code']); ?><?php endif; ?><?php if (!empty($health['final_url'])): ?><br><small>Endziel: <?php echo esc_html((string) $health['final_url']); ?></small><?php endif; ?></td></tr><?php endforeach; endif; ?></tbody></table></div></div></div><?php
     }
 
@@ -6485,9 +8332,9 @@ JS;
     }
     private function campaign_is_complete($campaign) {
         if (!is_array($campaign)) { return false; }
-        $type = sanitize_key((string)($campaign['creative_type'] ?? 'banner'));
-        $network = sanitize_key((string)($campaign['network'] ?? 'manual'));
-        $mode = sanitize_key((string)($campaign['render_mode'] ?? 'image_link'));
+        $type = isset($campaign['_ppar_norm_creative_type']) ? (string) $campaign['_ppar_norm_creative_type'] : sanitize_key((string)($campaign['creative_type'] ?? 'banner'));
+        $network = isset($campaign['_ppar_norm_network']) ? (string) $campaign['_ppar_norm_network'] : sanitize_key((string)($campaign['network'] ?? 'manual'));
+        $mode = isset($campaign['_ppar_norm_render_mode']) ? (string) $campaign['_ppar_norm_render_mode'] : sanitize_key((string)($campaign['render_mode'] ?? 'image_link'));
         // DS24-Hardlock: Digistore24 is banner-only and may only leave the
         // shared campaign runtime through a validated Digistore tracking URL.
         // This covers manual, legacy and injected campaigns in addition to the
@@ -6515,7 +8362,19 @@ JS;
         elseif ($assign_mode === 'keywords') { $assignment_ok = !empty($campaign['match_keywords']); }
         elseif ($assign_mode === 'exact_page') { $assignment_ok = !empty($campaign['page_id']); }
         elseif ($assign_mode === 'auto_topic') { $assignment_ok = !empty($campaign['page_id']) && !empty($campaign['auto_topic_label']); }
-        elseif ($assign_mode === 'page_tree') { $assignment_ok = !empty($campaign['page_id']) || !empty($campaign['match_slugs']) || !empty($campaign['match_term_ids']) || !empty($campaign['automation_target_keys']); }
+        elseif ($assign_mode === 'page_tree') {
+            $assignment_ok = !empty($campaign['page_id']) || !empty($campaign['match_slugs']) || !empty($campaign['match_term_ids']) || !empty($campaign['automation_target_keys']);
+            // V6.72.60: fill-orientierte automatische Einzelartikel-Slots duerfen
+            // absichtlich ohne feste Zielkante materialisiert werden. Die fachliche
+            // Rangfolge wird zur Laufzeit aus Artikelkontext + Partner/Creative
+            // bestimmt. Ohne diese Ausnahme wuerde campaign_is_complete() genau
+            // diese neutralen Output-Objekte vor dem Ranking aussortieren.
+            if (!$assignment_ok && sanitize_key((string)($campaign['source'] ?? '')) === 'output_object_v4') {
+                $fill_slots = array('glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner');
+                $placements = array_map('sanitize_key',(array)($campaign['placements'] ?? array()));
+                $assignment_ok = !empty(array_intersect($fill_slots,$placements));
+            }
+        }
         else { $assignment_ok = false; }
         $start = trim((string)($campaign['start_date'] ?? ''));
         $end = trim((string)($campaign['end_date'] ?? ''));
@@ -7428,6 +9287,9 @@ JS;
             <h1>Affiliate Portal Kontrollzentrum</h1>
             <p><strong>Version:</strong> <?php echo esc_html(self::VERSION); ?>. Zentrale read-only Übersicht. Änderungen erfolgen ausschließlich in der Affiliate-Zentrale.</p>
             <p><a class="button button-primary" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-creatives')); ?>">Affiliate-Zentrale öffnen</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-router-check')); ?>">Trockenprüfung öffnen</a></p>
+            <?php $this->render_aff039_recovery_panel(); ?>
+            <?php $this->render_aff043_recovery_panel(); ?>
+            <?php $this->render_aff044_clean_restore_panel(); ?>
 
             <h2>Status</h2>
             <table class="widefat striped" style="max-width:980px;">
@@ -8692,7 +10554,7 @@ JS;
             return array();
         }
 
-        $allowed_slots = array('post_inline_banner', 'post_bottom_products', 'post_after_intro', 'post_mid_content', 'post_bottom_recommendation', 'hub_top_cta', 'hub_after_cards', 'hub_grid_card', 'hub_mid_banner', 'category_recommendation', 'product_after_category_tiles', 'anzeigenmarkt_top_banner', 'journal_banner', 'journal_product_1', 'journal_product_2', 'journal_product_3', 'top_info', 'mid_content', 'bottom_recommendation');
+        $allowed_slots = array('post_inline_banner', 'post_bottom_products', 'post_after_intro', 'post_mid_content', 'post_bottom_recommendation', 'hub_top_cta', 'hub_after_cards', 'hub_grid_card', 'hub_mid_banner', 'category_recommendation', 'product_after_category_tiles', 'anzeigenmarkt_top_banner', 'anzeigenmarkt_category_banner', 'journal_banner', 'journal_product_1', 'journal_product_2', 'journal_product_3', 'top_info', 'mid_content', 'bottom_recommendation');
         $allowed_intents = array('soft_hint', 'primary_product', 'fallback');
         $out = array();
         $used_group_ids = array();

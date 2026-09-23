@@ -14,6 +14,26 @@ if (!defined('ABSPATH')) {
  *   optional Adapter-Hooks, ohne den zentralen Steuervertrag umzubauen.
  */
 trait PPAR_Provider_Registry_Trait {
+    /**
+     * V6.72.148: Provider definitions are immutable during a normal public
+     * frontend request. Rebuilding and sanitizing the full registry for every
+     * campaign gate caused millions of redundant sanitize_* calls on leaf pages.
+     * Keep admin/AJAX/cron/REST/WP-CLI uncached so operational/adaptor tooling
+     * retains its existing per-call filter behaviour.
+     */
+    private $provider_registry_request_cache = null;
+
+    private function provider_registry_request_cache_allowed() {
+        if ((function_exists('is_admin') && is_admin())
+            || (defined('DOING_CRON') && DOING_CRON)
+            || (defined('REST_REQUEST') && REST_REQUEST)
+            || (defined('WP_CLI') && WP_CLI)
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+            return false;
+        }
+        return true;
+    }
+
     private function provider_registry_defaults() {
         return array(
             'awin' => array(
@@ -76,6 +96,10 @@ trait PPAR_Provider_Registry_Trait {
     }
 
     public function provider_registry() {
+        $cache_allowed = $this->provider_registry_request_cache_allowed();
+        if ($cache_allowed && is_array($this->provider_registry_request_cache)) {
+            return $this->provider_registry_request_cache;
+        }
         $raw = apply_filters('ppar_affiliate_provider_registry', $this->provider_registry_defaults(), self::PROVIDER_CONTRACT_VERSION);
         $raw = is_array($raw) ? $raw : array();
         $safe = array();
@@ -99,13 +123,22 @@ trait PPAR_Provider_Registry_Trait {
                 'capabilities' => $caps,
             );
         }
+        if ($cache_allowed) {
+            $this->provider_registry_request_cache = $safe;
+        }
         return $safe;
     }
 
     public function provider_definition($provider) {
-        $provider = sanitize_key((string) $provider);
+        static $definition_cache = array();
+        $raw = (string) $provider;
+        $cache_allowed = $this->provider_registry_request_cache_allowed();
+        if ($cache_allowed && array_key_exists($raw, $definition_cache)) { return $definition_cache[$raw]; }
+        $provider = sanitize_key($raw);
         $registry = $this->provider_registry();
-        return isset($registry[$provider]) ? $registry[$provider] : null;
+        $definition = isset($registry[$provider]) ? $registry[$provider] : null;
+        if ($cache_allowed) { $definition_cache[$raw] = $definition; }
+        return $definition;
     }
 
     public function provider_exists($provider) {
@@ -113,8 +146,13 @@ trait PPAR_Provider_Registry_Trait {
     }
 
     public function provider_supports($provider, $capability) {
+        static $capability_cache = array();
         $definition = $this->provider_definition($provider);
-        return is_array($definition) && in_array(sanitize_key((string) $capability), (array) $definition['capabilities'], true);
+        $raw = (string) $capability;
+        $cache_allowed = $this->provider_registry_request_cache_allowed();
+        if ($cache_allowed && array_key_exists($raw, $capability_cache)) { $capability = $capability_cache[$raw]; }
+        else { $capability = sanitize_key($raw); if ($cache_allowed) { $capability_cache[$raw] = $capability; } }
+        return is_array($definition) && in_array($capability, (array) $definition['capabilities'], true);
     }
 
     public function provider_label($provider) {

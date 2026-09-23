@@ -181,23 +181,37 @@ trait PPAR_Awin_Programme_Gate_Trait {
     }
 
     /**
+     * Read-only refresh of the official Awin joined-programme list.
+     * Existing gate decisions are deliberately not changed. New programmes
+     * therefore appear as pending until the operator explicitly approves them.
+     * On API failure Last-Known-Good programme data remains untouched because
+     * automation_refresh_awin_programme_list() writes only after a valid response.
+     */
+    /**
      * Keep Awin partner inventory fresh even while product/feed automation is off.
      * This is deliberately read-only partner metadata: no offers, products,
      * creatives or outputs are processed here.
      */
     public function ensure_awin_programme_inventory_schedule() {
-        if (!function_exists('wp_next_scheduled') || !function_exists('wp_schedule_event')) { return; }
+        if (!function_exists('wp_next_scheduled') || !function_exists('wp_schedule_event')) {
+            return;
+        }
         if (!wp_next_scheduled(self::AWIN_PROGRAMME_REFRESH_CRON_HOOK)) {
             wp_schedule_event(time() + 300, 'hourly', self::AWIN_PROGRAMME_REFRESH_CRON_HOOK);
         }
     }
+
     public function run_awin_programme_inventory_refresh() {
         if (!method_exists($this, 'automation_refresh_awin_programme_list')) {
             return new WP_Error('awin_programme_refresh_missing', 'Awin-Programmsynchronisierung ist nicht verfügbar.');
         }
         $result = $this->automation_refresh_awin_programme_list();
         if (is_wp_error($result)) {
-            update_option('ppar_awin_programme_list_refresh_warning_v1', array('at'=>time(),'code'=>$result->get_error_code(),'message'=>$result->get_error_message()), false);
+            update_option('ppar_awin_programme_list_refresh_warning_v1', array(
+                'at'=>time(),
+                'code'=>$result->get_error_code(),
+                'message'=>$result->get_error_message(),
+            ), false);
             return $result;
         }
         delete_option('ppar_awin_programme_list_refresh_warning_v1');
@@ -211,28 +225,44 @@ trait PPAR_Awin_Programme_Gate_Trait {
         }
         return $result;
     }
+
     public function handle_awin_programme_refresh() {
-        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        if (!current_user_can('manage_options')) {
+            wp_die('Keine Berechtigung.');
+        }
         check_admin_referer('ppar_refresh_awin_programmes', 'ppar_awin_refresh_nonce');
-        $result = method_exists($this, 'automation_refresh_awin_programme_list')
-            ? $this->automation_refresh_awin_programme_list()
-            : new WP_Error('awin_programme_refresh_missing', 'Awin-Programmsynchronisierung ist nicht verfügbar.');
-        $args = array('page'=>'affiliate-portal-provider-awin');
-        if (is_wp_error($result)) {
-            $args['ppar_awin_refresh']='failed'; $args['ppar_awin_refresh_message']=sanitize_text_field($result->get_error_message());
+
+        if (!method_exists($this, 'automation_refresh_awin_programme_list')) {
+            $result = new WP_Error('awin_programme_refresh_missing', 'Awin-Programmsynchronisierung ist nicht verfügbar.');
         } else {
-            $status=sanitize_key((string) ($result['status'] ?? '')); $count=absint($result['count'] ?? 0);
+            $result = $this->automation_refresh_awin_programme_list();
+        }
+
+        $args = array('page' => 'affiliate-portal-provider-awin');
+        if (is_wp_error($result)) {
+            $args['ppar_awin_refresh'] = 'failed';
+            $args['ppar_awin_refresh_message'] = sanitize_text_field($result->get_error_message());
+        } else {
+            $status = sanitize_key((string) ($result['status'] ?? ''));
+            $count = absint($result['count'] ?? 0);
             if ($status !== 'refreshed') {
-                $args['ppar_awin_refresh']='not_ready';
-                $args['ppar_awin_refresh_message']=$status==='disabled' ? 'Awin ist derzeit deaktiviert.' : 'Awin-Zugang ist noch nicht vollständig eingerichtet.';
+                $args['ppar_awin_refresh'] = 'not_ready';
+                $args['ppar_awin_refresh_message'] = $status === 'disabled'
+                    ? 'Awin ist derzeit deaktiviert.'
+                    : 'Awin-Zugang ist noch nicht vollständig eingerichtet.';
             } else {
-                $settings=$this->network_settings('awin'); $settings['programme_count']=$count; $settings['last_checked']=time(); $settings['last_status']='connected';
-                $settings['last_message']='Awin-Programmliste aktualisiert: ' . $count . ' verbundene Programme.';
-                update_option(self::OPTION_NETWORK_AWIN,$settings,false);
-                $args['ppar_awin_refresh']='ok'; $args['ppar_awin_refresh_count']=$count;
+                $settings = $this->network_settings('awin');
+                $settings['programme_count'] = $count;
+                $settings['last_checked'] = time();
+                $settings['last_status'] = 'connected';
+                $settings['last_message'] = 'Awin-Programmliste aktualisiert: ' . $count . ' verbundene Programme.';
+                update_option(self::OPTION_NETWORK_AWIN, $settings, false);
+                $args['ppar_awin_refresh'] = 'ok';
+                $args['ppar_awin_refresh_count'] = $count;
             }
         }
-        wp_safe_redirect(add_query_arg($args, admin_url('admin.php'))); exit;
+        wp_safe_redirect(add_query_arg($args, admin_url('admin.php')));
+        exit;
     }
 
     public function handle_awin_programme_gate_save() {

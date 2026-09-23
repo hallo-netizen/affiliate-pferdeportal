@@ -428,6 +428,9 @@ trait PPAR_Ebay_Account_Deletion_Trait {
         $scope_key = (string) $scope_key;
         $wpdb->delete($this->control_decisions_table(), array('scope_type' => $scope_type, 'scope_key' => $scope_key));
         $wpdb->delete($this->control_audit_table(), array('scope_type' => $scope_type, 'scope_key' => $scope_key));
+        if (method_exists($this, 'control_clear_decision_cache')) {
+            $this->control_clear_decision_cache();
+        }
     }
 
     private function ebay_deletion_delete_by_identity($identity_hash, &$counts) {
