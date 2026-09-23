@@ -22,14 +22,13 @@ Nicht als Current-/Startautorität verwenden:
 
 Recherche- und Artikelqualität, LanguageTool 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL bleiben unverändert. Kein Publish. Keine Alternativroute.
 
-
 ## Aktueller Produktionsanschluss nach gebundener Recherche
 
 Nach `CONCEPT_AGENT_RESEARCH_BOUND_V1` ausschließlich:
 
 `concept_agent/production_bridge.py`
 
-Der Bridge bindet aus dem aktuellen Batch automatisch die bereits vorhandenen Portal-Links und die vorhandene PPM-6.7.9-Qualitätsautorität. Während der Produktion werden Regeln und Links nicht frei gesucht oder neu gewählt.
+Der Bridge bindet aus dem aktuellen Batch automatisch die vorhandenen Portal-Links und die vorhandene PPM-6.7.9-Qualitätsautorität. Während der Produktion werden Regeln und Links nicht frei gesucht oder neu gewählt.
 
 Hart verboten:
 - historische Produktionswege als Ausführungsweg,
@@ -40,33 +39,37 @@ Hart verboten:
 
 Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`.
 
-### Harte Wiedereinstiegsregel – alle Phasen
+## Harte Wiedereinstiegsregel — überall
 
-Sobald derselbe Batch `MACHINE_READY` erreicht hat, gilt nach **jeder** Unterbrechung ausschließlich:
+Sobald derselbe Batch `MACHINE_READY` erreicht hat, muss **vor jeder Fortsetzung nach einer Unterbrechung** zuerst
 
 `concept_agent/universal_reentry_guard.py`
 
-Der normale Produktionscheckpoint bestimmt weiterhin Artikel und äußeren Schritt. Der Universal-Reentry-Checkpoint bindet zusätzlich den **vollständigen echten Arbeitszustand** des aktuell laufenden Artikels.
+aus dem aktuellen Produktions-Binding und dem aktuellen Fortschritts-Checkpoint eine exakte
+`CONCEPT_AGENT_UNIVERSAL_REENTRY_DECISION_V2` ableiten und verifizieren.
 
-Das gilt unabhängig davon, ob die Unterbrechung bei Recherche, Faktenprüfung, Kontext, Schreiben, Fullcheck, LT/PPM-Reparatur, Output-Gate, Signatur, Artikelabschluss, PSERC oder ENDSTEMPEL passiert.
+Diese Entscheidung ist für jede weitere Produktionsaktion Pflicht. Ohne passende Entscheidung akzeptiert `progress_guard.py` weder Schreiben noch Prüfen, Reparieren, Wiederherstellen des aktuellen Textes, PSERC noch ENDSTEMPEL.
+
+Der Wiedereinstieg beginnt logisch immer bei Stufe 0 und darf ausschließlich bereits hashgebunden nachgewiesene Stufen überspringen. Der Chat darf weder Stufe noch Artikel auswählen.
+
+Aktuelle Textbytes werden zusammen mit SHA-256, Größe und Revision dauerhaft im Fortschritts-Checkpoint gespeichert. Bei einem Wiedereinstieg dürfen sie nur aus diesem Checkpoint bytegenau wiederhergestellt werden.
 
 Hart:
-- fehlt der gültige Produktionscheckpoint: **STOP**,
-- läuft bereits ein Artikel und fehlt seine gültige Recovery-Kapsel: **STOP**,
-- falscher Batch, Artikel, Plan-Slot, Phase, Text-Hash, Prüfbefund, Revision oder Kapsel-Hash: **STOP**,
-- Phasensprung oder Artikelwechsel ohne erlaubten Übergang: **STOP**,
-- der Chat besitzt **keine freie Ausführungsautorität**,
-- der Chat darf beim Wiedereinstieg **weder Repository noch Prüferdateien/Binaries frei suchen**,
-- kein Wiederaufbau aus Chat-Erinnerung,
-- kein Ableiten aus alten Zuständen, Recovery-Artikeln oder historischen Wegen,
-- nur der exakt gebundene nächste Worker-/Prüfschritt ist zulässig,
+- fehlender oder falscher Produktionscheckpoint: **STOP**,
+- fehlende oder falsche Reentry-Entscheidung: **STOP**,
+- falscher Batch, Binding, Artikel, Reihenfolge, Text-Hash, Revision oder Prüferzustand: **STOP**,
+- freie Chat-Ausführung: **verboten**,
+- freie Repository-Suche beim Wiedereinstieg: **verboten**,
+- freie Suche nach Prüferdateien/Binaries: **verboten**,
+- Alternativroute: **verboten**,
+- fehlt die kanonische Ausführungsumgebung: **STOP statt Suchen oder Improvisieren**,
 - Reparatur bleibt beim selben Artikel,
-- PSERC und ENDSTEMPEL liegen ebenfalls hinter derselben Wiedereinstiegssperre,
-- nach ENDSTEMPEL-PASS ist ausschließlich STOP erlaubt,
-- nach `MACHINE_READY` desselben Batches darf `text-start` nicht erneut ausgelöst werden.
+- nächster Artikel erst nach LT-6.8- und PPM-6.7.9-PASS,
+- PSERC → ENDSTEMPEL → STOP bleibt gebunden,
+- nach `MACHINE_READY` desselben Batches kein zweites `text-start`.
 
-Ein Wiedereinstieg ohne vollständigen beweisbaren Zustand darf daher **niemals** durch Suchen, Raten oder einen Ersatzweg repariert werden.
+Damit kann ein neuer Chat den Arbeitsstand weder aus Erinnerung rekonstruieren noch einen anderen Weg wählen.
 
-`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Danach bestimmen ausschließlich die gültig verketteten Produktions-/Reentry-Checkpoints die Fortsetzung.
+`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Danach bestimmen ausschließlich aktuelles Produktions-Binding, aktueller Fortschritts-Checkpoint und die daraus exakt abgeleitete Reentry-Entscheidung die Fortsetzung.
 
 `text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
