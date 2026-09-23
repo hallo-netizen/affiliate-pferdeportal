@@ -102,7 +102,7 @@ jobs:
           print("TEXT_START_SOURCE_PROOF_PASS")
           PY
 
-      - name: Claim this bound batch exactly once
+      - name: Reserve current bound batch; retry allowed until machine ready
         id: claim
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         env:
@@ -118,27 +118,6 @@ jobs:
               return;
             }
 
-            const sourceTitle = 'TEXT_START_SOURCE_CONSUMED:' + sourceRunId;
-            const sourceQuery = 'repo:' + context.repo.owner + '/' + context.repo.repo + ' in:title "' + sourceTitle + '"';
-            const priorSource = await github.rest.search.issuesAndPullRequests({q: sourceQuery, per_page: 100});
-            if (priorSource.data.items.some(x => x.title === sourceTitle)) {
-              core.setFailed('TEXT_START_SOURCE_ALREADY_CONSUMED');
-              return;
-            }
-
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: sourceTitle,
-              body:
-                'SOURCE_REPOSITORY: hallo-netizen/text-start\n' +
-                'SOURCE_RUN_ID: ' + sourceRunId + '\n' +
-                'SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
-                'TARGET_HEAD: ' + context.sha + '\n' +
-                'ONE_TIME_AUTHORIZATION: CONSUMED\n' +
-                'PUBLISH: NO'
-            });
-
             const runtime = JSON.parse(fs.readFileSync('control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json', 'utf8'));
             if (runtime.status !== 'EXECUTION_READY' || runtime.publish_allowed !== false) {
               core.setFailed('TEXT_START_RUNTIME_NOT_READY');
@@ -149,25 +128,65 @@ jobs:
               core.setFailed('TEXT_START_BATCH_SHA_INVALID');
               return;
             }
+
             const title = 'TEXT_START_BATCH_CLAIM:' + batch;
             const q = 'repo:' + context.repo.owner + '/' + context.repo.repo + ' in:title "' + title + '"';
             const found = await github.rest.search.issuesAndPullRequests({q, per_page: 100});
-            if (found.data.items.some(x => x.title === title)) {
-              core.setFailed('TEXT_START_BATCH_ALREADY_CLAIMED');
+            const exact = found.data.items.filter(x => x.title === title);
+
+            let claimIssue;
+            if (exact.length > 1) {
+              core.setFailed('TEXT_START_BATCH_CLAIM_AMBIGUOUS');
               return;
             }
-            const created = await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title,
-              body:
-                'SOURCE_REPOSITORY: hallo-netizen/text-start\n' +
-                'SOURCE_RUN_ID: ' + sourceRunId + '\n' +
-                'SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
-                'TARGET_HEAD: ' + context.sha + '\n' +
-                'PUBLISH: NO'
-            });
-            core.setOutput('issue_number', String(created.data.number));
+
+            if (exact.length === 1) {
+              claimIssue = exact[0];
+              const comments = await github.paginate(
+                github.rest.issues.listComments,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: claimIssue.number,
+                  per_page: 100
+                }
+              );
+              const ready = comments.some(row =>
+                String(row.body || '').startsWith('TEXT_START_MACHINE_READY\n')
+              );
+              if (ready) {
+                core.setFailed('TEXT_START_BATCH_ALREADY_READY');
+                return;
+              }
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: claimIssue.number,
+                body:
+                  'TEXT_START_RETRY_RESERVED\n' +
+                  'SOURCE_RUN_ID: ' + sourceRunId + '\n' +
+                  'SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
+                  'TARGET_ACTION_RUN_ID: ' + context.runId + '\n' +
+                  'PUBLISH: NO'
+              });
+            } else {
+              const created = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body:
+                  'SOURCE_REPOSITORY: hallo-netizen/text-start\n' +
+                  'INITIAL_SOURCE_RUN_ID: ' + sourceRunId + '\n' +
+                  'INITIAL_SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
+                  'TARGET_HEAD: ' + context.sha + '\n' +
+                  'STATUS: RESERVED_NOT_READY\n' +
+                  'RETRY_POLICY: ALLOWED_UNTIL_MACHINE_READY\n' +
+                  'PUBLISH: NO'
+              });
+              claimIssue = created.data;
+            }
+
+            core.setOutput('issue_number', String(claimIssue.number));
             core.setOutput('batch_sha256', batch);
 
       - name: Materialize receiver authorization
