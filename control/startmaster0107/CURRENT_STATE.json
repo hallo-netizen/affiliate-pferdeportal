@@ -116,7 +116,9 @@
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ENTRANCE_RUN_35435850207_PASS",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_HARDLOCK_RUN_35435849529_PASS",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ACCEPTANCE_RUN_35435860769_PASS",
-    "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED"
+    "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED",
+    "TEXT_START_TARGET_CURRENT_CONCEPT_AGENT_1N_BINDING_PREPARED",
+    "UPSTREAM_REPAIR_FIXED_RETURN_LIMIT_REMOVED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -222,12 +224,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED_TEXT_START_LEGACY_RUNTIME_BINDING_OPEN",
+  "current_work_status": "CONCEPT_AGENT_TARGET_BINDING_AND_UNLIMITED_REPAIR_READY_CENTRAL_TEXT_START_SYNC_PENDING",
   "current_execution_blocker": {
-    "code": "TEXT_START_LEGACY_RUNTIME_BINDING_ACTIVE",
+    "code": "TEXT_START_CENTRAL_BINDING_PENDING",
     "error_class": true,
     "classification": "OPEN",
-    "detail": "The text-start receiver still selects control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json and invokes python3 isolated_system4/parent_start.py start-current-bound. That can select the legacy runtime batch instead of the current Concept Agent metadata batch.",
+    "detail": "The Pferdeatelier receiver is now bound to CURRENT_STATE and the current hash-bound Concept Agent metadata snapshot, and the fixed upstream repair-return ceiling has been removed. The central hallo-netizen/text-start main binding still names the legacy parent_start command. Prepared correction: hallo-netizen/text-start PR #9.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -290,13 +292,14 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "REMOVE_TEXT_START_LEGACY_RUNTIME_BINDING",
-    "action": "Change only the existing text-start Pferdeatelier receiver so the current Concept Agent batch is selected from control/startmaster0107/CURRENT_STATE.json and its hash-bound concept_agent/current/PSERC_METADATA_SNAPSHOT.json. The Concept Agent path must no longer read control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json or invoke isolated_system4/parent_start.py start-current-bound as its batch selector. Preserve the existing text-start authorization proof, retry-until-MACHINE_READY rule, duplicate-start protection, protected-main checkout, no-publish rule, and all unchanged research/article quality and downstream LT 6.8 / PPM 6.7.9 / PSERC / ENDSTEMPEL rules. Then run positive and negative receiver tests. Do not create a new runner or alternate route.",
-    "why": "The single Current authority is now consolidated around the current 16-item metadata snapshot, but text-start still selects the legacy runtime inbox batch.",
+    "goal": "SYNC_CENTRAL_TEXT_START_BINDING",
+    "action": "Merge prepared hallo-netizen/text-start PR #9 so the central fixed Pferdeatelier start authorization names the same existing Concept Agent intake command as the target receiver. Do not change project selection, target repository, target workflow, free-parameter policy, content/quality authority, or publish authority. After merge, perform a freshness check and update CURRENT_STATE only to the resulting next action.",
+    "why": "The target repository no longer selects the legacy runtime batch and upstream repair no longer has a fixed return ceiling. The only remaining mismatch is the central text-start main binding, which still names the legacy parent_start command.",
     "forbidden": [
-      "start an article before this binding is corrected",
-      "use legacy 7-item runtime artifacts as Concept Agent authority",
-      "create a new workflow or runner",
+      "start an article before central binding matches the target",
+      "restore runtime_inbox as Concept Agent authority",
+      "restore a fixed upstream repair-return limit",
+      "create a new runner or alternate route",
       "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
       "publish"
     ]
@@ -520,6 +523,26 @@
     "final_wordpress_import_file_present": false,
     "publish_allowed": false,
     "chat_may_choose_action": false,
-    "first_open_blocker": "TEXT_START_LEGACY_RUNTIME_BINDING_ACTIVE"
+    "first_open_blocker": "TEXT_START_CENTRAL_BINDING_PENDING",
+    "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT"
+  },
+  "text_start_current_binding": {
+    "status": "TARGET_PREPARED_CENTRAL_PENDING",
+    "target_workflow_ref": ".github/workflows/text-start-pferdeatelier.yml",
+    "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
+    "metadata_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
+    "intake_entry_ref": "concept_agent/intake_bridge.py",
+    "batch_size_policy": "1..N_FROM_CURRENT_HASH_BOUND_SNAPSHOT",
+    "legacy_runtime_inbox_used": false,
+    "legacy_parent_start_used": false,
+    "central_text_start_pr": "hallo-netizen/text-start#9",
+    "publish_allowed": false
+  },
+  "upstream_repair_policy": {
+    "status": "NO_FIXED_RETURN_LIMIT",
+    "same_article_same_workspace": true,
+    "return_until_real_pass": true,
+    "fixed_maximum_returns": null,
+    "publish_allowed": false
   }
 }
