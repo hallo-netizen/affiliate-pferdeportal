@@ -155,6 +155,48 @@ def verify_checkpoint(binding: dict, state: dict) -> None:
         raise Blocked("CHECKPOINT_COUNT_MISMATCH")
     if state.get("publish_allowed") is not False:
         raise Blocked("CHECKPOINT_PUBLISH_INVALID")
+    drafts = state.get("drafts")
+    if not isinstance(drafts, list):
+        raise Blocked("CHECKPOINT_DRAFTS_INVALID")
+    seen = set()
+    for row in drafts:
+        if not isinstance(row, dict):
+            raise Blocked("CHECKPOINT_DRAFT_ROW_INVALID")
+        index = row.get("item_index")
+        if not isinstance(index, int) or isinstance(index, bool) or index < 0 or index >= binding["item_count"] or index in seen:
+            raise Blocked("CHECKPOINT_DRAFT_INDEX_INVALID")
+        seen.add(index)
+        item = binding["items"][index]
+        if row.get("plan_slot") != item["identity"]["plan_slot"]:
+            raise Blocked("CHECKPOINT_DRAFT_SLOT_MISMATCH")
+        content = row.get("content_utf8")
+        if not isinstance(content, str) or not content:
+            raise Blocked("CHECKPOINT_DRAFT_BYTES_NOT_DURABLE")
+        raw = content.encode("utf-8")
+        if hashlib.sha256(raw).hexdigest() != row.get("draft_sha256"):
+            raise Blocked("CHECKPOINT_DRAFT_HASH_MISMATCH")
+        if len(raw) != row.get("size_bytes"):
+            raise Blocked("CHECKPOINT_DRAFT_SIZE_MISMATCH")
+        revision = row.get("revision")
+        if not isinstance(revision, int) or isinstance(revision, bool) or revision < 1:
+            raise Blocked("CHECKPOINT_DRAFT_REVISION_INVALID")
+    completed = state.get("completed_items")
+    if not isinstance(completed, list):
+        raise Blocked("CHECKPOINT_COMPLETED_INVALID")
+    for pos, rec in enumerate(completed):
+        if not isinstance(rec, dict) or rec.get("item_index") != pos:
+            raise Blocked("CHECKPOINT_COMPLETED_ORDER_INVALID")
+        if pos not in seen:
+            raise Blocked("CHECKPOINT_COMPLETED_DRAFT_MISSING")
+        if rec.get("plan_slot") != binding["items"][pos]["identity"]["plan_slot"]:
+            raise Blocked("CHECKPOINT_COMPLETED_SLOT_MISMATCH")
+        row = _find_draft(state, pos)
+        if rec.get("draft_sha256") != row.get("draft_sha256") or rec.get("revision") != row.get("revision"):
+            raise Blocked("CHECKPOINT_COMPLETED_DRAFT_BINDING_MISMATCH")
+        if rec.get("lt68") != "PASS" or rec.get("ppm679") != "PASS":
+            raise Blocked("CHECKPOINT_COMPLETED_VALIDATORS_NOT_PASS")
+    if state.get("next_item_index") != len(completed):
+        raise Blocked("CHECKPOINT_SEQUENCE_GAP")
     if state.get("allowed_action") != expected_action(binding, state):
         raise Blocked("CHECKPOINT_ALLOWED_ACTION_MISMATCH")
 
