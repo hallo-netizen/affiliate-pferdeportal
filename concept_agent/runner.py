@@ -9,8 +9,6 @@ import os
 import re
 import subprocess
 import sys
-import urllib.error
-import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -203,86 +201,8 @@ def _sim_check(item: dict[str, Any], body: str, revision: int, force_repair: boo
     }
 
 
-def _extract_response_text(response: dict[str, Any]) -> str:
-    for row in response.get("output", []):
-        if not isinstance(row, dict) or row.get("type") != "message":
-            continue
-        for part in row.get("content", []):
-            if isinstance(part, dict) and part.get("type") in {"output_text", "text"} and isinstance(part.get("text"), str):
-                return part["text"]
-    raise Blocked("MODEL_OUTPUT_TEXT_MISSING")
-
-
-def _model_call(item: dict[str, Any], revision: int, current_body: str | None, findings: list[dict[str, Any]] | None) -> dict[str, Any]:
-    key = os.getenv("OPENAI_API_KEY", "").strip()
-    if not key:
-        raise Blocked("OPENAI_API_KEY_MISSING")
-    model = os.getenv("CONCEPT_AGENT_MODEL", "gpt-5.6-sol")
-    if revision == 1:
-        task = (
-            "Schreibe genau den gebundenen Artikel. Nutze ausschließlich BOUND_WORK. Keine Recherche, keine Tools, "
-            "keine Änderung an Metadaten, Quellen, Links oder Regeln. Gib nur body_html zurück."
-        )
-    else:
-        task = (
-            "Repariere ausschließlich denselben Artikel anhand FINDINGS. Keine neue Recherche und keine Änderung an "
-            "Metadaten, Quellen, Links oder Regeln. Gib den vollständigen korrigierten body_html zurück."
-        )
-    user_payload = {
-        "TASK": task,
-        "BOUND_WORK": item["opaque_bound_work"],
-        "ITEM_IDENTITY": {k: item[k] for k in ("item_index", "plan_slot", "title", "target_keyword", "category", "article_type")},
-        "CURRENT_BODY": current_body,
-        "FINDINGS": findings or [],
-    }
-    payload = {
-        "model": model,
-        "reasoning": {"effort": "medium"},
-        "input": [
-            {"role": "developer", "content": "Du bist nur der Schreibarbeiter. Du hast keinerlei Workflow-Steuerung. Halte den in BOUND_WORK enthaltenen system4_bound.authoring_contract, die gebundenen Fakten und exakt die gebundenen internen Links ein. Keine freie Recherche, keine Regeländerung. Antworte ausschließlich mit dem verlangten JSON."},
-            {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)},
-        ],
-        "text": {
-            "format": {
-                "type": "json_schema",
-                "name": "concept_agent_article",
-                "strict": True,
-                "schema": {
-                    "type": "object",
-                    "additionalProperties": False,
-                    "properties": {"body_html": {"type": "string"}},
-                    "required": ["body_html"],
-                },
-            }
-        },
-    }
-    req = urllib.request.Request(
-        "https://api.openai.com/v1/responses",
-        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-        headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=180) as response:
-            result = json.loads(response.read())
-    except urllib.error.HTTPError as exc:
-        raise Blocked("MODEL_HTTP_ERROR:" + str(exc.code)) from exc
-    except Exception as exc:
-        raise Blocked("MODEL_CALL_FAILED") from exc
-    try:
-        parsed = json.loads(_extract_response_text(result))
-    except Exception as exc:
-        raise Blocked("MODEL_JSON_INVALID") from exc
-    body = parsed.get("body_html") if isinstance(parsed, dict) else None
-    if not isinstance(body, str) or not body.strip():
-        raise Blocked("MODEL_BODY_EMPTY")
-    return {
-        "item_index": item["item_index"],
-        "plan_slot": item["plan_slot"],
-        "body_html": body,
-        "revision": revision,
-        "used_bound_work_sha256": item["opaque_bound_work_sha256"],
-    }
+def _model_call(*args, **kwargs):
+    raise Blocked("DIRECT_MODEL_API_ROUTE_REMOVED_USE_EXISTING_107007")
 
 
 def _external_check(
@@ -338,10 +258,7 @@ def execute(binding: dict[str, Any], outdir: Path, mode: str, force_repair_index
     completed: set[int] = set()
     checker_cmd = os.getenv("CONCEPT_AGENT_CHECKER_CMD", "").strip()
     if mode == "production":
-        if not os.getenv("OPENAI_API_KEY", "").strip():
-            raise Blocked("OPENAI_API_KEY_MISSING")
-        if not checker_cmd:
-            raise Blocked("CONCEPT_AGENT_CHECKER_CMD_MISSING")
+        raise Blocked("DIRECT_MODEL_API_ROUTE_REMOVED_USE_EXISTING_107007")
 
     for item in run["items"]:
         idx = item["item_index"]
