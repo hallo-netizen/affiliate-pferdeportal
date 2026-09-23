@@ -55,4 +55,5 @@ jobs:
           path: |
             CATEGORY_INTEGRATION_HOBBYRAUM/out/current_audit.json
             /tmp/category-baseline.log
+            /tmp/ppm679.zip
           if-no-files-found: error
