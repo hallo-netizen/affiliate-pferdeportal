@@ -1,6 +1,13 @@
 {
   "contract": "PFERDE_ATELIER_CURRENT_STARTMASTER_POINTER_V2",
   "startmaster": "STARTMASTER0107",
+  "active_start_authority": "TEXT_START_ONLY",
+  "active_start_repository": "hallo-netizen/text-start",
+  "active_start_request": "START:pferdeatelier",
+  "active_project_entry_ref": "concept_agent/CONTROL_ENTRY_POINTER.json",
+  "current_batch_binding": "RUN_TIME_FROM_CURRENT_METADATA_SNAPSHOT_1_TO_N",
+  "legacy_startmaster_navigation_authority": false,
+  "legacy_runtime_inbox_start_authority": false,
   "root_ref": "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
   "state_ref": "control/startmaster0107/CURRENT_STATE.json",
   "gate_ref": "control/single-door-boundary/project_single_door_entry_v2.py",
@@ -16,5 +23,6 @@
   "chat_project_result_authority": "NONE",
   "api_required": false,
   "local_codex_required": false,
-  "hard_worker": "CODEX_CLOUD"
+  "hard_worker": "CODEX_CLOUD",
+  "legacy_fields_below_compatibility_only": true
 }
