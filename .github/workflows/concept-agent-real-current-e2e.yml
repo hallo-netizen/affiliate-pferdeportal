@@ -1,0 +1,79 @@
+name: Concept Agent Real Current E2E
+
+on:
+  push:
+    branches:
+      - 'hobbyroom/system4a-startgate-test-20260914'
+    paths:
+      - 'concept_agent/intake_bridge.py'
+      - 'concept_agent/runner.py'
+      - 'concept_agent/tests/real_current_e2e_driver.py'
+      - '.github/workflows/concept-agent-real-current-e2e.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-current-one:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prove exact chat snapshot fixture
+        run: |
+          set -euo pipefail
+          test -f concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json
+          echo '3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761  concept_agent/tests/fixtures/CHAT_SOURCE_EXACT.json' | sha256sum -c -
+      - name: Compile modified production modules
+        run: python3 -m py_compile concept_agent/intake_bridge.py concept_agent/runner.py concept_agent/tests/real_current_e2e_driver.py
+      - name: Forbid simulated production path
+        run: |
+          set -euo pipefail
+          ! grep -n 'simulation_binding' concept_agent/tests/real_current_e2e_driver.py
+          ! grep -n '_sim_writer' concept_agent/tests/real_current_e2e_driver.py
+          ! grep -n '_sim_check' concept_agent/tests/real_current_e2e_driver.py
+      - name: Download hash-bound LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Require real writer secret
+        run: test -n "${OPENAI_API_KEY:-}"
+      - name: Run one uninterrupted real current article chain
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/concept-agent-real-e2e
+          python3 concept_agent/tests/real_current_e2e_driver.py | tee /tmp/concept-agent-real-e2e.console.txt
+          test -f /tmp/concept-agent-real-e2e/CONCEPT_AGENT_REAL_CURRENT1_E2E_PROOF_V1.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/concept-agent-real-e2e/CONCEPT_AGENT_REAL_CURRENT1_E2E_PROOF_V1.json'))
+          assert x['status']=='PASS'
+          assert x['item_count']==1
+          assert x['languagetool']['status']=='PASS'
+          assert x['ppm']['status']=='PASS'
+          assert x['final_file_count']==1
+          assert x['simulation_binding_used'] is False
+          assert x['fake_checker_used'] is False
+          assert x['publish_allowed'] is False
+          print('CONCEPT_AGENT_REAL_CURRENT1_E2E_PASS')
+          PY
+      - name: Upload exact proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: concept-agent-real-current-e2e-${{ github.sha }}
+          path: |
+            /tmp/concept-agent-real-e2e/
+            /tmp/concept-agent-real-e2e.console.txt
+          if-no-files-found: warn
+          retention-days: 7
