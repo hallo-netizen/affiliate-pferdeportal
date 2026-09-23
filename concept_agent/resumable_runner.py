@@ -257,10 +257,7 @@ def execute_resumable(
     run = runner.normalize_binding(binding)
     outdir.mkdir(parents=True, exist_ok=True)
     if mode == "production":
-        if not os.getenv("OPENAI_API_KEY", "").strip():
-            raise runner.Blocked("OPENAI_API_KEY_MISSING")
-        if not os.getenv("CONCEPT_AGENT_CHECKER_CMD", "").strip():
-            raise runner.Blocked("CONCEPT_AGENT_CHECKER_CMD_MISSING")
+        raise runner.Blocked("DIRECT_MODEL_API_ROUTE_REMOVED_USE_EXISTING_107007")
 
     resumed = resume_state is not None
     state = validate_state(resume_state, run, binding_file_sha256) if resumed else initial_state(run, binding_file_sha256)
