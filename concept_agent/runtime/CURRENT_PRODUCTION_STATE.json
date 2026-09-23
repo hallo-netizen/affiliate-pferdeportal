@@ -1,27 +1,9 @@
 {
-  "contract": "CONCEPT_AGENT_DURABLE_RUNTIME_STATE_V2",
-  "repository": "hallo-netizen/affiliate-pferdeportal",
-  "state_branch": "concept-agent-runtime-state",
-  "state_path": "concept_agent/runtime/CURRENT_PRODUCTION_STATE.json",
-  "issue_number": 382,
+  "contract": "CONCEPT_AGENT_RUNTIME_STATE_TOMBSTONE_V1",
+  "status": "SUPERSEDED_NOT_AUTHORITY",
   "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-  "item_count": 16,
-  "machine_ready_run_id": 35909503205,
-  "machine_ready_comment_id": 5801466924,
-  "sequence": 0,
-  "previous_state_sha256": null,
-  "research_refs": [],
-  "production_binding_sha256": null,
-  "checkpoint_sha256": null,
-  "event_refs": [],
-  "status": "IN_PROGRESS",
-  "next_action": {
-    "action": "RESEARCH_ITEM",
-    "item_index": 0
-  },
-  "chat_may_choose_action": false,
-  "chat_may_write_state": false,
-  "second_text_start_allowed": false,
-  "publish_allowed": false,
-  "state_sha256": "0f9328e0574388983a67b487d183480b858ac2328b9629d5e1b543333ea3399c"
+  "superseded_by": "concept_agent/durable_event_log.py",
+  "authority": "NONE",
+  "reason": "The worker-auth/runtime-file design was rejected because production durability must not depend on GH_TOKEN, git push, git remote, or a chat-written progress mirror. Live progress is derived only from the fixed MACHINE_READY anchor plus bot-authored append-only durable events bound by CURRENT_STATE.",
+  "publish_allowed": false
 }
