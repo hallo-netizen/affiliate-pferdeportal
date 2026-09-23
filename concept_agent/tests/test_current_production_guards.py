@@ -9,41 +9,12 @@ HERE = Path(__file__).resolve().parents[1]
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
-import durable_state
+import durable_event_log
 import full_workflow_gate
 import intake_bridge
 import production_bridge
 import progress_guard
 import universal_reentry_guard
-
-
-class MemoryDurableBackend:
-    """Test-only backend. Production has no CLI/backend selector."""
-
-    def __init__(self, box):
-        self.box = box
-
-    def load(self):
-        state = json.loads(json.dumps(self.box["state"]))
-        durable_state.verify(state)
-        raw = (json.dumps(state, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-        return {
-            "state": state,
-            "raw": raw,
-            "head_sha": self.box["head_sha"],
-            "blob_sha": hashlib.sha1(raw).hexdigest(),
-        }
-
-    def write(self, state, expected_head_sha):
-        if expected_head_sha != self.box["head_sha"]:
-            raise durable_state.Blocked("DURABLE_STATE_BRANCH_MOVED")
-        durable_state.verify(state)
-        self.box["sequence"] += 1
-        self.box["state"] = json.loads(json.dumps(state))
-        self.box["head_sha"] = hashlib.sha1(
-            f"head-{self.box['sequence']}".encode()
-        ).hexdigest()
-        return self.load()
 
 
 class CurrentProductionGuardTests(unittest.TestCase):
@@ -333,163 +304,129 @@ class CurrentProductionGuardTests(unittest.TestCase):
         result = progress_guard.resume(binding, state, decision)
         self.assertEqual(result["allowed_action"]["action"], "STOP")
 
-    def _durable_box(self, binding):
-        bootstrap = durable_state.seal({
-            "contract": durable_state.CONTRACT,
-            "repository": durable_state.REPOSITORY,
-            "state_branch": durable_state.BRANCH,
-            "state_path": durable_state.STATE_PATH,
-            "batch_sha256": binding["batch_sha256"],
-            "item_count": binding["item_count"],
-            "machine_ready": {
-                "run_id": 1,
-                "issue_number": 1,
-                "source_run_id": 1,
-                "second_text_start_allowed": False,
-            },
-            "status": "WAITING_FOR_RESEARCH_BOUND",
-            "phase": "RESEARCH_BOUND_REQUIRED",
-            "next_action": "RUN_EXISTING_RESEARCH_FOR_CURRENT_BATCH",
-            "production_binding": None,
-            "checkpoint": None,
-            "chat_may_choose_action": False,
-            "chat_may_write_state": False,
-            "publish_allowed": False,
-            "source_main_sha": "0" * 40,
-            "note": "test",
-        })
+    def _event_current(self, binding, state, sequence, previous):
         return {
-            "state": bootstrap,
-            "head_sha": hashlib.sha1(b"head-0").hexdigest(),
-            "sequence": 0,
+            "status": "IN_PROGRESS",
+            "batch_sha256": binding["batch_sha256"],
+            "sequence": sequence,
+            "last_event_sha256": previous,
+            "allowed_action": progress_guard.expected_action(binding, state),
+            "publish_allowed": False,
         }
 
-    def test_interruption_after_write_resumes_from_external_durable_state(self):
+    def test_interruption_after_draft_replays_from_external_event_only(self):
         binding = self._binding()
-        state = self._checkpoint(binding)
-        box = self._durable_box(binding)
-        first_worker = MemoryDurableBackend(box)
-        durable_state.activate_production(binding, state, first_worker)
+        initial = self._checkpoint(binding)
+        anchor = hashlib.sha256(b"machine-ready-anchor").hexdigest()
+        current0 = self._event_current(binding, initial, 0, anchor)
+        event1 = durable_event_log.make_event(
+            current0,
+            current0["allowed_action"],
+            "UTF8_GZIP_BASE64",
+            b"exact-worker-one-draft",
+        )
 
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            draft = self._draft(root, binding, 0, "worker-one-bytes")
-            decision = self._decision(binding, state)
-            state2 = progress_guard.record_draft(
-                binding, state, decision, 0, draft
-            )
-            durable_state.persist_checkpoint_transition(
-                binding, state, state2, first_worker
-            )
-            expected_sha = state2["drafts"][0]["draft_sha256"]
-            draft.unlink()
+        # A new worker starts from the initial checkpoint and only the durable event.
+        resumed = durable_event_log.replay_production(binding, initial, [event1])
+        self.assertEqual(resumed["phase"], "LT68_REQUIRED")
+        self.assertEqual(resumed["next_item_index"], 0)
+        self.assertEqual(
+            resumed["drafts"][0]["content_utf8"],
+            "exact-worker-one-draft",
+        )
+        self.assertEqual(
+            resumed["drafts"][0]["draft_sha256"],
+            hashlib.sha256(b"exact-worker-one-draft").hexdigest(),
+        )
 
-            # New worker: no local predecessor state is reused.
-            second_worker = MemoryDurableBackend(box)
-            remote = second_worker.load()["state"]
-            self.assertEqual(remote["checkpoint"], state2)
-            self.assertEqual(
-                remote["next_action"]["action"],
-                "RUN_CHECKER",
-            )
-            decision2 = self._decision(binding, remote["checkpoint"])
-            restored = progress_guard.materialize_current_draft(
-                binding,
-                remote["checkpoint"],
-                decision2,
-                root / "restored",
-            )
-            restored_path = Path(restored["path"])
-            self.assertEqual(
-                progress_guard.file_sha(restored_path),
-                expected_sha,
-            )
-            self.assertEqual(
-                restored_path.read_text(encoding="utf-8"),
-                "worker-one-bytes",
-            )
+        # Replaying again in another fresh worker is byte-identical and deterministic.
+        resumed_again = durable_event_log.replay_production(binding, initial, [event1])
+        self.assertEqual(resumed_again, resumed)
 
-    def test_interruption_inside_repair_resumes_same_article_byte_exact(self):
+    def test_interruption_mid_repair_replays_same_article_and_repaired_bytes(self):
         binding = self._binding()
-        state0 = self._checkpoint(binding)
-        box = self._durable_box(binding)
-        worker1 = MemoryDurableBackend(box)
-        durable_state.activate_production(binding, state0, worker1)
+        initial = self._checkpoint(binding)
+        anchor = hashlib.sha256(b"machine-ready-anchor").hexdigest()
 
-        with tempfile.TemporaryDirectory() as td:
-            root = Path(td)
-            draft = self._draft(root, binding, 0, "before-repair")
-            decision0 = self._decision(binding, state0)
-            state1 = progress_guard.record_draft(
-                binding, state0, decision0, 0, draft
-            )
-            durable_state.persist_checkpoint_transition(
-                binding, state0, state1, worker1
-            )
+        current0 = self._event_current(binding, initial, 0, anchor)
+        event1 = durable_event_log.make_event(
+            current0,
+            current0["allowed_action"],
+            "UTF8_GZIP_BASE64",
+            b"before-repair",
+        )
+        state1 = durable_event_log.replay_production(binding, initial, [event1])
+        draft_sha = state1["drafts"][0]["draft_sha256"]
 
-            sha1 = progress_guard.file_sha(draft)
-            decision1 = self._decision(binding, state1)
-            state2 = progress_guard.record_check(
-                binding,
-                state1,
-                decision1,
-                0,
-                "LT68",
-                {
-                    "status": "REPAIR_REQUIRED",
-                    "content_sha256": sha1,
-                    "findings": [{"code": "x"}],
-                },
-                draft,
-            )
-            durable_state.persist_checkpoint_transition(
-                binding, state1, state2, worker1
-            )
+        current1 = self._event_current(
+            binding, state1, 1, event1["event_sha256"]
+        )
+        finding = {
+            "status": "REPAIR_REQUIRED",
+            "content_sha256": draft_sha,
+            "findings": [{"code": "x"}],
+        }
+        event2 = durable_event_log.make_event(
+            current1,
+            current1["allowed_action"],
+            "JSON_GZIP_BASE64",
+            durable_event_log.canon(finding),
+        )
 
-            # Worker dies exactly while article 0 is waiting for repair.
-            worker2 = MemoryDurableBackend(box)
-            remote2 = worker2.load()["state"]
-            self.assertEqual(remote2["phase"], "REPAIR_REQUIRED")
-            self.assertEqual(remote2["next_action"]["action"], "REPAIR_DRAFT")
-            self.assertEqual(remote2["next_action"]["item_index"], 0)
+        # Fresh worker: the durable chain alone reconstructs REPAIR_REQUIRED.
+        repair_state = durable_event_log.replay_production(
+            binding, initial, [event1, event2]
+        )
+        self.assertEqual(repair_state["phase"], "REPAIR_REQUIRED")
+        self.assertEqual(repair_state["next_item_index"], 0)
+        self.assertEqual(
+            progress_guard.expected_action(binding, repair_state)["action"],
+            "REPAIR_DRAFT",
+        )
 
-            decision2 = self._decision(binding, remote2["checkpoint"])
-            draft.write_text("after-repair", encoding="utf-8")
-            state3 = progress_guard.replace_draft(
-                binding,
-                remote2["checkpoint"],
-                decision2,
-                0,
-                draft,
-            )
-            durable_state.persist_checkpoint_transition(
-                binding,
-                remote2["checkpoint"],
-                state3,
-                worker2,
-            )
-            expected_sha = state3["drafts"][0]["draft_sha256"]
-            draft.unlink()
+        current2 = self._event_current(
+            binding, repair_state, 2, event2["event_sha256"]
+        )
+        event3 = durable_event_log.make_event(
+            current2,
+            current2["allowed_action"],
+            "UTF8_GZIP_BASE64",
+            b"after-repair",
+        )
 
-            # A third worker must recover the repaired bytes and stay on item 0.
-            worker3 = MemoryDurableBackend(box)
-            remote3 = worker3.load()["state"]
-            self.assertEqual(remote3["next_action"]["action"], "RUN_CHECKER")
-            self.assertEqual(remote3["next_action"]["checker"], "LT68")
-            self.assertEqual(remote3["next_action"]["item_index"], 0)
-            decision3 = self._decision(binding, remote3["checkpoint"])
-            restored = progress_guard.materialize_current_draft(
-                binding,
-                remote3["checkpoint"],
-                decision3,
-                root / "restored-repair",
-            )
-            restored_path = Path(restored["path"])
-            self.assertEqual(progress_guard.file_sha(restored_path), expected_sha)
-            self.assertEqual(
-                restored_path.read_text(encoding="utf-8"),
-                "after-repair",
-            )
+        # Another fresh worker reconstructs the repaired draft and returns to LT68.
+        repaired = durable_event_log.replay_production(
+            binding, initial, [event1, event2, event3]
+        )
+        next_action = progress_guard.expected_action(binding, repaired)
+        self.assertEqual(repaired["phase"], "LT68_REQUIRED")
+        self.assertEqual(repaired["next_item_index"], 0)
+        self.assertEqual(next_action["action"], "RUN_CHECKER")
+        self.assertEqual(next_action["checker"], "LT68")
+        self.assertEqual(repaired["drafts"][0]["content_utf8"], "after-repair")
+        self.assertEqual(
+            repaired["drafts"][0]["revision"],
+            2,
+        )
+
+    def test_durable_event_payload_tamper_is_blocked(self):
+        binding = self._binding()
+        initial = self._checkpoint(binding)
+        anchor = hashlib.sha256(b"machine-ready-anchor").hexdigest()
+        current0 = self._event_current(binding, initial, 0, anchor)
+        event = durable_event_log.make_event(
+            current0,
+            current0["allowed_action"],
+            "UTF8_GZIP_BASE64",
+            b"original",
+        )
+        broken = json.loads(json.dumps(event))
+        broken["payload_sha256"] = "0" * 64
+        with self.assertRaisesRegex(
+            durable_event_log.Blocked,
+            "DURABLE_EVENT_PAYLOAD_INTEGRITY_FAIL",
+        ):
+            durable_event_log.payload_text(broken)
 
     def test_missing_or_wrong_checkpoint_stops_before_decision(self):
         binding = self._binding()
