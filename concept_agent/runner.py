@@ -522,6 +522,8 @@ def main(argv: list[str] | None = None) -> int:
     run.add_argument("--out", required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == "check":
+            return checker_stdio()
         if args.command.startswith("simulate-"):
             return run_simulation(args.command, Path(args.out))
         path = Path(args.binding)
