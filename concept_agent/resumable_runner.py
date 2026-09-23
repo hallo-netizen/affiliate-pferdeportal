@@ -299,6 +299,8 @@ def execute_resumable(
                 "body_html": body,
                 "body_sha256": body_sha,
                 "findings": [],
+                "previous_body_html": None,
+                "prior_findings": [],
             }
             state["phase"] = "DRAFTED"
             state["event_log"].append({"event": "DRAFT", "item_index": idx, "revision": 1, "body_sha256": body_sha})
@@ -333,6 +335,8 @@ def execute_resumable(
                 "body_html": body,
                 "body_sha256": body_sha,
                 "findings": [],
+                "previous_body_html": cur["body_html"],
+                "prior_findings": findings,
             }
             state["phase"] = "DRAFTED"
             state["event_log"].append({"event": "DRAFT", "item_index": idx, "revision": revision, "body_sha256": body_sha})
@@ -350,7 +354,15 @@ def execute_resumable(
             result = runner._sim_check(item, body, revision, force_repair_index == idx)
         else:
             checker_cmd = os.getenv("CONCEPT_AGENT_CHECKER_CMD", "").strip()
-            result = runner._external_check(checker_cmd, item, body, revision)
+            result = runner._external_check(
+                checker_cmd,
+                item,
+                body,
+                revision,
+                batch_sha256=run["batch_sha256"],
+                previous_body_html=cur.get("previous_body_html"),
+                prior_findings=cur.get("prior_findings") if isinstance(cur.get("prior_findings"), list) else [],
+            )
         state["event_log"].append({
             "event": "CHECK",
             "item_index": idx,
