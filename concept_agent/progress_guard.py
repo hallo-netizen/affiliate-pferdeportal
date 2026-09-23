@@ -6,6 +6,8 @@ from pathlib import Path
 
 BINDING_CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
 CHECKPOINT_CONTRACT = "CONCEPT_AGENT_CURRENT_PROGRESS_V1"
+BATCH_STAGE_RESULT_CONTRACT = "CONCEPT_AGENT_BOUND_BATCH_STAGE_RESULT_V1"
+REENTRY_GATE = "CONCEPT_AGENT_UNIVERSAL_REENTRY_CHECKPOINT_V1"
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 
 class Blocked(RuntimeError):
@@ -61,6 +63,14 @@ def _find_draft(state: dict, index: int) -> dict:
         raise Blocked(f"DRAFT_MANIFEST_ITEM_INVALID:{index}")
     return matches[0]
 
+def _gated(action: dict) -> dict:
+    out = dict(action)
+    out["reentry_gate"] = REENTRY_GATE
+    out["canonical_bound_worker_only"] = True
+    out["free_chat_execution"] = False
+    out["fallback_route"] = "STOP"
+    return out
+
 def expected_action(binding: dict, state: dict) -> dict:
     phase = str(state.get("phase") or "")
     index = state.get("next_item_index")
@@ -69,27 +79,27 @@ def expected_action(binding: dict, state: dict) -> dict:
         raise Blocked("CHECKPOINT_INDEX_INVALID")
     if phase == "AUTHORING_REQUIRED":
         item = _binding_item(binding, index)
-        return {
+        return _gated({
             "action": "WRITE_DRAFT",
             "item_index": index,
             "plan_slot": item["identity"]["plan_slot"],
-        }
+        })
     if phase == "LT68_REQUIRED":
         row = _find_draft(state, index)
-        return {
+        return _gated({
             "action": "RUN_CHECKER",
             "checker": "LT68",
             "item_index": index,
             "draft_sha256": row["draft_sha256"],
-        }
+        })
     if phase == "PPM679_REQUIRED":
         row = _find_draft(state, index)
-        return {
+        return _gated({
             "action": "RUN_CHECKER",
             "checker": "PPM679",
             "item_index": index,
             "draft_sha256": row["draft_sha256"],
-        }
+        })
     if phase == "REPAIR_REQUIRED":
         row = _find_draft(state, index)
         current = state.get("current_item")
@@ -98,20 +108,34 @@ def expected_action(binding: dict, state: dict) -> dict:
         checker = str(current.get("checker") or "")
         if checker not in {"LT68", "PPM679"}:
             raise Blocked("REPAIR_CHECKER_INVALID")
-        return {
+        return _gated({
             "action": "REPAIR_DRAFT",
             "item_index": index,
             "checker": checker,
             "draft_sha256": row["draft_sha256"],
             "finding_sha256": current.get("finding_sha256"),
-        }
+        })
     if phase == "ALL_ARTICLES_LT_PPM_PASS":
         if index != count or state.get("status") != "PASS":
             raise Blocked("COMPLETE_CHECKPOINT_INVALID")
-        return {
+        return _gated({
             "action": "RUN_PSERC",
             "item_count": count,
-        }
+        })
+    if phase == "PSERC_PASS_ENDSTEMPEL_REQUIRED":
+        if index != count:
+            raise Blocked("PSERC_PASS_INDEX_INVALID")
+        return _gated({
+            "action": "RUN_ENDSTEMPEL",
+            "item_count": count,
+        })
+    if phase == "ENDSTEMPEL_PASS_STOP":
+        if index != count or state.get("status") != "PASS":
+            raise Blocked("ENDSTEMPEL_STOP_STATE_INVALID")
+        return _gated({
+            "action": "STOP",
+            "reason": "BATCH_COMPLETE_ENDSTEMPEL_PASS",
+        })
     raise Blocked("CHECKPOINT_PHASE_NOT_RESUMABLE:" + phase)
 
 def verify_checkpoint(binding: dict, state: dict) -> None:
@@ -286,6 +310,47 @@ def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> d
     }
     return _seal_new_state(binding, state, out)
 
+def _validate_batch_stage_result(state: dict, stage: str, result: dict) -> None:
+    if result.get("contract") != BATCH_STAGE_RESULT_CONTRACT:
+        raise Blocked("BATCH_STAGE_RESULT_CONTRACT_INVALID")
+    if result.get("stage") != stage:
+        raise Blocked("BATCH_STAGE_RESULT_STAGE_MISMATCH")
+    if result.get("status") != "PASS":
+        raise Blocked("BATCH_STAGE_RESULT_NOT_PASS")
+    if result.get("batch_sha256") != state.get("batch_sha256"):
+        raise Blocked("BATCH_STAGE_RESULT_BATCH_MISMATCH")
+    if result.get("source_checkpoint_sha256") != state.get("checkpoint_sha256"):
+        raise Blocked("BATCH_STAGE_RESULT_CHECKPOINT_MISMATCH")
+    if result.get("publish_allowed") is not False:
+        raise Blocked("BATCH_STAGE_RESULT_PUBLISH_INVALID")
+    evidence = str(result.get("evidence_sha256") or "")
+    if not SHA_RE.fullmatch(evidence):
+        raise Blocked("BATCH_STAGE_RESULT_EVIDENCE_HASH_INVALID")
+
+def record_batch_stage(binding: dict, state: dict, stage: str, result: dict) -> dict:
+    verify_checkpoint(binding, state)
+    stage = stage.upper()
+    action = state["allowed_action"]
+    if stage == "PSERC":
+        if action.get("action") != "RUN_PSERC" or state.get("phase") != "ALL_ARTICLES_LT_PPM_PASS":
+            raise Blocked("PSERC_NOT_ALLOWED")
+        _validate_batch_stage_result(state, stage, result)
+        out = json.loads(json.dumps(state))
+        out["phase"] = "PSERC_PASS_ENDSTEMPEL_REQUIRED"
+        out["status"] = "IN_PROGRESS"
+        out["pserc_result_sha256"] = stable(result)
+        return _seal_new_state(binding, state, out)
+    if stage == "ENDSTEMPEL":
+        if action.get("action") != "RUN_ENDSTEMPEL" or state.get("phase") != "PSERC_PASS_ENDSTEMPEL_REQUIRED":
+            raise Blocked("ENDSTEMPEL_NOT_ALLOWED")
+        _validate_batch_stage_result(state, stage, result)
+        out = json.loads(json.dumps(state))
+        out["phase"] = "ENDSTEMPEL_PASS_STOP"
+        out["status"] = "PASS"
+        out["endstempel_result_sha256"] = stable(result)
+        return _seal_new_state(binding, state, out)
+    raise Blocked("BATCH_STAGE_INVALID")
+
 def resume(binding: dict, state: dict) -> dict:
     verify_checkpoint(binding, state)
     return {
@@ -319,12 +384,17 @@ def main(argv: list[str]) -> int:
             binding, state = load(Path(argv[2])), load(Path(argv[3]))
             result = replace_draft(binding, state, int(argv[4]), Path(argv[5]))
             write(Path(argv[6]), result)
+        elif cmd == "record-batch-stage" and len(argv) == 7:
+            binding, state = load(Path(argv[2])), load(Path(argv[3]))
+            result = record_batch_stage(binding, state, argv[4], load(Path(argv[5])))
+            write(Path(argv[6]), result)
         else:
             raise Blocked(
                 "USE: progress_guard.py resume BINDING CHECKPOINT | "
                 "record-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
                 "record-check BINDING CHECKPOINT INDEX LT68|PPM679 RESULT_JSON DRAFT OUT | "
-                "replace-draft BINDING CHECKPOINT INDEX DRAFT OUT"
+                "replace-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
+                "record-batch-stage BINDING CHECKPOINT PSERC|ENDSTEMPEL RESULT_JSON OUT"
             )
         print(json.dumps({
             "status": result["phase"],
