@@ -1,4 +1,5 @@
 name: Known Error M01-M38 Exact Regression
+# rerun-m21-schema-aligned
 on:
   push:
     branches:
