@@ -70,6 +70,34 @@ Hart:
 
 Damit kann ein neuer Chat den Arbeitsstand weder aus Erinnerung rekonstruieren noch einen anderen Weg wählen.
 
-`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Danach bestimmen ausschließlich aktuelles Produktions-Binding, aktueller Fortschritts-Checkpoint und die daraus exakt abgeleitete Reentry-Entscheidung die Fortsetzung.
+## Dauerhafter Maschinenzustand nach MACHINE_READY
 
-`text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
+`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`.
+
+Nach `MACHINE_READY` gehört der laufende Arbeitszustand ausschließlich der Zentralmaschine. Fester Speicherort:
+
+- Branch: `runtime/concept-agent-current`
+- Datei: `concept_agent/runtime/CURRENT_PRODUCTION_STATE.json`
+- Vertrag: `CONCEPT_AGENT_DURABLE_RUNTIME_STATE_V1`
+
+Der Chat darf diesen Ort weder wählen noch beschreiben, überschreiben oder als neue Entscheidungsebene benutzen. Der Chat darf nur die Fortsetzung anstoßen. Die Maschine liest und prüft ihren Zustand selbst.
+
+Vor jeder Fortsetzung gilt zwingend:
+
+1. festen dauerhaften Zustand lesen;
+2. Hash, Batch, MACHINE_READY-Bindung und erlaubte Aktion prüfen;
+3. genau den gebundenen Schritt ausführen;
+4. vollständigen neuen Zustand **außerhalb des Workers** speichern;
+5. denselben gespeicherten Zustand erneut lesen und bytegenau prüfen;
+6. erst danach darf der nächste Worker starten.
+
+`concept_agent/production_bridge.py` aktiviert die Artikelproduktion erst, nachdem Produktions-Binding und initialer Checkpoint extern gespeichert und zurückgelesen wurden.
+
+`concept_agent/progress_guard.py` akzeptiert produktive Fortschritte nur noch als erfolgreich, wenn der neue Checkpoint zuerst im festen dauerhaften Zustand gespeichert und zurückgelesen wurde.
+
+Fehlt Schreib-/Lesezugriff auf diesen festen Zustand: **STOP**. Kein lokaler Ersatz, kein Chat-Recovery, keine Suche nach einem anderen Speicherort.
+
+Für den bereits MACHINE_READY befindlichen 16er-Batch gilt aktuell fail-closed:
+`RESEARCH_BOUND_REQUIRED`. Es wurde kein aktuelles dauerhaftes `CONCEPT_AGENT_RESEARCH_BOUND_V1` gefunden. Deshalb wird nichts aus alten Drafts, Recovery-Archiven oder Chat-Erinnerung rekonstruiert. Die Zentralmaschine muss für denselben Batch den vorhandenen freigegebenen Research-Schritt ausführen und danach den Produktionszustand binden.
+
+`text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert. Für denselben MACHINE_READY-Batch bleibt ein zweites `text-start` verboten.
