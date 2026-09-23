@@ -9,11 +9,41 @@ HERE = Path(__file__).resolve().parents[1]
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
+import durable_state
 import full_workflow_gate
 import intake_bridge
 import production_bridge
 import progress_guard
 import universal_reentry_guard
+
+
+class MemoryDurableBackend:
+    """Test-only backend. Production has no CLI/backend selector."""
+
+    def __init__(self, box):
+        self.box = box
+
+    def load(self):
+        state = json.loads(json.dumps(self.box["state"]))
+        durable_state.verify(state)
+        raw = (json.dumps(state, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        return {
+            "state": state,
+            "raw": raw,
+            "head_sha": self.box["head_sha"],
+            "blob_sha": hashlib.sha1(raw).hexdigest(),
+        }
+
+    def write(self, state, expected_head_sha):
+        if expected_head_sha != self.box["head_sha"]:
+            raise durable_state.Blocked("DURABLE_STATE_BRANCH_MOVED")
+        durable_state.verify(state)
+        self.box["sequence"] += 1
+        self.box["state"] = json.loads(json.dumps(state))
+        self.box["head_sha"] = hashlib.sha1(
+            f"head-{self.box['sequence']}".encode()
+        ).hexdigest()
+        return self.load()
 
 
 class CurrentProductionGuardTests(unittest.TestCase):
@@ -302,6 +332,164 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(decision["allowed_action"]["action"], "STOP")
         result = progress_guard.resume(binding, state, decision)
         self.assertEqual(result["allowed_action"]["action"], "STOP")
+
+    def _durable_box(self, binding):
+        bootstrap = durable_state.seal({
+            "contract": durable_state.CONTRACT,
+            "repository": durable_state.REPOSITORY,
+            "state_branch": durable_state.BRANCH,
+            "state_path": durable_state.STATE_PATH,
+            "batch_sha256": binding["batch_sha256"],
+            "item_count": binding["item_count"],
+            "machine_ready": {
+                "run_id": 1,
+                "issue_number": 1,
+                "source_run_id": 1,
+                "second_text_start_allowed": False,
+            },
+            "status": "WAITING_FOR_RESEARCH_BOUND",
+            "phase": "RESEARCH_BOUND_REQUIRED",
+            "next_action": "RUN_EXISTING_RESEARCH_FOR_CURRENT_BATCH",
+            "production_binding": None,
+            "checkpoint": None,
+            "chat_may_choose_action": False,
+            "chat_may_write_state": False,
+            "publish_allowed": False,
+            "source_main_sha": "0" * 40,
+            "note": "test",
+        })
+        return {
+            "state": bootstrap,
+            "head_sha": hashlib.sha1(b"head-0").hexdigest(),
+            "sequence": 0,
+        }
+
+    def test_interruption_after_write_resumes_from_external_durable_state(self):
+        binding = self._binding()
+        state = self._checkpoint(binding)
+        box = self._durable_box(binding)
+        first_worker = MemoryDurableBackend(box)
+        durable_state.activate_production(binding, state, first_worker)
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            draft = self._draft(root, binding, 0, "worker-one-bytes")
+            decision = self._decision(binding, state)
+            state2 = progress_guard.record_draft(
+                binding, state, decision, 0, draft
+            )
+            durable_state.persist_checkpoint_transition(
+                binding, state, state2, first_worker
+            )
+            expected_sha = state2["drafts"][0]["draft_sha256"]
+            draft.unlink()
+
+            # New worker: no local predecessor state is reused.
+            second_worker = MemoryDurableBackend(box)
+            remote = second_worker.load()["state"]
+            self.assertEqual(remote["checkpoint"], state2)
+            self.assertEqual(
+                remote["next_action"]["action"],
+                "RUN_CHECKER",
+            )
+            decision2 = self._decision(binding, remote["checkpoint"])
+            restored = progress_guard.materialize_current_draft(
+                binding,
+                remote["checkpoint"],
+                decision2,
+                root / "restored",
+            )
+            restored_path = Path(restored["path"])
+            self.assertEqual(
+                progress_guard.file_sha(restored_path),
+                expected_sha,
+            )
+            self.assertEqual(
+                restored_path.read_text(encoding="utf-8"),
+                "worker-one-bytes",
+            )
+
+    def test_interruption_inside_repair_resumes_same_article_byte_exact(self):
+        binding = self._binding()
+        state0 = self._checkpoint(binding)
+        box = self._durable_box(binding)
+        worker1 = MemoryDurableBackend(box)
+        durable_state.activate_production(binding, state0, worker1)
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            draft = self._draft(root, binding, 0, "before-repair")
+            decision0 = self._decision(binding, state0)
+            state1 = progress_guard.record_draft(
+                binding, state0, decision0, 0, draft
+            )
+            durable_state.persist_checkpoint_transition(
+                binding, state0, state1, worker1
+            )
+
+            sha1 = progress_guard.file_sha(draft)
+            decision1 = self._decision(binding, state1)
+            state2 = progress_guard.record_check(
+                binding,
+                state1,
+                decision1,
+                0,
+                "LT68",
+                {
+                    "status": "REPAIR_REQUIRED",
+                    "content_sha256": sha1,
+                    "findings": [{"code": "x"}],
+                },
+                draft,
+            )
+            durable_state.persist_checkpoint_transition(
+                binding, state1, state2, worker1
+            )
+
+            # Worker dies exactly while article 0 is waiting for repair.
+            worker2 = MemoryDurableBackend(box)
+            remote2 = worker2.load()["state"]
+            self.assertEqual(remote2["phase"], "REPAIR_REQUIRED")
+            self.assertEqual(remote2["next_action"]["action"], "REPAIR_DRAFT")
+            self.assertEqual(remote2["next_action"]["item_index"], 0)
+
+            decision2 = self._decision(binding, remote2["checkpoint"])
+            draft.write_text("after-repair", encoding="utf-8")
+            state3 = progress_guard.replace_draft(
+                binding,
+                remote2["checkpoint"],
+                decision2,
+                0,
+                draft,
+            )
+            durable_state.persist_checkpoint_transition(
+                binding,
+                remote2["checkpoint"],
+                state3,
+                worker2,
+            )
+            expected_sha = state3["drafts"][0]["draft_sha256"]
+            draft.unlink()
+
+            # A third worker must recover the repaired bytes and stay on item 0.
+            worker3 = MemoryDurableBackend(box)
+            remote3 = worker3.load()["state"]
+            self.assertEqual(remote3["next_action"]["action"], "RUN_CHECKER")
+            self.assertEqual(remote3["next_action"]["checker"], "LT68")
+            self.assertEqual(remote3["next_action"]["item_index"], 0)
+            decision3 = self._decision(binding, remote3["checkpoint"])
+            restored = progress_guard.materialize_current_draft(
+                binding,
+                remote3["checkpoint"],
+                decision3,
+                root / "restored-repair",
+            )
+            restored_path = Path(restored["path"])
+            self.assertEqual(progress_guard.file_sha(restored_path), expected_sha)
+            self.assertEqual(
+                restored_path.read_text(encoding="utf-8"),
+                "after-repair",
+            )
 
     def test_missing_or_wrong_checkpoint_stops_before_decision(self):
         binding = self._binding()
