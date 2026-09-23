@@ -2,74 +2,116 @@
 
 Diese Datei ist nur die Bürotür.
 
-## Einzige Current-Autorität
+## Einziger Einstieg
 
-`control/startmaster0107/CURRENT_STATE.json` auf dem geschützten `main`.
+Immer zuerst:
 
-Ablauf:
-1. `concept_agent/CONTROL_ENTRY_POINTER.json` lesen.
-2. Genau die dort genannte Current-Autorität lesen.
-3. Frischecheck nur auf Delta.
-4. Ausschließlich die eine dort gespeicherte `next_action` ausführen.
+`concept_agent/CONTROL_ENTRY_POINTER.json`
 
-Diese Datei enthält bewusst keine eigene Produktionsaktion und keine zweite Statuswahrheit.
+Der Pointer entscheidet die Phase **maschinell**. Der Chat darf sie nicht wählen.
 
-Nicht als Current-/Startautorität verwenden:
-- alte `control/startmaster0107/runtime_inbox/**`-Batchzustände,
-- historische Concept-Agent-Runner oder Produktionsworkflows,
-- alte Cross-Chat-Transportdateien oder Run-Requests,
-- historische Branches oder Protokolle.
+### Vor MACHINE_READY
 
-Recherche- und Artikelqualität, LanguageTool 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL bleiben unverändert. Kein Publish. Keine Alternativroute.
+Autorität bleibt unverändert:
 
-## Aktueller Produktionsanschluss nach gebundener Recherche
+`control/startmaster0107/CURRENT_STATE.json`
 
-Nach `CONCEPT_AGENT_RESEARCH_BOUND_V1` ausschließlich:
+`text-start` bleibt ausschließlich der Startknopf.
 
+### Nach MACHINE_READY
+
+Für den aktuellen Batch aus
+
+`concept_agent/current/PSERC_METADATA_SNAPSHOT.json`
+
+muss exakt ein GitHub-Issue
+
+`TEXT_START_BATCH_CLAIM:<batch_sha256>`
+
+existieren und darin exakt ein passender `TEXT_START_MACHINE_READY`-Beleg von
+`github-actions[bot]`.
+
+Sobald dieser Beleg existiert, ist ein zweites `text-start` verboten. Der veränderliche Produktionsfortschritt kommt danach **nicht mehr** aus `CURRENT_STATE.json`, sondern ausschließlich aus:
+
+`concept_agent/durable_event_log.py`
+
+Damit kann die alte Pre-MACHINE_READY-`next_action` in `CURRENT_STATE.json` nach einem erfolgreichen Start nicht wieder zur Produktionsentscheidung werden.
+
+## Dauerhaftes Zickzack-Protokoll
+
+Nach MACHINE_READY ist nur die append-only Ereigniskette im gebundenen Batch-Issue Fortschrittsautorität.
+
+Ein gültiger Arbeitsschritt ist ausschließlich ein
+`CONCEPT_AGENT_DURABLE_EVENT_V1`
+von
+`chatgpt-codex-connector[bot]`.
+
+Jedes Event bindet:
+- aktuellen Batch;
+- fortlaufende Sequenz;
+- Hash des vorherigen Events;
+- exakt die vorher maschinell erlaubte Aktion;
+- Ergebnisbytes bzw. Ergebnis-JSON;
+- SHA-256 und Bytegröße;
+- `publish_allowed=false`.
+
+Nicht-Bot-Kommentare werden ignoriert und sind niemals Autorität.
+
+Vor jeder produktiven Aktion muss `concept_agent/durable_event_log.py current`:
+1. den aktuellen Batch aus dem hashgebundenen PSERC-Metadaten-Snapshot ableiten;
+2. den exakten Batch-Claim finden;
+3. den MACHINE_READY-Botbeleg prüfen;
+4. die komplette Bot-Eventkette ab Event 1 hashverkettet wiederholen;
+5. Research-Bindung, Produktions-Binding und Fortschritts-Checkpoint deterministisch rekonstruieren;
+6. genau **eine** `allowed_action` ausgeben.
+
+Der Worker darf ausschließlich diese Aktion ausführen und muss das Ergebnis mit dem passenden `seal-*`-Befehl als nächstes Event ausgeben.
+
+Abbruchregel:
+- Abbruch vor neuem Bot-Event → letzter sicherer Zustand bleibt aktuell;
+- Abbruch nach neuem Bot-Event → ein neuer Worker rekonstruiert exakt daraus;
+- fehlendes, manipuliertes, mehrdeutiges oder lückenhaftes Bot-Event → **STOP**.
+
+Der Chat darf:
+- Fortsetzung anstoßen;
+- den maschinell abgeleiteten Zustand anzeigen.
+
+Der Chat darf nicht:
+- Stufe, Artikel, Prüfer oder Reparaturweg wählen;
+- Produktionsfortschritt behaupten;
+- ein autoritatives Event schreiben;
+- aus Chat-Erinnerung rekonstruieren;
+- alte Drafts/Recovery-Archive als NEW-Quelle verwenden;
+- einen Ersatzweg suchen.
+
+## Unveränderte Produktionsregeln
+
+Nach gebundener Recherche bleibt
 `concept_agent/production_bridge.py`
+die Produktionsbindung.
 
-Der Bridge bindet aus dem aktuellen Batch automatisch die vorhandenen Portal-Links und die vorhandene PPM-6.7.9-Qualitätsautorität. Während der Produktion werden Regeln und Links nicht frei gesucht oder neu gewählt.
+Der Fortschritt bleibt
+`concept_agent/progress_guard.py`
+unter
+`concept_agent/universal_reentry_guard.py`.
+
+Unverändert:
+- LanguageTool 6.8;
+- PPM 6.7.9;
+- bestehende Portal-Link-Bindungen;
+- PSERC;
+- ENDSTEMPEL;
+- Artikel-/Qualitätsregeln;
+- kein Publish.
 
 Hart verboten:
-- historische Produktionswege als Ausführungsweg,
-- alte oder Recovery-Artikel als Vorlage, Vergleich oder Produktionsquelle,
-- `pferde-atelier.de` und Subdomains als Recherchequelle,
-- freie Regelsuche während der Artikelproduktion,
-- freie Auswahl anderer interner Links.
+- historische Produktionswege;
+- alte oder Recovery-Artikel als Produktionsquelle;
+- `pferde-atelier.de` und Subdomains als Recherchequelle;
+- freie Regelsuche;
+- freie Linkwahl;
+- `GH_TOKEN`, `git push` oder `git remote` als Voraussetzung für Produktionsfortschritt;
+- zweites `text-start` nach MACHINE_READY desselben Batches;
+- Alternativroute.
 
-Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`.
-
-## Harte Wiedereinstiegsregel — überall
-
-Sobald derselbe Batch `MACHINE_READY` erreicht hat, muss **vor jeder Fortsetzung nach einer Unterbrechung** zuerst
-
-`concept_agent/universal_reentry_guard.py`
-
-aus dem aktuellen Produktions-Binding und dem aktuellen Fortschritts-Checkpoint eine exakte
-`CONCEPT_AGENT_UNIVERSAL_REENTRY_DECISION_V2` ableiten und verifizieren.
-
-Diese Entscheidung ist für jede weitere Produktionsaktion Pflicht. Ohne passende Entscheidung akzeptiert `progress_guard.py` weder Schreiben noch Prüfen, Reparieren, Wiederherstellen des aktuellen Textes, PSERC noch ENDSTEMPEL.
-
-Der Wiedereinstieg beginnt logisch immer bei Stufe 0 und darf ausschließlich bereits hashgebunden nachgewiesene Stufen überspringen. Der Chat darf weder Stufe noch Artikel auswählen.
-
-Aktuelle Textbytes werden zusammen mit SHA-256, Größe und Revision dauerhaft im Fortschritts-Checkpoint gespeichert. Bei einem Wiedereinstieg dürfen sie nur aus diesem Checkpoint bytegenau wiederhergestellt werden.
-
-Hart:
-- fehlender oder falscher Produktionscheckpoint: **STOP**,
-- fehlende oder falsche Reentry-Entscheidung: **STOP**,
-- falscher Batch, Binding, Artikel, Reihenfolge, Text-Hash, Revision oder Prüferzustand: **STOP**,
-- freie Chat-Ausführung: **verboten**,
-- freie Repository-Suche beim Wiedereinstieg: **verboten**,
-- freie Suche nach Prüferdateien/Binaries: **verboten**,
-- Alternativroute: **verboten**,
-- fehlt die kanonische Ausführungsumgebung: **STOP statt Suchen oder Improvisieren**,
-- Reparatur bleibt beim selben Artikel,
-- nächster Artikel erst nach LT-6.8- und PPM-6.7.9-PASS,
-- PSERC → ENDSTEMPEL → STOP bleibt gebunden,
-- nach `MACHINE_READY` desselben Batches kein zweites `text-start`.
-
-Damit kann ein neuer Chat den Arbeitsstand weder aus Erinnerung rekonstruieren noch einen anderen Weg wählen.
-
-`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Danach bestimmen ausschließlich aktuelles Produktions-Binding, aktueller Fortschritts-Checkpoint und die daraus exakt abgeleitete Reentry-Entscheidung die Fortsetzung.
-
-`text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
+Für den derzeit bereits MACHINE_READY befindlichen 16er-Batch existiert noch kein gültiges Produktions-Event. Deshalb leitet das Event-Gate aktuell ausschließlich `RESEARCH_ITEM` für Artikelindex 0 ab.
