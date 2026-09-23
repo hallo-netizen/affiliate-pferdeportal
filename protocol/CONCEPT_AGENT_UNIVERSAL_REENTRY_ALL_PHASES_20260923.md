@@ -30,3 +30,9 @@ Regressionspflicht:
 - Policy bleibt: keine freie Chat-/Repo-/Binary-/Alternativroute.
 
 PUBLISH: NO
+
+Nachholung Produktionsbindung:
+- `concept_agent/production_bridge.py` deklariert dieselbe V2-Wiedereinstiegspflicht jetzt ausdrücklich als Produktionspolicy;
+- universelle Reentry-Entscheidung vor jeder Aktion = Pflicht;
+- dauerhafte Draft-Bytes im Checkpoint = Pflicht;
+- keine neue Route und keine Qualitätsänderung.
