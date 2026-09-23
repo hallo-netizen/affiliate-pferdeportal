@@ -231,6 +231,19 @@ def build_work_binding(intake: dict, research_bound: dict, authoring: dict) -> d
         fids={str(s.get("source_id")) for s in fsources if isinstance(s,dict)}
         if not fids or not fids.issubset(rids):
             raise Blocked(f"AUTHORING_SOURCE_NOT_RESEARCH_BOUND:{idx}")
+        system4=Path(__file__).resolve().parent.parent/"isolated_system4"
+        if str(system4) not in sys.path:
+            sys.path.insert(0,str(system4))
+        import authoring_contract
+        source_snapshot_id=str(fact.get("source_snapshot_id") or "")
+        state={
+            "article":{k:meta[k] for k in EXACT_FIELDS},
+            "source_snapshot_sha256":source_snapshot_id,
+        }
+        try:
+            contract=authoring_contract.build(Path(__file__).resolve().parent.parent,state,fact,plan)
+        except Exception as exc:
+            raise Blocked(f"AUTHORING_CONTRACT_INVALID:{idx}:"+str(exc)) from exc
         work.append({
             "item_index":idx,
             "plan_slot":meta["plan_slot"],
@@ -248,6 +261,7 @@ def build_work_binding(intake: dict, research_bound: dict, authoring: dict) -> d
                 "internal_links":links,
                 "fact_pack":fact,
                 "production_plan_item":plan,
+                "authoring_contract":contract,
             },
         })
     out={
