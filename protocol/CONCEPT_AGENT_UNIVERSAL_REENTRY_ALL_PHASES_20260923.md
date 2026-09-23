@@ -11,7 +11,8 @@ Umgesetzt:
 - Wiederherstellung eines laufenden Textes ist nur bytegenau aus diesem Checkpoint erlaubt;
 - falsche/tampered Binding-, Checkpoint-, Decision-, Draft-, Reihenfolge- und Prüferzustände blockieren fail-closed;
 - freie Chat-Ausführung, freie Repository-Suche, freie Binär-/Prüfersuche und Alternativrouten sind verboten;
-- fehlt die kanonische Ausführungsumgebung: STOP;
+- die kanonische Ausführungsumgebung wird live durch `concept_agent/runtime_environment_guard.py` gegen die bestehende Runtime-Toolbox geprüft; LT 6.8, PPM 6.7.9 und PSERC müssen real vorhanden und hashgleich sein;
+- fehlt die kanonische Ausführungsumgebung oder weicht ein Runtime-Hash ab: STOP;
 - Artikelproduktion, PSERC, ENDSTEMPEL und finaler STOP liegen hinter derselben Reentry-Entscheidung;
 - text-start, Qualitätskern, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL und Publish-Regeln bleiben unverändert.
 
