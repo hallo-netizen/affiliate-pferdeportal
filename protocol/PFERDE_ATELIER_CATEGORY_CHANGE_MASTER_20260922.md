@@ -659,3 +659,23 @@ Diese Sektion ist nur Routing, **keine** zweite Status- oder NEXT-ACTION-Wahrhei
 5. Bei unveränderter Bindung keine Vollrekonstruktion; direkt `execution_state.bound_user_scope_action` innerhalb des kanonischen `authorized_next_action` ausführen.
 6. Bei neuem FAIL nur das Delta untersuchen und zuerst CURRENT nachziehen.
 
+
+## 14. HARD RULE – zentrale Pferdeportal-Kategorienquelle ab 2026-09-23
+
+Diese Regel ersetzt für den **Kategorieninhalt** jede ältere Formulierung, die interne Plugin-/PPM-Dateien als eigene Kategorieautorität lesen lässt.
+
+Verbindlich:
+- **Einzige Kategorien-Wahrheit:** `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv`.
+- Ausgangsquelle dieser Liste: aktueller WordPress-Export `pferdeatelier.WordPress.2026-09-23.xml`.
+- Bestand: **1160 WordPress-Kategorien**.
+- **Keine Automatik.**
+- **Kein Kategorieplugin.**
+- **Keine zweite Kategorienquelle.**
+- Bereits erbrachte Altbeweise werden nicht erneut vollständig durchgetestet.
+- Plugin-/PPM-interne Kategorienlisten dürfen nur notwendige technische **Ableitungen/Kopien** der zentralen Liste sein; sie besitzen keine eigene fachliche Autorität.
+- Bei künftiger Pluginarbeit wird nur das jeweilige Plugin gegen die zentrale Liste abgeglichen und nur dessen Delta geändert.
+- Änderungen an der zentralen Liste werden ausschließlich in `CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/AENDERUNGSPROTOKOLL.md` dokumentiert.
+
+### Fehler O – Kategorieverwaltung unnötig als Plugin/Automatik aufgebaut
+
+Der zwischenzeitliche Kandidat `PFERDEPORTAL_KATEGORIEN_V0.2.0_CANDIDATE_MIN.zip` und sein eigener Workflow waren zu komplex und widersprachen dem KISS-Ziel. Beide wurden entfernt. Verbleibend sind ausschließlich zentrale Liste + Änderungsprotokoll.

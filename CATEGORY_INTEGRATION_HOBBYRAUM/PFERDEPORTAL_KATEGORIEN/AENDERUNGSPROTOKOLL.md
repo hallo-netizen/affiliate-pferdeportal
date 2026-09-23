@@ -30,3 +30,10 @@ Bestand der aktuellen XML:
 
 Ab jetzt gilt:
 Jede spätere Kategorienänderung wird in `KATEGORIEN.tsv` eingetragen und hier protokolliert. Andere Plugins dürfen daraus nur ihren eigenen benötigten Stand ableiten; sie sind keine zweite Kategorienquelle.
+
+## 2026-09-23 – Steuerstand nachgezogen
+
+- `CURRENT_RELEASE.json` bindet die zentrale `KATEGORIEN.tsv` jetzt ausdrücklich als einzige Kategorien-Inhaltsquelle.
+- Die bestehende Kategorieakte wurde entsprechend präzisiert.
+- PPM-/Plugin-interne Kategorienbestände gelten nur noch als technische Ableitungen, nicht als zweite Wahrheit.
+- Keine Kategorie geändert.
