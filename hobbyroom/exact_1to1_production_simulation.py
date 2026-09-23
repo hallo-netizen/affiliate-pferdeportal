@@ -318,6 +318,13 @@ def execute_workspace(repo: Path, workspace: Path, worker: Path, env: dict, inde
                     p.write_text(after,encoding="utf-8")
                 else:
                     raise SimBlocked("SIM_WORKER_LT_REPAIR_NO_APPLICABLE_REPLACEMENT:"+json.dumps((s.get("checks") or {}).get("findings"),ensure_ascii=False))
+            if p.read_text(encoding="utf-8")==before:
+                raise SimBlocked("SIM_WORKER_REPAIR_UNCHANGED_DIAGNOSTIC:"+json.dumps({
+                    "checker":(s.get("checks") or {}).get("checker"),
+                    "findings":(s.get("checks") or {}).get("findings"),
+                    "last_error":s.get("last_error"),
+                    "revision":s.get("revision"),
+                },ensure_ascii=False,sort_keys=True))
             run([sys.executable,repo/"isolated_system4/controller.py","repair",workspace,p],cwd=repo,env=env)
         elif phase=="OUTPUT_GATE_REQUIRED":
             if (s.get("checks") or {}).get("status")!="PASS":
