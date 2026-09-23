@@ -210,7 +210,7 @@ def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, An
     if not body.startswith(EVENT_CONTRACT + "\n"):
         return None
     if _login(row) != TRUSTED_EVENT_AUTHOR:
-        raise Blocked("DURABLE_EVENT_AUTHOR_INVALID:" + str(row.get("id")))
+        return None
     line = body.splitlines()[1] if len(body.splitlines()) >= 2 else ""
     try:
         event = json.loads(line)
