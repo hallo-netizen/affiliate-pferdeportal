@@ -615,3 +615,47 @@ Zunächst wurden nur `complete-portal-category-source-v1.json`, kleiner Hierarch
 ### 12.8 Exakter nächster fachtechnischer Schritt
 
 **PPM 6.7.9 zuerst vollständig schließen:** aus dem exakt gebundenen Paket SHA `acbda93b…` einen ADD-only-Kandidaten für die 25 neuen Kategorien erzeugen, der die Voll-Kategoriequelle, den vollständigen Hierarchie-Snapshot und exakt 125 neue kanonische Slots konsistent nachzieht; alle abhängigen Self-/Binding-Hashes und Reconciliation-Counts deterministisch aktualisieren; danach lokaler/CI-Positiv-, Negativ- und Regressionstest. Keine WordPress-Schreiboperation.
+
+### Fehler M – CURRENT-Next-Action war nicht Guard-konform
+Frischecheck 2026-09-23:
+- Head `871a81dc0382c4bdad54eb3d30c493f7daa73535`
+- Workflow `Category Integration Hard Baseline`, Run `35826881075`: **FAIL**
+- exakter Fehler: `AFFILIATE_RELEASE_GUARD_BLOCKED:AUTHORIZED_NEXT_ACTION_INVALID`.
+
+Ursache:
+- `execution_state.authorized_next_action` enthielt den freien fachlichen Text `BUILD_AND_HARDTEST_PPM679_25_CATEGORY_ADD_125_SLOT_CANDIDATE`.
+- Der unveränderte Governance-Guard erlaubt dort ausschließlich die kanonischen Tokens `COMMIT_EXACT_V6638_21_FILE_SOURCE_TO_CANONICAL_ROOT`, `RUN_BOUND_RELEASE_GATES` oder `FINALIZE_RELEASE`.
+
+Korrektur:
+- `authorized_next_action` auf das Guard-konforme Token `RUN_BOUND_RELEASE_GATES` gesetzt.
+- Der **exakte fachliche nächste Schritt** bleibt ausschließlich in `execution_state.bound_user_scope_action` gebunden.
+- Der Guard selbst wurde nicht verändert.
+
+Prävention:
+- Bei jeder CURRENT-Änderung zuerst die zulässige Enum des unveränderten Guards prüfen.
+- Freie Fachbeschreibung nie in ein enum-gebundenes Governance-Feld schreiben.
+
+### Fehler N – alter PPA-013-Teilzielvertrag erzeugte Zielvertrags-Drift
+Frischecheck 2026-09-23:
+- `protocol/AFFILIATE_RELEASE_PPA013_CATEGORY_COMPLETION_TARGET_20260922.md` enthielt noch den historischen Scope „nur fünf Kategorietexte“.
+- Der inzwischen verbindliche Gesamtumfang lautet 5 Produktseiten + 25 Blattkategorien = 30 Knoten/30 Texte plus systemweite Propagation.
+
+Korrektur:
+- Die historische PPA-013-Datei ist ausdrücklich als **abgelöster Teilzielvertrag** markiert.
+- Verbindliche Zielquelle für diese Änderung ist ausschließlich Abschnitt **0A** dieser Datei.
+- `CURRENT_RELEASE.json.user_scope_lock.current_focus_scope_ref` zeigt auf diese zentrale Kategorieakte.
+
+Prävention:
+- Scope-Erweiterungen ändern die eine Zielautorität; alte Teilzielverträge bleiben nur Historie/Wegweiser und dürfen nicht parallel als aktueller Scope referenziert werden.
+
+## 13. Statischer Einstieg für einen neuen Chat
+
+Diese Sektion ist nur Routing, **keine** zweite Status- oder NEXT-ACTION-Wahrheit.
+
+1. `protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md` lesen, insbesondere Abschnitt 0A und Fehlerprotokoll.
+2. Danach ausschließlich `control/release-governance/CURRENT_RELEASE.json` als aktuelle Status-/Blocker-/NEXT-ACTION-Autorität lesen.
+3. Branch `affiliate-release-current` frisch gegen seinen Head prüfen.
+4. Den zu CURRENT gehörenden neuesten `Category Integration Hard Baseline`-Run prüfen.
+5. Bei unveränderter Bindung keine Vollrekonstruktion; direkt `execution_state.bound_user_scope_action` innerhalb des kanonischen `authorized_next_action` ausführen.
+6. Bei neuem FAIL nur das Delta untersuchen und zuerst CURRENT nachziehen.
+
