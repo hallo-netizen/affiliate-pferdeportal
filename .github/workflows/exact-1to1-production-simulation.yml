@@ -1,0 +1,141 @@
+name: Exact 1to1 Production Simulation
+
+on:
+  push:
+    branches:
+      - hobbyroom/exact-1to1-production-simulation-20260923
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-1to1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout simulation harness
+        uses: actions/checkout@v4
+        with:
+          path: harness
+
+      - name: Checkout exact current main production tree
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          path: prod
+
+      - name: Bind production checkout identity
+        working-directory: prod
+        shell: bash
+        run: |
+          set -euo pipefail
+          head="$(git rev-parse HEAD)"
+          main="$(git rev-parse origin/main)"
+          test "$head" = "$main"
+          echo "EXACT_MAIN_SHA=$head"
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Bind exact Python crypto runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --no-input 'cryptography==50.0.1'
+          python3 - <<'PY'
+          import cryptography
+          assert cryptography.__version__ == '50.0.1', cryptography.__version__
+          PY
+
+      - name: Materialize exact LanguageTool 6.8 runtime
+        shell: bash
+        working-directory: prod
+        run: |
+          set -euo pipefail
+          readarray -t meta < <(python3 - <<'PY'
+          import json
+          m=json.load(open('control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json',encoding='utf-8'))['languagetool']
+          print(m['inner_zip_sha256'])
+          print(m['inner_zip_size'])
+          print(m['commandline_jar_sha256'])
+          print(m['component_version'])
+          print(m['persistent_cache_root'])
+          print(m['source_url'])
+          PY
+          )
+          inner_sha="${meta[0]}"
+          inner_size="${meta[1]}"
+          jar_sha="${meta[2]}"
+          version="${meta[3]}"
+          cache_rel="${meta[4]}"
+          url="${meta[5]}"
+          cache="$HOME/$cache_rel"
+          zip="$cache/LanguageTool-$version.zip"
+          runtime="$cache/runtime-$inner_sha"
+          jar="$runtime/LanguageTool-$version/languagetool-commandline.jar"
+          mkdir -p "$cache"
+          if [ ! -f "$zip" ] || [ "$(stat -c%s "$zip")" != "$inner_size" ] || [ "$(sha256sum "$zip" | awk '{print $1}')" != "$inner_sha" ]; then
+            rm -f "$zip"
+            curl --fail --location --retry 3 "$url" -o "$zip"
+          fi
+          test "$(stat -c%s "$zip")" = "$inner_size"
+          echo "$inner_sha  $zip" | sha256sum -c -
+          if [ ! -f "$jar" ] || [ "$(sha256sum "$jar" | awk '{print $1}')" != "$jar_sha" ]; then
+            rm -rf "$runtime"
+            mkdir -p "$runtime"
+            unzip -q "$zip" -d "$runtime"
+          fi
+          echo "$jar_sha  $jar" | sha256sum -c -
+          echo "SYSTEM4_LANGUAGETOOL_JAR=$jar" >> "$GITHUB_ENV"
+
+      - name: Known-error regression matrix
+        working-directory: prod
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/startmaster0107/HOBBYRAUM_M01_M33_REGRESSION.py | tee /tmp/m01-m38.txt
+          grep -F 'GESAMT PASS' /tmp/m01-m38.txt
+
+      - name: Generic 1..N downstream negative contract
+        working-directory: prod
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 isolated_system4/downstream_1n_contract_probe.py | tee /tmp/downstream-1n.txt
+          grep -F 'SYSTEM4A_DOWNSTREAM_1N_CONTRACT_PROBE_OK' /tmp/downstream-1n.txt
+
+      - name: Run exact production-path simulation
+        shell: bash
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: ${{ env.SYSTEM4_LANGUAGETOOL_JAR }}
+        run: |
+          set -o pipefail
+          rm -rf /tmp/exact-1to1-output
+          mkdir -p /tmp/exact-1to1-output
+          python3 harness/hobbyroom/exact_1to1_production_simulation.py \
+            --repo prod \
+            --out /tmp/exact-1to1-output | tee /tmp/exact-1to1.log
+
+      - name: Upload exact simulation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exact-1to1-production-simulation-${{ github.run_id }}
+          path: |
+            /tmp/exact-1to1-output/
+            /tmp/exact-1to1.log
+            /tmp/m01-m38.txt
+            /tmp/downstream-1n.txt
+          if-no-files-found: warn
+          retention-days: 7
