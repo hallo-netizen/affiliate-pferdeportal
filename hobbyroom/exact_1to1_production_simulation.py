@@ -153,8 +153,8 @@ def localize_bound_sources(repo: Path):
             sentences=[]
             for n in range(1,15):
                 sentences.append(
-                    f"{title}: Prüfschritt {j+1}.{n} betrachtet {kw} im aktuellen gebundenen Simulationsfall; "
-                    f"Beobachtung {n} wird getrennt dokumentiert, auf erkennbare Abweichungen geprüft und vor der Nutzung erneut bestätigt."
+                    f"{title}: Quellenpfad {j+1} Prüfschritt {n} betrachtet {kw} im aktuellen gebundenen Simulationsfall; "
+                    f"Beobachtung aus Quelle {j+1} Nummer {n} wird getrennt dokumentiert, auf erkennbare Abweichungen geprüft und vor der Nutzung erneut bestätigt."
                 )
             name=f"item-{i}-source-{j}.html"
             (root/name).write_text(
