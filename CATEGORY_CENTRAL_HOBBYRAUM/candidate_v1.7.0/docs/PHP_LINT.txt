@@ -1,0 +1,10 @@
+No syntax errors detected in ./affiliate-portal-kategorie-workflow.php
+No syntax errors detected in ./includes/class-apkw-admin.php
+No syntax errors detected in ./includes/class-apkw-comparator.php
+No syntax errors detected in ./includes/class-apkw-dataforseo.php
+No syntax errors detected in ./includes/class-apkw-inventory.php
+No syntax errors detected in ./includes/class-apkw-research-evidence.php
+No syntax errors detected in ./includes/class-apkw-research.php
+No syntax errors detected in ./includes/class-apkw-settings.php
+No syntax errors detected in ./includes/class-apkw-validator.php
+No syntax errors detected in ./tests/run-tests.php

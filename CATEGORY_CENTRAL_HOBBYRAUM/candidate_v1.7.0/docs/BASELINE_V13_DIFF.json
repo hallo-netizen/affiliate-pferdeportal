@@ -1,0 +1,27 @@
+{
+  "audit": "BASELINE_V13_DIFF",
+  "status": "PASS",
+  "same_plugin_slug": "affiliate-portal-kategorie-workflow",
+  "same_plugin_line": true,
+  "unchanged_baseline_components": [
+    {
+      "file": "includes/class-apkw-settings.php",
+      "v13_sha256": "b7097a7419bdd3d77dad070ebf2ec0093c1dad99dc5ae5999274dd25b841a70d",
+      "v14_sha256": "b7097a7419bdd3d77dad070ebf2ec0093c1dad99dc5ae5999274dd25b841a70d",
+      "byte_identical": true
+    },
+    {
+      "file": "includes/class-apkw-inventory.php",
+      "v13_sha256": "e86e895ae0f9b66e5a40e0f32067bbe66d1e4e9d12d557b04d5d8c5b9e3ddfae",
+      "v14_sha256": "e86e895ae0f9b66e5a40e0f32067bbe66d1e4e9d12d557b04d5d8c5b9e3ddfae",
+      "byte_identical": true
+    },
+    {
+      "file": "includes/class-apkw-comparator.php",
+      "v13_sha256": "8c483ba9cf312da7e9a361e63ca6cb1c1e3fa9cd737b18c325ea771e651ad0d6",
+      "v14_sha256": "8c483ba9cf312da7e9a361e63ca6cb1c1e3fa9cd737b18c325ea771e651ad0d6",
+      "byte_identical": true
+    }
+  ],
+  "integration_scope": "DataForSEO gates, validation/evidence, admin workflow, schemas, tests, documentation; no parallel plugin"
+}

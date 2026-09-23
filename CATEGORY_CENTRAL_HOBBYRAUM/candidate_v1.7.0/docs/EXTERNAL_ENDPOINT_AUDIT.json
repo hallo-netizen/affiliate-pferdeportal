@@ -1,0 +1,14 @@
+{
+  "version": "1.6.1",
+  "allowed_endpoints": [
+    "/v3/appendix/user_data",
+    "/v3/dataforseo_labs/google/keyword_ideas/live",
+    "/v3/dataforseo_labs/google/keyword_overview/live"
+  ],
+  "found_urls": [
+    "https://api.dataforseo.com/v3/appendix/user_data",
+    "https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_ideas/live",
+    "https://api.dataforseo.com/v3/dataforseo_labs/google/keyword_overview/live"
+  ],
+  "pass": true
+}

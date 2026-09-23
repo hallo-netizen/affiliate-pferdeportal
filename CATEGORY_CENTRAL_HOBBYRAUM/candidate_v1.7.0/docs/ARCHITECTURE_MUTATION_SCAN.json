@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "files": [
+    {
+      "file": "affiliate-portal-kategorie-workflow.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-admin.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-comparator.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-dataforseo.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-inventory.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-research-evidence.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-research.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-settings.php",
+      "hits": []
+    },
+    {
+      "file": "includes/class-apkw-validator.php",
+      "hits": []
+    },
+    {
+      "file": "tests/run-tests.php",
+      "hits": []
+    }
+  ]
+}

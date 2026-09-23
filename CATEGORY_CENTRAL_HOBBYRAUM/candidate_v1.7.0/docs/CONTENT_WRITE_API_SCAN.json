@@ -1,0 +1,15 @@
+{
+  "version": "1.6.1",
+  "content_write_capability": false,
+  "forbidden_calls": {
+    "wp_insert_term": 0,
+    "wp_update_term": 0,
+    "wp_delete_term": 0,
+    "wp_insert_post": 0,
+    "wp_update_post": 0,
+    "wp_delete_post": 0,
+    "wp_set_object_terms": 0,
+    "wp_create_category": 0
+  },
+  "pass": true
+}
