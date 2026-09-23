@@ -176,7 +176,8 @@ jobs:
               --pointer project-main/control/startmaster0107/CONCEPT_AGENT_CURRENT_WORK_BINDING_POINTER.json \
               --current-state project-main/control/startmaster0107/CURRENT_STATE.json \
               --out /tmp/concept-agent-return/real16-current-negative
-            python3 control-branch/concept_agent/full_e2e_simulation.py --repo project-main --out /tmp/concept-agent-return/chat-to-final-file
+            python3 control-branch/concept_agent/full_e2e_simulation.py --repo control-branch --out /tmp/concept-agent-return/chat-to-final-file --count 3
+            python3 control-branch/isolated_system4/downstream_1n_contract_probe.py | tee /tmp/concept-agent-return/DOWNSTREAM_1N_CONTRACT_PROBE.txt
             PYTHONPATH="control-branch/concept_agent:project-main/concept_agent:${PYTHONPATH:-}" \
             python3 control-branch/concept_agent/fixed_block_route.py acceptance \
               --repo project-main \
