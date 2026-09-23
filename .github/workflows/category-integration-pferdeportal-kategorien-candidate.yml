@@ -1,0 +1,36 @@
+name: Category Integration Pferdeportal Kategorien Candidate
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN_CANDIDATE/**'
+      - '.github/workflows/category-integration-pferdeportal-kategorien-candidate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-hardtest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify candidate archive and run fail-closed test
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN_CANDIDATE/PFERDEPORTAL_KATEGORIEN_V0.1.0_CANDIDATE_MIN.zip
+          echo 'de5a551897667ce06717df2e056852397edd92063c0293ed4a96fe10a11c64a0  '\"$ZIP\" | sha256sum -c -
+          rm -rf /tmp/pferdeportal-kategorien
+          mkdir -p /tmp/pferdeportal-kategorien
+          unzip -q "$ZIP" -d /tmp/pferdeportal-kategorien
+          php -l /tmp/pferdeportal-kategorien/pferdeportal-kategorien.php
+          php /tmp/pferdeportal-kategorien/tests/synthetic.php | tee /tmp/pferdeportal-kategorien-test.log
+          grep -F 'PFERDEPORTAL_KATEGORIEN_SYNTHETIC_HARDTEST_PASS' /tmp/pferdeportal-kategorien-test.log
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: pferdeportal-kategorien-candidate-evidence
+          path: /tmp/pferdeportal-kategorien-test.log
+          if-no-files-found: error
