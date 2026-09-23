@@ -1,21 +1,30 @@
-# Pferde Atelier — Konzept 5 / Concept Agent
+# Pferde Atelier — aktueller Artikelstart
 
-Autoritativer Einstieg für neue Artikel-Batches: `concept_agent/intake_bridge.py`.
+Einziger Start für neue Artikelaufträge: `text-start` mit `START:pferdeatelier`.
 
-## Start
+Der feste Empfänger auf `main` liest bei jedem Start automatisch genau den aktuellen Metadaten-Snapshot aus:
 
-`python3 concept_agent/intake_bridge.py prepare <PSERC_METADATA_SNAPSHOT.json> <CONCEPT_AGENT_INTAKE.json>`
+`concept-agent/production-control:concept_agent/current/PSERC_METADATA_SNAPSHOT.json`
 
-Nur `CONCEPT_AGENT_INTAKE_READY` erlaubt den nächsten Schritt.
+Die Branch dient ausschließlich als **Datenablage für den aktuellen Auftrag**. Dort gibt es keinen Produktionsworkflow, keinen Runner, keine Run-Requests und keinen eigenen Produktionszustand.
 
-## Harte Grenze
+## Verbindlicher Ablauf
 
-- Eingang ist ausschließlich der aktuelle `PSERC_TEXTMACHINE_METADATA_BATCH_V2` aus dem Metadaten-Snapshot.
-- Der Concept Agent recherchiert artikelbezogen und bindet Quellen/Evidenz **vor** dem Draft.
-- Alte `control/startmaster0107/runtime_inbox/**`-Zustände und `SOURCE_REQUESTS.json` sind **keine** Startvoraussetzung für Konzept 5 und dürfen einen neuen Concept-Agent-Lauf weder bestimmen noch blockieren.
-- Batch, Reihenfolge, fünf Metadatenfelder und `plan_slot` bleiben unverändert.
+1. `text-start` autorisiert ausschließlich das Projekt Pferdeatelier.
+2. Der Empfänger ermittelt den **zu diesem Zeitpunkt aktuellen** Snapshot.
+3. `concept_agent/intake_bridge.py` validiert exakt diesen Snapshot.
+4. Die Artikelanzahl kommt ausschließlich aus dem Snapshot: **1..N**, niemals fest 7, 16 oder eine andere Zahl.
+5. Erst für diesen einen Lauf werden Snapshot-Head und Batch-Hash eingefroren.
+6. Vor `MACHINE_READY` darf ein technischer Fehlstart sauber wiederholt werden.
+7. Nach `MACHINE_READY` ist ein zweiter Start desselben Batches gesperrt.
+
+## Harte Grenzen
+
+- Recherche bleibt artikelbezogen und wird vor dem Draft gebunden.
+- Artikelinhalt und Qualitätsregeln bleiben unverändert.
+- LanguageTool 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL bleiben unverändert zuständig.
 - Kein Publish.
-- Nach Authoring bleiben LT 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL unverändert zuständig.
-- ENDSTEMPEL-Einstieg bleibt `concept_agent/endstempel_bridge.py`; diese Datei ersetzt keine downstream Prüfung.
+- Alte `runtime_inbox/**`, `SOURCE_REQUESTS.json`, alte 7er-Artefakte, alte Control-Branch-Runner und alte Cross-Chat-Transporte sind **keine Start- oder Produktionsautorität**.
+- Keine Alternativroute.
 
-Bei jeder Abweichung: `BLOCKED`, kein Ersatzpfad.
+Bei jeder Abweichung: `BLOCKED`.
