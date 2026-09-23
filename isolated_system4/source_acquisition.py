@@ -1,13 +1,11 @@
 from __future__ import annotations
 import hashlib, html, json, re, urllib.request, urllib.error
-from urllib.parse import urlparse
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from typing import Callable
 
 CONTRACT='SYSTEM4_MACHINE_SOURCE_REQUEST_BATCH_V1'
 RESULT_CONTRACT='SYSTEM4_MACHINE_ACQUIRED_SOURCE_BATCH_V1'
-FORBIDDEN_RESEARCH_HOST='pferde-atelier.de'
 class SourceAcquisitionError(RuntimeError): pass
 
 class _TextExtractor(HTMLParser):
@@ -69,9 +67,6 @@ def acquire_batch(request_batch:dict, *, fetcher:Callable[[str,float,int],dict]|
             if not sid or sid in seen: raise SourceAcquisitionError(f'SOURCE_REQUEST_ID_INVALID:{i}:{j}')
             seen.add(sid)
             if not re.match(r'^https?://',url): raise SourceAcquisitionError(f'SOURCE_REQUEST_URL_INVALID:{i}:{j}')
-            host=(urlparse(url).hostname or '').strip().rstrip('.').casefold()
-            if host==FORBIDDEN_RESEARCH_HOST or host.endswith('.'+FORBIDDEN_RESEARCH_HOST):
-                raise SourceAcquisitionError(f'SOURCE_REQUEST_OWN_DOMAIN_FORBIDDEN:{i}:{j}')
             result=fetch(url,timeout,max_bytes); status=int(result.get('http_status',0))
             if status<200 or status>=300: raise SourceAcquisitionError(f'SOURCE_HTTP_FAIL:{i}:{j}:{status}')
             evidence,title_from_body=_normalize_text(result.get('body',b''),str(result.get('content_type','')))
