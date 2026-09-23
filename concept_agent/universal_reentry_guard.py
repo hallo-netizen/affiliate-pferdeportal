@@ -73,7 +73,7 @@ def _binding_item(binding: dict, index: int) -> dict:
     return items[index]
 
 def _checks_sha(state: dict) -> str:
-    return hashlib.sha256(canon(state.get("checks") or {})).hexdigest()
+    return hashlib.sha256(canon(state.get("checks") or {}) + b"\n").hexdigest()
 
 def _capsule_identity(state: dict) -> dict:
     article = state.get("article") or {}
