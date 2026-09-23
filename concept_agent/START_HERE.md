@@ -21,3 +21,23 @@ Nicht als Current-/Startautorität verwenden:
 - historische Branches oder Protokolle.
 
 Recherche- und Artikelqualität, LanguageTool 6.8, PPM 6.7.9, PSERC und ENDSTEMPEL bleiben unverändert. Kein Publish. Keine Alternativroute.
+
+
+## Aktueller Produktionsanschluss nach gebundener Recherche
+
+Nach `CONCEPT_AGENT_RESEARCH_BOUND_V1` ausschließlich:
+
+`concept_agent/production_bridge.py`
+
+Der Bridge bindet aus dem aktuellen Batch automatisch die bereits vorhandenen Portal-Links und die vorhandene PPM-6.7.9-Qualitätsautorität. Während der Produktion werden Regeln und Links nicht frei gesucht oder neu gewählt.
+
+Hart verboten:
+- historische Produktionswege als Ausführungsweg,
+- alte oder Recovery-Artikel als Vorlage, Vergleich oder Produktionsquelle,
+- `pferde-atelier.de` und Subdomains als Recherchequelle,
+- freie Regelsuche während der Artikelproduktion,
+- freie Auswahl anderer interner Links.
+
+Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`. Ein abgeschlossener Schritt darf erst nach neuem hashverkettetem Checkpoint fortgesetzt werden. Reparaturen bleiben beim selben Artikel.
+
+`text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.

@@ -2,6 +2,7 @@
 from __future__ import annotations
 import hashlib, json, re, sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 SNAPSHOT_CONTRACT = "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND"
 BATCH_CONTRACT = "PSERC_TEXTMACHINE_METADATA_BATCH_V2"
@@ -12,6 +13,7 @@ RESEARCH_SUBMISSION_CONTRACT = "CONCEPT_AGENT_RESEARCH_SUBMISSION_V1"
 RESEARCH_BOUND_CONTRACT = "CONCEPT_AGENT_RESEARCH_BOUND_V1"
 EXACT_FIELDS = ("title", "target_keyword", "category", "article_type", "plan_slot")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
+FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
 
 class Blocked(RuntimeError):
     pass
@@ -24,6 +26,10 @@ def sha(raw: bytes) -> str:
 
 def stable(value) -> str:
     return sha(canon(value))
+
+def _forbidden_research_url(url: str) -> bool:
+    host = (urlparse(str(url or "")).hostname or "").strip().rstrip(".").casefold()
+    return host == FORBIDDEN_RESEARCH_HOST or host.endswith("." + FORBIDDEN_RESEARCH_HOST)
 
 def _load(path: Path):
     value = json.loads(path.read_text(encoding="utf-8"))
@@ -146,6 +152,8 @@ def bind_research(intake: dict, submission: dict) -> dict:
             seen.add(sid)
             if not source["source_url"].startswith(("https://", "http://")):
                 raise Blocked(f"RESEARCH_SOURCE_URL_INVALID:{index}:{sidx}")
+            if _forbidden_research_url(source["source_url"]):
+                raise Blocked(f"RESEARCH_SOURCE_OWN_DOMAIN_FORBIDDEN:{index}:{sidx}")
             if sha(source["evidence"].encode("utf-8")) != source["snapshot_sha256"]:
                 raise Blocked(f"RESEARCH_EVIDENCE_HASH_MISMATCH:{index}:{sidx}")
             checked_sources.append({k: source[k] for k in required})
