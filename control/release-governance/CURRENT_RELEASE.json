@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 113,
+  "generation": 114,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.152",
-    "status": "CATEGORY_INTEGRATION_6_72_152_TWO_JSON_DELTA_COMMITTED_GATE_PENDING",
+    "status": "CATEGORY_INTEGRATION_6_72_152_TWO_JSON_DELTA_PASS",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -233,13 +233,13 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_AFFILIATE_672152_TWO_JSON_DELTA_GATE_PENDING",
+    "state": "CATEGORY_INTEGRATION_PSTE_0576_CATEGORY_MAP_DELTA_PENDING",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. EXACT AFFILIATE-ZENTRALE 6.72.152 BASE SOURCE PASSED CATEGORY INTEGRATION HARD BASELINE RUN 35889101171. EXACTLY TWO ALREADY-HARDTESTED CATEGORY DERIVATION FILES ARE NOW COMMITTED: portal-structure-v279.json SHA256 ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed AND ebay-portal-catalog-v2.json SHA256 6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2. ALL OTHER 25 SOURCE FILES MUST REMAIN BYTE-IDENTICAL TO 6.72.152 BASE. RUN THE EXISTING BOUND GATE. NO WORDPRESS WRITE.",
-    "completion_condition": "EXACT AFFILIATE-ZENTRALE 6.72.152 FULL GITHUB SOURCE IS HASH-BOUND; ONLY THE TWO ALREADY-HARDTESTED CATEGORY JSON FILES ARE REPLACED; ALL OTHER 6.72.152 FILES ARE BYTE-IDENTICAL; FOCUSED CATEGORY DELTA POSITIVE/NEGATIVE/UNCHANGED-REGRESSION PASSES WITHOUT RE-RUNNING UNRELATED PROOFS.",
-    "after_completion_action": "NEXT, APPLY THE PSTE 0.57.6 CATEGORY-ONLY +25 DELTA TO fixtures/portal-category-map-v1.json (1124->1149) AGAINST THE EXACT GITHUB PASS SOURCE; THEN CLASSIFY THE REMAINING INSTALLED PLUGINS FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES ONLY. PSERC REQUIRES ONLY FRESH STRUCTURE/PLAN REGENERATION AFTER PSTE; NO 25-CATEGORY CODE PATCH. NO WORDPRESS APPLY BEFORE CATEGORY E2E + DRY-RUN PASS.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. AFFILIATE-ZENTRALE 6.72.152 CATEGORY DELTA IS CLOSED PASS: EXACT 27-FILE SOURCE BOUND; ONLY portal-structure-v279.json AND ebay-portal-catalog-v2.json CHANGED; 25 OTHER FILES BYTE-IDENTICAL; HARD BASELINE RUN 35889920034 SUCCESS. NEXT AND ONLY BLOCKER: APPLY PSTE 0.57.6 CATEGORY-ONLY +25 DELTA TO fixtures/portal-category-map-v1.json (1124->1149) AGAINST EXACT GITHUB PASS SOURCE FROM RUN 35693065234 / ARTIFACT 10679790400 / ZIP SHA256 71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f. NO OTHER PSTE FILE MAY CHANGE. NO WORDPRESS WRITE.",
+    "completion_condition": "PSTE 0.57.6 EXACT PASS SOURCE IS PRESERVED; ONLY fixtures/portal-category-map-v1.json CHANGES FROM 1124 TO 1149 USING THE CENTRAL KATEGORIEN.tsv; POSITIVE/NEGATIVE/UNCHANGED-REGRESSION AND FRESH-UNPACK BYTE IDENTITY PASS.",
+    "after_completion_action": "CLASSIFY THE REMAINING INSTALLED PLUGINS FOR STATIC CATEGORY/PORTAL-STRUCTURE COPIES ONLY. PSERC 0.28.23 REQUIRES ONLY FRESH STRUCTURE/PLAN REGENERATION; NO 25-CATEGORY CODE PATCH. NO WORDPRESS APPLY BEFORE CATEGORY E2E + DRY-RUN PASS.",
     "no_optional_detours": true,
-    "sequence": 32,
+    "sequence": 33,
     "authorized_change_prefixes": [
       "CATEGORY_INTEGRATION_HOBBYRAUM/",
       ".github/workflows/category-integration-",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-23",
-    "current_first_blocker": "AFFILIATE_6_72_152_CATEGORY_DELTA_BOUND_GATE_PENDING",
+    "current_first_blocker": "PSTE_0_57_6_CATEGORY_MAP_DELTA_1124_TO_1149",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1257,7 +1257,7 @@
     },
     "consumer_status": {
       "affiliate_672152": {
-        "status": "CATEGORY_TWO_JSON_DELTA_COMMITTED_GATE_PENDING",
+        "status": "CLOSED_CATEGORY_DELTA_PASS",
         "version": "6.72.152",
         "portal_candidate_sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
         "ebay_candidate_sha256": "6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2",
@@ -1272,7 +1272,10 @@
         "base_source_gate_run": 35889101171,
         "base_source_gate_result": "SUCCESS",
         "bound_candidate_manifest_sha256": "28f6409a442bd966d921a60fb4a9f2e86a8454c5bed348f44f3f13825f86f821",
-        "non_category_files_byte_identical": 25
+        "non_category_files_byte_identical": 25,
+        "category_gate_run": 35889920034,
+        "category_gate_result": "SUCCESS",
+        "category_gate_head": "923c8fb73a3d3cf212c1a84b25779f23190a7825"
       },
       "ppm_679": {
         "status": "CLOSED_SIGNED_BUILD_INTEGRITY_PASS",
