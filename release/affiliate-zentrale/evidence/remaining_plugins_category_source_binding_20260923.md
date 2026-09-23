@@ -207,3 +207,32 @@ Direkt aus dem historischen, hashgebundenen Template-Kit-Quellcode geprüft:
 - gespeichertes Backup-Manifest: `ppa013-category-completion-manifest-20260922-194858-33451736b021.json`.
 - 1.50.558 -> 1.50.559 erzwingt ebenfalls ausschließlich `pferde-template-kit.php` als geänderte Datei.
 - Damit ist jede unveränderte Asset-Datei zwischen 1.50.556 und 1.50.559 byteidentisch; der noch fehlende Punkt ist ausschließlich der exakte Hash/Inhalt der aktuellen Breadcrumb-Map aus dem 1.50.556-Tree-Manifest oder einem aktuellen Vollquellbaum.
+
+
+### Quellenabruf für aktuelle Breadcrumb-Map ausgeschöpft
+
+Geprüft ohne Rekonstruktion:
+- GitHub aktuelle Branches / Code-/Commit-/PR-Suche: kein direkter 1.50.559-Vollbaum.
+- GitHub Dateihistorie für
+  - `assets/breadcrumb-portal-map-v150310.json`
+  - `affiliate-portal-template-kit/assets/breadcrumb-portal-map-v150310.json`
+  - `pferde-template-kit/assets/breadcrumb-portal-map-v150310.json`
+  liefert jeweils keinen direkten Commit.
+- Library / Conversation Files: kein Template-Kit-Vollmaster, kein 1.50.556/1.50.558-Vollplugin und kein gespeichertes Tree-Manifest.
+- Hochgeladenes 1.50.559-Hardtest-ZIP enthält nur Helper/README/Evidence, nicht die Breadcrumb-JSON.
+- Historisches Apply nennt das exakte Tree-Backup `ppa013-category-completion-manifest-20260922-194858-33451736b021.json`, aber diese Datei ist in GitHub/Library nicht vorhanden.
+- Öffentlicher read-only Abruf des bekannten WordPress-Backup-Pfads und des direkten Plugin-Asset-Pfads ist aus der verfügbaren Umgebung nicht zugänglich.
+- Für den installierten `Pferd Server Evidence Exporter 1.0.2` ist kein dokumentierter oder öffentlich erreichbarer Export-Endpunkt vorhanden.
+
+Damit ist der erste Blocker präzise:
+`TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING`
+
+Nicht erlaubt:
+- keine Rekonstruktion der aktuellen Map aus 1.50.469/1.50.472,
+- kein blindes 1124->1149-Patching,
+- kein WordPress-Write.
+
+Erlaubter nächster Beleg:
+- exaktes bestehendes Tree-Manifest `ppa013-category-completion-manifest-20260922-194858-33451736b021.json`, oder
+- exakte aktuelle 1.50.559-Datei `assets/breadcrumb-portal-map-v150310.json`, oder
+- vollständiger aktueller 1.50.559-Pluginbaum.
