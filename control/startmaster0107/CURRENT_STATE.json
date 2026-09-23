@@ -225,12 +225,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_TEXT_START_1N_READY_NO_ACTIVE_PRODUCTION_RUN",
+  "current_work_status": "CONCEPT_AGENT_TEXT_START_1N_MACHINE_READY_DRAFTS_SECURED",
   "current_execution_blocker": {
     "code": "RESOLVED",
     "error_class": false,
     "classification": "RESOLVED",
-    "detail": "Central text-start main and the Pferdeatelier receiver now bind the same existing Concept Agent intake command. The receiver selects the current 1..N batch from CURRENT_STATE and its hash-bound metadata snapshot. The legacy runtime-inbox selector is not used. The fixed upstream repair-return ceiling is removed. No production article has been started by this maintenance.",
+    "detail": "The current 16-item Concept Agent batch already reached TEXT_START_MACHINE_READY. Do not start it again. The post-research production handoff is now bound on main via concept_agent/production_bridge.py and concept_agent/progress_guard.py. The 16 article drafts are durably secured before LT/PPM continuation.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -293,15 +293,20 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "START_CURRENT_1N_BATCH_VIA_TEXT_START",
-    "action": "On the next explicit production start, use the central hallo-netizen/text-start fixed request START:pferdeatelier. That route must resolve the current batch only through control/startmaster0107/CURRENT_STATE.json and its hash-bound concept_agent/current/PSERC_METADATA_SNAPSHOT.json, then prepare the existing Concept Agent intake. Continue through the existing research/authoring and downstream LT 6.8, PPM 6.7.9, PSERC and ENDSTEMPEL path. Do not publish.",
-    "why": "All maintenance blockers from the handoff are resolved: single Current authority, generic current 1..N selection, central/target text-start binding alignment, and no fixed upstream repair-return ceiling.",
+    "goal": "CONTINUE_CURRENT_16_BATCH_FROM_SECURED_DRAFTS",
+    "action": "Do not restart text-start. Use concept_agent/production_bridge.py with the current hash-bound snapshot, the existing current intake and the existing CONCEPT_AGENT_RESEARCH_BOUND_V1. Then bind the already secured 16 drafts with concept_agent/progress_guard.py and continue sequentially from item 0 through LanguageTool 6.8 and PPM 6.7.9. Repair the same article until PASS, then continue to PSERC and ENDSTEMPEL. Do not publish.",
+    "why": "The current batch already reached MACHINE_READY and all 16 draft bodies exist. PR #383 restored the missing post-research handoff without changing text-start or the immutable production core.",
     "forbidden": [
+      "restart the same text-start batch after MACHINE_READY",
       "use legacy runtime_inbox as Concept Agent authority",
       "invoke legacy parent_start as Concept Agent batch selector",
-      "restore a fixed upstream repair-return limit",
+      "use historical production routes as execution routes",
+      "use old or recovery articles as writing or quality references",
+      "use pferde-atelier.de or its subdomains as research sources",
+      "perform free rule lookup during production",
+      "perform free internal-link selection during production",
       "create a new runner or alternate route",
-      "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
+      "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content rules or quality rules",
       "publish"
     ]
   },
@@ -515,7 +520,7 @@
     "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
     "item_count": 16,
     "metadata_snapshot_status": "PASS",
-    "article_bodies_completed": 0,
+    "article_bodies_completed": 16,
     "next_article_index": 0,
     "languagetool_6_8_completed": 0,
     "ppm_6_7_9_completed": 0,
@@ -524,8 +529,34 @@
     "final_wordpress_import_file_present": false,
     "publish_allowed": false,
     "chat_may_choose_action": false,
-    "first_open_blocker": "NONE",
-    "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT"
+    "first_open_blocker": "CURRENT_PRODUCTION_BINDING_NOT_YET_MATERIALIZED",
+    "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT",
+    "machine_ready": {
+      "status": "PASS",
+      "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+      "central_run_id": 35909486065,
+      "target_run_id": 35909503205,
+      "claim_issue": 382,
+      "second_start_forbidden": true
+    },
+    "post_research_handoff": {
+      "status": "PASS_ON_MAIN",
+      "production_bridge_ref": "concept_agent/production_bridge.py",
+      "progress_guard_ref": "concept_agent/progress_guard.py",
+      "merge_commit_sha": "69e5c1e9219650c52a30f6d59d3e121cdb52b905",
+      "pr": 383,
+      "text_start_modified": false,
+      "immutable_production_core_modified": false,
+      "publish_allowed": false
+    },
+    "draft_recovery": {
+      "status": "SECURED",
+      "item_count": 16,
+      "archive_name": "PFERDE_ATELIER_16_DRAFTS_RECOVERY_20260923.zip",
+      "archive_sha256": "916353fef33d5f06b6ebf7e3942d2c112212c3cb077d02f9d21ea2b1be9dc1a1",
+      "recovery_manifest_sha256": "0e0014b57779b7a23d5c5e6ce1145c19dabfaf03a0a617785a51317902e8cd83",
+      "production_pass_claimed": false
+    }
   },
   "text_start_current_binding": {
     "status": "PASS",
