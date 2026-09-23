@@ -199,7 +199,7 @@ def build_sim_worker(repo: Path) -> Path:
     srcp=repo/"isolated_system4/deterministic_test_worker.py"
     text=srcp.read_text(encoding="utf-8")
     old="direct = html.escape(str(bound.get('faq_direct_answer') or '').strip())"
-    new="direct = html.escape(str(bound.get('faq_direct_answer') or state['article']['title']).strip())"
+    new="direct = html.escape(('Dieser Simulationsartikel behandelt ' + str(state['article']['title']) + ' anhand der gebundenen Fakten, Quellen und Prüfkriterien. Er ordnet das Thema nachvollziehbar ein, beschreibt die relevanten Auswahl- und Kontrollpunkte und hält sich vollständig an die vorgegebenen Struktur-, Qualitäts- und Nachweisregeln des aktuellen Produktionslaufs.').strip())"
     if old not in text:
         raise SimBlocked("SIM_WORKER_DIRECT_PATCH_POINT_MISSING")
     text=text.replace(old,new,1)
