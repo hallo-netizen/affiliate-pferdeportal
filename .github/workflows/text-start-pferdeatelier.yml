@@ -118,14 +118,46 @@ jobs:
               return;
             }
 
-            const runtime = JSON.parse(fs.readFileSync('control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json', 'utf8'));
-            if (runtime.status !== 'EXECUTION_READY' || runtime.publish_allowed !== false) {
-              core.setFailed('TEXT_START_RUNTIME_NOT_READY');
+            const crypto = require('crypto');
+            const stateRaw = fs.readFileSync('control/startmaster0107/CURRENT_STATE.json');
+            const state = JSON.parse(stateRaw);
+            const current = state.concept_agent_current_batch || {};
+            if (current.current_authority_ref !== 'control/startmaster0107/CURRENT_STATE.json' ||
+                current.current_authority_branch !== 'main' ||
+                current.publish_allowed !== false) {
+              core.setFailed('TEXT_START_CURRENT_AUTHORITY_INVALID');
               return;
             }
-            const batch = String(runtime.batch_sha256 || '');
-            if (!/^[0-9a-f]{64}$/.test(batch)) {
-              core.setFailed('TEXT_START_BATCH_SHA_INVALID');
+            const snapshotRef = String(current.metadata_snapshot_ref || '');
+            if (snapshotRef !== 'concept_agent/current/PSERC_METADATA_SNAPSHOT.json') {
+              core.setFailed('TEXT_START_CURRENT_SNAPSHOT_REF_INVALID');
+              return;
+            }
+            const snapshotRaw = fs.readFileSync(snapshotRef);
+            const snapshotSha = crypto.createHash('sha256').update(snapshotRaw).digest('hex');
+            if (snapshotSha !== String(current.metadata_snapshot_sha256 || '')) {
+              core.setFailed('TEXT_START_CURRENT_SNAPSHOT_HASH_MISMATCH');
+              return;
+            }
+            const snapshot = JSON.parse(snapshotRaw);
+            const bound = snapshot.next_textmachine_metadata_batch || {};
+            const items = Array.isArray(bound.items) ? bound.items : [];
+            if (bound.contract !== 'PSERC_TEXTMACHINE_METADATA_BATCH_V2' ||
+                bound.status !== 'READY_FOR_TEXTMACHINE_METADATA_INTAKE' ||
+                bound.publish_allowed !== false ||
+                bound.maximum_articles !== 0 ||
+                bound.maximum_articles_per_type !== 0 ||
+                !Number.isInteger(bound.item_count) ||
+                bound.item_count < 1 ||
+                items.length !== bound.item_count) {
+              core.setFailed('TEXT_START_CURRENT_BATCH_INVALID');
+              return;
+            }
+            const batch = String(bound.batch_sha256 || '');
+            if (!/^[0-9a-f]{64}$/.test(batch) ||
+                batch !== String(current.batch_sha256 || '') ||
+                bound.item_count !== current.item_count) {
+              core.setFailed('TEXT_START_CURRENT_BATCH_BINDING_MISMATCH');
               return;
             }
 
@@ -208,7 +240,7 @@ jobs:
               "target_repository": "hallo-netizen/affiliate-pferdeportal",
               "target_ref": "main",
               "target_head_sha": head,
-              "canonical_start_command": "python3 isolated_system4/parent_start.py start-current-bound",
+              "canonical_start_command": "python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json CONCEPT_AGENT_INTAKE.json",
               "article_content_rules_changed": False,
               "quality_rules_changed": False,
               "production_logic_changed": False,
@@ -219,46 +251,41 @@ jobs:
               fh.write("\n")
           PY
 
-      - name: Start existing Pferdeatelier machine
+      - name: Prepare current Concept Agent intake
         id: machine
         shell: bash
         run: |
           set -euo pipefail
-          python3 isolated_system4/parent_start.py start-current-bound | tee PARENT_START_RECEIPT.json
+          python3 concept_agent/intake_bridge.py prepare \
+            concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
+            CONCEPT_AGENT_INTAKE.json | tee CONCEPT_AGENT_INTAKE_RECEIPT.json
           python3 - <<'PY'
-          import json, pathlib
-          receipt=json.load(open("PARENT_START_RECEIPT.json", encoding="utf-8"))
-          if receipt.get("status") != "SYSTEM4_PARENT_ROOT_READY_STOP":
-              raise SystemExit("TEXT_START_PARENT_NOT_READY")
-          if receipt.get("root_only") is not True:
-              raise SystemExit("TEXT_START_PARENT_ROOT_ONLY_INVALID")
-          if receipt.get("publish_allowed") is not False:
+          import json
+          state=json.load(open("control/startmaster0107/CURRENT_STATE.json", encoding="utf-8"))
+          current=state["concept_agent_current_batch"]
+          receipt=json.load(open("CONCEPT_AGENT_INTAKE_RECEIPT.json", encoding="utf-8"))
+          intake=json.load(open("CONCEPT_AGENT_INTAKE.json", encoding="utf-8"))
+          if receipt.get("status") != "CONCEPT_AGENT_INTAKE_READY":
+              raise SystemExit("TEXT_START_CONCEPT_AGENT_NOT_READY")
+          if receipt.get("publish_allowed") is not False or intake.get("publish_allowed") is not False:
               raise SystemExit("TEXT_START_PUBLISH_FLAG_INVALID")
-          run_root=pathlib.Path(receipt["run_root"]).resolve()
-          workspace=pathlib.Path(receipt["batch_root"]).resolve() / "item-000000"
-          if not run_root.is_dir() or not workspace.is_dir():
-              raise SystemExit("TEXT_START_RUNTIME_MISSING")
-          pathlib.Path("RUN_ROOT.txt").write_text(str(run_root) + "\n", encoding="utf-8")
-          pathlib.Path("WORKSPACE.txt").write_text(str(workspace) + "\n", encoding="utf-8")
+          if receipt.get("batch_sha256") != current.get("batch_sha256"):
+              raise SystemExit("TEXT_START_BATCH_DRIFT")
+          if receipt.get("item_count") != current.get("item_count"):
+              raise SystemExit("TEXT_START_COUNT_DRIFT")
+          if intake.get("batch_sha256") != current.get("batch_sha256"):
+              raise SystemExit("TEXT_START_INTAKE_BATCH_DRIFT")
+          if intake.get("item_count") != current.get("item_count"):
+              raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
           PY
 
-      - name: Create durable initial workspace capsule
-        shell: bash
-        run: |
-          set -euo pipefail
-          workspace="$(cat WORKSPACE.txt)"
-          python3 isolated_system4/workspace_recovery_capsule.py create "$workspace" ARTICLE0_INITIAL_RECOVERY.json
-          run_root="$(cat RUN_ROOT.txt)"
-          tar -C "$run_root" -czf PFERDEATELIER_START_RUNTIME.tar.gz .
-
-      - name: Upload start handoff
+      - name: Upload current intake handoff
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pferdeatelier-start-${{ inputs.source_run_id }}
           path: |
-            PARENT_START_RECEIPT.json
-            ARTICLE0_INITIAL_RECOVERY.json
-            PFERDEATELIER_START_RUNTIME.tar.gz
+            CONCEPT_AGENT_INTAKE_RECEIPT.json
+            CONCEPT_AGENT_INTAKE.json
           if-no-files-found: error
           retention-days: 30
 
@@ -276,5 +303,6 @@ jobs:
                 'TEXT_START_MACHINE_READY\n' +
                 'TARGET_ACTION_RUN_ID: ' + context.runId + '\n' +
                 'SOURCE_RUN_ID: ' + '${{ inputs.source_run_id }}' + '\n' +
+                'BATCH_SHA256: ' + '${{ steps.claim.outputs.batch_sha256 }}' + '\n' +
                 'PUBLISH: NO'
             })

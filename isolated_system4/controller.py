@@ -47,8 +47,6 @@ FULLCHECK_STAGE = 'FULLCHECK'
 CANONICAL_COMPLETION_TRACE = tuple(row[0] for row in ARTICLE_ROUTE) + (FULLCHECK_STAGE,)
 OWNER_TO_ROUTE = {owner: (name, command, phase) for name, owner, command, phase in ARTICLE_ROUTE}
 COMMAND_TO_ROUTE = {command: name for name, owner, command, phase in ARTICLE_ROUTE}
-MAX_UPSTREAM_REPAIR_RETURNS = 2
-
 _MACHINE_ROUTE_FILES = (
     'point0.json',
     'root_receipt.json',
@@ -67,7 +65,6 @@ def _route_contract_digest() -> str:
         'article_route': ARTICLE_ROUTE,
         'completion_trace': CANONICAL_COMPLETION_TRACE,
         'machine_route_files': _MACHINE_ROUTE_FILES,
-        'max_upstream_repair_returns': MAX_UPSTREAM_REPAIR_RETURNS,
     }
     raw = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
     return hashlib.sha256(raw).hexdigest()
@@ -94,7 +91,7 @@ def _verify_route_state(state: dict) -> None:
     for owner, count in counts.items():
         if owner not in OWNER_TO_ROUTE or owner == DRAFT_WORKER:
             raise Fail('REPAIR_RETURN_OWNER_INVALID:' + str(owner))
-        if not isinstance(count, int) or isinstance(count, bool) or count < 0 or count > MAX_UPSTREAM_REPAIR_RETURNS:
+        if not isinstance(count, int) or isinstance(count, bool) or count < 0:
             raise Fail('REPAIR_RETURN_COUNT_INVALID:' + str(owner))
     history = state.get('repair_history')
     if not isinstance(history, list):
@@ -278,9 +275,6 @@ def _rollback_upstream_worker(state: dict, path: Path, owners: tuple[str, ...], 
     target_stage, _, _, target_phase = ARTICLE_ROUTE[target_index]
     counts = dict(state.get('repair_return_counts') or {})
     attempt = int(counts.get(target, 0)) + 1
-    if attempt > MAX_UPSTREAM_REPAIR_RETURNS:
-        raise Fail('REPAIR_RETURN_LIMIT_EXHAUSTED:' + target)
-
     immutable_before = state.get('immutable_core_sha256')
     article_before = json.loads(json.dumps(state.get('article'), ensure_ascii=False))
     counts[target] = attempt
