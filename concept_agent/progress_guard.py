@@ -35,6 +35,84 @@ def verify_binding(binding: dict) -> None:
         raise Blocked("BINDING_HASH_MISMATCH")
     if binding.get("publish_allowed") is not False:
         raise Blocked("BINDING_PUBLISH_INVALID")
+    items = binding.get("items")
+    if not isinstance(items, list) or not items or binding.get("item_count") != len(items):
+        raise Blocked("BINDING_ITEMS_INVALID")
+    for index, item in enumerate(items):
+        if not isinstance(item, dict) or item.get("item_index") != index:
+            raise Blocked(f"BINDING_ITEM_ORDER_INVALID:{index}")
+        identity = item.get("identity")
+        if not isinstance(identity, dict) or not SHA_RE.fullmatch(str(identity.get("plan_slot") or "")):
+            raise Blocked(f"BINDING_ITEM_IDENTITY_INVALID:{index}")
+
+def _binding_item(binding: dict, index: int) -> dict:
+    verify_binding(binding)
+    items = binding["items"]
+    if index < 0 or index >= len(items):
+        raise Blocked("ITEM_INDEX_INVALID")
+    return items[index]
+
+def _find_draft(state: dict, index: int) -> dict:
+    rows = state.get("drafts")
+    if not isinstance(rows, list):
+        raise Blocked("DRAFT_MANIFEST_MISSING")
+    matches = [row for row in rows if isinstance(row, dict) and row.get("item_index") == index]
+    if len(matches) != 1:
+        raise Blocked(f"DRAFT_MANIFEST_ITEM_INVALID:{index}")
+    return matches[0]
+
+def expected_action(binding: dict, state: dict) -> dict:
+    phase = str(state.get("phase") or "")
+    index = state.get("next_item_index")
+    count = binding.get("item_count")
+    if not isinstance(index, int) or isinstance(index, bool) or not isinstance(count, int):
+        raise Blocked("CHECKPOINT_INDEX_INVALID")
+    if phase == "AUTHORING_REQUIRED":
+        item = _binding_item(binding, index)
+        return {
+            "action": "WRITE_DRAFT",
+            "item_index": index,
+            "plan_slot": item["identity"]["plan_slot"],
+        }
+    if phase == "LT68_REQUIRED":
+        row = _find_draft(state, index)
+        return {
+            "action": "RUN_CHECKER",
+            "checker": "LT68",
+            "item_index": index,
+            "draft_sha256": row["draft_sha256"],
+        }
+    if phase == "PPM679_REQUIRED":
+        row = _find_draft(state, index)
+        return {
+            "action": "RUN_CHECKER",
+            "checker": "PPM679",
+            "item_index": index,
+            "draft_sha256": row["draft_sha256"],
+        }
+    if phase == "REPAIR_REQUIRED":
+        row = _find_draft(state, index)
+        current = state.get("current_item")
+        if not isinstance(current, dict) or current.get("item_index") != index:
+            raise Blocked("REPAIR_CURRENT_ITEM_INVALID")
+        checker = str(current.get("checker") or "")
+        if checker not in {"LT68", "PPM679"}:
+            raise Blocked("REPAIR_CHECKER_INVALID")
+        return {
+            "action": "REPAIR_DRAFT",
+            "item_index": index,
+            "checker": checker,
+            "draft_sha256": row["draft_sha256"],
+            "finding_sha256": current.get("finding_sha256"),
+        }
+    if phase == "ALL_ARTICLES_LT_PPM_PASS":
+        if index != count or state.get("status") != "PASS":
+            raise Blocked("COMPLETE_CHECKPOINT_INVALID")
+        return {
+            "action": "RUN_PSERC",
+            "item_count": count,
+        }
+    raise Blocked("CHECKPOINT_PHASE_NOT_RESUMABLE:" + phase)
 
 def verify_checkpoint(binding: dict, state: dict) -> None:
     verify_binding(binding)
@@ -52,13 +130,16 @@ def verify_checkpoint(binding: dict, state: dict) -> None:
         raise Blocked("CHECKPOINT_COUNT_MISMATCH")
     if state.get("publish_allowed") is not False:
         raise Blocked("CHECKPOINT_PUBLISH_INVALID")
+    if state.get("allowed_action") != expected_action(binding, state):
+        raise Blocked("CHECKPOINT_ALLOWED_ACTION_MISMATCH")
 
-def reseal(previous: dict, new: dict) -> dict:
+def _seal_new_state(binding: dict, previous: dict, new: dict) -> dict:
     prev_sha = previous.get("checkpoint_sha256")
     if not isinstance(prev_sha, str) or not SHA_RE.fullmatch(prev_sha):
         raise Blocked("PREVIOUS_CHECKPOINT_SHA_INVALID")
     out = json.loads(json.dumps(new))
     out["previous_checkpoint_sha256"] = prev_sha
+    out["allowed_action"] = expected_action(binding, out)
     out.pop("checkpoint_sha256", None)
     out["checkpoint_sha256"] = stable(out)
     return out
@@ -67,50 +148,47 @@ def write(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-def _draft_path(draft_dir: Path, index: int, slot: str) -> Path:
-    candidates = [draft_dir / f"{index:02d}_{slot}.md", draft_dir / f"{index}_{slot}.md"]
-    existing = [p for p in candidates if p.is_file()]
-    if len(existing) != 1:
-        raise Blocked(f"DRAFT_FILE_NOT_EXACT:{index}")
-    return existing[0]
-
-def _find_draft(state: dict, index: int) -> dict:
-    rows = state.get("drafts")
-    if not isinstance(rows, list):
-        raise Blocked("DRAFT_MANIFEST_MISSING")
-    matches = [row for row in rows if isinstance(row, dict) and row.get("item_index") == index]
-    if len(matches) != 1:
-        raise Blocked(f"DRAFT_MANIFEST_ITEM_INVALID:{index}")
-    return matches[0]
-
 def attach_drafts(binding: dict, state: dict, draft_dir: Path) -> dict:
     verify_checkpoint(binding, state)
-    if state.get("phase") != "AUTHORING_READY" or state.get("completed_items") != [] or state.get("current_item") is not None:
-        raise Blocked("ATTACH_DRAFTS_PHASE_INVALID")
-    rows = []
-    for item in binding["items"]:
-        idx = item["item_index"]
-        slot = item["identity"]["plan_slot"]
-        path = _draft_path(draft_dir, idx, slot)
-        raw = path.read_bytes()
-        if not raw.strip():
-            raise Blocked(f"DRAFT_EMPTY:{idx}")
-        rows.append({
-            "item_index": idx,
-            "plan_slot": slot,
-            "filename": path.name,
-            "draft_sha256": hashlib.sha256(raw).hexdigest(),
-            "size_bytes": len(raw),
-            "revision": 1,
-            "lt68": "PENDING",
-            "ppm679": "PENDING",
-        })
-    out = dict(state)
-    out["phase"] = "DRAFTS_SECURED_PENDING_LT"
-    out["drafts"] = rows
-    out["next_item_index"] = 0
+    raise Blocked("BATCH_DRAFT_ATTACH_FORBIDDEN")
+
+def record_draft(binding: dict, state: dict, index: int, draft_path: Path) -> dict:
+    verify_checkpoint(binding, state)
+    action = state["allowed_action"]
+    if action.get("action") != "WRITE_DRAFT" or action.get("item_index") != index:
+        raise Blocked("RECORD_DRAFT_NOT_ALLOWED")
+    item = _binding_item(binding, index)
+    slot = item["identity"]["plan_slot"]
+    if draft_path.name != f"{index:02d}_{slot}.md":
+        raise Blocked("DRAFT_FILENAME_NOT_EXACT")
+    raw = draft_path.read_bytes()
+    if not raw.strip():
+        raise Blocked("DRAFT_EMPTY")
+    rows = state.get("drafts")
+    if rows is None:
+        rows = []
+    if not isinstance(rows, list):
+        raise Blocked("DRAFT_MANIFEST_INVALID")
+    if any(isinstance(row, dict) and row.get("item_index") == index for row in rows):
+        raise Blocked("DRAFT_ALREADY_RECORDED")
+    out = json.loads(json.dumps(state))
+    out["drafts"] = list(rows) + [{
+        "item_index": index,
+        "plan_slot": slot,
+        "filename": draft_path.name,
+        "draft_sha256": hashlib.sha256(raw).hexdigest(),
+        "size_bytes": len(raw),
+        "revision": 1,
+        "lt68": "PENDING",
+        "ppm679": "PENDING",
+    }]
+    out["phase"] = "LT68_REQUIRED"
     out["status"] = "IN_PROGRESS"
-    return reseal(state, out)
+    out["current_item"] = {
+        "item_index": index,
+        "draft_sha256": out["drafts"][-1]["draft_sha256"],
+    }
+    return _seal_new_state(binding, state, out)
 
 def _check_result(result: dict, draft_sha: str) -> str:
     status = str(result.get("status") or "")
@@ -123,17 +201,20 @@ def _check_result(result: dict, draft_sha: str) -> str:
 
 def record_check(binding: dict, state: dict, index: int, checker: str, result: dict, draft_path: Path) -> dict:
     verify_checkpoint(binding, state)
-    if state.get("phase") not in {"DRAFTS_SECURED_PENDING_LT", "CHECKING", "REPAIR_REQUIRED"}:
-        raise Blocked("RECORD_CHECK_PHASE_INVALID")
-    if state.get("next_item_index") != index:
-        raise Blocked("RECORD_CHECK_WRONG_ITEM")
+    checker = checker.upper()
+    action = state["allowed_action"]
+    if (
+        action.get("action") != "RUN_CHECKER"
+        or action.get("item_index") != index
+        or action.get("checker") != checker
+    ):
+        raise Blocked("RECORD_CHECK_NOT_ALLOWED")
     row = _find_draft(state, index)
     if file_sha(draft_path) != row["draft_sha256"]:
         raise Blocked("RECORD_CHECK_DRAFT_BYTES_CHANGED")
     status = _check_result(result, row["draft_sha256"])
     out = json.loads(json.dumps(state))
     target = _find_draft(out, index)
-    checker = checker.upper()
     if checker == "LT68":
         if target.get("lt68") not in {"PENDING", "REPAIR_REQUIRED"} or target.get("ppm679") != "PENDING":
             raise Blocked("LT68_ORDER_INVALID")
@@ -154,10 +235,9 @@ def record_check(binding: dict, state: dict, index: int, checker: str, result: d
             "finding_sha256": stable(result),
         }
     elif checker == "LT68":
-        out["phase"] = "CHECKING"
+        out["phase"] = "PPM679_REQUIRED"
         out["current_item"] = {
             "item_index": index,
-            "next_checker": "PPM679",
             "draft_sha256": target["draft_sha256"],
         }
     else:
@@ -177,16 +257,17 @@ def record_check(binding: dict, state: dict, index: int, checker: str, result: d
             out["phase"] = "ALL_ARTICLES_LT_PPM_PASS"
             out["status"] = "PASS"
         else:
-            out["phase"] = "DRAFTS_SECURED_PENDING_LT"
-    return reseal(state, out)
+            out["phase"] = "AUTHORING_REQUIRED"
+    return _seal_new_state(binding, state, out)
 
 def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> dict:
     verify_checkpoint(binding, state)
-    if state.get("phase") != "REPAIR_REQUIRED" or state.get("next_item_index") != index:
-        raise Blocked("REPAIR_DRAFT_PHASE_INVALID")
-    current = state.get("current_item")
-    if not isinstance(current, dict) or current.get("item_index") != index:
-        raise Blocked("REPAIR_CURRENT_ITEM_INVALID")
+    action = state["allowed_action"]
+    if action.get("action") != "REPAIR_DRAFT" or action.get("item_index") != index:
+        raise Blocked("REPAIR_DRAFT_NOT_ALLOWED")
+    target0 = _find_draft(state, index)
+    if draft_path.name != target0["filename"]:
+        raise Blocked("REPAIR_DRAFT_FILENAME_MISMATCH")
     out = json.loads(json.dumps(state))
     target = _find_draft(out, index)
     new_sha = file_sha(draft_path)
@@ -194,24 +275,42 @@ def replace_draft(binding: dict, state: dict, index: int, draft_path: Path) -> d
         raise Blocked("REPAIR_DRAFT_UNCHANGED")
     target["draft_sha256"] = new_sha
     target["size_bytes"] = draft_path.stat().st_size
-    target["filename"] = draft_path.name
     target["revision"] = int(target.get("revision") or 1) + 1
     target["lt68"] = "PENDING"
     target["ppm679"] = "PENDING"
     target.pop("last_check_sha256", None)
-    out["phase"] = "DRAFTS_SECURED_PENDING_LT"
-    out["current_item"] = None
-    return reseal(state, out)
+    out["phase"] = "LT68_REQUIRED"
+    out["current_item"] = {
+        "item_index": index,
+        "draft_sha256": new_sha,
+    }
+    return _seal_new_state(binding, state, out)
+
+def resume(binding: dict, state: dict) -> dict:
+    verify_checkpoint(binding, state)
+    return {
+        "status": "RESUME_ALLOWED",
+        "batch_sha256": state["batch_sha256"],
+        "checkpoint_sha256": state["checkpoint_sha256"],
+        "allowed_action": state["allowed_action"],
+        "publish_allowed": False,
+    }
 
 def main(argv: list[str]) -> int:
     try:
         if len(argv) < 2:
             raise Blocked("COMMAND_REQUIRED")
         cmd = argv[1]
-        if cmd == "attach-drafts" and len(argv) == 6:
+        if cmd == "resume" and len(argv) == 4:
+            result = resume(load(Path(argv[2])), load(Path(argv[3])))
+            print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+            return 0
+        if cmd == "attach-drafts":
+            raise Blocked("BATCH_DRAFT_ATTACH_FORBIDDEN")
+        if cmd == "record-draft" and len(argv) == 7:
             binding, state = load(Path(argv[2])), load(Path(argv[3]))
-            result = attach_drafts(binding, state, Path(argv[4]))
-            write(Path(argv[5]), result)
+            result = record_draft(binding, state, int(argv[4]), Path(argv[5]))
+            write(Path(argv[6]), result)
         elif cmd == "record-check" and len(argv) == 9:
             binding, state = load(Path(argv[2])), load(Path(argv[3]))
             result = record_check(binding, state, int(argv[4]), argv[5], load(Path(argv[6])), Path(argv[7]))
@@ -222,13 +321,15 @@ def main(argv: list[str]) -> int:
             write(Path(argv[6]), result)
         else:
             raise Blocked(
-                "USE: progress_guard.py attach-drafts BINDING CHECKPOINT DRAFT_DIR OUT | "
+                "USE: progress_guard.py resume BINDING CHECKPOINT | "
+                "record-draft BINDING CHECKPOINT INDEX DRAFT OUT | "
                 "record-check BINDING CHECKPOINT INDEX LT68|PPM679 RESULT_JSON DRAFT OUT | "
                 "replace-draft BINDING CHECKPOINT INDEX DRAFT OUT"
             )
         print(json.dumps({
             "status": result["phase"],
             "next_item_index": result["next_item_index"],
+            "allowed_action": result["allowed_action"],
             "checkpoint_sha256": result["checkpoint_sha256"],
             "publish_allowed": False,
         }, sort_keys=True))

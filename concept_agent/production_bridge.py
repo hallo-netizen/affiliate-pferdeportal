@@ -15,9 +15,10 @@ import authoring_contract  # type: ignore
 import machine_point0  # type: ignore
 import production_checks  # type: ignore
 import intake_bridge
+import progress_guard
 
 CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
-CHECKPOINT_CONTRACT = "CONCEPT_AGENT_CURRENT_PROGRESS_V1"
+CHECKPOINT_CONTRACT = progress_guard.CHECKPOINT_CONTRACT
 FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
 
 class Blocked(RuntimeError):
@@ -162,10 +163,14 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
             "publish_allowed": False,
         },
         "progress_policy": {
-            "checkpoint_required_before_next_completed_step": True,
+            "checkpoint_required_before_every_action": True,
             "checkpoint_contract": CHECKPOINT_CONTRACT,
+            "allowed_action_is_hash_bound": True,
+            "batch_draft_attach_forbidden": True,
+            "single_checkpoint_selected_article_only": True,
             "same_article_on_repair": True,
             "resume_from_last_checkpoint_only": True,
+            "missing_or_mismatched_checkpoint": "STOP",
         },
         "items": items,
         "publish_allowed": False,
@@ -184,13 +189,15 @@ def initial_checkpoint(binding: dict) -> dict:
         "production_binding_sha256": binding["binding_sha256"],
         "item_count": binding["item_count"],
         "status": "IN_PROGRESS",
-        "phase": "AUTHORING_READY",
+        "phase": "AUTHORING_REQUIRED",
         "next_item_index": 0,
         "completed_items": [],
         "current_item": None,
         "previous_checkpoint_sha256": None,
+        "drafts": [],
         "publish_allowed": False,
     }
+    state["allowed_action"] = progress_guard.expected_action(binding, state)
     state["checkpoint_sha256"] = stable(state)
     return state
 
