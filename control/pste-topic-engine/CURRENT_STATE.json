@@ -2,24 +2,24 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "GITHUB_0577_REAL_WORDPRESS_PASS_LIVE_0576_STOPPED_SANDBOX_ANALYSIS_PENDING",
+  "status": "GITHUB_05710_REAL_WORDPRESS_PASS_LIVE_0579_PRE_APPLY",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "5d199990230b397fb732fe012cfb07250f7835db",
+    "technical_head": "cd1d65ad0f41e409d03686210f32fae1f0358b8a",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35705551530,
+    "run_id": 35991171575,
     "run_result": "SUCCESS",
-    "evidence_artifact_id": 10684138953,
-    "evidence_digest": "sha256:2ecf1dce45c5ea360b3921b99957885de596b37c58445ebd80ba74aa2cb85c53",
-    "candidate": "0.57.7-HOBBYROOM",
-    "candidate_sha256": "62a2523768c205dfaad50167cd19a892d113ba1acfd09cb6db3ad8b77c6b7382",
+    "evidence_artifact_id": 10804353613,
+    "evidence_digest": "sha256:48dbb18e97b232e9c67832c3321cab7b8b495b9abacb7a3fca5bd1d3b97b2ecf",
+    "candidate": "0.57.10-HOBBYROOM",
+    "candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_0577_REAL_WORDPRESS_E2E_PASS_REAL_SITE_RETEST_OPEN",
+    "release": "GITHUB_05710_REAL_WORDPRESS_E2E_PASS_LIVE_APPLY_READBACK_OPEN",
     "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_5d199990;_NO_PRODUCT_OR_PROOF_CHANGE",
-    "live_candidate": "0.57.6",
-    "live_candidate_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f"
+    "live_candidate": "0.57.9",
+    "live_candidate_sha256": "UNKNOWN_NOT_CLAIMED"
   },
   "proven": {
     "package_total_files": "PASS_131",
@@ -51,17 +51,22 @@
     "local_exact_zip_vs_0574_changed_product_files": "PASS_4_ONLY",
     "local_exact_zip_new_forbidden_surfaces": "ZERO_TIMEOUT_ZERO_DELETE_OPTION_ZERO_REMOTE_ZERO_SCHEDULING_ZERO_SLEEP_ZERO_SCHEMA_DESTRUCTIVE_SQL",
     "family_category_exhaustion_park_policy": "PASS_PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN_DOES_NOT_COUNT_AS_REPEATED_SYSTEM_FAILURE",
-    "technical_repeated_failure_guard_preserved": "PASS"
+    "technical_repeated_failure_guard_preserved": "PASS",
+    "internal_clarification_retention_role": "PASS_RESEARCH_KEYWORD_NOT_ALREADY_COVERED",
+    "internal_clarification_original_query_preserved": "PASS_RAW_KEYWORD_PRESERVED_AND_SANDBOX_RETENTION_PATH_PRESENT",
+    "real_duplicate_role_regression": "PASS_ALREADY_COVERED_PRESERVED",
+    "internal_clarification_real_wordpress_e2e": "PASS_RUN_35991171575",
+    "exact_05710_candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f"
   },
   "first_blocker": {
-    "code": "LIVE_0576_SAFE_CANCEL_NOT_PROMPT_AND_SANDBOX_PARK_CAUSES_PENDING_REVIEW",
-    "detail": "0.57.7 fixes the proven false global escalation of repeated PSTE_CATEGORY_EXHAUSTION_NOT_PROVEN family parks. Real-site 0.57.7 retest is still open. Separately, the earlier 0.57.6 safe-cancel race remains unresolved, and the 10 live parked families still require Semantic Sandbox cause analysis before any yield-rule change."
+    "code": "LIVE_05710_APPLY_READBACK_REQUIRED",
+    "detail": "0.57.10 is fully Real-WordPress-E2E proven. Live is observed as 0.57.9. Install only the exact tested 0.57.10 candidate and verify the retained internal-clarification row is no longer labeled already covered while the original query remains in Semantic Sandbox. No data deletion or blind research restart."
   },
   "next_action": {
-    "id": "ANALYZE_STOPPED_LIVE_WAVE_SEMANTIC_SANDBOX_THEN_LIVE_RETEST_0577",
-    "action": "Keep the stopped 0.57.6 live wave stopped. Analyze the Semantic Sandbox for the 10 parked families and their candidate-level rejection/review reasons without changing filters or topic-quality rules. After classification, install only the exact tested 0.57.7 bytes and run the next live production-wave acceptance with preserved data. Keep the separate safe-cancel live race recorded for its own minimal repair.",
-    "success": "SANDBOX_PARK_REASONS_CLASSIFIED_AND_EXACT_0577_LIVE_WAVE_NO_FALSE_REPEATED_SYSTEM_BLOCK",
-    "until_then": "NO_FILTER_CHANGE_NO_PPA005_CURRENT_PROMOTION_NO_BLIND_RESEARCH_RESTART"
+    "id": "LIVE_APPLY_05710_AND_READBACK_INTERNAL_CLARIFICATION",
+    "action": "Install only exact PSTE 0.57.10 candidate SHA256 f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f. Do not delete or rebuild retained data. After activation, verify in Themenprüfung that an internal-clarification candidate such as 'pferde putztasche' is treated as Recherchekeyword rather than Bereits abgedeckt, and verify the retained original query remains present in Semantic Sandbox for later normal editorial reformulation.",
+    "success": "LIVE_05710_ACTIVE_AND_INTERNAL_CLARIFICATION_RETENTION_READBACK_PASS",
+    "until_then": "NO_DATA_DELETION_NO_BLIND_RESEARCH_RESTART_NO_CATEGORY_LOGIC_CHANGE"
   },
   "rules": [
     "KISS",
@@ -142,7 +147,7 @@
   "live_observation": {
     "source": "USER_LIVE_WORDPRESS_SCREENSHOTS_AND_READ_ONLY_DIAGNOSTIC_2026-09-22",
     "execution": "STOPPED_BY_USER_AFTER_DRIVER_BLOCKED",
-    "installed_version": "0.57.6",
+    "installed_version": "0.57.9",
     "previous_prepare_step_overdue_recurrence_observed": false,
     "latest_visible_wave": {
       "usable_pass_topics": 29,
@@ -169,6 +174,43 @@
     "topic_yield": {
       "status": "SANDBOX_ANALYSIS_NOW_ALLOWED_AFTER_STOP",
       "rule": "ANALYZE_ONLY_SEMANTIC_SANDBOX_EVIDENCE_BEFORE_ANY_FILTER_OR_YIELD_CHANGE"
+    },
+    "latest_source": "USER_LIVE_WORDPRESS_SCREENSHOT_2026-09-24",
+    "internal_clarification_example": {
+      "query": "pferde putztasche",
+      "fundstellen": 55,
+      "reason_codes": [
+        "PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN",
+        "PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED",
+        "PSTE_FAMILY_V2_SUBJECT_HEAD_MISSING",
+        "PSTE_CONTEXT_QUERY_MISSING"
+      ],
+      "context": "PENDING",
+      "issue": "RETAINED_CORRECTLY_BUT_REVIEW_ROLE_LABEL_MISCLASSIFIED_AS_ALREADY_COVERED"
+    }
+  },
+  "internal_clarification_retention_fix": {
+    "status": "TESTED_PASS_LIVE_APPLY_READBACK_OPEN",
+    "symptom": "Portal-relevant unresolved family/context candidates such as 'pferde putztasche' were retained but misclassified in the review UI as already covered.",
+    "required_behavior": "Keep the original query losslessly in PSTE/Semantic Sandbox; do not hand it directly to production; allow later normal editorial reformulation and assignment.",
+    "root_cause": "PSTE_Topic_Policy::classifyRole returned ROLE_ALREADY_COVERED for a failed planning-readiness gate before distinguishing internal clarification from actual duplicate/coverage reasons.",
+    "fix_scope": [
+      "includes/class-pste-topic-policy.php",
+      "includes/class-pste-admin.php"
+    ],
+    "semantic_result": {
+      "internal_clarification": "ROLE_RESEARCH_KEYWORD",
+      "actual_duplicate": "ROLE_ALREADY_COVERED",
+      "original_query": "PRESERVED",
+      "direct_production_handoff": "FORBIDDEN_UNCHANGED"
+    },
+    "proof": {
+      "commit": "cd1d65ad0f41e409d03686210f32fae1f0358b8a",
+      "workflow_run": 35991171575,
+      "result": "SUCCESS",
+      "artifact_id": 10804353613,
+      "artifact_digest": "sha256:48dbb18e97b232e9c67832c3321cab7b8b495b9abacb7a3fca5bd1d3b97b2ecf",
+      "candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f"
     }
   }
 }
