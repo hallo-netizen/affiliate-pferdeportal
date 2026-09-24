@@ -135,13 +135,6 @@ def _materialize_stdin_snapshot(workspace: Path, actual_manifest: str) -> Path:
     _validate_snapshot_file(snapshot,actual_manifest)
     return snapshot
 
-def _start(snapshot: Path, workspace: Path) -> int:
-    p = subprocess.run([sys.executable, str(CODEX_ENTRY), 'start', str(snapshot), str(workspace)], text=True)
-    if p.returncode:
-        return p.returncode
-    print('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED')
-    return 0
-
 def _start_point0(point0: Path, workspace: Path, actual_manifest: str, item_index: int = 0) -> int:
     if not point0.is_file() or _within(point0, REPO):
         raise EntryFail('ROOT_POINT0_FILE_INVALID')
