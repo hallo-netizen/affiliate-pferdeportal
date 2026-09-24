@@ -16,15 +16,16 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Inspect exact bound PPM 6.7.9 production call
+      - name: Inspect exact bound PPM fact-pack builder
         shell: bash
         run: |
-          set -euo pipefail
+          set -eu
           rm -rf /tmp/ppm679
           mkdir -p /tmp/ppm679
           unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
-          grep -Rni -B80 -A140 'BLOCKED_WAVE2_RUNTIME_LINK_ROLE' /tmp/ppm679 --include='*.php' || true
-          grep -Rni -B60 -A140 'Content_Validator::\|execute_plan\|validate.*content' /tmp/ppm679 --include='*.php' | head -n 1400
+          cat /tmp/ppm679/portal-production-machine/tests/normal-draft-production/fixture-builder.php
+          echo '=== FACT PACK IMPORT ==='
+          grep -Rni -B80 -A180 'canonical_fact_pack_import_v1\|import_fact_pack_bundle' /tmp/ppm679/portal-production-machine --include='*.php' || true
 
       - name: Read exact current 16 state
         shell: bash
