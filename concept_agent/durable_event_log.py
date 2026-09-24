@@ -238,27 +238,25 @@ def payload_text(event: dict[str, Any]) -> str:
 def _event_author_allowed(row: dict[str, Any], event: dict[str, Any], batch_sha256: str) -> bool:
     login = _login(row)
     sequence = event.get("sequence")
-
-    if isinstance(sequence, int) and sequence > 60:
-        return login == TRUSTED_EVENT_AUTHOR
+    if not isinstance(sequence, int) or isinstance(sequence, bool) or sequence < 1:
+        return False
 
     migration = load_json(REPO / EVENT_AUTHOR_MIGRATION_REF)
     if migration.get("contract") != "CONCEPT_AGENT_EVENT_AUTHOR_MIGRATION_V2":
         raise Blocked("DURABLE_EVENT_AUTHOR_MIGRATION_CONTRACT_INVALID")
     if migration.get("status") != "ACTIVE" or migration.get("new_legacy_events_allowed") is not False:
         raise Blocked("DURABLE_EVENT_AUTHOR_MIGRATION_POLICY_INVALID")
-    if batch_sha256 != migration.get("legacy_batch_sha256"):
-        return False
-    if not isinstance(sequence, int) or isinstance(sequence, bool) or sequence < 1:
-        return False
+
+    legacy_batch = migration.get("legacy_batch_sha256")
     maximum = migration.get("frozen_legacy_max_sequence")
-    if not isinstance(maximum, int) or sequence > maximum:
-        return False
-    ids = migration.get("frozen_legacy_comment_ids")
-    if not isinstance(ids, dict):
-        raise Blocked("DURABLE_EVENT_LEGACY_COMMENT_MAP_MISSING")
-    expected_id = ids.get(str(sequence))
-    return isinstance(expected_id, int) and row.get("id") == expected_id
+    if batch_sha256 == legacy_batch and isinstance(maximum, int) and sequence <= maximum:
+        ids = migration.get("frozen_legacy_comment_ids")
+        if not isinstance(ids, dict):
+            raise Blocked("DURABLE_EVENT_LEGACY_COMMENT_MAP_MISSING")
+        expected_id = ids.get(str(sequence))
+        return isinstance(expected_id, int) and row.get("id") == expected_id
+
+    return login == TRUSTED_EVENT_AUTHOR
 
 
 def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, Any] | None:
