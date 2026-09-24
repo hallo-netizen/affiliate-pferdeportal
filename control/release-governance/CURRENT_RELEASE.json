@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 128,
+  "generation": 129,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "CATEGORY_INTEGRATION_PSTE_BLOCKED_STATUS_REASON_CLASSIFICATION",
+    "current_focus": "PSTE_INTERNAL_CLARIFICATION_RETENTION_LIVE_APPLY_READBACK",
     "current_focus_scope_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
-    "current_focus_reason": "CATEGORY CONCEPT IS NOW FINAL/FROZEN: 5 PRODUCT PAGES + 25 ARTICLE CATEGORIES, 30 NEW NODES, NO EXISTING CATEGORY MOVES, WORDPRESS TAXONOMY REMAINS FLAT. TECHNICAL CATEGORY PROPAGATION/READBACK CONTINUES. PSTE LIVE BLOCKED-STATUS REASON CLASSIFICATION REMAINS THE FIRST TECHNICAL OPEN POINT; RESOLVER DEFECT NOT PROVEN.",
+    "current_focus_reason": "CATEGORY CONCEPT AND NEW PSTE RESEARCH-FAMILY PRESENCE ARE CLOSED. CURRENT FIRST OPEN POINT IS THE LIVE APPLY/READBACK OF THE MINIMAL PSTE 0.57.10 RETENTION-ROLE FIX: RAW SEARCH TERMS STAY LOSSLESSLY RETAINED FOR LATER EDITORIAL REFORMULATION; INTERNAL CLARIFICATION MUST NOT DISPLAY AS ALREADY COVERED.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -233,11 +233,11 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_PSTE_BLOCKED_STATUS_REASON_CLASSIFICATION",
+    "state": "PSTE_INTERNAL_CLARIFICATION_RETENTION_LIVE_APPLY_READBACK",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. LIVE PSTE REASON-CODE SAMPLE NOW CHECKED: 3/3 BLOCKED_FOR_CATEGORY ROWS HAVE NO PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING. TWO ARE CORRECT DUPLICATE/ANSWER-EQUIVALENCE BLOCKS FOR ALREADY PUBLISHED CONTENT; ONE IS FAMILY/CONTEXT-ASSIGNMENT PENDING, ALSO WITHOUT CATEGORY EXACT-MATCH FAILURE. NEXT AND ONLY LIVE READ-ONLY CHECK: IN PORTALWEITE THEMENPRUEFUNG USE SEARCH TO TARGET KNOWN VALID OLD CATEGORY NAMES GEBISSE, HAFER, WINTERDECKEN AND OPEN TECHNISCHE DETAILS. IF THESE ALSO SHOW NO CATEGORY EXACT-MATCH MISS, THE CATEGORY-RESOLVER BLOCKER IS CLOSED. DO NOT INSTALL 0.57.9. NO PSERC FINAL REFRESH, LINK REFRESH, TOTAL E2E OR LIVE APPLY BEFORE THIS CHECK. NO LIBRARY.",
-    "completion_condition": "TARGETED LIVE READ-ONLY CHECK OF KNOWN VALID OLD CATEGORY SEARCHES GEBISSE, HAFER, WINTERDECKEN SHOWS NO PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING OR EQUIVALENT CURRENT-BASELINE CATEGORY MISS. UNKNOWN/FOREIGN CATEGORY REMAINS FAIL-CLOSED. IF PASS, CLOSE THE CATEGORY-RESOLVER BLOCKER WITHOUT PATCH AND PROCEED TO PSERC 1149 METADATA/PLAN REFRESH.",
-    "after_completion_action": "AFTER CONSOLIDATED PSTE LIVE READBACK PASS: PSERC 1149 METADATA/PLAN REFRESH, LINKREGISTRY/LINK TARGET REFRESH, TOTAL CATEGORY E2E, FINAL WORDPRESS PREFLIGHT writes_performed=false.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION CLOSEOUT. CATEGORY CONCEPT IS FINAL/FROZEN AND USER VERIFIED ALL FIVE NEW PSTE RESEARCH FAMILIES PRESENT. PSTE 0.57.10 MINIMAL INTERNAL-CLARIFICATION RETENTION/ROLE FIX HAS FULL REAL WORDPRESS E2E PASS. NEXT LIVE STEP ONLY: INSTALL EXACT TESTED PSTE-0.57.10-HOBBYROOM.zip SHA256 f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f WITHOUT DELETING/REBUILDING RETAINED DATA OR RESTARTING RESEARCH; THEN READ BACK 'pferde putztasche' IN THEMENPRUEFUNG AND SEMANTIC SANDBOX. EXPECT RECHERCHEKEYWORD/INTERNAL CLARIFICATION, ORIGINAL QUERY PRESERVED, NOT 'BEREITS ABGEDECKT'. AFTER PASS: PSERC 1149 REFRESH -> LINK TARGET REFRESH -> TOTAL CATEGORY E2E -> FINAL READ-ONLY PREFLIGHT.",
+    "completion_condition": "LIVE PSTE 0.57.10 ACTIVE; 'pferde putztasche' INTERNAL-CLARIFICATION CASE IS NO LONGER ROLE/LABEL 'BEREITS ABGEDECKT'; ORIGINAL QUERY REMAINS RETAINED IN SEMANTIC SANDBOX FOR LATER NORMAL EDITORIAL REFORMULATION; REAL DUPLICATE CASES REMAIN 'BEREITS ABGEDECKT'.",
+    "after_completion_action": "PSERC 1149 METADATA/PLAN REFRESH, LINKREGISTRY/LINK TARGET REFRESH, TOTAL CATEGORY E2E, FINAL WORDPRESS PREFLIGHT writes_performed=false.",
     "no_optional_detours": true,
     "sequence": 39,
     "authorized_change_prefixes": [
@@ -247,7 +247,7 @@
       "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/category_integration_pste_resolver_reclassification_20260924.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/pste_internal_clarification_retention_fix_20260924.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-24",
-    "current_first_blocker": "PSTE_0578_BLOCKED_STATUS_REASON_CLASSIFICATION_RESOLVER_DEFECT_NOT_PROVEN",
+    "current_first_blocker": "PSTE_05710_LIVE_APPLY_READBACK_REQUIRED",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1436,6 +1436,27 @@
         "purpose": "LARGE_DATASET_ADMIN_RENDER_FIX",
         "category_resolver_fix_included": false,
         "install_allowed": false
+      },
+      "pste_05710": {
+        "status": "REAL_WORDPRESS_E2E_PASS_LIVE_APPLY_READBACK_OPEN",
+        "version": "0.57.10",
+        "live_observed_version": "0.57.9",
+        "purpose": "INTERNAL_CLARIFICATION_RETENTION_ROLE_AND_UI_SEMANTICS_ONLY",
+        "category_resolver_change": false,
+        "data_deletion": false,
+        "raw_query_preserved": true,
+        "direct_production_handoff": false,
+        "proof_branch": "pste-05700-server-step-driver-proof",
+        "proof_commit": "cd1d65ad0f41e409d03686210f32fae1f0358b8a",
+        "proof_run_id": 35991171575,
+        "proof_result": "SUCCESS",
+        "proof_artifact_id": 10804353613,
+        "proof_artifact_digest": "sha256:48dbb18e97b232e9c67832c3321cab7b8b495b9abacb7a3fca5bd1d3b97b2ecf",
+        "candidate_zip_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f",
+        "targeted_positive": "INTERNAL_CLARIFICATION_TO_RESEARCH_KEYWORD_PASS",
+        "duplicate_regression": "ACTUAL_DUPLICATE_REMAINS_ALREADY_COVERED_PASS",
+        "evidence_ref": "release/affiliate-zentrale/evidence/pste_internal_clarification_retention_fix_20260924.md",
+        "next": "INSTALL_EXACT_TESTED_05710_THEN_LIVE_READBACK_NO_DATA_RESET"
       }
     },
     "live_consumer_closeout_20260924": {
@@ -1471,7 +1492,19 @@
       "global_duplicate_term_ids": 0,
       "global_duplicate_slugs": 0,
       "new_term_id_range": "1577-1601",
-      "user_decision_required_for_change": true
+      "user_decision_required_for_change": true,
+      "live_pste_research_family_readback": {
+        "status": "PASS",
+        "observed_version": "0.57.9",
+        "verified_families": [
+          "Pferdesättel",
+          "Trensen",
+          "Offenstallbau",
+          "Paddockbau",
+          "Reitplatzbau"
+        ],
+        "interpretation": "ALL_FIVE_NEW_FAMILIES_PRESENT_IN_ACTIVE_PSTE_RESEARCH_FAMILY_SELECTOR"
+      }
     }
   },
   "template_kit_150559_source_binding_evidence": {
@@ -1559,5 +1592,18 @@
     "historical_asset_sha256": "SUPERSEDED_BY_BOUND_CURRENT_1149_ASSET",
     "current_blocker": null,
     "current_asset_sha256": "db0e278e45c48a6ed586c360e98e142cae1aa05ff5f2f2b2e2d4c196378c720f"
+  },
+  "live_consumer_closeout_20260924": {
+    "status": "CATEGORY_CONCEPT_AND_FAMILY_PRESENCE_PASS_PSTE_05710_LIVE_READBACK_OPEN",
+    "template_kit_readback": "PASS",
+    "production_center_readback": "PASS",
+    "production_center_build_integrity": "PASS",
+    "remaining_static_full_category_consumers": 0,
+    "pste_live_version": "0.57.9",
+    "pste_new_family_selector": "PASS_5_OF_5",
+    "pste_internal_clarification_fix": "0.57.10_REAL_WORDPRESS_E2E_PASS",
+    "pste_05710_install_allowed": true,
+    "pste_05710_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f",
+    "next": "INSTALL_EXACT_05710_AND_READBACK_PFERDE_PUTZTASCHE_RETENTION_ROLE"
   }
 }
