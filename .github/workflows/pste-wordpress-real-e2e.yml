@@ -52,7 +52,7 @@ jobs:
           wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
 
-      - name: Build exact 0.57.11 candidate with bounded admin reads
+      - name: Build exact 0.57.12 candidate with stale-role readback repair
         shell: bash
         run: |
           set -euo pipefail
@@ -80,12 +80,13 @@ jobs:
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste05710-internal-clarification-retention-role.patch"
           base64 -d "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste05711-admin-bounded-read.patch.gz.b64" | gzip -d > /tmp/pste05711-admin-bounded-read.patch
           patch --no-backup-if-mismatch -p1 < /tmp/pste05711-admin-bounded-read.patch
+          patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste05712-stale-role-readmodel.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
-          sed -i 's/Version: 0\.57\.0/Version: 0.57.11/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.11');/" portal-seo-topic-engine.php
-          grep -q 'Version: 0.57.11' portal-seo-topic-engine.php
-          grep -q "define('PSTE_VERSION', '0.57.11');" portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.12/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.12');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.12' portal-seo-topic-engine.php
+          grep -q "define('PSTE_VERSION', '0.57.12');" portal-seo-topic-engine.php
           grep -q 'Workflow projection only' includes/class-pste-repository.php
           grep -q 'finalize_prepare_cursor' includes/class-pste-research-job.php
           grep -q 'pste-breadth-status' includes/class-pste-admin.php
@@ -93,6 +94,7 @@ jobs:
           grep -q "if(!\$ids)" includes/class-pste-sandbox-record-store.php
           grep -q "raw_keyword_preserved" includes/class-pste-normal-metadata-path.php
           grep -q "PSTE_SANDBOX_EDITORIAL_CLARIFICATION_RETAINED" includes/class-pste-semantic-review-sandbox.php
+          grep -q "Persisted automatic role/planning fields are caches" includes/class-pste-repository.php
           count="$(find . -type f -name '*.php' | wc -l)"
           test "$count" -eq 76
           while IFS= read -r f; do echo "LINT $f"; php -l "$f"; done < <(find . -type f -name '*.php' | sort)
@@ -100,19 +102,19 @@ jobs:
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
-          zip -qr /tmp/PSTE-0.57.11-HOBBYROOM.zip "Portal SEO Topic Engine"
+          zip -qr /tmp/PSTE-0.57.12-HOBBYROOM.zip "Portal SEO Topic Engine"
           echo PACKAGE_ZIP_BUILT
-          test "$(unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          test "$(unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           echo PACKAGE_ROOT_PASS
-          test "$(unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
-          unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
-          unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
-          unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
-          if unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
-          if unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
-          sha256sum /tmp/PSTE-0.57.11-HOBBYROOM.zip | tee /tmp/PSTE-0.57.11-HOBBYROOM.sha256
-          wp plugin install /tmp/PSTE-0.57.11-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test "$(unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
+          test "$(unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
+          unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
+          unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
+          unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
+          if unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
+          if unzip -Z1 /tmp/PSTE-0.57.12-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
+          sha256sum /tmp/PSTE-0.57.12-HOBBYROOM.zip | tee /tmp/PSTE-0.57.12-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.12-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
           test ! -d /tmp/wordpress/wp-content/plugins/portal-seo-topic-engine
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
@@ -194,6 +196,92 @@ jobs:
           grep -q '"ready":true' /tmp/setup.json
           grep -q '"context_status":"COMPLETE"' /tmp/setup.json
           wp eval 'if(!PSTE_Sandbox_Record_Store::isComplete())throw new RuntimeException("SANDBOX_RECORD_STORE_NOT_COMPLETE"); echo "PASS EMPTY_SANDBOX_REAL_MIGRATION\n";' --path=/tmp/wordpress
+
+      - name: Prove stale persisted automatic roles are reclassified read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval '
+            global $wpdb;
+            $table=PSTE_Repository::table("topic_pool");
+            $now=gmdate("Y-m-d H:i:s");
+            $run="00000000-0000-4000-8000-000000000012";
+            $insert=function(string $key,array $payload,string $storedRole) use($wpdb,$table,$now,$run): void {
+              $ok=$wpdb->insert($table,[
+                "pool_key"=>$key,
+                "normalized_key"=>hash("sha256",$key),
+                "candidate_id"=>hash("sha256","candidate|".$key),
+                "first_run_uuid"=>$run,
+                "last_run_uuid"=>$run,
+                "original_category_id"=>0,
+                "current_category_id"=>0,
+                "automatic_decision"=>"BLOCKED",
+                "automatic_pool_status"=>"BLOCKED_FOR_CATEGORY",
+                "topic_role"=>$storedRole,
+                "planning_suitability"=>"BLOCKED",
+                "context_state"=>"PENDING",
+                "structure_sha256"=>"",
+                "manual_status"=>"",
+                "manual_category_id"=>0,
+                "manual_article_type"=>"",
+                "manual_note"=>"",
+                "payload_json"=>wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
+                "occurrence_count"=>1,
+                "first_seen_at"=>$now,
+                "last_seen_at"=>$now,
+                "reviewed_by"=>0
+              ]);
+              if($ok!==1||$wpdb->last_error!=="")throw new RuntimeException("STALE_ROLE_SEED_FAILED_".$wpdb->last_error);
+            };
+            $internalKey=hash("sha256","legacy retained probe internal");
+            $internal=[
+              "canonical_query"=>"legacy retained probe internal",
+              "primary_longtail_query"=>"legacy retained probe internal",
+              "raw_user_question"=>"legacy retained probe internal",
+              "reason_codes"=>[
+                "PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN",
+                "PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED",
+                "PSTE_FAMILY_V2_SUBJECT_HEAD_MISSING",
+                "PSTE_CONTEXT_QUERY_MISSING"
+              ],
+              "sandbox_required"=>true,
+              "sandbox_admission_mode"=>"INTERNAL_CLARIFICATION",
+              "normal_metadata_path"=>["status"=>"SANDBOX_REQUIRED","sandbox_admission_mode"=>"INTERNAL_CLARIFICATION"],
+              "planning_readiness_gate"=>["contract"=>PSTE_Planning_Readiness_Gate::CONTRACT,"ok"=>false,"reason_codes"=>[]],
+              "decision"=>"BLOCKED"
+            ];
+            $insert($internalKey,$internal,PSTE_Topic_Policy::ROLE_ALREADY_COVERED);
+
+            $dupKey=hash("sha256","legacy duplicate probe");
+            $duplicate=[
+              "canonical_query"=>"legacy duplicate probe",
+              "primary_longtail_query"=>"legacy duplicate probe",
+              "raw_user_question"=>"legacy duplicate probe",
+              "reason_codes"=>["EXACT_NORMALIZED_QUERY_DUPLICATE","CROSS_TYPE_ANSWER_EQUIVALENCE"],
+              "planning_readiness_gate"=>["contract"=>PSTE_Planning_Readiness_Gate::CONTRACT,"ok"=>false,"reason_codes"=>["EXACT_NORMALIZED_QUERY_DUPLICATE"]],
+              "decision"=>"BLOCKED"
+            ];
+            $insert($dupKey,$duplicate,PSTE_Topic_Policy::ROLE_RESEARCH_KEYWORD);
+
+            $internalRows=PSTE_Repository::adminTopicPoolCandidates("BLOCKED_FOR_CATEGORY","legacy retained probe internal",10);
+            if(count($internalRows)!==1)throw new RuntimeException("STALE_INTERNAL_READ_COUNT_".count($internalRows));
+            $read=$internalRows[0];
+            if(($read["topic_role"]??"")!==PSTE_Topic_Policy::ROLE_RESEARCH_KEYWORD)throw new RuntimeException("STALE_INTERNAL_ROLE_NOT_RECLASSIFIED_".($read["topic_role"]??""));
+            if(($read["primary_longtail_query"]??"")!=="legacy retained probe internal")throw new RuntimeException("STALE_INTERNAL_PRIMARY_QUERY_CHANGED");
+            if(($read["raw_user_question"]??"")!=="legacy retained probe internal")throw new RuntimeException("STALE_INTERNAL_RAW_QUERY_CHANGED");
+            if(($read["planning_suitability"]??"")!==PSTE_Topic_Policy::PLAN_BLOCKED)throw new RuntimeException("STALE_INTERNAL_PLANNING_NOT_BLOCKED");
+
+            $dupRows=PSTE_Repository::adminTopicPoolCandidates("BLOCKED_FOR_CATEGORY","legacy duplicate probe",10);
+            if(count($dupRows)!==1)throw new RuntimeException("STALE_DUP_READ_COUNT_".count($dupRows));
+            if(($dupRows[0]["topic_role"]??"")!==PSTE_Topic_Policy::ROLE_ALREADY_COVERED)throw new RuntimeException("STALE_DUP_ROLE_NOT_RECLASSIFIED_".($dupRows[0]["topic_role"]??""));
+
+            $storedInternal=(string)$wpdb->get_var($wpdb->prepare("SELECT topic_role FROM $table WHERE pool_key=%s",$internalKey));
+            $storedDuplicate=(string)$wpdb->get_var($wpdb->prepare("SELECT topic_role FROM $table WHERE pool_key=%s",$dupKey));
+            if($storedInternal!==PSTE_Topic_Policy::ROLE_ALREADY_COVERED)throw new RuntimeException("STALE_INTERNAL_DB_MUTATED_".$storedInternal);
+            if($storedDuplicate!==PSTE_Topic_Policy::ROLE_RESEARCH_KEYWORD)throw new RuntimeException("STALE_DUP_DB_MUTATED_".$storedDuplicate);
+
+            echo "PASS_STALE_ROLE_READMODEL_INTERNAL_TO_RESEARCH_KEYWORD_DUP_TO_ALREADY_COVERED_DB_UNCHANGED\n";
+          ' --path=/tmp/wordpress
 
       - name: Prove bounded Sandbox export stays off legacy full-read path
         shell: bash
@@ -475,8 +563,8 @@ jobs:
         with:
           name: pste-real-wordpress-http-e2e-system
           path: |
-            /tmp/PSTE-0.57.11-HOBBYROOM.sha256
-            /tmp/PSTE-0.57.11-HOBBYROOM.zip
+            /tmp/PSTE-0.57.12-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.12-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
             /tmp/settings-stale-race.html
