@@ -41,10 +41,11 @@ Damit kann die alte Pre-MACHINE_READY-`next_action` in `CURRENT_STATE.json` nach
 
 Nach MACHINE_READY ist nur die append-only Ereigniskette im gebundenen Batch-Issue Fortschrittsautorität.
 
-Ein gültiger Arbeitsschritt ist ausschließlich ein
+Ein gültiger neuer Arbeitsschritt ist ausschließlich ein
 `CONCEPT_AGENT_DURABLE_EVENT_V1`
-von
-`chatgpt-codex-connector[bot]`.
+vom gebundenen Chat-Worker `hallo-netizen`.
+
+Die vorhandenen Events 1..60 sind ausschließlich eingefrorene Altbelege und werden nur über ihre exakten GitHub-Kommentar-IDs akzeptiert. Alte Worker-Identitäten besitzen keine aktuelle oder zukünftige Produktionsautorität.
 
 Jedes Event bindet:
 - aktuellen Batch;
@@ -55,22 +56,22 @@ Jedes Event bindet:
 - SHA-256 und Bytegröße;
 - `publish_allowed=false`.
 
-Nicht-Bot-Kommentare werden ignoriert und sind niemals Autorität.
+Nicht gebundene Kommentare werden ignoriert und sind niemals Autorität.
 
 Vor jeder produktiven Aktion muss `concept_agent/durable_event_log.py current`:
 1. den aktuellen Batch aus dem hashgebundenen PSERC-Metadaten-Snapshot ableiten;
 2. den exakten Batch-Claim finden;
 3. den MACHINE_READY-Botbeleg prüfen;
-4. die komplette Bot-Eventkette ab Event 1 hashverkettet wiederholen;
+4. die komplette Worker-Eventkette ab Event 1 hashverkettet wiederholen;
 5. Research-Bindung, Produktions-Binding und Fortschritts-Checkpoint deterministisch rekonstruieren;
 6. genau **eine** `allowed_action` ausgeben.
 
 Der Worker darf ausschließlich diese Aktion ausführen und muss das Ergebnis mit dem passenden `seal-*`-Befehl als nächstes Event ausgeben.
 
 Abbruchregel:
-- Abbruch vor neuem Bot-Event → letzter sicherer Zustand bleibt aktuell;
-- Abbruch nach neuem Bot-Event → ein neuer Worker rekonstruiert exakt daraus;
-- fehlendes, manipuliertes, mehrdeutiges oder lückenhaftes Bot-Event → **STOP**.
+- Abbruch vor neuem Worker-Event → letzter sicherer Zustand bleibt aktuell;
+- Abbruch nach neuem Worker-Event → ein neuer Worker rekonstruiert exakt daraus;
+- fehlendes, manipuliertes, mehrdeutiges oder lückenhaftes Worker-Event → **STOP**.
 
 Der Chat darf:
 - Fortsetzung anstoßen;
@@ -114,4 +115,4 @@ Hart verboten:
 - zweites `text-start` nach MACHINE_READY desselben Batches;
 - Alternativroute.
 
-Für den derzeit bereits MACHINE_READY befindlichen 16er-Batch existiert noch kein gültiges Produktions-Event. Deshalb leitet das Event-Gate aktuell ausschließlich `RESEARCH_ITEM` für Artikelindex 0 ab.
+Für einen bereits MACHINE_READY befindlichen Batch wird die aktuelle erlaubte Aktion ausschließlich aus der gültigen dauerhaften Ereigniskette abgeleitet.
