@@ -61,7 +61,7 @@ jobs:
 
   production:
     needs: verify
-    if: ${{ needs.verify.result == 'success' && (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
+    if: ${{ needs.verify.result == 'success' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/github-neutral-batch-executor-20260924' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     permissions:
