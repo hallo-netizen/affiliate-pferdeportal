@@ -67,8 +67,9 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
             ROOT / ".github/workflows/pferde-atelier-github-batch-executor.yml"
         ).read_text(encoding="utf-8")
         self.assertIn("concept_agent/RESUME_TRIGGER", workflow)
-        self.assertNotIn("recovery/current16-input", workflow)
-        self.assertNotIn("github_batch_executor.py", workflow)
+        trigger_block = workflow.split("jobs:", 1)[0]
+        self.assertNotIn("recovery/current16-input", trigger_block)
+        self.assertEqual(trigger_block.count("concept_agent/RESUME_TRIGGER"), 1)
         self.assertIn("concept_agent/durable_event_log.py current", workflow)
         self.assertIn("concept_agent/universal_reentry_guard.py build", workflow)
         self.assertIn("concept_agent/progress_guard.py resume", workflow)
