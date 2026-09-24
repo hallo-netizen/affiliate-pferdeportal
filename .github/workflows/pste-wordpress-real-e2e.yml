@@ -93,10 +93,10 @@ jobs:
           grep -q "if(!\$ids)" includes/class-pste-sandbox-record-store.php
           grep -q "raw_keyword_preserved" includes/class-pste-normal-metadata-path.php
           grep -q "PSTE_SANDBOX_EDITORIAL_CLARIFICATION_RETAINED" includes/class-pste-semantic-review-sandbox.php
-          grep -R -q "PSTE_ADMIN_EXACT_FULL_ANALYTICS_REQUIRES_FILTERED_OR_BATCHED_VIEW" includes/
+          grep -R -n "PSTE_ADMIN_EXACT_FULL_ANALYTICS_REQUIRES_FILTERED_OR_BATCHED_VIEW" includes/ || { echo PSTE_05711_ADMIN_GUARD_SENTINEL_MISSING; exit 1; }
           count="$(find . -type f -name '*.php' | wc -l)"
           test "$count" -eq 76
-          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find . -type f -name '*.php' | sort)
+          while IFS= read -r f; do echo "LINT $f"; php -l "$f"; done < <(find . -type f -name '*.php' | sort)
           rm -rf /tmp/pste-release
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
