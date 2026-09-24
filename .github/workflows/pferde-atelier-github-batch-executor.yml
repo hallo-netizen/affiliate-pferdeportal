@@ -123,5 +123,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git show c1fe5d40e87025bfaafa205f417b126dd1179092:concept_agent/github_batch_executor.py > /tmp/pferde_original_executor.py
+          gh api "repos/hallo-netizen/affiliate-pferdeportal/contents/concept_agent/github_batch_executor.py?ref=c1fe5d40e87025bfaafa205f417b126dd1179092" --jq .content | base64 -d > /tmp/pferde_original_executor.py
           PYTHONPATH="$GITHUB_WORKSPACE" python3 /tmp/pferde_original_executor.py run
