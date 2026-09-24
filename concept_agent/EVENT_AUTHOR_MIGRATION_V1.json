@@ -9,5 +9,27 @@
   "new_legacy_events_allowed": false,
   "future_batches_legacy_author_allowed": false,
   "publish_allowed": false,
-  "note": "Historical Codex events 1..20 remain immutable input evidence only. All new durable production events are GitHub Actions authored."
+  "note": "Historical Codex events 1..20 remain immutable input evidence only. All new durable production events are GitHub Actions authored.",
+  "legacy_event_hashes": {
+    "1": "994e3f19d4ada84aa0b7f43f82d7f39dff1f79e678d508bdfd1755889f7d7734",
+    "2": "dc930202c9f7e16ce84cba198381491296add11d4744c8757a0142c058b1ee30",
+    "3": "33d232e8a0fa9004eb7aca9c2fd2d6cd3834483967dca3d8bc13062ae513c785",
+    "4": "21d4bcbbbb631cc9be3323e8f882321d4af787ab16be756f9244da9b9fde913a",
+    "5": "85dfa52367ac94219d1ecaa44c3df6b375936e7059ef9d02a036de96d82ef237",
+    "6": "d59b0d66659db353911a13d3c231c6f7a0be5bea51f94e046a4ec77176e7b839",
+    "7": "3d9b78d8069ccf25546927a7ba10faa4a91a8ba090042944061f14602283f04d",
+    "8": "4cfad4f7c36e580d1d26b5c8162913e38f394f71664f0045346a7d1a514ea764",
+    "9": "2ed27c889a2b8989de27c9e1adb081c7917f07792e6acd670613fad75943d5ce",
+    "10": "093978cda50465152fecee99fc080daffd019e2ad38b2dbbb3f48fc6f9a1034e",
+    "11": "48315225f6a41f6b70236b2bc9bc764fe73d57a1cbfc8d308d2f67b570149f19",
+    "12": "6b38bd1088c7e16ce84cba198381491296add11d4744c8757a0142c058b1ee30",
+    "13": "e10ff6e8cfbb97ad459c9b6f7d03fde883976b5df8c640b44c0be01c69995ab8",
+    "14": "17aba664b004d18877fcf1f036becb24fb6246690fa3fc2d2077862f1d4d0e18",
+    "15": "c45b9d34a149919ca05f61904b632ada20a370d03a715e48f830c0d5a1029cf9",
+    "16": "18c1b4761111ccb9c78e2f02a4864b5a007a75287221ad11b7c8dc72415e67db",
+    "17": "d87a9a564686f7f764212f57d0fe072c197bd47f8e7fc2cc80a7f240ce57da58",
+    "18": "2a91a36c5a4fd61e519c5d0a957d98b58618b7daed17daa4c7942d9ac4d1ebf0",
+    "19": "515f3dc9362181a0923f2db010cf7024809505f191556efbd15038e7e317bb9c",
+    "20": "95cef542633080de5f4f52ca7387f44aa32bac59ee7e76529dc940db4a7ff8d9"
+  }
 }
