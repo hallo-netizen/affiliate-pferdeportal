@@ -308,56 +308,25 @@ def _write(current:dict,index:int)->bytes:
         return raw
     raise Blocked("PREWRITTEN_DRAFT_REQUIRED")
 
-def _repair(rows:list[dict],current:dict,index:int)->bytes:
-    row=_checkpoint_row(current,index); body=row["content_utf8"]
+def _repair_handoff(rows:list[dict],current:dict,index:int)->dict:
+    row=_checkpoint_row(current,index)
     result=_latest_check_payload(rows,index)
     findings=result.get("findings") if isinstance(result.get("findings"),list) else []
-    if not findings: raise Blocked("REPAIR_FINDINGS_MISSING")
-    checker=str(result.get("origin_checker") or result.get("checker") or "")
-    owners=_owners(checker,findings)
-    if owners!={"DRAFT_WORKER"}: raise Blocked("REPAIR_OWNER_NOT_DRAFT:"+",".join(sorted(owners or {"UNKNOWN"})))
-
-    # Current recovery batch contains prewritten drafts. LT repair is local-only:
-    # use LanguageTool 6.8's own ranked replacement list, apply the first offered
-    # replacement to the exact unique target, then the controller re-runs LT.
-    if checker not in {"LT68","languagetool"}:
-        raise Blocked("LOCAL_REPAIR_ROUTE_UNAVAILABLE:"+checker)
-
-    plain=production_checks._plain_text(body)
-    report,_,_=production_checks._run_languagetool_text(REPO,plain)
-    matches=report.get("matches") if isinstance(report,dict) else None
-    if not isinstance(matches,list) or not matches:
-        raise Blocked("LT68_REPAIR_MATCHES_MISSING")
-
-    edits=[]
-    for match in matches:
-        if not isinstance(match,dict): raise Blocked("LT68_REPAIR_MATCH_INVALID")
-        off=match.get("offset"); length=match.get("length")
-        if not isinstance(off,int) or not isinstance(length,int) or off<0 or length<=0:
-            raise Blocked("LT68_REPAIR_RANGE_INVALID")
-        target=plain[off:off+length]
-        replacements=match.get("replacements")
-        values=[r.get("value") for r in (replacements or []) if isinstance(r,dict) and isinstance(r.get("value"),str) and r.get("value")]
-        if not values:
-            # Verified German inflection for this exact LT68 spelling finding:
-            # Duden: Planierschild -> plural Planierschilde.
-            verified_lt_repairs={"Planierschilder":"Planierschilde","Planierschilde":"Schilde zum Planieren","Ein Vorrichtung":"Eine Vorrichtung"}
-            replacement=verified_lt_repairs.get(target)
-            if replacement:
-                values=[replacement]
-            else:
-                raise Blocked("LT68_REPAIR_NO_VERIFIED_REPLACEMENT:"+str(match.get("rule",{}).get("id") or ""))
-        if not target or body.count(target)!=1:
-            raise Blocked("LT68_REPAIR_TARGET_NOT_UNIQUE:"+target[:80])
-        edits.append((target,values[0]))
-
-    repaired=body
-    for target,replacement in edits:
-        repaired=repaired.replace(target,replacement,1)
-    if repaired==body: raise Blocked("REPAIR_DRAFT_UNCHANGED")
-    try: content_guard.validate_repair_continuity(body,repaired)
-    except content_guard.ContentGuardError as exc: raise Blocked("REPAIR_SCOPE_FAIL:"+str(exc)) from exc
-    return repaired.encode("utf-8")
+    if not findings:
+        raise Blocked("REPAIR_FINDINGS_MISSING")
+    return {
+        "status":"NORMAL_WORKFLOW_REPAIR_REQUIRED",
+        "batch_sha256":current["batch_sha256"],
+        "sequence":current["sequence"],
+        "item_index":index,
+        "checker":str(result.get("origin_checker") or result.get("checker") or ""),
+        "draft_sha256":row["draft_sha256"],
+        "finding_sha256":current["allowed_action"].get("finding_sha256"),
+        "allowed_action":current["allowed_action"],
+        "findings":findings,
+        "executor_mutation_performed":False,
+        "publish_allowed":False,
+    }
 
 def _final_ppm_payload(events:list[dict],index:int)->dict:
     for e in reversed(events):
@@ -474,7 +443,7 @@ def step()->dict:
         result=_lt(body) if action.get("checker")=="LT68" else _fullcheck(rows,current,idx,body,int(row["revision"]))
         _seal(current,"JSON_GZIP_BASE64",canon(result))
     elif name=="REPAIR_DRAFT":
-        _seal(current,"UTF8_GZIP_BASE64",_repair(rows,current,int(action["item_index"])))
+        return _repair_handoff(rows,current,int(action["item_index"]))
     elif name=="RUN_PSERC":
         _seal(current,"JSON_GZIP_BASE64",canon(_batch_stage(rows,current,"PSERC")))
     elif name=="RUN_ENDSTEMPEL":
@@ -499,6 +468,8 @@ def run()->dict:
             return {"contract":CONTRACT,"status":"PASS","steps":count,"batch_sha256":c["batch_sha256"],
                     "sequence":c["sequence"],"final_file_sha256":c["checkpoint"].get("endstempel_final_file_sha256"),
                     "publish_allowed":False}
+        if out["status"]=="NORMAL_WORKFLOW_REPAIR_REQUIRED":
+            return {"contract":CONTRACT,**out}
     raise Blocked("MAX_STEPS_EXCEEDED")
 
 def main()->int:
