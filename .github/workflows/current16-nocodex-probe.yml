@@ -3,10 +3,10 @@ name: current16 direct production executor
 on:
   push:
     branches: [current16-original-workflow-nocodex]
+  workflow_dispatch:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   execute:
@@ -17,7 +17,6 @@ jobs:
           persist-credentials: false
 
       - name: Read authoritative durable state
-        id: durable
         shell: bash
         run: |
           set -euo pipefail
@@ -35,51 +34,6 @@ jobs:
           print('ITEM_INDEX='+str(a.get('item_index')))
           if d.get('publish_allowed') is not False:
               raise SystemExit('PUBLISH_FLAG_INVALID')
-          if a.get('action') == 'STOP':
-              Path('/tmp/stop').write_text('1')
-          PY
-
-      - name: Trigger bound Codex continuation
-        if: ${{ !cancelled() }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -f /tmp/stop ]; then
-            echo 'DURABLE_ALREADY_STOPPED'
-            exit 0
-          fi
-          body=$(cat <<'EOF'
-          @codex AUTHORITATIVE CURRENT16 DIRECT EXECUTOR — CONTINUE THE EXISTING MACHINE_READY BATCH TO STOP.
-
-          HARD RULE:
-          - Run only: python3 concept_agent/durable_event_log.py current --out /tmp/concept-agent-current
-          - Execute ONLY the machine-derived allowed_action through the existing bound implementation.
-          - Seal ONLY with the matching durable_event_log seal-* command.
-          - Repeat current -> allowed_action -> execute -> seal until STOP.
-          - Existing secured current article bytes only when WRITE_DRAFT is machine-derived.
-          - RUN_CHECKER: exact named checker on exact current materialized draft.
-          - REPAIR_DRAFT: same article only, exact current findings/repair route only.
-          - Repairable checker findings are not terminal.
-          - No research rerun.
-          - No text-start.
-          - No parent_start.
-          - No alternate route.
-          - No architecture/workflow/rule changes.
-          - No publish.
-          - Continue 0..15, then machine-derived PSERC and ENDSTEMPEL, then STOP.
-          - Final response only at STOP or a true terminal durable fail-closed block.
-          EOF
-          )
-          gh api "repos/$REPO/issues/382/comments" -f body="$body" >/tmp/comment.json
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          d=json.loads(Path('/tmp/comment.json').read_text())
-          print('EXECUTOR_DISPATCH_COMMENT_ID='+str(d['id']))
-          print('EXECUTOR_DISPATCH_URL='+str(d['html_url']))
           PY
 
       - name: Record executor state
