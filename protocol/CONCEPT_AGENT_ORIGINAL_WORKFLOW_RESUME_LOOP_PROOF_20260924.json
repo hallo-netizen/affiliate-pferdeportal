@@ -14,9 +14,9 @@
     "new_github_actions_production_events_allowed": false
   },
   "positive_proof": {
-    "workflow_run_id": 36017836937,
+    "workflow_run_id": 36021105373,
     "conclusion": "success",
-    "head_sha": "372b203bc171ce153fa3386f5b5d6cfc1766f030",
+    "head_sha": "a014d0bfe4230f4265574ef6f27c3cada5661652",
     "marker": "ORIGINAL_WORKFLOW_RESUME_READY:REPAIR_DRAFT",
     "resume_status": "RESUME_ALLOWED",
     "tests_passed": 19
@@ -25,6 +25,7 @@
     "test_github_cannot_author_next_repair_event": "PASS",
     "test_no_per_error_github_trigger_or_alternate_executor": "PASS",
     "test_original_worker_can_author_next_event": "PASS",
+    "test_positive_original_worker_can_author_next_event": "PASS",
     "repair_file_commit_sha": "fadf76abd1779c9718de36310d09eeeb96f24ee6",
     "workflow_runs_for_repair_file_commit": 0,
     "marker": "PER_ERROR_GITHUB_RESTART_BLOCKED"
@@ -43,6 +44,8 @@
   "connector_identity_blocker": {
     "expected_author": "chatgpt-codex-connector[bot]",
     "available_comment_writer_observed_as": "hallo-netizen",
+    "historical_trigger_for_expected_author": "@codex",
+    "codex_trigger_used_for_current_resume": false,
     "nonauthoritative_event_attempt_removed": true,
     "state_advanced": false,
     "alternate_route_created": false
