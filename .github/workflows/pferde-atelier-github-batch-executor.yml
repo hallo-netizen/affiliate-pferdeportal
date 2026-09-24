@@ -33,7 +33,8 @@ jobs:
           set -euo pipefail
           python3 -m unittest -v \
             concept_agent.tests.test_resume_button_original_workflow \
-            concept_agent.tests.test_current_production_guards
+            concept_agent.tests.test_current_production_guards \
+            concept_agent.tests.test_interruption_return_to_start
           python3 control/startmaster0107/test_system4_107007_repair_authority.py
           PYTHONPATH=isolated_system4 python3 -m unittest -v \
             isolated_system4.test_machine_route_lock_contract.MachineRouteLockContractTests.test_bound_start_hardlock_blocks_before_any_temp_workspace \
