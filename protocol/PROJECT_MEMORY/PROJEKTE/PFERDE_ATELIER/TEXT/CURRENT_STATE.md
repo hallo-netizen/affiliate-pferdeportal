@@ -1,7 +1,25 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-09-11
+STAND: 2026-09-24
 STATUS: BLOCKED / ONE-FRESH-ARTICLE REALTEST NEXT
+
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Der frühere Produktionsblocker unten bleibt historische Text-/Produktionslage, ist aber **nicht** der aktuelle Status der abgeschlossenen Kategorieintegration.
+
+Für Kategorie/Struktur sind aktuell gebunden:
+- Portal Link Policy Runtime Verifier **1.0.0** – kein statisches Vollkopie-Delta erforderlich
+- Portal Production Center **1.1.1** – **1149 / 9 / 5790**, Build-Integrity PASS
+- Portal Production Link Policy Gate **1.0.1** – dynamischer/source-getriebener Kategoriepfad
+- Portal Production Machine **6.7.9** – **25/25 neue Kategorien + 125/125 neue Slots PASS**
+- Portal SEO Redaktionsplan Compiler **0.28.23** – vollständiger **1149-Lauf PASS**
+- Portal SEO Themenengine **0.57.12** – **LIVE_READBACK_PASS_CLOSED**, `pferde putztasche` = Recherchekeyword, Kontext PENDING, Originalbegriff erhalten
+
+Finale Kategorie-Nachweise:
+- Run `36005442270` = SUCCESS
+- Run `36005442188` = SUCCESS
+
+Kategorie-/Strukturscope: **CLOSED**. Kein PSERC-, Linkregistry-, E2E- oder Kategorie-Preflight erneut starten ohne neue harte Defektevidenz.
 
 ## EINE AKTUELLE WAHRHEIT
 
