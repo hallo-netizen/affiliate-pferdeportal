@@ -19,3 +19,4 @@ resume-after-lt68-runtime-restore
 resume-original-production-executor
 execute-original-production-chain
 live-run-original-executor
+live-run-endstempel-binding-restored
