@@ -1,14 +1,6 @@
 name: Pferdeatelier GitHub Batch Executor
 
 on:
-  push:
-    branches:
-      - main
-      - 'fix/github-neutral-batch-executor-*'
-    paths:
-      - 'concept_agent/**'
-      - 'recovery/current16-input/**'
-      - '.github/workflows/pferde-atelier-github-batch-executor.yml'
   workflow_dispatch:
   workflow_run:
     workflows: ['Pferdeatelier text-start receiver']
@@ -46,7 +38,7 @@ jobs:
 
   production:
     needs: verify
-    if: ${{ needs.verify.result == 'success' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/github-neutral-batch-executor-20260924' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
+    if: ${{ needs.verify.result == 'success' && (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     permissions:
@@ -61,6 +53,31 @@ jobs:
         with:
           fetch-depth: 2
           persist-credentials: false
+      - name: Second start button — resume exact saved state only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pferde-resume
+          mkdir -p /tmp/pferde-resume
+          python3 concept_agent/durable_event_log.py current --out /tmp/pferde-resume
+          test -f /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json || { echo 'RESUME_PRODUCTION_BINDING_MISSING'; exit 2; }
+          test -f /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json || { echo 'RESUME_CHECKPOINT_MISSING'; exit 2; }
+          python3 concept_agent/universal_reentry_guard.py build             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json
+          python3 concept_agent/universal_reentry_guard.py verify             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json
+          python3 concept_agent/progress_guard.py resume             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json             | tee /tmp/pferde-resume/RESUME_RECEIPT.json
+          python3 - <<'PY'
+          import json
+          receipt=json.load(open('/tmp/pferde-resume/RESUME_RECEIPT.json',encoding='utf-8'))
+          if receipt.get('status')!='RESUME_ALLOWED':
+              raise SystemExit('RESUME_NOT_ALLOWED')
+          if receipt.get('publish_allowed') is not False:
+              raise SystemExit('RESUME_PUBLISH_FLAG_INVALID')
+          action=receipt.get('allowed_action')
+          if not isinstance(action,dict) or not action.get('action'):
+              raise SystemExit('RESUME_ALLOWED_ACTION_MISSING')
+          print('SECOND_START_BUTTON_PASS:'+action['action'])
+          PY
+
       - name: Download hash-bound LanguageTool 6.8
         shell: bash
         run: |
@@ -114,7 +131,7 @@ jobs:
           echo "ENDSTEMPEL_TRUSTED_KEY_ID=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_key_id"])' "$identity")" >> "$GITHUB_ENV"
           echo "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_public_key_sha256"])' "$identity")" >> "$GITHUB_ENV"
           echo "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["public_key_b64"])' "$identity")" >> "$GITHUB_ENV"
-      - name: Run complete 1..N batch with automatic same-article returns
+      - name: Continue original workflow from exact saved state
         id: batch
         shell: bash
         run: |
