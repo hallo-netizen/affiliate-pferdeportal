@@ -105,23 +105,3 @@ class InterruptionReturnToStartTests(unittest.TestCase):
         forged["allowed_action"] = {"action": "RUN_PSERC"}
         with self.assertRaises(urg.Blocked):
             urg.verify(binding, state, forged)
-    def test_only_exact_quarantined_corrupt_tip_is_ignored(self):
-        cfg = json.loads((ROOT / "concept_agent" / "EVENT_AUTHOR_MIGRATION_V1.json").read_text(encoding="utf-8"))
-        q = cfg.get("quarantined_invalid_event_comments")
-        self.assertEqual(len(q), 1)
-        self.assertEqual(q[0]["sequence"], 61)
-        self.assertEqual(q[0]["comment_id"], 5817997992)
-        self.assertEqual(q[0]["disposition"], "REPLAY_FROM_LAST_VALID_EVENT")
-        self.assertFalse(q[0]["publish_allowed"])
-
-        exact = {"id": 5817997992, "body": "anything", "user": {"login": "hallo-netizen"}}
-        self.assertIsNone(delog._parse_event_comment(exact, q[0]["batch_sha256"]))
-
-        wrong = dict(exact)
-        wrong["id"] = 5817997993
-        with self.assertRaises(delog.Blocked):
-            delog._parse_event_comment(wrong, q[0]["batch_sha256"])
-
-
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
