@@ -37,7 +37,7 @@ def worker_contract(workspace:Path)->dict:
     if expected!=sha(canon(core)): raise SupervisorError('SUPERVISOR_STATE_TAMPERED')
     if s.get('worker_dispatch_allowed') is not True or s.get('phase')!='RESEARCH_REQUIRED': raise SupervisorError('WORKER_DISPATCH_CLOSED')
     if sha(p0.read_bytes())!=s['point0_sha256'] or sha(snap.read_bytes())!=s['production_snapshot_sha256'] or sha(pool.read_bytes())!=s['research_pool_sha256'] or sha(pre.read_bytes())!=s['machine_prewrite_sha256']: raise SupervisorError('SUPERVISOR_BOUND_BYTES_CHANGED')
-    return {'contract':'SYSTEM4_CODEX_WORKER_DISPATCH_V2','phase':'RESEARCH_REQUIRED','item_index':s['item_index'],'plan_slot':s['plan_slot'],'production_snapshot_path':str(snap),'research_pool_path':str(pool),'machine_prewrite_path':str(pre),'point0_sha256':s['point0_sha256'],'head_sha':s['head_sha'],'publish_allowed':False,'external_web_search_allowed':False,'machine_prewrite_mutation_allowed':False}
+    return {'contract':'SYSTEM4_BOUND_WORKER_DISPATCH_V2','phase':'RESEARCH_REQUIRED','item_index':s['item_index'],'plan_slot':s['plan_slot'],'production_snapshot_path':str(snap),'research_pool_path':str(pool),'machine_prewrite_path':str(pre),'point0_sha256':s['point0_sha256'],'head_sha':s['head_sha'],'publish_allowed':False,'external_web_search_allowed':False,'machine_prewrite_mutation_allowed':False}
 
 def _validated_state(workspace:Path)->dict:
     sp=workspace/'supervisor_state.json'; p0=workspace/'point0.json'; snap=workspace/'bound_snapshot.json'; pool=workspace/'bound_research_sources.json'; pre=workspace/'bound_machine_prewrite.json'; receipt=workspace/'root_receipt.json'
