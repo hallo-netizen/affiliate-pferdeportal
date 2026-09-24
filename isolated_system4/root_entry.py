@@ -7,7 +7,6 @@ import chat_start_gate, point0_snapshot, root_supervisor_bridge, worker_dispatch
 SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-CODEX_ENTRY = HERE / 'codex_entry.py'
 CONTROLLER = HERE / 'controller.py'
 ROOT_AGENTS = REPO / 'AGENTS.md'
 ROOT_OVERRIDE = REPO / 'AGENTS.override.md'
@@ -21,7 +20,6 @@ CRITICAL_PATHS = (
     'AGENTS.md',
     'AGENTS.override.md',
     'isolated_system4/root_entry.py',
-    'isolated_system4/codex_entry.py',
     'isolated_system4/controller.py',
     'isolated_system4/authoring_contract.py',
     'isolated_system4/content_guard.py',
