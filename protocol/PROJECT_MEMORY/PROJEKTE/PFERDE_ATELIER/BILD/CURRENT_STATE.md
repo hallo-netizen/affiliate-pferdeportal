@@ -28,7 +28,7 @@ Ergebnis:
 
 Die ältere 2.6.9-Passage unten bleibt historischer Beleg des früheren Bürostands und ist keine aktuelle Kategorie-Scope-Versionsangabe mehr.
 
-## Aktueller produktiver Stand
+## Historischer produktiver Stand vor Kategorie-Sync
 
 Historischer Bürostand vor der 24.09.-Nachführung:
 **Pferde Atelier Bildzentrale 2.6.9**
