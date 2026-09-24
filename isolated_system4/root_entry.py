@@ -7,7 +7,6 @@ import chat_start_gate, point0_snapshot, root_supervisor_bridge, worker_dispatch
 SYSTEM4_ROOT_CONTRACT = 'SYSTEM4_ISOLATED_ROOT_ENTRY_V3'
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-CODEX_ENTRY = HERE / 'codex_entry.py'
 CONTROLLER = HERE / 'controller.py'
 ROOT_AGENTS = REPO / 'AGENTS.md'
 ROOT_OVERRIDE = REPO / 'AGENTS.override.md'
@@ -21,7 +20,6 @@ CRITICAL_PATHS = (
     'AGENTS.md',
     'AGENTS.override.md',
     'isolated_system4/root_entry.py',
-    'isolated_system4/codex_entry.py',
     'isolated_system4/controller.py',
     'isolated_system4/authoring_contract.py',
     'isolated_system4/content_guard.py',
@@ -134,13 +132,6 @@ def _materialize_stdin_snapshot(workspace: Path, actual_manifest: str) -> Path:
     snapshot.write_bytes(raw)
     _validate_snapshot_file(snapshot,actual_manifest)
     return snapshot
-
-def _start(snapshot: Path, workspace: Path) -> int:
-    p = subprocess.run([sys.executable, str(CODEX_ENTRY), 'start', str(snapshot), str(workspace)], text=True)
-    if p.returncode:
-        return p.returncode
-    print('SYSTEM4_ROOT_ENTRY_PASS:RESEARCH_REQUIRED')
-    return 0
 
 def _start_point0(point0: Path, workspace: Path, actual_manifest: str, item_index: int = 0) -> int:
     if not point0.is_file() or _within(point0, REPO):
