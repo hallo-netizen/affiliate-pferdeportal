@@ -84,9 +84,9 @@ def restore(old):
 
 def main():
     pos = m.verify()
-    assert pos['status'] == 'CODEX_CLOUD_GATE_VERIFY_PASS'
+    assert pos['status'] == 'BOUND_WORKER_GATE_VERIFY_PASS'
     first = m.materialize()
-    assert first['status'] == 'CODEX_CLOUD_ENTRANCE_PASS'
+    assert first['status'] == 'BOUND_WORKER_ENTRANCE_PASS'
     ticket1 = json.loads((REPO / '.pferde-capsule/TICKET.json').read_text())
     first_again = m.materialize()
     ticket2 = json.loads((REPO / '.pferde-capsule/TICKET.json').read_text())
@@ -108,7 +108,7 @@ def main():
         r, root_rel, state_rel, bundle_rel = copy_current_repo(Path(t))
         old = use_repo(r)
         try:
-            assert m.verify()['status'] == 'CODEX_CLOUD_GATE_VERIFY_PASS'
+            assert m.verify()['status'] == 'BOUND_WORKER_GATE_VERIFY_PASS'
             statep, rootp, bundlep = r / state_rel, r / root_rel, r / bundle_rel
             original_state = json.loads(statep.read_text())
             original_root = json.loads(rootp.read_text())
@@ -175,7 +175,7 @@ def main():
 
     print(json.dumps({
         'ok': True,
-        'status': 'CODEX_CLOUD_GATE_CI_PASS',
+        'status': 'BOUND_WORKER_GATE_CI_PASS',
         'positive_negative': 'PASS',
         'current_startmaster_agnostic': True,
         'current_step_only_no_historical_chain_replay': True,
@@ -183,7 +183,7 @@ def main():
         'auto_advance_only_on_bound_pass': 'PASS',
         'terminal_nonpass_chat_restart_no_repeat': 'PASS',
         'api_required': False,
-        'local_codex_required': False,
+        'legacy_codex_required': False,
         'domain_logic_authority': 'NONE'
     }, indent=2))
 
