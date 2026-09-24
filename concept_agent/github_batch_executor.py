@@ -406,7 +406,19 @@ def _repair(rows:list[dict],current:dict,index:int)->bytes:
                 if isinstance(r,dict) and isinstance(r.get("value"),str) and r["value"] not in values:
                     values.append(r["value"])
             if len(values)!=1:
-                raise Blocked("LT68_REPAIR_REPLACEMENT_NOT_UNAMBIGUOUS:"+str(match.get("rule",{}).get("id") or ""))
+                # Repairable LT finding: never terminate the workflow here.
+                # Hand the same article back to the existing bounded repair worker.
+                _,facts,pack,plan,_,_=_build_evidence(rows,current,index)
+                state=_state_for_body(rows,current,index,body,int(row.get("revision") or 1))
+                context={"fact_pack":pack,"production_plan_item":plan,"authoring_contract":state["authoring_contract"],
+                         "facts":facts,"article":state["article"]}
+                return _model_body(
+                    item=current["production_binding"]["items"][index],
+                    current_body=body,
+                    findings=findings,
+                    context=context,
+                    mode="repair",
+                ).encode("utf-8")
             if not target or body.count(target)!=1:
                 raise Blocked("LT68_REPAIR_TARGET_NOT_UNIQUE:"+target[:80])
             edits.append((target,values[0]))
