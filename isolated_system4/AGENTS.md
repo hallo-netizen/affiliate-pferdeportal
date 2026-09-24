@@ -10,7 +10,7 @@ Es gibt nur diesen Produktionsweg:
 
 Keine alternative Route, kein Legacy-Orchestrator, kein STARTMASTER/H7/H8/ACM/System3-Runtimepfad.
 
-## Vor Codex unveränderlich
+## Vor Worker-Start unveränderlich
 
 Die Maschine bindet je Artikel vor Worker-Start:
 - Artikelidentität und `plan_slot`;
@@ -19,7 +19,7 @@ Die Maschine bindet je Artikel vor Worker-Start:
 - eigenen Research-Pool;
 - Git-Head, Root-Manifest und `publish_allowed=false`.
 
-Worker-Dispatch muss `external_web_search_allowed=false` und `machine_prewrite_mutation_allowed=false` enthalten. Codex darf weder fremde Quellen einschleusen noch die gebundenen Schienen neu definieren.
+Worker-Dispatch muss `external_web_search_allowed=false` und `machine_prewrite_mutation_allowed=false` enthalten. Der gebundene Worker darf weder fremde Quellen einschleusen noch die gebundenen Schienen neu definieren.
 
 ## Codex
 
@@ -41,8 +41,8 @@ Der gebundene Snapshot bestimmt exakt Anzahl und Reihenfolge. Jede endliche Anza
 
 ## Handoff
 
-Finaler Vertrag: `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`. Der Parent-Chat muss nach Canonicalize/Inline-Pack/Inline-Unpack exakt dieselben Bytes rekonstruieren. Kein Repository-/Git-/Codex-Sandbox-Handoff. `publish_allowed=false` bleibt gesetzt. Signing/ENDSTEMPEL bleiben aus, solange der bestehende WordPress-Signature-Switch aus ist.
+Finaler Vertrag: `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2`. Der Parent-Chat muss nach Canonicalize/Inline-Pack/Inline-Unpack exakt dieselben Bytes rekonstruieren. Kein Repository-/Git-/Worker-Sandbox-Handoff. `publish_allowed=false` bleibt gesetzt. Signing/ENDSTEMPEL bleiben aus, solange der bestehende WordPress-Signature-Switch aus ist.
 
 ## Testregel
 
-Die Live-Paritätsstrecke darf keinen vereinfachten Checker-/Root-Pfad besitzen. Im Test darf ausschließlich Codex durch einen deterministischen Testworker ersetzt werden. Echte LT-/PPM-Prüfer, Root, Supervisor, Dispatch, Controller, Repair, Batch und Handoff bleiben identisch. Historische Negativfälle und neue Point-0-V2/Prewrite-Angriffe sind Pflichtregressionen.
+Die Live-Paritätsstrecke darf keinen vereinfachten Checker-/Root-Pfad besitzen. Im Test darf ausschließlich der gebundene Worker durch einen deterministischen Testworker ersetzt werden. Echte LT-/PPM-Prüfer, Root, Supervisor, Dispatch, Controller, Repair, Batch und Handoff bleiben identisch. Historische Negativfälle und neue Point-0-V2/Prewrite-Angriffe sind Pflichtregressionen.
