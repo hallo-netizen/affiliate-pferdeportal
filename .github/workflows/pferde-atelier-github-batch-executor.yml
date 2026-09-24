@@ -6,170 +6,81 @@ on:
       - 'fix/github-neutral-batch-executor-20260924'
     paths:
       - 'concept_agent/RESUME_TRIGGER'
-      - 'recovery/current16-input/**'
   workflow_dispatch:
-  workflow_run:
-    workflows: ['Pferdeatelier text-start receiver']
-    types: [completed]
 
 permissions:
   contents: read
-  issues: write
+  issues: read
 
 concurrency:
-  group: pferdeatelier-github-batch-executor
-  cancel-in-progress: true
+  group: pferdeatelier-original-workflow-resume
+  cancel-in-progress: false
 
 jobs:
-  verify:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+  resume:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
-      CONCEPT_AGENT_PREWRITTEN_DIR: recovery/current16-input
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          fetch-depth: 2
-          persist-credentials: false
-      - name: Compile executor
-        run: python3 -m py_compile concept_agent/durable_event_log.py concept_agent/github_batch_executor.py
-      - name: Existing checkpoint and repair regressions
-        run: python3 -m unittest -v concept_agent.tests.test_current_production_guards
-
-      - name: Current durable-chain preflight
-        run: python3 concept_agent/github_batch_executor.py preflight
-
-  production:
-    needs: verify
-    if: ${{ needs.verify.result == 'success' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    permissions:
-      contents: read
-      issues: write
-    env:
       GITHUB_TOKEN: ${{ github.token }}
-      CONCEPT_AGENT_PREWRITTEN_DIR: recovery/current16-input
-      ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 2
           persist-credentials: false
-      - name: Second start button — resume exact saved state only
+
+      - name: Positive and negative wiring proof
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v             concept_agent.tests.test_resume_button_original_workflow             concept_agent.tests.test_current_production_guards
+
+      - name: Resume only through original bound workflow
         shell: bash
         run: |
           set -euo pipefail
           rm -rf /tmp/pferde-resume
           mkdir -p /tmp/pferde-resume
-          python3 concept_agent/durable_event_log.py current --out /tmp/pferde-resume
-          test -f /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json || { echo 'RESUME_PRODUCTION_BINDING_MISSING'; exit 2; }
-          test -f /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json || { echo 'RESUME_CHECKPOINT_MISSING'; exit 2; }
+
+          python3 concept_agent/durable_event_log.py current --out /tmp/pferde-resume             | tee /tmp/pferde-resume/CURRENT.json
+
+          test -f /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json
+          test -f /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json
+
           python3 concept_agent/universal_reentry_guard.py build             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json
+
           python3 concept_agent/universal_reentry_guard.py verify             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json
+
           python3 concept_agent/progress_guard.py resume             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json             | tee /tmp/pferde-resume/RESUME_RECEIPT.json
+
           python3 - <<'PY'
           import json
-          receipt=json.load(open('/tmp/pferde-resume/RESUME_RECEIPT.json',encoding='utf-8'))
-          if receipt.get('status')!='RESUME_ALLOWED':
-              raise SystemExit('RESUME_NOT_ALLOWED')
-          if receipt.get('publish_allowed') is not False:
-              raise SystemExit('RESUME_PUBLISH_FLAG_INVALID')
-          action=receipt.get('allowed_action')
-          if not isinstance(action,dict) or not action.get('action'):
-              raise SystemExit('RESUME_ALLOWED_ACTION_MISSING')
-          print('SECOND_START_BUTTON_PASS:'+action['action'])
-          PY
+          from pathlib import Path
 
-      - name: Download hash-bound LanguageTool 6.8
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p /tmp/system4-lt68
-          curl --fail --location --retry 3 \
-            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
-            -o /tmp/system4-lt68/LanguageTool-6.8.zip
-          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
-          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
-          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
-          echo 'SYSTEM4_LANGUAGETOOL_JAR=/tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' >> "$GITHUB_ENV"
-      - name: Bind existing GitHub Endstempel signer
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
-          umask 077
-          cat > /tmp/pferde_github_signer.py <<'PY'
-          #!/usr/bin/env python3
-          import base64,hashlib,json,os,re,sys
-          from cryptography.hazmat.primitives import serialization
-          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-          CONTRACT='PFERDE_ATELIER_GITHUB_FINAL_SIGN_REQUEST_V1'
-          raw=os.environ.get('ENDSTEMPEL_PRIVATE_KEY','').encode()
-          if not raw: raise SystemExit('ENDSTEMPEL_SECRET_MISSING')
-          try:
-              key=serialization.load_ssh_private_key(raw,password=None) if b'OPENSSH PRIVATE KEY' in raw else serialization.load_pem_private_key(raw,password=None)
-          except Exception: raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_INVALID')
-          if not isinstance(key,Ed25519PrivateKey): raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_NOT_ED25519')
-          pub=key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
-          pub_b64=base64.b64encode(pub).decode('ascii'); pub_sha=hashlib.sha256(pub).hexdigest()
-          ident={'signing_key_id':'github-secret-ed25519-'+pub_sha[:16],'signing_public_key_sha256':pub_sha,'public_key_b64':pub_b64}
-          if len(sys.argv)==2 and sys.argv[1]=='--identity':
-              print(json.dumps(ident,separators=(',',':'))); raise SystemExit(0)
-          try: req=json.loads(sys.stdin.read())
-          except Exception: raise SystemExit('SIGN_REQUEST_INVALID')
-          required={'contract','manifest_sha256','batch_sha256','source_manifest_sha256','article_count','algorithm'}
-          if not isinstance(req,dict) or set(req)!=required or req.get('contract')!=CONTRACT or req.get('algorithm')!='ED25519':
-              raise SystemExit('SIGN_REQUEST_FIELDS_INVALID')
-          for field in ('manifest_sha256','batch_sha256','source_manifest_sha256'):
-              if not re.fullmatch(r'[0-9a-f]{64}',str(req.get(field) or '')): raise SystemExit('SIGN_REQUEST_HASH_INVALID')
-          count=req.get('article_count')
-          if not isinstance(count,int) or isinstance(count,bool) or count<1: raise SystemExit('SIGN_REQUEST_COUNT_INVALID')
-          out=dict(ident); out['signature_b64']=base64.b64encode(key.sign(req['manifest_sha256'].encode('ascii'))).decode('ascii')
-          print(json.dumps(out,separators=(',',':')))
+          pointer=json.loads(Path("concept_agent/CONTROL_ENTRY_POINTER.json").read_text(encoding="utf-8"))
+          if pointer.get("production_event_author") != "hallo-netizen":
+              raise SystemExit("ORIGINAL_WORKER_AUTHORITY_NOT_BOUND")
+          if pointer.get("production_worker") != "BOUND_CHAT_WORKER":
+              raise SystemExit("BOUND_CHAT_WORKER_NOT_BOUND")
+          if "post_machine_ready_executor_ref" in pointer:
+              raise SystemExit("ALTERNATE_EXECUTOR_STILL_BOUND")
+
+          receipt=json.loads(Path("/tmp/pferde-resume/RESUME_RECEIPT.json").read_text(encoding="utf-8"))
+          if receipt.get("status") != "RESUME_ALLOWED":
+              raise SystemExit("ORIGINAL_WORKFLOW_RESUME_NOT_ALLOWED")
+          if receipt.get("publish_allowed") is not False:
+              raise SystemExit("PUBLISH_FLAG_INVALID")
+          action=receipt.get("allowed_action")
+          if not isinstance(action,dict) or not action.get("action"):
+              raise SystemExit("ORIGINAL_WORKFLOW_ALLOWED_ACTION_MISSING")
+
+          workflow=Path(".github/workflows/pferde-atelier-github-batch-executor.yml").read_text(encoding="utf-8")
+          trigger_block=workflow.split("jobs:",1)[0]
+          if "recovery/current16-input" in trigger_block:
+              raise SystemExit("PER_ERROR_PUSH_TRIGGER_PRESENT")
+          if trigger_block.count("concept_agent/RESUME_TRIGGER") != 1:
+              raise SystemExit("RESUME_TRIGGER_BINDING_INVALID")
+          if Path("concept_agent/github_batch_executor.py").exists():
+              raise SystemExit("ALTERNATE_EXECUTOR_PRESENT")
+
+          print("ORIGINAL_WORKFLOW_RESUME_READY:"+action["action"])
+          print("PER_ERROR_GITHUB_RESTART_BLOCKED")
           PY
-          chmod 700 /tmp/pferde_github_signer.py
-          identity="$(/tmp/pferde_github_signer.py --identity)"
-          echo "ENDSTEMPEL_HSM_CMD=/tmp/pferde_github_signer.py" >> "$GITHUB_ENV"
-          echo "ENDSTEMPEL_TRUSTED_KEY_ID=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_key_id"])' "$identity")" >> "$GITHUB_ENV"
-          echo "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_public_key_sha256"])' "$identity")" >> "$GITHUB_ENV"
-          echo "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["public_key_b64"])' "$identity")" >> "$GITHUB_ENV"
-      - name: Continue original workflow from exact saved state
-        id: batch
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 concept_agent/github_batch_executor.py run | tee /tmp/github-batch-executor-result.json
-          status="$(python3 -c 'import json;print(json.load(open("/tmp/github-batch-executor-result.json"))["status"])')"
-          echo "status=$status" >> "$GITHUB_OUTPUT"
-          if [ "$status" = "NORMAL_WORKFLOW_REPAIR_REQUIRED" ]; then
-            echo "Repair returned to normal same-article worker; waiting for repaired bound draft."
-          fi
-      - name: Verify final signed file
-        if: ${{ steps.batch.outputs.status == 'PASS' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          mapfile -t finals < <(find .pferde-final -type f -name 'GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json' 2>/dev/null | sort)
-          [ "${#finals[@]}" -eq 1 ] || { echo "FINAL_FILE_COUNT_INVALID:${#finals[@]}"; exit 2; }
-          python3 - "${finals[0]}" <<'PY'
-          import hashlib,json,sys
-          p=sys.argv[1]; raw=open(p,'rb').read(); x=json.loads(raw)
-          assert x['contract']=='PSERC_APPROVED_PRODUCTION_PACKAGE_V1'
-          assert x['endstamp_contract']=='PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1'
-          assert x['status']=='ENDSTEMPEL_PASS'
-          assert x['publish_allowed'] is False
-          assert x['content_mutation_performed'] is False
-          print('FINAL_REF='+p)
-          print('FINAL_SHA256='+hashlib.sha256(raw).hexdigest())
-          PY
-      - name: Upload exact final file
-        if: ${{ steps.batch.outputs.status == 'PASS' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: pferdeatelier-final-${{ github.run_id }}
-          path: .pferde-final/**/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
-          if-no-files-found: error
-          compression-level: 0
-          retention-days: 7
