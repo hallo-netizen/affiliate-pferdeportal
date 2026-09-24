@@ -1,4 +1,4 @@
-name: current16 nocodex probe
+name: current16 one-off execution package
 
 on:
   push:
@@ -8,26 +8,39 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  package:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Inspect bound PPM 6.7.9 normal-draft adapter
+      - name: Verify secured 16 inputs
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/ppm679
-          mkdir -p /tmp/ppm679
-          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
-          echo '=== FILES ==='
-          find /tmp/ppm679 -type f | grep -Ei 'normal-draft-(adapter|pipeline|release-validator)|draft-adapter|draft-pipeline'
-          echo '=== ADAPTER ==='
-          p="$(find /tmp/ppm679 -type f -name 'normal-draft-adapter.php' | head -n1)"
-          test -n "$p"
-          sed -n '1,260p' "$p"
-          echo '=== PIPELINE HEAD ==='
-          q="$(find /tmp/ppm679 -type f -name 'normal-draft-pipeline.php' | head -n1)"
-          test -n "$q"
-          sed -n '1,300p' "$q"
+          test "$(find recovery/current16-input -maxdepth 1 -type f -name '*.md' | wc -l)" -eq 16
+          mkdir -p /tmp/current16-package
+          cp recovery/current16-input/*.md /tmp/current16-package/
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path('/tmp/current16-package')
+          files=sorted(root.glob('*.md'))
+          assert len(files)==16
+          out=Path('/tmp/PFERDE_ATELIER_16_ARTIKEL_GESAMT.md')
+          parts=[]
+          for p in files:
+              parts.append(p.read_text(encoding='utf-8').rstrip())
+              parts.append('\n\n---\n\n')
+          out.write_text(''.join(parts).rstrip()+'\n',encoding='utf-8')
+          PY
+          (cd /tmp/current16-package && zip -q /tmp/PFERDE_ATELIER_16_ARTIKEL.zip *.md)
+          sha256sum /tmp/PFERDE_ATELIER_16_ARTIKEL_GESAMT.md /tmp/PFERDE_ATELIER_16_ARTIKEL.zip
+      - name: Upload secured article package
+        uses: actions/upload-artifact@v4
+        with:
+          name: PFERDE_ATELIER_16_ARTIKEL
+          path: |
+            /tmp/PFERDE_ATELIER_16_ARTIKEL_GESAMT.md
+            /tmp/PFERDE_ATELIER_16_ARTIKEL.zip
+          if-no-files-found: error
+          retention-days: 7
