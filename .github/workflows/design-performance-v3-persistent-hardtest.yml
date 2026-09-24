@@ -1,0 +1,204 @@
+name: Design Performance V3 Persistent Menu Hardtest
+
+on:
+  push:
+    branches: [affiliate-performance-menu-persistent-hardtest-20260924]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-design-v3/**'
+      - '.github/workflows/design-performance-v3-persistent-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-wordpress:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Install WordPress 7.1.2 and fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Design V3 Gate' --admin_user=admin --admin_password='ci-pass-12345' --admin_email=ci@example.test --skip-email
+
+          mkdir -p /tmp/wp-site/wp-content/plugins/design-v3-gate
+          cp AFFILIATE_HOBBYRAUM/performance-design-v3/design-v3-gate.php /tmp/wp-site/wp-content/plugins/design-v3-gate/
+          php -l /tmp/wp-site/wp-content/plugins/design-v3-gate/design-v3-gate.php
+          /tmp/wp plugin activate design-v3-gate --path=/tmp/wp-site
+
+          /tmp/wp eval '
+          $menu_id=wp_create_nav_menu("PFTK V3 1550 Fixture");
+          if(is_wp_error($menu_id)){fwrite(STDERR,$menu_id->get_error_message());exit(1);}
+          set_theme_mod("nav_menu_locations",array("primary"=>(int)$menu_id));
+          $first=0;
+          for($i=1;$i<=1550;$i++){
+            $id=wp_update_nav_menu_item($menu_id,0,array(
+              "menu-item-title"=>"Item ".$i,
+              "menu-item-url"=>home_url("/item-".$i."/"),
+              "menu-item-status"=>"publish",
+              "menu-item-parent-id"=>0
+            ));
+            if(is_wp_error($id)){fwrite(STDERR,$id->get_error_message());exit(1);}
+            if($i===1)$first=(int)$id;
+          }
+          update_option("pftk_v3_gate_menu_id",(int)$menu_id,false);
+          update_option("pftk_v3_first_item_id",$first,false);
+          echo "MENU_ID=".$menu_id." FIRST=".$first."\n";
+          ' --path=/tmp/wp-site
+
+      - name: Baseline without helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/server-baseline.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+          curl -fsS 'http://127.0.0.1:8080/?design_v3_gate=1' | tee /tmp/baseline.json
+          kill "$PID"
+          trap - EXIT
+
+      - name: Install exact candidate helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance
+          cp AFFILIATE_HOBBYRAUM/performance-design-v3/pa-affiliate-design-performance.php /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance/
+          php -l /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance/pa-affiliate-design-performance.php
+          grep -F 'Version: 3.0.0' /tmp/wp-site/wp-content/plugins/pa-affiliate-design-performance/pa-affiliate-design-performance.php
+          /tmp/wp plugin activate pa-affiliate-design-performance --path=/tmp/wp-site
+
+      - name: Cold warm admin and invalidation gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/server-candidate.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break || sleep 1; done
+
+          curl -fsS 'http://127.0.0.1:8080/?design_v3_gate=1' | tee /tmp/cold.json
+          curl -fsS 'http://127.0.0.1:8080/?design_v3_gate=1' | tee /tmp/warm.json
+          curl -fsS 'http://127.0.0.1:8080/wp-admin/admin-post.php?action=design_v3_admin' | tee /tmp/admin.json
+
+          /tmp/wp eval '
+          $menu_id=(int)get_option("pftk_v3_gate_menu_id",0);
+          $id=(int)get_option("pftk_v3_first_item_id",0);
+          $r=wp_update_nav_menu_item($menu_id,$id,array(
+            "menu-item-title"=>"Item 1 CHANGED",
+            "menu-item-url"=>home_url("/item-1/"),
+            "menu-item-status"=>"publish",
+            "menu-item-parent-id"=>0
+          ));
+          if(is_wp_error($r)){fwrite(STDERR,$r->get_error_message());exit(1);}
+          echo "UPDATED=".$r."\n";
+          ' --path=/tmp/wp-site
+
+          curl -fsS 'http://127.0.0.1:8080/?design_v3_gate=1' | tee /tmp/after-invalidation.json
+          curl -fsS 'http://127.0.0.1:8080/?design_v3_gate=1' | tee /tmp/warm2.json
+
+          kill "$PID"
+          trap - EXIT
+
+      - name: Assert semantic identity and technical reduction
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          def load(p):
+              with open(p,encoding='utf-8') as f:return json.load(f)
+          b=load('/tmp/baseline.json')
+          c=load('/tmp/cold.json')
+          w=load('/tmp/warm.json')
+          a=load('/tmp/admin.json')
+          i=load('/tmp/after-invalidation.json')
+          w2=load('/tmp/warm2.json')
+
+          for key in ('desktop_hash','mobile_hash','astra_hash'):
+              assert b[key]==c[key]==w[key], (key,b[key],c[key],w[key])
+
+          assert b['setup_filter_hits']==c['setup_filter_hits']==w['setup_filter_hits'], (b['setup_filter_hits'],c['setup_filter_hits'],w['setup_filter_hits'])
+          assert b['cache_hits']==0, b['cache_hits']
+          assert c['cache_hits']>=1500, c['cache_hits']
+          assert w['cache_hits']>=4500, w['cache_hits']
+          assert c['meta_hooks'] < b['meta_hooks']*0.55, (b['meta_hooks'],c['meta_hooks'])
+          assert w['meta_hooks'] < b['meta_hooks']*0.10, (b['meta_hooks'],w['meta_hooks'])
+
+          assert c['helper_stats']['persistent_stores']==1, c['helper_stats']
+          assert w['helper_stats']['persistent_loads']==1, w['helper_stats']
+          assert w['helper_stats']['persistent_items']==1550, w['helper_stats']
+          assert w['helper_stats']['persistent_stores']==0, w['helper_stats']
+
+          assert a['cache_hits']==0, a
+          assert a['helper_stats']=={}, a['helper_stats']
+
+          assert i['desktop_changed_title'] and i['mobile_changed_title'], i
+          assert i['helper_stats']['persistent_stores']==1, i['helper_stats']
+          assert i['helper_stats']['persistent_loads']==0, i['helper_stats']
+          assert w2['desktop_changed_title'] and w2['mobile_changed_title'], w2
+          assert w2['helper_stats']['persistent_loads']==1, w2['helper_stats']
+          assert w2['helper_stats']['persistent_items']==1550, w2['helper_stats']
+          assert i['desktop_hash']==w2['desktop_hash'], (i['desktop_hash'],w2['desktop_hash'])
+          assert i['mobile_hash']==w2['mobile_hash'], (i['mobile_hash'],w2['mobile_hash'])
+
+          print('PASS semantic hashes unchanged before content change')
+          print('PASS setup filters execute identically')
+          print('PASS persistent warm-cache meta reduction',b['meta_hooks'],c['meta_hooks'],w['meta_hooks'])
+          print('PASS admin bypass')
+          print('PASS content/menu invalidation and warm rebuild')
+          PY
+
+      - name: Package installable helper
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/package
+          mkdir -p /tmp/package/pa-affiliate-design-performance
+          cp AFFILIATE_HOBBYRAUM/performance-design-v3/pa-affiliate-design-performance.php /tmp/package/pa-affiliate-design-performance/
+          cd /tmp/package
+          zip -qr /tmp/PA_AFFILIATE_DESIGN_PERFORMANCE_3.0.0_PERSISTENT_MENU_HARDTEST.zip pa-affiliate-design-performance
+          sha256sum /tmp/PA_AFFILIATE_DESIGN_PERFORMANCE_3.0.0_PERSISTENT_MENU_HARDTEST.zip | tee /tmp/package.sha256
+
+      - name: Upload installable helper
+        uses: actions/upload-artifact@v4
+        with:
+          name: pa-affiliate-design-performance-3.0.0-persistent-menu-hardtest
+          path: |
+            /tmp/PA_AFFILIATE_DESIGN_PERFORMANCE_3.0.0_PERSISTENT_MENU_HARDTEST.zip
+            /tmp/package.sha256
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Dump logs on failure
+        if: failure()
+        run: |
+          cat /tmp/server-baseline.log || true
+          cat /tmp/server-candidate.log || true
