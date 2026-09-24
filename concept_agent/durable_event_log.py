@@ -27,7 +27,7 @@ import progress_guard
 import universal_reentry_guard
 
 EVENT_CONTRACT = "CONCEPT_AGENT_DURABLE_EVENT_V1"
-TRUSTED_EVENT_AUTHOR = "github-actions[bot]"
+TRUSTED_EVENT_AUTHOR = "hallo-netizen"
 LEGACY_EVENT_AUTHOR = "github-actions[bot]"
 TRUSTED_START_AUTHOR = "github-actions[bot]"
 SNAPSHOT_REF = "concept_agent/current/PSERC_METADATA_SNAPSHOT.json"
