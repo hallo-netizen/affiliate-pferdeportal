@@ -260,6 +260,17 @@ def _event_author_allowed(row: dict[str, Any], event: dict[str, Any], batch_sha2
 
 
 def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, Any] | None:
+    migration = load_json(REPO / EVENT_AUTHOR_MIGRATION_REF)
+    quarantined = migration.get("quarantined_invalid_event_comments") or []
+    for item in quarantined:
+        if (
+            isinstance(item, dict)
+            and item.get("batch_sha256") == batch_sha256
+            and item.get("comment_id") == row.get("id")
+            and item.get("disposition") == "REPLAY_FROM_LAST_VALID_EVENT"
+            and item.get("publish_allowed") is False
+        ):
+            return None
     body = str(row.get("body") or "")
     if not body.startswith(EVENT_CONTRACT + "\n"):
         return None
