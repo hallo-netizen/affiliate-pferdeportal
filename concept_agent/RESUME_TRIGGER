@@ -20,3 +20,4 @@ resume-original-production-executor
 execute-original-production-chain
 live-run-original-executor
 live-run-endstempel-binding-restored
+resume-with-original-module-path
