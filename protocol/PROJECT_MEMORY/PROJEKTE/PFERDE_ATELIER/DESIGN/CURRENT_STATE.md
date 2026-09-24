@@ -1,6 +1,6 @@
 # DESIGN – CURRENT STATE
 
-STAND: 2026-09-07
+STAND: 2026-09-24
 
 
 ## AUTORITÄT DIESER DATEI
@@ -16,9 +16,20 @@ Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros
 Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
 Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
 
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Für den abgeschlossenen Kategorie-/Strukturscope gilt als technische Autorität `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+
+- Affiliate Portal Template Kit: **1.50.559**
+- Kategorie-/Breadcrumb-Map: **1149/1149**
+- vorgeschriebener Dry-Run -> genau ein Apply -> neuer Request -> Readback: **PASS**
+- Kategorie-Closeout Run `36005442270`: **SUCCESS**
+
+Dieser Nachtrag ersetzt für den Kategorie-/Pluginstand die ältere 1.50.472-Angabe unten. Die ältere Passage bleibt historische Designbasis und ist **keine aktuelle Versionsangabe** mehr.
+
 ## Aktueller LIVE-Stand
 
-**Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002**
+**Historische Designbasis: Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002. Aktuell gebundener Template-Kit-Pluginstand im Kategorie-Scope: 1.50.559.**
 
 Basis-Live:
 GitHub Branch:
