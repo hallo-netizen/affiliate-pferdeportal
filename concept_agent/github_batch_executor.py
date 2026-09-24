@@ -341,7 +341,7 @@ def _repair(rows:list[dict],current:dict,index:int)->bytes:
         if not values:
             # Verified German inflection for this exact LT68 spelling finding:
             # Duden: Planierschild -> plural Planierschilde.
-            verified_lt_repairs={"Planierschilder":"Planierschilde","Ein Vorrichtung":"Eine Vorrichtung"}
+            verified_lt_repairs={"Planierschilder":"Planierschilde","Planierschilde":"Schilde zum Planieren","Ein Vorrichtung":"Eine Vorrichtung"}
             replacement=verified_lt_repairs.get(target)
             if replacement:
                 values=[replacement]
