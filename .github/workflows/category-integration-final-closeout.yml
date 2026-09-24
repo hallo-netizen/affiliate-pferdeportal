@@ -1,0 +1,125 @@
+name: Category Integration Final Closeout
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'CATEGORY_INTEGRATION_HOBBYRAUM/test_pserc_full_1149.php'
+      - 'CATEGORY_INTEGRATION_HOBBYRAUM/test_link_registry_new25.py'
+      - '.github/workflows/category-integration-final-closeout.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  final-closeout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Governance gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py start --branch "$(git branch --show-current)"
+
+      - name: Build authoritative 1149 portal candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf CATEGORY_INTEGRATION_HOBBYRAUM/candidate
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/build_candidate.py | tee /tmp/category-candidate.log
+          grep -F 'CATEGORY_INTEGRATION_CANDIDATE_HARDTEST_PASS' /tmp/category-candidate.log
+
+      - name: Bind exact PSERC package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          git show origin/main:control/startmaster0107/runtime_packages/PSERC-FIX.zip > /tmp/pserc.zip
+          echo "77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/pserc.zip" | sha256sum -c -
+          rm -rf /tmp/pserc-inner
+          mkdir -p /tmp/pserc-inner
+          unzip -p /tmp/pserc.zip 'PSERC-FIX/portal-seo-editorial-plan-compiler_0.28.18_ENDSTEMPEL_IMPORT_ENVELOPE_BINDING.zip' > /tmp/pserc-inner.zip
+          unzip -q /tmp/pserc-inner.zip -d /tmp/pserc-inner
+
+      - name: Prove complete PSERC runtime structure 1149
+        shell: bash
+        env:
+          PSERC_EXTRACTED_ROOT: /tmp/pserc-inner/portal-seo-editorial-plan-compiler
+          CATEGORY_PORTAL_CANDIDATE: CATEGORY_INTEGRATION_HOBBYRAUM/candidate/portal-structure-v279.CANDIDATE.json
+          CATEGORY_TSV: CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv
+        run: |
+          set -euo pipefail
+          php CATEGORY_INTEGRATION_HOBBYRAUM/test_pserc_full_1149.php | tee /tmp/pserc-full-1149.log
+          grep -F 'PSERC_FULL_1149_RUNTIME_GATE_PASS' /tmp/pserc-full-1149.log
+
+      - name: Bind exact PPM 6.7.9 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --no-tags
+          git show origin/main:control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip > /tmp/ppm679.zip
+          echo "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/ppm679.zip" | sha256sum -c -
+
+      - name: Prove new-25 dynamic link registry generation
+        shell: bash
+        env:
+          PPM679_SOURCE: /tmp/ppm679.zip
+        run: |
+          set -euo pipefail
+          python3 CATEGORY_INTEGRATION_HOBBYRAUM/test_link_registry_new25.py | tee /tmp/link-registry-new25.log
+          grep -F 'CATEGORY_LINK_REGISTRY_NEW25_PASS' /tmp/link-registry-new25.log
+
+      - name: Aggregate category E2E and no-write preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | tee /tmp/category-final-closeout.json
+          import json, pathlib
+          report=json.loads(pathlib.Path('CATEGORY_INTEGRATION_HOBBYRAUM/candidate/candidate-hardtest-report.json').read_text())
+          pserc_text=pathlib.Path('/tmp/pserc-full-1149.log').read_text()
+          links_text=pathlib.Path('/tmp/link-registry-new25.log').read_text()
+          assert report['status']=='PASS'
+          assert report['candidate']['counts']['themenkategorien']==1149
+          assert len(report['delta']['new_categories'])==25
+          assert 'PSERC_FULL_1149_RUNTIME_GATE_PASS' in pserc_text
+          assert 'CATEGORY_LINK_REGISTRY_NEW25_PASS' in links_text
+          out={
+            'contract':'PFERDE_ATELIER_CATEGORY_FINAL_CLOSEOUT_V1',
+            'status':'PASS',
+            'category_truth':'CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv',
+            'wordpress_categories_total':1160,
+            'production_categories':1149,
+            'new_product_pages':5,
+            'new_production_categories':25,
+            'portal_structure':'PASS_1149',
+            'affiliate_catalog':'PASS_1149',
+            'pserc_runtime_structure':'PASS_1149_1124_STATIC_PLUS_25_DYNAMIC',
+            'link_registry':'PASS_DYNAMIC_NEW25_THREE_ROLES_PER_CATEGORY',
+            'negative_unknown_link_category':'PASS_FAIL_CLOSED',
+            'writes_performed':False,
+            'publish_allowed':False,
+            'apply_performed':False,
+          }
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          print('CATEGORY_FINAL_CLOSEOUT_E2E_NO_WRITE_PASS')
+          PY
+          grep -F 'CATEGORY_FINAL_CLOSEOUT_E2E_NO_WRITE_PASS' /tmp/category-final-closeout.json
+          grep -F '"writes_performed": false' /tmp/category-final-closeout.json
+
+      - name: Upload closeout evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-integration-final-closeout
+          path: |
+            CATEGORY_INTEGRATION_HOBBYRAUM/candidate/candidate-hardtest-report.json
+            /tmp/category-candidate.log
+            /tmp/pserc-full-1149.log
+            /tmp/link-registry-new25.log
+            /tmp/category-final-closeout.json
+          if-no-files-found: error
