@@ -21,9 +21,9 @@ Die Maschine bindet je Artikel vor Worker-Start:
 
 Worker-Dispatch muss `external_web_search_allowed=false` und `machine_prewrite_mutation_allowed=false` enthalten. Der gebundene Worker darf weder fremde Quellen einschleusen noch die gebundenen Schienen neu definieren.
 
-## Codex
+## Gebundener Worker
 
-Codex ist der einzige fachliche Worker. Er wertet die gebundenen Quellen aus, erzeugt Facts, ergänzt nur erlaubte faktabhängige Context-Felder, schreibt den Artikel und führt verlangte Same-Article-Reparaturen aus. Er besitzt weder Workflow noch Textmaschine noch Design noch PASS.
+Der gebundene Chat-Worker ist der einzige fachliche Worker. Er wertet ausschließlich die gebundenen Quellen aus, erzeugt Facts, ergänzt nur erlaubte faktabhängige Context-Felder, schreibt den Artikel und führt verlangte Same-Article-Reparaturen aus. Er besitzt weder Workflow noch Textmaschine noch Design noch PASS und darf ausschließlich die maschinell abgeleitete Aktion ausführen.
 
 ## Textmaschine / Design unveränderlich
 
