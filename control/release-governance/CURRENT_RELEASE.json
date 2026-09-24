@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 135,
+  "generation": 136,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -215,17 +215,26 @@
         "BANNER_6_72_143_RESUME"
       ],
       "current_block_20260924": {
-        "status": "HARDTEST_PASS_REAL_SERVER_READBACK_REQUIRED",
-        "basis": "performance-diagnose-safe-20260924-121142.json",
-        "target": "AFFILIATE_RUNTIME_NORMALIZATION_PLUS_REQUEST_LOCAL_SLOT_RULE_CACHE",
-        "candidate_version": "6.72.153",
-        "candidate_zip": "AFFILIATE_ZENTRALE_V6.72.153_PERFORMANCE_RUNTIME_HARDTEST.zip",
-        "candidate_sha256": "209c70886fcd7b17ead16efb0440a877fb7cafb28a91460bd9cf7baeba703600",
-        "hardtest_run": 36023528874,
-        "hardtest_result": "SUCCESS",
-        "evidence_ref": "release/affiliate-zentrale/evidence/performance_runtime_v672153_hardtest_20260924.md",
-        "design_helper": "KEEP_CURRENT_2_0_0_UNCHANGED_IN_BLOCK_A",
-        "server_intermediate_check": "REQUIRED_BEFORE_BLOCK_B"
+        "status": "SERVER_REGRESSION_REJECTED_ROLLBACK_TO_6_72_152",
+        "basis_before": "performance-diagnose-safe-20260924-121142.json",
+        "basis_after": "performance-diagnose-safe-20260924-160352.json",
+        "rejected_candidate_version": "6.72.153",
+        "rejected_reason": "REAL_SERVER_TIME_REGRESSION_DESPITE_LOWER_SANITIZE_KEY_COUNTS",
+        "comparable_urls": {
+          "home": {
+            "before_s": 3.404759,
+            "after_s": 3.611034
+          },
+          "ausruestung": {
+            "before_s": 2.778482,
+            "after_s": 4.472333
+          }
+        },
+        "safe_fallback_version": "6.72.152",
+        "safe_fallback_zip": "AFFILIATE_ZENTRALE_V6.72.152_SAFE_FALLBACK.zip",
+        "safe_fallback_sha256": "0bf4443a3046b9c981b20efee226d83c56508ab887cb21b7b4b273a6d2dba181",
+        "fallback_build_run": 36024372128,
+        "next_rule": "DO_NOT_OPTIMIZE_BY_MICROCOUNTER_ALONE; REQUIRE_REAL_SERVER_WALL_TIME_IMPROVEMENT"
       }
     },
     "category_completion": {
@@ -246,11 +255,11 @@
     }
   },
   "execution_state": {
-    "state": "PERFORMANCE_BLOCK_A_HARDTEST_PASS_SERVER_READBACK_OPEN",
-    "authorized_next_action": "INSTALL_EXACT_6_72_153_PERFORMANCE_RUNTIME_HARDTEST_AND_RUN_SAME_SERVER_DIAGNOSIS",
+    "state": "PERFORMANCE_BLOCK_A_6_72_153_REJECTED_ROLLBACK_REQUIRED",
+    "authorized_next_action": "ROLL_BACK_SERVER_TO_EXACT_6_72_152_SAFE_FALLBACK_THEN_REMEASURE_BASELINE_BEFORE_NEW_PERFORMANCE_WORK",
     "bound_user_scope_action": "PERFORMANCE ONLY. CATEGORY/STRUCTURE REMAINS FROZEN. NO CONTENT, DESIGN, RANKING, PROVIDER, SLOT, VETO, PUBLISH OR QUALITY RULE CHANGE. BUNDLE SAFE CPU REUSE CHANGES, THEN ONE HARDTEST, THEN ONE REAL SERVER INTERMEDIATE MEASUREMENT.",
-    "completion_condition": "REAL SERVER INTERMEDIATE READBACK WITH SAME DIAGNOSTIC AND COMPARABLE TEST PAGES. ONLY THEN ENTER BLOCK B.",
-    "after_completion_action": "BLOCK_B_OBJECT_CACHE_LITESPEED_WP_OPTIMIZE_IF_SERVER_READBACK_CONFIRMS_NO_REGRESSION",
+    "completion_condition": "SERVER CONFIRMED ON 6.72.152 AND BASELINE RECHECK COMPLETE",
+    "after_completion_action": "REBASE PERFORMANCE PRIORITIES ON REAL WALL_TIME; DO NOT REAPPLY 6.72.153",
     "no_optional_detours": true,
     "sequence": 40,
     "authorized_change_prefixes": [
