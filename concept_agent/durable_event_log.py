@@ -248,9 +248,15 @@ def _event_author_allowed(row: dict[str, Any], event: dict[str, Any], batch_sha2
         return False
     sequence = event.get("sequence")
     maximum = migration.get("legacy_max_sequence")
+    hashes = migration.get("legacy_event_hashes")
     if not isinstance(sequence, int) or not isinstance(maximum, int) or sequence > maximum:
         return False
-    if sequence == maximum and event.get("event_sha256") != migration.get("legacy_last_event_sha256"):
+    if not isinstance(hashes, dict):
+        raise Blocked("DURABLE_EVENT_LEGACY_HASH_MAP_MISSING")
+    expected = str(hashes.get(str(sequence)) or "")
+    if not SHA_RE.fullmatch(expected) or event.get("event_sha256") != expected:
+        return False
+    if sequence == maximum and expected != migration.get("legacy_last_event_sha256"):
         raise Blocked("DURABLE_EVENT_LEGACY_CUTOFF_HASH_MISMATCH")
     return True
 
@@ -289,6 +295,7 @@ def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, An
     if stable(core) != declared:
         raise Blocked("DURABLE_EVENT_HASH_MISMATCH")
     event["_comment_id"] = row.get("id")
+    event["_comment_created_at"] = str(row.get("created_at") or "")
     return event
 
 
@@ -341,7 +348,14 @@ def _research_sources(event: dict[str, Any], index: int) -> list[dict[str, Any]]
             raise Blocked("DURABLE_EVENT_RESEARCH_OWN_DOMAIN_FORBIDDEN")
         if hashlib.sha256(source["evidence"].encode("utf-8")).hexdigest() != source["snapshot_sha256"]:
             raise Blocked("DURABLE_EVENT_RESEARCH_SOURCE_HASH_MISMATCH")
-        checked.append({k: source[k] for k in required})
+        row = {k: source[k] for k in required}
+        retrieved = str(source.get("retrieved_at") or "").strip()
+        if not retrieved:
+            retrieved = str(event.get("_comment_created_at") or "").strip()
+        if not retrieved:
+            raise Blocked("DURABLE_EVENT_RESEARCH_RETRIEVED_AT_MISSING")
+        row["retrieved_at"] = retrieved
+        checked.append(row)
     return checked
 
 
