@@ -1,0 +1,21 @@
+{
+  "contract": "PFERDE_ATELIER_BOUND_START_RECEIPT_V1",
+  "status": "BLOCKED",
+  "reason": "LEGACY_FALLBACK_NOT_AUTHORIZED_WITHOUT_CURRENT_TEXT_START",
+  "authorized_head_sha": null,
+  "dispatcher_pr": 342,
+  "dispatcher_head_sha": "b9d08953a46381f826a1669bf0fe4ff28f04a67e",
+  "hardlock_base_run": 35429041658,
+  "hardlock_base_status": "PASS",
+  "hardlock_base_head_sha": "b9d08953a46381f826a1669bf0fe4ff28f04a67e",
+  "user_approval": false,
+  "worker_capacity_status": "BLOCKED_USAGE_LIMIT",
+  "approved_article_count": 0,
+  "new_article_policy": "COMPLETELY_NEW_NO_RECOVERY_BODY",
+  "sequential_advance_policy": "PASS_ONLY",
+  "repair_policy": "SAME_ARTICLE_SAME_WORKSPACE_UNTIL_PASS",
+  "restart_recovery_status": "PENDING_TEST",
+  "durable_evidence_transport_status": "BLOCKED_NOT_PROVEN",
+  "worker_side_github_write_required": false,
+  "publish_allowed": false
+}
