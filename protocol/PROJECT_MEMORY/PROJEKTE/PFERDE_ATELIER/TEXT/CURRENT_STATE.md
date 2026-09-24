@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-09-24
-STATUS: BLOCKED / ONE-FRESH-ARTICLE REALTEST NEXT
+STATUS: KATEGORIE-SCOPE CLOSED / ÄLTERE PRODUKTIONSHISTORIE UNTEN NICHT ALS AKTUELLE KATEGORIE-NEXT-ACTION
 
 ## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
 
@@ -58,9 +58,11 @@ Der letzte frische Lauf vor M37 erreichte realen PPM/PSERC und endete äußerlic
 Der damalige innere Grund ist nicht mehr rekonstruierbar.
 **Produktions-Rootcause bleibt UNKNOWN.**
 
-## NEXT ACTION
+## HISTORISCHE PRODUKTIONS-NEXT-ACTION AUS STAND 2026-09-11
 
-Genau einen frischen ersten Artikel über den offiziellen aktuellen 107007-Weg bis zum realen LanguageTool-/PPM-/PSERC-Handoff ausführen.
+Die folgende Anweisung gehört zum damaligen Produktionsdiagnose-Stand und ist **keine aktuelle Kategorie-NEXT-ACTION**. Kategorie/Struktur ist geschlossen.
+
+Damals vorgesehen: genau einen frischen ersten Artikel über den offiziellen damaligen 107007-Weg bis zum realen LanguageTool-/PPM-/PSERC-Handoff ausführen.
 
 Bei erstem BLOCKED/REPAIR_REQUIRED:
 - exakt stoppen;
