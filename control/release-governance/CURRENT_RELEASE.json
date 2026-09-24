@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 130,
+  "generation": 131,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "PSTE_05711_LIVE_APPLY_READBACK",
+    "current_focus": "PSTE_05712_LIVE_APPLY_READBACK",
     "current_focus_scope_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
-    "current_focus_reason": "CATEGORY CONCEPT AND PSTE FAMILY PRESENCE ARE CLOSED. PSTE 0.57.11 NOW HAS FULL REAL WORDPRESS E2E PASS INCLUDING A 4200-ROW BOUNDED-READ ADMIN PROBE ACROSS ALL PSTE BACKEND PAGES. NEXT LIVE STEP IS INSTALL EXACT 0.57.11 AND READ BACK THEMENKARTE, THEMENPRUEFUNG AND RETAINED 'pferde putztasche'.",
+    "current_focus_reason": "PSTE 0.57.12 FULL REAL WORDPRESS E2E PASS. STALE PERSISTED AUTOMATIC ROLE READBACK IS NOW RECLASSIFIED READ-ONLY; ORIGINAL QUERY IS PRESERVED; DATABASE STORED ROLE IS NOT MUTATED; REAL DUPLICATES REMAIN ALREADY_COVERED. NEXT LIVE STEP: INSTALL EXACT TESTED 0.57.12 AND READ BACK 'pferde putztasche'.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -233,10 +233,10 @@
     }
   },
   "execution_state": {
-    "state": "PSTE_05711_LIVE_APPLY_READBACK",
+    "state": "PSTE_05712_LIVE_APPLY_READBACK",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "INSTALL ONLY EXACT TESTED PSTE-0.57.11-HOBBYROOM.zip SHA256 d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31 OVER LIVE 0.57.10. DO NOT DELETE/REBUILD RETAINED DATA AND DO NOT RESTART RESEARCH. THEN VERIFY THEMENKARTE AND THEMENPRUEFUNG OPEN WITHOUT CRITICAL ERROR AND 'pferde putztasche' REMAINS RETAINED FOR INTERNAL CLARIFICATION.",
-    "completion_condition": "LIVE PSTE 0.57.11 ACTIVE; THEMENKARTE OPENS WITHOUT CRITICAL ERROR; THEMENPRUEFUNG OPENS WITHOUT CRITICAL ERROR; 'pferde putztasche' REMAINS PRESENT/RETAINED AND IS NOT LOST; NO BLIND DATA RESET OR RESEARCH RESTART.",
+    "bound_user_scope_action": "INSTALL ONLY EXACT TESTED PSTE-0.57.12-HOBBYROOM.zip SHA256 0cf9c4004f9c237ac60a70a324c431193f8ddcce640ce1a2d08ddbdf901fdc9b OVER LIVE 0.57.11. DO NOT DELETE OR REBUILD RETAINED DATA AND DO NOT RESTART RESEARCH. THEN VERIFY THEMENPRUEFUNG SEARCH 'pferde putztasche': ROLE MUST NO LONGER BE 'BEREITS ABGEDECKT'; ORIGINAL QUERY AND INTERNAL-CLARIFICATION REASONS MUST REMAIN.",
+    "completion_condition": "LIVE PSTE 0.57.12 ACTIVE; 'pferde putztasche' READBACK NO LONGER SHOWS ROLE 'BEREITS ABGEDECKT'; ORIGINAL QUERY REMAINS RETAINED; REAL DUPLICATES STILL SHOW ALREADY_COVERED.",
     "after_completion_action": "PSERC 1149 METADATA/PLAN REFRESH, LINKREGISTRY/LINK TARGET REFRESH, TOTAL CATEGORY E2E, FINAL WORDPRESS PREFLIGHT writes_performed=false.",
     "no_optional_detours": true,
     "sequence": 39,
@@ -247,7 +247,7 @@
       "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/pste_05711_bounded_admin_read_fix_20260924.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/pste_05712_stale_role_readback_fix_20260924.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-24",
-    "current_first_blocker": "PSTE_05711_LIVE_APPLY_READBACK_REQUIRED",
+    "current_first_blocker": "PSTE_05712_LIVE_APPLY_READBACK_REQUIRED",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1488,6 +1488,31 @@
         "candidate_zip_sha256": "d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31",
         "evidence_ref": "release/affiliate-zentrale/evidence/pste_05711_bounded_admin_read_fix_20260924.md",
         "next": "INSTALL_EXACT_05711_THEN_LIVE_READBACK_NO_DATA_RESET_NO_RESEARCH_RESTART"
+      },
+      "pste_05712": {
+        "status": "REAL_WORDPRESS_E2E_PASS_LIVE_APPLY_READBACK_OPEN",
+        "version": "0.57.12",
+        "purpose": "RECLASSIFY_STALE_PERSISTED_AUTOMATIC_ROLE_ON_READ_ONLY",
+        "category_resolver_change": false,
+        "category_concept_change": false,
+        "data_deletion": false,
+        "database_role_mutation": false,
+        "research_restart_required": false,
+        "proof_branch": "pste-05700-server-step-driver-proof",
+        "proof_commit": "9288584486857a91425b6b9d15c71680b2dbc691",
+        "proof_run_id": 36000709696,
+        "proof_result": "SUCCESS",
+        "stale_role_readmodel_test": "PASS",
+        "internal_clarification_to_research_keyword": "PASS",
+        "real_duplicate_to_already_covered": "PASS",
+        "original_query_preserved": "PASS",
+        "stored_db_role_unchanged": "PASS",
+        "admin_bounded_read": "PASS",
+        "production_wave_40": "PASS",
+        "proof_artifact_id": 10808671661,
+        "proof_artifact_digest": "sha256:c16839c7a73edc5ee72ac62065982625f21c8585ad73442269f0fb3fa140bdc3",
+        "candidate_zip_sha256": "0cf9c4004f9c237ac60a70a324c431193f8ddcce640ce1a2d08ddbdf901fdc9b",
+        "next": "INSTALL_EXACT_05712_THEN_LIVE_READBACK_PFERDE_PUTZTASCHE"
       }
     },
     "live_consumer_closeout_20260924": {
