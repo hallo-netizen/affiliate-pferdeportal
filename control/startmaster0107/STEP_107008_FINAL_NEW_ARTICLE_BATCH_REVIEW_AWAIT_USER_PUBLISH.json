@@ -13,18 +13,6 @@
       "sha256": "6fcfddb024c77e418c12f3ca10113505745996be63162d29ec5fe45f31984c84"
     },
     {
-      "ref": "control/startmaster0107/codex-production-runtime/codex_environment_preflight.py",
-      "sha256": "d9393c50edc21dfae591012d5ea520249254c072879e0dbf26aa484031c1b9d8"
-    },
-    {
-      "ref": "control/startmaster0107/codex-production-runtime/RUNTIME_TOOLBOX_MANIFEST.json",
-      "sha256": "daee323ff219ba4918c40660b34ea39cb960f1664a0a0ac8d5e76c3ccc7296be"
-    },
-    {
-      "ref": "control/startmaster0107/codex-production-runtime/CODEX_ENVIRONMENT_SETUP_MAINTENANCE.sh",
-      "sha256": "7716d3d9d2bf5d3b52a6a3d1ece88da32e76d65a42c66aba701b2700031811de"
-    },
-    {
       "ref": "control/output-quarantine/output_release_gate.py",
       "sha256": "7e55ab7d4cf9569376955362b97881fb355b7dd48d8098564b353668e7277128"
     },
@@ -61,5 +49,6 @@
         }
       }
     ]
-  }
+  },
+  "worker_binding": "BOUND_CHAT_WORKER"
 }
