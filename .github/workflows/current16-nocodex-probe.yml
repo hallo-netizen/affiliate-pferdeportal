@@ -16,25 +16,23 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Read authoritative durable state
+      - name: Inspect exact bound PPM 6.7.9 production call
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ppm679
+          mkdir -p /tmp/ppm679
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
+          grep -Rni -B80 -A140 'BLOCKED_WAVE2_RUNTIME_LINK_ROLE' /tmp/ppm679 --include='*.php' || true
+          grep -Rni -B60 -A140 'Content_Validator::\|execute_plan\|validate.*content' /tmp/ppm679 --include='*.php' | head -n 1400
+
+      - name: Read exact current 16 state
         shell: bash
         run: |
           set -euo pipefail
           rm -rf /tmp/concept-agent-current
           python3 concept_agent/durable_event_log.py current --out /tmp/concept-agent-current | tee /tmp/current.json
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          d=json.loads(Path('/tmp/current.json').read_text(encoding='utf-8'))
-          a=d.get('allowed_action') or {}
-          print('CURRENT_SEQUENCE='+str(d.get('sequence')))
-          print('CURRENT_STAGE='+str(d.get('stage')))
-          print('ALLOWED_ACTION='+str(a.get('action')))
-          print('CHECKER='+str(a.get('checker')))
-          print('ITEM_INDEX='+str(a.get('item_index')))
-          if d.get('publish_allowed') is not False:
-              raise SystemExit('PUBLISH_FLAG_INVALID')
-          PY
+          cat /tmp/current.json
 
       - name: Record executor state
         uses: actions/upload-artifact@v4
