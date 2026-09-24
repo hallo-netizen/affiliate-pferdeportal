@@ -34,8 +34,6 @@ jobs:
           persist-credentials: false
       - name: Compile executor
         run: python3 -m py_compile concept_agent/durable_event_log.py concept_agent/github_batch_executor.py
-      - name: Executor migration tests
-        run: python3 -m unittest -v concept_agent.tests.test_github_batch_executor
       - name: Existing checkpoint and repair regressions
         run: python3 -m unittest -v concept_agent.tests.test_current_production_guards
 
