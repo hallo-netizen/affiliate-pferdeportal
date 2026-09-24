@@ -384,53 +384,55 @@ def _repair(rows:list[dict],current:dict,index:int)->bytes:
     owners=_owners(checker,findings)
     if owners!={"DRAFT_WORKER"}: raise Blocked("REPAIR_OWNER_NOT_DRAFT:"+",".join(sorted(owners or {"UNKNOWN"})))
 
-    # LanguageTool owns spelling/grammar replacement truth.  For LT findings,
-    # apply only one unambiguous replacement returned by the exact bound 6.8
-    # engine to the exact current bytes.  No generative rewrite is allowed.
-    if checker in {"LT68","languagetool"}:
-        plain=production_checks._plain_text(body)
-        report,_,_=production_checks._run_languagetool_text(REPO,plain)
-        matches=report.get("matches") if isinstance(report,dict) else None
-        if not isinstance(matches,list) or not matches:
-            raise Blocked("LT68_REPAIR_MATCHES_MISSING")
-        edits=[]
-        for match in matches:
-            if not isinstance(match,dict): raise Blocked("LT68_REPAIR_MATCH_INVALID")
-            off=match.get("offset"); length=match.get("length")
-            if not isinstance(off,int) or not isinstance(length,int) or off<0 or length<=0:
-                raise Blocked("LT68_REPAIR_RANGE_INVALID")
-            target=plain[off:off+length]
-            replacements=match.get("replacements")
-            values=[]
-            for r in replacements if isinstance(replacements,list) else []:
-                if isinstance(r,dict) and isinstance(r.get("value"),str) and r["value"] not in values:
-                    values.append(r["value"])
-            if len(values)!=1:
-                # Repairable LT finding: never terminate the workflow here.
-                # Hand the same article back to the existing bounded repair worker.
-                _,facts,pack,plan,_,_=_build_evidence(rows,current,index)
-                state=_state_for_body(rows,current,index,body,int(row.get("revision") or 1))
-                context={"fact_pack":pack,"production_plan_item":plan,"authoring_contract":state["authoring_contract"],
-                         "facts":facts,"article":state["article"]}
-                return _model_body(
-                    item=current["production_binding"]["items"][index],
-                    current_body=body,
-                    findings=findings,
-                    context=context,
-                    mode="repair",
-                ).encode("utf-8")
-            if not target or body.count(target)!=1:
-                raise Blocked("LT68_REPAIR_TARGET_NOT_UNIQUE:"+target[:80])
-            edits.append((target,values[0]))
-        repaired=body
-        for target,replacement in edits:
-            repaired=repaired.replace(target,replacement,1)
-    else:
+    def bound_repair_worker()->str:
         _,facts,pack,plan,_,_=_build_evidence(rows,current,index)
         state=_state_for_body(rows,current,index,body,int(row.get("revision") or 1))
         context={"fact_pack":pack,"production_plan_item":plan,"authoring_contract":state["authoring_contract"],
                  "facts":facts,"article":state["article"]}
-        repaired=_model_body(item=current["production_binding"]["items"][index],current_body=body,findings=findings,context=context,mode="repair")
+        return _model_body(
+            item=current["production_binding"]["items"][index],
+            current_body=body,
+            findings=findings,
+            context=context,
+            mode="repair",
+        )
+
+    # Repairable LT findings must never become terminal merely because the
+    # checker offers multiple choices or a deterministic text replacement
+    # cannot be applied safely. In that case the same article is returned to
+    # the existing bounded repair worker and then rechecked by the controller.
+    if checker in {"LT68","languagetool"}:
+        plain=production_checks._plain_text(body)
+        report,_,_=production_checks._run_languagetool_text(REPO,plain)
+        matches=report.get("matches") if isinstance(report,dict) else None
+        fallback_to_worker=False
+        edits=[]
+        if not isinstance(matches,list) or not matches:
+            fallback_to_worker=True
+        else:
+            for match in matches:
+                if not isinstance(match,dict):
+                    fallback_to_worker=True; break
+                off=match.get("offset"); length=match.get("length")
+                if not isinstance(off,int) or not isinstance(length,int) or off<0 or length<=0:
+                    fallback_to_worker=True; break
+                target=plain[off:off+length]
+                replacements=match.get("replacements")
+                values=[]
+                for r in replacements if isinstance(replacements,list) else []:
+                    if isinstance(r,dict) and isinstance(r.get("value"),str) and r["value"] not in values:
+                        values.append(r["value"])
+                if len(values)!=1 or not target or body.count(target)!=1:
+                    fallback_to_worker=True; break
+                edits.append((target,values[0]))
+        if fallback_to_worker:
+            repaired=bound_repair_worker()
+        else:
+            repaired=body
+            for target,replacement in edits:
+                repaired=repaired.replace(target,replacement,1)
+    else:
+        repaired=bound_repair_worker()
 
     if repaired==body: raise Blocked("REPAIR_DRAFT_UNCHANGED")
     try: content_guard.validate_repair_continuity(body,repaired)
