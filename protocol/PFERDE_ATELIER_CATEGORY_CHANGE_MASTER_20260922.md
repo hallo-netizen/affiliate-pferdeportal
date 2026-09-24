@@ -1081,3 +1081,67 @@ Bis dahin:
 - kein Linkregistry-Finalrefresh
 - kein Gesamt-Kategorie-E2E
 - keine Produktionsfreigabe
+
+
+---
+
+## 25. PSTE Resolver-Reklassifikation 2026-09-24
+
+Rolle: **Nachtrag/Korrektur der technischen Einordnung aus Abschnitt 24.** CURRENT-/NEXT-ACTION-Wahrheit bleibt ausschließlich `control/release-governance/CURRENT_RELEASE.json`.
+
+### Harte neue Prüfung
+
+Die autorisierte 1149-PSTE-Kategorieableitung wurde gegen die reale `PSTE_Article_Type_Registry::build()`-/`resolve()`-Logik geprüft.
+
+Ergebnis:
+- 1149 Kategorien
+- 1149 eindeutige Familie+Artikeltyp-Ziele
+- 0 Dubletten
+- 28/28 positive Resolverfälle PASS:
+  - `gebisse-beratung`
+  - `hafer-beratung`
+  - `pferdedecken-winterdecken-beratung`
+  - alle 25 Kategorien der fünf neuen Familien `pferdesaettel`, `trensen`, `offenstallbau`, `paddockbau`, `reitplatzbau`
+- unbekannte Fremdfamilie: fail-closed PASS mit `PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING`
+
+Evidence:
+`release/affiliate-zentrale/evidence/category_integration_pste_resolver_reclassification_20260924.md`
+
+### Korrektur der Interpretation aus Abschnitt 24
+
+`BLOCKED_FOR_CATEGORY` bedeutet im PSTE-Code **nicht ausschließlich**, dass eine Zielkategorie nicht aufgelöst werden konnte.
+
+Der Status wird ebenfalls für Planning-Readiness- und Duplicate-/Cannibalization-Blockaden verwendet. Die Admin-Oberfläche bezeichnet ihn selbst als **„Bereits abgedeckt oder blockiert“**.
+
+Damit sind:
+- 496/500 `BLOCKED_FOR_CATEGORY`
+- bekannte Altziele mit diesem Status
+- 0 Vorkommen der fünf neuen Familien im bestehenden Keyword-/Topic-Pool
+
+**kein hinreichender Beweis für einen defekten Kategorie-Resolver.**
+
+Zusätzlich gilt:
+`Gesamtbestand neu erfassen` aktualisiert Baseline/Struktur/Context, startet aber keine neue Keywordrecherche und erzeugt keine neuen Topic-Pool-Zeilen. Deshalb müssen die fünf neuen Familien nach diesem Schritt nicht automatisch im bestehenden Keywordbestand vorkommen.
+
+### Korrigierter erster Blocker
+
+Nicht mehr:
+`PSTE_0578_EXACT_LIVE_SOURCE_BIND_AND_KEYWORD_CATEGORY_RESOLUTION_496_OF_500_BLOCKED`
+
+Sondern:
+`PSTE_0578_BLOCKED_STATUS_REASON_CLASSIFICATION_RESOLVER_DEFECT_NOT_PROVEN`
+
+### Exakter nächster Schritt
+
+Nur read-only:
+die tatsächlich vorhandenen blockierten PSTE-Zeilen nach ihren bereits gespeicherten `reason_codes`, Planning-Readiness- und Duplicate-/Cannibalization-Gründen klassifizieren. Der bestehende PSTE-Bereich **„Konflikte“** zeigt diese Gründe bereits an.
+
+Nur wenn bei einem bekannten gültigen Ziel tatsächlich `PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING` oder ein gleichwertiger Current-Baseline-Miss belegt wird, wird ein Resolver-Fix wieder eröffnet.
+
+Bis dahin:
+- **kein Resolver-Fix erfinden**
+- **0.57.9 nicht installieren**
+- kein PSERC-Finalrefresh
+- kein Linkrefresh
+- kein Gesamt-Kategorie-E2E
+- kein Live-Apply
