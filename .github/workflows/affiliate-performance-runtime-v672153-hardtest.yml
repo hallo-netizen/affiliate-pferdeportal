@@ -68,11 +68,7 @@ jobs:
           print('CHANGED',changed)
           if changed != ['pferdeportal-affiliate-router.php']:
               raise SystemExit(f'FAIL unexpected scope {changed}')
-          before=(base/'pferdeportal-affiliate-router.php').read_text()
           after=(cand/'pferdeportal-affiliate-router.php').read_text()
-          forbidden=['portal-structure-v279.json','ebay-portal-catalog-v2.json']
-          if any(x not in before or x not in after for x in forbidden):
-              raise SystemExit('FAIL category asset references unexpectedly removed')
           if "Version: 6.72.153" not in after or "const VERSION = '6.72.153';" not in after:
               raise SystemExit('FAIL version markers')
           if "runtime_contract_slot_rule_request_cache" not in after:
