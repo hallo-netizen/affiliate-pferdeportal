@@ -52,7 +52,7 @@ jobs:
           wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
 
-      - name: Build exact 0.57.10 candidate with internal clarification retention
+      - name: Build exact 0.57.11 candidate with bounded admin reads
         shell: bash
         run: |
           set -euo pipefail
@@ -78,12 +78,14 @@ jobs:
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0578-bounded-sandbox-export.patch"
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0579-atomic-queue-step-lock.patch"
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste05710-internal-clarification-retention-role.patch"
+          base64 -d "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste05711-admin-bounded-read.patch.gz.b64" | gzip -d > /tmp/pste05711-admin-bounded-read.patch
+          patch --no-backup-if-mismatch -p1 < /tmp/pste05711-admin-bounded-read.patch
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
-          sed -i 's/Version: 0\.57\.0/Version: 0.57.10/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.10');/" portal-seo-topic-engine.php
-          grep -q 'Version: 0.57.10' portal-seo-topic-engine.php
-          grep -q "define('PSTE_VERSION', '0.57.10');" portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.11/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.11');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.11' portal-seo-topic-engine.php
+          grep -q "define('PSTE_VERSION', '0.57.11');" portal-seo-topic-engine.php
           grep -q 'Workflow projection only' includes/class-pste-repository.php
           grep -q 'finalize_prepare_cursor' includes/class-pste-research-job.php
           grep -q 'pste-breadth-status' includes/class-pste-admin.php
@@ -91,6 +93,7 @@ jobs:
           grep -q "if(!\$ids)" includes/class-pste-sandbox-record-store.php
           grep -q "raw_keyword_preserved" includes/class-pste-normal-metadata-path.php
           grep -q "PSTE_SANDBOX_EDITORIAL_CLARIFICATION_RETAINED" includes/class-pste-semantic-review-sandbox.php
+          grep -q "PSTE_ADMIN_EXACT_FULL_ANALYTICS_REQUIRES_FILTERED_OR_BATCHED_VIEW" includes/class-pste-analytics.php
           count="$(find . -type f -name '*.php' | wc -l)"
           test "$count" -eq 76
           while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find . -type f -name '*.php' | sort)
@@ -98,23 +101,103 @@ jobs:
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
-          zip -qr /tmp/PSTE-0.57.10-HOBBYROOM.zip "Portal SEO Topic Engine"
+          zip -qr /tmp/PSTE-0.57.11-HOBBYROOM.zip "Portal SEO Topic Engine"
           echo PACKAGE_ZIP_BUILT
-          test "$(unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          test "$(unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           echo PACKAGE_ROOT_PASS
-          test "$(unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
-          unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
-          unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
-          unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
-          if unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
-          if unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
-          sha256sum /tmp/PSTE-0.57.10-HOBBYROOM.zip | tee /tmp/PSTE-0.57.10-HOBBYROOM.sha256
-          wp plugin install /tmp/PSTE-0.57.10-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test "$(unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
+          test "$(unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
+          unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
+          unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
+          unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
+          if unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
+          if unzip -Z1 /tmp/PSTE-0.57.11-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
+          sha256sum /tmp/PSTE-0.57.11-HOBBYROOM.zip | tee /tmp/PSTE-0.57.11-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.11-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
           test ! -d /tmp/wordpress/wp-content/plugins/portal-seo-topic-engine
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
           cp "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/dataforseo-mock.php" /tmp/wordpress/wp-content/mu-plugins/pste-dataforseo-e2e.php
+
+      - name: Prove all PSTE admin pages fail-safe under bounded reads
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval '
+            global $wpdb;
+            $pool=PSTE_Repository::table("topic_pool");
+            $now=gmdate("Y-m-d H:i:s");
+            $base=[
+              "canonical_query"=>"admin bounded probe",
+              "primary_longtail_query"=>"admin bounded probe",
+              "raw_user_question"=>"admin bounded probe",
+              "reason_codes"=>["PSTE_ADMIN_BOUNDED_PROBE"],
+              "proposed_article_type"=>"FAQ",
+              "suggested_article_type"=>"FAQ",
+              "target_category_id"=>1,
+              "target_category_name"=>"Probe",
+              "topic_family_key"=>"probe",
+              "topic_family_name"=>"Probe",
+              "metrics"=>["search_volume"=>10],
+              "planning_suitability"=>"BLOCKED"
+            ];
+            for($i=0;$i<4200;$i++){
+              $uuid=sprintf("%08x-%04x-4%03x-8%03x-%012x",$i+1,($i+1)&0xffff,($i+1)&0xfff,($i+7)&0xfff,$i+100);
+              $payload=$base;
+              $payload["canonical_query"]="admin bounded probe ".$i;
+              $payload["primary_longtail_query"]="admin bounded probe ".$i;
+              $payload["raw_user_question"]="admin bounded probe ".$i;
+              $wpdb->insert($pool,[
+                "pool_key"=>$uuid,
+                "normalized_key"=>hash("sha256","admin bounded probe ".$i),
+                "candidate_id"=>hash("sha256","candidate ".$i),
+                "first_run_uuid"=>"00000000-0000-4000-8000-000000000001",
+                "last_run_uuid"=>"00000000-0000-4000-8000-000000000001",
+                "original_category_id"=>1,
+                "current_category_id"=>1,
+                "automatic_decision"=>"REVIEW_REQUIRED",
+                "automatic_pool_status"=>"BLOCKED_FOR_CATEGORY",
+                "topic_role"=>"RESEARCH_KEYWORD",
+                "planning_suitability"=>"BLOCKED",
+                "context_state"=>"PENDING",
+                "structure_sha256"=>"",
+                "manual_status"=>"",
+                "manual_category_id"=>0,
+                "manual_article_type"=>"",
+                "manual_note"=>"",
+                "payload_json"=>wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
+                "occurrence_count"=>1,
+                "first_seen_at"=>$now,
+                "last_seen_at"=>$now,
+                "reviewed_by"=>0
+              ]);
+              if($wpdb->last_error!=="")throw new RuntimeException("PSTE_ADMIN_PROBE_INSERT_FAILED_".$wpdb->last_error);
+            }
+            echo "PASS_ADMIN_BOUNDED_PROBE_SEED_".(int)$wpdb->get_var("SELECT COUNT(*) FROM $pool")."\n";
+          ' --path=/tmp/wordpress
+
+          pages=(
+            portal-seo-topic-engine
+            portal-seo-topic-engine-topics
+            portal-seo-topic-engine-keywords
+            portal-seo-topic-engine-review
+            portal-seo-topic-engine-coverage
+            portal-seo-topic-engine-priorities
+            portal-seo-topic-engine-conflicts
+            portal-seo-topic-engine-sandbox
+            portal-seo-topic-engine-sources
+            portal-seo-topic-engine-settings
+          )
+          for page in "${pages[@]}"; do
+            code="$(curl -sS -o "/tmp/admin-${page}.html" -w '%{http_code}' -b /tmp/pste-cookies.txt "http://127.0.0.1:8090/wp-admin/admin.php?page=${page}")"
+            test "$code" = "200"
+            if grep -Eqi 'There has been a critical error|Es gab einen kritischen Fehler|Allowed memory size.*exhausted|Fatal error|Uncaught (Error|Exception)' "/tmp/admin-${page}.html"; then
+              echo "PSTE_ADMIN_PAGE_FATAL_${page}"
+              sed -n '1,120p' "/tmp/admin-${page}.html"
+              exit 1
+            fi
+            echo "PASS_ADMIN_PAGE_${page}"
+          done
 
       - name: Prove internal clarification is retained and not marked covered
         shell: bash
@@ -392,8 +475,8 @@ jobs:
         with:
           name: pste-real-wordpress-http-e2e-system
           path: |
-            /tmp/PSTE-0.57.10-HOBBYROOM.sha256
-            /tmp/PSTE-0.57.10-HOBBYROOM.zip
+            /tmp/PSTE-0.57.11-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.11-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
             /tmp/settings-stale-race.html
