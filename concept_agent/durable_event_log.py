@@ -6,6 +6,7 @@ import base64
 import gzip
 import hashlib
 import json
+import os
 import re
 import sys
 import tempfile
@@ -26,9 +27,11 @@ import progress_guard
 import universal_reentry_guard
 
 EVENT_CONTRACT = "CONCEPT_AGENT_DURABLE_EVENT_V1"
-TRUSTED_EVENT_AUTHOR = "chatgpt-codex-connector[bot]"
+TRUSTED_EVENT_AUTHOR = "hallo-netizen"
+LEGACY_EVENT_AUTHOR = "github-actions[bot]"
 TRUSTED_START_AUTHOR = "github-actions[bot]"
 SNAPSHOT_REF = "concept_agent/current/PSERC_METADATA_SNAPSHOT.json"
+EVENT_AUTHOR_MIGRATION_REF = "concept_agent/EVENT_AUTHOR_MIGRATION_V1.json"
 MAX_COMMENT_BYTES = 60000
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 
@@ -81,14 +84,15 @@ def _current_batch() -> dict[str, Any]:
 
 
 def _api_json(url: str):
-    req = urllib.request.Request(
-        url,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "pferdeatelier-concept-agent-durable-event",
-            "X-GitHub-Api-Version": "2022-11-28",
-        },
-    )
+    headers={
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "pferdeatelier-concept-agent-durable-event",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    token=os.environ.get("GITHUB_TOKEN","").strip()
+    if token:
+        headers["Authorization"]="Bearer "+token
+    req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=30) as fh:
             return json.load(fh)
@@ -231,11 +235,33 @@ def payload_text(event: dict[str, Any]) -> str:
     return _decode_payload(event).decode("utf-8")
 
 
+def _event_author_allowed(row: dict[str, Any], event: dict[str, Any], batch_sha256: str) -> bool:
+    login = _login(row)
+    sequence = event.get("sequence")
+    if not isinstance(sequence, int) or isinstance(sequence, bool) or sequence < 1:
+        return False
+
+    migration = load_json(REPO / EVENT_AUTHOR_MIGRATION_REF)
+    if migration.get("contract") != "CONCEPT_AGENT_EVENT_AUTHOR_MIGRATION_V2":
+        raise Blocked("DURABLE_EVENT_AUTHOR_MIGRATION_CONTRACT_INVALID")
+    if migration.get("status") != "ACTIVE" or migration.get("new_legacy_events_allowed") is not False:
+        raise Blocked("DURABLE_EVENT_AUTHOR_MIGRATION_POLICY_INVALID")
+
+    legacy_batch = migration.get("legacy_batch_sha256")
+    maximum = migration.get("frozen_legacy_max_sequence")
+    if batch_sha256 == legacy_batch and isinstance(maximum, int) and sequence <= maximum:
+        ids = migration.get("frozen_legacy_comment_ids")
+        if not isinstance(ids, dict):
+            raise Blocked("DURABLE_EVENT_LEGACY_COMMENT_MAP_MISSING")
+        expected_id = ids.get(str(sequence))
+        return isinstance(expected_id, int) and row.get("id") == expected_id
+
+    return login == TRUSTED_EVENT_AUTHOR
+
+
 def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, Any] | None:
     body = str(row.get("body") or "")
     if not body.startswith(EVENT_CONTRACT + "\n"):
-        return None
-    if _login(row) != TRUSTED_EVENT_AUTHOR:
         return None
     line = body.splitlines()[1] if len(body.splitlines()) >= 2 else ""
     try:
@@ -244,6 +270,8 @@ def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, An
         raise Blocked("DURABLE_EVENT_JSON_INVALID:" + str(row.get("id"))) from exc
     if not isinstance(event, dict) or event.get("contract") != EVENT_CONTRACT:
         raise Blocked("DURABLE_EVENT_CONTRACT_INVALID")
+    if not _event_author_allowed(row, event, batch_sha256):
+        return None
     if event.get("batch_sha256") != batch_sha256:
         raise Blocked("DURABLE_EVENT_BATCH_MISMATCH")
     if event.get("publish_allowed") is not False:
@@ -265,6 +293,7 @@ def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, An
     if stable(core) != declared:
         raise Blocked("DURABLE_EVENT_HASH_MISMATCH")
     event["_comment_id"] = row.get("id")
+    event["_comment_created_at"] = str(row.get("created_at") or "")
     return event
 
 
@@ -317,7 +346,14 @@ def _research_sources(event: dict[str, Any], index: int) -> list[dict[str, Any]]
             raise Blocked("DURABLE_EVENT_RESEARCH_OWN_DOMAIN_FORBIDDEN")
         if hashlib.sha256(source["evidence"].encode("utf-8")).hexdigest() != source["snapshot_sha256"]:
             raise Blocked("DURABLE_EVENT_RESEARCH_SOURCE_HASH_MISMATCH")
-        checked.append({k: source[k] for k in required})
+        row = {k: source[k] for k in required}
+        retrieved = str(source.get("retrieved_at") or "").strip()
+        if not retrieved:
+            retrieved = str(event.get("_comment_created_at") or "").strip()
+        if not retrieved:
+            raise Blocked("DURABLE_EVENT_RESEARCH_RETRIEVED_AT_MISSING")
+        row["retrieved_at"] = retrieved
+        checked.append(row)
     return checked
 
 
