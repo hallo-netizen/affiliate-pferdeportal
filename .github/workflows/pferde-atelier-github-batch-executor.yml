@@ -43,7 +43,7 @@ jobs:
 
   production:
     needs: verify
-    if: ${{ needs.verify.result == 'success' && (github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
+    if: ${{ needs.verify.result == 'success' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_run') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     permissions:
