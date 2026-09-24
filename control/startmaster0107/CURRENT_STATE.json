@@ -127,7 +127,7 @@
   ],
   "publish_allowed": false,
   "execution_gate": {
-    "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
+    "contract": "PFERDE_ATELIER_BOUND_CHAT_WORKER_ENTRANCE_GATE_ENVELOPE_V2",
     "enforced": true,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
@@ -141,13 +141,14 @@
     "worker_context_policy": "CAPSULE_NAVIGATION_REPO_BOUND_STEP",
     "repeat_or_backtrack_policy": "DENY_UNLESS_PREBOUND_NEXT_BINDING",
     "api_dependency": "NONE",
-    "hard_worker_target": "CODEX_CLOUD",
+    "hard_worker_target": "BOUND_CHAT_WORKER",
     "hard_worker_runtime_verified": true,
     "base_hardlock_required_status_check": "hardlock-base",
     "official_runtime_entry_ref": "control/output-quarantine/runtime_entry_gate.py",
     "visible_output_authority": "RELEASE_RECEIPT_ONLY",
     "unbound_output_policy": "QUARANTINE_INVALID_NEVER_SURFACE_AS_PROJECT_RESULT",
-    "domain_blind_output_guard": true
+    "domain_blind_output_guard": true,
+    "worker_selection_policy": "MACHINE_BOUND_NO_CHAT_CHOICE"
   },
   "execution_gate_receipts": [
     {
@@ -235,11 +236,11 @@
     "publish_allowed": false
   },
   "external_execution_blocker": {
-    "code": "CODEX_USAGE_LIMIT",
-    "evidence": "PR #342 terminal comment 5740160115",
-    "classification": "EXTERNAL_AVAILABILITY_BLOCKER_NOT_PROJECT_FAILURE",
-    "effect": "Even after technical integration, no real Codex run may start until capacity is available and a fresh PASS receipt is created.",
-    "resolved": false,
+    "code": "LEGACY_WORKER_CAPACITY_BLOCKER_RETIRED",
+    "evidence": "Historical worker-capacity blocker retained only as prior evidence; it is not an active Concept-Agent production dependency.",
+    "classification": "HISTORICAL_EXTERNAL_BLOCKER_NOT_CURRENT",
+    "effect": "Does not apply to the bound chat worker.",
+    "resolved": true,
     "applies_to_concept_agent": false
   },
   "superseded_live_findings": [
