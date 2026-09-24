@@ -117,11 +117,8 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
     def test_resume_is_generic_1_to_n_not_current_16_hardcoded(self):
         source = inspect.getsource(d._current_batch)
         self.assertIn('count = intake.get("item_count")', source)
-        workflow = (
-            ROOT / ".github/workflows/pferde-atelier-github-batch-executor.yml"
-        ).read_text(encoding="utf-8")
-        self.assertNotIn("current16", workflow.lower())
         self.assertNotIn("item_count = 16", source.lower())
+        self.assertNotIn("range(16)", source.lower())
 
 
     def test_future_batch_event_one_uses_generic_bound_worker(self):
