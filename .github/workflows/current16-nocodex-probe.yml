@@ -11,71 +11,36 @@ permissions:
 jobs:
   execute:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
 
-      - name: Download hash-bound LanguageTool 6.8
+      - name: Inspect exact bound PPM fact-pack builder
+        shell: bash
+        run: |
+          set -eu
+          rm -rf /tmp/ppm679
+          mkdir -p /tmp/ppm679
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
+          cat /tmp/ppm679/portal-production-machine/tests/normal-draft-production/fixture-builder.php
+          echo '=== FACT PACK IMPORT ==='
+          grep -Rni -B80 -A180 'canonical_fact_pack_import_v1\|import_fact_pack_bundle' /tmp/ppm679/portal-production-machine --include='*.php' || true
+
+      - name: Read exact current 16 state
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/system4-lt68
-          curl --fail --location --retry 3 \
-            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
-            -o /tmp/system4-lt68/LanguageTool-6.8.zip
-          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
-          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
-          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+          rm -rf /tmp/concept-agent-current
+          python3 concept_agent/durable_event_log.py current --out /tmp/concept-agent-current | tee /tmp/current.json
+          cat /tmp/current.json
 
-      - name: Run exact LT68 over all 16 secured drafts
-        env:
-          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
-          PYTHONPATH: isolated_system4
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf /tmp/current16-lt
-          mkdir -p /tmp/current16-lt
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          import production_checks_engine as p
-
-          repo=Path('.').resolve()
-          src=repo/'recovery/current16-input'
-          files=sorted(src.glob('*.md'))
-          if len(files)!=16:
-              raise SystemExit('CURRENT16_INPUT_COUNT_INVALID:'+str(len(files)))
-          out=[]
-          for idx,path in enumerate(files):
-              text=path.read_text(encoding='utf-8')
-              report,raw,rc=p._run_languagetool_text(repo,p._plain_text(text))
-              row={
-                  'item_index':idx,
-                  'file':path.name,
-                  'sha256':p.text_sha256(text),
-                  'return_code':rc,
-                  'finding_count':len(report.get('matches') or []),
-                  'matches':report.get('matches') or [],
-              }
-              out.append(row)
-              print(json.dumps({
-                  'item_index':idx,
-                  'file':path.name,
-                  'finding_count':row['finding_count'],
-                  'rules':[m.get('rule',{}).get('id') for m in row['matches']],
-                  'messages':[m.get('message') for m in row['matches']],
-                  'replacements':[[r.get('value') for r in (m.get('replacements') or [])[:5]] for m in row['matches']],
-              },ensure_ascii=False))
-          Path('/tmp/current16-lt/LT68_ALL16.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
-          PY
-
-      - name: Upload exact LT68 evidence
+      - name: Record executor state
         uses: actions/upload-artifact@v4
         with:
-          name: current16-lt68-all16
-          path: /tmp/current16-lt/
+          name: current16-direct-executor-state
+          path: |
+            /tmp/current.json
+            /tmp/concept-agent-current
           if-no-files-found: error
           retention-days: 7
