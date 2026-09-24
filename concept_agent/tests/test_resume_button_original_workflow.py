@@ -32,19 +32,19 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
         )
         self.assertEqual(migration["contract"], "CONCEPT_AGENT_EVENT_AUTHOR_MIGRATION_V2")
         self.assertEqual(migration["current_event_author"], "hallo-netizen")
-        self.assertEqual(migration["frozen_legacy_max_sequence"], 60)
-        self.assertEqual(set(migration["frozen_legacy_comment_ids"]), {str(i) for i in range(1, 61)})
+        self.assertEqual(migration["frozen_legacy_max_sequence"], 74)
+        self.assertEqual(set(migration["frozen_legacy_comment_ids"]), {str(i) for i in range(1, 75)})
         self.assertIs(migration["new_legacy_events_allowed"], False)
         self.assertIs(migration["future_batches_legacy_events_allowed"], False)
 
-        row = {"id": migration["frozen_legacy_comment_ids"]["60"], "user": {"login": "anything"}}
-        self.assertTrue(d._event_author_allowed(row, {"sequence": 60}, self.BATCH))
+        row = {"id": migration["frozen_legacy_comment_ids"]["74"], "user": {"login": "anything"}}
+        self.assertTrue(d._event_author_allowed(row, {"sequence": 74}, self.BATCH))
         wrong = {"id": row["id"] + 1, "user": {"login": "anything"}}
         self.assertFalse(d._event_author_allowed(wrong, {"sequence": 60}, self.BATCH))
 
     def test_negative_github_cannot_author_next_repair_event(self):
         row = {"user": {"login": "github-actions[bot]"}}
-        self.assertFalse(d._event_author_allowed(row, {"sequence": 61}, self.BATCH))
+        self.assertFalse(d._event_author_allowed(row, {"sequence": 75}, self.BATCH))
 
     def test_negative_obsolete_worker_cannot_author_future_event(self):
         obsolete = "chatgpt-" + "co" + "dex-connector[bot]"
