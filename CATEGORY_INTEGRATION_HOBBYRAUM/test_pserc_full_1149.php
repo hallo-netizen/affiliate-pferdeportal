@@ -79,7 +79,7 @@ foreach((array)($portal['categories']??[]) as $c){
       'canonical_article_type'=>$type,
       'topic_family_name'=>$family,
       'topic_family'=>$family,
-      'topic_family_key'=>hash('sha256',$family),
+      'topic_family_key'=>hash('sha256',$productSlug.'|'.$family),
       'full_path'=>(string)($c['path']??''),
       'wp_parent_id'=>0,
       'parent_id'=>0,
