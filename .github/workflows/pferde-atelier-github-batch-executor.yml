@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  issues: read
+  issues: write
 
 concurrency:
   group: pferdeatelier-original-workflow-resume
@@ -45,6 +45,27 @@ jobs:
           unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
           echo 'SYSTEM4_LANGUAGETOOL_JAR=/tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' >> "$GITHUB_ENV"
+
+      - name: Bind existing GitHub Endstempel signer
+        shell: bash
+        env:
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.PFERDE_ATELIER_ENDSTEMPEL_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
+          umask 077
+          cat > /tmp/pferde_github_signer.py <<'PY'
+          #!/usr/bin/env python3
+          import base64, hashlib, os, sys
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          data=sys.stdin.buffer.read()
+          key=serialization.load_pem_private_key(os.environ["ENDSTEMPEL_PRIVATE_KEY"].encode(),password=None)
+          if not isinstance(key,Ed25519PrivateKey): raise SystemExit(2)
+          sys.stdout.write(base64.b64encode(key.sign(hashlib.sha256(data).digest())).decode())
+          PY
+          chmod 700 /tmp/pferde_github_signer.py
+          echo 'PFERDE_ATELIER_ENDSTEMPEL_SIGNER_CMD=python3 /tmp/pferde_github_signer.py' >> "$GITHUB_ENV"
 
       - name: Resume only through original bound workflow
         shell: bash
