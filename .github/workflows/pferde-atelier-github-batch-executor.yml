@@ -6,6 +6,7 @@ on:
       - 'fix/github-neutral-batch-executor-20260924'
     paths:
       - 'concept_agent/RESUME_TRIGGER'
+      - 'recovery/current16-input/**'
   workflow_dispatch:
   workflow_run:
     workflows: ['Pferdeatelier text-start receiver']
