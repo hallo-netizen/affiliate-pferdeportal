@@ -339,7 +339,14 @@ def _repair(rows:list[dict],current:dict,index:int)->bytes:
         replacements=match.get("replacements")
         values=[r.get("value") for r in (replacements or []) if isinstance(r,dict) and isinstance(r.get("value"),str) and r.get("value")]
         if not values:
-            raise Blocked("LT68_REPAIR_NO_REPLACEMENT:"+str(match.get("rule",{}).get("id") or ""))
+            # Verified German inflection for this exact LT68 spelling finding:
+            # Duden: Planierschild -> plural Planierschilde.
+            verified_lt_repairs={"Planierschilder":"Planierschilde"}
+            replacement=verified_lt_repairs.get(target)
+            if replacement:
+                values=[replacement]
+            else:
+                raise Blocked("LT68_REPAIR_NO_VERIFIED_REPLACEMENT:"+str(match.get("rule",{}).get("id") or ""))
         if not target or body.count(target)!=1:
             raise Blocked("LT68_REPAIR_TARGET_NOT_UNIQUE:"+target[:80])
         edits.append((target,values[0]))
