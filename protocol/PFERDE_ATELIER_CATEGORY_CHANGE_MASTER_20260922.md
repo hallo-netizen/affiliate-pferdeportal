@@ -1145,3 +1145,101 @@ Bis dahin:
 - kein Linkrefresh
 - kein Gesamt-Kategorie-E2E
 - kein Live-Apply
+
+
+---
+
+## 26. Kategoriekonzeption FINAL / FROZEN – 2026-09-24
+
+**Status: FACHLICH FERTIG / KEINE WEITERE KATEGORIEENTSCHEIDUNG OFFEN.**
+
+Dieser Abschnitt friert die Kategoriekonzeption für die laufende Änderung ein. Technische Propagation/Readbacks können noch offen sein; die fachliche Struktur selbst wird nicht mehr verändert.
+
+### 26.1 Finaler Strukturumfang
+
+Exakt **5 neue Produkt-/Hub-2-Seiten**:
+
+| Parent | Neue Produktseite | Slug |
+|---|---|---|
+| Sattel & Zubehör | Pferdesättel | `pferdesaettel` |
+| Trensen & Gebisse | Trensen | `trensen` |
+| Offenstall | Offenstallbau | `offenstallbau` |
+| Paddock | Paddockbau | `paddockbau` |
+| Reitplatz | Reitplatzbau | `reitplatzbau` |
+
+Exakt **25 neue Artikelkategorien**, fünf je Produktseite:
+
+- Pferdesättel: **FAQ · Beratung · Vergleich · Pflege · Kosten**
+- Trensen: **FAQ · Beratung · Vergleich · Pflege · Kosten**
+- Offenstallbau: **FAQ · Beratung · Vergleich · Installation · Kosten**
+- Paddockbau: **FAQ · Beratung · Vergleich · Installation · Kosten**
+- Reitplatzbau: **FAQ · Beratung · Vergleich · Installation · Kosten**
+
+Damit bleibt der Gesamtumfang unveränderlich:
+**5 Produktseiten + 25 Artikelkategorien = 30 neue Knoten.**
+
+### 26.2 Verbindliche Intent-Abgrenzung
+
+Damit allgemeine und bestehende spezielle Themen nicht gegeneinander kannibalisieren:
+
+- **FAQ** = allgemeine Fragen, Grundlagen, Definitionen, typische Wissensfragen.
+- **Beratung** = Auswahl-, Entscheidungs-, Planungs- und Handlungshilfe.
+- **Vergleich** = Alternativen, Unterschiede, Vor-/Nachteile, Gegenüberstellungen.
+- **Pflege** = Reinigung, Pflege, Erhalt und Wartung bei Pferdesätteln und Trensen.
+- **Installation** = Bau, Aufbau, Ausführung und Umsetzung bei Offenstallbau, Paddockbau und Reitplatzbau.
+- **Kosten** = Preise, Budget, laufende/Einmal-Kosten und Kostentreiber.
+
+Ein Artikel wird nach seiner **dominanten Suchintention** genau einer dieser fünf Kategorien der passenden Familie zugeordnet.
+
+### 26.3 Abgrenzung zu bestehenden Kategorien
+
+Die fünf neuen Familien sind **breite Oberthemen**, keine Ersatzkategorien für bestehende spezifische Themen.
+
+Beispiele:
+- `trensen-*` = allgemeine Trensen-Themen; `englische-trensen-*` bleibt spezifisch bestehen.
+- `offenstallbau-*` = gesamter Bau/Planung eines Offenstalls; bestehende Einzelthemen wie Bodenbefestigung, Tore, Raufen, Liegeflächen usw. bleiben eigenständig.
+- `paddockbau-*` = gesamter Paddockbau; `paddockzaeune-*` bleibt das spezifische Zaun-Thema.
+- `reitplatzbau-*` = gesamter Reitplatzbau; bestehende Einzelthemen wie Reitplatzboden, Drainage, Bewässerung, Beleuchtung usw. bleiben eigenständig.
+- `pferdesaettel-*` = allgemeine Pferdesattel-Themen; bestehende spezifische Sattel-/Zubehörthemen bleiben eigenständig.
+
+**Keine bestehende Kategorie wird verschoben, umbenannt, zusammengelegt oder ersetzt.**
+
+### 26.4 WordPress-Taxonomie vs. Portalhierarchie
+
+Harter Befund aus der einzigen Kategorien-Wahrheit `KATEGORIEN.tsv`:
+
+- 1160/1160 WordPress-Kategorien haben `parent_slug` leer.
+- Die WordPress-Kategorietaxonomie ist damit im aktuellen System **bewusst flach**.
+- Auch die 25 neuen Kategorien bleiben flach.
+- Die fachliche Hierarchie **Parent → Produktseite → Artikelkategorie** wird über die bestehende Portalstruktur/Ableitung gebunden, **nicht** durch WordPress-Term-Parents.
+
+HARD RULE:
+**Kein Worker darf die 25 neuen Artikelkategorien nachträglich als WordPress-Unterkategorien unter die fünf Produktseiten hängen.**
+
+### 26.5 Harte Strukturprüfung
+
+Aktueller Prüfstand:
+- `KATEGORIEN.tsv`: **1160 Zeilen**
+- globale doppelte Term-IDs: **0**
+- globale doppelte Slugs: **0**
+- neue echte Term-IDs: **1577–1601 = 25/25**
+- jede der fünf neuen Familien: **exakt 5/5 vorgesehene Intents**
+- fünf Produktseiten: **5 eindeutige IDs / 5 eindeutige Slugs**
+- bestehende Struktur bleibt additiv und unverändert.
+
+### 26.6 Freeze-Regel
+
+Für die laufende Kategorieintegration gilt ab jetzt:
+
+**KATEGORIEKONZEPT = FINAL / FROZEN.**
+
+Nicht mehr offen:
+- Anzahl der neuen Produktseiten,
+- deren Eltern,
+- Namen/Slugs,
+- Anzahl und Art der 25 Artikelkategorien,
+- Intent-System,
+- Abgrenzung zu bestehenden Kategorien,
+- WordPress-Parent-Modell.
+
+Offen bleiben ausschließlich technische Umsetzung/Propagation/Readback-Punkte aus Abschnitt 0A. Eine Änderung dieser Konzeption benötigt einen neuen ausdrücklichen Nutzerentscheid.
