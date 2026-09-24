@@ -44,7 +44,7 @@ Nach MACHINE_READY ist nur die append-only Ereigniskette im gebundenen Batch-Iss
 Ein gültiger Arbeitsschritt ist ausschließlich ein
 `CONCEPT_AGENT_DURABLE_EVENT_V1`
 von
-`github-actions[bot]`.
+`chatgpt-codex-connector[bot]`.
 
 Jedes Event bindet:
 - aktuellen Batch;
@@ -114,8 +114,4 @@ Hart verboten:
 - zweites `text-start` nach MACHINE_READY desselben Batches;
 - Alternativroute.
 
-Für den derzeit bereits MACHINE_READY befindlichen 16er-Batch existiert noch kein gültiges Produktions-Event. Deshalb leitet das Event-Gate aktuell ausschließlich `RESEARCH_ITEM` für Artikelindex 0 ab.
-
-
-## GitHub Actions executor
-Nach MACHINE_READY führt ausschließlich `concept_agent/github_batch_executor.py` die aus dem Checkpoint abgeleitete Aktionskette aus. Der Executor darf weder Artikelreihenfolge noch Prüfer noch Repair-Owner wählen. Er arbeitet bis zum vorhandenen STOP weiter und rekonstruiert nach Unterbrechung ausschließlich aus der hashverketteten Ereigniskette. Codex besitzt keine Ausführungs-, Event-, Workflow- oder Fallback-Autorität. Historische Codex-Events des bereits laufenden Batches bleiben ausschließlich als in `EVENT_AUTHOR_MIGRATION_V1.json` einzeln hashgebundene Altbelege lesbar.
+Für einen bereits MACHINE_READY befindlichen Batch wird die aktuelle erlaubte Aktion ausschließlich aus der gültigen dauerhaften Ereigniskette abgeleitet.
