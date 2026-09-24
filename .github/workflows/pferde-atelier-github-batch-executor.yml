@@ -112,9 +112,15 @@ jobs:
               raise SystemExit("PER_ERROR_PUSH_TRIGGER_PRESENT")
           if trigger_block.count("concept_agent/RESUME_TRIGGER") != 1:
               raise SystemExit("RESUME_TRIGGER_BINDING_INVALID")
-          if Path("concept_agent/github_batch_executor.py").exists():
-              raise SystemExit("ALTERNATE_EXECUTOR_PRESENT")
+          if not Path("concept_agent/github_batch_executor.py").is_file():
+              raise SystemExit("ORIGINAL_PRODUCTION_EXECUTOR_MISSING")
 
           print("ORIGINAL_WORKFLOW_RESUME_READY:"+action["action"])
           print("PER_ERROR_GITHUB_RESTART_BLOCKED")
           PY
+
+      - name: Execute original production chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 concept_agent/github_batch_executor.py run
