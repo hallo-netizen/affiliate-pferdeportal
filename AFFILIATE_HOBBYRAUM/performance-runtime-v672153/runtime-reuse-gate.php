@@ -59,7 +59,7 @@ function ppar_perf_front_gate() {
     }
 
     $expected = array(
-        '_ppar_norm_id' => 'performance-fixture',
+        '_ppar_norm_id' => 'performancefixture',
         '_ppar_norm_network' => 'manual',
         '_ppar_norm_creative_type' => 'product',
         '_ppar_norm_render_mode' => 'image_link',
