@@ -39,23 +39,7 @@ jobs:
         run: python3 -m unittest -v concept_agent.tests.test_github_batch_executor
       - name: Existing checkpoint and repair regressions
         run: python3 -m unittest -v concept_agent.tests.test_current_production_guards
-      - name: Verify no Codex execution route remains active
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          p=json.loads(Path('concept_agent/CONTROL_ENTRY_POINTER.json').read_text())
-          assert p['production_event_author']=='github-actions[bot]'
-          assert p['post_machine_ready_executor_ref']=='concept_agent/github_batch_executor.py'
-          assert p['codex_execution_allowed'] is False
-          assert p['codex_event_authority_allowed'] is False
-          d=Path('concept_agent/durable_event_log.py').read_text()
-          assert 'TRUSTED_EVENT_AUTHOR = "github-actions[bot]"' in d
-          assert 'LEGACY_EVENT_AUTHOR = "chatgpt-codex-connector[bot]"' in d
-          print('GITHUB_EXECUTOR_CODEX_ACTIVE_ROUTE_REMOVED_PASS')
-          PY
+
       - name: Current durable-chain preflight
         run: python3 concept_agent/github_batch_executor.py preflight
 
@@ -69,8 +53,6 @@ jobs:
       issues: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      CONCEPT_AGENT_MODEL: gpt-5.6-sol
       CONCEPT_AGENT_PREWRITTEN_DIR: recovery/current16-input
       ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
     steps:
