@@ -3,11 +3,11 @@
   "status": "ACTIVE",
   "current_event_author": "github-actions[bot]",
   "legacy_batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-  "frozen_legacy_max_sequence": 60,
+  "frozen_legacy_max_sequence": 61,
   "new_legacy_events_allowed": false,
   "future_batches_legacy_events_allowed": false,
   "publish_allowed": false,
-  "note": "Events 1..60 are frozen historical evidence by exact GitHub comment id. Only the bound GitHub Actions worker has future event authority.",
+  "note": "Events 1..61 are frozen historical evidence by exact GitHub comment id. Only the bound GitHub Actions worker has future event authority.",
   "frozen_legacy_comment_ids": {
     "1": 5804783543,
     "2": 5804862594,
@@ -68,6 +68,7 @@
     "57": 5816331120,
     "58": 5816336796,
     "59": 5816377359,
-    "60": 5816383403
+    "60": 5816383403,
+    "61": 5820718111
   }
 }
