@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGIN-UPDATEPROTOKOLL
 
-STAND: 2026-09-12
+STAND: 2026-09-24
 STATUS: APPEND-ONLY-CHRONIK
 
 ## ROLLE
@@ -54,6 +54,12 @@ Am 12.09.2026 wurden sechs WordPress-Screenshots inventarisiert.
 **Es wurde dabei kein Plugin verändert.** Deshalb existiert für die Baseline bewusst keine `PU-*`-ID.
 
 Vollständiger Bestand: `PLUGINREGISTER.md`.
+
+## STATUS-SYNC 2026-09-24 – KEIN NEUES PU-EREIGNIS
+
+Die Kategorie-/Pluginstände wurden am 24.09.2026 in PLUGINS und den betroffenen Fachbüros auf die bereits bewiesene technische Current-Autorität nachgeführt.
+
+Diese Änderung ist **nur Dokumentationssynchronisierung**. Es wurde durch diesen Campus-Nachtrag kein Plugin installiert, ersetzt, deaktiviert, reaktiviert oder gelöscht. Deshalb wird bewusst **keine erfundene PU-ID** angelegt.
 
 ## REGEL FÜR FACHBÜROS
 
