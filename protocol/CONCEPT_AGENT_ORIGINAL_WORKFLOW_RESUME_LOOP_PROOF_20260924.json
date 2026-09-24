@@ -1,0 +1,53 @@
+{
+  "contract": "PFERDE_ATELIER_ORIGINAL_WORKFLOW_RESUME_LOOP_PROOF_V1",
+  "date": "2026-09-24",
+  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "status": "WIRING_PASS_ORIGINAL_WORKER_INVOCATION_BLOCKED_BY_CURRENT_CONNECTOR_IDENTITY",
+  "publish_allowed": false,
+  "wiring": {
+    "workflow_ref": ".github/workflows/pferde-atelier-github-batch-executor.yml",
+    "alternate_executor_present": false,
+    "recovery_file_push_trigger_present": false,
+    "only_resume_trigger_path": "concept_agent/RESUME_TRIGGER",
+    "production_event_author": "chatgpt-codex-connector[bot]",
+    "github_actions_legacy_cutoff_sequence": 60,
+    "new_github_actions_production_events_allowed": false
+  },
+  "positive_proof": {
+    "workflow_run_id": 36021105373,
+    "conclusion": "success",
+    "head_sha": "a014d0bfe4230f4265574ef6f27c3cada5661652",
+    "marker": "ORIGINAL_WORKFLOW_RESUME_READY:REPAIR_DRAFT",
+    "resume_status": "RESUME_ALLOWED",
+    "tests_passed": 19
+  },
+  "negative_proof": {
+    "test_github_cannot_author_next_repair_event": "PASS",
+    "test_no_per_error_github_trigger_or_alternate_executor": "PASS",
+    "test_original_worker_can_author_next_event": "PASS",
+    "test_positive_original_worker_can_author_next_event": "PASS",
+    "repair_file_commit_sha": "fadf76abd1779c9718de36310d09eeeb96f24ee6",
+    "workflow_runs_for_repair_file_commit": 0,
+    "marker": "PER_ERROR_GITHUB_RESTART_BLOCKED"
+  },
+  "current_authoritative_state": {
+    "sequence": 60,
+    "last_event_sha256": "4c331d33562e9b644d5c7ef6c53412c86bb0de950c9681276e81ee0f27f3e724",
+    "allowed_action": {
+      "action": "REPAIR_DRAFT",
+      "checker": "LT68",
+      "item_index": 0,
+      "draft_sha256": "f9ad9ca5e9dc565f9ede43040031fe25706b2e7c68950c6f473fa742c9a84732",
+      "finding_sha256": "1c699a46d1bbc1b319a6620641a6bdd6f74d06dec9fe623ad96ea18f15f8349f"
+    }
+  },
+  "connector_identity_blocker": {
+    "expected_author": "chatgpt-codex-connector[bot]",
+    "available_comment_writer_observed_as": "hallo-netizen",
+    "historical_trigger_for_expected_author": "@codex",
+    "codex_trigger_used_for_current_resume": false,
+    "nonauthoritative_event_attempt_removed": true,
+    "state_advanced": false,
+    "alternate_route_created": false
+  }
+}
