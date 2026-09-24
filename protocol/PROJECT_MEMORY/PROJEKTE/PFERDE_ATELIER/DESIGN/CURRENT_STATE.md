@@ -27,7 +27,7 @@ Für den abgeschlossenen Kategorie-/Strukturscope gilt als technische Autorität
 
 Dieser Nachtrag ersetzt für den Kategorie-/Pluginstand die ältere 1.50.472-Angabe unten. Die ältere Passage bleibt historische Designbasis und ist **keine aktuelle Versionsangabe** mehr.
 
-## Aktueller LIVE-Stand
+## Historische Design-LIVE-Basis vor Kategorie-Sync
 
 **Historische Designbasis: Pferde Atelier Design 1.50.472 / Contract V104 + DESIGN-ORDER-SWAP-002. Aktuell gebundener Template-Kit-Pluginstand im Kategorie-Scope: 1.50.559.**
 
