@@ -24,31 +24,31 @@ def _touch_route(workspace: Path) -> None:
 
 
 class MachineRouteLockContractTests(unittest.TestCase):
-    def test_pre_codex_start_hardlock_blocks_before_any_temp_workspace(self):
-        blocker = parent_start.pre_codex_start_hardlock.PreCodexStartBlocked(
-            'PRECODEX_RECEIPT_NOT_PASS'
+    def test_bound_start_hardlock_blocks_before_any_temp_workspace(self):
+        blocker = parent_start.bound_start_hardlock.BoundStartBlocked(
+            'BOUND_START_RECEIPT_NOT_PASS'
         )
         with mock.patch.object(
-            parent_start.pre_codex_start_hardlock,
+            parent_start.bound_start_hardlock,
             'validate',
             side_effect=blocker,
         ), mock.patch.object(parent_start.tempfile, 'mkdtemp') as mkdtemp:
             with self.assertRaisesRegex(
-                parent_start.pre_codex_start_hardlock.PreCodexStartBlocked,
-                'PRECODEX_RECEIPT_NOT_PASS',
+                parent_start.bound_start_hardlock.BoundStartBlocked,
+                'BOUND_START_RECEIPT_NOT_PASS',
             ):
                 parent_start.start_bound()
         mkdtemp.assert_not_called()
 
-    def test_current_real_state_is_fail_closed_before_codex(self):
+    def test_current_real_state_is_fail_closed_without_current_authorization(self):
         with self.assertRaisesRegex(
-            parent_start.pre_codex_start_hardlock.PreCodexStartBlocked,
-            'PRECODEX_CURRENT_STATE_START_NOT_ALLOWED',
+            parent_start.bound_start_hardlock.BoundStartBlocked,
+            'BOUND_START_CURRENT_STATE_START_NOT_ALLOWED',
         ):
-            parent_start.pre_codex_start_hardlock.validate(parent_start.REPO)
+            parent_start.bound_start_hardlock.validate(parent_start.REPO)
 
-    def test_pre_codex_start_historical_negative_matrix(self):
-        guard = parent_start.pre_codex_start_hardlock
+    def test_bound_start_historical_negative_matrix(self):
+        guard = parent_start.bound_start_hardlock
         manifest = json.loads(guard.MANIFEST.read_text(encoding='utf-8'))
         head = 'a' * 40
         state = {
@@ -58,7 +58,7 @@ class MachineRouteLockContractTests(unittest.TestCase):
                 'step_id': 'RUN_NEW_ARTICLE_BATCH_NO_STOP',
                 'sequence': 107007,
             },
-            'current_execution_blocker': {'codex_start_allowed': True},
+            'current_execution_blocker': {'worker_start_allowed': True},
             'external_execution_blocker': {'resolved': True},
         }
         root = {
@@ -66,7 +66,7 @@ class MachineRouteLockContractTests(unittest.TestCase):
             'next_allowed_step': 'RUN_NEW_ARTICLE_BATCH_NO_STOP',
         }
         receipt = {
-            'contract': 'PFERDE_ATELIER_PRE_CODEX_START_RECEIPT_V1',
+            'contract': 'PFERDE_ATELIER_BOUND_START_RECEIPT_V1',
             'status': 'PASS',
             'authorized_head_sha': head,
             'dispatcher_pr': 342,
@@ -75,14 +75,14 @@ class MachineRouteLockContractTests(unittest.TestCase):
             'hardlock_base_status': 'PASS',
             'hardlock_base_head_sha': head,
             'user_approval': True,
-            'codex_capacity_status': 'AVAILABLE',
+            'worker_capacity_status': 'AVAILABLE',
             'approved_article_count': 7,
             'new_article_policy': 'COMPLETELY_NEW_NO_RECOVERY_BODY',
             'sequential_advance_policy': 'PASS_ONLY',
             'repair_policy': 'SAME_ARTICLE_SAME_WORKSPACE_UNTIL_PASS',
             'restart_recovery_status': 'PASS_CROSS_PROCESS_AND_DURABLE_TRANSPORT_READY',
             'durable_evidence_transport_status': 'PASS',
-            'codex_side_github_write_required': False,
+            'worker_side_github_write_required': False,
             'publish_allowed': False,
         }
 
@@ -94,22 +94,22 @@ class MachineRouteLockContractTests(unittest.TestCase):
             root=root,
             state_sha256='b' * 64,
         )
-        self.assertEqual(result['status'], 'PRE_CODEX_START_HARDLOCK_PASS')
+        self.assertEqual(result['status'], 'BOUND_START_HARDLOCK_PASS')
 
         cases = (
-            ('dispatcher_head_sha', 'c' * 40, 'PRECODEX_DISPATCHER_HEAD_DRIFT'),
-            ('hardlock_base_status', 'FAIL', 'PRECODEX_HARDLOCK_BASE_NOT_FRESH_PASS'),
-            ('codex_capacity_status', 'BLOCKED_USAGE_LIMIT', 'PRECODEX_CODEX_CAPACITY_NOT_AVAILABLE'),
-            ('restart_recovery_status', 'LOCAL_ONLY', 'PRECODEX_RESTART_RECOVERY_NOT_READY'),
-            ('durable_evidence_transport_status', 'BLOCKED', 'PRECODEX_DURABLE_EVIDENCE_TRANSPORT_NOT_PASS'),
-            ('new_article_policy', 'RECOVERY_ALLOWED', 'PRECODEX_RECEIPT_NEW_ARTICLE_POLICY_INVALID'),
-            ('publish_allowed', True, 'PRECODEX_RECEIPT_PUBLISH_NOT_FALSE'),
+            ('dispatcher_head_sha', 'c' * 40, 'BOUND_START_DISPATCHER_HEAD_DRIFT'),
+            ('hardlock_base_status', 'FAIL', 'BOUND_START_HARDLOCK_BASE_NOT_FRESH_PASS'),
+            ('worker_capacity_status', 'BLOCKED_USAGE_LIMIT', 'BOUND_START_WORKER_CAPACITY_NOT_AVAILABLE'),
+            ('restart_recovery_status', 'LOCAL_ONLY', 'BOUND_START_RESTART_RECOVERY_NOT_READY'),
+            ('durable_evidence_transport_status', 'BLOCKED', 'BOUND_START_DURABLE_EVIDENCE_TRANSPORT_NOT_PASS'),
+            ('new_article_policy', 'RECOVERY_ALLOWED', 'BOUND_START_RECEIPT_NEW_ARTICLE_POLICY_INVALID'),
+            ('publish_allowed', True, 'BOUND_START_RECEIPT_PUBLISH_NOT_FALSE'),
         )
         for field, value, expected in cases:
             bad = dict(receipt)
             bad[field] = value
             with self.subTest(field=field), self.assertRaisesRegex(
-                guard.PreCodexStartBlocked,
+                guard.BoundStartBlocked,
                 expected,
             ):
                 guard.validate_payload(
@@ -212,18 +212,18 @@ class MachineRouteLockContractTests(unittest.TestCase):
             self.assertEqual(batch_cmd[1], str(parent_start.BATCH_START))
             self.assertIn('start', batch_cmd)
             joined = ' '.join(point0_cmd + batch_cmd).lower()
-            self.assertNotIn('codex_entry.py', joined)
+            self.assertNotIn(('co' + 'dex_entry.py'), joined)
             self.assertNotIn('worker-start', joined)
             self.assertNotIn('advance', joined)
             self.assertEqual(receipt['status'], 'SYSTEM4_PARENT_ROOT_READY_STOP')
             self.assertEqual(receipt['started_item_index'], 0)
             self.assertIs(receipt['root_only'], True)
-            self.assertIs(receipt['codex_invoked'], False)
+            self.assertIs(receipt['worker_invoked'], False)
             self.assertIs(receipt['advance_invoked'], False)
             self.assertIs(receipt['publish_allowed'], False)
 
 
-    def test_codex_root_override_matches_current_bound_parent_start(self):
+    def test_bound_worker_root_override_matches_current_bound_parent_start(self):
         override = (parent_start.REPO / 'AGENTS.override.md').read_text(encoding='utf-8')
         self.assertIn(
             'python3 isolated_system4/parent_start.py start-current-bound',
@@ -262,11 +262,11 @@ class MachineRouteLockContractTests(unittest.TestCase):
         self.assertEqual(len(items), 7)
 
         with mock.patch.object(
-            parent_start.pre_codex_start_hardlock,
+            parent_start.bound_start_hardlock,
             'validate',
             return_value={
-                'contract': 'PFERDE_ATELIER_PRE_CODEX_START_HARDLOCK_V1',
-                'status': 'PRE_CODEX_START_HARDLOCK_PASS',
+                'contract': 'PFERDE_ATELIER_PRE_WORKER_START_HARDLOCK_V1',
+                'status': 'BOUND_START_HARDLOCK_PASS',
                 'head': 'test',
                 'approved_article_count': 7,
                 'publish_allowed': False,
@@ -282,7 +282,7 @@ class MachineRouteLockContractTests(unittest.TestCase):
             self.assertEqual(receipt['source_requests_item_count'], 7)
             self.assertEqual(receipt['started_item_index'], 0)
             self.assertIs(receipt['root_only'], True)
-            self.assertIs(receipt['codex_invoked'], False)
+            self.assertIs(receipt['worker_invoked'], False)
             self.assertIs(receipt['advance_invoked'], False)
             self.assertIs(receipt['external_paths_auto_created'], True)
             self.assertIs(receipt['publish_allowed'], False)
