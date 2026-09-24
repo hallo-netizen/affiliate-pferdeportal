@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 137,
+  "generation": 138,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -229,6 +229,21 @@
         "object_cache_next": "VERIFY_SERVER_REDIS_OR_MEMCACHED_AND_PHP_EXTENSION_BEFORE_ENABLE",
         "template_next": "BIND_EXACT_PPA013_1_50_559_MAIN_SOURCE_BEFORE ANY FIRST_PASS_MENU CHANGE",
         "no_guessing": true
+      },
+      "menu_helper_v3_20260924": {
+        "status": "HARDTEST_PASS_REAL_SERVER_READBACK_REQUIRED",
+        "candidate_version": "3.0.0",
+        "candidate_zip": "PA_AFFILIATE_DESIGN_PERFORMANCE_3.0.0_PERSISTENT_MENU_HARDTEST.zip",
+        "candidate_sha256": "2db4a035b83849dbfec048e8821d6990e670d2f145f37d63f5e58ce1717bc1fb",
+        "hardtest_run": 36033879960,
+        "warm_meta_hooks": {
+          "baseline": 97650,
+          "cold": 41850,
+          "warm": 13950,
+          "reduction_percent": 85.7
+        },
+        "template_kit_changed": false,
+        "evidence_ref": "release/affiliate-zentrale/evidence/design_performance_v3_persistent_menu_20260924.md"
       }
     },
     "category_completion": {
@@ -249,11 +264,11 @@
     }
   },
   "execution_state": {
-    "state": "PERFORMANCE_TECHNICAL_BLOCK_CLEAR_CAUSES_ACTIVE",
-    "authorized_next_action": "VERIFY_OBJECT_CACHE_CAPABILITY_AND_BIND_EXACT_TEMPLATE_KIT_1_50_559_SOURCE; KEEP_6_72_153_TECHNICAL_REUSE",
+    "state": "PERFORMANCE_MENU_V3_HARDTEST_PASS_SERVER_READBACK_OPEN",
+    "authorized_next_action": "INSTALL_DESIGN_PERFORMANCE_3_0_0_OVER_2_0_0; WARM_ONE_FRONTEND_REQUEST; RUN_ONE_PERFORMANCE_DIAGNOSIS",
     "bound_user_scope_action": "PERFORMANCE ONLY. CATEGORY/STRUCTURE REMAINS FROZEN. NO CONTENT, DESIGN, RANKING, PROVIDER, SLOT, VETO, PUBLISH OR QUALITY RULE CHANGE. BUNDLE SAFE CPU REUSE CHANGES, THEN ONE HARDTEST, THEN ONE REAL SERVER INTERMEDIATE MEASUREMENT.",
-    "completion_condition": "CLEAR TECHNICAL CAUSES ADDRESSED WITHOUT FUNCTIONAL OR QUALITY CHANGE; SERVER CHECK BETWEEN BLOCKS",
-    "after_completion_action": "THEN_REVIEW_KUBIO_ASTRA_HIVEPRESS_TECHNICAL_LOAD",
+    "completion_condition": "REAL SERVER DIAGNOSIS CONFIRMS NO FUNCTIONAL REGRESSION AND TECHNICAL MENU_META_TERM_REDUCTION",
+    "after_completion_action": "ONLY THEN CONTINUE TO NEXT CLEAR TECHNICAL PLUGIN_BOOTSTRAP_OR_KUBIO_ASTRA_HIVEPRESS_BLOCK",
     "no_optional_detours": true,
     "sequence": 40,
     "authorized_change_prefixes": [
