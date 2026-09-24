@@ -154,8 +154,8 @@ def _build_evidence(rows:list[dict],current:dict,index:int)->tuple[dict,dict,dic
     plan["quality_binding_hash"]=production_checks.stable_hash(plan["quality_binding"])
 
     base={
-      "contract":controller_engine.STATE_CONTRACT,"article":article,"source_snapshot_sha256":snap_sha,
-      "phase":"CHECK_REQUIRED","research":{"text":json.dumps(research,ensure_ascii=False,sort_keys=True),
+      "contract":controller_engine.CONTRACT,"article":article,"source_snapshot_sha256":snap_sha,
+      "batch_sha256":current["batch_sha256"],"phase":"CHECK_REQUIRED","research":{"text":json.dumps(research,ensure_ascii=False,sort_keys=True),
       "sha256":sha_text(json.dumps(research,ensure_ascii=False,sort_keys=True))},
       "facts":{"text":json.dumps(facts,ensure_ascii=False,sort_keys=True),
       "sha256":sha_text(json.dumps(facts,ensure_ascii=False,sort_keys=True))},
@@ -172,8 +172,8 @@ def _state_for_body(rows:list[dict],current:dict,index:int,body:str,revision:int
     research,facts,pack,plan,snap_sha,_=_build_evidence(rows,current,index)
     article=_article_from_binding(current["production_binding"]["items"][index])
     state={
-      "contract":controller_engine.STATE_CONTRACT,"article":article,"source_snapshot_sha256":snap_sha,
-      "phase":"CHECK_REQUIRED","research":{"text":json.dumps(research,ensure_ascii=False,sort_keys=True),
+      "contract":controller_engine.CONTRACT,"article":article,"source_snapshot_sha256":snap_sha,
+      "batch_sha256":current["batch_sha256"],"phase":"CHECK_REQUIRED","research":{"text":json.dumps(research,ensure_ascii=False,sort_keys=True),
       "sha256":sha_text(json.dumps(research,ensure_ascii=False,sort_keys=True))},
       "facts":{"text":json.dumps(facts,ensure_ascii=False,sort_keys=True),
       "sha256":sha_text(json.dumps(facts,ensure_ascii=False,sort_keys=True))},
