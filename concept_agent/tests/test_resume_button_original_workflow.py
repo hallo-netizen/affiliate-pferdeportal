@@ -124,5 +124,13 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
         self.assertNotIn("item_count = 16", source.lower())
 
 
+    def test_future_batch_event_one_uses_generic_bound_worker(self):
+        future_batch = "f" * 64
+        bound = {"user": {"login": "hallo-netizen"}}
+        other = {"user": {"login": "github-actions[bot]"}}
+        self.assertTrue(d._event_author_allowed(bound, {"sequence": 1}, future_batch))
+        self.assertFalse(d._event_author_allowed(other, {"sequence": 1}, future_batch))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
