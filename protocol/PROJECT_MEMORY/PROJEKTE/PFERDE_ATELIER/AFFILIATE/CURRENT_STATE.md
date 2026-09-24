@@ -1,6 +1,6 @@
 # AFFILIATE – CURRENT STATE
 
-STAND: 2026-09-12
+STAND: 2026-09-24
 STATUS: ADCELL API-V2-KANDIDAT LOKAL GEPRÜFT / KANONISCHE RÜCKBINDUNG OFFEN
 
 ## AUTORITÄT
@@ -12,6 +12,19 @@ Diese Datei ist die einzige aktuelle Campus-Standzusammenfassung des Büros AFFI
 - Zielvertrag → `ZV-AFFILIATE-ADCELL-001`
 - technische Release-Autorität → Branch `affiliate-release-current`
 - technischer Scope → `protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md`
+
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Die separate Kategorieintegration ist inzwischen technisch geschlossen. Autorität dafür ist ausschließlich `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+
+Aktueller gebundener Kategorie-Stand der Affiliate-Zentrale:
+- Version **6.72.152**
+- Portalstruktur: **1149 Produktionskategorien / 334 Produktseiten**
+- Affiliate-Katalog: **1149 Artikelkategorien / 334 Produktziele**
+- Final Closeout Run `36005442270`: **SUCCESS**
+- Hard Baseline Run `36005442188`: **SUCCESS**
+
+HARD RULE: Diese Kategoriearbeit ist geschlossen und darf nicht durch den älteren ADCELL-Arbeitsstand unten wieder geöffnet werden. ADCELL/Providerarbeit ist ein separater Arbeitsstrang.
 
 ## VERBINDLICHES ZIEL
 
