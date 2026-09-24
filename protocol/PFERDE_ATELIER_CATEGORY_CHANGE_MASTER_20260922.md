@@ -1243,3 +1243,40 @@ Nicht mehr offen:
 - WordPress-Parent-Modell.
 
 Offen bleiben ausschließlich technische Umsetzung/Propagation/Readback-Punkte aus Abschnitt 0A. Eine Änderung dieser Konzeption benötigt einen neuen ausdrücklichen Nutzerentscheid.
+
+
+---
+
+## 27. Kategorieintegration FINALER TECHNISCHER CLOSEOUT – 2026-09-24
+
+**Status: PASS / ZIELVERTRAG 0A TECHNISCH GESCHLOSSEN.**
+
+Vor dem Abschluss wurde ausdrücklich geprüft, welche früheren PASS-Aussagen nur Teilnachweise waren. Der frühere PSERC-PASS war ein 25er-Delta-Nachweis; der vollständige 1149-Lauf wurde deshalb separat nachgeholt.
+
+Final belegt:
+- zentrale Kategorienwahrheit: 1160 WordPress-Kategorien, davon 1149 Produktionskategorien;
+- aktuelle Portalstruktur: 1149 Produktionskategorien / 334 Produktseiten, SHA256 `ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed`;
+- aktueller Affiliate-Katalog: 1149 Artikelkategorien / 334 Produktziele, SHA256 `6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2`;
+- PSERC vollständiger Runtime-Gate: `PSERC_PORTAL_STRUCTURE_PASS`, 1149 total, 1124 protected, 25 dynamic, 0 missing protected, write_attempted=false;
+- Linkregistry: alle 25 neuen Kategorien gegen den aktuellen dynamischen System4-Prewrite geprüft, drei Linkrollen je Kategorie, 75/75 Linkbindungen PASS, unbekannte Kategorie fail-closed;
+- finaler aggregierter Kategorie-E2E/Preflight: `writes_performed=false`, `publish_allowed=false`, `apply_performed=false`.
+
+Finaler Workflow:
+- `Category Integration Final Closeout`
+- Run `36005442270`: **SUCCESS**
+- Artifact `10810097397`
+- Digest `sha256:b54ef510ce393dd0fa98313d5a80b58a455b103716f82b7cf7d62a92e938d7c7`
+
+Begleitender Hard-Baseline-Run:
+- Run `36005442188`: **SUCCESS**
+
+Hinweis zur Linkprüfung:
+- 17/25 neue Kategorien laufen vollständig durch den aktuellen PPM-Prewrite.
+- 8/25 mit den Kategorie-Intents `Kosten` bzw. `Installation` treffen anschließend auf die separate aktuelle PPM-Artikeltyp-Autorität. Für den Kategorie-/Link-Zielvertrag wurde deshalb ausschließlich die identische Link-/Hierarchiestrecke geprüft; dieser Artikeltyp-Punkt ist kein Kategorien-/Strukturdefekt.
+- Die PPM-Kategorieintegration selbst bleibt separat bereits 25/25 Kategorien + 125/125 Slots, signiert und Build-Integrity-PASS.
+
+Evidence:
+`release/affiliate-zentrale/evidence/category_integration_final_closeout_20260924.md`
+
+**Freeze:**
+Kategorie-/Strukturscope ist geschlossen. Kein weiterer Kategorie- oder Strukturumbau ohne neue harte Evidenz eines echten Defekts.
