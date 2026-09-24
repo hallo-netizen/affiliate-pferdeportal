@@ -1,0 +1,27 @@
+name: current16 nocodex probe
+
+on:
+  push:
+    branches: [current16-original-workflow-nocodex]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Inspect existing direct-draft adapters
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pserc-fix
+          mkdir -p /tmp/pserc-fix
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc-fix
+          echo '=== MATCHING FILES ==='
+          find /tmp/pserc-fix -type f | grep -Ei 'normal-draft|direct-draft|draft-adapter|draft-pipeline' || true
+          echo '=== MATCHING TEXT ==='
+          grep -RniE 'direct[-_ ]draft|normal[-_ ]draft|draft adapter|existing draft' /tmp/pserc-fix --include='*.php' --include='*.json' --include='*.md' | head -n 300 || true
