@@ -14,18 +14,20 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Inspect bound inner compiler direct-draft adapters
+      - name: Inspect bound PPM 6.7.9 normal-draft adapter
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/pserc-outer /tmp/pserc-inner
-          mkdir -p /tmp/pserc-outer /tmp/pserc-inner
-          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc-outer
-          inner="$(find /tmp/pserc-outer -type f -name '*.zip' | head -n1)"
-          test -n "$inner"
-          echo "INNER=$inner"
-          unzip -q "$inner" -d /tmp/pserc-inner
-          echo '=== MATCHING FILES ==='
-          find /tmp/pserc-inner -type f | grep -Ei 'normal-draft|direct-draft|draft-adapter|draft-pipeline' || true
-          echo '=== MATCHING TEXT ==='
-          grep -RniE 'direct[-_ ]draft|normal[-_ ]draft|draft adapter|existing draft' /tmp/pserc-inner --include='*.php' --include='*.json' --include='*.md' | head -n 500 || true
+          rm -rf /tmp/ppm679
+          mkdir -p /tmp/ppm679
+          unzip -q control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip -d /tmp/ppm679
+          echo '=== FILES ==='
+          find /tmp/ppm679 -type f | grep -Ei 'normal-draft-(adapter|pipeline|release-validator)|draft-adapter|draft-pipeline'
+          echo '=== ADAPTER ==='
+          p="$(find /tmp/ppm679 -type f -name 'normal-draft-adapter.php' | head -n1)"
+          test -n "$p"
+          sed -n '1,260p' "$p"
+          echo '=== PIPELINE HEAD ==='
+          q="$(find /tmp/ppm679 -type f -name 'normal-draft-pipeline.php' | head -n1)"
+          test -n "$q"
+          sed -n '1,300p' "$q"
