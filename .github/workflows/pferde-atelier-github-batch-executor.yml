@@ -56,7 +56,7 @@ jobs:
           from pathlib import Path
 
           pointer=json.loads(Path("concept_agent/CONTROL_ENTRY_POINTER.json").read_text(encoding="utf-8"))
-          if pointer.get("production_event_author") != "chatgpt-codex-connector[bot]":
+          if pointer.get("production_event_author") != "hallo-netizen":
               raise SystemExit("ORIGINAL_WORKER_AUTHORITY_NOT_BOUND")
           if "post_machine_ready_executor_ref" in pointer:
               raise SystemExit("ALTERNATE_EXECUTOR_STILL_BOUND")
