@@ -26,9 +26,11 @@ import progress_guard
 import universal_reentry_guard
 
 EVENT_CONTRACT = "CONCEPT_AGENT_DURABLE_EVENT_V1"
-TRUSTED_EVENT_AUTHOR = "chatgpt-codex-connector[bot]"
+TRUSTED_EVENT_AUTHOR = "github-actions[bot]"
+LEGACY_EVENT_AUTHOR = "chatgpt-codex-connector[bot]"
 TRUSTED_START_AUTHOR = "github-actions[bot]"
 SNAPSHOT_REF = "concept_agent/current/PSERC_METADATA_SNAPSHOT.json"
+EVENT_AUTHOR_MIGRATION_REF = "concept_agent/EVENT_AUTHOR_MIGRATION_V1.json"
 MAX_COMMENT_BYTES = 60000
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 
@@ -231,11 +233,31 @@ def payload_text(event: dict[str, Any]) -> str:
     return _decode_payload(event).decode("utf-8")
 
 
+def _event_author_allowed(row: dict[str, Any], event: dict[str, Any], batch_sha256: str) -> bool:
+    login = _login(row)
+    if login == TRUSTED_EVENT_AUTHOR:
+        return True
+    if login != LEGACY_EVENT_AUTHOR:
+        return False
+    migration = load_json(REPO / EVENT_AUTHOR_MIGRATION_REF)
+    if migration.get("contract") != "CONCEPT_AGENT_EVENT_AUTHOR_MIGRATION_V1":
+        raise Blocked("DURABLE_EVENT_AUTHOR_MIGRATION_CONTRACT_INVALID")
+    if migration.get("status") != "ACTIVE" or migration.get("new_legacy_events_allowed") is not False:
+        raise Blocked("DURABLE_EVENT_AUTHOR_MIGRATION_POLICY_INVALID")
+    if batch_sha256 != migration.get("legacy_batch_sha256"):
+        return False
+    sequence = event.get("sequence")
+    maximum = migration.get("legacy_max_sequence")
+    if not isinstance(sequence, int) or not isinstance(maximum, int) or sequence > maximum:
+        return False
+    if sequence == maximum and event.get("event_sha256") != migration.get("legacy_last_event_sha256"):
+        raise Blocked("DURABLE_EVENT_LEGACY_CUTOFF_HASH_MISMATCH")
+    return True
+
+
 def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, Any] | None:
     body = str(row.get("body") or "")
     if not body.startswith(EVENT_CONTRACT + "\n"):
-        return None
-    if _login(row) != TRUSTED_EVENT_AUTHOR:
         return None
     line = body.splitlines()[1] if len(body.splitlines()) >= 2 else ""
     try:
@@ -244,6 +266,8 @@ def _parse_event_comment(row: dict[str, Any], batch_sha256: str) -> dict[str, An
         raise Blocked("DURABLE_EVENT_JSON_INVALID:" + str(row.get("id"))) from exc
     if not isinstance(event, dict) or event.get("contract") != EVENT_CONTRACT:
         raise Blocked("DURABLE_EVENT_CONTRACT_INVALID")
+    if not _event_author_allowed(row, event, batch_sha256):
+        return None
     if event.get("batch_sha256") != batch_sha256:
         raise Blocked("DURABLE_EVENT_BATCH_MISMATCH")
     if event.get("publish_allowed") is not False:
