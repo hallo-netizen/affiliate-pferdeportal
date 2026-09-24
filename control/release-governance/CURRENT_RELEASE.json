@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 136,
+  "generation": 137,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -215,26 +215,20 @@
         "BANNER_6_72_143_RESUME"
       ],
       "current_block_20260924": {
-        "status": "SERVER_REGRESSION_REJECTED_ROLLBACK_TO_6_72_152",
+        "status": "TECHNICAL_OPTIMIZATION_ONLY",
         "basis_before": "performance-diagnose-safe-20260924-121142.json",
         "basis_after": "performance-diagnose-safe-20260924-160352.json",
-        "rejected_candidate_version": "6.72.153",
-        "rejected_reason": "REAL_SERVER_TIME_REGRESSION_DESPITE_LOWER_SANITIZE_KEY_COUNTS",
-        "comparable_urls": {
-          "home": {
-            "before_s": 3.404759,
-            "after_s": 3.611034
-          },
-          "ausruestung": {
-            "before_s": 2.778482,
-            "after_s": 4.472333
-          }
-        },
-        "safe_fallback_version": "6.72.152",
-        "safe_fallback_zip": "AFFILIATE_ZENTRALE_V6.72.152_SAFE_FALLBACK.zip",
-        "safe_fallback_sha256": "0bf4443a3046b9c981b20efee226d83c56508ab887cb21b7b4b273a6d2dba181",
-        "fallback_build_run": 36024372128,
-        "next_rule": "DO_NOT_OPTIMIZE_BY_MICROCOUNTER_ALONE; REQUIRE_REAL_SERVER_WALL_TIME_IMPROVEMENT"
+        "retained_candidate_version": "6.72.153",
+        "retained_reason": "TECHNICAL_REDUCTION_IN_REQUEST_LOCAL_NORMALIZATION IS MEASURABLE; WALL_TIME VARIANCE IS NOT USED ALONE TO DISCARD TECHNICAL GAINS",
+        "hard_rule": "OPTIMIZE CLEAR PHP/DB/HOOK/CACHE CAUSES FIRST; BROWSER/NETWORK/LCP ONLY LATER",
+        "confirmed_clear_points": [
+          "AFFILIATE_REQUEST_LOCAL_NORMALIZATION_REPETITION_REDUCED",
+          "PERSISTENT_OBJECT_CACHE_NOT_DETECTED",
+          "TEMPLATE_KIT_MENU_META_TERM_HOOK_VOLUME_REMAINS_HIGH"
+        ],
+        "object_cache_next": "VERIFY_SERVER_REDIS_OR_MEMCACHED_AND_PHP_EXTENSION_BEFORE_ENABLE",
+        "template_next": "BIND_EXACT_PPA013_1_50_559_MAIN_SOURCE_BEFORE ANY FIRST_PASS_MENU CHANGE",
+        "no_guessing": true
       }
     },
     "category_completion": {
@@ -255,11 +249,11 @@
     }
   },
   "execution_state": {
-    "state": "PERFORMANCE_BLOCK_A_6_72_153_REJECTED_ROLLBACK_REQUIRED",
-    "authorized_next_action": "ROLL_BACK_SERVER_TO_EXACT_6_72_152_SAFE_FALLBACK_THEN_REMEASURE_BASELINE_BEFORE_NEW_PERFORMANCE_WORK",
+    "state": "PERFORMANCE_TECHNICAL_BLOCK_CLEAR_CAUSES_ACTIVE",
+    "authorized_next_action": "VERIFY_OBJECT_CACHE_CAPABILITY_AND_BIND_EXACT_TEMPLATE_KIT_1_50_559_SOURCE; KEEP_6_72_153_TECHNICAL_REUSE",
     "bound_user_scope_action": "PERFORMANCE ONLY. CATEGORY/STRUCTURE REMAINS FROZEN. NO CONTENT, DESIGN, RANKING, PROVIDER, SLOT, VETO, PUBLISH OR QUALITY RULE CHANGE. BUNDLE SAFE CPU REUSE CHANGES, THEN ONE HARDTEST, THEN ONE REAL SERVER INTERMEDIATE MEASUREMENT.",
-    "completion_condition": "SERVER CONFIRMED ON 6.72.152 AND BASELINE RECHECK COMPLETE",
-    "after_completion_action": "REBASE PERFORMANCE PRIORITIES ON REAL WALL_TIME; DO NOT REAPPLY 6.72.153",
+    "completion_condition": "CLEAR TECHNICAL CAUSES ADDRESSED WITHOUT FUNCTIONAL OR QUALITY CHANGE; SERVER CHECK BETWEEN BLOCKS",
+    "after_completion_action": "THEN_REVIEW_KUBIO_ASTRA_HIVEPRESS_TECHNICAL_LOAD",
     "no_optional_detours": true,
     "sequence": 40,
     "authorized_change_prefixes": [
