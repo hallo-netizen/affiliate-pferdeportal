@@ -31,7 +31,7 @@ Die Kategorieintegration ist erst abgeschlossen, wenn **alle** folgenden Punkte 
 4. **Nicht Teil dieses Zielvertrags:** Texte, Kachelvorschauen, Designinhalte, Plugin-Konzepte, Performance-, Provider-, Ranking-, Banner- oder sonstige fachfremde Logik. PPA-013 darf nur auf eine statische Kategorien-/Portalstrukturbindung geprüft werden; Inhalte/Design bleiben unangetastet.
 5. PPM 6.7.9 muss die 25 neuen Produktionskategorien und 125 neuen kanonischen Slots konsistent enthalten. Dieser Punkt ist mit signiertem Build-Integrity-PASS bereits geschlossen.
 6. Affiliate-Zentrale muss im **installierten aktuellen Stand 6.72.152** ausschließlich die bereits hart getestete Portalstruktur und den bereits hart getesteten eBay-Katalog als technische Kategorienableitung erhalten; alle übrigen Dateien bleiben unverändert.
-7. PSTE muss im **installierten aktuellen Stand 0.57.6** seine technische Kategorieableitung auf 1149 Produktionskategorien nachziehen. PSERC 0.28.23 nutzt den bestehenden dynamischen Strukturpfad; kein 25er-Hardcoding.
+7. PSTE muss im **tatsächlich installierten aktuellen Live-Stand** seine technische Kategorieableitung auf 1149 Produktionskategorien korrekt konsumieren und die Keyword-/Themenzuordnung gegen diesen Bestand zuverlässig auflösen. Am 24.09.2026 wurde live **0.57.8** beobachtet; der lokale 0.57.9-Kandidat ist nicht installiert und nicht freigegeben. PSERC 0.28.23 nutzt den bestehenden dynamischen Strukturpfad; kein 25er-Hardcoding.
 8. Portal-/Link-Verbraucher werden nur auf tatsächliche statische Kategorie-/Strukturkopien geprüft. Dynamische Leser erhalten ausschließlich den notwendigen read-only Refresh/Readback.
 9. Bereits gültige, hash-identische Altbeweise werden nicht vollständig wiederholt. Nur das neue Delta wird positiv, negativ und auf unveränderten Altbestand geprüft, soweit für die konkrete Änderung erforderlich.
 10. Vor jedem späteren schreibenden WordPress-Schritt: echter Dry-Run/Preflight mit `writes_performed=false`; erst danach genau ein Apply + neuer Request + Readback.
@@ -976,3 +976,108 @@ Rolle: **Historie/Nachweis**, keine zweite CURRENT-/Status-/NEXT-ACTION-Wahrheit
 - Das Campus-Rekonstruktionsskript `reconstruct-design-1.50.469.sh` belegt: `580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5` ist der SHA256 der vollständigen historischen `pferde-template-kit.php` 1.50.469.
 - Es ist **nicht** der SHA der Breadcrumb-JSON.
 - Korrektur: historischer Loader-PHP-SHA wird entsprechend bezeichnet; der exakte SHA der aktuellen 1.50.559-`assets/breadcrumb-portal-map-v150310.json` bleibt offen und ist der erste Blocker.
+
+
+---
+
+## 24. Abschluss-/Nachholprüfung 2026-09-24 – PSTE Live-Delta und neuer Kategorie-Resolver-Blocker
+
+Rolle: **Historie/Nachweis**, keine zweite CURRENT-/NEXT-ACTION-Wahrheit. Aktueller Status und genau eine NEXT ACTION stehen ausschließlich in `control/release-governance/CURRENT_RELEASE.json`.
+
+### Frischecheck vor dem Live-Delta
+
+- Branch: `affiliate-release-current`
+- Head: `787d747410cfde5db1e8b86740c5103264725281`
+- Workflow: `Category Integration Hard Baseline`
+- Run: `35970840150`
+- Ergebnis: **SUCCESS**
+- Run-Head identisch: `787d747410cfde5db1e8b86740c5103264725281`
+
+Damit wurde **keine Vollrekonstruktion** durchgeführt; ausschließlich das spätere Live-PSTE-Delta wurde nachgeholt.
+
+### Bereits geschlossene Verbraucher
+
+Im aktuellen Chat wurden zusätzlich zu den früher geschlossenen Affiliate-/PPM-/PSTE-Map-/PSERC-Gates live geschlossen:
+
+- Template Kit 1.50.559: Kategorie-/Breadcrumb-Map **1149/1149**, Dry-Run PASS -> exakt ein Apply -> neuer Request -> Readback PASS.
+- Portal Production Center 1.1.1: Strukturbindung **1149 / 9 / 5790**, danach Build-Manifest/Ed25519-Trust-Root sauber neu gebunden; finaler Build-Integrity-Readback PASS.
+- Allgemeine Bildzentrale 2.7.6, Portal Link Policy Runtime Verifier 1.0.0, Portal Production Link Policy Gate 1.0.1 und Portal Category Structure Repair Guard 1.0.1: keine zusätzliche statische Vollkopie mit 1149er Delta nötig.
+
+Evidence:
+`release/affiliate-zentrale/evidence/category_integration_pste_live_delta_20260924.md`
+
+### PSTE-Live-Stand
+
+Live beobachtet:
+- **Portal SEO Themenengine 0.57.8**
+- `Gesamtbestand neu erfassen` endete mit **Gesamtbestand erfasst.**
+
+Der frühere WordPress-"kritischer Fehler" trat auf diesem konkreten 0.57.8-Capture-Lauf damit nicht erneut auf.
+
+Danach blockierte die Übersicht mit:
+`PSTE_ADMIN_ANALYTICS_DATASET_TOO_LARGE_USE_FILTERED_THEMENPRUEFUNG`
+
+Dafür existiert ein lokaler 0.57.9-Kandidat, **nicht installiert und nicht freigegeben**, weil danach ein schwererer Kategorieauflösungsfehler belegt wurde.
+
+### Neuer erster Blocker – Keyword-Kategorieauflösung
+
+Der direkt im aktuellen Chat bereitgestellte Keyword-Export wurde ohne Bibliothek ausgewertet:
+
+- 500 Statuszeilen
+- 496 × `BLOCKED_FOR_CATEGORY`
+- 4 × `AUTO_RESOLVED`
+- `pferdesaettel`: 0 Vorkommen
+- `trensen`: 0 Vorkommen
+- `offenstallbau`: 0 Vorkommen
+- `paddockbau`: 0 Vorkommen
+- `reitplatzbau`: 0 Vorkommen
+
+Auch bekannte Altziele werden blockiert. Damit ist der Fehler **nicht auf die 25 neuen Kategorien begrenzt**.
+
+Die technische Ursache ist noch **nicht bewiesen**. Nicht raten.
+
+### Fehler Z – PSTE-Gesamtbestand konnte im alten Stand kritisch abbrechen
+
+Die alte synchrone Baseline-Erfassung hatte große ungebremste Datenmengen in einem Request. Der beobachtete 0.57.8-Live-Lauf konnte `Gesamtbestand neu erfassen` erfolgreich abschließen.
+
+### Fehler AA – 0.57.8-Schutzbremse zu grob
+
+Nach erfolgreichem Gesamtbestand blockierte die Übersicht mit `PSTE_ADMIN_ANALYTICS_DATASET_TOO_LARGE_USE_FILTERED_THEMENPRUEFUNG`.
+Ein lokaler 0.57.9-Kandidat adressiert diesen Render-/Large-Dataset-Pfad, ist aber **nicht installiert**.
+
+### Fehler AB – PSTE-Kategorieauflösung massiv unvollständig
+
+500-Zeilen-Export: 496 `BLOCKED_FOR_CATEGORY`, nur 4 `AUTO_RESOLVED`; die fünf neuen Familien fehlen vollständig.
+
+**Status: OFFEN / erster aktueller Blocker.**
+
+### Fehler AC – historischer PLUGINS-START_HERE-Pfad auf aktuellem Branch nicht vorhanden
+
+Der in älteren Protokollabschnitten genannte Pfad
+`protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/PLUGINS/START_HERE.md`
+liefert auf `affiliate-release-current` aktuell 404 und darf deshalb nicht als aktuelle Bürotür behauptet werden.
+
+Für diesen Kategorieauftrag existiert eine stärkere technische Current-Autorität. Der statische Einstieg ist deshalb:
+1. `protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md` Abschnitt 0A lesen.
+2. Danach ausschließlich `control/release-governance/CURRENT_RELEASE.json`.
+3. Branch `affiliate-release-current` und den zu Current gehörenden `Category Integration Hard Baseline` frisch prüfen.
+4. Bei unveränderter Bindung direkt die dortige NEXT ACTION ausführen.
+
+### Exakter nächster Schritt
+
+Nur lokal/read-only gegen den beobachteten 0.57.8-Stand und den 500-Zeilen-Export:
+
+1. Exakten Codepfad bestimmen, der `BLOCKED_FOR_CATEGORY` erzeugt.
+2. Mindestens einen blockierten Altfall und alle fünf neuen Familien gegen die 1149er Kategorieableitung/Live-Baseline verfolgen.
+3. Positiv: alter gültiger Fall löst korrekt auf.
+4. Positiv: alle fünf neuen Familien lösen korrekt auf.
+5. Negativ: wirklich unbekannte/fremde Kategorie bleibt fail-closed.
+6. Erst danach **einen konsolidierten PSTE-Kandidaten** bauen, der den noch nicht live installierten 0.57.9-Large-Dataset-Fix und den belegten Kategorie-Resolver-Fix gemeinsam enthält.
+7. Vor Live-Installation vollständiger lokaler Regressionstest und sicherer Rollback auf den original E2E-geprüften 0.57.6-Stand SHA256 `71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f`.
+
+Bis dahin:
+- **0.57.9 nicht installieren**
+- kein PSERC-Finalrefresh
+- kein Linkregistry-Finalrefresh
+- kein Gesamt-Kategorie-E2E
+- keine Produktionsfreigabe
