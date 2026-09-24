@@ -84,6 +84,10 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
             "control/startmaster0107/bound_start_hardlock.py",
             "control/startmaster0107/BOUND_START_HARDLOCK.json",
             "control/startmaster0107/BOUND_START_RECEIPT.json",
+            "control/startmaster0107/CURRENT_STATE.json",
+            "control/startmaster0107/PFERDE_ATELIER_START_HERE.json",
+            "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
+            "control/CURRENT_STARTMASTER.json",
         ]
         for rel in active:
             with self.subTest(path=rel):
