@@ -94,5 +94,6 @@
       "ref": "control/startmaster0107/fachworkflow_proof_handoff.py",
       "sha256": "f1d6640442b78db0b4897ac92b97b1204ae97ed65bf5ad31956a45709345962a"
     }
-  ]
+  ],
+  "worker_binding": "BOUND_CHAT_WORKER"
 }
