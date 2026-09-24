@@ -27,13 +27,30 @@ jobs:
           python3 control/release-governance/release_guard.py governance-check
           python3 control/release-governance/release_guard.py start --branch "$(git branch --show-current)"
 
-      - name: Build authoritative 1149 portal candidate
+      - name: Verify already-applied 1149 portal and affiliate catalog
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf CATEGORY_INTEGRATION_HOBBYRAUM/candidate
-          python3 CATEGORY_INTEGRATION_HOBBYRAUM/build_candidate.py | tee /tmp/category-candidate.log
-          grep -F 'CATEGORY_INTEGRATION_CANDIDATE_HARDTEST_PASS' /tmp/category-candidate.log
+          python3 - <<'PY' | tee /tmp/current-1149-authority.json
+          import hashlib, json, pathlib
+          portal=pathlib.Path('release/affiliate-zentrale/current/affiliate-portal-router/assets/portal-structure-v279.json')
+          catalog=pathlib.Path('release/affiliate-zentrale/current/affiliate-portal-router/assets/ebay-portal-catalog-v2.json')
+          p=json.loads(portal.read_text(encoding='utf-8'))
+          c=json.loads(catalog.read_text(encoding='utf-8'))
+          psha=hashlib.sha256(portal.read_bytes()).hexdigest()
+          csha=hashlib.sha256(catalog.read_bytes()).hexdigest()
+          assert psha=='ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed', psha
+          assert csha=='6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2', csha
+          assert p['counts']['themenkategorien']==1149
+          assert p['counts']['produktseiten']==334
+          assert c['counts']['article_categories']==1149
+          assert c['counts']['product_pages']==334
+          assert c['source_sha256']==psha
+          out={'status':'PASS','portal_sha256':psha,'catalog_sha256':csha,'production_categories':1149,'product_pages':334,'catalog_source_bound':True}
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          print('CURRENT_1149_PORTAL_AFFILIATE_AUTHORITY_PASS')
+          PY
+          grep -F 'CURRENT_1149_PORTAL_AFFILIATE_AUTHORITY_PASS' /tmp/current-1149-authority.json
 
       - name: Bind exact PSERC package
         shell: bash
@@ -51,7 +68,7 @@ jobs:
         shell: bash
         env:
           PSERC_EXTRACTED_ROOT: /tmp/pserc-inner/portal-seo-editorial-plan-compiler
-          CATEGORY_PORTAL_CANDIDATE: CATEGORY_INTEGRATION_HOBBYRAUM/candidate/portal-structure-v279.CANDIDATE.json
+          CATEGORY_PORTAL_CANDIDATE: release/affiliate-zentrale/current/affiliate-portal-router/assets/portal-structure-v279.json
           CATEGORY_TSV: CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv
         run: |
           set -euo pipefail
@@ -72,7 +89,7 @@ jobs:
           PPM679_SOURCE: /tmp/ppm679.zip
         run: |
           set -euo pipefail
-          python3 CATEGORY_INTEGRATION_HOBBYRAUM/test_link_registry_new25.py | tee /tmp/link-registry-new25.log
+          CATEGORY_PORTAL_CANDIDATE=release/affiliate-zentrale/current/affiliate-portal-router/assets/portal-structure-v279.json python3 CATEGORY_INTEGRATION_HOBBYRAUM/test_link_registry_new25.py | tee /tmp/link-registry-new25.log
           grep -F 'CATEGORY_LINK_REGISTRY_NEW25_PASS' /tmp/link-registry-new25.log
 
       - name: Aggregate category E2E and no-write preflight
@@ -81,12 +98,11 @@ jobs:
           set -euo pipefail
           python3 - <<'PY' | tee /tmp/category-final-closeout.json
           import json, pathlib
-          report=json.loads(pathlib.Path('CATEGORY_INTEGRATION_HOBBYRAUM/candidate/candidate-hardtest-report.json').read_text())
+          current=json.loads(pathlib.Path('/tmp/current-1149-authority.json').read_text().split('CURRENT_1149_PORTAL_AFFILIATE_AUTHORITY_PASS')[0])
           pserc_text=pathlib.Path('/tmp/pserc-full-1149.log').read_text()
           links_text=pathlib.Path('/tmp/link-registry-new25.log').read_text()
-          assert report['status']=='PASS'
-          assert report['candidate']['counts']['themenkategorien']==1149
-          assert len(report['delta']['new_categories'])==25
+          assert current['status']=='PASS'
+          assert current['production_categories']==1149
           assert 'PSERC_FULL_1149_RUNTIME_GATE_PASS' in pserc_text
           assert 'CATEGORY_LINK_REGISTRY_NEW25_PASS' in links_text
           out={
@@ -117,8 +133,7 @@ jobs:
         with:
           name: category-integration-final-closeout
           path: |
-            CATEGORY_INTEGRATION_HOBBYRAUM/candidate/candidate-hardtest-report.json
-            /tmp/category-candidate.log
+            /tmp/current-1149-authority.json
             /tmp/pserc-full-1149.log
             /tmp/link-registry-new25.log
             /tmp/category-final-closeout.json
