@@ -64,13 +64,32 @@ class InterruptionReturnToStartTests(unittest.TestCase):
         self.assertFalse((ROOT / "concept_agent/github_batch_executor.py").exists())
 
     def test_inner_resume_rejects_tamper_and_stale_decision(self):
+        items = []
+        for i in range(2):
+            slot = hashlib.sha256(f"inner-slot-{i}".encode()).hexdigest()
+            items.append({
+                "item_index": i,
+                "identity": {"item_index": i, "title": f"Artikel {i}", "target_keyword": f"Keyword {i}", "category": "test", "article_type": "Beratung", "plan_slot": slot, "identity_sha256": hashlib.sha256(f"identity-{i}".encode()).hexdigest()},
+                "research_bound": {"item_index": i, "plan_slot": slot, "source_pool_sha256": hashlib.sha256(f"sources-{i}".encode()).hexdigest(), "sources": [{"source_id": f"s{i}", "source_title": "Quelle", "source_url": "https://example.org/", "evidence": "Beleg", "snapshot_sha256": hashlib.sha256(b"Beleg").hexdigest()}]},
+                "bound_work_sha256": hashlib.sha256(f"work-{i}".encode()).hexdigest(),
+            })
         binding = {
-            "contract": pg.BINDING_CONTRACT,
-            "batch_sha256": hashlib.sha256(b"inner-batch").hexdigest(),
-            "item_count": 2,
-            "publish_allowed": False,
+            "contract": pg.BINDING_CONTRACT, "status": "AUTHORING_READY",
+            "batch_sha256": hashlib.sha256(b"inner-batch").hexdigest(), "item_count": 2,
+            "source_intake_sha256": hashlib.sha256(b"intake").hexdigest(),
+            "source_research_binding_sha256": hashlib.sha256(b"research").hexdigest(),
+            "quality_authority": {"source": "TEST_ONLY"}, "route_policy": {"publish_allowed": False},
+            "progress_policy": {"checkpoint_required_before_every_action": True}, "items": items, "publish_allowed": False,
         }
-        state = pg.initial_checkpoint(binding)
+        binding["binding_sha256"] = pg.stable(binding)
+        state = {
+            "contract": pg.CHECKPOINT_CONTRACT, "batch_sha256": binding["batch_sha256"],
+            "production_binding_sha256": binding["binding_sha256"], "item_count": 2, "status": "IN_PROGRESS",
+            "phase": "AUTHORING_REQUIRED", "next_item_index": 0, "completed_items": [], "current_item": None,
+            "previous_checkpoint_sha256": None, "drafts": [], "publish_allowed": False,
+        }
+        state["allowed_action"] = pg.expected_action(binding, state)
+        state["checkpoint_sha256"] = pg.stable(state)
         decision = urg.build(binding, state)
         urg.verify(binding, state, decision)
         result = pg.resume(binding, state, decision)
