@@ -274,11 +274,18 @@ def _model_body(*,item:dict,current_body:str|None,findings:list[dict],context:di
              {"role":"user","content":json.dumps(user,ensure_ascii=False)}],
              "text":{"format":{"type":"json_schema","name":"bound_article","strict":True,
                "schema":{"type":"object","additionalProperties":False,"properties":{"body":{"type":"string"}},"required":["body"]}}}}
-    try: parsed=json.loads(_response_text(_api_call(payload)))
-    except Exception as exc: raise Blocked("MODEL_BODY_JSON_INVALID") from exc
-    body=parsed.get("body") if isinstance(parsed,dict) else None
-    if not isinstance(body,str) or not body.strip(): raise Blocked("MODEL_BODY_EMPTY")
-    return body.strip()
+
+    last=None
+    for _ in range(3):
+        try:
+            parsed=json.loads(_response_text(_api_call(payload)))
+            body=parsed.get("body") if isinstance(parsed,dict) else None
+            if isinstance(body,str) and body.strip():
+                return body.strip()
+            last=Blocked("MODEL_BODY_EMPTY")
+        except Exception as exc:
+            last=exc
+    raise Blocked("REPAIR_WORKER_RETRY_EXHAUSTED:"+str(last))
 
 def _exact_input_path(current:dict,index:int)->Path|None:
     root=os.environ.get("CONCEPT_AGENT_PREWRITTEN_DIR","").strip()
