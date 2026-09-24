@@ -123,6 +123,28 @@ jobs:
           curl -fsS 'http://127.0.0.1:8080/wp-admin/admin-post.php?action=ppar_perf_runtime_admin' | tee /tmp/admin.json
           grep -F 'PPAR_RUNTIME_REUSE_ADMIN_UNCACHED_PASS' /tmp/admin.json
 
+      - name: Verify and package exact 6.72.152 fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "Version: 6.72.152" /tmp/base/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.152';" /tmp/base/affiliate-portal-router/pferdeportal-affiliate-router.php
+          test "$(sha256sum /tmp/base/affiliate-portal-router/assets/portal-structure-v279.json | awk '{print $1}')" = "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed"
+          test "$(sha256sum /tmp/base/affiliate-portal-router/assets/ebay-portal-catalog-v2.json | awk '{print $1}')" = "6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2"
+          cd /tmp/base
+          zip -qr /tmp/AFFILIATE_ZENTRALE_V6.72.152_SAFE_FALLBACK.zip affiliate-portal-router
+          sha256sum /tmp/AFFILIATE_ZENTRALE_V6.72.152_SAFE_FALLBACK.zip | tee /tmp/fallback.sha256
+
+      - name: Upload exact 6.72.152 fallback
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-zentrale-v672152-safe-fallback
+          path: |
+            /tmp/AFFILIATE_ZENTRALE_V6.72.152_SAFE_FALLBACK.zip
+            /tmp/fallback.sha256
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Package installable candidate
         shell: bash
         run: |
