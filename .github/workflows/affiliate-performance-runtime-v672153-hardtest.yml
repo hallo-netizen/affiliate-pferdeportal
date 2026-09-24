@@ -1,0 +1,132 @@
+name: Affiliate Performance Runtime V672153 Hardtest
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/performance-runtime-v672153/**'
+      - '.github/workflows/affiliate-performance-runtime-v672153-hardtest.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  combined-performance-contract:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Build exact isolated candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base /tmp/candidate
+          mkdir -p /tmp/base /tmp/candidate
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/base/affiliate-portal-router
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/candidate/affiliate-portal-router
+          python3 AFFILIATE_HOBBYRAUM/performance-runtime-v672153/apply_runtime_reuse_patch.py /tmp/candidate/affiliate-portal-router
+
+      - name: Assert one-file performance-only delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base=Path('/tmp/base/affiliate-portal-router')
+          cand=Path('/tmp/candidate/affiliate-portal-router')
+          def h(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          rels=sorted(set(
+              [p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()] +
+              [p.relative_to(cand).as_posix() for p in cand.rglob('*') if p.is_file()]
+          ))
+          changed=[r for r in rels if not (base/r).is_file() or not (cand/r).is_file() or h(base/r)!=h(cand/r)]
+          print('CHANGED',changed)
+          if changed != ['pferdeportal-affiliate-router.php']:
+              raise SystemExit(f'FAIL unexpected scope {changed}')
+          before=(base/'pferdeportal-affiliate-router.php').read_text()
+          after=(cand/'pferdeportal-affiliate-router.php').read_text()
+          forbidden=['portal-structure-v279.json','ebay-portal-catalog-v2.json']
+          if any(x not in before or x not in after for x in forbidden):
+              raise SystemExit('FAIL category asset references unexpectedly removed')
+          if "Version: 6.72.153" not in after or "const VERSION = '6.72.153';" not in after:
+              raise SystemExit('FAIL version markers')
+          if "runtime_contract_slot_rule_request_cache" not in after:
+              raise SystemExit('FAIL slot rule cache missing')
+          if "empty($runtime_campaign['_ppar_runtime_normalized'])" not in after:
+              raise SystemExit('FAIL runtime normalization reuse missing')
+          print('PASS exact one-file performance delta')
+          PY
+
+      - name: PHP syntax all candidate files
+        run: find /tmp/candidate/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Preserve existing affiliate performance contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "ebay_topic_titles_duplicate_v672146" /tmp/candidate/affiliate-portal-router/includes/trait-ppar-ebay.php
+          grep -F "ranked_campaigns_request_cache" /tmp/candidate/affiliate-portal-router/pferdeportal-affiliate-router.php
+          php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+      - name: Install WordPress 7.1.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Runtime Perf' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          cp -a /tmp/candidate/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cp AFFILIATE_HOBBYRAUM/performance-runtime-v672153/runtime-reuse-gate.php /tmp/wp-site/wp-content/mu-plugins/ppar-runtime-reuse-gate.php
+
+      - name: Real WordPress semantic and reduction gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS 'http://127.0.0.1:8080/?ppar_perf_runtime_gate=1' | tee /tmp/front.json
+          grep -F 'PPAR_RUNTIME_REUSE_FRONTEND_PASS' /tmp/front.json
+          grep -F '"old_loop_sanitize":3000' /tmp/front.json
+          grep -F '"new_loop_sanitize":0' /tmp/front.json
+          curl -fsS 'http://127.0.0.1:8080/wp-admin/admin-post.php?action=ppar_perf_runtime_admin' | tee /tmp/admin.json
+          grep -F 'PPAR_RUNTIME_REUSE_ADMIN_UNCACHED_PASS' /tmp/admin.json
+
+      - name: Dump server log on failure
+        if: failure()
+        run: cat /tmp/wp-server.log || true
