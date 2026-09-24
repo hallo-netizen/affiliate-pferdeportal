@@ -80,3 +80,59 @@ Bis dahin:
 - kein Linkrefresh
 - kein Gesamt-E2E
 - kein Live-Apply
+
+
+## Live-Reason-Code-Stichprobe 2026-09-24
+
+Quelle: direkte WordPress-PSTE-Themenprüfung, vom Benutzer aus dem aktiven System abgelesen. Read-only.
+
+### Fall 1: `pferde stehlen lumpenpack`
+
+- Fundstellen: 53
+- Statusoberfläche: `Bereits abgedeckt` / `BLOCKIERT`
+- Reason Codes:
+  - `PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN`
+  - `PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED`
+  - `PSTE_FAMILY_V2_SUBJECT_HEAD_MISSING`
+  - `PSTE_CONTEXT_QUERY_MISSING`
+- Kontext: `PENDING`
+- Befund: **kein** `PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING`; kein belegter Kategorie-Resolverfehler.
+
+### Fall 2: `Wie alt werden Pferde?`
+
+- Fundstellen: 80
+- vorhandener veröffentlichter Beitrag laut Benutzer
+- Reason Codes:
+  - `PSTE_ARTICLE_TYPE_EXTENSION_ROUTE_PASS`
+  - `EXACT_NORMALIZED_QUERY_DUPLICATE`
+  - `CROSS_TYPE_ANSWER_EQUIVALENCE`
+  - `PSTE_NORMAL_METADATA_PATH_PASS`
+  - `EDITORIAL_TITLE_PIPELINE_V5_PASS`
+  - `ARTICLE_TYPE_AUTOMATICALLY_RESOLVED`
+- Kontext: `PENDING`
+- Befund: korrekt als bereits abgedeckt/Duplicate blockiert; **kein** Kategorie-Resolverfehler.
+
+### Fall 3: `Können Pferde schwimmen?`
+
+- Fundstellen: 75
+- vorhandener veröffentlichter Beitrag laut Benutzer
+- Reason Codes identisch zu Fall 2:
+  - `PSTE_ARTICLE_TYPE_EXTENSION_ROUTE_PASS`
+  - `EXACT_NORMALIZED_QUERY_DUPLICATE`
+  - `CROSS_TYPE_ANSWER_EQUIVALENCE`
+  - `PSTE_NORMAL_METADATA_PATH_PASS`
+  - `EDITORIAL_TITLE_PIPELINE_V5_PASS`
+  - `ARTICLE_TYPE_AUTOMATICALLY_RESOLVED`
+- Kontext: `PENDING`
+- Befund: korrekt als bereits abgedeckt/Duplicate blockiert; **kein** Kategorie-Resolverfehler.
+
+### Zwischenfazit
+
+3/3 live geprüfte `BLOCKED_FOR_CATEGORY`-Zeilen enthalten **keinen** `PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING`.
+2/3 sind nachweislich bereits veröffentlichte/inhaltlich äquivalente Themen und deshalb korrekt blockiert.
+1/3 ist wegen fehlender Familien-/Kontextklärung blockiert, ebenfalls ohne Kategorie-Exact-Match-Fehler.
+
+Der 496er Sammelstatus bleibt daher als Kategorie-Resolverfehler **nicht belegt**.
+
+Nächste gezielte Prüfung:
+Suche in der bestehenden `Portalweite Themenprüfung` nach bekannten gültigen Alt-Zielkategorien (`Gebisse`, `Hafer`, `Winterdecken`) und prüfe deren technische Details auf `PSTE_TARGET_CATEGORY_EXACT_MATCH_MISSING`. Keine Zufallsstichprobe.
