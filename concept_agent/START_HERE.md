@@ -43,7 +43,7 @@ Nach MACHINE_READY ist nur die append-only Ereigniskette im gebundenen Batch-Iss
 
 Ein gültiger neuer Arbeitsschritt ist ausschließlich ein
 `CONCEPT_AGENT_DURABLE_EVENT_V1`
-vom gebundenen Chat-Worker `hallo-netizen`.
+vom gebundenen GitHub-Actions-Worker `github-actions[bot]`.
 
 Die vorhandenen Events 1..60 sind ausschließlich eingefrorene Altbelege und werden nur über ihre exakten GitHub-Kommentar-IDs akzeptiert. Alte Worker-Identitäten besitzen keine aktuelle oder zukünftige Produktionsautorität.
 
