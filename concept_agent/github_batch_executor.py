@@ -314,6 +314,32 @@ def _repair_handoff(rows:list[dict],current:dict,index:int)->dict:
     findings=result.get("findings") if isinstance(result.get("findings"),list) else []
     if not findings:
         raise Blocked("REPAIR_FINDINGS_MISSING")
+
+    # Normal workflow owns the repair. After an interruption, accept only a
+    # changed same-article draft from the already bound input slot and resume
+    # the existing checkpoint/event chain. The executor never edits the text.
+    repaired=_exact_input_path(current,index)
+    if repaired is not None:
+        raw=repaired.read_bytes()
+        if raw.strip() and sha_bytes(raw)!=row["draft_sha256"]:
+            try:
+                text=raw.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                raise Blocked("REPAIR_DRAFT_UTF8_REQUIRED") from exc
+            try:
+                content_guard.validate_repair_continuity(row["content_utf8"],text)
+            except content_guard.ContentGuardError as exc:
+                raise Blocked("REPAIR_SCOPE_FAIL:"+str(exc)) from exc
+            _seal(current,"UTF8_GZIP_BASE64",raw)
+            return {
+                "status":"ADVANCED",
+                "action":"REPAIR_DRAFT",
+                "sequence":current["sequence"]+1,
+                "item_index":index,
+                "executor_mutation_performed":False,
+                "publish_allowed":False,
+            }
+
     return {
         "status":"NORMAL_WORKFLOW_REPAIR_REQUIRED",
         "batch_sha256":current["batch_sha256"],
