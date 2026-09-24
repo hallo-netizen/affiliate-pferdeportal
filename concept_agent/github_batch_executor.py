@@ -214,79 +214,6 @@ def _state_for_body(rows:list[dict],current:dict,index:int,body:str,revision:int
     state["authoring_contract"]=authoring_contract.build(REPO,state,pack,plan)
     return state
 
-def _response_text(value:dict)->str:
-    for row in value.get("output",[]):
-        if not isinstance(row,dict) or row.get("type")!="message": continue
-        for part in row.get("content",[]):
-            if isinstance(part,dict) and part.get("type") in {"output_text","text"} and isinstance(part.get("text"),str):
-                return part["text"]
-    raise Blocked("MODEL_OUTPUT_TEXT_MISSING")
-
-def _api_call(payload:dict)->dict:
-    key=os.environ.get("OPENAI_API_KEY","").strip()
-    if not key: raise Blocked("OPENAI_API_KEY_MISSING")
-    req=urllib.request.Request("https://api.openai.com/v1/responses",
-      data=json.dumps(payload,ensure_ascii=False).encode("utf-8"),
-      headers={"Authorization":"Bearer "+key,"Content-Type":"application/json"},method="POST")
-    try:
-        with urllib.request.urlopen(req,timeout=300) as fh: return json.load(fh)
-    except urllib.error.HTTPError as exc: raise Blocked("MODEL_HTTP_"+str(exc.code)) from exc
-
-def _research_worker(current:dict,index:int)->dict:
-    item=current.get("allowed_action") or {}
-    title=str(item.get("plan_slot") or "")
-    binding=durable_event_log._snapshot_and_intake(durable_event_log._current_batch())[1]["items"][index]
-    model=os.environ.get("CONCEPT_AGENT_MODEL","gpt-5.6-sol")
-    prompt={"title":binding["title"],"target_keyword":binding["target_keyword"],"category":binding["category"],
-            "article_type":binding["article_type"],
-            "instruction":"Recherchiere belastbare externe Quellen. Pferde-atelier.de und Subdomains sind verboten. Liefere pro Quelle URL, Titel und kurze konkrete Evidenz."}
-    payload={"model":model,"input":[{"role":"developer","content":"Du bist ausschließlich Research-Worker. Keine Workflow-, Schreib-, Prüf- oder Publish-Autorität."},
-             {"role":"user","content":json.dumps(prompt,ensure_ascii=False)}],
-             "tools":[{"type":"web_search"}],
-             "text":{"format":{"type":"json_schema","name":"research_sources","strict":True,
-               "schema":{"type":"object","additionalProperties":False,"properties":{"sources":{"type":"array","minItems":1,"items":{
-                 "type":"object","additionalProperties":False,"properties":{
-                   "source_title":{"type":"string"},"source_url":{"type":"string"},"evidence":{"type":"string"}},
-                 "required":["source_title","source_url","evidence"]}}},"required":["sources"]}}}}
-    result=_api_call(payload)
-    try: parsed=json.loads(_response_text(result))
-    except Exception as exc: raise Blocked("RESEARCH_MODEL_JSON_INVALID") from exc
-    rows=[]; now=datetime.now(timezone.utc).isoformat()
-    for pos,src in enumerate(parsed.get("sources") or []):
-        url=str(src.get("source_url") or "").strip(); evidence=str(src.get("evidence") or "").strip()
-        st=str(src.get("source_title") or "").strip()
-        if not url.startswith(("https://","http://")) or not st or not evidence: raise Blocked("RESEARCH_SOURCE_INVALID")
-        if durable_event_log.intake_bridge._forbidden_research_url(url): raise Blocked("RESEARCH_OWN_DOMAIN_FORBIDDEN")
-        rows.append({"source_id":f"GH-{index}-{pos}-{sha_text(url)[:12]}","source_title":st,"source_url":url,
-                     "evidence":evidence,"snapshot_sha256":sha_text(evidence),"retrieved_at":now})
-    return {"sources":rows}
-
-def _model_body(*,item:dict,current_body:str|None,findings:list[dict],context:dict|None,mode:str)->str:
-    model=os.environ.get("CONCEPT_AGENT_MODEL","gpt-5.6-sol")
-    if mode=="write":
-        instruction=("Schreibe exakt den gebundenen Artikel. Nutze nur BOUND_WORK. Keine neue Recherche, keine Metadaten- "
-                     "oder Workflowentscheidung. Erfülle die gebundenen Struktur-, Link- und Faktenregeln.")
-    else:
-        instruction=("Repariere ausschließlich denselben Artikel anhand FINDINGS. Erhalte fachlichen Inhalt und Aussage so weit "
-                     "wie möglich byte-/satznah; ändere nur, was der Befund verlangt. Keine neue Recherche oder Workflowentscheidung.")
-    user={"instruction":instruction,"BOUND_WORK":item,"CURRENT_BODY":current_body,"FINDINGS":findings,"BOUND_CONTEXT":context}
-    payload={"model":model,"input":[{"role":"developer","content":"Du bist ausschließlich gebundener Schreib-/Reparaturarbeiter. Keine Workflow-, Routing-, Prüf- oder Publish-Autorität. Antworte nur mit JSON."},
-             {"role":"user","content":json.dumps(user,ensure_ascii=False)}],
-             "text":{"format":{"type":"json_schema","name":"bound_article","strict":True,
-               "schema":{"type":"object","additionalProperties":False,"properties":{"body":{"type":"string"}},"required":["body"]}}}}
-
-    last=None
-    for _ in range(3):
-        try:
-            parsed=json.loads(_response_text(_api_call(payload)))
-            body=parsed.get("body") if isinstance(parsed,dict) else None
-            if isinstance(body,str) and body.strip():
-                return body.strip()
-            last=Blocked("MODEL_BODY_EMPTY")
-        except Exception as exc:
-            last=exc
-    raise Blocked("REPAIR_WORKER_RETRY_EXHAUSTED:"+str(last))
-
 def _exact_input_path(current:dict,index:int)->Path|None:
     root=os.environ.get("CONCEPT_AGENT_PREWRITTEN_DIR","").strip()
     if not root: return None
@@ -379,8 +306,7 @@ def _write(current:dict,index:int)->bytes:
         raw=p.read_bytes()
         if not raw.strip(): raise Blocked("PREWRITTEN_DRAFT_EMPTY")
         return raw
-    item=current["production_binding"]["items"][index]
-    return _model_body(item=item,current_body=None,findings=[],context=None,mode="write").encode("utf-8")
+    raise Blocked("PREWRITTEN_DRAFT_REQUIRED")
 
 def _repair(rows:list[dict],current:dict,index:int)->bytes:
     row=_checkpoint_row(current,index); body=row["content_utf8"]
@@ -391,56 +317,36 @@ def _repair(rows:list[dict],current:dict,index:int)->bytes:
     owners=_owners(checker,findings)
     if owners!={"DRAFT_WORKER"}: raise Blocked("REPAIR_OWNER_NOT_DRAFT:"+",".join(sorted(owners or {"UNKNOWN"})))
 
-    def bound_repair_worker()->str:
-        _,facts,pack,plan,_,_=_build_evidence(rows,current,index)
-        state=_state_for_body(rows,current,index,body,int(row.get("revision") or 1))
-        context={"fact_pack":pack,"production_plan_item":plan,"authoring_contract":state["authoring_contract"],
-                 "facts":facts,"article":state["article"]}
-        return _model_body(
-            item=current["production_binding"]["items"][index],
-            current_body=body,
-            findings=findings,
-            context=context,
-            mode="repair",
-        )
+    # Current recovery batch contains prewritten drafts. LT repair is local-only:
+    # use LanguageTool 6.8's own ranked replacement list, apply the first offered
+    # replacement to the exact unique target, then the controller re-runs LT.
+    if checker not in {"LT68","languagetool"}:
+        raise Blocked("LOCAL_REPAIR_ROUTE_UNAVAILABLE:"+checker)
 
-    # Repairable LT findings must never become terminal merely because the
-    # checker offers multiple choices or a deterministic text replacement
-    # cannot be applied safely. In that case the same article is returned to
-    # the existing bounded repair worker and then rechecked by the controller.
-    if checker in {"LT68","languagetool"}:
-        plain=production_checks._plain_text(body)
-        report,_,_=production_checks._run_languagetool_text(REPO,plain)
-        matches=report.get("matches") if isinstance(report,dict) else None
-        fallback_to_worker=False
-        edits=[]
-        if not isinstance(matches,list) or not matches:
-            fallback_to_worker=True
-        else:
-            for match in matches:
-                if not isinstance(match,dict):
-                    fallback_to_worker=True; break
-                off=match.get("offset"); length=match.get("length")
-                if not isinstance(off,int) or not isinstance(length,int) or off<0 or length<=0:
-                    fallback_to_worker=True; break
-                target=plain[off:off+length]
-                replacements=match.get("replacements")
-                values=[]
-                for r in replacements if isinstance(replacements,list) else []:
-                    if isinstance(r,dict) and isinstance(r.get("value"),str) and r["value"] not in values:
-                        values.append(r["value"])
-                if len(values)!=1 or not target or body.count(target)!=1:
-                    fallback_to_worker=True; break
-                edits.append((target,values[0]))
-        if fallback_to_worker:
-            repaired=bound_repair_worker()
-        else:
-            repaired=body
-            for target,replacement in edits:
-                repaired=repaired.replace(target,replacement,1)
-    else:
-        repaired=bound_repair_worker()
+    plain=production_checks._plain_text(body)
+    report,_,_=production_checks._run_languagetool_text(REPO,plain)
+    matches=report.get("matches") if isinstance(report,dict) else None
+    if not isinstance(matches,list) or not matches:
+        raise Blocked("LT68_REPAIR_MATCHES_MISSING")
 
+    edits=[]
+    for match in matches:
+        if not isinstance(match,dict): raise Blocked("LT68_REPAIR_MATCH_INVALID")
+        off=match.get("offset"); length=match.get("length")
+        if not isinstance(off,int) or not isinstance(length,int) or off<0 or length<=0:
+            raise Blocked("LT68_REPAIR_RANGE_INVALID")
+        target=plain[off:off+length]
+        replacements=match.get("replacements")
+        values=[r.get("value") for r in replacements if isinstance(r,dict) and isinstance(r.get("value"),str) and r.get("value")]
+        if not values:
+            raise Blocked("LT68_REPAIR_NO_REPLACEMENT:"+str(match.get("rule",{}).get("id") or ""))
+        if not target or body.count(target)!=1:
+            raise Blocked("LT68_REPAIR_TARGET_NOT_UNIQUE:"+target[:80])
+        edits.append((target,values[0]))
+
+    repaired=body
+    for target,replacement in edits:
+        repaired=repaired.replace(target,replacement,1)
     if repaired==body: raise Blocked("REPAIR_DRAFT_UNCHANGED")
     try: content_guard.validate_repair_continuity(body,repaired)
     except content_guard.ContentGuardError as exc: raise Blocked("REPAIR_SCOPE_FAIL:"+str(exc)) from exc
