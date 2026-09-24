@@ -8,7 +8,7 @@
   "current_authority_branch": "main",
   "phase_switch_policy": "CURRENT_SNAPSHOT_BATCH_EXACT_TEXT_START_CLAIM_PLUS_EXACT_MACHINE_READY_BOT_PROOF",
   "machine_ready_proof_author": "github-actions[bot]",
-  "production_event_author": "github-actions[bot]",
+  "production_event_author": "chatgpt-codex-connector[bot]",
   "entry_policy": "DERIVE_PHASE_DO_NOT_LET_CHAT_CHOOSE",
   "freshness_rule": "CURRENT_SNAPSHOT_PLUS_EXACT_MACHINE_READY_CLAIM_PLUS_APPEND_ONLY_EVENTS",
   "alternate_route_allowed": false,
@@ -24,9 +24,5 @@
   "pserc_modified": false,
   "endstempel_modified": false,
   "plugin_code_modified": false,
-  "publish_allowed": false,
-  "post_machine_ready_executor_ref": "concept_agent/github_batch_executor.py",
-  "execution_mode": "GITHUB_ACTIONS_CONTINUOUS_1N_RESUME",
-  "codex_execution_allowed": false,
-  "codex_event_authority_allowed": false
+  "publish_allowed": false
 }
