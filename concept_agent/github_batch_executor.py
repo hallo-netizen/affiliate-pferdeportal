@@ -149,7 +149,7 @@ def _build_evidence(rows:list[dict],current:dict,index:int)->tuple[dict,dict,dic
         for raw in body_lines:
             line=raw.strip()
             if not started:
-                if not line or line.startswith("#") or re.match(r"(?is)^</?(?:article|section)\\b", line): continue
+                if not line or line.startswith("#") or re.match(r"(?is)^</?(?:article|section)\b", line): continue
                 started=True
             if started and not line:
                 break
