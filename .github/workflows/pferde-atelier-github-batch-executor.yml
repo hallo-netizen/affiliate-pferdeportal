@@ -7,6 +7,7 @@ on:
       - 'fix/github-neutral-batch-executor-*'
     paths:
       - 'concept_agent/**'
+      - 'recovery/current16-input/**'
       - '.github/workflows/pferde-atelier-github-batch-executor.yml'
   workflow_dispatch:
   workflow_run:
@@ -114,8 +115,18 @@ jobs:
           echo "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_public_key_sha256"])' "$identity")" >> "$GITHUB_ENV"
           echo "ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64=$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["public_key_b64"])' "$identity")" >> "$GITHUB_ENV"
       - name: Run complete 1..N batch with automatic same-article returns
-        run: python3 concept_agent/github_batch_executor.py run | tee /tmp/github-batch-executor-result.json
+        id: batch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 concept_agent/github_batch_executor.py run | tee /tmp/github-batch-executor-result.json
+          status="$(python3 -c 'import json;print(json.load(open("/tmp/github-batch-executor-result.json"))["status"])')"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          if [ "$status" = "NORMAL_WORKFLOW_REPAIR_REQUIRED" ]; then
+            echo "Repair returned to normal same-article worker; waiting for repaired bound draft."
+          fi
       - name: Verify final signed file
+        if: ${{ steps.batch.outputs.status == 'PASS' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -133,6 +144,7 @@ jobs:
           print('FINAL_SHA256='+hashlib.sha256(raw).hexdigest())
           PY
       - name: Upload exact final file
+        if: ${{ steps.batch.outputs.status == 'PASS' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pferdeatelier-final-${{ github.run_id }}
