@@ -1,7 +1,7 @@
 # BILD – CURRENT STATE
 
-STAND: 2026-09-05
-STATUS: LIVE 2.6.9 / MASTERAKTEN TEILWEISE HISTORISCH
+STAND: 2026-09-24
+STATUS: KATEGORIE-SCOPE AUF 2.7.6 NACHGEFÜHRT / HISTORISCHE MASTERAKTEN BLEIBEN GETRENNT
 
 
 ## AUTORITÄT DIESER DATEI
@@ -17,9 +17,20 @@ Diese Datei ist die **einzige aktuelle Campus-Standzusammenfassung dieses Büros
 Technische/Fachwahrheit bleibt an den in dieser Datei verlinkten Originalquellen.
 Andere Campus-Dateien dürfen diesen dynamischen Bürostand nicht als zweite Wahrheit fortschreiben.
 
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Für den Kategorieabschluss wurde die **Allgemeine Bildzentrale 2.7.6** aus der technischen Originalquelle vollständig read-only geprüft.
+
+Ergebnis:
+- keine statische Vollkopie der 1149 Pferdeportal-Kategorien;
+- kein Kategorie-Delta erforderlich;
+- Kategorie-/Strukturscope für dieses Plugin: **CLOSED / PASS**.
+
+Die ältere 2.6.9-Passage unten bleibt historischer Beleg des früheren Bürostands und ist keine aktuelle Kategorie-Scope-Versionsangabe mehr.
+
 ## Aktueller produktiver Stand
 
-LIVE in WordPress:
+Historischer Bürostand vor der 24.09.-Nachführung:
 **Pferde Atelier Bildzentrale 2.6.9**
 
 Vom Nutzer bestätigte Pluginbeschreibung:
