@@ -83,6 +83,16 @@ jobs:
           git show origin/main:control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip > /tmp/ppm679.zip
           echo "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/ppm679.zip" | sha256sum -c -
 
+      - name: Bind exact System4 link-generation source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf isolated_system4
+          git archive origin/main isolated_system4 | tar -x
+          test -f isolated_system4/machine_point0.py
+          test -f isolated_system4/point0_snapshot.py
+          test -f isolated_system4/production_checks.py
+
       - name: Prove new-25 dynamic link registry generation
         shell: bash
         env:
