@@ -49,7 +49,7 @@ jobs:
       - name: Bind existing GitHub Endstempel signer
         shell: bash
         env:
-          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.PFERDE_ATELIER_ENDSTEMPEL_PRIVATE_KEY }}
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
