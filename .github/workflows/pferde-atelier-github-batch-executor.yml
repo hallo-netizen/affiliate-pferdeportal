@@ -112,8 +112,8 @@ jobs:
               raise SystemExit("PER_ERROR_PUSH_TRIGGER_PRESENT")
           if trigger_block.count("concept_agent/RESUME_TRIGGER") != 1:
               raise SystemExit("RESUME_TRIGGER_BINDING_INVALID")
-          if not Path("concept_agent/github_batch_executor.py").is_file():
-              raise SystemExit("ORIGINAL_PRODUCTION_EXECUTOR_MISSING")
+          if Path("concept_agent/github_batch_executor.py").exists():
+              raise SystemExit("ALTERNATE_EXECUTOR_PRESENT")
 
           print("ORIGINAL_WORKFLOW_RESUME_READY:"+action["action"])
           print("PER_ERROR_GITHUB_RESTART_BLOCKED")
@@ -123,4 +123,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 concept_agent/github_batch_executor.py run
+          git show c1fe5d40e87025bfaafa205f417b126dd1179092:concept_agent/github_batch_executor.py > /tmp/pferde_original_executor.py
+          PYTHONPATH="$GITHUB_WORKSPACE" python3 /tmp/pferde_original_executor.py run
