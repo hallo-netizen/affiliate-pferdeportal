@@ -123,6 +123,24 @@ jobs:
           curl -fsS 'http://127.0.0.1:8080/wp-admin/admin-post.php?action=ppar_perf_runtime_admin' | tee /tmp/admin.json
           grep -F 'PPAR_RUNTIME_REUSE_ADMIN_UNCACHED_PASS' /tmp/admin.json
 
+      - name: Package installable candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/candidate
+          zip -qr /tmp/AFFILIATE_ZENTRALE_V6.72.153_PERFORMANCE_RUNTIME_HARDTEST.zip affiliate-portal-router
+          sha256sum /tmp/AFFILIATE_ZENTRALE_V6.72.153_PERFORMANCE_RUNTIME_HARDTEST.zip | tee /tmp/candidate.sha256
+
+      - name: Upload installable candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-zentrale-v672153-performance-runtime-hardtest
+          path: |
+            /tmp/AFFILIATE_ZENTRALE_V6.72.153_PERFORMANCE_RUNTIME_HARDTEST.zip
+            /tmp/candidate.sha256
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Dump server log on failure
         if: failure()
         run: cat /tmp/wp-server.log || true
