@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 123,
+  "generation": 124,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "CATEGORY_INTEGRATION_30_NODE_PROPAGATION",
+    "current_focus": "CATEGORY_INTEGRATION_PSTE_CATEGORY_RESOLUTION",
     "current_focus_scope_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
-    "current_focus_reason": "30-NODE CATEGORY INTEGRATION AFTER USER-CONFIRMED TEXT/ICON/EXACT7 PASS. CURRENT DELTA AUDIT 2026-09-23 HARD-BOUND AFFILIATE 6.72.145 FULL PACKAGE FROM AFFILIATE OFFICE WITH 6.72.142 GOLDMASTER FALLBACK; PORTAL/CATALOG CANDIDATE HARDTEST PASS; PSERC DYNAMIC CATEGORY POS/NEG PASS; EXACT PPM679 PACKAGE REBOUND. FIRST OPEN BLOCKER IS NOW PPM679 ADD-ONLY EXTENSION FOR 25 NEW PRODUCTION CATEGORIES PLUS 125 CANONICAL PORTAL SLOTS. NO WORDPRESS WRITE BEFORE COMPLETE LOCAL/CI EVIDENCE AND DRY-RUN.",
+    "current_focus_reason": "ALL STATIC CATEGORY CONSUMERS ARE CLOSED, BUT LIVE PSTE 0.57.8 KEYWORD CATEGORY RESOLUTION IS NOW THE FIRST BLOCKER: 496/500 EXPORT ROWS BLOCKED_FOR_CATEGORY AND ALL FIVE NEW FAMILIES ABSENT. ROOT CAUSE NOT YET PROVEN. 0.57.9 LOCAL CANDIDATE IS NOT INSTALLED AND MUST NOT BE USED UNTIL RESOLVER FIX IS CONSOLIDATED.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -233,13 +233,13 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_POST_CONSUMER_E2E",
+    "state": "CATEGORY_INTEGRATION_PSTE_KEYWORD_CATEGORY_RESOLVER_BLOCKED",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. ALL STATIC/EXACT LIVE CONSUMERS ARE NOW CLASSIFIED. TEMPLATE KIT 1.50.559 LIVE CATEGORY MAP IS 1149/1149 WITH READBACK PASS. IMAGE CENTER 2.7.6 AND LINK POLICY RUNTIME VERIFIER 1.0.0 HAVE NO STATIC FULL CATEGORY COPY. PRODUCTION LINK POLICY GATE 1.0.1 IS DYNAMIC/SOURCE-DRIVEN WITH NO FULL STATIC CATEGORY COPY REQUIRING DELTA. CATEGORY STRUCTURE REPAIR GUARD 1.0.1 CONTAINS ONLY ITS INTENTIONAL 11-ROW REPAIR CONTRACT, NOT A FULL CATEGORY COPY. PORTAL PRODUCTION CENTER 1.1.1 STRUCTURE BINDINGS ARE 1149/9/5790 AND FINAL SIGNED BUILD INTEGRITY READBACK IS PASS. NEXT AND ONLY SCOPE: FRESH PSTE LIVE STRUCTURE REFRESH, PSERC METADATA SNAPSHOT REGENERATION TO 1149, LINKREGISTRY/LINK TARGET REFRESH, THEN CATEGORY TOTAL E2E AND FINAL WORDPRESS PREFLIGHT writes_performed=false. NO CONTENT/DESIGN/PERFORMANCE/PROVIDER/RANKING/BANNER WORK.",
-    "completion_condition": "PSTE LIVE STRUCTURE REFRESH, PSERC 1149 METADATA/PLAN READBACK, LINK TARGET REFRESH, TOTAL CATEGORY E2E AND FINAL WORDPRESS PREFLIGHT ALL PASS WITH writes_performed=false; NO UNRESOLVED CATEGORY CONSUMER REMAINS.",
-    "after_completion_action": "IF ALL FINAL CATEGORY E2E/PREFLIGHT CHECKS PASS, DOCUMENT CLOSEOUT AND MARK CATEGORY INTEGRATION PASS. DO NOT REAPPLY ALREADY CLOSED TEMPLATE KIT OR PRODUCTION CENTER DELTAS.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. COMMITTED CATEGORY BASELINE AT HEAD 787d747410cfde5db1e8b86740c5103264725281 PASSED CATEGORY INTEGRATION HARD BASELINE RUN 35970840150. LIVE DELTA AFTER THAT: PSTE 0.57.8 OBSERVED ACTIVE; 'GESAMTBESTAND NEU ERFASSEN' COMPLETED WITH 'GESAMTBESTAND ERFASST'. CURRENT KEYWORD EXPORT HAS 500 STATUS ROWS: 496 BLOCKED_FOR_CATEGORY, 4 AUTO_RESOLVED; PFERDESAETTEL/TRENSEN/OFFENSTALLBAU/PADDOCKBAU/REITPLATZBAU EACH 0 OCCURRENCES. THIS IS NOT JUST A 25-NEW-CATEGORY MISS BECAUSE OLD VALID TARGETS ARE ALSO BLOCKED. LOCAL PSTE 0.57.9 CANDIDATE ONLY ADDRESSES LARGE-DATASET ADMIN RENDERING AND IS NOT INSTALLED/NOT RELEASED; DO NOT INSTALL IT YET. FIRST AND ONLY NEXT ACTION: LOCALLY/READ-ONLY TRACE THE EXACT 0.57.8 BLOCKED_FOR_CATEGORY RESOLUTION PATH AGAINST THE 1149 CATEGORY DERIVATION AND THE 500-ROW EXPORT, REPRODUCE AT LEAST ONE BLOCKED OLD VALID CASE PLUS ALL FIVE NEW FAMILIES, IDENTIFY ROOT CAUSE, THEN HARDTEST ONE CONSOLIDATED PSTE CANDIDATE INCLUDING THE LARGE-DATASET FIX AND RESOLVER FIX. NO PSERC FINAL REFRESH, LINK REFRESH, TOTAL E2E OR LIVE APPLY BEFORE THIS PASS.",
+    "completion_condition": "PSTE CATEGORY RESOLVER ROOT CAUSE IS REPRODUCED AND FIXED LOCALLY; POSITIVE TEST PASSES FOR AT LEAST ONE PRE-EXISTING VALID CATEGORY AND ALL FIVE NEW FAMILIES; UNKNOWN/FOREIGN CATEGORY STILL FAILS CLOSED; ONE CONSOLIDATED PSTE CANDIDATE PASSES LOCAL REGRESSION WITH EXACT 0.57.6 E2E ROLLBACK BOUND. ONLY THEN MAY LIVE PREFLIGHT/INSTALL BE CONSIDERED.",
+    "after_completion_action": "AFTER CONSOLIDATED PSTE LIVE READBACK PASS: PSERC 1149 METADATA/PLAN REFRESH, LINKREGISTRY/LINK TARGET REFRESH, TOTAL CATEGORY E2E, FINAL WORDPRESS PREFLIGHT writes_performed=false.",
     "no_optional_detours": true,
-    "sequence": 36,
+    "sequence": 37,
     "authorized_change_prefixes": [
       "CATEGORY_INTEGRATION_HOBBYRAUM/",
       ".github/workflows/category-integration-",
@@ -247,7 +247,7 @@
       "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/remaining_plugins_category_source_binding_20260923.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/category_integration_pste_live_delta_20260924.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-24",
-    "current_first_blocker": "PSTE_PSERC_LINK_REFRESH_AND_CATEGORY_E2E_PRECHECK",
+    "current_first_blocker": "PSTE_0578_KEYWORD_CATEGORY_RESOLUTION_496_OF_500_BLOCKED",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1098,8 +1098,8 @@
         "historical_hardtest_checkout_forbidden_as_current_source": true
       },
       "pste": {
-        "status": "CATEGORY_MAP_DELTA_CLOSED_FRESH_LIVE_STRUCTURE_REFRESH_PENDING",
-        "next": "FRESH_WORDPRESS_STRUCTURE_READBACK"
+        "status": "LIVE_0_57_8_BASELINE_CAPTURE_PASS_KEYWORD_RESOLVER_BLOCKED",
+        "next": "LOCAL_RESOLVER_ROOT_CAUSE_AND_CONSOLIDATED_FIX"
       },
       "pserc": {
         "status": "DELTA25_REAL_WORDPRESS_IDS_DYNAMIC_GATE_PASS_FULL_RUNTIME_REFRESH_PENDING",
@@ -1125,7 +1125,7 @@
           "baseline_sha256": "94afcd85f7c8fbaac286486fc5297a31bc34ee13c7d23905e7fe0382c4f60ade",
           "structure_hash": "8833afb25607e2157b7a03018bf833db4353e0f86d08e77bb0c605dd035413f7"
         },
-        "next": "LIVE/FULL PSTE BASELINE REFRESH THEN PSERC METADATA SNAPSHOT REGENERATION TO 1149; NO CATEGORY CODE PATCH"
+        "next": "BLOCKED UNTIL PSTE RESOLVER PASS; THEN PSERC METADATA SNAPSHOT REGENERATION TO 1149; NO CATEGORY CODE PATCH"
       },
       "wordpress_write_performed": true,
       "wordpress_write_scope": "TEMPLATE_KIT_CATEGORY_DERIVATION_AND_PRODUCTION_CENTER_CATEGORY_BINDINGS/BUILD_INTEGRITY ONLY; EACH WITH DRY_RUN PASS -> EXACTLY_ONE_APPLY -> NEW_REQUEST READBACK PASS"
@@ -1285,7 +1285,7 @@
         "signed_candidate_sha256": "cb64d1ee7fcf9c3bc4ff5aa9e2e8cb948763c2c2c1a7ad956b90f980da9e40fa"
       },
       "pste_0576": {
-        "status": "CLOSED_CATEGORY_MAP_DELTA_HARDTEST_PASS",
+        "status": "HISTORICAL_CATEGORY_MAP_DELTA_HARDTEST_PASS_SUPERSEDED_LIVE_BY_0_57_8",
         "version": "0.57.6",
         "proof_run_id": 35693065234,
         "proof_artifact_id": 10679790400,
@@ -1312,10 +1312,11 @@
         "wordpress_write_performed": false
       },
       "pserc_02823": {
-        "status": "DYNAMIC_CATEGORY_GATE_PASS_REFRESH_ONLY",
+        "status": "DYNAMIC_CATEGORY_GATE_PASS_FINAL_REFRESH_BLOCKED_BY_PSTE_RESOLVER",
         "version": "0.28.23",
         "code_patch_required": false,
-        "live_delta25_gate_pass": true
+        "live_delta25_gate_pass": true,
+        "next": "WAIT_FOR_PSTE_RESOLVER_LIVE_READBACK_PASS_THEN_REFRESH_TO_1149"
       },
       "template_kit_150559": {
         "status": "CLOSED_CATEGORY_DELTA_LIVE_READBACK_PASS",
@@ -1383,15 +1384,55 @@
         "source_tree_sha256": "5c661f4334683b591f3a9d5c82f2613a6fbab5d55ab932181cc6e30b0552e099",
         "source_file_count": 1,
         "category_delta_required": false
+      },
+      "pste_0578": {
+        "status": "LIVE_BLOCKED_KEYWORD_CATEGORY_RESOLVER",
+        "version": "0.57.8",
+        "live_observation": "ACTIVE_VERSION_VISIBLE_AND_GESAMTBESTAND_ERFASST",
+        "keyword_export_rows": 500,
+        "blocked_for_category": 496,
+        "auto_resolved": 4,
+        "new_family_occurrences": {
+          "pferdesaettel": 0,
+          "trensen": 0,
+          "offenstallbau": 0,
+          "paddockbau": 0,
+          "reitplatzbau": 0
+        },
+        "root_cause": "OPEN_NOT_GUESSED",
+        "local_0578_package_sha256": "f2f4f9b4e09d3bb8301f12a3aee1f75e56d3a9f7cc2a750c525f62456367b6c7",
+        "exact_0576_e2e_rollback_sha256": "71bae2436fc1c3d52c06cefe551517af32a89eeb005457331e2c44136a1c888f",
+        "evidence_ref": "release/affiliate-zentrale/evidence/category_integration_pste_live_delta_20260924.md"
+      },
+      "pste_0579_local_candidate": {
+        "status": "LOCAL_ONLY_NOT_INSTALLED_NOT_RELEASED",
+        "version": "0.57.9",
+        "sha256": "93cf1adc0a4d0e0a5b10e29bb9025d2b165210fe278c389254343fd5f3a6a2cd",
+        "purpose": "LARGE_DATASET_ADMIN_RENDER_FIX",
+        "category_resolver_fix_included": false,
+        "install_allowed": false
       }
     },
     "live_consumer_closeout_20260924": {
-      "status": "PASS_CONSUMER_CLASSIFICATION_COMPLETE",
+      "status": "STATIC_CONSUMERS_PASS_PSTE_RUNTIME_RESOLVER_BLOCKED",
       "template_kit_readback": "PASS",
       "production_center_readback": "PASS",
       "production_center_build_integrity": "PASS",
       "remaining_static_full_category_consumers": 0,
-      "next": "PSTE_PSERC_LINK_REFRESH_THEN_TOTAL_CATEGORY_E2E_AND_FINAL_PREFLIGHT"
+      "pste_live_version": "0.57.8",
+      "pste_keyword_resolver": "BLOCKED_496_OF_500",
+      "pste_0579_install_allowed": false,
+      "next": "LOCAL_PSTE_0578_CATEGORY_RESOLVER_ROOT_CAUSE_AND_CONSOLIDATED_FIX"
+    },
+    "closeout_fresh_check_20260924": {
+      "status": "PASS_DELTA_CHECK",
+      "checked_head": "787d747410cfde5db1e8b86740c5103264725281",
+      "hard_baseline_run_id": 35970840150,
+      "hard_baseline_result": "SUCCESS",
+      "current_authority": "control/release-governance/CURRENT_RELEASE.json",
+      "target_authority": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md#0A",
+      "later_live_delta": "PSTE_0.57.8_INSTALLED_AND_BASELINE_CAPTURED",
+      "library_used": false
     }
   },
   "template_kit_150559_source_binding_evidence": {
