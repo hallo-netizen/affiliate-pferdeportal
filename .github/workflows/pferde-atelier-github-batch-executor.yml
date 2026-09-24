@@ -1,6 +1,11 @@
 name: Pferdeatelier GitHub Batch Executor
 
 on:
+  push:
+    branches:
+      - 'fix/github-neutral-batch-executor-20260924'
+    paths:
+      - 'concept_agent/RESUME_TRIGGER'
   workflow_dispatch:
   workflow_run:
     workflows: ['Pferdeatelier text-start receiver']
