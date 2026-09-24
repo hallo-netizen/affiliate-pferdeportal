@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 PORTAL=ROOT/"affiliate-portal-router/assets/portal-structure-v279.json"
-CANDIDATE=ROOT/"CATEGORY_INTEGRATION_HOBBYRAUM/candidate/portal-structure-v279.CANDIDATE.json"
+CANDIDATE=Path(os.environ.get("CATEGORY_PORTAL_CANDIDATE", str(ROOT/"release/affiliate-zentrale/current/affiliate-portal-router/assets/portal-structure-v279.json"))).resolve()
 PPM=ROOT/"control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
 PPM_SRC=Path(os.environ.get("PPM679_SOURCE","/tmp/ppm679.zip"))
 
