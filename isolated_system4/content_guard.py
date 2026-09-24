@@ -339,7 +339,7 @@ def validate_repair_continuity(old_body: str, new_body: str) -> dict[str, Any]:
     _require(isinstance(new_body, str) and new_body.strip(), "REPAIR_NEW_BODY_INVALID")
     old = _visible_text(old_body)
     new = _visible_text(new_body)
-    _require(old != new, "REPAIR_DRAFT_UNCHANGED")
+    _require(old_body != new_body, "REPAIR_DRAFT_UNCHANGED")
     length_change = abs(len(new) - len(old)) / max(1, len(old))
     similarity = SequenceMatcher(None, old, new, autojunk=False).ratio()
     _require(length_change <= MAX_REPAIR_LENGTH_CHANGE, f"REPAIR_SCOPE_TOO_LARGE:LENGTH:{length_change:.4f}")
