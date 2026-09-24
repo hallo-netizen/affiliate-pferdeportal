@@ -15,6 +15,7 @@
   "free_chat_execution_authority": false,
   "chat_project_result_authority": "NONE",
   "api_required": false,
-  "local_codex_required": false,
-  "hard_worker": "CODEX_CLOUD"
+  "hard_worker": "BOUND_CHAT_WORKER",
+  "local_worker_product_required": false,
+  "worker_selection_policy": "MACHINE_BOUND_NO_FREE_CHOICE"
 }
