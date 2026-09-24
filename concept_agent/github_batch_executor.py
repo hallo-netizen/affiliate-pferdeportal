@@ -337,7 +337,7 @@ def _repair(rows:list[dict],current:dict,index:int)->bytes:
             raise Blocked("LT68_REPAIR_RANGE_INVALID")
         target=plain[off:off+length]
         replacements=match.get("replacements")
-        values=[r.get("value") for r in replacements if isinstance(r,dict) and isinstance(r.get("value"),str) and r.get("value")]
+        values=[r.get("value") for r in (replacements or []) if isinstance(r,dict) and isinstance(r.get("value"),str) and r.get("value")]
         if not values:
             raise Blocked("LT68_REPAIR_NO_REPLACEMENT:"+str(match.get("rule",{}).get("id") or ""))
         if not target or body.count(target)!=1:
