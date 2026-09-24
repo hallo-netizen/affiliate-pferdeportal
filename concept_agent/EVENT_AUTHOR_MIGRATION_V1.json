@@ -7,7 +7,7 @@
   "new_legacy_events_allowed": false,
   "future_batches_legacy_events_allowed": false,
   "publish_allowed": false,
-  "note": "Events 1..60 are frozen historical evidence by exact GitHub comment id. Author identity has no future authority. Exact listed corrupt-tip comments are quarantined before payload parsing; they grant no progress and force replay from the last valid event.",
+  "note": "Events 1..60 are frozen historical evidence by exact GitHub comment id. Author identity has no future authority.",
   "frozen_legacy_comment_ids": {
     "1": 5804783543,
     "2": 5804862594,
@@ -69,16 +69,5 @@
     "58": 5816336796,
     "59": 5816377359,
     "60": 5816383403
-  },
-  "quarantined_invalid_event_comments": [
-    {
-      "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-      "sequence": 61,
-      "comment_id": 5817997992,
-      "previous_event_sha256": "4c331d33562e9b644d5c7ef6c53412c86bb0de950c9681276e81ee0f27f3e724",
-      "reason": "DURABLE_EVENT_PAYLOAD_DECODE_INVALID",
-      "disposition": "REPLAY_FROM_LAST_VALID_EVENT",
-      "publish_allowed": false
-    }
-  ]
+  }
 }
