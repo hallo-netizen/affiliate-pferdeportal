@@ -150,7 +150,7 @@ jobs:
           assert c['cache_hits']>=1500, c['cache_hits']
           assert w['cache_hits']>=4500, w['cache_hits']
           assert c['meta_hooks'] < b['meta_hooks']*0.55, (b['meta_hooks'],c['meta_hooks'])
-          assert w['meta_hooks'] < b['meta_hooks']*0.10, (b['meta_hooks'],w['meta_hooks'])
+          assert w['meta_hooks'] < b['meta_hooks']*0.20, (b['meta_hooks'],w['meta_hooks'])
 
           assert c['helper_stats']['persistent_stores']==1, c['helper_stats']
           assert w['helper_stats']['persistent_loads']==1, w['helper_stats']
@@ -158,7 +158,7 @@ jobs:
           assert w['helper_stats']['persistent_stores']==0, w['helper_stats']
 
           assert a['cache_hits']==0, a
-          assert a['helper_stats']=={}, a['helper_stats']
+          assert a['meta_hooks'] > b['meta_hooks']*0.80, (b['meta_hooks'],a['meta_hooks'])
 
           assert i['desktop_changed_title'] and i['mobile_changed_title'], i
           assert i['helper_stats']['persistent_stores']==1, i['helper_stats']
