@@ -1,0 +1,13 @@
+{
+  "contract": "CONCEPT_AGENT_EVENT_AUTHOR_MIGRATION_V1",
+  "status": "ACTIVE",
+  "current_event_author": "github-actions[bot]",
+  "legacy_event_author": "chatgpt-codex-connector[bot]",
+  "legacy_batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "legacy_max_sequence": 20,
+  "legacy_last_event_sha256": "95cef542633080de5f4f52ca7387f44aa32bac59ee7e76529dc940db4a7ff8d9",
+  "new_legacy_events_allowed": false,
+  "future_batches_legacy_author_allowed": false,
+  "publish_allowed": false,
+  "note": "Historical Codex events 1..20 remain immutable input evidence only. All new durable production events are GitHub Actions authored."
+}
