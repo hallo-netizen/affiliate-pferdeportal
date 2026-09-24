@@ -80,7 +80,7 @@ foreach((array)($portal['categories']??[]) as $c){
       'topic_family_name'=>$family,
       'topic_family'=>$family,
       'topic_family_key'=>hash('sha256',$productSlug.'|'.$family),
-      'full_path'=>(string)($c['path']??''),
+      'full_path'=>implode(' > ',[$mainName,$hubName,$productName,(string)$terms[$slug]['name']]),
       'wp_parent_id'=>0,
       'parent_id'=>0,
       'parent'=>0,
