@@ -71,9 +71,12 @@ jobs:
               raise SystemExit("ORIGINAL_WORKFLOW_ALLOWED_ACTION_MISSING")
 
           workflow=Path(".github/workflows/pferde-atelier-github-batch-executor.yml").read_text(encoding="utf-8")
-          if "recovery/current16-input" in workflow:
+          trigger_block=workflow.split("jobs:",1)[0]
+          if "recovery/current16-input" in trigger_block:
               raise SystemExit("PER_ERROR_PUSH_TRIGGER_PRESENT")
-          if "github_batch_executor.py" in workflow:
+          if trigger_block.count("concept_agent/RESUME_TRIGGER") != 1:
+              raise SystemExit("RESUME_TRIGGER_BINDING_INVALID")
+          if Path("concept_agent/github_batch_executor.py").exists():
               raise SystemExit("ALTERNATE_EXECUTOR_PRESENT")
 
           print("ORIGINAL_WORKFLOW_RESUME_READY:"+action["action"])
