@@ -8,7 +8,7 @@
   "current_authority_branch": "main",
   "phase_switch_policy": "CURRENT_SNAPSHOT_BATCH_EXACT_TEXT_START_CLAIM_PLUS_EXACT_MACHINE_READY_BOT_PROOF",
   "machine_ready_proof_author": "github-actions[bot]",
-  "production_event_author": "github-actions[bot]",
+  "production_event_author": "hallo-netizen",
   "entry_policy": "DERIVE_PHASE_DO_NOT_LET_CHAT_CHOOSE",
   "freshness_rule": "CURRENT_SNAPSHOT_PLUS_EXACT_MACHINE_READY_CLAIM_PLUS_APPEND_ONLY_EVENTS",
   "alternate_route_allowed": false,
@@ -25,6 +25,6 @@
   "endstempel_modified": false,
   "plugin_code_modified": false,
   "publish_allowed": false,
-  "production_worker": "BOUND_GITHUB_ACTIONS_WORKER",
+  "production_worker": "BOUND_CHAT_WORKER",
   "bound_worker_may_execute_only_machine_allowed_action": true
 }
