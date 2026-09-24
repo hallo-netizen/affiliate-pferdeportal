@@ -40,7 +40,7 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
         row = {"id": migration["frozen_legacy_comment_ids"]["74"], "user": {"login": "anything"}}
         self.assertTrue(d._event_author_allowed(row, {"sequence": 74}, self.BATCH))
         wrong = {"id": row["id"] + 1, "user": {"login": "anything"}}
-        self.assertFalse(d._event_author_allowed(wrong, {"sequence": 60}, self.BATCH))
+        self.assertFalse(d._event_author_allowed(wrong, {"sequence": 74}, self.BATCH))
 
     def test_negative_github_cannot_author_next_repair_event(self):
         row = {"user": {"login": "github-actions[bot]"}}
@@ -49,11 +49,11 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
     def test_negative_obsolete_worker_cannot_author_future_event(self):
         obsolete = "chatgpt-" + "co" + "dex-connector[bot]"
         row = {"user": {"login": obsolete}}
-        self.assertFalse(d._event_author_allowed(row, {"sequence": 61}, self.BATCH))
+        self.assertFalse(d._event_author_allowed(row, {"sequence": 75}, self.BATCH))
 
     def test_positive_bound_chat_worker_can_author_next_event(self):
         row = {"user": {"login": "hallo-netizen"}}
-        self.assertTrue(d._event_author_allowed(row, {"sequence": 61}, self.BATCH))
+        self.assertTrue(d._event_author_allowed(row, {"sequence": 75}, self.BATCH))
 
     def test_no_per_error_github_trigger_or_alternate_executor(self):
         workflow = (
