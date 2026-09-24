@@ -1,13 +1,13 @@
 {
   "contract": "CONCEPT_AGENT_EVENT_AUTHOR_MIGRATION_V2",
   "status": "ACTIVE",
-  "current_event_author": "hallo-netizen",
+  "current_event_author": "github-actions[bot]",
   "legacy_batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
   "frozen_legacy_max_sequence": 60,
   "new_legacy_events_allowed": false,
   "future_batches_legacy_events_allowed": false,
   "publish_allowed": false,
-  "note": "Events 1..60 are frozen historical evidence by exact GitHub comment id. Author identity has no future authority.",
+  "note": "Events 1..60 are frozen historical evidence by exact GitHub comment id. Only the bound GitHub Actions worker has future event authority.",
   "frozen_legacy_comment_ids": {
     "1": 5804783543,
     "2": 5804862594,
