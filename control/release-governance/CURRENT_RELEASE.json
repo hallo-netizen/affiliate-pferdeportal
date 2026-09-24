@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 132,
+  "generation": 133,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "PSERC_1149_METADATA_PLAN_REFRESH",
+    "current_focus": "CATEGORY_INTEGRATION_CLOSED",
     "current_focus_scope_ref": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
-    "current_focus_reason": "LIVE PSTE 0.57.12 READBACK PASS: 'pferde putztasche' NOW DISPLAYS RECHERCHEKEYWORD, REMAINS BLOCKED/PENDING FOR SYSTEM CHECK, ORIGINAL QUERY AND INTERNAL-CLARIFICATION REASONS PRESERVED. PSTE BLOCKER CLOSED. NEXT FIXED STEP IS PSERC 1149 METADATA/PLAN REFRESH.",
+    "current_focus_reason": "CATEGORY/STRUCTURE TARGET CONTRACT CLOSED. FINAL CLOSEOUT RUN 36005442270 SUCCESS: CURRENT PORTAL 1149, AFFILIATE CATALOG 1149, PSERC FULL 1149 PASS (1124 PROTECTED + 25 DYNAMIC, 0 MISSING PROTECTED), NEW-25 LINK REGISTRY 75 LINKS PASS, UNKNOWN CATEGORY FAIL-CLOSED, FINAL NO-WRITE PREFLIGHT writes_performed=false. COMPANION HARD BASELINE RUN 36005442188 SUCCESS.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -233,11 +233,11 @@
     }
   },
   "execution_state": {
-    "state": "PSERC_1149_METADATA_PLAN_REFRESH",
+    "state": "CATEGORY_INTEGRATION_CLOSED",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "PSTE LIVE READBACK PASS. NEXT: REFRESH PSERC METADATA/PLAN TO THE AUTHORITATIVE 1149 PRODUCTION CATEGORIES USING THE EXISTING PSERC 0.28.23 DYNAMIC CATEGORY PATH. NO CATEGORY CODE PATCH UNLESS A HARD FAILURE PROVES ONE. AFTER PASS: LINKREGISTRY/LINK TARGET REFRESH -> TOTAL CATEGORY E2E -> FINAL WORDPRESS PREFLIGHT writes_performed=false.",
-    "completion_condition": "PSERC CURRENT METADATA/PLAN SNAPSHOT IS REGENERATED/READ BACK AGAINST 1149 PRODUCTION CATEGORIES WITH NO CATEGORY MISS OR DUPLICATE AND NO UNAUTHORIZED WRITE.",
-    "after_completion_action": "LINKREGISTRY/LINK TARGET REFRESH, TOTAL CATEGORY E2E, FINAL WORDPRESS PREFLIGHT writes_performed=false.",
+    "bound_user_scope_action": "NO FURTHER CATEGORY/STRUCTURE CHANGE. CATEGORY TARGET CONTRACT 0A IS COMPLETE. DO NOT REOPEN CLOSED CATEGORY WORK WITHOUT NEW HARD EVIDENCE OF A CATEGORY/STRUCTURE DEFECT.",
+    "completion_condition": "ALREADY MET: FINAL CATEGORY CLOSEOUT SUCCESS RUN 36005442270 AND HARD BASELINE SUCCESS RUN 36005442188.",
+    "after_completion_action": "RETURN TO THE SEPARATE NON-CATEGORY PROJECT/PRODUCTION QUEUE ONLY ON EXPLICIT USER DIRECTION. CATEGORY WORK REMAINS FROZEN.",
     "no_optional_detours": true,
     "sequence": 39,
     "authorized_change_prefixes": [
@@ -247,7 +247,7 @@
       "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/pste_05712_stale_role_readback_fix_20260924.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/category_integration_final_closeout_20260924.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1033,7 +1033,7 @@
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
     "last_audit_date": "2026-09-24",
-    "current_first_blocker": "PSERC_1149_METADATA_PLAN_REFRESH",
+    "current_first_blocker": null,
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1102,9 +1102,9 @@
         "next": "READ_ONLY_CLASSIFY_BLOCKED_ROW_REASON_CODES_NO_RESOLVER_PATCH_UNLESS_EXACT_MATCH_MISS_PROVEN"
       },
       "pserc": {
-        "status": "DELTA25_REAL_WORDPRESS_IDS_DYNAMIC_GATE_PASS_FULL_RUNTIME_REFRESH_PENDING",
+        "status": "CLOSED_FULL_1149_RUNTIME_GATE_PASS",
         "observed_snapshot_compiler_version": "0.28.23",
-        "observed_portal_structure_category_count": 1124,
+        "observed_portal_structure_category_count": 1149,
         "target_production_category_count": 1149,
         "current_snapshot_ref": "seo-redaktionsplan-metadaten-snapshot-6157fc4c4b9c110a28d9c89729d5cbecf31b94579ed77031fa9d63cf243ed4d6.json",
         "delta25_gate": {
@@ -1125,7 +1125,7 @@
           "baseline_sha256": "94afcd85f7c8fbaac286486fc5297a31bc34ee13c7d23905e7fe0382c4f60ade",
           "structure_hash": "8833afb25607e2157b7a03018bf833db4353e0f86d08e77bb0c605dd035413f7"
         },
-        "next": "BLOCKED UNTIL PSTE BLOCKED-STATUS CLASSIFICATION PASS; THEN PSERC METADATA SNAPSHOT REGENERATION TO 1149; NO CATEGORY CODE PATCH"
+        "next": "NONE"
       },
       "wordpress_write_performed": true,
       "wordpress_write_scope": "TEMPLATE_KIT_CATEGORY_DERIVATION_AND_PRODUCTION_CENTER_CATEGORY_BINDINGS/BUILD_INTEGRITY ONLY; EACH WITH DRY_RUN PASS -> EXACTLY_ONE_APPLY -> NEW_REQUEST READBACK PASS"
@@ -1575,6 +1575,74 @@
         ],
         "interpretation": "ALL_FIVE_NEW_FAMILIES_PRESENT_IN_ACTIVE_PSTE_RESEARCH_FAMILY_SELECTOR"
       }
+    },
+    "final_closeout_20260924": {
+      "status": "PASS_CLOSED",
+      "target_contract": "protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md#0A",
+      "category_truth": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
+      "wordpress_categories_total": 1160,
+      "production_categories": 1149,
+      "new_product_pages": 5,
+      "new_production_categories": 25,
+      "portal_structure": {
+        "status": "PASS_1149",
+        "sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
+        "product_pages": 334
+      },
+      "affiliate_catalog": {
+        "status": "PASS_1149",
+        "sha256": "6513ce4ea3e077ca1410ffbfa684138f688e772e07aa8aa483464a6fa8277ff2",
+        "source_bound": true
+      },
+      "pserc": {
+        "status": "PSERC_PORTAL_STRUCTURE_PASS",
+        "category_count": 1149,
+        "protected_live_category_count": 1124,
+        "dynamic_live_category_count": 25,
+        "missing_protected_category_count": 0,
+        "static_drift_count": 37,
+        "new_term_id_range": "1577-1601",
+        "write_attempted": false,
+        "baseline_sha256": "0ebc184df6b2ee84d949e853041027a89e8527d00a4872bf6a1d41fd0f194651"
+      },
+      "link_registry": {
+        "status": "PASS_DYNAMIC_NEW25_THREE_ROLES_PER_CATEGORY",
+        "categories_checked": 25,
+        "links_per_category": 3,
+        "total_links_checked": 75,
+        "negative_unknown_category": "PASS_FAIL_CLOSED",
+        "write_attempted": false
+      },
+      "final_preflight": {
+        "workflow_run": 36005442270,
+        "result": "SUCCESS",
+        "head": "0f4e4d6b46525b463aeac73da0300bea9ca9a6a9",
+        "artifact_id": 10810097397,
+        "artifact_digest": "sha256:b54ef510ce393dd0fa98313d5a80b58a455b103716f82b7cf7d62a92e938d7c7",
+        "writes_performed": false,
+        "publish_allowed": false,
+        "apply_performed": false
+      },
+      "hard_baseline": {
+        "workflow_run": 36005442188,
+        "result": "SUCCESS"
+      },
+      "evidence_ref": "release/affiliate-zentrale/evidence/category_integration_final_closeout_20260924.md",
+      "next": "NONE_CATEGORY_SCOPE_CLOSED"
+    },
+    "link_registry_closeout": {
+      "status": "CLOSED_DYNAMIC_NEW25_PASS",
+      "source_portal_sha256": "ce5a312b9017e58c8968a9f0ff132df7cd8d34c7899911a522e03c49eb1a3eed",
+      "categories_checked": 25,
+      "total_links_checked": 75,
+      "roles": [
+        "parent_category",
+        "semantic_related",
+        "further_information"
+      ],
+      "negative_unknown_category": "PASS_FAIL_CLOSED",
+      "write_attempted": false,
+      "next": "NONE"
     }
   },
   "template_kit_150559_source_binding_evidence": {
