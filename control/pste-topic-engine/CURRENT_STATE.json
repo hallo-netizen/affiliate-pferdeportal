@@ -2,21 +2,21 @@
   "contract": "PSTE_TOPIC_ENGINE_CURRENT_STATE_V1",
   "scope": "PFERDE_ATELIER_SEO_TOPIC_ENGINE",
   "authority_role": "SOLE_CURRENT_STATUS_AND_NEXT_ACTION_AUTHORITY",
-  "status": "GITHUB_05710_REAL_WORDPRESS_PASS_LIVE_0579_PRE_APPLY",
+  "status": "GITHUB_05711_REAL_WORDPRESS_PASS_LIVE_APPLY_READBACK_OPEN",
   "binding": {
     "repo": "hallo-netizen/affiliate-pferdeportal",
     "branch": "pste-05700-server-step-driver-proof",
-    "technical_head": "cd1d65ad0f41e409d03686210f32fae1f0358b8a",
+    "technical_head": "93321123bbb07c902a3bcda2d96ab3c4d3cf6426",
     "workflow": "PSTE Real WordPress HTTP E2E",
-    "run_id": 35991171575,
+    "run_id": 35998243177,
     "run_result": "SUCCESS",
-    "evidence_artifact_id": 10804353613,
-    "evidence_digest": "sha256:48dbb18e97b232e9c67832c3321cab7b8b495b9abacb7a3fca5bd1d3b97b2ecf",
-    "candidate": "0.57.10-HOBBYROOM",
-    "candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f",
+    "evidence_artifact_id": 10808195166,
+    "evidence_digest": "sha256:f8659106061f5ef51ac0abfd874622ff39222e19b9b9aa85a6f776f1d1627815",
+    "candidate": "0.57.11-HOBBYROOM",
+    "candidate_sha256": "d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31",
     "plugin_root": "Portal SEO Topic Engine",
     "plugin_basename": "Portal SEO Topic Engine/portal-seo-topic-engine.php",
-    "release": "GITHUB_05710_REAL_WORDPRESS_E2E_PASS_LIVE_APPLY_READBACK_OPEN",
+    "release": "GITHUB_05711_REAL_WORDPRESS_E2E_PASS_LIVE_APPLY_READBACK_OPEN",
     "post_pass_branch_delta": "DOCUMENTATION_ONLY_AFTER_TECHNICAL_HEAD_5d199990;_NO_PRODUCT_OR_PROOF_CHANGE",
     "live_candidate": "0.57.9",
     "live_candidate_sha256": "UNKNOWN_NOT_CLAIMED"
@@ -40,7 +40,7 @@
     "technical_park_errors": "ZERO",
     "provider_counts": "PASS_EXACT_26_EACH",
     "driver_terminal_state": "PASS_IDLE",
-    "real_wordpress_full_e2e": "PASS_RUN_35705551530",
+    "real_wordpress_full_e2e": "PASS_RUN_35998243177",
     "final_zip_full_workflow": "LEGACY_0.57.0_WORKFLOW_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
     "separate_process_full_system": "LEGACY_0.57.1_WORKFLOW_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
     "complete_system_simulation": "LEGACY_0.57.0_DISCOVERY_PASS_AT_SAME_HEAD_NOT_0576_BYTE_PROOF",
@@ -56,17 +56,32 @@
     "internal_clarification_original_query_preserved": "PASS_RAW_KEYWORD_PRESERVED_AND_SANDBOX_RETENTION_PATH_PRESENT",
     "real_duplicate_role_regression": "PASS_ALREADY_COVERED_PRESERVED",
     "internal_clarification_real_wordpress_e2e": "PASS_RUN_35991171575",
-    "exact_05710_candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f"
+    "exact_05710_candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f",
+    "admin_bounded_read_all_pages": "PASS",
+    "admin_pages_real_wordpress": [
+      "Übersicht",
+      "Themenkarte",
+      "Keywords & Longtails",
+      "Themenprüfung",
+      "Abdeckung",
+      "Prioritäten",
+      "Konflikte",
+      "Semantic Sandbox",
+      "Datenquellen",
+      "Einstellungen"
+    ],
+    "admin_probe_rows": 4200,
+    "exact_05711_candidate_sha256": "d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31"
   },
   "first_blocker": {
-    "code": "LIVE_05710_APPLY_READBACK_REQUIRED",
-    "detail": "0.57.10 is fully Real-WordPress-E2E proven. Live is observed as 0.57.9. Install only the exact tested 0.57.10 candidate and verify the retained internal-clarification row is no longer labeled already covered while the original query remains in Semantic Sandbox. No data deletion or blind research restart."
+    "code": "LIVE_05711_APPLY_READBACK_REQUIRED",
+    "detail": "0.57.11 passed full Real WordPress E2E including a 4200-row admin bounded-read probe across all PSTE admin pages. Install only the exact tested 0.57.11 candidate over live 0.57.10, then verify Themenkarte and Themenprüfung open without a critical error and re-check the retained internal-clarification example without deleting or rebuilding data."
   },
   "next_action": {
-    "id": "LIVE_APPLY_05710_AND_READBACK_INTERNAL_CLARIFICATION",
-    "action": "Install only exact PSTE 0.57.10 candidate SHA256 f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f. Do not delete or rebuild retained data. After activation, verify in Themenprüfung that an internal-clarification candidate such as 'pferde putztasche' is treated as Recherchekeyword rather than Bereits abgedeckt, and verify the retained original query remains present in Semantic Sandbox for later normal editorial reformulation.",
-    "success": "LIVE_05710_ACTIVE_AND_INTERNAL_CLARIFICATION_RETENTION_READBACK_PASS",
-    "until_then": "NO_DATA_DELETION_NO_BLIND_RESEARCH_RESTART_NO_CATEGORY_LOGIC_CHANGE"
+    "id": "LIVE_APPLY_05711_AND_READBACK_ADMIN_PAGES",
+    "action": "Install only exact PSTE 0.57.11 candidate SHA256 d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31. Do not delete or rebuild retained data and do not restart research. After activation verify Themenkarte opens, Themenprüfung opens, and the retained 'pferde putztasche' case remains available for internal clarification rather than being lost.",
+    "success": "LIVE_05711_ACTIVE_THEMENKARTE_AND_THEMENPRUEFUNG_READBACK_PASS",
+    "until_then": "NO_DATA_DELETION_NO_BLIND_RESEARCH_RESTART"
   },
   "rules": [
     "KISS",
@@ -212,5 +227,28 @@
       "artifact_digest": "sha256:48dbb18e97b232e9c67832c3321cab7b8b495b9abacb7a3fca5bd1d3b97b2ecf",
       "candidate_sha256": "f55d01f10205daaf86d579f986c0be000d2ec2f44ccb281decc3b939e205e65f"
     }
+  },
+  "admin_bounded_read_fix": {
+    "status": "REAL_WORDPRESS_E2E_PASS_LIVE_APPLY_READBACK_OPEN",
+    "root_cause": "Analytics-heavy admin views could materialize a very large topic pool and related data in one request, causing fatal memory exhaustion on live datasets.",
+    "scope": "Central bounded/fail-safe admin read behavior; no category, provider, ranking, research-source or production-content logic change.",
+    "proof_commit": "93321123bbb07c902a3bcda2d96ab3c4d3cf6426",
+    "proof_run_id": 35998243177,
+    "proof_artifact_id": 10808195166,
+    "proof_artifact_digest": "sha256:f8659106061f5ef51ac0abfd874622ff39222e19b9b9aa85a6f776f1d1627815",
+    "candidate_sha256": "d89e61555dafdc1de4d2e4840730da1a34b3805b1b8be6b06ab7a9f6d9b92b31",
+    "probe_rows": 4200,
+    "pages_passed": [
+      "portal-seo-topic-engine",
+      "portal-seo-topic-engine-topics",
+      "portal-seo-topic-engine-keywords",
+      "portal-seo-topic-engine-review",
+      "portal-seo-topic-engine-coverage",
+      "portal-seo-topic-engine-priorities",
+      "portal-seo-topic-engine-conflicts",
+      "portal-seo-topic-engine-sandbox",
+      "portal-seo-topic-engine-sources",
+      "portal-seo-topic-engine-settings"
+    ]
   }
 }
