@@ -1,0 +1,93 @@
+name: Pferdeatelier Original Workflow Resume Button
+
+on:
+  push:
+    branches:
+      - 'fix/github-neutral-batch-executor-20260924'
+    paths:
+      - 'concept_agent/RESUME_TRIGGER'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: pferdeatelier-original-workflow-resume
+  cancel-in-progress: false
+
+jobs:
+  resume:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Positive and negative wiring proof
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v \
+            concept_agent.tests.test_resume_button_original_workflow \
+            concept_agent.tests.test_current_production_guards
+          python3 control/startmaster0107/test_system4_107007_repair_authority.py
+          PYTHONPATH=isolated_system4 python3 -m unittest -v \
+            isolated_system4.test_machine_route_lock_contract.MachineRouteLockContractTests.test_bound_start_hardlock_blocks_before_any_temp_workspace \
+            isolated_system4.test_machine_route_lock_contract.MachineRouteLockContractTests.test_current_real_state_is_fail_closed_without_current_authorization \
+            isolated_system4.test_machine_route_lock_contract.MachineRouteLockContractTests.test_bound_start_historical_negative_matrix \
+            isolated_system4.test_machine_route_lock_contract.MachineRouteLockContractTests.test_reconnected_parent_uses_current_point0_then_root_only_batch_start \
+            isolated_system4.test_machine_route_lock_contract.MachineRouteLockContractTests.test_bound_worker_root_override_matches_current_bound_parent_start
+
+      - name: Resume only through original bound workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pferde-resume
+          mkdir -p /tmp/pferde-resume
+
+          python3 concept_agent/durable_event_log.py current --out /tmp/pferde-resume             | tee /tmp/pferde-resume/CURRENT.json
+
+          test -f /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json
+          test -f /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json
+
+          python3 concept_agent/universal_reentry_guard.py build             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json
+
+          python3 concept_agent/universal_reentry_guard.py verify             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json
+
+          python3 concept_agent/progress_guard.py resume             /tmp/pferde-resume/CURRENT_PRODUCTION_BINDING.json             /tmp/pferde-resume/CURRENT_PROGRESS_CHECKPOINT.json             /tmp/pferde-resume/REENTRY_DECISION.json             | tee /tmp/pferde-resume/RESUME_RECEIPT.json
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          pointer=json.loads(Path("concept_agent/CONTROL_ENTRY_POINTER.json").read_text(encoding="utf-8"))
+          if pointer.get("production_event_author") != "hallo-netizen":
+              raise SystemExit("ORIGINAL_WORKER_AUTHORITY_NOT_BOUND")
+          if "post_machine_ready_executor_ref" in pointer:
+              raise SystemExit("ALTERNATE_EXECUTOR_STILL_BOUND")
+
+          receipt=json.loads(Path("/tmp/pferde-resume/RESUME_RECEIPT.json").read_text(encoding="utf-8"))
+          if receipt.get("status") != "RESUME_ALLOWED":
+              raise SystemExit("ORIGINAL_WORKFLOW_RESUME_NOT_ALLOWED")
+          if receipt.get("publish_allowed") is not False:
+              raise SystemExit("PUBLISH_FLAG_INVALID")
+          action=receipt.get("allowed_action")
+          if not isinstance(action,dict) or not action.get("action"):
+              raise SystemExit("ORIGINAL_WORKFLOW_ALLOWED_ACTION_MISSING")
+
+          workflow=Path(".github/workflows/pferde-atelier-github-batch-executor.yml").read_text(encoding="utf-8")
+          trigger_block=workflow.split("jobs:",1)[0]
+          if "recovery/current16-input" in trigger_block:
+              raise SystemExit("PER_ERROR_PUSH_TRIGGER_PRESENT")
+          if trigger_block.count("concept_agent/RESUME_TRIGGER") != 1:
+              raise SystemExit("RESUME_TRIGGER_BINDING_INVALID")
+          if Path("concept_agent/github_batch_executor.py").exists():
+              raise SystemExit("ALTERNATE_EXECUTOR_PRESENT")
+
+          print("ORIGINAL_WORKFLOW_RESUME_READY:"+action["action"])
+          print("PER_ERROR_GITHUB_RESTART_BLOCKED")
+          PY
