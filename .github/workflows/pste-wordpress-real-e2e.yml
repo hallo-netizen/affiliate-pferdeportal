@@ -52,7 +52,7 @@ jobs:
           wp config create --path=/tmp/wordpress --dbname=wordpress --dbuser=root --dbpass=root --dbhost=127.0.0.1:3306 --skip-check --quiet
           wp core install --path=/tmp/wordpress --url=http://127.0.0.1:8090 --title='PSTE Real E2E' --admin_user=admin --admin_password='e2e-pass-12345' --admin_email=e2e@example.invalid --skip-email --quiet
 
-      - name: Build exact 0.57.9 candidate with atomic cancel coordination
+      - name: Build exact 0.57.10 candidate with internal clarification retention
         shell: bash
         run: |
           set -euo pipefail
@@ -77,17 +77,20 @@ jobs:
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0577-family-park-policy.patch"
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0578-bounded-sandbox-export.patch"
           patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste0579-atomic-queue-step-lock.patch"
+          patch --no-backup-if-mismatch -p1 < "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/pste05710-internal-clarification-retention-role.patch"
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-quarantine-trace.py" includes/class-pste-repository.php
           python3 "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/inject-state-trace.py" includes/class-pste-repository.php includes/class-pste-research-job.php includes/class-pste-breadth-research-queue.php
-          sed -i 's/Version: 0\.57\.0/Version: 0.57.9/' portal-seo-topic-engine.php
-          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.9');/" portal-seo-topic-engine.php
-          grep -q 'Version: 0.57.9' portal-seo-topic-engine.php
-          grep -q "define('PSTE_VERSION', '0.57.9');" portal-seo-topic-engine.php
+          sed -i 's/Version: 0\.57\.0/Version: 0.57.10/' portal-seo-topic-engine.php
+          sed -i "s/define('PSTE_VERSION', '0\.57\.0');/define('PSTE_VERSION', '0.57.10');/" portal-seo-topic-engine.php
+          grep -q 'Version: 0.57.10' portal-seo-topic-engine.php
+          grep -q "define('PSTE_VERSION', '0.57.10');" portal-seo-topic-engine.php
           grep -q 'Workflow projection only' includes/class-pste-repository.php
           grep -q 'finalize_prepare_cursor' includes/class-pste-research-job.php
           grep -q 'pste-breadth-status' includes/class-pste-admin.php
           grep -q "PROVIDER_SAFE_RETRY_LIMIT=1" includes/class-pste-research-job.php
           grep -q "if(!\$ids)" includes/class-pste-sandbox-record-store.php
+          grep -q "raw_keyword_preserved" includes/class-pste-normal-metadata-path.php
+          grep -q "PSTE_SANDBOX_EDITORIAL_CLARIFICATION_RETAINED" includes/class-pste-semantic-review-sandbox.php
           count="$(find . -type f -name '*.php' | wc -l)"
           test "$count" -eq 76
           while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find . -type f -name '*.php' | sort)
@@ -95,23 +98,51 @@ jobs:
           mkdir -p "/tmp/pste-release/Portal SEO Topic Engine"
           cp -a /tmp/pste-candidate/portal-seo-topic-engine/. "/tmp/pste-release/Portal SEO Topic Engine/"
           cd /tmp/pste-release
-          zip -qr /tmp/PSTE-0.57.9-HOBBYROOM.zip "Portal SEO Topic Engine"
+          zip -qr /tmp/PSTE-0.57.10-HOBBYROOM.zip "Portal SEO Topic Engine"
           echo PACKAGE_ZIP_BUILT
-          test "$(unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
+          test "$(unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | awk -F/ 'NF{print $1}' | sort -u)" = "Portal SEO Topic Engine"
           echo PACKAGE_ROOT_PASS
-          test "$(unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
-          test "$(unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
-          unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
-          unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
-          unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
-          if unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
-          if unzip -Z1 /tmp/PSTE-0.57.9-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
-          sha256sum /tmp/PSTE-0.57.9-HOBBYROOM.zip | tee /tmp/PSTE-0.57.9-HOBBYROOM.sha256
-          wp plugin install /tmp/PSTE-0.57.9-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
+          test "$(unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -v '/$' | wc -l)" -eq 131
+          test "$(unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -E '\.php$' | wc -l)" -eq 76
+          unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/portal-seo-topic-engine.php'
+          unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-admin.php'
+          unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -Fx 'Portal SEO Topic Engine/includes/class-pste-plugin.php'
+          if unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -q '^portal-seo-topic-engine/'; then echo WRONG_PLUGIN_ROOT; exit 1; fi
+          if unzip -Z1 /tmp/PSTE-0.57.10-HOBBYROOM.zip | grep -q '^Portal SEO Topic Engine/portal-seo-topic-engine/'; then echo NESTED_PLUGIN_ROOT; exit 1; fi
+          sha256sum /tmp/PSTE-0.57.10-HOBBYROOM.zip | tee /tmp/PSTE-0.57.10-HOBBYROOM.sha256
+          wp plugin install /tmp/PSTE-0.57.10-HOBBYROOM.zip --activate --path=/tmp/wordpress --quiet
           test -f "/tmp/wordpress/wp-content/plugins/Portal SEO Topic Engine/portal-seo-topic-engine.php"
           test ! -d /tmp/wordpress/wp-content/plugins/portal-seo-topic-engine
           mkdir -p /tmp/wordpress/wp-content/mu-plugins
           cp "$GITHUB_WORKSPACE/proof/pste-wordpress-real-e2e/dataforseo-mock.php" /tmp/wordpress/wp-content/mu-plugins/pste-dataforseo-e2e.php
+
+      - name: Prove internal clarification is retained and not marked covered
+        shell: bash
+        run: |
+          set -euo pipefail
+          wp eval '
+            $internal=[
+              "primary_longtail_query"=>"pferde putztasche",
+              "reason_codes"=>[
+                "PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN",
+                "PSTE_SANDBOX_INTERNAL_CLARIFICATION_REQUIRED",
+                "PSTE_FAMILY_V2_SUBJECT_HEAD_MISSING",
+                "PSTE_CONTEXT_QUERY_MISSING"
+              ],
+              "sandbox_required"=>true,
+              "sandbox_admission_mode"=>"INTERNAL_CLARIFICATION",
+              "normal_metadata_path"=>["status"=>"SANDBOX_REQUIRED","sandbox_admission_mode"=>"INTERNAL_CLARIFICATION"],
+              "planning_readiness_gate"=>["contract"=>PSTE_Planning_Readiness_Gate::CONTRACT,"ok"=>false,"reason_codes"=>[]],
+            ];
+            $duplicate=[
+              "primary_longtail_query"=>"Wie alt werden Pferde?",
+              "reason_codes"=>["EXACT_NORMALIZED_QUERY_DUPLICATE","CROSS_TYPE_ANSWER_EQUIVALENCE"],
+              "planning_readiness_gate"=>["contract"=>PSTE_Planning_Readiness_Gate::CONTRACT,"ok"=>false,"reason_codes"=>["EXACT_NORMALIZED_QUERY_DUPLICATE"]],
+            ];
+            if(PSTE_Topic_Policy::classifyRole($internal)!==PSTE_Topic_Policy::ROLE_RESEARCH_KEYWORD) throw new RuntimeException("INTERNAL_CLARIFICATION_MUST_REMAIN_RESEARCH_KEYWORD");
+            if(PSTE_Topic_Policy::classifyRole($duplicate)!==PSTE_Topic_Policy::ROLE_ALREADY_COVERED) throw new RuntimeException("REAL_DUPLICATE_MUST_REMAIN_ALREADY_COVERED");
+            echo "PASS_INTERNAL_CLARIFICATION_RETENTION_ROLE\n";
+          ' --path=/tmp/wordpress
 
       - name: Prove family park is not a repeated system failure
         shell: bash
@@ -361,8 +392,8 @@ jobs:
         with:
           name: pste-real-wordpress-http-e2e-system
           path: |
-            /tmp/PSTE-0.57.9-HOBBYROOM.sha256
-            /tmp/PSTE-0.57.9-HOBBYROOM.zip
+            /tmp/PSTE-0.57.10-HOBBYROOM.sha256
+            /tmp/PSTE-0.57.10-HOBBYROOM.zip
             /tmp/setup.json
             /tmp/settings.html
             /tmp/settings-stale-race.html
