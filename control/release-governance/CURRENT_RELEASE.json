@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 122,
+  "generation": 123,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -233,13 +233,13 @@
     }
   },
   "execution_state": {
-    "state": "CATEGORY_INTEGRATION_TEMPLATE_KIT_150559_SOURCE_BINDING",
+    "state": "CATEGORY_INTEGRATION_POST_CONSUMER_E2E",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. AFFILIATE 6.72.152, PPM 6.7.9, PSERC 0.28.23 DYNAMIC CATEGORY GATE, AND PSTE 0.57.6 MAP DELTA ARE CLOSED/PASS. TEMPLATE KIT HISTORICAL FULL-SOURCE AUDIT HAS IDENTIFIED A REAL STATIC CATEGORY/PORTAL-STRUCTURE CONSUMER: assets/breadcrumb-portal-map-v150310.json / PFTK_BREADCRUMB_PORTAL_MAP_V150310 WITH HARD 1124 CATEGORY COUNT. DO NOT RECONSTRUCT TEMPLATE KIT 1.50.559 FROM OLD SOURCES. FIRST AND ONLY NEXT ACTION: READ-ONLY BIND THE EXACT CURRENT INSTALLED 1.50.559 ASSET assets/breadcrumb-portal-map-v150310.json (SHA, CONTRACT, COUNT, SCHEMA). IF CURRENT IS STILL 1124, PREPARE ONLY THE CATEGORY-DERIVATION DELTA TO 1149 AGAINST THE CENTRAL CATEGORY TRUTH. NO CONTENT/DESIGN WORK. NO WORDPRESS WRITE BEFORE REQUIRED DRY-RUN.",
-    "completion_condition": "EXACT CURRENT TEMPLATE KIT 1.50.559 BREADCRUMB ASSET IS HASH/SCHEMA/COUNT-BOUND. IF 1124, ONLY THAT STATIC CATEGORY-DERIVATION IS UPDATED TO 1149 AND HARDTESTED; IF ALREADY 1149, CONSUMER CLOSES BYTE-IDENTICAL. NO OTHER TEMPLATE KIT LOGIC CHANGES.",
-    "after_completion_action": "REPEAT THE SAME EXACT-SOURCE STATIC-COPY CLASSIFICATION FOR IMAGE CENTER 2.7.6, LINK POLICY RUNTIME VERIFIER 1.0.0, PRODUCTION CENTER 1.1.1, PRODUCTION LINK POLICY GATE 1.0.1, AND CATEGORY STRUCTURE REPAIR GUARD 1.0.1. THEN CATEGORY E2E + DRY-RUN writes_performed=false.",
+    "bound_user_scope_action": "CATEGORY INTEGRATION ONLY. ALL STATIC/EXACT LIVE CONSUMERS ARE NOW CLASSIFIED. TEMPLATE KIT 1.50.559 LIVE CATEGORY MAP IS 1149/1149 WITH READBACK PASS. IMAGE CENTER 2.7.6 AND LINK POLICY RUNTIME VERIFIER 1.0.0 HAVE NO STATIC FULL CATEGORY COPY. PRODUCTION LINK POLICY GATE 1.0.1 IS DYNAMIC/SOURCE-DRIVEN WITH NO FULL STATIC CATEGORY COPY REQUIRING DELTA. CATEGORY STRUCTURE REPAIR GUARD 1.0.1 CONTAINS ONLY ITS INTENTIONAL 11-ROW REPAIR CONTRACT, NOT A FULL CATEGORY COPY. PORTAL PRODUCTION CENTER 1.1.1 STRUCTURE BINDINGS ARE 1149/9/5790 AND FINAL SIGNED BUILD INTEGRITY READBACK IS PASS. NEXT AND ONLY SCOPE: FRESH PSTE LIVE STRUCTURE REFRESH, PSERC METADATA SNAPSHOT REGENERATION TO 1149, LINKREGISTRY/LINK TARGET REFRESH, THEN CATEGORY TOTAL E2E AND FINAL WORDPRESS PREFLIGHT writes_performed=false. NO CONTENT/DESIGN/PERFORMANCE/PROVIDER/RANKING/BANNER WORK.",
+    "completion_condition": "PSTE LIVE STRUCTURE REFRESH, PSERC 1149 METADATA/PLAN READBACK, LINK TARGET REFRESH, TOTAL CATEGORY E2E AND FINAL WORDPRESS PREFLIGHT ALL PASS WITH writes_performed=false; NO UNRESOLVED CATEGORY CONSUMER REMAINS.",
+    "after_completion_action": "IF ALL FINAL CATEGORY E2E/PREFLIGHT CHECKS PASS, DOCUMENT CLOSEOUT AND MARK CATEGORY INTEGRATION PASS. DO NOT REAPPLY ALREADY CLOSED TEMPLATE KIT OR PRODUCTION CENTER DELTAS.",
     "no_optional_detours": true,
-    "sequence": 35,
+    "sequence": 36,
     "authorized_change_prefixes": [
       "CATEGORY_INTEGRATION_HOBBYRAUM/",
       ".github/workflows/category-integration-",
@@ -1032,8 +1032,8 @@
     "rule": "READ BEFORE ANY FUTURE CATEGORY STRUCTURE CHANGE; THIS FILE CENTRALIZES REQUIREMENTS, CONSUMERS, TEST CONTRACT, DRY-RUN RULE, FALLBACK AND ERROR HISTORY",
     "created_commit": "67dcfdbe4223300090b6be00c82bda6b89ad138b",
     "last_audit_commit": "5f5d5b320327ecf4aff33fea132932f194dc53c4",
-    "last_audit_date": "2026-09-23",
-    "current_first_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING",
+    "last_audit_date": "2026-09-24",
+    "current_first_blocker": "PSTE_PSERC_LINK_REFRESH_AND_CATEGORY_E2E_PRECHECK",
     "category_registry_ref": "CATEGORY_INTEGRATION_HOBBYRAUM/PFERDEPORTAL_KATEGORIEN/KATEGORIEN.tsv",
     "category_registry_source": "pferdeatelier.WordPress.2026-09-23.xml",
     "category_registry_count": 1160,
@@ -1076,10 +1076,11 @@
     },
     "remaining_consumers_20260923": {
       "ppa013": {
-        "status": "IN_CATEGORY_SCOPE_STATIC_BREADCRUMB_CONSUMER_CURRENT_ASSET_BINDING_OPEN",
-        "open_delta": "EXACT_CURRENT_1_50_559_BREADCRUMB_MAP_SHA_SCHEMA_COUNT_BINDING_ONLY",
-        "forbidden": "NO CONTENT/DESIGN CHANGE; NO RECONSTRUCTION FROM OLD SOURCE; NO WORDPRESS WRITE BEFORE REQUIRED DRY-RUN",
-        "performance_helper": "MUST_REMAIN_UNCHANGED"
+        "status": "CLOSED_CATEGORY_DELTA_LIVE_READBACK_PASS",
+        "version": "1.50.559",
+        "category_count": 1149,
+        "map_sha256": "db0e278e45c48a6ed586c360e98e142cae1aa05ff5f2f2b2e2d4c196378c720f",
+        "next": "NONE"
       },
       "affiliate_672145": {
         "status": "BLOCKED_EXACT_FULL_PACKAGE_NOT_AVAILABLE",
@@ -1097,7 +1098,7 @@
         "historical_hardtest_checkout_forbidden_as_current_source": true
       },
       "pste": {
-        "status": "NO_CATEGORY_CODE_CHANGE_REQUIRED_DYNAMIC_STRUCTURE_READ",
+        "status": "CATEGORY_MAP_DELTA_CLOSED_FRESH_LIVE_STRUCTURE_REFRESH_PENDING",
         "next": "FRESH_WORDPRESS_STRUCTURE_READBACK"
       },
       "pserc": {
@@ -1126,7 +1127,8 @@
         },
         "next": "LIVE/FULL PSTE BASELINE REFRESH THEN PSERC METADATA SNAPSHOT REGENERATION TO 1149; NO CATEGORY CODE PATCH"
       },
-      "wordpress_write_performed": false
+      "wordpress_write_performed": true,
+      "wordpress_write_scope": "TEMPLATE_KIT_CATEGORY_DERIVATION_AND_PRODUCTION_CENTER_CATEGORY_BINDINGS/BUILD_INTEGRITY ONLY; EACH WITH DRY_RUN PASS -> EXACTLY_ONE_APPLY -> NEW_REQUEST READBACK PASS"
     },
     "category_only_scope_lock": {
       "status": "HARD_LOCKED",
@@ -1316,34 +1318,84 @@
         "live_delta25_gate_pass": true
       },
       "template_kit_150559": {
-        "status": "BLOCKED_EXACT_CURRENT_BREADCRUMB_MAP_NOT_BOUND",
+        "status": "CLOSED_CATEGORY_DELTA_LIVE_READBACK_PASS",
         "version": "1.50.559",
-        "non_category_scope_forbidden": true
+        "category_count": 1149,
+        "actual_categories": 1149,
+        "main_sha256": "2e6571e27f72a751899c88a47c1ffce682bb03971ba5b88899a42f2009f0d509",
+        "map_sha256": "db0e278e45c48a6ed586c360e98e142cae1aa05ff5f2f2b2e2d4c196378c720f",
+        "changed_files": [
+          "assets/breadcrumb-portal-map-v150310.json",
+          "pferde-template-kit.php"
+        ],
+        "added_files": [],
+        "removed_files": [],
+        "source_check_pass": true,
+        "readback_receipt": "category-1149-manifest-20260924-065947-2cc6016faa02.json"
       },
       "category_repair_guard_101": {
-        "status": "BLOCKED_EXACT_GITHUB_SOURCE_NOT_BOUND",
-        "version": "1.0.1"
+        "status": "CLOSED_INTENTIONAL_11_ROW_REPAIR_CONTRACT_NOT_FULL_CATEGORY_COPY",
+        "version": "1.0.1",
+        "source_tree_sha256": "2d04232b6dabf092c4dfb8bfda55c09c6ab59069ac48c1396ae434769add523c",
+        "source_file_count": 15,
+        "category_delta_required": false
       },
       "production_center_111": {
-        "status": "BLOCKED_EXACT_GITHUB_SOURCE_NOT_BOUND",
-        "version": "1.1.1"
+        "status": "CLOSED_CATEGORY_BINDINGS_AND_SIGNED_BUILD_INTEGRITY_LIVE_READBACK_PASS",
+        "version": "1.1.1",
+        "portal_categories": 1149,
+        "journal_categories": 9,
+        "total_slots": 5790,
+        "structure_files": {
+          "includes/adapters/class-editorial-plan-adapter.php": "c103b62bc33a1493f4acf9e7c11cd557333ac5492394aa6ccd228c4bc900c6a2",
+          "includes/adapters/class-production-preview-adapter.php": "57fe48f945b7ecec511ec772822e5b83c480e5573deb9770cf935952322eb31f",
+          "tests/unit/test-production-preview.php": "3759715a28d4e239feaba3ff07ac3381e630317a8ef86b70fea2318e127ba443",
+          "tests/integration/test-snapshot-pass.php": "74e72217f06c1237f66dae351e886814e32055bd049e758197b5b7626b515cd3"
+        },
+        "build_manifest_sha256": "09e3b29ea05cd89a470ca82a003bb1d65fb8c7435a73baf048525bc1070d6782",
+        "build_manifest_file_count": 70,
+        "signing_key_id": "ppc111-ed25519-5dd62b91470e1fc9",
+        "signing_public_key_sha256": "5dd62b91470e1fc9caec3c39bd5eb3e73967812ec20470799f73b3ac311d9460",
+        "runtime_build_integrity": "PASS",
+        "tree_matches_receipt": true,
+        "signature_valid": true,
+        "trust_root_binding_valid": true,
+        "structure_1149_bound_in_manifest": true,
+        "readback_receipt": "final-integrity-20260924-073634.json"
       },
       "production_link_policy_gate_101": {
-        "status": "BLOCKED_EXACT_GITHUB_SOURCE_NOT_BOUND",
-        "version": "1.0.1"
+        "status": "CLOSED_DYNAMIC_CATEGORY_SOURCE_NO_FULL_STATIC_CATEGORY_COPY",
+        "version": "1.0.1",
+        "source_tree_sha256": "b00d6444312833fca92d44d7519526dbb67c502a160f40498b8f316010716e3b",
+        "source_file_count": 25,
+        "category_delta_required": false
       },
       "link_policy_runtime_verifier_100": {
-        "status": "BLOCKED_EXACT_GITHUB_SOURCE_NOT_BOUND",
-        "version": "1.0.0"
+        "status": "CLOSED_NO_STATIC_FULL_CATEGORY_COPY_DYNAMIC_READ_ONLY",
+        "version": "1.0.0",
+        "source_tree_sha256": "919f992d3ef4341228e4569a7457400c60603c73b7bd9574a216c5e984ee1502",
+        "source_file_count": 5,
+        "category_delta_required": false
       },
       "image_center_276": {
-        "status": "BLOCKED_EXACT_GITHUB_SOURCE_NOT_BOUND",
-        "version": "2.7.6"
+        "status": "CLOSED_NO_STATIC_FULL_CATEGORY_COPY_DYNAMIC_READ_ONLY",
+        "version": "2.7.6",
+        "source_tree_sha256": "5c661f4334683b591f3a9d5c82f2613a6fbab5d55ab932181cc6e30b0552e099",
+        "source_file_count": 1,
+        "category_delta_required": false
       }
+    },
+    "live_consumer_closeout_20260924": {
+      "status": "PASS_CONSUMER_CLASSIFICATION_COMPLETE",
+      "template_kit_readback": "PASS",
+      "production_center_readback": "PASS",
+      "production_center_build_integrity": "PASS",
+      "remaining_static_full_category_consumers": 0,
+      "next": "PSTE_PSERC_LINK_REFRESH_THEN_TOTAL_CATEGORY_E2E_AND_FINAL_PREFLIGHT"
     }
   },
   "template_kit_150559_source_binding_evidence": {
-    "status": "EXACT_1_0_3_HARDTEST_RECOVERED_FULL_SOURCE_STILL_BLOCKED",
+    "status": "CLOSED_LIVE_1149_READBACK_PASS",
     "evidence_ref": "release/affiliate-zentrale/evidence/remaining_plugins_category_source_binding_20260923.md",
     "artifact": "PFERDE_ATELIER_PPA013_1.50.558_TO_1.50.559_TEXT30_FINAL_CORRECTIVE_1.0.3_HARDTEST.zip",
     "artifact_sha256": "3600de85fc1a577d8c80ba06c306270c92eafac1144b41b1277b330323778f85",
@@ -1353,7 +1405,7 @@
     "target_version": "1.50.559",
     "proven_delta_boundary": "ONLY pferde-template-kit.php MAY CHANGE; NO FILE ADD/REMOVE; 1.50.559 TRANSFORM REPLACES EDITORIAL OVERLAY + VERSION MARKERS; NO NEW SEPARATE CATEGORY/PORTAL-STRUCTURE FILE INTRODUCED BY THIS DELTA",
     "proof_limit": "NO COMPLETE 1.50.559 MAIN SHA/FULL TREE READBACK IS BOUND; DO NOT RECONSTRUCT A SUBSTITUTE FULL SOURCE FROM 1.50.558",
-    "wordpress_write": "NONE",
+    "wordpress_write": "CATEGORY_DELTA_APPLIED_WITH_DRY_RUN_AND_READBACK_PASS",
     "central_category_truth_check": {
       "tsv_rows": 1160,
       "target_new_production_categories": 25,
@@ -1408,20 +1460,24 @@
       "evidence_exporter_route": "NOT_DOCUMENTED_OR_PUBLICLY_REACHABLE",
       "wordpress_write": "NONE"
     },
-    "current_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING"
+    "current_blocker": null,
+    "exact_current_asset_binding": "PASS",
+    "current_asset_sha256": "db0e278e45c48a6ed586c360e98e142cae1aa05ff5f2f2b2e2d4c196378c720f",
+    "current_asset_category_count": 1149
   },
   "template_kit_150559_static_structure_consumer": {
-    "status": "HISTORICAL_STATIC_CONSUMER_CONFIRMED_CURRENT_ASSET_BINDING_OPEN",
+    "status": "CLOSED_CATEGORY_DELTA_LIVE_READBACK_PASS",
     "consumer_path": "assets/breadcrumb-portal-map-v150310.json",
     "contract": "PFTK_BREADCRUMB_PORTAL_MAP_V150310",
     "historical_required_category_count": 1124,
     "hard_baseline_run": 35904805135,
     "evidence_ref": "release/affiliate-zentrale/evidence/remaining_plugins_category_source_binding_20260923.md",
-    "current_binding_required": "EXACT_CURRENT_1_50_559_ASSET_SHA_SCHEMA_COUNT",
+    "current_binding_required": "PASS",
     "if_current_still_1124": "UPDATE_THIS_STATIC_BREADCRUMB_DERIVATION_TO_1149_ONLY",
     "wordpress_write": "NONE",
     "historical_loader_php_sha256": "580fa6c7f5566f29df9254ce92f687a4831554e1d84bf03fbd936bb7577edfe5",
-    "historical_asset_sha256": "UNBOUND_NOT_CLAIMED",
-    "current_blocker": "TEMPLATE_KIT_1_50_559_EXACT_CURRENT_BREADCRUMB_MAP_BINDING"
+    "historical_asset_sha256": "SUPERSEDED_BY_BOUND_CURRENT_1149_ASSET",
+    "current_blocker": null,
+    "current_asset_sha256": "db0e278e45c48a6ed586c360e98e142cae1aa05ff5f2f2b2e2d4c196378c720f"
   }
 }
