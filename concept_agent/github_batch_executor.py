@@ -134,6 +134,34 @@ def _build_evidence(rows:list[dict],current:dict,index:int)->tuple[dict,dict,dic
 
     plan=json.loads(json.dumps(item["production_plan_item"],ensure_ascii=False))
     quality=plan.get("quality_binding") if isinstance(plan.get("quality_binding"),dict) else {}
+
+    # The current secured FAQ drafts already contain the direct answer as their
+    # first body paragraph.  The recovery binding omitted only this projection.
+    # Copy those existing bytes into the required quality binding; never invent
+    # or rewrite an answer here.
+    if article["article_type"]=="FAQ" and not str(quality.get("faq_direct_answer") or "").strip():
+        prewritten=_exact_input_path(current,index)
+        if prewritten is None: raise Blocked("FAQ_DIRECT_ANSWER_SOURCE_DRAFT_MISSING:"+str(index))
+        source=prewritten.read_text(encoding="utf-8")
+        body_lines=source.splitlines()
+        paragraph=[]
+        started=False
+        for raw in body_lines:
+            line=raw.strip()
+            if not started:
+                if not line or line.startswith("#"): continue
+                started=True
+            if started and not line:
+                break
+            if started and line.startswith("#"):
+                break
+            if started:
+                paragraph.append(line)
+        answer=" ".join(paragraph).strip()
+        if not answer: raise Blocked("FAQ_DIRECT_ANSWER_SOURCE_EMPTY:"+str(index))
+        quality["faq_direct_answer"]=answer
+        plan["quality_binding"]=quality
+
     links=quality.get("link_bindings") if isinstance(quality.get("link_bindings"),list) else []
     if len(links)!=3: raise Blocked("BOUND_LINKS_NOT_EXACT_THREE:"+str(index))
     allowed=[c["fact_id"] for c in pack_claims]
