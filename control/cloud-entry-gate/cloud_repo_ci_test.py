@@ -183,7 +183,7 @@ def main():
         'auto_advance_only_on_bound_pass': 'PASS',
         'terminal_nonpass_chat_restart_no_repeat': 'PASS',
         'api_required': False,
-        'legacy_codex_required': False,
+        'obsolete_worker_required': False,
         'domain_logic_authority': 'NONE'
     }, indent=2))
 
