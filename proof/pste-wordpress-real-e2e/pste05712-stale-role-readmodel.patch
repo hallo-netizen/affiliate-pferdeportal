@@ -1,0 +1,19 @@
+--- a/includes/class-pste-repository.php
++++ b/includes/class-pste-repository.php
+@@ -1908,7 +1908,15 @@
+         $candidate=self::revalidatePersistedAutomaticTitleState($candidate);
+         $candidate=self::applyAutomaticBeratungTitleDiversityReadModel($candidate,(string)($row['pool_key']??''));
+         if((string)($row['manual_status']??'')===''&&(string)($candidate['title_batch_diversity']['status']??'')==='REVIEW_REQUIRED')$row['automatic_pool_status']='REVIEW_REQUIRED';
+-        $candidate['pool_key']=(string)$row['pool_key'];$candidate['topic_key']=(string)$row['pool_key'];$candidate['global_topic_uuid']=(string)$row['pool_key'];$candidate['normalized_key']=(string)($row['normalized_key']??'');$candidate['automatic_decision']=(string)$row['automatic_decision'];$candidate['automatic_pool_status']=(string)$row['automatic_pool_status'];$candidate['manual_status']=(string)$row['manual_status'];$candidate['pool_status']=$candidate['manual_status']!==''?$candidate['manual_status']:$candidate['automatic_pool_status'];$candidate['occurrence_count']=(int)$row['occurrence_count'];$candidate['first_seen_at']=(string)$row['first_seen_at'];$candidate['last_seen_at']=(string)$row['last_seen_at'];$candidate['manual_note']=(string)$row['manual_note'];$candidate['topic_role']=(string)($row['topic_role']??PSTE_Topic_Policy::classifyRole($candidate));$candidate['planning_suitability']=(string)($row['planning_suitability']??'BLOCKED');$candidate['context_state']=(string)($row['context_state']??'PENDING');$candidate['structure_sha256']=(string)($row['structure_sha256']??'');$candidate['context_synced_at']=(string)($row['context_synced_at']??'');
++        $candidate['pool_key']=(string)$row['pool_key'];$candidate['topic_key']=(string)$row['pool_key'];$candidate['global_topic_uuid']=(string)$row['pool_key'];$candidate['normalized_key']=(string)($row['normalized_key']??'');$candidate['automatic_decision']=(string)$row['automatic_decision'];$candidate['automatic_pool_status']=(string)$row['automatic_pool_status'];$candidate['manual_status']=(string)$row['manual_status'];$candidate['pool_status']=$candidate['manual_status']!==''?$candidate['manual_status']:$candidate['automatic_pool_status'];$candidate['occurrence_count']=(int)$row['occurrence_count'];$candidate['first_seen_at']=(string)$row['first_seen_at'];$candidate['last_seen_at']=(string)$row['last_seen_at'];$candidate['manual_note']=(string)$row['manual_note'];$candidate['context_state']=(string)($row['context_state']??'PENDING');$candidate['structure_sha256']=(string)($row['structure_sha256']??'');$candidate['context_synced_at']=(string)($row['context_synced_at']??'');
++        $candidate['topic_role']=(string)($row['topic_role']??PSTE_Topic_Policy::classifyRole($candidate));$candidate['planning_suitability']=(string)($row['planning_suitability']??'BLOCKED');
++        // Persisted automatic role/planning fields are caches. Re-evaluate them on read so an old
++        // retained row cannot keep a role that was superseded by the current policy. Manual rows
++        // remain byte-semantically bound to their persisted review state. This projection is read-only.
++        if($candidate['manual_status']===''){
++            $candidate['topic_role']=PSTE_Topic_Policy::classifyRole($candidate);
++            $candidate['planning_suitability']=PSTE_Topic_Policy::planningSuitability($candidate,$candidate['pool_status'],$candidate['context_state']);
++        }
+         $candidate['occurrences']=$occurrences;$candidate['assignments']=$assignments;
+         $status=$candidate['pool_status'];$candidate['traffic_light']=self::trafficLightForStatus($status,$candidate['context_state']);
+         if($status==='APPROVED'){$candidate['decision']='PASS';$candidate['reason_codes']=array_values(array_unique(array_merge($candidate['reason_codes']??[],['MANUAL_APPROVED'])));$candidate['discovery_only']=false;}
