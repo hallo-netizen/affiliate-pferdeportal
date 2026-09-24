@@ -202,7 +202,7 @@ def _decode_payload(event: dict[str, Any]) -> bytes:
     try:
         raw = gzip.decompress(base64.b64decode(encoded.encode("ascii"), validate=True))
     except Exception as exc:
-        raise Blocked("DURABLE_EVENT_PAYLOAD_DECODE_INVALID") from exc
+        raise Blocked("DURABLE_EVENT_PAYLOAD_DECODE_INVALID:SEQ:" + str(event.get("sequence")) + ":COMMENT:" + str(event.get("_comment_id") or "UNKNOWN")) from exc
     if len(raw) != event.get("payload_size_bytes") or sha(raw) != event.get("payload_sha256"):
         raise Blocked("DURABLE_EVENT_PAYLOAD_INTEGRITY_FAIL")
     if kind == "UTF8_GZIP_BASE64":
