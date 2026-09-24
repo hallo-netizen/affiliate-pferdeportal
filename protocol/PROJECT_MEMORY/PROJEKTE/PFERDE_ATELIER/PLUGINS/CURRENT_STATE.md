@@ -1,7 +1,7 @@
 # PLUGINS – CURRENT STATE
 
-STAND: 2026-09-23
-STATUS: INVENTARBASIS + KATEGORIE-SCOPE-INVENTARDELTA ERFASST / KEINE FACH-/RELEASE-WAHRHEIT
+STAND: 2026-09-24
+STATUS: KATEGORIE-/PLUGINSTAND 2026-09-24 NACHGEFÜHRT / KATEGORIE-SCOPE GESCHLOSSEN / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
 
 ## AUTORITÄT
 
@@ -14,6 +14,29 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung des PLUGINS-Büros.
 - Fach-/Release-/LIVE-Status → zuständiges Fachbüro / technische Originalquelle
 - Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
 - dauerhaftes WAS/WARUM → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+## KATEGORIE-CLOSEOUT-SYNC 2026-09-24
+
+Reine Dokumentations-Nachführung aus der technischen Current-Autorität `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`. Keine Pluginänderung und kein WordPress-Write durch diese Bürosynchronisierung.
+
+Kategorie-/Strukturscope: **PASS / CLOSED**.
+Finale Nachweise:
+- `Category Integration Final Closeout` Run `36005442270` = SUCCESS
+- `Category Integration Hard Baseline` Run `36005442188` = SUCCESS
+
+Aktuell gebundene Kategorie-relevante Pluginstände:
+- Affiliate Portal Template Kit: **1.50.559** – 1149er Kategorie-/Breadcrumb-Readback PASS
+- Affiliate-Zentrale: **6.72.152** – Portalstruktur/Katalog 1149 PASS
+- Allgemeine Bildzentrale: **2.7.6** – keine statische Vollkopie, kein Kategorie-Delta erforderlich
+- Portal Link Policy Runtime Verifier: **1.0.0** – kein statisches Vollkopie-Delta erforderlich
+- Portal Production Center: **1.1.1** – 1149 / 9 / 5790 + Build-Integrity PASS
+- Portal Production Link Policy Gate: **1.0.1** – dynamischer/source-getriebener Kategoriepfad
+- Portal Production Machine: **6.7.9** – Kategorieintegration 25/25 + 125/125 Slots PASS
+- Portal SEO Redaktionsplan Compiler: **0.28.23** – vollständiger 1149-Strukturgate PASS
+- Portal SEO Themenengine: **0.57.12** – LIVE_READBACK_PASS_CLOSED; `pferde putztasche` Readback PASS
+- Portal Category Structure Repair Guard: **1.0.1** – kein statisches Vollkopie-Delta erforderlich
+
+HARD RULE: Keine Kategorie-/Strukturarbeit erneut öffnen, solange keine neue harte Evidenz eines echten Kategorie-/Strukturdefekts vorliegt.
 
 ## BEOBACHTETER WORDPRESS-BESTAND 2026-09-12
 
@@ -38,7 +61,7 @@ Beobachtet:
 - Portal Production Link Policy Gate: **1.0.1**
 - Portal Production Machine: **6.7.9**
 - Portal SEO Redaktionsplan Compiler: **0.28.23**
-- Portal SEO Themenengine: **0.57.6**
+- Portal SEO Themenengine: **0.57.12**
 - Portal Category Structure Repair Guard: **1.0.1**
 
 Für Fach-/Release-/LIVE-Status weiterhin zwingend zum zuständigen Fachbüro bzw. zur technischen Hauptquelle routen. Die Kategorieintegration selbst hat ihre technische Current-Autorität auf `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
@@ -60,8 +83,8 @@ Der WordPress-Snapshot zeigt bei mehreren Eigenentwicklungen neuere installierte
 
 Offene Abgleiche:
 
-- Affiliate-Zentrale: WordPress beobachtet `6.72.17`; ältere Campus-Registerbelege nennen frühere Stände → AFFILIATE autoritativ frisch abgleichen.
-- Portal SEO Redaktionsplan Compiler: WordPress beobachtet `0.28.20` aktiv und `0.28.16` inaktiv; campusweiter Installerindex enthält ältere 0.28.16-Belege → TEXT autoritativ abgleichen.
+- Affiliate-Zentrale: historischer 12.09.-Drift ist für den Kategorie-Scope durch den 24.09.-Closeout überholt; aktueller gebundener Stand **6.72.152**.
+- Portal SEO Redaktionsplan Compiler: Kategorie-Scope aktuell **0.28.23**; der separat beobachtete inaktive Altstand 0.28.16 bleibt nur als möglicher Aufräumpunkt bestehen.
 - Universal Product Comparison: WordPress beobachtet `0.8.5-prototype`; PRODUKTVERGLEICH-CURRENT_STATE enthält älteren Testkandidaten → Fachbüro frisch abgleichen.
 - Universal Product Knowledge: WordPress beobachtet `0.5.1-prototype`; frühere Produktvergleichsbelege referenzieren 0.5.0 → Fachbüro frisch abgleichen.
 
