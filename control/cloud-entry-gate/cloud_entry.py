@@ -64,8 +64,8 @@ def authority():
         raise Blocked('DOMAIN_AUTHORITY_MUST_BE_NONE')
     if gate.get('worker_context_policy') not in {'CAPSULE_ONLY', 'CAPSULE_NAVIGATION_REPO_BOUND_STEP'}:
         raise Blocked('WORKER_CONTEXT_POLICY_INVALID')
-    if gate.get('hard_worker_target') != 'CODEX_CLOUD':
-        raise Blocked('HARD_WORKER_NOT_CODEX_CLOUD')
+    if gate.get('hard_worker_target') != 'BOUND_CHAT_WORKER':
+        raise Blocked('HARD_WORKER_NOT_BOUND_CHAT_WORKER')
     if gate.get('api_dependency') != 'NONE':
         raise Blocked('API_DEPENDENCY_FORBIDDEN')
     bp = REPO / rel(gate.get('bundle_ref'))
@@ -204,7 +204,7 @@ def materialize():
     (CAPSULE / 'TICKET.json').write_text(json.dumps(ticket, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (CAPSULE / 'RECEIPT_SCHEMA.json').write_text(json.dumps(receipt_schema(ticket), ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     manifest = {
-        'contract': 'PFERDE_ATELIER_CODEX_CLOUD_CAPSULE_V2',
+        'contract': 'PFERDE_ATELIER_BOUND_WORKER_CAPSULE_V2',
         'startmaster': state['startmaster'],
         'step_id': state['next_allowed_step'],
         'sequence': gate['sequence'],
@@ -223,7 +223,7 @@ def materialize():
     (CAPSULE / 'CAPSULE_MANIFEST.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return {
         'ok': True,
-        'status': 'CODEX_CLOUD_ENTRANCE_PASS',
+        'status': 'BOUND_WORKER_ENTRANCE_PASS',
         'step_id': state['next_allowed_step'],
         'sequence': gate['sequence'],
         'ticket_id': ticket['ticket_id'],
@@ -403,7 +403,7 @@ def verify():
     terminal = terminal_for_current(state, ticket)
     return {
         'ok': True,
-        'status': 'CODEX_CLOUD_GATE_VERIFY_PASS',
+        'status': 'BOUND_WORKER_GATE_VERIFY_PASS',
         'startmaster': state['startmaster'],
         'step_id': state['next_allowed_step'],
         'sequence': gate['sequence'],
@@ -429,7 +429,7 @@ def main():
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     except Blocked as e:
-        print(json.dumps({'ok': False, 'status': 'CODEX_CLOUD_ENTRANCE_BLOCKED', 'reason': str(e)}, ensure_ascii=False, indent=2))
+        print(json.dumps({'ok': False, 'status': 'BOUND_WORKER_ENTRANCE_BLOCKED', 'reason': str(e)}, ensure_ascii=False, indent=2))
         return 2
 
 if __name__ == '__main__':
