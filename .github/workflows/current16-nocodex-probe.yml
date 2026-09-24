@@ -14,14 +14,18 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - name: Inspect existing direct-draft adapters
+      - name: Inspect bound inner compiler direct-draft adapters
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/pserc-fix
-          mkdir -p /tmp/pserc-fix
-          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc-fix
+          rm -rf /tmp/pserc-outer /tmp/pserc-inner
+          mkdir -p /tmp/pserc-outer /tmp/pserc-inner
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc-outer
+          inner="$(find /tmp/pserc-outer -type f -name '*.zip' | head -n1)"
+          test -n "$inner"
+          echo "INNER=$inner"
+          unzip -q "$inner" -d /tmp/pserc-inner
           echo '=== MATCHING FILES ==='
-          find /tmp/pserc-fix -type f | grep -Ei 'normal-draft|direct-draft|draft-adapter|draft-pipeline' || true
+          find /tmp/pserc-inner -type f | grep -Ei 'normal-draft|direct-draft|draft-adapter|draft-pipeline' || true
           echo '=== MATCHING TEXT ==='
-          grep -RniE 'direct[-_ ]draft|normal[-_ ]draft|draft adapter|existing draft' /tmp/pserc-fix --include='*.php' --include='*.json' --include='*.md' | head -n 300 || true
+          grep -RniE 'direct[-_ ]draft|normal[-_ ]draft|draft adapter|existing draft' /tmp/pserc-inner --include='*.php' --include='*.json' --include='*.md' | head -n 500 || true
