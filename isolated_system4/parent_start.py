@@ -14,7 +14,7 @@ if str(CONTROL) not in sys.path:
     sys.path.insert(0, str(CONTROL))
 
 import system4_107007_entry as entry
-import pre_codex_start_hardlock
+import bound_start_hardlock
 
 MACHINE_POINT0 = HERE / "machine_point0.py"
 BATCH_START = CONTROL / "system4_107007_batch.py"
@@ -226,7 +226,7 @@ def start(source_requests_path: str, runtime_root_path: str, provider: str) -> d
         "point0": str(point0),
         "batch_root": str(batch_root),
         "root_only": True,
-        "codex_invoked": False,
+        "worker_invoked": False,
         "advance_invoked": False,
         "publish_allowed": False,
     }
@@ -239,9 +239,9 @@ def start(source_requests_path: str, runtime_root_path: str, provider: str) -> d
 
 def start_bound() -> dict:
     # Hard fail before any temporary run/workspace exists. This binds every real
-    # Codex start to the current HEAD, dispatcher/hardlock receipt, explicit user
-    # approval and the full historical start-error checklist.
-    preflight = pre_codex_start_hardlock.validate(REPO)
+    # Bind the current start to HEAD, hardlock receipt, explicit authorization
+    # and the full historical start-error checklist before creating any workspace.
+    preflight = bound_start_hardlock.validate(REPO)
     runtime, runtime_items, bound_source_requests = _current_bound_source_requests()
     batch = str(runtime.get("batch_sha256") or "")
     generation = int(runtime["generation"])
@@ -265,7 +265,7 @@ def start_bound() -> dict:
             "source_requests_bound_sha256": str(runtime["source_requests_sha256"]),
             "source_requests_item_count": len(runtime_items),
             "external_paths_auto_created": True,
-            "pre_codex_start_hardlock": preflight,
+            "bound_start_hardlock": preflight,
         }
     )
     (runtime_root / "parent_start_receipt.json").write_text(
