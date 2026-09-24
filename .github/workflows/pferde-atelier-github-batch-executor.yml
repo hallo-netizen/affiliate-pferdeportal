@@ -17,7 +17,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: pferdeatelier-github-batch-executor-recovered
+  group: pferdeatelier-github-batch-executor
   cancel-in-progress: true
 
 jobs:
