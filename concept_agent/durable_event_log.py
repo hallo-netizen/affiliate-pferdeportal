@@ -6,6 +6,7 @@ import base64
 import gzip
 import hashlib
 import json
+import os
 import re
 import sys
 import tempfile
@@ -83,14 +84,15 @@ def _current_batch() -> dict[str, Any]:
 
 
 def _api_json(url: str):
-    req = urllib.request.Request(
-        url,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "pferdeatelier-concept-agent-durable-event",
-            "X-GitHub-Api-Version": "2022-11-28",
-        },
-    )
+    headers={
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "pferdeatelier-concept-agent-durable-event",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    token=os.environ.get("GITHUB_TOKEN","").strip()
+    if token:
+        headers["Authorization"]="Bearer "+token
+    req = urllib.request.Request(url, headers=headers)
     try:
         with urllib.request.urlopen(req, timeout=30) as fh:
             return json.load(fh)
