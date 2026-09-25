@@ -497,7 +497,7 @@ def verify_current_entry(pointer_path: Path, current_state_path: Path, outdir: P
             raise Blocked("CURRENT_" + name + "_COUNT_INVALID")
     if lt_count > body_count or ppm_count > body_count:
         raise Blocked("CURRENT_VALIDATOR_COUNT_AHEAD_OF_ARTICLES")
-    if next_article != min(ppm_count, count):
+    if next_article != min(body_count, count):
         raise Blocked("CURRENT_NEXT_ARTICLE_INDEX_MISMATCH")
 
     article_stage_pass = body_count == count and lt_count == count and ppm_count == count
