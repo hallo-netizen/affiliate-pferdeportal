@@ -12,6 +12,8 @@ Ablauf:
 3. Frischecheck nur auf Delta.
 4. Ausschließlich die eine dort gespeicherte `next_action` ausführen.
 
+**Frischer `text-start`:** `CONCEPT_AGENT_INTAKE_READY` ist kein Stop. Der bereits aktive Chat führt ohne Nutzer-Zwischenmeldung unmittelbar die im Intake gebundene erste Aktion `RESEARCH_REQUIRED` aus. Danach gilt ausschließlich der unveränderte bestehende NO-STOP-/Worker-/Prüfweg bis `STOP`.
+
 Diese Datei enthält bewusst keine eigene Produktionsaktion und keine zweite Statuswahrheit.
 
 Nicht als Current-/Startautorität verwenden:
