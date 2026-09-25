@@ -214,15 +214,23 @@ def main(argv: list[str]) -> int:
         if len(argv) != 7 or argv[1] != "bind":
             raise Blocked("USE: production_bridge.py bind SNAPSHOT INTAKE RESEARCH_BOUND OUT_BINDING OUT_CHECKPOINT")
         result = build(load(Path(argv[2])), load(Path(argv[3])), load(Path(argv[4])))
-        checkpoint = initial_checkpoint(result)
+        checkpoint_path = Path(argv[6])
+        resumed = checkpoint_path.is_file()
+        if resumed:
+            checkpoint = load(checkpoint_path)
+            progress_guard.verify_checkpoint(result, checkpoint)
+        else:
+            checkpoint = initial_checkpoint(result)
         write_json(Path(argv[5]), result)
-        write_json(Path(argv[6]), checkpoint)
+        if not resumed:
+            write_json(checkpoint_path, checkpoint)
         print(json.dumps({
-            "status": "CONCEPT_AGENT_CURRENT_PRODUCTION_READY",
+            "status": "CONCEPT_AGENT_CURRENT_PRODUCTION_RESUMED" if resumed else "CONCEPT_AGENT_CURRENT_PRODUCTION_READY",
             "batch_sha256": result["batch_sha256"],
             "item_count": result["item_count"],
             "binding_sha256": result["binding_sha256"],
             "checkpoint_sha256": checkpoint["checkpoint_sha256"],
+            "resumed_existing_checkpoint": resumed,
             "publish_allowed": False,
         }, ensure_ascii=False, sort_keys=True))
         return 0

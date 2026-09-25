@@ -717,6 +717,8 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
         "continuation_required": not terminal,
         "worker_must_execute_allowed_operation_immediately": not terminal,
         "worker_return_must_reenter_full_workflow_gate": not terminal,
+        "handoff_is_terminal": terminal,
+        "same_bound_worker_must_continue_without_return": not terminal,
     }
     if terminal:
         ticket["process_trigger"] = None
@@ -733,6 +735,8 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
             "exactly_once_for_stage": True,
             "return_required": True,
             "return_to": "concept_agent/full_workflow_gate.py",
+            "handoff_is_terminal": False,
+            "same_bound_worker_must_continue_without_return": True,
             "publish_allowed": False,
         }
         ticket["process_trigger"] = dict(trigger_core)

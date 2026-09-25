@@ -498,6 +498,8 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
             "worker": "BOUND_CHAT_WORKER",
             "allowed_action": action,
             "return_to": "concept_agent/progress_guard.py",
+            "handoff_is_terminal": False,
+            "same_bound_worker_must_continue_without_return": True,
         }
         if action.get("action") == "WRITE_DRAFT":
             trigger_core["bound_work_item"] = json.loads(json.dumps(_binding_item(binding, int(action["item_index"]))))
@@ -515,6 +517,8 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         "continuation_required": not terminal,
         "worker_must_execute_allowed_action_immediately": not terminal,
         "worker_return_must_reenter_progress_guard": not terminal,
+        "handoff_is_terminal": terminal,
+        "same_bound_worker_must_continue_without_return": not terminal,
         "terminal": terminal,
         "publish_allowed": False,
     }
