@@ -1,7 +1,7 @@
 {
   "contract": "CAMPUS_SINGLE_TRUTH_ROUTING_V1",
   "version": "1.0",
-  "effective_date": "2026-09-18",
+  "effective_date": "2026-09-25",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "campus_branch": "hobbyroom/project-memory-campus-v1-20260905",
   "rules": {
@@ -127,6 +127,90 @@
       "id": "CAMPUS_TRESOR",
       "start_here": "protocol/PROJECT_MEMORY/TRESOR/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/TRESOR/STATUS.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_PROJEKTLEITUNG",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PROJEKTLEITUNG/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PROJEKTLEITUNG/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PROJEKTLEITUNG/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_KONZEPT",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/KONZEPT/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/KONZEPT/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/KONZEPT/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_SEO_KATEGORIEN",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_TEXT_REDAKTION",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXT_REDAKTION/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXT_REDAKTION/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/TEXT_REDAKTION/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_WISSENSDATENBANK",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WISSENSDATENBANK/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WISSENSDATENBANK/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WISSENSDATENBANK/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_PRODUKTVERGLEICH",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRODUKTVERGLEICH/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRODUKTVERGLEICH/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRODUKTVERGLEICH/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_DESIGN",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/DESIGN/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_BILD",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/BILD/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/BILD/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/BILD/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_AFFILIATE",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/AFFILIATE/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_WORDPRESS_TECHNIK",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WORDPRESS_TECHNIK/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WORDPRESS_TECHNIK/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/WORDPRESS_TECHNIK/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_PLUGINS",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PLUGINS/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_PRODUKTION",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRODUKTION/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRODUKTION/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRODUKTION/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_PRUEFUNG",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRUEFUNG/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRUEFUNG/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/PRUEFUNG/HOBBYRAUM.md"
+    },
+    {
+      "id": "HOBBYRAUSCH_GEMEINSAM",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GEMEINSAM/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GEMEINSAM/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GEMEINSAM/HOBBYRAUM.md"
     }
   ]
 }
