@@ -41,7 +41,7 @@ Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_
 
 ## Harte Wiedereinstiegsregel — überall
 
-Sobald derselbe Batch `MACHINE_READY` erreicht hat, muss **vor jeder Fortsetzung nach einer Unterbrechung** zuerst
+Nach jedem Start und **vor jeder Fortsetzung nach einer Unterbrechung** muss zuerst
 
 `concept_agent/universal_reentry_guard.py`
 
@@ -66,10 +66,10 @@ Hart:
 - Reparatur bleibt beim selben Artikel,
 - nächster Artikel erst nach LT-6.8- und PPM-6.7.9-PASS,
 - PSERC → ENDSTEMPEL → STOP bleibt gebunden,
-- nach `MACHINE_READY` desselben Batches kein zweites `text-start`.
+- `text-start` bleibt nur Startknopf; ein erneuter Start darf keine Stufe oder keinen Artikel frei wählen, sondern muss über den bestehenden Reentry-Checkpoint in die exakt gebundene nächste Aktion führen.
 
 Damit kann ein neuer Chat den Arbeitsstand weder aus Erinnerung rekonstruieren noch einen anderen Weg wählen.
 
-`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität **vor** `MACHINE_READY`. Danach bestimmen ausschließlich aktuelles Produktions-Binding, aktueller Fortschritts-Checkpoint und die daraus exakt abgeleitete Reentry-Entscheidung die Fortsetzung.
+`control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität. Während eines laufenden Batches bestimmen ausschließlich aktuelles Produktions-Binding, aktueller Fortschritts-Checkpoint und die daraus exakt abgeleitete Reentry-Entscheidung die Fortsetzung.
 
 `text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
