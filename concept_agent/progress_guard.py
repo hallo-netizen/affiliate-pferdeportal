@@ -499,6 +499,8 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
             "allowed_action": action,
             "return_to": "concept_agent/progress_guard.py",
         }
+        if action.get("action") == "WRITE_DRAFT":
+            trigger_core["bound_work_item"] = json.loads(json.dumps(_binding_item(binding, int(action["item_index"]))))
         process_trigger = dict(trigger_core)
         process_trigger["trigger_sha256"] = stable(trigger_core)
         process_trigger["exactly_once_for_checkpoint"] = True

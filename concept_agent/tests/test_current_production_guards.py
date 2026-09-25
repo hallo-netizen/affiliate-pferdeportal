@@ -139,6 +139,12 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(result["process_trigger"]["worker"], "BOUND_CHAT_WORKER")
         self.assertEqual(result["process_trigger"]["allowed_action"], result["allowed_action"])
         self.assertEqual(result["process_trigger"]["checkpoint_sha256"], state["checkpoint_sha256"])
+        self.assertEqual(result["process_trigger"]["bound_work_item"], binding["items"][0])
+        self.assertEqual(result["process_trigger"]["bound_work_item"]["item_index"], 0)
+        self.assertEqual(
+            result["process_trigger"]["bound_work_item"]["identity"]["plan_slot"],
+            result["allowed_action"]["plan_slot"],
+        )
         self.assertIs(result["process_trigger"]["exactly_once_for_checkpoint"], True)
         self.assertIs(result["process_trigger"]["return_required"], True)
         trigger_core = {
@@ -147,6 +153,7 @@ class CurrentProductionGuardTests(unittest.TestCase):
             "worker": result["process_trigger"]["worker"],
             "allowed_action": result["process_trigger"]["allowed_action"],
             "return_to": result["process_trigger"]["return_to"],
+            "bound_work_item": result["process_trigger"]["bound_work_item"],
         }
         self.assertEqual(result["process_trigger"]["trigger_sha256"], progress_guard.stable(trigger_core))
         self.assertIs(result["continuation_required"], True)
@@ -165,6 +172,16 @@ class CurrentProductionGuardTests(unittest.TestCase):
         tampered["decision_sha256"] = progress_guard.stable(core)
         with self.assertRaisesRegex(progress_guard.Blocked, "REENTRY_DECISION_ACTION_MISMATCH"):
             progress_guard.resume(binding, state, tampered)
+
+    def test_write_trigger_exposes_only_checkpoint_selected_bound_work_item(self):
+        binding = self._binding(2)
+        state = self._checkpoint(binding)
+        decision = self._decision(binding, state)
+        result = progress_guard.resume(binding, state, decision)
+        payload = result["process_trigger"]["bound_work_item"]
+        self.assertEqual(payload, binding["items"][0])
+        self.assertNotEqual(payload, binding["items"][1])
+        self.assertEqual(payload["identity"]["plan_slot"], state["allowed_action"]["plan_slot"])
 
     def test_stale_decision_dies_immediately_after_checkpoint_changes(self):
         binding = self._binding()
