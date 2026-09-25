@@ -2926,52 +2926,12 @@ JS;
     }
 
     /**
-     * Current contract: relevance first, then dynamic coverage.
-     * No provider weights and no calendar/week rotation.
+     * Current contract: relevance first, then even partner/creative distribution.
      *
-     * Performance: one indexed GROUP BY over the already existing output-object
-     * table per frontend request at most. All further slot decisions reuse the
-     * request-local snapshot. If the table/read is unavailable, keep the normal
-     * relevance order unchanged (safe fallback).
+     * Performance rule: this stays pure in-memory on the already ranked candidate
+     * list. No extra DB/meta/provider call is allowed from the frontend hot path.
+     * The page/slot hash acts as the stable editorial plan across the portal.
      */
-    private function banner_distribution_coverage_snapshot() {
-        static $snapshot = null;
-        if ($snapshot !== null) { return $snapshot; }
-        $snapshot = array('partners'=>array(), 'creatives'=>array(), 'available'=>false);
-        if (!method_exists($this, 'output_objects_table') || !method_exists($this, 'output_local_portal_key')) {
-            return $snapshot;
-        }
-        global $wpdb;
-        if (!is_object($wpdb) || !method_exists($wpdb, 'get_results') || !method_exists($wpdb, 'prepare')) {
-            return $snapshot;
-        }
-        $table = $this->output_objects_table();
-        $portal = $this->output_local_portal_key();
-        $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT provider, partner_external_id, campaign_post_id, COUNT(*) AS assignment_count
-             FROM {$table}
-             WHERE portal_key=%s AND output_type='portal_banner' AND status='published'
-             GROUP BY provider, partner_external_id, campaign_post_id",
-            $portal
-        ), ARRAY_A);
-        if (!is_array($rows)) { return $snapshot; }
-        foreach ($rows as $row) {
-            $provider = sanitize_key((string) ($row['provider'] ?? ''));
-            $partner = trim((string) ($row['partner_external_id'] ?? ''));
-            $count = max(0, absint($row['assignment_count'] ?? 0));
-            if ($provider !== '') {
-                $partner_key = $provider . '|' . ($partner !== '' ? strtolower($partner) : '_provider');
-                $snapshot['partners'][$partner_key] = absint($snapshot['partners'][$partner_key] ?? 0) + $count;
-            }
-            $post_id = absint($row['campaign_post_id'] ?? 0);
-            if ($post_id > 0) {
-                $snapshot['creatives']['post:' . $post_id] = absint($snapshot['creatives']['post:' . $post_id] ?? 0) + $count;
-            }
-        }
-        $snapshot['available'] = true;
-        return $snapshot;
-    }
-
     private function banner_distribution_partner_key($campaign) {
         if (!is_array($campaign)) { return ''; }
         $provider = sanitize_key((string) ($campaign['network'] ?? ''));
@@ -2983,12 +2943,32 @@ JS;
         return $provider . '|' . ($partner !== '' ? strtolower($partner) : '_provider');
     }
 
-    private function banner_distribution_creative_key($campaign) {
-        if (!is_array($campaign)) { return ''; }
-        $post_id = absint($campaign['post_id'] ?? 0);
-        if ($post_id > 0) { return 'post:' . $post_id; }
-        $id = sanitize_key((string) ($campaign['id'] ?? ''));
-        return $id !== '' ? 'id:' . $id : '';
+    private function banner_distribution_bucket($context, $slot_type, $total, $salt = '') {
+        $total = max(1, absint($total));
+        $post_id = absint($context['post_id'] ?? 0);
+        $terms = array_values(array_unique(array_map('absint', (array) ($context['term_ids'] ?? array()))));
+        sort($terms, SORT_NUMERIC);
+        $slugs = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($context['slugs'] ?? array())))));
+        sort($slugs, SORT_STRING);
+        // Deliberately no week/date: the editorial distribution is stable and
+        // cache-friendly until content/campaign relevance changes.
+        $seed = implode('|', array(
+            'distribution-v2',
+            (string) $post_id,
+            implode(',', $terms),
+            implode(',', $slugs),
+            sanitize_key((string) $slot_type),
+            (string) max(1, absint($context['banner_distribution_position'] ?? 1)),
+            sanitize_key((string) $salt),
+        ));
+        return (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
+    }
+
+    private function banner_distribution_rotate_equal_group($indexes, $candidates, $context, $slot_type, $partner_key) {
+        $indexes = array_values((array) $indexes);
+        if (count($indexes) < 2) { return $indexes; }
+        $offset = $this->banner_distribution_bucket($context, $slot_type, count($indexes), 'creative|' . (string)$partner_key);
+        return array_merge(array_slice($indexes, $offset), array_slice($indexes, 0, $offset));
     }
 
     private function banner_distribution_reorder_candidates($candidates, $context, $slot_type) {
@@ -2998,72 +2978,63 @@ JS;
         if (empty($settings['enabled'])) { return $candidates; }
 
         $automatic = array();
-        foreach ($candidates as $index=>$candidate) {
+        foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') { continue; }
-            $candidate['_ppar_distribution_original_index'] = $index;
             $automatic[] = $candidate;
         }
         if (count($automatic) < 2) { return $automatic ?: $candidates; }
 
-        // Distribution never overrides relevance/format. Only the best existing
-        // relevance tier participates in the coverage decision.
+        // Never override relevance, priority or required geometry.
         $best_specificity = (int) ($automatic[0]['specificity'] ?? 0);
         $best_matches = (int) ($automatic[0]['matches'] ?? 0);
+        $best_priority = (int) ($automatic[0]['priority'] ?? 0);
         $best_geometry = $this->banner_candidate_geometry($automatic[0]);
         $best_ratio = (float) ($best_geometry['ratio'] ?? 0.0);
 
-        $best = array();
-        $rest = array();
-        foreach ($automatic as $candidate) {
+        $groups = array();
+        foreach ($automatic as $index=>$candidate) {
+            $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
             $geometry = $this->banner_candidate_geometry($candidate);
-            if ((int) ($candidate['specificity'] ?? 0) === $best_specificity
-                && (int) ($candidate['matches'] ?? 0) === $best_matches
-                && abs((float) ($geometry['ratio'] ?? 0.0) - $best_ratio) < 0.05) {
-                $best[] = $candidate;
-            } else {
-                $rest[] = $candidate;
+            if ((int) ($candidate['specificity'] ?? 0) !== $best_specificity
+                || (int) ($candidate['matches'] ?? 0) !== $best_matches
+                || (int) ($candidate['priority'] ?? 0) !== $best_priority
+                || abs((float)($geometry['ratio'] ?? 0.0) - $best_ratio) >= 0.05) {
+                continue;
             }
+            $partner_key = $this->banner_distribution_partner_key($campaign);
+            if ($partner_key === '') { $partner_key = '_unknown'; }
+            if (!isset($groups[$partner_key])) { $groups[$partner_key] = array(); }
+            $groups[$partner_key][] = $index;
         }
-        if (count($best) < 2) { return array_merge($best, $rest); }
+        if (!$groups) { return $automatic; }
 
-        $coverage = $this->banner_distribution_coverage_snapshot();
-        if (empty($coverage['available'])) {
-            // Safe fallback: no extra DB retries and no change to the existing
-            // relevance order if coverage evidence cannot be read.
-            return array_merge($best, $rest);
-        }
+        $partner_keys = array_keys($groups);
+        sort($partner_keys, SORT_STRING);
+        $selected_partner = $partner_keys[$this->banner_distribution_bucket($context, $slot_type, count($partner_keys), 'partner')] ?? '';
+        if ($selected_partner === '' || empty($groups[$selected_partner])) { return $automatic; }
 
-        usort($best, function($a, $b) use ($coverage) {
-            $ca = is_array($a['campaign'] ?? null) ? $a['campaign'] : array();
-            $cb = is_array($b['campaign'] ?? null) ? $b['campaign'] : array();
-            $pa = $this->banner_distribution_partner_key($ca);
-            $pb = $this->banner_distribution_partner_key($cb);
-            $pca = absint($coverage['partners'][$pa] ?? 0);
-            $pcb = absint($coverage['partners'][$pb] ?? 0);
-            if ($pca !== $pcb) { return $pca <=> $pcb; }
-
-            $ka = $this->banner_distribution_creative_key($ca);
-            $kb = $this->banner_distribution_creative_key($cb);
-            $cca = absint($coverage['creatives'][$ka] ?? 0);
-            $ccb = absint($coverage['creatives'][$kb] ?? 0);
-            if ($cca !== $ccb) { return $cca <=> $ccb; }
-
-            // Equal coverage: retain the already proven central ranking order.
-            return absint($a['_ppar_distribution_original_index'] ?? 0) <=> absint($b['_ppar_distribution_original_index'] ?? 0);
-        });
-
-        foreach ($best as &$candidate) {
-            unset($candidate['_ppar_distribution_original_index']);
+        $groups[$selected_partner] = $this->banner_distribution_rotate_equal_group(
+            $groups[$selected_partner],
+            $automatic,
+            $context,
+            $slot_type,
+            $selected_partner
+        );
+        $selected_indexes = array_fill_keys($groups[$selected_partner], true);
+        $out = array();
+        foreach ($groups[$selected_partner] as $index) {
+            $candidate = $automatic[$index];
             $candidate['reason'] = sanitize_text_field(
                 (string) ($candidate['reason'] ?? 'Passende Zuordnung.')
-                . ' · Dynamische Verteilung innerhalb derselben Relevanzstufe.'
+                . ' · Gleichmäßige Partner-/Werbemittelverteilung innerhalb derselben Relevanzstufe.'
             );
+            $out[] = $candidate;
         }
-        unset($candidate);
-        foreach ($rest as &$candidate) { unset($candidate['_ppar_distribution_original_index']); }
-        unset($candidate);
-        return array_values(array_merge($best, $rest));
+        foreach ($automatic as $index=>$candidate) {
+            if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
+        }
+        return array_values($out);
     }
 
     private function get_assignments() {
