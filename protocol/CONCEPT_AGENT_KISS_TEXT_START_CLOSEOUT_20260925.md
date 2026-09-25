@@ -164,3 +164,60 @@ NICHT ANFASSEN
 ## KISS Worker-Anschluss 2026-09-25
 `RESUME_ALLOWED` ist nicht terminal. Der bereits gebundene Worker führt ausschließlich die hashgebundene `allowed_action` aus, gibt die Rückgabe unmittelbar an `concept_agent/progress_guard.py` zurück und setzt die daraus gebundene Folgeaktion ohne freie Auswahl bis `STOP` fort. Kein neuer Runner, keine Produktionssteuerung über GitHub, kein Publish.
 Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpointgebundenen Prozess-Trigger für den bestehenden gebundenen Worker; dessen Rückgabe muss in `concept_agent/progress_guard.py` zurücklaufen. `STOP` erzeugt keinen Trigger.
+
+
+## Nachholprüfung nach PR #405 – 2026-09-25
+
+Status dieses Abschnitts: **Nachweis/Protokoll, keine CURRENT-Autorität.**
+
+### Frischer Delta-Stand
+- Bürotür bleibt `concept_agent/START_HERE.md`.
+- Routing bleibt `concept_agent/CONTROL_ENTRY_POINTER.json`.
+- Einzige Current-Autorität bleibt `control/startmaster0107/CURRENT_STATE.json`.
+- Aktueller `main`: `dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5`.
+- PR #404 wurde gemergt: `fe3c225df56086f9a932c134409c8f5bcb1699b8`.
+- PR #405 wurde gemergt: `dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5`.
+- PR #405 ergänzt ausschließlich den checkpointgebundenen Prozessanstoß in `concept_agent/progress_guard.py`: jede nichtterminale `allowed_action` erzeugt genau einen `process_trigger` mit `exactly_once_for_checkpoint=true`, `return_required=true` und Rückgabeziel `concept_agent/progress_guard.py`; `STOP` erzeugt keinen Trigger.
+- #405-Checks: Deterministic Entrance Gate Run `36136422220` = SUCCESS; Immutable Base Hardlock Run `36136418296` = SUCCESS.
+
+### Erster aktuell belegter offener Punkt
+Der Prozess-Trigger wird im aktuellen Concept-Agent-Code erzeugt und getestet. Im aktuellen Concept-Agent-Pfad ist jedoch **kein belegter Verbraucher dieses `process_trigger` vorhanden, der den gebundenen Worker tatsächlich startet**. Damit ist der reale Aktionsanstoß noch nicht als ausgeführt/proven nachgewiesen.
+
+Kein neuer Runner, keine neue Route und kein Ersatzmechanismus daraus ableiten.
+
+### Current-Abgleich
+`control/startmaster0107/CURRENT_STATE.json` enthält diesen Stand nach #405 noch nicht und ist deshalb gegenüber dem aktuellen `main` fachlich veraltet. Eine einseitige Änderung ist unzulässig, weil die Datei über `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` hashgebunden ist und der vorhandene Guard sonst absichtlich mit `STATE_HASH_MISMATCH` blockiert.
+
+Daher gilt bis zur autorisierten synchronen Aktualisierung:
+- **Current-Autorität: BLOCKED / veraltet gegenüber main**
+- **keine zweite CURRENT-Wahrheit aus diesem Protokoll ableiten**
+
+### Exakt eine NEXT ACTION für den Folgechat
+Über den vorgesehenen autorisierten State-Write-Weg die eine Current-Autorität samt ihrer Hash-Bindung auf den belegten Stand nach PR #405 synchronisieren und dort als ersten offenen technischen Blocker festhalten: **checkpointgebundener `process_trigger` vorhanden, tatsächlicher Consumer/Worker-Start noch nicht belegt**.
+
+Erst danach genau diesen einen offenen Anschluss schließen: vorhandenen gebundenen Worker den bestehenden `process_trigger` genau einmal pro Checkpoint konsumieren lassen und seine Rückgabe wieder an `progress_guard.py` geben. Kein Neubau.
+
+### Nachgeholtes Fehlerprotokoll
+1. `RESUME_ALLOWED` war nach #404 als verpflichtende Fortsetzung markiert, aber ohne eigenen Prozess-Trigger.
+   - Status: **RESOLVED durch PR #405**.
+2. Prozess-Trigger nach #405 vorhanden, aber tatsächlicher Consumer/Worker-Start im aktuellen Concept-Agent-Pfad nicht belegt.
+   - Status: **OPEN / FIRST TECHNICAL BLOCKER**.
+3. Current-Autorität wurde nach #405 nicht synchron nachgezogen.
+   - Status: **BLOCKED / FIRST GOVERNANCE BLOCKER**, weil Current+Root-Hash nur gemeinsam über den autorisierten State-Write-Weg geändert werden dürfen.
+4. Gesamt-End-to-End-Test mit realem Prozessanstoß über jede Stufe bis STOP wurde nach #405 nicht ausgeführt.
+   - Status: **OFFEN**.
+
+### Aktualisierter PROTOKOLLCHECK
+- Fehler: NACHGEHOLT
+- Protokoll: NACHGEHOLT
+- Warum: PASS
+- Current-Autorität: BLOCKED
+- Bürotür/Einstiegspunkt: PASS
+- Frischecheck: DELTA GEPRÜFT
+- Hobbyraum: NICHT BETROFFEN
+- Zielvertrag: PASS
+- Archiv: NICHT BETROFFEN
+- Eine Wahrheit: PASS
+- Tests: OFFEN
+- Plugins: NICHT BETROFFEN
+- Paul/Worker: NICHT BETROFFEN
