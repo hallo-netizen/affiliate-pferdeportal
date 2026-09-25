@@ -110,12 +110,27 @@ final class PPAR_Partner_Analytics_Admin {
         foreach (array('today','7','30','all') as $period) {
             $row = isset($report['periods'][$period]) && is_array($report['periods'][$period]) ? $report['periods'][$period] : array();
             if (!$row) { continue; }
+            $details = array();
+            foreach ((array) ($row['details'] ?? array()) as $detail) {
+                if (!is_array($detail)) { continue; }
+                $details[] = array(
+                    'label'=>sanitize_text_field((string)($detail['label'] ?? 'Originalzeile')),
+                    'external_id'=>sanitize_text_field((string)($detail['external_id'] ?? '')),
+                    'clicks'=>array_key_exists('clicks',$detail) && is_numeric($detail['clicks']) ? max(0,(int)$detail['clicks']) : null,
+                    'orders'=>array_key_exists('orders',$detail) && is_numeric($detail['orders']) ? max(0,(int)$detail['orders']) : null,
+                    'sales'=>array_key_exists('sales',$detail) && is_numeric($detail['sales']) ? (float)$detail['sales'] : null,
+                    'commission'=>array_key_exists('commission',$detail) && is_numeric($detail['commission']) ? (float)$detail['commission'] : null,
+                    'conversion'=>array_key_exists('conversion',$detail) && is_numeric($detail['conversion']) ? (float)$detail['conversion'] : null,
+                    'currency'=>preg_match('/^[A-Z]{3}$/', strtoupper((string)($detail['currency'] ?? 'EUR'))) ? strtoupper((string)$detail['currency']) : 'EUR',
+                );
+            }
             $periods[$period] = array(
                 'clicks' => array_key_exists('clicks', $row) && is_numeric($row['clicks']) ? max(0, (int)$row['clicks']) : null,
                 'orders' => array_key_exists('orders', $row) && is_numeric($row['orders']) ? max(0, (int)$row['orders']) : null,
                 'sales' => array_key_exists('sales', $row) && is_numeric($row['sales']) ? max(0, (float)$row['sales']) : null,
                 'commission' => array_key_exists('commission', $row) && is_numeric($row['commission']) ? (float)$row['commission'] : null,
                 'conversion' => array_key_exists('conversion', $row) && is_numeric($row['conversion']) ? (float)$row['conversion'] : null,
+                'details' => $details,
             );
         }
         $currency = strtoupper((string)($report['currency'] ?? 'EUR'));
@@ -145,6 +160,7 @@ final class PPAR_Partner_Analytics_Admin {
             'currency' => (string)($entry['currency'] ?? 'EUR'),
             'source' => (string)($entry['source'] ?? ''),
             'updated_at' => absint($entry['updated_at'] ?? 0),
+            'details' => isset($period['details']) && is_array($period['details']) ? $period['details'] : array(),
         );
     }
 
@@ -211,6 +227,18 @@ final class PPAR_Partner_Analytics_Admin {
                     <td><?php echo self::na($r['conversion'],'percent'); ?></td>
                     <td><?php if ($r['updated_at']>0) { echo esc_html(wp_date('d.m.Y H:i',$r['updated_at'])); if ($r['source']!=='') { echo '<br><span class="description">'.esc_html($r['source']).'</span>'; } } else { echo '<span class="description">noch kein Report</span>'; } ?></td>
                 </tr>
+                <?php if (!empty($r['details']) && count((array)$r['details']) > 1) : foreach ((array)$r['details'] as $detail) : ?>
+                <tr>
+                    <td style="padding-left:28px">↳ <?php echo esc_html((string)($detail['label'] ?? 'Originalzeile')); ?><?php if (!empty($detail['external_id'])) : ?><br><span class="description">ID <?php echo esc_html((string)$detail['external_id']); ?></span><?php endif; ?></td>
+                    <td><span class="description">Originalzeile</span></td>
+                    <td><?php echo self::na($detail['clicks'] ?? null); ?></td>
+                    <td><?php echo self::na($detail['orders'] ?? null); ?></td>
+                    <td><?php echo self::na($detail['sales'] ?? null,'money',(string)($detail['currency'] ?? $r['currency'])); ?></td>
+                    <td><?php echo self::na($detail['commission'] ?? null,'money',(string)($detail['currency'] ?? $r['currency'])); ?></td>
+                    <td><?php echo self::na($detail['conversion'] ?? null,'percent'); ?></td>
+                    <td><span class="description">vom Provider unverändert</span></td>
+                </tr>
+                <?php endforeach; endif; ?>
             <?php endforeach; ?>
             </tbody></table>
             <p class="description" style="margin-top:12px">Wichtig: Diese Übersicht zeigt ausschließlich Originalwerte der jeweiligen Partnerportale. Fehlende Providerwerte werden nicht als Null ersetzt; unterschiedliche Währungen werden nicht vermischt.</p>
