@@ -1,0 +1,234 @@
+diff --git a/a/affiliate-portal-router/includes/trait-ppar-ebay-run.php b/b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+index d74b051..3ff59f9 100644
+--- a/a/affiliate-portal-router/includes/trait-ppar-ebay-run.php
++++ b/b/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+@@ -416,6 +416,79 @@ trait PPAR_Ebay_Run_Trait {
+         }
+     }
+ 
++
++    /**
++     * V6.46 state-only recovery for the V6.45 public-freshness contract gap.
++     *
++     * The recovery is intentionally narrow. It reopens only a V6.45
++     * insufficient_safe_sources failure whose persisted coverage proves that
++     * every examined published BUSINESS object was rejected solely because its
++     * source freshness expired while the same run had successfully materialised
++     * BUSINESS winners. That state is impossible under the corrected selector:
++     * stale rows are no longer eligible for prepare/apply.
++     *
++     * The same UUID is preserved. Only derived selection/coverage state and the
++     * already-completed refresh sub-job are invalidated so the canonical workflow
++     * re-enters its existing bounded local-reconcile -> remote-refresh path.
++     */
++    public function maybe_migrate_ebay_public_freshness_v6460() {
++        $run=$this->ebay_run_load();
++        if((string)($run['schema']??'')!=='1.0'){return;}
++        $loaded_run=$run;
++        if(sanitize_key((string)($run['status']??''))!=='failed'
++            || sanitize_key((string)($run['error_code']??''))!=='insufficient_safe_sources'){return;}
++        $failure=$this->ebay_run_last_failure_entry($run,'insufficient_safe_sources');
++        $details=is_array($failure['details']??null)?$failure['details']:array();
++        $failed_phase=sanitize_key((string)($details['phase']??''));
++        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
++        if($failed_phase!=='' && $failed_phase!=='coverage_verify'){return;}
++        if(strpos($failure_build,'6.45.0-')!==0){return;}
++
++        $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
++        $required=absint($coverage['required']??0);
++        $covered=absint($coverage['covered']??0);
++        $missing=array_values(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array()))));
++        $invalid=is_array($coverage['invalid']??null)?$coverage['invalid']:array();
++        if($required!==311 || $covered!==0 || count($missing)!==311 || !$invalid){return;}
++        foreach($invalid as $reason){
++            if(sanitize_key((string)$reason)!=='source_stale'){return;}
++        }
++        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
++        if(absint($selection['stats']['business']['materialized']??0)<1){return;}
++
++        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
++        if($uuid===''){return;}
++        $failure_at=absint($failure['at']??$run['finished_at']??0);
++        $marker=hash('sha256',$uuid.'|'.$failure_at.'|public_freshness_contract|6.46.0');
++        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
++        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
++        $history[]=array(
++            'at'=>time(),'reason'=>'public_freshness_contract_recovery',
++            'error_code'=>'insufficient_safe_sources','migration_key'=>$marker,
++            'stale_public_objects'=>count($invalid),
++        );
++        if(count($history)>8){$history=array_slice($history,-8);}
++
++        $run['recovery_history']=$history;
++        $run['status']='running';$run['phase']='reconcile_local';$run['finished_at']=0;
++        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
++        $run['resume_reason']='public_freshness_contract_recovery';$run['no_progress_count']=0;
++        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
++        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
++        $run['phase_state']['selection']=array();
++        $run['phase_state']['refresh']=array();
++        $run['coverage']=array();
++        $run['gapfill']=array('attempts'=>0,'missing'=>array());
++        $run['end_manifest']=array();
++
++        // All nested-option mutation happens only after the canonical CAS won.
++        // A concurrent request can therefore never lose its newer run state.
++        if($this->ebay_run_compare_and_swap($loaded_run,$run)!==false){
++            update_option(self::OPTION_EBAY_SELECTION_STATE,array(),false);
++            update_option(self::OPTION_EBAY_REFRESH_JOB,array(),false);
++        }
++    }
++
+     /** Backward-compatible entry point retained for older test harnesses. */
+     public function maybe_recover_ebay_false_no_progress_v6420() {
+         return $this->maybe_migrate_ebay_progress_contract_v6421();
+ diff --git a/a/affiliate-portal-router/includes/trait-ppar-ebay.php b/b/affiliate-portal-router/includes/trait-ppar-ebay.php
+index 486b554..2d9d0b6 100644
+--- a/a/affiliate-portal-router/includes/trait-ppar-ebay.php
++++ b/b/affiliate-portal-router/includes/trait-ppar-ebay.php
+@@ -3423,6 +3423,31 @@ trait PPAR_Ebay_Trait {
+      * hard-bounded and the prepare state processes only a small number of
+      * concepts per worker tick.
+      */
++    /**
++     * Public-fresh source eligibility shared by BUSINESS selection/materialisation.
++     *
++     * V6.46 closes a contract gap exposed by a long-lived canonical run: the
++     * selector previously accepted rows whose six-hour source freshness had
++     * already expired while the public coverage gate correctly rejected those
++     * same rows. Internal materialisation could therefore rise while public
++     * coverage stayed at zero. Selection must never create or preserve a winner
++     * that the immediately following public gate is guaranteed to reject.
++     */
++    private function ebay_business_source_row_is_public_fresh($row, $now = null) {
++        $row = is_array($row) ? $row : array();
++        $now = $now === null ? time() : absint($now);
++        if (array_key_exists('source_state', $row) && sanitize_key((string)$row['source_state']) !== 'available') { return false; }
++        if (array_key_exists('policy_state', $row) && sanitize_key((string)$row['policy_state']) !== 'allowed') { return false; }
++        if (array_key_exists('route_state', $row) && !in_array(sanitize_key((string)$row['route_state']), array('ready','review_last_good'), true)) { return false; }
++        // Real DB rows always carry fresh_until. Legacy unit fixtures that omit
++        // the column are not reinterpreted here; the SQL production path still
++        // requires a concrete fresh_until > now value.
++        if (array_key_exists('fresh_until', $row) && absint($row['fresh_until']) <= $now) { return false; }
++        $end = absint($row['item_end_at'] ?? 0);
++        if ($end > 0 && $end <= $now) { return false; }
++        return true;
++    }
++
+     private function ebay_business_selection_concept_rows($concept_id, $settings = null) {
+         $settings = is_array($settings) ? $settings : $this->ebay_settings();
+         $concept_id = sanitize_key((string)$concept_id);
+@@ -3433,9 +3458,12 @@ trait PPAR_Ebay_Trait {
+         $reserve_limit = max(0, min(10, absint($settings['business_reserve_per_concept'] ?? 2)));
+         $query_limit = max(8, min(30, $pool_limit + $reserve_limit + 5));
+         $table = $this->ebay_items_table();
++        $now = time();
+         return (array)$wpdb->get_results($wpdb->prepare(
+-            "SELECT * FROM {$table} WHERE seller_account_type='BUSINESS' AND rule_id=%s AND source_state='available' AND policy_state='allowed' AND route_state IN ('ready','review_last_good') AND policy_version=%s AND classifier_version=%s ORDER BY last_seen DESC,id DESC LIMIT %d",
++            "SELECT * FROM {$table} WHERE seller_account_type='BUSINESS' AND rule_id=%s AND source_state='available' AND policy_state='allowed' AND route_state IN ('ready','review_last_good') AND fresh_until>%d AND (item_end_at=0 OR item_end_at>%d) AND policy_version=%s AND classifier_version=%s ORDER BY last_seen DESC,id DESC LIMIT %d",
+             $concept_id,
++            $now,
++            $now,
+             self::EBAY_CONTENT_POLICY_VERSION,
+             self::EBAY_BUSINESS_CLASSIFIER_VERSION,
+             $query_limit
+@@ -3457,8 +3485,9 @@ trait PPAR_Ebay_Trait {
+             // ignores or mis-plans the WHERE rule_id predicate.
+             if (sanitize_key((string)($row['rule_id'] ?? '')) !== $concept_id) { continue; }
+             $plan['scanned']++;
+-            $end = absint($row['item_end_at'] ?? 0);
+-            if ($end > 0 && $end <= $now) { continue; }
++            // Defense in depth: even if a DB/test layer ignores the SQL freshness
++            // predicate, a stale source can never enter an active BUSINESS plan.
++            if (!$this->ebay_business_source_row_is_public_fresh($row, $now)) { $plan['blocked']++; continue; }
+             $item = $this->ebay_business_source_row_item($row, $settings);
+             if (is_wp_error($item)) { $plan['blocked']++; continue; }
+             $classification = (array)($item['portal_classification'] ?? array());
+@@ -4009,8 +4038,8 @@ trait PPAR_Ebay_Trait {
+             $state['business_cursor']=max(absint($state['business_cursor']??0),$row_id);
+             $stats['scanned']=absint($stats['scanned']??0)+1;
+             $item_id=(string)($row['item_id']??'');
+-            $end=absint($row['item_end_at']??0);
+-            if(sanitize_key((string)($row['source_state']??''))==='ended'||($end>0&&$end<=time())){
++            $now=time();$end=absint($row['item_end_at']??0);
++            if(sanitize_key((string)($row['source_state']??''))==='ended'||($end>0&&$end<=$now)){
+                 if(isset($state['business_active'][$item_id])){
+                     if((string)($row['creative_identity_hash']??'')!==''){$this->ebay_purge_item_content($row,'purged_ended','eBay-Angebot beendet; Auswahl entfernt die öffentliche Ausgabe.');}
+                     $this->ebay_business_selection_record_soft_failure($state,$stats,$item_id,'business_selected_ended_during_apply',$row);
+@@ -4018,6 +4047,14 @@ trait PPAR_Ebay_Trait {
+                 continue;
+             }
+             if(!isset($state['business_active'][$item_id])){continue;}
++            // A source can age out between prepare and apply in a long-lived run.
++            // Treat that as a bounded candidate-local soft failure so coverage /
++            // gap-fill owns the replacement instead of publishing guaranteed-stale
++            // data and later reporting a contradictory public 0/N state.
++            if(!$this->ebay_business_source_row_is_public_fresh($row,$now)){
++                $this->ebay_business_selection_record_soft_failure($state,$stats,$item_id,'business_selected_stale_during_apply',$row);
++                continue;
++            }
+             $item=$this->ebay_business_source_row_item($row,$settings);
+             if(is_wp_error($item)){
+                 $stats['errors'][]=array('item_id'=>$item_id,'code'=>$item->get_error_code());
+@@ -7805,8 +7842,8 @@ trait PPAR_Ebay_Trait {
+         // Reserve rows were already selected by the full quality planner. Candidates
+         // are only a fallback when no reserve exists. Never scan active winners.
+         $rows=(array)$wpdb->get_results($wpdb->prepare(
+-            "SELECT * FROM {$table} WHERE seller_account_type='BUSINESS' AND rule_id=%s AND source_state='available' AND policy_state='allowed' AND route_state IN ('ready','review_last_good') AND output_state IN ('reserve','candidate','candidate_overflow') ORDER BY last_seen DESC,id DESC LIMIT 30",
+-            $concept
++            "SELECT * FROM {$table} WHERE seller_account_type='BUSINESS' AND rule_id=%s AND source_state='available' AND policy_state='allowed' AND route_state IN ('ready','review_last_good') AND fresh_until>%d AND (item_end_at=0 OR item_end_at>%d) AND output_state IN ('reserve','candidate','candidate_overflow') ORDER BY last_seen DESC,id DESC LIMIT 30",
++            $concept, time(), time()
+         ),ARRAY_A);
+         $reserve=array();$fallback=array();$now=time();
+         foreach($rows as $row){
+diff --git a/a/affiliate-portal-router/pferdeportal-affiliate-router.php b/b/affiliate-portal-router/pferdeportal-affiliate-router.php
+index edb525a..eff28ae 100644
+--- a/a/affiliate-portal-router/pferdeportal-affiliate-router.php
++++ b/b/affiliate-portal-router/pferdeportal-affiliate-router.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.45.0
++ * Version: 6.46.0
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -39,8 +39,8 @@ final class Pferdeportal_Affiliate_Router {
+     use PPAR_Ebay_Run_Trait;
+     use PPAR_Ebay_Account_Deletion_Trait;
+     use PPAR_Awin_Programme_Gate_Trait;
+-    const VERSION = '6.45.0';
+-    const EBAY_RUNTIME_BUILD = '6.45.0-canonical-run-persistence-race-rootfix-20260820';
++    const VERSION = '6.46.0';
++    const EBAY_RUNTIME_BUILD = '6.46.0-public-freshness-selection-contract-rootfix-20260820';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+     const CAMPAIGN_POST_TYPE = 'ap_campaign';
+@@ -196,6 +196,7 @@ final class Pferdeportal_Affiliate_Router {
+         add_action('init', array($this, 'maybe_migrate_ebay_progress_contract_v6421'), 4);
+         add_action('init', array($this, 'maybe_migrate_ebay_partial_checkpoint_v6430'), 5);
+         add_action('init', array($this, 'maybe_migrate_ebay_business_materialization_v6440'), 6);
++        add_action('init', array($this, 'maybe_migrate_ebay_public_freshness_v6460'), 7);
+         add_action('init', array($this, 'maybe_migrate_ebay_worker_transport_v6412'), 10);
+         add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11);
+         add_action('init', array($this, 'ensure_automation_schedule'), 21);
+diff --git a/a/affiliate-portal-router/readme.txt b/b/affiliate-portal-router/readme.txt
+index 5d2d9b8..2f978a1 100644
+--- a/a/affiliate-portal-router/readme.txt
++++ b/b/affiliate-portal-router/readme.txt
+@@ -1,5 +1,12 @@
+-Affiliate-Zentrale 6.45.0 – CANONICAL RUN PERSISTENCE / RACE ROOTFIX
+-Stable tag: 6.45.0
++Affiliate-Zentrale 6.46.0 – PUBLIC FRESHNESS / SELECTION CONTRACT ROOTFIX
++Stable tag: 6.46.0
++
++Korrektur 6.46.0
++- BUSINESS-Selection und PUBLIC-Coverage verwenden jetzt denselben harten Frische-/Ende-Vertrag: eine Quelle mit abgelaufenem `fresh_until` kann nicht mehr als aktiver Gewinner ausgewählt oder materialisiert werden.
++- Ein BUSINESS-Gewinner, der zwischen Prepare und Apply aus der 6-Stunden-Frische fällt, wird als kandidatenspezifischer Soft-Fall `business_selected_stale_during_apply` entfernt; Coverage/Gap-Fill entscheidet anschließend bounded über Ersatz.
++- Reserve-/Ersatzpromotion berücksichtigt nur aktuell frische, nicht beendete Quellen.
++- Exakt der V6.45-Fehlerzustand `insufficient_safe_sources` wird nur dann mit derselben Run-UUID state-only wieder geöffnet, wenn der persistierte Public-Coverage-Beleg 311/311 fehlend, 0 öffentlich versorgt, bereits materialisierte BUSINESS-Gewinner und ausschließlich `source_stale` als Invalidierungsgrund beweist. Gemischte/unklare Fehler bleiben terminal.
++- Die enge Recovery setzt nur abgeleitete Selection/Coverage/Gap-Fill-/Refresh-Teilzustände zurück und geht über den bestehenden kanonischen `reconcile_local -> refresh_remote`-Pfad; keine Source-, Kampagnen-, Artikel-, Prompt-, Design- oder Fachlogik wird umdefiniert.
+ 
+ Korrektur 6.45.0
+ - Kanonische Admin-AJAX-Ticks schreiben vor Lease-Erwerb keinen kompletten Run-Snapshot mehr zurück. Ein abgewiesener Parallelrequest verändert weder Cursor noch Paket-/Fortschrittszähler.
