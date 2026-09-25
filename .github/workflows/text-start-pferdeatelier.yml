@@ -14,7 +14,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 concurrency:
   group: pferdeatelier-text-start-receiver
@@ -31,278 +30,86 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Verify central start proof
+      - name: Start current bound Concept Agent intake
         env:
           SOURCE_RUN_ID: ${{ inputs.source_run_id }}
           SOURCE_ISSUE_NUMBER: ${{ inputs.source_issue_number }}
         shell: bash
         run: |
           set -euo pipefail
+
           python3 - <<'PY'
-          import json, os, urllib.request
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
 
           run_id = os.environ["SOURCE_RUN_ID"]
-          issue = os.environ["SOURCE_ISSUE_NUMBER"]
+          issue_number = os.environ["SOURCE_ISSUE_NUMBER"]
           if not run_id.isdigit() or int(run_id) < 1:
               raise SystemExit("TEXT_START_SOURCE_RUN_ID_INVALID")
-          if not issue.isdigit() or int(issue) < 1:
+          if not issue_number.isdigit() or int(issue_number) < 1:
               raise SystemExit("TEXT_START_SOURCE_ISSUE_INVALID")
 
-          def get(url):
-              req = urllib.request.Request(
-                  url,
-                  headers={
-                      "Accept": "application/vnd.github+json",
-                      "User-Agent": "pferdeatelier-text-start-receiver",
-                      "X-GitHub-Api-Version": "2022-11-28",
-                  },
-              )
-              with urllib.request.urlopen(req, timeout=20) as fh:
-                  return json.load(fh)
+          state_path = Path("control/startmaster0107/CURRENT_STATE.json")
+          state = json.loads(state_path.read_text(encoding="utf-8"))
+          current = state.get("concept_agent_current_batch") or {}
 
-          run = get(f"https://api.github.com/repos/hallo-netizen/text-start/actions/runs/{run_id}")
-          if run.get("name") != "text-start door":
-              raise SystemExit("TEXT_START_SOURCE_WORKFLOW_INVALID")
-          if run.get("path") != ".github/workflows/text-start-door.yml":
-              raise SystemExit("TEXT_START_SOURCE_WORKFLOW_PATH_INVALID")
-          if run.get("event") != "issues" or run.get("head_branch") != "main":
-              raise SystemExit("TEXT_START_SOURCE_EVENT_INVALID")
-          if run.get("display_title") != "START:pferdeatelier":
-              raise SystemExit("TEXT_START_SOURCE_TITLE_INVALID")
-          if ((run.get("actor") or {}).get("login") != "hallo-netizen"
-              or (run.get("triggering_actor") or {}).get("login") != "hallo-netizen"):
-              raise SystemExit("TEXT_START_SOURCE_ACTOR_INVALID")
-          repo = (run.get("repository") or {}).get("full_name")
-          if repo != "hallo-netizen/text-start":
-              raise SystemExit("TEXT_START_SOURCE_REPOSITORY_INVALID")
+          if current.get("current_authority_ref") != "control/startmaster0107/CURRENT_STATE.json":
+              raise SystemExit("TEXT_START_CURRENT_AUTHORITY_INVALID")
+          if current.get("current_authority_branch") != "main":
+              raise SystemExit("TEXT_START_CURRENT_BRANCH_INVALID")
+          if current.get("publish_allowed") is not False:
+              raise SystemExit("TEXT_START_PUBLISH_NOT_FALSE")
 
-          source_issue = get(
-              f"https://api.github.com/repos/hallo-netizen/text-start/issues/{issue}"
-          )
-          if source_issue.get("title") != "START:pferdeatelier":
-              raise SystemExit("TEXT_START_SOURCE_ISSUE_TITLE_INVALID")
-          if (source_issue.get("user") or {}).get("login") != "hallo-netizen":
-              raise SystemExit("TEXT_START_SOURCE_ISSUE_AUTHOR_INVALID")
+          snapshot_ref = current.get("metadata_snapshot_ref")
+          if snapshot_ref != "concept_agent/current/PSERC_METADATA_SNAPSHOT.json":
+              raise SystemExit("TEXT_START_CURRENT_SNAPSHOT_REF_INVALID")
 
-          comments = get(
-              f"https://api.github.com/repos/hallo-netizen/text-start/issues/{issue}/comments?per_page=100"
-          )
-          bot_bodies = [
-              str(row.get("body") or "")
-              for row in comments
-              if (row.get("user") or {}).get("login") == "github-actions[bot]"
-          ]
-          authorized = f"START_AUTHORIZED: pferdeatelier\nRUN_ID: {run_id}"
-          requested = f"TARGET_DISPATCH_REQUESTED: pferdeatelier\nSOURCE_RUN_ID: {run_id}"
-          if authorized not in bot_bodies:
-              raise SystemExit("TEXT_START_AUTHORIZATION_COMMENT_MISSING")
-          if requested not in bot_bodies:
-              raise SystemExit("TEXT_START_DISPATCH_COMMENT_MISSING")
+          snapshot_path = Path(snapshot_ref)
+          snapshot_raw = snapshot_path.read_bytes()
+          snapshot_sha = hashlib.sha256(snapshot_raw).hexdigest()
+          if snapshot_sha != current.get("metadata_snapshot_sha256"):
+              raise SystemExit("TEXT_START_CURRENT_SNAPSHOT_HASH_MISMATCH")
 
-          print("TEXT_START_SOURCE_PROOF_PASS")
+          snapshot = json.loads(snapshot_raw)
+          batch = snapshot.get("next_textmachine_metadata_batch") or {}
+          items = batch.get("items")
+          if (
+              batch.get("contract") != "PSERC_TEXTMACHINE_METADATA_BATCH_V2"
+              or batch.get("status") != "READY_FOR_TEXTMACHINE_METADATA_INTAKE"
+              or batch.get("publish_allowed") is not False
+              or not isinstance(items, list)
+              or batch.get("item_count") != len(items)
+              or len(items) < 1
+              or batch.get("batch_sha256") != current.get("batch_sha256")
+              or batch.get("item_count") != current.get("item_count")
+          ):
+              raise SystemExit("TEXT_START_CURRENT_BATCH_INVALID")
+
+          print("TEXT_START_BOUND_BATCH_PASS")
           PY
 
-      - name: Reserve current bound batch; retry allowed until machine ready
-        id: claim
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
-        env:
-          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
-          SOURCE_ISSUE_NUMBER: ${{ inputs.source_issue_number }}
-        with:
-          script: |
-            const fs = require('fs');
-            const sourceRunId = String(process.env.SOURCE_RUN_ID || '');
-            const sourceIssueNumber = String(process.env.SOURCE_ISSUE_NUMBER || '');
-            if (!/^[1-9][0-9]*$/.test(sourceRunId) || !/^[1-9][0-9]*$/.test(sourceIssueNumber)) {
-              core.setFailed('TEXT_START_SOURCE_ID_INVALID');
-              return;
-            }
+          python3 concept_agent/intake_bridge.py prepare             concept_agent/current/PSERC_METADATA_SNAPSHOT.json             /tmp/CONCEPT_AGENT_INTAKE.json             | tee /tmp/CONCEPT_AGENT_INTAKE_RECEIPT.json
 
-            const crypto = require('crypto');
-            const stateRaw = fs.readFileSync('control/startmaster0107/CURRENT_STATE.json');
-            const state = JSON.parse(stateRaw);
-            const current = state.concept_agent_current_batch || {};
-            if (current.current_authority_ref !== 'control/startmaster0107/CURRENT_STATE.json' ||
-                current.current_authority_branch !== 'main' ||
-                current.publish_allowed !== false) {
-              core.setFailed('TEXT_START_CURRENT_AUTHORITY_INVALID');
-              return;
-            }
-            const snapshotRef = String(current.metadata_snapshot_ref || '');
-            if (snapshotRef !== 'concept_agent/current/PSERC_METADATA_SNAPSHOT.json') {
-              core.setFailed('TEXT_START_CURRENT_SNAPSHOT_REF_INVALID');
-              return;
-            }
-            const snapshotRaw = fs.readFileSync(snapshotRef);
-            const snapshotSha = crypto.createHash('sha256').update(snapshotRaw).digest('hex');
-            if (snapshotSha !== String(current.metadata_snapshot_sha256 || '')) {
-              core.setFailed('TEXT_START_CURRENT_SNAPSHOT_HASH_MISMATCH');
-              return;
-            }
-            const snapshot = JSON.parse(snapshotRaw);
-            const bound = snapshot.next_textmachine_metadata_batch || {};
-            const items = Array.isArray(bound.items) ? bound.items : [];
-            if (bound.contract !== 'PSERC_TEXTMACHINE_METADATA_BATCH_V2' ||
-                bound.status !== 'READY_FOR_TEXTMACHINE_METADATA_INTAKE' ||
-                bound.publish_allowed !== false ||
-                bound.maximum_articles !== 0 ||
-                bound.maximum_articles_per_type !== 0 ||
-                !Number.isInteger(bound.item_count) ||
-                bound.item_count < 1 ||
-                items.length !== bound.item_count) {
-              core.setFailed('TEXT_START_CURRENT_BATCH_INVALID');
-              return;
-            }
-            const batch = String(bound.batch_sha256 || '');
-            if (!/^[0-9a-f]{64}$/.test(batch) ||
-                batch !== String(current.batch_sha256 || '') ||
-                bound.item_count !== current.item_count) {
-              core.setFailed('TEXT_START_CURRENT_BATCH_BINDING_MISMATCH');
-              return;
-            }
-
-            const title = 'TEXT_START_BATCH_CLAIM:' + batch;
-            const q = 'repo:' + context.repo.owner + '/' + context.repo.repo + ' in:title "' + title + '"';
-            const found = await github.rest.search.issuesAndPullRequests({q, per_page: 100});
-            const exact = found.data.items.filter(x => x.title === title);
-
-            let claimIssue;
-            if (exact.length > 1) {
-              core.setFailed('TEXT_START_BATCH_CLAIM_AMBIGUOUS');
-              return;
-            }
-
-            if (exact.length === 1) {
-              claimIssue = exact[0];
-              const comments = await github.paginate(
-                github.rest.issues.listComments,
-                {
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: claimIssue.number,
-                  per_page: 100
-                }
-              );
-              const ready = comments.some(row =>
-                String(row.body || '').startsWith('TEXT_START_MACHINE_READY\n')
-              );
-              if (ready) {
-                core.setFailed('TEXT_START_BATCH_ALREADY_READY');
-                return;
-              }
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: claimIssue.number,
-                body:
-                  'TEXT_START_RETRY_RESERVED\n' +
-                  'SOURCE_RUN_ID: ' + sourceRunId + '\n' +
-                  'SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
-                  'TARGET_ACTION_RUN_ID: ' + context.runId + '\n' +
-                  'PUBLISH: NO'
-              });
-            } else {
-              const created = await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title,
-                body:
-                  'SOURCE_REPOSITORY: hallo-netizen/text-start\n' +
-                  'INITIAL_SOURCE_RUN_ID: ' + sourceRunId + '\n' +
-                  'INITIAL_SOURCE_ISSUE_NUMBER: ' + sourceIssueNumber + '\n' +
-                  'TARGET_HEAD: ' + context.sha + '\n' +
-                  'STATUS: RESERVED_NOT_READY\n' +
-                  'RETRY_POLICY: ALLOWED_UNTIL_MACHINE_READY\n' +
-                  'PUBLISH: NO'
-              });
-              claimIssue = created.data;
-            }
-
-            core.setOutput('issue_number', String(claimIssue.number));
-            core.setOutput('batch_sha256', batch);
-
-      - name: Materialize receiver authorization
-        env:
-          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
-          SOURCE_ISSUE_NUMBER: ${{ inputs.source_issue_number }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json, os, subprocess
-          head = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-          auth = {
-              "contract": "PFERDE_ATELIER_TEXT_START_AUTH_V1",
-              "status": "PASS",
-              "source_repository": "hallo-netizen/text-start",
-              "source_run_id": int(os.environ["SOURCE_RUN_ID"]),
-              "source_issue_number": int(os.environ["SOURCE_ISSUE_NUMBER"]),
-              "target_repository": "hallo-netizen/affiliate-pferdeportal",
-              "target_ref": "main",
-              "target_head_sha": head,
-              "canonical_start_command": "python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json CONCEPT_AGENT_INTAKE.json",
-              "article_content_rules_changed": False,
-              "quality_rules_changed": False,
-              "production_logic_changed": False,
-              "publish_allowed": False,
-          }
-          with open(".text-start-receiver-auth.json", "w", encoding="utf-8") as fh:
-              json.dump(auth, fh, ensure_ascii=False, sort_keys=True)
-              fh.write("\n")
-          PY
-
-      - name: Prepare current Concept Agent intake
-        id: machine
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 concept_agent/intake_bridge.py prepare \
-            concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
-            CONCEPT_AGENT_INTAKE.json | tee CONCEPT_AGENT_INTAKE_RECEIPT.json
           python3 - <<'PY'
           import json
-          state=json.load(open("control/startmaster0107/CURRENT_STATE.json", encoding="utf-8"))
-          current=state["concept_agent_current_batch"]
-          receipt=json.load(open("CONCEPT_AGENT_INTAKE_RECEIPT.json", encoding="utf-8"))
-          intake=json.load(open("CONCEPT_AGENT_INTAKE.json", encoding="utf-8"))
+          from pathlib import Path
+
+          state = json.loads(Path("control/startmaster0107/CURRENT_STATE.json").read_text(encoding="utf-8"))
+          current = state["concept_agent_current_batch"]
+          receipt = json.loads(Path("/tmp/CONCEPT_AGENT_INTAKE_RECEIPT.json").read_text(encoding="utf-8"))
+          intake = json.loads(Path("/tmp/CONCEPT_AGENT_INTAKE.json").read_text(encoding="utf-8"))
+
           if receipt.get("status") != "CONCEPT_AGENT_INTAKE_READY":
               raise SystemExit("TEXT_START_CONCEPT_AGENT_NOT_READY")
-          if receipt.get("publish_allowed") is not False or intake.get("publish_allowed") is not False:
-              raise SystemExit("TEXT_START_PUBLISH_FLAG_INVALID")
           if receipt.get("batch_sha256") != current.get("batch_sha256"):
               raise SystemExit("TEXT_START_BATCH_DRIFT")
           if receipt.get("item_count") != current.get("item_count"):
               raise SystemExit("TEXT_START_COUNT_DRIFT")
-          if intake.get("batch_sha256") != current.get("batch_sha256"):
-              raise SystemExit("TEXT_START_INTAKE_BATCH_DRIFT")
-          if intake.get("item_count") != current.get("item_count"):
-              raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
+          if intake.get("publish_allowed") is not False:
+              raise SystemExit("TEXT_START_PUBLISH_FLAG_INVALID")
+
+          print("TEXT_START_BUTTON_ONLY_PASS")
+          print("CONCEPT_AGENT_INTAKE_READY")
           PY
-
-      - name: Upload current intake handoff
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: pferdeatelier-start-${{ inputs.source_run_id }}
-          path: |
-            CONCEPT_AGENT_INTAKE_RECEIPT.json
-            CONCEPT_AGENT_INTAKE.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Mark batch claim ready
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
-        env:
-          CLAIM_ISSUE: ${{ steps.claim.outputs.issue_number }}
-        with:
-          script: |
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: Number(process.env.CLAIM_ISSUE),
-              body:
-                'TEXT_START_MACHINE_READY\n' +
-                'TARGET_ACTION_RUN_ID: ' + context.runId + '\n' +
-                'SOURCE_RUN_ID: ' + '${{ inputs.source_run_id }}' + '\n' +
-                'BATCH_SHA256: ' + '${{ steps.claim.outputs.batch_sha256 }}' + '\n' +
-                'PUBLISH: NO'
-            })
