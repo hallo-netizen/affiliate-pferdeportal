@@ -164,3 +164,10 @@ NICHT ANFASSEN
 ## KISS Worker-Anschluss 2026-09-25
 `RESUME_ALLOWED` ist nicht terminal. Der bereits gebundene Worker führt ausschließlich die hashgebundene `allowed_action` aus, gibt die Rückgabe unmittelbar an `concept_agent/progress_guard.py` zurück und setzt die daraus gebundene Folgeaktion ohne freie Auswahl bis `STOP` fort. Kein neuer Runner, keine Produktionssteuerung über GitHub, kein Publish.
 Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpointgebundenen Prozess-Trigger für den bestehenden gebundenen Worker; dessen Rückgabe muss in `concept_agent/progress_guard.py` zurücklaufen. `STOP` erzeugt keinen Trigger.
+
+## Abschlussdelta nach PR #405
+- Main: `dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5` (PR #405 gemergt).
+- PR #405: exakt ein checkpointgebundener `process_trigger` pro nicht-terminaler `allowed_action`; `STOP` erzeugt keinen Trigger.
+- Pflichtprüfungen am PR-Head `496fc76839570f4b9308af2e6f54a3e0dd0cc726`: Deterministic Entrance Gate Run `36136422220` PASS; Immutable Base Hardlock Run `36136418296` PASS.
+- Offen: realer End-to-End-Nachweis, dass der bestehende gebundene Worker jeden Trigger tatsächlich konsumiert, genau den gebundenen Prozess startet, die Rückgabe an `progress_guard.py` zurückführt und die Kette bis `STOP` durchläuft.
+- Kein Gesamt-PASS bis zu diesem realen Nachweis.
