@@ -235,3 +235,8 @@ Status dieses Abschnitts: Historie/Nachweis. **Keine CURRENT-Autorität und kein
 - Root `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` wird ausschließlich mit dem dazugehörigen neuen Current-SHA-256 nachgezogen; keine Startlogik wird verändert.
 - Current nennt keinen geratenen Artikelstand. Der operative Laufstand darf ausschließlich aus einem vorhandenen gültigen `CONCEPT_AGENT_CURRENT_PROGRESS_V1`-Checkpoint stammen.
 - Fehlt ein gültiger Checkpoint, gilt STOP/BLOCKED statt Rekonstruktion.
+
+## PR #417 — Frischer Batch vor Produktions-Checkpoint
+- Historiennachweis, keine Current-Autorität.
+- Funktionaler Minimalfix ausschließlich in `concept_agent/intake_bridge.py`: vorhandenen gültigen Produktions-Checkpoint fortsetzen; existiert vor Beginn der Produktion noch keiner, unmittelbar mit `RESEARCH_REQUIRED` fortsetzen. Nach begonnener Produktion bleibt fehlender Checkpoint fail-closed ohne Rekonstruktion.
+- Keine neue Route, kein Runner, kein Workflow, kein Codex/API, keine Änderung an Artikel-/Qualitätsregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL oder Publish.
