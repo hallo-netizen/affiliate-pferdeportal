@@ -30,6 +30,9 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 - `Geh zu PB ONE in die Ideenwerkstatt.`
 - `Geh zu PB ONE, Angebote/Flyer.`
 - `Geh ins Pferde-Atelier.`
+- `Geh zu Hobbyrausch.`
+- `Geh zu Hobbyrausch, Büro PLUGINS.`
+- `Geh zu Hobbyrausch, Büro WORDPRESS_TECHNIK.`
 - `Geh ins Pferde-Atelier, Büro TEXT/SEO.`
 - `Geh ins Pferde-Atelier, Büro PRODUKTVERGLEICH.`
 - `Geh ins Pferde-Atelier, Büro TECHNIK.`
