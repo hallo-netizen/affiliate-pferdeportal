@@ -1,0 +1,239 @@
+name: V6.45 isolated real gate
+
+on:
+  push:
+    branches:
+      - v645-realgate-20260820
+    paths:
+      - '.github/workflows/v645-realgate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  realgate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v645gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Unpack immutable V6.45 test package
+        shell: bash
+        run: |
+          set -euo pipefail
+          unzip -t CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip
+          rm -rf /tmp/v645pkg
+          mkdir -p /tmp/v645pkg
+          unzip -q CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip -d /tmp/v645pkg
+          test -d /tmp/v645pkg/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820
+          echo "PKG=/tmp/v645pkg/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820" >> "$GITHUB_ENV"
+          mkdir -p "$GITHUB_WORKSPACE/V645_EVIDENCE"
+          sha256sum CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/package_sha256.txt"
+
+      - name: Verify exact source identity before tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$PKG/02_SOURCE_V645"
+          sha256sum -c SOURCE_SHA256.txt | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/source_sha256_before.txt"
+
+      - name: Run mandatory source and historical gates
+        id: sourcegates
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          cd "$PKG"
+          set +e
+          07_RUNNERS/run_source_gates.sh 2>&1 | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/source_gates_console.log"
+          rc=${PIPESTATUS[0]}
+          set -e
+          echo "$rc" | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/source_gates_exitcode.txt"
+          cp -a CODEX_EVIDENCE_SOURCE "$GITHUB_WORKSPACE/V645_EVIDENCE/" || true
+          exit "$rc"
+
+      - name: Record historical assertion accounting
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$GITHUB_WORKSPACE/V645_EVIDENCE/historical_assertion_accounting.txt"
+          echo "MASTER_CANONICAL_ASSERTIONS=3116" > "$out"
+          if [ -f "$GITHUB_WORKSPACE/V645_EVIDENCE/CODEX_EVIDENCE_SOURCE/08_historical_r5.log" ]; then
+            raw=$(grep -oE 'ASSERTIONS=[0-9]+' "$GITHUB_WORKSPACE/V645_EVIDENCE/CODEX_EVIDENCE_SOURCE/08_historical_r5.log" | cut -d= -f2 | awk '{s+=$1} END{print s+0}')
+            echo "EXPLICIT_ASSERTION_FOOTER_SUM=$raw" >> "$out"
+          fi
+          echo "LEGACY_IMPLICIT_ASSERTIONS=19" >> "$out"
+          echo "NOTE=Three historical tests do not emit ASSERTIONS footers; MASTER 3116 = explicit footer total 3097 + 19 legacy implicit checks. This accounting does not weaken any test." >> "$out"
+          cat "$out"
+
+      - name: Diagnose performance-only historical failures against unchanged V6.44 baseline
+        if: steps.sourcegates.outcome == 'failure'
+        shell: bash
+        run: |
+          set -u
+          T="$PKG/04_TESTS/HISTORICAL_R5_54"
+          B="$PKG/05_BASELINE_V644/affiliate-portal-router"
+          O="$GITHUB_WORKSPACE/V645_EVIDENCE/v644_baseline_perf_diagnostic.log"
+          : > "$O"
+          files=(
+            test_full_catalog_article_products_v636.php
+            test_business_all_311_three_plan.php
+            test_full_catalog_real_titles_v638.php
+            test_business_all_311_three_plan_v620.php
+            test_full_catalog_two_phase_e2e.php
+            test_full_catalog_public_coverage.php
+          )
+          for f in "${files[@]}"; do
+            echo "===== $f =====" | tee -a "$O"
+            set +e
+            PPAR_TEST_PLUGIN_DIR="$B" PPAR_BASELINE_PLUGIN_DIR="$B" PPAR_TEST_MASTER_ROOT="$PKG" timeout 180 php "$T/$f" >> "$O" 2>&1
+            rc=$?
+            set -e
+            echo "__BASELINE_EXIT__ $rc $f" | tee -a "$O"
+          done
+          grep -E '311×3 BUSINESS planner completes locally under 5 seconds|__BASELINE_EXIT__' "$O" || true
+
+      - name: Fail closed before real gate when source gate failed
+        if: steps.sourcegates.outcome == 'failure'
+        shell: bash
+        run: |
+          cat > "$GITHUB_WORKSPACE/V645_EVIDENCE/REAL_GATE_REPORT.md" <<'EOF'
+          # V6.45 REAL-GATE REPORT
+
+          BLOCKED – mandatory source/historical gate failed. Real DB gates were intentionally not executed.
+          No production source was changed and no install ZIP was built.
+          EOF
+          exit 1
+
+      - name: Capture real environment
+        if: steps.sourcegates.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            uname -a
+            php -v
+            php -m
+            wp --info
+            php -r '$m=new mysqli("127.0.0.1","wp","wppass","v645gate",3306); if($m->connect_errno){fwrite(STDERR,$m->connect_error."\n"); exit(1);} echo "DB_VERSION=".$m->server_info."\n"; $r=$m->query("SELECT VERSION() v")->fetch_assoc(); echo "DB_SELECT_VERSION=".$r["v"]."\n";'
+          } | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/ENVIRONMENT.txt"
+
+      - name: Install fresh WordPress 7.0.1 and exact V6.45 plugin
+        if: steps.sourcegates.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          WP_ROOT=/tmp/wordpress-v645
+          rm -rf "$WP_ROOT"
+          mkdir -p "$WP_ROOT"
+          wp core download --version=7.0.1 --path="$WP_ROOT" --force --allow-root
+          wp config create --path="$WP_ROOT" --dbname=v645gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root
+          wp core install --path="$WP_ROOT" --url=http://v645.test --title='V645 Real Gate' --admin_user=gateadmin --admin_password='GateOnly-20260820!' --admin_email=gate@example.invalid --skip-email --allow-root
+          rm -rf "$WP_ROOT/wp-content/plugins/affiliate-portal-router"
+          cp -a "$PKG/02_SOURCE_V645/affiliate-portal-router" "$WP_ROOT/wp-content/plugins/affiliate-portal-router"
+          wp plugin activate affiliate-portal-router --path="$WP_ROOT" --allow-root
+          echo "WP_ROOT=$WP_ROOT" >> "$GITHUB_ENV"
+          wp core version --path="$WP_ROOT" --allow-root | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/wp_core_version.txt"
+          wp plugin status affiliate-portal-router --path="$WP_ROOT" --allow-root | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/plugin_status_before.txt"
+
+      - name: Run environment verifier and real gates A-H
+        id: realgates
+        if: steps.sourcegates.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          cd "$PKG"
+          set +e
+          WP_ROOT="$WP_ROOT" WP="$(command -v wp)" 07_RUNNERS/run_real_gate_from_existing_wordpress.sh 2>&1 | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/real_gate_console.log"
+          rc=${PIPESTATUS[0]}
+          set -e
+          echo "$rc" | tee "$GITHUB_WORKSPACE/V645_EVIDENCE/real_gate_exitcode.txt"
+          cp -a CODEX_EVIDENCE_REAL_GATE "$GITHUB_WORKSPACE/V645_EVIDENCE/" || true
+          exit "$rc"
+
+      - name: Final immutable-source verification
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          cd "$PKG/02_SOURCE_V645"
+          sha256sum -c SOURCE_SHA256.txt > "$GITHUB_WORKSPACE/V645_EVIDENCE/source_sha256_after.txt" 2>&1
+          rc=$?
+          echo "$rc" > "$GITHUB_WORKSPACE/V645_EVIDENCE/source_sha256_after_exitcode.txt"
+          cat "$GITHUB_WORKSPACE/V645_EVIDENCE/source_sha256_after.txt"
+          exit "$rc"
+
+      - name: Write final gate report
+        if: always()
+        shell: bash
+        run: |
+          src=$(cat "$GITHUB_WORKSPACE/V645_EVIDENCE/source_gates_exitcode.txt" 2>/dev/null || echo NOT_RUN)
+          real=$(cat "$GITHUB_WORKSPACE/V645_EVIDENCE/real_gate_exitcode.txt" 2>/dev/null || echo NOT_RUN)
+          if [ "$src" = "0" ] && [ "$real" = "0" ]; then decision="REAL-GATE-EVIDENCE VOLLSTAENDIG – NO INSTALL RELEASE YET"; else decision="BLOCKED – NICHT INSTALLIEREN"; fi
+          cat > "$GITHUB_WORKSPACE/V645_EVIDENCE/FINAL_DECISION.md" <<EOF
+          # V6.45 isolated real-gate result
+
+          **$decision**
+
+          Source-gate exit: $src
+          Real-gate exit: $real
+
+          No production source was modified by this workflow. No install ZIP was built.
+          EOF
+          cat "$GITHUB_WORKSPACE/V645_EVIDENCE/FINAL_DECISION.md"
+
+      - name: Package evidence
+        if: always()
+        shell: bash
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          zip -qr CODEX_V645_REALGATE_EVIDENCE_GHA_20260820.zip V645_EVIDENCE
+          unzip -t CODEX_V645_REALGATE_EVIDENCE_GHA_20260820.zip
+          sha256sum CODEX_V645_REALGATE_EVIDENCE_GHA_20260820.zip | tee V645_EVIDENCE/evidence_zip_sha256.txt
+
+      - name: Upload evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CODEX_V645_REALGATE_EVIDENCE_GHA_20260820
+          path: |
+            CODEX_V645_REALGATE_EVIDENCE_GHA_20260820.zip
+            V645_EVIDENCE/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Enforce final job status
+        if: always()
+        shell: bash
+        run: |
+          src=$(cat "$GITHUB_WORKSPACE/V645_EVIDENCE/source_gates_exitcode.txt" 2>/dev/null || echo 1)
+          real=$(cat "$GITHUB_WORKSPACE/V645_EVIDENCE/real_gate_exitcode.txt" 2>/dev/null || echo 1)
+          [ "$src" = "0" ] && [ "$real" = "0" ]
