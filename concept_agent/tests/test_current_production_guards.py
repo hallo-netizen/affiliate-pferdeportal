@@ -136,6 +136,19 @@ class CurrentProductionGuardTests(unittest.TestCase):
         result = progress_guard.resume(binding, state, decision)
         self.assertEqual(result["allowed_action"]["action"], "WRITE_DRAFT")
         self.assertEqual(result["bound_worker"], "BOUND_CHAT_WORKER")
+        self.assertEqual(result["process_trigger"]["worker"], "BOUND_CHAT_WORKER")
+        self.assertEqual(result["process_trigger"]["allowed_action"], result["allowed_action"])
+        self.assertEqual(result["process_trigger"]["checkpoint_sha256"], state["checkpoint_sha256"])
+        self.assertIs(result["process_trigger"]["exactly_once_for_checkpoint"], True)
+        self.assertIs(result["process_trigger"]["return_required"], True)
+        trigger_core = {
+            "batch_sha256": result["process_trigger"]["batch_sha256"],
+            "checkpoint_sha256": result["process_trigger"]["checkpoint_sha256"],
+            "worker": result["process_trigger"]["worker"],
+            "allowed_action": result["process_trigger"]["allowed_action"],
+            "return_to": result["process_trigger"]["return_to"],
+        }
+        self.assertEqual(result["process_trigger"]["trigger_sha256"], progress_guard.stable(trigger_core))
         self.assertIs(result["continuation_required"], True)
         self.assertIs(result["worker_must_execute_allowed_action_immediately"], True)
         self.assertIs(result["worker_return_must_reenter_progress_guard"], True)
@@ -308,6 +321,7 @@ class CurrentProductionGuardTests(unittest.TestCase):
         result = progress_guard.resume(binding, state, decision)
         self.assertEqual(result["allowed_action"]["action"], "STOP")
         self.assertEqual(result["status"], "STOP")
+        self.assertIsNone(result["process_trigger"])
         self.assertIs(result["continuation_required"], False)
         self.assertIs(result["worker_must_execute_allowed_action_immediately"], False)
         self.assertIs(result["worker_return_must_reenter_progress_guard"], False)

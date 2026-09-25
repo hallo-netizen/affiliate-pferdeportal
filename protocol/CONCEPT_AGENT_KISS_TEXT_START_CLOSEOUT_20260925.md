@@ -163,4 +163,4 @@ NICHT ANFASSEN
 → keine neue Architektur, kein neuer Runner, keine Alternativroute, keine Qualitäts-/LT-/PPM-/PSERC-/ENDSTEMPEL-Regeländerung.
 ## KISS Worker-Anschluss 2026-09-25
 `RESUME_ALLOWED` ist nicht terminal. Der bereits gebundene Worker führt ausschließlich die hashgebundene `allowed_action` aus, gibt die Rückgabe unmittelbar an `concept_agent/progress_guard.py` zurück und setzt die daraus gebundene Folgeaktion ohne freie Auswahl bis `STOP` fort. Kein neuer Runner, keine Produktionssteuerung über GitHub, kein Publish.
-
+Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpointgebundenen Prozess-Trigger für den bestehenden gebundenen Worker; dessen Rückgabe muss in `concept_agent/progress_guard.py` zurücklaufen. `STOP` erzeugt keinen Trigger.

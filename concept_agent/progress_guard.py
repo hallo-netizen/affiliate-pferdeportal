@@ -490,12 +490,26 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
     verify_reentry_decision(binding, state, decision)
     action = json.loads(json.dumps(state["allowed_action"]))
     terminal = action.get("action") == "STOP"
+    process_trigger = None
+    if not terminal:
+        trigger_core = {
+            "batch_sha256": state["batch_sha256"],
+            "checkpoint_sha256": state["checkpoint_sha256"],
+            "worker": "BOUND_CHAT_WORKER",
+            "allowed_action": action,
+            "return_to": "concept_agent/progress_guard.py",
+        }
+        process_trigger = dict(trigger_core)
+        process_trigger["trigger_sha256"] = stable(trigger_core)
+        process_trigger["exactly_once_for_checkpoint"] = True
+        process_trigger["return_required"] = True
     return {
         "status": "STOP" if terminal else "RESUME_ALLOWED",
         "batch_sha256": state["batch_sha256"],
         "checkpoint_sha256": state["checkpoint_sha256"],
         "allowed_action": action,
         "bound_worker": "BOUND_CHAT_WORKER",
+        "process_trigger": process_trigger,
         "continuation_required": not terminal,
         "worker_must_execute_allowed_action_immediately": not terminal,
         "worker_return_must_reenter_progress_guard": not terminal,
