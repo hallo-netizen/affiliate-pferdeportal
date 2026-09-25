@@ -180,3 +180,7 @@ Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpoin
 - Ausschließlich Einstiegskorrektur: `CONCEPT_AGENT_INTAKE_READY` ist für den bereits aktiven Chat nicht terminal.
 - Ohne Nutzer-Zwischenmeldung sofort `RESEARCH_REQUIRED`; danach bleibt die bestehende NO-STOP-/Worker-/Prüfkette unverändert.
 - Keine Änderung an Übergaben, Workern, LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL oder Publish.
+
+## PR #412 — Gebundener Arbeitszettel im WRITE_DRAFT-Trigger
+- Minimalfix ausschließlich an der bestehenden Chat-Worker-Übergabe: Bei `WRITE_DRAFT` wird genau das bereits maschinell gebundene aktuelle Work-Item mitgegeben.
+- Keine freie Artikel-, Regel-, Link- oder Stufenauswahl; LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL und Publish bleiben unverändert.
