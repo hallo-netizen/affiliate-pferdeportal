@@ -307,3 +307,26 @@ Keine Architekturänderung. Nur die bestehende Hobbyraum-Regel präzisiert: Hobb
 
 BEZUG:
 ARCH-090.
+
+
+### 2026-09-25 – Projektgebäude HOBBYRAUSCH neu angelegt
+
+BEDARF:
+Hobbyrausch startet vollständig bei null und soll dieselben Ordnungs- und Sicherheitsprinzipien des Campus nutzen, ohne Pferde-Atelier-Bestand zu kopieren.
+
+KISS-FIX:
+- neues Gebäude `PROJEKTE/HOBBYRAUSCH/`;
+- 14 leere Fachbüros mit START_HERE + genau einer CURRENT_STATE + genau einem Hobbyraum;
+- zentraler Hauptpförtner und Projektflur um Hobbyrausch ergänzt;
+- Autoritätsplan um Hobbyrausch-Scopes ergänzt;
+- Hausmeister, Archiv und Tresor bleiben unverändert campusweit zentral;
+- Pluginbüro mit `PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md` als Einzelwahrheit und separater `ORIGINAL/`-Ablage vorbereitet.
+
+NEGATIVPRÜFUNG:
+- keine Pferde-Atelier-Fachinhalte übernommen;
+- keine zweite Tresor-/Archiv-/Hausmeister-Struktur erzeugt;
+- keine Plugin-Current-Wahrheit im Register oder in ORIGINAL abgelegt;
+- keine bestehenden Pferde-Atelier-Scopes geändert.
+
+BEZUG:
+ARCH-091.
