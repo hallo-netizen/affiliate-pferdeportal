@@ -1,0 +1,855 @@
+{
+    "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
+    "version": "5.0.0",
+    "compiler_version": "0.28.23",
+    "created_at_utc": "2026-09-22T21:06:17+00:00",
+    "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+    "system_boundary": {
+        "production_machine_modified": false,
+        "production_center_modified": false,
+        "editorial_guard_modified": false,
+        "design_plugin_modified": false,
+        "posts_terms_urls_yoast_modified": false,
+        "existing_articles_modified": false,
+        "production_started": false,
+        "draft_created": false,
+        "publish_allowed": false,
+        "wordpress_database_write_attempted": false,
+        "plugin_option_write_attempted": true,
+        "server_file_write_attempted": false,
+        "article_text_emitted": false,
+        "html_emitted": false,
+        "fact_pack_emitted": false,
+        "headings_tables_lists_links_emitted": false
+    },
+    "hard_rules": {
+        "question_title_always_faq": true,
+        "journal_question_title_registered_exception": true,
+        "category_must_match_article_type": true,
+        "semantic_category_family_must_match_source_query": true,
+        "runtime_reassignment_forbidden": true,
+        "portal_internal_topic_evidence_required": true,
+        "external_serp_evidence_required": false,
+        "text_machine_is_only_content_and_format_authority": true,
+        "metadata_handoff_exact_scalar_fields": [
+            "title",
+            "target_keyword",
+            "category",
+            "article_type",
+            "plan_slot"
+        ],
+        "unsupported_metadata_only_intake_must_block": true,
+        "existing_title_slug_and_topic_duplicates_blocked": true,
+        "canonical_slot_is_technical_capacity_only": true,
+        "direct_ppm_consumer_claimed": false,
+        "approved_research_text_process_required": true,
+        "ppm_package_requires_canonical_article_id_before_preflight": true,
+        "plan_slot_identity_contract": "PSERC_PLAN_SLOT_IDENTITY_V2_CANONICAL_ID_ONLY",
+        "plan_slot_identity_excludes_working_title_and_intent_angle": true,
+        "semantic_duplicate_gate_is_separate_from_slot_capacity": true,
+        "ready_requires_technical_editorial_and_e2e_pass": true,
+        "textmachine_target_keyword_exact_title_binding_prevalidated": true,
+        "raw_keyword_remains_separately_preserved": true
+    },
+    "bindings": {
+        "compiler_version": "0.28.23",
+        "compiler_build": "0.28.23-system4-direct-draft-import-redaktionsplan-isolated-ppm679",
+        "compiler_package_binding_sha256": "d7d15a0ebeb121dbca3a3311425209249fbbb9d5b8ff3db90a7ec0d143d90771",
+        "production_version": "6.7.9",
+        "production_baseline_sha256": "2ea072513859019e86134e40db0d759b96477cf8ec832ab79ef8640374ab61e0",
+        "production_file_hashes": {
+            "portal-production-machine.php": "0874f26f21e471007922cf759ea5ad52bdc61a5975931898e83e9ff8f6418906",
+            "contracts/article-type-templates.json": "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f",
+            "contracts/journal-article-type-release-v1.json": "0afbbca3465e4b073d395aeaaa37aba026cc14b5dc5e5d7486cdcfcec783fa40",
+            "contracts/article-type-extension-manifest-v1.json": "755b709ebfea6e6279cad1e064ae896a68246147c09c523e1747fbf7e81e62c4",
+            "contracts/article-type-extension-manifest-v1.sig": "824e18cb3fe33f6d87ccda844580ce8e8b40eb75191551f23a63931ac3271328",
+            "contracts/editorial-plan-governance-v1.json": "5b87316a469e02a051592563a4fba1a7728e09d3ada992ccfb49d4bfc2d31271",
+            "contracts/canonical-complete-editorial-plan-v1.json": "85e223c7c82c02aae0853526b9521c38113311a21e8c4cd1cdb88fa9b5df0b44",
+            "contracts/normal-draft-release-v1.json": "5214575a71a5e4b77f62fce98d52b36e0b6d8b7af340b186051bd0ca85fa858e",
+            "contracts/production-plan-v4.json": "c6d4f816218b283eb37977ae340ffb5d345f723ab772f5cc1a355fb4b27682eb",
+            "contracts/production-plan-v5.json": "d6809c6d75205dbc6402c52445935eac85b35908d8db27d59edac4ffca2d6e15",
+            "includes/content-validator.php": "1fbf730b85e1d51ede18a6ad55500c94c161a15085bc54e2fce4ee4c18892687",
+            "includes/plan-validator.php": "70567e251a7cc7ddc9aa8205abe892dd632524cf2c039d247c3d56f4cd024d1c",
+            "includes/editorial-plan-registry.php": "83b98637eb49c22c5d220c5e6d394b5a0243fd9272158ba1802f43e830c4d4fa",
+            "includes/normal-draft-pipeline.php": "dd31675feb4c80f2d3ff6273604e2e55cceecab061cd904eb8a16bec2ee87b9b",
+            "includes/normal-draft-release-validator.php": "ced9f984694a8c4ee03b8b6646fa788560dacf236a06212519a4d27548c16962",
+            "includes/normal-draft-adapter.php": "043fc9158cdded12b23d9cf2f762a4d2451e52faf5145aa92365c855ceec57d4",
+            "includes/article-type-validator.php": "8e9ca000aa2f8cc7e10fe22fb546bb4bcb6a66ba2ae05641e696cb48d5348bed",
+            "includes/article-type-extension-registry.php": "f0046dd39a7863f1b272bfe8a2403142e0ba93eed5f2647d6b8cd41bfa62dd8c",
+            "includes/systemwide-duplicate-guard.php": "4f250ab8a6b4745c1bf8a7abfefdecbe5ed9503afec7365b217be0e070ebf926",
+            "includes/production-wave-governor.php": "26f53cb8e08bef611ce58f5152a8dc7b96835cd1b9c8db56bb7d281f6b4103de"
+        },
+        "canonical_plan_file_sha256": "85e223c7c82c02aae0853526b9521c38113311a21e8c4cd1cdb88fa9b5df0b44",
+        "normal_draft_release_sha256": "5214575a71a5e4b77f62fce98d52b36e0b6d8b7af340b186051bd0ca85fa858e",
+        "normal_draft_release_self_hash": "a40d82ffab0f49002ea6a0bf67013235577e6b2253ce9a4acd3b64965241fc66",
+        "seo_version": "0.57.6",
+        "seo_schema": "12",
+        "seo_snapshot_sha256": "1edd9b5981dc2818b788e6857c89a8149a00f45efb0c699f1ec14c2eec6cf755",
+        "seo_source_binding_sha256": "0e92753a33bd6cd06f3da279d69de57cfca4f3550033a839b04e7a07f26d5af1",
+        "seo_source_binding_file_count": 0,
+        "seo_capability_binding_sha256": "73c33e6ad97a86f78513065e7b7b1cc035aec807f6cda3a5b35baa463d56f47a",
+        "seo_capability_required_symbol_count": 12,
+        "portal_structure_registry_sha256": "fcee268bbdac945bc7e985ca234193d25213d436ab96241dde61453be0ae6d3f",
+        "portal_structure_category_count": 1124,
+        "portal_structure_live_baseline_sha256": "c630d6c7c83849478630cf8faddb6be0e5801555e0635bef2478031921fbf3f6",
+        "occupied_canonical_ids_sha256": "628bd12b4ab96a28dd89e0ac8f64db06831846d45a0aa879a2242118f2f0740d",
+        "plan_slot_identity": {
+            "contract": "PSERC_PLAN_SLOT_IDENTITY_V2_CANONICAL_ID_ONLY",
+            "algorithm": "SHA256_DOMAIN_SEPARATED_CANONICAL_ARTICLE_ID",
+            "domain": "pserc-plan-slot-v2|",
+            "includes": [
+                "canonical_article_id"
+            ],
+            "excludes": [
+                "working_title",
+                "intent_angle",
+                "search_intent_key",
+                "keyword_ownership_key",
+                "generated_title",
+                "target_keyword",
+                "category_name",
+                "body_html",
+                "body_text",
+                "content",
+                "format",
+                "design"
+            ],
+            "semantic_routing_authority": false,
+            "content_or_design_authority": false
+        },
+        "existing_content_snapshot_sha256": "f56a3a37f684227f361cac732426ec9937de304045655a018ceaaa6ed1210227",
+        "existing_content_item_count": 69
+    },
+    "existing_content_inventory": {
+        "status": "PSERC_EXISTING_CONTENT_BOUNDED_GENERATION_PASS",
+        "source": "WORDPRESS_BOUNDED_GENERATION",
+        "item_count": 69,
+        "snapshot_sha256": "f56a3a37f684227f361cac732426ec9937de304045655a018ceaaa6ed1210227",
+        "write_attempted": false
+    },
+    "production_release": {
+        "registered_article_types": [
+            "FAQ",
+            "Beratung",
+            "Vergleich",
+            "Pflege",
+            "Journal"
+        ],
+        "planning_registered_article_types": [
+            "Journal"
+        ],
+        "journal_registration": {
+            "ok": true,
+            "status": "PSERC_JOURNAL_SIGNED_NORMAL_DRAFT_REGISTRATION_PASS",
+            "article_type": "Journal",
+            "canonical_type_id": "journal",
+            "scope": "JOURNAL_CONTENT_BLOCK_ONLY",
+            "title_contract": {
+                "keyword_required": true,
+                "colon_forbidden": false,
+                "question_mark": "OPTIONAL",
+                "question_or_statement_allowed": true,
+                "fixed_title_template": false,
+                "natural_german_surface_required": true
+            },
+            "structure_contract": {
+                "intro_required": true,
+                "intermediate_headings_required": true,
+                "h2_h3_logical_hierarchy_required": true,
+                "table": "OPTIONAL_ONLY_IF_INFORMATION_GAIN",
+                "lists": "OPTIONAL_ONLY_IF_USEFUL",
+                "conclusion": "OPTIONAL_NO_FORCED_FAZIT_HEADING",
+                "internal_links": "OPTIONAL_SEMANTIC_ONLY_ZERO_ALLOWED",
+                "external_sources": "EXISTING_SOURCE_LOGIC_UNCHANGED"
+            },
+            "selection_policy": "EXPLICIT_JOURNAL_SCOPE_AND_INTENT_ONLY",
+            "ppm_bridge": {
+                "version": "6.7.9",
+                "legacy_internal_article_type": "Wissen",
+                "external_article_type": "Journal",
+                "canonical_slot_count": 45,
+                "preserved_legacy_slot_count": 40,
+                "canonical_article_ids": [
+                    "article:d56ca683d495329babfdd740",
+                    "article:9809d058d4a1d9b09eda974d",
+                    "article:1dd020952f127bba8bc52feb",
+                    "article:a1c139164522c334ce7e2ef7",
+                    "article:0809d44771542cde80216ef2",
+                    "article:0acdf1c613e1d17f610f25eb",
+                    "article:ceada7ee9fe331c80e46761f",
+                    "article:781e21aa520c91cf2675ac68",
+                    "article:a85c252c07ebf019f5b01ea6",
+                    "article:2242fde62811812013d2fb06",
+                    "article:c92856445bb5b1111b9e4b13",
+                    "article:566c68a13548d9b5baf5624b",
+                    "article:5750e34a0fe387995f50a1eb",
+                    "article:a278f4c0152c541582a88026",
+                    "article:24eb71fb2557bafe9691a7cb",
+                    "article:dafe8bd24a429d99294c9ab5",
+                    "article:508dd2fa8b0a46fb0a235911",
+                    "article:1d69168e44441b102126216b",
+                    "article:0e9b27453111408bf3ba111f",
+                    "article:0bbf23eca5b608dfdec4f06b",
+                    "article:60bc0cc5952312cab2f6f06c",
+                    "article:bff60db695c2fca823284775",
+                    "article:db9bbf1dbf1d59aea24d590c",
+                    "article:e9fa352af5282d000a935693",
+                    "article:d92af07cf177ad77ec31c247",
+                    "article:2db57e85bf0336524dd68407",
+                    "article:009ecda006f53459137cabf4",
+                    "article:15adcabb7c5f9d9472348837",
+                    "article:c242809f30624c137b3901a7",
+                    "article:df35d1240226ebb160c23294",
+                    "article:701b7543c7c5263ae5dc1ec7",
+                    "article:423c211fe3592d99168bab5d",
+                    "article:abb5d10de755093a2a679226",
+                    "article:d30d684afbaa1b4721722ebf",
+                    "article:7d1ddd1929e6b0af64d042f0",
+                    "article:2c3e1e232a46e78296b4b50f",
+                    "article:fb0b464e6d9f6ff0159f3385",
+                    "article:6915f3ed43adcc7228d0fc74",
+                    "article:b9e36f57b37f8045e0ca2e7e",
+                    "article:01f9f71609157b7dc61dec46",
+                    "article:cf3b0b8f487bf47c0bbbc3f9",
+                    "article:76938dc99070c29a74acca66",
+                    "article:441ab73fc27fea1ed9dcb582",
+                    "article:0f3c169b5f3ea2fea6610cdd",
+                    "article:8c961f747c03adecae6c1641"
+                ],
+                "canonical_article_ids_sha256": "4ac6f89d4fad3e484b733574b122bd3717d1ca5ac4bd8fb1dcf02e7fa3f3da52",
+                "active_signed_journal_category_count": 9,
+                "registered_runtime_journal_category_count": 9,
+                "ppm_journal_registry_sha256": "706f9541ca7805351f4e8b2111552976787a97348f34cd64524e66a957662132",
+                "ppm_journal_type_contract_sha256": "0afbbca3465e4b073d395aeaaa37aba026cc14b5dc5e5d7486cdcfcec783fa40",
+                "ppm_canonical_plan_sha256": "85e223c7c82c02aae0853526b9521c38113311a21e8c4cd1cdb88fa9b5df0b44",
+                "ppm_signed_release_updated": true,
+                "normal_draft_release_active": true
+            },
+            "category_bridge": [
+                {
+                    "key": "understanding",
+                    "name": "Pferde Verstehen",
+                    "canonical_plan_slug": "pferde-verstehen",
+                    "runtime_slugs": [
+                        "pferde-verstehen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:d56ca683d495329babfdd740",
+                        "article:9809d058d4a1d9b09eda974d",
+                        "article:1dd020952f127bba8bc52feb",
+                        "article:a1c139164522c334ce7e2ef7",
+                        "article:0809d44771542cde80216ef2"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "breeds",
+                    "name": "Pferderassen & Pferdetypen",
+                    "canonical_plan_slug": "pferderassen-und-pferdetypen",
+                    "runtime_slugs": [
+                        "pferderassen-und-pferdetypen",
+                        "pferderassen-pferdetypen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:0acdf1c613e1d17f610f25eb",
+                        "article:ceada7ee9fe331c80e46761f",
+                        "article:781e21aa520c91cf2675ac68",
+                        "article:a85c252c07ebf019f5b01ea6",
+                        "article:2242fde62811812013d2fb06"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "law",
+                    "name": "Recht, Finanzen & Organisation",
+                    "canonical_plan_slug": "recht-finanzen-und-organisation",
+                    "runtime_slugs": [
+                        "recht-finanzen-und-organisation",
+                        "recht-finanzen-organisation"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:c92856445bb5b1111b9e4b13",
+                        "article:566c68a13548d9b5baf5624b",
+                        "article:5750e34a0fe387995f50a1eb",
+                        "article:a278f4c0152c541582a88026",
+                        "article:24eb71fb2557bafe9691a7cb"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "community",
+                    "name": "Reiterleben & Community",
+                    "canonical_plan_slug": "reiterleben-und-community",
+                    "runtime_slugs": [
+                        "reiterleben-und-community",
+                        "reiterleben-community"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:dafe8bd24a429d99294c9ab5",
+                        "article:508dd2fa8b0a46fb0a235911",
+                        "article:1d69168e44441b102126216b",
+                        "article:0e9b27453111408bf3ba111f",
+                        "article:0bbf23eca5b608dfdec4f06b"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "training",
+                    "name": "Ausbildung & Reitweisen",
+                    "canonical_plan_slug": "ausbildung-und-reitweisen",
+                    "runtime_slugs": [
+                        "ausbildung-und-reitweisen",
+                        "ausbildung-reitweisen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:60bc0cc5952312cab2f6f06c",
+                        "article:bff60db695c2fca823284775",
+                        "article:db9bbf1dbf1d59aea24d590c",
+                        "article:e9fa352af5282d000a935693",
+                        "article:d92af07cf177ad77ec31c247"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "feeding",
+                    "name": "Pferdeernährung verstehen",
+                    "canonical_plan_slug": "pferdeernaehrung-verstehen",
+                    "runtime_slugs": [
+                        "pferdeernaehrung-verstehen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:2db57e85bf0336524dd68407",
+                        "article:009ecda006f53459137cabf4",
+                        "article:15adcabb7c5f9d9472348837",
+                        "article:c242809f30624c137b3901a7",
+                        "article:df35d1240226ebb160c23294"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "health",
+                    "name": "Pferdegesundheit verstehen",
+                    "canonical_plan_slug": "pferdegesundheit-verstehen",
+                    "runtime_slugs": [
+                        "pferdegesundheit-verstehen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:701b7543c7c5263ae5dc1ec7",
+                        "article:423c211fe3592d99168bab5d",
+                        "article:abb5d10de755093a2a679226",
+                        "article:d30d684afbaa1b4721722ebf",
+                        "article:7d1ddd1929e6b0af64d042f0"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "housing",
+                    "name": "Alltags-Pferde-Haltungsformen",
+                    "canonical_plan_slug": "alltags-pferde-haltungsformen",
+                    "runtime_slugs": [
+                        "alltags-pferde-haltungsformen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:2c3e1e232a46e78296b4b50f",
+                        "article:fb0b464e6d9f6ff0159f3385",
+                        "article:6915f3ed43adcc7228d0fc74",
+                        "article:b9e36f57b37f8045e0ca2e7e",
+                        "article:01f9f71609157b7dc61dec46"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                },
+                {
+                    "key": "general",
+                    "name": "Pferdewissen & Grundlagen",
+                    "canonical_plan_slug": "pferdewissen-grundlagen",
+                    "runtime_slugs": [
+                        "pferdewissen-grundlagen"
+                    ],
+                    "signed_plan_slot_available": true,
+                    "signed_plan_slot_count": 5,
+                    "canonical_article_ids": [
+                        "article:cf3b0b8f487bf47c0bbbc3f9",
+                        "article:76938dc99070c29a74acca66",
+                        "article:441ab73fc27fea1ed9dcb582",
+                        "article:0f3c169b5f3ea2fea6610cdd",
+                        "article:8c961f747c03adecae6c1641"
+                    ],
+                    "ppm_legacy_article_type": "Wissen",
+                    "ppm_active_article_type": "Journal",
+                    "draft_release_active": true
+                }
+            ],
+            "new_category": {
+                "name": "Pferdewissen & Grundlagen",
+                "slug": "pferdewissen-grundlagen",
+                "term_id": "RUNTIME_ONLY_NOT_HARDCODED",
+                "wordpress_level": "SAME_FLAT_LEVEL_AS_EXISTING_JOURNAL_CATEGORIES",
+                "visual_relation": "JOURNAL",
+                "signed_ppm_plan_slot_available": true
+            },
+            "sandbox_redaktionsplan_binding": {
+                "sandbox_is_not_a_second_editorial_plan": true,
+                "normal_path_reentry_required": true,
+                "canonical_plan_binding_required_before_any_draft_release": true,
+                "no_direct_sandbox_production": true,
+                "signed_journal_category_must_bind_active_journal_slot": true,
+                "all_nine_categories_require_signed_ppm_slots": true
+            },
+            "five_field_handoff": [
+                "title",
+                "target_keyword",
+                "category",
+                "article_type",
+                "plan_slot"
+            ],
+            "runtime_route_activation": "ACTIVE_EXPLICIT_SCOPE_AND_INTENT_ONLY",
+            "normal_draft_release": true,
+            "publish_allowed": false,
+            "workflow_change": false,
+            "textmachine_change": false,
+            "other_article_type_rule_change": false,
+            "write_attempted": false
+        },
+        "metadata_candidate_article_types": [
+            "FAQ",
+            "Beratung",
+            "Vergleich",
+            "Pflege",
+            "Journal"
+        ],
+        "batch_policy": {
+            "minimum_articles": 1,
+            "maximum_articles": 0,
+            "maximum_articles_per_type": 0,
+            "zero_means_unbounded": true,
+            "scope_mode": "USER_SELECTED_READY_SET_UNBOUNDED",
+            "publish_allowed": false,
+            "wissen_allowed": true
+        },
+        "ppm_internal_execution_policy": {
+            "minimum_articles": 1,
+            "maximum_articles": 4,
+            "maximum_articles_per_type": 1,
+            "publish_allowed": false,
+            "wissen_allowed": true,
+            "scope_mode": "REUSABLE_NORMAL_DRAFT_1_TO_4"
+        },
+        "publish_allowed": false
+    },
+    "title_rule_compatibility": {
+        "contract": "PSERC_TITLE_RULE_COMPATIBILITY_V3_PPM_READ_ONLY_SINGLE_TITLE_AUTHORITY",
+        "status": "PASS",
+        "ok": true,
+        "production_version": "6.7.9",
+        "production_baseline_sha256": "2ea072513859019e86134e40db0d759b96477cf8ec832ab79ef8640374ab61e0",
+        "rows": {
+            "FAQ": {
+                "article_type": "FAQ",
+                "ppm_semantic_contract": {
+                    "search_intent": "INFORMATIONAL_DIRECT_QUESTION",
+                    "purpose": "Eine konkrete Nutzerfrage direkt, nachvollziehbar und quellengebunden beantworten.",
+                    "boundary": {
+                        "is": "eine zentrale Frage mit geordneten Teilantworten",
+                        "is_not": [
+                            "Auswahlberatung ohne zentrale Frage",
+                            "symmetrische Gegenueberstellung mehrerer Optionen",
+                            "Pflege- oder Wartungsanleitung"
+                        ]
+                    },
+                    "structure_profile": "faq"
+                },
+                "ppm_title_contract": {
+                    "keyword_required": true,
+                    "colon_forbidden": true,
+                    "question_mark": "REQUIRED"
+                },
+                "portal_policy": {
+                    "question_mark": "REQUIRED",
+                    "allowed_special_characters": [
+                        "?"
+                    ],
+                    "special_characters_other_than_terminal_faq_question_mark": "FORBIDDEN",
+                    "natural_sentence_surface": "HARD_UPSTREAM_RELEASE_GATE",
+                    "phrase_diversity": "OPTIONAL_NONBLOCKING",
+                    "qualifier_preservation": "SEMANTIC_GENERATION_REQUIREMENT",
+                    "target_keyword_binding": "EXACT_SUBSTRING_ANY_POSITION_MATCHES_UNCHANGED_PPM",
+                    "target_keyword_position_1": "NOT_REQUIRED",
+                    "raw_query_target_keyword_relation": "RAW_QUERY_PRESERVED_SEPARATELY_TARGET_KEYWORD_MAY_BE_MEANING_PRESERVING_NORMALIZED_KEYPHRASE",
+                    "keyword_staccato": "HARD_UPSTREAM_RELEASE_GATE",
+                    "multiple_article_types_per_seed": "ALLOWED_ONLY_AS_DISTINCT_SEO_EVIDENCE_BRANCHES_NO_AUTO_FANOUT"
+                },
+                "compatibility": "COMPATIBLE_STRICTER_UPSTREAM",
+                "conflicts": []
+            },
+            "Beratung": {
+                "article_type": "Beratung",
+                "ppm_semantic_contract": {
+                    "search_intent": "DECISION_SUPPORT",
+                    "purpose": "Eine Auswahl- oder Handlungsentscheidung anhand nachvollziehbarer Kriterien vorbereiten.",
+                    "boundary": {
+                        "is": "eine Entscheidung innerhalb eines Bedarfs anhand gewichteter Kriterien",
+                        "is_not": [
+                            "reine Einzelfrage ohne Entscheidungslogik",
+                            "symmetrischer A/B-Vergleich",
+                            "reine Schrittfolge fuer Pflege oder Wartung"
+                        ]
+                    },
+                    "structure_profile": "beratung"
+                },
+                "ppm_title_contract": {
+                    "keyword_required": true,
+                    "colon_forbidden": true,
+                    "question_mark": "OPTIONAL"
+                },
+                "portal_policy": {
+                    "question_mark": "FORBIDDEN",
+                    "allowed_special_characters": [],
+                    "special_characters_other_than_terminal_faq_question_mark": "FORBIDDEN",
+                    "natural_sentence_surface": "HARD_UPSTREAM_RELEASE_GATE",
+                    "phrase_diversity": "HARD_NO_REPEATED_GENERIC_BERATUNG_SCHEMA",
+                    "qualifier_preservation": "SEMANTIC_GENERATION_REQUIREMENT",
+                    "target_keyword_binding": "EXACT_SUBSTRING_ANY_POSITION_MATCHES_UNCHANGED_PPM",
+                    "target_keyword_position_1": "NOT_REQUIRED",
+                    "raw_query_target_keyword_relation": "RAW_QUERY_PRESERVED_SEPARATELY_TARGET_KEYWORD_MAY_BE_MEANING_PRESERVING_NORMALIZED_KEYPHRASE",
+                    "keyword_staccato": "HARD_UPSTREAM_RELEASE_GATE",
+                    "multiple_article_types_per_seed": "ALLOWED_ONLY_AS_DISTINCT_SEO_EVIDENCE_BRANCHES_NO_AUTO_FANOUT"
+                },
+                "compatibility": "COMPATIBLE_STRICTER_UPSTREAM",
+                "conflicts": []
+            },
+            "Vergleich": {
+                "article_type": "Vergleich",
+                "ppm_semantic_contract": {
+                    "search_intent": "COMPARATIVE_DECISION",
+                    "purpose": "Mindestens zwei klar benannte Optionen anhand derselben Kriterien ausgewogen gegenueberstellen.",
+                    "boundary": {
+                        "is": "symmetrische Gegenueberstellung von mindestens zwei Optionen mit Vor- und Nachteilen je Option",
+                        "is_not": [
+                            "Kriterienberatung innerhalb nur einer Option",
+                            "einseitige Produktbeschreibung",
+                            "Pflege- oder Wartungsanleitung"
+                        ]
+                    },
+                    "structure_profile": "vergleich"
+                },
+                "ppm_title_contract": {
+                    "keyword_required": true,
+                    "colon_forbidden": true,
+                    "question_mark": "OPTIONAL"
+                },
+                "portal_policy": {
+                    "question_mark": "FORBIDDEN",
+                    "allowed_special_characters": [],
+                    "special_characters_other_than_terminal_faq_question_mark": "FORBIDDEN",
+                    "natural_sentence_surface": "HARD_UPSTREAM_RELEASE_GATE",
+                    "phrase_diversity": "OPTIONAL_NONBLOCKING",
+                    "qualifier_preservation": "SEMANTIC_GENERATION_REQUIREMENT",
+                    "target_keyword_binding": "EXACT_SUBSTRING_ANY_POSITION_MATCHES_UNCHANGED_PPM",
+                    "target_keyword_position_1": "NOT_REQUIRED",
+                    "raw_query_target_keyword_relation": "RAW_QUERY_PRESERVED_SEPARATELY_TARGET_KEYWORD_MAY_BE_MEANING_PRESERVING_NORMALIZED_KEYPHRASE",
+                    "keyword_staccato": "HARD_UPSTREAM_RELEASE_GATE",
+                    "multiple_article_types_per_seed": "ALLOWED_ONLY_AS_DISTINCT_SEO_EVIDENCE_BRANCHES_NO_AUTO_FANOUT"
+                },
+                "compatibility": "COMPATIBLE_STRICTER_UPSTREAM",
+                "conflicts": []
+            },
+            "Pflege": {
+                "article_type": "Pflege",
+                "ppm_semantic_contract": {
+                    "search_intent": "PROCEDURAL_MAINTENANCE",
+                    "purpose": "Pflege, Reinigung, Wartung oder Werterhalt als sichere, nachvollziehbare Schrittfolge erklaeren.",
+                    "boundary": {
+                        "is": "geordnete Pflege- oder Wartungsprozedur mit Risiken und Schutzmassnahmen",
+                        "is_not": [
+                            "Kaufberatung",
+                            "symmetrischer Vergleich",
+                            "reine Einzelfrage ohne Prozess"
+                        ]
+                    },
+                    "structure_profile": "pflege"
+                },
+                "ppm_title_contract": {
+                    "keyword_required": true,
+                    "colon_forbidden": true,
+                    "question_mark": "OPTIONAL"
+                },
+                "portal_policy": {
+                    "question_mark": "FORBIDDEN",
+                    "allowed_special_characters": [],
+                    "special_characters_other_than_terminal_faq_question_mark": "FORBIDDEN",
+                    "natural_sentence_surface": "HARD_UPSTREAM_RELEASE_GATE",
+                    "phrase_diversity": "OPTIONAL_NONBLOCKING",
+                    "qualifier_preservation": "SEMANTIC_GENERATION_REQUIREMENT",
+                    "target_keyword_binding": "EXACT_SUBSTRING_ANY_POSITION_MATCHES_UNCHANGED_PPM",
+                    "target_keyword_position_1": "NOT_REQUIRED",
+                    "raw_query_target_keyword_relation": "RAW_QUERY_PRESERVED_SEPARATELY_TARGET_KEYWORD_MAY_BE_MEANING_PRESERVING_NORMALIZED_KEYPHRASE",
+                    "keyword_staccato": "HARD_UPSTREAM_RELEASE_GATE",
+                    "multiple_article_types_per_seed": "ALLOWED_ONLY_AS_DISTINCT_SEO_EVIDENCE_BRANCHES_NO_AUTO_FANOUT"
+                },
+                "compatibility": "COMPATIBLE_STRICTER_UPSTREAM",
+                "conflicts": []
+            },
+            "Journal": {
+                "article_type": "Journal",
+                "ppm_semantic_contract": {
+                    "search_intent": "",
+                    "purpose": "",
+                    "boundary": [],
+                    "structure_profile": ""
+                },
+                "ppm_title_contract": {
+                    "keyword_required": true,
+                    "colon_forbidden": false,
+                    "question_mark": "OPTIONAL",
+                    "question_or_statement_allowed": true,
+                    "fixed_title_template": false,
+                    "natural_german_surface_required": true,
+                    "artificial_generator_phrase_forbidden": true,
+                    "keyword_staccato_forbidden": true,
+                    "mode": "EXISTING_TITLE_PIPELINE_VALIDATE_EXISTING_ONLY",
+                    "natural_german_required": true,
+                    "phrase_family_repetition_forbidden": true,
+                    "raw_search_phrase_as_title_allowed": false,
+                    "template_spam_forbidden": true
+                },
+                "portal_policy": {
+                    "question_mark": "OPTIONAL_QUESTION_OR_STATEMENT",
+                    "allowed_special_characters": [
+                        "?"
+                    ],
+                    "special_characters_other_than_terminal_question_mark_for_journal": "FORBIDDEN",
+                    "natural_sentence_surface": "HARD_UPSTREAM_RELEASE_GATE",
+                    "phrase_diversity": "HARD_NO_REPEATED_GENERIC_JOURNAL_SCHEMA",
+                    "qualifier_preservation": "SEMANTIC_GENERATION_REQUIREMENT",
+                    "target_keyword_binding": "EXACT_SUBSTRING_ANY_POSITION_MATCHES_UNCHANGED_PPM",
+                    "target_keyword_position_1": "NOT_REQUIRED",
+                    "raw_query_target_keyword_relation": "RAW_QUERY_PRESERVED_SEPARATELY_TARGET_KEYWORD_MAY_BE_MEANING_PRESERVING_NORMALIZED_KEYPHRASE",
+                    "keyword_staccato": "HARD_UPSTREAM_RELEASE_GATE",
+                    "multiple_article_types_per_seed": "ALLOWED_ONLY_AS_DISTINCT_SEO_EVIDENCE_BRANCHES_NO_AUTO_FANOUT"
+                },
+                "compatibility": "COMPATIBLE_STRICTER_UPSTREAM",
+                "conflicts": []
+            }
+        },
+        "conflicts": [],
+        "rule_precedence": [
+            "SEO_INTENT_DETERMINES_WHAT_THE_ARTICLE_MUST_ANSWER",
+            "ACTIVE_PPM_ARTICLE_TYPE_AND_TITLE_CONTRACT_IS_READ_ONLY_TECHNICAL_AND_CONTENT_STRUCTURE_AUTHORITY",
+            "PORTAL_TITLE_POLICY_MAY_BE_STRICTER_BUT_MUST_NEVER_CONTRADICT_PPM",
+            "MANDATORY_TITLE_QUALITY_RULES_BLOCK_UPSTREAM_BERATUNG_AND_JOURNAL_REPEAT_SCHEMAS_HARD_OTHER_DIVERSITY_NONBLOCKING",
+            "FINAL_HANDOFF_REMAINS_EXACTLY_FIVE_SCALAR_FIELDS_NO_HIDDEN_SIXTH_FIELD"
+        ],
+        "write_attempted": false,
+        "sha256": "480dba614f6f7fdaa6ec462444f2c96550bd9788b5fde61cb278ab3ca0dedb3b"
+    },
+    "counts": {
+        "seo_all": 3850,
+        "seo_eligible": 37,
+        "seo_held": 3813,
+        "compiled_items": 37,
+        "next_metadata_batch_items": 16,
+        "READY_FOR_METADATA_HANDOFF": 16,
+        "HELD_NO_ACTIVE_NORMAL_DRAFT_RELEASE": 0,
+        "HELD_JOURNAL_CATEGORY_NOT_IN_SIGNED_CANONICAL_PLAN": 0,
+        "HELD_UNSUPPORTED_ARTICLE_TYPE": 1,
+        "HELD_SLOT_NOT_PRODUCTION_ENABLED": 0,
+        "BLOCKED_NO_FREE_CANONICAL_SLOT": 0,
+        "BLOCKED_NO_SEMANTICALLY_COMPATIBLE_CANONICAL_SLOT": 0,
+        "REVIEW_REQUIRED_TITLE_COMPATIBILITY": 0,
+        "REVIEW_REQUIRED_TARGET_KEYWORD": 1,
+        "HELD_NO_TITLE_CONTRACT": 0,
+        "BLOCKED_QUESTION_TITLE_NOT_FAQ": 0,
+        "BLOCKED_CATEGORY_ARTICLE_TYPE_MISMATCH": 0,
+        "BLOCKED_EXISTING_CONTENT_DUPLICATE": 4,
+        "BLOCKED_DUPLICATE_METADATA_CANDIDATE": 0,
+        "REVIEW_REQUIRED_SEMANTIC_OVERLAP": 4,
+        "REVIEW_REQUIRED_TITLE_PHRASE_REPETITION": 0,
+        "BLOCKED_ASSIGNMENT_CONSISTENCY": 0,
+        "BLOCKED_EDITORIAL_STRAND": 0,
+        "BLOCKED_DUAL_STRAND_RELEASE": 0,
+        "BLOCKED_LANGUAGE_GATE": 0,
+        "BLOCKED_PORTAL_TOPIC_EVIDENCE": 11
+    },
+    "ready_batch_descriptor": {
+        "contract": "PSERC_READY_BATCH_DESCRIPTOR_V1",
+        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+        "item_count": 16,
+        "maximum_articles": 0,
+        "maximum_articles_per_type": 0,
+        "publish_allowed": false,
+        "content_or_format_payload_present": false,
+        "ready_chain_sha256": "ef96b678178e63a201cfdd0ae9c70ca5d34af2a28e9c99bf0952f24f76e3cbe1",
+        "items_json_bytes": 4024
+    },
+    "persistence": {
+        "server_storage": true,
+        "wordpress_option_storage": true,
+        "record_local_generation": true,
+        "atomic_snapshot_activation": true,
+        "preview_exists_only_in_current_response_or_browser_download": false
+    },
+    "next_step": "APPROVED_RESEARCH_TEXT_PROCESS_INTAKE_REQUIRED",
+    "items": [],
+    "next_textmachine_metadata_batch": {
+        "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+        "item_count": 16,
+        "maximum_articles": 0,
+        "maximum_articles_per_type": 0,
+        "publish_allowed": false,
+        "content_or_format_payload_present": false,
+        "items": [
+            {
+                "article_type": "Beratung",
+                "category": "reitplatzplaner-beratung",
+                "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+                "target_keyword": "Reitplatzplaner für Pferde",
+                "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "pferdedecken-regendecken-faq",
+                "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+                "target_keyword": "Frieren Pferde unter Regendecken",
+                "title": "Frieren Pferde unter Regendecken?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "reitplatzbewaesserung-faq",
+                "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+                "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+                "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "kappzaum-faq",
+                "plan_slot": "160c801f6e1b6c99065f287083a6b5fbc93a545764e04e7c833531904d77bb5d",
+                "target_keyword": "Kann man mit Kappzaum spazieren gehen",
+                "title": "Kann man mit Kappzaum spazieren gehen?"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "longiergurte-beratung",
+                "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+                "target_keyword": "Longiergurte mit Bogen",
+                "title": "Longiergurte mit Bogen im Ratgeber"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+                "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+                "target_keyword": "Kühlgamaschen für Pferde",
+                "title": "Passende Kühlgamaschen für Pferde wählen"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "pferdehaftpflicht-beratung",
+                "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+                "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+                "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "kappzaum-beratung",
+                "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+                "target_keyword": "Kappzaum für Pferde",
+                "title": "So findest du ein optimales Kappzaum für Pferde"
+            },
+            {
+                "article_type": "Beratung",
+                "category": "schermaschinen-beratung",
+                "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+                "target_keyword": "Schermaschinen für Pferde",
+                "title": "So wählst du passende Schermaschinen für Pferde"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "schabracken-faq",
+                "plan_slot": "a554b0f86f23cda760d2a03f839934cbc4dda269d961ff891e763a684283352b",
+                "target_keyword": "Warum sagt man du alte Schabracke",
+                "title": "Warum sagt man du alte Schabracke?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "schabracken-faq",
+                "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+                "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+                "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "reitplatzplaner-faq",
+                "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+                "target_keyword": "Was ist ein Reitplatzplaner",
+                "title": "Was ist ein Reitplatzplaner?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "magnetfelddecken-faq",
+                "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+                "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+                "title": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "longiergurte-faq",
+                "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+                "target_keyword": "Wie lege ich einen Longiergurt an",
+                "title": "Wie lege ich einen Longiergurt an?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "tuev-beim-pferdeanhaenger-faq",
+                "plan_slot": "53c8c859fbbc1b9a2a17ffe53efaf31d74520ac7a89aebc1e84ec9a6ea95ea6f",
+                "target_keyword": "Wie oft muss ein Pferdeanhänger zum TÜV",
+                "title": "Wie oft muss ein Pferdeanhänger zum TÜV?"
+            },
+            {
+                "article_type": "FAQ",
+                "category": "tuev-beim-pferdeanhaenger-faq",
+                "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+                "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+                "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+            }
+        ],
+        "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0"
+    },
+    "metadata_boundary": {
+        "ok": true,
+        "status": "PSERC_METADATA_BOUNDARY_PASS",
+        "message": "Der Handoff enthält je Position exakt fünf skalare Planungsfelder."
+    },
+    "manifest_sha256": "2d1335445273c4ffc8946f25b67b4192ee2ebd669a90be97c67932325a98f789"
+}

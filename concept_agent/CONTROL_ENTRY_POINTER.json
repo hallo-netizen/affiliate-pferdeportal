@@ -1,0 +1,19 @@
+{
+  "contract": "CONCEPT_AGENT_MAIN_ENTRY_POINTER_V2",
+  "workflow": "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT",
+  "status": "PASS",
+  "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
+  "current_authority_branch": "main",
+  "entry_policy": "READ_CURRENT_AUTHORITY_FIRST",
+  "freshness_rule": "READ_CURRENT_AUTHORITY_AND_ONLY_CHECK_DELTA",
+  "alternate_route_allowed": false,
+  "reconstruction_allowed": false,
+  "chat_may_choose_stage": false,
+  "domain_workflow_modified": false,
+  "language_tool_6_8_modified": false,
+  "ppm_6_7_9_modified": false,
+  "pserc_modified": false,
+  "endstempel_modified": false,
+  "plugin_code_modified": false,
+  "publish_allowed": false
+}

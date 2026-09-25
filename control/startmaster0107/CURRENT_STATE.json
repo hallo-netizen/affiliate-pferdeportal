@@ -104,7 +104,22 @@
     "PR340_HARDLOCK_RUN_35427693879_PASS",
     "PR340_HARDLOCK_BASE_RUN_35427693887_PASS",
     "PR342_FINAL_PRECODEX_HEAD_VERIFIED_ON_93956F83CA2F8DDEA5F07CB82C1B77EF393F248F",
-    "PR342_HARDLOCK_BASE_RUN_35427945011_PASS"
+    "PR342_HARDLOCK_BASE_RUN_35427945011_PASS",
+    "REAL7_LIVE_START_MAIN_6EDDDF8BDAF044E123D0B3A917E091C1B1D05863",
+    "REAL7_ARTICLE0_REACHED_REPAIR_REQUIRED_REVISION1",
+    "REAL7_CODEX_USAGE_LIMIT_TERMINAL_COMMENT_5740160115",
+    "REAL7_USAGE_LIMIT_EVIDENCE_BRANCH_COMMIT_4B92AF33E7D5C900A168086059D638590E98C793",
+    "SYSTEM4_RESTART_RECOVERY_CANDIDATE_F9281D903D7C0381E7A83F24C3FFA1E5D4FCFC5E",
+    "SYSTEM4_RESTART_RECOVERY_ACCEPTANCE_RUN_35430672460_PASS",
+    "SYSTEM4_PRECODEX_START_HARDLOCK_CANDIDATE_VALIDATED_NOT_INTEGRATED",
+    "SYSTEM4_RESTART_RECOVERY_PRECODEX_HARDLOCK_PR352_MERGED_B594FE069765B2BFD879459E12E92C04A883874C",
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ENTRANCE_RUN_35435850207_PASS",
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_HARDLOCK_RUN_35435849529_PASS",
+    "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ACCEPTANCE_RUN_35435860769_PASS",
+    "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED",
+    "TEXT_START_TARGET_CURRENT_CONCEPT_AGENT_1N_BINDING_PREPARED",
+    "UPSTREAM_REPAIR_FIXED_RETURN_LIMIT_REMOVED",
+    "TEXT_START_CENTRAL_BINDING_SYNCED"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -117,7 +132,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908",
+    "bundle_sha256": "67c4324b870412895fc9e404612aa52742116e19e2424d57fe95d8cb3f7022d3",
     "state_write_authority": "ENTRANCE_GATE_ONLY",
     "unknown_step_policy": "DENY",
     "free_chat_direct_execution_valid": false,
@@ -193,7 +208,7 @@
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
     "bundle_ref": "control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP.json",
-    "bundle_sha256": "d1133a9188e2c4f09fa322c7d48ac36406bf42274247f47cdecfb79162ffa908"
+    "bundle_sha256": "67c4324b870412895fc9e404612aa52742116e19e2424d57fe95d8cb3f7022d3"
   },
   "visible_output_security": {
     "policy_ref": "control/output-quarantine/OUTPUT_VISIBILITY_POLICY.json",
@@ -210,31 +225,22 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "E2E_PRECODEX_READY_USER_STOP_NO_CODEX_START",
+  "current_work_status": "CONCEPT_AGENT_TEXT_START_1N_READY_NO_ACTIVE_PRODUCTION_RUN",
   "current_execution_blocker": {
-    "code": "USER_EXPLICITLY_FORBIDS_CODEX_START_CURRENT_TURN",
+    "code": "RESOLVED",
     "error_class": false,
-    "detail": "No known technical blocker remains before a real Codex acceptance start. Permanent dispatcher authority is PR #342; PR #107 is superseded. Because any status merge itself advances main, CURRENT_STATE deliberately does not pin dispatcher freshness to a fixed current-main SHA. The mandatory start rule is dynamic and fail-closed: immediately before any Codex start, fresh-read main and PR #342, require dispatcher head == then-current main, require a fresh successful hardlock-base for that exact head/base relation, and only then start. Last pre-status-refresh dispatcher verification was hardlock-base run 35427945011 PASS on head 93956f83ca2f8ddea5f07cb82c1b77ef393f248f. User explicitly forbids Codex start in this turn.",
-    "dispatcher_pr": 342,
-    "superseded_dispatcher_pr": 107,
-    "dispatcher_freshness_policy": "FRESH_READ_AT_START_HEAD_MUST_EQUAL_CURRENT_MAIN",
-    "hardlock_policy": "FRESH_HARDLOCK_BASE_PASS_REQUIRED_AT_START",
-    "last_verified_dispatcher_head": "93956f83ca2f8ddea5f07cb82c1b77ef393f248f",
-    "last_verified_hardlock_base_run": 35427945011,
-    "last_verified_hardlock_base_status": "PASS",
-    "codex_free_acceptance_run_id": 35398621624,
-    "codex_free_acceptance_status": "PASS",
-    "real_codex_durable_evidence_status": "STILL_REQUIRED",
-    "codex_start_allowed": false,
-    "fresh_user_codex_approval_required": true,
+    "classification": "RESOLVED",
+    "detail": "Central text-start main and the Pferdeatelier receiver now bind the same existing Concept Agent intake command. The receiver selects the current 1..N batch from CURRENT_STATE and its hash-bound metadata snapshot. The legacy runtime-inbox selector is not used. The fixed upstream repair-return ceiling is removed. No production article has been started by this maintenance.",
+    "applies_to_concept_agent": true,
     "publish_allowed": false
   },
   "external_execution_blocker": {
-    "code": "CODEX_CAPACITY_UNKNOWN_UNTIL_AUTHORIZED_START",
-    "evidence": "Last observed usage-limit response is historical (PR107 issuecomment-5736330732, 2026-09-18). No new Codex start was attempted because the user explicitly forbids it in this turn.",
-    "classification": "EXTERNAL_AVAILABILITY_UNKNOWN_NOT_PROJECT_FAILURE",
-    "effect": "On a later explicit user authorization, the real start attempt establishes current capacity. No capacity claim is made now.",
-    "resolved": null
+    "code": "CODEX_USAGE_LIMIT",
+    "evidence": "PR #342 terminal comment 5740160115",
+    "classification": "EXTERNAL_AVAILABILITY_BLOCKER_NOT_PROJECT_FAILURE",
+    "effect": "Even after technical integration, no real Codex run may start until capacity is available and a fresh PASS receipt is created.",
+    "resolved": false,
+    "applies_to_concept_agent": false
   },
   "superseded_live_findings": [
     {
@@ -257,82 +263,46 @@
     }
   ],
   "latest_live_evidence": {
-    "main_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
-    "dispatcher_pr": 107,
-    "dispatcher_head_sha": "226a31f88a4f418f0b33f85800e634af1148d48d",
-    "latest_durable_pr107_terminal_comment": "5735784162",
-    "latest_durable_pr107_terminal_code": "REAL_CODEX_REPAIR_ACCEPTANCE_PASS_WITH_EVIDENCE_FIELDS_OMITTED",
-    "latest_observed_shell_checker": "PPM 6.7.9",
-    "latest_observed_shell_article_index": 0,
-    "latest_observed_shell_findings": [
-      {
-        "error_code": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
-        "actual": 0.2909090909090909,
-        "expected": "<=0.02",
-        "repair_owner": "DRAFT_WORKER"
-      },
-      {
-        "error_code": "BLOCKED_KNOWN_SHORT_CONCLUSION",
-        "actual": 0.09494949494949495,
-        "expected": ">=0.1",
-        "repair_owner": "DRAFT_WORKER"
-      },
-      {
-        "error_code": "BLOCKED_WAVE2_CONCLUSION_BALANCE",
-        "actual": {
-          "paragraphs": 3,
-          "ratio": 0.09494949494949495,
-          "words": 94
-        },
-        "expected": {
-          "minimum_paragraphs": 2,
-          "minimum_ratio": 0.1
-        },
-        "repair_owner": "DRAFT_WORKER"
-      },
-      {
-        "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
-        "actual": {
-          "body_rows": 4,
-          "columns": 3,
-          "count": 1,
-          "unique_token_ratio": 0.09230769230769231
-        },
-        "expected": {
-          "body_rows": 4,
-          "columns": 3,
-          "count": 1,
-          "unique_token_ratio": 0.18
-        },
-        "repair_owner": "DRAFT_WORKER"
-      }
-    ],
-    "exact_task_mapping_for_latest_shell_findings_proven": false,
+    "main_sha": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+    "dispatcher_pr": 342,
+    "dispatcher_head_sha": "6edddf8bdaf044e123d0b3a917e091c1b1d05863",
+    "trigger_comment": "5740144791",
+    "terminal_comment": "5740160115",
+    "terminal_code": "CODEX_USAGE_LIMIT_AFTER_ARTICLE0_REPAIR_REQUIRED",
     "completed_articles": 0,
-    "second_article_started": false,
+    "current_article_index": 0,
+    "current_phase": "REPAIR_REQUIRED",
+    "current_revision": 1,
+    "last_article_sha256": "c546af87a1275fa877a0acf13177f3ea0774d905968b02cb4219d80e31f5409e",
+    "last_finding_codes": [
+      "LANGUAGETOOL_FINDING"
+    ],
+    "exact_languagetool_findings_durable": false,
+    "article_bytes_durable": false,
+    "article1_started": false,
+    "batch_progress": "0/7",
     "sequence_107008_reached": false,
-    "publish_performed": false
+    "publish_performed": false,
+    "evidence_branch": "test-evidence/real7-live-20260919",
+    "evidence_commit": "4b92af33e7d5c900a168086059d638590e98c793"
   },
-  "last_safe_main_sha": "93956f83ca2f8ddea5f07cb82c1b77ef393f248f",
-  "last_safe_change": "PR #343 merged the pre-Codex status. Permanent dispatcher PR #342 was then synchronized and verified with hardlock-base run 35427945011 PASS. This CURRENT_STATE uses dynamic freshness at actual start so a status merge cannot make its own fixed main SHA stale.",
-  "hobbyroom_status": "E2E_PRECODEX_READY_USER_STOP",
+  "last_safe_main_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
+  "last_safe_change": "Restart-recovery and pre-Codex start hardlock integrated by PR #352 after exact-head PASS of Deterministic Entrance Gate 35435850207, Immutable Base Hardlock 35435849529 and full System4A acceptance 35435860769. CURRENT closeout stops before Codex. No production text, PPM 6.7.9, LanguageTool 6.8, design or quality threshold changed.",
+  "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "NONE_KNOWN_TECHNICAL; DYNAMIC_FRESHNESS_CHECK_REQUIRED_AT_START; USER_STOP_ACTIVE",
+  "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
   "next_action": {
-    "goal": "ON_NEW_EXPLICIT_APPROVAL_FRESH_CHECK_THEN_START_REAL_CODEX_1_PLUS_3_ACCEPTANCE",
-    "action": "Do not start Codex in this turn. On a later explicit start command: (1) fresh-read current main and PR #342; (2) require PR #342 head exactly equals current main, otherwise synchronize head first without merging the dispatcher; (3) require a fresh hardlock-base PASS on that exact relation; (4) only then start the isolated real Codex 1+3 acceptance with fresh real articles, real LanguageTool 6.8, real PPM 6.7.9, durable remote article bytes/evidence, separate real PPM quality-negative case, and same-article repair for any BATCH_TEMPLATE_REUSE_BLOCKED until pass or genuine hard blocker; (5) keep canonical 107008 fail-closed; no production 7-item batch and no publish.",
-    "why": "All preparatory test and security work is complete. Remaining evidence inherently requires the real Codex run, which the user explicitly forbids now.",
+    "goal": "START_CURRENT_1N_BATCH_VIA_TEXT_START",
+    "action": "On the next explicit production start, use the central hallo-netizen/text-start fixed request START:pferdeatelier. That route must resolve the current batch only through control/startmaster0107/CURRENT_STATE.json and its hash-bound concept_agent/current/PSERC_METADATA_SNAPSHOT.json, then prepare the existing Concept Agent intake. Continue through the existing research/authoring and downstream LT 6.8, PPM 6.7.9, PSERC and ENDSTEMPEL path. Do not publish.",
+    "why": "All maintenance blockers from the handoff are resolved: single Current authority, generic current 1..N selection, central/target text-start binding alignment, and no fixed upstream repair-return ceiling.",
     "forbidden": [
-      "start Codex in this turn",
-      "start real article production in this turn",
-      "merge permanent dispatcher PR #342",
-      "start production 7-item batch",
-      "publish or write to WordPress",
-      "weaken hardlock or hardlock-base",
-      "lower quality or batch thresholds",
-      "bypass canonical 107008",
-      "claim real-Codex durable evidence before it exists"
+      "use legacy runtime_inbox as Concept Agent authority",
+      "invoke legacy parent_start as Concept Agent batch selector",
+      "restore a fixed upstream repair-return limit",
+      "create a new runner or alternate route",
+      "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
+      "publish"
     ]
   },
   "hobbyroom_pr": 331,
@@ -490,6 +460,92 @@
     "codex_free_acceptance_run": 35398621624,
     "codex_started": false,
     "real_article_production_started": false,
+    "publish_allowed": false
+  },
+  "real7_authorization_20260919": {
+    "authorized": true,
+    "article_count": 7,
+    "codex": true,
+    "live_repo_logging": true,
+    "publish_allowed": false
+  },
+  "real7_live_progress_durability": {
+    "status": "PARTIAL_DURABILITY_ONLY_METADATA_PRESERVED_ARTICLE_BYTES_MISSING",
+    "protocol_ref": "protocol/STARTMASTER0107_REAL7_LIVE_PROGRESS_DURABILITY_20260919.md",
+    "durable_metadata": true,
+    "durable_article_bytes": false,
+    "detailed_lt_findings_durable": false,
+    "tmp_only_evidence_forbidden": true,
+    "note": "The runtime stopped on usage limit before exact article bytes/detailed LT findings could be externalized. This is not a content failure, but it prevents exact same-workspace continuation from being proven.",
+    "publish_allowed": false
+  },
+  "restart_recovery_candidate": {
+    "status": "MERGED_AFTER_EXACT_HEAD_ACCEPTANCE_PASS",
+    "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
+    "acceptance_run": 35435860769,
+    "acceptance_result": "PASS",
+    "recovery_capsule": "isolated_system4/workspace_recovery_capsule.py",
+    "restart_probe": "isolated_system4/restart_repair_probe.py",
+    "exact_pre_restart_checks_hash_verified": true,
+    "exact_pre_restart_draft_hash_verified": true,
+    "same_article_verified": true,
+    "production_main_contains_fix": true,
+    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c"
+  },
+  "pre_codex_start_hardlock_candidate": {
+    "status": "MERGED_AFTER_EXACT_HEAD_ACCEPTANCE_PASS_STOP_BEFORE_CODEX",
+    "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
+    "manifest_ref": "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
+    "receipt_ref": "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
+    "validator_ref": "control/startmaster0107/pre_codex_start_hardlock.py",
+    "current_test_receipt_status": "BLOCKED",
+    "current_test_receipt_reason": "CURRENT_REAL7_STOP_IS_CODEX_USAGE_LIMIT_AND_DURABLE_CROSS_TASK_RECOVERY_TRANSPORT_IS_NOT_YET_PROVEN",
+    "production_main_contains_hardlock": true,
+    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
+    "acceptance_run": 35435860769
+  },
+  "concept_agent_current_batch": {
+    "workflow": "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT",
+    "entry_ref": "concept_agent/CONTROL_ENTRY_POINTER.json",
+    "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
+    "current_authority_branch": "main",
+    "metadata_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
+    "metadata_snapshot_sha256": "3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761",
+    "metadata_snapshot_manifest_sha256": "2d1335445273c4ffc8946f25b67b4192ee2ebd669a90be97c67932325a98f789",
+    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+    "item_count": 16,
+    "metadata_snapshot_status": "PASS",
+    "article_bodies_completed": 0,
+    "next_article_index": 0,
+    "languagetool_6_8_completed": 0,
+    "ppm_6_7_9_completed": 0,
+    "pserc_batch_completed": false,
+    "endstempel_completed": false,
+    "final_wordpress_import_file_present": false,
+    "publish_allowed": false,
+    "chat_may_choose_action": false,
+    "first_open_blocker": "NONE",
+    "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT"
+  },
+  "text_start_current_binding": {
+    "status": "PASS",
+    "target_workflow_ref": ".github/workflows/text-start-pferdeatelier.yml",
+    "central_repository": "hallo-netizen/text-start",
+    "central_main_sha": "afd02b5468b6549bdfa0f3c407c79dc602edf657",
+    "central_pr": 9,
+    "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
+    "metadata_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
+    "intake_entry_ref": "concept_agent/intake_bridge.py",
+    "batch_size_policy": "1..N_FROM_CURRENT_HASH_BOUND_SNAPSHOT",
+    "legacy_runtime_inbox_used": false,
+    "legacy_parent_start_used": false,
+    "publish_allowed": false
+  },
+  "upstream_repair_policy": {
+    "status": "PASS",
+    "same_article_same_workspace": true,
+    "return_until_real_pass": true,
+    "fixed_maximum_returns": null,
     "publish_allowed": false
   }
 }
