@@ -1,0 +1,28 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -391,7 +391,24 @@
+  wp eval-file "$PKG/03_REAL_GATE/public_freshness_contract_v646.php" --path="$WP" --allow-root > "$E/$p/02_v646.log" 2>&1 || return 1; grep -Fxq 'PUBLIC_FRESHNESS_V646_OK' "$E/$p/02_v646.log" || return 1
+  wp eval-file "$PKG/03_REAL_GATE/dynamic_rule_recovery_v647.php" --path="$WP" --allow-root > "$E/$p/03_v647.log" 2>&1 || return 1; grep -Fxq 'DYNAMIC_RULE_RECOVERY_V647_OK' "$E/$p/03_v647.log" || return 1
+  wp eval-file "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php" --path="$WP" --allow-root > "$E/$p/04_v648.log" 2>&1 || return 1; grep -Fxq 'CANONICAL_REFRESH_AUTHORITY_V648_OK' "$E/$p/04_v648.log" || return 1
+- wp eval-file "$PKG/03_REAL_GATE/public_coverage_target_bridge_v649.php" --path="$WP" --allow-root > "$E/$p/05_v649.log" 2>&1 || return 1; grep -Fxq 'PUBLIC_COVERAGE_TARGET_BRIDGE_V649_OK' "$E/$p/05_v649.log" || return 1
++ # V6.49 real bridge predates V6.51 checkpoint_candidate scoping. Retain it
++ # unchanged as RED counterproof, then run a V6.51 successor that supplies the
++ # candidate set the current public-verification contract requires.
++ set +e; wp eval-file "$PKG/03_REAL_GATE/public_coverage_target_bridge_v649.php" --path="$WP" --allow-root > "$E/$p/05_v649_OLD_PRECHECKPOINT_RED.log" 2>&1; local old_v649_rc=$?; set -e
++ [ "$old_v649_rc" -ne 0 ] && grep -Fxq 'FAIL targeted gapfill receives exactly the real 220 missing families once' "$E/$p/05_v649_OLD_PRECHECKPOINT_RED.log" || return 1
++ setup_wp; rm -rf "$WP/wp-content/plugins/affiliate-portal-router"; cp -a "$src" "$WP/wp-content/plugins/affiliate-portal-router"; wp plugin activate affiliate-portal-router --path="$WP" --allow-root >/dev/null
++ local v649root="$E/$p/V651_REAL_V649_ROOT"; rm -rf "$v649root"; mkdir -p "$v649root"; cp -a "$PKG/03_REAL_GATE" "$v649root/03_REAL_GATE"
++ python3 - "$v649root/03_REAL_GATE/public_coverage_target_bridge_v649.php" <<'PYV649'
++import sys
++p=sys.argv[1];s=open(p,encoding='utf-8').read()
++needle="$run=rg_base_run($uuid,1739,1739);$run['build']='6.48.0-canonical-refresh-authority-rootfix-20260821';"
++repl="$run=rg_base_run($uuid,1739,1739);$run['checkpoint_candidate']=array('business_campaign_ids'=>array_values($campaign_ids_by_concept),'private_listing_ids'=>array());$run['build']='6.48.0-canonical-refresh-authority-rootfix-20260821';"
++if s.count(needle)!=1: raise SystemExit('V6.51 real V6.49 checkpoint-candidate fixture anchor mismatch')
++open(p,'w',encoding='utf-8').write(s.replace(needle,repl,1))
++PYV649
++ (cd "$v649root" && find 03_REAL_GATE -type f -print0 | sort -z | xargs -0 sha256sum) > "$E/$p/V651_REAL_V649_SUCCESSOR_SHA256.txt"
++ wp eval-file "$v649root/03_REAL_GATE/public_coverage_target_bridge_v649.php" --path="$WP" --allow-root > "$E/$p/05_v649.log" 2>&1 || return 1; grep -Fxq 'PUBLIC_COVERAGE_TARGET_BRIDGE_V649_OK' "$E/$p/05_v649.log" || return 1
++ printf 'V649_REAL_PRECHECKPOINT_FIXTURE=EXPECTED_RED\nV651_REAL_V649_CHECKPOINT_SUCCESSOR=PASS\n' > "$E/$p/V651_REAL_V649_CONTRACT.txt"
+  wp eval-file "$PKG/03_REAL_GATE/checkpoint_restart_contract_v651.php" --path="$WP" --allow-root > "$E/$p/06_v651.log" 2>&1 || return 1; grep -Fq 'CHECKPOINT_RESTART_REAL_V651_OK' "$E/$p/06_v651.log" || return 1
+  echo REAL_GATE=PASS > "$E/$p/RESULT.txt"
+ }

@@ -1,0 +1,75 @@
+diff -ruN /mnt/data/work_v650/steps/step1/affiliate-portal-router/includes/trait-ppar-ebay-run.php /mnt/data/work_v650/steps/step2/affiliate-portal-router/includes/trait-ppar-ebay-run.php
+--- a/includes/trait-ppar-ebay-run.php	2026-08-21 14:06:35.614452372 +0000
++++ b/includes/trait-ppar-ebay-run.php	2026-08-21 14:06:35.614728270 +0000
+@@ -650,6 +650,59 @@
+         $this->ebay_run_compare_and_swap($loaded_run,$run);
+     }
+ 
++    /**
++     * V6.50 state-only recovery for a V6.49 terminal safe-supply-gap result.
++     *
++     * V6.49 had already completed the canonical targeted BUSINESS gap-fill but
++     * still converted any remaining family without a public safe winner into the
++     * global terminal error insufficient_safe_sources. V6.50 may reopen only when
++     * the persisted V6.49 gap-fill selection itself proves that every still
++     * missing family had no safely selectable winner. Same UUID, no rediscovery,
++     * no reselection and no quality-rule mutation.
++     */
++    public function maybe_migrate_ebay_safe_supply_gap_v6500() {
++        $run=$this->ebay_run_load();
++        if((string)($run['schema']??'')!=='1.0'){return;}
++        $loaded_run=$run;
++        if(sanitize_key((string)($run['status']??''))!=='failed'
++            || sanitize_key((string)($run['error_code']??''))!=='insufficient_safe_sources'){return;}
++        $failure=$this->ebay_run_last_failure_entry($run,'insufficient_safe_sources');
++        $details=is_array($failure['details']??null)?$failure['details']:array();
++        if(sanitize_key((string)($details['phase']??''))!=='coverage_verify'){return;}
++        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
++        if(strpos($failure_build,'6.49.0-')!==0){return;}
++
++        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
++        if(empty($routes['business'])){return;}
++        $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
++        if(!empty($coverage['error_code']) || empty($coverage['missing']) || absint($run['gapfill']['attempts']??0)<1){return;}
++        $result=$this->ebay_run_business_safe_supply_gap_contract($run,$coverage);
++        if(($result['status']??'')!=='pass'){return;}
++
++        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
++        if($uuid===''){return;}
++        $failure_at=absint($failure['at']??$run['finished_at']??0);
++        $marker=hash('sha256',$uuid.'|'.$failure_at.'|safe_supply_gap_contract|6.50.0');
++        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
++        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
++        $history[]=array(
++            'at'=>time(),'reason'=>'safe_supply_gap_contract_recovery',
++            'error_code'=>'insufficient_safe_sources','migration_key'=>$marker,
++            'open_gap_count'=>count((array)($result['coverage']['open_gaps']??array())),
++            'preserved_components'=>1,
++        );
++        if(count($history)>8){$history=array_slice($history,-8);}
++
++        $run['recovery_history']=$history;
++        $run['coverage']=(array)$result['coverage'];
++        $run['status']='running';$run['phase']='public_verify';$run['finished_at']=0;
++        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
++        $run['resume_reason']='safe_supply_gap_contract_recovery';$run['no_progress_count']=0;
++        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
++        $run['end_manifest']=array();
++        $this->ebay_run_compare_and_swap($loaded_run,$run);
++    }
++
+     /** Backward-compatible entry point retained for older test harnesses. */
+     public function maybe_recover_ebay_false_no_progress_v6420() {
+         return $this->maybe_migrate_ebay_progress_contract_v6421();
+     }
+diff -ruN /mnt/data/work_v650/steps/step1/affiliate-portal-router/pferdeportal-affiliate-router.php /mnt/data/work_v650/steps/step2/affiliate-portal-router/pferdeportal-affiliate-router.php
+--- a/pferdeportal-affiliate-router.php	2026-08-21 12:02:57.000000000 +0000
++++ b/pferdeportal-affiliate-router.php	2026-08-21 14:06:35.622383059 +0000
+@@ -199,6 +199,7 @@
+         add_action('init', array($this, 'maybe_migrate_ebay_public_freshness_v6460'), 7);
+         add_action('init', array($this, 'maybe_migrate_ebay_dynamic_business_rule_context_v6470'), 8);
+         add_action('init', array($this, 'maybe_migrate_ebay_public_coverage_target_v6490'), 9);
++        add_action('init', array($this, 'maybe_migrate_ebay_safe_supply_gap_v6500'), 10);
+         add_action('init', array($this, 'maybe_migrate_ebay_worker_transport_v6412'), 10);
+         add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11);
+         add_action('init', array($this, 'ensure_automation_schedule'), 21);

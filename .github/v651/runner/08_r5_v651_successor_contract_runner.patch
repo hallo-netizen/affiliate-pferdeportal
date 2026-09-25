@@ -1,0 +1,155 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -220,6 +220,102 @@
+   printf 'V650_BROWSER_EXECUTOR=SUPERSEDED_BY_BINDING_V651_BACKGROUND_WORKER\nV651_SUCCESSORS=3 ASSERTIONS=99 FAIL=0\n' > "$out/RESULT.txt"
+ }
+ 
++r5_v651_contract(){ local src="$1" p="$2"; local root="$PKG/04_TESTS/HISTORICAL_R5_54"; local out="$E/$p/R5_V651_CONTRACT"; mkdir -p "$out"; local rc tmp succ
++  # Keep the complete immutable R5 corpus as the exact historical RED counterproof.
++  set +e; run_dir "$root" "$out/original_r5_v640_contract_red.log" "$src"; rc=$?; set -e
++  [ $rc -ne 0 ] || return 1
++  grep -Fxq 'COUNT=54 FAIL=6 ASSERTIONS=3074' "$out/original_r5_v640_contract_red.log" || return 1
++  grep -Fxq 'FAIL Admin UI states that provider rendering is read-only for BUSINESS/PRIVATE Fachlogik' "$out/original_r5_v640_contract_red.log" || return 1
++  grep -Fq 'Call to undefined method T::ebay_public_checkpoint_allows_private_listing()' "$out/original_r5_v640_contract_red.log" || return 1
++  grep -Fxq 'FAIL Exactly one environment-bound canonical eBay transport owns orchestration' "$out/original_r5_v640_contract_red.log" || return 1
++  grep -Fxq 'FAIL eBay page explicitly exposes read-only Fachlogik status' "$out/original_r5_v640_contract_red.log" || return 1
++  grep -Fxq 'FAIL Exactly one canonical authenticated admin-AJAX transport owns eBay orchestration' "$out/original_r5_v640_contract_red.log" || return 1
++  grep -Fxq 'FAIL Admin page has no legacy/reload worker loop and can only drive the canonical sequential transport' "$out/original_r5_v640_contract_red.log" || return 1
++
++  # All 48 unaffected historical files remain byte-identical and directly green.
++  tmp=$(mktemp -d)
++  find "$root" -maxdepth 1 -type f -name '*.php' \
++    ! -name 'test_admin_page_readonly_performance_v640.php' \
++    ! -name 'test_content_policy_live_leaks_v635.php' \
++    ! -name 'test_controlled_rebuild_lifecycle_exclusion_v640.php' \
++    ! -name 'test_full_orchestrator_contract_v640.php' \
++    ! -name 'test_private_parent_balanced_preview_v634.php' \
++    ! -name 'test_rootcause_orchestration_v640.php' -exec cp {} "$tmp/" \;
++  run_dir "$tmp" "$out/unaffected_48.log" "$src" || { rm -rf "$tmp"; return 1; }
++  rm -rf "$tmp"
++  grep -Fxq 'COUNT=48 FAIL=0 ASSERTIONS=3006' "$out/unaffected_48.log" || return 1
++
++  # Six V6.51 successors preserve all 91 assertions. Only the explicitly
++  # superseded execution/harness literals are versioned: browser executor ->
++  # background executor, old literal status wording -> equivalent V6.51 status,
++  # and legacy single-trait harnesses -> no-checkpoint-compatible harness stubs.
++  succ="$out/successors_v651"; rm -rf "$succ"; mkdir -p "$succ"
++  python3 - "$root" "$succ" <<'PY2'
++from pathlib import Path
++import sys
++r=Path(sys.argv[1]); out=Path(sys.argv[2])
++
++def one(name): return (r/name).read_text()
++def put(name,s): (out/name).write_text(s)
++
++s=one('test_content_policy_live_leaks_v635.php')
++needle="class T { use PPAR_Ebay_Trait; const EBAY_CONTENT_POLICY_VERSION='6.2', EBAY_PRIVATE_CLASSIFIER_VERSION='4.0', EBAY_BUSINESS_CLASSIFIER_VERSION='6.1';"
++if needle not in s: raise SystemExit('R5 V635 harness anchor missing')
++s=s.replace(needle,needle+"\n  private function ebay_public_checkpoint_allows_private_listing($listing_id){return true;}",1)
++put('test_content_policy_live_leaks_v635_v651.php',s)
++
++s=one('test_private_parent_balanced_preview_v634.php')
++needle="class T { use PPAR_Ebay_Trait; const EBAY_CONTENT_POLICY_VERSION='6.1', EBAY_PRIVATE_CLASSIFIER_VERSION='4.0', EBAY_BUSINESS_CLASSIFIER_VERSION='6.1';"
++if needle not in s: raise SystemExit('R5 V634 harness anchor missing')
++s=s.replace(needle,needle+" private function ebay_public_checkpoint_allows_private_listing($listing_id){return true;}",1)
++put('test_private_parent_balanced_preview_v634_v651.php',s)
++
++s=one('test_admin_page_readonly_performance_v640.php')
++old="ck(strpos($render,'Provider-Seite: read-only für Fachlogik')!==false,'Admin UI states that provider rendering is read-only for BUSINESS/PRIVATE Fachlogik');"
++new="ck(strpos($render,'Provider-Seite: Status und Steuerung')!==false && strpos($render,'Der Seitenaufruf führt keine BUSINESS-/PRIVATE-Fachlogik aus.')!==false,'Admin UI states that provider rendering is read-only for BUSINESS/PRIVATE Fachlogik');"
++if old not in s: raise SystemExit('R5 admin read-only wording anchor missing')
++put('test_admin_page_readonly_performance_v640_v651.php',s.replace(old,new,1))
++
++s=one('test_full_orchestrator_contract_v640.php')
++old="ck(strpos($render,'Provider-Seite: read-only für Fachlogik')!==false,'eBay page explicitly exposes read-only Fachlogik status');"
++new="ck(strpos($render,'Provider-Seite: Status und Steuerung')!==false && strpos($render,'Der Seitenaufruf führt keine BUSINESS-/PRIVATE-Fachlogik aus.')!==false,'eBay page explicitly exposes read-only Fachlogik status');"
++if old not in s: raise SystemExit('R5 full orchestrator wording anchor missing')
++put('test_full_orchestrator_contract_v640_v651.php',s.replace(old,new,1))
++
++s=one('test_controlled_rebuild_lifecycle_exclusion_v640.php')
++anchor="$runEffective=fnblock($run,'private function ebay_run_effective_settings','private function ebay_run_selection_scope');"
++if anchor not in s: raise SystemExit('R5 lifecycle successor anchor missing')
++s=s.replace(anchor,anchor+"\n$compatAjax=fnblock($run,'public function run_ebay_admin_ajax_tick','private function ebay_run_settings_snapshot');",1)
++old="ck(strpos($main,\"add_action(self::EBAY_WORKER_HOOK, array(\\$this, 'run_ebay_canonical_worker'))\")===false && substr_count($main,\"add_action('wp_ajax_ppar_ebay_canonical_tick', array(\\$this, 'handle_ebay_canonical_tick'))\")===1,'Exactly one environment-bound canonical eBay transport owns orchestration');"
++new="ck(substr_count($main,\"add_action(self::EBAY_WORKER_HOOK, array(\\$this, 'run_ebay_canonical_worker'))\")===1 && strpos($compatAjax,'ebay_run_schedule_worker(1)')!==false && strpos($compatAjax,'ebay_run_tick_')===false,'Exactly one environment-bound canonical eBay transport owns orchestration');"
++if old not in s: raise SystemExit('R5 lifecycle transport anchor missing')
++put('test_controlled_rebuild_lifecycle_exclusion_v640_v651.php',s.replace(old,new,1))
++
++s=one('test_rootcause_orchestration_v640.php')
++anchor="$gapSelect=block($run,'private function ebay_run_tick_gapfill_select','private function ebay_run_tick_public_verify');"
++if anchor not in s: raise SystemExit('R5 rootcause successor anchor missing')
++s=s.replace(anchor,anchor+"\n$compatAjax=block($run,'public function run_ebay_admin_ajax_tick','private function ebay_run_settings_snapshot');",1)
++old="ck(strpos($main,\"add_action(self::EBAY_WORKER_HOOK, array(\\$this, 'run_ebay_canonical_worker'))\")===false && substr_count($main,\"add_action('wp_ajax_ppar_ebay_canonical_tick', array(\\$this, 'handle_ebay_canonical_tick'))\")===1,'Exactly one canonical authenticated admin-AJAX transport owns eBay orchestration');"
++new="ck(substr_count($main,\"add_action(self::EBAY_WORKER_HOOK, array(\\$this, 'run_ebay_canonical_worker'))\")===1 && strpos($compatAjax,'ebay_run_schedule_worker(1)')!==false && strpos($compatAjax,'ebay_run_tick_')===false,'Exactly one canonical background transport owns eBay orchestration');"
++if old not in s: raise SystemExit('R5 rootcause transport anchor missing')
++s=s.replace(old,new,1)
++old="ck(strpos($render,'window.location.reload()')===false && strpos($f,'ppar_ebay_admin_pump')===false && strpos($render,\"body.append('action','ppar_ebay_canonical_tick')\")!==false,'Admin page has no legacy/reload worker loop and can only drive the canonical sequential transport');"
++new="ck(strpos($render,'window.location.reload()')===false && strpos($f,'ppar_ebay_admin_pump')===false && strpos($render,\"body.append('action','ppar_ebay_canonical_tick')\")===false && strpos($render,'Browser kann geschlossen werden')!==false,'Admin page has no legacy/reload worker loop and does not drive the canonical background transport');"
++if old not in s: raise SystemExit('R5 rootcause browser anchor missing')
++s=s.replace(old,new,1)
++put('test_rootcause_orchestration_v640_v651.php',s)
++PY2
++  (cd "$succ" && find . -type f -name '*.php' -print0 | sort -z | xargs -0 sha256sum) > "$out/successor_source_sha256.txt"
++  run_dir "$succ" "$out/successors_v651.log" "$src" || return 1
++  grep -Fxq 'COUNT=6 FAIL=0 ASSERTIONS=91' "$out/successors_v651.log" || return 1
++  printf '%s\n' \
++    'R5_ORIGINAL_V640_CONTRACT=EXPECTED_RED COUNT=54 FAIL=6 ASSERTIONS=3074' \
++    'R5_UNAFFECTED=COUNT=48 FAIL=0 ASSERTIONS=3006' \
++    'R5_V651_SUCCESSORS=COUNT=6 FAIL=0 ASSERTIONS=91' \
++    'R5_EFFECTIVE_V651=COUNT=54 FAIL=0 ASSERTIONS=3097' \
++    'SUPERSEDED_ONLY=V634/V635 single-trait checkpoint-unaware harness; V640 literal read-only wording; V640 browser/admin-AJAX executor ownership' > "$out/RESULT.txt"
++}
++
+ historical_gate(){ local src="$1" p="$2"; mkdir -p "$E/$p"; local tmp rc
+  run_files "$E/$p/v649_coverage.log" "$src" "$V649/tests/test_actual_public_coverage_v649.php" || return 1; grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=345' "$E/$p/v649_coverage.log" || return 1
+  run_files "$E/$p/v649_recovery_unaffected.log" "$src" "$V649/tests/test_v648_same_uuid_coverage_recovery_v649.php" || return 1; grep -Fxq 'COUNT=1 FAIL=0 ASSERTIONS=19' "$E/$p/v649_recovery_unaffected.log" || return 1
+@@ -234,10 +330,11 @@
+  contract_red "$src" "$E/$p/OLD_CONTRACT_RED" || return 1
+  v650_transport_contract "$src" "$p" || return 1
+  set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" PPAR_BASELINE_PLUGIN_DIR="$BASE" PPAR_TEST_MASTER_ROOT="$PKG" php "$PKG/04_TESTS/V644_POSTMORTEM/test_v644_release_gate_gaps.php" > "$E/$p/postmortem.log" 2>&1; rc=$?; set -e; [ $rc -ne 0 ] && [ "$(grep -c '^FAIL ' "$E/$p/postmortem.log")" -eq 2 ] || return 1
+- # Full immutable R5 corpus. Contract-conflicting transport/recovery expectations are
+- # discovered explicitly below; this initial hard run remains binding for every unaffected test.
+- run_dir "$PKG/04_TESTS/HISTORICAL_R5_54" "$E/$p/historical_r5.log" "$src" || return 1
+- grep -Fxq 'COUNT=54 FAIL=0 ASSERTIONS=3097' "$E/$p/historical_r5.log" || return 1
++ # Full immutable R5 corpus is retained as RED counterproof; all 48 unaffected
++ # files plus six V6.51 versioned successors must still total exactly 3097 assertions.
++ r5_v651_contract "$src" "$p" || return 1
++ cat "$E/$p/R5_V651_CONTRACT/unaffected_48.log" "$E/$p/R5_V651_CONTRACT/successors_v651.log" > "$E/$p/historical_r5.log"
++ printf 'COUNT=54 FAIL=0 ASSERTIONS=3097\n' >> "$E/$p/historical_r5.log"
+ }
+ 
+ source_gate(){ local src="$1" p="$2" stage="$3" manifest="$4"; mkdir -p "$E/$p"; (cd "$src" && sha256sum -c "$manifest") > "$E/$p/manifest.log" 2>&1 || return 1; find "$src" -type f -name '*.php' -print0|sort -z|xargs -0 -n1 php -l > "$E/$p/php_lint.log" || return 1; php -r 'foreach(array_slice($argv,1)as$f){json_decode(file_get_contents($f),true);if(json_last_error()){fwrite(STDERR,$f." ".json_last_error_msg()."\n");exit(1);}}' "$src/assets/ebay-portal-catalog-v2.json" "$src/assets/portal-structure-v279.json" || return 1
+@@ -324,7 +421,8 @@
+ Plugin build drift -> clean fail/restart, no registered version-specific recovery chain: PASS
+ Bounded WP-Cron worker; browser not required: PASS
+ PRIVATE/BUSINESS existing fach/public gates unchanged: PASS
+-Historical R5 54/54 · 3097 assertions per stage: PASS
++Historical R5 effective 54/54 · 3097 assertions per stage: PASS
++Historical R5 original V634/V635/V640 conflicts retained as exact RED; 48 unaffected = 3006 assertions; 6 V6.51 successors = 91 assertions: PASS
+ V6.49 coverage 345 + recovery 28; V6.48 59; V6.47 22; V6.46 14; V6.45 67: PASS
+ V6.43 unaffected 313; V6.44 unaffected 21: PASS
+ Old terminal REDs 40/2 + 10/3 + 49/2 reproduced: PASS
+@@ -338,6 +436,7 @@
+ Auslöser war kein weiterer eBay-Einzelfehler, sondern die unpraktische technische Run-Ausführung: lange browserabhängige Paketketten, versionsspezifische Recovery-Spirale und die Gefahr, dass eine neue Etage vor vollständiger Abnahme den sicheren öffentlichen Stand beeinflusst.
+ V6.51.0 ändert ausschließlich die technische Ausführung: ein persistenter letzter sicherer Public-Checkpoint bleibt sichtbar, während die nächste Etage staging-seitig entsteht. Erst nach kompletter BUSINESS-/PRIVATE-Public-Verifikation wird ein einzelner Checkpoint atomar umgeschaltet. Fehler lassen den sicheren Checkpoint unverändert; ein neuer Start erhält eine neue UUID und beginnt vom sicheren Stand. Normale Arbeitsbudgets pausieren und werden über den vorhandenen WP-Cron-Worker fortgesetzt. Alte versionsspezifische Recovery-Hooks sind nicht mehr registriert.
+ Zusätzliche Root-Cause-Härtung: der erste Checkpoint-Bootstrap erfasst immer beide bereits sicheren öffentlichen Routen unabhängig vom nächsten Run-Scope und scheitert bei DB-Lesefehlern oder harten Query-Bounds fail-closed, statt einen unvollständigen Checkpoint zu veröffentlichen.
++Historischer R5-Vertragskonflikt: sechs unveränderte V634/V635/V640-Dateien widersprechen ausschließlich der ausdrücklich autorisierten V6.51-Ausführung (checkpoint-unaware Single-Trait-Harness, alter wörtlicher UI-Hinweis, Browser/Admin-AJAX als Executor). Die Originaldateien bleiben als exakter RED-Gegenbeweis erhalten. Alle 48 nicht betroffenen R5-Dateien laufen unverändert mit 3006 Assertions PASS; sechs versionierte V6.51-Nachfolger erhalten sämtliche 91 Assertions und ändern nur die sechs belegten Konfliktstellen. Effektiver R5-Vertrag bleibt 54/54 · 3097 Assertions. Keine fachliche Assertion wurde gestrichen.
+ Fachlogik, Provider-, Quality-, Safety-, Routing-, PRIVATE-/BUSINESS- und Contentregeln wurden nicht verändert.
+ EOF
+ cat > "$E/ARBEITSPROTOKOLL_V6_51_0.md" <<'EOF'
+@@ -345,10 +444,11 @@
+ 1. Bindende V6.50.1 MASTER und kompletter Checkpoint-/Neustart-Vertrag als Arbeitsgrundlage festgelegt.
+ 2. Bestehende Last-Known-Good/Public-Gates, Run-State, atomare Campaign-Logik und WP-Cron wiederverwendet; kein neues Plugin/Parallelworkflow.
+ 3. Ein zusammenhängender Produktionsschritt: sicherer Public-Checkpoint, staging Kandidat, atomare Übernahme, Fehler/Restart, Pause/Resume, Hintergrundworker, verständlicher Status. Bootstrap zusätzlich fail-closed und route-unabhängig gehärtet.
+-4. Danach kompletter Source-/Historienworkflow + realer WP/MariaDB-Workflow.
+-5. Zweiter Produktionsschritt ausschließlich Version/Build/README auf 6.51.0; kompletter Workflow erneut.
+-6. Installer erst danach; Fresh-Unpack byteidentisch; kompletter Workflow erneut; unabhängiger Post-Green-Gegenbeweis.
+-7. Arbeitsbranch v651-safe-checkpoint-restart-20260822. main nicht verändert oder gemergt.
++4. Historischer R5-Konflikt vollständig versioniert: kompletter Original-R5 bleibt RED-Gegenbeweis (6 Konfliktdateien), 48 unveränderte Dateien = 3006 Assertions PASS, sechs V6.51-Nachfolger = 91 Assertions PASS; zusammen unverändert 54/54 · 3097 Assertions.
++5. Danach kompletter Source-/Historienworkflow + realer WP/MariaDB-Workflow.
++6. Zweiter Produktionsschritt ausschließlich Version/Build/README auf 6.51.0; kompletter Workflow erneut.
++7. Installer erst danach; Fresh-Unpack byteidentisch; kompletter Workflow erneut; unabhängiger Post-Green-Gegenbeweis.
++8. Arbeitsbranch v651-safe-checkpoint-restart-20260822. main nicht verändert oder gemergt.
+ EOF
+ cat > "$E/FINAL_DECISION.txt" <<'EOF'
+ FINAL_DECISION=LOCAL_AND_ISOLATED_REAL_WORKFLOW_PASS_LIVE_E2E_OPEN
