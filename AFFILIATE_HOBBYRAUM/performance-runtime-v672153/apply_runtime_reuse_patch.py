@@ -5,7 +5,7 @@ import sys
 
 EXPECTED_SHA256 = "c2fd6d86cd9d8c8398f19185fa64f6d4cd020cfcf748ef86ca974d8f853f990a"
 TARGET_VERSION = "6.72.153"
-
+# 2026-09-25: revalidate against current authoritative 6.72.152 source tree; no semantic change.\n
 if len(sys.argv) != 2:
     raise SystemExit("usage: apply_runtime_reuse_patch.py <plugin-root>")
 
