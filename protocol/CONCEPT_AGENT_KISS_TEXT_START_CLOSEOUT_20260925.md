@@ -191,3 +191,36 @@ Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpoin
 - Jede nicht-terminale Übergabe bleibt im selben bestehenden Ablauf; der gebundene Worker setzt vorwärts sowie nach Repair/Rückgabe unmittelbar mit der nächsten gebundenen Aktion fort.
 - Nur der vorhandene terminale STOP beendet den Lauf.
 - Fachlogik, Artikelregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL und Publish bleiben unverändert.
+
+
+## Nachholprüfung nach PR #413 — 2026-09-25
+
+Status dieses Abschnitts: Historie/Nachweis. **Keine CURRENT-Autorität und keine eigene NEXT-ACTION-Wahrheit.**
+
+- PR #413 `Restore current-state resume and no-stop handoffs` ist gemergt.
+- Merge-Commit / aktuelles main: `20488acc7d371765df99573e74a04e519adaccdd`.
+- Der Merge ist auf fünf Dateien begrenzt: `concept_agent/START_HERE.md`, `concept_agent/full_workflow_gate.py`, `concept_agent/production_bridge.py`, `concept_agent/progress_guard.py`, dieses Protokoll.
+- Geschützte globale Start-/Root-Dateien wurden nicht verändert.
+- Ein vorhandener gültiger Produktions-Checkpoint wird beim Wiedereinstieg weiterverwendet; kein Rückfall auf einen neuen Anfangs-Checkpoint.
+- Jede nicht-terminale Übergabe bleibt im selben bestehenden Ablauf. Das gilt vorwärts sowie bei Repair/Rückgabe. Nur `STOP` ist terminal.
+- Artikel-/Qualitätsregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL und Publish wurden nicht geändert.
+
+### Frischecheck nach Merge
+- `concept_agent/START_HERE.md` und `concept_agent/CONTROL_ENTRY_POINTER.json` routen weiterhin eindeutig auf genau eine Current-Autorität: `control/startmaster0107/CURRENT_STATE.json`.
+- Die technische Hashbindung zwischen `PFERDE_ATELIER_START_HERE.json` und `CURRENT_STATE.json` ist auf main weiterhin konsistent.
+- Die Current-Autorität selbst enthält jedoch noch den Vor-PR-#413-Stand `CONCEPT_AGENT_PROCESS_TRIGGER_BOUND_EXECUTION_PROOF_OPEN` und die alte NEXT ACTION `PROVE_EXISTING_BOUND_PROCESS_TRIGGER_EXECUTION_END_TO_END`.
+- Damit ist die Current-Autorität nach dem realen Merge #413 **inhaltlich veraltet**.
+- Eine isolierte Änderung von `CURRENT_STATE.json` ist verboten, weil deren SHA-256 in der geschützten `PFERDE_ATELIER_START_HERE.json` gebunden ist. Beides muss gemeinsam konsistent bleiben; der geschützte Root-Pfad darf nicht durch eine Nebenroute umgangen werden.
+
+### Erster offener Blocker
+`CURRENT_AUTHORITY_NOT_SYNCED_AFTER_PR413`
+
+Der fachliche Fix liegt auf main, aber die einzige Current-Autorität ist noch nicht auf diesen Stand nachgezogen.
+
+### Exakt eine NEXT ACTION
+Den gemergten PR-#413-Stand über den **bereits vorgesehenen autorisierten Current/Root-Synchronisationsweg** in die eine Current-Autorität nachziehen, ohne neuen Weg, neue Architektur, neue Produktionssteuerung oder einseitige Hash-Änderung. Erst danach darf die daraus neu gebundene NEXT ACTION ausgeführt werden.
+
+### Tests / PASS
+- Für PR #413 wurden keine zusätzlichen fachlichen Gesamtstreckentests angefordert oder ausgeführt.
+- Der Merge selbst ist kein Gesamt-E2E-Nachweis.
+- Deshalb kein neuer Gesamt-PASS behauptet.
