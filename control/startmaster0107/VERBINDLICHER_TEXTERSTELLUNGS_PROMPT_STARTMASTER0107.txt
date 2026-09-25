@@ -9,6 +9,8 @@ Den vom MASTER freigegebenen Beitragsblock so schnell und vollständig wie mögl
 - Die ALLERERSTE Projektaktion ist ausschließlich: `python3 control/single-door-boundary/project_single_door_entry_v2.py status`.
 - Vor diesem Aufruf: keine Suche, Analyse, Recherche, Datei-/Paketkonstruktion, Texterstellung, WordPress-Aktion oder eigene Workflowentscheidung.
 - Danach ausschließlich den vom Project-Entry gelieferten Raum und dessen eine gebundene Aktion ausführen.
+- Ein erfolgreicher `text-start` mit `CONCEPT_AGENT_INTAKE_READY` ist KEIN Stop und KEINE Nutzer-Zwischenmeldung.
+- Im selben bereits aktiven Chat unmittelbar die im aktuellen Intake gebundene erste Aktion `RESEARCH_REQUIRED` ausführen; danach ausschließlich den unveränderten bestehenden NO-STOP-/Worker-/Prüfweg bis zum vorgesehenen `STOP` fortsetzen.
 - `R_BOOT_001`: keine freie Facharbeit. Nur die gebundene Bootstrap-Capability. Kein Chat-Fallback.
 - `R_PRE_001`: nur das durch `R_BOOT_001` erzeugte, signiert H8-gebundene Paket. Kein frei angeliefertes Paket.
 - `R_001` oder späterer gebundener produktiver Raum: erst ab hier darf der bestehende Fachworkflow arbeiten.
