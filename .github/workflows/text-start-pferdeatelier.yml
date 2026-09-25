@@ -166,6 +166,5 @@ jobs:
           path: |
             CONCEPT_AGENT_INTAKE_RECEIPT.json
             CONCEPT_AGENT_INTAKE.json
-            control/startmaster0107/CURRENT_STATE.json
           if-no-files-found: error
           retention-days: 30
