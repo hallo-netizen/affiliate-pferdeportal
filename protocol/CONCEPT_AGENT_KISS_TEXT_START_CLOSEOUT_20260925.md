@@ -184,3 +184,10 @@ Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpoin
 ## PR #412 — Gebundener Arbeitszettel im WRITE_DRAFT-Trigger
 - Minimalfix ausschließlich an der bestehenden Chat-Worker-Übergabe: Bei `WRITE_DRAFT` wird genau das bereits maschinell gebundene aktuelle Work-Item mitgegeben.
 - Keine freie Artikel-, Regel-, Link- oder Stufenauswahl; LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL und Publish bleiben unverändert.
+
+## Minimalfix Arbeitsstand + durchgehende Übergaben 2026-09-25
+- Kein Architekturumbau, keine neue Route, kein neuer Runner.
+- Ein bereits vorhandener gültiger Produktions-Checkpoint wird beim erneuten Einstieg weiterverwendet und nicht durch einen neuen Anfangs-Checkpoint ersetzt.
+- Jede nicht-terminale Übergabe bleibt im selben bestehenden Ablauf; der gebundene Worker setzt vorwärts sowie nach Repair/Rückgabe unmittelbar mit der nächsten gebundenen Aktion fort.
+- Nur der vorhandene terminale STOP beendet den Lauf.
+- Fachlogik, Artikelregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL und Publish bleiben unverändert.
