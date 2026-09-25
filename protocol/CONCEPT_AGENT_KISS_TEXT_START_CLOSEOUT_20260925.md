@@ -58,7 +58,7 @@ Ergebnis: **CURRENT-Autorität = BLOCKED / nicht synchronisierbar, bis der Hardl
 
 Zusätzlich ist die Concept-Agent-Bürotür bis zum Merge von PR #399 **BLOCKED**: Sie routet zwar eindeutig auf genau eine Current-Autorität, enthält auf main aber noch die überholte `MACHINE_READY`-/`kein zweites text-start`-Regel. PR #399 korrigiert genau dieses Delta. Die technisch hashgebundenen Felder in `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` werden nicht entfernt, weil vorhandene Guards sie aktiv prüfen; sie sind keine separat erfundene Current-Autorität.
 
-## Exakt eine NEXT ACTION
+## Historisch damals gebundene NEXT ACTION — nicht Current
 **Den bestehenden Hardlock-Konflikt für exakt PR #399 auf dem bereits autorisierten Repository-Regelweg lösen, ohne den Diff von PR #399 zu erweitern oder einen neuen Produktionsweg zu bauen. Danach #399 mergen und unmittelbar die vorhandene komplette positive/negative Strecke vom Startknopf bis zur Dateiausgabe ausführen.**
 
 ## Verbindlicher Arbeitsweg
@@ -217,10 +217,21 @@ Status dieses Abschnitts: Historie/Nachweis. **Keine CURRENT-Autorität und kein
 
 Der fachliche Fix liegt auf main, aber die einzige Current-Autorität ist noch nicht auf diesen Stand nachgezogen.
 
-### Exakt eine NEXT ACTION
+### Historisch damals gebundene NEXT ACTION — nicht Current
 Den gemergten PR-#413-Stand über den **bereits vorgesehenen autorisierten Current/Root-Synchronisationsweg** in die eine Current-Autorität nachziehen, ohne neuen Weg, neue Architektur, neue Produktionssteuerung oder einseitige Hash-Änderung. Erst danach darf die daraus neu gebundene NEXT ACTION ausgeführt werden.
 
 ### Tests / PASS
 - Für PR #413 wurden keine zusätzlichen fachlichen Gesamtstreckentests angefordert oder ausgeführt.
 - Der Merge selbst ist kein Gesamt-E2E-Nachweis.
 - Deshalb kein neuer Gesamt-PASS behauptet.
+
+
+## Current-Synchronisierung nach PR #413 — 2026-09-25
+
+Status dieses Abschnitts: Historie/Nachweis. **Keine CURRENT-Autorität und keine eigene NEXT-ACTION-Wahrheit.**
+
+- Current-Synchronisierung vorbereitet für den bereits gemergten PR #413.
+- Einzige Current-Autorität bleibt `control/startmaster0107/CURRENT_STATE.json`.
+- Root `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` wird ausschließlich mit dem dazugehörigen neuen Current-SHA-256 nachgezogen; keine Startlogik wird verändert.
+- Current nennt keinen geratenen Artikelstand. Der operative Laufstand darf ausschließlich aus einem vorhandenen gültigen `CONCEPT_AGENT_CURRENT_PROGRESS_V1`-Checkpoint stammen.
+- Fehlt ein gültiger Checkpoint, gilt STOP/BLOCKED statt Rekonstruktion.
