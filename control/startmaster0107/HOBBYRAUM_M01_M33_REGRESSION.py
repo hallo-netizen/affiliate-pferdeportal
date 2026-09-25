@@ -502,6 +502,17 @@ def m38():
     must("plan_contract_version" in handoff and plan_version in handoff,"M38_HANDOFF_PLAN_CONTRACT_VERSION_NOT_BOUND")
     must("required_plugin_version" in handoff and plugin_version in handoff,"M38_HANDOFF_PLUGIN_VERSION_NOT_BOUND")
 
+def m39():
+    release=(REPO/"control/output-quarantine/output_release_gate.py").read_text(encoding="utf-8")
+    github=(REPO/"control/startmaster0107/GITHUB_FINAL_RELEASE.py").read_text(encoding="utf-8")
+    chat=(REPO/"control/startmaster0107/chat_delivery_payload.py").read_text(encoding="utf-8")
+    must('RELEASE_IDENTITY_CONTRACT = "PFERDE_ATELIER_OUTPUT_RELEASE_IDENTITY_V1"' in release,"M39_RELEASE_IDENTITY_CONTRACT_MISSING")
+    must('"release_identity_sha256"' in release,"M39_RELEASE_IDENTITY_PROPAGATION_MISSING")
+    must('destination = release_root / prepared["release_identity_sha256"]' in release,"M39_VISIBLE_RELEASE_IDENTITY_MISSING")
+    must('durable_release_archive" / prepared["release_identity_sha256"]' in release,"M39_DURABLE_RELEASE_IDENTITY_MISSING")
+    must('"release_identity_sha256"' in github and '"content_batch_sha256"' in github,"M39_GITHUB_ENDSTEMPEL_IDENTITY_MISSING")
+    must('"release_identity_sha256"' in chat,"M39_PARENT_CHAT_RELEASE_IDENTITY_MISSING")
+
 def m35_machine_proof_selftest():
     good="""$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
@@ -520,7 +531,7 @@ CASES=[
 ("M01",m01),("M02",m02),("M03",m03),("M04",m04),("M05",m05),("M06",m06),("M07",m07),("M08",m08),("M09",m09),("M10",m10),
 ("M11",m11),("M12",m12),("M13",m13),("M14",m14),("M15",m15),("M16",m16),("M17",m17),("M18",m18),("M19",m19),("M20",m20),
 ("M21",m21),("M22",m22),("M23",m23),("M24",m24),("M25",m25),("M26",m26),("M27",m27),("M28",m28),("M29",m29),("M30",m30),
-("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36),("M37",m37),("M38",m38)]
+("M31",m31),("M32",m32),("M33",m33),("M34",m34),("M35",m35),("M36",m36),("M37",m37),("M38",m38),("M39",m39)]
 
 def _run_ordered(cases,phase):
     results=[]
@@ -560,14 +571,14 @@ def main(argv):
     if argv not in ([],["--open-only"]): raise Fail("USAGE: [--open-only] | --case MXX | --proof-selftest M28|M35")
 
     # Repair phase: do not duplicate already-proven old positives while an open
-    # regression still fails. Once M26-M38 are resolved, automatically run the
+    # regression still fails. Once M26-M39 are resolved, automatically run the
     # one required final M01-M38 suite on the same head.
     if open_only:
-        open_results=_run_ordered(CASES[25:],"OPEN_M26_M38")
+        open_results=_run_ordered(CASES[25:],"OPEN_M26_M39")
         if open_results is None:return 2
         print("OPEN_REGRESSIONS_PASS",flush=True)
 
-    results=_run_ordered(CASES,"FINAL_M01_M38")
+    results=_run_ordered(CASES,"FINAL_M01_M39")
     if results is None:return 2
 
     # Required final re-check against the last real production regression.
