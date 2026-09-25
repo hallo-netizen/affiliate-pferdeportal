@@ -67,6 +67,12 @@ class OriginalWorkflowResumeButtonTests(unittest.TestCase):
         self.assertIn("concept_agent/universal_reentry_guard.py build", workflow)
         self.assertIn("concept_agent/progress_guard.py resume", workflow)
         self.assertFalse((ROOT / "concept_agent/github_batch_executor.py").exists())
+        self.assertIn("issues: read", workflow)
+        self.assertNotIn("issues: write", workflow)
+        self.assertNotIn("gh api", workflow)
+        self.assertNotIn("pferde_original_executor.py", workflow)
+        self.assertIn("REENTRY_VERIFIED_WORKER_ATTACHMENT_MISSING", workflow)
+        self.assertIn("exit 2", workflow.split("Require existing bound worker attachment", 1)[1])
 
     def test_active_route_has_no_obsolete_worker_product_binding(self):
         forbidden = ("co" + "dex").lower()
