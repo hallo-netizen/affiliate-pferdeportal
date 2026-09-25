@@ -327,6 +327,104 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertIs(result["worker_return_must_reenter_progress_guard"], False)
         self.assertIs(result["terminal"], True)
 
+    def test_every_nonterminal_checkpoint_emits_immediate_bound_worker_trigger(self):
+        binding = self._binding(1)
+        state = self._checkpoint(binding)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+
+            def assert_trigger(current_state, expected_action, expected_checker=None):
+                decision = self._decision(binding, current_state)
+                result = progress_guard.resume(binding, current_state, decision)
+                self.assertEqual(result["status"], "RESUME_ALLOWED")
+                self.assertEqual(result["allowed_action"]["action"], expected_action)
+                if expected_checker is not None:
+                    self.assertEqual(result["allowed_action"].get("checker"), expected_checker)
+                self.assertEqual(result["bound_worker"], "BOUND_CHAT_WORKER")
+                self.assertIsNotNone(result["process_trigger"])
+                self.assertEqual(result["process_trigger"]["allowed_action"], result["allowed_action"])
+                self.assertEqual(result["process_trigger"]["return_to"], "concept_agent/progress_guard.py")
+                self.assertIs(result["process_trigger"]["exactly_once_for_checkpoint"], True)
+                self.assertIs(result["process_trigger"]["return_required"], True)
+                self.assertIs(result["worker_must_execute_allowed_action_immediately"], True)
+                self.assertIs(result["worker_return_must_reenter_progress_guard"], True)
+                return decision
+
+            decision = assert_trigger(state, "WRITE_DRAFT")
+            draft = self._draft(root, binding, 0, "v1")
+            state = progress_guard.record_draft(binding, state, decision, 0, draft)
+
+            decision = assert_trigger(state, "RUN_CHECKER", "LT68")
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "x"}]}, draft
+            )
+
+            decision = assert_trigger(state, "REPAIR_DRAFT", "LT68")
+            draft.write_text("v2", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision = assert_trigger(state, "RUN_CHECKER", "LT68")
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft
+            )
+
+            decision = assert_trigger(state, "RUN_CHECKER", "PPM679")
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "y"}]}, draft
+            )
+
+            decision = assert_trigger(state, "REPAIR_DRAFT", "PPM679")
+            draft.write_text("v3", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision = assert_trigger(state, "RUN_CHECKER", "LT68")
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft
+            )
+
+            decision = assert_trigger(state, "RUN_CHECKER", "PPM679")
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "PASS", "content_sha256": sha}, draft
+            )
+
+            decision = assert_trigger(state, "RUN_PSERC")
+            pserc = {
+                "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+                "stage": "PSERC", "status": "PASS",
+                "batch_sha256": binding["batch_sha256"],
+                "source_checkpoint_sha256": state["checkpoint_sha256"],
+                "evidence_sha256": hashlib.sha256(b"pserc-evidence").hexdigest(),
+                "pserc_package_sha256": hashlib.sha256(b"pserc-package").hexdigest(),
+                "publish_allowed": False,
+            }
+            state = progress_guard.record_batch_stage(binding, state, decision, "PSERC", pserc)
+
+            decision = assert_trigger(state, "RUN_ENDSTEMPEL")
+            end = {
+                "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+                "stage": "ENDSTEMPEL", "status": "PASS",
+                "batch_sha256": binding["batch_sha256"],
+                "source_checkpoint_sha256": state["checkpoint_sha256"],
+                "evidence_sha256": hashlib.sha256(b"end-evidence").hexdigest(),
+                "final_file_sha256": hashlib.sha256(b"final-file").hexdigest(),
+                "publish_allowed": False,
+            }
+            state = progress_guard.record_batch_stage(binding, state, decision, "ENDSTEMPEL", end)
+
+            decision = self._decision(binding, state)
+            result = progress_guard.resume(binding, state, decision)
+            self.assertEqual(result["status"], "STOP")
+            self.assertIsNone(result["process_trigger"])
+            self.assertIs(result["continuation_required"], False)
+
     def test_missing_or_wrong_checkpoint_stops_before_decision(self):
         binding = self._binding()
         state = self._checkpoint(binding)
