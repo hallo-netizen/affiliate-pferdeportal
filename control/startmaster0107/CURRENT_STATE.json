@@ -119,7 +119,9 @@
     "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED",
     "TEXT_START_TARGET_CURRENT_CONCEPT_AGENT_1N_BINDING_PREPARED",
     "UPSTREAM_REPAIR_FIXED_RETURN_LIMIT_REMOVED",
-    "TEXT_START_CENTRAL_BINDING_SYNCED"
+    "TEXT_START_CENTRAL_BINDING_SYNCED",
+    "PR410_TEXT_START_ENTRY_FIX_MERGED_6961C0902E2E24348015BD866C73AB771DA7B931",
+    "TEXT_START_RUN22_START_36175325674_PASS_RECEIVER_36175343523_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -230,7 +232,7 @@
     "code": "PROCESS_TRIGGER_EXECUTION_NOT_YET_PROVEN",
     "error_class": true,
     "classification": "FIRST_OPEN_BLOCKER",
-    "detail": "PR #405 is merged on main. progress_guard emits exactly one checkpoint-bound process_trigger for each non-terminal allowed_action and no trigger at STOP. Required hardlock and hardlock-base checks passed on PR head 496fc76839570f4b9308af2e6f54a3e0dd0cc726. A real end-to-end run proving that the existing bound worker consumes every trigger and starts the corresponding process through the whole chain has not yet been executed.",
+    "detail": "PR #410 is merged on main at 6961c0902e2e24348015bd866c73ab771da7b931 and makes CONCEPT_AGENT_INTAKE_READY non-terminal for the already active chat, requiring immediate RESEARCH_REQUIRED. Real run #22 proved text-start run 36175325674 PASS and Pferdeatelier receiver run 36175343523 PASS on that main head, with a valid 16-item intake artifact. The chat was interrupted for closeout before a completed RESEARCH result / CONCEPT_AGENT_RESEARCH_BOUND_V1 and before end-to-end continuation were proven. Therefore the first open blocker remains real execution proof from RESEARCH_REQUIRED through the unchanged bound worker chain to STOP.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -294,9 +296,10 @@
   "hobbyroom_blocker": "NONE",
   "next_action": {
     "goal": "PROVE_EXISTING_BOUND_PROCESS_TRIGGER_EXECUTION_END_TO_END",
-    "action": "Using only the existing Concept Agent path, run the current 1..N batch and prove that each checkpoint-bound process_trigger is consumed exactly once by the existing bound worker, its allowed_action actually starts, the worker result returns to progress_guard, repair stays on the same article until PASS, and the chain continues through PSERC and ENDSTEMPEL to STOP. Do not add a runner, alternate route, API/GitHub production control, or publish.",
-    "why": "PR #405 has already implemented the checkpoint-bound trigger and passed the required hardlock checks at the PR head. The only remaining open point is real execution proof.",
+    "action": "Resume the current 16-item Concept Agent batch from the valid run #22 intake. Execute the bound first action RESEARCH_REQUIRED in the already active chat, return the real result through the existing guards, and continue the unchanged bound chain through article production, LT 6.8, PPM 6.7.9, repair on the same article when required, PSERC, ENDSTEMPEL and STOP. Do not restart the batch, add a runner, alternate route, API/GitHub production-progress control, or publish.",
+    "why": "PR #410 has fixed only the initial chat entry after CONCEPT_AGENT_INTAKE_READY. Run #22 proved start and receiver, but the closeout interruption occurred before the first completed research result and before end-to-end proof.",
     "forbidden": [
+      "restart the current batch unless the canonical reentry guard explicitly requires it",
       "create a new runner or alternate route",
       "add API or GitHub production-progress control",
       "change text-start beyond start-button behavior",
@@ -525,7 +528,7 @@
     "chat_may_choose_action": false,
     "first_open_blocker": "PROCESS_TRIGGER_EXECUTION_NOT_YET_PROVEN",
     "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT",
-    "process_trigger_binding_status": "MERGED_TRIGGER_BOUND_EXECUTION_PROOF_OPEN",
+    "process_trigger_binding_status": "TEXT_START_ENTRY_FIXED_E2E_EXECUTION_PROOF_OPEN",
     "process_trigger_pr": 405,
     "process_trigger_merge_sha": "dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5"
   },
