@@ -174,3 +174,9 @@ Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpoin
 ## PR #408 — Live Outer Worker Trigger
 - Minimalfix ausschließlich im bestehenden Concept-Agent-Routing: jede nicht-terminale äußere Stufe bindet jetzt denselben BOUND_CHAT_WORKER mit genau einem hashgebundenen process_trigger, sofortiger Ausführungspflicht und verpflichtender Rückkehr in full_workflow_gate.py.
 - Keine Änderung an Recherche-/Artikelregeln, LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL oder Publish.
+
+
+## PR #410 — Startpunkt unmittelbar vor RESEARCH_REQUIRED
+- Ausschließlich Einstiegskorrektur: `CONCEPT_AGENT_INTAKE_READY` ist für den bereits aktiven Chat nicht terminal.
+- Ohne Nutzer-Zwischenmeldung sofort `RESEARCH_REQUIRED`; danach bleibt die bestehende NO-STOP-/Worker-/Prüfkette unverändert.
+- Keine Änderung an Übergaben, Workern, LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL oder Publish.
