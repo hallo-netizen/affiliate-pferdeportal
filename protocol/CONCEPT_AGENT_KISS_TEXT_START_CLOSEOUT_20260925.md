@@ -180,3 +180,11 @@ Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpoin
 - Ausschließlich Einstiegskorrektur: `CONCEPT_AGENT_INTAKE_READY` ist für den bereits aktiven Chat nicht terminal.
 - Ohne Nutzer-Zwischenmeldung sofort `RESEARCH_REQUIRED`; danach bleibt die bestehende NO-STOP-/Worker-/Prüfkette unverändert.
 - Keine Änderung an Übergaben, Workern, LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL oder Publish.
+
+
+## Abschlussdelta nach Run #22
+- PR #410 wurde auf main als `6961c0902e2e24348015bd866c73ab771da7b931` gemergt. Änderung ausschließlich an `concept_agent/START_HERE.md`: `CONCEPT_AGENT_INTAKE_READY` ist für den bereits aktiven Chat kein Stop; unmittelbar `RESEARCH_REQUIRED`.
+- Pflichtchecks vor Merge: Deterministic Entrance Gate / hardlock PASS; Immutable Base Hardlock / hardlock-base PASS.
+- Echter 16er-Lauf #22: text-start run `36175325674` PASS; Pferdeatelier receiver run `36175343523` PASS; Artifact `pferdeatelier-start-36175325674` vorhanden; main head `6961c0902e2e24348015bd866c73ab771da7b931`.
+- Nicht als PASS belegt: abgeschlossene echte Recherche / `CONCEPT_AGENT_RESEARCH_BOUND_V1` aus Run #22 und die anschließende End-to-End-Kette. Der Chat wurde durch die Abschluss-/Übergabeanforderung unterbrochen.
+- Aktuelle Wahrheit bleibt ausschließlich `control/startmaster0107/CURRENT_STATE.json`; dieses Protokoll ist nur Historie/Nachweis.
