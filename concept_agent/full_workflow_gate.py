@@ -497,7 +497,7 @@ def verify_current_entry(pointer_path: Path, current_state_path: Path, outdir: P
             raise Blocked("CURRENT_" + name + "_COUNT_INVALID")
     if lt_count > body_count or ppm_count > body_count:
         raise Blocked("CURRENT_VALIDATOR_COUNT_AHEAD_OF_ARTICLES")
-    if next_article != min(body_count, count):
+    if next_article != min(ppm_count, count):
         raise Blocked("CURRENT_NEXT_ARTICLE_INDEX_MISMATCH")
 
     article_stage_pass = body_count == count and lt_count == count and ppm_count == count
@@ -717,6 +717,8 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
         "continuation_required": not terminal,
         "worker_must_execute_allowed_operation_immediately": not terminal,
         "worker_return_must_reenter_full_workflow_gate": not terminal,
+        "handoff_is_terminal": terminal,
+        "same_bound_worker_must_continue_without_return": not terminal,
     }
     if terminal:
         ticket["process_trigger"] = None
@@ -733,6 +735,8 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
             "exactly_once_for_stage": True,
             "return_required": True,
             "return_to": "concept_agent/full_workflow_gate.py",
+            "handoff_is_terminal": False,
+            "same_bound_worker_must_continue_without_return": True,
             "publish_allowed": False,
         }
         ticket["process_trigger"] = dict(trigger_core)
