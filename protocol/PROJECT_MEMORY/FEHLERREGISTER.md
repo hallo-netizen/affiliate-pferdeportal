@@ -57,6 +57,21 @@ Release-/Governance-Autorität ebenfalls auf `affiliate-release-current`:
 - `control/release-governance/CURRENT_RELEASE.json`
 - `release/affiliate-zentrale/AGENTS.md`
 
+## PFERDE-ATELIER-KATEGORIEINTEGRATION
+
+Bereich: PFERDE ATELIER / KATEGORIEN / PLUGIN-STRUKTUR  
+Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
+
+Autoritative Fehler-/Änderungsquelle:
+Branch `affiliate-release-current` →
+`protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md`
+
+Aktuelle Status-/Blocker-/NEXT-ACTION-Autorität:
+Branch `affiliate-release-current` →
+`control/release-governance/CURRENT_RELEASE.json`
+
+Dieses Register kopiert keine Fehlerdetails und keine NEXT ACTION.
+
 ## BILD-249-LOCAL-PREVIEW
 
 Bereich: BILD  

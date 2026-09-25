@@ -1,7 +1,7 @@
 # AFFILIATE – CURRENT STATE
 
-STAND: 2026-09-12
-STATUS: ADCELL API-V2-KANDIDAT LOKAL GEPRÜFT / KANONISCHE RÜCKBINDUNG OFFEN
+STAND: 2026-09-24
+STATUS: KATEGORIE-SCOPE CLOSED / ADCELL + OTTO-AWIN PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED
 
 ## AUTORITÄT
 
@@ -13,7 +13,22 @@ Diese Datei ist die einzige aktuelle Campus-Standzusammenfassung des Büros AFFI
 - technische Release-Autorität → Branch `affiliate-release-current`
 - technischer Scope → `protocol/AFFILIATE_RELEASE_ADCELL_AUTOMATION_SCOPE_20260911.md`
 
-## VERBINDLICHES ZIEL
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Die separate Kategorieintegration ist inzwischen technisch geschlossen. Autorität dafür ist ausschließlich `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+
+Aktueller gebundener Kategorie-Stand der Affiliate-Zentrale:
+- Version **6.72.152**
+- Portalstruktur: **1149 Produktionskategorien / 334 Produktseiten**
+- Affiliate-Katalog: **1149 Artikelkategorien / 334 Produktziele**
+- Final Closeout Run `36005442270`: **SUCCESS**
+- Hard Baseline Run `36005442188`: **SUCCESS**
+
+HARD RULE: Diese Kategoriearbeit ist geschlossen und darf nicht durch den älteren ADCELL-Arbeitsstand unten wieder geöffnet werden. ADCELL/Providerarbeit ist ein separater Arbeitsstrang.
+
+## HISTORISCHER / PAUSIERTER ADCELL-ZIELSTAND
+
+Der folgende ADCELL-Zielstand ist **nicht aktuell freigegeben** und wird nur als pausierte Historie erhalten. Wiederaufnahme nur auf neue ausdrückliche Nutzeranweisung.
 
 ADCELL vollautomatisch über API v2:
 
@@ -64,8 +79,8 @@ Der ADCELL-Kontozugang ist weiterhin nicht wiederhergestellt. Deshalb ist echter
 
 ## NEXT ACTION
 
-Exakt aus `HOBBYRAUM.md`:
+Für Kategorie/Struktur: **NONE / CLOSED**.
 
-**Die drei lokal bereits geprüften ADCELL-Source-Dateien bytegenau auf `affiliate-release-current` zurückbinden, Manifest/Governance atomar an diesen committed Sourcezustand binden und dieselben Gates auf dem committed Stand erneut ausführen.**
+Für ADCELL/OTTO-Awin: **NONE, solange keine neue ausdrückliche Nutzeranweisung zur Wiederaufnahme vorliegt.**
 
-Erst danach Fresh-Unpack + Source/ZIP-Identity und Test-Plugin. Live-PASS erst nach echtem ADCELL-Zugang.
+Die frühere Rückbindungsaktion bleibt historische Information und ist keine aktuelle Ausführungsfreigabe.

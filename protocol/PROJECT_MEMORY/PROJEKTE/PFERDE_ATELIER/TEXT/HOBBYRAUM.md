@@ -1,7 +1,24 @@
 # PFERDE ATELIER – TEXT – HOBBYRAUM
 
-STAND: 2026-09-11
-STATUS: BLOCKED – EIN FRISCHER ARTIKEL REALTEST IST NEXT ACTION
+STAND: 2026-09-24
+STATUS: KATEGORIE-SCOPE CLOSED / SEPARATE PRODUKTIONSHISTORIE UNTEN NICHT ALS KATEGORIE-NEXT-ACTION VERWENDEN
+
+## KATEGORIE-KONTROLLPUNKT 2026-09-24
+
+Kategorie-/Strukturscope: **PASS / CLOSED**.
+
+Aktuelle Kategorie-relevante Text-/Produktionsplugins:
+- Runtime Verifier 1.0.0
+- Production Center 1.1.1
+- Link Policy Gate 1.0.1
+- PPM 6.7.9
+- PSERC 0.28.23
+- PSTE 0.57.12
+
+Finale Runs: `36005442270` SUCCESS und `36005442188` SUCCESS.
+
+**NEXT ACTION für Kategorie/Struktur: NONE.**
+Der unten dokumentierte M37/Ein-Artikel-Realtest gehört zu einem separaten älteren Produktionsarbeitsstrang und darf den geschlossenen Kategorieauftrag nicht wieder öffnen.
 
 ## ABGESCHLOSSENE HOBBYRAUMARBEIT M37
 

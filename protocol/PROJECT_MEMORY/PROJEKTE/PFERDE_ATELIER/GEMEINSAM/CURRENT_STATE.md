@@ -1,7 +1,19 @@
 # GEMEINSAM – CURRENT STATE
 
-STAND: 2026-09-05
-STATUS: AKTIV / KEIN OFFENER AUFTRAG
+STAND: 2026-09-24
+STATUS: AKTIV / KATEGORIE-SCOPE NACHGEFÜHRT / KEIN OFFENER KATEGORIEAUFTRAG
+
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Portal Category Structure Repair Guard **1.0.1** wurde im finalen Kategorie-Consumer-Audit geprüft.
+
+Ergebnis:
+- absichtlich kleiner Repair-Vertrag;
+- keine statische Vollkopie der 1149 Kategorien;
+- kein Kategorie-Delta erforderlich;
+- Kategorie-/Strukturscope: **CLOSED / PASS**.
+
+Technische Abschlussautorität: `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
 
 ## AUTORITÄT DIESER DATEI
 

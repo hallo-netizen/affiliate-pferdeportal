@@ -1,8 +1,27 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-12
+STAND: 2026-09-24
 QUELLE: WordPress-Screenshotinventur des Nutzers + bereits vorhandene Campus-/Fachbelege
 REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Autorität.
+
+## INVENTARDELTA 2026-09-24 – KATEGORIE-SCOPE FINAL
+
+Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorieabschlusses. Diese Werte superseden für den Kategorieauftrag die entsprechenden älteren Registerzeilen; alle fachfremden Registerzeilen bleiben unverändert.
+
+| ID | Plugin | Aktuell gebundener Kategorie-Stand 24.09.2026 | Fachbüro |
+|---|---|---:|---|
+| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.559** | DESIGN |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | **6.72.152** | AFFILIATE |
+| PA-E-004 | Allgemeine Bildzentrale | **2.7.6** | BILD |
+| PA-E-013 | Portal Link Policy Runtime Verifier | **1.0.0** | TEXT |
+| PA-E-014 | Portal Production Center | **1.1.1** | TEXT |
+| PA-E-015 | Portal Production Link Policy Gate | **1.0.1** | TEXT |
+| PA-E-016 | Portal Production Machine | **6.7.9** | TEXT |
+| PA-E-017 | Portal SEO Redaktionsplan Compiler | **0.28.23** | TEXT |
+| PA-E-019 | Portal SEO Themenengine | **0.57.12** | TEXT |
+| PA-E-027 | Portal Category Structure Repair Guard | **1.0.1** | GEMEINSAM |
+
+**Regel:** Dies ist Inventar-/Routing-Synchronisierung. Fach-/Release-/LIVE-Wahrheit bleibt im jeweiligen Fachbüro/technischen Original. Kategorie-/Strukturscope ist laut technischer Current-Autorität geschlossen; daraus folgt keine allgemeine Updatefreigabe für fachfremde Plugins.
 
 ## LEGENDE
 
@@ -20,20 +39,20 @@ REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Auto
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | 1.50.472 | aktiv | **KRITISCH · BEHALTEN** | `../DESIGN/START_HERE.md` |
+| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | 1.50.559 | aktiv | **KRITISCH · BEHALTEN** | `../DESIGN/START_HERE.md` |
 | PA-E-002 | Pferde Atelier – Anzeigenmarkt & Journal Breadcrumbs | 1.1.1 | aktiv | **WICHTIG · BEHALTEN**; Schnittstelle zu HIVEPRESS | `../DESIGN/START_HERE.md` + `../HIVEPRESS/START_HERE.md` |
 
 ## AFFILIATE
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.17 | aktiv | **KRITISCH · BEHALTEN**; installierte Version gegen Releaseautorität abgleichen | `../AFFILIATE/START_HERE.md` |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.152 | aktiv | **KRITISCH · BEHALTEN**; installierte Version gegen Releaseautorität abgleichen | `../AFFILIATE/START_HERE.md` |
 
 ## BILD
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-004 | Allgemeine Bildzentrale | 2.6.9 | aktiv | **WICHTIG · BEHALTEN** | `../BILD/START_HERE.md` |
+| PA-E-004 | Allgemeine Bildzentrale | 2.7.6 | aktiv | **WICHTIG · BEHALTEN** | `../BILD/START_HERE.md` |
 
 ## HIVEPRESS / ANZEIGENMARKT
 
@@ -56,9 +75,9 @@ REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Auto
 | PA-E-014 | Portal Production Center | 1.1.1 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-015 | Portal Production Link Policy Gate | 1.0.1 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-016 | Portal Production Machine | 6.7.9 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
-| PA-E-017 | Portal SEO Redaktionsplan Compiler | 0.28.20 | aktiv | **KRITISCH · BEHALTEN**; Fach-/Releasebeleg frisch abgleichen | `../TEXT/START_HERE.md` |
+| PA-E-017 | Portal SEO Redaktionsplan Compiler | 0.28.23 | aktiv | **KRITISCH · BEHALTEN**; Fach-/Releasebeleg frisch abgleichen | `../TEXT/START_HERE.md` |
 | PA-E-018 | Portal SEO Redaktionsplan Compiler | 0.28.16 | **inaktiv** | **ALTREST · ENTFERNUNG PRÜFEN**; erst Abhängigkeit/Rollback/Pluginroot klären | `../TEXT/START_HERE.md` |
-| PA-E-019 | Portal SEO Themenengine | 0.56.25 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
+| PA-E-019 | Portal SEO Themenengine | 0.57.12 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-020 | PPM-Quellpaket Exporter | 1.0.0 | aktiv | **HILFSWERKZEUG · AUFRÄUMKANDIDAT**, wenn Nachweisexport nicht mehr gebraucht wird | `../TEXT/START_HERE.md` |
 | PA-E-021 | SEO-Quellpaket Exporter | 1.0.0 | aktiv | **HILFSWERKZEUG · AUFRÄUMKANDIDAT**, wenn Nachweisexport nicht mehr gebraucht wird | `../TEXT/START_HERE.md` |
 

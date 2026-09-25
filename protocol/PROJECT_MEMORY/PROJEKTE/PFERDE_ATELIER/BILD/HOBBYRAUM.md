@@ -1,7 +1,13 @@
 # BILD – HOBBYRAUM
 
-STAND: 2026-09-05
-STATUS: FREI
+STAND: 2026-09-24
+STATUS: FREI / KATEGORIE-SCOPE 2.7.6 CLOSED
+
+## KATEGORIE-KONTROLLPUNKT 2026-09-24
+
+Allgemeine Bildzentrale **2.7.6**: keine statische Vollkopie der Pferdeportal-Kategorien, kein Delta erforderlich, Kategorie-Scope **CLOSED / PASS**.
+
+NEXT ACTION Kategorie/Struktur: **NONE**.
 
 ## 1-KLICK-ÜBERSICHT
 

@@ -1,6 +1,6 @@
 # CAMPUS – START_HERE
 
-STAND: 2026-09-05
+STAND: 2026-09-16
 STATUS: AKTIVER CAMPUS-EINGANG
 
 ## 1-KLICK-ÜBERSICHT
@@ -12,10 +12,10 @@ Die oberste Eingangstür des Campus.
 du einen neuen Chat startest, ein Projekt/Büro suchst oder einfach in Alltagssprache sagst, wohin du willst.
 
 **DU DARFST …**  
-dein Ziel normal formulieren. Der Hauptpförtner ordnet Projekt und Büro zu und liest den aktuellen Stand.
+dein Ziel normal formulieren. Der Hauptpförtner ordnet Projekt und Büro zu und führt zur zuständigen Bürotür.
 
 **DU DARFST NICHT …**  
-am Eingang Fachinhalte ändern oder unbekannte Arbeitswege erfinden.
+am Eingang Fachinhalte ändern, einen Arbeitsweg erfinden oder aus dieser Tür einen aktuellen Fach-/Branch-/Teststand ableiten.
 
 **ALS NÄCHSTES …**  
 `HAUPTPFOERTNER.md`.
@@ -36,21 +36,17 @@ Diese Aussagen sind gleichwertige Routingaufträge:
 
 Der Nutzer muss keine Dateipfade oder Fachbegriffe auswendig kennen.
 
-## Aktueller technischer Hinweis
+## KISS – keine aktuelle Fachwahrheit an der Campus-Tür
 
-Der Campus-Prototyp liegt noch NICHT auf `main`.
+Diese oberste Tür ist ausschließlich Navigation.
 
-Aktueller Ort:
-- Repository: `hallo-netizen/affiliate-pferdeportal`
-- Branch: `hobbyroom/project-memory-campus-v1-20260905`
-- Pfad: `protocol/PROJECT_MEMORY/`
+Sie speichert deshalb **keinen aktuellen Branch, Head, Commit, Test-/Run-Stand, Fachblocker oder NEXT ACTION**. Solche Angaben würden zwangsläufig veralten und einen neuen Chat auf einen falschen Einstieg schicken.
 
-Solange das so ist, ist für einen völlig neuen Chat ohne bekannten Repository-Kontext der robuste Einstieg:
+Verbindlicher Weg:
+`START_HERE.md` → `HAUPTPFOERTNER.md` → zuständige Bürotür → genau eine zuständige `CURRENT_STATE` → Frischecheck gegen den echten letzten Arbeits-/Teststand → `NEXT ACTION`.
 
-`Öffne im GitHub-Repo hallo-netizen/affiliate-pferdeportal den Branch hobbyroom/project-memory-campus-v1-20260905 und gehe zu protocol/PROJECT_MEMORY/START_HERE.md. Danach: Pferde-Atelier → TEXT/SEO.`
-
-Nach späterer Verlagerung/Merge in den dauerhaften Campus-Hauptort reicht die Alltagssprache allein.
-
+Autorität für diese Regel:
+`BAUCONTAINER/EINGANGSSTANDARD.md` → **KISS-Einstieg – eine Tür, eine CURRENT_STATE, Frischecheck**.
 
 ## HARD RULE – PROTOKOLLPFLICHT
 
@@ -66,4 +62,3 @@ aktuellen Campus-/Fachstand zuerst frisch lesen und nur tatsächlich betroffene 
 
 Autorität:
 `protocol/PROJECT_MEMORY/BAUCONTAINER/EINGANGSSTANDARD.md` → **Backup-/Tresor-/Archiv-Sperre**.
-

@@ -1,7 +1,7 @@
 # PLUGINS – HOBBYRAUM
 
-STAND: 2026-09-12
-STATUS: FREI
+STAND: 2026-09-24
+STATUS: FREI / KATEGORIE-PLUGIN-SYNC CLOSED
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -22,7 +22,7 @@ Bei neuem Auftrag: `CURRENT_STATE.md` → `REGELWERK.md` → `protocol/PROJECT_M
 
 ## AKTUELLE ARBEIT
 
-Keine technische Pluginarbeit gebunden.
+Kategorie-relevante Pluginstände und Fachbüro-Routing sind auf den finalen 24.09.-Closeout synchronisiert. Keine technische Pluginarbeit gebunden.
 
 NEXT ACTION: `NONE`.
 

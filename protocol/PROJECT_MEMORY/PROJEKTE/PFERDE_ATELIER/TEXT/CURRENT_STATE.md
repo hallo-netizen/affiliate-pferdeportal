@@ -1,7 +1,25 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-09-11
-STATUS: BLOCKED / ONE-FRESH-ARTICLE REALTEST NEXT
+STAND: 2026-09-24
+STATUS: KATEGORIE-SCOPE CLOSED / ÄLTERE PRODUKTIONSHISTORIE UNTEN NICHT ALS AKTUELLE KATEGORIE-NEXT-ACTION
+
+## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
+
+Der frühere Produktionsblocker unten bleibt historische Text-/Produktionslage, ist aber **nicht** der aktuelle Status der abgeschlossenen Kategorieintegration.
+
+Für Kategorie/Struktur sind aktuell gebunden:
+- Portal Link Policy Runtime Verifier **1.0.0** – kein statisches Vollkopie-Delta erforderlich
+- Portal Production Center **1.1.1** – **1149 / 9 / 5790**, Build-Integrity PASS
+- Portal Production Link Policy Gate **1.0.1** – dynamischer/source-getriebener Kategoriepfad
+- Portal Production Machine **6.7.9** – **25/25 neue Kategorien + 125/125 neue Slots PASS**
+- Portal SEO Redaktionsplan Compiler **0.28.23** – vollständiger **1149-Lauf PASS**
+- Portal SEO Themenengine **0.57.12** – **LIVE_READBACK_PASS_CLOSED**, `pferde putztasche` = Recherchekeyword, Kontext PENDING, Originalbegriff erhalten
+
+Finale Kategorie-Nachweise:
+- Run `36005442270` = SUCCESS
+- Run `36005442188` = SUCCESS
+
+Kategorie-/Strukturscope: **CLOSED**. Kein PSERC-, Linkregistry-, E2E- oder Kategorie-Preflight erneut starten ohne neue harte Defektevidenz.
 
 ## EINE AKTUELLE WAHRHEIT
 
@@ -40,9 +58,11 @@ Der letzte frische Lauf vor M37 erreichte realen PPM/PSERC und endete äußerlic
 Der damalige innere Grund ist nicht mehr rekonstruierbar.
 **Produktions-Rootcause bleibt UNKNOWN.**
 
-## NEXT ACTION
+## HISTORISCHE PRODUKTIONS-NEXT-ACTION AUS STAND 2026-09-11
 
-Genau einen frischen ersten Artikel über den offiziellen aktuellen 107007-Weg bis zum realen LanguageTool-/PPM-/PSERC-Handoff ausführen.
+Die folgende Anweisung gehört zum damaligen Produktionsdiagnose-Stand und ist **keine aktuelle Kategorie-NEXT-ACTION**. Kategorie/Struktur ist geschlossen.
+
+Damals vorgesehen: genau einen frischen ersten Artikel über den offiziellen damaligen 107007-Weg bis zum realen LanguageTool-/PPM-/PSERC-Handoff ausführen.
 
 Bei erstem BLOCKED/REPAIR_REQUIRED:
 - exakt stoppen;
