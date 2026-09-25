@@ -1,0 +1,96 @@
+{
+  "system": "SYSTEM3_ISOLATED_ONE_PROCESS",
+  "status": "FROZEN_WAITING_FOR_CODEX_CAPACITY",
+  "authoritative_runtime_scope": "isolated_system3 only",
+  "architecture_branch": "hobbyroom/system3-isolated-one-process-v1",
+  "architecture_head": "5c34cf9e981d4e98134b40818c27a779c45524ce",
+  "codex_live_branch": "hobbyroom/system3-codex-proven-path-v1",
+  "production_or_publish_allowed": false,
+  "frozen": true,
+  "freeze_reason": "CODEX_USAGE_LIMIT_REACHED",
+  "freeze_rule": "No further System 3 changes, repairs, reroutes, fixture edits, rule edits or 7/7 expansion until Codex execution is available and the prepared fixed-link canonical retest has been executed.",
+  "completed": [
+    "isolated fixed process prototype built",
+    "authoritative PPM 6.7.9, PSERC and PSTE rule sources hash-bound and sealed",
+    "sealed-rule tamper negative test blocked correctly",
+    "canonical FAQ type and primary_question contract bound",
+    "canonical_fact_pack_import_v1 supplied with three FULLY_SUPPORTED claims",
+    "negative missing-fact-pack test blocked fail-closed",
+    "negative missing-link-target test blocked fail-closed",
+    "first FAQ artifact returned SYSTEM3_RETURN_PASS and independent sealed-rule artifact audit PASS",
+    "retained legacy 7/7 production package and WordPress WXR re-read; no re-upload required",
+    "fixed canonical internal-link rules re-verified",
+    "retained production plan 02_PRODUKTIONSPLAN_3_ENTWUERFE.json found with materialized link_bindings and portal_link_registry",
+    "fixed Regendecken FAQ bindings restored in System3 fixture",
+    "CI on fixed-link test head passed",
+    "corrected fixed-link retest prepared but not executed because Codex usage limit was reached"
+  ],
+  "fixed_link_rules": {
+    "verified": true,
+    "runtime_path": "runtime_order.links",
+    "required_roles": ["parent_category", "semantic_related", "further_information"],
+    "regendecken_faq_binding": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken",
+        "reason": "Die übergeordnete Fachseite ordnet Regendecken und ihren vorgesehenen Einsatz ein.",
+        "section_id": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/ausruestung/ausruestung-decken/",
+        "anchor": "Pferdedecken",
+        "reason": "Die übergeordnete Deckenseite ergänzt Material-, Einsatz- und Auswahlgrundlagen.",
+        "section_id": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/journal/",
+        "anchor": "Journal",
+        "reason": "Das Journal enthält ergänzende Ratgeber und vertiefende Praxisinformationen.",
+        "section_id": "further_information"
+      }
+    ],
+    "source": "retained 02_PRODUKTIONSPLAN_3_ENTWUERFE.json / link_bindings + portal_link_registry"
+  },
+  "first_canonical_article": {
+    "article_id": "SYSTEM3-LIVE-001",
+    "article_type": "FAQ",
+    "subject": "Woran erkennt man eine passende Regendecke für ein Pferd?",
+    "previous_return_evidence": "PR232 issuecomment-5634085512",
+    "previous_artifact_audit_evidence": "PR232 issuecomment-5634121819",
+    "previous_artifact_sha256": "40075c440c30b393c085f93f4b6f5a1b141877ed33995bae7f945d2f73b0d69d",
+    "previous_link_conformance_status": "SUPERSEDED_FOR_LINK_RULE_PROOF",
+    "detail": "Usable test article exists and passed the prior canonical run plus independent artifact audit, but it used earlier ad-hoc test links. It is available as a test artifact, not the final fixed-link regression proof."
+  },
+  "current_test": {
+    "fixed_link_fixture_commit": "9f3ba4d848d0cd513d4a9727ceedfdbe0d687cb0",
+    "prepared_retry_comment": "PR232 issuecomment-5634341724",
+    "result": "NOT_EXECUTED",
+    "execution_blocker": "CODEX_USAGE_LIMIT_REACHED"
+  },
+  "legacy_7of7_reference": {
+    "production_package": "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+    "production_package_sha256": "8536206bbe34d3cad197186f26870cb75f4f6bb5a7737d4be3684b6522e5feb8",
+    "status": "ENDSTEMPEL_PASS",
+    "article_count": 7,
+    "wordpress_wxr": "GEN1_7_ARTIKEL_KURZWEG_WORDPRESS_IMPORT_AKTUELL.xml"
+  },
+  "current_blocker": {
+    "code": "CODEX_USAGE_LIMIT_REACHED",
+    "detail": "Execution capacity only. No article/rule/link failure has been established after the fixed-link correction.",
+    "resolved": false
+  },
+  "last_safe_state": "System 3 frozen with fixed Regendecken FAQ link bindings in the fixture and green CI. No WordPress write, publish or merge performed.",
+  "next_action": "When Codex is available again, unfreeze only to rerun the exact prepared canonical test on the unchanged fixed-link fixture. Accept only SYSTEM3_RETURN_PASS or first exact SYSTEM3_RETURN_BLOCKED, then independently audit. Only after that expand through the existing 7/7 corpus.",
+  "forbidden": [
+    "any System 3 change while frozen",
+    "treat Codex usage-limit as article/rule/link FAIL",
+    "model/Codex free link selection",
+    "invent or reinterpret fixed link bindings",
+    "rule changes",
+    "alternate route or fallback",
+    "auto-publish or WordPress write"
+  ]
+}
