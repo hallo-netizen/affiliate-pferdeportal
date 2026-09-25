@@ -180,11 +180,44 @@ def prepare_file(snapshot_path: str, out_path: str) -> dict:
     Path(out_path).write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return request
 
+def _start_receipt(result: dict) -> dict:
+    trigger_core = {
+        "contract": "CONCEPT_AGENT_BOUND_START_PROCESS_TRIGGER_V1",
+        "batch_sha256": result["batch_sha256"],
+        "intake_sha256": result["intake_sha256"],
+        "worker": "BOUND_CHAT_WORKER",
+        "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
+        "current_authority_branch": "main",
+        "allowed_operation": "CONTINUE_CURRENT_BOUND_BATCH_FROM_CURRENT_AUTHORITY",
+        "return_to": "concept_agent/full_workflow_gate.py",
+        "handoff_is_terminal": False,
+        "same_bound_worker_must_continue_without_return": True,
+        "exactly_once_for_intake": True,
+        "return_required": True,
+        "publish_allowed": False,
+    }
+    process_trigger = dict(trigger_core)
+    process_trigger["trigger_sha256"] = stable(trigger_core)
+    return {
+        "status": "CONCEPT_AGENT_INTAKE_READY",
+        "batch_sha256": result["batch_sha256"],
+        "item_count": result["item_count"],
+        "intake_sha256": result["intake_sha256"],
+        "bound_worker": "BOUND_CHAT_WORKER",
+        "process_trigger": process_trigger,
+        "continuation_required": True,
+        "worker_must_execute_allowed_operation_immediately": True,
+        "worker_return_must_reenter_full_workflow_gate": True,
+        "handoff_is_terminal": False,
+        "same_bound_worker_must_continue_without_return": True,
+        "publish_allowed": False,
+    }
+
 def main(argv: list[str]) -> int:
     try:
         if len(argv) == 4 and argv[1] == "prepare":
             result = prepare_file(argv[2], argv[3])
-            print(json.dumps({"status":"CONCEPT_AGENT_INTAKE_READY","batch_sha256":result["batch_sha256"],"item_count":result["item_count"],"intake_sha256":result["intake_sha256"],"publish_allowed":False}, ensure_ascii=False, sort_keys=True))
+            print(json.dumps(_start_receipt(result), ensure_ascii=False, sort_keys=True))
             return 0
         raise Blocked("USE: intake_bridge.py prepare SNAPSHOT_JSON OUT_JSON")
     except Exception as exc:
