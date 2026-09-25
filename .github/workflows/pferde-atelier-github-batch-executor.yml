@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  issues: write
+  issues: read
 
 concurrency:
   group: pferdeatelier-original-workflow-resume
@@ -119,9 +119,8 @@ jobs:
           print("PER_ERROR_GITHUB_RESTART_BLOCKED")
           PY
 
-      - name: Execute original production chain
+      - name: Require existing bound worker attachment
         shell: bash
         run: |
-          set -euo pipefail
-          gh api "repos/hallo-netizen/affiliate-pferdeportal/contents/concept_agent/github_batch_executor.py?ref=c1fe5d40e87025bfaafa205f417b126dd1179092" --jq .content | base64 -d > /tmp/pferde_original_executor.py
-          PYTHONPATH="$GITHUB_WORKSPACE/isolated_system4:$GITHUB_WORKSPACE/concept_agent:$GITHUB_WORKSPACE" python3 /tmp/pferde_original_executor.py run
+          echo 'REENTRY_VERIFIED_WORKER_ATTACHMENT_MISSING'
+          exit 2
