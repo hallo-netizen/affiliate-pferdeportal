@@ -12,7 +12,7 @@ Ablauf:
 3. Frischecheck nur auf Delta.
 4. Ausschließlich die eine dort gespeicherte `next_action` ausführen.
 
-**Frischer `text-start`:** `CONCEPT_AGENT_INTAKE_READY` ist kein Stop. Der bereits aktive Chat führt ohne Nutzer-Zwischenmeldung unmittelbar die im Intake gebundene erste Aktion `RESEARCH_REQUIRED` aus. Danach gilt ausschließlich der unveränderte bestehende NO-STOP-/Worker-/Prüfweg bis `STOP`.
+**Jeder `text-start`:** Zuerst wird die aktuelle Current-Autorität gelesen. Liegt für denselben Batch bereits ein begonnener Arbeitsstand vor, ist `CONCEPT_AGENT_INTAKE_READY` nur Eingangs- und Identitätsbestätigung und darf keinen Rücksprung auf `RESEARCH_REQUIRED` oder einen bereits erledigten Schritt auslösen. Es wird exakt die in der Current-Autorität gebundene nächste Aktion fortgesetzt. Nur wenn für diesen Batch noch kein Arbeitsfortschritt existiert, beginnt die erste offene Aktion bei `RESEARCH_REQUIRED`.
 
 Diese Datei enthält bewusst keine eigene Produktionsaktion und keine zweite Statuswahrheit.
 
@@ -42,6 +42,8 @@ Hart verboten:
 Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`.
 
 **Verbindlicher Worker-Anschluss:** Ein gültiges `RESUME_ALLOWED` ist niemals ein Stop. Der bereits gebundene Worker muss die exakt enthaltene `allowed_action` sofort ausführen, seine Rückgabe wieder an `progress_guard.py` geben und die daraus neu gebundene `allowed_action` unmittelbar fortsetzen. Das wiederholt sich ohne freie Auswahl und ohne Benutzer-Zwischenfreigabe bis zur einzigen terminalen Aktion `STOP`. Fehler- oder Repair-Rückgaben bleiben im selben Ablauf und dürfen keinen Neustart oder Alternativweg erzeugen.
+
+**HARD RULE – JEDE ÜBERGABE IN JEDE RICHTUNG:** Jede nicht-terminale Übergabe ist Teil desselben laufenden Arbeitsablaufs und darf weder als fertige Antwort noch als Stop an den Benutzer zurückgegeben werden. Das gilt vorwärts und rückwärts: Schreiben → LT 6.8 → PPM 6.7.9 → bei Befund zurück zur Reparatur desselben Artikels → erneute Prüfung → nach vollständigem PASS nächster Artikel → PSERC → ENDSTEMPEL. Nach jeder Übergabe muss der bereits gebundene Worker die nächste exakt gebundene Aktion unmittelbar ausführen. Ausschließlich die ausdrücklich gebundene terminale Aktion `STOP` beendet den Lauf.
 
 ## Harte Wiedereinstiegsregel — überall
 
