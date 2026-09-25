@@ -306,3 +306,23 @@ REGEL:
 Nach Abschluss/Rückgabe endet die Arbeitsbindung; dauerhafte Wahrheit bleibt in Current-/Protokoll-/Fachquellen.
 BELEG:
 `BAUCONTAINER/HOBBYRAUM_STANDARD.md`
+
+
+## ARCH-091 – Neues Projektgebäude HOBBYRAUSCH mit Plugin-Einzelwahrheit
+
+WAS:
+Neues Projektgebäude `PROJEKTE/HOBBYRAUSCH/` startet leer auf Basis der bewährten Campusregeln.
+
+WARUM:
+Hobbyrausch soll von Anfang an ohne historische Mischzustände aufgebaut werden. Insbesondere darf sich das Pferde-Atelier-Problem mehrerer konkurrierender Pluginstände nicht wiederholen.
+
+REGEL:
+- zentrale Campusdienste Hauptpförtner, Hausmeister, Archiv und Tresor bleiben einmalig zentral;
+- jedes Hobbyrausch-Büro besitzt genau eine Current-Autorität;
+- jedes einzelne Plugin erhält später genau eine Akte `PLUGINS/PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`;
+- unveränderte Originalplugin-Dateien liegen separat unter `.../<PLUGIN-ID>/ORIGINAL/`;
+- Register, Originalablage, Historie und Hobbyraum sind niemals zweite Current-Wahrheiten;
+- Pferde-Atelier ist nur Struktur-/Erfahrungsreferenz, kein automatisch übernommener Bestand.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/START_HERE.md`
