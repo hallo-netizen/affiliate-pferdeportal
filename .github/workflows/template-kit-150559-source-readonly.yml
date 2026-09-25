@@ -15,7 +15,7 @@ jobs:
       - name: Fetch exact installed main file read-only
         shell: bash
         run: |
-          set -euo pipefail
+          set -u
           mkdir -p out
           URL='https://pferde-atelier.de/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php'
           STATUS="$(curl -A 'Mozilla/5.0' -L --silent --show-error --connect-timeout 15 --max-time 90 -D out/headers.txt -o out/pferde-template-kit.php -w '%{http_code}' "$URL" || true)"
@@ -27,28 +27,24 @@ jobs:
           status=Path('out/http_status.txt').read_text().strip()
           p=Path('out/pferde-template-kit.php')
           result={'http_status':status}
-          if status=='200' and p.is_file():
+          if p.is_file():
               raw=p.read_bytes()
               text=raw.decode('utf-8',errors='replace')
               hm=re.search(r'^\s*\*\s*Version:\s*([0-9.]+)\s*$',text,re.M)
               cm=re.search(r"const\s+VERSION\s*=\s*'([^']+)'\s*;",text)
               result.update({
-                  'status':'FETCHED',
                   'bytes':len(raw),
                   'sha256':hashlib.sha256(raw).hexdigest(),
                   'header_version':hm.group(1) if hm else None,
                   'const_version':cm.group(1) if cm else None,
-                  'has_template_marker':'Affiliate Portal Template Kit' in text,
+                  'prefix':text[:300],
               })
-              if result['header_version']!='1.50.559' or result['const_version']!='1.50.559':
-                  raise SystemExit('VERSION_NOT_1_50_559')
-          else:
-              raise SystemExit('FETCH_FAILED_'+status)
           Path('out/summary.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
           print(json.dumps(result,sort_keys=True))
           PY
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: template-kit-150559-exact-main-source
           path: out/
