@@ -56,6 +56,8 @@ CURRENT_STATE wurde **nicht** isoliert verändert, weil seine Hash-Bindung an `c
 
 Ergebnis: **CURRENT-Autorität = BLOCKED / nicht synchronisierbar, bis der Hardlock-Konflikt auf dem bereits vorgesehenen autorisierten Weg gelöst ist.**
 
+Zusätzlich ist die Concept-Agent-Bürotür bis zum Merge von PR #399 **BLOCKED**: Sie routet zwar eindeutig auf genau eine Current-Autorität, enthält auf main aber noch die überholte `MACHINE_READY`-/`kein zweites text-start`-Regel. PR #399 korrigiert genau dieses Delta. Die technisch hashgebundenen Felder in `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` werden nicht entfernt, weil vorhandene Guards sie aktiv prüfen; sie sind keine separat erfundene Current-Autorität.
+
 ## Exakt eine NEXT ACTION
 **Den bestehenden Hardlock-Konflikt für exakt PR #399 auf dem bereits autorisierten Repository-Regelweg lösen, ohne den Diff von PR #399 zu erweitern oder einen neuen Produktionsweg zu bauen. Danach #399 mergen und unmittelbar die vorhandene komplette positive/negative Strecke vom Startknopf bis zur Dateiausgabe ausführen.**
 
@@ -111,7 +113,7 @@ Ergebnis: **CURRENT-Autorität = BLOCKED / nicht synchronisierbar, bis der Hardl
 - Protokoll: NACHGEHOLT
 - Warum: PASS
 - Current-Autorität: BLOCKED
-- Bürotür/Einstiegspunkt: PASS
+- Bürotür/Einstiegspunkt: BLOCKED
 - Frischecheck: DELTA GEPRÜFT
 - Hobbyraum: NICHT BETROFFEN
 - Zielvertrag: PASS
