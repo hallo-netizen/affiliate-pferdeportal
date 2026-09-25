@@ -1,0 +1,64 @@
+name: V6.45 hardened full real gate
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/v645-hard-verified-realgate.yml'
+      - '.github/scripts/verify-v645-full-evidence.sh'
+      - '.github/scripts/run-v645-realgate-ci.sh'
+      - '.github/overlays/v645/soft_failure_recovery.php'
+      - 'CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820.zip'
+
+permissions:
+  contents: read
+
+jobs:
+  hard-realgate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: rootpass
+          MARIADB_DATABASE: v645gate
+          MARIADB_USER: wp
+          MARIADB_PASSWORD: wppass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -uwp -pwppass"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4 with mysqli and WP-CLI
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli
+          tools: wp-cli
+          coverage: none
+
+      - name: Hardened source + full real A-H verification
+        shell: bash
+        run: |
+          chmod +x .github/scripts/run-v645-realgate-ci.sh .github/scripts/verify-v645-full-evidence.sh
+          .github/scripts/verify-v645-full-evidence.sh
+
+      - name: Upload hardened evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V645_HARD_VERIFIED_REALGATE
+          path: |
+            CODEX_V645_REALGATE_EVIDENCE_GHA_20260820.zip
+            V645_EVIDENCE/
+          if-no-files-found: error
+          retention-days: 7
