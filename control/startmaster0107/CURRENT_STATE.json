@@ -225,12 +225,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_TEXT_START_1N_READY_NO_ACTIVE_PRODUCTION_RUN",
+  "current_work_status": "CONCEPT_AGENT_PROCESS_TRIGGER_BOUND_EXECUTION_PROOF_OPEN",
   "current_execution_blocker": {
-    "code": "RESOLVED",
-    "error_class": false,
-    "classification": "RESOLVED",
-    "detail": "Central text-start main and the Pferdeatelier receiver now bind the same existing Concept Agent intake command. The receiver selects the current 1..N batch from CURRENT_STATE and its hash-bound metadata snapshot. The legacy runtime-inbox selector is not used. The fixed upstream repair-return ceiling is removed. No production article has been started by this maintenance.",
+    "code": "PROCESS_TRIGGER_EXECUTION_NOT_YET_PROVEN",
+    "error_class": true,
+    "classification": "FIRST_OPEN_BLOCKER",
+    "detail": "PR #405 is merged on main. progress_guard emits exactly one checkpoint-bound process_trigger for each non-terminal allowed_action and no trigger at STOP. Required hardlock and hardlock-base checks passed on PR head 496fc76839570f4b9308af2e6f54a3e0dd0cc726. A real end-to-end run proving that the existing bound worker consumes every trigger and starts the corresponding process through the whole chain has not yet been executed.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -286,21 +286,20 @@
     "evidence_branch": "test-evidence/real7-live-20260919",
     "evidence_commit": "4b92af33e7d5c900a168086059d638590e98c793"
   },
-  "last_safe_main_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
-  "last_safe_change": "Restart-recovery and pre-Codex start hardlock integrated by PR #352 after exact-head PASS of Deterministic Entrance Gate 35435850207, Immutable Base Hardlock 35435849529 and full System4A acceptance 35435860769. CURRENT closeout stops before Codex. No production text, PPM 6.7.9, LanguageTool 6.8, design or quality threshold changed.",
-  "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
+  "last_safe_main_sha": "dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5",
+  "last_safe_change": "PR #405 merged: one checkpoint-bound process_trigger per non-terminal allowed_action; STOP emits none. hardlock and hardlock-base passed on PR head 496fc76839570f4b9308af2e6f54a3e0dd0cc726. Full real end-to-end trigger consumption remains open.",
+  "hobbyroom_status": "NOT_CURRENT_AUTHORITY",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
+  "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "START_CURRENT_1N_BATCH_VIA_TEXT_START",
-    "action": "On the next explicit production start, use the central hallo-netizen/text-start fixed request START:pferdeatelier. That route must resolve the current batch only through control/startmaster0107/CURRENT_STATE.json and its hash-bound concept_agent/current/PSERC_METADATA_SNAPSHOT.json, then prepare the existing Concept Agent intake. Continue through the existing research/authoring and downstream LT 6.8, PPM 6.7.9, PSERC and ENDSTEMPEL path. Do not publish.",
-    "why": "All maintenance blockers from the handoff are resolved: single Current authority, generic current 1..N selection, central/target text-start binding alignment, and no fixed upstream repair-return ceiling.",
+    "goal": "PROVE_EXISTING_BOUND_PROCESS_TRIGGER_EXECUTION_END_TO_END",
+    "action": "Using only the existing Concept Agent path, run the current 1..N batch and prove that each checkpoint-bound process_trigger is consumed exactly once by the existing bound worker, its allowed_action actually starts, the worker result returns to progress_guard, repair stays on the same article until PASS, and the chain continues through PSERC and ENDSTEMPEL to STOP. Do not add a runner, alternate route, API/GitHub production control, or publish.",
+    "why": "PR #405 has already implemented the checkpoint-bound trigger and passed the required hardlock checks at the PR head. The only remaining open point is real execution proof.",
     "forbidden": [
-      "use legacy runtime_inbox as Concept Agent authority",
-      "invoke legacy parent_start as Concept Agent batch selector",
-      "restore a fixed upstream repair-return limit",
       "create a new runner or alternate route",
+      "add API or GitHub production-progress control",
+      "change text-start beyond start-button behavior",
       "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
       "publish"
     ]
@@ -524,8 +523,11 @@
     "final_wordpress_import_file_present": false,
     "publish_allowed": false,
     "chat_may_choose_action": false,
-    "first_open_blocker": "NONE",
-    "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT"
+    "first_open_blocker": "PROCESS_TRIGGER_EXECUTION_NOT_YET_PROVEN",
+    "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT",
+    "process_trigger_binding_status": "MERGED_TRIGGER_BOUND_EXECUTION_PROOF_OPEN",
+    "process_trigger_pr": 405,
+    "process_trigger_merge_sha": "dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5"
   },
   "text_start_current_binding": {
     "status": "PASS",
