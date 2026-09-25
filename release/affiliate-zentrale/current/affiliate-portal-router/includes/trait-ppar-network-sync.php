@@ -903,33 +903,60 @@ trait PPAR_Network_Sync_Trait {
         // einzelne Originalzeile des Providerreports repraesentieren. OTTO ist
         // eindeutig ueber seine Advertiser-ID. Die generische Awin-Zeile bleibt
         // bei mehreren Fremd-Advertisern bewusst "nicht verfuegbar".
-        $buckets=array('awin'=>array(),'otto'=>array());
+        $buckets=array('awin'=>array(),'otto'=>array(),'idealo'=>array());
         foreach ($rows as $row) {
             if (!is_array($row)) { continue; }
             $advertiser_id=absint($row['advertiserId']??0);
-            $bucket=($advertiser_id>0 && $advertiser_id===absint(self::OTTO_AWIN_ADVERTISER_ID))?'otto':'awin';
+            if ($advertiser_id>0 && $advertiser_id===absint(self::OTTO_AWIN_ADVERTISER_ID)) {
+                $bucket='otto';
+            } elseif ($advertiser_id===84749) {
+                // Existing idealo campaigns are already bound to Awin advertiser 84749.
+                // Use that provider-original Awin row directly; do not derive it locally.
+                $bucket='idealo';
+            } else {
+                $bucket='awin';
+            }
             $buckets[$bucket][]=$row;
         }
         $out=array();
         foreach ($buckets as $bucket=>$bucket_rows) {
-            if (count($bucket_rows)!==1) {
-                $out[$bucket]=null;
+            $details=array();
+            foreach ($bucket_rows as $row) {
+                if (!is_array($row)) { continue; }
+                $conversion=null;
+                foreach (array('conversionRate','conversion','conversion_rate') as $key) {
+                    if (array_key_exists($key,$row) && is_numeric($row[$key])) { $conversion=(float)$row[$key]; break; }
+                }
+                $currency=strtoupper(sanitize_text_field((string)($row['currency']??'EUR')));
+                if (!preg_match('/^[A-Z]{3}$/',$currency)) { $currency='EUR'; }
+                $advertiser_id=absint($row['advertiserId']??0);
+                $label=sanitize_text_field((string)($row['advertiserName']??$row['advertiser']??''));
+                if ($label==='') { $label=$advertiser_id>0 ? 'Awin Advertiser '.$advertiser_id : 'Awin Originalzeile'; }
+                $details[]=array(
+                    'label'=>$label,
+                    'external_id'=>$advertiser_id>0?(string)$advertiser_id:'',
+                    'clicks'=>array_key_exists('clicks',$row)&&is_numeric($row['clicks'])?max(0,(int)$row['clicks']):null,
+                    'orders'=>array_key_exists('totalNo',$row)&&is_numeric($row['totalNo'])?max(0,(int)$row['totalNo']):null,
+                    'sales'=>array_key_exists('totalValue',$row)&&is_numeric($row['totalValue'])?(float)$row['totalValue']:null,
+                    'commission'=>array_key_exists('totalComm',$row)&&is_numeric($row['totalComm'])?(float)$row['totalComm']:null,
+                    'conversion'=>$conversion,
+                    'currency'=>$currency,
+                );
+            }
+            if (count($details)!==1) {
+                // Never calculate a provider total ourselves. Preserve each original
+                // advertiser row so the backend can still show the real provider data.
+                $out[$bucket]=array(
+                    'clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null,
+                    'currency'=>'EUR','details'=>$details,
+                );
                 continue;
             }
-            $row=$bucket_rows[0];
-            $currency=strtoupper(sanitize_text_field((string)($row['currency']??'EUR')));
-            if (!preg_match('/^[A-Z]{3}$/',$currency)) { $currency='EUR'; }
-            $conversion=null;
-            foreach (array('conversionRate','conversion','conversion_rate') as $key) {
-                if (array_key_exists($key,$row) && is_numeric($row[$key])) { $conversion=(float)$row[$key]; break; }
-            }
+            $row=$details[0];
             $out[$bucket]=array(
-                'clicks'=>array_key_exists('clicks',$row)&&is_numeric($row['clicks'])?max(0,(int)$row['clicks']):null,
-                'orders'=>array_key_exists('totalNo',$row)&&is_numeric($row['totalNo'])?max(0,(int)$row['totalNo']):null,
-                'sales'=>array_key_exists('totalValue',$row)&&is_numeric($row['totalValue'])?(float)$row['totalValue']:null,
-                'commission'=>array_key_exists('totalComm',$row)&&is_numeric($row['totalComm'])?(float)$row['totalComm']:null,
-                'conversion'=>$conversion,
-                'currency'=>$currency,
+                'clicks'=>$row['clicks'],'orders'=>$row['orders'],'sales'=>$row['sales'],
+                'commission'=>$row['commission'],'conversion'=>$row['conversion'],
+                'currency'=>$row['currency'],'details'=>$details,
             );
         }
         return $out;
@@ -937,18 +964,19 @@ trait PPAR_Network_Sync_Trait {
 
     private function partner_analytics_awin_reports() {
         $reports=array(
-            'awin'=>array('source'=>'Awin Advertiser Performance API – einzelne Originalzeile, keine Eigenaggregation','currency'=>'EUR','updated_at'=>time(),'periods'=>array()),
+            'awin'=>array('source'=>'Awin Advertiser Performance API – Originalzeilen, keine Eigenaggregation','currency'=>'EUR','updated_at'=>time(),'periods'=>array()),
             'otto'=>array('source'=>'Awin Advertiser Performance API / OTTO – Originalzeile','currency'=>'EUR','updated_at'=>time(),'periods'=>array()),
+            'idealo'=>array('source'=>'Awin Advertiser Performance API / idealo 84749 – Originalzeile','currency'=>'EUR','updated_at'=>time(),'periods'=>array()),
         );
         $successful=0;
         foreach ($this->partner_analytics_period_windows() as $period=>$window) {
             $result=$this->partner_analytics_awin_range($window['start'],$window['end']);
             if (is_wp_error($result)) { continue; }
             $successful++;
-            foreach (array('awin','otto') as $bucket) {
+            foreach (array('awin','otto','idealo') as $bucket) {
                 $row=is_array($result[$bucket]??null)?$result[$bucket]:null;
                 if (!$row) {
-                    $reports[$bucket]['periods'][$period]=array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null);
+                    $reports[$bucket]['periods'][$period]=array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null,'details'=>array());
                     continue;
                 }
                 $reports[$bucket]['currency']=(string)($row['currency']??'EUR');
@@ -956,6 +984,7 @@ trait PPAR_Network_Sync_Trait {
                     'clicks'=>$row['clicks']??null,'orders'=>$row['orders']??null,
                     'sales'=>$row['sales']??null,'commission'=>$row['commission']??null,
                     'conversion'=>$row['conversion']??null,
+                    'details'=>is_array($row['details']??null)?$row['details']:array(),
                 );
             }
         }
@@ -998,24 +1027,37 @@ trait PPAR_Network_Sync_Trait {
         $conversion_i=$find(array('conversion','conversion_rate','conversionrate','konversion','konversionsrate'));
         if ($click_i===null && $lead_i===null && $sale_count_i===null && $revenue_i===null && $commission_i===null && $conversion_i===null) { return new WP_Error('adcell_report_headers','ADCELL-CSV enthaelt keine eindeutig gebundenen Statistikspalten.'); }
 
-        // Keine eigene Summe ueber CSV-Zeilen. Nur wenn ADCELL fuer den angefragten
-        // Zeitraum genau eine Original-Datenzeile liefert, wird sie unveraendert
-        // als Providerwert angezeigt. Mehrere Zeilen bleiben im kompakten Dashboard
-        // bewusst unverfuegbar statt von uns zusammengerechnet zu werden.
+        // Keine Eigenaggregation. Jede vom Provider gelieferte Originalzeile
+        // bleibt einzeln sichtbar; nur bei exakt einer Zeile kann die kompakte
+        // Providerzeile direkt dieselben Werte zeigen.
+        $program_i=$find(array('programm','programmname','program','program_name','partnerprogramm','partner_programm'));
+        $program_id_i=$find(array('pid','program_id','programid','programm_id','programmid'));
         $data_lines=array_values(array_filter($lines,static function($line){return trim((string)$line)!=='';}));
-        if (count($data_lines)!==1) {
-            return array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null);
+        $details=array();
+        foreach ($data_lines as $row_index=>$line) {
+            $cols=str_getcsv($line,';');
+            $read=function($idx) use($cols){ if($idx===null || !isset($cols[$idx])) return null; return $this->partner_analytics_decimal($cols[$idx]); };
+            $clicks=$read($click_i);
+            $lead=$read($lead_i); $sale_count=$read($sale_count_i);
+            $orders=$lead!==null?$lead:$sale_count;
+            $label=$program_i!==null && isset($cols[$program_i]) ? sanitize_text_field((string)$cols[$program_i]) : '';
+            $external_id=$program_id_i!==null && isset($cols[$program_id_i]) ? sanitize_text_field((string)$cols[$program_id_i]) : '';
+            if ($label==='') { $label=$external_id!=='' ? 'ADCELL Programm '.$external_id : 'ADCELL Originalzeile '.($row_index+1); }
+            $details[]=array(
+                'label'=>$label,'external_id'=>$external_id,
+                'clicks'=>$clicks===null?null:max(0,(int)$clicks),
+                'orders'=>$orders===null?null:max(0,(int)$orders),
+                'sales'=>$read($revenue_i),'commission'=>$read($commission_i),'conversion'=>$read($conversion_i),
+                'currency'=>'EUR',
+            );
         }
-        $cols=str_getcsv($data_lines[0],';');
-        $read=function($idx) use($cols){ if($idx===null || !isset($cols[$idx])) return null; return $this->partner_analytics_decimal($cols[$idx]); };
-        $clicks=$read($click_i);
-        $lead=$read($lead_i); $sale_count=$read($sale_count_i);
-        $orders=$lead!==null?$lead:$sale_count;
-        $sales=$read($revenue_i); $commission=$read($commission_i); $conversion=$read($conversion_i);
+        if (count($details)!==1) {
+            return array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null,'details'=>$details);
+        }
+        $only=$details[0];
         return array(
-            'clicks'=>$clicks===null?null:max(0,(int)$clicks),
-            'orders'=>$orders===null?null:max(0,(int)$orders),
-            'sales'=>$sales,'commission'=>$commission,'conversion'=>$conversion,
+            'clicks'=>$only['clicks'],'orders'=>$only['orders'],'sales'=>$only['sales'],
+            'commission'=>$only['commission'],'conversion'=>$only['conversion'],'details'=>$details,
         );
     }
 
