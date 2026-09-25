@@ -230,7 +230,7 @@
     "code": "RESOLVED",
     "error_class": false,
     "classification": "RESOLVED",
-    "detail": "Central text-start main and the Pferdeatelier receiver now bind the same existing Concept Agent intake command. The receiver selects the current 1..N batch from CURRENT_STATE and its hash-bound metadata snapshot. The legacy runtime-inbox selector is not used. The fixed upstream repair-return ceiling is removed. No production article has been started by this maintenance.",
+    "detail": "Central text-start remains the start button only. The current Concept Agent runner now binds every verified RESUME_ALLOWED directly to the existing BOUND_CHAT_WORKER: execute exactly allowed_action, return the result to progress_guard, and continue until STOP. No production article has been started by this maintenance.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -291,7 +291,7 @@
   "hobbyroom_status": "TEMPORARY_CONCEPT_AGENT_16_BINDINGS_VALIDATED",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
-  "hobbyroom_blocker": "PRODUCTIVE_FRESH_BATCH_EXECUTOR_FROM_INTAKE_NOT_PRESENT; CONTROL_STATE_IS_AUTHORITY",
+  "hobbyroom_blocker": "NONE",
   "next_action": {
     "goal": "START_CURRENT_1N_BATCH_VIA_TEXT_START",
     "action": "On the next explicit production start, use the central hallo-netizen/text-start fixed request START:pferdeatelier. That route must resolve the current batch only through control/startmaster0107/CURRENT_STATE.json and its hash-bound concept_agent/current/PSERC_METADATA_SNAPSHOT.json, then prepare the existing Concept Agent intake. Continue through the existing research/authoring and downstream LT 6.8, PPM 6.7.9, PSERC and ENDSTEMPEL path. Do not publish.",
@@ -546,6 +546,18 @@
     "same_article_same_workspace": true,
     "return_until_real_pass": true,
     "fixed_maximum_returns": null,
+    "publish_allowed": false
+  },
+  "concept_agent_worker_attachment": {
+    "status": "BOUND",
+    "worker": "BOUND_CHAT_WORKER",
+    "runner_ref": "concept_agent/progress_guard.py",
+    "resume_allowed_is_terminal": false,
+    "execute_allowed_action_immediately": true,
+    "return_to_progress_guard_required": true,
+    "terminal_action": "STOP",
+    "free_action_choice": false,
+    "alternate_route_allowed": false,
     "publish_allowed": false
   }
 }
