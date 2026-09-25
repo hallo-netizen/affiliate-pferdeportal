@@ -53,6 +53,33 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/production-continuity/test_production_continuity_guard.py
+      - name: KISS text-start receiver has no GitHub production control
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -E 'api\\.github\\.com|github\\.rest|TEXT_START_BATCH_CLAIM|TEXT_START_MACHINE_READY|upload-artifact|issues: write' .github/workflows/text-start-pferdeatelier.yml
+
+      - name: Current start handoff is repeatable and deterministic
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json /tmp/intake-1.json > /tmp/receipt-1.json
+          python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json /tmp/intake-2.json > /tmp/receipt-2.json
+          cmp /tmp/intake-1.json /tmp/intake-2.json
+          python3 - <<'PY'
+          import json
+          state=json.load(open('control/startmaster0107/CURRENT_STATE.json',encoding='utf-8'))['concept_agent_current_batch']
+          a=json.load(open('/tmp/intake-1.json',encoding='utf-8'))
+          r=json.load(open('/tmp/receipt-1.json',encoding='utf-8'))
+          if r.get('status')!='CONCEPT_AGENT_INTAKE_READY':
+              raise SystemExit('START_RECEIPT_NOT_READY')
+          if a.get('batch_sha256')!=state.get('batch_sha256') or a.get('item_count')!=state.get('item_count'):
+              raise SystemExit('START_CURRENT_BINDING_MISMATCH')
+          if a.get('publish_allowed') is not False:
+              raise SystemExit('START_PUBLISH_FLAG_INVALID')
+          print('KISS_TEXT_START_REPEAT_PASS')
+          PY
+
       - name: Existing Concept Agent transition and repair tests
         env:
           PYTHONDONTWRITEBYTECODE: '1'
