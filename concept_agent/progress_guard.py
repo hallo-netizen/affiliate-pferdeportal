@@ -488,11 +488,18 @@ def record_batch_stage(binding: dict, state: dict, decision: dict, stage: str, r
 
 def resume(binding: dict, state: dict, decision: dict) -> dict:
     verify_reentry_decision(binding, state, decision)
+    action = json.loads(json.dumps(state["allowed_action"]))
+    terminal = action.get("action") == "STOP"
     return {
-        "status": "RESUME_ALLOWED",
+        "status": "STOP" if terminal else "RESUME_ALLOWED",
         "batch_sha256": state["batch_sha256"],
         "checkpoint_sha256": state["checkpoint_sha256"],
-        "allowed_action": state["allowed_action"],
+        "allowed_action": action,
+        "bound_worker": "BOUND_CHAT_WORKER",
+        "continuation_required": not terminal,
+        "worker_must_execute_allowed_action_immediately": not terminal,
+        "worker_return_must_reenter_progress_guard": not terminal,
+        "terminal": terminal,
         "publish_allowed": False,
     }
 

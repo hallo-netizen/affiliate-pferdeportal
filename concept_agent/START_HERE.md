@@ -39,6 +39,8 @@ Hart verboten:
 
 Der Produktionsfortschritt läuft ausschließlich über `concept_agent/progress_guard.py`.
 
+**Verbindlicher Worker-Anschluss:** Ein gültiges `RESUME_ALLOWED` ist niemals ein Stop. Der bereits gebundene Worker muss die exakt enthaltene `allowed_action` sofort ausführen, seine Rückgabe wieder an `progress_guard.py` geben und die daraus neu gebundene `allowed_action` unmittelbar fortsetzen. Das wiederholt sich ohne freie Auswahl und ohne Benutzer-Zwischenfreigabe bis zur einzigen terminalen Aktion `STOP`. Fehler- oder Repair-Rückgaben bleiben im selben Ablauf und dürfen keinen Neustart oder Alternativweg erzeugen.
+
 ## Harte Wiedereinstiegsregel — überall
 
 Nach jedem Start und **vor jeder Fortsetzung nach einer Unterbrechung** muss zuerst

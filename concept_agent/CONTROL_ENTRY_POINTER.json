@@ -15,5 +15,9 @@
   "pserc_modified": false,
   "endstempel_modified": false,
   "plugin_code_modified": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "production_worker": "BOUND_CHAT_WORKER",
+  "resume_allowed_is_terminal": false,
+  "bound_worker_must_execute_allowed_action_immediately": true,
+  "bound_worker_return_must_reenter_progress_guard": true
 }
