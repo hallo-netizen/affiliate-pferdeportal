@@ -1,0 +1,18 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -376,8 +376,14 @@
+  python3 - "$ahroot/03_REAL_GATE/lib.php" <<'PYAH'
+ import sys
+ p=sys.argv[1];s=open(p,encoding='utf-8').read();needle='function rg_tick() { return rg_plugin()->run_ebay_admin_ajax_tick(); }';repl='function rg_tick() { return rg_plugin()->run_ebay_canonical_worker(); }'
+ if s.count(needle)!=1: raise SystemExit('V6.51 real A-H transport anchor mismatch')
+-open(p,'w',encoding='utf-8').write(s.replace(needle,repl,1))
++s=s.replace(needle,repl,1)
++old_build="'build'=>'6.44.0-business-materialization-gapfill-rootfix-20260820'";new_build="'build'=>Pferdeportal_Affiliate_Router::EBAY_RUNTIME_BUILD"
++if s.count(old_build)!=1: raise SystemExit('V6.51 real A-H runtime-build seed anchor mismatch')
++s=s.replace(old_build,new_build,1)
++old_transport="'worker_transport'=>'admin_ajax'";new_transport="'worker_transport'=>'wp_cron'"
++if s.count(old_transport)!=1: raise SystemExit('V6.51 real A-H worker-transport seed anchor mismatch')
++open(p,'w',encoding='utf-8').write(s.replace(old_transport,new_transport,1))
+ PYAH
+  (cd "$ahroot" && find 03_REAL_GATE 07_RUNNERS -type f -print0 | sort -z | xargs -0 sha256sum) > "$E/$p/V651_REAL_AH_SUCCESSOR_SHA256.txt"
+  rm -rf "$ahroot/CODEX_EVIDENCE_REAL_GATE"; (cd "$ahroot" && WP_ROOT="$WP" WP="$(command -v wp)" 07_RUNNERS/run_real_gate_from_existing_wordpress.sh) > "$E/$p/01_A_H.log" 2>&1 || return 1; cp -a "$ahroot/CODEX_EVIDENCE_REAL_GATE" "$E/$p/A_H"

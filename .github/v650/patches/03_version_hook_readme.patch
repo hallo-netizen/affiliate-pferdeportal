@@ -1,0 +1,40 @@
+diff -ruN /mnt/data/work_v650/steps/step2/affiliate-portal-router/pferdeportal-affiliate-router.php /mnt/data/work_v650/steps/step3/affiliate-portal-router/pferdeportal-affiliate-router.php
+--- a/pferdeportal-affiliate-router.php	2026-08-21 14:06:35.622383059 +0000
++++ b/pferdeportal-affiliate-router.php	2026-08-21 13:45:01.259442099 +0000
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
+  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
+- * Version: 6.49.0
++ * Version: 6.50.0
+  * Author: OpenAI
+  * Requires at least: 6.0
+  * Requires PHP: 7.4
+@@ -39,8 +39,8 @@
+     use PPAR_Ebay_Run_Trait;
+     use PPAR_Ebay_Account_Deletion_Trait;
+     use PPAR_Awin_Programme_Gate_Trait;
+-    const VERSION = '6.49.0';
+-    const EBAY_RUNTIME_BUILD = '6.49.0-public-coverage-target-bridge-rootfix-20260821';
++    const VERSION = '6.50.0';
++    const EBAY_RUNTIME_BUILD = '6.50.0-coverage-gap-contract-rootfix-20260821';
+     const CONTRACT_VERSION = '1.0';
+     const PROVIDER_CONTRACT_VERSION = '2.0';
+     const CAMPAIGN_POST_TYPE = 'ap_campaign';
+diff -ruN /mnt/data/work_v650/steps/step2/affiliate-portal-router/readme.txt /mnt/data/work_v650/steps/step3/affiliate-portal-router/readme.txt
+--- a/readme.txt	2026-08-21 12:02:57.000000000 +0000
++++ b/readme.txt	2026-08-21 13:45:56.790402044 +0000
+@@ -1,5 +1,11 @@
+-Affiliate-Zentrale 6.49.0 – PUBLIC COVERAGE TARGET BRIDGE ROOTFIX
+-Stable tag: 6.49.0
++Affiliate-Zentrale 6.50.0 – COVERAGE GAP CONTRACT ROOTFIX
++Stable tag: 6.50.0
++
++Korrektur 6.50.0
++- Nach genau einem kanonischen, gezielten BUSINESS-Gap-Fill darf eine weiterhin unversorgte Familie nur dann als offene sichere Versorgungslücke enden, wenn der persistierte terminale Gap-Fill-Selection-State beweist, dass für genau diese Familie kein sicher auswählbarer Kandidat verblieb.
++- Ein sicher ausgewählter Kandidat, der trotzdem im Public-Gate fehlt, bleibt ein harter technischer Invariantenfehler; Qualitäts-, Sicherheits-, Akzeptanz- und Materialisierungsregeln werden nicht gelockert.
++- Offene sichere Versorgungslücken bleiben nicht öffentlich und werden über den unveränderten regulären kanonischen eBay-Lauf erneut geprüft.
++- Ein V6.49-`insufficient_safe_sources`-Endzustand wird nur mit diesem persistierten Gap-Fill-Beweis unter derselben UUID bis `public_verify` fortgesetzt; Discovery, Refresh und Selection werden nicht zurückgesetzt.
+ 
+ Korrektur 6.49.0
+ - Ursache des realen V6.48-`0/311` nach erfolgreicher Same-UUID-Recovery beseitigt: Der kanonische Public-Coverage-Gate verknüpfte ein veröffentlichtes Ausgabeobjekt korrekt mit seiner eBay-Source-Zeile, übergab anschließend aber diese Source-Zeile an `ebay_business_campaign_target_keys()`. Dieser Vertrag erwartet eine Creative-Library-Zeile; dadurch war die erwartete Zielmenge leer und jedes ansonsten gültige BUSINESS-Ausgabeobjekt fälschlich als `target_mismatch` verworfen.

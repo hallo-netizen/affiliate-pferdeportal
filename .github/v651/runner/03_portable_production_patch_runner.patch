@@ -1,0 +1,12 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -89,7 +89,8 @@
+ 
+ # 2. Current source is built only from binding V6.50.1 MASTER.
+ cp -a "$V6501BASE" "$SRC"
+-(cd "$SRCROOT" && patch -p6 --forward --batch < "$G/01_checkpoint_restart.patch") > "$E/12_apply_v651_step1.log" 2>&1 || block "V6.51 checkpoint/restart rootfix patch failed"
++sed -e 's#/mnt/data/v651_checkpoint_work/master/master-v6501/03_SOURCE/affiliate-portal-router/#a/#g' -e 's#/mnt/data/v651_checkpoint_work/source/#b/#g' "$G/01_checkpoint_restart.patch" > /tmp/v651_checkpoint_restart_portable.patch
++(cd "$SRC" && patch -p1 --forward --batch < /tmp/v651_checkpoint_restart_portable.patch) > "$E/12_apply_v651_step1.log" 2>&1 || block "V6.51 checkpoint/restart rootfix patch failed"
+ 
+ run_files(){ local out="$1" src="$2"; shift 2; :>"$out"; local fail=0 count=0 assertions=0 rc f; for f in "$@"; do count=$((count+1)); echo "===== $(basename "$f") =====" >>"$out"; set +e; USE_ZEND_ALLOC=0 PPAR_TEST_PLUGIN_DIR="$src" PPAR_BASELINE_PLUGIN_DIR="$BASE" PPAR_V647_BASELINE_DIR="$V647BASE" PPAR_V648_BASELINE_DIR="$V648BASE" PPAR_V649_BASELINE_DIR="$V649BASE" PPAR_V650_BASELINE_DIR="$V650BASE" PPAR_V6501_BASELINE_DIR="$V6501BASE" PPAR_TEST_MASTER_ROOT="$PKG" timeout 150 php "$f" >>"$out" 2>&1; rc=$?; set -e; echo "__TEST_EXIT__=$rc $(basename "$f")" >>"$out"; [ $rc -eq 0 ] || fail=$((fail+1)); done; assertions=$(grep -oE 'ASSERTIONS=[0-9]+' "$out"|cut -d= -f2|awk '{s+=$1}END{print s+0}'); echo "COUNT=$count FAIL=$fail ASSERTIONS=$assertions" | tee -a "$out"; [ $fail -eq 0 ]; }
+ run_dir(){ local d="$1" out="$2" src="$3"; mapfile -d '' fs < <(find "$d" -maxdepth 1 -type f -name '*.php' -print0|sort -z); run_files "$out" "$src" "${fs[@]}"; }

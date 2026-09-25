@@ -1,0 +1,11 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -359,7 +359,7 @@
+ cp "$V648/real/canonical_refresh_authority_v648.php" "$PKG/03_REAL_GATE/canonical_refresh_authority_v648.php"
+ cp "$V649/real/public_coverage_target_bridge_v649.php" "$PKG/03_REAL_GATE/public_coverage_target_bridge_v649.php"
+ cp "$G/checkpoint_restart_contract_v651.php" "$PKG/03_REAL_GATE/checkpoint_restart_contract_v651.php"
+-setup_wp(){ rm -rf "$WP"; mkdir -p "$WP"; wp core download --version=7.0.1 --path="$WP" --force --allow-root >/dev/null; wp config create --path="$WP" --dbname=v651gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >/dev/null; wp core install --path="$WP" --url=http://v651.test --title='V651 Gate' --admin_user=gateadmin --admin_password='GateOnly-20260822!' --admin_email=gate@example.invalid --skip-email --allow-root >/dev/null; }
++setup_wp(){ rm -rf "$WP"; mkdir -p "$WP"; wp core download --version=7.0.1 --path="$WP" --force --allow-root >/dev/null; wp config create --path="$WP" --dbname=v651gate --dbuser=wp --dbpass=wppass --dbhost=127.0.0.1:3306 --skip-check --allow-root >/dev/null; wp db reset --yes --path="$WP" --allow-root >/dev/null; wp core install --path="$WP" --url=http://v651.test --title='V651 Gate' --admin_user=gateadmin --admin_password='GateOnly-20260822!' --admin_email=gate@example.invalid --skip-email --allow-root >/dev/null; }
+ real_gate(){ local src="$1" stage="$2" p="$3" expected_version="$4"; mkdir -p "$E/$p"; setup_wp; rm -rf "$WP/wp-content/plugins/affiliate-portal-router"; cp -a "$src" "$WP/wp-content/plugins/affiliate-portal-router"; wp plugin activate affiliate-portal-router --path="$WP" --allow-root >/dev/null; python3 - "$PKG/03_REAL_GATE/verify_environment.php" "$expected_version" <<'PYVER'
+ import re,sys
+ p=sys.argv[1];v=sys.argv[2];s=open(p,encoding="utf-8").read();s=re.sub(r"Pferdeportal_Affiliate_Router::VERSION==='[0-9.]+'",f"Pferdeportal_Affiliate_Router::VERSION==='{v}'",s);s=re.sub(r"tested plugin version is [0-9.]+",f"tested plugin version is {v}",s);open(p,"w",encoding="utf-8").write(s)

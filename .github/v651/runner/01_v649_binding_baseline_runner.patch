@@ -1,0 +1,47 @@
+--- .github/v651_gate/run-v651-full-release.sh
++++ .github/v651_gate/run-v651-full-release.sh
+@@ -17,6 +17,10 @@
+ BINDMASTERROOT=/tmp/v6501-binding-master
+ BINDMASTER="$BINDMASTERROOT/master-v6501"
+ V6501BASE="$BINDMASTER/03_SOURCE/affiliate-portal-router"
++V649_ART=/tmp/V649_FINAL_VERIFIED_RELEASE_651.zip
++V649_ARTROOT=/tmp/v649-artifact-651
++V649_BINDROOT=/tmp/v649-binding-651
++V649_BINDMASTER="$V649_BINDROOT/master-v649"
+ RECON=/tmp/v651-reconstructed
+ RECON_PARENT="$RECON/CODEX_V645_REALGATE_SOURCE_AND_EXACT_TASK_20260820/02_SOURCE_V645"
+ RECONSRC="$RECON_PARENT/affiliate-portal-router"
+@@ -31,8 +35,8 @@
+ INSTALL="$WORK/affiliate-zentrale_v6.51.0_SAFE_CHECKPOINT_RESTART_REALGATE.zip"
+ MASTER_DIR=/tmp/master-v651
+ MASTER="$WORK/MASTER_AFFILIATE_ZENTRALE_V6_51_0_SAFE_CHECKPOINT_RESTART_REALGATE_20260822.zip"
+-rm -rf "$E" "$PKGROOT" "$BINDROOT" "$BINDMASTERROOT" "$RECON" "$V647BASE" "$V648BASE" "$V649BASE" "$V650BASE" "$SRCROOT" "$FRESH" "$WP" "$MASTER_DIR"
+-rm -f "$BINDART" "$INSTALL" "$MASTER"
++rm -rf "$E" "$PKGROOT" "$BINDROOT" "$BINDMASTERROOT" "$V649_ARTROOT" "$V649_BINDROOT" "$RECON" "$V647BASE" "$V648BASE" "$V649BASE" "$V650BASE" "$SRCROOT" "$FRESH" "$WP" "$MASTER_DIR"
++rm -f "$BINDART" "$V649_ART" "$INSTALL" "$MASTER"
+ mkdir -p "$E" "$PKGROOT" "$BINDROOT" "$BINDMASTERROOT" "$RECON" "$SRCROOT" "$FRESH"
+ block(){ echo "BLOCKED: $*" | tee "$E/BLOCKED.txt"; echo 'FINAL_DECISION=BLOCKED' > "$E/FINAL_DECISION.txt"; exit 1; }
+ trap 'rc=$?; if [ $rc -ne 0 ] && [ ! -f "$E/FINAL_DECISION.txt" ]; then echo "FINAL_DECISION=BLOCKED" > "$E/FINAL_DECISION.txt"; fi' EXIT
+@@ -66,9 +70,19 @@
+ (cd "$RECONSRC" && patch -p1 --forward --batch < "$V648/patches/02_version_readme.patch") >> "$E/09_reconstruct_v648.log" 2>&1 || block "V6.48 version patch failed"
+ (cd "$RECONSRC" && sha256sum -c "$V648/manifests/FINAL_TREE_SHA256.txt") >> "$E/09_reconstruct_v648.log" 2>&1 || block "V6.48 manifest failed"
+ cp -a "$RECONSRC" "$V648BASE"
+-cp -a "$V648BASE" "$V649BASE"
+-for p in 01_public_coverage_target_bridge.patch 02_version_hook_readme.patch; do (cd "$V649BASE" && patch -p1 --forward --batch < "$V649/patches/$p") >> "$E/10_reconstruct_v649.log" 2>&1 || block "V6.49 reconstruction failed at $p"; done
+-(cd "$V649BASE" && sha256sum -c "$V649/manifests/FINAL_TREE_SHA256.txt") >> "$E/10_reconstruct_v649.log" 2>&1 || block "V6.49 manifest failed"
++# V6.49 is a proven release baseline. Do not reconstruct it from the partial harness;
++# use the exact green V6.49 MASTER artifact, as the verified V6.50.1 release gate did.
++curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
++  "https://api.github.com/repos/hallo-netizen/affiliate-pferdeportal/actions/artifacts/9445946958/zip" -o "$V649_ART" || block "cannot retrieve verified V6.49 release artifact"
++mkdir -p "$V649_ARTROOT" "$V649_BINDROOT"
++unzip -t "$V649_ART" > "$E/10_v649_artifact_zip.log" || block "V6.49 artifact ZIP invalid"
++unzip -q "$V649_ART" -d "$V649_ARTROOT"
++V649_MASTER_ZIP="$V649_ARTROOT/MASTER_AFFILIATE_ZENTRALE_V6_49_0_PUBLIC_COVERAGE_TARGET_BRIDGE_ROOTFIX_REALGATE_20260821.zip"
++echo '1337992a300590883549777d70444ffe76b30104a14b366955ab47411d7d3927  /tmp/v649-artifact-651/MASTER_AFFILIATE_ZENTRALE_V6_49_0_PUBLIC_COVERAGE_TARGET_BRIDGE_ROOTFIX_REALGATE_20260821.zip' | sha256sum -c - > "$E/10_v649_master_hash.log" 2>&1 || block "binding V6.49 MASTER mismatch"
++unzip -q "$V649_MASTER_ZIP" -d "$V649_BINDROOT"
++(cd "$V649_BINDMASTER" && sha256sum -c MASTER_SHA256.txt) > "$E/10_v649_master_manifest.log" 2>&1 || block "binding V6.49 MASTER manifest mismatch"
++cp -a "$V649_BINDMASTER/03_SOURCE/affiliate-portal-router" "$V649BASE"
++(cd "$V649BASE" && sha256sum -c "$V649/manifests/FINAL_TREE_SHA256.txt") > "$E/10_v649_source_manifest.log" 2>&1 || block "binding V6.49 source mismatch"
+ cp -a "$V649BASE" "$V650BASE"
+ for p in 01_coverage_gap_contract_core.patch 02_v649_same_uuid_gap_migration.patch 03_version_hook_readme.patch; do (cd "$V650BASE" && patch -p1 --forward --batch < "$V650/patches/$p") >> "$E/11_reconstruct_v650.log" 2>&1 || block "V6.50 reconstruction failed at $p"; done
+ (cd "$V650BASE" && sha256sum -c "$V650/manifests/step3_TREE_SHA256.txt") >> "$E/11_reconstruct_v650.log" 2>&1 || block "V6.50 manifest failed"

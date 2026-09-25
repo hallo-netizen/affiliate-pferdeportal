@@ -1,0 +1,1 @@
+V6.50 gate transport verification uses exact binary reconstruction; production source unaffected.
