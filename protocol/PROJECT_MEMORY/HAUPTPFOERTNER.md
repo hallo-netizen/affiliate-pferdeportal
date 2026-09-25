@@ -37,6 +37,9 @@ Jede klare natürliche Formulierung wie:
 - „Hauptpförtner.“
 - „geh auf den Campus“
 - „geh ins Pferde-Atelier“
+- „geh zu Hobbyrausch“
+- „geh zu Hobbyrausch PLUGINS“
+- „geh zu Hobbyrausch WORDPRESS_TECHNIK“
 - „geh ins Pferde-Atelier TEXT/SEO“
 - „geh ins Pferde-Atelier PRODUKTVERGLEICH“
 - „geh ins Pferde-Atelier TECHNIK“
@@ -86,6 +89,7 @@ Unklar:
 
 Projektgebäude:
 - `PROJEKTE/PFERDE_ATELIER/`
+- `PROJEKTE/HOBBYRAUSCH/`
 
 Projektübergreifend:
 - `ALLGEMEINGUELTIGE_BAUSTEINE/`
