@@ -135,6 +135,11 @@ class CurrentProductionGuardTests(unittest.TestCase):
         decision = self._decision(binding, state)
         result = progress_guard.resume(binding, state, decision)
         self.assertEqual(result["allowed_action"]["action"], "WRITE_DRAFT")
+        self.assertEqual(result["bound_worker"], "BOUND_CHAT_WORKER")
+        self.assertIs(result["continuation_required"], True)
+        self.assertIs(result["worker_must_execute_allowed_action_immediately"], True)
+        self.assertIs(result["worker_return_must_reenter_progress_guard"], True)
+        self.assertIs(result["terminal"], False)
         self.assertEqual(decision["outer_stage"], "ARTICLE_PRODUCTION")
 
         with self.assertRaisesRegex(progress_guard.Blocked, "REENTRY_DECISION_CONTRACT_INVALID"):
@@ -302,6 +307,11 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(decision["allowed_action"]["action"], "STOP")
         result = progress_guard.resume(binding, state, decision)
         self.assertEqual(result["allowed_action"]["action"], "STOP")
+        self.assertEqual(result["status"], "STOP")
+        self.assertIs(result["continuation_required"], False)
+        self.assertIs(result["worker_must_execute_allowed_action_immediately"], False)
+        self.assertIs(result["worker_return_must_reenter_progress_guard"], False)
+        self.assertIs(result["terminal"], True)
 
     def test_missing_or_wrong_checkpoint_stops_before_decision(self):
         binding = self._binding()
