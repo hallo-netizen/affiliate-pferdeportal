@@ -171,3 +171,6 @@ Processanstoß-Fix: Jede gültige `allowed_action` erzeugt genau einen checkpoin
 - Pflichtprüfungen am PR-Head `496fc76839570f4b9308af2e6f54a3e0dd0cc726`: Deterministic Entrance Gate Run `36136422220` PASS; Immutable Base Hardlock Run `36136418296` PASS.
 - Offen: realer End-to-End-Nachweis, dass der bestehende gebundene Worker jeden Trigger tatsächlich konsumiert, genau den gebundenen Prozess startet, die Rückgabe an `progress_guard.py` zurückführt und die Kette bis `STOP` durchläuft.
 - Kein Gesamt-PASS bis zu diesem realen Nachweis.
+## PR #408 — Live Outer Worker Trigger
+- Minimalfix ausschließlich im bestehenden Concept-Agent-Routing: jede nicht-terminale äußere Stufe bindet jetzt denselben BOUND_CHAT_WORKER mit genau einem hashgebundenen process_trigger, sofortiger Ausführungspflicht und verpflichtender Rückkehr in full_workflow_gate.py.
+- Keine Änderung an Recherche-/Artikelregeln, LT 6.8, PPM 6.7.9, Repair, PSERC, ENDSTEMPEL oder Publish.

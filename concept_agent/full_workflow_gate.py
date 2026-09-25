@@ -699,6 +699,7 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
     proof_core.pop("proof_sha256", None)
     if proof_sha != stable(proof_core):
         raise Blocked("ENTRY_PROOF_HASH_MISMATCH_FOR_ROUTE")
+    terminal = stage == "COMPLETE"
     ticket = {
         "contract": STAGE_ROUTE_CONTRACT,
         "status": "PASS",
@@ -712,7 +713,30 @@ def stage_route_from_entry_proof(proof: dict[str, Any]) -> dict[str, Any]:
         "chat_may_choose_stage": False,
         "alternate_route_allowed": False,
         "publish_allowed": False,
+        "bound_worker": None if terminal else "BOUND_CHAT_WORKER",
+        "continuation_required": not terminal,
+        "worker_must_execute_allowed_operation_immediately": not terminal,
+        "worker_return_must_reenter_full_workflow_gate": not terminal,
     }
+    if terminal:
+        ticket["process_trigger"] = None
+    else:
+        trigger_core = {
+            "contract": "CONCEPT_AGENT_BOUND_STAGE_PROCESS_TRIGGER_V1",
+            "batch_sha256": proof["batch_sha256"],
+            "entry_proof_sha256": proof_sha,
+            "stage": stage,
+            "worker": "BOUND_CHAT_WORKER",
+            "authority": route["authority"],
+            "entry_ref": route["entry_ref"],
+            "allowed_operation": route["allowed_operation"],
+            "exactly_once_for_stage": True,
+            "return_required": True,
+            "return_to": "concept_agent/full_workflow_gate.py",
+            "publish_allowed": False,
+        }
+        ticket["process_trigger"] = dict(trigger_core)
+        ticket["process_trigger"]["trigger_sha256"] = stable(trigger_core)
     ticket["route_sha256"] = stable(ticket)
     return ticket
 
