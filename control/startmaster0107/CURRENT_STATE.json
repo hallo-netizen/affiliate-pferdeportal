@@ -119,7 +119,8 @@
     "CONCEPT_AGENT_CURRENT_AUTHORITY_CONSOLIDATED",
     "TEXT_START_TARGET_CURRENT_CONCEPT_AGENT_1N_BINDING_PREPARED",
     "UPSTREAM_REPAIR_FIXED_RETURN_LIMIT_REMOVED",
-    "TEXT_START_CENTRAL_BINDING_SYNCED"
+    "TEXT_START_CENTRAL_BINDING_SYNCED",
+    "PR413_RESUME_EXISTING_CHECKPOINT_NO_STOP_HANDOFFS_MERGED_20488ACC7D371765DF99573E74A04E519ADACCDD"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -225,12 +226,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_PROCESS_TRIGGER_BOUND_EXECUTION_PROOF_OPEN",
+  "current_work_status": "CONCEPT_AGENT_RESUME_AND_NO_STOP_HANDOFF_FIX_MERGED",
   "current_execution_blocker": {
-    "code": "PROCESS_TRIGGER_EXECUTION_NOT_YET_PROVEN",
-    "error_class": true,
-    "classification": "FIRST_OPEN_BLOCKER",
-    "detail": "PR #405 is merged on main. progress_guard emits exactly one checkpoint-bound process_trigger for each non-terminal allowed_action and no trigger at STOP. Required hardlock and hardlock-base checks passed on PR head 496fc76839570f4b9308af2e6f54a3e0dd0cc726. A real end-to-end run proving that the existing bound worker consumes every trigger and starts the corresponding process through the whole chain has not yet been executed.",
+    "code": "RESOLVED",
+    "error_class": false,
+    "classification": "RESOLVED",
+    "detail": "PR #413 is merged on main at 20488acc7d371765df99573e74a04e519adaccdd. production_bridge reuses an already existing valid production checkpoint instead of replacing it with a new initial checkpoint. full_workflow_gate and progress_guard mark every non-terminal handoff as continuation by the same bound worker, including repair/return paths. Only STOP is terminal. No additional full E2E test was requested or executed for this fix.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -286,19 +287,20 @@
     "evidence_branch": "test-evidence/real7-live-20260919",
     "evidence_commit": "4b92af33e7d5c900a168086059d638590e98c793"
   },
-  "last_safe_main_sha": "dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5",
-  "last_safe_change": "PR #405 merged: one checkpoint-bound process_trigger per non-terminal allowed_action; STOP emits none. hardlock and hardlock-base passed on PR head 496fc76839570f4b9308af2e6f54a3e0dd0cc726. Full real end-to-end trigger consumption remains open.",
+  "last_safe_main_sha": "20488acc7d371765df99573e74a04e519adaccdd",
+  "last_safe_change": "PR #413 merged: existing valid production checkpoint is resumed on entry; every non-terminal handoff continues through the same bound worker forward and on repair/return; only STOP is terminal. Protected global start path and domain quality rules unchanged. No additional full E2E test was requested.",
   "hobbyroom_status": "NOT_CURRENT_AUTHORITY",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "PROVE_EXISTING_BOUND_PROCESS_TRIGGER_EXECUTION_END_TO_END",
-    "action": "Using only the existing Concept Agent path, run the current 1..N batch and prove that each checkpoint-bound process_trigger is consumed exactly once by the existing bound worker, its allowed_action actually starts, the worker result returns to progress_guard, repair stays on the same article until PASS, and the chain continues through PSERC and ENDSTEMPEL to STOP. Do not add a runner, alternate route, API/GitHub production control, or publish.",
-    "why": "PR #405 has already implemented the checkpoint-bound trigger and passed the required hardlock checks at the PR head. The only remaining open point is real execution proof.",
+    "goal": "CONTINUE_CURRENT_1N_BATCH_FROM_EXISTING_VALID_CHECKPOINT",
+    "action": "On the next real start or continuation, use only the existing Concept Agent path. If a valid current production checkpoint exists for the same batch, resume exactly that checkpoint and execute its single bound next action. Continue every non-terminal handoff immediately through the same bound worker, including repair and re-check, until STOP. If no valid current checkpoint exists, STOP/BLOCKED instead of reconstructing or guessing progress. Do not publish.",
+    "why": "PR #413 implemented exactly the two requested corrections: preserve an existing valid work checkpoint on start and make every non-terminal handoff continue in the existing worker path in both directions. The live article position must come from the valid production checkpoint, not from chat memory or static counters in CURRENT_STATE.",
     "forbidden": [
+      "reconstruct or guess the live article/checker position when the valid checkpoint is missing",
       "create a new runner or alternate route",
-      "add API or GitHub production-progress control",
+      "add GitHub production-progress control",
       "change text-start beyond start-button behavior",
       "change LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, article content or quality rules",
       "publish"
@@ -523,11 +525,14 @@
     "final_wordpress_import_file_present": false,
     "publish_allowed": false,
     "chat_may_choose_action": false,
-    "first_open_blocker": "PROCESS_TRIGGER_EXECUTION_NOT_YET_PROVEN",
+    "first_open_blocker": "NONE_IMPLEMENTATION_FIX_MERGED_RUNTIME_POSITION_FROM_VALID_CHECKPOINT_ONLY",
     "batch_size_policy": "1..N_FROM_CURRENT_SNAPSHOT",
-    "process_trigger_binding_status": "MERGED_TRIGGER_BOUND_EXECUTION_PROOF_OPEN",
+    "process_trigger_binding_status": "PR413_RESUME_AND_NO_STOP_HANDOFF_MERGED",
     "process_trigger_pr": 405,
-    "process_trigger_merge_sha": "dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5"
+    "process_trigger_merge_sha": "dee94c3ad5f709881da0efaa9da8e1ca3d00c3a5",
+    "start_resume_policy": "EXISTING_VALID_CHECKPOINT_FIRST_NO_RECONSTRUCTION",
+    "live_progress_authority": "CONCEPT_AGENT_CURRENT_PROGRESS_V1_CHECKPOINT_ONLY",
+    "static_progress_counters_are_resume_authority": false
   },
   "text_start_current_binding": {
     "status": "PASS",
