@@ -1,0 +1,8 @@
+Affiliate-Portal Kategorie-Workflow 1.8.1
+Status: neuester belegter Entwicklungsstand
+Expected ZIP SHA-256:
+1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b
+
+Exakter Originaldateiname: in den autoritativen Akten nicht dokumentiert.
+ZIP-Bytes: noch nicht in ORIGINAL abgelegt.
+Nicht raten / nicht rekonstruieren.
