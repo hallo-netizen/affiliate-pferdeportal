@@ -29,16 +29,51 @@ jobs:
           git diff --name-only "$BASE_SHA" "$HEAD_SHA" > /tmp/changed.txt
           cat /tmp/changed.txt
           python3 - <<'PY'
-          import os, pathlib, re
+          import hashlib, json, os, pathlib, re, subprocess
 
           changed = pathlib.Path('/tmp/changed.txt').read_text(encoding='utf-8').splitlines()
           head_ref = os.environ['HEAD_REF']
+          base_sha = os.environ['BASE_SHA']
+          head_sha = os.environ['HEAD_SHA']
 
           immutable = re.compile(r'^(\.github/workflows/|AGENTS\.md$|AGENTS\.override\.md$|control/CURRENT_STARTMASTER\.json$|control/cloud-entry-gate/|control/deterministic-entrance-gate/|control/production-continuity/|control/paul-scope-gate/|control/output-quarantine/|control/single-door-boundary/|isolated_system4/|control/startmaster0107/ENDSTEMPEL_|control/startmaster0107/system4_107007_|control/startmaster0107/system4_107008_|control/startmaster0107/pre_codex_start_hardlock\.py$|control/startmaster0107/PRE_CODEX_START_HARDLOCK\.json$|control/startmaster0107/PRE_CODEX_START_RECEIPT\.json$|control/startmaster0107/PFERDE_ATELIER_START_HERE\.json$|control/startmaster0107/STEP_107007_RUN_NEW_ARTICLE_BATCH_NO_STOP\.json$|control/startmaster0107/GITHUB_FINAL_RELEASE\.py$|control/startmaster0107/chat_delivery_payload\.py$|control/startmaster0107/runtime_packages/|control/startmaster0107/VERBINDLICHER_TEXTERSTELLUNGS_PROMPT_STARTMASTER0107\.txt$|control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107\.json$)')
+
+          sync_paths = {
+              'control/startmaster0107/CURRENT_STATE.json',
+              'control/startmaster0107/PFERDE_ATELIER_START_HERE.json',
+          }
+
+          def git_show(commit, path):
+              return subprocess.check_output(['git', 'show', f'{commit}:{path}'])
+
+          def exact_current_root_sync(paths):
+              if set(paths) != sync_paths or len(paths) != 2:
+                  return False
+              root_path = 'control/startmaster0107/PFERDE_ATELIER_START_HERE.json'
+              state_path = 'control/startmaster0107/CURRENT_STATE.json'
+              base_root = json.loads(git_show(base_sha, root_path))
+              head_root = json.loads(git_show(head_sha, root_path))
+              head_state_raw = git_show(head_sha, state_path)
+              head_state = json.loads(head_state_raw)
+              base_without_hash = dict(base_root)
+              head_without_hash = dict(head_root)
+              base_without_hash.pop('current_state_sha256', None)
+              head_without_hash.pop('current_state_sha256', None)
+              if base_without_hash != head_without_hash:
+                  return False
+              if head_root.get('current_state_sha256') != hashlib.sha256(head_state_raw).hexdigest():
+                  return False
+              if head_root.get('next_allowed_step') != head_state.get('next_allowed_step'):
+                  return False
+              if head_root.get('startmaster') != head_state.get('startmaster'):
+                  return False
+              return True
 
           def decision(ref, paths):
               if ref.startswith('paul/') and any(p.startswith('protocol/PROJECT_MEMORY/') for p in paths):
                   return 'PAUL_PROJECT_MEMORY_WRITE_BLOCKED'
+              if exact_current_root_sync(paths):
+                  return 'PASS'
               if any(immutable.search(p) for p in paths):
                   return 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
               return 'PASS'
@@ -50,6 +85,9 @@ jobs:
           assert decision('feature/test', ['.github/workflows/x.yml']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
           assert decision('feature/test', ['isolated_system4/controller.py']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
           assert decision('feature/test', ['control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
+          assert decision('feature/test', ['control/startmaster0107/PFERDE_ATELIER_START_HERE.json']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
+          assert decision('feature/test', ['control/startmaster0107/CURRENT_STATE.json', 'control/startmaster0107/PFERDE_ATELIER_START_HERE.json']) == 'PASS'
+          assert decision('feature/test', ['control/startmaster0107/CURRENT_STATE.json', 'control/startmaster0107/PFERDE_ATELIER_START_HERE.json', 'src/example.py']) == 'IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED'
           assert decision('feature/test', ['control/startmaster0107/runtime_inbox/RUNTIME_INBOX_STATE.json']) == 'PASS'
           print('PATH_GUARD_SELFTEST_PASS')
 
