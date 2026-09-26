@@ -468,6 +468,15 @@ def build(binding: dict, checkpoint: dict, capsule: dict | None = None, previous
                 raise Blocked("WRITER_PREFLIGHT_AUTHORING_CONTRACT_MISSING")
             workspace["writer_preflight"] = json.loads(json.dumps(authoring))
             workspace["writer_preflight_sha256"] = stable(authoring)
+        if current.get("phase") == "REPAIR_REQUIRED":
+            checks = state.get("checks")
+            if not isinstance(checks, dict) or checks.get("status") != "FAIL":
+                raise Blocked("REPAIR_BUNDLE_CHECKS_MISSING")
+            findings = checks.get("findings")
+            if not isinstance(findings, list) or not findings:
+                raise Blocked("REPAIR_BUNDLE_FINDINGS_MISSING")
+            workspace["repair_bundle"] = json.loads(json.dumps(checks))
+            workspace["repair_bundle_sha256"] = stable(checks)
         workspace_capsule = json.loads(json.dumps(cap))
         workspace_action = {
             "action": "CONTINUE_BOUND_ARTICLE_WORKER",
