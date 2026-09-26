@@ -180,6 +180,27 @@ Wenn die Regel nicht belegt werden kann:
 - Kein Hobbyraum als Current-Autorität benutzt.
 - Kein Paul-Parallelweg benutzt.
 
+
+
+## Closeout-/Current-Sync-Fehlerprotokoll
+
+- PR #440 erster Head `af3b61e11acb59e151a5215513bdc2f0fbf344fc`:
+  - Deterministic Entrance Gate: PASS.
+  - Immutable Base Hardlock Run `36273885762`: FAIL.
+  - Exakter Grund: Der Hardlock erlaubt einen Current-Sync nur als **exakt zwei Dateien**:
+    `control/startmaster0107/CURRENT_STATE.json` und
+    `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`.
+    Das im selben PR zusätzlich enthaltene Historienprotokoll machte den Pfad absichtlich unzulässig:
+    `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
+- Fix:
+  - Historienprotokoll aus dem Current-Sync entfernt.
+  - Current-Sync auf exakt die zwei autorisierten Dateien reduziert.
+  - Neuer Head `98de5d6d80a6c3be2d55d6edcdedbc7e9da0d104`.
+  - Deterministic Entrance Gate Run `36273941581`: PASS.
+  - Immutable Base Hardlock Run `36273940237`: PASS.
+  - PR #440 gemergt als `442d5f1cad2ce0bb25409e050925c64f48fb1008`.
+- Der erste separate Protokoll-PR #441 war auf dem alten Main geprüft. Nach Merge von #440 verlangte GitHub die zwei Required Checks auf dem neuen Base; #441 wurde deshalb geschlossen und das identische Protokoll frisch von neuem Main als PR #442 aufgesetzt. Das ist kein Produkt-/Fachfehler.
+
 ## Current-/Campus-Synchronisierung
 
 Die zuvor auf main vorhandene `CURRENT_STATE.json` beschrieb noch den alten Artikel-11-/Konzept-5-Produktionsstand. Der relevante Konzept-6-Delta wurde im Closeout auf einen separaten Current-Sync-Branch nachgezogen und die `PFERDE_ATELIER_START_HERE.json` hashgebunden an die aktualisierte Current-Datei rebunden.
