@@ -1,4 +1,4 @@
-name: Konzept 6 Technical Speed Test
+name: Konzept 6 Technical Full16 Speed Test
 
 on:
   push:
@@ -54,7 +54,7 @@ jobs:
           fi
           echo 'K6_TECH_SCOPE_PASS'
 
-      - name: Run two original articles through exact check path
+      - name: Run all 16 original articles through exact check path
         shell: bash
         env:
           SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
@@ -82,7 +82,7 @@ jobs:
           pack_by_snapshot={str(p.get('source_snapshot_id')):p for p in packs}
 
           results=[]
-          for idx,plan in enumerate(plans[:2]):
+          for idx,plan in enumerate(plans):
               ca=plan['canonical_article']
               slot=rel_by_id[plan['canonical_article_id']]
               article_path=article_by_slot[slot]
@@ -118,9 +118,22 @@ jobs:
               }
               results.append(row)
               print(json.dumps(row,ensure_ascii=False))
+          if len(results) != 16:
+              raise SystemExit('K6_SPEED_ARTICLE_COUNT_INVALID:'+str(len(results)))
           if any(r['status']!='PASS' for r in results):
               raise SystemExit('K6_SPEED_ARTICLE_NOT_PASS')
-          print(json.dumps({'summary':'K6_TWO_ARTICLE_SPEED_PASS','first_seconds':results[0]['seconds'],'second_seconds':results[1]['seconds'],'speedup_ratio':round(results[0]['seconds']/max(results[1]['seconds'],0.001),2)},ensure_ascii=False))
+          total=round(sum(r['seconds'] for r in results),3)
+          warm=results[1:]
+          avg_warm=round(sum(r['seconds'] for r in warm)/len(warm),3)
+          print(json.dumps({
+              'summary':'K6_FULL16_SPEED_PASS',
+              'article_count':len(results),
+              'total_seconds':total,
+              'cold_first_seconds':results[0]['seconds'],
+              'warm_average_seconds':avg_warm,
+              'warm_max_seconds':max(r['seconds'] for r in warm),
+              'warm_min_seconds':min(r['seconds'] for r in warm)
+          },ensure_ascii=False))
           PY
 
       - name: Preserve result
