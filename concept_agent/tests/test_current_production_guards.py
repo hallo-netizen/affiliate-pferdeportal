@@ -228,6 +228,8 @@ class CurrentProductionGuardTests(unittest.TestCase):
             "worker": result["process_trigger"]["worker"],
             "allowed_action": result["process_trigger"]["allowed_action"],
             "return_to": result["process_trigger"]["return_to"],
+            "handoff_is_terminal": result["process_trigger"]["handoff_is_terminal"],
+            "same_bound_worker_must_continue_without_return": result["process_trigger"]["same_bound_worker_must_continue_without_return"],
             "bound_work_item": result["process_trigger"]["bound_work_item"],
         }
         self.assertEqual(result["process_trigger"]["trigger_sha256"], progress_guard.stable(trigger_core))
