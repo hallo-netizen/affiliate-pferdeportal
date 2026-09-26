@@ -455,3 +455,27 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
   - Dieser temporäre Recovery-Weg ist keine Current-Autorität und wird nicht als Produktionsweg übernommen. Das frühere Durable-Event-System bleibt aus dem aktuellen Produktionsweg entfernt.
 - Damit bleibt der Abschlussstatus fail-closed: die eine zuständige Current-Autorität ist formal eindeutig, kann aber wegen des Authority-Sync-/Hardlock-Konflikts nicht auf den belegten neueren Live-Stand nachgezogen werden. Keine zweite Current-/NEXT-ACTION-Wahrheit wird aus Protokoll, Temp-Branch oder Historie erzeugt.
 - Keine Änderung an LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln, Plugins oder Publish.
+
+
+## Abschluss-/Nachholprüfung 2026-09-26 — Recovery-Delta nach PR #432
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Nach dem zunächst fehlgeschlagenen TEMP-Recovery `36246041178` wurde ein engerer read-only Recovery-Nachweis ausgeführt, der ausschließlich die historische autorisierte Ereigniskette bis Sequenz 74 berücksichtigt.
+- TEMP-Run `36246130808` (`TEMP DEV Recover Current16 State`) = SUCCESS.
+- Zugehöriger PPM-Export `36246130876` = SUCCESS.
+- Recovery-Quelle bleibt der historische, inzwischen aus dem aktuellen Produktionsweg entfernte Durable-Event-Stand; dieser Nachweis stellt ihn nicht als Produktionsweg wieder her.
+- Exakt rekonstruierter historischer Fortschritt bei Sequenz 74:
+  - `stage=ARTICLE_PRODUCTION`
+  - `phase=REPAIR_REQUIRED`
+  - `next_item_index=1`
+  - `allowed_action.action=REPAIR_DRAFT`
+  - `allowed_action.item_index=1`
+  - `allowed_action.checker=PPM679`
+  - `draft_sha256=bb3afaa71589e51a247240fc3ffd44cb0ac8bd9e8eb9ad041aa33854123ad924`
+  - `finding_sha256=606aba6fdf28f815450a2aeda9b3f7a04d4f281af82aef58ff1d3c24aa49d3fd`
+  - `checkpoint_sha256=6c90458444334482b631ec36bdfa5591b080b986e412675ebbf0244cf9b49675`
+  - `publish_allowed=false`
+- Der Recovery-Artefaktname lautet `temp-current16-recovered-state` (Run-Artefakt `10907178233`, temporär). Er ist Evidence, keine Current-Autorität.
+- Der frühere `DURABLE_EVENT_SEQUENCE_GAP`-Befund bleibt korrekt für den Versuch, die gesamte spätere Kommentarfolge ungefiltert wiederzugeben. Der enger begrenzte, historische autorisierte Stand bis Sequenz 74 ist dagegen reproduzierbar rekonstruierbar.
+- Daraus wird ausdrücklich keine neue CURRENT-/NEXT-ACTION-Wahrheit abgeleitet. Die zuständige Current-Autorität bleibt `control/startmaster0107/CURRENT_STATE.json`; deren Nachzug auf den neueren belegten Stand bleibt durch den in PR #431 dokumentierten Authority-Sync-/Hardlock-Konflikt BLOCKED.
+- Keine Änderung an Produktionslogik, Architektur, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln, Plugins oder Publish.
