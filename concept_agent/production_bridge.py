@@ -105,6 +105,27 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
         links = plan["quality_binding"].get("link_bindings")
         if not isinstance(links, list) or len(links) != 3 or len({x.get("role") for x in links}) != 3:
             raise Blocked(f"CURRENT_LINK_BINDING_INVALID:{index}")
+        writer_preflight = {
+            "contract": "CONCEPT_AGENT_WRITER_PREFLIGHT_V1",
+            "instruction": "APPLY_ALL_BOUND_REQUIREMENTS_BEFORE_FIRST_DRAFT",
+            "source_only": "EXISTING_BOUND_AUTHORITIES",
+            "global_requirements": static_rules["constants"],
+            "structure_requirements": static_rules["structure"],
+            "article_type_requirements": type_authority[article["article_type"]],
+            "bound_requirements": {
+                "intent_terms": list(plan["quality_binding"].get("intent_terms") or []),
+                "faq_direct_answer": plan["quality_binding"].get("faq_direct_answer"),
+                "table_value_statement": plan["quality_binding"].get("table_value_statement"),
+                "link_bindings": json.loads(json.dumps(links)),
+                "runtime_order": json.loads(json.dumps(plan.get("runtime_order") or {})),
+                "allowed_fact_ids": list((plan.get("runtime_order") or {}).get("allowed_fact_ids") or []),
+            },
+            "rules_changed": False,
+            "checker_order_changed": False,
+            "publish_allowed": False,
+        }
+        writer_preflight["preflight_sha256"] = stable(writer_preflight)
+
         item = {
             "item_index": index,
             "identity": {
@@ -122,6 +143,7 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
                 "static_validator_constants": static_rules["constants"],
                 "article_type_definition": type_authority[article["article_type"]],
             },
+            "writer_preflight": writer_preflight,
             "forbidden_inputs": {
                 "historical_article_content": True,
                 "recovery_article_content": True,
