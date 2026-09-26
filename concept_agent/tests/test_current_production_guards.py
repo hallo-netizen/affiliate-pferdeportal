@@ -145,7 +145,15 @@ class CurrentProductionGuardTests(unittest.TestCase):
         if phase == "REPAIR_REQUIRED":
             checks = {
                 "status": "FAIL",
+                "checker": action.get("checker"),
                 "checked_draft_sha256": row["draft_sha256"],
+                "errors": ["TEST_REPAIR_REQUIRED"],
+                "findings": [
+                    {"error_code": "TEST_FINDING_ONE", "repair_owner": "DRAFT_WORKER"},
+                    {"error_code": "TEST_FINDING_TWO", "repair_owner": "DRAFT_WORKER"},
+                ],
+                "repair_owner": "DRAFT_WORKER",
+                "repair_owners": ["DRAFT_WORKER"],
             }
             last_error = "TEST_REPAIR_REQUIRED"
         article = {
@@ -419,6 +427,15 @@ class CurrentProductionGuardTests(unittest.TestCase):
             )
 
             decision = self._decision(binding, state)
+            repair_start = progress_guard.resume(binding, state, decision)
+            self.assertEqual(
+                [row["error_code"] for row in repair_start["process_trigger"]["workspace"]["repair_bundle"]["findings"]],
+                ["TEST_FINDING_ONE", "TEST_FINDING_TWO"],
+            )
+            self.assertEqual(
+                repair_start["process_trigger"]["workspace"]["repair_bundle_sha256"],
+                universal_reentry_guard.stable(repair_start["process_trigger"]["workspace"]["repair_bundle"]),
+            )
             draft.write_text("article-v2", encoding="utf-8")
             state = progress_guard.replace_draft(binding, state, decision, 0, draft)
 
