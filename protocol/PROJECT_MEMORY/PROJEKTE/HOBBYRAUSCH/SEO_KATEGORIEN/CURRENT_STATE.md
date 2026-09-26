@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-26
-STATUS: KATEGORIE-WORKFLOW GEBUNDEN / INSTALLATION NOCH BLOCKED
+STATUS: KATEGORIE-WORKFLOW 1.8.1 ALS NEUESTER ENTWICKLUNGSSTAND GEBUNDEN / ZIP NOCH NICHT BYTEGEBUNDEN
 
 ## Rolle
 
@@ -11,35 +11,49 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_SEO_KATEGORIEN`.
 
 ## Aktueller belastbarer Stand
 
-Der vorhandene allgemeingültige Kategorie-Workflow wurde als Basis für Hobby Depot gebunden.
+Neuester belegter Entwicklungsstand:
+**Affiliate-Portal Kategorie-Workflow 1.8.1**
 
-Belegte Basis:
-- MASTER 016 R10/R9 Runtime Deployment
-- Plugin V1.8.0
-- Content → WordPress `category`
-- Marketplace/HivePress → `hp_listing_category`
-- Journal nur auf explizit gebundener Taxonomie
-- DataForSEO-Research
-- SEO-/Intent-/Kannibalisierungsprüfungen
-- Dry-Run → Apply → Readback
-- kein Auto-Delete / keine stillen Remaps
+V1.8.1 ist als Weiterentwicklung der allgemeingültigen V1.8.0-Linie dokumentiert.
+Zusatz:
+`PARENT_TOPIC_GAP`-Finalprüfungsgate.
 
-Projektinput liegt unter:
+Belegt:
+- 220/220 Vollregression PASS
+- 15/15 PHP-Lint PASS
+- Fresh-ZIP 220/220 PASS
+- ZIP SHA-256:
+  `1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`
+- Live noch nicht installiert
+
+Kein belegter V1.8.2+-Stand gefunden.
+
+Technische Basis vorhanden:
+- DataForSEO-Verbindungstest
+- Keyword Ideas / Suggestions / Overview
+- Research-/Evidence-/Lifecycle-/Coverage-Pfad
+- SEO-Nachfrage-/Intent-/Affiliate-Fit-Gates
+- WordPress-/Taxonomie-Inventur
+- WordPress `category`
+- HivePress `hp_listing_category`
+- explizit gebundene Journal-Taxonomie
+- Dry-Run → Apply → Readback/Rollback
+- persistente concept_id-Bindung
+
+Projektinput:
 `../KONZEPT/VORARBEITEN_HOBBYFINDER/`
 
-Technischer Audit:
-`KATEGORIE_WORKFLOW_AUDIT_20260926.md`
-
-Keine Pferde-Atelier-Fachkategorien oder Pferde-Reparaturdaten werden übernommen.
-Die spätere 1.8.1-Pferde-Testkette ist nicht die Hobby-Depot-Basis.
+Detailprüfung:
+`KATEGORIE_WORKFLOW_VERSIONSPRUEFUNG_20260926.md`
 
 ## Erster offener Blocker
 
-Die exakt hashgebundenen vollständigen V1.8.0-Installer-/Source-Bytes sind aus den aktuell erreichbaren Quellen noch nicht wieder gebunden.
+Der exakte V1.8.1-Dateiname und die ZIP-Bytes sind in den aktuell erreichbaren autoritativen Quellen nicht vorhanden.
 
-Ein realer GitHub-Entpacktest hat bestätigt:
-Der im technischen Branch erreichbare Root-Master enthält den V1.8.0-Installer NICHT und darf nicht als Ersatzbasis verwendet werden.
+Die vom Nutzer erwähnte lokale Datei ist in diesem Chat aktuell nicht als Datei verfügbar und konnte deshalb noch nicht gegen den bekannten SHA-256 geprüft werden.
 
 ## NEXT ACTION
 
-Exakten V1.8.0-Installer oder Source anhand der bekannten SHA-256 wiederbinden; danach vollständiger Projektbindungs-Scan + Regression und erst dann Installation auf Hobby Depot.
+V1.8.1-ZIP bytegenau gegen
+`1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`
+prüfen; danach vollständiger Pferde-/Projektbindungs-Scan sowie Writer-/DataForSEO-/WordPress-Ausgabeprüfung und erst dann Installation.
