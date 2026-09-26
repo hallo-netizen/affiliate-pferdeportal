@@ -395,3 +395,15 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
 - Die bestehende Kette wird im selben Test vollständig bis zum vertraglichen Ende fortgesetzt:
   WRITE_DRAFT → LT-Repair → LT-PASS → PPM-Repair → LT-Recheck → PPM-PASS → PSERC → ENDSTEMPEL → STOP.
 - Ausschließlich Testnachweis; keine Produktionslogik, keine Architektur, kein Runner, kein Startweg, keine Qualitätsregel und kein Publish wurden verändert.
+
+
+## Nachweis — persistente Research-Nutzdaten 2026-09-26
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Batch unverändert: `df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0`, 16 Artikel.
+- Die echte `CONCEPT_AGENT_RESEARCH_BOUND_V1`-Nutzdatei liegt dauerhaft unter `concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json`.
+- Research-Binding-SHA-256: `cebfc4416a8022a684a4ab11cb53a6f879d497db480f0272c69bee07db7b5509`.
+- Datei-SHA-256: `e33b81f3b63185fe333ed30195bc9366c9bf8dde856bbf463d1dc57bbf6f4fc0`.
+- `concept_agent/CONTROL_ENTRY_POINTER.json` bindet Pfad, Datei-Hash und Binding-Hash.
+- Keine Änderung an text-start, Workflowarchitektur, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln oder Publish.
+- Zweck: Ein späterer Wiedereinstieg darf die bereits gebundene Recherche nicht erneut vergessen oder aus bloßen Status-/Hashangaben rekonstruieren.
