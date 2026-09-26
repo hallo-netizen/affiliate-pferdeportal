@@ -4,6 +4,7 @@ import html
 import json
 import re
 import zipfile
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -38,6 +39,7 @@ def _type_class(article_type: str) -> str:
         raise AuthoringContractError('ARTICLE_TYPE_TOKEN_INVALID')
     return 'ppm-type-' + value
 
+@lru_cache(maxsize=4)
 def _static_ppm_rules(package: Path) -> dict[str, Any]:
     try:
         with zipfile.ZipFile(package) as archive:
@@ -66,6 +68,7 @@ def _static_ppm_rules(package: Path) -> dict[str, Any]:
         raise AuthoringContractError('PPM_SOURCE_TRACE_MINIMUM_MISSING')
     return {'constants':constants,'structure':structure,'derived_binding_requirements':{'table_value_statement_minimum_words':int(table_value_match.group(1)),'source_trace_minimum':int(source_trace_match.group(1))}}
 
+@lru_cache(maxsize=32)
 def _type_definition(package: Path, article_type: str) -> dict[str, Any]:
     try:
         with zipfile.ZipFile(package) as archive:
