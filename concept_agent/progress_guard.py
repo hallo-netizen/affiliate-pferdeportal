@@ -523,6 +523,16 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         }
         if action.get("action") == "WRITE_DRAFT":
             trigger_core["bound_work_item"] = json.loads(json.dumps(_binding_item(binding, int(action["item_index"]))))
+            workspace = decision.get("workspace")
+            capsule = decision.get("workspace_capsule")
+            workspace_action = decision.get("workspace_action")
+            if any(value is not None for value in (workspace, capsule)):
+                if not isinstance(workspace, dict) or not isinstance(capsule, dict) or not isinstance(workspace_action, dict):
+                    raise Blocked("WORKSPACE_CAPSULE_REQUIRED_FOR_BOUND_WRITE")
+                trigger_core["workspace"] = json.loads(json.dumps(workspace))
+                trigger_core["workspace_capsule"] = json.loads(json.dumps(capsule))
+                trigger_core["workspace_action"] = json.loads(json.dumps(workspace_action))
+                trigger_core["workspace_restore_contract"] = "SYSTEM4_WORKSPACE_RECOVERY_CAPSULE_V1"
         if isinstance(decision.get("workspace_action"), dict):
             trigger_core["workspace_action"] = json.loads(json.dumps(decision["workspace_action"]))
         if action.get("action") in {"RUN_CHECKER", "REPAIR_DRAFT"}:

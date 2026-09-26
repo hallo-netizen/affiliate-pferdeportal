@@ -162,6 +162,66 @@ class CurrentProductionGuardTests(unittest.TestCase):
             "publish_allowed": False,
         }
 
+    def _draft_ready_workspace_capsule(self, binding, state):
+        index = int(state["allowed_action"]["item_index"])
+        item = binding["items"][index]
+        research_text = "research"
+        facts_text = "facts"
+        fact_pack = {"facts": []}
+        plan_item = {"plan_slot": item["identity"]["plan_slot"]}
+        context_core = {"fact_pack": fact_pack, "production_plan_item": plan_item}
+        article = {
+            "canonical_article_id": f"article:{index}",
+            "item_index": index,
+            **{k: item["identity"][k] for k in ("title", "target_keyword", "category", "article_type", "plan_slot")},
+        }
+        inner = {
+            "contract": universal_reentry_guard.STATE_CONTRACT,
+            "source_snapshot_sha256": hashlib.sha256(b"current-snapshot").hexdigest(),
+            "batch_sha256": binding["batch_sha256"],
+            "article": article,
+            "immutable_core_sha256": "",
+            "publish_allowed": False,
+            "phase": "DRAFT_REQUIRED",
+            "revision": 0,
+            "research": {"text": research_text, "sha256": hashlib.sha256(research_text.encode()).hexdigest()},
+            "facts": {"text": facts_text, "sha256": hashlib.sha256(facts_text.encode()).hexdigest()},
+            "production_context": {
+                **context_core,
+                "sha256": universal_reentry_guard.stable(context_core),
+            },
+            "authoring_contract": {"contract": "TEST_BOUND"},
+            "draft_markdown": None,
+            "draft_sha256": None,
+            "checks": {},
+            "last_error": None,
+            "release_prepared": None,
+            "released": False,
+        }
+        inner["immutable_core_sha256"] = universal_reentry_guard.stable({
+            "contract": inner["contract"],
+            "source_snapshot_sha256": inner["source_snapshot_sha256"],
+            "batch_sha256": inner["batch_sha256"],
+            "article": inner["article"],
+        })
+        raw = (json.dumps(inner, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
+        file_row = {
+            "path": "state.json",
+            "size": len(raw),
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "base64": __import__("base64").b64encode(raw).decode(),
+        }
+        normalized = [{"path": "state.json", "size": len(raw), "sha256": file_row["sha256"]}]
+        return {
+            "contract": universal_reentry_guard.CAPSULE_CONTRACT,
+            "status": "RECOVERY_CAPSULE_READY",
+            "workspace_identity": universal_reentry_guard._capsule_identity(inner),
+            "file_count": 1,
+            "tree_sha256": universal_reentry_guard._tree_hash(normalized),
+            "files": [file_row],
+            "publish_allowed": False,
+        }
+
     def _decision(self, binding, state):
         capsule = self._workspace_capsule(binding, state)
         return universal_reentry_guard.build(binding, state, capsule)
@@ -261,6 +321,99 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(payload, binding["items"][0])
         self.assertNotEqual(payload, binding["items"][1])
         self.assertEqual(payload["identity"]["plan_slot"], state["allowed_action"]["plan_slot"])
+
+    def test_write_draft_handoff_preserves_prepared_workspace_without_rerunning_research(self):
+        binding = self._binding()
+        state = self._checkpoint(binding)
+        capsule = self._draft_ready_workspace_capsule(binding, state)
+        decision = universal_reentry_guard.build(binding, state, capsule)
+
+        result = progress_guard.resume(binding, state, decision)
+        trigger = result["process_trigger"]
+
+        self.assertEqual(result["allowed_action"]["action"], "WRITE_DRAFT")
+        self.assertEqual(trigger["bound_work_item"], binding["items"][0])
+        self.assertEqual(trigger["workspace_capsule"], capsule)
+        self.assertEqual(trigger["workspace_restore_contract"], universal_reentry_guard.CAPSULE_CONTRACT)
+        self.assertEqual(trigger["workspace_action"]["action"], "CONTINUE_BOUND_ARTICLE_WORKER")
+        self.assertEqual(trigger["workspace_action"]["inner_phase"], "DRAFT_REQUIRED")
+        self.assertEqual(trigger["workspace_action"]["inner_action"], "BOUND_DRAFT_ONLY")
+        self.assertNotEqual(trigger["workspace_action"]["inner_phase"], "RESEARCH_REQUIRED")
+
+    def test_write_draft_handoff_blocks_partial_workspace_transport(self):
+        binding = self._binding()
+        state = self._checkpoint(binding)
+        capsule = self._draft_ready_workspace_capsule(binding, state)
+        decision = universal_reentry_guard.build(binding, state, capsule)
+        broken = json.loads(json.dumps(decision))
+        broken["workspace_capsule"] = None
+        core = dict(broken)
+        core.pop("decision_sha256", None)
+        broken["decision_sha256"] = progress_guard.stable(core)
+
+        with self.assertRaisesRegex(progress_guard.Blocked, "WORKSPACE_CAPSULE_REQUIRED_FOR_BOUND_WRITE"):
+            progress_guard.resume(binding, state, broken)
+
+    def test_pre_researched_single_article_runs_write_repairs_and_rechecks_to_pass(self):
+        binding = self._binding(1)
+        state = self._checkpoint(binding)
+        capsule = self._draft_ready_workspace_capsule(binding, state)
+        decision = universal_reentry_guard.build(binding, state, capsule)
+        start = progress_guard.resume(binding, state, decision)
+        self.assertEqual(start["process_trigger"]["workspace_action"]["inner_phase"], "DRAFT_REQUIRED")
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            draft = self._draft(root, binding, 0, "article-v1")
+            state = progress_guard.record_draft(binding, state, decision, 0, draft)
+
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "lt"}]},
+                draft,
+            )
+
+            decision = self._decision(binding, state)
+            draft.write_text("article-v2", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+            decision = self._decision(binding, state)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "ppm"}]},
+                draft,
+            )
+
+            decision = self._decision(binding, state)
+            draft.write_text("article-v3", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+            decision = self._decision(binding, state)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+        self.assertEqual(state["phase"], "ALL_ARTICLES_LT_PPM_PASS")
+        self.assertEqual(state["next_item_index"], 1)
+        self.assertEqual(len(state["completed_items"]), 1)
+        self.assertEqual(state["completed_items"][0]["lt68"], "PASS")
+        self.assertEqual(state["completed_items"][0]["ppm679"], "PASS")
 
     def test_stale_decision_dies_immediately_after_checkpoint_changes(self):
         binding = self._binding()
