@@ -240,3 +240,22 @@ Status dieses Abschnitts: Historie/Nachweis. **Keine CURRENT-Autorität und kein
 - Historiennachweis, keine Current-Autorität.
 - Funktionaler Minimalfix ausschließlich in `concept_agent/intake_bridge.py`: vorhandenen gültigen Produktions-Checkpoint fortsetzen; existiert vor Beginn der Produktion noch keiner, unmittelbar mit `RESEARCH_REQUIRED` fortsetzen. Nach begonnener Produktion bleibt fehlender Checkpoint fail-closed ohne Rekonstruktion.
 - Keine neue Route, kein Runner, kein Workflow, kein Codex/API, keine Änderung an Artikel-/Qualitätsregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL oder Publish.
+
+## Abschluss-/Nachholprüfung 2026-09-26 — realer Worker-Fortsetzungsblocker
+
+Status dieses Abschnitts: **Historie/Nachweis, keine CURRENT-Autorität, keine eigene NEXT ACTION.**
+
+- Frisch geprüfter Main: `17e5e32c5303e6732bbab0845ae532900ac5f527`.
+- PR #416 gemergt: Start-Intake bindet `BOUND_CHAT_WORKER`.
+- PR #417 gemergt: frischer Batch darf vor Recherche ohne Produktions-Checkpoint mit `RESEARCH_REQUIRED` fortsetzen.
+- Letzter realer Zentralstart: Run `36199051596` = SUCCESS.
+- Letzter realer Pferdeatelier-Empfänger: Run `36199100455` = SUCCESS.
+- Receipt des Empfängers: 16er-Batch, `CONCEPT_AGENT_INTAKE_READY`, `BOUND_CHAT_WORKER`, `continuation_required=true`, erste Aktion `RESEARCH_REQUIRED`, vor Recherche kein Produktions-Checkpoint erforderlich.
+- Der Empfängerlauf endet danach mit Upload von Intake/Receipt. Für diesen Lauf wurde kein nachfolgender gültiger `CONCEPT_AGENT_CURRENT_PROGRESS_V1`-Checkpoint und kein späterer Artikelproduktionsfortschritt gefunden.
+- Aktueller fachlicher Befund: reale Konsumption/Ausführung der nicht-terminalen Worker-Fortsetzung nach Intake ist weiterhin offen. Trigger-/Pflichtfelder sind kein Ausführungsnachweis.
+- Der verlangte reale 1:1-Gesamtlauf über Start → echte Workeraktion → Rückgabe → nächste Aktion → Repair/Rückweg → PSERC → ENDSTEMPEL → vertraglichen STOP wurde **noch nicht ausgeführt**. Kein Gesamt-PASS.
+- Die einzige Current-Autorität auf main ist nach #416/#417 und dem realen Lauf inhaltlich veraltet. Reiner Current-/Root-Sync wurde als PR #418 vorbereitet.
+- PR #418 ist aktuell durch den bestehenden `hardlock-base` blockiert: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED` für `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`. Ruleset 21788951 ist aktiv, `bypass_actors=[]`, `current_user_can_bypass=never`.
+- Deshalb bleibt die operative Current-Wahrheit auf main bis zur autorisierten Root-/Current-Synchronisierung unverändert; dieser Protokollabschnitt ersetzt sie ausdrücklich nicht.
+- Keine neue Architektur, kein Runner, kein Codex-/API-Weg, keine GitHub-Produktionssteuerung, keine Änderung an Artikel-/Qualitätsregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL oder Publish.
+
