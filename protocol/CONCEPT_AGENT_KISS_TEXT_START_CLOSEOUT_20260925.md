@@ -417,3 +417,18 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
 - Falscher Datei-, Binding-, Batch- oder Count-Stand blockiert fail-closed.
 - Fremder/neuer Batch bleibt beim bisherigen Research-Start.
 - Keine Änderung an text-start, Workflowarchitektur, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln oder Publish.
+
+
+## Abschluss-/Nachholprüfung 2026-09-26 — Live-Reentry nach persistierter Recherche
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Aktuelles Produktions-main vor Current-Nachzug: `ae15e893d10be04243b214d717f47535471933a3`.
+- PR #427 gemergt: vorbereiteter Workspace kann am ersten `WRITE_DRAFT`-Handoff vollständig weitergegeben werden; Produktionslogik außerhalb dieses Übergabepunkts unverändert.
+- PR #428 gemergt: Testfall mit bereits gebundener Recherche wurde über WRITE_DRAFT → LT-Reparatur/Recheck → PPM-Reparatur/Recheck → PSERC → ENDSTEMPEL → vertragliches STOP erweitert; Testnachweis, kein Live-E2E.
+- PR #429 gemergt: exakte aktuelle 16er-`CONCEPT_AGENT_RESEARCH_BOUND_V1`-Nutzdaten dauerhaft unter `concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json` gespeichert.
+- PR #430 gemergt: gleicher Batch konsumiert die exakt hashgebundene persistierte Recherche und fordert keine neue Recherche an.
+- PR #430 Schutzprüfungen: Deterministic Entrance Gate Run `36245560559` SUCCESS; Immutable Base Hardlock Run `36245559334` SUCCESS.
+- Neuer echter Start: zentraler Run `36245592069` SUCCESS; Pferdeatelier Receiver `36245600186` SUCCESS auf `ae15e893d10be04243b214d717f47535471933a3`.
+- Live-Receipt: `USE_PERSISTED_RESEARCH_BOUND`, Research-Rerun nicht erforderlich, nächster bestehender Einstieg `concept_agent/production_bridge.py`.
+- Erster offene Live-Punkt: Receiver endet nach Intake/Receipt; noch kein gültiges `CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1` und kein `CONCEPT_AGENT_CURRENT_PROGRESS_V1` aus diesem Lauf beobachtet. Damit ist die reale BOUND_CHAT_WORKER-Konsumierung des bestehenden Handoffs vor Artikel 0 weiterhin offen.
+- Keine Änderung an LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln, Publish oder text-start als reinem Startknopf.
