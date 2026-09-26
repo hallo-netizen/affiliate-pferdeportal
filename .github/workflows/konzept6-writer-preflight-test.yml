@@ -7,6 +7,7 @@ on:
       - 'konzept6/working-copy-20260926'
     paths:
       - '.github/workflows/konzept6-writer-preflight-test.yml'
+      - 'concept_agent/production_bridge.py'
 
 permissions:
   contents: read
@@ -48,6 +49,21 @@ jobs:
               assert pf['structure_requirements']==item['authoring_authority']['structure_contract']
               assert pf['article_type_requirements']==item['authoring_authority']['article_type_definition']
               assert pf['bound_requirements']['link_bindings']==item['link_bindings']
+              policy=pf['k6_h2_target_keyword_policy']
+              assert policy['contract']=='K6_H2_TARGET_KEYWORD_POLICY_V1'
+              assert policy['source']=='USER_APPROVED_K6_RULE_2026-09-26'
+              assert policy['scope']=='H2_ONLY'
+              assert policy['target_keyword']==item['identity']['target_keyword']
+              assert policy['exact_occurrences_min']==1
+              assert policy['exact_occurrences_max']==2
+              assert policy['zero_occurrences_allowed'] is False
+              assert policy['intent_term_requirement_unchanged'] is True
+              assert policy['target_keyword_is_not_default_repair_term'] is True
+              assert policy['repair_strategy_when_exact_occurrence_cap_reached']=='USE_NON_TARGET_BOUND_INTENT_TERM_IN_NATURAL_SECTION_HEADING'
+              assert policy['ppm679_changed'] is False
+              assert policy['languagetool68_changed'] is False
+              assert pf['bound_requirements']['intent_terms']==item['production_plan_item']['quality_binding']['intent_terms']
+              assert pf['additive_rules']==['K6_H2_TARGET_KEYWORD_POLICY_V1']
               core=dict(pf); declared=core.pop('preflight_sha256')
               assert declared==production_bridge.stable(core)
           checkpoint=production_bridge.initial_checkpoint(binding)
@@ -59,6 +75,7 @@ jobs:
           assert start['process_trigger']['worker']=='BOUND_CHAT_WORKER'
           print('K6_WRITER_PREFLIGHT_REAL16_PASS')
           print('ITEM_COUNT=16')
+          print('K6_H2_POLICY=PASS')
           print('FIRST_PREFLIGHT_SHA='+payload['writer_preflight']['preflight_sha256'])
           out=repo/'konzept6-live-binding.json'
           out.write_text(json.dumps(binding,ensure_ascii=False,indent=2),encoding='utf-8')
