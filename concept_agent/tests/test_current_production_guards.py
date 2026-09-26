@@ -354,6 +354,67 @@ class CurrentProductionGuardTests(unittest.TestCase):
         with self.assertRaisesRegex(progress_guard.Blocked, "WORKSPACE_CAPSULE_REQUIRED_FOR_BOUND_WRITE"):
             progress_guard.resume(binding, state, broken)
 
+    def test_pre_researched_single_article_runs_write_repairs_and_rechecks_to_pass(self):
+        binding = self._binding(1)
+        state = self._checkpoint(binding)
+        capsule = self._draft_ready_workspace_capsule(binding, state)
+        decision = universal_reentry_guard.build(binding, state, capsule)
+        start = progress_guard.resume(binding, state, decision)
+        self.assertEqual(start["process_trigger"]["workspace_action"]["inner_phase"], "DRAFT_REQUIRED")
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            draft = self._draft(root, binding, 0, "article-v1")
+            state = progress_guard.record_draft(binding, state, decision, 0, draft)
+
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "lt"}]},
+                draft,
+            )
+
+            decision = self._decision(binding, state)
+            draft.write_text("article-v2", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+            decision = self._decision(binding, state)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "ppm"}]},
+                draft,
+            )
+
+            decision = self._decision(binding, state)
+            draft.write_text("article-v3", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+            decision = self._decision(binding, state)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+        self.assertEqual(state["phase"], "ALL_ARTICLES_LT_PPM_PASS")
+        self.assertEqual(state["next_item_index"], 1)
+        self.assertEqual(len(state["completed_items"]), 1)
+        self.assertEqual(state["completed_items"][0]["lt68"], "PASS")
+        self.assertEqual(state["completed_items"][0]["ppm679"], "PASS")
+
     def test_stale_decision_dies_immediately_after_checkpoint_changes(self):
         binding = self._binding()
         state = self._checkpoint(binding)
