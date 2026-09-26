@@ -407,3 +407,13 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
 - `concept_agent/CONTROL_ENTRY_POINTER.json` bindet Pfad, Datei-Hash und Binding-Hash.
 - Keine Änderung an text-start, Workflowarchitektur, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln oder Publish.
 - Zweck: Ein späterer Wiedereinstieg darf die bereits gebundene Recherche nicht erneut vergessen oder aus bloßen Status-/Hashangaben rekonstruieren.
+
+
+## Nachweis — gespeicherte Recherche wird beim gleichen Batch konsumiert
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Gleicher Batch + exakt gültige persistierte `CONCEPT_AGENT_RESEARCH_BOUND_V1`: `intake_bridge.py` gibt nicht erneut `RESEARCH_REQUIRED` aus.
+- Stattdessen bindet die bestehende Übergabe direkt den vorhandenen `concept_agent/production_bridge.py`.
+- Falscher Datei-, Binding-, Batch- oder Count-Stand blockiert fail-closed.
+- Fremder/neuer Batch bleibt beim bisherigen Research-Start.
+- Keine Änderung an text-start, Workflowarchitektur, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln oder Publish.
