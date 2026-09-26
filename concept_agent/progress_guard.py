@@ -523,6 +523,8 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         }
         if action.get("action") == "WRITE_DRAFT":
             trigger_core["bound_work_item"] = json.loads(json.dumps(_binding_item(binding, int(action["item_index"]))))
+        if isinstance(decision.get("workspace_action"), dict):
+            trigger_core["workspace_action"] = json.loads(json.dumps(decision["workspace_action"]))
         if action.get("action") in {"RUN_CHECKER", "REPAIR_DRAFT"}:
             workspace = decision.get("workspace")
             capsule = decision.get("workspace_capsule")
