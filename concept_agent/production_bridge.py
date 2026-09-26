@@ -30,6 +30,11 @@ def canon(value) -> bytes:
 def stable(value) -> str:
     return hashlib.sha256(canon(value)).hexdigest()
 
+def _normalize_heading_phrase(value: str) -> str:
+    value = re.sub(r"(?is)<[^>]+>", " ", str(value or "")).casefold()
+    value = re.sub(r"[^a-z0-9äöüß]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
 def load(path: Path) -> dict:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
@@ -105,6 +110,10 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
         links = plan["quality_binding"].get("link_bindings")
         if not isinstance(links, list) or len(links) != 3 or len({x.get("role") for x in links}) != 3:
             raise Blocked(f"CURRENT_LINK_BINDING_INVALID:{index}")
+        title_target_collision = (
+            _normalize_heading_phrase(article["title"])
+            == _normalize_heading_phrase(article["target_keyword"])
+        )
         writer_preflight = {
             "contract": "CONCEPT_AGENT_WRITER_PREFLIGHT_V1",
             "instruction": "APPLY_ALL_BOUND_REQUIREMENTS_BEFORE_FIRST_DRAFT",
@@ -126,9 +135,11 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
                 "scope": "H2_ONLY",
                 "target_keyword": article["target_keyword"],
                 "exact_match": "CASEFOLD_PUNCTUATION_NORMALIZED_FULL_PHRASE",
-                "exact_occurrences_min": 1,
-                "exact_occurrences_max": 2,
-                "zero_occurrences_allowed": False,
+                "exact_occurrences_min": 0 if title_target_collision else 1,
+                "exact_occurrences_max": 0 if title_target_collision else 2,
+                "zero_occurrences_allowed": title_target_collision,
+                "title_target_normalized_equal": title_target_collision,
+                "title_collision_exception": "NO_EXACT_TARGET_KEYWORD_IN_H2_WHEN_NORMALIZED_TITLE_EQUALS_TARGET" if title_target_collision else None,
                 "intent_term_requirement_unchanged": True,
                 "target_keyword_is_not_default_repair_term": True,
                 "second_occurrence_only_if_natural_and_content_fitting": True,
