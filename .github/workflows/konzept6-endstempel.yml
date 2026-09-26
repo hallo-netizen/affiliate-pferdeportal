@@ -5,7 +5,8 @@ on:
     branches:
       - 'konzept6/working-copy-20260926'
     paths:
-      - 'concept_agent/konzept6/ENDSTEMPEL_PAYLOAD.zip.b64'\n      - 'concept_agent/konzept6/ENDSTEMPEL_TRIGGER.txt'
+      - 'concept_agent/konzept6/ENDSTEMPEL_PAYLOAD.zip.b64'
+      - 'concept_agent/konzept6/ENDSTEMPEL_TRIGGER.txt'
 
 permissions:
   contents: write
