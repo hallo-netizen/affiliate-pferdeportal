@@ -21,7 +21,12 @@ jobs:
           printf '%s\n' "$GOT"
       - uses: actions/upload-artifact@v4
         with:
-          name: temp-existing-ppm679
-          path: control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
+          name: temp-existing-concept-agent-workspace
+          path: |
+            concept_agent/
+            isolated_system4/
+            affiliate-portal-router/assets/portal-structure-v279.json
+            control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
+            control/startmaster0107/CURRENT_STATE.json
           if-no-files-found: error
           retention-days: 1
