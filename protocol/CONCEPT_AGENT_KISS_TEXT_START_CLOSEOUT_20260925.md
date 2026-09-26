@@ -267,3 +267,76 @@ Status dieses Abschnitts: **Historie/Nachweis, keine CURRENT-Autorität, keine e
 - Negativ: manipulierter Checkpoint wurde fail-closed blockiert; terminales STOP erzeugte keinen weiteren Trigger.
 - Teststatus: PASS. Keine Produktionslogik, Qualitätsregel, LT-6.8-, PPM-6.7.9-, PSERC-, ENDSTEMPEL- oder Publish-Änderung.
 
+## Abschluss-/Nachholprüfung 2026-09-26 — PR #421 + jüngster Realstart + Execution-Workspace
+
+Status dieses Abschnitts: **Historie/Nachweis, keine CURRENT-Autorität und keine eigene NEXT ACTION.**
+
+### Frischecheck / Delta
+- Bürotür `concept_agent/START_HERE.md` und Pointer `concept_agent/CONTROL_ENTRY_POINTER.json` routen weiterhin eindeutig auf genau eine Current-Autorität: `control/startmaster0107/CURRENT_STATE.json`.
+- Autoritativer Zielvertrag unverändert: `control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json` mit Ziel `MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE`.
+- Aktueller Main vor dieser Nachholsynchronisierung: `c2155b694dc46fc7120038d43d82e0b0faf73286`.
+- Seit der bisher in Current gebundenen Live-Evidence `17e5e32...` lag relevantes Delta vor; deshalb wurde ausschließlich dieses Delta geprüft.
+
+### Tatsächlich erledigt / nachgewiesen
+- PR #421 ist gemergt: `c2155b694dc46fc7120038d43d82e0b0faf73286`.
+- PR #421 ändert keine Produktions- oder Qualitätslogik. Er stellt die bereits vorhandene aktive Chat-Konsumption nach `CONCEPT_AGENT_INTAKE_READY` wieder her und ergänzt einen vollständigen Handoff-Regressionslauf.
+- Der PR-#421-Test konsumiert die gebundene Kette durch Recherche-/Authoring-Handoffs, 16 Artikel, LT-/PPM-Reparaturrückwege, PSERC, ENDSTEMPEL, Finaldatei und terminales STOP. Das ist **Test-Evidence**, kein realer Produktions-E2E.
+- Jüngster realer zentraler Start: `36233010823` = SUCCESS.
+- Jüngster realer Receiver: `36233018969` = SUCCESS auf Main `c2155b69...`.
+- Receiver-Receipt: Batch `df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0`, 16 Artikel, `CONCEPT_AGENT_INTAKE_READY`, `BOUND_CHAT_WORKER`, `continuation_required=true`, `fresh_batch_first_action=RESEARCH_REQUIRED`, `production_checkpoint_required_before_research=false`, `publish_allowed=false`.
+- Für diesen Realstart wurde kein nachfolgender gültiger `CONCEPT_AGENT_CURRENT_PROGRESS_V1`-Checkpoint und kein vertraglicher STOP nachgewiesen.
+- PR #422 (`Restore bound worker workspace in existing text-start handoff`) wurde geprüft und **geschlossen, nicht gemergt**. Grund: Er hätte die geschützte `.github/workflows/text-start-pferdeatelier.yml` verändert und damit genau den verbotenen GitHub-/Startworkflow-Transportweg geschaffen.
+- Die aktuelle Chat-Ausführungsumgebung besitzt keinen gemounteten Current-Main-Repository-Checkout. Die gebundene PPM-6.7.9-ZIP liegt auf Main (Git-Blob `151e9d6f908453dfc5b4acb497c4927a3f03c940`, 1.614.485 Bytes, gebundener SHA-256 `acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1`), kann vom verfügbaren GitHub-Textconnector aber nicht als Binärbytes in den aktuellen Worker-Container materialisiert werden; direkter Raw-Netzabruf ist in dieser Ausführungsumgebung ebenfalls nicht verfügbar.
+- Historische/diagnostische Läufe zeigen, dass der unveränderte LT-/PPM-Kern bei vorhandenem vollständigem Checkout ausführbar ist. Diese historischen Wege sind Evidence, **keine Current-/Produktionsroute**.
+
+### Erster offener Fehler / Blocker
+`BOUND_CHAT_WORKER_CANONICAL_EXECUTION_WORKSPACE_NOT_AVAILABLE`
+
+Nicht der Handoff-Vertrag ist jetzt der erste belegte offene Punkt. PR #421 deckt dessen Semantik im Test ab. Offen ist die reale Ausführungsbindung: Der gebundene Chat-Worker benötigt den bestehenden kanonischen Repository-Arbeitsraum mit den unveränderten echten Prüfern, ohne dass dafür text-start oder GitHub zum Produktionscontroller umgebaut werden.
+
+### Exakt eine fachliche NEXT ACTION
+Die NEXT ACTION steht ausschließlich in `control/startmaster0107/CURRENT_STATE.json`. Dieses Protokoll wiederholt sie nicht als zweite Autorität.
+
+### Nicht verändert
+- keine neue Architektur;
+- kein neuer Runner;
+- kein Codex-/OpenAI-API-Produktionsweg;
+- kein GitHub-Produktionsfortschritt;
+- kein text-start-Workflow-Fix;
+- keine Artikel-/Qualitätsregeln;
+- kein LanguageTool-6.8-, PPM-6.7.9-, PSERC- oder ENDSTEMPEL-Code;
+- kein Publish;
+- keine Plugins.
+
+### Tests / PASS
+- PR #421 Handoff-Regressionskette: PASS als Test-Evidence.
+- Jüngster echter Start/Receiver: PASS bis `CONCEPT_AGENT_INTAKE_READY`.
+- Realer End-to-End-Lauf vom einmaligen Start über echte Workerarbeit, echte LT-/PPM-Reparaturkette, PSERC, ENDSTEMPEL bis STOP: **OFFEN**.
+- Deshalb **kein Gesamt-PASS**.
+
+### PROTOKOLLCHECK
+- Fehler: NACHGEHOLT
+- Protokoll: NACHGEHOLT
+- Warum: PASS
+- Current-Autorität: NACHGEHOLT
+- Bürotür/Einstiegspunkt: PASS
+- Frischecheck: DELTA GEPRÜFT
+- Hobbyraum: NICHT BETROFFEN
+- Zielvertrag: PASS
+- Archiv: NICHT BETROFFEN
+- Eine Wahrheit: PASS
+- Tests: OFFEN
+- Plugins: NICHT BETROFFEN
+- Paul/Worker: BOUND_CHAT_WORKER BETROFFEN; kein Parallelbranch als Current
+
+### Nachtrag — Current-Synchronisierung PR #423 blockiert
+- Der Versuch, ausschließlich `CURRENT_STATE.json`, den dazugehörigen Root-Hash und dieses Protokoll konsistent nachzuziehen, wurde als PR #423 erstellt.
+- Deterministic Entrance Gate Run `36235999525`: **PASS**.
+- Immutable Base Hardlock Run `36235999516`: **FAIL**.
+- Exakter Fehler: `IMMUTABLE_SECURITY_PATH_CHANGE_BLOCKED`.
+- Betroffener immutable Pfad: `control/startmaster0107/PFERDE_ATELIER_START_HERE.json`.
+- Ursache: `CURRENT_STATE.json` kann nicht isoliert geändert werden, weil dessen SHA-256 im Root gebunden ist; der notwendige Root-Hash darf unter der aktuellen Hardlock-Regel nicht geändert werden.
+- Es wurde kein Bypass, keine einseitige Current-Änderung und keine Ersatz-Current erzeugt.
+- Folge: Die einzige Current-Autorität auf `main` bleibt inhaltlich hinter dem frisch geprüften Delta zurück. Nach den Campusregeln ist der Abschlussstatus deshalb **CURRENT-AUTORITÄT BLOCKED**, bis der vorgesehene autorisierte Root-/Current-Synchronisationsweg wieder zulässig ist.
+- Dieses Protokoll bleibt ausschließlich Evidence/Historie und ersetzt Current ausdrücklich nicht.
+
