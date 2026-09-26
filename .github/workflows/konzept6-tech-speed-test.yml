@@ -48,7 +48,6 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile isolated_system4/production_checks_engine.py concept_agent/progress_guard.py
-          git diff 48eaad387df2a24c9de94e5f0a8210dd22f2ba32 -- concept_agent/progress_guard.py > /tmp/progress.diff
           if grep -q 'repair_bundle' concept_agent/progress_guard.py; then
             echo 'ARCHITECTURE_SCOPE_VIOLATION_REPAIR_BUNDLE'
             exit 2
