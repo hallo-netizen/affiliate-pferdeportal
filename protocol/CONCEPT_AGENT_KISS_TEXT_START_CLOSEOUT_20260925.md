@@ -386,3 +386,12 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
 - Der Testartikel läuft danach durch WRITE_DRAFT → LT-Repair → LT-PASS → PPM-Repair → LT-Recheck → PPM-PASS.
 - Negativtest: unvollständiger Workspace-Transport blockiert fail-closed mit `WORKSPACE_CAPSULE_REQUIRED_FOR_BOUND_WRITE`.
 - Kein neuer Runner, kein neuer Controller, keine neue Route.
+
+
+## Nachweis — bereits recherchierter Einzelartikel bis vertragliches STOP
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Der bestehende Testfall startet mit bereits gebundener Recherche direkt bei `DRAFT_REQUIRED`; Recherche wird nicht erneut ausgeführt.
+- Die bestehende Kette wird im selben Test vollständig bis zum vertraglichen Ende fortgesetzt:
+  WRITE_DRAFT → LT-Repair → LT-PASS → PPM-Repair → LT-Recheck → PPM-PASS → PSERC → ENDSTEMPEL → STOP.
+- Ausschließlich Testnachweis; keine Produktionslogik, keine Architektur, kein Runner, kein Startweg, keine Qualitätsregel und kein Publish wurden verändert.
