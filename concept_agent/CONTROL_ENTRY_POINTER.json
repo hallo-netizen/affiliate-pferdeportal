@@ -22,5 +22,6 @@
   "bound_worker_return_must_reenter_progress_guard": true,
   "current_research_bound_ref": "concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json",
   "current_research_bound_file_sha256": "e33b81f3b63185fe333ed30195bc9366c9bf8dde856bbf463d1dc57bbf6f4fc0",
-  "current_research_binding_sha256": "cebfc4416a8022a684a4ab11cb53a6f879d497db480f0272c69bee07db7b5509"
+  "current_research_binding_sha256": "cebfc4416a8022a684a4ab11cb53a6f879d497db480f0272c69bee07db7b5509",
+  "current_research_batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0"
 }
