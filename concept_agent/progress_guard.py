@@ -197,6 +197,14 @@ def verify_checkpoint(binding: dict, state: dict) -> None:
             raise Blocked("CHECKPOINT_COMPLETED_VALIDATORS_NOT_PASS")
     if state.get("next_item_index") != len(completed):
         raise Blocked("CHECKPOINT_SEQUENCE_GAP")
+    if state.get("phase") == "REPAIR_REQUIRED":
+        current = state.get("current_item")
+        if not isinstance(current, dict):
+            raise Blocked("REPAIR_CURRENT_ITEM_INVALID")
+        bundle = current.get("repair_bundle")
+        declared = current.get("finding_sha256")
+        if not isinstance(bundle, dict) or not isinstance(declared, str) or declared != stable(bundle):
+            raise Blocked("REPAIR_BUNDLE_HASH_MISMATCH")
     if state.get("allowed_action") != expected_action(binding, state):
         raise Blocked("CHECKPOINT_ALLOWED_ACTION_MISMATCH")
 
@@ -369,6 +377,7 @@ def record_check(binding: dict, state: dict, decision: dict, index: int, checker
             "checker": checker,
             "draft_sha256": target["draft_sha256"],
             "finding_sha256": stable(result),
+            "repair_bundle": json.loads(json.dumps(result)),
         }
     elif checker == "LT68":
         out["phase"] = "PPM679_REQUIRED"
@@ -421,6 +430,7 @@ def replace_draft(binding: dict, state: dict, decision: dict, index: int, draft_
     target["lt68"] = "PENDING"
     target["ppm679"] = "PENDING"
     target.pop("last_check_sha256", None)
+    target.pop("repair_bundle", None)
     out["phase"] = "LT68_REQUIRED"
     out["current_item"] = {
         "item_index": index,
@@ -535,6 +545,14 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
                 trigger_core["workspace_restore_contract"] = "SYSTEM4_WORKSPACE_RECOVERY_CAPSULE_V1"
         if isinstance(decision.get("workspace_action"), dict):
             trigger_core["workspace_action"] = json.loads(json.dumps(decision["workspace_action"]))
+        if action.get("action") == "REPAIR_DRAFT":
+            current = state.get("current_item")
+            if not isinstance(current, dict):
+                raise Blocked("REPAIR_CURRENT_ITEM_INVALID")
+            repair_bundle = current.get("repair_bundle")
+            if not isinstance(repair_bundle, dict) or stable(repair_bundle) != action.get("finding_sha256"):
+                raise Blocked("REPAIR_BUNDLE_HASH_MISMATCH")
+            trigger_core["repair_bundle"] = json.loads(json.dumps(repair_bundle))
         if action.get("action") in {"RUN_CHECKER", "REPAIR_DRAFT"}:
             workspace = decision.get("workspace")
             capsule = decision.get("workspace_capsule")
