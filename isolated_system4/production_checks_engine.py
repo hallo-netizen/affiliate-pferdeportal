@@ -145,6 +145,20 @@ def _find_languagetool_jar(repo: Path) -> Path:
             return candidate.resolve()
         raise ProductionCheckError("LANGUAGETOOL_6_8_EXPLICIT_JAR_INVALID")
 
+    # Fast path: a live/previous exact worker already records the hash-bound JAR path.
+    # This only avoids repeated recursive directory scans; the exact file hash is still checked.
+    if LT_WORKER_META.is_file():
+        try:
+            meta = json.loads(LT_WORKER_META.read_text(encoding="utf-8"))
+        except Exception:
+            meta = None
+        if isinstance(meta, dict) and meta.get("jar_sha256") == LT_JAR_SHA256:
+            raw_path = str(meta.get("jar") or "").strip()
+            if raw_path:
+                candidate = Path(raw_path)
+                if candidate.is_file() and file_sha256(candidate) == LT_JAR_SHA256:
+                    return candidate.resolve()
+
     candidates: list[Path] = []
     roots = [
         repo / ".pferde-environment",
