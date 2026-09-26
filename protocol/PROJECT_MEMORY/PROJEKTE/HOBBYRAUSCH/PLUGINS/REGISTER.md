@@ -13,11 +13,18 @@ Akte:
 Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
-Gebundene Basis:
-V1.8.0 / MASTER 016 R10/R9 Runtime Deployment
+Neuester belegter Entwicklungsstand:
+**V1.8.1**
 
-Rolle:
-DataForSEO-gestützte Portal-/Kategorieplanung, Validierung, WordPress-/HivePress-Zielbindung und kontrolliertes Post-FINAL-Deployment.
+Vorheriger vollständig benannter Release-/Archivstand:
+V1.8.0 / MASTER016-R10/R11.
+
+V1.8.1:
+- PARENT_TOPIC_GAP-Gate
+- 220/220 PASS
+- ZIP SHA-256 `1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`
+- Live noch nicht installiert
+- exakter ZIP-Dateiname derzeit nicht belegt
 
 Status:
 Siehe ausschließlich
