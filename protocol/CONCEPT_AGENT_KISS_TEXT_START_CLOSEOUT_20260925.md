@@ -318,7 +318,7 @@ Die NEXT ACTION steht ausschließlich in `control/startmaster0107/CURRENT_STATE.
 - Fehler: NACHGEHOLT
 - Protokoll: NACHGEHOLT
 - Warum: PASS
-- Current-Autorität: NACHGEHOLT
+- Current-Autorität: BLOCKED
 - Bürotür/Einstiegspunkt: PASS
 - Frischecheck: DELTA GEPRÜFT
 - Hobbyraum: NICHT BETROFFEN
