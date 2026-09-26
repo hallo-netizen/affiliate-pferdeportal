@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Read historical exact current state without mutation
+      - name: Recover last authorized state through sequence 74
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -21,14 +21,43 @@ jobs:
           set -euo pipefail
           git fetch --no-tags origin 4e3f0eaa4e0c6dc5f182619811ad70414f402f81
           git worktree add --detach /tmp/recover-src 4e3f0eaa4e0c6dc5f182619811ad70414f402f81
+          python3 - <<'PY'
+          import json, os, urllib.request
+          rows=[]
+          page=1
+          while True:
+              req=urllib.request.Request(
+                  f"https://api.github.com/repos/hallo-netizen/affiliate-pferdeportal/issues/382/comments?per_page=100&page={page}",
+                  headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json","User-Agent":"current16-recovery-readonly"},
+              )
+              with urllib.request.urlopen(req,timeout=30) as fh:
+                  part=json.load(fh)
+              rows.extend(part)
+              if len(part)<100: break
+              page+=1
+          out=[]
+          for row in rows:
+              body=str(row.get("body") or "")
+              if body.startswith("CONCEPT_AGENT_DURABLE_EVENT_V1\n"):
+                  try:
+                      event=json.loads(body.splitlines()[1])
+                  except Exception:
+                      out.append(row); continue
+                  if int(event.get("sequence") or 0)>74:
+                      continue
+              out.append(row)
+          with open("/tmp/comments-through-74.json","w",encoding="utf-8") as fh:
+              json.dump(out,fh,ensure_ascii=False)
+          PY
           cd /tmp/recover-src
-          GITHUB_TOKEN="$GH_TOKEN" python3 concept_agent/durable_event_log.py current --out /tmp/current16-recovered
+          python3 concept_agent/durable_event_log.py --comments-json /tmp/comments-through-74.json current --out /tmp/current16-recovered
           test -f /tmp/current16-recovered/CURRENT_PRODUCTION_BINDING.json
           test -f /tmp/current16-recovered/CURRENT_PROGRESS_CHECKPOINT.json
           python3 - <<'PY'
           import json
           p=json.load(open('/tmp/current16-recovered/CURRENT_PROGRESS_CHECKPOINT.json',encoding='utf-8'))
           a=p.get('allowed_action') or {}
+          assert a.get('action')=='REPAIR_DRAFT' and a.get('checker')=='PPM679' and a.get('item_index')==1, a
           print(json.dumps({'phase':p.get('phase'),'next_item_index':p.get('next_item_index'),'allowed_action':a,'checkpoint_sha256':p.get('checkpoint_sha256')},sort_keys=True))
           PY
       - uses: actions/upload-artifact@v4
