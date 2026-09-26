@@ -259,3 +259,11 @@ Status dieses Abschnitts: **Historie/Nachweis, keine CURRENT-Autorität, keine e
 - Deshalb bleibt die operative Current-Wahrheit auf main bis zur autorisierten Root-/Current-Synchronisierung unverändert; dieser Protokollabschnitt ersetzt sie ausdrücklich nicht.
 - Keine neue Architektur, kein Runner, kein Codex-/API-Weg, keine GitHub-Produktionssteuerung, keine Änderung an Artikel-/Qualitätsregeln, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL oder Publish.
 
+## PR #421 — Vollständiger Worker-Handoff-Regressionsnachweis
+- Minimalfix bleibt ausschließlich die Wiederherstellung der bereits in PR #410 bewiesenen Regel: `CONCEPT_AGENT_INTAKE_READY` ist für den bereits aktiven Chat kein Stop-/Antwortpunkt; die exakt gebundene Aktion wird ohne Nutzer-Zwischenmeldung konsumiert.
+- Test gegen die bytegenau per Git-Blob-Hash verifizierten aktuellen Handoff-Module des PR-Heads: `intake_bridge.py`, `full_workflow_gate.py`, `progress_guard.py`, `universal_reentry_guard.py`.
+- Reales 16er-Start-Receipt aus Run 36199100455 stimmt exakt mit dem aktuellen `_start_receipt` überein.
+- Ein zusammenhängender 16er-Handoff-Lauf konsumierte 62 nicht-terminale Übergaben, davon 55 Progress-Handoffs: Start → RESEARCH_REQUIRED → RESEARCH_BOUND → AUTHORING_BOUND → 16 Artikel → LT 6.8 → PPM 6.7.9 → erzwungener LT-Repair-Rückweg → Recheck → erzwungener PPM-Repair-Rückweg → LT-Recheck → PPM-Recheck → PSERC → ENDSTEMPEL → hashgebundene Finaldatei → terminales STOP.
+- Negativ: manipulierter Checkpoint wurde fail-closed blockiert; terminales STOP erzeugte keinen weiteren Trigger.
+- Teststatus: PASS. Keine Produktionslogik, Qualitätsregel, LT-6.8-, PPM-6.7.9-, PSERC-, ENDSTEMPEL- oder Publish-Änderung.
+

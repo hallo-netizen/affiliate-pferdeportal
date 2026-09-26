@@ -12,7 +12,7 @@ Ablauf:
 3. Frischecheck nur auf Delta.
 4. Ausschließlich die eine dort gespeicherte `next_action` ausführen.
 
-**Jeder `text-start`:** Zuerst wird die aktuelle Current-Autorität gelesen. Liegt für denselben Batch bereits ein begonnener Arbeitsstand vor, ist `CONCEPT_AGENT_INTAKE_READY` nur Eingangs- und Identitätsbestätigung und darf keinen Rücksprung auf `RESEARCH_REQUIRED` oder einen bereits erledigten Schritt auslösen. Es wird exakt die in der Current-Autorität gebundene nächste Aktion fortgesetzt. Nur wenn für diesen Batch noch kein Arbeitsfortschritt existiert, beginnt die erste offene Aktion bei `RESEARCH_REQUIRED`.
+**Jeder `text-start`:** Zuerst wird die aktuelle Current-Autorität gelesen. `CONCEPT_AGENT_INTAKE_READY` ist für den bereits aktiven Chat niemals ein Stop oder Antwortpunkt. Liegt für denselben Batch bereits ein begonnener Arbeitsstand vor, ist `CONCEPT_AGENT_INTAKE_READY` nur Eingangs- und Identitätsbestätigung und darf keinen Rücksprung auf `RESEARCH_REQUIRED` oder einen bereits erledigten Schritt auslösen; der bereits aktive Chat führt ohne Nutzer-Zwischenmeldung unmittelbar die exakt gebundene nächste Aktion aus. Nur wenn für diesen Batch noch kein Arbeitsfortschritt existiert, führt der bereits aktive Chat ohne Nutzer-Zwischenmeldung unmittelbar `RESEARCH_REQUIRED` aus. Danach gilt unverändert der bestehende NO-STOP-/Worker-/Prüfweg bis zum ausdrücklich gebundenen terminalen `STOP`.
 
 Diese Datei enthält bewusst keine eigene Produktionsaktion und keine zweite Statuswahrheit.
 

@@ -344,6 +344,244 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertIs(result["worker_return_must_reenter_progress_guard"], False)
         self.assertIs(result["terminal"], True)
 
+    def test_start_button_to_final_file_consumes_every_handoff_16_items(self):
+        # One regression test for the complete existing handoff chain. This is test-only:
+        # no production runner, route, checker, quality rule or publish behavior is added.
+        door = (HERE / "START_HERE.md").read_text(encoding="utf-8")
+        receiver = (HERE.parent / ".github/workflows/text-start-pferdeatelier.yml").read_text(encoding="utf-8")
+        self.assertIn("niemals ein Stop oder Antwortpunkt", door)
+        self.assertIn("ohne Nutzer-Zwischenmeldung unmittelbar", door)
+        self.assertIn("python3 concept_agent/intake_bridge.py prepare", receiver)
+        self.assertIn("CONCEPT_AGENT_INTAKE_RECEIPT.json", receiver)
+
+        binding = self._binding(16)
+        batch = binding["batch_sha256"]
+        count = binding["item_count"]
+
+        # Start-button receiver output: the active chat must consume this immediately.
+        receipt = intake_bridge._start_receipt({
+            "batch_sha256": batch,
+            "item_count": count,
+            "intake_sha256": binding["source_intake_sha256"],
+        })
+        self.assertEqual(receipt["status"], "CONCEPT_AGENT_INTAKE_READY")
+        self.assertEqual(receipt["bound_worker"], "BOUND_CHAT_WORKER")
+        self.assertIs(receipt["continuation_required"], True)
+        self.assertIs(receipt["worker_must_execute_allowed_operation_immediately"], True)
+        self.assertIs(receipt["worker_return_must_reenter_full_workflow_gate"], True)
+        self.assertIs(receipt["handoff_is_terminal"], False)
+        self.assertIs(receipt["same_bound_worker_must_continue_without_return"], True)
+        self.assertEqual(receipt["process_trigger"]["fresh_batch_first_action"], "RESEARCH_REQUIRED")
+        self.assertEqual(receipt["process_trigger"]["worker"], "BOUND_CHAT_WORKER")
+        self.assertIs(receipt["process_trigger"]["return_required"], True)
+
+        consumed_handoffs = ["START:RESEARCH_REQUIRED"]
+
+        # Consume every existing outer-stage handoff, not just assert that a trigger exists.
+        outer = full_workflow_gate.initial_state(batch, count)
+        outer = full_workflow_gate.complete_stage(
+            outer, "INTAKE", full_workflow_gate.payload_for("INTAKE", outer)
+        )
+
+        def consume_outer(expected_stage):
+            nonlocal outer
+            proof = full_workflow_gate.enter(outer)
+            route = full_workflow_gate.stage_route_from_entry_proof(proof)
+            self.assertEqual(route["next_stage"], expected_stage)
+            self.assertEqual(route["bound_worker"], "BOUND_CHAT_WORKER")
+            self.assertIs(route["continuation_required"], True)
+            self.assertIs(route["worker_must_execute_allowed_operation_immediately"], True)
+            self.assertIs(route["worker_return_must_reenter_full_workflow_gate"], True)
+            self.assertIs(route["handoff_is_terminal"], False)
+            self.assertIs(route["same_bound_worker_must_continue_without_return"], True)
+            self.assertIsNotNone(route["process_trigger"])
+            self.assertEqual(route["process_trigger"]["worker"], "BOUND_CHAT_WORKER")
+            self.assertIs(route["process_trigger"]["return_required"], True)
+            consumed_handoffs.append("OUTER:" + expected_stage)
+            return route
+
+        consume_outer("RESEARCH")
+        outer = full_workflow_gate.complete_stage(
+            outer, "RESEARCH", full_workflow_gate.payload_for("RESEARCH", outer)
+        )
+        consume_outer("RESEARCH_BOUND")
+        outer = full_workflow_gate.complete_stage(
+            outer, "RESEARCH_BOUND", full_workflow_gate.payload_for("RESEARCH_BOUND", outer)
+        )
+        consume_outer("AUTHORING_BOUND")
+        outer = full_workflow_gate.complete_stage(
+            outer, "AUTHORING_BOUND", full_workflow_gate.payload_for("AUTHORING_BOUND", outer)
+        )
+        consume_outer("ARTICLE_PRODUCTION")
+
+        state = self._checkpoint(binding)
+        progress_actions = []
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+
+            def consume_progress(expected_action, expected_checker=None):
+                decision = self._decision(binding, state)
+                result = progress_guard.resume(binding, state, decision)
+                self.assertEqual(result["status"], "RESUME_ALLOWED")
+                self.assertEqual(result["bound_worker"], "BOUND_CHAT_WORKER")
+                self.assertEqual(result["allowed_action"]["action"], expected_action)
+                if expected_checker is not None:
+                    self.assertEqual(result["allowed_action"].get("checker"), expected_checker)
+                self.assertIs(result["continuation_required"], True)
+                self.assertIs(result["worker_must_execute_allowed_action_immediately"], True)
+                self.assertIs(result["worker_return_must_reenter_progress_guard"], True)
+                self.assertIs(result["handoff_is_terminal"], False)
+                self.assertIs(result["same_bound_worker_must_continue_without_return"], True)
+                self.assertIsNotNone(result["process_trigger"])
+                self.assertEqual(result["process_trigger"]["worker"], "BOUND_CHAT_WORKER")
+                self.assertEqual(result["process_trigger"]["allowed_action"], result["allowed_action"])
+                self.assertIs(result["process_trigger"]["exactly_once_for_checkpoint"], True)
+                self.assertIs(result["process_trigger"]["return_required"], True)
+                progress_actions.append(
+                    expected_action + (":" + expected_checker if expected_checker else "")
+                )
+                consumed_handoffs.append("PROGRESS:" + progress_actions[-1])
+                return decision, result
+
+            # Article 0: prove both backward paths and automatic re-check continuation.
+            decision, result = consume_progress("WRITE_DRAFT")
+            self.assertEqual(result["process_trigger"]["bound_work_item"], binding["items"][0])
+            draft = self._draft(root, binding, 0, "article-0-v1")
+            state = progress_guard.record_draft(binding, state, decision, 0, draft)
+
+            decision, _ = consume_progress("RUN_CHECKER", "LT68")
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "lt"}]},
+                draft,
+            )
+
+            decision, _ = consume_progress("REPAIR_DRAFT", "LT68")
+            draft.write_text("article-0-v2", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision, _ = consume_progress("RUN_CHECKER", "LT68")
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+            decision, _ = consume_progress("RUN_CHECKER", "PPM679")
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "ppm"}]},
+                draft,
+            )
+
+            decision, _ = consume_progress("REPAIR_DRAFT", "PPM679")
+            draft.write_text("article-0-v3", encoding="utf-8")
+            state = progress_guard.replace_draft(binding, state, decision, 0, draft)
+
+            decision, _ = consume_progress("RUN_CHECKER", "LT68")
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+            decision, _ = consume_progress("RUN_CHECKER", "PPM679")
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "PPM679",
+                {"status": "PASS", "content_sha256": sha}, draft,
+            )
+
+            # Articles 1..15: consume every forward handoff.
+            for index in range(1, 16):
+                decision, result = consume_progress("WRITE_DRAFT")
+                self.assertEqual(result["process_trigger"]["bound_work_item"], binding["items"][index])
+                draft = self._draft(root, binding, index, f"article-{index}-v1")
+                state = progress_guard.record_draft(binding, state, decision, index, draft)
+
+                decision, _ = consume_progress("RUN_CHECKER", "LT68")
+                sha = progress_guard.file_sha(draft)
+                state = progress_guard.record_check(
+                    binding, state, decision, index, "LT68",
+                    {"status": "PASS", "content_sha256": sha}, draft,
+                )
+
+                decision, _ = consume_progress("RUN_CHECKER", "PPM679")
+                state = progress_guard.record_check(
+                    binding, state, decision, index, "PPM679",
+                    {"status": "PASS", "content_sha256": sha}, draft,
+                )
+
+            self.assertEqual(state["phase"], "ALL_ARTICLES_LT_PPM_PASS")
+            self.assertEqual(len(state["completed_items"]), 16)
+
+            outer = full_workflow_gate.complete_stage(
+                outer, "ARTICLE_PRODUCTION",
+                full_workflow_gate.payload_for("ARTICLE_PRODUCTION", outer),
+            )
+            consume_outer("PSERC_PACKAGE")
+
+            decision, _ = consume_progress("RUN_PSERC")
+            pserc = {
+                "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+                "stage": "PSERC",
+                "status": "PASS",
+                "batch_sha256": batch,
+                "source_checkpoint_sha256": state["checkpoint_sha256"],
+                "evidence_sha256": hashlib.sha256(b"pserc-evidence").hexdigest(),
+                "pserc_package_sha256": hashlib.sha256(b"pserc-package").hexdigest(),
+                "publish_allowed": False,
+            }
+            state = progress_guard.record_batch_stage(binding, state, decision, "PSERC", pserc)
+
+            outer = full_workflow_gate.complete_stage(
+                outer, "PSERC_PACKAGE", full_workflow_gate.payload_for("PSERC_PACKAGE", outer)
+            )
+            consume_outer("ENDSTEMPEL")
+
+            decision, _ = consume_progress("RUN_ENDSTEMPEL")
+            final_file = root / "FINAL_WORDPRESS_IMPORT.json"
+            final_file.write_text('{"status":"final-test-file"}\n', encoding="utf-8")
+            final_sha = progress_guard.file_sha(final_file)
+            end = {
+                "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+                "stage": "ENDSTEMPEL",
+                "status": "PASS",
+                "batch_sha256": batch,
+                "source_checkpoint_sha256": state["checkpoint_sha256"],
+                "evidence_sha256": hashlib.sha256(b"end-evidence").hexdigest(),
+                "final_file_sha256": final_sha,
+                "publish_allowed": False,
+            }
+            state = progress_guard.record_batch_stage(binding, state, decision, "ENDSTEMPEL", end)
+
+            outer = full_workflow_gate.complete_stage(
+                outer, "ENDSTEMPEL", full_workflow_gate.payload_for("ENDSTEMPEL", outer)
+            )
+            proof = full_workflow_gate.enter(outer)
+            terminal_route = full_workflow_gate.stage_route_from_entry_proof(proof)
+            self.assertEqual(terminal_route["next_stage"], "COMPLETE")
+            self.assertIs(terminal_route["handoff_is_terminal"], True)
+            self.assertIs(terminal_route["continuation_required"], False)
+            self.assertIsNone(terminal_route["process_trigger"])
+
+            decision = self._decision(binding, state)
+            stop = progress_guard.resume(binding, state, decision)
+            self.assertEqual(stop["status"], "STOP")
+            self.assertEqual(stop["allowed_action"]["action"], "STOP")
+            self.assertIs(stop["terminal"], True)
+            self.assertIs(stop["continuation_required"], False)
+            self.assertIsNone(stop["process_trigger"])
+            self.assertTrue(final_file.is_file())
+            self.assertEqual(progress_guard.file_sha(final_file), state["endstempel_final_file_sha256"])
+
+        # 1 start handoff + 6 outer handoffs + 55 progress handoffs.
+        self.assertEqual(len(progress_actions), 55)
+        self.assertEqual(len(consumed_handoffs), 62)
+        self.assertEqual(progress_actions.count("REPAIR_DRAFT:LT68"), 1)
+        self.assertEqual(progress_actions.count("REPAIR_DRAFT:PPM679"), 1)
+
     def test_missing_or_wrong_checkpoint_stops_before_decision(self):
         binding = self._binding()
         state = self._checkpoint(binding)
