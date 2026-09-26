@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-26
-STATUS: V1.8.0 EXAKT GEBUNDEN / HOBBY-DEPOT-WEITERENTWICKLUNG OFFEN
+STATUS: V1.8.2 HOBBY-DEPOT-PILOT LOKAL PASS / LIVE-TEST ALS NÄCHSTES
 
 ## Rolle
 
@@ -11,36 +11,35 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_SEO_KATEGORIEN`.
 
 ## Aktueller belastbarer Stand
 
-Die vollständigen R10-Artefakte V1.8.0 wurden vom Nutzer bereitgestellt und bytegenau gegen die autoritativen SHA-256 geprüft.
+Der Kategorie-Workflow wurde auf Basis der byteverifizierten allgemeinen V1.8.0-Linie zum Hobby-Depot-Pilot V1.8.2 weiterentwickelt.
 
-PASS:
-- Source 216/216
-- Installer 216/216
-- PHP-Lint 15/15
-- Produktionscode ohne Pferde-Atelier-Bindung
+Er kann jetzt:
+- Konzept/Seeds als Startpunkt aufnehmen;
+- vor bezahlter Recherche einen kostenlosen Preflight zeigen;
+- DataForSEO für reale Nachfrage/Intents verwenden;
+- daraus einen ersten abgestimmten Entwurf für Content/Hobby-Struktur, Magazin und HivePress/Marketplace erzeugen;
+- bestehende SEO-, Ownership-, Kannibalisierungs-, Coverage- und Affiliate-Fit-Gates anwenden;
+- nach FINAL WordPress-Seiten als Entwurf sowie WordPress-/HivePress-/Journal-Taxonomien kontrolliert anlegen;
+- Dry-Run, Apply, Readback, Rollback und Idempotenz erzwingen.
 
-DataForSEO, Research, SEO-/Intent-/Kannibalisierungs-/Coverage-/Affiliate-Fit-Gates sowie Taxonomie-Deployment sind vorhanden.
+Tests:
+- 223/223 PASS;
+- Fresh-Unpack 223/223 PASS;
+- PHP-Lint 16/16 PASS;
+- kein Pferde-Bezug im Produktions-PHP.
 
 Projektinput:
 `../KONZEPT/VORARBEITEN_HOBBYFINDER/`
 
-Detail:
-`KATEGORIE_WORKFLOW_AUDIT_20260926.md`
-
-## Neuester dokumentierter Nachstand
-
-V1.8.1:
-PARENT_TOPIC_GAP-Gate, 220/220 PASS, ZIP-SHA
-`1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`.
-
-Die V1.8.1-ZIP-Bytes selbst sind nicht gebunden.
+Technischer Pilotinput:
+`HOBBY_DEPOT_KATEGORIE_PILOT_KONZEPT.json`
 
 ## Erster offener Punkt
 
-Für Hobby Depot fehlt gegenüber dem gewünschten Ziel noch echte WordPress-Seitenerzeugung.
-V1.8.0 liest/prüft Seiten, der Writer schreibt aber nur Taxonomie-Terme.
+Kein echter Hobby-Depot-Live-Test gegen WordPress/DataForSEO ausgeführt.
+
+Das historisch dokumentierte allgemeine V1.8.1-`PARENT_TOPIC_GAP`-Gate ist noch nicht in den Pilotcode portiert.
 
 ## NEXT ACTION
 
-V1.8.0 als saubere byteverifizierte Basis weiterentwickeln:
-PARENT_TOPIC_GAP allgemein übernehmen + transaktionalen wordpress_page-Writer ergänzen + komplette Regression; danach installierbares Hobby-Depot-ZIP erzeugen.
+V1.8.2 auf Hobby Depot installieren und zuerst nur DataForSEO-Verbindung + kostenlosen Konzept-Preflight prüfen. Danach kontrollierter kleiner SEO-Testlauf; keine Massenstruktur vor erfolgreichem Readback.
