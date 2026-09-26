@@ -1,0 +1,91 @@
+name: HobbyDepot Category Baseline
+
+on:
+  push:
+    branches:
+      - hobbydepot/category-workflow-v1-20260926
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extract-audit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Locate R10 master and installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kat-master /tmp/kat-installer /tmp/out
+          MASTER="ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK (1).zip"
+          test -f "$MASTER"
+          unzip -q "$MASTER" -d /tmp/kat-master
+          find /tmp/kat-master -type f | sort > /tmp/out/master-files.txt
+          INSTALLER="$(find /tmp/kat-master -type f -name 'AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.0_MASTER016_R10_R9_RUNTIME_DEPLOYMENT.zip' -print -quit)"
+          test -n "$INSTALLER"
+          ACTUAL_SHA="$(sha256sum "$INSTALLER" | awk '{print $1}')"
+          EXPECTED_SHA="4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845"
+          printf 'installer=%s\nexpected_sha256=%s\nactual_sha256=%s\n' "$INSTALLER" "$EXPECTED_SHA" "$ACTUAL_SHA" | tee /tmp/out/installer-binding.txt
+          test "$ACTUAL_SHA" = "$EXPECTED_SHA"
+          cp "$INSTALLER" /tmp/out/HOBBYDEPOT_KATEGORIE_WORKFLOW_BASE_V1.8.0.zip
+          unzip -q "$INSTALLER" -d /tmp/kat-installer
+
+      - name: Scan for Pferde-Atelier bindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "Scope: extracted V1.8.0 installer"
+            echo "Forbidden project terms: pferd / pferde / pferde-atelier / pferdeatelier"
+            echo
+          } > /tmp/out/project-specific-scan.txt
+          if grep -RIniE --exclude='*.png' --exclude='*.jpg' --exclude='*.jpeg' --exclude='*.gif' --exclude='*.zip' 'pferd|pferde-atelier|pferdeatelier' /tmp/kat-installer > /tmp/out/project-specific-hits.txt; then
+            cat /tmp/out/project-specific-hits.txt >> /tmp/out/project-specific-scan.txt
+            echo "RESULT=FAIL_PROJECT_SPECIFIC_BINDING" >> /tmp/out/project-specific-scan.txt
+            exit 21
+          else
+            echo "RESULT=PASS_NO_PFERDE_BINDING" >> /tmp/out/project-specific-scan.txt
+          fi
+
+      - name: PHP lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > /tmp/out/php-lint.txt
+          while IFS= read -r -d '' f; do
+            php -l "$f" | tee -a /tmp/out/php-lint.txt
+          done < <(find /tmp/kat-installer -type f -name '*.php' -print0)
+          echo "RESULT=PASS" >> /tmp/out/php-lint.txt
+
+      - name: Run bundled regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          TEST_RUNNER="$(find /tmp/kat-installer -type f -path '*/tests/run-tests.php' -print -quit)"
+          test -n "$TEST_RUNNER"
+          php "$TEST_RUNNER" | tee /tmp/out/regression.txt
+
+      - name: Record clean Hobby Depot baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENTRY="$(find /tmp/kat-installer -type f -name 'affiliate-portal-kategorie-workflow.php' -print -quit)"
+          test -n "$ENTRY"
+          grep -E 'Plugin Name:|Description:|Version:|Requires at least:|Requires PHP:' "$ENTRY" > /tmp/out/plugin-header.txt
+          {
+            echo "BASELINE=V1.8.0_R10_R9"
+            echo "HORSE_SPECIFIC_EXTENSION_1_8_1=EXCLUDED"
+            echo "WORDPRESS_LIVE_DEPLOYMENT=NOT_YET_EXECUTED"
+            echo "NEXT=INSTALL_ON_HOBBY_DEPOT_THEN_DATAFORSEO_CONNECTION_DRY_RUN"
+          } > /tmp/out/hobbydepot-baseline.txt
+
+      - name: Upload audited installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: hobbydepot-category-v1.8.0-audited
+          path: /tmp/out/
+          if-no-files-found: error
+          retention-days: 30
