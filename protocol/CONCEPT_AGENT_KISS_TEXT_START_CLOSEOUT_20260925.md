@@ -437,3 +437,21 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
 - Aktives Ruleset `21788951`: required checks `hardlock` + `hardlock-base`, `bypass_actors=[]`, `current_user_can_bypass=never`. Deshalb ist der notwendige Current-Nachzug aktuell technisch BLOCKED; kein Bypass und keine Architekturänderung wurden benutzt.
 - Folge: `control/startmaster0107/CURRENT_STATE.json` bleibt bis zur Auflösung dieses Authority-Sync-Konflikts auf seinem vorherigen Inhalt; dieses Protokoll ersetzt die Current-Autorität nicht und enthält keine eigene NEXT ACTION.
 
+
+
+## Abschluss-/Nachholprüfung 2026-09-26 — Delta nach PR #431
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Produktions-main bei dieser Nachholprüfung: `a6764fb10ca77864e97fec864d489483a3fe888d` (PR #431).
+- Bürotür-Routing unverändert: `control/CURRENT_STARTMASTER.json` → `control/startmaster0107/PFERDE_ATELIER_START_HERE.json` → genau eine Current-Autorität `control/startmaster0107/CURRENT_STATE.json`.
+- Zielvertrag unverändert: `control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json`, Ziel `MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE`.
+- PR #429 und #430 bleiben der letzte integrierte fachliche Delta-Stand: exakte 16er-Recherche dauerhaft gespeichert; gleicher Batch konsumiert diese hashgebundene Recherche ohne Research-Rerun.
+- Echter Reentry-Nachweis bleibt: zentraler Start `36245592069` SUCCESS, Receiver `36245600186` SUCCESS auf `ae15e893d10be04243b214d717f47535471933a3`; Receipt `USE_PERSISTED_RESEARCH_BOUND`, nächster bestehender Einstieg `concept_agent/production_bridge.py`; noch kein Live-Produktionsbinding/-checkpoint aus diesem Start.
+- PR #431 dokumentiert den blockierten Current-Nachzug. Der Versuch, `CURRENT_STATE.json` auf den neueren Live-Stand zu synchronisieren, erfordert eine entsprechende Hash-Nachführung in der immutable Bürotür und wird durch den bestehenden Hardlock blockiert. Kein Bypass, keine Lockerung, keine Architekturänderung.
+- Nach PR #431 wurde ausschließlich auf temporärem Entwicklungszweig geprüft:
+  - Run `36246041160` (`TEMP DEV Export Existing PPM679`) = SUCCESS.
+  - Run `36246041178` (`TEMP DEV Recover Current16 State`) = FAILURE.
+  - Exakter erster Fehler: `CONCEPT_AGENT_DURABLE_EVENT_BLOCKED:DURABLE_EVENT_SEQUENCE_GAP`.
+  - Dieser temporäre Recovery-Weg ist keine Current-Autorität und wird nicht als Produktionsweg übernommen. Das frühere Durable-Event-System bleibt aus dem aktuellen Produktionsweg entfernt.
+- Damit bleibt der Abschlussstatus fail-closed: die eine zuständige Current-Autorität ist formal eindeutig, kann aber wegen des Authority-Sync-/Hardlock-Konflikts nicht auf den belegten neueren Live-Stand nachgezogen werden. Keine zweite Current-/NEXT-ACTION-Wahrheit wird aus Protokoll, Temp-Branch oder Historie erzeugt.
+- Keine Änderung an LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln, Plugins oder Publish.
