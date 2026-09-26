@@ -19,5 +19,8 @@
   "production_worker": "BOUND_CHAT_WORKER",
   "resume_allowed_is_terminal": false,
   "bound_worker_must_execute_allowed_action_immediately": true,
-  "bound_worker_return_must_reenter_progress_guard": true
+  "bound_worker_return_must_reenter_progress_guard": true,
+  "current_research_bound_ref": "concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json",
+  "current_research_bound_file_sha256": "e33b81f3b63185fe333ed30195bc9366c9bf8dde856bbf463d1dc57bbf6f4fc0",
+  "current_research_binding_sha256": "cebfc4416a8022a684a4ab11cb53a6f879d497db480f0272c69bee07db7b5509"
 }
