@@ -159,6 +159,32 @@ jobs:
               raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
           PY
 
+      - name: Materialize existing bound worker workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PPM='control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+          PSERC='control/startmaster0107/runtime_packages/PSERC-FIX.zip'
+          LT_ZIP='.pferde-environment/LanguageTool-6.8.zip'
+
+          test -f "$PPM"
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  '"$PPM" | sha256sum -c -
+          test -f "$PSERC"
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  '"$PSERC" | sha256sum -c -
+
+          mkdir -p .pferde-environment
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o "$LT_ZIP"
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  '"$LT_ZIP" | sha256sum -c -
+          unzip -p "$LT_ZIP" LanguageTool-6.8/languagetool-commandline.jar | sha256sum | \
+            grep -F '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8'
+
+          tar -czf /tmp/PFERDEATELIER_BOUND_WORKSPACE.tar.gz .
+          mv /tmp/PFERDEATELIER_BOUND_WORKSPACE.tar.gz .
+          sha256sum PFERDEATELIER_BOUND_WORKSPACE.tar.gz > PFERDEATELIER_BOUND_WORKSPACE.sha256
+
       - name: Upload current intake handoff
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -166,5 +192,7 @@ jobs:
           path: |
             CONCEPT_AGENT_INTAKE_RECEIPT.json
             CONCEPT_AGENT_INTAKE.json
+            PFERDEATELIER_BOUND_WORKSPACE.tar.gz
+            PFERDEATELIER_BOUND_WORKSPACE.sha256
           if-no-files-found: error
           retention-days: 30
