@@ -1,42 +1,65 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-26
-STATUS: BASIS GEBUNDEN / INSTALLER-BYTES NOCH BLOCKED
+STATUS: NEUESTER ENTWICKLUNGSSTAND 1.8.1 GEBUNDEN / ZIP-BYTES NOCH NICHT GEBUNDEN
 
 ## Rolle
 
 Einzige aktuelle Pluginwahrheit für HD-001.
 
-## Gebundene Basis
+## Neuester belegter Entwicklungsstand
 
-Allgemeingültiger Kategorie-Workflow:
-- belegte Releasebasis: V1.8.0
-- MASTER: 016 R10/R9 Runtime Deployment
-- Installer SHA-256: `4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845`
-- Source SHA-256: `1d17566f309f460e48255b78357912cf5e18b1eba2eed7654516e79c8f9fa7fd`
+**Affiliate-Portal Kategorie-Workflow 1.8.1**
 
-Technischer Arbeitsbranch:
-`hobbydepot/category-workflow-v1-20260926`
+Beleg:
+`category-master016-r10-r9-runtime-deployment-20260822`
+→ `audits/PFERDE_ATELIER_PARENT_TOPIC_GAP_TODO_20260922.md`
 
-Sauberer Startcommit:
-`de13db58bc20ca544700fd733d2a1a7c0c3f9668`
+Nachweis:
+- allgemeines `PARENT_TOPIC_GAP`-Finalgate
+- 220/220 Vollregression PASS
+- 15/15 PHP-Lint PASS
+- Fresh-ZIP-Test 220/220 PASS
+- ZIP SHA-256:
+  `1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`
+- Live noch nicht installiert
+
+Kein belegter Stand 1.8.2 oder höher gefunden.
+
+## Vorheriger vollständig benannter Release-/Archivstand
+
+V1.8.0 / MASTER016-R10/R11
+
+Installer:
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.0_MASTER016_R10_R9_RUNTIME_DEPLOYMENT.zip`
+
+Installer SHA-256:
+`4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845`
+
+Source:
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.0_MASTER016_R10_R9_RUNTIME_DEPLOYMENT.zip`
+
+Source SHA-256:
+`1d17566f309f460e48255b78357912cf5e18b1eba2eed7654516e79c8f9fa7fd`
 
 ## Allgemeingültigkeit
 
-V1.8.0 ist der belegte allgemeingültige Kern für Content, HivePress/Marketplace und Journal.
+Die 1.8.0-Basis ist allgemeingültig.
+Die 1.8.1-Erweiterung ist als allgemeine Pflichtprüfung für künftige Portale dokumentiert; Pferde Atelier war Test-/Pilotfall.
 
-Keine Pferde-Atelier-Fachkategorien oder Pferde-Reparaturdaten werden übernommen.
-
-Die spätere 1.8.1-Pferde-Testkette vom 22.09.2026 ist ausdrücklich NICHT die Basis dieses Plugins.
+Für Hobby Depot dürfen keine Pferde-Kategorien, IDs, Slugs, URLs oder Reparaturdeltas übernommen werden.
 
 ## Aktueller erster Blocker
 
-Die vollständigen V1.8.0-Installer-/Source-Bytes sind in den aktuell erreichbaren GitHub-Dateien nicht vorhanden.
+Der exakte Dateiname und die ZIP-Bytes von V1.8.1 sind in den erreichbaren autoritativen Quellen nicht abgelegt.
 
-Der real entpackte Root-Master im technischen Branch enthält den gebundenen V1.8.0-Installer nicht.
-
-Das frühere im Campus inventarisierte Library-Archiv ist über den angegebenen Pfad derzeit nicht auflösbar.
+Deshalb:
+- kein Dateiname raten;
+- keine Rekonstruktion;
+- keine Installation vor SHA-Prüfung.
 
 ## NEXT ACTION
 
-Exakten V1.8.0-Installer oder Source gegen den bekannten SHA-256 wiederbinden. Danach vollständiger Projektbindungs-Scan + Regression; erst anschließend Installation auf Hobby Depot.
+Das vorhandene V1.8.1-ZIP anhand SHA-256
+`1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`
+binden, danach vollständigen Pferde-/Projektbindungs-Scan und die Writer-/DataForSEO-/WordPress-Ausgabe hart prüfen.
