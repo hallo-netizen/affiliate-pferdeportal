@@ -216,6 +216,7 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(result["process_trigger"]["checkpoint_sha256"], state["checkpoint_sha256"])
         self.assertEqual(result["process_trigger"]["bound_work_item"], binding["items"][0])
         self.assertEqual(result["process_trigger"]["bound_work_item"]["item_index"], 0)
+        self.assertEqual(result["process_trigger"]["workspace_action"]["action"], "START_BOUND_ARTICLE_WORKER")
         self.assertEqual(
             result["process_trigger"]["bound_work_item"]["identity"]["plan_slot"],
             result["allowed_action"]["plan_slot"],
@@ -231,6 +232,7 @@ class CurrentProductionGuardTests(unittest.TestCase):
             "handoff_is_terminal": result["process_trigger"]["handoff_is_terminal"],
             "same_bound_worker_must_continue_without_return": result["process_trigger"]["same_bound_worker_must_continue_without_return"],
             "bound_work_item": result["process_trigger"]["bound_work_item"],
+            "workspace_action": result["process_trigger"]["workspace_action"],
         }
         self.assertEqual(result["process_trigger"]["trigger_sha256"], progress_guard.stable(trigger_core))
         self.assertIs(result["continuation_required"], True)
