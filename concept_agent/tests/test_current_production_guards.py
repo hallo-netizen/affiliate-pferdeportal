@@ -415,6 +415,44 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(state["completed_items"][0]["lt68"], "PASS")
         self.assertEqual(state["completed_items"][0]["ppm679"], "PASS")
 
+        decision = self._decision(binding, state)
+        self.assertEqual(decision["allowed_action"]["action"], "RUN_PSERC")
+        pserc = {
+            "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+            "stage": "PSERC",
+            "status": "PASS",
+            "batch_sha256": binding["batch_sha256"],
+            "source_checkpoint_sha256": state["checkpoint_sha256"],
+            "evidence_sha256": hashlib.sha256(b"pserc-evidence").hexdigest(),
+            "pserc_package_sha256": hashlib.sha256(b"pserc-package").hexdigest(),
+            "publish_allowed": False,
+        }
+        state = progress_guard.record_batch_stage(binding, state, decision, "PSERC", pserc)
+        self.assertEqual(state["phase"], "PSERC_PASS_ENDSTEMPEL_REQUIRED")
+
+        decision = self._decision(binding, state)
+        self.assertEqual(decision["allowed_action"]["action"], "RUN_ENDSTEMPEL")
+        endstempel = {
+            "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+            "stage": "ENDSTEMPEL",
+            "status": "PASS",
+            "batch_sha256": binding["batch_sha256"],
+            "source_checkpoint_sha256": state["checkpoint_sha256"],
+            "evidence_sha256": hashlib.sha256(b"endstempel-evidence").hexdigest(),
+            "final_file_sha256": hashlib.sha256(b"final-file").hexdigest(),
+            "publish_allowed": False,
+        }
+        state = progress_guard.record_batch_stage(binding, state, decision, "ENDSTEMPEL", endstempel)
+        self.assertEqual(state["phase"], "ENDSTEMPEL_PASS_STOP")
+
+        decision = self._decision(binding, state)
+        stop = progress_guard.resume(binding, state, decision)
+        self.assertEqual(stop["status"], "STOP")
+        self.assertEqual(stop["allowed_action"]["action"], "STOP")
+        self.assertIsNone(stop["process_trigger"])
+        self.assertIs(stop["terminal"], True)
+        self.assertIs(stop["continuation_required"], False)
+
     def test_stale_decision_dies_immediately_after_checkpoint_changes(self):
         binding = self._binding()
         state = self._checkpoint(binding)
