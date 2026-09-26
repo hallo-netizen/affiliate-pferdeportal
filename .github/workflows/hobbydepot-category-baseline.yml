@@ -22,10 +22,25 @@ jobs:
           mkdir -p /tmp/kat-master /tmp/kat-installer /tmp/out
           MASTER="ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK (1).zip"
           test -f "$MASTER"
-          unzip -q "$MASTER" -d /tmp/kat-master
-          find /tmp/kat-master -type f | sort > /tmp/out/master-files.txt
-          INSTALLER="$(find /tmp/kat-master -type f -name 'AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.0_MASTER016_R10_R9_RUNTIME_DEPLOYMENT.zip' -print -quit)"
-          test -n "$INSTALLER"
+          sha256sum "$MASTER" | tee /tmp/out/root-master-sha256.txt
+          python3 - <<'PY'
+import zipfile, os
+master="ALLGEMEINGUELTIGER_KATEGORIE_MASTER_016_WORKFLOW_HARDLOCK (1).zip"
+with zipfile.ZipFile(master) as z:
+    names=z.namelist()
+    print("MASTER_ENTRY_COUNT", len(names))
+    for n in names:
+        if "1.8.0" in n or "R10_R9" in n or "RUNTIME_DEPLOYMENT" in n:
+            print("CANDIDATE", n)
+    z.extractall("/tmp/kat-master")
+PY
+          find /tmp/kat-master -type f | sort | tee /tmp/out/master-files.txt
+          INSTALLER="$(find /tmp/kat-master -type f \( -iname '*KATEGORIE*V1.8.0*.zip' -o -iname '*CATEGORY*V1.8.0*.zip' \) -print -quit)"
+          if [ -z "$INSTALLER" ]; then
+            echo "INSTALLER_NOT_FOUND" >&2
+            find /tmp/kat-master -type f -iname '*.zip' -print >&2
+            exit 31
+          fi
           ACTUAL_SHA="$(sha256sum "$INSTALLER" | awk '{print $1}')"
           EXPECTED_SHA="4c98847e96b091955436230b721a39b5049132037546367a810d4ed642f40845"
           printf 'installer=%s\nexpected_sha256=%s\nactual_sha256=%s\n' "$INSTALLER" "$EXPECTED_SHA" "$ACTUAL_SHA" | tee /tmp/out/installer-binding.txt
