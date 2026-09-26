@@ -14,6 +14,8 @@ RESEARCH_BOUND_CONTRACT = "CONCEPT_AGENT_RESEARCH_BOUND_V1"
 EXACT_FIELDS = ("title", "target_keyword", "category", "article_type", "plan_slot")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
+REPO = Path(__file__).resolve().parent.parent
+CONTROL_POINTER = REPO / "concept_agent" / "CONTROL_ENTRY_POINTER.json"
 
 class Blocked(RuntimeError):
     pass
@@ -180,7 +182,51 @@ def prepare_file(snapshot_path: str, out_path: str) -> dict:
     Path(out_path).write_text(json.dumps(request, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return request
 
+def _persisted_research_for_intake(result: dict) -> dict | None:
+    if not CONTROL_POINTER.is_file():
+        return None
+    pointer = _load(CONTROL_POINTER)
+    batch = pointer.get("current_research_batch_sha256")
+    if batch != result.get("batch_sha256"):
+        return None
+
+    rel = pointer.get("current_research_bound_ref")
+    file_sha = pointer.get("current_research_bound_file_sha256")
+    binding_sha = pointer.get("current_research_binding_sha256")
+    if not isinstance(rel, str) or not rel or not SHA_RE.fullmatch(str(file_sha or "")) or not SHA_RE.fullmatch(str(binding_sha or "")):
+        raise Blocked("CURRENT_RESEARCH_POINTER_INVALID")
+
+    path = (REPO / rel).resolve()
+    root = REPO.resolve()
+    if path != root and root not in path.parents:
+        raise Blocked("CURRENT_RESEARCH_POINTER_ESCAPE")
+    if not path.is_file():
+        raise Blocked("CURRENT_RESEARCH_BOUND_MISSING")
+
+    raw = path.read_bytes()
+    if sha(raw) != file_sha:
+        raise Blocked("CURRENT_RESEARCH_BOUND_FILE_HASH_MISMATCH")
+    bound = json.loads(raw.decode("utf-8"))
+    if not isinstance(bound, dict) or bound.get("contract") != RESEARCH_BOUND_CONTRACT:
+        raise Blocked("CURRENT_RESEARCH_BOUND_CONTRACT_INVALID")
+    core = dict(bound)
+    declared = core.pop("research_binding_sha256", None)
+    if declared != binding_sha or stable(core) != declared:
+        raise Blocked("CURRENT_RESEARCH_BOUND_BINDING_HASH_MISMATCH")
+    if bound.get("batch_sha256") != result.get("batch_sha256") or bound.get("item_count") != result.get("item_count"):
+        raise Blocked("CURRENT_RESEARCH_BOUND_BATCH_OR_COUNT_MISMATCH")
+    if bound.get("draft_allowed") is not True or bound.get("publish_allowed") is not False:
+        raise Blocked("CURRENT_RESEARCH_BOUND_FLAGS_INVALID")
+
+    return {
+        "ref": rel,
+        "file_sha256": file_sha,
+        "research_binding_sha256": binding_sha,
+    }
+
+
 def _start_receipt(result: dict) -> dict:
+    persisted = _persisted_research_for_intake(result)
     trigger_core = {
         "contract": "CONCEPT_AGENT_BOUND_START_PROCESS_TRIGGER_V1",
         "batch_sha256": result["batch_sha256"],
@@ -188,10 +234,18 @@ def _start_receipt(result: dict) -> dict:
         "worker": "BOUND_CHAT_WORKER",
         "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
         "current_authority_branch": "main",
-        "allowed_operation": "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_RESEARCH_REQUIRED",
-        "fresh_batch_first_action": "RESEARCH_REQUIRED",
+        "allowed_operation": (
+            "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_USE_PERSISTED_RESEARCH_BOUND"
+            if persisted
+            else "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_RESEARCH_REQUIRED"
+        ),
+        "fresh_batch_first_action": "USE_PERSISTED_RESEARCH_BOUND" if persisted else "RESEARCH_REQUIRED",
         "production_checkpoint_required_before_research": False,
-        "missing_production_checkpoint_policy": "BEFORE_RESEARCH_EXPECTED_CONTINUE_RESEARCH_AFTER_PRODUCTION_START_BLOCK_NO_RECONSTRUCTION",
+        "missing_production_checkpoint_policy": (
+            "USE_EXACT_HASH_BOUND_PERSISTED_RESEARCH_NO_RESEARCH_RERUN"
+            if persisted
+            else "BEFORE_RESEARCH_EXPECTED_CONTINUE_RESEARCH_AFTER_PRODUCTION_START_BLOCK_NO_RECONSTRUCTION"
+        ),
         "return_to": "concept_agent/full_workflow_gate.py",
         "handoff_is_terminal": False,
         "same_bound_worker_must_continue_without_return": True,
@@ -199,6 +253,11 @@ def _start_receipt(result: dict) -> dict:
         "return_required": True,
         "publish_allowed": False,
     }
+    if persisted:
+        trigger_core["persisted_research_bound_ref"] = persisted["ref"]
+        trigger_core["persisted_research_bound_file_sha256"] = persisted["file_sha256"]
+        trigger_core["persisted_research_binding_sha256"] = persisted["research_binding_sha256"]
+        trigger_core["next_entry_ref"] = "concept_agent/production_bridge.py"
     process_trigger = dict(trigger_core)
     process_trigger["trigger_sha256"] = stable(trigger_core)
     return {
