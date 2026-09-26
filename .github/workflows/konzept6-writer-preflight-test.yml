@@ -63,6 +63,12 @@ jobs:
           out.write_text(json.dumps(binding,ensure_ascii=False,indent=2),encoding='utf-8')
           PY
 
+      - name: Prove prepared workspace exposes exact authoring contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent/tests/test_current_production_guards.py
+
       - name: Upload real bound writer input
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
