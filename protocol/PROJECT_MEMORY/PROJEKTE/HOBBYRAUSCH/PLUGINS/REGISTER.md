@@ -1,9 +1,27 @@
 # HOBBYRAUSCH – PLUGINREGISTER
 
-STAND: 2026-09-25
+STAND: 2026-09-26
 ROLLE: INVENTAR / WEGWEISER, KEINE PLUGIN-CURRENT-WAHRHEIT
 
-Aktueller Bestand: LEER.
+## Bestand
+
+### HD-001 – Kategorie-Workflow
+
+Akte:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/`
+
+Plugin:
+`Affiliate-Portal Kategorie-Workflow`
+
+Gebundene Basis:
+V1.8.0 / MASTER 016 R10/R9 Runtime Deployment
+
+Rolle:
+DataForSEO-gestützte Portal-/Kategorieplanung, Validierung, WordPress-/HivePress-Zielbindung und kontrolliertes Post-FINAL-Deployment.
+
+Status:
+Siehe ausschließlich
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`.
 
 ## Harte Regel
 
