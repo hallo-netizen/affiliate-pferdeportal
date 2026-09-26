@@ -1,0 +1,62 @@
+name: Konzept 6 Writer Preflight Test
+
+on:
+  push:
+    branches:
+      - 'konzept6/working-copy-20260926'
+    paths:
+      - '.github/workflows/konzept6-writer-preflight-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact Konzept-6 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Prove existing rules reach writer before first draft
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,sys
+          from pathlib import Path
+          repo=Path.cwd()
+          sys.path.insert(0,str(repo/'concept_agent'))
+          import intake_bridge,production_bridge,universal_reentry_guard,progress_guard
+          snap=json.loads((repo/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((repo/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          assert binding['item_count']==16
+          for item in binding['items']:
+              pf=item.get('writer_preflight')
+              assert isinstance(pf,dict)
+              assert pf['contract']=='CONCEPT_AGENT_WRITER_PREFLIGHT_V1'
+              assert pf['rules_changed'] is False
+              assert pf['checker_order_changed'] is False
+              assert pf['global_requirements']==item['authoring_authority']['static_validator_constants']
+              assert pf['structure_requirements']==item['authoring_authority']['structure_contract']
+              assert pf['article_type_requirements']==item['authoring_authority']['article_type_definition']
+              assert pf['bound_requirements']['link_bindings']==item['link_bindings']
+              core=dict(pf); declared=core.pop('preflight_sha256')
+              assert declared==production_bridge.stable(core)
+          checkpoint=production_bridge.initial_checkpoint(binding)
+          decision=universal_reentry_guard.build(binding,checkpoint)
+          start=progress_guard.resume(binding,checkpoint,decision)
+          payload=start['process_trigger']['bound_work_item']
+          assert payload['writer_preflight']==binding['items'][0]['writer_preflight']
+          assert start['allowed_action']['action']=='WRITE_DRAFT'
+          assert start['process_trigger']['worker']=='BOUND_CHAT_WORKER'
+          print('K6_WRITER_PREFLIGHT_REAL16_PASS')
+          print('ITEM_COUNT=16')
+          print('FIRST_PREFLIGHT_SHA='+payload['writer_preflight']['preflight_sha256'])
+          PY
