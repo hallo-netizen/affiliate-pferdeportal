@@ -4,6 +4,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).resolve().parents[1]
 if str(HERE) not in sys.path:
@@ -22,6 +23,43 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertTrue(intake_bridge._forbidden_research_url("https://www.pferde-atelier.de/test"))
         self.assertTrue(production_bridge._forbidden_own_domain("https://pferde-atelier.de/"))
         self.assertFalse(intake_bridge._forbidden_research_url("https://example.org/test"))
+
+    def test_current_same_batch_start_consumes_persisted_research_without_rerun(self):
+        snapshot = json.loads((HERE / "current" / "PSERC_METADATA_SNAPSHOT.json").read_text(encoding="utf-8"))
+        intake = intake_bridge.prepare(snapshot)
+        receipt = intake_bridge._start_receipt(intake)
+        trigger = receipt["process_trigger"]
+        self.assertEqual(trigger["fresh_batch_first_action"], "USE_PERSISTED_RESEARCH_BOUND")
+        self.assertEqual(
+            trigger["allowed_operation"],
+            "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_USE_PERSISTED_RESEARCH_BOUND",
+        )
+        self.assertEqual(trigger["next_entry_ref"], "concept_agent/production_bridge.py")
+        self.assertEqual(
+            trigger["persisted_research_bound_ref"],
+            "concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json",
+        )
+        self.assertNotEqual(trigger["fresh_batch_first_action"], "RESEARCH_REQUIRED")
+
+    def test_same_batch_persisted_research_hash_mismatch_blocks_fail_closed(self):
+        snapshot = json.loads((HERE / "current" / "PSERC_METADATA_SNAPSHOT.json").read_text(encoding="utf-8"))
+        intake = intake_bridge.prepare(snapshot)
+        source = HERE / "current" / "CONCEPT_AGENT_RESEARCH_BOUND.json"
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            target = root / "research.json"
+            target.write_bytes(source.read_bytes())
+            pointer = {
+                "current_research_batch_sha256": intake["batch_sha256"],
+                "current_research_bound_ref": "research.json",
+                "current_research_bound_file_sha256": "0" * 64,
+                "current_research_binding_sha256": json.loads(source.read_text(encoding="utf-8"))["research_binding_sha256"],
+            }
+            pointer_path = root / "pointer.json"
+            pointer_path.write_text(json.dumps(pointer), encoding="utf-8")
+            with mock.patch.object(intake_bridge, "REPO", root), mock.patch.object(intake_bridge, "CONTROL_POINTER", pointer_path):
+                with self.assertRaisesRegex(intake_bridge.Blocked, "CURRENT_RESEARCH_BOUND_FILE_HASH_MISMATCH"):
+                    intake_bridge._start_receipt(intake)
 
     def _binding(self, count=2):
         items = []
