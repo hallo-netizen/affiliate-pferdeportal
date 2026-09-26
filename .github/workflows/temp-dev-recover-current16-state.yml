@@ -1,0 +1,39 @@
+name: TEMP DEV Recover Current16 State
+on:
+  push:
+    branches:
+      - temp/dev-export-existing-ppm679-20260926
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Read historical exact current state without mutation
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin 4e3f0eaa4e0c6dc5f182619811ad70414f402f81
+          git worktree add --detach /tmp/recover-src 4e3f0eaa4e0c6dc5f182619811ad70414f402f81
+          cd /tmp/recover-src
+          GITHUB_TOKEN="$GH_TOKEN" python3 concept_agent/durable_event_log.py current --out /tmp/current16-recovered
+          test -f /tmp/current16-recovered/CURRENT_PRODUCTION_BINDING.json
+          test -f /tmp/current16-recovered/CURRENT_PROGRESS_CHECKPOINT.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('/tmp/current16-recovered/CURRENT_PROGRESS_CHECKPOINT.json',encoding='utf-8'))
+          a=p.get('allowed_action') or {}
+          print(json.dumps({'phase':p.get('phase'),'next_item_index':p.get('next_item_index'),'allowed_action':a,'checkpoint_sha256':p.get('checkpoint_sha256')},sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: temp-current16-recovered-state
+          path: /tmp/current16-recovered/
+          if-no-files-found: error
+          retention-days: 1
