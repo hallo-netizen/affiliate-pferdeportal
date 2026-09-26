@@ -1,0 +1,23 @@
+name: TEMP PR426 Reentry Regression
+
+on:
+  push:
+    branches:
+      - fix/restore-proven-workspace-reentry-20260926
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Run Concept Agent reentry regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 concept_agent/tests/test_universal_reentry_guard.py
+          python3 concept_agent/tests/test_current_production_guards.py
