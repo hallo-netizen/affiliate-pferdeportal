@@ -13,18 +13,14 @@ Akte:
 Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
-Neuester belegter Entwicklungsstand:
-**V1.8.1**
+Aktueller Hobby-Depot-Pilot:
+**V1.8.2**
 
-Vorheriger vollständig benannter Release-/Archivstand:
-V1.8.0 / MASTER016-R10/R11.
+Installer:
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.2_HOBBY_DEPOT_PILOT.zip`
 
-V1.8.1:
-- PARENT_TOPIC_GAP-Gate
-- 220/220 PASS
-- ZIP SHA-256 `1915922977b3d803b25ed9458e5eb40ae7dd30c37f9d3c763720d5e47b25ac6b`
-- Live noch nicht installiert
-- exakter ZIP-Dateiname derzeit nicht belegt
+Rolle:
+Konzept → DataForSEO → SEO-/Intent-/Kannibalisierungsprüfung → abgestimmte Content-/Magazin-/HivePress-Struktur → kontrolliertes WordPress-Deployment.
 
 Status:
 Siehe ausschließlich
@@ -37,7 +33,7 @@ Jedes Plugin erhält genau eine feste ID und eine eigene Akte:
 
 Pflicht:
 - `CURRENT.md` = einzige aktuelle Wahrheit dieses Plugins;
-- `ORIGINAL/` = unveränderte Originaldateien/Installer des belegten Stands;
+- `ORIGINAL/` = unveränderte Originaldateien/Installer belegter Basen;
 - `START_HERE.md` = Navigation;
 - Historie, Tests, Register und Hobbyraum dürfen CURRENT nicht ersetzen.
 
