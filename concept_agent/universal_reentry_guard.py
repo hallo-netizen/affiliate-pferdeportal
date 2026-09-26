@@ -462,6 +462,12 @@ def build(binding: dict, checkpoint: dict, capsule: dict | None = None, previous
             "revision": current.get("revision"),
             "last_error": current.get("last_error"),
         }
+        if current.get("phase") == "DRAFT_REQUIRED":
+            authoring = state.get("authoring_contract")
+            if not isinstance(authoring, dict):
+                raise Blocked("WRITER_PREFLIGHT_AUTHORING_CONTRACT_MISSING")
+            workspace["writer_preflight"] = json.loads(json.dumps(authoring))
+            workspace["writer_preflight_sha256"] = stable(authoring)
         workspace_capsule = json.loads(json.dumps(cap))
         workspace_action = {
             "action": "CONTINUE_BOUND_ARTICLE_WORKER",
