@@ -14,6 +14,7 @@ import socket
 import fcntl
 import struct
 import signal
+import shutil
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -31,6 +32,8 @@ LT_WORKER_REQUEST_TIMEOUT = 30.0
 LT_OUTER_DEPENDENCY_SHA256 = "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a"
 LT_INNER_DEPENDENCY_SHA256 = "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d"
 SYSTEM4_DIRNAME = "isolated_system4"
+PPM_RUNTIME_CACHE = Path("/tmp/system4-ppm679-" + PPM_PACKAGE_SHA256[:16])
+PPM_RUNTIME_LOCK = Path("/tmp/system4-ppm679-runtime.lock")
 
 
 class ProductionCheckError(RuntimeError):
@@ -575,6 +578,43 @@ def _ppm_repair_findings(value: Any) -> list[dict[str, Any]]:
     return unique
 
 
+def _ppm_runtime_root(package: Path) -> Path:
+    """Materialize the exact hash-bound PPM runtime once per host.
+
+    The package hash is still verified before this function is called.  The
+    cache only removes repeated ZIP extraction; validator code and inputs stay
+    unchanged.
+    """
+    PPM_RUNTIME_LOCK.touch(exist_ok=True)
+    with PPM_RUNTIME_LOCK.open("r+") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        marker = PPM_RUNTIME_CACHE / ".package_sha256"
+        ppm_root = PPM_RUNTIME_CACHE / "portal-production-machine"
+        if (
+            marker.is_file()
+            and marker.read_text(encoding="utf-8").strip() == PPM_PACKAGE_SHA256
+            and (ppm_root / "tests" / "bootstrap-test.php").is_file()
+        ):
+            return ppm_root
+
+        if PPM_RUNTIME_CACHE.exists():
+            shutil.rmtree(PPM_RUNTIME_CACHE, ignore_errors=True)
+        staging = Path(tempfile.mkdtemp(prefix="system4-ppm679-stage-", dir="/tmp"))
+        try:
+            with zipfile.ZipFile(package) as archive:
+                archive.extractall(staging)
+            staged_root = staging / "portal-production-machine"
+            if not (staged_root / "tests" / "bootstrap-test.php").is_file():
+                raise ProductionCheckError("PPM679_PURE_VALIDATOR_RUNTIME_MISSING")
+            (staging / ".package_sha256").write_text(PPM_PACKAGE_SHA256 + "\n", encoding="utf-8")
+            staging.rename(PPM_RUNTIME_CACHE)
+        except Exception:
+            if staging.exists():
+                shutil.rmtree(staging, ignore_errors=True)
+            raise
+        return PPM_RUNTIME_CACHE / "portal-production-machine"
+
+
 def run_ppm_content_validator(
     repo: Path,
     article_html: str,
@@ -618,15 +658,9 @@ $result=PPM679_Content_Validator::check($generated,$item,'system4_direct_article
 echo json_encode(['ok'=>!empty($result['ok']),'result'=>$result],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
 ?>'''
 
-    with tempfile.TemporaryDirectory(prefix="system4-ppm-") as td:
+    ppm_root = _ppm_runtime_root(package)
+    with tempfile.TemporaryDirectory(prefix="system4-ppm-call-") as td:
         td_path = Path(td)
-        root = td_path / "ppm"
-        root.mkdir()
-        with zipfile.ZipFile(package) as archive:
-            archive.extractall(root)
-        ppm_root = root / "portal-production-machine"
-        if not (ppm_root / "tests" / "bootstrap-test.php").is_file():
-            raise ProductionCheckError("PPM679_PURE_VALIDATOR_RUNTIME_MISSING")
         payload_path = td_path / "payload.json"
         payload_path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
         script = td_path / "check.php"
