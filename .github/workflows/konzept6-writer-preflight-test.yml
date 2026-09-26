@@ -59,4 +59,14 @@ jobs:
           print('K6_WRITER_PREFLIGHT_REAL16_PASS')
           print('ITEM_COUNT=16')
           print('FIRST_PREFLIGHT_SHA='+payload['writer_preflight']['preflight_sha256'])
+          out=repo/'konzept6-live-binding.json'
+          out.write_text(json.dumps(binding,ensure_ascii=False,indent=2),encoding='utf-8')
           PY
+
+      - name: Upload real bound writer input
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: konzept6-live-binding-${{ github.sha }}
+          path: konzept6-live-binding.json
+          if-no-files-found: error
+          retention-days: 7
