@@ -1,73 +1,47 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-26
-STATUS: V1.8.2 HOBBY-DEPOT-PILOT GEBAUT / LOKAL PASS / LIVE-TEST ALS NÄCHSTES
-
-## Rolle
-
-Einzige aktuelle Pluginwahrheit für HD-001.
+STATUS: V1.8.3 HOBBY-DEPOT-PILOT GEBAUT / LOKAL PASS / UPDATE BEREIT
 
 ## Aktueller Pilotstand
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.2 Hobby Depot Pilot`
+`Affiliate-Portal Kategorie-Workflow V1.8.3 Hobby Depot Pilot`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.2_HOBBY_DEPOT_PILOT.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.3_HOBBY_DEPOT_PILOT.zip`
 
 Installer SHA-256:
-`21e835920a9141a6383278a4463395adcffb1f3107e035cda721560f40c31133`
+`eb442048c0853ccbf19111ce028bd0c44faf57631c22cbae37db3102c3905960`
 
-Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.2_HOBBY_DEPOT_PILOT.zip`
+## Änderung gegenüber V1.8.2
 
-Source SHA-256:
-`8b44ef81b07ca140a4cb864de733bdfa5d54493ab64c7248fb55769b8400cc51`
+- eigener Hauptmenüpunkt `Kategorien` im WordPress-Backend;
+- nicht mehr unter `Werkzeuge`;
+- interne Rückleitungen auf den neuen Hauptmenüpunkt angepasst;
+- bestehende DataForSEO-/Grundeinstellungen bleiben erhalten.
 
-Technischer Pilotinput:
-`HOBBY_DEPOT_KATEGORIE_PILOT_KONZEPT.json`
+## Datenübernahme
 
-## Was V1.8.2 neu kann
+V1.8.3 verwendet unverändert dieselben WordPress-Optionsschlüssel:
+- `apkw_dataforseo_login`
+- `apkw_dataforseo_password`
+- `apkw_default_location_name`
+- `apkw_default_language_code`
 
-- Konzept-/Seed-Eingabe als Startpunkt;
-- kostenloser Preflight vor jedem bezahlten DataForSEO-Lauf;
-- SEO-gestützter Erstentwurf für Content/Hobby-Struktur, Marketplace/HivePress und Magazin;
-- keine neue Struktur ohne positive gebundene SEO-Evidenz;
-- vorhandene Keyword-/Intent-/Ownership-/Kannibalisierungs-/Coverage-/Affiliate-Fit-Gates bleiben aktiv;
-- WordPress-Seiten können nach FINAL als Entwurf angelegt/aktualisiert werden;
-- WordPress-Kategorien, HivePress `hp_listing_category` und gebundene Journal-Taxonomien bleiben unterstützt;
-- gemischtes Deployment Seiten + Taxonomien;
-- Dry-Run → explizites Apply → Readback → Rollback;
-- Idempotenz und Live-Drift-Blockade;
-- logische Parent-Bindung auch über unterschiedliche WordPress-Objekttypen.
+Daher werden bei einem normalen Update von V1.8.2 auf V1.8.3 bereits eingetragene Zugangsdaten, Standort und Sprache direkt weiterverwendet.
 
-## Harte Tests
+Keine Zugangsdaten werden in das ZIP kopiert oder exportiert.
 
-- bestehende Suite + neue Tests: 223/223 PASS;
-- Fresh-Unpack-Installer: 223/223 PASS;
-- PHP-Lint: 16/16 PASS;
-- kein Pferde-/Pferde-Atelier-Bezug im Produktions-PHP;
-- negativer SEO-Test: keine positive Marketplace-Evidenz → keine erfundene Marketplace-Kategorie;
-- Slug-Konflikt → vor Write BLOCKED;
-- Rollback gemischtes Deployment PASS;
-- zweiter identischer Lauf → 0 neue Writes.
+## Tests
 
-## Herkunft / unveränderte Basis
-
-V1.8.2 baut auf der byteverifizierten allgemeinen V1.8.0-R10-Basis auf.
-
-Historisch dokumentiert ist zusätzlich V1.8.1 mit allgemeinem `PARENT_TOPIC_GAP`-Gate.
-Die exakten V1.8.1-Bytes sind nicht gebunden; dieses Gate ist im aktuellen V1.8.2-Pilot noch NICHT als Codeport übernommen.
-
-## Artefaktablage
-
-Persistente Spiegelung:
-`/Campus-Archiv/PROJEKTE/HOBBYRAUSCH/PLUGINS/HD-001-KATEGORIE-WORKFLOW/`
-
-## Erster offener Punkt
-
-Noch kein echter Hobby-Depot-WordPress-/DataForSEO-Live-Test ausgeführt.
+- 223/223 PASS
+- PHP-Lint 16/16 PASS
+- kein Pferde-/Pferde-Atelier-Bezug im Produktions-PHP
 
 ## NEXT ACTION
 
-V1.8.2 Pilot auf Hobby Depot installieren und zunächst nur aktivieren + DataForSEO-Verbindungstest ausführen. Danach Konzept-Preflight ohne bezahlte Recherche prüfen; erst anschließend kontrollierten SEO-Testlauf starten.
+V1.8.3 über die bestehende V1.8.2-Installation aktualisieren. Danach prüfen:
+1. Hauptmenüpunkt `Kategorien` sichtbar;
+2. bestehende DataForSEO-Eingaben noch vorhanden;
+3. Verbindungstest PASS.
