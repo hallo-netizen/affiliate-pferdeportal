@@ -1,0 +1,27 @@
+name: TEMP DEV Export Existing PPM679
+on:
+  push:
+    branches:
+      - temp/dev-export-existing-ppm679-20260926
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact existing package
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"
+          test -f "$P"
+          GOT="$(sha256sum "$P" | awk '{print $1}')"
+          test "$GOT" = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+          printf '%s\n' "$GOT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: temp-existing-ppm679
+          path: control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip
+          if-no-files-found: error
+          retention-days: 1
