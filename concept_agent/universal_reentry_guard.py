@@ -473,8 +473,33 @@ def build(binding: dict, checkpoint: dict, capsule: dict | None = None, previous
         if current.get("draft_sha256"):
             workspace_action["draft_sha256"] = current["draft_sha256"]
         workspace_action["revision"] = current.get("revision")
-    elif checkpoint["allowed_action"].get("action") in {"RUN_CHECKER", "REPAIR_DRAFT"}:
-        raise Blocked("WORKSPACE_CAPSULE_REQUIRED_FOR_ACTIVE_ARTICLE")
+    else:
+        outer_action = checkpoint["allowed_action"]
+        outer_name = outer_action.get("action")
+        if outer_name in {"RUN_CHECKER", "REPAIR_DRAFT"}:
+            raise Blocked("WORKSPACE_CAPSULE_REQUIRED_FOR_ACTIVE_ARTICLE")
+        if outer_name == "WRITE_DRAFT":
+            item = _binding_item(binding, int(outer_action["item_index"]))
+            workspace_action = {
+                "action": "START_BOUND_ARTICLE_WORKER",
+                "item_index": outer_action["item_index"],
+                "plan_slot": item["identity"]["plan_slot"],
+            }
+        elif outer_name == "RUN_PSERC":
+            workspace_action = {
+                "action": "RUN_BOUND_PSERC",
+                "item_count": outer_action["item_count"],
+            }
+        elif outer_name == "RUN_ENDSTEMPEL":
+            workspace_action = {
+                "action": "RUN_BOUND_ENDSTEMPEL",
+                "item_count": outer_action["item_count"],
+            }
+        elif outer_name == "STOP":
+            workspace_action = {
+                "action": "STOP",
+                "reason": outer_action.get("reason"),
+            }
 
     decision = {
         "contract": CONTRACT,
