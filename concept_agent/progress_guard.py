@@ -248,6 +248,26 @@ def verify_reentry_decision(binding: dict, state: dict, decision: dict) -> None:
     if stage not in {"ARTICLE_PRODUCTION", "PSERC_PACKAGE", "ENDSTEMPEL", "COMPLETE"}:
         raise Blocked("REENTRY_DECISION_STAGE_INVALID")
 
+    if action in {"RUN_CHECKER", "REPAIR_DRAFT"}:
+        workspace = decision.get("workspace")
+        capsule = decision.get("workspace_capsule")
+        workspace_action = decision.get("workspace_action")
+        if not isinstance(workspace, dict) or not isinstance(capsule, dict) or not isinstance(workspace_action, dict):
+            raise Blocked("WORKSPACE_CAPSULE_REQUIRED_FOR_ACTIVE_ARTICLE")
+        if workspace.get("item_index") != state["allowed_action"].get("item_index"):
+            raise Blocked("WORKSPACE_ITEM_MISMATCH")
+        if workspace.get("plan_slot") != binding["items"][workspace["item_index"]]["identity"]["plan_slot"]:
+            raise Blocked("WORKSPACE_SLOT_MISMATCH")
+        expected_draft = state["allowed_action"].get("draft_sha256")
+        if expected_draft and workspace.get("draft_sha256") != expected_draft:
+            raise Blocked("WORKSPACE_DRAFT_HASH_MISMATCH")
+        if workspace_action.get("action") != "CONTINUE_BOUND_ARTICLE_WORKER":
+            raise Blocked("WORKSPACE_ACTION_INVALID")
+        if workspace_action.get("item_index") != workspace.get("item_index"):
+            raise Blocked("WORKSPACE_ACTION_ITEM_MISMATCH")
+        if workspace_action.get("plan_slot") != workspace.get("plan_slot"):
+            raise Blocked("WORKSPACE_ACTION_SLOT_MISMATCH")
+
 def _seal_new_state(binding: dict, previous: dict, new: dict) -> dict:
     prev_sha = previous.get("checkpoint_sha256")
     if not isinstance(prev_sha, str) or not SHA_RE.fullmatch(prev_sha):
@@ -503,6 +523,18 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         }
         if action.get("action") == "WRITE_DRAFT":
             trigger_core["bound_work_item"] = json.loads(json.dumps(_binding_item(binding, int(action["item_index"]))))
+        if isinstance(decision.get("workspace_action"), dict):
+            trigger_core["workspace_action"] = json.loads(json.dumps(decision["workspace_action"]))
+        if action.get("action") in {"RUN_CHECKER", "REPAIR_DRAFT"}:
+            workspace = decision.get("workspace")
+            capsule = decision.get("workspace_capsule")
+            workspace_action = decision.get("workspace_action")
+            if not isinstance(workspace, dict) or not isinstance(capsule, dict) or not isinstance(workspace_action, dict):
+                raise Blocked("WORKSPACE_CAPSULE_REQUIRED_FOR_ACTIVE_ARTICLE")
+            trigger_core["workspace"] = json.loads(json.dumps(workspace))
+            trigger_core["workspace_capsule"] = json.loads(json.dumps(capsule))
+            trigger_core["workspace_action"] = json.loads(json.dumps(workspace_action))
+            trigger_core["workspace_restore_contract"] = "SYSTEM4_WORKSPACE_RECOVERY_CAPSULE_V1"
         process_trigger = dict(trigger_core)
         process_trigger["trigger_sha256"] = stable(trigger_core)
         process_trigger["exactly_once_for_checkpoint"] = True

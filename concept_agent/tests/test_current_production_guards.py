@@ -88,8 +88,83 @@ class CurrentProductionGuardTests(unittest.TestCase):
         state["checkpoint_sha256"] = progress_guard.stable(state)
         return state
 
+    def _workspace_capsule(self, binding, state):
+        action = state["allowed_action"]
+        if action.get("action") not in {"RUN_CHECKER", "REPAIR_DRAFT"}:
+            return None
+        index = int(action["item_index"])
+        item = binding["items"][index]
+        row = next(x for x in state["drafts"] if x["item_index"] == index)
+        text = row["content_utf8"]
+        research_text = "research"
+        facts_text = "facts"
+        fact_pack = {"facts": []}
+        plan_item = {"plan_slot": item["identity"]["plan_slot"]}
+        context_core = {"fact_pack": fact_pack, "production_plan_item": plan_item}
+        phase = "REPAIR_REQUIRED" if action["action"] == "REPAIR_DRAFT" else "CHECK_REQUIRED"
+        checks = {}
+        last_error = None
+        if phase == "REPAIR_REQUIRED":
+            checks = {
+                "status": "FAIL",
+                "checked_draft_sha256": row["draft_sha256"],
+            }
+            last_error = "TEST_REPAIR_REQUIRED"
+        article = {
+            "canonical_article_id": f"article:{index}",
+            "item_index": index,
+            **{k: item["identity"][k] for k in ("title", "target_keyword", "category", "article_type", "plan_slot")},
+        }
+        inner = {
+            "contract": universal_reentry_guard.STATE_CONTRACT,
+            "source_snapshot_sha256": hashlib.sha256(b"current-snapshot").hexdigest(),
+            "batch_sha256": binding["batch_sha256"],
+            "article": article,
+            "immutable_core_sha256": "",
+            "publish_allowed": False,
+            "phase": phase,
+            "revision": row["revision"],
+            "research": {"text": research_text, "sha256": hashlib.sha256(research_text.encode()).hexdigest()},
+            "facts": {"text": facts_text, "sha256": hashlib.sha256(facts_text.encode()).hexdigest()},
+            "production_context": {
+                **context_core,
+                "sha256": universal_reentry_guard.stable(context_core),
+            },
+            "authoring_contract": {"contract": "TEST_BOUND"},
+            "draft_markdown": text,
+            "draft_sha256": row["draft_sha256"],
+            "checks": checks,
+            "last_error": last_error,
+            "release_prepared": None,
+            "released": False,
+        }
+        inner["immutable_core_sha256"] = universal_reentry_guard.stable({
+            "contract": inner["contract"],
+            "source_snapshot_sha256": inner["source_snapshot_sha256"],
+            "batch_sha256": inner["batch_sha256"],
+            "article": inner["article"],
+        })
+        raw = (json.dumps(inner, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
+        file_row = {
+            "path": "state.json",
+            "size": len(raw),
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "base64": __import__("base64").b64encode(raw).decode(),
+        }
+        normalized = [{"path": "state.json", "size": len(raw), "sha256": file_row["sha256"]}]
+        return {
+            "contract": universal_reentry_guard.CAPSULE_CONTRACT,
+            "status": "RECOVERY_CAPSULE_READY",
+            "workspace_identity": universal_reentry_guard._capsule_identity(inner),
+            "file_count": 1,
+            "tree_sha256": universal_reentry_guard._tree_hash(normalized),
+            "files": [file_row],
+            "publish_allowed": False,
+        }
+
     def _decision(self, binding, state):
-        return universal_reentry_guard.build(binding, state)
+        capsule = self._workspace_capsule(binding, state)
+        return universal_reentry_guard.build(binding, state, capsule)
 
     def _draft(self, root, binding, index, text=None):
         slot = binding["items"][index]["identity"]["plan_slot"]
@@ -141,6 +216,7 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(result["process_trigger"]["checkpoint_sha256"], state["checkpoint_sha256"])
         self.assertEqual(result["process_trigger"]["bound_work_item"], binding["items"][0])
         self.assertEqual(result["process_trigger"]["bound_work_item"]["item_index"], 0)
+        self.assertEqual(result["process_trigger"]["workspace_action"]["action"], "START_BOUND_ARTICLE_WORKER")
         self.assertEqual(
             result["process_trigger"]["bound_work_item"]["identity"]["plan_slot"],
             result["allowed_action"]["plan_slot"],
@@ -153,7 +229,10 @@ class CurrentProductionGuardTests(unittest.TestCase):
             "worker": result["process_trigger"]["worker"],
             "allowed_action": result["process_trigger"]["allowed_action"],
             "return_to": result["process_trigger"]["return_to"],
+            "handoff_is_terminal": result["process_trigger"]["handoff_is_terminal"],
+            "same_bound_worker_must_continue_without_return": result["process_trigger"]["same_bound_worker_must_continue_without_return"],
             "bound_work_item": result["process_trigger"]["bound_work_item"],
+            "workspace_action": result["process_trigger"]["workspace_action"],
         }
         self.assertEqual(result["process_trigger"]["trigger_sha256"], progress_guard.stable(trigger_core))
         self.assertIs(result["continuation_required"], True)

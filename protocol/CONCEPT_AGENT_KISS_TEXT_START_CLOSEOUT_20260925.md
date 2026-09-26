@@ -340,3 +340,36 @@ Die NEXT ACTION steht ausschließlich in `control/startmaster0107/CURRENT_STATE.
 - Folge: Die einzige Current-Autorität auf `main` bleibt inhaltlich hinter dem frisch geprüften Delta zurück. Nach den Campusregeln ist der Abschlussstatus deshalb **CURRENT-AUTORITÄT BLOCKED**, bis der vorgesehene autorisierte Root-/Current-Synchronisationsweg wieder zulässig ist.
 - Dieses Protokoll bleibt ausschließlich Evidence/Historie und ersetzt Current ausdrücklich nicht.
 
+## Nachholung 2026-09-26 — bewiesene Workspace-Recovery im bestehenden Reentry wiederhergestellt
+
+Ursache:
+- Die bereits bewiesene Capsule-Recovery aus `c2bde4d8ab81d3786a474d18ae8958d369637377` wurde in `5d0b38dd367c47154bd6dedc3f59b05259857ad8` beim Binden des Outer-Gates ersetzt statt zusammengeführt.
+- Dadurch blieb die äußere Checkpoint-/Stage-Bindung erhalten, aber die bestehende `SYSTEM4_WORKSPACE_RECOVERY_CAPSULE_V1`-Wiederaufnahme war im aktuellen Concept-Agent-Handoff nicht mehr vollständig transportiert.
+
+Fix PR #426:
+- heutige `CONCEPT_AGENT_UNIVERSAL_REENTRY_DECISION_V2`- und `full_workflow_gate`-Bindung unverändert beibehalten;
+- bewiesene Workspace-Capsule-Validierung und Inner-Phase-Kontinuität wieder integriert;
+- `START_BOUND_ARTICLE_WORKER` für den ersten gebundenen Artikel-Workspace wiederhergestellt;
+- `RUN_CHECKER` und `REPAIR_DRAFT` fail-closed ohne verifizierte Workspace-Capsule;
+- dieselbe Capsule wird im bestehenden `process_trigger` an denselben gebundenen Worker weitergereicht;
+- Repair → Recheck bleibt derselbe Artikel/Workspace;
+- bestehende gebundene PSERC-/ENDSTEMPEL-Aktionen bleiben im vorhandenen Outer-/Batch-Pfad;
+- kein neuer Runner, kein neuer Controller, keine neue Produktionsroute.
+
+Nicht verändert:
+- text-start;
+- LT 6.8;
+- PPM 6.7.9;
+- PSERC;
+- ENDSTEMPEL;
+- Text-/SEO-/Qualitätsregeln;
+- Plugins;
+- Publish-Regel.
+
+Entwicklungsnachweis:
+- temporärer, ausschließlich auf dem Reparaturbranch verwendeter Testworkflow wurde nach dem Test vollständig wieder entfernt;
+- Reentry-Capsule-Regressionsmatrix: 4/4 PASS;
+- Current-Production-Regression einschließlich 16 Artikel, LT-/PPM-Repair, Recheck, PSERC, ENDSTEMPEL und STOP: 13/13 PASS;
+- Entwicklungs-Testlauf: `36239622721 = SUCCESS`;
+- finaler Live-Code enthält daraus keinen neuen GitHub-Workflow, keine Codex-Abhängigkeit und keine API-Abhängigkeit.
+
