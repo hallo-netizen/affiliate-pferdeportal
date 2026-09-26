@@ -374,6 +374,11 @@ class CurrentProductionGuardTests(unittest.TestCase):
         self.assertEqual(trigger["workspace_capsule"], capsule)
         self.assertEqual(trigger["workspace_restore_contract"], universal_reentry_guard.CAPSULE_CONTRACT)
         self.assertEqual(trigger["workspace_action"]["action"], "CONTINUE_BOUND_ARTICLE_WORKER")
+        self.assertEqual(trigger["workspace"]["writer_preflight"], {"contract": "TEST_BOUND"})
+        self.assertEqual(
+            trigger["workspace"]["writer_preflight_sha256"],
+            universal_reentry_guard.stable({"contract": "TEST_BOUND"}),
+        )
         self.assertEqual(trigger["workspace_action"]["inner_phase"], "DRAFT_REQUIRED")
         self.assertEqual(trigger["workspace_action"]["inner_action"], "BOUND_DRAFT_ONLY")
         self.assertNotEqual(trigger["workspace_action"]["inner_phase"], "RESEARCH_REQUIRED")
