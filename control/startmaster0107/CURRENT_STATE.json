@@ -121,7 +121,8 @@
     "UPSTREAM_REPAIR_FIXED_RETURN_LIMIT_REMOVED",
     "TEXT_START_CENTRAL_BINDING_SYNCED",
     "PR413_RESUME_EXISTING_CHECKPOINT_NO_STOP_HANDOFFS_MERGED_20488ACC7D371765DF99573E74A04E519ADACCDD",
-    "CONCEPT_AGENT_ARTICLES_0_TO_9_LT68_PPM679_PASS_ARTICLE10_DRAFT_CHECKPOINT36"
+    "CONCEPT_AGENT_ARTICLES_0_TO_9_LT68_PPM679_PASS_ARTICLE10_DRAFT_CHECKPOINT36",
+    "CONCEPT_AGENT_ARTICLES_0_TO_10_LT68_PPM679_PASS_ARTICLE11_WRITE_DRAFT_CHECKPOINT38"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -227,12 +228,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "CONCEPT_AGENT_REAL_PRODUCTION_ARTICLES_0_TO_9_PASS_ARTICLE10_LT68_REQUIRED",
+  "current_work_status": "CONCEPT_AGENT_REAL_PRODUCTION_ARTICLES_0_TO_10_LT68_PPM679_PASS_ARTICLE11_WRITE_DRAFT_REQUIRED",
   "current_execution_blocker": {
     "code": "NONE_ACTIVE_PRODUCTION_CONTINUATION",
     "error_class": false,
     "classification": "NO_CURRENT_EXECUTION_BLOCKER_ACTIVE_BOUND_GATE",
-    "detail": "The previous LanguageTool 6.8 runtime blocker is resolved with the exact manifest-bound package and commandline JAR. In the real bound-chat worker checkpoint chain, articles 0 through 9 have completed LT 6.8 and PPM 6.7.9 with PASS. Article 10 draft is stored in CONCEPT_AGENT_CURRENT_PROGRESS_V1 checkpoint 16e52fcfa669d5a8c869d29f96ce3dccac6102c700b5cd1eb0d423156c8ab252 with draft SHA-256 6f649bd208f2df8bae6fd99edfa3b3b8115d65713d54c3e893d25717b14225b8. The next bound action is RUN_CHECKER LT68 for item 10. No workflow, quality-rule, checker or publish blocker is currently active.",
+    "detail": "The LanguageTool 6.8 runtime blocker remains resolved with the exact manifest-bound package and commandline JAR. In the real bound-chat worker checkpoint chain, articles 0 through 10 have completed LT 6.8 and PPM 6.7.9 with PASS. CONCEPT_AGENT_CURRENT_PROGRESS_V1 checkpoint 7012eee5dd22d82a8c1906bdc73bf2bee45cfca207cd3bfc746f61600c3b52db is in AUTHORING_REQUIRED with next_item_index 11. The next bound action is WRITE_DRAFT for item 11 and plan_slot fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5. No workflow, quality-rule, checker or publish blocker is currently active.",
     "applies_to_concept_agent": true,
     "publish_allowed": false
   },
@@ -289,18 +290,16 @@
       6,
       7,
       8,
-      9
+      9,
+      10
     ],
-    "completed_article_count": 10,
-    "article0_to_9_lt68_result": "PASS",
-    "article0_to_9_ppm679_result": "PASS",
+    "completed_article_count": 11,
     "article10_draft_observed": true,
     "article10_draft_sha256": "6f649bd208f2df8bae6fd99edfa3b3b8115d65713d54c3e893d25717b14225b8",
-    "latest_checkpoint_sha256": "16e52fcfa669d5a8c869d29f96ce3dccac6102c700b5cd1eb0d423156c8ab252",
-    "latest_checkpoint_file_sha256": "8140b805c88d919748d8b0508d90d215d7bc41b32c4e1909189cfd944af97a36",
-    "next_bound_action": "RUN_CHECKER",
-    "next_checker": "LT68",
-    "next_item_index": 10,
+    "latest_checkpoint_sha256": "7012eee5dd22d82a8c1906bdc73bf2bee45cfca207cd3bfc746f61600c3b52db",
+    "latest_checkpoint_file_sha256": "5477fb1d7dbdc45febc7f83151103ee030c7fb6a0e7911dd8b5896cb4e49a1a4",
+    "next_bound_action": "WRITE_DRAFT",
+    "next_item_index": 11,
     "lt68_runtime_blocker_resolved": true,
     "lt68_package_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
     "lt68_commandline_jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
@@ -311,18 +310,23 @@
     },
     "worker_continuation_real_execution_proven": true,
     "contractual_stop_reached": false,
-    "publish_performed": false
+    "publish_performed": false,
+    "article0_to_10_lt68_result": "PASS",
+    "article0_to_10_ppm679_result": "PASS",
+    "article10_lt68_result": "PASS",
+    "article10_ppm679_result": "PASS",
+    "next_plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5"
   },
   "last_safe_main_sha": "08935280708046ac788e474715f169e4069da871",
-  "last_safe_change": "Main remained unchanged by the article-production work. The bound worker progressed the existing 16-item batch through real LT 6.8 and PPM 6.7.9 PASS for articles 0-9 and wrote article 10 into checkpoint 36. Current is synchronized only to that proven delta; no production architecture or quality rule changed.",
+  "last_safe_change": "Main production code remained unchanged by the article-production work. The bound worker progressed the existing 16-item batch through real LT 6.8 and PPM 6.7.9 PASS for articles 0-10. Current is synchronized only to proven checkpoint 38; no production architecture, content rule, quality rule, checker or publish rule changed.",
   "hobbyroom_status": "NOT_CURRENT_AUTHORITY",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "CONTINUE_EXISTING_ARTICLE10_CHECKPOINT",
-    "action": "Resume the same existing bound-chat worker from CONCEPT_AGENT_CURRENT_PROGRESS_V1 checkpoint 16e52fcfa669d5a8c869d29f96ce3dccac6102c700b5cd1eb0d423156c8ab252. Execute only the already-bound RUN_CHECKER LT68 action for item 10 and draft SHA-256 6f649bd208f2df8bae6fd99edfa3b3b8115d65713d54c3e893d25717b14225b8. If LT requests repair, repair only the same article and recheck. If LT passes, continue unchanged to PPM 6.7.9, then continue the existing article chain. If the prior chat workspace is unavailable, restore the recovery evidence package first and verify its SHA-256 before resuming. Do not rerun research or change the bound links, metadata, order or plan_slot.",
-    "why": "Articles 0-9 are already real PASS through the unchanged LT 6.8 and PPM 6.7.9 gates. The first open bound action is article 10 LT68; there is no earlier unresolved execution blocker.",
+    "goal": "CONTINUE_EXISTING_ARTICLE11_WRITE_DRAFT_CHECKPOINT",
+    "action": "Resume the same existing bound-chat worker from CONCEPT_AGENT_CURRENT_PROGRESS_V1 checkpoint 7012eee5dd22d82a8c1906bdc73bf2bee45cfca207cd3bfc746f61600c3b52db. Execute only the already-bound WRITE_DRAFT action for item 11 and plan_slot fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5. Use the already persisted research binding; do not rerun research. Then follow the unchanged chain LT 6.8 -> PPM 6.7.9. If either checker requests repair, repair only the same article and recheck before continuing. Do not change the three bound internal links, metadata, order or plan_slot.",
+    "why": "Articles 0-10 are already real PASS through the unchanged LT 6.8 and PPM 6.7.9 gates. The first open bound action is WRITE_DRAFT for article 11; there is no earlier unresolved execution blocker.",
     "temporary_execution_tools_policy": "Codex and GitHub may be used during fixes and production when needed. Neither may remain as a dependency, controller, runtime requirement or production path in the final result.",
     "forbidden": [
       "new architecture, runner, controller, sidecar or alternate route",
