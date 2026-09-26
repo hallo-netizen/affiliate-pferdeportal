@@ -373,3 +373,16 @@ Entwicklungsnachweis:
 - Entwicklungs-Testlauf: `36239622721 = SUCCESS`;
 - finaler Live-Code enthält daraus keinen neuen GitHub-Workflow, keine Codex-Abhängigkeit und keine API-Abhängigkeit.
 
+
+
+## PR #427 — vorhandenen Arbeitsraum beim ersten WRITE_DRAFT vollständig weitergeben
+Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Minimalfix ausschließlich in der ersten gebrochenen Artikelübergabe nach bereits gebundener Recherche.
+- Wenn für `WRITE_DRAFT` bereits eine verifizierte `SYSTEM4_WORKSPACE_RECOVERY_CAPSULE_V1` vorhanden ist, transportiert der bestehende `process_trigger` den vollständigen Workspace und die Capsule an denselben `BOUND_CHAT_WORKER`, statt sie an dieser Übergabe zu verlieren.
+- Der bestehende Start ohne Capsule bleibt unverändert.
+- Start, Intake, Recherche, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln und Publish wurden nicht verändert.
+- Positivtest bindet einen bereits recherchierten Testartikel direkt bei `DRAFT_REQUIRED`; `RESEARCH_REQUIRED` wird nicht erneut ausgeführt.
+- Der Testartikel läuft danach durch WRITE_DRAFT → LT-Repair → LT-PASS → PPM-Repair → LT-Recheck → PPM-PASS.
+- Negativtest: unvollständiger Workspace-Transport blockiert fail-closed mit `WORKSPACE_CAPSULE_REQUIRED_FOR_BOUND_WRITE`.
+- Kein neuer Runner, kein neuer Controller, keine neue Route.
