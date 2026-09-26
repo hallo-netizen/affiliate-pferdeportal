@@ -138,9 +138,8 @@ class UniversalReentryGuardTests(unittest.TestCase):
                 guard.validate_transition(previous,current)
         for before,after in (("RESEARCH_REQUIRED","DRAFT_REQUIRED"),("REPAIR_REQUIRED","OUTPUT_GATE_REQUIRED"),("RELEASED","RESEARCH_REQUIRED")):
             previous=guard.build(self.binding,outer,self.capsule(self.canonical_state(before)))
-            current=guard.build(self.binding,outer,self.capsule(self.canonical_state(after)),previous)
             with self.assertRaises(guard.Blocked):
-                guard.validate_transition(previous,current)
+                guard.build(self.binding,outer,self.capsule(self.canonical_state(after)),previous)
 
     def test_tamper_wrong_article_and_missing_capsule_block(self):
         outer=self.outer("AUTHORING_REQUIRED")
