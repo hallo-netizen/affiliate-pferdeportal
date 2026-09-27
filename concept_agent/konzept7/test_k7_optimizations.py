@@ -8,7 +8,7 @@ sys.path.insert(0,str(HERE/"concept_agent"))
 sys.path.insert(0,str(HERE/"concept_agent"/"konzept7"))
 
 import intake_bridge,production_bridge
-import k7_execution_lock,k7_research_planner,k7_parallel_controller,k7_closeout_plan,k7_metrics,k7_start_controller,k7_bound_fact_context
+import k7_execution_lock,k7_research_planner,k7_parallel_controller,k7_closeout_plan,k7_metrics,k7_start_controller,k7_bound_fact_context,k7_section_balance
 
 class K7OptimizationTests(unittest.TestCase):
     @classmethod
@@ -46,7 +46,30 @@ class K7OptimizationTests(unittest.TestCase):
             self.assertEqual(trace_binding["data_source_hash"],"REFERENCED_FACT_EVIDENCE_TEXT_SHA256")
             self.assertFalse(trace_binding["visible_text_mutation_required"])
             self.assertTrue(bp["repair_policy"]["all_findings_from_same_checker_one_revision"])
+            balance=bp["section_balance"]
+            self.assertEqual(balance["contract"],"K7_SECTION_BALANCE_POLICY_V1")
+            self.assertEqual(balance["minimum_words"],60)
+            self.assertEqual(balance["maximum_words"],120)
+            self.assertEqual(balance["exempt_block_ids"],["table","conclusion","further_information"])
+            self.assertTrue(balance["apply_to_last_normal_h2"])
+            self.assertEqual(item["writer_preflight"]["k7_section_balance_policy"],balance)
+            self.assertNotIn("recovery_article_content",item["forbidden_inputs"])
             self.assertFalse(bp["ppm679_changed"]); self.assertFalse(bp["languagetool68_changed"])
+
+
+    def test_section_balance_and_archive_isolation(self):
+        self.assertFalse((HERE/"recovery/current16-input").exists())
+        def words(n):
+            return " ".join("wort"+str(i) for i in range(n))
+        good='<section data-block="body"><h2>A</h2><p>'+words(60)+'</p><h2>B</h2><p>'+words(120)+'</p></section>'
+        out=k7_section_balance.validate(good)
+        self.assertEqual([row["word_count"] for row in out["sections"]],[60,120])
+        with self.assertRaises(k7_section_balance.SectionBalanceError):
+            k7_section_balance.validate('<section data-block="body"><h2>A</h2><p>'+words(59)+'</p></section>')
+        with self.assertRaises(k7_section_balance.SectionBalanceError):
+            k7_section_balance.validate('<section data-block="body"><h2>A</h2><p>'+words(121)+'</p></section>')
+        special=good+'<section data-block="table"><h2>Tabelle</h2><p>kurz</p></section><section data-block="conclusion"><h2>Fazit</h2><p>kurz</p></section><section data-block="further_information"><h2>Weiterführende Informationen</h2><p>kurz</p></section>'
+        self.assertEqual(len(k7_section_balance.validate(special)["sections"]),2)
 
     def test_start_lock_exists_before_research_and_duplicate_resumes(self):
         with tempfile.TemporaryDirectory() as td:
