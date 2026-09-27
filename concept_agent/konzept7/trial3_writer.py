@@ -11,7 +11,7 @@ DRAFTS={
 EXPECTED={
 "01_regendecken.html":{"item_index":1,"sha256":"03d996528757b4b754dcee4e7524b68d1e9b7a917bd4d0ce5f91ebabaf1c51e8"},
 "08_schermaschinen.html":{"item_index":8,"sha256":"704c1a91373d55ee975655b3ba5ccb4cf31ffd1467b39270e271265f6f167b6b"},
-"15_tuev_kosten.html":{"item_index":15,"sha256":"921ce21576cf58fa2667ae060ed8c87773670b51872a4aa2fc5f8992eabe6b99"},
+"15_tuev_kosten.html":{"item_index":15,"sha256":"f793a35c82df20f02f97374920af34bbb169f61d6d313919e9718109c5ac6da2"},
 } 
 FAQ_DIRECT_PREFIXES={
 "01_regendecken.html":"Nässe und Regen verringern die Isolationswirkung des Fells deutlich; ob eine Regendecke sinnvoll ist, hängt deshalb unter anderem von Nässe, Wind, Schutz, Schur, Alter, Gesundheit und Körperzustand ab. Ein gesundes Pferd kann sich mit Winterfell und Körperfett gut gegen Kälte isolieren.",
@@ -149,6 +149,8 @@ FINAL_REPAIRS={
 ("Gewichtsklasse aus den Fahrzeugpapieren übernehmen","zulässige Gesamtmasse aus den Fahrzeugpapieren übernehmen"),
 ("Bundesland<span","Bundesland und Prüforganisation<span"),
 ("Regionale Preisübersicht der Prüfstelle verwenden","Bundesland und Prüforganisation abgleichen"),
+("Fahrzeugart und zulässige Gesamtmasse einordnen","Fahrzeugart und Gesamtmasse gemeinsam einordnen"),
+("zulässige Gesamtmasse aus den Fahrzeugpapieren übernehmen","Fahrzeugart zur zulässigen Gesamtmasse passend einordnen"),
 ],
 }
 TABLE_GUIDANCE_FACT_IDS={
