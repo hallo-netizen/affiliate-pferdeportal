@@ -338,7 +338,7 @@ Die bereits zusammengetragenen menschbezogenen Portal-, Affiliate-, Abo-, Weiter
 
 REGEL:
 - ausschließlich Themenfeld Mensch;
-- keine Pferde-, Hobby-, Gaumen-, Tier- oder sonstigen Fremdthemen;
+- keine Nicht-Mensch-Themen;
 - zunächst nur das tatsächlich benötigte Büro `KONZEPT`;
 - genau eine Current-Autorität über Scope `MENSCH_KONZEPT`;
 - `KONZEPT_MASTER.md` enthält dauerhaften Konzeptinhalt, aber keinen dynamischen Current-Status;
