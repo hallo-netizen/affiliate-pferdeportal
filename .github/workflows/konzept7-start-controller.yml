@@ -1,0 +1,73 @@
+name: Konzept 7 Start Controller
+
+on:
+  workflow_dispatch:
+    inputs:
+      article_lanes:
+        description: Parallel article lanes
+        required: true
+        default: '4'
+        type: choice
+        options: ['1','2','4','8']
+      runtime_generation:
+        description: Runtime generation
+        required: true
+        default: '1'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: konzept7-start-controller
+  cancel-in-progress: false
+
+jobs:
+  start:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Start or resume exact K7 run
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k7-run
+          python3 concept_agent/konzept7/k7_start_controller.py \
+            concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
+            concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json \
+            /tmp/k7-run \
+            "${{ inputs.article_lanes }}" \
+            "${{ inputs.runtime_generation }}" | tee /tmp/k7-start-result.json
+
+      - name: Verify start result is bound and non-publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('/tmp/k7-run')
+          result=json.load(open('/tmp/k7-start-result.json',encoding='utf-8'))
+          run=json.load(open(root/'K7_RUN_ROOT.json',encoding='utf-8'))
+          if result.get('publish_allowed') is not False or run.get('publish_allowed') is not False:
+              raise SystemExit('K7_START_PUBLISH_FLAG_INVALID')
+          if result.get('stage') not in {'RESEARCH_REQUIRED','ARTICLE_PRODUCTION'}:
+              raise SystemExit('K7_START_STAGE_INVALID')
+          if run.get('chat_may_choose_stage') is not False or run.get('chat_may_choose_article') is not False:
+              raise SystemExit('K7_START_CHAT_FREEDOM_NOT_LOCKED')
+          print('K7_START_LOCK_PASS')
+          PY
+
+      - name: Upload exact K7 run root
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: konzept7-start-root-${{ github.run_id }}
+          path: /tmp/k7-run/
+          if-no-files-found: error
+          retention-days: 30
