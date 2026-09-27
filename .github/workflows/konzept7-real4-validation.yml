@@ -7,6 +7,8 @@ on:
     paths:
       - 'concept_agent/konzept7/real4/K7_REAL4_DRAFTS.tgz.b64'
       - 'concept_agent/konzept7/k7_real4_context.py'
+      - 'concept_agent/konzept7/k7_real4_repair.py'
+      - 'concept_agent/konzept7/k7_mechanical_preflight.py'
       - '.github/workflows/konzept7-real4-validation.yml'
   workflow_dispatch:
 
