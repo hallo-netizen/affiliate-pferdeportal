@@ -326,3 +326,24 @@ REGEL:
 
 BELEG:
 `PROJEKTE/HOBBYRAUSCH/START_HERE.md`
+
+
+## ARCH-092 – Neues Projektgebäude MENSCH mit eigenem Konzeptbüro
+
+WAS:
+Neues Projektgebäude `PROJEKTE/MENSCH/` mit zunächst genau einem Büro `KONZEPT/`.
+
+WARUM:
+Die bereits zusammengetragenen menschbezogenen Portal-, Affiliate-, Abo-, Weiterbildungs- und E-Learning-Ideen sollen getrennt von allen nicht-menschlichen Projekten dauerhaft konsolidiert werden. Bislang gab es dafür kein eigenes Campus-Projektgebäude.
+
+REGEL:
+- ausschließlich Themenfeld Mensch;
+- keine Pferde-, Hobby-, Gaumen-, Tier- oder sonstigen Fremdthemen;
+- zunächst nur das tatsächlich benötigte Büro `KONZEPT`;
+- genau eine Current-Autorität über Scope `MENSCH_KONZEPT`;
+- `KONZEPT_MASTER.md` enthält dauerhaften Konzeptinhalt, aber keinen dynamischen Current-Status;
+- `HOBBYRAUM.md` bleibt nur temporäre Ausführungsfläche;
+- weitere Büros erst bei echtem Bedarf.
+
+BELEG:
+`PROJEKTE/MENSCH/START_HERE.md`
