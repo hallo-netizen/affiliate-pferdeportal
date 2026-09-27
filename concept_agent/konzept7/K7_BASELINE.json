@@ -17,5 +17,5 @@
   "pserc_changed": false,
   "endstempel_semantics_changed": false,
   "publish_allowed": false,
-  "isolation_rule": "K7_ACTIVE_RUNTIME_MUST_NOT_REFERENCE_KONZEPT6_PATHS_BRANCHES_PAYLOADS_OR_POLICY_NAMES"
+  "isolation_rule": "K7_ACTIVE_RUNTIME_MUST_NOT_REFERENCE_PREVIOUS_CONCEPT_PATHS_BRANCHES_PAYLOADS_OR_POLICY_NAMES"
 }
