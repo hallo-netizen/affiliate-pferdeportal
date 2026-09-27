@@ -1,5 +1,6 @@
 from __future__ import annotations
 import json,tempfile,unittest
+from unittest import mock
 from pathlib import Path
 import sys
 
@@ -85,6 +86,61 @@ class K7OptimizationTests(unittest.TestCase):
             prod=k7_start_controller.start(snap_path,HERE/"concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json",root/"run",4,1)
             self.assertEqual(prod["stage"],"ARTICLE_PRODUCTION")
             self.assertEqual(len(prod["ready_actions"]),4)
+
+    def test_midrun_chat_handoff_resumes_exact_parallel_state_without_replanning(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            run=root/"run"; run.mkdir()
+            binding=self.binding
+            pstate=k7_parallel_controller.initial(binding,4)
+            for index in range(8):
+                pstate=k7_parallel_controller.record_draft(binding,pstate,index,f"<article><h2>A {index}</h2><p>fertig</p></article>")
+                pstate=k7_parallel_controller.record_check(binding,pstate,index,"LT68","PASS")
+                pstate=k7_parallel_controller.record_check(binding,pstate,index,"PPM679","PASS")
+            (run/"K7_PRODUCTION_BINDING.json").write_text(json.dumps(binding,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            (run/"K7_PARALLEL_STATE.json").write_text(json.dumps(pstate,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            k7_execution_lock.acquire(run/"K7_EXECUTION_LOCK.json",binding["batch_sha256"],binding["binding_sha256"],binding["item_count"],1)
+            closeout=k7_closeout_plan.build(binding["batch_sha256"],binding["item_count"],1)
+            (run/"K7_CLOSEOUT_PLAN.json").write_text(json.dumps(closeout,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            rr=k7_start_controller._write(run/"K7_RUN_ROOT.json",{
+              "contract":k7_start_controller.CONTRACT,"status":"PRODUCTION_ACTIVE",
+              "batch_sha256":self.intake["batch_sha256"],"intake_sha256":self.intake["intake_sha256"],
+              "item_count":binding["item_count"],"runtime_generation":1,"article_lanes":4,
+              "duplicate_start_policy":"RESUME_SAME_RUN","conflicting_start_policy":"BLOCK",
+              "chat_may_choose_stage":False,"chat_may_choose_article":False,
+              "alternate_route_allowed":False,"publish_allowed":False,
+              "production_binding_sha256":binding["binding_sha256"],
+            })
+            with mock.patch.object(k7_research_planner,"plan",side_effect=AssertionError("replanning forbidden")), \
+                 mock.patch.object(production_bridge,"build",side_effect=AssertionError("rebinding forbidden")):
+                out=k7_start_controller._resume_active_run(self.intake,rr,run,4)
+            self.assertEqual(out["status"],"RESUME_EXISTING_RUN")
+            self.assertEqual(out["stage"],"ARTICLE_PRODUCTION")
+            self.assertEqual([a["item_index"] for a in out["ready_actions"]],[8,9,10,11])
+            self.assertTrue(all(a["action"]=="WRITE_DRAFT" for a in out["ready_actions"]))
+
+    def test_midrun_chat_handoff_blocks_mismatched_saved_state(self):
+        with tempfile.TemporaryDirectory() as td:
+            run=Path(td)
+            binding=self.binding
+            (run/"K7_PRODUCTION_BINDING.json").write_text(json.dumps(binding,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            pstate=k7_parallel_controller.initial(binding,4)
+            (run/"K7_PARALLEL_STATE.json").write_text(json.dumps(pstate,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            k7_execution_lock.acquire(run/"K7_EXECUTION_LOCK.json",binding["batch_sha256"],binding["binding_sha256"],binding["item_count"],1)
+            closeout=k7_closeout_plan.build(binding["batch_sha256"],binding["item_count"],1)
+            (run/"K7_CLOSEOUT_PLAN.json").write_text(json.dumps(closeout,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            rr={
+              "contract":k7_start_controller.CONTRACT,"status":"PRODUCTION_ACTIVE",
+              "batch_sha256":self.intake["batch_sha256"],"intake_sha256":self.intake["intake_sha256"],
+              "item_count":binding["item_count"],"runtime_generation":1,"article_lanes":4,
+              "duplicate_start_policy":"RESUME_SAME_RUN","conflicting_start_policy":"BLOCK",
+              "chat_may_choose_stage":False,"chat_may_choose_article":False,
+              "alternate_route_allowed":False,"publish_allowed":False,
+              "production_binding_sha256":"0"*64,
+            }
+            rr["run_root_sha256"]=k7_start_controller.stable(rr)
+            with self.assertRaisesRegex(k7_start_controller.Blocked,"ACTIVE_RESUME_BINDING_MISMATCH"):
+                k7_start_controller._resume_active_run(self.intake,rr,run,4)
 
     def test_execution_lock_duplicate_resume_conflict_block(self):
         with tempfile.TemporaryDirectory() as td:
