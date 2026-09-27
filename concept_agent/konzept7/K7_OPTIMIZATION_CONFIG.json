@@ -11,7 +11,8 @@
     "exact_pass_reuse_before_new_work": true,
     "internal_pass_is_never_chat_stop": true,
     "real_repair_evidence_required": true,
-    "measurement_required_for_optimization_claim": true
+    "measurement_required_for_optimization_claim": true,
+    "active_writer_access_to_archived_article_bodies": false
   },
   "start": {
     "execution_lock": true,
@@ -34,7 +35,15 @@
     "conclusion_ratio_target_if_applicable": 0.12,
     "table_unique_token_ratio_target_if_applicable": 0.22,
     "mechanical_requirements_prebound": true,
-    "all_same_checker_findings_one_repair_revision": true
+    "all_same_checker_findings_one_repair_revision": true,
+    "normal_h2_section_min_words": 60,
+    "normal_h2_section_max_words": 120,
+    "normal_h2_exempt_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ],
+    "heading_content_relation": "USE_EXISTING_BOUND_INTENT_AND_HEADING_SEMANTIC_RULES"
   },
   "production": {
     "default_article_lanes": 4,
