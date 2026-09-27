@@ -26,7 +26,8 @@ PACKAGE / TREE GATES
 - Final source file count: 27/27.
 - Final ZIP fresh-unpack: byte-identical to tested 6.72.165 working tree.
 - Exact 6.72.164 fallback fresh-unpack: byte-identical to baseline tree.
-- 6.72.165 installer SHA256: b8fc3af23a262a3b749163e241d5ac7ab0d666b8fb2396fe45426e8433fd7bb0
+- 6.72.165 installer SHA256: 0170c89cf7381bc4a99c379277b529a7056bf61ec47683c027fef7c536fafb21
+- Installer packaging rebound only because the originally referenced ZIP bytes were not retained; fresh-unpacked 27/27 source bytes are unchanged and exactly match CURRENT_SOURCE_SHA256.txt.
 - 6.72.164 fallback SHA256: 97a7b7b4b45008d93faa9a6dc76976f501a233804adc31bb5c4da37a4011b17f
 - 6.72.165 source-manifest file SHA256: f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c
 
