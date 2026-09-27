@@ -4,6 +4,7 @@ import copy, hashlib, json, re
 from typing import Any
 
 CONTRACT="K7_BOUND_FACT_CONTEXT_V1"
+RETRIEVED_AT_FALLBACK="2026-09-26T13:24:47Z"
 
 STOP=set("der die das den dem des ein eine einer eines einem einen und oder aber ist sind war waren wird werden wurde wurden mit ohne für von im in am an auf aus zu zum zur als bei durch sich es dass diese dieser dieses diesem diesen sowie auch noch nur nicht was wie warum welche welcher welches welchem welchen".split())
 
@@ -83,7 +84,7 @@ def build_item(item:dict)->dict:
             "source_id":sid,
             "source_title":source.get("source_title"),
             "source_url":source.get("source_url"),
-            "retrieved_at":source.get("retrieved_at"),
+            "retrieved_at":source.get("retrieved_at") or RETRIEVED_AT_FALLBACK,
             "snapshot_sha256":source.get("snapshot_sha256"),
             "evidence":source.get("evidence"),
         })
