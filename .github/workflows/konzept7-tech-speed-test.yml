@@ -1,0 +1,141 @@
+name: Konzept 7 Technical Full16 Speed Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  speed-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Restore exact current 16-article payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/k7payload
+          mkdir -p /tmp/k7payload
+          base64 -d concept_agent/konzept7/ENDSTEMPEL_PAYLOAD.zip.b64 > /tmp/k7payload.zip
+          unzip -q /tmp/k7payload.zip -d /tmp/k7payload
+
+      - name: Syntax and scope checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile isolated_system4/production_checks_engine.py concept_agent/progress_guard.py
+          if grep -q 'repair_bundle' concept_agent/progress_guard.py; then
+            echo 'ARCHITECTURE_SCOPE_VIOLATION_REPAIR_BUNDLE'
+            exit 2
+          fi
+          echo 'K7_TECH_SCOPE_PASS'
+
+      - name: Run all 16 original articles through exact check path
+        shell: bash
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/system4-ppm679-* /tmp/system4-lt68-worker-v1.json /tmp/system4-lt68-worker-v1.lock
+          python3 - <<'PY' | tee /tmp/k7-speed-result.jsonl
+          import hashlib,json,pathlib,sys,time
+          repo=pathlib.Path.cwd()
+          sys.path.insert(0,str(repo/'isolated_system4'))
+          import production_checks_engine as checks
+
+          payload=pathlib.Path('/tmp/k7payload')
+          manifests=list(payload.glob('control/startmaster0107/recovery_sources/*/generation-*/MANIFEST.json'))
+          if len(manifests)!=1:
+              raise SystemExit('PAYLOAD_MANIFEST_COUNT_INVALID:'+str(len(manifests)))
+          manifest=json.loads(manifests[0].read_text(encoding='utf-8'))
+          envelope_path=payload/pathlib.Path(manifest['import_envelope_ref'])
+          envelope=json.loads(envelope_path.read_text(encoding='utf-8'))
+          plans=envelope['production_plan']['items']
+          packs=envelope['fact_pack_bundle']['fact_packs']
+          releases=envelope['workflow_release']['items']
+          rel_by_id={r['canonical_article_id']:r['plan_slot'] for r in releases}
+          article_by_slot={r['plan_slot']:payload/pathlib.Path(r['ref']) for r in manifest['items']}
+          pack_by_snapshot={str(p.get('source_snapshot_id')):p for p in packs}
+
+          results=[]
+          for idx,plan in enumerate(plans):
+              ca=plan['canonical_article']
+              slot=rel_by_id[plan['canonical_article_id']]
+              article_path=article_by_slot[slot]
+              raw=article_path.read_bytes()
+              html=raw.decode('utf-8')
+              source=str(plan['source_snapshot_id'])
+              pack=pack_by_snapshot.get(source)
+              if pack is None:
+                  raise SystemExit('FACT_PACK_MISSING:'+source)
+              quality=plan.get('quality_binding') or {}
+              cat=plan.get('category_binding') or quality.get('wordpress_category') or {}
+              state={
+                  'article':{
+                      'article_type':plan['article_type'],
+                      'target_keyword':plan['target_keyword'],
+                      'title':plan['topic'],
+                      'category':cat['slug'],
+                  },
+                  'source_snapshot_sha256':source,
+                  'draft_markdown':html,
+                  'draft_sha256':hashlib.sha256(raw).hexdigest(),
+              }
+              t0=time.monotonic()
+              out=checks.run_all(repo,state,pack,plan)
+              elapsed=time.monotonic()-t0
+              row={
+                  'article_index':idx,
+                  'title':plan['topic'],
+                  'status':out['status'],
+                  'seconds':round(elapsed,3),
+                  'ppm_cache_present':checks.PPM_RUNTIME_CACHE.is_dir(),
+                  'lt_worker_present':checks.LT_WORKER_META.is_file(),
+              }
+              results.append(row)
+              print(json.dumps(row,ensure_ascii=False))
+          if len(results) != 16:
+              raise SystemExit('K7_SPEED_ARTICLE_COUNT_INVALID:'+str(len(results)))
+          if any(r['status']!='PASS' for r in results):
+              raise SystemExit('K7_SPEED_ARTICLE_NOT_PASS')
+          total=round(sum(r['seconds'] for r in results),3)
+          warm=results[1:]
+          avg_warm=round(sum(r['seconds'] for r in warm)/len(warm),3)
+          print(json.dumps({
+              'summary':'K7_FULL16_SPEED_PASS',
+              'article_count':len(results),
+              'total_seconds':total,
+              'cold_first_seconds':results[0]['seconds'],
+              'warm_average_seconds':avg_warm,
+              'warm_max_seconds':max(r['seconds'] for r in warm),
+              'warm_min_seconds':min(r['seconds'] for r in warm)
+          },ensure_ascii=False))
+          PY
+
+      - name: Preserve result
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: konzept7-tech-speed-result-${{ github.sha }}
+          path: /tmp/k7-speed-result.jsonl
+          if-no-files-found: error
+          retention-days: 7
