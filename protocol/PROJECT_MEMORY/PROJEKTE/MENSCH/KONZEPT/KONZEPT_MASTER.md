@@ -187,7 +187,7 @@ Mögliche Inhaltswelten:
 - Fotografie;
 - Zeichnen;
 - Musik;
-- weitere kreative Fähigkeiten, soweit sie als Lernziel und nicht als eigenständiges Hobbyportal behandelt werden.
+- weitere kreative Fähigkeiten, soweit sie als persönliches Lernziel behandelt werden.
 
 ### 6.5 Wissen & Allgemeinbildung
 - Geschichte;
