@@ -93,12 +93,14 @@ class K7OptimizationTests(unittest.TestCase):
             run=root/"run"; run.mkdir()
             binding=self.binding
             pstate=k7_parallel_controller.initial(binding,4)
+            state_path=run/"K7_PARALLEL_STATE.json"
+            state_path.write_text(json.dumps(pstate,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
             for index in range(8):
-                pstate=k7_parallel_controller.record_draft(binding,pstate,index,f"<article><h2>A {index}</h2><p>fertig</p></article>")
-                pstate=k7_parallel_controller.record_check(binding,pstate,index,"LT68","PASS")
-                pstate=k7_parallel_controller.record_check(binding,pstate,index,"PPM679","PASS")
+                pstate=k7_parallel_controller.record_draft(binding,state_path,index,f"<article><h2>A {index}</h2><p>fertig</p></article>")
+                pstate=k7_parallel_controller.record_check(binding,state_path,index,"LT68","PASS")
+                pstate=k7_parallel_controller.record_check(binding,state_path,index,"PPM679","PASS")
             (run/"K7_PRODUCTION_BINDING.json").write_text(json.dumps(binding,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-            (run/"K7_PARALLEL_STATE.json").write_text(json.dumps(pstate,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+            self.assertEqual(json.loads(state_path.read_text(encoding="utf-8")),pstate)
             k7_execution_lock.acquire(run/"K7_EXECUTION_LOCK.json",binding["batch_sha256"],binding["binding_sha256"],binding["item_count"],1)
             closeout=k7_closeout_plan.build(binding["batch_sha256"],binding["item_count"],1)
             (run/"K7_CLOSEOUT_PLAN.json").write_text(json.dumps(closeout,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
@@ -118,6 +120,30 @@ class K7OptimizationTests(unittest.TestCase):
             self.assertEqual(out["stage"],"ARTICLE_PRODUCTION")
             self.assertEqual([a["item_index"] for a in out["ready_actions"]],[8,9,10,11])
             self.assertTrue(all(a["action"]=="WRITE_DRAFT" for a in out["ready_actions"]))
+
+    def test_persistent_transition_requires_existing_durable_state(self):
+        with tempfile.TemporaryDirectory() as td:
+            missing=Path(td)/"K7_PARALLEL_STATE.json"
+            with self.assertRaisesRegex(k7_parallel_controller.Blocked,"DURABLE_STATE_MISSING"):
+                k7_parallel_controller.record_draft(self.binding,missing,0,"draft")
+
+    def test_every_nonterminal_ready_action_closes_free_search_and_alt_routes(self):
+        state=k7_parallel_controller.initial(self.binding,4)
+        variants=[state]
+        ps=k7_parallel_controller.simulate(self.binding,4)
+        ps=json.loads(json.dumps(ps)); ps["batch_phase"]="PSERC_REQUIRED"; ps["pserc"]="PENDING"; ps["endstempel"]="PENDING"; ps["status"]="PASS"; ps=k7_parallel_controller.seal(ps)
+        variants.append(ps)
+        es=json.loads(json.dumps(ps)); es["batch_phase"]="ENDSTEMPEL_REQUIRED"; es["pserc"]="PASS"; es=k7_parallel_controller.seal(es)
+        variants.append(es)
+        for variant in variants:
+            for action in k7_parallel_controller.ready_actions(self.binding,variant):
+                self.assertIs(action["canonical_bound_worker_only"],True)
+                self.assertIs(action["free_chat_execution"],False)
+                self.assertIs(action["free_repo_search"],False)
+                self.assertIs(action["free_archive_search"],False)
+                self.assertIs(action["free_research_rerun"],False)
+                self.assertIs(action["alternate_route_allowed"],False)
+                self.assertIs(action["return_to_parallel_controller_required"],True)
 
     def test_midrun_chat_handoff_blocks_mismatched_saved_state(self):
         with tempfile.TemporaryDirectory() as td:
@@ -205,12 +231,12 @@ class K7OptimizationTests(unittest.TestCase):
     def test_bundled_repair_keeps_real_before_after_bytes(self):
         s=k7_parallel_controller.initial(self.binding,4)
         body1="<article><h2>A</h2><p>vorher</p></article>"
-        s=k7_parallel_controller.record_draft(self.binding,s,0,body1)
-        s=k7_parallel_controller.record_check(self.binding,s,0,"LT68","PASS")
+        s=k7_parallel_controller._record_draft(self.binding,s,0,body1)
+        s=k7_parallel_controller._record_check(self.binding,s,0,"LT68","PASS")
         findings=[{"code":"A"},{"code":"B"},{"code":"C"}]
-        s=k7_parallel_controller.record_check(self.binding,s,0,"PPM679","REPAIR_REQUIRED",findings)
+        s=k7_parallel_controller._record_check(self.binding,s,0,"PPM679","REPAIR_REQUIRED",findings)
         body2="<article><h2>A</h2><p>nachher sauber</p></article>"
-        s=k7_parallel_controller.record_repair(self.binding,s,0,body2)
+        s=k7_parallel_controller._record_repair(self.binding,s,0,body2)
         row=s["items"][0]
         self.assertEqual(row["phase"],"LT68_REQUIRED")
         self.assertEqual(row["repair_count"],1)
