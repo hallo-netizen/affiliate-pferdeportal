@@ -8,6 +8,7 @@ on:
       - 'concept_agent/production_bridge.py'
       - 'concept_agent/konzept7/k7_real4_context.py'
       - 'concept_agent/konzept7/live_writer_probe/00_reitplatzplaner_blueprint_fresh.md'
+      - 'concept_agent/konzept7/live_writer_probe/01_regendecken_faq_blueprint_fresh.md'
       - '.github/workflows/konzept7-live-writer-check.yml'
   workflow_dispatch:
 
@@ -51,62 +52,77 @@ jobs:
           import intake_bridge,production_bridge,k7_real4_context
           import authoring_contract,content_guard,design_guard,production_checks_engine as checks
 
-          draft_path=root/'concept_agent/konzept7/live_writer_probe/00_reitplatzplaner_blueprint_fresh.md'
-          text=draft_path.read_text(encoding='utf-8').strip()
+          probe_paths={
+              0:root/'concept_agent/konzept7/live_writer_probe/00_reitplatzplaner_blueprint_fresh.md',
+              1:root/'concept_agent/konzept7/live_writer_probe/01_regendecken_faq_blueprint_fresh.md',
+          }
           snap=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
           research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
           intake=intake_bridge.prepare(snap)
           binding=production_bridge.build(snap,intake,research)
-          item=binding['items'][0]
-          row=k7_real4_context.build_all(binding)['items'][0]
-          bp=item['writer_preflight']['k7_first_draft_blueprint']
-          assert bp['target_trace_lexical_support_ratio']==1.0
-          assert bp['trace_unit_minimum_shared_lexical_tokens']==2
-          assert bp['mechanical_requirements_prebound']['source_trace_field_binding']['data_source_title']=='REFERENCED_FACT_SOURCE_ID'
-          state={
-            'article':{
-              'title':row['identity']['title'],
-              'target_keyword':row['identity']['target_keyword'],
-              'category':row['identity']['category'],
-              'article_type':row['identity']['article_type'],
-              'plan_slot':row['identity']['plan_slot'],
-            },
-            'source_snapshot_sha256':row['fact_pack']['source_snapshot_id'],
-            'draft_markdown':text,
-            'draft_sha256':hashlib.sha256(text.encode('utf-8')).hexdigest(),
-            'publish_allowed':False,
-          }
-          target=str(row['identity']['target_keyword']).strip()
-          def norm(value):
-              value=re.sub(r'(?is)<[^>]+>',' ',str(value)).casefold()
-              value=re.sub(r'[^a-z0-9äöüß]+',' ',value)
-              return re.sub(r'\s+',' ',value).strip()
-          labels=re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',text)
-          count=sum(1 for label in labels if norm(target) in norm(label))
-          if count<1 or count>2:
-              raise SystemExit('K7_FRESH_H2_TARGET_COUNT_INVALID:'+str(count))
-          contract=authoring_contract.build(root,state,row['fact_pack'],row['production_plan_item'])
-          authoring_contract.validate_candidate(text,contract)
-          content_guard.validate_single_article(text,row['fact_pack'])
-          design_guard.validate_design_neutrality(text,row['identity']['article_type'])
-          t0=time.monotonic()
-          try:
-              out=checks.run_all(root,state,row['fact_pack'],row['production_plan_item'])
-          except checks.RepairRequired as exc:
-              print(json.dumps({'status':'REPAIR_REQUIRED','checker':exc.checker,'finding_count':len(exc.findings),'findings':exc.findings},ensure_ascii=False))
-              raise
-          elapsed=round(time.monotonic()-t0,3)
-          ev=out['evidence']
-          print(json.dumps({
-              'status':'PASS_FIRST_DRAFT',
-              'seconds':elapsed,
-              'draft_sha256':state['draft_sha256'],
-              'word_count':len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',re.sub(r'(?is)<[^>]+>',' ',text))),
-              'h2_exact_target_keyword_count':count,
-              'lt68':ev['languagetool'].get('status','PASS'),
-              'lt68_findings':ev['languagetool'].get('unresolved_finding_count'),
-              'ppm679':ev['ppm679']['status'],
-              'ppm679_hash':ev['ppm679']['content_sha256'],
-              'publish_allowed':False,
-          },ensure_ascii=False,sort_keys=True))
+          contexts={row['item_index']:row for row in k7_real4_context.build_all(binding)['items']}
+          results=[]
+          for index in (0,1):
+              item=binding['items'][index]
+              row=contexts[index]
+              text=probe_paths[index].read_text(encoding='utf-8').strip()
+              bp=item['writer_preflight']['k7_first_draft_blueprint']
+              assert bp['target_trace_lexical_support_ratio']==1.0
+              assert bp['trace_unit_minimum_shared_lexical_tokens']==2
+              assert bp['mechanical_requirements_prebound']['source_trace_field_binding']['data_source_title']=='REFERENCED_FACT_SOURCE_ID'
+              state={
+                'article':{
+                  'title':row['identity']['title'],
+                  'target_keyword':row['identity']['target_keyword'],
+                  'category':row['identity']['category'],
+                  'article_type':row['identity']['article_type'],
+                  'plan_slot':row['identity']['plan_slot'],
+                },
+                'source_snapshot_sha256':row['fact_pack']['source_snapshot_id'],
+                'draft_markdown':text,
+                'draft_sha256':hashlib.sha256(text.encode('utf-8')).hexdigest(),
+                'publish_allowed':False,
+              }
+              target=str(row['identity']['target_keyword']).strip()
+              def norm(value):
+                  value=re.sub(r'(?is)<[^>]+>',' ',str(value)).casefold()
+                  value=re.sub(r'[^a-z0-9äöüß]+',' ',value)
+                  return re.sub(r'\\s+',' ',value).strip()
+              labels=re.findall(r'(?is)<h2\\b[^>]*>(.*?)</h2>',text)
+              count=sum(1 for label in labels if norm(target) in norm(label))
+              policy=item['writer_preflight']['k7_h2_target_keyword_policy']
+              lo=int(policy['exact_occurrences_min']); hi=int(policy['exact_occurrences_max'])
+              if count<lo or count>hi:
+                  raise SystemExit(f'K7_FRESH_H2_TARGET_COUNT_INVALID:{index}:{count}:{lo}:{hi}')
+              contract=authoring_contract.build(root,state,row['fact_pack'],row['production_plan_item'])
+              authoring_contract.validate_candidate(text,contract)
+              content_guard.validate_single_article(text,row['fact_pack'])
+              design_guard.validate_design_neutrality(text,row['identity']['article_type'])
+              t0=time.monotonic()
+              try:
+                  out=checks.run_all(root,state,row['fact_pack'],row['production_plan_item'])
+              except checks.RepairRequired as exc:
+                  print(json.dumps({'status':'REPAIR_REQUIRED','item_index':index,'article_type':row['identity']['article_type'],'checker':exc.checker,'finding_count':len(exc.findings),'findings':exc.findings},ensure_ascii=False))
+                  raise
+              elapsed=round(time.monotonic()-t0,3)
+              ev=out['evidence']
+              result={
+                  'status':'PASS_FIRST_DRAFT',
+                  'item_index':index,
+                  'article_type':row['identity']['article_type'],
+                  'seconds':elapsed,
+                  'draft_sha256':state['draft_sha256'],
+                  'word_count':len(re.findall(r'\\b[\\wÄÖÜäöüß-]+\\b',re.sub(r'(?is)<[^>]+>',' ',text))),
+                  'h2_exact_target_keyword_count':count,
+                  'h2_policy_min':lo,
+                  'h2_policy_max':hi,
+                  'lt68':ev['languagetool'].get('status','PASS'),
+                  'lt68_findings':ev['languagetool'].get('unresolved_finding_count'),
+                  'ppm679':ev['ppm679']['status'],
+                  'ppm679_hash':ev['ppm679']['content_sha256'],
+                  'publish_allowed':False,
+              }
+              results.append(result)
+              print(json.dumps(result,ensure_ascii=False,sort_keys=True))
+          print(json.dumps({'status':'K7_FRESH_WRITER_EFFECT_PASS','article_count':len(results),'types':[r['article_type'] for r in results],'publish_allowed':False},ensure_ascii=False,sort_keys=True))
           PY
