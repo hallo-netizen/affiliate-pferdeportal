@@ -22,7 +22,7 @@ START_HERE_NO_STOP_MARKERS = (
     "`continuation_required=true`",
     "weder antworten noch erneut prüfen/suchen",
     "ohne Nutzer-Zwischenmeldung",
-    "terminalen `STOP`",
+    "terminale `STOP`",
 )
 
 class Blocked(RuntimeError):
