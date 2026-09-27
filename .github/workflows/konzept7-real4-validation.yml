@@ -57,7 +57,7 @@ jobs:
           import concurrent.futures, hashlib, json, pathlib, sys, time
           root=pathlib.Path.cwd()
           sys.path[:0]=[str(root/'concept_agent'),str(root/'concept_agent/konzept7'),str(root/'isolated_system4')]
-          import intake_bridge,production_bridge,k7_real4_context
+          import intake_bridge,production_bridge,k7_real4_context,k7_mechanical_preflight
           import production_checks_engine as checks
           import content_guard
 
@@ -80,6 +80,7 @@ jobs:
               index,path=pair
               row=by_index[index]
               body=path.read_text(encoding='utf-8').strip()
+              body,mechanical=k7_mechanical_preflight.normalize_source_traces(body,row['fact_pack'])
               state={
                   'article': {
                       'title': row['identity']['title'],
