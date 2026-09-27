@@ -1,0 +1,69 @@
+{
+  "contract": "K7_OPTIMIZATION_CONFIG_V1",
+  "status": "ACTIVE_EXPERIMENTAL",
+  "concept": "K7",
+  "baseline_branch": "konzept7/baseline-isolated-20260927",
+  "working_branch": "konzept7/working-copy-20260927",
+  "principles": {
+    "quality_gates_may_be_weakened": false,
+    "publish_allowed": false,
+    "historical_article_content_allowed": false,
+    "exact_pass_reuse_before_new_work": true,
+    "internal_pass_is_never_chat_stop": true,
+    "real_repair_evidence_required": true,
+    "measurement_required_for_optimization_claim": true
+  },
+  "start": {
+    "execution_lock": true,
+    "duplicate_start_policy": "RESUME_SAME_BATCH",
+    "conflicting_start_policy": "BLOCK",
+    "exact_binding_required": true
+  },
+  "research": {
+    "exact_identity_cache_reuse": true,
+    "cached_research_must_validate_hashes": true,
+    "new_research_only_for_cache_misses": true,
+    "parallel_research_lanes": 4,
+    "own_domain_forbidden": "pferde-atelier.de"
+  },
+  "writer": {
+    "first_draft_goal": "PASS_WITHOUT_REPAIR",
+    "min_word_safety_addition": 100,
+    "min_paragraph_safety_addition": 2,
+    "min_table_row_safety_addition": 1,
+    "conclusion_ratio_target_if_applicable": 0.12,
+    "table_unique_token_ratio_target_if_applicable": 0.22,
+    "mechanical_requirements_prebound": true,
+    "all_same_checker_findings_one_repair_revision": true
+  },
+  "production": {
+    "default_article_lanes": 4,
+    "benchmark_article_lanes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "per_article_order": [
+      "WRITE_DRAFT",
+      "LT68",
+      "PPM679",
+      "REPAIR_IF_REQUIRED",
+      "PASS"
+    ],
+    "cross_article_state_sharing": false,
+    "checker_runtime_keep_warm": true,
+    "per_phase_timing": true,
+    "before_after_repair_bytes_required": true
+  },
+  "closeout": {
+    "preallocate_at_start": true,
+    "search_for_closeout_route_after_articles": false,
+    "order": [
+      "PSERC",
+      "ENDSTEMPEL",
+      "FINAL_WORDPRESS_JSON"
+    ],
+    "durable_final_hash_required": true
+  }
+}
