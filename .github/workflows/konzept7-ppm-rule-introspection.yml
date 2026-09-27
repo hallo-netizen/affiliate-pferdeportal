@@ -1,0 +1,32 @@
+name: Konzept 7 PPM Rule Introspection
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - '.github/workflows/konzept7-ppm-rule-introspection.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact K7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Print exact bound PPM rule neighborhoods
+        shell: bash
+        run: |
+          set -euo pipefail
+          pkg='control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip'
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  '"$pkg" | sha256sum -c -
+          rm -rf /tmp/k7ppm && mkdir -p /tmp/k7ppm
+          unzip -q "$pkg" -d /tmp/k7ppm
+          grep -R -n -B 35 -A 80 -E 'TRACE_LEXICAL_SUPPORT|unique_token_ratio|TABLE_VALUE' /tmp/k7ppm/portal-production-machine/includes /tmp/k7ppm/portal-production-machine/tests || true
