@@ -16,7 +16,9 @@ SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
 REPO = Path(__file__).resolve().parent.parent
 CONTROL_POINTER = REPO / "concept_agent" / "CONTROL_ENTRY_POINTER.json"
+CURRENT_STATE = REPO / "control" / "startmaster0107" / "CURRENT_STATE.json"
 START_HERE = REPO / "concept_agent" / "START_HERE.md"
+COMMIT_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 START_HERE_NO_STOP_MARKERS = (
     "`CONCEPT_AGENT_INTAKE_READY`",
     "`continuation_required=true`",
@@ -242,9 +244,50 @@ def _persisted_research_for_intake(result: dict) -> dict | None:
     }
 
 
+def _current_k7_start_binding(result: dict, persisted: dict | None) -> dict | None:
+    if not CURRENT_STATE.is_file():
+        return None
+    state = _load(CURRENT_STATE)
+    action = state.get("next_action")
+    if not isinstance(action, dict) or action.get("goal") != "RUN_K7_FULL16_END_TO_END_FOUR_LANE_VALIDATION":
+        return None
+    current = state.get("concept_agent_current_batch")
+    if not isinstance(current, dict):
+        raise Blocked("CURRENT_K7_BATCH_BINDING_MISSING")
+    if current.get("batch_sha256") != result.get("batch_sha256") or current.get("item_count") != result.get("item_count"):
+        raise Blocked("CURRENT_K7_BATCH_BINDING_MISMATCH")
+    if persisted is None:
+        raise Blocked("CURRENT_K7_PERSISTED_RESEARCH_REQUIRED")
+    if persisted.get("research_binding_sha256") != current.get("research_binding_sha256"):
+        raise Blocked("CURRENT_K7_RESEARCH_BINDING_MISMATCH")
+    branch = action.get("execution_branch")
+    head = action.get("execution_head_sha")
+    lanes = action.get("required_lanes")
+    if not isinstance(branch, str) or not branch.strip():
+        raise Blocked("CURRENT_K7_EXECUTION_BRANCH_INVALID")
+    if not isinstance(head, str) or not COMMIT_SHA_RE.fullmatch(head):
+        raise Blocked("CURRENT_K7_EXECUTION_HEAD_INVALID")
+    if lanes != 4:
+        raise Blocked("CURRENT_K7_REQUIRED_LANES_INVALID")
+    if action.get("research_policy") != "REUSE_EXACT_PERSISTED_RESEARCH_IF_HASH_VALID_NO_RERUN":
+        raise Blocked("CURRENT_K7_RESEARCH_POLICY_INVALID")
+    if action.get("quality_policy") != "LANGUAGETOOL_6_8_PPM_6_7_9_PSERC_ENDSTEMPEL_UNCHANGED":
+        raise Blocked("CURRENT_K7_QUALITY_POLICY_INVALID")
+    if action.get("publish_allowed") is not False:
+        raise Blocked("CURRENT_K7_PUBLISH_INVALID")
+    return {
+        "execution_branch": branch,
+        "execution_head_sha": head,
+        "article_lanes": lanes,
+        "start_controller_ref": "concept_agent/konzept7/k7_start_controller.py",
+        "parallel_controller_ref": "concept_agent/konzept7/k7_parallel_controller.py",
+    }
+
+
 def _start_receipt(result: dict) -> dict:
     verify_start_here_no_stop_contract()
     persisted = _persisted_research_for_intake(result)
+    k7 = _current_k7_start_binding(result, persisted)
     trigger_core = {
         "contract": "CONCEPT_AGENT_BOUND_START_PROCESS_TRIGGER_V1",
         "batch_sha256": result["batch_sha256"],
@@ -253,18 +296,30 @@ def _start_receipt(result: dict) -> dict:
         "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
         "current_authority_branch": "main",
         "allowed_operation": (
-            "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_USE_PERSISTED_RESEARCH_BOUND"
-            if persisted
-            else "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_RESEARCH_REQUIRED"
+            "START_BOUND_K7_PRODUCTION_AND_EXECUTE_READY_ACTIONS"
+            if k7
+            else (
+                "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_USE_PERSISTED_RESEARCH_BOUND"
+                if persisted
+                else "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_RESEARCH_REQUIRED"
+            )
         ),
-        "fresh_batch_first_action": "USE_PERSISTED_RESEARCH_BOUND" if persisted else "RESEARCH_REQUIRED",
+        "fresh_batch_first_action": (
+            "START_BOUND_K7_PRODUCTION"
+            if k7
+            else ("USE_PERSISTED_RESEARCH_BOUND" if persisted else "RESEARCH_REQUIRED")
+        ),
         "production_checkpoint_required_before_research": False,
         "missing_production_checkpoint_policy": (
             "USE_EXACT_HASH_BOUND_PERSISTED_RESEARCH_NO_RESEARCH_RERUN"
             if persisted
             else "BEFORE_RESEARCH_EXPECTED_CONTINUE_RESEARCH_AFTER_PRODUCTION_START_BLOCK_NO_RECONSTRUCTION"
         ),
-        "return_to": "concept_agent/full_workflow_gate.py",
+        "return_to": (
+            "concept_agent/konzept7/k7_parallel_controller.py"
+            if k7
+            else "concept_agent/full_workflow_gate.py"
+        ),
         "handoff_is_terminal": False,
         "same_bound_worker_must_continue_without_return": True,
         "exactly_once_for_intake": True,
@@ -275,7 +330,23 @@ def _start_receipt(result: dict) -> dict:
         trigger_core["persisted_research_bound_ref"] = persisted["ref"]
         trigger_core["persisted_research_bound_file_sha256"] = persisted["file_sha256"]
         trigger_core["persisted_research_binding_sha256"] = persisted["research_binding_sha256"]
-        trigger_core["next_entry_ref"] = "concept_agent/production_bridge.py"
+        trigger_core["next_entry_ref"] = (
+            k7["start_controller_ref"] if k7 else "concept_agent/production_bridge.py"
+        )
+    if k7:
+        trigger_core.update({
+            "execution_branch": k7["execution_branch"],
+            "execution_head_sha": k7["execution_head_sha"],
+            "article_lanes": k7["article_lanes"],
+            "required_start_stage": "ARTICLE_PRODUCTION",
+            "required_ready_action": "WRITE_DRAFT",
+            "required_ready_action_count": 4,
+            "ready_actions_must_be_executed_immediately": True,
+            "parallel_controller_ref": k7["parallel_controller_ref"],
+            "chat_may_choose_stage": False,
+            "chat_may_choose_article": False,
+            "chat_may_choose_action": False,
+        })
     process_trigger = dict(trigger_core)
     process_trigger["trigger_sha256"] = stable(trigger_core)
     return {
