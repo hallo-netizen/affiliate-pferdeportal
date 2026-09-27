@@ -1,0 +1,63 @@
+name: Konzept 7 Local Test Bundle
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - '.github/workflows/konzept7-local-test-bundle.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact K7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify archived bodies are absent
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e recovery/current16-input
+          echo K7_ARCHIVE_ACCESS_ISOLATED_PASS
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/LanguageTool-6.8.zip' | sha256sum -c -
+
+      - name: Build local exact-test bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k7-local-bundle/repo
+          cp -a isolated_system4 /tmp/k7-local-bundle/repo/
+          mkdir -p /tmp/k7-local-bundle/repo/concept_agent/konzept7
+          cp concept_agent/konzept7/k7_section_balance.py /tmp/k7-local-bundle/repo/concept_agent/konzept7/
+          mkdir -p /tmp/k7-local-bundle/repo/control/startmaster0107/runtime_packages
+          cp control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip \
+            /tmp/k7-local-bundle/repo/control/startmaster0107/runtime_packages/
+          cp /tmp/LanguageTool-6.8.zip /tmp/k7-local-bundle/
+          printf '%s\n' '${{ github.sha }}' > /tmp/k7-local-bundle/K7_HEAD_SHA.txt
+          tar -C /tmp -czf K7_LOCAL_TEST_BUNDLE.tgz k7-local-bundle
+
+      - name: Upload local exact-test bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: k7-local-test-bundle-${{ github.sha }}
+          path: K7_LOCAL_TEST_BUNDLE.tgz
+          if-no-files-found: error
+          retention-days: 2
