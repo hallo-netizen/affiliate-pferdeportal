@@ -44,7 +44,7 @@ jobs:
               assert pf['structure_requirements']==item['authoring_authority']['structure_contract']
               assert pf['article_type_requirements']==item['authoring_authority']['article_type_definition']
               assert pf['bound_requirements']['link_bindings']==item['link_bindings']
-              policy=pf['k6_h2_target_keyword_policy']
+              policy=pf['k7_h2_target_keyword_policy']
               assert policy['contract']=='K7_H2_TARGET_KEYWORD_POLICY_V1'
               assert policy['source']=='USER_APPROVED_K7_RULE_2026-09-26'
               assert policy['scope']=='H2_ONLY'
