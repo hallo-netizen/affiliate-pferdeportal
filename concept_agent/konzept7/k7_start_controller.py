@@ -57,7 +57,8 @@ def start(snapshot_path:Path,research_path:Path|None,state_dir:Path,lanes=4,gene
         })
         start_status="NEW_RUN_CREATED"
     if not closeout_path.exists():
-        closeout=_write(closeout_path,k7_closeout_plan.build(intake["batch_sha256"],intake["item_count"],generation))
+        closeout=k7_closeout_plan.build(intake["batch_sha256"],intake["item_count"],generation)
+        closeout_path.write_text(json.dumps(closeout,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     else:
         closeout=load(closeout_path)
     bound=load(research_path) if research_path and research_path.is_file() else None
@@ -86,7 +87,7 @@ def start(snapshot_path:Path,research_path:Path|None,state_dir:Path,lanes=4,gene
 
 def main(argv):
     try:
-        if len(argv) not in {5,6,7}: raise Blocked("USE: k7_start_controller.py SNAPSHOT RESEARCH_OR_DASH STATE_DIR LANES [GENERATION]")
+        if len(argv) not in {5,6}: raise Blocked("USE: k7_start_controller.py SNAPSHOT RESEARCH_OR_DASH STATE_DIR LANES [GENERATION]")
         research=None if argv[2]=="-" else Path(argv[2])
         out=start(Path(argv[1]),research,Path(argv[3]),int(argv[4]),int(argv[5]) if len(argv)>5 else 1)
         print(json.dumps(out,ensure_ascii=False,sort_keys=True)); return 0
