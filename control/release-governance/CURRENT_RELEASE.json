@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 140,
+  "generation": 141,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,15 +35,15 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.165",
-    "status": "PERFORMANCE_ROUTER_6_72_165_HARD_LOCAL_PASS_SOURCE_BOUND_INSTALL_READBACK_OPEN",
+    "version": "6.72.166",
+    "status": "PERFORMANCE_ROUTER_6_72_166_SOURCE_BOUND_TARGETED_HARDPASS_FULL_GATE_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c",
+    "current_source_manifest_sha256": "e6b3b8f9307dda69f11804447d424922951c08b9b316c374d81f551b6e47fb4b",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "0170c89cf7381bc4a99c379277b529a7056bf61ec47683c027fef7c536fafb21",
+    "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
     "final_artifact_sha256": null
   },
@@ -54,9 +54,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "PERFORMANCE_ROUTER_6_72_165_SOURCE_BOUND_INSTALL_READBACK",
+    "current_focus": "PERFORMANCE_ROUTER_6_72_166_SOURCE_BOUND_TARGETED_HARDPASS_FULL_GATE",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_PERFORMANCE_OPTIMIZATION_TARGET_20260924.md",
-    "current_focus_reason": "USER EXPLICITLY REQUIRED CONTINUED PERFORMANCE OPTIMIZATION, LARGE BUNDLING AND HARD LOCAL SIMULATION BEFORE RELEASE ON 2026-09-27. EXACT INSTALLED 6.72.164 SOURCE PROVENANCE IS BOUND; 6.72.165 CHANGES PERFORMANCE-ONLY REQUEST-LOCAL NORMALIZATION/CANDIDATE INDEX WORK. CATEGORY/STRUCTURE REMAINS FINAL_FROZEN. TEMPLATE-KIT 1.50.573 ASSET BUNDLE IS SEPARATE AND ALREADY SERVER-READBACK.",
+    "current_focus_reason": "USER CONFIRMED 6.72.165 INSTALLED AFTER THE REQUIRED READBACK. POST-6.72.165 DIAGNOSIS SHOWS NORMAL PORTAL QUERIES STILL ENTERING PRIVATE-EBAY/HIVEPRESS QUERY RESOLUTION AND A LARGE BUSINESS SOURCE BATCH READING FULL ROWS. 6.72.166 IS ONE BUNDLED PERFORMANCE-ONLY STEP: EARLY RELEVANCE GATE, SINGLE CATEGORY-ID RESOLUTION, AND BOUNDED BUSINESS SOURCE COLUMN PROJECTION. CATEGORY/STRUCTURE REMAINS FINAL_FROZEN. TEMPLATE-KIT 1.50.573 REMAINS SEPARATELY LIVE AND UNCHANGED.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -258,33 +258,28 @@
         "evidence_ref": "release/affiliate-zentrale/evidence/design_performance_v3_persistent_menu_20260924.md"
       },
       "current_block_20260927": {
-        "status": "HARD_LOCAL_PASS_SOURCE_BOUND_INSTALL_READBACK_OPEN",
-        "live_base_version": "6.72.164",
-        "candidate_version": "6.72.165",
-        "installer_sha256": "0170c89cf7381bc4a99c379277b529a7056bf61ec47683c027fef7c536fafb21",
-        "fallback_version": "6.72.164",
-        "fallback_sha256": "97a7b7b4b45008d93faa9a6dc76976f501a233804adc31bb5c4da37a4011b17f",
-        "source_manifest_sha256": "f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c",
+        "status": "SOURCE_BOUND_TARGETED_HARDPASS_FULL_GATE_OPEN",
+        "live_base_version": "6.72.165",
+        "candidate_version": "6.72.166",
+        "installer_sha256": null,
+        "fallback_version": "6.72.165",
+        "fallback_sha256": "0170c89cf7381bc4a99c379277b529a7056bf61ec47683c027fef7c536fafb21",
+        "source_manifest_sha256": "e6b3b8f9307dda69f11804447d424922951c08b9b316c374d81f551b6e47fb4b",
         "source_file_count": 27,
-        "changed_from_stale_current_file_count": 5,
         "performance_candidate_functional_files": [
           "pferdeportal-affiliate-router.php",
-          "includes/trait-ppar-automation-suite.php"
+          "includes/trait-ppar-ebay.php"
         ],
-        "hard_simulation_rows": 2012,
-        "identifier_fuzz_cases": 5000,
-        "result_hashes": "IDENTICAL_ALL_TESTED_MODES",
-        "safety_modes": [
-          "DIAGNOSTIC_FILTERS",
-          "MUTATING_FILTERS",
-          "ADMIN",
-          "AJAX",
-          "REST",
-          "CRON",
-          "WP_CLI"
+        "measured_basis": "performance-diagnose-safe-20260927-161416(1).json",
+        "measured_basis_sha256": "f18b39751cb3183fa81d56cf2f6dd277b5c43dbb7cedf9bc198163b05c2f1f29",
+        "bundled_changes": [
+          "EARLY_EXIT_UNRELATED_PRE_GET_POSTS_FROM_PRIVATE_EBAY_HIVEPRESS_TERM_RESOLUTION",
+          "SINGLE_PASS_HP_LISTING_CATEGORY_ID_RESOLUTION_IN_VISIBILITY_CEILING",
+          "BOUNDED_BUSINESS_SOURCE_ROW_COLUMN_PROJECTION"
         ],
-        "evidence_ref": "release/affiliate-zentrale/evidence/performance_router_v672165_source_binding_20260927.txt",
-        "next": "INSTALL_EXACT_6_72_165_THEN_ONE_REAL_SERVER_READBACK; ON_FUNCTIONAL_REGRESSION_RESTORE_EXACT_6_72_164"
+        "targeted_hardtest": "PASS_8_QUERY_CASES_PLUS_SINGLE_SCAN_PLUS_REQUIRED_SOURCE_FIELD_PROJECTION",
+        "evidence_ref": "release/affiliate-zentrale/evidence/performance_router_v672166_query_source_bundle_20260927.md",
+        "next": "RUN_ONE_COMBINED_FULL_GATE; IF_PASS_BUILD_ONE_6_72_166_INSTALLER_AND_RUN_ONE_REAL_SERVER_READBACK; ON_ANY_FUNCTIONAL_REGRESSION_RESTORE_EXACT_6_72_165"
       }
     },
     "category_completion": {
@@ -305,20 +300,20 @@
     }
   },
   "execution_state": {
-    "state": "PERFORMANCE_ROUTER_6_72_165_INSTALL_READBACK_OPEN",
-    "authorized_next_action": "INSTALL_EXACT_AFFILIATE_6_72_165_OVER_CURRENT_LIVE_6_72_164; RUN EXACTLY ONE PERFORMANCE DIAGNOSIS/READBACK; IF ANY FUNCTIONAL REGRESSION RESTORE EXACT COMPLETE 6_72_164 FALLBACK",
-    "bound_user_scope_action": "PERFORMANCE ONLY. CATEGORY/STRUCTURE FINAL_FROZEN. NO CONTENT, DESIGN, RANKING, PROVIDER, SLOT, VETO, PUBLISH OR QUALITY RULE CHANGE. 6.72.165 IS ONE BUNDLED ROUTER PERFORMANCE STEP; TEMPLATE-KIT 1.50.573 IS ALREADY SEPARATELY LIVE.",
-    "completion_condition": "ONE REAL SERVER READBACK CONFIRMS 6.72.165 ACTIVE, FUNCTIONAL REGRESSION NONE, AND NORMAL FRONTEND PERFORMANCE IMPROVEMENT WITHOUT CHANGING OUTPUT",
-    "after_completion_action": "ONLY THEN CONTINUE TO NEXT LARGE CLEAR TECHNICAL BLOCK; IF REGRESSION RESTORE EXACT COMPLETE 6.72.164 FALLBACK",
+    "state": "PERFORMANCE_ROUTER_6_72_166_FULL_GATE_OPEN",
+    "authorized_next_action": "RUN ONE COMBINED FULL GATE OVER SOURCE-BOUND 6.72.166; IF PASS BUILD EXACTLY ONE 6.72.166 INSTALLER AND RUN EXACTLY ONE REAL PERFORMANCE/READBACK; IF ANY FUNCTIONAL REGRESSION RESTORE EXACT COMPLETE 6.72.165 FALLBACK",
+    "bound_user_scope_action": "PERFORMANCE ONLY. CATEGORY/STRUCTURE FINAL_FROZEN. NO CONTENT, DESIGN, RANKING, PROVIDER, SLOT, VETO, PUBLISH OR QUALITY RULE CHANGE. 6.72.166 IS ONE BUNDLED ROUTER QUERY/SOURCE-READ PERFORMANCE STEP; TEMPLATE-KIT 1.50.573 REMAINS UNCHANGED.",
+    "completion_condition": "ONE COMBINED FULL GATE PASSES FOR SOURCE-BOUND 6.72.166, THEN ONE REAL SERVER READBACK CONFIRMS 6.72.166 ACTIVE, FUNCTIONAL REGRESSION NONE, AND NORMAL FRONTEND PERFORMANCE IMPROVEMENT WITHOUT CHANGING OUTPUT",
+    "after_completion_action": "ONLY THEN CONTINUE TO THE NEXT LARGE CLEAR TECHNICAL BLOCK; IF REGRESSION RESTORE EXACT COMPLETE 6.72.165 FALLBACK",
     "no_optional_detours": true,
-    "sequence": 42,
+    "sequence": 43,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "control/release-governance/CURRENT_RELEASE.json",
       "release/affiliate-zentrale/evidence/"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/performance_router_v672165_source_binding_20260927.txt"
+    "evidence_ref": "release/affiliate-zentrale/evidence/performance_router_v672166_query_source_bundle_20260927.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
