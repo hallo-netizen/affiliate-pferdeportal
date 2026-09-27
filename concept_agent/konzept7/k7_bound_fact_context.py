@@ -59,7 +59,15 @@ def _best_faq_answer(title:str,target:str,sources:list[dict])->str:
             candidates.append((score,len(sentence),sentence))
     if not candidates: raise K7BoundFactContextError("FAQ_DIRECT_ANSWER_SOURCE_MISSING")
     candidates.sort(key=lambda x:(x[0],-x[1]),reverse=True)
-    return candidates[0][2]
+    chosen=[]
+    seen=set()
+    for _,_,sentence in candidates:
+        key=sentence.casefold()
+        if key in seen: continue
+        seen.add(key); chosen.append(sentence)
+        if len(re.findall(r"\\b[\\wÄÖÜäöüß-]+\\b"," ".join(chosen),re.UNICODE))>=20:
+            break
+    return " ".join(chosen)
 
 def build_item(item:dict)->dict:
     identity=item.get("identity") or {}
