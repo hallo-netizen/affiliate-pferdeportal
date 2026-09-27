@@ -16,9 +16,26 @@ SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
 REPO = Path(__file__).resolve().parent.parent
 CONTROL_POINTER = REPO / "concept_agent" / "CONTROL_ENTRY_POINTER.json"
+START_HERE = REPO / "concept_agent" / "START_HERE.md"
+START_HERE_NO_STOP_MARKERS = (
+    "`CONCEPT_AGENT_INTAKE_READY`",
+    "`continuation_required=true`",
+    "weder antworten noch erneut prüfen/suchen",
+    "ohne Nutzer-Zwischenmeldung",
+    "terminale `STOP`",
+)
 
 class Blocked(RuntimeError):
     pass
+
+def verify_start_here_no_stop_contract(path: Path = START_HERE) -> dict:
+    if not path.is_file():
+        raise Blocked("START_HERE_NO_STOP_HARDLOCK_MISSING:FILE")
+    text = path.read_text(encoding="utf-8")
+    missing = [str(i) for i, marker in enumerate(START_HERE_NO_STOP_MARKERS) if marker not in text]
+    if missing:
+        raise Blocked("START_HERE_NO_STOP_HARDLOCK_MISSING:" + ",".join(missing))
+    return {"status": "PASS", "marker_count": len(START_HERE_NO_STOP_MARKERS)}
 
 def canon(value):
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -226,6 +243,7 @@ def _persisted_research_for_intake(result: dict) -> dict | None:
 
 
 def _start_receipt(result: dict) -> dict:
+    verify_start_here_no_stop_contract()
     persisted = _persisted_research_for_intake(result)
     trigger_core = {
         "contract": "CONCEPT_AGENT_BOUND_START_PROCESS_TRIGGER_V1",
