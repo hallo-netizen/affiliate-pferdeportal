@@ -1,0 +1,91 @@
+name: Konzept 7 Writer Preflight Test
+# repair-bundle-transport-proof
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Prove existing rules reach writer before first draft
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,sys
+          from pathlib import Path
+          repo=Path.cwd()
+          sys.path.insert(0,str(repo/'concept_agent'))
+          import intake_bridge,production_bridge,universal_reentry_guard,progress_guard
+          snap=json.loads((repo/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((repo/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          assert binding['item_count']==16
+          for item in binding['items']:
+              pf=item.get('writer_preflight')
+              assert isinstance(pf,dict)
+              assert pf['contract']=='CONCEPT_AGENT_WRITER_PREFLIGHT_V1'
+              assert pf['rules_changed'] is False
+              assert pf['checker_order_changed'] is False
+              assert pf['global_requirements']==item['authoring_authority']['static_validator_constants']
+              assert pf['structure_requirements']==item['authoring_authority']['structure_contract']
+              assert pf['article_type_requirements']==item['authoring_authority']['article_type_definition']
+              assert pf['bound_requirements']['link_bindings']==item['link_bindings']
+              policy=pf['k6_h2_target_keyword_policy']
+              assert policy['contract']=='K7_H2_TARGET_KEYWORD_POLICY_V1'
+              assert policy['source']=='USER_APPROVED_K7_RULE_2026-09-26'
+              assert policy['scope']=='H2_ONLY'
+              assert policy['target_keyword']==item['identity']['target_keyword']
+              assert policy['exact_occurrences_min']==1
+              assert policy['exact_occurrences_max']==2
+              assert policy['zero_occurrences_allowed'] is False
+              assert policy['intent_term_requirement_unchanged'] is True
+              assert policy['target_keyword_is_not_default_repair_term'] is True
+              assert policy['repair_strategy_when_exact_occurrence_cap_reached']=='USE_NON_TARGET_BOUND_INTENT_TERM_IN_NATURAL_SECTION_HEADING'
+              assert policy['ppm679_changed'] is False
+              assert policy['languagetool68_changed'] is False
+              assert pf['bound_requirements']['intent_terms']==item['production_plan_item']['quality_binding']['intent_terms']
+              assert pf['additive_rules']==['K7_H2_TARGET_KEYWORD_POLICY_V1']
+              core=dict(pf); declared=core.pop('preflight_sha256')
+              assert declared==production_bridge.stable(core)
+          checkpoint=production_bridge.initial_checkpoint(binding)
+          decision=universal_reentry_guard.build(binding,checkpoint)
+          start=progress_guard.resume(binding,checkpoint,decision)
+          payload=start['process_trigger']['bound_work_item']
+          assert payload['writer_preflight']==binding['items'][0]['writer_preflight']
+          assert start['allowed_action']['action']=='WRITE_DRAFT'
+          assert start['process_trigger']['worker']=='BOUND_CHAT_WORKER'
+          print('K7_WRITER_PREFLIGHT_REAL16_PASS')
+          print('ITEM_COUNT=16')
+          print('K7_H2_POLICY=PASS')
+          print('FIRST_PREFLIGHT_SHA='+payload['writer_preflight']['preflight_sha256'])
+          out=repo/'konzept7-live-binding.json'
+          out.write_text(json.dumps(binding,ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+
+      - name: Prove prepared workspace exposes exact authoring contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent/tests/test_current_production_guards.py
+
+      - name: Upload real bound writer input
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: konzept7-live-binding-${{ github.sha }}
+          path: konzept7-live-binding.json
+          if-no-files-found: error
+          retention-days: 7
