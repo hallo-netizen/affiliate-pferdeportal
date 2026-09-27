@@ -8,7 +8,7 @@ sys.path.insert(0,str(HERE/"concept_agent"))
 sys.path.insert(0,str(HERE/"concept_agent"/"konzept7"))
 
 import intake_bridge,production_bridge
-import k7_execution_lock,k7_research_planner,k7_parallel_controller,k7_closeout_plan,k7_metrics
+import k7_execution_lock,k7_research_planner,k7_parallel_controller,k7_closeout_plan,k7_metrics,k7_start_controller
 
 class K7OptimizationTests(unittest.TestCase):
     @classmethod
@@ -32,6 +32,21 @@ class K7OptimizationTests(unittest.TestCase):
             self.assertGreater(bp["target_table_unique_token_ratio_if_applicable"],0.18)
             self.assertTrue(bp["repair_policy"]["all_findings_from_same_checker_one_revision"])
             self.assertFalse(bp["ppm679_changed"]); self.assertFalse(bp["languagetool68_changed"])
+
+    def test_start_lock_exists_before_research_and_duplicate_resumes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            snap_path=root/"snapshot.json"
+            snap_path.write_text((HERE/"concept_agent/current/PSERC_METADATA_SNAPSHOT.json").read_text(encoding="utf-8"),encoding="utf-8")
+            first=k7_start_controller.start(snap_path,None,root/"run",4,1)
+            self.assertEqual(first["status"],"NEW_RUN_CREATED")
+            self.assertEqual(first["stage"],"RESEARCH_REQUIRED")
+            self.assertTrue((root/"run"/"K7_RUN_ROOT.json").is_file())
+            second=k7_start_controller.start(snap_path,None,root/"run",4,1)
+            self.assertEqual(second["status"],"RESUME_EXISTING_RUN")
+            prod=k7_start_controller.start(snap_path,HERE/"concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json",root/"run",4,1)
+            self.assertEqual(prod["stage"],"ARTICLE_PRODUCTION")
+            self.assertEqual(len(prod["ready_actions"]),4)
 
     def test_execution_lock_duplicate_resume_conflict_block(self):
         with tempfile.TemporaryDirectory() as td:
