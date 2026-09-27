@@ -35,6 +35,41 @@ def _write(path,x):
     path.write_text(json.dumps(x,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     return x
 
+def _resume_active_run(intake:dict,rr:dict,state_dir:Path,lanes:int):
+    if rr.get("status")!="PRODUCTION_ACTIVE":
+        return None
+    if rr.get("article_lanes")!=lanes:
+        raise Blocked("ACTIVE_RESUME_LANES_MISMATCH")
+    required={
+      "binding":state_dir/"K7_PRODUCTION_BINDING.json",
+      "state":state_dir/"K7_PARALLEL_STATE.json",
+      "lock":state_dir/"K7_EXECUTION_LOCK.json",
+      "closeout":state_dir/"K7_CLOSEOUT_PLAN.json",
+    }
+    for name,path in required.items():
+        if not path.is_file():
+            raise Blocked("ACTIVE_RESUME_STATE_MISSING:"+name)
+    binding=load(required["binding"])
+    if binding.get("batch_sha256")!=intake.get("batch_sha256"):
+        raise Blocked("ACTIVE_RESUME_BATCH_MISMATCH")
+    if binding.get("binding_sha256")!=rr.get("production_binding_sha256"):
+        raise Blocked("ACTIVE_RESUME_BINDING_MISMATCH")
+    pstate=load(required["state"])
+    k7_parallel_controller.verify(binding,pstate)
+    if pstate.get("article_lanes")!=rr.get("article_lanes"):
+        raise Blocked("ACTIVE_RESUME_STATE_LANES_MISMATCH")
+    if pstate.get("item_count")!=rr.get("item_count"):
+        raise Blocked("ACTIVE_RESUME_ITEM_COUNT_MISMATCH")
+    lock=k7_execution_lock.verify(load(required["lock"]))
+    if lock.get("batch_sha256")!=binding.get("batch_sha256") or lock.get("production_binding_sha256")!=binding.get("binding_sha256") or lock.get("item_count")!=binding.get("item_count"):
+        raise Blocked("ACTIVE_RESUME_LOCK_MISMATCH")
+    closeout=load(required["closeout"])
+    return {
+      "status":"RESUME_EXISTING_RUN","stage":pstate["batch_phase"],"execution_lock_status":"RESUME_EXISTING",
+      "ready_actions":k7_parallel_controller.ready_actions(binding,pstate),
+      "closeout_plan":closeout,"publish_allowed":False
+    }
+
 def start(snapshot_path:Path,research_path:Path|None,state_dir:Path,lanes=4,generation=1):
     snap=load(snapshot_path)
     intake=intake_bridge.prepare(snap)
@@ -45,6 +80,9 @@ def start(snapshot_path:Path,research_path:Path|None,state_dir:Path,lanes=4,gene
         rr=_verify_root(load(root_path))
         if rr["batch_sha256"]!=intake["batch_sha256"] or rr["intake_sha256"]!=intake["intake_sha256"]:
             raise Blocked("CONFLICTING_START_BLOCKED")
+        resumed=_resume_active_run(intake,rr,state_dir,lanes)
+        if resumed is not None:
+            return resumed
         start_status="RESUME_EXISTING_RUN"
     else:
         rr=_write(root_path,{
