@@ -15,13 +15,13 @@ TABLE_HEADERS={
 TABLE_CELLS={
 0:[
 "Reitplatzplaner für Reitböden","Reitplatzplaner werden auf verschiedenen Reitböden eingesetzt","Reitböden zuerst mit dem Reitplatzplaner-Einsatz abgleichen",
-"Striegelzinken an der Tretschicht","Striegelzinken lockern die Tretschicht","Tretschicht und Striegelzinken als Lockerungsprofil prüfen",
-"Planierschild an der Tretschicht","Planierschild ebnet die Tretschicht","Tretschicht und Planierschild als Einebnungsprofil prüfen",
+"Tretschicht durch Lockern bearbeiten","Zinken lockern die Tretschicht","Tretschicht und Lockern als Pflegewirkung prüfen",
+"Planierschild an der Tretschicht","Planierschild ebnet die Tretschicht","Tretschicht und Planierschild beim Einebnen prüfen",
 "Arbeitstiefe passend zum Boden","Arbeitstiefe muss zum Boden passen","Boden und Arbeitstiefe als Tiefenabstimmung bewerten",
-"Striegelzinken vor Planierschild","Striegelzinken lockern die Tretschicht","Planierschild ebnet anschließend die Tretschicht"],
+"Tretschicht lockern vor Planierschild","Zinken lockern die Tretschicht","Planierschild ebnet anschließend die Tretschicht"],
 1:[
 "Winterfell und Körperfett","Winterfell und Körperfett isolieren gegen Kälte","Pferd, Winterfell und Körperfett als Kälteprofil einordnen",
-"Nässe und Regen am Fell","Nässe und Regen mindern die Isolationswirkung","Fell und Isolationswirkung als Feuchteprofil prüfen",
+"Nässe und Regen am Fell","Nässe und Regen mindern die Isolationswirkung","Fell und Isolationswirkung bei Nässe prüfen",
 "Wind und Schutz bei Regendecke","Wind und Schutz beeinflussen die Regendeckenentscheidung","Regendecke, Wind und Schutz als Expositionsprofil bewerten",
 "Schur und Alter bei Regendecke","Schur und Alter gehören zur Regendeckenbeurteilung","Regendecke, Schur und Alter als Individualprofil bewerten",
 "Gesundheit und Körperzustand","Gesundheit und Körperzustand gehören zur Regendeckenbeurteilung","Regendecke, Gesundheit und Körperzustand als Konditionsprofil bewerten"],
@@ -36,12 +36,12 @@ TABLE_CELLS={
 "Kappzaum für Handarbeit","Kappzaum kann für Handarbeit genutzt werden","Handarbeit mit gut sitzendem Kappzaum als Arbeitsprofil einordnen",
 "Kappzaum für Bodenarbeit","Kappzaum kann für Bodenarbeit genutzt werden","Bodenarbeit mit gut sitzendem Kappzaum als Bodenprofil einordnen",
 "Kappzaum am Nasenbereich","Kappzaum wirkt über den Nasenbereich","Nasenbereich statt Pferdemaul als Wirkprofil berücksichtigen",
-"Sitz und Einwirkung","Korrekter Sitz und angemessene Einwirkung","Sitz und Einwirkung als Passungsprofil gemeinsam prüfen"],
+"Sitz und Einwirkung","Korrekter Sitz und angemessene Einwirkung","Sitz und Einwirkung gemeinsam prüfen"],
 }
 
 ANCHOR_SEEDS={
 "fact-rp-0-a":[("Reitplatzplaner","Reitböden"),("Reitböden","Reitplatzplaner")],
-"fact-rp-0-b":[("Striegelzinken","Tretschicht"),("Tretschicht","Striegelzinken")],
+"fact-rp-0-b":[("lockern","Tretschicht"),("Tretschicht","lockern")],
 "fact-rp-0-c":[("Planierschild","Tretschicht"),("Arbeitstiefe","Boden")],
 "fact-23330868f4b0-1":[("Winterfell","Körperfett")],
 "fact-23330868f4b0-2":[("Nässe","Isolationswirkung")],
