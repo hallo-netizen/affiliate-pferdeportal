@@ -101,7 +101,7 @@ trait PPAR_Ebay_Trait {
         $all_ok = true;
         foreach (array_chunk($hashes, 1000) as $chunk) {
             $placeholders = implode(',', array_fill(0, count($chunk), '%s'));
-            $sql = $wpdb->prepare("SELECT * FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC", $chunk);
+            $sql = $wpdb->prepare("SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC", $chunk);
             $rows = $wpdb->get_results($sql, ARRAY_A);
             if (!is_array($rows)) { $all_ok = false; continue; }
             foreach ($chunk as $hash) {
@@ -2766,7 +2766,7 @@ trait PPAR_Ebay_Trait {
         }
         global $wpdb;
         $row = $wpdb->get_row($wpdb->prepare(
-            "SELECT * FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",
+            "SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description FROM {$this->ebay_items_table()} WHERE creative_identity_hash=%s AND seller_account_type='BUSINESS' ORDER BY id DESC LIMIT 1",
             $hash
         ), ARRAY_A);
         $result = is_array($row) ? $row : array();
@@ -9101,6 +9101,32 @@ trait PPAR_Ebay_Trait {
      * Nachfahren explizit in dieselbe Taxonomie-Klausel aufgenommen. Andere
      * HivePress-Kategorien und normale Listings bleiben vollständig unangetastet.
      */
+    /**
+     * Cheap pre_get_posts gate: private-eBay visibility logic can only affect
+     * HivePress listing/category queries. Normal portal/article queries leave
+     * here before any term resolution or queried-object work.
+     */
+    private function ebay_query_may_touch_listing_category($query) {
+        if (!is_object($query) || !method_exists($query, 'get')) { return false; }
+        if (method_exists($query, 'is_singular') && $query->is_singular('hp_listing')) { return true; }
+        if (method_exists($query, 'is_tax') && $query->is_tax('hp_listing_category')) { return true; }
+
+        $post_type = $query->get('post_type');
+        if ($post_type === 'hp_listing' || (is_array($post_type) && in_array('hp_listing', $post_type, true))) { return true; }
+        if ((string) $query->get('taxonomy') === 'hp_listing_category') { return true; }
+        if (!empty($query->get('hp_listing_category'))) { return true; }
+
+        $contains_listing_category = function($node) use (&$contains_listing_category) {
+            if (!is_array($node)) { return false; }
+            if (isset($node['taxonomy']) && (string) $node['taxonomy'] === 'hp_listing_category') { return true; }
+            foreach ($node as $value) {
+                if (is_array($value) && $contains_listing_category($value)) { return true; }
+            }
+            return false;
+        };
+        return $contains_listing_category((array) $query->get('tax_query'));
+    }
+
     /** Resolve the exact HivePress parent term without relying on global query state. */
     private function ebay_private_parent_term() {
         static $resolved = false;
@@ -9161,6 +9187,7 @@ trait PPAR_Ebay_Trait {
     public function ebay_expand_private_parent_listing_query($query) {
         if ($this->ebay_is_backend_admin_screen_request()) { return; }
         if (!is_object($query) || !method_exists($query, 'get') || !method_exists($query, 'set')) { return; }
+        if (!$this->ebay_query_may_touch_listing_category($query)) { return; }
 
         $parent = $this->ebay_private_parent_term();
         $parent_id = is_object($parent) ? absint($parent->term_id ?? 0) : 0;
@@ -9300,12 +9327,12 @@ trait PPAR_Ebay_Trait {
     }
 
     /** Exakte Sichtbarkeitsregel: Single oder Taxonomie-Teilbaum ab Private Anzeigen. */
-    private function ebay_query_allows_private_ebay($query) {
+    private function ebay_query_allows_private_ebay($query, $category_term_ids = null) {
         if ($this->ebay_query_is_listing_singular($query)) { return true; }
         $parent = $this->ebay_private_parent_term();
         $parent_id = is_object($parent) ? absint($parent->term_id ?? 0) : 0;
         if ($parent_id <= 0) { return false; }
-        $ids = $this->ebay_query_listing_category_term_ids($query);
+        $ids = is_array($category_term_ids) ? $category_term_ids : $this->ebay_query_listing_category_term_ids($query);
         if (!$ids) { return false; }
         foreach ($ids as $term_id) {
             if ($term_id === $parent_id) { return true; }
@@ -9324,13 +9351,17 @@ trait PPAR_Ebay_Trait {
     public function ebay_enforce_private_visibility_ceiling($query) {
         if ($this->ebay_is_backend_admin_screen_request()) { return; }
         if (!is_object($query) || !method_exists($query, 'get') || !method_exists($query, 'set')) { return; }
-        if ($this->ebay_query_is_listing_singular($query) || $this->ebay_query_allows_private_ebay($query)) { return; }
+        if (!$this->ebay_query_may_touch_listing_category($query)) { return; }
+        if ($this->ebay_query_is_listing_singular($query)) { return; }
+
+        $category_term_ids = $this->ebay_query_listing_category_term_ids($query);
+        if ($this->ebay_query_allows_private_ebay($query, $category_term_ids)) { return; }
         if ($query->get('_ppar_ebay_visibility_ceiling')) { return; }
 
         $post_type = $query->get('post_type');
         $listing_query = $post_type === 'hp_listing' || (is_array($post_type) && in_array('hp_listing', $post_type, true));
         if (!$listing_query) {
-            $listing_query = (string) $query->get('taxonomy') === 'hp_listing_category' || !empty($query->get('hp_listing_category')) || !empty($this->ebay_query_listing_category_term_ids($query));
+            $listing_query = (string) $query->get('taxonomy') === 'hp_listing_category' || !empty($query->get('hp_listing_category')) || !empty($category_term_ids);
         }
         if (!$listing_query) { return; }
 
