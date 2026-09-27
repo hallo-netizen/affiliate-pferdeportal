@@ -1,0 +1,136 @@
+name: Konzept 7 Real4 Parallel Validation
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - 'concept_agent/konzept7/real4/K7_REAL4_DRAFTS.tgz.b64'
+      - 'concept_agent/konzept7/k7_real4_context.py'
+      - '.github/workflows/konzept7-real4-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact K7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Restore four fresh drafts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k7-real4-drafts
+          base64 -d concept_agent/konzept7/real4/K7_REAL4_DRAFTS.tgz.b64 > /tmp/k7-real4.tgz
+          tar -xzf /tmp/k7-real4.tgz -C /tmp/k7-real4-drafts
+          test "$(find /tmp/k7-real4-drafts -maxdepth 1 -type f -name '*.md' | wc -l)" -eq 4
+
+      - name: Run real four-lane LT68 and PPM679 validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import concurrent.futures, hashlib, json, pathlib, sys, time
+          root=pathlib.Path.cwd()
+          sys.path[:0]=[str(root/'concept_agent'),str(root/'concept_agent/konzept7'),str(root/'isolated_system4')]
+          import intake_bridge,production_bridge,k7_real4_context
+          import production_checks_engine as checks
+          import content_guard
+
+          snap=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          ctx=k7_real4_context.build_all(binding)
+
+          files=sorted(pathlib.Path('/tmp/k7-real4-drafts').glob('*.md'))
+          if len(files)!=4:
+              raise SystemExit('K7_REAL4_DRAFT_COUNT_INVALID')
+
+          bodies=[p.read_text(encoding='utf-8').strip() for p in files]
+          distinct=content_guard.validate_batch_distinctness(bodies)
+
+          by_index={row['item_index']:row for row in ctx['items']}
+
+          def run_one(pair):
+              index,path=pair
+              row=by_index[index]
+              body=path.read_text(encoding='utf-8').strip()
+              state={
+                  'article': {
+                      'title': row['identity']['title'],
+                      'target_keyword': row['identity']['target_keyword'],
+                      'category': row['identity']['category'],
+                      'article_type': row['identity']['article_type'],
+                      'plan_slot': row['identity']['plan_slot'],
+                  },
+                  'source_snapshot_sha256': row['fact_pack']['source_snapshot_id'],
+                  'draft_markdown': body,
+                  'draft_sha256': hashlib.sha256(body.encode('utf-8')).hexdigest(),
+                  'publish_allowed': False,
+              }
+              started=time.perf_counter()
+              try:
+                  result=checks.run_all(root,state,row['fact_pack'],row['production_plan_item'])
+                  elapsed=time.perf_counter()-started
+                  ev=result['evidence']
+                  return {
+                      'item_index':index,
+                      'status':'PASS',
+                      'seconds':round(elapsed,3),
+                      'draft_sha256':state['draft_sha256'],
+                      'lt68':ev['languagetool']['status'] if 'status' in ev['languagetool'] else 'PASS',
+                      'lt68_findings':ev['languagetool'].get('unresolved_finding_count'),
+                      'ppm679':ev['ppm679']['status'],
+                      'ppm679_hash':ev['ppm679']['content_sha256'],
+                  }
+              except checks.RepairRequired as exc:
+                  elapsed=time.perf_counter()-started
+                  return {
+                      'item_index':index,
+                      'status':'REPAIR_REQUIRED',
+                      'seconds':round(elapsed,3),
+                      'checker':exc.checker,
+                      'findings':exc.findings,
+                  }
+
+          wall_start=time.perf_counter()
+          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+              results=list(pool.map(run_one, list(enumerate(files))))
+          wall=round(time.perf_counter()-wall_start,3)
+          results=sorted(results,key=lambda x:x['item_index'])
+          report={
+              'contract':'K7_REAL4_PARALLEL_VALIDATION_V1',
+              'status':'PASS' if all(x['status']=='PASS' for x in results) else 'REPAIR_REQUIRED',
+              'article_count':4,
+              'parallel_lanes':4,
+              'wall_seconds':wall,
+              'serial_equivalent_seconds':round(sum(x['seconds'] for x in results),3),
+              'parallel_speedup_factor':round(sum(x['seconds'] for x in results)/wall,3) if wall else None,
+              'batch_distinctness':distinct,
+              'items':results,
+              'publish_allowed':False,
+          }
+          pathlib.Path('K7_REAL4_VALIDATION.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(report,ensure_ascii=False,sort_keys=True))
+          if report['status']!='PASS':
+              raise SystemExit(3)
+          PY
+
+      - name: Upload real4 validation report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: k7-real4-validation-${{ github.sha }}
+          path: K7_REAL4_VALIDATION.json
+          if-no-files-found: warn
+          retention-days: 14
