@@ -18,13 +18,6 @@ def write_all(outdir:Path)->dict:
     rows=[]
     for name,b64 in DRAFTS.items():
         body=gzip.decompress(base64.b64decode(b64)).decode("utf-8")
-        if name=="08_schermaschinen.html":
-            old_text="Umgekehrt kann ein passender Schneidsatz nur sinnvoll arbeiten, wenn die Maschine dafür geeignet ist. Ein fairer Vergleich nutzt bei jedem Gerät dieselben Fragen zu Motor, Stromversorgung, Gewicht und verfügbarem Schneidsatz."
-            trace='<span class="ppm-source-trace" data-fact-id="fact-k7-27b5c81a0da1-2" data-source-hash="53ceb7b51f4577154f39f85c132c798addcde059d6d3228cd3e4b323afc54b38" data-source-title="wahl-horse-clipper"></span><span class="ppm-source-trace" data-fact-id="fact-k7-27b5c81a0da1-6" data-source-hash="1760f24e20464d8132c1697b76aeddeeebf9cff19cc6f5cad2fbcf6a3797d45b" data-source-title="wahl-horse-clipper"></span>'
-            new_text="Umgekehrt kann ein passender Schneidsatz nur sinnvoll arbeiten, wenn die Maschine dafür geeignet ist."+trace+'</p>\n<p data-fact-ids="fact-k7-27b5c81a0da1-2">Ein fairer Vergleich nutzt bei jedem Gerät dieselben Fragen zu Motor, Stromversorgung, Gewicht und verfügbarem Schneidsatz.'
-            if old_text not in body:
-                raise SystemExit("TRIAL3_PARAGRAPH_SPLIT_TARGET_MISSING:"+name)
-            body=body.replace(old_text,new_text,1)
         sha=hashlib.sha256(body.encode("utf-8")).hexdigest()
         if sha!=EXPECTED[name]["sha256"]:
             raise SystemExit("TRIAL3_DRAFT_HASH_MISMATCH:"+name)
