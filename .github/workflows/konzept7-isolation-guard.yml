@@ -1,0 +1,55 @@
+name: Konzept 7 Isolation Guard
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - '.github/workflows/konzept7-*.yml'
+      - 'concept_agent/konzept7/**'
+      - 'concept_agent/production_bridge.py'
+      - 'concept_agent/progress_guard.py'
+      - 'concept_agent/universal_reentry_guard.py'
+      - 'concept_agent/full_workflow_gate.py'
+      - 'concept_agent/endstempel_bridge.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolation:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Prove no Konzept-6 runtime linkage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(
+            {
+              find concept_agent/konzept7 -type f -print 2>/dev/null || true
+              find .github/workflows -maxdepth 1 -type f -name 'konzept7-*.yml' -print 2>/dev/null || true
+              printf '%s\n' \
+                concept_agent/production_bridge.py \
+                concept_agent/progress_guard.py \
+                concept_agent/universal_reentry_guard.py \
+                concept_agent/full_workflow_gate.py \
+                concept_agent/endstempel_bridge.py
+            } | sort -u
+          )
+          if grep -E -i 'konzept6|konzept 6|konzept-6|K6_H2_TARGET_KEYWORD_POLICY|USER_APPROVED_K6' "${files[@]}"; then
+            echo 'K7_ISOLATION_VIOLATION'
+            exit 2
+          fi
+          test ! -e concept_agent/konzept6
+          test ! -e .github/workflows/konzept6-endstempel.yml
+          test ! -e .github/workflows/konzept6-live-writer-check.yml
+          test ! -e .github/workflows/konzept6-tech-speed-test.yml
+          test ! -e .github/workflows/konzept6-writer-preflight-test.yml
+          echo 'K7_ISOLATION_PASS'
