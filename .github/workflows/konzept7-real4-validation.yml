@@ -103,6 +103,7 @@ jobs:
                       'status':'PASS',
                       'seconds':round(elapsed,3),
                       'draft_sha256':state['draft_sha256'],
+                      'mechanical_preflight':mechanical,
                       'lt68':ev['languagetool']['status'] if 'status' in ev['languagetool'] else 'PASS',
                       'lt68_findings':ev['languagetool'].get('unresolved_finding_count'),
                       'ppm679':ev['ppm679']['status'],
@@ -115,6 +116,7 @@ jobs:
                       'status':'REPAIR_REQUIRED',
                       'seconds':round(elapsed,3),
                       'checker':exc.checker,
+                      'mechanical_preflight':mechanical,
                       'findings':exc.findings,
                   }
 
