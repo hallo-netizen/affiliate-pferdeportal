@@ -125,6 +125,7 @@ class K7OptimizationTests(unittest.TestCase):
             contract=authoring_contract.build(HERE,state,row["fact_pack"],row["production_plan_item"])
             self.assertEqual(contract["article_identity"]["article_type"],identity["article_type"])
             self.assertGreaterEqual(len(contract["bound_requirements"]["canonical_fact_ids"]),3)
+            self.assertTrue(all(isinstance(src.get("retrieved_at"),str) and src["retrieved_at"] for src in row["fact_pack"]["sources"]))
             if identity["article_type"]=="FAQ":
                 self.assertTrue(contract["bound_requirements"]["faq_direct_answer"])
 
