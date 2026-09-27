@@ -11,7 +11,7 @@ DRAFTS={
 EXPECTED={
 "01_regendecken.html":{"item_index":1,"sha256":"03d996528757b4b754dcee4e7524b68d1e9b7a917bd4d0ce5f91ebabaf1c51e8"},
 "08_schermaschinen.html":{"item_index":8,"sha256":"704c1a91373d55ee975655b3ba5ccb4cf31ffd1467b39270e271265f6f167b6b"},
-"15_tuev_kosten.html":{"item_index":15,"sha256":"f793a35c82df20f02f97374920af34bbb169f61d6d313919e9718109c5ac6da2"},
+"15_tuev_kosten.html":{"item_index":15,"sha256":"13a282edce6e7dec74d272079d6707f6bf5edef8dcb749820e6a80eb060edf26"},
 } 
 FAQ_DIRECT_PREFIXES={
 "01_regendecken.html":"Nässe und Regen verringern die Isolationswirkung des Fells deutlich; ob eine Regendecke sinnvoll ist, hängt deshalb unter anderem von Nässe, Wind, Schutz, Schur, Alter, Gesundheit und Körperzustand ab. Ein gesundes Pferd kann sich mit Winterfell und Körperfett gut gegen Kälte isolieren.",
@@ -151,6 +151,9 @@ FINAL_REPAIRS={
 ("Regionale Preisübersicht der Prüfstelle verwenden","Bundesland und Prüforganisation abgleichen"),
 ("Fahrzeugart und zulässige Gesamtmasse einordnen","Fahrzeugart und Gesamtmasse gemeinsam einordnen"),
 ("zulässige Gesamtmasse aus den Fahrzeugpapieren übernehmen","Fahrzeugart zur zulässigen Gesamtmasse passend einordnen"),
+("<h2>Vor dem TÜV beim Pferdeanhänger den Preis prüfen</h2>","<h2>Preis vor dem Transport zur Prüfstelle kontrollieren</h2>"),
+("<h2>Transport und Kostenfaktoren der Hauptuntersuchung vergleichen</h2>","<h2>Kostenfaktoren für den TÜV beim Pferdeanhänger vergleichen</h2>"),
+("Für die Kostenschätzung werden Fahrzeugart, zulässige Gesamtmasse, Bundesland und Prüforganisation benötigt. Danach sollte für den Pferdeanhänger die aktuelle Preisübersicht der gewählten Prüfstelle herangezogen werden. Ein fremder Betrag kann sonst für den eigenen Termin unpassend sein.","Für die Kostenschätzung reichen vier Angaben: Fahrzeugart, zulässige Gesamtmasse, Bundesland und Prüforganisation. Mit ihnen lässt sich die passende Position in der aktuellen Preisübersicht der gewählten Prüfstelle finden. Ein fremder Beispielbetrag ist deshalb keine verlässliche Grundlage für den eigenen Termin."),
 ],
 }
 TABLE_GUIDANCE_FACT_IDS={
