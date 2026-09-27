@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.152
+ * Version: 6.72.165
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -31,6 +31,14 @@ require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
 
 final class Pferdeportal_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
+    private $ranked_campaign_candidate_index_request_cache = array();
+    private $ranked_campaign_raw_records_request_cache = null;
+    private $ranked_campaign_raw_target_keys_request_cache = array();
+    private $ranked_campaign_posts_request_cache = null;
+    private $ranked_campaign_from_post_request_cache = array();
+    private $runtime_contract_slot_rule_request_cache = array();
+    private $ranked_campaign_sanitize_key_request_cache = array();
+    private $ranked_campaign_sanitize_text_request_cache = array();
 
     private function ranked_campaigns_request_cache_allowed() {
         if ((function_exists('is_admin') && is_admin())
@@ -41,6 +49,41 @@ final class Pferdeportal_Affiliate_Router {
             return false;
         }
         return true;
+    }
+
+
+    /**
+     * V6.72.164: request-local reuse for repeated stable key normalization.
+     * The optimization is deliberately disabled outside normal frontend requests
+     * and whenever WordPress has a sanitize_key filter, so original filter calls
+     * and all administrative/worker semantics remain untouched.
+     */
+    private function ranked_campaign_sanitize_key_request_cached($value) {
+        $value = (string) $value;
+        if (!$this->ranked_campaigns_request_cache_allowed()
+            || (function_exists('has_filter') && has_filter('sanitize_key'))) {
+            return sanitize_key($value);
+        }
+        if (array_key_exists($value, $this->ranked_campaign_sanitize_key_request_cache)) {
+            return $this->ranked_campaign_sanitize_key_request_cache[$value];
+        }
+        $this->ranked_campaign_sanitize_key_request_cache[$value] = sanitize_key($value);
+        return $this->ranked_campaign_sanitize_key_request_cache[$value];
+    }
+
+
+    /** Request-local reuse for repeated stable text normalization in the ranking hot path. */
+    private function ranked_campaign_sanitize_text_request_cached($value) {
+        $value = (string) $value;
+        if (!$this->ranked_campaigns_request_cache_allowed()
+            || (function_exists('has_filter') && has_filter('sanitize_text_field'))) {
+            return sanitize_text_field($value);
+        }
+        if (array_key_exists($value, $this->ranked_campaign_sanitize_text_request_cache)) {
+            return $this->ranked_campaign_sanitize_text_request_cache[$value];
+        }
+        $this->ranked_campaign_sanitize_text_request_cache[$value] = sanitize_text_field($value);
+        return $this->ranked_campaign_sanitize_text_request_cache[$value];
     }
 
     private function ranked_campaigns_request_cache_key($context, $slot_type, $forced_campaign_id) {
@@ -66,7 +109,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.152';
+    const VERSION = '6.72.165';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -279,6 +322,7 @@ final class Pferdeportal_Affiliate_Router {
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
         add_action(self::PARTNER_ANALYTICS_CRON_HOOK, array($this, 'run_partner_analytics_refresh'));
+        add_action('admin_post_ppar_partner_analytics_refresh_now', array($this, 'handle_partner_analytics_refresh_now'));
         // AFF-ERR-039: recovery work is isolated to its dedicated worker.
         // Never bind state repair to normal init/frontend/REST requests.
         add_action(self::AFF039_RECOVERY_HOOK, array($this, 'run_aff039_recovery_worker'));
@@ -2635,40 +2679,15 @@ JS;
         $context = $this->get_content_context($post_id);
         return $this->render_affiliate_slot_for_context($post_id, $context, $slot_type, $intent, $forced_group_id);
     }
-    /**
-     * Soft target shares for banner *places*, never a relevance override.
-     * Only providers represented in the best relevance tier participate.
-     * Missing providers are automatically redistributed among eligible ones.
-     */
+    /** Current banner distribution contract: always automatic; manual per-page overrides remain separate. */
     private function banner_distribution_defaults() {
-        return array(
-            'enabled'=>true,
-            'weights'=>array(
-                'otto'=>40,
-                'awin_other'=>25,
-                'adcell'=>20,
-                'direct'=>15,
-                'digistore24'=>0,
-                'other'=>0,
-            ),
-        );
+        return array('enabled'=>true,'mode'=>'relevance_first_stable_even_distribution');
     }
 
     private function banner_distribution_settings() {
-        $saved = get_option(self::OPTION_BANNER_DISTRIBUTION, array());
-        $saved = is_array($saved) ? $saved : array();
-        $defaults = $this->banner_distribution_defaults();
-        $weights = isset($saved['weights']) && is_array($saved['weights']) ? $saved['weights'] : array();
-        $out = array(
-            'enabled'=>array_key_exists('enabled', $saved) ? !empty($saved['enabled']) : true,
-            'weights'=>$defaults['weights'],
-        );
-        foreach ($out['weights'] as $key=>$default) {
-            if (array_key_exists($key, $weights)) {
-                $out['weights'][$key] = max(0, min(100, absint($weights[$key])));
-            }
-        }
-        return $out;
+        // Old weight/toggle options are intentionally ignored. They are incompatible
+        // with the current relevance-first contract and could silently disable rotation.
+        return $this->banner_distribution_defaults();
     }
 
     /**
@@ -2769,29 +2788,17 @@ JS;
         if (!$this->category_large_banner_slot($slot_type) || count($candidates) < 2) { return $candidates; }
 
         $top = $candidates[0];
-        $specificity = (int) ($top['specificity'] ?? 0);
-        $matches = (int) ($top['matches'] ?? 0);
-        // V6.72.93: Prioritaet darf innerhalb derselben fachlichen Relevanz
-        // nicht einen allgemeinen Banner auf allen Kategorien festnageln.
-        // Die Verteilung erfolgt innerhalb derselben Relevanz + Geometrie.
-        $best_geometry = $this->banner_candidate_geometry($top);
-        $best_ratio = (float)($best_geometry['ratio'] ?? 0.0);
-        $equal = array();
-        $rest = array();
+        $top_band = $this->banner_distribution_relevance_band((int) ($top['specificity'] ?? 0));
+        $equal = array(); $rest = array();
         foreach ($candidates as $candidate) {
-            $candidate_geometry = $this->banner_candidate_geometry($candidate);
-            if ((int) ($candidate['specificity'] ?? 0) === $specificity
-                && (int) ($candidate['matches'] ?? 0) === $matches
-                && abs((float)($candidate_geometry['ratio'] ?? 0.0) - $best_ratio) < 0.05) {
+            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) === $top_band) {
                 $equal[] = $candidate;
-            } else {
-                $rest[] = $candidate;
-            }
+            } else { $rest[] = $candidate; }
         }
         if (count($equal) < 2) { return $candidates; }
 
         $seed = implode('|', array(
-            gmdate('o-W'),
+            'category-banner-v2',
             (string) absint($context['post_id'] ?? 0),
             sanitize_key((string) $slot_type),
             sanitize_key((string) ($context['primary_slug'] ?? '')),
@@ -2865,64 +2872,37 @@ JS;
         ), true);
     }
 
-    private function banner_distribution_provider_key($campaign) {
-        if (!is_array($campaign)) { return 'other'; }
-        $network = sanitize_key((string) ($campaign['network'] ?? ''));
-        if ($network === 'awin') {
-            return absint($campaign['advertiser_id'] ?? 0) === self::OTTO_AWIN_ADVERTISER_ID ? 'otto' : 'awin_other';
-        }
-        if ($network === 'adcell') { return 'adcell'; }
-        if ($network === 'digistore24') { return 'digistore24'; }
-        if (in_array($network, array('direct','manual'), true)) { return 'direct'; }
-        return 'other';
-    }
-
     private function banner_distribution_relevance_band($specificity) {
         $specificity = (int) $specificity;
-        if ($specificity >= 450) { return 5; }
-        if ($specificity >= 400) { return 4; }
-        if ($specificity >= 350) { return 3; }
-        if ($specificity >= 200) { return 2; }
-        return 1;
+        if ($specificity >= 500) { return 4; } // exact topic
+        if ($specificity >= 200) { return 3; } // extended topic
+        if ($specificity >= 100) { return 2; } // general horse/shop fallback
+        return 1; // technical fallback
     }
 
-    private function banner_distribution_bucket($context, $slot_type, $total) {
-        $total = max(1, absint($total));
+    private function banner_distribution_partner_key($campaign) {
+        if (!is_array($campaign)) { return '_unknown'; }
+        $provider = sanitize_key((string) ($campaign['network'] ?? ''));
+        if ($provider === '') { $provider = '_unknown'; }
+        $partner = trim((string) ($campaign['advertiser_id'] ?? ''));
+        if ($partner === '') { $partner = trim((string) ($campaign['partner_external_id'] ?? '')); }
+        if ($partner === '') { $partner = trim((string) ($campaign['programme_name'] ?? '')); }
+        if ($partner === '') { $partner = trim((string) ($campaign['partner'] ?? '')); }
+        return $provider . '|' . ($partner !== '' ? strtolower($partner) : '_provider');
+    }
+
+    private function banner_distribution_stable_index($context, $slot_type, $count, $salt = '') {
+        $count = max(1, absint($count));
         $post_id = absint($context['post_id'] ?? 0);
-        $terms = array_values(array_unique(array_map('absint', (array) ($context['term_ids'] ?? array()))));
-        sort($terms, SORT_NUMERIC);
-        $slugs = array_values(array_unique(array_filter(array_map('sanitize_key', (array) ($context['slugs'] ?? array())))));
-        sort($slugs, SORT_STRING);
-        // Weekly stability is deliberate: deterministic enough for caches and
-        // reproducible diagnosis, while banner places rotate over time.
-        $seed = implode('|', array(
-            gmdate('o-W'),
-            (string) $post_id,
-            implode(',', $terms),
-            implode(',', $slugs),
-            sanitize_key((string) $slot_type),
-            (string) max(1, absint($context['banner_distribution_position'] ?? 1)),
-        ));
-        return (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % $total);
-    }
+        $primary = sanitize_key((string) ($context['primary_slug'] ?? ''));
+        $position = max(1, absint($context['banner_distribution_position'] ?? 1));
 
-    /** V6.72.55: Innerhalb exakt gleich guter Banner desselben Provider-Buckets
-     * wird seitenstabil rotiert. So zeigt nicht jeder Glossarartikel denselben
-     * allgemeinen Banner, waehrend ein fachlich besserer Treffer unveraendert gewinnt. */
-    private function banner_distribution_rotate_equal_group($indexes, $candidates, $context, $slot_type, $provider_key) {
-        $indexes = array_values((array) $indexes);
-        if (count($indexes) < 2) { return $indexes; }
-        $seed = implode('|', array(
-            'equal-campaign-v1',
-            gmdate('o-W'),
-            (string) absint($context['post_id'] ?? 0),
-            sanitize_key((string) ($context['primary_slug'] ?? '')),
-            sanitize_key((string) $slot_type),
-            sanitize_key((string) $provider_key),
-            (string) max(1, absint($context['banner_distribution_position'] ?? 1)),
-        ));
-        $offset = (int) (hexdec(substr(hash('sha256', $seed), 0, 8)) % count($indexes));
-        return array_merge(array_slice($indexes, $offset), array_slice($indexes, 0, $offset));
+        // Performance-safe round-robin: no DB/meta/provider access. Consecutive
+        // content IDs deterministically walk through all eligible partner/creative
+        // choices instead of allowing the same banner to win repeatedly by chance.
+        $base = $post_id > 0 ? $post_id : (int) sprintf('%u', crc32($primary));
+        $salt_hash = (int) (hexdec(substr(hash('sha256', sanitize_key((string)$slot_type) . '|' . sanitize_key((string)$salt)), 0, 8)) % $count);
+        return (int) (($base + $position - 1 + $salt_hash) % $count);
     }
 
     private function banner_distribution_reorder_candidates($candidates, $context, $slot_type) {
@@ -2931,102 +2911,64 @@ JS;
         $settings = $this->banner_distribution_settings();
         if (empty($settings['enabled'])) { return $candidates; }
 
-        // V6.72.82: Gewichte sind nur weiche Verteilungsanteile und niemals ein
-        // Teilnahme-Gate. Jeder technisch und fachlich gueltige aktive Banner aus
-        // dem kompletten Pool bleibt im Rennen. Harte Ausschluesse erfolgen nur
-        // ueber Provider-/Creative-Status, Sicherheitsgates oder ein echtes Veto.
-        $automatic_banner_candidates = array();
+        $automatic = array();
         foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') {
-                continue;
-            }
-            $automatic_banner_candidates[] = $candidate;
+            if (!is_array($campaign) || sanitize_key((string) ($campaign['creative_type'] ?? 'banner')) !== 'banner') { continue; }
+            $automatic[] = $candidate;
         }
-        if (!$automatic_banner_candidates) {
-            return array();
-        }
-        if (count($automatic_banner_candidates) === 1) {
-            return $automatic_banner_candidates;
-        }
+        if (count($automatic) < 2) { return $automatic ?: $candidates; }
 
-        // Verteilung ist niemals ein Relevanz-Override. Nur fachlich exakt
-        // gleich gute Treffer duerfen nach Provideranteil rotiert werden.
-        // Die Kandidaten sind bereits specificity -> matches -> priority sortiert.
-        $best_specificity = (int) ($automatic_banner_candidates[0]['specificity'] ?? 0);
-        $best_matches = (int) ($automatic_banner_candidates[0]['matches'] ?? 0);
-        $best_priority = (int) ($automatic_banner_candidates[0]['priority'] ?? 0);
-        $best_geometry = $this->banner_candidate_geometry($automatic_banner_candidates[0]);
-        $best_ratio = (float)($best_geometry['ratio'] ?? 0.0);
+        // Same relevance TIER, not identical score/matches/priority.
+        $top_band = $this->banner_distribution_relevance_band((int) ($automatic[0]['specificity'] ?? 0));
+        $tier = array(); $rest = array();
+        foreach ($automatic as $candidate) {
+            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) === $top_band) {
+                $tier[] = $candidate;
+            } else { $rest[] = $candidate; }
+        }
+        if (count($tier) < 2) { return array_merge($tier, $rest); }
+
         $groups = array();
-        foreach ($automatic_banner_candidates as $index=>$candidate) {
-            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign)) { continue; }
-            $candidate_geometry = $this->banner_candidate_geometry($candidate);
-            if ((int) ($candidate['specificity'] ?? 0) !== $best_specificity
-                || (int) ($candidate['matches'] ?? 0) !== $best_matches
-                || (int) ($candidate['priority'] ?? 0) !== $best_priority
-                || abs((float)($candidate_geometry['ratio'] ?? 0.0) - $best_ratio) >= 0.05) {
-                continue;
-            }
-            $key = $this->banner_distribution_provider_key($campaign);
-            $weight = max(1, absint($settings['weights'][$key] ?? 0));
+        foreach ($tier as $candidate) {
+            $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
+            $key = $this->banner_distribution_partner_key($campaign);
             if (!isset($groups[$key])) { $groups[$key] = array(); }
-            $groups[$key][] = $index;
+            $groups[$key][] = $candidate;
         }
+        $partner_keys = array_keys($groups);
+        sort($partner_keys, SORT_STRING);
+        $partner_key = $partner_keys[$this->banner_distribution_stable_index($context,$slot_type,count($partner_keys),'partner')] ?? '';
+        if ($partner_key === '' || empty($groups[$partner_key])) { return array_merge($tier,$rest); }
 
-        $ordered_keys = array('otto','awin_other','adcell','direct','digistore24','other');
-        $eligible = array();
-        $total = 0;
-        foreach ($ordered_keys as $key) {
-            if (empty($groups[$key])) { continue; }
-            $weight = max(1, absint($settings['weights'][$key] ?? 0));
-            $eligible[$key] = $weight;
-            $total += $weight;
+        $selected_group = array_values($groups[$partner_key]);
+        // Decouple creative rotation from partner rotation. Otherwise a 2x2 pool
+        // can deterministically hit only one creative per partner forever.
+        $creative_context = $context;
+        if (absint($creative_context['post_id'] ?? 0) > 0 && count($partner_keys) > 1) {
+            $creative_context['post_id'] = intdiv(absint($creative_context['post_id']), count($partner_keys));
         }
+        $creative_offset = $this->banner_distribution_stable_index($creative_context,$slot_type,count($selected_group),'creative-'.$partner_key);
+        $selected_group = array_merge(array_slice($selected_group,$creative_offset),array_slice($selected_group,0,$creative_offset));
 
-        if ($total <= 0 || !$eligible) {
-            return array();
-        }
-        if (count($eligible) === 1) {
-            $only = array_key_first($eligible);
-            $groups[$only] = $this->banner_distribution_rotate_equal_group($groups[$only], $automatic_banner_candidates, $context, $slot_type, $only);
-            $selected_indexes = array_fill_keys($groups[$only], true);
-            $out = array();
-            foreach ($groups[$only] as $index) { $out[] = $automatic_banner_candidates[$index]; }
-            foreach ($automatic_banner_candidates as $index=>$candidate) {
-                if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
-            }
-            return array_values($out);
-        }
-
-        $bucket = $this->banner_distribution_bucket($context, $slot_type, $total);
-        $cursor = 0;
-        $selected = '';
-        foreach ($eligible as $key=>$weight) {
-            $cursor += $weight;
-            if ($bucket < $cursor) { $selected = $key; break; }
-        }
-        if ($selected === '' || empty($groups[$selected])) {
-            return $automatic_banner_candidates;
-        }
-
-        $groups[$selected] = $this->banner_distribution_rotate_equal_group($groups[$selected], $automatic_banner_candidates, $context, $slot_type, $selected);
-        $selected_indexes = array_fill_keys($groups[$selected], true);
-        $out = array();
-        foreach ($groups[$selected] as $index) {
-            $candidate = $automatic_banner_candidates[$index];
-            $candidate['reason'] = sanitize_text_field(
-                (string) ($candidate['reason'] ?? 'Passende Zuordnung.')
-                . ' · Banneranteil ' . $selected . ': ' . absint($eligible[$selected]) . '/' . $total . ' der aktuell gleich relevanten Quellen.'
-            );
+        $out = array(); $selected_keys = array();
+        foreach ($selected_group as $candidate) {
+            $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
+            $key = absint($campaign['post_id'] ?? 0) > 0 ? 'post:'.absint($campaign['post_id']) : 'id:'.sanitize_key((string)($campaign['id'] ?? ''));
+            if ($key !== '') { $selected_keys[$key]=true; }
+            $candidate['reason'] = sanitize_text_field((string)($candidate['reason'] ?? 'Passende Zuordnung.') . ' · Gleichmäßige Verteilung innerhalb derselben Relevanzstufe.');
             $out[] = $candidate;
         }
-        foreach ($automatic_banner_candidates as $index=>$candidate) {
-            if (!isset($selected_indexes[$index])) { $out[] = $candidate; }
+        foreach ($tier as $candidate) {
+            $campaign = is_array($candidate['campaign'] ?? null) ? $candidate['campaign'] : array();
+            $key = absint($campaign['post_id'] ?? 0) > 0 ? 'post:'.absint($campaign['post_id']) : 'id:'.sanitize_key((string)($campaign['id'] ?? ''));
+            if ($key !== '' && isset($selected_keys[$key])) { continue; }
+            $out[]=$candidate;
         }
+        foreach ($rest as $candidate) { $out[]=$candidate; }
         return array_values($out);
     }
+
     private function get_assignments() {
         $value = get_option(self::OPTION_ASSIGNMENTS, array());
         return is_array($value) ? $value : array();
@@ -3908,18 +3850,30 @@ JS;
         $stored = is_array($stored) ? $stored : array();
         $campaign = wp_parse_args($stored, $this->central_blank_campaign());
         $campaign['post_id'] = (int) $post->ID;
-        $campaign['id'] = !empty($stored['id']) ? sanitize_key((string) $stored['id']) : sanitize_key((string) $post->post_name);
+        $campaign['id'] = !empty($stored['id']) ? $this->ranked_campaign_sanitize_key_request_cached((string) $stored['id']) : $this->ranked_campaign_sanitize_key_request_cached((string) $post->post_name);
         $campaign['name'] = trim((string) $post->post_title) !== '' ? (string) $post->post_title : (string) ($campaign['name'] ?? $campaign['id']);
         $campaign['active'] = !empty($campaign['active']);
         $campaign['match_descendants'] = !empty($campaign['match_descendants']);
-        $campaign['match_slugs'] = is_array($campaign['match_slugs']) ? array_values(array_filter(array_map('sanitize_key', $campaign['match_slugs']))) : array();
-        $campaign['match_keywords'] = is_array($campaign['match_keywords']) ? array_values(array_filter(array_map('sanitize_text_field', $campaign['match_keywords']))) : array();
+        $campaign['match_slugs'] = is_array($campaign['match_slugs']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $campaign['match_slugs']))) : array();
+        $campaign['match_keywords'] = is_array($campaign['match_keywords']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_text_request_cached'), $campaign['match_keywords']))) : array();
         $campaign['match_term_ids'] = isset($campaign['match_term_ids']) && is_array($campaign['match_term_ids']) ? array_values(array_filter(array_map('absint', $campaign['match_term_ids']))) : array();
         $campaign['automation_target_keys'] = isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys']) ? array_values(array_unique(array_filter(array_map(array($this, 'automation_normalize_target_key'), $campaign['automation_target_keys'])))) : array();
-        $campaign['placements'] = is_array($campaign['placements']) ? array_values(array_filter(array_map('sanitize_key', $campaign['placements']))) : array();
-        $campaign['product_gtins'] = isset($campaign['product_gtins']) && is_array($campaign['product_gtins']) ? array_values(array_unique(array_filter(array_map('sanitize_text_field', $campaign['product_gtins'])))) : array();
-        $campaign['product_asins'] = isset($campaign['product_asins']) && is_array($campaign['product_asins']) ? array_values(array_unique(array_filter(array_map('sanitize_text_field', $campaign['product_asins'])))) : array();
+        $campaign['placements'] = is_array($campaign['placements']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $campaign['placements']))) : array();
+        $campaign['product_gtins'] = isset($campaign['product_gtins']) && is_array($campaign['product_gtins']) ? array_values(array_unique(array_filter(array_map(array($this, 'ranked_campaign_sanitize_text_request_cached'), $campaign['product_gtins'])))) : array();
+        $campaign['product_asins'] = isset($campaign['product_asins']) && is_array($campaign['product_asins']) ? array_values(array_unique(array_filter(array_map(array($this, 'ranked_campaign_sanitize_text_request_cached'), $campaign['product_asins'])))) : array();
         $campaign['product_identifiers'] = $this->affiliate_normalize_product_identifiers($campaign['product_identifiers'] ?? array());
+
+        // V6.72.153 performance-only: campaign_from_post() already performs the
+        // immutable request-local normalization work. Mark and retain those
+        // scalar values once so public ranking does not sanitize the same
+        // campaign again for every slot.
+        $campaign['_ppar_runtime_normalized'] = 1;
+        $campaign['_ppar_norm_id'] = (string) $campaign['id'];
+        $campaign['_ppar_norm_network'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['network'] ?? 'manual'));
+        $campaign['_ppar_norm_creative_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['creative_type'] ?? 'banner'));
+        $campaign['_ppar_norm_render_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['render_mode'] ?? 'image_link'));
+        $campaign['_ppar_norm_programme_status'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['programme_status'] ?? 'unknown'));
+        $campaign['_ppar_norm_assignment_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['assignment_mode'] ?? 'page_tree'));
         return $campaign;
     }
 
@@ -4108,12 +4062,23 @@ JS;
     private function runtime_contract_slot_rule($slot_type) {
         $slot_type = sanitize_key((string) $slot_type);
         if ($slot_type === '' || !method_exists($this, 'output_portal_registry') || !method_exists($this, 'output_slot_matrix')) { return array(); }
+        $use_cache = $this->ranked_campaigns_request_cache_allowed();
+        if ($use_cache && array_key_exists($slot_type, $this->runtime_contract_slot_rule_request_cache)) {
+            return $this->runtime_contract_slot_rule_request_cache[$slot_type];
+        }
+        $rule = array();
         foreach ((array) $this->output_portal_registry() as $portal) {
             if (!is_array($portal) || empty($portal['enabled'])) { continue; }
             $matrix = $this->output_slot_matrix($portal);
-            if (is_array($matrix) && !empty($matrix[$slot_type]) && is_array($matrix[$slot_type])) { return $matrix[$slot_type]; }
+            if (is_array($matrix) && !empty($matrix[$slot_type]) && is_array($matrix[$slot_type])) {
+                $rule = $matrix[$slot_type];
+                break;
+            }
         }
-        return array();
+        if ($use_cache) {
+            $this->runtime_contract_slot_rule_request_cache[$slot_type] = $rule;
+        }
+        return $rule;
     }
 
     private function campaign_matches_contract_slot_rule($campaign, $slot_type) {
@@ -4235,8 +4200,28 @@ JS;
         $tokens = array_values(array_diff($this->output_tokens($evidence), array('pferd','pferde','horse','horses','banner','anzeige','affiliate')));
         if (!$tokens) { return null; }
         $primary = $this->output_text(str_replace(array('-','_'),' ',(string)($context['primary_slug'] ?? '')));
-        if ($primary !== '' && $this->output_term_present($evidence,$primary)) {
-            return array('specificity'=>520,'matches'=>1,'reason'=>'Glossar-Laufzeit: exakter Begriffstreffer im Werbemittel/Partnerprofil.');
+        if ($primary !== '') {
+            // Exact means the complete distinctive glossary term, not one shared
+            // generic token. The former any-token test made broad horse-shop banners
+            // look exact on many unrelated glossary entries and prevented rotation.
+            $generic_exact = array('pferd','pferde','horse','horses','banner','anzeige','affiliate','shop','reiter','reiten');
+            $primary_tokens = array_values(array_diff($this->output_tokens($primary), $generic_exact));
+            $evidence_tokens = array_values(array_diff($this->output_tokens($evidence), $generic_exact));
+            if ($primary_tokens && $evidence_tokens) {
+                $matched = 0;
+                foreach ($primary_tokens as $pt) {
+                    $hit = false;
+                    foreach ($evidence_tokens as $et) {
+                        if ($et === $pt || (strlen($pt) >= 5 && strlen($et) >= 5 && (strpos($et,$pt)!==false || strpos($pt,$et)!==false))) {
+                            $hit = true; break;
+                        }
+                    }
+                    if ($hit) { $matched++; }
+                }
+                if ($matched === count($primary_tokens)) {
+                    return array('specificity'=>520,'matches'=>$matched,'reason'=>'Glossar-Laufzeit: vollständiger exakter Begriffstreffer im Werbemittel/Partnerprofil.');
+                }
+            }
         }
         $context_text = implode(' ', array_filter(array(
             (string)($context['primary_name'] ?? ''),
@@ -4689,8 +4674,8 @@ JS;
         $out = array();
         foreach ((array) $identifiers as $identifier) {
             if (!is_array($identifier)) { continue; }
-            $type = strtoupper(sanitize_text_field((string) ($identifier['type'] ?? $identifier['identifier_type'] ?? '')));
-            $value = trim(sanitize_text_field((string) ($identifier['value'] ?? $identifier['identifier_value'] ?? '')));
+            $type = strtoupper($this->ranked_campaign_sanitize_text_request_cached((string) ($identifier['type'] ?? $identifier['identifier_type'] ?? '')));
+            $value = trim($this->ranked_campaign_sanitize_text_request_cached((string) ($identifier['value'] ?? $identifier['identifier_value'] ?? '')));
             if ($type === 'EAN') { $type = 'GTIN'; }
             if (!in_array($type, array('GTIN','MPN','MANUFACTURER_ARTICLE_NUMBER'), true) || $value === '') { continue; }
             if ($type === 'GTIN') {
@@ -4778,11 +4763,270 @@ JS;
         return $result;
     }
 
+    /**
+     * V6.72.162 performance-only: exact same ordered campaign post source as
+     * get_campaigns(), but without normalizing every campaign up front. Public
+     * slot ranking can therefore preselect obvious type/placement candidates
+     * before campaign_from_post() performs the expensive full normalization.
+     * Admin/Cron/REST/WP-CLI/AJAX stay on the historical get_campaigns() path.
+     */
+    private function ranked_campaign_posts_snapshot() {
+        if (!$this->ranked_campaigns_request_cache_allowed()) { return array(); }
+        if (is_array($this->ranked_campaign_posts_request_cache)) {
+            return $this->ranked_campaign_posts_request_cache;
+        }
+        if (!post_type_exists(self::CAMPAIGN_POST_TYPE)) {
+            $this->register_campaign_post_type();
+        }
+        $posts = get_posts(array(
+            'post_type' => self::CAMPAIGN_POST_TYPE,
+            'post_status' => array('publish', 'draft', 'private'),
+            'numberposts' => -1,
+            'orderby' => array('menu_order' => 'ASC', 'title' => 'ASC'),
+            'order' => 'ASC',
+            'suppress_filters' => true,
+        ));
+        $this->ranked_campaign_posts_request_cache = array_values((array) $posts);
+        return $this->ranked_campaign_posts_request_cache;
+    }
+
+    /** Normalize a selected post at most once per request. */
+    private function ranked_campaign_from_post_cached($post) {
+        $post_id = is_object($post) ? absint($post->ID ?? 0) : 0;
+        if ($post_id <= 0) { return null; }
+        if (array_key_exists($post_id, $this->ranked_campaign_from_post_request_cache)) {
+            $cached = $this->ranked_campaign_from_post_request_cache[$post_id];
+            return is_array($cached) ? $cached : null;
+        }
+        $campaign = $this->campaign_from_post($post);
+        $this->ranked_campaign_from_post_request_cache[$post_id] = is_array($campaign) ? $campaign : false;
+        return is_array($campaign) ? $campaign : null;
+    }
+
+    /**
+     * V6.72.163 performance-only: cache the raw campaign record once per request.
+     * No campaign normalization is performed here. Later candidate selection reads
+     * only the raw fields that the current ranking mode actually needs.
+     */
+    private function ranked_campaign_raw_records_snapshot() {
+        if (!$this->ranked_campaigns_request_cache_allowed()) { return array(); }
+        if (is_array($this->ranked_campaign_raw_records_request_cache)) {
+            return $this->ranked_campaign_raw_records_request_cache;
+        }
+        $records = array();
+        foreach ($this->ranked_campaign_posts_snapshot() as $position => $post) {
+            if (!is_object($post) || empty($post->ID)) { continue; }
+            $stored = get_post_meta((int) $post->ID, 'ppar_campaign_data', true);
+            $records[(int) $position] = array(
+                'post' => $post,
+                'stored' => is_array($stored) ? $stored : array(),
+            );
+        }
+        $this->ranked_campaign_raw_records_request_cache = $records;
+        return $this->ranked_campaign_raw_records_request_cache;
+    }
+
+    /** Same target-key normalization as campaign_from_post(), cached per raw post. */
+    private function ranked_campaign_raw_target_keys($position, $stored) {
+        $position = (int) $position;
+        if (array_key_exists($position, $this->ranked_campaign_raw_target_keys_request_cache)) {
+            return (array) $this->ranked_campaign_raw_target_keys_request_cache[$position];
+        }
+        $stored = is_array($stored) ? $stored : array();
+        $targets = isset($stored['automation_target_keys']) && is_array($stored['automation_target_keys'])
+            ? array_values(array_unique(array_filter(array_map(array($this, 'automation_normalize_target_key'), $stored['automation_target_keys']))))
+            : array();
+        $this->ranked_campaign_raw_target_keys_request_cache[$position] = $targets;
+        return $targets;
+    }
+
+    /** Exact same identifier semantics as affiliate_campaign_matches_exact_identifiers(). */
+    private function ranked_campaign_raw_exact_identifier_keys($stored) {
+        $stored = is_array($stored) ? $stored : array();
+        $ids = $this->affiliate_normalize_product_identifiers((array) ($stored['product_identifiers'] ?? array()));
+        if (isset($stored['product_gtins']) && is_array($stored['product_gtins'])) {
+            foreach ($stored['product_gtins'] as $gtin) {
+                $ids[] = array('type'=>'GTIN', 'value'=>(string) $gtin);
+            }
+        }
+        $ids = $this->affiliate_normalize_product_identifiers($ids);
+        $keys = array();
+        foreach ($ids as $row) {
+            if (!is_array($row)) { continue; }
+            $type = (string) ($row['type'] ?? '');
+            $value = (string) ($row['value'] ?? '');
+            if ($type === '' || $value === '') { continue; }
+            $keys[$type . ':' . $value] = true;
+        }
+        return $keys;
+    }
+
+    /**
+     * V6.72.163: build only the tiny raw index needed by the current ranking mode.
+     * 6.72.162 eagerly normalized every product placement on every page, even for
+     * banner-only requests. This lazy index keeps the same candidate semantics but
+     * avoids unrelated work. Exact-product mode additionally indexes only the exact
+     * stable identifiers that would otherwise be checked later after full campaign
+     * normalization.
+     */
+    private function ranked_campaign_candidate_index($mode) {
+        $mode = $this->ranked_campaign_sanitize_key_request_cached((string) $mode);
+        if (!$this->ranked_campaigns_request_cache_allowed()) { return array(); }
+        if (isset($this->ranked_campaign_candidate_index_request_cache[$mode])
+            && is_array($this->ranked_campaign_candidate_index_request_cache[$mode])) {
+            return $this->ranked_campaign_candidate_index_request_cache[$mode];
+        }
+
+        $index = array();
+        if ($mode === 'type') {
+            $index = array('by_type'=>array());
+        } elseif ($mode === 'id') {
+            $index = array('by_id'=>array());
+        } elseif ($mode === 'placement') {
+            $index = array('product_by_placement'=>array());
+        } elseif ($mode === 'exact') {
+            $index = array('product_by_exact_identifier'=>array());
+        } else {
+            return array();
+        }
+
+        foreach ($this->ranked_campaign_raw_records_snapshot() as $position => $record) {
+            $post = is_array($record) ? ($record['post'] ?? null) : null;
+            $stored = is_array($record) ? (array) ($record['stored'] ?? array()) : array();
+            if (!is_object($post) || empty($post->ID)) { continue; }
+            $position = (int) $position;
+
+            if ($mode === 'id') {
+                $id = !empty($stored['id']) ? $this->ranked_campaign_sanitize_key_request_cached((string) $stored['id']) : $this->ranked_campaign_sanitize_key_request_cached((string) ($post->post_name ?? ''));
+                if ($id !== '') {
+                    if (!isset($index['by_id'][$id])) { $index['by_id'][$id] = array(); }
+                    $index['by_id'][$id][$position] = true;
+                }
+                continue;
+            }
+
+            $type = $this->ranked_campaign_sanitize_key_request_cached((string) (array_key_exists('creative_type', $stored) ? $stored['creative_type'] : 'banner'));
+            if ($mode === 'type') {
+                if (!isset($index['by_type'][$type])) { $index['by_type'][$type] = array(); }
+                $index['by_type'][$type][$position] = true;
+                continue;
+            }
+
+            if ($type !== 'product') { continue; }
+
+            if ($mode === 'placement') {
+                if (array_key_exists('placements', $stored)) {
+                    $placements = is_array($stored['placements'])
+                        ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $stored['placements'])))
+                        : array();
+                } else {
+                    $placements = array('hub_grid_card');
+                }
+                foreach ($placements as $placement) {
+                    $placement = (string) $placement;
+                    if ($placement === '') { continue; }
+                    if (!isset($index['product_by_placement'][$placement])) { $index['product_by_placement'][$placement] = array(); }
+                    $index['product_by_placement'][$placement][$position] = true;
+                }
+                continue;
+            }
+
+            foreach ($this->ranked_campaign_raw_exact_identifier_keys($stored) as $identifier_key => $_true) {
+                if (!isset($index['product_by_exact_identifier'][$identifier_key])) {
+                    $index['product_by_exact_identifier'][$identifier_key] = array();
+                }
+                $index['product_by_exact_identifier'][$identifier_key][$position] = true;
+            }
+        }
+
+        $this->ranked_campaign_candidate_index_request_cache[$mode] = $index;
+        return $this->ranked_campaign_candidate_index_request_cache[$mode];
+    }
+
+    /**
+     * V6.72.163: normalize only candidates that can still survive the existing
+     * type/placement/exact-identifier gate. Original post order is preserved.
+     */
+    private function ranked_campaign_candidate_pool($slot_type, $required_type, $forced_campaign_id_norm, $exact_mode, $exact_identifiers = array(), $rank_context = array()) {
+        if (!$this->ranked_campaigns_request_cache_allowed()) {
+            return array_values((array) $this->get_campaigns());
+        }
+        $posts = $this->ranked_campaign_posts_snapshot();
+        $positions = array();
+
+        if ($forced_campaign_id_norm !== '') {
+            $index = $this->ranked_campaign_candidate_index('id');
+            $positions = (array) ($index['by_id'][$forced_campaign_id_norm] ?? array());
+        } elseif ($required_type === 'product' && $exact_mode) {
+            $index = $this->ranked_campaign_candidate_index('exact');
+            foreach ($this->affiliate_normalize_product_identifiers($exact_identifiers) as $identifier) {
+                if (!is_array($identifier)) { continue; }
+                $type = (string) ($identifier['type'] ?? '');
+                $value = (string) ($identifier['value'] ?? '');
+                if ($type === '' || $value === '') { continue; }
+                $key = $type . ':' . $value;
+                foreach ((array) ($index['product_by_exact_identifier'][$key] ?? array()) as $position => $_true) {
+                    $positions[(int) $position] = true;
+                }
+            }
+        } elseif ($required_type === 'product') {
+            $index = $this->ranked_campaign_candidate_index('placement');
+            foreach (array_merge($this->equivalent_slot_names($slot_type), array('*')) as $placement) {
+                foreach ((array) ($index['product_by_placement'][(string) $placement] ?? array()) as $position => $_true) {
+                    $positions[(int) $position] = true;
+                }
+            }
+        } elseif ($required_type !== '') {
+            $index = $this->ranked_campaign_candidate_index('type');
+            $positions = (array) ($index['by_type'][$required_type] ?? array());
+        } else {
+            foreach ($posts as $position => $post) {
+                if (is_object($post) && !empty($post->ID)) { $positions[(int) $position] = true; }
+            }
+        }
+
+        if (!$positions) { return array(); }
+        ksort($positions, SORT_NUMERIC);
+        $out = array();
+        $raw_records = $this->ranked_campaign_raw_records_snapshot();
+        foreach (array_keys($positions) as $position) {
+            $position = (int) $position;
+            if (!isset($posts[$position]) || !is_object($posts[$position])) { continue; }
+
+            // Public product campaigns with explicit automation target keys are
+            // fail-closed in campaign_match_rank() for page/category contexts.
+            // Apply that exact existing target-rank decision before expensive
+            // campaign_from_post() normalization. Article/glossary/breed contexts
+            // keep their historical fall-through semantics.
+            if ($forced_campaign_id_norm === '' && $required_type === 'product' && !$exact_mode) {
+                $record = isset($raw_records[$position]) && is_array($raw_records[$position]) ? $raw_records[$position] : array();
+                $stored = isset($record['stored']) && is_array($record['stored']) ? $record['stored'] : array();
+                $raw_targets = $this->ranked_campaign_raw_target_keys($position, $stored);
+                if ($raw_targets) {
+                    $target_probe = array('automation_target_keys'=>$raw_targets);
+                    $automation_rank = method_exists($this, 'automation_campaign_exact_target_rank')
+                        ? $this->automation_campaign_exact_target_rank($target_probe, is_array($rank_context) ? $rank_context : array())
+                        : null;
+                    $fill_post_type = is_array($rank_context) && isset($rank_context['_ppar_norm_post_type'])
+                        ? (string) $rank_context['_ppar_norm_post_type']
+                        : sanitize_key((string) (is_array($rank_context) ? ($rank_context['post_type'] ?? '') : ''));
+                    if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) {
+                        continue;
+                    }
+                }
+            }
+
+            $campaign = $this->ranked_campaign_from_post_cached($posts[$position]);
+            if (is_array($campaign)) { $out[] = $campaign; }
+        }
+        return $out;
+    }
+
     private function ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id = '') {
         $candidates = array();
-        $slot_type = sanitize_key((string) $slot_type);
+        $slot_type = $this->ranked_campaign_sanitize_key_request_cached((string) $slot_type);
         $required_type = $this->slot_required_creative_type($slot_type);
-        $forced_campaign_id_norm = $forced_campaign_id !== '' ? sanitize_key((string) $forced_campaign_id) : '';
+        $forced_campaign_id_norm = $forced_campaign_id !== '' ? $this->ranked_campaign_sanitize_key_request_cached((string) $forced_campaign_id) : '';
         $exact_identifiers = $this->affiliate_normalize_product_identifiers((array) ($context['exact_product_identifiers'] ?? array()));
         $exact_mode = $required_type === 'product' && !empty($exact_identifiers);
         // V6.72.150: Ranking context and repeated campaign scalars are immutable for the complete campaign
@@ -4791,16 +5035,16 @@ JS;
         // remain for callers outside this hot loop.
         $rank_context = $context;
         $rank_context['slot_type'] = $slot_type;
-        $rank_context['_ppar_norm_primary_slug'] = sanitize_key((string) ($context['primary_slug'] ?? ''));
-        $rank_context['_ppar_norm_post_type'] = sanitize_key((string) ($context['post_type'] ?? ''));
+        $rank_context['_ppar_norm_primary_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['primary_slug'] ?? ''));
+        $rank_context['_ppar_norm_post_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['post_type'] ?? ''));
         $rank_context['_ppar_norm_ancestor_ids'] = isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array();
-        $rank_context['_ppar_norm_slugs'] = isset($context['slugs']) && is_array($context['slugs']) ? array_map('sanitize_key', $context['slugs']) : array();
+        $rank_context['_ppar_norm_slugs'] = isset($context['slugs']) && is_array($context['slugs']) ? array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['slugs']) : array();
         $rank_context['_ppar_norm_term_ids'] = isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array();
-        $rank_context['_ppar_norm_direct_term_slugs'] = isset($context['direct_term_slugs']) && is_array($context['direct_term_slugs']) ? array_values(array_filter(array_map('sanitize_key', $context['direct_term_slugs']))) : array();
+        $rank_context['_ppar_norm_direct_term_slugs'] = isset($context['direct_term_slugs']) && is_array($context['direct_term_slugs']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['direct_term_slugs']))) : array();
         $rank_context['_ppar_norm_semantic_primary_target_key'] = method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '';
         $rank_context['_ppar_norm_semantic_ancestor_target_keys'] = method_exists($this, 'automation_normalize_target_key') ? array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array())))) : array();
-        $rank_context['_ppar_norm_product_family_slug'] = sanitize_key((string) ($context['product_family_slug'] ?? ''));
-        foreach ($this->get_campaigns() as $campaign) {
+        $rank_context['_ppar_norm_product_family_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['product_family_slug'] ?? ''));
+        foreach ($this->ranked_campaign_candidate_pool($slot_type, $required_type, $forced_campaign_id_norm, $exact_mode, $exact_identifiers, $rank_context) as $campaign) {
             // Cheap eligibility/match checks first. V6.19 evaluated control and
             // health gates for the entire BUSINESS campaign inventory on every
             // product slot even when a campaign could not match the current page.
@@ -4810,14 +5054,18 @@ JS;
                 continue;
             }
             $runtime_campaign = $campaign;
-            $runtime_campaign['_ppar_runtime_normalized'] = 1;
             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
-            $runtime_campaign['_ppar_norm_id'] = sanitize_key((string) ($campaign['id'] ?? ''));
-            $runtime_campaign['_ppar_norm_network'] = sanitize_key((string) ($campaign['network'] ?? 'manual'));
-            $runtime_campaign['_ppar_norm_creative_type'] = sanitize_key((string) ($campaign['creative_type'] ?? 'banner'));
-            $runtime_campaign['_ppar_norm_render_mode'] = sanitize_key((string) ($campaign['render_mode'] ?? 'image_link'));
-            $runtime_campaign['_ppar_norm_programme_status'] = sanitize_key((string) ($campaign['programme_status'] ?? 'unknown'));
-            $runtime_campaign['_ppar_norm_assignment_mode'] = sanitize_key((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+            if (empty($runtime_campaign['_ppar_runtime_normalized'])) {
+                // Defensive fallback for non-standard callers that did not come
+                // through campaign_from_post(). Semantics stay identical.
+                $runtime_campaign['_ppar_runtime_normalized'] = 1;
+                $runtime_campaign['_ppar_norm_id'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['id'] ?? ''));
+                $runtime_campaign['_ppar_norm_network'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['network'] ?? 'manual'));
+                $runtime_campaign['_ppar_norm_creative_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['creative_type'] ?? 'banner'));
+                $runtime_campaign['_ppar_norm_render_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['render_mode'] ?? 'image_link'));
+                $runtime_campaign['_ppar_norm_programme_status'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['programme_status'] ?? 'unknown'));
+                $runtime_campaign['_ppar_norm_assignment_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+            }
             $active_allowed = !empty($runtime_campaign['active']) || $this->category_product_incident_inactive_auto_allowed($runtime_campaign, $slot_type);
             if (!$active_allowed || !$this->campaign_is_complete($runtime_campaign) || !$this->rule_is_current($runtime_campaign) || !$this->campaign_program_allows_delivery($runtime_campaign) || !$this->otto_awin_product_campaign_seller_ready($runtime_campaign)) {
                 continue;
@@ -4869,9 +5117,9 @@ JS;
         if ($required_type === 'banner') {
             $candidates = $this->banner_dedupe_resolution_variants($candidates);
         }
-        if ($forced_campaign_id === '' && $this->category_large_banner_slot($slot_type)) {
-            $candidates = $this->category_large_banner_rotate_candidates($candidates, $context, $slot_type);
-        } elseif ($forced_campaign_id === '' && $this->banner_distribution_slot($slot_type)) {
+        if ($forced_campaign_id === '' && $this->banner_distribution_slot($slot_type)) {
+            // One distribution path for every banner slot, including category-large
+            // banners. Technical slot/geometry gates have already run above.
             $candidates = $this->banner_distribution_reorder_candidates($candidates, $context, $slot_type);
         }
         // Exact Productwissen identity outranks legacy provider cohorts/strategies.
@@ -6096,19 +6344,9 @@ JS;
     public function handle_save_banner_distribution() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
         check_admin_referer('ppar_save_banner_distribution','ppar_banner_distribution_nonce');
-        $raw = is_array($_POST['ppar_banner_distribution'] ?? null) ? wp_unslash($_POST['ppar_banner_distribution']) : array();
-        $keys = array('otto','awin_other','adcell','direct','digistore24','other');
-        $weights = array();
-        foreach ($keys as $key) {
-            $weights[$key] = max(0, min(100, absint($raw['weights'][$key] ?? 0)));
-        }
-        $enabled = !empty($raw['enabled']);
-        if ($enabled && array_sum($weights) <= 0) {
-            wp_die('Für die automatische Bannerverteilung muss mindestens ein Anteil größer als 0 sein.');
-        }
         update_option(self::OPTION_BANNER_DISTRIBUTION, array(
-            'enabled'=>$enabled,
-            'weights'=>$weights,
+            'enabled'=>true,
+            'mode'=>'relevance_first_stable_even_distribution',
             'updated_at'=>time(),
             'updated_by'=>get_current_user_id(),
         ), false);
@@ -6170,25 +6408,14 @@ JS;
         ?>
         <div class="wrap"><h1>Zuordnungen</h1>
         <div class="notice notice-info inline"><p><strong>Normalfall:</strong> Banner und Produkte werden direkt am Werbemittel automatisch einem eindeutigen Hauptbereich und dessen Unterseiten zugeordnet. Diese Seite ist zugleich die interne Reparaturinstanz: Automatik lassen, fest ersetzen oder vollständig ausblenden.</p></div>
-        <?php $banner_distribution = $this->banner_distribution_settings(); $banner_weights = (array)($banner_distribution['weights'] ?? array()); ?>
+        <?php $banner_distribution = $this->banner_distribution_settings(); ?>
         <h2>Automatische Bannerverteilung</h2>
-        <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="max-width:900px;background:#fff;border:1px solid #c3c4c7;padding:18px;margin-bottom:24px">
-            <input type="hidden" name="action" value="ppar_save_banner_distribution">
-            <?php wp_nonce_field('ppar_save_banner_distribution','ppar_banner_distribution_nonce'); ?>
-            <p><label><input type="checkbox" name="ppar_banner_distribution[enabled]" value="1" <?php checked(!empty($banner_distribution['enabled'])); ?>> <strong>Anteilsgesteuerte Bannerautomatik aktiv</strong></label></p>
-            <p class="description">Relevanz und Sicherheitsprüfungen kommen immer zuerst. Die Anteile gelten nur zwischen aktuell gleich relevanten, technisch freigegebenen Bannerquellen. Fehlt eine Quelle, wird ihr Anteil automatisch auf die vorhandenen Quellen verteilt. Die Auswahl bleibt pro Seiten-/Slot-Kombination eine Woche stabil.</p>
-            <table class="form-table"><tbody>
-                <tr><th>OTTO</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][otto]" value="<?php echo absint($banner_weights['otto'] ?? 40); ?>"> <span class="description">Startwert 40</span></td></tr>
-                <tr><th>Awin – andere Programme</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][awin_other]" value="<?php echo absint($banner_weights['awin_other'] ?? 25); ?>"></td></tr>
-                <tr><th>ADCELL</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][adcell]" value="<?php echo absint($banner_weights['adcell'] ?? 20); ?>"></td></tr>
-                <tr><th>Direktpartner</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][direct]" value="<?php echo absint($banner_weights['direct'] ?? 15); ?>"></td></tr>
-                <tr><th>Digistore24</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][digistore24]" value="<?php echo absint($banner_weights['digistore24'] ?? 0); ?>"> <span class="description">aktuell zurückgestellt</span></td></tr>
-                <tr><th>Sonstige</th><td><input type="number" min="0" max="100" name="ppar_banner_distribution[weights][other]" value="<?php echo absint($banner_weights['other'] ?? 0); ?>"></td></tr>
-            </tbody></table>
-            <p class="description">Die Werte sind relative Zielanteile; 40/25/20/15 entspricht 40/25/20/15 %. Die Summe muss technisch nicht 100 sein, da das System unter den tatsächlich verfügbaren Quellen normalisiert.</p>
-            <?php submit_button('Banneranteile speichern'); ?>
-        </form>
+        <div style="max-width:900px;background:#fff;border:1px solid #c3c4c7;padding:18px;margin-bottom:24px">
+            <p><strong>Aktiv: Relevanz zuerst, danach gleichmäßige Partner-/Werbemittelverteilung.</strong></p>
+            <p class="description">Keine festen Providerquoten. Keine Wochenrotation. Manuelle Ausnahmen darunter bleiben unverändert wirksam.</p>
+        </div>
         <h2>Manuelle Ausnahme suchen</h2>
+
         <form method="get" style="display:flex;gap:8px;max-width:760px"><input type="hidden" name="page" value="affiliate-portal-assignments"><input type="search" name="ppar_page_search" value="<?php echo esc_attr($search); ?>" class="regular-text" placeholder="Seitentitel suchen, z. B. Regendecken" required><?php submit_button('Suchen','secondary','',false); ?></form>
         <?php if ($search !== '') : ?><div style="max-width:900px;margin-top:12px;background:#fff;border:1px solid #c3c4c7;padding:12px 18px"><strong>Treffer:</strong><?php if (!$results) : ?> keine<?php else : ?><ul><?php foreach($results as $result): ?><li><a href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-assignments&page_id='.(int)$result->ID)); ?>"><?php echo esc_html((string)$result->post_title); ?></a> <span class="description">· <?php echo esc_html((string)$result->post_name); ?></span></li><?php endforeach; ?></ul><?php endif; ?></div><?php endif; ?>
         <?php if($page_id): ?><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="max-width:850px;background:#fff;border:1px solid #c3c4c7;padding:22px;margin-top:18px"><input type="hidden" name="action" value="ppar_save_assignment"><input type="hidden" name="page_id" value="<?php echo $page_id; ?>"><?php wp_nonce_field('ppar_save_assignment','ppar_assignment_nonce'); ?><h2><?php echo esc_html(get_the_title($page_id)); ?></h2><table class="form-table"><tr><th>Affiliate-Banner</th><td><select name="ppar_assignment[banner_mode]"><option value="automatic" <?php selected($a['banner_mode'],'automatic'); ?>>Automatik verwenden</option><option value="fixed" <?php selected($a['banner_mode'],'fixed'); ?>>Fest auswählen</option><option value="none" <?php selected($a['banner_mode'],'none'); ?>>Nicht anzeigen</option></select><br><?php $this->creative_dropdown('ppar_assignment[banner_id]','banner',absint($a['banner_id']??0),'Banner auswählen'); ?></td></tr><tr><th>Produktvorschläge</th><td><select name="ppar_assignment[products_mode]"><option value="automatic" <?php selected($a['products_mode'],'automatic'); ?>>Automatik verwenden</option><option value="fixed" <?php selected($a['products_mode'],'fixed'); ?>>Fest auswählen</option><option value="none" <?php selected($a['products_mode'],'none'); ?>>Nicht anzeigen</option></select><p>Position 1: <?php $this->creative_dropdown('ppar_assignment[product_ids][]','product',absint($a['product_ids'][0]??0),'Produkt auswählen'); ?></p><p>Position 2: <?php $this->creative_dropdown('ppar_assignment[product_ids][]','product',absint($a['product_ids'][1]??0),'optional'); ?></p><p>Position 3: <?php $this->creative_dropdown('ppar_assignment[product_ids][]','product',absint($a['product_ids'][2]??0),'optional'); ?></p></td></tr><tr><th>Reparaturgrund</th><td><input type="text" class="regular-text" style="width:min(760px,100%)" name="ppar_assignment[repair_reason]" value="<?php echo esc_attr((string)($a['repair_reason']??'')); ?>"><p class="description">Pflicht, sobald Banner oder Produkte manuell festgelegt/deaktiviert werden. Bei reiner Automatik darf das Feld leer bleiben.</p></td></tr><tr><th>Vererbung</th><td><label><input type="checkbox" name="ppar_assignment[apply_descendants]" value="1" <?php checked(!empty($a['apply_descendants'])); ?>> Auf strukturell untergeordnete Seiten anwenden</label></td></tr></table><?php submit_button('Ausnahme speichern'); ?></form><?php endif; ?>
@@ -8357,7 +8584,7 @@ JS;
             $creative_ok = trim((string)($campaign['image_url'] ?? '')) !== '' || trim((string)($campaign['title'] ?? '')) !== '';
         }
         $placements_ok = !empty($campaign['placements']) && is_array($campaign['placements']);
-        $assign_mode = sanitize_key((string)($campaign['assignment_mode'] ?? 'page_tree'));
+        $assign_mode = isset($campaign['_ppar_norm_assignment_mode']) ? (string) $campaign['_ppar_norm_assignment_mode'] : sanitize_key((string)($campaign['assignment_mode'] ?? 'page_tree'));
         if ($assign_mode === 'fallback') { $assignment_ok = true; }
         elseif ($assign_mode === 'keywords') { $assignment_ok = !empty($campaign['match_keywords']); }
         elseif ($assign_mode === 'exact_page') { $assignment_ok = !empty($campaign['page_id']); }

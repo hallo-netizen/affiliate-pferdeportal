@@ -899,10 +899,10 @@ trait PPAR_Network_Sync_Trait {
         if (isset($rows['advertiserId'])) { $rows=array($rows); }
         if (!is_array($rows)) { return new WP_Error('awin_report_schema','Awin-Performance-Report hat kein auswertbares Zeilenschema.'); }
 
-        // Keine Eigenaggregation: eine sichtbare Tabellenzeile darf nur eine
-        // einzelne Originalzeile des Providerreports repraesentieren. OTTO ist
-        // eindeutig ueber seine Advertiser-ID. Die generische Awin-Zeile bleibt
-        // bei mehreren Fremd-Advertisern bewusst "nicht verfuegbar".
+        // Keine Eigenaggregation: jede Awin-Advertiserzeile bleibt als echte
+        // Provider-Originalzeile erhalten. OTTO wird nur über seine feste
+        // Advertiser-ID abgetrennt. Bei mehreren Awin-Advertisern gibt es bewusst
+        // keinen selbst berechneten Summenwert; die Originalzeilen bleiben sichtbar.
         $buckets=array('awin'=>array(),'otto'=>array());
         foreach ($rows as $row) {
             if (!is_array($row)) { continue; }
@@ -912,25 +912,42 @@ trait PPAR_Network_Sync_Trait {
         }
         $out=array();
         foreach ($buckets as $bucket=>$bucket_rows) {
-            if (count($bucket_rows)!==1) {
-                $out[$bucket]=null;
-                continue;
+            $details=array();
+            foreach ($bucket_rows as $row) {
+                if (!is_array($row)) { continue; }
+                $currency=strtoupper(sanitize_text_field((string)($row['currency']??'EUR')));
+                if (!preg_match('/^[A-Z]{3}$/',$currency)) { $currency='EUR'; }
+                $conversion=null;
+                foreach (array('conversionRate','conversion','conversion_rate') as $key) {
+                    if (array_key_exists($key,$row) && is_numeric($row[$key])) { $conversion=(float)$row[$key]; break; }
+                }
+                $advertiser_id=absint($row['advertiserId']??0);
+                $label=sanitize_text_field((string)($row['advertiserName']??$row['advertiser']??''));
+                if ($label==='') { $label=$advertiser_id>0 ? 'Awin Advertiser '.$advertiser_id : 'Awin Originalzeile'; }
+                $details[]=array(
+                    'label'=>$label,
+                    'external_id'=>$advertiser_id>0?(string)$advertiser_id:'',
+                    'clicks'=>array_key_exists('clicks',$row)&&is_numeric($row['clicks'])?max(0,(int)$row['clicks']):null,
+                    'orders'=>array_key_exists('totalNo',$row)&&is_numeric($row['totalNo'])?max(0,(int)$row['totalNo']):null,
+                    'sales'=>array_key_exists('totalValue',$row)&&is_numeric($row['totalValue'])?(float)$row['totalValue']:null,
+                    'commission'=>array_key_exists('totalComm',$row)&&is_numeric($row['totalComm'])?(float)$row['totalComm']:null,
+                    'conversion'=>$conversion,
+                    'currency'=>$currency,
+                );
             }
-            $row=$bucket_rows[0];
-            $currency=strtoupper(sanitize_text_field((string)($row['currency']??'EUR')));
-            if (!preg_match('/^[A-Z]{3}$/',$currency)) { $currency='EUR'; }
-            $conversion=null;
-            foreach (array('conversionRate','conversion','conversion_rate') as $key) {
-                if (array_key_exists($key,$row) && is_numeric($row[$key])) { $conversion=(float)$row[$key]; break; }
+            if (count($details)===1) {
+                $one=$details[0];
+                $out[$bucket]=array(
+                    'clicks'=>$one['clicks'],'orders'=>$one['orders'],'sales'=>$one['sales'],
+                    'commission'=>$one['commission'],'conversion'=>$one['conversion'],
+                    'currency'=>$one['currency'],'details'=>$details,
+                );
+            } else {
+                $out[$bucket]=array(
+                    'clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null,
+                    'currency'=>'EUR','details'=>$details,
+                );
             }
-            $out[$bucket]=array(
-                'clicks'=>array_key_exists('clicks',$row)&&is_numeric($row['clicks'])?max(0,(int)$row['clicks']):null,
-                'orders'=>array_key_exists('totalNo',$row)&&is_numeric($row['totalNo'])?max(0,(int)$row['totalNo']):null,
-                'sales'=>array_key_exists('totalValue',$row)&&is_numeric($row['totalValue'])?(float)$row['totalValue']:null,
-                'commission'=>array_key_exists('totalComm',$row)&&is_numeric($row['totalComm'])?(float)$row['totalComm']:null,
-                'conversion'=>$conversion,
-                'currency'=>$currency,
-            );
         }
         return $out;
     }
@@ -948,7 +965,7 @@ trait PPAR_Network_Sync_Trait {
             foreach (array('awin','otto') as $bucket) {
                 $row=is_array($result[$bucket]??null)?$result[$bucket]:null;
                 if (!$row) {
-                    $reports[$bucket]['periods'][$period]=array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null);
+                    $reports[$bucket]['periods'][$period]=array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null,'details'=>array());
                     continue;
                 }
                 $reports[$bucket]['currency']=(string)($row['currency']??'EUR');
@@ -956,6 +973,7 @@ trait PPAR_Network_Sync_Trait {
                     'clicks'=>$row['clicks']??null,'orders'=>$row['orders']??null,
                     'sales'=>$row['sales']??null,'commission'=>$row['commission']??null,
                     'conversion'=>$row['conversion']??null,
+                    'details'=>is_array($row['details']??null)?$row['details']:array(),
                 );
             }
         }
@@ -978,56 +996,84 @@ trait PPAR_Network_Sync_Trait {
         $settings=$this->network_settings('adcell');
         $username=$this->network_secret('adcell','username',$settings);
         $password=$this->network_secret('adcell','password',$settings);
-        if ($username==='' || $password==='') { return new WP_Error('adcell_report_credentials_missing','ADCELL-Reportingzugang fehlt.'); }
+        if ($username==='' || $password==='') { return new WP_Error('adcell_report_credentials_missing','ADCELL-Reportingzugang fehlt (Benutzername/Schnittstellen-Passwort).'); }
         $url=add_query_arg(array('sarts'=>'p','pid'=>'a','status'=>'a','subid'=>'','eventid'=>'a','timestart'=>absint($start),'timeend'=>absint($end),'uname'=>$username,'pass'=>$password),'https://www.adcell.de/csv_affilistats.php');
-        $response=$this->api_response(wp_safe_remote_get($url,array('timeout'=>25,'redirection'=>1,'headers'=>array('Accept'=>'text/csv,text/plain'),'limit_response_size'=>4194304)));
-        if (empty($response['ok'])) { return new WP_Error('adcell_report_http','ADCELL-Statistikreport nicht verfuegbar.'); }
-        $body=trim((string)($response['body']??''));
+        $response=$this->api_response(wp_safe_remote_get($url,array('timeout'=>25,'redirection'=>2,'headers'=>array('Accept'=>'text/csv,text/plain,*/*'),'limit_response_size'=>4194304)));
+        if (empty($response['ok'])) { return new WP_Error('adcell_report_http','ADCELL-Statistikreport nicht verfügbar: '.sanitize_text_field((string)($response['message']??'HTTP-Fehler'))); }
+        $body=(string)($response['body']??'');
+        $body=preg_replace('/^\xEF\xBB\xBF/','',$body);
+        $body=trim($body);
         if ($body==='' || stripos($body,'<html')!==false) { return new WP_Error('adcell_report_body','ADCELL-Statistikreport ist leer oder kein CSV.'); }
-        $lines=preg_split('/\\r\\n|\\r|\\n/',$body,-1,PREG_SPLIT_NO_EMPTY);
-        if (!$lines) { return new WP_Error('adcell_report_empty','ADCELL-Statistikreport enthaelt keine Zeilen.'); }
-        $headers=str_getcsv(array_shift($lines),';');
+        $lines=preg_split('/\r\n|\r|\n/',$body,-1,PREG_SPLIT_NO_EMPTY);
+        if (!$lines) { return new WP_Error('adcell_report_empty','ADCELL-Statistikreport enthält keine Zeilen.'); }
+        $header_line=(string)array_shift($lines);
+        $delimiter=substr_count($header_line,';')>=substr_count($header_line,',')?';':',';
+        $headers=str_getcsv($header_line,$delimiter,'"','\\');
         $norm=array();
-        foreach ($headers as $i=>$h) { $k=strtolower(remove_accents(trim((string)$h)));$k=preg_replace('/[^a-z0-9]+/','_',$k);$norm[$i]=trim($k,'_'); }
-        $find=function($aliases) use($norm){ foreach($norm as $i=>$h){ if(in_array($h,$aliases,true)) return $i; } return null; };
-        $click_i=$find(array('klicks','clicks','click'));
-        $lead_i=$find(array('leads','lead'));
-        $sale_count_i=$find(array('sales','sale','verkaeufe','verkaufe'));
-        $revenue_i=$find(array('umsatz','warenwert','sales_value','sale_value'));
-        $commission_i=$find(array('provision','provisionen','commission','earnings','verdienst'));
-        $conversion_i=$find(array('conversion','conversion_rate','conversionrate','konversion','konversionsrate'));
-        if ($click_i===null && $lead_i===null && $sale_count_i===null && $revenue_i===null && $commission_i===null && $conversion_i===null) { return new WP_Error('adcell_report_headers','ADCELL-CSV enthaelt keine eindeutig gebundenen Statistikspalten.'); }
-
-        // Keine eigene Summe ueber CSV-Zeilen. Nur wenn ADCELL fuer den angefragten
-        // Zeitraum genau eine Original-Datenzeile liefert, wird sie unveraendert
-        // als Providerwert angezeigt. Mehrere Zeilen bleiben im kompakten Dashboard
-        // bewusst unverfuegbar statt von uns zusammengerechnet zu werden.
-        $data_lines=array_values(array_filter($lines,static function($line){return trim((string)$line)!=='';}));
-        if (count($data_lines)!==1) {
-            return array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null);
+        foreach ($headers as $i=>$h) {
+            $k=strtolower(remove_accents(trim((string)$h)));
+            $k=preg_replace('/[^a-z0-9]+/','_',$k);
+            $norm[$i]=trim($k,'_');
         }
-        $cols=str_getcsv($data_lines[0],';');
-        $read=function($idx) use($cols){ if($idx===null || !isset($cols[$idx])) return null; return $this->partner_analytics_decimal($cols[$idx]); };
-        $clicks=$read($click_i);
-        $lead=$read($lead_i); $sale_count=$read($sale_count_i);
-        $orders=$lead!==null?$lead:$sale_count;
-        $sales=$read($revenue_i); $commission=$read($commission_i); $conversion=$read($conversion_i);
-        return array(
-            'clicks'=>$clicks===null?null:max(0,(int)$clicks),
-            'orders'=>$orders===null?null:max(0,(int)$orders),
-            'sales'=>$sales,'commission'=>$commission,'conversion'=>$conversion,
-        );
+        $find=function($aliases) use($norm){
+            foreach($norm as $i=>$h){ if(in_array($h,$aliases,true)) return $i; }
+            return null;
+        };
+        $click_i=$find(array('klicks','klick','clicks','click','anzahl_klicks','anzahl_clicks','click_count','klickanzahl'));
+        $lead_i=$find(array('leads','lead','anzahl_leads','lead_count'));
+        $sale_count_i=$find(array('sales','sale','verkaeufe','verkaufe','verkaeufe_anzahl','verkaufe_anzahl','anzahl_sales','anzahl_verkaeufe','anzahl_verkaufe','sale_count'));
+        $revenue_i=$find(array('umsatz','warenwert','sales_value','sale_value','umsatz_eur','warenwert_eur'));
+        $commission_i=$find(array('provision','provisionen','commission','earnings','verdienst','provision_eur','verdienst_eur'));
+        $conversion_i=$find(array('conversion','conversion_rate','conversionrate','konversion','konversionsrate','cr'));
+        $program_i=$find(array('programm','programmname','programm_name','program','program_name','partnerprogramm','partner_programm','partnerprogramm_name'));
+        $program_id_i=$find(array('pid','program_id','programid','programm_id','programmid','programmnummer','programm_nr'));
+        if ($click_i===null && $lead_i===null && $sale_count_i===null && $revenue_i===null && $commission_i===null && $conversion_i===null) {
+            return new WP_Error('adcell_report_headers','ADCELL-CSV enthält keine gebundene Statistikspalte. Gelieferte Spalten: '.sanitize_text_field(implode(', ',array_values($norm))));
+        }
+
+        // Provider-original only: retain each ADCELL row; never sum rows ourselves.
+        $details=array();
+        foreach ((array)$lines as $row_index=>$line) {
+            if (trim((string)$line)==='') { continue; }
+            $cols=str_getcsv((string)$line,$delimiter,'"','\\');
+            if (!array_filter($cols,static function($v){return trim((string)$v)!=='';})) { continue; }
+            $read=function($idx) use($cols){ if($idx===null || !isset($cols[$idx])) return null; return $this->partner_analytics_decimal($cols[$idx]); };
+            $clicks=$read($click_i);
+            $lead=$read($lead_i); $sale_count=$read($sale_count_i);
+            $orders=$lead!==null?$lead:$sale_count;
+            $label=$program_i!==null && isset($cols[$program_i])?sanitize_text_field((string)$cols[$program_i]):'';
+            $external_id=$program_id_i!==null && isset($cols[$program_id_i])?sanitize_text_field((string)$cols[$program_id_i]):'';
+            if ($label==='') { $label=$external_id!==''?'ADCELL Programm '.$external_id:'ADCELL Originalzeile '.($row_index+1); }
+            $details[]=array(
+                'label'=>$label,'external_id'=>$external_id,
+                'clicks'=>$clicks===null?null:max(0,(int)$clicks),
+                'orders'=>$orders===null?null:max(0,(int)$orders),
+                'sales'=>$read($revenue_i),'commission'=>$read($commission_i),'conversion'=>$read($conversion_i),
+                'currency'=>'EUR',
+            );
+        }
+        if (!$details) { return new WP_Error('adcell_report_no_data_rows','ADCELL-CSV enthält keine auswertbare Original-Datenzeile.'); }
+        if (count($details)===1) {
+            $only=$details[0];
+            return array('clicks'=>$only['clicks'],'orders'=>$only['orders'],'sales'=>$only['sales'],'commission'=>$only['commission'],'conversion'=>$only['conversion'],'details'=>$details);
+        }
+        return array('clicks'=>null,'orders'=>null,'sales'=>null,'commission'=>null,'conversion'=>null,'details'=>$details);
     }
 
     private function partner_analytics_adcell_report() {
         $report=array('source'=>'ADCELL Affiliate-Statistik CSV','currency'=>'EUR','updated_at'=>time(),'periods'=>array());
-        $successful=0;
+        $successful=0; $errors=array();
         foreach ($this->partner_analytics_period_windows() as $period=>$window) {
             $row=$this->partner_analytics_adcell_range($window['start'],$window['end']);
-            if (is_wp_error($row)) { continue; }
+            if (is_wp_error($row)) {
+                $errors[]=$period.': '.sanitize_text_field($row->get_error_message());
+                continue;
+            }
             $report['periods'][$period]=$row;$successful++;
         }
-        return $successful>0?$report:new WP_Error('adcell_reports_unavailable','Kein ADCELL-Reportzeitraum konnte geladen werden.');
+        return $successful>0
+            ? $report
+            : new WP_Error('adcell_reports_unavailable','Kein ADCELL-Reportzeitraum konnte geladen werden'.($errors?': '.implode(' | ',$errors):'.'));
     }
 
     private function partner_analytics_refresh_provider($provider) {
@@ -1035,7 +1081,9 @@ trait PPAR_Network_Sync_Trait {
         $result=null;
         if ($provider==='awin') {
             $result=$this->partner_analytics_awin_reports();
-            if (!is_wp_error($result)) { foreach ($result as $key=>$report) { $this->partner_analytics_ingest_original_report($key,$report); } }
+            if (!is_wp_error($result)) {
+                foreach ($result as $key=>$report) { $this->partner_analytics_ingest_original_report($key,$report); }
+            }
         } elseif ($provider==='adcell') {
             $result=$this->partner_analytics_adcell_report();
             if (!is_wp_error($result)) { $this->partner_analytics_ingest_original_report('adcell',$result); }
@@ -1043,8 +1091,23 @@ trait PPAR_Network_Sync_Trait {
             $result=apply_filters('ppar_partner_analytics_fetch_provider_report',null,$provider,$this->partner_analytics_period_windows(),self::PROVIDER_CONTRACT_VERSION);
             if (is_array($result)) { $this->partner_analytics_ingest_original_report($provider,$result); }
         }
-        $state=get_option('ppar_partner_analytics_refresh_state_v1',array());$state=is_array($state)?$state:array();
-        $state[$provider]=array('checked_at'=>time(),'status'=>is_wp_error($result)?'unavailable':(is_array($result)?'imported':'no_adapter'),'message'=>is_wp_error($result)?sanitize_text_field($result->get_error_message()):'');
+
+        $state=get_option('ppar_partner_analytics_refresh_state_v1',array());
+        $state=is_array($state)?$state:array();
+        $state[$provider]=array(
+            'checked_at'=>time(),
+            'status'=>is_wp_error($result)?'unavailable':(is_array($result)?'imported':'no_adapter'),
+            'message'=>is_wp_error($result)?sanitize_text_field($result->get_error_message()):(is_array($result)?'Originalreport importiert.':'Für diesen Provider ist noch kein verifizierter Original-Reportingadapter gebunden.')
+        );
+        // OTTO is not a separate adapter. Its original figures are delivered by
+        // the Awin advertiser report and must not be overwritten with no_adapter.
+        if ($provider==='awin') {
+            $state['otto']=array(
+                'checked_at'=>time(),
+                'status'=>is_wp_error($result)?'unavailable':'imported',
+                'message'=>is_wp_error($result)?sanitize_text_field($result->get_error_message()):'OTTO-Originalzeile wird über den Awin-Advertiserreport importiert.'
+            );
+        }
         update_option('ppar_partner_analytics_refresh_state_v1',$state,false);
         return $result;
     }
@@ -1052,7 +1115,7 @@ trait PPAR_Network_Sync_Trait {
     private function partner_analytics_refresh_all_reports() {
         $results=array();
         foreach (array_keys($this->provider_registry()) as $provider) {
-            if (in_array($provider,array('manual','direct'),true)) { continue; }
+            if (in_array($provider,array('manual','direct','otto'),true)) { continue; }
             $results[$provider]=$this->partner_analytics_refresh_provider($provider);
         }
         return $results;
@@ -1067,6 +1130,14 @@ trait PPAR_Network_Sync_Trait {
 
     public function run_partner_analytics_refresh() {
         return $this->partner_analytics_refresh_all_reports();
+    }
+
+    public function handle_partner_analytics_refresh_now() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer('ppar_partner_analytics_refresh_now');
+        $this->partner_analytics_refresh_all_reports();
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-kiss-partners','ppar_stats_refreshed'=>'1'), admin_url('admin.php')));
+        exit;
     }
 
     public function handle_run_network_sync() {

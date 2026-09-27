@@ -2869,7 +2869,7 @@ trait PPAR_Automation_Suite_Trait {
         if (!preg_match('/^(page|category|journal|market|uge_group|uge_term|pa_breed|pa_breed_group):([a-z0-9_-]+)$/', $key, $match)) {
             return '';
         }
-        return $match[1] . ':' . sanitize_key($match[2]);
+        return $match[1] . ':' . $this->ranked_campaign_sanitize_key_request_cached($match[2]);
     }
 
     private function automation_campaign_exact_target_rank($campaign, $context) {
@@ -2878,15 +2878,15 @@ trait PPAR_Automation_Suite_Trait {
         if (!$wanted) {
             return null;
         }
-        $primary = isset($context['_ppar_norm_primary_slug']) ? (string) $context['_ppar_norm_primary_slug'] : sanitize_key((string) ($context['primary_slug'] ?? ''));
-        $post_type = isset($context['_ppar_norm_post_type']) ? (string) $context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
+        $primary = isset($context['_ppar_norm_primary_slug']) ? (string) $context['_ppar_norm_primary_slug'] : $this->ranked_campaign_sanitize_key_request_cached((string) ($context['primary_slug'] ?? ''));
+        $post_type = isset($context['_ppar_norm_post_type']) ? (string) $context['_ppar_norm_post_type'] : $this->ranked_campaign_sanitize_key_request_cached((string) ($context['post_type'] ?? ''));
         $available = array();
         $semantic_primary = isset($context['_ppar_norm_semantic_primary_target_key']) ? (string) $context['_ppar_norm_semantic_primary_target_key'] : (method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '');
         $semantic_ancestors = isset($context['_ppar_norm_semantic_ancestor_target_keys']) && is_array($context['_ppar_norm_semantic_ancestor_target_keys']) ? $context['_ppar_norm_semantic_ancestor_target_keys'] : array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array()))));
         if ($semantic_primary !== '') { $available[] = $semantic_primary; }
         foreach ($semantic_ancestors as $semantic_key) { $available[] = $semantic_key; }
         $slot_type = isset($context['slot_type']) ? (string) $context['slot_type'] : '';
-        $slot_type = isset($context['_ppar_norm_post_type']) ? $slot_type : sanitize_key($slot_type);
+        $slot_type = isset($context['_ppar_norm_post_type']) ? $slot_type : $this->ranked_campaign_sanitize_key_request_cached($slot_type);
         if ($post_type === 'page' && $slot_type === 'anzeigenmarkt_top_banner') {
             $available[] = 'market:anzeigenmarkt';
         }
@@ -2911,7 +2911,7 @@ trait PPAR_Automation_Suite_Trait {
         }
         $direct_term_slugs = isset($context['_ppar_norm_direct_term_slugs']) && is_array($context['_ppar_norm_direct_term_slugs']) ? $context['_ppar_norm_direct_term_slugs'] : (array) ($context['direct_term_slugs'] ?? array());
         foreach ($direct_term_slugs as $slug) {
-            $slug = isset($context['_ppar_norm_direct_term_slugs']) ? (string) $slug : sanitize_key((string) $slug);
+            $slug = isset($context['_ppar_norm_direct_term_slugs']) ? (string) $slug : $this->ranked_campaign_sanitize_key_request_cached((string) $slug);
             if ($slug === '') {
                 continue;
             }

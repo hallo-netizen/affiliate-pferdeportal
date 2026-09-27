@@ -12,6 +12,15 @@ if (!defined('ABSPATH')) { exit; }
  * - combined cards are optional and only join offers sharing an exact GTIN.
  */
 trait PPAR_Idealo_Trait {
+    /**
+     * V6.72.160 performance-only: request-local exact-GTIN index for combined
+     * product cards. It changes only the candidate search order: the same exact
+     * GTIN condition that previously ran last now narrows the pool before the
+     * expensive relevance/control/health gates. Admin/Cron/REST/CLI/AJAX keep
+     * the historical full-scan path.
+     */
+    private $multiprovider_gtin_candidate_index_request_cache = null;
+
     const IDEALO_REFRESH_HOOK = 'ppar_idealo_refresh_v1';
     const IDEALO_MANUAL_REFRESH_HOOK = 'ppar_idealo_manual_refresh_v1';
     const IDEALO_MANUAL_WORKER_ACTION = 'ppar_idealo_manual_refresh_worker_v2';
@@ -1028,6 +1037,59 @@ trait PPAR_Idealo_Trait {
     }
 
     /**
+     * V6.72.160: build one ordered request-local GTIN -> campaign-index map for
+     * public frontend reads. The original get_campaigns() order is retained so
+     * same-network winner selection is byte-for-byte equivalent. This is only a
+     * preselection; every historical delivery/relevance/control/health gate still
+     * executes for the resulting candidates.
+     */
+    private function multiprovider_exact_gtin_candidate_pool($wanted_gtins) {
+        $wanted_gtins=$this->idealo_normalize_gtins_from_values((array)$wanted_gtins);
+        if (!$wanted_gtins || !method_exists($this,'get_campaigns')) { return array(); }
+
+        $cache_allowed=method_exists($this,'ranked_campaigns_request_cache_allowed')
+            ? $this->ranked_campaigns_request_cache_allowed()
+            : false;
+        if (!$cache_allowed) {
+            // Non-frontend paths retain the historical full scan exactly.
+            return array_values((array)$this->get_campaigns());
+        }
+
+        $campaigns=array_values((array)$this->get_campaigns());
+        if (!is_array($this->multiprovider_gtin_candidate_index_request_cache)) {
+            $index=array();
+            foreach ($campaigns as $position=>$candidate) {
+                if (!is_array($candidate) || empty($candidate['active'])) { continue; }
+                $creative_type=isset($candidate['_ppar_norm_creative_type'])
+                    ? (string)$candidate['_ppar_norm_creative_type']
+                    : sanitize_key((string)($candidate['creative_type']??''));
+                if ($creative_type!=='product') { continue; }
+                foreach ($this->multiprovider_campaign_gtins($candidate) as $gtin) {
+                    $gtin=(string)$gtin;
+                    if ($gtin==='') { continue; }
+                    if (!isset($index[$gtin])) { $index[$gtin]=array(); }
+                    $index[$gtin][(int)$position]=true;
+                }
+            }
+            $this->multiprovider_gtin_candidate_index_request_cache=$index;
+        }
+
+        $positions=array();
+        foreach ($wanted_gtins as $gtin) {
+            foreach (array_keys((array)($this->multiprovider_gtin_candidate_index_request_cache[(string)$gtin]??array())) as $position) {
+                $positions[(int)$position]=true;
+            }
+        }
+        if (!$positions) { return array(); }
+        ksort($positions,SORT_NUMERIC);
+        $out=array();
+        foreach (array_keys($positions) as $position) {
+            if (isset($campaigns[$position]) && is_array($campaigns[$position])) { $out[]=$campaigns[$position]; }
+        }
+        return $out;
+    }
+
+    /**
      * V6.61.4: iPN image_url is a tracking wrapper. Product cards must load the
      * real HTTPS image target, not the tracking endpoint. Current feed 2901 wraps
      * the real cdn.idealo.com path in trg (sometimes through gfx.productsup.io).
@@ -1146,13 +1208,16 @@ trait PPAR_Idealo_Trait {
         if ($current_url==='') { $current_url=$this->multiprovider_runtime_tracking_url((string)($campaign['url']??''),(string)($campaign['network']??'')); }
         $base=array('network'=>sanitize_key((string)($campaign['network']??'')),'url'=>$current_url,'label'=>$this->multiprovider_offer_label($campaign['network']??''));
         if (!in_array($this->idealo_output_mode(), array('combined','automatic'), true)) { return $current_url!==''?array($base):array(); }
-        if (!$this->multiprovider_campaign_gtins($campaign)) { return $current_url!==''?array($base):array(); }
+        $base_gtins=$this->multiprovider_campaign_gtins($campaign);
+        if (!$base_gtins) { return $current_url!==''?array($base):array(); }
         $offers=array();
-        foreach ($this->get_campaigns() as $candidate) {
+        foreach ($this->multiprovider_exact_gtin_candidate_pool($base_gtins) as $candidate) {
             if (!is_array($candidate)||empty($candidate['active'])||sanitize_key((string)($candidate['creative_type']??''))!=='product'||!$this->campaign_is_complete($candidate)||!$this->campaign_program_allows_delivery($candidate)||!$this->campaign_source_allows_delivery($candidate)||!$this->campaign_slot_allowed($candidate,$slot_type)) { continue; }
+            // Defensive parity check: the request index only narrows the pool;
+            // the historical exact-GTIN condition remains authoritative.
+            if (!$this->multiprovider_campaigns_share_exact_gtin($campaign,$candidate)) { continue; }
             $rank_context=$context; $rank_context['slot_type']=sanitize_key((string)$slot_type); if (!$this->campaign_match_rank($candidate,$rank_context)) { continue; }
             if (!$this->campaign_control_allows_delivery($candidate,$slot_type)||!$this->campaign_health_allows_delivery($candidate)) { continue; }
-            if (!$this->multiprovider_campaigns_share_exact_gtin($campaign,$candidate)) { continue; }
             $network=sanitize_key((string)($candidate['network']??'')); if ($network===''||isset($offers[$network])) { continue; }
             if ($network==='idealo' && $this->idealo_link_strategy()==='comparison') { continue; }
             $candidate_post_id=absint($candidate['post_id']??0);

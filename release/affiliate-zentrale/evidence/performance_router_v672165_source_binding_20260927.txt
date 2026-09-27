@@ -1,0 +1,41 @@
+PFERDE ATELIER — AFFILIATE ROUTER 6.72.165 PERFORMANCE SOURCE BINDING / HARDTEST EVIDENCE
+========================================================================================
+
+SCOPE
+- Performance only. No category/structure/content/design/ranking/provider/slot/veto/publish/quality-rule change.
+- Exact functional base: installed/tested Affiliate Router 6.72.164 complete package.
+- 6.72.165 bundles the already hard-tested request-local normalization reductions and binds the exact current live-source delta into the official Current source authority.
+- Source tree: 27 files; no add/remove; exactly five files differ from stale GitHub 6.72.152 current tree because GitHub had not yet been synchronized to the already installed 6.72.164 state. Relative to exact 6.72.164, the performance candidate changes only main router + automation suite; 6.72.165 then changes version markers only versus that candidate.
+
+FINAL LOCAL HARD SIMULATION AGAINST EXACT 6.72.164 FALLBACK
+- Dataset: 2,012 historical recovery rows.
+- Campaign normalization output hash: IDENTICAL in frontend/diagnostic/mutating/admin/ajax/rest/cron/cli modes.
+- Normal frontend sanitize_key: 35,390 -> 2,726.
+- Normal frontend sanitize_text_field: 16,096 -> 133.
+- Candidate indexes output hash: IDENTICAL.
+- Normal frontend index sanitize_key: 8,062 -> 2,027.
+- Normal frontend index sanitize_text_field: 20,120 -> 162.
+- 5,000 deterministic product identifier cases: output hash IDENTICAL; sanitize_text_field 10,000 -> 54.
+- Diagnostic sanitizer hooks active: output hashes IDENTICAL and original call counts retained.
+- Mutating sanitizer filters: output hashes IDENTICAL.
+- Admin/AJAX/REST/Cron/WP-CLI: output hashes IDENTICAL and original uncached behavior retained.
+
+PACKAGE / TREE GATES
+- PHP lint: 21/21 PASS on working tree.
+- PHP lint: 21/21 PASS on fresh-unpacked final ZIP.
+- Final source file count: 27/27.
+- Final ZIP fresh-unpack: byte-identical to tested 6.72.165 working tree.
+- Exact 6.72.164 fallback fresh-unpack: byte-identical to baseline tree.
+- 6.72.165 installer SHA256: b8fc3af23a262a3b749163e241d5ac7ab0d666b8fb2396fe45426e8433fd7bb0
+- 6.72.164 fallback SHA256: 97a7b7b4b45008d93faa9a6dc76976f501a233804adc31bb5c4da37a4011b17f
+- 6.72.165 source-manifest file SHA256: f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c
+
+REAL SERVER READBACK BASIS
+- Latest performance diagnosis: 2026-09-27T10:07:13Z to 10:08:18Z.
+- Heavy Paddock pages continue to show 84,954 sanitize_key fires under the diagnostic hook, with router line 64 sampled; the optimization intentionally bypasses request caching while sanitizer filters are attached, preserving diagnostic/filter semantics.
+- Template-Kit 1.50.573 asset bundle is separately live/read back; this router change does not alter it.
+
+RELEASE POLICY
+- Exact 6.72.165 source is bound atomically to release/affiliate-zentrale/current/affiliate-portal-router together with CURRENT_SOURCE_SHA256.txt, this evidence and governance.
+- Installation is the next authorized server step, followed by exactly one real diagnostic/readback.
+- If any functional regression appears, restore the exact complete 6.72.164 fallback.
