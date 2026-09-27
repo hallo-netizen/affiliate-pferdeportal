@@ -11,13 +11,33 @@ DRAFTS={
 EXPECTED={
 "01_regendecken.html":{"item_index":1,"sha256":"d3957d5bec9e69c45bd20d58d0cfaaf0da8937024b194e0790a38f58ad456db3"},
 "08_schermaschinen.html":{"item_index":8,"sha256":"849fdfec62f3cfa8a6990ae1adddceb355710f1897a7fc36534e51f2a96ee4c9"},
-"15_tuev_kosten.html":{"item_index":15,"sha256":"f9cf08d714e0e190639c76c2c335ca0122d489ed1247c411ca6f18b3c053cee4"},
+"15_tuev_kosten.html":{"item_index":15,"sha256":"c8a0bcbf6f306fe720dd8e72fbba56a490897cab3f2b0c426690b4c6ee41fc43"},
 }
 def write_all(outdir:Path)->dict:
     outdir.mkdir(parents=True,exist_ok=True)
     rows=[]
     for name,b64 in DRAFTS.items():
         body=gzip.decompress(base64.b64decode(b64)).decode("utf-8")
+        if name=="15_tuev_kosten.html":
+            bindings=[
+                (
+                    "Praktisch hilft eine feste Reihenfolge: zuerst den Anhänger eindeutig einordnen, danach die passende Prüfstelle auswählen und erst dann den aktuellen Betrag nachsehen. Damit bleiben Fahrzeugdaten und Preisquelle sauber getrennt. Für die Vorbereitung genügt es, die Angaben aus den Fahrzeugpapieren bereitzuhalten und anschließend gezielt die Übersicht der ausgewählten Organisation für das eigene Bundesland zu öffnen. So wird nicht zwischen unpassenden Preisbeispielen hin- und hergesprungen.",
+                    "fact-k7-f1c165d83a4d-4",
+                    "f5cd03906877c484fcb9d85accdc936e40637e4ae245b48df244e11a8b25711f",
+                ),
+                (
+                    "Damit wird aus der Frage „Was kostet der TÜV?“ kein Ratespiel: Erst den eigenen Anhänger sauber einordnen, dann die passende Preisquelle nutzen. Mehr braucht es für eine nachvollziehbare Kostenschätzung nicht. Wenn Terminort oder Prüforganisation noch nicht feststehen, ist eine konkrete Zahl dagegen zwangsläufig unsicher. In diesem Fall ist es sinnvoller, die Auswahl zuerst festzulegen und den Betrag erst danach zu übernehmen. So bleibt die Planung aktuell und nachvollziehbar.",
+                    "fact-k7-f1c165d83a4d-5",
+                    "de6b7d87788d7b26948fd95c941db896774ead598e484aac70efa890667c0c33",
+                ),
+            ]
+            for visible,fact_id,source_hash in bindings:
+                old_p="<p>"+visible+"</p>"
+                trace='<span class="ppm-source-trace" data-fact-id="'+fact_id+'" data-source-hash="'+source_hash+'" data-source-title="adac-hu-kosten"></span>'
+                new_p='<p data-fact-ids="'+fact_id+'">'+visible+trace+"</p>"
+                if old_p not in body:
+                    raise SystemExit("TRIAL3_TUEV_FACT_BIND_TARGET_MISSING:"+fact_id)
+                body=body.replace(old_p,new_p,1)
         sha=hashlib.sha256(body.encode("utf-8")).hexdigest()
         if sha!=EXPECTED[name]["sha256"]:
             raise SystemExit("TRIAL3_DRAFT_HASH_MISMATCH:"+name)
