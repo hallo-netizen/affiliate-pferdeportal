@@ -1,0 +1,126 @@
+name: Konzept 7 Live Writer Check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Restore exact bound production package
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/k7payload
+          mkdir -p /tmp/k7payload
+          base64 -d concept_agent/konzept7/ENDSTEMPEL_PAYLOAD.zip.b64 > /tmp/k7payload.zip
+          unzip -q /tmp/k7payload.zip -d /tmp/k7payload
+
+      - name: Run exact first-draft checks
+        shell: bash
+        env:
+          SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,pathlib,re,sys,time
+          repo=pathlib.Path.cwd()
+          sys.path.insert(0,str(repo/'isolated_system4'))
+          import authoring_contract,content_guard,design_guard,production_checks_engine as checks
+
+          draft_path=repo/'concept_agent/konzept7/live_writer_probe/00_reitplatzplaner_fresh.md'
+          text=draft_path.read_text(encoding='utf-8')
+          payload=pathlib.Path('/tmp/k7payload')
+          manifests=list(payload.glob('control/startmaster0107/recovery_sources/*/generation-*/MANIFEST.json'))
+          if len(manifests)!=1:
+              raise SystemExit('K7_PAYLOAD_MANIFEST_COUNT_INVALID:'+str(len(manifests)))
+          manifest=json.loads(manifests[0].read_text(encoding='utf-8'))
+          envelope=json.loads((payload/pathlib.Path(manifest['import_envelope_ref'])).read_text(encoding='utf-8'))
+          plan=envelope['production_plan']['items'][0]
+          target_keyword=str(plan['target_keyword']).strip()
+          def norm(value):
+              value=re.sub(r'(?is)<[^>]+>',' ',str(value)).casefold()
+              value=re.sub(r'[^a-z0-9äöüß]+',' ',value)
+              return re.sub(r'\s+',' ',value).strip()
+          target_norm=norm(target_keyword)
+          h2_labels=re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',text)
+          exact_h2_count=sum(1 for label in h2_labels if target_norm and target_norm in norm(label))
+          if exact_h2_count<1 or exact_h2_count>2:
+              raise SystemExit(f'K7_H2_TARGET_KEYWORD_COUNT_INVALID:{exact_h2_count}:1:2')
+          synthetic_counts=[
+              sum(1 for label in labels if target_norm in norm(label))
+              for labels in (
+                  ['Boden richtig beurteilen'],
+                  [target_keyword+' richtig auswählen'],
+                  [target_keyword+' richtig auswählen',target_keyword+' sinnvoll einsetzen'],
+                  [target_keyword+' eins',target_keyword+' zwei',target_keyword+' drei'],
+              )
+          ]
+          if synthetic_counts!=[0,1,2,3]:
+              raise SystemExit('K7_H2_TARGET_KEYWORD_COUNTER_PROOF_FAILED:'+repr(synthetic_counts))
+          allowed=[1<=count<=2 for count in synthetic_counts]
+          if allowed!=[False,True,True,False]:
+              raise SystemExit('K7_H2_TARGET_KEYWORD_BOUNDARY_PROOF_FAILED:'+repr(allowed))
+          src=plan['source_snapshot_id']
+          pack=next(p for p in envelope['fact_pack_bundle']['fact_packs'] if p.get('source_snapshot_id')==src)
+          category=(plan.get('category_binding') or plan.get('quality_binding',{}).get('wordpress_category') or {})['slug']
+          raw=text.encode('utf-8')
+          state={
+              'article':{
+                  'article_type':plan['article_type'],
+                  'target_keyword':plan['target_keyword'],
+                  'title':plan['topic'],
+                  'category':category,
+              },
+              'source_snapshot_sha256':src,
+              'draft_markdown':text,
+              'draft_sha256':hashlib.sha256(raw).hexdigest(),
+          }
+          t0=time.monotonic()
+          try:
+              contract=authoring_contract.build(repo,state,pack,plan)
+              authoring_contract.validate_candidate(text,contract)
+              content_guard.validate_single_article(text,pack)
+              design_guard.validate_design_neutrality(text,plan['article_type'])
+              out=checks.run_all(repo,state,pack,plan)
+          except checks.RepairRequired as exc:
+              print(json.dumps({'status':'REPAIR_REQUIRED','checker':exc.checker,'finding_count':len(exc.findings),'findings':exc.findings},ensure_ascii=False))
+              raise
+          except Exception as exc:
+              print(json.dumps({'status':'BLOCKED','type':type(exc).__name__,'error':str(exc)},ensure_ascii=False))
+              raise
+          elapsed=round(time.monotonic()-t0,3)
+          print(json.dumps({
+              'status':'PASS_FIRST_DRAFT',
+              'seconds':elapsed,
+              'draft_sha256':state['draft_sha256'],
+              'word_count':len(text.split()),
+              'h2_exact_target_keyword_count':exact_h2_count,
+              'h2_target_keyword_boundary_proof':'0=BLOCK,1=PASS,2=PASS,3=BLOCK',
+              'ppm_cache_present':checks.PPM_RUNTIME_CACHE.is_dir(),
+              'lt_worker_present':checks.LT_WORKER_META.is_file(),
+          },ensure_ascii=False))
+          PY
