@@ -114,6 +114,37 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
             _normalize_heading_phrase(article["title"])
             == _normalize_heading_phrase(article["target_keyword"])
         )
+        constants = static_rules["constants"]
+        k7_first_draft_blueprint = {
+            "contract": "K7_FIRST_DRAFT_BLUEPRINT_V1",
+            "goal": "PASS_FIRST_DRAFT_WITHOUT_REPAIR",
+            "targets_are_safety_margins_not_checker_changes": True,
+            "target_min_words": int(constants.get("min_words") or 0) + 100,
+            "target_min_paragraphs": int(constants.get("min_paragraphs") or 0) + 2,
+            "target_min_h2": int(constants.get("min_h2") or 0),
+            "target_min_table_body_rows": int(constants.get("min_table_body_rows") or 0) + 1,
+            "target_conclusion_ratio_if_applicable": 0.12,
+            "target_table_unique_token_ratio_if_applicable": 0.22,
+            "target_duplicate_sentence_ratio": min(float(constants.get("max_duplicate_sentence_ratio") or 0.02) / 2.0, 0.01),
+            "mechanical_requirements_prebound": {
+                "link_bindings": json.loads(json.dumps(links)),
+                "allowed_fact_ids": list((plan.get("runtime_order") or {}).get("allowed_fact_ids") or []),
+                "faq_direct_answer": plan["quality_binding"].get("faq_direct_answer"),
+                "table_value_statement": plan["quality_binding"].get("table_value_statement"),
+                "table_value_statement_minimum_words": int(static_rules["derived_binding_requirements"]["table_value_statement_minimum_words"]),
+                "source_trace_minimum": int(static_rules["derived_binding_requirements"]["source_trace_minimum"]),
+            },
+            "repair_policy": {
+                "all_findings_from_same_checker_one_revision": True,
+                "after_any_text_repair_restart_at_lt68": True,
+                "before_after_bytes_and_hashes_required": True,
+            },
+            "real_writer_effect_proof": "REQUIRED_BEFORE_CLAIMING_SPEED_OR_QUALITY_GAIN",
+            "ppm679_changed": False,
+            "languagetool68_changed": False,
+        }
+        k7_first_draft_blueprint["blueprint_sha256"] = stable(k7_first_draft_blueprint)
+
         writer_preflight = {
             "contract": "CONCEPT_AGENT_WRITER_PREFLIGHT_V1",
             "instruction": "APPLY_ALL_BOUND_REQUIREMENTS_BEFORE_FIRST_DRAFT",
@@ -121,6 +152,7 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
             "global_requirements": static_rules["constants"],
             "structure_requirements": static_rules["structure"],
             "article_type_requirements": type_authority[article["article_type"]],
+            "k7_first_draft_blueprint": k7_first_draft_blueprint,
             "bound_requirements": {
                 "intent_terms": list(plan["quality_binding"].get("intent_terms") or []),
                 "faq_direct_answer": plan["quality_binding"].get("faq_direct_answer"),
@@ -210,6 +242,19 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
             "recovery_article_reference_forbidden": True,
             "own_domain_research_forbidden": FORBIDDEN_RESEARCH_HOST,
             "quality_core_changed": False,
+            "publish_allowed": False,
+        },
+        "k7_execution_policy": {
+            "execution_lock_ref": "concept_agent/konzept7/k7_execution_lock.py",
+            "research_planner_ref": "concept_agent/konzept7/k7_research_planner.py",
+            "parallel_controller_ref": "concept_agent/konzept7/k7_parallel_controller.py",
+            "metrics_ref": "concept_agent/konzept7/k7_metrics.py",
+            "closeout_plan_ref": "concept_agent/konzept7/k7_closeout_plan.py",
+            "default_article_lanes": 4,
+            "benchmark_article_lanes": [1, 2, 4, 8],
+            "duplicate_start_policy": "RESUME_SAME_BATCH",
+            "conflicting_start_policy": "BLOCK",
+            "internal_pass_is_chat_stop": False,
             "publish_allowed": False,
         },
         "progress_policy": {
