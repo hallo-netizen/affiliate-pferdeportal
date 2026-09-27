@@ -18,7 +18,7 @@ TABLE_CELLS={
 "Tretschicht durch Lockern bearbeiten","Zinken lockern die Tretschicht","Tretschicht und Lockern als Pflegewirkung prüfen",
 "Planierschild an der Tretschicht","Planierschild ebnet die Tretschicht","Tretschicht und Planierschild beim Einebnen prüfen",
 "Arbeitstiefe passend zum Boden","Arbeitstiefe muss zum Boden passen","Boden und Arbeitstiefe als Tiefenabstimmung bewerten",
-"Tretschicht lockern vor Planierschild","Zinken lockern die Tretschicht","Planierschild ebnet anschließend die Tretschicht"],
+"Die Tretschicht vor dem Einebnen lockern","Zinken lockern die Tretschicht","Planierschild ebnet anschließend die Tretschicht"],
 1:[
 "Winterfell und Körperfett","Winterfell und Körperfett isolieren gegen Kälte","Pferd, Winterfell und Körperfett als Kälteprofil einordnen",
 "Nässe und Regen am Fell","Nässe und Regen mindern die Isolationswirkung","Fell und Isolationswirkung bei Nässe prüfen",
