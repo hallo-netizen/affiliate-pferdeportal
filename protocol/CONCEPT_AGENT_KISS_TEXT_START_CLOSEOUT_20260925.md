@@ -503,3 +503,15 @@ Historiennachweis, keine Current-Autorität und keine neue Route.
 - Negativ: abweichende Spurzahl → `CURRENT_K7_REQUIRED_LANES_INVALID` fail-closed.
 - Nicht-K7-Ziele behalten den bestehenden generischen Produktionsweg unverändert.
 - Keine Workflow-, Runner-, LT-6.8-, PPM-6.7.9-, PSERC-, ENDSTEMPEL- oder Publish-Änderung.
+
+
+## Nachtrag 2026-09-27 — Abschluss-/Nachholprüfung nach Start #39
+
+Historiennachweis, keine Current-Autorität.
+
+- PR #450 gemergt auf Main `248d8f581d17a3b8e370db2723b85ce9bb3c89ed`; Änderung ausschließlich am bestehenden Intake/`process_trigger`-Handoff plus Tests/Protokoll, keine neue Produktionsarchitektur.
+- Pflichtchecks: Deterministic Entrance Gate `36337645429` PASS; Immutable Base Hardlock `36337643794` PASS.
+- Realer Start #39: Zentralstart `36337682857`; Pferdeatelier-Receiver `36337690805` PASS auf Main `248d8f581d17a3b8e370db2723b85ce9bb3c89ed`.
+- Der reale Receipt bindet `START_BOUND_K7_PRODUCTION_AND_EXECUTE_READY_ACTIONS`, K7-Head `0d360883b7bc59af3aabd55b8ffab65d53c67db5`, vier Spuren und vier `WRITE_DRAFT`-Aktionen; keine freie Stufen-/Artikel-/Aktionswahl.
+- Korrektur eines Chat-Zwischenstands: Im Chat wurden danach Artikel-0-bis-3-LT/PPM-PASS-Zwischenstände behauptet, ohne dass dafür ein dauerhafter K7-Produktionscheckpoint in der autoritativen Arbeitskette geschrieben wurde. Diese Aussagen sind **keine Evidence und kein Current-Stand** und dürfen nicht übernommen werden.
+- Belastbarer Endstand dieses Nachtrags: Startübergang bewiesen; vollständiger K7-16er-Produktionslauf weiterhin nicht dauerhaft ausgeführt/belegt; PSERC, ENDSTEMPEL und finale WordPress-JSON für K7 weiterhin offen.
