@@ -43,7 +43,7 @@
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "b8fc3af23a262a3b749163e241d5ac7ab0d666b8fb2396fe45426e8433fd7bb0",
+    "candidate_reference_artifact_sha256": "0170c89cf7381bc4a99c379277b529a7056bf61ec47683c027fef7c536fafb21",
     "final_artifact_ref": null,
     "final_artifact_sha256": null
   },
@@ -261,7 +261,7 @@
         "status": "HARD_LOCAL_PASS_SOURCE_BOUND_INSTALL_READBACK_OPEN",
         "live_base_version": "6.72.164",
         "candidate_version": "6.72.165",
-        "installer_sha256": "b8fc3af23a262a3b749163e241d5ac7ab0d666b8fb2396fe45426e8433fd7bb0",
+        "installer_sha256": "0170c89cf7381bc4a99c379277b529a7056bf61ec47683c027fef7c536fafb21",
         "fallback_version": "6.72.164",
         "fallback_sha256": "97a7b7b4b45008d93faa9a6dc76976f501a233804adc31bb5c4da37a4011b17f",
         "source_manifest_sha256": "f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c",
