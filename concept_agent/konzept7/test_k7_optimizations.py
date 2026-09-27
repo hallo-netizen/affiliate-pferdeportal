@@ -30,6 +30,14 @@ class K7OptimizationTests(unittest.TestCase):
             self.assertEqual(bp["target_min_table_body_rows"],int(req["min_table_body_rows"])+1)
             self.assertGreater(bp["target_conclusion_ratio_if_applicable"],0.10)
             self.assertGreater(bp["target_table_unique_token_ratio_if_applicable"],0.18)
+            self.assertEqual(bp["target_trace_lexical_support_ratio"],1.0)
+            self.assertEqual(bp["trace_unit_minimum_shared_lexical_tokens"],2)
+            self.assertEqual(bp["trace_lexical_reference"],"REFERENCED_FACT_STATEMENT_PLUS_EVIDENCE")
+            trace_binding=bp["mechanical_requirements_prebound"]["source_trace_field_binding"]
+            self.assertEqual(trace_binding["data_fact_id"],"REFERENCED_FACT_ID")
+            self.assertEqual(trace_binding["data_source_title"],"REFERENCED_FACT_SOURCE_ID")
+            self.assertEqual(trace_binding["data_source_hash"],"REFERENCED_FACT_EVIDENCE_TEXT_SHA256")
+            self.assertFalse(trace_binding["visible_text_mutation_required"])
             self.assertTrue(bp["repair_policy"]["all_findings_from_same_checker_one_revision"])
             self.assertFalse(bp["ppm679_changed"]); self.assertFalse(bp["languagetool68_changed"])
 
