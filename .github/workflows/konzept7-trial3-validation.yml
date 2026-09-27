@@ -1,0 +1,207 @@
+name: Konzept 7 Trial3 Validation
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - 'concept_agent/konzept7/trial3_writer.py'
+      - 'concept_agent/konzept7/k7_section_balance.py'
+      - 'concept_agent/konzept7/k7_bound_fact_context.py'
+      - 'concept_agent/production_bridge.py'
+      - '.github/workflows/konzept7-trial3-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SYSTEM4_LANGUAGETOOL_JAR: /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar
+    steps:
+      - name: Checkout exact K7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Prove archived article bodies are unavailable
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e recovery/current16-input
+          if find . -path './.git' -prune -o -type f -print | grep -q '^./recovery/current16-input/'; then
+            echo 'K7_ARCHIVED_ARTICLE_ACCESS_FAIL'
+            exit 2
+          fi
+          echo 'K7_ARCHIVED_ARTICLE_ACCESS_BLOCKED_PASS'
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/system4-lt68
+          curl --fail --location --retry 3             https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip             -o /tmp/system4-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/system4-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/system4-lt68/LanguageTool-6.8.zip -d /tmp/system4-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/system4-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Generate fresh isolated trial3 drafts
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/k7-trial3-drafts
+          python3 concept_agent/konzept7/trial3_writer.py /tmp/k7-trial3-drafts | tee /tmp/k7-trial3-generation.json
+          test "$(find /tmp/k7-trial3-drafts -maxdepth 1 -type f -name '*.html' | wc -l)" -eq 3
+
+      - name: Run exact current three-article validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/system4-ppm679-* /tmp/system4-lt68-worker-v1.json /tmp/system4-lt68-worker-v1.lock
+          python3 - <<'PY' | tee /tmp/k7-trial3-result.json
+          import concurrent.futures,hashlib,json,pathlib,re,sys,time
+          root=pathlib.Path.cwd()
+          sys.path[:0]=[str(root/'concept_agent'),str(root/'concept_agent/konzept7'),str(root/'isolated_system4')]
+          import intake_bridge,production_bridge,k7_bound_fact_context,k7_section_balance,k7_mechanical_preflight,trial3_writer
+          import authoring_contract,content_guard,design_guard,production_checks_engine as checks
+
+          if (root/'recovery/current16-input').exists():
+              raise SystemExit('K7_ARCHIVED_ARTICLE_ACCESS_FAIL')
+
+          snap=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          allctx={row['item_index']:row for row in k7_bound_fact_context.build_all(binding)['items']}
+          mapping={
+              '01_regendecken.html':1,
+              '08_schermaschinen.html':8,
+              '15_tuev_kosten.html':15,
+          }
+          expected_titles={
+              1:'Frieren Pferde unter Regendecken?',
+              8:'So wählst du passende Schermaschinen für Pferde',
+              15:'Wie teuer ist der TÜV beim Pferdeanhänger?',
+          }
+          for name,index in mapping.items():
+              exp=trial3_writer.EXPECTED[name]
+              if exp['item_index']!=index:
+                  raise SystemExit('TRIAL3_ITEM_MAPPING_INVALID:'+name)
+              if allctx[index]['identity']['title']!=expected_titles[index]:
+                  raise SystemExit('TRIAL3_IDENTITY_NOT_CURRENT16:'+str(index))
+              if allctx[index]['identity']['plan_slot']!=binding['items'][index]['identity']['plan_slot']:
+                  raise SystemExit('TRIAL3_PLAN_SLOT_MISMATCH:'+str(index))
+
+          def norm(value):
+              value=re.sub(r'(?is)<[^>]+>',' ',str(value)).casefold()
+              value=re.sub(r'[^a-z0-9äöüß]+',' ',value)
+              return re.sub(r'\s+',' ',value).strip()
+
+          def run_one(pair):
+              name,index=pair
+              row=allctx[index]
+              item=binding['items'][index]
+              path=pathlib.Path('/tmp/k7-trial3-drafts')/name
+              body=path.read_text(encoding='utf-8').strip()
+              sha=hashlib.sha256(body.encode('utf-8')).hexdigest()
+              if sha!=trial3_writer.EXPECTED[name]['sha256']:
+                  raise RuntimeError('TRIAL3_DRAFT_HASH_INVALID:'+name)
+
+              balance=k7_section_balance.validate(body)
+              policy=item['writer_preflight']['k7_h2_target_keyword_policy']
+              target=str(row['identity']['target_keyword'])
+              labels=re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',body)
+              count=sum(1 for label in labels if norm(target) in norm(label))
+              lo=int(policy['exact_occurrences_min']); hi=int(policy['exact_occurrences_max'])
+              if count<lo or count>hi:
+                  raise RuntimeError(f'K7_H2_TARGET_COUNT_INVALID:{index}:{count}:{lo}:{hi}')
+
+              body2,mechanical=k7_mechanical_preflight.normalize_source_traces(body,row['fact_pack'])
+              if body2!=body:
+                  raise RuntimeError('TRIAL3_TRACE_MUTATION_UNEXPECTED:'+name)
+              state={
+                  'article':{
+                      'title':row['identity']['title'],
+                      'target_keyword':row['identity']['target_keyword'],
+                      'category':row['identity']['category'],
+                      'article_type':row['identity']['article_type'],
+                      'plan_slot':row['identity']['plan_slot'],
+                  },
+                  'source_snapshot_sha256':row['fact_pack']['source_snapshot_id'],
+                  'draft_markdown':body,
+                  'draft_sha256':sha,
+                  'publish_allowed':False,
+              }
+              contract=authoring_contract.build(root,state,row['fact_pack'],row['production_plan_item'])
+              authoring_contract.validate_candidate(body,contract)
+              content_guard.validate_single_article(body,row['fact_pack'])
+              design_guard.validate_design_neutrality(body,row['identity']['article_type'])
+              started=time.perf_counter()
+              try:
+                  out=checks.run_all(root,state,row['fact_pack'],row['production_plan_item'])
+                  elapsed=time.perf_counter()-started
+                  ev=out['evidence']
+                  return {
+                      'item_index':index,'title':row['identity']['title'],'status':'PASS',
+                      'seconds':round(elapsed,3),'draft_sha256':sha,
+                      'word_count':len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',re.sub(r'(?is)<[^>]+>',' ',body))),
+                      'section_balance':balance,'h2_target_count':count,
+                      'lt68':ev['languagetool'].get('status','PASS'),
+                      'lt68_findings':ev['languagetool'].get('unresolved_finding_count'),
+                      'ppm679':ev['ppm679']['status'],
+                      'ppm679_hash':ev['ppm679']['content_sha256'],
+                      'identity_sha256':row['identity']['identity_sha256'],
+                      'plan_slot':row['identity']['plan_slot'],
+                  }
+              except checks.RepairRequired as exc:
+                  elapsed=time.perf_counter()-started
+                  return {
+                      'item_index':index,'title':row['identity']['title'],
+                      'status':'REPAIR_REQUIRED','seconds':round(elapsed,3),
+                      'draft_sha256':sha,'checker':exc.checker,'findings':exc.findings,
+                      'section_balance':balance,'identity_sha256':row['identity']['identity_sha256'],
+                      'plan_slot':row['identity']['plan_slot'],
+                  }
+
+          wall_start=time.perf_counter()
+          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+              results=list(pool.map(run_one,mapping.items()))
+          wall=time.perf_counter()-wall_start
+          results=sorted(results,key=lambda x:x['item_index'])
+          serial=sum(float(x['seconds']) for x in results)
+          report={
+              'contract':'K7_TRIAL3_VALIDATION_V1',
+              'status':'PASS' if all(x['status']=='PASS' for x in results) else 'REPAIR_REQUIRED',
+              'article_count':3,
+              'indices':[1,8,15],
+              'current16_batch_sha256':binding['batch_sha256'],
+              'archived_article_bodies_available':False,
+              'parallel_lanes':3,
+              'wall_seconds':round(wall,3),
+              'serial_equivalent_seconds':round(serial,3),
+              'parallel_speedup_factor':round(serial/wall,3) if wall else None,
+              'items':results,
+              'publish_allowed':False,
+          }
+          pathlib.Path('/tmp/K7_TRIAL3_VALIDATION.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(report,ensure_ascii=False,sort_keys=True))
+          if report['status']!='PASS':
+              raise SystemExit(3)
+          PY
+
+      - name: Upload trial3 evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: k7-trial3-validation-${{ github.sha }}
+          path: |
+            /tmp/K7_TRIAL3_VALIDATION.json
+            /tmp/k7-trial3-generation.json
+            /tmp/k7-trial3-drafts/
+          if-no-files-found: warn
+          retention-days: 7
