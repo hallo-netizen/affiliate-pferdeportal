@@ -29,4 +29,4 @@ jobs:
           echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  '"$pkg" | sha256sum -c -
           rm -rf /tmp/k7ppm && mkdir -p /tmp/k7ppm
           unzip -q "$pkg" -d /tmp/k7ppm
-          grep -R -n -B 35 -A 80 -E 'TRACE_LEXICAL_SUPPORT|unique_token_ratio|TABLE_VALUE' /tmp/k7ppm/portal-production-machine/includes /tmp/k7ppm/portal-production-machine/tests || true
+          grep -R -n -B 20 -A 90 -E 'function lexically_supported|lexically_supported\(|unique_token_ratio|minimum_unique_content_token_ratio|TABLE_VALUE' /tmp/k7ppm/portal-production-machine/includes /tmp/k7ppm/portal-production-machine/tests || true
