@@ -492,3 +492,14 @@ Historiennachweis, keine Current-Autorität und keine neue Route.
 - Negativfall: Pflichtmarker „weder antworten noch erneut prüfen/suchen“ entfernt → `START_HERE_NO_STOP_HARDLOCK_MISSING`.
 - Unverändert: text-start-Workflow, `production_bridge.py`, `progress_guard.py`, `full_workflow_gate.py`, LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Publish.
 - Keine neue Architektur, kein Runner, keine Alternativroute.
+
+
+## Nachtrag 2026-09-27 — K7 text-start Direktbindung
+
+Historiennachweis, keine Current-Autorität und keine neue Route.
+
+- Minimalfix: Der bestehende text-start `process_trigger` bindet beim aktuellen Ziel `RUN_K7_FULL16_END_TO_END_FOUR_LANE_VALIDATION` direkt den vorhandenen `k7_start_controller.py` auf exakt gebundenem Branch/Head und exakt 4 Spuren.
+- Positiv: aktuelle K7-Bindung → `START_BOUND_K7_PRODUCTION_AND_EXECUTE_READY_ACTIONS`, 4 × `WRITE_DRAFT`, keine freie Stufen-/Artikel-/Aktionswahl.
+- Negativ: abweichende Spurzahl → `CURRENT_K7_REQUIRED_LANES_INVALID` fail-closed.
+- Nicht-K7-Ziele behalten den bestehenden generischen Produktionsweg unverändert.
+- Keine Workflow-, Runner-, LT-6.8-, PPM-6.7.9-, PSERC-, ENDSTEMPEL- oder Publish-Änderung.
