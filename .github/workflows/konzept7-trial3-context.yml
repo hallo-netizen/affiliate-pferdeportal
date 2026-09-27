@@ -1,0 +1,75 @@
+name: Konzept 7 Trial3 Context
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - '.github/workflows/konzept7-trial3-context.yml'
+      - 'concept_agent/production_bridge.py'
+      - 'concept_agent/konzept7/k7_bound_fact_context.py'
+      - 'concept_agent/konzept7/k7_section_balance.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  context:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout exact K7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Build isolated three-article writer contexts
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e recovery/current16-input
+          python3 - <<'PY'
+          import json,pathlib,sys
+          root=pathlib.Path.cwd()
+          sys.path[:0]=[str(root/'concept_agent'),str(root/'concept_agent/konzept7'),str(root/'isolated_system4')]
+          import intake_bridge,production_bridge,k7_bound_fact_context,authoring_contract
+          snap=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          contexts={row['item_index']:row for row in k7_bound_fact_context.build_all(binding)['items']}
+          selected=[]
+          for idx in (1,8,15):
+              row=contexts[idx]
+              item=binding['items'][idx]
+              state={'article':{
+                  'title':row['identity']['title'],
+                  'target_keyword':row['identity']['target_keyword'],
+                  'category':row['identity']['category'],
+                  'article_type':row['identity']['article_type'],
+                  'plan_slot':row['identity']['plan_slot'],
+              },'source_snapshot_sha256':row['fact_pack']['source_snapshot_id']}
+              contract=authoring_contract.build(root,state,row['fact_pack'],row['production_plan_item'])
+              selected.append({
+                  'item_index':idx,
+                  'identity':row['identity'],
+                  'writer_preflight':item['writer_preflight'],
+                  'fact_pack':row['fact_pack'],
+                  'production_plan_item':row['production_plan_item'],
+                  'authoring_contract':contract,
+              })
+          out={'contract':'K7_TRIAL3_CONTEXT_V1','indices':[1,8,15],'items':selected,'publish_allowed':False}
+          pathlib.Path('K7_TRIAL3_CONTEXT.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('K7_TRIAL3_CONTEXT_PASS')
+          PY
+
+      - name: Upload trial3 context
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: k7-trial3-context-${{ github.sha }}
+          path: K7_TRIAL3_CONTEXT.json
+          if-no-files-found: error
+          retention-days: 7
