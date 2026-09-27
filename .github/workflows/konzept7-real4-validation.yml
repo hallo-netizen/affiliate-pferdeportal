@@ -57,7 +57,7 @@ jobs:
           import concurrent.futures, hashlib, json, pathlib, sys, time
           root=pathlib.Path.cwd()
           sys.path[:0]=[str(root/'concept_agent'),str(root/'concept_agent/konzept7'),str(root/'isolated_system4')]
-          import intake_bridge,production_bridge,k7_real4_context,k7_mechanical_preflight
+          import intake_bridge,production_bridge,k7_real4_context,k7_mechanical_preflight,k7_real4_repair
           import production_checks_engine as checks
           import content_guard
 
@@ -80,6 +80,7 @@ jobs:
               index,path=pair
               row=by_index[index]
               body=path.read_text(encoding='utf-8').strip()
+              body,repair=k7_real4_repair.repair(body,index,row['fact_pack'])
               body,mechanical=k7_mechanical_preflight.normalize_source_traces(body,row['fact_pack'])
               state={
                   'article': {
@@ -104,6 +105,7 @@ jobs:
                       'status':'PASS',
                       'seconds':round(elapsed,3),
                       'draft_sha256':state['draft_sha256'],
+                      'repair':repair,
                       'mechanical_preflight':mechanical,
                       'lt68':ev['languagetool']['status'] if 'status' in ev['languagetool'] else 'PASS',
                       'lt68_findings':ev['languagetool'].get('unresolved_finding_count'),
