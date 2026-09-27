@@ -125,6 +125,9 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
             "target_min_table_body_rows": int(constants.get("min_table_body_rows") or 0) + 1,
             "target_conclusion_ratio_if_applicable": 0.12,
             "target_table_unique_token_ratio_if_applicable": 0.22,
+            "target_trace_lexical_support_ratio": 1.0,
+            "trace_unit_minimum_shared_lexical_tokens": 2,
+            "trace_lexical_reference": "REFERENCED_FACT_STATEMENT_PLUS_EVIDENCE",
             "target_duplicate_sentence_ratio": min(float(constants.get("max_duplicate_sentence_ratio") or 0.02) / 2.0, 0.01),
             "mechanical_requirements_prebound": {
                 "link_bindings": json.loads(json.dumps(links)),
@@ -133,6 +136,12 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
                 "table_value_statement": plan["quality_binding"].get("table_value_statement"),
                 "table_value_statement_minimum_words": int(static_rules["derived_binding_requirements"]["table_value_statement_minimum_words"]),
                 "source_trace_minimum": int(static_rules["derived_binding_requirements"]["source_trace_minimum"]),
+                "source_trace_field_binding": {
+                    "data_fact_id": "REFERENCED_FACT_ID",
+                    "data_source_title": "REFERENCED_FACT_SOURCE_ID",
+                    "data_source_hash": "REFERENCED_FACT_EVIDENCE_TEXT_SHA256",
+                    "visible_text_mutation_required": False,
+                },
             },
             "repair_policy": {
                 "all_findings_from_same_checker_one_revision": True,
