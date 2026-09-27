@@ -18,6 +18,21 @@ import universal_reentry_guard
 
 
 class CurrentProductionGuardTests(unittest.TestCase):
+    def test_text_start_no_stop_hardlock_positive(self):
+        result = intake_bridge.verify_start_here_no_stop_contract(HERE / "START_HERE.md")
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(result["marker_count"], len(intake_bridge.START_HERE_NO_STOP_MARKERS))
+
+    def test_text_start_no_stop_hardlock_negative_blocks_missing_rule(self):
+        source = (HERE / "START_HERE.md").read_text(encoding="utf-8")
+        broken = source.replace("weder antworten noch erneut prüfen/suchen", "antworten oder prüfen erlaubt", 1)
+        self.assertNotEqual(source, broken)
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "START_HERE.md"
+            path.write_text(broken, encoding="utf-8")
+            with self.assertRaisesRegex(intake_bridge.Blocked, "START_HERE_NO_STOP_HARDLOCK_MISSING"):
+                intake_bridge.verify_start_here_no_stop_contract(path)
+
     def test_own_domain_is_always_forbidden(self):
         self.assertTrue(intake_bridge._forbidden_research_url("https://pferde-atelier.de/test"))
         self.assertTrue(intake_bridge._forbidden_research_url("https://www.pferde-atelier.de/test"))
