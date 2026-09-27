@@ -87,8 +87,8 @@ jobs:
               def norm(value):
                   value=re.sub(r'(?is)<[^>]+>',' ',str(value)).casefold()
                   value=re.sub(r'[^a-z0-9äöüß]+',' ',value)
-                  return re.sub(r'\\s+',' ',value).strip()
-              labels=re.findall(r'(?is)<h2\\b[^>]*>(.*?)</h2>',text)
+                  return re.sub(r'\s+',' ',value).strip()
+              labels=re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',text)
               count=sum(1 for label in labels if norm(target) in norm(label))
               policy=item['writer_preflight']['k7_h2_target_keyword_policy']
               lo=int(policy['exact_occurrences_min']); hi=int(policy['exact_occurrences_max'])
@@ -112,7 +112,7 @@ jobs:
                   'article_type':row['identity']['article_type'],
                   'seconds':elapsed,
                   'draft_sha256':state['draft_sha256'],
-                  'word_count':len(re.findall(r'\\b[\\wÄÖÜäöüß-]+\\b',re.sub(r'(?is)<[^>]+>',' ',text))),
+                  'word_count':len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',re.sub(r'(?is)<[^>]+>',' ',text))),
                   'h2_exact_target_keyword_count':count,
                   'h2_policy_min':lo,
                   'h2_policy_max':hi,
