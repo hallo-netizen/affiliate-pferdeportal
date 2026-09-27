@@ -105,7 +105,7 @@ jobs:
           def run_one(pair):
               name,index=pair
               row=allctx[index]
-              item=binding['items'][index]
+              preflight=row['writer_preflight']
               path=pathlib.Path('/tmp/k7-trial3-drafts')/name
               body=path.read_text(encoding='utf-8').strip()
               sha=hashlib.sha256(body.encode('utf-8')).hexdigest()
@@ -113,7 +113,7 @@ jobs:
                   raise RuntimeError('TRIAL3_DRAFT_HASH_INVALID:'+name)
 
               balance=k7_section_balance.validate(body)
-              policy=item['writer_preflight']['k7_h2_target_keyword_policy']
+              policy=preflight['k7_h2_target_keyword_policy']
               target=str(row['identity']['target_keyword'])
               labels=re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',body)
               count=sum(1 for label in labels if norm(target) in norm(label))
@@ -138,6 +138,10 @@ jobs:
                   'publish_allowed':False,
               }
               contract=authoring_contract.build(root,state,row['fact_pack'],row['production_plan_item'])
+              if preflight['bound_requirements']['allowed_fact_ids']!=contract['bound_requirements']['canonical_fact_ids']:
+                  raise RuntimeError('TRIAL3_FINAL_WRITER_FACT_BINDING_MISMATCH:'+str(index))
+              if row['identity']['article_type']=='FAQ' and preflight['bound_requirements']['faq_direct_answer']!=contract['bound_requirements']['faq_direct_answer']:
+                  raise RuntimeError('TRIAL3_FINAL_WRITER_FAQ_BINDING_MISMATCH:'+str(index))
               authoring_contract.validate_candidate(body,contract)
               content_guard.validate_single_article(body,row['fact_pack'])
               design_guard.validate_design_neutrality(body,row['identity']['article_type'])

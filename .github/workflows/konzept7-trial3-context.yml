@@ -56,7 +56,7 @@ jobs:
               selected.append({
                   'item_index':idx,
                   'identity':row['identity'],
-                  'writer_preflight':item['writer_preflight'],
+                  'writer_preflight':row['writer_preflight'],
                   'fact_pack':row['fact_pack'],
                   'production_plan_item':row['production_plan_item'],
                   'authoring_contract':contract,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import base64,gzip,hashlib,json,sys
+import base64,gzip,hashlib,json,re,sys
 from pathlib import Path
 
 DRAFTS={
@@ -9,15 +9,25 @@ DRAFTS={
 "15_tuev_kosten.html":"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"
 }
 EXPECTED={
-"01_regendecken.html":{"item_index":1,"sha256":"89280436ee8afa6387fd8eaffeda81684e80312ac29b1701953b241be75d6dd6"},
+"01_regendecken.html":{"item_index":1,"sha256":"8d59fc0cd7862425731ae07b910d8226718e73f5c3a428feec545b3d84f8eafb"},
 "08_schermaschinen.html":{"item_index":8,"sha256":"d8be4de5f2c54162042fdd25cedda816d38b22420e62158885e614b953ffe2f3"},
-"15_tuev_kosten.html":{"item_index":15,"sha256":"16f9d70f788ba28e9b996ac0e873e3490f445ade12c91e10d20a3640d7a8293a"},
+"15_tuev_kosten.html":{"item_index":15,"sha256":"a8bbb5932b06136aeff5289c2e1bebb79f52f5a9411fe136ee75d34b2aaf157d"},
+} 
+FAQ_DIRECT_PREFIXES={
+"01_regendecken.html":"Nässe und Regen verringern die Isolationswirkung des Fells deutlich; ob eine Regendecke sinnvoll ist, hängt deshalb unter anderem von Nässe, Wind, Schutz, Schur, Alter, Gesundheit und Körperzustand ab. Ein gesundes Pferd kann sich mit Winterfell und Körperfett gut gegen Kälte isolieren.",
+"15_tuev_kosten.html":"Die Kosten der Hauptuntersuchung für Anhänger sind nicht bundesweit als ein einziger Festbetrag anzugeben. Sie hängen unter anderem von Fahrzeugart, zulässiger Gesamtmasse, Bundesland und Prüforganisation ab; deshalb sollte für einen Pferdeanhänger die aktuelle Preisübersicht der gewählten Prüfstelle herangezogen werden.",
 }
 def write_all(outdir:Path)->dict:
     outdir.mkdir(parents=True,exist_ok=True)
     rows=[]
     for name,b64 in DRAFTS.items():
         body=gzip.decompress(base64.b64decode(b64)).decode("utf-8")
+        direct=FAQ_DIRECT_PREFIXES.get(name)
+        if direct:
+            m=re.search(r'(?is)(<section data-block="intro"><p[^>]*>)(.*?)(<span class="ppm-source-trace")',body)
+            if not m:
+                raise SystemExit("TRIAL3_FAQ_INTRO_NOT_FOUND:"+name)
+            body=body[:m.start(2)]+direct+body[m.end(2):]
         sha=hashlib.sha256(body.encode("utf-8")).hexdigest()
         if sha!=EXPECTED[name]["sha256"]:
             raise SystemExit("TRIAL3_DRAFT_HASH_MISMATCH:"+name)

@@ -126,8 +126,15 @@ class K7OptimizationTests(unittest.TestCase):
             self.assertEqual(contract["article_identity"]["article_type"],identity["article_type"])
             self.assertGreaterEqual(len(contract["bound_requirements"]["canonical_fact_ids"]),3)
             self.assertTrue(all(isinstance(src.get("retrieved_at"),str) and src["retrieved_at"] for src in row["fact_pack"]["sources"]))
+            preflight=row["writer_preflight"]
+            self.assertEqual(preflight["bound_requirements"]["allowed_fact_ids"],runtime_allowed:=row["production_plan_item"]["runtime_order"]["allowed_fact_ids"])
+            self.assertEqual(runtime_allowed,[claim["fact_id"] for claim in row["fact_pack"]["claims"]])
+            self.assertEqual(preflight["k7_first_draft_blueprint"]["mechanical_requirements_prebound"]["allowed_fact_ids"],runtime_allowed)
             if identity["article_type"]=="FAQ":
-                self.assertTrue(contract["bound_requirements"]["faq_direct_answer"])
+                direct=contract["bound_requirements"]["faq_direct_answer"]
+                self.assertTrue(direct)
+                self.assertEqual(preflight["bound_requirements"]["faq_direct_answer"],direct)
+                self.assertEqual(preflight["k7_first_draft_blueprint"]["mechanical_requirements_prebound"]["faq_direct_answer"],direct)
 
     def test_parallel_lane_matrix_and_no_cross_article_mix(self):
         for lanes in (1,2,4,8):

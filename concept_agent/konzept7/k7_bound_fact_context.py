@@ -70,6 +70,43 @@ def _best_faq_answer(title:str,target:str,sources:list[dict])->str:
             break
     return " ".join(chosen)
 
+def finalize_writer_preflight(item:dict,plan:dict,pack:dict)->dict:
+    preflight=copy.deepcopy(item.get("writer_preflight") or {})
+    if preflight.get("contract")!="CONCEPT_AGENT_WRITER_PREFLIGHT_V1":
+        raise K7BoundFactContextError("WRITER_PREFLIGHT_MISSING")
+    quality=plan.get("quality_binding") if isinstance(plan.get("quality_binding"),dict) else {}
+    runtime=plan.get("runtime_order") if isinstance(plan.get("runtime_order"),dict) else {}
+    allowed=list(runtime.get("allowed_fact_ids") or [])
+    canonical=[str(row.get("fact_id") or "") for row in pack.get("claims") or [] if str(row.get("fact_id") or "")]
+    if allowed!=canonical:
+        raise K7BoundFactContextError("FINAL_FACT_BINDING_MISMATCH")
+
+    bound=preflight.get("bound_requirements")
+    if not isinstance(bound,dict):
+        raise K7BoundFactContextError("WRITER_BOUND_REQUIREMENTS_MISSING")
+    bound["faq_direct_answer"]=quality.get("faq_direct_answer")
+    bound["table_value_statement"]=quality.get("table_value_statement")
+    bound["link_bindings"]=copy.deepcopy(quality.get("link_bindings") or [])
+    bound["runtime_order"]=copy.deepcopy(runtime)
+    bound["allowed_fact_ids"]=allowed
+
+    blueprint=preflight.get("k7_first_draft_blueprint")
+    if not isinstance(blueprint,dict):
+        raise K7BoundFactContextError("WRITER_BLUEPRINT_MISSING")
+    mechanical=blueprint.get("mechanical_requirements_prebound")
+    if not isinstance(mechanical,dict):
+        raise K7BoundFactContextError("WRITER_MECHANICAL_BINDING_MISSING")
+    mechanical["faq_direct_answer"]=quality.get("faq_direct_answer")
+    mechanical["table_value_statement"]=quality.get("table_value_statement")
+    mechanical["link_bindings"]=copy.deepcopy(quality.get("link_bindings") or [])
+    mechanical["allowed_fact_ids"]=allowed
+    blueprint.pop("blueprint_sha256",None)
+    blueprint["blueprint_sha256"]=stable(blueprint)
+
+    preflight.pop("preflight_sha256",None)
+    preflight["preflight_sha256"]=stable(preflight)
+    return preflight
+
 def build_item(item:dict)->dict:
     identity=item.get("identity") or {}
     research=item.get("research_bound") or {}
@@ -158,11 +195,13 @@ def build_item(item:dict)->dict:
         plan["quality_binding"]["faq_direct_answer"]=answer
         plan["quality_binding_hash"]=stable(plan["quality_binding"])
     plan["runtime_order"]=runtime
+    writer_preflight=finalize_writer_preflight(item,plan,pack)
     return {
         "item_index":item["item_index"],
         "identity":copy.deepcopy(identity),
         "fact_pack":pack,
         "production_plan_item":plan,
+        "writer_preflight":writer_preflight,
     }
 
 def build_all(binding:dict)->dict:
