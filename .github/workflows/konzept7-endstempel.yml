@@ -1,0 +1,142 @@
+name: Konzept 7 Endstempel
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: konzept7-endstempel-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Restore and verify bound ENDSTEMPEL source
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='concept_agent/konzept7/ENDSTEMPEL_PAYLOAD.zip.b64'
+          test -s "$payload" || { echo 'K7_PAYLOAD_MISSING'; exit 2; }
+          base64 -d "$payload" > /tmp/k7-endstempel.zip
+          ref="$(python3 - <<'PY'
+          import pathlib,re,zipfile
+          z=zipfile.ZipFile('/tmp/k7-endstempel.zip')
+          names=z.namelist()
+          refs=[n for n in names if re.fullmatch(r'control/startmaster0107/recovery_sources/[0-9a-f]{64}/generation-[0-9]{6}/MANIFEST\.json',n)]
+          if len(refs)!=1: raise SystemExit('K7_EXACTLY_ONE_PAYLOAD_SOURCE_REQUIRED:'+str(len(refs)))
+          for n in names:
+              p=pathlib.PurePosixPath(n)
+              if p.is_absolute() or '..' in p.parts: raise SystemExit('K7_PAYLOAD_PATH_INVALID')
+          z.extractall('.')
+          print(refs[0])
+          PY
+          )"
+          test -f "$ref" || { echo 'K7_SOURCE_MISSING_AFTER_RESTORE'; exit 2; }
+          python3 - "$ref" <<'PY'
+          import hashlib,json,pathlib,re,sys
+          p=pathlib.Path(sys.argv[1]); x=json.loads(p.read_text(encoding='utf-8'))
+          if x.get('contract')!='PFERDE_ATELIER_EXISTING_ARTICLE_RECOVERY_SOURCE_V1': raise SystemExit('K7_MANIFEST_CONTRACT_INVALID')
+          rows=x.get('items')
+          if not isinstance(rows,list) or x.get('item_count')!=len(rows) or len(rows)<1: raise SystemExit('K7_MANIFEST_COUNT_INVALID')
+          if x.get('publish_allowed') is not False or x.get('content_mutation_performed') is not False: raise SystemExit('K7_MANIFEST_FLAGS_INVALID')
+          for row in rows:
+              slot=str(row.get('plan_slot') or ''); declared=str(row.get('sha256') or ''); ap=pathlib.Path(str(row.get('ref') or ''))
+              if not re.fullmatch(r'[0-9a-f]{64}',slot) or not re.fullmatch(r'[0-9a-f]{64}',declared): raise SystemExit('K7_ARTICLE_BINDING_INVALID')
+              raw=ap.read_bytes()
+              if hashlib.sha256(raw).hexdigest()!=declared: raise SystemExit('K7_ARTICLE_HASH_INVALID:'+slot)
+          ep=pathlib.Path(str(x.get('import_envelope_ref') or '')); raw=ep.read_bytes()
+          if hashlib.sha256(raw).hexdigest()!=x.get('import_envelope_sha256'): raise SystemExit('K7_ENVELOPE_HASH_INVALID')
+          print('K7_SOURCE_VERIFY_PASS')
+          PY
+          echo "source_ref=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: Build and sign final WordPress JSON
+        id: stamp
+        shell: bash
+        env:
+          SOURCE_REF: ${{ steps.source.outputs.source_ref }}
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo 'ENDSTEMPEL_SECRET_MISSING'; exit 2; }
+          umask 077
+          trap 'rm -f /tmp/k7-signer.py /tmp/k7-final-result.json' EXIT
+          cat > /tmp/k7-signer.py <<'PY'
+          #!/usr/bin/env python3
+          import base64,hashlib,json,os,sys
+          from cryptography.hazmat.primitives import serialization
+          from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+          raw=os.environ.get('ENDSTEMPEL_PRIVATE_KEY','').encode()
+          if not raw: raise SystemExit('ENDSTEMPEL_SECRET_MISSING')
+          key=serialization.load_ssh_private_key(raw,password=None) if b'OPENSSH PRIVATE KEY' in raw else serialization.load_pem_private_key(raw,password=None)
+          if not isinstance(key,Ed25519PrivateKey): raise SystemExit('ENDSTEMPEL_PRIVATE_KEY_NOT_ED25519')
+          pub=key.public_key().public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)
+          ident={'signing_key_id':'github-secret-ed25519-'+hashlib.sha256(pub).hexdigest()[:16],'signing_public_key_sha256':hashlib.sha256(pub).hexdigest(),'public_key_b64':base64.b64encode(pub).decode('ascii')}
+          if len(sys.argv)==2 and sys.argv[1]=='--identity':
+              print(json.dumps(ident,separators=(',',':'))); raise SystemExit(0)
+          req=json.loads(sys.stdin.read())
+          if req.get('contract')!='PFERDE_ATELIER_GITHUB_FINAL_SIGN_REQUEST_V1' or req.get('algorithm')!='ED25519': raise SystemExit('SIGN_REQUEST_INVALID')
+          out=dict(ident)
+          out['signature_b64']=base64.b64encode(key.sign(str(req['manifest_sha256']).encode('ascii'))).decode('ascii')
+          print(json.dumps(out,separators=(',',':')))
+          PY
+          chmod 700 /tmp/k7-signer.py
+          identity="$(/tmp/k7-signer.py --identity)"
+          export ENDSTEMPEL_HSM_CMD=/tmp/k7-signer.py
+          export ENDSTEMPEL_TRUSTED_KEY_ID="$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_key_id"])' "$identity")"
+          export ENDSTEMPEL_TRUSTED_PUBLIC_KEY_SHA256="$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["signing_public_key_sha256"])' "$identity")"
+          export ENDSTEMPEL_TRUSTED_PUBLIC_KEY_B64="$(python3 -c 'import json,sys;print(json.loads(sys.argv[1])["public_key_b64"])' "$identity")"
+          python3 control/startmaster0107/GITHUB_FINAL_RELEASE.py finalize "$SOURCE_REF" | tee /tmp/k7-final-result.json
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import hashlib,json,pathlib
+          x=json.load(open('/tmp/k7-final-result.json',encoding='utf-8'))
+          if x.get('ok') is not True or x.get('status')!='GITHUB_FINAL_RELEASE_PASS' or x.get('publish_allowed') is not False: raise SystemExit('K7_FINAL_NOT_PASS')
+          p=pathlib.Path(x['final_ref']); h=hashlib.sha256(p.read_bytes()).hexdigest()
+          if h!=x.get('final_sha256') or x.get('article_count')<1: raise SystemExit('K7_FINAL_HASH_OR_COUNT_INVALID')
+          print('final_ref='+x['final_ref'])
+          print('final_filename='+p.name)
+          print('final_sha256='+h)
+          print('batch_sha256='+x['batch_sha256'])
+          print('article_count='+str(x['article_count']))
+          print('runtime_generation='+str(x['runtime_generation']))
+          PY
+
+      - name: Publish durable Konzept-7 WordPress JSON
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FINAL_REF: ${{ steps.stamp.outputs.final_ref }}
+          FINAL_FILENAME: ${{ steps.stamp.outputs.final_filename }}
+          FINAL_SHA256: ${{ steps.stamp.outputs.final_sha256 }}
+          BATCH_SHA256: ${{ steps.stamp.outputs.batch_sha256 }}
+          RUNTIME_GENERATION: ${{ steps.stamp.outputs.runtime_generation }}
+        run: |
+          set -euo pipefail
+          printf -v gp '%06d' "$RUNTIME_GENERATION"
+          tag="konzept7-endstempel-$BATCH_SHA256-g$gp"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'K7_RELEASE_REPLAY_BLOCKED'; exit 2
+          fi
+          gh release create "$tag" "$FINAL_REF#$FINAL_FILENAME" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Konzept 7 Endstempel $BATCH_SHA256 generation $gp" --notes "Konzept-7 final WordPress JSON. SHA-256: $FINAL_SHA256. publish_allowed=false."
+          echo "K7_DURABLE_RELEASE_PASS:$tag:$FINAL_SHA256"
+
+      - name: Upload transport copy
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: konzept7-endstempel-${{ steps.stamp.outputs.batch_sha256 }}-g${{ steps.stamp.outputs.runtime_generation }}
+          path: ${{ steps.stamp.outputs.final_ref }}
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
