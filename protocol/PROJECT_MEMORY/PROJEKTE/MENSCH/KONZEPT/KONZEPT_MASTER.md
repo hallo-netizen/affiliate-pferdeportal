@@ -293,3 +293,154 @@ Noch offen und ausdrücklich nicht als final festgeschrieben:
 - Umfang und Regeln des Dienstleisterverzeichnisses.
 
 Diese offenen Punkte sind Konzeptfragen und keine zweite NEXT ACTION.
+
+## 12. Neueste Konzeptverdichtung – ein Portal, drei Mensch-Stränge
+
+Stand der Diskussion: 2026-09-27.
+
+### 12.1 Ein Portal statt drei getrennten Websites
+
+Die drei bisher herausgearbeiteten inhaltlichen Stränge sollen nach aktuellem Konzept **nicht** auf drei getrennte Portale verteilt werden.
+
+Sie sollen unter **einer Marke und einer Domain** zusammengeführt werden:
+
+1. **Persönlicher Mensch / Leben**
+   - Persönlichkeit;
+   - Identität;
+   - Beziehungen;
+   - Familie;
+   - Lebensphasen;
+   - Wandel;
+   - Orientierung.
+
+2. **Mensch im Beruf / in der Arbeitswelt**
+   - Beruf;
+   - Karriere;
+   - Neuorientierung;
+   - Arbeitswelt;
+   - Führung;
+   - Zusammenarbeit;
+   - Unternehmensleben aus menschlicher Sicht.
+
+3. **Lernen / Entwicklung / Weiterkommen**
+   - Weiterbildung;
+   - E-Learning;
+   - Seminare;
+   - Kurse;
+   - Sprachen;
+   - Fähigkeiten;
+   - persönliche und berufliche Entwicklung.
+
+Begründung:
+Viele reale Such- und Lebenssituationen überschneiden mehrere Stränge gleichzeitig. Beispiele sind berufliche Neuorientierung in der Lebensmitte, Selbstvertrauen im Beruf oder Weiterbildung nach einer Veränderung. Eine Trennung auf mehrere Domains würde diese natürlichen Überschneidungen künstlich zerschneiden.
+
+### 12.2 Parallel laufende Bereiche innerhalb derselben Website
+
+Neben den Hauptkategorien sollen innerhalb derselben Website weitere Bereiche parallel laufen:
+
+- **Journal / Magazin** für Longtails, konkrete Situationen, Fragen und Inspiration;
+- **Anzeigen- / Dienstleistermarkt** für passende Coaches, Seminaranbieter, Kursanbieter, Weiterbildungsanbieter und andere geeignete menschbezogene Dienstleistungen;
+- **Glossar** als unterstützende Wissens- und Verlinkungsebene.
+
+Diese Bereiche sind keine eigenständigen Portale.
+
+### 12.3 Verdichteter erster Entwurf der Hauptnavigation
+
+Aus der vorherigen 8er-Arbeitsstruktur wurde als kompakterer Navigationsentwurf zunächst folgende **6er-Struktur** entwickelt:
+
+1. **Persönlichkeit & Identität**
+   - Selbstbild;
+   - Selbstvertrauen;
+   - Stärken;
+   - Motivation;
+   - persönliche Entwicklung.
+
+2. **Beziehungen & Familie**
+   - Partnerschaft;
+   - Familie;
+   - Freundschaft;
+   - Elternschaft;
+   - Kommunikation;
+   - Liebe;
+   - Sexualität.
+
+3. **Lebensphasen & Wandel**
+   - Elternwerden und neue Verantwortung;
+   - Erwachsenwerden;
+   - große Übergänge;
+   - Lebensmitte;
+   - Älterwerden;
+   - Abschied;
+   - Sterben;
+   - Tod;
+   - Trauer.
+
+4. **Beruf & Arbeitswelt**
+   - Berufswahl;
+   - Karriere;
+   - Bewerbung;
+   - berufliche Neuorientierung;
+   - Führung;
+   - Teamarbeit;
+   - Unternehmenskultur;
+   - Konflikte und Kommunikation im Arbeitsleben.
+
+5. **Lernen & Weiterentwicklung**
+   - Weiterbildung;
+   - E-Learning;
+   - Sprachen;
+   - Seminare und Workshops;
+   - Lernmethoden;
+   - digitale Fähigkeiten;
+   - berufliche und persönliche Entwicklung.
+
+6. **Orientierung & Lebensgestaltung**
+   - Entscheidungen;
+   - Ziele;
+   - Sinn;
+   - Lebensplanung;
+   - persönliche Richtung;
+   - berufliche Richtung;
+   - „Wie möchte ich leben?“.
+
+Diese 6er-Struktur ist **noch keine finale Taxonomie**, sondern der aktuell verdichtete Navigationsentwurf.
+
+### 12.4 Lebenszeitstrahl als zusätzlicher Entdeckungsweg
+
+Die Idee einer rein chronologischen Hauptnavigation „von Geburt bis Tod“ wurde geprüft.
+
+Aktueller Konzeptgedanke:
+Der Lebenszeitstrahl ist **stark als zusätzlicher Zugangsweg**, aber nicht als alleinige Hauptnavigation.
+
+Möglicher Entdeckungsweg:
+
+**Ankommen / Elternwerden → Aufwachsen → Erwachsenwerden → Beziehungen & Familie → Beruf & Entwicklung → Lebensmitte → Älterwerden → Abschied & Trauer**
+
+Damit kann der Nutzer das Portal zusätzlich nach seiner aktuellen Lebensphase erkunden.
+
+### 12.5 Geburt, Tod und Trauer
+
+Geburt, Elternwerden, Abschied, Sterben, Tod und Trauer gehören ausdrücklich zum Themenfeld Mensch.
+
+Abgrenzung:
+- keine medizinische Schwangerschafts-, Geburts- oder Krankheitsberatung;
+- Fokus auf menschliche, mentale, soziale und lebenspraktische Veränderungen;
+- Trauer und Verlust als menschliche Lebenssituationen, nicht als medizinische Diagnose oder Therapie.
+
+Aktueller Strukturgedanke:
+- **Geburt / Elternwerden** nicht als eigene Hauptkategorie, sondern im Zusammenhang mit Beziehungen, Familie und Lebensphasen;
+- **Tod & Trauer** nicht als isolierte Hauptkategorie, sondern als großer Themencluster unter **Lebensphasen & Wandel**.
+
+Damit bleibt die Hauptnavigation ausgewogen, während Anfang und Ende des Lebens trotzdem vollständig in der Portalidee enthalten sind.
+
+### 12.6 Noch offen
+
+Noch nicht entschieden:
+- ob die 6er-Struktur final bleibt oder wieder auf 7 Hauptkategorien erweitert wird;
+- genaue Benennung der Hauptkategorien;
+- genaue Trennung zwischen „Persönlichkeit & Identität“ und „Orientierung & Lebensgestaltung“;
+- genaue Rolle von Familie/Elternschaft zwischen „Beziehungen & Familie“ und „Lebensphasen & Wandel“;
+- endgültige Ausgestaltung des Lebenszeitstrahls.
+
+Diese Punkte bleiben Konzeptarbeit und sind noch keine finale Navigationsfreigabe.
+
