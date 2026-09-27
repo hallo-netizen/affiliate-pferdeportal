@@ -479,3 +479,16 @@ Status dieses Abschnitts: Historie/Nachweis, keine Current-Autorität und keine 
 - Der frühere `DURABLE_EVENT_SEQUENCE_GAP`-Befund bleibt korrekt für den Versuch, die gesamte spätere Kommentarfolge ungefiltert wiederzugeben. Der enger begrenzte, historische autorisierte Stand bis Sequenz 74 ist dagegen reproduzierbar rekonstruierbar.
 - Daraus wird ausdrücklich keine neue CURRENT-/NEXT-ACTION-Wahrheit abgeleitet. Die zuständige Current-Autorität bleibt `control/startmaster0107/CURRENT_STATE.json`; deren Nachzug auf den neueren belegten Stand bleibt durch den in PR #431 dokumentierten Authority-Sync-/Hardlock-Konflikt BLOCKED.
 - Keine Änderung an Produktionslogik, Architektur, LT 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Qualitätsregeln, Plugins oder Publish.
+
+
+## Nachtrag 2026-09-27 — Wiederhergestellter text-start NO-STOP-Hardlock
+
+Historiennachweis, keine Current-Autorität und keine neue Route.
+
+- Erster gebrochener Punkt: Auf `main` war die bereits in PR #421 vorhandene harte Regel „`CONCEPT_AGENT_INTAKE_READY` ist kein Antwort-/Stop-Punkt; gebundener Worker setzt unmittelbar fort“ aus `concept_agent/START_HERE.md` verloren gegangen.
+- Minimalfix PR #447 stellt ausschließlich diese bestehende Regel wieder her.
+- `concept_agent/intake_bridge.py` blockiert fail-closed, falls die NO-STOP-Regel künftig erneut aus der Bürotür entfernt wird.
+- Positivfall: vollständige NO-STOP-Marker vorhanden → PASS.
+- Negativfall: Pflichtmarker „weder antworten noch erneut prüfen/suchen“ entfernt → `START_HERE_NO_STOP_HARDLOCK_MISSING`.
+- Unverändert: text-start-Workflow, `production_bridge.py`, `progress_guard.py`, `full_workflow_gate.py`, LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL, Publish.
+- Keine neue Architektur, kein Runner, keine Alternativroute.
