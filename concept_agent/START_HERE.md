@@ -19,6 +19,8 @@ Pflichtweg:
 
 Bei einem realen Produktionslauf bestimmt ausschließlich die frisch gelesene Current-Autorität den erlaubten Einstieg. Bereits gültig gebundene Research-/Checkpoint-/Artikelzustände werden wiederverwendet; ein erneuter Start darf keinen parallelen zweiten Wahrheitsweg eröffnen.
 
+**HARD RULE – text-start ist kein Antwortpunkt:** Sobald ein realer `text-start` ein gültiges `CONCEPT_AGENT_INTAKE_READY` mit `continuation_required=true` an den bereits gebundenen `BOUND_CHAT_WORKER` übergibt, darf dieser weder antworten noch erneut prüfen/suchen. Er muss ohne Nutzer-Zwischenmeldung die exakt gebundene `process_trigger`-Aktion unmittelbar ausführen, deren Rückgabe in den bestehenden Guard zurückführen und jede weitere nicht-terminale gebundene Aktion unmittelbar fortsetzen. Erst der ausdrücklich gebundene terminale `STOP` beendet den Lauf.
+
 Nicht-terminale Übergaben sind kein Chat-Stop. Schreiben, LanguageTool 6.8, PPM 6.7.9, Same-Article-Repair, PSERC und ENDSTEMPEL laufen nur in der von Current gebundenen Reihenfolge. Ein echter Fehler blockiert fail-closed am ersten gebrochenen Punkt.
 
 ## Nicht als Current verwenden
