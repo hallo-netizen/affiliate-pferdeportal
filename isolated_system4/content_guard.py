@@ -25,7 +25,7 @@ MIN_REPAIR_SIMILARITY = 0.72
 SEMANTIC_REPEAT_MAX_CONTAINMENT = 0.70
 SEMANTIC_REPEAT_MIN_SHARED_TOKENS = 10
 SEMANTIC_REPEAT_MIN_CONTENT_TOKENS = 12
-SEMANTIC_REPEAT_EXEMPT_BLOCKS = {"conclusion", "further_information"}
+SEMANTIC_REPEAT_EXEMPT_BLOCKS = {"further_information"}
 SEMANTIC_REPEAT_STOPWORDS = {
     "aber","als","am","an","auch","auf","aus","bei","das","dass","dem","den","der","des","die","dies","diese",
     "einer","einem","einen","eine","ein","es","für","im","in","ist","kann","mit","nach","nicht","nur","oder",
