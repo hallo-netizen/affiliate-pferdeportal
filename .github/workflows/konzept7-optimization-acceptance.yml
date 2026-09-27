@@ -1,0 +1,77 @@
+name: Konzept 7 Optimization Acceptance
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - 'concept_agent/production_bridge.py'
+      - 'concept_agent/konzept7/**'
+      - '.github/workflows/konzept7-optimization-acceptance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact Konzept-7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Compile optimized K7 components
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            concept_agent/production_bridge.py \
+            concept_agent/konzept7/k7_execution_lock.py \
+            concept_agent/konzept7/k7_research_planner.py \
+            concept_agent/konzept7/k7_parallel_controller.py \
+            concept_agent/konzept7/k7_metrics.py \
+            concept_agent/konzept7/k7_closeout_plan.py
+
+      - name: Run K7 hard optimization acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent.konzept7.test_k7_optimizations
+
+      - name: Re-run existing production guard suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent/tests/test_current_production_guards.py
+
+      - name: Prove current 16 binding can initialize 1 2 4 8 lanes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib,sys,tempfile
+          root=pathlib.Path.cwd()
+          sys.path[:0]=[str(root/'concept_agent'),str(root/'concept_agent/konzept7')]
+          import intake_bridge,production_bridge,k7_parallel_controller
+          snap=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text())
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text())
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          result={}
+          for lanes in (1,2,4,8):
+              state=k7_parallel_controller.initial(binding,lanes)
+              actions=k7_parallel_controller.ready_actions(binding,state)
+              result[str(lanes)]={
+                'initial_actions':len(actions),
+                'items':[a['item_index'] for a in actions],
+                'lanes':[a['lane'] for a in actions],
+              }
+              if len(actions)!=min(lanes,binding['item_count']):
+                  raise SystemExit('K7_LANE_WIDTH_INVALID:'+str(lanes))
+          print(json.dumps({'status':'K7_OPTIMIZATION_ACCEPTANCE_PASS','matrix':result},sort_keys=True))
+          PY
