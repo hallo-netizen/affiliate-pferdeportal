@@ -165,7 +165,7 @@ def write_all(outdir:Path)->dict:
             m=re.search(r'(?is)<section data-block="further_information">.*?</section>',body)
             if not m:
                 raise SystemExit("TRIAL3_FURTHER_INFORMATION_MISSING:"+name)
-            ps=re.findall(r'(?is)<p\\b.*?</p>',m.group(0))
+            ps=re.findall(r'(?is)<p\b.*?</p>',m.group(0))
             if len(ps)<keep:
                 raise SystemExit("TRIAL3_FURTHER_INFORMATION_PARAGRAPHS_MISSING:"+name)
             concise='<section data-block="further_information"><h2>Weiterführende Informationen</h2>'+''.join(ps[:keep])+'</section>'
