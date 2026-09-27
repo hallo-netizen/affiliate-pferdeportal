@@ -1,0 +1,55 @@
+name: Konzept 7 Real4 Preparation
+
+on:
+  push:
+    branches:
+      - 'konzept7/working-copy-20260927'
+    paths:
+      - 'concept_agent/konzept7/K7_REAL4_TRIGGER.txt'
+      - '.github/workflows/konzept7-real4-prep.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact K7 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Build exact K7 binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib,sys
+          root=pathlib.Path.cwd()
+          sys.path.insert(0,str(root/'concept_agent'))
+          import intake_bridge,production_bridge
+          snap=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=intake_bridge.prepare(snap)
+          binding=production_bridge.build(snap,intake,research)
+          out={
+            'contract':'K7_REAL4_BOUND_WORK_V1',
+            'batch_sha256':binding['batch_sha256'],
+            'binding_sha256':binding['binding_sha256'],
+            'item_count':4,
+            'items':binding['items'][:4],
+            'publish_allowed':False,
+          }
+          (root/'K7_REAL4_BOUND_WORK.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('K7_REAL4_PREP_PASS:'+binding['binding_sha256'])
+          PY
+      - name: Upload bound work
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: k7-real4-bound-work-${{ github.sha }}
+          path: K7_REAL4_BOUND_WORK.json
+          if-no-files-found: error
+          retention-days: 7
