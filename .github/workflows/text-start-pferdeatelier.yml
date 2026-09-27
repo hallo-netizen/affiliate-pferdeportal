@@ -159,12 +159,94 @@ jobs:
               raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
           PY
 
-      - name: Upload current intake handoff
+      - name: Bind current K7 production target
+        id: k7
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          state=json.load(open("control/startmaster0107/CURRENT_STATE.json", encoding="utf-8"))
+          action=state.get("next_action") or {}
+          if action.get("goal") != "RUN_K7_FULL16_END_TO_END_FOUR_LANE_VALIDATION":
+              raise SystemExit("TEXT_START_K7_CURRENT_ACTION_NOT_BOUND")
+          head=str(action.get("execution_head_sha") or "")
+          branch=str(action.get("execution_branch") or "")
+          lanes=action.get("required_lanes")
+          if len(head) != 40 or not branch or lanes != 4:
+              raise SystemExit("TEXT_START_K7_EXECUTION_TARGET_INVALID")
+          current=state.get("concept_agent_current_batch") or {}
+          batch=str(current.get("batch_sha256") or "")
+          research=str(current.get("research_binding_sha256") or "")
+          if len(batch) != 64 or len(research) != 64:
+              raise SystemExit("TEXT_START_K7_CURRENT_BINDING_INVALID")
+          out=os.environ["GITHUB_OUTPUT"]
+          with open(out,"a",encoding="utf-8") as fh:
+              fh.write(f"head={head}\n")
+              fh.write(f"branch={branch}\n")
+              fh.write(f"lanes={lanes}\n")
+              fh.write(f"batch={batch}\n")
+              fh.write(f"research={research}\n")
+          PY
+
+      - name: Checkout bound K7 execution head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ steps.k7.outputs.head }}
+          path: k7-run
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Start bound K7 production
+        env:
+          K7_EXPECTED_HEAD: ${{ steps.k7.outputs.head }}
+          K7_EXPECTED_BATCH: ${{ steps.k7.outputs.batch }}
+          K7_EXPECTED_RESEARCH: ${{ steps.k7.outputs.research }}
+          K7_LANES: ${{ steps.k7.outputs.lanes }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C k7-run rev-parse HEAD)" = "$K7_EXPECTED_HEAD"
+          python3 - <<'PY'
+          import json, os
+          research=json.load(open("k7-run/concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json", encoding="utf-8"))
+          if research.get("batch_sha256") != os.environ["K7_EXPECTED_BATCH"]:
+              raise SystemExit("TEXT_START_K7_RESEARCH_BATCH_DRIFT")
+          if research.get("research_binding_sha256") != os.environ["K7_EXPECTED_RESEARCH"]:
+              raise SystemExit("TEXT_START_K7_RESEARCH_BINDING_DRIFT")
+          PY
+          python3 k7-run/concept_agent/konzept7/k7_start_controller.py \
+            k7-run/concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
+            k7-run/concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json \
+            K7_RUNTIME_STATE \
+            "$K7_LANES" 1 | tee K7_START_RECEIPT.json
+          python3 - <<'PY'
+          import json
+          receipt=json.load(open("K7_START_RECEIPT.json", encoding="utf-8"))
+          actions=receipt.get("ready_actions")
+          if receipt.get("stage") != "ARTICLE_PRODUCTION":
+              raise SystemExit("TEXT_START_K7_PRODUCTION_NOT_STARTED")
+          if receipt.get("publish_allowed") is not False:
+              raise SystemExit("TEXT_START_K7_PUBLISH_FLAG_INVALID")
+          if receipt.get("execution_lock_status") not in {"CREATED","RESUME_EXISTING"}:
+              raise SystemExit("TEXT_START_K7_EXECUTION_LOCK_INVALID")
+          if not isinstance(actions,list) or len(actions) != 4:
+              raise SystemExit("TEXT_START_K7_FOUR_LANES_NOT_READY")
+          if [row.get("lane") for row in actions] != [0,1,2,3]:
+              raise SystemExit("TEXT_START_K7_LANES_INVALID")
+          if any(row.get("action") != "WRITE_DRAFT" for row in actions):
+              raise SystemExit("TEXT_START_K7_WRITE_DRAFT_NOT_READY")
+          print("TEXT_START_K7_PRODUCTION_STARTED")
+          PY
+
+      - name: Upload current intake and K7 production handoff
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pferdeatelier-start-${{ inputs.source_run_id }}
           path: |
             CONCEPT_AGENT_INTAKE_RECEIPT.json
             CONCEPT_AGENT_INTAKE.json
+            K7_START_RECEIPT.json
+            K7_RUNTIME_STATE/**
           if-no-files-found: error
           retention-days: 30
