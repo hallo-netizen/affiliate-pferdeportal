@@ -22,6 +22,15 @@ BATCH_SHINGLE_SIZE = 8
 MAX_PAIRWISE_SHINGLE_JACCARD = 0.20
 MAX_REPAIR_LENGTH_CHANGE = 0.30
 MIN_REPAIR_SIMILARITY = 0.72
+SEMANTIC_REPEAT_MAX_CONTAINMENT = 0.70
+SEMANTIC_REPEAT_MIN_SHARED_TOKENS = 10
+SEMANTIC_REPEAT_MIN_CONTENT_TOKENS = 12
+SEMANTIC_REPEAT_EXEMPT_BLOCKS = {"conclusion", "further_information"}
+SEMANTIC_REPEAT_STOPWORDS = {
+    "aber","als","am","an","auch","auf","aus","bei","das","dass","dem","den","der","des","die","dies","diese",
+    "einer","einem","einen","eine","ein","es","für","im","in","ist","kann","mit","nach","nicht","nur","oder",
+    "sich","sie","so","sollte","sollten","über","und","vom","von","vor","war","werden","wie","wird","zu","zum","zur"
+}
 
 
 class ContentGuardError(RuntimeError):
@@ -351,6 +360,64 @@ def validate_repair_continuity(old_body: str, new_body: str) -> dict[str, Any]:
     }
 
 
+def _semantic_repeat_paragraphs(article: str) -> list[str]:
+    rows: list[str] = []
+    sections = list(re.finditer(
+        r'(?is)<section\b[^>]*data-block\s*=\s*(["\'])([^"\']+)\1[^>]*>(.*?)</section>',
+        article,
+    ))
+    bodies = [(m.group(2), m.group(3)) for m in sections] if sections else [("", article)]
+    for block_id, body in bodies:
+        if block_id in SEMANTIC_REPEAT_EXEMPT_BLOCKS:
+            continue
+        for paragraph in re.findall(r"(?is)<p\b[^>]*>(.*?)</p>", body):
+            text = re.sub(r"(?is)<span\b[^>]*>.*?</span>", " ", paragraph)
+            text = _visible_text(text)
+            if len(_word_tokens(text)) >= SEMANTIC_REPEAT_MIN_CONTENT_TOKENS:
+                rows.append(text)
+    return rows
+
+
+def _semantic_repeat_tokens(text: str) -> set[str]:
+    return {
+        token
+        for token in _word_tokens(text)
+        if len(token) >= 3 and token not in SEMANTIC_REPEAT_STOPWORDS
+    }
+
+
+def validate_semantic_repetition(article: str) -> dict[str, Any]:
+    paragraphs = _semantic_repeat_paragraphs(article)
+    maximum = 0.0
+    worst_pair: tuple[int, int] | None = None
+    for left in range(len(paragraphs)):
+        a = _semantic_repeat_tokens(paragraphs[left])
+        if len(a) < SEMANTIC_REPEAT_MIN_CONTENT_TOKENS:
+            continue
+        for right in range(left + 1, len(paragraphs)):
+            b = _semantic_repeat_tokens(paragraphs[right])
+            if len(b) < SEMANTIC_REPEAT_MIN_CONTENT_TOKENS:
+                continue
+            shared = len(a & b)
+            if shared < SEMANTIC_REPEAT_MIN_SHARED_TOKENS:
+                continue
+            containment = shared / min(len(a), len(b))
+            if containment > maximum:
+                maximum = containment
+                worst_pair = (left, right)
+            if containment >= SEMANTIC_REPEAT_MAX_CONTAINMENT:
+                raise ContentGuardError(
+                    f"ARTICLE_MEANING_REPEAT_BLOCKED:{left + 1}:{right + 1}:{containment:.4f}"
+                )
+    return {
+        "status": "PASS",
+        "paragraph_count": len(paragraphs),
+        "max_containment": round(maximum, 6),
+        "threshold": SEMANTIC_REPEAT_MAX_CONTAINMENT,
+        "worst_pair": list(worst_pair) if worst_pair is not None else None,
+    }
+
+
 def validate_article_fact_ids(article: str, fact_pack: Mapping[str, Any]) -> dict[str, Any]:
     claims = fact_pack.get("claims")
     _require(isinstance(claims, list) and claims, "ARTICLE_FACT_PACK_CLAIMS_MISSING")
@@ -372,4 +439,5 @@ def validate_article_fact_ids(article: str, fact_pack: Mapping[str, Any]) -> dic
 def validate_single_article(article: str, fact_pack: Mapping[str, Any]) -> dict[str, Any]:
     validate_fact_pack(fact_pack)
     trace = validate_article_fact_ids(article, fact_pack)
-    return {"status": "PASS", "trace": trace}
+    repetition = validate_semantic_repetition(article)
+    return {"status": "PASS", "trace": trace, "semantic_repetition": repetition}
