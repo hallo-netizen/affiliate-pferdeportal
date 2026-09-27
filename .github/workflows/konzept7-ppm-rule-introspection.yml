@@ -31,5 +31,9 @@ jobs:
           unzip -q "$pkg" -d /tmp/k7ppm
           echo '=== LEXICAL FUNCTION ==='
           awk '/function lexically_supported/{flag=1} flag{print NR ":" $0} flag && /^    }/{exit}' /tmp/k7ppm/portal-production-machine/includes/content-validator.php
+          echo '=== LEXICAL TOKENIZER ==='
+          awk '/function lexical_tokens/{flag=1} flag{print NR ":" $0} flag && /^    }/{exit}' /tmp/k7ppm/portal-production-machine/includes/content-validator.php
+          echo '=== TABLE TOKEN SET ==='
+          awk '/function token_set/{flag=1} flag{print NR ":" $0} flag && /^    }/{exit}' /tmp/k7ppm/portal-production-machine/includes/content-structure-language-gate.php
           echo '=== TABLE SCORING NEIGHBORHOOD ==='
           grep -n -B 45 -A 65 -E 'unique_ratio|minimum_unique_content_token_ratio|BLOCKED_WAVE2_TABLE_VALUE' /tmp/k7ppm/portal-production-machine/includes/content-structure-language-gate.php || true
