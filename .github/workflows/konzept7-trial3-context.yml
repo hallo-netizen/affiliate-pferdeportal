@@ -64,6 +64,7 @@ jobs:
           out={'contract':'K7_TRIAL3_CONTEXT_V1','indices':[1,8,15],'items':selected,'publish_allowed':False}
           pathlib.Path('K7_TRIAL3_CONTEXT.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print('K7_TRIAL3_CONTEXT_PASS')
+          print(json.dumps(out,ensure_ascii=False,sort_keys=True))
           PY
 
       - name: Upload trial3 context
