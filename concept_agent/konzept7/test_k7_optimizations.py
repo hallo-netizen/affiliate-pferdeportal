@@ -8,7 +8,7 @@ sys.path.insert(0,str(HERE/"concept_agent"))
 sys.path.insert(0,str(HERE/"concept_agent"/"konzept7"))
 
 import intake_bridge,production_bridge
-import k7_execution_lock,k7_research_planner,k7_parallel_controller,k7_closeout_plan,k7_metrics,k7_start_controller
+import k7_execution_lock,k7_research_planner,k7_parallel_controller,k7_closeout_plan,k7_metrics,k7_start_controller,k7_bound_fact_context
 
 class K7OptimizationTests(unittest.TestCase):
     @classmethod
@@ -81,6 +81,29 @@ class K7OptimizationTests(unittest.TestCase):
         self.assertFalse(fresh["exact_bound_reuse"])
         self.assertEqual([x["lane"] for x in fresh["items"][:8]],[0,1,2,3,0,1,2,3])
         self.assertTrue(all(x["new_external_lookup_required"] for x in fresh["items"]))
+
+
+    def test_bound_fact_context_builds_real16_without_new_research(self):
+        import authoring_contract
+        out=k7_bound_fact_context.build_all(self.binding)
+        self.assertEqual(out["item_count"],16)
+        self.assertFalse(out["new_external_research_performed"])
+        self.assertFalse(out["historical_article_content_used"])
+        self.assertEqual(out["source"],"CURRENT_HASH_BOUND_RESEARCH_ONLY")
+        for row in out["items"]:
+            identity=row["identity"]
+            state={"article":{
+                "title":identity["title"],
+                "target_keyword":identity["target_keyword"],
+                "category":identity["category"],
+                "article_type":identity["article_type"],
+                "plan_slot":identity["plan_slot"],
+            },"source_snapshot_sha256":row["fact_pack"]["source_snapshot_id"]}
+            contract=authoring_contract.build(HERE,state,row["fact_pack"],row["production_plan_item"])
+            self.assertEqual(contract["article_identity"]["article_type"],identity["article_type"])
+            self.assertGreaterEqual(len(contract["bound_requirements"]["canonical_fact_ids"]),3)
+            if identity["article_type"]=="FAQ":
+                self.assertTrue(contract["bound_requirements"]["faq_direct_answer"])
 
     def test_parallel_lane_matrix_and_no_cross_article_mix(self):
         for lanes in (1,2,4,8):
