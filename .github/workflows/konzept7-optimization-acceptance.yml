@@ -31,6 +31,7 @@ jobs:
           set -euo pipefail
           python3 -m py_compile \
             concept_agent/production_bridge.py \
+            concept_agent/konzept7/k7_start_controller.py \
             concept_agent/konzept7/k7_execution_lock.py \
             concept_agent/konzept7/k7_research_planner.py \
             concept_agent/konzept7/k7_parallel_controller.py \
