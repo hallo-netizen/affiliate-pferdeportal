@@ -128,6 +128,14 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
             "target_trace_lexical_support_ratio": 1.0,
             "trace_unit_minimum_shared_lexical_tokens": 2,
             "trace_lexical_reference": "REFERENCED_FACT_STATEMENT_PLUS_EVIDENCE",
+            "existing_ppm_title_repeat_guard": {
+                "normalized_title_repeat_in_visible_body_forbidden": True,
+                "title_target_collision": title_target_collision,
+                "exact_target_keyword_in_visible_body_allowed": not title_target_collision,
+                "bound_table_value_statement_usage": "PARAPHRASE_IF_VERBATIM_TEXT_WOULD_REPEAT_NORMALIZED_TITLE",
+                "source": "EXISTING_PPM_6_7_9_TITLE_REPEAT_GUARDS",
+                "ppm679_changed": False,
+            },
             "target_duplicate_sentence_ratio": min(float(constants.get("max_duplicate_sentence_ratio") or 0.02) / 2.0, 0.01),
             "mechanical_requirements_prebound": {
                 "link_bindings": json.loads(json.dumps(links)),
