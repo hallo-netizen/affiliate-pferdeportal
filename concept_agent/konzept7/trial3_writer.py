@@ -135,7 +135,7 @@ EDITORIAL_REPAIRS={
 FINAL_REPAIRS={
 "08_schermaschinen.html":[
 ("Motorart und Geschwindigkeitsstufen vergleichen","bürstenlosen Motor und zwei Geschwindigkeiten vergleichen"),
-(">Gewicht<span class=\\\"ppm-source-trace\\\"",">Gewicht und Schneidsatz<span class=\\\"ppm-source-trace\\\""),
+("Gewicht<span","Gewicht und Schneidsatz<span"),
 ("Gewicht bei längerer Nutzung berücksichtigen","Gewicht und Schneidsatz gemeinsam bewerten"),
 ("Handhabung bei längerer Nutzung einschätzen","Gewicht und Schneidsatz für längere Nutzung einordnen"),
 ("Austauschbarkeit und passende Schneidsätze prüfen","austauschbaren Pferde-Schneidsatz und Gewicht prüfen"),
@@ -147,7 +147,7 @@ FINAL_REPAIRS={
 ("<h2>Kostenfaktoren der Hauptuntersuchung vergleichen</h2>","<h2>Transport und Kostenfaktoren der Hauptuntersuchung vergleichen</h2>"),
 ("Fahrzeugart in der Preisübersicht einordnen","Fahrzeugart und zulässige Gesamtmasse einordnen"),
 ("Gewichtsklasse aus den Fahrzeugpapieren übernehmen","zulässige Gesamtmasse aus den Fahrzeugpapieren übernehmen"),
-(">Bundesland<span class=\\\"ppm-source-trace\\\"",">Bundesland und Prüforganisation<span class=\\\"ppm-source-trace\\\""),
+("Bundesland<span","Bundesland und Prüforganisation<span"),
 ("Regionale Preisübersicht der Prüfstelle verwenden","Bundesland und Prüforganisation abgleichen"),
 ],
 }
