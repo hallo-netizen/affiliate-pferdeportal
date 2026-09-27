@@ -17,7 +17,7 @@ deine Aufgabe ausschließlich das Themenfeld Mensch betrifft.
 das zuständige Büro wählen und dort nach dessen Regeln arbeiten.
 
 **DU DARFST NICHT …**  
-Pferde-, Hobby-, Gaumen-, Tier-, Technik- oder andere Nicht-Mensch-Themen in dieses Gebäude mischen oder am Gebäudeeingang Fachstatus erfinden.
+Nicht-Mensch-Themen in dieses Gebäude mischen oder am Gebäudeeingang Fachstatus erfinden.
 
 **ALS NÄCHSTES …**  
 `KONZEPT/START_HERE.md` → `AUTORITAETSPLAN.json` → Scope `MENSCH_KONZEPT` → genau eine Current-Autorität → Frischecheck → deren NEXT ACTION.
