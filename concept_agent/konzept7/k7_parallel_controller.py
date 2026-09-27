@@ -69,6 +69,19 @@ def _lane_heads(state):
         if lane not in heads: heads[lane]=row
     return [heads[k] for k in sorted(heads)]
 
+def _gated_action(action):
+    out=dict(action)
+    out.update({
+      "canonical_bound_worker_only":True,
+      "free_chat_execution":False,
+      "free_repo_search":False,
+      "free_archive_search":False,
+      "free_research_rerun":False,
+      "alternate_route_allowed":False,
+      "return_to_parallel_controller_required":True,
+    })
+    return out
+
 def ready_actions(binding,state):
     verify(binding,state)
     if state["batch_phase"]=="ARTICLE_PRODUCTION":
@@ -80,11 +93,11 @@ def ready_actions(binding,state):
             elif phase=="PPM679_REQUIRED": action={"action":"RUN_CHECKER","checker":"PPM679","draft_sha256":row["draft_sha256"]}
             elif phase=="REPAIR_REQUIRED": action={"action":"REPAIR_DRAFT","finding_sha256":row.get("finding_sha256")}
             else: continue
-            action.update({"item_index":row["item_index"],"plan_slot":row["plan_slot"],"lane":row["lane"],"canonical_bound_worker_only":True,"free_chat_execution":False})
-            out.append(action)
+            action.update({"item_index":row["item_index"],"plan_slot":row["plan_slot"],"lane":row["lane"]})
+            out.append(_gated_action(action))
         return out
-    if state["batch_phase"]=="PSERC_REQUIRED": return [{"action":"RUN_PSERC","item_count":state["item_count"]}]
-    if state["batch_phase"]=="ENDSTEMPEL_REQUIRED": return [{"action":"RUN_ENDSTEMPEL","item_count":state["item_count"]}]
+    if state["batch_phase"]=="PSERC_REQUIRED": return [_gated_action({"action":"RUN_PSERC","item_count":state["item_count"]})]
+    if state["batch_phase"]=="ENDSTEMPEL_REQUIRED": return [_gated_action({"action":"RUN_ENDSTEMPEL","item_count":state["item_count"]})]
     if state["batch_phase"]=="COMPLETE": return [{"action":"STOP","reason":"BATCH_COMPLETE_ENDSTEMPEL_PASS"}]
     raise Blocked("BATCH_PHASE_INVALID")
 
@@ -92,7 +105,7 @@ def _row(state,index):
     if not isinstance(index,int) or index<0 or index>=len(state["items"]): raise Blocked("ITEM_INDEX_INVALID")
     return state["items"][index]
 
-def record_draft(binding,state,index,content):
+def _record_draft(binding,state,index,content):
     verify(binding,state); out=json.loads(json.dumps(state)); row=_row(out,index)
     if row["phase"]!="AUTHORING_REQUIRED": raise Blocked("WRITE_NOT_ALLOWED")
     if not isinstance(content,str) or not content.strip(): raise Blocked("DRAFT_EMPTY")
@@ -101,7 +114,7 @@ def record_draft(binding,state,index,content):
     row["revision_history"]=[{"revision":1,"reason":"FIRST_DRAFT","content_utf8":content,"draft_sha256":sha}]
     return seal(out)
 
-def record_check(binding,state,index,checker,status,findings=None):
+def _record_check(binding,state,index,checker,status,findings=None):
     verify(binding,state); out=json.loads(json.dumps(state)); row=_row(out,index); checker=checker.upper()
     if status not in {"PASS","REPAIR_REQUIRED"}: raise Blocked("CHECK_STATUS_INVALID")
     if checker=="LT68" and row["phase"]!="LT68_REQUIRED": raise Blocked("LT_ORDER_INVALID")
@@ -119,7 +132,7 @@ def record_check(binding,state,index,checker,status,findings=None):
         out["batch_phase"]="PSERC_REQUIRED"; out["status"]="PASS"
     return seal(out)
 
-def record_repair(binding,state,index,content):
+def _record_repair(binding,state,index,content):
     verify(binding,state); out=json.loads(json.dumps(state)); row=_row(out,index)
     if row["phase"]!="REPAIR_REQUIRED": raise Blocked("REPAIR_NOT_ALLOWED")
     if not isinstance(content,str) or not content.strip(): raise Blocked("REPAIR_EMPTY")
@@ -135,7 +148,7 @@ def record_repair(binding,state,index,content):
     row.pop("repair_checker",None); row.pop("finding_sha256",None); row.pop("finding_count",None)
     return seal(out)
 
-def record_stage(binding,state,stage):
+def _record_stage(binding,state,stage):
     verify(binding,state); out=json.loads(json.dumps(state))
     if stage=="PSERC":
         if out["batch_phase"]!="PSERC_REQUIRED": raise Blocked("PSERC_NOT_ALLOWED")
@@ -146,16 +159,51 @@ def record_stage(binding,state,stage):
     else: raise Blocked("STAGE_INVALID")
     return seal(out)
 
+def _load_persisted_state(binding,state_path):
+    path=Path(state_path)
+    if not path.is_file(): raise Blocked("DURABLE_STATE_MISSING")
+    state=json.loads(path.read_text(encoding="utf-8"))
+    verify(binding,state)
+    return state
+
+def _persist_state(binding,state_path,state):
+    verify(binding,state)
+    path=Path(state_path)
+    path.parent.mkdir(parents=True,exist_ok=True)
+    tmp=path.with_name(path.name+".tmp")
+    tmp.write_text(json.dumps(state,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    tmp.replace(path)
+    readback=_load_persisted_state(binding,path)
+    if readback.get("state_sha256")!=state.get("state_sha256"):
+        raise Blocked("DURABLE_STATE_READBACK_MISMATCH")
+    return readback
+
+def record_draft(binding,state_path,index,content):
+    state=_load_persisted_state(binding,state_path)
+    return _persist_state(binding,state_path,_record_draft(binding,state,index,content))
+
+def record_check(binding,state_path,index,checker,status,findings=None):
+    state=_load_persisted_state(binding,state_path)
+    return _persist_state(binding,state_path,_record_check(binding,state,index,checker,status,findings))
+
+def record_repair(binding,state_path,index,content):
+    state=_load_persisted_state(binding,state_path)
+    return _persist_state(binding,state_path,_record_repair(binding,state,index,content))
+
+def record_stage(binding,state_path,stage):
+    state=_load_persisted_state(binding,state_path)
+    return _persist_state(binding,state_path,_record_stage(binding,state,stage))
+
 def simulate(binding,lanes):
     state=initial(binding,lanes)
     while state["batch_phase"]=="ARTICLE_PRODUCTION":
         acts=ready_actions(binding,state)
         for a in acts:
             i=a["item_index"]; action=a["action"]
-            if action=="WRITE_DRAFT": state=record_draft(binding,state,i,f"<article><h2>Artikel {i}</h2><p>synthetic-{i}</p></article>")
-            elif action=="RUN_CHECKER": state=record_check(binding,state,i,a["checker"],"PASS")
+            if action=="WRITE_DRAFT": state=_record_draft(binding,state,i,f"<article><h2>Artikel {i}</h2><p>synthetic-{i}</p></article>")
+            elif action=="RUN_CHECKER": state=_record_check(binding,state,i,a["checker"],"PASS")
             else: raise Blocked("UNEXPECTED_SIM_ACTION")
-    state=record_stage(binding,state,"PSERC"); state=record_stage(binding,state,"ENDSTEMPEL")
+    state=_record_stage(binding,state,"PSERC"); state=_record_stage(binding,state,"ENDSTEMPEL")
     if ready_actions(binding,state)[0]["action"]!="STOP": raise Blocked("SIM_NOT_TERMINAL")
     return state
 
