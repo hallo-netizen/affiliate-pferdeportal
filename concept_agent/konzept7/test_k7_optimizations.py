@@ -33,6 +33,13 @@ class K7OptimizationTests(unittest.TestCase):
             self.assertEqual(bp["target_trace_lexical_support_ratio"],1.0)
             self.assertEqual(bp["trace_unit_minimum_shared_lexical_tokens"],2)
             self.assertEqual(bp["trace_lexical_reference"],"REFERENCED_FACT_STATEMENT_PLUS_EVIDENCE")
+            title_guard=bp["existing_ppm_title_repeat_guard"]
+            self.assertTrue(title_guard["normalized_title_repeat_in_visible_body_forbidden"])
+            collision=item["writer_preflight"]["k7_h2_target_keyword_policy"]["title_target_normalized_equal"]
+            self.assertEqual(title_guard["title_target_collision"],collision)
+            self.assertEqual(title_guard["exact_target_keyword_in_visible_body_allowed"],not collision)
+            self.assertEqual(title_guard["bound_table_value_statement_usage"],"PARAPHRASE_IF_VERBATIM_TEXT_WOULD_REPEAT_NORMALIZED_TITLE")
+            self.assertFalse(title_guard["ppm679_changed"])
             trace_binding=bp["mechanical_requirements_prebound"]["source_trace_field_binding"]
             self.assertEqual(trace_binding["data_fact_id"],"REFERENCED_FACT_ID")
             self.assertEqual(trace_binding["data_source_title"],"REFERENCED_FACT_SOURCE_ID")
