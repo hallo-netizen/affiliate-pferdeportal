@@ -117,7 +117,7 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
         writer_preflight = {
             "contract": "CONCEPT_AGENT_WRITER_PREFLIGHT_V1",
             "instruction": "APPLY_ALL_BOUND_REQUIREMENTS_BEFORE_FIRST_DRAFT",
-            "source_only": "EXISTING_BOUND_AUTHORITIES_PLUS_USER_APPROVED_K6_H2_RULE",
+            "source_only": "EXISTING_BOUND_AUTHORITIES_PLUS_USER_APPROVED_K7_H2_RULE",
             "global_requirements": static_rules["constants"],
             "structure_requirements": static_rules["structure"],
             "article_type_requirements": type_authority[article["article_type"]],
@@ -129,9 +129,9 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
                 "runtime_order": json.loads(json.dumps(plan.get("runtime_order") or {})),
                 "allowed_fact_ids": list((plan.get("runtime_order") or {}).get("allowed_fact_ids") or []),
             },
-            "k6_h2_target_keyword_policy": {
-                "contract": "K6_H2_TARGET_KEYWORD_POLICY_V1",
-                "source": "USER_APPROVED_K6_RULE_2026-09-26",
+            "k7_h2_target_keyword_policy": {
+                "contract": "K7_H2_TARGET_KEYWORD_POLICY_V1",
+                "source": "USER_APPROVED_K7_BASELINE_FROM_FROZEN_K6_2026-09-27",
                 "scope": "H2_ONLY",
                 "target_keyword": article["target_keyword"],
                 "exact_match": "CASEFOLD_PUNCTUATION_NORMALIZED_FULL_PHRASE",
@@ -147,7 +147,7 @@ def build(snapshot: dict, intake: dict, research_bound: dict) -> dict:
                 "ppm679_changed": False,
                 "languagetool68_changed": False,
             },
-            "additive_rules": ["K6_H2_TARGET_KEYWORD_POLICY_V1"],
+            "additive_rules": ["K7_H2_TARGET_KEYWORD_POLICY_V1"],
             "rules_changed": False,
             "checker_order_changed": False,
             "publish_allowed": False,
