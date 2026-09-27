@@ -211,6 +211,12 @@
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GEMEINSAM/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GEMEINSAM/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/HOBBYRAUSCH/GEMEINSAM/HOBBYRAUM.md"
+    },
+    {
+      "id": "MENSCH_KONZEPT",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/MENSCH/KONZEPT/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/MENSCH/KONZEPT/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/MENSCH/KONZEPT/HOBBYRAUM.md"
     }
   ]
 }
