@@ -515,3 +515,16 @@ Historiennachweis, keine Current-Autorität.
 - Der reale Receipt bindet `START_BOUND_K7_PRODUCTION_AND_EXECUTE_READY_ACTIONS`, K7-Head `0d360883b7bc59af3aabd55b8ffab65d53c67db5`, vier Spuren und vier `WRITE_DRAFT`-Aktionen; keine freie Stufen-/Artikel-/Aktionswahl.
 - Korrektur eines Chat-Zwischenstands: Im Chat wurden danach Artikel-0-bis-3-LT/PPM-PASS-Zwischenstände behauptet, ohne dass dafür ein dauerhafter K7-Produktionscheckpoint in der autoritativen Arbeitskette geschrieben wurde. Diese Aussagen sind **keine Evidence und kein Current-Stand** und dürfen nicht übernommen werden.
 - Belastbarer Endstand dieses Nachtrags: Startübergang bewiesen; vollständiger K7-16er-Produktionslauf weiterhin nicht dauerhaft ausgeführt/belegt; PSERC, ENDSTEMPEL und finale WordPress-JSON für K7 weiterhin offen.
+
+
+## Nachtrag 2026-09-27 — Fehlerprotokoll des K7-Startübergangs
+
+Historie/Nachweis, keine Current-Autorität und keine eigene NEXT ACTION.
+
+- Fehlannahme: Die vorhandene NO-STOP-Regel wurde zeitweise als ausreichender technischer Produktionsstart behandelt. Sie erzwingt die Fortsetzung erst nach korrekt gebundenem Handoff und war deshalb allein nicht die vollständige Lösung.
+- PR #448 `Restore K7 start worker no-stop hardlock`: überholter/doppelter Ansatz; nicht gemergt und geschlossen. Keine Produktionswirkung.
+- PR #449 `Start bound K7 production immediately after intake`: falscher Ansatz, weil er den geschützten GitHub-Receiver selbst zum K7-Ausführer gemacht hätte. Der bestehende Immutable-Hardlock blockierte den Workflow-Eingriff; PR nicht gemergt und geschlossen. Keine Architekturänderung gelangte auf Main.
+- Korrektur: PR #450 bindet ausschließlich den bestehenden `process_trigger` direkt an den vorhandenen K7-Startcontroller und die vier gebundenen `WRITE_DRAFT`-Spuren. Das ist der integrierte Minimalfix.
+- Operativer Fehlgriff nach Start #39: Ein erwarteter Dateiname `concept_agent/current/CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING.json` wurde angefragt, existiert am gebundenen K7-Head aber nicht; der Abruf endete 404. Keine Datei wurde verändert und daraus wurde kein Status abgeleitet.
+- Schwerwiegender Chatfehler: Nach Start #39 wurden Artikel-0-bis-3-LT/PPM-PASS-Zwischenstände behauptet, obwohl kein gültiger dauerhafter `CONCEPT_AGENT_CURRENT_PROGRESS_V1`-Checkpoint existierte. Diese Aussagen sind ungültig, wurden im Abschlussnachtrag ausdrücklich widerrufen und dürfen niemals als Produktionsfortschritt verwendet werden.
+- Belastbare Wahrheit bleibt ausschließlich `control/startmaster0107/CURRENT_STATE.json`: Startübergang bewiesen; vollständiger K7-16er-E2E-Lauf weiterhin offen; erster Pflichtnachweis ist ein dauerhafter K7-Produktionscheckpoint.
