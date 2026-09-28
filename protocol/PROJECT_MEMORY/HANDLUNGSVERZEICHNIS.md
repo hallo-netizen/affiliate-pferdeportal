@@ -373,3 +373,17 @@ Der Runner ist fail-closed und darf nur den im Job definierten minimalen Tausch 
 Kein neuer Plugin-Versionszähler pro Versuch.
 Im Hobbyraum existiert nur `DESIGN_HOBBYRAUM_CANDIDATE.zip`.
 Neue Releaseversion erst nach echtem LIVE-PASS.
+
+
+## Landingpages planen / abgrenzen
+
+Aktion:
+Eigenständige Vergleichs-, Rechner-, Such- oder Angebotsseiten im Pferde-Atelier planen, gegen Kategorien/Journal abgrenzen oder ihren Pilot koordinieren.
+
+Verbindlicher Weg:
+`PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/START_HERE.md`
+→ `AUTORITAETSPLAN.json` → zuständige Current-Autorität → Frischecheck → NEXT ACTION
+→ für technische Änderungen anschließend ausschließlich zuständiges DESIGN- bzw. AFFILIATE-Büro.
+
+Harte Grenze:
+Landingpage ist keine Kategorie. Keine Änderung an zentraler Kategorienwahrheit oder normaler Textproduktion aus diesem Büro.
