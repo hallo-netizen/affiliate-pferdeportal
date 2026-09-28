@@ -1,0 +1,106 @@
+name: K8 Real Worker Packets
+on:
+  push:
+    branches:
+      - 'tmp/k8-real-worker-packets-20260928'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Build exact K8 worker packets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          ROOT=Path('.').resolve()
+          sys.path.insert(0, str((ROOT/'concept_agent').resolve()))
+          sys.path.insert(0, str((ROOT/'isolated_system4').resolve()))
+          from concept_agent.konzept8_verbot.engine import k8_intake_bridge, k8_production_bridge, k8_bound_fact_context
+          import production_checks_engine as pce
+
+          snapshot=json.loads((ROOT/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text(encoding='utf-8'))
+          research=json.loads((ROOT/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text(encoding='utf-8'))
+          intake=k8_intake_bridge.prepare(snapshot)
+          binding=k8_production_bridge.build(snapshot,intake,research)
+
+          selected=[]
+          for idx in range(3):
+              base=binding['items'][idx]
+              ctx=k8_bound_fact_context.build_item(base)
+              packet={
+                  'contract':'K8_REAL_BOUND_WRITE_WORK_ITEM_V1',
+                  'source_main_sha':'b8377be3a7b2eec3d5b6b06e1c3abb8c61395bdb',
+                  'batch_sha256':binding['batch_sha256'],
+                  'production_binding_sha256':binding['binding_sha256'],
+                  'bound_work_sha256':base['bound_work_sha256'],
+                  'item_index':idx,
+                  'allowed_action':{'action':'WRITE_DRAFT','item_index':idx,'plan_slot':base['identity']['plan_slot']},
+                  'identity':base['identity'],
+                  'research_bound':base['research_bound'],
+                  'fact_pack':ctx['fact_pack'],
+                  'production_plan_item':ctx['production_plan_item'],
+                  'writer_preflight':ctx['writer_preflight'],
+                  'link_bindings':base['link_bindings'],
+                  'authoring_authority':base['authoring_authority'],
+                  'quality_tool_bindings':{
+                      'languagetool':{
+                          'version':'6.8',
+                          'engine':pce.LT_ENGINE,
+                          'commandline_jar_sha256':pce.LT_JAR_SHA256
+                      },
+                      'ppm':{
+                          'version':pce.PPM_VERSION,
+                          'package_ref':pce.PPM_PACKAGE_REL,
+                          'package_sha256':pce.PPM_PACKAGE_SHA256
+                      }
+                  },
+                  'workflow':[
+                      'WRITE_DRAFT',
+                      'LANGUAGETOOL_6_8',
+                      'PPM_6_7_9',
+                      'SAME_ARTICLE_REPAIR_IF_REQUIRED',
+                      'LANGUAGETOOL_6_8_AFTER_REPAIR',
+                      'PPM_6_7_9_AFTER_REPAIR',
+                      'ARTICLE_PASS'
+                  ],
+                  'search_policy':{
+                      'search_current':False,
+                      'search_ppm_package':False,
+                      'search_k7':False,
+                      'search_archive':False,
+                      'free_rule_lookup':False,
+                      'use_only_embedded_bound_work':True
+                  },
+                  'publish_allowed':False
+              }
+              name=f"{idx+1:02d}_K8_WORKER_{base['identity']['plan_slot'][:12]}.json"
+              (ROOT/'out'/name).write_text(json.dumps(packet,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              selected.append({'file':name,'item_index':idx,'title':base['identity']['title'],'plan_slot':base['identity']['plan_slot']})
+          manifest={
+              'contract':'K8_REAL_3_ARTICLE_WORKER_BATCH_V1',
+              'source_main_sha':'b8377be3a7b2eec3d5b6b06e1c3abb8c61395bdb',
+              'item_count':3,
+              'items':selected,
+              'normal_run':True,
+              'artificial_negative_probe':False,
+              'stop_after_article_0':False,
+              'stop_after_article_1':False,
+              'publish_allowed':False
+          }
+          (ROOT/'out'/'00_K8_3_ARTIKEL_MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(manifest,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: K8_REAL_3_ARTIKEL_WORKER_DATEIEN
+          path: out/*
+          if-no-files-found: error
