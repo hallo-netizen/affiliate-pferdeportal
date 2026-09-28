@@ -3,22 +3,26 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: V1.8.5 SIMPLE BEREIT / TESTLABOR DANACH
+STATUS: V1.8.6 ROOTFIX BEREIT / TESTLABOR-WIEDERHOLUNG ALS NÄCHSTES
 
 ## Aktueller belastbarer Stand
 
-Kategorie-Workflow V1.8.5 reduziert die Bedienoberfläche ohne Funktionsabbau.
+V1.8.5:
+- DataForSEO-Verbindung live PASS;
+- Testlabor-Konzept kostenlose Vorprüfung live PASS;
+- 4 geplante DataForSEO-Abfragen, noch keine Kosten;
+- erster bestätigter Konzeptstart blockierte vor Paid-Calls mit `Ausdrückliche sichtbare Nutzerfreigabe fehlt.`
 
-Direkt sichtbar:
-- DataForSEO-Verbindung;
-- Status;
-- Protokoll;
-- Konzeptstart.
+Diagnose:
+Konzeptstart war fälschlich an das separate Human-Sight-Review-Gate gebunden.
 
-Eingeklappt erhalten:
-Research-, Coverage-, Kannibalisierungs-, Review-, FINAL-, Dry-Run-, Apply-, Readback-, Rollback-, Drift- und Idempotenzfunktionen.
+V1.8.6 behebt genau diesen ersten gebrochenen Punkt:
+- Adminrecht;
+- eigener Nonce;
+- ausdrückliche Paid-Call-Bestätigung;
+- keine zusätzliche Human-Sight-Review-Anforderung am Konzeptstart.
 
-Installationspaket ist von Entwicklungs-Tests/Audits befreit.
+Spätere Review-/Research-/FINAL-/Dry-Run-/Apply-/Readback-/Rollback-Gates bleiben unverändert.
 
 Teststatus:
 - 227/227 PASS;
@@ -26,9 +30,6 @@ Teststatus:
 - Installer PHP-Lint 16/16 PASS;
 - Runtime-Parität 21/21 PASS.
 
-Wegwerf-Testinput:
-`HOBBY_DEPOT_TESTLABOR_KATEGORIE_KONZEPT_20260928.json`
-
 ## NEXT ACTION
 
-V1.8.5 installieren und reduzierte Oberfläche prüfen; danach DataForSEO-Verbindungstest und Testlabor-Konzept.
+V1.8.6 installieren → Testlabor-Konzept erneut kostenlos vorprüfen → Paid-Calls bestätigen → SEO-Erstentwurf erzeugen.
