@@ -432,7 +432,7 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
                 self._artifact_receipt(ticket, draft, workspace_capsule=capsule),
                 root, cp,
             )
-            restarted = github_director.resume(binding, cp, capsule)
+            restarted = github_director.resume(binding, cp)
             self.assertEqual(restarted["checkpoint"], current["checkpoint"])
             self.assertEqual(restarted["ticket"], current["ticket"])
             self.assertEqual(restarted["ticket"]["allowed_action"]["checker"], "LT68")
@@ -459,11 +459,48 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
             )
 
             # Fresh process in REPAIR_REQUIRED must stay on the same article and repair.
-            restarted = github_director.resume(binding, cp, repair_capsule)
+            restarted = github_director.resume(binding, cp)
             self.assertEqual(restarted["checkpoint"], current["checkpoint"])
             self.assertEqual(restarted["ticket"], current["ticket"])
             self.assertEqual(restarted["ticket"]["allowed_action"]["action"], "REPAIR_DRAFT")
             self.assertEqual(restarted["ticket"]["allowed_action"]["item_index"], 0)
+
+    def test_065_missing_or_tampered_checkpoint_capsule_blocks(self):
+        binding = self._binding(1)
+        checkpoint = self._checkpoint(binding)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cp = root / "checkpoint.json"
+            progress_guard.write(cp, checkpoint)
+            current = github_director.resume(binding, cp)
+
+            state, decision, ticket = current["checkpoint"], current["decision"], current["ticket"]
+            slot = binding["items"][0]["identity"]["plan_slot"]
+            draft = root / f"00_{slot}.md"
+            draft.write_text("Artikel", encoding="utf-8")
+            predicted = progress_guard.record_draft(binding, state, decision, 0, draft)
+            capsule = self._next_capsule(binding, predicted)
+            current = github_director.persist_and_continue(
+                binding, state, decision, ticket,
+                self._artifact_receipt(ticket, draft, workspace_capsule=capsule),
+                root, cp,
+            )
+
+            sidecar = github_director._capsule_path(cp, current["checkpoint"]["checkpoint_sha256"])
+            self.assertTrue(sidecar.is_file())
+
+            saved = sidecar.read_bytes()
+            sidecar.unlink()
+            with self.assertRaisesRegex(github_director.Blocked, "BOUND_WORKSPACE_CAPSULE_MISSING"):
+                github_director.resume(binding, cp)
+
+            sidecar.write_bytes(saved)
+            wrapper = json.loads(sidecar.read_text(encoding="utf-8"))
+            wrapper["capsule_sha256"] = "0" * 64
+            progress_guard.write(sidecar, wrapper)
+            with self.assertRaisesRegex(github_director.Blocked, "CAPSULE_BINDING_HASH_MISMATCH"):
+                github_director.resume(binding, cp)
+
 
     def test_07_stop_is_the_only_terminal_exit(self):
         binding = self._binding(1)
