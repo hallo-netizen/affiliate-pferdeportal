@@ -215,6 +215,42 @@ def accept(
 
     raise Blocked("DIRECTOR_ACTION_NOT_ACCEPTABLE")
 
+def _capsule_dir(checkpoint_path: Path) -> Path:
+    return checkpoint_path.parent / ".github-director-capsules"
+
+def _capsule_path(checkpoint_path: Path, checkpoint_sha256: str) -> Path:
+    if not SHA_RE.fullmatch(str(checkpoint_sha256 or "")):
+        raise Blocked("DIRECTOR_CAPSULE_CHECKPOINT_HASH_INVALID")
+    return _capsule_dir(checkpoint_path) / (checkpoint_sha256 + ".json")
+
+def _persist_capsule_file(checkpoint_path: Path, checkpoint_sha256: str, capsule: dict[str, Any]) -> None:
+    path = _capsule_path(checkpoint_path, checkpoint_sha256)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    wrapper = {
+        "contract": "CONCEPT_AGENT_GITHUB_DIRECTOR_CAPSULE_BINDING_V1",
+        "checkpoint_sha256": checkpoint_sha256,
+        "capsule": capsule,
+        "capsule_sha256": stable(capsule),
+        "publish_allowed": False,
+    }
+    progress_guard.write(path, wrapper)
+
+def _load_capsule_file(checkpoint_path: Path, checkpoint_sha256: str) -> dict[str, Any]:
+    path = _capsule_path(checkpoint_path, checkpoint_sha256)
+    if not path.is_file():
+        raise Blocked("DIRECTOR_BOUND_WORKSPACE_CAPSULE_MISSING")
+    wrapper = load(path)
+    if wrapper.get("contract") != "CONCEPT_AGENT_GITHUB_DIRECTOR_CAPSULE_BINDING_V1":
+        raise Blocked("DIRECTOR_CAPSULE_BINDING_CONTRACT_INVALID")
+    if wrapper.get("checkpoint_sha256") != checkpoint_sha256:
+        raise Blocked("DIRECTOR_CAPSULE_BINDING_CHECKPOINT_MISMATCH")
+    capsule = wrapper.get("capsule")
+    if not isinstance(capsule, dict) or wrapper.get("capsule_sha256") != stable(capsule):
+        raise Blocked("DIRECTOR_CAPSULE_BINDING_HASH_MISMATCH")
+    if wrapper.get("publish_allowed") is not False:
+        raise Blocked("DIRECTOR_CAPSULE_BINDING_PUBLISH_INVALID")
+    return capsule
+
 def persist_and_continue(
     binding: dict[str, Any],
     checkpoint: dict[str, Any],
@@ -232,33 +268,35 @@ def persist_and_continue(
         raise Blocked("DIRECTOR_STALE_CHECKPOINT_REPLAY_BLOCKED")
     new_checkpoint = accept(binding, checkpoint, decision, ticket, receipt, work_root)
     progress_guard.verify_checkpoint(binding, new_checkpoint)
+    next_action = new_checkpoint["allowed_action"]["action"]
+    capsule = receipt.get("workspace_capsule")
+    capsule_required = next_action in {"RUN_CHECKER", "REPAIR_DRAFT"}
+    if capsule_required:
+        if not isinstance(capsule, dict):
+            raise Blocked("DIRECTOR_WORKSPACE_CAPSULE_REQUIRED")
+        universal_reentry_guard.build(binding, new_checkpoint, capsule)
+        _persist_capsule_file(checkpoint_path, new_checkpoint["checkpoint_sha256"], capsule)
+    elif capsule is not None:
+        raise Blocked("DIRECTOR_UNEXPECTED_WORKSPACE_CAPSULE")
     progress_guard.write(checkpoint_path, new_checkpoint)
     persisted = load(checkpoint_path)
     progress_guard.verify_checkpoint(binding, persisted)
     if persisted != new_checkpoint:
         raise Blocked("DIRECTOR_PERSISTED_CHECKPOINT_MISMATCH")
-    capsule = receipt.get("workspace_capsule")
-    if capsule is not None and not isinstance(capsule, dict):
-        raise Blocked("DIRECTOR_WORKSPACE_CAPSULE_INVALID")
-    next_decision = universal_reentry_guard.build(binding, persisted, capsule)
-    next_ticket = issue(binding, persisted, next_decision)
-    return {
-        "status": "STOP" if next_ticket["terminal"] else "CONTINUE",
-        "checkpoint": persisted,
-        "decision": next_decision,
-        "ticket": next_ticket,
-        "publish_allowed": False,
-    }
+    return resume(binding, checkpoint_path)
 
 def resume(
     binding: dict[str, Any],
     checkpoint_path: Path,
-    capsule: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if not checkpoint_path.is_file():
         raise Blocked("DIRECTOR_DURABLE_CHECKPOINT_MISSING")
     checkpoint = load(checkpoint_path)
     progress_guard.verify_checkpoint(binding, checkpoint)
+    action = checkpoint["allowed_action"]["action"]
+    capsule = None
+    if action in {"RUN_CHECKER", "REPAIR_DRAFT"}:
+        capsule = _load_capsule_file(checkpoint_path, checkpoint["checkpoint_sha256"])
     decision = universal_reentry_guard.build(binding, checkpoint, capsule)
     ticket = issue(binding, checkpoint, decision)
     return {
