@@ -2,13 +2,15 @@ from __future__ import annotations
 import html
 import re
 
-CONTRACT = "K8_SECTION_BALANCE_POLICY_V2"
-MIN_WORDS = 60
-MAX_WORDS = 120
+CONTRACT = "K8_SECTION_BALANCE_POLICY_V3"
+MIN_WORDS = 80
+MAX_WORDS = 240
 EXEMPT_BLOCKS = {"table", "conclusion", "further_information"}
+MAIN_MIN_RATIO = 0.55
 CONCLUSION_TARGET_RATIO = 0.12
 CONCLUSION_MAX_RATIO = 0.18
 CONCLUSION_MAX_PARAGRAPHS = 3
+FURTHER_INFORMATION_MAX_WORDS = 60
 
 class SectionBalanceError(RuntimeError):
     pass
@@ -22,16 +24,20 @@ def _words(value: str) -> int:
 def inspect(article_html: str) -> list[dict]:
     if not isinstance(article_html, str) or not article_html.strip():
         raise SectionBalanceError("K8_ARTICLE_EMPTY")
-    headings = list(re.finditer(r"(?is)<h2\b[^>]*>(.*?)</h2>", article_html))
     rows = []
-    for pos, heading in enumerate(headings):
-        end = headings[pos + 1].start() if pos + 1 < len(headings) else len(article_html)
-        body = article_html[heading.end():end]
-        block = re.search(r'(?is)\bdata-block\s*=\s*(["\'])([^"\']+)\1', body)
-        block_id = block.group(2) if block else ""
+    for section in re.finditer(
+        r'(?is)<section\b[^>]*data-block\s*=\s*(["\'])([^"\']+)\1[^>]*>(.*?)</section>',
+        article_html,
+    ):
+        block_id = section.group(2)
+        section_body = section.group(3)
+        h2 = re.search(r"(?is)<h2\b[^>]*>(.*?)</h2>", section_body)
+        if h2 is None:
+            continue
+        body = section_body[h2.end():]
         rows.append({
             "block_id": block_id,
-            "heading": _plain(heading.group(1)),
+            "heading": _plain(h2.group(1)),
             "word_count": _words(body),
             "paragraph_count": len(re.findall(r"(?is)<p\b[^>]*>", body)),
         })
@@ -56,9 +62,18 @@ def validate(article_html: str) -> dict:
     if len(conclusions) != 1:
         raise SectionBalanceError(f"K8_CONCLUSION_BLOCK_COUNT:{len(conclusions)}")
     conclusion = conclusions[0]
+
     total_words = _words(article_html)
     if total_words <= 0:
         raise SectionBalanceError("K8_TOTAL_WORD_COUNT_INVALID")
+
+    main_words = sum(r["word_count"] for r in normal)
+    main_ratio = main_words / total_words
+    if main_ratio < MAIN_MIN_RATIO:
+        raise SectionBalanceError(
+            f"K8_MAIN_TEXT_RATIO_TOO_LOW:{main_ratio:.6f}:{MAIN_MIN_RATIO:.6f}"
+        )
+
     conclusion_ratio = conclusion["word_count"] / total_words
     if conclusion_ratio > CONCLUSION_MAX_RATIO:
         raise SectionBalanceError(
@@ -69,15 +84,25 @@ def validate(article_html: str) -> dict:
             f'K8_CONCLUSION_PARAGRAPHS_TOO_HIGH:{conclusion["paragraph_count"]}:{CONCLUSION_MAX_PARAGRAPHS}'
         )
 
+    further = [r for r in rows if r["block_id"] == "further_information"]
+    if len(further) == 1 and further[0]["word_count"] > FURTHER_INFORMATION_MAX_WORDS:
+        raise SectionBalanceError(
+            f'K8_FURTHER_INFORMATION_TOO_LONG:{further[0]["word_count"]}:{FURTHER_INFORMATION_MAX_WORDS}'
+        )
+
     return {
         "status": "PASS",
         "contract": CONTRACT,
         "minimum_words": MIN_WORDS,
         "maximum_words": MAX_WORDS,
+        "main_minimum_ratio": MAIN_MIN_RATIO,
+        "main_word_count": main_words,
+        "main_ratio": main_ratio,
         "exempt_blocks": sorted(EXEMPT_BLOCKS),
         "conclusion_target_ratio": CONCLUSION_TARGET_RATIO,
         "conclusion_maximum_ratio": CONCLUSION_MAX_RATIO,
         "conclusion_maximum_paragraphs": CONCLUSION_MAX_PARAGRAPHS,
         "conclusion_ratio": conclusion_ratio,
+        "further_information_maximum_words": FURTHER_INFORMATION_MAX_WORDS,
         "sections": rows,
     }
