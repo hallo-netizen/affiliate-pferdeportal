@@ -347,3 +347,23 @@ REGEL:
 
 BELEG:
 `PROJEKTE/MENSCH/START_HERE.md`
+
+
+## ARCH-093 – LANDINGPAGES-Büro im Pferde-Atelier
+
+WAS:
+Neues Projektbüro `PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/` für eigenständige Vergleichs-, Rechner-, Such- und Angebots-Landingpages.
+
+WARUM:
+Landingpages sollen im Frontend in vorhandene Portalstrukturen eingebunden werden können, ohne als Fake-Kategorien in KATEGORIEN.tsv, PSTE, PSERC oder normale TEXT-Produktion zu geraten.
+
+REGEL:
+- Landingpage = normale WordPress-Seite, keine Kategorie;
+- optisch darf sie als zusätzliche Themenkachel erscheinen;
+- technische Darstellung bleibt DESIGN-Verantwortung;
+- Provider/Rechner/Banner bleiben AFFILIATE-Verantwortung;
+- erster Pilot ausschließlich `Pferdehaftpflicht vergleichen`;
+- keine allgemeine Automatik vor Pilot-PASS.
+
+BELEG:
+`PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/START_HERE.md`
