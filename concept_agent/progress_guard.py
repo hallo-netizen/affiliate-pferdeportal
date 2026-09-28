@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import hashlib, json, re, sys
+import hashlib, json, os, re, sys
 from pathlib import Path
 
 BINDING_CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
@@ -71,6 +71,31 @@ def _gated(action: dict) -> dict:
     out["free_chat_execution"] = False
     out["fallback_route"] = "STOP"
     return out
+
+
+def recovery_view(state: dict) -> dict:
+    action = state.get("allowed_action")
+    if not isinstance(action, dict):
+        raise Blocked("RECOVERY_ALLOWED_ACTION_MISSING")
+    current = state.get("current_item")
+    active_sha = None
+    index = state.get("next_item_index")
+    if isinstance(index, int):
+        rows = state.get("drafts") or []
+        matches = [r for r in rows if isinstance(r, dict) and r.get("item_index") == index]
+        if len(matches) == 1:
+            active_sha = matches[0].get("draft_sha256")
+    return {
+        "source": "EXACT_DURABLE_CHECKPOINT_ONLY",
+        "phase": state.get("phase"),
+        "next_item_index": state.get("next_item_index"),
+        "completed_item_count": len(state.get("completed_items") or []),
+        "current_item": json.loads(json.dumps(current)),
+        "active_draft_sha256": active_sha,
+        "allowed_action": json.loads(json.dumps(action)),
+        "allowed_action_sha256": stable(action),
+        "history_reconstruction_allowed": False,
+    }
 
 def expected_action(binding: dict, state: dict) -> dict:
     phase = str(state.get("phase") or "")
@@ -281,7 +306,21 @@ def _seal_new_state(binding: dict, previous: dict, new: dict) -> dict:
 
 def write(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    raw = (json.dumps(value, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    tmp = path.with_name(path.name + ".tmp")
+    with tmp.open("wb") as handle:
+        handle.write(raw)
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(tmp, path)
+    try:
+        fd = os.open(str(path.parent), os.O_RDONLY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    except OSError:
+        pass
 
 def attach_drafts(binding: dict, state: dict, draft_dir: Path) -> dict:
     verify_checkpoint(binding, state)
@@ -520,6 +559,8 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
             "return_to": "concept_agent/progress_guard.py",
             "handoff_is_terminal": False,
             "same_bound_worker_must_continue_without_return": True,
+            "durable_checkpoint_required_before_next_action": True,
+            "history_reconstruction_forbidden": True,
         }
         if action.get("action") == "WRITE_DRAFT":
             trigger_core["bound_work_item"] = json.loads(json.dumps(_binding_item(binding, int(action["item_index"]))))
@@ -561,6 +602,8 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         "worker_return_must_reenter_progress_guard": not terminal,
         "handoff_is_terminal": terminal,
         "same_bound_worker_must_continue_without_return": not terminal,
+        "durable_checkpoint_required_before_next_action": not terminal,
+        "recovery": recovery_view(state),
         "terminal": terminal,
         "publish_allowed": False,
     }
