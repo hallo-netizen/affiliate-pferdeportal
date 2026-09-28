@@ -13,23 +13,23 @@ Akte:
 Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
-Aktueller Hobby-Depot-Pilot:
-**V1.8.9 Guided Resume**
+Aktueller Pilot:
+**V1.9.0 Stage Hardlock**
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
 
 SHA-256:
-`c415df2c63cf3640f723a763ebe6bf527540d377e104d8ce48e7d427246d2c07`
+`79d914e6896c36c0022dbae25c7c3ec24923dc453eadc499ef6cd1b88fcd83a1`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
 
 SHA-256:
-`ceea10f2e9b50f6349e5ea83d48cfed3fc78b360e0eeccff4292d38cbb11ad5a`
+`b63fbedaf4a474923ce6946cafec45faa5ebcea4de36cd534dd9c546d089c3c9`
 
 Status:
-lokal positiv/negativ 235/235 PASS; Live-Abnahme noch offen.
+lokal positiv/negativ 241/241 PASS; Live-Rollback und Live-Retest noch offen.
 
-Siehe ausschließlich
+Siehe ausschließlich:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`.
