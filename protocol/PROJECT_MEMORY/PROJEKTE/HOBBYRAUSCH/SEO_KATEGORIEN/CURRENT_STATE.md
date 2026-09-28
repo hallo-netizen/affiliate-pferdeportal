@@ -2,23 +2,28 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-26
-STATUS: V1.8.3 PILOT LOKAL PASS / WORDPRESS-UPDATE ALS NÄCHSTES
+STAND: 2026-09-28
+STATUS: V1.8.4 TESTLABOR BEREIT / ECHTER DATAFORSEO-TEST ALS NÄCHSTES
 
 ## Aktueller belastbarer Stand
 
-Der Hobby-Depot-Kategorie-Workflow liegt als V1.8.3 vor.
+Kategorie-Workflow V1.8.4 ist lokal und nach Fresh-Unpack vollständig getestet.
 
-Neu gegenüber V1.8.2:
-- eigener Hauptmenüpunkt `Kategorien` im WordPress-Backend;
-- bestehende DataForSEO-Zugangsdaten sowie Standort/Sprache bleiben beim Update erhalten.
+Neu:
+- verständliches Kontrollprotokoll;
+- DataForSEO-Einzelkosten;
+- sichtbare Research-/Kannibalisierungs-/Deployment-/Readback-/Rollback-Ereignisse;
+- JSON-Export;
+- keine Credential-/Authwerte im Log.
 
-Die bisherigen Konzept-/SEO-/Kannibalisierungs-/WordPress-/HivePress-Funktionen bleiben unverändert.
+Teststatus:
+- 225/225 PASS;
+- Fresh-Unpack 225/225 PASS;
+- PHP-Lint 17/17 PASS.
 
-Tests:
-- 223/223 PASS
-- PHP-Lint 16/16 PASS
+Wegwerf-Testinput:
+`HOBBY_DEPOT_TESTLABOR_KATEGORIE_KONZEPT_20260928.json`
 
 ## NEXT ACTION
 
-V1.8.3 über die bestehende Installation aktualisieren; danach Hauptnavigation und Einstellungsübernahme prüfen.
+V1.8.4 auf Hobby Depot aktualisieren → Protokoll öffnen → DataForSEO-Verbindung PASS erzeugen → Testlabor-Konzept kostenlos vorprüfen. Noch kein echter Struktur-Write vor geprüftem Dry-Run.
