@@ -18,40 +18,35 @@ import universal_reentry_guard
 
 
 class CurrentProductionGuardTests(unittest.TestCase):
-    def test_current_k7_text_start_binds_directly_to_four_lane_production(self):
+    def test_current_k7_text_start_uses_existing_bound_chat_continuation_route(self):
         snapshot = json.loads((HERE / "current" / "PSERC_METADATA_SNAPSHOT.json").read_text(encoding="utf-8"))
         intake = intake_bridge.prepare(snapshot)
         receipt = intake_bridge._start_receipt(intake)
         trigger = receipt["process_trigger"]
-        self.assertEqual(trigger["allowed_operation"], "START_BOUND_K7_PRODUCTION_AND_EXECUTE_READY_ACTIONS")
-        self.assertEqual(trigger["fresh_batch_first_action"], "START_BOUND_K7_PRODUCTION")
-        self.assertEqual(trigger["next_entry_ref"], "concept_agent/konzept7/k7_start_controller.py")
-        self.assertEqual(trigger["return_to"], "concept_agent/konzept7/k7_parallel_controller.py")
-        self.assertEqual(trigger["execution_branch"], "konzept7/working-copy-20260927")
-        self.assertEqual(trigger["execution_head_sha"], "0d360883b7bc59af3aabd55b8ffab65d53c67db5")
-        self.assertEqual(trigger["article_lanes"], 4)
-        self.assertEqual(trigger["required_start_stage"], "ARTICLE_PRODUCTION")
-        self.assertEqual(trigger["required_ready_action"], "WRITE_DRAFT")
-        self.assertEqual(trigger["required_ready_action_count"], 4)
-        self.assertIs(trigger["ready_actions_must_be_executed_immediately"], True)
-        self.assertIs(trigger["chat_may_choose_stage"], False)
-        self.assertIs(trigger["chat_may_choose_article"], False)
-        self.assertIs(trigger["chat_may_choose_action"], False)
+        self.assertEqual(
+            trigger["allowed_operation"],
+            "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_USE_PERSISTED_RESEARCH_BOUND",
+        )
+        self.assertEqual(trigger["fresh_batch_first_action"], "USE_PERSISTED_RESEARCH_BOUND")
+        self.assertEqual(trigger["next_entry_ref"], "concept_agent/production_bridge.py")
+        self.assertEqual(trigger["return_to"], "concept_agent/full_workflow_gate.py")
+        self.assertNotIn("parallel_controller_ref", trigger)
+        self.assertNotIn("execution_branch", trigger)
+        self.assertNotIn("execution_head_sha", trigger)
         self.assertIs(receipt["continuation_required"], True)
         self.assertIs(receipt["worker_must_execute_allowed_operation_immediately"], True)
+        self.assertIs(receipt["worker_return_must_reenter_full_workflow_gate"], True)
         self.assertIs(receipt["same_bound_worker_must_continue_without_return"], True)
 
-    def test_current_k7_text_start_blocks_wrong_lane_binding(self):
+    def test_current_k7_text_start_does_not_reactivate_removed_special_controller_route(self):
         snapshot = json.loads((HERE / "current" / "PSERC_METADATA_SNAPSHOT.json").read_text(encoding="utf-8"))
         intake = intake_bridge.prepare(snapshot)
-        state = json.loads((HERE.parent / "control" / "startmaster0107" / "CURRENT_STATE.json").read_text(encoding="utf-8"))
-        state["next_action"]["required_lanes"] = 2
-        with tempfile.TemporaryDirectory() as td:
-            path = Path(td) / "CURRENT_STATE.json"
-            path.write_text(json.dumps(state), encoding="utf-8")
-            with mock.patch.object(intake_bridge, "CURRENT_STATE", path):
-                with self.assertRaisesRegex(intake_bridge.Blocked, "CURRENT_K7_REQUIRED_LANES_INVALID"):
-                    intake_bridge._start_receipt(intake)
+        receipt = intake_bridge._start_receipt(intake)
+        raw = json.dumps(receipt, ensure_ascii=False, sort_keys=True)
+        self.assertNotIn("concept_agent/konzept7/k7_start_controller.py", raw)
+        self.assertNotIn("concept_agent/konzept7/k7_parallel_controller.py", raw)
+        self.assertIn("concept_agent/production_bridge.py", raw)
+        self.assertIn("concept_agent/full_workflow_gate.py", raw)
 
     def test_non_k7_start_keeps_existing_generic_route(self):
         snapshot = json.loads((HERE / "current" / "PSERC_METADATA_SNAPSHOT.json").read_text(encoding="utf-8"))
