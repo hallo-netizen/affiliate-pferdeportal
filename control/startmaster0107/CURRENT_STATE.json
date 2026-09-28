@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_CAPABILITY_CONSTRAINT_PROVEN",
+  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_PRISON_TEST_AUTHORIZED_PENDING",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -132,7 +132,8 @@
     "K7_RECOVERY_16_RESTART_MATRIX_PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS",
     "PR460_K7_WORKING_BRANCH_RECOVERY_MERGED_04EC51A56C9C6037683C770015871D35CB757CAC",
     "CAPABILITY_BOUNDARY_EXISTING_ROUTE_AUDIT_PASS_ONLY_CODEX_CLOUD_FOUND",
-    "HOST_CAPABILITY_REVOCATION_NOT_AVAILABLE_BY_REPOSITORY_CONTRACT"
+    "HOST_CAPABILITY_REVOCATION_NOT_AVAILABLE_BY_REPOSITORY_CONTRACT",
+    "K7_CAPSULE_PRISON_TEST_AUTHORIZED_ONLY_REAL_EXECUTION_PENDING_20260928"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -238,17 +239,20 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_CAPABILITY_CONSTRAINT_PROVEN",
+  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_PRISON_TEST_AUTHORIZED_PENDING",
   "current_execution_blocker": {
-    "code": "BOUND_CHAT_WORKER_TRUE_CAPABILITY_ISOLATION_IMPOSSIBLE_UNDER_CURRENT_NO_CODEX_NO_API_CONSTRAINT",
+    "code": "REAL_CAPSULE_PRISON_TEST_NOT_EXECUTED",
     "error_class": true,
-    "classification": "PROVEN_CONSTRAINT_CONFLICT_REQUIRES_USER_RULE_DECISION",
-    "detail": "Recovery is merged and proven. Existing-boundary audit found no non-Codex hard-worker path: productive hard-worker and Single-Door capability isolation are bound to CODEX_CLOUD, while repository code explicitly states it cannot revoke tools exposed by the ChatGPT host. With No-Codex, No-API and no-architecture-change all kept simultaneously, the same BOUND_CHAT_WORKER cannot be made technically incapable of out-of-band action by repository code alone. No further compliant implementation step exists without changing at least one of those user constraints.",
+    "classification": "TEST_EVIDENCE_OPEN",
+    "detail": "Recovery and K7 Full16 remain proven. The user has now authorized testing the already existing Capsule/Single-Door external hard-worker boundary as a prison test only. No production, quality, architecture or publish change is authorized. The existing mechanical boundary test code is present on current main, but the decisive real isolated-worker negative/positive prison test has not yet been executed in this chat. No capability-isolation PASS may be claimed until that real test succeeds.",
     "applies_to_concept_agent": true,
     "recovery_fix_resolved": true,
-    "existing_non_codex_external_boundary_found": false,
-    "only_existing_external_hard_worker": "CODEX_CLOUD",
-    "host_capability_revocation_by_repository": false,
+    "existing_external_boundary_candidate": "EXISTING_CAPSULE_SINGLE_DOOR_HARD_WORKER",
+    "existing_hard_worker_runtime": "CODEX_BOUND",
+    "prison_test_only_authorized": true,
+    "production_reactivation_authorized": false,
+    "quality_change_authorized": false,
+    "architecture_change_authorized": false,
     "capability_hardlock_resolved": false,
     "publish_allowed": false
   },
@@ -366,31 +370,34 @@
       "architecture_change_allowed": false
     }
   },
-  "last_safe_main_sha": "52a7439540b2a300f26b5b5d6f721513bf8fd902",
+  "last_safe_main_sha": "cd671620dd0c84fb9de971ad91dff5eefe788da8",
   "last_safe_change": "PR #458 merged the proven interruption/reentry recovery hardening: atomic checkpoint persistence plus exact resume from the last valid checkpoint. K7 full16 had already completed at 6ac289b39f63eacb61aead2e08041ee7ee580f10 with 16 LT6.8+PPM6.7.9 PASS article bytes, PSERC PASS and ENDSTEMPEL generation-000002. The remaining open issue is true same-chat capability isolation; no fake hardlock is claimed.",
   "hobbyroom_status": "NOT_CURRENT_AUTHORITY",
   "hobbyroom_branch": "NONE_CURRENT_E2E_BOUND_TO_MAIN_AND_PR107_HEAD",
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "USER_RULE_DECISION_REQUIRED_FOR_TRUE_CAPABILITY_ISOLATION",
-    "action": "Do not change production code, article rules, quality gates or architecture and do not start another live article batch. The existing system has no non-Codex external hard-worker boundary, and repository code cannot revoke ChatGPT host capabilities. Preserve the proven recovery fix. True technical capability isolation can proceed only if the user explicitly changes a governing constraint to permit an external hard-worker boundary; otherwise record the same-chat limitation as accepted and make no hardlock claim. Do not publish.",
-    "why": "The required investigation is complete: every existing hard-worker/Single-Door route is Codex-bound, and the project boundary itself states repository code cannot revoke host-exposed ChatGPT tools. Under the simultaneous No-Codex, No-API and no-architecture-change constraints there is no remaining compliant technical fix.",
-    "recovery_status": "MERGED_AND_PROVEN",
-    "capability_boundary_audit": "PASS_NO_NON_CODEX_EXTERNAL_HARD_WORKER_FOUND",
-    "capability_hardlock_status": "BLOCKED_BY_USER_CONSTRAINT_SET",
-    "architecture_change_allowed": false,
-    "codex_allowed": false,
+    "goal": "EXECUTE_EXISTING_CAPSULE_PRISON_TEST_ONLY",
+    "action": "Use the already existing Capsule/Single-Door hard-worker path only as a prison test. Do not modify production code, quality rules, gates or architecture and do not start a live article batch. Execute a real positive/negative isolation test against the exact current boundary: the isolated worker must be able to perform exactly the one allowed bound action, while attempts at a second action, shell/repository access, web/file search, another article/step, backtrack/sidejump, state write or workflow change must fail technically. Record PASS only if the real worker runtime proves those negative cases; otherwise stop at the first failure. Do not publish.",
+    "why": "The user has resolved the previous constraint conflict for testing only by authorizing the existing external Capsule hard-worker to be tested. This is the smallest existing mechanism that can prove 'cannot' rather than 'must not', without rebuilding the old GitHub per-repair event loop.",
+    "test_scope": "EXISTING_CAPSULE_SINGLE_DOOR_ONLY",
+    "production_run_allowed": false,
+    "codex_allowed_for_prison_test_only": true,
+    "codex_allowed_for_production": false,
     "openai_api_allowed": false,
+    "architecture_change_allowed": false,
     "quality_policy": "LANGUAGETOOL_6_8_PPM_6_7_9_PSERC_ENDSTEMPEL_UNCHANGED",
+    "prison_test_boundary_blob": "4921624e0b6d24ce35549bec28e6d43035b2f098",
+    "prison_test_mechanical_test_blob": "412d5b10c65b9e28777eb5b7739233ab377c1ff3",
+    "prison_test_worker_harness_blob": "1574349f2b613b1e3c1e6b5dc7af168cd4e6d29f",
     "publish_allowed": false,
     "forbidden": [
-      "start another live article batch before the governing constraint decision",
-      "claim the same chat is technically incapable of deviation",
-      "use a self-generated receipt or prompt-only rule as capability-isolation proof",
-      "reactivate CODEX_CLOUD or any API route without explicit user rule change",
-      "change article content rules, LanguageTool 6.8, PPM 6.7.9, PSERC or ENDSTEMPEL",
-      "add a parallel architecture, alternate route or second CURRENT authority",
+      "change article content or quality rules",
+      "change LanguageTool 6.8, PPM 6.7.9, PSERC or ENDSTEMPEL",
+      "add a new architecture, runner, route or second CURRENT authority",
+      "reactivate the historical GitHub durable-event per-step/per-repair loop",
+      "start a live article production batch before the prison test is proven",
+      "claim capability isolation from code inspection or a simulated receipt alone",
       "publish"
     ]
   },
@@ -668,5 +675,15 @@
     "recovery_working_merge_sha": "04ec51a56c9c6037683c770015871d35cb757cac"
   },
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
-  "current_closeout_protocol_ref": "protocol/STARTMASTER0107_KONZEPT7_OPTIMIZATION_REAL4_CLOSEOUT_20260927.md"
+  "current_closeout_protocol_ref": "protocol/STARTMASTER0107_K7_CAPSULE_PRISON_TEST_HANDOFF_20260928.md",
+  "capability_boundary_audit": {
+    "user_constraint_decision": "EXISTING_CAPSULE_HARD_WORKER_PRISON_TEST_AUTHORIZED_ONLY",
+    "prison_test_status": "PENDING_REAL_EXECUTION",
+    "production_use_authorized": false,
+    "architecture_change_authorized": false,
+    "current_main_sha_at_authorization": "cd671620dd0c84fb9de971ad91dff5eefe788da8",
+    "boundary_blob": "4921624e0b6d24ce35549bec28e6d43035b2f098",
+    "mechanical_test_blob": "412d5b10c65b9e28777eb5b7739233ab377c1ff3",
+    "worker_harness_blob": "1574349f2b613b1e3c1e6b5dc7af168cd4e6d29f"
+  }
 }
