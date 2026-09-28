@@ -2,25 +2,29 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-26
-STATUS: HD-001 V1.8.3 UPDATE BEREIT
+STAND: 2026-09-28
+STATUS: HD-001 V1.8.4 TESTBEREIT
 
 ## Rolle
 
 Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PLUGINS`.
 
-## Aktueller belastbarer Stand
+## Aktueller Stand
 
-HD-001 Kategorie-Workflow wurde auf V1.8.3 weiterentwickelt.
+HD-001 liegt als V1.8.4 Hobby-Depot-Pilot vor.
 
 Neu:
-- eigener WordPress-Hauptmenüpunkt `Kategorien`;
-- bestehende DataForSEO-/Grundeinstellungen werden beim Update unverändert übernommen.
+- Hauptmenü `Kategorien`;
+- Unterpunkt `Protokoll`;
+- verständliche Laufhistorie und DataForSEO-Einzelkosten;
+- Dry-Run/Deployment/Readback/Rollback nachvollziehbar;
+- Credentials und Authwerte werden aus dem Log entfernt.
 
-Lokale Tests:
-- 223/223 PASS
-- PHP-Lint 16/16 PASS
+Tests:
+- 225/225 PASS;
+- Fresh-Unpack 225/225 PASS;
+- PHP 17/17 PASS.
 
 ## NEXT ACTION
 
-V1.8.3 über V1.8.2 installieren und Menü + Einstellungsübernahme + DataForSEO-Verbindung prüfen.
+V1.8.4 installieren und zuerst Verbindungstest + Protokollanzeige prüfen. Danach Testlabor-Konzept ohne produktive Kategorien starten.
