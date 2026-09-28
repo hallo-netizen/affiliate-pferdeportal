@@ -477,7 +477,7 @@
     "workflow": "PFERDE_ATELIER_KONZEPT_6_WORKING_COPY",
     "entry_ref": "concept_agent/CONTROL_ENTRY_POINTER.json",
     "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
-    "current_authority_branch": "main",
+    "current_authority_branch": "konzept7/hard-worker-completion-20260928",
     "metadata_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
     "metadata_snapshot_sha256": "3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761",
     "metadata_snapshot_manifest_sha256": "2d1335445273c4ffc8946f25b67b4192ee2ebd669a90be97c67932325a98f789",
@@ -550,7 +550,7 @@
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
   "current_execution_policy": {
     "control_model": "GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
-    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_MAIN",
+    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_PRE_K8_K7_BASE",
     "host_model_worker_binding_status": "BLOCKED_NOT_AVAILABLE_IN_CURRENT_GITHUB_START_PATH",
     "chat_role": "INITIAL_TRIGGER_ONLY",
     "chat_may_route": false,
