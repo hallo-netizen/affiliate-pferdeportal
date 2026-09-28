@@ -46,29 +46,54 @@ def verify_goal_contract(value: dict[str, Any]) -> None:
         "startmaster": "STARTMASTER0107",
         "goal": "MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE",
         "default_reasoning": "medium",
+        "applies_to": [
+            "text_generation",
+            "routine_bound_transformations",
+            "deterministic_workflow_navigation",
+            "routine_metadata_work",
+        ],
+        "escalate_above_medium_only_if": [
+            "existing_bound_step_explicitly_requires_higher_reasoning",
+            "rootcause_or_semantic_case_cannot_be_safely_completed_at_medium_on_same_unchanged_input",
+            "existing workflow explicitly marks step high-risk",
+        ],
+        "never_trade_for_medium": [
+            "research_completeness",
+            "fact_binding",
+            "title_keyword_rules",
+            "duplicate_cannibalization",
+            "LanguageTool",
+            "PPM",
+            "PSERC",
+            "PSTE",
+            "design",
+            "publish_safety",
+            "package_preflight",
+        ],
         "downgrade_for_cost_or_speed_without_gate_parity": "FORBIDDEN",
+        "measurement": [
+            "articles_per_batch",
+            "wall_clock_per_article",
+            "repeated_gate_count",
+            "backtrack_count",
+            "quality_gate_pass_rate",
+        ],
         "success": "MEDIUM_USED_WHERE_POSSIBLE_AND_OUTPUT_PASSES_IDENTICAL_EXISTING_GATES_WITH_ZERO_RULE_CHANGES",
         "hard_execution_principle": "MEDIUM_IS_EXECUTION_DEFAULT_ONLY; ALL EXISTING DOMAIN_GATES_UNCHANGED",
         "immutable_entrance_layer": "GITHUB_PULL_REQUEST_TARGET_BASE_HARDLOCK",
     }
-    for key, expected_value in expected.items():
-        if value.get(key) != expected_value:
-            raise Blocked("DIRECTOR_GOAL_CONTRACT_INVALID:" + key)
-    never = value.get("never_trade_for_medium")
-    required_never = {
-        "research_completeness", "fact_binding", "title_keyword_rules",
-        "duplicate_cannibalization", "LanguageTool", "PPM", "PSERC", "PSTE",
-        "design", "publish_safety", "package_preflight",
-    }
-    if not isinstance(never, list) or set(never) != required_never:
-        raise Blocked("DIRECTOR_GOAL_NEVER_TRADE_INVALID")
-    allowed_escalations = value.get("escalate_above_medium_only_if")
-    if not isinstance(allowed_escalations, list) or set(allowed_escalations) != {
-        "existing_bound_step_explicitly_requires_higher_reasoning",
-        "rootcause_or_semantic_case_cannot_be_safely_completed_at_medium_on_same_unchanged_input",
-        "existing workflow explicitly marks step high-risk",
-    }:
-        raise Blocked("DIRECTOR_GOAL_ESCALATION_POLICY_INVALID")
+    if value != expected:
+        missing = sorted(set(expected).difference(value))
+        extra = sorted(set(value).difference(expected))
+        changed = sorted(k for k in set(expected).intersection(value) if value[k] != expected[k])
+        raise Blocked(
+            "DIRECTOR_GOAL_CONTRACT_NOT_EXACT:"
+            + ",".join(missing or ["NONE"])
+            + ":"
+            + ",".join(extra or ["NONE"])
+            + ":"
+            + ",".join(changed or ["NONE"])
+        )
 
 def current_goal_contract() -> dict[str, Any]:
     value = load(GOAL_CONTRACT_PATH)
@@ -148,6 +173,25 @@ def verify_ticket(binding: dict[str, Any], checkpoint: dict[str, Any], decision:
 def _verify_receipt(ticket: dict[str, Any], receipt: dict[str, Any]) -> None:
     if not isinstance(receipt, dict) or receipt.get("contract") != RECEIPT_CONTRACT:
         raise Blocked("DIRECTOR_RECEIPT_CONTRACT_INVALID")
+    base_fields = {
+        "contract", "status", "ticket_sha256", "checkpoint_sha256",
+        "allowed_action_sha256", "worker_role", "reasoning_effort",
+        "publish_allowed", "workflow_change_requested",
+        "quality_gate_change_requested", "next_action",
+    }
+    action_name = str((ticket.get("allowed_action") or {}).get("action") or "")
+    action_fields = {
+        "WRITE_DRAFT": {"artifact_relpath", "artifact_sha256", "workspace_capsule"},
+        "REPAIR_DRAFT": {"artifact_relpath", "artifact_sha256", "workspace_capsule"},
+        "RUN_CHECKER": {"artifact_relpath", "artifact_sha256", "result", "workspace_capsule"},
+        "RUN_PSERC": {"result"},
+        "RUN_ENDSTEMPEL": {"result"},
+    }.get(action_name)
+    if action_fields is None:
+        raise Blocked("DIRECTOR_RECEIPT_ACTION_NOT_ALLOWED")
+    unknown = sorted(set(receipt).difference(base_fields | action_fields))
+    if unknown:
+        raise Blocked("DIRECTOR_RECEIPT_EXTRA_FIELDS_FORBIDDEN:" + ",".join(unknown))
     if receipt.get("status") != "COMPLETED":
         raise Blocked("DIRECTOR_RECEIPT_NOT_COMPLETED")
     if receipt.get("ticket_sha256") != ticket.get("ticket_sha256"):
@@ -158,10 +202,14 @@ def _verify_receipt(ticket: dict[str, Any], receipt: dict[str, Any]) -> None:
         raise Blocked("DIRECTOR_RECEIPT_ACTION_MISMATCH")
     if receipt.get("worker_role") != ticket.get("worker_role"):
         raise Blocked("DIRECTOR_RECEIPT_WORKER_MISMATCH")
+    if receipt.get("reasoning_effort") != ticket.get("reasoning_effort"):
+        raise Blocked("DIRECTOR_RECEIPT_REASONING_MISMATCH")
     if receipt.get("publish_allowed") is not False:
         raise Blocked("DIRECTOR_RECEIPT_PUBLISH_INVALID")
     if receipt.get("workflow_change_requested") is not False:
         raise Blocked("DIRECTOR_RECEIPT_WORKFLOW_CHANGE_FORBIDDEN")
+    if receipt.get("quality_gate_change_requested") is not False:
+        raise Blocked("DIRECTOR_RECEIPT_QUALITY_CHANGE_FORBIDDEN")
     if receipt.get("next_action") is not None:
         raise Blocked("DIRECTOR_RECEIPT_NEXT_ACTION_FORBIDDEN")
 
