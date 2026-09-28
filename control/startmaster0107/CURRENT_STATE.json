@@ -512,7 +512,7 @@
     "semantic_role": "COMPLETED_K6_COMPATIBILITY_SNAPSHOT_NOT_CURRENT_K7_STATUS"
   },
   "text_start_current_binding": {
-    "status": "PASS",
+    "status": "PASS_ISOLATED_K7_START",
     "target_workflow_ref": ".github/workflows/text-start-pferdeatelier.yml",
     "central_repository": "hallo-netizen/text-start",
     "central_main_sha": "afd02b5468b6549bdfa0f3c407c79dc602edf657",
@@ -523,7 +523,10 @@
     "batch_size_policy": "1..N_FROM_CURRENT_HASH_BOUND_SNAPSHOT",
     "legacy_runtime_inbox_used": false,
     "legacy_parent_start_used": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "central_start_branch": "konzept7/isolated-start-20260928",
+    "central_start_head_sha": "c1c8af7488d8df84471310a6bd9deb802f677bd8",
+    "central_main_is_current_start_authority": false
   },
   "upstream_repair_policy": {
     "status": "PASS",
