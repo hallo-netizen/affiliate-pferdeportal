@@ -72,6 +72,10 @@ Solange diese Current-Autorität keine Provider-/Slot-/Landingpage-Änderung erl
 
 Gleiches gilt für DESIGN: die optische Kachel-Erweiterung wird nur im zuständigen Design-Arbeitsweg und ausschließlich für den gebundenen Pilot umgesetzt.
 
+## Gebundener Plugin-Plan
+
+`PLUGIN_IMPLEMENTIERUNGSPLAN.md`
+
 ## NEXT ACTION
 
 Den Pilot `Pferdehaftpflicht vergleichen` technisch erst dann umsetzen, wenn die zuständigen AFFILIATE- und DESIGN-Current-Autoritäten die jeweilige Änderung freigeben; dabei ausschließlich diese eine Landingpage/Kachel testen und keinerlei weitere Kategorien oder Landingpages mitändern.
