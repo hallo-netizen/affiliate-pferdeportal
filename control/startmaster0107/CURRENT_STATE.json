@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_TESTED_HOST_WORKER_BINDING_BLOCKED",
+  "status": "K7_DIRECTOR_PROVEN_NATIVE_BOUND_MODEL_WORKER_HOST_UNAVAILABLE_FAIL_CLOSED",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -123,7 +123,8 @@
     "K7_CAPSULE_PRISON_TEST_AUTHORIZED_ONLY_REAL_EXECUTION_PENDING_20260928",
     "PR469_GITHUB_DIRECTOR_MERGED_MAIN_2343152EAF300771F3BEA65E6269283CDCE2D68D",
     "PR471_DIRECTOR_HARDENING_MERGED_MAIN_E51FBEF79E79D824A1E38445F0B3AFCB904273FA",
-    "K7_GITHUB_DIRECTOR_REAL_TEST_RUN_36420006811_11_OF_11_PASS"
+    "K7_GITHUB_DIRECTOR_REAL_TEST_RUN_36420006811_11_OF_11_PASS",
+    "K7_NATIVE_HOST_WORKER_CAPABILITY_AUDIT_NO_COMPATIBLE_INVOCATION_FOUND_20260928"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -229,13 +230,14 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_TESTED_HOST_WORKER_BINDING_BLOCKED",
+  "current_work_status": "K7_DIRECTOR_PROVEN_NATIVE_BOUND_MODEL_WORKER_HOST_UNAVAILABLE_FAIL_CLOSED",
   "current_execution_blocker": {
-    "code": "BOUND_MODEL_WORKER_HOST_NOT_AVAILABLE_IN_CURRENT_GITHUB_START_PATH",
+    "code": "NATIVE_BOUND_MODEL_WORKER_HOST_CAPABILITY_UNAVAILABLE",
     "error_class": true,
-    "classification": "CONTROL_ONLY",
-    "detail": "The domain-blind GitHub director is implemented on main and its full positive/negative matrix is proven. The remaining blocker is outside the existing repository controller logic: the current text-start GitHub path can dispatch GitHub Actions and create the bound intake handoff, but it cannot itself instantiate a capability-restricted model worker. Without Codex/API or another approved host-level worker capability, WRITE_DRAFT/RESEARCH cannot be physically separated from free-chat execution. No fake hardlock is claimed.",
+    "classification": "HOST_CAPABILITY_ONLY",
+    "detail": "The GitHub director is implemented and proven. It can issue exactly one checkpoint-bound ticket and accept only the matching constrained receipt. The existing GitHub start path can run deterministic repository code but exposes no native host primitive that instantiates a model worker with physically reduced capabilities. Repository code cannot remove capabilities exposed by the chat host. Therefore physical worker confinement cannot be completed inside the current repository path without introducing a different execution host, which is outside the authorized scope.",
     "applies_to_concept_agent": true,
+    "github_director_resolved": true,
     "recovery_fix_resolved": true,
     "production_reactivation_authorized": false,
     "quality_change_authorized": false,
@@ -350,9 +352,9 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "PROVE_OR_BIND_APPROVED_HOST_LEVEL_MODEL_WORKER_CAPABILITY",
-    "action": "Keep the proven GitHub director and all existing K7 workers/gates unchanged. Identify and prove one host-level model-worker invocation that the director can start for exactly one bound ticket without giving the free chat routing authority. It must require neither Codex nor OpenAI API under the current production constraints. If no such host capability exists, remain fail-closed and do not reactivate production.",
-    "scope": "HOST_CAPABILITY_BINDING_ONLY_DIRECTOR_AND_EXISTING_WORKERS_UNCHANGED",
+    "goal": "HOLD_FAIL_CLOSED_UNTIL_NATIVE_BOUND_MODEL_WORKER_HOST_CAPABILITY_EXISTS",
+    "action": "Do not alter the proven K7 workflow, workers, quality gates, recovery or GitHub director. Do not substitute acceptance-only confinement for physical worker confinement. Production remains blocked. If a native host capability becomes available that can instantiate exactly the director-bound worker with physically restricted capabilities, bind the existing ticket to that host and rerun the existing positive/negative matrix before production reactivation.",
+    "scope": "HOST_CAPABILITY_ONLY_NO_REPOSITORY_ARCHITECTURE_CHANGE",
     "existing_workflow_steps_unchanged": true,
     "article_content_rules_changed": false,
     "quality_rules_changed": false,
@@ -361,8 +363,10 @@
     "pserc_changed": false,
     "endstempel_changed": false,
     "recovery_changed": false,
+    "director_changed": false,
     "publish_allowed": false,
     "forbidden": [
+      "claim physical worker confinement from repository rules alone",
       "change existing worker responsibilities",
       "change article workflow order",
       "change content or quality rules",
