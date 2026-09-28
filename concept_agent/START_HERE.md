@@ -42,7 +42,3 @@ LanguageTool 6.8, PPM 6.7.9, PSERC, ENDSTEMPEL und `publish_allowed=false` dürf
 
 Die konkrete aktuelle Aktion steht ausschließlich in:
 `control/startmaster0107/CURRENT_STATE.json`.
-
-## Aktuelle Ausführungsgrenze
-
-Für Produktion gilt ausschließlich der in der Current-Autorität gebundene Concept-Agent-Weg. Historische, archivierte oder frühere externe Ausführungswege besitzen **keine** aktuelle Start-, Worker-, Routing-, Diagnose- oder Fallback-Autorität und dürfen nicht als Lösung reaktiviert oder vorgeschlagen werden.
