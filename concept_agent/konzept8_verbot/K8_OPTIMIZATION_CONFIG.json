@@ -29,8 +29,8 @@
   },
   "writer": {
     "first_draft_goal": "PASS_WITHOUT_REPAIR",
-    "min_word_safety_addition": 100,
-    "min_paragraph_safety_addition": 2,
+    "min_word_safety_addition": 0,
+    "min_paragraph_safety_addition": 0,
     "min_table_row_safety_addition": 1,
     "conclusion_ratio_target_if_applicable": 0.12,
     "table_unique_token_ratio_target_if_applicable": 0.22,
@@ -43,7 +43,10 @@
       "conclusion",
       "further_information"
     ],
-    "heading_content_relation": "USE_EXISTING_BOUND_INTENT_AND_HEADING_SEMANTIC_RULES"
+    "heading_content_relation": "USE_EXISTING_BOUND_INTENT_AND_HEADING_SEMANTIC_RULES",
+    "conclusion_ratio_maximum": 0.18,
+    "conclusion_maximum_paragraphs": 3,
+    "conclusion_may_fill_global_minimums": false
   },
   "production": {
     "default_article_lanes": 4,
