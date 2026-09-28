@@ -14,7 +14,7 @@ RESEARCH_BOUND_CONTRACT = "CONCEPT_AGENT_RESEARCH_BOUND_V1"
 EXACT_FIELDS = ("title", "target_keyword", "category", "article_type", "plan_slot")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 FORBIDDEN_RESEARCH_HOST = "pferde-atelier.de"
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parents[3]
 CONTROL_POINTER = REPO / "concept_agent" / "CONTROL_ENTRY_POINTER.json"
 
 class Blocked(RuntimeError):
@@ -225,48 +225,45 @@ def _persisted_research_for_intake(result: dict) -> dict | None:
     }
 
 
-def _start_receipt(result: dict) -> dict:
+def _k8_start_receipt(snapshot: dict, result: dict) -> dict:
     persisted = _persisted_research_for_intake(result)
-    trigger_core = {
-        "contract": "CONCEPT_AGENT_BOUND_START_PROCESS_TRIGGER_V1",
-        "batch_sha256": result["batch_sha256"],
-        "intake_sha256": result["intake_sha256"],
-        "worker": "BOUND_CHAT_WORKER",
-        "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
-        "current_authority_branch": "main",
-        "allowed_operation": (
-            "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_USE_PERSISTED_RESEARCH_BOUND"
-            if persisted
-            else "RESUME_VALID_PRODUCTION_CHECKPOINT_IF_PRESENT_ELSE_RESEARCH_REQUIRED"
-        ),
-        "fresh_batch_first_action": "USE_PERSISTED_RESEARCH_BOUND" if persisted else "RESEARCH_REQUIRED",
-        "production_checkpoint_required_before_research": False,
-        "missing_production_checkpoint_policy": (
-            "USE_EXACT_HASH_BOUND_PERSISTED_RESEARCH_NO_RESEARCH_RERUN"
-            if persisted
-            else "BEFORE_RESEARCH_EXPECTED_CONTINUE_RESEARCH_AFTER_PRODUCTION_START_BLOCK_NO_RECONSTRUCTION"
-        ),
-        "return_to": "concept_agent/full_workflow_gate.py",
-        "handoff_is_terminal": False,
-        "same_bound_worker_must_continue_without_return": True,
-        "exactly_once_for_intake": True,
-        "return_required": True,
-        "publish_allowed": False,
-    }
-    if persisted:
-        trigger_core["persisted_research_bound_ref"] = persisted["ref"]
-        trigger_core["persisted_research_bound_file_sha256"] = persisted["file_sha256"]
-        trigger_core["persisted_research_binding_sha256"] = persisted["research_binding_sha256"]
-        trigger_core["next_entry_ref"] = "concept_agent/production_bridge.py"
-    process_trigger = dict(trigger_core)
-    process_trigger["trigger_sha256"] = stable(trigger_core)
+    if persisted is None:
+        raise Blocked("K8_PERSISTED_RESEARCH_REQUIRED")
+
+    bound_path = (REPO / persisted["ref"]).resolve()
+    bound = _load(bound_path)
+
+    from . import k8_production_bridge as production_bridge
+    from .. import k8_command_gate
+
+    binding = production_bridge.build(snapshot, result, bound)
+    checkpoint = production_bridge.initial_checkpoint(binding)
+    required_command = k8_command_gate.proposal_for(checkpoint)
+
     return {
         "status": "CONCEPT_AGENT_INTAKE_READY",
         "batch_sha256": result["batch_sha256"],
         "item_count": result["item_count"],
         "intake_sha256": result["intake_sha256"],
-        "bound_worker": "BOUND_CHAT_WORKER",
-        "process_trigger": process_trigger,
+        "bound_worker": "K8_VERBOT_SINGLE_GATE",
+        "process_trigger": {
+            "contract": "K8_VERBOT_BOUND_START_PROCESS_TRIGGER_V1",
+            "batch_sha256": result["batch_sha256"],
+            "checkpoint_sha256": checkpoint["checkpoint_sha256"],
+            "allowed_action": checkpoint["allowed_action"],
+            "required_command": required_command,
+            "gate_ref": "concept_agent/konzept8_verbot/k8_command_gate.py",
+            "entry_ref": "concept_agent/konzept8_verbot/k8_entry.py",
+            "state_change_authority": "K8_ISOLATED_PROGRESS_GUARD_ONLY",
+            "wrong_missing_or_stale_command": "BLOCKED_KEEP_EXACT_SAME_CHECKPOINT",
+            "return_required": True,
+            "publish_allowed": False,
+        },
+        "k8_bootstrap": {
+            "binding": binding,
+            "checkpoint": checkpoint,
+            "required_command": required_command,
+        },
         "continuation_required": True,
         "worker_must_execute_allowed_operation_immediately": True,
         "worker_return_must_reenter_full_workflow_gate": True,
@@ -278,8 +275,10 @@ def _start_receipt(result: dict) -> dict:
 def main(argv: list[str]) -> int:
     try:
         if len(argv) == 4 and argv[1] == "prepare":
-            result = prepare_file(argv[2], argv[3])
-            print(json.dumps(_start_receipt(result), ensure_ascii=False, sort_keys=True))
+            snapshot = _load(Path(argv[2]))
+            result = prepare(snapshot)
+            Path(argv[3]).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            print(json.dumps(_k8_start_receipt(snapshot, result), ensure_ascii=False, sort_keys=True))
             return 0
         raise Blocked("USE: intake_bridge.py prepare SNAPSHOT_JSON OUT_JSON")
     except Exception as exc:
