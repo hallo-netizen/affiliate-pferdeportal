@@ -3,27 +3,32 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: V1.8.4 TESTLABOR BEREIT / ECHTER DATAFORSEO-TEST ALS NÄCHSTES
+STATUS: V1.8.5 SIMPLE BEREIT / TESTLABOR DANACH
 
 ## Aktueller belastbarer Stand
 
-Kategorie-Workflow V1.8.4 ist lokal und nach Fresh-Unpack vollständig getestet.
+Kategorie-Workflow V1.8.5 reduziert die Bedienoberfläche ohne Funktionsabbau.
 
-Neu:
-- verständliches Kontrollprotokoll;
-- DataForSEO-Einzelkosten;
-- sichtbare Research-/Kannibalisierungs-/Deployment-/Readback-/Rollback-Ereignisse;
-- JSON-Export;
-- keine Credential-/Authwerte im Log.
+Direkt sichtbar:
+- DataForSEO-Verbindung;
+- Status;
+- Protokoll;
+- Konzeptstart.
+
+Eingeklappt erhalten:
+Research-, Coverage-, Kannibalisierungs-, Review-, FINAL-, Dry-Run-, Apply-, Readback-, Rollback-, Drift- und Idempotenzfunktionen.
+
+Installationspaket ist von Entwicklungs-Tests/Audits befreit.
 
 Teststatus:
-- 225/225 PASS;
-- Fresh-Unpack 225/225 PASS;
-- PHP-Lint 17/17 PASS.
+- 227/227 PASS;
+- Fresh-Unpack-Installer 227/227 PASS;
+- Installer PHP-Lint 16/16 PASS;
+- Runtime-Parität 21/21 PASS.
 
 Wegwerf-Testinput:
 `HOBBY_DEPOT_TESTLABOR_KATEGORIE_KONZEPT_20260928.json`
 
 ## NEXT ACTION
 
-V1.8.4 auf Hobby Depot aktualisieren → Protokoll öffnen → DataForSEO-Verbindung PASS erzeugen → Testlabor-Konzept kostenlos vorprüfen. Noch kein echter Struktur-Write vor geprüftem Dry-Run.
+V1.8.5 installieren und reduzierte Oberfläche prüfen; danach DataForSEO-Verbindungstest und Testlabor-Konzept.
