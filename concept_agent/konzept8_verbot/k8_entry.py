@@ -11,11 +11,11 @@ CONCEPT_AGENT = HERE.parent
 if str(CONCEPT_AGENT) not in sys.path:
     sys.path.insert(0, str(CONCEPT_AGENT))
 
-import progress_guard  # type: ignore
-import universal_reentry_guard  # type: ignore
+from .engine import k8_progress_guard as progress_guard
+from .engine import k8_universal_reentry_guard as universal_reentry_guard
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
-import k8_command_gate  # type: ignore
+from . import k8_command_gate
 
 EXECUTE = "K8_VERBOT_EXECUTE_EXACT_CURRENT_ACTION"
 

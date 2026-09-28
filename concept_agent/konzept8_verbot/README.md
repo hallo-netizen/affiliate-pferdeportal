@@ -1,20 +1,19 @@
 # K8 Verbot
 
-Eigenständige Arbeitskopie des letzten K7-Working-Copy-Standes vor dem GitHub-Regisseur.
+Eigenständiger, hart isolierter Produktionslauf.
 
-- Quelle: `konzept7/working-copy-20260927`
-- K7-GitHub-Freeze: `archive/k7-github-frozen-20260928`
-- K8-Baseline: `konzept8-verbot/baseline-20260928`
-- K8-Arbeit: `konzept8-verbot/working-copy-20260928`
+## Trennungsregel
 
-## Einzige neue Idee
+K8 liest, importiert oder startet keinen anderen Konzept-Lauf. Kein anderer Konzept-Lauf wird von K8 als Fallback, Quelle, Controller oder Worker verwendet.
 
-Vor die bestehende K7-Fortsetzung kommt genau eine Schleuse.
+Der Live-Eingang darf ausschließlich in diesen K8-Namensraum führen. Gemeinsame fachliche Autoritäten außerhalb der Konzeptsteuerung bleiben nur die unveränderten, bereits bestehenden Qualitätsmaschinen und aktuellen gebundenen Produktionsdaten.
+
+## Verbotsprinzip
 
 - exakt der aktuelle checkpointgebundene Befehl: darf passieren;
 - jeder andere, fehlende, alte oder erweiterte Befehl: keine Zustandsänderung;
 - derselbe Checkpoint und dieselbe NEXT ACTION bleiben gültig;
-- beschädigter Current/Checkpoint: harter STOP statt Raten;
-- der bestehende K7-Workflow und seine Qualitätsprüfungen bleiben unverändert.
+- beschädigter Checkpoint: harter STOP statt Raten;
+- Qualitätsregeln, Prüferfolge und Publish bleiben unverändert.
 
-Die Schleuse selbst erzeugt keinen neuen Fachschritt und entscheidet keine Inhalte oder Qualität.
+Die Trennung wird maschinell in beiden Richtungen geprüft.

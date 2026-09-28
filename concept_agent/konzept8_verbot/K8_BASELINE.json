@@ -1,0 +1,21 @@
+{
+  "contract": "KONZEPT8_VERBOT_ISOLATED_BASELINE_V1",
+  "status": "BASELINE_CREATED_NOT_YET_OPTIMIZED",
+  "concept": "K8",
+  "branch": "konzept8-verbot/working-copy-20260928",
+  "baseline_created_from_snapshot_sha256": "2327a3c9f2bbdfbc9b0c6244a5b815d126aac203",
+  "provenance_only": true,
+  "runtime_dependency_on_previous_concept": false,
+  "previous_concept_runtime_paths_allowed": false,
+  "previous_concept_payloads_copied": false,
+  "previous_article_content_copied": false,
+  "current_article_payload_present": false,
+  "optimization_changes_started": false,
+  "quality_gates_changed": false,
+  "languagetool68_changed": false,
+  "ppm679_changed": false,
+  "pserc_changed": false,
+  "endstempel_semantics_changed": false,
+  "publish_allowed": false,
+  "isolation_rule": "K8_ACTIVE_RUNTIME_MUST_NOT_REFERENCE_PREVIOUS_CONCEPT_PATHS_BRANCHES_PAYLOADS_OR_POLICY_NAMES"
+}
