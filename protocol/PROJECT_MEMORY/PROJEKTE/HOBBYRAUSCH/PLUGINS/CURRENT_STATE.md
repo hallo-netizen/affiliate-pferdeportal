@@ -3,30 +3,23 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: HD-001 V1.8.9 LOKAL POSITIV/NEGATIV PASS / LIVE-PASS AUSSTEHEND
-
-## Rolle
-
-Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PLUGINS`.
+STATUS: HD-001 V1.8.9 PERSISTENT RESUME LIVE PASS / GESAMTABNAHME NOCH OFFEN
 
 ## Aktueller belastbarer Stand
 
-V1.8.9 behebt den noch unnötig versteckten ersten Fortsetzungsschritt:
-- Fortsetzungsdatei bei leerem Workspace direkt sichtbar;
-- danach genau eine nächste Aktion;
-- keine erneuten Uploads interner Zwischenstände;
-- DataForSEO-PASS persistent;
-- ungültige vorhandene Review-Signaturen fail-closed.
+V1.8.9 hat den vereinfachten Fortsetzungsweg live bestanden:
+- gespeicherte DataForSEO-Verbindung wiederverwendet;
+- signierter Initial-Draft übernommen;
+- Global-Coverage ohne erneuten Zwischen-Datei-Pingpong gestartet;
+- Global-Coverage Preflight/DataForSEO/Finalisierung PASS;
+- 1 Paid-Call, 0.132 USD;
+- kein WordPress-Write.
 
-Lokale Prüfung:
-- 235/235 PASS;
-- Fresh-Unpack 235/235 PASS;
-- Runtime PHP 17/17 PASS;
-- Runtime-Parität 22/22 PASS;
-- gezielte positive und negative Workspace-/Review-/Paid-Call-Tests PASS.
-
-Keine Funktions-, Qualitäts-, Research-, Deployment-, Readback-, Drift- oder Rollback-Gates entfernt.
+Global-Coverage wurde fachlich geprüft und die 27 Review-Cores für den technischen Test explizit aufgelöst. Korrigierter Draft bereit:
+`kategorie-draft-hobby-depot-testlabor-global-bereinigt.json`.
 
 ## NEXT ACTION
 
-V1.8.9 installieren und den bereits signierten Initial-Draft einmal im direkt sichtbaren Fortsetzungsfeld laden. Erwartung: direkte Weiterleitung zu Global-Coverage. Vor diesem Live-PASS keine Plugin-Abnahme.
+Korrigierten Draft einmal als neuen externen Arbeitsstand übernehmen → Global-Sichtfreigabe serverseitig bestätigen → Detailresearch starten.
+
+Gesamtplugin erst nach Dry-Run, Apply, Readback, zweitem identischem Lauf und Rollback abnehmen.
