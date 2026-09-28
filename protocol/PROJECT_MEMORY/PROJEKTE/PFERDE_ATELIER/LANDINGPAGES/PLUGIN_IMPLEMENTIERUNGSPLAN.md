@@ -84,3 +84,71 @@ Voraussichtlich kleinster Affiliate-Korridor:
 - vorhandene Output-/Shortcode-Schicht für den expliziten Rechneraufruf.
 
 Keine Änderung an eBay-/Ranking-/Kategorie-/Performancecode, sofern der echte Implementierungsbedarf das nicht zwingend beweist.
+
+
+## Exakter vorbereiteter Code-Korridor
+
+Noch **kein Source-Write**, solange die Affiliate-Current-Autorität den Performance-Scope exklusiv bindet.
+
+Nach Freigabe ist der kleinste vorgesehene Korridor:
+
+### 1. Provider-Registry
+
+Bestehende Funktion:
+`PPAR_Provider_Registry_Trait::provider_registry_defaults()`
+
+Nur zwei neue Providerdefinitionen ergänzen:
+- `tarifcheck`
+- `check24`
+
+Beide zunächst:
+- `state=prepared`
+- `access_owner=adapter`
+- kein Specialist-Menü
+- nur tatsächlich belegte Capabilities.
+
+Wichtig:
+Der vorhandene request-lokale Registry-Cache aus 6.72.148 bleibt unverändert. Keine neue Registry-Abfrage pro Slot/Kachel.
+
+### 2. Rechner-Ausgabe
+
+Der vorhandene normale Affiliate-Slot ist für Banner/Produkte optimiert. Der große Tarifrechner wird deshalb **nicht** in die globale Slot-Automatik eingeschleust.
+
+KISS:
+- genau ein expliziter, providerneutraler Rechner-Shortcode;
+- dieser läuft nur dort, wo er tatsächlich im Seiteninhalt steht;
+- ohne Shortcode: null Rechnerarbeit;
+- ohne freigegebenen Provideradapter: leere Ausgabe/fail closed;
+- keine externe Anfrage beim bloßen Registrieren des Providers;
+- keine `the_content`-, `pre_get_posts`-, Menü-, Kategorie- oder Taxonomie-Suche zum Finden der Landingpage.
+
+Der Adapter liefert ausschließlich den real gebundenen Tarifrechner-Embed.
+
+### 3. Pilot-Hardlock
+
+Für den ersten Realtest akzeptiert der Rechner nur:
+- Provider `tarifcheck`;
+- Produkt `tierhalter/pferdehaftpflicht`;
+- die explizit gebundene WordPress-Seite `Pferdehaftpflicht vergleichen`.
+
+CHECK24 wird nur registriert/vorbereitet und erzeugt im Pilot keinerlei Frontendoutput.
+
+### 4. Banner
+
+Banner von Tarifcheck/CHECK24 bleiben im bestehenden Weg:
+Provider/Import -> Creative-Library -> Relevanz -> Verteilung -> Veto -> Output.
+
+Der Rechner-Shortcode erzeugt **keinen zweiten Bannerweg**.
+
+### 5. Performance-Testpflicht
+
+Vor Freigabe:
+- normale Startseite: 0 Rechneraufrufe;
+- normale Kategorie: 0 Rechneraufrufe;
+- Journalartikel: 0 Rechneraufrufe, sofern kein expliziter Shortcode gesetzt ist;
+- Pilot-Landingpage: genau 1 Rechnerausgabe;
+- unbekannter Provider: leer/fail closed;
+- falsche Seite: leer/fail closed;
+- Provider pausiert/veto: leer/fail closed;
+- keine zusätzlichen DB-/Taxonomie-/Menüabfragen auf Negativseiten;
+- bestehende Banner-/Ranking-/Veto-Regression PASS.
