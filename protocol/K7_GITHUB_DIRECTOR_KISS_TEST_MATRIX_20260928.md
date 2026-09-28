@@ -49,3 +49,12 @@ Muss fail-closed blockieren:
 Die bestehenden Kern-Dateien werden bytegenau über Git-Blob-Fingerprints festgehalten. Die Testmatrix enthält sowohl den zulässigen kompletten Weg als auch absichtliche Regelverletzungen. Ein Negativfall, der nicht blockiert, ist Gesamt-FAIL.
 
 Interne Entwicklungssimulation des neuen Director-Adapters: PASS.
+
+## GitHub-Realtest
+- Run: `36420006811`
+- Ergebnis: **PASS**
+- Director-Matrix: **11/11 PASS**
+- Full16-Simulation: **16 Artikel / 5 Repairs / Unterbrechung vor und nach jedem akzeptierten Schritt / Replay alter Tickets BLOCKED / ENDSTEMPEL -> STOP**
+- Bestehende Deterministic-Gate-Regression: PASS
+- Bestehende Production-Continuity-Regression: PASS
+- Testworkflow war ausschließlich Wegwerf-Testhülle in PR #470 und wird nicht in Produktion übernommen.

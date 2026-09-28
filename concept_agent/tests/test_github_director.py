@@ -385,6 +385,11 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
             with self.assertRaisesRegex(github_director.Blocked, "EXTRA_FIELDS_FORBIDDEN"):
                 github_director.accept(binding, checkpoint, decision, ticket, extra, root)
 
+            bad_hash = copy.deepcopy(base)
+            bad_hash["artifact_sha256"] = "0" * 64
+            with self.assertRaisesRegex(github_director.Blocked, "ARTIFACT_HASH_MISMATCH"):
+                github_director.accept(binding, checkpoint, decision, ticket, bad_hash, root)
+
             bad_ticket = copy.deepcopy(ticket)
             bad_ticket["allowed_action"] = {"action": "RUN_PSERC", "item_count": 1}
             with self.assertRaises(github_director.Blocked):
@@ -627,6 +632,26 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
         self.assertIsNotNone(ticket["worker_role"])
         with self.assertRaises(github_director.Blocked):
             github_director._worker_role({"action": "SOMETHING_ELSE"})
+        with self.assertRaisesRegex(github_director.Blocked, "CHECKER_UNKNOWN"):
+            github_director._worker_role({"action": "RUN_CHECKER", "checker": "OTHER"})
+
+    def test_08_each_existing_step_has_one_fixed_worker_role(self):
+        cases = (
+            ({"action": "WRITE_DRAFT"}, "WRITE_DRAFT_WORKER"),
+            ({"action": "RUN_CHECKER", "checker": "LT68"}, "LT68_WORKER"),
+            ({"action": "RUN_CHECKER", "checker": "PPM679"}, "PPM679_WORKER"),
+            ({"action": "REPAIR_DRAFT"}, "REPAIR_DRAFT_WORKER"),
+            ({"action": "RUN_PSERC"}, "PSERC_WORKER"),
+            ({"action": "RUN_ENDSTEMPEL"}, "ENDSTEMPEL_WORKER"),
+            ({"action": "STOP"}, None),
+        )
+        roles = []
+        for action, expected in cases:
+            actual = github_director._worker_role(action)
+            self.assertEqual(actual, expected)
+            if actual is not None:
+                roles.append(actual)
+        self.assertEqual(len(roles), len(set(roles)))
 
 
 if __name__ == "__main__":

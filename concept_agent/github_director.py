@@ -182,8 +182,8 @@ def _verify_receipt(ticket: dict[str, Any], receipt: dict[str, Any]) -> None:
         raise Blocked("DIRECTOR_RECEIPT_CONTRACT_INVALID")
     base_keys = {
         "contract", "status", "ticket_sha256", "checkpoint_sha256",
-        "allowed_action_sha256", "worker_role", "publish_allowed",
-        "workflow_change_requested", "next_action",
+        "allowed_action_sha256", "worker_role", "reasoning_effort", "publish_allowed",
+        "workflow_change_requested", "quality_gate_change_requested", "next_action",
     }
     action = str((ticket.get("allowed_action") or {}).get("action") or "")
     if action in {"WRITE_DRAFT", "REPAIR_DRAFT"}:
@@ -196,7 +196,7 @@ def _verify_receipt(ticket: dict[str, Any], receipt: dict[str, Any]) -> None:
         raise Blocked("DIRECTOR_RECEIPT_ACTION_INVALID")
     extra = sorted(set(receipt) - allowed_keys)
     if extra:
-        raise Blocked("DIRECTOR_RECEIPT_EXTRA_FIELD_FORBIDDEN:" + ",".join(extra))
+        raise Blocked("DIRECTOR_RECEIPT_EXTRA_FIELDS_FORBIDDEN:" + ",".join(extra))
     if receipt.get("status") != "COMPLETED":
         raise Blocked("DIRECTOR_RECEIPT_NOT_COMPLETED")
     if receipt.get("ticket_sha256") != ticket.get("ticket_sha256"):
@@ -207,6 +207,10 @@ def _verify_receipt(ticket: dict[str, Any], receipt: dict[str, Any]) -> None:
         raise Blocked("DIRECTOR_RECEIPT_ACTION_MISMATCH")
     if receipt.get("worker_role") != ticket.get("worker_role"):
         raise Blocked("DIRECTOR_RECEIPT_WORKER_MISMATCH")
+    if receipt.get("reasoning_effort") != ticket.get("reasoning_effort"):
+        raise Blocked("DIRECTOR_RECEIPT_REASONING_MISMATCH")
+    if receipt.get("quality_gate_change_requested") is not False:
+        raise Blocked("DIRECTOR_RECEIPT_QUALITY_CHANGE_FORBIDDEN")
     if receipt.get("publish_allowed") is not False:
         raise Blocked("DIRECTOR_RECEIPT_PUBLISH_INVALID")
     if receipt.get("workflow_change_requested") is not False:
