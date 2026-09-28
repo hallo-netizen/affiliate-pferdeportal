@@ -16,7 +16,7 @@ if str(CONCEPT_AGENT) not in sys.path:
 
 import progress_guard  # type: ignore
 import universal_reentry_guard  # type: ignore
-import k8_command_gate as gate  # type: ignore
+from concept_agent.konzept8_verbot import k8_command_gate as gate  # type: ignore
 
 
 class K8VerbotGateTests(unittest.TestCase):
