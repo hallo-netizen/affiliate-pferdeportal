@@ -129,7 +129,8 @@
     "PR458_FINAL_HARDLOCK_RUN_36400899834_PASS",
     "K7_RECOVERY_TARGETED_ABORT_MATRIX_3_OF_3_PASS_EXACT_PROGRESS_GUARD_BLOB_AEE4324F11FA8B0F4B865211359DCEA0255C8D7F",
     "K7_RECOVERY_EXTENDED_POSITIVE_NEGATIVE_3_OF_3_PASS",
-    "K7_RECOVERY_16_RESTART_MATRIX_PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS"
+    "K7_RECOVERY_16_RESTART_MATRIX_PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS",
+    "PR460_K7_WORKING_BRANCH_RECOVERY_MERGED_04EC51A56C9C6037683C770015871D35CB757CAC"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -278,7 +279,7 @@
     "scope": "KONZEPT7_WORKING_COPY",
     "main_sha_before_current_sync": "52a7439540b2a300f26b5b5d6f721513bf8fd902",
     "working_branch": "konzept7/working-copy-20260927",
-    "working_head_sha": "a5dc3cf2c066bf6d97e0623326b5fcd9b0f11074",
+    "working_head_sha": "04ec51a56c9c6037683c770015871d35cb757cac",
     "isolated_baseline_branch": "konzept7/baseline-isolated-20260927",
     "isolated_baseline_sha": "bdaa69eb9c96e4586f57e9b7da5aa96c7f23c9b6",
     "k6_gold_sha": "2327a3c9f2bbdfbc9b0c6244a5b815d126aac203",
@@ -345,7 +346,10 @@
     "recovery_targeted_abort_matrix": "PASS_3_OF_3",
     "recovery_extended_positive_negative": "PASS_3_OF_3",
     "recovery_restart_matrix": "PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS_ENDSTEMPEL_STOP",
-    "capability_isolation_status": "OPEN_SAME_CHAT_CANNOT_BE_REPOSITORY_CAPABILITY_REVOKED_WITHOUT_EXISTING_CODEX_CLOUD_BOUNDARY"
+    "capability_isolation_status": "OPEN_SAME_CHAT_CANNOT_BE_REPOSITORY_CAPABILITY_REVOKED_WITHOUT_EXISTING_CODEX_CLOUD_BOUNDARY",
+    "k7_working_recovery_pr": 460,
+    "k7_working_recovery_merge_sha": "04ec51a56c9c6037683c770015871d35cb757cac",
+    "k7_working_recovery_scope": "EXACT_INTERRUPTION_CHECKPOINT_STATE_ONLY_NO_CONTENT_QUALITY_ARCHITECTURE_CHANGE"
   },
   "last_safe_main_sha": "52a7439540b2a300f26b5b5d6f721513bf8fd902",
   "last_safe_change": "PR #458 merged the proven interruption/reentry recovery hardening: atomic checkpoint persistence plus exact resume from the last valid checkpoint. K7 full16 had already completed at 6ac289b39f63eacb61aead2e08041ee7ee580f10 with 16 LT6.8+PPM6.7.9 PASS article bytes, PSERC PASS and ENDSTEMPEL generation-000002. The remaining open issue is true same-chat capability isolation; no fake hardlock is claimed.",
@@ -637,14 +641,16 @@
     "role": "CURRENT_WORK_EVIDENCE_ONLY_NEXT_ACTION_IS_TOP_LEVEL_NEXT_ACTION",
     "status": "FULL16_COMPLETE_RECOVERY_HARDENED_CAPABILITY_ISOLATION_OPEN",
     "working_branch": "konzept7/working-copy-20260927",
-    "working_head_sha": "a5dc3cf2c066bf6d97e0623326b5fcd9b0f11074",
+    "working_head_sha": "04ec51a56c9c6037683c770015871d35cb757cac",
     "baseline_branch": "konzept7/baseline-isolated-20260927",
     "baseline_sha": "bdaa69eb9c96e4586f57e9b7da5aa96c7f23c9b6",
     "protocol_ref": "protocol/STARTMASTER0107_KONZEPT7_OPTIMIZATION_REAL4_CLOSEOUT_20260927.md",
     "quality_gates_changed": false,
     "publish_allowed": false,
     "full16_completion_commit": "6ac289b39f63eacb61aead2e08041ee7ee580f10",
-    "recovery_fix_merge_sha": "52a7439540b2a300f26b5b5d6f721513bf8fd902"
+    "recovery_fix_merge_sha": "52a7439540b2a300f26b5b5d6f721513bf8fd902",
+    "recovery_working_pr": 460,
+    "recovery_working_merge_sha": "04ec51a56c9c6037683c770015871d35cb757cac"
   },
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
   "current_closeout_protocol_ref": "protocol/STARTMASTER0107_KONZEPT7_OPTIMIZATION_REAL4_CLOSEOUT_20260927.md"
