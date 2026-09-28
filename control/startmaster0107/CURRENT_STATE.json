@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K7_EXISTING_BOUND_CHAT_WORKFLOW_REACTIVATED_PHYSICAL_HOST_CONFINEMENT_NOT_CLAIMED",
+  "status": "K7_BOUND_CHAT_CONTINUATION_FIX_READY_REAL_START_TO_STOP_VALIDATION_REQUIRED",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -230,16 +230,16 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K7_EXISTING_BOUND_CHAT_WORKFLOW_REACTIVATED_PHYSICAL_HOST_CONFINEMENT_NOT_CLAIMED",
+  "current_work_status": "K7_BOUND_CHAT_CONTINUATION_FIX_READY_REAL_START_TO_STOP_VALIDATION_REQUIRED",
   "current_execution_blocker": {
-    "code": "NONE",
+    "code": "REAL_START_TO_STOP_VALIDATION_NOT_YET_RUN",
     "error_class": false,
-    "classification": "NO_CURRENT_WORKFLOW_BLOCKER",
-    "detail": "The proven existing K7 BOUND_CHAT_WORKER continuation path is the active production path. Physical host-level capability confinement is not claimed and is not substituted by repository rules.",
+    "classification": "VALIDATION_REQUIRED",
+    "detail": "The existing bound-chat continuation conflict has been corrected across the current routing state. The complete real text-start -> WRITE_DRAFT -> LT68 -> PPM679 -> repair/recheck as required -> PSERC -> ENDSTEMPEL -> terminal STOP path has not yet been rerun on the corrected K7 head, so production reactivation is not yet claimed.",
     "applies_to_concept_agent": true,
     "github_director_resolved": true,
     "recovery_fix_resolved": true,
-    "production_reactivation_authorized": true,
+    "production_reactivation_authorized": false,
     "quality_change_authorized": false,
     "architecture_change_authorized": false,
     "publish_allowed": false
@@ -352,9 +352,9 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "RUN_EXISTING_K7_BOUND_CHAT_PRODUCTION_UNTIL_TERMINAL_STOP",
-    "action": "Use the existing Concept-Agent production path only. From text-start, execute each exact bound process_trigger immediately. After every worker result, re-enter the existing progress guard, persist the exact next checkpoint, execute the next bound action without a chat stop, and continue through WRITE_DRAFT -> LT 6.8 -> PPM 6.7.9 -> same-article repair/recheck when required -> next article -> PSERC -> ENDSTEMPEL -> terminal STOP.",
-    "scope": "EXISTING_K7_PATH_ONLY_NO_ARCHITECTURE_CHANGE",
+    "goal": "RUN_ONE_REAL_K7_START_TO_TERMINAL_STOP_VALIDATION",
+    "action": "Run one normal real K7 production batch from the existing isolated text-start button on the corrected K7 head and verify that every non-terminal bound worker return immediately re-enters the existing guard and continues through WRITE_DRAFT, LT 6.8, PPM 6.7.9, same-article repair/recheck if required, PSERC, ENDSTEMPEL and terminal STOP. Do not alter workflow architecture or quality rules during this validation.",
+    "scope": "REAL_EXECUTION_VALIDATION_ONLY",
     "existing_workflow_steps_unchanged": true,
     "article_content_rules_changed": false,
     "quality_rules_changed": false,
