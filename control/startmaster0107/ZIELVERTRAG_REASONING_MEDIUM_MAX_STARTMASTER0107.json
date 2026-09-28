@@ -37,5 +37,41 @@
   ],
   "success": "MEDIUM_USED_WHERE_POSSIBLE_AND_OUTPUT_PASSES_IDENTICAL_EXISTING_GATES_WITH_ZERO_RULE_CHANGES",
   "hard_execution_principle": "MEDIUM_IS_EXECUTION_DEFAULT_ONLY; ALL EXISTING DOMAIN_GATES_UNCHANGED",
-  "immutable_entrance_layer": "GITHUB_PULL_REQUEST_TARGET_BASE_HARDLOCK"
+  "immutable_entrance_layer": "GITHUB_PULL_REQUEST_TARGET_BASE_HARDLOCK",
+  "bound_execution_hard_rule": {
+    "scope": "START_BUTTON_THROUGH_FINAL_FILE",
+    "existing_steps_only": true,
+    "architecture_change": false,
+    "quality_or_content_change": false,
+    "chat_may_replace_bound_step": false,
+    "direct_chat_article_or_repair_result_forbidden": true,
+    "every_nonterminal_result_requires_real_non_chat_execution_proof": true,
+    "self_asserted_chat_receipt_is_not_proof": true,
+    "missing_or_mismatched_execution_proof": "STOP_AT_FIRST_BROKEN_POINT",
+    "same_rule_applies_forward_and_repair_return": true
+  },
+  "interruption_and_reentry_hard_rule": {
+    "authoritative_resume_source": "LAST_VALID_DURABLE_CHECKPOINT_ONLY",
+    "persist_after_every_accepted_result": true,
+    "atomic_checkpoint_replace_required": true,
+    "preserve_exact_article_bytes": true,
+    "preserve_checker_and_repair_state": true,
+    "preserve_next_action": true,
+    "preserve_worker_handoff_information": true,
+    "history_reconstruction_forbidden": true,
+    "missing_durable_checkpoint": "STOP_NOT_RECONSTRUCT",
+    "applies_to": [
+      "normal_run",
+      "interruption_between_production_steps",
+      "interruption_during_single_article",
+      "shutdown_or_new_chat"
+    ]
+  },
+  "proof_scope_hard_rule": {
+    "positive_and_negative_proof_required": true,
+    "direct_forbidden_action_must_be_attempted": true,
+    "test_may_claim_only_exactly_what_was_exercised": true,
+    "self_generated_receipt_does_not_prove_capability_isolation": true,
+    "blanket_100_percent_claim_without_direct_negative_proof": "FORBIDDEN"
+  }
 }
