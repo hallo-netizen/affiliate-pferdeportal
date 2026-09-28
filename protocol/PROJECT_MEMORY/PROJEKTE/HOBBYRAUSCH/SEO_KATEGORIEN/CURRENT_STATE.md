@@ -3,42 +3,39 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: TESTLABOR DATAFORSEO-ERSTLAUF PASS / BEREINIGTER INITIAL-DRAFT BEREIT
+STATUS: INITIAL-REVIEW LIVE SIGNIERT / V1.8.7 SIMPLE REVIEW BEREIT
 
 ## Aktueller belastbarer Stand
 
-V1.8.6 Live-Test:
-- DataForSEO-Verbindung PASS;
-- kostenlose Konzept-Vorprüfung PASS;
-- SEO-Erstentwurf erfolgreich;
+Testlabor DataForSEO:
+- Verbindung PASS;
+- Konzept-Vorprüfung PASS;
+- SEO-Erstentwurf PASS;
 - 4 Paid-Calls;
 - Gesamtkosten 0.06804 USD;
-- Overview 17 Treffer;
-- je 50 Suggestions für `kerzen gießen`, `kerzen selber machen`, `buchbinden`;
 - kein WordPress-Write.
 
-Originaldraft:
-`APKW_RESEARCH_DRAFT_20260928-101752.json`
-SHA-256 `85d6e54705207a019e293f3e16505018450307127a2e9021cea42cea48d397f3`.
-
-Sichtprüfung:
-Offensichtliche Wortstellungs-/Synonym-Dubletten wurden nicht akzeptiert.
+Der automatisch erzeugte Erstbaum wurde wegen Wortstellungs-/Synonym-Dubletten nicht unverändert freigegeben.
 
 Bereinigter Draft:
-`APKW_RESEARCH_DRAFT_20260928-101752_INITIAL_REVIEW_CLEANED.json`
-SHA-256 `e66b90aafc54907aeefa6f122d3c7a13bdb5e983a7df44a92b4acafb83da8921`.
-
-Korrektur:
 - Hauptthemen unverändert;
 - Marketplace unverändert;
 - Magazin unverändert;
-- nur redundante Content-Unterkategorien durch bereits vorhandene positive informationale DataForSEO-Evidenz ersetzt;
-- keine neue API-Abfrage;
-- Validator PASS.
+- redundante Content-Unterkategorien durch bereits bezahlte positive informationale Evidenz ersetzt;
+- keine neue API-Abfrage.
 
-Initial-Review-Scope SHA-256:
-`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`.
+Der bereinigte Draft wurde live serverseitig als Initial-Review signiert:
+`kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
+
+SHA-256:
+`6f072094c2d0c8255aaada41c43f9ede9e23e1bea7485cadb0f688f37d45c67c`
+
+V1.8.7 vereinfacht alle sichtbaren Review-Gates:
+- kein manuelles Hash-Feld;
+- keine manuelle Zusammenfassung;
+- serverseitige Erzeugung dieser Metadaten;
+- Nutzerbestätigung und Signaturprüfung bleiben.
 
 ## NEXT ACTION
 
-Korrigierten Draft im Plugin unter Erst-Sichtfreigabe hochladen, Scope-Hash eintragen, kurze Freigabe-Zusammenfassung setzen und serverseitig signieren. Danach Global-Coverage-Preflight.
+V1.8.7 installieren und danach mit der bereits signierten Initial-Datei den kostenfreien Global-Coverage-Prüfplan erzeugen.
