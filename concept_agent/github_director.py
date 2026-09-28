@@ -369,7 +369,13 @@ def main(argv: list[str]) -> int:
             progress_guard.write(Path(argv[5]), issue(binding, checkpoint, decision))
             print("CONCEPT_AGENT_GITHUB_DIRECTOR_TICKET_READY")
             return 0
-        raise Blocked("USE: github_director.py issue BINDING CHECKPOINT DECISION OUT_TICKET")
+        if len(argv) == 5 and argv[1] == "resume":
+            binding = load(Path(argv[2]))
+            current = resume(binding, Path(argv[3]))
+            progress_guard.write(Path(argv[4]), current)
+            print("CONCEPT_AGENT_GITHUB_DIRECTOR_HANDOFF_READY")
+            return 0
+        raise Blocked("USE: github_director.py issue BINDING CHECKPOINT DECISION OUT_TICKET | resume BINDING CHECKPOINT OUT_HANDOFF")
     except Exception as exc:
         print("CONCEPT_AGENT_GITHUB_DIRECTOR_BLOCKED:" + str(exc), file=sys.stderr)
         return 2
