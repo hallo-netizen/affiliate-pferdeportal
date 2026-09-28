@@ -43,6 +43,7 @@ CAMPUS_SINGLE_TRUTH_ENTRY_V1
 - `DESIGN/START_HERE.md` → Portaldesign
 - `BILD/START_HERE.md` → projektspezifische Nutzung der allgemeinen Bildzentrale
 - `AFFILIATE/START_HERE.md` → Affiliate-Zentrale / Release
+- `LANDINGPAGES/START_HERE.md` → eigenständige Vergleichs-/Rechner-/Such-Landingpages; konzeptionelle Trennung von Kategorien und Journal
 - `HIVEPRESS/START_HERE.md` → Anzeigenmarkt / HivePress
 - `TECHNIK/START_HERE.md` → WordPress-/Hosting-Betrieb, Speicher-/Backupdiagnose und sichere technische Wartung ohne Fachinhaltsänderung
 - `PLUGINS/START_HERE.md` → zentraler Plugin-Bestand, Updatekontrolle und isolierte aktuelle Ausgabeartefakte
