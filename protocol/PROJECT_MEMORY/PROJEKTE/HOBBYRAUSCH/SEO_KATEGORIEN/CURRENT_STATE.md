@@ -3,36 +3,33 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: TESTLABOR RESEARCH VOLLSTÄNDIG / READ_ONLY_PREVIEW LOKAL PASS / LIVE-FINALPRÜFUNG OFFEN
+STATUS: TESTLABOR UNERWARTET DEPLOYED / V1.9.0 HARDLOCK LOKAL PASS / ROLLBACK NÄCHSTES
 
 ## Aktueller belastbarer Stand
 
-Live:
-- Global-Coverage PASS;
-- Detailresearch PASS;
-- Spezialisierungs-Tiefenprüfung vollständig;
-- 15/15 Content-Knoten exakt abgedeckt;
-- remaining_unattempted_estimate = 0;
-- kein WordPress-Write.
+Research/Tiefenprüfung waren vollständig:
+- 15/15 Content-Knoten;
+- Spezialisierungsprüfung abgeschlossen;
+- READ_ONLY_PREVIEW lokal PASS.
 
-READ_ONLY_PREVIEW:
-`kategorie-read-only-preview-hobby-depot-testlabor-20260928.json`
+Live-Befund nach READ_ONLY_PREVIEW-Übernahme:
+- WordPress zeigt `Deployment abgeschlossen`;
+- Schreiben + Readback erfolgreich.
 
-SHA-256:
-`93c72578bfaed4c4600e5b375535619c8a8b2bd55b28f5e5b24cdbac2b64fd00`
+Das ist für den angeforderten Einzelschritt nicht akzeptabel und wird nicht als Plugin-PASS gewertet.
 
-Lokale Positivprüfung:
-- Schema PASS;
-- Research-Evidenz PASS;
-- Comparator PASS_READ_ONLY_PREVIEW.
+V1.9.0 Rootfix:
+- exakte serverseitige Stage-Bindung aller Guided-Aktionen;
+- stale spätere Aktionen blockieren;
+- Downstream-Artefakte werden bei Upstream-Ersatz invalidiert;
+- aktiver Deployment-Run muss vor neuem Upstream-Import zurückgerollt werden.
 
-Lokale Negativprüfung:
-- fehlende Coverage-Entscheidung → BLOCKED;
-- manipulierte Research-Bindung → BLOCKED;
-- unrecherchiertes Primärkeyword → BLOCKED.
-
-Die 182 Cross-Cluster-Overlap-Warnungen stammen aus dem absichtlich überlappenden Dummy-Test und sind keine produktive Hobby-Depot-Strukturfreigabe.
+Lokale Prüfung:
+- 241/241 PASS;
+- Fresh-Unpack 241/241 PASS;
+- exakter Regressionstest READ_ONLY_PREVIEW + stale Deploy-Plan → kein Deployment, stale Pakete gelöscht, Stage structure_ready;
+- PHP/Runtime-Parität PASS.
 
 ## NEXT ACTION
 
-READ_ONLY_PREVIEW live einmal übernehmen → finale Gesamtprüfung muss PASS zeigen → danach finale Sichtfreigabe.
+V1.9.0 installieren, aktuellen Test-Deployment-Run vollständig zurückrollen und danach denselben READ_ONLY_PREVIEW erneut übernehmen. Erwartung: finale Read-only-Prüfung bei Stage `structure_ready`, kein automatischer Write.
