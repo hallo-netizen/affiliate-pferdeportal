@@ -8,7 +8,7 @@ RETRIEVED_AT_FALLBACK="2026-09-26T13:24:47Z"
 
 STOP=set("der die das den dem des ein eine einer eines einem einen und oder aber ist sind war waren wird werden wurde wurden mit ohne für von im in am an auf aus zu zum zur als bei durch sich es dass diese dieser dieses diesem diesen sowie auch noch nur nicht was wie warum welche welcher welches welchem welchen".split())
 
-class K7BoundFactContextError(RuntimeError): pass
+class K8BoundFactContextError(RuntimeError): pass
 
 def stable(v:Any)->str:
     return hashlib.sha256(json.dumps(v,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode()).hexdigest()
@@ -25,7 +25,7 @@ def tokens(v:str)->set[str]:
 
 def evidence_chunks(evidence:str)->list[str]:
     evidence=" ".join(str(evidence or "").split()).strip()
-    if len(evidence)<20: raise K7BoundFactContextError("EVIDENCE_TOO_SHORT")
+    if len(evidence)<20: raise K8BoundFactContextError("EVIDENCE_TOO_SHORT")
     raw=[evidence]
     sentences=[x.strip() for x in re.split(r"(?<=[.!?])\s+",evidence) if len(x.strip())>=20]
     raw.extend(sentences)
@@ -42,7 +42,7 @@ def evidence_chunks(evidence:str)->list[str]:
         if len(x)>=20 and key not in seen:
             seen.add(key); out.append(x)
     if len(out)<3:
-        raise K7BoundFactContextError("EVIDENCE_CANNOT_YIELD_THREE_BOUND_CLAIMS")
+        raise K8BoundFactContextError("EVIDENCE_CANNOT_YIELD_THREE_BOUND_CLAIMS")
     return out
 
 def _best_faq_answer(title:str,target:str,sources:list[dict])->str:
@@ -58,7 +58,7 @@ def _best_faq_answer(title:str,target:str,sources:list[dict])->str:
             if any(w in folded for w in ("hängt","unterscheiden","intervall","kosten","möglich","genutzt","pflegegerät","erklärt")):
                 score+=1
             candidates.append((score,len(sentence),sentence))
-    if not candidates: raise K7BoundFactContextError("FAQ_DIRECT_ANSWER_SOURCE_MISSING")
+    if not candidates: raise K8BoundFactContextError("FAQ_DIRECT_ANSWER_SOURCE_MISSING")
     candidates.sort(key=lambda x:(x[0],-x[1]),reverse=True)
     chosen=[]
     seen=set()
@@ -73,17 +73,17 @@ def _best_faq_answer(title:str,target:str,sources:list[dict])->str:
 def finalize_writer_preflight(item:dict,plan:dict,pack:dict)->dict:
     preflight=copy.deepcopy(item.get("writer_preflight") or {})
     if preflight.get("contract")!="CONCEPT_AGENT_WRITER_PREFLIGHT_V1":
-        raise K7BoundFactContextError("WRITER_PREFLIGHT_MISSING")
+        raise K8BoundFactContextError("WRITER_PREFLIGHT_MISSING")
     quality=plan.get("quality_binding") if isinstance(plan.get("quality_binding"),dict) else {}
     runtime=plan.get("runtime_order") if isinstance(plan.get("runtime_order"),dict) else {}
     allowed=list(runtime.get("allowed_fact_ids") or [])
     canonical=[str(row.get("fact_id") or "") for row in pack.get("claims") or [] if str(row.get("fact_id") or "")]
     if allowed!=canonical:
-        raise K7BoundFactContextError("FINAL_FACT_BINDING_MISMATCH")
+        raise K8BoundFactContextError("FINAL_FACT_BINDING_MISMATCH")
 
     bound=preflight.get("bound_requirements")
     if not isinstance(bound,dict):
-        raise K7BoundFactContextError("WRITER_BOUND_REQUIREMENTS_MISSING")
+        raise K8BoundFactContextError("WRITER_BOUND_REQUIREMENTS_MISSING")
     bound["faq_direct_answer"]=quality.get("faq_direct_answer")
     bound["table_value_statement"]=quality.get("table_value_statement")
     bound["link_bindings"]=copy.deepcopy(quality.get("link_bindings") or [])
@@ -92,10 +92,10 @@ def finalize_writer_preflight(item:dict,plan:dict,pack:dict)->dict:
 
     blueprint=preflight.get("k8_first_draft_blueprint")
     if not isinstance(blueprint,dict):
-        raise K7BoundFactContextError("WRITER_BLUEPRINT_MISSING")
+        raise K8BoundFactContextError("WRITER_BLUEPRINT_MISSING")
     mechanical=blueprint.get("mechanical_requirements_prebound")
     if not isinstance(mechanical,dict):
-        raise K7BoundFactContextError("WRITER_MECHANICAL_BINDING_MISSING")
+        raise K8BoundFactContextError("WRITER_MECHANICAL_BINDING_MISSING")
     mechanical["faq_direct_answer"]=quality.get("faq_direct_answer")
     mechanical["table_value_statement"]=quality.get("table_value_statement")
     mechanical["link_bindings"]=copy.deepcopy(quality.get("link_bindings") or [])
@@ -111,12 +111,12 @@ def build_item(item:dict)->dict:
     identity=item.get("identity") or {}
     research=item.get("research_bound") or {}
     sources=research.get("sources")
-    if not isinstance(sources,list) or not sources: raise K7BoundFactContextError("BOUND_RESEARCH_SOURCES_MISSING")
+    if not isinstance(sources,list) or not sources: raise K8BoundFactContextError("BOUND_RESEARCH_SOURCES_MISSING")
     claims=[]; n=0
     fact_sources=[]
     for source in sources:
         sid=str(source.get("source_id") or "").strip()
-        if not sid: raise K7BoundFactContextError("SOURCE_ID_MISSING")
+        if not sid: raise K8BoundFactContextError("SOURCE_ID_MISSING")
         fact_sources.append({
             "source_id":sid,
             "source_title":source.get("source_title"),
@@ -127,7 +127,7 @@ def build_item(item:dict)->dict:
         })
         for chunk in evidence_chunks(str(source.get("evidence") or "")):
             n+=1
-            fid=f"fact-k7-{str(identity.get('plan_slot') or '')[:12]}-{n}"
+            fid=f"fact-k8-{str(identity.get('plan_slot') or '')[:12]}-{n}"
             claims.append({
                 "fact_id":fid,
                 "source_id":sid,
@@ -138,7 +138,7 @@ def build_item(item:dict)->dict:
                 "claim_status":"FULLY_SUPPORTED",
                 "article_types":[identity.get("article_type")],
             })
-    if len(claims)<3: raise K7BoundFactContextError("FACT_COUNT_TOO_LOW")
+    if len(claims)<3: raise K8BoundFactContextError("FACT_COUNT_TOO_LOW")
     snapshot_id=stable({
         "plan_slot":identity.get("plan_slot"),
         "source_pool_sha256":research.get("source_pool_sha256"),
@@ -161,11 +161,11 @@ def build_item(item:dict)->dict:
     evidence_sentences=[]
     for source in sources:
         evidence_sentences.extend(x.strip() for x in re.split(r"(?<=[.!?])\s+",str(source.get("evidence") or "")) if len(x.strip())>=20)
-    if not evidence_sentences: raise K7BoundFactContextError("RUNTIME_EVIDENCE_SENTENCE_MISSING")
+    if not evidence_sentences: raise K8BoundFactContextError("RUNTIME_EVIDENCE_SENTENCE_MISSING")
     lead=evidence_sentences[0]
     conclusion=evidence_sentences[-1]
     runtime={
-        "order_id":"k7-"+str(identity.get("plan_slot") or "")[:16],
+        "order_id":"k8-"+str(identity.get("plan_slot") or "")[:16],
         "article_type":article_type,
         "title":title,
         "slug":slugify(title),
@@ -206,7 +206,7 @@ def build_item(item:dict)->dict:
 
 def build_all(binding:dict)->dict:
     items=[build_item(item) for item in binding.get("items") or []]
-    if len(items)!=binding.get("item_count"): raise K7BoundFactContextError("BINDING_COUNT_MISMATCH")
+    if len(items)!=binding.get("item_count"): raise K8BoundFactContextError("BINDING_COUNT_MISMATCH")
     out={
         "contract":CONTRACT,
         "status":"PASS",
