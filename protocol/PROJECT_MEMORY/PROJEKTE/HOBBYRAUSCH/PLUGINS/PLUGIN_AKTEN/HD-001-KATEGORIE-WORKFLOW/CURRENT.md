@@ -1,71 +1,67 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.6 LIVE DATAFORSEO-KONZEPTLAUF PASS / INITIAL-REVIEW-KORREKTUR BEREIT
+STATUS: V1.8.7 SIMPLE REVIEW GEBAUT / INITIAL-REVIEW LIVE BEREITS SIGNIERT
 
 ## Aktueller Stand
 
-Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.6 Hobby Depot Simple Rootfix`
+Neue Bedienversion:
+`Affiliate-Portal Kategorie-Workflow V1.8.7 Hobby Depot Simple Review`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
 
 Installer SHA-256:
-`2854f41f060a4f13abc2721ae76c74f8cf8689e4e7224592060b24b79929ab15`
+`b11313949ef46bf690e48b103cf930c9dad2dd761144d5e9f04a5e41b4bfabe4`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
 
 Source SHA-256:
-`a73e28307fde3ad42a4a18a79bd6ff627065494bf8f4921b92065e5aa048ddc9`
+`97f2ec77bd17f26b0b62d85e67746824bd1435563a9514e238c443dac1a90f70`
 
-## Live-Test V1.8.6
+## V1.8.7 Reduktion
 
-Testlabor:
-`hobby-depot-testlabor-20260928`
+Entfernt wurden ausschließlich manuelle technische Eingaben bei allen sichtbaren Review-Gates:
+- kein manuelles Kopieren des Review-Scope SHA-256;
+- keine manuelle Freigabe-Zusammenfassung.
 
-Ergebnis:
-- DataForSEO-Verbindung PASS;
-- kostenlose Konzept-Vorprüfung PASS;
-- bestätigter SEO-Erstentwurf erfolgreich erzeugt;
-- 4 Paid-Calls ausgeführt;
-- Kosten gesamt: 0.06804 USD;
-- Overview: 17 normalisierte Treffer;
-- 3 Topic-Suggestion-Calls: je 50 Treffer;
+Erhalten bleiben:
+- Datei-/Paketbindung;
+- sichtbares ausdrückliches Bestätigungs-Häkchen;
+- Adminrecht und Nonce;
+- serverseitige Berechnung des Review-Scope;
+- serverseitig signierte Review-Quittung;
+- Hash-/Signaturprüfung der Folgegates.
+
+Der Server erzeugt Hash und Protokolltext automatisch.
+
+Tests:
+- Source Vollsuite 227/227 PASS;
+- Fresh-Unpack-Installer 227/227 PASS;
+- Source PHP-Lint 17/17 PASS;
+- Installer Runtime PHP-Lint 16/16 PASS;
+- Runtime-Parität Source↔Installer 21/21 byteidentisch.
+
+## Live-Test / bereits erledigte Erstfreigabe
+
+V1.8.6 DataForSEO-Testlabor:
+- 4 Paid-Calls;
+- 0.06804 USD;
+- Research-Draft erzeugt;
 - kein WordPress-Write.
 
-Original-Research-Draft:
-`APKW_RESEARCH_DRAFT_20260928-101752.json`
+Bereinigter Draft wurde live serverseitig als Initial-Review signiert.
+
+Signierte Datei:
+`kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
+
 SHA-256:
-`85d6e54705207a019e293f3e16505018450307127a2e9021cea42cea48d397f3`
+`6f072094c2d0c8255aaada41c43f9ede9e23e1bea7485cadb0f688f37d45c67c`
 
-## Sichtprüfung
-
-Der automatisch erzeugte Erstbaum enthielt offensichtliche Wortstellungs-/Synonym-Dubletten als getrennte Content-Unterkategorien.
-
-Beispiele:
-- `Kerzen Formen Gießen` / `Kerzen Gießen Form` / `Kerzen Gießen Formen`;
-- `Kerzen Zum Selber Machen` / `Selber Kerzen Machen` / `Selber Machen Kerzen`;
-- `Buchbinden Selber` / `Selber Buchbinden` / `Selbst Buchbinden`.
-
-Diese Fassung wurde deshalb nicht freigegeben.
-
-Korrigierter, ausschließlich aus bereits bezahlter positiver informationaler Evidenz gebildeter Draft:
-`APKW_RESEARCH_DRAFT_20260928-101752_INITIAL_REVIEW_CLEANED.json`
-SHA-256:
-`e66b90aafc54907aeefa6f122d3c7a13bdb5e983a7df44a92b4acafb83da8921`
-
-Server-validator:
-- RESEARCH_DRAFT VALID=YES;
-- Initial-Review-Scope SHA-256:
-`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`.
-
-Keine neue DataForSEO-Abfrage für die Korrektur.
-
-Archiv:
-`/Campus-Archiv/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HD-001-KATEGORIE-WORKFLOW/TESTLAUF_20260928/`
+Review-Scope:
+`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`
 
 ## NEXT ACTION
 
-Im WordPress-Plugin unter `Erweiterte Prüfschritte und Freigaben` den korrigierten RESEARCH_DRAFT für die Erst-Sichtfreigabe verwenden, Scope-Hash `998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74` eintragen und serverseitig signieren.
+V1.8.7 über V1.8.6 installieren. Danach mit der bereits signierten Initial-Datei den kostenfreien Global-Coverage-Prüfplan erzeugen. Keine manuelle Hash- oder Zusammenfassungseingabe mehr.
