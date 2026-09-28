@@ -13,8 +13,11 @@ Aktueller kanonischer Affiliate-Stand:
 - Performance-Scope: keine Provider-, Slot-, Design-, Ranking-, Content- oder Kategorienänderung bis Abschluss des Gates.
 
 Parallel bestätigter Design-/Template-Performance-Stand:
-- Template Kit 1.50.575 ist real installiert und gemessen.
+- Template Kit 1.50.575 ist der real gemessene Live-Basisstand.
+- Template Kit 1.50.576 ist der neuere Performance-Kandidat mit HARD LOCAL PASS; realer Server-Readback ist noch offen.
+- Candidate ZIP SHA256: edea3d49585012b0c99f6263d5772654c3c61c463be106466cf54a4fecec16de.
 - Die Performance-Arbeit wird nicht durch Landingpage-/Providercode zurückgedreht.
+- Jede spätere Landingpage-Kacheländerung muss auf dem nach Real-Readback bestätigten aktuellen Template-Kit-Stand aufsetzen; kein Reapply auf 1.50.575.
 
 ## Nach Freigabe – kleinster Affiliate-Delta
 
