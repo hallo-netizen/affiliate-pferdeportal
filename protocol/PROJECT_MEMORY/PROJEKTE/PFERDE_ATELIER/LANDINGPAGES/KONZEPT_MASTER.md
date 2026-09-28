@@ -26,6 +26,8 @@ Intern zwei Kategorien + eine Seite.
 
 Landingpages werden als normale WordPress-Seiten geführt.
 
+**Wichtig für die technische Trennung:** Eine Landingpage wird nicht als direkte WordPress-Kindseite der Ebene-3-Seite angelegt, auf der ihre Kachel erscheint. Die aktuelle Designlogik verwendet direkte Unterseiten als Themenquelle. Der sichtbare Bezug wird deshalb ausschließlich über die ausdrücklich registrierte Zusatzkachel und redaktionelle interne Links hergestellt.
+
 Sie werden nicht in die zentrale Kategorienwahrheit aufgenommen und erzeugen keine Produktionskategorie.
 
 Damit bleiben unberührt:
@@ -102,3 +104,19 @@ Erst nach PASS des Piloten prüfen:
 - andere klar transaktionale Werkzeuge mit passendem Provider.
 
 Keine Landingpage nur deshalb, weil ein Keyword existiert.
+
+
+## 10. Technischer Pilot-Korridor
+
+Für `Pferdehaftpflicht vergleichen` ist der Korridor bewusst eng:
+
+1. eigenständige normale WordPress-Seite ohne Parent-Beziehung zu `Pferdehaftpflicht`;
+2. nicht im normalen Portalmenü;
+3. genau eine Zusatzkachel nur auf der bestehenden Seite `Pferdehaftpflicht`;
+4. Zusatzkachel verwendet dieselbe vorhandene Kartenoptik;
+5. Kategorie-IDs und Artikelbezug bleiben ausschließlich aus den zwei echten Kategorien;
+6. Rechner/Banner werden erst auf der Landingpage geladen;
+7. keine Wirkung auf andere Ebene-3-Seiten;
+8. nach Pilot Positiv-/Negativprüfung, erst danach Entscheidung über Verallgemeinerung.
+
+Damit bleibt die sichtbare Einheitlichkeit erhalten, ohne die interne Kategorien- und Textlogik zu vermischen.
