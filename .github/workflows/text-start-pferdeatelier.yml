@@ -142,7 +142,7 @@ jobs:
           python3 - <<'PY'
           import json
           state=json.load(open("control/startmaster0107/CURRENT_STATE.json", encoding="utf-8"))
-          current=state["concept_agent_current_batch"]
+          current=state["next_action"]
           receipt=json.load(open("CONCEPT_AGENT_INTAKE_RECEIPT.json", encoding="utf-8"))
           intake=json.load(open("CONCEPT_AGENT_INTAKE.json", encoding="utf-8"))
           if receipt.get("status") != "CONCEPT_AGENT_INTAKE_READY":
