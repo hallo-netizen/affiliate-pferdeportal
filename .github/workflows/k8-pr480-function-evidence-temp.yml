@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: b002d15102b63200158f7a60d36d4a89c9c1aa2f
+          ref: e944ed1010b46b8e87957eaaa980980916e206e6
           persist-credentials: false
       - name: Assert exact PR480 head
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "b002d15102b63200158f7a60d36d4a89c9c1aa2f"
+          test "$(git rev-parse HEAD)" = "e944ed1010b46b8e87957eaaa980980916e206e6"
           echo "K8_PR480_EXACT_HEAD_PASS"
       - name: Run required K8 PR480 function tests
         shell: bash
