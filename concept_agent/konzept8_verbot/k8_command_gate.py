@@ -12,7 +12,7 @@ CONCEPT_AGENT = HERE.parent
 if str(CONCEPT_AGENT) not in sys.path:
     sys.path.insert(0, str(CONCEPT_AGENT))
 
-import progress_guard  # type: ignore
+from .engine import k8_progress_guard as progress_guard
 
 CONTRACT = "K8_VERBOT_COMMAND_V1"
 PASS = "K8_VERBOT_EXACT_COMMAND_ALLOWED"
