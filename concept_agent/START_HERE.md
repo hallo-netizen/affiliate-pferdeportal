@@ -76,6 +76,8 @@ Hart:
 
 Damit kann ein neuer Chat den Arbeitsstand weder aus Erinnerung rekonstruieren noch einen anderen Weg wählen.
 
+**HARD RULE – vollständiger Abbruchstand:** Nach jedem akzeptierten Produktionsresultat muss der vollständige aktuelle Produktionsstand dauerhaft gespeichert sein. Bei Unterbrechung zwischen Schritten, mitten in einem Artikel, mitten in einer Reparatur, Shutdown oder neuem Chat gilt ausschließlich der letzte gültige Checkpoint mit Artikelbytes, Prüf-/Reparaturstand und NEXT ACTION. Kein Zusammensuchen aus Chat-Historie, keine Rekonstruktion und kein alternativer Wiedereinstieg.
+
 `control/startmaster0107/CURRENT_STATE.json` bleibt Startautorität. Während eines laufenden Batches bestimmen ausschließlich aktuelles Produktions-Binding, aktueller Fortschritts-Checkpoint und die daraus exakt abgeleitete Reentry-Entscheidung die Fortsetzung.
 
 `text-start` bleibt ausschließlich Startknopf und wird dadurch nicht erweitert.
