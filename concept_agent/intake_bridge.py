@@ -294,7 +294,7 @@ def _start_receipt(result: dict) -> dict:
         "intake_sha256": result["intake_sha256"],
         "worker": "BOUND_CHAT_WORKER",
         "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
-        "current_authority_branch": "main",
+        "current_authority_branch": "konzept7/hard-worker-completion-20260928",
         "allowed_operation": (
             "START_BOUND_K7_PRODUCTION_AND_EXECUTE_READY_ACTIONS"
             if k7
