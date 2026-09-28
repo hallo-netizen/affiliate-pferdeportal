@@ -550,7 +550,7 @@
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
   "current_execution_policy": {
     "control_model": "GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
-    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_PRE_K8_K7_BASE",
+    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_ISOLATED_K7_BASE",
     "host_model_worker_binding_status": "BLOCKED_NOT_AVAILABLE_IN_CURRENT_GITHUB_START_PATH",
     "chat_role": "INITIAL_TRIGGER_ONLY",
     "chat_may_route": false,
