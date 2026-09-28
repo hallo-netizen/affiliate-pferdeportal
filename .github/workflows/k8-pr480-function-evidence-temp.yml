@@ -1,0 +1,31 @@
+name: K8 PR480 Function Evidence
+on:
+  push:
+    branches:
+      - test/k8-pr480-function-evidence-20260928
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 237a5ab652393d7347bcc4dfeec799822dd6825e
+          persist-credentials: false
+      - name: Assert exact PR480 head
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "237a5ab652393d7347bcc4dfeec799822dd6825e"
+          echo "K8_PR480_EXACT_HEAD_PASS"
+      - name: Run required K8 PR480 function tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PYTHONDONTWRITEBYTECODE=1
+          export PYTHONPATH=.
+          python3 concept_agent/tests/test_k8_section_balance_v4.py
+          python3 concept_agent/tests/test_k8_wordpress_export.py
+          echo "K8_PR480_FUNCTION_TESTS_PASS"
