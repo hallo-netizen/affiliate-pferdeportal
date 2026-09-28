@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: HD-001 V1.8.5 SIMPLE UPDATE BEREIT
+STATUS: HD-001 V1.8.6 ROOTFIX UPDATE BEREIT
 
 ## Rolle
 
@@ -11,14 +11,15 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PLUGINS`.
 
 ## Aktueller belastbarer Stand
 
-HD-001 liegt als V1.8.5 Hobby Depot Simple vor.
+HD-001 V1.8.5 wurde live bis zum ersten echten DataForSEO-Konzeptstart getestet.
 
-Änderung:
-- normale Oberfläche stark reduziert;
-- DataForSEO-Test, Status, Protokoll und Konzeptstart direkt sichtbar;
-- technische Zwischenstufen nur noch eingeklappt;
-- keine Funktion/Gate/Qualität entfernt;
-- Installationspaket von Tests/Audits befreit.
+Live-Blocker:
+`SEO-Erstentwurf erzeugen` verlangte irrtümlich eine separate Human-Sight-Review-Bestätigung.
+
+Rootfix V1.8.6:
+- Konzeptstart verlangt nur Adminrecht + eigenen Nonce + ausdrückliche DataForSEO-Paid-Bestätigung;
+- spätere Human-Review-Gates unverändert;
+- keine Funktions- oder Qualitätsreduktion.
 
 Tests:
 - 227/227 PASS;
@@ -28,4 +29,4 @@ Tests:
 
 ## NEXT ACTION
 
-V1.8.5 über V1.8.4 installieren und reduzierte Hauptansicht prüfen.
+V1.8.6 über V1.8.5 installieren und denselben Testlabor-Konzeptstart erneut ausführen.
