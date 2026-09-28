@@ -364,11 +364,63 @@ def _start_receipt(result: dict) -> dict:
         "publish_allowed": False,
     }
 
+
+def _k8_live_start_receipt(snapshot: dict, result: dict) -> dict:
+    verify_start_here_no_stop_contract()
+    persisted = _persisted_research_for_intake(result)
+    if persisted is None:
+        raise Blocked("K8_PERSISTED_RESEARCH_REQUIRED")
+
+    bound_path = (REPO / persisted["ref"]).resolve()
+    bound = _load(bound_path)
+
+    # Import only at runtime to avoid changing the existing module dependency graph.
+    import production_bridge  # type: ignore
+    from concept_agent.konzept8_verbot import k8_command_gate  # type: ignore
+
+    binding = production_bridge.build(snapshot, result, bound)
+    checkpoint = production_bridge.initial_checkpoint(binding)
+    required_command = k8_command_gate.proposal_for(checkpoint)
+
+    return {
+        "status": "CONCEPT_AGENT_INTAKE_READY",
+        "batch_sha256": result["batch_sha256"],
+        "item_count": result["item_count"],
+        "intake_sha256": result["intake_sha256"],
+        "bound_worker": "K8_VERBOT_SINGLE_GATE",
+        "process_trigger": {
+            "contract": "K8_VERBOT_BOUND_START_PROCESS_TRIGGER_V1",
+            "batch_sha256": result["batch_sha256"],
+            "checkpoint_sha256": checkpoint["checkpoint_sha256"],
+            "allowed_action": checkpoint["allowed_action"],
+            "required_command": required_command,
+            "gate_ref": "concept_agent/konzept8_verbot/k8_command_gate.py",
+            "entry_ref": "concept_agent/konzept8_verbot/k8_entry.py",
+            "state_change_authority": "EXISTING_PROGRESS_GUARD_ONLY",
+            "wrong_missing_or_stale_command": "BLOCKED_KEEP_EXACT_SAME_CHECKPOINT",
+            "return_required": True,
+            "publish_allowed": False,
+        },
+        "k8_bootstrap": {
+            "binding": binding,
+            "checkpoint": checkpoint,
+            "required_command": required_command,
+        },
+        "continuation_required": True,
+        "worker_must_execute_allowed_operation_immediately": True,
+        "worker_return_must_reenter_full_workflow_gate": True,
+        "handoff_is_terminal": False,
+        "same_bound_worker_must_continue_without_return": True,
+        "publish_allowed": False,
+    }
+
 def main(argv: list[str]) -> int:
     try:
         if len(argv) == 4 and argv[1] == "prepare":
-            result = prepare_file(argv[2], argv[3])
-            print(json.dumps(_start_receipt(result), ensure_ascii=False, sort_keys=True))
+            snapshot = _load(Path(argv[2]))
+            result = prepare(snapshot)
+            Path(argv[3]).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            print(json.dumps(_k8_live_start_receipt(snapshot, result), ensure_ascii=False, sort_keys=True))
             return 0
         raise Blocked("USE: intake_bridge.py prepare SNAPSHOT_JSON OUT_JSON")
     except Exception as exc:
