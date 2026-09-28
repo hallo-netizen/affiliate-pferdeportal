@@ -17,10 +17,15 @@ def build(batch_sha:str,item_count:int,generation:int=1):
     out={
       "contract":CONTRACT,"status":"PREALLOCATED","batch_sha256":batch_sha,"item_count":item_count,
       "runtime_generation":generation,
-      "steps":["PSERC","ENDSTEMPEL","FINAL_WORDPRESS_JSON"],
+      "steps":["PSERC","ENDSTEMPEL_WITH_FINAL_WORDPRESS_JSON"],
       "endstempel_source_dir":f"control/startmaster0107/recovery_sources/{batch_sha}/generation-{gp}",
       "release_tag":f"konzept8-verbot-endstempel-{batch_sha}-g{gp}",
       "final_filename":"GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+      "wordpress_exporter_ref":"concept_agent/konzept8_verbot/engine/k8_wordpress_export.py",
+      "wordpress_contract":"SYSTEM4_WORDPRESS_HANDOFF_V1",
+      "wordpress_filename":f"K8_WORDPRESS_DIRECT_IMPORT_{batch_sha}.json",
+      "wordpress_mime_type":"application/json",
+      "wordpress_json_required_before_stop":True,
       "route_search_after_articles":False,
       "final_hash_required":True,"publish_allowed":False
     }

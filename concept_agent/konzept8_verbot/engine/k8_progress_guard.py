@@ -155,13 +155,29 @@ def expected_action(binding: dict, state: dict) -> dict:
         return _gated({
             "action": "RUN_ENDSTEMPEL",
             "item_count": count,
+            "wordpress_exporter_ref": "concept_agent/konzept8_verbot/engine/k8_wordpress_export.py",
+            "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+            "wordpress_filename": f"K8_WORDPRESS_DIRECT_IMPORT_{state['batch_sha256']}.json",
+            "wordpress_json_required_before_stop": True,
         })
     if phase == "ENDSTEMPEL_PASS_STOP":
         if index != count or state.get("status") != "PASS":
             raise Blocked("ENDSTEMPEL_STOP_STATE_INVALID")
+        if state.get("wordpress_contract") != "SYSTEM4_WORDPRESS_HANDOFF_V1":
+            raise Blocked("WORDPRESS_EXPORT_CONTRACT_MISSING")
+        wp_sha = str(state.get("wordpress_json_sha256") or "")
+        if not SHA_RE.fullmatch(wp_sha):
+            raise Blocked("WORDPRESS_EXPORT_HASH_MISSING")
+        expected_name = f"K8_WORDPRESS_DIRECT_IMPORT_{state['batch_sha256']}.json"
+        if state.get("wordpress_json_filename") != expected_name:
+            raise Blocked("WORDPRESS_EXPORT_FILENAME_INVALID")
         return _gated({
             "action": "STOP",
             "reason": "BATCH_COMPLETE_ENDSTEMPEL_PASS",
+            "wordpress_contract": state["wordpress_contract"],
+            "wordpress_json_filename": state["wordpress_json_filename"],
+            "wordpress_json_sha256": wp_sha,
+            "wordpress_download_required": True,
         })
     raise Blocked("CHECKPOINT_PHASE_NOT_RESUMABLE:" + phase)
 
@@ -531,6 +547,15 @@ def _validate_batch_stage_result(state: dict, stage: str, result: dict) -> None:
     artifact = str(result.get(artifact_field) or "")
     if not SHA_RE.fullmatch(artifact):
         raise Blocked("BATCH_STAGE_RESULT_ARTIFACT_HASH_INVALID:" + artifact_field)
+    if stage == "ENDSTEMPEL":
+        if result.get("wordpress_contract") != "SYSTEM4_WORDPRESS_HANDOFF_V1":
+            raise Blocked("ENDSTEMPEL_WORDPRESS_CONTRACT_INVALID")
+        wp_sha = str(result.get("wordpress_json_sha256") or "")
+        if not SHA_RE.fullmatch(wp_sha):
+            raise Blocked("ENDSTEMPEL_WORDPRESS_JSON_HASH_INVALID")
+        expected_name = f"K8_WORDPRESS_DIRECT_IMPORT_{state['batch_sha256']}.json"
+        if result.get("wordpress_json_filename") != expected_name:
+            raise Blocked("ENDSTEMPEL_WORDPRESS_JSON_FILENAME_INVALID")
 
 def record_batch_stage(binding: dict, state: dict, decision: dict, stage: str, result: dict) -> dict:
     verify_reentry_decision(binding, state, decision)
@@ -555,6 +580,9 @@ def record_batch_stage(binding: dict, state: dict, decision: dict, stage: str, r
         out["status"] = "PASS"
         out["endstempel_result_sha256"] = stable(result)
         out["endstempel_final_file_sha256"] = result["final_file_sha256"]
+        out["wordpress_contract"] = result["wordpress_contract"]
+        out["wordpress_json_sha256"] = result["wordpress_json_sha256"]
+        out["wordpress_json_filename"] = result["wordpress_json_filename"]
         return _seal_new_state(binding, state, out)
     raise Blocked("BATCH_STAGE_INVALID")
 
@@ -603,6 +631,17 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         process_trigger["trigger_sha256"] = stable(trigger_core)
         process_trigger["exactly_once_for_checkpoint"] = True
         process_trigger["return_required"] = True
+    final_delivery = None
+    if terminal:
+        final_delivery = {
+            "contract": state["wordpress_contract"],
+            "filename": state["wordpress_json_filename"],
+            "sha256": state["wordpress_json_sha256"],
+            "mime_type": "application/json",
+            "chat_must_provide_file": True,
+            "wordpress_direct_import": True,
+            "publish_allowed": False,
+        }
     return {
         "status": "STOP" if terminal else "RESUME_ALLOWED",
         "batch_sha256": state["batch_sha256"],
@@ -617,6 +656,7 @@ def resume(binding: dict, state: dict, decision: dict) -> dict:
         "same_bound_worker_must_continue_without_return": not terminal,
         "durable_checkpoint_required_before_next_action": not terminal,
         "recovery": recovery_view(state),
+        "final_delivery": final_delivery,
         "terminal": terminal,
         "publish_allowed": False,
     }
