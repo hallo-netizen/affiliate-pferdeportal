@@ -13,13 +13,14 @@ Aktueller kanonischer Affiliate-Stand:
 - Performance-Scope: keine Provider-, Slot-, Design-, Ranking-, Content- oder Kategorienänderung bis Abschluss des Gates.
 
 Parallel bestätigter Design-/Template-Performance-Stand:
-- Template Kit 1.50.575 war die vorherige real gemessene Live-Basis.
-- Template Kit 1.50.576 ist inzwischen real auf dem Portal aktiv belegt: die Diagnose vom 2026-09-28 10:07–10:09 UTC liefert Frontend-Assets mit `?ver=1.50.576`.
-- HARD LOCAL für 1.50.576: 35/35 PASS; Candidate ZIP SHA256 `edea3d49585012b0c99f6263d5772654c3c61c463be106466cf54a4fecec16de`.
-- Der erwartete Warm-Request-Gewinn der sieben Menüabfragen ist im aktuellen Real-Server-Lauf **noch nicht belegt**: auf mehreren normalen Seiten bleibt die betreffende Template-Kit-Queryfamilie sichtbar. Deshalb kein PERFORMANCE_PASS behaupten.
+- Template Kit 1.50.575 und 1.50.576 sind überholt.
+- Aktuellster belegter Template-Stand ist **1.50.578**.
+- 1.50.578 basiert exakt auf 1.50.577; nur `pferde-template-kit.php` geändert; 200/200 lokale Assertions PASS.
+- Installer SHA256: `72c97478f262c5771f3d3e2a9353b7e49758928552d95d434e846eea1bdaa7ba`.
+- Reale Diagnose vom 2026-09-28 belegt `?ver=1.50.578` im Frontend.
 - Die Performance-Arbeit wird nicht durch Landingpage-/Providercode zurückgedreht.
-- Solange der Nachbar-Performance-Strang diesen 1.50.576-Realbefund nicht geschlossen hat, wird **kein Template-Kit-Source-Write** für die Landingpage-Kachel ausgeführt.
-- Jede spätere Landingpage-Kacheländerung setzt ausschließlich auf dem dann frisch bestätigten aktuellen Template-Kit-Stand auf; kein Reapply auf 1.50.575 oder einen älteren Stand.
+- Für die Landingpage-Kachel wird **kein Template-Code** geschrieben, solange der Nachbar-Performance-Strang dort weiterarbeitet.
+- Jede spätere Kacheländerung setzt ausschließlich auf dem dann frisch bestätigten aktuellen Template-Kit-Endstand auf; kein Reapply auf 1.50.577 oder älter.
 
 ## Nach Freigabe – kleinster Affiliate-Delta
 
