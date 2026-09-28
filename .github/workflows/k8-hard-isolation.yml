@@ -1,0 +1,117 @@
+name: K8 Hard Isolation
+
+on:
+  push:
+    branches:
+      - k8-verbot-hard-isolation-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact K8 candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: K8 contains zero K7 runtime references
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE 'konzept7|K7_|k7_|archive/k7' concept_agent/konzept8_verbot; then
+            echo K8_TO_K7_REFERENCE_FORBIDDEN
+            exit 2
+          fi
+          if grep -nE 'konzept7|K7_|k7_|archive/k7' concept_agent/intake_bridge.py; then
+            echo LIVE_ENTRY_TO_K7_REFERENCE_FORBIDDEN
+            exit 2
+          fi
+          grep -q 'concept_agent.konzept8_verbot.engine' concept_agent/intake_bridge.py
+          echo K8_TO_K7_ZERO_REFERENCE_PASS
+
+      - name: K7 contains zero K8 runtime references
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin             'refs/heads/konzept7/working-copy-20260927:refs/remotes/origin/konzept7/working-copy-20260927'             'refs/heads/archive/k7-github-frozen-20260928:refs/remotes/origin/archive/k7-github-frozen-20260928'
+          rm -rf /tmp/k7-pre /tmp/k7-github
+          git worktree add --detach /tmp/k7-pre origin/konzept7/working-copy-20260927
+          git worktree add --detach /tmp/k7-github origin/archive/k7-github-frozen-20260928
+          if grep -RInE 'konzept8|K8_|k8_' /tmp/k7-pre/concept_agent/konzept7; then
+            echo K7_PRE_TO_K8_REFERENCE_FORBIDDEN
+            exit 2
+          fi
+          if grep -RInE 'konzept8|K8_|k8_' /tmp/k7-github/concept_agent 2>/dev/null; then
+            echo K7_GITHUB_TO_K8_REFERENCE_FORBIDDEN
+            exit 2
+          fi
+          echo K7_TO_K8_ZERO_REFERENCE_PASS
+
+      - name: K8 engine imports no other concept runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE 'concept_agent/konzept[0-79]|concept_agent\.konzept[0-79]|from .*konzept[0-79]|import .*k[0-79]_' concept_agent/konzept8_verbot; then
+            echo K8_OTHER_CONCEPT_IMPORT_FORBIDDEN
+            exit 2
+          fi
+          echo K8_IMPORT_ISOLATION_PASS
+
+      - name: Compile complete isolated K8 runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m compileall -q concept_agent/konzept8_verbot
+
+      - name: Existing live command reaches K8 only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f /tmp/k8-intake.json
+          python3 concept_agent/intake_bridge.py prepare             concept_agent/current/PSERC_METADATA_SNAPSHOT.json             /tmp/k8-intake.json > /tmp/k8-receipt.json
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/k8-receipt.json'))
+          assert r['status']=='CONCEPT_AGENT_INTAKE_READY'
+          assert r['bound_worker']=='K8_VERBOT_SINGLE_GATE'
+          assert r['process_trigger']['contract']=='K8_VERBOT_BOUND_START_PROCESS_TRIGGER_V1'
+          assert r['process_trigger']['state_change_authority']=='K8_ISOLATED_PROGRESS_GUARD_ONLY'
+          assert r['process_trigger']['required_command']['command']==r['process_trigger']['allowed_action']
+          assert r['publish_allowed'] is False
+          raw=json.dumps(r,sort_keys=True)
+          assert 'konzept7' not in raw and 'K7_' not in raw and 'k7_' not in raw
+          print('K8_LIVE_ENTRY_ISOLATION_PASS')
+          PY
+
+      - name: K8 gate wrong command is inert
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, copy
+          from concept_agent.konzept8_verbot.engine import k8_intake_bridge, k8_production_bridge
+          from concept_agent.konzept8_verbot import k8_command_gate, k8_entry
+          snapshot=json.load(open('concept_agent/current/PSERC_METADATA_SNAPSHOT.json'))
+          intake=k8_intake_bridge.prepare(snapshot)
+          research=json.load(open('concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json'))
+          binding=k8_production_bridge.build(snapshot,intake,research)
+          checkpoint=k8_production_bridge.initial_checkpoint(binding)
+          before=copy.deepcopy(checkpoint)
+          wrong=k8_command_gate.proposal_for(checkpoint)
+          wrong['command']={'action':'RUN_PSERC','item_count':binding['item_count']}
+          out=k8_entry.attempt(binding,checkpoint,wrong)
+          assert out['status']==k8_command_gate.BLOCKED
+          assert checkpoint==before
+          assert out['checkpoint_sha256']==before['checkpoint_sha256']
+          assert out['allowed_action']==before['allowed_action']
+          assert out['state_changed'] is False
+          assert out['execution'] is None
+          print('K8_WRONG_COMMAND_INERT_PASS')
+          PY
