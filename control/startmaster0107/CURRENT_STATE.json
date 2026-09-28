@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K8_REAL3_FRESH_CHAT_TEST_READY",
+  "status": "K8_REAL3_FRESH_CHAT_ENTRY_FIX_READY",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -139,7 +139,8 @@
     "PR480_K8_BALANCE_WORDPRESS_OUTPUT_MERGED_4A4D3AF9F9BBF37152C83A671711624C053D941F",
     "PR480_FINAL_FUNCTION_TEST_RUN_36464744454_PASS",
     "PR480_FINAL_DETERMINISTIC_ENTRANCE_RUN_36464652156_PASS",
-    "PR480_FINAL_IMMUTABLE_BASE_HARDLOCK_RUN_36464647048_PASS"
+    "PR480_FINAL_IMMUTABLE_BASE_HARDLOCK_RUN_36464647048_PASS",
+    "K8_REAL3_FIRST_FRESH_CHAT_ENTRY_FAILED_FREE_WRITING_20260928"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -245,16 +246,16 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K8_REAL3_FRESH_CHAT_TEST_READY",
+  "current_work_status": "K8_REAL3_FRESH_CHAT_ENTRY_FIX_READY",
   "current_execution_blocker": {
-    "code": "NONE_K8_REAL3_FRESH_CHAT_TEST_READY",
-    "error_class": false,
-    "classification": "NORMAL_PRODUCTION_SCOPE",
-    "detail": "The real 3-article K8 fresh-chat batch is bound and ready. The fresh chat receives only the 3-article WordPress-derived JSON and the prompt 'Schreibe einen Artikel.'. No worker packet, test mode, transition hint or alternate route is allowed.",
+    "code": "K8_FRESH_CHAT_ENTRY_PROMPT_WAS_TOO_WEAK",
+    "error_class": true,
+    "classification": "ENTRY_BINDING_FAILURE",
+    "detail": "The fresh-chat prompt 'Schreibe einen Artikel.' allowed free article writing before the repository-bound K8 entrance was entered. The first broken point is therefore the natural-language entry instruction, not the downstream K8 single-gate workflow.",
     "applies_to_concept_agent": true,
-    "item_count": 3,
-    "batch_sha256": "02dafa3511ea475aa3385e720ccce2812fe4b3bf0054fe7b1b49a552d5c19531",
-    "research_binding_sha256": "cc97860812f8d850fdcb3b1813020aafaa29747308d420258e36409ecbec089d",
+    "first_broken_point": "FRESH_CHAT_ENTRY_DID_NOT_NAME_CONCEPT_AGENT_START_HERE",
+    "production_logic_changed": false,
+    "quality_rules_changed": false,
     "publish_allowed": false
   },
   "superseded_live_findings": [
@@ -365,12 +366,14 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "RUN_K8_REAL_3_ARTICLE_FRESH_CHAT_BATCH",
-    "action": "In a completely fresh chat, upload the exact 3-article WordPress-derived JSON for batch 02dafa3511ea475aa3385e720ccce2812fe4b3bf0054fe7b1b49a552d5c19531 and give only the prompt 'Schreibe einen Artikel.'. The existing K8 single-gate route must process all three bound articles through the normal fixed route, including LanguageTool 6.8 and PPM 6.7.9, with only same-article repair when required.",
-    "scope": "K8_REAL_FRESH_CHAT_NORMAL_WORDPRESS_INPUT_3_ARTICLES",
+    "goal": "RERUN_K8_REAL_3_ARTICLE_FRESH_CHAT_WITH_EXACT_ENTRY",
+    "action": "In a completely fresh chat, upload the same exact 3-article WordPress-derived JSON for batch 02dafa3511ea475aa3385e720ccce2812fe4b3bf0054fe7b1b49a552d5c19531 and use exactly this prompt: Pferde Atelier: Starte bei `concept_agent/START_HERE.md` und führe ausschließlich die gebundene Current-`next_action` für die beigefügte Datei bis zum terminalen `STOP` aus.",
+    "scope": "K8_REAL_FRESH_CHAT_NORMAL_WORDPRESS_INPUT_3_ARTICLES_EXACT_ENTRY",
     "item_count": 3,
     "batch_sha256": "02dafa3511ea475aa3385e720ccce2812fe4b3bf0054fe7b1b49a552d5c19531",
-    "exact_user_prompt": "Schreibe einen Artikel.",
+    "exact_user_prompt": "Pferde Atelier: Starte bei `concept_agent/START_HERE.md` und führe ausschließlich die gebundene Current-`next_action` für die beigefügte Datei bis zum terminalen `STOP` aus.",
+    "failed_prior_prompt": "Schreibe einen Artikel.",
+    "failure_observed": "FREE_ARTICLE_WRITING_BEFORE_K8_ENTRY",
     "special_worker_packet_allowed": false,
     "test_mode_allowed": false,
     "extra_transition_instructions_allowed": false,
@@ -592,7 +595,7 @@
   },
   "k8_verbot_current": {
     "role": "CURRENT_WORK_EVIDENCE_ONLY_TOP_LEVEL_NEXT_ACTION_IS_AUTHORITY",
-    "status": "REAL3_FRESH_CHAT_TEST_READY",
+    "status": "REAL3_FRESH_CHAT_ENTRY_FIX_READY",
     "main_merge_pr": 475,
     "main_merge_sha": "29acff84db0effec816ac5e3e0b8be7f0d0957b8",
     "live_gate_merge_pr": 474,
@@ -614,7 +617,7 @@
     "publish_allowed": false,
     "latest_namespace_cleanup_pr": 477,
     "latest_namespace_cleanup_merge_sha": "eb881a67a7b991bf1c8a6a0b7ea0d047077d46d7",
-    "normal_three_article_run": "AUTHORIZED_READY",
+    "normal_three_article_run": "RERUN_REQUIRED_WITH_EXACT_ENTRY",
     "prior_article0_test_authority": "REVOKED_REPLACED_BY_NORMAL_3_ARTICLE_LIVE_RUN",
     "main_head_sha": "e97cd11b55be2aee07641ad72ce7da7447cbd2f4",
     "text_balance_fix_pr": 479,
@@ -633,6 +636,8 @@
     "open_followup_deterministic_hardlock": "PASS_RUN_36464652156",
     "pr480_merge_sha": "4a4d3af9f9bbf37152c83a671711624c053d941f",
     "real3_batch_sha256": "02dafa3511ea475aa3385e720ccce2812fe4b3bf0054fe7b1b49a552d5c19531",
-    "real3_research_binding_sha256": "cc97860812f8d850fdcb3b1813020aafaa29747308d420258e36409ecbec089d"
+    "real3_research_binding_sha256": "cc97860812f8d850fdcb3b1813020aafaa29747308d420258e36409ecbec089d",
+    "first_fresh_chat_entry_result": "FAIL_FREE_ARTICLE_WRITING_BEFORE_K8_ENTRY",
+    "exact_fresh_chat_entry_prompt": "Pferde Atelier: Starte bei `concept_agent/START_HERE.md` und führe ausschließlich die gebundene Current-`next_action` für die beigefügte Datei bis zum terminalen `STOP` aus."
   }
 }
