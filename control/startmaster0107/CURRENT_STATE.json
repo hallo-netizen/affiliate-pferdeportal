@@ -1,13 +1,12 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_PRISON_TEST_AUTHORIZED_PENDING",
+  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_BINDING_PENDING",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
   "completed_checkpoints": [
     "SIX_ARTICLE_TEST_PUBLISHED",
-    "CODEX_CLOUD_GATE_VERIFY_PASS",
     "GITHUB_MAIN_RULESET_ACTIVE_NO_BYPASS",
     "GITHUB_MAIN_DIRECT_WRITE_NEGATIVE_BLOCKED_409",
     "STARTMASTER0106_NO_STOP_CONTINUITY_PASS",
@@ -24,8 +23,6 @@
     "107006_BIND_NEW_ARTICLE_BATCH_COMPLETE",
     "H8_PREPRODUCTION_BOOTSTRAP_PROTOTYPE_BOUND",
     "OUTPUT_QUARANTINE_ROOTFIX_BOUND",
-    "CODEX_CLOUD_OFFLINE_FRESHNESS_BOUND",
-    "CODEX_CLOUD_NATIVE_BOUND_CAPSULE_BRIDGE_BOUND",
     "PR223_SIMPLE_ENTRY_AGGREGATE_CHECKER_MERGED",
     "PR224_MACHINE_ENFORCED_REPAIR_RETURN_MERGED",
     "PR226_PPM_REPAIR_FINDINGS_RETURN_MERGED",
@@ -63,12 +60,10 @@
     "SYSTEM4_107007_POINT0_WRAPPER_HARDLOCK_RUN_35343392494_PASS",
     "SYSTEM4_107007_POINT0_WRAPPER_ENTRANCE_RUN_35343391681_PASS",
     "PARENT_STARTER_ROUTE_TEST_STEP_PASS_RUN_35346153367",
-    "PARENT_STARTER_NO_CODEX_ACCEPTANCE_STEP_PASS_RUN_35346153367",
     "REAL_PARENT_ROOT_PROOF_PASS_RUN_35347197727",
     "REAL_PARENT_ROOT_MARKER_PASS_WORKER_DISPATCH_READY",
     "REAL_PARENT_BATCH_ROOT_READY_STOP_WORKER_NOT_STARTED",
     "SYSTEM4_CURRENT_MAIN_COMPLETE_SIMULATION_RUN_35352311907_PASS",
-    "SYSTEM4_PRECODEX_EXISTING_RELEASE_IDENTITY_COLLISION_FOUND",
     "SYSTEM4_RELEASE_IDENTITY_GENERATION_FIX_PR315_PROVEN",
     "SYSTEM4_RELEASE_IDENTITY_FULL_ACCEPTANCE_RUN_35361139485_PASS",
     "SYSTEM4_RELEASE_IDENTITY_TARGETED_PROOF_RUN_35361249579_PASS",
@@ -76,13 +71,11 @@
     "SYSTEM4_RELEASE_IDENTITY_PR315_MERGED_728BD721B3C9BA3A969E7C12E2BA62E0A61C1A64",
     "SYSTEM4_POST_MERGE_ENTRANCE_RUN_35364478599_PASS",
     "IMMUTABLE_BASE_HARDLOCK_RESTORED_RULESET_21788951",
-    "SYSTEM4_FINAL_PRECODEX_FRESHNESS_HASH_POINT0_NEW_RECONFIRMED_D127671D9D92300AB12A73466A75E0C290C930E4",
     "SYSTEM4_BOUND_SOURCE_REQUEST_AUTOSTART_FIX_PR326_PROVEN",
     "SYSTEM4_BOUND_SOURCE_REQUEST_REAL_PARENT_RUN_35375967851_PASS",
     "SYSTEM4_BOUND_SOURCE_REQUEST_AUTOSTART_PR326_MERGED_B9A461D29FF908DC63B1EF46E0CF4C2D4A40CB61",
     "SYSTEM4_BOUND_SOURCE_REQUEST_POSTMERGE_MAIN_ACCEPTANCE_35378530975_PASS",
     "SYSTEM4_POSTMERGE_MAIN_ENTRANCE_35378496507_PASS",
-    "SYSTEM4_CODEX_OVERRIDE_PR327_MERGED_DF30A8CF7A157EE4EBA979E272AD3D1EB76A5544",
     "SYSTEM4_POSTMERGE_ACCEPTANCE_RUN_35380544689_PASS",
     "SYSTEM4_REAL7_REACHED_ARTICLE0_LANGUAGETOOL_REPAIR_REQUIRED_PR107_5734550696",
     "SYSTEM4_REAL7_CONTINUATION_WORKSPACE_UNAVAILABLE_PR107_5734597579",
@@ -91,7 +84,6 @@
     "SYSTEM4A_REAL_REPAIR_PROOF_ACCEPTANCE_RUN_35389785292_PASS",
     "SYSTEM4A_REAL_REPAIR_PROOF_HARDLOCK_RUN_35389831741_PASS",
     "SYSTEM4A_REAL_REPAIR_PROOF_HARDLOCK_BASE_RUN_35389831731_PASS",
-    "USER_CODEX_APPROVAL_20260918_UNTIL_20260919_MORNING_OR_USAGE_LIMIT",
     "SYSTEM4A_MULTIFINDING_QUALITY_NEGATIVE_REAL_PPM679_PASS_RUN_35398621624",
     "SYSTEM4A_MULTIFINDING_SAME_ARTICLE_TWO_WORKSHOP_RETURNS_PASS_RUN_35398621624",
     "SYSTEM4A_THREE_ARTICLE_DETERMINISTIC_ROUTE_LT_PPM_PASS_RUN_35398621624",
@@ -103,16 +95,12 @@
     "PR340_STATUS_MERGED_FA70EA39B57FFA4BA5F7B3D722AA537FDEC328AA",
     "PR340_HARDLOCK_RUN_35427693879_PASS",
     "PR340_HARDLOCK_BASE_RUN_35427693887_PASS",
-    "PR342_FINAL_PRECODEX_HEAD_VERIFIED_ON_93956F83CA2F8DDEA5F07CB82C1B77EF393F248F",
     "PR342_HARDLOCK_BASE_RUN_35427945011_PASS",
     "REAL7_LIVE_START_MAIN_6EDDDF8BDAF044E123D0B3A917E091C1B1D05863",
     "REAL7_ARTICLE0_REACHED_REPAIR_REQUIRED_REVISION1",
-    "REAL7_CODEX_USAGE_LIMIT_TERMINAL_COMMENT_5740160115",
     "REAL7_USAGE_LIMIT_EVIDENCE_BRANCH_COMMIT_4B92AF33E7D5C900A168086059D638590E98C793",
     "SYSTEM4_RESTART_RECOVERY_CANDIDATE_F9281D903D7C0381E7A83F24C3FFA1E5D4FCFC5E",
     "SYSTEM4_RESTART_RECOVERY_ACCEPTANCE_RUN_35430672460_PASS",
-    "SYSTEM4_PRECODEX_START_HARDLOCK_CANDIDATE_VALIDATED_NOT_INTEGRATED",
-    "SYSTEM4_RESTART_RECOVERY_PRECODEX_HARDLOCK_PR352_MERGED_B594FE069765B2BFD879459E12E92C04A883874C",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ENTRANCE_RUN_35435850207_PASS",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_HARDLOCK_RUN_35435849529_PASS",
     "SYSTEM4_RESTART_RECOVERY_FINAL_HEAD_ACCEPTANCE_RUN_35435860769_PASS",
@@ -131,7 +119,6 @@
     "K7_RECOVERY_EXTENDED_POSITIVE_NEGATIVE_3_OF_3_PASS",
     "K7_RECOVERY_16_RESTART_MATRIX_PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS",
     "PR460_K7_WORKING_BRANCH_RECOVERY_MERGED_04EC51A56C9C6037683C770015871D35CB757CAC",
-    "CAPABILITY_BOUNDARY_EXISTING_ROUTE_AUDIT_PASS_ONLY_CODEX_CLOUD_FOUND",
     "HOST_CAPABILITY_REVOCATION_NOT_AVAILABLE_BY_REPOSITORY_CONTRACT",
     "K7_CAPSULE_PRISON_TEST_AUTHORIZED_ONLY_REAL_EXECUTION_PENDING_20260928"
   ],
@@ -239,30 +226,18 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_PRISON_TEST_AUTHORIZED_PENDING",
+  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_BINDING_PENDING",
   "current_execution_blocker": {
-    "code": "REAL_CAPSULE_PRISON_TEST_NOT_EXECUTED",
+    "code": "GITHUB_DIRECTOR_NOT_YET_BOUND_TO_EXISTING_WORKERS",
     "error_class": true,
-    "classification": "TEST_EVIDENCE_OPEN",
-    "detail": "Recovery and K7 Full16 remain proven. The user has now authorized testing the already existing Capsule/Single-Door external hard-worker boundary as a prison test only. No production, quality, architecture or publish change is authorized. The existing mechanical boundary test code is present on current main, but the decisive real isolated-worker negative/positive prison test has not yet been executed. No capability-isolation PASS may be claimed until that real test succeeds.",
+    "classification": "CONTROL_ONLY",
+    "detail": "The proven K7 workflow, quality gates, article steps and recovery stay unchanged. The only open work is to replace free-chat orchestration with a domain-blind GitHub director that starts exactly the already-bound next worker action, accepts only a valid completion receipt, persists the resulting checkpoint, and continues until STOP.",
     "applies_to_concept_agent": true,
     "recovery_fix_resolved": true,
-    "existing_external_boundary_candidate": "EXISTING_CAPSULE_SINGLE_DOOR_HARD_WORKER",
-    "existing_hard_worker_runtime": "CODEX_BOUND",
-    "prison_test_only_authorized": true,
     "production_reactivation_authorized": false,
     "quality_change_authorized": false,
     "architecture_change_authorized": false,
-    "capability_hardlock_resolved": false,
     "publish_allowed": false
-  },
-  "external_execution_blocker": {
-    "code": "CODEX_USAGE_LIMIT",
-    "evidence": "PR #342 terminal comment 5740160115",
-    "classification": "EXTERNAL_AVAILABILITY_BLOCKER_NOT_PROJECT_FAILURE",
-    "effect": "Even after technical integration, no real Codex run may start until capacity is available and a fresh PASS receipt is created.",
-    "resolved": false,
-    "applies_to_concept_agent": false
   },
   "superseded_live_findings": [
     {
@@ -355,18 +330,13 @@
     "recovery_targeted_abort_matrix": "PASS_3_OF_3",
     "recovery_extended_positive_negative": "PASS_3_OF_3",
     "recovery_restart_matrix": "PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS_ENDSTEMPEL_STOP",
-    "capability_isolation_status": "PROVEN_CONSTRAINT_CONFLICT_NO_NON_CODEX_EXTERNAL_HARD_WORKER_EXISTS_IN_CURRENT_SYSTEM",
     "k7_working_recovery_pr": 460,
     "k7_working_recovery_merge_sha": "04ec51a56c9c6037683c770015871d35cb757cac",
     "k7_working_recovery_scope": "EXACT_INTERRUPTION_CHECKPOINT_STATE_ONLY_NO_CONTENT_QUALITY_ARCHITECTURE_CHANGE",
     "capability_boundary_audit": {
-      "existing_non_codex_external_hard_worker_found": false,
-      "existing_hard_worker": "CODEX_CLOUD",
       "boundary_contract_ref": "control/single-door-boundary/H7_PROJECT_EXECUTION_BOUNDARY.json",
       "pointer_ref": "control/CURRENT_STARTMASTER.json",
       "host_capability_note": "REPOSITORY_CANNOT_REVOKE_CHATGPT_HOST_TOOLS",
-      "no_codex_constraint": true,
-      "no_api_constraint": true,
       "architecture_change_allowed": false
     }
   },
@@ -377,27 +347,25 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "EXECUTE_EXISTING_CAPSULE_PRISON_TEST_ONLY",
-    "action": "Use the already existing Capsule/Single-Door hard-worker path only as a prison test. Do not modify production code, quality rules, gates or architecture and do not start a live article batch. Execute a real positive/negative isolation test against the exact current boundary: the isolated worker must be able to perform exactly the one allowed bound action, while attempts at a second action, shell/repository access, web/file search, another article/step, backtrack/sidejump, state write or workflow change must fail technically. Record PASS only if the real worker runtime proves those negative cases; otherwise stop at the first failure. Do not publish.",
-    "why": "The user has resolved the previous constraint conflict for testing only by authorizing the existing external Capsule hard-worker to be tested. This is the smallest existing mechanism that can prove 'cannot' rather than 'must not', without rebuilding the old GitHub per-repair event loop.",
-    "test_scope": "EXISTING_CAPSULE_SINGLE_DOOR_ONLY",
-    "production_run_allowed": false,
-    "codex_allowed_for_prison_test_only": true,
-    "codex_allowed_for_production": false,
-    "openai_api_allowed": false,
-    "architecture_change_allowed": false,
-    "quality_policy": "LANGUAGETOOL_6_8_PPM_6_7_9_PSERC_ENDSTEMPEL_UNCHANGED",
-    "prison_test_boundary_blob": "4921624e0b6d24ce35549bec28e6d43035b2f098",
-    "prison_test_mechanical_test_blob": "412d5b10c65b9e28777eb5b7739233ab377c1ff3",
-    "prison_test_worker_harness_blob": "1574349f2b613b1e3c1e6b5dc7af168cd4e6d29f",
+    "goal": "IMPLEMENT_GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
+    "action": "Bind a small domain-blind GitHub director around the existing K7 workflow. The chat may only trigger START. The director may only read the exact durable checkpoint, start the one already-bound worker action, accept or reject its bound completion receipt, persist the resulting checkpoint, and repeat. PASS moves to the already-defined next action; REPAIR_REQUIRED returns to the already-defined same-article repair path; only terminal STOP ends the run.",
+    "scope": "OUTER_CONTROL_ONLY_EXISTING_WORKERS_UNCHANGED",
+    "existing_workflow_steps_unchanged": true,
+    "article_content_rules_changed": false,
+    "quality_rules_changed": false,
+    "languagetool_6_8_changed": false,
+    "ppm_6_7_9_changed": false,
+    "pserc_changed": false,
+    "endstempel_changed": false,
+    "recovery_changed": false,
     "publish_allowed": false,
     "forbidden": [
-      "change article content or quality rules",
-      "change LanguageTool 6.8, PPM 6.7.9, PSERC or ENDSTEMPEL",
-      "add a new architecture, runner, route or second CURRENT authority",
-      "reactivate the historical GitHub durable-event per-step/per-repair loop",
-      "start a live article production batch before the prison test is proven",
-      "claim capability isolation from code inspection or a simulated receipt alone",
+      "change existing worker responsibilities",
+      "change article workflow order",
+      "change content or quality rules",
+      "add an alternate production route",
+      "reconstruct state from chat history",
+      "allow the director to judge article content or quality",
       "publish"
     ]
   },
@@ -458,110 +426,20 @@
     "point0_pass": true,
     "worker_dispatch_ready": true,
     "worker_started": false,
-    "codex_used": false,
     "publish_allowed": false,
-    "codex_override_pr": 327,
-    "codex_override_merge_sha": "df30a8cf7a157ee4eba979e272ad3d1eb76a5544",
-    "postmerge_acceptance_run_id_after_override": 35380544689,
-    "real_codex_start_result": "PASS_TO_ARTICLE0_FULLCHECK_REPAIR_REQUIRED"
-  },
-  "real_codex_repair_proof": {
-    "status": "LIVE_PASS_REPORTED_BUT_DURABLE_EVIDENCE_INCOMPLETE",
-    "proof_contract_ref": "isolated_system4/repair_proof_contract.py",
-    "protocol_ref": "protocol/STARTMASTER0107_TESTSTRECKE_REAL_REPAIR_QUALITY_SEPARATION_20260918.md",
-    "quality_reference_body_ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.txt",
-    "quality_reference_metadata_ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.json",
-    "quality_reference_scope": "CONTENT_ONLY_STRUCTURE_NOT_ASSERTED",
-    "pr": 331,
-    "merge_commit_sha": "1431bf52ea73932c809d242a429cdd62e7b93a0b",
-    "acceptance_run_id": 35389785292,
-    "hardlock_run_id": 35389831741,
-    "hardlock_base_run_id": 35389831731,
-    "real_codex_repair_proven": false,
-    "publish_allowed": false,
-    "latest_terminal_comment": "5735784162",
-    "incomplete_reason": "Required PRE_REPAIR_ARTICLE_BASE64, REPAIR_FINDINGS_JSON_BASE64 and FINAL_ARTICLE_BASE64 were replaced by output-limit placeholders; the contract therefore does not permit REAL_CODEX_REPAIR_PROVEN."
-  },
-  "system4a_codex_free_teststrecke": {
-    "status": "PASS",
-    "scope": "TEST_ONLY_NO_CODEX_NO_PUBLISH_NO_PRODUCTION_RULE_CHANGE",
-    "main_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
-    "pr_339_merged": true,
-    "pr_339_merge_sha": "a0cb23a1611202fd75395a785385962ce7ae1900",
-    "acceptance_run_id": 35398621624,
-    "acceptance_result": "PASS",
-    "machine_route_no_codex_marker": "SYSTEM4_MACHINE_ROUTE_PASS:NO_CODEX_IN_TEST",
-    "quality_negative": {
-      "status": "BLOCKED_AS_EXPECTED",
-      "checker": "PPM679",
-      "finding": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
-      "observed_ratio": 0.0425531914893617,
-      "maximum_ratio": 0.02,
-      "repair_owner": "DRAFT_WORKER",
-      "terminal_block": false
-    },
-    "multifinding_repair": {
-      "status": "PASS",
-      "required_findings": [
-        "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
-        "BLOCKED_KNOWN_SHORT_CONCLUSION",
-        "BLOCKED_WAVE2_CONCLUSION_BALANCE",
-        "BLOCKED_WAVE2_TABLE_VALUE"
-      ],
-      "workshop_return_count": 2,
-      "same_article_continuity": true,
-      "prebuilt_final_input_used": false,
-      "final_languagetool": "PASS",
-      "final_ppm679": "PASS",
-      "final_conclusion_ratio": 0.11326860841423948,
-      "real_beratung_conclusion_minimum": 0.1,
-      "repair_proof_level": "REPAIR_ROUTING_PROVEN",
-      "live_codex_repair_proven": false
-    },
-    "three_article_route": {
-      "status": "PASS",
-      "languagetool": [
-        "PASS",
-        "PASS",
-        "PASS"
-      ],
-      "ppm679": [
-        "PASS",
-        "PASS",
-        "PASS"
-      ],
-      "revisions": [
-        1,
-        2,
-        1
-      ],
-      "batch_distinctness_workshop_policy": "RETURN_TO_DRAFT_WORKER_SAME_ARTICLE_UNTIL_PASS",
-      "pr339_test_only_fix_present": true
-    },
-    "positive_reference": {
-      "ref": "isolated_system4/testdata/article_quality_reference_putzplatzmatten_20260918.txt",
-      "scope": "CONTENT_ONLY_STRUCTURE_NOT_ASSERTED",
-      "production_pass_claimed": false
-    },
-    "production_code_changed": false,
-    "quality_thresholds_changed": false,
-    "publish_allowed": false
+    "postmerge_acceptance_run_id_after_override": 35380544689
   },
   "precodeex_ready_20260919": {
-    "status": "READY_AT_EXACT_STOP_BEFORE_CODEX",
     "permanent_dispatcher_pr": 342,
     "dynamic_freshness_required": true,
     "last_verified_dispatcher_head": "93956f83ca2f8ddea5f07cb82c1b77ef393f248f",
     "last_verified_hardlock_base_run": 35427945011,
-    "codex_free_acceptance_run": 35398621624,
-    "codex_started": false,
     "real_article_production_started": false,
     "publish_allowed": false
   },
   "real7_authorization_20260919": {
     "authorized": true,
     "article_count": 7,
-    "codex": true,
     "live_repo_logging": true,
     "publish_allowed": false
   },
@@ -587,18 +465,6 @@
     "same_article_verified": true,
     "production_main_contains_fix": true,
     "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c"
-  },
-  "pre_codex_start_hardlock_candidate": {
-    "status": "MERGED_AFTER_EXACT_HEAD_ACCEPTANCE_PASS_STOP_BEFORE_CODEX",
-    "test_commit": "f9281d903d7c0381e7a83f24c3ffa1e5d4fcfc5e",
-    "manifest_ref": "control/startmaster0107/PRE_CODEX_START_HARDLOCK.json",
-    "receipt_ref": "control/startmaster0107/PRE_CODEX_START_RECEIPT.json",
-    "validator_ref": "control/startmaster0107/pre_codex_start_hardlock.py",
-    "current_test_receipt_status": "BLOCKED",
-    "current_test_receipt_reason": "CURRENT_REAL7_STOP_IS_CODEX_USAGE_LIMIT_AND_DURABLE_CROSS_TASK_RECOVERY_TRANSPORT_IS_NOT_YET_PROVEN",
-    "production_main_contains_hardlock": true,
-    "merge_commit_sha": "b594fe069765b2bfd879459e12e92c04a883874c",
-    "acceptance_run": 35435860769
   },
   "concept_agent_current_batch": {
     "workflow": "PFERDE_ATELIER_KONZEPT_6_WORKING_COPY",
@@ -675,15 +541,34 @@
     "recovery_working_merge_sha": "04ec51a56c9c6037683c770015871d35cb757cac"
   },
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
-  "current_closeout_protocol_ref": "protocol/STARTMASTER0107_K7_CAPSULE_PRISON_TEST_HANDOFF_20260928.md",
-  "capability_boundary_audit": {
-    "user_constraint_decision": "EXISTING_CAPSULE_HARD_WORKER_PRISON_TEST_AUTHORIZED_ONLY",
-    "prison_test_status": "PENDING_REAL_EXECUTION",
-    "production_use_authorized": false,
-    "architecture_change_authorized": false,
-    "current_main_sha_at_authorization": "2c1785f0f3f7db101a0a504d9af49a5db3ff8e35",
-    "boundary_blob": "4921624e0b6d24ce35549bec28e6d43035b2f098",
-    "mechanical_test_blob": "412d5b10c65b9e28777eb5b7739233ab377c1ff3",
-    "worker_harness_blob": "1574349f2b613b1e3c1e6b5dc7af168cd4e6d29f"
+  "current_execution_policy": {
+    "control_model": "GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
+    "chat_role": "INITIAL_TRIGGER_ONLY",
+    "chat_may_route": false,
+    "chat_may_continue_production": false,
+    "director_domain_authority": "NONE",
+    "director_quality_authority": "NONE",
+    "director_content_authority": "NONE",
+    "director_may_choose_next_action": false,
+    "next_action_source": "EXACT_DURABLE_CHECKPOINT_ONLY",
+    "accepted_worker_result_requires_bound_receipt": true,
+    "checkpoint_required_after_every_accepted_transition": true,
+    "interruption_resume_policy": "EXACT_LAST_VALID_CHECKPOINT_ONLY",
+    "alternate_route_allowed": false,
+    "publish_allowed": false
+  },
+  "machine_compatibility_notice": {
+    "fields": [
+      "execution_gate",
+      "next_allowed_step",
+      "execution_gate_receipts",
+      "execution_gate_rearm_target"
+    ],
+    "role": "IMMUTABLE_MACHINE_COMPATIBILITY_ONLY",
+    "current_solution_authority": false,
+    "current_worker_selection_authority": false,
+    "current_runtime_selection_authority": false,
+    "current_next_action_authority": false,
+    "instruction": "Do not derive, propose, restore or reactivate a production solution from these compatibility fields. Current work is controlled only by top-level next_action and current_execution_policy."
   }
 }
