@@ -3,33 +3,42 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: V1.8.6 ROOTFIX BEREIT / TESTLABOR-WIEDERHOLUNG ALS NÄCHSTES
+STATUS: TESTLABOR DATAFORSEO-ERSTLAUF PASS / BEREINIGTER INITIAL-DRAFT BEREIT
 
 ## Aktueller belastbarer Stand
 
-V1.8.5:
-- DataForSEO-Verbindung live PASS;
-- Testlabor-Konzept kostenlose Vorprüfung live PASS;
-- 4 geplante DataForSEO-Abfragen, noch keine Kosten;
-- erster bestätigter Konzeptstart blockierte vor Paid-Calls mit `Ausdrückliche sichtbare Nutzerfreigabe fehlt.`
+V1.8.6 Live-Test:
+- DataForSEO-Verbindung PASS;
+- kostenlose Konzept-Vorprüfung PASS;
+- SEO-Erstentwurf erfolgreich;
+- 4 Paid-Calls;
+- Gesamtkosten 0.06804 USD;
+- Overview 17 Treffer;
+- je 50 Suggestions für `kerzen gießen`, `kerzen selber machen`, `buchbinden`;
+- kein WordPress-Write.
 
-Diagnose:
-Konzeptstart war fälschlich an das separate Human-Sight-Review-Gate gebunden.
+Originaldraft:
+`APKW_RESEARCH_DRAFT_20260928-101752.json`
+SHA-256 `85d6e54705207a019e293f3e16505018450307127a2e9021cea42cea48d397f3`.
 
-V1.8.6 behebt genau diesen ersten gebrochenen Punkt:
-- Adminrecht;
-- eigener Nonce;
-- ausdrückliche Paid-Call-Bestätigung;
-- keine zusätzliche Human-Sight-Review-Anforderung am Konzeptstart.
+Sichtprüfung:
+Offensichtliche Wortstellungs-/Synonym-Dubletten wurden nicht akzeptiert.
 
-Spätere Review-/Research-/FINAL-/Dry-Run-/Apply-/Readback-/Rollback-Gates bleiben unverändert.
+Bereinigter Draft:
+`APKW_RESEARCH_DRAFT_20260928-101752_INITIAL_REVIEW_CLEANED.json`
+SHA-256 `e66b90aafc54907aeefa6f122d3c7a13bdb5e983a7df44a92b4acafb83da8921`.
 
-Teststatus:
-- 227/227 PASS;
-- Fresh-Unpack-Installer 227/227 PASS;
-- Installer PHP-Lint 16/16 PASS;
-- Runtime-Parität 21/21 PASS.
+Korrektur:
+- Hauptthemen unverändert;
+- Marketplace unverändert;
+- Magazin unverändert;
+- nur redundante Content-Unterkategorien durch bereits vorhandene positive informationale DataForSEO-Evidenz ersetzt;
+- keine neue API-Abfrage;
+- Validator PASS.
+
+Initial-Review-Scope SHA-256:
+`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`.
 
 ## NEXT ACTION
 
-V1.8.6 installieren → Testlabor-Konzept erneut kostenlos vorprüfen → Paid-Calls bestätigen → SEO-Erstentwurf erzeugen.
+Korrigierten Draft im Plugin unter Erst-Sichtfreigabe hochladen, Scope-Hash eintragen, kurze Freigabe-Zusammenfassung setzen und serverseitig signieren. Danach Global-Coverage-Preflight.
