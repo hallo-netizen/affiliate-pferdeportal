@@ -376,7 +376,10 @@ def _k8_live_start_receipt(snapshot: dict, result: dict) -> dict:
 
     # Import only at runtime to avoid changing the existing module dependency graph.
     import production_bridge  # type: ignore
-    from concept_agent.konzept8_verbot import k8_command_gate  # type: ignore
+    k8_dir = REPO / "concept_agent" / "konzept8_verbot"
+    if str(k8_dir) not in sys.path:
+        sys.path.insert(0, str(k8_dir))
+    import k8_command_gate  # type: ignore
 
     binding = production_bridge.build(snapshot, result, bound)
     checkpoint = production_bridge.initial_checkpoint(binding)
