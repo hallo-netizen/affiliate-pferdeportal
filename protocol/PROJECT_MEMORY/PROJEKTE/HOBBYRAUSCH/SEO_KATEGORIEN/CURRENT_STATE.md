@@ -3,31 +3,36 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: GLOBAL-COVERAGE LIVE PASS / 27 REVIEW-CORES AUFGELÖST / DETAILRESEARCH ALS NÄCHSTES
+STATUS: TESTLABOR RESEARCH VOLLSTÄNDIG / READ_ONLY_PREVIEW LOKAL PASS / LIVE-FINALPRÜFUNG OFFEN
 
 ## Aktueller belastbarer Stand
 
-Testlabor:
-- DataForSEO-Verbindung gespeichert/PASS;
-- Initial-Draft serverseitig signiert;
-- V1.8.9 Persistenzpfad live PASS;
-- Global-Coverage live abgeschlossen;
-- 1000 Treffer;
-- 1 Paid-Call dieser Stufe;
-- 0.132 USD;
+Live:
+- Global-Coverage PASS;
+- Detailresearch PASS;
+- Spezialisierungs-Tiefenprüfung vollständig;
+- 15/15 Content-Knoten exakt abgedeckt;
+- remaining_unattempted_estimate = 0;
 - kein WordPress-Write.
 
-Global-Coverage enthält starkes Winter-/Event-Rauschen. Automatische Architekturmutation ist deaktiviert; deshalb kein stiller Strukturumbau.
+READ_ONLY_PREVIEW:
+`kategorie-read-only-preview-hobby-depot-testlabor-20260928.json`
 
-Die vom Plugin ausgewählten 27 Review-Cores wurden für den Test explizit entschieden:
-- `joggen im winter` = ARTICLE_ONLY im Magazin-Discovery-Cluster;
-- alle übrigen ausgewählten irrelevanten saisonalen/event-/news-/produktbezogenen Cores = OUT_OF_SCOPE.
+SHA-256:
+`93c72578bfaed4c4600e5b375535619c8a8b2bd55b28f5e5b24cdbac2b64fd00`
 
-Baum unverändert, keine neue API-Abfrage.
+Lokale Positivprüfung:
+- Schema PASS;
+- Research-Evidenz PASS;
+- Comparator PASS_READ_ONLY_PREVIEW.
 
-Bereinigter Draft:
-`kategorie-draft-hobby-depot-testlabor-global-bereinigt.json`
+Lokale Negativprüfung:
+- fehlende Coverage-Entscheidung → BLOCKED;
+- manipulierte Research-Bindung → BLOCKED;
+- unrecherchiertes Primärkeyword → BLOCKED.
+
+Die 182 Cross-Cluster-Overlap-Warnungen stammen aus dem absichtlich überlappenden Dummy-Test und sind keine produktive Hobby-Depot-Strukturfreigabe.
 
 ## NEXT ACTION
 
-Bereinigten Draft einmalig übernehmen und Global-Sichtfreigabe serverseitig signieren. Danach Detailresearch.
+READ_ONLY_PREVIEW live einmal übernehmen → finale Gesamtprüfung muss PASS zeigen → danach finale Sichtfreigabe.
