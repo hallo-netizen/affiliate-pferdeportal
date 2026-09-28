@@ -1,78 +1,78 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.8 PERSISTENT GUIDED FLOW GEBAUT / LIVE-INSTALLATION ALS NÄCHSTES
+STATUS: V1.8.9 GUIDED RESUME LOKAL POSITIV/NEGATIV PASS / LIVE-ABNAHME NOCH OFFEN
 
 ## Aktueller Stand
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.8 Hobby Depot Persistent Flow`
+`Affiliate-Portal Kategorie-Workflow V1.8.9 Hobby Depot Guided Resume`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
 
 Installer SHA-256:
-`eae83b6b472de2e78993d271b0da9d57021ba7134d51b7150f0b99c63bd4a85b`
+`c415df2c63cf3640f723a763ebe6bf527540d377e104d8ce48e7d427246d2c07`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
 
 Source SHA-256:
-`4bb9929946941f5be75574ebb869408a3154255f56d2f8e28cc1ecdb5d4b9c62`
+`ceea10f2e9b50f6349e5ea83d48cfed3fc78b360e0eeccff4292d38cbb11ad5a`
 
-## V1.8.8 – Ursache der unnötig komplizierten Bedienung behoben
+## Vereinfachung V1.8.9
 
-Bisher:
-- derselbe Zwischenstand musste zwischen internen Stufen wiederholt heruntergeladen und erneut hochgeladen werden;
-- kostenlose Preflights und Folgeaktionen waren an kurzlebige Transient-Tokens gebunden;
-- die DataForSEO-Verbindung erschien als wiederkehrender Bedienpunkt;
-- die technische Einzelwerkzeug-Ansicht dominierte den normalen Ablauf.
+- Bei leerem Arbeitsstand ist die einmalig nötige Fortsetzungsdatei direkt sichtbar.
+- Kein versteckter Aufklapper mehr als erster Bedienweg.
+- Danach bleibt genau eine NEXT ACTION sichtbar.
+- Interne Zwischenpakete werden nicht erneut hochgeladen.
+- DataForSEO-PASS bleibt bei unveränderten Credentials/Markt/Sprache gespeichert.
+- Externe Datei wird nur benötigt, wenn wirklich ein neuer/korrigierter Stand von außen kommt.
 
-Jetzt:
-- aktueller Workflow-Arbeitsstand wird serverseitig persistent gespeichert;
-- intern erzeugte Drafts, Global-Coverage, Research, FINAL und Deployment-Dry-Run werden automatisch weiterverwendet;
-- derselbe Zwischenstand muss nicht mehr erneut hochgeladen werden;
-- eine Datei wird nur noch einmal ausgewählt, wenn wirklich ein neuer externer Stand hereinkommt, z. B. eine korrigierte Chat/Master-Datei;
-- DataForSEO-PASS wird an Credentials + Markt + Sprache gebunden gespeichert und nur bei Änderung ungültig;
-- normale Oberfläche zeigt Status + genau die nächste zulässige Aktion;
-- bisherige Einzelwerkzeuge bleiben vollständig als technische Notfallansicht erhalten.
+## Zusätzlicher Fail-Closed-Schutz
 
-## Funktionsschutz
+- Eine Datei mit vorhandener, aber ungültiger Initialfreigabe wird nicht still als unsignierter Draft übernommen, sondern abgewiesen.
+- Ein global freigegebener Draft ohne zugehörige gespeicherte Global-Coverage wird abgewiesen.
+- Eine ungültige Global-Review-Bindung wird abgewiesen.
 
-Unverändert aktiv:
-- explizite Bestätigung vor Paid-Calls;
-- serverseitig signierte Sichtfreigaben;
-- Scope-/Research-/Hash-Bindung;
-- Global-Coverage- und Detailresearch-Gates;
-- Spezialisierungs-Tiefenprüfung;
-- read-only Gesamtprüfung;
-- FINAL_APPROVED;
-- Deployment-Dry-Run;
-- explizite Schreibfreigabe;
-- Readback;
-- Idempotenz;
-- Drift-Schutz;
-- Rollback.
+## Lokale Positiv-/Negativprüfung vor Live-Abnahme
 
-## Tests
+Source Vollsuite: 235/235 PASS.
+Fresh-Unpack-Installer: 235/235 PASS.
+Source PHP-Lint: 18/18 PASS.
+Installer Runtime PHP-Lint: 17/17 PASS.
+Runtime-Parität Source↔Installer: 22/22 PASS.
 
-- Source Vollsuite: 229/229 PASS;
-- Fresh-Unpack-Installer: 229/229 PASS;
-- Source PHP-Lint: 18/18 PASS;
-- Installer Runtime PHP-Lint: 17/17 PASS;
-- Runtime-Parität Source↔Installer: 22/22 Dateien byteidentisch;
-- Produktion-PHP Pferde-Domain-Scan: 0 Treffer.
+Gezielte Positivtests:
+- signierter Initial-Draft → persistenter Workspace → Stage initial_approved;
+- derselbe gespeicherte Draft → Global-Coverage ohne erneuten Upload;
+- Draft + Global-Paket bleiben parallel persistent;
+- DataForSEO-PASS bleibt bei unveränderten Einstellungen gültig.
 
-## Live-Teststand vor Update
+Gezielte Negativtests:
+- manipulierte signierte Struktur → Review ungültig;
+- beschädigter Workspace-Payload → BLOCKED;
+- Paid Global ohne ausdrückliche Bestätigung → BLOCKED;
+- geänderte Verbindungseinstellungen → gespeicherter PASS ungültig.
 
-- DataForSEO live PASS;
-- 4 Paid-Calls;
-- Kosten 0.06804 USD;
-- bereinigter Initial-Draft live serverseitig signiert;
-- signierte Datei:
-  `kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
-- noch kein WordPress-Write.
+Exakter aktueller Hobby-Depot-Teststand:
+`kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
+- JSON PASS;
+- mode RESEARCH_DRAFT;
+- project_id hobby-depot-testlabor-20260928;
+- lokal neu berechneter Review-Scope entspricht exakt dem gespeicherten Scope:
+`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`;
+- serverseitige HMAC-Signatur vorhanden; kryptographische Verifikation erfolgt absichtlich nur auf derselben WordPress-Installation mit deren geheimem WordPress-Salt.
+
+## Live-Teststand
+
+V1.8.8 ist aktuell live sichtbar:
+- DataForSEO verbunden;
+- noch kein persistenter Arbeitsstand übernommen;
+- noch kein neuer WordPress-Write.
+
+V1.8.9 ist lokal geprüft, aber noch NICHT live abgenommen.
 
 ## NEXT ACTION
 
-V1.8.8 über V1.8.7 installieren. Danach den bereits signierten Initial-Draft genau einmal unter `Arbeitsstand übernehmen` laden. Ab dann verwendet der normale Ablauf diesen Stand serverseitig weiter; nächster sichtbarer Schritt ist direkt `Global-Coverage starten`.
+V1.8.9 über V1.8.8 installieren. Danach die bereits serverseitig signierte Datei genau einmal direkt im sichtbaren Fortsetzungsfeld laden. Erwartung: sofort Stage `initial_approved` und als einzige NEXT ACTION `Global-Coverage starten`. Erst nach diesem Live-PASS ist V1.8.9 abgenommen.
