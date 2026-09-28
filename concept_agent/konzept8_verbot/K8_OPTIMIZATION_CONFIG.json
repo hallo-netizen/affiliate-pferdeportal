@@ -36,8 +36,8 @@
     "table_unique_token_ratio_target_if_applicable": 0.22,
     "mechanical_requirements_prebound": true,
     "all_same_checker_findings_one_repair_revision": true,
-    "normal_h2_section_min_words": 60,
-    "normal_h2_section_max_words": 120,
+    "normal_h2_section_min_words": 80,
+    "normal_h2_section_max_words": 240,
     "normal_h2_exempt_blocks": [
       "table",
       "conclusion",
@@ -46,7 +46,10 @@
     "heading_content_relation": "USE_EXISTING_BOUND_INTENT_AND_HEADING_SEMANTIC_RULES",
     "conclusion_ratio_maximum": 0.18,
     "conclusion_maximum_paragraphs": 3,
-    "conclusion_may_fill_global_minimums": false
+    "conclusion_may_fill_global_minimums": false,
+    "normal_h2_combined_minimum_ratio": 0.55,
+    "further_information_maximum_words": 60,
+    "balance_basis": "PPM_750_WORD_FLOOR_WITH_MAIN_TEXT_PRIMARY"
   },
   "production": {
     "default_article_lanes": 4,
@@ -73,9 +76,13 @@
     "search_for_closeout_route_after_articles": false,
     "order": [
       "PSERC",
-      "ENDSTEMPEL",
-      "FINAL_WORDPRESS_JSON"
+      "ENDSTEMPEL_WITH_FINAL_WORDPRESS_JSON"
     ],
-    "durable_final_hash_required": true
+    "durable_final_hash_required": true,
+    "final_wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+    "final_wordpress_format": "JSON",
+    "final_wordpress_mime_type": "application/json",
+    "final_wordpress_exporter_ref": "concept_agent/konzept8_verbot/engine/k8_wordpress_export.py",
+    "chat_must_provide_final_wordpress_json": true
   }
 }
