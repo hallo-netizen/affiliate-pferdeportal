@@ -554,6 +554,80 @@ class CurrentProductionGuardTests(unittest.TestCase):
             self.assertEqual(progress_guard.file_sha(restored), expected)
             self.assertEqual(restored.read_text(encoding="utf-8"), "exact-current-article-bytes")
 
+    def test_abort_before_accepted_draft_resumes_exact_write_action(self):
+        binding = self._binding()
+        state = self._checkpoint(binding)
+        before = json.loads(json.dumps(state))
+        before_sha = state["checkpoint_sha256"]
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self._draft(root, binding, 0, "unfinished-local-only")
+            decision = self._decision(binding, state)
+            resumed = progress_guard.resume(binding, state, decision)
+            self.assertEqual(state, before)
+            self.assertEqual(state["checkpoint_sha256"], before_sha)
+            self.assertEqual(resumed["allowed_action"]["action"], "WRITE_DRAFT")
+            self.assertEqual(resumed["recovery"]["source"], "EXACT_DURABLE_CHECKPOINT_ONLY")
+            self.assertIs(resumed["recovery"]["history_reconstruction_allowed"], False)
+
+    def test_shutdown_after_accepted_draft_resumes_exact_lt_and_restores_bytes(self):
+        binding = self._binding()
+        state = self._checkpoint(binding)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            draft = self._draft(root, binding, 0, "durable-before-shutdown")
+            decision = self._decision(binding, state)
+            state = progress_guard.record_draft(binding, state, decision, 0, draft)
+            saved = json.loads(json.dumps(state))
+            draft.unlink()
+
+            decision2 = self._decision(binding, saved)
+            resumed = progress_guard.resume(binding, saved, decision2)
+            self.assertEqual(resumed["allowed_action"]["action"], "RUN_CHECKER")
+            self.assertEqual(resumed["allowed_action"]["checker"], "LT68")
+            self.assertEqual(
+                resumed["recovery"]["active_draft_sha256"],
+                saved["drafts"][0]["draft_sha256"],
+            )
+            restored = progress_guard.materialize_current_draft(
+                binding, saved, decision2, root / "restore"
+            )
+            self.assertEqual(
+                Path(restored["path"]).read_text(encoding="utf-8"),
+                "durable-before-shutdown",
+            )
+
+    def test_abort_during_repair_ignores_unaccepted_local_edit_and_restores_checkpoint_bytes(self):
+        binding = self._binding()
+        state = self._checkpoint(binding)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            draft = self._draft(root, binding, 0, "accepted-v1")
+            decision = self._decision(binding, state)
+            state = progress_guard.record_draft(binding, state, decision, 0, draft)
+            decision = self._decision(binding, state)
+            sha = progress_guard.file_sha(draft)
+            state = progress_guard.record_check(
+                binding, state, decision, 0, "LT68",
+                {"status": "REPAIR_REQUIRED", "content_sha256": sha, "findings": [{"code": "x"}]},
+                draft,
+            )
+            accepted_sha = state["drafts"][0]["draft_sha256"]
+            draft.write_text("local-unaccepted-repair", encoding="utf-8")
+
+            saved = json.loads(json.dumps(state))
+            decision2 = self._decision(binding, saved)
+            resumed = progress_guard.resume(binding, saved, decision2)
+            self.assertEqual(resumed["allowed_action"]["action"], "REPAIR_DRAFT")
+            self.assertEqual(saved["drafts"][0]["draft_sha256"], accepted_sha)
+            restored = progress_guard.materialize_current_draft(
+                binding, saved, decision2, root / "restore-repair"
+            )
+            self.assertEqual(
+                Path(restored["path"]).read_text(encoding="utf-8"),
+                "accepted-v1",
+            )
+
     def test_tampered_durable_article_bytes_invalidate_checkpoint(self):
         binding = self._binding()
         state = self._checkpoint(binding)
