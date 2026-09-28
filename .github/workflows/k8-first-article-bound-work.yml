@@ -18,9 +18,10 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import json
+          import json, sys
           from pathlib import Path
-          from concept_agent import intake_bridge, production_bridge
+          sys.path.insert(0, str(Path('concept_agent').resolve()))
+          import intake_bridge, production_bridge
           root=Path('.')
           snapshot=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text())
           intake=intake_bridge.prepare(snapshot)
