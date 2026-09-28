@@ -15,8 +15,10 @@ if str(CONCEPT_AGENT) not in sys.path:
 import intake_bridge  # type: ignore
 import production_bridge  # type: ignore
 import progress_guard  # type: ignore
-from concept_agent.konzept8_verbot import k8_command_gate  # type: ignore
-from concept_agent.konzept8_verbot import k8_entry  # type: ignore
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+import k8_command_gate  # type: ignore
+import k8_entry  # type: ignore
 
 START_READY = "K8_VERBOT_START_READY"
 
