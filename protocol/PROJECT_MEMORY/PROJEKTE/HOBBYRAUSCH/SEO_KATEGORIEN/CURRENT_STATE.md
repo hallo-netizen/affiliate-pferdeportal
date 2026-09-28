@@ -3,12 +3,12 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: INITIAL-REVIEW SIGNIERT / V1.8.8 PERSISTENT FLOW BEREIT
+STATUS: INITIAL-REVIEW SIGNIERT / V1.8.9 LOKAL HART GEPRÜFT / LIVE-PASS AUSSTEHEND
 
 ## Aktueller belastbarer Stand
 
-Live-Testlabor:
-- DataForSEO Verbindung PASS;
+Testlabor:
+- DataForSEO-Verbindung PASS;
 - SEO-Erstentwurf PASS;
 - 4 Paid-Calls;
 - Gesamtkosten 0.06804 USD;
@@ -18,22 +18,20 @@ Live-Testlabor:
 Signierte Datei:
 `kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
 
-V1.8.8 ändert nur die Bedien-/Zustandsführung:
-- gespeicherte DataForSEO-Verbindung;
-- persistenter serverseitiger Workflow-Arbeitsstand;
-- automatisch wiederverwendete Zwischenpakete;
-- eine Datei nur bei echtem neuen externen Stand;
-- normale UI zeigt nur nächste Aktion;
-- technische Altwerkzeuge bleiben verfügbar.
+V1.8.9:
+- einmalige Fortsetzungsdatei bei leerem Arbeitsstand direkt sichtbar;
+- danach serverseitige Weitergabe ohne Datei-Pingpong;
+- gespeicherter DataForSEO-PASS;
+- ungültige vorhandene Review-Signaturen fail-closed.
 
-Fachliche und technische Gates bleiben vollständig bestehen.
-
-Teststatus:
-- 229/229 PASS;
-- Fresh-Unpack 229/229 PASS;
-- Installer Runtime PHP 17/17 PASS;
-- Runtime-Parität 22/22 PASS.
+Lokale Abnahmeprüfung:
+- Vollsuite 235/235 PASS;
+- Fresh-Unpack 235/235 PASS;
+- PHP 18/18 Source, 17/17 Runtime;
+- Runtime-Parität 22/22 PASS;
+- positiver signierter Workspace→Global-Pfad PASS;
+- Manipulation, Workspace-Korruption, fehlende Paid-Bestätigung und Settings-Änderung jeweils korrekt BLOCKED/invalidiert.
 
 ## NEXT ACTION
 
-V1.8.8 installieren → signierten Initial-Draft einmalig als Arbeitsstand übernehmen → direkt Global-Coverage starten.
+V1.8.9 live installieren und signierten Initial-Draft einmal laden. Erwartung: direkte Stage `initial_approved` → einzige NEXT ACTION `Global-Coverage starten`. Erst danach Live-Abnahme.
