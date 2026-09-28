@@ -49,6 +49,10 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python control/cloud-entry-gate/cloud_repo_ci_test.py
+      - name: K7 GitHub director full positive-negative matrix
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 -m unittest -v concept_agent.tests.test_github_director
       - name: Production continuity no-stop positive-negative CI
         env:
           PYTHONDONTWRITEBYTECODE: '1'
