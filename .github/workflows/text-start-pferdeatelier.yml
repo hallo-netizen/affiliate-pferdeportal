@@ -23,10 +23,10 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout protected main
+      - name: Checkout isolated K7 branch
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: main
+          ref: konzept7/hard-worker-completion-20260928
           fetch-depth: 1
           persist-credentials: false
 
@@ -118,7 +118,7 @@ jobs:
               "source_run_id": int(os.environ["SOURCE_RUN_ID"]),
               "source_issue_number": int(os.environ["SOURCE_ISSUE_NUMBER"]),
               "target_repository": "hallo-netizen/affiliate-pferdeportal",
-              "target_ref": "main",
+              "target_ref": "konzept7/hard-worker-completion-20260928",
               "target_head_sha": head,
               "canonical_start_command": "python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json CONCEPT_AGENT_INTAKE.json",
               "article_content_rules_changed": False,
@@ -159,12 +159,30 @@ jobs:
               raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
           PY
 
-      - name: Upload current intake handoff
+      - name: Build or resume exact K7 production binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 concept_agent/production_bridge.py bind \
+            concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
+            CONCEPT_AGENT_INTAKE.json \
+            concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json \
+            CONCEPT_AGENT_PRODUCTION_BINDING.json \
+            CONCEPT_AGENT_PROGRESS_CHECKPOINT.json
+          python3 concept_agent/github_director.py resume \
+            CONCEPT_AGENT_PRODUCTION_BINDING.json \
+            CONCEPT_AGENT_PROGRESS_CHECKPOINT.json \
+            CONCEPT_AGENT_GITHUB_DIRECTOR_HANDOFF.json
+
+      - name: Upload current intake and K7 director handoff
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pferdeatelier-start-${{ inputs.source_run_id }}
           path: |
             CONCEPT_AGENT_INTAKE_RECEIPT.json
             CONCEPT_AGENT_INTAKE.json
+            CONCEPT_AGENT_PRODUCTION_BINDING.json
+            CONCEPT_AGENT_PROGRESS_CHECKPOINT.json
+            CONCEPT_AGENT_GITHUB_DIRECTOR_HANDOFF.json
           if-no-files-found: error
           retention-days: 30
