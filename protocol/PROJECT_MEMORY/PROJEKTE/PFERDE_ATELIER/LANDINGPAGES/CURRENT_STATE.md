@@ -36,8 +36,14 @@ Journal:
 ## Providerstand
 
 Vom Nutzer bestätigt:
-- Tarifcheck: Partnerfreigabe vorhanden;
-- CHECK24: Partnerfreigabe vorhanden.
+- Tarifcheck: Partnerfreigabe vorhanden; Versicherungs-Pilot läuft über Tarifcheck;
+- CHECK24: Partnerfreigabe vorhanden; soll jetzt bereits als eigener vorbereiteter Provider im Zielbild mitgeführt werden, auch wenn für den aktuellen Pferdehaftpflicht-Pilot keine zweite Versicherungs-Ausgabe aktiviert wird.
+
+Providerregel für den Pilot:
+- Tarifcheck = aktiver Zielprovider für `Pferdehaftpflicht vergleichen`;
+- CHECK24 = vorbereitet/registriert für spätere geeignete Bereiche und andere Projekte;
+- keine doppelte Versicherungs-Ausgabe auf der Pilot-Landingpage;
+- keine erfundene CHECK24-Schnittstelle oder Bannerquelle.
 
 Exakte interne Werbemittel-/Rechner-/Bannerquellen dieser Provider sind noch nicht technisch gebunden. Kein Endpunkt, Feed oder Importweg darf geraten werden.
 
