@@ -1,47 +1,46 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-09-26
-STATUS: V1.8.3 HOBBY-DEPOT-PILOT GEBAUT / LOKAL PASS / UPDATE BEREIT
+STAND: 2026-09-28
+STATUS: V1.8.4 HOBBY-DEPOT-PILOT GEBAUT / 225-TEST-PASS / LIVE-TEST ALS NÄCHSTES
 
 ## Aktueller Pilotstand
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.3 Hobby Depot Pilot`
+`Affiliate-Portal Kategorie-Workflow V1.8.4 Hobby Depot Pilot`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.3_HOBBY_DEPOT_PILOT.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.4_HOBBY_DEPOT_PILOT.zip`
 
 Installer SHA-256:
-`eb442048c0853ccbf19111ce028bd0c44faf57631c22cbae37db3102c3905960`
+`547ed0fd488975ecfa10b6a66fd10909b9f7760b1204337a78b6300d460660f7`
 
-## Änderung gegenüber V1.8.2
+## Neu in V1.8.4
 
-- eigener Hauptmenüpunkt `Kategorien` im WordPress-Backend;
-- nicht mehr unter `Werkzeuge`;
-- interne Rückleitungen auf den neuen Hauptmenüpunkt angepasst;
-- bestehende DataForSEO-/Grundeinstellungen bleiben erhalten.
-
-## Datenübernahme
-
-V1.8.3 verwendet unverändert dieselben WordPress-Optionsschlüssel:
-- `apkw_dataforseo_login`
-- `apkw_dataforseo_password`
-- `apkw_default_location_name`
-- `apkw_default_language_code`
-
-Daher werden bei einem normalen Update von V1.8.2 auf V1.8.3 bereits eingetragene Zugangsdaten, Standort und Sprache direkt weiterverwendet.
-
-Keine Zugangsdaten werden in das ZIP kopiert oder exportiert.
+- Unterpunkt `Kategorien -> Protokoll`;
+- verständliche PASS/BLOCKED-Historie;
+- DataForSEO-Einzelkosten im Log;
+- Konzept-, Research-, Dry-Run-, Deployment-, Readback- und Rollback-Zusammenfassungen;
+- JSON-Export des Protokolls;
+- bestätigtes Leeren;
+- Zugangsdaten/Auth-/Tokenwerte werden nicht protokolliert.
 
 ## Tests
 
-- 223/223 PASS
-- PHP-Lint 16/16 PASS
-- kein Pferde-/Pferde-Atelier-Bezug im Produktions-PHP
+- vollständige Regression 225/225 PASS;
+- Fresh-Unpack 225/225 PASS;
+- PHP-Lint 17/17 PASS;
+- Produktionsscan Pferde-Atelier-Bindung: 0 Treffer.
+
+## Testinput
+
+`HOBBY_DEPOT_TESTLABOR_KATEGORIE_KONZEPT_20260928.json`
+
+Nur für kontrollierten Wegwerf-Test; keine produktive Struktur.
 
 ## NEXT ACTION
 
-V1.8.3 über die bestehende V1.8.2-Installation aktualisieren. Danach prüfen:
-1. Hauptmenüpunkt `Kategorien` sichtbar;
-2. bestehende DataForSEO-Eingaben noch vorhanden;
-3. Verbindungstest PASS.
+V1.8.4 über die bestehende Installation aktualisieren. Danach:
+1. `Kategorien -> Protokoll` öffnen;
+2. DataForSEO-Verbindungstest ausführen;
+3. Testlabor-Konzept kostenlos vorprüfen;
+4. erst danach Paid-Calls bestätigen.
