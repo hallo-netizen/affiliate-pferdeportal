@@ -14,26 +14,27 @@ Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
 Aktueller Hobby-Depot-Pilot:
-**V1.8.7 Simple Review**
+**V1.8.8 Persistent Guided Flow**
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
 
 SHA-256:
-`b11313949ef46bf690e48b103cf930c9dad2dd761144d5e9f04a5e41b4bfabe4`
+`eae83b6b472de2e78993d271b0da9d57021ba7134d51b7150f0b99c63bd4a85b`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
 
 SHA-256:
-`97f2ec77bd17f26b0b62d85e67746824bd1435563a9514e238c443dac1a90f70`
+`4bb9929946941f5be75574ebb869408a3154255f56d2f8e28cc1ecdb5d4b9c62`
 
-V1.8.7:
-- technische Review-Hashes werden automatisch berechnet;
-- Freigabe-Zusammenfassung wird automatisch erzeugt;
-- Nutzer bestätigt nur noch sichtbar die richtige Datei/Struktur;
-- serverseitige Signatur- und Validierungsgates bleiben bestehen;
-- 227/227 PASS.
+V1.8.8:
+- persistenter Arbeitsstand;
+- kein erneutes Hochladen identischer Zwischenpakete im Normalpfad;
+- DataForSEO-PASS persistent bis zu einer echten Einstellungsänderung;
+- genau eine sichtbare NEXT ACTION;
+- technische Vollfunktion als Notfallansicht erhalten;
+- 229/229 PASS.
 
 Status:
 Siehe ausschließlich
