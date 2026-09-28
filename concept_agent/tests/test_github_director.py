@@ -411,5 +411,70 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
             with self.assertRaisesRegex(github_director.Blocked, "DURABLE_CHECKPOINT_MISSING"):
                 github_director.resume(binding, cp)
 
+    def test_06_restart_inside_article_and_repair_uses_only_saved_checkpoint(self):
+        binding = self._binding(1)
+        checkpoint = self._checkpoint(binding)
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cp = root / "checkpoint.json"
+            progress_guard.write(cp, checkpoint)
+            current = github_director.resume(binding, cp)
+
+            # Persist a draft, then simulate a completely fresh process before LT.
+            state, decision, ticket = current["checkpoint"], current["decision"], current["ticket"]
+            slot = binding["items"][0]["identity"]["plan_slot"]
+            draft = root / f"00_{slot}.md"
+            draft.write_text("Artikel vor Unterbrechung", encoding="utf-8")
+            predicted = progress_guard.record_draft(binding, state, decision, 0, draft)
+            capsule = self._next_capsule(binding, predicted)
+            current = github_director.persist_and_continue(
+                binding, state, decision, ticket,
+                self._artifact_receipt(ticket, draft, workspace_capsule=capsule),
+                root, cp,
+            )
+            restarted = github_director.resume(binding, cp, capsule)
+            self.assertEqual(restarted["checkpoint"], current["checkpoint"])
+            self.assertEqual(restarted["ticket"], current["ticket"])
+            self.assertEqual(restarted["ticket"]["allowed_action"]["checker"], "LT68")
+
+            # Move to PPM and force repair.
+            state, decision, ticket = restarted["checkpoint"], restarted["decision"], restarted["ticket"]
+            draft_sha = hashlib.sha256(draft.read_bytes()).hexdigest()
+            lt = {"status": "PASS", "content_sha256": draft_sha}
+            predicted = progress_guard.record_check(binding, state, decision, 0, "LT68", lt, draft)
+            capsule = self._next_capsule(binding, predicted)
+            current = github_director.persist_and_continue(
+                binding, state, decision, ticket,
+                self._artifact_receipt(ticket, draft, result=lt, workspace_capsule=capsule),
+                root, cp,
+            )
+            state, decision, ticket = current["checkpoint"], current["decision"], current["ticket"]
+            ppm = {"status": "REPAIR_REQUIRED", "content_sha256": draft_sha, "findings": ["test"]}
+            predicted = progress_guard.record_check(binding, state, decision, 0, "PPM679", ppm, draft)
+            repair_capsule = self._next_capsule(binding, predicted)
+            current = github_director.persist_and_continue(
+                binding, state, decision, ticket,
+                self._artifact_receipt(ticket, draft, result=ppm, workspace_capsule=repair_capsule),
+                root, cp,
+            )
+
+            # Fresh process in REPAIR_REQUIRED must stay on the same article and repair.
+            restarted = github_director.resume(binding, cp, repair_capsule)
+            self.assertEqual(restarted["checkpoint"], current["checkpoint"])
+            self.assertEqual(restarted["ticket"], current["ticket"])
+            self.assertEqual(restarted["ticket"]["allowed_action"]["action"], "REPAIR_DRAFT")
+            self.assertEqual(restarted["ticket"]["allowed_action"]["item_index"], 0)
+
+    def test_07_stop_is_the_only_terminal_exit(self):
+        binding = self._binding(1)
+        checkpoint = self._checkpoint(binding)
+        decision = universal_reentry_guard.build(binding, checkpoint)
+        ticket = github_director.issue(binding, checkpoint, decision)
+        self.assertFalse(ticket["terminal"])
+        self.assertIsNotNone(ticket["worker_role"])
+        with self.assertRaises(github_director.Blocked):
+            github_director._worker_role({"action": "SOMETHING_ELSE"})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
