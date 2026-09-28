@@ -128,6 +128,7 @@
   ],
   "publish_allowed": false,
   "execution_gate": {
+    "contract": "PFERDE_ATELIER_CODEX_CLOUD_ENTRANCE_GATE_ENVELOPE_V2",
     "enforced": true,
     "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
     "sequence": 107007,
@@ -140,12 +141,14 @@
     "content_quality_design_authority": "NONE",
     "worker_context_policy": "CAPSULE_NAVIGATION_REPO_BOUND_STEP",
     "repeat_or_backtrack_policy": "DENY_UNLESS_PREBOUND_NEXT_BINDING",
+    "api_dependency": "NONE",
+    "hard_worker_target": "CODEX_CLOUD",
+    "hard_worker_runtime_verified": true,
     "base_hardlock_required_status_check": "hardlock-base",
     "official_runtime_entry_ref": "control/output-quarantine/runtime_entry_gate.py",
     "visible_output_authority": "RELEASE_RECEIPT_ONLY",
     "unbound_output_policy": "QUARANTINE_INVALID_NEVER_SURFACE_AS_PROJECT_RESULT",
-    "domain_blind_output_guard": true,
-    "contract": "PFERDE_ATELIER_DETERMINISTIC_EXECUTION_GATE_ENVELOPE_V2"
+    "domain_blind_output_guard": true
   },
   "execution_gate_receipts": [
     {
