@@ -68,7 +68,15 @@ Weitere Provider dürfen technisch als Alternative/Fallback gebunden werden, ohn
 
 Providerintegration nutzt die vorhandene zentrale Creative-/Relevanz-/Veto-/Ausgabelogik der Affiliate-Zentrale. Keine zweite Bannerverteilung und kein separates Providerplugin.
 
-Tarifcheck und CHECK24 sind vom Nutzer als freigegebene Partner genannt. Exakte Import-/Werbemittelquellen werden erst nach realer Prüfung ihrer Partnerbereiche gebunden.
+Tarifcheck und CHECK24 sind vom Nutzer als freigegebene Partner genannt.
+
+Für den ersten Versicherungs-Pilot gilt:
+- Tarifcheck ist der aktive Zielprovider;
+- CHECK24 wird bereits als vorbereiteter Provider im Gesamtkonzept mitgeführt;
+- CHECK24 erhält auf der Pilotseite keine zweite Versicherungs-Ausgabe;
+- CHECK24 kann später für andere passende Bereiche oder Folgeprojekte aktiviert werden.
+
+Exakte Import-/Werbemittelquellen werden erst nach realer Prüfung ihrer Partnerbereiche gebunden.
 
 ## 7. Banner
 
