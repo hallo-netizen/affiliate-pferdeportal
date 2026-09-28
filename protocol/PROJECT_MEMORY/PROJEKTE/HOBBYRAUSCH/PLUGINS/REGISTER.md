@@ -14,28 +14,22 @@ Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
 Aktueller Hobby-Depot-Pilot:
-**V1.8.8 Persistent Guided Flow**
+**V1.8.9 Guided Resume**
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
 
 SHA-256:
-`eae83b6b472de2e78993d271b0da9d57021ba7134d51b7150f0b99c63bd4a85b`
+`c415df2c63cf3640f723a763ebe6bf527540d377e104d8ce48e7d427246d2c07`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
 
 SHA-256:
-`4bb9929946941f5be75574ebb869408a3154255f56d2f8e28cc1ecdb5d4b9c62`
-
-V1.8.8:
-- persistenter Arbeitsstand;
-- kein erneutes Hochladen identischer Zwischenpakete im Normalpfad;
-- DataForSEO-PASS persistent bis zu einer echten Einstellungsänderung;
-- genau eine sichtbare NEXT ACTION;
-- technische Vollfunktion als Notfallansicht erhalten;
-- 229/229 PASS.
+`ceea10f2e9b50f6349e5ea83d48cfed3fc78b360e0eeccff4292d38cbb11ad5a`
 
 Status:
+lokal positiv/negativ 235/235 PASS; Live-Abnahme noch offen.
+
 Siehe ausschließlich
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`.
