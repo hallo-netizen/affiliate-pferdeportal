@@ -3,7 +3,7 @@
   "workflow": "PFERDE_ATELIER_KONZEPT_5_CONCEPT_AGENT",
   "status": "PASS",
   "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
-  "current_authority_branch": "main",
+  "current_authority_branch": "konzept7/hard-worker-completion-20260928",
   "entry_policy": "READ_CURRENT_AUTHORITY_FIRST",
   "freshness_rule": "READ_CURRENT_AUTHORITY_AND_ONLY_CHECK_DELTA",
   "alternate_route_allowed": false,
