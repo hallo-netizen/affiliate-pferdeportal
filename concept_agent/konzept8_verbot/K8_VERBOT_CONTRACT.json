@@ -1,0 +1,19 @@
+{
+  "contract": "K8_VERBOT_CONTRACT_V1",
+  "concept": "K8_VERBOT",
+  "source_branch": "konzept7/working-copy-20260927",
+  "k7_github_frozen_branch": "archive/k7-github-frozen-20260928",
+  "goal": "KEEP_K7_WORKFLOW_UNCHANGED_MAKE_ALL_NONBOUND_CHAT_COMMANDS_STATELESS_AND_INEFFECTIVE",
+  "single_gate_rule": "ONLY_EXACT_CURRENT_CHECKPOINT_ACTION_MAY_PASS",
+  "invalid_command_result": "BLOCKED_KEEP_EXACT_SAME_CHECKPOINT_AND_EXACT_SAME_ALLOWED_ACTION",
+  "missing_command_result": "BLOCKED_KEEP_EXACT_SAME_CHECKPOINT_AND_EXACT_SAME_ALLOWED_ACTION",
+  "stale_command_result": "BLOCKED_KEEP_EXACT_SAME_CHECKPOINT_AND_EXACT_SAME_ALLOWED_ACTION",
+  "state_change_authority": "EXISTING_PROGRESS_GUARD_ONLY",
+  "workflow_change_allowed": false,
+  "quality_change_allowed": false,
+  "languagetool_6_8_changed": false,
+  "ppm_6_7_9_changed": false,
+  "pserc_changed": false,
+  "endstempel_changed": false,
+  "publish_allowed": false
+}
