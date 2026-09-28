@@ -134,30 +134,12 @@ jobs:
               raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
           PY
 
-      - name: Build or resume exact K7 production binding
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 concept_agent/production_bridge.py bind \
-            concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
-            CONCEPT_AGENT_INTAKE.json \
-            concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json \
-            CONCEPT_AGENT_PRODUCTION_BINDING.json \
-            CONCEPT_AGENT_PROGRESS_CHECKPOINT.json
-          python3 concept_agent/github_director.py resume \
-            CONCEPT_AGENT_PRODUCTION_BINDING.json \
-            CONCEPT_AGENT_PROGRESS_CHECKPOINT.json \
-            CONCEPT_AGENT_GITHUB_DIRECTOR_HANDOFF.json
-
-      - name: Upload current intake and K7 director handoff
+      - name: Upload current intake handoff
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pferdeatelier-start-${{ inputs.source_run_id }}
           path: |
             CONCEPT_AGENT_INTAKE_RECEIPT.json
             CONCEPT_AGENT_INTAKE.json
-            CONCEPT_AGENT_PRODUCTION_BINDING.json
-            CONCEPT_AGENT_PROGRESS_CHECKPOINT.json
-            CONCEPT_AGENT_GITHUB_DIRECTOR_HANDOFF.json
           if-no-files-found: error
           retention-days: 30
