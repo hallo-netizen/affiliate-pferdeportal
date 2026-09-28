@@ -157,8 +157,10 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
             "checkpoint_sha256": ticket["checkpoint_sha256"],
             "allowed_action_sha256": ticket["allowed_action_sha256"],
             "worker_role": ticket["worker_role"],
+            "reasoning_effort": ticket["reasoning_effort"],
             "publish_allowed": False,
             "workflow_change_requested": False,
+            "quality_gate_change_requested": False,
             "next_action": None,
         }
         value.update(extra)
@@ -187,24 +189,25 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
     def test_01_goal_contract_positive_and_negative(self):
         goal = json.loads((REPO / "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json").read_text())
         github_director.verify_goal_contract(goal)
-        for key, value in (
-            ("goal", "OTHER"),
-            ("default_reasoning", "low"),
-            ("downgrade_for_cost_or_speed_without_gate_parity", "ALLOWED"),
-            ("success", "OTHER"),
-            ("hard_execution_principle", "OTHER"),
-            ("immutable_entrance_layer", "OTHER"),
-        ):
+        self.assertEqual(set(goal), {
+            "contract", "startmaster", "goal", "default_reasoning", "applies_to",
+            "escalate_above_medium_only_if", "never_trade_for_medium",
+            "downgrade_for_cost_or_speed_without_gate_parity", "measurement",
+            "success", "hard_execution_principle", "immutable_entrance_layer",
+        })
+        for key in goal:
             broken = copy.deepcopy(goal)
-            broken[key] = value
+            value = broken[key]
+            if isinstance(value, list):
+                broken[key] = value[:-1]
+            elif isinstance(value, str):
+                broken[key] = value + "_BROKEN"
+            else:
+                broken[key] = None
             with self.assertRaises(github_director.Blocked, msg=key):
                 github_director.verify_goal_contract(broken)
         broken = copy.deepcopy(goal)
-        broken["never_trade_for_medium"] = broken["never_trade_for_medium"][:-1]
-        with self.assertRaises(github_director.Blocked):
-            github_director.verify_goal_contract(broken)
-        broken = copy.deepcopy(goal)
-        broken["escalate_above_medium_only_if"] = []
+        broken["unexpected_clause"] = True
         with self.assertRaises(github_director.Blocked):
             github_director.verify_goal_contract(broken)
 
@@ -364,6 +367,8 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
             for key, value in (
                 ("publish_allowed", True),
                 ("workflow_change_requested", True),
+                ("quality_gate_change_requested", True),
+                ("reasoning_effort", "low"),
                 ("next_action", {"action": "RUN_PSERC"}),
                 ("allowed_action_sha256", "0" * 64),
                 ("checkpoint_sha256", "0" * 64),
@@ -374,6 +379,11 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
                 row[key] = value
                 with self.assertRaises(github_director.Blocked, msg=key):
                     github_director.accept(binding, checkpoint, decision, ticket, row, root)
+
+            extra = copy.deepcopy(base)
+            extra["shell_command"] = "anything"
+            with self.assertRaisesRegex(github_director.Blocked, "EXTRA_FIELDS_FORBIDDEN"):
+                github_director.accept(binding, checkpoint, decision, ticket, extra, root)
 
             bad_ticket = copy.deepcopy(ticket)
             bad_ticket["allowed_action"] = {"action": "RUN_PSERC", "item_count": 1}
@@ -500,6 +510,112 @@ class GithubDirectorAcceptanceTests(unittest.TestCase):
             progress_guard.write(sidecar, wrapper)
             with self.assertRaisesRegex(github_director.Blocked, "CAPSULE_BINDING_HASH_MISMATCH"):
                 github_director.resume(binding, cp)
+
+
+    def test_066_full16_restart_repair_matrix(self):
+        binding = self._binding(16)
+        checkpoint = self._checkpoint(binding)
+        repair_indices = {1, 5, 9, 13, 15}
+        repaired = set()
+        steps = 0
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cp = root / "checkpoint.json"
+            progress_guard.write(cp, checkpoint)
+            current = github_director.resume(binding, cp)
+
+            while current["ticket"]["allowed_action"]["action"] != "STOP":
+                # Any interruption before the current worker result must reissue exactly the same ticket.
+                before = github_director.resume(binding, cp)
+                self.assertEqual(before["ticket"], current["ticket"])
+                self.assertEqual(before["checkpoint"], current["checkpoint"])
+
+                state, decision, ticket = current["checkpoint"], current["decision"], current["ticket"]
+                action = ticket["allowed_action"]
+                name = action["action"]
+
+                if name == "WRITE_DRAFT":
+                    index = action["item_index"]
+                    slot = binding["items"][index]["identity"]["plan_slot"]
+                    draft = root / f"{index:02d}_{slot}.md"
+                    draft.write_text(f"Artikel {index} v1", encoding="utf-8")
+                    predicted = progress_guard.record_draft(binding, state, decision, index, draft)
+                    receipt = self._artifact_receipt(
+                        ticket, draft, workspace_capsule=self._next_capsule(binding, predicted)
+                    )
+                elif name == "RUN_CHECKER":
+                    index = action["item_index"]
+                    slot = binding["items"][index]["identity"]["plan_slot"]
+                    draft = root / f"{index:02d}_{slot}.md"
+                    digest = hashlib.sha256(draft.read_bytes()).hexdigest()
+                    if action["checker"] == "PPM679" and index in repair_indices and index not in repaired:
+                        result = {"status": "REPAIR_REQUIRED", "content_sha256": digest, "findings": ["matrix"]}
+                    else:
+                        result = {"status": "PASS", "content_sha256": digest}
+                    predicted = progress_guard.record_check(
+                        binding, state, decision, index, action["checker"], result, draft
+                    )
+                    receipt = self._artifact_receipt(
+                        ticket, draft, result=result, workspace_capsule=self._next_capsule(binding, predicted)
+                    )
+                elif name == "REPAIR_DRAFT":
+                    index = action["item_index"]
+                    slot = binding["items"][index]["identity"]["plan_slot"]
+                    draft = root / f"{index:02d}_{slot}.md"
+                    draft.write_text(f"Artikel {index} v2", encoding="utf-8")
+                    repaired.add(index)
+                    predicted = progress_guard.replace_draft(binding, state, decision, index, draft)
+                    receipt = self._artifact_receipt(
+                        ticket, draft, workspace_capsule=self._next_capsule(binding, predicted)
+                    )
+                elif name == "RUN_PSERC":
+                    result = {
+                        "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+                        "stage": "PSERC", "status": "PASS",
+                        "batch_sha256": state["batch_sha256"],
+                        "source_checkpoint_sha256": state["checkpoint_sha256"],
+                        "evidence_sha256": "5" * 64,
+                        "pserc_package_sha256": "6" * 64,
+                        "publish_allowed": False,
+                    }
+                    receipt = self._receipt(ticket, result=result)
+                elif name == "RUN_ENDSTEMPEL":
+                    result = {
+                        "contract": progress_guard.BATCH_STAGE_RESULT_CONTRACT,
+                        "stage": "ENDSTEMPEL", "status": "PASS",
+                        "batch_sha256": state["batch_sha256"],
+                        "source_checkpoint_sha256": state["checkpoint_sha256"],
+                        "evidence_sha256": "7" * 64,
+                        "final_file_sha256": "8" * 64,
+                        "publish_allowed": False,
+                    }
+                    receipt = self._receipt(ticket, result=result)
+                else:
+                    self.fail("unexpected action: " + name)
+
+                current = github_director.persist_and_continue(
+                    binding, state, decision, ticket, receipt, root, cp
+                )
+                steps += 1
+
+                # Any interruption after the accepted transition must resume exactly from the new saved point.
+                after = github_director.resume(binding, cp)
+                self.assertEqual(after["ticket"], current["ticket"])
+                self.assertEqual(after["checkpoint"], current["checkpoint"])
+
+                # The old ticket/result can never be accepted twice.
+                with self.assertRaisesRegex(github_director.Blocked, "STALE_CHECKPOINT_REPLAY_BLOCKED"):
+                    github_director.persist_and_continue(
+                        binding, state, decision, ticket, receipt, root, cp
+                    )
+
+            self.assertEqual(steps, 65)
+            self.assertEqual(repaired, repair_indices)
+            self.assertEqual(len(current["checkpoint"]["completed_items"]), 16)
+            self.assertEqual(current["status"], "STOP")
+            self.assertEqual(current["ticket"]["allowed_action"]["action"], "STOP")
+            self.assertTrue(current["ticket"]["terminal"])
 
 
     def test_07_stop_is_the_only_terminal_exit(self):
