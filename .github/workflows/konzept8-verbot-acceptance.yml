@@ -1,0 +1,65 @@
+name: Konzept 8 Verbot Acceptance
+
+on:
+  push:
+    branches:
+      - 'konzept8-verbot/working-copy-20260928'
+    paths:
+      - 'concept_agent/konzept8_verbot/**'
+      - '.github/workflows/konzept8-verbot-acceptance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact K8 commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Prove K8 is isolated from baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin konzept8-verbot/baseline-20260928
+          changed="$(git diff --name-only origin/konzept8-verbot/baseline-20260928...HEAD)"
+          printf '%s\n' "$changed"
+          bad="$(printf '%s\n' "$changed" | grep -vE '^(concept_agent/konzept8_verbot/|\.github/workflows/konzept8-verbot-acceptance\.yml$)' || true)"
+          if [ -n "$bad" ]; then
+            echo "K8_BASELINE_DRIFT_OUTSIDE_ISOLATED_OFFICE"
+            printf '%s\n' "$bad"
+            exit 2
+          fi
+          test ! -e concept_agent/github_director.py
+          echo K8_ISOLATION_PASS
+
+      - name: Compile K8 gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile concept_agent/konzept8_verbot/k8_command_gate.py
+
+      - name: Run K8 positive negative matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent.konzept8_verbot.test_k8_command_gate
+
+      - name: Re-run unchanged K7 optimization suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent.konzept7.test_k7_optimizations
+
+      - name: Re-run existing production guard suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v concept_agent/tests/test_current_production_guards.py
