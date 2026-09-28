@@ -42,7 +42,7 @@ class K8SectionBalanceTest(unittest.TestCase):
             k8_section_balance.validate(html)
 
     def test_table_padding_cannot_rescue_short_main_text(self):
-        html=article([110,110],table_words=350,conclusion_words=80,further_words=20,intro_words=60)
+        html=article([110,110],table_words=370,conclusion_words=80,further_words=20,intro_words=60)
         with self.assertRaisesRegex(k8_section_balance.SectionBalanceError,"K8_MAIN_TEXT_RATIO_TOO_LOW"):
             k8_section_balance.validate(html)
 
