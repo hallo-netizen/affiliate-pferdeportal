@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_BINDING_PENDING",
+  "status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_TESTED_HOST_WORKER_BINDING_BLOCKED",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -120,7 +120,10 @@
     "K7_RECOVERY_16_RESTART_MATRIX_PASS_16_ARTICLES_5_REPAIRS_60_RESTARTS",
     "PR460_K7_WORKING_BRANCH_RECOVERY_MERGED_04EC51A56C9C6037683C770015871D35CB757CAC",
     "HOST_CAPABILITY_REVOCATION_NOT_AVAILABLE_BY_REPOSITORY_CONTRACT",
-    "K7_CAPSULE_PRISON_TEST_AUTHORIZED_ONLY_REAL_EXECUTION_PENDING_20260928"
+    "K7_CAPSULE_PRISON_TEST_AUTHORIZED_ONLY_REAL_EXECUTION_PENDING_20260928",
+    "PR469_GITHUB_DIRECTOR_MERGED_MAIN_2343152EAF300771F3BEA65E6269283CDCE2D68D",
+    "PR471_DIRECTOR_HARDENING_MERGED_MAIN_E51FBEF79E79D824A1E38445F0B3AFCB904273FA",
+    "K7_GITHUB_DIRECTOR_REAL_TEST_RUN_36420006811_11_OF_11_PASS"
   ],
   "next_allowed_step": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
   "queued_after_current_step": [
@@ -226,12 +229,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_BINDING_PENDING",
+  "current_work_status": "K7_FULL16_COMPLETE_RECOVERY_PROVEN_GITHUB_DIRECTOR_TESTED_HOST_WORKER_BINDING_BLOCKED",
   "current_execution_blocker": {
-    "code": "GITHUB_DIRECTOR_NOT_YET_BOUND_TO_EXISTING_WORKERS",
+    "code": "BOUND_MODEL_WORKER_HOST_NOT_AVAILABLE_IN_CURRENT_GITHUB_START_PATH",
     "error_class": true,
     "classification": "CONTROL_ONLY",
-    "detail": "The proven K7 workflow, quality gates, article steps and recovery stay unchanged. The only open work is to replace free-chat orchestration with a domain-blind GitHub director that starts exactly the already-bound next worker action, accepts only a valid completion receipt, persists the resulting checkpoint, and continues until STOP.",
+    "detail": "The domain-blind GitHub director is implemented on main and its full positive/negative matrix is proven. The remaining blocker is outside the existing repository controller logic: the current text-start GitHub path can dispatch GitHub Actions and create the bound intake handoff, but it cannot itself instantiate a capability-restricted model worker. Without Codex/API or another approved host-level worker capability, WRITE_DRAFT/RESEARCH cannot be physically separated from free-chat execution. No fake hardlock is claimed.",
     "applies_to_concept_agent": true,
     "recovery_fix_resolved": true,
     "production_reactivation_authorized": false,
@@ -347,9 +350,9 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "IMPLEMENT_GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
-    "action": "Bind a small domain-blind GitHub director around the existing K7 workflow. The chat may only trigger START. The director may only read the exact durable checkpoint, start the one already-bound worker action, accept or reject its bound completion receipt, persist the resulting checkpoint, and repeat. PASS moves to the already-defined next action; REPAIR_REQUIRED returns to the already-defined same-article repair path; only terminal STOP ends the run.",
-    "scope": "OUTER_CONTROL_ONLY_EXISTING_WORKERS_UNCHANGED",
+    "goal": "PROVE_OR_BIND_APPROVED_HOST_LEVEL_MODEL_WORKER_CAPABILITY",
+    "action": "Keep the proven GitHub director and all existing K7 workers/gates unchanged. Identify and prove one host-level model-worker invocation that the director can start for exactly one bound ticket without giving the free chat routing authority. It must require neither Codex nor OpenAI API under the current production constraints. If no such host capability exists, remain fail-closed and do not reactivate production.",
+    "scope": "HOST_CAPABILITY_BINDING_ONLY_DIRECTOR_AND_EXISTING_WORKERS_UNCHANGED",
     "existing_workflow_steps_unchanged": true,
     "article_content_rules_changed": false,
     "quality_rules_changed": false,
@@ -543,6 +546,8 @@
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
   "current_execution_policy": {
     "control_model": "GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
+    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_MAIN",
+    "host_model_worker_binding_status": "BLOCKED_NOT_AVAILABLE_IN_CURRENT_GITHUB_START_PATH",
     "chat_role": "INITIAL_TRIGGER_ONLY",
     "chat_may_route": false,
     "chat_may_continue_production": false,
