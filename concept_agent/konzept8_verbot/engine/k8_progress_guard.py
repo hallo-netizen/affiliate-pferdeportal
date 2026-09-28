@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib, json, os, re, sys
 from pathlib import Path
+from . import k8_section_balance
 
 BINDING_CONTRACT = "CONCEPT_AGENT_CURRENT_PRODUCTION_BINDING_V1"
 CHECKPOINT_CONTRACT = "CONCEPT_AGENT_CURRENT_PROGRESS_V1"
@@ -322,6 +323,12 @@ def write(path: Path, value: dict) -> None:
     except OSError:
         pass
 
+def _validate_k8_text_balance(content: str) -> None:
+    try:
+        k8_section_balance.validate(content)
+    except k8_section_balance.SectionBalanceError as exc:
+        raise Blocked("K8_TEXT_BALANCE:" + str(exc)) from exc
+
 def attach_drafts(binding: dict, state: dict, draft_dir: Path) -> dict:
     verify_checkpoint(binding, state)
     raise Blocked("BATCH_DRAFT_ATTACH_FORBIDDEN")
@@ -338,6 +345,11 @@ def record_draft(binding: dict, state: dict, decision: dict, index: int, draft_p
     raw = draft_path.read_bytes()
     if not raw.strip():
         raise Blocked("DRAFT_EMPTY")
+    try:
+        content = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise Blocked("DRAFT_UTF8_REQUIRED") from exc
+    _validate_k8_text_balance(content)
     rows = state.get("drafts")
     if rows is None:
         rows = []
@@ -352,7 +364,7 @@ def record_draft(binding: dict, state: dict, decision: dict, index: int, draft_p
         "filename": draft_path.name,
         "draft_sha256": hashlib.sha256(raw).hexdigest(),
         "size_bytes": len(raw),
-        "content_utf8": raw.decode("utf-8"),
+        "content_utf8": content,
         "revision": 1,
         "lt68": "PENDING",
         "ppm679": "PENDING",
@@ -453,6 +465,7 @@ def replace_draft(binding: dict, state: dict, decision: dict, index: int, draft_
         content = raw.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise Blocked("REPAIR_DRAFT_UTF8_REQUIRED") from exc
+    _validate_k8_text_balance(content)
     target["draft_sha256"] = new_sha
     target["size_bytes"] = len(raw)
     target["content_utf8"] = content
