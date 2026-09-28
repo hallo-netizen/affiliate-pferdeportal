@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: HD-001 V1.8.8 PERSISTENT GUIDED FLOW BEREIT
+STATUS: HD-001 V1.8.9 LOKAL POSITIV/NEGATIV PASS / LIVE-PASS AUSSTEHEND
 
 ## Rolle
 
@@ -11,23 +11,22 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PLUGINS`.
 
 ## Aktueller belastbarer Stand
 
-V1.8.8 ersetzt den manuellen Datei-Pingpong im normalen Kategorie-Ablauf durch einen persistenten serverseitigen Arbeitsstand.
+V1.8.9 behebt den noch unnötig versteckten ersten Fortsetzungsschritt:
+- Fortsetzungsdatei bei leerem Workspace direkt sichtbar;
+- danach genau eine nächste Aktion;
+- keine erneuten Uploads interner Zwischenstände;
+- DataForSEO-PASS persistent;
+- ungültige vorhandene Review-Signaturen fail-closed.
 
-Neu:
-- DataForSEO-Verbindungs-PASS bleibt gespeichert, solange Credentials/Markt/Sprache unverändert sind;
-- Zwischenpakete werden serverseitig gespeichert und intern wiederverwendet;
-- normale Ansicht zeigt nur aktuellen Status und nächste Aktion;
-- neue externe Korrekturdatei muss nur einmal übernommen werden;
-- technische Alt-/Einzelwerkzeuge bleiben als Notfallansicht vorhanden.
-
-Keine Research-, Qualitäts-, Review-, Deployment-, Readback-, Drift- oder Rollback-Funktion entfernt.
-
-Tests:
-- 229/229 PASS;
-- Fresh-Unpack 229/229 PASS;
+Lokale Prüfung:
+- 235/235 PASS;
+- Fresh-Unpack 235/235 PASS;
 - Runtime PHP 17/17 PASS;
-- Runtime-Parität 22/22 PASS.
+- Runtime-Parität 22/22 PASS;
+- gezielte positive und negative Workspace-/Review-/Paid-Call-Tests PASS.
+
+Keine Funktions-, Qualitäts-, Research-, Deployment-, Readback-, Drift- oder Rollback-Gates entfernt.
 
 ## NEXT ACTION
 
-V1.8.8 installieren und den bereits signierten Initial-Draft einmalig in den persistenten Arbeitsstand übernehmen. Danach Global-Coverage direkt aus dem gespeicherten Stand starten.
+V1.8.9 installieren und den bereits signierten Initial-Draft einmal im direkt sichtbaren Fortsetzungsfeld laden. Erwartung: direkte Weiterleitung zu Global-Coverage. Vor diesem Live-PASS keine Plugin-Abnahme.
