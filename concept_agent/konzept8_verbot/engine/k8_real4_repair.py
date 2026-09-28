@@ -2,7 +2,7 @@
 from __future__ import annotations
 import hashlib,re
 
-class K7Real4RepairError(RuntimeError): pass
+class K8Real4RepairError(RuntimeError): pass
 
 STOP=set("der die das den dem des ein eine einer eines einem einen und oder aber ist sind war waren wird werden wurde wurden mit ohne für von im in am an auf aus zu zum zur als bei durch sich es dass diese dieser dieses diesem diesen sowie auch noch nur nicht".split())
 
@@ -71,7 +71,7 @@ def _refs(fact_pack:dict)->dict[str,str]:
     for row in fact_pack.get("claims") or []:
         if isinstance(row,dict) and row.get("fact_id"):
             out[str(row["fact_id"])]=str(row.get("statement") or "")+" "+str(row.get("evidence_text") or "")
-    if not out: raise K7Real4RepairError("FACT_PACK_EMPTY")
+    if not out: raise K8Real4RepairError("FACT_PACK_EMPTY")
     return out
 
 def _replace_headers(table:str,index:int)->str:
@@ -108,7 +108,7 @@ def _repair_non_table_units(html:str,fact_pack:dict)->tuple[str,int]:
         if len(lexical_tokens(m.group(4)) & lexical_tokens(reference))>=2:
             return m.group(0)
         if not ids or ids[0] not in ANCHOR_SEEDS:
-            raise K7Real4RepairError("NO_LEXICAL_REPAIR_SEED:"+str(ids))
+            raise K8Real4RepairError("NO_LEXICAL_REPAIR_SEED:"+str(ids))
         n=counters.get(ids[0],0); seeds=ANCHOR_SEEDS[ids[0]]; a,b=seeds[n%len(seeds)]; counters[ids[0]]=n+1
         endings=[
             f" Dabei bleiben {a} und {b} die gebundenen Bezugspunkte.",
@@ -126,15 +126,15 @@ def _repair_non_table_units(html:str,fact_pack:dict)->tuple[str,int]:
     return (outside.replace(placeholder,table,1) if table else outside),changes
 
 def repair(article_html:str,item_index:int,fact_pack:dict)->tuple[str,dict]:
-    if item_index not in TABLE_CELLS: raise K7Real4RepairError("ITEM_UNSUPPORTED")
+    if item_index not in TABLE_CELLS: raise K8Real4RepairError("ITEM_UNSUPPORTED")
     before=article_html
     m=re.search(r"(?is)<table\b[^>]*>.*?</table>",article_html)
-    if not m: raise K7Real4RepairError("TABLE_MISSING")
+    if not m: raise K8Real4RepairError("TABLE_MISSING")
     table=_replace_headers(m.group(0),item_index)
     table=_replace_cells(table,item_index)
     article_html=article_html[:m.start()]+table+article_html[m.end():]
     article_html,non_table_changes=_repair_non_table_units(article_html,fact_pack)
-    if article_html==before: raise K7Real4RepairError("REPAIR_UNCHANGED")
+    if article_html==before: raise K8Real4RepairError("REPAIR_UNCHANGED")
     return article_html,{
       "status":"PASS",
       "repair_kind":"BUNDLED_PPM_LEXICAL_AND_TABLE_VALUE",
