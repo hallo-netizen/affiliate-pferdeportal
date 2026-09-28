@@ -17,6 +17,7 @@ if str(CONCEPT_AGENT) not in sys.path:
 import progress_guard  # type: ignore
 import universal_reentry_guard  # type: ignore
 from concept_agent.konzept8_verbot import k8_command_gate as gate  # type: ignore
+from concept_agent.konzept8_verbot import k8_entry  # type: ignore
 
 
 class K8VerbotGateTests(unittest.TestCase):
@@ -217,6 +218,36 @@ class K8VerbotGateTests(unittest.TestCase):
         self.assertEqual(blocked["status"], gate.BLOCKED)
         self.assertIs(blocked["retry_same_action"], False)
         self.assertEqual(blocked["allowed_action"]["action"], "STOP")
+
+
+    def test_k8_entry_calls_existing_resume_only_for_exact_command(self):
+        binding = self._binding()
+        checkpoint = self._checkpoint(binding)
+        exact = gate.proposal_for(checkpoint)
+        ok = k8_entry.attempt(binding, checkpoint, exact)
+        self.assertEqual(ok["status"], k8_entry.EXECUTE)
+        self.assertEqual(ok["allowed_action"], checkpoint["allowed_action"])
+        self.assertEqual(ok["execution"]["allowed_action"], checkpoint["allowed_action"])
+        self.assertEqual(ok["execution"]["checkpoint_sha256"], checkpoint["checkpoint_sha256"])
+        self.assertIs(ok["state_changed"], False)
+
+        wrong = gate.proposal_for(checkpoint)
+        wrong["command"] = {"action": "RUN_PSERC", "item_count": 2}
+        blocked = k8_entry.attempt(binding, checkpoint, wrong)
+        self.assertEqual(blocked["status"], gate.BLOCKED)
+        self.assertIsNone(blocked["execution"])
+        self.assertEqual(blocked["checkpoint_sha256"], checkpoint["checkpoint_sha256"])
+        self.assertEqual(blocked["allowed_action"], checkpoint["allowed_action"])
+        self.assertIs(blocked["continuation_required"], True)
+
+    def test_k8_entry_missing_command_keeps_same_action_open(self):
+        binding = self._binding()
+        checkpoint = self._checkpoint(binding)
+        blocked = k8_entry.attempt(binding, checkpoint, None)
+        self.assertEqual(blocked["status"], gate.BLOCKED)
+        self.assertIsNone(blocked["execution"])
+        self.assertEqual(blocked["allowed_action"], checkpoint["allowed_action"])
+        self.assertIs(blocked["continuation_required"], True)
 
 
 if __name__ == "__main__":
