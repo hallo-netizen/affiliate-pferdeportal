@@ -14,27 +14,27 @@ Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
 Aktueller Hobby-Depot-Pilot:
-**V1.8.5 Simple**
+**V1.8.6 Simple Rootfix**
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.5_HOBBY_DEPOT_SIMPLE.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
 
 SHA-256:
-`332e50db94771b808aac067e2f198ebc32e9141012566c1da785f3ada294282e`
+`2854f41f060a4f13abc2721ae76c74f8cf8689e4e7224592060b24b79929ab15`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.5_HOBBY_DEPOT_SIMPLE.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
 
 SHA-256:
-`fa8653a76884ff16c6dc12b1b90c0fd0c5d1fb12a52970361c14cc780294f261`
+`a73e28307fde3ad42a4a18a79bd6ff627065494bf8f4921b92065e5aa048ddc9`
 
 Rolle:
 Konzept → DataForSEO → SEO-/Intent-/Kannibalisierungsprüfung → Content-/Magazin-/HivePress-Struktur → kontrolliertes WordPress-Deployment.
 
-V1.8.5:
-- reduzierte Standardoberfläche;
-- Expertenpfad vollständig erhalten;
-- schlankes Runtime-Installerpaket;
+V1.8.6:
+- Rootfix des live gefundenen Konzeptstart-Freigabefehlers;
+- reduzierte UI bleibt;
+- spätere Human-Review-Gates bleiben;
 - 227/227 PASS.
 
 Status:
