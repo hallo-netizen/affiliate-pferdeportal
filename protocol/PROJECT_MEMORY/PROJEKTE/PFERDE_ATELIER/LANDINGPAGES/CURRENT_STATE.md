@@ -2,7 +2,7 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STATUS: PILOT_DEFINIERT_TECHNISCHE_UMSETZUNG_NOCH_NICHT_FREIGEGEBEN
+STATUS: IMPLEMENTATION_READY_WAITING_PERFORMANCE_CLOSEOUT
 
 ## Belastbarer Stand
 
@@ -76,6 +76,14 @@ Gleiches gilt für DESIGN: die optische Kachel-Erweiterung wird nur im zuständi
 
 `PLUGIN_IMPLEMENTIERUNGSPLAN.md`
 
+## Aktuellster Performance-Abgleich 2026-09-28
+
+- Template Kit 1.50.576 ist im realen Frontend aktiv belegt.
+- Der erwartete Wegfall der sieben Menüabfragen ist im aktuellen Real-Server-Lauf noch nicht als PASS belegt; die Queryfamilie ist weiterhin sichtbar.
+- Affiliate-Zentrale bleibt auf Kandidat 6.72.166 mit `release_allowed=false`.
+- Deren autorisierte NEXT ACTION bleibt `RUN_BOUND_RELEASE_GATES`.
+- Bis beide Performance-Stränge ihren aktuellen gebundenen Schritt abgeschlossen haben: kein Landingpage-/Provider-Source-Write.
+
 ## NEXT ACTION
 
-Den Pilot `Pferdehaftpflicht vergleichen` technisch erst dann umsetzen, wenn die zuständigen AFFILIATE- und DESIGN-Current-Autoritäten die jeweilige Änderung freigeben; dabei ausschließlich diese eine Landingpage/Kachel testen und keinerlei weitere Kategorien oder Landingpages mitändern.
+Frisch auf Performance-Closeout prüfen. Sobald AFFILIATE und DESIGN ihre gebundenen Performance-Schritte freigeben, exakt den vorbereiteten Ein-Seiten-Pilot aus `PLUGIN_IMPLEMENTIERUNGSPLAN.md` umsetzen; keine zweite Landingpage, keine Kategorieänderung und keine globale Provider-/Rechnerarbeit.
