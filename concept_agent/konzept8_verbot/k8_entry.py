@@ -13,7 +13,9 @@ if str(CONCEPT_AGENT) not in sys.path:
 
 import progress_guard  # type: ignore
 import universal_reentry_guard  # type: ignore
-from concept_agent.konzept8_verbot import k8_command_gate  # type: ignore
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+import k8_command_gate  # type: ignore
 
 EXECUTE = "K8_VERBOT_EXECUTE_EXACT_CURRENT_ACTION"
 
