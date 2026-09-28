@@ -1,52 +1,60 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.9 LIVE RESUME + GLOBAL-COVERAGE PASS / GLOBAL-ENTSCHEIDUNGSDRAFT BEREIT
+STATUS: V1.8.9 LIVE BIS SPEZIALISIERUNGS-TIEFENPRÜFUNG PASS / READ_ONLY_PREVIEW LOKAL PASS / LIVE-FINALPRÜFUNG OFFEN
 
-## Live-Nachweis V1.8.9
+## Live-Teststand
 
-Persistenter Fortsetzungsweg live erfolgreich:
-- signierter Initial-Draft wurde übernommen;
-- kein erneuter DataForSEO-Verbindungstest nötig;
-- Global-Coverage direkt aus dem gespeicherten Arbeitsstand gestartet;
-- Plugin-Version im Global-Paket: 1.8.9;
-- Global-Coverage-Preflight PASS;
-- DataForSEO Global-Coverage abgeschlossen;
-- Paket finalisiert;
-- 1 Paid-Call dieser Stufe;
-- Kosten 0.132 USD;
+Plugin:
+`Affiliate-Portal Kategorie-Workflow V1.8.9 Hobby Depot Guided Resume`
+
+Live erfolgreich:
+- persistenter Arbeitsstand;
+- DataForSEO-PASS persistent;
+- signierter Initial-Draft übernommen;
+- Global-Coverage gespeichert und wiederverwendet;
+- korrigierter Global-Stand freigegeben;
+- Detailresearch abgeschlossen;
+- Spezialisierungs-Tiefenprüfung abgeschlossen.
+
+Aktuelles Research-Paket:
+`kategorie-research-hobby-depot-testlabor-aktuell.json.gz`
+
+Research-Befund:
+- specialization_depth_research.completed = true;
+- 15/15 Content-Knoten exakt abgedeckt;
+- remaining_unattempted_estimate = 0;
+- 15 Paid-Calls in der Spezialisierungsstufe;
+- Spezialisierungskosten 0.225 USD;
 - kein WordPress-Write.
 
-Aktuelle Live-Dateien:
-- `kategorie-draft-hobby-depot-testlabor-aktuell.json`
-- `kategorie-global-hobby-depot-testlabor-aktuell.json`
+## READ_ONLY_PREVIEW vorbereitet
 
-Global-Paket Content-SHA:
-`3d4b83f78c64d712ed9977b4ecc5b2686b24219f56493c288a7f1198982dac07`
+Datei:
+`kategorie-read-only-preview-hobby-depot-testlabor-20260928.json`
 
-Source-Draft-Bindung:
-`643480411e53fea8326ba6da64a6d03347db3eba5f6cbd7724c45e9e1198117b`
+SHA-256:
+`93c72578bfaed4c4600e5b375535619c8a8b2bd55b28f5e5b24cdbac2b64fd00`
 
-## Fachprüfung Global-Coverage
+Lokale Prüfung gegen exakt V1.8.9:
+- Kategorie-Schema PASS;
+- Research-Bindung PASS;
+- Research-Evidenz PASS;
+- Comparator PASS_READ_ONLY_PREVIEW;
+- 0 blockierende Evidenzfehler.
 
-Die 1000 gelieferten Global-Treffer sind stark von saisonalem Winter-/Event-Rauschen geprägt. Das ist sicher, weil automatische Architekturmutation deaktiviert ist und jeder relevante Review-Core vor Detailresearch explizit aufgelöst werden muss.
+Nicht blockierende Warnungen:
+- 182 Cross-Cluster-Overlap-Review-Signale aus bewusst überlappenden Dummy-Seeds;
+- 6 Sparse-Longtail-Review-Signale.
 
-Für den technischen Test wurden die 27 vom Plugin ausgewählten Review-Cores explizit entschieden:
-- `joggen im winter` → ARTICLE_ONLY / Cluster `magazine-discovery`;
-- übrige ausgewählte saisonale/event-/produkt-/newsartige Treffer → OUT_OF_SCOPE für diesen technischen Testlauf.
+Negativtests:
+- eine erforderliche Cluster-Coverage-Entscheidung entfernt → BLOCKED;
+- Research-Bindung manipuliert → BLOCKED;
+- unrecherchiertes Primärkeyword eingesetzt → BLOCKED.
 
-Baum unverändert.
-Keine neue DataForSEO-Abfrage.
-Kein WordPress-Write.
-
-Bereit:
-`kategorie-draft-hobby-depot-testlabor-global-bereinigt.json`
-
-## Plugin-Abnahme
-
-V1.8.9 Persistent-Resume-Verhalten: LIVE PASS.
-Gesamtplugin noch NICHT vollständig abgenommen; Detailresearch, Finalisierung, Deployment-Dry-Run, Apply, Readback, Idempotenz und Rollback stehen noch aus.
+Wichtig:
+Die Live-HMAC-Signaturen des Research-Pakets sind an den geheimen WordPress-Salt gebunden und werden deshalb erst auf derselben Live-Installation kryptographisch verifiziert. Der deklarierte Inhalts-Hash des Research-Pakets stimmt lokal exakt.
 
 ## NEXT ACTION
 
-Bereinigten Global-Entscheidungsdraft einmalig als neuen extern korrigierten Arbeitsstand übernehmen und serverseitig Global-Sichtfreigabe bestätigen. Danach Detailresearch starten.
+READ_ONLY_PREVIEW einmal als neuen Arbeitsstand übernehmen. Erwartung: direkte finale Read-only-Gesamtprüfung PASS und sichtbare Aktion `Finale Struktur freigeben`. Erst nach diesem Live-PASS weiter zum Deployment-Dry-Run.
