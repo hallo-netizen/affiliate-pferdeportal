@@ -233,3 +233,15 @@ Die CURRENT-Autorität muss als einzige NEXT ACTION festlegen:
 **K7 auf dem frisch geprüften Head mit dem aktuellen 16er-Binding als vollständigen 4-Spur-End-to-End-Lauf ausführen: Start/Lock -> Research-Reuse -> 16 Artikel -> LT 6.8 -> PPM 6.7.9 -> PSERC -> ENDSTEMPEL -> finale WordPress-JSON; `publish_allowed=false`.**
 
 Dieses Protokoll ist nur Historie/Nachweis und darf diese NEXT ACTION nicht ersetzen.
+
+
+## Nachtrag 2026-09-28 — Recovery-Härtung
+
+- Scope ausschließlich Unterbrechung/Wiedereinstieg; keine Inhalts-, Qualitäts-, Gate- oder Architekturänderung.
+- Checkpoints werden atomar geschrieben; Wiedereinstieg erfolgt ausschließlich aus dem letzten gültigen Checkpoint mit Artikelbytes, Prüf-/Repair-Stand und NEXT ACTION.
+- GitHub Immutable Base Hardlock: Run 36398704548 SUCCESS; erneuter Ready-for-Review-Run 36400680461 SUCCESS.
+- Exakter PR-Head-Blob `progress_guard.py`: `aee4324f11fa8b0f4b865211359dcea0255c8d7f`; lokal ausgeführter Blob byteidentisch.
+- Zieltests: Abbruch vor Draft-Annahme PASS; Shutdown nach angenommener Draft + Byte-Recovery PASS; Abbruch während Repair + Recovery auf letzte akzeptierte Bytes PASS.
+- Positiv/Negativ: voller Normalweg mit Repair bis STOP PASS; unakzeptierte lokale Draft-Änderung vor Checker BLOCK; stale Reentry-Entscheidung nach neuem Checkpoint BLOCK.
+- 16er Restart-Matrix: PASS mit 16 Artikeln, 5 Repair-Rücksprüngen und 60 simulierten Neustarts/Chatwechseln bis `ENDSTEMPEL_PASS_STOP`; `publish_allowed=false`.
+- Kein Capability-Hardlock wird hier behauptet. Die vorhandene repositoryseitige Single-Door-Hard-Worker-Grenze ist an `CODEX_CLOUD` gebunden; sie wurde wegen der geltenden No-Codex/No-API-Regel nicht reaktiviert.

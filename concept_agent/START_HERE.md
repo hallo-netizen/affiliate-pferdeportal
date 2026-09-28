@@ -23,6 +23,8 @@ Bei einem realen Produktionslauf bestimmt ausschließlich die frisch gelesene Cu
 
 Nicht-terminale Übergaben sind kein Chat-Stop. Schreiben, LanguageTool 6.8, PPM 6.7.9, Same-Article-Repair, PSERC und ENDSTEMPEL laufen nur in der von Current gebundenen Reihenfolge. Ein echter Fehler blockiert fail-closed am ersten gebrochenen Punkt.
 
+**HARD RULE – Unterbrechung/Wiedereinstieg:** Nach jedem akzeptierten Produktionsresultat muss der vollständige aktuelle Produktionsstand dauerhaft gespeichert sein. Bei Unterbrechung zwischen Schritten, mitten in einem Artikel, mitten in einer Reparatur, Shutdown oder neuem Chat gilt ausschließlich der letzte gültige Checkpoint mit Artikelbytes, Prüf-/Reparaturstand und NEXT ACTION. Kein Zusammensuchen aus Chat-Historie, keine Rekonstruktion und kein alternativer Wiedereinstieg.
+
 ## Nicht als Current verwenden
 
 - `CONTROL_ENTRY_POINTER.json` selbst;
