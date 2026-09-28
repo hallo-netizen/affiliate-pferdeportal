@@ -3,28 +3,29 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: HD-001 V1.8.4 TESTBEREIT
+STATUS: HD-001 V1.8.5 SIMPLE UPDATE BEREIT
 
 ## Rolle
 
 Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PLUGINS`.
 
-## Aktueller Stand
+## Aktueller belastbarer Stand
 
-HD-001 liegt als V1.8.4 Hobby-Depot-Pilot vor.
+HD-001 liegt als V1.8.5 Hobby Depot Simple vor.
 
-Neu:
-- Hauptmenü `Kategorien`;
-- Unterpunkt `Protokoll`;
-- verständliche Laufhistorie und DataForSEO-Einzelkosten;
-- Dry-Run/Deployment/Readback/Rollback nachvollziehbar;
-- Credentials und Authwerte werden aus dem Log entfernt.
+Änderung:
+- normale Oberfläche stark reduziert;
+- DataForSEO-Test, Status, Protokoll und Konzeptstart direkt sichtbar;
+- technische Zwischenstufen nur noch eingeklappt;
+- keine Funktion/Gate/Qualität entfernt;
+- Installationspaket von Tests/Audits befreit.
 
 Tests:
-- 225/225 PASS;
-- Fresh-Unpack 225/225 PASS;
-- PHP 17/17 PASS.
+- 227/227 PASS;
+- Fresh-Unpack-Installer 227/227 PASS;
+- Installer PHP 16/16 PASS;
+- Runtime-Parität 21/21 PASS.
 
 ## NEXT ACTION
 
-V1.8.4 installieren und zuerst Verbindungstest + Protokollanzeige prüfen. Danach Testlabor-Konzept ohne produktive Kategorien starten.
+V1.8.5 über V1.8.4 installieren und reduzierte Hauptansicht prüfen.
