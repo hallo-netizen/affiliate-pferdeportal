@@ -44,13 +44,94 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile concept_agent/konzept8_verbot/k8_command_gate.py
+          python3 -m py_compile             concept_agent/konzept8_verbot/k8_command_gate.py             concept_agent/konzept8_verbot/k8_entry.py             concept_agent/konzept8_verbot/k8_start_bridge.py
 
       - name: Run K8 positive negative matrix
         shell: bash
         run: |
           set -euo pipefail
           python3 -m unittest -v concept_agent.konzept8_verbot.test_k8_command_gate
+
+      - name: Real current-16 start wrong abort resume continue test
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/k8-real-start
+          mkdir -p /tmp/k8-real-start
+
+          python3 concept_agent/konzept8_verbot/k8_start_bridge.py start             concept_agent/current/PSERC_METADATA_SNAPSHOT.json             concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json             /tmp/k8-real-start > /tmp/k8-start-1.json
+
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k8-start-1.json'))
+          assert x['status']=='K8_VERBOT_START_READY'
+          assert x['resumed_existing_checkpoint'] is False
+          assert x['allowed_action']['action']=='WRITE_DRAFT'
+          assert x['allowed_action']['item_index']==0
+          assert x['required_command']['command']==x['allowed_action']
+          assert x['publish_allowed'] is False
+          json.dump(x['required_command'],open('/tmp/k8-correct.json','w'))
+          wrong=json.loads(json.dumps(x['required_command']))
+          wrong['command']={'action':'RUN_PSERC','item_count':16}
+          json.dump(wrong,open('/tmp/k8-wrong.json','w'))
+          PY
+
+          sha256sum /tmp/k8-real-start/K8_PROGRESS.json > /tmp/k8-before.sha
+
+          set +e
+          python3 concept_agent/konzept8_verbot/k8_start_bridge.py start             concept_agent/current/PSERC_METADATA_SNAPSHOT.json             concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json             /tmp/k8-real-start /tmp/k8-wrong.json > /tmp/k8-wrong-result.json
+          wrong_rc=$?
+          set -e
+          test "$wrong_rc" -eq 3
+          sha256sum /tmp/k8-real-start/K8_PROGRESS.json > /tmp/k8-after-wrong.sha
+          diff -u /tmp/k8-before.sha /tmp/k8-after-wrong.sha
+
+          python3 - <<'PY'
+          import json
+          start=json.load(open('/tmp/k8-start-1.json'))
+          wrong=json.load(open('/tmp/k8-wrong-result.json'))
+          assert wrong['status']=='K8_VERBOT_BLOCKED_KEEP_SAME_CHECKPOINT'
+          assert wrong['checkpoint_sha256']==start['checkpoint_sha256']
+          assert wrong['allowed_action']==start['allowed_action']
+          assert wrong['state_changed'] is False
+          assert wrong['continuation_required'] is True
+          assert wrong['execution'] is None
+          PY
+
+          # Simulated interruption: fresh process, same durable state directory.
+          python3 concept_agent/konzept8_verbot/k8_start_bridge.py start             concept_agent/current/PSERC_METADATA_SNAPSHOT.json             concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json             /tmp/k8-real-start > /tmp/k8-restart.json
+
+          sha256sum /tmp/k8-real-start/K8_PROGRESS.json > /tmp/k8-after-restart.sha
+          diff -u /tmp/k8-before.sha /tmp/k8-after-restart.sha
+
+          python3 - <<'PY'
+          import json
+          a=json.load(open('/tmp/k8-start-1.json'))
+          b=json.load(open('/tmp/k8-restart.json'))
+          assert b['resumed_existing_checkpoint'] is True
+          assert b['checkpoint_sha256']==a['checkpoint_sha256']
+          assert b['allowed_action']==a['allowed_action']
+          assert b['required_command']==a['required_command']
+          json.dump(b['required_command'],open('/tmp/k8-restart-correct.json','w'))
+          PY
+
+          python3 concept_agent/konzept8_verbot/k8_start_bridge.py start             concept_agent/current/PSERC_METADATA_SNAPSHOT.json             concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json             /tmp/k8-real-start /tmp/k8-restart-correct.json > /tmp/k8-continue.json
+
+          sha256sum /tmp/k8-real-start/K8_PROGRESS.json > /tmp/k8-after-continue.sha
+          diff -u /tmp/k8-before.sha /tmp/k8-after-continue.sha
+
+          python3 - <<'PY'
+          import json
+          a=json.load(open('/tmp/k8-start-1.json'))
+          c=json.load(open('/tmp/k8-continue.json'))
+          assert c['status']=='K8_VERBOT_EXECUTE_EXACT_CURRENT_ACTION'
+          assert c['checkpoint_sha256']==a['checkpoint_sha256']
+          assert c['allowed_action']==a['allowed_action']
+          assert c['execution']['allowed_action']==a['allowed_action']
+          assert c['execution']['continuation_required'] is True
+          assert c['publish_allowed'] is False
+          print('K8_REAL_CURRENT16_START_WRONG_ABORT_RESUME_CONTINUE_PASS')
+          PY
 
       - name: Re-run unchanged K7 optimization suite
         shell: bash
