@@ -13,11 +13,13 @@ Aktueller kanonischer Affiliate-Stand:
 - Performance-Scope: keine Provider-, Slot-, Design-, Ranking-, Content- oder Kategorienänderung bis Abschluss des Gates.
 
 Parallel bestätigter Design-/Template-Performance-Stand:
-- Template Kit 1.50.575 ist der real gemessene Live-Basisstand.
-- Template Kit 1.50.576 ist der neuere Performance-Kandidat mit HARD LOCAL PASS; realer Server-Readback ist noch offen.
-- Candidate ZIP SHA256: edea3d49585012b0c99f6263d5772654c3c61c463be106466cf54a4fecec16de.
+- Template Kit 1.50.575 war die vorherige real gemessene Live-Basis.
+- Template Kit 1.50.576 ist inzwischen real auf dem Portal aktiv belegt: die Diagnose vom 2026-09-28 10:07–10:09 UTC liefert Frontend-Assets mit `?ver=1.50.576`.
+- HARD LOCAL für 1.50.576: 35/35 PASS; Candidate ZIP SHA256 `edea3d49585012b0c99f6263d5772654c3c61c463be106466cf54a4fecec16de`.
+- Der erwartete Warm-Request-Gewinn der sieben Menüabfragen ist im aktuellen Real-Server-Lauf **noch nicht belegt**: auf mehreren normalen Seiten bleibt die betreffende Template-Kit-Queryfamilie sichtbar. Deshalb kein PERFORMANCE_PASS behaupten.
 - Die Performance-Arbeit wird nicht durch Landingpage-/Providercode zurückgedreht.
-- Jede spätere Landingpage-Kacheländerung muss auf dem nach Real-Readback bestätigten aktuellen Template-Kit-Stand aufsetzen; kein Reapply auf 1.50.575.
+- Solange der Nachbar-Performance-Strang diesen 1.50.576-Realbefund nicht geschlossen hat, wird **kein Template-Kit-Source-Write** für die Landingpage-Kachel ausgeführt.
+- Jede spätere Landingpage-Kacheländerung setzt ausschließlich auf dem dann frisch bestätigten aktuellen Template-Kit-Stand auf; kein Reapply auf 1.50.575 oder einen älteren Stand.
 
 ## Nach Freigabe – kleinster Affiliate-Delta
 
