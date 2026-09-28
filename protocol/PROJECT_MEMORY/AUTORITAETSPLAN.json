@@ -217,6 +217,12 @@
       "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/MENSCH/KONZEPT/START_HERE.md",
       "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/MENSCH/KONZEPT/CURRENT_STATE.md",
       "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/MENSCH/KONZEPT/HOBBYRAUM.md"
+    },
+    {
+      "id": "PFERDE_ATELIER_LANDINGPAGES",
+      "start_here": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/START_HERE.md",
+      "current_authority": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/CURRENT_STATE.md",
+      "execution_surface": "protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/HOBBYRAUM.md"
     }
   ]
 }
