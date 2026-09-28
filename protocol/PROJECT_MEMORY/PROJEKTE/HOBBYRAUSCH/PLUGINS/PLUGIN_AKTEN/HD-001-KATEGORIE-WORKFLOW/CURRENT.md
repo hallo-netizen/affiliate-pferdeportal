@@ -1,60 +1,72 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.9 LIVE BIS SPEZIALISIERUNGS-TIEFENPRÜFUNG PASS / READ_ONLY_PREVIEW LOKAL PASS / LIVE-FINALPRÜFUNG OFFEN
+STATUS: V1.9.0 STAGE HARDLOCK LOKAL POSITIV/NEGATIV PASS / LIVE-ROLLBACK + RETEST OFFEN
 
-## Live-Teststand
+## Live-Befund V1.8.9
+
+Nach Übernahme des vorbereiteten READ_ONLY_PREVIEW zeigte WordPress unerwartet:
+- Stage: `Deployment abgeschlossen`;
+- `Schreiben und Readback erfolgreich`;
+- URL-Meldung `apkw_msg=deployed`.
+
+Dieser Zustand darf aus einem READ_ONLY_PREVIEW-Import allein nicht erreichbar sein.
+
+## Code-Ursache
+
+Zwei reale Lücken im Guided Flow:
+1. `workspace_next` prüfte serverseitig nicht bei jedem POST, ob der angeforderte Schritt exakt zur aktuellen Stage gehört. Ein veralteter/staler späterer POST konnte daher bei noch vorhandenen Downstream-Artefakten prinzipiell weiterlaufen.
+2. Beim Ersetzen eines früheren Arbeitsstands wurden abhängige spätere Pakete (`final`, `deploy_plan` usw.) nicht konsequent invalidiert.
+
+Damit war der UI-Ablauf zwar geführt, aber der Serverpfad noch nicht hart genug an die aktuelle Stage gebunden.
+
+## Fix V1.9.0
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.9 Hobby Depot Guided Resume`
+`Affiliate-Portal Kategorie-Workflow V1.9.0 Hobby Depot Stage Hardlock`
 
-Live erfolgreich:
-- persistenter Arbeitsstand;
-- DataForSEO-PASS persistent;
-- signierter Initial-Draft übernommen;
-- Global-Coverage gespeichert und wiederverwendet;
-- korrigierter Global-Stand freigegeben;
-- Detailresearch abgeschlossen;
-- Spezialisierungs-Tiefenprüfung abgeschlossen.
+Installer:
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
 
-Aktuelles Research-Paket:
-`kategorie-research-hobby-depot-testlabor-aktuell.json.gz`
+Installer SHA-256:
+`79d914e6896c36c0022dbae25c7c3ec24923dc453eadc499ef6cd1b88fcd83a1`
 
-Research-Befund:
-- specialization_depth_research.completed = true;
-- 15/15 Content-Knoten exakt abgedeckt;
-- remaining_unattempted_estimate = 0;
-- 15 Paid-Calls in der Spezialisierungsstufe;
-- Spezialisierungskosten 0.225 USD;
-- kein WordPress-Write.
+Source:
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
 
-## READ_ONLY_PREVIEW vorbereitet
+Source SHA-256:
+`b63fbedaf4a474923ce6946cafec45faa5ebcea4de36cd534dd9c546d089c3c9`
 
-Datei:
-`kategorie-read-only-preview-hobby-depot-testlabor-20260928.json`
+Neu:
+- jeder Guided-POST hat serverseitigen exakten Stage-Guard;
+- stale/alter POST für einen späteren Schritt wird BLOCKED;
+- neuer/korrigierter Upstream-Stand invalidiert alle davon abhängigen Downstream-Pakete und alte Deployment-Metadaten;
+- READ_ONLY_PREVIEW-Import entfernt stale `FINAL_APPROVED` und `deploy_plan`;
+- während eines aktiven Deployment-Runs ist ein neuer Upstream-Import BLOCKED, bis Rollback erfolgt;
+- persistente DataForSEO-Verbindung und der vereinfachte Guided Flow bleiben unverändert.
 
-SHA-256:
-`93c72578bfaed4c4600e5b375535619c8a8b2bd55b28f5e5b24cdbac2b64fd00`
+## Lokale harte Prüfung vor Live-Abnahme
 
-Lokale Prüfung gegen exakt V1.8.9:
-- Kategorie-Schema PASS;
-- Research-Bindung PASS;
-- Research-Evidenz PASS;
-- Comparator PASS_READ_ONLY_PREVIEW;
-- 0 blockierende Evidenzfehler.
+- Source Vollsuite: 241/241 PASS;
+- Fresh-Unpack-Installer: 241/241 PASS;
+- Source PHP-Lint: 18/18 PASS;
+- Installer Runtime PHP-Lint: 17/17 PASS;
+- Runtime-Parität Source↔Installer: 22/22 byteidentisch.
 
-Nicht blockierende Warnungen:
-- 182 Cross-Cluster-Overlap-Review-Signale aus bewusst überlappenden Dummy-Seeds;
-- 6 Sparse-Longtail-Review-Signale.
+Gezielte Positiv-/Negativtests:
+- exakt aktuelle Stage → nächster Schritt erlaubt;
+- stale Deployment-Aktion bei `structure_ready` → BLOCKED;
+- neuer READ_ONLY_PREVIEW bei stale Final-/Deployment-Plan → Downstream entfernt, Stage bleibt `structure_ready`;
+- aktiver Deployment-Run + neuer/korrigierter Upstream-Import → BLOCKED bis Rollback;
+- bestehende Persistenz-/Verbindungs-/Review-Negativtests weiterhin PASS.
 
-Negativtests:
-- eine erforderliche Cluster-Coverage-Entscheidung entfernt → BLOCKED;
-- Research-Bindung manipuliert → BLOCKED;
-- unrecherchiertes Primärkeyword eingesetzt → BLOCKED.
+## Live-Status
 
-Wichtig:
-Die Live-HMAC-Signaturen des Research-Pakets sind an den geheimen WordPress-Salt gebunden und werden deshalb erst auf derselben Live-Installation kryptographisch verifiziert. Der deklarierte Inhalts-Hash des Research-Pakets stimmt lokal exakt.
+V1.8.9 ist aktuell live und zeigt einen bereits ausgeführten Test-Deployment-Run.
+Dieser Testbestand muss über den vorhandenen Rollback sauber zurückgesetzt werden.
+
+V1.9.0 ist lokal geprüft, aber noch NICHT live abgenommen.
 
 ## NEXT ACTION
 
-READ_ONLY_PREVIEW einmal als neuen Arbeitsstand übernehmen. Erwartung: direkte finale Read-only-Gesamtprüfung PASS und sichtbare Aktion `Finale Struktur freigeben`. Erst nach diesem Live-PASS weiter zum Deployment-Dry-Run.
+V1.9.0 über V1.8.9 installieren. Der persistente Live-Stand muss danach weiterhin `deployed` anzeigen. Dann den aktuell angezeigten Testlauf ausdrücklich vollständig zurückrollen. Erst danach READ_ONLY_PREVIEW erneut übernehmen und beweisen, dass exakt `structure_ready` / finale Prüfung erscheint und kein automatischer oder staler Deployment-Sprung mehr möglich ist.
