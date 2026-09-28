@@ -23,10 +23,10 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout protected main
+      - name: Checkout fixed K8 Verbot working copy
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: main
+          ref: konzept8-verbot/working-copy-20260928
           fetch-depth: 1
           persist-credentials: false
 
@@ -118,9 +118,9 @@ jobs:
               "source_run_id": int(os.environ["SOURCE_RUN_ID"]),
               "source_issue_number": int(os.environ["SOURCE_ISSUE_NUMBER"]),
               "target_repository": "hallo-netizen/affiliate-pferdeportal",
-              "target_ref": "main",
+              "target_ref": "konzept8-verbot/working-copy-20260928",
               "target_head_sha": head,
-              "canonical_start_command": "python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json CONCEPT_AGENT_INTAKE.json",
+              "canonical_start_command": "python3 concept_agent/konzept8_verbot/k8_start_bridge.py start concept_agent/current/PSERC_METADATA_SNAPSHOT.json concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json K8_STATE",
               "article_content_rules_changed": False,
               "quality_rules_changed": False,
               "production_logic_changed": False,
@@ -131,40 +131,33 @@ jobs:
               fh.write("\n")
           PY
 
-      - name: Prepare current Concept Agent intake
+      - name: Start K8 Verbot through the single existing door
         id: machine
         shell: bash
         run: |
           set -euo pipefail
-          python3 concept_agent/intake_bridge.py prepare \
+          python3 concept_agent/konzept8_verbot/k8_start_bridge.py start \
             concept_agent/current/PSERC_METADATA_SNAPSHOT.json \
-            CONCEPT_AGENT_INTAKE.json | tee CONCEPT_AGENT_INTAKE_RECEIPT.json
+            concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json \
+            K8_STATE | tee K8_START_RECEIPT.json
           python3 - <<'PY'
           import json
-          state=json.load(open("control/startmaster0107/CURRENT_STATE.json", encoding="utf-8"))
-          current=state["concept_agent_current_batch"]
-          receipt=json.load(open("CONCEPT_AGENT_INTAKE_RECEIPT.json", encoding="utf-8"))
-          intake=json.load(open("CONCEPT_AGENT_INTAKE.json", encoding="utf-8"))
-          if receipt.get("status") != "CONCEPT_AGENT_INTAKE_READY":
-              raise SystemExit("TEXT_START_CONCEPT_AGENT_NOT_READY")
-          if receipt.get("publish_allowed") is not False or intake.get("publish_allowed") is not False:
-              raise SystemExit("TEXT_START_PUBLISH_FLAG_INVALID")
-          if receipt.get("batch_sha256") != current.get("batch_sha256"):
-              raise SystemExit("TEXT_START_BATCH_DRIFT")
-          if receipt.get("item_count") != current.get("item_count"):
-              raise SystemExit("TEXT_START_COUNT_DRIFT")
-          if intake.get("batch_sha256") != current.get("batch_sha256"):
-              raise SystemExit("TEXT_START_INTAKE_BATCH_DRIFT")
-          if intake.get("item_count") != current.get("item_count"):
-              raise SystemExit("TEXT_START_INTAKE_COUNT_DRIFT")
+          receipt=json.load(open("K8_START_RECEIPT.json", encoding="utf-8"))
+          if receipt.get("status") != "K8_VERBOT_START_READY":
+              raise SystemExit("K8_START_NOT_READY")
+          if receipt.get("publish_allowed") is not False:
+              raise SystemExit("K8_START_PUBLISH_FLAG_INVALID")
+          if receipt.get("required_command",{}).get("command") != receipt.get("allowed_action"):
+              raise SystemExit("K8_START_COMMAND_NOT_EXACT")
           PY
 
-      - name: Upload current intake handoff
+      - name: Upload K8 single-door handoff
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pferdeatelier-start-${{ inputs.source_run_id }}
           path: |
-            CONCEPT_AGENT_INTAKE_RECEIPT.json
-            CONCEPT_AGENT_INTAKE.json
+            K8_START_RECEIPT.json
+            K8_STATE/K8_PRODUCTION_BINDING.json
+            K8_STATE/K8_PROGRESS.json
           if-no-files-found: error
           retention-days: 30
