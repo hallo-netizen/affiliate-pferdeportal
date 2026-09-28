@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-28
-STATUS: HD-001 V1.8.6 ROOTFIX UPDATE BEREIT
+STATUS: HD-001 V1.8.6 LIVE-KONZEPTLAUF PASS / INITIAL-REVIEW ALS NÄCHSTES
 
 ## Rolle
 
@@ -11,22 +11,26 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PLUGINS`.
 
 ## Aktueller belastbarer Stand
 
-HD-001 V1.8.5 wurde live bis zum ersten echten DataForSEO-Konzeptstart getestet.
+V1.8.6 ist live über den vorherigen Konzeptstart-Blocker hinaus gelaufen.
 
-Live-Blocker:
-`SEO-Erstentwurf erzeugen` verlangte irrtümlich eine separate Human-Sight-Review-Bestätigung.
+Nachweis:
+- DataForSEO-Konzeptlauf erfolgreich;
+- 4 Paid-Calls;
+- 0.06804 USD Gesamtkosten;
+- Research-Draft erzeugt;
+- kein WordPress-Write.
 
-Rootfix V1.8.6:
-- Konzeptstart verlangt nur Adminrecht + eigenen Nonce + ausdrückliche DataForSEO-Paid-Bestätigung;
-- spätere Human-Review-Gates unverändert;
-- keine Funktions- oder Qualitätsreduktion.
+Die sichtbare Erstprüfung erkannte semantische Wortstellungs-/Synonym-Dubletten in den automatisch gewählten Content-Unterkategorien.
 
-Tests:
-- 227/227 PASS;
-- Fresh-Unpack-Installer 227/227 PASS;
-- Installer PHP 16/16 PASS;
-- Runtime-Parität 21/21 PASS.
+Daher:
+- Originaldraft nicht freigegeben;
+- bereinigter Draft aus derselben bereits bezahlten Evidenz erstellt;
+- Plugin-Validator PASS;
+- keine neue API-Abfrage.
+
+Initial-Review-Scope:
+`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`
 
 ## NEXT ACTION
 
-V1.8.6 über V1.8.5 installieren und denselben Testlabor-Konzeptstart erneut ausführen.
+Bereinigten RESEARCH_DRAFT serverseitig als Erst-Sichtfreigabe signieren.
