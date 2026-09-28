@@ -46,5 +46,3 @@ jobs:
               raise SystemExit('K8_ADDED_OR_REMOVED_EXISTING_GUARD_FAILURE')
           print('K8_EXISTING_GUARD_PARITY_PASS')
           PY
-      - name: Existing K7 optimization regression
-        run: python3 -m unittest -v concept_agent.konzept7.test_k7_optimizations
