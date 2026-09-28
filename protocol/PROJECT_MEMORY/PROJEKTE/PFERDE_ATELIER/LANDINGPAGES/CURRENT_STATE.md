@@ -41,6 +41,22 @@ Vom Nutzer bestätigt:
 
 Exakte interne Werbemittel-/Rechner-/Bannerquellen dieser Provider sind noch nicht technisch gebunden. Kein Endpunkt, Feed oder Importweg darf geraten werden.
 
+## Kritischer technischer Befund
+
+Die Landingpage darf für den Pilot **nicht als direkte WordPress-Unterseite von `Pferdehaftpflicht` angelegt werden**.
+
+Grund:
+Das aktuelle Template Kit liest direkte veröffentlichte Unterseiten einer Ebene-3-Seite als Themenquelle für deren Kategorietext. Eine echte Parent/Child-Verknüpfung würde die Landingpage damit trotz fehlender Kategorie in bestehende Text-/Darstellungslogik hineinziehen.
+
+Pilotregel deshalb:
+- Landingpage als eigenständige normale WordPress-Seite;
+- nicht als Kategorie;
+- nicht als direkte WordPress-Kindseite von `Pferdehaftpflicht`;
+- nicht als normaler Menüpunkt;
+- sichtbare Verbindung ausschließlich über genau eine ausdrücklich registrierte Zusatzkachel und interne Links.
+
+Das aktuelle Kachel-Rendering kann Seiten und Kategorien grundsätzlich als gültige Kartenobjekte behandeln. Für den Pilot muss nur die Zusatzkachel separat in die bestehende Kartenliste eingebracht werden; die Kategorie-ID-/Artikelermittlung darf weiterhin ausschließlich echte Kategorien übernehmen.
+
 ## Technische Sperre
 
 Die Affiliate-Zentrale besitzt eine eigene technische Current-Autorität:
