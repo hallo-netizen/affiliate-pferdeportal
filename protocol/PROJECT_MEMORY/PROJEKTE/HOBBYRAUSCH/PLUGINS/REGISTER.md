@@ -1,6 +1,6 @@
 # HOBBYRAUSCH – PLUGINREGISTER
 
-STAND: 2026-09-26
+STAND: 2026-09-28
 ROLLE: INVENTAR / WEGWEISER, KEINE PLUGIN-CURRENT-WAHRHEIT
 
 ## Bestand
@@ -14,27 +14,23 @@ Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
 Aktueller Hobby-Depot-Pilot:
-**V1.8.2**
+**V1.8.4**
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.2_HOBBY_DEPOT_PILOT.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.4_HOBBY_DEPOT_PILOT.zip`
+
+SHA-256:
+`547ed0fd488975ecfa10b6a66fd10909b9f7760b1204337a78b6300d460660f7`
 
 Rolle:
-Konzept → DataForSEO → SEO-/Intent-/Kannibalisierungsprüfung → abgestimmte Content-/Magazin-/HivePress-Struktur → kontrolliertes WordPress-Deployment.
+Konzept → DataForSEO → SEO-/Intent-/Kannibalisierungsprüfung → Content-/Magazin-/HivePress-Struktur → kontrolliertes WordPress-Deployment.
+
+V1.8.4:
+- Kontrollprotokoll;
+- DataForSEO-Einzelkosten;
+- Dry-Run/Readback/Rollback sichtbar;
+- 225/225 PASS.
 
 Status:
 Siehe ausschließlich
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`.
-
-## Harte Regel
-
-Jedes Plugin erhält genau eine feste ID und eine eigene Akte:
-`PLUGIN_AKTEN/<PLUGIN-ID>/`
-
-Pflicht:
-- `CURRENT.md` = einzige aktuelle Wahrheit dieses Plugins;
-- `ORIGINAL/` = unveränderte Originaldateien/Installer belegter Basen;
-- `START_HERE.md` = Navigation;
-- Historie, Tests, Register und Hobbyraum dürfen CURRENT nicht ersetzen.
-
-Keine Version aus Dateiname oder Erinnerung ableiten.
