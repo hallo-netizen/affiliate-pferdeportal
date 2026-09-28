@@ -14,27 +14,25 @@ Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
 Aktueller Hobby-Depot-Pilot:
-**V1.8.6 Simple Rootfix**
+**V1.8.7 Simple Review**
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
 
 SHA-256:
-`2854f41f060a4f13abc2721ae76c74f8cf8689e4e7224592060b24b79929ab15`
+`b11313949ef46bf690e48b103cf930c9dad2dd761144d5e9f04a5e41b4bfabe4`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
 
 SHA-256:
-`a73e28307fde3ad42a4a18a79bd6ff627065494bf8f4921b92065e5aa048ddc9`
+`97f2ec77bd17f26b0b62d85e67746824bd1435563a9514e238c443dac1a90f70`
 
-Rolle:
-Konzept → DataForSEO → SEO-/Intent-/Kannibalisierungsprüfung → Content-/Magazin-/HivePress-Struktur → kontrolliertes WordPress-Deployment.
-
-V1.8.6:
-- Rootfix des live gefundenen Konzeptstart-Freigabefehlers;
-- reduzierte UI bleibt;
-- spätere Human-Review-Gates bleiben;
+V1.8.7:
+- technische Review-Hashes werden automatisch berechnet;
+- Freigabe-Zusammenfassung wird automatisch erzeugt;
+- Nutzer bestätigt nur noch sichtbar die richtige Datei/Struktur;
+- serverseitige Signatur- und Validierungsgates bleiben bestehen;
 - 227/227 PASS.
 
 Status:
