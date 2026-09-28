@@ -444,3 +444,80 @@ Noch nicht entschieden:
 
 Diese Punkte bleiben Konzeptarbeit und sind noch keine finale Navigationsfreigabe.
 
+## 13. Marken- und Namensideen
+
+Stand der Diskussion: 2026-09-28.
+
+### 13.1 Grundanforderung an den Namen
+
+Der Portalname soll das gesamte Mensch-Konzept tragen können:
+- Persönlichkeit;
+- Beziehungen;
+- Lebensphasen;
+- Beruf und Arbeitswelt;
+- Lernen und Weiterbildung;
+- Orientierung und Entwicklung.
+
+Der Name soll deshalb:
+- breit genug für das gesamte Leben sein;
+- nicht zu esoterisch wirken;
+- nicht nach klassischem Coaching-Portal klingen;
+- nicht zu eng auf Beruf, Lernen oder Persönlichkeit begrenzt sein;
+- seriös und merkfähig sein;
+- auch sensible Themen wie Geburt, Wandel, Alter, Tod und Trauer tragen können;
+- zugleich Entwicklung, Lernen und berufliches Weiterkommen nicht ausschließen.
+
+### 13.2 Erste Namensideen
+
+- **Menschwerk** – aktiv, breit, verbindet Entwicklung, Beruf, Leben und Gestalten.
+- **Lebenswerk** – hochwertig und sehr breit; Verfügbarkeit und bestehende Bedeutungen müssten geprüft werden.
+- **Menschsein** – emotional, unmittelbar und sehr breit; besonders passend zum Lebensbogen von Geburt bis Tod.
+- **Menschraum** – modern und offen; schafft gedanklich Raum für unterschiedliche menschliche Themen.
+- **Lebensraum** – grundsätzlich passend, aber begrifflich stark mit Wohnen, Umwelt und Ökologie verbunden.
+- **Lebenswege** – sehr passend zu Lebensphasen, Entscheidungen, Entwicklung, Beruf und dem geplanten Zeitstrahl.
+- **Weiterleben** – ungewöhnlich und entwicklungsorientiert; zugleich mögliche starke Nähe zu Trauer und Verlust.
+- **Menschwärts** – eigenständig, bewegungs- und entwicklungsorientiert, bewusst markenhaft.
+- **Lebenswärts** – Bewegung, Veränderung und Entwicklung; ebenfalls eher markenhaft.
+- **Menschlich** – sehr klar und maximal breit; Marken- und Domainverfügbarkeit müsste geprüft werden.
+- **Das Leben** – inhaltlich sehr passend, aber vermutlich marken- und suchseitig schwierig.
+- **Lebenskompass** – starke Orientierungskomponente, möglicherweise etwas enger als das Gesamtportal.
+- **Mensch & Leben** – unmittelbar verständlich und breit, aber weniger eigenständig als Kunstname.
+- **Lebensatelier** – passend zu einer bestehenden Atelier-Namenswelt, wirkt jedoch weicher.
+- **Mensch Atelier** – ungewöhnlich und breit, aber möglicherweise zu nah an anderen Atelier-Marken.
+- **Mensch Kontor** – seriöser und markanter, zugleich etwas geschäftlicher.
+- **Mensch Salon** – interessant für Wissen, Austausch und Kultur, jedoch weniger unmittelbar passend zu Beruf und E-Learning.
+
+### 13.3 Aktuell besonders interessante Richtungen
+
+Als besonders passend wurden zunächst herausgestellt:
+
+1. **Menschwerk**
+   - stark für Leben, Arbeiten, Lernen und Entwicklung;
+   - aktiv und nicht zu weich;
+   - sehr breit einsetzbar.
+
+2. **Menschsein**
+   - stärker emotional und menschlich;
+   - trägt den kompletten Lebensbogen besonders gut;
+   - weniger kommerziell klingend.
+
+3. **Lebenswege**
+   - besonders passend, wenn Lebensphasen, Entscheidungen und der geplante Lebenszeitstrahl stärker zum Markenkern werden;
+   - verbindet persönliche und berufliche Entwicklung.
+
+4. **Menschwärts**
+   - bewusst eigenständig und markenhaft;
+   - vermittelt Richtung, Entwicklung und Bewegung;
+   - als Außenseiter besonders interessant.
+
+### 13.4 Noch offen
+
+Noch nicht entschieden:
+- endgültiger Portalname;
+- Marken- und Domainverfügbarkeit;
+- mögliche Verwechslungen oder bestehende Marken;
+- ob eher sachlich, emotional oder markenhaft positioniert werden soll;
+- ob eine Verbindung zur bestehenden Atelier-Namenswelt gewünscht oder bewusst vermieden wird.
+
+Die Namensliste ist Konzeptmaterial und keine finale Markenentscheidung.
+
