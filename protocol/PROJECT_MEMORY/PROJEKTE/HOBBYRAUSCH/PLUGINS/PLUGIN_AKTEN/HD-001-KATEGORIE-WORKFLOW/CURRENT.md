@@ -1,61 +1,46 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.5 HOBBY-DEPOT-SIMPLE GEBAUT / REDUZIERTE UI / LIVE-UPDATE ALS NÄCHSTES
+STATUS: V1.8.6 HOBBY-DEPOT-SIMPLE ROOTFIX GEBAUT / LIVE-BLOCKER BEHOBEN
 
 ## Aktueller Stand
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.5 Hobby Depot Simple`
+`Affiliate-Portal Kategorie-Workflow V1.8.6 Hobby Depot Simple Rootfix`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.5_HOBBY_DEPOT_SIMPLE.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
 
 Installer SHA-256:
-`332e50db94771b808aac067e2f198ebc32e9141012566c1da785f3ada294282e`
+`2854f41f060a4f13abc2721ae76c74f8cf8689e4e7224592060b24b79929ab15`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.5_HOBBY_DEPOT_SIMPLE.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.6_HOBBY_DEPOT_SIMPLE_ROOTFIX.zip`
 
 Source SHA-256:
-`fa8653a76884ff16c6dc12b1b90c0fd0c5d1fb12a52970361c14cc780294f261`
+`a73e28307fde3ad42a4a18a79bd6ff627065494bf8f4921b92065e5aa048ddc9`
 
-## Vereinfachung ohne Funktionsabbau
+## Live-Befund V1.8.5
 
-Standardansicht zeigt nur:
-- DataForSEO-Status und Verbindungstest;
-- Sicherheitsstatus;
-- Protokoll-Link;
-- Konzeptdatei laden und kostenlos prüfen;
-- bestätigten SEO-Erstentwurf.
+Nach erfolgreicher kostenloser Konzept-Vorprüfung und gesetzter DataForSEO-Bestätigung blockierte der Klick auf `SEO-Erstentwurf erzeugen` mit:
 
-Eingeklappt, aber vollständig erhalten:
-- sichtbare Erstprüfung;
-- Global Coverage;
-- sichtbare Global-Gap-Prüfung;
-- Detailresearch;
-- Spezialisierungs-Tiefenprüfung;
-- optionale Blatt-Evidenz;
-- read-only Gesamtprüfung;
-- technische Zielbindung;
-- sichtbare Finalprüfung;
-- FINAL_APPROVED;
-- Deployment-Dry-Run;
-- Apply;
-- Readback;
-- Rollback;
-- Drift-Schutz und Idempotenz.
+`Ausdrückliche sichtbare Nutzerfreigabe fehlt.`
 
-Keine Gate-, Qualitäts-, Research- oder Deployment-Logik wurde entfernt.
+## Rootcause
 
-## Installer-Reduktion
+`build_concept_draft()` rief fälschlich `require_review_actor()` auf.
+Diese Prüfung gehört ausschließlich zu den separaten sichtbaren Human-Review-Signaturen und verlangt Felder, die der Konzeptstart absichtlich nicht sendet.
 
-Installationspaket enthält nur Runtime-Dateien/Schemas/Beispiel/README/SHA256SUMS.
-Tests und Audit-Dokumente bleiben im Quellpaket.
+## Fix V1.8.6
 
-Größe:
-- V1.8.4 Installer: ca. 209 KB
-- V1.8.5 Installer: ca. 107 KB
+Der Konzeptstart prüft jetzt exakt:
+- Administratorrecht;
+- eigenen Nonce;
+- ausdrückliche `apkw_concept_paid_confirmation=1`.
+
+Die späteren sichtbaren Initial-/Global-/Final-Review-Gates bleiben unverändert verpflichtend.
+
+Keine Research-, Qualitäts-, Deployment- oder Sicherheitsfunktion wurde entfernt.
 
 ## Tests
 
@@ -71,4 +56,4 @@ Größe:
 
 ## NEXT ACTION
 
-V1.8.5 über V1.8.4 installieren. Danach nur prüfen, ob die reduzierte Hauptansicht erscheint; anschließend DataForSEO-Verbindungstest starten.
+V1.8.6 über V1.8.5 installieren. Danach Testlabor-Konzept erneut kostenlos vorprüfen, Paid-Calls bestätigen und `SEO-Erstentwurf erzeugen` erneut ausführen.
