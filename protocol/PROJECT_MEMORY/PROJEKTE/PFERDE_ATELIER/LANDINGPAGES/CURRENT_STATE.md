@@ -78,11 +78,13 @@ Gleiches gilt für DESIGN: die optische Kachel-Erweiterung wird nur im zuständi
 
 ## Aktuellster Performance-Abgleich 2026-09-28
 
-- Template Kit 1.50.576 ist im realen Frontend aktiv belegt.
-- Der erwartete Wegfall der sieben Menüabfragen ist im aktuellen Real-Server-Lauf noch nicht als PASS belegt; die Queryfamilie ist weiterhin sichtbar.
-- Affiliate-Zentrale bleibt auf Kandidat 6.72.166 mit `release_allowed=false`.
+- Template Kit **1.50.578** ist der aktuellste belegte Performance-Stand.
+- 1.50.578 baut exakt auf 1.50.577 auf; geändert wurde nur `pferde-template-kit.php`, 504/504 Dateien bleiben im Paket, 200/200 lokale Positiv-/Negativassertions PASS.
+- 1.50.577 hatte bereits reale deutliche Reduktionen auf normalen Portalbereichen gezeigt; 1.50.578 zielt zusätzlich auf Diagnose-observerbedingte Meta-/Term-Wiederholungen.
+- Die Diagnose `performance-diagnose-safe-20260928-134316.json` belegt Frontend-Assets mit `?ver=1.50.578`; dieser Template-Stand wird daher nicht angefasst.
+- Affiliate-Zentrale bleibt separat auf Kandidat **6.72.166** mit `release_allowed=false`.
 - Deren autorisierte NEXT ACTION bleibt `RUN_BOUND_RELEASE_GATES`.
-- Bis beide Performance-Stränge ihren aktuellen gebundenen Schritt abgeschlossen haben: kein Landingpage-/Provider-Source-Write.
+- Solange das Affiliate-Performance-Gate offen ist: kein Provider-/Slot-/Rechner-Source-Write.
 
 ## NEXT ACTION
 
