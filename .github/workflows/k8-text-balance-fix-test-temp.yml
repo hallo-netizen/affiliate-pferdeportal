@@ -1,0 +1,102 @@
+name: K8 Text Balance Fix Test
+on:
+  push:
+    branches:
+      - k8-fix-section-conclusion-balance-20260928
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Compile changed K8 files
+        run: |
+          python3 -m py_compile             concept_agent/konzept8_verbot/engine/k8_section_balance.py             concept_agent/konzept8_verbot/engine/k8_progress_guard.py             concept_agent/konzept8_verbot/engine/k8_production_bridge.py
+      - name: Verify exact K8 writer targets and hard balance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, sys, tempfile
+          from pathlib import Path
+          root=Path('.').resolve()
+          sys.path.insert(0,str((root/'concept_agent').resolve()))
+          from concept_agent.konzept8_verbot.engine import (
+              k8_intake_bridge, k8_production_bridge, k8_section_balance,
+              k8_progress_guard, k8_universal_reentry_guard,
+          )
+
+          snapshot=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text())
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text())
+          intake=k8_intake_bridge.prepare(snapshot)
+          binding=k8_production_bridge.build(snapshot,intake,research)
+          bp=binding['items'][0]['writer_preflight']['k8_first_draft_blueprint']
+          assert bp['target_min_words']==750, bp['target_min_words']
+          assert bp['target_min_paragraphs']==16, bp['target_min_paragraphs']
+          assert bp['target_conclusion_ratio_if_applicable']==0.12
+          cb=bp['conclusion_balance']
+          assert cb['target_ratio']==0.12
+          assert cb['maximum_ratio']==0.18
+          assert cb['maximum_paragraphs']==3
+          assert cb['use_conclusion_to_fill_global_word_or_paragraph_floor'] is False
+
+          def words(n, token='inhalt'):
+              return ' '.join([token]*n)
+          def article(normal=100, conclusion=100, conclusion_paragraphs=2):
+              cp=[]
+              each=conclusion//conclusion_paragraphs
+              rem=conclusion
+              for i in range(conclusion_paragraphs):
+                  n=rem if i==conclusion_paragraphs-1 else each
+                  rem-=n
+                  cp.append('<p>'+words(n,'fazit')+'</p>')
+              return (
+                  '<p data-block="intro">'+words(80,'intro')+'</p>'
+                  '<h2>Erster sinnvoller Abschnitt</h2><div data-block="answer"><p>'+words(normal,'a')+'</p></div>'
+                  '<h2>Zweiter sinnvoller Abschnitt</h2><div data-block="details"><p>'+words(normal,'b')+'</p></div>'
+                  '<h2>Dritter sinnvoller Abschnitt</h2><div data-block="checklist"><p>'+words(normal,'c')+'</p></div>'
+                  '<h2>Vergleich der Merkmale</h2><div data-block="table"><p>'+words(90,'t')+'</p></div>'
+                  '<h2>Fazit</h2><div data-block="conclusion">'+''.join(cp)+'</div>'
+                  '<h2>Weiterführende Informationen</h2><div data-block="further_information"><p>'+words(40,'w')+'</p></div>'
+              )
+
+          good=article(normal=100,conclusion=100,conclusion_paragraphs=2)
+          out=k8_section_balance.validate(good)
+          assert out['status']=='PASS'
+          assert out['conclusion_ratio'] <= 0.18
+
+          try:
+              k8_section_balance.validate(article(normal=100,conclusion=400,conclusion_paragraphs=8))
+          except k8_section_balance.SectionBalanceError as exc:
+              assert 'K8_CONCLUSION_RATIO_TOO_HIGH' in str(exc) or 'K8_CONCLUSION_PARAGRAPHS_TOO_HIGH' in str(exc)
+          else:
+              raise SystemExit('OVERSIZED_CONCLUSION_NOT_BLOCKED')
+
+          try:
+              k8_section_balance.validate(article(normal=40,conclusion=100,conclusion_paragraphs=2))
+          except k8_section_balance.SectionBalanceError as exc:
+              assert 'K8_H2_SECTION_WORD_RANGE' in str(exc)
+          else:
+              raise SystemExit('SHORT_SECTION_NOT_BLOCKED')
+
+          checkpoint=k8_production_bridge.initial_checkpoint(binding)
+          decision=k8_universal_reentry_guard.build(binding,checkpoint)
+          item=binding['items'][0]
+          filename=f"00_{item['identity']['plan_slot']}.md"
+          with tempfile.TemporaryDirectory() as td:
+              p=Path(td)/filename
+              p.write_text(article(normal=100,conclusion=400,conclusion_paragraphs=8),encoding='utf-8')
+              try:
+                  k8_progress_guard.record_draft(binding,checkpoint,decision,0,p)
+              except k8_progress_guard.Blocked as exc:
+                  assert 'K8_TEXT_BALANCE:' in str(exc)
+              else:
+                  raise SystemExit('PROGRESS_GUARD_ACCEPTED_BAD_CONCLUSION')
+
+          print('K8_TEXT_BALANCE_FIX_PASS')
+          PY
