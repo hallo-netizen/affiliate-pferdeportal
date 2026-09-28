@@ -7,6 +7,7 @@ import re
 import sys
 from pathlib import Path
 
+from . import k8_bound_fact_context
 from . import k8_progress_guard as progress_guard
 
 CONTRACT = "SYSTEM4_WORDPRESS_HANDOFF_V1"
@@ -23,37 +24,11 @@ def load(path: Path) -> dict:
         raise Blocked("JSON_OBJECT_REQUIRED:" + str(path))
     return value
 
-def _bound_slug(item: dict) -> str:
-    plan = item.get("production_plan_item")
-    if not isinstance(plan, dict):
-        raise Blocked("PRODUCTION_PLAN_ITEM_MISSING")
-    canonical = plan.get("canonical_article")
-    runtime = plan.get("runtime_order")
-    slug = None
-    if isinstance(canonical, dict):
-        slug = canonical.get("slug")
-    if (not isinstance(slug, str) or not slug.strip()) and isinstance(runtime, dict):
-        slug = runtime.get("slug")
-    if not isinstance(slug, str) or not slug.strip():
-        raise Blocked("BOUND_SLUG_MISSING")
-    return slug.strip()
-
-def _canonical_article_id(item: dict) -> str:
-    plan = item.get("production_plan_item")
-    if not isinstance(plan, dict):
-        raise Blocked("PRODUCTION_PLAN_ITEM_MISSING")
-    value = plan.get("canonical_article_id")
-    if not isinstance(value, str) or not value.strip():
-        raise Blocked("CANONICAL_ARTICLE_ID_MISSING")
-    return value.strip()
-
 def build(binding: dict, checkpoint: dict) -> dict:
     progress_guard.verify_binding(binding)
     progress_guard.verify_checkpoint(binding, checkpoint)
     if checkpoint.get("phase") not in {"PSERC_PASS_ENDSTEMPEL_REQUIRED", "ENDSTEMPEL_PASS_STOP"}:
         raise Blocked("WORDPRESS_EXPORT_TOO_EARLY")
-    if checkpoint.get("status") not in {"IN_PROGRESS", "PASS"}:
-        raise Blocked("WORDPRESS_EXPORT_STATE_INVALID")
     if not SHA_RE.fullmatch(str(checkpoint.get("pserc_package_sha256") or "")):
         raise Blocked("PSERC_PASS_REQUIRED")
 
@@ -81,11 +56,11 @@ def build(binding: dict, checkpoint: dict) -> dict:
         body = draft.get("content_utf8")
         if not isinstance(body, str) or not body:
             raise Blocked(f"DRAFT_BODY_MISSING:{index}")
+
+        context = k8_bound_fact_context.build_item(item)
         articles.append({
             "index": index,
-            "canonical_article_id": _canonical_article_id(item),
             "title": identity["title"],
-            "slug": _bound_slug(item),
             "target_keyword": identity["target_keyword"],
             "category": identity["category"],
             "article_type": identity["article_type"],
@@ -93,6 +68,10 @@ def build(binding: dict, checkpoint: dict) -> dict:
             "final_draft_sha256": draft["draft_sha256"],
             "revision_count": draft["revision"],
             "body": body,
+            "production_context": {
+                "fact_pack": context["fact_pack"],
+                "production_plan_item": context["production_plan_item"],
+            },
             "languagetool": {
                 "status": "PASS",
                 "engine": "LanguageTool 6.8",
@@ -112,7 +91,6 @@ def build(binding: dict, checkpoint: dict) -> dict:
         "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
         "no_legacy_status": "PASS",
         "test_suite_status": "PASS",
-        "article_count": len(articles),
         "wordpress_review": {
             "file_format": "JSON",
             "mime_type": "application/json",
