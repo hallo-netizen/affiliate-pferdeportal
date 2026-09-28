@@ -86,6 +86,7 @@ def build(binding: dict, checkpoint: dict) -> dict:
     return {
         "contract": CONTRACT,
         "batch_sha256": binding["batch_sha256"],
+        "article_count": len(articles),
         "publish_allowed": False,
         "signing_deferred": True,
         "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
