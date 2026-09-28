@@ -1,0 +1,30 @@
+name: K8 First Article Bound Work
+on:
+  push:
+    branches:
+      - k8-verbot-first-article-test-20260928
+permissions:
+  contents: read
+jobs:
+  dump:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Dump exact item 0 bound work
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from concept_agent import intake_bridge, production_bridge
+          root=Path('.')
+          snapshot=json.loads((root/'concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text())
+          intake=intake_bridge.prepare(snapshot)
+          research=json.loads((root/'concept_agent/current/CONCEPT_AGENT_RESEARCH_BOUND.json').read_text())
+          binding=production_bridge.build(snapshot,intake,research)
+          print(json.dumps(binding['items'][0],ensure_ascii=False,sort_keys=True))
+          PY
