@@ -1,78 +1,52 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.9 GUIDED RESUME LOKAL POSITIV/NEGATIV PASS / LIVE-ABNAHME NOCH OFFEN
+STATUS: V1.8.9 LIVE RESUME + GLOBAL-COVERAGE PASS / GLOBAL-ENTSCHEIDUNGSDRAFT BEREIT
 
-## Aktueller Stand
+## Live-Nachweis V1.8.9
 
-Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.8.9 Hobby Depot Guided Resume`
+Persistenter Fortsetzungsweg live erfolgreich:
+- signierter Initial-Draft wurde übernommen;
+- kein erneuter DataForSEO-Verbindungstest nötig;
+- Global-Coverage direkt aus dem gespeicherten Arbeitsstand gestartet;
+- Plugin-Version im Global-Paket: 1.8.9;
+- Global-Coverage-Preflight PASS;
+- DataForSEO Global-Coverage abgeschlossen;
+- Paket finalisiert;
+- 1 Paid-Call dieser Stufe;
+- Kosten 0.132 USD;
+- kein WordPress-Write.
 
-Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
+Aktuelle Live-Dateien:
+- `kategorie-draft-hobby-depot-testlabor-aktuell.json`
+- `kategorie-global-hobby-depot-testlabor-aktuell.json`
 
-Installer SHA-256:
-`c415df2c63cf3640f723a763ebe6bf527540d377e104d8ce48e7d427246d2c07`
+Global-Paket Content-SHA:
+`3d4b83f78c64d712ed9977b4ecc5b2686b24219f56493c288a7f1198982dac07`
 
-Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.9_HOBBY_DEPOT_GUIDED_RESUME.zip`
+Source-Draft-Bindung:
+`643480411e53fea8326ba6da64a6d03347db3eba5f6cbd7724c45e9e1198117b`
 
-Source SHA-256:
-`ceea10f2e9b50f6349e5ea83d48cfed3fc78b360e0eeccff4292d38cbb11ad5a`
+## Fachprüfung Global-Coverage
 
-## Vereinfachung V1.8.9
+Die 1000 gelieferten Global-Treffer sind stark von saisonalem Winter-/Event-Rauschen geprägt. Das ist sicher, weil automatische Architekturmutation deaktiviert ist und jeder relevante Review-Core vor Detailresearch explizit aufgelöst werden muss.
 
-- Bei leerem Arbeitsstand ist die einmalig nötige Fortsetzungsdatei direkt sichtbar.
-- Kein versteckter Aufklapper mehr als erster Bedienweg.
-- Danach bleibt genau eine NEXT ACTION sichtbar.
-- Interne Zwischenpakete werden nicht erneut hochgeladen.
-- DataForSEO-PASS bleibt bei unveränderten Credentials/Markt/Sprache gespeichert.
-- Externe Datei wird nur benötigt, wenn wirklich ein neuer/korrigierter Stand von außen kommt.
+Für den technischen Test wurden die 27 vom Plugin ausgewählten Review-Cores explizit entschieden:
+- `joggen im winter` → ARTICLE_ONLY / Cluster `magazine-discovery`;
+- übrige ausgewählte saisonale/event-/produkt-/newsartige Treffer → OUT_OF_SCOPE für diesen technischen Testlauf.
 
-## Zusätzlicher Fail-Closed-Schutz
+Baum unverändert.
+Keine neue DataForSEO-Abfrage.
+Kein WordPress-Write.
 
-- Eine Datei mit vorhandener, aber ungültiger Initialfreigabe wird nicht still als unsignierter Draft übernommen, sondern abgewiesen.
-- Ein global freigegebener Draft ohne zugehörige gespeicherte Global-Coverage wird abgewiesen.
-- Eine ungültige Global-Review-Bindung wird abgewiesen.
+Bereit:
+`kategorie-draft-hobby-depot-testlabor-global-bereinigt.json`
 
-## Lokale Positiv-/Negativprüfung vor Live-Abnahme
+## Plugin-Abnahme
 
-Source Vollsuite: 235/235 PASS.
-Fresh-Unpack-Installer: 235/235 PASS.
-Source PHP-Lint: 18/18 PASS.
-Installer Runtime PHP-Lint: 17/17 PASS.
-Runtime-Parität Source↔Installer: 22/22 PASS.
-
-Gezielte Positivtests:
-- signierter Initial-Draft → persistenter Workspace → Stage initial_approved;
-- derselbe gespeicherte Draft → Global-Coverage ohne erneuten Upload;
-- Draft + Global-Paket bleiben parallel persistent;
-- DataForSEO-PASS bleibt bei unveränderten Einstellungen gültig.
-
-Gezielte Negativtests:
-- manipulierte signierte Struktur → Review ungültig;
-- beschädigter Workspace-Payload → BLOCKED;
-- Paid Global ohne ausdrückliche Bestätigung → BLOCKED;
-- geänderte Verbindungseinstellungen → gespeicherter PASS ungültig.
-
-Exakter aktueller Hobby-Depot-Teststand:
-`kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
-- JSON PASS;
-- mode RESEARCH_DRAFT;
-- project_id hobby-depot-testlabor-20260928;
-- lokal neu berechneter Review-Scope entspricht exakt dem gespeicherten Scope:
-`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`;
-- serverseitige HMAC-Signatur vorhanden; kryptographische Verifikation erfolgt absichtlich nur auf derselben WordPress-Installation mit deren geheimem WordPress-Salt.
-
-## Live-Teststand
-
-V1.8.8 ist aktuell live sichtbar:
-- DataForSEO verbunden;
-- noch kein persistenter Arbeitsstand übernommen;
-- noch kein neuer WordPress-Write.
-
-V1.8.9 ist lokal geprüft, aber noch NICHT live abgenommen.
+V1.8.9 Persistent-Resume-Verhalten: LIVE PASS.
+Gesamtplugin noch NICHT vollständig abgenommen; Detailresearch, Finalisierung, Deployment-Dry-Run, Apply, Readback, Idempotenz und Rollback stehen noch aus.
 
 ## NEXT ACTION
 
-V1.8.9 über V1.8.8 installieren. Danach die bereits serverseitig signierte Datei genau einmal direkt im sichtbaren Fortsetzungsfeld laden. Erwartung: sofort Stage `initial_approved` und als einzige NEXT ACTION `Global-Coverage starten`. Erst nach diesem Live-PASS ist V1.8.9 abgenommen.
+Bereinigten Global-Entscheidungsdraft einmalig als neuen extern korrigierten Arbeitsstand übernehmen und serverseitig Global-Sichtfreigabe bestätigen. Danach Detailresearch starten.
