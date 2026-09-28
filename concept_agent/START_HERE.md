@@ -4,7 +4,7 @@ Diese Datei ist ausschließlich die **Bürotür**. Sie enthält keine eigene CUR
 
 ## Einzige Current-Autorität
 
-`control/startmaster0107/CURRENT_STATE.json` auf dem geschützten `main`.
+`control/startmaster0107/CURRENT_STATE.json` auf dem in `concept_agent/CONTROL_ENTRY_POINTER.json` gebundenen `current_authority_branch`.
 
 Pflichtweg:
 1. `concept_agent/CONTROL_ENTRY_POINTER.json` nur als technische Bindungs-/Kompatibilitätsdatei lesen.
