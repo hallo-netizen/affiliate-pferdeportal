@@ -1,67 +1,78 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.7 SIMPLE REVIEW GEBAUT / INITIAL-REVIEW LIVE BEREITS SIGNIERT
+STATUS: V1.8.8 PERSISTENT GUIDED FLOW GEBAUT / LIVE-INSTALLATION ALS NÄCHSTES
 
 ## Aktueller Stand
 
-Neue Bedienversion:
-`Affiliate-Portal Kategorie-Workflow V1.8.7 Hobby Depot Simple Review`
+Plugin:
+`Affiliate-Portal Kategorie-Workflow V1.8.8 Hobby Depot Persistent Flow`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
 
 Installer SHA-256:
-`b11313949ef46bf690e48b103cf930c9dad2dd761144d5e9f04a5e41b4bfabe4`
+`eae83b6b472de2e78993d271b0da9d57021ba7134d51b7150f0b99c63bd4a85b`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.7_HOBBY_DEPOT_SIMPLE_REVIEW.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.8.8_HOBBY_DEPOT_PERSISTENT_FLOW.zip`
 
 Source SHA-256:
-`97f2ec77bd17f26b0b62d85e67746824bd1435563a9514e238c443dac1a90f70`
+`4bb9929946941f5be75574ebb869408a3154255f56d2f8e28cc1ecdb5d4b9c62`
 
-## V1.8.7 Reduktion
+## V1.8.8 – Ursache der unnötig komplizierten Bedienung behoben
 
-Entfernt wurden ausschließlich manuelle technische Eingaben bei allen sichtbaren Review-Gates:
-- kein manuelles Kopieren des Review-Scope SHA-256;
-- keine manuelle Freigabe-Zusammenfassung.
+Bisher:
+- derselbe Zwischenstand musste zwischen internen Stufen wiederholt heruntergeladen und erneut hochgeladen werden;
+- kostenlose Preflights und Folgeaktionen waren an kurzlebige Transient-Tokens gebunden;
+- die DataForSEO-Verbindung erschien als wiederkehrender Bedienpunkt;
+- die technische Einzelwerkzeug-Ansicht dominierte den normalen Ablauf.
 
-Erhalten bleiben:
-- Datei-/Paketbindung;
-- sichtbares ausdrückliches Bestätigungs-Häkchen;
-- Adminrecht und Nonce;
-- serverseitige Berechnung des Review-Scope;
-- serverseitig signierte Review-Quittung;
-- Hash-/Signaturprüfung der Folgegates.
+Jetzt:
+- aktueller Workflow-Arbeitsstand wird serverseitig persistent gespeichert;
+- intern erzeugte Drafts, Global-Coverage, Research, FINAL und Deployment-Dry-Run werden automatisch weiterverwendet;
+- derselbe Zwischenstand muss nicht mehr erneut hochgeladen werden;
+- eine Datei wird nur noch einmal ausgewählt, wenn wirklich ein neuer externer Stand hereinkommt, z. B. eine korrigierte Chat/Master-Datei;
+- DataForSEO-PASS wird an Credentials + Markt + Sprache gebunden gespeichert und nur bei Änderung ungültig;
+- normale Oberfläche zeigt Status + genau die nächste zulässige Aktion;
+- bisherige Einzelwerkzeuge bleiben vollständig als technische Notfallansicht erhalten.
 
-Der Server erzeugt Hash und Protokolltext automatisch.
+## Funktionsschutz
 
-Tests:
-- Source Vollsuite 227/227 PASS;
-- Fresh-Unpack-Installer 227/227 PASS;
-- Source PHP-Lint 17/17 PASS;
-- Installer Runtime PHP-Lint 16/16 PASS;
-- Runtime-Parität Source↔Installer 21/21 byteidentisch.
+Unverändert aktiv:
+- explizite Bestätigung vor Paid-Calls;
+- serverseitig signierte Sichtfreigaben;
+- Scope-/Research-/Hash-Bindung;
+- Global-Coverage- und Detailresearch-Gates;
+- Spezialisierungs-Tiefenprüfung;
+- read-only Gesamtprüfung;
+- FINAL_APPROVED;
+- Deployment-Dry-Run;
+- explizite Schreibfreigabe;
+- Readback;
+- Idempotenz;
+- Drift-Schutz;
+- Rollback.
 
-## Live-Test / bereits erledigte Erstfreigabe
+## Tests
 
-V1.8.6 DataForSEO-Testlabor:
+- Source Vollsuite: 229/229 PASS;
+- Fresh-Unpack-Installer: 229/229 PASS;
+- Source PHP-Lint: 18/18 PASS;
+- Installer Runtime PHP-Lint: 17/17 PASS;
+- Runtime-Parität Source↔Installer: 22/22 Dateien byteidentisch;
+- Produktion-PHP Pferde-Domain-Scan: 0 Treffer.
+
+## Live-Teststand vor Update
+
+- DataForSEO live PASS;
 - 4 Paid-Calls;
-- 0.06804 USD;
-- Research-Draft erzeugt;
-- kein WordPress-Write.
-
-Bereinigter Draft wurde live serverseitig als Initial-Review signiert.
-
-Signierte Datei:
-`kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
-
-SHA-256:
-`6f072094c2d0c8255aaada41c43f9ede9e23e1bea7485cadb0f688f37d45c67c`
-
-Review-Scope:
-`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`
+- Kosten 0.06804 USD;
+- bereinigter Initial-Draft live serverseitig signiert;
+- signierte Datei:
+  `kategorie-research-draft-initial-freigegeben-20260928-104812-utc.json`
+- noch kein WordPress-Write.
 
 ## NEXT ACTION
 
-V1.8.7 über V1.8.6 installieren. Danach mit der bereits signierten Initial-Datei den kostenfreien Global-Coverage-Prüfplan erzeugen. Keine manuelle Hash- oder Zusammenfassungseingabe mehr.
+V1.8.8 über V1.8.7 installieren. Danach den bereits signierten Initial-Draft genau einmal unter `Arbeitsstand übernehmen` laden. Ab dann verwendet der normale Ablauf diesen Stand serverseitig weiter; nächster sichtbarer Schritt ist direkt `Global-Coverage starten`.
