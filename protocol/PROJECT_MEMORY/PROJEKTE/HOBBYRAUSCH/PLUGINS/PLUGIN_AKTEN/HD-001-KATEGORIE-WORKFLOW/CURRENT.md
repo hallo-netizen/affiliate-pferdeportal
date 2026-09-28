@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-28
-STATUS: V1.8.6 HOBBY-DEPOT-SIMPLE ROOTFIX GEBAUT / LIVE-BLOCKER BEHOBEN
+STATUS: V1.8.6 LIVE DATAFORSEO-KONZEPTLAUF PASS / INITIAL-REVIEW-KORREKTUR BEREIT
 
 ## Aktueller Stand
 
@@ -20,40 +20,52 @@ Source:
 Source SHA-256:
 `a73e28307fde3ad42a4a18a79bd6ff627065494bf8f4921b92065e5aa048ddc9`
 
-## Live-Befund V1.8.5
+## Live-Test V1.8.6
 
-Nach erfolgreicher kostenloser Konzept-Vorprüfung und gesetzter DataForSEO-Bestätigung blockierte der Klick auf `SEO-Erstentwurf erzeugen` mit:
+Testlabor:
+`hobby-depot-testlabor-20260928`
 
-`Ausdrückliche sichtbare Nutzerfreigabe fehlt.`
+Ergebnis:
+- DataForSEO-Verbindung PASS;
+- kostenlose Konzept-Vorprüfung PASS;
+- bestätigter SEO-Erstentwurf erfolgreich erzeugt;
+- 4 Paid-Calls ausgeführt;
+- Kosten gesamt: 0.06804 USD;
+- Overview: 17 normalisierte Treffer;
+- 3 Topic-Suggestion-Calls: je 50 Treffer;
+- kein WordPress-Write.
 
-## Rootcause
+Original-Research-Draft:
+`APKW_RESEARCH_DRAFT_20260928-101752.json`
+SHA-256:
+`85d6e54705207a019e293f3e16505018450307127a2e9021cea42cea48d397f3`
 
-`build_concept_draft()` rief fälschlich `require_review_actor()` auf.
-Diese Prüfung gehört ausschließlich zu den separaten sichtbaren Human-Review-Signaturen und verlangt Felder, die der Konzeptstart absichtlich nicht sendet.
+## Sichtprüfung
 
-## Fix V1.8.6
+Der automatisch erzeugte Erstbaum enthielt offensichtliche Wortstellungs-/Synonym-Dubletten als getrennte Content-Unterkategorien.
 
-Der Konzeptstart prüft jetzt exakt:
-- Administratorrecht;
-- eigenen Nonce;
-- ausdrückliche `apkw_concept_paid_confirmation=1`.
+Beispiele:
+- `Kerzen Formen Gießen` / `Kerzen Gießen Form` / `Kerzen Gießen Formen`;
+- `Kerzen Zum Selber Machen` / `Selber Kerzen Machen` / `Selber Machen Kerzen`;
+- `Buchbinden Selber` / `Selber Buchbinden` / `Selbst Buchbinden`.
 
-Die späteren sichtbaren Initial-/Global-/Final-Review-Gates bleiben unverändert verpflichtend.
+Diese Fassung wurde deshalb nicht freigegeben.
 
-Keine Research-, Qualitäts-, Deployment- oder Sicherheitsfunktion wurde entfernt.
+Korrigierter, ausschließlich aus bereits bezahlter positiver informationaler Evidenz gebildeter Draft:
+`APKW_RESEARCH_DRAFT_20260928-101752_INITIAL_REVIEW_CLEANED.json`
+SHA-256:
+`e66b90aafc54907aeefa6f122d3c7a13bdb5e983a7df44a92b4acafb83da8921`
 
-## Tests
+Server-validator:
+- RESEARCH_DRAFT VALID=YES;
+- Initial-Review-Scope SHA-256:
+`998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74`.
 
-- Source Vollsuite: 227/227 PASS;
-- Fresh-Unpack-Installer mit identischem Test-Runner: 227/227 PASS;
-- Source PHP-Lint: 17/17 PASS;
-- Installer Runtime PHP-Lint: 16/16 PASS;
-- Runtime-Parität Source↔Installer: 21/21 Dateien byteidentisch.
+Keine neue DataForSEO-Abfrage für die Korrektur.
 
-## Testinput
-
-`HOBBY_DEPOT_TESTLABOR_KATEGORIE_KONZEPT_20260928.json`
+Archiv:
+`/Campus-Archiv/PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HD-001-KATEGORIE-WORKFLOW/TESTLAUF_20260928/`
 
 ## NEXT ACTION
 
-V1.8.6 über V1.8.5 installieren. Danach Testlabor-Konzept erneut kostenlos vorprüfen, Paid-Calls bestätigen und `SEO-Erstentwurf erzeugen` erneut ausführen.
+Im WordPress-Plugin unter `Erweiterte Prüfschritte und Freigaben` den korrigierten RESEARCH_DRAFT für die Erst-Sichtfreigabe verwenden, Scope-Hash `998699f3c2508427608f303c2c8008ea3c68a9e76497bfdccfc23fbb81813c74` eintragen und serverseitig signieren.
