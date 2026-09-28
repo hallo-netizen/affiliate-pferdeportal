@@ -330,3 +330,25 @@ NEGATIVPRÜFUNG:
 
 BEZUG:
 ARCH-091.
+
+
+### 2026-09-28 – LANDINGPAGES-Büro Pferde-Atelier
+
+BEDARF:
+Vergleichs-/Rechnerseiten sollen sichtbar in bestehende Themenkacheln integrierbar sein, intern aber nicht als Produktionskategorien oder Journalartikel geführt werden.
+
+KISS-FIX:
+- neues Büro `PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/`;
+- genau eine Current-Autorität im Autoritätsplan;
+- dauerhafter Konzeptmaster getrennt vom dynamischen Current;
+- erster Pilot ausschließlich `Pferdehaftpflicht vergleichen`;
+- technische Source-Änderungen bleiben in DESIGN/AFFILIATE und werden vom Landingpage-Büro nicht selbst ausgeführt.
+
+NEGATIVPRÜFUNG:
+- keine neue Kategorie erzeugt;
+- keine Kategorienwahrheit verändert;
+- keine Affiliate-/Design-Source verändert;
+- keine zweite technische Autorität angelegt.
+
+BEZUG:
+ARCH-093.
