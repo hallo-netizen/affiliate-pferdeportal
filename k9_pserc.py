@@ -43,7 +43,7 @@ def canonical_fact_pack(research):
             "article_types":list(raw.get("article_types") or [fp.get("article_type")]),
             "claim_status":str(raw.get("claim_status") or ""),
             "evidence_text":evidence,
-            "evidence_text_sha256":hashlib.sha256(evidence.encode()).hexdigest(),
+            "evidence_text_sha256":str(raw.get("evidence_text_sha256") or ""),
             "fact_id":str(raw.get("fact_id") or ""),
             "source_id":sid,
             "source_url":str(src.get("url") or ""),
