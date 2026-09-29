@@ -75,10 +75,26 @@ jobs:
           python3 k9_engine.py accept /tmp/K9_CHECK_SUBMISSION.json | tee K9_CHECK_ACCEPT_RESULT.json
           test ! -f runtime/CURRENT_JOB.json
           test ! -f runtime/CHAT_ENTRY.json
+          read -r repair_required fully_done total < <(python3 - <<'PY'
+          import json
+          s=json.load(open('state/STATUS.json'))
+          print(s.get('repair_required',0),s.get('fully_done',0),s.get('total',0))
+          PY
+          )
+          if [ "$repair_required" -gt 0 ]; then
+            python3 k9_engine.py prepare repair "$repair_required" --source-run-id "${GITHUB_RUN_ID}-auto-repair" | tee K9_REPAIR_START_RESULT.json
+            test -f runtime/CURRENT_JOB.json
+            test -f runtime/CHAT_ENTRY.json
+          elif [ "$fully_done" -eq "$total" ] && [ "$total" -gt 0 ]; then
+            touch runtime/FINALIZE_REQUIRED
+          else
+            echo 'K9_CHECK_TERMINAL_STATE_INVALID'
+            exit 2
+          fi
           git config user.name 'k9-check-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -A state runtime warehouse
-          git diff --cached --quiet || git commit -m 'K9: accept native LT68 PPM679 check product'
+          git diff --cached --quiet || git commit -m 'K9: accept check and prepare deterministic next state'
           git push
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
