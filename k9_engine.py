@@ -42,6 +42,30 @@ def current_job():
         raise K9Error("CURRENT_JOB_HASH_INVALID")
     return data
 
+def write_chat_entry(job):
+    entry = {
+        "contract": "K9_CHAT_ENTRY_V1",
+        "concept": "K9",
+        "status": "OPEN_JOB_READY_FOR_CHAT",
+        "repository": "hallo-netizen/affiliate-pferdeportal",
+        "branch": "konzept9/greenfield-20260929",
+        "job_path": "runtime/CURRENT_JOB.json",
+        "job_id": job["job_id"],
+        "job_sha256": job["job_sha256"],
+        "station": job["station"],
+        "item_count": job["item_count"],
+        "allowed_action": "EXECUTE_EXACT_STATION_ONLY",
+        "forbidden": [
+            "SEARCH_OTHER_CONCEPTS",
+            "ROUTE_TO_NEXT_STATION",
+            "RECONSTRUCT_JOB",
+            "USE_LEGACY_RUNTIME"
+        ],
+        "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB"
+    }
+    write_json(CHAT_ENTRY, entry)
+    return entry
+
 def eligible(item, station):
     s = item["stages"]
     if station == "research":
@@ -151,6 +175,7 @@ def prepare(station, batch_size, source_run_id="manual"):
     if existing is not None:
         if existing["station"] != station:
             raise K9Error("ACTIVE_JOB_EXISTS_FOR_OTHER_STATION")
+        write_chat_entry(existing)
         return {"status": "EXISTING_JOB_REUSED", "job": existing}
 
     data = ledger()
@@ -183,6 +208,7 @@ def prepare(station, batch_size, source_run_id="manual"):
     core["job_id"] = "K9-" + station.upper() + "-" + stable(core)[:16]
     core["job_sha256"] = stable(core)
     write_json(CURRENT_JOB, core)
+    write_chat_entry(core)
     return {"status": "NEW_JOB_PREPARED", "job": core}
 
 def validate_submission(job, submission):
@@ -261,6 +287,8 @@ def accept(path):
     write_json(WAREHOUSE / "jobs" / f"{job['job_id']}.json", job)
     write_json(LEDGER, data)
     CURRENT_JOB.unlink()
+    if CHAT_ENTRY.exists():
+        CHAT_ENTRY.unlink()
     return {
         "status": "ACCEPTED",
         "job_id": job["job_id"],
