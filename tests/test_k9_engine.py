@@ -16,14 +16,17 @@ class K9Tests(unittest.TestCase):
         k.WAREHOUSE = root / "warehouse"
         k.write_json(k.LEDGER, {"contract":"K9_LEDGER_V1","generation":1,"items":[]})
         intake = root / "intake.json"
-        k.write_json(intake, {"items":[{"item_id":"a","title":"A"},{"item_id":"b","title":"B"}]})
+        k.write_json(intake, {"items":[
+            {"item_id":"a","title":"A","metadata":{"keyword":"ka"}},
+            {"item_id":"b","title":"B","metadata":{"keyword":"kb"}}
+        ]})
         k.import_intake(intake)
 
     def tearDown(self):
         self.tmp.cleanup()
 
-    def submission(self, job, results):
-        path = k.ROOT / "submission.json"
+    def submission(self, job, results, name="submission.json"):
+        path = k.ROOT / name
         k.write_json(path, {
             "contract":"K9_SUBMISSION_V1",
             "job_id":job["job_id"],
@@ -31,6 +34,21 @@ class K9Tests(unittest.TestCase):
             "results":results
         })
         return path
+
+    def finish_research(self, count=2):
+        job = k.prepare("research", count)["job"]
+        rows = []
+        for iid in job["item_ids"]:
+            rows.append({"item_id":iid,"facts":[f"fact-{iid}"],"sources":[f"source-{iid}"]})
+        k.accept(self.submission(job, rows, "research.json"))
+        return job
+
+    def finish_write_one(self):
+        self.finish_research(1)
+        job = k.prepare("write", 1)["job"]
+        self.assertEqual(job["items"][0]["input_products"]["research"]["facts"], ["fact-a"])
+        k.accept(self.submission(job, [{"item_id":"a","article_text":"Artikel A"}], "write.json"))
+        return job
 
     def test_restart_reuses_exact_job(self):
         first = k.prepare("research", 2)["job"]
@@ -47,30 +65,55 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(before, k.load_json(k.LEDGER))
         self.assertTrue(k.CURRENT_JOB.exists())
 
-    def test_completed_research_unlocks_write_only_after_accept(self):
-        job = k.prepare("research", 2)["job"]
-        good = self.submission(job, [
-            {"item_id":"a","facts":["x"],"sources":["s"]},
-            {"item_id":"b","facts":["y"],"sources":["t"]}
-        ])
-        k.accept(good)
-        write_job = k.prepare("write", 2)["job"]
-        self.assertEqual(set(write_job["item_ids"]), {"a","b"})
+    def test_write_job_contains_complete_research_product(self):
+        self.finish_research(2)
+        job = k.prepare("write", 2)["job"]
+        by_id = {x["item_id"]:x for x in job["items"]}
+        self.assertEqual(by_id["a"]["input_products"]["research"]["facts"], ["fact-a"])
+        self.assertEqual(by_id["b"]["input_products"]["research"]["sources"], ["source-b"])
+        self.assertTrue(by_id["a"]["input_product_refs"]["research"]["path"].startswith("warehouse/research/"))
 
     def test_other_station_cannot_steal_open_job(self):
         k.prepare("research", 1)
         with self.assertRaises(k.K9Error):
             k.prepare("write", 1)
 
-    def test_check_fail_routes_to_repair_as_new_station_product(self):
-        research = k.prepare("research", 1)["job"]
-        k.accept(self.submission(research, [{"item_id":"a","facts":["x"],"sources":["s"]}]))
-        write = k.prepare("write", 1)["job"]
-        k.accept(self.submission(write, [{"item_id":"a","article_text":"Artikel"}]))
+    def test_check_job_contains_article_and_research(self):
+        self.finish_write_one()
         check = k.prepare("check", 1)["job"]
-        k.accept(self.submission(check, [{"item_id":"a","lt68_pass":True,"ppm679_pass":False}]))
+        inp = check["items"][0]["input_products"]
+        self.assertEqual(inp["article"]["article_text"], "Artikel A")
+        self.assertEqual(inp["research"]["facts"], ["fact-a"])
+
+    def test_check_fail_routes_to_repair_with_complete_inputs(self):
+        self.finish_write_one()
+        check = k.prepare("check", 1)["job"]
+        k.accept(self.submission(check, [{"item_id":"a","lt68_pass":True,"ppm679_pass":False}], "check.json"))
         repair = k.prepare("repair", 1)["job"]
-        self.assertEqual(repair["item_ids"], ["a"])
+        inp = repair["items"][0]["input_products"]
+        self.assertEqual(inp["article"]["article_text"], "Artikel A")
+        self.assertFalse(inp["failed_check"]["ppm679_pass"])
+        self.assertEqual(inp["research"]["facts"], ["fact-a"])
+
+    def test_recheck_after_repair_uses_repaired_article(self):
+        self.finish_write_one()
+        check = k.prepare("check", 1)["job"]
+        k.accept(self.submission(check, [{"item_id":"a","lt68_pass":False,"ppm679_pass":True}], "check1.json"))
+        repair = k.prepare("repair", 1)["job"]
+        k.accept(self.submission(repair, [{"item_id":"a","article_text":"Artikel A repariert"}], "repair.json"))
+        recheck = k.prepare("check", 1)["job"]
+        self.assertEqual(recheck["items"][0]["input_products"]["article"]["article_text"], "Artikel A repariert")
+        self.assertEqual(recheck["items"][0]["revision"], 1)
+
+    def test_tampered_warehouse_product_is_blocked(self):
+        self.finish_research(1)
+        data = k.ledger()
+        ref = data["items"][0]["products"]["research"]
+        package = k.load_json(k.ROOT / ref["path"])
+        package["results"][0]["facts"] = ["tampered"]
+        k.write_json(k.ROOT / ref["path"], package)
+        with self.assertRaisesRegex(k.K9Error, "INPUT_PRODUCT_HASH_MISMATCH"):
+            k.prepare("write", 1)
 
     def test_duplicate_intake_blocked(self):
         path = k.ROOT / "duplicate.json"
