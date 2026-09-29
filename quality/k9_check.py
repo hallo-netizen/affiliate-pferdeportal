@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, json, sys, tempfile
+import argparse, hashlib, json, sys, tempfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -9,6 +9,10 @@ import k9_ppm679
 
 class CheckError(RuntimeError):
     pass
+
+def stable(obj):
+    raw=json.dumps(obj,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 def load_json(path):
     try:
@@ -41,7 +45,7 @@ def run_job(job_path, jar_path, ppm_path):
         article=one_product(item,"article","article_product")
         html=str(article.get("content_html") or "")
         title=str(article.get("title") or "")
-        ppm_item=article.get("ppm_item")
+        ppm_item=json.loads(json.dumps(article.get("ppm_item")))
         fact_pack=research.get("fact_pack")
         if not html or not title or not isinstance(ppm_item,dict) or not isinstance(fact_pack,dict):
             raise CheckError("K9_CHECK_BOUND_INPUT_INCOMPLETE")
@@ -51,6 +55,14 @@ def run_job(job_path, jar_path, ppm_path):
             article_path=root/"article.html"
             article_path.write_text(html,encoding="utf-8")
             lt_result=k9_lt68.run(Path(jar_path),article_path)
+            binding=ppm_item.get("quality_binding")
+            if not isinstance(binding,dict):
+                raise CheckError("K9_CHECK_QUALITY_BINDING_MISSING")
+            evidence=lt_result.get("language_evidence")
+            if not isinstance(evidence,dict):
+                raise CheckError("K9_CHECK_LT_EVIDENCE_MISSING")
+            binding["language_evidence"]=evidence
+            ppm_item["quality_binding_hash"]=stable(binding)
             ppm_input={
                 "contract":"K9_PPM679_INPUT_V1",
                 "generated":{
