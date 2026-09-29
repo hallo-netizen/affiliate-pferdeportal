@@ -65,6 +65,7 @@ def canonical_fact_pack(research):
     if not fpid: raise Blocked("FACT_PACK_ID_MISSING")
     return {
         "contract":"canonical_fact_pack_v1",
+        "article_type":str(fp.get("article_type") or ""),
         "fact_pack_id":fpid,
         "source_snapshot_id":fpid,
         "claims":claims,
