@@ -57,8 +57,15 @@ jobs:
           assert r['lt68_result']['contract']=='K9_LT68_RESULT_V1'
           assert r['lt68_result']['status'] in ('PASS','REPAIR_REQUIRED')
           assert r['ppm679_result']['contract']=='K9_PPM679_RESULT_V1'
-          assert r['ppm679_result']['status']=='PASS', r['ppm679_result']
+          assert r['ppm679_result']['status'] in ('PASS','REPAIR_REQUIRED')
           assert r['lt68_result']['article_sha256']==r['ppm679_result']['content_sha256']
+          wave=r['ppm679_result']['checks']['content_structure_language_gate_checks']
+          assert r['lt68_result']['checked_text_sha256']==wave['language_checked_text_sha256']
+          assert r['lt68_result']['finding_count']==wave['language_raw_finding_count']
+          if r['lt68_result']['finding_count']==0:
+              assert wave['language_evidence_valid'] is True, wave
+          else:
+              assert r['ppm679_result']['status']=='REPAIR_REQUIRED'
           PY
       - name: Wrong station must block
         shell: bash
