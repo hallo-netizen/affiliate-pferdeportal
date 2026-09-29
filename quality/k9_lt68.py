@@ -3,7 +3,9 @@ import argparse, hashlib, html, json, re, subprocess, sys, tempfile
 from pathlib import Path
 
 LT_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
-ENGINE = "LanguageTool 6.8"
+LT_OUTER_DEPENDENCY_SHA256 = "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a"
+LT_INNER_DEPENDENCY_SHA256 = "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d"
+ENGINE = "LanguageTool 6.8 / Bestand 43"
 
 class LTError(RuntimeError):
     pass
@@ -18,15 +20,17 @@ def file_sha256(path: Path) -> str:
             h.update(chunk)
     return h.hexdigest()
 
-def plain_text(article_html: str) -> str:
-    value = re.sub(r"(?is)<!--.*?-->", "\n", article_html)
-    value = re.sub(r"(?is)<(script|style)\\b[^>]*>.*?</\\1>", "\n", value)
-    value = re.sub(r"(?is)</?(?:article|section|p|div|li|h[1-6]|br|tr|td|th|ul|ol|table|blockquote)\\b[^>]*>", "\n", value)
-    value = re.sub(r"(?s)<[^>]+>", "", value)
-    value = html.unescape(value)
-    value = re.sub(r"[ \t\r\f\v]+", " ", value)
-    value = re.sub(r"\n[ \t]*\n+", "\n\n", value)
-    return value.strip() + "\n"
+def ppm_visible_language_text(article_html: str) -> str:
+    """Exact Python copy of PPM 6.7.9 Wave-2 visible_language_text()."""
+    lines = []
+    for match in re.finditer(r"<(h2|p|li|th|td|small)\b[^>]*>(.*?)</\1>", article_html, re.I | re.S):
+        value = html.unescape(match.group(2))
+        value = re.sub(r"<[^>]+>", " ", value)
+        value = re.sub(r"\s+", " ", value).strip()
+        value = re.sub(r"\s+([.,;:!?])", r"\1", value)
+        if value:
+            lines.append(value)
+    return "\n\n".join(lines)
 
 def run(jar: Path, article_path: Path) -> dict:
     if not jar.is_file():
@@ -36,7 +40,7 @@ def run(jar: Path, article_path: Path) -> dict:
         raise LTError("LT68_JAR_HASH_MISMATCH")
 
     raw_html = article_path.read_text(encoding="utf-8")
-    checked = plain_text(raw_html)
+    checked = ppm_visible_language_text(raw_html)
     if not checked.strip():
         raise LTError("LT68_TEXT_EMPTY")
 
@@ -54,8 +58,9 @@ def run(jar: Path, article_path: Path) -> dict:
     if proc.returncode != 0:
         raise LTError("LT68_EXECUTION_FAILED:" + (proc.stderr or proc.stdout).strip()[:220])
 
+    raw_report = proc.stdout
     try:
-        report = json.loads(proc.stdout)
+        report = json.loads(raw_report)
     except json.JSONDecodeError as exc:
         raise LTError("LT68_REPORT_INVALID") from exc
 
@@ -76,14 +81,42 @@ def run(jar: Path, article_path: Path) -> dict:
             "context": str(context.get("text") or ""),
         })
 
+    article_sha = sha256_bytes(raw_html.encode("utf-8"))
+    checked_sha = sha256_bytes(checked.encode("utf-8"))
+    raw_sha = sha256_bytes(raw_report.encode("utf-8"))
+    evidence = {
+        "engine": ENGINE,
+        "outer_dependency_sha256": LT_OUTER_DEPENDENCY_SHA256,
+        "inner_dependency_sha256": LT_INNER_DEPENDENCY_SHA256,
+        "content_hash": article_sha,
+        "checked_text": checked,
+        "checked_text_sha256": checked_sha,
+        "raw_report_json": raw_report,
+        "raw_report_sha256": raw_sha,
+        "raw_finding_count": len(matches),
+        "unresolved_finding_count": len(matches),
+        "return_code": proc.returncode,
+        "approved_exceptions": [],
+        "execution_record": {
+            "input_sha256": checked_sha,
+            "raw_stdout_sha256": raw_sha,
+            "return_code": proc.returncode,
+        },
+    }
+
     return {
         "contract": "K9_LT68_RESULT_V1",
         "engine": ENGINE,
         "jar_sha256": actual,
-        "article_sha256": sha256_bytes(raw_html.encode("utf-8")),
-        "checked_text_sha256": sha256_bytes(checked.encode("utf-8")),
+        "outer_dependency_sha256": LT_OUTER_DEPENDENCY_SHA256,
+        "inner_dependency_sha256": LT_INNER_DEPENDENCY_SHA256,
+        "article_sha256": article_sha,
+        "checked_text_sha256": checked_sha,
+        "raw_report_sha256": raw_sha,
+        "return_code": proc.returncode,
         "finding_count": len(findings),
         "findings": findings,
+        "language_evidence": evidence,
         "status": "PASS" if not findings else "REPAIR_REQUIRED",
         "publish_allowed": False,
     }
