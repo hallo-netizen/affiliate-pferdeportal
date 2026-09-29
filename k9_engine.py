@@ -8,6 +8,8 @@ CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
 CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
 WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
+LT68_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
+PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
 
 class K9Error(RuntimeError):
     pass
@@ -212,6 +214,142 @@ def prepare(station, batch_size, source_run_id="manual"):
     write_chat_entry(core)
     return {"status": "NEW_JOB_PREPARED", "job": core}
 
+def _job_item(job, item_id):
+    matches = [x for x in job.get("items", []) if x.get("item_id") == item_id]
+    if len(matches) != 1:
+        raise K9Error("JOB_ITEM_MISSING_OR_DUPLICATE")
+    return matches[0]
+
+def _validate_research_product(row, job_item):
+    product = row.get("research_product")
+    if not isinstance(product, dict) or product.get("contract") != "K9_RESEARCH_PRODUCT_V1":
+        raise K9Error("RESEARCH_PRODUCT_CONTRACT_INVALID")
+    sources = product.get("sources")
+    pack = product.get("fact_pack")
+    if not isinstance(sources, list) or not sources or not isinstance(pack, dict):
+        raise K9Error("RESEARCH_PRODUCT_INCOMPLETE")
+
+    source_ids = []
+    for source in sources:
+        if not isinstance(source, dict):
+            raise K9Error("RESEARCH_SOURCE_INVALID")
+        sid = str(source.get("source_id") or "").strip()
+        url = str(source.get("url") or "").strip()
+        title = str(source.get("title") or "").strip()
+        if not sid or not url or not title:
+            raise K9Error("RESEARCH_SOURCE_REQUIRED_FIELD_MISSING")
+        source_ids.append(sid)
+    if len(source_ids) != len(set(source_ids)):
+        raise K9Error("RESEARCH_SOURCE_ID_DUPLICATE")
+
+    required_pack = {
+        "fact_pack_id", "domain", "article_type", "fact_ids", "status", "claims",
+        "fact_pack_hash", "source_manifest_hash", "claim_register_hash",
+        "required_block_coverage", "table_evidence_coverage",
+        "conclusion_evidence_coverage", "article_type_coverage",
+        "temporal_validity_status", "contradiction_status",
+        "production_readiness_status", "placeholder_content_status"
+    }
+    if not required_pack.issubset(pack):
+        raise K9Error("RESEARCH_FACT_PACK_REQUIRED_FIELD_MISSING")
+    if pack.get("status") != "SOURCE_VERIFIED_PRODUCTION_READY" or pack.get("production_readiness_status") != "SOURCE_VERIFIED_PRODUCTION_READY":
+        raise K9Error("RESEARCH_FACT_PACK_NOT_PRODUCTION_READY")
+    fact_ids = pack.get("fact_ids")
+    claims = pack.get("claims")
+    if not isinstance(fact_ids, list) or not fact_ids or not isinstance(claims, list) or not claims:
+        raise K9Error("RESEARCH_FACT_PACK_FACTS_MISSING")
+    if len(fact_ids) != len(set(fact_ids)):
+        raise K9Error("RESEARCH_FACT_ID_DUPLICATE")
+
+    claim_ids = []
+    for claim in claims:
+        if not isinstance(claim, dict):
+            raise K9Error("RESEARCH_CLAIM_INVALID")
+        for key in ("fact_id", "source_id", "locator", "statement", "claim_status", "subject_scope", "time_scope"):
+            if not str(claim.get(key) or "").strip():
+                raise K9Error("RESEARCH_CLAIM_REQUIRED_FIELD_MISSING:" + key)
+        if claim.get("claim_status") != "FULLY_SUPPORTED":
+            raise K9Error("RESEARCH_CLAIM_NOT_FULLY_SUPPORTED")
+        if claim["source_id"] not in source_ids:
+            raise K9Error("RESEARCH_CLAIM_SOURCE_UNKNOWN")
+        claim_ids.append(claim["fact_id"])
+    if set(claim_ids) != set(fact_ids) or len(claim_ids) != len(set(claim_ids)):
+        raise K9Error("RESEARCH_FACT_CLAIM_SET_MISMATCH")
+
+    expected_type = str(job_item.get("metadata", {}).get("article_type") or "").strip()
+    if expected_type and pack.get("article_type") != expected_type:
+        raise K9Error("RESEARCH_ARTICLE_TYPE_MISMATCH")
+    declared = product.get("product_sha256")
+    core = dict(product)
+    core.pop("product_sha256", None)
+    if declared != stable(core):
+        raise K9Error("RESEARCH_PRODUCT_HASH_INVALID")
+    return product
+
+def _validate_article_product(row, job_item):
+    product = row.get("article_product")
+    if not isinstance(product, dict) or product.get("contract") != "K9_ARTICLE_PRODUCT_V1":
+        raise K9Error("ARTICLE_PRODUCT_CONTRACT_INVALID")
+    title = str(product.get("title") or "").strip()
+    html = str(product.get("content_html") or "")
+    if not title or not html.strip():
+        raise K9Error("ARTICLE_PRODUCT_CONTENT_MISSING")
+    content_sha = hashlib.sha256(html.encode("utf-8")).hexdigest()
+    if product.get("content_sha256") != content_sha:
+        raise K9Error("ARTICLE_PRODUCT_CONTENT_HASH_INVALID")
+
+    research_row = job_item.get("input_products", {}).get("research")
+    if not isinstance(research_row, dict):
+        raise K9Error("ARTICLE_RESEARCH_INPUT_MISSING")
+    research = research_row.get("research_product")
+    if not isinstance(research, dict):
+        raise K9Error("ARTICLE_RESEARCH_PRODUCT_MISSING")
+    if product.get("research_product_sha256") != research.get("product_sha256"):
+        raise K9Error("ARTICLE_RESEARCH_BINDING_MISMATCH")
+
+    ppm_item = product.get("ppm_item")
+    if not isinstance(ppm_item, dict):
+        raise K9Error("ARTICLE_PPM_ITEM_MISSING")
+    fact_pack = research.get("fact_pack", {})
+    if ppm_item.get("source_snapshot_id") != fact_pack.get("fact_pack_id"):
+        raise K9Error("ARTICLE_PPM_SOURCE_BINDING_MISMATCH")
+    if ppm_item.get("article_type") != fact_pack.get("article_type"):
+        raise K9Error("ARTICLE_PPM_TYPE_BINDING_MISMATCH")
+    canonical = ppm_item.get("canonical_article")
+    if not isinstance(canonical, dict) or canonical.get("body_html") != html or canonical.get("title") != title:
+        raise K9Error("ARTICLE_PPM_CANONICAL_BINDING_MISMATCH")
+
+    declared = product.get("product_sha256")
+    core = dict(product)
+    core.pop("product_sha256", None)
+    if declared != stable(core):
+        raise K9Error("ARTICLE_PRODUCT_HASH_INVALID")
+    return product
+
+def _validate_check_product(row, job_item):
+    lt = row.get("lt68_result")
+    ppm = row.get("ppm679_result")
+    if not isinstance(lt, dict) or lt.get("contract") != "K9_LT68_RESULT_V1":
+        raise K9Error("CHECK_LT68_RESULT_INVALID")
+    if not isinstance(ppm, dict) or ppm.get("contract") != "K9_PPM679_RESULT_V1":
+        raise K9Error("CHECK_PPM679_RESULT_INVALID")
+
+    article_row = job_item.get("input_products", {}).get("article")
+    if not isinstance(article_row, dict):
+        raise K9Error("CHECK_ARTICLE_INPUT_MISSING")
+    article = article_row.get("article_product")
+    if not isinstance(article, dict):
+        raise K9Error("CHECK_ARTICLE_PRODUCT_MISSING")
+    content_sha = article.get("content_sha256")
+
+    if lt.get("jar_sha256") != LT68_JAR_SHA256 or lt.get("article_sha256") != content_sha:
+        raise K9Error("CHECK_LT68_BINDING_INVALID")
+    if ppm.get("ppm_package_sha256") != PPM679_PACKAGE_SHA256 or ppm.get("content_sha256") != content_sha:
+        raise K9Error("CHECK_PPM679_BINDING_INVALID")
+    if lt.get("status") not in ("PASS", "REPAIR_REQUIRED") or ppm.get("status") not in ("PASS", "REPAIR_REQUIRED"):
+        raise K9Error("CHECK_RESULT_STATUS_INVALID")
+    return lt, ppm
+
 def validate_submission(job, submission):
     if submission.get("contract") != "K9_SUBMISSION_V1":
         raise K9Error("SUBMISSION_CONTRACT_INVALID")
@@ -227,18 +365,15 @@ def validate_submission(job, submission):
     station = job["station"]
     for item_id in job["item_ids"]:
         row = by_id[item_id]
+        job_item = _job_item(job, item_id)
         if station == "research":
-            if not isinstance(row.get("facts"), list) or not row["facts"] or not isinstance(row.get("sources"), list) or not row["sources"]:
-                raise K9Error("RESEARCH_RESULT_INCOMPLETE")
+            _validate_research_product(row, job_item)
         elif station == "write":
-            if not isinstance(row.get("article_text"), str) or not row["article_text"].strip():
-                raise K9Error("WRITE_RESULT_INCOMPLETE")
+            _validate_article_product(row, job_item)
         elif station == "check":
-            if not isinstance(row.get("lt68_pass"), bool) or not isinstance(row.get("ppm679_pass"), bool):
-                raise K9Error("CHECK_RESULT_INCOMPLETE")
+            _validate_check_product(row, job_item)
         elif station == "repair":
-            if not isinstance(row.get("article_text"), str) or not row["article_text"].strip():
-                raise K9Error("REPAIR_RESULT_INCOMPLETE")
+            _validate_article_product(row, job_item)
     return by_id
 
 def accept(path):
@@ -272,7 +407,9 @@ def accept(path):
         elif stage == "write":
             item["stages"]["write"] = "DONE"
         elif stage == "check":
-            if result["lt68_pass"] and result["ppm679_pass"]:
+            lt_status = result["lt68_result"]["status"]
+            ppm_status = result["ppm679_result"]["status"]
+            if lt_status == "PASS" and ppm_status == "PASS":
                 item["stages"]["check"] = "DONE"
                 item["stages"]["repair"] = "NOT_REQUIRED"
             else:
