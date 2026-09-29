@@ -1,0 +1,130 @@
+name: K9 final PSERC ENDSTEMPEL package
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths: ['runtime/FINALIZE_TRIGGER']
+permissions:
+  contents: write
+concurrency:
+  group: k9-production-state
+  cancel-in-progress: false
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - name: Assert finalization is the only valid next state
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f runtime/FINALIZE_REQUIRED
+          test -f runtime/FINALIZE_TRIGGER
+          test ! -f runtime/CURRENT_JOB.json
+          python3 - <<'PY'
+          import json
+          s=json.load(open('state/STATUS.json'))
+          assert s['fully_done']==s['total'] and s['total']>0
+          assert s['remaining']==0
+          assert s['ready_for_check']==0
+          assert s['repair_required']==0
+          assert s['active_job'] is None
+          print('K9_FINAL_STATE_READY')
+          PY
+      - name: Hard regression tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Prepare exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k9-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Run real isolated PSERC bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 k9_pserc.py . quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip quality/PSERC-FIX.zip /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar --output runtime/K9_PSERC_RESULT.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('runtime/K9_PSERC_RESULT.json'))
+          assert x['contract']=='K9_PSERC_RESULT_V1'
+          assert x['status']=='PASS'
+          assert x['bridge_status']=='PSERC_PPM_INTAKE_BRIDGE_EXECUTED'
+          assert x['publish_allowed'] is False
+          print('K9_REAL_PSERC_PASS')
+          PY
+      - name: Build and sign final ENDSTEMPEL JSON
+        env:
+          ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${ENDSTEMPEL_PRIVATE_KEY:-}" || { echo ENDSTEMPEL_SECRET_MISSING; exit 2; }
+          mkdir -p final
+          python3 k9_endstempel.py build . runtime/K9_PSERC_RESULT.json final | tee runtime/K9_ENDSTEMPEL_RESULT.json
+          final_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+          test -f "$final_path"
+          python3 k9_endstempel.py verify "$final_path" | tee runtime/K9_ENDSTEMPEL_VERIFY.json
+      - name: Verify exact WordPress import contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          final_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+          python3 k9_wordpress_verify.py "$final_path" --output runtime/K9_WORDPRESS_IMPORT_VERIFY.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('runtime/K9_WORDPRESS_IMPORT_VERIFY.json'))
+          assert x['contract']=='K9_WORDPRESS_IMPORT_VERIFY_V1'
+          assert x['status']=='PASS'
+          assert x['publish_allowed'] is False
+          print('K9_WORDPRESS_IMPORT_CONTRACT_PASS')
+          PY
+      - name: Write terminal STOP receipt and persist final package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          final=pathlib.Path('final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json')
+          raw=final.read_bytes()
+          pkg=json.loads(raw)
+          receipt={
+            'contract':'K9_TERMINAL_RECEIPT_V1',
+            'status':'STOP',
+            'workflow':'RESEARCH_WRITE_LT68_PPM679_REPAIR_PSERC_ENDSTEMPEL_WORDPRESS_FILE',
+            'final_ref':str(final),
+            'final_sha256':hashlib.sha256(raw).hexdigest(),
+            'batch_sha256':pkg['batch_sha256'],
+            'article_count':pkg['article_manifest']['article_count'],
+            'publish_allowed':False,
+          }
+          pathlib.Path('runtime/K9_STOP.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER
+          git config user.name 'k9-finalizer-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A final runtime
+          git commit -m 'K9: real PSERC ENDSTEMPEL WordPress package STOP'
+          git push
+      - name: Publish exact final JSON as durable release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' > /tmp/release.env
+          import json
+          x=json.load(open('runtime/K9_STOP.json'))
+          print('TAG=k9-endstempel-'+x['batch_sha256']+'-g000009')
+          print('SHA='+x['final_sha256'])
+          PY
+          . /tmp/release.env
+          final_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 && { echo K9_RELEASE_REPLAY_BLOCKED; exit 2; } || true
+          gh release create "$TAG" "$final_path#GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json" --repo "$GITHUB_REPOSITORY" --target konzept9/greenfield-20260929 --title "K9 Endstempel real E2E" --notes "K9 real E2E final JSON. SHA-256: $SHA. publish_allowed=false."
+          echo K9_FINAL_DURABLE_RELEASE_PASS
