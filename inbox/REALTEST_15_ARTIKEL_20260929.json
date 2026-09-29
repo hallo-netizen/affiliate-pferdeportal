@@ -1,0 +1,172 @@
+{
+  "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
+  "version": "5.0.0",
+  "compiler_version": "0.28.23",
+  "created_at_utc": "2026-09-22T21:06:17+00:00",
+  "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+  "system_boundary": {
+    "production_machine_modified": false,
+    "production_center_modified": false,
+    "editorial_guard_modified": false,
+    "design_plugin_modified": false,
+    "posts_terms_urls_yoast_modified": false,
+    "existing_articles_modified": false,
+    "production_started": false,
+    "draft_created": false,
+    "publish_allowed": false,
+    "wordpress_database_write_attempted": false,
+    "plugin_option_write_attempted": true,
+    "server_file_write_attempted": false,
+    "article_text_emitted": false,
+    "html_emitted": false,
+    "fact_pack_emitted": false,
+    "headings_tables_lists_links_emitted": false
+  },
+  "hard_rules": {
+    "question_title_always_faq": true,
+    "journal_question_title_registered_exception": true,
+    "category_must_match_article_type": true,
+    "semantic_category_family_must_match_source_query": true,
+    "runtime_reassignment_forbidden": true,
+    "portal_internal_topic_evidence_required": true,
+    "external_serp_evidence_required": false,
+    "text_machine_is_only_content_and_format_authority": true,
+    "metadata_handoff_exact_scalar_fields": [
+      "title",
+      "target_keyword",
+      "category",
+      "article_type",
+      "plan_slot"
+    ],
+    "unsupported_metadata_only_intake_must_block": true,
+    "existing_title_slug_and_topic_duplicates_blocked": true,
+    "canonical_slot_is_technical_capacity_only": true,
+    "direct_ppm_consumer_claimed": false,
+    "approved_research_text_process_required": true,
+    "ppm_package_requires_canonical_article_id_before_preflight": true,
+    "plan_slot_identity_contract": "PSERC_PLAN_SLOT_IDENTITY_V2_CANONICAL_ID_ONLY",
+    "plan_slot_identity_excludes_working_title_and_intent_angle": true,
+    "semantic_duplicate_gate_is_separate_from_slot_capacity": true,
+    "ready_requires_technical_editorial_and_e2e_pass": true,
+    "textmachine_target_keyword_exact_title_binding_prevalidated": true,
+    "raw_keyword_remains_separately_preserved": true
+  },
+  "next_step": "APPROVED_RESEARCH_TEXT_PROCESS_INTAKE_REQUIRED",
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 15,
+    "maximum_articles": 0,
+    "maximum_articles_per_type": 0,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "article_type": "FAQ",
+        "category": "pferdedecken-regendecken-faq",
+        "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+        "target_keyword": "Frieren Pferde unter Regendecken",
+        "title": "Frieren Pferde unter Regendecken?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "reitplatzbewaesserung-faq",
+        "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+        "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+        "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "kappzaum-faq",
+        "plan_slot": "160c801f6e1b6c99065f287083a6b5fbc93a545764e04e7c833531904d77bb5d",
+        "target_keyword": "Kann man mit Kappzaum spazieren gehen",
+        "title": "Kann man mit Kappzaum spazieren gehen?"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "longiergurte-beratung",
+        "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+        "target_keyword": "Longiergurte mit Bogen",
+        "title": "Longiergurte mit Bogen im Ratgeber"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+        "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+        "target_keyword": "Kühlgamaschen für Pferde",
+        "title": "Passende Kühlgamaschen für Pferde wählen"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "pferdehaftpflicht-beratung",
+        "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+        "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+        "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "kappzaum-beratung",
+        "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+        "target_keyword": "Kappzaum für Pferde",
+        "title": "So findest du ein optimales Kappzaum für Pferde"
+      },
+      {
+        "article_type": "Beratung",
+        "category": "schermaschinen-beratung",
+        "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+        "target_keyword": "Schermaschinen für Pferde",
+        "title": "So wählst du passende Schermaschinen für Pferde"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "schabracken-faq",
+        "plan_slot": "a554b0f86f23cda760d2a03f839934cbc4dda269d961ff891e763a684283352b",
+        "target_keyword": "Warum sagt man du alte Schabracke",
+        "title": "Warum sagt man du alte Schabracke?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "schabracken-faq",
+        "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+        "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+        "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "reitplatzplaner-faq",
+        "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+        "target_keyword": "Was ist ein Reitplatzplaner",
+        "title": "Was ist ein Reitplatzplaner?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "magnetfelddecken-faq",
+        "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+        "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+        "title": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "longiergurte-faq",
+        "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+        "target_keyword": "Wie lege ich einen Longiergurt an",
+        "title": "Wie lege ich einen Longiergurt an?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "tuev-beim-pferdeanhaenger-faq",
+        "plan_slot": "53c8c859fbbc1b9a2a17ffe53efaf31d74520ac7a89aebc1e84ec9a6ea95ea6f",
+        "target_keyword": "Wie oft muss ein Pferdeanhänger zum TÜV",
+        "title": "Wie oft muss ein Pferdeanhänger zum TÜV?"
+      },
+      {
+        "article_type": "FAQ",
+        "category": "tuev-beim-pferdeanhaenger-faq",
+        "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+        "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+        "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+      }
+    ],
+    "batch_sha256": "75a736d2f6dd1da48992cd48337f134f745d1a43cec46e2776605b116477f678"
+  }
+}
