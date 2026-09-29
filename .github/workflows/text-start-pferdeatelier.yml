@@ -87,6 +87,7 @@ jobs:
             test -f runtime/CHAT_ENTRY.json
           elif [ "$fully_done" -eq "$total" ] && [ "$total" -gt 0 ]; then
             touch runtime/FINALIZE_REQUIRED
+            printf 'auto-finalize-from-green-check\n' > runtime/FINALIZE_TRIGGER
           else
             echo 'K9_CHECK_TERMINAL_STATE_INVALID'
             exit 2
