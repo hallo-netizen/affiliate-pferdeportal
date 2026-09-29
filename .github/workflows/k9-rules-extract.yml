@@ -9,10 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Print exact PPM content generator
+      - name: Inspect exact PPM test-mode kses_post
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/k9-gen && mkdir -p /tmp/k9-gen
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-gen
-          cat /tmp/k9-gen/portal-production-machine/includes/content-generator.php
+          rm -rf /tmp/k9-kses && mkdir -p /tmp/k9-kses
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-kses
+          ROOT=/tmp/k9-kses/portal-production-machine
+          grep -Rni --include='*.php' 'function kses_post' "$ROOT" | head -30
+          f=$(grep -Rl --include='*.php' 'function kses_post' "$ROOT" | head -1)
+          n=$(grep -n 'function kses_post' "$f" | head -1 | cut -d: -f1)
+          s=$((n-30)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+90)); sed -n "${s},${e}p" "$f"
