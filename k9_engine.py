@@ -7,6 +7,7 @@ LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
 CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
 WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
+STATUS_FILE = ROOT / "state" / "STATUS.json"
 WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
 LT68_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
@@ -96,7 +97,24 @@ def eligible(item, station):
 
 def status_report(data=None):
     data = data or ledger()
-    result = {"contract": "K9_STATUS_V1", "total": len(data["items"]), "stations": {}}
+    total = len(data["items"])
+    fully_done = sum(1 for x in data["items"] if x["stages"]["check"] == "DONE")
+    repair_required = sum(1 for x in data["items"] if x["stages"]["repair"] == "PENDING")
+    ready_for_write = sum(1 for x in data["items"] if x["stages"]["research"] == "DONE" and x["stages"]["write"] == "PENDING")
+    ready_for_check = sum(1 for x in data["items"] if x["stages"]["write"] == "DONE" and x["stages"]["check"] == "PENDING")
+    research_open = sum(1 for x in data["items"] if x["stages"]["research"] == "PENDING")
+    result = {
+        "contract": "K9_STATUS_V1",
+        "ledger_generation": data.get("generation"),
+        "total": total,
+        "fully_done": fully_done,
+        "remaining": total - fully_done,
+        "research_open": research_open,
+        "ready_for_write": ready_for_write,
+        "ready_for_check": ready_for_check,
+        "repair_required": repair_required,
+        "stations": {}
+    }
     for station in STATIONS:
         values = [x["stages"][station] for x in data["items"]]
         result["stations"][station] = {
@@ -107,6 +125,11 @@ def status_report(data=None):
         key: job[key] for key in ("job_id", "station", "item_count", "item_ids")
     }
     return result
+
+def write_status(data=None):
+    report = status_report(data)
+    write_json(STATUS_FILE, report)
+    return report
 
 def import_intake(path):
     if current_job() is not None:
@@ -141,6 +164,7 @@ def import_intake(path):
     data["items"].extend(additions)
     data["generation"] += 1
     write_json(LEDGER, data)
+    write_status(data)
     return {"status": "INTAKE_ACCEPTED", "added": len(additions), "total": len(data["items"])}
 
 def _product_result(item, stage):
@@ -192,6 +216,7 @@ def prepare(station, batch_size, source_run_id="manual"):
         if existing["station"] != station:
             raise K9Error("ACTIVE_JOB_EXISTS_FOR_OTHER_STATION")
         write_chat_entry(existing)
+        write_status()
         return {"status": "EXISTING_JOB_REUSED", "job": existing}
 
     data = ledger()
@@ -226,6 +251,7 @@ def prepare(station, batch_size, source_run_id="manual"):
     core["job_sha256"] = stable(core)
     write_json(CURRENT_JOB, core)
     write_chat_entry(core)
+    write_status(data)
     return {"status": "NEW_JOB_PREPARED", "job": core}
 
 def _job_item(job, item_id):
@@ -441,12 +467,13 @@ def accept(path):
     CURRENT_JOB.unlink()
     if CHAT_ENTRY.exists():
         CHAT_ENTRY.unlink()
+    final_report = write_status(data)
     return {
         "status": "ACCEPTED",
         "job_id": job["job_id"],
         "station": stage,
         "item_count": job["item_count"],
-        "report": status_report(data)
+        "report": final_report
     }
 
 def main():
