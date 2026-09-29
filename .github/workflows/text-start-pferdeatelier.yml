@@ -13,11 +13,17 @@ on:
         default: '10'
 permissions:
   contents: write
+concurrency:
+  group: k9-production-state
+  cancel-in-progress: false
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
       - name: Assert isolated K9 tree
         shell: bash
         run: |
@@ -34,7 +40,8 @@ jobs:
           BATCH_SIZE: ${{ inputs.batch_size }}
           SOURCE_RUN_ID: ${{ github.run_id }}
         run: python3 k9_engine.py prepare "$STATION" "$BATCH_SIZE" --source-run-id "$SOURCE_RUN_ID" | tee K9_START_RESULT.json
-      - name: Persist exact open job if created
+      - name: Persist exact chat job
+        if: ${{ inputs.station != 'check' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -46,11 +53,38 @@ jobs:
             git diff --cached --quiet || git commit -m 'K9: persist exact open station job'
             git push
           fi
+      - name: Prepare exact LanguageTool 6.8 for machine check
+        if: ${{ inputs.station == 'check' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f runtime/CURRENT_JOB.json ]; then exit 0; fi
+          mkdir -p /tmp/k9-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Run native K9 check and accept result
+        if: ${{ inputs.station == 'check' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f runtime/CURRENT_JOB.json ]; then exit 0; fi
+          python3 quality/k9_check.py runtime/CURRENT_JOB.json /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip --output /tmp/K9_CHECK_SUBMISSION.json
+          python3 k9_engine.py accept /tmp/K9_CHECK_SUBMISSION.json | tee K9_CHECK_ACCEPT_RESULT.json
+          test ! -f runtime/CURRENT_JOB.json
+          test ! -f runtime/CHAT_ENTRY.json
+          git config user.name 'k9-check-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A state runtime warehouse
+          git diff --cached --quiet || git commit -m 'K9: accept native LT68 PPM679 check product'
+          git push
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: k9-station-ticket
           path: |
             K9_START_RESULT.json
+            K9_CHECK_ACCEPT_RESULT.json
             runtime/CURRENT_JOB.json
             runtime/CHAT_ENTRY.json
           if-no-files-found: ignore
