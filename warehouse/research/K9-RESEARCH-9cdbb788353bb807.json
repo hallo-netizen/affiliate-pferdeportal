@@ -23,7 +23,9 @@
           "claims": [
             {
               "action": "Vor der Gerätewahl Tretschicht, Feuchteverhalten und Entwässerungsprinzip des Platzes einordnen.",
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "check": "Tretschicht und Feuchteverhalten des vorhandenen Platzes beschreiben.",
               "claim_status": "FULLY_SUPPORTED",
               "display_label": "Bodenfeuchte und Aufbau",
@@ -41,7 +43,9 @@
             },
             {
               "action": "Die Auswahl des Pflegegeräts nicht isoliert vom vorhandenen Platzaufbau betrachten.",
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "check": "Prüfen, ob das Gerät zur vorhandenen Konstruktion und vorgesehenen Nutzung passt.",
               "claim_status": "FULLY_SUPPORTED",
               "display_label": "Gesamtsystem Reitplatz",
@@ -59,7 +63,9 @@
             },
             {
               "action": "Den Pflegegang an den aktuellen Feuchtezustand der Tretschicht anpassen.",
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "check": "Prüfen, ob der Boden vor dem Planieren passend feucht ist.",
               "claim_status": "FULLY_SUPPORTED",
               "display_label": "Bewässerung und Pflegezustand",
@@ -77,7 +83,9 @@
             },
             {
               "action": "Eine einstellbare Arbeitstiefe und ein geeignetes Planierelement als zentrale Auswahlkriterien prüfen.",
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "check": "Prüfen, wie fein die Zinkentiefe verstellbar ist und wie das Gerät anschließend einebnet.",
               "claim_status": "FULLY_SUPPORTED",
               "display_label": "Arbeitstiefe und Einebnung",
@@ -95,7 +103,9 @@
             },
             {
               "action": "Tretschicht, Arbeitsbreite und verfügbares Zugfahrzeug gemeinsam abgleichen.",
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "check": "Prüfen, ob Einsatzbereich, Arbeitsbreite und Leistungsbedarf zum Betrieb passen.",
               "claim_status": "FULLY_SUPPORTED",
               "display_label": "Tretschicht, Arbeitsbreite und Zugfahrzeug",
@@ -115,7 +125,13 @@
           "conclusion_evidence_coverage": "PASS",
           "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
           "domain": "pferdeportal",
-          "fact_ids": ["fact-rpp-001","fact-rpp-002","fact-rpp-003","fact-rpp-004","fact-rpp-005"],
+          "fact_ids": [
+            "fact-rpp-001",
+            "fact-rpp-002",
+            "fact-rpp-003",
+            "fact-rpp-004",
+            "fact-rpp-005"
+          ],
           "fact_pack_hash": "448068287dd4879c3d3eff4d82e46b6ae40ff749fa514d051a6a00cba9374616",
           "fact_pack_id": "fp-b635f0c7fcf42dc40b860747",
           "placeholder_content_status": "PASS",
@@ -128,17 +144,52 @@
           "title_scope": "reitplatzplaner_fuer_pferde"
         },
         "portal_links": [
-          {"anchor":"Weide","href":"/weide/","role":"parent_category","section_id":"criteria"},
-          {"anchor":"Reitplatzpflege","href":"/weide/weide-reitplatzpflege/","role":"semantic_related","section_id":"decision"},
-          {"anchor":"Reitplatzplaner","href":"/weide/weide-reitplatzpflege/reitplatzplaner/","role":"further_information","section_id":"further_information"}
+          {
+            "anchor": "Weide",
+            "href": "/weide/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Reitplatzpflege",
+            "href": "/weide/weide-reitplatzpflege/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Reitplatzplaner",
+            "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
         ],
         "product_sha256": "55632c679f000dd328e4cf1b47d0135013a1456138e6e57aa4d0f51cbd1c0a86",
         "sources": [
-          {"source_id":"src-fn-reitplaetze","title":"Reitplätze – FNverlag Leseprobe","url":"https://www.fnverlag.de/files/12/24/leseprobe_978-3-88542-716-2.pdf"},
-          {"source_id":"src-lwk-gute-reitplaetze","title":"Gute Reitplätze – guter und sicherer Sport","url":"https://www.landwirtschaftskammer.de/duesse/lehrschau/sondertage/2009-10-29.htm"},
-          {"source_id":"src-fn-wasser","title":"Grüner Stall: Tipps zum Wasser sparen","url":"https://app.pferd-aktuell.de/news/aktuelle-meldungen/umwelt-und-pferdehaltung/gruener-stall-tipps-zum-wasser-sparen"},
-          {"source_id":"src-otto-vario","title":"OTTO-VARIO Reitplatzplaner","url":"https://www.ottosport.com/produkte/otto-reitplatzplaner/otto-vario"},
-          {"source_id":"src-hatzenbichler-planer","title":"Hatzenbichler Reitplatzplaner","url":"https://www.hatzenbichler.com/de/reiplatzplaner"}
+          {
+            "source_id": "src-fn-reitplaetze",
+            "title": "Reitplätze – FNverlag Leseprobe",
+            "url": "https://www.fnverlag.de/files/12/24/leseprobe_978-3-88542-716-2.pdf"
+          },
+          {
+            "source_id": "src-lwk-gute-reitplaetze",
+            "title": "Gute Reitplätze – guter und sicherer Sport",
+            "url": "https://www.landwirtschaftskammer.de/duesse/lehrschau/sondertage/2009-10-29.htm"
+          },
+          {
+            "source_id": "src-fn-wasser",
+            "title": "Grüner Stall: Tipps zum Wasser sparen",
+            "url": "https://app.pferd-aktuell.de/news/aktuelle-meldungen/umwelt-und-pferdehaltung/gruener-stall-tipps-zum-wasser-sparen"
+          },
+          {
+            "source_id": "src-otto-vario",
+            "title": "OTTO-VARIO Reitplatzplaner",
+            "url": "https://www.ottosport.com/produkte/otto-reitplatzplaner/otto-vario"
+          },
+          {
+            "source_id": "src-hatzenbichler-planer",
+            "title": "Hatzenbichler Reitplatzplaner",
+            "url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+          }
         ]
       }
     }
