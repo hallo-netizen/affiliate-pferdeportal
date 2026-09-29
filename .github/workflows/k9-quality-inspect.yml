@@ -9,24 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Inspect copied K9 PPM package only
+      - name: Inspect exact validator signatures only
         shell: bash
         run: |
           set -euo pipefail
           echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
           rm -rf /tmp/k9ppm && mkdir -p /tmp/k9ppm
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm
-          echo '--- TOP FILES ---'
-          find /tmp/k9ppm -maxdepth 3 -type f | sed 's#^/tmp/k9ppm/##' | sort | head -120
-          echo '--- BOOTSTRAP / VALIDATOR SYMBOLS ---'
-          grep -REn --include='*.php' 'class PPM679_|function .*check|Content_Validator|import_fact_pack_bundle|canonical_article' /tmp/k9ppm | head -160 || true
-          echo '--- CONTENT VALIDATOR ---'
-          sed -n '1,260p' /tmp/k9ppm/portal-production-machine/includes/content-validator.php
-          echo '--- LOCAL CONTENT VALIDATOR ---'
-          sed -n '1,280p' /tmp/k9ppm/portal-production-machine/includes/three-type-local-content-validator.php
-          echo '--- BOOTSTRAP ---'
-          sed -n '1,220p' /tmp/k9ppm/portal-production-machine/tests/bootstrap-test.php
-          echo '--- VALIDATION CONTRACT ---'
-          cat /tmp/k9ppm/portal-production-machine/contracts/content-validation-contract-v2.json
-          echo '--- ARTICLE TYPE TEMPLATES HEAD ---'
-          sed -n '1,260p' /tmp/k9ppm/portal-production-machine/contracts/article-type-templates.json
+          ROOT=/tmp/k9ppm/portal-production-machine
+          echo '--- content-validator functions ---'
+          grep -nE 'function [A-Za-z0-9_]+' "$ROOT/includes/content-validator.php"
+          echo '--- local-content-validator functions ---'
+          grep -nE 'function [A-Za-z0-9_]+' "$ROOT/includes/three-type-local-content-validator.php"
+          echo '--- content-validator check neighborhood ---'
+          n=$(grep -nE 'function check\(' "$ROOT/includes/content-validator.php" | head -1 | cut -d: -f1)
+          s=$((n-25)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+90)); sed -n "${s},${e}p" "$ROOT/includes/content-validator.php"
+          echo '--- local-validator public entry neighborhood ---'
+          n=$(grep -nE 'public static function' "$ROOT/includes/three-type-local-content-validator.php" | tail -1 | cut -d: -f1)
+          s=$((n-25)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+110)); sed -n "${s},${e}p" "$ROOT/includes/three-type-local-content-validator.php"
