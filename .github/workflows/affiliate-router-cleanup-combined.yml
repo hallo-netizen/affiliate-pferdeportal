@@ -1,47 +1,273 @@
 name: Affiliate Router Cleanup Combined
+
 on:
   push:
     branches: [affiliate-release-current]
     paths:
       - '.github/workflows/affiliate-router-cleanup-combined.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   combined-contract:
     runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
     steps:
       - uses: actions/checkout@v4
-      - name: Build combined candidate
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Governance and exact 6.72.166 source binding
+        shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/router-clean
-          mkdir -p /tmp/router-clean
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/router-clean/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/router-clean/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_batch_patch.py /tmp/router-clean/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cpu_similarity_patch.py /tmp/router-clean/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_ranking_memo_patch.py /tmp/router-clean/affiliate-portal-router
-      - name: PHP syntax
-        run: find /tmp/router-clean/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
-      - name: CPU exact-equivalence
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py source-check
+          python3 control/release-governance/release_guard.py start --branch affiliate-release-current
+          grep -F "Version: 6.72.166" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.166';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
+          echo "PASS exact source-bound 6.72.166"
+
+      - name: Exact delta versus proven 6.72.165
+        shell: bash
         run: |
-          cp AFFILIATE_HOBBYRAUM/performance-cache/test_ebay_similarity_cpu_v672146.php /tmp/router-clean/test_ebay_similarity_cpu_v672146.php
-          cd /tmp/router-clean
-          php test_ebay_similarity_cpu_v672146.php
-      - name: Batch positive-negative regression
+          set -euo pipefail
+          rm -rf /tmp/v672165 /tmp/v672166
+          mkdir -p /tmp/v672165 /tmp/v672166
+          git archive 4ee6922d2f6fd93e0261e5e8bed8758bcfcc5c01 release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/v672165
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/v672166/affiliate-portal-router
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          a=Path('/tmp/v672165/release/affiliate-zentrale/current/affiliate-portal-router')
+          b=Path('/tmp/v672166/affiliate-portal-router')
+          def h(p):
+              return hashlib.sha256(p.read_bytes()).hexdigest()
+          rels=sorted(set(
+              [p.relative_to(a).as_posix() for p in a.rglob('*') if p.is_file()] +
+              [p.relative_to(b).as_posix() for p in b.rglob('*') if p.is_file()]
+          ))
+          changed=[r for r in rels if not (a/r).is_file() or not (b/r).is_file() or h(a/r)!=h(b/r)]
+          expected=['includes/trait-ppar-ebay.php','pferdeportal-affiliate-router.php']
+          print('CHANGED',changed)
+          if changed != expected:
+              raise SystemExit(f'FAIL unexpected 6.72.166 delta: {changed}')
+          print('PASS exact two-file performance delta')
+          PY
+
+      - name: PHP syntax all current plugin files
+        shell: bash
         run: |
-          cp AFFILIATE_HOBBYRAUM/performance-cache/test_request_local_batch_cache.php /tmp/router-clean/test_request_local_batch_cache.php
-          cd /tmp/router-clean
-          php test_request_local_batch_cache.php
-      - name: Ranking first-call semantics unchanged
+          set -euo pipefail
+          find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "21"
+          echo "PASS php lint 21/21"
+
+      - name: 6.72.166 changed-path hard assertions
+        shell: bash
         run: |
-          rm -rf /tmp/base145
-          mkdir -p /tmp/base145
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/base145/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cache_patch.py /tmp/base145/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_batch_patch.py /tmp/base145/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/apply_performance_cpu_similarity_patch.py /tmp/base145/affiliate-portal-router
-          python3 AFFILIATE_HOBBYRAUM/performance-cache/test_ranking_memo_source.py /tmp/base145/affiliate-portal-router /tmp/router-clean/affiliate-portal-router
-      - name: Banner regression
-        run: php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php').read_text()
+          def function_body(name):
+              marker='function '+name+'('
+              start=src.find(marker)
+              if start < 0:
+                  raise SystemExit('FAIL missing '+name)
+              brace=src.find('{',start)
+              depth=0
+              for i in range(brace,len(src)):
+                  if src[i]=='{': depth+=1
+                  elif src[i]=='}':
+                      depth-=1
+                      if depth==0:
+                          return src[brace+1:i]
+              raise SystemExit('FAIL unclosed '+name)
+          expand=function_body('ebay_expand_private_parent_listing_query')
+          ceiling=function_body('ebay_enforce_private_visibility_ceiling')
+          if expand.find('ebay_query_may_touch_listing_category') < 0 or expand.find('ebay_private_parent_term') < 0:
+              raise SystemExit('FAIL expansion guard/term path missing')
+          if expand.find('ebay_query_may_touch_listing_category') > expand.find('ebay_private_parent_term'):
+              raise SystemExit('FAIL expansion expensive term resolution occurs before cheap gate')
+          if ceiling.find('ebay_query_may_touch_listing_category') < 0:
+              raise SystemExit('FAIL visibility cheap gate missing')
+          if ceiling.count('ebay_query_listing_category_term_ids($query)') != 1:
+              raise SystemExit('FAIL visibility category IDs not single-pass')
+          projection='SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description'
+          if src.count(projection) < 2:
+              raise SystemExit('FAIL bounded source projection missing')
+          prime=function_body('ebay_prime_business_campaign_source_row_cache')
+          single=function_body('ebay_business_campaign_source_row')
+          if 'SELECT *' in prime or 'SELECT *' in single:
+              raise SystemExit('FAIL full-row BUSINESS source query remains')
+          print('PASS early relevance gates')
+          print('PASS single-pass listing-category resolution')
+          print('PASS bounded BUSINESS source projection')
+          PY
+
+      - name: Existing provider and banner regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh
+          php AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php
+          php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+      - name: Install exact WordPress 7.1.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 6.72.166 Full Gate' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/ppar-hivepress-fixture.php <<'PHP'
+          <?php
+          add_action('init', static function(){
+              if (!post_type_exists('hp_listing')) {
+                  register_post_type('hp_listing', array('public'=>true,'label'=>'Listings'));
+              }
+              if (!taxonomy_exists('hp_listing_category')) {
+                  register_taxonomy('hp_listing_category', array('hp_listing'), array('public'=>true,'hierarchical'=>true,'label'=>'Listing categories'));
+              }
+          }, 1);
+          PHP
+
+      - name: Build query-regression fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/query-fixture.php <<'PHP'
+          <?php
+          if (!class_exists('Pferdeportal_Affiliate_Router')) { fwrite(STDERR,"FAIL plugin class missing\n"); exit(2); }
+          if (!post_type_exists('hp_listing')) { register_post_type('hp_listing', array('public'=>true)); }
+          if (!taxonomy_exists('hp_listing_category')) { register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true)); }
+          $ensure_term = static function($name,$slug,$parent=0){
+              $existing=get_term_by('slug',$slug,'hp_listing_category');
+              if (is_object($existing)) return (int)$existing->term_id;
+              $r=wp_insert_term($name,'hp_listing_category',array('slug'=>$slug,'parent'=>$parent));
+              if (is_wp_error($r)) { fwrite(STDERR,"FAIL term ".$slug.": ".$r->get_error_message()."\n"); exit(2); }
+              return (int)$r['term_id'];
+          };
+          $private=$ensure_term('Private Anzeigen','private-anzeigen');
+          $child=$ensure_term('Private Kind','private-kind',$private);
+          $other=$ensure_term('Andere Kategorie','andere-kategorie');
+
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $snap=static function($q){
+              return array(
+                  'post_type'=>$q->get('post_type'),
+                  'taxonomy'=>$q->get('taxonomy'),
+                  'term'=>$q->get('term'),
+                  'term_id'=>$q->get('term_id'),
+                  'hp_listing_category'=>$q->get('hp_listing_category'),
+                  'tax_query'=>$q->get('tax_query'),
+                  'meta_query'=>$q->get('meta_query'),
+                  'posts_per_page'=>$q->get('posts_per_page'),
+                  'posts_per_archive_page'=>$q->get('posts_per_archive_page'),
+                  'private_limit'=>$q->get('_ppar_ebay_private_public_limit'),
+                  'ceiling'=>$q->get('_ppar_ebay_visibility_ceiling'),
+                  'paged'=>$q->get('paged'),
+                  'no_found_rows'=>$q->get('no_found_rows'),
+              );
+          };
+          $make=static function($vars){
+              $q=new WP_Query();
+              foreach($vars as $k=>$v){ $q->set($k,$v); }
+              return $q;
+          };
+          $run=static function($vars) use($make,$o,$snap){
+              $q=$make($vars);
+              $o->ebay_expand_private_parent_listing_query($q);
+              $o->ebay_enforce_private_visibility_ceiling($q);
+              return $snap($q);
+          };
+          $cases=array(
+              'ordinary_page'=>$run(array('post_type'=>'page')),
+              'ordinary_post'=>$run(array('post_type'=>'post')),
+              'unrelated_taxonomy'=>$run(array('taxonomy'=>'category','term'=>'news')),
+              'listing_general'=>$run(array('post_type'=>'hp_listing')),
+              'private_parent'=>$run(array('post_type'=>'hp_listing','hp_listing_category'=>'private-anzeigen')),
+              'private_child'=>$run(array('post_type'=>'hp_listing','hp_listing_category'=>'private-kind')),
+              'other_listing_category'=>$run(array('post_type'=>'hp_listing','hp_listing_category'=>'andere-kategorie')),
+              'listing_single'=>$run(array('post_type'=>'hp_listing','p'=>123)),
+              'explicit_private_tax_query'=>$run(array('post_type'=>'hp_listing','tax_query'=>array(array('taxonomy'=>'hp_listing_category','field'=>'term_id','terms'=>array($private))))),
+          );
+          echo json_encode($cases, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT), "\n";
+          PHP
+
+      - name: WordPress/MariaDB exact functional equivalence 6.72.165 -> 6.72.166
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base-plugin
+          mkdir -p /tmp/base-plugin
+          git archive 4ee6922d2f6fd93e0261e5e8bed8758bcfcc5c01 release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/base-plugin
+          cp -a /tmp/base-plugin/release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.165") { exit(2); } echo "BASE_VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp eval-file /tmp/query-fixture.php --path=/tmp/wp-site > /tmp/base-query.json
+          /tmp/wp plugin deactivate affiliate-portal-router --path=/tmp/wp-site
+          rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.166") { exit(2); } echo "CURRENT_VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp eval-file /tmp/query-fixture.php --path=/tmp/wp-site > /tmp/current-query.json
+          diff -u /tmp/base-query.json /tmp/current-query.json
+          echo "PASS WordPress/MariaDB query behavior byte-identical across all bound cases"
+
+      - name: Current plugin frontend smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/wp-server.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ >/tmp/front.html; then break; fi
+            sleep 1
+          done
+          test -s /tmp/front.html
+          ! grep -Eqi 'Fatal error|Uncaught Error|Parse error' /tmp/front.html
+          echo "PASS current frontend smoke"
+
+      - name: Upload combined full-gate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-router-672166-combined-full-gate
+          path: |
+            /tmp/php-lint.log
+            /tmp/base-query.json
+            /tmp/current-query.json
+            /tmp/wp-server.log
+          if-no-files-found: error
