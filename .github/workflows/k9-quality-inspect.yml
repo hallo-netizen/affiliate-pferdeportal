@@ -20,5 +20,13 @@ jobs:
           find /tmp/k9ppm -maxdepth 3 -type f | sed 's#^/tmp/k9ppm/##' | sort | head -120
           echo '--- BOOTSTRAP / VALIDATOR SYMBOLS ---'
           grep -REn --include='*.php' 'class PPM679_|function .*check|Content_Validator|import_fact_pack_bundle|canonical_article' /tmp/k9ppm | head -160 || true
-          echo '--- TEST BOOTSTRAP ---'
-          find /tmp/k9ppm -type f \( -name 'bootstrap-test.php' -o -name '*validator*test*.php' \) -print | head -80
+          echo '--- CONTENT VALIDATOR ---'
+          sed -n '1,260p' /tmp/k9ppm/portal-production-machine/includes/content-validator.php
+          echo '--- LOCAL CONTENT VALIDATOR ---'
+          sed -n '1,280p' /tmp/k9ppm/portal-production-machine/includes/three-type-local-content-validator.php
+          echo '--- BOOTSTRAP ---'
+          sed -n '1,220p' /tmp/k9ppm/portal-production-machine/tests/bootstrap-test.php
+          echo '--- VALIDATION CONTRACT ---'
+          cat /tmp/k9ppm/portal-production-machine/contracts/content-validation-contract-v2.json
+          echo '--- ARTICLE TYPE TEMPLATES HEAD ---'
+          sed -n '1,260p' /tmp/k9ppm/portal-production-machine/contracts/article-type-templates.json
