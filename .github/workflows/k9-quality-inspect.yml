@@ -1,0 +1,24 @@
+name: K9 one-time PPM interface inspection
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Inspect copied K9 PPM package only
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
+          rm -rf /tmp/k9ppm && mkdir -p /tmp/k9ppm
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm
+          echo '--- TOP FILES ---'
+          find /tmp/k9ppm -maxdepth 3 -type f | sed 's#^/tmp/k9ppm/##' | sort | head -120
+          echo '--- BOOTSTRAP / VALIDATOR SYMBOLS ---'
+          grep -REn --include='*.php' 'class PPM679_|function .*check|Content_Validator|import_fact_pack_bundle|canonical_article' /tmp/k9ppm | head -160 || true
+          echo '--- TEST BOOTSTRAP ---'
+          find /tmp/k9ppm -type f \( -name 'bootstrap-test.php' -o -name '*validator*test*.php' \) -print | head -80
