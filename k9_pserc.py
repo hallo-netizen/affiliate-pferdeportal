@@ -123,7 +123,14 @@ if(empty($imp['ok'])){echo json_encode(['ok'=>false,'status'=>'PPM_FACT_PACK_IMP
 $expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
 if($expectedSource===''){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH\n");exit(2);}
 $item['source_hashes']=[$expectedSource];
-$plan=$header; $plan['items']=[$item];
+$activeContracts=PPM679_Plan_Validator::active_contract_hashes();
+$item['contract_hashes']=$activeContracts;
+$item['gold_core_binding']='FOUR_TYPE_APPROVED_GOLD_CORE_V1';
+$plan=$header;
+$plan['plan_id']='k9-final-'.substr(hash('sha256',$cid.'|'.$externalSlot),0,20);
+$plan['gold_core_binding']='FOUR_TYPE_APPROVED_GOLD_CORE_V1';
+$plan['contract_hashes']=$activeContracts;
+$plan['items']=[$item];
 $batch=['contract'=>'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status'=>'PASS','item_count'=>1,'maximum_articles'=>0,'maximum_articles_per_type'=>0,'publish_allowed'=>false,'content_or_format_payload_present'=>false,'items'=>[['title'=>(string)($item['topic']??''),'target_keyword'=>(string)($item['target_keyword']??''),'category'=>(string)($slot['category_slug']??''),'article_type'=>(string)($item['article_type']??''),'plan_slot'=>$externalSlot]]];
 $tmp=$batch; unset($tmp['batch_sha256']); $batch['batch_sha256']=PSERC_Stable_Json::hash($tmp);
 $snapshot=['ok'=>true,'version'=>'6.7.9','plan'=>PPM679_Editorial_Plan_Registry::plan()];
