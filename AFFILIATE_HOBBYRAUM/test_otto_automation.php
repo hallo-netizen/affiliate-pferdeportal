@@ -373,7 +373,7 @@ pass_or_fail(
 );
 
 pass_or_fail(
-    str_contains($automation, "FROM {$runs_table}")
+    str_contains($automation, 'FROM {$runs_table}')
     && str_contains($automation, "operation='queued_partner_sync'")
     && str_contains($automation, "message LIKE %s")
     && str_contains($automation, "first_seen>=%d AND first_seen<=%d")
@@ -391,12 +391,12 @@ pass_or_fail(
     && str_contains($automation, "'no_candidate'")
     && str_contains($automation, "'already_cleaned'")
     && str_contains($automation, "'nicht ausgeführt'")
-    && !str_contains($automation, "if (!empty($otto_cleanup['matched_runs']))"),
+    && !str_contains($automation, 'if (!empty($otto_cleanup[\'matched_runs\']))'),
     '6.72.8 cleanup readback is always observable and idempotence-aware'
 );
 pass_or_fail(
-    str_contains($automation, "$target = '4.1.3';")
-    && str_contains($automation, "absint($cleanup['candidate_runs'] ?? 0) > 0"),
+    str_contains($automation, '$target = \'4.1.3\';')
+    && str_contains($automation, 'absint($cleanup[\'candidate_runs\'] ?? 0) > 0'),
     '6.72.8 safety migration uses candidate-run contract'
 );
 
