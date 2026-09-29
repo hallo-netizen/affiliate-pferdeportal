@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 4,
+  "generation": 5,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -12,6 +12,11 @@
         "title": "Das Wichtigste über Reitplatzplaner für Pferde"
       },
       "products": {
+        "check": {
+          "job_id": "K9-CHECK-92efad9c144ab9b4",
+          "path": "warehouse/check/K9-CHECK-92efad9c144ab9b4.json",
+          "sha256": "25110bb689f17814034d82ade8f37935600b36729f0a5537069a37a2492539fe"
+        },
         "research": {
           "job_id": "K9-RESEARCH-9cdbb788353bb807",
           "path": "warehouse/research/K9-RESEARCH-9cdbb788353bb807.json",
@@ -25,8 +30,8 @@
       },
       "revision": 0,
       "stages": {
-        "check": "PENDING",
-        "repair": "NOT_REQUIRED",
+        "check": "FAIL",
+        "repair": "PENDING",
         "research": "DONE",
         "write": "DONE"
       },

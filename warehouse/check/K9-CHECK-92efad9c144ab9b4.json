@@ -1,0 +1,979 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-92efad9c144ab9b4",
+  "results": [
+    {
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "lt68_result": {
+        "article_sha256": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+        "checked_text_sha256": "e3174cbded7568d126ef73cfcdf4ea690b43a563f326460b408fd5c294fc840e",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8",
+        "finding_count": 21,
+        "findings": [
+          {
+            "context": "...üssen.  Reitplatz und Boden zuerst einordnen Der Feuchtezustand des Reitbodens gehört an den ...",
+            "length": 3,
+            "message": "Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben.",
+            "offset": 847,
+            "rule_id": "DE_CASE"
+          },
+          {
+            "context": "...och der eigene Reitboden maßgeblich: Aufbau, Feuchteverhalten und geplante Nutzung werden zuerst beschrieb...",
+            "length": 16,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 2066,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...n die engere Auswahl kommt.  Tretschicht und Feuchteverhalten des vorhandenen Platzes beschreiben. Prüfen,...",
+            "length": 16,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 2214,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "....  Arbeitstiefe und Einebnung passend wählen Höhenverstellbare Zinken lockern den Reitboden; die eingestell...",
+            "length": 17,
+            "message": "Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben.",
+            "offset": 2586,
+            "rule_id": "DE_CASE"
+          },
+          {
+            "context": "...  Kriterien für Reitplatzplaner im Überblick Die wichtigsten Auswahlpunkte lassen sich in ein...",
+            "length": 3,
+            "message": "Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben.",
+            "offset": 4660,
+            "rule_id": "DE_CASE"
+          },
+          {
+            "context": "...an den vorhandenen Bedingungen ausgerichtet. KriteriumWas geprüft wirdBedeutung für die Auswahl Feucht...",
+            "length": 12,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4973,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...dingungen ausgerichtet. KriteriumWas geprüft wirdBedeutung für die Auswahl FeuchtezustandWassergehalt u...",
+            "length": 13,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4994,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...iumWas geprüft wirdBedeutung für die Auswahl FeuchtezustandWassergehalt und Verhalten der TretschichtBestimmt mit, u...",
+            "length": 26,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5024,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...FeuchtezustandWassergehalt und Verhalten der TretschichtBestimmt mit, unter welchen Bedingungen gepflegt wird...",
+            "length": 19,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5069,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...mit, unter welchen Bedingungen gepflegt wird PlatzaufbauPlanung, Bauausführung und NutzungBindet das Gerät a...",
+            "length": 18,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5134,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...t wird PlatzaufbauPlanung, Bauausführung und NutzungBindet das Gerät an das vorhandene Bodensystem Bewä...",
+            "length": 13,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5172,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...ndet das Gerät an das vorhandene Bodensystem BewässerungWitterungsangepasster PflegezustandVerändert die Bedingungen für d...",
+            "length": 32,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5226,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...Bodensystem BewässerungWitterungsangepasster PflegezustandVerändert die Bedingungen für den Pflegegang Arbeitsti...",
+            "length": 22,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5259,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...Verändert die Bedingungen für den Pflegegang ArbeitstiefeVerstellbarkeit der Zinken und Intensität der LockerungErlau...",
+            "length": 27,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5317,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...erstellbarkeit der Zinken und Intensität der LockerungErlaubt eine kontrollierte Anpassung an die Tretschi...",
+            "length": 16,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5375,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...e kontrollierte Anpassung an die Tretschicht EinebnungWirkung des PlanierelementsSoll Unebenheiten nach de...",
+            "length": 16,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5440,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...sung an die Tretschicht EinebnungWirkung des PlanierelementsSoll Unebenheiten nach der Bearbeitung nivelliere...",
+            "length": 19,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5461,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...er Bearbeitung nivellieren Arbeitsbreite und LeistungPlatzgeometrie und verfügbares ZugfahrzeugMüssen gemeinsam ...",
+            "length": 22,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5545,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...e und LeistungPlatzgeometrie und verfügbares ZugfahrzeugMüssen gemeinsam zum betrieblichen Einsatz passen  ...",
+            "length": 17,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5584,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...n Auswahlkriterien nicht vollständig.  Fazit Ein Reitplatzplaner für Pferde passt dann zum Be...",
+            "length": 3,
+            "message": "Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben.",
+            "offset": 5942,
+            "rule_id": "DE_CASE"
+          },
+          {
+            "context": "...enem Fahrzeug.  Weiterführende Informationen Weitere Informationen zur konkreten Geräteauswahl fi...",
+            "length": 7,
+            "message": "Außer am Satzanfang werden nur Nomen und Eigennamen großgeschrieben.",
+            "offset": 6837,
+            "rule_id": "DE_CASE"
+          }
+        ],
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 3,
+            "conclusion_ratio": 0.11784511784511785,
+            "conclusion_word_count": 105,
+            "content_hash": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [
+              "Kriterien für Reitplatzplaner im Überblick"
+            ],
+            "heading_count": 6,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [
+              "Reitplatz und Boden zuerst einordnen",
+              "Arbeitstiefe und Einebnung passend wählen",
+              "Arbeitsbreite und Zugfahrzeug gemeinsam prüfen",
+              "Kriterien für Reitplatzplaner im Überblick"
+            ],
+            "internal_test_marker_valid": false,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 99,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "language_evidence_valid": false,
+            "language_exception_errors": [],
+            "language_raw_finding_count": null,
+            "language_raw_report_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "language_unresolved_finding_count": null,
+            "list_count": 1,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "quality_binding_hash": "9aafc26455bd682136d340c76bc05b87eebdfcb7be76a3d0dda879723ddb22c2",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Reitplatzplaner",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/"
+              },
+              "parent_category": {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              "semantic_related": {
+                "anchor": "Reitplatzpflege",
+                "block": "decision",
+                "href": "/weide/weide-reitplatzpflege/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 6,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Kriterium",
+              "Was geprüft wird",
+              "Bedeutung für die Auswahl"
+            ],
+            "table_heading": "Kriterien für Reitplatzplaner im Überblick",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.25806451612903225,
+            "table_value_statement": "",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              {
+                "anchor": "Reitplatzpflege",
+                "block": "decision",
+                "href": "/weide/weide-reitplatzpflege/"
+              },
+              {
+                "anchor": "Reitplatzplaner",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/"
+              }
+            ],
+            "wordpress_category": [],
+            "wordpress_category_binding_mode": "LEGACY_NUMERIC_BOUND",
+            "wordpress_category_valid": false
+          },
+          "content_structure_language_gate_status": "BLOCKED",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 5,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 38,
+          "fail_closed_aggregate_status": "BLOCKED",
+          "h2_count": 6,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.10344827586206896,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.11784511784511785,
+            "conclusion_word_count": 105,
+            "content_hash": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 891,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 19,
+          "publish_allowed": false,
+          "quality_content_hash": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 5,
+          "table_body_row_count": 6,
+          "table_count": 1,
+          "technical_content_hash": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 5,
+          "used_fact_count": 5,
+          "visible_link_count": 3,
+          "word_count": 877
+        },
+        "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+        "content_sha256": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ba5b5daff7e3edb3d662e6826b48b59594ca304c336d6005a5b01069180b5240",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[16]@byte_7509.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Feuchtezustand</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d70f7939aa8ef64d4ca217dabca7fc387a1abc38ed3fb4d7ed17efc4518ed0d7",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[17]@byte_7532.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wassergehalt und Verhalten der Tretschicht</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "eb6dbe9d4351fda27c3ae01b1a27f52b137c34814edfff24ae88eb0fb5ae8482",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[18]@byte_7583.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bestimmt mit, unter welchen Bedingungen gepflegt wird</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "15aaa64b9e2671f6a45b63b9368d1eb668fa7ba4d3b5ec0f9095c0b95ea2da78",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[19]@byte_7684.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Platzaufbau</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ec96f07aa657f5caf7b85fc79622a3ba00c46fb424e3488131d1c5ba05d90429",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[20]@byte_7704.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Planung, Bauausführung und Nutzung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "5e0e3b2886bd842ca6d7046472d7de025423d6e0f24ffbdea2423fc7b59a4135",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[21]@byte_7748.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bindet das Gerät an das vorhandene Bodensystem</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "40ac94348c640fdc54130ec975101492dc44c37d687954e846995cfa4cd85e56",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[22]@byte_7843.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bewässerung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "e878df2782fbc9935d9b0e500cceed0f29245394bd15d6fe3c50fd7f568a604e",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[23]@byte_7864.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Witterungsangepasster Pflegezustand</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "210c64548a09ba52c46884a349ef41eec8394ee0a021b536de0e7b02fdefe96f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[24]@byte_7908.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Verändert die Bedingungen für den Pflegegang</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "aae8a51d2b3836487f3d4caf6255b99c5197f4a3019b0b0b61489a7c85c7bcbd",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[25]@byte_8002.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Arbeitstiefe</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "4c57500d247583684981c86b068fd52b4fc9d6069c47be935380950876e777b8",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[26]@byte_8023.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Verstellbarkeit der Zinken und Intensität der Lockerung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "35a9ab6854bde1e24a02f91d7fd3e5a59aefea942a051598f439a394e002bc85",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[27]@byte_8088.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Erlaubt eine kontrollierte Anpassung an die Tretschicht</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "2ac99cc07796201e24f5faab3882e39a724e9a3792d4b676ff3dc19690abe937",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[28]@byte_8191.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Einebnung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "2717277f07027f8be96d3427c5c2c5c9e9b83d4899ea1ca615c390dbe0e71592",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[29]@byte_8209.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wirkung des Planierelements</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "395f9bedc02bd9f334201fb02260eefa63ec301aedd9f013f166f5f8557a27af",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[30]@byte_8245.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Soll Unebenheiten nach der Bearbeitung nivellieren</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "85759310fa1e4dab4be8497931318fdfffbf29da7e57250f964b565b286148c9",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[31]@byte_8343.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Arbeitsbreite und Leistung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "6a81adb31c0825f680d3eb665cfa53208bd43c59bf1aaa13b3f21e8619921ff6",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[32]@byte_8378.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Platzgeometrie und verfügbares Zugfahrzeug</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-29T17:30:46+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "c6f03c956fe738304e63aafa1abc2357b8f69fb4053dc72aa39d21d5af7d1788",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[33]@byte_8430.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Müssen gemeinsam zum betrieblichen Einsatz passen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "three_type_local_quality_binding_v1",
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_QUALITY_BINDING_MISSING",
+            "expected": "content_structure_language_binding_v2",
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.contract",
+            "human_message": "The Wave-2 quality binding is missing or has the wrong contract.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "K9-BER-REAL-001",
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTERNAL_MARKER_MISSING",
+            "expected": "LT marker without brackets",
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.internal_test_marker",
+            "human_message": "A valid internal test marker is required in the quality binding.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Kriterien für Reitplatzplaner im Überblick"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+            "expected": [],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.generic_headings",
+            "human_message": "Headings must sound human and name the concrete reader question.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Reitplatz und Boden zuerst einordnen",
+              "Arbeitstiefe und Einebnung passend wählen",
+              "Arbeitsbreite und Zugfahrzeug gemeinsam prüfen",
+              "Kriterien für Reitplatzplaner im Überblick"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "expected": [
+              "reitplatzplaner für pferde",
+              "tretschicht und feuchtezustand",
+              "einstellbare arbeitstiefe",
+              "kontrollierte einebnung",
+              "arbeitsbreite und platzgeometrie",
+              "zugfahrzeug und leistungsbedarf"
+            ],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.heading_intent_terms",
+            "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "",
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_LINK_REGISTRY_HASH",
+            "expected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.portal_link_registry_hash",
+            "human_message": "The portal link registry is missing or hash-mismatched.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": null,
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTERNAL_LINK_REGISTRY",
+            "expected": {
+              "anchor": "Weide",
+              "href": "/weide/",
+              "role": "parent_category",
+              "section_id": "criteria"
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.links.parent_category.registry",
+            "human_message": "The visible link is not active and exactly bound to the current portal registry.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": null,
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTERNAL_LINK_REGISTRY",
+            "expected": {
+              "anchor": "Reitplatzpflege",
+              "href": "/weide/weide-reitplatzpflege/",
+              "role": "semantic_related",
+              "section_id": "decision"
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.links.semantic_related.registry",
+            "human_message": "The visible link is not active and exactly bound to the current portal registry.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": null,
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTERNAL_LINK_REGISTRY",
+            "expected": {
+              "anchor": "Reitplatzplaner",
+              "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+              "role": "further_information",
+              "section_id": "further_information"
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.links.further_information.registry",
+            "human_message": "The visible link is not active and exactly bound to the current portal registry.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "bad_headers": [],
+              "body_rows": 6,
+              "columns": 3,
+              "count": 1,
+              "heading": "Kriterien für Reitplatzplaner im Überblick",
+              "unique_token_ratio": 0.25806451612903225,
+              "value_statement": ""
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
+            "expected": {
+              "body_rows": 4,
+              "columns": 3,
+              "count": 1,
+              "unique_token_ratio": 0.18,
+              "value_statement_words": ">=8"
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.table",
+            "human_message": "The table must have a concrete purpose, useful headings and additional information beyond prose.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "checked_text_matches": false,
+              "checked_text_sha256": null,
+              "content_hash": null,
+              "engine": null,
+              "exception_errors": [],
+              "execution_record": [],
+              "raw_finding_count": null,
+              "raw_report_decodes": false,
+              "raw_report_sha256": null,
+              "return_code": null,
+              "unresolved_finding_count": null
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+            "expected": {
+              "checked_text_sha256": "2d1785f02e882d163a79508874d5ebc153542765aabd3618fb9ed14cecc9372b",
+              "content_hash": "d17c44a99623224ee1ab546662280821def51a15a551e736aafd4ea278ea2fce",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "human_exceptions_only": true,
+              "raw_finding_count": 0,
+              "return_code": 0,
+              "unresolved_finding_count": 0
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.language_evidence",
+            "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_WORDPRESS_CATEGORY",
+            "expected": {
+              "legacy": {
+                "id": ">=1",
+                "name": "non-empty",
+                "slug": "real non-default"
+              },
+              "semantic": {
+                "hierarchy_path": "non-empty",
+                "name": "non-empty",
+                "slug": "real non-default",
+                "snapshot_hash": "sha256",
+                "taxonomy": "category"
+              }
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.wordpress_category",
+            "human_message": "A real semantic target category or legacy numeric binding is required and Uncategorized is forbidden.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          }
+        ],
+        "fail_closed_aggregate_status": "BLOCKED",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "technical_status": "BLOCKED_TECHNICAL_CHECK"
+      }
+    }
+  ],
+  "station": "check"
+}
