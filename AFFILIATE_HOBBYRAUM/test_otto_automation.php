@@ -345,7 +345,7 @@ pass_or_fail(
     str_contains($automation, 'function automation_cleanup_legacy_unfiltered_otto_imports')
     && str_contains($automation, "last_complete_run=%s")
     && str_contains($automation, "absint(\$run['updated'] ?? 0) !== 0")
-    && str_contains($automation, 'row-count-exceeds-imported'),
+    && str_contains($automation, 'exact-import-count-mismatch'),
     'legacy OTTO cleanup is exact-run scoped and fails closed on provenance mismatch'
 );
 pass_or_fail(
@@ -356,9 +356,9 @@ pass_or_fail(
     'legacy OTTO cleanup removes only exact linked output and never broad-deletes partner library'
 );
 pass_or_fail(
-    str_contains($automation, "update_option('ppar_otto_legacy_cleanup_v6727'")
+    str_contains($automation, "update_option('ppar_otto_legacy_cleanup_v6728'")
     && str_contains($automation, 'OTTO-Sicherheitsbereinigung:')
-    && str_contains($automation, "\$target = '4.1.2'"),
+    && str_contains($automation, "\$target = '4.1.3'"),
     'cleanup is idempotently version-bound and visible in automation readback'
 );
 pass_or_fail(
