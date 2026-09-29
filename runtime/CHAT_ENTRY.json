@@ -1,0 +1,23 @@
+{
+  "allowed_action": "EXECUTE_EXACT_STATION_ONLY",
+  "branch": "konzept9/greenfield-20260929",
+  "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB",
+  "concept": "K9",
+  "contract": "K9_CHAT_ENTRY_V1",
+  "forbidden": [
+    "SEARCH_OTHER_CONCEPTS",
+    "ROUTE_TO_NEXT_STATION",
+    "RECONSTRUCT_JOB",
+    "USE_LEGACY_RUNTIME"
+  ],
+  "item_count": 1,
+  "job_id": "K9-WRITE-4a035f2a0fe9ce82",
+  "job_path": "runtime/CURRENT_JOB.json",
+  "job_sha256": "d8f96ee74deb8630cbf8a9be93c2bc83c92b27d55db9e6ee9fa83f1137034395",
+  "output_contract": "K9_ARTICLE_PRODUCT_V1",
+  "repository": "hallo-netizen/affiliate-pferdeportal",
+  "station": "write",
+  "status": "OPEN_JOB_READY_FOR_CHAT",
+  "submission_path": "submissions/K9-WRITE-4a035f2a0fe9ce82.json",
+  "worker_type": "CHAT_WRITE_WORKER"
+}
