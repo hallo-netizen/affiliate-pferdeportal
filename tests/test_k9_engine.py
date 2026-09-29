@@ -13,6 +13,7 @@ class K9Tests(unittest.TestCase):
         k.ROOT = root
         k.LEDGER = root / "state/ledger.json"
         k.CURRENT_JOB = root / "runtime/CURRENT_JOB.json"
+        k.CHAT_ENTRY = root / "runtime/CHAT_ENTRY.json"
         k.WAREHOUSE = root / "warehouse"
         k.write_json(k.LEDGER, {"contract":"K9_LEDGER_V1","generation":1,"items":[]})
         intake = root / "intake.json"
@@ -49,6 +50,22 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(job["items"][0]["input_products"]["research"]["facts"], ["fact-a"])
         k.accept(self.submission(job, [{"item_id":"a","article_text":"Artikel A"}], "write.json"))
         return job
+
+    def test_prepare_creates_exact_chat_entry(self):
+        job = k.prepare("research", 2)["job"]
+        entry = k.load_json(k.CHAT_ENTRY)
+        self.assertEqual(entry["contract"], "K9_CHAT_ENTRY_V1")
+        self.assertEqual(entry["job_id"], job["job_id"])
+        self.assertEqual(entry["job_sha256"], job["job_sha256"])
+        self.assertEqual(entry["station"], "research")
+        self.assertEqual(entry["job_path"], "runtime/CURRENT_JOB.json")
+
+    def test_accept_removes_chat_entry(self):
+        job = k.prepare("research", 1)["job"]
+        self.assertTrue(k.CHAT_ENTRY.exists())
+        good = self.submission(job, [{"item_id":"a","facts":["x"],"sources":["s"]}], "research-one.json")
+        k.accept(good)
+        self.assertFalse(k.CHAT_ENTRY.exists())
 
     def test_restart_reuses_exact_job(self):
         first = k.prepare("research", 2)["job"]
