@@ -82,3 +82,54 @@ Der aktuelle offene Validierungspunkt und die exakt eine NEXT ACTION stehen auss
 Der im realen Lauf beobachtete Stop nach dem Schreibschritt ist als Ursache im Current-Delta verarbeitet.
 
 Aktuell ist der erste offene Punkt keine neue Fach-/Qualitätsstörung, sondern die noch fehlende reale Start->STOP-Validierung des korrigierten Heads.
+
+## Nachgeholtes Fehlerprotokoll dieses Arbeitschats — 2026-09-29
+
+Auch dieser Abschnitt ist ausschließlich HISTORIE / ÄNDERUNGSNACHWEIS und keine CURRENT-Wahrheit.
+
+1. **Worker-Begriff falsch überhöht**
+   - Im Chat wurde wiederholt so formuliert, als könne ein „Worker“ von Natur aus keine Nebenwege gehen.
+   - Korrektur: Ein Worker ist nicht automatisch physisch eingeschränkt. Harte Capability-Einschränkung benötigt eine echte Host-Grenze.
+   - Dauerhafte Konsequenz: K7 behauptet keine physische Host-Einsperrung.
+
+2. **GitHub-/Worker-Start semantisch widersprüchlich erklärt**
+   - K5/K6-Start-/Wiedereinstiegsmechanismen wurden zeitweise fälschlich so dargestellt, als sei „Worker starten“ dort nicht belegt.
+   - Belegt ist: GitHub stößt den gebundenen Arbeitsweg/Wiedereinstieg an; die damalige Bezeichnung „Worker“ war nicht gleichbedeutend mit einem physisch separat eingesperrten Modellhost.
+
+3. **K7 zu früh als repositoryseitig fertig bezeichnet**
+   - K7 wurde im Chat als fertig/abgeschlossen bezeichnet, bevor ein realer Lauf auf dem korrigierten Stand Startknopf -> terminal STOP nachgewiesen war.
+   - Korrektur: Current meldet ausdrücklich REAL_START_TO_STOP_VALIDATION_NOT_YET_RUN.
+
+4. **Falsche Datei für den Nachbar-Chat ausgegeben**
+   - Es wurde eine Library-Datei mit Herkunft/Name K8_REALTEST_3_ARTIKEL_WORDPRESS als K7-Testinput ausgegeben bzw. neutral umbenannt.
+   - Das war für einen K7-Realnachweis unzulässig.
+   - Zusätzlich war diese 3-Artikel-Datei nicht die aktuell durch K7 gebundene Current-Snapshot-Datei.
+
+5. **Startprompt unnötig mit Regeln überladen**
+   - Der Nachbar-Chat-Prompt enthielt zusätzliche Workflowregeln.
+   - Dadurch wurde kein sauberer Nachweis geführt, dass der normale Workflow die Regeln selbst bereitstellt.
+   - Korrekturprinzip: Ein echter Workflowtest darf nur den normalen Start auslösen; die Regeln müssen aus dem Workflow kommen.
+
+6. **Chat-Anhang fälschlich als GitHub-Startinput behandelt**
+   - Frisch geprüft: .github/workflows/text-start-pferdeatelier.yml startet kanonisch mit concept_agent/current/PSERC_METADATA_SNAPSHOT.json.
+   - Es gibt im aktuellen K7-text-start keinen belegten Mechanismus, der eine beliebige Chat-Anhangdatei direkt in diesen GitHub-Receiver einspeist.
+   - Der bisherige 3-Artikel-Nachbar-Chat-Lauf war deshalb kein Beweis Chat-Anhang -> GitHub-Startknopf -> kompletter K7-Lauf.
+   - Current-gebundener Produktionsinput ist derzeit concept_agent/current/PSERC_METADATA_SNAPSHOT.json, Batch df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0, 16 Artikel.
+
+7. **Realer Nachbar-Chat stoppte nach WRITE_DRAFT**
+   - Der Artikel wurde geschrieben, der normale Workflow lief danach nicht automatisch weiter.
+   - Ursache: Widerspruch zwischen bestehender No-Stop-/Guard-Regel und späterer Current-Bindung chat_role=INITIAL_TRIGGER_ONLY / chat_may_continue_production=false.
+
+8. **Continuation-Fix**
+   - Der Konflikt wurde minimal auf den bereits vorhandenen generischen K7-Weg zurückgeführt.
+   - Derselbe Fix gilt für alle nicht-terminalen Rückgaben:
+     WRITE_DRAFT -> LT6.8 -> PPM6.7.9 -> ggf. REPAIR_DRAFT -> LT6.8 -> PPM6.7.9 -> nächster Artikel -> PSERC -> ENDSTEMPEL -> STOP.
+   - Keine neue Route, kein neuer Runner, keine Qualitätsänderung.
+
+9. **Offener Beweis**
+   - Auf dem korrigierten K7-Head existiert weiterhin kein neuer vollständiger realer GitHub-Workflowlauf Startknopf -> terminal STOP.
+   - Für den aktuellen Head wurden keine GitHub Actions Workflow-Runs gefunden.
+   - Daher ist PASS für das aktuelle Delta nicht zulässig.
+
+Aktueller Status, erster offener Punkt und genau eine NEXT ACTION bleiben ausschließlich in:
+control/startmaster0107/CURRENT_STATE.json.
