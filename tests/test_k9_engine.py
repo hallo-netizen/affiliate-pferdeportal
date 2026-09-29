@@ -18,6 +18,7 @@ class K9Tests(unittest.TestCase):
         k.LEDGER = root / "state/ledger.json"
         k.CURRENT_JOB = root / "runtime/CURRENT_JOB.json"
         k.CHAT_ENTRY = root / "runtime/CHAT_ENTRY.json"
+        k.STATUS_FILE = root / "state/STATUS.json"
         k.WAREHOUSE = root / "warehouse"
         k.write_json(k.LEDGER, {"contract":"K9_LEDGER_V1","generation":1,"items":[]})
         intake = root / "intake.json"
@@ -156,12 +157,23 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(entry["job_sha256"],job["job_sha256"])
         self.assertEqual(entry["station"],"research")
         self.assertEqual(entry["job_path"],"runtime/CURRENT_JOB.json")
+        self.assertEqual(entry["submission_path"],"submissions/"+job["job_id"]+".json")
+        self.assertEqual(entry["output_contract"],"K9_RESEARCH_PRODUCT_V1")
 
     def test_accept_removes_chat_entry(self):
         job=k.prepare("research",1)["job"]
         self.assertTrue(k.CHAT_ENTRY.exists())
         k.accept(self.submission(job,[self.research_row("a")],"research-one.json"))
         self.assertFalse(k.CHAT_ENTRY.exists())
+
+    def test_status_stamp_shows_done_and_remaining(self):
+        initial=k.load_json(k.STATUS_FILE)
+        self.assertEqual(initial["total"],2)
+        self.assertEqual(initial["fully_done"],0)
+        self.assertEqual(initial["remaining"],2)
+        self.finish_research(1)
+        after_research=k.load_json(k.STATUS_FILE)
+        self.assertEqual(after_research["ready_for_write"],1)
 
     def test_restart_reuses_exact_job(self):
         first=k.prepare("research",2)["job"]
