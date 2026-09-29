@@ -126,7 +126,11 @@ Auch dieser Abschnitt ist ausschließlich HISTORIE / ÄNDERUNGSNACHWEIS und kein
      WRITE_DRAFT -> LT6.8 -> PPM6.7.9 -> ggf. REPAIR_DRAFT -> LT6.8 -> PPM6.7.9 -> nächster Artikel -> PSERC -> ENDSTEMPEL -> STOP.
    - Keine neue Route, kein neuer Runner, keine Qualitätsänderung.
 
-9. **Offener Beweis**
+9. **Dateiausgabe vor Verifikation**
+   - Im Chat wurde mindestens einmal ein Download-Link unter einem neuen Dateinamen ausgegeben, bevor die tatsächliche Datei unter genau diesem Pfad/Namen belastbar verifiziert war.
+   - Korrekturprinzip: Quelldatei, Inhalt, Zielname und tatsächliche Verfügbarkeit müssen vor Ausgabe geprüft sein.
+
+10. **Offener Beweis**
    - Auf dem korrigierten K7-Head existiert weiterhin kein neuer vollständiger realer GitHub-Workflowlauf Startknopf -> terminal STOP.
    - Für den aktuellen Head wurden keine GitHub Actions Workflow-Runs gefunden.
    - Daher ist PASS für das aktuelle Delta nicht zulässig.
