@@ -229,6 +229,6 @@
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9"
     }
   ],
-  "station": "write",
-  "retry_accept": 1
+  "retry_accept": 1,
+  "station": "write"
 }
