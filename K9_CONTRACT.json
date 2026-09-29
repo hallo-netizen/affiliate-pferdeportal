@@ -1,0 +1,18 @@
+{
+  "contract": "PFERDE_ATELIER_KONZEPT9_GREENFIELD_V1",
+  "concept": "K9",
+  "status": "GREENFIELD_FOUNDATION",
+  "principle": "EACH_STATION_PRODUCES_A_COMPLETE_STORED_PRODUCT",
+  "automatic_cross_station_chaining": false,
+  "chat_controls_routing": false,
+  "station_start_is_explicit": true,
+  "stations": ["research", "write", "check", "repair"],
+  "restart_rule": "REUSE_EXACT_OPEN_JOB_OR_START_NEW_JOB_FROM_ELIGIBLE_WAREHOUSE_ITEMS",
+  "partial_package_acceptance": false,
+  "duplicate_processing": "BLOCK",
+  "publish_allowed": false,
+  "quality": {"language_tool": "6.8", "ppm": "6.7.9"},
+  "legacy_runtime_imports_allowed": false,
+  "legacy_state_reads_allowed": false,
+  "legacy_paths_allowed": false
+}

@@ -1,1 +1,0 @@
-System 4 integration note: before any production-rule adapter is accepted, it must be checked against HARD_RULE_NO_LEGACY_IMPORTS.md. Domain rule text/tool inputs are allowed; prior orchestration/workflow implementations are not execution dependencies.
