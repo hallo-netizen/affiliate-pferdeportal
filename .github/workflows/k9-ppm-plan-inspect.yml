@@ -1,0 +1,21 @@
+name: K9 temporary inspect PPM plan contract
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths: ['runtime/PPM_PLAN_INSPECT_TRIGGER']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Inspect exact PPM 6.7.9 plan validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ppm-inspect
+          mkdir -p /tmp/ppm-inspect
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/ppm-inspect
+          echo '=== MATCH FILES ==='
+          grep -R -n -C 12 'PLAN_V4_REQUIRES_ALL_TOP_LEVEL_FIELDS\|BLOCKED_PLAN_REQUIRED_FIELD_MISSING\|plan_id' /tmp/ppm-inspect/portal-production-machine | head -n 500
