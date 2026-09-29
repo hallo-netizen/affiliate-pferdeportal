@@ -248,6 +248,140 @@ jobs:
           diff -u /tmp/base-query.json /tmp/current-query.json
           echo "PASS WordPress/MariaDB query behavior byte-identical across all bound cases"
 
+      - name: Product deals and partner analytics WordPress MariaDB gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/product-deals-analytics-gate.php <<'PHP'
+          <?php
+          $fail = static function($m){ fwrite(STDERR, "FAIL ".$m."\n"); exit(2); };
+          $pass = static function($m){ echo "PASS ".$m."\n"; };
+
+          if (!class_exists('PPAR_Partner_Analytics_Admin')) { $fail('partner analytics class missing'); }
+          if (!class_exists('PPAR_Deal_Radar')) { $fail('deal radar class missing'); }
+
+          $admin = get_user_by('login','admin');
+          if (!$admin) { $fail('admin user missing'); }
+          wp_set_current_user($admin->ID);
+
+          $report = array(
+            'source'=>'awin_advertiser_report',
+            'currency'=>'EUR',
+            'updated_at'=>time(),
+            'periods'=>array(
+              '30'=>array(
+                'clicks'=>12,'orders'=>3,'sales'=>250.50,'commission'=>18.75,'conversion'=>25.0,
+                'details'=>array(array(
+                  'label'=>'OTTO Original','external_id'=>'14336','clicks'=>12,'orders'=>3,
+                  'sales'=>250.50,'commission'=>18.75,'conversion'=>25.0,'currency'=>'EUR'
+                ))
+              )
+            )
+          );
+          if (PPAR_Partner_Analytics_Admin::ingest_report('otto',$report) !== true) { $fail('OTTO report ingest'); }
+          if (PPAR_Partner_Analytics_Admin::ingest_report('amazon',array(
+            'source'=>'amazon_report','currency'=>'EUR','updated_at'=>time(),
+            'periods'=>array('30'=>array('clicks'=>5))
+          )) !== true) { $fail('Amazon partial report ingest'); }
+
+          $providerReport = new ReflectionMethod('PPAR_Partner_Analytics_Admin','provider_report');
+          $otto = $providerReport->invoke(null,'otto','30');
+          if (($otto['clicks']??null)!==12 || ($otto['orders']??null)!==3
+              || abs((float)($otto['sales']??0)-250.50)>0.0001
+              || abs((float)($otto['commission']??0)-18.75)>0.0001
+              || abs((float)($otto['conversion']??0)-25.0)>0.0001) {
+              $fail('OTTO original report values changed');
+          }
+          $amazon = $providerReport->invoke(null,'amazon','30');
+          if (($amazon['clicks']??null)!==5 || $amazon['orders']!==null || $amazon['sales']!==null
+              || $amazon['commission']!==null || $amazon['conversion']!==null) {
+              $fail('missing provider values must remain unavailable');
+          }
+          $providerKey = new ReflectionMethod('PPAR_Partner_Analytics_Admin','campaign_provider_key');
+          if ($providerKey->invoke(null,array('network'=>'awin','advertiser_id'=>14336)) !== 'otto') {
+              $fail('Awin advertiser 14336 must be shown as OTTO');
+          }
+          if ($providerKey->invoke(null,array('network'=>'awin','advertiser_id'=>99999)) !== 'awin') {
+              $fail('other Awin advertiser identity');
+          }
+          $_GET['range']='30';
+          ob_start();
+          PPAR_Partner_Analytics_Admin::render_page();
+          $html=(string)ob_get_clean();
+          if (strpos($html,'Partner &amp; Einnahmen')===false
+              || strpos($html,'über Awin-Advertiserreport')===false
+              || strpos($html,'nicht verfügbar')===false) {
+              $fail('partner analytics admin output contract');
+          }
+          $pass('partner analytics exact original numbers and unavailable values');
+
+          global $wpdb;
+          $table=$wpdb->prefix.'ppar_sync_products';
+          if ((string)$wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s',$table)) !== $table) {
+              $fail('sync products table missing after plugin activation');
+          }
+          $wpdb->query($wpdb->prepare("DELETE FROM {$table} WHERE external_key LIKE %s",'full-gate-%'));
+          $now=time();
+          $rows=array(
+            array('network'=>'awin','external_key'=>'full-gate-otto','programme_external_id'=>'14336','programme_name'=>'OTTO DE','title'=>'Uvex Reithelm Exxential III','price'=>'80.00'),
+            array('network'=>'idealo','external_key'=>'full-gate-idealo','programme_external_id'=>'','programme_name'=>'idealo','title'=>'Uvex Reithelm Exxential III','price'=>'120.00'),
+            array('network'=>'ebay','external_key'=>'full-gate-ebay','programme_external_id'=>'','programme_name'=>'eBay','title'=>'Uvex Reithelm Exxential III','price'=>'130.00'),
+            array('network'=>'idealo','external_key'=>'full-gate-bag','programme_external_id'=>'','programme_name'=>'idealo','title'=>'Reithelm Tasche für Uvex Helm','price'=>'10.00'),
+          );
+          foreach($rows as $row){
+              $key=$row['external_key'];
+              $ok=$wpdb->insert($table,array(
+                'network'=>$row['network'],
+                'external_key'=>$key,
+                'programme_external_id'=>$row['programme_external_id'],
+                'programme_name'=>$row['programme_name'],
+                'title'=>$row['title'],
+                'image_url'=>'https://example.com/'.$key.'.jpg',
+                'tracking_url'=>'https://example.com/go/'.$key,
+                'destination_url'=>'https://example.com/p/'.$key,
+                'price'=>$row['price'],
+                'currency'=>'EUR',
+                'brand'=>'Uvex',
+                'category'=>'Reithelme',
+                'quality_status'=>'pass',
+                'source_hash'=>hash('sha256',$key),
+                'source_headers'=>'{}',
+                'payload'=>json_encode(array('ean'=>'4000000000001')),
+                'first_seen'=>$now-300,
+                'last_seen'=>$now,
+              ));
+              if ($ok===false) { $fail('insert deal fixture '.$key.': '.$wpdb->last_error); }
+          }
+
+          delete_option(PPAR_Deal_Radar::OPTION_HISTORY);
+          delete_option(PPAR_Deal_Radar::OPTION_STATE);
+          delete_transient('ppar_deal_best_reithelm_v1');
+          $state=PPAR_Deal_Radar::refresh();
+          $best=is_array($state['best']??null)?$state['best']:array();
+          if ((int)($state['candidate_count']??-1)!==3) { $fail('accessory exclusion candidate count'); }
+          if (!$best || ($best['provider']??'')!=='otto' || abs((float)($best['price']??0)-80.0)>0.0001) {
+              $fail('best Reithelm deal selection');
+          }
+          if (($best['evidence_basis']??'')!=='Marktvergleich'
+              || (float)($best['saving_eur']??0)<15
+              || (float)($best['discount_pct']??0)<18) {
+              $fail('deal evidence threshold');
+          }
+          $stored=get_option(PPAR_Deal_Radar::OPTION_STATE,array());
+          if (!is_array($stored) || (($stored['best']['offer_key']??'') !== ($best['offer_key']??''))) {
+              $fail('deal state MariaDB persistence');
+          }
+          PPAR_Deal_Radar::ensure_schedule();
+          if (!wp_next_scheduled(PPAR_Deal_Radar::CRON_HOOK)) { $fail('deal radar schedule missing'); }
+          $pass('Reithelm positive deal selected from real MariaDB rows');
+          $pass('Reithelm accessory negative excluded');
+          $pass('deal state persisted and schedule active');
+
+          echo "PRODUCT_DEALS_PARTNER_ANALYTICS_WORDPRESS_MARIADB_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/product-deals-analytics-gate.php --path=/tmp/wp-site | tee /tmp/product-deals-analytics-gate.txt
+          grep -F 'PRODUCT_DEALS_PARTNER_ANALYTICS_WORDPRESS_MARIADB_PASS' /tmp/product-deals-analytics-gate.txt
+
       - name: Current plugin frontend smoke
         shell: bash
         run: |
@@ -271,5 +405,6 @@ jobs:
             /tmp/php-lint.log
             /tmp/base-query.json
             /tmp/current-query.json
+            /tmp/product-deals-analytics-gate.txt
             /tmp/wp-server.log
           if-no-files-found: error
