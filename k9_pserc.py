@@ -71,6 +71,7 @@ def canonical_fact_pack(research):
         "claims":claims,
         "sources":canon_sources,
         "status":"SOURCE_VERIFIED_PRODUCTION_READY",
+        "production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY",
         "title_scope":str(fp.get("title_scope") or ""),
     }
 
