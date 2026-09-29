@@ -12,6 +12,7 @@ WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
 LT68_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
 PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+INTAKE_FIELDS = {"title", "target_keyword", "category", "article_type", "plan_slot"}
 
 class K9Error(RuntimeError):
     pass
@@ -135,9 +136,13 @@ def import_intake(path):
     if current_job() is not None:
         raise K9Error("ACTIVE_JOB_EXISTS")
     source = load_json(path)
+    if source.get("contract") != "K9_INTAKE_V1" or source.get("publish_allowed") is not False:
+        raise K9Error("INTAKE_CONTRACT_INVALID")
     rows = source.get("items")
-    if not isinstance(rows, list) or not rows:
+    if not isinstance(rows, list) or not rows or source.get("item_count") != len(rows):
         raise K9Error("INTAKE_EMPTY_OR_INVALID")
+    if not str(source.get("batch_id") or "").strip() or not str(source.get("batch_sha256") or "").strip():
+        raise K9Error("INTAKE_BATCH_IDENTITY_MISSING")
     data = ledger()
     known = {x["item_id"] for x in data["items"]}
     additions = []
@@ -147,6 +152,8 @@ def import_intake(path):
         metadata = row.get("metadata", {})
         if not item_id or not title or item_id in known or not isinstance(metadata, dict):
             raise K9Error("INTAKE_ITEM_INVALID_OR_DUPLICATE")
+        if set(metadata.keys()) != INTAKE_FIELDS or metadata.get("title") != title or not all(str(metadata.get(k) or "").strip() for k in INTAKE_FIELDS):
+            raise K9Error("INTAKE_METADATA_NOT_EXACT_FIVE_FIELDS")
         known.add(item_id)
         additions.append({
             "item_id": item_id,
