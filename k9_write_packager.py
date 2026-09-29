@@ -19,13 +19,13 @@ def load(path):
     return data
 
 def text_of(markup):
-    value=re.sub(r"(?is)<(script|style)\b[^>]*>.*?</\1>"," ",markup)
+    value=re.sub(r"(?is)<(script|style)\\b[^>]*>.*?</\\1>"," ",markup)
     value=re.sub(r"(?s)<[^>]+>"," ",value)
     value=htmlmod.unescape(value)
-    return re.sub(r"\s+"," ",value).strip()
+    return re.sub(r"\\s+"," ",value).strip()
 
 def word_count(markup):
-    return len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",text_of(markup)))
+    return len(re.findall(r"\\b[\\wÄÖÜäöüß-]+\\b",text_of(markup)))
 
 def validate_html(markup, article_type, metadata, research, rules):
     if not markup.strip(): raise PackError("WRITER_HTML_EMPTY")
@@ -40,13 +40,13 @@ def validate_html(markup, article_type, metadata, research, rules):
     if "ppm-ai-disclosure" not in markup: raise PackError("AI_DISCLOSURE_MISSING")
     if metadata["target_keyword"].casefold() not in metadata["title"].casefold():
         raise PackError("TITLE_KEYWORD_BINDING_INVALID")
-    anchors=re.findall(r'<a\b[^>]*data-link-role=["\\']([^"\\']+)["\\'][^>]*href=["\\']([^"\\']+)["\\']',markup,re.I)
+    anchors=re.findall(r"<a\\b[^>]*data-link-role=[\\\"\']([^\\\"\']+)[\\\"\'][^>]*href=[\\\"\']([^\\\"\']+)[\\\"\']",markup,re.I)
     if len(anchors)!=3: raise PackError("VISIBLE_LINK_COUNT_NOT_EXACT_THREE")
     expected={(x["role"],x["href"]) for x in research.get("portal_links",[])}
     if set(anchors)!=expected: raise PackError("LINK_BINDING_MISMATCH")
     allowed=set(research.get("fact_pack",{}).get("fact_ids",[]))
     used=[]
-    for raw in re.findall(r'data-fact-ids=["\\']([^"\\']+)["\\']',markup,re.I):
+    for raw in re.findall(r"data-fact-ids=[\\\"\']([^\\\"\']+)[\\\"\']",markup,re.I):
         used.extend(raw.split())
     if not used or not set(used).issubset(allowed): raise PackError("FACT_ID_BINDING_INVALID")
     if not allowed.issubset(set(used)): raise PackError("NOT_ALL_RESEARCH_FACTS_USED")
@@ -96,8 +96,8 @@ def build(draft_path):
     links=[dict(x,reason="Gebundener K9-Portallink aus dem versiegelten Rechercheprodukt.") for x in portal_links]
     order_id="k9-"+item_id[-8:]
     slug="reitplatzplaner-fuer-pferde" if meta["target_keyword"]=="Reitplatzplaner für Pferde" else re.sub(r"[^a-z0-9]+","-",meta["target_keyword"].lower()).strip("-")
-    lead=text_of(re.search(r'<section\s+data-block=["\\']intro["\\'][^>]*>(.*?)</section>',markup,re.S|re.I).group(1))
-    concl=text_of(re.search(r'<section\s+data-block=["\\']conclusion["\\'][^>]*>(.*?)</section>',markup,re.S|re.I).group(1))
+    lead=text_of(re.search(r"<section\\s+data-block=[\\\"\']intro[\\\"\'][^>]*>(.*?)</section>",markup,re.S|re.I).group(1))
+    concl=text_of(re.search(r"<section\\s+data-block=[\\\"\']conclusion[\\\"\'][^>]*>(.*?)</section>",markup,re.S|re.I).group(1))
     runtime_order={
         "allowed_fact_ids":fact_ids,"article_type":article_type,"conclusion":concl,"domain":"pferdeportal",
         "fact_pack_hash":fact_pack["fact_pack_hash"],"lead":lead,"links":links,"order_id":order_id,
@@ -106,9 +106,9 @@ def build(draft_path):
         "table_focus":fact_ids[:4],"title":title
     }
     body_text=text_of(markup)
-    metrics={"h2_count":len(re.findall(r"<h2\b",markup,re.I)),"paragraph_count":len(re.findall(r"<p\b",markup,re.I)),
-             "table_body_row_count":len(re.findall(r"<tr\b",re.search(r"<tbody>(.*?)</tbody>",markup,re.S|re.I).group(1),re.I)),
-             "visible_link_count":len(re.findall(r"<a\b",markup,re.I)),"word_count":word_count(markup)}
+    metrics={"h2_count":len(re.findall(r"<h2\\b",markup,re.I)),"paragraph_count":len(re.findall(r"<p\\b",markup,re.I)),
+             "table_body_row_count":len(re.findall(r"<tr\\b",re.search(r"<tbody>(.*?)</tbody>",markup,re.S|re.I).group(1),re.I)),
+             "visible_link_count":len(re.findall(r"<a\\b",markup,re.I)),"word_count":word_count(markup)}
     content_plan={"article_type":article_type,"required_blocks":rules["types"][article_type]["required_blocks"],"fact_ids":fact_ids,
                   "link_roles":[x["role"] for x in portal_links]}
     canonical={
