@@ -1,0 +1,83 @@
+{
+  "contract": "K9_WORKER_CONTRACTS_V1",
+  "concept": "K9",
+  "cross_station_chaining": false,
+  "contracts": {
+    "research": {
+      "worker_type": "CHAT_RESEARCH_WORKER",
+      "input_rule": "USE_ONLY_THIS_JOB_ITEM_AND_PUBLIC_RESEARCH_SOURCES",
+      "output_contract": "K9_RESEARCH_PRODUCT_V1",
+      "must": [
+        "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+        "USE_STABLE_SOURCE_IDS",
+        "USE_STABLE_FACT_IDS",
+        "BIND_EVERY_FACT_TO_ONE_KNOWN_SOURCE",
+        "RETURN_PPM_COMPATIBLE_FACT_PACK",
+        "FACT_PACK_STATUS_SOURCE_VERIFIED_PRODUCTION_READY",
+        "HASH_COMPLETE_RESEARCH_PRODUCT"
+      ],
+      "forbidden": [
+        "WRITE_ARTICLE",
+        "ROUTE_TO_WRITE",
+        "USE_PFERDE_ATELIER_OWN_DOMAIN_AS_RESEARCH_SOURCE",
+        "USE_LEGACY_K4_K8_STATE",
+        "RETURN_PARTIAL_BATCH"
+      ]
+    },
+    "write": {
+      "worker_type": "CHAT_WRITE_WORKER",
+      "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_IN_THIS_JOB",
+      "output_contract": "K9_ARTICLE_PRODUCT_V1",
+      "must": [
+        "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+        "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
+        "RETURN_FINAL_ARTICLE_HTML",
+        "BIND_RESEARCH_PRODUCT_SHA256",
+        "RETURN_PPM_ITEM_BOUND_TO_SAME_FACT_PACK",
+        "HASH_COMPLETE_ARTICLE_PRODUCT"
+      ],
+      "forbidden": [
+        "DO_NEW_RESEARCH",
+        "INVENT_NEW_FACTS",
+        "ROUTE_TO_CHECK",
+        "USE_LEGACY_K4_K8_STATE",
+        "RETURN_PARTIAL_BATCH"
+      ]
+    },
+    "check": {
+      "worker_type": "K9_NATIVE_MACHINE_CHECK",
+      "input_rule": "USE_ONLY_BOUND_RESEARCH_AND_ARTICLE_PRODUCTS",
+      "output_contract": "K9_SUBMISSION_V1_WITH_LT68_AND_PPM679_RESULTS",
+      "must": [
+        "RUN_HASH_BOUND_LANGUAGETOOL_6_8",
+        "RUN_HASH_BOUND_PPM_6_7_9",
+        "BIND_BOTH_RESULTS_TO_EXACT_ARTICLE_SHA256",
+        "RETURN_PASS_OR_REPAIR_REQUIRED"
+      ],
+      "forbidden": [
+        "MANUAL_PASS_BOOLEAN",
+        "CHANGE_ARTICLE",
+        "ROUTE_AROUND_FAILED_CHECK",
+        "USE_LEGACY_K4_K8_RUNTIME"
+      ]
+    },
+    "repair": {
+      "worker_type": "CHAT_REPAIR_WORKER",
+      "input_rule": "USE_ONLY_BOUND_RESEARCH_ARTICLE_AND_FAILED_CHECK",
+      "output_contract": "K9_ARTICLE_PRODUCT_V1",
+      "must": [
+        "REPAIR_ONLY_REPORTED_FAILURES",
+        "PRESERVE_RESEARCH_PRODUCT_BINDING",
+        "RETURN_COMPLETE_REPAIRED_ARTICLE_PRODUCT",
+        "HASH_COMPLETE_ARTICLE_PRODUCT"
+      ],
+      "forbidden": [
+        "DO_NEW_RESEARCH",
+        "ADD_UNBOUND_FACTS",
+        "ROUTE_TO_CHECK",
+        "USE_LEGACY_K4_K8_STATE",
+        "RETURN_PARTIAL_BATCH"
+      ]
+    }
+  }
+}
