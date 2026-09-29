@@ -382,6 +382,107 @@ jobs:
           /tmp/wp eval-file /tmp/product-deals-analytics-gate.php --path=/tmp/wp-site | tee /tmp/product-deals-analytics-gate.txt
           grep -F 'PRODUCT_DEALS_PARTNER_ANALYTICS_WORDPRESS_MARIADB_PASS' /tmp/product-deals-analytics-gate.txt
 
+      - name: Manual single-upload importer WordPress MariaDB gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/manual-import-gate.php <<'PHP'
+          <?php
+          $fail = static function($m){ fwrite(STDERR, "FAIL ".$m."\n"); exit(2); };
+          $pass = static function($m){ echo "PASS ".$m."\n"; };
+          if (!class_exists('PPAR_Affiliate_Admin_KISS')) { $fail('KISS importer class missing'); }
+
+          $key='full-gate-ds24-key';
+          update_option('ppar_network_digistore24_v1',array(
+              'api_key'=>$key,
+              'tested_key_fingerprint'=>hash('sha256',$key),
+              'affiliate_id'=>'full-gate-affiliate'
+          ),false);
+
+          $detect = new ReflectionMethod('PPAR_Affiliate_Admin_KISS','detect_provider');
+          $import = new ReflectionMethod('PPAR_Affiliate_Admin_KISS','import_digistore24_partnerships');
+
+          $csv="Vendor;Produkt-ID;Produkt;Werbemittel-ID;Status der Partnerschaft;Provision\n"
+              ."Vendor A;1001;Produkt A;420875;Genehmigt;20%\n"
+              ."Vendor B;1002;Produkt B;43923;Approved;30%\n"
+              ."Vendor B;1003;Produkt C;314918;Genehmigt;25%\n"
+              ."Vendor X;9999;Nicht genehmigt;999999;Abgelehnt;99%\n";
+          $det=$detect->invoke(null,'partnerschaften.csv',$csv);
+          if (!is_array($det) || ($det['kind']??'')!=='digistore24_partnerships') { $fail('DS24 exact header detection'); }
+
+          $tmp=tempnam(sys_get_temp_dir(),'ds24-full-gate-');
+          file_put_contents($tmp,$csv);
+          $res=$import->invoke(null,$tmp,'partnerschaften.csv');
+          @unlink($tmp);
+          if (is_wp_error($res)) { $fail('DS24 import: '.$res->get_error_message()); }
+          if (($res['status']??'')!=='success' || (int)($res['product_count']??0)!==3
+              || (int)($res['source_count']??0)!==3 || (int)($res['vendor_count']??0)!==2) {
+              $fail('DS24 import result counts');
+          }
+
+          $inventory=get_option(PPAR_Affiliate_Admin_KISS::DS24_INVENTORY_OPTION,array());
+          $market=get_option(PPAR_Affiliate_Admin_KISS::DS24_MARKETPLACE_OPTION,array());
+          $partnerships=get_option('ppar_digistore24_partnerships_v1',array());
+          $affiliations=get_option('ppar_digistore24_affiliations_v1',array());
+          if ((int)($inventory['product_count']??0)!==3 || (int)($inventory['blocked']??0)!==1) { $fail('inventory persistence'); }
+          if (count((array)($market['items']??array()))!==3) { $fail('marketplace persistence'); }
+          if (count((array)$partnerships)!==3 || count((array)$affiliations)!==3) { $fail('partnership/affiliation persistence'); }
+          $pass('DS24 import persists exact approved rows and blocks rejected row');
+
+          $tmp=tempnam(sys_get_temp_dir(),'ds24-full-gate-');
+          file_put_contents($tmp,$csv);
+          $res2=$import->invoke(null,$tmp,'partnerschaften.csv');
+          @unlink($tmp);
+          if (is_wp_error($res2) || (int)($res2['product_count']??0)!==3
+              || count((array)(get_option('ppar_digistore24_affiliations_v1',array())))!==3) {
+              $fail('idempotent reimport');
+          }
+          $pass('DS24 reimport is idempotent');
+
+          $before=hash('sha256',serialize(array(
+              get_option(PPAR_Affiliate_Admin_KISS::DS24_INVENTORY_OPTION,array()),
+              get_option(PPAR_Affiliate_Admin_KISS::DS24_MARKETPLACE_OPTION,array()),
+              get_option('ppar_digistore24_partnerships_v1',array()),
+              get_option('ppar_digistore24_affiliations_v1',array())
+          )));
+          $dup="Vendor;Produkt-ID;Produkt;Werbemittel-ID;Status der Partnerschaft;Provision\n"
+              ."Vendor A;1001;Produkt A;420875;Genehmigt;20%\n"
+              ."Vendor A;1001;Produkt B;43923;Genehmigt;20%\n";
+          $tmp=tempnam(sys_get_temp_dir(),'ds24-full-gate-');
+          file_put_contents($tmp,$dup);
+          $bad=$import->invoke(null,$tmp,'partnerschaften.csv');
+          @unlink($tmp);
+          if (!is_wp_error($bad) || $bad->get_error_code()!=='ds24_csv_product_id_duplicate') { $fail('duplicate product must fail closed'); }
+          $after=hash('sha256',serialize(array(
+              get_option(PPAR_Affiliate_Admin_KISS::DS24_INVENTORY_OPTION,array()),
+              get_option(PPAR_Affiliate_Admin_KISS::DS24_MARKETPLACE_OPTION,array()),
+              get_option('ppar_digistore24_partnerships_v1',array()),
+              get_option('ppar_digistore24_affiliations_v1',array())
+          )));
+          if (!hash_equals($before,$after)) { $fail('failed import mutated persisted inventory'); }
+          $pass('duplicate DS24 product fails closed with no data mutation');
+
+          $cases=array(
+              'awin'=>array('creative.csv',"name,url\nBanner,https://www.awin1.com/cread.php?x=1\n",'awin_creatives'),
+              'adcell'=>array('creative.csv',"name,url\nBanner,https://t.adcell.com/click.php?x=1\n",'adcell_creatives'),
+              'ebay'=>array('ebay.csv',"item_id,url\n123,https://www.ebay.de/itm/123?epn=1\n",'ebay_detected'),
+              'idealo'=>array('productdata_123.csv',"id,product_title,product_deeplink,ean,gtins_product,asins_product,main_category,sub_category,brand_name,image_url\n1,Helm,https://example.com/x,4000000000001,4000000000001,,Reiten,Helme,Uvex,https://example.com/i.jpg\n",'idealo_feed')
+          );
+          foreach($cases as $label=>$row){
+              $got=$detect->invoke(null,$row[0],$row[1]);
+              if (!is_array($got) || ($got['kind']??'')!==$row[2]) { $fail($label.' provider detection'); }
+          }
+          $amb=$detect->invoke(null,'mixed.txt',"https://www.awin1.com/x\nhttps://t.adcell.com/x\n");
+          if (!is_wp_error($amb) || $amb->get_error_code()!=='universal_import_ambiguous') { $fail('ambiguous provider must fail closed'); }
+          $unknown=$detect->invoke(null,'unknown.txt',"nichts eindeutig erkennbar\n");
+          if (!is_wp_error($unknown) || $unknown->get_error_code()!=='universal_import_unknown') { $fail('unknown provider must fail closed'); }
+          $pass('multi-provider detection positive and ambiguous/unknown negative');
+
+          echo "MANUAL_SINGLE_UPLOAD_WORDPRESS_MARIADB_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/manual-import-gate.php --path=/tmp/wp-site | tee /tmp/manual-import-gate.txt
+          grep -F 'MANUAL_SINGLE_UPLOAD_WORDPRESS_MARIADB_PASS' /tmp/manual-import-gate.txt
+
       - name: Current plugin frontend smoke
         shell: bash
         run: |
@@ -406,5 +507,6 @@ jobs:
             /tmp/base-query.json
             /tmp/current-query.json
             /tmp/product-deals-analytics-gate.txt
+            /tmp/manual-import-gate.txt
             /tmp/wp-server.log
           if-no-files-found: error
