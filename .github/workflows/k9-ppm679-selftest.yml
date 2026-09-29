@@ -1,0 +1,87 @@
+name: K9 native PPM679 selftest
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths:
+      - 'quality/k9_ppm679.py'
+      - '.github/workflows/k9-ppm679-selftest.yml'
+permissions:
+  contents: read
+jobs:
+  ppm679:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Assert K9-native isolation
+        run: |
+          set -euo pipefail
+          ! grep -E 'concept_agent|isolated_system4|startmaster|SYSTEM4_' quality/k9_ppm679.py
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
+      - name: Build positive input from PPM own approved fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/k9ppm-fixture && mkdir -p /tmp/k9ppm-fixture
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm-fixture
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('/tmp/k9ppm-fixture/portal-production-machine/contracts/g9-single-faq-approved-candidate-v1.json')
+          f=json.loads(p.read_text())
+          c=f['candidate']
+          html=c['content_html']
+          payload={
+            'contract':'K9_PPM679_INPUT_V1',
+            'generated':{
+              'article_type':f['article_type'],
+              'title':c['title'],
+              'content_html':html,
+              'content_hash':hashlib.sha256(html.encode()).hexdigest()
+            },
+            'item':f['item'],
+            'fact_pack':f['fact_pack']
+          }
+          pathlib.Path('/tmp/k9-ppm-pass.json').write_text(json.dumps(payload,ensure_ascii=False))
+          bad=json.loads(json.dumps(payload))
+          bad_html='<p>Zu kurz und absichtlich unvollständig.</p>'
+          bad['generated']['content_html']=bad_html
+          bad['generated']['content_hash']=hashlib.sha256(bad_html.encode()).hexdigest()
+          pathlib.Path('/tmp/k9-ppm-fail.json').write_text(json.dumps(bad,ensure_ascii=False))
+          PY
+      - name: Positive PPM execution
+        run: |
+          set -euo pipefail
+          python3 quality/k9_ppm679.py quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip /tmp/k9-ppm-pass.json --output /tmp/ppm-pass.json
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/ppm-pass.json'))
+          assert r['status']=='PASS', r
+          assert r['ppm_version']=='6.7.9'
+          assert r['publish_allowed'] is False
+          PY
+      - name: Negative PPM execution requires repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          python3 quality/k9_ppm679.py quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip /tmp/k9-ppm-fail.json --output /tmp/ppm-fail.json
+          rc=$?
+          set -e
+          test "$rc" -eq 3
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/ppm-fail.json'))
+          assert r['status']=='REPAIR_REQUIRED', r
+          assert len(r.get('errors',[]))>0, r
+          PY
+      - name: Wrong PPM package hash fails closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf x > /tmp/fake-ppm.zip
+          set +e
+          python3 quality/k9_ppm679.py /tmp/fake-ppm.zip /tmp/k9-ppm-pass.json > /tmp/ppm-bad-hash.json
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          grep -q 'PPM679_PACKAGE_HASH_MISMATCH' /tmp/ppm-bad-hash.json
