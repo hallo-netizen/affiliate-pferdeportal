@@ -5,6 +5,7 @@ on:
     paths: ['submissions/**.json']
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: k9-production-state
   cancel-in-progress: false
@@ -17,27 +18,60 @@ jobs:
           fetch-depth: 0
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Accept only exact current submission
+        id: accept
         shell: bash
         run: |
           set -euo pipefail
           count=$(find submissions -maxdepth 1 -type f -name '*.json' | wc -l)
           if [ "$count" -eq 0 ]; then
             echo 'No pending submission; likely cleanup commit.'
+            echo 'next_station=' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           test "$count" -eq 1
           test -f runtime/CURRENT_JOB.json
-          job_id=$(python3 - <<'PY'
+          read -r job_id station item_count < <(python3 - <<'PY'
           import json
-          print(json.load(open('runtime/CURRENT_JOB.json'))['job_id'])
+          j=json.load(open('runtime/CURRENT_JOB.json'))
+          print(j['job_id'], j['station'], j['item_count'])
           PY
           )
           f="submissions/${job_id}.json"
           test -f "$f"
           python3 k9_engine.py accept "$f" | tee K9_ACCEPT_RESULT.json
           git rm "$f"
+          next_station=""
+          case "$station" in
+            research) next_station="write" ;;
+            write) next_station="check" ;;
+            repair) next_station="check" ;;
+            *) echo "UNEXPECTED_CHAT_STATION:$station"; exit 2 ;;
+          esac
           git config user.name 'k9-warehouse-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -A state runtime warehouse submissions
           git commit -m 'K9: accept complete exact station product'
           git push
+          echo "next_station=$next_station" >> "$GITHUB_OUTPUT"
+          echo "item_count=$item_count" >> "$GITHUB_OUTPUT"
+      - name: Automatically dispatch the predetermined next station
+        if: ${{ steps.accept.outputs.next_station != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEXT_STATION: ${{ steps.accept.outputs.next_station }}
+          ITEM_COUNT: ${{ steps.accept.outputs.item_count }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(python3 - <<'PY'
+          import json,os
+          print(json.dumps({'ref':'konzept9/greenfield-20260929','inputs':{'station':os.environ['NEXT_STATION'],'batch_size':os.environ['ITEM_COUNT']}},separators=(',',':')))
+          PY
+          )"
+          curl --fail-with-body --silent --show-error -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/hallo-netizen/affiliate-pferdeportal/actions/workflows/text-start-pferdeatelier.yml/dispatches \
+            -d "$body"
+          echo "K9_AUTO_NEXT_DISPATCHED:$NEXT_STATION"
