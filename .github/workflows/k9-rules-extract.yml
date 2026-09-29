@@ -9,40 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Run exact current K9 payload through PPM content generator
+      - name: Prove exact fact-rpp-001 trace hash mismatch
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/k9-exact-gen && mkdir -p /tmp/k9-exact-gen
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-exact-gen/ppm
           python3 - <<'PY'
-          import copy, hashlib, json
+          import json,re
           from pathlib import Path
           import k9_pserc
           root=Path('.')
           ledger=k9_pserc.load(root/'state/ledger.json')
           item,research,article,checkrow=k9_pserc.latest_products(ledger,root)[0]
-          ppm_item=copy.deepcopy(article['ppm_item'])
-          canonical_id='article:'+hashlib.sha256((item['item_id']+'|'+article['content_sha256']).encode()).hexdigest()[:24]
-          ppm_item['canonical_article_id']=canonical_id
           fp=k9_pserc.canonical_fact_pack(research)
-          ppm_item['source_snapshot_id']=fp['fact_pack_id']
-          Path('/tmp/k9-exact-gen/payload.json').write_text(json.dumps({'item':ppm_item,'fact_pack':fp},ensure_ascii=False),encoding='utf-8')
+          claim=next(x for x in fp['claims'] if x['fact_id']=='fact-rpp-001')
+          html=article['ppm_item']['canonical_article']['body_html']
+          m=re.search(r'data-fact-id=["\']fact-rpp-001["\'][^>]*data-source-hash=["\']([0-9a-f]{64})["\']',html)
+          assert m, 'ARTICLE_TRACE_FOR_FACT_RPP_001_NOT_FOUND'
+          article_hash=m.group(1)
+          canonical_hash=claim['evidence_text_sha256']
+          print(json.dumps({'fact_id':'fact-rpp-001','article_trace_hash':article_hash,'canonical_fact_pack_hash':canonical_hash,'match':article_hash==canonical_hash},indent=2))
+          assert article_hash != canonical_hash, 'EXPECTED_CURRENT_MISMATCH_NOT_PRESENT'
           PY
-          cat > /tmp/k9-exact-gen/run.php <<'PHP'
-          <?php
-          $root=$argv[1]; $payload=json_decode(file_get_contents($argv[2]),true);
-          require $root.'/tests/normal-draft-production/fixture-builder.php';
-          nd_reset();
-          $item=(array)$payload['item']; $pack=(array)$payload['fact_pack'];
-          $imp=PPM679_Admin::import_fact_pack_bundle(['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]]);
-          if(empty($imp['ok'])){echo json_encode(['phase'=>'import','result'=>$imp],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);exit(0);}
-          $source=PPM679_Storage::fact_pack_hash((string)$item['source_snapshot_id']);
-          $item['source_hashes']=[$source];
-          $item['contract_hashes']=PPM679_Plan_Validator::active_contract_hashes();
-          $item['gold_core_binding']='FOUR_TYPE_APPROVED_GOLD_CORE_V1';
-          $r=PPM679_Content_Generator::generate($item,$pack);
-          echo json_encode(['phase'=>'generate','result'=>$r],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-          ?>
-          PHP
-          php /tmp/k9-exact-gen/run.php /tmp/k9-exact-gen/ppm/portal-production-machine /tmp/k9-exact-gen/payload.json
