@@ -1,0 +1,30 @@
+{
+  "contract": "K9_STATUS_V1",
+  "ledger_generation": 1,
+  "total": 0,
+  "fully_done": 0,
+  "remaining": 0,
+  "research_open": 0,
+  "ready_for_write": 0,
+  "ready_for_check": 0,
+  "repair_required": 0,
+  "stations": {
+    "research": {
+      "DONE": 0,
+      "PENDING": 0
+    },
+    "write": {
+      "DONE": 0,
+      "PENDING": 0
+    },
+    "check": {
+      "DONE": 0,
+      "PENDING": 0
+    },
+    "repair": {
+      "DONE": 0,
+      "PENDING": 0
+    }
+  },
+  "active_job": null
+}
