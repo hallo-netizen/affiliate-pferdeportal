@@ -80,9 +80,19 @@ $expected = [
 ];
 
 $actual = named_function_hashes(automation_source());
+$mismatches = [];
 foreach ($expected as $name => $hash) {
-    if (!isset($actual[$name])) { fail_gate("missing function {$name}"); }
-    if (!hash_equals($hash, $actual[$name])) { fail_gate("Awin/OTTO function changed: {$name}"); }
+    if (!isset($actual[$name])) {
+        $mismatches[] = "missing function {$name}";
+        continue;
+    }
+    if (!hash_equals($hash, $actual[$name])) {
+        $mismatches[] = "stale hash {$name} expected={$hash} actual={$actual[$name]}";
+        continue;
+    }
     echo "PASS: {$name} unchanged\n";
+}
+if ($mismatches) {
+    fail_gate(implode("\n", $mismatches));
 }
 echo 'ALL 18 AWIN/OTTO FUNCTION HASHES PASS' . PHP_EOL;
