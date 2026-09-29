@@ -9,17 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Inspect exact PPM generation failure path
+      - name: Print exact PPM content generator
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/k9-gen-inspect && mkdir -p /tmp/k9-gen-inspect
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-gen-inspect
-          ROOT=/tmp/k9-gen-inspect/portal-production-machine
-          echo '===FAILURE PATH==='
-          grep -Rni --include='*.php' 'BLOCKED_CONTENT_GENERATION_FAILED\|FACT_PACK_AND_TYPE_TEMPLATE_MUST_GENERATE_ARTICLE_CANDIDATE' "$ROOT" | head -100
-          f=$(grep -Rl --include='*.php' 'BLOCKED_CONTENT_GENERATION_FAILED' "$ROOT" | head -1)
-          n=$(grep -n 'BLOCKED_CONTENT_GENERATION_FAILED' "$f" | head -1 | cut -d: -f1)
-          s=$((n-100)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+180)); sed -n "${s},${e}p" "$f"
-          echo '===GENERATOR FUNCTIONS==='
-          grep -Rni --include='*.php' -E 'function .*generate|generate_candidate|article_candidate' "$ROOT/includes" | head -180
+          rm -rf /tmp/k9-gen && mkdir -p /tmp/k9-gen
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-gen
+          cat /tmp/k9-gen/portal-production-machine/includes/content-generator.php
