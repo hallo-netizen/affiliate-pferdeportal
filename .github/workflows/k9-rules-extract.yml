@@ -9,18 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Print PPM article type contracts
+      - name: Inspect fact-pack import hash rules only
         shell: bash
         run: |
           set -euo pipefail
           echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
           rm -rf /tmp/k9rules && mkdir -p /tmp/k9rules
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9rules
-          ROOT=/tmp/k9rules/portal-production-machine/contracts
-          echo '===ARTICLE_TYPE_TEMPLATES==='
-          cat "$ROOT/article-type-templates.json"
-          echo '===CONTENT_VALIDATION_CONTRACT==='
-          cat "$ROOT/content-validation-contract-v2.json"
-          echo '===SECTION_REQUIREMENTS_FILES==='
-          find "$ROOT" -maxdepth 1 -type f -iname '*section*' -o -iname '*structure*' | sort
-          for f in "$ROOT"/*section* "$ROOT"/*structure*; do if [ -f "$f" ]; then echo "===FILE:$f==="; cat "$f"; fi; done
+          ROOT=/tmp/k9rules/portal-production-machine
+          echo '===IMPORT FACT PACK BUNDLE==='
+          grep -Rni --include='*.php' 'function import_fact_pack_bundle' "$ROOT" | head -10
+          f=$(grep -Rl --include='*.php' 'function import_fact_pack_bundle' "$ROOT" | head -1)
+          n=$(grep -n 'function import_fact_pack_bundle' "$f" | head -1 | cut -d: -f1)
+          s=$((n-25)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+260)); sed -n "${s},${e}p" "$f"
+          echo '===FACT PACK HASH REFERENCES==='
+          grep -Rni --include='*.php' -E 'fact_pack_hash|claim_register_hash|source_manifest_hash' "$ROOT/includes" "$ROOT/tests" | head -220 || true
