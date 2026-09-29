@@ -1,32 +1,32 @@
 {
   "contract": "PFERDE_ATELIER_KONZEPT9_GREENFIELD_V3",
+  "role": "INVARIANT_CONTRACT_NOT_CURRENT",
   "concept": "K9",
-  "status": "REAL_ONE_ARTICLE_E2E_STOP_PASS_SCALE_NOT_YET_PROVEN",
-  "principle": "EACH_STATION_PRODUCES_A_COMPLETE_STORED_PRODUCT",
+  "current_authority": "CURRENT_STATE.json",
+  "goal_source": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json@main",
+  "principle": "EACH_STATION_PRODUCES_A_COMPLETE_DURABLE_PRODUCT",
+  "initial_start_is_explicit": true,
+  "deterministic_cross_station_routing": true,
+  "transitions": {
+    "research_pass": "write",
+    "write_pass": "check",
+    "check_fail": "repair",
+    "repair_pass": "check",
+    "check_pass_terminal": "pserc_endstempel_wordpress_stop"
+  },
+  "chat_controls_routing": false,
   "stations": [
     "research",
     "write",
     "check",
-    "repair",
-    "finalize"
+    "repair"
   ],
   "station_workers": {
     "research": "CHAT_RESEARCH_WORKER",
     "write": "CHAT_WRITE_WORKER",
     "check": "K9_NATIVE_MACHINE_CHECK",
-    "repair": "CHAT_REPAIR_WORKER",
-    "finalize": "K9_NATIVE_PSERC_ENDSTEMPEL_WORDPRESS_STOP"
+    "repair": "CHAT_REPAIR_WORKER"
   },
-  "deterministic_transition_map": {
-    "research_done": "write",
-    "write_done": "check",
-    "check_fail": "repair",
-    "repair_done": "check",
-    "check_pass": "finalize",
-    "finalize_pass": "STOP"
-  },
-  "automatic_cross_station_routing": true,
-  "chat_controls_routing": false,
   "restart_rule": "REUSE_EXACT_OPEN_JOB_OR_START_NEW_JOB_FROM_ELIGIBLE_WAREHOUSE_ITEMS",
   "partial_package_acceptance": false,
   "duplicate_processing": "BLOCK",
@@ -37,7 +37,6 @@
   "exact_submission_path_binding": true,
   "human_status_stamp": true,
   "wordpress_intake": {
-    "native_bridge_built": true,
     "exact_fields": [
       "title",
       "target_keyword",
@@ -45,46 +44,17 @@
       "article_type",
       "plan_slot"
     ],
-    "legacy_runtime_state_imported": false,
-    "real_one_article_e2e_proven": true
+    "legacy_runtime_state_imported": false
   },
   "quality": {
-    "language_tool": {
-      "version": "6.8",
-      "native_executor_bound": true,
-      "real_e2e_proven": true
-    },
-    "ppm": {
-      "version": "6.7.9",
-      "native_executor_bound": true,
-      "real_e2e_proven": true
-    },
-    "combined_check": {
-      "native_executor_bound": true,
-      "chat_required": false,
-      "real_e2e_proven": true
-    },
-    "pserc": {
-      "native_executor_bound": true,
-      "real_e2e_proven": true
-    },
-    "endstempel": {
-      "algorithm": "ED25519",
-      "native_executor_bound": true,
-      "real_e2e_proven": true
-    },
-    "wordpress_final_verify": {
-      "native_executor_bound": true,
-      "real_e2e_proven": true
-    }
+    "language_tool": "6.8",
+    "ppm": "6.7.9",
+    "pserc_required": true,
+    "endstempel_required": true,
+    "wordpress_final_verify_required": true
   },
-  "final_output_contract": "PSERC_APPROVED_PRODUCTION_PACKAGE_V1",
-  "terminal_contract": "K9_TERMINAL_RECEIPT_V1",
-  "external_chat_autostart_without_api_or_codex": false,
-  "api_or_codex_allowed_in_production": false,
   "legacy_runtime_imports_allowed": false,
   "legacy_state_reads_allowed": false,
   "legacy_paths_allowed": false,
-  "publish_allowed": false,
-  "production_start_allowed": false
+  "publish_allowed": false
 }
