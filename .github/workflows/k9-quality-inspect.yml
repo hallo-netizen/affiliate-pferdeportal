@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Derive minimal PPM item shape
+      - name: Inspect exact fact and item examples
         shell: bash
         run: |
           set -euo pipefail
@@ -18,31 +18,15 @@ jobs:
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm
           python3 - <<'PY'
           import json,pathlib
-          root=pathlib.Path('/tmp/k9ppm/portal-production-machine')
-          src=(root/'includes/content-validator.php').read_text()
-          def keys(prefix):
-              out=set(); start=0
-              needle=prefix+"['"
-              while True:
-                  i=src.find(needle,start)
-                  if i<0: break
-                  j=src.find("']",i+len(needle))
-                  if j<0: break
-                  out.add(src[i+len(needle):j]); start=j+2
-              return sorted(out)
-          print('ITEM_KEYS', keys('$item'))
-          print('GENERATED_KEYS', keys('$generated'))
-          c=root/'contracts'
+          c=pathlib.Path('/tmp/k9ppm/portal-production-machine/contracts')
           faq=json.loads((c/'g9-single-faq-approved-candidate-v1.json').read_text())
-          print('FAQ_ITEM_KEYS', sorted(faq['item'].keys()))
-          print('FAQ_CANDIDATE_KEYS', sorted(faq['candidate'].keys()))
-          print('FAQ_FACT_KEYS', sorted(faq['fact_pack'].keys()))
+          print('FAQ_FACT_PACK')
+          print(json.dumps(faq['fact_pack'],ensure_ascii=False,indent=2)[:12000])
+          print('FAQ_ITEM')
+          print(json.dumps(faq['item'],ensure_ascii=False,indent=2)[:12000])
           bundle=json.loads((c/'three-type-bundled-approved-candidates-v1.json').read_text())
-          print('THREE_ITEM_COUNT', len(bundle['items']))
-          first=bundle['items'][0]
-          print('THREE_FIRST_KEYS', sorted(first.keys()))
-          for k,v in first.items():
-              if isinstance(v,dict): print('THREE_FIRST_'+k+'_KEYS', sorted(v.keys()))
-          fp=bundle['fact_pack_bundle']['fact_packs'][0]
-          print('THREE_FACT_KEYS', sorted(fp.keys()))
+          print('BERATUNG_FACT_PACK')
+          print(json.dumps(bundle['fact_pack_bundle']['fact_packs'][0],ensure_ascii=False,indent=2)[:12000])
+          print('BERATUNG_ITEM')
+          print(json.dumps(bundle['items'][0],ensure_ascii=False,indent=2)[:16000])
           PY
