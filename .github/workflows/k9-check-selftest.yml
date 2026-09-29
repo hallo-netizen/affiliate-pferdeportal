@@ -1,0 +1,76 @@
+name: K9 combined check selftest
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths:
+      - 'quality/k9_check.py'
+      - 'quality/k9_lt68.py'
+      - 'quality/k9_ppm679.py'
+      - '.github/workflows/k9-check-selftest.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Assert no legacy runtime dependency
+        run: |
+          set -euo pipefail
+          ! grep -E 'concept_agent|isolated_system4|startmaster|SYSTEM4_' quality/k9_check.py quality/k9_lt68.py quality/k9_ppm679.py
+      - name: Prepare exact LT68
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k9-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Build sealed K9 check job from PPM approved fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/k9-check-fixture && mkdir -p /tmp/k9-check-fixture
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-check-fixture
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path('/tmp/k9-check-fixture/portal-production-machine/contracts/g9-single-faq-approved-candidate-v1.json')
+          f=json.loads(p.read_text())
+          c=f['candidate']; html=c['content_html']; sha=hashlib.sha256(html.encode()).hexdigest()
+          research={'contract':'K9_RESEARCH_PRODUCT_V1','sources':[{'source_id':'fixture','url':'https://example.org/fixture','title':'fixture'}],'fact_pack':f['fact_pack'],'product_sha256':'fixture-research'}
+          article={'contract':'K9_ARTICLE_PRODUCT_V1','article_type':f['article_type'],'title':c['title'],'content_html':html,'content_sha256':sha,'research_product_sha256':'fixture-research','ppm_item':f['item'],'product_sha256':'fixture-article'}
+          job={'contract':'K9_JOB_V1','status':'OPEN','station':'check','job_id':'K9-CHECK-SELFTEST','job_sha256':'not-used-here','item_count':1,'item_ids':['fixture-1'],'items':[{'item_id':'fixture-1','input_products':{'research':{'research_product':research},'article':{'article_product':article}}}]}
+          pathlib.Path('/tmp/k9-check-job.json').write_text(json.dumps(job,ensure_ascii=False))
+          PY
+      - name: Run both native K9 quality machines
+        run: |
+          set -euo pipefail
+          python3 quality/k9_check.py /tmp/k9-check-job.json /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip --output /tmp/k9-check-submission.json
+          python3 - <<'PY'
+          import json
+          s=json.load(open('/tmp/k9-check-submission.json'))
+          assert s['contract']=='K9_SUBMISSION_V1'
+          assert s['station']=='check'
+          assert len(s['results'])==1
+          r=s['results'][0]
+          assert r['lt68_result']['contract']=='K9_LT68_RESULT_V1'
+          assert r['lt68_result']['status'] in ('PASS','REPAIR_REQUIRED')
+          assert r['ppm679_result']['contract']=='K9_PPM679_RESULT_V1'
+          assert r['ppm679_result']['status']=='PASS', r['ppm679_result']
+          assert r['lt68_result']['article_sha256']==r['ppm679_result']['content_sha256']
+          PY
+      - name: Wrong station must block
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          p='/tmp/k9-check-job.json'; d=json.load(open(p)); d['station']='write'; open('/tmp/k9-check-wrong.json','w').write(json.dumps(d))
+          PY
+          set +e
+          python3 quality/k9_check.py /tmp/k9-check-wrong.json /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip --output /tmp/never.json > /tmp/wrong.log
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          grep -q 'K9_CHECK_JOB_INVALID' /tmp/wrong.log
