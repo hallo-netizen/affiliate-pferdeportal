@@ -1,0 +1,16 @@
+name: K9 greenfield selftest
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - run: |
+          test ! -e concept_agent
+          test ! -e control
+          test ! -e isolated_system4
+          python3 -m unittest discover -s tests -p 'test_*.py'
