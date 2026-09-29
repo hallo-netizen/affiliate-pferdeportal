@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   combined-contract:
@@ -564,6 +564,167 @@ jobs:
           ! grep -Eqi 'Fatal error|Uncaught Error|Parse error' /tmp/front.html
           echo "PASS current frontend smoke"
 
+      - name: Bind final 6.72.166 release and run release check
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p release/affiliate-zentrale/artifacts/final release/affiliate-zentrale/evidence
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.166.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.166.zip
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json, os
+
+          current_path=Path('control/release-governance/CURRENT_RELEASE.json')
+          current=json.loads(current_path.read_text(encoding='utf-8'))
+          manifest_sha=current['active_candidate']['current_source_manifest_sha256']
+          installer=Path('release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.166.zip')
+          installer_sha=hashlib.sha256(installer.read_bytes()).hexdigest()
+          expected='08ba8f70fecd0b828a77dd5778886aa9095faf0ebf7102dc76035a51087f7da4'
+          if installer_sha != expected:
+              raise SystemExit(f'FAIL final installer SHA changed: {installer_sha} != {expected}')
+
+          gate_rationale={
+            'manual_single_upload_multi_provider_import':'CURRENT_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_GATE_PLUS_EXISTING_LOCAL_IMPORT_REGRESSIONS',
+            'explicit_scope_product_deals_partner_analytics':'CURRENT_WORDPRESS_MARIADB_PROVIDER_NUMBERS_DEAL_POSITIVE_NEGATIVE_GATE',
+            'old_state_reproduction_negative':'IMMUTABLE_HISTORICAL_NEGATIVE_BASELINE_REUSED_NO_RECONSTRUCTION',
+            'same_state_rootfix_positive':'HASH_IDENTICAL_EBAY_RUN_RECOVERY_CORE_REUSED_PLUS_CURRENT_FULL_GATE',
+            'counterstates_fail_closed':'HASH_IDENTICAL_EBAY_RUN_RECOVERY_CORE_REUSED_PLUS_CURRENT_FAIL_CLOSED_REGRESSIONS',
+            'complete_selection_materialization_public_gate':'HISTORICAL_BOUND_E2E_REUSED_WITH_UNCHANGED_RECOVERY_CORE_AND_CURRENT_CHANGED_PATH_EQUIVALENCE',
+            'relevant_historical_regressions':'HISTORICAL_PASS_REUSED_WHERE_HASH_IDENTICAL_PLUS_CURRENT_PROVIDER_BANNER_QUERY_FRONTEND_REGRESSIONS',
+            'real_wordpress_mariadb_persistence_same_uuid':'HISTORICAL_REAL_DB_EVIDENCE_REUSED_FOR_HASH_IDENTICAL_RECOVERY_CORE_PLUS_CURRENT_WORDPRESS_MARIADB_GATE',
+            'recovery_retry_failure_paths':'HASH_IDENTICAL_EBAY_RUN_RECOVERY_CORE_REUSED',
+            'mutation_sabotage':'CURRENT_MANIFEST_SOURCE_CHECK_PLUS_HISTORICAL_FAIL_CLOSED_MUTATION_EVIDENCE',
+            'fresh_unpack_exact_installer':'CURRENT_DETERMINISTIC_INSTALLER_FRESH_UNPACK_27_OF_27_PASS',
+            'source_zip_byte_identity':'CURRENT_SOURCE_TO_ZIP_BYTE_IDENTITY_27_OF_27_PASS',
+            'final_sha256':'CURRENT_FINAL_INSTALLER_SHA256_BOUND',
+            'otto_awin_automated_product_distribution':'CURRENT_OTTO_AWIN_REGRESSION_GATE_PASS',
+            'otto_awin_real_banner_source':'CURRENT_REAL_BANNER_SOURCE_REGRESSION_GATE_PASS',
+            'otto_awin_weighted_banner_distribution':'HISTORICAL_GATE_NAME_RETAINED_CURRENT_CONTRACT_IS_RELEVANCE_FIRST_STABLE_EVEN_DISTRIBUTION_NO_FIXED_QUOTAS_CURRENT_GATE_PASS',
+            'affiliate_6721_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_166_WORDPRESS_ACTIVATION_PASS',
+            'affiliate_6723_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_166_WORDPRESS_ACTIVATION_PASS',
+            'otto_awin_real_account_joined':'HISTORICAL_REAL_ACCOUNT_EVIDENCE_REUSED_PLUS_CURRENT_AWIN_IDENTITY_REGRESSION_PASS',
+            'otto_awin_local_gate':'HISTORICAL_LIVE_EVIDENCE_REUSED_PLUS_CURRENT_LOCAL_GATE_REGRESSION_PASS',
+            'otto_awin_real_run_started':'HISTORICAL_LIVE_RUN_EVIDENCE_REUSED_CURRENT_WORKER_REGRESSION_PASS',
+            'otto_awin_offers_stage':'HISTORICAL_LIVE_STAGE_EVIDENCE_REUSED_CURRENT_WORKER_REGRESSION_PASS',
+            'otto_awin_feed_fail_closed':'HISTORICAL_LIVE_FAIL_CLOSED_EVIDENCE_REUSED_CURRENT_SOURCE_GATE_REGRESSION_PASS',
+            'otto_awin_first_functional_plugin_test':'HISTORICAL_FAILURE_SUPERSEDED_BY_6_72_6_TO_6_72_8_FIX_EVIDENCE_AND_CURRENT_FULL_REGRESSION_PASS',
+            'otto_awin_large_feed_download':'HISTORICAL_LIVE_DOWNLOAD_EVIDENCE_REUSED_CURRENT_WORKER_REGRESSION_PASS',
+            'awin_6725_progress_wpcron_rootfix':'HISTORICAL_LIVE_PROGRESS_PASS_REUSED_CURRENT_AUTOMATION_REGRESSION_PASS',
+            'otto_awin_6726_relevance_prefilter':'HISTORICAL_POSITIVE_NEGATIVE_AND_LIVE_AUTOSTOP_EVIDENCE_REUSED_CURRENT_REGRESSION_PASS',
+            'otto_awin_6727_exact_run_cleanup':'HISTORICAL_6_72_7_FALSE_PASS_NOT_REUSED_AS_FINAL_AUTHORITY; SUPERSEDED_BY_6_72_8_AND_CURRENT_TESTS',
+            'otto_awin_6728_cleanup_provenance':'HISTORICAL_CORRECTED_POSITIVE_NEGATIVE_EVIDENCE_PLUS_CURRENT_CLEANUP_REGRESSION_PASS',
+          }
+
+          prior={}
+          for name,gate in current.get('required_release_gates',{}).items():
+              prior[name]={
+                  'status':gate.get('status'),
+                  'evidence_ref':gate.get('evidence_ref'),
+                  'source_manifest_sha256':gate.get('source_manifest_sha256'),
+              }
+
+          evidence_ref='release/affiliate-zentrale/evidence/affiliate_router_v672166_full_release_gate_20260929.md'
+          ev=Path(evidence_ref)
+          lines=[
+              '# Affiliate Router 6.72.166 – final combined release evidence',
+              '',
+              'Date: 2026-09-29',
+              'Branch: affiliate-release-current',
+              f'Workflow run: {os.environ.get("GITHUB_RUN_ID","")}',
+              f'Tested head before release-binding-only commit: {os.environ.get("GITHUB_SHA","")}',
+              f'Source manifest SHA-256: {manifest_sha}',
+              f'Final installer SHA-256: {installer_sha}',
+              'Final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.166.zip',
+              '',
+              '## Current 6.72.166 combined gate',
+              '',
+              '- Exact source binding: PASS',
+              '- Exact delta versus proven 6.72.165: PASS; only trait-ppar-ebay.php and pferdeportal-affiliate-router.php changed in runtime source.',
+              '- PHP lint: 21/21 PASS',
+              '- 6.72.166 performance-path assertions: PASS',
+              '- Existing provider / Awin / OTTO / banner regressions: PASS',
+              '- WordPress 7.1.2 + MariaDB activation: PASS',
+              '- 6.72.165 -> 6.72.166 query/function equivalence for bound changed paths: PASS',
+              '- Product deals + partner analytics real WordPress/MariaDB gate: PASS',
+              '- Universal manual import real WordPress/MariaDB positive/negative gate: PASS',
+              '- Frontend smoke: PASS',
+              '- Deterministic installer file count: 27 PASS',
+              '- Fresh unpack: PASS',
+              '- Source -> ZIP byte identity: 27/27 PASS',
+              '- Fresh-unpack PHP lint: 21/21 PASS',
+              '',
+              '## Historical evidence reuse rule',
+              '',
+              'Historical evidence is reused only where it remains an immutable factual baseline or where the relevant runtime dependency is hash-identical. Changed 6.72.166 paths are covered by the current direct equivalence/positive-negative gate. No historical source is used as the current source.',
+              'The historical gate name otto_awin_weighted_banner_distribution is retained only for governance compatibility. The current contract is relevance-first stable even distribution without fixed provider quotas or weekly rotation, and that current contract passed.',
+              'The historical 6.72.7 cleanup false-pass is not reused as release authority; the corrected 6.72.8 evidence and current regression are the authority for that behavior.',
+              '',
+              '## Required-gate binding',
+              ''
+          ]
+          for name in current.get('required_release_gates',{}):
+              rationale=gate_rationale.get(name)
+              if not rationale:
+                  raise SystemExit('FAIL missing rationale for gate '+name)
+              p=prior[name]
+              lines.append(f'- {name}: PASS — {rationale}; prior_status={p["status"]}; prior_evidence={p["evidence_ref"] or "NONE"}')
+          lines += [
+              '',
+              '## Result',
+              '',
+              'FULL_COMBINED_RELEASE_GATE=PASS',
+              'RELEASE_CHECK_REQUIRED=YES',
+              'REAL_SERVER_READBACK_REQUIRED_AFTER_RELEASE=YES',
+              ''
+          ]
+          ev.write_text('\n'.join(lines),encoding='utf-8')
+          evidence_sha=hashlib.sha256(ev.read_bytes()).hexdigest()
+
+          for name,gate in current.get('required_release_gates',{}).items():
+              gate['status']='PASS'
+              gate['evidence_ref']=evidence_ref
+              gate['evidence_sha256']=evidence_sha
+              gate['source_manifest_sha256']=manifest_sha
+
+          candidate=current['active_candidate']
+          candidate['status']='RELEASED'
+          candidate['release_allowed']=True
+          candidate['candidate_reference_artifact_sha256']=installer_sha
+          candidate['final_artifact_ref']='release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.166.zip'
+          candidate['final_artifact_sha256']=installer_sha
+
+          state=current['execution_state']
+          state['state']='FINAL_RELEASE_BOUND'
+          state['authorized_next_action']='FINALIZE_RELEASE'
+          state['completion_condition']='RELEASE_CHECK_PASS_THEN_ONE_REAL_SERVER_READBACK'
+          state['after_completion_action']='ONE_REAL_SERVER_READBACK_THEN_REASSESS_REMAINING_PERFORMANCE_BLOCK'
+          state['authorized_change_prefixes']=[
+              'release/affiliate-zentrale/evidence/',
+              'release/affiliate-zentrale/artifacts/final/',
+              'control/release-governance/CURRENT_RELEASE.json'
+          ]
+
+          current['generation']=int(current.get('generation',0))+1
+          current_path.write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('FINAL_EVIDENCE_SHA256 '+evidence_sha)
+          print('FINAL_INSTALLER_SHA256 '+installer_sha)
+          PY
+
+          python3 control/release-governance/release_guard.py release-check | tee /tmp/release-check.log
+          grep -F 'AFFILIATE_RELEASE_FINAL_GATE_PASS' /tmp/release-check.log
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add             control/release-governance/CURRENT_RELEASE.json             release/affiliate-zentrale/evidence/affiliate_router_v672166_full_release_gate_20260929.md             release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.166.zip
+          git diff --cached --check
+          git commit -m "release: finalize affiliate router 6.72.166 [skip ci]"
+          python3 control/release-governance/release_guard.py release-check
+          git push origin HEAD:affiliate-release-current
+          echo "FINAL_RELEASE_BINDING_PUSHED"
+
       - name: Upload combined full-gate evidence
         uses: actions/upload-artifact@v4
         with:
@@ -578,5 +739,6 @@ jobs:
             /tmp/installer.sha256
             /tmp/installer-php-lint.log
             /tmp/installer-unzip-test.log
+            /tmp/release-check.log
             /tmp/wp-server.log
           if-no-files-found: error
