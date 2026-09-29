@@ -22,10 +22,17 @@ class K9Tests(unittest.TestCase):
         k.WAREHOUSE = root / "warehouse"
         k.write_json(k.LEDGER, {"contract":"K9_LEDGER_V1","generation":1,"items":[]})
         intake = root / "intake.json"
-        k.write_json(intake, {"items":[
-            {"item_id":"a","title":"A","metadata":{"article_type":"Beratung","target_keyword":"ka","category":"kat-a"}},
-            {"item_id":"b","title":"B","metadata":{"article_type":"Beratung","target_keyword":"kb","category":"kat-b"}}
-        ]})
+        k.write_json(intake, {
+            "contract":"K9_INTAKE_V1",
+            "batch_id":"K9-INTAKE-TEST",
+            "batch_sha256":"a"*64,
+            "item_count":2,
+            "publish_allowed":False,
+            "items":[
+                {"item_id":"a","title":"A","metadata":{"title":"A","article_type":"Beratung","target_keyword":"ka","category":"kat-a","plan_slot":"slot-a"}},
+                {"item_id":"b","title":"B","metadata":{"title":"B","article_type":"Beratung","target_keyword":"kb","category":"kat-b","plan_slot":"slot-b"}}
+            ]
+        })
         k.import_intake(intake)
 
     def tearDown(self):
@@ -287,7 +294,10 @@ class K9Tests(unittest.TestCase):
 
     def test_duplicate_intake_blocked(self):
         path=k.ROOT/"duplicate.json"
-        k.write_json(path,{"items":[{"item_id":"a","title":"A2"}]})
+        k.write_json(path,{
+            "contract":"K9_INTAKE_V1","batch_id":"dup","batch_sha256":"b"*64,"item_count":1,"publish_allowed":False,
+            "items":[{"item_id":"a","title":"A2","metadata":{"title":"A2","article_type":"Beratung","target_keyword":"ka2","category":"kat-a","plan_slot":"slot-a2"}}]
+        })
         with self.assertRaises(k.K9Error):
             k.import_intake(path)
 
