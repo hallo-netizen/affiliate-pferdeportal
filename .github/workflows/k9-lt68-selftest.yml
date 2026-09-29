@@ -1,0 +1,68 @@
+name: K9 native LT68 selftest
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths:
+      - 'quality/k9_lt68.py'
+      - '.github/workflows/k9-lt68-selftest.yml'
+permissions:
+  contents: read
+jobs:
+  lt68:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Assert native K9 isolation
+        run: |
+          set -euo pipefail
+          ! grep -E 'concept_agent|isolated_system4|startmaster|SYSTEM4_' quality/k9_lt68.py
+      - name: Download exact LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k9-lt68
+          curl --fail --location --retry 3 \
+            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+            -o /tmp/k9-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: Positive LT execution
+        run: |
+          set -euo pipefail
+          printf '<p>Das ist ein vollständiger Satz.</p>\n' > /tmp/k9-lt-pass.html
+          python3 quality/k9_lt68.py /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/k9-lt-pass.html --output /tmp/lt-pass.json
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/lt-pass.json'))
+          assert r['status']=='PASS', r
+          assert r['engine']=='LanguageTool 6.8'
+          assert r['finding_count']==0
+          PY
+      - name: Negative LT execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '<p>Das ist ein Tset.</p>\n' > /tmp/k9-lt-fail.html
+          set +e
+          python3 quality/k9_lt68.py /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/k9-lt-fail.html --output /tmp/lt-fail.json
+          rc=$?
+          set -e
+          test "$rc" -eq 3
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/lt-fail.json'))
+          assert r['status']=='REPAIR_REQUIRED', r
+          assert r['finding_count']>0, r
+          PY
+      - name: Wrong jar hash must fail closed
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf x > /tmp/fake.jar
+          set +e
+          python3 quality/k9_lt68.py /tmp/fake.jar /tmp/k9-lt-pass.html > /tmp/bad-hash.json
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          grep -q 'LT68_JAR_HASH_MISMATCH' /tmp/bad-hash.json
