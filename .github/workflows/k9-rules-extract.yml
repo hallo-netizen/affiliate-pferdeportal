@@ -9,18 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Inspect exact plan and item contract hash binding
+      - name: Inspect exact production fact-pack requirements
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/k9-plan-inspect && mkdir -p /tmp/k9-plan-inspect
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-plan-inspect
-          ROOT=/tmp/k9-plan-inspect/portal-production-machine
-          echo '===ITEM CONTRACT HASH REFERENCES==='
-          grep -Rni --include='*.php' "contract_hashes" "$ROOT/includes/plan-validator.php" "$ROOT/tests/normal-draft-production/fixture-builder.php" | head -120
-          echo '===FIXTURE BUILDER PLAN==='
-          n=$(grep -n 'function nd_build_plan' "$ROOT/tests/normal-draft-production/fixture-builder.php" | head -1 | cut -d: -f1)
-          s=$((n-20)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+90)); sed -n "${s},${e}p" "$ROOT/tests/normal-draft-production/fixture-builder.php"
-          echo '===VALIDATOR ITEM HASH CONTEXT==='
-          n=$(grep -n "item_required=array" "$ROOT/includes/plan-validator.php" | head -1 | cut -d: -f1)
-          s=$((n-10)); e=$((n+110)); sed -n "${s},${e}p" "$ROOT/includes/plan-validator.php"
+          rm -rf /tmp/k9-fp-inspect && mkdir -p /tmp/k9-fp-inspect
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-fp-inspect
+          F=/tmp/k9-fp-inspect/portal-production-machine/includes/plan-validator.php
+          n=$(grep -n 'function validate_production_fact_pack' "$F" | head -1 | cut -d: -f1)
+          test -n "$n"
+          s=$((n-20)); e=$((n+260)); sed -n "${s},${e}p" "$F"
