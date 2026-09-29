@@ -350,8 +350,9 @@ pass_or_fail(
 );
 pass_or_fail(
     str_contains($automation, 'output_deactivate_materialized_object')
-    && str_contains($automation, "'_ppar_creative_identity_hash'")
-    && str_contains($automation, "'_ppar_output_object_key'")
+    && str_contains($automation, "creative_identity_hash=%s")
+    && str_contains($automation, "\$wpdb->delete(\$library_table, array(")
+    && str_contains($automation, "'last_complete_run'=>\$run_uuid")
     && !str_contains($automation, 'DELETE FROM {$library_table} WHERE provider='),
     'legacy OTTO cleanup removes only exact linked output and never broad-deletes partner library'
 );
