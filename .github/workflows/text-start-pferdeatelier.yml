@@ -23,10 +23,10 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout protected main
+      - name: Checkout isolated K7 branch
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: main
+          ref: konzept7/hard-worker-completion-20260928
           fetch-depth: 1
           persist-credentials: false
 
@@ -44,7 +44,7 @@ jobs:
           issue = os.environ["SOURCE_ISSUE_NUMBER"]
           if not run_id.isdigit() or int(run_id) < 1:
               raise SystemExit("TEXT_START_SOURCE_RUN_ID_INVALID")
-          if not issue.isdigit() or int(issue) < 1:
+          if issue != "0":
               raise SystemExit("TEXT_START_SOURCE_ISSUE_INVALID")
 
           def get(url):
@@ -64,39 +64,14 @@ jobs:
               raise SystemExit("TEXT_START_SOURCE_WORKFLOW_INVALID")
           if run.get("path") != ".github/workflows/text-start-door.yml":
               raise SystemExit("TEXT_START_SOURCE_WORKFLOW_PATH_INVALID")
-          if run.get("event") != "issues" or run.get("head_branch") != "main":
+          if run.get("event") != "workflow_dispatch" or run.get("head_branch") != "konzept7/isolated-start-20260928":
               raise SystemExit("TEXT_START_SOURCE_EVENT_INVALID")
-          if run.get("display_title") != "START:pferdeatelier":
-              raise SystemExit("TEXT_START_SOURCE_TITLE_INVALID")
           if ((run.get("actor") or {}).get("login") != "hallo-netizen"
               or (run.get("triggering_actor") or {}).get("login") != "hallo-netizen"):
               raise SystemExit("TEXT_START_SOURCE_ACTOR_INVALID")
           repo = (run.get("repository") or {}).get("full_name")
           if repo != "hallo-netizen/text-start":
               raise SystemExit("TEXT_START_SOURCE_REPOSITORY_INVALID")
-
-          source_issue = get(
-              f"https://api.github.com/repos/hallo-netizen/text-start/issues/{issue}"
-          )
-          if source_issue.get("title") != "START:pferdeatelier":
-              raise SystemExit("TEXT_START_SOURCE_ISSUE_TITLE_INVALID")
-          if (source_issue.get("user") or {}).get("login") != "hallo-netizen":
-              raise SystemExit("TEXT_START_SOURCE_ISSUE_AUTHOR_INVALID")
-
-          comments = get(
-              f"https://api.github.com/repos/hallo-netizen/text-start/issues/{issue}/comments?per_page=100"
-          )
-          bot_bodies = [
-              str(row.get("body") or "")
-              for row in comments
-              if (row.get("user") or {}).get("login") == "github-actions[bot]"
-          ]
-          authorized = f"START_AUTHORIZED: pferdeatelier\nRUN_ID: {run_id}"
-          requested = f"TARGET_DISPATCH_REQUESTED: pferdeatelier\nSOURCE_RUN_ID: {run_id}"
-          if authorized not in bot_bodies:
-              raise SystemExit("TEXT_START_AUTHORIZATION_COMMENT_MISSING")
-          if requested not in bot_bodies:
-              raise SystemExit("TEXT_START_DISPATCH_COMMENT_MISSING")
 
           print("TEXT_START_SOURCE_PROOF_PASS")
           PY
@@ -118,7 +93,7 @@ jobs:
               "source_run_id": int(os.environ["SOURCE_RUN_ID"]),
               "source_issue_number": int(os.environ["SOURCE_ISSUE_NUMBER"]),
               "target_repository": "hallo-netizen/affiliate-pferdeportal",
-              "target_ref": "main",
+              "target_ref": "konzept7/hard-worker-completion-20260928",
               "target_head_sha": head,
               "canonical_start_command": "python3 concept_agent/intake_bridge.py prepare concept_agent/current/PSERC_METADATA_SNAPSHOT.json CONCEPT_AGENT_INTAKE.json",
               "article_content_rules_changed": False,

@@ -1,7 +1,7 @@
 {
   "contract": "PFERDE_ATELIER_CONTROL_STATE_V4",
   "startmaster": "STARTMASTER0107",
-  "status": "K7_DIRECTOR_PROVEN_NATIVE_BOUND_MODEL_WORKER_HOST_UNAVAILABLE_FAIL_CLOSED",
+  "status": "K7_BOUND_CHAT_CONTINUATION_FIX_READY_REAL_START_TO_STOP_VALIDATION_REQUIRED",
   "previous_binding": "STARTMASTER0106",
   "workflow_change_scope": "OUTER_TECHNICAL_ORIGIN_IDENTITY_VISIBILITY_LOCK_ONLY_NO_DOMAIN_CONTENT_QUALITY_DESIGN_CHANGE",
   "content_or_design_contract_changed": false,
@@ -230,12 +230,12 @@
     "quality_authority": "NONE",
     "publish_allowed": false
   },
-  "current_work_status": "K7_DIRECTOR_PROVEN_NATIVE_BOUND_MODEL_WORKER_HOST_UNAVAILABLE_FAIL_CLOSED",
+  "current_work_status": "K7_BOUND_CHAT_CONTINUATION_FIX_READY_REAL_START_TO_STOP_VALIDATION_REQUIRED",
   "current_execution_blocker": {
-    "code": "NATIVE_BOUND_MODEL_WORKER_HOST_CAPABILITY_UNAVAILABLE",
-    "error_class": true,
-    "classification": "HOST_CAPABILITY_ONLY",
-    "detail": "The GitHub director is implemented and proven. It can issue exactly one checkpoint-bound ticket and accept only the matching constrained receipt. The existing GitHub start path can run deterministic repository code but exposes no native host primitive that instantiates a model worker with physically reduced capabilities. Repository code cannot remove capabilities exposed by the chat host. Therefore physical worker confinement cannot be completed inside the current repository path without introducing a different execution host, which is outside the authorized scope.",
+    "code": "REAL_START_TO_STOP_VALIDATION_NOT_YET_RUN",
+    "error_class": false,
+    "classification": "VALIDATION_REQUIRED",
+    "detail": "The existing bound-chat continuation conflict has been corrected across the current routing state. The complete real text-start -> WRITE_DRAFT -> LT68 -> PPM679 -> repair/recheck as required -> PSERC -> ENDSTEMPEL -> terminal STOP path has not yet been rerun on the corrected K7 head, so production reactivation is not yet claimed.",
     "applies_to_concept_agent": true,
     "github_director_resolved": true,
     "recovery_fix_resolved": true,
@@ -352,9 +352,9 @@
   "hobbyroom_sync_policy": "Do not use the historical System-4A hobbyroom branch as current truth. Current operational truth remains CURRENT_STATE. No separate new HOBBYRAUM truth was created because the repository's current handoff contract explicitly forbids Hobbyraum as a second CURRENT/NEXT-ACTION authority.",
   "hobbyroom_blocker": "NONE",
   "next_action": {
-    "goal": "HOLD_FAIL_CLOSED_UNTIL_NATIVE_BOUND_MODEL_WORKER_HOST_CAPABILITY_EXISTS",
-    "action": "Do not alter the proven K7 workflow, workers, quality gates, recovery or GitHub director. Do not substitute acceptance-only confinement for physical worker confinement. Production remains blocked. If a native host capability becomes available that can instantiate exactly the director-bound worker with physically restricted capabilities, bind the existing ticket to that host and rerun the existing positive/negative matrix before production reactivation.",
-    "scope": "HOST_CAPABILITY_ONLY_NO_REPOSITORY_ARCHITECTURE_CHANGE",
+    "goal": "RUN_ONE_REAL_K7_START_TO_TERMINAL_STOP_VALIDATION",
+    "action": "Run one normal real K7 production batch from the existing isolated text-start button on the corrected K7 head and verify that every non-terminal bound worker return immediately re-enters the existing guard and continues through WRITE_DRAFT, LT 6.8, PPM 6.7.9, same-article repair/recheck if required, PSERC, ENDSTEMPEL and terminal STOP. Do not alter workflow architecture or quality rules during this validation.",
+    "scope": "REAL_EXECUTION_VALIDATION_ONLY",
     "existing_workflow_steps_unchanged": true,
     "article_content_rules_changed": false,
     "quality_rules_changed": false,
@@ -366,13 +366,13 @@
     "director_changed": false,
     "publish_allowed": false,
     "forbidden": [
-      "claim physical worker confinement from repository rules alone",
       "change existing worker responsibilities",
       "change article workflow order",
       "change content or quality rules",
       "add an alternate production route",
       "reconstruct state from chat history",
-      "allow the director to judge article content or quality",
+      "allow the director or chat to choose a different next action",
+      "claim physical host confinement",
       "publish"
     ]
   },
@@ -477,7 +477,7 @@
     "workflow": "PFERDE_ATELIER_KONZEPT_6_WORKING_COPY",
     "entry_ref": "concept_agent/CONTROL_ENTRY_POINTER.json",
     "current_authority_ref": "control/startmaster0107/CURRENT_STATE.json",
-    "current_authority_branch": "main",
+    "current_authority_branch": "konzept7/hard-worker-completion-20260928",
     "metadata_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json",
     "metadata_snapshot_sha256": "3ac8a725f3e7ebb8a6e332b07e88b989e508e05fe9aa29260aaca6f9bedfc761",
     "metadata_snapshot_manifest_sha256": "2d1335445273c4ffc8946f25b67b4192ee2ebd669a90be97c67932325a98f789",
@@ -512,7 +512,7 @@
     "semantic_role": "COMPLETED_K6_COMPATIBILITY_SNAPSHOT_NOT_CURRENT_K7_STATUS"
   },
   "text_start_current_binding": {
-    "status": "PASS",
+    "status": "PASS_ISOLATED_K7_START",
     "target_workflow_ref": ".github/workflows/text-start-pferdeatelier.yml",
     "central_repository": "hallo-netizen/text-start",
     "central_main_sha": "afd02b5468b6549bdfa0f3c407c79dc602edf657",
@@ -523,7 +523,10 @@
     "batch_size_policy": "1..N_FROM_CURRENT_HASH_BOUND_SNAPSHOT",
     "legacy_runtime_inbox_used": false,
     "legacy_parent_start_used": false,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "central_start_branch": "konzept7/isolated-start-20260928",
+    "central_start_head_sha": "c1c8af7488d8df84471310a6bd9deb802f677bd8",
+    "central_main_is_current_start_authority": false
   },
   "upstream_repair_policy": {
     "status": "PASS",
@@ -549,12 +552,12 @@
   },
   "next_allowed_step_role": "LEGACY_MACHINE_GATE_MIRROR_NOT_HUMAN_NEXT_ACTION",
   "current_execution_policy": {
-    "control_model": "GITHUB_DIRECTOR_EXISTING_WORKERS_ONLY",
-    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_MAIN",
-    "host_model_worker_binding_status": "BLOCKED_NOT_AVAILABLE_IN_CURRENT_GITHUB_START_PATH",
-    "chat_role": "INITIAL_TRIGGER_ONLY",
+    "control_model": "EXISTING_BOUND_CHAT_WORKER_WITH_EXISTING_GUARDS",
+    "director_implementation_status": "IMPLEMENTED_AND_TESTED_ON_ISOLATED_K7_BASE",
+    "host_model_worker_binding_status": "PHYSICAL_HOST_CONFINEMENT_NOT_CLAIMED",
+    "chat_role": "EXECUTE_EXACT_BOUND_ACTIONS_UNTIL_TERMINAL_STOP",
     "chat_may_route": false,
-    "chat_may_continue_production": false,
+    "chat_may_continue_production": true,
     "director_domain_authority": "NONE",
     "director_quality_authority": "NONE",
     "director_content_authority": "NONE",

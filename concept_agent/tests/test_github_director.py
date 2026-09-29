@@ -20,7 +20,7 @@ import progress_guard
 import universal_reentry_guard
 
 EXACT_EXISTING_BLOB_SHA1 = {
-    "concept_agent/intake_bridge.py": "b857653bac827e378c5819f4387e55fa84530e9f",
+    "concept_agent/intake_bridge.py": "043d1bf6c7f9541306252ae9cba879c4bd06efa1",
     "concept_agent/production_bridge.py": "3ab8116c91be773cdf1db2a06f02c957d32ddc9c",
     "concept_agent/progress_guard.py": "aee4324f11fa8b0f4b865211359dcea0255c8d7f",
     "concept_agent/universal_reentry_guard.py": "504c7d5372eb4bfde12333fdd383198ce4d329b0",
