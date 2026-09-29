@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Inspect exact validator signatures only
+      - name: Inspect minimal PPM data shape only
         shell: bash
         run: |
           set -euo pipefail
@@ -17,13 +17,29 @@ jobs:
           rm -rf /tmp/k9ppm && mkdir -p /tmp/k9ppm
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm
           ROOT=/tmp/k9ppm/portal-production-machine
-          echo '--- content-validator functions ---'
-          grep -nE 'function [A-Za-z0-9_]+' "$ROOT/includes/content-validator.php"
-          echo '--- local-content-validator functions ---'
-          grep -nE 'function [A-Za-z0-9_]+' "$ROOT/includes/three-type-local-content-validator.php"
-          echo '--- content-validator check neighborhood ---'
-          n=$(grep -nE 'function check\(' "$ROOT/includes/content-validator.php" | head -1 | cut -d: -f1)
-          s=$((n-25)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+90)); sed -n "${s},${e}p" "$ROOT/includes/content-validator.php"
-          echo '--- local-validator public entry neighborhood ---'
-          n=$(grep -nE 'public static function' "$ROOT/includes/three-type-local-content-validator.php" | tail -1 | cut -d: -f1)
-          s=$((n-25)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+110)); sed -n "${s},${e}p" "$ROOT/includes/three-type-local-content-validator.php"
+          echo '--- ITEM KEYS REFERENCED BY CONTENT VALIDATOR ---'
+          grep -oE "\\$item\\['[A-Za-z0-9_]+'\\]" "$ROOT/includes/content-validator.php" | sort -u || true
+          echo '--- GENERATED KEYS REFERENCED BY CONTENT VALIDATOR ---'
+          grep -oE "\\$generated\\['[A-Za-z0-9_]+'\\]" "$ROOT/includes/content-validator.php" | sort -u || true
+          echo '--- FACT PACK REFERENCES ---'
+          grep -Rni --include='*.php' 'fact_pack' "$ROOT/includes/content-validator.php" "$ROOT/includes/content-structure-language-gate.php" | head -120 || true
+          echo '--- BUNDLED CANDIDATE SHAPE ---'
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('/tmp/k9ppm/portal-production-machine/contracts')
+          for name in ['three-type-bundled-approved-candidates-v1.json','g9-single-faq-approved-candidate-v1.json']:
+              p=root/name
+              print('FILE',name)
+              data=json.loads(p.read_text())
+              print('TOP',sorted(data.keys()))
+              def walk(x, prefix='', depth=0):
+                  if depth>2:return
+                  if isinstance(x,dict):
+                      print(prefix+' KEYS '+','.join(sorted(x.keys())))
+                      for k,v in list(x.items())[:8]:
+                          if isinstance(v,(dict,list)): walk(v,prefix+'/'+k,depth+1)
+                  elif isinstance(x,list):
+                      print(prefix+f' LISTLEN {len(x)}')
+                      if x: walk(x[0],prefix+'/0',depth+1)
+              walk(data)
+          PY
