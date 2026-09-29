@@ -483,6 +483,72 @@ jobs:
           /tmp/wp eval-file /tmp/manual-import-gate.php --path=/tmp/wp-site | tee /tmp/manual-import-gate.txt
           grep -F 'MANUAL_SINGLE_UPLOAD_WORDPRESS_MARIADB_PASS' /tmp/manual-import-gate.txt
 
+      - name: Build and fresh-verify one 6.72.166 installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/installer-build /tmp/installer-unpack
+          mkdir -p /tmp/installer-build /tmp/installer-unpack
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+
+          repo=Path('.')
+          source=repo/'release/affiliate-zentrale/current'
+          manifest=repo/'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+          out=Path('/tmp/AFFILIATE_ZENTRALE_6.72.166.zip')
+
+          rows=[]
+          for raw in manifest.read_text(encoding='utf-8').splitlines():
+              if not raw.strip():
+                  continue
+              digest, rel = raw.split(None,1)
+              rel=rel.strip()
+              rows.append((digest,rel))
+          if len(rows)!=27:
+              raise SystemExit(f'FAIL manifest rows {len(rows)} != 27')
+
+          if out.exists():
+              out.unlink()
+          with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for digest,rel in sorted(rows,key=lambda x:x[1]):
+                  p=source/rel
+                  data=p.read_bytes()
+                  got=hashlib.sha256(data).hexdigest()
+                  if got!=digest:
+                      raise SystemExit(f'FAIL source hash {rel}: {got} != {digest}')
+                  zi=zipfile.ZipInfo(rel)
+                  zi.date_time=(2026,9,29,0,0,0)
+                  zi.compress_type=zipfile.ZIP_DEFLATED
+                  zi.external_attr=0o100644 << 16
+                  z.writestr(zi,data)
+
+          zip_sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          Path('/tmp/installer.sha256').write_text(zip_sha+'  AFFILIATE_ZENTRALE_6.72.166.zip\n',encoding='utf-8')
+
+          with zipfile.ZipFile(out) as z:
+              names=sorted(n for n in z.namelist() if not n.endswith('/'))
+              expected=sorted(rel for _,rel in rows)
+              if names!=expected:
+                  raise SystemExit('FAIL ZIP file list differs from source manifest')
+              for digest,rel in rows:
+                  data=z.read(rel)
+                  got=hashlib.sha256(data).hexdigest()
+                  if got!=digest:
+                      raise SystemExit(f'FAIL ZIP byte identity {rel}: {got} != {digest}')
+          print('INSTALLER_FILE_COUNT_PASS 27')
+          print('SOURCE_ZIP_BYTE_IDENTITY_PASS 27_OF_27')
+          print('INSTALLER_SHA256 '+zip_sha)
+          PY
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.166.zip -d /tmp/installer-unpack
+          find /tmp/installer-unpack/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/installer-php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/installer-php-lint.log)" = "21"
+          grep -F "Version: 6.72.166" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.166';" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.166.zip | tee /tmp/installer-unzip-test.log
+          echo "FRESH_UNPACK_PASS"
+          cat /tmp/installer.sha256
+
       - name: Current plugin frontend smoke
         shell: bash
         run: |
@@ -508,5 +574,9 @@ jobs:
             /tmp/current-query.json
             /tmp/product-deals-analytics-gate.txt
             /tmp/manual-import-gate.txt
+            /tmp/AFFILIATE_ZENTRALE_6.72.166.zip
+            /tmp/installer.sha256
+            /tmp/installer-php-lint.log
+            /tmp/installer-unzip-test.log
             /tmp/wp-server.log
           if-no-files-found: error
