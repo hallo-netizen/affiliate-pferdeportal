@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
 CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
+WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
 WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
 LT68_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
@@ -25,6 +26,15 @@ def write_json(path, data):
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+def worker_contract(station):
+    data = load_json(WORKER_CONTRACTS)
+    if data.get("contract") != "K9_WORKER_CONTRACTS_V1":
+        raise K9Error("WORKER_CONTRACT_FILE_INVALID")
+    value = data.get("contracts", {}).get(station)
+    if not isinstance(value, dict):
+        raise K9Error("WORKER_CONTRACT_MISSING:" + station)
+    return value
 
 def ledger():
     data = load_json(LEDGER)
@@ -64,7 +74,9 @@ def write_chat_entry(job):
             "RECONSTRUCT_JOB",
             "USE_LEGACY_RUNTIME"
         ],
-        "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB"
+        "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB",
+        "worker_type": job["worker_contract"]["worker_type"],
+        "output_contract": job["worker_contract"]["output_contract"]
     }
     write_json(CHAT_ENTRY, entry)
     return entry
@@ -206,7 +218,8 @@ def prepare(station, batch_size, source_run_id="manual"):
         "item_ids": [x["item_id"] for x in items],
         "items": job_items,
         "source_run_id": str(source_run_id),
-        "ledger_generation": data["generation"]
+        "ledger_generation": data["generation"],
+        "worker_contract": worker_contract(station)
     }
     core["job_id"] = "K9-" + station.upper() + "-" + stable(core)[:16]
     core["job_sha256"] = stable(core)
