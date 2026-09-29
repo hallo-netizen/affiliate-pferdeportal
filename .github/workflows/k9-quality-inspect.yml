@@ -17,11 +17,21 @@ jobs:
           rm -rf /tmp/k9ppm && mkdir -p /tmp/k9ppm
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm
           python3 - <<'PY'
-          import json,re,pathlib
+          import json,pathlib
           root=pathlib.Path('/tmp/k9ppm/portal-production-machine')
           src=(root/'includes/content-validator.php').read_text()
-          print('ITEM_KEYS', sorted(set(re.findall(r"\\$item\\['([^']+)'\\]", src))))
-          print('GENERATED_KEYS', sorted(set(re.findall(r"\\$generated\\['([^']+)'\\]", src))))
+          def keys(prefix):
+              out=set(); start=0
+              needle=prefix+"['"
+              while True:
+                  i=src.find(needle,start)
+                  if i<0: break
+                  j=src.find("']",i+len(needle))
+                  if j<0: break
+                  out.add(src[i+len(needle):j]); start=j+2
+              return sorted(out)
+          print('ITEM_KEYS', keys('$item'))
+          print('GENERATED_KEYS', keys('$generated'))
           c=root/'contracts'
           faq=json.loads((c/'g9-single-faq-approved-candidate-v1.json').read_text())
           print('FAQ_ITEM_KEYS', sorted(faq['item'].keys()))
