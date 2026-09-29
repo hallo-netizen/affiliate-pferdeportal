@@ -1,72 +1,54 @@
 {
   "contract": "K9_CURRENT_STATE_V3",
+  "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
-  "status": "REAL_ONE_ARTICLE_E2E_STOP_PASS_SCALE_NOT_YET_PROVEN",
   "branch": "konzept9/greenfield-20260929",
-  "head_before_authority_sync": "db0e6dc668fa61ab6709d102f42dcf1e3768bc0d",
-  "principle": "INDEPENDENT_FINISHED_PRODUCTS_PER_STATION_WITH_DETERMINISTIC_ROUTING",
-  "real_e2e_proof": {
-    "input": "REAL_WORDPRESS_EXACT_FIVE_FIELDS_ONE_ARTICLE",
-    "article": "Das Wichtigste über Reitplatzplaner für Pferde",
-    "stages": [
-      "WORDPRESS_INTAKE",
-      "RESEARCH",
-      "WRITE",
-      "LT68",
-      "PPM679",
-      "REPAIR",
-      "RECHECK",
-      "PSERC",
-      "ENDSTEMPEL",
-      "WORDPRESS_FINAL_VERIFY",
-      "STOP"
-    ],
-    "finalizer_run": 36609492082,
-    "terminal_commit": "9209488eaf00560e540b28b1f0eab3dc2196a1cb",
+  "goal_source": {
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "ref": "main",
+    "path": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
+  },
+  "status": "REAL_SINGLE_ARTICLE_END_TO_END_PASS_TERMINAL_STOP",
+  "freshness": {
+    "last_relevant_technical_head": "24aa2077cdbb23842e2ea022657765605161fa14",
+    "last_head_selftest_run": 36609752979,
+    "last_real_finalizer_run": 36609492082,
+    "finalizer_input_head": "ca8a8431d5a17de69c345ea351cd8df5d3f7874f",
+    "terminal_package_commit": "9209488eaf00560e540b28b1f0eab3dc2196a1cb"
+  },
+  "proven": {
+    "article_count": 1,
+    "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
+    "article_type": "Beratung",
+    "research": "PASS",
+    "write": "PASS",
+    "lt68": "PASS",
+    "ppm679": "PASS",
+    "repair_cycles": 2,
+    "pserc": "PASS",
+    "endstempel": "PASS",
+    "wordpress_import_verify": "PASS",
+    "terminal_stop": "PASS",
     "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
     "final_sha256": "9c2f63d1dfd4deedf556041830a62c6f96a8631639100ee693f7fc0deeb2bd74",
-    "terminal_receipt": "runtime/K9_STOP.json",
-    "article_count": 1,
     "publish_allowed": false
   },
-  "hard_proven": [
-    "ISOLATED_K9_TREE_WITHOUT_K4_K8_RUNTIME_PATHS",
-    "SEPARATE_TEXT_START_REPOSITORY_AND_K9_BRANCH",
-    "DETERMINISTIC_K9_CHAT_DOOR_ISSUE_46",
-    "EXACT_OPEN_JOB_REUSED_AFTER_RESTART",
-    "PARTIAL_PACKAGE_REJECTED_WITHOUT_LEDGER_CHANGE",
-    "WRONG_STATION_AND_DUPLICATE_PROCESSING_BLOCKED",
-    "COMPLETE_PREDECESSOR_PRODUCT_EMBEDDED_IN_NEXT_JOB",
-    "WAREHOUSE_PRODUCT_HASH_TAMPER_BLOCKED",
-    "SEALED_RESEARCH_EVIDENCE_HASHES_PRESERVED_END_TO_END",
-    "SEALED_ARTICLE_PRODUCT_BOUND_TO_RESEARCH_HASH",
-    "FAKE_BOOLEAN_CHECK_RESULTS_REJECTED",
-    "LANGUAGETOOL_6_8_NATIVE_REAL_PASS",
-    "PPM_6_7_9_NATIVE_REAL_PASS",
-    "REPAIR_AND_RECHECK_REAL_PASS",
-    "REAL_PSERC_BRIDGE_PASS",
-    "REAL_ED25519_ENDSTEMPEL_PASS",
-    "REAL_WORDPRESS_IMPORT_FORMAT_VERIFY_PASS",
-    "REAL_TERMINAL_STOP_RECEIPT_PASS",
-    "DURABLE_GITHUB_RELEASE_ASSET_HASH_MATCH_PASS",
-    "WRITE_OR_REPAIR_TO_CHECK_AUTO_DISPATCH_BUILT",
-    "CHECK_FAIL_TO_REPAIR_AUTO_PREPARE_BUILT",
-    "CHECK_PASS_TO_FINALIZER_AUTO_TRIGGER_BUILT",
-    "STATE_MUTATIONS_SERIALIZED"
-  ],
-  "not_yet_proven": [
-    "FRESH_MULTI_ARTICLE_REAL_BATCH",
-    "FRESH_REAL_ABORT_AND_NEW_CHAT_REENTRY_DURING_MULTI_ARTICLE_BATCH",
-    "CHECK_PASS_TO_FINALIZER_AUTO_TRIGGER_IN_A_FRESH_FROM_ZERO_RUN",
-    "RESEARCH_ACCEPT_TO_WRITE_ROUTING_IN_A_FRESH_FROM_ZERO_RUN_WITHOUT_TEST_TRIGGER",
-    "SCALE_BEYOND_ONE_REAL_ARTICLE"
-  ],
-  "platform_boundary": {
-    "github_can_prepare_exact_chat_job": true,
-    "github_can_start_new_chatgpt_chat_without_api_or_codex": false,
-    "api_or_codex_allowed_in_production": false
+  "runtime_evidence": {
+    "status_file": "state/STATUS.json",
+    "terminal_receipt": "runtime/K9_STOP.json",
+    "pserc_result": "runtime/K9_PSERC_RESULT.json",
+    "endstempel_verify": "runtime/K9_ENDSTEMPEL_RESULT.json",
+    "wordpress_verify": "runtime/K9_WORDPRESS_IMPORT_VERIFY.json"
   },
-  "next_action": "RUN_FRESH_MULTI_ARTICLE_REAL_BATCH_WITH_FORCED_ABORT_REENTRY_AND_NO_TEMPORARY_TRIGGERS",
-  "production_ready": false,
-  "publish_allowed": false
+  "first_open_blocker": null,
+  "production_readiness": "SINGLE_ARTICLE_E2E_PROVEN_MULTI_ITEM_AND_FORCED_FRESH_CHAT_REENTRY_NOT_YET_PROVEN",
+  "next_action": "RUN_NEXT_REAL_MULTI_ITEM_BATCH_END_TO_END_WITH_UNCHANGED_K9_AND_ONE_FORCED_FRESH_CHAT_REENTRY; VERIFY_TERMINAL_STOP_AND_FINAL_WORDPRESS_PACKAGE; DO_NOT_CHANGE_ARCHITECTURE_OR_QUALITY_GATES",
+  "working_binding": {
+    "entry_door": "hallo-netizen/text-start issue #46 (K9:pferdeatelier)",
+    "current_authority": "CURRENT_STATE.json",
+    "runtime_job_entry": "runtime/CHAT_ENTRY.json only when a chat job is open",
+    "legacy_k4_k8_runtime_use": "FORBIDDEN",
+    "chat_may_route": false,
+    "publish_allowed": false
+  }
 }
