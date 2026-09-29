@@ -1,0 +1,5 @@
+{
+  "items": [
+    {"item_id": "example-001", "title": "Beispielartikel", "metadata": {"target_keyword": "beispiel"}}
+  ]
+}
