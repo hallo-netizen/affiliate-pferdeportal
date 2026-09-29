@@ -36,7 +36,7 @@ jobs:
           import json
           r=json.load(open('/tmp/lt-pass.json'))
           assert r['status']=='PASS', r
-          assert r['engine']=='LanguageTool 6.8'
+          assert r['engine']=='LanguageTool 6.8 / Bestand 43'
           assert r['finding_count']==0
           PY
       - name: Negative LT execution
