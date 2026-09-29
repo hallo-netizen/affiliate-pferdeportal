@@ -1,0 +1,55 @@
+name: K9 import WordPress metadata
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths: ['inbox/**.json']
+permissions:
+  contents: write
+concurrency:
+  group: k9-production-state
+  cancel-in-progress: false
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - name: Hard tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Import exact five-field WordPress package
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(find inbox -maxdepth 1 -type f -name '*.json' | wc -l)
+          if [ "$count" -eq 0 ]; then
+            echo 'No pending intake; likely cleanup commit.'
+            exit 0
+          fi
+          test "$count" -eq 1
+          f=$(find inbox -maxdepth 1 -type f -name '*.json')
+          python3 k9_intake.py "$f" --output /tmp/K9_INTAKE.json
+          batch_id=$(python3 - <<'PY'
+          import json
+          print(json.load(open('/tmp/K9_INTAKE.json'))['batch_id'])
+          PY
+          )
+          mkdir -p warehouse/intake
+          archive="warehouse/intake/${batch_id}.json"
+          if [ -f "$archive" ]; then
+            cmp -s /tmp/K9_INTAKE.json "$archive"
+            git rm "$f"
+            git config user.name 'k9-intake-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git commit -m 'K9: remove already imported intake duplicate'
+            git push
+            exit 0
+          fi
+          python3 k9_engine.py import-intake /tmp/K9_INTAKE.json | tee K9_INTAKE_RESULT.json
+          cp /tmp/K9_INTAKE.json "$archive"
+          git rm "$f"
+          git config user.name 'k9-intake-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add state warehouse/intake
+          git commit -m 'K9: accept exact WordPress metadata intake'
+          git push
