@@ -1,0 +1,552 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-bfc0c6806fa88f0c55a2dcd9"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "article": {
+          "job_id": "K9-REPAIR-897fde836f73cd27",
+          "path": "warehouse/repair/K9-REPAIR-897fde836f73cd27.json",
+          "sha256": "620d1741d48d43f4ae1b03de0cfe7c7c9a8c3fb71daf1579fefe3cd82086a18c"
+        },
+        "research": {
+          "job_id": "K9-RESEARCH-9cdbb788353bb807",
+          "path": "warehouse/research/K9-RESEARCH-9cdbb788353bb807.json",
+          "sha256": "70ad6e1d0693d0e51e2ed938a6e906d7162bfb0405a3cca6459e2204fa689184"
+        }
+      },
+      "input_products": {
+        "article": {
+          "article_product": {
+            "article_type": "Beratung",
+            "content_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-order-id=\"k9-rpp-001\" data-gold-core-binding=\"FOUR_TYPE_APPROVED_GOLD_CORE_V1\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002\">Ein Reitplatzplaner für Pferde sollte nicht losgelöst vom vorhandenen Reitboden ausgewählt werden. Der Wassergehalt beeinflusst die Reiteigenschaften des Platzes, und auch Planung, Aufbau und Nutzung des Bodens gehören zusammen. Für die Gerätewahl bedeutet das: Zuerst wird der eigene Platz eingeordnet, erst danach werden Arbeitsbreite, Zinken, Planierelemente oder das Zugfahrzeug verglichen.</p>\n<p data-fact-ids=\"fact-rpp-003 fact-rpp-004 fact-rpp-005\">Ebenso wichtig ist der aktuelle Pflegezustand. Die Bewässerung hängt vom Aufbau und von der Tretschicht ab, während Arbeitstiefe, Einebnung, Arbeitsbreite und Leistungsbedarf die konkrete Bearbeitung bestimmen. Ein passender Reitplatzplaner ist deshalb kein Universalgerät, sondern ein Werkzeug, dessen Einstellmöglichkeiten zum vorhandenen Boden, zur Platzgeometrie und zum verfügbaren Zugfahrzeug passen müssen.</p>\n</section>\n<section data-block=\"criteria\">\n<h2>Reitplatzplaner für Pferde nach Boden und Feuchte auswählen</h2>\n<p data-fact-ids=\"fact-rpp-001\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-001\" data-source-hash=\"c20571944b1146d4e93af26a65a0080448886bc8d9a39ac5a20084dacb06acb2\" data-source-title=\"src-fn-reitplaetze\"></span>Der Feuchtezustand des Reitbodens gehört an den Anfang der Auswahl. Der Wassergehalt beeinflusst die Reiteigenschaften, und je nach Entwässerungsprinzip spielt auch die Wasserdurchlässigkeit der Schichten eine Rolle. Deshalb sollte vor dem Gerätekauf geklärt sein, wie sich die Tretschicht im Alltag verhält und unter welchen Bedingungen sie gepflegt wird.</p>\n<p data-fact-ids=\"fact-rpp-002\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-002\" data-source-hash=\"070abf201bdb8d0828ccbd00321c5c775f8851822a86c9767ce7959c2190c1c1\" data-source-title=\"src-lwk-gute-reitplaetze\"></span>Auch der Platzaufbau selbst ist Teil der Entscheidung. Anforderungen an einen guten Reitboden ergeben sich nicht nur aus einem einzelnen Material, sondern aus Planung, Bauausführung und den biomechanischen Anforderungen des Pferdes. Ein Pflegegerät sollte daher zum bestehenden Gesamtsystem passen und nicht nur nach einem einzelnen Ausstattungsmerkmal ausgewählt werden.</p>\n<p data-fact-ids=\"fact-rpp-003\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-003\" data-source-hash=\"a755d5cdc88e670d98a2e94cc105cff75fec6e0531be0bb3fa89aa6bff0519a5\" data-source-title=\"src-fn-wasser\"></span>Die Pflegebedingungen ändern sich zudem mit dem Feuchtezustand. Eine ausreichende, an die Witterung angepasste Bewässerung hängt vom Aufbau des Platzes und von der Art der Tretschicht ab. Daraus folgt für die Praxis, dass dieselbe Geräteeinstellung nicht unabhängig vom aktuellen Zustand des Bodens sinnvoll bewertet werden kann.</p>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002\">Der übergeordnete Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> liefert den räumlichen Zusammenhang. Für die konkrete Geräteentscheidung bleibt jedoch der eigene Reitboden maßgeblich: Aufbau, Feuchtigkeit und geplante Nutzung werden zuerst beschrieben, bevor ein bestimmter Reitplatzplaner in die engere Auswahl kommt.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"fact-rpp-001\">Tretschicht und Feuchtigkeit des vorhandenen Platzes beschreiben.</li>\n<li data-fact-ids=\"fact-rpp-002\">Prüfen, wie der Reitplatz aufgebaut ist und wie er genutzt wird.</li>\n<li data-fact-ids=\"fact-rpp-003\">Den Pflegegang an den aktuellen Feuchtezustand der Tretschicht binden.</li>\n<li data-fact-ids=\"fact-rpp-004\">Einstellbare Arbeitstiefe und kontrollierte Einebnung vergleichen.</li>\n<li data-fact-ids=\"fact-rpp-005\">Arbeitsbreite und Leistungsbedarf mit Platz und Zugfahrzeug abgleichen.</li>\n</ul>\n</section>\n<section data-block=\"decision\">\n<h2>Reitplatzplaner mit passender Arbeitstiefe und Einebnung wählen</h2>\n<p data-fact-ids=\"fact-rpp-004\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-004\" data-source-hash=\"79048a5e1a7a2fbc2d01775a30cca1267b674446d592ce1e9559de05acbaaa71\" data-source-title=\"src-otto-vario\"></span>Höhenverstellbare Zinken lockern den Reitboden; die eingestellte Tiefe bestimmt dabei die Intensität der Auflockerung. Ein Planierschild dient anschließend dazu, Unebenheiten zu nivellieren. Für die Auswahl ist deshalb entscheidend, wie fein sich die Arbeitstiefe anpassen lässt und wie kontrolliert das Gerät nach der Lockerung wieder einebnet.</p>\n<p data-fact-ids=\"fact-rpp-004 fact-rpp-003\">Arbeitstiefe und Feuchtezustand sollten zusammen betrachtet werden. Wenn sich die Eigenschaften der Tretschicht mit der Bewässerung und Witterung verändern, muss auch die Bearbeitung darauf reagieren können. Ein Gerät mit nachvollziehbarer Einstellung bietet hier mehr Entscheidungssicherheit als eine Auswahl, die nur auf Breite oder äußerer Bauform beruht.</p>\n<h2>Reitplatzpflege mit Arbeitsbreite und Zugfahrzeug abstimmen</h2>\n<p data-fact-ids=\"fact-rpp-005\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-005\" data-source-hash=\"1e6ab7a5664bb38d9684dcfa879c7dd7b7146cf4e4dc153c5afdd6084b31c93d\" data-source-title=\"src-hatzenbichler-planer\"></span>Reitplatzplaner werden für unterschiedliche Tretschichten angeboten; zugleich unterscheiden sich Arbeitsbreiten und Leistungsanforderungen. Damit gehören Platzgeometrie und Zugfahrzeug in dieselbe Prüfung. Eine große Arbeitsbreite ist nicht automatisch besser, wenn sie nicht zur Fläche oder zum vorhandenen Fahrzeug passt.</p>\n<p data-fact-ids=\"fact-rpp-005 fact-rpp-002\">Die Auswahl sollte deshalb mehrere Muss-Kriterien gleichzeitig erfüllen: Das Gerät muss zur Tretschicht passen, sich auf dem vorhandenen Platz praktikabel einsetzen lassen und vom vorgesehenen Zugfahrzeug sinnvoll betrieben werden können. Ein Vorteil bei nur einem dieser Punkte gleicht einen klaren Nachteil bei einem anderen Punkt nicht automatisch aus.</p>\n<p data-fact-ids=\"fact-rpp-004 fact-rpp-005\">Für die engere Auswahl hilft es, die Kandidaten nicht nach möglichst vielen Funktionen zu ordnen, sondern nach kontrollierbaren Eigenschaften: passende Arbeitstiefe, saubere Einebnung, geeignete Arbeitsbreite und ein Leistungsbedarf, der zum vorhandenen Zugfahrzeug passt. So bleibt nachvollziehbar, warum ein Modell zum eigenen Platz passt oder ausscheidet.</p>\n<p data-fact-ids=\"fact-rpp-003 fact-rpp-004\">Die Seite <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatzpflege/\">Reitplatzpflege</a> ergänzt die Einordnung des laufenden Pflegezustands. Für den konkreten Kaufentscheid bleibt jedoch wichtig, dass die Geräteeinstellung auf den tatsächlichen Boden und dessen Feuchtezustand abgestimmt werden kann.</p>\n</section>\n<section data-block=\"table\">\n<h2>Reitplatzplaner für Pferde anhand klarer Kriterien vergleichen</h2>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002 fact-rpp-003 fact-rpp-004 fact-rpp-005\">Die wichtigsten Auswahlpunkte lassen sich in eine feste Reihenfolge bringen. Zuerst wird der Platz eingeordnet, anschließend werden Einstellbarkeit und Einebnung geprüft und erst danach Arbeitsbreite und Zugfahrzeug gemeinsam bewertet. Dadurch bleibt die Entscheidung an den vorhandenen Bedingungen ausgerichtet.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Kriterium</th><th>Was geprüft wird</th><th>Bedeutung für die Auswahl</th></tr></thead><tbody>\n<tr data-fact-ids=\"fact-rpp-001\"><td data-fact-ids=\"fact-rpp-001\">Feuchtezustand</td><td data-fact-ids=\"fact-rpp-001\">Wassergehalt und Verhalten der Tretschicht</td><td data-fact-ids=\"fact-rpp-001\">Bestimmt mit, unter welchen Bedingungen gepflegt wird</td></tr>\n<tr data-fact-ids=\"fact-rpp-002\"><td data-fact-ids=\"fact-rpp-002\">Platzaufbau</td><td data-fact-ids=\"fact-rpp-002\">Planung, Bauausführung und Nutzung</td><td data-fact-ids=\"fact-rpp-002\">Bindet das Gerät an das vorhandene Bodensystem</td></tr>\n<tr data-fact-ids=\"fact-rpp-003\"><td data-fact-ids=\"fact-rpp-003\">Bewässerung</td><td data-fact-ids=\"fact-rpp-003\">Witterungsangepasster Pflegezustand</td><td data-fact-ids=\"fact-rpp-003\">Verändert die Bedingungen für den Pflegegang</td></tr>\n<tr data-fact-ids=\"fact-rpp-004\"><td data-fact-ids=\"fact-rpp-004\">Arbeitstiefe</td><td data-fact-ids=\"fact-rpp-004\">Verstellbarkeit der Zinken und Intensität der Lockerung</td><td data-fact-ids=\"fact-rpp-004\">Erlaubt eine kontrollierte Anpassung an die Tretschicht</td></tr>\n<tr data-fact-ids=\"fact-rpp-004\"><td data-fact-ids=\"fact-rpp-004\">Einebnung</td><td data-fact-ids=\"fact-rpp-004\">Wirkung des Planierelements</td><td data-fact-ids=\"fact-rpp-004\">Soll Unebenheiten nach der Bearbeitung nivellieren</td></tr>\n<tr data-fact-ids=\"fact-rpp-005\"><td data-fact-ids=\"fact-rpp-005\">Arbeitsbreite und Leistung</td><td data-fact-ids=\"fact-rpp-005\">Platzgeometrie und verfügbares Zugfahrzeug</td><td data-fact-ids=\"fact-rpp-005\">Müssen gemeinsam zum betrieblichen Einsatz passen</td></tr>\n</tbody></table>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-004 fact-rpp-005\">Die Tabelle ist keine Rangliste einzelner Produkte. Sie dient dazu, ungeeignete Kombinationen früh auszusortieren. Ein Reitplatzplaner, der zwar eine große Arbeitsbreite bietet, aber nicht zum Boden oder zum Zugfahrzeug passt, erfüllt die grundlegenden Auswahlkriterien nicht vollständig.</p>\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002\">Ein Reitplatzplaner für Pferde passt dann zum Betrieb, wenn die Auswahl beim vorhandenen Reitboden beginnt. Feuchtezustand, Schichtaufbau, Planung und Nutzung bilden den Rahmen. Erst innerhalb dieses Rahmens lässt sich beurteilen, welche Gerätefunktionen tatsächlich sinnvoll sind.</p>\n<p data-fact-ids=\"fact-rpp-003 fact-rpp-004\">Für die praktische Pflege sind der aktuelle Feuchtezustand, eine einstellbare Arbeitstiefe und eine kontrollierte Einebnung zentrale Punkte. Die Geräteeinstellung sollte an die Tretschicht angepasst werden können, statt den Platz unabhängig von seinem Zustand immer gleich zu bearbeiten.</p>\n<p data-fact-ids=\"fact-rpp-005\">Zum Schluss werden Arbeitsbreite und Leistungsbedarf mit Platzgeometrie und Zugfahrzeug abgeglichen. Die belastbarste Entscheidung entsteht deshalb nicht aus einem einzelnen Ausstattungsmerkmal, sondern aus der Übereinstimmung von Boden, Einstellbarkeit, Arbeitsbreite und vorhandenem Fahrzeug.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"fact-rpp-004 fact-rpp-005\">Weitere Informationen zur konkreten Geräteauswahl findest du unter <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatzpflege/reitplatzplaner/\">Reitplatzplaner</a>. Dort kann die Auswahl anschließend anhand des eigenen Bodens, der benötigten Arbeitstiefe, der Arbeitsbreite und des vorhandenen Zugfahrzeugs weiter eingegrenzt werden.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+            "content_sha256": "46c41d1d336d830e54e7f81129a72aa4d4aa82f85aeb1866e54f5767f6d7df56",
+            "contract": "K9_ARTICLE_PRODUCT_V1",
+            "ppm_item": {
+              "article_type": "Beratung",
+              "canonical_article": {
+                "article_type": "Beratung",
+                "body_html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\" data-order-id=\"k9-rpp-001\" data-gold-core-binding=\"FOUR_TYPE_APPROVED_GOLD_CORE_V1\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002\">Ein Reitplatzplaner für Pferde sollte nicht losgelöst vom vorhandenen Reitboden ausgewählt werden. Der Wassergehalt beeinflusst die Reiteigenschaften des Platzes, und auch Planung, Aufbau und Nutzung des Bodens gehören zusammen. Für die Gerätewahl bedeutet das: Zuerst wird der eigene Platz eingeordnet, erst danach werden Arbeitsbreite, Zinken, Planierelemente oder das Zugfahrzeug verglichen.</p>\n<p data-fact-ids=\"fact-rpp-003 fact-rpp-004 fact-rpp-005\">Ebenso wichtig ist der aktuelle Pflegezustand. Die Bewässerung hängt vom Aufbau und von der Tretschicht ab, während Arbeitstiefe, Einebnung, Arbeitsbreite und Leistungsbedarf die konkrete Bearbeitung bestimmen. Ein passender Reitplatzplaner ist deshalb kein Universalgerät, sondern ein Werkzeug, dessen Einstellmöglichkeiten zum vorhandenen Boden, zur Platzgeometrie und zum verfügbaren Zugfahrzeug passen müssen.</p>\n</section>\n<section data-block=\"criteria\">\n<h2>Reitplatzplaner für Pferde nach Boden und Feuchte auswählen</h2>\n<p data-fact-ids=\"fact-rpp-001\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-001\" data-source-hash=\"c20571944b1146d4e93af26a65a0080448886bc8d9a39ac5a20084dacb06acb2\" data-source-title=\"src-fn-reitplaetze\"></span>Der Feuchtezustand des Reitbodens gehört an den Anfang der Auswahl. Der Wassergehalt beeinflusst die Reiteigenschaften, und je nach Entwässerungsprinzip spielt auch die Wasserdurchlässigkeit der Schichten eine Rolle. Deshalb sollte vor dem Gerätekauf geklärt sein, wie sich die Tretschicht im Alltag verhält und unter welchen Bedingungen sie gepflegt wird.</p>\n<p data-fact-ids=\"fact-rpp-002\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-002\" data-source-hash=\"070abf201bdb8d0828ccbd00321c5c775f8851822a86c9767ce7959c2190c1c1\" data-source-title=\"src-lwk-gute-reitplaetze\"></span>Auch der Platzaufbau selbst ist Teil der Entscheidung. Anforderungen an einen guten Reitboden ergeben sich nicht nur aus einem einzelnen Material, sondern aus Planung, Bauausführung und den biomechanischen Anforderungen des Pferdes. Ein Pflegegerät sollte daher zum bestehenden Gesamtsystem passen und nicht nur nach einem einzelnen Ausstattungsmerkmal ausgewählt werden.</p>\n<p data-fact-ids=\"fact-rpp-003\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-003\" data-source-hash=\"a755d5cdc88e670d98a2e94cc105cff75fec6e0531be0bb3fa89aa6bff0519a5\" data-source-title=\"src-fn-wasser\"></span>Die Pflegebedingungen ändern sich zudem mit dem Feuchtezustand. Eine ausreichende, an die Witterung angepasste Bewässerung hängt vom Aufbau des Platzes und von der Art der Tretschicht ab. Daraus folgt für die Praxis, dass dieselbe Geräteeinstellung nicht unabhängig vom aktuellen Zustand des Bodens sinnvoll bewertet werden kann.</p>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002\">Der übergeordnete Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> liefert den räumlichen Zusammenhang. Für die konkrete Geräteentscheidung bleibt jedoch der eigene Reitboden maßgeblich: Aufbau, Feuchtigkeit und geplante Nutzung werden zuerst beschrieben, bevor ein bestimmter Reitplatzplaner in die engere Auswahl kommt.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"fact-rpp-001\">Tretschicht und Feuchtigkeit des vorhandenen Platzes beschreiben.</li>\n<li data-fact-ids=\"fact-rpp-002\">Prüfen, wie der Reitplatz aufgebaut ist und wie er genutzt wird.</li>\n<li data-fact-ids=\"fact-rpp-003\">Den Pflegegang an den aktuellen Feuchtezustand der Tretschicht binden.</li>\n<li data-fact-ids=\"fact-rpp-004\">Einstellbare Arbeitstiefe und kontrollierte Einebnung vergleichen.</li>\n<li data-fact-ids=\"fact-rpp-005\">Arbeitsbreite und Leistungsbedarf mit Platz und Zugfahrzeug abgleichen.</li>\n</ul>\n</section>\n<section data-block=\"decision\">\n<h2>Reitplatzplaner mit passender Arbeitstiefe und Einebnung wählen</h2>\n<p data-fact-ids=\"fact-rpp-004\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-004\" data-source-hash=\"79048a5e1a7a2fbc2d01775a30cca1267b674446d592ce1e9559de05acbaaa71\" data-source-title=\"src-otto-vario\"></span>Höhenverstellbare Zinken lockern den Reitboden; die eingestellte Tiefe bestimmt dabei die Intensität der Auflockerung. Ein Planierschild dient anschließend dazu, Unebenheiten zu nivellieren. Für die Auswahl ist deshalb entscheidend, wie fein sich die Arbeitstiefe anpassen lässt und wie kontrolliert das Gerät nach der Lockerung wieder einebnet.</p>\n<p data-fact-ids=\"fact-rpp-004 fact-rpp-003\">Arbeitstiefe und Feuchtezustand sollten zusammen betrachtet werden. Wenn sich die Eigenschaften der Tretschicht mit der Bewässerung und Witterung verändern, muss auch die Bearbeitung darauf reagieren können. Ein Gerät mit nachvollziehbarer Einstellung bietet hier mehr Entscheidungssicherheit als eine Auswahl, die nur auf Breite oder äußerer Bauform beruht.</p>\n<h2>Reitplatzpflege mit Arbeitsbreite und Zugfahrzeug abstimmen</h2>\n<p data-fact-ids=\"fact-rpp-005\"><span class=\"ppm-source-trace\" data-fact-id=\"fact-rpp-005\" data-source-hash=\"1e6ab7a5664bb38d9684dcfa879c7dd7b7146cf4e4dc153c5afdd6084b31c93d\" data-source-title=\"src-hatzenbichler-planer\"></span>Reitplatzplaner werden für unterschiedliche Tretschichten angeboten; zugleich unterscheiden sich Arbeitsbreiten und Leistungsanforderungen. Damit gehören Platzgeometrie und Zugfahrzeug in dieselbe Prüfung. Eine große Arbeitsbreite ist nicht automatisch besser, wenn sie nicht zur Fläche oder zum vorhandenen Fahrzeug passt.</p>\n<p data-fact-ids=\"fact-rpp-005 fact-rpp-002\">Die Auswahl sollte deshalb mehrere Muss-Kriterien gleichzeitig erfüllen: Das Gerät muss zur Tretschicht passen, sich auf dem vorhandenen Platz praktikabel einsetzen lassen und vom vorgesehenen Zugfahrzeug sinnvoll betrieben werden können. Ein Vorteil bei nur einem dieser Punkte gleicht einen klaren Nachteil bei einem anderen Punkt nicht automatisch aus.</p>\n<p data-fact-ids=\"fact-rpp-004 fact-rpp-005\">Für die engere Auswahl hilft es, die Kandidaten nicht nach möglichst vielen Funktionen zu ordnen, sondern nach kontrollierbaren Eigenschaften: passende Arbeitstiefe, saubere Einebnung, geeignete Arbeitsbreite und ein Leistungsbedarf, der zum vorhandenen Zugfahrzeug passt. So bleibt nachvollziehbar, warum ein Modell zum eigenen Platz passt oder ausscheidet.</p>\n<p data-fact-ids=\"fact-rpp-003 fact-rpp-004\">Die Seite <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatzpflege/\">Reitplatzpflege</a> ergänzt die Einordnung des laufenden Pflegezustands. Für den konkreten Kaufentscheid bleibt jedoch wichtig, dass die Geräteeinstellung auf den tatsächlichen Boden und dessen Feuchtezustand abgestimmt werden kann.</p>\n</section>\n<section data-block=\"table\">\n<h2>Reitplatzplaner für Pferde anhand klarer Kriterien vergleichen</h2>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002 fact-rpp-003 fact-rpp-004 fact-rpp-005\">Die wichtigsten Auswahlpunkte lassen sich in eine feste Reihenfolge bringen. Zuerst wird der Platz eingeordnet, anschließend werden Einstellbarkeit und Einebnung geprüft und erst danach Arbeitsbreite und Zugfahrzeug gemeinsam bewertet. Dadurch bleibt die Entscheidung an den vorhandenen Bedingungen ausgerichtet.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Kriterium</th><th>Was geprüft wird</th><th>Bedeutung für die Auswahl</th></tr></thead><tbody>\n<tr data-fact-ids=\"fact-rpp-001\"><td data-fact-ids=\"fact-rpp-001\">Feuchtezustand</td><td data-fact-ids=\"fact-rpp-001\">Wassergehalt und Verhalten der Tretschicht</td><td data-fact-ids=\"fact-rpp-001\">Bestimmt mit, unter welchen Bedingungen gepflegt wird</td></tr>\n<tr data-fact-ids=\"fact-rpp-002\"><td data-fact-ids=\"fact-rpp-002\">Platzaufbau</td><td data-fact-ids=\"fact-rpp-002\">Planung, Bauausführung und Nutzung</td><td data-fact-ids=\"fact-rpp-002\">Bindet das Gerät an das vorhandene Bodensystem</td></tr>\n<tr data-fact-ids=\"fact-rpp-003\"><td data-fact-ids=\"fact-rpp-003\">Bewässerung</td><td data-fact-ids=\"fact-rpp-003\">Witterungsangepasster Pflegezustand</td><td data-fact-ids=\"fact-rpp-003\">Verändert die Bedingungen für den Pflegegang</td></tr>\n<tr data-fact-ids=\"fact-rpp-004\"><td data-fact-ids=\"fact-rpp-004\">Arbeitstiefe</td><td data-fact-ids=\"fact-rpp-004\">Verstellbarkeit der Zinken und Intensität der Lockerung</td><td data-fact-ids=\"fact-rpp-004\">Erlaubt eine kontrollierte Anpassung an die Tretschicht</td></tr>\n<tr data-fact-ids=\"fact-rpp-004\"><td data-fact-ids=\"fact-rpp-004\">Einebnung</td><td data-fact-ids=\"fact-rpp-004\">Wirkung des Planierelements</td><td data-fact-ids=\"fact-rpp-004\">Soll Unebenheiten nach der Bearbeitung nivellieren</td></tr>\n<tr data-fact-ids=\"fact-rpp-005\"><td data-fact-ids=\"fact-rpp-005\">Arbeitsbreite und Leistung</td><td data-fact-ids=\"fact-rpp-005\">Platzgeometrie und verfügbares Zugfahrzeug</td><td data-fact-ids=\"fact-rpp-005\">Müssen gemeinsam zum betrieblichen Einsatz passen</td></tr>\n</tbody></table>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-004 fact-rpp-005\">Die Tabelle ist keine Rangliste einzelner Produkte. Sie dient dazu, ungeeignete Kombinationen früh auszusortieren. Ein Reitplatzplaner, der zwar eine große Arbeitsbreite bietet, aber nicht zum Boden oder zum Zugfahrzeug passt, erfüllt die grundlegenden Auswahlkriterien nicht vollständig.</p>\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"fact-rpp-001 fact-rpp-002\">Ein Reitplatzplaner für Pferde passt dann zum Betrieb, wenn die Auswahl beim vorhandenen Reitboden beginnt. Feuchtezustand, Schichtaufbau, Planung und Nutzung bilden den Rahmen. Erst innerhalb dieses Rahmens lässt sich beurteilen, welche Gerätefunktionen tatsächlich sinnvoll sind.</p>\n<p data-fact-ids=\"fact-rpp-003 fact-rpp-004\">Für die praktische Pflege sind der aktuelle Feuchtezustand, eine einstellbare Arbeitstiefe und eine kontrollierte Einebnung zentrale Punkte. Die Geräteeinstellung sollte an die Tretschicht angepasst werden können, statt den Platz unabhängig von seinem Zustand immer gleich zu bearbeiten.</p>\n<p data-fact-ids=\"fact-rpp-005\">Zum Schluss werden Arbeitsbreite und Leistungsbedarf mit Platzgeometrie und Zugfahrzeug abgeglichen. Die belastbarste Entscheidung entsteht deshalb nicht aus einem einzelnen Ausstattungsmerkmal, sondern aus der Übereinstimmung von Boden, Einstellbarkeit, Arbeitsbreite und vorhandenem Fahrzeug.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"fact-rpp-004 fact-rpp-005\">Weitere Informationen zur konkreten Geräteauswahl findest du unter <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatzpflege/reitplatzplaner/\">Reitplatzplaner</a>. Dort kann die Auswahl anschließend anhand des eigenen Bodens, der benötigten Arbeitstiefe, der Arbeitsbreite und des vorhandenen Zugfahrzeugs weiter eingegrenzt werden.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+                "body_html_sha256": "46c41d1d336d830e54e7f81129a72aa4d4aa82f85aeb1866e54f5767f6d7df56",
+                "body_text": "Ein Reitplatzplaner für Pferde sollte nicht losgelöst vom vorhandenen Reitboden ausgewählt werden. Der Wassergehalt beeinflusst die Reiteigenschaften des Platzes, und auch Planung, Aufbau und Nutzung des Bodens gehören zusammen. Für die Gerätewahl bedeutet das: Zuerst wird der eigene Platz eingeordnet, erst danach werden Arbeitsbreite, Zinken, Planierelemente oder das Zugfahrzeug verglichen. Ebenso wichtig ist der aktuelle Pflegezustand. Die Bewässerung hängt vom Aufbau und von der Tretschicht ab, während Arbeitstiefe, Einebnung, Arbeitsbreite und Leistungsbedarf die konkrete Bearbeitung bestimmen. Ein passender Reitplatzplaner ist deshalb kein Universalgerät, sondern ein Werkzeug, dessen Einstellmöglichkeiten zum vorhandenen Boden, zur Platzgeometrie und zum verfügbaren Zugfahrzeug passen müssen. Reitplatzplaner für Pferde nach Boden und Feuchte auswählen Der Feuchtezustand des Reitbodens gehört an den Anfang der Auswahl. Der Wassergehalt beeinflusst die Reiteigenschaften, und je nach Entwässerungsprinzip spielt auch die Wasserdurchlässigkeit der Schichten eine Rolle. Deshalb sollte vor dem Gerätekauf geklärt sein, wie sich die Tretschicht im Alltag verhält und unter welchen Bedingungen sie gepflegt wird. Auch der Platzaufbau selbst ist Teil der Entscheidung. Anforderungen an einen guten Reitboden ergeben sich nicht nur aus einem einzelnen Material, sondern aus Planung, Bauausführung und den biomechanischen Anforderungen des Pferdes. Ein Pflegegerät sollte daher zum bestehenden Gesamtsystem passen und nicht nur nach einem einzelnen Ausstattungsmerkmal ausgewählt werden. Die Pflegebedingungen ändern sich zudem mit dem Feuchtezustand. Eine ausreichende, an die Witterung angepasste Bewässerung hängt vom Aufbau des Platzes und von der Art der Tretschicht ab. Daraus folgt für die Praxis, dass dieselbe Geräteeinstellung nicht unabhängig vom aktuellen Zustand des Bodens sinnvoll bewertet werden kann. Der übergeordnete Bereich Weide liefert den räumlichen Zusammenhang. Für die konkrete Geräteentscheidung bleibt jedoch der eigene Reitboden maßgeblich: Aufbau, Feuchtigkeit und geplante Nutzung werden zuerst beschrieben, bevor ein bestimmter Reitplatzplaner in die engere Auswahl kommt. Tretschicht und Feuchtigkeit des vorhandenen Platzes beschreiben. Prüfen, wie der Reitplatz aufgebaut ist und wie er genutzt wird. Den Pflegegang an den aktuellen Feuchtezustand der Tretschicht binden. Einstellbare Arbeitstiefe und kontrollierte Einebnung vergleichen. Arbeitsbreite und Leistungsbedarf mit Platz und Zugfahrzeug abgleichen. Reitplatzplaner mit passender Arbeitstiefe und Einebnung wählen Höhenverstellbare Zinken lockern den Reitboden; die eingestellte Tiefe bestimmt dabei die Intensität der Auflockerung. Ein Planierschild dient anschließend dazu, Unebenheiten zu nivellieren. Für die Auswahl ist deshalb entscheidend, wie fein sich die Arbeitstiefe anpassen lässt und wie kontrolliert das Gerät nach der Lockerung wieder einebnet. Arbeitstiefe und Feuchtezustand sollten zusammen betrachtet werden. Wenn sich die Eigenschaften der Tretschicht mit der Bewässerung und Witterung verändern, muss auch die Bearbeitung darauf reagieren können. Ein Gerät mit nachvollziehbarer Einstellung bietet hier mehr Entscheidungssicherheit als eine Auswahl, die nur auf Breite oder äußerer Bauform beruht. Reitplatzpflege mit Arbeitsbreite und Zugfahrzeug abstimmen Reitplatzplaner werden für unterschiedliche Tretschichten angeboten; zugleich unterscheiden sich Arbeitsbreiten und Leistungsanforderungen. Damit gehören Platzgeometrie und Zugfahrzeug in dieselbe Prüfung. Eine große Arbeitsbreite ist nicht automatisch besser, wenn sie nicht zur Fläche oder zum vorhandenen Fahrzeug passt. Die Auswahl sollte deshalb mehrere Muss-Kriterien gleichzeitig erfüllen: Das Gerät muss zur Tretschicht passen, sich auf dem vorhandenen Platz praktikabel einsetzen lassen und vom vorgesehenen Zugfahrzeug sinnvoll betrieben werden können. Ein Vorteil bei nur einem dieser Punkte gleicht einen klaren Nachteil bei einem anderen Punkt nicht automatisch aus. Für die engere Auswahl hilft es, die Kandidaten nicht nach möglichst vielen Funktionen zu ordnen, sondern nach kontrollierbaren Eigenschaften: passende Arbeitstiefe, saubere Einebnung, geeignete Arbeitsbreite und ein Leistungsbedarf, der zum vorhandenen Zugfahrzeug passt. So bleibt nachvollziehbar, warum ein Modell zum eigenen Platz passt oder ausscheidet. Die Seite Reitplatzpflege ergänzt die Einordnung des laufenden Pflegezustands. Für den konkreten Kaufentscheid bleibt jedoch wichtig, dass die Geräteeinstellung auf den tatsächlichen Boden und dessen Feuchtezustand abgestimmt werden kann. Reitplatzplaner für Pferde anhand klarer Kriterien vergleichen Die wichtigsten Auswahlpunkte lassen sich in eine feste Reihenfolge bringen. Zuerst wird der Platz eingeordnet, anschließend werden Einstellbarkeit und Einebnung geprüft und erst danach Arbeitsbreite und Zugfahrzeug gemeinsam bewertet. Dadurch bleibt die Entscheidung an den vorhandenen Bedingungen ausgerichtet. Kriterium Was geprüft wird Bedeutung für die Auswahl Feuchtezustand Wassergehalt und Verhalten der Tretschicht Bestimmt mit, unter welchen Bedingungen gepflegt wird Platzaufbau Planung, Bauausführung und Nutzung Bindet das Gerät an das vorhandene Bodensystem Bewässerung Witterungsangepasster Pflegezustand Verändert die Bedingungen für den Pflegegang Arbeitstiefe Verstellbarkeit der Zinken und Intensität der Lockerung Erlaubt eine kontrollierte Anpassung an die Tretschicht Einebnung Wirkung des Planierelements Soll Unebenheiten nach der Bearbeitung nivellieren Arbeitsbreite und Leistung Platzgeometrie und verfügbares Zugfahrzeug Müssen gemeinsam zum betrieblichen Einsatz passen Die Tabelle ist keine Rangliste einzelner Produkte. Sie dient dazu, ungeeignete Kombinationen früh auszusortieren. Ein Reitplatzplaner, der zwar eine große Arbeitsbreite bietet, aber nicht zum Boden oder zum Zugfahrzeug passt, erfüllt die grundlegenden Auswahlkriterien nicht vollständig. Fazit Ein Reitplatzplaner für Pferde passt dann zum Betrieb, wenn die Auswahl beim vorhandenen Reitboden beginnt. Feuchtezustand, Schichtaufbau, Planung und Nutzung bilden den Rahmen. Erst innerhalb dieses Rahmens lässt sich beurteilen, welche Gerätefunktionen tatsächlich sinnvoll sind. Für die praktische Pflege sind der aktuelle Feuchtezustand, eine einstellbare Arbeitstiefe und eine kontrollierte Einebnung zentrale Punkte. Die Geräteeinstellung sollte an die Tretschicht angepasst werden können, statt den Platz unabhängig von seinem Zustand immer gleich zu bearbeiten. Zum Schluss werden Arbeitsbreite und Leistungsbedarf mit Platzgeometrie und Zugfahrzeug abgeglichen. Die belastbarste Entscheidung entsteht deshalb nicht aus einem einzelnen Ausstattungsmerkmal, sondern aus der Übereinstimmung von Boden, Einstellbarkeit, Arbeitsbreite und vorhandenem Fahrzeug. Weiterführende Informationen Weitere Informationen zur konkreten Geräteauswahl findest du unter Reitplatzplaner . Dort kann die Auswahl anschließend anhand des eigenen Bodens, der benötigten Arbeitstiefe, der Arbeitsbreite und des vorhandenen Zugfahrzeugs weiter eingegrenzt werden. Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+                "body_text_sha256": "45e1184a3fab96bdac6a970f3e6edf5f58551300a76ea0147ba7f4ae952736cb",
+                "claim_ids": [
+                  "fact-rpp-001",
+                  "fact-rpp-002",
+                  "fact-rpp-003",
+                  "fact-rpp-004",
+                  "fact-rpp-005"
+                ],
+                "content_plan_hash": "8df2299d85a5c828ed0973dc0acd50fa8b124a629d0f14c7d967f4c05195783b",
+                "fact_pack_hash": "448068287dd4879c3d3eff4d82e46b6ae40ff749fa514d051a6a00cba9374616",
+                "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+                "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+                "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+                "gold_reference_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 31,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 2,
+                  "word_count": 1134
+                },
+                "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Weide",
+                    "href": "/weide/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzpflege",
+                    "href": "/weide/weide-reitplatzpflege/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzplaner",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "local_candidate_metrics": {
+                  "h2_count": 6,
+                  "paragraph_count": 19,
+                  "table_body_row_count": 6,
+                  "visible_link_count": 3,
+                  "word_count": 899
+                },
+                "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+                "order_id": "k9-55a2dcd9",
+                "skeleton_hash": "5e4600d2150081b76676abe7ec94f5daaea319634f8d61f5afe196733a4bdae4",
+                "slug": "reitplatzplaner-fuer-pferde",
+                "source_ids": [
+                  "src-fn-reitplaetze",
+                  "src-lwk-gute-reitplaetze",
+                  "src-fn-wasser",
+                  "src-otto-vario",
+                  "src-hatzenbichler-planer"
+                ],
+                "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+              },
+              "contract_hashes": [],
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "plan_item_key": "k9-0b401802eeed8574",
+              "quality_binding": {
+                "ai_disclosure_required": true,
+                "contract": "content_structure_language_binding_v2",
+                "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "intent_terms": [
+                  "Reitplatzplaner für Pferde",
+                  "Reitplatzplaner",
+                  "Reitplatzpflege",
+                  "Weide"
+                ],
+                "internal_test_marker": "LT0B401802EEED",
+                "language_evidence": {},
+                "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+                "link_bindings": [
+                  {
+                    "active": true,
+                    "anchor": "Weide",
+                    "href": "/weide/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzpflege",
+                    "href": "/weide/weide-reitplatzpflege/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzplaner",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "minimum_word_count": 750,
+                "portal_link_registry": {
+                  "contract": "portal_link_registry_snapshot_v2",
+                  "entries": [
+                    {
+                      "active": true,
+                      "anchor": "Weide",
+                      "href": "/weide/",
+                      "reason": "Maschinell gebundener Portal-Hauptbereich",
+                      "role": "parent_category",
+                      "section_id": "criteria",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Reitplatzpflege",
+                      "href": "/weide/weide-reitplatzpflege/",
+                      "reason": "Maschinell gebundener Portal-Bereich",
+                      "role": "semantic_related",
+                      "section_id": "decision",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Reitplatzplaner",
+                      "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                      "reason": "Maschinell gebundene Portal-Produktseite",
+                      "role": "further_information",
+                      "section_id": "further_information",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    }
+                  ],
+                  "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+                },
+                "portal_link_registry_hash": "5a6dd595e9dc6a906848a6aeeaf05abd2c130f5e8d999902a30bb4418fa63ee9",
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Reitplatzplaner für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "type_meta": {
+                  "decision_criteria": [
+                    "Tretschicht und Feuchtezustand",
+                    "einstellbare Arbeitstiefe",
+                    "kontrollierte Einebnung",
+                    "Arbeitsbreite und Platzgeometrie",
+                    "Zugfahrzeug und Leistungsbedarf"
+                  ],
+                  "decision_goal": "Einen Reitplatzplaner auswählen, dessen Arbeitsweise und Einstellmöglichkeiten zum vorhandenen Reitboden, zur Platzgröße und zum Zugfahrzeug passen."
+                },
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+              },
+              "quality_binding_hash": "7a37484c8226e9f73a459ce9df55783fc597476871940eb30fb2f4101e374495",
+              "runtime_order": {
+                "allowed_fact_ids": [
+                  "fact-rpp-001",
+                  "fact-rpp-002",
+                  "fact-rpp-003",
+                  "fact-rpp-004",
+                  "fact-rpp-005"
+                ],
+                "article_type": "Beratung",
+                "conclusion": "Fazit Ein Reitplatzplaner für Pferde passt dann zum Betrieb, wenn die Auswahl beim vorhandenen Reitboden beginnt. Feuchtezustand, Schichtaufbau, Planung und Nutzung bilden den Rahmen. Erst innerhalb dieses Rahmens lässt sich beurteilen, welche Gerätefunktionen tatsächlich sinnvoll sind. Für die praktische Pflege sind der aktuelle Feuchtezustand, eine einstellbare Arbeitstiefe und eine kontrollierte Einebnung zentrale Punkte. Die Geräteeinstellung sollte an die Tretschicht angepasst werden können, statt den Platz unabhängig von seinem Zustand immer gleich zu bearbeiten. Zum Schluss werden Arbeitsbreite und Leistungsbedarf mit Platzgeometrie und Zugfahrzeug abgeglichen. Die belastbarste Entscheidung entsteht deshalb nicht aus einem einzelnen Ausstattungsmerkmal, sondern aus der Übereinstimmung von Boden, Einstellbarkeit, Arbeitsbreite und vorhandenem Fahrzeug.",
+                "domain": "pferdeportal",
+                "fact_pack_hash": "448068287dd4879c3d3eff4d82e46b6ae40ff749fa514d051a6a00cba9374616",
+                "lead": "Ein Reitplatzplaner für Pferde sollte nicht losgelöst vom vorhandenen Reitboden ausgewählt werden. Der Wassergehalt beeinflusst die Reiteigenschaften des Platzes, und auch Planung, Aufbau und Nutzung des Bodens gehören zusammen. Für die Gerätewahl bedeutet das: Zuerst wird der eigene Platz eingeordnet, erst danach werden Arbeitsbreite, Zinken, Planierelemente oder das Zugfahrzeug verglichen. Ebenso wichtig ist der aktuelle Pflegezustand. Die Bewässerung hängt vom Aufbau und von der Tretschicht ab, während Arbeitstiefe, Einebnung, Arbeitsbreite und Leistungsbedarf die konkrete Bearbeitung bestimmen. Ein passender Reitplatzplaner ist deshalb kein Universalgerät, sondern ein Werkzeug, dessen Einstellmöglichkeiten zum vorhandenen Boden, zur Platzgeometrie und zum verfügbaren Zugfahrzeug passen müssen.",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Weide",
+                    "href": "/weide/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzpflege",
+                    "href": "/weide/weide-reitplatzpflege/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzplaner",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "order_id": "k9-55a2dcd9",
+                "required_sections": [
+                  "Fazit",
+                  "Weiterführende Informationen"
+                ],
+                "section_fact_ids": [
+                  "fact-rpp-001",
+                  "fact-rpp-002",
+                  "fact-rpp-003",
+                  "fact-rpp-004",
+                  "fact-rpp-005"
+                ],
+                "slug": "reitplatzplaner-fuer-pferde",
+                "subject_label": "die Auswahl eines Reitplatzplaners für Pferde",
+                "subject_scope": "reitplatzplaner_fuer_pferde",
+                "table_focus": [
+                  "fact-rpp-001",
+                  "fact-rpp-002",
+                  "fact-rpp-003",
+                  "fact-rpp-004"
+                ],
+                "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+              },
+              "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+              "source_hashes": [],
+              "source_order_id": "k9-55a2dcd9",
+              "source_snapshot_id": "fp-b635f0c7fcf42dc40b860747",
+              "target_keyword": "Reitplatzplaner für Pferde",
+              "three_type_local_binding": {
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "semantic_keywords": [
+                  "Reitplatzplaner für Pferde",
+                  "Tretschicht und Feuchtezustand",
+                  "einstellbare Arbeitstiefe",
+                  "kontrollierte Einebnung",
+                  "Arbeitsbreite und Platzgeometrie",
+                  "Zugfahrzeug und Leistungsbedarf"
+                ],
+                "wordpress_runtime_term_id_required_later": true,
+                "wordpress_runtime_validation_performed_now": false
+              },
+              "topic": "Das Wichtigste über Reitplatzplaner für Pferde"
+            },
+            "product_sha256": "eb0e83cd5e3fd4a01033f6fe196433bb5a08edb143efbc0a11249a0016f3f83c",
+            "research_product_sha256": "55632c679f000dd328e4cf1b47d0135013a1456138e6e57aa4d0f51cbd1c0a86",
+            "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+          },
+          "item_id": "k9-bfc0c6806fa88f0c55a2dcd9"
+        },
+        "research": {
+          "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Tretschicht und Feuchtezustand",
+                "einstellbare Arbeitstiefe",
+                "kontrollierte Einebnung",
+                "Arbeitsbreite und Platzgeometrie",
+                "Zugfahrzeug und Leistungsbedarf"
+              ],
+              "decision_goal": "Einen Reitplatzplaner auswählen, dessen Arbeitsweise und Einstellmöglichkeiten zum vorhandenen Reitboden, zur Platzgröße und zum Zugfahrzeug passen."
+            },
+            "fact_pack": {
+              "article_type": "Beratung",
+              "article_type_coverage": "PASS",
+              "claim_register_hash": "33845b6f77a75e807d9c869d51423c99308aa599bba285943e84095e10124c93",
+              "claims": [
+                {
+                  "action": "Vor der Gerätewahl Tretschicht, Feuchteverhalten und Entwässerungsprinzip des Platzes einordnen.",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "check": "Tretschicht und Feuchteverhalten des vorhandenen Platzes beschreiben.",
+                  "claim_status": "FULLY_SUPPORTED",
+                  "display_label": "Bodenfeuchte und Aufbau",
+                  "display_statement": "Der Wassergehalt beeinflusst die Reiteigenschaften eines Reitplatzes wesentlich; außerdem ist je nach Entwässerungsprinzip die Wasserdurchlässigkeit der Schichten relevant.",
+                  "evidence_text_sha256": "c20571944b1146d4e93af26a65a0080448886bc8d9a39ac5a20084dacb06acb2",
+                  "fact_id": "fact-rpp-001",
+                  "locator": "snapshot:snap-c42a74b3129fc55cb1e568bb:evidence:1",
+                  "result": "Die Gerätewahl wird an den vorhandenen Boden und dessen Feuchteverhalten gebunden.",
+                  "snapshot_id": "snap-c42a74b3129fc55cb1e568bb",
+                  "source_id": "src-fn-reitplaetze",
+                  "statement": "Der Wassergehalt beeinflusst die Reiteigenschaften eines Reitplatzes wesentlich; außerdem ist je nach Entwässerungsprinzip die Wasserdurchlässigkeit der Schichten relevant.",
+                  "subject_scope": "arena_surface_moisture_and_layers",
+                  "time_scope": "SOURCE_SCOPE",
+                  "why": "Bodenfeuchte und Schichtaufbau beeinflussen die Wirkung der Pflege."
+                },
+                {
+                  "action": "Die Auswahl des Pflegegeräts nicht isoliert vom vorhandenen Platzaufbau betrachten.",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "check": "Prüfen, ob das Gerät zur vorhandenen Konstruktion und vorgesehenen Nutzung passt.",
+                  "claim_status": "FULLY_SUPPORTED",
+                  "display_label": "Gesamtsystem Reitplatz",
+                  "display_statement": "Anforderungen an einen guten Reitboden ergeben sich nicht nur aus Materialwahl, sondern auch aus Planung, Bauausführung und den biomechanischen Anforderungen des Pferdes.",
+                  "evidence_text_sha256": "070abf201bdb8d0828ccbd00321c5c775f8851822a86c9767ce7959c2190c1c1",
+                  "fact_id": "fact-rpp-002",
+                  "locator": "snapshot:snap-915faab6ee3b016d29d167e9:evidence:1",
+                  "result": "Der Reitplatzplaner wird als Teil eines bestehenden Bodensystems ausgewählt.",
+                  "snapshot_id": "snap-915faab6ee3b016d29d167e9",
+                  "source_id": "src-lwk-gute-reitplaetze",
+                  "statement": "Anforderungen an einen guten Reitboden ergeben sich nicht nur aus Materialwahl, sondern auch aus Planung, Bauausführung und den biomechanischen Anforderungen des Pferdes.",
+                  "subject_scope": "arena_system_context",
+                  "time_scope": "SOURCE_SCOPE",
+                  "why": "Planung, Aufbau und Nutzung des Reitbodens hängen zusammen."
+                },
+                {
+                  "action": "Den Pflegegang an den aktuellen Feuchtezustand der Tretschicht anpassen.",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "check": "Prüfen, ob der Boden vor dem Planieren passend feucht ist.",
+                  "claim_status": "FULLY_SUPPORTED",
+                  "display_label": "Bewässerung und Pflegezustand",
+                  "display_statement": "Eine ausreichende, witterungsangepasste Bewässerung hängt unter anderem vom Aufbau des Reitplatzes und von der Art der Tretschicht ab.",
+                  "evidence_text_sha256": "a755d5cdc88e670d98a2e94cc105cff75fec6e0531be0bb3fa89aa6bff0519a5",
+                  "fact_id": "fact-rpp-003",
+                  "locator": "snapshot:snap-5bb7e13d96e42082a3e00d59:evidence:1",
+                  "result": "Die gleiche Geräteeinstellung wird nicht unabhängig vom Feuchtezustand verwendet.",
+                  "snapshot_id": "snap-5bb7e13d96e42082a3e00d59",
+                  "source_id": "src-fn-wasser",
+                  "statement": "Eine ausreichende, witterungsangepasste Bewässerung hängt unter anderem vom Aufbau des Reitplatzes und von der Art der Tretschicht ab.",
+                  "subject_scope": "arena_watering_condition",
+                  "time_scope": "SOURCE_SCOPE",
+                  "why": "Der Feuchtezustand verändert die Eigenschaften der Tretschicht."
+                },
+                {
+                  "action": "Eine einstellbare Arbeitstiefe und ein geeignetes Planierelement als zentrale Auswahlkriterien prüfen.",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "check": "Prüfen, wie fein die Zinkentiefe verstellbar ist und wie das Gerät anschließend einebnet.",
+                  "claim_status": "FULLY_SUPPORTED",
+                  "display_label": "Arbeitstiefe und Einebnung",
+                  "display_statement": "Höhenverstellbare Zinken lockern den Reitboden; die eingestellte Tiefe bestimmt die Intensität der Auflockerung, während ein Planierschild Unebenheiten nivelliert.",
+                  "evidence_text_sha256": "79048a5e1a7a2fbc2d01775a30cca1267b674446d592ce1e9559de05acbaaa71",
+                  "fact_id": "fact-rpp-004",
+                  "locator": "snapshot:snap-a680ee7508c8b77aedb3ecbe:evidence:1",
+                  "result": "Das Gerät muss Lockerung und Einebnung kontrollierbar an den Boden anpassen können.",
+                  "snapshot_id": "snap-a680ee7508c8b77aedb3ecbe",
+                  "source_id": "src-otto-vario",
+                  "statement": "Höhenverstellbare Zinken lockern den Reitboden; die eingestellte Tiefe bestimmt die Intensität der Auflockerung, während ein Planierschild Unebenheiten nivelliert.",
+                  "subject_scope": "groomer_depth_and_leveling",
+                  "time_scope": "SOURCE_SCOPE",
+                  "why": "Arbeitstiefe und Planierelement bestimmen unmittelbar die Bearbeitung der Tretschicht."
+                },
+                {
+                  "action": "Tretschicht, Arbeitsbreite und verfügbares Zugfahrzeug gemeinsam abgleichen.",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "check": "Prüfen, ob Einsatzbereich, Arbeitsbreite und Leistungsbedarf zum Betrieb passen.",
+                  "claim_status": "FULLY_SUPPORTED",
+                  "display_label": "Tretschicht, Arbeitsbreite und Zugfahrzeug",
+                  "display_statement": "Reitplatzplaner werden für unterschiedliche Tretschichten angeboten; zugleich unterscheiden sich Arbeitsbreiten und Leistungsanforderungen.",
+                  "evidence_text_sha256": "1e6ab7a5664bb38d9684dcfa879c7dd7b7146cf4e4dc153c5afdd6084b31c93d",
+                  "fact_id": "fact-rpp-005",
+                  "locator": "snapshot:snap-bdd88548e1d86fedffddef5f:evidence:1",
+                  "result": "Ein Planer passt nur, wenn Bodenart, Platzgeometrie und Zugfahrzeug zusammenpassen.",
+                  "snapshot_id": "snap-bdd88548e1d86fedffddef5f",
+                  "source_id": "src-hatzenbichler-planer",
+                  "statement": "Reitplatzplaner werden für unterschiedliche Tretschichten angeboten; zugleich unterscheiden sich Arbeitsbreiten und Leistungsanforderungen.",
+                  "subject_scope": "surface_width_and_tractor_fit",
+                  "time_scope": "SOURCE_SCOPE",
+                  "why": "Gerätevarianten unterscheiden sich bei Einsatzbereich, Breite und Leistungsbedarf."
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeportal",
+              "fact_ids": [
+                "fact-rpp-001",
+                "fact-rpp-002",
+                "fact-rpp-003",
+                "fact-rpp-004",
+                "fact-rpp-005"
+              ],
+              "fact_pack_hash": "448068287dd4879c3d3eff4d82e46b6ae40ff749fa514d051a6a00cba9374616",
+              "fact_pack_id": "fp-b635f0c7fcf42dc40b860747",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "0b87f85ea060be0d5b6cee5ee14f285a232c451e426dfa2c5937b6b18f302e92",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "reitplatzplaner_fuer_pferde"
+            },
+            "portal_links": [
+              {
+                "anchor": "Weide",
+                "href": "/weide/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Reitplatzpflege",
+                "href": "/weide/weide-reitplatzpflege/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Reitplatzplaner",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "55632c679f000dd328e4cf1b47d0135013a1456138e6e57aa4d0f51cbd1c0a86",
+            "sources": [
+              {
+                "source_id": "src-fn-reitplaetze",
+                "title": "Reitplätze – FNverlag Leseprobe",
+                "url": "https://www.fnverlag.de/files/12/24/leseprobe_978-3-88542-716-2.pdf"
+              },
+              {
+                "source_id": "src-lwk-gute-reitplaetze",
+                "title": "Gute Reitplätze – guter und sicherer Sport",
+                "url": "https://www.landwirtschaftskammer.de/duesse/lehrschau/sondertage/2009-10-29.htm"
+              },
+              {
+                "source_id": "src-fn-wasser",
+                "title": "Grüner Stall: Tipps zum Wasser sparen",
+                "url": "https://app.pferd-aktuell.de/news/aktuelle-meldungen/umwelt-und-pferdehaltung/gruener-stall-tipps-zum-wasser-sparen"
+              },
+              {
+                "source_id": "src-otto-vario",
+                "title": "OTTO-VARIO Reitplatzplaner",
+                "url": "https://www.ottosport.com/produkte/otto-reitplatzplaner/otto-vario"
+              },
+              {
+                "source_id": "src-hatzenbichler-planer",
+                "title": "Hatzenbichler Reitplatzplaner",
+                "url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "reitplatzplaner-beratung",
+        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+        "target_keyword": "Reitplatzplaner für Pferde",
+        "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+      },
+      "revision": 2,
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+    }
+  ],
+  "job_id": "K9-CHECK-0e969dd48e869590",
+  "job_sha256": "b035db5c8d2646a4b9e963b398c232fc7084ab25f7e37340dcb7bde948473f8c",
+  "ledger_generation": 8,
+  "source_run_id": "36607367669-e2e-recheck",
+  "station": "check",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "MANUAL_PASS_BOOLEAN",
+      "CHANGE_ARTICLE",
+      "ROUTE_AROUND_FAILED_CHECK",
+      "USE_LEGACY_K4_K8_RUNTIME"
+    ],
+    "input_rule": "USE_ONLY_BOUND_RESEARCH_AND_ARTICLE_PRODUCTS",
+    "must": [
+      "RUN_HASH_BOUND_LANGUAGETOOL_6_8",
+      "RUN_HASH_BOUND_PPM_6_7_9",
+      "BIND_BOTH_RESULTS_TO_EXACT_ARTICLE_SHA256",
+      "RETURN_PASS_OR_REPAIR_REQUIRED"
+    ],
+    "output_contract": "K9_SUBMISSION_V1_WITH_LT68_AND_PPM679_RESULTS",
+    "worker_type": "K9_NATIVE_MACHINE_CHECK"
+  }
+}
