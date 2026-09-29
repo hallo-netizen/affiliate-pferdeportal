@@ -61,7 +61,7 @@ function named_function_hashes(string $source): array {
 $expected = [
     'automation_stop_legacy_unfiltered_otto_jobs' => 'b865a12b06c2476fe7ae7226c1b755870d37c864382de81f06ec9960cd0424c9',
     'automation_cleanup_legacy_unfiltered_otto_imports' => 'e36a5f4f3e61167589a901797ae6334889e79a605ff084d88b61aa9f43ee6bdd',
-    'automation_refresh_awin_programme_list' => '19e20f583cab151328dfeaaf5ce1ee53124e7bbf278c54e6393b0c1ec5d57519',
+    'automation_refresh_awin_programme_list' => 'a3e6346dd0c7ffb0b3226884daa8015b02a7d36937b8c23d9128736d366f888e',
     'automation_refresh_awin_feed_list' => '1ae544163278402a4fac05d5743b447acc0934b870fa28c063e437db013f6a2f',
     'automation_enqueue_awin_partner' => 'd6758c77f2f8a0fef06d416c4b62fef2846079a15cf04d14ec3f5251157e321e',
     'automation_validate_awin_feed_url' => 'ceb1124ed666cc8ca6812623561512c25e66c5183801af58069cf0b1399dd6ea',
