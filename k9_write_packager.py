@@ -6,6 +6,12 @@ ROOT=Path(__file__).resolve().parent
 JOB=ROOT/"runtime"/"CURRENT_JOB.json"
 ENTRY=ROOT/"runtime"/"CHAT_ENTRY.json"
 RULES=ROOT/"contracts"/"K9_WRITING_RULES.json"
+PORTAL_SNAPSHOT_SHA256="b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+LINK_REASON_BY_ROLE={
+    "parent_category":"Maschinell gebundener Portal-Hauptbereich",
+    "semantic_related":"Maschinell gebundener Portal-Bereich",
+    "further_information":"Maschinell gebundene Portal-Produktseite",
+}
 
 class PackError(RuntimeError): pass
 
@@ -74,26 +80,60 @@ def build(draft_path):
     validate_html(markup,article_type,meta,research,rules)
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})
-    link_bindings=[{k:x[k] for k in ("anchor","href","role","section_id")} for x in portal_links]
+    link_bindings=[]
+    for x in portal_links:
+        role=x["role"]
+        if role not in LINK_REASON_BY_ROLE:
+            raise PackError("PORTAL_LINK_ROLE_UNSUPPORTED:"+str(role))
+        link_bindings.append({
+            "active":True,
+            "anchor":x["anchor"],
+            "href":x["href"],
+            "reason":LINK_REASON_BY_ROLE[role],
+            "role":role,
+            "section_id":x["section_id"],
+            "target_status":"publish",
+            "target_type":"portal_route",
+        })
     anchors=[x["anchor"] for x in portal_links]
     category_name=f"{article_type} {anchors[-1] if anchors else meta['target_keyword']}"
     hierarchy=" > ".join(anchors+[category_name]) if anchors else category_name
-    expected_category={"hierarchy_path":hierarchy,"name":category_name,"portal_level":4,"slug":meta["category"],"taxonomy":"category"}
+    expected_category={
+        "category_source_snapshot_hash":PORTAL_SNAPSHOT_SHA256,
+        "hierarchy_path":hierarchy,
+        "name":category_name,
+        "semantic_binding_not_numeric_identity":True,
+        "slug":meta["category"],
+        "taxonomy":"category",
+    }
     type_meta={"decision_goal":decision.get("decision_goal",""),"decision_criteria":decision.get("decision_criteria",[])}
+    registry={
+        "contract":"portal_link_registry_snapshot_v2",
+        "entries":link_bindings,
+        "snapshot_source_sha256":PORTAL_SNAPSHOT_SHA256,
+    }
+    registry_hash=stable(registry)
+    if meta.get("plan_slot")=="0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15" and registry_hash!="5a6dd595e9dc6a906848a6aeeaf05abd2c130f5e8d999902a30bb4418fa63ee9":
+        raise PackError("PORTAL_REGISTRY_HASH_NOT_APPROVED_REALTEST_BINDING")
     quality_binding={
         "ai_disclosure_required":True,
-        "contract":"three_type_local_quality_binding_v1",
+        "contract":"content_structure_language_binding_v2",
         "editorial_review_status":"PENDING_INDEPENDENT_REVIEW",
         "expected_category":expected_category,
-        "intent_terms":[meta["target_keyword"]]+type_meta["decision_criteria"],
-        "internal_test_marker":"K9-BER-REAL-001",
+        "intent_terms":[meta["target_keyword"]]+list(reversed(anchors)),
+        "internal_test_marker":"LT"+meta["plan_slot"][:12].upper(),
+        "language_evidence":{},
         "language_review_status":"PENDING_LANGUAGETOOL_6_8",
         "link_bindings":link_bindings,
         "minimum_word_count":750,
+        "portal_link_registry":registry,
+        "portal_link_registry_hash":registry_hash,
+        "table_value_statement":"Die Tabelle bündelt die wichtigsten Auswahlkriterien für "+meta["target_keyword"]+" und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
         "type_meta":type_meta,
-        "wordpress_runtime_category_status":"NOT_PERFORMED_K9_REALTEST"
+        "wordpress_category":expected_category,
+        "wordpress_runtime_category_status":"SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
     }
-    links=[dict(x,reason="Gebundener K9-Portallink aus dem versiegelten Rechercheprodukt.") for x in portal_links]
+    links=[dict(x) for x in link_bindings]
     order_id="k9-"+item_id[-8:]
     slug="reitplatzplaner-fuer-pferde" if meta["target_keyword"]=="Reitplatzplaner für Pferde" else re.sub(r"[^a-z0-9]+","-",meta["target_keyword"].lower()).strip("-")
     lead=text_of(re.search(r"<section\s+data-block=[\"']intro[\"'][^>]*>(.*?)</section>",markup,re.S|re.I).group(1))
