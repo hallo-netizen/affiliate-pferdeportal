@@ -9,18 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Inspect fact-pack import hash rules only
+      - name: Print compact Beratung item schema
         shell: bash
         run: |
           set -euo pipefail
-          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
-          rm -rf /tmp/k9rules && mkdir -p /tmp/k9rules
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9rules
-          ROOT=/tmp/k9rules/portal-production-machine
-          echo '===IMPORT FACT PACK BUNDLE==='
-          grep -Rni --include='*.php' 'function import_fact_pack_bundle' "$ROOT" | head -10
-          f=$(grep -Rl --include='*.php' 'function import_fact_pack_bundle' "$ROOT" | head -1)
-          n=$(grep -n 'function import_fact_pack_bundle' "$f" | head -1 | cut -d: -f1)
-          s=$((n-25)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+260)); sed -n "${s},${e}p" "$f"
-          echo '===FACT PACK HASH REFERENCES==='
-          grep -Rni --include='*.php' -E 'fact_pack_hash|claim_register_hash|source_manifest_hash' "$ROOT/includes" "$ROOT/tests" | head -220 || true
+          rm -rf /tmp/k9schema && mkdir -p /tmp/k9schema
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9schema
+          python3 - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('/tmp/k9schema/portal-production-machine/contracts/three-type-bundled-approved-candidates-v1.json')
+          b=json.loads(p.read_text())
+          item=next(x for x in b['items'] if x.get('article_type')=='Beratung')
+          out={k:v for k,v in item.items() if k!='canonical_article'}
+          ca=item['canonical_article']
+          out['canonical_article']={k:v for k,v in ca.items() if k not in ('body_html','body_text')}
+          print(json.dumps(out,ensure_ascii=False,separators=(',',':')))
+          PY
