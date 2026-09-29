@@ -9,17 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Print exact Wave2 PPM contract and gate code
+      - name: Print exact PPM visible language algorithm
         shell: bash
         run: |
           set -euo pipefail
-          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
-          rm -rf /tmp/k9wave2 && mkdir -p /tmp/k9wave2
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9wave2
-          ROOT=/tmp/k9wave2/portal-production-machine
-          echo '===WAVE2_CONTRACT==='
-          cat "$ROOT/contracts/content-structure-language-gate-v2.json"
-          echo '===WAVE2_FUNCTIONS==='
-          grep -nE 'function|portal_link_registry|language_evidence|wordpress_category|value_statement|internal_test_marker' "$ROOT/includes/content-structure-language-gate.php" | head -240
-          echo '===WAVE2_RELEVANT_CODE==='
-          sed -n '1,520p' "$ROOT/includes/content-structure-language-gate.php"
+          rm -rf /tmp/k9visible && mkdir -p /tmp/k9visible
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9visible
+          F=/tmp/k9visible/portal-production-machine/includes/content-structure-language-gate.php
+          sed -n '556,620p' "$F"
