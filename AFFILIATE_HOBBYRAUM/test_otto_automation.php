@@ -186,19 +186,17 @@ pass_or_fail(
 
 pass_or_fail(
     str_contains($router, "const OPTION_BANNER_DISTRIBUTION = 'ppar_banner_distribution_v1'")
-    && str_contains($router, "'otto'=>40")
-    && str_contains($router, "'awin_other'=>25")
-    && str_contains($router, "'adcell'=>20")
-    && str_contains($router, "'direct'=>15")
-    && str_contains($router, "'digistore24'=>0"),
-    'banner distribution has explicit configurable starting shares'
+    && str_contains($router, "return array('enabled'=>true,'mode'=>'relevance_first_stable_even_distribution')")
+    && str_contains($router, 'return $this->banner_distribution_defaults();'),
+    'banner distribution is always automatic with relevance-first stable even distribution'
 );
 pass_or_fail(
     str_contains($router, 'banner_distribution_relevance_band')
-    && str_contains($router, 'best_band')
-    && str_contains($router, 'Banneranteil ')
-    && str_contains($router, "gmdate('o-W')"),
-    'banner share applies only inside best relevance tier and stays weekly deterministic'
+    && str_contains($router, '$top_band')
+    && str_contains($router, 'banner_distribution_stable_index')
+    && str_contains($router, 'Gleichmäßige Verteilung innerhalb derselben Relevanzstufe.')
+    && !str_contains($router, "gmdate('o-W')"),
+    'banner rotation stays inside the best relevance tier and is stably distributed without weekly rotation'
 );
 pass_or_fail(
     str_contains($router, 'function banner_distribution_slot')
@@ -211,10 +209,10 @@ pass_or_fail(
     'banner share covers all real banner placement families'
 );
 pass_or_fail(
-    str_contains($router, 'Weight 0 is an automatic exclusion')
-    && str_contains($router, "absint(\$settings['weights'][\$key] ?? 0) <= 0")
-    && str_contains($router, 'return array();'),
-    'zero banner share is a true automatic exclusion'
+    str_contains($router, 'Old weight/toggle options are intentionally ignored')
+    && str_contains($router, 'could silently disable rotation')
+    && str_contains($router, 'return $this->banner_distribution_defaults();'),
+    'obsolete weight settings cannot disable the current automatic rotation'
 );
 pass_or_fail(
     str_contains($automation, 'ppar_affiliate_awin_static_creatives')
@@ -235,9 +233,9 @@ pass_or_fail(
     'multi-position banner slots use independent distribution seeds'
 );
 pass_or_fail(
-    str_contains($router, 'Position 2 receives its own weighted decision')
+    str_contains($router, "\$first_context['banner_distribution_position'] = 1")
     && str_contains($router, "\$candidate_key !== \$first_key"),
-    'second banner place uses independent share decision without duplicate creative'
+    'second banner place uses an independent stable decision without duplicate creative'
 );
 pass_or_fail(
     str_contains($router, 'Für eine manuelle Affiliate-Reparatur ist eine Begründung erforderlich.')
@@ -246,10 +244,11 @@ pass_or_fail(
     'manual page repair stores reason actor and timestamp'
 );
 pass_or_fail(
-    str_contains($router, 'handle_save_banner_distribution')
-    && str_contains($router, 'Banneranteile speichern')
+    str_contains($router, 'Automatische Bannerverteilung')
+    && str_contains($router, 'Relevanz zuerst, danach gleichmäßige Partner-/Werbemittelverteilung.')
+    && str_contains($router, 'Keine festen Providerquoten. Keine Wochenrotation.')
     && str_contains($router, 'Diese Seite ist zugleich die interne Reparaturinstanz'),
-    'banner share settings and manual repair UI are available'
+    'automatic banner distribution and manual repair UI expose the current contract'
 );
 pass_or_fail(
     str_contains($articles, "assignment_selection_for_slot(\$context, 'post_inline_banner')")
