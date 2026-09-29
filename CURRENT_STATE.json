@@ -11,10 +11,12 @@
   "status": "REAL_SINGLE_ARTICLE_END_TO_END_PASS_TERMINAL_STOP",
   "freshness": {
     "last_relevant_technical_head": "24aa2077cdbb23842e2ea022657765605161fa14",
-    "last_head_selftest_run": 36609752979,
+    "last_head_selftest_run": 36610425056,
     "last_real_finalizer_run": 36609492082,
     "finalizer_input_head": "ca8a8431d5a17de69c345ea351cd8df5d3f7874f",
-    "terminal_package_commit": "9209488eaf00560e540b28b1f0eab3dc2196a1cb"
+    "terminal_package_commit": "9209488eaf00560e540b28b1f0eab3dc2196a1cb",
+    "current_head": "d571823d4b7290249deaab821a06a9e570b0446e",
+    "freshness_result": "PASS_NO_RELEVANT_TECHNICAL_DELTA_AFTER_24aa2077_GOVERNANCE_CLOSEOUT_ONLY"
   },
   "proven": {
     "article_count": 1,
