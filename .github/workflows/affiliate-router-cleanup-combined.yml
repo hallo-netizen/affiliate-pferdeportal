@@ -5,6 +5,7 @@ on:
     branches: [affiliate-release-current]
     paths:
       - '.github/workflows/affiliate-router-cleanup-combined.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_otto_automation.php'
   workflow_dispatch:
 
 permissions:
