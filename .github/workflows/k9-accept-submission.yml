@@ -5,6 +5,9 @@ on:
     paths: ['submissions/**.json']
 permissions:
   contents: write
+concurrency:
+  group: k9-production-state
+  cancel-in-progress: false
 jobs:
   accept:
     runs-on: ubuntu-latest
@@ -13,17 +16,28 @@ jobs:
         with:
           fetch-depth: 0
       - run: python3 -m unittest discover -s tests -p 'test_*.py'
-      - name: Accept only complete exact current submission
+      - name: Accept only exact current submission
         shell: bash
         run: |
           set -euo pipefail
           count=$(find submissions -maxdepth 1 -type f -name '*.json' | wc -l)
+          if [ "$count" -eq 0 ]; then
+            echo 'No pending submission; likely cleanup commit.'
+            exit 0
+          fi
           test "$count" -eq 1
-          f=$(find submissions -maxdepth 1 -type f -name '*.json')
+          test -f runtime/CURRENT_JOB.json
+          job_id=$(python3 - <<'PY'
+          import json
+          print(json.load(open('runtime/CURRENT_JOB.json'))['job_id'])
+          PY
+          )
+          f="submissions/${job_id}.json"
+          test -f "$f"
           python3 k9_engine.py accept "$f" | tee K9_ACCEPT_RESULT.json
           git rm "$f"
           git config user.name 'k9-warehouse-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add state runtime warehouse
-          git commit -m 'K9: accept complete station product'
+          git add -A state runtime warehouse submissions
+          git commit -m 'K9: accept complete exact station product'
           git push
