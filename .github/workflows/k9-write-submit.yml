@@ -15,12 +15,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
-      - name: Package exact open write job
+      - name: Package and atomically accept exact open write job
         shell: bash
         run: |
           set -euo pipefail
           count=$(find writer_drafts -maxdepth 1 -type f -name '*.json' | wc -l)
-          if [ "$count" -eq 0 ]; then echo 'No writer draft; likely cleanup commit.'; exit 0; fi
+          if [ "$count" -eq 0 ]; then echo 'No writer draft.'; exit 0; fi
           test "$count" -eq 1
           test -f runtime/CURRENT_JOB.json
           job_id=$(python3 - <<'PY'
@@ -30,11 +30,14 @@ jobs:
           )
           draft="writer_drafts/${job_id}.json"
           test -f "$draft"
-          out="submissions/${job_id}.json"
+          out="/tmp/${job_id}.submission.json"
           python3 k9_write_packager.py "$draft" --output "$out"
+          python3 k9_engine.py accept "$out" | tee K9_WRITE_ACCEPT_RESULT.json
+          test ! -f runtime/CURRENT_JOB.json
+          test ! -f runtime/CHAT_ENTRY.json
           git rm "$draft"
           git config user.name 'k9-write-packager-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add "$out"
-          git commit -m 'K9: package exact sealed write product'
+          git add -A state runtime warehouse
+          git commit -m 'K9: package and accept exact sealed write product'
           git push
