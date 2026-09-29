@@ -1,0 +1,29 @@
+name: K9 accept complete station product
+on:
+  push:
+    branches: [konzept9/greenfield-20260929]
+    paths: ['submissions/**.json']
+permissions:
+  contents: write
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Accept only complete exact current submission
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(find submissions -maxdepth 1 -type f -name '*.json' | wc -l)
+          test "$count" -eq 1
+          f=$(find submissions -maxdepth 1 -type f -name '*.json')
+          python3 k9_engine.py accept "$f" | tee K9_ACCEPT_RESULT.json
+          git rm "$f"
+          git config user.name 'k9-warehouse-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add state runtime warehouse
+          git commit -m 'K9: accept complete station product'
+          git push
