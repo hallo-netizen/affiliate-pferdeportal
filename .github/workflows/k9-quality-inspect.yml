@@ -9,37 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Inspect minimal PPM data shape only
+      - name: Derive minimal PPM item shape
         shell: bash
         run: |
           set -euo pipefail
           echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip' | sha256sum -c -
           rm -rf /tmp/k9ppm && mkdir -p /tmp/k9ppm
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9ppm
-          ROOT=/tmp/k9ppm/portal-production-machine
-          echo '--- ITEM KEYS REFERENCED BY CONTENT VALIDATOR ---'
-          grep -oE "\\$item\\['[A-Za-z0-9_]+'\\]" "$ROOT/includes/content-validator.php" | sort -u || true
-          echo '--- GENERATED KEYS REFERENCED BY CONTENT VALIDATOR ---'
-          grep -oE "\\$generated\\['[A-Za-z0-9_]+'\\]" "$ROOT/includes/content-validator.php" | sort -u || true
-          echo '--- FACT PACK REFERENCES ---'
-          grep -Rni --include='*.php' 'fact_pack' "$ROOT/includes/content-validator.php" "$ROOT/includes/content-structure-language-gate.php" | head -120 || true
-          echo '--- BUNDLED CANDIDATE SHAPE ---'
           python3 - <<'PY'
-          import json, pathlib
-          root=pathlib.Path('/tmp/k9ppm/portal-production-machine/contracts')
-          for name in ['three-type-bundled-approved-candidates-v1.json','g9-single-faq-approved-candidate-v1.json']:
-              p=root/name
-              print('FILE',name)
-              data=json.loads(p.read_text())
-              print('TOP',sorted(data.keys()))
-              def walk(x, prefix='', depth=0):
-                  if depth>2:return
-                  if isinstance(x,dict):
-                      print(prefix+' KEYS '+','.join(sorted(x.keys())))
-                      for k,v in list(x.items())[:8]:
-                          if isinstance(v,(dict,list)): walk(v,prefix+'/'+k,depth+1)
-                  elif isinstance(x,list):
-                      print(prefix+f' LISTLEN {len(x)}')
-                      if x: walk(x[0],prefix+'/0',depth+1)
-              walk(data)
+          import json,re,pathlib
+          root=pathlib.Path('/tmp/k9ppm/portal-production-machine')
+          src=(root/'includes/content-validator.php').read_text()
+          print('ITEM_KEYS', sorted(set(re.findall(r"\\$item\\['([^']+)'\\]", src))))
+          print('GENERATED_KEYS', sorted(set(re.findall(r"\\$generated\\['([^']+)'\\]", src))))
+          c=root/'contracts'
+          faq=json.loads((c/'g9-single-faq-approved-candidate-v1.json').read_text())
+          print('FAQ_ITEM_KEYS', sorted(faq['item'].keys()))
+          print('FAQ_CANDIDATE_KEYS', sorted(faq['candidate'].keys()))
+          print('FAQ_FACT_KEYS', sorted(faq['fact_pack'].keys()))
+          bundle=json.loads((c/'three-type-bundled-approved-candidates-v1.json').read_text())
+          print('THREE_ITEM_COUNT', len(bundle['items']))
+          first=bundle['items'][0]
+          print('THREE_FIRST_KEYS', sorted(first.keys()))
+          for k,v in first.items():
+              if isinstance(v,dict): print('THREE_FIRST_'+k+'_KEYS', sorted(v.keys()))
+          fp=bundle['fact_pack_bundle']['fact_packs'][0]
+          print('THREE_FACT_KEYS', sorted(fp.keys()))
           PY
