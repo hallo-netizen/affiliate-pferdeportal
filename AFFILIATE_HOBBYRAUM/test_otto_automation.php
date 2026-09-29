@@ -325,9 +325,10 @@ pass_or_fail($choose_provider(['otto'=>40,'awin_other'=>25,'adcell'=>20,'direct'
 pass_or_fail($choose_provider(['otto'=>40,'awin_other'=>25,'adcell'=>20,'direct'=>15], 40) === 'awin_other', 'weighted banner bucket moves to next share at boundary');
 pass_or_fail($choose_provider(['otto'=>40,'adcell'=>20], 45) === 'adcell', 'missing banner sources are redistributed by normalization');
 pass_or_fail(
-    str_contains($router, "if (\$this->banner_distribution_relevance_band((int) (\$candidate['specificity'] ?? 0)) !== \$best_band)")
+    str_contains($router, "\$top_band = \$this->banner_distribution_relevance_band")
+    && str_contains($router, "if (\$this->banner_distribution_relevance_band((int) (\$candidate['specificity'] ?? 0)) === \$top_band)")
     && str_contains($router, "if (!\$exact_mode &&"),
-    'share cannot outrank stronger relevance and product exact logic stays separate'
+    'banner distribution stays inside top relevance tier and product exact logic stays separate'
 );
 
 $fp = static function(array $row): string {
