@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/affiliate-router-cleanup-combined.yml'
       - 'AFFILIATE_HOBBYRAUM/test_otto_automation.php'
+      - 'AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php'
   workflow_dispatch:
 
 permissions:
