@@ -63,6 +63,7 @@ def write_chat_entry(job):
         "repository": "hallo-netizen/affiliate-pferdeportal",
         "branch": "konzept9/greenfield-20260929",
         "job_path": "runtime/CURRENT_JOB.json",
+        "submission_path": "submissions/" + job["job_id"] + ".json",
         "job_id": job["job_id"],
         "job_sha256": job["job_sha256"],
         "station": job["station"],
