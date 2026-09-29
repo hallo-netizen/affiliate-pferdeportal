@@ -9,11 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Print exact PPM visible language algorithm
+      - name: Inspect exact PPM plan validator required fields
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/k9visible && mkdir -p /tmp/k9visible
-          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9visible
-          F=/tmp/k9visible/portal-production-machine/includes/content-structure-language-gate.php
-          sed -n '556,620p' "$F"
+          rm -rf /tmp/k9-plan-inspect && mkdir -p /tmp/k9-plan-inspect
+          unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-plan-inspect
+          ROOT=/tmp/k9-plan-inspect/portal-production-machine
+          echo '===MATCHES==='
+          grep -Rni --include='*.php' 'PLAN_V4_REQUIRES_ALL_TOP_LEVEL_FIELDS\|BLOCKED_PLAN_REQUIRED_FIELD_MISSING\|plan_id' "$ROOT" | head -100
+          echo '===CONTEXT==='
+          f=$(grep -Rl --include='*.php' 'PLAN_V4_REQUIRES_ALL_TOP_LEVEL_FIELDS' "$ROOT" | head -1)
+          test -n "$f"
+          n=$(grep -n 'PLAN_V4_REQUIRES_ALL_TOP_LEVEL_FIELDS' "$f" | head -1 | cut -d: -f1)
+          s=$((n-120)); if [ "$s" -lt 1 ]; then s=1; fi; e=$((n+220)); sed -n "${s},${e}p" "$f"
