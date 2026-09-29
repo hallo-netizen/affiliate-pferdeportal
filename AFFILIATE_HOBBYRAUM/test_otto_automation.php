@@ -21,6 +21,7 @@ function source(string $name): string {
         'trait-ppar-automation-suite.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php',
         'trait-ppar-awin-programme-gate.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-awin-programme-gate.php',
         'trait-ppar-provider-registry.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-provider-registry.php',
+        'trait-ppar-network-sync.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-network-sync.php',
         'trait-ppar-output-objects.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php',
         'trait-ppar-article-plans.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-article-plans.php',
         'trait-ppar-creative-library.php' => 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php',
@@ -43,6 +44,7 @@ function source(string $name): string {
 $automation = source('trait-ppar-automation-suite.php');
 $awin_gate = source('trait-ppar-awin-programme-gate.php');
 $provider_registry = source('trait-ppar-provider-registry.php');
+$network_sync = source('trait-ppar-network-sync.php');
 $output = source('trait-ppar-output-objects.php');
 $articles = source('trait-ppar-article-plans.php');
 $creative = source('trait-ppar-creative-library.php');
@@ -83,8 +85,10 @@ pass_or_fail(
 );
 pass_or_fail(
     str_contains($automation, 'function automation_refresh_awin_programme_list')
-    && str_contains($automation, "/programmes?relationship=joined")
-    && str_contains($automation, 'Last-Known-Good bleibt erhalten.'),
+    && str_contains($automation, '$this->awin_fetch_current_joined_programmes($settings)')
+    && str_contains($network_sync, "array('relationship' => 'joined')")
+    && str_contains($network_sync, "'https://api.awin.com/publishers/'")
+    && str_contains($network_sync, 'Last-Known-Good bleibt erhalten.'),
     'joined Awin programme list refreshes automatically with Last-Known-Good fallback'
 );
 pass_or_fail(
