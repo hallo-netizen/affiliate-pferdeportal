@@ -1,0 +1,10 @@
+{
+  "contract": "K9_TERMINAL_RECEIPT_V1",
+  "status": "STOP",
+  "workflow": "RESEARCH_WRITE_LT68_PPM679_REPAIR_PSERC_ENDSTEMPEL_WORDPRESS_FILE",
+  "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+  "final_sha256": "9c2f63d1dfd4deedf556041830a62c6f96a8631639100ee693f7fc0deeb2bd74",
+  "batch_sha256": "4fb58ca3ee3cae7e18b00accc8b61e6a1e6345b2d5d9e0439535cf61edd3bb5c",
+  "article_count": 1,
+  "publish_allowed": false
+}
