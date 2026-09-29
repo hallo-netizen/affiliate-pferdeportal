@@ -181,7 +181,22 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
     except Exception as exc: raise Blocked("PSERC_OUTPUT_INVALID") from exc
     bridge=wrapper.get("bridge") if isinstance(wrapper,dict) else None
     if not isinstance(bridge,dict) or bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
-        raise Blocked("PSERC_BRIDGE_NOT_PASS:"+json.dumps(bridge,ensure_ascii=False)[:800])
+        detail={"bridge_status":bridge.get("status") if isinstance(bridge,dict) else None}
+        if isinstance(bridge,dict):
+            ppm=bridge.get("ppm_result")
+            artifact=ppm.get("artifact") if isinstance(ppm,dict) else None
+            if isinstance(artifact,dict):
+                detail["ppm_status"]=artifact.get("status")
+                errors=artifact.get("errors")
+                if isinstance(errors,list) and errors and isinstance(errors[0],dict):
+                    detail["first_error"]={
+                        "error_code":errors[0].get("error_code"),
+                        "failed_rule":errors[0].get("failed_rule"),
+                        "field_path":errors[0].get("field_path"),
+                        "actual":errors[0].get("actual"),
+                        "expected":errors[0].get("expected"),
+                    }
+        raise Blocked("PSERC_BRIDGE_NOT_PASS:"+json.dumps(detail,ensure_ascii=False,sort_keys=True))
     ppm_result=bridge.get("ppm_result"); artifact=ppm_result.get("artifact") if isinstance(ppm_result,dict) else None
     if not isinstance(artifact,dict) or artifact.get("status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
         raise Blocked("PSERC_PPM_ARTIFACT_NOT_PASS")
