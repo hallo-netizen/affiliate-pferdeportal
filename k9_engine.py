@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
+CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
 WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
 
