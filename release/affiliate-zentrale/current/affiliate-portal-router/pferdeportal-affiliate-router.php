@@ -3618,8 +3618,39 @@ JS;
             || !method_exists($this, 'automation_campaign_exact_target_rank')) { return null; }
         $partner_identity = $this->glossary_campaign_partner_identity($campaign);
         if ($partner_identity === '') { return null; }
+
+        // V6.72.169: partner inheritance is an exact same-partner question.
+        // Public requests prefilter the raw campaign snapshot by provider/partner
+        // identity and banner type before normalizing anything. Admin/Cron/etc.
+        // retain the historical complete snapshot path.
+        $siblings = array();
+        $frontend_prefilter = $this->ranked_campaigns_request_cache_allowed()
+            && method_exists($this, 'ranked_campaign_raw_records_snapshot')
+            && method_exists($this, 'ranked_campaign_from_post_cached');
+        if ($frontend_prefilter) {
+            foreach ($this->ranked_campaign_raw_records_snapshot() as $record) {
+                $post = is_array($record) ? ($record['post'] ?? null) : null;
+                $stored = is_array($record) ? (array) ($record['stored'] ?? array()) : array();
+                if (!is_object($post) || empty($post->ID) || empty($stored['active'])) { continue; }
+                if (absint($post->ID) === absint($campaign['post_id'] ?? 0)) { continue; }
+                $creative_type = sanitize_key((string) (array_key_exists('creative_type', $stored) ? $stored['creative_type'] : 'banner'));
+                if ($creative_type !== 'banner' || empty($stored['automation_target_keys'])) { continue; }
+                $identity_probe = array(
+                    'network' => array_key_exists('network', $stored) ? $stored['network'] : 'manual',
+                    'advertiser_id' => $stored['advertiser_id'] ?? '',
+                    'programme_name' => $stored['programme_name'] ?? '',
+                    'partner' => $stored['partner'] ?? '',
+                );
+                if ($this->glossary_campaign_partner_identity($identity_probe) !== $partner_identity) { continue; }
+                $sibling = $this->ranked_campaign_from_post_cached($post);
+                if (is_array($sibling)) { $siblings[] = $sibling; }
+            }
+        } else {
+            $siblings = array_values((array) $this->get_campaigns());
+        }
+
         $best = null;
-        foreach ((array) $this->get_campaigns() as $sibling) {
+        foreach ($siblings as $sibling) {
             if (!is_array($sibling) || empty($sibling['active'])) { continue; }
             if (absint($sibling['post_id'] ?? 0) === absint($campaign['post_id'] ?? 0)) { continue; }
             if (sanitize_key((string) ($sibling['creative_type'] ?? 'banner')) !== 'banner') { continue; }
