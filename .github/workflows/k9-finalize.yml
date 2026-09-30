@@ -34,8 +34,6 @@ jobs:
           assert s['active_job'] is None
           print('K9_FINAL_STATE_READY')
           PY
-      - name: Hard regression tests
-        run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Prepare exact LanguageTool 6.8
         shell: bash
         run: |
@@ -106,6 +104,20 @@ jobs:
             'publish_allowed':False,
           }
           pathlib.Path('runtime/K9_STOP.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          delivery={
+            'contract':'K9_CHAT_DELIVERY_V1',
+            'status':'READY',
+            'final_ref':receipt['final_ref'],
+            'final_sha256':receipt['final_sha256'],
+            'batch_sha256':receipt['batch_sha256'],
+            'article_count':receipt['article_count'],
+            'artifact_name':'k9-wordpress-final-json',
+            'filename':'GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json',
+            'finalizer_run_id':os.environ.get('GITHUB_RUN_ID'),
+            'required_surface':'CHAT_ATTACHMENT',
+            'publish_allowed':False
+          }
+          pathlib.Path('runtime/CHAT_DELIVERY.json').write_text(json.dumps(delivery,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           current={
             'contract':'K9_CURRENT_STATE_V3',
             'role':'SOLE_CURRENT_AUTHORITY',
@@ -115,7 +127,7 @@ jobs:
             'operational_mode':'SUPERVISOR',
             'active_job':None,
             'first_open_blocker':None,
-            'next_action':'RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES',
+            'next_action':'DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT',
             'work_binding':{
               'baseline':'LATEST_REAL_E2E_STOP',
               'preserve_existing_station_products':True,
@@ -132,6 +144,11 @@ jobs:
               'finalizer_run_id':os.environ.get('GITHUB_RUN_ID'),
               'trigger_head_sha':os.environ.get('GITHUB_SHA')
             },
+            'allowed_action':'DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY',
+            'all_other_actions':'DENY',
+            'code_change_allowed':False,
+            'chat_delivery_required':True,
+            'chat_delivery_manifest_ref':'runtime/CHAT_DELIVERY.json',
             'chat_may_route':False,
             'publish_allowed':False
           }
@@ -160,3 +177,10 @@ jobs:
           gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 && { echo K9_RELEASE_REPLAY_BLOCKED; exit 2; } || true
           gh release create "$TAG" "$final_path#GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json" --repo "$GITHUB_REPOSITORY" --target konzept9/greenfield-20260929 --title "K9 Endstempel real E2E" --notes "K9 real E2E final JSON. SHA-256: $SHA. publish_allowed=false."
           echo K9_FINAL_DURABLE_RELEASE_PASS
+      - name: Upload exact WordPress JSON for chat delivery
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: k9-wordpress-final-json
+          path: final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
+          if-no-files-found: error
+          retention-days: 30

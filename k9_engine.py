@@ -88,6 +88,11 @@ def write_current_for_job(job):
         "orchestration_mode": orchestration_mode(),
         "first_open_blocker": None,
         "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY" if is_chat else "RUN_NATIVE_CHECK",
+        "allowed_action": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY" if is_chat else "RUN_NATIVE_CHECK_ONLY",
+        "route_lock": "EXACT_RUNTIME_CHAT_ENTRY_ONLY" if is_chat else "NATIVE_CHECK_ONLY",
+        "supervisor_actions_allowed": False,
+        "code_change_allowed": False,
+        "all_other_actions": "DENY",
         "chat_may_route": False,
         "publish_allowed": False
     }
@@ -211,6 +216,12 @@ def write_chat_entry(job):
         "first_action": "EXECUTE_BOUND_JOB_IMMEDIATELY",
         "first_response_rule": "NO_STATUS_REPORT_NO_DIAGNOSIS_NO_FIX_PROPOSAL_BEFORE_JOB_EXECUTION",
         "role": "WORKER_NOT_SUPERVISOR",
+        "route_lock": "EXACT_RUNTIME_CHAT_ENTRY_ONLY",
+        "supervisor_actions_allowed": False,
+        "code_change_allowed": False,
+        "all_other_actions": "DENY",
+        "writer_preflight_rule": ("RUN_BOUND_WRITE_PACKAGER_PREFLIGHT_AND_FIX_ALL_FINDINGS_BEFORE_RETURN" if is_writer else None),
+        "repair_scope_rule": ("REPAIR_ALL_REPORTED_FAILED_CHECK_FINDINGS_IN_ONE_PASS_ONLY" if station == "repair" else None),
         "forbidden": [
             "SEARCH_OTHER_CONCEPTS",
             "ROUTE_TO_NEXT_STATION",
@@ -641,6 +652,10 @@ def assert_execution_only_entry(job):
         raise K9Error("CHAT_ENTRY_JOB_MISMATCH")
     if entry.get("execution_policy") != "WORKER_EXECUTES_ONLY_NEVER_SUPERVISES":
         raise K9Error("CHAT_ENTRY_EXECUTION_POLICY_INVALID")
+    if entry.get("route_lock") != "EXACT_RUNTIME_CHAT_ENTRY_ONLY" or entry.get("all_other_actions") != "DENY":
+        raise K9Error("CHAT_ENTRY_ROUTE_LOCK_INVALID")
+    if entry.get("supervisor_actions_allowed") is not False or entry.get("code_change_allowed") is not False:
+        raise K9Error("CHAT_ENTRY_WORKER_PRIVILEGE_INVALID")
     if entry.get("input_authority_rule") != "BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_THIS_STATION":
         raise K9Error("CHAT_ENTRY_INPUT_AUTHORITY_RULE_INVALID")
     if entry.get("blocked_rule") != "IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY":
@@ -672,6 +687,10 @@ def assert_execution_only_entry(job):
             raise K9Error("CHAT_ENTRY_COMPLETE_WRITING_RULE_BINDING_INVALID")
         if entry.get("writing_rules_coverage_contract")!="K9_COMPLETE_RULE_COVERAGE_V1" or entry.get("complete_rule_application_required") is not True:
             raise K9Error("CHAT_ENTRY_RULE_COVERAGE_GUARD_INVALID")
+        if entry.get("writer_preflight_rule")!="RUN_BOUND_WRITE_PACKAGER_PREFLIGHT_AND_FIX_ALL_FINDINGS_BEFORE_RETURN":
+            raise K9Error("CHAT_ENTRY_WRITER_PREFLIGHT_GUARD_INVALID")
+        if job.get("station")=="repair" and entry.get("repair_scope_rule")!="REPAIR_ALL_REPORTED_FAILED_CHECK_FINDINGS_IN_ONE_PASS_ONLY":
+            raise K9Error("CHAT_ENTRY_REPAIR_SCOPE_GUARD_INVALID")
 
 def validate_submission(job, submission):
     if submission.get("contract") != "K9_SUBMISSION_V1":

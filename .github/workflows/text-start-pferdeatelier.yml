@@ -39,7 +39,8 @@ jobs:
           test ! -e concept_agent
           test ! -e control
           test ! -e isolated_system4
-      - name: Hard tests
+      - name: Hard tests once at explicit production entry
+        if: ${{ inputs.run_mode != 'inherit' }}
         run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Bind orchestration mode without changing station logic
         env:

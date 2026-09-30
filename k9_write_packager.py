@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str((ROOT/"quality").resolve()))
 import k9_rule_guard
+import k9_table_guard
 JOB=ROOT/"runtime"/"CURRENT_JOB.json"
 ENTRY=ROOT/"runtime"/"CHAT_ENTRY.json"
 RULES=ROOT/"contracts"/"K9_WRITING_RULES.json"
@@ -157,6 +158,33 @@ def validate_html(markup, article_type, metadata, research, rules):
     if not allowed.issubset(set(used)): raise PackError("NOT_ALL_RESEARCH_FACTS_USED")
     if word_count(markup)<750 and article_type=="Beratung": raise PackError("BERATUNG_WORD_COUNT_BELOW_750")
 
+def complete_rule_preflight(markup, metadata, rules):
+    writing=k9_rule_guard.evaluate(markup,metadata,rules)
+    table=k9_table_guard.evaluate(markup)
+    findings=list(writing.get("findings") or [])
+    table_findings=list(table.get("findings") or [])
+    table_rule=k9_table_guard.load_rule()
+    if table_rule.get("word_budget",{}).get("table_words_count_toward_article_minimum") is False:
+        minimum=int((rules.get("editorial_additive",{}).get("balance_policy",{}) or {}).get("hard_total_words_min") or 0)
+        if minimum and int(table.get("non_table_word_count") or 0)<minimum:
+            table_findings.append({
+                "code":"K9_RULE_TABLE_CANNOT_FILL_ARTICLE_WORD_FLOOR",
+                "actual_non_table_words":int(table.get("non_table_word_count") or 0),
+                "minimum":minimum
+            })
+    findings.extend(table_findings)
+    if writing.get("status")!="PASS" or findings:
+        codes=[]
+        for finding in findings:
+            if isinstance(finding,dict):
+                code=str(finding.get("code") or finding.get("error_code") or "UNKNOWN")
+            else:
+                code=str(finding)
+            if code and code not in codes:
+                codes.append(code)
+        raise PackError("WRITING_PREFLIGHT_REPAIR_REQUIRED:"+",".join(codes or ["UNKNOWN"]))
+    return True
+
 def _build_single(job,entry,rules,rules_sha,draft):
     if job.get("contract")!="K9_JOB_V1" or job.get("status")!="OPEN" or job.get("station") not in ("write","repair"):
         raise PackError("WRITE_JOB_INVALID")
@@ -181,6 +209,7 @@ def _build_single(job,entry,rules,rules_sha,draft):
     article_type=meta["article_type"]
     markup=ensure_all_fact_traces(markup,research)
     validate_html(markup,article_type,meta,research,rules)
+    complete_rule_preflight(markup,meta,rules)
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})
     link_bindings=[]

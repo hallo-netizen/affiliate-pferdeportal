@@ -1,7 +1,16 @@
 name: K9 greenfield selftest
 on:
+  workflow_dispatch:
   push:
     branches: [konzept9/greenfield-20260929]
+    paths:
+      - 'K9_CONTRACT.json'
+      - 'k9_*.py'
+      - 'quality/**'
+      - 'contracts/**'
+      - 'tests/**'
+      - '.github/workflows/k9-*.yml'
+      - '.github/workflows/text-start-pferdeatelier.yml'
 permissions:
   contents: read
 jobs:
