@@ -69,12 +69,12 @@ Affiliate-6.72.167-Finalstand:
 - Final Installer: `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.167.zip`;
 - Installer-SHA-256: `998730894c4dbd677bbee04bff947df740800a6c6ab9524b747a0da5a5f8adc0`;
 - technische Release-Autorität: `RELEASED`, `release_allowed=true`;
-- noch **kein WordPress-Live-Readback**.
+- Nutzer-Readback 2026-09-30: **6.72.167 ist in WordPress aktiv**. eBay-Verbindungsstatus ist noch frisch zu prüfen.
 
 GENAU EINE NEXT ACTION:
-`INSTALL_AFFILIATE_ZENTRALE_6_72_167_AND_READBACK`.
+`READBACK_EBAY_CONNECTION_STATUS_ON_AFFILIATE_6_72_167`.
 
-Exakt den final gegateten Installer mit SHA-256 `998730894c4dbd677bbee04bff947df740800a6c6ab9524b747a0da5a5f8adc0` installieren. Danach ausschließlich WordPress-Version/Aktivstatus und den eBay-Status readbacken. Erst danach reale Affiliate-Housekeeping-Bereinigung und dieselbe Datenbank-/Performance-Nachmessung ausführen.
+WordPress → `Affiliate-Zentrale` → `Netzwerke & API` → Karte `eBay`. Dort den aktuellen Status sowie `Letzte Zugangsprüfung`/Meldung lesen und anschließend einmal `Speichern & OAuth prüfen` ausführen. Danach eBay-Status erneut lesen. Erst bei erfolgreichem Readback reale Affiliate-Housekeeping-Bereinigung und dieselbe Datenbank-/Performance-Nachmessung ausführen.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
