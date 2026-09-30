@@ -3,59 +3,83 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN RESEARCH COMPLETE / V1.9.1 LIVE DEPLOY-READBACK FEHLER REPRODUZIERT / V1.9.2 HARD PASS / LIVE-RETEST NÄCHSTES
+STATUS: BUCHBINDEN RESEARCH COMPLETE / V1.9.2 LIVE READBACK FAIL / ROLLBACK PASS / LIVE-URSACHE OFFEN / DIAGNOSE POSITIV+NEGATIV PASS
 
 ## Harte Abnahmeregel
 
 **Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
+Ein synthetischer Einzeltest reicht nicht: Für einen behaupteten Live-Fix muss der echte Produktionspfad mit dem echten Paket simuliert sein.
+
 ## Live-Befund
 
-Der Buchbinden-READ_ONLY_PREVIEW lief bis zum echten Deployment.
+Auch V1.9.2 scheiterte live mit:
 
-Live:
 `Readback fehlgeschlagen: DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
 
-Damit wurde nichts als erfolgreich abgenommen; Rollback hat den Vorzustand wiederhergestellt.
+V1.9.2 ist damit nicht abgenommen.
 
-## Root Cause
+## Tatsächlicher gebundener Ausgangszustand
 
-V1.9.1:
-Exact-Slug-Zielobjekt mit richtigem Namen, aber falschem nativen Parent → `ADOPT_EXISTING` trotz `changed_fields:[parent]` → Parent nicht geschrieben → Readback-Mismatch.
+Der bestehende Live-Research-Snapshot vor dem Write enthält keines der sieben Buchbinden-Zielobjekte.
 
-## Fix
+Für den echten Kandidaten ergibt die lokale Preflight-Simulation deshalb:
+- CREATE: 7;
+- UPDATE: 0;
+- ADOPT_EXISTING: 0.
 
-Aktuell:
-`Affiliate-Portal Kategorie-Workflow V1.9.2`
+Der frühere angenommene Existing-Parent-Fall war nicht der reale Livepfad.
 
-SHA-256:
-`8d462ee585ee0921772c0deb56b9829b7e7819a618dfdfc441e06bd3afa79ff8`
+## Exakte Produktionssimulation
+
+Mit dem echten Buchbinden-READ_ONLY_PREVIEW und dem echten Research-Paket, lokal nur testseitig neu signiert:
+
+- Validator PASS;
+- Research-Binding PASS;
+- Research-Evidence PASS;
+- Comparator PASS;
+- Deployment-Preflight: 7 CREATE;
+- Apply + Readback: PASS.
+
+Der Livefehler lässt sich im bisherigen WordPress-Mock deshalb noch nicht reproduzieren.
+
+## Feldgenaue Diagnose
+
+Ein diagnostischer V1.9.3-Stand speichert den fehlgeschlagenen Readback vor Rollback und nennt:
+- konkreten node/path;
+- erwartete Werte;
+- tatsächliche Werte;
+- abweichende Felder.
 
 Positiv:
-- exakter reproduzierter Fehlerfall → UPDATE → DEPLOYED_AND_READBACK_PASS;
-- Taxonomy + Page Parent-Korrektur PASS;
-- Rollback-Restore PASS;
-- Fresh-Unpack 251/251 PASS.
+- echter 7-CREATE-Plan → PASS.
 
-Negativ/fail-closed:
-- V1.9.1 Regression erzeugt exakt DEPLOY_READBACK_MISMATCH + Rollback PASS;
-- Slug-Konflikt mit anderem Namen bleibt BLOCKED;
-- andere concept_id-Bindung bleibt BLOCKED;
-- stale/manipulierter Plan bleibt BLOCKED.
+Negativ:
+- Slug-Mutation → slug;
+- Name-Mutation → name;
+- Parent-Mutation → parent;
+- concept_id-Mutation → concept_meta;
+- logischer Parent mutiert → logical_parent_meta;
+- jeweils automatischer Rollback PASS.
+
+Gesamtregression:
+251/251 PASS.
+PHP-Lint PASS.
+
+Dies ist ausdrücklich Diagnose, noch kein Live-Fix.
 
 ## Produktionsdatei
 
-Weiterhin derselbe fachlich geprüfte:
-`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json`
-
+Der fachliche Buchbinden-READ_ONLY_PREVIEW bleibt unverändert.
 Kein neuer Research-Lauf erforderlich.
 
 ## NEXT ACTION
 
-1. V1.9.2 installieren.
-2. denselben READ_ONLY_PREVIEW über `Arbeitsstand übernehmen` erneut laden, damit der alte V1.9.1-Dry-Run verworfen wird;
-3. `Finale Struktur freigeben`;
-4. `WordPress-Vorschau erstellen`;
-5. neuen geprüften Plan anwenden.
+**Nicht erneut deployen.**
 
-Nur bei erneutem BLOCKED/Fehler stoppen.
+Zuerst:
+`Kategorien → Protokoll → Protokoll als JSON exportieren`
+
+Die eine JSON hier bereitstellen.
+
+Dann wird der bereits gelaufene echte Dry-Run/Fehlerzustand ausgewertet, ohne einen weiteren WordPress-Write auszulösen.
