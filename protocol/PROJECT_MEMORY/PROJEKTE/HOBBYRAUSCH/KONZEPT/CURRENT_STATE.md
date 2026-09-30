@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN INTENT-OWNERSHIP GESETZT / V1.9.1 OWNER-HANDOFF IMPLEMENTIERT / TEXT-DUBLETTENGATE + FAQ-DATENPRÜFUNG OFFEN
+STATUS: BUCHBINDEN INTENT-OWNERSHIP GESETZT / V1.9.1 OWNER-HANDOFF IMPLEMENTIERT / PSTE 0.57.14 TEXT-DUBLETTENGATE LOKAL PASS / LIVE-ABNAHME + FAQ-DATENPRÜFUNG OFFEN
 
 ## Rolle
 
@@ -63,24 +63,28 @@ Prüfung:
 
 ### Noch offen
 
-`HOBBYRAUSCH/TEXT_REDAKTION` ist weiterhin fachlich/technisch noch nicht als Produktionssystem gebunden.
+`HOBBYRAUSCH/TEXT_REDAKTION` ist jetzt auf **PSTE 0.57.14 Editorial Ownership Gate / lokal HARD PASS** gebunden.
 
-Deshalb fehlt noch der **Downstream-Artikelgate** für:
+Der allgemeine Downstream-Artikelgate ist damit lokal implementiert für:
+- eindeutigen `owner_concept_id`;
+- verpflichtenden `semantic_intent_key` vor Artikelpromotion;
 - semantisch gleiche Intents mit anderer Formulierung;
-- bereits geplante/vorhandene Artikel;
-- Keyword-/Intent-Kannibalisierung vor Textproduktion.
+- bestehende exakte/answer-equivalente Dubletten;
+- Frageform ohne automatische FAQ-Owner-Autorität.
+
+Die reale WordPress-Abnahme dieses Anschlusses ist noch offen.
 
 FAQ-Tragfähigkeit bleibt datenoffen:
 mindestens 3, bevorzugt 4+, eigenständige Restintents müssen real belegt werden; sonst nicht künstlich auffüllen.
 
 ## Erster offener Blocker
 
-Nicht mehr das Kategorie-Plugin.
+Kein Entwicklungsblocker mehr im Kategorie- oder Ownership-Gate.
 
-Offen ist jetzt die **allgemeingültige Text-/Redaktionsprüfung**, die den V1.9.1-Handoff konsumiert und vor Artikelerstellung semantische Dubletten/Kannibalisierung fail-closed blockiert.
+Offen ist jetzt die **reale gemeinsame Abnahme** von V1.9.1 → PSTE 0.57.14 sowie anschließend die datenbasierte Buchbinden-/FAQ-Prüfung.
 
 ## NEXT ACTION
 
-Kein weiteres Kategorie-Plugin bauen.
+Kein weiteres Plugin bauen.
 
-Als Nächstes den allgemeinen Downstream-Artikelgate auf den V1.9.1-Handoff binden und danach Buchbinden als ersten Realfall durch DataForSEO-/SERP- und Ownership-Prüfung laufen lassen.
+Als Nächstes V1.9.1 live sauber zurückrollen/retesten, den Editorial-Handoff in PSTE 0.57.14 importieren und danach Buchbinden als ersten Realfall durch DataForSEO-/SERP- und Ownership-Prüfung laufen lassen.
