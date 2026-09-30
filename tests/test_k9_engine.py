@@ -193,6 +193,7 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(entry["job_path"],"runtime/CURRENT_JOB.json")
         self.assertEqual(entry["submission_path"],"submissions/"+job["job_id"]+".json")
         self.assertEqual(entry["output_contract"],"K9_RESEARCH_PRODUCT_V1")
+        self.assertEqual(entry["first_action"],"EXECUTE_BOUND_JOB_IMMEDIATELY")
         self.assertEqual(entry["required_output_fields"],["sources","portal_links","decision_support","fact_pack","product_sha256"])
         self.assertEqual(entry["output_field_sources"]["portal_links"],"COPY_EXACTLY_FROM_JOB_INPUT_PRODUCTS_PORTAL_CONTEXT_PORTAL_LINKS")
         self.assertEqual(entry["execution_policy"],"WORKER_EXECUTES_ONLY_NEVER_SUPERVISES")
@@ -377,6 +378,17 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(rb["sources"][0]["source_id"],"src-b")
         self.assertEqual(ra["product_sha256"],k.stable({x:y for x,y in ra.items() if x!="product_sha256"}))
         self.assertTrue(by_id["a"]["input_product_refs"]["research"]["path"].startswith("warehouse/research/"))
+
+    def test_write_chat_entry_uses_writer_draft_packager_path(self):
+        self.finish_research(1)
+        job=k.prepare("write",1)["job"]
+        entry=k.load_json(k.CHAT_ENTRY)
+        self.assertEqual(entry["submission_path"],"writer_drafts/"+job["job_id"]+".json")
+        self.assertEqual(entry["output_contract"],"K9_WRITER_DRAFT_V1")
+        self.assertEqual(entry["completion_rule"],"WRITE_EXACT_DRAFT_TO_BOUND_WRITER_DRAFT_PATH")
+        self.assertEqual(entry["packager_path"],"k9_write_packager.py")
+        self.assertEqual(entry["writing_rules_path"],"contracts/K9_WRITING_RULES.json")
+        self.assertEqual(entry["required_output_fields"],["contract","job_id","item_id","title","content_html"])
 
     def test_article_wrong_research_binding_is_blocked(self):
         self.finish_research(1)

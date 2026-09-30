@@ -82,6 +82,9 @@ def current_job():
     return data
 
 def write_chat_entry(job):
+    station = job["station"]
+    is_writer = station in ("write", "repair")
+    output_path = ("writer_drafts/" if is_writer else "submissions/") + job["job_id"] + ".json"
     entry = {
         "contract": "K9_CHAT_ENTRY_V1",
         "concept": "K9",
@@ -89,15 +92,18 @@ def write_chat_entry(job):
         "repository": "hallo-netizen/affiliate-pferdeportal",
         "branch": "konzept9/greenfield-20260929",
         "job_path": "runtime/CURRENT_JOB.json",
-        "submission_path": "submissions/" + job["job_id"] + ".json",
+        "submission_path": output_path,
         "job_id": job["job_id"],
         "job_sha256": job["job_sha256"],
-        "station": job["station"],
+        "station": station,
         "item_count": job["item_count"],
         "allowed_action": "EXECUTE_EXACT_STATION_ONLY",
         "execution_policy": "WORKER_EXECUTES_ONLY_NEVER_SUPERVISES",
         "input_authority_rule": "BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_THIS_STATION",
         "blocked_rule": "IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY",
+        "first_action": "EXECUTE_BOUND_JOB_IMMEDIATELY",
+        "first_response_rule": "NO_STATUS_REPORT_NO_DIAGNOSIS_NO_FIX_PROPOSAL_BEFORE_JOB_EXECUTION",
+        "role": "WORKER_NOT_SUPERVISOR",
         "forbidden": [
             "SEARCH_OTHER_CONCEPTS",
             "ROUTE_TO_NEXT_STATION",
@@ -111,11 +117,14 @@ def write_chat_entry(job):
             "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
             "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
         ],
-        "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB",
+        "completion_rule": ("WRITE_EXACT_DRAFT_TO_BOUND_WRITER_DRAFT_PATH" if is_writer
+                            else "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB"),
         "worker_type": job["worker_contract"]["worker_type"],
         "output_contract": job["worker_contract"]["output_contract"],
         "required_output_fields": job["worker_contract"].get("required_output_fields", []),
-        "output_field_sources": job["worker_contract"].get("output_field_sources", {})
+        "output_field_sources": job["worker_contract"].get("output_field_sources", {}),
+        "packager_path": ("k9_write_packager.py" if is_writer else None),
+        "writing_rules_path": ("contracts/K9_WRITING_RULES.json" if is_writer else None)
     }
     write_json(CHAT_ENTRY, entry)
     return entry
@@ -258,6 +267,16 @@ def prepare(station, batch_size, source_run_id="manual"):
     if existing is not None:
         if existing["station"] != station:
             raise K9Error("ACTIVE_JOB_EXISTS_FOR_OTHER_STATION")
+        latest_contract = worker_contract(station)
+        if existing.get("worker_contract") != latest_contract:
+            core = dict(existing)
+            core["worker_contract"] = latest_contract
+            core.pop("job_id", None)
+            core.pop("job_sha256", None)
+            core["job_id"] = "K9-" + station.upper() + "-" + stable(core)[:16]
+            core["job_sha256"] = stable(core)
+            write_json(CURRENT_JOB, core)
+            existing = core
         write_chat_entry(existing)
         write_status()
         return {"status": "EXISTING_JOB_REUSED", "job": existing}

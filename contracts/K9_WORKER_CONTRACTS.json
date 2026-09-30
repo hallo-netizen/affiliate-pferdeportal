@@ -54,7 +54,7 @@
     "write": {
       "worker_type": "CHAT_WRITE_WORKER",
       "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_IN_THIS_JOB",
-      "output_contract": "K9_ARTICLE_PRODUCT_V1",
+      "output_contract": "K9_WRITER_DRAFT_V1",
       "must": [
         "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
         "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
@@ -64,7 +64,10 @@
         "HASH_COMPLETE_ARTICLE_PRODUCT",
         "EXECUTE_EXACT_OPEN_STATION_ONLY",
         "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
-        "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER"
+        "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+        "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+        "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+        "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION"
       ],
       "forbidden": [
         "DO_NEW_RESEARCH",
@@ -78,8 +81,24 @@
         "RESET_OR_REPLACE_TEST_STATE",
         "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
         "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
-        "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
-      ]
+        "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+        "WRITE_DIRECTLY_TO_SUBMISSIONS",
+        "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+      ],
+      "required_output_fields": [
+        "contract",
+        "job_id",
+        "item_id",
+        "title",
+        "content_html"
+      ],
+      "output_field_sources": {
+        "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+        "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+        "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+        "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE",
+        "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY"
+      }
     },
     "check": {
       "worker_type": "K9_NATIVE_MACHINE_CHECK",
@@ -111,7 +130,7 @@
     "repair": {
       "worker_type": "CHAT_REPAIR_WORKER",
       "input_rule": "USE_ONLY_BOUND_RESEARCH_ARTICLE_AND_FAILED_CHECK",
-      "output_contract": "K9_ARTICLE_PRODUCT_V1",
+      "output_contract": "K9_WRITER_DRAFT_V1",
       "must": [
         "REPAIR_ONLY_REPORTED_FAILURES",
         "PRESERVE_RESEARCH_PRODUCT_BINDING",
@@ -119,7 +138,10 @@
         "HASH_COMPLETE_ARTICLE_PRODUCT",
         "EXECUTE_EXACT_OPEN_STATION_ONLY",
         "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
-        "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER"
+        "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+        "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+        "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+        "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION"
       ],
       "forbidden": [
         "DO_NEW_RESEARCH",
@@ -133,8 +155,24 @@
         "RESET_OR_REPLACE_TEST_STATE",
         "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
         "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
-        "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
-      ]
+        "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+        "WRITE_DIRECTLY_TO_SUBMISSIONS",
+        "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+      ],
+      "required_output_fields": [
+        "contract",
+        "job_id",
+        "item_id",
+        "title",
+        "content_html"
+      ],
+      "output_field_sources": {
+        "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+        "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+        "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+        "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE",
+        "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY"
+      }
     }
   },
   "execution_discipline": {
