@@ -23,82 +23,82 @@
           "claim_register_hash": "8b0f5c9adc2c4721783f1a1942d218d9f0a9e916563e3aa6b29b039c65c2aac2",
           "claims": [
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "72b79db6839a200f7a592b992c7d059a85a2c55dbb2e1a1d5687b2b41a46d9ea",
               "fact_id": "FACT-AKKU-KABEL-001",
               "locator": "Cordless, lines 282-286",
               "source_id": "SRC-WAHL-CORDED-CORDLESS-20260930",
               "statement": "Ein Akkugerät bietet mehr Bewegungsfreiheit und ist besonders praktisch, wenn am Scherplatz kein Netzanschluss verfügbar ist.",
               "subject_scope": "Bewegungsfreiheit und Stromzugang",
-              "time_scope": "allgemeine Produktauswahl",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
               "article_types": [
                 "Beratung"
               ],
-              "evidence_text_sha256": "72b79db6839a200f7a592b992c7d059a85a2c55dbb2e1a1d5687b2b41a46d9ea"
-            },
-            {
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "a4a90c332b076027d52825405e7c31dcaffee0b39f7c426c3d9ee2b6f7f9ef0c",
               "fact_id": "FACT-AKKU-KABEL-002",
               "locator": "Cordless, lines 284-286",
               "source_id": "SRC-WAHL-CORDED-CORDLESS-20260930",
               "statement": "Bei jungen oder nervösen Pferden kann ein fehlendes Stromkabel die Handhabung erleichtern, weil kein Kabel am Boden liegt; zugleich ist die Akkulaufzeit begrenzt und für längere Einsätze kann ein Ersatzakku sinnvoll sein.",
               "subject_scope": "Sicherheit und Akkulaufzeit",
-              "time_scope": "allgemeine Produktauswahl",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
               "article_types": [
                 "Beratung"
               ],
-              "evidence_text_sha256": "a4a90c332b076027d52825405e7c31dcaffee0b39f7c426c3d9ee2b6f7f9ef0c"
-            },
-            {
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "feb3b5d37bbad2acead3dad183a3eaa7e48b983bb717f6033fc4a6a385741c1c",
               "fact_id": "FACT-AKKU-KABEL-003",
               "locator": "Corded, lines 288-291",
               "source_id": "SRC-WAHL-CORDED-CORDLESS-20260930",
               "statement": "Netzbetriebene Schermaschinen liefern bei vorhandener Steckdose kontinuierlich Energie und eignen sich deshalb besonders für längere Scherarbeiten, schränken die Bewegungsfreiheit durch das Kabel aber stärker ein.",
               "subject_scope": "Dauerbetrieb und Kabel",
-              "time_scope": "allgemeine Produktauswahl",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
               "article_types": [
                 "Beratung"
               ],
-              "evidence_text_sha256": "feb3b5d37bbad2acead3dad183a3eaa7e48b983bb717f6033fc4a6a385741c1c"
-            },
-            {
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "e0977b055cc421ec3c7e90efa4ccb6079fba381ce93302d4d2ceb596f15aae2e",
               "fact_id": "FACT-AKKU-KABEL-004",
               "locator": "Factors to consider: Horse Clipping Frequency",
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Wie oft und wie viele Pferde geschoren werden, ist ein zentrales Auswahlkriterium; bei regelmäßigem Einsatz oder mehreren Pferden steigt die Bedeutung von Ausdauer und passender Geräteklasse.",
               "subject_scope": "Einsatzhäufigkeit",
-              "time_scope": "allgemeine Produktauswahl",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
               "article_types": [
                 "Beratung"
               ],
-              "evidence_text_sha256": "e0977b055cc421ec3c7e90efa4ccb6079fba381ce93302d4d2ceb596f15aae2e"
-            },
-            {
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "ebc097debe9f97029ca5b3fe6d1ed478def69cdadeb8e5165a0fb2fc1b7f262a",
               "fact_id": "FACT-AKKU-KABEL-005",
               "locator": "Factors to consider: Power Source",
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Bei der Stromversorgung sollte vor dem Kauf geklärt werden, ob am Einsatzort zuverlässig Netzstrom verfügbar ist oder ob kabellose Bewegungsfreiheit wichtiger ist.",
               "subject_scope": "Stromversorgung",
-              "time_scope": "allgemeine Produktauswahl",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
               "article_types": [
                 "Beratung"
               ],
-              "evidence_text_sha256": "ebc097debe9f97029ca5b3fe6d1ed478def69cdadeb8e5165a0fb2fc1b7f262a"
-            },
-            {
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "9be3a7c0891aa45d4d68c25ff0eafcacd0593892c7b1782d461ce89b4ee26c6a",
               "fact_id": "FACT-AKKU-KABEL-006",
               "locator": "Factors to consider: Horse’s Temperament; weight, balance",
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Bei nervösen oder jungen Pferden sowie bei längerer Arbeit sind Geräusch, Vibration, Gewicht und Balance wichtige Kriterien für eine gut kontrollierbare Schermaschine.",
               "subject_scope": "Temperament und Ergonomie",
-              "time_scope": "allgemeine Produktauswahl",
-              "article_types": [
-                "Beratung"
-              ],
-              "evidence_text_sha256": "9be3a7c0891aa45d4d68c25ff0eafcacd0593892c7b1782d461ce89b4ee26c6a"
+              "time_scope": "allgemeine Produktauswahl"
             }
           ],
           "conclusion_evidence_coverage": "PASS",
@@ -112,6 +112,7 @@
             "FACT-AKKU-KABEL-005",
             "FACT-AKKU-KABEL-006"
           ],
+          "fact_pack_hash": "37c87a1f3d738b34dad3f2cd7b70b986ea681876e4138f6b8d2394c9686e592f",
           "fact_pack_id": "FP-K9-AKKU-KABEL-20260930",
           "placeholder_content_status": "PASS",
           "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
@@ -120,8 +121,7 @@
           "status": "SOURCE_VERIFIED_PRODUCTION_READY",
           "table_evidence_coverage": "PASS",
           "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
-          "title_scope": "pferdeschermaschine_akku_oder_kabel",
-          "fact_pack_hash": "37c87a1f3d738b34dad3f2cd7b70b986ea681876e4138f6b8d2394c9686e592f"
+          "title_scope": "pferdeschermaschine_akku_oder_kabel"
         },
         "portal_links": [
           {
@@ -143,6 +143,7 @@
             "section_id": "further_information"
           }
         ],
+        "product_sha256": "e5caafd3487b5d8d5409c1eaf56fc913fcd687c8759e8e0fdbc18479dae7baca",
         "sources": [
           {
             "source_id": "SRC-WAHL-CORDED-CORDLESS-20260930",
@@ -154,8 +155,7 @@
             "title": "Which Clipper is Right for Me and My Horse?",
             "url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/"
           }
-        ],
-        "product_sha256": "e5caafd3487b5d8d5409c1eaf56fc913fcd687c8759e8e0fdbc18479dae7baca"
+        ]
       }
     }
   ],

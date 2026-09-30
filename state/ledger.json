@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 21,
+  "generation": 22,
   "items": [
     {
       "item_id": "k9-1ff3dfabfed47a0c47c8df13",
@@ -51,12 +51,18 @@
         "target_keyword": "Pferdeschermaschine Akku oder Kabel",
         "title": "Pferdeschermaschine mit Akku oder Kabel: Was passt besser?"
       },
-      "products": {},
+      "products": {
+        "research": {
+          "job_id": "K9-RESEARCH-f82d23dbc475e65f",
+          "path": "warehouse/research/K9-RESEARCH-f82d23dbc475e65f.json",
+          "sha256": "6764afed22b63c897d1e6526930aaa7d71a01671be2fe304761d0c16770e8fcc"
+        }
+      },
       "revision": 0,
       "stages": {
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
-        "research": "PENDING",
+        "research": "DONE",
         "write": "PENDING"
       },
       "title": "Pferdeschermaschine mit Akku oder Kabel: Was passt besser?"
