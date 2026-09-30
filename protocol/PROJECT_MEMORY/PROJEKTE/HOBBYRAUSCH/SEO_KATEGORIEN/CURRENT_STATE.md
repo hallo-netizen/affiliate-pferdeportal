@@ -3,73 +3,80 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN RESEARCH COMPLETE / 2× LIVE READBACK FAIL MIT 7 CREATE / V1.9.3 DIAGNOSE POS+NEG HARD PASS / DIAGNOSE-LIVERUN NÄCHSTES
+STATUS: BUCHBINDEN RESEARCH COMPLETE / LIVE-ROOT-CAUSE BEWIESEN / V1.9.4 EXAKTER PRODUKTIONSPFAD POS+NEG HARD PASS / LIVE-RETEST NÄCHSTES
 
 ## Harte Abnahmeregel
 
 **Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-## Live-Protokoll – jetzt bewiesen
+## Live-Root-Cause
 
-Die beiden echten Buchbinden-Dry-Runs waren identisch:
-- CREATE 7;
-- ADOPT_EXISTING 0;
-- UPDATE 0;
-- UNCHANGED 0.
+V1.9.3 hat den realen Fehler feldgenau offengelegt:
 
-Beide Apply-Versuche:
-`DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
+`node:hdc-21557545f2e7cc51`
+`Feld: name`
 
-Damit ist der Fehler eindeutig im CREATE→Readback-Pfad eingegrenzt.
+Knoten:
+`Techniken & Praxis`
 
-## Lokale Reproduktion
+WordPress-Core speichert den Termnamen intern escaped:
+`Techniken &amp; Praxis`.
 
-Exakter echter Buchbinden-Kandidat:
-- Preflight 7 CREATE;
-- lokaler Deploy+Readback PASS.
+Der bisherige Readback verglich diesen rohen DB-Wert gegen den Klartextnamen und produzierte dadurch einen falschen Mismatch.
 
-Daraus folgt:
-Der lokale Mock bildet mindestens eine Live-WordPress-Abweichung noch nicht ab.
+## Exakte Altcode-Reproduktion
 
-## Diagnostischer V1.9.3-Stand
+Mit dem echten Buchbinden-Kandidaten, 7 CREATE und WordPress-Core-Term-Escaping reproduziert V1.9.3 wortgleich:
+
+`DEPLOY_READBACK_MISMATCH @ node:hdc-21557545f2e7cc51 | Felder: name | Automatischer Rollback: PASS`
+
+## Fix V1.9.4
 
 Installer SHA:
-`6bd488625e545a1921d88423c1658792d8747aa81b035140c93bcc1174a4fda3`
+`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
 
-Kein Produktionsfix.
+Taxonomie-Namen werden beim Readback ausschließlich von WordPress-Core-Escaping zurück in Klartext normalisiert.
 
-Erfasst beim Readback je Knoten:
-- name;
-- slug;
-- parent;
-- concept_meta;
-- logical_parent_meta;
-- jeweils expected und actual.
+Keine fachliche Strukturänderung.
 
-Positiv-/Negativsimulation:
-- exakter 7-CREATE-Pfad PASS;
-- absichtlich falscher slug erkannt;
-- falscher name erkannt;
-- falscher parent erkannt;
-- falsches concept_meta erkannt;
-- falsches logical_parent_meta erkannt;
-- jeweiliger Rollback PASS.
+## Positivsimulation
+
+Echter Produktionspfad:
+- 7 CREATE;
+- Core-Escaping aktiv;
+- `Techniken & Praxis` intern `Techniken &amp; Praxis`;
+- Deploy + Readback PASS.
+
+## Negativsimulation
+
+Weiterhin korrekt BLOCKED:
+- echter falscher Name;
+- doppelt kodierter/falscher Name;
+- falscher Slug;
+- falscher Parent;
+- falsche concept_id;
+- falscher logical parent.
+
+Rollback jeweils PASS.
 
 Regression:
-251/251 PASS.
-Fresh-Unpack PHP PASS.
-Runtime-Parität 22/22.
+- Source 251/251 PASS;
+- Fresh Installer 251/251 PASS;
+- PHP Source 25/25 PASS;
+- PHP Installer 17/17 PASS;
+- Runtime-Parität 22/22 PASS.
 
 ## NEXT ACTION
 
-V1.9.3 installieren und den **bereits vorhandenen** Dry-Run genau einmal über
+V1.9.4 installieren.
+
+Dann den bereits vorhandenen 7-CREATE-Dry-Run genau einmal über
 `Geprüften Plan anwenden`
 ausführen.
 
 Kein neuer Research-Lauf.
 Keine neue Datei.
-Kein neuer Dry-Run nötig.
+Kein neuer Dry-Run.
 
-Wenn Live erneut abweicht:
-Die Fehlermeldung vollständig hier einfügen.
-Sie enthält jetzt den exakten Knoten und Soll/Ist-Feldwert; danach wird erst der reale Ursachenfix gebaut.
+Erwartung:
+`Deployment abgeschlossen` und `Schreiben und Readback erfolgreich.`
