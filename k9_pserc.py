@@ -88,41 +88,6 @@ def canonical_fact_pack(research):
         "title_scope":str(fp.get("title_scope") or ""),
     }
 
-def _trace_match(markup,fid):
-    for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>\s*</span>',markup,re.I):
-        a=re.search(r'\bdata-fact-id=["\']([^"\']+)["\']',m.group(0),re.I)
-        if a and a.group(1)==fid:
-            return m
-    return None
-
-def _fact_target_match(markup,fid):
-    for m in re.finditer(r'<[a-z][a-z0-9]*\b[^>]*\bdata-fact-ids=["\']([^"\']+)["\'][^>]*>',markup,re.I):
-        if fid in m.group(1).split():
-            return m
-    return None
-
-def _attr_value(tag,name):
-    m=re.search(name+r'="([^"]+)"',tag,re.I)
-    if m: return m.group(1)
-    m=re.search(name+r"='([^']+)'",tag,re.I)
-    return m.group(1) if m else ""
-
-def _full_trace_match(markup,fid):
-    for m in re.finditer(r'<span[^>]*></span>',markup,re.I):
-        tag=m.group(0)
-        if "ppm-source-trace" not in tag:
-            continue
-        if _attr_value(tag,"data-fact-id")==fid:
-            return m
-    return None
-
-def _fact_target_match(markup,fid):
-    for m in re.finditer(r'<[A-Za-z][A-Za-z0-9:-]*[^>]*>',markup):
-        value=_attr_value(m.group(0),"data-fact-ids")
-        if value and fid in value.split():
-            return m
-    return None
-
 def _attr_value(tag,name):
     m=re.search(name+r'="([^"]+)"',tag,re.I)
     if m: return m.group(1)
@@ -142,10 +107,11 @@ def _trace_candidate(markup,fid,statement):
     statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(statement or "").casefold()))
     candidates=[]
     for tagname in ("p","li","td"):
-        pattern=r"<"+tagname+r"\\b[^>]*>.*?</"+tagname+r">"
+        pattern="<"+tagname+r"(?: [^>]*)?>.*?</"+tagname+">"
+        opener_pattern="<"+tagname+r"(?: [^>]*)?>"
         for m in re.finditer(pattern,markup,re.I|re.S):
             segment=m.group(0)
-            opener=re.match(r"<"+tagname+r"\\b[^>]*>",segment,re.I)
+            opener=re.match(opener_pattern,segment,re.I)
             if not opener:
                 continue
             value=_attr_value(opener.group(0),"data-fact-ids")
