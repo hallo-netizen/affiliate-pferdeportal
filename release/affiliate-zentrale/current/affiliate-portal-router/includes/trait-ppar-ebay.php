@@ -2301,8 +2301,8 @@ trait PPAR_Ebay_Trait {
         return 'ppar_ebay_token_' . substr(hash('sha256', (string) ($settings['environment'] ?? '') . '|' . (string) ($settings['client_id'] ?? '')), 0, 24);
     }
 
-    private function ebay_access_token($settings, $force = false) {
-        if (method_exists($this, 'provider_channel_pause_gate')) {
+    private function ebay_access_token($settings, $force = false, $respect_channel_pause = true) {
+        if ($respect_channel_pause && method_exists($this, 'provider_channel_pause_gate')) {
             $channel_gate = $this->provider_channel_pause_gate('ebay');
             if (is_wp_error($channel_gate)) { return $channel_gate; }
         }
