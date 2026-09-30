@@ -39,7 +39,7 @@ jobs:
           git rm "$draft"
           git config user.name 'k9-write-packager-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -A state runtime warehouse
+          git add -A state runtime warehouse CURRENT_STATE.json
           git commit -m 'K9: package and accept exact sealed write product'
           git push
       - name: Automatically start native check after write or repair

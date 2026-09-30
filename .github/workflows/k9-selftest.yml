@@ -306,6 +306,11 @@ jobs:
               raise SystemExit("LIVE_FIRST_ACTION_NOT_EXECUTE")
           if entry.get("first_response_rule") != "NO_STATUS_REPORT_NO_DIAGNOSIS_NO_FIX_PROPOSAL_BEFORE_JOB_EXECUTION":
               raise SystemExit("LIVE_FIRST_RESPONSE_RULE_INVALID")
+          current=json.loads(Path("CURRENT_STATE.json").read_text())
+          if current.get("active_job",{}).get("job_id") != job.get("job_id") or current.get("active_job",{}).get("station") != job.get("station"):
+              raise SystemExit("LIVE_CURRENT_JOB_MISMATCH")
+          if current.get("orchestration_mode")=="AUTO_CHAIN" and current.get("status") not in ("OPEN_CHAT_WORKER_JOB","NATIVE_CHECK_RUNNING"):
+              raise SystemExit("LIVE_CURRENT_STATUS_INVALID")
           if job.get("station") == "research":
               required=["sources","portal_links","decision_support","fact_pack","product_sha256"]
               if entry.get("required_output_fields") != required:

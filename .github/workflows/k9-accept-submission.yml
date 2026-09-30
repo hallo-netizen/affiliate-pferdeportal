@@ -49,7 +49,7 @@ jobs:
           esac
           git config user.name 'k9-warehouse-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -A state runtime warehouse submissions
+          git add -A state runtime warehouse submissions CURRENT_STATE.json
           git commit -m 'K9: accept complete exact station product'
           git push
           echo "next_station=$next_station" >> "$GITHUB_OUTPUT"

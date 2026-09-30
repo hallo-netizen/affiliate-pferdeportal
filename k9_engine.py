@@ -7,6 +7,7 @@ LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
 CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
 AUTO_CHAIN = ROOT / "runtime" / "AUTO_CHAIN.json"
+CURRENT_STATE = ROOT / "CURRENT_STATE.json"
 WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
 PORTAL_BINDINGS = ROOT / "contracts" / "K9_PORTAL_BINDINGS.json"
 STATUS_FILE = ROOT / "state" / "STATUS.json"
@@ -62,6 +63,67 @@ def set_orchestration_mode(mode, source_run_id="manual"):
         "status": "ORCHESTRATION_MODE_SET",
         "mode": orchestration_mode()
     }
+
+def write_current_for_job(job):
+    station = job["station"]
+    row = job["items"][0] if job.get("items") else {}
+    is_chat = station != "check"
+    current = {
+        "contract": "K9_CURRENT_STATE_V3",
+        "role": "SOLE_CURRENT_AUTHORITY",
+        "concept": "K9",
+        "branch": "konzept9/greenfield-20260929",
+        "status": "OPEN_CHAT_WORKER_JOB" if is_chat else "NATIVE_CHECK_RUNNING",
+        "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY" if is_chat else "K9_NATIVE_MACHINE_CHECK",
+        "active_job": {
+            "job_id": job["job_id"],
+            "station": station,
+            "article_title": row.get("title"),
+            "item_id": row.get("item_id"),
+            "runtime_entry": "runtime/CHAT_ENTRY.json" if is_chat else None,
+            "job_path": "runtime/CURRENT_JOB.json"
+        },
+        "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION" if is_chat else "NATIVE_MACHINE_ONLY",
+        "orchestration_mode": orchestration_mode(),
+        "first_open_blocker": None,
+        "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY" if is_chat else "RUN_NATIVE_CHECK",
+        "chat_may_route": False,
+        "publish_allowed": False
+    }
+    write_json(CURRENT_STATE, current)
+    return current
+
+def deterministic_next_from_report(report):
+    if report.get("repair_required", 0) > 0:
+        return "repair"
+    if report.get("ready_for_check", 0) > 0:
+        return "check"
+    if report.get("ready_for_write", 0) > 0:
+        return "write"
+    if report.get("research_open", 0) > 0:
+        return "research"
+    if report.get("total", 0) > 0 and report.get("fully_done") == report.get("total"):
+        return "finalize"
+    return None
+
+def write_current_transition(report):
+    nxt = deterministic_next_from_report(report)
+    current = {
+        "contract": "K9_CURRENT_STATE_V3",
+        "role": "SOLE_CURRENT_AUTHORITY",
+        "concept": "K9",
+        "branch": "konzept9/greenfield-20260929",
+        "status": "FINALIZE_PENDING" if nxt == "finalize" else "AUTO_CHAIN_TRANSITION_PENDING",
+        "operational_mode": "SYSTEM_ROUTING_ONLY",
+        "active_job": None,
+        "orchestration_mode": orchestration_mode(),
+        "first_open_blocker": None if nxt else "AUTO_CHAIN_NO_VALID_TRANSITION",
+        "next_action": "RUN_FINALIZER" if nxt == "finalize" else ("PREPARE_" + str(nxt).upper() if nxt else "STOP_AND_DIAGNOSE_TRANSITION"),
+        "chat_may_route": False,
+        "publish_allowed": False
+    }
+    write_json(CURRENT_STATE, current)
+    return current
 
 def worker_contract(station):
     data = load_json(WORKER_CONTRACTS)
@@ -331,6 +393,7 @@ def prepare(station, batch_size, source_run_id="manual"):
             existing = core
         write_chat_entry(existing)
         write_status()
+        write_current_for_job(existing)
         return {"status": "EXISTING_JOB_REUSED", "job": existing}
 
     data = ledger()
@@ -366,6 +429,7 @@ def prepare(station, batch_size, source_run_id="manual"):
     write_json(CURRENT_JOB, core)
     write_chat_entry(core)
     write_status(data)
+    write_current_for_job(core)
     return {"status": "NEW_JOB_PREPARED", "job": core}
 
 def _job_item(job, item_id):
@@ -657,6 +721,8 @@ def accept(path):
     if CHAT_ENTRY.exists():
         CHAT_ENTRY.unlink()
     final_report = write_status(data)
+    if orchestration_mode() == "AUTO_CHAIN":
+        write_current_transition(final_report)
     return {
         "status": "ACCEPTED",
         "job_id": job["job_id"],
@@ -671,17 +737,8 @@ def auto_next_station():
     if current_job() is not None:
         raise K9Error("AUTO_NEXT_ACTIVE_JOB_EXISTS")
     report = status_report()
-    if report["repair_required"] > 0:
-        nxt = "repair"
-    elif report["ready_for_check"] > 0:
-        nxt = "check"
-    elif report["ready_for_write"] > 0:
-        nxt = "write"
-    elif report["research_open"] > 0:
-        nxt = "research"
-    elif report["total"] > 0 and report["fully_done"] == report["total"]:
-        nxt = "finalize"
-    else:
+    nxt = deterministic_next_from_report(report)
+    if nxt is None:
         raise K9Error("AUTO_NEXT_NO_VALID_TRANSITION")
     return {"status": "AUTO_NEXT_READY", "next": nxt, "report": report}
 

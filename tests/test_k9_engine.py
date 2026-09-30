@@ -19,6 +19,7 @@ class K9Tests(unittest.TestCase):
         k.CURRENT_JOB = root / "runtime/CURRENT_JOB.json"
         k.CHAT_ENTRY = root / "runtime/CHAT_ENTRY.json"
         k.AUTO_CHAIN = root / "runtime/AUTO_CHAIN.json"
+        k.CURRENT_STATE = root / "CURRENT_STATE.json"
         k.STATUS_FILE = root / "state/STATUS.json"
         k.WAREHOUSE = root / "warehouse"
         k.PORTAL_BINDINGS = root / "contracts/K9_PORTAL_BINDINGS.json"
@@ -564,6 +565,27 @@ class K9Tests(unittest.TestCase):
     def test_auto_next_is_blocked_outside_auto_chain(self):
         with self.assertRaisesRegex(k.K9Error,"AUTO_NEXT_REQUIRES_ACTIVE_AUTO_CHAIN"):
             k.auto_next_station()
+
+
+    def test_auto_chain_prepare_synchronizes_current_authority(self):
+        k.set_orchestration_mode("auto_chain","test-run")
+        job=k.prepare("research",1)["job"]
+        current=k.load_json(k.CURRENT_STATE)
+        self.assertEqual(current["status"],"OPEN_CHAT_WORKER_JOB")
+        self.assertEqual(current["active_job"]["job_id"],job["job_id"])
+        self.assertEqual(current["active_job"]["station"],"research")
+        self.assertEqual(current["orchestration_mode"],"AUTO_CHAIN")
+        self.assertEqual(current["next_action"],"EXECUTE_RUNTIME_CHAT_ENTRY")
+
+    def test_auto_chain_accept_synchronizes_transition_current(self):
+        k.set_orchestration_mode("auto_chain","test-run")
+        job=k.prepare("research",1)["job"]
+        k.accept(self.submission(job,[self.research_row("a")],"current-sync-research.json"))
+        current=k.load_json(k.CURRENT_STATE)
+        self.assertEqual(current["status"],"AUTO_CHAIN_TRANSITION_PENDING")
+        self.assertIsNone(current["active_job"])
+        self.assertEqual(current["next_action"],"PREPARE_WRITE")
+        self.assertEqual(current["orchestration_mode"],"AUTO_CHAIN")
 
 if __name__=="__main__":
     unittest.main()
