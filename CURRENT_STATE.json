@@ -3,16 +3,11 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "goal_source": {
-    "repository": "hallo-netizen/affiliate-pferdeportal",
-    "ref": "main",
-    "path": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
-  },
   "status": "OPEN_CHAT_WORKER_JOB",
   "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
   "active_job": {
-    "job_id": "K9-WRITE-4608172043f2597d",
-    "station": "write",
+    "job_id": "K9-RESEARCH-51b228a51f6f3eb7",
+    "station": "research",
     "article_title": "So wählst du passende Schermaschinen für Pferde",
     "item_id": "k9-1ff3dfabfed47a0c47c8df13",
     "runtime_entry": "runtime/CHAT_ENTRY.json",
@@ -21,12 +16,10 @@
   "worker_binding": {
     "role": "WORKER_NOT_SUPERVISOR",
     "first_action": "READ_RUNTIME_CHAT_ENTRY_AND_EXECUTE_EXACT_JOB",
-    "predecessor_rule": "BOUND_RESEARCH_PRODUCT_IS_AUTHORITATIVE_INPUT",
     "forbidden": [
       "STATUS_REPORT_BEFORE_EXECUTION",
       "DIAGNOSE_OR_REDESIGN_WORKFLOW",
       "PROPOSE_OR_APPLY_SYSTEM_FIX",
-      "REOPEN_RESEARCH",
       "MANUALLY_ROUTE_NEXT_STATION",
       "RESET_TEST_STATE"
     ],
@@ -34,7 +27,7 @@
   },
   "routing": {
     "chat_may_route": false,
-    "after_write_submission": "K9_AUTOMATIC_ROUTING_ONLY"
+    "after_research_submission": "K9_AUTOMATIC_ROUTING_ONLY"
   },
   "quality": {
     "language_tool": "6.8",
@@ -44,11 +37,12 @@
     "wordpress_final_verify_required": true,
     "publish_allowed": false
   },
-  "fresh_chat_test": {
-    "reentry": "PASS",
-    "research_to_write": "PASS_AUTOMATIC",
-    "current_station": "WRITE",
-    "remaining_proof": "WRITE_TO_CHECK_REPAIR_IF_NEEDED_FINALIZER_PSERC_ENDSTEMPEL_WORDPRESS_STOP_WITH_ZERO_MANUAL_NUDGE"
+  "preflight": {
+    "research_contract_gate": "PASS_POSITIVE_NEGATIVE_SELFTEST_36714495691",
+    "missing_portal_links": "BLOCKS",
+    "wrong_portal_links": "BLOCKS",
+    "missing_decision_support": "BLOCKS",
+    "complete_research": "PASSES"
   },
   "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY"
 }
