@@ -1,14 +1,22 @@
 {
-  "active_job": null,
+  "active_job": {
+    "article_title": "Was ist ein Reitplatzplaner?",
+    "item_id": "k9-16024ee8a6c9b5e964f452e6",
+    "job_id": "K9-WRITE-8ec01399c3be14f9",
+    "job_path": "runtime/CURRENT_JOB.json",
+    "runtime_entry": "runtime/CHAT_ENTRY.json",
+    "station": "write"
+  },
   "branch": "konzept9/greenfield-20260929",
   "chat_may_route": false,
   "concept": "K9",
   "contract": "K9_CURRENT_STATE_V3",
   "first_open_blocker": null,
-  "next_action": "PREPARE_WRITE",
-  "operational_mode": "SYSTEM_ROUTING_ONLY",
+  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY",
+  "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
   "orchestration_mode": "AUTO_CHAIN",
   "publish_allowed": false,
   "role": "SOLE_CURRENT_AUTHORITY",
-  "status": "AUTO_CHAIN_TRANSITION_PENDING"
+  "status": "OPEN_CHAT_WORKER_JOB",
+  "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION"
 }

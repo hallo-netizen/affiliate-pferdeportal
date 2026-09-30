@@ -1,0 +1,204 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-16024ee8a6c9b5e964f452e6"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "research": {
+          "job_id": "K9-RESEARCH-5e13bb3343e89ce8",
+          "path": "warehouse/research/K9-RESEARCH-5e13bb3343e89ce8.json",
+          "sha256": "9fa3f53a2d3f65f8633561459e9b9d0104a5de3f2636f977dfe5783ed83f1fd5"
+        }
+      },
+      "input_products": {
+        "research": {
+          "item_id": "k9-16024ee8a6c9b5e964f452e6",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Grundfunktion: Reitboden lockern, mischen und einebnen",
+                "Typische Arbeitselemente wie Zinken sowie Schiene, Kufe oder Walze",
+                "Passung von Bauart und Einstellung zu Reitboden und Zug- oder Trägerfahrzeug"
+              ],
+              "decision_goal": "Für einen FAQ-Artikel knapp erklären, was ein Reitplatzplaner ist, welche Grundfunktion er erfüllt und wovon seine passende Ausführung abhängt."
+            },
+            "fact_pack": {
+              "article_type": "FAQ",
+              "article_type_coverage": "FAQ_COMPLETE",
+              "claim_register_hash": "0b8bf931e452d48524ffe9598fd7cbb5360a3a7cfa9a69c1098df70052f75a3c",
+              "claims": [
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "e8144ea9f5ecc1cc66cab53c26335085526b5db369d54ae9ad6f3c8781a2eb04",
+                  "fact_id": "RP_F1",
+                  "locator": "page text / product description",
+                  "source_id": "RP_WUPODO",
+                  "statement": "Ein Reitplatzplaner, auch Reitbahnplaner genannt, ist ein Pflegegerät für Reitböden, das den Boden je nach Bauart lockert, mischt und anschließend wieder einebnet.",
+                  "subject_scope": "Definition und grundlegende Funktion eines Reitplatzplaners",
+                  "time_scope": "zeitunabhängige allgemeine Gerätefunktion, geprüft 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "43080726f6b1b106ce43a4a9c74b1dff0e1325242e33d64902da25e380c5ed0a",
+                  "fact_id": "RP_F2",
+                  "locator": "page text / product description",
+                  "source_id": "RP_REITSAND",
+                  "statement": "Typische Reitplatzplaner arbeiten mit Zinken zum Auflockern und mit einer nachlaufenden Schiene, Kufe oder Walze zum Verteilen und Glätten des Reitbodenbelags.",
+                  "subject_scope": "Definition und grundlegende Funktion eines Reitplatzplaners",
+                  "time_scope": "zeitunabhängige allgemeine Gerätefunktion, geprüft 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "d9433c3fd3eb097f9395ea1b4eaa764cc51ab5f2e7ffd9c1a2d49faaee749a2d",
+                  "fact_id": "RP_F3",
+                  "locator": "page text / product description",
+                  "source_id": "RP_RASPLIE",
+                  "statement": "Reitplatzplaner gibt es für unterschiedliche Zug- und Trägerfahrzeuge sowie Reitbodenarten; deshalb müssen Arbeitsweise, Anbauart und Einstellung zum vorhandenen Boden und zum eingesetzten Fahrzeug passen.",
+                  "subject_scope": "Definition und grundlegende Funktion eines Reitplatzplaners",
+                  "time_scope": "zeitunabhängige allgemeine Gerätefunktion, geprüft 2026-09-30"
+                }
+              ],
+              "conclusion_evidence_coverage": "COMPLETE",
+              "contradiction_status": "NO_MATERIAL_CONTRADICTION_FOUND",
+              "domain": "Reitplatzpflege",
+              "fact_ids": [
+                "RP_F1",
+                "RP_F2",
+                "RP_F3"
+              ],
+              "fact_pack_hash": "c630b3bec456bc6e74c09c4f8108e44e42d663eabdabece98b2bafa96a4600b9",
+              "fact_pack_id": "k9-reitplatzplaner-faq-6eec2779d9c1029e4bb36e33",
+              "placeholder_content_status": "NONE",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "COMPLETE",
+              "source_manifest_hash": "06eedb3da1a42ae326adbd5820325ae526112324e3b2feb05535f0e532844e73",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "NOT_REQUIRED_FOR_FAQ",
+              "temporal_validity_status": "CURRENT_GENERAL_INFORMATION",
+              "title_scope": "was_ist_ein_reitplatzplaner"
+            },
+            "portal_links": [
+              {
+                "anchor": "Weide",
+                "href": "/weide/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Reitplatzpflege",
+                "href": "/weide/weide-reitplatzpflege/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Reitplatzplaner",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "6f344b1b6e81472e3a5adcfe1fea11ba23eb456bf5a23fc5559d23b2a3100318",
+            "sources": [
+              {
+                "source_id": "RP_WUPODO",
+                "title": "Reitplatzplaner | Reitbahnplaner für Traktoren | wupodo.de",
+                "url": "https://www.wupodo.de/reitplatzplaner"
+              },
+              {
+                "source_id": "RP_REITSAND",
+                "title": "Groomer W | Die Reitsand GmbH",
+                "url": "https://reitsand-gmbh.de/platz-pflegen-2/"
+              },
+              {
+                "source_id": "RP_RASPLIE",
+                "title": "Reitplatzplaner | Platz-Max | Rampelmann & Spliethoff",
+                "url": "https://www.rasplie.de/de/reitboden-weidepflege/pflegen/reitplatzplaner/"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-16024ee8a6c9b5e964f452e6",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "reitplatzplaner-faq",
+        "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+        "target_keyword": "Was ist ein Reitplatzplaner",
+        "title": "Was ist ein Reitplatzplaner?"
+      },
+      "revision": 0,
+      "title": "Was ist ein Reitplatzplaner?"
+    }
+  ],
+  "job_id": "K9-WRITE-8ec01399c3be14f9",
+  "job_sha256": "4b052f9e0dc85c2afaa542140b09a88e9911475ce9c73a5fbcb46148018bce87",
+  "ledger_generation": 30,
+  "source_run_id": "36748817897",
+  "station": "write",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "INVENT_NEW_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_IN_THIS_JOB",
+    "must": [
+      "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+      "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
+      "RETURN_FINAL_ARTICLE_HTML",
+      "BIND_RESEARCH_PRODUCT_SHA256",
+      "RETURN_PPM_ITEM_BOUND_TO_SAME_FACT_PACK",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "ADD_AT_LEAST_THREE_PPM_SOURCE_TRACE_SPANS_TO_LEXICALLY_SUPPORTING_FACTUAL_PARAGRAPHS",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_WRITE_WORKER"
+  }
+}
