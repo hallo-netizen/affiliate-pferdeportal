@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: ARCHITEKTURGRENZE KORRIGIERT / EIGENES HOBBY-DEPOT-TEXT-/SEO-PLUGIN NOCH NICHT GEBAUT / PSTE NUR REFERENZ
+STATUS: EIGENES HD-002 TEXT-/SEO-PLUGIN V0.1.0 HARD LOCAL PASS / LIVE-INSTALLATION OFFEN
 
 ## Rolle
 
@@ -11,55 +11,56 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_TEXT_REDAKTION`.
 
 ## Harte Projektgrenze
 
-Hobby Depot darf das Pferdeatelier-PSTE weder verändern noch als installierten Produktivbaustein voraussetzen.
+Hobby Depot besitzt jetzt einen eigenen Text-/SEO-Pluginstrang:
+`HD-002 – Hobby Depot SEO Themenengine`.
 
-Pferdeatelier-PSTE ist für Hobby Depot ausschließlich:
-- technische Referenz;
-- Vergleichsquelle für bewährte Duplicate-/Kannibalisierungslogik;
-- Vergleichsquelle für Performance-/Storage-Learnings.
+Pferdeatelier-PSTE ist nur Referenzquelle für bewährte allgemeine Mechanismen.
+Keine Runtime-Abhängigkeit, keine gemeinsamen Optionen/Tabellen, keine Bearbeitung des Pferdeatelier-Plugins.
 
-Nicht erlaubt:
-- Installation eines für Pferdeatelier gebauten PSTE-Pakets als Hobby-Depot-Zielplugin;
-- Änderung des live installierten Pferdeatelier-PSTE aus diesem Scope;
-- technische Abhängigkeit Hobby Depot → Pferdeatelier-PSTE.
+## Aktueller Pluginstand
 
-## Korrektur des bisherigen Arbeitsstands
+Version:
+`HDTE 0.1.0`
 
-Die zuvor erzeugten PSTE-0.57.14-Ownership-Pakete waren lokale Referenz-/Machbarkeitsprototypen.
+Installer:
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_HARD_LOCAL_PASS.zip`
 
-Sie sind für Hobby Depot:
-**NICHT INSTALLIEREN / NICHT PRODUKTIV VERWENDEN.**
+SHA-256:
+`c6b24fdff3499c1e9a1039fae722d6ad8418df215e55a07e394408bbcac9f2a5`
 
-Es wurde kein live installiertes Pferdeatelier-PSTE verändert.
+Eigene Identitäten:
+- Code: `HDTE_`;
+- Speicher/Optionen/Tabellen/Hooks: `hdte_`;
+- Projekt: `hobby_depot`.
 
-Der lokale Prototyp hat fachlich/technisch trotzdem belegt, dass folgende allgemeine Mechanismen funktionieren:
-- `owner_concept_id`;
-- `semantic_intent_key`;
-- semantische Dublettenblockade;
-- Frageform besitzt keine FAQ-Owner-Autorität;
-- V1.9.1-Kategorie-Handoff kann technisch konsumiert werden.
+Maschinelle Projektgrenze: PASS.
 
-Diese Erkenntnisse dürfen in ein eigenes Hobby-Depot-Plugin übernommen werden, nicht das Pferdeatelier-Plugin selbst.
+## Technische Funktionen
 
-## Zielarchitektur
+- DataForSEO-/Research-Basis aus der bewährten Engine übernommen;
+- aktuelle Storage-/Datenbankbereinigungsmechanik übernommen;
+- Ownership-Gate für V1.9.1-Handoff integriert;
+- semantische Dubletten/Kannibalisierung fail-closed;
+- neue eigenständige Artikelintents erlaubt;
+- answer-equivalente Varianten dürfen nicht den Owner wechseln;
+- Frageform erzeugt niemals automatisch FAQ-Ownership.
 
-Hobby Depot erhält genau **einen eigenen Text-/SEO-Pluginstrang**.
+## Prüfung
 
-Dieser soll:
-- den allgemeinen V1.9.1-Kategorie-Handoff lesen;
-- Artikel-Intent und Owner-Kategorie eindeutig binden;
-- Dubletten/Kannibalisierung fail-closed blockieren;
-- später die Hobby-Depot-Redaktionslogik tragen;
-- projektneutralen Code nutzen, wo sinnvoll;
-- keine Pferdeatelier-Fachdaten oder -Produktivzustände übernehmen.
+Fresh-Unpack:
+- PHP 80/80 PASS;
+- Ownership 11/11 PASS;
+- Frage≠FAQ 12/12 PASS;
+- Family 8/8 PASS;
+- Frontend 0 DB Reads/Writes;
+- Admin 0 Writes;
+- Koexistenz neben PSTE ohne Speicher-/Klassenkollision: PASS.
 
-Performance-/Storage-Learnings aus PSTE werden nur per Diff/Review übernommen, wenn sie für das neue Plugin tatsächlich relevant sind.
+## Buchbinden
 
-## Aktueller belastbarer Fachstand Buchbinden
+Fachliche Owner-Matrix bleibt gültig.
 
-Fachliche Ownership-Matrix und lokaler E2E-Prototyp sind belegt.
-
-DataForSEO-Bestand:
+DataForSEO:
 - Einstieg: Evidenz vorhanden;
 - Ausrüstung: Evidenz vorhanden;
 - Material: Mindestbreite vorhanden;
@@ -67,20 +68,10 @@ DataForSEO-Bestand:
 - Fragen/Probleme: Research-Gap;
 - FAQ: Research-Gap.
 
-## Erster offener Blocker
-
-Kein fachlicher Ownership-Blocker.
-
-Technisch fehlt der **eigene Hobby-Depot Text-/SEO-Pluginstrang**.
-
 ## NEXT ACTION
 
-Kein PSTE installieren oder verändern.
+Kein Pferdeatelier-PSTE installieren.
 
-Als Nächstes:
-1. kleinsten Funktionsumfang des einen Hobby-Depot Text-/SEO-Plugins aus dem bereits bewiesenen Ownership-Vertrag ableiten;
-2. nur allgemeine, relevante PSTE-Mechanismen als Referenz übernehmen;
-3. eigenes Namespace, eigene Options/Storage-Identitäten und eigenes Release-Artefakt;
-4. danach Buchbinden als erster E2E-Testfall.
+Vor HD-002-Liveinstallation nur noch prüfen, ob im Nachbarchat seit dem gebundenen Referenz-SHA ein neuerer Storage-/Performance-Stand veröffentlicht wurde.
 
-Keine Plugin-Orgie: genau ein Hobby-Depot Text-/SEO-Plugin.
+Danach HD-002 auf Hobby Depot installieren und den V1.9.1-Ownership-Handoff real importieren.
