@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: HD-001 V1.9.1 / HD-002 V0.1.1 HARD LOCAL PASS / HD-002 LIVE-RETEST OFFEN
+STATUS: HD-001 V1.9.1 TESTROLLBACK PASS / HD-002 V0.1.1 LIVE-MIGRATION PASS / PRODUKTIVER OWNER-HANDOFF FEHLT
 
 ## HD-001 – Kategorie-Workflow
 
@@ -12,38 +12,42 @@ STATUS: HD-001 V1.9.1 / HD-002 V0.1.1 HARD LOCAL PASS / HD-002 LIVE-RETEST OFFEN
 Lokale Vollprüfung:
 248/248 PASS.
 
-Der manuelle Live-Test wurde bis zum Kategorie-/Deployment-Testablauf durchgeführt; HD-002-Liveprüfung läuft danach separat weiter.
+Live-Test:
+- READ_ONLY_PREVIEW erneut übernommen;
+- finale Struktur freigegeben;
+- WordPress-Vorschau erstellt;
+- Testdeployment durchgeführt;
+- vollständiger Rollback PASS.
+
+Der verwendete Bestand bleibt ausdrücklich Testlabor und ist nicht der produktive Hobby-Depot-Kategorienstand.
 
 ## HD-002 – Hobby Depot SEO Themenengine
 
-Aktuell:
+Installiert:
 `V0.1.1 FRESH_INSTALL_MIGRATION_FIX_HARD_PASS`
 
-Installer SHA-256:
-`6230a7e7db47dc1c337106051cd658e2093e0a3873dbb4d9225749538123577d`
+Live:
+- sichere Migration COMPLETE;
+- normales Backend READY;
+- 0 Beiträge;
+- 0 Themenfamilien;
+- 0 nutzbare Kategorien;
+- Website-Gesamtbild noch nicht erfasst.
 
-V0.1.0:
-**SUPERSEDED**, weil live `HDTE_SITE_BASELINE_REQUIRED` bei einer Neuinstallation auftrat.
+## Erster offener Blocker
 
-V0.1.1:
-- Fresh Install vollständig lokal bis COMPLETE simuliert;
-- pausierten Fresh-Install-Job fortsetzen PASS;
-- Bestandsdaten ohne Baseline bleiben BLOCKED;
-- Daten-Drift während Fresh Install BLOCKED;
-- PHP 80/80;
-- Projektgrenze PASS;
-- Ownership 11/11;
-- Frage≠FAQ 12/12;
-- Family 8/8;
-- HD-001→HD-002 9/9;
-- Storage-/Performance-Kern 4/4 byte-identisch.
+Nicht HD-002 selbst.
+
+Es fehlt ein echter live vorhandener Hobby-Depot-Kategorienstand mit produktionsfähigem Editorial-Ownership-Handoff.
+
+Der alte Test-Handoff ist nicht verwendbar:
+27 ARTICLE_ONLY / 27 ohne owner_concept_id.
 
 ## NEXT ACTION
 
-V0.1.1 über V0.1.0 installieren.
+Nicht „Gesamtbestand erfassen“.
 
-Dann:
-**Hobby Depot Themenengine → Sichere Migration fortsetzen**
+Zuerst produktiven Buchbinden-Pilot in HD-001 aufbauen und live deployen.
 
-Erst nach READY:
-Owner-Handoff importieren → Gesamtbestand erfassen → Buchbinden-E2E.
+Danach:
+HD-002 übernimmt gültigen Owner-Handoff → Gesamtbestand erfassen → DataForSEO → Buchbinden-E2E.
