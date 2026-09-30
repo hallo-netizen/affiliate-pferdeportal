@@ -66,6 +66,7 @@ trait PPAR_Housekeeping_Trait {
         $now = time();
         $history_cutoff = $now - 90 * DAY_IN_SECONDS;
         $derived_cutoff = $now - 180 * DAY_IN_SECONDS;
+        $ebay_ended_cutoff = $now - 7 * DAY_IN_SECONDS;
         $audit_cutoff = $now - 365 * DAY_IN_SECONDS;
         $deleted = 0; $compacted = 0;
 
@@ -105,8 +106,8 @@ trait PPAR_Housekeeping_Trait {
             $table = $this->ebay_items_table();
             $marker = wp_json_encode(array('_housekeeping'=>'ended_source_compacted_v1'));
             $changed = $wpdb->query($wpdb->prepare(
-                "UPDATE {$table} SET source_payload=%s, short_description='' WHERE source_state='ended' AND listing_post_id=0 AND output_state IN ('none','purged_ended') AND updated_at>0 AND updated_at<%d AND source_payload<>%s LIMIT 250",
-                $marker, $derived_cutoff, $marker
+                "UPDATE {$table} SET source_payload=%s, short_description='' WHERE source_state='ended' AND status='purged_ended' AND listing_post_id=0 AND output_state='inactive' AND updated_at>0 AND updated_at<%d AND source_payload<>%s LIMIT 250",
+                $marker, $ebay_ended_cutoff, $marker
             ));
             if ($changed !== false) { $compacted += max(0, (int)$changed); }
         }
