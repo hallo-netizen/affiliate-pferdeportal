@@ -43,38 +43,38 @@ Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand
 
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
 
-- Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert. Technische Releasebasis **6.72.166** bleibt Fallback. Neuer **6.72.167 eBay-KISS-/Storage-Cleanup-Kandidat** ist auf `affiliate-release-current` in Arbeit; 6.72.166-Performancepfade sind ausdrücklich zu erhalten.
+- Affiliate-Zentrale: real **6.72.167** aktiv; eBay OAuth erfolgreich geprüft. Technisch final freigegeben ist **6.72.168** als Recovery-Sweep-/Speicherpflege-Release; 6.72.167 bleibt bis Installation Live-Fallback.
 - PSTE: real **0.57.13** aktiv; WordPress-Live-Readback am 2026-09-30 bestätigt. Installationsquelle war der final geprüfte 0.57.13-Kandidat mit SHA-256 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`. Die WordPress-Pluginliste bestätigt Version und Aktivstatus, nicht unabhängig den Live-Byte-Hash.
 - PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht aus; **kein Update erforderlich**. Manueller Dry-Run + zustandsgebundene Bereinigung am 2026-09-30 erfolgreich: obsolete Generation `16115ea4650a8334d732`, 339 Options-Einträge, 7 Ready-Zeilen, 14 Candidate-Zeilen, 12,92 MB gelöscht; danach 3 geschützte Generationen, 0 weitere Löschkandidaten.
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
 ERSTER OFFENER PUNKT:
-PSTE 0.57.13 bleibt separat fortsetzbar; der Browserfehler `PSTE_CONTEXT_AJAX_NETWORK_FAILED` ist kein gespeicherter BLOCKED-Job. `Gesamtbestand neu abgleichen` nicht erneut verwenden. Die PSTE-Speicherpflege bleibt bis `COMPLETE` gesperrt.
+PSTE 0.57.13 bleibt separat fortsetzbar; `Gesamtbestand neu abgleichen` nicht erneut verwenden. Die PSTE-Speicherpflege bleibt bis `COMPLETE` gesperrt.
 
-Der aktive manuelle Arbeitsstrang Affiliate-Zentrale 6.72.167 ist technisch **RELEASED** und vollständig gegatet, aber noch **nicht in WordPress installiert**.
+Affiliate-Zentrale Live-Stand: **6.72.167 aktiv**; eBay OAuth wurde danach vom Nutzer erfolgreich geprüft.
 
-Affiliate-6.72.167-Finalstand:
-- 17 historische eBay-Run-Recovery-/Migrationsfunktionen aus dem Run-Modul entfernt;
-- weitere 4 nachweislich tote eBay-Kompatibilitätsmethoden entfernt;
-- Run-Modul von 3015 auf 2144 Zeilen reduziert;
-- alter terminaler eBay-Lauf bleibt höchstens 24 Stunden als aktuelle Diagnose sichtbar und wird danach bounded historisiert; bei neuem manuellen Start wird ein terminaler Vorgänger sofort historisiert;
-- eBay-OAuth-Verbindungstest von Kanalpause getrennt; normale Runtime bleibt weiterhin kanalgesperrt/fail-closed;
-- zentraler Housekeeping-Pfad verdichtet exakt `ended + purged_ended + inactive + listing_post_id=0` nach 7 Tagen;
-- aktive, öffentliche/listing-gebundene und junge Datensätze bleiben unangetastet;
-- PRIVATE/BUSINESS-, Coverage-, Qualitäts-, Affiliate-, Compliance- und 6.72.166-Performancepfade bleiben gebunden;
-- vollständiger WordPress-7.1.2-/MariaDB-Gesamttest: **PASS**;
-- Workflow Run `36730922545`: **SUCCESS**;
-- Final Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672167_full_release_gate_20260930.md`;
-- Source-Manifest-SHA-256: `274ec2c4a72f7c8f5d4871f55b2b2f3c5ad81c54915998a37425c074b5cf6b0a`;
-- Final Installer: `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.167.zip`;
-- Installer-SHA-256: `998730894c4dbd677bbee04bff947df740800a6c6ab9524b747a0da5a5f8adc0`;
-- technische Release-Autorität: `RELEASED`, `release_allowed=true`;
-- Nutzer-Readback 2026-09-30: **6.72.167 ist in WordPress aktiv**. eBay-Verbindungsstatus ist noch frisch zu prüfen.
+Technischer Finalstand **6.72.168**:
+- 39 schreibende historische AFF039/AFF043/AFF044-Recovery-/Restore-Funktionen entfernt;
+- zugehörige Cron-/Init-/Admin-Post-/Kontrollzentrum-Pfade entfernt;
+- automatischer AFF043-Restore auf `init` vollständig entfernt;
+- read-only Incident-Fallback für `category_product_1..3` samt hashgebundenem 15.09.-Snapshot vorläufig bytegleich erhalten;
+- eBay-Core und eBay-Run gegenüber 6.72.167 bytegleich;
+- zentrale Speicherpflege mit bestehender eBay-Busy-Sperre erhalten;
+- neuer KISS-Pfad: `Affiliate-Zentrale → Steuerung & System → Speicherpflege → Speicherpflege jetzt starten`;
+- Speicherpflege entfernt zusätzlich obsolete AFF039/AFF043/AFF044-Recovery-State-Optionen/Locks/Schedules;
+- WordPress 7.1.2 + MariaDB Positiv-/Negativtest: **PASS**;
+- Full Gate Run `36734127128`: **SUCCESS**;
+- Final Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672168_full_release_gate_20260930.md`;
+- Source-Manifest-SHA-256: `c38f7eb13702f944fabdec2c8d5de85a7786e037d94201a1e12d2ed5ac128cd4`;
+- Final Installer: `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.168.zip`;
+- Installer-SHA-256: `60665d446f2b04fbfd807067fd34648c97a4d0c011c979c06f4095dfcb82d912`;
+- Release-Autorität: `RELEASED`, `release_allowed=true`;
+- 6.72.168 noch **nicht live installiert**.
 
 GENAU EINE NEXT ACTION:
-`READBACK_EBAY_CONNECTION_STATUS_ON_AFFILIATE_6_72_167`.
+`INSTALL_AFFILIATE_ZENTRALE_6_72_168_AND_READBACK`.
 
-WordPress → `Affiliate-Zentrale` → `Netzwerke & API` → Karte `eBay`. Dort den aktuellen Status sowie `Letzte Zugangsprüfung`/Meldung lesen und anschließend einmal `Speichern & OAuth prüfen` ausführen. Danach eBay-Status erneut lesen. Erst bei erfolgreichem Readback reale Affiliate-Housekeeping-Bereinigung und dieselbe Datenbank-/Performance-Nachmessung ausführen.
+Exakt den final gegateten Installer mit SHA-256 `60665d446f2b04fbfd807067fd34648c97a4d0c011c979c06f4095dfcb82d912` installieren. Danach ausschließlich Version/Aktivstatus readbacken. Anschließend: `Affiliate-Zentrale → Steuerung & System → Speicherpflege → Speicherpflege jetzt starten`. Den ausgegebenen Speicherpflege-Status und die Ergebniszahlen readbacken; erst danach dieselbe Datenbank-/Performance-Nachmessung durchführen.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
