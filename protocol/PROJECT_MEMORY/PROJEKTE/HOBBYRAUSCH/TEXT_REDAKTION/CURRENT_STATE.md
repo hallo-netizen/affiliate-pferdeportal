@@ -85,6 +85,42 @@ Performance-/Write-Grenze:
 - kein Frontend-Output;
 - keine Artikel-/Kategorieerzeugung.
 
+## Zweiter Hard-Recheck gegen den neuesten 0.57.13-Stand
+
+Erneut frisch geprüft gegen genau:
+`PSTE-0.57.13-DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS.zip`
+SHA-256 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`.
+
+Dreifachvergleich alter COMPAT_RECHECK → finaler PERFORMANCE_SAFE → 0.57.14:
+- nachträgliche Optimierungsänderungen: exakt 4 MOD + 1 DELETE;
+- `class-pste-repository.php`: in 0.57.14 byte-identisch zum finalen 0.57.13;
+- `class-pste-research-archive.php`: byte-identisch;
+- `class-pste-sandbox-record-store.php`: byte-identisch;
+- `class-pste-storage-maintenance.php`: byte-identisch;
+- entfernte `class-pste-sandbox-record-store.php.orig`: bleibt entfernt;
+- alle übrigen nicht-Ownership-Dateien ebenfalls byte-identisch.
+
+Gesamtdiff finaler 0.57.13 → korrigierter 0.57.14:
+- Basisdateien: 132;
+- Kandidat: 134;
+- Unterschiede: exakt 6 vorgesehene Pfade;
+- unerwartete Unterschiede: 0.
+
+Boot-Simulation:
+- Frontend: gleiche Hooks, 0 zusätzliche DB-Reads/Writes/Schedules/Remote-Calls beim Plugin-Boot;
+- Admin: gleiche 13 Actions + 1 Filter, gleiche 3 Reads, 0 Writes/Schedules/Remote-Calls beim Boot;
+- Ownership-Datei wird zwar zusätzlich per `require_once` geladen (11.047 Byte PHP), führt beim Laden aber keine DB-/Hook-/Remote-Arbeit aus.
+
+Wichtig zur Versionslogik:
+Der bestehende Research-Driver besitzt unverändert eine Code-Version-Recovery. Nur falls bei Installation bereits ein aktiver Research-Job im Zustand BLOCKED unter 0.57.13 existiert, kann der Versionswechsel auf 0.57.14 dessen vorhandenen Recovery-Pfad auslösen. Das ist keine zurückgenommene Performance-/Storage-Optimierung, muss vor Live-Installation aber als Zustandsprüfung beachtet werden.
+
+Archivprüfung des korrigierten Installers:
+- Archivkopie byte-identisch zum lokal geprüften Paket;
+- SHA-256 erneut `1ac6fa754fc6a170adccb3ab53d9023e5b8a4caaa653a79923ca9d2ae587222e`;
+- keine doppelten ZIP-Einträge;
+- keine `.orig/.bak/.tmp/.old/~`-Einträge;
+- keine Symlink-Einträge.
+
 ## Harte lokale Prüfung aktueller Kandidat
 
 - Ownership Positiv/Negativ: 10/10 PASS;
