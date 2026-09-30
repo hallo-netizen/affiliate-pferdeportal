@@ -32,7 +32,8 @@
               "time_scope": "allgemeine Produktauswahl",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "2837e31fb462241b44d2fe2caf6e92573b3cdf00155ce3fdb7d5554c4bf3b1d0"
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -44,7 +45,8 @@
               "time_scope": "allgemeine Produktauswahl",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "11a69b6ac0082f4c0b52684d3b20641f837cbf5b5948c7dfd56098120d718a4a"
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -56,7 +58,8 @@
               "time_scope": "allgemeine Produktauswahl",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "7bbe7b41fee2df1cb9c818666b3d0aa2c1a872c2eb73a6ad8a81c2506ed27409"
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -68,7 +71,8 @@
               "time_scope": "allgemeine Produktauswahl",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "1adc09802f31c1931a6e4e71400bde75a9876d97427a840092ab90f78c26b439"
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -80,7 +84,8 @@
               "time_scope": "allgemeine Schurpraxis",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457"
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -92,7 +97,8 @@
               "time_scope": "allgemeine Schurpraxis",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd"
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -104,7 +110,8 @@
               "time_scope": "allgemeine Schurpraxis",
               "article_types": [
                 "Beratung"
-              ]
+              ],
+              "evidence_text_sha256": "1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af"
             }
           ],
           "conclusion_evidence_coverage": "PASS",
@@ -149,7 +156,7 @@
             "section_id": "further_information"
           }
         ],
-        "product_sha256": "473a1c639855b5ee6224c45189c360bd5865ebe796fc2629080a01c04bff264c",
+        "product_sha256": "2673e2890fd55db721c0837284b1a4897faa9abc9771eb3644118d6bc5ed9e38",
         "sources": [
           {
             "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
