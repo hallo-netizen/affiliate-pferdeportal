@@ -84,3 +84,10 @@ Für Kategorie/Struktur: **NONE / CLOSED**.
 Für ADCELL/OTTO-Awin: **NONE, solange keine neue ausdrückliche Nutzeranweisung zur Wiederaufnahme vorliegt.**
 
 Die frühere Rückbindungsaktion bleibt historische Information und ist keine aktuelle Ausführungsfreigabe.
+
+
+## PLUGIN-UPDATE-RÜCKVERWEIS 2026-09-30
+
+`PLUGIN_UPDATE_REF: PU-20260930-001`
+
+Nur Rückverweis auf das zentrale PLUGINS-Updateprotokoll. Keine zweite Updatechronik und keine Änderung der technischen Affiliate-Release-Autorität.
