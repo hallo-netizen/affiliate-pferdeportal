@@ -45,16 +45,16 @@ Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand
 
 - Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert und Performancepfade unverändert gebunden.
 - PSTE: real **0.57.13** aktiv; WordPress-Live-Readback am 2026-09-30 bestätigt. Installationsquelle war der final geprüfte 0.57.13-Kandidat mit SHA-256 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`. Die WordPress-Pluginliste bestätigt Version und Aktivstatus, nicht unabhängig den Live-Byte-Hash.
-- PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht nach Quellprüfung aus; **kein Update erforderlich**.
+- PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht aus; **kein Update erforderlich**. Manueller Dry-Run + zustandsgebundene Bereinigung am 2026-09-30 erfolgreich: obsolete Generation `16115ea4650a8334d732`, 339 Options-Einträge, 7 Ready-Zeilen, 14 Candidate-Zeilen, 12,92 MB gelöscht; danach 3 geschützte Generationen, 0 weitere Löschkandidaten.
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
 ERSTER OFFENER PUNKT:
-PSTE 0.57.13 ist installiert und per WordPress-Readback als aktiv bestätigt. Die vorhandenen PSTE-Altbestände sind noch nicht mit der neuen eingebauten Speicherpflege verdichtet.
+Der erste reale Start der PSTE-0.57.13-Speicherpflege wurde vom eingebauten Schutz korrekt mit `PSTE_STORAGE_MAINTENANCE_CONTEXT_REFRESH_BLOCKED` abgewiesen. Ursache ist frisch im finalen PSTE-Quellstand verifiziert: die Speicherpflege darf nicht starten, solange der PSTE-`Portalabgleich` den Status `RUNNING` hat. Der Nutzer-Screenshot zeigt den Portalabgleich real als `RUNNING` und die automatische Meldung `Portalabgleich läuft automatisch request-begrenzt weiter.`
 
 GENAU EINE NEXT ACTION:
-`RUN_PSTE_0_57_13_BOUNDED_STORAGE_MAINTENANCE_ON_EXISTING_ALTSTAND`.
+`COMPLETE_RUNNING_PSTE_PORTALABGLEICH_BEFORE_STORAGE_MAINTENANCE`.
 
-Dabei ausschließlich die in PSTE 0.57.13 eingebaute adminseitige, begrenzte Speicherpflege mit Active-Work-Sperren verwenden. Keine manuelle Datenbanklöschung und keine Änderung an Affiliate, PSERC oder PPM.
+Auf `SEO Themenengine → Übersicht` den bereits laufenden automatischen Portalabgleich bis `COMPLETE` durchlaufen lassen. Nicht parallel erneut Speicherpflege starten. Falls die Automatik nicht mehr läuft, ausschließlich den vorhandenen Originalbutton `Portalabgleich jetzt fortsetzen` verwenden. Erst nach `COMPLETE` die PSTE-Speicherpflege erneut starten. Keine manuelle Datenbanklöschung und keine Änderung an Affiliate, PSERC oder PPM.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
