@@ -3,6 +3,8 @@ import argparse, hashlib, html as htmlmod, json, re, sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
+sys.path.insert(0,str((ROOT/"quality").resolve()))
+import k9_rule_guard
 JOB=ROOT/"runtime"/"CURRENT_JOB.json"
 ENTRY=ROOT/"runtime"/"CHAT_ENTRY.json"
 RULES=ROOT/"contracts"/"K9_WRITING_RULES.json"
@@ -134,10 +136,16 @@ def validate_html(markup, article_type, metadata, research, rules):
 
 def build(draft_path):
     job=load(JOB); entry=load(ENTRY); draft=load(draft_path); rules=load(RULES)
+    coverage=k9_rule_guard.validate_coverage(rules)
+    rules_sha=coverage["rules_sha256"]
     if job.get("contract")!="K9_JOB_V1" or job.get("status")!="OPEN" or job.get("station") not in ("write","repair"):
         raise PackError("WRITE_JOB_INVALID")
     if entry.get("job_id")!=job.get("job_id") or entry.get("job_sha256")!=job.get("job_sha256"):
         raise PackError("CHAT_ENTRY_JOB_MISMATCH")
+    if entry.get("writing_rules_path")!="contracts/K9_WRITING_RULES.json" or entry.get("writing_rules_sha256")!=rules_sha:
+        raise PackError("COMPLETE_WRITING_RULE_BINDING_INVALID")
+    if entry.get("writing_rules_coverage_contract")!="K9_COMPLETE_RULE_COVERAGE_V1" or entry.get("complete_rule_application_required") is not True:
+        raise PackError("WRITING_RULE_COVERAGE_NOT_REQUIRED")
     if draft.get("contract")!="K9_WRITER_DRAFT_V1" or draft.get("job_id")!=job["job_id"]:
         raise PackError("WRITER_DRAFT_JOB_MISMATCH")
     if len(job.get("items",[]))!=1 or job.get("item_count")!=1:
@@ -270,7 +278,8 @@ def build(draft_path):
     }
     product={"contract":"K9_ARTICLE_PRODUCT_V1","article_type":article_type,"title":title,"content_html":markup,
              "content_sha256":hashlib.sha256(markup.encode()).hexdigest(),
-             "research_product_sha256":research["product_sha256"],"ppm_item":ppm_item}
+             "research_product_sha256":research["product_sha256"],"writing_rules_sha256":rules_sha,
+             "writing_rules_coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1","ppm_item":ppm_item}
     product["product_sha256"]=stable(product)
     return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],
             "results":[{"item_id":item_id,"article_product":product}]}

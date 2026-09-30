@@ -1,6 +1,6 @@
 {
   "contract": "K9_WRITING_RULES_V1",
-  "source": "STATIC_COPY_OF_PPM_6_7_9_ARTICLE_TYPE_TEMPLATES",
+  "source": "COMPLETE_BOUND_RULESET_PPM_6_7_9_PLUS_APPROVED_EDITORIAL_ADDITIONS",
   "source_ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
   "runtime_dependency_on_legacy": false,
   "global": {
@@ -208,6 +208,164 @@
           }
         }
       }
+    }
+  },
+  "coverage": {
+    "contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+    "fail_closed": true,
+    "policy": "NO_RULE_GROUP_MAY_EXIST_WITHOUT_A_NAMED_ENFORCEMENT_OWNER",
+    "required_rule_groups": [
+      "ppm_679",
+      "lt_68",
+      "k9_structural",
+      "editorial_additive"
+    ],
+    "rule_groups": {
+      "ppm_679": {
+        "source": "quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip",
+        "source_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "semantics": "ALL_RULES_IN_BOUND_PPM_PACKAGE_WITHOUT_SELECTIVE_COPY",
+        "enforced_by": [
+          "K9_NATIVE_PPM679_CHECK"
+        ]
+      },
+      "lt_68": {
+        "source": "LanguageTool 6.8",
+        "source_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "semantics": "ALL_LANGUAGE_FINDINGS_FROM_BOUND_LT68_ENGINE",
+        "enforced_by": [
+          "K9_NATIVE_LT68_CHECK"
+        ]
+      },
+      "k9_structural": {
+        "source": "contracts/K9_WRITING_RULES.json global/types",
+        "semantics": "COMPLETE_K9_STRUCTURE_AND_TRACE_RULES",
+        "enforced_by": [
+          "K9_WRITE_PACKAGER",
+          "K9_NATIVE_PPM679_CHECK"
+        ]
+      },
+      "editorial_additive": {
+        "source": [
+          "USER_APPROVED_K8_BASELINE_FROM_FROZEN_K6_2026-09-27",
+          "concept_agent/konzept8_verbot/K8_OPTIMIZATION_CONFIG.json@5a452af433d7661173e712dc2f3b3fbd5898bef6",
+          "concept_agent/konzept8_verbot/engine/k8_production_bridge.py@5a452af433d7661173e712dc2f3b3fbd5898bef6",
+          "concept_agent/current/PSERC_METADATA_SNAPSHOT.json@5a452af433d7661173e712dc2f3b3fbd5898bef6"
+        ],
+        "semantics": "ALL_APPROVED_ADDITIVE_TEXT_RULES_AS_ONE_CLOSED_RULE_GROUP",
+        "enforced_by": [
+          "CHAT_WRITE_WORKER",
+          "CHAT_REPAIR_WORKER",
+          "K9_RULE_GUARD"
+        ]
+      }
+    },
+    "future_rule_policy": "ADDING_OR_REMOVING_A_REQUIRED_RULE_GROUP_WITHOUT_ENFORCEMENT_OWNER_MUST_FAIL_CLOSED"
+  },
+  "editorial_additive": {
+    "contract": "K9_EDITORIAL_ADDITIVE_RULES_V1",
+    "heading_policy": {
+      "contract": "K9_H2_POLICY_V1",
+      "target_keyword_exact_phrase_mode": "CASEFOLD_PUNCTUATION_NORMALIZED",
+      "exact_target_phrase_occurrences_max": 2,
+      "exact_target_phrase_occurrences_min_when_no_title_collision": 1,
+      "exact_target_phrase_occurrences_when_title_equals_target": 0,
+      "significant_target_keyword_token_h2_occurrences_max": 2,
+      "keyword_staccato_forbidden": true,
+      "phrase_family_repetition_forbidden": true,
+      "duplicate_normalized_h2_forbidden": true,
+      "repeated_heading_lead_word_max": 2,
+      "natural_heading_surface_required": true,
+      "heading_content_relation_required": true,
+      "significant_keyword_stop_tokens": [
+        "der",
+        "die",
+        "das",
+        "ein",
+        "eine",
+        "einen",
+        "einem",
+        "einer",
+        "und",
+        "oder",
+        "mit",
+        "ohne",
+        "unter",
+        "ueber",
+        "über",
+        "von",
+        "zu",
+        "zum",
+        "zur",
+        "im",
+        "in",
+        "am",
+        "an",
+        "auf",
+        "ist",
+        "sind",
+        "wie",
+        "was",
+        "welche",
+        "welcher",
+        "welches",
+        "warum",
+        "kann",
+        "man",
+        "fuer",
+        "für",
+        "pferd",
+        "pferde"
+      ]
+    },
+    "balance_policy": {
+      "contract": "K8_SECTION_BALANCE_POLICY_V4",
+      "hard_total_words_min": 750,
+      "hard_total_words_max": 900,
+      "preferred_total_words_min": 780,
+      "preferred_total_words_max": 850,
+      "normal_h2_section_min_words": 100,
+      "normal_h2_section_max_words": 220,
+      "normal_h2_longest_to_shortest_max_ratio": 1.5,
+      "normal_h2_combined_minimum_ratio": 0.5,
+      "exempt_blocks": [
+        "table",
+        "conclusion",
+        "further_information"
+      ],
+      "table_may_fill_word_budget": false,
+      "further_information_maximum_words": 60,
+      "further_information_may_fill_word_budget": false
+    },
+    "conclusion_policy": {
+      "contract": "K8_CONCLUSION_BALANCE_POLICY_V1",
+      "target_ratio_min": 0.1,
+      "target_ratio_max": 0.12,
+      "maximum_ratio": 0.15,
+      "maximum_paragraphs": 3,
+      "use_conclusion_to_fill_global_word_or_paragraph_floor": false
+    },
+    "surface_policy": {
+      "natural_german_required": true,
+      "artificial_generator_phrase_forbidden": true,
+      "keyword_staccato_forbidden": true,
+      "phrase_family_repetition_forbidden": true,
+      "template_spam_forbidden": true,
+      "forbidden_generator_phrases": [
+        "Beim Thema „",
+        "Unter dem Aspekt „",
+        "Der Aspekt „",
+        "gibt die fachliche Richtung vor",
+        "hält die Auswahl am Bedarf",
+        "schafft damit einen sachlichen Anschluss"
+      ]
+    },
+    "writer_targets": {
+      "semantics": "WRITER_SAFETY_TARGETS_NOT_REPLACEMENT_FOR_EXISTING_GATES",
+      "table_unique_token_ratio_target_if_applicable": 0.22,
+      "target_trace_lexical_support_ratio": 1,
+      "trace_unit_minimum_shared_lexical_tokens": 2,
+      "target_duplicate_sentence_ratio": 0.01
     }
   }
 }

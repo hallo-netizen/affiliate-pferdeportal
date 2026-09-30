@@ -6,6 +6,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import k9_lt68
 import k9_ppm679
+import k9_rule_guard
 
 class CheckError(RuntimeError):
     pass
@@ -50,6 +51,12 @@ def run_job(job_path, jar_path, ppm_path):
         if not html or not title or not isinstance(ppm_item,dict) or not isinstance(fact_pack,dict):
             raise CheckError("K9_CHECK_BOUND_INPUT_INCOMPLETE")
 
+        rules_path=HERE.parent/"contracts"/"K9_WRITING_RULES.json"
+        rules=load_json(rules_path)
+        writing_result=k9_rule_guard.evaluate(html,item.get("metadata") or {},rules)
+        if article.get("writing_rules_sha256")!=writing_result.get("writing_rules_sha256"):
+            raise CheckError("K9_CHECK_WRITING_RULES_BINDING_MISMATCH")
+
         with tempfile.TemporaryDirectory(prefix="k9-check-") as td:
             root=Path(td)
             article_path=root/"article.html"
@@ -87,7 +94,8 @@ def run_job(job_path, jar_path, ppm_path):
         rows.append({
             "item_id":item_id,
             "lt68_result":lt_result,
-            "ppm679_result":ppm_result
+            "ppm679_result":ppm_result,
+            "writing_rules_result":writing_result
         })
     if len(rows)!=job.get("item_count"):
         raise CheckError("K9_CHECK_ITEM_COUNT_MISMATCH")

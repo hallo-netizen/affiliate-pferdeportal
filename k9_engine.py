@@ -10,6 +10,7 @@ AUTO_CHAIN = ROOT / "runtime" / "AUTO_CHAIN.json"
 CURRENT_STATE = ROOT / "CURRENT_STATE.json"
 WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
 PORTAL_BINDINGS = ROOT / "contracts" / "K9_PORTAL_BINDINGS.json"
+WRITING_RULES = ROOT / "contracts" / "K9_WRITING_RULES.json"
 STATUS_FILE = ROOT / "state" / "STATUS.json"
 WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
@@ -234,7 +235,10 @@ def write_chat_entry(job):
         "required_output_fields": job["worker_contract"].get("required_output_fields", []),
         "output_field_sources": job["worker_contract"].get("output_field_sources", {}),
         "packager_path": ("k9_write_packager.py" if is_writer else None),
-        "writing_rules_path": ("contracts/K9_WRITING_RULES.json" if is_writer else None)
+        "writing_rules_path": ("contracts/K9_WRITING_RULES.json" if is_writer else None),
+        "writing_rules_sha256": (stable(load_json(WRITING_RULES)) if is_writer else None),
+        "writing_rules_coverage_contract": ((load_json(WRITING_RULES).get("coverage") or {}).get("contract") if is_writer else None),
+        "complete_rule_application_required": bool(is_writer)
     }
     write_json(CHAT_ENTRY, entry)
     return entry
@@ -601,10 +605,13 @@ def _validate_article_product(row, job_item):
 def _validate_check_product(row, job_item):
     lt = row.get("lt68_result")
     ppm = row.get("ppm679_result")
+    writing = row.get("writing_rules_result")
     if not isinstance(lt, dict) or lt.get("contract") != "K9_LT68_RESULT_V1":
         raise K9Error("CHECK_LT68_RESULT_INVALID")
     if not isinstance(ppm, dict) or ppm.get("contract") != "K9_PPM679_RESULT_V1":
         raise K9Error("CHECK_PPM679_RESULT_INVALID")
+    if not isinstance(writing, dict) or writing.get("contract") != "K9_WRITING_RULES_RESULT_V1":
+        raise K9Error("CHECK_WRITING_RULES_RESULT_INVALID")
 
     article_row = job_item.get("input_products", {}).get("article")
     if not isinstance(article_row, dict):
@@ -618,9 +625,11 @@ def _validate_check_product(row, job_item):
         raise K9Error("CHECK_LT68_BINDING_INVALID")
     if ppm.get("ppm_package_sha256") != PPM679_PACKAGE_SHA256 or ppm.get("content_sha256") != content_sha:
         raise K9Error("CHECK_PPM679_BINDING_INVALID")
-    if lt.get("status") not in ("PASS", "REPAIR_REQUIRED") or ppm.get("status") not in ("PASS", "REPAIR_REQUIRED"):
+    if writing.get("content_sha256") != content_sha or writing.get("writing_rules_sha256") != article.get("writing_rules_sha256"):
+        raise K9Error("CHECK_WRITING_RULES_BINDING_INVALID")
+    if lt.get("status") not in ("PASS", "REPAIR_REQUIRED") or ppm.get("status") not in ("PASS", "REPAIR_REQUIRED") or writing.get("status") not in ("PASS", "REPAIR_REQUIRED"):
         raise K9Error("CHECK_RESULT_STATUS_INVALID")
-    return lt, ppm
+    return lt, ppm, writing
 
 def assert_execution_only_entry(job):
     if job.get("station") == "check":
@@ -657,6 +666,12 @@ def assert_execution_only_entry(job):
     }
     if not required_forbidden.issubset(set(entry.get("forbidden") or [])):
         raise K9Error("CHAT_ENTRY_EXECUTION_GUARD_INCOMPLETE")
+    if job.get("station") in ("write","repair"):
+        rules=load_json(WRITING_RULES)
+        if entry.get("writing_rules_path")!="contracts/K9_WRITING_RULES.json" or entry.get("writing_rules_sha256")!=stable(rules):
+            raise K9Error("CHAT_ENTRY_COMPLETE_WRITING_RULE_BINDING_INVALID")
+        if entry.get("writing_rules_coverage_contract")!="K9_COMPLETE_RULE_COVERAGE_V1" or entry.get("complete_rule_application_required") is not True:
+            raise K9Error("CHAT_ENTRY_RULE_COVERAGE_GUARD_INVALID")
 
 def validate_submission(job, submission):
     if submission.get("contract") != "K9_SUBMISSION_V1":
@@ -718,7 +733,8 @@ def accept(path):
         elif stage == "check":
             lt_status = result["lt68_result"]["status"]
             ppm_status = result["ppm679_result"]["status"]
-            if lt_status == "PASS" and ppm_status == "PASS":
+            writing_status = result["writing_rules_result"]["status"]
+            if lt_status == "PASS" and ppm_status == "PASS" and writing_status == "PASS":
                 item["stages"]["check"] = "DONE"
                 item["stages"]["repair"] = "NOT_REQUIRED"
             else:
