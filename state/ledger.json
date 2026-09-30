@@ -1,46 +1,25 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 36,
+  "generation": 38,
   "items": [
     {
-      "item_id": "k9-16024ee8a6c9b5e964f452e6",
+      "item_id": "k9-037886feb135ca682b8423e7",
       "metadata": {
         "article_type": "FAQ",
-        "category": "reitplatzplaner-faq",
-        "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
-        "target_keyword": "Was ist ein Reitplatzplaner",
-        "title": "Was ist ein Reitplatzplaner?"
+        "category": "pferdedecken-regendecken-faq",
+        "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+        "target_keyword": "Frieren Pferde unter Regendecken",
+        "title": "Frieren Pferde unter Regendecken?"
       },
-      "products": {
-        "check": {
-          "job_id": "K9-CHECK-5fcbd9b694812ef1",
-          "path": "warehouse/check/K9-CHECK-5fcbd9b694812ef1.json",
-          "sha256": "e64bbed701eebb1331fbffad661af4ea527c58f71b153b5ca2de2111cf9abd5d"
-        },
-        "repair": {
-          "job_id": "K9-REPAIR-d790c40e820b4bd4",
-          "path": "warehouse/repair/K9-REPAIR-d790c40e820b4bd4.json",
-          "sha256": "51a57025e64adabc696da02435b234fbd30010a1e07157722373189e19c91b6c"
-        },
-        "research": {
-          "job_id": "K9-RESEARCH-5e13bb3343e89ce8",
-          "path": "warehouse/research/K9-RESEARCH-5e13bb3343e89ce8.json",
-          "sha256": "9fa3f53a2d3f65f8633561459e9b9d0104a5de3f2636f977dfe5783ed83f1fd5"
-        },
-        "write": {
-          "job_id": "K9-WRITE-8ec01399c3be14f9",
-          "path": "warehouse/write/K9-WRITE-8ec01399c3be14f9.json",
-          "sha256": "f0dcf375b6808958b94c05890a01ca89566fe131b68213f36cfc3569b5f4dae0"
-        }
-      },
-      "revision": 2,
+      "products": {},
+      "revision": 0,
       "stages": {
-        "check": "DONE",
+        "check": "PENDING",
         "repair": "NOT_REQUIRED",
-        "research": "DONE",
-        "write": "DONE"
+        "research": "PENDING",
+        "write": "PENDING"
       },
-      "title": "Was ist ein Reitplatzplaner?"
+      "title": "Frieren Pferde unter Regendecken?"
     }
   ]
 }
