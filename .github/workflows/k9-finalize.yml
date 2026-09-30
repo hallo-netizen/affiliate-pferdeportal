@@ -115,9 +115,9 @@ jobs:
             'operational_mode':'SUPERVISOR',
             'active_job':None,
             'first_open_blocker':None,
-            'next_action':'DESIGN_AND_PROVE_ZERO_MANUAL_NUDGE_ORCHESTRATION_AROUND_EXISTING_K9_STATIONS',
+            'next_action':'RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES',
             'work_binding':{
-              'baseline':'SCHERMASCHINEN_REAL_E2E_STOP',
+              'baseline':'LATEST_REAL_E2E_STOP',
               'preserve_existing_station_products':True,
               'preserve_quality_gates':['LT_6_8','PPM_6_7_9','PSERC','ENDSTEMPEL','WORDPRESS_VERIFY'],
               'do_not_reopen_completed_article':True,
@@ -152,7 +152,7 @@ jobs:
           python3 - <<'PY' > /tmp/release.env
           import json
           x=json.load(open('runtime/K9_STOP.json'))
-          print('TAG=k9-endstempel-'+x['batch_sha256']+'-g000009')
+          print('TAG=k9-endstempel-'+x['final_sha256'][:16])
           print('SHA='+x['final_sha256'])
           PY
           . /tmp/release.env
