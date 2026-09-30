@@ -29,7 +29,10 @@
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden.",
               "subject_scope": "Geräteklasse nach Einsatzhäufigkeit",
-              "time_scope": "allgemeine Produktauswahl"
+              "time_scope": "allgemeine Produktauswahl",
+              "article_types": [
+                "Beratung"
+              ]
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -38,7 +41,10 @@
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter.",
               "subject_scope": "Geräteklasse nach Felltyp",
-              "time_scope": "allgemeine Produktauswahl"
+              "time_scope": "allgemeine Produktauswahl",
+              "article_types": [
+                "Beratung"
+              ]
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -47,7 +53,10 @@
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben.",
               "subject_scope": "Stromversorgung",
-              "time_scope": "allgemeine Produktauswahl"
+              "time_scope": "allgemeine Produktauswahl",
+              "article_types": [
+                "Beratung"
+              ]
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -56,7 +65,10 @@
               "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
               "statement": "Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern.",
               "subject_scope": "Pferdetemperament und Ergonomie",
-              "time_scope": "allgemeine Produktauswahl"
+              "time_scope": "allgemeine Produktauswahl",
+              "article_types": [
+                "Beratung"
+              ]
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -65,7 +77,10 @@
               "source_id": "SRC-LISTER-COAT-TYPES-20260930",
               "statement": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.",
               "subject_scope": "Messerauswahl nach Felltyp",
-              "time_scope": "allgemeine Schurpraxis"
+              "time_scope": "allgemeine Schurpraxis",
+              "article_types": [
+                "Beratung"
+              ]
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -74,7 +89,10 @@
               "source_id": "SRC-LISTER-HOT-BLADES-20260930",
               "statement": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.",
               "subject_scope": "Wartung und Wärmeentwicklung",
-              "time_scope": "allgemeine Schurpraxis"
+              "time_scope": "allgemeine Schurpraxis",
+              "article_types": [
+                "Beratung"
+              ]
             },
             {
               "claim_status": "FULLY_SUPPORTED",
@@ -83,7 +101,10 @@
               "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
               "statement": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein.",
               "subject_scope": "Vorbereitung und sichere Anwendung",
-              "time_scope": "allgemeine Schurpraxis"
+              "time_scope": "allgemeine Schurpraxis",
+              "article_types": [
+                "Beratung"
+              ]
             }
           ],
           "conclusion_evidence_coverage": "PASS",
@@ -128,7 +149,7 @@
             "section_id": "further_information"
           }
         ],
-        "product_sha256": "a7ea3cabc861e365e388d3a8a17654a0c6b21b51388fd06b0f1962f35a8149cf",
+        "product_sha256": "473a1c639855b5ee6224c45189c360bd5865ebe796fc2629080a01c04bff264c",
         "sources": [
           {
             "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",

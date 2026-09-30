@@ -1,15 +1,15 @@
 {
   "active_job": {
+    "job_id": "K9-REPAIR-fd25fc7abd7eb4c6",
+    "station": "repair",
     "item_count": 1,
     "item_ids": [
       "k9-1ff3dfabfed47a0c47c8df13"
-    ],
-    "job_id": "K9-REPAIR-b10026f78b23a64d",
-    "station": "repair"
+    ]
   },
   "contract": "K9_STATUS_V1",
   "fully_done": 0,
-  "ledger_generation": 11,
+  "ledger_generation": 12,
   "ready_for_check": 0,
   "ready_for_write": 0,
   "remaining": 1,
