@@ -4336,7 +4336,6 @@ JS;
 
             $rank = $this->campaign_match_rank($runtime_campaign, $rank_context);
             if (!$rank) { continue; }
-            if (!$this->campaign_health_allows_delivery($runtime_campaign)) { continue; }
 
             $candidates[] = array(
                 'campaign' => $campaign,
@@ -4371,6 +4370,7 @@ JS;
             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
             if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }
             if (!$this->campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
+            if (!$this->campaign_health_allows_delivery($runtime_campaign)) { continue; }
             $candidates[] = $candidate;
         }
 
