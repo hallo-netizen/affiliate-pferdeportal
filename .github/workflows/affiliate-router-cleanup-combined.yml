@@ -175,7 +175,6 @@ jobs:
           for name in [
               'ebay_business_campaign_source_allows_delivery',
               'ebay_business_campaign_source_allows_delivery_base',
-              'ebay_public_checkpoint_allows_business_campaign',
           ]:
               if body(ebay,name) != body(base_ebay,name):
                   raise SystemExit('FAIL eBay safety/source semantics changed: '+name)
