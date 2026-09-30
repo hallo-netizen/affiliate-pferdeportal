@@ -4,10 +4,10 @@
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
   "status": "STOP",
-  "operational_mode": "SUPERVISOR",
+  "operational_mode": "TERMINAL_CHAT_DELIVERY_ONLY",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
+  "next_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
   "work_binding": {
     "baseline": "LATEST_REAL_E2E_STOP",
     "preserve_existing_station_products": true,
@@ -30,6 +30,14 @@
     "finalizer_run_id": "36785527375",
     "trigger_head_sha": "71bc7493aba40d832b21fc8828ff3b85e5e8b0f6"
   },
+  "allowed_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY",
+  "route_lock": "TERMINAL_CHAT_DELIVERY_ONLY",
+  "supervisor_actions_allowed": false,
+  "code_change_allowed": false,
+  "repair_authorized": false,
+  "all_other_actions": "DENY",
+  "chat_delivery_required": true,
+  "chat_delivery_manifest_ref": "runtime/CHAT_DELIVERY.json",
   "chat_may_route": false,
   "publish_allowed": false
 }

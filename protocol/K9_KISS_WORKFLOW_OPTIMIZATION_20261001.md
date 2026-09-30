@@ -53,3 +53,10 @@ The route lock is now present in every chat-sensitive state:
 - successful STOP: deliver the verified WordPress file in chat only.
 
 A finalizer failure can therefore no longer silently turn the next chat into a system-repair session. A repair requires a new explicit user instruction.
+
+## Current authority aligned
+The already completed 16-article STOP was still carrying the obsolete next action RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES. It is now aligned to terminal delivery only:
+- next action: DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT;
+- code/supervisor/repair authority: denied;
+- all other actions: denied;
+- exact final file/hash/article count retained unchanged.
