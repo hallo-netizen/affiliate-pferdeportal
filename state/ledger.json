@@ -1,7 +1,45 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 52,
+  "generation": 54,
   "items": [
+    {
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "reitplatzplaner-beratung",
+        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+        "target_keyword": "Reitplatzplaner für Pferde",
+        "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+    },
+    {
+      "item_id": "k9-037886feb135ca682b8423e7",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "pferdedecken-regendecken-faq",
+        "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+        "target_keyword": "Frieren Pferde unter Regendecken",
+        "title": "Frieren Pferde unter Regendecken?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Frieren Pferde unter Regendecken?"
+    },
     {
       "item_id": "k9-6b233ed9774bd3dd530835c3",
       "metadata": {
@@ -11,36 +49,262 @@
         "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
         "title": "Ist eine Reitplatzbewässerung von unten möglich?"
       },
-      "products": {
-        "check": {
-          "job_id": "K9-CHECK-091d0a31fb242167",
-          "path": "warehouse/check/K9-CHECK-091d0a31fb242167.json",
-          "sha256": "c102865ba856e87324fd78adc72d3fff4981a136687cfccf4af9b2b2bbd20678"
-        },
-        "repair": {
-          "job_id": "K9-REPAIR-b897c6bc163c672a",
-          "path": "warehouse/repair/K9-REPAIR-b897c6bc163c672a.json",
-          "sha256": "e416e596c13101169965455908b3498ade7c6f6493d4f70933a069dc492504df"
-        },
-        "research": {
-          "job_id": "K9-RESEARCH-212dbee117f90c60",
-          "path": "warehouse/research/K9-RESEARCH-212dbee117f90c60.json",
-          "sha256": "fbbb6ea04e1a73392bbd14f78775453b3566089f0ec6cc9b1096d716145dbfe3"
-        },
-        "write": {
-          "job_id": "K9-WRITE-833e4fa969d7d122",
-          "path": "warehouse/write/K9-WRITE-833e4fa969d7d122.json",
-          "sha256": "d985144cc3236a3e6bcc021f282347049f9e1c5f702f7eb3298ff04aaf09e725"
-        }
-      },
-      "revision": 2,
+      "products": {},
+      "revision": 0,
       "stages": {
-        "check": "DONE",
+        "check": "PENDING",
         "repair": "NOT_REQUIRED",
-        "research": "DONE",
-        "write": "DONE"
+        "research": "PENDING",
+        "write": "PENDING"
       },
       "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+    },
+    {
+      "item_id": "k9-b148e1ddcdab462e0b2b68cb",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "kappzaum-faq",
+        "plan_slot": "160c801f6e1b6c99065f287083a6b5fbc93a545764e04e7c833531904d77bb5d",
+        "target_keyword": "Kann man mit Kappzaum spazieren gehen",
+        "title": "Kann man mit Kappzaum spazieren gehen?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Kann man mit Kappzaum spazieren gehen?"
+    },
+    {
+      "item_id": "k9-a38f92cbb97fe29aece54292",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "longiergurte-beratung",
+        "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+        "target_keyword": "Longiergurte mit Bogen",
+        "title": "Longiergurte mit Bogen im Ratgeber"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Longiergurte mit Bogen im Ratgeber"
+    },
+    {
+      "item_id": "k9-f35eba3ca3cc3dbecc1bd9c6",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+        "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+        "target_keyword": "Kühlgamaschen für Pferde",
+        "title": "Passende Kühlgamaschen für Pferde wählen"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Passende Kühlgamaschen für Pferde wählen"
+    },
+    {
+      "item_id": "k9-3c3435598b994d2448cd4b8b",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "pferdehaftpflicht-beratung",
+        "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+        "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+        "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+    },
+    {
+      "item_id": "k9-34a53bf77374419ef08b0669",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "kappzaum-beratung",
+        "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+        "target_keyword": "Kappzaum für Pferde",
+        "title": "So findest du ein optimales Kappzaum für Pferde"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "So findest du ein optimales Kappzaum für Pferde"
+    },
+    {
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "schermaschinen-beratung",
+        "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+        "target_keyword": "Schermaschinen für Pferde",
+        "title": "So wählst du passende Schermaschinen für Pferde"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "So wählst du passende Schermaschinen für Pferde"
+    },
+    {
+      "item_id": "k9-676a012f09815f814e233775",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "schabracken-faq",
+        "plan_slot": "a554b0f86f23cda760d2a03f839934cbc4dda269d961ff891e763a684283352b",
+        "target_keyword": "Warum sagt man du alte Schabracke",
+        "title": "Warum sagt man du alte Schabracke?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Warum sagt man du alte Schabracke?"
+    },
+    {
+      "item_id": "k9-784b73ee2bf3e2114d3af948",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "schabracken-faq",
+        "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+        "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+        "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+    },
+    {
+      "item_id": "k9-16024ee8a6c9b5e964f452e6",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "reitplatzplaner-faq",
+        "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+        "target_keyword": "Was ist ein Reitplatzplaner",
+        "title": "Was ist ein Reitplatzplaner?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Was ist ein Reitplatzplaner?"
+    },
+    {
+      "item_id": "k9-4dc2b290f41c1793da77ca9a",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "magnetfelddecken-faq",
+        "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+        "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+        "title": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed?"
+    },
+    {
+      "item_id": "k9-21f5591329fafb286a69f685",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "longiergurte-faq",
+        "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+        "target_keyword": "Wie lege ich einen Longiergurt an",
+        "title": "Wie lege ich einen Longiergurt an?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Wie lege ich einen Longiergurt an?"
+    },
+    {
+      "item_id": "k9-d0fe00ff92cd9bbae7e8c1a3",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "tuev-beim-pferdeanhaenger-faq",
+        "plan_slot": "53c8c859fbbc1b9a2a17ffe53efaf31d74520ac7a89aebc1e84ec9a6ea95ea6f",
+        "target_keyword": "Wie oft muss ein Pferdeanhänger zum TÜV",
+        "title": "Wie oft muss ein Pferdeanhänger zum TÜV?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Wie oft muss ein Pferdeanhänger zum TÜV?"
+    },
+    {
+      "item_id": "k9-853343bea0615b0c5a1be5dd",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "tuev-beim-pferdeanhaenger-faq",
+        "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+        "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+        "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
     }
   ]
 }
