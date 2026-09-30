@@ -33,15 +33,22 @@ def build(root,pserc_path,outdir):
     if pserc.get("contract")!="K9_PSERC_RESULT_V1" or pserc.get("status")!="PASS": raise Blocked("PSERC_RESULT_NOT_PASS")
     if pserc.get("publish_allowed") is not False: raise Blocked("PSERC_PUBLISH_FLAG_INVALID")
     ledger=load(root/"state/ledger.json")
-    intake_files=sorted((root/"warehouse/intake").glob("K9-INTAKE-*.json"))
-    if len(intake_files)!=1: raise Blocked("EXACTLY_ONE_INTAKE_REQUIRED")
-    intake=load(intake_files[0])
-    batch=str(intake.get("source_batch_sha256") or "")
-    if not re.fullmatch(r"[0-9a-f]{64}",batch): raise Blocked("SOURCE_BATCH_SHA_INVALID")
     if ledger.get("generation",0)<1: raise Blocked("LEDGER_GENERATION_INVALID")
     items=ledger.get("items")
     if not isinstance(items,list) or len(items)!=1 or items[0].get("stages",{}).get("check")!="DONE": raise Blocked("LEDGER_NOT_FULLY_CHECKED")
     meta=items[0]["metadata"]; slot=meta["plan_slot"]
+    intake_files=[]
+    for candidate in sorted((root/"warehouse/intake").glob("K9-INTAKE-*.json")):
+        candidate_data=load(candidate)
+        candidate_items=candidate_data.get("items")
+        if not isinstance(candidate_items,list):
+            continue
+        if any(isinstance(row,dict) and isinstance(row.get("metadata"),dict) and row["metadata"].get("plan_slot")==slot for row in candidate_items):
+            intake_files.append(candidate)
+    if len(intake_files)!=1: raise Blocked("ACTIVE_INTAKE_NOT_UNIQUE")
+    intake=load(intake_files[0])
+    batch=str(intake.get("source_batch_sha256") or "")
+    if not re.fullmatch(r"[0-9a-f]{64}",batch): raise Blocked("SOURCE_BATCH_SHA_INVALID")
     article_key="repair" if items[0].get("revision",0)>0 else "write"
     apath=root/items[0]["products"][article_key]["path"]; apkg=load(apath)
     rows=[x for x in apkg.get("results",[]) if x.get("item_id")==items[0]["item_id"]]

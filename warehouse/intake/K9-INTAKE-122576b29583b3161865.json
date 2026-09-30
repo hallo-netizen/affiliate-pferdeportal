@@ -17,7 +17,7 @@
     }
   ],
   "publish_allowed": false,
-  "source_batch_sha256": "real-k9-auto-reitplatzplaner-20260930",
+  "source_batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
   "source_file_sha256": "5c4b20c2277335d401df8328cda43718b33772c960033494e67ae7ab2dfdd99f",
   "source_kind": "WORDPRESS_METADATA_EXACT_FIVE_FIELDS"
 }
