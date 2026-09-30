@@ -1,0 +1,2076 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-1ff3dfabfed47a0c47c8df13"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "article": {
+          "job_id": "K9-REPAIR-95dc5dbc2fbaf3b2",
+          "path": "warehouse/repair/K9-REPAIR-95dc5dbc2fbaf3b2.json",
+          "sha256": "76070edc832754121947a0954bde7b37435c8c31e495716a37359a1dd24c6d52"
+        },
+        "failed_check": {
+          "job_id": "K9-CHECK-3c089793bb8032bb",
+          "path": "warehouse/check/K9-CHECK-3c089793bb8032bb.json",
+          "sha256": "93ed5530373ccdf12df412f95af0b333ac50e4bb1253a15089158ef27d3f2278"
+        },
+        "research": {
+          "job_id": "K9-RESEARCH-beba25304f7d5eeb",
+          "path": "warehouse/research/K9-RESEARCH-beba25304f7d5eeb.json",
+          "sha256": "58d1b558d3b1eb9598113b5dc422009befca4a9b5390a7a474fb5e6c34a22357"
+        }
+      },
+      "input_products": {
+        "article": {
+          "article_product": {
+            "article_type": "Beratung",
+            "content_html": "<article>\n<section data-block=\"intro\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.</p>\n</section>\n\n<section data-block=\"criteria\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005\">\n<h2>Welche Schermaschinen für Pferde passen zu Einsatz und Fell?</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001\">Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-CLIPPER-001\"><strong>Einsatzhäufigkeit:</strong> Prüfe, wie oft und wie viele Pferde du scheren möchtest.</li>\n<li data-fact-ids=\"FACT-CLIPPER-002\"><strong>Felltyp:</strong> Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.</li>\n<li data-fact-ids=\"FACT-CLIPPER-003\"><strong>Stromversorgung:</strong> Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Pferdetemperament:</strong> Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Ergonomie:</strong> Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.</li>\n<li data-fact-ids=\"FACT-CLIPPER-005\"><strong>Messerauswahl:</strong> Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.</li>\n</ul>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</p>\n</section>\n\n<section data-block=\"decision\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen Schritt für Schritt passend auswählen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004\">Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-pflegezubehoer/\">Pflegezubehör</a> die passende thematische Einordnung.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.</p>\n</section>\n\n<section data-block=\"table\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen</h2>\n<table data-table=\"comparison\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<thead><tr><th>Kriterium</th><th>Prüffrage</th><th>Folgerung für die Auswahl</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-CLIPPER-001\">Einsatzumfang</td><td data-fact-ids=\"FACT-CLIPPER-001\">Wie oft und wie viele Pferde werden geschoren?</td><td data-fact-ids=\"FACT-CLIPPER-001\">Mit Häufigkeit und Umfang steigt der Bedarf an einer passenden Geräteklasse.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-002\">Felltyp</td><td data-fact-ids=\"FACT-CLIPPER-002\">Ist das Fell eher fein oder dicht?</td><td data-fact-ids=\"FACT-CLIPPER-002\">Feines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt eher mehr Leistung.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-003\">Stromversorgung</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ist ein Netzanschluss sicher erreichbar?</td><td data-fact-ids=\"FACT-CLIPPER-003\">Akku erhöht die Bewegungsfreiheit, kann aber Grenzen bei Laufzeit und Leistung haben.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Pferdetemperament</td><td data-fact-ids=\"FACT-CLIPPER-004\">Reagiert das Pferd empfindlich auf Geräusch oder Vibration?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Weniger Geräusch und Vibration können die Handhabung bei jungen oder nervösen Pferden erleichtern.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Ergonomie</td><td data-fact-ids=\"FACT-CLIPPER-004\">Lässt sich das Gerät leicht und ausgewogen führen?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Gewicht und Balance beeinflussen die kontrollierte Führung während der Schur.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-005\">Messer</td><td data-fact-ids=\"FACT-CLIPPER-005\">Passt das Messer zum Felltyp?</td><td data-fact-ids=\"FACT-CLIPPER-005\">Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-006\">Wartung</td><td data-fact-ids=\"FACT-CLIPPER-006\">Werden Messer regelmäßig gereinigt und geölt?</td><td data-fact-ids=\"FACT-CLIPPER-006\">Ölen reduziert Reibung und Hitze und hilft, unnötige Belastung zu vermeiden.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-007\">Vorbereitung</td><td data-fact-ids=\"FACT-CLIPPER-007\">Ist das Pferd trocken, sauber und gründlich gebürstet?</td><td data-fact-ids=\"FACT-CLIPPER-007\">Diese Vorbereitung gehört zum empfohlenen Vorgehen vor dem Scheren.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003\">Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004 FACT-CLIPPER-005\">Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.</p>\n</section>\n\n<section data-block=\"further_information\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005 FACT-CLIPPER-006\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005\">Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/\">Schermaschinen</a>.</p>\n</section>\n\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.</p>\n</article>",
+            "content_sha256": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+            "contract": "K9_ARTICLE_PRODUCT_V1",
+            "ppm_item": {
+              "article_type": "Beratung",
+              "canonical_article": {
+                "article_type": "Beratung",
+                "body_html": "<article>\n<section data-block=\"intro\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.</p>\n</section>\n\n<section data-block=\"criteria\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005\">\n<h2>Welche Schermaschinen für Pferde passen zu Einsatz und Fell?</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001\">Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-CLIPPER-001\"><strong>Einsatzhäufigkeit:</strong> Prüfe, wie oft und wie viele Pferde du scheren möchtest.</li>\n<li data-fact-ids=\"FACT-CLIPPER-002\"><strong>Felltyp:</strong> Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.</li>\n<li data-fact-ids=\"FACT-CLIPPER-003\"><strong>Stromversorgung:</strong> Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Pferdetemperament:</strong> Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Ergonomie:</strong> Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.</li>\n<li data-fact-ids=\"FACT-CLIPPER-005\"><strong>Messerauswahl:</strong> Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.</li>\n</ul>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</p>\n</section>\n\n<section data-block=\"decision\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen Schritt für Schritt passend auswählen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004\">Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-pflegezubehoer/\">Pflegezubehör</a> die passende thematische Einordnung.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.</p>\n</section>\n\n<section data-block=\"table\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen</h2>\n<table data-table=\"comparison\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<thead><tr><th>Kriterium</th><th>Prüffrage</th><th>Folgerung für die Auswahl</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-CLIPPER-001\">Einsatzumfang</td><td data-fact-ids=\"FACT-CLIPPER-001\">Wie oft und wie viele Pferde werden geschoren?</td><td data-fact-ids=\"FACT-CLIPPER-001\">Mit Häufigkeit und Umfang steigt der Bedarf an einer passenden Geräteklasse.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-002\">Felltyp</td><td data-fact-ids=\"FACT-CLIPPER-002\">Ist das Fell eher fein oder dicht?</td><td data-fact-ids=\"FACT-CLIPPER-002\">Feines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt eher mehr Leistung.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-003\">Stromversorgung</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ist ein Netzanschluss sicher erreichbar?</td><td data-fact-ids=\"FACT-CLIPPER-003\">Akku erhöht die Bewegungsfreiheit, kann aber Grenzen bei Laufzeit und Leistung haben.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Pferdetemperament</td><td data-fact-ids=\"FACT-CLIPPER-004\">Reagiert das Pferd empfindlich auf Geräusch oder Vibration?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Weniger Geräusch und Vibration können die Handhabung bei jungen oder nervösen Pferden erleichtern.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Ergonomie</td><td data-fact-ids=\"FACT-CLIPPER-004\">Lässt sich das Gerät leicht und ausgewogen führen?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Gewicht und Balance beeinflussen die kontrollierte Führung während der Schur.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-005\">Messer</td><td data-fact-ids=\"FACT-CLIPPER-005\">Passt das Messer zum Felltyp?</td><td data-fact-ids=\"FACT-CLIPPER-005\">Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-006\">Wartung</td><td data-fact-ids=\"FACT-CLIPPER-006\">Werden Messer regelmäßig gereinigt und geölt?</td><td data-fact-ids=\"FACT-CLIPPER-006\">Ölen reduziert Reibung und Hitze und hilft, unnötige Belastung zu vermeiden.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-007\">Vorbereitung</td><td data-fact-ids=\"FACT-CLIPPER-007\">Ist das Pferd trocken, sauber und gründlich gebürstet?</td><td data-fact-ids=\"FACT-CLIPPER-007\">Diese Vorbereitung gehört zum empfohlenen Vorgehen vor dem Scheren.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003\">Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004 FACT-CLIPPER-005\">Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.</p>\n</section>\n\n<section data-block=\"further_information\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005 FACT-CLIPPER-006\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005\">Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/\">Schermaschinen</a>.</p>\n</section>\n\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.</p>\n</article>",
+                "body_html_sha256": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+                "body_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen. Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell. Welche Schermaschinen für Pferde passen zu Einsatz und Fell? Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter. Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung . Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen. Einsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest. Felltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell. Stromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist. Pferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern. Ergonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt. Messerauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen. Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben. Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten. Schermaschinen Schritt für Schritt passend auswählen Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden. Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist. Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst. Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung. Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden. Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen. Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen Kriterium Prüffrage Folgerung für die Auswahl Einsatzumfang Wie oft und wie viele Pferde werden geschoren? Mit Häufigkeit und Umfang steigt der Bedarf an einer passenden Geräteklasse. Felltyp Ist das Fell eher fein oder dicht? Feines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt eher mehr Leistung. Stromversorgung Ist ein Netzanschluss sicher erreichbar? Akku erhöht die Bewegungsfreiheit, kann aber Grenzen bei Laufzeit und Leistung haben. Pferdetemperament Reagiert das Pferd empfindlich auf Geräusch oder Vibration? Weniger Geräusch und Vibration können die Handhabung bei jungen oder nervösen Pferden erleichtern. Ergonomie Lässt sich das Gerät leicht und ausgewogen führen? Gewicht und Balance beeinflussen die kontrollierte Führung während der Schur. Messer Passt das Messer zum Felltyp? Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten. Wartung Werden Messer regelmäßig gereinigt und geölt? Ölen reduziert Reibung und Hitze und hilft, unnötige Belastung zu vermeiden. Vorbereitung Ist das Pferd trocken, sauber und gründlich gebürstet? Diese Vorbereitung gehört zum empfohlenen Vorgehen vor dem Scheren. Fazit Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können. Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen. Weiterführende Informationen Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen . Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
+                "body_text_sha256": "98e6a795c85b779f4255ca7a7e8c607410d4adda77e0e0253ef03dce55ae9487",
+                "claim_ids": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004",
+                  "FACT-CLIPPER-005",
+                  "FACT-CLIPPER-006",
+                  "FACT-CLIPPER-007"
+                ],
+                "content_plan_hash": "cf72e3f99dda104c77b079f9589ea334400745af6830897bbd9321f5f03444d4",
+                "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+                "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+                "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+                "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+                "gold_reference_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 31,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 2,
+                  "word_count": 1134
+                },
+                "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Ausrüstung",
+                    "href": "/ausruestung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Pflegezubehör",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Schermaschinen",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "local_candidate_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 18,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 3,
+                  "word_count": 812
+                },
+                "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+                "order_id": "k9-47c8df13",
+                "skeleton_hash": "99c8fad5b16aed17bda18483816e10105a487a700e639fd32716795c8037acf0",
+                "slug": "schermaschinen-f-r-pferde",
+                "source_ids": [
+                  "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "SRC-LISTER-COAT-TYPES-20260930",
+                  "SRC-LISTER-HOT-BLADES-20260930",
+                  "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930"
+                ],
+                "title": "So wählst du passende Schermaschinen für Pferde"
+              },
+              "contract_hashes": [],
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "plan_item_key": "k9-27b5c81a0da11c56",
+              "quality_binding": {
+                "ai_disclosure_required": true,
+                "contract": "content_structure_language_binding_v2",
+                "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "intent_terms": [
+                  "Schermaschinen für Pferde",
+                  "Schermaschinen",
+                  "Pflegezubehör",
+                  "Ausrüstung"
+                ],
+                "internal_test_marker": "LT27B5C81A0DA1",
+                "language_evidence": {},
+                "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+                "link_bindings": [
+                  {
+                    "active": true,
+                    "anchor": "Ausrüstung",
+                    "href": "/ausruestung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Pflegezubehör",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Schermaschinen",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "minimum_word_count": 750,
+                "portal_link_registry": {
+                  "contract": "portal_link_registry_snapshot_v2",
+                  "entries": [
+                    {
+                      "active": true,
+                      "anchor": "Ausrüstung",
+                      "href": "/ausruestung/",
+                      "reason": "Maschinell gebundener Portal-Hauptbereich",
+                      "role": "parent_category",
+                      "section_id": "criteria",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Pflegezubehör",
+                      "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                      "reason": "Maschinell gebundener Portal-Bereich",
+                      "role": "semantic_related",
+                      "section_id": "decision",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Schermaschinen",
+                      "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                      "reason": "Maschinell gebundene Portal-Produktseite",
+                      "role": "further_information",
+                      "section_id": "further_information",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    }
+                  ],
+                  "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+                },
+                "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "type_meta": {
+                  "decision_criteria": [
+                    "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+                    "Felltyp und benötigte Geräteklasse",
+                    "Netz- oder Akkubetrieb",
+                    "Geräusch, Vibration, Gewicht und Balance",
+                    "Passende Messer für Felltyp und gewünschte Schnittlänge",
+                    "Wartung, Kühlung und regelmäßiges Ölen"
+                  ],
+                  "decision_goal": "Eine passende Schermaschine für Pferde nach Einsatzumfang, Felltyp, Stromversorgung, Pferdetemperament, Ergonomie und Wartungsanforderungen auswählen."
+                },
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+              },
+              "quality_binding_hash": "de3a13405be288f397c4e324f6853303926c5d250b1279536a2db27a61180ddd",
+              "runtime_order": {
+                "allowed_fact_ids": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004",
+                  "FACT-CLIPPER-005",
+                  "FACT-CLIPPER-006",
+                  "FACT-CLIPPER-007"
+                ],
+                "article_type": "Beratung",
+                "conclusion": "Fazit Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können. Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.",
+                "domain": "pferdeportal",
+                "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+                "lead": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen. Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Ausrüstung",
+                    "href": "/ausruestung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Pflegezubehör",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Schermaschinen",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "order_id": "k9-47c8df13",
+                "required_sections": [
+                  "Fazit",
+                  "Weiterführende Informationen"
+                ],
+                "section_fact_ids": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004",
+                  "FACT-CLIPPER-005",
+                  "FACT-CLIPPER-006",
+                  "FACT-CLIPPER-007"
+                ],
+                "slug": "schermaschinen-f-r-pferde",
+                "subject_label": "die Auswahl eines Reitplatzplaners für Pferde",
+                "subject_scope": "k9_topic",
+                "table_focus": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004"
+                ],
+                "title": "So wählst du passende Schermaschinen für Pferde"
+              },
+              "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+              "source_hashes": [],
+              "source_order_id": "k9-47c8df13",
+              "source_snapshot_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+              "target_keyword": "Schermaschinen für Pferde",
+              "three_type_local_binding": {
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "semantic_keywords": [
+                  "Schermaschinen für Pferde",
+                  "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+                  "Felltyp und benötigte Geräteklasse",
+                  "Netz- oder Akkubetrieb",
+                  "Geräusch, Vibration, Gewicht und Balance",
+                  "Passende Messer für Felltyp und gewünschte Schnittlänge",
+                  "Wartung, Kühlung und regelmäßiges Ölen"
+                ],
+                "wordpress_runtime_term_id_required_later": true,
+                "wordpress_runtime_validation_performed_now": false
+              },
+              "topic": "So wählst du passende Schermaschinen für Pferde"
+            },
+            "product_sha256": "cdad95fe29dd374f792890e4b1e89b18a7e5f2d6958b8354ce27717cf578259f",
+            "research_product_sha256": "a7ea3cabc861e365e388d3a8a17654a0c6b21b51388fd06b0f1962f35a8149cf",
+            "title": "So wählst du passende Schermaschinen für Pferde"
+          },
+          "item_id": "k9-1ff3dfabfed47a0c47c8df13"
+        },
+        "failed_check": {
+          "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+          "lt68_result": {
+            "article_sha256": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+            "checked_text_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+            "contract": "K9_LT68_RESULT_V1",
+            "engine": "LanguageTool 6.8 / Bestand 43",
+            "finding_count": 1,
+            "findings": [
+              {
+                "context": "...oder dicht?  Feines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt e...",
+                "length": 8,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 4052,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              }
+            ],
+            "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+            "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+            "language_evidence": {
+              "approved_exceptions": [],
+              "checked_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.\n\nDie passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.\n\nWelche Schermaschinen für Pferde passen zu Einsatz und Fell?\n\nDer erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.\n\nFür die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.\n\nEinsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest.\n\nFelltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.\n\nStromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.\n\nPferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.\n\nErgonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.\n\nMesserauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.\n\nBei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.\n\nAuch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nSchermaschinen Schritt für Schritt passend auswählen\n\nBeginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.\n\nDanach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.\n\nIm nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.\n\nDanach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung.\n\nZur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.\n\nVor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.\n\nSchermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen\n\nKriterium\n\nPrüffrage\n\nFolgerung für die Auswahl\n\nEinsatzumfang\n\nWie oft und wie viele Pferde werden geschoren?\n\nMit Häufigkeit und Umfang steigt der Bedarf an einer passenden Geräteklasse.\n\nFelltyp\n\nIst das Fell eher fein oder dicht?\n\nFeines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt eher mehr Leistung.\n\nStromversorgung\n\nIst ein Netzanschluss sicher erreichbar?\n\nAkku erhöht die Bewegungsfreiheit, kann aber Grenzen bei Laufzeit und Leistung haben.\n\nPferdetemperament\n\nReagiert das Pferd empfindlich auf Geräusch oder Vibration?\n\nWeniger Geräusch und Vibration können die Handhabung bei jungen oder nervösen Pferden erleichtern.\n\nErgonomie\n\nLässt sich das Gerät leicht und ausgewogen führen?\n\nGewicht und Balance beeinflussen die kontrollierte Führung während der Schur.\n\nMesser\n\nPasst das Messer zum Felltyp?\n\nEin ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nWartung\n\nWerden Messer regelmäßig gereinigt und geölt?\n\nÖlen reduziert Reibung und Hitze und hilft, unnötige Belastung zu vermeiden.\n\nVorbereitung\n\nIst das Pferd trocken, sauber und gründlich gebürstet?\n\nDiese Vorbereitung gehört zum empfohlenen Vorgehen vor dem Scheren.\n\nFazit\n\nPassende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.\n\nEbenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.\n\nRegelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.\n\nVor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.\n\nWeiterführende Informationen\n\nWenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen.\n\nDieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
+              "checked_text_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+              "content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "execution_record": {
+                "input_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+                "raw_stdout_sha256": "5355aefbede38d46e430f5af12ee1262ec7eba384676761ab7224c71256d990b",
+                "return_code": 0
+              },
+              "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+              "raw_finding_count": 1,
+              "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Trümmern\"},{\"value\":\"Trimmen\"},{\"value\":\"Trimmer\"},{\"value\":\"Trommeln\"},{\"value\":\"Trimmers\"},{\"value\":\"Flimmern\"},{\"value\":\"Zimmern\"},{\"value\":\"Triggern\"},{\"value\":\"Thrillern\"},{\"value\":\"Trillern\"},{\"value\":\"Trommlern\"},{\"value\":\"Dimmern\"},{\"value\":\"Drummern\"},{\"value\":\"Glimmern\"},{\"value\":\"Skimmern\"},{\"value\":\"Stimmern\"},{\"value\":\"Timern\"},{\"value\":\"Trampern\"},{\"value\":\"Trierern\"},{\"value\":\"Wimmern\"}],\"offset\":4052,\"length\":8,\"context\":{\"text\":\"...oder dicht?  Feines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt e...\",\"offset\":48,\"length\":8},\"sentence\":\"Feines Fell kann mit leichteren Trimmern bearbeitet werden; dichteres Fell verlangt eher mehr Leistung.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0}],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+              "raw_report_sha256": "5355aefbede38d46e430f5af12ee1262ec7eba384676761ab7224c71256d990b",
+              "return_code": 0,
+              "unresolved_finding_count": 1
+            },
+            "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+            "publish_allowed": false,
+            "raw_report_sha256": "5355aefbede38d46e430f5af12ee1262ec7eba384676761ab7224c71256d990b",
+            "return_code": 0,
+            "status": "REPAIR_REQUIRED"
+          },
+          "ppm679_result": {
+            "checks": {
+              "content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+              "content_structure_language_gate_checks": {
+                "article_type": "Beratung",
+                "body_h1_count": 0,
+                "conclusion_paragraph_count": 4,
+                "conclusion_ratio": 0.15024630541871922,
+                "conclusion_word_count": 122,
+                "content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+                "contract": "content_structure_language_gate_v2",
+                "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+                "generic_heading_hits": [],
+                "heading_count": 5,
+                "heading_spacing_errors": [],
+                "html_balance": {
+                  "ok": true,
+                  "unclosed": [],
+                  "unexpected_closing": []
+                },
+                "intent_heading_misses": [],
+                "internal_test_marker_valid": true,
+                "internal_test_marker_visible": false,
+                "intro_heading_count": 0,
+                "intro_starts_with_paragraph": true,
+                "intro_word_count": 64,
+                "known_language_regression_hits": [],
+                "language_checked_text_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+                "language_evidence_valid": false,
+                "language_exception_errors": [],
+                "language_raw_finding_count": 1,
+                "language_raw_report_sha256": "5355aefbede38d46e430f5af12ee1262ec7eba384676761ab7224c71256d990b",
+                "language_unresolved_finding_count": 1,
+                "list_count": 1,
+                "maximum_list_items": 6,
+                "near_duplicate_headings": [],
+                "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
+                "quality_binding_hash": "e6ad464bc08a78d3f08844363ed827b91df87d7ec2cbc62addbe33f4a2fe929b",
+                "required_blocks": [
+                  "intro",
+                  "criteria",
+                  "decision",
+                  "table",
+                  "conclusion",
+                  "further_information"
+                ],
+                "resolved_link_roles": {
+                  "further_information": {
+                    "anchor": "Schermaschinen",
+                    "block": "further_information",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+                  },
+                  "parent_category": {
+                    "anchor": "Ausrüstung",
+                    "block": "criteria",
+                    "href": "/ausruestung/"
+                  },
+                  "semantic_related": {
+                    "anchor": "Pflegezubehör",
+                    "block": "decision",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/"
+                  }
+                },
+                "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+                "section_blocks": [
+                  "intro",
+                  "criteria",
+                  "decision",
+                  "table",
+                  "conclusion",
+                  "further_information"
+                ],
+                "table_body_rows": 8,
+                "table_columns": 3,
+                "table_count": 1,
+                "table_headers": [
+                  "Kriterium",
+                  "Prüffrage",
+                  "Folgerung für die Auswahl"
+                ],
+                "table_heading": "Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen",
+                "table_tag_balance": true,
+                "table_unique_content_token_ratio": 0.15178571428571427,
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "title_repeated_in_body": false,
+                "version": "6.7.9-wave2-quarantine",
+                "visible_internal_links": [
+                  {
+                    "anchor": "Ausrüstung",
+                    "block": "criteria",
+                    "href": "/ausruestung/"
+                  },
+                  {
+                    "anchor": "Pflegezubehör",
+                    "block": "decision",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/"
+                  },
+                  {
+                    "anchor": "Schermaschinen",
+                    "block": "further_information",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+                  }
+                ],
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+                "wordpress_category_valid": true
+              },
+              "content_structure_language_gate_status": "BLOCKED",
+              "draft_create_allowed": false,
+              "duplicate_sentence_ratio": 0.03571428571428571,
+              "fact_pack_claim_count": 7,
+              "fact_pack_coverage_ratio": 1,
+              "factual_unit_count": 44,
+              "fail_closed_aggregate_status": "BLOCKED",
+              "h2_count": 5,
+              "internal_link_roles": [
+                "parent_category",
+                "semantic_related"
+              ],
+              "intro_pair_similarity": 0.023809523809523808,
+              "known_error_gate_checks": {
+                "adjacent_heading_count": 0,
+                "article_type": "Beratung",
+                "basic_html_balance": {
+                  "ok": true,
+                  "unclosed": [],
+                  "unexpected_closing": []
+                },
+                "body_h1_count": 0,
+                "conclusion_ratio": 0.15024630541871922,
+                "conclusion_word_count": 122,
+                "content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+                "contract": "known_error_gate_v1",
+                "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+                "duplicate_heading_count": 0,
+                "generic_heading_matches": [],
+                "invalid_internal_link_count": 0,
+                "known_regression_pattern_count": 0,
+                "known_regression_patterns": [],
+                "links_clustered_at_end": false,
+                "maximum_items_in_one_list": 6,
+                "required_conclusion_ratio": 0.1,
+                "required_minimum_list_items": 4,
+                "scope_limit": "known concrete defects only; no general editorial-quality claim",
+                "title_repeated_in_body": false,
+                "total_word_count": 812,
+                "version": "6.7.9-wave1-quarantine",
+                "visible_link_count": 3,
+                "visible_test_marker_found": false
+              },
+              "known_error_gate_status": "PASS",
+              "paragraph_count": 18,
+              "publish_allowed": false,
+              "quality_content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+              "required_blocks": [
+                "intro",
+                "criteria",
+                "decision",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "source_trace_count": 0,
+              "table_body_row_count": 0,
+              "table_count": 0,
+              "technical_content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+              "trace_lexical_support_ratio": 0,
+              "trace_units": 0,
+              "used_fact_count": 7,
+              "visible_link_count": 3,
+              "word_count": 802
+            },
+            "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+            "content_sha256": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+            "contract": "K9_PPM679_RESULT_V1",
+            "errors": [
+              {
+                "action_context": "k9_native_article_control",
+                "actual": 0,
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_TABLE_COUNT",
+                "evidence_hash": "98030375636324ef6eb22620623b5891d7a008d1c26027d5a81c36bbc0d8b865",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": 1,
+                "failed_rule": "GENERATED_ARTICLE_MUST_CONTAIN_EXACTLY_ONE_CANONICAL_TABLE",
+                "field_path": "content.table_count",
+                "item_index": null,
+                "reason": "Der Entwurf enthält nicht genau eine kanonische Vergleichstabelle.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": 0,
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_TABLE_ROW_FLOOR",
+                "evidence_hash": "8adda8594dfa9f32f7d02a3a5921d39a25fd70f4ec7a6b2d1cca1b1b541f74ef",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "at least 4",
+                "failed_rule": "CANONICAL_TABLE_MUST_HAVE_MINIMUM_4_CONTENT_ROWS",
+                "field_path": "content.table.body_row_count",
+                "item_index": null,
+                "reason": "Die echte Tabelle enthält zu wenige Inhaltszeilen. Fundstelle: tbody der kanonischen Tabelle.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": 0,
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_SOURCE_TRACE_COUNT",
+                "evidence_hash": "31c11a20bef869f7eb5de54e5178788976fbf7d09d25dd63476d24c7867125c6",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "at least 3",
+                "failed_rule": "ALL_FACTUAL_ARTICLE_TYPES_REQUIRE_SOURCE_TRACES",
+                "field_path": "content.source_trace_count",
+                "item_index": null,
+                "reason": "Der erzeugte Entwurf enthält zu wenige gebundene Faktenspuren.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "a7578879a7ba0f60ccca1bf466147ef9bc67faaa5bddbf536fde5c0ab90ed989",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[0]@byte_123.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "b636b5945e929c3544a7ee4a39bc60939a992d3ba8b5b92feb58074e0539feaf",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[0]@byte_123.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "da2fc90ae26c1b23fddae3459a8fdefed6f08a8b89b8661cce214353c693f0c1",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[0]@byte_123.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "d3e99f87479659799a017d0e4b185a30ccc0df69a539a65d22c6bf80cfe05707",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[0]@byte_123.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "a45441fa3503512a95df4fedb354df1717aab0004bd19b21784c8caf4ed1f9d1",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[1]@byte_511.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "77e9c883066d549b258407912599741d128162b39798cc332ac38b577a6f0f77",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[1]@byte_511.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "17fb9e6324746d891357cddb0eee100a6f595a563a253700c09b968d8c94bcf0",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[2]@byte_1000.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "466d197acb675724ba11b20e0ab84e84df9ef1ba958bca10dd97caf8be52aa02",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[2]@byte_1000.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "fc87ab7f03122d2c4986e4a259eb38d95f24707d8db8535d6b42e2bb29f66178",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[3]@byte_1713.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "e259463964ee1ce282c5c3b3f456a82956593f56815cbffb425410974cb7eb0c",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[4]@byte_1851.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "0464a439bce783acf77db161c1a46390c075c75ce4cce8e986e477059a6a73ec",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[5]@byte_1985.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "197b9021316b7e406f94ea8b8cb3822730b05b6cd8fc5d0f54a1a4859e836e15",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[6]@byte_2172.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "8149ce1a99659c0f18d623b5feeb2c6eb912d013398ca01598103e59f56385d3",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[7]@byte_2352.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "dd6d619087450135918052f77af3730ee7da173646923ae7b00aa8e0b4b4bd41",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[8]@byte_2523.FACT-CLIPPER-005.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "9e9901351a382254a2cf725525277892638e6819cd8862a514a61d20541a57a6",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[9]@byte_2676.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "c3167e50b016b42a19490887c178c3aa200b1409802a83e30383ac532bf1a4e6",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[10]@byte_2931.FACT-CLIPPER-005.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "607b8d0c6f56eb766cce0bc4e8b1fd3f77d25c7f770ae77ed225eee389410b16",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[11]@byte_3496.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "812bddd7033833a6501ce54c247d6fac6fa2e589933180f03c50fa94e4352312",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[11]@byte_3496.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "f0b35344bb943b103867833a176f97b8e79c27364a12d5918e0e4648a28cbcf2",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[12]@byte_3818.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "90cd261462d236f57b31acd625af5476aab926233e6b79cd0b6d2e1627be07eb",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[13]@byte_4056.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "9c877f42afd810e83cc1d1acd10e7ef213faa33ce41f3ae6921fb2a324bf4231",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[14]@byte_4789.FACT-CLIPPER-006.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "1699962b9d190b38bb6fde5e1e55518ffdc0e7e07c2a6c3922100c3148d0bcef",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[15]@byte_5040.FACT-CLIPPER-007.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "887a2673e4fc8b69aa783c49130140474dfdd347055d24ed9fadb90817d70456",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[16]@byte_5883.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "a6ab673ecd5a8564fcfea6463fd51a5703a8ec028167178d3a956fc621fcab34",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[17]@byte_5938.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "28acbb5c3c67cdd20fc8ca3c7fa3af7f5611b8a14adf9807cc07865b8cc8cf2e",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[18]@byte_6026.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "145898b5fc43642430aeeabb66ca9cf00849132bb3caf19c027e6912521f9114",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[19]@byte_6156.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "9a8894fb4eefe6cd859a84ca741f31aad5b0d8d1cad92a5e9422280ccfba5bd9",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[20]@byte_6205.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "55a76a3c689f57e4ce569c0d04b81140a28ad97ea35d9d931aae4363dac2449a",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[21]@byte_6281.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "3df4a65563078807500616146d42413bf8aaf112f2a17bd78b8de6640584f392",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[22]@byte_6436.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "0532dd50a7365526ad28e3975c6ba83d6d81b64995c03e4fc849195be1811311",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[23]@byte_6493.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "bc053d4252bef22a75133bcc923be3bf3bad144df1ed0b46c4332941f4347d8c",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[24]@byte_6575.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "902cd1471838aa56a775247a04003cf0386570e97084a0b4640c67fbe4aac7e2",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[25]@byte_6713.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "9713cfa1ea1bb563cf3e104cb03b563150fe3eaef4dd3ba6d1622b572764c6db",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[26]@byte_6772.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "459f8fcabaa94937baf64cf387e138178c5c9bc2bf5e26d4ef55a28be84a7f27",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[27]@byte_6874.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "740e5449e3ef60618ee44789d2eb11143ef6591ac3700a3017634b5237d1081b",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[28]@byte_7027.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "f72529b90ae079907a5e2e643f1bb5a4e80d7f322aae8a5582168da7b2211e96",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[29]@byte_7078.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "8d45e9fa1b7d840826b28d042ff17a0174f8f3ac7b974278dfa63af3c929b695",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[30]@byte_7173.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "69215dd7854edc1fc8316be38518a0364ea56e6c1a57461bb057bf28a16a2def",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[31]@byte_7304.FACT-CLIPPER-005.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "6d48df655b5cb80723ea4f1ad43231a004e53a5bce1f1046d70fc8a460c7a0be",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[32]@byte_7352.FACT-CLIPPER-005.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "80d7a8e062083889cc075fe05f98fee59caf157845dd1f35e7f19bee0c9777c0",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[33]@byte_7423.FACT-CLIPPER-005.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "831fab467cff0d3cc49dfd85b182c9e75fbe1144229cd5b95901cfabcb738eae",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[34]@byte_7584.FACT-CLIPPER-006.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "15f1f97a16298736057b789ca78fcb551fbbac9efa3cb217afec0ecb90fc3c7f",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[35]@byte_7633.FACT-CLIPPER-006.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "e40ae2bbe9034cd10b421936cd6a517ec249003b806369373d70fe7a8809db46",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[36]@byte_7723.FACT-CLIPPER-006.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "4c4eee4b967eb7c0b1e0784620e3a2da166f310f3f37f9a1738be5a5f70b4ba6",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[37]@byte_7853.FACT-CLIPPER-007.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "4d65c487a8b502d99e567064e59bc4c7093dee6bdb812953263b2845ebb2598b",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[38]@byte_7907.FACT-CLIPPER-007.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "5eca4df04c7f5e9442cec6c0a31150f93c6e4aa7a86d64c1e033109e9bcf1564",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[39]@byte_8005.FACT-CLIPPER-007.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "1828c9848babd4b420a14d2ab515d99e919084924b4b43b025834bb6bf7749e5",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[40]@byte_8335.FACT-CLIPPER-001.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "cd029636b2fe648b889ddddb171dd8641b3a9b456ea326e87afc4f9aadcb0a60",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[40]@byte_8335.FACT-CLIPPER-002.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "0a82e846e8ddb1a02b32fddd5f8fdcbcedd56da2dc6bb3969f8ef1ad53df0077",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[40]@byte_8335.FACT-CLIPPER-003.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "b6e47116f7c19439e2aaf1681bb6d24cf0245ff3d609d8d6bfb2f966677c4feb",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[41]@byte_8745.FACT-CLIPPER-004.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "36a9fd2fe731d681c971cb7bbf16910d07eaebfd64da3bb1afbcfd799e7018ee",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[41]@byte_8745.FACT-CLIPPER-005.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "3376df7deba92a978bbc2af39f2547add38e80ab1324fd3c785df6553b13dd37",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[42]@byte_9074.FACT-CLIPPER-006.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [],
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH",
+                "evidence_hash": "3605d6355cf52b5e48474b78754b8f888745394b8c5ed3cd27ea28cc307db0b2",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "Beratung",
+                "failed_rule": "REFERENCED_FACT_MUST_APPLY_TO_ARTICLE_TYPE",
+                "field_path": "content.factual_units[43]@byte_9229.FACT-CLIPPER-007.article_types",
+                "item_index": null,
+                "reason": "Eine verwendete Faktreferenz ist für diesen Beitragstyp nicht freigegeben.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": 0,
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT",
+                "evidence_hash": "a3df44d509aa1b7245b6938ea9c24e2a2b7c1b2f7b55326707ca893493999809",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "at least 0.8",
+                "failed_rule": "AT_LEAST_80_PERCENT_OF_TRACE_UNITS_REQUIRE_LEXICAL_FACT_SUPPORT",
+                "field_path": "content.trace_lexical_support_ratio",
+                "item_index": null,
+                "reason": "Zu wenige Faktenspuren besitzen eine erkennbare lexikalische Verbindung zu ihrer sichtbaren Aussage.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": 0.03571428571428571,
+                "detected_at": "2026-09-30T13:15:00+00:00",
+                "error_code": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
+                "evidence_hash": "6b76f5618f83ac15a9a95b6f80bdb9285361c136bac67baebd8694cc4e619fa1",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "at most 0.02",
+                "failed_rule": "DUPLICATE_SENTENCE_RATIO_MUST_NOT_EXCEED_2_PERCENT",
+                "field_path": "content.duplicate_sentence_ratio",
+                "item_index": null,
+                "reason": "Der sichtbare Artikel wiederholt zu viele vollständige Sätze.",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": {
+                  "bad_headers": [],
+                  "body_rows": 8,
+                  "columns": 3,
+                  "count": 1,
+                  "heading": "Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen",
+                  "unique_token_ratio": 0.15178571428571427,
+                  "value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar."
+                },
+                "component": "PPM679_Content_Structure_Language_Gate",
+                "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
+                "expected": {
+                  "body_rows": 4,
+                  "columns": 3,
+                  "count": 1,
+                  "unique_token_ratio": 0.18,
+                  "value_statement_words": ">=8"
+                },
+                "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+                "field_path": "content.table",
+                "human_message": "The table must have a concrete purpose, useful headings and additional information beyond prose.",
+                "server_state_hash": "k9-native",
+                "source_files": [
+                  "includes/content-structure-language-gate.php",
+                  "contracts/content-structure-language-gate-v2.json"
+                ]
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": {
+                  "checked_text_matches": true,
+                  "checked_text_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+                  "content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+                  "engine": "LanguageTool 6.8 / Bestand 43",
+                  "exception_errors": [],
+                  "execution_record": {
+                    "input_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+                    "raw_stdout_sha256": "5355aefbede38d46e430f5af12ee1262ec7eba384676761ab7224c71256d990b",
+                    "return_code": 0
+                  },
+                  "raw_finding_count": 1,
+                  "raw_report_decodes": true,
+                  "raw_report_sha256": "5355aefbede38d46e430f5af12ee1262ec7eba384676761ab7224c71256d990b",
+                  "return_code": 0,
+                  "unresolved_finding_count": 1
+                },
+                "component": "PPM679_Content_Structure_Language_Gate",
+                "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "expected": {
+                  "checked_text_sha256": "81df9642a2cb2924883a8f162aaeb58f129a63c0e1c059d0ece0634f75789584",
+                  "content_hash": "39aff6ccfd37ce1faadc1a4e2326f02596449b74a339679b89ed2be2e0504d5d",
+                  "engine": "LanguageTool 6.8 / Bestand 43",
+                  "human_exceptions_only": true,
+                  "raw_finding_count": 0,
+                  "return_code": 0,
+                  "unresolved_finding_count": 0
+                },
+                "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+                "field_path": "item.quality_binding.language_evidence",
+                "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+                "server_state_hash": "k9-native",
+                "source_files": [
+                  "includes/content-structure-language-gate.php",
+                  "contracts/content-structure-language-gate-v2.json"
+                ]
+              }
+            ],
+            "fail_closed_aggregate_status": "BLOCKED",
+            "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+            "ppm_version": "6.7.9",
+            "publish_allowed": false,
+            "status": "REPAIR_REQUIRED",
+            "technical_status": "BLOCKED_TECHNICAL_CHECK"
+          }
+        },
+        "research": {
+          "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+                "Felltyp und benötigte Geräteklasse",
+                "Netz- oder Akkubetrieb",
+                "Geräusch, Vibration, Gewicht und Balance",
+                "Passende Messer für Felltyp und gewünschte Schnittlänge",
+                "Wartung, Kühlung und regelmäßiges Ölen"
+              ],
+              "decision_goal": "Eine passende Schermaschine für Pferde nach Einsatzumfang, Felltyp, Stromversorgung, Pferdetemperament, Ergonomie und Wartungsanforderungen auswählen."
+            },
+            "fact_pack": {
+              "article_type": "Beratung",
+              "article_type_coverage": "PASS_BERATUNG",
+              "claim_register_hash": "6300dc5370768eb9f2159aba50205b4697a36fb181c19ac34c54069979112b75",
+              "claims": [
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-001",
+                  "locator": "Factors to consider: Horse Clipping Frequency; Light Duty/Trimmers; Medium/HEAVY Duty; Heavy Duty",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden.",
+                  "subject_scope": "Geräteklasse nach Einsatzhäufigkeit",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-002",
+                  "locator": "Factors to consider: Coat Type",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter.",
+                  "subject_scope": "Geräteklasse nach Felltyp",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-003",
+                  "locator": "Factors to consider: Power Source",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben.",
+                  "subject_scope": "Stromversorgung",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-004",
+                  "locator": "Factors to consider: Horse’s Temperament; weight, balance",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern.",
+                  "subject_scope": "Pferdetemperament und Ergonomie",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-005",
+                  "locator": "Fine coated horses; Medium coated horses; Thick coated horses",
+                  "source_id": "SRC-LISTER-COAT-TYPES-20260930",
+                  "statement": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.",
+                  "subject_scope": "Messerauswahl nach Felltyp",
+                  "time_scope": "allgemeine Schurpraxis"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-006",
+                  "locator": "You’re not using enough oil; You’re using the wrong blades for the application",
+                  "source_id": "SRC-LISTER-HOT-BLADES-20260930",
+                  "statement": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.",
+                  "subject_scope": "Wartung und Wärmeentwicklung",
+                  "time_scope": "allgemeine Schurpraxis"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-007",
+                  "locator": "GENERAL ADVICE ON CLIPPING & TRIMMING, points 1, 7, 8, 13",
+                  "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
+                  "statement": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein.",
+                  "subject_scope": "Vorbereitung und sichere Anwendung",
+                  "time_scope": "allgemeine Schurpraxis"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-CLIPPER-001",
+                "FACT-CLIPPER-002",
+                "FACT-CLIPPER-003",
+                "FACT-CLIPPER-004",
+                "FACT-CLIPPER-005",
+                "FACT-CLIPPER-006",
+                "FACT-CLIPPER-007"
+              ],
+              "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+              "fact_pack_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "a29cc0cef3b670de645ecbd88884865299e720db63f285613ae9275b31aed33c",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND"
+            },
+            "portal_links": [
+              {
+                "anchor": "Ausrüstung",
+                "href": "/ausruestung/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Pflegezubehör",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Schermaschinen",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "a7ea3cabc861e365e388d3a8a17654a0c6b21b51388fd06b0f1962f35a8149cf",
+            "sources": [
+              {
+                "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                "title": "Which Clipper is Right for Me and My Horse?",
+                "url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/"
+              },
+              {
+                "source_id": "SRC-LISTER-COAT-TYPES-20260930",
+                "title": "Our guide to clipping different coat types",
+                "url": "https://www.lister-global.com/news/clipping-different-coat-types/"
+              },
+              {
+                "source_id": "SRC-LISTER-HOT-BLADES-20260930",
+                "title": "Help! My Clipper Blades Are Getting Hot",
+                "url": "https://www.lister-global.com/news/bladesgettinghot/"
+              },
+              {
+                "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
+                "title": "Horseline Instructions",
+                "url": "https://www.wahl.co.uk/app/uploads/2018/08/ZB032-Horseline-Instuction-Booklet-Rev.4-10-18.pdf"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "schermaschinen-beratung",
+        "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+        "target_keyword": "Schermaschinen für Pferde",
+        "title": "So wählst du passende Schermaschinen für Pferde"
+      },
+      "revision": 1,
+      "title": "So wählst du passende Schermaschinen für Pferde"
+    }
+  ],
+  "job_id": "K9-REPAIR-b8f6e63e319eb7c4",
+  "job_sha256": "927e7ec2fd4a3178ca15ce44de0ff40ccb4010fb45cad2ffc8e2e8cc6f3b03e6",
+  "ledger_generation": 9,
+  "source_run_id": "36720218355-auto-repair",
+  "station": "repair",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "ADD_UNBOUND_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_BOUND_RESEARCH_ARTICLE_AND_FAILED_CHECK",
+    "must": [
+      "REPAIR_ONLY_REPORTED_FAILURES",
+      "PRESERVE_RESEARCH_PRODUCT_BINDING",
+      "RETURN_COMPLETE_REPAIRED_ARTICLE_PRODUCT",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_REPAIR_WORKER"
+  }
+}
