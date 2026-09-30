@@ -184,6 +184,44 @@ class K9Tests(unittest.TestCase):
         k.accept(self.submission(job,[row],"write.json"))
         return job,row
 
+    def test_terminal_stop_archives_old_ledger_before_new_intake(self):
+        old = k.load_json(k.LEDGER)
+        for item in old["items"]:
+            item["stages"]["research"]="DONE"
+            item["stages"]["write"]="DONE"
+            item["stages"]["check"]="DONE"
+            item["stages"]["repair"]="NOT_REQUIRED"
+        k.write_json(k.LEDGER, old)
+        k.write_json(k.CURRENT_STATE, {
+            "contract":"K9_CURRENT_STATE_V3",
+            "role":"SOLE_CURRENT_AUTHORITY",
+            "concept":"K9",
+            "branch":"konzept9/greenfield-20260929",
+            "status":"STOP",
+            "active_job":None,
+            "publish_allowed":False
+        })
+        nxt=k.ROOT/"next.json"
+        k.write_json(nxt,{
+            "contract":"K9_INTAKE_V1",
+            "batch_id":"K9-INTAKE-NEXT",
+            "batch_sha256":"b"*64,
+            "item_count":1,
+            "publish_allowed":False,
+            "items":[
+                {"item_id":"c","title":"C","metadata":{"title":"C","article_type":"Beratung","target_keyword":"kc","category":"kat-a","plan_slot":"slot-c"}}
+            ]
+        })
+        result=k.import_intake(nxt)
+        fresh=k.load_json(k.LEDGER)
+        self.assertEqual(result["total"],1)
+        self.assertEqual([x["item_id"] for x in fresh["items"]],["c"])
+        archives=list((k.WAREHOUSE/"ledger-history").glob("K9-LEDGER-*.json"))
+        self.assertEqual(len(archives),1)
+        archived=k.load_json(archives[0])
+        self.assertEqual({x["item_id"] for x in archived["items"]},{"a","b"})
+        self.assertTrue(all(x["stages"]["check"]=="DONE" for x in archived["items"]))
+
     def test_module_defines_real_chat_entry_path(self):
         self.assertEqual(ORIGINAL_CHAT_ENTRY.name,"CHAT_ENTRY.json")
 

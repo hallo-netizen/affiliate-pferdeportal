@@ -300,6 +300,22 @@ def import_intake(path):
     if not str(source.get("batch_id") or "").strip() or not str(source.get("batch_sha256") or "").strip():
         raise K9Error("INTAKE_BATCH_IDENTITY_MISSING")
     data = ledger()
+    current = load_json(CURRENT_STATE) if CURRENT_STATE.is_file() else {}
+    if current.get("status") == "STOP" and data["items"]:
+        if not all(x.get("stages",{}).get("check") == "DONE" for x in data["items"]):
+            raise K9Error("TERMINAL_LEDGER_NOT_FULLY_DONE")
+        archive_dir = WAREHOUSE / "ledger-history"
+        archive_path = archive_dir / ("K9-LEDGER-" + stable(data)[:20] + ".json")
+        if archive_path.is_file():
+            if load_json(archive_path) != data:
+                raise K9Error("LEDGER_ARCHIVE_COLLISION")
+        else:
+            write_json(archive_path, data)
+        data = {
+            "contract": "K9_LEDGER_V1",
+            "generation": int(data.get("generation", 0)) + 1,
+            "items": []
+        }
     known = {x["item_id"] for x in data["items"]}
     additions = []
     for row in rows:
