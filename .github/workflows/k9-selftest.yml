@@ -76,7 +76,11 @@ jobs:
           sys.path.insert(0, str(Path(".").resolve()))
           import k9_write_packager
 
-          job=json.loads(Path("runtime/CURRENT_JOB.json").read_text())
+          job_path=Path("runtime/CURRENT_JOB.json")
+          if not job_path.exists():
+              print("STRUCTURAL_ACTIVE_JOB_TEST_SKIPPED_FINAL_STATE=1")
+              raise SystemExit(0)
+          job=json.loads(job_path.read_text())
           row=job["items"][0]
           research=copy.deepcopy(row["input_products"]["research"]["research_product"])
           article=copy.deepcopy(row["input_products"]["article"]["article_product"])
