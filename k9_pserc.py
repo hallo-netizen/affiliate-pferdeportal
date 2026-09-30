@@ -110,6 +110,35 @@ def latest_products(ledger, root):
         out.append((item,row(research_pkg)["research_product"],row(article_pkg)["article_product"],row(check_pkg)))
     return out
 
+
+def bind_export_traces(html,fact_pack):
+    claims=fact_pack.get("claims")
+    if not isinstance(claims,list): raise Blocked("FACT_PACK_CLAIMS_INVALID")
+    out=str(html)
+    for claim in claims:
+        if not isinstance(claim,dict): raise Blocked("CLAIM_INVALID")
+        fid=str(claim.get("fact_id") or "").strip()
+        sid=str(claim.get("source_id") or "").strip()
+        source_hash=str(claim.get("evidence_text_sha256") or "").strip()
+        if not fid or not sid or not source_hash: raise Blocked("PSERC_TRACE_BINDING_INVALID:"+fid)
+        trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
+               f'data-source-hash="{source_hash}" data-source-title="{sid}"></span>')
+        existing=re.compile(
+            r'<span\\b(?=[^>]*class=["\\\'][^"\\\']*\\bppm-source-trace\\b[^"\\\']*["\\\'])'
+            r'(?=[^>]*data-fact-id=["\\\']'+re.escape(fid)+r'["\\\'])[^>]*></span>',
+            re.I
+        )
+        if existing.search(out):
+            out=existing.sub(trace,out,count=1)
+            continue
+        target=re.search(
+            r'<(?:p|li|td)\\b[^>]*data-fact-ids=["\\\'][^"\\\']*\\b'+re.escape(fid)+r'\\b[^"\\\']*["\\\'][^>]*>',
+            out,re.I
+        )
+        if not target: raise Blocked("PSERC_TRACE_TARGET_MISSING:"+fid)
+        out=out[:target.end()]+trace+out[target.end():]
+    return out
+
 PHP=r'''<?php
 $ppm=$argv[1]; $pserc=$argv[2]; $payload=json_decode((string)file_get_contents($argv[3]),true);
 if(!is_array($payload)){fwrite(STDERR,"PAYLOAD_INVALID\n");exit(2);}
@@ -226,6 +255,12 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
             ppm_item["canonical_article_id"]=canonical_id
             fp=canonical_fact_pack(research)
             ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
+            export_html=bind_export_traces(html,fp)
+            canonical_article=ppm_item.get("canonical_article")
+            if not isinstance(canonical_article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
+            canonical_article["body_html"]=export_html
+            canonical_article["body_html_sha256"]=hashlib.sha256(export_html.encode("utf-8")).hexdigest()
+            ppm_item["canonical_article"]=canonical_article
             header={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9"}
             payload={
                 "item":ppm_item,
