@@ -2,31 +2,63 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-28
-STATUS: HD-001 V1.9.0 STAGE HARDLOCK LOKAL PASS / LIVE-ABNAHME OFFEN
+STAND: 2026-09-30
+STATUS: HD-001 V1.9.1 + HD-002 V0.1.0 LOKAL HARD PASS / LIVE-ABNAHME OFFEN
 
 ## Aktueller belastbarer Stand
 
-V1.8.9 hat nach READ_ONLY_PREVIEW-Übernahme unerwartet einen bereits ausgeführten Deployment-Zustand gezeigt. Das wird als realer Blocker behandelt.
+Hobby Depot besitzt zwei klar getrennte Pluginstränge:
 
-Codeprüfung:
-- geführte POST-Aktionen waren nicht serverseitig auf die exakt aktuelle Stage hart gebunden;
-- stale Downstream-Pakete wurden bei Upstream-Ersatz nicht vollständig invalidiert.
+### HD-001 – Kategorie-Workflow
+Aktuell:
+`Affiliate-Portal Kategorie-Workflow V1.9.1`
 
-V1.9.0 behebt genau diese beiden Punkte:
-- exakter Stage-Guard für jeden Guided-Schritt;
-- Downstream-Invalidierung bei neuem/korrigiertem Upstream-Stand;
-- aktiver Deployment-Run schützt seinen Rollback-Anker und blockiert Upstream-Ersatz bis Rollback.
+Status:
+- Stage-Hardlock;
+- Editorial-Ownership-Handoff;
+- 248/248 PASS;
+- Fresh-Unpack PASS;
+- noch nicht live abgenommen.
 
-Lokale Prüfung:
-- 241/241 PASS;
-- Fresh-Unpack 241/241 PASS;
-- Runtime PHP 17/17 PASS;
-- Runtime-Parität 22/22 PASS;
-- exakter READ_ONLY_PREVIEW→stale Deployment Regressionstest PASS/BLOCKED wie erwartet.
+### HD-002 – Text-/SEO-Plugin
+Aktuell:
+`Hobby Depot SEO Themenengine V0.1.0`
 
-Keine Gesamt-Abnahme.
+Status:
+- eigener Hobby-Depot-Codepräfix `HDTE_`;
+- eigene Speicher-/Option-/Tabellen-/Hook-Präfixe `hdte_`;
+- keine Runtime-Abhängigkeit vom Pferdeatelier-PSTE;
+- maschinelle Projektgrenze PASS;
+- Ownership 11/11 PASS;
+- Frage≠FAQ 12/12 PASS;
+- Family Identity 8/8 PASS;
+- PHP 80/80 PASS;
+- Koexistenz mit PSTE ohne Klassen-/Speicherkollision PASS;
+- noch nicht live installiert.
+
+Installer:
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_HARD_LOCAL_PASS.zip`
+
+SHA-256:
+`c6b24fdff3499c1e9a1039fae722d6ad8418df215e55a07e394408bbcac9f2a5`
+
+## Harte Projektgrenze
+
+Pferdeatelier-Plugins dürfen aus Hobby Depot nur gelesen bzw. einmalig als Referenzbasis kopiert werden.
+
+Ab der Kopie:
+- ausschließlich eigener Hobby-Depot-Strang;
+- keine gemeinsamen Optionen/Tabellen;
+- keine Bearbeitung des Pferdeatelier-Plugins;
+- keine Runtime-Abhängigkeit;
+- Fremdprojekt-Reste werden maschinell BLOCKED.
 
 ## NEXT ACTION
 
-V1.9.0 installieren → vorhandenen Test-Deployment-Run zurückrollen → READ_ONLY_PREVIEW erneut übernehmen → live beweisen: Stage structure_ready/finale Prüfung, kein Deployment-Sprung.
+Vor Liveinstallation von HD-002 einmal Delta prüfen, ob seit dem gebundenen PSTE-Referenzstand ein neuerer Storage-/Performance-Stand vorliegt.
+
+Wenn kein neuer Delta existiert:
+1. HD-001 V1.9.1 live sauber abnehmen;
+2. HD-002 V0.1.0 installieren;
+3. V1.9.1-Handoff in HD-002 importieren;
+4. Buchbinden E2E real ausführen.
