@@ -1,7 +1,7 @@
 # HD-002 – HOBBY DEPOT SEO THEMENENGINE – CURRENT
 
 STAND: 2026-09-30
-STATUS: V0.1.0 EIGENER HOBBY-DEPOT-STRANG / HARD LOCAL PASS / LIVE-INSTALLATION OFFEN
+STATUS: V0.1.0 PRODUCTION CANDIDATE / HARD LOCAL PASS / LIVE-INSTALLATION OFFEN
 
 ## Identität
 
@@ -11,64 +11,70 @@ Plugin:
 Version:
 `0.1.0`
 
-Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_HARD_LOCAL_PASS.zip`
+Produktionskandidat:
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_PRODUCTION_CANDIDATE.zip`
+
+Installer SHA-256:
+`2d3a0bd9180b30ff76e7fb0ed84a8e7cf1a4a7c0d2135999329cb5d11371a684`
 
 Source:
-`QUELLCODE_HDTE_V0.1.0_HD002_HARD_LOCAL_PASS.zip`
+`QUELLCODE_HDTE_V0.1.0_PRODUCTION_CANDIDATE.zip`
 
-SHA-256:
-`c6b24fdff3499c1e9a1039fae722d6ad8418df215e55a07e394408bbcac9f2a5`
+Source SHA-256:
+`5204950ba0b74e58054a5fddddfdb037ef3daf40baa4fd54b47171d149828a45`
 
 ## Harte Projekttrennung
 
 - eigener PHP-Präfix: `HDTE_`;
 - eigener Option-/Table-/Hook-Präfix: `hdte_`;
-- eigene Projekt-ID: `hobby_depot`;
+- Projekt-ID: `hobby_depot`;
 - keine Runtime-Abhängigkeit vom Pferdeatelier-PSTE;
-- paralleler Boot mit PSTE geprüft;
-- Aktivierungs-/Release-Guard blockiert Fremdprojekt-Quellreste;
-- direkte DB-Schreibpfade sind auf eigene `wp_*hdte_*` Tabellen begrenzt;
-- atomare Optionsbereinigung nur für eigene `hdte_`-Keys/Transients.
+- keine gemeinsamen Tabellen/Optionen;
+- Aktivierungs-/Release-Guard blockiert Fremdprojekt-Reste;
+- paralleler Boot mit PSTE ohne Klassen-/Speicherkollision geprüft.
 
-Pferdeatelier-PSTE wurde nur einmalig als Referenzbasis gelesen/kopiert und wird von HD-002 nicht verändert.
+## Referenzbasis
 
-## Übernommene technische Basis
-
-Referenz:
+Einmalig als technische Vorlage:
 `PSTE-0.57.13-DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS.zip`
 
 Referenz-SHA:
 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`
 
-Storage-/Performance-Abgleich:
-- Research-Archive: normalisierte Parität PASS;
-- Sandbox-Record-Store: normalisierte Parität PASS;
-- Repository: nur projektbezogene Handoff-/FAQ-Anpassungen; Storage-/Cleanup-Mechanik erhalten;
-- Storage-Maintenance: nur Rollback-UI-Wortlaut angepasst; Komprimierungs-/Restore-Mechanik erhalten;
-- keine alte `.orig`-Datei übernommen.
+Finaler Referenzdelta-Check:
+**kein neuerer PSTE-Storage-/Performance-Stand vorhanden.**
 
-## Hobby-Depot-Anpassung
+Die übernommene Storage-/Performance-Logik wurde in HD-002 eigenständig mit `hdte_`-Speichern geführt.
 
-- V1.9.1-Editorial-Ownership-Handoff wird read-only unterstützt;
-- `owner_concept_id` + `semantic_intent_key` vor Artikelpromotion;
-- neue eigenständige Intents sind erlaubt, wenn Owner gültig und semantischer Schlüssel einzigartig ist;
-- answer-equivalente Varianten dürfen nicht zu einem anderen Owner springen;
-- Frageform besitzt keine automatische FAQ-/Kategorie-Owner-Autorität;
-- keine Kategorien- oder Artikelanlage durch diesen Gate-Schritt.
+## Produktionscheck
 
-## Harte lokale Prüfung
+Packaging:
+- WordPress-Pluginordner normalisiert auf `hobby-depot-seo-topic-engine`;
+- gegenüber dem zuvor geprüften HD-002-Code 135/135 interne Dateien byte-identisch;
+- keine doppelten ZIP-Einträge;
+- keine `.orig/.bak/.tmp/.old/~`.
 
-Fresh Installer:
+Fresh-Unpack:
 - PHP-Lint 80/80 PASS;
 - Project Boundary PASS;
+- Foreign-Project-Runtime-Reste: 0.
+
+Direkter HD-001 → HD-002 Vertragstest:
+- HD-001 erzeugt `APKW_EDITORIAL_INTENT_OWNERSHIP_HANDOFF_V1`;
+- HD-002 übernimmt den Handoff als READY;
+- Buchbinden Positiv-/Negativfälle: 9/9 PASS;
+- falsche FAQ-Zuordnung BLOCKED;
+- semantische Dublette BLOCKED;
+- fehlender `semantic_intent_key` BLOCKED;
+- neuer eigenständiger Intent mit gültigem Owner PASS.
+
+Zusätzliche lokale Tests bleiben:
 - Ownership 11/11 PASS;
 - Frage≠FAQ 12/12 PASS;
 - Family Identity 8/8 PASS;
-- Frontend-Boot: 0 DB Reads/Writes, 0 Schedules, 0 Remote;
-- Admin-Boot: 3 Reads, 0 Writes, 0 Schedules, 0 Remote;
-- Koexistenz mit PSTE: PASS;
-- Runtime Worktree↔Fresh-Unpack: 135/135 byte-identisch.
+- Frontend-Boot ohne zusätzliche DB-Writes;
+- Admin-Boot ohne Writes;
+- Koexistenz neben PSTE PASS.
 
 ## Beleggrenze
 
@@ -77,7 +83,9 @@ Noch keine produktive Datenänderung.
 
 ## NEXT ACTION
 
-Vor Live-Installation den aktuellen Nachbarchat-PSTE-Stand noch einmal nur als Referenzdelta prüfen, falls dort ein neuerer Storage-/Performance-Stand veröffentlicht wurde.
+HD-001 V1.9.1 live sauber abnehmen und erst danach HD-002 V0.1.0 installieren.
 
-Wenn kein neuer Delta existiert:
-HD-002 V0.1.0 auf Hobby Depot installieren und ausschließlich mit eigenen `hdte_` Daten initialisieren.
+Anschließend:
+1. V1.9.1-Editorial-Handoff in HD-002 importieren;
+2. Buchbinden E2E real ausführen;
+3. nur die offenen Research-Räume Fragen/Probleme und FAQ nachrecherchieren.
