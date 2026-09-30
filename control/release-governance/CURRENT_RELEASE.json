@@ -297,13 +297,24 @@
         "sha256": "685aaa10f7ea9fe3e95369d3989ca9fd9c30125a6b7953741ec9cac3446a6bb9"
       },
       "category_texts": "FIVE_NEW_TEXTS_OPEN_RULES_BOUND_150_200_NATURAL_SPECIFIC_NO_TEMPLATE_NO_PADDING_NO_GENERIC_CLOSING"
+    },
+    "ebay_kiss_cleanup": {
+      "version": "6.72.167",
+      "status": "TARGETED_SOURCE_AND_ISOLATED_LOGIC_PASS_FULL_GATE_OPEN",
+      "source_manifest_sha256": "480277aa8850ec5916c62a24548f90155dfa21591228e3c8a41b338ddc46afc4",
+      "removed_legacy_run_functions": 17,
+      "removed_dead_ebay_compat_methods": 4,
+      "run_trait_lines_before": 3015,
+      "run_trait_lines_after": 2144,
+      "local_php84_logic_harness": "ALL_PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/ebay_kiss_storage_cleanup_v672167_source_checks_20260930.md"
     }
   },
   "execution_state": {
-    "state": "WORKING",
-    "authorized_next_action": "RUN_TARGETED_EBAY_KISS_TESTS",
+    "state": "TARGETED_PASS_FULL_GATE_OPEN",
+    "authorized_next_action": "RUN_COMBINED_FULL_RELEASE_GATE_FOR_6_72_167",
     "bound_user_scope_action": "EBAY ONLY: KISS/RECOVERY CLEANUP + STORAGE PREVENTION + CONNECTION STATUS REPAIR. PRESERVE 6.72.166 PERFORMANCE AND ALL CURRENT EBAY FUNCTION/QUALITY/COMPLIANCE GATES.",
-    "completion_condition": "TARGETED POSITIVE/NEGATIVE PASS THEN FULL RELEASE GATE THEN ONE REAL SERVER READBACK",
+    "completion_condition": "COMBINED_FULL_RELEASE_GATE_PASS_THEN_BUILD_ONE_INSTALLER_THEN_ONE_REAL_SERVER_READBACK",
     "after_completion_action": "RUN SAME DATABASE/PERFORMANCE MEASUREMENT AND COMPARE",
     "no_optional_detours": true,
     "sequence": 44,
