@@ -1,0 +1,1039 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-00c0134014a9e7b4",
+  "results": [
+    {
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "lt68_result": {
+        "article_sha256": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+        "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 12,
+        "findings": [
+          {
+            "context": "...eiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig untersch...",
+            "length": 11,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 139,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...äte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzpl...",
+            "length": 17,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 155,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...ie Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sic...",
+            "length": 14,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 516,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...x Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenvers...",
+            "length": 14,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 1102,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...t werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstel...",
+            "length": 15,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 3100,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unters...",
+            "length": 14,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 3132,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...lauf übernimmt.  Reitplatzplaner im direkten Kriterienvergleich  Die Tabelle bündelt die wichtigsten Auswahl...",
+            "length": 18,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 3935,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...art  Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche T...",
+            "length": 11,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4356,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...den unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche Tretschicht soll regelm...",
+            "length": 17,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4372,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...pflege  Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.  Sollen Randbereiche regelmäßig m...",
+            "length": 15,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5186,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...r verfügbar.  Sollen Randbereiche regelmäßig mitbearbeitet werden?  Zusatzausstattung  Zackenschiene, H...",
+            "length": 13,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5245,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...äte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder untersch...",
+            "length": 15,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 6395,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          }
+        ],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Ein Reitplatzplaner soll die regelmäßige Pflege des Reitbodens unterstützen. Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzplaner deutlich bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb lohnt es sich, nicht zuerst auf ein einzelnes Modell zu schauen, sondern Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam zu betrachten.\n\nFür die Auswahl sind vor allem die Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt. Ein Planierschild hat die Aufgabe, den Reitplatz zu ebnen. Damit wird klar, warum ein Reitplatzplaner nicht nur nach Breite oder Preis eingeordnet werden sollte: Entscheidend ist, welche Bearbeitung für die eigene Tretschicht gebraucht wird.\n\nReitplatzplaner für Pferde nach klaren Kriterien auswählen\n\nEin sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.\n\nEbenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.\n\nFür die übergeordnete Einordnung des Platzes gehört auch der Bereich Weide in den Zusammenhang.\n\nTretschicht prüfen: Welche Bodenart soll regelmäßig bearbeitet werden?\n\nArbeitstiefe festlegen: Wie wichtig ist eine einstellbare Tiefenführung der Zinken?\n\nArbeitsbreite abgleichen: Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?\n\nZugfahrzeug berücksichtigen: Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?\n\nArbeitswerkzeuge vergleichen: Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?\n\nRandpflege einordnen: Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?\n\nBoden, Fahrzeug und Arbeitswerkzeuge zusammenbringen\n\nDie Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.\n\nAuch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.\n\nFür die praktische Pflegeentscheidung ist der Bereich Reitplatzpflege die passende nächste Ebene.\n\nWer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.\n\nReitplatzplaner im direkten Kriterienvergleich\n\nDie Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.\n\nPrüfpunkt\n\nGebundene Einordnung\n\nFrage für die Auswahl\n\nBodenart\n\nModelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.\n\nWelche Tretschicht soll regelmäßig gepflegt werden?\n\nArbeitstiefe\n\nDie Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.\n\nWie tief soll die Bearbeitung erfolgen?\n\nPlanieren\n\nEin Planierschild dient dazu, den Reitplatz zu ebnen.\n\nWie wichtig ist das gezielte Ausgleichen der Oberfläche?\n\nArbeitsbreite\n\nReitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.\n\nWelche Breite passt zur Fläche und zum Fahrweg?\n\nZugfahrzeug\n\nGewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.\n\nWelches Fahrzeug ist bereits vorhanden?\n\nZinken und Walze\n\nZinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.\n\nWelche Arbeitsfolge wird auf dem eigenen Boden benötigt?\n\nRandpflege\n\nJe nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.\n\nSollen Randbereiche regelmäßig mitbearbeitet werden?\n\nZusatzausstattung\n\nZackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.\n\nWelche Zusatzfunktion wird tatsächlich genutzt?\n\nFazit zur Auswahl eines Reitplatzplaners\n\nEin passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.\n\nDanach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.\n\nErst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.\n\nWeiterführende Informationen\n\nWenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.\n\nFür die weitere Produktauswahl findest du den gebundenen Bereich Reitplatzplaner. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+          "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+            "raw_stdout_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 12,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Sand-Lies\"},{\"value\":\"Sand-Liese\"},{\"value\":\"Sand-Blitz-\"},{\"value\":\"Sand-Fliese\"},{\"value\":\"Sand-Gleis-\"},{\"value\":\"Sand-Vlies\"},{\"value\":\"Sand-Vliese\"}],\"offset\":139,\"length\":11,\"context\":{\"text\":\"...eiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig untersch...\",\"offset\":48,\"length\":11},\"sentence\":\"Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":155,\"length\":17,\"context\":{\"text\":\"...äte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzpl...\",\"offset\":48,\"length\":17},\"sentence\":\"Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Striegel zinken\"},{\"value\":\"Störsegelzinken\"}],\"offset\":516,\"length\":14,\"context\":{\"text\":\"...ie Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sic...\",\"offset\":48,\"length\":14},\"sentence\":\"Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Striegel zinken\"},{\"value\":\"Störsegelzinken\"}],\"offset\":1102,\"length\":14,\"context\":{\"text\":\"...x Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenvers...\",\"offset\":48,\"length\":14},\"sentence\":\"Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Hufschlagzeuger\"},{\"value\":\"Hufschlagzeugers\"},{\"value\":\"Hufschlafräume\"},{\"value\":\"Hufschlagzeugern\"},{\"value\":\"Hufschlagzeuge\"},{\"value\":\"Hufschlafräumen\"},{\"value\":\"Hufschlagbäume\"},{\"value\":\"Hufschlagleute\"},{\"value\":\"Hufschlagzeugen\"},{\"value\":\"Hufschlagbäumen\"},{\"value\":\"Hufglasräume\"},{\"value\":\"Hufglasräumen\"},{\"value\":\"Hufschlaghämmer\"},{\"value\":\"Hufschlagkeule\"},{\"value\":\"Hufschlagkeulen\"},{\"value\":\"Hufschlagleuten\"},{\"value\":\"Hufschlagzeuges\"},{\"value\":\"Hufschlagräume\"},{\"value\":\"Hufschlagräuber\"},{\"value\":\"Hufschlagbeuger\"}],\"offset\":3100,\"length\":15,\"context\":{\"text\":\"...t werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstel...\",\"offset\":48,\"length\":15},\"sentence\":\"Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Striegel zinken\"},{\"value\":\"Störsegelzinken\"}],\"offset\":3132,\"length\":14,\"context\":{\"text\":\"...Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unters...\",\"offset\":48,\"length\":14},\"sentence\":\"Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":3935,\"length\":18,\"context\":{\"text\":\"...lauf übernimmt.  Reitplatzplaner im direkten Kriterienvergleich  Die Tabelle bündelt die wichtigsten Auswahl...\",\"offset\":48,\"length\":18},\"sentence\":\"Reitplatzplaner im direkten Kriterienvergleich\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Sand-Lies\"},{\"value\":\"Sand-Liese\"},{\"value\":\"Sand-Blitz-\"},{\"value\":\"Sand-Fliese\"},{\"value\":\"Sand-Gleis-\"},{\"value\":\"Sand-Vlies\"},{\"value\":\"Sand-Vliese\"}],\"offset\":4356,\"length\":11,\"context\":{\"text\":\"...art  Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche T...\",\"offset\":48,\"length\":11},\"sentence\":\"Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":4372,\"length\":17,\"context\":{\"text\":\"...den unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche Tretschicht soll regelm...\",\"offset\":48,\"length\":17},\"sentence\":\"Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Hufschlagzeuger\"},{\"value\":\"Hufschlagzeugers\"},{\"value\":\"Hufschlafräume\"},{\"value\":\"Hufschlagzeugern\"},{\"value\":\"Hufschlagzeuge\"},{\"value\":\"Hufschlafräumen\"},{\"value\":\"Hufschlagbäume\"},{\"value\":\"Hufschlagleute\"},{\"value\":\"Hufschlagzeugen\"},{\"value\":\"Hufschlagbäumen\"},{\"value\":\"Hufglasräume\"},{\"value\":\"Hufglasräumen\"},{\"value\":\"Hufschlaghämmer\"},{\"value\":\"Hufschlagkeule\"},{\"value\":\"Hufschlagkeulen\"},{\"value\":\"Hufschlagleuten\"},{\"value\":\"Hufschlagzeuges\"},{\"value\":\"Hufschlagräume\"},{\"value\":\"Hufschlagräuber\"},{\"value\":\"Hufschlagbeuger\"}],\"offset\":5186,\"length\":15,\"context\":{\"text\":\"...pflege  Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.  Sollen Randbereiche regelmäßig m...\",\"offset\":48,\"length\":15},\"sentence\":\"Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"mit bearbeitet\"},{\"value\":\"mitgearbeitet\"},{\"value\":\"mitarbeitet\"},{\"value\":\"mitverarbeitet\"}],\"offset\":5245,\"length\":13,\"context\":{\"text\":\"...r verfügbar.  Sollen Randbereiche regelmäßig mitbearbeitet werden?  Zusatzausstattung  Zackenschiene, H...\",\"offset\":48,\"length\":13},\"sentence\":\"Sollen Randbereiche regelmäßig mitbearbeitet werden?\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Hufschlagzeuger\"},{\"value\":\"Hufschlagzeugers\"},{\"value\":\"Hufschlafräume\"},{\"value\":\"Hufschlagzeugern\"},{\"value\":\"Hufschlagzeuge\"},{\"value\":\"Hufschlafräumen\"},{\"value\":\"Hufschlagbäume\"},{\"value\":\"Hufschlagleute\"},{\"value\":\"Hufschlagzeugen\"},{\"value\":\"Hufschlagbäumen\"},{\"value\":\"Hufglasräume\"},{\"value\":\"Hufglasräumen\"},{\"value\":\"Hufschlaghämmer\"},{\"value\":\"Hufschlagkeule\"},{\"value\":\"Hufschlagkeulen\"},{\"value\":\"Hufschlagleuten\"},{\"value\":\"Hufschlagzeuges\"},{\"value\":\"Hufschlagräume\"},{\"value\":\"Hufschlagräuber\"},{\"value\":\"Hufschlagbeuger\"}],\"offset\":6395,\"length\":15,\"context\":{\"text\":\"...äte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder untersch...\",\"offset\":48,\"length\":15},\"sentence\":\"Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0}],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+          "return_code": 0,
+          "unresolved_finding_count": 12
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+        "return_code": 0,
+        "status": "REPAIR_REQUIRED"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 3,
+            "conclusion_ratio": 0.16400911161731208,
+            "conclusion_word_count": 144,
+            "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [],
+            "heading_count": 5,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [
+              "Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen"
+            ],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 112,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+            "language_evidence_valid": false,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 12,
+            "language_raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+            "language_unresolved_finding_count": 12,
+            "list_count": 1,
+            "maximum_list_items": 6,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "5a6dd595e9dc6a906848a6aeeaf05abd2c130f5e8d999902a30bb4418fa63ee9",
+            "quality_binding_hash": "b73a656a2fee727763ec2caeea532a6b31d847d670f37c41780fd960e04a3d3a",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Reitplatzplaner",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/"
+              },
+              "parent_category": {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              "semantic_related": {
+                "anchor": "Reitplatzpflege",
+                "block": "decision",
+                "href": "/weide/weide-reitplatzpflege/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 8,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Prüfpunkt",
+              "Gebundene Einordnung",
+              "Frage für die Auswahl"
+            ],
+            "table_heading": "Reitplatzplaner im direkten Kriterienvergleich",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.1958762886597938,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Reitplatzplaner für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              {
+                "anchor": "Reitplatzpflege",
+                "block": "decision",
+                "href": "/weide/weide-reitplatzpflege/"
+              },
+              {
+                "anchor": "Reitplatzplaner",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+              "name": "Beratung Reitplatzplaner",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "reitplatzplaner-beratung",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "BLOCKED",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 7,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 42,
+          "fail_closed_aggregate_status": "BLOCKED",
+          "h2_count": 5,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.013888888888888888,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.16400911161731208,
+            "conclusion_word_count": 144,
+            "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 6,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 878,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 16,
+          "publish_allowed": false,
+          "quality_content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 23,
+          "table_body_row_count": 8,
+          "table_count": 1,
+          "technical_content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 12,
+          "used_fact_count": 7,
+          "visible_link_count": 3,
+          "word_count": 868
+        },
+        "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+        "content_sha256": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "376afbed0a3e3756f77dd72dc6961a3c813423439622f51cfb52075555ed738f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[4]@byte_3530.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Tretschicht prüfen:</strong> Welche Bodenart soll regelmäßig bearbeitet werden?</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "e8056856551c7368aac595f6112ce9471ea389ab10ae783686ab81e609722443",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[5]@byte_3630.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Arbeitstiefe festlegen:</strong> Wie wichtig ist eine einstellbare Tiefenführung der Zinken?</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "542dd959df22e4ec827cfb5718f5e868a265937214afc44e268c270a09b9a18c",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[6]@byte_3741.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Arbeitsbreite abgleichen:</strong> Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "29c1fbf4a7b3535d1822aa25de4b5bb8b1ac86a09c8b7bfaf5719523a2fd8b89",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[7]@byte_3855.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Zugfahrzeug berücksichtigen:</strong> Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a78d6dbd307060bb7d45c18b97446ae53bdad8f72c0fd655c78a9d96e0a6ea51",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[8]@byte_3976.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Arbeitswerkzeuge vergleichen:</strong> Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "7b7d3655db401a88f267bb7b7689c4d232d4bebed04be8e0b8cf13d3e12b3c7c",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[9]@byte_4115.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Randpflege einordnen:</strong> Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "4951e5793d5bd5aedaef50c6c3eefa914558777dae27a6ced54d5cd8a1b9c106",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[14]@byte_8119.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bodenart</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "f07e1d125ddd7f6a715f0d2c78ceb253a4a6e20252357bd6b4048f67d15ca5ca",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[15]@byte_8136.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "5e66a76c9e89a054c7e4250cb0fe6aa00068dbfb63605f3d0bf3877e908f4bcb",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[16]@byte_8233.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Tretschicht soll regelmäßig gepflegt werden?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "b38bcb4d01a09745023dac29faa4590be2e47a8d0a06cca6ff9724f09e832ffd",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[17]@byte_8305.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Arbeitstiefe</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ad05f583961b9daac4a2408a607de7ad7f36f60d82aacf6e330366c2c5fe199f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[18]@byte_8326.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "330d85a4f08f81f89851c8d53b0c1a06ec8aa74bb909c59687f2d3f1793e7129",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[19]@byte_8417.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wie tief soll die Bearbeitung erfolgen?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a68840deb048f26a931bbe479f4fca81e33dab5a0fd964ae5f4e7bdeccc6e3db",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[20]@byte_8475.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Planieren</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "2fe1bbc86f536f131bdc5c2d1426d94d6fe4f517523b836cd3bccd9fc9fd9f9d",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[21]@byte_8493.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Ein Planierschild dient dazu, den Reitplatz zu ebnen.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d73dabeec113a76bfcc6bff0a8f4c37ca2e47a39156fe19e78ef8d74b954056b",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[22]@byte_8555.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wie wichtig ist das gezielte Ausgleichen der Oberfläche?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "bdca4d06f5db79832c6ea40d91a830851b3d429a06958e04cb17ff0da5fc0ce8",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[23]@byte_8631.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Arbeitsbreite</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "e971e9267719a2866889de40380eeb69fdd7cd8bb96e9650d3070d8f48569c67",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[24]@byte_8653.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "832cbd574ec36c4830f285f10e8f8c0bef697694d8a0812501a384182a692aef",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[25]@byte_8732.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Breite passt zur Fläche und zum Fahrweg?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "64db080214d895e6201989eec945b04935b47d47c49bd3dd0c7ebcdf445d4e01",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[26]@byte_8799.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zugfahrzeug</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "50c3ef1f904052b2d90cd0df3bcb665679da5a38a3b1c079e78fddf19472b41c",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[27]@byte_8819.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "8dfb277c6797e0f76ef770e2517f2b60a48e341a56715265f4fc93ad6dbf9e19",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[28]@byte_8897.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welches Fahrzeug ist bereits vorhanden?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "88a55713ba45a74faf15e2c5a97c519021ab88bf79c781fbf530f94692427128",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[29]@byte_8955.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zinken und Walze</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a9f6f00b4fe37b1f55034ac8d367ed08c802fa47959e155e88d0bed4b3514c7d",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[30]@byte_8980.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "97c867d739e982b571c6e1fb985bee9a58f1cfc8dd661f823a32e7eceb71483b",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[31]@byte_9073.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Arbeitsfolge wird auf dem eigenen Boden benötigt?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "05579e69fa56deadce4809fc9be789b759da1d95e3feebaa87b79d5604c7063d",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[32]@byte_9149.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Randpflege</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ffe5369e7618dde9484b8cbcb9bbf8d2eaddb83ac0f003b3e808ceb55d3e7a9c",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[33]@byte_9168.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "4cc610ab9fbcfa7ac14b6f4b60a3ac837e44babed5d53012893e78de7951ca82",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[34]@byte_9242.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Sollen Randbereiche regelmäßig mitbearbeitet werden?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "f2fe514fc441b4efe9e86f62bcc882e5146b4ef6f3af9fef310f4c94de67d647",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[35]@byte_9315.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zusatzausstattung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "8827d0fbbe8989edc3728ec224afaf84945ff799e3521956f170f832991a8089",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[36]@byte_9341.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T15:40:34+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "cbe94af3547416c1be927f4d2705eb125e835cfb502d9a7691963c9614c4fade",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[37]@byte_9449.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Zusatzfunktion wird tatsächlich genutzt?</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "first_element_is_p": true,
+              "headings": 0,
+              "words": 112
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+            "expected": {
+              "first_element": "p",
+              "headings": 0,
+              "word_range": [
+                30,
+                100
+              ]
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.intro",
+            "human_message": "The article needs a short introductory paragraph without a heading.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "expected": [
+              "reitplatzplaner für pferde",
+              "reitplatzplaner",
+              "reitplatzpflege",
+              "weide"
+            ],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.heading_intent_terms",
+            "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "checked_text_matches": true,
+              "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+              "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "exception_errors": [],
+              "execution_record": {
+                "input_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+                "raw_stdout_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+                "return_code": 0
+              },
+              "raw_finding_count": 12,
+              "raw_report_decodes": true,
+              "raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+              "return_code": 0,
+              "unresolved_finding_count": 12
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+            "expected": {
+              "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+              "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "human_exceptions_only": true,
+              "raw_finding_count": 0,
+              "return_code": 0,
+              "unresolved_finding_count": 0
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.language_evidence",
+            "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          }
+        ],
+        "fail_closed_aggregate_status": "BLOCKED",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "technical_status": "BLOCKED_TECHNICAL_CHECK"
+      }
+    }
+  ],
+  "station": "check"
+}

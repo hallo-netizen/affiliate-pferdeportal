@@ -1,0 +1,1612 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-bfc0c6806fa88f0c55a2dcd9"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "article": {
+          "job_id": "K9-WRITE-a50a69a17e704591",
+          "path": "warehouse/write/K9-WRITE-a50a69a17e704591.json",
+          "sha256": "3ed8c9e9bc45c3720ef561fcc742b7acde56b3f0cdd0fd775f680ed9d7b7b63e"
+        },
+        "failed_check": {
+          "job_id": "K9-CHECK-00c0134014a9e7b4",
+          "path": "warehouse/check/K9-CHECK-00c0134014a9e7b4.json",
+          "sha256": "14c3bf03a57e0d6a27c913aa752a3f9f92d760070ce2b670d44b56cb8f2f9dec"
+        },
+        "research": {
+          "job_id": "K9-RESEARCH-0c08920b33f4cfe8",
+          "path": "warehouse/research/K9-RESEARCH-0c08920b33f4cfe8.json",
+          "sha256": "3af5aa6502e22ee056dd120678af2d5f56578b112bb84d4c1d43609d22c5d483"
+        }
+      },
+      "input_products": {
+        "article": {
+          "article_product": {
+            "article_type": "Beratung",
+            "content_html": "<article data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Ein Reitplatzplaner soll die regelmäßige Pflege des Reitbodens unterstützen. Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzplaner deutlich bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb lohnt es sich, nicht zuerst auf ein einzelnes Modell zu schauen, sondern Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam zu betrachten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-003\">Für die Auswahl sind vor allem die Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt. Ein Planierschild hat die Aufgabe, den Reitplatz zu ebnen. Damit wird klar, warum ein Reitplatzplaner nicht nur nach Breite oder Preis eingeordnet werden sollte: Entscheidend ist, welche Bearbeitung für die eigene Tretschicht gebraucht wird.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n</section>\n<section data-block=\"criteria\">\n<h2>Reitplatzplaner für Pferde nach klaren Kriterien auswählen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-005\">Ein sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-006\">Ebenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-006\" data-source-hash=\"4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p>Für die übergeordnete Einordnung des Platzes gehört auch der Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> in den Zusammenhang.</p>\n<ul data-list=\"criteria\">\n<li><strong>Tretschicht prüfen:</strong> Welche Bodenart soll regelmäßig bearbeitet werden?</li>\n<li><strong>Arbeitstiefe festlegen:</strong> Wie wichtig ist eine einstellbare Tiefenführung der Zinken?</li>\n<li><strong>Arbeitsbreite abgleichen:</strong> Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?</li>\n<li><strong>Zugfahrzeug berücksichtigen:</strong> Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?</li>\n<li><strong>Arbeitswerkzeuge vergleichen:</strong> Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?</li>\n<li><strong>Randpflege einordnen:</strong> Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?</li>\n</ul>\n</section>\n<section data-block=\"decision\">\n<h2>Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-004\">Die Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-007\">Auch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n<p>Für die praktische Pflegeentscheidung ist der Bereich <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatzpflege/\">Reitplatzpflege</a> die passende nächste Ebene.</p>\n<p data-fact-ids=\"FACT-REITPLATZ-003 FACT-REITPLATZ-005\">Wer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n</section>\n<section data-block=\"table\">\n<h2>Reitplatzplaner im direkten Kriterienvergleich</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Die Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Prüfpunkt</th><th>Gebundene Einordnung</th><th>Frage für die Auswahl</th></tr></thead><tbody>\n<tr><td>Bodenart</td><td>Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.</td><td>Welche Tretschicht soll regelmäßig gepflegt werden?</td></tr>\n<tr><td>Arbeitstiefe</td><td>Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.</td><td>Wie tief soll die Bearbeitung erfolgen?</td></tr>\n<tr><td>Planieren</td><td>Ein Planierschild dient dazu, den Reitplatz zu ebnen.</td><td>Wie wichtig ist das gezielte Ausgleichen der Oberfläche?</td></tr>\n<tr><td>Arbeitsbreite</td><td>Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.</td><td>Welche Breite passt zur Fläche und zum Fahrweg?</td></tr>\n<tr><td>Zugfahrzeug</td><td>Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.</td><td>Welches Fahrzeug ist bereits vorhanden?</td></tr>\n<tr><td>Zinken und Walze</td><td>Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.</td><td>Welche Arbeitsfolge wird auf dem eigenen Boden benötigt?</td></tr>\n<tr><td>Randpflege</td><td>Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.</td><td>Sollen Randbereiche regelmäßig mitbearbeitet werden?</td></tr>\n<tr><td>Zusatzausstattung</td><td>Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.</td><td>Welche Zusatzfunktion wird tatsächlich genutzt?</td></tr>\n</tbody></table>\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit zur Auswahl eines Reitplatzplaners</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-003 FACT-REITPLATZ-005\">Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-006 FACT-REITPLATZ-007\">Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-006\" data-source-hash=\"4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-005\">Wenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-007\">Für die weitere Produktauswahl findest du den gebundenen Bereich <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatzpflege/reitplatzplaner/\">Reitplatzplaner</a>. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+            "content_sha256": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+            "contract": "K9_ARTICLE_PRODUCT_V1",
+            "ppm_item": {
+              "article_type": "Beratung",
+              "canonical_article": {
+                "article_type": "Beratung",
+                "body_html": "<article data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Ein Reitplatzplaner soll die regelmäßige Pflege des Reitbodens unterstützen. Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzplaner deutlich bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb lohnt es sich, nicht zuerst auf ein einzelnes Modell zu schauen, sondern Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam zu betrachten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-003\">Für die Auswahl sind vor allem die Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt. Ein Planierschild hat die Aufgabe, den Reitplatz zu ebnen. Damit wird klar, warum ein Reitplatzplaner nicht nur nach Breite oder Preis eingeordnet werden sollte: Entscheidend ist, welche Bearbeitung für die eigene Tretschicht gebraucht wird.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n</section>\n<section data-block=\"criteria\">\n<h2>Reitplatzplaner für Pferde nach klaren Kriterien auswählen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-005\">Ein sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-006\">Ebenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-006\" data-source-hash=\"4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p>Für die übergeordnete Einordnung des Platzes gehört auch der Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> in den Zusammenhang.</p>\n<ul data-list=\"criteria\">\n<li><strong>Tretschicht prüfen:</strong> Welche Bodenart soll regelmäßig bearbeitet werden?</li>\n<li><strong>Arbeitstiefe festlegen:</strong> Wie wichtig ist eine einstellbare Tiefenführung der Zinken?</li>\n<li><strong>Arbeitsbreite abgleichen:</strong> Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?</li>\n<li><strong>Zugfahrzeug berücksichtigen:</strong> Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?</li>\n<li><strong>Arbeitswerkzeuge vergleichen:</strong> Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?</li>\n<li><strong>Randpflege einordnen:</strong> Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?</li>\n</ul>\n</section>\n<section data-block=\"decision\">\n<h2>Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-004\">Die Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-007\">Auch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n<p>Für die praktische Pflegeentscheidung ist der Bereich <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatzpflege/\">Reitplatzpflege</a> die passende nächste Ebene.</p>\n<p data-fact-ids=\"FACT-REITPLATZ-003 FACT-REITPLATZ-005\">Wer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n</section>\n<section data-block=\"table\">\n<h2>Reitplatzplaner im direkten Kriterienvergleich</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Die Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Prüfpunkt</th><th>Gebundene Einordnung</th><th>Frage für die Auswahl</th></tr></thead><tbody>\n<tr><td>Bodenart</td><td>Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.</td><td>Welche Tretschicht soll regelmäßig gepflegt werden?</td></tr>\n<tr><td>Arbeitstiefe</td><td>Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.</td><td>Wie tief soll die Bearbeitung erfolgen?</td></tr>\n<tr><td>Planieren</td><td>Ein Planierschild dient dazu, den Reitplatz zu ebnen.</td><td>Wie wichtig ist das gezielte Ausgleichen der Oberfläche?</td></tr>\n<tr><td>Arbeitsbreite</td><td>Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.</td><td>Welche Breite passt zur Fläche und zum Fahrweg?</td></tr>\n<tr><td>Zugfahrzeug</td><td>Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.</td><td>Welches Fahrzeug ist bereits vorhanden?</td></tr>\n<tr><td>Zinken und Walze</td><td>Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.</td><td>Welche Arbeitsfolge wird auf dem eigenen Boden benötigt?</td></tr>\n<tr><td>Randpflege</td><td>Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.</td><td>Sollen Randbereiche regelmäßig mitbearbeitet werden?</td></tr>\n<tr><td>Zusatzausstattung</td><td>Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.</td><td>Welche Zusatzfunktion wird tatsächlich genutzt?</td></tr>\n</tbody></table>\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit zur Auswahl eines Reitplatzplaners</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-003 FACT-REITPLATZ-005\">Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-006 FACT-REITPLATZ-007\">Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-006\" data-source-hash=\"4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-005\">Wenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-007\">Für die weitere Produktauswahl findest du den gebundenen Bereich <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatzpflege/reitplatzplaner/\">Reitplatzplaner</a>. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+                "body_html_sha256": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+                "body_text": "Ein Reitplatzplaner soll die regelmäßige Pflege des Reitbodens unterstützen. Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzplaner deutlich bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb lohnt es sich, nicht zuerst auf ein einzelnes Modell zu schauen, sondern Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam zu betrachten. Für die Auswahl sind vor allem die Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt. Ein Planierschild hat die Aufgabe, den Reitplatz zu ebnen. Damit wird klar, warum ein Reitplatzplaner nicht nur nach Breite oder Preis eingeordnet werden sollte: Entscheidend ist, welche Bearbeitung für die eigene Tretschicht gebraucht wird. Reitplatzplaner für Pferde nach klaren Kriterien auswählen Ein sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten. Ebenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten. Für die übergeordnete Einordnung des Platzes gehört auch der Bereich Weide in den Zusammenhang. Tretschicht prüfen: Welche Bodenart soll regelmäßig bearbeitet werden? Arbeitstiefe festlegen: Wie wichtig ist eine einstellbare Tiefenführung der Zinken? Arbeitsbreite abgleichen: Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug? Zugfahrzeug berücksichtigen: Welche Leistung und Anbauart stehen tatsächlich zur Verfügung? Arbeitswerkzeuge vergleichen: Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt? Randpflege einordnen: Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant? Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen Die Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt. Auch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen. Für die praktische Pflegeentscheidung ist der Bereich Reitplatzpflege die passende nächste Ebene. Wer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt. Reitplatzplaner im direkten Kriterienvergleich Die Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden. Prüfpunkt Gebundene Einordnung Frage für die Auswahl Bodenart Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben. Welche Tretschicht soll regelmäßig gepflegt werden? Arbeitstiefe Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden. Wie tief soll die Bearbeitung erfolgen? Planieren Ein Planierschild dient dazu, den Reitplatz zu ebnen. Wie wichtig ist das gezielte Ausgleichen der Oberfläche? Arbeitsbreite Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten. Welche Breite passt zur Fläche und zum Fahrweg? Zugfahrzeug Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät. Welches Fahrzeug ist bereits vorhanden? Zinken und Walze Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann. Welche Arbeitsfolge wird auf dem eigenen Boden benötigt? Randpflege Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar. Sollen Randbereiche regelmäßig mitbearbeitet werden? Zusatzausstattung Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden. Welche Zusatzfunktion wird tatsächlich genutzt? Fazit zur Auswahl eines Reitplatzplaners Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten. Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt. Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen. Weiterführende Informationen Wenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen. Für die weitere Produktauswahl findest du den gebundenen Bereich Reitplatzplaner . Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen. Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+                "body_text_sha256": "edec15ecf1d6a51d742bf17cfb78cbcf6d18f66e17fa2743d502aac8c64e17ec",
+                "claim_ids": [
+                  "FACT-REITPLATZ-001",
+                  "FACT-REITPLATZ-002",
+                  "FACT-REITPLATZ-003",
+                  "FACT-REITPLATZ-004",
+                  "FACT-REITPLATZ-005",
+                  "FACT-REITPLATZ-006",
+                  "FACT-REITPLATZ-007"
+                ],
+                "content_plan_hash": "2036078e13a20325ba46f467df9c63fab419808d7796976ee6cf419a62c7d494",
+                "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
+                "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+                "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+                "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+                "gold_reference_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 31,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 2,
+                  "word_count": 1134
+                },
+                "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Weide",
+                    "href": "/weide/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzpflege",
+                    "href": "/weide/weide-reitplatzpflege/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzplaner",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "local_candidate_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 16,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 3,
+                  "word_count": 878
+                },
+                "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+                "order_id": "k9-55a2dcd9",
+                "skeleton_hash": "196ec488f87434631f1884fb6d571afa11942837090d1434be773841a04a94cc",
+                "slug": "reitplatzplaner-fuer-pferde",
+                "source_ids": [
+                  "SRC-HATZEN-REITPLATZ-20260930",
+                  "SRC-PLATZMAX-LIGHT-20260930",
+                  "SRC-PLATZMAX-MAXISM-20260930"
+                ],
+                "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+              },
+              "contract_hashes": [],
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "plan_item_key": "k9-0b401802eeed8574",
+              "quality_binding": {
+                "ai_disclosure_required": true,
+                "contract": "content_structure_language_binding_v2",
+                "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "intent_terms": [
+                  "Reitplatzplaner für Pferde",
+                  "Reitplatzplaner",
+                  "Reitplatzpflege",
+                  "Weide"
+                ],
+                "internal_test_marker": "LT0B401802EEED",
+                "language_evidence": {},
+                "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+                "link_bindings": [
+                  {
+                    "active": true,
+                    "anchor": "Weide",
+                    "href": "/weide/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzpflege",
+                    "href": "/weide/weide-reitplatzpflege/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzplaner",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "minimum_word_count": 750,
+                "portal_link_registry": {
+                  "contract": "portal_link_registry_snapshot_v2",
+                  "entries": [
+                    {
+                      "active": true,
+                      "anchor": "Weide",
+                      "href": "/weide/",
+                      "reason": "Maschinell gebundener Portal-Hauptbereich",
+                      "role": "parent_category",
+                      "section_id": "criteria",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Reitplatzpflege",
+                      "href": "/weide/weide-reitplatzpflege/",
+                      "reason": "Maschinell gebundener Portal-Bereich",
+                      "role": "semantic_related",
+                      "section_id": "decision",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Reitplatzplaner",
+                      "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                      "reason": "Maschinell gebundene Portal-Produktseite",
+                      "role": "further_information",
+                      "section_id": "further_information",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    }
+                  ],
+                  "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+                },
+                "portal_link_registry_hash": "5a6dd595e9dc6a906848a6aeeaf05abd2c130f5e8d999902a30bb4418fa63ee9",
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Reitplatzplaner für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "type_meta": {
+                  "decision_criteria": [
+                    "Tretschicht und Bodenart",
+                    "Benötigte Arbeitstiefe",
+                    "Arbeitsbreite und Platzgröße",
+                    "Vorhandenes Zugfahrzeug und Leistung",
+                    "Benötigte Zinken-, Planierschild- und Walzenfunktion",
+                    "Banden- und Hufschlagpflege"
+                  ],
+                  "decision_goal": "Einen Reitplatzplaner auswählen, dessen Bodenbearbeitung, Arbeitsbreite und Zugfahrzeug-Anforderungen zum eigenen Reitplatz passen."
+                },
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+              },
+              "quality_binding_hash": "149a0e1f3f591d5430932e2a87d027614efaa667a4dcc1dbd31bf6afc8b07c4d",
+              "runtime_order": {
+                "allowed_fact_ids": [
+                  "FACT-REITPLATZ-001",
+                  "FACT-REITPLATZ-002",
+                  "FACT-REITPLATZ-003",
+                  "FACT-REITPLATZ-004",
+                  "FACT-REITPLATZ-005",
+                  "FACT-REITPLATZ-006",
+                  "FACT-REITPLATZ-007"
+                ],
+                "article_type": "Beratung",
+                "conclusion": "Fazit zur Auswahl eines Reitplatzplaners Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten. Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt. Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.",
+                "domain": "pferdeportal",
+                "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
+                "lead": "Ein Reitplatzplaner soll die regelmäßige Pflege des Reitbodens unterstützen. Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzplaner deutlich bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb lohnt es sich, nicht zuerst auf ein einzelnes Modell zu schauen, sondern Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam zu betrachten. Für die Auswahl sind vor allem die Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt. Ein Planierschild hat die Aufgabe, den Reitplatz zu ebnen. Damit wird klar, warum ein Reitplatzplaner nicht nur nach Breite oder Preis eingeordnet werden sollte: Entscheidend ist, welche Bearbeitung für die eigene Tretschicht gebraucht wird.",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Weide",
+                    "href": "/weide/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzpflege",
+                    "href": "/weide/weide-reitplatzpflege/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Reitplatzplaner",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "order_id": "k9-55a2dcd9",
+                "required_sections": [
+                  "Fazit",
+                  "Weiterführende Informationen"
+                ],
+                "section_fact_ids": [
+                  "FACT-REITPLATZ-001",
+                  "FACT-REITPLATZ-002",
+                  "FACT-REITPLATZ-003",
+                  "FACT-REITPLATZ-004",
+                  "FACT-REITPLATZ-005",
+                  "FACT-REITPLATZ-006",
+                  "FACT-REITPLATZ-007"
+                ],
+                "slug": "reitplatzplaner-fuer-pferde",
+                "subject_label": "die Auswahl eines Reitplatzplaners für Pferde",
+                "subject_scope": "reitplatzplaner_fuer_pferde",
+                "table_focus": [
+                  "FACT-REITPLATZ-001",
+                  "FACT-REITPLATZ-002",
+                  "FACT-REITPLATZ-003",
+                  "FACT-REITPLATZ-004"
+                ],
+                "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+              },
+              "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+              "source_hashes": [],
+              "source_order_id": "k9-55a2dcd9",
+              "source_snapshot_id": "FP-K9-REITPLATZPLANER-20260930",
+              "target_keyword": "Reitplatzplaner für Pferde",
+              "three_type_local_binding": {
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "semantic_keywords": [
+                  "Reitplatzplaner für Pferde",
+                  "Tretschicht und Bodenart",
+                  "Benötigte Arbeitstiefe",
+                  "Arbeitsbreite und Platzgröße",
+                  "Vorhandenes Zugfahrzeug und Leistung",
+                  "Benötigte Zinken-, Planierschild- und Walzenfunktion",
+                  "Banden- und Hufschlagpflege"
+                ],
+                "wordpress_runtime_term_id_required_later": true,
+                "wordpress_runtime_validation_performed_now": false
+              },
+              "topic": "Das Wichtigste über Reitplatzplaner für Pferde"
+            },
+            "product_sha256": "e54696e3622ef516e011a89412ff99fe88080cba30cd662a9041c32fa6e8b4c5",
+            "research_product_sha256": "f97856d11baef9c479ae5d32877af6b11615989f40faaf91ec848e7c877e51f7",
+            "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+          },
+          "item_id": "k9-bfc0c6806fa88f0c55a2dcd9"
+        },
+        "failed_check": {
+          "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+          "lt68_result": {
+            "article_sha256": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+            "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+            "contract": "K9_LT68_RESULT_V1",
+            "engine": "LanguageTool 6.8 / Bestand 43",
+            "finding_count": 12,
+            "findings": [
+              {
+                "context": "...eiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig untersch...",
+                "length": 11,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 139,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...äte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzpl...",
+                "length": 17,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 155,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...ie Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sic...",
+                "length": 14,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 516,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...x Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenvers...",
+                "length": 14,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 1102,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...t werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstel...",
+                "length": 15,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 3100,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unters...",
+                "length": 14,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 3132,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...lauf übernimmt.  Reitplatzplaner im direkten Kriterienvergleich  Die Tabelle bündelt die wichtigsten Auswahl...",
+                "length": 18,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 3935,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...art  Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche T...",
+                "length": 11,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 4356,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...den unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche Tretschicht soll regelm...",
+                "length": 17,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 4372,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...pflege  Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.  Sollen Randbereiche regelmäßig m...",
+                "length": 15,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 5186,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...r verfügbar.  Sollen Randbereiche regelmäßig mitbearbeitet werden?  Zusatzausstattung  Zackenschiene, H...",
+                "length": 13,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 5245,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              },
+              {
+                "context": "...äte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder untersch...",
+                "length": 15,
+                "message": "Möglicher Tippfehler gefunden.",
+                "offset": 6395,
+                "rule_id": "GERMAN_SPELLER_RULE"
+              }
+            ],
+            "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+            "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+            "language_evidence": {
+              "approved_exceptions": [],
+              "checked_text": "Ein Reitplatzplaner soll die regelmäßige Pflege des Reitbodens unterstützen. Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzplaner deutlich bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb lohnt es sich, nicht zuerst auf ein einzelnes Modell zu schauen, sondern Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam zu betrachten.\n\nFür die Auswahl sind vor allem die Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt. Ein Planierschild hat die Aufgabe, den Reitplatz zu ebnen. Damit wird klar, warum ein Reitplatzplaner nicht nur nach Breite oder Preis eingeordnet werden sollte: Entscheidend ist, welche Bearbeitung für die eigene Tretschicht gebraucht wird.\n\nReitplatzplaner für Pferde nach klaren Kriterien auswählen\n\nEin sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.\n\nEbenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.\n\nFür die übergeordnete Einordnung des Platzes gehört auch der Bereich Weide in den Zusammenhang.\n\nTretschicht prüfen: Welche Bodenart soll regelmäßig bearbeitet werden?\n\nArbeitstiefe festlegen: Wie wichtig ist eine einstellbare Tiefenführung der Zinken?\n\nArbeitsbreite abgleichen: Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?\n\nZugfahrzeug berücksichtigen: Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?\n\nArbeitswerkzeuge vergleichen: Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?\n\nRandpflege einordnen: Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?\n\nBoden, Fahrzeug und Arbeitswerkzeuge zusammenbringen\n\nDie Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.\n\nAuch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.\n\nFür die praktische Pflegeentscheidung ist der Bereich Reitplatzpflege die passende nächste Ebene.\n\nWer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.\n\nReitplatzplaner im direkten Kriterienvergleich\n\nDie Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.\n\nPrüfpunkt\n\nGebundene Einordnung\n\nFrage für die Auswahl\n\nBodenart\n\nModelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.\n\nWelche Tretschicht soll regelmäßig gepflegt werden?\n\nArbeitstiefe\n\nDie Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.\n\nWie tief soll die Bearbeitung erfolgen?\n\nPlanieren\n\nEin Planierschild dient dazu, den Reitplatz zu ebnen.\n\nWie wichtig ist das gezielte Ausgleichen der Oberfläche?\n\nArbeitsbreite\n\nReitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.\n\nWelche Breite passt zur Fläche und zum Fahrweg?\n\nZugfahrzeug\n\nGewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.\n\nWelches Fahrzeug ist bereits vorhanden?\n\nZinken und Walze\n\nZinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.\n\nWelche Arbeitsfolge wird auf dem eigenen Boden benötigt?\n\nRandpflege\n\nJe nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.\n\nSollen Randbereiche regelmäßig mitbearbeitet werden?\n\nZusatzausstattung\n\nZackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.\n\nWelche Zusatzfunktion wird tatsächlich genutzt?\n\nFazit zur Auswahl eines Reitplatzplaners\n\nEin passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.\n\nDanach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.\n\nErst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.\n\nWeiterführende Informationen\n\nWenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.\n\nFür die weitere Produktauswahl findest du den gebundenen Bereich Reitplatzplaner. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+              "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+              "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "execution_record": {
+                "input_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+                "raw_stdout_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+                "return_code": 0
+              },
+              "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+              "raw_finding_count": 12,
+              "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Sand-Lies\"},{\"value\":\"Sand-Liese\"},{\"value\":\"Sand-Blitz-\"},{\"value\":\"Sand-Fliese\"},{\"value\":\"Sand-Gleis-\"},{\"value\":\"Sand-Vlies\"},{\"value\":\"Sand-Vliese\"}],\"offset\":139,\"length\":11,\"context\":{\"text\":\"...eiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig untersch...\",\"offset\":48,\"length\":11},\"sentence\":\"Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":155,\"length\":17,\"context\":{\"text\":\"...äte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze. Gleichzeitig unterscheiden sich Reitplatzpl...\",\"offset\":48,\"length\":17},\"sentence\":\"Hersteller beschreiben solche Geräte unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Striegel zinken\"},{\"value\":\"Störsegelzinken\"}],\"offset\":516,\"length\":14,\"context\":{\"text\":\"...ie Arbeitswerkzeuge interessant. Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sic...\",\"offset\":48,\"length\":14},\"sentence\":\"Zwei Reihen Striegelzinken können den Reitboden bearbeiten, während sich die Tiefenführung über eine verstellbare Andruckwalze beeinflussen lässt.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Striegel zinken\"},{\"value\":\"Störsegelzinken\"}],\"offset\":1102,\"length\":14,\"context\":{\"text\":\"...x Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden. Danach gleicht eine höhenvers...\",\"offset\":48,\"length\":14},\"sentence\":\"Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Hufschlagzeuger\"},{\"value\":\"Hufschlagzeugers\"},{\"value\":\"Hufschlafräume\"},{\"value\":\"Hufschlagzeugern\"},{\"value\":\"Hufschlagzeuge\"},{\"value\":\"Hufschlafräumen\"},{\"value\":\"Hufschlagbäume\"},{\"value\":\"Hufschlagleute\"},{\"value\":\"Hufschlagzeugen\"},{\"value\":\"Hufschlagbäumen\"},{\"value\":\"Hufglasräume\"},{\"value\":\"Hufglasräumen\"},{\"value\":\"Hufschlaghämmer\"},{\"value\":\"Hufschlagkeule\"},{\"value\":\"Hufschlagkeulen\"},{\"value\":\"Hufschlagleuten\"},{\"value\":\"Hufschlagzeuges\"},{\"value\":\"Hufschlagräume\"},{\"value\":\"Hufschlagräuber\"},{\"value\":\"Hufschlagbeuger\"}],\"offset\":3100,\"length\":15,\"context\":{\"text\":\"...t werden. Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstel...\",\"offset\":48,\"length\":15},\"sentence\":\"Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Striegel zinken\"},{\"value\":\"Störsegelzinken\"}],\"offset\":3132,\"length\":14,\"context\":{\"text\":\"...Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unters...\",\"offset\":48,\"length\":14},\"sentence\":\"Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":3935,\"length\":18,\"context\":{\"text\":\"...lauf übernimmt.  Reitplatzplaner im direkten Kriterienvergleich  Die Tabelle bündelt die wichtigsten Auswahl...\",\"offset\":48,\"length\":18},\"sentence\":\"Reitplatzplaner im direkten Kriterienvergleich\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Sand-Lies\"},{\"value\":\"Sand-Liese\"},{\"value\":\"Sand-Blitz-\"},{\"value\":\"Sand-Fliese\"},{\"value\":\"Sand-Gleis-\"},{\"value\":\"Sand-Vlies\"},{\"value\":\"Sand-Vliese\"}],\"offset\":4356,\"length\":11,\"context\":{\"text\":\"...art  Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche T...\",\"offset\":48,\"length\":11},\"sentence\":\"Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":4372,\"length\":17,\"context\":{\"text\":\"...den unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.  Welche Tretschicht soll regelm...\",\"offset\":48,\"length\":17},\"sentence\":\"Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Hufschlagzeuger\"},{\"value\":\"Hufschlagzeugers\"},{\"value\":\"Hufschlafräume\"},{\"value\":\"Hufschlagzeugern\"},{\"value\":\"Hufschlagzeuge\"},{\"value\":\"Hufschlafräumen\"},{\"value\":\"Hufschlagbäume\"},{\"value\":\"Hufschlagleute\"},{\"value\":\"Hufschlagzeugen\"},{\"value\":\"Hufschlagbäumen\"},{\"value\":\"Hufglasräume\"},{\"value\":\"Hufglasräumen\"},{\"value\":\"Hufschlaghämmer\"},{\"value\":\"Hufschlagkeule\"},{\"value\":\"Hufschlagkeulen\"},{\"value\":\"Hufschlagleuten\"},{\"value\":\"Hufschlagzeuges\"},{\"value\":\"Hufschlagräume\"},{\"value\":\"Hufschlagräuber\"},{\"value\":\"Hufschlagbeuger\"}],\"offset\":5186,\"length\":15,\"context\":{\"text\":\"...pflege  Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.  Sollen Randbereiche regelmäßig m...\",\"offset\":48,\"length\":15},\"sentence\":\"Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"mit bearbeitet\"},{\"value\":\"mitgearbeitet\"},{\"value\":\"mitarbeitet\"},{\"value\":\"mitverarbeitet\"}],\"offset\":5245,\"length\":13,\"context\":{\"text\":\"...r verfügbar.  Sollen Randbereiche regelmäßig mitbearbeitet werden?  Zusatzausstattung  Zackenschiene, H...\",\"offset\":48,\"length\":13},\"sentence\":\"Sollen Randbereiche regelmäßig mitbearbeitet werden?\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Hufschlagzeuger\"},{\"value\":\"Hufschlagzeugers\"},{\"value\":\"Hufschlafräume\"},{\"value\":\"Hufschlagzeugern\"},{\"value\":\"Hufschlagzeuge\"},{\"value\":\"Hufschlafräumen\"},{\"value\":\"Hufschlagbäume\"},{\"value\":\"Hufschlagleute\"},{\"value\":\"Hufschlagzeugen\"},{\"value\":\"Hufschlagbäumen\"},{\"value\":\"Hufglasräume\"},{\"value\":\"Hufglasräumen\"},{\"value\":\"Hufschlaghämmer\"},{\"value\":\"Hufschlagkeule\"},{\"value\":\"Hufschlagkeulen\"},{\"value\":\"Hufschlagleuten\"},{\"value\":\"Hufschlagzeuges\"},{\"value\":\"Hufschlagräume\"},{\"value\":\"Hufschlagräuber\"},{\"value\":\"Hufschlagbeuger\"}],\"offset\":6395,\"length\":15,\"context\":{\"text\":\"...äte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder untersch...\",\"offset\":48,\"length\":15},\"sentence\":\"Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hufschlagräumer, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0}],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+              "raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+              "return_code": 0,
+              "unresolved_finding_count": 12
+            },
+            "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+            "publish_allowed": false,
+            "raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+            "return_code": 0,
+            "status": "REPAIR_REQUIRED"
+          },
+          "ppm679_result": {
+            "checks": {
+              "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+              "content_structure_language_gate_checks": {
+                "article_type": "Beratung",
+                "body_h1_count": 0,
+                "conclusion_paragraph_count": 3,
+                "conclusion_ratio": 0.16400911161731208,
+                "conclusion_word_count": 144,
+                "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+                "contract": "content_structure_language_gate_v2",
+                "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+                "generic_heading_hits": [],
+                "heading_count": 5,
+                "heading_spacing_errors": [],
+                "html_balance": {
+                  "ok": true,
+                  "unclosed": [],
+                  "unexpected_closing": []
+                },
+                "intent_heading_misses": [
+                  "Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen"
+                ],
+                "internal_test_marker_valid": true,
+                "internal_test_marker_visible": false,
+                "intro_heading_count": 0,
+                "intro_starts_with_paragraph": true,
+                "intro_word_count": 112,
+                "known_language_regression_hits": [],
+                "language_checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+                "language_evidence_valid": false,
+                "language_exception_errors": [],
+                "language_raw_finding_count": 12,
+                "language_raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+                "language_unresolved_finding_count": 12,
+                "list_count": 1,
+                "maximum_list_items": 6,
+                "near_duplicate_headings": [],
+                "portal_link_registry_hash": "5a6dd595e9dc6a906848a6aeeaf05abd2c130f5e8d999902a30bb4418fa63ee9",
+                "quality_binding_hash": "b73a656a2fee727763ec2caeea532a6b31d847d670f37c41780fd960e04a3d3a",
+                "required_blocks": [
+                  "intro",
+                  "criteria",
+                  "decision",
+                  "table",
+                  "conclusion",
+                  "further_information"
+                ],
+                "resolved_link_roles": {
+                  "further_information": {
+                    "anchor": "Reitplatzplaner",
+                    "block": "further_information",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/"
+                  },
+                  "parent_category": {
+                    "anchor": "Weide",
+                    "block": "criteria",
+                    "href": "/weide/"
+                  },
+                  "semantic_related": {
+                    "anchor": "Reitplatzpflege",
+                    "block": "decision",
+                    "href": "/weide/weide-reitplatzpflege/"
+                  }
+                },
+                "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+                "section_blocks": [
+                  "intro",
+                  "criteria",
+                  "decision",
+                  "table",
+                  "conclusion",
+                  "further_information"
+                ],
+                "table_body_rows": 8,
+                "table_columns": 3,
+                "table_count": 1,
+                "table_headers": [
+                  "Prüfpunkt",
+                  "Gebundene Einordnung",
+                  "Frage für die Auswahl"
+                ],
+                "table_heading": "Reitplatzplaner im direkten Kriterienvergleich",
+                "table_tag_balance": true,
+                "table_unique_content_token_ratio": 0.1958762886597938,
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Reitplatzplaner für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "title_repeated_in_body": false,
+                "version": "6.7.9-wave2-quarantine",
+                "visible_internal_links": [
+                  {
+                    "anchor": "Weide",
+                    "block": "criteria",
+                    "href": "/weide/"
+                  },
+                  {
+                    "anchor": "Reitplatzpflege",
+                    "block": "decision",
+                    "href": "/weide/weide-reitplatzpflege/"
+                  },
+                  {
+                    "anchor": "Reitplatzplaner",
+                    "block": "further_information",
+                    "href": "/weide/weide-reitplatzpflege/reitplatzplaner/"
+                  }
+                ],
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+                  "name": "Beratung Reitplatzplaner",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "reitplatzplaner-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+                "wordpress_category_valid": true
+              },
+              "content_structure_language_gate_status": "BLOCKED",
+              "draft_create_allowed": false,
+              "duplicate_sentence_ratio": 0,
+              "fact_pack_claim_count": 7,
+              "fact_pack_coverage_ratio": 1,
+              "factual_unit_count": 42,
+              "fail_closed_aggregate_status": "BLOCKED",
+              "h2_count": 5,
+              "internal_link_roles": [
+                "parent_category",
+                "semantic_related"
+              ],
+              "intro_pair_similarity": 0.013888888888888888,
+              "known_error_gate_checks": {
+                "adjacent_heading_count": 0,
+                "article_type": "Beratung",
+                "basic_html_balance": {
+                  "ok": true,
+                  "unclosed": [],
+                  "unexpected_closing": []
+                },
+                "body_h1_count": 0,
+                "conclusion_ratio": 0.16400911161731208,
+                "conclusion_word_count": 144,
+                "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+                "contract": "known_error_gate_v1",
+                "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+                "duplicate_heading_count": 0,
+                "generic_heading_matches": [],
+                "invalid_internal_link_count": 0,
+                "known_regression_pattern_count": 0,
+                "known_regression_patterns": [],
+                "links_clustered_at_end": false,
+                "maximum_items_in_one_list": 6,
+                "required_conclusion_ratio": 0.1,
+                "required_minimum_list_items": 4,
+                "scope_limit": "known concrete defects only; no general editorial-quality claim",
+                "title_repeated_in_body": false,
+                "total_word_count": 878,
+                "version": "6.7.9-wave1-quarantine",
+                "visible_link_count": 3,
+                "visible_test_marker_found": false
+              },
+              "known_error_gate_status": "PASS",
+              "paragraph_count": 16,
+              "publish_allowed": false,
+              "quality_content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+              "required_blocks": [
+                "intro",
+                "criteria",
+                "decision",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "source_trace_count": 23,
+              "table_body_row_count": 8,
+              "table_count": 1,
+              "technical_content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+              "trace_lexical_support_ratio": 1,
+              "trace_units": 12,
+              "used_fact_count": 7,
+              "visible_link_count": 3,
+              "word_count": 868
+            },
+            "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+            "content_sha256": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+            "contract": "K9_PPM679_RESULT_V1",
+            "errors": [
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "376afbed0a3e3756f77dd72dc6961a3c813423439622f51cfb52075555ed738f",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[4]@byte_3530.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Tretschicht prüfen:</strong> Welche Bodenart soll regelmäßig bearbeitet werden?</li>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "e8056856551c7368aac595f6112ce9471ea389ab10ae783686ab81e609722443",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[5]@byte_3630.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Arbeitstiefe festlegen:</strong> Wie wichtig ist eine einstellbare Tiefenführung der Zinken?</li>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "542dd959df22e4ec827cfb5718f5e868a265937214afc44e268c270a09b9a18c",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[6]@byte_3741.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Arbeitsbreite abgleichen:</strong> Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?</li>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "29c1fbf4a7b3535d1822aa25de4b5bb8b1ac86a09c8b7bfaf5719523a2fd8b89",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[7]@byte_3855.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Zugfahrzeug berücksichtigen:</strong> Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?</li>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "a78d6dbd307060bb7d45c18b97446ae53bdad8f72c0fd655c78a9d96e0a6ea51",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[8]@byte_3976.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Arbeitswerkzeuge vergleichen:</strong> Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?</li>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "7b7d3655db401a88f267bb7b7689c4d232d4bebed04be8e0b8cf13d3e12b3c7c",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[9]@byte_4115.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Randpflege einordnen:</strong> Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?</li>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "4951e5793d5bd5aedaef50c6c3eefa914558777dae27a6ced54d5cd8a1b9c106",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[14]@byte_8119.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bodenart</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "f07e1d125ddd7f6a715f0d2c78ceb253a4a6e20252357bd6b4048f67d15ca5ca",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[15]@byte_8136.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Modelle werden unter anderem für Sand-, Sand-Vlies- und Rindenmulchplätze beschrieben.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "5e66a76c9e89a054c7e4250cb0fe6aa00068dbfb63605f3d0bf3877e908f4bcb",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[16]@byte_8233.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Tretschicht soll regelmäßig gepflegt werden?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "b38bcb4d01a09745023dac29faa4590be2e47a8d0a06cca6ff9724f09e832ffd",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[17]@byte_8305.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Arbeitstiefe</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "ad05f583961b9daac4a2408a607de7ad7f36f60d82aacf6e330366c2c5fe199f",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[18]@byte_8326.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "330d85a4f08f81f89851c8d53b0c1a06ec8aa74bb909c59687f2d3f1793e7129",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[19]@byte_8417.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wie tief soll die Bearbeitung erfolgen?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "a68840deb048f26a931bbe479f4fca81e33dab5a0fd964ae5f4e7bdeccc6e3db",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[20]@byte_8475.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Planieren</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "2fe1bbc86f536f131bdc5c2d1426d94d6fe4f517523b836cd3bccd9fc9fd9f9d",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[21]@byte_8493.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Ein Planierschild dient dazu, den Reitplatz zu ebnen.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "d73dabeec113a76bfcc6bff0a8f4c37ca2e47a39156fe19e78ef8d74b954056b",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[22]@byte_8555.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wie wichtig ist das gezielte Ausgleichen der Oberfläche?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "bdca4d06f5db79832c6ea40d91a830851b3d429a06958e04cb17ff0da5fc0ce8",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[23]@byte_8631.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Arbeitsbreite</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "e971e9267719a2866889de40380eeb69fdd7cd8bb96e9650d3070d8f48569c67",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[24]@byte_8653.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "832cbd574ec36c4830f285f10e8f8c0bef697694d8a0812501a384182a692aef",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[25]@byte_8732.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Breite passt zur Fläche und zum Fahrweg?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "64db080214d895e6201989eec945b04935b47d47c49bd3dd0c7ebcdf445d4e01",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[26]@byte_8799.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zugfahrzeug</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "50c3ef1f904052b2d90cd0df3bcb665679da5a38a3b1c079e78fddf19472b41c",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[27]@byte_8819.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "8dfb277c6797e0f76ef770e2517f2b60a48e341a56715265f4fc93ad6dbf9e19",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[28]@byte_8897.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welches Fahrzeug ist bereits vorhanden?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "88a55713ba45a74faf15e2c5a97c519021ab88bf79c781fbf530f94692427128",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[29]@byte_8955.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zinken und Walze</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "a9f6f00b4fe37b1f55034ac8d367ed08c802fa47959e155e88d0bed4b3514c7d",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[30]@byte_8980.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "97c867d739e982b571c6e1fb985bee9a58f1cfc8dd661f823a32e7eceb71483b",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[31]@byte_9073.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Arbeitsfolge wird auf dem eigenen Boden benötigt?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "05579e69fa56deadce4809fc9be789b759da1d95e3feebaa87b79d5604c7063d",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[32]@byte_9149.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Randpflege</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "ffe5369e7618dde9484b8cbcb9bbf8d2eaddb83ac0f003b3e808ceb55d3e7a9c",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[33]@byte_9168.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Je nach Modell sind Bandenrolle oder Hufschlagräumer verfügbar.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "4cc610ab9fbcfa7ac14b6f4b60a3ac837e44babed5d53012893e78de7951ca82",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[34]@byte_9242.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Sollen Randbereiche regelmäßig mitbearbeitet werden?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "f2fe514fc441b4efe9e86f62bcc882e5146b4ef6f3af9fef310f4c94de67d647",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[35]@byte_9315.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zusatzausstattung</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "8827d0fbbe8989edc3728ec224afaf84945ff799e3521956f170f832991a8089",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[36]@byte_9341.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": "missing",
+                "detected_at": "2026-09-30T15:40:34+00:00",
+                "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+                "evidence_hash": "cbe94af3547416c1be927f4d2705eb125e835cfb502d9a7691963c9614c4fade",
+                "evidence_refs": [
+                  "includes/content-validator.php",
+                  "contracts/article-type-templates.json",
+                  "contracts/table-contract-v1.json"
+                ],
+                "expected": "one or more bound fact ids",
+                "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+                "field_path": "content.factual_units[37]@byte_9449.data-fact-ids",
+                "item_index": null,
+                "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Welche Zusatzfunktion wird tatsächlich genutzt?</td>",
+                "server_state_hash": "k9-native",
+                "severity": "BLOCKING",
+                "validator_id": "PPM679_Content_Validator",
+                "validator_version": "6.7.9"
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": {
+                  "first_element_is_p": true,
+                  "headings": 0,
+                  "words": 112
+                },
+                "component": "PPM679_Content_Structure_Language_Gate",
+                "error_code": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+                "expected": {
+                  "first_element": "p",
+                  "headings": 0,
+                  "word_range": [
+                    30,
+                    100
+                  ]
+                },
+                "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+                "field_path": "content.intro",
+                "human_message": "The article needs a short introductory paragraph without a heading.",
+                "server_state_hash": "k9-native",
+                "source_files": [
+                  "includes/content-structure-language-gate.php",
+                  "contracts/content-structure-language-gate-v2.json"
+                ]
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": [
+                  "Boden, Fahrzeug und Arbeitswerkzeuge zusammenbringen"
+                ],
+                "component": "PPM679_Content_Structure_Language_Gate",
+                "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+                "expected": [
+                  "reitplatzplaner für pferde",
+                  "reitplatzplaner",
+                  "reitplatzpflege",
+                  "weide"
+                ],
+                "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+                "field_path": "content.heading_intent_terms",
+                "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+                "server_state_hash": "k9-native",
+                "source_files": [
+                  "includes/content-structure-language-gate.php",
+                  "contracts/content-structure-language-gate-v2.json"
+                ]
+              },
+              {
+                "action_context": "k9_native_article_control",
+                "actual": {
+                  "checked_text_matches": true,
+                  "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+                  "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+                  "engine": "LanguageTool 6.8 / Bestand 43",
+                  "exception_errors": [],
+                  "execution_record": {
+                    "input_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+                    "raw_stdout_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+                    "return_code": 0
+                  },
+                  "raw_finding_count": 12,
+                  "raw_report_decodes": true,
+                  "raw_report_sha256": "7e47d216779e6098a71bb950c1761fb86352170120b6df2938c561a23f36c8c6",
+                  "return_code": 0,
+                  "unresolved_finding_count": 12
+                },
+                "component": "PPM679_Content_Structure_Language_Gate",
+                "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+                "expected": {
+                  "checked_text_sha256": "ff8663221f4b26b9f06c0ccb0c3031d01daf4ee95df408253e39a79cc35d037d",
+                  "content_hash": "782e2d86ad83de488d712e32f3c96d9d81bcbb5ed46ffcabc17b94ee22856fca",
+                  "engine": "LanguageTool 6.8 / Bestand 43",
+                  "human_exceptions_only": true,
+                  "raw_finding_count": 0,
+                  "return_code": 0,
+                  "unresolved_finding_count": 0
+                },
+                "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+                "field_path": "item.quality_binding.language_evidence",
+                "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+                "server_state_hash": "k9-native",
+                "source_files": [
+                  "includes/content-structure-language-gate.php",
+                  "contracts/content-structure-language-gate-v2.json"
+                ]
+              }
+            ],
+            "fail_closed_aggregate_status": "BLOCKED",
+            "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+            "ppm_version": "6.7.9",
+            "publish_allowed": false,
+            "status": "REPAIR_REQUIRED",
+            "technical_status": "BLOCKED_TECHNICAL_CHECK"
+          }
+        },
+        "research": {
+          "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Tretschicht und Bodenart",
+                "Benötigte Arbeitstiefe",
+                "Arbeitsbreite und Platzgröße",
+                "Vorhandenes Zugfahrzeug und Leistung",
+                "Benötigte Zinken-, Planierschild- und Walzenfunktion",
+                "Banden- und Hufschlagpflege"
+              ],
+              "decision_goal": "Einen Reitplatzplaner auswählen, dessen Bodenbearbeitung, Arbeitsbreite und Zugfahrzeug-Anforderungen zum eigenen Reitplatz passen."
+            },
+            "fact_pack": {
+              "article_type": "Beratung",
+              "article_type_coverage": "PASS_BERATUNG",
+              "claim_register_hash": "ffbd4030f876ce185e397af52404e5e4847c488206f7cdcfca4fa88fe277a5bb",
+              "claims": [
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a",
+                  "fact_id": "FACT-REITPLATZ-001",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Hatzenbichler beschreibt Reitplatzplaner als Geräte zur Reitplatzpflege und zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen.",
+                  "subject_scope": "Einsatzbereich des Reitplatzplaners",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239",
+                  "fact_id": "FACT-REITPLATZ-002",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Zwei Reihen Striegelzinken bearbeiten den Reitboden; über die verstellbare Andruckwalze lässt sich die Tiefenführung der Zinken einstellen.",
+                  "subject_scope": "Zinken und Arbeitstiefe",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1",
+                  "fact_id": "FACT-REITPLATZ-003",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Ein am Gerät montiertes Planierschild dient dazu, den Reitplatz zu ebnen.",
+                  "subject_scope": "Planieren und Ebenheit",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69",
+                  "fact_id": "FACT-REITPLATZ-004",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Die angebotenen Reitplatzplaner unterscheiden sich bei Arbeitsbreite, Gewicht und benötigter Zugleistung; diese Werte sollten zum vorhandenen Zugfahrzeug und zur Fläche passen.",
+                  "subject_scope": "Arbeitsbreite und Zugfahrzeug",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d",
+                  "fact_id": "FACT-REITPLATZ-005",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+                  "statement": "Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden, eine höhenverstellbare Planierschiene gleicht Unebenheiten aus und eine Walze bearbeitet die Oberfläche nach.",
+                  "subject_scope": "Arbeitsfolge und Komponenten",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f",
+                  "fact_id": "FACT-REITPLATZ-006",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+                  "statement": "Der Platz-Max Light ist für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten.",
+                  "subject_scope": "Einsatz und Zugfahrzeug",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1",
+                  "fact_id": "FACT-REITPLATZ-007",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+                  "statement": "Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.",
+                  "subject_scope": "Ausstattungsmerkmale",
+                  "time_scope": "retrieved 2026-09-30"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-REITPLATZ-001",
+                "FACT-REITPLATZ-002",
+                "FACT-REITPLATZ-003",
+                "FACT-REITPLATZ-004",
+                "FACT-REITPLATZ-005",
+                "FACT-REITPLATZ-006",
+                "FACT-REITPLATZ-007"
+              ],
+              "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
+              "fact_pack_id": "FP-K9-REITPLATZPLANER-20260930",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "21d68fdf81597a139b21bbabbfd5bf4b43c0f6a923e1f4c08f380267719025e4",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "reitplatzplaner_fuer_pferde"
+            },
+            "portal_links": [
+              {
+                "anchor": "Weide",
+                "href": "/weide/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Reitplatzpflege",
+                "href": "/weide/weide-reitplatzpflege/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Reitplatzplaner",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "f97856d11baef9c479ae5d32877af6b11615989f40faaf91ec848e7c877e51f7",
+            "sources": [
+              {
+                "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                "title": "Reitplatzplaner – Hatzenbichler",
+                "url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+              },
+              {
+                "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+                "title": "Platz-Max Light Bahnplaner",
+                "url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/"
+              },
+              {
+                "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+                "title": "Reitplatzplaner Platz-Max Maxi-SM",
+                "url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "reitplatzplaner-beratung",
+        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+        "target_keyword": "Reitplatzplaner für Pferde",
+        "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+      },
+      "revision": 0,
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+    }
+  ],
+  "job_id": "K9-REPAIR-c7d846bffd750b0b",
+  "job_sha256": "a2c966bf7c193c0af7ccca616aafb9526c3e1ff1f1d98914b39aa181e9d4c5be",
+  "ledger_generation": 25,
+  "source_run_id": "36738473810-auto-chain",
+  "station": "repair",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "ADD_UNBOUND_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_BOUND_RESEARCH_ARTICLE_AND_FAILED_CHECK",
+    "must": [
+      "REPAIR_ONLY_REPORTED_FAILURES",
+      "PRESERVE_RESEARCH_PRODUCT_BINDING",
+      "RETURN_COMPLETE_REPAIRED_ARTICLE_PRODUCT",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "ADD_AT_LEAST_THREE_PPM_SOURCE_TRACE_SPANS_TO_LEXICALLY_SUPPORTING_FACTUAL_PARAGRAPHS",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_REPAIR_WORKER"
+  }
+}
