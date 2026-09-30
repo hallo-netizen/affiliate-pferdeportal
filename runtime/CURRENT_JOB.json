@@ -1,9 +1,7 @@
 {
   "contract": "K9_JOB_V1",
   "item_count": 1,
-  "item_ids": [
-    "k9-a38f92cbb97fe29aece54292"
-  ],
+  "item_ids": ["k9-a38f92cbb97fe29aece54292"],
   "items": [
     {
       "input_product_refs": {},
@@ -20,30 +18,16 @@
       "title": "Longiergurte mit Bogen im Ratgeber"
     }
   ],
-  "job_id": "K9-RESEARCH-7449454f400e263e",
-  "job_sha256": "ba44ae96600b5e39705584edeb2ce5c569dac7568d6a3b7582af43ae79a23e65",
-  "ledger_generation": 10,
-  "source_run_id": "manual-current-chat-auto-proof-20260930",
+  "job_id": "K9-RESEARCH-12ef2ec83671e474",
+  "job_sha256": "d3cf8ad58e7241fd8bbe0715d47d3320660341bdf5b694d2c00371c6ea289ca6",
+  "ledger_generation": 2,
+  "source_run_id": "current-chat-auto-proof-20260930",
   "station": "research",
   "status": "OPEN",
   "worker_contract": {
-    "forbidden": [
-      "WRITE_ARTICLE",
-      "ROUTE_TO_WRITE",
-      "USE_PFERDE_ATELIER_OWN_DOMAIN_AS_RESEARCH_SOURCE",
-      "USE_LEGACY_K4_K8_STATE",
-      "RETURN_PARTIAL_BATCH"
-    ],
+    "forbidden": ["WRITE_ARTICLE","ROUTE_TO_WRITE","USE_PFERDE_ATELIER_OWN_DOMAIN_AS_RESEARCH_SOURCE","USE_LEGACY_K4_K8_STATE","RETURN_PARTIAL_BATCH"],
     "input_rule": "USE_ONLY_THIS_JOB_ITEM_AND_PUBLIC_RESEARCH_SOURCES",
-    "must": [
-      "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
-      "USE_STABLE_SOURCE_IDS",
-      "USE_STABLE_FACT_IDS",
-      "BIND_EVERY_FACT_TO_ONE_KNOWN_SOURCE",
-      "RETURN_PPM_COMPATIBLE_FACT_PACK",
-      "FACT_PACK_STATUS_SOURCE_VERIFIED_PRODUCTION_READY",
-      "HASH_COMPLETE_RESEARCH_PRODUCT"
-    ],
+    "must": ["RETURN_ONE_COMPLETE_RESULT_PER_ITEM","USE_STABLE_SOURCE_IDS","USE_STABLE_FACT_IDS","BIND_EVERY_FACT_TO_ONE_KNOWN_SOURCE","RETURN_PPM_COMPATIBLE_FACT_PACK","FACT_PACK_STATUS_SOURCE_VERIFIED_PRODUCTION_READY","HASH_COMPLETE_RESEARCH_PRODUCT"],
     "output_contract": "K9_RESEARCH_PRODUCT_V1",
     "worker_type": "CHAT_RESEARCH_WORKER"
   }

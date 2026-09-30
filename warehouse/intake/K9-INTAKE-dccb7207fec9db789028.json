@@ -1,0 +1,23 @@
+{
+  "batch_id": "K9-INTAKE-dccb7207fec9db789028",
+  "batch_sha256": "b0a6482f971a9700b16ab1caccfed9e3d474aee93ad5e4632ddc8c2f92c1419a",
+  "contract": "K9_INTAKE_V1",
+  "item_count": 1,
+  "items": [
+    {
+      "item_id": "k9-a38f92cbb97fe29aece54292",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "longiergurte-beratung",
+        "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+        "target_keyword": "Longiergurte mit Bogen",
+        "title": "Longiergurte mit Bogen im Ratgeber"
+      },
+      "title": "Longiergurte mit Bogen im Ratgeber"
+    }
+  ],
+  "publish_allowed": false,
+  "source_batch_sha256": "010949e5066cfca5d3ee176e85e8510b83cfecf0ef5c165cee047e0915488702",
+  "source_file_sha256": "8abda4199786d1eb8c223cce3664591961499fd1d39345bf73ebd329ca628f5b",
+  "source_kind": "WORDPRESS_METADATA_EXACT_FIVE_FIELDS"
+}

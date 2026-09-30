@@ -4,20 +4,15 @@
   "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB",
   "concept": "K9",
   "contract": "K9_CHAT_ENTRY_V1",
-  "forbidden": [
-    "SEARCH_OTHER_CONCEPTS",
-    "ROUTE_TO_NEXT_STATION",
-    "RECONSTRUCT_JOB",
-    "USE_LEGACY_RUNTIME"
-  ],
+  "forbidden": ["SEARCH_OTHER_CONCEPTS","ROUTE_TO_NEXT_STATION","RECONSTRUCT_JOB","USE_LEGACY_RUNTIME"],
   "item_count": 1,
-  "job_id": "K9-RESEARCH-7449454f400e263e",
+  "job_id": "K9-RESEARCH-12ef2ec83671e474",
   "job_path": "runtime/CURRENT_JOB.json",
-  "job_sha256": "ba44ae96600b5e39705584edeb2ce5c569dac7568d6a3b7582af43ae79a23e65",
+  "job_sha256": "d3cf8ad58e7241fd8bbe0715d47d3320660341bdf5b694d2c00371c6ea289ca6",
   "output_contract": "K9_RESEARCH_PRODUCT_V1",
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "station": "research",
   "status": "OPEN_JOB_READY_FOR_CHAT",
-  "submission_path": "submissions/K9-RESEARCH-7449454f400e263e.json",
+  "submission_path": "submissions/K9-RESEARCH-12ef2ec83671e474.json",
   "worker_type": "CHAT_RESEARCH_WORKER"
 }
