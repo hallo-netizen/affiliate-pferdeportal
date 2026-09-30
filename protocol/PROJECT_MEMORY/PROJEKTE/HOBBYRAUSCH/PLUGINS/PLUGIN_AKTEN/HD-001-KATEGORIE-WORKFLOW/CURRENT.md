@@ -1,69 +1,67 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-30
-STATUS: V1.9.1 EDITORIAL INTENT OWNERSHIP LOKAL HARD PASS / LIVE-ROLLBACK + RETEST OFFEN
+STATUS: V1.9.2 DEPLOY READBACK FIX HARD PASS / LIVE-RETEST OFFEN
 
-## Aktueller belastbarer Stand
-
-V1.9.1 ist die direkte Fortsetzung derselben Pluginlinie. Kein Zusatz-/Companion-Plugin.
+## Aktuell
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.9.1`
+`Affiliate-Portal Kategorie-Workflow V1.9.2`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.1_EDITORIAL_INTENT_OWNERSHIP.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.2_DEPLOY_READBACK_FIX_HARD_PASS.zip`
 
 Installer SHA-256:
-`92c8b4ee6e1c53ce677b7a059766796c02afc9d39cdcd5f86511bf51b8808b1f`
+`8d462ee585ee0921772c0deb56b9829b7e7819a618dfdfc441e06bd3afa79ff8`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.1_EDITORIAL_INTENT_OWNERSHIP.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.2_DEPLOY_READBACK_FIX_HARD_PASS.zip`
 
 Source SHA-256:
-`7ccb6f45f2728466392b4a56e6fcda44e71265b7138cdb55be9921b4d576cc32`
+`10dd5daf5ae04cd39ef86d45128759d53b4e0af23ef6928086efbff1014a55d7`
 
-V1.9.1 enthält vollständig den V1.9.0-Stage-Hardlock:
-- exakter serverseitiger Stage-Guard;
-- stale spätere Aktionen BLOCKED;
-- Downstream-Artefakte bei Upstream-Ersatz invalidiert;
-- aktiver Deployment-Run blockiert neuen Upstream-Import bis Rollback.
+V1.9.1 ist wegen des live reproduzierten Deployment-Readback-Fehlers superseded.
 
-Zusätzlich neu, allgemeingültig:
-- finaler Report exportiert `research_evidence.editorial_handoff`;
-- alle aktiven Strukturknoten werden als Kategorie-Owner-Registry ausgegeben;
-- explizite `ARTICLE_ONLY`-Intents können mit `owner_concept_id` genau einem Owner zugeordnet werden;
-- fehlender/ungültiger Owner oder derselbe exakte Intent bei mehreren Ownern blockiert nur den Editorial-Handoff;
-- bestehender Kategorien-/Deployment-PASS wird dadurch nicht rückwirkend verändert;
-- Residual-Research wird niemals automatisch zum Artikel;
-- keine Beitragstitel- oder Textproduktion im Kategorie-Plugin.
+## Live gefundener Fehler
 
-## Harte lokale Prüfung
+`DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
 
-- Source Vollsuite: 248/248 PASS;
-- Fresh-Unpack Source: 248/248 PASS;
-- Source PHP-Lint: 18/18 PASS;
-- Installer Runtime PHP-Lint: 17/17 PASS;
-- Source↔Installer Runtime-Parität: 22/22 byteidentisch;
-- Source-/Installer-Checksummen: PASS.
+Ursache:
+Ein vorhandenes Exact-Slug-Zielobjekt mit gleichem Namen, aber abweichendem nativen Parent wurde in V1.9.1 als `ADOPT_EXISTING` geplant. Der Plan führte `parent` zwar als geändert, ADOPT_EXISTING schrieb den Parent jedoch nicht. Der nachgelagerte Readback erkannte die Abweichung korrekt und rollte zurück.
 
-Realer bisheriger Hobby-Depot-Testbestand:
-- 20 aktive Struktur-Owner erkannt;
-- 27 bestehende `ARTICLE_ONLY`-Entscheidungen besitzen noch keinen `owner_concept_id`;
-- deshalb Editorial-Handoff korrekt BLOCKED;
-- Kategorienstand bleibt davon unberührt.
+## Fix V1.9.2
 
-## Live-Status
+Exact-Slug:
+- native Differenz `name/slug/parent` → `UPDATE`;
+- keine native Differenz → `ADOPT_EXISTING` meta-only.
 
-V1.8.9 ist weiterhin der zuletzt dokumentierte Live-Stand und zeigt den unerwartet ausgeführten Test-Deployment-Run.
+## Beweise
 
-V1.9.1 ist lokal hart geprüft, aber noch NICHT live abgenommen.
+V1.9.1 exakter Fehlerfall:
+- Preflight PASS;
+- action ADOPT_EXISTING;
+- changed_fields [parent];
+- Apply → DEPLOY_READBACK_MISMATCH;
+- Auto-Rollback PASS.
+
+V1.9.2 derselbe Fall:
+- action UPDATE;
+- Deploy + Readback PASS;
+- Taxonomy Parent korrekt;
+- Rollback stellt alten Parent wieder her PASS;
+- Page Parent Korrektur PASS;
+- identischer Exact-Slug ohne native Diff bleibt ADOPT_EXISTING ohne unnötigen nativen Update-Write.
+
+Gesamt:
+- Source 251/251 PASS;
+- Fresh-Unpack Installer 251/251 PASS;
+- PHP-Lint PASS;
+- Source↔Installer Runtime-Parität 22/22 byteidentisch.
 
 ## NEXT ACTION
 
-V1.9.1 über V1.8.9 installieren → vorhandenen Test-Deployment-Run vollständig zurückrollen → denselben READ_ONLY_PREVIEW erneut übernehmen.
+V1.9.2 über V1.9.1 installieren.
 
-Erwartung:
-- Stage exakt `structure_ready`;
-- kein automatischer/staler Write;
-- Kategorienprüfung unverändert;
-- Editorial-Handoff zeigt die alten ungebundenen ARTICLE_ONLY-Intents sichtbar als offen/BLOCKED, bis ihre Owner fachlich zugeordnet sind.
+Der fehlgeschlagene Live-Write wurde automatisch zurückgerollt; der gespeicherte alte Dry-Run ist wegen der geänderten Aktionsplanung nicht mehr zu verwenden.
+
+Danach denselben READ_ONLY_PREVIEW erneut als Arbeitsstand übernehmen → finale Struktur freigeben → neue WordPress-Vorschau erzeugen → neuen Plan anwenden.
