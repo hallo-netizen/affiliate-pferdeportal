@@ -37,5 +37,44 @@
     "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
     "clean_zero_nudge_confirmation_still_required": true,
     "reason": "This real run exposed and fixed run-boundary and ENDSTEMPEL intake-selection defects before reaching STOP."
+  },
+  "confirmation_start": {
+    "contract": "K9_CONFIRMATION_START_BINDING_V1",
+    "purpose": "CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
+    "connector_action": "CREATE_FILE",
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "branch": "konzept9/greenfield-20260929",
+    "path_prefix": "inbox-auto/",
+    "external_workflow_dispatch_required": false,
+    "server_side_entry_workflow": ".github/workflows/k9-intake.yml",
+    "exact_target": {
+      "title": "Was ist ein Reitplatzplaner?",
+      "target_keyword": "Was ist ein Reitplatzplaner",
+      "category": "reitplatzplaner-faq",
+      "article_type": "FAQ",
+      "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5"
+    },
+    "exact_payload": {
+      "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
+      "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+      "next_textmachine_metadata_batch": {
+        "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+        "publish_allowed": false,
+        "content_or_format_payload_present": false,
+        "item_count": 1,
+        "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+        "items": [
+          {
+            "title": "Was ist ein Reitplatzplaner?",
+            "target_keyword": "Was ist ein Reitplatzplaner",
+            "category": "reitplatzplaner-faq",
+            "article_type": "FAQ",
+            "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5"
+          }
+        ]
+      }
+    },
+    "instruction": "CREATE_EXACT_PAYLOAD_UNDER_INBOX_AUTO_AND_DO_NOT_CALL_WORKFLOW_DISPATCH"
   }
 }
