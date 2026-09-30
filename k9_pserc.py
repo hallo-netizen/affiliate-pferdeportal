@@ -89,7 +89,7 @@ def canonical_fact_pack(research):
     }
 
 def _trace_match(markup,fid):
-    for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I):
+    for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>\s*</span>',markup,re.I):
         a=re.search(r'\bdata-fact-id=["\']([^"\']+)["\']',m.group(0),re.I)
         if a and a.group(1)==fid:
             return m
@@ -117,17 +117,11 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
             f'<span class="ppm-source-trace" data-fact-id="{fid}" '
             f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
         )
-        existing=re.search(
-            r'<span\\b[^>]*class=["\\\'][^"\\\']*\\bppm-source-trace\\b[^"\\\']*["\\\'][^>]*data-fact-id=["\\\']'+re.escape(fid)+r'["\\\'][^>]*></span>',
-            markup,re.I
-        )
+        existing=_trace_match(markup,fid)
         if existing:
             markup=markup[:existing.start()]+trace+markup[existing.end():]
             continue
-        target=re.search(
-            r'<(p|li|td)\\b[^>]*data-fact-ids=["\\\'][^"\\\']*\\b'+re.escape(fid)+r'\\b[^"\\\']*["\\\'][^>]*>',
-            markup,re.I
-        )
+        target=_fact_target_match(markup,fid)
         if not target:
             raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
         markup=markup[:target.end()]+trace+markup[target.end():]
