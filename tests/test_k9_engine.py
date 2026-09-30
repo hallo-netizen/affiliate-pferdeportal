@@ -33,6 +33,11 @@ class K9Tests(unittest.TestCase):
                     {"anchor":"Root B","href":"/b/","role":"parent_category","section_id":"criteria"},
                     {"anchor":"Mid B","href":"/b/mid/","role":"semantic_related","section_id":"decision"},
                     {"anchor":"Leaf B","href":"/b/mid/leaf/","role":"further_information","section_id":"further_information"}
+                ]},
+                "schermaschinen-beratung":{"portal_links":[
+                    {"anchor":"Ausrüstung","href":"/ausruestung/","role":"parent_category","section_id":"criteria"},
+                    {"anchor":"Pflegezubehör","href":"/ausruestung/ausruestung-pflegezubehoer/","role":"semantic_related","section_id":"decision"},
+                    {"anchor":"Schermaschinen","href":"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/","role":"further_information","section_id":"further_information"}
                 ]}
             }
         })
@@ -281,6 +286,86 @@ class K9Tests(unittest.TestCase):
         row["research_product"]["product_sha256"]=k.stable(core)
         with self.assertRaisesRegex(k.K9Error,"RESEARCH_DECISION_SUPPORT_INVALID"):
             k.accept(self.submission(job,[row],"missing-decision-support.json"))
+
+    def test_schermaschinen_research_gate_real_shape_positive_negative_and_write_transition(self):
+        metadata={
+            "article_type":"Beratung",
+            "category":"schermaschinen-beratung",
+            "plan_slot":"27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+            "target_keyword":"Schermaschinen für Pferde",
+            "title":"So wählst du passende Schermaschinen für Pferde"
+        }
+        k.write_json(k.LEDGER,{
+            "contract":"K9_LEDGER_V1","generation":10,
+            "items":[{
+                "item_id":"k9-1ff3dfabfed47a0c47c8df13",
+                "title":metadata["title"],"metadata":metadata,"revision":0,"products":{},
+                "stages":{"research":"PENDING","write":"PENDING","check":"PENDING","repair":"NOT_REQUIRED"}
+            }]
+        })
+        k.write_status()
+        job=k.prepare("research",1,source_run_id="schermaschinen-regression")["job"]
+        links=job["items"][0]["input_products"]["portal_context"]["portal_links"]
+        self.assertEqual([x["href"] for x in links],[
+            "/ausruestung/",
+            "/ausruestung/ausruestung-pflegezubehoer/",
+            "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+        ])
+        source_id="SRC-WAHL-HORSE-CLIPPER-BUYING-GUIDE"
+        fact_id="FACT-CLIPPER-001"
+        pack={
+            "fact_pack_id":"FP-K9-SCHERMASCHINEN-PFERDE-REGRESSION",
+            "domain":"pferdeatelier","article_type":"Beratung","fact_ids":[fact_id],
+            "status":"SOURCE_VERIFIED_PRODUCTION_READY",
+            "claims":[{
+                "fact_id":fact_id,"source_id":source_id,
+                "locator":"Light Duty/Trimmers; Medium Duty; Heavy Duty",
+                "statement":"Die Geräteklasse richtet sich nach Einsatz und Fell.",
+                "claim_status":"FULLY_SUPPORTED",
+                "subject_scope":"Auswahl der Geräteklasse","time_scope":"allgemeine Produktauswahl"
+            }],
+            "fact_pack_hash":"a"*64,"source_manifest_hash":"b"*64,"claim_register_hash":"c"*64,
+            "required_block_coverage":"PASS","table_evidence_coverage":"PASS",
+            "conclusion_evidence_coverage":"PASS","article_type_coverage":"PASS_BERATUNG",
+            "temporal_validity_status":"PASS","contradiction_status":"NO_MATERIAL_CONTRADICTIONS_FOUND",
+            "production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY",
+            "placeholder_content_status":"NONE"
+        }
+        product={
+            "contract":"K9_RESEARCH_PRODUCT_V1",
+            "sources":[{"source_id":source_id,"title":"Horse Clipper Buying Guide","url":"https://www.wahl.co.uk/content-hub/horse-clipper-buying-guide/"}],
+            "portal_links":links,
+            "decision_support":{
+                "decision_goal":"Eine passende Schermaschine nach Einsatz, Fell und Stromversorgung auswählen.",
+                "decision_criteria":["Einsatzumfang","Felltyp","Stromversorgung"]
+            },
+            "fact_pack":pack
+        }
+        product["product_sha256"]=k.stable(product)
+        good={"item_id":"k9-1ff3dfabfed47a0c47c8df13","research_product":product}
+
+        import copy
+        missing_links=copy.deepcopy(good)
+        missing_links["research_product"].pop("portal_links")
+        core=dict(missing_links["research_product"]); core.pop("product_sha256")
+        missing_links["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_PORTAL_LINKS_INVALID"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[missing_links]})
+
+        missing_decision=copy.deepcopy(good)
+        missing_decision["research_product"].pop("decision_support")
+        core=dict(missing_decision["research_product"]); core.pop("product_sha256")
+        missing_decision["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_DECISION_SUPPORT_INVALID"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[missing_decision]})
+
+        good_submission=self.submission(job,[good],"schermaschinen-good.json")
+        accepted=k.accept(good_submission)
+        self.assertEqual(accepted["status"],"ACCEPTED")
+        write=k.prepare("write",1,source_run_id="schermaschinen-regression-write")["job"]
+        research=write["items"][0]["input_products"]["research"]["research_product"]
+        self.assertEqual(research["portal_links"],links)
+        self.assertEqual(research["decision_support"]["decision_criteria"],["Einsatzumfang","Felltyp","Stromversorgung"])
 
     def test_write_job_contains_complete_hash_bound_research_product(self):
         self.finish_research(2)
