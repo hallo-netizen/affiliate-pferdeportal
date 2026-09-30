@@ -123,6 +123,43 @@ def _fact_target_match(markup,fid):
             return m
     return None
 
+def _attr_value(tag,name):
+    m=re.search(name+r'="([^"]+)"',tag,re.I)
+    if m: return m.group(1)
+    m=re.search(name+r"='([^']+)'",tag,re.I)
+    return m.group(1) if m else ""
+
+def _full_trace_match(markup,fid):
+    for m in re.finditer(r'<span[^>]*></span>',markup,re.I):
+        tag=m.group(0)
+        if "ppm-source-trace" not in tag:
+            continue
+        if _attr_value(tag,"data-fact-id")==fid:
+            return m
+    return None
+
+def _trace_candidate(markup,fid,statement):
+    statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(statement or "").casefold()))
+    candidates=[]
+    for tagname in ("p","li","td"):
+        pattern=r"<"+tagname+r"\\b[^>]*>.*?</"+tagname+r">"
+        for m in re.finditer(pattern,markup,re.I|re.S):
+            segment=m.group(0)
+            opener=re.match(r"<"+tagname+r"\\b[^>]*>",segment,re.I)
+            if not opener:
+                continue
+            value=_attr_value(opener.group(0),"data-fact-ids")
+            if not value or fid not in value.split():
+                continue
+            visible=re.sub(r"<[^>]+>"," ",segment)
+            visible_tokens=set(re.findall(r"[a-z0-9äöüß]+",visible.casefold()))
+            score=len(statement_tokens & visible_tokens)
+            candidates.append((score,m.start(),opener.end(),segment))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x:(-x[0],x[1]))
+    return candidates[0]
+
 def bind_canonical_article_traces(ppm_item, fact_pack):
     article=ppm_item.get("canonical_article")
     if not isinstance(article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
@@ -133,20 +170,24 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
         fid=str(claim.get("fact_id") or "").strip()
         source_id=str(claim.get("source_id") or "").strip()
         source_hash=str(claim.get("evidence_text_sha256") or "").strip()
+        statement=str(claim.get("statement") or "")
         if not fid or not source_id or not source_hash:
             raise Blocked("CANONICAL_TRACE_BINDING_MISSING:"+fid)
+        while True:
+            existing=_full_trace_match(markup,fid)
+            if not existing:
+                break
+            markup=markup[:existing.start()]+markup[existing.end():]
+        candidate=_trace_candidate(markup,fid,statement)
+        if not candidate:
+            raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
+        _,start_pos,open_len,segment=candidate
         trace=(
             f'<span class="ppm-source-trace" data-fact-id="{fid}" '
             f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
         )
-        existing=_full_trace_match(markup,fid)
-        if existing:
-            markup=markup[:existing.start()]+trace+markup[existing.end():]
-            continue
-        target=_fact_target_match(markup,fid)
-        if not target:
-            raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
-        markup=markup[:target.end()]+trace+markup[target.end():]
+        replacement_segment=segment[:open_len]+trace+segment[open_len:]
+        markup=markup[:start_pos]+replacement_segment+markup[start_pos+len(segment):]
     article["body_html"]=markup
     article["body_html_sha256"]=hashlib.sha256(markup.encode("utf-8")).hexdigest()
     article["source_ids"]=[str(x.get("source_id") or "") for x in fact_pack.get("sources",[]) if isinstance(x,dict)]
@@ -313,7 +354,10 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
                 raise Blocked("PSERC_EXECUTION_FAILED:"+str(item.get("item_id") or idx)+":"+(proc.stderr or proc.stdout)[:500])
             try: wrapper=json.loads(proc.stdout)
             except Exception as exc: raise Blocked("PSERC_OUTPUT_INVALID:"+str(item.get("item_id") or idx)) from exc
-            bridge,artifact=_validate_bridge(wrapper)
+            try:
+                bridge,artifact=_validate_bridge(wrapper)
+            except Blocked as exc:
+                raise Blocked(str(item.get("item_id") or idx)+":"+str(exc)) from exc
             results.append({
                 "item_id":item["item_id"],
                 "plan_slot":item["metadata"]["plan_slot"],
