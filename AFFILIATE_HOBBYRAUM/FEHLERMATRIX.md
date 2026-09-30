@@ -33,6 +33,8 @@ Regel: Vor JEDEM Lauf gegen alle Einträge prüfen. Bei einem neuen Fehler wird 
 | AF-027 | Neue Versionsnummer gewählt, ohne die tatsächlich installierte WordPress-Version als Untergrenze zu verwenden | Kandidat 6.64.2 lag unter der real installierten 6.72.0 | Vor jedem Versionsfix gilt die vom Nutzer/WordPress belegte installierte Version als harte Untergrenze; nächster Kandidat muss exakt darüber liegen, hier 6.72.1 |
 | AF-028 | Echten Digistore24-CSV-Header nicht gegen den Importer geprüft | Digistore24 exportiert die ID-Spalte als `Werbemittel`, der Importer akzeptierte nur `Werbemittel-ID` und meldete daher unbekannten Anbieter | Vor Live-Freigabe immer gegen die tatsächlich vorhandene CSV-Kopfzeile prüfen; `Werbemittel` ist für diesen DS24-Export ein gültiger Alias für die Werbemittel-ID |
 
+| AF-074 | 6.72.167-Gesamttestworkflow durch doppelt erzeugte Step-Marker ungültig | Workflow-Run `36730210700` stoppte vor dem ersten Fachjob; Ursache war eine fehlerhafte Workflow-Textänderung mit doppeltem `- name:`-Marker | Nach programmatischer Workflow-Textänderung vor jedem echten Run die YAML-/Step-Struktur syntaktisch prüfen; bei ungültigem Workflow ausschließlich die Testdatei reparieren, Plugin-Source unverändert lassen. |
+
 ## Dauerregel
 - Jede neu festgestellte Fehlentscheidung erhält sofort die nächste AF-ID.
 - Kein zweiter Versuch, bevor der neue Fehler hier eingetragen ist.
