@@ -70,7 +70,8 @@ jobs:
             git config user.name 'k9-station-bot'
             git config user.email 'actions@users.noreply.github.com'
             test -f state/STATUS.json
-            git add -A -- runtime/CURRENT_JOB.json runtime/CHAT_ENTRY.json runtime/AUTO_CHAIN.json state/STATUS.json CURRENT_STATE.json
+            git add -A -- runtime/CURRENT_JOB.json runtime/CHAT_ENTRY.json state/STATUS.json CURRENT_STATE.json
+            if [ -f runtime/AUTO_CHAIN.json ]; then git add -A -- runtime/AUTO_CHAIN.json; fi
             git diff --cached --quiet || git commit -m 'K9: persist exact open station job'
             git push
           fi
