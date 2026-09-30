@@ -185,7 +185,7 @@ def build(draft_path):
         type_meta={"primary_question":title}
         claims=fact_pack.get("claims") if isinstance(fact_pack.get("claims"),list) else []
         direct_answer=str((claims[0] if claims else {}).get("statement") or "").strip()
-        if len(re.findall(r"\\b[\\wÄÖÜäöüß-]+\\b",direct_answer,re.UNICODE))<12:
+        if len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",direct_answer,re.UNICODE))<12:
             raise PackError("FAQ_DIRECT_ANSWER_BINDING_INVALID")
     else:
         type_meta={"decision_goal":decision.get("decision_goal",""),"decision_criteria":decision.get("decision_criteria",[])}
