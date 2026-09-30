@@ -1,88 +1,106 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-30
-STATUS: V1.9.2 LIVE FAIL / ROLLBACK PASS / V1.9.3 LIVE-READBACK-DIAGNOSE POSITIV+NEGATIV HARD PASS / DIAGNOSE-LIVERUN NÄCHSTES
+STATUS: V1.9.4 TERM-NAME READBACK FIX / LIVE-ROOT-CAUSE BEWIESEN / SOURCE+FRESH-INSTALLER POSITIV+NEGATIV HARD PASS / LIVE-RETEST OFFEN
 
 ## Harte Abnahmeregel
 
 **Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-Ein synthetischer Einzeltest gilt nicht als Beweis für die reale Live-Ursache. Der echte Produktionspfad muss mit dem echten Produktionspaket simuliert sein.
+Ein synthetischer Einzeltest reicht nicht. Der echte Produktionspfad mit dem echten Buchbinden-Kandidaten muss simuliert sein.
 
-## Live-Befund
+## Live-Root-Cause – bewiesen
 
-V1.9.2 ist live zweimal mit dem echten Buchbinden-Kandidaten am Readback gescheitert:
+V1.9.3 Diagnose meldete live:
 
-`DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
+`DEPLOY_READBACK_MISMATCH @ node:hdc-21557545f2e7cc51 | Felder: name | Automatischer Rollback: PASS`
 
-Das exportierte Live-Protokoll bestätigt für beide Buchbinden-Läufe:
-- CREATE 7;
-- ADOPT_EXISTING 0;
-- UPDATE 0;
-- UNCHANGED 0.
+Der Knoten ist:
+`Techniken & Praxis`.
 
-Damit ist die frühere Parent-/ADOPT_EXISTING-Ursachenannahme für diesen Livefall widerlegt.
+WordPress Core speichert Taxonomie-Namen über `pre_term_name` und `_wp_specialchars`.
+Damit wird der Klartextname
 
-## V1.9.3 – Diagnose, kein Produktionsfix
+`Techniken & Praxis`
+
+intern als
+
+`Techniken &amp; Praxis`
+
+gespeichert.
+
+Der bisherige Readback verglich den rohen gespeicherten Termnamen bytegenau mit dem freigegebenen Klartextnamen. Dadurch entstand genau der Live-Mismatch.
+
+## Exakte Reproduktion mit altem Code
+
+V1.9.3 + echter Buchbinden-READ_ONLY_PREVIEW + echter 7-CREATE-Pfad + WordPress-Core-Term-Escaping:
+
+`DEPLOY_READBACK_MISMATCH @ node:hdc-21557545f2e7cc51 | Felder: name | Automatischer Rollback: PASS`
+
+Damit ist der Livefehler lokal wortgleich reproduziert.
+
+## Fix V1.9.4
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.9.3`
+`Affiliate-Portal Kategorie-Workflow V1.9.4`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.3_LIVE_READBACK_DIAGNOSTIC_POSNEG_PASS.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.4_TERM_NAME_READBACK_FIX_HARD_PASS.zip`
 
 Installer SHA-256:
-`6bd488625e545a1921d88423c1658792d8747aa81b035140c93bcc1174a4fda3`
+`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.3_LIVE_READBACK_DIAGNOSTIC_POSNEG_PASS.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.4_TERM_NAME_READBACK_FIX_HARD_PASS.zip`
 
 Source SHA-256:
-`d4258a5c7d873ff024d3027ba2fe3e774c9d3575930f972c238cde8ada43fc62`
+`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`
 
 Änderung:
-- keine Strukturentscheidung geändert;
-- keine Research-/Ownership-Regel geändert;
-- keine automatische Fehlerreparatur;
-- fehlgeschlagener Readback wird vor Rollback gespeichert;
-- Fehlermeldung nennt Knoten, Adapter/Taxonomie, abweichende Felder sowie Soll-/Istwerte.
+- nur Taxonomie-Termnamen werden beim Lesen von WordPress-Core-Sonderzeichen-Escaping zurück in Klartext normalisiert;
+- Seiten-Titel bleiben unverändert;
+- keine Struktur-/Research-/Ownership-Regel geändert;
+- echte semantische Namensabweichungen bleiben fail-closed.
 
-## Lokale Positiv-/Negativsimulation
+## Positiv-/Negativsimulation
 
 Exakter Produktionspfad:
 - echter Buchbinden-READ_ONLY_PREVIEW;
 - echtes Research-Paket;
 - 7 CREATE;
-- Positiv: Deploy + Readback PASS.
+- WordPress-Core-Escaping aktiv.
+
+Positiv V1.9.4:
+- `Techniken & Praxis` → intern `Techniken &amp; Praxis`;
+- Deploy + Readback PASS.
 
 Negativ:
-- Seiten-Slug mutiert → `slug` erkannt + Rollback PASS;
-- Kategoriename mutiert → `name` erkannt + Rollback PASS;
-- Parent mutiert → `parent` erkannt + Rollback PASS;
-- concept_id-Meta mutiert → `concept_meta` erkannt + Rollback PASS;
-- logical-parent-Meta mutiert → `logical_parent_meta` erkannt + Rollback PASS.
+- echter falscher Kategoriename → `name` Mismatch + Rollback PASS;
+- doppelt falsches `Techniken &amp;amp; Praxis` → `name` Mismatch + Rollback PASS;
+- falscher Slug → BLOCKED + Rollback PASS;
+- falscher Parent → BLOCKED + Rollback PASS;
+- falsches concept_meta → BLOCKED + Rollback PASS;
+- falsches logical_parent_meta → BLOCKED + Rollback PASS.
 
 Regression:
-- 251/251 PASS;
-- Fresh-Unpack PHP-Lint PASS;
+- Source 251/251 PASS;
+- Fresh-Installer 251/251 PASS;
+- Source PHP-Lint 25/25 PASS;
+- Fresh-Installer PHP-Lint 17/17 PASS;
 - Source↔Installer Runtime-Parität 22/22 byteidentisch.
-
-## Beleggrenze
-
-Die konkrete Live-Abweichung ist noch nicht bekannt.
-V1.9.3 ist deshalb ausdrücklich **keine Produktionsabnahme** und **kein behaupteter Fix**.
 
 ## NEXT ACTION
 
-V1.9.3 über V1.9.2 installieren.
+V1.9.4 über V1.9.3 installieren.
 
-Der fehlgeschlagene Apply hat die Workspace-Stufe nicht weitergeschaltet; der bestehende serverseitige Dry-Run bleibt auf `dryrun_ready`.
+Der letzte Diagnose-Apply wurde automatisch zurückgerollt; der bestehende Dry-Run bleibt unverändert auf 7 CREATE.
 
-Dann:
-`Kategorien → Geprüften Plan anwenden`
+Dann genau einmal:
+`Kategorien → Geprüften Plan anwenden`.
 
-Bei erneutem Mismatch liefert die Meldung jetzt:
-`node + fields + expected + actual`
-und führt weiterhin den automatischen Rollback aus.
+Erwartung:
+`Deployment abgeschlossen` + `Schreiben und Readback erfolgreich.`
 
-Diese exakte Meldung ist die nächste Autorität für den Ursachenfix.
+Kein neuer Research-Lauf.
+Keine neue Strukturdatei.
+Kein neuer Dry-Run nötig.
