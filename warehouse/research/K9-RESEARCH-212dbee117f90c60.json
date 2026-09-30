@@ -22,7 +22,9 @@
           "claim_register_hash": "92f390d0103338388dd0603c9c02db917f9740555cbc12e29edcb49576a3921e",
           "claims": [
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "6fe501b5e2dbe2acd51ecfd3498046282e810d0831a19e1383903b239bb115d3",
               "fact_id": "RBU_F1",
@@ -33,7 +35,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "aa63e0877b646e5e12b5cdca633400b4d98ad7a7014c1410b2c0699d8358c706",
               "fact_id": "RBU_F2",
@@ -44,7 +48,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "e0b570a527ef053532d886ff47e906f9089697b332d3553063a4cf1b1da0813f",
               "fact_id": "RBU_F3",
@@ -55,7 +61,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "955b509f13653fda88924f816d789d1767fb20eeb50945d26d0b5bc5bc7eabc1",
               "fact_id": "RBU_F4",
@@ -66,7 +74,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "ac8a2fc1029e2baf448142b97efcdb618cb0805377ee60931163b47621c589b1",
               "fact_id": "RBU_F5",
@@ -77,7 +87,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "001a7c786ffb4cd8c4b758fdf6598f1a13ad7e290e4bafcd397036815a18fa7c",
               "fact_id": "RBU_F6",
@@ -88,7 +100,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "7e4e36538401f6d41309b03877ad7d85e229faa4ce1fbd8ae35beec64b39664d",
               "fact_id": "RBU_F7",
@@ -99,7 +113,9 @@
               "time_scope": "RETRIEVED_2026-09-30"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "1326d66357e70520c62a9e0e7802985df4ee4c8a053ec9aac1002eec9cabd695",
               "fact_id": "RBU_F8",
@@ -113,7 +129,16 @@
           "conclusion_evidence_coverage": "PASS",
           "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
           "domain": "pferdeportal",
-          "fact_ids": ["RBU_F1","RBU_F2","RBU_F3","RBU_F4","RBU_F5","RBU_F6","RBU_F7","RBU_F8"],
+          "fact_ids": [
+            "RBU_F1",
+            "RBU_F2",
+            "RBU_F3",
+            "RBU_F4",
+            "RBU_F5",
+            "RBU_F6",
+            "RBU_F7",
+            "RBU_F8"
+          ],
           "fact_pack_hash": "fc91f7b75bf3c0aa38536abfed9584ee01d1179883272c7d5551cb8b794fa9c7",
           "fact_pack_id": "k9-reitplatzbewaesserung-faq-63328768e9ed161fdfeb14c1",
           "placeholder_content_status": "PASS",
@@ -126,16 +151,47 @@
           "title_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich"
         },
         "portal_links": [
-          {"anchor":"Weide","href":"/weide/","role":"parent_category","section_id":"criteria"},
-          {"anchor":"Reitplatz","href":"/weide/weide-reitplatz/","role":"semantic_related","section_id":"decision"},
-          {"anchor":"Reitplatzbewässerung","href":"/weide/weide-reitplatz/reitplatzbewaesserung/","role":"further_information","section_id":"further_information"}
+          {
+            "anchor": "Weide",
+            "href": "/weide/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Reitplatz",
+            "href": "/weide/weide-reitplatz/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Reitplatzbewässerung",
+            "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
         ],
         "product_sha256": "347439dfb3c17ae675d1158200b62837e89bb9bc12f9f27f00e5915d47e51666",
         "sources": [
-          {"source_id":"SRC_OTTO_EBBEFLUT","title":"OTTO-Ebbe&Flut Reitplatzbau mit automatischer Bewässerung","url":"https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau"},
-          {"source_id":"SRC_BOHLMANN_UNTERFLUR","title":"Reithallen Beregnungsanlagen – Unterflurbewässerung","url":"https://www.bohlmann-reitboden.de/de/reitboden/reitplatzberegnung/bewaesserung-reithalle/"},
-          {"source_id":"SRC_RISOHORSE_FAQ","title":"Häufige Fragen zum Risohorse Ebbe und Flut-System","url":"https://risohorse.de/de/faq/"},
-          {"source_id":"SRC_BAYWA_REITPLATZ","title":"Bewässerung für Reitplatz und Reithalle","url":"https://www.baywa.de/i/beratung/bewaesserung/kommunen/sportplatz/reitplatz"}
+          {
+            "source_id": "SRC_OTTO_EBBEFLUT",
+            "title": "OTTO-Ebbe&Flut Reitplatzbau mit automatischer Bewässerung",
+            "url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau"
+          },
+          {
+            "source_id": "SRC_BOHLMANN_UNTERFLUR",
+            "title": "Reithallen Beregnungsanlagen – Unterflurbewässerung",
+            "url": "https://www.bohlmann-reitboden.de/de/reitboden/reitplatzberegnung/bewaesserung-reithalle/"
+          },
+          {
+            "source_id": "SRC_RISOHORSE_FAQ",
+            "title": "Häufige Fragen zum Risohorse Ebbe und Flut-System",
+            "url": "https://risohorse.de/de/faq/"
+          },
+          {
+            "source_id": "SRC_BAYWA_REITPLATZ",
+            "title": "Bewässerung für Reitplatz und Reithalle",
+            "url": "https://www.baywa.de/i/beratung/bewaesserung/kommunen/sportplatz/reitplatz"
+          }
         ]
       }
     }
