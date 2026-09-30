@@ -47,7 +47,6 @@ def ensure_all_fact_traces(markup, research):
     fact_pack=research.get("fact_pack",{})
     fact_ids=[str(x) for x in fact_pack.get("fact_ids",[]) if str(x)]
     claims={str(x.get("fact_id") or ""):x for x in fact_pack.get("claims",[]) if isinstance(x,dict)}
-    source_titles={str(x.get("source_id") or ""):str(x.get("title") or "") for x in research.get("sources",[]) if isinstance(x,dict)}
     existing=set(_trace_fact_ids(markup))
     for fid in fact_ids:
         if fid in existing:
@@ -56,9 +55,8 @@ def ensure_all_fact_traces(markup, research):
         if not claim:
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
         source_hash=str(claim.get("evidence_text_sha256") or "")
-        source_id=str(claim.get("source_id") or "")
-        source_title=source_titles.get(source_id,"").strip()
-        if not source_hash or not source_title:
+        source_id=str(claim.get("source_id") or "").strip()
+        if not source_hash or not source_id:
             raise PackError("PPM_SOURCE_TRACE_BINDING_MISSING:"+fid)
         statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(claim.get("statement") or "").casefold()))
         candidates=[]
@@ -77,7 +75,7 @@ def ensure_all_fact_traces(markup, research):
         candidates.sort(key=lambda x:(-x[0],x[1]))
         _,start,end,insert_at,segment=candidates[0]
         trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
-               f'data-source-hash="{source_hash}" data-source-title="{source_title}"></span>')
+               f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>')
         replacement=segment[:insert_at]+trace+segment[insert_at:]
         markup=markup[:start]+replacement+markup[end:]
         existing.add(fid)
@@ -100,7 +98,6 @@ def validate_html(markup, article_type, metadata, research, rules):
         raise PackError("CANONICAL_TABLE_CLASS_MISSING")
     claims=research.get("fact_pack",{}).get("claims",[])
     claim_map={str(x.get("fact_id") or ""):x for x in claims if isinstance(x,dict)}
-    source_titles={str(x.get("source_id") or ""):str(x.get("title") or "") for x in research.get("sources",[]) if isinstance(x,dict)}
     trace_tags=[m.group(0) for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I)]
     trace_fact_ids=[]
     for tag in trace_tags:
@@ -112,7 +109,7 @@ def validate_html(markup, article_type, metadata, research, rules):
         claim=claim_map.get(fid)
         if not claim:
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
-        expected_title=source_titles.get(str(claim.get("source_id") or ""),"").strip()
+        expected_title=str(claim.get("source_id") or "").strip()
         if not expected_title or source_title != expected_title:
             raise PackError("PPM_SOURCE_TRACE_SOURCE_TITLE_MISMATCH:"+fid)
         if source_hash != str(claim.get("evidence_text_sha256") or ""):
