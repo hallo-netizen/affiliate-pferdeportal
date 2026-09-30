@@ -22,6 +22,16 @@ def load_rule():
     rule=json.loads(RULE_PATH.read_text(encoding="utf-8"))
     if rule.get("contract")!="K9_MOBILE_COMPACT_TABLE_POLICY_V1" or rule.get("status")!="ACTIVE":
         raise TableRuleError("K9_TABLE_RULE_INVALID")
+    expected_top={"contract","status","purpose","header","first_column","other_cells","word_budget","publish_allowed"}
+    if set(rule)!=expected_top:
+        raise TableRuleError("K9_TABLE_RULE_SCHEMA_DRIFT")
+    expected_label={"preferred_words","maximum_words","multiword_exception","sentences_forbidden"}
+    if set(rule.get("header") or {})!=expected_label or set(rule.get("first_column") or {})!=expected_label:
+        raise TableRuleError("K9_TABLE_LABEL_RULE_SCHEMA_DRIFT")
+    if set(rule.get("other_cells") or {})!={"preferred_maximum_words","hard_maximum_words","sentences_forbidden","flow_text_forbidden"}:
+        raise TableRuleError("K9_TABLE_CELL_RULE_SCHEMA_DRIFT")
+    if set(rule.get("word_budget") or {})!={"table_words_count_toward_article_minimum","missing_article_words_must_be_added_to_normal_prose"}:
+        raise TableRuleError("K9_TABLE_WORD_BUDGET_RULE_SCHEMA_DRIFT")
     return rule
 
 def _table(article_html):
