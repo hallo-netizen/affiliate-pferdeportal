@@ -387,6 +387,7 @@ def _validate_research_product(row, job_item):
     if len(fact_ids) != len(set(fact_ids)):
         raise K9Error("RESEARCH_FACT_ID_DUPLICATE")
 
+    expected_type = str(job_item.get("metadata", {}).get("article_type") or "").strip()
     claim_ids = []
     for claim in claims:
         if not isinstance(claim, dict):
@@ -394,6 +395,11 @@ def _validate_research_product(row, job_item):
         for key in ("fact_id", "source_id", "locator", "statement", "claim_status", "subject_scope", "time_scope"):
             if not str(claim.get(key) or "").strip():
                 raise K9Error("RESEARCH_CLAIM_REQUIRED_FIELD_MISSING:" + key)
+        article_types = claim.get("article_types")
+        if not isinstance(article_types, list) or not article_types or not all(str(x or "").strip() for x in article_types):
+            raise K9Error("RESEARCH_CLAIM_ARTICLE_TYPES_INVALID:" + str(claim.get("fact_id") or ""))
+        if expected_type and expected_type not in article_types:
+            raise K9Error("RESEARCH_CLAIM_ARTICLE_TYPE_MISMATCH:" + str(claim.get("fact_id") or ""))
         if claim.get("claim_status") != "FULLY_SUPPORTED":
             raise K9Error("RESEARCH_CLAIM_NOT_FULLY_SUPPORTED")
         if claim["source_id"] not in source_ids:
@@ -402,7 +408,6 @@ def _validate_research_product(row, job_item):
     if set(claim_ids) != set(fact_ids) or len(claim_ids) != len(set(claim_ids)):
         raise K9Error("RESEARCH_FACT_CLAIM_SET_MISMATCH")
 
-    expected_type = str(job_item.get("metadata", {}).get("article_type") or "").strip()
     if expected_type and pack.get("article_type") != expected_type:
         raise K9Error("RESEARCH_ARTICLE_TYPE_MISMATCH")
     declared = product.get("product_sha256")

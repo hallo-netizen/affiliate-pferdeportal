@@ -323,7 +323,8 @@ class K9Tests(unittest.TestCase):
                 "locator":"Light Duty/Trimmers; Medium Duty; Heavy Duty",
                 "statement":"Die Geräteklasse richtet sich nach Einsatz und Fell.",
                 "claim_status":"FULLY_SUPPORTED",
-                "subject_scope":"Auswahl der Geräteklasse","time_scope":"allgemeine Produktauswahl"
+                "subject_scope":"Auswahl der Geräteklasse","time_scope":"allgemeine Produktauswahl",
+                "article_types":["Beratung"]
             }],
             "fact_pack_hash":"a"*64,"source_manifest_hash":"b"*64,"claim_register_hash":"c"*64,
             "required_block_coverage":"PASS","table_evidence_coverage":"PASS",
@@ -346,6 +347,20 @@ class K9Tests(unittest.TestCase):
         good={"item_id":"k9-1ff3dfabfed47a0c47c8df13","research_product":product}
 
         import copy
+        missing_article_types=copy.deepcopy(good)
+        missing_article_types["research_product"]["fact_pack"]["claims"][0].pop("article_types")
+        core=dict(missing_article_types["research_product"]); core.pop("product_sha256")
+        missing_article_types["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_CLAIM_ARTICLE_TYPES_INVALID"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[missing_article_types]})
+
+        wrong_article_types=copy.deepcopy(good)
+        wrong_article_types["research_product"]["fact_pack"]["claims"][0]["article_types"]=["FAQ"]
+        core=dict(wrong_article_types["research_product"]); core.pop("product_sha256")
+        wrong_article_types["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_CLAIM_ARTICLE_TYPE_MISMATCH"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[wrong_article_types]})
+
         missing_links=copy.deepcopy(good)
         missing_links["research_product"].pop("portal_links")
         core=dict(missing_links["research_product"]); core.pop("product_sha256")

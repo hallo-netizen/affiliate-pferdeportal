@@ -14,6 +14,54 @@ jobs:
           test ! -e control
           test ! -e isolated_system4
           python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: PPM 6.7.9 regression - claim article type binding
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import copy, hashlib, json, sys, tempfile
+          from pathlib import Path
+          sys.path.insert(0, str(Path("quality").resolve()))
+          import k9_ppm679
+
+          research=json.loads(Path("warehouse/research/K9-RESEARCH-beba25304f7d5eeb.json").read_text())
+          article=json.loads(Path("warehouse/repair/K9-REPAIR-b8f6e63e319eb7c4.json").read_text())
+          rp=research["results"][0]["research_product"]
+          ap=article["results"][0]["article_product"]
+          article_type=rp["fact_pack"]["article_type"]
+
+          def check(pack):
+              payload={
+                  "contract":"K9_PPM679_INPUT_V1",
+                  "generated":{
+                      "article_type":ap["article_type"],
+                      "title":ap["title"],
+                      "content_html":ap["content_html"],
+                      "content_hash":ap["content_sha256"]
+                  },
+                  "item":copy.deepcopy(ap["ppm_item"]),
+                  "fact_pack":pack
+              }
+              with tempfile.TemporaryDirectory() as td:
+                  p=Path(td)/"input.json"
+                  p.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
+                  return k9_ppm679.run(Path("quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip"),p)
+
+          negative=check(copy.deepcopy(rp["fact_pack"]))
+          negative_codes={e.get("error_code") for e in negative.get("errors",[]) if isinstance(e,dict)}
+          if "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH" not in negative_codes:
+              raise SystemExit("NEGATIVE_DID_NOT_REPRODUCE_FACT_TYPE_MISMATCH")
+
+          fixed=copy.deepcopy(rp["fact_pack"])
+          for claim in fixed["claims"]:
+              claim["article_types"]=[article_type]
+          positive=check(fixed)
+          positive_codes={e.get("error_code") for e in positive.get("errors",[]) if isinstance(e,dict)}
+          if "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH" in positive_codes:
+              raise SystemExit("POSITIVE_STILL_HAS_FACT_TYPE_MISMATCH")
+
+          print("NEGATIVE_REPRODUCED=1")
+          print("POSITIVE_FACT_TYPE_BINDING_ACCEPTED=1")
+          PY
       - name: Validate actual open runtime job
         run: |
           set -euo pipefail
