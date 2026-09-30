@@ -1,0 +1,158 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-RESEARCH-beba25304f7d5eeb",
+  "station": "research",
+  "results": [
+    {
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+            "title": "Which Clipper is Right for Me and My Horse?",
+            "url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/"
+          },
+          {
+            "source_id": "SRC-LISTER-COAT-TYPES-20260930",
+            "title": "Our guide to clipping different coat types",
+            "url": "https://www.lister-global.com/news/clipping-different-coat-types/"
+          },
+          {
+            "source_id": "SRC-LISTER-HOT-BLADES-20260930",
+            "title": "Help! My Clipper Blades Are Getting Hot",
+            "url": "https://www.lister-global.com/news/bladesgettinghot/"
+          },
+          {
+            "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
+            "title": "Horseline Instructions",
+            "url": "https://www.wahl.co.uk/app/uploads/2018/08/ZB032-Horseline-Instuction-Booklet-Rev.4-10-18.pdf"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Ausrüstung",
+            "href": "/ausruestung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Pflegezubehör",
+            "href": "/ausruestung/ausruestung-pflegezubehoer/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Schermaschinen",
+            "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Eine passende Schermaschine für Pferde nach Einsatzumfang, Felltyp, Stromversorgung, Pferdetemperament, Ergonomie und Wartungsanforderungen auswählen.",
+          "decision_criteria": [
+            "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+            "Felltyp und benötigte Geräteklasse",
+            "Netz- oder Akkubetrieb",
+            "Geräusch, Vibration, Gewicht und Balance",
+            "Passende Messer für Felltyp und gewünschte Schnittlänge",
+            "Wartung, Kühlung und regelmäßiges Ölen"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+          "domain": "pferdeatelier",
+          "article_type": "Beratung",
+          "fact_ids": [
+            "FACT-CLIPPER-001",
+            "FACT-CLIPPER-002",
+            "FACT-CLIPPER-003",
+            "FACT-CLIPPER-004",
+            "FACT-CLIPPER-005",
+            "FACT-CLIPPER-006",
+            "FACT-CLIPPER-007"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "FACT-CLIPPER-001",
+              "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+              "locator": "Factors to consider: Horse Clipping Frequency; Light Duty/Trimmers; Medium/HEAVY Duty; Heavy Duty",
+              "statement": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Geräteklasse nach Einsatzhäufigkeit",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
+              "fact_id": "FACT-CLIPPER-002",
+              "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+              "locator": "Factors to consider: Coat Type",
+              "statement": "Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Geräteklasse nach Felltyp",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
+              "fact_id": "FACT-CLIPPER-003",
+              "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+              "locator": "Factors to consider: Power Source",
+              "statement": "Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Stromversorgung",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
+              "fact_id": "FACT-CLIPPER-004",
+              "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+              "locator": "Factors to consider: Horse’s Temperament; weight, balance",
+              "statement": "Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Pferdetemperament und Ergonomie",
+              "time_scope": "allgemeine Produktauswahl"
+            },
+            {
+              "fact_id": "FACT-CLIPPER-005",
+              "source_id": "SRC-LISTER-COAT-TYPES-20260930",
+              "locator": "Fine coated horses; Medium coated horses; Thick coated horses",
+              "statement": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Messerauswahl nach Felltyp",
+              "time_scope": "allgemeine Schurpraxis"
+            },
+            {
+              "fact_id": "FACT-CLIPPER-006",
+              "source_id": "SRC-LISTER-HOT-BLADES-20260930",
+              "locator": "You’re not using enough oil; You’re using the wrong blades for the application",
+              "statement": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Wartung und Wärmeentwicklung",
+              "time_scope": "allgemeine Schurpraxis"
+            },
+            {
+              "fact_id": "FACT-CLIPPER-007",
+              "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
+              "locator": "GENERAL ADVICE ON CLIPPING & TRIMMING, points 1, 7, 8, 13",
+              "statement": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "Vorbereitung und sichere Anwendung",
+              "time_scope": "allgemeine Schurpraxis"
+            }
+          ],
+          "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+          "source_manifest_hash": "a29cc0cef3b670de645ecbd88884865299e720db63f285613ae9275b31aed33c",
+          "claim_register_hash": "6300dc5370768eb9f2159aba50205b4697a36fb181c19ac34c54069979112b75",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS_BERATUNG",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "a7ea3cabc861e365e388d3a8a17654a0c6b21b51388fd06b0f1962f35a8149cf"
+      }
+    }
+  ]
+}
