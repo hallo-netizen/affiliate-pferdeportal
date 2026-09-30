@@ -3,7 +3,7 @@
   "status": "STOP",
   "workflow": "RESEARCH_WRITE_LT68_PPM679_REPAIR_PSERC_ENDSTEMPEL_WORDPRESS_FILE",
   "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-  "final_sha256": "56bc934abbe86145a7d9d3a1bbc97ed161b0a0dae77e217dde10c86580132ca9",
+  "final_sha256": "bec5ecd9c1cb64fdf2d61e270a1ee3bad47334016dc44b893f78eda69e33d3f2",
   "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
   "article_count": 1,
   "publish_allowed": false
