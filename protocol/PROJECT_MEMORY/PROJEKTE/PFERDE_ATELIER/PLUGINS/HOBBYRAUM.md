@@ -45,7 +45,44 @@ Harte Grenze:
 - Keywords, Topic-Pool, Recovery-/Rollbackautoritäten und aktuelle Produktionsdaten nie blind löschen.
 - Kandidaten sind keine LIVE-Stände.
 
-NEXT ACTION: `PSTE_0_57_12_DATABASE_PERFORMANCE_FULL_COMPATIBILITY_CHECK`.
+## PSTE-KANDIDAT 0.57.13 – HARD PASS / NOCH NICHT LIVE
+
+Ausgangsbasis: real installiertes PSTE **0.57.12**.
+
+Gebündelter Kandidat:
+`PSTE-0.57.13-DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS.zip`
+
+SHA-256:
+`9627705af4d934b6dcde5106476459af2f3959032da9caee2a33cc5621c22345`
+
+Scope:
+- verlustfreie Verdichtung von Run-Snapshots, Candidate-Payloads, Parkarchiven und record-lokalen Sandbox-Daten;
+- alte unkomprimierte Daten bleiben lesbar;
+- Topic-Pool und Legacy-Sandbox-Rollbackautorität bleiben unangetastet;
+- kein neuer Frontend-Hook/-Filter und kein zusätzliches globales Frontend-Include;
+- Storagepflege nur adminseitig, bounded, mit Active-Work-Sperren und atomarem Lock;
+- separater Legacy-Restore stellt vor einem Rückfall auf 0.57.12 die alte Speicherform wieder her.
+
+Hardtests:
+- PHP-Lint **78/78 PASS**;
+- Storage-Core **22/22 PASS**;
+- Maintenance/Active-Work-Guards **10/10 PASS**;
+- Public Storage API **8/8 PASS**;
+- Rollback-Restore **17/17 PASS**;
+- Restore-Mode **7/7 PASS**;
+- Atomic Lock **3/3 PASS**;
+- PSERC-0.28.27-Bindung PASS;
+- Fresh-Unpack/Dateistruktur PASS.
+
+Wichtig: Ein früherer 0.57.13-Zwischenkandidat wurde vor Installation verworfen, weil er Storage-Klassen global im Frontend lud und noch keine vollständigen Active-Work-Sperren hatte. Nur der oben hashgebundene Kandidat gilt.
+
+## PSERC / PPM – PRÜFRESULTAT 2026-09-30
+
+**PSERC 0.28.27:** vorhandene Generation-Retention ist bereits fail-closed und schützt aktive/Resume-/Lease-Zustände plus zwei Fallbackgenerationen. Eigene Dry-Run-Speicherwartung vorhanden. **Kein Codeupdate erforderlich.**
+
+**PPM 6.7.9:** Datenbankfamilie aktuell klein (ca. 26,6 MB), kein belegtes unkontrolliertes Wachstum. Kritische Produktionslogik. **Kein Codeupdate auf Verdacht.**
+
+NEXT ACTION: `INSTALL_PSTE_0_57_13_DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS`.
 
 ## WENN EIN UPDATE BEAUFTRAGT WIRD
 
