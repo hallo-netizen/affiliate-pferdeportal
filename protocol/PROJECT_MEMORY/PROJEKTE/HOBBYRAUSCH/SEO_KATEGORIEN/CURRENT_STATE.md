@@ -3,83 +3,73 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN RESEARCH COMPLETE / V1.9.2 LIVE READBACK FAIL / ROLLBACK PASS / LIVE-URSACHE OFFEN / DIAGNOSE POSITIV+NEGATIV PASS
+STATUS: BUCHBINDEN RESEARCH COMPLETE / 2× LIVE READBACK FAIL MIT 7 CREATE / V1.9.3 DIAGNOSE POS+NEG HARD PASS / DIAGNOSE-LIVERUN NÄCHSTES
 
 ## Harte Abnahmeregel
 
 **Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-Ein synthetischer Einzeltest reicht nicht: Für einen behaupteten Live-Fix muss der echte Produktionspfad mit dem echten Paket simuliert sein.
+## Live-Protokoll – jetzt bewiesen
 
-## Live-Befund
+Die beiden echten Buchbinden-Dry-Runs waren identisch:
+- CREATE 7;
+- ADOPT_EXISTING 0;
+- UPDATE 0;
+- UNCHANGED 0.
 
-Auch V1.9.2 scheiterte live mit:
+Beide Apply-Versuche:
+`DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
 
-`Readback fehlgeschlagen: DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
+Damit ist der Fehler eindeutig im CREATE→Readback-Pfad eingegrenzt.
 
-V1.9.2 ist damit nicht abgenommen.
+## Lokale Reproduktion
 
-## Tatsächlicher gebundener Ausgangszustand
+Exakter echter Buchbinden-Kandidat:
+- Preflight 7 CREATE;
+- lokaler Deploy+Readback PASS.
 
-Der bestehende Live-Research-Snapshot vor dem Write enthält keines der sieben Buchbinden-Zielobjekte.
+Daraus folgt:
+Der lokale Mock bildet mindestens eine Live-WordPress-Abweichung noch nicht ab.
 
-Für den echten Kandidaten ergibt die lokale Preflight-Simulation deshalb:
-- CREATE: 7;
-- UPDATE: 0;
-- ADOPT_EXISTING: 0.
+## Diagnostischer V1.9.3-Stand
 
-Der frühere angenommene Existing-Parent-Fall war nicht der reale Livepfad.
+Installer SHA:
+`6bd488625e545a1921d88423c1658792d8747aa81b035140c93bcc1174a4fda3`
 
-## Exakte Produktionssimulation
+Kein Produktionsfix.
 
-Mit dem echten Buchbinden-READ_ONLY_PREVIEW und dem echten Research-Paket, lokal nur testseitig neu signiert:
+Erfasst beim Readback je Knoten:
+- name;
+- slug;
+- parent;
+- concept_meta;
+- logical_parent_meta;
+- jeweils expected und actual.
 
-- Validator PASS;
-- Research-Binding PASS;
-- Research-Evidence PASS;
-- Comparator PASS;
-- Deployment-Preflight: 7 CREATE;
-- Apply + Readback: PASS.
+Positiv-/Negativsimulation:
+- exakter 7-CREATE-Pfad PASS;
+- absichtlich falscher slug erkannt;
+- falscher name erkannt;
+- falscher parent erkannt;
+- falsches concept_meta erkannt;
+- falsches logical_parent_meta erkannt;
+- jeweiliger Rollback PASS.
 
-Der Livefehler lässt sich im bisherigen WordPress-Mock deshalb noch nicht reproduzieren.
-
-## Feldgenaue Diagnose
-
-Ein diagnostischer V1.9.3-Stand speichert den fehlgeschlagenen Readback vor Rollback und nennt:
-- konkreten node/path;
-- erwartete Werte;
-- tatsächliche Werte;
-- abweichende Felder.
-
-Positiv:
-- echter 7-CREATE-Plan → PASS.
-
-Negativ:
-- Slug-Mutation → slug;
-- Name-Mutation → name;
-- Parent-Mutation → parent;
-- concept_id-Mutation → concept_meta;
-- logischer Parent mutiert → logical_parent_meta;
-- jeweils automatischer Rollback PASS.
-
-Gesamtregression:
+Regression:
 251/251 PASS.
-PHP-Lint PASS.
-
-Dies ist ausdrücklich Diagnose, noch kein Live-Fix.
-
-## Produktionsdatei
-
-Der fachliche Buchbinden-READ_ONLY_PREVIEW bleibt unverändert.
-Kein neuer Research-Lauf erforderlich.
+Fresh-Unpack PHP PASS.
+Runtime-Parität 22/22.
 
 ## NEXT ACTION
 
-**Nicht erneut deployen.**
+V1.9.3 installieren und den **bereits vorhandenen** Dry-Run genau einmal über
+`Geprüften Plan anwenden`
+ausführen.
 
-Zuerst:
-`Kategorien → Protokoll → Protokoll als JSON exportieren`
+Kein neuer Research-Lauf.
+Keine neue Datei.
+Kein neuer Dry-Run nötig.
 
-Die eine JSON hier bereitstellen.
-
-Dann wird der bereits gelaufene echte Dry-Run/Fehlerzustand ausgewertet, ohne einen weiteren WordPress-Write auszulösen.
+Wenn Live erneut abweicht:
+Die Fehlermeldung vollständig hier einfügen.
+Sie enthält jetzt den exakten Knoten und Soll/Ist-Feldwert; danach wird erst der reale Ursachenfix gebaut.
