@@ -1,0 +1,1372 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-a405084979eca15c",
+  "results": [
+    {
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "lt68_result": {
+        "article_sha256": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+        "checked_text_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 2,
+        "findings": [
+          {
+            "context": "...nd Detailarbeit geeignet. Bei dichterem oder groberem Fell sind leistungsstärkere Schermaschinen s...",
+            "length": 8,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 1168,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "... saubere Vorbereitung gehört zur empfohlenen Schurpraxis.  Fazit  Passende Schermaschinen für Pferde ...",
+            "length": 11,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5230,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          }
+        ],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend ist, wie oft du scherst, wie viele Pferde du bearbeiten möchtest, welchen Felltyp dein Pferd hat und ob dir Netzbetrieb oder Bewegungsfreiheit wichtiger ist. Auch Geräusch, Vibration, Gewicht und Balance spielen eine Rolle, besonders bei jungen oder nervösen Pferden. Eine passende Auswahl entsteht deshalb aus mehreren Kriterien, die zusammen betrachtet werden sollten.\n\nFür die grundlegende Einordnung hilft zunächst der Blick auf den Bereich Ausrüstung. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen. Wichtig ist aber, die Geräteklasse nicht pauschal zu wählen, sondern an den tatsächlichen Einsatz anzupassen.\n\nWelche Kriterien bei der Auswahl wichtig sind\n\nDer erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Die Geräteklasse sollte deshalb zum Umfang der Arbeit passen. Leichte Trimmer sind vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit geeignet. Bei dichterem oder groberem Fell sind leistungsstärkere Schermaschinen sinnvoller.\n\nEinsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest.\n\nFelltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes oder grobes Fell.\n\nStromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.\n\nPferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.\n\nErgonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.\n\nMesserauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.\n\nBei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben. Welche Lösung besser passt, hängt deshalb von deinem typischen Einsatz ab und nicht von einer pauschalen Rangfolge.\n\nAuch die Messerwahl gehört zur eigentlichen Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, während mittlere oder gröbere Messer bei dichterem beziehungsweise grobem Fell geeigneter sein können. Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nSo kommst du Schritt für Schritt zur passenden Schermaschine\n\nBeginne mit deinem tatsächlichen Arbeitsumfang. Wenn du vor allem kleinere Bereiche oder feines Fell bearbeitest, kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden. Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt.\n\nIm nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst. Das ist besonders relevant, wenn die Schur länger dauert.\n\nDanach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein Messer wählt, das für den vorhandenen Felltyp ungeeignet ist, kann die Arbeit unnötig erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung.\n\nZur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden. Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden, und die Luftzufuhr der Maschine darf nicht blockiert sein. Hautfalten sind beim Scheren zu straffen.\n\nDie wichtigsten Auswahlpunkte im Überblick\n\nKriterium\n\nWorauf du achten solltest\n\nWarum es wichtig ist\n\nEinsatzumfang\n\nGelegentliches Scheren oder regelmäßiger Einsatz bei mehreren Pferden\n\nDie benötigte Geräteklasse hängt wesentlich von Häufigkeit und Umfang ab.\n\nFelltyp\n\nFeines, kurzes oder dichtes und grobes Fell\n\nLeichte Trimmer und leistungsstärkere Maschinen sind für unterschiedliche Felltypen geeignet.\n\nStromversorgung\n\nNetzanschluss oder Bewegungsfreiheit mit Akku\n\nAkkugeräte bieten Bewegungsfreiheit, können aber Grenzen bei Laufzeit und Leistung haben.\n\nTemperament\n\nGeräusch und Vibration beachten\n\nBei nervösen oder jungen Pferden kann eine ruhigere Handhabung hilfreich sein.\n\nErgonomie\n\nGewicht und Balance prüfen\n\nEin gut ausbalanciertes Gerät lässt sich leichter kontrolliert führen.\n\nMesser\n\nMesser passend zum Felltyp wählen\n\nZu feine Messer können bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nWartung\n\nRegelmäßig reinigen und ölen\n\nÖlen reduziert Reibung und Hitze und hilft, unnötige Belastung zu vermeiden.\n\nVorbereitung\n\nPferd trocken, sauber und gründlich gebürstet\n\nEine saubere Vorbereitung gehört zur empfohlenen Schurpraxis.\n\nFazit\n\nPassende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp, Stromversorgung, Temperament des Pferdes, Ergonomie, Messer und Wartung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem oder grobem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Netz- und Akkubetrieb haben unterschiedliche praktische Voraussetzungen, deshalb sollte die Stromversorgung zu deiner Arbeitssituation passen.\n\nEbenso wichtig ist das Zusammenspiel von Maschine und Messer. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.\n\nVor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zur empfohlenen Praxis. So entsteht keine pauschale Kaufentscheidung, sondern eine Auswahl, die zu deinem Pferd und deinem tatsächlichen Einsatz passt.\n\nWeiterführende Informationen\n\nWenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen.\n\nDieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
+          "checked_text_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+          "content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+            "raw_stdout_sha256": "0a3a269a3d189807d2e49855e9ceb318d640f50912ad84bad9fd6be510c78511",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 2,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"gröberem\"},{\"value\":\"größerem\"},{\"value\":\"properem\"},{\"value\":\"größere\"},{\"value\":\"größeren\"},{\"value\":\"größerer\"},{\"value\":\"größeres\"},{\"value\":\"Eroberer\"},{\"value\":\"oberem\"},{\"value\":\"erobere\"},{\"value\":\"erobertem\"},{\"value\":\"froherem\"},{\"value\":\"grünerem\"},{\"value\":\"krosserem\"},{\"value\":\"propere\"},{\"value\":\"properen\"},{\"value\":\"properer\"},{\"value\":\"properes\"},{\"value\":\"trüberem\"}],\"offset\":1168,\"length\":8,\"context\":{\"text\":\"...nd Detailarbeit geeignet. Bei dichterem oder groberem Fell sind leistungsstärkere Schermaschinen s...\",\"offset\":48,\"length\":8},\"sentence\":\"Bei dichterem oder groberem Fell sind leistungsstärkere Schermaschinen sinnvoller.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Schulpraxis\"}],\"offset\":5230,\"length\":11,\"context\":{\"text\":\"... saubere Vorbereitung gehört zur empfohlenen Schurpraxis.  Fazit  Passende Schermaschinen für Pferde ...\",\"offset\":48,\"length\":11},\"sentence\":\"Eine saubere Vorbereitung gehört zur empfohlenen Schurpraxis.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0}],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "0a3a269a3d189807d2e49855e9ceb318d640f50912ad84bad9fd6be510c78511",
+          "return_code": 0,
+          "unresolved_finding_count": 2
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "0a3a269a3d189807d2e49855e9ceb318d640f50912ad84bad9fd6be510c78511",
+        "return_code": 0,
+        "status": "REPAIR_REQUIRED"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 3,
+            "conclusion_ratio": 0.1842696629213483,
+            "conclusion_word_count": 164,
+            "content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [
+              "Die wichtigsten Auswahlpunkte im Überblick"
+            ],
+            "heading_count": 5,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [
+              "Welche Kriterien bei der Auswahl wichtig sind",
+              "So kommst du Schritt für Schritt zur passenden Schermaschine",
+              "Die wichtigsten Auswahlpunkte im Überblick"
+            ],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 106,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+            "language_evidence_valid": false,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 2,
+            "language_raw_report_sha256": "0a3a269a3d189807d2e49855e9ceb318d640f50912ad84bad9fd6be510c78511",
+            "language_unresolved_finding_count": 2,
+            "list_count": 1,
+            "maximum_list_items": 6,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
+            "quality_binding_hash": "621b31593bcc8a491a04965d2b4ee10146d8f178a87707e1c060fa946c9d08d1",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Schermaschinen",
+                "block": "further_information",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+              },
+              "parent_category": {
+                "anchor": "Ausrüstung",
+                "block": "intro",
+                "href": "/ausruestung/"
+              },
+              "semantic_related": {
+                "anchor": "Pflegezubehör",
+                "block": "decision",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 8,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Kriterium",
+              "Worauf du achten solltest",
+              "Warum es wichtig ist"
+            ],
+            "table_heading": "Die wichtigsten Auswahlpunkte im Überblick",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.16981132075471697,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Ausrüstung",
+                "block": "intro",
+                "href": "/ausruestung/"
+              },
+              {
+                "anchor": "Pflegezubehör",
+                "block": "decision",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/"
+              },
+              {
+                "anchor": "Schermaschinen",
+                "block": "further_information",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+              "name": "Beratung Schermaschinen",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "schermaschinen-beratung",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "BLOCKED",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 7,
+          "fact_pack_coverage_ratio": 0,
+          "factual_unit_count": 40,
+          "fail_closed_aggregate_status": "BLOCKED",
+          "h2_count": 5,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.1842696629213483,
+            "conclusion_word_count": 164,
+            "content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 6,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 890,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 14,
+          "publish_allowed": false,
+          "quality_content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 0,
+          "table_body_row_count": 0,
+          "table_count": 0,
+          "technical_content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+          "trace_lexical_support_ratio": 0,
+          "trace_units": 0,
+          "used_fact_count": 0,
+          "visible_link_count": 3,
+          "word_count": 872
+        },
+        "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+        "content_sha256": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_TABLE_COUNT",
+            "evidence_hash": "a2b52d20d8b775c5ea070a42a8cf1247e13b1020189353de52acc4e8a6ab4c4b",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": 1,
+            "failed_rule": "GENERATED_ARTICLE_MUST_CONTAIN_EXACTLY_ONE_CANONICAL_TABLE",
+            "field_path": "content.table_count",
+            "item_index": null,
+            "reason": "Der Entwurf enthält nicht genau eine kanonische Vergleichstabelle.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 14,
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_PARAGRAPH_FLOOR",
+            "evidence_hash": "39c3d83c4281dbc16e30416b397e3b607e1a85c969beb3a213c3464307557938",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at least 16",
+            "failed_rule": "COMPLETE_ARTICLE_MUST_HAVE_MINIMUM_16_PARAGRAPHS",
+            "field_path": "content.paragraph_count",
+            "item_index": null,
+            "reason": "Der Artikel enthält zu wenige eigenständige Absätze. Fundstelle: gesamtes finales HTML.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_TABLE_ROW_FLOOR",
+            "evidence_hash": "69f22649b84ce5ce2cd5018c5a63ef360da79154ebaa990a4489184c4d8586f5",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at least 4",
+            "failed_rule": "CANONICAL_TABLE_MUST_HAVE_MINIMUM_4_CONTENT_ROWS",
+            "field_path": "content.table.body_row_count",
+            "item_index": null,
+            "reason": "Die echte Tabelle enthält zu wenige Inhaltszeilen. Fundstelle: tbody der kanonischen Tabelle.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_SOURCE_TRACE_COUNT",
+            "evidence_hash": "7351ca13f21b6e781fcc3199d4b2b9e8f462d6ee806dc40a684d9af82634473b",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at least 3",
+            "failed_rule": "ALL_FACTUAL_ARTICLE_TYPES_REQUIRE_SOURCE_TRACES",
+            "field_path": "content.source_trace_count",
+            "item_index": null,
+            "reason": "Der erzeugte Entwurf enthält zu wenige gebundene Faktenspuren.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "fc87f108d6fcb72a3b5a376d5a5de2d1a3a5f963896a52c0b0ca83cb14f6823f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[0]@byte_123.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend ist, wie oft du scherst, wie viele Pferde du bearbeiten möchtest, welchen ",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "5ad70c1d6fe342e64b9d8d5f7f6f5f283ac6ff3300a0d4115032d17477751435",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[1]@byte_1177.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Die Ge",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "6b8c04e91c1a419d3ace5084478940edf1aae2ec176a68180850757443de03b8",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[2]@byte_1633.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Einsatzhäufigkeit:</strong> Prüfe, wie oft und wie viele Pferde du scheren möchtest.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "839f3fce44d87439b358d0e61224ab0a8697a5a34a1b82a9a106969b9bd42812",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[3]@byte_1738.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Felltyp:</strong> Feines, kurzes Fell stellt andere Anforderungen als dichtes oder grobes Fell.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "0cd88e0f73313b41ec3baadfcff65f5faa3031ce5c2cb430e59e43a62c0e76bc",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[4]@byte_1851.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Stromversorgung:</strong> Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "85cc015bb30a260f1fae8972300c9728bb53c33c9f82a32e8f7ab2bf2ad8344f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[5]@byte_2005.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Pferdetemperament:</strong> Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "bea6f83c4a420cae4aa0df57e9543c8a65f7c00c02b6c6b2945a4feef637a6a8",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[6]@byte_2152.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Ergonomie:</strong> Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "66965d66c4e0f85d2dc63ebb7910c43b40b442029322926629e7a631377b0ff6",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[7]@byte_2290.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Messerauswahl:</strong> Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "520cb2fd186792308902fbc446804253add68fa5b3d8f6fbbd8e8d0d6dd0cae7",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[8]@byte_2410.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei La",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "59ccf827ecb0e332ba70ac848978cb9b2a0466af32fdc3b989914423abee465f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[9]@byte_2750.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Auch die Messerwahl gehört zur eigentlichen Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, während mittlere oder gröbere Messer bei dichterem beziehungsweise gro",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ff00ec80afcb3e4bba5cb1c9aeccd3bdd250f1e44ea07cc50ca4425e39318eda",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[10]@byte_3331.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Beginne mit deinem tatsächlichen Arbeitsumfang. Wenn du vor allem kleinere Bereiche oder feines Fell bearbeitest, kann ein leichteres Gerät ausreichen. Für umfangreichere Schure",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "2e77e40edfe44edfec13eb55c749f145414be422fc0c31d8403e2ae2872075c5",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[11]@byte_3720.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzei",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "1aa52598133f8ef2b055df42a2b1a2d6206c73c483f165bfe3a6a7f52b82e5ab",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[12]@byte_4491.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschin",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "fa9dcae19c062939291d6b6e6db9d93de5e853a0ec7d548c630c93112396db0c",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[13]@byte_5334.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Einsatzumfang</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "89ece3910a7cd19e7a7017aeeff04f01854b14e2339ddef072a96c2a0023d936",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[14]@byte_5356.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Gelegentliches Scheren oder regelmäßiger Einsatz bei mehreren Pferden</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "6adebd4ef73b3f92237455d22b4ea4c9a8224e3c1dff98acec69329e112414d0",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[15]@byte_5436.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Die benötigte Geräteklasse hängt wesentlich von Häufigkeit und Umfang ab.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d96bdc0476338dccce504d4dfbe95dc805d286fcc7be05c33621c9459c1207bb",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[16]@byte_5532.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Felltyp</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "5cbe4dd1f594fa4e8ed3b7dae49d8471ce031eb42cbfe3f3fbaa4137272f7654",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[17]@byte_5548.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Feines, kurzes oder dichtes und grobes Fell</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "2ac20e2f2aad0f1b8855d9b78dc63d37b3d1a3fe55e4d60fed38f0823e93d254",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[18]@byte_5600.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Leichte Trimmer und leistungsstärkere Maschinen sind für unterschiedliche Felltypen geeignet.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "3b85605d475bf1bc410725d69fb966bcec73fd0861fbfdf01df07d9fbbd755e3",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[19]@byte_5714.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Stromversorgung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "0554ea0f47814aee5b024dbf845d2101a7dd48c0d36216b4914661300ac24b3a",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[20]@byte_5738.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Netzanschluss oder Bewegungsfreiheit mit Akku</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "83d498e97d2422ca7d22d4c849ba9b4d565299e8bd9bbc86ddf9c66c320ce671",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[21]@byte_5792.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Akkugeräte bieten Bewegungsfreiheit, können aber Grenzen bei Laufzeit und Leistung haben.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "457aef3dfe6272d4e25e6756cb9a2ec769df6ba777e8f3609d3ec7f5a3dedad4",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[22]@byte_5902.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Temperament</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "261857b6b195ef71c4d1dbdf4ed93dac4bc24bc6b27f0ec51716c92b74bafe62",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[23]@byte_5922.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Geräusch und Vibration beachten</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "69e04fc0bea0f3aaeab352ef83173bf4161d2ff1c14a822f9b0ab5f93afcfe82",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[24]@byte_5963.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bei nervösen oder jungen Pferden kann eine ruhigere Handhabung hilfreich sein.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "c0bf35f77a9dbdc53ce26ea7bc68bd157f712f60e0cd927088d97c1d5c330761",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[25]@byte_6061.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Ergonomie</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "f4c631a947b1dee016278e562b5599828d59982ea1023594be1786d331572422",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[26]@byte_6079.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Gewicht und Balance prüfen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "9a0e03d83bb52eea15e6d959313fa72030c566de041de7a8a3936d9ba6642846",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[27]@byte_6115.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Ein gut ausbalanciertes Gerät lässt sich leichter kontrolliert führen.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "c78da225ab601795abecd66d8ba3fe2d3fca5353a4c87a32c0e64acb947c1903",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[28]@byte_6207.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Messer</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a2b215faa736f2f1267282aa02adc13af53c94336699dfae0142bc395aaf1b02",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[29]@byte_6222.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Messer passend zum Felltyp wählen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "42d31dd2e5e40c31b0372390463a58782b900a1b245f4f93cac61ef90ed8caa1",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[30]@byte_6265.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Zu feine Messer können bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "901b45917f46a906d070232dc968279c12ec85bc71591b72b3d5eecb2ceef53a",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[31]@byte_6383.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Wartung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "5a358b61931ed645394aafc93e70c6ef7b4cb8d491cd3b507f5eeb73a300b9da",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[32]@byte_6399.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Regelmäßig reinigen und ölen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "f1e69f2bee095b037a0931cd609a395c006e33e2fff0bd8e62eba60f8aff7e89",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[33]@byte_6439.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Ölen reduziert Reibung und Hitze und hilft, unnötige Belastung zu vermeiden.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "5fa4a9f19f43175a92def03117c563c0158ffb5de77ada0400b9e07f277bdda9",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[34]@byte_6536.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Vorbereitung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "87e21cd9c75a2092309061a0e269b8c87ada36ffde5bbde6e9da5807e13f6169",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[35]@byte_6557.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Pferd trocken, sauber und gründlich gebürstet</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "c922e830d4f1c77bf1d048ca4c2072f2b3b65f20a51dc60db74310047a368a89",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[36]@byte_6613.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Eine saubere Vorbereitung gehört zur empfohlenen Schurpraxis.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "4825241d17cd394b322ce40587830f2e9a6c5d950538a731de98d58ddc642d10",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[37]@byte_6904.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp, Stromversorgung, Temperament des Pferdes, Ergonomie, Messer und Wartung gemeinsa",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ccab37b34235e6ba447c83487a9411c7da6a3eb15066884ae75e87cfebc8a3dc",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[38]@byte_7455.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Ebenso wichtig ist das Zusammenspiel von Maschine und Messer. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Bei empfindlichen Pferden können ",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "389e3e19ca422a36a8f3af4f7c0fecf64894bf3c14cb84e58199630168aba070",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[39]@byte_7846.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger U",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_PACK_COVERAGE",
+            "evidence_hash": "1a15de430a0edb1b9f5e5f7725f30e5785db9ed3fa5837dae4d52e40cee0087e",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at least 0.75",
+            "failed_rule": "ARTICLE_MUST_USE_AT_LEAST_75_PERCENT_OF_BOUND_FACT_PACK",
+            "field_path": "content.fact_pack_coverage_ratio",
+            "item_index": null,
+            "reason": "Der sichtbare Artikel nutzt zu wenig des gebundenen Fact-Packs.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T13:10:28+00:00",
+            "error_code": "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT",
+            "evidence_hash": "260b281ed1c156b18b1265af5c45e3a2374f61b6da686957d69f76d1deeffbaa",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at least 0.8",
+            "failed_rule": "AT_LEAST_80_PERCENT_OF_TRACE_UNITS_REQUIRE_LEXICAL_FACT_SUPPORT",
+            "field_path": "content.trace_lexical_support_ratio",
+            "item_index": null,
+            "reason": "Zu wenige Faktenspuren besitzen eine erkennbare lexikalische Verbindung zu ihrer sichtbaren Aussage.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "first_element_is_p": true,
+              "headings": 0,
+              "words": 106
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+            "expected": {
+              "first_element": "p",
+              "headings": 0,
+              "word_range": [
+                30,
+                100
+              ]
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.intro",
+            "human_message": "The article needs a short introductory paragraph without a heading.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Die wichtigsten Auswahlpunkte im Überblick"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+            "expected": [],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.generic_headings",
+            "human_message": "Headings must sound human and name the concrete reader question.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Welche Kriterien bei der Auswahl wichtig sind",
+              "So kommst du Schritt für Schritt zur passenden Schermaschine",
+              "Die wichtigsten Auswahlpunkte im Überblick"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "expected": [
+              "schermaschinen für pferde",
+              "schermaschinen",
+              "pflegezubehör",
+              "ausrüstung"
+            ],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.heading_intent_terms",
+            "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "intro",
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTERNAL_LINK_PLACEMENT",
+            "expected": "criteria",
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.links.parent_category.block",
+            "human_message": "The link is not in its bound section.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "bad_headers": [],
+              "body_rows": 8,
+              "columns": 3,
+              "count": 1,
+              "heading": "Die wichtigsten Auswahlpunkte im Überblick",
+              "unique_token_ratio": 0.16981132075471697,
+              "value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar."
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
+            "expected": {
+              "body_rows": 4,
+              "columns": 3,
+              "count": 1,
+              "unique_token_ratio": 0.18,
+              "value_statement_words": ">=8"
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.table",
+            "human_message": "The table must have a concrete purpose, useful headings and additional information beyond prose.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "checked_text_matches": true,
+              "checked_text_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+              "content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "exception_errors": [],
+              "execution_record": {
+                "input_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+                "raw_stdout_sha256": "0a3a269a3d189807d2e49855e9ceb318d640f50912ad84bad9fd6be510c78511",
+                "return_code": 0
+              },
+              "raw_finding_count": 2,
+              "raw_report_decodes": true,
+              "raw_report_sha256": "0a3a269a3d189807d2e49855e9ceb318d640f50912ad84bad9fd6be510c78511",
+              "return_code": 0,
+              "unresolved_finding_count": 2
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+            "expected": {
+              "checked_text_sha256": "4aafaf27ab1c0996f458351ca197292724ef555a2490d86a0d36f2618a00b07e",
+              "content_hash": "475b31205faff8355460b33285acaff9a2d2ff7567b30d6b2ba43d1ee537f957",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "human_exceptions_only": true,
+              "raw_finding_count": 0,
+              "return_code": 0,
+              "unresolved_finding_count": 0
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.language_evidence",
+            "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          }
+        ],
+        "fail_closed_aggregate_status": "BLOCKED",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "technical_status": "BLOCKED_TECHNICAL_CHECK"
+      }
+    }
+  ],
+  "station": "check"
+}
