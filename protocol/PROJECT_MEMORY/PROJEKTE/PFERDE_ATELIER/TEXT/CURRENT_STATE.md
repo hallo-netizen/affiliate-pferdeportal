@@ -3,6 +3,14 @@
 STAND: 2026-09-24
 STATUS: KATEGORIE-SCOPE CLOSED / ÄLTERE PRODUKTIONSHISTORIE UNTEN NICHT ALS AKTUELLE KATEGORIE-NEXT-ACTION
 
+## PLUGIN-PFLEGE-DELTA 2026-09-30
+
+Portal SEO Themenengine ist real in WordPress als **0.57.13 aktiv** bestätigt.
+
+`PLUGIN_UPDATE_REF: PU-20260930-002`
+
+Dieses Storage-/Performanceupdate ändert keine Kategorie-, Recherche-, Qualitäts- oder Produktionsregel und öffnet den geschlossenen Kategorie-Scope nicht erneut. Die unten genannte 0.57.12 bleibt ausdrücklich die historische Kategorie-Closeout-Baseline vom 24.09.; der aktuelle reale Pluginstand wird ausschließlich im PLUGINS-Büro geführt.
+
 ## KATEGORIE-/PLUGIN-STATUSDELTA 2026-09-24
 
 Der frühere Produktionsblocker unten bleibt historische Text-/Produktionslage, ist aber **nicht** der aktuelle Status der abgeschlossenen Kategorieintegration.
@@ -13,7 +21,7 @@ Für Kategorie/Struktur sind aktuell gebunden:
 - Portal Production Link Policy Gate **1.0.1** – dynamischer/source-getriebener Kategoriepfad
 - Portal Production Machine **6.7.9** – **25/25 neue Kategorien + 125/125 neue Slots PASS**
 - Portal SEO Redaktionsplan Compiler **0.28.23** – vollständiger **1149-Lauf PASS**
-- Portal SEO Themenengine **0.57.12** – **LIVE_READBACK_PASS_CLOSED**, `pferde putztasche` = Recherchekeyword, Kontext PENDING, Originalbegriff erhalten
+- Portal SEO Themenengine **0.57.12 (Kategorie-Closeout-Baseline 24.09.)** – **LIVE_READBACK_PASS_CLOSED**, `pferde putztasche` = Recherchekeyword, Kontext PENDING, Originalbegriff erhalten
 
 Finale Kategorie-Nachweise:
 - Run `36005442270` = SUCCESS
