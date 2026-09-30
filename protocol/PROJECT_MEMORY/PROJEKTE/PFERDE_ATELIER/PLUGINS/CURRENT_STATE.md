@@ -43,18 +43,32 @@ Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand
 
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
 
-- Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert und Performancepfade unverändert gebunden.
+- Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert. Technische Releasebasis **6.72.166** bleibt Fallback. Neuer **6.72.167 eBay-KISS-/Storage-Cleanup-Kandidat** ist auf `affiliate-release-current` in Arbeit; 6.72.166-Performancepfade sind ausdrücklich zu erhalten.
 - PSTE: real **0.57.13** aktiv; WordPress-Live-Readback am 2026-09-30 bestätigt. Installationsquelle war der final geprüfte 0.57.13-Kandidat mit SHA-256 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`. Die WordPress-Pluginliste bestätigt Version und Aktivstatus, nicht unabhängig den Live-Byte-Hash.
 - PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht aus; **kein Update erforderlich**. Manueller Dry-Run + zustandsgebundene Bereinigung am 2026-09-30 erfolgreich: obsolete Generation `16115ea4650a8334d732`, 339 Options-Einträge, 7 Ready-Zeilen, 14 Candidate-Zeilen, 12,92 MB gelöscht; danach 3 geschützte Generationen, 0 weitere Löschkandidaten.
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
 ERSTER OFFENER PUNKT:
-Der erste reale Start der PSTE-0.57.13-Speicherpflege wurde vom eingebauten Schutz korrekt mit `PSTE_STORAGE_MAINTENANCE_CONTEXT_REFRESH_BLOCKED` abgewiesen. Ursache ist frisch im finalen PSTE-Quellstand verifiziert: die Speicherpflege darf nicht starten, solange der PSTE-`Portalabgleich` den Status `RUNNING` hat. Der Nutzer-Screenshot zeigt den Portalabgleich real als `RUNNING` und die automatische Meldung `Portalabgleich läuft automatisch request-begrenzt weiter.`
+PSTE 0.57.13 arbeitet weiterhin automatisch den bereits gestarteten `Portalabgleich` ab; dessen Speicherpflege bleibt bis `COMPLETE` korrekt blockiert. Während dieser automatische Hintergrundlauf weiterläuft, ist der aktive manuelle Arbeitsstrang die Affiliate-Zentrale 6.72.167: eBay wurde auf der bestehenden 6.72.166-Performancebasis deutlich verschlankt, aber der vollständige Release-Gesamttest ist noch offen.
+
+Affiliate-6.72.167-Stand:
+- 17 historische eBay-Run-Recovery-/Migrationsfunktionen aus dem Run-Modul entfernt;
+- weitere 4 nachweislich tote eBay-Kompatibilitätsmethoden entfernt;
+- Run-Modul von 3015 auf 2144 Zeilen reduziert;
+- alter terminaler Fremdbuild-Run wird bounded historisiert statt dauerhaft als aktueller roter Hauptstatus mitgeschleppt;
+- eBay-OAuth-Verbindungstest von Kanalpause getrennt; normale Runtime bleibt weiterhin kanalgesperrt/fail-closed;
+- zentraler Housekeeping-Pfad verdichtet exakt `ended + purged_ended + inactive + listing_post_id=0` nach 7 Tagen;
+- aktive, öffentliche/listing-gebundene und junge Datensätze bleiben unangetastet;
+- PRIVATE/BUSINESS-, Coverage-, Qualitäts-, Affiliate-, Compliance- und 6.72.166-Performancepfade bleiben gebunden;
+- isolierte PHP-8.4 Positiv-/Negativ-Simulation: `ALL_PASS`;
+- Source-/Logik-Evidence: `release/affiliate-zentrale/evidence/ebay_kiss_storage_cleanup_v672167_source_checks_20260930.md`;
+- aktueller Source-Manifest-SHA-256: `480277aa8850ec5916c62a24548f90155dfa21591228e3c8a41b338ddc46afc4`;
+- noch **kein** Live-Installer / kein WordPress-Readback.
 
 GENAU EINE NEXT ACTION:
-`COMPLETE_RUNNING_PSTE_PORTALABGLEICH_BEFORE_STORAGE_MAINTENANCE`.
+`RUN_COMBINED_FULL_RELEASE_GATE_FOR_AFFILIATE_6_72_167_EBAY_KISS_STORAGE_CLEANUP`.
 
-Auf `SEO Themenengine → Übersicht` den bereits laufenden automatischen Portalabgleich bis `COMPLETE` durchlaufen lassen. Nicht parallel erneut Speicherpflege starten. Falls die Automatik nicht mehr läuft, ausschließlich den vorhandenen Originalbutton `Portalabgleich jetzt fortsetzen` verwenden. Erst nach `COMPLETE` die PSTE-Speicherpflege erneut starten. Keine manuelle Datenbanklöschung und keine Änderung an Affiliate, PSERC oder PPM.
+PSTE währenddessen nicht manuell neu starten und keine PSTE-Datenbanklöschung ausführen. Sobald der Portalabgleich dort `COMPLETE` ist, wird die PSTE-Speicherpflege als separater späterer Schritt wieder aufgenommen. Affiliate 6.72.167 darf erst nach vollständigem Gate-PASS paketiert/installiert werden.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
