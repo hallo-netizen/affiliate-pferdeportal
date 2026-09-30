@@ -31,20 +31,15 @@ Aktuell beobachtet:
 
 Der frühere Kategorie-Stand weiter unten bleibt historische Scope-Dokumentation und darf diese reale Inventarbeobachtung nicht überschreiben.
 
-## AKTUELLER AUFRÄUM-/PERFORMANCEAUFTRAG 2026-09-30
+## AKTIVER ZIELVERTRAG
 
-Ziel des laufenden Plugin-Arbeitsstrangs:
-- Datenbank nachhaltig gegen unnötiges Wachstum schützen;
-- vorhandene Altlasten kontrolliert bereinigen;
-- Performanceverbesserungen erhalten und nicht gegenseitig überschreiben;
-- Plugin für Plugin arbeiten, keine Serie von Miniversionen.
+Autoritative Zielquelle:
+`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`
 
-Arbeitsgrenze:
-- Fach-/Release-/LIVE-Autorität bleibt im jeweiligen Fachbüro bzw. in der technischen Originalquelle.
-- Keine Datenlöschung ohne belegte Schutz-/Recoveryprüfung.
-- Keine Performanceoptimierung darf durch Storage-/Housekeepingänderungen rückgängig gemacht werden.
-- Affiliate-Zentrale **6.72.165** wurde im laufenden Auftrag durch einen gleichversionierten Storage-Housekeeping-Build ersetzt; exakter Updatebeleg steht in `UPDATEPROTOKOLL.md`.
-- PSTE **0.57.12** ist weiterhin real installiert; ein neuer PSTE-Kandidat ist **noch kein LIVE-Stand**.
+Dauerhafte Arbeitsentscheidung/Warum:
+`protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md` → `PLUGINS-001`.
+
+Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand, ersten offenen Punkt und NEXT ACTION.
 
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
 
@@ -80,6 +75,16 @@ Final neu gebaut und frisch geprüft:
 - Diff gegen 0.57.12: 2 neue Storage-Dateien, 6 geänderte Runtime/Admin-Dateien, 1 entfernte ungenutzte `.orig`-Datei; Contracts/Fixtures unverändert.
 
 Nur dieser hashgebundene Kandidat darf installiert werden.
+
+## ABSCHLUSS-/ARTEFAKTSTATUS
+
+Die nach Abschlussregel geforderten isolierten `CURRENT.zip`-Binärartefakte konnten über den in diesem Chat verfügbaren GitHub-Schreibweg nicht bytegenau ins Repository übertragen werden. Es wurden deshalb keine ZIPs rekonstruiert.
+
+Dauerhafte Blockerbelege:
+- `ISOLIERTE_PLUGINS/PA-E-003/MANIFEST.md`
+- `ISOLIERTE_PLUGINS/PA-E-019/MANIFEST.md`
+
+Dies ändert die technische NEXT ACTION nicht. Der formale Plugin-Artefakt-Sync bleibt jedoch BLOCKED, bis ein autorisierter Binär-Uploadweg verfügbar ist.
 
 ## KATEGORIE-CLOSEOUT-SYNC 2026-09-24
 
