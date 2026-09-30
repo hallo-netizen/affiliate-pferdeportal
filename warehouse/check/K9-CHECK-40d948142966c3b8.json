@@ -1,0 +1,243 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-40d948142966c3b8",
+  "results": [
+    {
+      "item_id": "k9-037886feb135ca682b8423e7",
+      "lt68_result": {
+        "article_sha256": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+        "checked_text_sha256": "ea590e0636149068a38fc0a247bd61107df9ed9d1a36cc30ec5bb8b154e1192e",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 0,
+        "findings": [],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung. Entscheidend sind Trockenheit, Fellzustand sowie die Stärke von Wind und Nässe.\n\nNasses Fell verliert Isolationswirkung, sodass Regen und gefrierender Niederschlag die Kältebelastung erhöhen können, auch wenn die Lufttemperatur allein noch keine Decke erfordern würde. Eine Regendecke kann deshalb vor allem dort helfen, wo sie das Fell trocken hält. Ob sie zugleich genug Wärme bietet, hängt jedoch von ihrer Ausführung und vom einzelnen Pferd ab.\n\nRegendecken schützen vor Nässe, aber nicht automatisch vor Kälte\n\nEine ungefütterte Regendecke kann das Fell eines ungeschorenen Pferdes anlegen und die natürliche Aufstellung der Haare begrenzen, ohne nennenswert zusätzliche Isolation zu liefern. Damit ist sie vor allem ein Nässeschutz. Wer nur auf die Tatsache schaut, dass eine Decke auf dem Pferd liegt, kann den tatsächlichen Wärmeschutz leicht überschätzen.\n\nBei einem robusten, ungeschorenen Pferd mit dichtem Winterfell kann das eigene Fell einen großen Teil der Isolation übernehmen. Wird dieses Fell durch eine ungefütterte Regendecke angelegt, sollte deshalb nicht automatisch angenommen werden, dass die Kombination wärmer ist als trockenes, frei aufgestelltes Winterfell.\n\nNässe: Nasses Fell isoliert schlechter als trockenes Fell.\n\nUngefütterte Decke: Sie schützt vor Regen, liefert aber kaum zusätzliche Isolation.\n\nWinterfell: Trockenes, intaktes Winterfell kann selbst sehr wirksam isolieren.\n\nRegendecken bei Wind und nassem Wetter richtig einschätzen\n\nZugang zu einem Unterstand oder Windschutz und das Trockenbleiben helfen Pferden, bei kaltem, windigem oder nassem Wetter Körperwärme zu halten. Eine Regendecke ist deshalb nur ein Teil des gesamten Wetterschutzes. Ein trockener Platz und Schutz vor starkem Wind können ebenso wichtig sein wie die Decke selbst.\n\nBei Regen und Wind wirken mehrere Faktoren zusammen. Wird das Fell nass, sinkt seine Isolationswirkung. Trifft zusätzlich Wind auf das Pferd, kann der Wärmeverlust weiter steigen. Eine gut sitzende Regendecke kann das Fell trocken halten, ersetzt aber keinen geeigneten Unterstand, wenn die Wetterbedingungen dauerhaft unangenehm sind.\n\nGerade bei ungefütterten Modellen lohnt sich ein genauer Blick auf das Pferd. Die Decke hält Niederschlag ab, bringt aber keine nennenswerte zusätzliche Wärmeschicht mit. Deshalb kann sie bei einem Pferd mit wenig eigener Isolation oder unter sehr ungünstigen Bedingungen zu wenig sein.\n\nRegendecken für geschorene, alte oder dünne Pferde\n\nEine Decke wird eher bei geschorenen, sehr jungen, sehr alten, untergewichtigen, kranken oder noch nicht an Kälte gewöhnten Pferden benötigt sowie bei fehlendem Schutz in starker Kälte oder Nässe. Diese Pferde haben andere Voraussetzungen als ein gesundes, gut genährtes Tier mit dichtem Winterfell und geschütztem Standort.\n\nBei solchen Pferden sollte der Schutz deshalb stärker an Alter, Schur, Körperzustand, Gesundheit und Wetter angepasst werden. Auch ein fehlender Unterstand kann die Entscheidung beeinflussen. Die passende Lösung ergibt sich aus der Kombination dieser Faktoren und nicht aus einer pauschalen Temperaturgrenze.\n\nWird einem Pferd unter einer Decke zu warm, kann es schwitzen; Feuchtigkeit unter der Decke kann später das Auskühlen begünstigen und Hautprobleme fördern. Mehr Decke ist daher nicht automatisch besser. Auch Überwärmung muss vermieden werden.\n\nFür die übergeordnete Einordnung von Decken, Schutz und weiterer Pferdeausstattung führt der gebundene Bereich über Ausrüstung.\n\nRegendecken regelmäßig am Pferd kontrollieren\n\nEine Decke sollte trocken bleiben, richtig sitzen und regelmäßig abgenommen werden, damit Pferd, Haut und Sitz der Decke kontrolliert werden können. Nur von außen zu schauen reicht nicht, weil sich Feuchtigkeit, Scheuerstellen oder ein verrutschter Sitz unter der Decke verbergen können.\n\nBei der Kontrolle sollte außerdem auffallen, ob das Pferd unter der Decke schwitzt. Feuchtigkeit auf der Innenseite oder deutlich feuchtes Fell sind Hinweise darauf, dass die Kombination aus Wetter, Decke und Pferd neu beurteilt werden sollte.\n\nPrüfe regelmäßig, ob die Decke trocken und korrekt positioniert ist.\n\nKontrolliere Fell und Haut unter der Decke auf Feuchtigkeit und Scheuerstellen.\n\nAchte darauf, ob das Pferd unter der Decke schwitzt.\n\nBeziehe Wind, Regen und Zustand des Winterfells in die Beurteilung ein.\n\nBerücksichtige Alter, Schur, Körperzustand, Gesundheit und Gewöhnung an Kälte.\n\nWelche Deckenarten für unterschiedliche Wetterlagen und Pferde infrage kommen, ist im gebundenen Bereich Decken zusammengeführt.\n\nRegendecken nach Pferd und Wetter beurteilen\n\nDie Tabelle ordnet typische Situationen nach den gebundenen Fakten ein. Entscheidend ist immer die Kombination aus Fell, Nässe, Wind, individueller Verfassung und Art der Decke.\n\nSituation\n\nGebundene Einordnung\n\nWorauf achten?\n\nDichtes, trockenes Winterfell\n\nEingeschlossene Luft unterstützt die natürliche Isolation.\n\nBei Wetterwechsel besonders auf Feuchtigkeit und Wind achten.\n\nUngefüttertes Regenmodell\n\nEs hält Niederschlag ab, erzeugt aber kaum zusätzliche Wärme.\n\nDen tatsächlichen Wärmeschutz nicht mit bloßem Regenschutz gleichsetzen.\n\nKalter Regen mit Wind\n\nFeuchtes Fell verliert einen Teil seiner isolierenden Wirkung.\n\nTrockenen Rückzugsort oder wirksamen Windschutz bereitstellen.\n\nGeschorenes oder besonders empfindliches Pferd\n\nZusätzlicher Schutz wird bei solchen Voraussetzungen eher erforderlich.\n\nAlter, Körperzustand, Gesundheit und Gewöhnung an Kälte einzeln bewerten.\n\nFazit zum Kälteschutz mit Regendecken\n\nPferde können auch mit Regendecke frieren. Eine ungefütterte Regendecke schützt in erster Linie vor Niederschlag und liefert kaum zusätzliche Isolation. Gleichzeitig kann trockenes, intaktes Winterfell selbst wirksam isolieren, während Nässe und starker Wind diese Wirkung verringern.\n\nOb eine Decke ausreicht, hängt deshalb vom einzelnen Pferd und den Bedingungen ab. Geschorene, sehr junge, sehr alte, untergewichtige oder kranke Pferde benötigen eher zusätzlichen Schutz. Gleichzeitig sollte eine Decke nicht so warm sein, dass das Pferd schwitzt. Regelmäßige Kontrolle, ein passender Sitz sowie Schutz vor Wind und Nässe sind deshalb wichtiger als eine starre Temperaturregel.\n\nWeitere Informationen zu Regendecken\n\nWer die Auswahl vertiefen möchte, sollte neben der Fütterung der Decke auch Sitz, Trockenheit und die individuellen Voraussetzungen des Pferdes berücksichtigen.\n\nDer gebundene Themenbereich ist hier erreichbar: Regendecken.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "ea590e0636149068a38fc0a247bd61107df9ed9d1a36cc30ec5bb8b154e1192e",
+          "content_hash": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "ea590e0636149068a38fc0a247bd61107df9ed9d1a36cc30ec5bb8b154e1192e",
+            "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 0,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "return_code": 0,
+          "unresolved_finding_count": 0
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "return_code": 0,
+        "status": "PASS"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+          "content_structure_language_gate_checks": {
+            "article_type": "FAQ",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 2,
+            "conclusion_ratio": 0.10730088495575221,
+            "conclusion_word_count": 97,
+            "content_hash": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "faq_direct_answer_bound": true,
+            "faq_direct_answer_word_count": 24,
+            "faq_intro_starts_with_direct_answer": true,
+            "faq_meta_opening_hit": "",
+            "generic_heading_hits": [],
+            "heading_count": 7,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 88,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "ea590e0636149068a38fc0a247bd61107df9ed9d1a36cc30ec5bb8b154e1192e",
+            "language_evidence_valid": true,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 0,
+            "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "language_unresolved_finding_count": 0,
+            "list_count": 2,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "f71e2ee1d0c337e51dfac12afdb334b5e06a6d8263198fca8c2bfdfcbb007084",
+            "quality_binding_hash": "ab99cd4880997bb83781e6aa301fddd59d9af6ad865f784a57c1b8c6e513a6a2",
+            "required_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Regendecken",
+                "block": "further_information",
+                "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/"
+              },
+              "parent_category": {
+                "anchor": "Ausrüstung",
+                "block": "criteria",
+                "href": "/ausruestung/"
+              },
+              "semantic_related": {
+                "anchor": "Decken",
+                "block": "decision",
+                "href": "/ausruestung/ausruestung-decken/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "criteria",
+              "checklist",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 4,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Situation",
+              "Gebundene Einordnung",
+              "Worauf achten?"
+            ],
+            "table_heading": "Regendecken nach Pferd und Wetter beurteilen",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.2753623188405797,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Frieren Pferde unter Regendecken und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Ausrüstung",
+                "block": "criteria",
+                "href": "/ausruestung/"
+              },
+              {
+                "anchor": "Decken",
+                "block": "decision",
+                "href": "/ausruestung/ausruestung-decken/"
+              },
+              {
+                "anchor": "Regendecken",
+                "block": "further_information",
+                "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Ausrüstung > Decken > Regendecken > FAQ Regendecken",
+              "name": "FAQ Regendecken",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "pferdedecken-regendecken-faq",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "PASS",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 7,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 36,
+          "fail_closed_aggregate_status": "PASS",
+          "h2_count": 7,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.06896551724137931,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "FAQ",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.10730088495575221,
+            "conclusion_word_count": 97,
+            "content_hash": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.08,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 904,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 20,
+          "publish_allowed": false,
+          "quality_content_hash": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+          "required_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 7,
+          "table_body_row_count": 4,
+          "table_count": 1,
+          "technical_content_hash": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 7,
+          "used_fact_count": 7,
+          "visible_link_count": 3,
+          "word_count": 898
+        },
+        "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+        "content_sha256": "190180a99ef5ebfd228ebefecaf18719394e3cde704a34e02edf763495a6820b",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [],
+        "fail_closed_aggregate_status": "PASS",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "PASS",
+        "technical_status": "TECHNICAL_CHECK_OK"
+      }
+    }
+  ],
+  "station": "check"
+}
