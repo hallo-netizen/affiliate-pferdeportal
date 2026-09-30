@@ -210,7 +210,8 @@ jobs:
               raise SystemExit('FAIL raw exact-GTIN index not used')
           if 'ebay_campaign_post_ids_for_exact_gtins' not in gtin:
               raise SystemExit('FAIL eBay exact-GTIN bridge missing')
-          if gtin.count('get_campaigns(') != 1 or "if (!$cache_allowed)" not in gtin:
+          gtin_code='\n'.join(line.split('//',1)[0] for line in gtin.splitlines())
+          if gtin_code.count('get_campaigns(') != 1 or "if (!$cache_allowed)" not in gtin:
               raise SystemExit('FAIL public multiprovider path still has an unbounded campaign scan')
 
           glossary=body(main,'glossary_partner_inherited_exact_rank')
