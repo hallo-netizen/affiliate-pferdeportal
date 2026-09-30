@@ -44,3 +44,12 @@ The bound rule object is hash-sealed into the job input and the packager fails c
 
 ## Intake duplicate removed
 The intake workflow previously ran the full software unittest suite and then immediately dispatched the station receiver, which ran the same suite again at explicit production entry. Intake now performs intake only; the existing receiver keeps the single explicit start regression check. No production or quality gate is removed.
+
+## Chat-switch drift closure
+The route lock is now present in every chat-sensitive state:
+- active worker job: execute only the exact bound runtime job;
+- automatic transition: system routing only, no supervisor/code/repair authority;
+- failed finalizer: report the blocker only, no implicit repair authority;
+- successful STOP: deliver the verified WordPress file in chat only.
+
+A finalizer failure can therefore no longer silently turn the next chat into a system-repair session. A repair requires a new explicit user instruction.

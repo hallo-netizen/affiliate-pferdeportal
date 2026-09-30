@@ -85,6 +85,21 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         self.assertIn("PPM679_AUTHORING_RULES",contracts["write"]["input_rule"])
         self.assertIn("PPM679_AUTHORING_RULES",contracts["repair"]["input_rule"])
 
+    def test_all_chat_switch_sensitive_states_are_route_locked(self):
+        engine=self.text("k9_engine.py")
+        finalizer=self.text(".github/workflows/k9-finalize.yml")
+        self.assertIn('"route_lock": "SYSTEM_ROUTING_ONLY"',engine)
+        self.assertIn('"repair_authorized": False',engine)
+        for required in (
+            "FINALIZER_BLOCKER_REPORT_ONLY",
+            "REPORT_FINALIZER_BLOCKER_TO_USER_ONLY",
+            "'repair_authorized':False",
+            "'code_change_allowed':False",
+            "'operational_mode':'TERMINAL_CHAT_DELIVERY_ONLY'",
+            "'route_lock':'TERMINAL_CHAT_DELIVERY_ONLY'",
+        ):
+            self.assertIn(required,finalizer)
+
     def test_finalizer_keeps_all_real_gates_and_mandates_chat_file(self):
         wf=self.text(".github/workflows/k9-finalize.yml")
         for required in (

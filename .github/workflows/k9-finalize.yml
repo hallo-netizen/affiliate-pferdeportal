@@ -83,6 +83,43 @@ jobs:
           assert x['publish_allowed'] is False
           print('K9_WORDPRESS_IMPORT_CONTRACT_PASS')
           PY
+      - name: Lock failed finalization to report-only
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os,pathlib
+          current={
+            'contract':'K9_CURRENT_STATE_V3',
+            'role':'SOLE_CURRENT_AUTHORITY',
+            'concept':'K9',
+            'branch':'konzept9/greenfield-20260929',
+            'status':'BLOCKED_FINALIZER',
+            'operational_mode':'FINALIZER_BLOCKER_REPORT_ONLY',
+            'active_job':None,
+            'first_open_blocker':{
+              'code':'FINALIZER_FAILED_BEFORE_TERMINAL_PACKAGE',
+              'evidence_run_id':os.environ.get('GITHUB_RUN_ID'),
+              'detail':'Read the failed finalizer run. Do not repair or reroute without an explicit user instruction.'
+            },
+            'next_action':'REPORT_FINALIZER_BLOCKER_TO_USER',
+            'allowed_action':'REPORT_FINALIZER_BLOCKER_TO_USER_ONLY',
+            'route_lock':'FINALIZER_BLOCKER_REPORT_ONLY',
+            'supervisor_actions_allowed':False,
+            'code_change_allowed':False,
+            'repair_authorized':False,
+            'all_other_actions':'DENY',
+            'chat_may_route':False,
+            'publish_allowed':False
+          }
+          pathlib.Path('CURRENT_STATE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          git config user.name 'k9-finalizer-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add CURRENT_STATE.json
+          git diff --cached --quiet || git commit -m 'K9: lock failed finalizer to report-only'
+          git push
       - name: Write terminal STOP receipt and persist final package
         shell: bash
         run: |
@@ -124,7 +161,7 @@ jobs:
             'concept':'K9',
             'branch':'konzept9/greenfield-20260929',
             'status':'STOP',
-            'operational_mode':'SUPERVISOR',
+            'operational_mode':'TERMINAL_CHAT_DELIVERY_ONLY',
             'active_job':None,
             'first_open_blocker':None,
             'next_action':'DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT',
@@ -145,6 +182,9 @@ jobs:
               'trigger_head_sha':os.environ.get('GITHUB_SHA')
             },
             'allowed_action':'DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY',
+            'route_lock':'TERMINAL_CHAT_DELIVERY_ONLY',
+            'supervisor_actions_allowed':False,
+            'repair_authorized':False,
             'all_other_actions':'DENY',
             'code_change_allowed':False,
             'chat_delivery_required':True,

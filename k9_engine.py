@@ -220,7 +220,13 @@ def write_current_transition(report):
         "active_job": None,
         "orchestration_mode": orchestration_mode(),
         "first_open_blocker": None if nxt else "AUTO_CHAIN_NO_VALID_TRANSITION",
-        "next_action": "RUN_FINALIZER" if nxt == "finalize" else ("PREPARE_" + str(nxt).upper() if nxt else "STOP_AND_DIAGNOSE_TRANSITION"),
+        "next_action": "RUN_FINALIZER" if nxt == "finalize" else ("PREPARE_" + str(nxt).upper() if nxt else "REPORT_TRANSITION_BLOCKER"),
+        "allowed_action": "SYSTEM_ROUTING_ONLY" if nxt else "REPORT_TRANSITION_BLOCKER_ONLY",
+        "route_lock": "SYSTEM_ROUTING_ONLY",
+        "supervisor_actions_allowed": False,
+        "code_change_allowed": False,
+        "repair_authorized": False,
+        "all_other_actions": "DENY",
         "chat_may_route": False,
         "publish_allowed": False
     }
