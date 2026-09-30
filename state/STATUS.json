@@ -1,23 +1,30 @@
 {
-  "active_job": null,
+  "active_job": {
+    "item_count": 1,
+    "item_ids": [
+      "k9-037886feb135ca682b8423e7"
+    ],
+    "job_id": "K9-REPAIR-e3c6ee5f1224bb32",
+    "station": "repair"
+  },
   "contract": "K9_STATUS_V1",
   "fully_done": 0,
-  "ledger_generation": 40,
+  "ledger_generation": 41,
   "orchestration_mode": "AUTO_CHAIN",
-  "ready_for_check": 1,
+  "ready_for_check": 0,
   "ready_for_write": 0,
   "remaining": 1,
-  "repair_required": 0,
+  "repair_required": 1,
   "research_open": 0,
   "stations": {
     "check": {
       "DONE": 0,
-      "PENDING": 1
+      "FAIL": 1,
+      "PENDING": 0
     },
     "repair": {
       "DONE": 0,
-      "NOT_REQUIRED": 1,
-      "PENDING": 0
+      "PENDING": 1
     },
     "research": {
       "DONE": 1,

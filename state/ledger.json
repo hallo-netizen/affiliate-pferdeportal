@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 40,
+  "generation": 41,
   "items": [
     {
       "item_id": "k9-037886feb135ca682b8423e7",
@@ -12,6 +12,11 @@
         "title": "Frieren Pferde unter Regendecken?"
       },
       "products": {
+        "check": {
+          "job_id": "K9-CHECK-f21d32252edd928a",
+          "path": "warehouse/check/K9-CHECK-f21d32252edd928a.json",
+          "sha256": "0afd51d0df462a678e93981bdac937b6d0fc62f34bf47a8a8e7a3fa90c5d05d4"
+        },
         "research": {
           "job_id": "K9-RESEARCH-4571d4ba822044c4",
           "path": "warehouse/research/K9-RESEARCH-4571d4ba822044c4.json",
@@ -25,8 +30,8 @@
       },
       "revision": 0,
       "stages": {
-        "check": "PENDING",
-        "repair": "NOT_REQUIRED",
+        "check": "FAIL",
+        "repair": "PENDING",
         "research": "DONE",
         "write": "DONE"
       },
