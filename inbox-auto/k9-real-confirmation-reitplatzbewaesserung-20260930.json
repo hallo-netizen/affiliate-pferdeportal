@@ -1,0 +1,23 @@
+{
+  "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
+  "version": "5.0.0",
+  "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+    "item_count": 1,
+    "content_or_format_payload_present": false,
+    "publish_allowed": false,
+    "items": [
+      {
+        "title": "Ist eine Reitplatzbewässerung von unten möglich?",
+        "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+        "category": "reitplatzbewaesserung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892"
+      }
+    ]
+  },
+  "publish_allowed": false
+}
