@@ -1,46 +1,25 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 27,
+  "generation": 29,
   "items": [
     {
-      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "item_id": "k9-16024ee8a6c9b5e964f452e6",
       "metadata": {
-        "article_type": "Beratung",
-        "category": "reitplatzplaner-beratung",
-        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
-        "target_keyword": "Reitplatzplaner für Pferde",
-        "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+        "article_type": "FAQ",
+        "category": "reitplatzplaner-faq",
+        "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+        "target_keyword": "Was ist ein Reitplatzplaner",
+        "title": "Was ist ein Reitplatzplaner?"
       },
-      "products": {
-        "check": {
-          "job_id": "K9-CHECK-88ad9e43b23e456d",
-          "path": "warehouse/check/K9-CHECK-88ad9e43b23e456d.json",
-          "sha256": "5dffd07979c0b2694aba8740dbaa81b0a4134a2ef6c546c47903c725e17284c0"
-        },
-        "repair": {
-          "job_id": "K9-REPAIR-c7d846bffd750b0b",
-          "path": "warehouse/repair/K9-REPAIR-c7d846bffd750b0b.json",
-          "sha256": "b56bfa8fc2fa285473d6edf1f5e624b515a00ff568a740633b1f8368b1e93fde"
-        },
-        "research": {
-          "job_id": "K9-RESEARCH-0c08920b33f4cfe8",
-          "path": "warehouse/research/K9-RESEARCH-0c08920b33f4cfe8.json",
-          "sha256": "3af5aa6502e22ee056dd120678af2d5f56578b112bb84d4c1d43609d22c5d483"
-        },
-        "write": {
-          "job_id": "K9-WRITE-a50a69a17e704591",
-          "path": "warehouse/write/K9-WRITE-a50a69a17e704591.json",
-          "sha256": "3ed8c9e9bc45c3720ef561fcc742b7acde56b3f0cdd0fd775f680ed9d7b7b63e"
-        }
-      },
-      "revision": 1,
+      "products": {},
+      "revision": 0,
       "stages": {
-        "check": "DONE",
+        "check": "PENDING",
         "repair": "NOT_REQUIRED",
-        "research": "DONE",
-        "write": "DONE"
+        "research": "PENDING",
+        "write": "PENDING"
       },
-      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+      "title": "Was ist ein Reitplatzplaner?"
     }
   ]
 }
