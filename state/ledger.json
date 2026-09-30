@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 55,
+  "generation": 56,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -16,6 +16,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -23,7 +28,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Das Wichtigste über Reitplatzplaner für Pferde"
     },
@@ -41,6 +46,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -48,7 +58,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Frieren Pferde unter Regendecken?"
     },
@@ -66,6 +76,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -73,7 +88,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Ist eine Reitplatzbewässerung von unten möglich?"
     },
@@ -91,6 +106,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -98,7 +118,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Kann man mit Kappzaum spazieren gehen?"
     },
@@ -116,6 +136,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -123,7 +148,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Longiergurte mit Bogen im Ratgeber"
     },
@@ -141,6 +166,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -148,7 +178,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Passende Kühlgamaschen für Pferde wählen"
     },
@@ -166,6 +196,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -173,7 +208,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
     },
@@ -191,6 +226,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -198,7 +238,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "So findest du ein optimales Kappzaum für Pferde"
     },
@@ -216,6 +256,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -223,7 +268,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "So wählst du passende Schermaschinen für Pferde"
     },
@@ -241,6 +286,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -248,7 +298,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Warum sagt man du alte Schabracke?"
     },
@@ -266,6 +316,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -273,7 +328,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
     },
@@ -291,6 +346,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -298,7 +358,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Was ist ein Reitplatzplaner?"
     },
@@ -316,6 +376,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -323,7 +388,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed?"
     },
@@ -341,6 +406,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -348,7 +418,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Wie lege ich einen Longiergurt an?"
     },
@@ -366,6 +436,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -373,7 +448,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Wie oft muss ein Pferdeanhänger zum TÜV?"
     },
@@ -391,6 +466,11 @@
           "job_id": "K9-RESEARCH-e053565c2857d4c0",
           "path": "warehouse/research/K9-RESEARCH-e053565c2857d4c0.json",
           "sha256": "4b6d4d543d1bf42a0a3c94e66cb6954a6adbe5292fcc60c34ad13e9a1006796d"
+        },
+        "write": {
+          "job_id": "K9-WRITE-2932b06df177b8bf",
+          "path": "warehouse/write/K9-WRITE-2932b06df177b8bf.json",
+          "sha256": "ccc75b5838f0c3c73ecd0ee112b9aedd1272652dce66577dc96e3bb860545050"
         }
       },
       "revision": 0,
@@ -398,7 +478,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
     }
