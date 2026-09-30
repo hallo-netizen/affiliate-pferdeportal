@@ -20,83 +20,98 @@
         "fact_pack": {
           "article_type": "Beratung",
           "article_type_coverage": "PASS_BERATUNG",
+          "claim_register_hash": "ffbd4030f876ce185e397af52404e5e4847c488206f7cdcfca4fa88fe277a5bb",
           "claims": [
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a",
               "fact_id": "FACT-REITPLATZ-001",
               "locator": "manufacturer product page",
               "source_id": "SRC-HATZEN-REITPLATZ-20260930",
               "statement": "Hatzenbichler beschreibt Reitplatzplaner als Geräte zur Reitplatzpflege und zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen.",
               "subject_scope": "Einsatzbereich des Reitplatzplaners",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a"
+              "time_scope": "retrieved 2026-09-30"
             },
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239",
               "fact_id": "FACT-REITPLATZ-002",
               "locator": "manufacturer product page",
               "source_id": "SRC-HATZEN-REITPLATZ-20260930",
               "statement": "Zwei Reihen Striegelzinken bearbeiten den Reitboden; über die verstellbare Andruckwalze lässt sich die Tiefenführung der Zinken einstellen.",
               "subject_scope": "Zinken und Arbeitstiefe",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239"
+              "time_scope": "retrieved 2026-09-30"
             },
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1",
               "fact_id": "FACT-REITPLATZ-003",
               "locator": "manufacturer product page",
               "source_id": "SRC-HATZEN-REITPLATZ-20260930",
               "statement": "Ein am Gerät montiertes Planierschild dient dazu, den Reitplatz zu ebnen.",
               "subject_scope": "Planieren und Ebenheit",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1"
+              "time_scope": "retrieved 2026-09-30"
             },
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69",
               "fact_id": "FACT-REITPLATZ-004",
               "locator": "manufacturer product page",
               "source_id": "SRC-HATZEN-REITPLATZ-20260930",
               "statement": "Die angebotenen Reitplatzplaner unterscheiden sich bei Arbeitsbreite, Gewicht und benötigter Zugleistung; diese Werte sollten zum vorhandenen Zugfahrzeug und zur Fläche passen.",
               "subject_scope": "Arbeitsbreite und Zugfahrzeug",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69"
+              "time_scope": "retrieved 2026-09-30"
             },
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d",
               "fact_id": "FACT-REITPLATZ-005",
               "locator": "manufacturer product page",
               "source_id": "SRC-PLATZMAX-LIGHT-20260930",
               "statement": "Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden, eine höhenverstellbare Planierschiene gleicht Unebenheiten aus und eine Walze bearbeitet die Oberfläche nach.",
               "subject_scope": "Arbeitsfolge und Komponenten",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d"
+              "time_scope": "retrieved 2026-09-30"
             },
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f",
               "fact_id": "FACT-REITPLATZ-006",
               "locator": "manufacturer product page",
               "source_id": "SRC-PLATZMAX-LIGHT-20260930",
               "statement": "Der Platz-Max Light ist für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten.",
               "subject_scope": "Einsatz und Zugfahrzeug",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f"
+              "time_scope": "retrieved 2026-09-30"
             },
             {
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1",
               "fact_id": "FACT-REITPLATZ-007",
               "locator": "manufacturer product page",
               "source_id": "SRC-PLATZMAX-MAXISM-20260930",
               "statement": "Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.",
               "subject_scope": "Ausstattungsmerkmale",
-              "time_scope": "retrieved 2026-09-30",
-              "article_types": ["Beratung"],
-              "evidence_text_sha256": "95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1"
+              "time_scope": "retrieved 2026-09-30"
             }
           ],
           "conclusion_evidence_coverage": "PASS",
@@ -111,29 +126,55 @@
             "FACT-REITPLATZ-006",
             "FACT-REITPLATZ-007"
           ],
+          "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
           "fact_pack_id": "FP-K9-REITPLATZPLANER-20260930",
           "placeholder_content_status": "PASS",
           "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
           "required_block_coverage": "PASS",
+          "source_manifest_hash": "21d68fdf81597a139b21bbabbfd5bf4b43c0f6a923e1f4c08f380267719025e4",
           "status": "SOURCE_VERIFIED_PRODUCTION_READY",
           "table_evidence_coverage": "PASS",
           "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
-          "title_scope": "reitplatzplaner_fuer_pferde",
-          "source_manifest_hash": "21d68fdf81597a139b21bbabbfd5bf4b43c0f6a923e1f4c08f380267719025e4",
-          "claim_register_hash": "ffbd4030f876ce185e397af52404e5e4847c488206f7cdcfca4fa88fe277a5bb",
-          "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590"
+          "title_scope": "reitplatzplaner_fuer_pferde"
         },
         "portal_links": [
-          {"anchor":"Weide","href":"/weide/","role":"parent_category","section_id":"criteria"},
-          {"anchor":"Reitplatzpflege","href":"/weide/weide-reitplatzpflege/","role":"semantic_related","section_id":"decision"},
-          {"anchor":"Reitplatzplaner","href":"/weide/weide-reitplatzpflege/reitplatzplaner/","role":"further_information","section_id":"further_information"}
+          {
+            "anchor": "Weide",
+            "href": "/weide/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Reitplatzpflege",
+            "href": "/weide/weide-reitplatzpflege/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Reitplatzplaner",
+            "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
         ],
+        "product_sha256": "f97856d11baef9c479ae5d32877af6b11615989f40faaf91ec848e7c877e51f7",
         "sources": [
-          {"source_id":"SRC-HATZEN-REITPLATZ-20260930","title":"Reitplatzplaner – Hatzenbichler","url":"https://www.hatzenbichler.com/de/reiplatzplaner"},
-          {"source_id":"SRC-PLATZMAX-LIGHT-20260930","title":"Platz-Max Light Bahnplaner","url":"https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/"},
-          {"source_id":"SRC-PLATZMAX-MAXISM-20260930","title":"Reitplatzplaner Platz-Max Maxi-SM","url":"https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/"}
-        ],
-        "product_sha256": "f97856d11baef9c479ae5d32877af6b11615989f40faaf91ec848e7c877e51f7"
+          {
+            "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+            "title": "Reitplatzplaner – Hatzenbichler",
+            "url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+          },
+          {
+            "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+            "title": "Platz-Max Light Bahnplaner",
+            "url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/"
+          },
+          {
+            "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+            "title": "Reitplatzplaner Platz-Max Maxi-SM",
+            "url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/"
+          }
+        ]
       }
     }
   ],
