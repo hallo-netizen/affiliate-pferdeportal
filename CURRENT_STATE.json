@@ -1,22 +1,46 @@
 {
-  "active_job": {
-    "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
-    "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
-    "job_id": "K9-CHECK-41094697ccece70f",
-    "job_path": "runtime/CURRENT_JOB.json",
-    "runtime_entry": null,
-    "station": "check"
-  },
-  "branch": "konzept9/greenfield-20260929",
-  "chat_may_route": false,
-  "concept": "K9",
   "contract": "K9_CURRENT_STATE_V3",
-  "first_open_blocker": null,
-  "next_action": "RUN_NATIVE_CHECK",
-  "operational_mode": "K9_NATIVE_MACHINE_CHECK",
-  "orchestration_mode": "STATION_ONLY",
-  "publish_allowed": false,
   "role": "SOLE_CURRENT_AUTHORITY",
-  "status": "NATIVE_CHECK_RUNNING",
-  "worker_mode": "NATIVE_MACHINE_ONLY"
+  "concept": "K9",
+  "branch": "konzept9/greenfield-20260929",
+  "status": "BLOCKED_FINALIZER_REGRESSION",
+  "operational_mode": "K9_FINALIZATION_REPAIR",
+  "orchestration_mode": "STATION_ONLY",
+  "worker_mode": "SUPERVISOR_FIX_ONLY_NO_ARTICLE_REOPEN",
+  "active_job": null,
+  "first_open_blocker": {
+    "code": "K9_PSERC_POSITIVE_SCOPE_LANGUAGE_EVIDENCE_REGRESSION",
+    "evidence_run_id": 36783315041,
+    "evidence_head_sha": "b157d15882117980c8fb6a51ec452f47128f5c2f",
+    "detail": "Latest K9 greenfield selftest fails in the positive PSERC scope regression because PPM returns BLOCKED_WAVE2_LANGUAGE_EVIDENCE after the test mutation. The 16 production articles themselves remain CHECK DONE. The previous real finalizer run 36783181669 failed earlier at CANONICAL_TRACE_TARGET_MISSING:RPB_F1; later trace-parser fixes exist but are not yet proven by a green selftest/finalizer.",
+    "publish_allowed": false
+  },
+  "next_action": "FIX_PSERC_POSITIVE_SCOPE_TEST_LANGUAGE_EVIDENCE_BINDING_AND_GET_GREENFIELD_SELFTEST_PASS",
+  "work_binding": {
+    "branch": "konzept9/greenfield-20260929",
+    "verified_head_sha": "b157d15882117980c8fb6a51ec452f47128f5c2f",
+    "status_ref": "state/STATUS.json",
+    "ledger_generation": 65,
+    "article_count": 16,
+    "article_check_done": 16,
+    "remaining_articles": 0,
+    "repair_required": 0,
+    "do_not_reopen_completed_articles": true,
+    "finalization_required": true,
+    "latest_real_finalizer_run_id": 36783181669,
+    "latest_real_finalizer_result": "FAIL_CANONICAL_TRACE_TARGET_MISSING_RPB_F1",
+    "latest_selftest_run_id": 36783315041,
+    "latest_selftest_result": "FAIL_BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+    "preserve_quality_gates": [
+      "LT_6_8",
+      "PPM_6_7_9",
+      "PSERC",
+      "ENDSTEMPEL",
+      "WORDPRESS_VERIFY"
+    ],
+    "target_ref": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json@main",
+    "publish_allowed": false
+  },
+  "chat_may_route": false,
+  "publish_allowed": false
 }
