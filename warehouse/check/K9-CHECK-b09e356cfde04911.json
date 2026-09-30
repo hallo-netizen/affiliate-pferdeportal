@@ -1,0 +1,234 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-b09e356cfde04911",
+  "results": [
+    {
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "lt68_result": {
+        "article_sha256": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+        "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 0,
+        "findings": [],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.\n\nDie passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.\n\nWelche Schermaschinen für Pferde passen zu Einsatz und Fell?\n\nDer erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.\n\nFür die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.\n\nEinsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest.\n\nFelltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.\n\nStromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.\n\nPferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.\n\nErgonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.\n\nMesserauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.\n\nBei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.\n\nAuch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.\n\nSchermaschinen Schritt für Schritt passend auswählen\n\nBeginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.\n\nDanach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.\n\nIm nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.\n\nDanach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung.\n\nZur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.\n\nVor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.\n\nSchermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen\n\nKriterium\n\nPrüffrage\n\nFolgerung für die Auswahl\n\nEinsatzumfang\n\nWie oft und wie viele Pferde werden geschoren?\n\nJe häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.\n\nFelltyp\n\nIst das Fell eher fein oder dicht?\n\nBei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.\n\nStromversorgung\n\nIst ein Netzanschluss sicher erreichbar?\n\nEin Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.\n\nPferdetemperament\n\nReagiert das Pferd empfindlich auf Geräusch oder Vibration?\n\nBei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.\n\nErgonomie\n\nLässt sich das Gerät leicht und ausgewogen führen?\n\nEin geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.\n\nMesser\n\nPasst das Messer zum Felltyp?\n\nEin ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nWartung\n\nWerden Messer regelmäßig gereinigt und geölt?\n\nRegelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.\n\nVorbereitung\n\nIst das Pferd trocken, sauber und gründlich gebürstet?\n\nTrockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.\n\nFazit\n\nPassende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.\n\nEbenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.\n\nRegelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.\n\nVor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.\n\nWeiterführende Informationen\n\nWenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen.\n\nDieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
+          "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+          "content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+            "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 0,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "return_code": 0,
+          "unresolved_finding_count": 0
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "return_code": 0,
+        "status": "PASS"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 4,
+            "conclusion_ratio": 0.14769975786924938,
+            "conclusion_word_count": 122,
+            "content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [],
+            "heading_count": 5,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 64,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+            "language_evidence_valid": true,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 0,
+            "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "language_unresolved_finding_count": 0,
+            "list_count": 1,
+            "maximum_list_items": 6,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
+            "quality_binding_hash": "12b06f092916fcf0cadd91aaa56583f3fb99c27564b47147012a98cacc9a2cf1",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Schermaschinen",
+                "block": "further_information",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+              },
+              "parent_category": {
+                "anchor": "Ausrüstung",
+                "block": "criteria",
+                "href": "/ausruestung/"
+              },
+              "semantic_related": {
+                "anchor": "Pflegezubehör",
+                "block": "decision",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 8,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Kriterium",
+              "Prüffrage",
+              "Folgerung für die Auswahl"
+            ],
+            "table_heading": "Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.21929824561403508,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Ausrüstung",
+                "block": "criteria",
+                "href": "/ausruestung/"
+              },
+              {
+                "anchor": "Pflegezubehör",
+                "block": "decision",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/"
+              },
+              {
+                "anchor": "Schermaschinen",
+                "block": "further_information",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+              "name": "Beratung Schermaschinen",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "schermaschinen-beratung",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "PASS",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 7,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 44,
+          "fail_closed_aggregate_status": "PASS",
+          "h2_count": 5,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.023809523809523808,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.14769975786924938,
+            "conclusion_word_count": 122,
+            "content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 6,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 826,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 18,
+          "publish_allowed": false,
+          "quality_content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 7,
+          "table_body_row_count": 8,
+          "table_count": 1,
+          "technical_content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 6,
+          "used_fact_count": 7,
+          "visible_link_count": 3,
+          "word_count": 816
+        },
+        "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+        "content_sha256": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [],
+        "fail_closed_aggregate_status": "PASS",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "PASS",
+        "technical_status": "TECHNICAL_CHECK_OK"
+      }
+    }
+  ],
+  "station": "check"
+}
