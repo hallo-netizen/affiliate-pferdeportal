@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: PSTE 0.57.14 EDITORIAL OWNERSHIP GATE LOKAL HARD PASS / LIVE-ABNAHME OFFEN
+STATUS: PSTE 0.57.14 EDITORIAL OWNERSHIP GATE + BUCHBINDEN E2E LOKAL PASS / LIVE-ABNAHME OFFEN
 
 ## Rolle
 
@@ -61,22 +61,36 @@ Alle anderen Dateien der 0.57.13-Basis bleiben byte-identisch.
 - WordPress-Write: keiner;
 - Artikel-/Kategorieerzeugung: keine.
 
+## Buchbinden E2E-Realtest
+
+Mit vorhandenen Hobby-Depot-DataForSEO-Daten wurde die Kette V1.9.1 → PSTE 0.57.14 lokal geprüft.
+
+PASS:
+- `Was kostet Buchbinden?` mit Owner Einstieg;
+- semantisch gleiche Kostenfrage unter FAQ BLOCKED;
+- `vorsatzpapier buchbinden` unter Material PASS;
+- derselbe exakte Intent unter FAQ BLOCKED;
+- Frageform unter Material bleibt Material;
+- semantische Doppelbelegung unter FAQ BLOCKED;
+- fehlender `semantic_intent_key` BLOCKED.
+
+Evidenzdatei:
+`BUCHBINDEN_E2E_OWNERSHIP_REALTEST_20260930.json`
+
 ## Beleggrenze
 
-V0.57.14 ist lokal hart geprüft, aber noch nicht auf einer echten Hobby-Depot-WordPress-Installation abgenommen.
+V0.57.14 ist lokal hart geprüft und im Buchbinden-E2E lokal PASS, aber noch nicht auf einer echten Hobby-Depot-WordPress-Installation abgenommen.
 
 ## Erster offener Blocker
 
 Kein Entwicklungsblocker mehr.
 
-Offen ist die reale Abnahme zusammen mit dem V1.9.1-Kategorie-Handoff.
+Kein lokaler Entwicklungsblocker mehr.
+
+Offen ist nur die reale WordPress-Abnahme zusammen mit dem V1.9.1-Kategorie-Handoff.
 
 ## NEXT ACTION
 
 V1.9.1 Kategorie-Workflow live sauber zurückrollen/retesten und danach dessen Editorial-Handoff in PSTE 0.57.14 importieren.
 
-Dann den Buchbinden-Pilot real prüfen:
-- Owner-Kategorie;
-- semantischer Intent;
-- vorhandene/geplante Dublette;
-- FAQ nur bei eigenständigem Restintent.
+Der lokale Buchbinden-E2E muss dabei reproduziert werden. Keine weitere Text-Pluginänderung, solange diese reale Abnahme nicht einen neuen konkreten Fehler zeigt.
