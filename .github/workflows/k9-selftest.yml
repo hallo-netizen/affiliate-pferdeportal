@@ -141,7 +141,7 @@ jobs:
                   continue
               claim=claim_by_id[fid]
               paragraph=re.search(
-                  r'<p\\b[^>]*data-fact-ids=["\\'][^"\\']*\\b'+re.escape(fid)+r'\\b[^"\\']*["\\'][^>]*>',
+                  r"<p\\b[^>]*data-fact-ids=[\"'][^\"']*\\b"+re.escape(fid)+r"\\b[^\"']*[\"'][^>]*>",
                   html,re.I
               )
               if not paragraph:
