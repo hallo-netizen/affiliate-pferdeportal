@@ -8,3 +8,4 @@ finalize-16-after-trace-parser-fix
 retry-16-single-canonical-trace-binder
 retry-16-full-trace-span-replacement
 finalize-16-after-full-span-binder
+finalize-16-after-lexical-trace-binding
