@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: PSTE 0.57.14 EDITORIAL OWNERSHIP GATE + BUCHBINDEN E2E LOKAL PASS / LIVE-ABNAHME OFFEN
+STATUS: PSTE 0.57.14 OWNERSHIP AUF FINALER 0.57.13 PERFORMANCE-/STORAGE-BASIS HARD PASS / BUCHBINDEN E2E LOKAL PASS / LIVE-ABNAHME OFFEN
 
 ## Rolle
 
@@ -13,34 +13,55 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_TEXT_REDAKTION`.
 
 Hobby Depot übernimmt keine Pferde-Atelier-Fachbestände. Verwendet wird ausschließlich der allgemeingültige technische PSTE-Kern als Basis.
 
-Exakte Basis:
-`PSTE 0.57.13 DATABASE_STORAGE_CLEANUP_PERFORMANCE_COMPAT_RECHECK_HARD_PASS`
+### Verbindliche Basis
 
-Aktueller Entwicklungskandidat:
-`PSTE 0.57.14 EDITORIAL OWNERSHIP GATE`
+Neuester geprüfter PSTE-0.57.13-Stand aus Datenbankbereinigung/Performance:
 
-Installer:
+`PSTE-0.57.13-DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS.zip`
+
+SHA-256:
+`bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`
+
+### Veralteter 0.57.14-Kandidat – NICHT INSTALLIEREN
+
 `PSTE-0.57.14-EDITORIAL-OWNERSHIP-GATE_HARD_LOCAL_PASS.zip`
 
 SHA-256:
 `3c0d39011911a7d663adc35dad8724f81dacf671c4b971d4719e221928345871`
 
-## Was V0.57.14 ergänzt
+Dieser Kandidat basierte auf einem früheren 0.57.13-COMPAT_RECHECK und würde spätere Storage-/Performance-Korrekturen zurücknehmen. Zusätzlich enthielt er eine `.orig`-Datei.
 
-- liest den allgemeinen `APKW_EDITORIAL_INTENT_OWNERSHIP_HANDOFF_V1` read-only;
-- bindet Artikelkandidaten an `owner_concept_id`;
-- verlangt einen `semantic_intent_key` vor Artikelpromotion;
-- gleicher semantischer Intent darf nicht mehrfach vergeben werden;
-- bestehende exakte Duplicate-/Answer-Equivalent-Prüfung bleibt aktiv;
-- Frageform besitzt ausdrücklich keine FAQ-/Kategorie-Owner-Autorität;
-- kein Erzeugen/Umbenennen von Kategorien;
-- keine Text-/Designregel verändert.
+Status:
+**SUPERSEDED / NICHT INSTALLIEREN.**
 
-Damit kann z. B. eine Frage wie `Was kostet Buchbinden?` dem Owner `Einstieg` gehören, ohne wegen der Frageform automatisch als FAQ behandelt zu werden.
+### Aktueller Entwicklungskandidat
 
-## Veränderungsfläche gegen 0.57.13
+`PSTE-0.57.14-EDITORIAL-OWNERSHIP-ON-FINAL-0.57.13_HARD_PASS.zip`
 
-Exakt 6 Dateien:
+SHA-256:
+`1ac6fa754fc6a170adccb3ab53d9023e5b8a4caaa653a79923ca9d2ae587222e`
+
+Er wurde frisch auf der finalen 0.57.13-PERFORMANCE_SAFE-Basis aufgebaut.
+
+## Geschützte Datenbank-/Performance-Fixes
+
+Folgende nachträglichen 0.57.13-Dateien bleiben im aktuellen 0.57.14 byte-identisch:
+- `includes/class-pste-repository.php`;
+- `includes/class-pste-research-archive.php`;
+- `includes/class-pste-sandbox-record-store.php`;
+- `includes/class-pste-storage-maintenance.php`.
+
+Damit bleiben insbesondere erhalten:
+- Legacy-Restore für Run-/Candidate-Speicher;
+- Legacy-Restore für Research-Archive;
+- Legacy-Restore für Sandbox-Records;
+- Restore-/Downgrade-Modus der Storage-Pflege;
+- atomarer Storage-Maintenance-Lock;
+- Entfernung der alten `.orig`-Datei.
+
+## Ownership-Ergänzung
+
+Exakt 6 Pfade unterscheiden sich von der finalen 0.57.13:
 - ADD `contracts/upstream-editorial-ownership-v1.json`;
 - MOD `includes/class-pste-admin.php`;
 - ADD `includes/class-pste-article-ownership-gate.php`;
@@ -48,49 +69,65 @@ Exakt 6 Dateien:
 - MOD `portal-seo-topic-engine.php`;
 - MOD `uninstall.php`.
 
-Alle anderen Dateien der 0.57.13-Basis bleiben byte-identisch.
+Funktion:
+- liest `APKW_EDITORIAL_INTENT_OWNERSHIP_HANDOFF_V1` read-only;
+- bindet Artikelkandidaten an `owner_concept_id`;
+- verlangt `semantic_intent_key`;
+- blockiert doppelte semantische Intent-Ownership;
+- Frageform besitzt keine FAQ-/Kategorie-Owner-Autorität.
 
-## Lokale harte Prüfung
+Performance-/Write-Grenze:
+- keine neuen WordPress-Hooks oder Filter;
+- keine neuen Hintergrundjobs;
+- keine DB-Lese-/Schreiboperation beim normalen Boot durch den Ownership-Gate;
+- ein neuer Option-Write nur beim ausdrücklichen Admin-Import des Ownership-Handoffs;
+- Option-Read nur bei ausdrücklicher Ownership-Abfrage/Validierung;
+- kein Frontend-Output;
+- keine Artikel-/Kategorieerzeugung.
 
-- gezielte Ownership Positiv/Negativ: 10/10 PASS;
+## Harte lokale Prüfung aktueller Kandidat
+
+- Ownership Positiv/Negativ: 10/10 PASS;
 - Fresh-Unpack Ownership: 10/10 PASS;
-- Fresh-Unpack PHP-Lint: 79/79 PASS;
-- Worktree ↔ Fresh-Unpack: 135/135 Dateien byte-identisch;
-- Funktionserhalt außerhalb der 6 gezielten Dateien: PASS;
-- unerwartete Änderungen: 0;
-- WordPress-Write: keiner;
-- Artikel-/Kategorieerzeugung: keine.
+- PHP-Lint Fresh-Unpack: 79/79 PASS;
+- Fresh-Unpack: 134 Dateien;
+- Worktree ↔ Fresh-Unpack: byte-identisch;
+- verbotene `.orig/.bak/~`: 0;
+- geschützte Storage-/Performance-Dateien: 4/4 byte-identisch zur finalen 0.57.13;
+- unerwartete geänderte Pfade: 0.
+
+Prüfbeleg:
+`PSTE_0.57.14_FINAL_BASE_COMPAT_EVIDENCE_20260930.txt`
 
 ## Buchbinden E2E-Realtest
 
-Mit vorhandenen Hobby-Depot-DataForSEO-Daten wurde die Kette V1.9.1 → PSTE 0.57.14 lokal geprüft.
+V1.9.1 → PSTE 0.57.14 lokal PASS:
+- korrekter Owner passiert;
+- falsche FAQ-Zuordnung BLOCKED;
+- semantische Doppelbelegung BLOCKED;
+- fehlender `semantic_intent_key` BLOCKED;
+- Frageform bleibt ohne FAQ-Autorität.
 
-PASS:
-- `Was kostet Buchbinden?` mit Owner Einstieg;
-- semantisch gleiche Kostenfrage unter FAQ BLOCKED;
-- `vorsatzpapier buchbinden` unter Material PASS;
-- derselbe exakte Intent unter FAQ BLOCKED;
-- Frageform unter Material bleibt Material;
-- semantische Doppelbelegung unter FAQ BLOCKED;
-- fehlender `semantic_intent_key` BLOCKED.
-
-Evidenzdatei:
+Evidenz:
 `BUCHBINDEN_E2E_OWNERSHIP_REALTEST_20260930.json`
 
 ## Beleggrenze
 
-V0.57.14 ist lokal hart geprüft und im Buchbinden-E2E lokal PASS, aber noch nicht auf einer echten Hobby-Depot-WordPress-Installation abgenommen.
+Keine Live-Installation des korrigierten 0.57.14 durchgeführt.
 
 ## Erster offener Blocker
 
-Kein Entwicklungsblocker mehr.
+Kein lokaler Entwicklungsblocker.
 
-Kein lokaler Entwicklungsblocker mehr.
-
-Offen ist nur die reale WordPress-Abnahme zusammen mit dem V1.9.1-Kategorie-Handoff.
+Offen ist die reale WordPress-Abnahme zusammen mit V1.9.1.
 
 ## NEXT ACTION
 
-V1.9.1 Kategorie-Workflow live sauber zurückrollen/retesten und danach dessen Editorial-Handoff in PSTE 0.57.14 importieren.
+Nur den **korrigierten** 0.57.14-Kandidaten verwenden.
 
-Der lokale Buchbinden-E2E muss dabei reproduziert werden. Keine weitere Text-Pluginänderung, solange diese reale Abnahme nicht einen neuen konkreten Fehler zeigt.
+Vor Installation:
+1. V1.9.1 Kategorie-Workflow bleibt ebenfalls noch ungeändert/uninstalliert;
+2. PSTE 0.57.14 erst installieren, wenn der Nutzer die Prüfung akzeptiert;
+3. danach reale Abnahme V1.9.1 → Editorial-Handoff → PSTE 0.57.14.
+
+Keine weitere PSTE-Änderung, solange die reale Abnahme keinen neuen konkreten Fehler zeigt.
