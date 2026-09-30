@@ -17,7 +17,7 @@ Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobach
 | Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
 | Portal Production Machine | **6.7.9** | aktiv | TEXT; kritisch, unverändert |
 | Portal SEO Redaktionsplan Compiler | **0.28.27** | aktiv | TEXT; kritisch |
-| Portal SEO Themenengine | **0.57.12** | aktiv | TEXT; kritisch |
+| Portal SEO Themenengine | **0.57.13** | aktiv | TEXT; kritisch |
 
 **Arbeitsregel 30.09.2026:** Datenbank-/Performancebereinigung nur pluginweise und gegen die jeweilige aktuelle Fachquelle. Storageänderungen dürfen vorhandene Performanceoptimierungen nicht überschreiben. Kandidaten werden erst nach Installation/Readback zum beobachteten Betriebsstand.
 
@@ -35,7 +35,7 @@ Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorie
 | PA-E-015 | Portal Production Link Policy Gate | **1.0.1** | TEXT |
 | PA-E-016 | Portal Production Machine | **6.7.9** | TEXT |
 | PA-E-017 | Portal SEO Redaktionsplan Compiler | **0.28.23** | TEXT |
-| PA-E-019 | Portal SEO Themenengine | **0.57.12** | TEXT |
+| PA-E-019 | Portal SEO Themenengine | **0.57.13** | TEXT |
 | PA-E-027 | Portal Category Structure Repair Guard | **1.0.1** | GEMEINSAM |
 
 **Regel:** Dies ist Inventar-/Routing-Synchronisierung. Fach-/Release-/LIVE-Wahrheit bleibt im jeweiligen Fachbüro/technischen Original. Kategorie-/Strukturscope ist laut technischer Current-Autorität geschlossen; daraus folgt keine allgemeine Updatefreigabe für fachfremde Plugins.
@@ -94,7 +94,7 @@ Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorie
 | PA-E-016 | Portal Production Machine | 6.7.9 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-017 | Portal SEO Redaktionsplan Compiler | 0.28.23 | aktiv | **KRITISCH · BEHALTEN**; Fach-/Releasebeleg frisch abgleichen | `../TEXT/START_HERE.md` |
 | PA-E-018 | Portal SEO Redaktionsplan Compiler | 0.28.16 | **inaktiv** | **ALTREST · ENTFERNUNG PRÜFEN**; erst Abhängigkeit/Rollback/Pluginroot klären | `../TEXT/START_HERE.md` |
-| PA-E-019 | Portal SEO Themenengine | 0.57.12 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
+| PA-E-019 | Portal SEO Themenengine | 0.57.13 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-020 | PPM-Quellpaket Exporter | 1.0.0 | aktiv | **HILFSWERKZEUG · AUFRÄUMKANDIDAT**, wenn Nachweisexport nicht mehr gebraucht wird | `../TEXT/START_HERE.md` |
 | PA-E-021 | SEO-Quellpaket Exporter | 1.0.0 | aktiv | **HILFSWERKZEUG · AUFRÄUMKANDIDAT**, wenn Nachweisexport nicht mehr gebraucht wird | `../TEXT/START_HERE.md` |
 
