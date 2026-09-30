@@ -41,21 +41,21 @@ def validate_html(markup, article_type, metadata, research, rules):
         if f'data-block="{block}"' not in markup and f"data-block='{block}'" not in markup:
             raise PackError("REQUIRED_BLOCK_MISSING:"+block)
     if markup.lower().count("<table") != 1: raise PackError("TABLE_COUNT_NOT_EXACT_ONE")
-    table_open=re.search(r"<table\\b([^>]*)>",markup,re.I)
+    table_open=re.search(r"<table\b([^>]*)>",markup,re.I)
     if not table_open:
         raise PackError("TABLE_OPEN_TAG_MISSING")
-    class_match=re.search(r'class=["\\\']([^"\\\']+)["\\\']',table_open.group(1),re.I)
+    class_match=re.search(r'class=["\']([^"\']+)["\']',table_open.group(1),re.I)
     table_classes=set((class_match.group(1).split() if class_match else []))
     if not {"system-129-table","comparison-table"}.issubset(table_classes):
         raise PackError("CANONICAL_TABLE_CLASS_MISSING")
     claims=research.get("fact_pack",{}).get("claims",[])
     claim_map={str(x.get("fact_id") or ""):x for x in claims if isinstance(x,dict)}
-    trace_tags=[m.group(0) for m in re.finditer(r"<span\\b[^>]*class=[\"'](?:[^\"']*\\s)?ppm-source-trace(?:\\s[^\"']*)?[\"'][^>]*>",markup,re.I)]
+    trace_tags=[m.group(0) for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I)]
     if len(trace_tags)<3:
         raise PackError("PPM_SOURCE_TRACE_COUNT_BELOW_3")
     for tag in trace_tags:
         def attr(name):
-            m=re.search(r"\\b"+re.escape(name)+r"=[\"']([^\"']+)[\"']",tag,re.I)
+            m=re.search(r"\b"+re.escape(name)+r'=["\']([^"\']+)["\']',tag,re.I)
             return m.group(1) if m else ""
         fid=attr("data-fact-id"); source_hash=attr("data-source-hash"); source_title=attr("data-source-title")
         claim=claim_map.get(fid)
