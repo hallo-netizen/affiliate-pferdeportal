@@ -7,9 +7,9 @@
   "operational_mode": "SUPERVISOR",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "DESIGN_AND_PROVE_ZERO_MANUAL_NUDGE_ORCHESTRATION_AROUND_EXISTING_K9_STATIONS",
+  "next_action": "RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
   "work_binding": {
-    "baseline": "SCHERMASCHINEN_REAL_E2E_STOP",
+    "baseline": "REITPLATZPLANER_REAL_AUTO_CHAIN_E2E_STOP",
     "preserve_existing_station_products": true,
     "preserve_quality_gates": [
       "LT_6_8",
@@ -31,5 +31,11 @@
     "trigger_head_sha": "edb23f04fb4ed72cdf3516a1de0e71d28366c220"
   },
   "chat_may_route": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "auto_chain_proof": {
+    "result": "REAL_E2E_REACHED_STOP_AFTER_MIDRUN_FIXES",
+    "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
+    "clean_zero_nudge_confirmation_still_required": true,
+    "reason": "This real run exposed and fixed run-boundary and ENDSTEMPEL intake-selection defects before reaching STOP."
+  }
 }
