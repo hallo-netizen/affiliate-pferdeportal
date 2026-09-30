@@ -2,34 +2,44 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-28
-STATUS: TESTLABOR UNERWARTET DEPLOYED / V1.9.0 HARDLOCK LOKAL PASS / ROLLBACK NÄCHSTES
+STAND: 2026-09-30
+STATUS: TESTLABOR UNERWARTET DEPLOYED / V1.9.1 LOKAL HARD PASS / ROLLBACK + READ_ONLY RETEST NÄCHSTES
 
 ## Aktueller belastbarer Stand
 
-Research/Tiefenprüfung waren vollständig:
+Research/Tiefenprüfung des bisherigen Testlabors:
 - 15/15 Content-Knoten;
 - Spezialisierungsprüfung abgeschlossen;
 - READ_ONLY_PREVIEW lokal PASS.
 
-Live-Befund nach READ_ONLY_PREVIEW-Übernahme:
+Live-Befund des alten Laufs:
 - WordPress zeigt `Deployment abgeschlossen`;
-- Schreiben + Readback erfolgreich.
+- Schreiben + Readback wurde unerwartet ausgeführt.
 
-Das ist für den angeforderten Einzelschritt nicht akzeptabel und wird nicht als Plugin-PASS gewertet.
+Aktueller Fixstand ist jetzt **V1.9.1** derselben Pluginlinie.
 
-V1.9.0 Rootfix:
-- exakte serverseitige Stage-Bindung aller Guided-Aktionen;
-- stale spätere Aktionen blockieren;
-- Downstream-Artefakte werden bei Upstream-Ersatz invalidiert;
-- aktiver Deployment-Run muss vor neuem Upstream-Import zurückgerollt werden.
+V1.9.1 enthält:
+- vollständigen V1.9.0 Stage-Hardlock;
+- zusätzlich allgemeingültigen Editorial Intent Ownership Handoff;
+- keine Hobby-Depot-Fachbegriffe hardcodiert;
+- kein neues Plugin.
 
 Lokale Prüfung:
-- 241/241 PASS;
-- Fresh-Unpack 241/241 PASS;
-- exakter Regressionstest READ_ONLY_PREVIEW + stale Deploy-Plan → kein Deployment, stale Pakete gelöscht, Stage structure_ready;
-- PHP/Runtime-Parität PASS.
+- 248/248 PASS;
+- Fresh-Unpack 248/248 PASS;
+- PHP-Lint Source 18/18;
+- PHP-Lint Installer 17/17;
+- Runtime-Parität 22/22 byteidentisch.
+
+Realer Kompatibilitätscheck:
+Die bisherige READ_ONLY_PREVIEW-Datei enthält 27 `ARTICLE_ONLY`-Entscheidungen ohne eindeutigen Artikel-Owner. V1.9.1 blockiert deshalb nur deren späteren Redaktions-Handoff; die Kategorienprüfung selbst bleibt kompatibel.
 
 ## NEXT ACTION
 
-V1.9.0 installieren, aktuellen Test-Deployment-Run vollständig zurückrollen und danach denselben READ_ONLY_PREVIEW erneut übernehmen. Erwartung: finale Read-only-Prüfung bei Stage `structure_ready`, kein automatischer Write.
+V1.9.1 installieren → aktuellen Test-Deployment-Run vollständig zurückrollen → denselben READ_ONLY_PREVIEW erneut übernehmen.
+
+Erwartung:
+- `structure_ready`;
+- kein automatischer Write;
+- Stage-Hardlock real PASS;
+- Editorial-Handoff sichtbar und fail-closed für noch ungebundene ARTICLE_ONLY-Owner.
