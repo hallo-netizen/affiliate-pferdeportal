@@ -91,12 +91,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | sort -z | xargs -0 -n1 php -l
-
-      - name: PHP syntax all current plugin files
-        shell: bash
-        run: |
-          set -euo pipefail
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "21"
           echo "PASS php lint 21/21"
@@ -237,14 +231,6 @@ jobs:
           print('PASS central busy gate and 7-day eBay compaction preserved')
           print('PASS manual KISS storage care delegates to central housekeeping')
           PY
-
-      - name: Existing provider and banner regressions
-        shell: bash
-        run: |
-          set -euo pipefail
-          bash AFFILIATE_HOBBYRAUM/run_otto_checks.sh
-          php AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php
-          php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
 
       - name: Existing provider and banner regressions
         shell: bash
@@ -438,7 +424,6 @@ jobs:
           /tmp/wp eval-file /tmp/recovery-sweep-housekeeping-gate.php --path=/tmp/wp-site | tee /tmp/recovery-sweep-housekeeping-gate.txt
           grep -F 'RECOVERY_SWEEP_HOUSEKEEPING_WORDPRESS_MARIADB_PASS' /tmp/recovery-sweep-housekeeping-gate.txt
 
-      - name: Product deals and partner analytics WordPress MariaDB gate
       - name: Product deals and partner analytics WordPress MariaDB gate
         shell: bash
         run: |
