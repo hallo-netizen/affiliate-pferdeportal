@@ -10,9 +10,9 @@
   "active_job": null,
   "first_open_blocker": {
     "code": "K9_PSERC_POSITIVE_SCOPE_LANGUAGE_EVIDENCE_REGRESSION",
-    "evidence_run_id": 36783315041,
-    "evidence_head_sha": "b157d15882117980c8fb6a51ec452f47128f5c2f",
-    "detail": "Latest K9 greenfield selftest fails in the positive PSERC scope regression because PPM returns BLOCKED_WAVE2_LANGUAGE_EVIDENCE after the test mutation. The 16 production articles themselves remain CHECK DONE. The previous real finalizer run 36783181669 failed earlier at CANONICAL_TRACE_TARGET_MISSING:RPB_F1; later trace-parser fixes exist but are not yet proven by a green selftest/finalizer.",
+    "evidence_run_id": 36784005186,
+    "evidence_head_sha": "585f7011ba2d77b6b79ddebe99c4054aaaa62edc",
+    "detail": "Freshness recheck confirms the same first blocker: the positive PSERC scope regression returns BLOCKED_WAVE2_LANGUAGE_EVIDENCE. The 16 production articles themselves remain CHECK DONE. The previous real finalizer run 36783181669 failed earlier at CANONICAL_TRACE_TARGET_MISSING:RPB_F1; later trace-parser fixes exist but are not yet proven by a green PSERC scope regression/finalizer.",
     "publish_allowed": false
   },
   "next_action": "FIX_PSERC_POSITIVE_SCOPE_TEST_LANGUAGE_EVIDENCE_BINDING_AND_GET_GREENFIELD_SELFTEST_PASS",
@@ -29,8 +29,8 @@
     "finalization_required": true,
     "latest_real_finalizer_run_id": 36783181669,
     "latest_real_finalizer_result": "FAIL_CANONICAL_TRACE_TARGET_MISSING_RPB_F1",
-    "latest_selftest_run_id": 36783315041,
-    "latest_selftest_result": "FAIL_BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+    "latest_selftest_run_id": 36784005186,
+    "latest_selftest_result": "FAIL_SAME_BLOCKED_WAVE2_LANGUAGE_EVIDENCE_CONFIRMED",
     "preserve_quality_gates": [
       "LT_6_8",
       "PPM_6_7_9",
@@ -39,7 +39,10 @@
       "WORDPRESS_VERIFY"
     ],
     "target_ref": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json@main",
-    "publish_allowed": false
+    "publish_allowed": false,
+    "last_relevant_code_head_sha": "b157d15882117980c8fb6a51ec452f47128f5c2f",
+    "freshness_checked_through_commit": "7fccecd1fdb06dae31ed21cdb7649d4c9921a0b4",
+    "freshness_rule": "NO_FULL_RECONSTRUCTION_UNLESS_RELEVANT_CODE_OR_STATE_DELTA"
   },
   "chat_may_route": false,
   "publish_allowed": false
