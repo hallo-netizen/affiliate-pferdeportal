@@ -3,108 +3,59 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN RESEARCH LIVE COMPLETE / READ_ONLY_PREVIEW LOKAL POSITIV+NEGATIV SIMULIERT / LIVE-STRUKTURIMPORT NÄCHSTES
+STATUS: BUCHBINDEN RESEARCH COMPLETE / V1.9.1 LIVE DEPLOY-READBACK FEHLER REPRODUZIERT / V1.9.2 HARD PASS / LIVE-RETEST NÄCHSTES
 
 ## Harte Abnahmeregel
 
 **Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-## Live Research
+## Live-Befund
 
-Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.9.1`
+Der Buchbinden-READ_ONLY_PREVIEW lief bis zum echten Deployment.
 
-Live erzeugtes Research-Paket:
-`research-specialization-depth-b43e665c-34a5-4672-a486-56f6f9e731ba`
+Live:
+`Readback fehlgeschlagen: DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
 
-Research:
-- Global-Coverage erledigt;
-- Detailresearch erledigt;
-- Spezialisierungs-Tiefenprüfung 5/5 Content-Knoten erledigt;
-- Research-Handoff verlangt jetzt `READ_ONLY_PREVIEW`.
+Damit wurde nichts als erfolgreich abgenommen; Rollback hat den Vorzustand wiederhergestellt.
 
-## Finaler READ_ONLY_PREVIEW-Kandidat
+## Root Cause
 
-Datei:
-`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json`
+V1.9.1:
+Exact-Slug-Zielobjekt mit richtigem Namen, aber falschem nativen Parent → `ADOPT_EXISTING` trotz `changed_fields:[parent]` → Parent nicht geschrieben → Readback-Mismatch.
+
+## Fix
+
+Aktuell:
+`Affiliate-Portal Kategorie-Workflow V1.9.2`
 
 SHA-256:
-`78b9db7666d413ba5508f0d59741ff6579e3dca22d8b0078f8c2fccdbeb19bcb`
+`8d462ee585ee0921772c0deb56b9829b7e7819a618dfdfc441e06bd3afa79ff8`
 
-Aktive Struktur:
-- Content: Buchbinden → Einstieg / Ausrüstung / Material / Techniken & Praxis;
-- Marketplace: Buchbinden Set;
-- Magazine: Buchbinden Online.
+Positiv:
+- exakter reproduzierter Fehlerfall → UPDATE → DEPLOYED_AND_READBACK_PASS;
+- Taxonomy + Page Parent-Korrektur PASS;
+- Rollback-Restore PASS;
+- Fresh-Unpack 251/251 PASS.
 
-Fragen/Probleme und FAQ bleiben bewusst noch ohne eigene Strukturpromotion, weil dafür im gebundenen Pilot-Research keine ausreichende eigenständige Evidenz vorliegt.
+Negativ/fail-closed:
+- V1.9.1 Regression erzeugt exakt DEPLOY_READBACK_MISMATCH + Rollback PASS;
+- Slug-Konflikt mit anderem Namen bleibt BLOCKED;
+- andere concept_id-Bindung bleibt BLOCKED;
+- stale/manipulierter Plan bleibt BLOCKED.
 
-## Coverage-/Ownership-Entscheidungen
+## Produktionsdatei
 
-Cluster-Coverage:
-- alle 49 reviewpflichtigen Cluster-Cores explizit entschieden;
-- fachfremde Provider-/Online-/Wetter-/Buchhandels-/lokale Dienstleistungs-Cores strukturell ausgeschlossen;
-- `buchbinden bücher` als ARTICLE_ONLY im redaktionellen Buchbinden-Online-Raum gebunden.
+Weiterhin derselbe fachlich geprüfte:
+`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json`
 
-Explizite Artikel-Owner:
-- Einstieg: `buchbinden kurs`, `buchbinden kosten`;
-- Ausrüstung: `buchbinden zubehör`, `ahle buchbinden`;
-- Material: `papier für buchbinden`, `vorsatzpapier buchbinden`;
-- Techniken & Praxis: `buchbinden japanisch`, `buchbinden fadenheftung`, `buchbinden klebebindung`, `buchbinden hardcover`.
-
-Editorial Handoff:
-- 11 ARTICLE_ONLY-Zuweisungen;
-- 11/11 eindeutig gebunden;
-- Status lokal: `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`.
-
-## Positivsimulation
-
-Exakter Kandidat gegen V1.9.1:
-- Validator PASS;
-- Research-Binding PASS;
-- Research-Evidence `PASS_WITH_RESEARCH_EVIDENCE`;
-- Editorial-Handoff PASS;
-- Comparator `PASS_READ_ONLY_PREVIEW`;
-- Fresh-Live-Simulation: 7 CREATE_PREVIEW / 0 CONFLICT / 0 BLOCKED.
-
-V1.9.1 Regression zusätzlich:
-**248/248 PASS**.
-
-## Negativsimulation
-
-Erwartungsgemäß BLOCKED:
-- fehlende Cluster-Core-Entscheidung → `DFS_TOP_KEYWORD_GROUP_UNRESOLVED`;
-- ARTICLE_ONLY ohne Owner → `SPECIALIZATION_COVERAGE_OWNER_MISSING`;
-- Owner im falschen Cluster → `SPECIALIZATION_COVERAGE_OWNER_CLUSTER_MISMATCH`;
-- nicht belegter Spezialisierungsintent → `DFS_SPECIALIZATION_DECISION_NOT_EVIDENCED`;
-- fehlende Begründung für `Techniken & Praxis` → `DFS_VISIBLE_NAME_UNRESOLVED` + `DFS_CATEGORY_NAME_CHOICE_UNRESOLVED`;
-- falscher Research-Hash → `RESEARCH_BINDING_HASH_MISMATCH`;
-- doppelte Spezialisierungsentscheidung → `SPECIALIZATION_COVERAGE_DECISION_DUPLICATE`.
-
-Evidence:
-`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_POS_NEG_EVIDENCE.json`
-
-## Beleggrenze
-
-Die live erzeugten Research-/Review-HMAC-Signaturen sind an das WordPress-Servergeheimnis gebunden und können offline nicht positiv neu verifiziert werden.
-
-Lokal bestätigt:
-- Content-Hash/Binding des Research-Pakets;
-- Validator;
-- Research-Evidence;
-- Comparator;
-- Ownership;
-- Positiv-/Negativfälle.
-
-Der verbleibende Server-HMAC-Gate wird beim Live-Import durch V1.9.1 erneut geprüft.
+Kein neuer Research-Lauf erforderlich.
 
 ## NEXT ACTION
 
-In WordPress `Kategorien` genau den neuen `READ_ONLY_PREVIEW` über `Arbeitsstand übernehmen` hochladen.
+1. V1.9.2 installieren.
+2. denselben READ_ONLY_PREVIEW über `Arbeitsstand übernehmen` erneut laden, damit der alte V1.9.1-Dry-Run verworfen wird;
+3. `Finale Struktur freigeben`;
+4. `WordPress-Vorschau erstellen`;
+5. neuen geprüften Plan anwenden.
 
-Wenn die Seite danach `Read-only Gesamtprüfung PASS.` zeigt:
-1. `Finale Struktur freigeben`;
-2. `WordPress-Vorschau erstellen`;
-3. `Geprüften Plan anwenden`.
-
-Bei irgendeinem BLOCKED/Fehler:
-keine Abnahme; Fehler lokal reproduzieren → Positiv-/Negativsimulation → erst danach neuer Kandidat.
+Nur bei erneutem BLOCKED/Fehler stoppen.
