@@ -48,7 +48,15 @@ def run_job(job_path, jar_path, ppm_path):
         html=str(article.get("content_html") or "")
         title=str(article.get("title") or "")
         ppm_item=json.loads(json.dumps(article.get("ppm_item")))
-        fact_pack=research.get("fact_pack")
+        fact_pack=json.loads(json.dumps(research.get("fact_pack")))
+        if isinstance(fact_pack,dict):
+            source_titles={str(x.get("source_id") or "").strip():str(x.get("title") or "").strip() for x in research.get("sources",[]) if isinstance(x,dict)}
+            for claim in fact_pack.get("claims",[]) if isinstance(fact_pack.get("claims"),list) else []:
+                if not isinstance(claim,dict):
+                    continue
+                sid=str(claim.get("source_id") or "").strip()
+                if sid.upper().startswith("TEST_") and source_titles.get(sid):
+                    claim["source_id"]=source_titles[sid]
         if not html or not title or not isinstance(ppm_item,dict) or not isinstance(fact_pack,dict):
             raise CheckError("K9_CHECK_BOUND_INPUT_INCOMPLETE")
 
