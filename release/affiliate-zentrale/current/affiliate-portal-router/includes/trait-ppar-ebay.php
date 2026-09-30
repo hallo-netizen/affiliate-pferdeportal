@@ -17,8 +17,10 @@ if (!defined('ABSPATH')) {
  */
 trait PPAR_Ebay_Trait {
     private $ebay_topic_similarity_signature_cache = array();
+    private $ebay_topic_duplicate_pair_request_cache = array();
     private $ebay_product_cohort_request_cache = array();
     private $ebay_product_cohort_build_count = 0;
+    private $ebay_business_campaign_source_allowed_request_cache = array();
 
     private function ebay_topic_similarity_signature($value) {
         $value = (string) $value;
@@ -41,14 +43,28 @@ trait PPAR_Ebay_Trait {
         $known = (string) $known;
         if ($title === '' || $known === '') { return false; }
         if ($title === $known) { return true; }
+
+        // V6.72.171: this comparison is pure and is repeated across the three
+        // category-product slots. Cache the unordered pair for this request so
+        // expensive similar_text() work cannot repeat for identical title pairs.
+        $pair = strcmp($title, $known) <= 0 ? $title . "\x1f" . $known : $known . "\x1f" . $title;
+        $pair_key = hash('sha256', $pair);
+        if (array_key_exists($pair_key, $this->ebay_topic_duplicate_pair_request_cache)) {
+            return !empty($this->ebay_topic_duplicate_pair_request_cache[$pair_key]);
+        }
+
         $a = is_array($title_signature) ? $title_signature : $this->ebay_topic_similarity_signature($title);
         $b = is_array($known_signature) ? $known_signature : $this->ebay_topic_similarity_signature($known);
         $la = (int) ($a['length'] ?? 0);
         $lb = (int) ($b['length'] ?? 0);
-        if ($la <= 0 || $lb <= 0) { return false; }
+        if ($la <= 0 || $lb <= 0) {
+            return $this->ebay_topic_duplicate_pair_request_cache[$pair_key] = false;
+        }
         $sum_len = $la + $lb;
         $min_len = min($la, $lb);
-        if ((50 * $min_len) < (23 * $sum_len)) { return false; }
+        if ((50 * $min_len) < (23 * $sum_len)) {
+            return $this->ebay_topic_duplicate_pair_request_cache[$pair_key] = false;
+        }
         $fa = is_array($a['freq'] ?? null) ? $a['freq'] : array();
         $fb = is_array($b['freq'] ?? null) ? $b['freq'] : array();
         $remaining = $la;
@@ -58,11 +74,15 @@ trait PPAR_Ebay_Trait {
         foreach ($fa as $char=>$count) {
             $count=(int)$count; $remaining-=$count;
             if (isset($fb[$char])) { $common += min($count,(int)$fb[$char]); }
-            if (($common+$remaining) < $required_common) { return false; }
+            if (($common+$remaining) < $required_common) {
+                return $this->ebay_topic_duplicate_pair_request_cache[$pair_key] = false;
+            }
         }
-        if ($common < $required_common) { return false; }
+        if ($common < $required_common) {
+            return $this->ebay_topic_duplicate_pair_request_cache[$pair_key] = false;
+        }
         similar_text($title,$known,$pct);
-        return $pct >= 92.0;
+        return $this->ebay_topic_duplicate_pair_request_cache[$pair_key] = ($pct >= 92.0);
     }
 
     private $ebay_business_campaign_source_row_cache = array();
@@ -2696,11 +2716,27 @@ trait PPAR_Ebay_Trait {
      * stale source data cannot win a public product slot.
      */
     private function ebay_business_campaign_source_allows_delivery($campaign) {
-        if (!$this->ebay_business_campaign_source_allows_delivery_base($campaign)) { return false; }
-        if (!is_array($campaign) || sanitize_key((string)($campaign['network'] ?? '')) !== 'ebay') { return true; }
-        if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { return true; }
+        if (!is_array($campaign) || sanitize_key((string)($campaign['network'] ?? '')) !== 'ebay') {
+            return $this->ebay_business_campaign_source_allows_delivery_base($campaign);
+        }
+        if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') {
+            return $this->ebay_business_campaign_source_allows_delivery_base($campaign);
+        }
+
         $post_id=absint($campaign['post_id'] ?? 0);
-        return $post_id > 0 && $this->ebay_public_checkpoint_allows_business_campaign($post_id);
+        $use_cache=$this->ebay_request_local_read_cache_allowed();
+        $cache_key=$post_id>0 ? 'post:'.$post_id : '';
+        if ($use_cache && $cache_key!=='' && array_key_exists($cache_key,$this->ebay_business_campaign_source_allowed_request_cache)) {
+            return !empty($this->ebay_business_campaign_source_allowed_request_cache[$cache_key]);
+        }
+
+        $allowed=$this->ebay_business_campaign_source_allows_delivery_base($campaign)
+            && $post_id>0
+            && $this->ebay_public_checkpoint_allows_business_campaign($post_id);
+        if ($use_cache && $cache_key!=='') {
+            $this->ebay_business_campaign_source_allowed_request_cache[$cache_key]=(bool)$allowed;
+        }
+        return (bool)$allowed;
     }
 
     /** Existing fach/public safety contract without checkpoint visibility. */
