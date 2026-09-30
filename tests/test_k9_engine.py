@@ -9,6 +9,7 @@ spec = importlib.util.spec_from_file_location("k9_engine", SRC)
 k = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(k)
 ORIGINAL_CHAT_ENTRY = k.CHAT_ENTRY
+ORIGINAL_WRITING_RULES = k.WRITING_RULES
 
 class K9Tests(unittest.TestCase):
     def setUp(self):
@@ -23,6 +24,8 @@ class K9Tests(unittest.TestCase):
         k.STATUS_FILE = root / "state/STATUS.json"
         k.WAREHOUSE = root / "warehouse"
         k.PORTAL_BINDINGS = root / "contracts/K9_PORTAL_BINDINGS.json"
+        k.WRITING_RULES = root / "contracts/K9_WRITING_RULES.json"
+        k.write_json(k.WRITING_RULES, k.load_json(ORIGINAL_WRITING_RULES))
         k.write_json(k.PORTAL_BINDINGS, {
             "contract":"K9_PORTAL_BINDINGS_V1",
             "bindings":{
@@ -142,6 +145,8 @@ class K9Tests(unittest.TestCase):
             "content_html":html,
             "content_sha256":hashlib.sha256(html.encode()).hexdigest(),
             "research_product_sha256":research_product["product_sha256"],
+            "writing_rules_sha256":k.stable(k.load_json(k.WRITING_RULES)),
+            "writing_rules_coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1",
             "ppm_item":ppm_item
         }
         product["product_sha256"]=k.stable(product)
@@ -167,6 +172,15 @@ class K9Tests(unittest.TestCase):
                 "ppm_package_sha256":k.PPM679_PACKAGE_SHA256,
                 "content_sha256":sha,
                 "errors":[] if ppm_status=="PASS" else [{"error_code":"TEST_FAIL"}]
+            },
+            "writing_rules_result":{
+                "contract":"K9_WRITING_RULES_RESULT_V1",
+                "status":"PASS",
+                "content_sha256":sha,
+                "writing_rules_sha256":article_product["writing_rules_sha256"],
+                "coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1",
+                "findings":[],
+                "publish_allowed":False
             }
         }
 

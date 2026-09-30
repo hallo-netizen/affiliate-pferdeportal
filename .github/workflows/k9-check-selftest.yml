@@ -6,6 +6,8 @@ on:
       - 'quality/k9_check.py'
       - 'quality/k9_lt68.py'
       - 'quality/k9_ppm679.py'
+      - 'quality/k9_rule_guard.py'
+      - 'contracts/K9_WRITING_RULES.json'
       - '.github/workflows/k9-check-selftest.yml'
 permissions:
   contents: read
@@ -34,13 +36,18 @@ jobs:
           rm -rf /tmp/k9-check-fixture && mkdir -p /tmp/k9-check-fixture
           unzip -q quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip -d /tmp/k9-check-fixture
           python3 - <<'PY'
-          import hashlib,json,pathlib
+          import hashlib,json,pathlib,sys
+          sys.path.insert(0,str(pathlib.Path('quality').resolve()))
+          import k9_rule_guard
           p=pathlib.Path('/tmp/k9-check-fixture/portal-production-machine/contracts/g9-single-faq-approved-candidate-v1.json')
           f=json.loads(p.read_text())
           c=f['candidate']; html=c['content_html']; sha=hashlib.sha256(html.encode()).hexdigest()
           research={'contract':'K9_RESEARCH_PRODUCT_V1','sources':[{'source_id':'fixture','url':'https://example.org/fixture','title':'fixture'}],'fact_pack':f['fact_pack'],'product_sha256':'fixture-research'}
-          article={'contract':'K9_ARTICLE_PRODUCT_V1','article_type':f['article_type'],'title':c['title'],'content_html':html,'content_sha256':sha,'research_product_sha256':'fixture-research','ppm_item':f['item'],'product_sha256':'fixture-article'}
-          job={'contract':'K9_JOB_V1','status':'OPEN','station':'check','job_id':'K9-CHECK-SELFTEST','job_sha256':'not-used-here','item_count':1,'item_ids':['fixture-1'],'items':[{'item_id':'fixture-1','input_products':{'research':{'research_product':research},'article':{'article_product':article}}}]}
+          rules=json.loads(pathlib.Path('contracts/K9_WRITING_RULES.json').read_text())
+          rules_sha=k9_rule_guard.validate_coverage(rules)['rules_sha256']
+          article={'contract':'K9_ARTICLE_PRODUCT_V1','article_type':f['article_type'],'title':c['title'],'content_html':html,'content_sha256':sha,'research_product_sha256':'fixture-research','writing_rules_sha256':rules_sha,'writing_rules_coverage_contract':'K9_COMPLETE_RULE_COVERAGE_V1','ppm_item':f['item'],'product_sha256':'fixture-article'}
+          metadata={'title':c['title'],'target_keyword':str(f['item'].get('target_keyword') or '')}
+          job={'contract':'K9_JOB_V1','status':'OPEN','station':'check','job_id':'K9-CHECK-SELFTEST','job_sha256':'not-used-here','item_count':1,'item_ids':['fixture-1'],'items':[{'item_id':'fixture-1','metadata':metadata,'input_products':{'research':{'research_product':research},'article':{'article_product':article}}}]}
           pathlib.Path('/tmp/k9-check-job.json').write_text(json.dumps(job,ensure_ascii=False))
           PY
       - name: Run both native K9 quality machines
@@ -58,7 +65,10 @@ jobs:
           assert r['lt68_result']['status'] in ('PASS','REPAIR_REQUIRED')
           assert r['ppm679_result']['contract']=='K9_PPM679_RESULT_V1'
           assert r['ppm679_result']['status'] in ('PASS','REPAIR_REQUIRED')
-          assert r['lt68_result']['article_sha256']==r['ppm679_result']['content_sha256']
+          assert r['writing_rules_result']['contract']=='K9_WRITING_RULES_RESULT_V1'
+          assert r['writing_rules_result']['status'] in ('PASS','REPAIR_REQUIRED')
+          assert r['lt68_result']['article_sha256']==r['ppm679_result']['content_sha256']==r['writing_rules_result']['content_sha256']
+          assert len(r['writing_rules_result']['writing_rules_sha256'])==64
           wave=r['ppm679_result']['checks']['content_structure_language_gate_checks']
           assert r['lt68_result']['checked_text_sha256']==wave['language_checked_text_sha256']
           assert r['lt68_result']['finding_count']==wave['language_raw_finding_count']
