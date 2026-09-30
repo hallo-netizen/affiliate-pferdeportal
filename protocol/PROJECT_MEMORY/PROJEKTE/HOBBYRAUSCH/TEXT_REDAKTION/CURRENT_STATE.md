@@ -3,55 +3,73 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: HD-002 V0.1.1 FRESH-INSTALL-MIGRATION-FIX HARD LOCAL PASS / LIVE-RETEST OFFEN
+STATUS: HD-002 V0.1.1 LIVE-MIGRATION PASS / PRODUKTIVER KATEGORIE-OWNER-STAND FEHLT / GESAMTBESTAND NOCH NICHT ERFASSEN
 
 ## Rolle
 
 Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_TEXT_REDAKTION`.
 
-## Aktueller Stand
+## Live-Stand
 
-Eigenes Hobby-Depot-Plugin:
+Installiert:
 `Hobby Depot SEO Themenengine 0.1.1`
 
-Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.1_FRESH_INSTALL_MIGRATION_FIX_HARD_PASS.zip`
+Die sichere Migration ist live vollständig abgeschlossen.
+Backend ist erreichbar und READY.
 
-SHA-256:
-`6230a7e7db47dc1c337106051cd658e2093e0a3873dbb4d9225749538123577d`
+V0.1.0 bleibt superseded.
 
-V0.1.0 ist wegen des live reproduzierten Erstinstallationsfehlers `HDTE_SITE_BASELINE_REQUIRED` superseded.
+## Aktueller sichtbarer Zustand
 
-## Fix
+Übersicht zeigt:
+- Beiträge: 0;
+- Themenfamilien: 0;
+- nutzbare Kategorien: 0;
+- Website-Gesamtbild: NOT CAPTURED;
+- DataForSEO: NICHT EINGERICHTET;
+- Portalabgleich: NOT STARTED.
 
-Fresh Install ohne eigenen HDTE-Datenbestand darf die Startmigration ohne Baseline abschließen.
+## Wichtige Sperre vor „Gesamtbestand erfassen“
 
-Diese Ausnahme gilt nur bei maschinell verifiziert leerem eigenen Datenbestand.
+Der bisherige HD-001-Lauf war ein Testlauf und wurde vollständig zurückgerollt.
 
-Bestandsmigrationen bleiben baselinepflichtig und fail-closed.
+Die dafür verwendete Testdatei:
+`kategorie-read-only-preview-hobby-depot-testlabor-20260928.json`
 
-## Prüfung
+enthält:
+- 20 Strukturknoten;
+- 27 `ARTICLE_ONLY`-Entscheidungen;
+- davon 27 ohne `owner_concept_id`.
 
-- alter 0.1.0-Fehler reproduziert;
-- kompletter 0.1.1-Fresh-Install-Ablauf COMPLETE;
-- Resume des pausierten Fresh-Install-Jobs PASS;
-- 3 relevante Negativfälle BLOCKED wie erwartet;
-- PHP 80/80;
-- Ownership 11/11;
-- Frage≠FAQ 12/12;
-- Family 8/8;
-- HD-001→HD-002 9/9;
-- kritische Storage-/Performance-Dateien 4/4 byte-identisch.
+Damit ist deren Editorial-Ownership-Handoff nicht produktionsbereit.
 
-## Projektgrenze
+Außerdem sind die Testkategorien nach Rollback nicht live vorhanden.
 
-Keine Änderung am Pferdeatelier-PSTE.
-Keine Runtime-Abhängigkeit.
-Eigene `HDTE_`-/`hdte_`-Identitäten bleiben erhalten.
+Deshalb jetzt NICHT:
+`Gesamtbestand erfassen`.
+
+## Technischer Folgepunkt
+
+HD-002 besitzt bereits den technischen Handoff-Importer, aber der produktive Owner-Handoff muss aus einem echten, nicht zurückgerollten Hobby-Depot-Kategorienstand stammen.
+
+Ein lokaler Folgefix wird vorbereitet, damit HD-002 einen gültigen installierten HD-001-Handoff später automatisch read-only übernehmen kann. Das ersetzt aber nicht den fehlenden produktiven Kategorienstand.
 
 ## NEXT ACTION
 
-0.1.1 über die installierte 0.1.0 ersetzen und anschließend in der Themenengine **„Sichere Migration fortsetzen“** ausführen.
+Zuerst echten Hobby-Depot-Kategorienstand für den Buchbinden-Pilot erzeugen und live bereitstellen.
 
-Nach READY:
-Owner-Handoff importieren → Gesamtbestand erfassen → Buchbinden-E2E.
+Pilotpfad:
+`Fertigen → Buch & Papier → Buchbinden`
+
+Aktuell datenbelegt:
+- Einstieg;
+- Ausrüstung;
+- Material;
+- Techniken/Praxis.
+
+Noch nicht datenbelegt:
+- Fragen/Probleme;
+- FAQ.
+
+Erst nach live vorhandenem, gültigem Owner-Handoff:
+Gesamtbestand erfassen → DataForSEO anbinden → Buchbinden-Recherche.
