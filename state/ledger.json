@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 29,
+  "generation": 30,
   "items": [
     {
       "item_id": "k9-16024ee8a6c9b5e964f452e6",
@@ -11,12 +11,18 @@
         "target_keyword": "Was ist ein Reitplatzplaner",
         "title": "Was ist ein Reitplatzplaner?"
       },
-      "products": {},
+      "products": {
+        "research": {
+          "job_id": "K9-RESEARCH-5e13bb3343e89ce8",
+          "path": "warehouse/research/K9-RESEARCH-5e13bb3343e89ce8.json",
+          "sha256": "9fa3f53a2d3f65f8633561459e9b9d0104a5de3f2636f977dfe5783ed83f1fd5"
+        }
+      },
       "revision": 0,
       "stages": {
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
-        "research": "PENDING",
+        "research": "DONE",
         "write": "PENDING"
       },
       "title": "Was ist ein Reitplatzplaner?"
