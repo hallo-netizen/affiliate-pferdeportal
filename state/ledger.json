@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 20,
+  "generation": 21,
   "items": [
     {
       "item_id": "k9-1ff3dfabfed47a0c47c8df13",
@@ -41,6 +41,25 @@
         "write": "DONE"
       },
       "title": "So wählst du passende Schermaschinen für Pferde"
+    },
+    {
+      "item_id": "k9-471058bc28330751f465ee9f",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "schermaschinen-beratung",
+        "plan_slot": "d1e01dd33d7ff61d12ea95dac29dba5f8f566ae5a318f05c5af7d0f744db4973",
+        "target_keyword": "Pferdeschermaschine Akku oder Kabel",
+        "title": "Pferdeschermaschine mit Akku oder Kabel: Was passt besser?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Pferdeschermaschine mit Akku oder Kabel: Was passt besser?"
     }
   ]
 }
