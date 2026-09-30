@@ -114,98 +114,24 @@ trait PPAR_Ebay_Run_Trait {
     }
 
     /**
-     * V6.63.6 exact state-only recovery for the live build-change closure that was
-     * produced after the V6.47 -> V6.63.4 transition. The old generic restart
-     * button would create a new UUID. For this one proven state we instead re-enter
-     * reconcile_local on the SAME UUID from the durable safe public checkpoint.
-     * No provider/discovery/materialized tail from the incompatible build is trusted.
+     * 6.72.167 KISS one-time state retirement.
+     * Terminal runs from historical builds are bounded history, not current
+     * operational state. Current-build terminal runs remain visible until the
+     * next explicit start, preserving useful immediate diagnostics.
      */
-    public function maybe_recover_ebay_build_change_checkpoint_same_uuid_v6636() {
-        if (function_exists('current_user_can') && !current_user_can('manage_options')) { return; }
-        $run=$this->ebay_run_load();
-        if ((string)($run['schema']??'')!=='1.0' || sanitize_key((string)($run['status']??''))!=='failed'
-            || sanitize_key((string)($run['error_code']??''))!=='run_build_changed_restart_required') { return; }
-        $loaded=$run;
-        $uuid=sanitize_text_field((string)($run['run_uuid']??'')); if($uuid===''){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,'run_build_changed_restart_required');
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        if(sanitize_key((string)($details['phase']??''))!=='reconcile_local'){return;}
-        if(!hash_equals('6.63.4-live-observed-gap-proof-recovery-rootfix-20260828',sanitize_text_field((string)($details['build']??'')))){return;}
-        if(!hash_equals('6.47.0-dynamic-business-rule-context-rootfix-20260821',sanitize_text_field((string)($details['previous_build']??'')))){return;}
-        if((string)($run['progress_contract_version']??'')!=='3.1'){return;}
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['private']) || empty($routes['business'])){return;}
-        $checkpoint=$this->ebay_public_checkpoint_load();
-        if(!$this->ebay_public_checkpoint_is_safe($checkpoint)){return;}
-        $checkpoint_id=sanitize_text_field((string)($checkpoint['checkpoint_id']??''));
-        $failed_checkpoint=sanitize_text_field((string)($run['checkpoint_id']??$details['checkpoint_id']??$run['checkpoint_base_id']??''));
-        if($checkpoint_id==='' || $failed_checkpoint==='' || !hash_equals($checkpoint_id,$failed_checkpoint)){return;}
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|same_uuid_safe_checkpoint_reentry|6.63.6');
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array('at'=>time(),'reason'=>'same_uuid_safe_checkpoint_reentry','error_code'=>'run_build_changed_restart_required','migration_key'=>$marker,
-            'from_build'=>sanitize_text_field((string)($details['previous_build']??'')),'failure_build'=>sanitize_text_field((string)($details['build']??'')),
-            'checkpoint_id'=>$checkpoint_id,'full_run_restarted'=>0,'new_uuid_created'=>0);
-        if(count($history)>8){$history=array_slice($history,-8);}
-        $run['recovery_history']=$history;
-        $run['build']=self::EBAY_RUNTIME_BUILD;$run['status']='running';$run['phase']='reconcile_local';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='external_tick';$run['resume_reason']='same_uuid_safe_checkpoint_reentry';
-        $run['resume_at']=0;$run['no_progress_count']=0;$run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        $run['progress_contract_version']=$this->ebay_run_progress_contract_version();
-        // Incompatible-build derived tails are intentionally discarded. The durable
-        // safe public checkpoint is the sole starting truth, while the UUID persists.
-        $run['phase_state']=array();$run['coverage']=array();$run['gapfill']=array('attempts'=>0,'missing'=>array());$run['end_manifest']=array();
-        $run['checkpoint_base_id']=$checkpoint_id;$run['checkpoint_id']=$checkpoint_id;
-        $run['checkpoint_candidate']=array('business_campaign_ids'=>$this->ebay_public_checkpoint_business_ids($checkpoint),'private_listing_ids'=>$this->ebay_public_checkpoint_private_ids($checkpoint));
-        $run['checkpoint_cleanup_selection']=array();$run['checkpoint_verified_manifest']=array();
-        $run['private_public_revalidation']=array();
-        if($this->ebay_run_compare_and_swap($loaded,$run)===false){return;}
-        update_option(self::OPTION_EBAY_SELECTION_STATE,array(),false);
-        $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
-    }
-
-    /**
-     * V6.63.8 exact live-state adoption.
-     *
-     * The observed production run can be left at reconcile_local with zero
-     * transport ticks because V6.63.4 persists the run but delegates every
-     * package to an external GitHub heartbeat. If that scheduler is delayed,
-     * nothing in WordPress advances the already-authorized run.
-     *
-     * Only the exact zero-work state is safe to adopt across the build change:
-     * no package, cursor or phase work has run yet. Preserve the UUID, checkpoint
-     * and complete immutable run snapshot, change only the build/driver contract
-     * and immediately start the private self-drive chain. Any state with actual
-     * work remains subject to the generic fail-closed build-change rule below.
-     */
-    public function maybe_adopt_stalled_zero_tick_ebay_run_v6638() {
+    public function maybe_retire_legacy_terminal_ebay_run_v672167() {
         $run = $this->ebay_run_load();
-        if ((string)($run['schema'] ?? '') !== '1.0' || !$this->ebay_run_is_active($run)) { return; }
-        if (!hash_equals('6.63.4-live-observed-gap-proof-recovery-rootfix-20260828', sanitize_text_field((string)($run['build'] ?? '')))) { return; }
-        if (sanitize_key((string)($run['status'] ?? '')) !== 'running'
-            || sanitize_key((string)($run['phase'] ?? '')) !== 'reconcile_local'
-            || absint($run['progress_seq'] ?? 0) !== 0
-            || absint($run['transport_tick_count'] ?? 0) !== 0
-            || absint($run['phase_tick_count'] ?? 0) !== 0
-            || sanitize_text_field((string)($run['owner'] ?? '')) !== ''
-            || absint($run['lease_expires_at'] ?? 0) !== 0
-            || absint($run['no_progress_count'] ?? 0) !== 0
-            || sanitize_key((string)($run['error_code'] ?? '')) !== '') { return; }
-        $phase_state = is_array($run['phase_state'] ?? null) ? $run['phase_state'] : array();
-        if ($phase_state) { return; }
-
-        $before = $run;
-        $run['build'] = self::EBAY_RUNTIME_BUILD;
-        $run['worker_transport'] = 'self_drive';
-        $run['orchestrator_contract'] = 'self_drive_v1';
-        $run['resume_reason'] = 'zero_tick_self_drive_adoption';
-        $run['last_progress_at'] = time();
-        $run['self_drive_adopted_at'] = time();
-        $saved = $this->ebay_run_compare_and_swap($before, $run);
-        if ($saved === false) { return; }
-        $this->ebay_run_dispatch_self_drive((string)($run['run_uuid'] ?? ''), 'zero_tick_upgrade');
+        if ((string)($run['schema'] ?? '') !== '1.0') { return; }
+        $status = sanitize_key((string)($run['status'] ?? ''));
+        if (!in_array($status, array('failed','completed'), true)) { return; }
+        $build = sanitize_text_field((string)($run['build'] ?? ''));
+        if ($build !== '' && hash_equals($build, (string)self::EBAY_RUNTIME_BUILD)) { return; }
+        $this->ebay_run_archive_terminal($run);
+        if (function_exists('delete_option')) { delete_option($this->ebay_run_option_key()); }
     }
+
+
+
 
     /** Generic future-proof upgrade rule: never revive a run from another build. */
     public function maybe_close_incompatible_ebay_run_for_checkpoint_restart() {
@@ -899,31 +825,6 @@ trait PPAR_Ebay_Run_Trait {
         return is_array($saved) ? $saved : $this->ebay_run_load();
     }
 
-    /** State-only migration for an already-open V6.41.0/V6.41.1 run. No cursor,
-     * source, listing, campaign, taxonomy or selection plan is reset/mutated. */
-    public function maybe_migrate_ebay_worker_transport_v6412() {
-        if ((string)get_option($this->ebay_run_worker_transport_migration_key(), '') === 'done') { return; }
-        if (function_exists('wp_clear_scheduled_hook')) {
-            wp_clear_scheduled_hook(self::EBAY_WORKER_HOOK);
-            if (defined(static::class . '::EBAY_REFRESH_WORKER_HOOK')) {
-                wp_clear_scheduled_hook(self::EBAY_REFRESH_WORKER_HOOK);
-            }
-        }
-        $run = $this->ebay_run_load();
-        if ((string)($run['schema'] ?? '') === '1.0') {
-            $before = $run;
-            $run['worker_transport'] = 'admin_ajax';
-            if (sanitize_key((string)($run['resume_reason'] ?? '')) === 'awaiting_server_cron') {
-                $run['resume_reason'] = 'awaiting_admin_ajax';
-            }
-            if ($this->ebay_run_compare_and_swap($before, $run) === false) {
-                // Another request changed the run. Do not stamp the one-time
-                // migration done until a later request re-evaluates that state.
-                return;
-            }
-        }
-        update_option($this->ebay_run_worker_transport_migration_key(), 'done', false);
-    }
 
     /** Current durable progress-contract version. Kept separate from the plugin
      * build so state migration is based on the persisted contract, not on a
@@ -945,175 +846,8 @@ trait PPAR_Ebay_Run_Trait {
         return array();
     }
 
-    /**
-     * V6.42.1 state-only migration for the proven old progress-contract defect.
-     *
-     * Root cause: V6.41.2/V6.41.3 could advance fair PRIVATE per-leaf prepare
-     * cursors while the canonical no-progress fingerprint stayed unchanged.
-     * V6.42 fixed the fingerprint itself, but its recovery was incorrectly tied
-     * to one build prefix plus one global option. A real V6.41.2 failed run could
-     * therefore remain terminal forever even though it had the exact proven
-     * false-stall shape.
-     *
-     * This migration is per run + per failure event, fail-closed and state-only.
-     * It never reopens a current-contract failure. It never mutates source rows,
-     * listings, campaigns or taxonomies. If policy/catalog changed since the
-     * failed run, only derived selection/coverage state is invalidated and the
-     * same immutable run UUID re-enters reconcile_local.
-     */
-    public function maybe_migrate_ebay_progress_contract_v6421() {
-        $run = $this->ebay_run_load();
-        if ((string)($run['schema'] ?? '') !== '1.0') { return; }
-        $loaded_run = $run;
-
-        $current_contract = $this->ebay_run_progress_contract_version();
-        $current_catalog = hash_file('sha256', __DIR__ . '/../assets/ebay-portal-catalog-v2.json') ?: '';
-        $status = sanitize_key((string)($run['status'] ?? ''));
-        $run_contract = sanitize_text_field((string)($run['progress_contract_version'] ?? ''));
-        $build = sanitize_text_field((string)($run['build'] ?? ''));
-        $affected_build = strpos($build, '6.41.2-') === 0 || strpos($build, '6.41.3-') === 0;
-        $contract_changed = (string)($run['policy_version'] ?? '') !== (string)self::EBAY_CONTENT_POLICY_VERSION
-            || ($current_catalog !== '' && (string)($run['catalog_version'] ?? '') !== $current_catalog);
-
-        // Open affected old-contract run: upgrade the contract in-place. If the
-        // policy/catalog also changed, a derived selection plan is unsafe to
-        // resume; preserve remote/source cursors and re-enter reconciliation.
-        if ($this->ebay_run_is_open($run) && ($run_contract !== $current_contract || $affected_build)) {
-            $history = is_array($run['recovery_history'] ?? null) ? $run['recovery_history'] : array();
-            $marker = hash('sha256', (string)($run['run_uuid'] ?? '').'|open|'.$current_contract.'|'.$build.'|'.($contract_changed?'1':'0'));
-            foreach ($history as $entry) {
-                if (is_array($entry) && hash_equals($marker, (string)($entry['migration_key'] ?? ''))) { return; }
-            }
-            $history[] = array('at'=>time(),'from_build'=>$build,'reason'=>'progress_contract_upgrade_open_run','migration_key'=>$marker,'contract_reconcile'=>$contract_changed?1:0);
-            if (count($history) > 8) { $history = array_slice($history, -8); }
-            $run['recovery_history'] = $history;
-            $run['progress_contract_version'] = $current_contract;
-            $run['owner'] = '';
-            $run['lease_expires_at'] = 0;
-            $run['worker_transport'] = 'admin_ajax';
-            $run['no_progress_count'] = 0;
-            if ($contract_changed) {
-                $run['phase'] = 'reconcile_local';
-                $run['resume_reason'] = 'progress_contract_policy_reconcile';
-                if (!isset($run['phase_state']) || !is_array($run['phase_state'])) { $run['phase_state'] = array(); }
-                $run['phase_state']['selection'] = array();
-                $run['coverage'] = array();
-                $run['gapfill'] = array('attempts'=>0,'missing'=>array());
-                $run['end_manifest'] = array();
-                $run['policy_version'] = (string)self::EBAY_CONTENT_POLICY_VERSION;
-                if ($current_catalog !== '') { $run['catalog_version'] = $current_catalog; }
-            } else {
-                $run['resume_reason'] = 'progress_contract_upgraded_in_place';
-            }
-            if ($this->ebay_run_compare_and_swap($loaded_run, $run) !== false && $contract_changed) {
-                update_option(self::OPTION_EBAY_SELECTION_STATE, array(), false);
-            }
-            return;
-        }
-
-        if ($status !== 'failed' || sanitize_key((string)($run['error_code'] ?? '')) !== 'canonical_worker_no_progress') { return; }
-
-        $failure = $this->ebay_run_last_failure_entry($run, 'canonical_worker_no_progress');
-        $details = is_array($failure['details'] ?? null) ? $failure['details'] : array();
-        $failed_phase = sanitize_key((string)($details['phase'] ?? ''));
-        $failure_build = sanitize_text_field((string)($details['build'] ?? $build));
-        $failure_contract = sanitize_text_field((string)($details['progress_contract_version'] ?? $run_contract));
-        $affected_failure_build = strpos($failure_build, '6.41.2-') === 0 || strpos($failure_build, '6.41.3-') === 0;
-
-        // A failure explicitly produced under the current progress contract is a
-        // real failure until separately diagnosed. Never auto-recover it.
-        if ($failure_contract !== '' && hash_equals($current_contract, $failure_contract)) { return; }
-        if (!$affected_failure_build) { return; }
-
-        $selection = is_array($run['phase_state']['selection'] ?? null) ? $run['phase_state']['selection'] : array();
-        $selection_status = sanitize_key((string)($selection['status'] ?? ''));
-        $leaf_offsets = is_array($selection['prepare_private_leaf_offsets'] ?? null) ? $selection['prepare_private_leaf_offsets'] : array();
-        $leaf_offset_progress = 0;
-        foreach ($leaf_offsets as $offset) { $leaf_offset_progress += absint($offset); }
-        $proven_private_prepare_progress = !empty($selection['prepare_private_initialized'])
-            && empty($selection['prepare_private_complete'])
-            && (absint($selection['prepare_private_scanned'] ?? 0) > 0
-                || absint($selection['prepare_private_leaf_index'] ?? 0) > 0
-                || $leaf_offset_progress > 0);
-        $exact_false_failure = $failed_phase === 'selection_prepare'
-            && in_array($selection_status, array('pending','preparing'), true)
-            && $proven_private_prepare_progress;
-        if (!$exact_false_failure) { return; }
-
-        $failure_at = absint($failure['at'] ?? $run['finished_at'] ?? 0);
-        $migration_key = hash('sha256', (string)($run['run_uuid'] ?? '').'|'.$failure_at.'|canonical_worker_no_progress|selection_prepare|'.$current_contract);
-        $history = is_array($run['recovery_history'] ?? null) ? $run['recovery_history'] : array();
-        foreach ($history as $entry) {
-            if (is_array($entry) && hash_equals($migration_key, (string)($entry['migration_key'] ?? ''))) { return; }
-        }
-
-        $history[] = array(
-            'at'=>time(),'from_build'=>$failure_build,'from_progress_contract'=>$failure_contract,
-            'error_code'=>'canonical_worker_no_progress','reason'=>'legacy_private_prepare_progress_fingerprint_omission',
-            'migration_key'=>$migration_key,'contract_reconcile'=>$contract_changed?1:0,
-        );
-        if (count($history) > 8) { $history = array_slice($history, -8); }
-        $run['recovery_history'] = $history;
-        $run['status'] = 'running';
-        $run['phase'] = $contract_changed ? 'reconcile_local' : 'selection_prepare';
-        $run['finished_at'] = 0;
-        $run['owner'] = '';
-        $run['lease_expires_at'] = 0;
-        $run['worker_transport'] = 'admin_ajax';
-        $run['resume_reason'] = $contract_changed ? 'legacy_false_stall_policy_reconcile' : 'legacy_false_stall_recovered';
-        $run['no_progress_count'] = 0;
-        $run['error_code'] = '';
-        $run['error_message'] = '';
-        $run['last_progress_at'] = time();
-        $run['progress_contract_version'] = $current_contract;
-        if ($contract_changed) {
-            if (!isset($run['phase_state']) || !is_array($run['phase_state'])) { $run['phase_state'] = array(); }
-            $run['phase_state']['selection'] = array();
-            $run['coverage'] = array();
-            $run['gapfill'] = array('attempts'=>0,'missing'=>array());
-            $run['end_manifest'] = array();
-            $run['policy_version'] = (string)self::EBAY_CONTENT_POLICY_VERSION;
-            if ($current_catalog !== '') { $run['catalog_version'] = $current_catalog; }
-        }
-        if ($this->ebay_run_compare_and_swap($loaded_run, $run) !== false && $contract_changed) {
-            update_option(self::OPTION_EBAY_SELECTION_STATE, array(), false);
-        }
-    }
 
 
-    /**
-     * V6.43.0 state-only migration for one proven canonical PARTIAL-checkpoint
-     * false stall. It reopens a failed run only when the persisted nested
-     * discovery state itself proves that the same run stopped on a resumable
-     * segment_time_budget checkpoint in the exact matching scope. Unknown or
-     * current failures remain terminal.
-     */
-    public function maybe_migrate_ebay_partial_checkpoint_v6430() {
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0') { return; }
-        $loaded_run=$run;
-        if(sanitize_key((string)($run['status']??''))!=='failed' || sanitize_key((string)($run['error_code']??''))!=='canonical_worker_no_progress') { return; }
-        $failure=$this->ebay_run_last_failure_entry($run,'canonical_worker_no_progress');
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        $failed_phase=sanitize_key((string)($details['phase']??''));
-        if(!in_array($failed_phase,array('refresh_remote','gapfill_discovery'),true)) { return; }
-        $job=is_array($run['phase_state']['discovery']??null)?$run['phase_state']['discovery']:array();
-        if(!$this->ebay_sync_job_is_resumable_partial($job)) { return; }
-        $scope=sanitize_key((string)($job['scope']??''));
-        $expected_scope=$failed_phase==='gapfill_discovery'?'business_recovery':'all';
-        if($scope!==$expected_scope) { return; }
-        $run_uuid=sanitize_text_field((string)($run['run_uuid']??''));
-        $job_uuid=sanitize_text_field((string)($job['run_uuid']??''));
-        if($run_uuid==='' || $job_uuid==='' || !hash_equals($run_uuid,$job_uuid)) { return; }
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$run_uuid.'|'.$failure_at.'|partial_checkpoint|'.$failed_phase.'|'.$scope);
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array('at'=>time(),'reason'=>'canonical_partial_checkpoint_resume','phase'=>$failed_phase,'scope'=>$scope,'migration_key'=>$marker);
-        if(count($history)>8){$history=array_slice($history,-8);}
-        $run['recovery_history']=$history;$run['status']='running';$run['phase']=$failed_phase;$run['finished_at']=0;$run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';$run['resume_reason']='partial_checkpoint_resume';$run['no_progress_count']=0;$run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        $this->ebay_run_compare_and_swap($loaded_run,$run);
-    }
 
     /**
      * V6.44.0 state-only recovery for the proven BUSINESS materialisation
@@ -1148,366 +882,12 @@ trait PPAR_Ebay_Run_Trait {
         return $route==='review_last_good' && strpos($reason,'[ebay_business_materialization_not_active]')!==false;
     }
 
-    public function maybe_migrate_ebay_business_materialization_v6440() {
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0') { return; }
-        $loaded_run=$run;
-        if(sanitize_key((string)($run['status']??''))!=='failed'
-            || sanitize_key((string)($run['error_code']??''))!=='business_recovery_incomplete'){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,'business_recovery_incomplete');
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        $failed_phase=sanitize_key((string)($details['phase']??''));
-        if($failed_phase!=='' && $failed_phase!=='business_materialize'){return;}
-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
-        if(sanitize_key((string)($selection['failure_reason']??''))!=='business_recovery_incomplete'){return;}
-        $errors=is_array($selection['stats']['business']['errors']??null)?$selection['stats']['business']['errors']:array();
-        if(!$errors){return;}
-        foreach($errors as $entry){if(!$this->ebay_run_business_materialization_error_is_proven_soft_v6440($entry)){return;}}
-
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
-        if($uuid===''){return;}
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|business_materialization_soft_candidates|6.44.0');
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array('at'=>time(),'reason'=>'business_materialization_soft_candidate_recovery','error_code'=>'business_recovery_incomplete','migration_key'=>$marker,'soft_errors'=>count($errors));
-        if(count($history)>8){$history=array_slice($history,-8);}
-
-        // Preserve source/refresh state and immutable run identity. Only the
-        // derived selection/coverage tail is rebuilt under the corrected rule.
-        $run['recovery_history']=$history;$run['status']='running';$run['phase']='selection_prepare';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
-        $run['resume_reason']='business_materialization_soft_candidate_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
-        $run['phase_state']['selection']=array();$run['coverage']=array();$run['gapfill']=array('attempts'=>0,'missing'=>array());$run['end_manifest']=array();
-        // The legacy selection option is only cleared after the canonical CAS
-        // won. A losing concurrent migration must not mutate any durable state.
-        if($this->ebay_run_compare_and_swap($loaded_run,$run)!==false){
-            update_option(self::OPTION_EBAY_SELECTION_STATE,array(),false);
-        }
-    }
 
 
-    /**
-     * V6.46 state-only recovery for the V6.45 public-freshness contract gap.
-     *
-     * The recovery is intentionally narrow. It reopens only a V6.45
-     * insufficient_safe_sources failure whose persisted coverage proves that
-     * every examined published BUSINESS object was rejected solely because its
-     * source freshness expired while the same run had successfully materialised
-     * BUSINESS winners. That state is impossible under the corrected selector:
-     * stale rows are no longer eligible for prepare/apply.
-     *
-     * The same UUID is preserved. Only derived selection/coverage state and the
-     * already-completed refresh sub-job are invalidated so the canonical workflow
-     * re-enters its existing bounded local-reconcile -> remote-refresh path.
-     */
-    public function maybe_migrate_ebay_public_freshness_v6460() {
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0'){return;}
-        $loaded_run=$run;
-        if(sanitize_key((string)($run['status']??''))!=='failed'
-            || sanitize_key((string)($run['error_code']??''))!=='insufficient_safe_sources'){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,'insufficient_safe_sources');
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        $failed_phase=sanitize_key((string)($details['phase']??''));
-        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
-        if($failed_phase!=='' && $failed_phase!=='coverage_verify'){return;}
-        if(strpos($failure_build,'6.45.0-')!==0){return;}
 
-        $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
-        $required=absint($coverage['required']??0);
-        $covered=absint($coverage['covered']??0);
-        $missing=array_values(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array()))));
-        $invalid=is_array($coverage['invalid']??null)?$coverage['invalid']:array();
-        if($required!==311 || $covered!==0 || count($missing)!==311 || !$invalid){return;}
-        foreach($invalid as $reason){
-            if(sanitize_key((string)$reason)!=='source_stale'){return;}
-        }
-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
-        if(absint($selection['stats']['business']['materialized']??0)<1){return;}
 
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
-        if($uuid===''){return;}
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|public_freshness_contract|6.46.0');
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array(
-            'at'=>time(),'reason'=>'public_freshness_contract_recovery',
-            'error_code'=>'insufficient_safe_sources','migration_key'=>$marker,
-            'stale_public_objects'=>count($invalid),
-        );
-        if(count($history)>8){$history=array_slice($history,-8);}
 
-        $run['recovery_history']=$history;
-        $run['status']='running';$run['phase']='reconcile_local';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
-        $run['resume_reason']='public_freshness_contract_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
-        $run['phase_state']['selection']=array();
-        $run['phase_state']['refresh']=array();
-        $run['coverage']=array();
-        $run['gapfill']=array('attempts'=>0,'missing'=>array());
-        $run['end_manifest']=array();
 
-        // All nested-option mutation happens only after the canonical CAS won.
-        // A concurrent request can therefore never lose its newer run state.
-        if($this->ebay_run_compare_and_swap($loaded_run,$run)!==false){
-            update_option(self::OPTION_EBAY_SELECTION_STATE,array(),false);
-            update_option(self::OPTION_EBAY_REFRESH_JOB,array(),false);
-        }
-    }
-
-    /**
-     * V6.48 canonical-state recovery for the proven V6.46 dynamic BUSINESS rule-context loss.
-     *
-     * Root cause of the V6.47 live miss: schema-1.0 component state is owned by the
-     * canonical run's phase_state. ebay_refresh_job_save() therefore writes the
-     * completed refresh into phase_state.refresh and intentionally does NOT mirror
-     * it into the legacy OPTION_EBAY_REFRESH_JOB. V6.47 nevertheless required both
-     * stores to contain the same completed refresh, so a valid canonical production
-     * state could never pass that extra legacy gate. The V6.47 real gate hid this by
-     * manually seeding the non-authoritative legacy option.
-     *
-     * This recovery now uses exactly one authority for schema-1.0: the canonical
-     * phase_state.refresh with the same run UUID. Legacy standalone component options
-     * are neither proof nor veto. All other provenance/coverage/selection/gap-fill
-     * guards remain unchanged and fail-closed. The method name is retained for
-     * compatibility with the existing init hook and historical test harnesses.
-     */
-    public function maybe_migrate_ebay_dynamic_business_rule_context_v6470() {
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0'){return;}
-        $loaded_run=$run;
-        if(sanitize_key((string)($run['status']??''))!=='failed'
-            || sanitize_key((string)($run['error_code']??''))!=='insufficient_safe_sources'){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,'insufficient_safe_sources');
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        if(sanitize_key((string)($details['phase']??''))!=='coverage_verify'){return;}
-        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
-        if(strpos($failure_build,'6.46.0-')!==0){return;}
-
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['business'])){return;}
-        $required_now=array_values(array_unique(array_filter(array_map('sanitize_key',(array)$this->ebay_business_required_product_concept_ids()))));
-        sort($required_now,SORT_STRING);
-        if(count($required_now)!==311){return;}
-        $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
-        $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
-        $missing_sorted=$missing;sort($missing_sorted,SORT_STRING);
-        if(absint($coverage['required']??0)!==311 || absint($coverage['covered']??0)!==0
-            || count($missing_sorted)!==311 || $missing_sorted!==$required_now){return;}
-
-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
-        if(absint($selection['stats']['business']['materialized']??0)!==0
-            || absint($selection['stats']['business']['active']??0)!==0){return;}
-        if(absint($run['gapfill']['attempts']??0)<1){return;}
-
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
-        if($uuid===''){return;}
-        // Schema-1.0 has one authoritative component-state store: canonical
-        // phase_state. The legacy standalone refresh option is deliberately ignored
-        // here because production saves no longer mirror canonical refresh state to it.
-        $refresh=is_array($run['phase_state']['refresh']??null)?$run['phase_state']['refresh']:array();
-        if(sanitize_key((string)($refresh['status']??''))!=='completed'
-            || !hash_equals($uuid,sanitize_text_field((string)($refresh['run_uuid']??'')))){return;}
-
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|dynamic_business_rule_context|canonical-state-v648');
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array(
-            'at'=>time(),'reason'=>'dynamic_business_rule_context_recovery',
-            'error_code'=>'insufficient_safe_sources','migration_key'=>$marker,
-            'missing_business_concepts'=>count($missing),'preserved_refresh'=>1,
-        );
-        if(count($history)>8){$history=array_slice($history,-8);}
-
-        $run['recovery_history']=$history;
-        $run['status']='running';$run['phase']='gapfill_discovery';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
-        $run['resume_reason']='dynamic_business_rule_context_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
-        // Preserve phase_state.refresh byte-for-byte; it proves the completed
-        // V6.46 remote pass and prevents an unnecessary second full refresh.
-        $run['phase_state']['discovery']=array();
-        $run['phase_state']['selection']=array();
-        $run['gapfill']=array('attempts'=>1,'missing'=>$missing);
-        $run['end_manifest']=array();
-
-        // Legacy discovery/selection residue is cleared only after the canonical CAS.
-        // The legacy refresh option is intentionally neither read nor changed: under
-        // schema-1.0 it is non-authoritative historical residue.
-        if($this->ebay_run_compare_and_swap($loaded_run,$run)!==false){
-            update_option(self::OPTION_EBAY_SYNC_JOB,array(),false);
-            update_option(self::OPTION_EBAY_SELECTION_STATE,array(),false);
-        }
-    }
-
-    /**
-     * V6.49 state-only recovery for the V6.48 public-coverage target bridge bug.
-     *
-     * V6.48 correctly linked a published output object back to its eBay source
-     * row, but then passed that source-table row into
-     * ebay_business_campaign_target_keys(). That helper consumes a Creative
-     * Library row and therefore returned an empty expected target set for every
-     * otherwise-valid BUSINESS campaign. The public gate consequently recorded
-     * target_mismatch and could force a false 0/311 insufficient_safe_sources
-     * terminal state after a successful materialization path.
-     *
-     * Recovery is deliberately narrow and state-only. It reopens only the exact
-     * V6.48 terminal signature with the current 311 manifest and at least one
-     * persisted target_mismatch proof. Existing refresh/discovery/selection and
-     * public output are preserved byte-for-byte. Only derived coverage/gap-fill
-     * accounting is invalidated so the corrected public gate runs first; if real
-     * families are still missing it may use the normal one bounded targeted
-     * gap-fill for that corrected subset under the same UUID.
-     */
-    public function maybe_migrate_ebay_public_coverage_target_v6490() {
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0'){return;}
-        $loaded_run=$run;
-        if(sanitize_key((string)($run['status']??''))!=='failed'
-            || sanitize_key((string)($run['error_code']??''))!=='insufficient_safe_sources'){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,'insufficient_safe_sources');
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        if(sanitize_key((string)($details['phase']??''))!=='coverage_verify'){return;}
-        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
-        if(strpos($failure_build,'6.48.0-')!==0){return;}
-
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['business'])){return;}
-        $required_now=array_values(array_unique(array_filter(array_map('sanitize_key',(array)$this->ebay_business_required_product_concept_ids()))));
-        sort($required_now,SORT_STRING);
-        if(count($required_now)!==311){return;}
-        $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
-        $missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($coverage['missing']??array())))));
-        $missing_sorted=$missing;sort($missing_sorted,SORT_STRING);
-        if(absint($coverage['required']??0)!==311 || absint($coverage['covered']??0)!==0
-            || count($missing_sorted)!==311 || $missing_sorted!==$required_now){return;}
-        if(absint($run['gapfill']['attempts']??0)<1){return;}
-        $invalid=is_array($coverage['invalid']??null)?$coverage['invalid']:array();
-        if(!$invalid){return;}
-        $target_mismatch=0;
-        foreach($invalid as $reason){if(sanitize_key((string)$reason)==='target_mismatch'){$target_mismatch++;}}
-        if($target_mismatch<1){return;}
-
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
-        if($uuid===''){return;}
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|public_coverage_target_bridge|6.49.0');
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array(
-            'at'=>time(),'reason'=>'public_coverage_target_contract_recovery',
-            'error_code'=>'insufficient_safe_sources','migration_key'=>$marker,
-            'target_mismatch_objects'=>$target_mismatch,'preserved_components'=>1,
-        );
-        if(count($history)>8){$history=array_slice($history,-8);}
-
-        $run['recovery_history']=$history;
-        $run['status']='running';$run['phase']='coverage_verify';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
-        $run['resume_reason']='public_coverage_target_contract_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        // Refresh/discovery/selection are already completed evidence and remain
-        // untouched. Only data derived from the broken public gate is discarded.
-        $run['coverage']=array();
-        $run['gapfill']=array('attempts'=>0,'missing'=>array());
-        $run['end_manifest']=array();
-        $this->ebay_run_compare_and_swap($loaded_run,$run);
-    }
-
-    /**
-     * V6.50.1 state-only recovery for the stale-proof upgrade path.
-     *
-     * V6.50 incorrectly reused a terminal V6.49 gap-fill proof and jumped
-     * directly to public_verify. Public coverage can change between the old
-     * failure and the upgrade, so the old missing/selection proof is derived
-     * stale state. Reopen only the exact affected upgrade signatures, preserve
-     * the same run UUID and upstream refresh/source evidence, discard only the
-     * stale derived discovery/selection/coverage/gap-fill state, and re-enter
-     * the existing coverage_verify -> one canonical targeted gap-fill path.
-     */
-    public function maybe_migrate_ebay_safe_supply_gap_v6500() {
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0'){return;}
-        $loaded_run=$run;
-        if(sanitize_key((string)($run['status']??''))!=='failed'){return;}
-
-        $error_code=sanitize_key((string)($run['error_code']??''));
-        $failure=$this->ebay_run_last_failure_entry($run,$error_code);
-        $details=is_array($failure['details']??null)?$failure['details']:array();
-        $failure_phase=sanitize_key((string)($details['phase']??''));
-        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
-
-        $from_v649=$error_code==='insufficient_safe_sources'
-            && $failure_phase==='coverage_verify'
-            && strpos($failure_build,'6.49.0-')===0;
-
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        $has_v650_stale_recovery=false;
-        foreach($history as $entry){
-            if(is_array($entry)
-                && sanitize_key((string)($entry['reason']??''))==='safe_supply_gap_contract_recovery'
-                && sanitize_key((string)($entry['error_code']??''))==='insufficient_safe_sources'){
-                $has_v650_stale_recovery=true;break;
-            }
-        }
-        $from_v650_stale_failure=$error_code==='business_safe_gap_new_missing_family'
-            && $failure_phase==='public_verify'
-            && strpos($failure_build,'6.50.0-')===0
-            && sanitize_key((string)($run['resume_reason']??''))==='safe_supply_gap_contract_recovery'
-            && $has_v650_stale_recovery;
-
-        if(!$from_v649 && !$from_v650_stale_failure){return;}
-
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['business'])){return;}
-        $coverage=is_array($run['coverage']??null)?$run['coverage']:array();
-        if(!empty($coverage['error_code']) || empty($coverage['missing']) || absint($run['gapfill']['attempts']??0)<1){return;}
-
-        // The old terminal proof is used only to prove that this is the exact
-        // safe-supply-gap upgrade path. It is never reused as current truth.
-        $result=$this->ebay_run_business_safe_supply_gap_contract($run,$coverage);
-        if(($result['status']??'')!=='pass'){return;}
-
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));
-        if($uuid===''){return;}
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|safe_supply_gap_stale_proof_recovery|6.50.1');
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array(
-            'at'=>time(),'reason'=>'safe_supply_gap_stale_proof_recovery',
-            'error_code'=>$error_code,'migration_key'=>$marker,
-            'preserved_components'=>1,'discarded_derived_gap_proof'=>1,
-        );
-        if(count($history)>8){$history=array_slice($history,-8);}
-
-        $run['recovery_history']=$history;
-        $run['status']='running';$run['phase']='coverage_verify';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='admin_ajax';
-        $run['resume_reason']='safe_supply_gap_stale_proof_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
-        // Preserve upstream refresh/source evidence. Discovery and selection are
-        // derived from the old missing set and must be recomputed for current gaps.
-        $run['phase_state']['discovery']=array();
-        $run['phase_state']['selection']=array();
-        $run['coverage']=array();
-        $run['gapfill']=array('attempts'=>0,'missing'=>array());
-        $run['end_manifest']=array();
-        $this->ebay_run_compare_and_swap($loaded_run,$run);
-    }
-
-    /** Backward-compatible entry point retained for older test harnesses. */
-    public function maybe_recover_ebay_false_no_progress_v6420() {
-        return $this->maybe_migrate_ebay_progress_contract_v6421();
-    }
 
     /** Backward-compatible admin endpoint. It never executes fach logic; it can
      * only ensure that the background worker is scheduled. */
@@ -1557,78 +937,7 @@ trait PPAR_Ebay_Run_Trait {
         return function_exists('wp_generate_uuid4') ? wp_generate_uuid4() : substr(hash('sha256', microtime(true) . '|canonical|' . mt_rand()), 0, 36);
     }
 
-    private function ebay_run_legacy_raw_states() {
-        return array(
-            'discovery'=>is_array(get_option(self::OPTION_EBAY_SYNC_JOB, array())) ? get_option(self::OPTION_EBAY_SYNC_JOB, array()) : array(),
-            'refresh'=>is_array(get_option(self::OPTION_EBAY_REFRESH_JOB, array())) ? get_option(self::OPTION_EBAY_REFRESH_JOB, array()) : array(),
-            'selection'=>is_array(get_option(self::OPTION_EBAY_SELECTION_STATE, array())) ? get_option(self::OPTION_EBAY_SELECTION_STATE, array()) : array(),
-            'maintenance'=>is_array(get_option(self::OPTION_EBAY_MAINTENANCE_STATE, array())) ? get_option(self::OPTION_EBAY_MAINTENANCE_STATE, array()) : array(),
-        );
-    }
 
-    /** State-only adoption of one compatible V6.40 open chain. No source/post/
-     * campaign mutation occurs here. Ambiguous competing owners fail closed. */
-    private function ebay_run_adopt_legacy_if_needed() {
-        $current = $this->ebay_run_load();
-        if ((string)($current['schema'] ?? '') === '1.0') { return $current; }
-        $legacy = $this->ebay_run_legacy_raw_states();
-        $sync = $legacy['discovery']; $refresh = $legacy['refresh']; $selection = $legacy['selection'];
-        $sync_open = in_array(sanitize_key((string)($sync['status'] ?? '')), array('queued','running','partial'), true);
-        $refresh_open = in_array(sanitize_key((string)($refresh['status'] ?? '')), array('queued','running','partial'), true);
-        $selection_open = in_array(sanitize_key((string)($selection['status'] ?? '')), array('pending','preparing','running'), true);
-        if (!$sync_open && !$refresh_open && !$selection_open) { return array(); }
-
-        $uuid = '';
-        $operation = 'refresh';
-        $phase = 'reconcile_local';
-        $remote_subphase = 'inventory';
-        $compatible = true;
-        if ($sync_open) {
-            $uuid = sanitize_text_field((string)($sync['run_uuid'] ?? ''));
-            $operation = 'sync'; $phase = 'refresh_remote'; $remote_subphase = 'discovery';
-        }
-        if ($refresh_open) {
-            $r_uuid = sanitize_text_field((string)($refresh['run_uuid'] ?? ''));
-            if ($uuid !== '' && $r_uuid !== '' && !hash_equals($uuid, $r_uuid)) { $compatible = false; }
-            if ($uuid === '') { $uuid = $r_uuid; }
-            $operation = 'refresh';
-            $rphase = sanitize_key((string)($refresh['summary']['phase'] ?? ''));
-            $phase = in_array($rphase, array('local_reconciliation','asset_verification'), true) ? 'reconcile_local' : 'refresh_remote';
-            $remote_subphase = 'inventory';
-        }
-        if ($selection_open) {
-            $owner = sanitize_text_field((string)($selection['owner'] ?? ''));
-            if (strpos($owner, 'sync:') === 0) { $s_uuid = substr($owner, 5); }
-            elseif (strpos($owner, 'refresh:') === 0) { $s_uuid = substr($owner, 8); }
-            elseif (strpos($owner, 'run:') === 0) { $s_uuid = substr($owner, 4); }
-            else { $s_uuid = ''; }
-            if ($uuid !== '' && $s_uuid !== '' && !hash_equals($uuid, $s_uuid)) { $compatible = false; }
-            if ($uuid === '' && $s_uuid !== '') { $uuid = $s_uuid; }
-            if (!$sync_open && !$refresh_open) { $operation = 'selection'; }
-            $phase = 'selection_prepare';
-        }
-        if (!$compatible || $uuid === '') {
-            $blocked = array(
-                'schema'=>'1.0','build'=>self::EBAY_RUNTIME_BUILD,'run_uuid'=>$uuid !== '' ? $uuid : $this->ebay_run_new_uuid(),
-                'status'=>'failed','phase'=>'failed','started_at'=>time(),'updated_at'=>time(),'finished_at'=>time(),
-                'error_code'=>'blocked_migration_required','error_message'=>'Mehrere alte eBay-Workerzustände besitzen keine eindeutig gemeinsame Run-Identität.',
-                'phase_state'=>$legacy,
-            );
-            return $this->ebay_run_save($blocked);
-        }
-        $settings = $this->ebay_settings();
-        $run = array(
-            'schema'=>'1.0','build'=>self::EBAY_RUNTIME_BUILD,'run_uuid'=>$uuid,'status'=>'running','phase'=>$phase,
-            'operation'=>$operation,'remote_subphase'=>$remote_subphase,'started_at'=>min(array_filter(array_map('absint', array($sync['created_at']??0,$refresh['created_at']??0,$selection['started_at']??0))) ?: array(time())),
-            'updated_at'=>time(),'finished_at'=>0,'owner'=>'','lease_expires_at'=>0,'worker_transport'=>'admin_ajax','resume_reason'=>'adopted_legacy_state',
-            'no_progress_count'=>0,'last_progress_at'=>time(),'progress_seq'=>0,
-            'config_snapshot'=>array('seller_routes'=>array('private'=>!empty($settings['private_enabled']),'business'=>!empty($settings['business_enabled'])),'settings'=>$this->ebay_run_settings_snapshot($settings)),
-            'catalog_version'=>hash_file('sha256', __DIR__ . '/../assets/ebay-portal-catalog-v2.json') ?: '',
-            'policy_version'=>self::EBAY_CONTENT_POLICY_VERSION,'private_classifier_version'=>self::EBAY_PRIVATE_CLASSIFIER_VERSION,'business_classifier_version'=>self::EBAY_BUSINESS_CLASSIFIER_VERSION,'progress_contract_version'=>$this->ebay_run_progress_contract_version(),
-            'phase_state'=>$legacy,'coverage'=>array(),'errors'=>array(),'start_manifest'=>array('adopted_legacy'=>1),'end_manifest'=>array(),
-        );
-        return $this->ebay_run_save($run);
-    }
 
     private function ebay_run_start($manual = false, $operation = 'sync') {
         $operation = sanitize_key((string)$operation);
@@ -1638,6 +947,15 @@ trait PPAR_Ebay_Run_Trait {
             $this->ebay_run_schedule_worker(1);
             return array('status'=>'already_running','run_uuid'=>(string)$run['run_uuid'],'phase'=>(string)$run['phase'],'transport'=>'self_drive');
         }
+        // KISS 6.72.167: a terminal old run is history, never the current
+        // status surface for a new manual attempt. Archive it before validating
+        // the next run so a configuration error cannot resurrect a stale red box.
+        if ((string)($run['schema'] ?? '') === '1.0'
+            && in_array(sanitize_key((string)($run['status'] ?? '')), array('failed','completed'), true)) {
+            $this->ebay_run_archive_terminal($run);
+            if (function_exists('delete_option')) { delete_option($this->ebay_run_option_key()); }
+            $run = array();
+        }
         $settings = $this->ebay_settings();
         if (empty($settings['enabled']) && !$manual) { return array('status'=>'disabled'); }
         $errors = $this->ebay_configuration_errors($settings);
@@ -1645,7 +963,6 @@ trait PPAR_Ebay_Run_Trait {
         $scope = $this->ebay_selection_scope_for_enabled_routes('all', $settings);
         if ($scope === '') { return new WP_Error('ebay_routes_disabled', 'PRIVATE und BUSINESS sind beide deaktiviert.'); }
 
-        if ((string)($run['schema'] ?? '') === '1.0') { $this->ebay_run_archive_terminal($run); }
         $checkpoint = $this->ebay_public_checkpoint_bootstrap($settings);
         if (is_wp_error($checkpoint)) { return $checkpoint; }
         $checkpoint = is_array($checkpoint) ? $checkpoint : array();
@@ -2161,59 +1478,6 @@ trait PPAR_Ebay_Run_Trait {
         return true;
     }
 
-    /**
-     * V6.63.5 state-only recovery for the exact live V6.63.4 terminal state:
-     * BUSINESS proof recovery completed, the fresh PRIVATE tail completed, but
-     * final public_verify rejected one or more winners solely as source_stale.
-     */
-    public function maybe_recover_ebay_private_public_freshness_v6635() {
-        if(function_exists('current_user_can') && !current_user_can('manage_options')){return;}
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0' || sanitize_key((string)($run['status']??''))!=='failed'){return;}
-        $loaded=$run;$code=sanitize_key((string)($run['error_code']??''));
-        if($code!=='private_public_gate_failed'){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,$code);$details=is_array($failure['details']??null)?$failure['details']:array();
-        if(sanitize_key((string)($details['phase']??''))!=='public_verify'){return;}
-        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
-        if($failure_build!=='6.63.4-live-observed-gap-proof-recovery-rootfix-20260828'){return;}
-        $private=array('error_code'=>$code,'invalid'=>is_array($details['invalid']??null)?$details['invalid']:array(),'public'=>absint($details['public']??0));
-        if(!$this->ebay_run_private_public_freshness_only_failure($private)){return;}
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['private']) || empty($routes['business'])){return;}
-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
-        if(sanitize_key((string)($selection['status']??''))!=='complete'
-            || sanitize_key((string)($selection['phase']??''))!=='complete'
-            || absint($selection['prepare_private_scanned']??0)<1){return;}
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();$has_business_proof_recovery=false;
-        foreach($history as $entry){if(is_array($entry)&&sanitize_key((string)($entry['reason']??''))==='business_gap_proof_regeneration'){$has_business_proof_recovery=true;break;}}
-        if(!$has_business_proof_recovery){return;}
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));if($uuid===''){return;}
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|private_public_freshness_revalidation|6.63.5');
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $reason_counts=array();foreach((array)$private['invalid'] as $value){$k=sanitize_key((string)$value);$reason_counts[$k]=absint($reason_counts[$k]??0)+1;}
-        $history[]=array('at'=>time(),'reason'=>'private_public_freshness_revalidation','error_code'=>$code,'migration_key'=>$marker,
-            'preserved_run_uuid'=>1,'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),
-            'preserved_business_gap_proof'=>!empty($run['gapfill']['selection_proof'])?1:0,'failure_reason_counts'=>$reason_counts,
-            'discovery_restarted'=>0,'full_run_restarted'=>0,'external_tick_bootstrap_requested'=>1);
-        if(count($history)>8){$history=array_slice($history,-8);}
-        $prior=is_array($run['private_public_revalidation']??null)?$run['private_public_revalidation']:array();
-        $run['recovery_history']=$history;$run['status']='running';$run['phase']='selection_prepare';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='external_tick';$run['resume_reason']='private_public_freshness_revalidation';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();$run['progress_seq']=absint($run['progress_seq']??0)+1;
-        $run['progress_contract_version']=$this->ebay_run_progress_contract_version();
-        $run['private_public_revalidation']=array('status'=>'pending','attempts'=>absint($prior['attempts']??0)+1,'public_freshness_churn_attempts'=>1,
-            'started_at'=>time(),'reason'=>'live_v6634_source_stale','failure_reason_counts'=>$reason_counts,
-            'private_candidate_count_before'=>count((array)($run['checkpoint_candidate']['private_listing_ids']??array())),
-            'business_campaign_count'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())));
-        $saved=$this->ebay_run_compare_and_swap($loaded,$run);if($saved===false){return;}
-        $selection=$this->ebay_selection_request('private_public_freshness_revalidation','run:'.$uuid,true,'private');
-        if(sanitize_key((string)($selection['status']??''))==='failed'){
-            $this->ebay_run_fail('private_public_freshness_revalidation_start_failed','PRIVATE-Frische-Endrevalidierung konnte aus dem V6.63.4-Livezustand nicht sicher gestartet werden.',array('selection'=>$selection));return;
-        }
-        $current=$this->ebay_run_load();if($this->ebay_run_is_open($current)){$state=is_array($current['private_public_revalidation']??null)?$current['private_public_revalidation']:array();$state['status']='running';$state['selection_owner']=sanitize_text_field((string)($selection['owner']??''));$current['private_public_revalidation']=$state;$this->ebay_run_save($current);}
-        $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
-    }
 
     /**
      * V6.63 one-time state-only recovery for the exact V6.62 production failure.
@@ -2222,55 +1486,7 @@ trait PPAR_Ebay_Run_Trait {
      * happens on admin_init. The next external heartbeat performs the ordinary
      * bounded PRIVATE selector. New-build failures are never auto-reopened.
      */
-    /**
-     * V6.63.2 one-shot bootstrap for a recovered terminal run. The canonical
-     * worker remains external_tick-only: this performs exactly one non-blocking
-     * same-origin POST after the state-only recovery has been persisted and the
-     * PRIVATE selector has been queued. It schedules no cron, creates no second
-     * run and writes no state after dispatch, so a fast worker cannot be
-     * overwritten by the originating admin request. The 15-minute GitHub safety
-     * schedule remains the fallback if the loopback transport is unavailable.
-     */
-    private function ebay_run_bootstrap_recovered_external_tick_v6632($run_uuid) {
-        return $this->ebay_run_dispatch_self_drive((string)$run_uuid, 'recovery_bootstrap');
-    }
 
-    public function maybe_recover_ebay_private_public_gate_v6630() {
-        if(function_exists('current_user_can') && !current_user_can('manage_options')){return;}
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0' || sanitize_key((string)($run['status']??''))!=='failed'){return;}
-        $loaded=$run;$code=sanitize_key((string)($run['error_code']??''));
-        if(!in_array($code,array('private_public_gate_failed','private_public_cap_exceeded'),true)){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,$code);$details=is_array($failure['details']??null)?$failure['details']:array();
-        if(sanitize_key((string)($details['phase']??''))!=='public_verify'){return;}
-        $failure_build=sanitize_text_field((string)($details['build']??$run['build']??''));
-        if($failure_build!=='6.56.0-safe-gap-churn-revalidation-rootfix-20260827'){return;}
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['private']) || absint($run['gapfill']['attempts']??0)<1){return;}
-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
-        if(sanitize_key((string)($selection['status']??''))!=='complete' || sanitize_key((string)($selection['selection_scope']??''))!=='business'){return;}
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));if($uuid===''){return;}
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|private_public_tail_revalidation|6.63.0');
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $invalid=is_array($details['invalid']??null)?$details['invalid']:array();$reason_counts=array();
-        foreach($invalid as $value){$k=sanitize_key((string)$value);if($k===''){$k='unknown';}$reason_counts[$k]=absint($reason_counts[$k]??0)+1;}
-        $history[]=array('at'=>time(),'reason'=>'private_public_tail_revalidation','error_code'=>$code,'migration_key'=>$marker,'preserved_run_uuid'=>1,'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),'failure_reason_counts'=>$reason_counts,'external_tick_bootstrap_requested'=>1);
-        if(count($history)>8){$history=array_slice($history,-8);}
-        $run['recovery_history']=$history;$run['status']='running';$run['phase']='selection_prepare';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='external_tick';$run['resume_reason']='private_public_gate_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();$run['progress_seq']=absint($run['progress_seq']??0)+1;
-        $run['progress_contract_version']=$this->ebay_run_progress_contract_version();
-        $run['private_public_revalidation']=array('status'=>'pending','attempts'=>1,'started_at'=>time(),'reason'=>'failed_public_gate_recovery','failure_reason_counts'=>$reason_counts,'private_candidate_count_before'=>count((array)($run['checkpoint_candidate']['private_listing_ids']??array())),'business_campaign_count'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())));
-        $saved=$this->ebay_run_compare_and_swap($loaded,$run);if($saved===false){return;}
-        $selection=$this->ebay_selection_request('private_public_gate_recovery','run:'.$uuid,true,'private');
-        if(sanitize_key((string)($selection['status']??''))==='failed'){
-            $this->ebay_run_fail('private_public_revalidation_start_failed','PRIVATE-Endrevalidierung konnte nach dem alten Public-Gate-Fehler nicht sicher gestartet werden.',array('selection'=>$selection));return;
-        }
-        $current=$this->ebay_run_load();if($this->ebay_run_is_open($current)){$state=is_array($current['private_public_revalidation']??null)?$current['private_public_revalidation']:array();$state['status']='running';$state['selection_owner']=sanitize_text_field((string)($selection['owner']??''));$current['private_public_revalidation']=$state;$this->ebay_run_save($current);}
-        $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
-    }
 
     /**
      * V6.63.3 state-only repair for the exact V6.63 PRIVATE-tail proof-loss
@@ -2282,93 +1498,6 @@ trait PPAR_Ebay_Run_Trait {
      * Discovery, refresh, run UUID, public checkpoint and existing materialized
      * candidates remain untouched. A fresh PRIVATE tail is required afterwards.
      */
-    /**
-     * V6.63.4 state-only recovery for the exact live V6.63.0 proof-loss state.
-     *
-     * V6.63.3 was too strict: it required hidden/private tail bookkeeping fields
-     * (`private_public_revalidation.status`, selection_scope and owner) that are
-     * not part of the terminal invariant and can legitimately be absent after
-     * the completed PRIVATE tail has been persisted/merged. That made a proven
-     * live terminal state fail to reopen even though the admin read-only state
-     * already proved: PRIVATE tail finished, run is at coverage_verify, the
-     * recovery history is the V6.63 PRIVATE-tail recovery and the safe-gap proof
-     * is the only failing invariant.
-     *
-     * This repair gates only on durable/observable terminal invariants, keeps the
-     * same run UUID, preserves discovery and candidate checkpoints, and reopens
-     * only gapfill_select so canonical BUSINESS selection can regenerate the
-     * missing proof. A fresh PRIVATE tail is required after that rerun.
-     */
-    public function maybe_recover_ebay_business_gap_proof_v6634() {
-        if(function_exists('current_user_can') && !current_user_can('manage_options')){return;}
-        $run=$this->ebay_run_load();
-        if((string)($run['schema']??'')!=='1.0' || sanitize_key((string)($run['status']??''))!=='failed'){return;}
-        $loaded=$run;$code=sanitize_key((string)($run['error_code']??''));
-        if($code!=='business_safe_gap_proof_missing'){return;}
-        $failure=$this->ebay_run_last_failure_entry($run,$code);$details=is_array($failure['details']??null)?$failure['details']:array();
-        if(sanitize_key((string)($details['phase']??''))!=='coverage_verify'){return;}
-        $failure_build=sanitize_text_field((string)($details['build']??''));
-        if($failure_build!=='6.63.0-private-public-tail-revalidation-rootfix-20260828'){return;}
-        $gap_contract=is_array($details['gap_contract']??null)?$details['gap_contract']:array();
-        if(sanitize_key((string)($gap_contract['error_code']??''))!=='business_safe_gap_proof_missing'){return;}
-
-        $uuid=sanitize_text_field((string)($run['run_uuid']??''));if($uuid===''){return;}
-        $routes=is_array($run['config_snapshot']['seller_routes']??null)?$run['config_snapshot']['seller_routes']:array();
-        if(empty($routes['business']) || empty($routes['private'])){return;}
-        if(sanitize_key((string)($run['resume_reason']??''))!=='private_public_revalidated'){return;}
-
-        // Use the same durable fields that the live admin read-only diagnostic
-        // exposes. Hidden bookkeeping is intentionally not required here.
-        $selection=is_array($run['phase_state']['selection']??null)?$run['phase_state']['selection']:array();
-        if(sanitize_key((string)($selection['status']??''))!=='complete'
-            || sanitize_key((string)($selection['phase']??''))!=='complete'
-            || absint($selection['prepare_private_scanned']??0)<1){return;}
-
-        $gap_missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($run['gapfill']['missing']??array())))));
-        $failed_missing=array_values(array_unique(array_filter(array_map('sanitize_key',(array)($gap_contract['missing']??array())))));
-        sort($gap_missing,SORT_STRING);sort($failed_missing,SORT_STRING);
-        if(absint($run['gapfill']['attempts']??0)<1 || !$gap_missing || !$failed_missing){return;}
-        foreach($failed_missing as $id){if(!in_array($id,$gap_missing,true)){return;}}
-
-        $history=is_array($run['recovery_history']??null)?$run['recovery_history']:array();
-        $has_private_tail_recovery=false;
-        foreach($history as $entry){
-            if(is_array($entry) && sanitize_key((string)($entry['reason']??''))==='private_public_tail_revalidation'
-                && in_array(sanitize_key((string)($entry['error_code']??'')),array('private_public_gate_failed','private_public_cap_exceeded'),true)){
-                $has_private_tail_recovery=true;break;
-            }
-        }
-        if(!$has_private_tail_recovery){return;}
-
-        $failure_at=absint($failure['at']??$run['finished_at']??0);
-        $marker=hash('sha256',$uuid.'|'.$failure_at.'|business_gap_proof_regeneration|6.63.4');
-        foreach($history as $entry){if(is_array($entry)&&hash_equals($marker,(string)($entry['migration_key']??''))){return;}}
-        $history[]=array(
-            'at'=>time(),'reason'=>'business_gap_proof_regeneration','error_code'=>$code,
-            'migration_key'=>$marker,'preserved_run_uuid'=>1,
-            'preserved_business_candidates'=>count((array)($run['checkpoint_candidate']['business_campaign_ids']??array())),
-            'preserved_private_candidates'=>count((array)($run['checkpoint_candidate']['private_listing_ids']??array())),
-            'target_count'=>count($gap_missing),'discovery_restarted'=>0,'full_run_restarted'=>0,
-            'live_observed_terminal_gate'=>1,'external_tick_bootstrap_requested'=>1,
-        );
-        if(count($history)>8){$history=array_slice($history,-8);}
-
-        $run['recovery_history']=$history;
-        $run['status']='running';$run['phase']='gapfill_select';$run['finished_at']=0;
-        $run['owner']='';$run['lease_expires_at']=0;$run['worker_transport']='external_tick';
-        $run['resume_reason']='business_gap_proof_recovery';$run['no_progress_count']=0;
-        $run['error_code']='';$run['error_message']='';$run['last_progress_at']=time();
-        $run['progress_seq']=absint($run['progress_seq']??0)+1;
-        $run['progress_contract_version']=$this->ebay_run_progress_contract_version();
-        if(!isset($run['phase_state'])||!is_array($run['phase_state'])){$run['phase_state']=array();}
-        $run['phase_state']['selection']=array();
-        unset($run['gapfill']['selection_proof']);
-        // BUSINESS rerun after the completed PRIVATE tail invalidates that tail
-        // for final publication. Force exactly one fresh PRIVATE tail afterwards.
-        $run['private_public_revalidation']=array();
-        $saved=$this->ebay_run_compare_and_swap($loaded,$run);if($saved===false){return;}
-        $this->ebay_run_bootstrap_recovered_external_tick_v6632($uuid);
-    }
 
     /**
      * V6.50 coverage-gap contract.
