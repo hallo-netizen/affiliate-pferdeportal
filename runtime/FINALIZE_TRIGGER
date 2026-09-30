@@ -4,3 +4,4 @@ finalize-16-after-pserc-source-fix
 retry-16-after-source-boundary-fix
 retry-16-complete-pserc-traces
 finalize-16-after-canonical-trace-fix
+finalize-16-after-trace-parser-fix
