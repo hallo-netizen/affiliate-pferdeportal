@@ -27,7 +27,7 @@ Aktuell beobachtet:
 - Pferde Atelier – Affiliate Design Performance: **3.0.0 inaktiv**.
 - Portal Production Machine: **6.7.9**, aktiv.
 - Portal SEO Redaktionsplan Compiler: **0.28.27**, aktiv.
-- Portal SEO Themenengine: **0.57.12**, aktiv.
+- Portal SEO Themenengine: **0.57.13**, aktiv.
 
 Der frühere Kategorie-Stand weiter unten bleibt historische Scope-Dokumentation und darf diese reale Inventarbeobachtung nicht überschreiben.
 
@@ -44,17 +44,17 @@ Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
 
 - Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert und Performancepfade unverändert gebunden.
-- PSTE: real weiterhin **0.57.12** aktiv. Final geprüfter **0.57.13-Kandidat** ist bereit, aber noch **NICHT LIVE**. Kandidaten-SHA-256: `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`.
+- PSTE: real **0.57.13** aktiv; WordPress-Live-Readback am 2026-09-30 bestätigt. Installationsquelle war der final geprüfte 0.57.13-Kandidat mit SHA-256 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`. Die WordPress-Pluginliste bestätigt Version und Aktivstatus, nicht unabhängig den Live-Byte-Hash.
 - PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht nach Quellprüfung aus; **kein Update erforderlich**.
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
 ERSTER OFFENER PUNKT:
-PSTE 0.57.13 ist vollständig lokal/fresh geprüft, aber noch nicht in WordPress installiert; real bleibt PSTE 0.57.12.
+PSTE 0.57.13 ist installiert und per WordPress-Readback als aktiv bestätigt. Die vorhandenen PSTE-Altbestände sind noch nicht mit der neuen eingebauten Speicherpflege verdichtet.
 
 GENAU EINE NEXT ACTION:
-`INSTALL_PSTE_0_57_13_DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS`.
+`RUN_PSTE_0_57_13_BOUNDED_STORAGE_MAINTENANCE_ON_EXISTING_ALTSTAND`.
 
-Der PSTE-Kandidat ist nur Kandidat, bis WordPress-Installation und Readback bestätigt sind. Erst danach folgt Datenbankpflege; vorher keine manuelle Löschung.
+Dabei ausschließlich die in PSTE 0.57.13 eingebaute adminseitige, begrenzte Speicherpflege mit Active-Work-Sperren verwenden. Keine manuelle Datenbanklöschung und keine Änderung an Affiliate, PSERC oder PPM.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
@@ -74,7 +74,7 @@ Final neu gebaut und frisch geprüft:
 - Stray-Backup-Dateien `*.orig/*.bak/*~`: `0`
 - Diff gegen 0.57.12: 2 neue Storage-Dateien, 6 geänderte Runtime/Admin-Dateien, 1 entfernte ungenutzte `.orig`-Datei; Contracts/Fixtures unverändert.
 
-Nur dieser hashgebundene Kandidat darf installiert werden.
+Der Nutzer bestätigt die Installation; der WordPress-Readback zeigt **Portal SEO Themenengine 0.57.13 aktiv**. Die Pluginliste beweist Version/Aktivstatus, aber nicht unabhängig den exakten Live-Bytebestand.
 
 ## ABSCHLUSS-/ARTEFAKTSTATUS
 
