@@ -166,7 +166,7 @@ def build(draft_path):
         "allowed_fact_ids":fact_ids,"article_type":article_type,"conclusion":concl,"domain":"pferdeportal",
         "fact_pack_hash":fact_pack["fact_pack_hash"],"lead":lead,"links":links,"order_id":order_id,
         "required_sections":["Fazit","Weiterführende Informationen"],"section_fact_ids":fact_ids,"slug":slug,
-        "subject_label":"die Auswahl eines Reitplatzplaners für Pferde","subject_scope":fact_pack.get("title_scope","k9_topic"),
+        "subject_label":"die Auswahl eines Reitplatzplaners für Pferde","subject_scope":fact_pack["title_scope"],
         "table_focus":fact_ids[:4],"title":title
     }
     body_text=text_of(markup)

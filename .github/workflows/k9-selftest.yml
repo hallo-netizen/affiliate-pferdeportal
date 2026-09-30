@@ -136,6 +136,63 @@ jobs:
               raise SystemExit("STRUCTURAL_CANDIDATE_STILL_BLOCKED:"+",".join(remaining))
           print("CANONICAL_TABLE_AND_SOURCE_TRACES_ACCEPTED=1")
           PY
+      - name: PSERC scope regression negative and positive
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k9-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
+          python3 - <<'PY'
+          import copy, hashlib, json, shutil, subprocess, tempfile
+          from pathlib import Path
+
+          root=Path(".").resolve()
+          ledger=json.loads((root/"state/ledger.json").read_text())
+          item=ledger["items"][0]
+          research_path=root/item["products"]["research"]["path"]
+          article_path=root/item["products"]["repair"]["path"]
+          target_scope="schermaschinen_fuer_pferde"
+
+          def prepare(dst, positive):
+              shutil.copytree(root,dst,dirs_exist_ok=True)
+              rp_path=dst/item["products"]["research"]["path"]
+              ap_path=dst/item["products"]["repair"]["path"]
+              rpkg=json.loads(rp_path.read_text())
+              apkg=json.loads(ap_path.read_text())
+              fp=rpkg["results"][0]["research_product"]["fact_pack"]
+              if positive:
+                  fp["title_scope"]=target_scope
+                  apkg["results"][0]["article_product"]["ppm_item"]["runtime_order"]["subject_scope"]=target_scope
+              else:
+                  fp.pop("title_scope",None)
+              rp_path.write_text(json.dumps(rpkg,ensure_ascii=False,indent=2)+"\n")
+              ap_path.write_text(json.dumps(apkg,ensure_ascii=False,indent=2)+"\n")
+
+          with tempfile.TemporaryDirectory() as td:
+              neg=Path(td)/"neg"; pos=Path(td)/"pos"
+              prepare(neg,False); prepare(pos,True)
+              cmd=lambda d,out:[
+                  "python3","k9_pserc.py",str(d),
+                  "quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip",
+                  "quality/PSERC-FIX.zip",
+                  "/tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar",
+                  "--output",str(out)
+              ]
+              nout=Path(td)/"neg.json"
+              n=subprocess.run(cmd(neg,nout),text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+              if n.returncode==0 or "CANONICAL_FACT_PACK_SCOPE_MISMATCH" not in n.stdout:
+                  raise SystemExit("NEGATIVE_SCOPE_MISMATCH_NOT_REPRODUCED")
+              pout=Path(td)/"pos.json"
+              p=subprocess.run(cmd(pos,pout),text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+              if p.returncode!=0:
+                  raise SystemExit("POSITIVE_SCOPE_FIX_FAILED:"+p.stdout[-1200:])
+              result=json.loads(pout.read_text())
+              if result.get("status")!="PASS" or result.get("bridge_status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
+                  raise SystemExit("POSITIVE_SCOPE_FIX_NOT_PASS")
+              print("PSERC_SCOPE_NEGATIVE_REPRODUCED=1")
+              print("PSERC_SCOPE_POSITIVE_PASS=1")
+          PY
       - name: Validate actual open runtime job
         run: |
           set -euo pipefail

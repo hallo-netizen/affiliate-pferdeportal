@@ -76,6 +76,7 @@ class K9Tests(unittest.TestCase):
             "fact_pack_id":f"fp-{iid}",
             "domain":"pferdeportal",
             "article_type":"Beratung",
+            "title_scope":k.canonical_title_scope({"target_keyword":f"k{iid}"}),
             "fact_ids":[fact_id],
             "status":"SOURCE_VERIFIED_PRODUCTION_READY",
             "claims":[{
@@ -259,6 +260,7 @@ class K9Tests(unittest.TestCase):
         job=k.prepare("research",1)["job"]
         links=job["items"][0]["input_products"]["portal_context"]["portal_links"]
         self.assertEqual([x["role"] for x in links],["parent_category","semantic_related","further_information"])
+        self.assertEqual(job["items"][0]["input_products"]["scope_context"]["title_scope"],"ka")
 
     def test_research_missing_portal_links_is_blocked_without_state_change(self):
         job=k.prepare("research",1)["job"]
@@ -317,7 +319,7 @@ class K9Tests(unittest.TestCase):
         fact_id="FACT-CLIPPER-001"
         pack={
             "fact_pack_id":"FP-K9-SCHERMASCHINEN-PFERDE-REGRESSION",
-            "domain":"pferdeatelier","article_type":"Beratung","fact_ids":[fact_id],
+            "domain":"pferdeatelier","article_type":"Beratung","title_scope":"schermaschinen_fuer_pferde","fact_ids":[fact_id],
             "status":"SOURCE_VERIFIED_PRODUCTION_READY",
             "claims":[{
                 "fact_id":fact_id,"source_id":source_id,
@@ -349,6 +351,20 @@ class K9Tests(unittest.TestCase):
         good={"item_id":"k9-1ff3dfabfed47a0c47c8df13","research_product":product}
 
         import copy
+        missing_title_scope=copy.deepcopy(good)
+        missing_title_scope["research_product"]["fact_pack"].pop("title_scope")
+        core=dict(missing_title_scope["research_product"]); core.pop("product_sha256")
+        missing_title_scope["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_FACT_PACK_REQUIRED_FIELD_MISSING"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[missing_title_scope]})
+
+        wrong_title_scope=copy.deepcopy(good)
+        wrong_title_scope["research_product"]["fact_pack"]["title_scope"]="wrong_scope"
+        core=dict(wrong_title_scope["research_product"]); core.pop("product_sha256")
+        wrong_title_scope["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_TITLE_SCOPE_MISMATCH"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[wrong_title_scope]})
+
         missing_evidence_hash=copy.deepcopy(good)
         missing_evidence_hash["research_product"]["fact_pack"]["claims"][0].pop("evidence_text_sha256")
         core=dict(missing_evidence_hash["research_product"]); core.pop("product_sha256")

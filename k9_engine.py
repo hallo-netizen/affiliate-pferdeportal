@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, hashlib, json, sys
+import argparse, hashlib, json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -61,6 +61,16 @@ def portal_binding(metadata):
     if set(roles) != {"parent_category", "semantic_related", "further_information"} or len(roles) != len(set(roles)):
         raise K9Error("PORTAL_BINDING_ROLES_INVALID")
     return {"portal_links": links}
+
+def canonical_title_scope(metadata):
+    raw = str(metadata.get("target_keyword") or "").strip().casefold()
+    replacements = {"ä":"ae","ö":"oe","ü":"ue","ß":"ss"}
+    for src,dst in replacements.items():
+        raw = raw.replace(src,dst)
+    scope = re.sub(r"[^a-z0-9]+", "_", raw).strip("_")
+    if not scope:
+        raise K9Error("RESEARCH_TITLE_SCOPE_SOURCE_MISSING")
+    return scope
 
 def ledger():
     data = load_json(LEDGER)
@@ -241,7 +251,10 @@ def _product_result(item, stage):
 
 def _inputs_for(item, station):
     if station == "research":
-        return {"portal_context": portal_binding(item["metadata"])}, {}
+        return {
+            "portal_context": portal_binding(item["metadata"]),
+            "scope_context": {"title_scope": canonical_title_scope(item["metadata"])}
+        }, {}
     research, research_ref = _product_result(item, "research")
     if station == "write":
         return {"research": research}, {"research": research_ref}
@@ -369,7 +382,7 @@ def _validate_research_product(row, job_item):
         raise K9Error("RESEARCH_SOURCE_ID_DUPLICATE")
 
     required_pack = {
-        "fact_pack_id", "domain", "article_type", "fact_ids", "status", "claims",
+        "fact_pack_id", "domain", "article_type", "title_scope", "fact_ids", "status", "claims",
         "fact_pack_hash", "source_manifest_hash", "claim_register_hash",
         "required_block_coverage", "table_evidence_coverage",
         "conclusion_evidence_coverage", "article_type_coverage",
@@ -414,6 +427,11 @@ def _validate_research_product(row, job_item):
 
     if expected_type and pack.get("article_type") != expected_type:
         raise K9Error("RESEARCH_ARTICLE_TYPE_MISMATCH")
+    bound_scope = str(job_item.get("input_products", {}).get("scope_context", {}).get("title_scope") or "").strip()
+    if not bound_scope:
+        raise K9Error("RESEARCH_BOUND_TITLE_SCOPE_MISSING")
+    if str(pack.get("title_scope") or "").strip() != bound_scope:
+        raise K9Error("RESEARCH_TITLE_SCOPE_MISMATCH")
     declared = product.get("product_sha256")
     core = dict(product)
     core.pop("product_sha256", None)
