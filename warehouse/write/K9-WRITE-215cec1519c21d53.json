@@ -1,0 +1,315 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-WRITE-215cec1519c21d53",
+  "results": [
+    {
+      "article_product": {
+        "article_type": "FAQ",
+        "content_html": "<article data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"F001\">Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung. Deshalb entscheidet nicht allein die Außentemperatur darüber, ob eine Regendecke sinnvoll ist. Entscheidend ist, wie trocken das Pferd bleibt, wie dicht sein Fell ist und wie stark Wind oder Nässe auf den Körper einwirken.<span class=\"ppm-source-trace\" data-fact-id=\"F001\" data-source-hash=\"bccf94cad9aa4f9cafbc22055ec878345850266516c019a1b5d9e16e0affa655\" data-source-title=\"SRC_PSU_WINTER_WELLNESS\"></span></p>\n<p data-fact-ids=\"F002\">Nasses Fell verliert Isolationswirkung, sodass Regen und gefrierender Niederschlag die Kältebelastung erhöhen können, auch wenn die Lufttemperatur allein noch keine Decke erfordern würde. Eine Regendecke kann deshalb vor allem dort helfen, wo sie das Fell trocken hält. Ob sie zugleich genug Wärme bietet, hängt jedoch von ihrer Ausführung und vom einzelnen Pferd ab.<span class=\"ppm-source-trace\" data-fact-id=\"F002\" data-source-hash=\"6faeb1bd6c0a6b6e113543a3e3f52e17c5ce55a729570a42104600b075452a9c\" data-source-title=\"SRC_PSU_BLANKET_2026\"></span></p>\n</section>\n\n<section data-block=\"answer\">\n<h2>Regendecken schützen vor Nässe, aber nicht automatisch vor Kälte</h2>\n<p data-fact-ids=\"F003\">Eine ungefütterte Regendecke kann das Fell eines ungeschorenen Pferdes anlegen und die natürliche Aufstellung der Haare begrenzen, ohne nennenswert zusätzliche Isolation zu liefern. Damit ist sie vor allem ein Nässeschutz. Wer nur auf die Tatsache schaut, dass eine Decke auf dem Pferd liegt, kann den tatsächlichen Wärmeschutz leicht überschätzen.<span class=\"ppm-source-trace\" data-fact-id=\"F003\" data-source-hash=\"d8e6ca26f64739409fa7bad2af8bbb82c1de7c699134220f556d79085a78ffa4\" data-source-title=\"SRC_PSU_WINTER_WELLNESS\"></span></p>\n<p data-fact-ids=\"F001 F003\">Bei einem robusten, ungeschorenen Pferd mit dichtem Winterfell kann das eigene Fell einen großen Teil der Isolation übernehmen. Wird dieses Fell durch eine ungefütterte Regendecke angelegt, sollte deshalb nicht automatisch angenommen werden, dass die Kombination wärmer ist als trockenes, frei aufgestelltes Winterfell.</p>\n<ul data-list=\"key_answers\">\n<li data-fact-ids=\"F002\"><strong>Nässe:</strong> Nasses Fell isoliert schlechter als trockenes Fell.</li>\n<li data-fact-ids=\"F003\"><strong>Ungefütterte Decke:</strong> Sie schützt vor Regen, liefert aber kaum zusätzliche Isolation.</li>\n<li data-fact-ids=\"F001\"><strong>Winterfell:</strong> Trockenes, intaktes Winterfell kann selbst sehr wirksam isolieren.</li>\n</ul>\n</section>\n\n<section data-block=\"details\">\n<h2>Regendecken bei Wind und nassem Wetter richtig einschätzen</h2>\n<p data-fact-ids=\"F007\">Zugang zu einem Unterstand oder Windschutz und das Trockenbleiben helfen Pferden, bei kaltem, windigem oder nassem Wetter Körperwärme zu halten. Eine Regendecke ist deshalb nur ein Teil des gesamten Wetterschutzes. Ein trockener Platz und Schutz vor starkem Wind können ebenso wichtig sein wie die Decke selbst.<span class=\"ppm-source-trace\" data-fact-id=\"F007\" data-source-hash=\"02e5827dd78d7cb73dcf328247118c06da4a0e41874b44367663d75966108a15\" data-source-title=\"SRC_USU_COLD\"></span></p>\n<p data-fact-ids=\"F001 F002 F007\">Bei Regen und Wind wirken mehrere Faktoren zusammen. Wird das Fell nass, sinkt seine Isolationswirkung. Trifft zusätzlich Wind auf das Pferd, kann der Wärmeverlust weiter steigen. Eine gut sitzende Regendecke kann das Fell trocken halten, ersetzt aber keinen geeigneten Unterstand, wenn die Wetterbedingungen dauerhaft unangenehm sind.</p>\n<p data-fact-ids=\"F003\">Gerade bei ungefütterten Modellen lohnt sich ein genauer Blick auf das Pferd. Die Decke hält Niederschlag ab, bringt aber keine nennenswerte zusätzliche Wärmeschicht mit. Deshalb kann sie bei einem Pferd mit wenig eigener Isolation oder unter sehr ungünstigen Bedingungen zu wenig sein.</p>\n\n<h2>Regendecken für geschorene, alte oder dünne Pferde</h2>\n<p data-fact-ids=\"F005\">Eine Decke wird eher bei geschorenen, sehr jungen, sehr alten, untergewichtigen, kranken oder noch nicht an Kälte gewöhnten Pferden benötigt sowie bei fehlendem Schutz in starker Kälte oder Nässe. Diese Pferde haben andere Voraussetzungen als ein gesundes, gut genährtes Tier mit dichtem Winterfell und geschütztem Standort.<span class=\"ppm-source-trace\" data-fact-id=\"F005\" data-source-hash=\"02b0099e25ccee3fe48f835d804ac7a9b2bab335ed3d7d1aa3e0edf09d8c4817\" data-source-title=\"SRC_UMN_WINTER\"></span></p>\n<p data-fact-ids=\"F005 F007\">Bei solchen Pferden sollte der Schutz deshalb stärker an Alter, Schur, Körperzustand, Gesundheit und Wetter angepasst werden. Auch ein fehlender Unterstand kann die Entscheidung beeinflussen. Die passende Lösung ergibt sich aus der Kombination dieser Faktoren und nicht aus einer pauschalen Temperaturgrenze.</p>\n<p data-fact-ids=\"F004\">Wird einem Pferd unter einer Decke zu warm, kann es schwitzen; Feuchtigkeit unter der Decke kann später das Auskühlen begünstigen und Hautprobleme fördern. Mehr Decke ist daher nicht automatisch besser. Auch Überwärmung muss vermieden werden.<span class=\"ppm-source-trace\" data-fact-id=\"F004\" data-source-hash=\"78d371b86e347d8abab3ef31a639176e4ecf92bd4550baa9296b7b43ef86563f\" data-source-title=\"SRC_PSU_WINTER_WELLNESS\"></span></p>\n</section>\n\n<section data-block=\"criteria\">\n<p>Für die übergeordnete Einordnung von Decken, Schutz und weiterer Pferdeausstattung führt der gebundene Bereich über <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>.</p>\n</section>\n\n<section data-block=\"checklist\">\n<h2>Regendecken regelmäßig am Pferd kontrollieren</h2>\n<p data-fact-ids=\"F006\">Eine Decke sollte trocken bleiben, richtig sitzen und regelmäßig abgenommen werden, damit Pferd, Haut und Sitz der Decke kontrolliert werden können. Nur von außen zu schauen reicht nicht, weil sich Feuchtigkeit, Scheuerstellen oder ein verrutschter Sitz unter der Decke verbergen können.<span class=\"ppm-source-trace\" data-fact-id=\"F006\" data-source-hash=\"e3ff3ee2ee1ee2e6ac9b20fce4e3acbeb5b6deb7cd249531c137c7537a45d8ff\" data-source-title=\"SRC_PSU_BLANKET_2026\"></span></p>\n<p data-fact-ids=\"F004 F006\">Bei der Kontrolle sollte außerdem auffallen, ob das Pferd unter der Decke schwitzt. Feuchtigkeit auf der Innenseite oder deutlich feuchtes Fell sind Hinweise darauf, dass die Kombination aus Wetter, Decke und Pferd neu beurteilt werden sollte.</p>\n<ul data-list=\"checklist\">\n<li data-fact-ids=\"F006\">Prüfe regelmäßig, ob die Decke trocken und korrekt positioniert ist.</li>\n<li data-fact-ids=\"F006\">Kontrolliere Fell und Haut unter der Decke auf Feuchtigkeit und Scheuerstellen.</li>\n<li data-fact-ids=\"F004\">Achte darauf, ob das Pferd unter der Decke schwitzt.</li>\n<li data-fact-ids=\"F001 F002\">Beziehe Wind, Regen und Zustand des Winterfells in die Beurteilung ein.</li>\n<li data-fact-ids=\"F005\">Berücksichtige Alter, Schur, Körperzustand, Gesundheit und Gewöhnung an Kälte.</li>\n</ul>\n</section>\n\n<section data-block=\"decision\">\n<p>Welche Deckenarten für unterschiedliche Wetterlagen und Pferde infrage kommen, ist im gebundenen Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-decken/\">Decken</a> zusammengeführt.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Regendecken nach Pferd und Wetter beurteilen</h2>\n<p data-fact-ids=\"F001 F002 F003 F005\">Die Tabelle ordnet typische Situationen nach den gebundenen Fakten ein. Entscheidend ist immer die Kombination aus Fell, Nässe, Wind, individueller Verfassung und Art der Decke.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>Situation</th><th>Gebundene Einordnung</th><th>Worauf achten?</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"F001\">Gesundes Pferd mit dichtem Winterfell</td><td data-fact-ids=\"F001\">Trockenes Winterfell kann durch eingeschlossene Luft gut isolieren.</td><td data-fact-ids=\"F001 F002\">Nässe und starken Wind mitbeurteilen.</td></tr>\n<tr><td data-fact-ids=\"F003\">Ungefütterte Regendecke</td><td data-fact-ids=\"F003\">Sie schützt vor Niederschlag, liefert aber kaum zusätzliche Isolation.</td><td data-fact-ids=\"F003\">Nicht allein aus der Decke auf ausreichenden Wärmeschutz schließen.</td></tr>\n<tr><td data-fact-ids=\"F002 F007\">Regen und starker Wind</td><td data-fact-ids=\"F002\">Nasses Fell verliert Isolationswirkung.</td><td data-fact-ids=\"F007\">Trockenheit, Unterstand und Windschutz prüfen.</td></tr>\n<tr><td data-fact-ids=\"F005\">Geschorenes, altes, junges oder dünnes Pferd</td><td data-fact-ids=\"F005\">Zusätzlicher Deckenschutz wird eher benötigt.</td><td data-fact-ids=\"F005\">Die Deckenwahl stärker am einzelnen Pferd ausrichten.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit zum Kälteschutz mit Regendecken</h2>\n<p data-fact-ids=\"F001 F002 F003\">Pferde können auch mit Regendecke frieren. Eine ungefütterte Regendecke schützt in erster Linie vor Niederschlag und liefert kaum zusätzliche Isolation. Gleichzeitig kann trockenes, intaktes Winterfell selbst wirksam isolieren, während Nässe und starker Wind diese Wirkung verringern.</p>\n<p data-fact-ids=\"F004 F005 F006 F007\">Ob eine Decke ausreicht, hängt deshalb vom einzelnen Pferd und den Bedingungen ab. Geschorene, sehr junge, sehr alte, untergewichtige oder kranke Pferde benötigen eher zusätzlichen Schutz. Gleichzeitig sollte eine Decke nicht so warm sein, dass das Pferd schwitzt. Regelmäßige Kontrolle, ein passender Sitz sowie Schutz vor Wind und Nässe sind deshalb wichtiger als eine starre Temperaturregel.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weitere Informationen zu Regendecken</h2>\n<p data-fact-ids=\"F003 F006\">Wer die Auswahl vertiefen möchte, sollte neben der Fütterung der Decke auch Sitz, Trockenheit und die individuellen Voraussetzungen des Pferdes berücksichtigen.</p>\n<p>Der gebundene Themenbereich ist hier erreichbar: <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-decken/pferdedecken-regendecken/\">Regendecken</a>.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+        "content_sha256": "5bd1f1da2e06cc5e807e72edaec1f7c900b35769753838483d587cc14733730b",
+        "contract": "K9_ARTICLE_PRODUCT_V1",
+        "ppm_item": {
+          "article_type": "FAQ",
+          "canonical_article": {
+            "article_type": "FAQ",
+            "body_html": "<article data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"F001\">Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung. Deshalb entscheidet nicht allein die Außentemperatur darüber, ob eine Regendecke sinnvoll ist. Entscheidend ist, wie trocken das Pferd bleibt, wie dicht sein Fell ist und wie stark Wind oder Nässe auf den Körper einwirken.<span class=\"ppm-source-trace\" data-fact-id=\"F001\" data-source-hash=\"bccf94cad9aa4f9cafbc22055ec878345850266516c019a1b5d9e16e0affa655\" data-source-title=\"SRC_PSU_WINTER_WELLNESS\"></span></p>\n<p data-fact-ids=\"F002\">Nasses Fell verliert Isolationswirkung, sodass Regen und gefrierender Niederschlag die Kältebelastung erhöhen können, auch wenn die Lufttemperatur allein noch keine Decke erfordern würde. Eine Regendecke kann deshalb vor allem dort helfen, wo sie das Fell trocken hält. Ob sie zugleich genug Wärme bietet, hängt jedoch von ihrer Ausführung und vom einzelnen Pferd ab.<span class=\"ppm-source-trace\" data-fact-id=\"F002\" data-source-hash=\"6faeb1bd6c0a6b6e113543a3e3f52e17c5ce55a729570a42104600b075452a9c\" data-source-title=\"SRC_PSU_BLANKET_2026\"></span></p>\n</section>\n\n<section data-block=\"answer\">\n<h2>Regendecken schützen vor Nässe, aber nicht automatisch vor Kälte</h2>\n<p data-fact-ids=\"F003\">Eine ungefütterte Regendecke kann das Fell eines ungeschorenen Pferdes anlegen und die natürliche Aufstellung der Haare begrenzen, ohne nennenswert zusätzliche Isolation zu liefern. Damit ist sie vor allem ein Nässeschutz. Wer nur auf die Tatsache schaut, dass eine Decke auf dem Pferd liegt, kann den tatsächlichen Wärmeschutz leicht überschätzen.<span class=\"ppm-source-trace\" data-fact-id=\"F003\" data-source-hash=\"d8e6ca26f64739409fa7bad2af8bbb82c1de7c699134220f556d79085a78ffa4\" data-source-title=\"SRC_PSU_WINTER_WELLNESS\"></span></p>\n<p data-fact-ids=\"F001 F003\">Bei einem robusten, ungeschorenen Pferd mit dichtem Winterfell kann das eigene Fell einen großen Teil der Isolation übernehmen. Wird dieses Fell durch eine ungefütterte Regendecke angelegt, sollte deshalb nicht automatisch angenommen werden, dass die Kombination wärmer ist als trockenes, frei aufgestelltes Winterfell.</p>\n<ul data-list=\"key_answers\">\n<li data-fact-ids=\"F002\"><strong>Nässe:</strong> Nasses Fell isoliert schlechter als trockenes Fell.</li>\n<li data-fact-ids=\"F003\"><strong>Ungefütterte Decke:</strong> Sie schützt vor Regen, liefert aber kaum zusätzliche Isolation.</li>\n<li data-fact-ids=\"F001\"><strong>Winterfell:</strong> Trockenes, intaktes Winterfell kann selbst sehr wirksam isolieren.</li>\n</ul>\n</section>\n\n<section data-block=\"details\">\n<h2>Regendecken bei Wind und nassem Wetter richtig einschätzen</h2>\n<p data-fact-ids=\"F007\">Zugang zu einem Unterstand oder Windschutz und das Trockenbleiben helfen Pferden, bei kaltem, windigem oder nassem Wetter Körperwärme zu halten. Eine Regendecke ist deshalb nur ein Teil des gesamten Wetterschutzes. Ein trockener Platz und Schutz vor starkem Wind können ebenso wichtig sein wie die Decke selbst.<span class=\"ppm-source-trace\" data-fact-id=\"F007\" data-source-hash=\"02e5827dd78d7cb73dcf328247118c06da4a0e41874b44367663d75966108a15\" data-source-title=\"SRC_USU_COLD\"></span></p>\n<p data-fact-ids=\"F001 F002 F007\">Bei Regen und Wind wirken mehrere Faktoren zusammen. Wird das Fell nass, sinkt seine Isolationswirkung. Trifft zusätzlich Wind auf das Pferd, kann der Wärmeverlust weiter steigen. Eine gut sitzende Regendecke kann das Fell trocken halten, ersetzt aber keinen geeigneten Unterstand, wenn die Wetterbedingungen dauerhaft unangenehm sind.</p>\n<p data-fact-ids=\"F003\">Gerade bei ungefütterten Modellen lohnt sich ein genauer Blick auf das Pferd. Die Decke hält Niederschlag ab, bringt aber keine nennenswerte zusätzliche Wärmeschicht mit. Deshalb kann sie bei einem Pferd mit wenig eigener Isolation oder unter sehr ungünstigen Bedingungen zu wenig sein.</p>\n\n<h2>Regendecken für geschorene, alte oder dünne Pferde</h2>\n<p data-fact-ids=\"F005\">Eine Decke wird eher bei geschorenen, sehr jungen, sehr alten, untergewichtigen, kranken oder noch nicht an Kälte gewöhnten Pferden benötigt sowie bei fehlendem Schutz in starker Kälte oder Nässe. Diese Pferde haben andere Voraussetzungen als ein gesundes, gut genährtes Tier mit dichtem Winterfell und geschütztem Standort.<span class=\"ppm-source-trace\" data-fact-id=\"F005\" data-source-hash=\"02b0099e25ccee3fe48f835d804ac7a9b2bab335ed3d7d1aa3e0edf09d8c4817\" data-source-title=\"SRC_UMN_WINTER\"></span></p>\n<p data-fact-ids=\"F005 F007\">Bei solchen Pferden sollte der Schutz deshalb stärker an Alter, Schur, Körperzustand, Gesundheit und Wetter angepasst werden. Auch ein fehlender Unterstand kann die Entscheidung beeinflussen. Die passende Lösung ergibt sich aus der Kombination dieser Faktoren und nicht aus einer pauschalen Temperaturgrenze.</p>\n<p data-fact-ids=\"F004\">Wird einem Pferd unter einer Decke zu warm, kann es schwitzen; Feuchtigkeit unter der Decke kann später das Auskühlen begünstigen und Hautprobleme fördern. Mehr Decke ist daher nicht automatisch besser. Auch Überwärmung muss vermieden werden.<span class=\"ppm-source-trace\" data-fact-id=\"F004\" data-source-hash=\"78d371b86e347d8abab3ef31a639176e4ecf92bd4550baa9296b7b43ef86563f\" data-source-title=\"SRC_PSU_WINTER_WELLNESS\"></span></p>\n</section>\n\n<section data-block=\"criteria\">\n<p>Für die übergeordnete Einordnung von Decken, Schutz und weiterer Pferdeausstattung führt der gebundene Bereich über <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>.</p>\n</section>\n\n<section data-block=\"checklist\">\n<h2>Regendecken regelmäßig am Pferd kontrollieren</h2>\n<p data-fact-ids=\"F006\">Eine Decke sollte trocken bleiben, richtig sitzen und regelmäßig abgenommen werden, damit Pferd, Haut und Sitz der Decke kontrolliert werden können. Nur von außen zu schauen reicht nicht, weil sich Feuchtigkeit, Scheuerstellen oder ein verrutschter Sitz unter der Decke verbergen können.<span class=\"ppm-source-trace\" data-fact-id=\"F006\" data-source-hash=\"e3ff3ee2ee1ee2e6ac9b20fce4e3acbeb5b6deb7cd249531c137c7537a45d8ff\" data-source-title=\"SRC_PSU_BLANKET_2026\"></span></p>\n<p data-fact-ids=\"F004 F006\">Bei der Kontrolle sollte außerdem auffallen, ob das Pferd unter der Decke schwitzt. Feuchtigkeit auf der Innenseite oder deutlich feuchtes Fell sind Hinweise darauf, dass die Kombination aus Wetter, Decke und Pferd neu beurteilt werden sollte.</p>\n<ul data-list=\"checklist\">\n<li data-fact-ids=\"F006\">Prüfe regelmäßig, ob die Decke trocken und korrekt positioniert ist.</li>\n<li data-fact-ids=\"F006\">Kontrolliere Fell und Haut unter der Decke auf Feuchtigkeit und Scheuerstellen.</li>\n<li data-fact-ids=\"F004\">Achte darauf, ob das Pferd unter der Decke schwitzt.</li>\n<li data-fact-ids=\"F001 F002\">Beziehe Wind, Regen und Zustand des Winterfells in die Beurteilung ein.</li>\n<li data-fact-ids=\"F005\">Berücksichtige Alter, Schur, Körperzustand, Gesundheit und Gewöhnung an Kälte.</li>\n</ul>\n</section>\n\n<section data-block=\"decision\">\n<p>Welche Deckenarten für unterschiedliche Wetterlagen und Pferde infrage kommen, ist im gebundenen Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-decken/\">Decken</a> zusammengeführt.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Regendecken nach Pferd und Wetter beurteilen</h2>\n<p data-fact-ids=\"F001 F002 F003 F005\">Die Tabelle ordnet typische Situationen nach den gebundenen Fakten ein. Entscheidend ist immer die Kombination aus Fell, Nässe, Wind, individueller Verfassung und Art der Decke.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>Situation</th><th>Gebundene Einordnung</th><th>Worauf achten?</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"F001\">Gesundes Pferd mit dichtem Winterfell</td><td data-fact-ids=\"F001\">Trockenes Winterfell kann durch eingeschlossene Luft gut isolieren.</td><td data-fact-ids=\"F001 F002\">Nässe und starken Wind mitbeurteilen.</td></tr>\n<tr><td data-fact-ids=\"F003\">Ungefütterte Regendecke</td><td data-fact-ids=\"F003\">Sie schützt vor Niederschlag, liefert aber kaum zusätzliche Isolation.</td><td data-fact-ids=\"F003\">Nicht allein aus der Decke auf ausreichenden Wärmeschutz schließen.</td></tr>\n<tr><td data-fact-ids=\"F002 F007\">Regen und starker Wind</td><td data-fact-ids=\"F002\">Nasses Fell verliert Isolationswirkung.</td><td data-fact-ids=\"F007\">Trockenheit, Unterstand und Windschutz prüfen.</td></tr>\n<tr><td data-fact-ids=\"F005\">Geschorenes, altes, junges oder dünnes Pferd</td><td data-fact-ids=\"F005\">Zusätzlicher Deckenschutz wird eher benötigt.</td><td data-fact-ids=\"F005\">Die Deckenwahl stärker am einzelnen Pferd ausrichten.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit zum Kälteschutz mit Regendecken</h2>\n<p data-fact-ids=\"F001 F002 F003\">Pferde können auch mit Regendecke frieren. Eine ungefütterte Regendecke schützt in erster Linie vor Niederschlag und liefert kaum zusätzliche Isolation. Gleichzeitig kann trockenes, intaktes Winterfell selbst wirksam isolieren, während Nässe und starker Wind diese Wirkung verringern.</p>\n<p data-fact-ids=\"F004 F005 F006 F007\">Ob eine Decke ausreicht, hängt deshalb vom einzelnen Pferd und den Bedingungen ab. Geschorene, sehr junge, sehr alte, untergewichtige oder kranke Pferde benötigen eher zusätzlichen Schutz. Gleichzeitig sollte eine Decke nicht so warm sein, dass das Pferd schwitzt. Regelmäßige Kontrolle, ein passender Sitz sowie Schutz vor Wind und Nässe sind deshalb wichtiger als eine starre Temperaturregel.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weitere Informationen zu Regendecken</h2>\n<p data-fact-ids=\"F003 F006\">Wer die Auswahl vertiefen möchte, sollte neben der Fütterung der Decke auch Sitz, Trockenheit und die individuellen Voraussetzungen des Pferdes berücksichtigen.</p>\n<p>Der gebundene Themenbereich ist hier erreichbar: <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-decken/pferdedecken-regendecken/\">Regendecken</a>.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+            "body_html_sha256": "5bd1f1da2e06cc5e807e72edaec1f7c900b35769753838483d587cc14733730b",
+            "body_text": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung. Deshalb entscheidet nicht allein die Außentemperatur darüber, ob eine Regendecke sinnvoll ist. Entscheidend ist, wie trocken das Pferd bleibt, wie dicht sein Fell ist und wie stark Wind oder Nässe auf den Körper einwirken. Nasses Fell verliert Isolationswirkung, sodass Regen und gefrierender Niederschlag die Kältebelastung erhöhen können, auch wenn die Lufttemperatur allein noch keine Decke erfordern würde. Eine Regendecke kann deshalb vor allem dort helfen, wo sie das Fell trocken hält. Ob sie zugleich genug Wärme bietet, hängt jedoch von ihrer Ausführung und vom einzelnen Pferd ab. Regendecken schützen vor Nässe, aber nicht automatisch vor Kälte Eine ungefütterte Regendecke kann das Fell eines ungeschorenen Pferdes anlegen und die natürliche Aufstellung der Haare begrenzen, ohne nennenswert zusätzliche Isolation zu liefern. Damit ist sie vor allem ein Nässeschutz. Wer nur auf die Tatsache schaut, dass eine Decke auf dem Pferd liegt, kann den tatsächlichen Wärmeschutz leicht überschätzen. Bei einem robusten, ungeschorenen Pferd mit dichtem Winterfell kann das eigene Fell einen großen Teil der Isolation übernehmen. Wird dieses Fell durch eine ungefütterte Regendecke angelegt, sollte deshalb nicht automatisch angenommen werden, dass die Kombination wärmer ist als trockenes, frei aufgestelltes Winterfell. Nässe: Nasses Fell isoliert schlechter als trockenes Fell. Ungefütterte Decke: Sie schützt vor Regen, liefert aber kaum zusätzliche Isolation. Winterfell: Trockenes, intaktes Winterfell kann selbst sehr wirksam isolieren. Regendecken bei Wind und nassem Wetter richtig einschätzen Zugang zu einem Unterstand oder Windschutz und das Trockenbleiben helfen Pferden, bei kaltem, windigem oder nassem Wetter Körperwärme zu halten. Eine Regendecke ist deshalb nur ein Teil des gesamten Wetterschutzes. Ein trockener Platz und Schutz vor starkem Wind können ebenso wichtig sein wie die Decke selbst. Bei Regen und Wind wirken mehrere Faktoren zusammen. Wird das Fell nass, sinkt seine Isolationswirkung. Trifft zusätzlich Wind auf das Pferd, kann der Wärmeverlust weiter steigen. Eine gut sitzende Regendecke kann das Fell trocken halten, ersetzt aber keinen geeigneten Unterstand, wenn die Wetterbedingungen dauerhaft unangenehm sind. Gerade bei ungefütterten Modellen lohnt sich ein genauer Blick auf das Pferd. Die Decke hält Niederschlag ab, bringt aber keine nennenswerte zusätzliche Wärmeschicht mit. Deshalb kann sie bei einem Pferd mit wenig eigener Isolation oder unter sehr ungünstigen Bedingungen zu wenig sein. Regendecken für geschorene, alte oder dünne Pferde Eine Decke wird eher bei geschorenen, sehr jungen, sehr alten, untergewichtigen, kranken oder noch nicht an Kälte gewöhnten Pferden benötigt sowie bei fehlendem Schutz in starker Kälte oder Nässe. Diese Pferde haben andere Voraussetzungen als ein gesundes, gut genährtes Tier mit dichtem Winterfell und geschütztem Standort. Bei solchen Pferden sollte der Schutz deshalb stärker an Alter, Schur, Körperzustand, Gesundheit und Wetter angepasst werden. Auch ein fehlender Unterstand kann die Entscheidung beeinflussen. Die passende Lösung ergibt sich aus der Kombination dieser Faktoren und nicht aus einer pauschalen Temperaturgrenze. Wird einem Pferd unter einer Decke zu warm, kann es schwitzen; Feuchtigkeit unter der Decke kann später das Auskühlen begünstigen und Hautprobleme fördern. Mehr Decke ist daher nicht automatisch besser. Auch Überwärmung muss vermieden werden. Für die übergeordnete Einordnung von Decken, Schutz und weiterer Pferdeausstattung führt der gebundene Bereich über Ausrüstung . Regendecken regelmäßig am Pferd kontrollieren Eine Decke sollte trocken bleiben, richtig sitzen und regelmäßig abgenommen werden, damit Pferd, Haut und Sitz der Decke kontrolliert werden können. Nur von außen zu schauen reicht nicht, weil sich Feuchtigkeit, Scheuerstellen oder ein verrutschter Sitz unter der Decke verbergen können. Bei der Kontrolle sollte außerdem auffallen, ob das Pferd unter der Decke schwitzt. Feuchtigkeit auf der Innenseite oder deutlich feuchtes Fell sind Hinweise darauf, dass die Kombination aus Wetter, Decke und Pferd neu beurteilt werden sollte. Prüfe regelmäßig, ob die Decke trocken und korrekt positioniert ist. Kontrolliere Fell und Haut unter der Decke auf Feuchtigkeit und Scheuerstellen. Achte darauf, ob das Pferd unter der Decke schwitzt. Beziehe Wind, Regen und Zustand des Winterfells in die Beurteilung ein. Berücksichtige Alter, Schur, Körperzustand, Gesundheit und Gewöhnung an Kälte. Welche Deckenarten für unterschiedliche Wetterlagen und Pferde infrage kommen, ist im gebundenen Bereich Decken zusammengeführt. Regendecken nach Pferd und Wetter beurteilen Die Tabelle ordnet typische Situationen nach den gebundenen Fakten ein. Entscheidend ist immer die Kombination aus Fell, Nässe, Wind, individueller Verfassung und Art der Decke. Situation Gebundene Einordnung Worauf achten? Gesundes Pferd mit dichtem Winterfell Trockenes Winterfell kann durch eingeschlossene Luft gut isolieren. Nässe und starken Wind mitbeurteilen. Ungefütterte Regendecke Sie schützt vor Niederschlag, liefert aber kaum zusätzliche Isolation. Nicht allein aus der Decke auf ausreichenden Wärmeschutz schließen. Regen und starker Wind Nasses Fell verliert Isolationswirkung. Trockenheit, Unterstand und Windschutz prüfen. Geschorenes, altes, junges oder dünnes Pferd Zusätzlicher Deckenschutz wird eher benötigt. Die Deckenwahl stärker am einzelnen Pferd ausrichten. Fazit zum Kälteschutz mit Regendecken Pferde können auch mit Regendecke frieren. Eine ungefütterte Regendecke schützt in erster Linie vor Niederschlag und liefert kaum zusätzliche Isolation. Gleichzeitig kann trockenes, intaktes Winterfell selbst wirksam isolieren, während Nässe und starker Wind diese Wirkung verringern. Ob eine Decke ausreicht, hängt deshalb vom einzelnen Pferd und den Bedingungen ab. Geschorene, sehr junge, sehr alte, untergewichtige oder kranke Pferde benötigen eher zusätzlichen Schutz. Gleichzeitig sollte eine Decke nicht so warm sein, dass das Pferd schwitzt. Regelmäßige Kontrolle, ein passender Sitz sowie Schutz vor Wind und Nässe sind deshalb wichtiger als eine starre Temperaturregel. Weitere Informationen zu Regendecken Wer die Auswahl vertiefen möchte, sollte neben der Fütterung der Decke auch Sitz, Trockenheit und die individuellen Voraussetzungen des Pferdes berücksichtigen. Der gebundene Themenbereich ist hier erreichbar: Regendecken . Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+            "body_text_sha256": "0e11aa4e181aad66a8918d993bebbbdc5baf63cb475a77b64368a1f0735e4b93",
+            "claim_ids": [
+              "F001",
+              "F002",
+              "F003",
+              "F004",
+              "F005",
+              "F006",
+              "F007"
+            ],
+            "content_plan_hash": "4e65c377939356fd6c4c72922125318b0b5acdc5b1b011cbbca8d681bc2db159",
+            "fact_pack_hash": "d0ec7c4b12e231964f8fc20e645bb690b1a3d68e71abc9c837f6530008e952b0",
+            "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+            "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+            "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+            "gold_reference_metrics": {
+              "h2_count": 5,
+              "paragraph_count": 31,
+              "table_body_row_count": 8,
+              "visible_link_count": 2,
+              "word_count": 1134
+            },
+            "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+            "links": [
+              {
+                "active": true,
+                "anchor": "Ausrüstung",
+                "href": "/ausruestung/",
+                "reason": "Maschinell gebundener Portal-Hauptbereich",
+                "role": "parent_category",
+                "section_id": "criteria",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Decken",
+                "href": "/ausruestung/ausruestung-decken/",
+                "reason": "Maschinell gebundener Portal-Bereich",
+                "role": "semantic_related",
+                "section_id": "decision",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Regendecken",
+                "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+                "reason": "Maschinell gebundene Portal-Produktseite",
+                "role": "further_information",
+                "section_id": "further_information",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              }
+            ],
+            "local_candidate_metrics": {
+              "h2_count": 7,
+              "paragraph_count": 20,
+              "table_body_row_count": 4,
+              "visible_link_count": 3,
+              "word_count": 920
+            },
+            "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+            "order_id": "k9-2b8423e7",
+            "skeleton_hash": "8f4527a2f5bafe119d2df87c8808a94b6fc0e11f645980247ffd9cbd1f08e9d0",
+            "slug": "frieren-pferde-unter-regendecken",
+            "source_ids": [
+              "SRC_PSU_BLANKET_2026",
+              "SRC_UMN_WINTER",
+              "SRC_PSU_WINTER_WELLNESS",
+              "SRC_USU_COLD"
+            ],
+            "title": "Frieren Pferde unter Regendecken?"
+          },
+          "contract_hashes": [],
+          "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+          "plan_item_key": "k9-23330868f4b0c797",
+          "quality_binding": {
+            "ai_disclosure_required": true,
+            "contract": "content_structure_language_binding_v2",
+            "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+            "expected_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Ausrüstung > Decken > Regendecken > FAQ Regendecken",
+              "name": "FAQ Regendecken",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "pferdedecken-regendecken-faq",
+              "taxonomy": "category"
+            },
+            "faq_direct_answer": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung.",
+            "intent_terms": [
+              "Frieren Pferde unter Regendecken",
+              "Regendecken",
+              "Decken",
+              "Ausrüstung"
+            ],
+            "internal_test_marker": "LT23330868F4B0",
+            "language_evidence": {},
+            "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+            "link_bindings": [
+              {
+                "active": true,
+                "anchor": "Ausrüstung",
+                "href": "/ausruestung/",
+                "reason": "Maschinell gebundener Portal-Hauptbereich",
+                "role": "parent_category",
+                "section_id": "criteria",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Decken",
+                "href": "/ausruestung/ausruestung-decken/",
+                "reason": "Maschinell gebundener Portal-Bereich",
+                "role": "semantic_related",
+                "section_id": "decision",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Regendecken",
+                "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+                "reason": "Maschinell gebundene Portal-Produktseite",
+                "role": "further_information",
+                "section_id": "further_information",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              }
+            ],
+            "minimum_word_count": 750,
+            "portal_link_registry": {
+              "contract": "portal_link_registry_snapshot_v2",
+              "entries": [
+                {
+                  "active": true,
+                  "anchor": "Ausrüstung",
+                  "href": "/ausruestung/",
+                  "reason": "Maschinell gebundener Portal-Hauptbereich",
+                  "role": "parent_category",
+                  "section_id": "criteria",
+                  "target_status": "publish",
+                  "target_type": "portal_route"
+                },
+                {
+                  "active": true,
+                  "anchor": "Decken",
+                  "href": "/ausruestung/ausruestung-decken/",
+                  "reason": "Maschinell gebundener Portal-Bereich",
+                  "role": "semantic_related",
+                  "section_id": "decision",
+                  "target_status": "publish",
+                  "target_type": "portal_route"
+                },
+                {
+                  "active": true,
+                  "anchor": "Regendecken",
+                  "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+                  "reason": "Maschinell gebundene Portal-Produktseite",
+                  "role": "further_information",
+                  "section_id": "further_information",
+                  "target_status": "publish",
+                  "target_type": "portal_route"
+                }
+              ],
+              "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+            },
+            "portal_link_registry_hash": "f71e2ee1d0c337e51dfac12afdb334b5e06a6d8263198fca8c2bfdfcbb007084",
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Frieren Pferde unter Regendecken und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "type_meta": {
+              "primary_question": "Frieren Pferde unter Regendecken?"
+            },
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Ausrüstung > Decken > Regendecken > FAQ Regendecken",
+              "name": "FAQ Regendecken",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "pferdedecken-regendecken-faq",
+              "taxonomy": "category"
+            },
+            "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+          },
+          "quality_binding_hash": "8170b44ce6e3b2d05baf9abeaa8029bd789f9eab89835c80ea3cdd079bf01128",
+          "runtime_order": {
+            "allowed_fact_ids": [
+              "F001",
+              "F002",
+              "F003",
+              "F004",
+              "F005",
+              "F006",
+              "F007"
+            ],
+            "answer": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung.",
+            "article_type": "FAQ",
+            "conclusion": "Fazit zum Kälteschutz mit Regendecken Pferde können auch mit Regendecke frieren. Eine ungefütterte Regendecke schützt in erster Linie vor Niederschlag und liefert kaum zusätzliche Isolation. Gleichzeitig kann trockenes, intaktes Winterfell selbst wirksam isolieren, während Nässe und starker Wind diese Wirkung verringern. Ob eine Decke ausreicht, hängt deshalb vom einzelnen Pferd und den Bedingungen ab. Geschorene, sehr junge, sehr alte, untergewichtige oder kranke Pferde benötigen eher zusätzlichen Schutz. Gleichzeitig sollte eine Decke nicht so warm sein, dass das Pferd schwitzt. Regelmäßige Kontrolle, ein passender Sitz sowie Schutz vor Wind und Nässe sind deshalb wichtiger als eine starre Temperaturregel.",
+            "domain": "pferdeportal",
+            "fact_pack_hash": "d0ec7c4b12e231964f8fc20e645bb690b1a3d68e71abc9c837f6530008e952b0",
+            "faq_answer": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung.",
+            "faq_question": "Frieren Pferde unter Regendecken?",
+            "lead": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung.",
+            "links": [
+              {
+                "active": true,
+                "anchor": "Ausrüstung",
+                "href": "/ausruestung/",
+                "reason": "Maschinell gebundener Portal-Hauptbereich",
+                "role": "parent_category",
+                "section_id": "criteria",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Decken",
+                "href": "/ausruestung/ausruestung-decken/",
+                "reason": "Maschinell gebundener Portal-Bereich",
+                "role": "semantic_related",
+                "section_id": "decision",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Regendecken",
+                "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+                "reason": "Maschinell gebundene Portal-Produktseite",
+                "role": "further_information",
+                "section_id": "further_information",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              }
+            ],
+            "order_id": "k9-2b8423e7",
+            "primary_question": "Frieren Pferde unter Regendecken?",
+            "question": "Frieren Pferde unter Regendecken?",
+            "required_sections": [
+              "Fazit",
+              "Weiterführende Informationen"
+            ],
+            "section_fact_ids": [
+              "F001",
+              "F002",
+              "F003",
+              "F004",
+              "F005",
+              "F006",
+              "F007"
+            ],
+            "slug": "frieren-pferde-unter-regendecken",
+            "subject_label": "Frieren Pferde unter Regendecken",
+            "subject_scope": "frieren_pferde_unter_regendecken",
+            "summary": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung.",
+            "table_focus": [
+              "F001",
+              "F002",
+              "F003",
+              "F004"
+            ],
+            "title": "Frieren Pferde unter Regendecken?"
+          },
+          "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+          "source_hashes": [],
+          "source_order_id": "k9-2b8423e7",
+          "source_snapshot_id": "K9-FACTPACK-FRIEREN-REGENDECKEN-002",
+          "target_keyword": "Frieren Pferde unter Regendecken",
+          "three_type_local_binding": {
+            "expected_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Ausrüstung > Decken > Regendecken > FAQ Regendecken",
+              "name": "FAQ Regendecken",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "pferdedecken-regendecken-faq",
+              "taxonomy": "category"
+            },
+            "semantic_keywords": [
+              "Frieren Pferde unter Regendecken",
+              "Winterfell und natürliche Isolation des Pferdes",
+              "Nässe, Wind und vorhandener Wetterschutz",
+              "Füllung und Wirkung einer ungefütterten Regendecke",
+              "Scheren, Alter, Körperzustand, Gesundheit und Akklimatisierung",
+              "Anzeichen für Überwärmung oder unzureichenden Wärmeschutz"
+            ],
+            "wordpress_runtime_term_id_required_later": true,
+            "wordpress_runtime_validation_performed_now": false
+          },
+          "topic": "Frieren Pferde unter Regendecken?"
+        },
+        "product_sha256": "ebf4cf23a152004ef94824e4c091d52e57ff8f8cc24f4629f6c039ed63241b57",
+        "research_product_sha256": "03a05b206af5c8250e6ed351aa09cbcfb6f7c0fe3be0bb940b648c8bdfae518d",
+        "title": "Frieren Pferde unter Regendecken?"
+      },
+      "item_id": "k9-037886feb135ca682b8423e7"
+    }
+  ],
+  "station": "write"
+}

@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 39,
+  "generation": 40,
   "items": [
     {
       "item_id": "k9-037886feb135ca682b8423e7",
@@ -16,6 +16,11 @@
           "job_id": "K9-RESEARCH-4571d4ba822044c4",
           "path": "warehouse/research/K9-RESEARCH-4571d4ba822044c4.json",
           "sha256": "436d328f0c68aa17e8202adee5545d564a32f7c3eeed95dc2cf978d230a788d1"
+        },
+        "write": {
+          "job_id": "K9-WRITE-215cec1519c21d53",
+          "path": "warehouse/write/K9-WRITE-215cec1519c21d53.json",
+          "sha256": "894cf0b0f48282db01368a4818f3896f10a58b24e26fbe0aafc3f16ed3861c5c"
         }
       },
       "revision": 0,
@@ -23,7 +28,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Frieren Pferde unter Regendecken?"
     }
