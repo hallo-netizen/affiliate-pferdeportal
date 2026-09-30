@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, copy, hashlib, json, subprocess, sys, tempfile, zipfile
+import argparse, copy, hashlib, json, re, subprocess, sys, tempfile, zipfile
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parent
@@ -87,6 +87,41 @@ def canonical_fact_pack(research):
         "production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY",
         "title_scope":str(fp.get("title_scope") or ""),
     }
+
+def bind_canonical_article_traces(ppm_item, fact_pack):
+    article=ppm_item.get("canonical_article")
+    if not isinstance(article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
+    markup=str(article.get("body_html") or "")
+    if not markup: raise Blocked("CANONICAL_ARTICLE_HTML_MISSING")
+    for claim in fact_pack.get("claims",[]):
+        if not isinstance(claim,dict): continue
+        fid=str(claim.get("fact_id") or "")
+        source_id=str(claim.get("source_id") or "")
+        source_hash=str(claim.get("evidence_text_sha256") or "")
+        if not fid or not source_id or not source_hash:
+            raise Blocked("CANONICAL_TRACE_BINDING_MISSING:"+fid)
+        existing=re.search(
+            r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*data-fact-id=["\']'+re.escape(fid)+r'["\'][^>]*>',
+            markup,re.I
+        )
+        if existing:
+            continue
+        target=re.search(
+            r'<(p|li)\b[^>]*data-fact-ids=["\'][^"\']*\b'+re.escape(fid)+r'\b[^"\']*["\'][^>]*>',
+            markup,re.I
+        )
+        if not target:
+            raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
+        trace=(
+            f'<span class="ppm-source-trace" data-fact-id="{fid}" '
+            f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
+        )
+        markup=markup[:target.end()]+trace+markup[target.end():]
+    article["body_html"]=markup
+    article["body_html_sha256"]=hashlib.sha256(markup.encode("utf-8")).hexdigest()
+    article["source_ids"]=[str(x.get("source_id") or "") for x in fact_pack.get("sources",[]) if isinstance(x,dict)]
+    ppm_item["canonical_article"]=article
+    return ppm_item
 
 def latest_products(ledger, root):
     items=ledger.get("items")
@@ -254,6 +289,7 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
             canonical_id="article:"+hashlib.sha256((item["item_id"]+"|"+article["content_sha256"]).encode()).hexdigest()[:24]
             ppm_item["canonical_article_id"]=canonical_id
             fp=canonical_fact_pack(research)
+            ppm_item=bind_canonical_article_traces(ppm_item,fp)
             ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
             export_html=bind_export_traces(html,fp)
             canonical_article=ppm_item.get("canonical_article")
