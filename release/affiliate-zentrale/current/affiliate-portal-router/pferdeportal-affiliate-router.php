@@ -33,6 +33,9 @@ final class Pferdeportal_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
     private $category_product_shared_rank_base_request_cache = array();
     private $category_product_shared_rank_base_build_count = 0;
+    private $category_product_control_base_request_cache = array();
+    private $category_product_health_request_cache = array();
+    private $category_product_image_ready_request_cache = array();
     private $ranked_campaign_candidate_index_request_cache = array();
     private $ranked_campaign_raw_records_request_cache = null;
     private $ranked_campaign_raw_target_keys_request_cache = array();
@@ -4369,8 +4372,8 @@ JS;
             $runtime_campaign = $campaign;
             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
             if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }
-            if (!$this->campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
-            if (!$this->campaign_health_allows_delivery($runtime_campaign)) { continue; }
+            if (!$this->category_product_campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
+            if (!$this->category_product_campaign_health_allows_delivery($runtime_campaign)) { continue; }
             $candidates[] = $candidate;
         }
 
@@ -4383,7 +4386,7 @@ JS;
         $image_ready = array();
         foreach ($candidates as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-            if (!is_array($campaign) || !$this->product_campaign_public_image_ready($campaign)) { continue; }
+            if (!is_array($campaign) || !$this->category_product_public_image_ready($campaign)) { continue; }
             $image_ready[] = $candidate;
         }
         return array_values($image_ready);
@@ -7432,7 +7435,7 @@ JS;
      * bereits materialisiertes Ausgabeobjekt/Kampagne noch aktiv markiert ist.
      * Freigaben überschreiben dagegen niemals technische Sicherheitsprüfungen.
      */
-    private function campaign_control_allows_delivery($campaign, $slot_type = '') {
+    private function campaign_control_base_allows_delivery($campaign) {
         if (!is_array($campaign)) { return false; }
         if (method_exists($this, 'control_emergency_stop_active') && $this->control_emergency_stop_active()) { return false; }
         if (!method_exists($this, 'control_get_decision')) { return true; }
@@ -7464,12 +7467,66 @@ JS;
             $target_gate = $this->control_target_gate($portal_key, $targets[0]);
             if (is_wp_error($target_gate)) { return false; }
         }
+        return true;
+    }
+
+    private function campaign_control_allows_delivery($campaign, $slot_type = '') {
+        if (!$this->campaign_control_base_allows_delivery($campaign)) { return false; }
+        if (!method_exists($this, 'control_get_decision')) { return true; }
+        $portal_key = method_exists($this, 'output_local_portal_key') ? sanitize_key((string) $this->output_local_portal_key()) : '';
+        if ($portal_key === '') { return true; }
         $slot_type = !empty($campaign['_ppar_runtime_normalized_slot_type']) ? (string) $slot_type : sanitize_key((string) $slot_type);
         if ($slot_type !== '' && method_exists($this, 'control_slot_gate')) {
             $slot_gate = $this->control_slot_gate($portal_key, $slot_type);
             if (is_wp_error($slot_gate)) { return false; }
         }
         return true;
+    }
+
+    private function category_product_campaign_control_allows_delivery($campaign, $slot_type) {
+        if (!$this->ranked_campaigns_request_cache_allowed()
+            || (function_exists('has_filter') && has_filter('ppar_affiliate_partner_gate_result'))) {
+            return $this->campaign_control_allows_delivery($campaign, $slot_type);
+        }
+        $post_id = absint($campaign['post_id'] ?? $campaign['_post_id'] ?? 0);
+        $campaign_id = (string) ($campaign['id'] ?? '');
+        $key = $post_id > 0 ? 'post:' . $post_id : 'id:' . $campaign_id;
+        if (!array_key_exists($key, $this->category_product_control_base_request_cache)) {
+            $this->category_product_control_base_request_cache[$key] = $this->campaign_control_base_allows_delivery($campaign);
+        }
+        if (empty($this->category_product_control_base_request_cache[$key])) { return false; }
+
+        $portal_key = method_exists($this, 'output_local_portal_key') ? sanitize_key((string) $this->output_local_portal_key()) : '';
+        if ($portal_key === '' || !method_exists($this, 'control_slot_gate')) { return true; }
+        $slot_type = sanitize_key((string) $slot_type);
+        if ($slot_type === '') { return true; }
+        $slot_gate = $this->control_slot_gate($portal_key, $slot_type);
+        return !is_wp_error($slot_gate);
+    }
+
+    private function category_product_campaign_health_allows_delivery($campaign) {
+        if (!$this->ranked_campaigns_request_cache_allowed()) {
+            return $this->campaign_health_allows_delivery($campaign);
+        }
+        $post_id = absint($campaign['post_id'] ?? $campaign['_post_id'] ?? 0);
+        $key = $post_id > 0 ? 'post:' . $post_id : 'id:' . (string)($campaign['id'] ?? '');
+        if (!array_key_exists($key, $this->category_product_health_request_cache)) {
+            $this->category_product_health_request_cache[$key] = $this->campaign_health_allows_delivery($campaign);
+        }
+        return !empty($this->category_product_health_request_cache[$key]);
+    }
+
+    private function category_product_public_image_ready($campaign) {
+        if (!$this->ranked_campaigns_request_cache_allowed()
+            || (function_exists('has_filter') && has_filter('http_request_host_is_external'))) {
+            return $this->product_campaign_public_image_ready($campaign);
+        }
+        $post_id = absint($campaign['post_id'] ?? $campaign['_post_id'] ?? 0);
+        $key = $post_id > 0 ? 'post:' . $post_id : 'id:' . (string)($campaign['id'] ?? '');
+        if (!array_key_exists($key, $this->category_product_image_ready_request_cache)) {
+            $this->category_product_image_ready_request_cache[$key] = $this->product_campaign_public_image_ready($campaign);
+        }
+        return !empty($this->category_product_image_ready_request_cache[$key]);
     }
 
     /** Shared live source gate for every public campaign delivery path. */
