@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 64,
+  "generation": 65,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -13,9 +13,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -35,8 +35,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -173,9 +173,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -195,8 +195,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -213,9 +213,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -235,8 +235,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -253,9 +253,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -275,8 +275,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -293,9 +293,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -315,8 +315,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -333,9 +333,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -355,8 +355,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -413,9 +413,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -435,8 +435,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },
@@ -493,9 +493,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-e9d5c4c44d0d0537",
-          "path": "warehouse/check/K9-CHECK-e9d5c4c44d0d0537.json",
-          "sha256": "6538af6f238ce2494e822489ae0babea2c78fd714274ce144c88076c21b634a2"
+          "job_id": "K9-CHECK-41094697ccece70f",
+          "path": "warehouse/check/K9-CHECK-41094697ccece70f.json",
+          "sha256": "95e3773c44a4f95d88050cf79a59b57115d347711c3cc05364388d650294779b"
         },
         "repair": {
           "job_id": "K9-REPAIR-77809af7c6c1f60c",
@@ -515,8 +515,8 @@
       },
       "revision": 4,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },

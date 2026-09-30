@@ -2,21 +2,21 @@
   "active_job": {
     "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
     "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
-    "job_id": "K9-REPAIR-77809af7c6c1f60c",
+    "job_id": "K9-CHECK-41094697ccece70f",
     "job_path": "runtime/CURRENT_JOB.json",
-    "runtime_entry": "runtime/CHAT_ENTRY.json",
-    "station": "repair"
+    "runtime_entry": null,
+    "station": "check"
   },
   "branch": "konzept9/greenfield-20260929",
   "chat_may_route": false,
   "concept": "K9",
   "contract": "K9_CURRENT_STATE_V3",
   "first_open_blocker": null,
-  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY",
-  "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
+  "next_action": "RUN_NATIVE_CHECK",
+  "operational_mode": "K9_NATIVE_MACHINE_CHECK",
   "orchestration_mode": "STATION_ONLY",
   "publish_allowed": false,
   "role": "SOLE_CURRENT_AUTHORITY",
-  "status": "OPEN_CHAT_WORKER_JOB",
-  "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION"
+  "status": "NATIVE_CHECK_RUNNING",
+  "worker_mode": "NATIVE_MACHINE_ONLY"
 }
