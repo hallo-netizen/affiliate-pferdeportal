@@ -23,6 +23,28 @@
           "section_id": "further_information"
         }
       ]
+    },
+    "reitplatzplaner-beratung": {
+      "portal_links": [
+        {
+          "anchor": "Weide",
+          "href": "/weide/",
+          "role": "parent_category",
+          "section_id": "criteria"
+        },
+        {
+          "anchor": "Reitplatzpflege",
+          "href": "/weide/weide-reitplatzpflege/",
+          "role": "semantic_related",
+          "section_id": "decision"
+        },
+        {
+          "anchor": "Reitplatzplaner",
+          "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+          "role": "further_information",
+          "section_id": "further_information"
+        }
+      ]
     }
   }
 }
