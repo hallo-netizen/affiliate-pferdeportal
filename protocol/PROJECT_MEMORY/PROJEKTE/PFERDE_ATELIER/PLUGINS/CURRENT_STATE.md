@@ -7,7 +7,8 @@ STATUS: REALER WORDPRESS-PLUGINSTAND 2026-09-30 NACHGEFÜHRT / AUFRÄUM- UND PER
 
 Diese Datei ist die einzige aktuelle Standzusammenfassung des PLUGINS-Büros.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- aktueller belastbarer Stand, erster offener Punkt und genau eine NEXT ACTION → diese Datei
+- `HOBBYRAUM.md` → nur temporäre Ausführungsfläche, keine eigene Status-/NEXT-ACTION-Autorität
 - vollständiger beobachteter Pluginbestand → `PLUGINREGISTER.md`
 - Update-Chronik → `UPDATEPROTOKOLL.md`
 - Update-/Pflegeregeln → `REGELWERK.md`
@@ -48,14 +49,37 @@ Arbeitsgrenze:
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
 
 - Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert und Performancepfade unverändert gebunden.
-- PSTE: real weiterhin **0.57.12** aktiv. Final geprüfter **0.57.13-Kandidat** ist bereit, aber noch **NICHT LIVE**. Kandidaten-SHA-256: `9627705af4d934b6dcde5106476459af2f3959032da9caee2a33cc5621c22345`.
+- PSTE: real weiterhin **0.57.12** aktiv. Final geprüfter **0.57.13-Kandidat** ist bereit, aber noch **NICHT LIVE**. Kandidaten-SHA-256: `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`.
 - PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht nach Quellprüfung aus; **kein Update erforderlich**.
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
-Aktuelle Plugin-NEXT-ACTION:
+ERSTER OFFENER PUNKT:
+PSTE 0.57.13 ist vollständig lokal/fresh geprüft, aber noch nicht in WordPress installiert; real bleibt PSTE 0.57.12.
+
+GENAU EINE NEXT ACTION:
 `INSTALL_PSTE_0_57_13_DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS`.
 
 Der PSTE-Kandidat ist nur Kandidat, bis WordPress-Installation und Readback bestätigt sind. Erst danach folgt Datenbankpflege; vorher keine manuelle Löschung.
+
+### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
+
+Bei der Abschlussprüfung wurde in einem früheren 0.57.13-Paket eine ungewollte Backup-Datei `includes/class-pste-sandbox-record-store.php.orig` entdeckt. Dieser Kandidat wurde **vor Installation verworfen**.
+
+Final neu gebaut und frisch geprüft:
+- ZIP SHA-256: `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`
+- Version: `0.57.13`
+- Fresh PHP-Lint: `78/78 PASS`
+- Storage Core: `22/22 PASS`
+- Maintenance + Active-Work Guards: `10/10 PASS`
+- Public Storage API: `8/8 PASS`
+- Rollback Restore: `17/17 PASS`
+- Restore Mode: `7/7 PASS`
+- Atomic Lock: `3/3 PASS`
+- PSERC-0.28.27-Bindung: `PASS`
+- Stray-Backup-Dateien `*.orig/*.bak/*~`: `0`
+- Diff gegen 0.57.12: 2 neue Storage-Dateien, 6 geänderte Runtime/Admin-Dateien, 1 entfernte ungenutzte `.orig`-Datei; Contracts/Fixtures unverändert.
+
+Nur dieser hashgebundene Kandidat darf installiert werden.
 
 ## KATEGORIE-CLOSEOUT-SYNC 2026-09-24
 
