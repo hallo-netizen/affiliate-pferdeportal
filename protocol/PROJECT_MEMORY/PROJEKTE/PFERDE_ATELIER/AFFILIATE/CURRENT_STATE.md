@@ -1,13 +1,17 @@
 # AFFILIATE – CURRENT STATE
 
-STAND: 2026-09-24
-STATUS: KATEGORIE-SCOPE CLOSED / ADCELL + OTTO-AWIN PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED
+STAND: 2026-09-30
+STATUS: CAMPUS-ROUTING / KEINE ZWEITE TECHNISCHE RELEASE- ODER NEXT-ACTION-WAHRHEIT
+
+> Für aktuellen technischen Source-/Release-/Gate-Status gilt ausschließlich Branch `affiliate-release-current` → `control/release-governance/CURRENT_RELEASE.json`.
+> Für den laufenden Plugin-/Datenbank-/Performance-Aufräumauftrag gilt ausschließlich `../PLUGINS/CURRENT_STATE.md` als operative Current-/NEXT-ACTION-Autorität.
+> Die älteren Kategorie-/ADCELL-/Providerabschnitte weiter unten sind historische/pausierte Fachkontexte und dürfen keinen neueren technischen Release- oder Plugin-Current überschreiben.
 
 ## AUTORITÄT
 
 Diese Datei ist die einzige aktuelle Campus-Standzusammenfassung des Büros AFFILIATE.
 
-- aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`
+- technische Releasearbeit / Gate-Status → ausschließlich `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`; `HOBBYRAUM.md` nur bei ausdrücklich gebundener temporärer Ausführung
 - Fehlerdetails → `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md` auf `affiliate-release-current`
 - Zielvertrag → `ZV-AFFILIATE-ADCELL-001`
 - technische Release-Autorität → Branch `affiliate-release-current`
