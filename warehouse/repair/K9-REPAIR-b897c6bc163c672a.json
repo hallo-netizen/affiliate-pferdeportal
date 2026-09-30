@@ -1,0 +1,320 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-REPAIR-b897c6bc163c672a",
+  "results": [
+    {
+      "article_product": {
+        "article_type": "FAQ",
+        "content_html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"RBU_F1\"><span class=\"ppm-source-trace\" data-fact-id=\"RBU_F1\" data-source-hash=\"6fe501b5e2dbe2acd51ecfd3498046282e810d0831a19e1383903b239bb115d3\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span>Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.</p>\n<p data-fact-ids=\"RBU_F2 RBU_F5\">Das Wasser gelangt dabei nicht über eine Bewässerung von oben auf den Platz. Je nach System wird Feuchtigkeit über einen geregelten Wasserstand oder über Tropfschläuche unter der Tretschicht eingebracht und anschließend durch Kapillarwirkung im Reitboden verteilt.</p>\n<p data-fact-ids=\"RBU_F7\">Welche Lösung passt, hängt vom vorhandenen Bodenaufbau und von der technischen Infrastruktur der Anlage ab.</p>\n</section>\n\n<section data-block=\"answer\">\n<h2>Bewässerung von unten am Reitplatz</h2>\n<p data-fact-ids=\"RBU_F1 RBU_F2\">Beim Ebbe-Flut-System wird die Feuchtigkeit nicht durch eine Beregnung von oben auf die Oberfläche gebracht. Wasser befindet sich unterhalb der Tretschicht und wird durch eine geeignete Sandschicht nach oben transportiert. Entscheidend ist dabei die Kapillarwirkung: Feuchtigkeit wandert durch die feinen Zwischenräume des Materials in Richtung Tretschicht.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F2\" data-source-hash=\"aa63e0877b646e5e12b5cdca633400b4d98ad7a7014c1410b2c0699d8358c706\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span></p>\n<p data-fact-ids=\"RBU_F3\">Die Wassermenge wird nicht dem Zufall überlassen. Ein steuerbares System hält einen festgelegten Wasserpegel. Sinkt er in trockenen Phasen, kann Wasser zugeführt werden; bei überschüssigem Regenwasser kann Wasser wieder abgelassen werden. So wird die Feuchtigkeit über den Wasserstand reguliert. Die Oberfläche muss dafür nicht von oben beregnet werden.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F3\" data-source-hash=\"e0b570a527ef053532d886ff47e906f9089697b332d3553063a4cf1b1da0813f\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span></p>\n<p data-fact-ids=\"RBU_F1 RBU_F4\">Für die Praxis bedeutet das: Die Bewässerung ist Teil des Bodenaufbaus und nicht nur ein zusätzliches Gerät am Platzrand. Beim Ebbe-Flut-Prinzip muss das Wasser im aufgebauten System gehalten werden, damit der geregelte Wasserstand und der Transport nach oben funktionieren können.</p>\n<ul data-list=\"key_answers\">\n<li data-fact-ids=\"RBU_F1\">Bewässerung von unten ist technisch möglich.</li>\n<li data-fact-ids=\"RBU_F2\">Kapillarwirkung transportiert Feuchtigkeit zur Tretschicht.</li>\n<li data-fact-ids=\"RBU_F3\">Der Wasserpegel kann automatisch geregelt werden.</li>\n</ul>\n</section>\n\n<section data-block=\"details\">\n<h2>Ebbe-Flut-Systeme für den Reitplatz</h2>\n<p data-fact-ids=\"RBU_F4\">Ein Ebbe-Flut-System arbeitet mit einem eingefassten Aufbau, der Wasser im System hält. Beim beschriebenen Aufbau wird dafür eine wasserdichte Folie über die Fläche geführt. Darauf liegen die für Wassertransport und Reitboden nötigen Schichten. Der Platz funktioniert damit als zusammenhängendes Wasser- und Bodensystem.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F4\" data-source-hash=\"955b509f13653fda88924f816d789d1767fb20eeb50945d26d0b5bc5bc7eabc1\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span></p>\n<p data-fact-ids=\"RBU_F5 RBU_F6\">Bei der Unterbodentropfbewässerung liegen dagegen Tropfschläuche unter der Tretschicht. Sie geben Wasser direkt im Unterboden ab; anschließend verteilt die Kapillarwirkung die Feuchtigkeit nach oben. Solche Systeme können in einzelne Bereiche gegliedert und getrennt angesteuert werden. Bohlmann beschreibt diese Variante für Reithallen außerdem als nachträglich einbaubar und während der Bewässerung nutzbar.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F5\" data-source-hash=\"ac8a2fc1029e2baf448142b97efcdb618cb0805377ee60931163b47621c589b1\" data-source-title=\"SRC_BOHLMANN_UNTERFLUR\"></span><span class=\"ppm-source-trace\" data-fact-id=\"RBU_F6\" data-source-hash=\"001a7c786ffb4cd8c4b758fdf6598f1a13ad7e290e4bafcd397036815a18fa7c\" data-source-title=\"SRC_BOHLMANN_UNTERFLUR\"></span></p>\n<p data-fact-ids=\"RBU_F3 RBU_F5\">Der zentrale Unterschied liegt damit in der Wasserführung. Ebbe-Flut regelt einen Wasserstand im aufgebauten System, während Tropfschläuche Wasser punktuell unterhalb der Tretschicht abgeben. Beide Varianten nutzen den Weg der Feuchtigkeit nach oben, benötigen dafür aber unterschiedliche technische Komponenten und eine passende Abstimmung auf den jeweiligen Reitboden.</p>\n<p data-fact-ids=\"RBU_F3 RBU_F6\">Auch die Steuerung unterscheidet sich. Beim Ebbe-Flut-System steht der Wasserpegel im Mittelpunkt; bei einer Unterbodentropfbewässerung können einzelne Sektionen getrennt versorgt werden. Damit lässt sich die Entscheidung nicht allein über den Begriff Unterflurbewässerung treffen, sondern nur über den konkreten technischen Aufbau.</p>\n</section>\n\n<section data-block=\"criteria\">\n<p data-fact-ids=\"RBU_F7\">Der Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> bildet den übergeordneten Rahmen. Für die technische Auswahl müssen Bodenaufbau, Wasseranschluss und Steuerung zur vorhandenen Anlage passen. Auch Wartungszugang und Wasserableitung sollten vor dem Einbau feststehen.</p>\n</section>\n\n<section data-block=\"checklist\">\n<h2>Reitplatz vor dem Einbau prüfen</h2>\n<p data-fact-ids=\"RBU_F7\">Eine Unterflurbewässerung sollte nicht allein nach dem gewünschten Komfort ausgewählt werden. Der Bodenaufbau muss mit dem vorgesehenen System zusammenpassen. Ebenso wichtig sind Wasseranschluss, verfügbarer Druck und Durchfluss sowie die Frage, wie Wartung und Steuerung später zugänglich bleiben.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F7\" data-source-hash=\"7e4e36538401f6d41309b03877ad7d85e229faa4ce1fbd8ae35beec64b39664d\" data-source-title=\"SRC_BAYWA_REITPLATZ\"></span></p>\n<p data-fact-ids=\"RBU_F8\">Beim Ebbe-Flut-System kommen weitere Anforderungen hinzu. Benötigte Anschlüsse und ein sinnvoller Weg für überschüssiges Wasser müssen bereits in der Planung berücksichtigt werden. Je nach Anlage gehören dazu Wasser, Strom und eine geeignete Möglichkeit zur Ableitung. Diese Punkte sollten geklärt sein, bevor der Bodenaufbau festgelegt wird.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F8\" data-source-hash=\"1326d66357e70520c62a9e0e7802985df4ee4c8a053ec9aac1002eec9cabd695\" data-source-title=\"SRC_RISOHORSE_FAQ\"></span></p>\n<p data-fact-ids=\"RBU_F7 RBU_F8\">Zusätzlich sollte geklärt werden, wie die Anlage später gewartet wird und wo überschüssiges Wasser hinfließen kann. Gerade diese Punkte entscheiden darüber, ob das System nicht nur eingebaut, sondern im laufenden Betrieb auch sinnvoll gesteuert und kontrolliert werden kann.</p>\n<ul data-list=\"checklist\">\n<li data-fact-ids=\"RBU_F7\">Bodenaufbau und Tretschicht prüfen.</li>\n<li data-fact-ids=\"RBU_F7\">Wasseranschluss, Druck und Durchfluss klären.</li>\n<li data-fact-ids=\"RBU_F8\">Strom und Wasserableitung einplanen.</li>\n<li data-fact-ids=\"RBU_F3 RBU_F6\">Gewünschte Steuerung vorab festlegen.</li>\n<li data-fact-ids=\"RBU_F6\">Einbau im bestehenden Platz prüfen.</li>\n</ul>\n</section>\n\n<section data-block=\"decision\">\n<p data-fact-ids=\"RBU_F5 RBU_F6\">Weitere Fragen zum Aufbau gehören in den Bereich <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatz/\">Reitplatz</a>. Welche Unterflurlösung passt, hängt vom konkreten Bestand und der geplanten Nutzung ab.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Reitplatzbewässerung kompakt vergleichen</h2>\n<p data-fact-ids=\"RBU_F2 RBU_F3 RBU_F5 RBU_F6\">Die wichtigsten Unterschiede lassen sich knapp über Wasserführung, Steuerung und Einbauform einordnen.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>System</th><th>Prinzip</th><th>Steuerung</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"RBU_F1 RBU_F2\">Ebbe-Flut</td><td data-fact-ids=\"RBU_F2\">Kapillarwirkung im Unterbau</td><td data-fact-ids=\"RBU_F3\">Wasserpegel automatisch</td></tr>\n<tr><td data-fact-ids=\"RBU_F5\">Tropfsystem</td><td data-fact-ids=\"RBU_F5\">Tropfschläuche unter Tretschicht</td><td data-fact-ids=\"RBU_F6\">Sektionen separat</td></tr>\n<tr><td data-fact-ids=\"RBU_F4\">Abdichtung</td><td data-fact-ids=\"RBU_F4\">Wasser bleibt im System</td><td data-fact-ids=\"RBU_F3\">Zuführen oder Ablassen</td></tr>\n<tr><td data-fact-ids=\"RBU_F7 RBU_F8\">Planung</td><td data-fact-ids=\"RBU_F7\">Boden und Anschlüsse</td><td data-fact-ids=\"RBU_F8\">Ableitung vorsehen</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"RBU_F1 RBU_F2 RBU_F3\">Eine Reitplatzbewässerung kann tatsächlich von unten arbeiten. Beim Ebbe-Flut-Prinzip steigt Feuchtigkeit durch Kapillarwirkung in die Tretschicht, während der Wasserpegel gesteuert wird. Unterbodentropfsysteme bringen Wasser über Leitungen unter der Tretschicht ein und nutzen ebenfalls die Kapillarwirkung.</p>\n<p data-fact-ids=\"RBU_F4 RBU_F7 RBU_F8\">Welche Variante passt, entscheidet sich am vorhandenen Bodenaufbau und an der technischen Infrastruktur. Besonders beim Ebbe-Flut-System müssen Aufbau, Anschlüsse und Wasserableitung zusammen geplant werden. Deshalb sollte die Entscheidung vor größeren Umbauten anhand der realen Platzbedingungen getroffen werden.</p>\n<p data-fact-ids=\"RBU_F5 RBU_F6\">Eine Unterbodentropfbewässerung ist technisch anders aufgebaut und kann bei bestimmten Bestandsanlagen eine Alternative sein. Die Kernfrage lautet daher nicht nur, ob Bewässerung von unten möglich ist, sondern welche Technik sich mit dem vorhandenen Reitboden sinnvoll umsetzen lässt.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"RBU_F7\">Für die konkrete Planung sind Aufbau und Anschlüsse des eigenen Platzes entscheidend. Ergänzend findest du den gebundenen Themenbereich <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatz/reitplatzbewaesserung/\">Reitplatzbewässerung</a>. Dort lässt sich die Auswahl im Zusammenhang mit weiteren Bewässerungslösungen einordnen.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+        "content_sha256": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+        "contract": "K9_ARTICLE_PRODUCT_V1",
+        "ppm_item": {
+          "article_type": "FAQ",
+          "canonical_article": {
+            "article_type": "FAQ",
+            "body_html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"RBU_F1\"><span class=\"ppm-source-trace\" data-fact-id=\"RBU_F1\" data-source-hash=\"6fe501b5e2dbe2acd51ecfd3498046282e810d0831a19e1383903b239bb115d3\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span>Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.</p>\n<p data-fact-ids=\"RBU_F2 RBU_F5\">Das Wasser gelangt dabei nicht über eine Bewässerung von oben auf den Platz. Je nach System wird Feuchtigkeit über einen geregelten Wasserstand oder über Tropfschläuche unter der Tretschicht eingebracht und anschließend durch Kapillarwirkung im Reitboden verteilt.</p>\n<p data-fact-ids=\"RBU_F7\">Welche Lösung passt, hängt vom vorhandenen Bodenaufbau und von der technischen Infrastruktur der Anlage ab.</p>\n</section>\n\n<section data-block=\"answer\">\n<h2>Bewässerung von unten am Reitplatz</h2>\n<p data-fact-ids=\"RBU_F1 RBU_F2\">Beim Ebbe-Flut-System wird die Feuchtigkeit nicht durch eine Beregnung von oben auf die Oberfläche gebracht. Wasser befindet sich unterhalb der Tretschicht und wird durch eine geeignete Sandschicht nach oben transportiert. Entscheidend ist dabei die Kapillarwirkung: Feuchtigkeit wandert durch die feinen Zwischenräume des Materials in Richtung Tretschicht.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F2\" data-source-hash=\"aa63e0877b646e5e12b5cdca633400b4d98ad7a7014c1410b2c0699d8358c706\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span></p>\n<p data-fact-ids=\"RBU_F3\">Die Wassermenge wird nicht dem Zufall überlassen. Ein steuerbares System hält einen festgelegten Wasserpegel. Sinkt er in trockenen Phasen, kann Wasser zugeführt werden; bei überschüssigem Regenwasser kann Wasser wieder abgelassen werden. So wird die Feuchtigkeit über den Wasserstand reguliert. Die Oberfläche muss dafür nicht von oben beregnet werden.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F3\" data-source-hash=\"e0b570a527ef053532d886ff47e906f9089697b332d3553063a4cf1b1da0813f\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span></p>\n<p data-fact-ids=\"RBU_F1 RBU_F4\">Für die Praxis bedeutet das: Die Bewässerung ist Teil des Bodenaufbaus und nicht nur ein zusätzliches Gerät am Platzrand. Beim Ebbe-Flut-Prinzip muss das Wasser im aufgebauten System gehalten werden, damit der geregelte Wasserstand und der Transport nach oben funktionieren können.</p>\n<ul data-list=\"key_answers\">\n<li data-fact-ids=\"RBU_F1\">Bewässerung von unten ist technisch möglich.</li>\n<li data-fact-ids=\"RBU_F2\">Kapillarwirkung transportiert Feuchtigkeit zur Tretschicht.</li>\n<li data-fact-ids=\"RBU_F3\">Der Wasserpegel kann automatisch geregelt werden.</li>\n</ul>\n</section>\n\n<section data-block=\"details\">\n<h2>Ebbe-Flut-Systeme für den Reitplatz</h2>\n<p data-fact-ids=\"RBU_F4\">Ein Ebbe-Flut-System arbeitet mit einem eingefassten Aufbau, der Wasser im System hält. Beim beschriebenen Aufbau wird dafür eine wasserdichte Folie über die Fläche geführt. Darauf liegen die für Wassertransport und Reitboden nötigen Schichten. Der Platz funktioniert damit als zusammenhängendes Wasser- und Bodensystem.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F4\" data-source-hash=\"955b509f13653fda88924f816d789d1767fb20eeb50945d26d0b5bc5bc7eabc1\" data-source-title=\"SRC_OTTO_EBBEFLUT\"></span></p>\n<p data-fact-ids=\"RBU_F5 RBU_F6\">Bei der Unterbodentropfbewässerung liegen dagegen Tropfschläuche unter der Tretschicht. Sie geben Wasser direkt im Unterboden ab; anschließend verteilt die Kapillarwirkung die Feuchtigkeit nach oben. Solche Systeme können in einzelne Bereiche gegliedert und getrennt angesteuert werden. Bohlmann beschreibt diese Variante für Reithallen außerdem als nachträglich einbaubar und während der Bewässerung nutzbar.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F5\" data-source-hash=\"ac8a2fc1029e2baf448142b97efcdb618cb0805377ee60931163b47621c589b1\" data-source-title=\"SRC_BOHLMANN_UNTERFLUR\"></span><span class=\"ppm-source-trace\" data-fact-id=\"RBU_F6\" data-source-hash=\"001a7c786ffb4cd8c4b758fdf6598f1a13ad7e290e4bafcd397036815a18fa7c\" data-source-title=\"SRC_BOHLMANN_UNTERFLUR\"></span></p>\n<p data-fact-ids=\"RBU_F3 RBU_F5\">Der zentrale Unterschied liegt damit in der Wasserführung. Ebbe-Flut regelt einen Wasserstand im aufgebauten System, während Tropfschläuche Wasser punktuell unterhalb der Tretschicht abgeben. Beide Varianten nutzen den Weg der Feuchtigkeit nach oben, benötigen dafür aber unterschiedliche technische Komponenten und eine passende Abstimmung auf den jeweiligen Reitboden.</p>\n<p data-fact-ids=\"RBU_F3 RBU_F6\">Auch die Steuerung unterscheidet sich. Beim Ebbe-Flut-System steht der Wasserpegel im Mittelpunkt; bei einer Unterbodentropfbewässerung können einzelne Sektionen getrennt versorgt werden. Damit lässt sich die Entscheidung nicht allein über den Begriff Unterflurbewässerung treffen, sondern nur über den konkreten technischen Aufbau.</p>\n</section>\n\n<section data-block=\"criteria\">\n<p data-fact-ids=\"RBU_F7\">Der Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> bildet den übergeordneten Rahmen. Für die technische Auswahl müssen Bodenaufbau, Wasseranschluss und Steuerung zur vorhandenen Anlage passen. Auch Wartungszugang und Wasserableitung sollten vor dem Einbau feststehen.</p>\n</section>\n\n<section data-block=\"checklist\">\n<h2>Reitplatz vor dem Einbau prüfen</h2>\n<p data-fact-ids=\"RBU_F7\">Eine Unterflurbewässerung sollte nicht allein nach dem gewünschten Komfort ausgewählt werden. Der Bodenaufbau muss mit dem vorgesehenen System zusammenpassen. Ebenso wichtig sind Wasseranschluss, verfügbarer Druck und Durchfluss sowie die Frage, wie Wartung und Steuerung später zugänglich bleiben.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F7\" data-source-hash=\"7e4e36538401f6d41309b03877ad7d85e229faa4ce1fbd8ae35beec64b39664d\" data-source-title=\"SRC_BAYWA_REITPLATZ\"></span></p>\n<p data-fact-ids=\"RBU_F8\">Beim Ebbe-Flut-System kommen weitere Anforderungen hinzu. Benötigte Anschlüsse und ein sinnvoller Weg für überschüssiges Wasser müssen bereits in der Planung berücksichtigt werden. Je nach Anlage gehören dazu Wasser, Strom und eine geeignete Möglichkeit zur Ableitung. Diese Punkte sollten geklärt sein, bevor der Bodenaufbau festgelegt wird.<span class=\"ppm-source-trace\" data-fact-id=\"RBU_F8\" data-source-hash=\"1326d66357e70520c62a9e0e7802985df4ee4c8a053ec9aac1002eec9cabd695\" data-source-title=\"SRC_RISOHORSE_FAQ\"></span></p>\n<p data-fact-ids=\"RBU_F7 RBU_F8\">Zusätzlich sollte geklärt werden, wie die Anlage später gewartet wird und wo überschüssiges Wasser hinfließen kann. Gerade diese Punkte entscheiden darüber, ob das System nicht nur eingebaut, sondern im laufenden Betrieb auch sinnvoll gesteuert und kontrolliert werden kann.</p>\n<ul data-list=\"checklist\">\n<li data-fact-ids=\"RBU_F7\">Bodenaufbau und Tretschicht prüfen.</li>\n<li data-fact-ids=\"RBU_F7\">Wasseranschluss, Druck und Durchfluss klären.</li>\n<li data-fact-ids=\"RBU_F8\">Strom und Wasserableitung einplanen.</li>\n<li data-fact-ids=\"RBU_F3 RBU_F6\">Gewünschte Steuerung vorab festlegen.</li>\n<li data-fact-ids=\"RBU_F6\">Einbau im bestehenden Platz prüfen.</li>\n</ul>\n</section>\n\n<section data-block=\"decision\">\n<p data-fact-ids=\"RBU_F5 RBU_F6\">Weitere Fragen zum Aufbau gehören in den Bereich <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatz/\">Reitplatz</a>. Welche Unterflurlösung passt, hängt vom konkreten Bestand und der geplanten Nutzung ab.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Reitplatzbewässerung kompakt vergleichen</h2>\n<p data-fact-ids=\"RBU_F2 RBU_F3 RBU_F5 RBU_F6\">Die wichtigsten Unterschiede lassen sich knapp über Wasserführung, Steuerung und Einbauform einordnen.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>System</th><th>Prinzip</th><th>Steuerung</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"RBU_F1 RBU_F2\">Ebbe-Flut</td><td data-fact-ids=\"RBU_F2\">Kapillarwirkung im Unterbau</td><td data-fact-ids=\"RBU_F3\">Wasserpegel automatisch</td></tr>\n<tr><td data-fact-ids=\"RBU_F5\">Tropfsystem</td><td data-fact-ids=\"RBU_F5\">Tropfschläuche unter Tretschicht</td><td data-fact-ids=\"RBU_F6\">Sektionen separat</td></tr>\n<tr><td data-fact-ids=\"RBU_F4\">Abdichtung</td><td data-fact-ids=\"RBU_F4\">Wasser bleibt im System</td><td data-fact-ids=\"RBU_F3\">Zuführen oder Ablassen</td></tr>\n<tr><td data-fact-ids=\"RBU_F7 RBU_F8\">Planung</td><td data-fact-ids=\"RBU_F7\">Boden und Anschlüsse</td><td data-fact-ids=\"RBU_F8\">Ableitung vorsehen</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"RBU_F1 RBU_F2 RBU_F3\">Eine Reitplatzbewässerung kann tatsächlich von unten arbeiten. Beim Ebbe-Flut-Prinzip steigt Feuchtigkeit durch Kapillarwirkung in die Tretschicht, während der Wasserpegel gesteuert wird. Unterbodentropfsysteme bringen Wasser über Leitungen unter der Tretschicht ein und nutzen ebenfalls die Kapillarwirkung.</p>\n<p data-fact-ids=\"RBU_F4 RBU_F7 RBU_F8\">Welche Variante passt, entscheidet sich am vorhandenen Bodenaufbau und an der technischen Infrastruktur. Besonders beim Ebbe-Flut-System müssen Aufbau, Anschlüsse und Wasserableitung zusammen geplant werden. Deshalb sollte die Entscheidung vor größeren Umbauten anhand der realen Platzbedingungen getroffen werden.</p>\n<p data-fact-ids=\"RBU_F5 RBU_F6\">Eine Unterbodentropfbewässerung ist technisch anders aufgebaut und kann bei bestimmten Bestandsanlagen eine Alternative sein. Die Kernfrage lautet daher nicht nur, ob Bewässerung von unten möglich ist, sondern welche Technik sich mit dem vorhandenen Reitboden sinnvoll umsetzen lässt.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"RBU_F7\">Für die konkrete Planung sind Aufbau und Anschlüsse des eigenen Platzes entscheidend. Ergänzend findest du den gebundenen Themenbereich <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatz/reitplatzbewaesserung/\">Reitplatzbewässerung</a>. Dort lässt sich die Auswahl im Zusammenhang mit weiteren Bewässerungslösungen einordnen.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+            "body_html_sha256": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+            "body_text": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet. Das Wasser gelangt dabei nicht über eine Bewässerung von oben auf den Platz. Je nach System wird Feuchtigkeit über einen geregelten Wasserstand oder über Tropfschläuche unter der Tretschicht eingebracht und anschließend durch Kapillarwirkung im Reitboden verteilt. Welche Lösung passt, hängt vom vorhandenen Bodenaufbau und von der technischen Infrastruktur der Anlage ab. Bewässerung von unten am Reitplatz Beim Ebbe-Flut-System wird die Feuchtigkeit nicht durch eine Beregnung von oben auf die Oberfläche gebracht. Wasser befindet sich unterhalb der Tretschicht und wird durch eine geeignete Sandschicht nach oben transportiert. Entscheidend ist dabei die Kapillarwirkung: Feuchtigkeit wandert durch die feinen Zwischenräume des Materials in Richtung Tretschicht. Die Wassermenge wird nicht dem Zufall überlassen. Ein steuerbares System hält einen festgelegten Wasserpegel. Sinkt er in trockenen Phasen, kann Wasser zugeführt werden; bei überschüssigem Regenwasser kann Wasser wieder abgelassen werden. So wird die Feuchtigkeit über den Wasserstand reguliert. Die Oberfläche muss dafür nicht von oben beregnet werden. Für die Praxis bedeutet das: Die Bewässerung ist Teil des Bodenaufbaus und nicht nur ein zusätzliches Gerät am Platzrand. Beim Ebbe-Flut-Prinzip muss das Wasser im aufgebauten System gehalten werden, damit der geregelte Wasserstand und der Transport nach oben funktionieren können. Bewässerung von unten ist technisch möglich. Kapillarwirkung transportiert Feuchtigkeit zur Tretschicht. Der Wasserpegel kann automatisch geregelt werden. Ebbe-Flut-Systeme für den Reitplatz Ein Ebbe-Flut-System arbeitet mit einem eingefassten Aufbau, der Wasser im System hält. Beim beschriebenen Aufbau wird dafür eine wasserdichte Folie über die Fläche geführt. Darauf liegen die für Wassertransport und Reitboden nötigen Schichten. Der Platz funktioniert damit als zusammenhängendes Wasser- und Bodensystem. Bei der Unterbodentropfbewässerung liegen dagegen Tropfschläuche unter der Tretschicht. Sie geben Wasser direkt im Unterboden ab; anschließend verteilt die Kapillarwirkung die Feuchtigkeit nach oben. Solche Systeme können in einzelne Bereiche gegliedert und getrennt angesteuert werden. Bohlmann beschreibt diese Variante für Reithallen außerdem als nachträglich einbaubar und während der Bewässerung nutzbar. Der zentrale Unterschied liegt damit in der Wasserführung. Ebbe-Flut regelt einen Wasserstand im aufgebauten System, während Tropfschläuche Wasser punktuell unterhalb der Tretschicht abgeben. Beide Varianten nutzen den Weg der Feuchtigkeit nach oben, benötigen dafür aber unterschiedliche technische Komponenten und eine passende Abstimmung auf den jeweiligen Reitboden. Auch die Steuerung unterscheidet sich. Beim Ebbe-Flut-System steht der Wasserpegel im Mittelpunkt; bei einer Unterbodentropfbewässerung können einzelne Sektionen getrennt versorgt werden. Damit lässt sich die Entscheidung nicht allein über den Begriff Unterflurbewässerung treffen, sondern nur über den konkreten technischen Aufbau. Der Bereich Weide bildet den übergeordneten Rahmen. Für die technische Auswahl müssen Bodenaufbau, Wasseranschluss und Steuerung zur vorhandenen Anlage passen. Auch Wartungszugang und Wasserableitung sollten vor dem Einbau feststehen. Reitplatz vor dem Einbau prüfen Eine Unterflurbewässerung sollte nicht allein nach dem gewünschten Komfort ausgewählt werden. Der Bodenaufbau muss mit dem vorgesehenen System zusammenpassen. Ebenso wichtig sind Wasseranschluss, verfügbarer Druck und Durchfluss sowie die Frage, wie Wartung und Steuerung später zugänglich bleiben. Beim Ebbe-Flut-System kommen weitere Anforderungen hinzu. Benötigte Anschlüsse und ein sinnvoller Weg für überschüssiges Wasser müssen bereits in der Planung berücksichtigt werden. Je nach Anlage gehören dazu Wasser, Strom und eine geeignete Möglichkeit zur Ableitung. Diese Punkte sollten geklärt sein, bevor der Bodenaufbau festgelegt wird. Zusätzlich sollte geklärt werden, wie die Anlage später gewartet wird und wo überschüssiges Wasser hinfließen kann. Gerade diese Punkte entscheiden darüber, ob das System nicht nur eingebaut, sondern im laufenden Betrieb auch sinnvoll gesteuert und kontrolliert werden kann. Bodenaufbau und Tretschicht prüfen. Wasseranschluss, Druck und Durchfluss klären. Strom und Wasserableitung einplanen. Gewünschte Steuerung vorab festlegen. Einbau im bestehenden Platz prüfen. Weitere Fragen zum Aufbau gehören in den Bereich Reitplatz . Welche Unterflurlösung passt, hängt vom konkreten Bestand und der geplanten Nutzung ab. Reitplatzbewässerung kompakt vergleichen Die wichtigsten Unterschiede lassen sich knapp über Wasserführung, Steuerung und Einbauform einordnen. System Prinzip Steuerung Ebbe-Flut Kapillarwirkung im Unterbau Wasserpegel automatisch Tropfsystem Tropfschläuche unter Tretschicht Sektionen separat Abdichtung Wasser bleibt im System Zuführen oder Ablassen Planung Boden und Anschlüsse Ableitung vorsehen Fazit Eine Reitplatzbewässerung kann tatsächlich von unten arbeiten. Beim Ebbe-Flut-Prinzip steigt Feuchtigkeit durch Kapillarwirkung in die Tretschicht, während der Wasserpegel gesteuert wird. Unterbodentropfsysteme bringen Wasser über Leitungen unter der Tretschicht ein und nutzen ebenfalls die Kapillarwirkung. Welche Variante passt, entscheidet sich am vorhandenen Bodenaufbau und an der technischen Infrastruktur. Besonders beim Ebbe-Flut-System müssen Aufbau, Anschlüsse und Wasserableitung zusammen geplant werden. Deshalb sollte die Entscheidung vor größeren Umbauten anhand der realen Platzbedingungen getroffen werden. Eine Unterbodentropfbewässerung ist technisch anders aufgebaut und kann bei bestimmten Bestandsanlagen eine Alternative sein. Die Kernfrage lautet daher nicht nur, ob Bewässerung von unten möglich ist, sondern welche Technik sich mit dem vorhandenen Reitboden sinnvoll umsetzen lässt. Weiterführende Informationen Für die konkrete Planung sind Aufbau und Anschlüsse des eigenen Platzes entscheidend. Ergänzend findest du den gebundenen Themenbereich Reitplatzbewässerung . Dort lässt sich die Auswahl im Zusammenhang mit weiteren Bewässerungslösungen einordnen. Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+            "body_text_sha256": "94b0f8acabe664321503b3cea406640d1b8a5799f87f67f72a64a306dfbaa47a",
+            "claim_ids": [
+              "RBU_F1",
+              "RBU_F2",
+              "RBU_F3",
+              "RBU_F4",
+              "RBU_F5",
+              "RBU_F6",
+              "RBU_F7",
+              "RBU_F8"
+            ],
+            "content_plan_hash": "d3bd7e590e40e72bbf7443194eb55777540cf66c28891902e2999825ea14d1b9",
+            "fact_pack_hash": "fc91f7b75bf3c0aa38536abfed9584ee01d1179883272c7d5551cb8b794fa9c7",
+            "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+            "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+            "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+            "gold_reference_metrics": {
+              "h2_count": 5,
+              "paragraph_count": 31,
+              "table_body_row_count": 8,
+              "visible_link_count": 2,
+              "word_count": 1134
+            },
+            "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+            "links": [
+              {
+                "active": true,
+                "anchor": "Weide",
+                "href": "/weide/",
+                "reason": "Maschinell gebundener Portal-Hauptbereich",
+                "role": "parent_category",
+                "section_id": "criteria",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Reitplatz",
+                "href": "/weide/weide-reitplatz/",
+                "reason": "Maschinell gebundener Portal-Bereich",
+                "role": "semantic_related",
+                "section_id": "decision",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Reitplatzbewässerung",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+                "reason": "Maschinell gebundene Portal-Produktseite",
+                "role": "further_information",
+                "section_id": "further_information",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              }
+            ],
+            "local_candidate_metrics": {
+              "h2_count": 6,
+              "paragraph_count": 21,
+              "table_body_row_count": 4,
+              "visible_link_count": 3,
+              "word_count": 800
+            },
+            "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+            "order_id": "k9-530835c3",
+            "skeleton_hash": "4e65a7953af9919c61ebc512d5358555bac22a8448cb8d1393f872acf95e3441",
+            "slug": "ist-eine-reitplatzbew-sserung-von-unten-m-glich",
+            "source_ids": [
+              "SRC_OTTO_EBBEFLUT",
+              "SRC_BOHLMANN_UNTERFLUR",
+              "SRC_RISOHORSE_FAQ",
+              "SRC_BAYWA_REITPLATZ"
+            ],
+            "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+          },
+          "contract_hashes": [],
+          "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+          "plan_item_key": "k9-916a0af7de798127",
+          "quality_binding": {
+            "ai_disclosure_required": true,
+            "contract": "content_structure_language_binding_v2",
+            "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+            "expected_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Weide > Reitplatz > Reitplatzbewässerung > FAQ Reitplatzbewässerung",
+              "name": "FAQ Reitplatzbewässerung",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "reitplatzbewaesserung-faq",
+              "taxonomy": "category"
+            },
+            "faq_direct_answer": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+            "intent_terms": [
+              "Ist eine Reitplatzbewässerung von unten möglich",
+              "Reitplatzbewässerung",
+              "Reitplatz",
+              "Weide"
+            ],
+            "internal_test_marker": "LT916A0AF7DE79",
+            "language_evidence": {},
+            "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+            "link_bindings": [
+              {
+                "active": true,
+                "anchor": "Weide",
+                "href": "/weide/",
+                "reason": "Maschinell gebundener Portal-Hauptbereich",
+                "role": "parent_category",
+                "section_id": "criteria",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Reitplatz",
+                "href": "/weide/weide-reitplatz/",
+                "reason": "Maschinell gebundener Portal-Bereich",
+                "role": "semantic_related",
+                "section_id": "decision",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Reitplatzbewässerung",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+                "reason": "Maschinell gebundene Portal-Produktseite",
+                "role": "further_information",
+                "section_id": "further_information",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              }
+            ],
+            "minimum_word_count": 750,
+            "portal_link_registry": {
+              "contract": "portal_link_registry_snapshot_v2",
+              "entries": [
+                {
+                  "active": true,
+                  "anchor": "Weide",
+                  "href": "/weide/",
+                  "reason": "Maschinell gebundener Portal-Hauptbereich",
+                  "role": "parent_category",
+                  "section_id": "criteria",
+                  "target_status": "publish",
+                  "target_type": "portal_route"
+                },
+                {
+                  "active": true,
+                  "anchor": "Reitplatz",
+                  "href": "/weide/weide-reitplatz/",
+                  "reason": "Maschinell gebundener Portal-Bereich",
+                  "role": "semantic_related",
+                  "section_id": "decision",
+                  "target_status": "publish",
+                  "target_type": "portal_route"
+                },
+                {
+                  "active": true,
+                  "anchor": "Reitplatzbewässerung",
+                  "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+                  "reason": "Maschinell gebundene Portal-Produktseite",
+                  "role": "further_information",
+                  "section_id": "further_information",
+                  "target_status": "publish",
+                  "target_type": "portal_route"
+                }
+              ],
+              "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+            },
+            "portal_link_registry_hash": "b4dac0c64e08c171229080de1365d0889c3b96eeb5e125b1e8047fda0b0a06d7",
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Ist eine Reitplatzbewässerung von unten möglich und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "type_meta": {
+              "primary_question": "Ist eine Reitplatzbewässerung von unten möglich?"
+            },
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Weide > Reitplatz > Reitplatzbewässerung > FAQ Reitplatzbewässerung",
+              "name": "FAQ Reitplatzbewässerung",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "reitplatzbewaesserung-faq",
+              "taxonomy": "category"
+            },
+            "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+          },
+          "quality_binding_hash": "9baaf4374eede301931fbc31abffe4373fd4abcbb4f3a80938615058f7813b0e",
+          "runtime_order": {
+            "allowed_fact_ids": [
+              "RBU_F1",
+              "RBU_F2",
+              "RBU_F3",
+              "RBU_F4",
+              "RBU_F5",
+              "RBU_F6",
+              "RBU_F7",
+              "RBU_F8"
+            ],
+            "answer": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+            "article_type": "FAQ",
+            "conclusion": "Fazit Eine Reitplatzbewässerung kann tatsächlich von unten arbeiten. Beim Ebbe-Flut-Prinzip steigt Feuchtigkeit durch Kapillarwirkung in die Tretschicht, während der Wasserpegel gesteuert wird. Unterbodentropfsysteme bringen Wasser über Leitungen unter der Tretschicht ein und nutzen ebenfalls die Kapillarwirkung. Welche Variante passt, entscheidet sich am vorhandenen Bodenaufbau und an der technischen Infrastruktur. Besonders beim Ebbe-Flut-System müssen Aufbau, Anschlüsse und Wasserableitung zusammen geplant werden. Deshalb sollte die Entscheidung vor größeren Umbauten anhand der realen Platzbedingungen getroffen werden. Eine Unterbodentropfbewässerung ist technisch anders aufgebaut und kann bei bestimmten Bestandsanlagen eine Alternative sein. Die Kernfrage lautet daher nicht nur, ob Bewässerung von unten möglich ist, sondern welche Technik sich mit dem vorhandenen Reitboden sinnvoll umsetzen lässt.",
+            "domain": "pferdeportal",
+            "fact_pack_hash": "fc91f7b75bf3c0aa38536abfed9584ee01d1179883272c7d5551cb8b794fa9c7",
+            "faq_answer": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+            "faq_question": "Ist eine Reitplatzbewässerung von unten möglich?",
+            "lead": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+            "links": [
+              {
+                "active": true,
+                "anchor": "Weide",
+                "href": "/weide/",
+                "reason": "Maschinell gebundener Portal-Hauptbereich",
+                "role": "parent_category",
+                "section_id": "criteria",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Reitplatz",
+                "href": "/weide/weide-reitplatz/",
+                "reason": "Maschinell gebundener Portal-Bereich",
+                "role": "semantic_related",
+                "section_id": "decision",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              },
+              {
+                "active": true,
+                "anchor": "Reitplatzbewässerung",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+                "reason": "Maschinell gebundene Portal-Produktseite",
+                "role": "further_information",
+                "section_id": "further_information",
+                "target_status": "publish",
+                "target_type": "portal_route"
+              }
+            ],
+            "order_id": "k9-530835c3",
+            "primary_question": "Ist eine Reitplatzbewässerung von unten möglich?",
+            "question": "Ist eine Reitplatzbewässerung von unten möglich?",
+            "required_sections": [
+              "Fazit",
+              "Weiterführende Informationen"
+            ],
+            "section_fact_ids": [
+              "RBU_F1",
+              "RBU_F2",
+              "RBU_F3",
+              "RBU_F4",
+              "RBU_F5",
+              "RBU_F6",
+              "RBU_F7",
+              "RBU_F8"
+            ],
+            "slug": "ist-eine-reitplatzbew-sserung-von-unten-m-glich",
+            "subject_label": "Ist eine Reitplatzbewässerung von unten möglich",
+            "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+            "summary": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+            "table_focus": [
+              "RBU_F1",
+              "RBU_F2",
+              "RBU_F3",
+              "RBU_F4"
+            ],
+            "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+          },
+          "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+          "source_hashes": [],
+          "source_order_id": "k9-530835c3",
+          "source_snapshot_id": "k9-reitplatzbewaesserung-faq-63328768e9ed161fdfeb14c1",
+          "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+          "three_type_local_binding": {
+            "expected_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Weide > Reitplatz > Reitplatzbewässerung > FAQ Reitplatzbewässerung",
+              "name": "FAQ Reitplatzbewässerung",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "reitplatzbewaesserung-faq",
+              "taxonomy": "category"
+            },
+            "semantic_keywords": [
+              "Ist eine Reitplatzbewässerung von unten möglich",
+              "Ebbe-Flut-System oder Unterbodentropfbewässerung",
+              "vorhandener Bodenaufbau und notwendiger Systemaufbau",
+              "Wasserstand beziehungsweise Zonensteuerung",
+              "Wasser-, Strom- und Entwässerungsanschlüsse",
+              "Nachrüstbarkeit und Nutzung während der Bewässerung"
+            ],
+            "wordpress_runtime_term_id_required_later": true,
+            "wordpress_runtime_validation_performed_now": false
+          },
+          "topic": "Ist eine Reitplatzbewässerung von unten möglich?"
+        },
+        "product_sha256": "85a1c8bc5150992072375a32d2df628336fdbbd7162d93fc073d36209c80bede",
+        "research_product_sha256": "347439dfb3c17ae675d1158200b62837e89bb9bc12f9f27f00e5915d47e51666",
+        "title": "Ist eine Reitplatzbewässerung von unten möglich?",
+        "writing_rules_coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+        "writing_rules_sha256": "b1c66fa5d872742cb2461f6653001de862a9d74531fad25d1910a50d6094c286"
+      },
+      "item_id": "k9-6b233ed9774bd3dd530835c3"
+    }
+  ],
+  "station": "repair"
+}
