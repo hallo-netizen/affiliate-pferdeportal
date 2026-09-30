@@ -13,6 +13,13 @@ if (!defined('ABSPATH')) { exit; }
  */
 trait PPAR_Idealo_Trait {
     /**
+     * V6.72.170: request-local cache for the final exact-GTIN candidate pool.
+     * Keyed by GTIN + current context + slot, so repeated rendering of the same
+     * product card cannot redo provider/source work in one request.
+     */
+    private $multiprovider_exact_gtin_pool_request_cache = array();
+
+    /**
      * V6.72.160 performance-only: request-local exact-GTIN index for combined
      * product cards. It changes only the candidate search order: the same exact
      * GTIN condition that previously ran last now narrows the pool before the
@@ -1042,7 +1049,7 @@ trait PPAR_Idealo_Trait {
      * preselection; every historical delivery/relevance/control/health gate still
      * executes for the resulting candidates.
      */
-    private function multiprovider_exact_gtin_candidate_pool($wanted_gtins) {
+    private function multiprovider_exact_gtin_candidate_pool($wanted_gtins, $context = array(), $slot_type = '') {
         $wanted_gtins=$this->idealo_normalize_gtins_from_values((array)$wanted_gtins);
         if (!$wanted_gtins) { return array(); }
 
@@ -1056,20 +1063,35 @@ trait PPAR_Idealo_Trait {
                 : array();
         }
 
-        // V6.72.169: public exact-offer lookup reuses the same cheap raw campaign
-        // snapshot/index as normal slot ranking. idealo and OTTO/Awin identities
-        // are already stored in campaign data; eBay identities are added by a
-        // targeted source lookup for only the requested GTIN(s). No full
-        // get_campaigns() normalization pass is allowed in this hot path.
         if (!method_exists($this,'ranked_campaign_posts_snapshot')
             || !method_exists($this,'ranked_campaign_candidate_index')
             || !method_exists($this,'ranked_campaign_from_post_cached')) {
             return array();
         }
 
+        $context=is_array($context)?$context:array();
+        $slot_type=sanitize_key((string)$slot_type);
+        $cache_context=array(
+            'gtins'=>$wanted_gtins,
+            'slot'=>$slot_type,
+            'post_id'=>absint($context['post_id']??0),
+            'post_type'=>sanitize_key((string)($context['post_type']??'')),
+            'primary_slug'=>sanitize_key((string)($context['primary_slug']??'')),
+            'slugs'=>array_values((array)($context['slugs']??array())),
+            'term_ids'=>array_map('intval',(array)($context['term_ids']??array())),
+            'direct_term_slugs'=>array_values((array)($context['direct_term_slugs']??array())),
+            'semantic_primary_target_key'=>(string)($context['semantic_primary_target_key']??''),
+            'semantic_ancestor_target_keys'=>array_values((array)($context['semantic_ancestor_target_keys']??array())),
+        );
+        $cache_key=hash('sha256',wp_json_encode($cache_context,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+        if (array_key_exists($cache_key,$this->multiprovider_exact_gtin_pool_request_cache)) {
+            return $this->multiprovider_exact_gtin_pool_request_cache[$cache_key];
+        }
+
         $posts=$this->ranked_campaign_posts_snapshot();
         $positions=array();
 
+        // idealo / Awin-OTTO / already refreshed eBay campaigns: exact raw index.
         $exact_index=$this->ranked_campaign_candidate_index('exact');
         foreach ($wanted_gtins as $gtin) {
             $key='GTIN:'.(string)$gtin;
@@ -1078,28 +1100,43 @@ trait PPAR_Idealo_Trait {
             }
         }
 
-        // eBay BUSINESS historically derives GTIN from its verified source
-        // payload instead of persisting it in ppar_campaign_data. Preserve that
-        // exact cross-provider behavior with a requested-GTIN lookup only.
-        if (method_exists($this,'ebay_campaign_post_ids_for_exact_gtins')) {
-            $ebay_post_ids=$this->ebay_campaign_post_ids_for_exact_gtins($wanted_gtins);
-            if ($ebay_post_ids) {
-                $position_by_post=array();
-                foreach ($posts as $position=>$post) {
-                    if (is_object($post) && !empty($post->ID)) {
-                        $position_by_post[absint($post->ID)]=(int)$position;
-                    }
+        // Existing eBay campaigns created before GTIN persistence do not yet
+        // appear in the generic exact index. Never search their complete source
+        // table by payload text. Reuse the normal page/slot candidate preselection,
+        // then batch-load source rows only for those few surviving eBay candidates.
+        $ebay_candidates=array();
+        if (method_exists($this,'ranked_campaign_candidate_pool')) {
+            foreach ($this->ranked_campaign_candidate_pool($slot_type,'product','',false,array(),$context) as $candidate) {
+                if (!is_array($candidate)
+                    || sanitize_key((string)($candidate['network']??''))!=='ebay'
+                    || empty($candidate['active'])) { continue; }
+                $ebay_candidates[]=$candidate;
+            }
+        }
+        if ($ebay_candidates && method_exists($this,'ebay_prime_business_campaign_source_row_cache_for_campaigns')) {
+            $this->ebay_prime_business_campaign_source_row_cache_for_campaigns($ebay_candidates);
+        }
+        if ($ebay_candidates) {
+            $position_by_post=array();
+            foreach ($posts as $position=>$post) {
+                if (is_object($post) && !empty($post->ID)) {
+                    $position_by_post[absint($post->ID)]=(int)$position;
                 }
-                foreach ($ebay_post_ids as $post_id) {
-                    $post_id=absint($post_id);
-                    if ($post_id>0 && isset($position_by_post[$post_id])) {
-                        $positions[$position_by_post[$post_id]]=true;
-                    }
+            }
+            foreach ($ebay_candidates as $candidate) {
+                $candidate_gtins=$this->multiprovider_campaign_gtins($candidate);
+                if (!$candidate_gtins || !array_intersect($wanted_gtins,$candidate_gtins)) { continue; }
+                $post_id=absint($candidate['post_id']??0);
+                if ($post_id>0 && isset($position_by_post[$post_id])) {
+                    $positions[$position_by_post[$post_id]]=true;
                 }
             }
         }
 
-        if (!$positions) { return array(); }
+        if (!$positions) {
+            $this->multiprovider_exact_gtin_pool_request_cache[$cache_key]=array();
+            return array();
+        }
         ksort($positions,SORT_NUMERIC);
 
         $out=array();
@@ -1112,13 +1149,13 @@ trait PPAR_Idealo_Trait {
                 : sanitize_key((string)($candidate['creative_type']??''));
             if ($creative_type!=='product') { continue; }
 
-            // Targeted indexes are only preselection. Keep the historical exact
-            // identity check authoritative before returning a candidate.
+            // Exact identity remains authoritative after preselection.
             $candidate_gtins=$this->multiprovider_campaign_gtins($candidate);
             if (!array_intersect($wanted_gtins,$candidate_gtins)) { continue; }
             $out[]=$candidate;
         }
-        return array_values($out);
+        $this->multiprovider_exact_gtin_pool_request_cache[$cache_key]=array_values($out);
+        return $this->multiprovider_exact_gtin_pool_request_cache[$cache_key];
     }
 
     /**
@@ -1243,7 +1280,7 @@ trait PPAR_Idealo_Trait {
         $base_gtins=$this->multiprovider_campaign_gtins($campaign);
         if (!$base_gtins) { return $current_url!==''?array($base):array(); }
         $offers=array();
-        foreach ($this->multiprovider_exact_gtin_candidate_pool($base_gtins) as $candidate) {
+        foreach ($this->multiprovider_exact_gtin_candidate_pool($base_gtins,$context,$slot_type) as $candidate) {
             if (!is_array($candidate)||empty($candidate['active'])||sanitize_key((string)($candidate['creative_type']??''))!=='product'||!$this->campaign_is_complete($candidate)||!$this->campaign_program_allows_delivery($candidate)||!$this->campaign_source_allows_delivery($candidate)||!$this->campaign_slot_allowed($candidate,$slot_type)) { continue; }
             // Defensive parity check: the request index only narrows the pool;
             // the historical exact-GTIN condition remains authoritative.
