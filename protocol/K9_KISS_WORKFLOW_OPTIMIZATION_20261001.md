@@ -60,3 +60,13 @@ The already completed 16-article STOP was still carrying the obsolete next actio
 - code/supervisor/repair authority: denied;
 - all other actions: denied;
 - exact final file/hash/article count retained unchanged.
+
+## Green evidence
+- KISS duplicate-loop removal commit: ebc3cc304025e28d6fc46a6420f1e2d5537497f5 — selftest run 36787389250 SUCCESS.
+- Exact hash-bound PPM 6.7.9 authoring rules before WRITE/REPAIR: 0d428c33d90eef4c1f0b615df9b59091c19beb8a — selftest run 36788030881 SUCCESS.
+- Duplicate intake regression removal: 923b997da8c91efdca212634d4cc69bcab88596f — selftest run 36788193650 SUCCESS.
+- Hard route lock for all chat-sensitive states: f6ee65716a7ad245115ed6ad5787abbb2103c9a1 — selftest run 36788384493 SUCCESS.
+- Terminal Current aligned to chat-delivery-only: c705794b9988ce619ecace77e03563dc4b6f3f6f.
+
+All green selftests include the unchanged K9 transition contract, PPM 6.7.9 regressions, PSERC negative/positive regression, terminal truth/fact traces and runtime-entry validation.
+
