@@ -181,7 +181,14 @@ def build(draft_path):
         "slug":meta["category"],
         "taxonomy":"category",
     }
-    type_meta={"decision_goal":decision.get("decision_goal",""),"decision_criteria":decision.get("decision_criteria",[])}
+    if article_type=="FAQ":
+        type_meta={"primary_question":title}
+        claims=fact_pack.get("claims") if isinstance(fact_pack.get("claims"),list) else []
+        direct_answer=str((claims[0] if claims else {}).get("statement") or "").strip()
+        if len(re.findall(r"\\b[\\wÄÖÜäöüß-]+\\b",direct_answer,re.UNICODE))<12:
+            raise PackError("FAQ_DIRECT_ANSWER_BINDING_INVALID")
+    else:
+        type_meta={"decision_goal":decision.get("decision_goal",""),"decision_criteria":decision.get("decision_criteria",[])}
     registry={
         "contract":"portal_link_registry_snapshot_v2",
         "entries":link_bindings,
@@ -208,6 +215,8 @@ def build(draft_path):
         "wordpress_category":expected_category,
         "wordpress_runtime_category_status":"SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
     }
+    if article_type=="FAQ":
+        quality_binding["faq_direct_answer"]=direct_answer
     links=[dict(x) for x in link_bindings]
     order_id="k9-"+item_id[-8:]
     slug="reitplatzplaner-fuer-pferde" if meta["target_keyword"]=="Reitplatzplaner für Pferde" else re.sub(r"[^a-z0-9]+","-",meta["target_keyword"].lower()).strip("-")
@@ -217,9 +226,19 @@ def build(draft_path):
         "allowed_fact_ids":fact_ids,"article_type":article_type,"conclusion":concl,"domain":"pferdeportal",
         "fact_pack_hash":fact_pack["fact_pack_hash"],"lead":lead,"links":links,"order_id":order_id,
         "required_sections":["Fazit","Weiterführende Informationen"],"section_fact_ids":fact_ids,"slug":slug,
-        "subject_label":"die Auswahl eines Reitplatzplaners für Pferde","subject_scope":fact_pack["title_scope"],
+        "subject_label":meta["target_keyword"],"subject_scope":fact_pack["title_scope"],
         "table_focus":fact_ids[:4],"title":title
     }
+    if article_type=="FAQ":
+        runtime_order.update({
+            "lead":direct_answer,
+            "answer":direct_answer,
+            "faq_question":title,
+            "faq_answer":direct_answer,
+            "primary_question":title,
+            "question":title,
+            "summary":direct_answer,
+        })
     body_text=text_of(markup)
     metrics={"h2_count":len(re.findall(r"<h2\b",markup,re.I)),"paragraph_count":len(re.findall(r"<p\b",markup,re.I)),
              "table_body_row_count":len(re.findall(r"<tr\b",re.search(r"<tbody>(.*?)</tbody>",markup,re.S|re.I).group(1),re.I)),
