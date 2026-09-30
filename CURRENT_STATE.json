@@ -8,15 +8,15 @@
     "ref": "main",
     "path": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
   },
-  "status": "REAL_SINGLE_ARTICLE_AUTO_CHAIN_PASS_TERMINAL_STOP_FINALIZER_DISPATCH_FIXED",
+  "status": "FRESH_CHAT_SINGLE_ARTICLE_AUTO_PROOF_READY_OPEN_RESEARCH_JOB",
   "freshness": {
     "last_relevant_technical_head": "a90e19f7f0bc6383d83b501688f1436371a038f1",
     "last_head_selftest_run": 36709648061,
     "last_real_finalizer_run": 36709672952,
     "finalizer_input_head": "95c55ae7042754c2a962a4f8e452f5beb7692b6b",
     "terminal_package_commit": "b16299c4d661c2e54e467bbdc753dc8db46a85ec",
-    "current_head": "b16299c4d661c2e54e467bbdc753dc8db46a85ec",
-    "freshness_result": "PASS_AFTER_EXPLICIT_FINALIZER_DISPATCH_FIX_AND_REAL_TERMINAL_FINALIZATION"
+    "current_head": "8fb251018242b9d1a14a0f154b07e795097dd526",
+    "freshness_result": "PASS_FRESH_CHAT_PROOF_STATE_STAGED_SELFTEST_36710944974_SUCCESS"
   },
   "proven": {
     "article_count": 1,
@@ -58,15 +58,30 @@
     "endstempel_verify": "runtime/K9_ENDSTEMPEL_VERIFY.json",
     "wordpress_verify": "runtime/K9_WORDPRESS_IMPORT_VERIFY.json"
   },
-  "first_open_blocker": "FULL_AUTO_FINALIZER_DISPATCH_NOT_YET_PROVEN_FROM_A_NEW_GREEN_CHECK_AFTER_FIX",
-  "production_readiness": "SINGLE_ARTICLE_AUTO_CHAIN_PROVEN_THROUGH_GREEN_CHECK_AND_TERMINAL_OUTPUT_PROVEN; FRESH_FULL_AUTO_NO_NUDGE_AND_MULTI_ITEM_NOT_YET_PROVEN",
-  "next_action": "START_ONE_REAL_SINGLE_ARTICLE_FROM_A_FRESH_CHAT_ON_CURRENT_K9_AND_RUN_FULL_AUTO_END_TO_END_WITH_ZERO_MANUAL_STAGE_OR_FINALIZER_NUDGES; VERIFY_LT68_PPM679_REPAIR_IF_NEEDED_PSERC_ENDSTEMPEL_WORDPRESS_FILE_AND_TERMINAL_STOP; THEN_RUN_MULTI_ITEM_SCALE_PROOF",
+  "first_open_blocker": "FORCED_FRESH_CHAT_REENTRY_AND_FULL_AUTO_ZERO_NUDGE_NOT_YET_PROVEN",
+  "production_readiness": "SINGLE_ARTICLE_AUTO_CHAIN_AND_TERMINAL_OUTPUT_PROVEN; FRESH_CHAT_FULL_AUTO_ZERO_NUDGE_AND_MULTI_ITEM_NOT_YET_PROVEN",
+  "next_action": "FROM_A_NEW_CHAT_ENTER_K9:PFERDEATELIER; READ_CURRENT_STATE_AND_THE_EXISTING_RUNTIME_CHAT_ENTRY; EXECUTE_ONLY_OPEN_JOB K9-RESEARCH-f44ef7e1296d1829 FOR 'So wählst du passende Schermaschinen für Pferde'; DO_NOT_RECONSTRUCT_OR_MANUALLY_ROUTE; CONTINUE AUTOMATICALLY THROUGH WRITE_LT68_PPM679_REPAIR_RECHECK_PSERC_ENDSTEMPEL_WORDPRESS_STOP; VERIFY_ZERO_MANUAL_STAGE_OR_FINALIZER_NUDGES",
   "working_binding": {
     "entry_door": "hallo-netizen/text-start issue #46 (K9:pferdeatelier)",
     "current_authority": "CURRENT_STATE.json",
     "runtime_job_entry": "runtime/CHAT_ENTRY.json only when a chat job is open",
     "legacy_k4_k8_runtime_use": "FORBIDDEN",
     "chat_may_route": false,
+    "publish_allowed": false
+  },
+  "fresh_chat_proof": {
+    "article_title": "So wählst du passende Schermaschinen für Pferde",
+    "article_type": "Beratung",
+    "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+    "open_job_id": "K9-RESEARCH-f44ef7e1296d1829",
+    "open_job_sha256": "74a8274f9bc7938ccfe4cb662518987c8718cf7cadaf16bdd358f6f76b836897",
+    "entry_status": "OPEN_JOB_READY_FOR_CHAT",
+    "staged_commit": "8fb251018242b9d1a14a0f154b07e795097dd526",
+    "selftest_run": 36710944974,
+    "selftest_status": "SUCCESS",
+    "old_runtime_cleared": true,
+    "old_final_cleared": true,
+    "previous_pass_archive": "archive/k9-auto-longiergurt-pass-20260930",
     "publish_allowed": false
   }
 }
