@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN INTENT-OWNERSHIP GESETZT / FAQ-TRAGFÄHIGKEIT DATENOFFEN / TECHNISCHE ARTIKELSPERRE NOCH NICHT GEBUNDEN
+STATUS: BUCHBINDEN INTENT-OWNERSHIP GESETZT / V1.9.1 OWNER-HANDOFF IMPLEMENTIERT / TEXT-DUBLETTENGATE + FAQ-DATENPRÜFUNG OFFEN
 
 ## Rolle
 
@@ -13,121 +13,74 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_KONZEPT`.
 
 Aktueller Markenname: **Hobby Depot**.
 
-Verbindliche Konzept-Arbeitsbasis:
+Verbindliche Arbeitsbasis:
 `KATEGORIEN_ARBEITSBASIS_UND_PILOTREGELN_20260930.md`
 
-Buchbinden-Pilot – fachliche Intent-Ownership:
+Buchbinden-Pilot:
 `BUCHBINDEN_INTENT_OWNERSHIP_MATRIX_20260930.md`
 
-Technische Ist-/Gap-Prüfung zum Buchbinden-Pilot:
+Technische Prüfung:
 `BUCHBINDEN_TECHNISCHE_INTENT_ABSICHERUNG_20260930.md`
 
-Historischer/konsolidierter Vorstand bleibt:
-`KONZEPT_ZWISCHENSTAND_KATEGORIEN_UND_INTERNE_SUCHE_20260930.md`
-
-Die historischen Hobbyfinder-Vorarbeiten unter `VORARBEITEN_HOBBYFINDER/` bleiben Planungsinput, aber keine finale Taxonomie.
-
-### Bestätigte Hauptwelten als Arbeitsbasis
+### Struktur
 
 **Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln**
 
-Diese Acht sind die aktuelle Arbeitsbasis, noch keine endgültige evidenzbasierte SEO-Freigabe.
+Harte Tiefe:
+**SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE**
 
-Weitere bestätigte Strukturregeln:
-- Pflanzen und Tiere bleiben getrennt; Zusammenlegung nur Reserveoption.
-- Genuss bleibt reduzierter Unterast von Fertigen.
-- Modelle und Suchen/Finden erhalten keinen eigenen Hauptslot, sondern werden nach Tätigkeit/Intention verteilt.
-- Exotisch/Außergewöhnlich bleibt Querschnitt bzw. Magazin-/Inspirationsmerkmal.
-- maximale Tiefe: **SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE**;
-- keine zusätzliche Kategorieebene;
-- bei Überfüllung nur horizontale Teilung auf derselben Leaf-Ebene;
-- Hobby-Depot-Zielwert je Leaf ungefähr bis 10 eigenständige Beiträge;
-- neuer Geschwister-Leaf nur bei eigenständigem Intent-Raum und mindestens 3, bevorzugt 4+ tragfähigen Beiträgen;
-- Keyword allein erzeugt keine Kategorie;
-- Übersicht hat Vorrang vor schematischer Gleichförmigkeit.
+Keine weitere Kategorieebene.
 
-### Buchbinden-Pilot – fachlich gesetzt
+### Buchbinden – fachliche Owner-Regel
 
-Pilot:
-**Fertigen → Buch & Papier → Buchbinden**
+**Ein Beitrag = ein primärer Intent = ein eindeutiger Kategorie-Owner.**
 
-Die sechs Prüfbereiche sind fachlich eindeutig getrennt:
-- **Einstieg** = Startentscheidung / Eignung / Aufwand / Kosten / erste Schritte;
-- **Ausrüstung** = Werkzeug- und Geräteentscheidung;
-- **Material** = Materialentscheidung;
-- **Techniken/Praxis** = Durchführung und Methodenwahl;
-- **Fragen/Probleme** = Fehlerbehebung;
-- **FAQ** = ausschließlich belegte Restfragen ohne anderen Owner.
+Für Buchbinden gilt:
+- Einstieg = Startentscheidung;
+- Ausrüstung = Werkzeugentscheidung;
+- Material = Materialentscheidung;
+- Techniken/Praxis = Durchführung/Methodenwahl;
+- Fragen/Probleme = Fehlerbehebung;
+- FAQ = ausschließlich belegte Restfragen ohne anderen Owner.
 
-HARD RULE:
 **Eine Frageform macht noch keinen FAQ-Intent.**
 
-Beispiele:
-- `Was kostet Buchbinden?` → Einstieg;
-- `Brauche ich eine Buchbinderpresse?` → Ausrüstung;
-- `Welcher Kleber ist richtig?` → Material;
-- `Welche Bindung liegt flach?` → Techniken/Praxis;
-- `Warum wellt sich Papier?` → Fragen/Probleme.
+### Technische Umsetzung – jetzt vorhanden
 
-Grundregel bleibt:
-**Jeder Beitrag besitzt genau einen eindeutigen Intent-/Keyword-Owner.**
+Kategorie-Workflow V1.9.1 derselben allgemeinen Pluginlinie ist lokal hart geprüft.
 
-FAQ darf nicht mit bereits vergebenen Intents aufgefüllt werden.
-Wenn weniger als 3, bevorzugt 4+, eigenständige Restintents belegt werden, bleibt die FAQ-Tragfähigkeit offen.
+Neu:
+- allgemeine Kategorie-Owner-Registry;
+- `ARTICLE_ONLY` kann an `owner_concept_id` gebunden werden;
+- gleicher exakter Artikel-Intent bei mehreren Ownern wird im Editorial-Handoff blockiert;
+- ungebundene ARTICLE_ONLY-Intents bleiben sichtbar offen;
+- Residual-Research wird nie automatisch Artikel;
+- keine Hobby-Depot-Begriffe hardcodiert;
+- kein neues Plugin.
 
-### Technischer Ist-Stand
+Prüfung:
+248/248 PASS, Fresh-Unpack 248/248 PASS.
 
-Der vorhandene Kategorie-Workflow besitzt bereits belegte allgemeine Mechanismen für:
-- Search Intent;
-- Keyword Ownership;
-- Kannibalisierungsprüfung;
-- Coverage-/Research-Evidenz.
+### Noch offen
 
-Der aktuelle Hobby-Depot-Stand V1.9.0 ergänzt einen Stage-/Ablauf-Hardlock; er ist **kein neuer FAQ-/Artikel-Ownership-Fix**.
+`HOBBYRAUSCH/TEXT_REDAKTION` ist weiterhin fachlich/technisch noch nicht als Produktionssystem gebunden.
 
-Das Hobby-Depot-Büro `TEXT_REDAKTION` steht weiterhin auf **NEU / LEER**.
-Daher ist noch nicht end-to-end belegt, dass Hobby Depot vor Artikelerstellung Cross-Leaf-Doppelbelegung technisch blockiert.
+Deshalb fehlt noch der **Downstream-Artikelgate** für:
+- semantisch gleiche Intents mit anderer Formulierung;
+- bereits geplante/vorhandene Artikel;
+- Keyword-/Intent-Kannibalisierung vor Textproduktion.
 
-Die V1.9.0-Source-/Installer-Identitäten und Hashes sind in der autoritativen Pluginakte dokumentiert. Die exakten V1.9.0-ZIP-Bytes liegen im aktuell geprüften Campus-/Kategorie-Branch jedoch nicht als direkt erneut prüfbare Originaldateien vor.
-
-Keine Rekonstruktion aus älteren Ständen.
-
-### Forschungs-/Datenregel
-
-DataForSEO-/Keyword-Recherche soll als gemeinsamer Forschungsbestand für Kategorienplanung und spätere Artikelplanung erhalten bleiben.
-
-Keine große Research-Rohdatenablage in WordPress.
-Rohforschung zunächst extern als Arbeits-/Spreadsheet-/Artefaktbasis; WordPress erhält später nur die freigegebene Struktur bzw. schlanke notwendige Metadaten.
-
-### Grenze zum allgemeinen Kategorie-Plugin
-
-Allgemeingültig werden nur Mechanismen:
-- konfigurierbare Tiefengrenze;
-- horizontale Breitenprüfung;
-- konfigurierbare Leaf-Zielgröße/Mindesttragfähigkeit;
-- konfigurierbare Research-Linsen;
-- Intent-/Kannibalisierungsprüfung;
-- verlustfreie Research-Evidenz.
-
-Die acht Hauptwelten, `Einstieg`, die Hobby-Depot-FAQ-Pflicht und die Werte 10 / 3–4 werden **nicht** als universelle Fachregeln hardcodiert, sondern gehören ins Projektprofil.
-
-Für technische Pluginarbeit gilt ausschließlich der zuständige Scope `HOBBYRAUSCH_SEO_KATEGORIEN` mit dessen eigener Current-Autorität. Dieses Konzept-CURRENT ersetzt dessen Plugin-/Release-Status nicht.
+FAQ-Tragfähigkeit bleibt datenoffen:
+mindestens 3, bevorzugt 4+, eigenständige Restintents müssen real belegt werden; sonst nicht künstlich auffüllen.
 
 ## Erster offener Blocker
 
-Die fachliche FAQ-vs.-Leaf-Trennung ist für Buchbinden gesetzt.
+Nicht mehr das Kategorie-Plugin.
 
-Offen ist jetzt der **technische End-to-End-Beweis auf Artikelebene**:
-Vor Artikelpromotion muss Hobby Depot fail-closed verhindern, dass derselbe Intent zwei Beiträgen oder zwei Leafs gehört.
-
-Zusätzlich ist die FAQ-Leaf-Tragfähigkeit noch datenoffen und darf erst nach DataForSEO-/SERP-Evidenz freigegeben werden.
+Offen ist jetzt die **allgemeingültige Text-/Redaktionsprüfung**, die den V1.9.1-Handoff konsumiert und vor Artikelerstellung semantische Dubletten/Kannibalisierung fail-closed blockiert.
 
 ## NEXT ACTION
 
-**Noch keine Pluginänderung.**
+Kein weiteres Kategorie-Plugin bauen.
 
-Zuerst im zuständigen technischen Scope den exakten V1.9.0-Source-/Installer-Stand als prüfbare Originalbytes gegen die bereits dokumentierten SHA-256 binden.
-
-Danach nur prüfen, ob die vorhandenen Search-Intent-/Keyword-Ownership-/Kannibalisierungsmechanismen die Buchbinden-Cross-Leaf-Regel bereits vollständig erzwingen oder welcher kleinste allgemeingültige Mechanismus fehlt.
-
-Anschließend den Buchbinden-Pilot mit DataForSEO-/SERP-Evidenz auf tatsächliche Leaf-Tragfähigkeit und insbesondere auf mindestens 3, bevorzugt 4+, eigenständige FAQ-Restintents prüfen.
+Als Nächstes den allgemeinen Downstream-Artikelgate auf den V1.9.1-Handoff binden und danach Buchbinden als ersten Realfall durch DataForSEO-/SERP- und Ownership-Prüfung laufen lassen.
