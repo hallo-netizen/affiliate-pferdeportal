@@ -67,6 +67,28 @@
           "section_id": "further_information"
         }
       ]
+    },
+    "pferdedecken-regendecken-faq": {
+      "portal_links": [
+        {
+          "anchor": "Ausrüstung",
+          "href": "/ausruestung/",
+          "role": "parent_category",
+          "section_id": "criteria"
+        },
+        {
+          "anchor": "Decken",
+          "href": "/ausruestung/ausruestung-decken/",
+          "role": "semantic_related",
+          "section_id": "decision"
+        },
+        {
+          "anchor": "Regendecken",
+          "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+          "role": "further_information",
+          "section_id": "further_information"
+        }
+      ]
     }
   }
 }
