@@ -18,6 +18,7 @@ class K9Tests(unittest.TestCase):
         k.LEDGER = root / "state/ledger.json"
         k.CURRENT_JOB = root / "runtime/CURRENT_JOB.json"
         k.CHAT_ENTRY = root / "runtime/CHAT_ENTRY.json"
+        k.AUTO_CHAIN = root / "runtime/AUTO_CHAIN.json"
         k.STATUS_FILE = root / "state/STATUS.json"
         k.WAREHOUSE = root / "warehouse"
         k.PORTAL_BINDINGS = root / "contracts/K9_PORTAL_BINDINGS.json"
@@ -520,6 +521,49 @@ class K9Tests(unittest.TestCase):
         })
         with self.assertRaises(k.K9Error):
             k.import_intake(path)
+
+
+    def test_station_only_default_and_auto_chain_entry_are_both_supported(self):
+        self.assertEqual(k.orchestration_mode(),"STATION_ONLY")
+        station_job=k.prepare("research",1)["job"]
+        station_entry=k.load_json(k.CHAT_ENTRY)
+        self.assertEqual(station_entry["orchestration_mode"],"STATION_ONLY")
+        self.assertEqual(station_entry["after_submission_rule"],"STOP_AFTER_EXACT_STATION_PRODUCT")
+        k.CURRENT_JOB.unlink()
+        k.CHAT_ENTRY.unlink()
+
+        k.set_orchestration_mode("auto_chain","test-run")
+        self.assertEqual(k.orchestration_mode(),"AUTO_CHAIN")
+        auto_job=k.prepare("research",1)["job"]
+        auto_entry=k.load_json(k.CHAT_ENTRY)
+        self.assertEqual(auto_entry["job_id"],auto_job["job_id"])
+        self.assertEqual(auto_entry["orchestration_mode"],"AUTO_CHAIN")
+        self.assertEqual(auto_entry["after_submission_rule"],k.AUTO_CHAIN_AFTER_SUBMISSION_RULE)
+        self.assertEqual(auto_entry["routing_rule"],k.AUTO_CHAIN_ROUTING_RULE)
+        self.assertEqual(auto_entry["execution_policy"],"WORKER_EXECUTES_ONLY_NEVER_SUPERVISES")
+
+    def test_auto_chain_inherit_and_explicit_station_only_switch(self):
+        k.set_orchestration_mode("auto_chain","test-run")
+        self.assertTrue(k.AUTO_CHAIN.exists())
+        inherited=k.set_orchestration_mode("inherit","next-run")
+        self.assertEqual(inherited["mode"],"AUTO_CHAIN")
+        self.assertTrue(k.AUTO_CHAIN.exists())
+        standalone=k.set_orchestration_mode("station_only","manual-station")
+        self.assertEqual(standalone["mode"],"STATION_ONLY")
+        self.assertFalse(k.AUTO_CHAIN.exists())
+
+    def test_auto_next_uses_existing_station_products_without_worker_routing(self):
+        k.set_orchestration_mode("auto_chain","test-run")
+        research=k.prepare("research",1)["job"]
+        k.accept(self.submission(research,[self.research_row("a")],"auto-research.json"))
+        nxt=k.auto_next_station()
+        self.assertEqual(nxt["next"],"write")
+        self.assertEqual(nxt["report"]["ready_for_write"],1)
+        self.assertEqual(nxt["report"]["research_open"],1)
+
+    def test_auto_next_is_blocked_outside_auto_chain(self):
+        with self.assertRaisesRegex(k.K9Error,"AUTO_NEXT_REQUIRES_ACTIVE_AUTO_CHAIN"):
+            k.auto_next_station()
 
 if __name__=="__main__":
     unittest.main()

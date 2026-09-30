@@ -14,6 +14,32 @@ jobs:
           test ! -e control
           test ! -e isolated_system4
           python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Auto-chain orchestration wiring regression
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          receiver=Path(".github/workflows/text-start-pferdeatelier.yml").read_text()
+          accept=Path(".github/workflows/k9-accept-submission.yml").read_text()
+          writer=Path(".github/workflows/k9-write-submit.yml").read_text()
+          finalizer=Path(".github/workflows/k9-finalize.yml").read_text()
+          required_receiver=[
+              "options: [station_only, auto_chain, inherit]",
+              'k9_engine.py orchestration "$RUN_MODE"',
+              "k9_engine.py auto-next",
+              '"run_mode":"inherit"'
+          ]
+          missing=[x for x in required_receiver if x not in receiver]
+          if missing:
+              raise SystemExit("AUTO_CHAIN_RECEIVER_WIRING_MISSING:"+",".join(missing))
+          if "'run_mode':'inherit'" not in accept:
+              raise SystemExit("AUTO_CHAIN_ACCEPT_INHERIT_MISSING")
+          if '"run_mode":"inherit"' not in writer:
+              raise SystemExit("AUTO_CHAIN_WRITER_INHERIT_MISSING")
+          if "runtime/AUTO_CHAIN.json" not in finalizer or "rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER runtime/AUTO_CHAIN.json" not in finalizer:
+              raise SystemExit("AUTO_CHAIN_TERMINAL_CLOSE_MISSING")
+          print("AUTO_CHAIN_WIRING_PASS=1")
+          PY
       - name: PPM 6.7.9 regression - claim article type binding
         run: |
           set -euo pipefail

@@ -56,5 +56,17 @@
   "legacy_runtime_imports_allowed": false,
   "legacy_state_reads_allowed": false,
   "legacy_paths_allowed": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "execution_modes": {
+    "station_only": "EXACT_EXISTING_STATION_PRODUCT_THEN_CHAT_MAY_STOP",
+    "auto_chain": "SERIAL_ONE_ITEM_LOOP_OVER_EXISTING_STATIONS_WITH_SYSTEM_SELECTED_TRANSITIONS"
+  },
+  "auto_chain": {
+    "initial_batch_size": 1,
+    "worker_route_selection": false,
+    "next_station_source": "K9_SYSTEM_STATUS_ONLY",
+    "chat_continuation": "FOLLOW_ONLY_NEW_SYSTEM_GENERATED_CHAT_ENTRY_WHILE_RUNTIME_AUTO_CHAIN_IS_ACTIVE",
+    "station_products_unchanged": true,
+    "quality_gates_unchanged": true
+  }
 }

@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          body='{"ref":"konzept9/greenfield-20260929","inputs":{"station":"check","batch_size":"1"}}'
+          body='{"ref":"konzept9/greenfield-20260929","inputs":{"station":"check","batch_size":"1","run_mode":"inherit"}}'
           curl --fail-with-body --silent --show-error -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer $GH_TOKEN" \

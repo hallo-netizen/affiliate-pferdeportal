@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
 CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
+AUTO_CHAIN = ROOT / "runtime" / "AUTO_CHAIN.json"
 WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
 PORTAL_BINDINGS = ROOT / "contracts" / "K9_PORTAL_BINDINGS.json"
 STATUS_FILE = ROOT / "state" / "STATUS.json"
@@ -14,6 +15,8 @@ STATIONS = ("research", "write", "check", "repair")
 LT68_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
 PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
 INTAKE_FIELDS = {"title", "target_keyword", "category", "article_type", "plan_slot"}
+AUTO_CHAIN_AFTER_SUBMISSION_RULE = "DO_NOT_STOP_WHILE_AUTO_CHAIN_ACTIVE_WAIT_FOR_NEXT_SYSTEM_GENERATED_CHAT_ENTRY_OR_AUTO_CHAIN_CLOSE"
+AUTO_CHAIN_ROUTING_RULE = "SYSTEM_GENERATES_NEXT_STATION_WORKER_NEVER_SELECTS_ROUTE"
 
 class K9Error(RuntimeError):
     pass
@@ -29,6 +32,36 @@ def write_json(path, data):
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+def orchestration_mode():
+    if not AUTO_CHAIN.exists():
+        return "STATION_ONLY"
+    data = load_json(AUTO_CHAIN)
+    if data.get("contract") != "K9_AUTO_CHAIN_V1" or data.get("status") != "ACTIVE" or data.get("publish_allowed") is not False:
+        raise K9Error("AUTO_CHAIN_STATE_INVALID")
+    return "AUTO_CHAIN"
+
+def set_orchestration_mode(mode, source_run_id="manual"):
+    if mode not in ("station_only", "auto_chain", "inherit"):
+        raise K9Error("ORCHESTRATION_MODE_INVALID")
+    if mode == "inherit":
+        return {"status": "ORCHESTRATION_INHERITED", "mode": orchestration_mode()}
+    if mode == "auto_chain":
+        write_json(AUTO_CHAIN, {
+            "contract": "K9_AUTO_CHAIN_V1",
+            "status": "ACTIVE",
+            "mode": "SERIAL_ONE_ITEM_EXISTING_STATIONS",
+            "source_run_id": str(source_run_id),
+            "routing_authority": "K9_SYSTEM_ONLY",
+            "station_worker_may_select_route": False,
+            "publish_allowed": False
+        })
+    elif AUTO_CHAIN.exists():
+        AUTO_CHAIN.unlink()
+    return {
+        "status": "ORCHESTRATION_MODE_SET",
+        "mode": orchestration_mode()
+    }
 
 def worker_contract(station):
     data = load_json(WORKER_CONTRACTS)
@@ -94,6 +127,7 @@ def current_job():
 def write_chat_entry(job):
     station = job["station"]
     is_writer = station in ("write", "repair")
+    mode = orchestration_mode()
     output_path = ("writer_drafts/" if is_writer else "submissions/") + job["job_id"] + ".json"
     entry = {
         "contract": "K9_CHAT_ENTRY_V1",
@@ -130,6 +164,10 @@ def write_chat_entry(job):
         "completion_rule": ("WRITE_EXACT_DRAFT_TO_BOUND_WRITER_DRAFT_PATH" if is_writer
                             else "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB"),
         "worker_type": job["worker_contract"]["worker_type"],
+        "orchestration_mode": mode,
+        "orchestration_state_path": "runtime/AUTO_CHAIN.json" if mode == "AUTO_CHAIN" else None,
+        "after_submission_rule": AUTO_CHAIN_AFTER_SUBMISSION_RULE if mode == "AUTO_CHAIN" else "STOP_AFTER_EXACT_STATION_PRODUCT",
+        "routing_rule": AUTO_CHAIN_ROUTING_RULE,
         "output_contract": job["worker_contract"]["output_contract"],
         "required_output_fields": job["worker_contract"].get("required_output_fields", []),
         "output_field_sources": job["worker_contract"].get("output_field_sources", {}),
@@ -169,6 +207,7 @@ def status_report(data=None):
         "ready_for_write": ready_for_write,
         "ready_for_check": ready_for_check,
         "repair_required": repair_required,
+        "orchestration_mode": orchestration_mode(),
         "stations": {}
     }
     for station in STATIONS:
@@ -517,6 +556,16 @@ def assert_execution_only_entry(job):
         raise K9Error("CHAT_ENTRY_INPUT_AUTHORITY_RULE_INVALID")
     if entry.get("blocked_rule") != "IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY":
         raise K9Error("CHAT_ENTRY_BLOCKED_RULE_INVALID")
+    mode = entry.get("orchestration_mode")
+    if mode not in ("STATION_ONLY", "AUTO_CHAIN"):
+        raise K9Error("CHAT_ENTRY_ORCHESTRATION_MODE_INVALID")
+    if entry.get("routing_rule") != AUTO_CHAIN_ROUTING_RULE:
+        raise K9Error("CHAT_ENTRY_ROUTING_RULE_INVALID")
+    if mode == "AUTO_CHAIN":
+        if entry.get("after_submission_rule") != AUTO_CHAIN_AFTER_SUBMISSION_RULE or entry.get("orchestration_state_path") != "runtime/AUTO_CHAIN.json":
+            raise K9Error("CHAT_ENTRY_AUTO_CHAIN_GUARD_INVALID")
+    elif entry.get("after_submission_rule") != "STOP_AFTER_EXACT_STATION_PRODUCT":
+        raise K9Error("CHAT_ENTRY_STATION_ONLY_GUARD_INVALID")
     required_forbidden = {
         "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
         "CHANGE_WORKFLOW_OR_ARCHITECTURE",
@@ -616,6 +665,26 @@ def accept(path):
         "report": final_report
     }
 
+def auto_next_station():
+    if orchestration_mode() != "AUTO_CHAIN":
+        raise K9Error("AUTO_NEXT_REQUIRES_ACTIVE_AUTO_CHAIN")
+    if current_job() is not None:
+        raise K9Error("AUTO_NEXT_ACTIVE_JOB_EXISTS")
+    report = status_report()
+    if report["repair_required"] > 0:
+        nxt = "repair"
+    elif report["ready_for_check"] > 0:
+        nxt = "check"
+    elif report["ready_for_write"] > 0:
+        nxt = "write"
+    elif report["research_open"] > 0:
+        nxt = "research"
+    elif report["total"] > 0 and report["fully_done"] == report["total"]:
+        nxt = "finalize"
+    else:
+        raise K9Error("AUTO_NEXT_NO_VALID_TRANSITION")
+    return {"status": "AUTO_NEXT_READY", "next": nxt, "report": report}
+
 def main():
     parser = argparse.ArgumentParser()
     subs = parser.add_subparsers(dest="cmd", required=True)
@@ -627,6 +696,10 @@ def main():
     p.add_argument("--source-run-id", default="manual")
     p = subs.add_parser("accept")
     p.add_argument("path")
+    p = subs.add_parser("orchestration")
+    p.add_argument("mode", choices=("station_only", "auto_chain", "inherit"))
+    p.add_argument("--source-run-id", default="manual")
+    subs.add_parser("auto-next")
     subs.add_parser("status")
     args = parser.parse_args()
 
@@ -637,6 +710,10 @@ def main():
             result = prepare(args.station, args.batch_size, args.source_run_id)
         elif args.cmd == "accept":
             result = accept(args.path)
+        elif args.cmd == "orchestration":
+            result = set_orchestration_mode(args.mode, args.source_run_id)
+        elif args.cmd == "auto-next":
+            result = auto_next_station()
         else:
             result = status_report()
         print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))

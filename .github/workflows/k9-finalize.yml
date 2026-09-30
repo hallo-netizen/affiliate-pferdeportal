@@ -137,7 +137,7 @@ jobs:
           }
           pathlib.Path('CURRENT_STATE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
-          rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER
+          rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER runtime/AUTO_CHAIN.json
           git config user.name 'k9-finalizer-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -A final runtime CURRENT_STATE.json
