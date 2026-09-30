@@ -1660,100 +1660,7 @@ trait PPAR_Ebay_Trait {
      * left >250 PRIVATE listings published. This method performs no inventory
      * work in the page/AJAX request; it only queues/dispatches the bounded worker.
      */
-    /**
-     * One-time state retirement for the failed V6.40 browser/upgrade recovery
-     * architecture. This is deliberately STATE-ONLY: no source row, listing,
-     * campaign, taxonomy or selection plan is created/changed here.
-     *
-     * It prevents an already-open V6.40 recovery from surviving a source update
-     * and immediately continuing the same PRIVATE loop before an operator starts
-     * a new controlled job explicitly or the regular schedules do so.
-     */
-    public function maybe_retire_deprecated_ebay_recovery_transports() {
-        $marker_key = 'ppar_ebay_controlled_rebuild_transport_retired_20260812';
-        $contract_marker_key = 'ppar_ebay_controlled_rebuild_transport_retired_contract_v1';
-        // One architecture retirement, never one retirement per patch build.
-        // Existing V6.40.3+ markers mean the migration already ran; adopt the
-        // stable marker without touching any current run/cursor/selection owner.
-        if ((string)get_option($contract_marker_key, '') === 'done') { return; }
-        $legacy_marker = (string)get_option($marker_key, '');
-        if ($legacy_marker !== '' && $this->ebay_known_patch_state_build($legacy_marker)) {
-            update_option($contract_marker_key, 'done', false);
-            return;
-        }
-        $now = time();
 
-        $selection = $this->ebay_selection_state_load();
-        if ($this->ebay_selection_state_is_open($selection)) {
-            $selection['status'] = 'failed';
-            $selection['phase'] = 'retired';
-            $selection['failed_at'] = $now;
-            $selection['completed_at'] = $now;
-            $selection['failure_reason'] = 'failed_v640_recovery_state_retired';
-            $selection['error'] = 'Alter V6.40-Recovery-State wurde ohne Bestandsmutation beendet.';
-            $selection['retired_by_build'] = (string)self::EBAY_RUNTIME_BUILD;
-            $this->ebay_selection_state_save($selection);
-        }
-
-        // IMPORTANT: stale jobs are, by definition, runtime-INcompatible.
-        // Therefore the compatibility-aware *_is_open() helpers cannot be used
-        // to discover them here; doing so made the old-build retirement branch
-        // unreachable. Inspect the raw lifecycle status first, then fail only
-        // incompatible queued/running jobs. A valid current-build job is kept.
-        $sync = $this->ebay_sync_job_load();
-        $sync_status = sanitize_key((string)($sync['status'] ?? ''));
-        if (in_array($sync_status, array('queued','running'), true)
-            && !$this->ebay_sync_job_runtime_compatible($sync)) {
-            $sync['status'] = 'failed';
-            $sync['worker_phase'] = 'retired';
-            $sync['finished_at'] = $now;
-            $sync['failure_reason'] = 'failed_v640_runtime_retired';
-            $this->ebay_sync_job_save($sync);
-        }
-        $refresh = $this->ebay_refresh_job_load();
-        $refresh_status = sanitize_key((string)($refresh['status'] ?? ''));
-        if (in_array($refresh_status, array('queued','running'), true)
-            && !$this->ebay_refresh_job_runtime_compatible($refresh)) {
-            $refresh['status'] = 'failed';
-            $refresh['finished_at'] = $now;
-            $refresh['failure_reason'] = 'failed_v640_runtime_retired';
-            $this->ebay_refresh_job_save($refresh);
-        }
-        $local_business = $this->ebay_business_local_recovery_state_load();
-        if (sanitize_key((string)($local_business['status'] ?? '')) === 'running') {
-            $local_business['status'] = 'failed';
-            $local_business['phase'] = 'retired';
-            $local_business['failed_at'] = $now;
-            $local_business['failure_reason'] = 'browser_recovery_transport_retired';
-            $this->ebay_business_local_recovery_state_save($local_business);
-        }
-
-        // If no valid discovery job owns the shared worker hook, remove stale
-        // single events left by the failed selection loop. Regular 3h discovery
-        // remains scheduled via EBAY_CRON_HOOK and will create fresh state itself.
-        $sync = $this->ebay_sync_job_load();
-        if (!$this->ebay_sync_job_is_open($sync) && function_exists('wp_clear_scheduled_hook')) {
-            wp_clear_scheduled_hook(self::EBAY_WORKER_HOOK);
-        }
-        foreach (array(
-            'ppar_ebay_selection_worker_lock_',
-            'ppar_ebay_sync_worker_lock_',
-        ) as $prefix) {
-            if (function_exists('delete_transient')) {
-                delete_transient($prefix . substr(hash('sha256', (string)self::EBAY_RUNTIME_BUILD), 0, 12));
-            }
-        }
-        update_option($marker_key, (string)self::EBAY_RUNTIME_BUILD, false);
-        update_option($contract_marker_key, 'done', false);
-    }
-
-    /**
-     * Deprecated compatibility method. It MUST remain a no-op. A WordPress page
-     * request is never allowed to infer drift and start/continue recovery.
-     */
-    public function ensure_ebay_selection_recovery_schedule() {
-        return $this->ebay_selection_state_load();
-    }
 
     /**
      * Only the private eBay importer ever writes both legacy markers below.
@@ -9644,18 +9551,6 @@ trait PPAR_Ebay_Trait {
         );
     }
 
-    public function maybe_migrate_ebay_private_flat_structure() {
-        if ((string) get_option(self::OPTION_EBAY_PRIVATE_STRUCTURE_VERSION, '') === '2.0') { return; }
-        if (!function_exists('taxonomy_exists') || !taxonomy_exists('hp_listing_category') || !function_exists('term_exists')) { return; }
-        $settings = $this->ebay_settings();
-        $legacy = term_exists('ebay-privatanzeigen', 'hp_listing_category');
-        // Fresh installations must not silently create a portal taxonomy. The automatic
-        // migration is only for an already configured/legacy private eBay structure.
-        if (!$legacy && absint($settings['private_root_term_id'] ?? 0) <= 0 && absint($settings['private_parent_term_id'] ?? 0) <= 0) { return; }
-        $result = $this->ebay_setup_private_categories();
-        if (is_wp_error($result)) { return; }
-        update_option(self::OPTION_EBAY_PRIVATE_STRUCTURE_VERSION, '2.0', false);
-    }
 
     public function handle_ebay_save_settings() {
         if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
@@ -9959,17 +9854,6 @@ trait PPAR_Ebay_Trait {
         return $this->ebay_business_local_recovery_state_save($state);
     }
 
-    private function ebay_business_local_recovery_verified($selection) {
-        $selection=is_array($selection)?$selection:array();
-        if(sanitize_key((string)($selection['status']??''))!=='complete' || sanitize_key((string)($selection['selection_scope']??''))!=='business'){return false;}
-        $expected=absint($selection['plan_stats']['business']['active_target']??0);
-        $materialized=absint($selection['stats']['business']['materialized']??0);
-        $missing=absint($selection['plan_stats']['business']['missing']??0);
-        // A technically successful materialization is not a supplied portal.
-        // Recovery is verified only when the required physical product families
-        // are represented; otherwise the next step must be targeted discovery.
-        return $expected>0 && $materialized===$expected && $missing===0;
-    }
 
     /** Hard no-progress guard for the provider-page recovery transport. */
     private function ebay_admin_progress_fingerprint($job,$refresh,$selection,$local_business,$article_rebuild=array()) {
