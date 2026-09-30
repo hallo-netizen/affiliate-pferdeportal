@@ -35,7 +35,7 @@ jobs:
               raise SystemExit("AUTO_CHAIN_RECEIVER_WIRING_MISSING:"+",".join(missing))
           if "'run_mode':'inherit'" not in accept:
               raise SystemExit("AUTO_CHAIN_ACCEPT_INHERIT_MISSING")
-          if '"run_mode":"inherit"' not in writer:
+          if '"run_mode":"inherit"' not in writer and "'run_mode':'inherit'" not in writer:
               raise SystemExit("AUTO_CHAIN_WRITER_INHERIT_MISSING")
           if "runtime/AUTO_CHAIN.json" not in finalizer or "rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER runtime/AUTO_CHAIN.json" not in finalizer:
               raise SystemExit("AUTO_CHAIN_TERMINAL_CLOSE_MISSING")
