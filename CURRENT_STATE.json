@@ -31,5 +31,45 @@
     "trigger_head_sha": "58597d5ba222ac4dbe9a9954481625967010ac7e"
   },
   "chat_may_route": false,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "confirmation_start": {
+    "contract": "K9_CONFIRMATION_START_BINDING_V1",
+    "purpose": "CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
+    "connector_action": "CREATE_FILE",
+    "repository": "hallo-netizen/affiliate-pferdeportal",
+    "branch": "konzept9/greenfield-20260929",
+    "path_prefix": "inbox-auto/",
+    "external_workflow_dispatch_required": false,
+    "server_side_entry_workflow": ".github/workflows/k9-intake.yml",
+    "exact_target": {
+      "title": "Frieren Pferde unter Regendecken?",
+      "target_keyword": "Frieren Pferde unter Regendecken",
+      "category": "pferdedecken-regendecken-faq",
+      "article_type": "FAQ",
+      "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe"
+    },
+    "exact_payload": {
+      "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
+      "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+      "next_textmachine_metadata_batch": {
+        "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+        "publish_allowed": false,
+        "content_or_format_payload_present": false,
+        "item_count": 1,
+        "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+        "items": [
+          {
+            "title": "Frieren Pferde unter Regendecken?",
+            "target_keyword": "Frieren Pferde unter Regendecken",
+            "category": "pferdedecken-regendecken-faq",
+            "article_type": "FAQ",
+            "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe"
+          }
+        ]
+      }
+    },
+    "source_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json@5a452af433d7661173e712dc2f3b3fbd5898bef6",
+    "instruction": "CREATE_EXACT_PAYLOAD_UNDER_INBOX_AUTO_AND_DO_NOT_CALL_WORKFLOW_DISPATCH"
+  }
 }
