@@ -1,22 +1,45 @@
 {
-  "active_job": null,
+  "active_job": {
+    "item_count": 16,
+    "item_ids": [
+      "k9-bfc0c6806fa88f0c55a2dcd9",
+      "k9-037886feb135ca682b8423e7",
+      "k9-6b233ed9774bd3dd530835c3",
+      "k9-b148e1ddcdab462e0b2b68cb",
+      "k9-a38f92cbb97fe29aece54292",
+      "k9-f35eba3ca3cc3dbecc1bd9c6",
+      "k9-3c3435598b994d2448cd4b8b",
+      "k9-34a53bf77374419ef08b0669",
+      "k9-1ff3dfabfed47a0c47c8df13",
+      "k9-676a012f09815f814e233775",
+      "k9-784b73ee2bf3e2114d3af948",
+      "k9-16024ee8a6c9b5e964f452e6",
+      "k9-4dc2b290f41c1793da77ca9a",
+      "k9-21f5591329fafb286a69f685",
+      "k9-d0fe00ff92cd9bbae7e8c1a3",
+      "k9-853343bea0615b0c5a1be5dd"
+    ],
+    "job_id": "K9-REPAIR-fd30e1d829b4e439",
+    "station": "repair"
+  },
   "contract": "K9_STATUS_V1",
   "fully_done": 0,
-  "ledger_generation": 58,
+  "ledger_generation": 59,
   "orchestration_mode": "STATION_ONLY",
-  "ready_for_check": 16,
+  "ready_for_check": 0,
   "ready_for_write": 0,
   "remaining": 16,
-  "repair_required": 0,
+  "repair_required": 16,
   "research_open": 0,
   "stations": {
     "check": {
       "DONE": 0,
-      "PENDING": 16
+      "FAIL": 16,
+      "PENDING": 0
     },
     "repair": {
-      "DONE": 16,
-      "PENDING": 0
+      "DONE": 0,
+      "PENDING": 16
     },
     "research": {
       "DONE": 16,
