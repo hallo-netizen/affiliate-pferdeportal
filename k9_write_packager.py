@@ -158,6 +158,31 @@ def validate_html(markup, article_type, metadata, research, rules):
     if not allowed.issubset(set(used)): raise PackError("NOT_ALL_RESEARCH_FACTS_USED")
     if word_count(markup)<750 and article_type=="Beratung": raise PackError("BERATUNG_WORD_COUNT_BELOW_750")
 
+def validate_ppm_authoring_rules(item, article_type):
+    bound=(item.get("input_products") or {}).get("ppm_authoring_rules")
+    if not isinstance(bound,dict) or bound.get("contract")!="K9_PPM679_AUTHORING_RULES_V1":
+        raise PackError("PPM_AUTHORING_RULES_MISSING")
+    if bound.get("article_type")!=article_type or bound.get("ppm_version")!="6.7.9":
+        raise PackError("PPM_AUTHORING_RULES_TYPE_OR_VERSION_MISMATCH")
+    if bound.get("ppm_package_sha256")!="acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1":
+        raise PackError("PPM_AUTHORING_RULES_PACKAGE_HASH_MISMATCH")
+    if bound.get("source_mode")!="EXACT_HASH_BOUND_PPM679_PACKAGE" or bound.get("quality_change_allowed") is not False:
+        raise PackError("PPM_AUTHORING_RULES_SOURCE_INVALID")
+    if not isinstance(bound.get("global_requirements"),dict) or not isinstance(bound.get("structure_requirements"),dict) or not isinstance(bound.get("type_requirements"),dict):
+        raise PackError("PPM_AUTHORING_RULES_INCOMPLETE")
+    required_constants={
+        "min_words","min_paragraphs","min_h2","min_table_body_rows",
+        "min_fact_pack_coverage_ratio","min_trace_lexical_support_ratio",
+        "max_duplicate_sentence_ratio","max_intro_pair_similarity",
+    }
+    if not required_constants.issubset(set(bound["global_requirements"])):
+        raise PackError("PPM_AUTHORING_RULES_CONSTANTS_INCOMPLETE")
+    declared=str(bound.get("rules_sha256") or "")
+    core=dict(bound); core.pop("rules_sha256",None)
+    if declared!=stable(core):
+        raise PackError("PPM_AUTHORING_RULES_HASH_INVALID")
+    return bound
+
 def complete_rule_preflight(markup, metadata, rules):
     writing=k9_rule_guard.evaluate(markup,metadata,rules)
     table=k9_table_guard.evaluate(markup)
@@ -207,6 +232,7 @@ def _build_single(job,entry,rules,rules_sha,draft):
     research=research_row.get("research_product")
     if not isinstance(research,dict): raise PackError("RESEARCH_PRODUCT_MISSING")
     article_type=meta["article_type"]
+    validate_ppm_authoring_rules(item,article_type)
     markup=ensure_all_fact_traces(markup,research)
     validate_html(markup,article_type,meta,research,rules)
     complete_rule_preflight(markup,meta,rules)

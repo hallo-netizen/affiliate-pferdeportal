@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, hashlib, json, re, sys
+import argparse, hashlib, json, re, sys, zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -16,6 +16,17 @@ WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
 LT68_JAR_SHA256 = "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8"
 PPM679_PACKAGE_SHA256 = "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
+PPM679_PACKAGE = ROOT / "quality" / "PORTAL_PRODUCTION_MACHINE_V6.7.9.zip"
+PPM_STRUCTURE_MEMBER = "portal-production-machine/contracts/content-structure-language-gate-v2.json"
+PPM_TYPE_TEMPLATES_MEMBER = "portal-production-machine/contracts/article-type-templates.json"
+PPM_TYPE_EXTENSION_MANIFEST_MEMBER = "portal-production-machine/contracts/article-type-extension-manifest-v1.json"
+PPM_VALIDATOR_MEMBER = "portal-production-machine/includes/content-validator.php"
+PPM_STRUCTURE_GATE_MEMBER = "portal-production-machine/includes/content-structure-language-gate.php"
+PPM_STATIC_CONSTANTS = (
+    "MIN_WORDS", "MIN_PARAGRAPHS", "MIN_H2", "MIN_TABLE_BODY_ROWS",
+    "MIN_FACT_PACK_COVERAGE_RATIO", "MIN_TRACE_LEXICAL_SUPPORT_RATIO",
+    "MAX_DUPLICATE_SENTENCE_RATIO", "MAX_INTRO_PAIR_SIMILARITY",
+)
 INTAKE_FIELDS = {"title", "target_keyword", "category", "article_type", "plan_slot"}
 AUTO_CHAIN_AFTER_SUBMISSION_RULE = "DO_NOT_STOP_WHILE_AUTO_CHAIN_ACTIVE_WAIT_FOR_NEXT_SYSTEM_GENERATED_CHAT_ENTRY_OR_AUTO_CHAIN_CLOSE"
 AUTO_CHAIN_ROUTING_RULE = "SYSTEM_GENERATES_NEXT_STATION_WORKER_NEVER_SELECTS_ROUTE"
@@ -26,6 +37,91 @@ class K9Error(RuntimeError):
 def stable(obj):
     raw = json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with Path(path).open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+def ppm_authoring_rules(article_type):
+    article_type = str(article_type or "").strip()
+    if not article_type:
+        raise K9Error("PPM_AUTHORING_ARTICLE_TYPE_MISSING")
+    if not PPM679_PACKAGE.is_file() or file_sha256(PPM679_PACKAGE) != PPM679_PACKAGE_SHA256:
+        raise K9Error("PPM_AUTHORING_PACKAGE_HASH_MISMATCH")
+    try:
+        with zipfile.ZipFile(PPM679_PACKAGE) as archive:
+            structure = json.loads(archive.read(PPM_STRUCTURE_MEMBER).decode("utf-8"))
+            templates = json.loads(archive.read(PPM_TYPE_TEMPLATES_MEMBER).decode("utf-8"))
+            extensions = json.loads(archive.read(PPM_TYPE_EXTENSION_MANIFEST_MEMBER).decode("utf-8"))
+            validator = archive.read(PPM_VALIDATOR_MEMBER).decode("utf-8")
+            structure_gate = archive.read(PPM_STRUCTURE_GATE_MEMBER).decode("utf-8")
+            types = templates.get("types") if isinstance(templates, dict) else None
+            type_definition = dict(types.get(article_type)) if isinstance(types, dict) and isinstance(types.get(article_type), dict) else None
+            if type_definition is None:
+                ext = extensions.get("extensions") if isinstance(extensions, dict) else None
+                if isinstance(ext, dict):
+                    for row in ext.values():
+                        if not isinstance(row, dict):
+                            continue
+                        aliases = row.get("aliases") if isinstance(row.get("aliases"), list) else []
+                        if article_type not in aliases:
+                            continue
+                        caps = row.get("ppm_capabilities") if isinstance(row.get("ppm_capabilities"), dict) else {}
+                        rel = str(caps.get("type_definition_contract") or "").strip()
+                        if rel:
+                            value = json.loads(archive.read("portal-production-machine/" + rel).decode("utf-8"))
+                            candidate = value.get("type_definition") if isinstance(value, dict) else None
+                            if isinstance(candidate, dict):
+                                type_definition = dict(candidate)
+                        break
+    except Exception as exc:
+        raise K9Error("PPM_AUTHORING_SOURCE_READ_FAILED") from exc
+
+    if not isinstance(structure, dict) or structure.get("contract") != "content_structure_language_gate_v2":
+        raise K9Error("PPM_AUTHORING_STRUCTURE_CONTRACT_INVALID")
+    if not isinstance(type_definition, dict) or not type_definition:
+        raise K9Error("PPM_AUTHORING_TYPE_DEFINITION_MISSING:" + article_type)
+
+    constants = {}
+    for name in PPM_STATIC_CONSTANTS:
+        match = re.search(r"const\s+" + re.escape(name) + r"\s*=\s*([^;]+);", validator)
+        if not match:
+            raise K9Error("PPM_AUTHORING_CONSTANT_MISSING:" + name)
+        raw = match.group(1).strip()
+        if re.fullmatch(r"[0-9]+", raw):
+            value = int(raw)
+        elif re.fullmatch(r"[0-9]+\.[0-9]+", raw):
+            value = float(raw)
+        else:
+            raise K9Error("PPM_AUTHORING_CONSTANT_INVALID:" + name)
+        constants[name.lower()] = value
+
+    table_match = re.search(r"self::word_count\(\$statement\)\s*<\s*([0-9]+)", structure_gate)
+    trace_match = re.search(r"count\(\$trace_tags\)\s*<\s*([0-9]+)", validator)
+    if not table_match or not trace_match:
+        raise K9Error("PPM_AUTHORING_DERIVED_REQUIREMENT_MISSING")
+
+    core = {
+        "contract": "K9_PPM679_AUTHORING_RULES_V1",
+        "article_type": article_type,
+        "ppm_version": "6.7.9",
+        "ppm_package_sha256": PPM679_PACKAGE_SHA256,
+        "global_requirements": constants,
+        "structure_requirements": structure,
+        "type_requirements": type_definition,
+        "derived_binding_requirements": {
+            "table_value_statement_minimum_words": int(table_match.group(1)),
+            "source_trace_minimum": int(trace_match.group(1)),
+        },
+        "source_mode": "EXACT_HASH_BOUND_PPM679_PACKAGE",
+        "quality_change_allowed": False,
+    }
+    out = dict(core)
+    out["rules_sha256"] = stable(core)
+    return out
 
 def load_json(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -249,7 +345,10 @@ def write_chat_entry(job):
         "writing_rules_path": ("contracts/K9_WRITING_RULES.json" if is_writer else None),
         "writing_rules_sha256": (stable(load_json(WRITING_RULES)) if is_writer else None),
         "writing_rules_coverage_contract": ((load_json(WRITING_RULES).get("coverage") or {}).get("contract") if is_writer else None),
-        "complete_rule_application_required": bool(is_writer)
+        "complete_rule_application_required": bool(is_writer),
+        "ppm_authoring_rules_required": bool(is_writer),
+        "ppm_authoring_rules_source": ("job.items[*].input_products.ppm_authoring_rules" if is_writer else None),
+        "ppm_authoring_rules_sha256_required": bool(is_writer)
     }
     write_json(CHAT_ENTRY, entry)
     return entry
@@ -389,7 +488,10 @@ def _inputs_for(item, station):
         }, {}
     research, research_ref = _product_result(item, "research")
     if station == "write":
-        return {"research": research}, {"research": research_ref}
+        return {
+            "research": research,
+            "ppm_authoring_rules": ppm_authoring_rules(item["metadata"]["article_type"]),
+        }, {"research": research_ref}
 
     article_stage = "repair" if item.get("revision", 0) > 0 and item.get("products", {}).get("repair") else "write"
     article, article_ref = _product_result(item, article_stage)
@@ -399,6 +501,7 @@ def _inputs_for(item, station):
     if station == "repair":
         check, check_ref = _product_result(item, "check")
         payload["failed_check"] = check
+        payload["ppm_authoring_rules"] = ppm_authoring_rules(item["metadata"]["article_type"])
         refs["failed_check"] = check_ref
     return payload, refs
 
@@ -689,6 +792,8 @@ def assert_execution_only_entry(job):
             raise K9Error("CHAT_ENTRY_RULE_COVERAGE_GUARD_INVALID")
         if entry.get("writer_preflight_rule")!="RUN_BOUND_WRITE_PACKAGER_PREFLIGHT_AND_FIX_ALL_FINDINGS_BEFORE_RETURN":
             raise K9Error("CHAT_ENTRY_WRITER_PREFLIGHT_GUARD_INVALID")
+        if entry.get("ppm_authoring_rules_required") is not True or entry.get("ppm_authoring_rules_source")!="job.items[*].input_products.ppm_authoring_rules" or entry.get("ppm_authoring_rules_sha256_required") is not True:
+            raise K9Error("CHAT_ENTRY_PPM_AUTHORING_RULE_BINDING_INVALID")
         if job.get("station")=="repair" and entry.get("repair_scope_rule")!="REPAIR_ALL_REPORTED_FAILED_CHECK_FINDINGS_IN_ONE_PASS_ONLY":
             raise K9Error("CHAT_ENTRY_REPAIR_SCOPE_GUARD_INVALID")
 

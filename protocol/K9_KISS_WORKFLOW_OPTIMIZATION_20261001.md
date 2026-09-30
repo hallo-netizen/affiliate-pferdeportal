@@ -29,3 +29,15 @@ PSERC remains because it is the final integration/binding gate. What is removed 
 - No content rule removed.
 - No publish permission enabled.
 - Completed articles are not reopened.
+
+## Writer root-cause closure
+The completed 16-article history proved that the Writer had K9/editorial rules, but several exact PPM 6.7.9 authoring constraints only became visible after the article was written. This caused avoidable write -> check -> repair loops and allowed repair passes to create new downstream PPM findings.
+
+K9 now extracts the exact authoring authority directly from the unchanged, hash-bound PPM 6.7.9 package before every WRITE and REPAIR job:
+- exact content-structure-language contract;
+- exact article-type definition;
+- exact static PPM constants;
+- exact derived table-value/source-trace requirements;
+- exact PPM package SHA-256.
+
+The bound rule object is hash-sealed into the job input and the packager fails closed if it is missing or changed. No PPM rule, threshold, content rule or quality gate is altered. This is earlier rule visibility, not a replacement checker and not a second PPM execution.

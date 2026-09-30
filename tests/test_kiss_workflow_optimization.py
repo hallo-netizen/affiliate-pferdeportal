@@ -1,8 +1,11 @@
 import json
+import sys
 import unittest
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+import k9_engine
 
 class KissWorkflowOptimizationTests(unittest.TestCase):
     def text(self,path):
@@ -54,6 +57,27 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         self.assertIn("WRITING_PREFLIGHT_REPAIR_REQUIRED",packager)
         self.assertIn("REPAIR_ALL_REPORTED_FAILURES_IN_ONE_PASS",contracts["contracts"]["repair"]["must"])
         self.assertIn("DO_NOT_STOP_AFTER_FIRST_REPORTED_FINDING",contracts["contracts"]["repair"]["must"])
+
+    def test_writer_receives_exact_hash_bound_ppm679_authoring_rules(self):
+        rules=json.loads(self.text("contracts/K9_WRITING_RULES.json"))
+        for article_type in rules["types"]:
+            bound=k9_engine.ppm_authoring_rules(article_type)
+            self.assertEqual(bound["contract"],"K9_PPM679_AUTHORING_RULES_V1")
+            self.assertEqual(bound["ppm_package_sha256"],k9_engine.PPM679_PACKAGE_SHA256)
+            self.assertEqual(bound["structure_requirements"]["contract"],"content_structure_language_gate_v2")
+            self.assertEqual(bound["article_type"],article_type)
+            declared=bound["rules_sha256"]
+            core=dict(bound); core.pop("rules_sha256")
+            self.assertEqual(declared,k9_engine.stable(core))
+            for key in (
+                "min_words","min_paragraphs","min_h2","min_table_body_rows",
+                "min_fact_pack_coverage_ratio","min_trace_lexical_support_ratio",
+                "max_duplicate_sentence_ratio","max_intro_pair_similarity",
+            ):
+                self.assertIn(key,bound["global_requirements"])
+        contracts=json.loads(self.text("contracts/K9_WORKER_CONTRACTS.json"))["contracts"]
+        self.assertIn("PPM679_AUTHORING_RULES",contracts["write"]["input_rule"])
+        self.assertIn("PPM679_AUTHORING_RULES",contracts["repair"]["input_rule"])
 
     def test_finalizer_keeps_all_real_gates_and_mandates_chat_file(self):
         wf=self.text(".github/workflows/k9-finalize.yml")
