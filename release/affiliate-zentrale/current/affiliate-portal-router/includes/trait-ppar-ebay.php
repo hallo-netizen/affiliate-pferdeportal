@@ -64,7 +64,6 @@ trait PPAR_Ebay_Trait {
     }
 
     private $ebay_business_campaign_source_row_cache = array();
-    private $ebay_business_campaign_source_row_cache_primed = false;
     private $ebay_catalog_rules_request_cache = null;
     private $ebay_settings_request_cache = null;
 
@@ -79,33 +78,43 @@ trait PPAR_Ebay_Trait {
         return true;
     }
 
-    private function ebay_prime_business_campaign_source_row_cache() {
-        if ($this->ebay_business_campaign_source_row_cache_primed || !$this->ebay_request_local_read_cache_allowed() || !method_exists($this, 'get_campaigns')) {
-            return;
-        }
+    private function ebay_prime_business_campaign_source_row_cache_for_campaigns($campaigns) {
+        if (!$this->ebay_request_local_read_cache_allowed()) { return; }
+
         $hashes = array();
-        foreach ((array) $this->get_campaigns() as $campaign) {
+        foreach ((array) $campaigns as $candidate) {
+            $campaign = is_array($candidate) && isset($candidate['campaign']) && is_array($candidate['campaign'])
+                ? $candidate['campaign']
+                : $candidate;
             if (!is_array($campaign) || sanitize_key((string) ($campaign['network'] ?? '')) !== 'ebay') { continue; }
             $post_id = absint($campaign['post_id'] ?? 0);
             if ($post_id <= 0 || absint(get_post_meta($post_id, '_ppar_ebay_business_auto', true)) !== 1) { continue; }
             $hash = strtolower(sanitize_text_field((string) get_post_meta($post_id, '_ppar_creative_identity_hash', true)));
-            if (preg_match('/^[a-f0-9]{64}$/', $hash)) { $hashes[$hash] = true; }
+            if (!preg_match('/^[a-f0-9]{64}$/', $hash)) { continue; }
+            $cache_key = 'BUSINESS|' . $hash;
+            if (array_key_exists($cache_key, $this->ebay_business_campaign_source_row_cache)) { continue; }
+            $hashes[$hash] = true;
         }
+
         $hashes = array_keys($hashes);
-        if (!$hashes) {
-            $this->ebay_business_campaign_source_row_cache_primed = true;
-            return;
-        }
+        if (!$hashes) { return; }
+
         global $wpdb;
         $table = $this->ebay_items_table();
-        $all_ok = true;
         foreach (array_chunk($hashes, 1000) as $chunk) {
             $placeholders = implode(',', array_fill(0, count($chunk), '%s'));
-            $sql = $wpdb->prepare("SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC", $chunk);
+            $sql = $wpdb->prepare(
+                "SELECT id,item_id,seller_account_type,creative_identity_hash,source_state,policy_state,route_state,item_end_at,source_payload,title,short_description FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash IN ({$placeholders}) ORDER BY id DESC",
+                $chunk
+            );
             $rows = $wpdb->get_results($sql, ARRAY_A);
-            if (!is_array($rows)) { $all_ok = false; continue; }
+            if (!is_array($rows)) { continue; }
+
             foreach ($chunk as $hash) {
-                $this->ebay_business_campaign_source_row_cache['BUSINESS|' . $hash] = array();
+                $cache_key = 'BUSINESS|' . $hash;
+                if (!array_key_exists($cache_key, $this->ebay_business_campaign_source_row_cache)) {
+                    $this->ebay_business_campaign_source_row_cache[$cache_key] = array();
+                }
             }
             foreach ($rows as $row) {
                 if (!is_array($row)) { continue; }
@@ -118,7 +127,6 @@ trait PPAR_Ebay_Trait {
                 }
             }
         }
-        if ($all_ok) { $this->ebay_business_campaign_source_row_cache_primed = true; }
     }
 
 
@@ -2665,11 +2673,8 @@ trait PPAR_Ebay_Trait {
         if (!preg_match('/^[a-f0-9]{64}$/', $hash)) { return array(); }
         $cache_key = 'BUSINESS|' . $hash;
         $use_cache = $this->ebay_request_local_read_cache_allowed();
-        if ($use_cache) {
-            $this->ebay_prime_business_campaign_source_row_cache();
-            if (array_key_exists($cache_key, $this->ebay_business_campaign_source_row_cache)) {
-                return $this->ebay_business_campaign_source_row_cache[$cache_key];
-            }
+        if ($use_cache && array_key_exists($cache_key, $this->ebay_business_campaign_source_row_cache)) {
+            return $this->ebay_business_campaign_source_row_cache[$cache_key];
         }
         global $wpdb;
         $row = $wpdb->get_row($wpdb->prepare(
@@ -2759,9 +2764,90 @@ trait PPAR_Ebay_Trait {
         return false;
     }
 
+    /**
+     * V6.72.169: exact-GTIN lookup for cross-provider offer buttons without a
+     * full campaign normalization pass. The source table is narrowed by the
+     * requested stable GTINs, payloads are then verified exactly, and only the
+     * matching campaign post IDs are returned. Public source/control/health
+     * gates still run later on the normalized matching candidates.
+     */
+    public function ebay_campaign_post_ids_for_exact_gtins($wanted_gtins) {
+        if (!$this->ebay_request_local_read_cache_allowed()) { return array(); }
+
+        $normalize = function($values) {
+            if (method_exists($this, 'idealo_normalize_gtins_from_values')) {
+                return $this->idealo_normalize_gtins_from_values((array) $values);
+            }
+            $out = array();
+            foreach ((array) $values as $value) {
+                $digits = preg_replace('/[^0-9]/', '', (string) $value);
+                if (in_array(strlen($digits), array(8,12,13,14), true)) { $out[$digits] = true; }
+            }
+            return array_keys($out);
+        };
+        $wanted = $normalize($wanted_gtins);
+        if (!$wanted) { return array(); }
+
+        global $wpdb;
+        $table = $this->ebay_items_table();
+        $like_parts = array();
+        $like_args = array();
+        foreach ($wanted as $gtin) {
+            $like_parts[] = 'source_payload LIKE %s';
+            $like_args[] = '%' . $wpdb->esc_like((string) $gtin) . '%';
+        }
+        $sql = "SELECT creative_identity_hash,source_payload FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash<>'' AND (" . implode(' OR ', $like_parts) . ") ORDER BY id DESC";
+        $rows = $wpdb->get_results($wpdb->prepare($sql, $like_args), ARRAY_A);
+        if (!is_array($rows) || !$rows) { return array(); }
+
+        $wanted_set = array_fill_keys($wanted, true);
+        $hashes = array();
+        foreach ($rows as $row) {
+            if (!is_array($row)) { continue; }
+            $hash = strtolower(sanitize_text_field((string) ($row['creative_identity_hash'] ?? '')));
+            if (!preg_match('/^[a-f0-9]{64}$/', $hash)) { continue; }
+            $payload = json_decode((string) ($row['source_payload'] ?? ''), true);
+            $payload = is_array($payload) ? $payload : array();
+            $raw = is_array($payload['raw'] ?? null) ? $payload['raw'] : array();
+            $values = array($raw['gtin'] ?? '', $raw['ean'] ?? '', $raw['upc'] ?? '');
+            foreach ((array) ($raw['localizedAspects'] ?? array()) as $aspect) {
+                if (!is_array($aspect)) { continue; }
+                $name = strtolower(trim((string) ($aspect['name'] ?? '')));
+                if (in_array($name, array('ean','gtin','upc','ean/gtin'), true)) {
+                    $values[] = (string) ($aspect['value'] ?? '');
+                }
+            }
+            $row_gtins = $normalize($values);
+            if (array_intersect($row_gtins, array_keys($wanted_set))) { $hashes[$hash] = true; }
+        }
+        $hashes = array_keys($hashes);
+        if (!$hashes) { return array(); }
+
+        $placeholders = implode(',', array_fill(0, count($hashes), '%s'));
+        $args = array_merge(array(self::CAMPAIGN_POST_TYPE), $hashes);
+        $sql = $wpdb->prepare(
+            "SELECT DISTINCT p.ID
+             FROM {$wpdb->posts} p
+             INNER JOIN {$wpdb->postmeta} h ON h.post_id=p.ID AND h.meta_key='_ppar_creative_identity_hash'
+             INNER JOIN {$wpdb->postmeta} a ON a.post_id=p.ID AND a.meta_key='_ppar_ebay_business_auto' AND a.meta_value='1'
+             WHERE p.post_type=%s
+               AND p.post_status IN ('publish','draft','private')
+               AND h.meta_value IN ({$placeholders})
+             ORDER BY p.menu_order ASC,p.post_title ASC",
+            $args
+        );
+        return array_values(array_unique(array_map('absint', (array) $wpdb->get_col($sql))));
+    }
+
     private function ebay_filter_ranked_product_candidates_provider_cohort($candidates) {
         $candidates = array_values((array) $candidates);
         if (!$candidates) { return array(); }
+
+        // V6.72.169: the page/slot ranking has already narrowed the product pool.
+        // Prime BUSINESS source evidence only for those surviving candidates,
+        // never by normalizing the complete campaign inventory.
+        $this->ebay_prime_business_campaign_source_row_cache_for_campaigns($candidates);
+
         $candidates = array_values(array_filter($candidates, function($candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign) || sanitize_key((string) ($campaign['network'] ?? '')) !== 'ebay') { return true; }
