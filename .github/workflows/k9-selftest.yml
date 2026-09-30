@@ -122,6 +122,9 @@ jobs:
               print("STRUCTURAL_ACTIVE_JOB_TEST_SKIPPED_FINAL_STATE=1")
               raise SystemExit(0)
           job=json.loads(job_path.read_text())
+          if job.get("station") not in ("check","repair"):
+              print("STRUCTURAL_ACTIVE_ARTICLE_TEST_NOT_APPLICABLE="+str(job.get("station")))
+              raise SystemExit(0)
           row=job["items"][0]
           research=copy.deepcopy(row["input_products"]["research"]["research_product"])
           article=copy.deepcopy(row["input_products"]["article"]["article_product"])
