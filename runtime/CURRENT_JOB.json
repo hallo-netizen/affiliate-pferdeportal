@@ -1,0 +1,813 @@
+{
+  "contract": "K9_JOB_V1",
+  "status": "OPEN",
+  "station": "repair",
+  "item_count": 1,
+  "item_ids": [
+    "k9-1ff3dfabfed47a0c47c8df13"
+  ],
+  "items": [
+    {
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "title": "So wählst du passende Schermaschinen für Pferde",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "schermaschinen-beratung",
+        "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+        "target_keyword": "Schermaschinen für Pferde",
+        "title": "So wählst du passende Schermaschinen für Pferde"
+      },
+      "revision": 4,
+      "input_products": {
+        "research": {
+          "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+                "Felltyp und benötigte Geräteklasse",
+                "Netz- oder Akkubetrieb",
+                "Geräusch, Vibration, Gewicht und Balance",
+                "Passende Messer für Felltyp und gewünschte Schnittlänge",
+                "Wartung, Kühlung und regelmäßiges Ölen"
+              ],
+              "decision_goal": "Eine passende Schermaschine für Pferde nach Einsatzumfang, Felltyp, Stromversorgung, Pferdetemperament, Ergonomie und Wartungsanforderungen auswählen."
+            },
+            "fact_pack": {
+              "article_type": "Beratung",
+              "article_type_coverage": "PASS_BERATUNG",
+              "claim_register_hash": "6300dc5370768eb9f2159aba50205b4697a36fb181c19ac34c54069979112b75",
+              "claims": [
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-001",
+                  "locator": "Factors to consider: Horse Clipping Frequency; Light Duty/Trimmers; Medium/HEAVY Duty; Heavy Duty",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden.",
+                  "subject_scope": "Geräteklasse nach Einsatzhäufigkeit",
+                  "time_scope": "allgemeine Produktauswahl",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "2837e31fb462241b44d2fe2caf6e92573b3cdf00155ce3fdb7d5554c4bf3b1d0"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-002",
+                  "locator": "Factors to consider: Coat Type",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter.",
+                  "subject_scope": "Geräteklasse nach Felltyp",
+                  "time_scope": "allgemeine Produktauswahl",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "11a69b6ac0082f4c0b52684d3b20641f837cbf5b5948c7dfd56098120d718a4a"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-003",
+                  "locator": "Factors to consider: Power Source",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben.",
+                  "subject_scope": "Stromversorgung",
+                  "time_scope": "allgemeine Produktauswahl",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "7bbe7b41fee2df1cb9c818666b3d0aa2c1a872c2eb73a6ad8a81c2506ed27409"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-004",
+                  "locator": "Factors to consider: Horse’s Temperament; weight, balance",
+                  "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "statement": "Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern.",
+                  "subject_scope": "Pferdetemperament und Ergonomie",
+                  "time_scope": "allgemeine Produktauswahl",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "1adc09802f31c1931a6e4e71400bde75a9876d97427a840092ab90f78c26b439"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-005",
+                  "locator": "Fine coated horses; Medium coated horses; Thick coated horses",
+                  "source_id": "SRC-LISTER-COAT-TYPES-20260930",
+                  "statement": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.",
+                  "subject_scope": "Messerauswahl nach Felltyp",
+                  "time_scope": "allgemeine Schurpraxis",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-006",
+                  "locator": "You’re not using enough oil; You’re using the wrong blades for the application",
+                  "source_id": "SRC-LISTER-HOT-BLADES-20260930",
+                  "statement": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.",
+                  "subject_scope": "Wartung und Wärmeentwicklung",
+                  "time_scope": "allgemeine Schurpraxis",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd"
+                },
+                {
+                  "claim_status": "FULLY_SUPPORTED",
+                  "fact_id": "FACT-CLIPPER-007",
+                  "locator": "GENERAL ADVICE ON CLIPPING & TRIMMING, points 1, 7, 8, 13",
+                  "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
+                  "statement": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein.",
+                  "subject_scope": "Vorbereitung und sichere Anwendung",
+                  "time_scope": "allgemeine Schurpraxis",
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "evidence_text_sha256": "1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-CLIPPER-001",
+                "FACT-CLIPPER-002",
+                "FACT-CLIPPER-003",
+                "FACT-CLIPPER-004",
+                "FACT-CLIPPER-005",
+                "FACT-CLIPPER-006",
+                "FACT-CLIPPER-007"
+              ],
+              "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+              "fact_pack_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "a29cc0cef3b670de645ecbd88884865299e720db63f285613ae9275b31aed33c",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "schermaschinen_fuer_pferde"
+            },
+            "portal_links": [
+              {
+                "anchor": "Ausrüstung",
+                "href": "/ausruestung/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Pflegezubehör",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Schermaschinen",
+                "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "789a1e393b8dc9b29976d07c33bd1713d7d1a6f262de51df04cff2395a5fcfc4",
+            "sources": [
+              {
+                "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                "title": "Which Clipper is Right for Me and My Horse?",
+                "url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/"
+              },
+              {
+                "source_id": "SRC-LISTER-COAT-TYPES-20260930",
+                "title": "Our guide to clipping different coat types",
+                "url": "https://www.lister-global.com/news/clipping-different-coat-types/"
+              },
+              {
+                "source_id": "SRC-LISTER-HOT-BLADES-20260930",
+                "title": "Help! My Clipper Blades Are Getting Hot",
+                "url": "https://www.lister-global.com/news/bladesgettinghot/"
+              },
+              {
+                "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
+                "title": "Horseline Instructions",
+                "url": "https://www.wahl.co.uk/app/uploads/2018/08/ZB032-Horseline-Instuction-Booklet-Rev.4-10-18.pdf"
+              }
+            ]
+          }
+        },
+        "article": {
+          "article_product": {
+            "article_type": "Beratung",
+            "content_html": "<article>\n<section data-block=\"intro\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.</p>\n</section>\n\n<section data-block=\"criteria\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005\">\n<h2>Welche Schermaschinen für Pferde passen zu Einsatz und Fell?</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001\">Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-CLIPPER-001\"><strong>Einsatzhäufigkeit:</strong> Prüfe, wie oft und wie viele Pferde du scheren möchtest.</li>\n<li data-fact-ids=\"FACT-CLIPPER-002\"><strong>Felltyp:</strong> Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.</li>\n<li data-fact-ids=\"FACT-CLIPPER-003\"><strong>Stromversorgung:</strong> Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Pferdetemperament:</strong> Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Ergonomie:</strong> Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.</li>\n<li data-fact-ids=\"FACT-CLIPPER-005\"><strong>Messerauswahl:</strong> Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.</li>\n</ul>\n<p data-fact-ids=\"FACT-CLIPPER-003\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-003\" data-source-hash=\"7bbe7b41fee2df1cb9c818666b3d0aa2c1a872c2eb73a6ad8a81c2506ed27409\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-005\" data-source-hash=\"c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457\" data-source-title=\"SRC-LISTER-COAT-TYPES-20260930\"></span>Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.</p>\n</section>\n\n<section data-block=\"decision\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen Schritt für Schritt passend auswählen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-004\" data-source-hash=\"1adc09802f31c1931a6e4e71400bde75a9876d97427a840092ab90f78c26b439\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-pflegezubehoer/\">Pflegezubehör</a> die passende thematische Einordnung.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-006\" data-source-hash=\"5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd\" data-source-title=\"SRC-LISTER-HOT-BLADES-20260930\"></span>Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-007\" data-source-hash=\"1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af\" data-source-title=\"SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930\"></span>Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.</p>\n</section>\n\n<section data-block=\"table\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen</h2>\n<table class=\"system-129-table comparison-table\" data-table=\"comparison\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<thead><tr><th>Kriterium</th><th>Prüffrage</th><th>Folgerung für die Auswahl</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-CLIPPER-001\">Einsatzumfang</td><td data-fact-ids=\"FACT-CLIPPER-001\">Wie oft und wie viele Pferde werden geschoren?</td><td data-fact-ids=\"FACT-CLIPPER-001\">Je häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-002\">Felltyp</td><td data-fact-ids=\"FACT-CLIPPER-002\">Ist das Fell eher fein oder dicht?</td><td data-fact-ids=\"FACT-CLIPPER-002\">Bei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-003\">Stromversorgung</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ist ein Netzanschluss sicher erreichbar?</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ein Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Pferdetemperament</td><td data-fact-ids=\"FACT-CLIPPER-004\">Reagiert das Pferd empfindlich auf Geräusch oder Vibration?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Bei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Ergonomie</td><td data-fact-ids=\"FACT-CLIPPER-004\">Lässt sich das Gerät leicht und ausgewogen führen?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Ein geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-005\">Messer</td><td data-fact-ids=\"FACT-CLIPPER-005\">Passt das Messer zum Felltyp?</td><td data-fact-ids=\"FACT-CLIPPER-005\">Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-006\">Wartung</td><td data-fact-ids=\"FACT-CLIPPER-006\">Werden Messer regelmäßig gereinigt und geölt?</td><td data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-007\">Vorbereitung</td><td data-fact-ids=\"FACT-CLIPPER-007\">Ist das Pferd trocken, sauber und gründlich gebürstet?</td><td data-fact-ids=\"FACT-CLIPPER-007\">Trockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003\">Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004 FACT-CLIPPER-005\">Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.</p>\n</section>\n\n<section data-block=\"further_information\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005 FACT-CLIPPER-006\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005\">Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/\">Schermaschinen</a>.</p>\n</section>\n\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.</p>\n</article>",
+            "content_sha256": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+            "contract": "K9_ARTICLE_PRODUCT_V1",
+            "ppm_item": {
+              "article_type": "Beratung",
+              "canonical_article": {
+                "article_type": "Beratung",
+                "body_html": "<article>\n<section data-block=\"intro\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.</p>\n</section>\n\n<section data-block=\"criteria\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005\">\n<h2>Welche Schermaschinen für Pferde passen zu Einsatz und Fell?</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001\">Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-CLIPPER-001\"><strong>Einsatzhäufigkeit:</strong> Prüfe, wie oft und wie viele Pferde du scheren möchtest.</li>\n<li data-fact-ids=\"FACT-CLIPPER-002\"><strong>Felltyp:</strong> Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.</li>\n<li data-fact-ids=\"FACT-CLIPPER-003\"><strong>Stromversorgung:</strong> Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Pferdetemperament:</strong> Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Ergonomie:</strong> Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.</li>\n<li data-fact-ids=\"FACT-CLIPPER-005\"><strong>Messerauswahl:</strong> Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.</li>\n</ul>\n<p data-fact-ids=\"FACT-CLIPPER-003\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-003\" data-source-hash=\"7bbe7b41fee2df1cb9c818666b3d0aa2c1a872c2eb73a6ad8a81c2506ed27409\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-005\" data-source-hash=\"c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457\" data-source-title=\"SRC-LISTER-COAT-TYPES-20260930\"></span>Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.</p>\n</section>\n\n<section data-block=\"decision\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen Schritt für Schritt passend auswählen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-004\" data-source-hash=\"1adc09802f31c1931a6e4e71400bde75a9876d97427a840092ab90f78c26b439\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-pflegezubehoer/\">Pflegezubehör</a> die passende thematische Einordnung.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-006\" data-source-hash=\"5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd\" data-source-title=\"SRC-LISTER-HOT-BLADES-20260930\"></span>Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-007\" data-source-hash=\"1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af\" data-source-title=\"SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930\"></span>Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.</p>\n</section>\n\n<section data-block=\"table\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen</h2>\n<table class=\"system-129-table comparison-table\" data-table=\"comparison\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<thead><tr><th>Kriterium</th><th>Prüffrage</th><th>Folgerung für die Auswahl</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-CLIPPER-001\">Einsatzumfang</td><td data-fact-ids=\"FACT-CLIPPER-001\">Wie oft und wie viele Pferde werden geschoren?</td><td data-fact-ids=\"FACT-CLIPPER-001\">Je häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-002\">Felltyp</td><td data-fact-ids=\"FACT-CLIPPER-002\">Ist das Fell eher fein oder dicht?</td><td data-fact-ids=\"FACT-CLIPPER-002\">Bei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-003\">Stromversorgung</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ist ein Netzanschluss sicher erreichbar?</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ein Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Pferdetemperament</td><td data-fact-ids=\"FACT-CLIPPER-004\">Reagiert das Pferd empfindlich auf Geräusch oder Vibration?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Bei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Ergonomie</td><td data-fact-ids=\"FACT-CLIPPER-004\">Lässt sich das Gerät leicht und ausgewogen führen?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Ein geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-005\">Messer</td><td data-fact-ids=\"FACT-CLIPPER-005\">Passt das Messer zum Felltyp?</td><td data-fact-ids=\"FACT-CLIPPER-005\">Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-006\">Wartung</td><td data-fact-ids=\"FACT-CLIPPER-006\">Werden Messer regelmäßig gereinigt und geölt?</td><td data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-007\">Vorbereitung</td><td data-fact-ids=\"FACT-CLIPPER-007\">Ist das Pferd trocken, sauber und gründlich gebürstet?</td><td data-fact-ids=\"FACT-CLIPPER-007\">Trockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003\">Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004 FACT-CLIPPER-005\">Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.</p>\n</section>\n\n<section data-block=\"further_information\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005 FACT-CLIPPER-006\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005\">Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/\">Schermaschinen</a>.</p>\n</section>\n\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.</p>\n</article>",
+                "body_html_sha256": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+                "body_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen. Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell. Welche Schermaschinen für Pferde passen zu Einsatz und Fell? Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter. Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung . Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen. Einsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest. Felltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell. Stromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist. Pferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern. Ergonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt. Messerauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen. Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben. Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten. Schermaschinen Schritt für Schritt passend auswählen Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden. Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist. Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst. Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung. Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden. Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen. Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen Kriterium Prüffrage Folgerung für die Auswahl Einsatzumfang Wie oft und wie viele Pferde werden geschoren? Je häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse. Felltyp Ist das Fell eher fein oder dicht? Bei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend. Stromversorgung Ist ein Netzanschluss sicher erreichbar? Ein Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen. Pferdetemperament Reagiert das Pferd empfindlich auf Geräusch oder Vibration? Bei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern. Ergonomie Lässt sich das Gerät leicht und ausgewogen führen? Ein geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen. Messer Passt das Messer zum Felltyp? Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten. Wartung Werden Messer regelmäßig gereinigt und geölt? Regelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden. Vorbereitung Ist das Pferd trocken, sauber und gründlich gebürstet? Trockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung. Fazit Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können. Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen. Weiterführende Informationen Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen . Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
+                "body_text_sha256": "55916166b32715cd9714ef7b65b2a6074e2ba53be1b9161dea3b7331d4c9476c",
+                "claim_ids": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004",
+                  "FACT-CLIPPER-005",
+                  "FACT-CLIPPER-006",
+                  "FACT-CLIPPER-007"
+                ],
+                "content_plan_hash": "cf72e3f99dda104c77b079f9589ea334400745af6830897bbd9321f5f03444d4",
+                "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+                "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+                "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+                "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+                "gold_reference_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 31,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 2,
+                  "word_count": 1134
+                },
+                "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Ausrüstung",
+                    "href": "/ausruestung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Pflegezubehör",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Schermaschinen",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "local_candidate_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 18,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 3,
+                  "word_count": 826
+                },
+                "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+                "order_id": "k9-47c8df13",
+                "skeleton_hash": "6a272cf369b316138c6cb14ca8cab404156ab0044bb3844bf05a9a2b1e85d9bb",
+                "slug": "schermaschinen-f-r-pferde",
+                "source_ids": [
+                  "SRC-WAHL-CLIPPER-CHOICE-20260930",
+                  "SRC-LISTER-COAT-TYPES-20260930",
+                  "SRC-LISTER-HOT-BLADES-20260930",
+                  "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930"
+                ],
+                "title": "So wählst du passende Schermaschinen für Pferde"
+              },
+              "contract_hashes": [],
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "plan_item_key": "k9-27b5c81a0da11c56",
+              "quality_binding": {
+                "ai_disclosure_required": true,
+                "contract": "content_structure_language_binding_v2",
+                "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "intent_terms": [
+                  "Schermaschinen für Pferde",
+                  "Schermaschinen",
+                  "Pflegezubehör",
+                  "Ausrüstung"
+                ],
+                "internal_test_marker": "LT27B5C81A0DA1",
+                "language_evidence": {},
+                "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+                "link_bindings": [
+                  {
+                    "active": true,
+                    "anchor": "Ausrüstung",
+                    "href": "/ausruestung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Pflegezubehör",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Schermaschinen",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "minimum_word_count": 750,
+                "portal_link_registry": {
+                  "contract": "portal_link_registry_snapshot_v2",
+                  "entries": [
+                    {
+                      "active": true,
+                      "anchor": "Ausrüstung",
+                      "href": "/ausruestung/",
+                      "reason": "Maschinell gebundener Portal-Hauptbereich",
+                      "role": "parent_category",
+                      "section_id": "criteria",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Pflegezubehör",
+                      "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                      "reason": "Maschinell gebundener Portal-Bereich",
+                      "role": "semantic_related",
+                      "section_id": "decision",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Schermaschinen",
+                      "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                      "reason": "Maschinell gebundene Portal-Produktseite",
+                      "role": "further_information",
+                      "section_id": "further_information",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    }
+                  ],
+                  "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+                },
+                "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "type_meta": {
+                  "decision_criteria": [
+                    "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+                    "Felltyp und benötigte Geräteklasse",
+                    "Netz- oder Akkubetrieb",
+                    "Geräusch, Vibration, Gewicht und Balance",
+                    "Passende Messer für Felltyp und gewünschte Schnittlänge",
+                    "Wartung, Kühlung und regelmäßiges Ölen"
+                  ],
+                  "decision_goal": "Eine passende Schermaschine für Pferde nach Einsatzumfang, Felltyp, Stromversorgung, Pferdetemperament, Ergonomie und Wartungsanforderungen auswählen."
+                },
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+              },
+              "quality_binding_hash": "de3a13405be288f397c4e324f6853303926c5d250b1279536a2db27a61180ddd",
+              "runtime_order": {
+                "allowed_fact_ids": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004",
+                  "FACT-CLIPPER-005",
+                  "FACT-CLIPPER-006",
+                  "FACT-CLIPPER-007"
+                ],
+                "article_type": "Beratung",
+                "conclusion": "Fazit Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können. Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.",
+                "domain": "pferdeportal",
+                "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+                "lead": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen. Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Ausrüstung",
+                    "href": "/ausruestung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Pflegezubehör",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Schermaschinen",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "order_id": "k9-47c8df13",
+                "required_sections": [
+                  "Fazit",
+                  "Weiterführende Informationen"
+                ],
+                "section_fact_ids": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004",
+                  "FACT-CLIPPER-005",
+                  "FACT-CLIPPER-006",
+                  "FACT-CLIPPER-007"
+                ],
+                "slug": "schermaschinen-f-r-pferde",
+                "subject_label": "die Auswahl eines Reitplatzplaners für Pferde",
+                "subject_scope": "k9_topic",
+                "table_focus": [
+                  "FACT-CLIPPER-001",
+                  "FACT-CLIPPER-002",
+                  "FACT-CLIPPER-003",
+                  "FACT-CLIPPER-004"
+                ],
+                "title": "So wählst du passende Schermaschinen für Pferde"
+              },
+              "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+              "source_hashes": [],
+              "source_order_id": "k9-47c8df13",
+              "source_snapshot_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+              "target_keyword": "Schermaschinen für Pferde",
+              "three_type_local_binding": {
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "semantic_keywords": [
+                  "Schermaschinen für Pferde",
+                  "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
+                  "Felltyp und benötigte Geräteklasse",
+                  "Netz- oder Akkubetrieb",
+                  "Geräusch, Vibration, Gewicht und Balance",
+                  "Passende Messer für Felltyp und gewünschte Schnittlänge",
+                  "Wartung, Kühlung und regelmäßiges Ölen"
+                ],
+                "wordpress_runtime_term_id_required_later": true,
+                "wordpress_runtime_validation_performed_now": false
+              },
+              "topic": "So wählst du passende Schermaschinen für Pferde"
+            },
+            "product_sha256": "51835877980ce052a994cdca3c5de68574e749ee80989899eca9776a5652ffd0",
+            "research_product_sha256": "2673e2890fd55db721c0837284b1a4897faa9abc9771eb3644118d6bc5ed9e38",
+            "title": "So wählst du passende Schermaschinen für Pferde"
+          },
+          "item_id": "k9-1ff3dfabfed47a0c47c8df13"
+        },
+        "failed_check": {
+          "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+          "lt68_result": {
+            "article_sha256": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+            "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+            "contract": "K9_LT68_RESULT_V1",
+            "engine": "LanguageTool 6.8 / Bestand 43",
+            "finding_count": 0,
+            "findings": [],
+            "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+            "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+            "language_evidence": {
+              "approved_exceptions": [],
+              "checked_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.\n\nDie passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.\n\nWelche Schermaschinen für Pferde passen zu Einsatz und Fell?\n\nDer erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.\n\nFür die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.\n\nEinsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest.\n\nFelltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.\n\nStromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.\n\nPferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.\n\nErgonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.\n\nMesserauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.\n\nBei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.\n\nAuch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.\n\nSchermaschinen Schritt für Schritt passend auswählen\n\nBeginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.\n\nDanach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.\n\nIm nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.\n\nDanach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung.\n\nZur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.\n\nVor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.\n\nSchermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen\n\nKriterium\n\nPrüffrage\n\nFolgerung für die Auswahl\n\nEinsatzumfang\n\nWie oft und wie viele Pferde werden geschoren?\n\nJe häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.\n\nFelltyp\n\nIst das Fell eher fein oder dicht?\n\nBei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.\n\nStromversorgung\n\nIst ein Netzanschluss sicher erreichbar?\n\nEin Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.\n\nPferdetemperament\n\nReagiert das Pferd empfindlich auf Geräusch oder Vibration?\n\nBei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.\n\nErgonomie\n\nLässt sich das Gerät leicht und ausgewogen führen?\n\nEin geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.\n\nMesser\n\nPasst das Messer zum Felltyp?\n\nEin ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nWartung\n\nWerden Messer regelmäßig gereinigt und geölt?\n\nRegelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.\n\nVorbereitung\n\nIst das Pferd trocken, sauber und gründlich gebürstet?\n\nTrockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.\n\nFazit\n\nPassende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.\n\nEbenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.\n\nRegelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.\n\nVor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.\n\nWeiterführende Informationen\n\nWenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen.\n\nDieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
+              "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+              "content_hash": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "execution_record": {
+                "input_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+                "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+                "return_code": 0
+              },
+              "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+              "raw_finding_count": 0,
+              "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+              "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+              "return_code": 0,
+              "unresolved_finding_count": 0
+            },
+            "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+            "publish_allowed": false,
+            "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0,
+            "status": "PASS"
+          },
+          "ppm679_result": {
+            "checks": {
+              "content_hash": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+              "content_structure_language_gate_checks": {
+                "article_type": "Beratung",
+                "body_h1_count": 0,
+                "conclusion_paragraph_count": 4,
+                "conclusion_ratio": 0.14769975786924938,
+                "conclusion_word_count": 122,
+                "content_hash": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+                "contract": "content_structure_language_gate_v2",
+                "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+                "generic_heading_hits": [],
+                "heading_count": 5,
+                "heading_spacing_errors": [],
+                "html_balance": {
+                  "ok": true,
+                  "unclosed": [],
+                  "unexpected_closing": []
+                },
+                "intent_heading_misses": [],
+                "internal_test_marker_valid": true,
+                "internal_test_marker_visible": false,
+                "intro_heading_count": 0,
+                "intro_starts_with_paragraph": true,
+                "intro_word_count": 64,
+                "known_language_regression_hits": [],
+                "language_checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+                "language_evidence_valid": true,
+                "language_exception_errors": [],
+                "language_raw_finding_count": 0,
+                "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+                "language_unresolved_finding_count": 0,
+                "list_count": 1,
+                "maximum_list_items": 6,
+                "near_duplicate_headings": [],
+                "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
+                "quality_binding_hash": "504fa8fba8e4d5a4580cc3bb70e80f7abb73c3871c76f55cb25075304e95d402",
+                "required_blocks": [
+                  "intro",
+                  "criteria",
+                  "decision",
+                  "table",
+                  "conclusion",
+                  "further_information"
+                ],
+                "resolved_link_roles": {
+                  "further_information": {
+                    "anchor": "Schermaschinen",
+                    "block": "further_information",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+                  },
+                  "parent_category": {
+                    "anchor": "Ausrüstung",
+                    "block": "criteria",
+                    "href": "/ausruestung/"
+                  },
+                  "semantic_related": {
+                    "anchor": "Pflegezubehör",
+                    "block": "decision",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/"
+                  }
+                },
+                "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+                "section_blocks": [
+                  "intro",
+                  "criteria",
+                  "decision",
+                  "table",
+                  "conclusion",
+                  "further_information"
+                ],
+                "table_body_rows": 8,
+                "table_columns": 3,
+                "table_count": 1,
+                "table_headers": [
+                  "Kriterium",
+                  "Prüffrage",
+                  "Folgerung für die Auswahl"
+                ],
+                "table_heading": "Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen",
+                "table_tag_balance": true,
+                "table_unique_content_token_ratio": 0.21929824561403508,
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "title_repeated_in_body": false,
+                "version": "6.7.9-wave2-quarantine",
+                "visible_internal_links": [
+                  {
+                    "anchor": "Ausrüstung",
+                    "block": "criteria",
+                    "href": "/ausruestung/"
+                  },
+                  {
+                    "anchor": "Pflegezubehör",
+                    "block": "decision",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/"
+                  },
+                  {
+                    "anchor": "Schermaschinen",
+                    "block": "further_information",
+                    "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/"
+                  }
+                ],
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
+                  "name": "Beratung Schermaschinen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "schermaschinen-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+                "wordpress_category_valid": true
+              },
+              "content_structure_language_gate_status": "PASS",
+              "draft_create_allowed": false,
+              "duplicate_sentence_ratio": 0,
+              "fact_pack_claim_count": 7,
+              "fact_pack_coverage_ratio": 1,
+              "factual_unit_count": 44,
+              "fail_closed_aggregate_status": "PASS",
+              "h2_count": 5,
+              "internal_link_roles": [
+                "parent_category",
+                "semantic_related"
+              ],
+              "intro_pair_similarity": 0.023809523809523808,
+              "known_error_gate_checks": {
+                "adjacent_heading_count": 0,
+                "article_type": "Beratung",
+                "basic_html_balance": {
+                  "ok": true,
+                  "unclosed": [],
+                  "unexpected_closing": []
+                },
+                "body_h1_count": 0,
+                "conclusion_ratio": 0.14769975786924938,
+                "conclusion_word_count": 122,
+                "content_hash": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+                "contract": "known_error_gate_v1",
+                "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+                "duplicate_heading_count": 0,
+                "generic_heading_matches": [],
+                "invalid_internal_link_count": 0,
+                "known_regression_pattern_count": 0,
+                "known_regression_patterns": [],
+                "links_clustered_at_end": false,
+                "maximum_items_in_one_list": 6,
+                "required_conclusion_ratio": 0.1,
+                "required_minimum_list_items": 4,
+                "scope_limit": "known concrete defects only; no general editorial-quality claim",
+                "title_repeated_in_body": false,
+                "total_word_count": 826,
+                "version": "6.7.9-wave1-quarantine",
+                "visible_link_count": 3,
+                "visible_test_marker_found": false
+              },
+              "known_error_gate_status": "PASS",
+              "paragraph_count": 18,
+              "publish_allowed": false,
+              "quality_content_hash": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+              "required_blocks": [
+                "intro",
+                "criteria",
+                "decision",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "source_trace_count": 5,
+              "table_body_row_count": 8,
+              "table_count": 1,
+              "technical_content_hash": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+              "trace_lexical_support_ratio": 1,
+              "trace_units": 5,
+              "used_fact_count": 7,
+              "visible_link_count": 3,
+              "word_count": 816
+            },
+            "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+            "content_sha256": "5cbaa6e4612e446abadff1c6bb12d86c9dfa32923aee8506d7c5fe2b93913a3c",
+            "contract": "K9_PPM679_RESULT_V1",
+            "errors": [],
+            "fail_closed_aggregate_status": "PASS",
+            "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+            "ppm_version": "6.7.9",
+            "publish_allowed": false,
+            "status": "PASS",
+            "technical_status": "TECHNICAL_CHECK_OK"
+          }
+        }
+      },
+      "input_product_refs": {
+        "research": {
+          "job_id": "K9-RESEARCH-beba25304f7d5eeb",
+          "path": "warehouse/research/K9-RESEARCH-beba25304f7d5eeb.json",
+          "sha256": "9a66efb47c29f97409f1439b5ca4035f0db253f8345f00964487711802dbd0f6"
+        },
+        "article": {
+          "job_id": "K9-REPAIR-c2c354bb138c2d55",
+          "path": "warehouse/repair/K9-REPAIR-c2c354bb138c2d55.json",
+          "sha256": "671096ac1880e5574d52d9fd389ca1cf00b353e982072b768b5452384ee93c00"
+        },
+        "failed_check": {
+          "job_id": "K9-CHECK-5db5386307107a67",
+          "path": "warehouse/check/K9-CHECK-5db5386307107a67.json",
+          "sha256": "0dbb395d1db9722e6b9183763c5b47253c7a49becc71ab0180b005724e2dae77"
+        }
+      }
+    }
+  ],
+  "source_run_id": "scope-and-all-trace-migration-20260930",
+  "ledger_generation": 18,
+  "worker_contract": {
+    "worker_type": "CHAT_REPAIR_WORKER",
+    "input_rule": "USE_ONLY_BOUND_RESEARCH_ARTICLE_AND_FAILED_CHECK",
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "must": [
+      "REPAIR_ONLY_REPORTED_FAILURES",
+      "PRESERVE_RESEARCH_PRODUCT_BINDING",
+      "RETURN_COMPLETE_REPAIRED_ARTICLE_PRODUCT",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "ADD_AT_LEAST_THREE_PPM_SOURCE_TRACE_SPANS_TO_LEXICALLY_SUPPORTING_FACTUAL_PARAGRAPHS",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM"
+    ],
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "ADD_UNBOUND_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "output_field_sources": {
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE",
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY"
+    }
+  },
+  "job_id": "K9-REPAIR-b9f2d8fe49bb88cf",
+  "job_sha256": "0d0d8da7c76b75ad6d8a4e3aa0efec6f78a746c8a3870a817dd30964c7777dc3"
+}

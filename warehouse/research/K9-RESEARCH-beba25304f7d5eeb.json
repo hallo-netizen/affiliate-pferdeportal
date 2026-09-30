@@ -134,7 +134,8 @@
           "source_manifest_hash": "a29cc0cef3b670de645ecbd88884865299e720db63f285613ae9275b31aed33c",
           "status": "SOURCE_VERIFIED_PRODUCTION_READY",
           "table_evidence_coverage": "PASS",
-          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND"
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "title_scope": "schermaschinen_fuer_pferde"
         },
         "portal_links": [
           {
@@ -156,7 +157,7 @@
             "section_id": "further_information"
           }
         ],
-        "product_sha256": "2673e2890fd55db721c0837284b1a4897faa9abc9771eb3644118d6bc5ed9e38",
+        "product_sha256": "789a1e393b8dc9b29976d07c33bd1713d7d1a6f262de51df04cff2395a5fcfc4",
         "sources": [
           {
             "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",

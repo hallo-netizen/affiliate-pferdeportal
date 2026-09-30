@@ -33,6 +33,52 @@ def text_of(markup):
 def word_count(markup):
     return len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",text_of(markup)))
 
+def _trace_fact_ids(markup):
+    out=[]
+    for tag in re.findall(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I):
+        m=re.search(r'\bdata-fact-id=["\']([^"\']+)["\']',tag,re.I)
+        if m:
+            out.append(m.group(1))
+    return out
+
+def ensure_all_fact_traces(markup, research):
+    fact_pack=research.get("fact_pack",{})
+    fact_ids=[str(x) for x in fact_pack.get("fact_ids",[]) if str(x)]
+    claims={str(x.get("fact_id") or ""):x for x in fact_pack.get("claims",[]) if isinstance(x,dict)}
+    existing=set(_trace_fact_ids(markup))
+    for fid in fact_ids:
+        if fid in existing:
+            continue
+        claim=claims.get(fid)
+        if not claim:
+            raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
+        source_hash=str(claim.get("evidence_text_sha256") or "")
+        source_title=str(claim.get("source_id") or "")
+        if not source_hash or not source_title:
+            raise PackError("PPM_SOURCE_TRACE_BINDING_MISSING:"+fid)
+        statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(claim.get("statement") or "").casefold()))
+        candidates=[]
+        for m in re.finditer(r"<p\b[^>]*>.*?</p>",markup,re.I|re.S):
+            segment=m.group(0)
+            opener=re.match(r"<p\b[^>]*>",segment,re.I)
+            if not opener:
+                continue
+            attr=re.search(r'\bdata-fact-ids=["\']([^"\']+)["\']',opener.group(0),re.I)
+            if not attr or fid not in attr.group(1).split():
+                continue
+            visible_tokens=set(re.findall(r"[a-z0-9äöüß]+",text_of(segment).casefold()))
+            candidates.append((len(statement_tokens & visible_tokens),m.start(),m.end(),opener.end(),segment))
+        if not candidates:
+            raise PackError("PPM_SOURCE_TRACE_TARGET_MISSING:"+fid)
+        candidates.sort(key=lambda x:(-x[0],x[1]))
+        _,start,end,insert_at,segment=candidates[0]
+        trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
+               f'data-source-hash="{source_hash}" data-source-title="{source_title}"></span>')
+        replacement=segment[:insert_at]+trace+segment[insert_at:]
+        markup=markup[:start]+replacement+markup[end:]
+        existing.add(fid)
+    return markup
+
 def validate_html(markup, article_type, metadata, research, rules):
     if not markup.strip(): raise PackError("WRITER_HTML_EMPTY")
     trules=rules.get("types",{}).get(article_type)
@@ -51,13 +97,13 @@ def validate_html(markup, article_type, metadata, research, rules):
     claims=research.get("fact_pack",{}).get("claims",[])
     claim_map={str(x.get("fact_id") or ""):x for x in claims if isinstance(x,dict)}
     trace_tags=[m.group(0) for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I)]
-    if len(trace_tags)<3:
-        raise PackError("PPM_SOURCE_TRACE_COUNT_BELOW_3")
+    trace_fact_ids=[]
     for tag in trace_tags:
         def attr(name):
             m=re.search(r"\b"+re.escape(name)+r'=["\']([^"\']+)["\']',tag,re.I)
             return m.group(1) if m else ""
         fid=attr("data-fact-id"); source_hash=attr("data-source-hash"); source_title=attr("data-source-title")
+        trace_fact_ids.append(fid)
         claim=claim_map.get(fid)
         if not claim:
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
@@ -65,6 +111,10 @@ def validate_html(markup, article_type, metadata, research, rules):
             raise PackError("PPM_SOURCE_TRACE_SOURCE_ID_MISMATCH:"+fid)
         if source_hash != str(claim.get("evidence_text_sha256") or ""):
             raise PackError("PPM_SOURCE_TRACE_HASH_MISMATCH:"+fid)
+    required_trace_ids=set(str(x) for x in research.get("fact_pack",{}).get("fact_ids",[]) if str(x))
+    if not required_trace_ids.issubset(set(trace_fact_ids)):
+        missing=sorted(required_trace_ids-set(trace_fact_ids))
+        raise PackError("PPM_SOURCE_TRACE_FACT_SET_MISMATCH:"+",".join(missing))
     if article_type=="Beratung" and 'data-list="criteria"' not in markup and "data-list='criteria'" not in markup:
         raise PackError("BERATUNG_CRITERIA_LIST_MISSING")
     if "ppm-ai-disclosure" not in markup: raise PackError("AI_DISCLOSURE_MISSING")
@@ -101,6 +151,7 @@ def build(draft_path):
     research=research_row.get("research_product")
     if not isinstance(research,dict): raise PackError("RESEARCH_PRODUCT_MISSING")
     article_type=meta["article_type"]
+    markup=ensure_all_fact_traces(markup,research)
     validate_html(markup,article_type,meta,research,rules)
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})

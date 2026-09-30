@@ -6,7 +6,7 @@
   "status": "OPEN_CHAT_WORKER_JOB",
   "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
   "active_job": {
-    "job_id": "K9-REPAIR-c2c354bb138c2d55",
+    "job_id": "K9-REPAIR-b9f2d8fe49bb88cf",
     "station": "repair",
     "article_title": "So wählst du passende Schermaschinen für Pferde",
     "item_id": "k9-1ff3dfabfed47a0c47c8df13",
@@ -14,7 +14,7 @@
     "job_path": "runtime/CURRENT_JOB.json"
   },
   "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION",
-  "next_action": "READ_RUNTIME_CHAT_ENTRY_AND_EXECUTE_NOW",
+  "next_action": "AUTO_PACKAGE_EXISTING_DRAFT_AND_CONTINUE",
   "chat_may_route": false,
   "publish_allowed": false
 }
