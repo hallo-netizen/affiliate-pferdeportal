@@ -530,7 +530,7 @@ trait PPAR_Provider_Registry_Trait {
                 $this->provider_set_access_state('ebay', 'credentials_saved', $message);
                 return new WP_Error('ebay_deletion_challenge_pending', $message);
             }
-            $token = $this->ebay_access_token($settings, true);
+            $token = $this->ebay_access_token($settings, true, false);
             if (is_wp_error($token)) {
                 $this->provider_set_access_state('ebay', 'failed', $token->get_error_message());
                 return $token;
