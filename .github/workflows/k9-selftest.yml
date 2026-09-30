@@ -46,7 +46,10 @@ jobs:
                   p.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
                   return k9_ppm679.run(Path("quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip"),p)
 
-          negative=check(copy.deepcopy(rp["fact_pack"]))
+          negative_pack=copy.deepcopy(rp["fact_pack"])
+          for claim in negative_pack["claims"]:
+              claim.pop("article_types",None)
+          negative=check(negative_pack)
           negative_codes={e.get("error_code") for e in negative.get("errors",[]) if isinstance(e,dict)}
           if "BLOCKED_CONTENT_FACT_REF_TYPE_MISMATCH" not in negative_codes:
               raise SystemExit("NEGATIVE_DID_NOT_REPRODUCE_FACT_TYPE_MISMATCH")
@@ -61,6 +64,77 @@ jobs:
 
           print("NEGATIVE_REPRODUCED=1")
           print("POSITIVE_FACT_TYPE_BINDING_ACCEPTED=1")
+          PY
+      - name: PPM 6.7.9 regression - canonical table and source traces
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import copy, hashlib, json, re, sys, tempfile
+          from pathlib import Path
+          sys.path.insert(0, str(Path("quality").resolve()))
+          import k9_ppm679
+          sys.path.insert(0, str(Path(".").resolve()))
+          import k9_write_packager
+
+          job=json.loads(Path("runtime/CURRENT_JOB.json").read_text())
+          row=job["items"][0]
+          research=copy.deepcopy(row["input_products"]["research"]["research_product"])
+          article=copy.deepcopy(row["input_products"]["article"]["article_product"])
+          fact_pack=research["fact_pack"]
+          for claim in fact_pack["claims"]:
+              claim["evidence_text_sha256"]=hashlib.sha256(claim["statement"].encode("utf-8")).hexdigest()
+
+          html=article["content_html"]
+          html=html.replace('<table data-table="comparison"', '<table class="system-129-table comparison-table" data-table="comparison"', 1)
+          claim_by_id={c["fact_id"]:c for c in fact_pack["claims"]}
+          trace_ids=["FACT-CLIPPER-003","FACT-CLIPPER-004","FACT-CLIPPER-005","FACT-CLIPPER-006","FACT-CLIPPER-007"]
+          for fid in trace_ids:
+              c=claim_by_id[fid]
+              opener=f'<p data-fact-ids="{fid}">'
+              trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
+                     f'data-source-hash="{c["evidence_text_sha256"]}" '
+                     f'data-source-title="{c["source_id"]}"></span>')
+              if opener not in html:
+                  raise SystemExit("TRACE_TARGET_MISSING:"+fid)
+              html=html.replace(opener, opener+trace, 1)
+
+          with tempfile.TemporaryDirectory() as td:
+              draft_path=Path(td)/"draft.json"
+              draft_path.write_text(json.dumps({
+                  "contract":"K9_WRITER_DRAFT_V1",
+                  "job_id":job["job_id"],
+                  "item_id":row["item_id"],
+                  "title":row["title"],
+                  "content_html":html
+              },ensure_ascii=False),encoding="utf-8")
+              packaged=k9_write_packager.build(draft_path)
+              ap=packaged["results"][0]["article_product"]
+              payload={
+                  "contract":"K9_PPM679_INPUT_V1",
+                  "generated":{
+                      "article_type":ap["article_type"],
+                      "title":ap["title"],
+                      "content_html":ap["content_html"],
+                      "content_hash":ap["content_sha256"]
+                  },
+                  "item":copy.deepcopy(ap["ppm_item"]),
+                  "fact_pack":fact_pack
+              }
+              inp=Path(td)/"ppm.json"
+              inp.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
+              result=k9_ppm679.run(Path("quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip"),inp)
+
+          codes={e.get("error_code") for e in result.get("errors",[]) if isinstance(e,dict)}
+          forbidden={
+              "BLOCKED_CONTENT_TABLE_COUNT",
+              "BLOCKED_CONTENT_TABLE_ROW_FLOOR",
+              "BLOCKED_CONTENT_SOURCE_TRACE_COUNT",
+              "BLOCKED_CONTENT_TRACE_LEXICAL_SUPPORT"
+          }
+          remaining=sorted(codes & forbidden)
+          if remaining:
+              raise SystemExit("STRUCTURAL_CANDIDATE_STILL_BLOCKED:"+",".join(remaining))
+          print("CANONICAL_TABLE_AND_SOURCE_TRACES_ACCEPTED=1")
           PY
       - name: Validate actual open runtime job
         run: |
