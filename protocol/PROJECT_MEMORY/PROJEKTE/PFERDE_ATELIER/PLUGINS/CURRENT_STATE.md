@@ -49,7 +49,7 @@ Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
 ERSTER OFFENER PUNKT:
-PSTE 0.57.13 arbeitet weiterhin automatisch den bereits gestarteten `Portalabgleich` ab; dessen Speicherpflege bleibt bis `COMPLETE` korrekt blockiert. Während dieser automatische Hintergrundlauf weiterläuft, ist der aktive manuelle Arbeitsstrang die Affiliate-Zentrale 6.72.167: eBay wurde auf der bestehenden 6.72.166-Performancebasis deutlich verschlankt, aber der vollständige Release-Gesamttest ist noch offen.
+PSTE 0.57.13 ist beim bereits gestarteten `Portalabgleich` jetzt **BLOCKED**. Aktueller Nutzer-Readback vom 2026-09-30 zeigt exakt: `PSTE_CONTEXT_AJAX_NETWORK_FAILED`. Damit ist der Abgleich nicht mehr nur langlaufend, sondern durch einen AJAX-/Netzwerkfehler unterbrochen. Die PSTE-Speicherpflege bleibt bis zu einem erfolgreichen `COMPLETE` weiterhin gesperrt. Parallel bleibt der aktive manuelle Arbeitsstrang die Affiliate-Zentrale 6.72.167: eBay wurde auf der bestehenden 6.72.166-Performancebasis deutlich verschlankt, aber der vollständige Release-Gesamttest ist noch offen.
 
 Affiliate-6.72.167-Stand:
 - 17 historische eBay-Run-Recovery-/Migrationsfunktionen aus dem Run-Modul entfernt;
