@@ -7,9 +7,9 @@
   "operational_mode": "SUPERVISOR",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "DESIGN_AND_PROVE_ZERO_MANUAL_NUDGE_ORCHESTRATION_AROUND_EXISTING_K9_STATIONS",
+  "next_action": "RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
   "work_binding": {
-    "baseline": "SCHERMASCHINEN_REAL_E2E_STOP",
+    "baseline": "LATEST_REAL_E2E_STOP",
     "preserve_existing_station_products": true,
     "preserve_quality_gates": [
       "LT_6_8",
