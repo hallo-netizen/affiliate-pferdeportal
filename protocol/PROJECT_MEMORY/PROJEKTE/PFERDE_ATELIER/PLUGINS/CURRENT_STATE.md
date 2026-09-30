@@ -49,26 +49,32 @@ Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand
 - PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
 
 ERSTER OFFENER PUNKT:
-PSTE 0.57.13: Nutzer-Screenshot vom 2026-09-30 zeigt lokal im Browser `BLOCKED · PSTE_CONTEXT_AJAX_NETWORK_FAILED`, aber die Quellprüfung des finalen 0.57.13-Pfads zeigt: dieser Code entsteht ausschließlich im Browser-Fetch-Catch und wird **nicht** als BLOCKED-Job in WordPress gespeichert. Der sichtbare Originalbutton `Portalabgleich jetzt fortsetzen` wird serverseitig nur bei Jobstatus `PENDING` oder `RUNNING` gerendert; damit belegt derselbe Screenshot, dass der gespeicherte Portalabgleich weiterhin fortsetzbar/laufend ist. Jeder erfolgreiche Batch wird vor dem nächsten Schritt gespeichert, zusätzlich wird ein Single-Cron-Fortsetzungslauf nach 10 Sekunden geplant. Kein Neustart des Gesamtbestands erforderlich; `Gesamtbestand neu abgleichen` nicht erneut verwenden. Die PSTE-Speicherpflege bleibt bis `COMPLETE` weiterhin gesperrt. Parallel bleibt der aktive manuelle Arbeitsstrang die Affiliate-Zentrale 6.72.167: eBay wurde auf der bestehenden 6.72.166-Performancebasis deutlich verschlankt, aber der vollständige Release-Gesamttest ist noch offen.
+PSTE 0.57.13 bleibt separat fortsetzbar; der Browserfehler `PSTE_CONTEXT_AJAX_NETWORK_FAILED` ist kein gespeicherter BLOCKED-Job. `Gesamtbestand neu abgleichen` nicht erneut verwenden. Die PSTE-Speicherpflege bleibt bis `COMPLETE` gesperrt.
 
-Affiliate-6.72.167-Stand:
+Der aktive manuelle Arbeitsstrang Affiliate-Zentrale 6.72.167 ist technisch **RELEASED** und vollständig gegatet, aber noch **nicht in WordPress installiert**.
+
+Affiliate-6.72.167-Finalstand:
 - 17 historische eBay-Run-Recovery-/Migrationsfunktionen aus dem Run-Modul entfernt;
 - weitere 4 nachweislich tote eBay-Kompatibilitätsmethoden entfernt;
 - Run-Modul von 3015 auf 2144 Zeilen reduziert;
-- alter terminaler Fremdbuild-Run wird bounded historisiert statt dauerhaft als aktueller roter Hauptstatus mitgeschleppt;
+- alter terminaler eBay-Lauf bleibt höchstens 24 Stunden als aktuelle Diagnose sichtbar und wird danach bounded historisiert; bei neuem manuellen Start wird ein terminaler Vorgänger sofort historisiert;
 - eBay-OAuth-Verbindungstest von Kanalpause getrennt; normale Runtime bleibt weiterhin kanalgesperrt/fail-closed;
 - zentraler Housekeeping-Pfad verdichtet exakt `ended + purged_ended + inactive + listing_post_id=0` nach 7 Tagen;
 - aktive, öffentliche/listing-gebundene und junge Datensätze bleiben unangetastet;
 - PRIVATE/BUSINESS-, Coverage-, Qualitäts-, Affiliate-, Compliance- und 6.72.166-Performancepfade bleiben gebunden;
-- isolierte PHP-8.4 Positiv-/Negativ-Simulation: `ALL_PASS`;
-- Source-/Logik-Evidence: `release/affiliate-zentrale/evidence/ebay_kiss_storage_cleanup_v672167_source_checks_20260930.md`;
-- aktueller Source-Manifest-SHA-256: `480277aa8850ec5916c62a24548f90155dfa21591228e3c8a41b338ddc46afc4`;
-- noch **kein** Live-Installer / kein WordPress-Readback.
+- vollständiger WordPress-7.1.2-/MariaDB-Gesamttest: **PASS**;
+- Workflow Run `36730922545`: **SUCCESS**;
+- Final Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672167_full_release_gate_20260930.md`;
+- Source-Manifest-SHA-256: `274ec2c4a72f7c8f5d4871f55b2b2f3c5ad81c54915998a37425c074b5cf6b0a`;
+- Final Installer: `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.167.zip`;
+- Installer-SHA-256: `998730894c4dbd677bbee04bff947df740800a6c6ab9524b747a0da5a5f8adc0`;
+- technische Release-Autorität: `RELEASED`, `release_allowed=true`;
+- noch **kein WordPress-Live-Readback**.
 
 GENAU EINE NEXT ACTION:
-`RUN_COMBINED_FULL_RELEASE_GATE_FOR_AFFILIATE_6_72_167_EBAY_KISS_STORAGE_CLEANUP`.
+`INSTALL_AFFILIATE_ZENTRALE_6_72_167_AND_READBACK`.
 
-PSTE währenddessen nicht manuell neu starten und keine PSTE-Datenbanklöschung ausführen. Sobald der Portalabgleich dort `COMPLETE` ist, wird die PSTE-Speicherpflege als separater späterer Schritt wieder aufgenommen. Affiliate 6.72.167 darf erst nach vollständigem Gate-PASS paketiert/installiert werden.
+Exakt den final gegateten Installer mit SHA-256 `998730894c4dbd677bbee04bff947df740800a6c6ab9524b747a0da5a5f8adc0` installieren. Danach ausschließlich WordPress-Version/Aktivstatus und den eBay-Status readbacken. Erst danach reale Affiliate-Housekeeping-Bereinigung und dieselbe Datenbank-/Performance-Nachmessung ausführen.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
