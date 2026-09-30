@@ -1,0 +1,62 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-RESEARCH-12ef2ec83671e474",
+  "results": [
+    {
+      "item_id": "k9-a38f92cbb97fe29aece54292",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "decision_support": {
+          "decision_criteria": [
+            "Widerrist- und Wirbelsäulenfreiheit",
+            "Anpassbarkeit an Rückenform und Widerrist",
+            "Stabilität und Polsterung",
+            "Position und Anzahl der Ringe",
+            "Gurtlänge und Verstellbereich"
+          ],
+          "decision_goal": "Einen Longiergurt mit Bogen auswählen, dessen Widerrist- und Wirbelsäulenfreiheit, Anpassbarkeit, Stabilität und Ringpositionen zum Pferd und zur geplanten Longierarbeit passen."
+        },
+        "fact_pack": {
+          "article_type": "Beratung",
+          "article_type_coverage": "PASS",
+          "claim_register_hash": "024a2920fad200f872fc09a2d90739edb7f54db25a5a5466cb482f5e4252f1d4",
+          "claims": [
+            {"action":"Für die geplante Arbeitsweise prüfen, ob passende seitliche Führungsringe vorhanden und sinnvoll positioniert sind.","article_types":["Beratung"],"check":"Für die geplante Arbeitsweise prüfen, ob passende seitliche Führungsringe vorhanden und sinnvoll positioniert sind.","claim_status":"FULLY_SUPPORTED","display_label":"Ringpositionen und Trainingszweck","display_statement":"Bei der Arbeit am Langzügel laufen die Langzügel vom Gebiss durch die seitlichen Ringe am Longiergurt bis in die Hand des Menschen.","evidence_text_sha256":"28941dc583c1bc1a0c3f28f70ce74dea1df009b7b4d0e6102701a15de4d7b9b3","fact_id":"fact-lgb-001","locator":"web:retrieved-2026-09-30:fact-lgb-001","result":"Ringpositionen sind funktional relevant, wenn der Gurt für Langzügel- oder Doppellongenarbeit genutzt werden soll.","source_id":"src-fn-bodenarbeit","statement":"Bei der Arbeit am Langzügel laufen die Langzügel vom Gebiss durch die seitlichen Ringe am Longiergurt bis in die Hand des Menschen.","subject_scope":"longiergurt_mit_bogen_auswahl","time_scope":"RETRIEVED_2026-09-30","why":"Ringpositionen sind funktional relevant, wenn der Gurt für Langzügel- oder Doppellongenarbeit genutzt werden soll."},
+            {"action":"Den Gurt nicht nur nach dem sichtbaren Bogen auswählen, sondern die tatsächliche Freiheit über Widerrist und Wirbelsäule kontrollieren.","article_types":["Beratung"],"check":"Den Gurt nicht nur nach dem sichtbaren Bogen auswählen, sondern die tatsächliche Freiheit über Widerrist und Wirbelsäule kontrollieren.","claim_status":"FULLY_SUPPORTED","display_label":"Widerristfreiheit und Druckverteilung","display_statement":"Ein anatomisch vorgeformter Longiergurt kann den Widerrist freigeben; beim beschriebenen Modell wurden Druckpunkte mit einer Sensorschabracke geprüft und NBR-Schaumstoff dient der Druckverteilung.","evidence_text_sha256":"da3ec21592200b09fcbc973a8a8dc02b63835bc027672ca03ae0f292089aa13d","fact_id":"fact-lgb-002","locator":"web:retrieved-2026-09-30:fact-lgb-002","result":"Widerrist- und Wirbelsäulenfreiheit sowie die Druckverteilung sollten vor dem Kauf am konkreten Pferderücken geprüft werden.","source_id":"src-decathlon-longiergurt","statement":"Ein anatomisch vorgeformter Longiergurt kann den Widerrist freigeben; beim beschriebenen Modell wurden Druckpunkte mit einer Sensorschabracke geprüft und NBR-Schaumstoff dient der Druckverteilung.","subject_scope":"longiergurt_mit_bogen_auswahl","time_scope":"RETRIEVED_2026-09-30","why":"Widerrist- und Wirbelsäulenfreiheit sowie die Druckverteilung sollten vor dem Kauf am konkreten Pferderücken geprüft werden."},
+            {"action":"Bei verstellbaren Systemen prüfen, ob Winkel und Polsterung fachgerecht an das Pferd angepasst werden können.","article_types":["Beratung"],"check":"Bei verstellbaren Systemen prüfen, ob Winkel und Polsterung fachgerecht an das Pferd angepasst werden können.","claim_status":"FULLY_SUPPORTED","display_label":"Anpassbarkeit an die Rückenform","display_statement":"Der Kieffer Equishape Pro kombiniert ein verstellbares Kopfeisen mit seitlich des Wirbelkanals liegenden, nachpolsterbaren Polstern; der Hersteller nennt Widerristfreiheit, Druckentlastung und anatomische Anpassbarkeit als Konstruktionsziele.","evidence_text_sha256":"5ae9121e046e63038ac4b46237d866de77d86a2314895859b536d3c081f4a07c","fact_id":"fact-lgb-003","locator":"web:retrieved-2026-09-30:fact-lgb-003","result":"Anpassbare Bogen- und Polsterlösungen können sinnvoll sein, wenn Rückenform oder Widerristhöhe besondere Anforderungen stellen.","source_id":"src-kieffer-equishape","statement":"Der Kieffer Equishape Pro kombiniert ein verstellbares Kopfeisen mit seitlich des Wirbelkanals liegenden, nachpolsterbaren Polstern; der Hersteller nennt Widerristfreiheit, Druckentlastung und anatomische Anpassbarkeit als Konstruktionsziele.","subject_scope":"longiergurt_mit_bogen_auswahl","time_scope":"RETRIEVED_2026-09-30","why":"Anpassbare Bogen- und Polsterlösungen können sinnvoll sein, wenn Rückenform oder Widerristhöhe besondere Anforderungen stellen."},
+            {"action":"Vorderen und hinteren Bogen, Polsterstärke und Bewegungsfreiheit gemeinsam beurteilen.","article_types":["Beratung"],"check":"Vorderen und hinteren Bogen, Polsterstärke und Bewegungsfreiheit gemeinsam beurteilen.","claim_status":"FULLY_SUPPORTED","display_label":"Bogenkonstruktion, Stabilität und Polster","display_statement":"Beim beschriebenen Equimero-Longiergurt schaffen zwei Carbonbügel eine Kammer über Widerrist und Wirbelsäule; der vordere Bogen ist flexibler, der hintere stabiler, und die Polster sind in unterschiedlichen Stärken erhältlich.","evidence_text_sha256":"b506a598f386b9bb2d47afa64e5aba2e54fb60241d99ec315da8b2efb93f8977","fact_id":"fact-lgb-004","locator":"web:retrieved-2026-09-30:fact-lgb-004","result":"Ein Bogen ist kein Selbstzweck: Flexibilität, Stabilität und Polsterhöhe müssen zusammen zur Rückenform und Bewegung des Pferdes passen.","source_id":"src-equimero-longiergurt","statement":"Beim beschriebenen Equimero-Longiergurt schaffen zwei Carbonbügel eine Kammer über Widerrist und Wirbelsäule; der vordere Bogen ist flexibler, der hintere stabiler, und die Polster sind in unterschiedlichen Stärken erhältlich.","subject_scope":"longiergurt_mit_bogen_auswahl","time_scope":"RETRIEVED_2026-09-30","why":"Ein Bogen ist kein Selbstzweck: Flexibilität, Stabilität und Polsterhöhe müssen zusammen zur Rückenform und Bewegung des Pferdes passen."},
+            {"action":"Ringanzahl, Verstellbereich und Polsterung nur zusammen mit der tatsächlichen Passform bewerten.","article_types":["Beratung"],"check":"Ringanzahl, Verstellbereich und Polsterung nur zusammen mit der tatsächlichen Passform bewerten.","claim_status":"FULLY_SUPPORTED","display_label":"Ringe, Verstellbereich und Polsterung","display_statement":"Der Longiergurt Komfort von Krämer besitzt 16 Ringe, weiche Polsterung und einen variabel einstellbaren Bauchumfang.","evidence_text_sha256":"0fee13c42805eaba8ea1d384255f4f04b95df7f111c19db27a49887c7501d5c1","fact_id":"fact-lgb-005","locator":"web:retrieved-2026-09-30:fact-lgb-005","result":"Viele Ringe erhöhen die Zahl der möglichen Befestigungspunkte, ersetzen aber weder passende Gurtlänge noch einen stabilen, druckfreien Sitz.","source_id":"src-kraemer-komfort","statement":"Der Longiergurt Komfort von Krämer besitzt 16 Ringe, weiche Polsterung und einen variabel einstellbaren Bauchumfang.","subject_scope":"longiergurt_mit_bogen_auswahl","time_scope":"RETRIEVED_2026-09-30","why":"Viele Ringe erhöhen die Zahl der möglichen Befestigungspunkte, ersetzen aber weder passende Gurtlänge noch einen stabilen, druckfreien Sitz."}
+          ],
+          "conclusion_evidence_coverage": "PASS",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "domain": "pferdeportal",
+          "fact_ids": ["fact-lgb-001","fact-lgb-002","fact-lgb-003","fact-lgb-004","fact-lgb-005"],
+          "fact_pack_hash": "721b93a1eb07fa945eb1ce1bed87eb14645ce9914d76aa263274f5b7ff6c8c81",
+          "fact_pack_id": "fp-6ffadd28f18d8e1ba6a04633",
+          "placeholder_content_status": "PASS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "required_block_coverage": "PASS",
+          "source_manifest_hash": "32905cf5a9698841906066634b916b674ba6a50d42aa9149b79d5560fda92e39",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "table_evidence_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "title_scope": "longiergurte_mit_bogen"
+        },
+        "portal_links": [
+          {"anchor":"Training","href":"/training/","role":"parent_category","section_id":"criteria"},
+          {"anchor":"Longieren","href":"/training/training-longieren/","role":"semantic_related","section_id":"decision"},
+          {"anchor":"Longiergurte","href":"/training/training-longieren/longiergurte/","role":"further_information","section_id":"further_information"}
+        ],
+        "product_sha256": "6fc70aa0b57bafdf24e65be55a757eaad50e6273954734718d76266cec845e7d",
+        "sources": [
+          {"source_id":"src-fn-bodenarbeit","title":"Merkblatt Bodenarbeit – Deutsche Reiterliche Vereinigung (FN)","url":"https://www.pferd-aktuell.de/shop/downloadable/download/sample/sample_id/12/"},
+          {"source_id":"src-decathlon-longiergurt","title":"Longiergurt Pferd/Pony schwarz – Decathlon","url":"https://www.decathlon.de/p/longiergurt-pferd-pony-schwarz/332654/c382m8644031"},
+          {"source_id":"src-kieffer-equishape","title":"Longiergurt Equishape Pro – Kieffer","url":"https://kieffer.net/products/longiergurt-equishape-pro"},
+          {"source_id":"src-equimero-longiergurt","title":"Longiergurt – Equimero","url":"https://www.equimero.de/produkt/longiergurt/"},
+          {"source_id":"src-kraemer-komfort","title":"Longiergurt Komfort – Krämer Pferdesport","url":"https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurt-Komfort"}
+        ]
+      }
+    }
+  ],
+  "station": "research"
+}
