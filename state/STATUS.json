@@ -1,14 +1,22 @@
 {
+  "active_job": null,
   "contract": "K9_STATUS_V1",
-  "ledger_generation": 18,
-  "total": 1,
   "fully_done": 0,
-  "remaining": 1,
-  "research_open": 0,
+  "ledger_generation": 19,
+  "ready_for_check": 1,
   "ready_for_write": 0,
-  "ready_for_check": 0,
-  "repair_required": 1,
+  "remaining": 1,
+  "repair_required": 0,
+  "research_open": 0,
   "stations": {
+    "check": {
+      "DONE": 0,
+      "PENDING": 1
+    },
+    "repair": {
+      "DONE": 1,
+      "PENDING": 0
+    },
     "research": {
       "DONE": 1,
       "PENDING": 0
@@ -16,23 +24,7 @@
     "write": {
       "DONE": 1,
       "PENDING": 0
-    },
-    "check": {
-      "DONE": 0,
-      "FAIL": 1,
-      "PENDING": 0
-    },
-    "repair": {
-      "DONE": 0,
-      "PENDING": 1
     }
   },
-  "active_job": {
-    "job_id": "K9-REPAIR-b9f2d8fe49bb88cf",
-    "station": "repair",
-    "item_count": 1,
-    "item_ids": [
-      "k9-1ff3dfabfed47a0c47c8df13"
-    ]
-  }
+  "total": 1
 }
