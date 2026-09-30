@@ -2771,73 +2771,7 @@ trait PPAR_Ebay_Trait {
      * matching campaign post IDs are returned. Public source/control/health
      * gates still run later on the normalized matching candidates.
      */
-    public function ebay_campaign_post_ids_for_exact_gtins($wanted_gtins) {
-        if (!$this->ebay_request_local_read_cache_allowed()) { return array(); }
-
-        $normalize = function($values) {
-            if (method_exists($this, 'idealo_normalize_gtins_from_values')) {
-                return $this->idealo_normalize_gtins_from_values((array) $values);
-            }
-            $out = array();
-            foreach ((array) $values as $value) {
-                $digits = preg_replace('/[^0-9]/', '', (string) $value);
-                if (in_array(strlen($digits), array(8,12,13,14), true)) { $out[$digits] = true; }
-            }
-            return array_keys($out);
-        };
-        $wanted = $normalize($wanted_gtins);
-        if (!$wanted) { return array(); }
-
-        global $wpdb;
-        $table = $this->ebay_items_table();
-        $like_parts = array();
-        $like_args = array();
-        foreach ($wanted as $gtin) {
-            $like_parts[] = 'source_payload LIKE %s';
-            $like_args[] = '%' . $wpdb->esc_like((string) $gtin) . '%';
-        }
-        $sql = "SELECT creative_identity_hash,source_payload FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash<>'' AND (" . implode(' OR ', $like_parts) . ") ORDER BY id DESC";
-        $rows = $wpdb->get_results($wpdb->prepare($sql, $like_args), ARRAY_A);
-        if (!is_array($rows) || !$rows) { return array(); }
-
-        $wanted_set = array_fill_keys($wanted, true);
-        $hashes = array();
-        foreach ($rows as $row) {
-            if (!is_array($row)) { continue; }
-            $hash = strtolower(sanitize_text_field((string) ($row['creative_identity_hash'] ?? '')));
-            if (!preg_match('/^[a-f0-9]{64}$/', $hash)) { continue; }
-            $payload = json_decode((string) ($row['source_payload'] ?? ''), true);
-            $payload = is_array($payload) ? $payload : array();
-            $raw = is_array($payload['raw'] ?? null) ? $payload['raw'] : array();
-            $values = array($raw['gtin'] ?? '', $raw['ean'] ?? '', $raw['upc'] ?? '');
-            foreach ((array) ($raw['localizedAspects'] ?? array()) as $aspect) {
-                if (!is_array($aspect)) { continue; }
-                $name = strtolower(trim((string) ($aspect['name'] ?? '')));
-                if (in_array($name, array('ean','gtin','upc','ean/gtin'), true)) {
-                    $values[] = (string) ($aspect['value'] ?? '');
-                }
-            }
-            $row_gtins = $normalize($values);
-            if (array_intersect($row_gtins, array_keys($wanted_set))) { $hashes[$hash] = true; }
-        }
-        $hashes = array_keys($hashes);
-        if (!$hashes) { return array(); }
-
-        $placeholders = implode(',', array_fill(0, count($hashes), '%s'));
-        $args = array_merge(array(self::CAMPAIGN_POST_TYPE), $hashes);
-        $sql = $wpdb->prepare(
-            "SELECT DISTINCT p.ID
-             FROM {$wpdb->posts} p
-             INNER JOIN {$wpdb->postmeta} h ON h.post_id=p.ID AND h.meta_key='_ppar_creative_identity_hash'
-             INNER JOIN {$wpdb->postmeta} a ON a.post_id=p.ID AND a.meta_key='_ppar_ebay_business_auto' AND a.meta_value='1'
-             WHERE p.post_type=%s
-               AND p.post_status IN ('publish','draft','private')
-               AND h.meta_value IN ({$placeholders})
-             ORDER BY p.menu_order ASC,p.post_title ASC",
-            $args
-        );
-        return array_values(array_unique(array_map('absint', (array) $wpdb->get_col($sql))));
-    }
+    
 
     private function ebay_filter_ranked_product_candidates_provider_cohort($candidates) {
         $candidates = array_values((array) $candidates);
@@ -5878,7 +5812,34 @@ trait PPAR_Ebay_Trait {
         return array('listing_id'=>$listing_id,'attachment_id'=>absint($image));
     }
 
+    private function ebay_business_item_gtins($item) {
+        $item=is_array($item)?$item:array();
+        $raw=is_array($item['raw']??null)?$item['raw']:array();
+        $values=array(
+            $item['gtin']??'',$item['ean']??'',$item['upc']??'',
+            $raw['gtin']??'',$raw['ean']??'',$raw['upc']??''
+        );
+        foreach ((array)($raw['localizedAspects']??array()) as $aspect) {
+            if (!is_array($aspect)) { continue; }
+            $name=strtolower(trim((string)($aspect['name']??'')));
+            if (in_array($name,array('ean','gtin','upc','ean/gtin'),true)) {
+                $values[]=(string)($aspect['value']??'');
+            }
+        }
+        $out=array();
+        foreach ($values as $value) {
+            foreach (preg_split('/[^0-9]+/',(string)$value) as $part) {
+                $part=trim($part);
+                if (in_array(strlen($part),array(8,12,13,14),true)) {
+                    $out['g:'.$part]=$part;
+                }
+            }
+        }
+        return array_values($out);
+    }
+
     private function ebay_business_creative($item, $rule, $run_uuid, $classification = array()) {
+        $product_gtins = $this->ebay_business_item_gtins($item);
         $seller = preg_replace('/[^0-9A-Za-z._-]/', '', (string) ($item['seller_username'] ?? ''));
         if ($seller === '') { $seller = 'ebay-business'; }
         $partner_name = !empty($item['seller_username']) ? 'eBay: ' . (string) $item['seller_username'] : 'eBay Business';
@@ -5901,6 +5862,7 @@ trait PPAR_Ebay_Trait {
             'ebay_verified_product_slug'=>sanitize_title((string) ($classification['product_slug'] ?? '')),'ebay_verified_product_concept'=>sanitize_key((string) ($classification['product_concept_id'] ?? '')),'ebay_verified_concept_kind'=>sanitize_key((string) ($classification['concept_kind'] ?? 'product')),'ebay_verified_product_targets'=>array_values((array) ($classification['product_target_slugs'] ?? array())),'ebay_verified_path'=>sanitize_text_field((string) ($classification['path'] ?? '')),'ebay_verified_score'=>absint($classification['score'] ?? 0),'ebay_evidence_hash'=>sanitize_text_field((string) ($classification['evidence_hash'] ?? '')),'ebay_business_match_contract'=>sanitize_key((string) ($classification['business_match_contract'] ?? '')),
             'ebay_quality_score'=>absint($item['business_quality']['overall'] ?? 0),'ebay_quality_relevance'=>absint($item['business_quality']['relevance'] ?? 0),'ebay_quality_seller'=>absint($item['business_quality']['seller'] ?? 0),'ebay_quality_offer'=>absint($item['business_quality']['offer'] ?? 0),'ebay_quality_price'=>absint($item['business_quality']['price'] ?? 0),'ebay_quality_reason'=>sanitize_text_field((string) ($item['business_quality']['reason'] ?? '')),
             'ebay_seller_feedback_percentage'=>(float) ($item['seller_feedback_percentage'] ?? 0),'ebay_seller_feedback_score'=>absint($item['seller_feedback_score'] ?? 0),'ebay_brand'=>sanitize_text_field((string) ($item['brand'] ?? '')),
+            'product_gtins'=>$product_gtins,
             'price'=>sanitize_text_field((string) ($item['price_value'] ?? '')),'currency'=>strtoupper(substr(sanitize_text_field((string) ($item['currency'] ?? 'EUR')),0,10)),'availability'=>'available',
         );
         $external_id = substr(preg_replace('/[^0-9A-Za-z._-]/', '-', (string) $item['item_id']), 0, 191);
