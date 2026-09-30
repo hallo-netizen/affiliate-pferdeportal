@@ -1,84 +1,88 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-09-30
-STATUS: V1.9.2 LIVE FAIL / AUTOMATISCHER ROLLBACK PASS / URSACHE NOCH NICHT BEWIESEN / V1.9.3 DIAGNOSE LOKAL POSITIV+NEGATIV PASS
+STATUS: V1.9.2 LIVE FAIL / ROLLBACK PASS / V1.9.3 LIVE-READBACK-DIAGNOSE POSITIV+NEGATIV HARD PASS / DIAGNOSE-LIVERUN NÄCHSTES
 
 ## Harte Abnahmeregel
 
 **Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-Zusätzlich gilt seit dem zweiten Livefehler:
-Ein synthetisch grüner Fix gilt nicht als Beweis für die reale Live-Ursache. Der reale Ausführungspfad muss mit dem echten Produktionspaket simuliert werden.
+Ein synthetischer Einzeltest gilt nicht als Beweis für die reale Live-Ursache. Der echte Produktionspfad muss mit dem echten Produktionspaket simuliert sein.
 
 ## Live-Befund
 
-V1.9.2 ist live erneut fehlgeschlagen:
+V1.9.2 ist live zweimal mit dem echten Buchbinden-Kandidaten am Readback gescheitert:
 
-`Readback fehlgeschlagen: DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
+`DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
 
-Damit ist V1.9.2 **NICHT abgenommen** und als Produktionsfix widerlegt.
+Das exportierte Live-Protokoll bestätigt für beide Buchbinden-Läufe:
+- CREATE 7;
+- ADOPT_EXISTING 0;
+- UPDATE 0;
+- UNCHANGED 0.
 
-## Korrektur der vorherigen Ursachenannahme
+Damit ist die frühere Parent-/ADOPT_EXISTING-Ursachenannahme für diesen Livefall widerlegt.
 
-Die vorherige Annahme `ADOPT_EXISTING bei falschem Parent` war für den echten Livefall nicht belegt.
+## V1.9.3 – Diagnose, kein Produktionsfix
 
-Der im echten Research-Paket gespeicherte Live-Inventar-Snapshot enthielt vor dem Deployment keines der sieben Buchbinden-Zielobjekte.
+Plugin:
+`Affiliate-Portal Kategorie-Workflow V1.9.3`
 
-Der reale Buchbinden-Plan ist deshalb im gebundenen Ausgangszustand:
+Installer:
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.3_LIVE_READBACK_DIAGNOSTIC_POSNEG_PASS.zip`
 
-- 7 × CREATE;
-- 0 × UPDATE;
-- 0 × ADOPT_EXISTING.
+Installer SHA-256:
+`6bd488625e545a1921d88423c1658792d8747aa81b035140c93bcc1174a4fda3`
 
-Der Parent-Adoption-Fix aus V1.9.2 kann damit nicht die Ursache des zweiten Livefehlers erklären.
+Source:
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.3_LIVE_READBACK_DIAGNOSTIC_POSNEG_PASS.zip`
 
-## Exakte lokale Reproduktion des Produktionsplans
+Source SHA-256:
+`d4258a5c7d873ff024d3027ba2fe3e774c9d3575930f972c238cde8ada43fc62`
 
-Verwendet:
+Änderung:
+- keine Strukturentscheidung geändert;
+- keine Research-/Ownership-Regel geändert;
+- keine automatische Fehlerreparatur;
+- fehlgeschlagener Readback wird vor Rollback gespeichert;
+- Fehlermeldung nennt Knoten, Adapter/Taxonomie, abweichende Felder sowie Soll-/Istwerte.
+
+## Lokale Positiv-/Negativsimulation
+
+Exakter Produktionspfad:
 - echter Buchbinden-READ_ONLY_PREVIEW;
-- echtes live erzeugtes Research-Paket;
-- für die lokale Testumgebung ausschließlich HMAC/Review-Signaturen neu versiegelt;
-- keine fachliche/strukturelle Änderung.
+- echtes Research-Paket;
+- 7 CREATE;
+- Positiv: Deploy + Readback PASS.
 
-Ergebnis:
-- Preflight PASS;
-- 7 × CREATE;
-- Deploy + Readback im lokalen WordPress-Test: PASS.
-
-Damit ist bewiesen:
-Der aktuelle lokale Mock bildet mindestens ein reales Live-Verhalten beim CREATE noch nicht ab.
-
-Die konkrete Live-Abweichung ist noch **nicht bekannt**.
-
-## V1.9.3 Diagnose – noch kein Produktionsfix
-
-Der Readback wurde feldgenau instrumentiert und speichert den fehlgeschlagenen Readback vor dem automatischen Rollback.
-
-Lokale Positivsimulation:
-- exakter 7-CREATE-Buchbinden-Plan → DEPLOYED_AND_READBACK_PASS.
-
-Lokale Negativsimulation:
-- mutierter Seiten-Slug → Feld `slug` erkannt + Rollback PASS;
-- mutierter Kategoriename → `name` erkannt + Rollback PASS;
-- mutierter Parent → `parent` erkannt + Rollback PASS;
-- beschädigte concept_id-Meta → `concept_meta` erkannt + Rollback PASS;
-- beschädigte logische Parent-Meta → `logical_parent_meta` erkannt + Rollback PASS.
+Negativ:
+- Seiten-Slug mutiert → `slug` erkannt + Rollback PASS;
+- Kategoriename mutiert → `name` erkannt + Rollback PASS;
+- Parent mutiert → `parent` erkannt + Rollback PASS;
+- concept_id-Meta mutiert → `concept_meta` erkannt + Rollback PASS;
+- logical-parent-Meta mutiert → `logical_parent_meta` erkannt + Rollback PASS.
 
 Regression:
 - 251/251 PASS;
-- PHP-Lint PASS.
+- Fresh-Unpack PHP-Lint PASS;
+- Source↔Installer Runtime-Parität 22/22 byteidentisch.
 
-WICHTIG:
-V1.9.3 ist derzeit **Diagnosecode**, kein behaupteter Live-Fix.
+## Beleggrenze
+
+Die konkrete Live-Abweichung ist noch nicht bekannt.
+V1.9.3 ist deshalb ausdrücklich **keine Produktionsabnahme** und **kein behaupteter Fix**.
 
 ## NEXT ACTION
 
-Kein erneuter Deployment-Versuch.
+V1.9.3 über V1.9.2 installieren.
 
-Zuerst den bereits vorhandenen Live-Run aus WordPress exportieren:
+Der fehlgeschlagene Apply hat die Workspace-Stufe nicht weitergeschaltet; der bestehende serverseitige Dry-Run bleibt auf `dryrun_ready`.
 
-`Kategorien → Protokoll → Protokoll als JSON exportieren`
+Dann:
+`Kategorien → Geprüften Plan anwenden`
 
-Damit wird ohne neuen Write geprüft, welche Aktionen der echte Live-Dry-Run geplant hat.
+Bei erneutem Mismatch liefert die Meldung jetzt:
+`node + fields + expected + actual`
+und führt weiterhin den automatischen Rollback aus.
 
-Erst danach wird entschieden, ob überhaupt ein diagnostischer Live-Run nötig ist.
+Diese exakte Meldung ist die nächste Autorität für den Ursachenfix.
