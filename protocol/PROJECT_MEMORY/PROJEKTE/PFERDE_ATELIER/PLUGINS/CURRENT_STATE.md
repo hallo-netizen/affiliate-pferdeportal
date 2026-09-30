@@ -45,6 +45,18 @@ Arbeitsgrenze:
 - Affiliate-Zentrale **6.72.165** wurde im laufenden Auftrag durch einen gleichversionierten Storage-Housekeeping-Build ersetzt; exakter Updatebeleg steht in `UPDATEPROTOKOLL.md`.
 - PSTE **0.57.12** ist weiterhin real installiert; ein neuer PSTE-Kandidat ist **noch kein LIVE-Stand**.
 
+## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
+
+- Affiliate-Zentrale: real **6.72.165** aktiv; Storage-Housekeeping-Ersatz installiert und Performancepfade unverändert gebunden.
+- PSTE: real weiterhin **0.57.12** aktiv. Final geprüfter **0.57.13-Kandidat** ist bereit, aber noch **NICHT LIVE**. Kandidaten-SHA-256: `9627705af4d934b6dcde5106476459af2f3959032da9caee2a33cc5621c22345`.
+- PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht nach Quellprüfung aus; **kein Update erforderlich**.
+- PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
+
+Aktuelle Plugin-NEXT-ACTION:
+`INSTALL_PSTE_0_57_13_DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS`.
+
+Der PSTE-Kandidat ist nur Kandidat, bis WordPress-Installation und Readback bestätigt sind. Erst danach folgt Datenbankpflege; vorher keine manuelle Löschung.
+
 ## KATEGORIE-CLOSEOUT-SYNC 2026-09-24
 
 Reine Dokumentations-Nachführung aus der technischen Current-Autorität `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`. Keine Pluginänderung und kein WordPress-Write durch diese Bürosynchronisierung.
