@@ -1,0 +1,783 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-921a7f7564921ca5",
+  "results": [
+    {
+      "item_id": "k9-a38f92cbb97fe29aece54292",
+      "lt68_result": {
+        "article_sha256": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+        "checked_text_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 7,
+        "findings": [
+          {
+            "context": "...ionen setzen stärker auf Anpassbarkeit. Beim Kieffer Equishape Pro lassen sich das Kopfeisen und ...",
+            "length": 7,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 1822,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...tzen stärker auf Anpassbarkeit. Beim Kieffer Equishape Pro lassen sich das Kopfeisen und die seitli...",
+            "length": 9,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 1830,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...n der einzelnen Bereiche. Beim beschriebenen Equimero-Gurt ist der vordere Carbonbogen flexibler ausgel...",
+            "length": 13,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 2510,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...ewerten.  Ringpositionen an der vorgesehenen Longier- oder Langzügelarbeit ausrichten.  Verstellbe...",
+            "length": 8,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 3701,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...kte können praktisch sein, wenn verschiedene Verschnallungen vorgesehen sind. Sie lösen aber keine Passfo...",
+            "length": 15,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4658,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...ls jemand, der regelmäßig mit Langzügel oder Doppellonge arbeitet und deshalb bestimmte seitliche Füh...",
+            "length": 11,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 5460,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "... ist.  Kriterium  Worauf achten?  Bedeutung  Widerristfreiheit  Raum über Widerrist und Wirbelsäule  Der Bo...",
+            "length": 17,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 6418,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          }
+        ],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Longiergurte mit Bogen werden vor allem dann interessant, wenn über dem Widerrist und entlang der Wirbelsäule mehr Raum geschaffen werden soll. Entscheidend ist aber nicht die sichtbare Bogenform allein. Anatomisch vorgeformte Modelle, verstellbare Kopfeisen, unterschiedliche Polsterstärken und konstruktiv getrennte Bereiche für Stabilität und Flexibilität zeigen, dass die Passform aus mehreren Bauteilen entsteht. Für die Auswahl lohnt sich deshalb ein genauer Blick auf Rückenform, Widerristhöhe, Druckverteilung und die Frage, wie gut sich der Gurt an das einzelne Pferd anpassen lässt.\n\nDaneben muss der Longiergurt zur geplanten Arbeit passen. Bei der Langzügelarbeit werden die Zügel durch seitliche Ringe am Longiergurt geführt; andere Modelle bieten eine größere Zahl von Ringen und damit mehr mögliche Befestigungspunkte. Das macht die Position der Ringe zu einem praktischen Auswahlkriterium. Ebenso wichtig bleiben der Verstellbereich des Bauchgurts und die Polsterung. Ein gut ausgestatteter Gurt ist deshalb nicht automatisch passend, wenn die Ringlage, die Länge oder der Sitz am Pferd nicht zur vorgesehenen Nutzung passen.\n\nWiderrist und Rückenform zuerst prüfen\n\nEin anatomisch vorgeformter Longiergurt kann den Widerrist freigeben. Beim beschriebenen Decathlon-Modell wurde die Druckverteilung mit einer Sensorschabracke geprüft; ein Schaumstoffkern soll den Druck über den Rücken verteilen. Für die Kaufentscheidung bedeutet das nicht, dass ein bestimmtes Material automatisch besser ist. Es zeigt vielmehr, welche Punkte am eigenen Pferd kontrolliert werden sollten: Liegt der Gurt seitlich ruhig, bleibt über Widerrist und Wirbelsäule genügend Raum und verteilt sich der Kontakt gleichmäßig, ohne dass der Bogen nur optisch hoch wirkt?\n\nAndere Konstruktionen setzen stärker auf Anpassbarkeit. Beim Kieffer Equishape Pro lassen sich das Kopfeisen und die seitlich des Wirbelkanals liegenden Polster verändern. Damit wird die Passform nicht nur über die Gurtlänge, sondern auch über Winkel und Polstervolumen beeinflusst. Für Pferde mit ausgeprägtem Widerrist oder einer Rückenform, die mit einem starren Gurt schlecht harmoniert, kann diese Verstellbarkeit ein wichtiges Kriterium sein. Der Hersteller empfiehlt bei diesem System ausdrücklich eine Anpassung über einen Sattler, was den Stellenwert der individuellen Einstellung zusätzlich unterstreicht.\n\nAuch bei deutlich ausgeprägten Bogenkonstruktionen lohnt sich der Blick auf die Aufgaben der einzelnen Bereiche. Beim beschriebenen Equimero-Gurt ist der vordere Carbonbogen flexibler ausgelegt, während der hintere Bogen mehr Stabilität geben soll. Dazu kommen austauschbare Polster in verschiedenen Stärken. Daraus folgt eine praktische Prüfreihenfolge: Erst wird geschaut, ob die Kammer über Widerrist und Wirbelsäule zum Pferd passt. Danach wird beurteilt, ob Polsterhöhe und Beweglichkeit ausreichend sind und der Gurt trotzdem stabil genug bleibt.\n\nDer Bereich Training ordnet die Ausrüstung in den größeren Trainingszusammenhang ein. Für die konkrete Auswahl bleibt dennoch der Pferderücken der Ausgangspunkt. Ein Bogen kann nur dann sinnvoll sein, wenn die gesamte Konstruktion mit dem Pferd harmoniert. Deshalb sollte die Passform nicht ausschließlich im Stand beurteilt werden. Die Entscheidung richtet sich danach, ob der Gurt die gewünschte Freiheit ermöglicht und gleichzeitig so angepasst werden kann, dass seine seitlichen Kontaktflächen nachvollziehbar und stabil liegen.\n\nWiderrist- und Wirbelsäulenfreiheit am konkreten Pferd kontrollieren.\n\nPrüfen, ob Winkel und Polsterung ausreichend anpassbar sind.\n\nBogenkonstruktion, Stabilität und Polsterhöhe gemeinsam bewerten.\n\nRingpositionen an der vorgesehenen Longier- oder Langzügelarbeit ausrichten.\n\nVerstellbereich und Gurtlänge nicht hinter der Zahl der Ringe zurückstellen.\n\nRingpositionen zur Arbeitsweise passend wählen\n\nDie seitlichen Ringe sind keine bloße Zusatzausstattung. Im FN-Merkblatt zur Bodenarbeit wird für die Langzügelarbeit beschrieben, dass die Zügel vom Gebiss durch die seitlichen Ringe am Longiergurt bis in die Hand des Menschen laufen. Wer einen Gurt für solche Aufgaben auswählt, sollte deshalb nicht nur zählen, wie viele Ringe vorhanden sind, sondern prüfen, auf welcher Höhe und an welcher Position die benötigten Führungen liegen. Die spätere Arbeitsweise bestimmt damit, welche Ringanordnung tatsächlich einen Nutzen hat.\n\nEin anderes Beispiel zeigt, wie unterschiedlich die Ausstattung ausfallen kann: Der Longiergurt Komfort von Krämer wird mit 16 Ringen, weicher Polsterung und variablem Bauchumfang beschrieben. Viele Befestigungspunkte können praktisch sein, wenn verschiedene Verschnallungen vorgesehen sind. Sie lösen aber keine Passformprobleme. Ein Modell mit vielen Ringen ist daher nur dann die bessere Wahl, wenn der Gurt in Länge und Umfang zum Pferd passt und die benötigten Ringe dort sitzen, wo sie für die geplante Arbeit sinnvoll genutzt werden können.\n\nFür die Entscheidung hilft eine klare Trennung zwischen Muss- und Zusatzkriterien. Muss-Kriterien sind die benötigten Führungs- und Befestigungspunkte sowie ein passender Verstellbereich. Zusätzliche Ringe sind erst danach interessant. Diese Reihenfolge verhindert, dass ein umfangreich ausgestatteter Gurt gewählt wird, dessen grundlegende Maße oder Ringpositionen nicht zum eigenen Einsatz passen. Wer überwiegend einfach longiert, kann andere Anforderungen haben als jemand, der regelmäßig mit Langzügel oder Doppellonge arbeitet und deshalb bestimmte seitliche Führungen benötigt.\n\nDie Seite Longieren stellt den Zusammenhang zur Arbeitsweise her. Für den Longiergurt selbst bleibt die Auswahl konkret: Die Konstruktion über dem Rücken muss Bewegungsfreiheit und Stabilität sinnvoll verbinden, während die Ringe die geplante Leinenführung ermöglichen müssen. Erst wenn beide Ebenen zusammenpassen, lässt sich beurteilen, ob ein Gurt mit Bogen für den eigenen Zweck tatsächlich einen Vorteil bietet.\n\nLongiergurte mit Bogen im Überblick\n\nDie wichtigsten Kriterien lassen sich als kurze Prüfreihenfolge zusammenfassen. Zuerst kommt die Freiheit über Widerrist und Wirbelsäule, anschließend die Anpassbarkeit an die Rückenform. Danach werden Stabilität, Polsterung, Ringpositionen und der Verstellbereich geprüft. Die Tabelle ordnet diese Punkte nach ihrer Funktion und zeigt, welche Beobachtung für die Auswahl entscheidend ist.\n\nKriterium\n\nWorauf achten?\n\nBedeutung\n\nWiderristfreiheit\n\nRaum über Widerrist und Wirbelsäule\n\nDer Bogen soll nicht nur hoch wirken, sondern tatsächlich ausreichend Freiheit ermöglichen.\n\nAnpassbarkeit\n\nWinkel und Polster verändern\n\nVerstellbare Bauteile können die Anpassung an unterschiedliche Rückenformen erleichtern.\n\nBogen und Stabilität\n\nFlexible und stabilisierende Bereiche\n\nBewegungsfreiheit und ruhiger Sitz müssen zusammen betrachtet werden.\n\nRingpositionen\n\nFührung passend zur Arbeitsweise\n\nDie benötigten seitlichen Ringe müssen dort liegen, wo sie für die Leinenführung gebraucht werden.\n\nVerstellbereich\n\nBauchumfang, Länge und Polsterung\n\nViele Ringe helfen nicht, wenn der Grundsitz des Gurts nicht passt.\n\nDie Tabelle ist keine Rangliste einzelner Produkte. Sie hilft vielmehr, die Auswahl in eine feste Reihenfolge zu bringen. Ein Modell scheidet aus, wenn es die grundlegende Passform nicht erfüllt, auch wenn es viele Befestigungspunkte bietet. Umgekehrt ist eine gute Rückenfreiheit allein noch kein vollständiges Auswahlkriterium, wenn Ringlage oder Verstellbereich nicht zur vorgesehenen Arbeit passen. So bleibt die Entscheidung am Pferd und am tatsächlichen Trainingszweck orientiert.\n\nFazit zur Auswahl\n\nLongiergurte mit Bogen sind vor allem dann sinnvoll zu prüfen, wenn Widerrist- und Wirbelsäulenfreiheit bei der Auswahl eine besondere Rolle spielen. Die vorhandenen Konstruktionen zeigen unterschiedliche Wege: anatomische Vorformung, verstellbare Kopfeisen, austauschbare Polster oder getrennt ausgelegte Bogenbereiche für mehr Flexibilität und Stabilität. Daraus ergibt sich kein pauschal bestes System. Entscheidend ist, ob der konkrete Gurt zur Rückenform passt und seine Anpassungsmöglichkeiten den tatsächlichen Bedarf des Pferdes abdecken.\n\nIm zweiten Schritt wird die geplante Arbeit einbezogen. Seitliche Ringe übernehmen bei Langzügelarbeit eine konkrete Führungsfunktion, während andere Gurte mit einer großen Zahl von Befestigungspunkten werben. Deshalb sollte die Ringanordnung immer nach dem vorgesehenen Einsatz beurteilt werden. Erst wenn Passform, Stabilität, Polsterung, Ringpositionen und Verstellbereich gemeinsam passen, entsteht eine nachvollziehbare Auswahl. Der Bogen ist dann ein Teil des Gesamtsystems und nicht das einzige Merkmal, nach dem der Longiergurt beurteilt wird.\n\nWeiterführende Informationen\n\nWeitere Beiträge zu Passform, Anwendung und unterschiedlichen Bauarten findest du im Bereich Longiergurte. Dort lässt sich die Auswahl anschließend anhand der eigenen Rückenform, der benötigten Ringpositionen und des vorgesehenen Trainingszwecks weiter einordnen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+          "content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+            "raw_stdout_sha256": "12728bb47a1bc5d547c800fce9c69f96b93cb3c4807dd73d00a848c28376dfd1",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 7,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Kiefer\"},{\"value\":\"Tiefer\"},{\"value\":\"Kiffer\"},{\"value\":\"Treffer\"},{\"value\":\"Kläffer\"},{\"value\":\"Ziffer\"},{\"value\":\"Pfeffer\"},{\"value\":\"Kieler\"},{\"value\":\"Clever\"},{\"value\":\"Kiewer\"},{\"value\":\"Koffer\"},{\"value\":\"Liefer\"},{\"value\":\"Klever\"},{\"value\":\"Kiffe\"},{\"value\":\"Kaffer\"},{\"value\":\"Kiffen\"},{\"value\":\"Kläffe\"},{\"value\":\"Kieker\"},{\"value\":\"Kläffen\"}],\"offset\":1822,\"length\":7,\"context\":{\"text\":\"...ionen setzen stärker auf Anpassbarkeit. Beim Kieffer Equishape Pro lassen sich das Kopfeisen und ...\",\"offset\":48,\"length\":7},\"sentence\":\"Beim Kieffer Equishape Pro lassen sich das Kopfeisen und die seitlich des Wirbelkanals liegenden Polster verändern.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":1830,\"length\":9,\"context\":{\"text\":\"...tzen stärker auf Anpassbarkeit. Beim Kieffer Equishape Pro lassen sich das Kopfeisen und die seitli...\",\"offset\":48,\"length\":9},\"sentence\":\"Beim Kieffer Equishape Pro lassen sich das Kopfeisen und die seitlich des Wirbelkanals liegenden Polster verändern.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Equiner-Gurt\"}],\"offset\":2510,\"length\":13,\"context\":{\"text\":\"...n der einzelnen Bereiche. Beim beschriebenen Equimero-Gurt ist der vordere Carbonbogen flexibler ausgel...\",\"offset\":48,\"length\":13},\"sentence\":\"Beim beschriebenen Equimero-Gurt ist der vordere Carbonbogen flexibler ausgelegt, während der hintere Bogen mehr Stabilität geben soll.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Conchiere\"},{\"value\":\"Longiere\"},{\"value\":\"Conchiert\"},{\"value\":\"Longiert\"},{\"value\":\"Logiert\"},{\"value\":\"Elongiert\"},{\"value\":\"Logiere\"},{\"value\":\"Longieren\"},{\"value\":\"Longierst\"},{\"value\":\"Longierte\"}],\"offset\":3701,\"length\":8,\"context\":{\"text\":\"...ewerten.  Ringpositionen an der vorgesehenen Longier- oder Langzügelarbeit ausrichten.  Verstellbe...\",\"offset\":48,\"length\":8},\"sentence\":\"Ringpositionen an der vorgesehenen Longier- oder Langzügelarbeit ausrichten.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Verschaltungen\"},{\"value\":\"Vergällungen\"},{\"value\":\"Verschalungen\"},{\"value\":\"Verschandlungen\"}],\"offset\":4658,\"length\":15,\"context\":{\"text\":\"...kte können praktisch sein, wenn verschiedene Verschnallungen vorgesehen sind. Sie lösen aber keine Passfo...\",\"offset\":48,\"length\":15},\"sentence\":\"Viele Befestigungspunkte können praktisch sein, wenn verschiedene Verschnallungen vorgesehen sind.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Doppelfolge\"},{\"value\":\"Doppellänge\"},{\"value\":\"Doppelbohne\"},{\"value\":\"Doppelmönche\"},{\"value\":\"Doppelklinge\"},{\"value\":\"Doppelloge\"},{\"value\":\"Doppelkönige\"},{\"value\":\"Doppellunge\"},{\"value\":\"Doppellanze\"},{\"value\":\"Doppelkonche\"},{\"value\":\"Doppellinie\"},{\"value\":\"Doppellounge\"},{\"value\":\"Doppellinse\"},{\"value\":\"Doppellage\"},{\"value\":\"Doppellöschen\"},{\"value\":\"Doppelmonde\"},{\"value\":\"Doppelsonde\"},{\"value\":\"Doppeljunge\"},{\"value\":\"Doppelsonne\"},{\"value\":\"Doppelmenge\"}],\"offset\":5460,\"length\":11,\"context\":{\"text\":\"...ls jemand, der regelmäßig mit Langzügel oder Doppellonge arbeitet und deshalb bestimmte seitliche Füh...\",\"offset\":48,\"length\":11},\"sentence\":\"Wer überwiegend einfach longiert, kann andere Anforderungen haben als jemand, der regelmäßig mit Langzügel oder Doppellonge arbeitet und deshalb bestimmte seitliche Führungen benötigt.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":6418,\"length\":17,\"context\":{\"text\":\"... ist.  Kriterium  Worauf achten?  Bedeutung  Widerristfreiheit  Raum über Widerrist und Wirbelsäule  Der Bo...\",\"offset\":48,\"length\":17},\"sentence\":\"Widerristfreiheit\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0}],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "12728bb47a1bc5d547c800fce9c69f96b93cb3c4807dd73d00a848c28376dfd1",
+          "return_code": 0,
+          "unresolved_finding_count": 7
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "12728bb47a1bc5d547c800fce9c69f96b93cb3c4807dd73d00a848c28376dfd1",
+        "return_code": 0,
+        "status": "REPAIR_REQUIRED"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 2,
+            "conclusion_ratio": 0.11864406779661017,
+            "conclusion_word_count": 140,
+            "content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [
+              "Longiergurte mit Bogen im Überblick"
+            ],
+            "heading_count": 5,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [
+              "Widerrist und Rückenform zuerst prüfen",
+              "Ringpositionen zur Arbeitsweise passend wählen",
+              "Fazit zur Auswahl"
+            ],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 156,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+            "language_evidence_valid": false,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 7,
+            "language_raw_report_sha256": "12728bb47a1bc5d547c800fce9c69f96b93cb3c4807dd73d00a848c28376dfd1",
+            "language_unresolved_finding_count": 7,
+            "list_count": 1,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "6abfe40ca14cb2e7f3ead17ded1b364a272846ecd0d2e81e960fa5fe538fe1a3",
+            "quality_binding_hash": "fe8511b1b4562307b31fd7d98bbe413246e219168dfb69118a23cc3443cc395b",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Longiergurte",
+                "block": "further_information",
+                "href": "/training/training-longieren/longiergurte/"
+              },
+              "parent_category": {
+                "anchor": "Training",
+                "block": "criteria",
+                "href": "/training/"
+              },
+              "semantic_related": {
+                "anchor": "Longieren",
+                "block": "decision",
+                "href": "/training/training-longieren/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 5,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Kriterium",
+              "Worauf achten?",
+              "Bedeutung"
+            ],
+            "table_heading": "Longiergurte mit Bogen im Überblick",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.17391304347826086,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Longiergurte mit Bogen und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Training",
+                "block": "criteria",
+                "href": "/training/"
+              },
+              {
+                "anchor": "Longieren",
+                "block": "decision",
+                "href": "/training/training-longieren/"
+              },
+              {
+                "anchor": "Longiergurte",
+                "block": "further_information",
+                "href": "/training/training-longieren/longiergurte/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Training > Longieren > Longiergurte > Beratung Longiergurte",
+              "name": "Beratung Longiergurte",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "longiergurte-beratung",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "BLOCKED",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 5,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 32,
+          "fail_closed_aggregate_status": "BLOCKED",
+          "h2_count": 5,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.07865168539325842,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.11864406779661017,
+            "conclusion_word_count": 140,
+            "content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 1180,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 16,
+          "publish_allowed": false,
+          "quality_content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 5,
+          "table_body_row_count": 0,
+          "table_count": 0,
+          "technical_content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 5,
+          "used_fact_count": 5,
+          "visible_link_count": 3,
+          "word_count": 1169
+        },
+        "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+        "content_sha256": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_TABLE_COUNT",
+            "evidence_hash": "119976c7d257143207475c3ce20dcebd8c74dbe36e1b31aff1c2ccf14e78b3bc",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": 1,
+            "failed_rule": "GENERATED_ARTICLE_MUST_CONTAIN_EXACTLY_ONE_CANONICAL_TABLE",
+            "field_path": "content.table_count",
+            "item_index": null,
+            "reason": "Der Entwurf enthält nicht genau eine kanonische Vergleichstabelle.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0,
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_TABLE_ROW_FLOOR",
+            "evidence_hash": "60f59238ec6765f9cfe4ad1f4a4ad10197211ffd49b2bb0ca5f6f405d1f6b7e4",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at least 4",
+            "failed_rule": "CANONICAL_TABLE_MUST_HAVE_MINIMUM_4_CONTENT_ROWS",
+            "field_path": "content.table.body_row_count",
+            "item_index": null,
+            "reason": "Die echte Tabelle enthält zu wenige Inhaltszeilen. Fundstelle: tbody der kanonischen Tabelle.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d1c43b5822aafa1a701276935a11bf5b851cbde0bf6eb51d7b7f2e9009493f73",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[14]@byte_8802.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Widerristfreiheit</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "044f560166a8f917d53e04dde1b8bcea128cf056867976ac507b7a81b819036c",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[15]@byte_8828.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Raum über Widerrist und Wirbelsäule</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "83ff233639474638d1ce94eb67a5213be9c2ce639e989a419a21b0de4a21c6fb",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[16]@byte_8874.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Der Bogen soll nicht nur hoch wirken, sondern tatsächlich ausreichend Freiheit ermöglichen.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "822cafe40ef8bf10ee11a09b060e617880156abd758125fa9bd1f8c09f0d06e0",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[17]@byte_9015.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Anpassbarkeit</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "98ed400fcf9528aa4438c2f98c202f610549f2906f86ea94bd6df82330b200cc",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[18]@byte_9037.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Winkel und Polster verändern</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "4046f07d92ba0739ced7fcaf1e561baf2b4613d070a12f671538657b407d11c5",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[19]@byte_9075.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Verstellbare Bauteile können die Anpassung an unterschiedliche Rückenformen erleichtern.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "1ad0d2eb4346bcd4284ed017d70dfb37acd207707f999d09e1ba931022504afe",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[20]@byte_9213.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bogen und Stabilität</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "710114779406f97deb44b8541432870243c98eea618050280bcf24808827152d",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[21]@byte_9243.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Flexible und stabilisierende Bereiche</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "65c6bd23936611bc85283c2e2559eb50a492cc208fe4615a981e0d00e9c43dd7",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[22]@byte_9289.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bewegungsfreiheit und ruhiger Sitz müssen zusammen betrachtet werden.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "2cec6bc1a9965c8e1c7b22b039c3d6429b2d65569eea2c9df5dc9386fee8c917",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[23]@byte_9407.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Ringpositionen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "1b195abac68e8508a2d97d16410313697b1601d9e93d00fd77e67047063750af",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[24]@byte_9430.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Führung passend zur Arbeitsweise</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d18b6f4c687b0fc782039327842ae9caf66b9d59fdd5cb1a0977d2fc74065dfb",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[25]@byte_9472.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Die benötigten seitlichen Ringe müssen dort liegen, wo sie für die Leinenführung gebraucht werden.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "c03ea9b7ac7b01c8b7fa0fdad5c762b45d9bba4a867251b3054017a42107bd62",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[26]@byte_9622.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Verstellbereich</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "0bf0980d435f7681ff07e112e0d6b098c497e5132794ec5a584579027297a26e",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[27]@byte_9646.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Bauchumfang, Länge und Polsterung</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-09-30T11:27:47+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "6b997a95f979075ae5bf513d1d0da45688097fba8ec41306643ebdcd2b87388f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[28]@byte_9689.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Viele Ringe helfen nicht, wenn der Grundsitz des Gurts nicht passt.</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "first_element_is_p": true,
+              "headings": 0,
+              "words": 156
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+            "expected": {
+              "first_element": "p",
+              "headings": 0,
+              "word_range": [
+                30,
+                100
+              ]
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.intro",
+            "human_message": "The article needs a short introductory paragraph without a heading.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Longiergurte mit Bogen im Überblick"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_GENERIC_TECHNICAL_HEADING",
+            "expected": [],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.generic_headings",
+            "human_message": "Headings must sound human and name the concrete reader question.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Widerrist und Rückenform zuerst prüfen",
+              "Ringpositionen zur Arbeitsweise passend wählen",
+              "Fazit zur Auswahl"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "expected": [
+              "longiergurte mit bogen",
+              "longiergurte",
+              "longieren",
+              "training"
+            ],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.heading_intent_terms",
+            "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "bad_headers": [],
+              "body_rows": 5,
+              "columns": 3,
+              "count": 1,
+              "heading": "Longiergurte mit Bogen im Überblick",
+              "unique_token_ratio": 0.17391304347826086,
+              "value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Longiergurte mit Bogen und macht die entscheidenden Prüfpunkte direkt vergleichbar."
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_TABLE_VALUE",
+            "expected": {
+              "body_rows": 4,
+              "columns": 3,
+              "count": 1,
+              "unique_token_ratio": 0.18,
+              "value_statement_words": ">=8"
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.table",
+            "human_message": "The table must have a concrete purpose, useful headings and additional information beyond prose.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "checked_text_matches": true,
+              "checked_text_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+              "content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "exception_errors": [],
+              "execution_record": {
+                "input_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+                "raw_stdout_sha256": "12728bb47a1bc5d547c800fce9c69f96b93cb3c4807dd73d00a848c28376dfd1",
+                "return_code": 0
+              },
+              "raw_finding_count": 7,
+              "raw_report_decodes": true,
+              "raw_report_sha256": "12728bb47a1bc5d547c800fce9c69f96b93cb3c4807dd73d00a848c28376dfd1",
+              "return_code": 0,
+              "unresolved_finding_count": 7
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+            "expected": {
+              "checked_text_sha256": "81fe6cb0f29a91b7381ebca51b5272a569ba59bc555b0a3c731587071c9d582e",
+              "content_hash": "bc9ae87eed08b7792c7f2ed9ff30687e59ed34405a81b3162ac0cc914179a399",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "human_exceptions_only": true,
+              "raw_finding_count": 0,
+              "return_code": 0,
+              "unresolved_finding_count": 0
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.language_evidence",
+            "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          }
+        ],
+        "fail_closed_aggregate_status": "BLOCKED",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "technical_status": "BLOCKED_TECHNICAL_CHECK"
+      }
+    }
+  ],
+  "station": "check"
+}
