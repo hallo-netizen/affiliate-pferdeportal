@@ -1,5 +1,6 @@
 name: K9 final PSERC ENDSTEMPEL package
 on:
+  workflow_dispatch:
   push:
     branches: [konzept9/greenfield-20260929]
     paths: ['runtime/FINALIZE_TRIGGER']
