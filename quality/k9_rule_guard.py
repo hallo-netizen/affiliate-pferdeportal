@@ -4,6 +4,13 @@ from collections import Counter
 
 CONTRACT = "K9_WRITING_RULES_RESULT_V1"
 REQUIRED_GROUPS = {"ppm_679","lt_68","k9_structural","editorial_additive"}
+SUPPORTED_EDITORIAL_SCHEMA = {
+    "heading_policy": {"contract","target_keyword_exact_phrase_mode","exact_target_phrase_occurrences_max","exact_target_phrase_occurrences_min_when_no_title_collision","exact_target_phrase_occurrences_when_title_equals_target","significant_target_keyword_token_h2_occurrences_max","keyword_staccato_forbidden","phrase_family_repetition_forbidden","duplicate_normalized_h2_forbidden","repeated_heading_lead_word_max","natural_heading_surface_required","heading_content_relation_required","significant_keyword_stop_tokens"},
+    "balance_policy": {"contract","hard_total_words_min","hard_total_words_max","preferred_total_words_min","preferred_total_words_max","normal_h2_section_min_words","normal_h2_section_max_words","normal_h2_longest_to_shortest_max_ratio","normal_h2_combined_minimum_ratio","exempt_blocks","table_may_fill_word_budget","further_information_maximum_words","further_information_may_fill_word_budget"},
+    "conclusion_policy": {"contract","target_ratio_min","target_ratio_max","maximum_ratio","maximum_paragraphs","use_conclusion_to_fill_global_word_or_paragraph_floor"},
+    "surface_policy": {"natural_german_required","artificial_generator_phrase_forbidden","keyword_staccato_forbidden","phrase_family_repetition_forbidden","template_spam_forbidden","forbidden_generator_phrases"},
+    "writer_targets": {"semantics","table_unique_token_ratio_target_if_applicable","target_trace_lexical_support_ratio","trace_unit_minimum_shared_lexical_tokens","target_duplicate_sentence_ratio"}
+}
 
 class RuleGuardError(RuntimeError):
     pass
@@ -43,9 +50,16 @@ def validate_coverage(rules):
     additive=rules.get("editorial_additive")
     if not isinstance(additive,dict) or additive.get("contract")!="K9_EDITORIAL_ADDITIVE_RULES_V1":
         raise RuleGuardError("K9_EDITORIAL_ADDITIVE_RULES_MISSING")
-    for key in ("heading_policy","balance_policy","conclusion_policy","surface_policy","writer_targets"):
-        if not isinstance(additive.get(key),dict):
+    expected_groups=set(SUPPORTED_EDITORIAL_SCHEMA)
+    actual_groups=set(additive)-{"contract"}
+    if actual_groups!=expected_groups:
+        raise RuleGuardError("K9_EDITORIAL_RULE_GROUP_SCHEMA_DRIFT")
+    for key,expected_keys in SUPPORTED_EDITORIAL_SCHEMA.items():
+        value=additive.get(key)
+        if not isinstance(value,dict):
             raise RuleGuardError("K9_EDITORIAL_RULE_GROUP_MISSING:"+key)
+        if set(value)!=expected_keys:
+            raise RuleGuardError("K9_EDITORIAL_RULE_FIELD_SCHEMA_DRIFT:"+key)
     return {"status":"PASS","contract":"K9_COMPLETE_RULE_COVERAGE_V1","rules_sha256":stable(rules)}
 
 def _h2_rows(article_html):
