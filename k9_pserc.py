@@ -31,12 +31,25 @@ def canonical_fact_pack(research):
     sources=research.get("sources")
     if not isinstance(fp,dict) or not isinstance(sources,list): raise Blocked("RESEARCH_PRODUCT_INVALID")
     by_id={str(x.get("source_id")):x for x in sources if isinstance(x,dict)}
+    def canonical_source_id(raw_id,src):
+        raw_id=str(raw_id or "").strip()
+        lowered=raw_id.casefold()
+        if any(token in lowered for token in ("test_","dummy","example","placeholder")):
+            url=str((src or {}).get("url") or "").strip()
+            title=str((src or {}).get("title") or "").strip()
+            basis=url or title
+            if not basis: raise Blocked("PLACEHOLDER_SOURCE_WITHOUT_REAL_BINDING:"+raw_id)
+            return "SRC_"+hashlib.sha256(basis.encode("utf-8")).hexdigest()[:16].upper()
+        return raw_id
+    canonical_sources={}
     claims=[]
     for raw in fp.get("claims",[]):
         if not isinstance(raw,dict): raise Blocked("CLAIM_INVALID")
-        sid=str(raw.get("source_id") or "")
-        src=by_id.get(sid)
-        if not src: raise Blocked("CLAIM_SOURCE_UNKNOWN:"+sid)
+        raw_sid=str(raw.get("source_id") or "")
+        src=by_id.get(raw_sid)
+        if not src: raise Blocked("CLAIM_SOURCE_UNKNOWN:"+raw_sid)
+        sid=canonical_source_id(raw_sid,src)
+        canonical_sources[sid]=src
         statement=str(raw.get("statement") or "")
         evidence=str(raw.get("display_statement") or statement)
         claims.append({
@@ -51,7 +64,7 @@ def canonical_fact_pack(research):
         })
     if not claims: raise Blocked("FACT_PACK_EMPTY")
     canon_sources=[]
-    for sid,src in by_id.items():
+    for sid,src in canonical_sources.items():
         related=[x for x in claims if x["source_id"]==sid]
         evidence=" ".join(x["evidence_text"] for x in related).strip() or str(src.get("title") or "")
         canon_sources.append({
