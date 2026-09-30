@@ -3,85 +3,108 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: V1.9.1 LIVE-STAGE-TEST PASS / BUCHBINDEN GLOBAL-COVERAGE LIVE COMPLETE / GLOBAL-KORREKTUR POSITIV+NEGATIV SIMULIERT / LIVE-IMPORT NÄCHSTES
+STATUS: BUCHBINDEN RESEARCH LIVE COMPLETE / READ_ONLY_PREVIEW LOKAL POSITIV+NEGATIV SIMULIERT / LIVE-STRUKTURIMPORT NÄCHSTES
 
 ## Harte Abnahmeregel
 
 **Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-## Live Global-Coverage
+## Live Research
 
-Eingangsdraft:
-`hobby-depot-buchbinden-production-pilot-v1`
+Plugin:
+`Affiliate-Portal Kategorie-Workflow V1.9.1`
 
-Global-Coverage:
-- V1.9.1;
-- 7 Seeds;
-- 1000 Ergebnisse;
-- DataForSEO-Aufruf COMPLETE;
-- Kosten laut Paket: 0.132 USD;
-- Global-Paket bleibt serverseitig gespeichert und wird für Detailresearch wiederverwendet.
+Live erzeugtes Research-Paket:
+`research-specialization-depth-b43e665c-34a5-4672-a486-56f6f9e731ba`
 
-Der Seed `buchbinden online` erzeugte im globalen Provider-Resultat viele fachfremde Online-Treffer (Wetter/Nachrichten usw.).
-Das ist kein WordPress-Fehler; die Global-Stufe verlangt deshalb explizite Master-Entscheidungen pro Review-Core.
+Research:
+- Global-Coverage erledigt;
+- Detailresearch erledigt;
+- Spezialisierungs-Tiefenprüfung 5/5 Content-Knoten erledigt;
+- Research-Handoff verlangt jetzt `READ_ONLY_PREVIEW`.
 
-## Korrigierter Global-Draft
+## Finaler READ_ONLY_PREVIEW-Kandidat
 
 Datei:
-`HOBBY_DEPOT_BUCHBINDEN_GLOBAL_KORRIGIERT_RESEARCH_DRAFT.json`
+`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json`
 
 SHA-256:
-`95b19bfc7d50f4d54d09cfa2ccc00c550ce967b024461b2d45e6e0c0a114b42e`
+`78b9db7666d413ba5508f0d59741ff6579e3dca22d8b0078f8c2fccdbeb19bcb`
 
-Entscheidungen:
-- 26/26 Global-Review-Cores explizit entschieden;
-- `buch selber binden` → SUBTOPIC, Owner `Techniken & Praxis`;
-- `buch binden lassen online` → OUT_OF_SCOPE für den aktuellen Hobby-Pilot;
-- `buch drucken lassen` → OUT_OF_SCOPE;
-- `gebrauchte bücher kaufen` → OUT_OF_SCOPE;
-- fachfremde Online-/Wetter-/Nachrichten-Cores → OUT_OF_SCOPE;
-- keine Architekturmutation durch irrelevante Provider-Treffer.
+Aktive Struktur:
+- Content: Buchbinden → Einstieg / Ausrüstung / Material / Techniken & Praxis;
+- Marketplace: Buchbinden Set;
+- Magazine: Buchbinden Online.
 
-Global-Bindung:
-- Package-ID passend;
-- Content-Hash passend;
-- Project-ID passend;
-- Project-Discovery-Scope passend.
+Fragen/Probleme und FAQ bleiben bewusst noch ohne eigene Strukturpromotion, weil dafür im gebundenen Pilot-Research keine ausreichende eigenständige Evidenz vorliegt.
+
+## Coverage-/Ownership-Entscheidungen
+
+Cluster-Coverage:
+- alle 49 reviewpflichtigen Cluster-Cores explizit entschieden;
+- fachfremde Provider-/Online-/Wetter-/Buchhandels-/lokale Dienstleistungs-Cores strukturell ausgeschlossen;
+- `buchbinden bücher` als ARTICLE_ONLY im redaktionellen Buchbinden-Online-Raum gebunden.
+
+Explizite Artikel-Owner:
+- Einstieg: `buchbinden kurs`, `buchbinden kosten`;
+- Ausrüstung: `buchbinden zubehör`, `ahle buchbinden`;
+- Material: `papier für buchbinden`, `vorsatzpapier buchbinden`;
+- Techniken & Praxis: `buchbinden japanisch`, `buchbinden fadenheftung`, `buchbinden klebebindung`, `buchbinden hardcover`.
+
+Editorial Handoff:
+- 11 ARTICLE_ONLY-Zuweisungen;
+- 11/11 eindeutig gebunden;
+- Status lokal: `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`.
 
 ## Positivsimulation
 
-Exakter korrigierter Draft gegen V1.9.1:
-- RESEARCH_DRAFT Preflight PASS;
-- initialer Review-Scope unverändert/passend;
-- gespeicherte Global-Bindung PASS;
-- 26 Global-Review-Gruppen vollständig entschieden;
-- Global-Coverage-Gate PASS;
-- Global-Content-Hash PASS.
+Exakter Kandidat gegen V1.9.1:
+- Validator PASS;
+- Research-Binding PASS;
+- Research-Evidence `PASS_WITH_RESEARCH_EVIDENCE`;
+- Editorial-Handoff PASS;
+- Comparator `PASS_READ_ONLY_PREVIEW`;
+- Fresh-Live-Simulation: 7 CREATE_PREVIEW / 0 CONFLICT / 0 BLOCKED.
+
+V1.9.1 Regression zusätzlich:
+**248/248 PASS**.
 
 ## Negativsimulation
 
-Alle erwartungsgemäß BLOCKED:
-- eine Global-Entscheidung fehlt → `GLOBAL_COVERAGE_CORE_UNRESOLVED`;
-- DEFERRED → `GLOBAL_COVERAGE_CORE_DEFERRED_BLOCKS_DETAIL`;
-- falscher Global-Hash → Binding FAIL;
-- veränderter Discovery-Scope → Binding FAIL;
-- ungültiger Decision-Code → `GLOBAL_COVERAGE_DECISION_VALUE_INVALID`;
-- falscher Owner-Cluster → `GLOBAL_COVERAGE_OWNER_CLUSTER_MISMATCH`.
+Erwartungsgemäß BLOCKED:
+- fehlende Cluster-Core-Entscheidung → `DFS_TOP_KEYWORD_GROUP_UNRESOLVED`;
+- ARTICLE_ONLY ohne Owner → `SPECIALIZATION_COVERAGE_OWNER_MISSING`;
+- Owner im falschen Cluster → `SPECIALIZATION_COVERAGE_OWNER_CLUSTER_MISMATCH`;
+- nicht belegter Spezialisierungsintent → `DFS_SPECIALIZATION_DECISION_NOT_EVIDENCED`;
+- fehlende Begründung für `Techniken & Praxis` → `DFS_VISIBLE_NAME_UNRESOLVED` + `DFS_CATEGORY_NAME_CHOICE_UNRESOLVED`;
+- falscher Research-Hash → `RESEARCH_BINDING_HASH_MISMATCH`;
+- doppelte Spezialisierungsentscheidung → `SPECIALIZATION_COVERAGE_DECISION_DUPLICATE`.
 
 Evidence:
-`HOBBY_DEPOT_BUCHBINDEN_GLOBAL_KORRIGIERT_POS_NEG_EVIDENCE.json`
+`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_POS_NEG_EVIDENCE.json`
 
-Beleggrenze:
-Die WordPress-HMAC-Signatur des bereits live erzeugten Global-Pakets ist servergeheim und kann offline nicht neu berechnet werden. Das Paket wurde live durch V1.9.1 erzeugt und gespeichert; der nächste serverseitige Freigabeschritt prüft diese Signatur erneut.
+## Beleggrenze
+
+Die live erzeugten Research-/Review-HMAC-Signaturen sind an das WordPress-Servergeheimnis gebunden und können offline nicht positiv neu verifiziert werden.
+
+Lokal bestätigt:
+- Content-Hash/Binding des Research-Pakets;
+- Validator;
+- Research-Evidence;
+- Comparator;
+- Ownership;
+- Positiv-/Negativfälle.
+
+Der verbleibende Server-HMAC-Gate wird beim Live-Import durch V1.9.1 erneut geprüft.
 
 ## NEXT ACTION
 
-In WordPress `Kategorien`:
-1. über `Arbeitsstand übernehmen` nur den korrigierten Draft hochladen;
-2. danach `Korrigierten Stand freigeben`;
-3. danach `Detailresearch starten`.
+In WordPress `Kategorien` genau den neuen `READ_ONLY_PREVIEW` über `Arbeitsstand übernehmen` hochladen.
 
-Das Global-Coverage-Paket NICHT erneut hochladen; es liegt bereits serverseitig vor.
+Wenn die Seite danach `Read-only Gesamtprüfung PASS.` zeigt:
+1. `Finale Struktur freigeben`;
+2. `WordPress-Vorschau erstellen`;
+3. `Geprüften Plan anwenden`.
 
 Bei irgendeinem BLOCKED/Fehler:
-keine Abnahme, sondern lokal reproduzieren → Positiv-/Negativsimulation → erst danach neuer Kandidat.
+keine Abnahme; Fehler lokal reproduzieren → Positiv-/Negativsimulation → erst danach neuer Kandidat.
