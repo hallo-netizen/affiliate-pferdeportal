@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.166
+ * Version: 6.72.167
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -109,7 +109,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.166';
+    const VERSION = '6.72.167';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -345,7 +345,7 @@ final class Pferdeportal_Affiliate_Router {
         // Checkpoint contract: an open run from another runtime build is never
         // version-by-version recovered. It is closed fail-safe and the next run
         // starts with a new UUID from the last confirmed public checkpoint.
-        add_action('init', array($this, 'maybe_adopt_stalled_zero_tick_ebay_run_v6638'), 3);
+        add_action('init', array($this, 'maybe_retire_legacy_terminal_ebay_run_v672167'), 3);
         add_action('init', array($this, 'maybe_close_incompatible_ebay_run_for_checkpoint_restart'), 4);
         add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11);
         add_action('init', array($this, 'maybe_aff043_automatic_state_restore'), 12);
@@ -405,13 +405,6 @@ final class Pferdeportal_Affiliate_Router {
             add_action('admin_init', array($this, 'maybe_migrate_campaigns'));
             add_action('admin_init', array($this, 'maybe_apply_article_products_upgrade'));
             add_action('admin_init', array($this, 'maybe_cleanup_false_partner_creatives'));
-            // V6.63: narrow state-only recovery for the proven PRIVATE public-gate tail defect.
-            // It never restarts a run or mutates listings/campaigns on admin_init; it only
-            // reopens the exact failed V6.62 run into a bounded PRIVATE-only selection tail.
-            add_action('admin_init', array($this, 'maybe_recover_ebay_private_public_gate_v6630'));
-            add_action('admin_init', array($this, 'maybe_recover_ebay_business_gap_proof_v6634'));
-            add_action('admin_init', array($this, 'maybe_recover_ebay_private_public_freshness_v6635'));
-            add_action('admin_init', array($this, 'maybe_recover_ebay_build_change_checkpoint_same_uuid_v6636'));
             add_action('admin_post_ppar_save_campaigns', array($this, 'handle_save_campaigns'));
             add_action('admin_post_ppar_save_campaign', array($this, 'handle_save_campaign'));
             add_action('admin_post_ppar_delete_campaign', array($this, 'handle_delete_campaign'));
