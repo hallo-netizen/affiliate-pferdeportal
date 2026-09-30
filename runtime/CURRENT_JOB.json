@@ -1,0 +1,263 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-bfc0c6806fa88f0c55a2dcd9"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "research": {
+          "job_id": "K9-RESEARCH-0c08920b33f4cfe8",
+          "path": "warehouse/research/K9-RESEARCH-0c08920b33f4cfe8.json",
+          "sha256": "3af5aa6502e22ee056dd120678af2d5f56578b112bb84d4c1d43609d22c5d483"
+        }
+      },
+      "input_products": {
+        "research": {
+          "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Tretschicht und Bodenart",
+                "Benötigte Arbeitstiefe",
+                "Arbeitsbreite und Platzgröße",
+                "Vorhandenes Zugfahrzeug und Leistung",
+                "Benötigte Zinken-, Planierschild- und Walzenfunktion",
+                "Banden- und Hufschlagpflege"
+              ],
+              "decision_goal": "Einen Reitplatzplaner auswählen, dessen Bodenbearbeitung, Arbeitsbreite und Zugfahrzeug-Anforderungen zum eigenen Reitplatz passen."
+            },
+            "fact_pack": {
+              "article_type": "Beratung",
+              "article_type_coverage": "PASS_BERATUNG",
+              "claim_register_hash": "ffbd4030f876ce185e397af52404e5e4847c488206f7cdcfca4fa88fe277a5bb",
+              "claims": [
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a",
+                  "fact_id": "FACT-REITPLATZ-001",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Hatzenbichler beschreibt Reitplatzplaner als Geräte zur Reitplatzpflege und zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen.",
+                  "subject_scope": "Einsatzbereich des Reitplatzplaners",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239",
+                  "fact_id": "FACT-REITPLATZ-002",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Zwei Reihen Striegelzinken bearbeiten den Reitboden; über die verstellbare Andruckwalze lässt sich die Tiefenführung der Zinken einstellen.",
+                  "subject_scope": "Zinken und Arbeitstiefe",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1",
+                  "fact_id": "FACT-REITPLATZ-003",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Ein am Gerät montiertes Planierschild dient dazu, den Reitplatz zu ebnen.",
+                  "subject_scope": "Planieren und Ebenheit",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69",
+                  "fact_id": "FACT-REITPLATZ-004",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                  "statement": "Die angebotenen Reitplatzplaner unterscheiden sich bei Arbeitsbreite, Gewicht und benötigter Zugleistung; diese Werte sollten zum vorhandenen Zugfahrzeug und zur Fläche passen.",
+                  "subject_scope": "Arbeitsbreite und Zugfahrzeug",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d",
+                  "fact_id": "FACT-REITPLATZ-005",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+                  "statement": "Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden, eine höhenverstellbare Planierschiene gleicht Unebenheiten aus und eine Walze bearbeitet die Oberfläche nach.",
+                  "subject_scope": "Arbeitsfolge und Komponenten",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f",
+                  "fact_id": "FACT-REITPLATZ-006",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+                  "statement": "Der Platz-Max Light ist für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten.",
+                  "subject_scope": "Einsatz und Zugfahrzeug",
+                  "time_scope": "retrieved 2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1",
+                  "fact_id": "FACT-REITPLATZ-007",
+                  "locator": "manufacturer product page",
+                  "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+                  "statement": "Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.",
+                  "subject_scope": "Ausstattungsmerkmale",
+                  "time_scope": "retrieved 2026-09-30"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-REITPLATZ-001",
+                "FACT-REITPLATZ-002",
+                "FACT-REITPLATZ-003",
+                "FACT-REITPLATZ-004",
+                "FACT-REITPLATZ-005",
+                "FACT-REITPLATZ-006",
+                "FACT-REITPLATZ-007"
+              ],
+              "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
+              "fact_pack_id": "FP-K9-REITPLATZPLANER-20260930",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "21d68fdf81597a139b21bbabbfd5bf4b43c0f6a923e1f4c08f380267719025e4",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "reitplatzplaner_fuer_pferde"
+            },
+            "portal_links": [
+              {
+                "anchor": "Weide",
+                "href": "/weide/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Reitplatzpflege",
+                "href": "/weide/weide-reitplatzpflege/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Reitplatzplaner",
+                "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "f97856d11baef9c479ae5d32877af6b11615989f40faaf91ec848e7c877e51f7",
+            "sources": [
+              {
+                "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+                "title": "Reitplatzplaner – Hatzenbichler",
+                "url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+              },
+              {
+                "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+                "title": "Platz-Max Light Bahnplaner",
+                "url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/"
+              },
+              {
+                "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+                "title": "Reitplatzplaner Platz-Max Maxi-SM",
+                "url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "reitplatzplaner-beratung",
+        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+        "target_keyword": "Reitplatzplaner für Pferde",
+        "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+      },
+      "revision": 0,
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+    }
+  ],
+  "job_id": "K9-WRITE-a50a69a17e704591",
+  "job_sha256": "d660cfc194f6ef4233933c2b3599364e167c729af75753deb120a3f30aa1bd72",
+  "ledger_generation": 23,
+  "source_run_id": "36737907272",
+  "station": "write",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "INVENT_NEW_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_IN_THIS_JOB",
+    "must": [
+      "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+      "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
+      "RETURN_FINAL_ARTICLE_HTML",
+      "BIND_RESEARCH_PRODUCT_SHA256",
+      "RETURN_PPM_ITEM_BOUND_TO_SAME_FACT_PACK",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "ADD_AT_LEAST_THREE_PPM_SOURCE_TRACE_SPANS_TO_LEXICALLY_SUPPORTING_FACTUAL_PARAGRAPHS",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_K9_WRITING_RULES_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_WRITE_WORKER"
+  }
+}
