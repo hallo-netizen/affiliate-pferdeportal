@@ -1,31 +1,27 @@
 {
   "contract": "K9_JOB_V1",
+  "status": "OPEN",
+  "station": "research",
   "item_count": 1,
-  "item_ids": [
-    "k9-a38f92cbb97fe29aece54292"
-  ],
+  "item_ids": ["k9-1ff3dfabfed47a0c47c8df13"],
   "items": [
     {
-      "input_product_refs": {},
-      "input_products": {},
-      "item_id": "k9-a38f92cbb97fe29aece54292",
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "title": "So wählst du passende Schermaschinen für Pferde",
       "metadata": {
         "article_type": "Beratung",
-        "category": "longiergurte-beratung",
-        "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
-        "target_keyword": "Longiergurte mit Bogen",
-        "title": "Longiergurte mit Bogen im Ratgeber"
+        "category": "schermaschinen-beratung",
+        "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+        "target_keyword": "Schermaschinen für Pferde",
+        "title": "So wählst du passende Schermaschinen für Pferde"
       },
       "revision": 0,
-      "title": "Longiergurte mit Bogen im Ratgeber"
+      "input_products": {},
+      "input_product_refs": {}
     }
   ],
-  "job_id": "K9-RESEARCH-12ef2ec83671e474",
-  "job_sha256": "d3cf8ad58e7241fd8bbe0715d47d3320660341bdf5b694d2c00371c6ea289ca6",
+  "source_run_id": "fresh-chat-proof-20260930",
   "ledger_generation": 2,
-  "source_run_id": "current-chat-auto-proof-20260930",
-  "station": "research",
-  "status": "OPEN",
   "worker_contract": {
     "forbidden": [
       "WRITE_ARTICLE",
@@ -46,5 +42,7 @@
     ],
     "output_contract": "K9_RESEARCH_PRODUCT_V1",
     "worker_type": "CHAT_RESEARCH_WORKER"
-  }
+  },
+  "job_id": "K9-RESEARCH-f44ef7e1296d1829",
+  "job_sha256": "74a8274f9bc7938ccfe4cb662518987c8718cf7cadaf16bdd358f6f76b836897"
 }
