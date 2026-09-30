@@ -47,6 +47,7 @@ def ensure_all_fact_traces(markup, research):
     fact_pack=research.get("fact_pack",{})
     fact_ids=[str(x) for x in fact_pack.get("fact_ids",[]) if str(x)]
     claims={str(x.get("fact_id") or ""):x for x in fact_pack.get("claims",[]) if isinstance(x,dict)}
+    source_titles={str(x.get("source_id") or ""):str(x.get("title") or "") for x in research.get("sources",[]) if isinstance(x,dict)}
     existing=set(_trace_fact_ids(markup))
     for fid in fact_ids:
         if fid in existing:
@@ -55,7 +56,8 @@ def ensure_all_fact_traces(markup, research):
         if not claim:
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
         source_hash=str(claim.get("evidence_text_sha256") or "")
-        source_title=str(claim.get("source_id") or "")
+        source_id=str(claim.get("source_id") or "")
+        source_title=source_titles.get(source_id,"").strip()
         if not source_hash or not source_title:
             raise PackError("PPM_SOURCE_TRACE_BINDING_MISSING:"+fid)
         statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(claim.get("statement") or "").casefold()))
@@ -98,6 +100,7 @@ def validate_html(markup, article_type, metadata, research, rules):
         raise PackError("CANONICAL_TABLE_CLASS_MISSING")
     claims=research.get("fact_pack",{}).get("claims",[])
     claim_map={str(x.get("fact_id") or ""):x for x in claims if isinstance(x,dict)}
+    source_titles={str(x.get("source_id") or ""):str(x.get("title") or "") for x in research.get("sources",[]) if isinstance(x,dict)}
     trace_tags=[m.group(0) for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I)]
     trace_fact_ids=[]
     for tag in trace_tags:
@@ -109,8 +112,9 @@ def validate_html(markup, article_type, metadata, research, rules):
         claim=claim_map.get(fid)
         if not claim:
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
-        if source_title != str(claim.get("source_id") or ""):
-            raise PackError("PPM_SOURCE_TRACE_SOURCE_ID_MISMATCH:"+fid)
+        expected_title=source_titles.get(str(claim.get("source_id") or ""),"").strip()
+        if not expected_title or source_title != expected_title:
+            raise PackError("PPM_SOURCE_TRACE_SOURCE_TITLE_MISMATCH:"+fid)
         if source_hash != str(claim.get("evidence_text_sha256") or ""):
             raise PackError("PPM_SOURCE_TRACE_HASH_MISMATCH:"+fid)
     required_trace_ids=set(str(x) for x in research.get("fact_pack",{}).get("fact_ids",[]) if str(x))
@@ -188,15 +192,9 @@ def _build_single(job,entry,rules,rules_sha,draft):
     }
     if article_type=="FAQ":
         type_meta={"primary_question":title}
-        claims=fact_pack.get("claims") if isinstance(fact_pack.get("claims"),list) else []
-        answer_parts=[]
-        for claim in claims:
-            statement=str((claim if isinstance(claim,dict) else {}).get("statement") or "").strip()
-            if statement:
-                answer_parts.append(statement)
-            direct_answer=" ".join(answer_parts).strip()
-            if len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",direct_answer,re.UNICODE))>=12:
-                break
+        intro_match=re.search(r"<section\s+data-block=[\"']intro[\"'][^>]*>(.*?)</section>",markup,re.S|re.I)
+        first_p=re.search(r"<p\b[^>]*>(.*?)</p>",intro_match.group(1),re.S|re.I) if intro_match else None
+        direct_answer=text_of(first_p.group(1)) if first_p else ""
         if len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",direct_answer,re.UNICODE))<12:
             raise PackError("FAQ_DIRECT_ANSWER_BINDING_INVALID")
     else:
