@@ -117,11 +117,17 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
             f'<span class="ppm-source-trace" data-fact-id="{fid}" '
             f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
         )
-        existing=_trace_match(markup,fid)
+        existing=re.search(
+            r'<span\\b[^>]*class=["\\\'][^"\\\']*\\bppm-source-trace\\b[^"\\\']*["\\\'][^>]*data-fact-id=["\\\']'+re.escape(fid)+r'["\\\'][^>]*></span>',
+            markup,re.I
+        )
         if existing:
             markup=markup[:existing.start()]+trace+markup[existing.end():]
             continue
-        target=_fact_target_match(markup,fid)
+        target=re.search(
+            r'<(p|li|td)\\b[^>]*data-fact-ids=["\\\'][^"\\\']*\\b'+re.escape(fid)+r'\\b[^"\\\']*["\\\'][^>]*>',
+            markup,re.I
+        )
         if not target:
             raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
         markup=markup[:target.end()]+trace+markup[target.end():]
@@ -130,7 +136,6 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
     article["source_ids"]=[str(x.get("source_id") or "") for x in fact_pack.get("sources",[]) if isinstance(x,dict)]
     ppm_item["canonical_article"]=article
     return ppm_item
-
 
 def latest_products(ledger, root):
     items=ledger.get("items")
@@ -152,28 +157,6 @@ def latest_products(ledger, root):
             if len(hits)!=1: raise Blocked("PRODUCT_ITEM_NOT_UNIQUE")
             return hits[0]
         out.append((item,row(research_pkg)["research_product"],row(article_pkg)["article_product"],row(check_pkg)))
-    return out
-
-
-def bind_export_traces(html,fact_pack):
-    claims=fact_pack.get("claims")
-    if not isinstance(claims,list): raise Blocked("FACT_PACK_CLAIMS_INVALID")
-    out=str(html)
-    for claim in claims:
-        if not isinstance(claim,dict): raise Blocked("CLAIM_INVALID")
-        fid=str(claim.get("fact_id") or "").strip()
-        sid=str(claim.get("source_id") or "").strip()
-        source_hash=str(claim.get("evidence_text_sha256") or "").strip()
-        if not fid or not sid or not source_hash: raise Blocked("PSERC_TRACE_BINDING_INVALID:"+fid)
-        trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
-               f'data-source-hash="{source_hash}" data-source-title="{sid}"></span>')
-        existing=_trace_match(out,fid)
-        if existing:
-            out=out[:existing.start()]+trace+out[existing.end():]
-            continue
-        target=_fact_target_match(out,fid)
-        if not target: raise Blocked("PSERC_TRACE_TARGET_MISSING:"+fid)
-        out=out[:target.end()]+trace+out[target.end():]
     return out
 
 
@@ -294,12 +277,6 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
             fp=canonical_fact_pack(research)
             ppm_item=bind_canonical_article_traces(ppm_item,fp)
             ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
-            export_html=bind_export_traces(html,fp)
-            canonical_article=ppm_item.get("canonical_article")
-            if not isinstance(canonical_article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
-            canonical_article["body_html"]=export_html
-            canonical_article["body_html_sha256"]=hashlib.sha256(export_html.encode("utf-8")).hexdigest()
-            ppm_item["canonical_article"]=canonical_article
             header={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9"}
             payload={
                 "item":ppm_item,
