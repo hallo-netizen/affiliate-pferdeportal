@@ -286,20 +286,25 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
         for idx,(item,research,article,checkrow) in enumerate(products):
             html=str(article.get("content_html") or "")
             if not html: raise Blocked("ARTICLE_HTML_MISSING:"+str(item.get("item_id") or idx))
-            article_path=td/f"article-{idx}.html"
-            article_path.write_text(html,encoding="utf-8")
-            lt=k9_lt68.run(Path(lt_jar),article_path)
-            if lt.get("status")!="PASS": raise Blocked("PSERC_LT_NOT_PASS:"+str(item.get("item_id") or idx))
             ppm_item=copy.deepcopy(article.get("ppm_item"))
             if not isinstance(ppm_item,dict): raise Blocked("PPM_ITEM_MISSING")
             binding=ppm_item.get("quality_binding")
             if not isinstance(binding,dict): raise Blocked("QUALITY_BINDING_MISSING")
-            binding["language_evidence"]=lt["language_evidence"]
-            ppm_item["quality_binding_hash"]=stable(binding)
             canonical_id="article:"+hashlib.sha256((item["item_id"]+"|"+article["content_sha256"]).encode()).hexdigest()[:24]
             ppm_item["canonical_article_id"]=canonical_id
             fp=canonical_fact_pack(research)
             ppm_item=bind_canonical_article_traces(ppm_item,fp)
+            canonical_article=ppm_item.get("canonical_article")
+            final_html=str(canonical_article.get("body_html") or "") if isinstance(canonical_article,dict) else ""
+            if not final_html: raise Blocked("CANONICAL_ARTICLE_HTML_MISSING:"+str(item.get("item_id") or idx))
+            if k9_lt68.ppm_visible_language_text(final_html)!=k9_lt68.ppm_visible_language_text(html):
+                raise Blocked("CANONICAL_TRACE_BINDING_CHANGED_VISIBLE_TEXT:"+str(item.get("item_id") or idx))
+            article_path=td/f"article-{idx}.html"
+            article_path.write_text(final_html,encoding="utf-8")
+            lt=k9_lt68.run(Path(lt_jar),article_path)
+            if lt.get("status")!="PASS": raise Blocked("PSERC_LT_NOT_PASS:"+str(item.get("item_id") or idx))
+            binding["language_evidence"]=lt["language_evidence"]
+            ppm_item["quality_binding_hash"]=stable(binding)
             ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
             header={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9"}
             payload={
