@@ -3,34 +3,14 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "BLOCKED_FINALIZER_REGRESSION",
-  "operational_mode": "K9_FINALIZATION_REPAIR",
-  "orchestration_mode": "STATION_ONLY",
-  "worker_mode": "SUPERVISOR_FIX_ONLY_NO_ARTICLE_REOPEN",
+  "status": "STOP",
+  "operational_mode": "SUPERVISOR",
   "active_job": null,
-  "first_open_blocker": {
-    "code": "K9_PSERC_POSITIVE_SCOPE_LANGUAGE_EVIDENCE_REGRESSION",
-    "evidence_run_id": 36784005186,
-    "evidence_head_sha": "585f7011ba2d77b6b79ddebe99c4054aaaa62edc",
-    "detail": "Freshness recheck confirms the same first blocker: the positive PSERC scope regression returns BLOCKED_WAVE2_LANGUAGE_EVIDENCE. The 16 production articles themselves remain CHECK DONE. The previous real finalizer run 36783181669 failed earlier at CANONICAL_TRACE_TARGET_MISSING:RPB_F1; later trace-parser fixes exist but are not yet proven by a green PSERC scope regression/finalizer.",
-    "publish_allowed": false
-  },
-  "next_action": "FIX_PSERC_POSITIVE_SCOPE_TEST_LANGUAGE_EVIDENCE_BINDING_AND_GET_GREENFIELD_SELFTEST_PASS",
+  "first_open_blocker": null,
+  "next_action": "RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
   "work_binding": {
-    "branch": "konzept9/greenfield-20260929",
-    "verified_head_sha": "b157d15882117980c8fb6a51ec452f47128f5c2f",
-    "status_ref": "state/STATUS.json",
-    "ledger_generation": 65,
-    "article_count": 16,
-    "article_check_done": 16,
-    "remaining_articles": 0,
-    "repair_required": 0,
-    "do_not_reopen_completed_articles": true,
-    "finalization_required": true,
-    "latest_real_finalizer_run_id": 36783181669,
-    "latest_real_finalizer_result": "FAIL_CANONICAL_TRACE_TARGET_MISSING_RPB_F1",
-    "latest_selftest_run_id": 36784005186,
-    "latest_selftest_result": "FAIL_SAME_BLOCKED_WAVE2_LANGUAGE_EVIDENCE_CONFIRMED",
+    "baseline": "LATEST_REAL_E2E_STOP",
+    "preserve_existing_station_products": true,
     "preserve_quality_gates": [
       "LT_6_8",
       "PPM_6_7_9",
@@ -38,11 +18,17 @@
       "ENDSTEMPEL",
       "WORDPRESS_VERIFY"
     ],
-    "target_ref": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json@main",
-    "publish_allowed": false,
-    "last_relevant_code_head_sha": "b157d15882117980c8fb6a51ec452f47128f5c2f",
-    "freshness_checked_through_commit": "7fccecd1fdb06dae31ed21cdb7649d4c9921a0b4",
-    "freshness_rule": "NO_FULL_RECONSTRUCTION_UNLESS_RELEVANT_CODE_OR_STATE_DELTA"
+    "do_not_reopen_completed_article": true,
+    "publish_allowed": false
+  },
+  "terminal_evidence": {
+    "stop_ref": "runtime/K9_STOP.json",
+    "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+    "final_sha256": "053a8acb1a94404134f13582545ef40ca3210cadc3b7f5c376aa7f50dfcd1242",
+    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+    "article_count": 16,
+    "finalizer_run_id": "36785527375",
+    "trigger_head_sha": "71bc7493aba40d832b21fc8828ff3b85e5e8b0f6"
   },
   "chat_may_route": false,
   "publish_allowed": false
