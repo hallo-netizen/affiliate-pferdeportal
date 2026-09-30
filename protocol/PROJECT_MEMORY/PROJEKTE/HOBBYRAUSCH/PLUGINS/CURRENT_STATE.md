@@ -3,62 +3,47 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: HD-001 V1.9.1 + HD-002 V0.1.0 PRODUCTION CANDIDATE HARD LOCAL PASS / LIVE-ABNAHME OFFEN
+STATUS: HD-001 V1.9.1 / HD-002 V0.1.1 HARD LOCAL PASS / HD-002 LIVE-RETEST OFFEN
 
-## Aktueller belastbarer Stand
+## HD-001 – Kategorie-Workflow
 
-Hobby Depot besitzt zwei klar getrennte Pluginstränge:
-
-### HD-001 – Kategorie-Workflow
-Aktuell:
 `Affiliate-Portal Kategorie-Workflow V1.9.1`
 
-Status:
-- Stage-Hardlock;
-- Editorial-Ownership-Handoff;
-- 248/248 PASS;
-- Fresh-Unpack PASS;
-- noch nicht live abgenommen.
+Lokale Vollprüfung:
+248/248 PASS.
 
-### HD-002 – Text-/SEO-Plugin
+Der manuelle Live-Test wurde bis zum Kategorie-/Deployment-Testablauf durchgeführt; HD-002-Liveprüfung läuft danach separat weiter.
+
+## HD-002 – Hobby Depot SEO Themenengine
+
 Aktuell:
-`Hobby Depot SEO Themenengine V0.1.0`
+`V0.1.1 FRESH_INSTALL_MIGRATION_FIX_HARD_PASS`
 
-Status:
-- eigener Hobby-Depot-Codepräfix `HDTE_`;
-- eigene Speicher-/Option-/Tabellen-/Hook-Präfixe `hdte_`;
-- keine Runtime-Abhängigkeit vom Pferdeatelier-PSTE;
-- maschinelle Projektgrenze PASS;
-- Ownership 11/11 PASS;
-- Frage≠FAQ 12/12 PASS;
-- Family Identity 8/8 PASS;
-- PHP 80/80 PASS;
-- Koexistenz mit PSTE ohne Klassen-/Speicherkollision PASS;
-- noch nicht live installiert.
+Installer SHA-256:
+`6230a7e7db47dc1c337106051cd658e2093e0a3873dbb4d9225749538123577d`
 
-Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_PRODUCTION_CANDIDATE.zip`
+V0.1.0:
+**SUPERSEDED**, weil live `HDTE_SITE_BASELINE_REQUIRED` bei einer Neuinstallation auftrat.
 
-SHA-256:
-`2d3a0bd9180b30ff76e7fb0ed84a8e7cf1a4a7c0d2135999329cb5d11371a684`
-
-## Harte Projektgrenze
-
-Pferdeatelier-Plugins dürfen aus Hobby Depot nur gelesen bzw. einmalig als Referenzbasis kopiert werden.
-
-Ab der Kopie:
-- ausschließlich eigener Hobby-Depot-Strang;
-- keine gemeinsamen Optionen/Tabellen;
-- keine Bearbeitung des Pferdeatelier-Plugins;
-- keine Runtime-Abhängigkeit;
-- Fremdprojekt-Reste werden maschinell BLOCKED.
+V0.1.1:
+- Fresh Install vollständig lokal bis COMPLETE simuliert;
+- pausierten Fresh-Install-Job fortsetzen PASS;
+- Bestandsdaten ohne Baseline bleiben BLOCKED;
+- Daten-Drift während Fresh Install BLOCKED;
+- PHP 80/80;
+- Projektgrenze PASS;
+- Ownership 11/11;
+- Frage≠FAQ 12/12;
+- Family 8/8;
+- HD-001→HD-002 9/9;
+- Storage-/Performance-Kern 4/4 byte-identisch.
 
 ## NEXT ACTION
 
-Referenzdelta geprüft: kein neuerer PSTE-Storage-/Performance-Stand vorhanden.
+V0.1.1 über V0.1.0 installieren.
 
-NEXT:
-1. HD-001 V1.9.1 live sauber abnehmen;
-2. HD-002 V0.1.0 installieren;
-3. V1.9.1-Handoff in HD-002 importieren;
-4. Buchbinden E2E real ausführen.
+Dann:
+**Hobby Depot Themenengine → Sichere Migration fortsetzen**
+
+Erst nach READY:
+Owner-Handoff importieren → Gesamtbestand erfassen → Buchbinden-E2E.
