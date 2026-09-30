@@ -98,14 +98,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/ppar-672170-local-sim.php <<'PHP'
+
+          cat >/tmp/ppar-672170-fixture.php <<'PHP'
           <?php
-          require '/tmp/wp-site/wp-load.php';
-          $fail=static function($m){fwrite(STDERR,"FAIL ".$m."\n");exit(2);};
-          $pass=static function($m){echo "PASS ".$m."\n";};
           $o=Pferdeportal_Affiliate_Router::instance();
           $rm=static function($name) use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
-          $rp=static function($name) use($o){$p=new ReflectionProperty($o,$name);$p->setAccessible(true);return $p;};
           $rm('maybe_install_ebay_schema')->invoke($o);
           if (!post_type_exists(Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE)) $rm('register_campaign_post_type')->invoke($o);
           global $wpdb;
@@ -114,17 +111,15 @@ jobs:
           $wanted='4006381333931';
 
           $page_id=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Test Product','post_name'=>'test-product']);
-          if(!$page_id)$fail('test page create');
-          $context=['post_id'=>$page_id,'post_type'=>'page','primary_slug'=>'test-product','slugs'=>['test-product']];
-          $slot='category_product_1';
+          if(!$page_id) throw new RuntimeException('test page create');
 
-          $insert_source=static function($i,$hash,$gtin,$filler='') use($wpdb,$table,$now){
+          $insert_source=static function($item_id,$hash,$gtin,$filler='') use($wpdb,$table,$now){
               $payload=json_encode(['raw'=>['gtin'=>$gtin,'localizedAspects'=>[['name'=>'EAN','value'=>$gtin]],'filler'=>$filler]],JSON_UNESCAPED_SLASHES);
               $ok=$wpdb->insert($table,[
-                  'portal_key'=>'pferdeatelier','item_id'=>'item-'.$i,'seller_account_type'=>'BUSINESS','seller_username'=>'seller'.$i,
-                  'route_mode'=>'business','rule_id'=>'rule-'.$i,'creative_identity_hash'=>$hash,'title'=>'Item '.$i,
-                  'condition_text'=>'Neu','affiliate_url'=>'https://example.test/a/'.$i,'item_web_url'=>'https://example.test/i/'.$i,
-                  'image_url'=>'https://i.ebayimg.com/images/g/test'.$i.'/s-l500.jpg','source_hash'=>hash('sha256','src-'.$i),
+                  'portal_key'=>'pferdeatelier','item_id'=>(string)$item_id,'seller_account_type'=>'BUSINESS','seller_username'=>'seller',
+                  'route_mode'=>'business','rule_id'=>'rule','creative_identity_hash'=>$hash,'title'=>'Item '.(string)$item_id,
+                  'condition_text'=>'Neu','affiliate_url'=>'https://example.test/a/'.rawurlencode((string)$item_id),'item_web_url'=>'https://example.test/i/'.rawurlencode((string)$item_id),
+                  'image_url'=>'https://i.ebayimg.com/images/g/test/s-l500.jpg','source_hash'=>hash('sha256','src-'.(string)$item_id),
                   'source_payload'=>$payload,'status'=>'active','source_state'=>'available','policy_state'=>'allowed','route_state'=>'ready',
                   'output_state'=>'campaign_published','policy_version'=>'test','classifier_version'=>'test',
                   'source_checked_at'=>$now,'rejection_reason'=>'','last_seen'=>$now,'fresh_until'=>$now+3600,'created_at'=>$now,'updated_at'=>$now
@@ -138,8 +133,8 @@ jobs:
               ]);
               $data=[
                   'id'=>$network.'-'.$i,'active'=>1,'creative_type'=>'product','network'=>$network,
-                  'title'=>$network.' product '.$i,'url'=>'https://example.test/'.$network.'/'.$i,
-                  'image_url'=>$network==='ebay'?'https://i.ebayimg.com/images/g/test'.$i.'/s-l500.jpg':'https://example.test/img/'.$i.'.jpg',
+                  'programme_status'=>'active','title'=>$network.' product '.$i,'url'=>'https://example.test/'.$network.'/'.$i,
+                  'image_url'=>$network==='ebay'?'https://i.ebayimg.com/images/g/test/s-l500.jpg':'https://example.test/img/'.$i.'.jpg',
                   'placements'=>['category_product_1'],'assignment_mode'=>'page_tree','automation_target_keys'=>['page:'.$target]
               ];
               if($gtin!==''){
@@ -156,110 +151,134 @@ jobs:
               return $p;
           };
 
-          // Large source table: the 6.72.169 LIKE path had to scan these payloads.
-          $filler=str_repeat('x',2048);
-          for($i=0;$i<3000;$i++){
+          // Large source table: simulates the live inventory cost that made
+          // 6.72.169's unindexed source_payload LIKE path regress.
+          $filler=str_repeat('x',4096);
+          for($i=0;$i<6000;$i++){
               $hash=hash('sha256','bulk-'.$i);
               $gtin=str_pad((string)(1000000000000+$i),13,'0',STR_PAD_LEFT);
               $insert_source('bulk-'.$i,$hash,$gtin,$filler);
           }
 
-          // 150 old eBay campaigns without persisted GTIN. Only two belong to this page.
-          $relevant=[];
+          // Legacy eBay campaigns: no GTIN in campaign data yet. Only two are
+          // context-relevant and only one of those has the requested GTIN.
           for($i=0;$i<150;$i++){
               $hash=hash('sha256','campaign-'.$i);
               $target=$i<2?'test-product':'other-'.$i;
               $gtin=$i===0?$wanted:str_pad((string)(2000000000000+$i),13,'0',STR_PAD_LEFT);
               $insert_source('campaign-'.$i,$hash,$gtin,$filler);
-              $p=$insert_campaign($i,'ebay',$target,'',$hash);
-              if($i<2)$relevant[]=$p;
+              $insert_campaign($i,'ebay',$target,'',$hash);
           }
           $insert_campaign(9001,'idealo','test-product',$wanted);
           $insert_campaign(9002,'awin','test-product',$wanted);
-
-          $reset=static function() use($rp,$o){
-              foreach([
-                  'ranked_campaign_posts_request_cache'=>null,
-                  'ranked_campaign_raw_records_request_cache'=>null,
-                  'ranked_campaign_candidate_index_request_cache'=>[],
-                  'ranked_campaign_from_post_request_cache'=>[],
-                  'ranked_campaign_raw_target_keys_request_cache'=>[],
-                  'ebay_business_campaign_source_row_cache'=>[],
-                  'multiprovider_exact_gtin_pool_request_cache'=>[]
-              ] as $name=>$value){$rp($name)->setValue($o,$value);}
-          };
-          $reset();
-
-          $pre=$rm('ranked_campaign_candidate_pool')->invoke($o,$slot,'product','',false,[],$context);
-          $pre_ebay=array_values(array_filter($pre,static function($row){return is_array($row)&&sanitize_key((string)($row['network']??''))==='ebay';}));
-          echo 'DEBUG_PRE_EBAY_COUNT='.count($pre_ebay)."\n";
-          foreach(array_slice($pre_ebay,0,3) as $dbg){
-              echo 'DEBUG_PRE_EBAY_POST='.absint($dbg['post_id']??0).' GTINS='.json_encode($rm('multiprovider_campaign_gtins')->invoke($o,$dbg))."\n";
-          }
-
-          $before_q=$wpdb->num_queries;
-          $t0=microtime(true);
-          $pool=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$context,$slot);
-          $new_ms=(microtime(true)-$t0)*1000;
-          $new_q=$wpdb->num_queries-$before_q;
-          $nets=[];$ebay_count=0;
-          foreach($pool as $row){
-              $n=sanitize_key((string)($row['network']??''));
-              $nets[$n]=true;
-              if($n==='ebay')$ebay_count++;
-          }
-          if(empty($nets['ebay'])||empty($nets['idealo'])||empty($nets['awin']))$fail('positive exact provider set '.json_encode(array_keys($nets)));
-          if($ebay_count!==1)$fail('positive eBay exact count '.$ebay_count);
-          $ecache=$rp('ebay_business_campaign_source_row_cache')->getValue($o);
-          if(count($ecache)>2)$fail('eBay source cache exceeded context candidates '.count($ecache));
-          $pass('positive exact GTIN: ebay + idealo + awin, eBay source rows <=2');
-
-          // Same request again must be pure request-cache reuse.
-          $q1=$wpdb->num_queries;
-          $pool2=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$context,$slot);
-          $repeat_q=$wpdb->num_queries-$q1;
-          if($repeat_q!==0)$fail('repeat exact pool added DB queries '.$repeat_q);
-          if(serialize($pool2)!==serialize($pool))$fail('repeat exact pool changed result');
-          $pass('repeat call: 0 additional DB queries');
-
-          // Negative 1: wrong GTIN must not create eBay false match.
-          $wrong='9999999999999';
-          $bad=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wrong],$context,$slot);
-          foreach($bad as $row){if(sanitize_key((string)($row['network']??''))==='ebay')$fail('wrong GTIN admitted eBay');}
-          $pass('negative wrong GTIN: no eBay false match');
-
-          // Negative 2: same GTIN but wrong page must not scan/admit unrelated eBay.
-          $wrong_context=['post_id'=>$page_id,'post_type'=>'page','primary_slug'=>'unrelated-page','slugs'=>['unrelated-page']];
-          $bad2=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$wrong_context,$slot);
-          foreach($bad2 as $row){if(sanitize_key((string)($row['network']??''))==='ebay')$fail('wrong page admitted eBay');}
-          $pass('negative wrong page: no eBay false match');
-
-          // Future refresh persistence helper.
-          $got=$rm('ebay_business_item_gtins')->invoke($o,['raw'=>['localizedAspects'=>[['name'=>'EAN','value'=>$wanted]]]]);
-          if($got!==[$wanted])$fail('write-time GTIN extraction '.json_encode($got));
-          $pass('future eBay refresh extracts exact GTIN');
-
-          // Reproduce the 6.72.169 SQL shape only as a local benchmark. This is
-          // never called by 6.72.170 runtime.
-          $like='%'.$wpdb->esc_like($wanted).'%';
-          $old_times=[];
-          for($i=0;$i<5;$i++){
-              $x=microtime(true);
-              $wpdb->get_results($wpdb->prepare(
-                  "SELECT creative_identity_hash,source_payload FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash<>'' AND source_payload LIKE %s ORDER BY id DESC",
-                  $like
-              ),ARRAY_A);
-              $old_times[]=(microtime(true)-$x)*1000;
-          }
-          sort($old_times);
-          $old_median=$old_times[2];
-          echo 'PERF_NEW_COLD_MS='.number_format($new_ms,3,'.','')."\n";
-          echo 'PERF_NEW_COLD_DB_QUERIES='.$new_q."\n";
-          echo 'PERF_NEW_REPEAT_DB_QUERIES='.$repeat_q."\n";
-          echo 'PERF_672169_LIKE_MEDIAN_MS='.number_format($old_median,3,'.','')."\n";
-          echo 'PERF_SOURCE_ROWS='.$wpdb->get_var("SELECT COUNT(*) FROM {$table}")."\n";
-          if($repeat_q!==0)$fail('request cache performance contract');
-          echo "LOCAL_POSITIVE_NEGATIVE_PERFORMANCE_PASS\n";
+          update_option('ppar_672170_fixture_page_id',$page_id,false);
+          echo "FIXTURE_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/ppar-672170-local-sim.php --path=/tmp/wp-site | tee /tmp/ppar-672170-local-sim.log
+          /tmp/wp eval-file /tmp/ppar-672170-fixture.php --path=/tmp/wp-site
+
+          cat >/tmp/wp-site/wp-content/mu-plugins/ppar-672170-frontend-sim.php <<'PHP'
+          <?php
+          add_action('template_redirect', static function(){
+              if (!isset($_GET['ppar_672170_sim']) || (string)$_GET['ppar_672170_sim']!=='1') return;
+              header('Content-Type: text/plain; charset=utf-8');
+              $fail=static function($m){http_response_code(500);echo "FAIL ".$m."\n";exit;};
+              $pass=static function($m){echo "PASS ".$m."\n";};
+              $o=Pferdeportal_Affiliate_Router::instance();
+              $rm=static function($name) use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
+              $rp=static function($name) use($o){$p=new ReflectionProperty($o,$name);$p->setAccessible(true);return $p;};
+              global $wpdb;
+              $table=$rm('ebay_items_table')->invoke($o);
+              $wanted='4006381333931';
+              $page_id=absint(get_option('ppar_672170_fixture_page_id',0));
+              $context=['post_id'=>$page_id,'post_type'=>'page','primary_slug'=>'test-product','slugs'=>['test-product']];
+              $slot='category_product_1';
+
+              $reset=static function() use($rp,$o){
+                  foreach([
+                      'ranked_campaign_posts_request_cache'=>null,
+                      'ranked_campaign_raw_records_request_cache'=>null,
+                      'ranked_campaign_candidate_index_request_cache'=>[],
+                      'ranked_campaign_from_post_request_cache'=>[],
+                      'ranked_campaign_raw_target_keys_request_cache'=>[],
+                      'ebay_business_campaign_source_row_cache'=>[],
+                      'multiprovider_exact_gtin_pool_request_cache'=>[]
+                  ] as $name=>$value){$rp($name)->setValue($o,$value);}
+              };
+              $reset();
+
+              if(!$rm('ranked_campaigns_request_cache_allowed')->invoke($o))$fail('frontend cache path not active');
+
+              $before_q=$wpdb->num_queries;
+              $t0=microtime(true);
+              $pool=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$context,$slot);
+              $new_ms=(microtime(true)-$t0)*1000;
+              $new_q=$wpdb->num_queries-$before_q;
+              $nets=[];$ebay_count=0;
+              foreach($pool as $row){
+                  $n=sanitize_key((string)($row['network']??''));
+                  $nets[$n]=true;
+                  if($n==='ebay')$ebay_count++;
+              }
+              if(empty($nets['ebay'])||empty($nets['idealo'])||empty($nets['awin']))$fail('positive exact provider set '.json_encode(array_keys($nets)));
+              if($ebay_count!==1)$fail('positive eBay exact count '.$ebay_count);
+              $ecache=$rp('ebay_business_campaign_source_row_cache')->getValue($o);
+              if(count($ecache)>2)$fail('eBay source cache exceeded context candidates '.count($ecache));
+              $pass('positive exact GTIN: ebay + idealo + awin, eBay source rows <=2');
+
+              $q1=$wpdb->num_queries;
+              $pool2=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$context,$slot);
+              $repeat_q=$wpdb->num_queries-$q1;
+              if($repeat_q!==0)$fail('repeat exact pool added DB queries '.$repeat_q);
+              if(serialize($pool2)!==serialize($pool))$fail('repeat exact pool changed result');
+              $pass('repeat call: 0 additional DB queries');
+
+              $wrong='9999999999999';
+              $bad=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wrong],$context,$slot);
+              foreach($bad as $row){if(sanitize_key((string)($row['network']??''))==='ebay')$fail('wrong GTIN admitted eBay');}
+              $pass('negative wrong GTIN: no eBay false match');
+
+              $wrong_context=['post_id'=>$page_id,'post_type'=>'page','primary_slug'=>'unrelated-page','slugs'=>['unrelated-page']];
+              $bad2=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$wrong_context,$slot);
+              foreach($bad2 as $row){if(sanitize_key((string)($row['network']??''))==='ebay')$fail('wrong page admitted eBay');}
+              $pass('negative wrong page: no eBay false match');
+
+              $got=$rm('ebay_business_item_gtins')->invoke($o,['raw'=>['localizedAspects'=>[['name'=>'EAN','value'=>$wanted]]]]);
+              if($got!==[$wanted])$fail('write-time GTIN extraction '.json_encode($got));
+              $pass('future eBay refresh extracts exact GTIN');
+
+              // Benchmark exactly the query shape introduced by 6.72.169. It is
+              // executed here only as a comparison, never by 6.72.170 runtime.
+              $like='%'.$wpdb->esc_like($wanted).'%';
+              $old_times=[];
+              for($i=0;$i<5;$i++){
+                  $x=microtime(true);
+                  $wpdb->get_results($wpdb->prepare(
+                      "SELECT creative_identity_hash,source_payload FROM {$table} WHERE seller_account_type='BUSINESS' AND creative_identity_hash<>'' AND source_payload LIKE %s ORDER BY id DESC",
+                      $like
+                  ),ARRAY_A);
+                  $old_times[]=(microtime(true)-$x)*1000;
+              }
+              sort($old_times);
+              $old_median=$old_times[2];
+
+              echo 'PERF_NEW_COLD_MS='.number_format($new_ms,3,'.','')."\n";
+              echo 'PERF_NEW_COLD_DB_QUERIES='.$new_q."\n";
+              echo 'PERF_NEW_REPEAT_DB_QUERIES='.$repeat_q."\n";
+              echo 'PERF_672169_LIKE_MEDIAN_MS='.number_format($old_median,3,'.','')."\n";
+              echo 'PERF_SOURCE_ROWS='.$wpdb->get_var("SELECT COUNT(*) FROM {$table}")."\n";
+              echo 'PERF_EBAY_SOURCE_CACHE_ROWS='.count($ecache)."\n";
+              if($repeat_q!==0)$fail('request cache performance contract');
+              echo "LOCAL_POSITIVE_NEGATIVE_PERFORMANCE_PASS\n";
+              exit;
+          }, 0);
+          PHP
+
+          php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/ppar-672170-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1; then break; fi
+              sleep 0.2
+          done
+          curl -fsS 'http://127.0.0.1:8080/?ppar_672170_sim=1' | tee /tmp/ppar-672170-local-sim.log
           grep -F 'LOCAL_POSITIVE_NEGATIVE_PERFORMANCE_PASS' /tmp/ppar-672170-local-sim.log
