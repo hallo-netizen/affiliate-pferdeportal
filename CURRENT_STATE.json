@@ -1,75 +1,22 @@
 {
-  "contract": "K9_CURRENT_STATE_V3",
-  "role": "SOLE_CURRENT_AUTHORITY",
-  "concept": "K9",
+  "active_job": {
+    "article_title": "Frieren Pferde unter Regendecken?",
+    "item_id": "k9-037886feb135ca682b8423e7",
+    "job_id": "K9-RESEARCH-4571d4ba822044c4",
+    "job_path": "runtime/CURRENT_JOB.json",
+    "runtime_entry": "runtime/CHAT_ENTRY.json",
+    "station": "research"
+  },
   "branch": "konzept9/greenfield-20260929",
-  "status": "STOP",
-  "operational_mode": "SUPERVISOR",
-  "active_job": null,
-  "first_open_blocker": null,
-  "next_action": "RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
-  "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP",
-    "preserve_existing_station_products": true,
-    "preserve_quality_gates": [
-      "LT_6_8",
-      "PPM_6_7_9",
-      "PSERC",
-      "ENDSTEMPEL",
-      "WORDPRESS_VERIFY"
-    ],
-    "do_not_reopen_completed_article": true,
-    "publish_allowed": false
-  },
-  "terminal_evidence": {
-    "stop_ref": "runtime/K9_STOP.json",
-    "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-    "final_sha256": "bec5ecd9c1cb64fdf2d61e270a1ee3bad47334016dc44b893f78eda69e33d3f2",
-    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-    "article_count": 1,
-    "finalizer_run_id": "36750304997",
-    "trigger_head_sha": "58597d5ba222ac4dbe9a9954481625967010ac7e"
-  },
   "chat_may_route": false,
+  "concept": "K9",
+  "contract": "K9_CURRENT_STATE_V3",
+  "first_open_blocker": null,
+  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY",
+  "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
+  "orchestration_mode": "AUTO_CHAIN",
   "publish_allowed": false,
-  "confirmation_start": {
-    "contract": "K9_CONFIRMATION_START_BINDING_V1",
-    "purpose": "CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
-    "connector_action": "CREATE_FILE",
-    "repository": "hallo-netizen/affiliate-pferdeportal",
-    "branch": "konzept9/greenfield-20260929",
-    "path_prefix": "inbox-auto/",
-    "external_workflow_dispatch_required": false,
-    "server_side_entry_workflow": ".github/workflows/k9-intake.yml",
-    "exact_target": {
-      "title": "Frieren Pferde unter Regendecken?",
-      "target_keyword": "Frieren Pferde unter Regendecken",
-      "category": "pferdedecken-regendecken-faq",
-      "article_type": "FAQ",
-      "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe"
-    },
-    "exact_payload": {
-      "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
-      "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
-      "next_textmachine_metadata_batch": {
-        "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
-        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
-        "publish_allowed": false,
-        "content_or_format_payload_present": false,
-        "item_count": 1,
-        "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-        "items": [
-          {
-            "title": "Frieren Pferde unter Regendecken?",
-            "target_keyword": "Frieren Pferde unter Regendecken",
-            "category": "pferdedecken-regendecken-faq",
-            "article_type": "FAQ",
-            "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe"
-          }
-        ]
-      }
-    },
-    "source_snapshot_ref": "concept_agent/current/PSERC_METADATA_SNAPSHOT.json@5a452af433d7661173e712dc2f3b3fbd5898bef6",
-    "instruction": "CREATE_EXACT_PAYLOAD_UNDER_INBOX_AUTO_AND_DO_NOT_CALL_WORKFLOW_DISPATCH"
-  }
+  "role": "SOLE_CURRENT_AUTHORITY",
+  "status": "OPEN_CHAT_WORKER_JOB",
+  "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION"
 }
