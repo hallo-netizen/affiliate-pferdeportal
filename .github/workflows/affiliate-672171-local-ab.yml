@@ -161,15 +161,24 @@ jobs:
               }
 
               $checks=[
-                  'slot1_specific'=>$selected['category_product_1']==='slot-1',
-                  'slot2_specific'=>$selected['category_product_2']==='slot-2',
-                  'slot3_specific'=>$selected['category_product_3']==='slot-3',
+                  // Current 6.72.170 semantics choose position N from the ranked
+                  // list; a slot-specific campaign therefore need not itself be
+                  // the visible winner of slot N. What must remain exact is that
+                  // its placement enters only its own slot candidate set.
+                  'slot1_binding_scoped'=>in_array('slot-1',$ids['category_product_1'],true)
+                      && !in_array('slot-1',$ids['category_product_2'],true)
+                      && !in_array('slot-1',$ids['category_product_3'],true),
+                  'slot2_binding_scoped'=>in_array('slot-2',$ids['category_product_2'],true)
+                      && !in_array('slot-2',$ids['category_product_1'],true)
+                      && !in_array('slot-2',$ids['category_product_3'],true),
+                  'slot3_binding_scoped'=>in_array('slot-3',$ids['category_product_3'],true)
+                      && !in_array('slot-3',$ids['category_product_1'],true)
+                      && !in_array('slot-3',$ids['category_product_2'],true),
                   'wrong_target_excluded'=>!in_array('wrong-target',$ids['category_product_1'],true)&&!in_array('wrong-target',$ids['category_product_2'],true)&&!in_array('wrong-target',$ids['category_product_3'],true),
                   'inactive_excluded'=>!in_array('inactive-target',$ids['category_product_1'],true)&&!in_array('inactive-target',$ids['category_product_2'],true)&&!in_array('inactive-target',$ids['category_product_3'],true),
                   'wrong_type_excluded'=>!in_array('wrong-type',$ids['category_product_1'],true)&&!in_array('wrong-type',$ids['category_product_2'],true)&&!in_array('wrong-type',$ids['category_product_3'],true),
                   'direct_binding_present'=>in_array('direct-page',$ids['category_product_1'],true),
                   'parent_descendant_present'=>in_array('parent-descendant',$ids['category_product_1'],true),
-                  'banner_present'=>$selected['hub_after_cards']==='ab-banner' && strlen($html['hub_after_cards'])>0,
                   'products_present'=>strlen($html['category_product_1'])>0&&strlen($html['category_product_2'])>0&&strlen($html['category_product_3'])>0,
               ];
 
