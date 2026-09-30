@@ -1,72 +1,69 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-09-28
-STATUS: V1.9.0 STAGE HARDLOCK LOKAL POSITIV/NEGATIV PASS / LIVE-ROLLBACK + RETEST OFFEN
+STAND: 2026-09-30
+STATUS: V1.9.1 EDITORIAL INTENT OWNERSHIP LOKAL HARD PASS / LIVE-ROLLBACK + RETEST OFFEN
 
-## Live-Befund V1.8.9
+## Aktueller belastbarer Stand
 
-Nach Übernahme des vorbereiteten READ_ONLY_PREVIEW zeigte WordPress unerwartet:
-- Stage: `Deployment abgeschlossen`;
-- `Schreiben und Readback erfolgreich`;
-- URL-Meldung `apkw_msg=deployed`.
-
-Dieser Zustand darf aus einem READ_ONLY_PREVIEW-Import allein nicht erreichbar sein.
-
-## Code-Ursache
-
-Zwei reale Lücken im Guided Flow:
-1. `workspace_next` prüfte serverseitig nicht bei jedem POST, ob der angeforderte Schritt exakt zur aktuellen Stage gehört. Ein veralteter/staler späterer POST konnte daher bei noch vorhandenen Downstream-Artefakten prinzipiell weiterlaufen.
-2. Beim Ersetzen eines früheren Arbeitsstands wurden abhängige spätere Pakete (`final`, `deploy_plan` usw.) nicht konsequent invalidiert.
-
-Damit war der UI-Ablauf zwar geführt, aber der Serverpfad noch nicht hart genug an die aktuelle Stage gebunden.
-
-## Fix V1.9.0
+V1.9.1 ist die direkte Fortsetzung derselben Pluginlinie. Kein Zusatz-/Companion-Plugin.
 
 Plugin:
-`Affiliate-Portal Kategorie-Workflow V1.9.0 Hobby Depot Stage Hardlock`
+`Affiliate-Portal Kategorie-Workflow V1.9.1`
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.1_EDITORIAL_INTENT_OWNERSHIP.zip`
 
 Installer SHA-256:
-`79d914e6896c36c0022dbae25c7c3ec24923dc453eadc499ef6cd1b88fcd83a1`
+`92c8b4ee6e1c53ce677b7a059766796c02afc9d39cdcd5f86511bf51b8808b1f`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.1_EDITORIAL_INTENT_OWNERSHIP.zip`
 
 Source SHA-256:
-`b63fbedaf4a474923ce6946cafec45faa5ebcea4de36cd534dd9c546d089c3c9`
+`7ccb6f45f2728466392b4a56e6fcda44e71265b7138cdb55be9921b4d576cc32`
 
-Neu:
-- jeder Guided-POST hat serverseitigen exakten Stage-Guard;
-- stale/alter POST für einen späteren Schritt wird BLOCKED;
-- neuer/korrigierter Upstream-Stand invalidiert alle davon abhängigen Downstream-Pakete und alte Deployment-Metadaten;
-- READ_ONLY_PREVIEW-Import entfernt stale `FINAL_APPROVED` und `deploy_plan`;
-- während eines aktiven Deployment-Runs ist ein neuer Upstream-Import BLOCKED, bis Rollback erfolgt;
-- persistente DataForSEO-Verbindung und der vereinfachte Guided Flow bleiben unverändert.
+V1.9.1 enthält vollständig den V1.9.0-Stage-Hardlock:
+- exakter serverseitiger Stage-Guard;
+- stale spätere Aktionen BLOCKED;
+- Downstream-Artefakte bei Upstream-Ersatz invalidiert;
+- aktiver Deployment-Run blockiert neuen Upstream-Import bis Rollback.
 
-## Lokale harte Prüfung vor Live-Abnahme
+Zusätzlich neu, allgemeingültig:
+- finaler Report exportiert `research_evidence.editorial_handoff`;
+- alle aktiven Strukturknoten werden als Kategorie-Owner-Registry ausgegeben;
+- explizite `ARTICLE_ONLY`-Intents können mit `owner_concept_id` genau einem Owner zugeordnet werden;
+- fehlender/ungültiger Owner oder derselbe exakte Intent bei mehreren Ownern blockiert nur den Editorial-Handoff;
+- bestehender Kategorien-/Deployment-PASS wird dadurch nicht rückwirkend verändert;
+- Residual-Research wird niemals automatisch zum Artikel;
+- keine Beitragstitel- oder Textproduktion im Kategorie-Plugin.
 
-- Source Vollsuite: 241/241 PASS;
-- Fresh-Unpack-Installer: 241/241 PASS;
+## Harte lokale Prüfung
+
+- Source Vollsuite: 248/248 PASS;
+- Fresh-Unpack Source: 248/248 PASS;
 - Source PHP-Lint: 18/18 PASS;
 - Installer Runtime PHP-Lint: 17/17 PASS;
-- Runtime-Parität Source↔Installer: 22/22 byteidentisch.
+- Source↔Installer Runtime-Parität: 22/22 byteidentisch;
+- Source-/Installer-Checksummen: PASS.
 
-Gezielte Positiv-/Negativtests:
-- exakt aktuelle Stage → nächster Schritt erlaubt;
-- stale Deployment-Aktion bei `structure_ready` → BLOCKED;
-- neuer READ_ONLY_PREVIEW bei stale Final-/Deployment-Plan → Downstream entfernt, Stage bleibt `structure_ready`;
-- aktiver Deployment-Run + neuer/korrigierter Upstream-Import → BLOCKED bis Rollback;
-- bestehende Persistenz-/Verbindungs-/Review-Negativtests weiterhin PASS.
+Realer bisheriger Hobby-Depot-Testbestand:
+- 20 aktive Struktur-Owner erkannt;
+- 27 bestehende `ARTICLE_ONLY`-Entscheidungen besitzen noch keinen `owner_concept_id`;
+- deshalb Editorial-Handoff korrekt BLOCKED;
+- Kategorienstand bleibt davon unberührt.
 
 ## Live-Status
 
-V1.8.9 ist aktuell live und zeigt einen bereits ausgeführten Test-Deployment-Run.
-Dieser Testbestand muss über den vorhandenen Rollback sauber zurückgesetzt werden.
+V1.8.9 ist weiterhin der zuletzt dokumentierte Live-Stand und zeigt den unerwartet ausgeführten Test-Deployment-Run.
 
-V1.9.0 ist lokal geprüft, aber noch NICHT live abgenommen.
+V1.9.1 ist lokal hart geprüft, aber noch NICHT live abgenommen.
 
 ## NEXT ACTION
 
-V1.9.0 über V1.8.9 installieren. Der persistente Live-Stand muss danach weiterhin `deployed` anzeigen. Dann den aktuell angezeigten Testlauf ausdrücklich vollständig zurückrollen. Erst danach READ_ONLY_PREVIEW erneut übernehmen und beweisen, dass exakt `structure_ready` / finale Prüfung erscheint und kein automatischer oder staler Deployment-Sprung mehr möglich ist.
+V1.9.1 über V1.8.9 installieren → vorhandenen Test-Deployment-Run vollständig zurückrollen → denselben READ_ONLY_PREVIEW erneut übernehmen.
+
+Erwartung:
+- Stage exakt `structure_ready`;
+- kein automatischer/staler Write;
+- Kategorienprüfung unverändert;
+- Editorial-Handoff zeigt die alten ungebundenen ARTICLE_ONLY-Intents sichtbar als offen/BLOCKED, bis ihre Owner fachlich zugeordnet sind.
