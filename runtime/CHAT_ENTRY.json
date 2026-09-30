@@ -55,5 +55,5 @@
   "worker_type": "CHAT_REPAIR_WORKER",
   "writing_rules_coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
   "writing_rules_path": "contracts/K9_WRITING_RULES.json",
-  "writing_rules_sha256": "b1c66fa5d872742cb2461f6653001de862a9d74531fad25d1910a50d6094c286"
+  "writing_rules_sha256": "723de98b0486de2984eaea74aebff6b0ee38589cee5eb1942630e8683d791c08"
 }
