@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 3,
+  "generation": 4,
   "items": [
     {
       "item_id": "k9-a38f92cbb97fe29aece54292",
@@ -16,6 +16,11 @@
           "job_id": "K9-RESEARCH-12ef2ec83671e474",
           "path": "warehouse/research/K9-RESEARCH-12ef2ec83671e474.json",
           "sha256": "fca10178fbd510ca9ef39b836eb2705bd7b6bf0fd96b6468f7d2216ac0c21adb"
+        },
+        "write": {
+          "job_id": "K9-WRITE-adc3712371fc5fe8",
+          "path": "warehouse/write/K9-WRITE-adc3712371fc5fe8.json",
+          "sha256": "bf99ae6c8d161f42eb8b32e128faa13dc2ce1650e9a0fe759580fbf9c3fa18de"
         }
       },
       "revision": 0,
@@ -23,7 +28,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Longiergurte mit Bogen im Ratgeber"
     }
