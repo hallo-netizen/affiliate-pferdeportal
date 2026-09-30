@@ -6,7 +6,7 @@ STATUS: AKTIV / DATENBANK · PERFORMANCE · AUFRÄUMEN
 ## 1-KLICK-ÜBERSICHT
 
 **WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des PLUGINS-Büros.
+Temporäre Ausführungsfläche des PLUGINS-Büros. `CURRENT_STATE.md` bleibt alleinige Current-/NEXT-ACTION-Autorität.
 
 **HIER BIST DU RICHTIG, WENN …**  
 ein konkretes Plugin inventarisiert, aktualisiert, deaktiviert, ersetzt, auf Abhängigkeiten geprüft oder als Aufräumkandidat untersucht werden soll.
@@ -53,7 +53,7 @@ Gebündelter Kandidat:
 `PSTE-0.57.13-DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS.zip`
 
 SHA-256:
-`9627705af4d934b6dcde5106476459af2f3959032da9caee2a33cc5621c22345`
+`bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`
 
 Scope:
 - verlustfreie Verdichtung von Run-Snapshots, Candidate-Payloads, Parkarchiven und record-lokalen Sandbox-Daten;
@@ -74,7 +74,10 @@ Hardtests:
 - PSERC-0.28.27-Bindung PASS;
 - Fresh-Unpack/Dateistruktur PASS.
 
-Wichtig: Ein früherer 0.57.13-Zwischenkandidat wurde vor Installation verworfen, weil er Storage-Klassen global im Frontend lud und noch keine vollständigen Active-Work-Sperren hatte. Nur der oben hashgebundene Kandidat gilt.
+Wichtig:
+- Ein früherer 0.57.13-Zwischenkandidat wurde vor Installation verworfen, weil er Storage-Klassen global im Frontend lud und noch keine vollständigen Active-Work-Sperren hatte.
+- Die Abschlussprüfung fand in einem weiteren vorinstallativen Paket zusätzlich eine ungewollte `.orig`-Backup-Datei. Auch dieses Paket wurde verworfen.
+- Nur der oben hashgebundene Kandidat `bb5f3c...` gilt.
 
 ## PSERC / PPM – PRÜFRESULTAT 2026-09-30
 
@@ -82,7 +85,7 @@ Wichtig: Ein früherer 0.57.13-Zwischenkandidat wurde vor Installation verworfen
 
 **PPM 6.7.9:** Datenbankfamilie aktuell klein (ca. 26,6 MB), kein belegtes unkontrolliertes Wachstum. Kritische Produktionslogik. **Kein Codeupdate auf Verdacht.**
 
-NEXT ACTION: `INSTALL_PSTE_0_57_13_DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS`.
+Ausführungsbindung: ausschließlich die in `CURRENT_STATE.md` aktuell gebundene NEXT ACTION ausführen. Dieser Hobbyraum erzeugt keine eigene NEXT ACTION.
 
 ## WENN EIN UPDATE BEAUFTRAGT WIRD
 
