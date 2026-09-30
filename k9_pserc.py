@@ -101,6 +101,28 @@ def _fact_target_match(markup,fid):
             return m
     return None
 
+def _attr_value(tag,name):
+    m=re.search(name+r'="([^"]+)"',tag,re.I)
+    if m: return m.group(1)
+    m=re.search(name+r"='([^']+)'",tag,re.I)
+    return m.group(1) if m else ""
+
+def _full_trace_match(markup,fid):
+    for m in re.finditer(r'<span[^>]*></span>',markup,re.I):
+        tag=m.group(0)
+        if "ppm-source-trace" not in tag:
+            continue
+        if _attr_value(tag,"data-fact-id")==fid:
+            return m
+    return None
+
+def _fact_target_match(markup,fid):
+    for m in re.finditer(r'<[A-Za-z][A-Za-z0-9:-]*[^>]*>',markup):
+        value=_attr_value(m.group(0),"data-fact-ids")
+        if value and fid in value.split():
+            return m
+    return None
+
 def bind_canonical_article_traces(ppm_item, fact_pack):
     article=ppm_item.get("canonical_article")
     if not isinstance(article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
@@ -108,16 +130,16 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
     if not markup: raise Blocked("CANONICAL_ARTICLE_HTML_MISSING")
     for claim in fact_pack.get("claims",[]):
         if not isinstance(claim,dict): continue
-        fid=str(claim.get("fact_id") or "")
-        source_id=str(claim.get("source_id") or "")
-        source_hash=str(claim.get("evidence_text_sha256") or "")
+        fid=str(claim.get("fact_id") or "").strip()
+        source_id=str(claim.get("source_id") or "").strip()
+        source_hash=str(claim.get("evidence_text_sha256") or "").strip()
         if not fid or not source_id or not source_hash:
             raise Blocked("CANONICAL_TRACE_BINDING_MISSING:"+fid)
         trace=(
             f'<span class="ppm-source-trace" data-fact-id="{fid}" '
             f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
         )
-        existing=_trace_match(markup,fid)
+        existing=_full_trace_match(markup,fid)
         if existing:
             markup=markup[:existing.start()]+trace+markup[existing.end():]
             continue
@@ -130,6 +152,7 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
     article["source_ids"]=[str(x.get("source_id") or "") for x in fact_pack.get("sources",[]) if isinstance(x,dict)]
     ppm_item["canonical_article"]=article
     return ppm_item
+
 
 def latest_products(ledger, root):
     items=ledger.get("items")
