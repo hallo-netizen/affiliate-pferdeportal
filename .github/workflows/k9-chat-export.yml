@@ -1,0 +1,19 @@
+name: K9 chat export
+on:
+  push:
+    branches: ['tmp/k9-chat-export-20261001']
+    paths: ['.github/workflows/k9-chat-export.yml']
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Upload verified WordPress JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: k9-wordpress-final-json
+          path: final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
+          if-no-files-found: error
+          retention-days: 1
