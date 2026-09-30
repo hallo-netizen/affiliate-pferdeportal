@@ -135,16 +135,22 @@ jobs:
           html=article["content_html"]
           html=html.replace('<table data-table="comparison"', '<table class="system-129-table comparison-table" data-table="comparison"', 1)
           claim_by_id={c["fact_id"]:c for c in fact_pack["claims"]}
-          trace_ids=["FACT-CLIPPER-003","FACT-CLIPPER-004","FACT-CLIPPER-005","FACT-CLIPPER-006","FACT-CLIPPER-007"]
+          trace_ids=list(fact_pack.get("fact_ids") or [])
           for fid in trace_ids:
-              c=claim_by_id[fid]
-              opener=f'<p data-fact-ids="{fid}">'
-              trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
-                     f'data-source-hash="{c["evidence_text_sha256"]}" '
-                     f'data-source-title="{c["source_id"]}"></span>')
-              if opener not in html:
+              if re.search(r'class=["\']ppm-source-trace["\'][^>]*data-fact-id=["\']'+re.escape(fid)+r'["\']',html):
+                  continue
+              claim=claim_by_id[fid]
+              paragraph=re.search(
+                  r'<p\\b[^>]*data-fact-ids=["\\'][^"\\']*\\b'+re.escape(fid)+r'\\b[^"\\']*["\\'][^>]*>',
+                  html,re.I
+              )
+              if not paragraph:
                   raise SystemExit("TRACE_TARGET_MISSING:"+fid)
-              html=html.replace(opener, opener+trace, 1)
+              opener=paragraph.group(0)
+              trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
+                     f'data-source-hash="{claim["evidence_text_sha256"]}" '
+                     f'data-source-title="{claim["source_id"]}"></span>')
+              html=html[:paragraph.end()]+trace+html[paragraph.end():]
 
           with tempfile.TemporaryDirectory() as td:
               draft_path=Path(td)/"draft.json"
