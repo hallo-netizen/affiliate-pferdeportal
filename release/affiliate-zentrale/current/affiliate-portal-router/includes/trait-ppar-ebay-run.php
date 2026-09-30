@@ -114,18 +114,24 @@ trait PPAR_Ebay_Run_Trait {
     }
 
     /**
-     * 6.72.167 KISS one-time state retirement.
-     * Terminal runs from historical builds are bounded history, not current
-     * operational state. Current-build terminal runs remain visible until the
-     * next explicit start, preserving useful immediate diagnostics.
+     * 6.72.167 KISS terminal-state retirement.
+     * A failed/completed run stays visible for one day for immediate diagnosis.
+     * Afterwards it becomes bounded history instead of an indefinitely current
+     * red/green operational state. Missing terminal timestamps are treated as
+     * stale/unknown and are archived fail-safe. New explicit starts archive a
+     * terminal predecessor immediately in ebay_run_start().
      */
     public function maybe_retire_legacy_terminal_ebay_run_v672167() {
         $run = $this->ebay_run_load();
         if ((string)($run['schema'] ?? '') !== '1.0') { return; }
         $status = sanitize_key((string)($run['status'] ?? ''));
         if (!in_array($status, array('failed','completed'), true)) { return; }
-        $build = sanitize_text_field((string)($run['build'] ?? ''));
-        if ($build !== '' && hash_equals($build, (string)self::EBAY_RUNTIME_BUILD)) { return; }
+        $terminal_at = max(
+            absint($run['finished_at'] ?? 0),
+            absint($run['last_progress_at'] ?? 0),
+            absint($run['started_at'] ?? 0)
+        );
+        if ($terminal_at > 0 && $terminal_at > time() - DAY_IN_SECONDS) { return; }
         $this->ebay_run_archive_terminal($run);
         if (function_exists('delete_option')) { delete_option($this->ebay_run_option_key()); }
     }
