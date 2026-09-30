@@ -18,7 +18,24 @@
     "conclusion_no_new_untraced_facts": true,
     "duplicate_block_names_forbidden": true,
     "topic_specific_special_logic_forbidden": true,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "canonical_table_classes": [
+      "system-129-table",
+      "comparison-table"
+    ],
+    "source_trace_contract": {
+      "class": "ppm-source-trace",
+      "minimum_count": 3,
+      "required_attributes": [
+        "data-fact-id",
+        "data-source-hash",
+        "data-source-title"
+      ],
+      "data_fact_id_source": "BOUND_RESEARCH_CLAIM.fact_id",
+      "data_source_hash_source": "BOUND_RESEARCH_CLAIM.evidence_text_sha256",
+      "data_source_title_source": "BOUND_RESEARCH_CLAIM.source_id",
+      "placement": "INSIDE_A_VISIBLE_FACTUAL_UNIT_THAT_LEXICALLY_SUPPORTS_THE_SAME_FACT"
+    }
   },
   "types": {
     "FAQ": {

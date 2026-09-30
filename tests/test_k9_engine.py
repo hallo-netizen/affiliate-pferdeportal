@@ -86,7 +86,8 @@ class K9Tests(unittest.TestCase):
                 "claim_status":"FULLY_SUPPORTED",
                 "subject_scope":f"subject-{iid}",
                 "time_scope":"SOURCE_SCOPE",
-                "article_types":["Beratung"]
+                "article_types":["Beratung"],
+                "evidence_text_sha256":hashlib.sha256(f"Belastbarer Fakt {iid}.".encode("utf-8")).hexdigest()
             }],
             "fact_pack_hash":"a"*64,
             "source_manifest_hash":"b"*64,
@@ -324,7 +325,8 @@ class K9Tests(unittest.TestCase):
                 "statement":"Die Geräteklasse richtet sich nach Einsatz und Fell.",
                 "claim_status":"FULLY_SUPPORTED",
                 "subject_scope":"Auswahl der Geräteklasse","time_scope":"allgemeine Produktauswahl",
-                "article_types":["Beratung"]
+                "article_types":["Beratung"],
+                "evidence_text_sha256":hashlib.sha256("Die Geräteklasse richtet sich nach Einsatz und Fell.".encode("utf-8")).hexdigest()
             }],
             "fact_pack_hash":"a"*64,"source_manifest_hash":"b"*64,"claim_register_hash":"c"*64,
             "required_block_coverage":"PASS","table_evidence_coverage":"PASS",
@@ -347,6 +349,20 @@ class K9Tests(unittest.TestCase):
         good={"item_id":"k9-1ff3dfabfed47a0c47c8df13","research_product":product}
 
         import copy
+        missing_evidence_hash=copy.deepcopy(good)
+        missing_evidence_hash["research_product"]["fact_pack"]["claims"][0].pop("evidence_text_sha256")
+        core=dict(missing_evidence_hash["research_product"]); core.pop("product_sha256")
+        missing_evidence_hash["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_CLAIM_EVIDENCE_HASH_INVALID"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[missing_evidence_hash]})
+
+        wrong_evidence_hash=copy.deepcopy(good)
+        wrong_evidence_hash["research_product"]["fact_pack"]["claims"][0]["evidence_text_sha256"]="0"*64
+        core=dict(wrong_evidence_hash["research_product"]); core.pop("product_sha256")
+        wrong_evidence_hash["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_CLAIM_EVIDENCE_HASH_INVALID"):
+            k.validate_submission(job,{"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":"research","results":[wrong_evidence_hash]})
+
         missing_article_types=copy.deepcopy(good)
         missing_article_types["research_product"]["fact_pack"]["claims"][0].pop("article_types")
         core=dict(missing_article_types["research_product"]); core.pop("product_sha256")

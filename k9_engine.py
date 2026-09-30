@@ -400,6 +400,10 @@ def _validate_research_product(row, job_item):
             raise K9Error("RESEARCH_CLAIM_ARTICLE_TYPES_INVALID:" + str(claim.get("fact_id") or ""))
         if expected_type and expected_type not in article_types:
             raise K9Error("RESEARCH_CLAIM_ARTICLE_TYPE_MISMATCH:" + str(claim.get("fact_id") or ""))
+        evidence_hash = str(claim.get("evidence_text_sha256") or "").strip()
+        expected_evidence_hash = hashlib.sha256(str(claim.get("statement") or "").encode("utf-8")).hexdigest()
+        if evidence_hash != expected_evidence_hash:
+            raise K9Error("RESEARCH_CLAIM_EVIDENCE_HASH_INVALID:" + str(claim.get("fact_id") or ""))
         if claim.get("claim_status") != "FULLY_SUPPORTED":
             raise K9Error("RESEARCH_CLAIM_NOT_FULLY_SUPPORTED")
         if claim["source_id"] not in source_ids:
