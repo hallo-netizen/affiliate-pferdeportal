@@ -189,7 +189,14 @@ def _build_single(job,entry,rules,rules_sha,draft):
     if article_type=="FAQ":
         type_meta={"primary_question":title}
         claims=fact_pack.get("claims") if isinstance(fact_pack.get("claims"),list) else []
-        direct_answer=str((claims[0] if claims else {}).get("statement") or "").strip()
+        answer_parts=[]
+        for claim in claims:
+            statement=str((claim if isinstance(claim,dict) else {}).get("statement") or "").strip()
+            if statement:
+                answer_parts.append(statement)
+            direct_answer=" ".join(answer_parts).strip()
+            if len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",direct_answer,re.UNICODE))>=12:
+                break
         if len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",direct_answer,re.UNICODE))<12:
             raise PackError("FAQ_DIRECT_ANSWER_BINDING_INVALID")
     else:
