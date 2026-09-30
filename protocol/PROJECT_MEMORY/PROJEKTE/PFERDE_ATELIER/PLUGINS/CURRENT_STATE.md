@@ -22,7 +22,7 @@ Quelle: vom Nutzer bereitgestellte aktuelle WordPress-Liste „Plugins → Insta
 
 Aktuell beobachtet:
 - Affiliate Portal Template Kit (Pferde-kompatibel): **1.50.578**, aktiv.
-- Affiliate-Zentrale (Portal-kompatibel): **6.72.165**, aktiv.
+- Affiliate-Zentrale (Portal-kompatibel): **6.72.167**, aktiv; Nutzer bestätigt Installation, danach eBay-OAuth erfolgreich geprüft. `PLUGIN_UPDATE_REF: PU-20260930-003`.
 - Performance Diagnose Safe: **2.3.0 aktiv**; ältere **2.2.0 inaktiv**.
 - Pferde Atelier – Affiliate Design Performance: **3.0.0 inaktiv**.
 - Portal Production Machine: **6.7.9**, aktiv.
