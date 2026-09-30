@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: BUCHBINDEN INTENT-OWNERSHIP GESETZT / V1.9.1 OWNER-HANDOFF IMPLEMENTIERT / PSTE 0.57.14 TEXT-DUBLETTENGATE LOKAL PASS / LIVE-ABNAHME + FAQ-DATENPRÜFUNG OFFEN
+STATUS: BUCHBINDEN E2E OWNERSHIP LOKAL PASS / V1.9.1 + PSTE 0.57.14 TECHNISCH VERKETTET / PROBLEME + FAQ DATENLÜCKE / LIVE-ABNAHME OFFEN
 
 ## Rolle
 
@@ -21,6 +21,9 @@ Buchbinden-Pilot:
 
 Technische Prüfung:
 `BUCHBINDEN_TECHNISCHE_INTENT_ABSICHERUNG_20260930.md`
+
+Lokaler Realtest mit vorhandenen DataForSEO-Daten:
+`BUCHBINDEN_E2E_OWNERSHIP_REALTEST_20260930.md`
 
 ### Struktur
 
@@ -72,19 +75,42 @@ Der allgemeine Downstream-Artikelgate ist damit lokal implementiert für:
 - bestehende exakte/answer-equivalente Dubletten;
 - Frageform ohne automatische FAQ-Owner-Autorität.
 
-Die reale WordPress-Abnahme dieses Anschlusses ist noch offen.
+Lokaler End-to-End-Test V1.9.1 → PSTE 0.57.14 mit realen Buchbinden-Keywords: PASS.
 
-FAQ-Tragfähigkeit bleibt datenoffen:
-mindestens 3, bevorzugt 4+, eigenständige Restintents müssen real belegt werden; sonst nicht künstlich auffüllen.
+Belegt:
+- richtige Owner passieren;
+- falsche FAQ-Zuordnung wird bei exakter oder semantischer Doppelbelegung BLOCKED;
+- Frageform besitzt keine FAQ-Autorität;
+- fehlender `semantic_intent_key` wird fail-closed blockiert.
+
+DataForSEO-Befund aus dem vorhandenen 50-Keyword-Buchbinden-Set:
+- Einstieg: Evidenz vorhanden;
+- Ausrüstung: Evidenz vorhanden;
+- Material: Mindestbreite vorhanden;
+- Techniken/Praxis: Evidenz vorhanden;
+- Fragen/Probleme: DATA GAP;
+- FAQ: DATA GAP.
+
+FAQ-Tragfähigkeit bleibt daher offen: mindestens 3, bevorzugt 4+, eigenständige Restintents müssen real belegt werden; sonst nicht künstlich auffüllen.
+
+Die reale WordPress-Abnahme des technischen Anschlusses ist weiterhin offen.
 
 ## Erster offener Blocker
 
 Kein Entwicklungsblocker mehr im Kategorie- oder Ownership-Gate.
 
-Offen ist jetzt die **reale gemeinsame Abnahme** von V1.9.1 → PSTE 0.57.14 sowie anschließend die datenbasierte Buchbinden-/FAQ-Prüfung.
+Technischer lokaler E2E-Blocker besteht nicht mehr.
+
+Offen sind jetzt:
+1. reale WordPress-Abnahme V1.9.1 → PSTE 0.57.14;
+2. gezielte Nachrecherche für **Fragen/Probleme** und **FAQ**, weil der vorhandene DataForSEO-Bestand dort noch keine ausreichende Tragfähigkeit belegt.
 
 ## NEXT ACTION
 
 Kein weiteres Plugin bauen.
 
-Als Nächstes V1.9.1 live sauber zurückrollen/retesten, den Editorial-Handoff in PSTE 0.57.14 importieren und danach Buchbinden als ersten Realfall durch DataForSEO-/SERP- und Ownership-Prüfung laufen lassen.
+Als Nächstes keine weitere Pluginentwicklung.
+
+1. V1.9.1 live sauber zurückrollen/retesten und Editorial-Handoff in PSTE 0.57.14 importieren.
+2. Parallel nur die fehlenden Buchbinden-Research-Räume **Fragen/Probleme** und **FAQ-Restintents** nachrecherchieren.
+3. Erst danach finale Buchbinden-Leaf-Freigabe.
