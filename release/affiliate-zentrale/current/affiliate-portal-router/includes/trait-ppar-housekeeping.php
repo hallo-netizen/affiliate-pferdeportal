@@ -31,6 +31,7 @@ trait PPAR_Housekeeping_Trait {
         return array(
             'contract'=>'1.0','status'=>'never','started_at'=>0,'finished_at'=>0,
             'db_deleted'=>0,'db_compacted'=>0,'files_deleted'=>0,'bytes_deleted'=>0,
+            'recovery_options_deleted'=>0,'recovery_schedules_cleared'=>0,
             'last_error'=>'',
         );
     }
@@ -49,6 +50,37 @@ trait PPAR_Housekeeping_Trait {
             if ($this->ebay_run_is_open($run)) { return true; }
         }
         return false;
+    }
+
+    private function housekeeping_retire_obsolete_recovery_state() {
+        $deleted = 0;
+        $cleared = 0;
+        foreach (array(
+            'ppar_aff039_dual_layer_recovery_v1',
+            'ppar_aff043_historical_product_state_restore_v1',
+            'ppar_aff044_clean_114_115_restore_v1',
+        ) as $option_key) {
+            if (get_option($option_key, null) !== null) {
+                delete_option($option_key);
+                $deleted++;
+            }
+        }
+        if (function_exists('delete_transient')) {
+            delete_transient('ppar_aff039_dual_layer_recovery_lock_v1');
+            delete_transient('ppar_aff043_historical_product_state_restore_lock_v1');
+        }
+        if (function_exists('wp_clear_scheduled_hook')) {
+            foreach (array(
+                'ppar_aff039_dual_layer_recovery_worker_v1',
+                'ppar_aff043_historical_product_state_restore_worker_v1',
+            ) as $hook) {
+                if (!function_exists('wp_next_scheduled') || wp_next_scheduled($hook)) {
+                    wp_clear_scheduled_hook($hook);
+                    $cleared++;
+                }
+            }
+        }
+        return array('options_deleted'=>$deleted,'schedules_cleared'=>$cleared);
     }
 
     private function housekeeping_delete_query($sql) {
@@ -188,6 +220,7 @@ trait PPAR_Housekeeping_Trait {
             return $state;
         }
         try {
+            $legacy=$this->housekeeping_retire_obsolete_recovery_state();
             $db=$this->housekeeping_db_pass();
             $disk=$this->housekeeping_disk_pass();
             // V6.72.71: Derselbe zentrale Tageslauf aktualisiert die belegten
@@ -201,6 +234,8 @@ trait PPAR_Housekeeping_Trait {
             $state['db_compacted']=absint($db['compacted']??0);
             $state['files_deleted']=absint($disk['deleted']??0);
             $state['bytes_deleted']=absint($disk['bytes']??0);
+            $state['recovery_options_deleted']=absint($legacy['options_deleted']??0);
+            $state['recovery_schedules_cleared']=absint($legacy['schedules_cleared']??0);
             $state['status']='complete';
         } catch (Throwable $e) {
             $state['status']='failed';$state['last_error']=sanitize_text_field($e->getMessage());
