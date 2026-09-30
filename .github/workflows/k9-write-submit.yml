@@ -17,6 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Package and atomically accept exact open write job
+        id: package
         shell: bash
         run: |
           set -euo pipefail
@@ -24,11 +25,13 @@ jobs:
           if [ "$count" -eq 0 ]; then echo 'No writer draft.'; exit 0; fi
           test "$count" -eq 1
           test -f runtime/CURRENT_JOB.json
-          job_id=$(python3 - <<'PY'
+          read -r job_id item_count < <(python3 - <<'PY'
           import json
-          print(json.load(open('runtime/CURRENT_JOB.json'))['job_id'])
+          j=json.load(open('runtime/CURRENT_JOB.json'))
+          print(j['job_id'], j['item_count'])
           PY
           )
+          echo "item_count=$item_count" >> "$GITHUB_OUTPUT"
           draft="writer_drafts/${job_id}.json"
           test -f "$draft"
           out="/tmp/${job_id}.submission.json"
@@ -45,10 +48,16 @@ jobs:
       - name: Automatically start native check after write or repair
         env:
           GH_TOKEN: ${{ github.token }}
+          ITEM_COUNT: ${{ steps.package.outputs.item_count }}
         shell: bash
         run: |
           set -euo pipefail
-          body='{"ref":"konzept9/greenfield-20260929","inputs":{"station":"check","batch_size":"1","run_mode":"inherit"}}'
+          test -n "$ITEM_COUNT"
+          body="$(python3 - <<'PY'
+          import json,os
+          print(json.dumps({'ref':'konzept9/greenfield-20260929','inputs':{'station':'check','batch_size':os.environ['ITEM_COUNT'],'run_mode':'inherit'}},separators=(',',':')))
+          PY
+          )"
           curl --fail-with-body --silent --show-error -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer $GH_TOKEN" \
