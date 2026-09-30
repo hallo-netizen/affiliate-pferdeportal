@@ -10,3 +10,4 @@ retry-16-full-trace-span-replacement
 finalize-16-after-full-span-binder
 finalize-16-after-lexical-trace-binding
 finalize-16-user-request-no-repair
+finalize-16-after-language-evidence-hash-fix
