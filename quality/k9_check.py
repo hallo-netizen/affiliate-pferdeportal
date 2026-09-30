@@ -7,6 +7,7 @@ sys.path.insert(0, str(HERE))
 import k9_lt68
 import k9_ppm679
 import k9_rule_guard
+import k9_table_guard
 
 class CheckError(RuntimeError):
     pass
@@ -54,6 +55,17 @@ def run_job(job_path, jar_path, ppm_path):
         rules_path=HERE.parent/"contracts"/"K9_WRITING_RULES.json"
         rules=load_json(rules_path)
         writing_result=k9_rule_guard.evaluate(html,item.get("metadata") or {},rules)
+        table_result=k9_table_guard.evaluate(html)
+        table_rule=k9_table_guard.load_rule()
+        table_findings=list(table_result.get("findings") or [])
+        if table_rule.get("word_budget",{}).get("table_words_count_toward_article_minimum") is False:
+            minimum=int((rules.get("editorial_additive",{}).get("balance_policy",{}) or {}).get("hard_total_words_min") or 0)
+            if minimum and int(table_result.get("non_table_word_count") or 0)<minimum:
+                table_findings.append({"code":"K9_RULE_TABLE_CANNOT_FILL_ARTICLE_WORD_FLOOR","actual_non_table_words":int(table_result.get("non_table_word_count") or 0),"minimum":minimum})
+        writing_result["findings"]=list(writing_result.get("findings") or [])+table_findings
+        writing_result["table_rule_contract"]=table_result.get("rule_contract")
+        if table_findings:
+            writing_result["status"]="REPAIR_REQUIRED"
         if article.get("writing_rules_sha256")!=writing_result.get("writing_rules_sha256"):
             raise CheckError("K9_CHECK_WRITING_RULES_BINDING_MISMATCH")
 
