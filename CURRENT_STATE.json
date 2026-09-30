@@ -8,95 +8,47 @@
     "ref": "main",
     "path": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
   },
-  "status": "FRESH_CHAT_AUTO_PROOF_WRITE_OPEN_EXECUTION_ONLY_GUARD_ACTIVE",
-  "freshness": {
-    "last_relevant_technical_head": "cc04ca39098ef3037307c3e7c2609c09c3e07b28",
-    "last_head_selftest_run": 36712868382,
-    "last_real_finalizer_run": 36709672952,
-    "finalizer_input_head": "95c55ae7042754c2a962a4f8e452f5beb7692b6b",
-    "terminal_package_commit": "b16299c4d661c2e54e467bbdc753dc8db46a85ec",
-    "current_head": "cc04ca39098ef3037307c3e7c2609c09c3e07b28",
-    "freshness_result": "PASS_EXECUTION_ONLY_WORKER_GUARD_SELFTEST_SUCCESS"
-  },
-  "proven": {
-    "article_count": 1,
-    "article_title": "Longiergurte mit Bogen im Ratgeber",
-    "article_type": "Beratung",
-    "research": "PASS",
-    "write": "PASS",
-    "lt68": "PASS",
-    "ppm679": "PASS",
-    "repair_cycles": 4,
-    "pserc": "PASS",
-    "endstempel": "PASS",
-    "wordpress_import_verify": "PASS",
-    "terminal_stop": "PASS",
-    "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-    "final_sha256": "06bd3170ab16d01c21422358a988c58d63c7c3fa1af6ba5e33bef4cb093be470",
-    "batch_sha256": "010949e5066cfca5d3ee176e85e8510b83cfecf0ef5c165cee047e0915488702",
-    "publish_allowed": false
-  },
-  "auto_chain_proof": {
-    "research_to_write": "PASS_AUTOMATIC",
-    "write_to_check": "PASS_AUTOMATIC",
-    "check_fail_to_repair": "PASS_AUTOMATIC",
-    "repair_to_recheck": "PASS_AUTOMATIC",
-    "green_check_to_finalize_trigger": "PASS_AUTOMATIC",
-    "explicit_finalizer_dispatch": {
-      "status": "FIX_DEPLOYED_NOT_YET_PROVEN_BY_A_NEW_GREEN_CHECK",
-      "receiver_fix_commit": "a90e19f7f0bc6383d83b501688f1436371a038f1",
-      "finalizer_dispatch_enable_commit": "a641c98abe74286b5b8b2002ba6144c7ebe891a3",
-      "reason": "GITHUB_TOKEN_PUSH_DOES_NOT_TRIGGER_ANOTHER_PUSH_WORKFLOW",
-      "current_run_completion": "ONE_EXISTING_FINALIZE_TRIGGER_WAS_REWRITTEN_ONCE_AFTER_FIX_TO_COMPLETE_THIS_ALREADY_GREEN_RUN"
-    },
-    "terminal_finalization_after_trigger": "PASS"
-  },
-  "runtime_evidence": {
-    "status_file": "state/STATUS.json",
-    "terminal_receipt": "runtime/K9_STOP.json",
-    "pserc_result": "runtime/K9_PSERC_RESULT.json",
-    "endstempel_verify": "runtime/K9_ENDSTEMPEL_VERIFY.json",
-    "wordpress_verify": "runtime/K9_WORDPRESS_IMPORT_VERIFY.json"
-  },
-  "first_open_blocker": "FRESH_CHAT_FULL_AUTO_ZERO_NUDGE_FROM_OPEN_WRITE_THROUGH_TERMINAL_STOP_NOT_YET_PROVEN",
-  "production_readiness": "FRESH_CHAT_REENTRY_AND_RESEARCH_TO_WRITE_AUTO_TRANSITION_PROVEN; EXECUTION_ONLY_WORKER_GUARD_ACTIVE; FULL_ZERO_NUDGE_TERMINAL_CHAIN_AND_MULTI_ITEM_NOT_YET_PROVEN",
-  "next_action": "EXECUTE_EXISTING_OPEN_WRITE_JOB K9-WRITE-4608172043f2597d ONLY; TREAT SEALED RESEARCH AS AUTHORITATIVE; DO NOT REOPEN RESEARCH, CHANGE WORKFLOW, CHANGE QUALITY GATES, RESET TEST STATE, OR MANUALLY ROUTE; AFTER WRITE SUBMISSION VERIFY AUTOMATIC CHECK_REPAIR_RECHECK_FINALIZER_PSERC_ENDSTEMPEL_WORDPRESS_STOP",
-  "working_binding": {
-    "entry_door": "hallo-netizen/text-start issue #46 (K9:pferdeatelier)",
-    "current_authority": "CURRENT_STATE.json",
-    "runtime_job_entry": "runtime/CHAT_ENTRY.json only when a chat job is open",
-    "outside_exact_job_state_use": "FORBIDDEN",
-    "worker_execution_policy": "WORKER_EXECUTES_ONLY_NEVER_SUPERVISES",
-    "accepted_predecessor_rule": "BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_CURRENT_STATION",
-    "chat_may_route": false,
-    "publish_allowed": false
-  },
-  "fresh_chat_proof": {
+  "status": "OPEN_CHAT_WORKER_JOB",
+  "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
+  "active_job": {
+    "job_id": "K9-WRITE-4608172043f2597d",
+    "station": "write",
     "article_title": "So wählst du passende Schermaschinen für Pferde",
-    "article_type": "Beratung",
     "item_id": "k9-1ff3dfabfed47a0c47c8df13",
-    "open_job_id": "K9-RESEARCH-f44ef7e1296d1829",
-    "open_job_sha256": "74a8274f9bc7938ccfe4cb662518987c8718cf7cadaf16bdd358f6f76b836897",
-    "entry_status": "OPEN_JOB_READY_FOR_CHAT",
-    "staged_commit": "8fb251018242b9d1a14a0f154b07e795097dd526",
-    "selftest_run": 36710944974,
-    "selftest_status": "SUCCESS",
-    "old_runtime_cleared": true,
-    "old_final_cleared": true,
-    "previous_pass_archive": "archive/k9-auto-longiergurt-pass-20260930",
-    "publish_allowed": false,
-    "research_to_write": "PASS_AUTOMATIC",
-    "current_open_station": "write",
-    "current_open_job_id": "K9-WRITE-4608172043f2597d",
-    "execution_only_guard": "ACTIVE"
+    "runtime_entry": "runtime/CHAT_ENTRY.json",
+    "job_path": "runtime/CURRENT_JOB.json"
   },
-  "worker_execution_only_fix": {
-    "status": "ACTIVE_AND_SELFTESTED",
-    "contract_fix_commit": "1e90274bbc326e62f6f4f6ed618356586aff7362",
-    "runtime_open_job_binding_commit": "fb7b57f38d1cb5b5ca15d85397dcb4ee4439fed9",
-    "acceptance_guard_commit": "cc04ca39098ef3037307c3e7c2609c09c3e07b28",
-    "selftest_run": 36712868382,
-    "selftest_status": "SUCCESS",
-    "behavior": "CHAT_WORKER_EXECUTES_EXACT_OPEN_STATION_ONLY; ACCEPTED_PREDECESSOR_IS_NOT_REOPENED; SYSTEM_OR_ARCHITECTURE_FIXES_ARE_FORBIDDEN; UNEXECUTABLE_INPUT_RETURNS_CONCRETE_BLOCKER_ONLY"
-  }
+  "worker_binding": {
+    "role": "WORKER_NOT_SUPERVISOR",
+    "first_action": "READ_RUNTIME_CHAT_ENTRY_AND_EXECUTE_EXACT_JOB",
+    "predecessor_rule": "BOUND_RESEARCH_PRODUCT_IS_AUTHORITATIVE_INPUT",
+    "forbidden": [
+      "STATUS_REPORT_BEFORE_EXECUTION",
+      "DIAGNOSE_OR_REDESIGN_WORKFLOW",
+      "PROPOSE_OR_APPLY_SYSTEM_FIX",
+      "REOPEN_RESEARCH",
+      "MANUALLY_ROUTE_NEXT_STATION",
+      "RESET_TEST_STATE"
+    ],
+    "blocked_rule": "ONLY_IF_EXACT_JOB_IS_UNEXECUTABLE_RETURN_CONCRETE_INPUT_BLOCKER"
+  },
+  "routing": {
+    "chat_may_route": false,
+    "after_write_submission": "K9_AUTOMATIC_ROUTING_ONLY"
+  },
+  "quality": {
+    "language_tool": "6.8",
+    "ppm": "6.7.9",
+    "pserc_required": true,
+    "endstempel_required": true,
+    "wordpress_final_verify_required": true,
+    "publish_allowed": false
+  },
+  "fresh_chat_test": {
+    "reentry": "PASS",
+    "research_to_write": "PASS_AUTOMATIC",
+    "current_station": "WRITE",
+    "remaining_proof": "WRITE_TO_CHECK_REPAIR_IF_NEEDED_FINALIZER_PSERC_ENDSTEMPEL_WORDPRESS_STOP_WITH_ZERO_MANUAL_NUDGE"
+  },
+  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY"
 }
