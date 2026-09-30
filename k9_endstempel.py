@@ -35,36 +35,31 @@ def build(root,pserc_path,outdir):
     ledger=load(root/"state/ledger.json")
     if ledger.get("generation",0)<1: raise Blocked("LEDGER_GENERATION_INVALID")
     items=ledger.get("items")
-    if not isinstance(items,list) or not items or any(x.get("stages",{}).get("check")!="DONE" for x in items): raise Blocked("LEDGER_NOT_FULLY_CHECKED")
+    if not isinstance(items,list) or not items: raise Blocked("LEDGER_ITEMS_INVALID")
+    if any(x.get("stages",{}).get("check")!="DONE" for x in items): raise Blocked("LEDGER_NOT_FULLY_CHECKED")
 
-    pserc_rows=pserc.get("results")
-    if isinstance(pserc_rows,list):
-        by_item={str(x.get("item_id") or ""):x for x in pserc_rows if isinstance(x,dict)}
-        if len(by_item)!=len(items): raise Blocked("PSERC_ITEM_SET_COUNT_INVALID")
-    elif len(items)==1:
-        by_item={str(items[0].get("item_id") or ""):pserc}
-    else:
-        raise Blocked("PSERC_BATCH_RESULTS_MISSING")
+    pserc_rows=pserc.get("items")
+    if not isinstance(pserc_rows,list) or len(pserc_rows)!=len(items): raise Blocked("PSERC_ARTICLE_SET_COUNT_INVALID")
+    pserc_by_id={str(x.get("item_id") or ""):x for x in pserc_rows if isinstance(x,dict)}
+    if len(pserc_by_id)!=len(items): raise Blocked("PSERC_ARTICLE_SET_NOT_UNIQUE")
 
-    intake_candidates=[]
+    slots=[str(x.get("metadata",{}).get("plan_slot") or "") for x in items]
+    if any(not x for x in slots): raise Blocked("PLAN_SLOT_MISSING")
+    slot_set=set(slots)
+    intake_files=[]
     for candidate in sorted((root/"warehouse/intake").glob("K9-INTAKE-*.json")):
         candidate_data=load(candidate)
         candidate_items=candidate_data.get("items")
-        if isinstance(candidate_items,list):
-            intake_candidates.append((candidate,candidate_items))
-    intake_paths=[]
-    for item in items:
-        slot=item["metadata"]["plan_slot"]
-        hits=[]
-        for candidate,candidate_items in intake_candidates:
-            if any(isinstance(row,dict) and isinstance(row.get("metadata"),dict) and row["metadata"].get("plan_slot")==slot for row in candidate_items):
-                hits.append(candidate)
-        if len(hits)!=1: raise Blocked("ACTIVE_INTAKE_NOT_UNIQUE:"+str(slot))
-        intake_paths.append(hits[0])
-    unique_intakes={str(x) for x in intake_paths}
-    if len(unique_intakes)!=1: raise Blocked("ACTIVE_INTAKE_BATCH_NOT_UNIQUE")
-    intake_path=intake_paths[0]
-    intake=load(intake_path)
+        if not isinstance(candidate_items,list):
+            continue
+        candidate_slots={
+            str(row.get("metadata",{}).get("plan_slot") or "")
+            for row in candidate_items if isinstance(row,dict)
+        }
+        if slot_set.issubset(candidate_slots):
+            intake_files.append(candidate)
+    if len(intake_files)!=1: raise Blocked("ACTIVE_INTAKE_NOT_UNIQUE")
+    intake=load(intake_files[0])
     batch=str(intake.get("source_batch_sha256") or "")
     if not re.fullmatch(r"[0-9a-f]{64}",batch): raise Blocked("SOURCE_BATCH_SHA_INVALID")
 
@@ -72,26 +67,37 @@ def build(root,pserc_path,outdir):
     plan_items=[]
     release_items=[]
     article_rows=[]
+    seen_cids=set()
     for item in items:
         iid=str(item.get("item_id") or "")
-        slot=item["metadata"]["plan_slot"]
+        row=pserc_by_id.get(iid)
+        if not isinstance(row,dict): raise Blocked("PSERC_ITEM_MISSING:"+iid)
+        if row.get("bridge_status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED" or row.get("publish_allowed") is not False:
+            raise Blocked("PSERC_ITEM_NOT_PASS:"+iid)
+        meta=item.get("metadata",{})
+        slot=str(meta.get("plan_slot") or "")
+        if str(row.get("plan_slot") or "")!=slot: raise Blocked("PSERC_PLAN_SLOT_MISMATCH:"+iid)
+
         article_key="repair" if item.get("revision",0)>0 else "write"
         apath=root/item["products"][article_key]["path"]
         apkg=load(apath)
-        rows=[x for x in apkg.get("results",[]) if x.get("item_id")==iid]
-        if len(rows)!=1: raise Blocked("LATEST_ARTICLE_NOT_UNIQUE:"+iid)
-        article=rows[0].get("article_product")
+        hits=[x for x in apkg.get("results",[]) if x.get("item_id")==iid]
+        if len(hits)!=1: raise Blocked("LATEST_ARTICLE_NOT_UNIQUE:"+iid)
+        article=hits[0].get("article_product")
         if not isinstance(article,dict): raise Blocked("ARTICLE_PRODUCT_MISSING:"+iid)
         html=str(article.get("content_html") or "")
         raw=html.encode("utf-8")
-        if hashlib.sha256(raw).hexdigest()!=article.get("content_sha256"): raise Blocked("ARTICLE_HASH_INVALID:"+iid)
+        if not html or hashlib.sha256(raw).hexdigest()!=article.get("content_sha256"):
+            raise Blocked("ARTICLE_HASH_INVALID:"+iid)
 
-        pr=by_item.get(iid)
-        if not isinstance(pr,dict): raise Blocked("PSERC_ITEM_RESULT_MISSING:"+iid)
-        fact_pack=pr.get("fact_pack"); plan_item=pr.get("production_plan_item")
-        cid=str(pr.get("canonical_article_id") or "")
+        fact_pack=row.get("fact_pack")
+        plan_item=row.get("production_plan_item")
+        cid=str(row.get("canonical_article_id") or "")
         if not isinstance(fact_pack,dict) or not isinstance(plan_item,dict) or not cid.startswith("article:"):
             raise Blocked("PSERC_COMPONENTS_INVALID:"+iid)
+        if cid in seen_cids: raise Blocked("CANONICAL_ARTICLE_ID_DUPLICATE:"+cid)
+        seen_cids.add(cid)
+
         plan_item=json.loads(json.dumps(plan_item,ensure_ascii=False))
         plan_item["canonical_article_id"]=cid
         canonical_article=plan_item.get("canonical_article")
@@ -108,7 +114,7 @@ def build(root,pserc_path,outdir):
             "plan_slot":slot,
             "sha256":hashlib.sha256(raw).hexdigest(),
             "byte_length":len(raw),
-            "content_utf8":html
+            "content_utf8":html,
         })
 
     bundle={"contract":"canonical_fact_pack_import_v1","fact_packs":fact_packs}
@@ -118,7 +124,7 @@ def build(root,pserc_path,outdir):
         "content_generation_performed_by_supervisor":False,
         "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
         "exact_five_batch_sha256":batch,
-        "exact_five_item_count":len(items),
+        "exact_five_item_count":len(article_rows),
         "fact_pack_bundle_sha256":bh,
         "items":release_items,
         "production_plan_sha256":ph,
@@ -144,8 +150,8 @@ def build(root,pserc_path,outdir):
         "contract":MANIFEST_CONTRACT,
         "batch_sha256":batch,
         "runtime_generation":ledger["generation"],
-        "source_manifest_ref":str(intake_path.relative_to(root)),
-        "source_manifest_sha256":file_sha(intake_path),
+        "source_manifest_ref":str(intake_files[0].relative_to(root)),
+        "source_manifest_sha256":file_sha(intake_files[0]),
         "article_count":len(article_rows),
         "articles":article_rows,
         "import_envelope_sha256":env_sha,
