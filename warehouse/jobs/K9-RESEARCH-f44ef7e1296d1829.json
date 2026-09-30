@@ -1,13 +1,14 @@
 {
   "contract": "K9_JOB_V1",
-  "status": "OPEN",
-  "station": "research",
   "item_count": 1,
-  "item_ids": ["k9-1ff3dfabfed47a0c47c8df13"],
+  "item_ids": [
+    "k9-1ff3dfabfed47a0c47c8df13"
+  ],
   "items": [
     {
+      "input_product_refs": {},
+      "input_products": {},
       "item_id": "k9-1ff3dfabfed47a0c47c8df13",
-      "title": "So wählst du passende Schermaschinen für Pferde",
       "metadata": {
         "article_type": "Beratung",
         "category": "schermaschinen-beratung",
@@ -16,12 +17,15 @@
         "title": "So wählst du passende Schermaschinen für Pferde"
       },
       "revision": 0,
-      "input_products": {},
-      "input_product_refs": {}
+      "title": "So wählst du passende Schermaschinen für Pferde"
     }
   ],
-  "source_run_id": "fresh-chat-proof-20260930",
+  "job_id": "K9-RESEARCH-f44ef7e1296d1829",
+  "job_sha256": "74a8274f9bc7938ccfe4cb662518987c8718cf7cadaf16bdd358f6f76b836897",
   "ledger_generation": 2,
+  "source_run_id": "fresh-chat-proof-20260930",
+  "station": "research",
+  "status": "OPEN",
   "worker_contract": {
     "forbidden": [
       "WRITE_ARTICLE",
@@ -42,7 +46,5 @@
     ],
     "output_contract": "K9_RESEARCH_PRODUCT_V1",
     "worker_type": "CHAT_RESEARCH_WORKER"
-  },
-  "job_id": "K9-RESEARCH-f44ef7e1296d1829",
-  "job_sha256": "74a8274f9bc7938ccfe4cb662518987c8718cf7cadaf16bdd358f6f76b836897"
+  }
 }
