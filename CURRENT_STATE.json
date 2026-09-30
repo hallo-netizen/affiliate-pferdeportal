@@ -2,10 +2,10 @@
   "active_job": {
     "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
     "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
-    "job_id": "K9-RESEARCH-e053565c2857d4c0",
+    "job_id": "K9-WRITE-2932b06df177b8bf",
     "job_path": "runtime/CURRENT_JOB.json",
     "runtime_entry": "runtime/CHAT_ENTRY.json",
-    "station": "research"
+    "station": "write"
   },
   "branch": "konzept9/greenfield-20260929",
   "chat_may_route": false,
