@@ -147,72 +147,99 @@ def run(root, ppm_zip, pserc_zip, lt_jar):
     if sha_file(pserc_zip)!=PSERC_SHA: raise Blocked("PSERC_PACKAGE_HASH_MISMATCH")
     ledger=load(root/"state/ledger.json")
     products=latest_products(ledger,root)
-    if len(products)!=1: raise Blocked("K9_PSERC_REALTEST_REQUIRES_ONE_ITEM")
-    item,research,article,checkrow=products[0]
-    html=str(article.get("content_html") or "")
-    if not html: raise Blocked("ARTICLE_HTML_MISSING")
+    results=[]
     with tempfile.TemporaryDirectory(prefix="k9-pserc-") as td:
-        td=Path(td); article_path=td/"article.html"; article_path.write_text(html,encoding="utf-8")
-        lt=k9_lt68.run(Path(lt_jar),article_path)
-        if lt.get("status")!="PASS": raise Blocked("PSERC_LT_NOT_PASS")
-        ppm_item=copy.deepcopy(article.get("ppm_item"))
-        if not isinstance(ppm_item,dict): raise Blocked("PPM_ITEM_MISSING")
-        binding=ppm_item.get("quality_binding")
-        if not isinstance(binding,dict): raise Blocked("QUALITY_BINDING_MISSING")
-        binding["language_evidence"]=lt["language_evidence"]
-        ppm_item["quality_binding_hash"]=stable(binding)
-        canonical_id="article:"+hashlib.sha256((item["item_id"]+"|"+article["content_sha256"]).encode()).hexdigest()[:24]
-        ppm_item["canonical_article_id"]=canonical_id
-        fp=canonical_fact_pack(research)
-        ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
-        header={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9"}
-        payload={"item":ppm_item,"fact_pack":fp,"header":header,"canonical_article_id":canonical_id,"plan_slot":item["metadata"]["plan_slot"],"content_sha256":article["content_sha256"]}
-        payload_path=td/"payload.json"; payload_path.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
-        ppm_dir=td/"ppm"; pouter=td/"pouter"; pdir=td/"pserc"; ppm_dir.mkdir(); pouter.mkdir(); pdir.mkdir()
+        td=Path(td)
+        ppm_dir=td/"ppm"; pouter=td/"pouter"; pdir=td/"pserc"
+        ppm_dir.mkdir(); pouter.mkdir(); pdir.mkdir()
         with zipfile.ZipFile(ppm_zip) as z: z.extractall(ppm_dir)
         with zipfile.ZipFile(pserc_zip) as z: z.extractall(pouter)
         inner=pouter/PSERC_INNER
         if not inner.is_file(): raise Blocked("PSERC_INNER_ZIP_MISSING")
         with zipfile.ZipFile(inner) as z: z.extractall(pdir)
         script=td/"run.php"; script.write_text(PHP,encoding="utf-8")
-        proc=subprocess.run(["php",str(script),str(ppm_dir/"portal-production-machine"),str(pdir/"portal-seo-editorial-plan-compiler"),str(payload_path)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=180)
-    if proc.returncode!=0: raise Blocked("PSERC_EXECUTION_FAILED:"+(proc.stderr or proc.stdout)[:500])
-    try: wrapper=json.loads(proc.stdout)
-    except Exception as exc: raise Blocked("PSERC_OUTPUT_INVALID") from exc
-    bridge=wrapper.get("bridge") if isinstance(wrapper,dict) else None
-    if not isinstance(bridge,dict) or bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
-        detail={"bridge_status":bridge.get("status") if isinstance(bridge,dict) else None}
-        if isinstance(bridge,dict):
-            ppm=bridge.get("ppm_result")
-            artifact=ppm.get("artifact") if isinstance(ppm,dict) else None
-            if isinstance(artifact,dict):
-                detail["ppm_status"]=artifact.get("status")
-                errors=artifact.get("errors")
-                if isinstance(errors,list) and errors and isinstance(errors[0],dict):
-                    detail["first_error"]={
-                        "error_code":errors[0].get("error_code"),
-                        "failed_rule":errors[0].get("failed_rule"),
-                        "field_path":errors[0].get("field_path"),
-                        "actual":errors[0].get("actual"),
-                        "expected":errors[0].get("expected"),
-                    }
-        raise Blocked("PSERC_BRIDGE_NOT_PASS:"+json.dumps(detail,ensure_ascii=False,sort_keys=True))
-    ppm_result=bridge.get("ppm_result"); artifact=ppm_result.get("artifact") if isinstance(ppm_result,dict) else None
-    if not isinstance(artifact,dict) or artifact.get("status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
-        raise Blocked("PSERC_PPM_ARTIFACT_NOT_PASS")
-    check_only=artifact.get("check_only"); rows=check_only.get("items") if isinstance(check_only,dict) else None
-    if not isinstance(rows,list) or len(rows)!=1: raise Blocked("PSERC_CHECK_ITEM_INVALID")
-    pr=rows[0]; checks=pr.get("checks")
-    if pr.get("technical_status")!="TECHNICAL_CHECK_OK" or pr.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK":
-        raise Blocked("PSERC_CONTENT_CHECK_NOT_PASS")
-    if not isinstance(checks,dict) or checks.get("fail_closed_aggregate_status")!="PASS":
-        raise Blocked("PSERC_FAIL_CLOSED_NOT_PASS")
-    return {
-        "contract":"K9_PSERC_RESULT_V1","status":"PASS","bridge_status":bridge["status"],
-        "canonical_article_id":wrapper["canonical_article_id"],"category_slug":wrapper["category_slug"],
-        "exact_five_batch":wrapper["batch"],"production_plan_item":wrapper["item"],
-        "fact_pack":fp,"lt68_result":lt,"ppm_status":artifact["status"],"publish_allowed":False
+        for index,(item,research,article,checkrow) in enumerate(products):
+            html=str(article.get("content_html") or "")
+            if not html: raise Blocked("ARTICLE_HTML_MISSING:"+str(item.get("item_id") or index))
+            article_path=td/("article-"+str(index)+".html")
+            article_path.write_text(html,encoding="utf-8")
+            lt=k9_lt68.run(Path(lt_jar),article_path)
+            if lt.get("status")!="PASS": raise Blocked("PSERC_LT_NOT_PASS:"+str(item.get("item_id") or index))
+            ppm_item=copy.deepcopy(article.get("ppm_item"))
+            if not isinstance(ppm_item,dict): raise Blocked("PPM_ITEM_MISSING")
+            binding=ppm_item.get("quality_binding")
+            if not isinstance(binding,dict): raise Blocked("QUALITY_BINDING_MISSING")
+            binding["language_evidence"]=lt["language_evidence"]
+            ppm_item["quality_binding_hash"]=stable(binding)
+            canonical_id="article:"+hashlib.sha256((item["item_id"]+"|"+article["content_sha256"]).encode()).hexdigest()[:24]
+            ppm_item["canonical_article_id"]=canonical_id
+            fp=canonical_fact_pack(research)
+            ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
+            header={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9"}
+            payload={"item":ppm_item,"fact_pack":fp,"header":header,"canonical_article_id":canonical_id,"plan_slot":item["metadata"]["plan_slot"],"content_sha256":article["content_sha256"]}
+            payload_path=td/("payload-"+str(index)+".json")
+            payload_path.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
+            proc=subprocess.run(
+                ["php",str(script),str(ppm_dir/"portal-production-machine"),str(pdir/"portal-seo-editorial-plan-compiler"),str(payload_path)],
+                text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=180
+            )
+            if proc.returncode!=0:
+                raise Blocked("PSERC_EXECUTION_FAILED:"+str(item.get("item_id") or index)+":"+(proc.stderr or proc.stdout)[:500])
+            try: wrapper=json.loads(proc.stdout)
+            except Exception as exc: raise Blocked("PSERC_OUTPUT_INVALID:"+str(item.get("item_id") or index)) from exc
+            bridge=wrapper.get("bridge") if isinstance(wrapper,dict) else None
+            if not isinstance(bridge,dict) or bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
+                detail={"bridge_status":bridge.get("status") if isinstance(bridge,dict) else None}
+                if isinstance(bridge,dict):
+                    ppm=bridge.get("ppm_result")
+                    artifact=ppm.get("artifact") if isinstance(ppm,dict) else None
+                    if isinstance(artifact,dict):
+                        detail["ppm_status"]=artifact.get("status")
+                        errors=artifact.get("errors")
+                        if isinstance(errors,list) and errors and isinstance(errors[0],dict):
+                            detail["first_error"]={
+                                "error_code":errors[0].get("error_code"),
+                                "failed_rule":errors[0].get("failed_rule"),
+                                "field_path":errors[0].get("field_path"),
+                                "actual":errors[0].get("actual"),
+                                "expected":errors[0].get("expected"),
+                            }
+                raise Blocked("PSERC_BRIDGE_NOT_PASS:"+str(item.get("item_id") or index)+":"+json.dumps(detail,ensure_ascii=False,sort_keys=True))
+            ppm_result=bridge.get("ppm_result")
+            artifact=ppm_result.get("artifact") if isinstance(ppm_result,dict) else None
+            if not isinstance(artifact,dict) or artifact.get("status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
+                raise Blocked("PSERC_PPM_ARTIFACT_NOT_PASS:"+str(item.get("item_id") or index))
+            check_only=artifact.get("check_only")
+            rows=check_only.get("items") if isinstance(check_only,dict) else None
+            if not isinstance(rows,list) or len(rows)!=1: raise Blocked("PSERC_CHECK_ITEM_INVALID:"+str(item.get("item_id") or index))
+            pr=rows[0]; checks=pr.get("checks")
+            if pr.get("technical_status")!="TECHNICAL_CHECK_OK" or pr.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK":
+                raise Blocked("PSERC_CONTENT_CHECK_NOT_PASS:"+str(item.get("item_id") or index))
+            if not isinstance(checks,dict) or checks.get("fail_closed_aggregate_status")!="PASS":
+                raise Blocked("PSERC_FAIL_CLOSED_NOT_PASS:"+str(item.get("item_id") or index))
+            results.append({
+                "item_id":item["item_id"],
+                "canonical_article_id":wrapper["canonical_article_id"],
+                "category_slug":wrapper["category_slug"],
+                "exact_five_batch":wrapper["batch"],
+                "production_plan_item":wrapper["item"],
+                "fact_pack":fp,
+                "lt68_result":lt,
+                "ppm_status":artifact["status"],
+                "publish_allowed":False
+            })
+    if not results: raise Blocked("PSERC_NO_ITEMS")
+    out={
+        "contract":"K9_PSERC_RESULT_V1",
+        "status":"PASS",
+        "bridge_status":"PSERC_PPM_INTAKE_BRIDGE_EXECUTED",
+        "item_count":len(results),
+        "results":results,
+        "publish_allowed":False
     }
+    if len(results)==1:
+        out.update({k:v for k,v in results[0].items() if k!="item_id"})
+    return out
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("root"); ap.add_argument("ppm"); ap.add_argument("pserc"); ap.add_argument("lt_jar"); ap.add_argument("--output",required=True); a=ap.parse_args()
@@ -221,5 +248,5 @@ def main():
         print(json.dumps({"contract":"K9_PSERC_RESULT_V1","status":"BLOCKED","reason":str(exc),"publish_allowed":False},ensure_ascii=False,indent=2))
         raise SystemExit(2)
     Path(a.output).write_text(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"K9_PSERC_PASS","canonical_article_id":out["canonical_article_id"]},indent=2))
+    print(json.dumps({"status":"K9_PSERC_PASS","item_count":out.get("item_count"),"canonical_article_id":out.get("canonical_article_id")},indent=2))
 if __name__=="__main__": main()
