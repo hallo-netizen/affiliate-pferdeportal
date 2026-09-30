@@ -1940,9 +1940,28 @@ trait PPAR_Output_Objects_Trait {
         $campaign['voucher_code'] = sanitize_text_field((string) ($payload['voucher_code'] ?? '')); $campaign['start_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['start_date'] ?? '') : ''; $campaign['end_date'] = method_exists($this,'automation_normalize_date') ? $this->automation_normalize_date($payload['end_date'] ?? '') : '';
         $campaign['image_url'] = esc_url_raw((string) ($row['image_url'] ?? '')); $campaign['url'] = $tracking_url; $campaign['destination_url'] = esc_url_raw((string) ($row['destination_url'] ?? '')); $campaign['subid_param'] = ''; $campaign['target'] = '_blank'; $campaign['required_url_fragment'] = ''; $campaign['health_check_enabled'] = true; $campaign['source'] = 'output_object_v4'; $campaign['last_synced'] = time(); $campaign['external_id'] = sanitize_text_field((string) ($row['external_id'] ?? ''));
 
-        // Exact commerce identity is separate from product facts. OTTO may expose
-        // GTIN/EAN and an explicit MPN; these are carried forward so Productwissen
-        // can request the identical product without Affiliate reading its tables.
+        // Exact commerce identity is separate from product facts.
+        // V6.72.170 persists eBay GTINs at normal provider materialization time,
+        // so future frontend requests use the same cheap raw exact index as the
+        // other providers. Existing campaigns remain compatible via the bounded
+        // page/slot source-row fallback until their next regular refresh.
+        if ($auto_ebay_business) {
+            $ebay_gtins = method_exists($this,'idealo_normalize_gtins_from_values')
+                ? $this->idealo_normalize_gtins_from_values((array)($payload['product_gtins']??array()))
+                : array_values(array_filter((array)($payload['product_gtins']??array())));
+            if ($ebay_gtins) {
+                $campaign['product_gtins'] = $ebay_gtins;
+                $ebay_identifiers = array();
+                foreach ($ebay_gtins as $gtin) { $ebay_identifiers[] = array('type'=>'GTIN','value'=>(string)$gtin); }
+                $campaign['product_identifiers'] = $this->affiliate_normalize_product_identifiers($ebay_identifiers);
+                $campaign['product_identity_source'] = 'ebay_business_source';
+                $campaign['product_provider'] = 'ebay';
+            }
+        }
+
+        // OTTO may expose GTIN/EAN and an explicit MPN; these are carried forward
+        // so Productwissen can request the identical product without Affiliate
+        // reading its tables.
         if ($auto_otto_awin_product) {
             $exact_identifiers = array();
             $gtin = preg_replace('/[^0-9]/', '', (string) ($payload['gtin'] ?? ''));
