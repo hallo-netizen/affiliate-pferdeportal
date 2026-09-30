@@ -23,6 +23,7 @@ jobs:
           accept=Path(".github/workflows/k9-accept-submission.yml").read_text()
           writer=Path(".github/workflows/k9-write-submit.yml").read_text()
           finalizer=Path(".github/workflows/k9-finalize.yml").read_text()
+          intake=Path(".github/workflows/k9-intake.yml").read_text()
           required_receiver=[
               "options: [station_only, auto_chain, inherit]",
               'k9_engine.py orchestration "$RUN_MODE"',
@@ -38,6 +39,16 @@ jobs:
               raise SystemExit("AUTO_CHAIN_WRITER_INHERIT_MISSING")
           if "runtime/AUTO_CHAIN.json" not in finalizer or "rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER runtime/AUTO_CHAIN.json" not in finalizer:
               raise SystemExit("AUTO_CHAIN_TERMINAL_CLOSE_MISSING")
+          intake_required=[
+              "'inbox-auto/**.json'",
+              "actions: write",
+              "run_mode",
+              "auto_chain",
+              "text-start-pferdeatelier.yml/dispatches"
+          ]
+          missing=[x for x in intake_required if x not in intake]
+          if missing:
+              raise SystemExit("AUTO_CHAIN_INTAKE_START_MISSING:"+",".join(missing))
           print("AUTO_CHAIN_WIRING_PASS=1")
           PY
       - name: PPM 6.7.9 regression - claim article type binding
