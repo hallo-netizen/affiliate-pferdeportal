@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.167
+ * Version: 6.72.168
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -109,7 +109,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.167';
+    const VERSION = '6.72.168';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -186,15 +186,8 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_EBAY_DELETION_STATE = 'ppar_ebay_deletion_state_v1';
     const OPTION_EBAY_DELETION_RECEIPTS = 'ppar_ebay_deletion_receipts_v1';
     const OPTION_HOUSEKEEPING_STATE = 'ppar_housekeeping_state_v1';
-    const OPTION_AFF039_RECOVERY = 'ppar_aff039_dual_layer_recovery_v1';
-    const AFF039_RECOVERY_HOOK = 'ppar_aff039_dual_layer_recovery_worker_v1';
-    const AFF039_RECOVERY_LOCK = 'ppar_aff039_dual_layer_recovery_lock_v1';
-    const OPTION_AFF043_RECOVERY = 'ppar_aff043_historical_product_state_restore_v1';
-    const AFF043_RECOVERY_HOOK = 'ppar_aff043_historical_product_state_restore_worker_v1';
-    const AFF043_RECOVERY_LOCK = 'ppar_aff043_historical_product_state_restore_lock_v1';
     const AFF043_SNAPSHOT_REL = 'recovery/aff043-historical-product-state-20260915.json';
     const AFF043_SNAPSHOT_SHA256 = '72bfd3ff58c9389c839b272a4bd86ec842c086937d84f0530b6de53d5f469db8';
-    const OPTION_AFF044_RESTORE = 'ppar_aff044_clean_114_115_restore_v1';
     const ARTICLE_PLAN_META = 'ppar_article_delivery_plan_v1';
     const ARTICLE_PLAN_SCHEMA = '1.5';
     const HEALTH_META = 'ppar_health_data_v1';
@@ -325,10 +318,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action('admin_post_ppar_partner_analytics_refresh_now', array($this, 'handle_partner_analytics_refresh_now'));
         // AFF-ERR-039: recovery work is isolated to its dedicated worker.
         // Never bind state repair to normal init/frontend/REST requests.
-        add_action(self::AFF039_RECOVERY_HOOK, array($this, 'run_aff039_recovery_worker'));
         // AFF-ERR-043: exact historical product-state restore is explicit/bounded only.
         // Never run it on init/frontend/REST.
-        add_action(self::AFF043_RECOVERY_HOOK, array($this, 'run_aff043_recovery_worker'));
         add_action(self::AWIN_PROGRAMME_REFRESH_CRON_HOOK, array($this, 'run_awin_programme_inventory_refresh'));
         add_action('init', array($this, 'ensure_awin_programme_inventory_schedule'), 23);
         add_action(self::HOUSEKEEPING_CRON_HOOK, array($this, 'run_housekeeping'));
@@ -348,7 +339,6 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'maybe_retire_legacy_terminal_ebay_run_v672167'), 3);
         add_action('init', array($this, 'maybe_close_incompatible_ebay_run_for_checkpoint_restart'), 4);
         add_action('init', array($this, 'maybe_enforce_ebay_deletion_compliance'), 11);
-        add_action('init', array($this, 'maybe_aff043_automatic_state_restore'), 12);
         add_action('init', array($this, 'ensure_automation_schedule'), 21);
         add_action('init', array($this, 'retire_ebay_legacy_cron_transport'), 22);
         add_action('init', array($this, 'ensure_ebay_maintenance_schedule'), 24);
@@ -449,13 +439,6 @@ final class Pferdeportal_Affiliate_Router {
             add_action('wp_ajax_ppar_ebay_canonical_tick', array($this, 'handle_ebay_canonical_tick'));
             add_action('admin_post_ppar_ebay_review_decision', array($this, 'handle_ebay_review_decision'));
             add_action('admin_post_ppar_ebay_business_curation', array($this, 'handle_ebay_business_curation'));
-            add_action('admin_post_ppar_aff039_recovery_start', array($this, 'handle_aff039_recovery_start'));
-            add_action('admin_post_ppar_aff039_recovery_step', array($this, 'handle_aff039_recovery_step'));
-            add_action('admin_post_ppar_aff039_recovery_stop', array($this, 'handle_aff039_recovery_stop'));
-            add_action('admin_post_ppar_aff043_recovery_start', array($this, 'handle_aff043_recovery_start'));
-            add_action('admin_post_ppar_aff043_recovery_step', array($this, 'handle_aff043_recovery_step'));
-            add_action('admin_post_ppar_aff043_recovery_stop', array($this, 'handle_aff043_recovery_stop'));
-            add_action('admin_post_ppar_aff044_clean_restore', array($this, 'handle_aff044_clean_restore'));
             add_action('admin_init', array($this, 'maybe_install_network_sync_schema'));
             add_action('admin_init', array($this, 'maybe_install_creative_library_schema'));
             add_action('admin_init', array($this, 'maybe_install_automation_schema'));
@@ -1399,378 +1382,27 @@ JS;
         return false;
     }
 
-    private function aff039_recovery_state() {
-        $state=get_option(self::OPTION_AFF039_RECOVERY,array());
-        return is_array($state)?$state:array();
-    }
 
-    private function aff039_save_state($state) {
-        $state=is_array($state)?$state:array();
-        $state['updated_at']=time();
-        update_option(self::OPTION_AFF039_RECOVERY,$state,false);
-        return $state;
-    }
 
-    private function aff039_schedule_next($delay=3) {
-        $state=$this->aff039_recovery_state();
-        if (sanitize_key((string)($state['status']??''))!=='running') { return false; }
-        if (!function_exists('wp_schedule_single_event')) { return false; }
-        if (!function_exists('wp_next_scheduled') || !wp_next_scheduled(self::AFF039_RECOVERY_HOOK)) {
-            return (bool)wp_schedule_single_event(time()+max(1,absint($delay)),self::AFF039_RECOVERY_HOOK);
-        }
-        return true;
-    }
 
-    private function aff039_redirect($notice='') {
-        $url=admin_url('admin.php?page=affiliate-portal-kontrollzentrum');
-        if ($notice!=='') { $url=add_query_arg('ppar_aff039',sanitize_key((string)$notice),$url); }
-        wp_safe_redirect($url); exit;
-    }
 
-    public function handle_aff039_recovery_start() {
-        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
-        check_admin_referer('ppar_aff039_recovery_start','ppar_aff039_nonce');
-        $existing=$this->aff039_recovery_state();
-        if (sanitize_key((string)($existing['status']??''))==='running') { $this->aff039_schedule_next(1); $this->aff039_redirect('running'); }
-        $evidence=$this->aff039_incident_evidence();
-        if (!$this->aff039_incident_proven($evidence)) {
-            $this->aff039_save_state(array('schema'=>'1.0','status'=>'blocked','phase'=>'preflight','reason'=>'incident_evidence_missing','evidence'=>$evidence,'started_at'=>time()));
-            $this->aff039_redirect('blocked');
-        }
-        $checkpoint=method_exists($this,'ebay_public_checkpoint_load')?$this->ebay_public_checkpoint_load():array();
-        $state=array(
-            'schema'=>'1.0','status'=>'running','phase'=>'normalize','started_at'=>time(),'started_by'=>get_current_user_id(),
-            'evidence'=>$evidence,'errors'=>array(),'stats'=>array(),
-            'backup'=>array(
-                'idealo_sha256'=>hash('sha256',serialize(get_option(self::OPTION_NETWORK_IDEALO,array()))),
-                'assignments_sha256'=>hash('sha256',serialize(get_option(self::OPTION_ASSIGNMENTS,array()))),
-                'ebay_checkpoint_sha256'=>hash('sha256',serialize(is_array($checkpoint)?$checkpoint:array())),
-                'article_rebuild_sha256'=>hash('sha256',serialize(get_option(self::OPTION_ARTICLE_REBUILD_STATE,array()))),
-            ),
-            'ebay_scan_cursor'=>0,'ebay_candidate_ids'=>array(),'ebay_repair_cursor'=>0,
-            'idealo_scan_cursor'=>0,'article_cursor'=>0,
-        );
-        $this->aff039_save_state($state);
-        $this->aff039_schedule_next(1);
-        $this->aff039_redirect('started');
-    }
 
-    public function handle_aff039_recovery_stop() {
-        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
-        check_admin_referer('ppar_aff039_recovery_stop','ppar_aff039_nonce');
-        $state=$this->aff039_recovery_state();
-        $state['status']='stopped'; $state['phase']='stopped'; $state['stopped_at']=time(); $state['stopped_by']=get_current_user_id();
-        $this->aff039_save_state($state);
-        if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::AFF039_RECOVERY_HOOK); }
-        $this->aff039_redirect('stopped');
-    }
 
-    public function handle_aff039_recovery_step() {
-        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
-        check_admin_referer('ppar_aff039_recovery_step','ppar_aff039_nonce');
-        $this->run_aff039_recovery_worker();
-        $this->aff039_redirect('stepped');
-    }
 
-    private function aff039_stop_incident_rebuild() {
-        $state=get_option(self::OPTION_ARTICLE_REBUILD_STATE,array());
-        $state=is_array($state)?$state:array();
-        if (sanitize_key((string)($state['status']??''))!=='running') { return false; }
-        $reason=sanitize_key((string)($state['reason']??''));
-        $incident=array('v672118_restore_exact_672108_runtime','v672117_emergency_visibility_rollback','v672117_restore_pre115_visible_products','v672115_multiprovider_category_repair');
-        if (!in_array($reason,$incident,true)) { return false; }
-        $state['status']='superseded_recovery'; $state['completed_at']=time(); $state['failure_reason']='aff039_dual_layer_rootfix_stopped_incident_rebuild';
-        update_option(self::OPTION_ARTICLE_REBUILD_STATE,$state,false);
-        if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::ARTICLE_REBUILD_HOOK); }
-        return true;
-    }
 
-    private function aff039_restore_awin_destination_state() {
-        global $wpdb; $table=$this->creative_library_table();
-        if (!is_object($wpdb)||empty($table)||!method_exists($wpdb,'get_results')||!method_exists($wpdb,'update')) { return array('scanned'=>0,'changed'=>0); }
-        $rows=$wpdb->get_results("SELECT id,tracking_url,destination_url,payload FROM {$table} WHERE provider='awin' AND creative_type='banner' AND payload LIKE '%\"_destination_state\"%' LIMIT 500",ARRAY_A);
-        $scanned=0; $changed=0;
-        foreach ((array)$rows as $row) {
-            $scanned++; $payload=json_decode((string)($row['payload']??''),true); if(!is_array($payload)){continue;}
-            $state=sanitize_key((string)($payload['_destination_state']??'')); $update=array();
-            if($state==='resolved') { $tracking=esc_url_raw((string)($row['tracking_url']??'')); if($tracking!==''&&wp_http_validate_url($tracking)){$update['destination_url']=$tracking;} }
-            unset($payload['_destination_state'],$payload['_destination_checked_at'],$payload['_destination_error']);
-            $update['payload']=wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-            if($wpdb->update($table,$update,array('id'=>absint($row['id'])))!==false){$changed++;}
-        }
-        return array('scanned'=>$scanned,'changed'=>$changed);
-    }
 
-    private function aff039_campaign_ids_after($meta_key,$cursor,$limit) {
-        global $wpdb; $cursor=absint($cursor); $limit=max(1,min(100,absint($limit)));
-        if(!is_object($wpdb)||empty($wpdb->posts)||empty($wpdb->postmeta)||!method_exists($wpdb,'get_col')||!method_exists($wpdb,'prepare')){return array();}
-        $sql=$wpdb->prepare("SELECT DISTINCT p.ID FROM {$wpdb->posts} p INNER JOIN {$wpdb->postmeta} pm ON pm.post_id=p.ID WHERE p.post_type=%s AND p.post_status IN ('publish','draft','private') AND p.ID>%d AND pm.meta_key=%s AND pm.meta_value='1' ORDER BY p.ID ASC LIMIT %d",self::CAMPAIGN_POST_TYPE,$cursor,(string)$meta_key,$limit);
-        return array_values(array_filter(array_map('absint',(array)$wpdb->get_col($sql))));
-    }
 
-    private function aff039_article_ids_after($cursor,$limit) {
-        global $wpdb; $cursor=absint($cursor); $limit=max(1,min(25,absint($limit)));
-        if(!is_object($wpdb)||empty($wpdb->posts)||!method_exists($wpdb,'get_col')||!method_exists($wpdb,'prepare')){return array();}
-        return array_values(array_filter(array_map('absint',(array)$wpdb->get_col($wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type='post' AND post_status='publish' AND ID>%d ORDER BY ID ASC LIMIT %d",$cursor,$limit)))));
-    }
 
-    private function aff039_checkpoint_candidate($old_checkpoint,$eligible) {
-        $eligible=array_values(array_unique(array_filter(array_map('absint',(array)$eligible)))); sort($eligible,SORT_NUMERIC);
-        if(count($eligible)<3){return new WP_Error('aff039_ebay_candidate_insufficient','Weniger als drei fachlich gueltige eBay-Kandidaten; Checkpoint bleibt unveraendert.');}
-        $old=is_array($old_checkpoint)?$old_checkpoint:array();
-        $old_business=array_values(array_unique(array_filter(array_map('absint',(array)($old['business_campaign_ids']??array())))));
-        $business=array_values(array_unique(array_merge($old_business,$eligible))); sort($business,SORT_NUMERIC);
-        $private=array_values(array_unique(array_filter(array_map('absint',(array)($old['private_listing_ids']??array()))))); sort($private,SORT_NUMERIC);
-        return array('schema'=>'1.0','status'=>'safe','checkpoint_id'=>'','business_campaign_ids'=>$business,'private_listing_ids'=>$private,'restore_reason'=>'aff039_dual_layer_rootfix_672125');
-    }
 
-    private function aff039_repair_article_products_only($post_id) {
-        $post_id=absint($post_id); $post=get_post($post_id);
-        if(!$post||$post->post_type!=='post'||$post->post_status!=='publish'){return new WP_Error('invalid_post','Kein veroeffentlichter Beitrag.');}
-        $stored=get_post_meta($post_id,self::ARTICLE_PLAN_META,true);
-        if(!is_array($stored)||empty($stored)){return array('status'=>'skipped_no_plan','count'=>0);}
-        $plan=wp_parse_args($stored,$this->article_plan_default());
-        $banner_before=wp_json_encode(array('banner'=>$plan['banner']??array(),'banner_2'=>$plan['banner_2']??array()),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-        $context=$this->get_content_context($post_id); $reports=array(); $product_ids=array(); $seen=array(); $titles=array();
-        $requirements=$this->article_plan_exact_product_requirements($post_id,$context);
-        if($requirements){
-            foreach($requirements as $requirement){
-                if(count($product_ids)>=3){break;} $identifiers=(array)($requirement['identifiers']??array()); if(!$identifiers){continue;}
-                $exact_context=$context; $exact_context['exact_product_identifiers']=$identifiers;
-                foreach($this->ranked_campaigns_for_slot($exact_context,'post_bottom_products') as $candidate){
-                    $campaign=$candidate['campaign']??null; if(!is_array($campaign)){continue;}
-                    $report=$this->article_product_quality_report($campaign,$exact_context,$candidate); $report['checks']['exact_identity']='pass'; $reports[]=$report;
-                    if(($report['overall']??'')!=='pass'){continue;} $dedupe=$this->article_plan_product_dedupe_key($campaign);
-                    if($dedupe==='title:'||isset($seen[$dedupe])||$this->article_plan_product_title_is_near_duplicate($campaign,$titles)){continue;}
-                    $seen[$dedupe]=true; $titles[]=$this->article_plan_product_title_key($campaign); $product_ids[]=absint($campaign['post_id']??0); break;
-                }
-            }
-        } else {
-            foreach($this->ranked_campaigns_for_slot($context,'post_bottom_products') as $candidate){
-                $campaign=$candidate['campaign']??null; if(!is_array($campaign)){continue;}
-                $report=$this->article_product_quality_report($campaign,$context,$candidate); $reports[]=$report; if(($report['overall']??'')!=='pass'){continue;}
-                $dedupe=$this->article_plan_product_dedupe_key($campaign); if($dedupe==='title:'||isset($seen[$dedupe])||$this->article_plan_product_title_is_near_duplicate($campaign,$titles)){continue;}
-                $seen[$dedupe]=true; $titles[]=$this->article_plan_product_title_key($campaign); $product_ids[]=absint($campaign['post_id']??0); if(count($product_ids)>=3){break;}
-            }
-        }
-        $plan['products']['reports']=array_slice($reports,0,20); $plan['products']['campaign_post_ids']=array_values(array_filter($product_ids));
-        $plan['products']['status']=$product_ids?'ready':'none'; $plan['products']['reason']=$product_ids?count($product_ids).' freigegebene Produkte nach AFF-ERR-039-Recovery.':'Keine Produkte mit PASS-Qualitaet.';
-        $plan['generated_at']=time(); $plan['campaign_revision']=$this->article_plan_campaign_revision(); $plan['schema']=self::ARTICLE_PLAN_SCHEMA; $plan['content_hash']=$this->article_plan_content_hash($post_id);
-        $has_banner=in_array((string)($plan['banner']['status']??''),array('ready','pending_anchor'),true); $plan['status']=($has_banner||$plan['products']['status']==='ready')?'ready':'no_output';
-        $banner_after=wp_json_encode(array('banner'=>$plan['banner']??array(),'banner_2'=>$plan['banner_2']??array()),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-        if(!hash_equals(hash('sha256',(string)$banner_before),hash('sha256',(string)$banner_after))){return new WP_Error('banner_mutation_detected','Recovery wuerde Bannerfelder veraendern; abgebrochen.');}
-        update_post_meta($post_id,self::ARTICLE_PLAN_META,$plan);
-        return array('status'=>$plan['products']['status'],'count'=>count($plan['products']['campaign_post_ids']));
-    }
 
-    public function run_aff039_recovery_worker() {
-        $state=$this->aff039_recovery_state();
-        if(sanitize_key((string)($state['status']??''))!=='running'){return $state;}
-        if(get_transient(self::AFF039_RECOVERY_LOCK)){return $state;}
-        set_transient(self::AFF039_RECOVERY_LOCK,'1',90);
-        try {
-            $phase=sanitize_key((string)($state['phase']??'normalize'));
-            if($phase==='normalize'){
-                if(function_exists('wp_clear_scheduled_hook')){wp_clear_scheduled_hook('ppar_v672118_product_state_recovery_worker');wp_clear_scheduled_hook('ppar_v672119_visibility_restore_worker');}
-                $state['stats']['stale_rebuild_stopped']=$this->aff039_stop_incident_rebuild()?1:0;
-                $state['stats']['awin_destination_restore']=$this->aff039_restore_awin_destination_state();
-                $idealo=get_option(self::OPTION_NETWORK_IDEALO,array()); $idealo=is_array($idealo)?$idealo:array();
-                $mode=method_exists($this,'idealo_sanitize_output_mode')?$this->idealo_sanitize_output_mode($idealo['output_mode']??'ebay_only'):sanitize_key((string)($idealo['output_mode']??'ebay_only'));
-                if(!empty($idealo['enabled'])&&$mode==='idealo_only'){$idealo['output_mode']='automatic';update_option(self::OPTION_NETWORK_IDEALO,$idealo,false);$state['stats']['idealo_mode_restored']=1;}
-                $assign=get_option(self::OPTION_ASSIGNMENTS,array()); $assign=is_array($assign)?$assign:array(); $changed=0;
-                foreach($assign as $key=>$row){if(!is_array($row)){continue;} $m=sanitize_key((string)($row['products_mode']??'automatic')); if(!in_array($m,array('automatic','fixed','none'),true)){$row['products_mode']='automatic';$row['product_ids']=array();$assign[$key]=$row;$changed++;}}
-                if($changed){update_option(self::OPTION_ASSIGNMENTS,$assign,false);} $state['stats']['invalid_assignment_modes_restored']=$changed;
-                $state['phase']='idealo_scan'; $state['idealo_scan_cursor']=0;
-            } elseif($phase==='idealo_scan'){
-                $ids=$this->aff039_campaign_ids_after('_ppar_idealo_auto',absint($state['idealo_scan_cursor']??0),50); $changed=0; $valid=0;
-                $settings=$this->idealo_settings(); $enabled=!empty($settings['enabled'])&&in_array($this->idealo_sanitize_output_mode($settings['output_mode']??''),array('idealo_only','separate','combined','automatic'),true);
-                foreach($ids as $id){$state['idealo_scan_cursor']=max(absint($state['idealo_scan_cursor']??0),$id);$campaign=$this->campaign_from_post(get_post($id));if(!is_array($campaign)){continue;}$desired=$enabled&&$this->idealo_campaign_publicly_allowed(array_merge($campaign,array('active'=>true)));if($desired){$valid++;}if((bool)($campaign['active']??false)!==$desired){$campaign['active']=$desired;$saved=$this->save_campaign_record($campaign,$id);if(!is_wp_error($saved)&&$saved){$changed++;}}}
-                $state['stats']['idealo_valid']=absint($state['stats']['idealo_valid']??0)+$valid; $state['stats']['idealo_activation_changes']=absint($state['stats']['idealo_activation_changes']??0)+$changed;
-                if(count($ids)<50){$state['phase']='ebay_scan';$state['ebay_scan_cursor']=0;}
-            } elseif($phase==='ebay_scan'){
-                $ids=$this->aff039_campaign_ids_after('_ppar_ebay_business_auto',absint($state['ebay_scan_cursor']??0),40); $eligible=(array)($state['ebay_candidate_ids']??array());
-                foreach($ids as $id){$state['ebay_scan_cursor']=max(absint($state['ebay_scan_cursor']??0),$id);$campaign=$this->campaign_from_post(get_post($id));if(!is_array($campaign)||sanitize_key((string)($campaign['network']??''))!=='ebay'||sanitize_key((string)($campaign['creative_type']??''))!=='product'){continue;}if(!$this->ebay_business_campaign_source_allows_delivery_base($campaign)){continue;}if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign)){continue;}$eligible[]=$id;}
-                $eligible=array_values(array_unique(array_filter(array_map('absint',$eligible)))); sort($eligible,SORT_NUMERIC); $state['ebay_candidate_ids']=$eligible; $state['stats']['ebay_candidates']=count($eligible);
-                if(count($ids)<40){
-                    $old=method_exists($this,'ebay_public_checkpoint_load')?$this->ebay_public_checkpoint_load():array(); $candidate=$this->aff039_checkpoint_candidate($old,$eligible);
-                    if(is_wp_error($candidate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['ebay_checkpoint']=$candidate->get_error_code();}
-                    else{$saved=$this->ebay_public_checkpoint_save($candidate);if($saved===false){$state['status']='blocked';$state['phase']='blocked';$state['errors']['ebay_checkpoint']='persistence_failed';}else{$state['stats']['ebay_checkpoint_business_ids']=count((array)$saved['business_campaign_ids']);$state['phase']='ebay_repair';$state['ebay_repair_cursor']=0;}}
-                }
-            } elseif($phase==='ebay_repair'){
-                $eligible=(array)($state['ebay_candidate_ids']??array()); $cursor=absint($state['ebay_repair_cursor']??0); $end=min(count($eligible),$cursor+12);
-                for($i=$cursor;$i<$end;$i++){$id=absint($eligible[$i]??0);if(!$id){continue;}$campaign=$this->campaign_from_post(get_post($id));if(!is_array($campaign)||!$this->ebay_business_campaign_source_allows_delivery_base($campaign)){continue;}if(empty($campaign['active'])&&!in_array(sanitize_key((string)($campaign['programme_status']??'unknown')),array('paused','ended'),true)){$campaign['active']=true;$campaign['programme_status']='active';$saved=$this->save_campaign_record($campaign,$id);if(!is_wp_error($saved)&&$saved){$state['stats']['ebay_reactivated']=absint($state['stats']['ebay_reactivated']??0)+1;}}
-                    $hash=strtolower(sanitize_text_field((string)get_post_meta($id,'_ppar_creative_identity_hash',true)));if(preg_match('/^[a-f0-9]{64}$/',$hash)&&method_exists($this,'output_creative_row')&&method_exists($this,'output_plan_creative')){$creative=$this->output_creative_row($hash);if(is_array($creative)&&sanitize_key((string)($creative['provider']??''))==='ebay'&&sanitize_key((string)($creative['creative_type']??''))==='product'){$plan=$this->output_plan_creative($creative,true);if(is_array($plan)){$state['stats']['ebay_replanned']=absint($state['stats']['ebay_replanned']??0)+1;$state['stats']['ebay_replanned_active']=absint($state['stats']['ebay_replanned_active']??0)+absint($plan['active']??0);if(!empty($plan['errors'])){$state['stats']['ebay_replan_errors']=absint($state['stats']['ebay_replan_errors']??0)+count((array)$plan['errors']);}}}}
-                }
-                $state['ebay_repair_cursor']=$end; $this->campaigns_request_cache=null;
-                if($end>=count($eligible)){$state['phase']='article_repair';$state['article_cursor']=0;}
-            } elseif($phase==='article_repair'){
-                $ids=$this->aff039_article_ids_after(absint($state['article_cursor']??0),10);
-                foreach($ids as $id){$state['article_cursor']=max(absint($state['article_cursor']??0),$id);$result=$this->aff039_repair_article_products_only($id);$state['stats']['articles_scanned']=absint($state['stats']['articles_scanned']??0)+1;if(is_wp_error($result)){$state['stats']['article_errors']=absint($state['stats']['article_errors']??0)+1;}elseif(($result['status']??'')==='skipped_no_plan'){$state['stats']['articles_skipped_no_plan']=absint($state['stats']['articles_skipped_no_plan']??0)+1;}else{$state['stats']['articles_repaired']=absint($state['stats']['articles_repaired']??0)+1;}}
-                if(count($ids)<10){$state['phase']='verify';}
-            } elseif($phase==='verify'){
-                $ebay=count((array)($state['ebay_candidate_ids']??array())); $idealo=absint($state['stats']['idealo_valid']??0); $errors=absint($state['stats']['article_errors']??0)+absint($state['stats']['ebay_replan_errors']??0);
-                if($ebay<3||$idealo<1||$errors>0){$state['status']='blocked';$state['phase']='blocked';$state['errors']['verification']='supply_or_repair_gate_failed';}
-                else{$state['status']='complete';$state['phase']='complete';$state['completed_at']=time();}
-            }
-            $this->aff039_save_state($state);
-        } finally { delete_transient(self::AFF039_RECOVERY_LOCK); }
-        $state=$this->aff039_recovery_state(); if(sanitize_key((string)($state['status']??''))==='running'){$this->aff039_schedule_next(2);} return $state;
-    }
 
-    /** AFF-ERR-044: exact clean composition of 6.72.114 product tier + safe 6.72.115 multiprovider mode. */
-    private function aff044_safe_ebay_supply_count() {
-        if (!method_exists($this, 'ebay_public_checkpoint_load')) { return 0; }
-        $checkpoint = $this->ebay_public_checkpoint_load();
-        $ids = is_array($checkpoint) ? array_values(array_unique(array_filter(array_map('absint', (array)($checkpoint['business_campaign_ids'] ?? array()))))) : array();
-        $safe = 0;
-        foreach ($ids as $id) {
-            $post = get_post($id);
-            $campaign = $post ? $this->campaign_from_post($post) : null;
-            if (!is_array($campaign) || empty($campaign['active'])) { continue; }
-            if (sanitize_key((string)($campaign['network'] ?? '')) !== 'ebay' || sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { continue; }
-            if (method_exists($this, 'ebay_business_campaign_source_allows_delivery_base') && !$this->ebay_business_campaign_source_allows_delivery_base($campaign)) { continue; }
-            if (!$this->campaign_is_complete($campaign) || !$this->product_campaign_public_image_ready($campaign)) { continue; }
-            $safe++;
-            if ($safe >= 3) { break; }
-        }
-        return $safe;
-    }
 
-    private function aff044_apply_clean_restore() {
-        $ebay_gate = method_exists($this, 'provider_channel_pause_gate') ? $this->provider_channel_pause_gate('ebay') : true;
-        if (is_wp_error($ebay_gate)) { return $ebay_gate; }
-        $idealo_gate = method_exists($this, 'provider_channel_pause_gate') ? $this->provider_channel_pause_gate('idealo') : true;
-        if (is_wp_error($idealo_gate)) { return $idealo_gate; }
-        $settings = get_option(self::OPTION_NETWORK_IDEALO, array());
-        $settings = is_array($settings) ? $settings : array();
-        if (empty($settings['enabled'])) { return new WP_Error('aff044_idealo_disabled','idealo ist nicht aktiv; keine Zustandsaenderung.'); }
-        $before = method_exists($this, 'idealo_sanitize_output_mode') ? $this->idealo_sanitize_output_mode($settings['output_mode'] ?? 'ebay_only') : sanitize_key((string)($settings['output_mode'] ?? 'ebay_only'));
-        $before_active_products = 0;
-        if (method_exists($this, 'get_campaigns')) {
-            foreach ((array) $this->get_campaigns() as $campaign) {
-                if (!is_array($campaign) || empty($campaign['active'])) { continue; }
-                if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { continue; }
-                $network = sanitize_key((string)($campaign['network'] ?? ''));
-                if (in_array($network, array('ebay','idealo'), true)) { $before_active_products++; }
-            }
-        }
-        $settings['output_mode'] = 'automatic';
-        update_option(self::OPTION_NETWORK_IDEALO, $settings, false);
-        if (method_exists($this, 'idealo_sync_campaign_activation')) { $this->idealo_sync_campaign_activation(); }
-        $after_settings = get_option(self::OPTION_NETWORK_IDEALO, array());
-        $after_settings = is_array($after_settings) ? $after_settings : array();
-        $after = method_exists($this, 'idealo_sanitize_output_mode') ? $this->idealo_sanitize_output_mode($after_settings['output_mode'] ?? '') : sanitize_key((string)($after_settings['output_mode'] ?? ''));
-        $this->campaigns_request_cache = null;
-        $after_active_products = 0;
-        if (method_exists($this, 'get_campaigns')) {
-            foreach ((array) $this->get_campaigns() as $campaign) {
-                if (!is_array($campaign) || empty($campaign['active'])) { continue; }
-                if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'product') { continue; }
-                $network = sanitize_key((string)($campaign['network'] ?? ''));
-                if (in_array($network, array('ebay','idealo'), true)) { $after_active_products++; }
-            }
-        }
-        if ($after !== 'automatic' || $after_active_products < $before_active_products) {
-            $settings['output_mode'] = $before;
-            update_option(self::OPTION_NETWORK_IDEALO, $settings, false);
-            if (method_exists($this, 'idealo_sync_campaign_activation')) { $this->idealo_sync_campaign_activation(); }
-            $this->campaigns_request_cache = null;
-            return new WP_Error('aff044_no_loss_gate_failed','Mehrprovider-Umschaltung wurde zurueckgerollt, weil der Produktbestand kleiner geworden waere.');
-        }
-        $safe_ebay = $this->aff044_safe_ebay_supply_count();
-        $state = array('schema'=>'1.0','status'=>'complete','before_mode'=>$before,'after_mode'=>'automatic','active_products_before'=>$before_active_products,'active_products_after'=>$after_active_products,'safe_ebay_campaigns'=>$safe_ebay,'completed_at'=>time());
-        update_option(self::OPTION_AFF044_RESTORE, $state, false);
-        return $state;
-    }
 
-    public function handle_aff044_clean_restore() {
-        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
-        check_admin_referer('ppar_aff044_clean_restore','ppar_aff044_nonce');
-        $result = $this->aff044_apply_clean_restore();
-        $status = is_wp_error($result) ? 'blocked' : 'complete';
-        if (is_wp_error($result)) {
-            update_option(self::OPTION_AFF044_RESTORE, array('schema'=>'1.0','status'=>'blocked','error'=>$result->get_error_code(),'message'=>$result->get_error_message(),'checked_at'=>time()), false);
-        }
-        $url = add_query_arg(array('page'=>'affiliate-portal-kontrollzentrum','ppar_aff044'=>$status), admin_url('admin.php'));
-        wp_safe_redirect($url);
-        exit;
-    }
 
-    private function render_aff044_clean_restore_panel() {
-        $state = get_option(self::OPTION_AFF044_RESTORE, array());
-        $state = is_array($state) ? $state : array();
-        $status = sanitize_key((string)($state['status'] ?? 'not_started'));
-        ?>
-        <div class="notice notice-info inline" style="padding:12px 14px;margin:14px 0;max-width:980px;">
-            <p><strong>Produktzustand 6.72.114/115 sauber wiederherstellen</strong> · Status: <?php echo esc_html($status); ?></p>
-            <p>Nur Kategorieprodukt-Tier 520/510/500 + Mehrprovider automatic. Kein Rebuild, keine Revision, kein Checkpoint-Write, keine Anzeige-/Kachel-Aenderung.</p>
-            <?php if (!empty($state['message'])): ?><p><?php echo esc_html((string)$state['message']); ?></p><?php endif; ?>
-            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
-                <input type="hidden" name="action" value="ppar_aff044_clean_restore">
-                <?php wp_nonce_field('ppar_aff044_clean_restore','ppar_aff044_nonce'); ?>
-                <button class="button button-primary">Produktzustand 114/115 sauber wiederherstellen</button>
-            </form>
-        </div>
-        <?php
-    }
 
-    public function maybe_aff043_automatic_state_restore() {
-        if (method_exists($this, 'ebay_settings') && method_exists($this, 'ebay_deletion_compliance_complete') && $this->ebay_deletion_compliance_complete()) {
-            $ebay = $this->ebay_settings();
-            if (empty($ebay['enabled']) && (string)($ebay['environment'] ?? 'production') === 'production') {
-                $access = method_exists($this, 'provider_access_state') ? $this->provider_access_state('ebay') : array();
-                $message = (string)($access['message'] ?? '');
-                if (strpos($message, 'Marketplace-Account-Deletion-Compliance hart deaktiviert') !== false) {
-                    $ebay['enabled'] = true;
-                    update_option(self::OPTION_NETWORK_EBAY, $this->ebay_normalize_settings($ebay, true), false);
-                    if (method_exists($this, 'provider_set_access_state')) {
-                        $this->provider_set_access_state('ebay', 'connected', 'eBay nach bereits vollstaendiger Marketplace-Account-Deletion-Compliance wieder aktiviert.');
-                    }
-                }
-            }
-        }
-        $state = $this->aff043_state();
-        $status = sanitize_key((string)($state['status'] ?? 'not_started'));
-        if (in_array($status, array('complete','blocked','stopped'), true)) { return; }
-        if ($status !== 'running') {
-            $reithelme = $this->aff043_current_supply_for_key('page:reithelme');
-            $stallhalfter = $this->aff043_current_supply_for_key('page:halfter-und-stricke-stallhalfter');
-            $idealo = get_option(self::OPTION_NETWORK_IDEALO, array());
-            $idealo = is_array($idealo) ? $idealo : array();
-            $mode = $this->idealo_sanitize_output_mode($idealo['output_mode'] ?? 'ebay_only');
-            $known_damage = $mode === 'idealo_only' || absint($reithelme['total'] ?? 0) < 3 || absint($stallhalfter['total'] ?? 0) < 3;
-            if (!$known_damage) { return; }
-            $snap = $this->aff043_snapshot();
-            if (is_wp_error($snap)) {
-                $this->aff043_save_state(array('schema'=>'1.0','status'=>'blocked','phase'=>'preflight','errors'=>array('snapshot'=>$snap->get_error_code()),'message'=>$snap->get_error_message(),'updated_at'=>time()));
-                return;
-            }
-            $state = array('schema'=>'1.0','status'=>'running','phase'=>'augment','cursor'=>0,'started_at'=>time(),'started_by'=>0,'snapshot_sha256'=>$snap['sha256'],'source_sha256'=>$snap['source_sha256'],'stats'=>array(),'errors'=>array(),'automatic_start'=>1);
-            $this->aff043_save_state($state);
-        }
-        $started = microtime(true);
-        for ($i=0; $i<40 && (microtime(true)-$started)<20.0; $i++) {
-            $state = $this->run_aff043_recovery_worker();
-            if (sanitize_key((string)($state['status'] ?? '')) !== 'running') { break; }
-        }
-    }
 
-    private function aff043_state() {
-        $state=get_option(self::OPTION_AFF043_RECOVERY,array());
-        return is_array($state)?$state:array();
-    }
 
-    private function aff043_save_state($state) {
-        $state=is_array($state)?$state:array(); $state['updated_at']=time();
-        update_option(self::OPTION_AFF043_RECOVERY,$state,false);
-        return $state;
-    }
 
-    private function aff043_redirect($notice='') {
-        $url=admin_url('admin.php?page=affiliate-portal-kontrollzentrum');
-        if($notice!==''){$url=add_query_arg(array('ppar_aff043_notice'=>sanitize_key((string)$notice)),$url);}
-        wp_safe_redirect($url); exit;
-    }
 
     private function aff043_snapshot() {
         $path=__DIR__.DIRECTORY_SEPARATOR.str_replace('/',DIRECTORY_SEPARATOR,self::AFF043_SNAPSHOT_REL);
@@ -1786,184 +1418,21 @@ JS;
         return array('rows'=>$rows,'sha256'=>self::AFF043_SNAPSHOT_SHA256,'source_sha256'=>(string)($data['source_sha256']??''));
     }
 
-    private function aff043_schedule_next($delay=2) {
-        if(function_exists('wp_next_scheduled')&&wp_next_scheduled(self::AFF043_RECOVERY_HOOK)){return;}
-        if(function_exists('wp_schedule_single_event')){wp_schedule_single_event(time()+max(1,absint($delay)),self::AFF043_RECOVERY_HOOK);}
-    }
 
-    private function aff043_target_keys($row) {
-        $out=array(); foreach((array)($row['automation_target_keys']??array()) as $key){$key=$this->automation_normalize_target_key($key);if($key!=='')$out[]=$key;}
-        return array_values(array_unique($out));
-    }
 
-    private function aff043_placements($row) {
-        return array_values(array_unique(array_filter(array_map('sanitize_key',(array)($row['placements']??array())))));
-    }
 
-    private function aff043_provider_paused_or_vetoed($provider) {
-        if(!method_exists($this,'provider_channel_pause_gate')){return false;}
-        $gate=$this->provider_channel_pause_gate($provider);
-        return is_wp_error($gate);
-    }
 
-    private function aff043_can_reactivate_historical($campaign,$network) {
-        if(!is_array($campaign)||sanitize_key((string)($campaign['creative_type']??''))!=='product'){return false;}
-        if($this->aff043_provider_paused_or_vetoed($network)){return false;}
-        $status=sanitize_key((string)($campaign['programme_status']??''));
-        if(in_array($status,array('paused','ended'),true)){return false;}
-        if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign)){return false;}
-        if($network==='ebay'){
-            return method_exists($this,'ebay_business_campaign_source_allows_delivery_base') && $this->ebay_business_campaign_source_allows_delivery_base($campaign);
-        }
-        if($network==='idealo'){
-            return $this->campaign_program_allows_delivery(array_merge($campaign,array('active'=>true)));
-        }
-        return false;
-    }
 
-    private function aff043_apply_row($row,$phase) {
-        $id=absint($row['post_id']??0); if($id<=0){return array('status'=>'skip');}
-        $post=get_post($id); if(!$post||$post->post_type!==self::CAMPAIGN_POST_TYPE){return array('status'=>'missing');}
-        $campaign=$this->campaign_from_post($post); if(!is_array($campaign)){return array('status'=>'invalid');}
-        $network=sanitize_key((string)($row['network']??''));
-        if(sanitize_key((string)($campaign['network']??''))!==$network||sanitize_key((string)($campaign['creative_type']??''))!=='product'){return array('status'=>'mismatch');}
-        $before=serialize($campaign); $historical_keys=$this->aff043_target_keys($row); $historical_places=$this->aff043_placements($row);
-        if($phase==='augment'){
-            $current_keys=array_values((array)($campaign['automation_target_keys']??array()));
-            $campaign['automation_target_keys']=array_values(array_unique(array_merge($current_keys,$historical_keys)));
-            $current_places=array_values((array)($campaign['placements']??array()));
-            $campaign['placements']=array_values(array_unique(array_merge($current_places,$historical_places)));
-        } else {
-            $campaign['automation_target_keys']=$historical_keys;
-            $campaign['placements']=$historical_places;
-            $mode=sanitize_key((string)($row['assignment_mode']??'page_tree'));
-            if(in_array($mode,array('page_tree','auto_topic','exact_page','keywords','fallback'),true)){$campaign['assignment_mode']=$mode;}
-            $campaign['page_id']=absint($row['page_id']??0);
-            $campaign['match_descendants']=!empty($row['match_descendants']);
-        }
-        $reactivated=0;
-        if(!empty($row['active'])&&empty($campaign['active'])&&$this->aff043_can_reactivate_historical($campaign,$network)){
-            $campaign['active']=true;
-            if(!in_array(sanitize_key((string)($campaign['programme_status']??'')),array('paused','ended'),true)){$campaign['programme_status']='active';}
-            $reactivated=1;
-        }
-        if(serialize($campaign)===$before){return array('status'=>'same','reactivated'=>$reactivated);}
-        $saved=$this->save_campaign_record($campaign,$id);
-        if(is_wp_error($saved)||!$saved){return array('status'=>'save_error','reactivated'=>0);}
-        return array('status'=>'changed','reactivated'=>$reactivated);
-    }
 
-    private function aff043_historical_gate_keys($rows) {
-        $parents=array('page:ausruestung-reiterbedarf'); $counts=array(); $nets=array();
-        foreach($rows as $row){if(empty($row['active']))continue;$keys=$this->aff043_target_keys($row);if(!array_intersect($parents,$keys))continue;$network=sanitize_key((string)($row['network']??''));foreach($keys as $key){if(strpos($key,'page:')!==0||in_array($key,array('page:ausruestung','page:ausruestung-reiterbedarf'),true))continue;$counts[$key]=absint($counts[$key]??0)+1;$nets[$key][$network]=absint($nets[$key][$network]??0)+1;}}
-        // Stallhalfter liegt ausserhalb Reiterbedarf, ist aber ausdruecklich Teil des Livefehlers.
-        $stall='page:halfter-und-stricke-stallhalfter';
-        foreach($rows as $row){if(empty($row['active']))continue;$keys=$this->aff043_target_keys($row);if(!in_array($stall,$keys,true))continue;$network=sanitize_key((string)($row['network']??''));$counts[$stall]=absint($counts[$stall]??0)+1;$nets[$stall][$network]=absint($nets[$stall][$network]??0)+1;}
-        ksort($counts); return array('counts'=>$counts,'networks'=>$nets);
-    }
 
-    private function aff043_current_supply_for_key($target_key) {
-        $target_key=$this->automation_normalize_target_key($target_key);$out=array('total'=>0,'ebay'=>0,'idealo'=>0,'ids'=>array());
-        foreach($this->get_campaigns() as $campaign){if(!is_array($campaign)||empty($campaign['active'])||sanitize_key((string)($campaign['creative_type']??''))!=='product')continue;$network=sanitize_key((string)($campaign['network']??''));if(!in_array($network,array('ebay','idealo'),true))continue;$keys=array_values((array)($campaign['automation_target_keys']??array()));if(!in_array($target_key,$keys,true))continue;if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign))continue;if($network==='ebay' && (!$this->ebay_business_campaign_source_allows_delivery_base($campaign)))continue;if($this->aff043_provider_paused_or_vetoed($network))continue;$out['total']++;$out[$network]++;$out['ids'][]=absint($campaign['post_id']??0);}
-        $out['ids']=array_values(array_unique(array_filter($out['ids'])));return $out;
-    }
 
-    private function aff043_supply_gate($rows) {
-        $hist=$this->aff043_historical_gate_keys($rows);$result=array();$fail=array();
-        foreach((array)$hist['counts'] as $key=>$historical_count){if($historical_count<3)continue;$cur=$this->aff043_current_supply_for_key($key);$result[$key]=$cur;$need_ebay=absint($hist['networks'][$key]['ebay']??0)>0;if($cur['total']<3||($need_ebay&&$cur['ebay']<1)){$fail[$key]=array('historical'=>$historical_count,'historical_networks'=>$hist['networks'][$key]??array(),'current'=>$cur);}}
-        if($fail){return new WP_Error('aff043_supply_gate_failed','Historische exakte Produktsupply ist noch nicht sicher wiederhergestellt.',array('failed'=>$fail,'supply'=>$result));}
-        return $result;
-    }
 
-    private function aff043_maybe_undo_aff042() {
-        $state=get_option('ppar_aff042_exact_assignment_restore_v1',array());$state=is_array($state)?$state:array();
-        if(sanitize_key((string)($state['status']??''))!=='complete'){return array('status'=>'not_applicable');}
-        $backup=get_option('ppar_aff042_assignments_before_exact_restore_v1',array());$backup=is_array($backup)?$backup:array();$old=is_array($backup['assignments']??null)?$backup['assignments']:null;
-        if($old===null){return array('status'=>'blocked','error'=>'aff042_backup_missing');}
-        $current=get_option(self::OPTION_ASSIGNMENTS,array());$current=is_array($current)?$current:array();$after_hash=(string)($state['after_sha256']??'');
-        if($after_hash===''||!hash_equals($after_hash,hash('sha256',serialize($current)))){return array('status'=>'preserved','reason'=>'current_assignments_changed_after_aff042');}
-        update_option(self::OPTION_ASSIGNMENTS,$old,false);$read=get_option(self::OPTION_ASSIGNMENTS,array());
-        if(!is_array($read)||!hash_equals(hash('sha256',serialize($old)),hash('sha256',serialize($read)))){return array('status'=>'blocked','error'=>'aff042_rollback_readback');}
-        return array('status'=>'restored','sha256'=>hash('sha256',serialize($old)));
-    }
 
-    private function aff043_safe_ebay_ids() {
-        $ids=array();foreach($this->get_campaigns() as $campaign){if(!is_array($campaign)||empty($campaign['active'])||sanitize_key((string)($campaign['network']??''))!=='ebay'||sanitize_key((string)($campaign['creative_type']??''))!=='product')continue;if(!$this->campaign_is_complete($campaign)||!$this->product_campaign_public_image_ready($campaign))continue;if(!$this->ebay_business_campaign_source_allows_delivery_base($campaign))continue;$ids[]=absint($campaign['post_id']??0);} $ids=array_values(array_unique(array_filter($ids)));sort($ids,SORT_NUMERIC);return $ids;
-    }
 
-    public function handle_aff043_recovery_start() {
-        if(!current_user_can('manage_options')){wp_die('Keine Berechtigung.');}check_admin_referer('ppar_aff043_recovery_start','ppar_aff043_nonce');
-        $snap=$this->aff043_snapshot();if(is_wp_error($snap)){$this->aff043_save_state(array('schema'=>'1.0','status'=>'blocked','phase'=>'preflight','errors'=>array('snapshot'=>$snap->get_error_code()),'message'=>$snap->get_error_message()));$this->aff043_redirect('blocked');}
-        $state=array('schema'=>'1.0','status'=>'running','phase'=>'augment','cursor'=>0,'started_at'=>time(),'started_by'=>get_current_user_id(),'snapshot_sha256'=>$snap['sha256'],'source_sha256'=>$snap['source_sha256'],'stats'=>array(),'errors'=>array());
-        $this->aff043_save_state($state);$this->run_aff043_recovery_worker();$this->aff043_redirect('started');
-    }
 
-    public function handle_aff043_recovery_step() {if(!current_user_can('manage_options')){wp_die('Keine Berechtigung.');}check_admin_referer('ppar_aff043_recovery_step','ppar_aff043_nonce');$this->run_aff043_recovery_worker();$this->aff043_redirect('stepped');}
-    public function handle_aff043_recovery_stop() {if(!current_user_can('manage_options')){wp_die('Keine Berechtigung.');}check_admin_referer('ppar_aff043_recovery_stop','ppar_aff043_nonce');$state=$this->aff043_state();$state['status']='stopped';$state['phase']='stopped';$state['stopped_at']=time();$this->aff043_save_state($state);if(function_exists('wp_clear_scheduled_hook'))wp_clear_scheduled_hook(self::AFF043_RECOVERY_HOOK);$this->aff043_redirect('stopped');}
 
-    public function run_aff043_recovery_worker() {
-        $state=$this->aff043_state();if(sanitize_key((string)($state['status']??''))!=='running')return $state;if(get_transient(self::AFF043_RECOVERY_LOCK))return $state;set_transient(self::AFF043_RECOVERY_LOCK,'1',90);
-        try{
-            $snap=$this->aff043_snapshot();if(is_wp_error($snap)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['snapshot']=$snap->get_error_code();$state['message']=$snap->get_error_message();$this->aff043_save_state($state);return $state;}
-            $rows=$snap['rows'];$phase=sanitize_key((string)($state['phase']??'augment'));
-            if(in_array($phase,array('augment','normalize'),true)){
-                $cursor=absint($state['cursor']??0);$end=min(count($rows),$cursor+60);$changed=0;$same=0;$missing=0;$errors=0;$reactivated=0;
-                for($i=$cursor;$i<$end;$i++){$r=$this->aff043_apply_row($rows[$i],$phase);$st=(string)($r['status']??'');if($st==='changed')$changed++;elseif($st==='same')$same++;elseif($st==='missing')$missing++;elseif(in_array($st,array('save_error','mismatch','invalid'),true))$errors++;$reactivated+=absint($r['reactivated']??0);}
-                $state['cursor']=$end;$state['stats'][$phase.'_changed']=absint($state['stats'][$phase.'_changed']??0)+$changed;$state['stats'][$phase.'_same']=absint($state['stats'][$phase.'_same']??0)+$same;$state['stats'][$phase.'_missing']=absint($state['stats'][$phase.'_missing']??0)+$missing;$state['stats'][$phase.'_errors']=absint($state['stats'][$phase.'_errors']??0)+$errors;$state['stats'][$phase.'_reactivated']=absint($state['stats'][$phase.'_reactivated']??0)+$reactivated;$this->campaigns_request_cache=null;
-                if($end>=count($rows)){$state['cursor']=0;$state['phase']=$phase==='augment'?'supply_gate':'finalize';}
-            } elseif($phase==='supply_gate'){
-                $gate=$this->aff043_supply_gate($rows);if(is_wp_error($gate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['supply']=$gate->get_error_code();$state['supply_gate']=$gate->get_error_data();}
-                else{$state['supply_gate']=$gate;$state['aff042_rollback']=$this->aff043_maybe_undo_aff042();$state['phase']='normalize';$state['cursor']=0;}
-            } elseif($phase==='finalize'){
-                $gate=$this->aff043_supply_gate($rows);if(is_wp_error($gate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['final_supply']=$gate->get_error_code();$state['supply_gate']=$gate->get_error_data();}
-                elseif($this->aff043_provider_paused_or_vetoed('ebay')){$state['status']='blocked';$state['phase']='blocked';$state['errors']['ebay_provider']='paused_or_vetoed';}
-                else{
-                    $settings=get_option(self::OPTION_NETWORK_IDEALO,array());$settings=is_array($settings)?$settings:array();$mode=$this->idealo_sanitize_output_mode($settings['output_mode']??'ebay_only');
-                    if(!empty($settings['enabled'])&&$mode==='idealo_only'){$settings['output_mode']='automatic';update_option(self::OPTION_NETWORK_IDEALO,$settings,false);$state['stats']['idealo_mode_restored']=1;}
-                    $this->campaigns_request_cache=null;$ebay_ids=$this->aff043_safe_ebay_ids();$old=$this->ebay_public_checkpoint_load();$candidate=$this->aff039_checkpoint_candidate($old,$ebay_ids);
-                    if(is_wp_error($candidate)){$state['status']='blocked';$state['phase']='blocked';$state['errors']['checkpoint']=$candidate->get_error_code();}
-                    else{$saved=$this->ebay_public_checkpoint_save($candidate);if($saved===false){$state['status']='blocked';$state['phase']='blocked';$state['errors']['checkpoint']='persistence_failed';}else{$state['stats']['ebay_checkpoint_business_ids']=count((array)($saved['business_campaign_ids']??array()));$state['status']='complete';$state['phase']='complete';$state['completed_at']=time();$state['supply_gate']=$gate;}}
-                }
-            }
-            $this->aff043_save_state($state);
-        } finally {delete_transient(self::AFF043_RECOVERY_LOCK);}
-        $state=$this->aff043_state();if(sanitize_key((string)($state['status']??''))==='running')$this->aff043_schedule_next(2);return $state;
-    }
 
-    private function render_aff043_recovery_panel() {
-        $state=$this->aff043_state();$status=sanitize_key((string)($state['status']??'not_started'));$phase=sanitize_key((string)($state['phase']??''));$stats=is_array($state['stats']??null)?$state['stats']:array();
-        ?>
-        <div class="postbox" style="max-width:1100px;padding:18px;margin-top:18px;border-left:4px solid #2271b1;">
-            <h2>AFF-ERR-043 Historischen Produktzustand wiederherstellen</h2>
-            <p><strong>Status:</strong> <code><?php echo esc_html($status); ?></code><?php if($phase!==''): ?> · <strong>Phase:</strong> <code><?php echo esc_html($phase); ?></code><?php endif; ?></p>
-            <p>Stellt ausschliesslich die am 15.09. real exportierten eBay-/idealo-Produkt-Zielbindungen und sichere Supply wieder her. Kacheln, Renderer, Rangfolge, Artikelplaene und Banner bleiben unveraendert. Zuerst wird Supply nur ergaenzt; bereinigt wird erst nach dem Positiv-Gate.</p>
-            <?php if($stats): ?><p><small><?php echo esc_html(wp_json_encode($stats)); ?></small></p><?php endif; ?>
-            <?php if(!empty($state['errors'])): ?><p><strong>BLOCK:</strong> <?php echo esc_html(wp_json_encode($state['errors'])); ?></p><?php endif; ?>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff043_recovery_start"><?php wp_nonce_field('ppar_aff043_recovery_start','ppar_aff043_nonce'); ?><button class="button button-primary">Historischen Produktzustand wiederherstellen</button></form>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff043_recovery_step"><?php wp_nonce_field('ppar_aff043_recovery_step','ppar_aff043_nonce'); ?><button class="button">Einen sicheren Batch ausfuehren</button></form>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff043_recovery_stop"><?php wp_nonce_field('ppar_aff043_recovery_stop','ppar_aff043_nonce'); ?><button class="button">Batch sicher beenden</button></form>
-            </div>
-        </div>
-        <?php
-    }
 
-    private function render_aff039_recovery_panel() {
-        $state=$this->aff039_recovery_state(); $status=sanitize_key((string)($state['status']??'not_started')); $phase=sanitize_key((string)($state['phase']??'')); $stats=is_array($state['stats']??null)?$state['stats']:array();
-        ?>
-        <div class="postbox" style="max-width:1100px;padding:18px;margin-top:18px;border-left:4px solid #b32d2e;">
-            <h2>AFF-ERR-039 Zweiebenen-Recovery</h2>
-            <p><strong>Status:</strong> <code><?php echo esc_html($status); ?></code><?php if($phase!==''): ?> · <strong>Phase:</strong> <code><?php echo esc_html($phase); ?></code><?php endif; ?></p>
-            <p>Recovery laeuft ausschließlich im gebundenen Worker. Normale Frontend-, REST- und eBay-Notification-Requests starten oder setzen sie niemals fort.</p>
-            <?php if($stats): ?><p><small><?php echo esc_html(wp_json_encode($stats)); ?></small></p><?php endif; ?>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff039_recovery_start"><?php wp_nonce_field('ppar_aff039_recovery_start','ppar_aff039_nonce'); ?><button class="button button-primary">AFF-ERR-039 Recovery starten</button></form>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff039_recovery_step"><?php wp_nonce_field('ppar_aff039_recovery_step','ppar_aff039_nonce'); ?><button class="button">Einen sicheren Batch ausfuehren</button></form>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="ppar_aff039_recovery_stop"><?php wp_nonce_field('ppar_aff039_recovery_stop','ppar_aff039_nonce'); ?><button class="button">Batch sicher beenden</button></form>
-            </div>
-        </div>
-        <?php
-    }
 
     public function maybe_apply_article_products_upgrade() {
         $done = (string) get_option(self::OPTION_ARTICLE_PRODUCTS_UPGRADE, '');
@@ -9507,9 +8976,6 @@ JS;
             <h1>Affiliate Portal Kontrollzentrum</h1>
             <p><strong>Version:</strong> <?php echo esc_html(self::VERSION); ?>. Zentrale read-only Übersicht. Änderungen erfolgen ausschließlich in der Affiliate-Zentrale.</p>
             <p><a class="button button-primary" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-creatives')); ?>">Affiliate-Zentrale öffnen</a> <a class="button" href="<?php echo esc_url(admin_url('admin.php?page=affiliate-portal-router-check')); ?>">Trockenprüfung öffnen</a></p>
-            <?php $this->render_aff039_recovery_panel(); ?>
-            <?php $this->render_aff043_recovery_panel(); ?>
-            <?php $this->render_aff044_clean_restore_panel(); ?>
 
             <h2>Status</h2>
             <table class="widefat striped" style="max-width:980px;">
