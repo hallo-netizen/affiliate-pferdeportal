@@ -33,7 +33,7 @@
       ],
       "data_fact_id_source": "BOUND_RESEARCH_CLAIM.fact_id",
       "data_source_hash_source": "BOUND_RESEARCH_CLAIM.evidence_text_sha256",
-      "data_source_title_source": "BOUND_RESEARCH_CLAIM.source_id",
+      "data_source_title_source": "BOUND_RESEARCH_SOURCE.title_BY_CLAIM_SOURCE_ID",
       "placement": "INSIDE_A_VISIBLE_FACTUAL_UNIT_THAT_LEXICALLY_SUPPORTS_THE_SAME_FACT"
     }
   },
