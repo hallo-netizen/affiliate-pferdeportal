@@ -1,91 +1,103 @@
 # HD-002 – HOBBY DEPOT SEO THEMENENGINE – CURRENT
 
 STAND: 2026-09-30
-STATUS: V0.1.0 PRODUCTION CANDIDATE / HARD LOCAL PASS / LIVE-INSTALLATION OFFEN
+STATUS: V0.1.1 FRESH-INSTALL-MIGRATION-FIX HARD LOCAL PASS / LIVE-RETEST OFFEN
 
-## Identität
+## Aktueller Kandidat
 
 Plugin:
 `Hobby Depot SEO Themenengine`
 
 Version:
-`0.1.0`
+`0.1.1`
 
-Produktionskandidat:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_PRODUCTION_CANDIDATE.zip`
+Installer:
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.1_FRESH_INSTALL_MIGRATION_FIX_HARD_PASS.zip`
 
-Installer SHA-256:
-`2d3a0bd9180b30ff76e7fb0ed84a8e7cf1a4a7c0d2135999329cb5d11371a684`
+SHA-256:
+`6230a7e7db47dc1c337106051cd658e2093e0a3873dbb4d9225749538123577d`
 
-Source:
-`QUELLCODE_HDTE_V0.1.0_PRODUCTION_CANDIDATE.zip`
+## Live gefundener Fehler in 0.1.0
 
-Source SHA-256:
-`5204950ba0b74e58054a5fddddfdb037ef3daf40baa4fd54b47171d149828a45`
+Fehlercode:
+`HDTE_SITE_BASELINE_REQUIRED`
 
-## Harte Projekttrennung
+Ursache:
+Die sichere Startmigration verlangte bei einer vollständig neuen Hobby-Depot-Installation bereits in `EDITORIAL_INIT` einen Website-Baseline-Snapshot.
 
-- eigener PHP-Präfix: `HDTE_`;
-- eigener Option-/Table-/Hook-Präfix: `hdte_`;
-- Projekt-ID: `hobby_depot`;
-- keine Runtime-Abhängigkeit vom Pferdeatelier-PSTE;
-- keine gemeinsamen Tabellen/Optionen;
-- Aktivierungs-/Release-Guard blockiert Fremdprojekt-Reste;
-- paralleler Boot mit PSTE ohne Klassen-/Speicherkollision geprüft.
+Dieser Snapshot kann im Backend aber erst nach erfolgreichem READY-Start und Import des Kategorie-/Owner-Handoffs erzeugt werden.
 
-## Referenzbasis
+Damit entstand auf einer Neuinstallation ein echter Start-Deadlock.
 
-Einmalig als technische Vorlage:
-`PSTE-0.57.13-DATABASE_STORAGE_CLEANUP_PERFORMANCE_SAFE_HARD_PASS.zip`
+V0.1.0:
+**SUPERSEDED / NICHT WEITER VERWENDEN.**
 
-Referenz-SHA:
-`bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`
+## Fix 0.1.1
 
-Finaler Referenzdelta-Check:
-**kein neuerer PSTE-Storage-/Performance-Stand vorhanden.**
+Eine fehlende Baseline ist ausschließlich dann zulässig, wenn der eigene HDTE-Datenbestand maschinell als vollständig leer bewiesen ist:
 
-Die übernommene Storage-/Performance-Logik wurde in HD-002 eigenständig mit `hdte_`-Speichern geführt.
+- Identity-Modus = `EMPTY_NEW_INSTALL`;
+- Topic Pool = 0;
+- Candidates = 0;
+- Occurrences = 0;
+- Assignments = 0;
+- History = 0;
+- Payload-Integrity-Total = 0;
+- Abschlussprüfung bestätigt weiterhin leeren Bestand.
 
-## Produktionscheck
+Nur dann wird die baselineabhängige Altbestandsmigration übersprungen und der sichere Erststart abgeschlossen.
 
-Packaging:
-- WordPress-Pluginordner normalisiert auf `hobby-depot-seo-topic-engine`;
-- gegenüber dem zuvor geprüften HD-002-Code 135/135 interne Dateien byte-identisch;
-- keine doppelten ZIP-Einträge;
-- keine `.orig/.bak/.tmp/.old/~`.
+Sobald eigener Bestand existiert, bleibt die Baseline zwingend und fail-closed.
 
-Fresh-Unpack:
+## Harte lokale Prüfung
+
+Alter Fehler reproduziert:
+- 0.1.0 → `HDTE_SITE_BASELINE_REQUIRED` bei `EDITORIAL_INIT`: PASS.
+
+0.1.1 Positiv:
+- kompletter öffentlicher Fresh-Install-Ablauf: Start → 14 request-bounded Schritte → COMPLETE: PASS;
+- Fortsetzen eines bereits bei `EDITORIAL_INIT` pausierten Fresh-Install-Jobs: PASS.
+
+0.1.1 Negativ:
+- bestehender Bestand ohne Baseline: BLOCKED `HDTE_SITE_BASELINE_REQUIRED`;
+- Daten erscheinen während Fresh Install: BLOCKED `HDTE_EMPTY_INSTALL_UNEXPECTED_CANDIDATES`;
+- Payload-Bestand > 0 ohne Baseline: BLOCKED `HDTE_SITE_BASELINE_REQUIRED`;
+- bestehender Bestand mit gültiger Baseline nutzt unverändert den normalen Editorial-Migrationsweg.
+
+Regression:
 - PHP-Lint 80/80 PASS;
 - Project Boundary PASS;
-- Foreign-Project-Runtime-Reste: 0.
-
-Direkter HD-001 → HD-002 Vertragstest:
-- HD-001 erzeugt `APKW_EDITORIAL_INTENT_OWNERSHIP_HANDOFF_V1`;
-- HD-002 übernimmt den Handoff als READY;
-- Buchbinden Positiv-/Negativfälle: 9/9 PASS;
-- falsche FAQ-Zuordnung BLOCKED;
-- semantische Dublette BLOCKED;
-- fehlender `semantic_intent_key` BLOCKED;
-- neuer eigenständiger Intent mit gültigem Owner PASS.
-
-Zusätzliche lokale Tests bleiben:
 - Ownership 11/11 PASS;
 - Frage≠FAQ 12/12 PASS;
 - Family Identity 8/8 PASS;
-- Frontend-Boot ohne zusätzliche DB-Writes;
-- Admin-Boot ohne Writes;
-- Koexistenz neben PSTE PASS.
+- HD-001 → HD-002 Buchbinden E2E 9/9 PASS;
+- Worktree ↔ Fresh-Unpack 135/135 byte-identisch.
+
+Performance-/Storage-Schutz:
+Diese vier kritischen Dateien sind gegenüber 0.1.0 byte-identisch:
+- `class-hdte-repository.php`;
+- `class-hdte-research-archive.php`;
+- `class-hdte-sandbox-record-store.php`;
+- `class-hdte-storage-maintenance.php`.
+
+Änderungsfläche 0.1.0 → 0.1.1:
+exakt 2 Dateien:
+- Pluginversion;
+- Safe-Migration-Job.
 
 ## Beleggrenze
 
-Noch keine Live-WordPress-Installation.
-Noch keine produktive Datenänderung.
+Noch kein Live-Retest mit 0.1.1.
 
 ## NEXT ACTION
 
-HD-001 V1.9.1 live sauber abnehmen und erst danach HD-002 V0.1.0 installieren.
+V0.1.1 über die installierte V0.1.0 ersetzen.
 
-Anschließend:
-1. V1.9.1-Editorial-Handoff in HD-002 importieren;
-2. Buchbinden E2E real ausführen;
-3. nur die offenen Research-Räume Fragen/Probleme und FAQ nachrecherchieren.
+Danach im Backend:
+**Hobby Depot Themenengine → Sichere Migration fortsetzen**
+
+Erwartung:
+der bereits pausierte Fresh-Install-Job läuft bis COMPLETE und die Themenengine wird READY.
+
+Danach erst:
+Owner-Handoff importieren → Gesamtbestand erfassen → Buchbinden-E2E.
