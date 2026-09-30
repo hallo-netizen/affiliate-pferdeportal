@@ -3,51 +3,37 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: HD-001 V1.9.1 TESTROLLBACK PASS / HD-002 V0.1.1 LIVE-MIGRATION PASS / PRODUKTIVER OWNER-HANDOFF FEHLT
+STATUS: HD-001 V1.9.2 HARD PASS / LIVE-RETEST OFFEN · HD-002 V0.1.1 LIVE-MIGRATION PASS
 
 ## HD-001 – Kategorie-Workflow
 
-`Affiliate-Portal Kategorie-Workflow V1.9.1`
+Aktuell:
+`Affiliate-Portal Kategorie-Workflow V1.9.2`
 
-Lokale Vollprüfung:
-248/248 PASS.
+V1.9.1 live:
+`DEPLOY_READBACK_MISMATCH | Automatischer Rollback: PASS`
 
-Live-Test:
-- READ_ONLY_PREVIEW erneut übernommen;
-- finale Struktur freigegeben;
-- WordPress-Vorschau erstellt;
-- Testdeployment durchgeführt;
-- vollständiger Rollback PASS.
+Root Cause reproduziert und in V1.9.2 behoben:
+Exact-Slug-Objekt mit nativer Parent-Differenz wird jetzt UPDATE statt ADOPT_EXISTING.
 
-Der verwendete Bestand bleibt ausdrücklich Testlabor und ist nicht der produktive Hobby-Depot-Kategorienstand.
+Beweise:
+- Source 251/251 PASS;
+- Fresh-Unpack 251/251 PASS;
+- PHP PASS;
+- Runtime-Parität 22/22;
+- exakter alter Fehlerfall V1.9.1 reproduziert;
+- derselbe Fall V1.9.2 Deploy+Readback PASS.
 
-## HD-002 – Hobby Depot SEO Themenengine
+Installer SHA:
+`8d462ee585ee0921772c0deb56b9829b7e7819a618dfdfc441e06bd3afa79ff8`
 
-Installiert:
-`V0.1.1 FRESH_INSTALL_MIGRATION_FIX_HARD_PASS`
+## HD-002 – Themenengine
 
-Live:
-- sichere Migration COMPLETE;
-- normales Backend READY;
-- 0 Beiträge;
-- 0 Themenfamilien;
-- 0 nutzbare Kategorien;
-- Website-Gesamtbild noch nicht erfasst.
-
-## Erster offener Blocker
-
-Nicht HD-002 selbst.
-
-Es fehlt ein echter live vorhandener Hobby-Depot-Kategorienstand mit produktionsfähigem Editorial-Ownership-Handoff.
-
-Der alte Test-Handoff ist nicht verwendbar:
-27 ARTICLE_ONLY / 27 ohne owner_concept_id.
+V0.1.1 live Migration COMPLETE.
+Noch kein Gesamtbestand erfassen, bis produktiver HD-001-Kategorienstand live steht.
 
 ## NEXT ACTION
 
-Nicht „Gesamtbestand erfassen“.
+HD-001 V1.9.2 installieren → vorhandenen Buchbinden READ_ONLY_PREVIEW erneut übernehmen → Finalfreigabe → neue WordPress-Vorschau → Apply.
 
-Zuerst produktiven Buchbinden-Pilot in HD-001 aufbauen und live deployen.
-
-Danach:
-HD-002 übernimmt gültigen Owner-Handoff → Gesamtbestand erfassen → DataForSEO → Buchbinden-E2E.
+Danach erst HD-002 Owner-Handoff / Gesamtbestand.
