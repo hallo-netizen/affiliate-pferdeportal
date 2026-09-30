@@ -5,6 +5,7 @@ on:
     branches: [affiliate-release-current]
     paths:
       - '.github/workflows/affiliate-router-cleanup-combined.yml'
+      - 'control/release-governance/CURRENT_RELEASE.json'
       - 'AFFILIATE_HOBBYRAUM/test_otto_automation.php'
       - 'AFFILIATE_HOBBYRAUM/test_adcell_awin_otto_unchanged.php'
   workflow_dispatch:
