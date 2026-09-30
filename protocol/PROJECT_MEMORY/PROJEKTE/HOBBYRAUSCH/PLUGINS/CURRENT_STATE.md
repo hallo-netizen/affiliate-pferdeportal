@@ -3,54 +3,47 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: HD-001 V1.9.2 LIVE FAIL / ROLLBACK PASS / V1.9.3 DIAGNOSE LOKAL POS+NEG PASS · HD-002 V0.1.1 LIVE-MIGRATION PASS
+STATUS: HD-001 V1.9.4 ROOT-CAUSE FIX POS+NEG HARD PASS / LIVE-RETEST OFFEN · HD-002 V0.1.1 LIVE-MIGRATION PASS
 
 ## HD-001 – Kategorie-Workflow
 
-V1.9.2 ist live erneut mit
-`DEPLOY_READBACK_MISMATCH`
-fehlgeschlagen.
+Aktuell:
+`Affiliate-Portal Kategorie-Workflow V1.9.4`
 
-Automatischer Rollback:
-PASS.
+Live-Root-Cause:
+- V1.9.3 Diagnose identifizierte `hdc-21557545f2e7cc51`;
+- einziges abweichendes Feld: `name`;
+- Knoten: `Techniken & Praxis`;
+- WordPress Core speichert den Taxonomie-Namen als `Techniken &amp; Praxis`;
+- alter Readback verglich roh statt semantisch normalisiert.
 
-Keine Abnahme.
+Altcode lokal wortgleich reproduziert:
+`DEPLOY_READBACK_MISMATCH ... Felder: name ... Rollback: PASS`
 
-Der zuvor angenommene Parent-Adoption-Fehler war nicht der reale zweite Livepfad:
-Der gebundene Live-Inventar-Snapshot enthält keine der sieben Buchbinden-Zielobjekte; der echte Ausgangsplan ist 7 × CREATE.
+V1.9.4:
+- normalisiert nur WordPress-Core-Termname-Escaping beim Lesen;
+- echte Namensabweichung bleibt BLOCKED.
 
-Exakte lokale Simulation desselben Kandidaten:
-- 7 CREATE;
-- Deploy + Readback PASS.
+Beweise:
+- echter 7-CREATE-Buchbinden-Pfad PASS;
+- relevante Negativfälle BLOCKED + Rollback PASS;
+- Source 251/251 PASS;
+- Fresh Installer 251/251 PASS;
+- Source PHP 25/25;
+- Installer PHP 17/17;
+- Runtime-Parität 22/22.
 
-Damit besteht eine noch nicht erklärte Differenz zwischen lokalem WordPress-Test und Live-WordPress.
-
-### V1.9.3 Diagnose
-
-Noch kein Produktionsfix.
-
-Positiv:
-- exakter Produktionsplan PASS.
-
-Negativ:
-- Slug-, Name-, Parent-, concept_id- und logical-parent-Abweichungen werden jeweils feldgenau erkannt;
-- automatischer Rollback jeweils PASS.
-
-Regression:
-- 251/251 PASS;
-- PHP-Lint PASS.
+Installer SHA:
+`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
 
 ## HD-002 – Themenengine
 
 V0.1.1 Live-Migration COMPLETE.
 
-Weiterhin kein `Gesamtbestand erfassen`, solange der produktive Kategorien-Deploy nicht erfolgreich readback-verifiziert ist.
+Weiterhin kein `Gesamtbestand erfassen`, solange HD-001 nicht live erfolgreich deployt und readback-verifiziert ist.
 
 ## NEXT ACTION
 
-Kein erneuter Write.
+HD-001 V1.9.4 installieren → bestehenden 7-CREATE-Dry-Run genau einmal anwenden.
 
-Zuerst vorhandenes Live-Protokoll exportieren:
-`Kategorien → Protokoll → Protokoll als JSON exportieren`
-
-Danach Ursache weiter eingrenzen.
+Kein neuer Research-Lauf, keine neue Strukturdatei, kein neuer Dry-Run.
