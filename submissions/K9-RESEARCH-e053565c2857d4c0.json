@@ -1,0 +1,2253 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-RESEARCH-e053565c2857d4c0",
+  "results": [
+    {
+      "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "OTTO_PLANER",
+            "title": "OTTO-Reitplatzplaner für die professionelle Reitbodenpflege",
+            "url": "https://www.ottosport.com/produkte/otto-reitplatzplaner"
+          },
+          {
+            "source_id": "OTTO_VARIO",
+            "title": "OTTO-VARIO Reitplatzplaner",
+            "url": "https://www.ottosport.com/produkte/otto-reitplatzplaner/otto-vario"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Weide",
+            "href": "/weide/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Reitplatzpflege",
+            "href": "/weide/weide-reitplatzpflege/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Reitplatzplaner",
+            "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Einen Reitplatzplaner nach Platzgröße, Zugfahrzeug, Pflegewerkzeugen und Einstellmöglichkeiten auswählen.",
+          "decision_criteria": [
+            "Platzgröße und Arbeitsbreite",
+            "Zugfahrzeug und Anhängung",
+            "Zinken und Lockerungstiefe",
+            "Planierschild und Nivellierung",
+            "Verstellbarkeit und Verschleißteile"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-01-418bb3760c83b63c",
+          "domain": "pferdeportal",
+          "article_type": "Beratung",
+          "title_scope": "reitplatzplaner_fuer_pferde",
+          "fact_ids": [
+            "RPB_F1",
+            "RPB_F2",
+            "RPB_F3",
+            "RPB_F4",
+            "RPB_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "RPB_F1",
+              "source_id": "OTTO_PLANER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Reitplatzplaner kombinieren Pflegewerkzeuge, um Reitböden regelmäßig zu lockern und zu egalisieren.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "reitplatzplaner_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "c0ac758c5fbfc507dfaffa089ca161fa94074c7bad78d13df4c9e44a7bf832a3"
+            },
+            {
+              "fact_id": "RPB_F2",
+              "source_id": "OTTO_VARIO",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Planerzinken dienen der Auflockerung des Reitbodens; ihre Arbeitstiefe lässt sich einstellen und bestimmt die Intensität der Lockerung.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "reitplatzplaner_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "c435228dfc6eb5a94154eba845df46950491437a4547655f6d301a95ec0870c3"
+            },
+            {
+              "fact_id": "RPB_F3",
+              "source_id": "OTTO_VARIO",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Ein Planierschild gleicht Unebenheiten wie Hufabdrücke aus und nivelliert die Tretschicht.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "reitplatzplaner_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "25275bdc9b2353292067d78fc4923be9091639cfb827f8fa0fd475333ef726bb"
+            },
+            {
+              "fact_id": "RPB_F4",
+              "source_id": "OTTO_PLANER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Reitplatzplaner unterscheiden sich unter anderem bei Arbeitsbreite und benötigter Anhängung am Zugfahrzeug.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "reitplatzplaner_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "a7da2adb1f27fa18734ccaa3598f41bbdb7d5ee36ea2f371140385a2448fe642"
+            },
+            {
+              "fact_id": "RPB_F5",
+              "source_id": "OTTO_PLANER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die Auswahl eines Reitplatzplaners sollte zur Platzgröße und zum vorhandenen Zugfahrzeug passen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "reitplatzplaner_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "bf4d202f7bfc3f4605746bd1befe729552ddc5c58f6c7e3e9e1f3f89adfcf2f0"
+            }
+          ],
+          "fact_pack_hash": "b4a418a392214b4cb83f750b390999d8c735cf019694074a68e502b6755c946d",
+          "source_manifest_hash": "4749cdc1b70c9607458d484c1f7cff12693e0b96e41bc0ae5ac96e671a00e2f2",
+          "claim_register_hash": "5fcad1f7883d098673c13e7537bc9ca5804dce73e04eeeb0633df73f629c7abf",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "c32b4b5537495f492a2a882542b9e9e327e1f952d46962c8b0af4395239404f1"
+      }
+    },
+    {
+      "item_id": "k9-037886feb135ca682b8423e7",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "WHW_RUG",
+            "title": "World Horse Welfare: Rugging horses – when does your horse need a rug?",
+            "url": "https://eu.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug"
+          },
+          {
+            "source_id": "ERA_RUG",
+            "title": "The Equestrian Research Atlas: Horse Rug Fill Weights Explained",
+            "url": "https://equestrianresearchatlas.co.uk/research/horse-rug-fill-weights-explained/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Ausrüstung",
+            "href": "/ausruestung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Decken",
+            "href": "/ausruestung/ausruestung-decken/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Regendecken",
+            "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Beurteilen, ob eine Regendecke neben Nässeschutz auch genügend Wärme für das individuelle Pferd und die Wetterlage bietet.",
+          "decision_criteria": [
+            "Füllgewicht der Decke",
+            "Schur und Fellzustand",
+            "Alter und Körperzustand",
+            "Wind, Regen und Temperatur",
+            "Unterstand und Bewegungsmöglichkeit"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-02-bcbf76bd4b4b43d8",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "frieren_pferde_unter_regendecken",
+          "fact_ids": [
+            "RD_F1",
+            "RD_F2",
+            "RD_F3",
+            "RD_F4",
+            "RD_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "RD_F1",
+              "source_id": "WHW_RUG",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Pferde können ihre Körpertemperatur unter vielen Bedingungen selbst regulieren; der Deckenbedarf muss trotzdem individuell beurteilt werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "frieren_pferde_unter_regendecken",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "eb2180944f44da7083d5ed4b90981b0d47683491deb2f0ebd22cbd18b44abf0f"
+            },
+            {
+              "fact_id": "RD_F2",
+              "source_id": "WHW_RUG",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bei der Deckenwahl sind individuelle Faktoren des Pferdes und die tatsächlichen Wetter- und Haltungsbedingungen wichtiger als eine pauschale Regel.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "frieren_pferde_unter_regendecken",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "fb4beceec47429f79f52433a8bb5710f9bf9fd12fc0770c3496fa96b974b4302"
+            },
+            {
+              "fact_id": "RD_F3",
+              "source_id": "WHW_RUG",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Zu warmes Eindecken kann zu Überhitzung und Schwitzen führen und ist deshalb ebenfalls zu vermeiden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "frieren_pferde_unter_regendecken",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "0bc653d929b658522b7fed40f05bc0b5a8ff693947194daec7f0e2a0294de890"
+            },
+            {
+              "fact_id": "RD_F4",
+              "source_id": "ERA_RUG",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Eine Regendecke ohne Füllung schützt vor Witterung, bietet aber nur wenig gezielte zusätzliche Isolation.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "frieren_pferde_unter_regendecken",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "d068eaf07a066b2ec84a98bcae010677f410800d931e565ea515bbef17cb58d8"
+            },
+            {
+              "fact_id": "RD_F5",
+              "source_id": "ERA_RUG",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bei anhaltendem kaltem Regen kann eine ungefütterte Regendecke für ein wärmebedürftiges Pferd zu wenig Isolation bieten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "frieren_pferde_unter_regendecken",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "0033887caac410d1714016a3fa5617376b1a83a8ed94ad48209bc1b718e3b34c"
+            }
+          ],
+          "fact_pack_hash": "67202151f31f44c4ffb2ce91bd9719f3c3e18e1cb865919bddda0ccecc4c882c",
+          "source_manifest_hash": "db63c1a2898e2c5703984df95f97941cbf1c7bd01b913ffd48f316f2d8daf705",
+          "claim_register_hash": "34424fb6203585d86adf100e3d01aedc7793faf4875ce75bb6af01278ecc4b2c",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "53b3caa9def31402783125de454abaf4ea7f5fc2e630ffa8ac0f1dbfb4ff09bf"
+      }
+    },
+    {
+      "item_id": "k9-6b233ed9774bd3dd530835c3",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "BAYWA_REIT",
+            "title": "BayWa: Bewässerung für Reitplatz und Reithalle",
+            "url": "https://www.baywa.de/i/beratung/bewaesserung/kommunen/sportplatz/reitplatz"
+          },
+          {
+            "source_id": "BOHLMANN_UNTER",
+            "title": "Bohlmann Reitböden: Bewässerung durch Unterflurbewässerung",
+            "url": "https://www.bohlmann-reitboden.de/de/reitboden/reitplatzberegnung/bewaesserung-reithalle/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Weide",
+            "href": "/weide/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Reitplatz",
+            "href": "/weide/weide-reitplatz/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Reitplatzbewässerung",
+            "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Klären, welche Form der Unterflurbewässerung zum vorhandenen oder geplanten Reitboden passt.",
+          "decision_criteria": [
+            "Ebbe-Flut oder Tropfsystem",
+            "Bodenaufbau und Abdichtung",
+            "Wasser- und Entwässerungsanschlüsse",
+            "Steuerung und Sektionen",
+            "Neubau oder Nachrüstung"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-03-e9a68713dcba7145",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+          "fact_ids": [
+            "RBW_F1",
+            "RBW_F2",
+            "RBW_F3",
+            "RBW_F4",
+            "RBW_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "RBW_F1",
+              "source_id": "BAYWA_REIT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Eine Reitplatzbewässerung von unten ist technisch möglich; Ebbe-Flut-Systeme halten den Boden durch Kapillarwirkung von unten feucht.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "99cb28dc7a902cd709a71ee6299d17e5587ee52c415f615e0248fe3d88e1a027"
+            },
+            {
+              "fact_id": "RBW_F2",
+              "source_id": "BAYWA_REIT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Beim Ebbe-Flut-System liegen über einer wasserdichten Folie ein Drainagerohrsystem sowie Sand- und Tretschichten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "3820fd7a30b98a85cb2bdb7ace5dbd591cee6b2627fe0c9eb6cd03ae16467312"
+            },
+            {
+              "fact_id": "RBW_F3",
+              "source_id": "BAYWA_REIT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Ein Regelschacht mit Pumpen und Sensoren kann den Wasserstand steuern, bei Trockenheit Wasser zuführen und bei Nässe Wasser abpumpen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "1fb5ec9fdc11fb814f6c9c83c129507a3f68d2d57a7018a3e845234d23eb3775"
+            },
+            {
+              "fact_id": "RBW_F4",
+              "source_id": "BOHLMANN_UNTER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Unterbodentropfbewässerung arbeitet mit Tropfschläuchen unter der Tretschicht und nutzt den Kapillareffekt des Reitsands.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "09612a80163a73e7a4cbcd1f0a77b06274e6b4b40b164da6feaaaa8416e3f4d9"
+            },
+            {
+              "fact_id": "RBW_F5",
+              "source_id": "BOHLMANN_UNTER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Unterbodentropfbewässerung kann in Sektionen gesteuert werden und wird für Reithallen als nachträglich einbaubar beschrieben.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "6a73558273dddc59d8051f9aaf99bbb4572030f9481efca1973c55ea1b7d182f"
+            }
+          ],
+          "fact_pack_hash": "9c6441b56ea9d89edaa06a2146872855b8715799fdd7b73b5c1f5c23d912f240",
+          "source_manifest_hash": "ea4402802f437786887ff40f8d69c80f7b7050033c62ebda8e74feef830f68c4",
+          "claim_register_hash": "fb2b8068fd97f6ec409683b7d43a42f0f8e254fd0e50d5ef16cc5ffe19e20189",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "a08ea62f0b2beb11a4a53cf877664522e4b29e52bda1da8890cb6234fd05f7fc"
+      }
+    },
+    {
+      "item_id": "k9-b148e1ddcdab462e0b2b68cb",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "WALD_KAPP",
+            "title": "Waldhausen Kappzaum, Leder",
+            "url": "https://www.waldhausen.com/waldhausen-kappzaum-leder/95601/"
+          },
+          {
+            "source_id": "CAV_KAPP",
+            "title": "CAVALLO: Kappzaum – so hilft er beim Longieren",
+            "url": "https://www.cavallo.de/reittraining/mit-kappzaum-optimal-longieren/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Training",
+            "href": "/training/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Longieren",
+            "href": "/training/training-longieren/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Kappzaum",
+            "href": "/training/training-longieren/kappzaum/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Einschätzen, ob ein gut sitzender Kappzaum als sichere Führzäumung für einen Spaziergang geeignet ist.",
+          "decision_criteria": [
+            "stabiler Sitz",
+            "Abstand zum Jochbein",
+            "mittiger Nasenring",
+            "Polsterung und Verschnallung",
+            "Führbarkeit des Pferdes"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-04-124da4e3858186c8",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "kann_man_mit_kappzaum_spazieren_gehen",
+          "fact_ids": [
+            "KSP_F1",
+            "KSP_F2",
+            "KSP_F3",
+            "KSP_F4",
+            "KSP_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "KSP_F1",
+              "source_id": "WALD_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Kappzäume werden nicht nur zum Longieren, sondern auch zur Ausbildung junger Pferde und für die Arbeit an der Hand eingesetzt.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kann_man_mit_kappzaum_spazieren_gehen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "d0cb89a2718fa6aa70f0cdef8cb58e54e76dd9e78d4d374c1ce7ba3d1784736c"
+            },
+            {
+              "fact_id": "KSP_F2",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Über den mittleren Ring am Nasenriemen lassen sich Signale auf Nase und Genick übertragen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kann_man_mit_kappzaum_spazieren_gehen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "4f5bf9ce391187781a2c44bea6d1219b01164136f03562efefe4a53881ff6aa9"
+            },
+            {
+              "fact_id": "KSP_F3",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der Nasenriemen eines Kappzaums sollte ausreichend Abstand zum Jochbein haben; CAVALLO nennt etwa zwei Finger Abstand.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kann_man_mit_kappzaum_spazieren_gehen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "2afc09ed55dc2266bc4affbc6ab933657b9796112f713a54592751448f9215cd"
+            },
+            {
+              "fact_id": "KSP_F4",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der mittlere Ring sollte auf dem Nasenrücken bleiben und der Kappzaum beim seitlichen Zug nicht verdrehen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kann_man_mit_kappzaum_spazieren_gehen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "1e5b50db922a6108d07da3ee023a7185dd6e953ac547783c559c0a03c8c70118"
+            },
+            {
+              "fact_id": "KSP_F5",
+              "source_id": "WALD_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Ein Kappzaum kann je nach Modell mit oder ohne Gebiss verwendet werden und sollte am Nasenrücken gut gepolstert sein.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kann_man_mit_kappzaum_spazieren_gehen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "b0fec67679358edcbee013f67e04e886134a1c4d1f9277d9d5518db51c7c737f"
+            }
+          ],
+          "fact_pack_hash": "5130e6e339bfe438aa4c2438b222577895c6624f00ebe66204080f7e2d9f696d",
+          "source_manifest_hash": "fe260ee520e1bfe979457529d9d75039f4aaff0ef2d147e5d4be2c75ecb0425f",
+          "claim_register_hash": "9825606cb87510da62119aaa0a78f290693c70dc87366992085b0a5f4233b400",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "92e4684f83158757852505b15ac1e0a35e40ae81bb18b64666362d522f662d3b"
+      }
+    },
+    {
+      "item_id": "k9-a38f92cbb97fe29aece54292",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "EQUIMERO_BOGEN",
+            "title": "Equimero Longiergurt",
+            "url": "https://www.equimero.de/produkt/longiergurt/"
+          },
+          {
+            "source_id": "EQUINEST_BOGEN",
+            "title": "Hansbo Sport Longiergurt mit Bogen",
+            "url": "https://equinest.de/pferdezubehor-pferdebedarf/longieren-bodenarbeit/hansbo-sport-longiergurt-mit-bogen-hs-schwarz/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Training",
+            "href": "/training/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Longieren",
+            "href": "/training/training-longieren/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Longiergurte",
+            "href": "/training/training-longieren/longiergurte/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Einen Longiergurt mit Bogen nach Bewegungsfreiheit, Passform und benötigten Befestigungspunkten auswählen.",
+          "decision_criteria": [
+            "Widerristfreiheit",
+            "Schulterfreiheit",
+            "Stabilität des Bogens",
+            "Ringpositionen",
+            "Polster- und Größenanpassung"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-05-900a6eb3e870d802",
+          "domain": "pferdeportal",
+          "article_type": "Beratung",
+          "title_scope": "longiergurte_mit_bogen",
+          "fact_ids": [
+            "LGB_F1",
+            "LGB_F2",
+            "LGB_F3",
+            "LGB_F4",
+            "LGB_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "LGB_F1",
+              "source_id": "EQUIMERO_BOGEN",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bogenkonstruktionen können so ausgelegt sein, dass Widerrist, Schulter und Trapezmuskel mehr räumliche Freiheit erhalten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "longiergurte_mit_bogen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "060ef7292ebaa1f02e09d7fdcccc4eeec375611699fb0652399673aa105c563c"
+            },
+            {
+              "fact_id": "LGB_F2",
+              "source_id": "EQUIMERO_BOGEN",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Beim beschriebenen Equimero-Modell ist der vordere Bogen flexibler und auf Schulterfreiheit ausgelegt, während der hintere Bogen die Position stabilisiert.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "longiergurte_mit_bogen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "1311896b1079a5a9c70a23c6637df98b841ba1a137dd35db1dc0d73144ebc4cc"
+            },
+            {
+              "fact_id": "LGB_F3",
+              "source_id": "EQUINEST_BOGEN",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Longiergurte mit Bogen können mehrere Ringe auf jeder Seite als unterschiedliche Befestigungspunkte für Trainingszubehör bieten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "longiergurte_mit_bogen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "80b5477f74984171407d58d49bed1ab73461f6d9eb4a3f0af906e84e122894ae"
+            },
+            {
+              "fact_id": "LGB_F4",
+              "source_id": "EQUINEST_BOGEN",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Anatomische Form und anpassbare Verschlüsse sollen einen stabilen Sitz ermöglichen, ohne die Bewegung unnötig einzuschränken.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "longiergurte_mit_bogen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "69d135c40992a22cbe481a22f0b844d804dde8bc8e3c391b67fe6e8227c5ab7a"
+            },
+            {
+              "fact_id": "LGB_F5",
+              "source_id": "EQUIMERO_BOGEN",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bei der Auswahl eines Bogengurts sind Widerristfreiheit, Schulterfreiheit und die Positionierbarkeit der Polster wichtige Passformmerkmale.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "longiergurte_mit_bogen",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "f65187e817fcf5b20b5202e86742028097e4ed9183ae38724bc1c5238a0ddb1a"
+            }
+          ],
+          "fact_pack_hash": "5cc326cc721e3ba2b5d32e92654e6e84c97b15a0599e67f4e473c6bbd21aa9e7",
+          "source_manifest_hash": "e36b0c8a5205eb72570b4f8282ac34a64dd01f84808f70d43f32f106d4677bb6",
+          "claim_register_hash": "472f5df83d053f2d5daf6fabd2ac71cfbf406f6284a1d9247fe010088d4e046b",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "69cb999735deb20f11a1f34037980240c20691927afbf84e916e999e645254ac"
+      }
+    },
+    {
+      "item_id": "k9-f35eba3ca3cc3dbecc1bd9c6",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "KERBL_COOL",
+            "title": "Albert Kerbl: Covalliero Kühlgamaschen",
+            "url": "https://www.kerbl.com/de/produkt/kuehlgamaschen-683070"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Gesundheit",
+            "href": "/gesundheit/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Regeneration",
+            "href": "/gesundheit/gesundheit-regeneration/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Kühlgamaschen",
+            "href": "/gesundheit/gesundheit-regeneration/gesundheit-regeneration-kuehlgamaschen/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Kühlgamaschen nach Kühlart, Passform, Anwendungsdauer und sicherer Handhabung auswählen.",
+          "decision_criteria": [
+            "Kühlelement und Temperatur",
+            "Passform und Verschlüsse",
+            "Anwendungsdauer",
+            "Wiederverwendbarkeit und Reinigung",
+            "Sicherheits- und Herstellerhinweise"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-06-a141bd35dde75da4",
+          "domain": "pferdeportal",
+          "article_type": "Beratung",
+          "title_scope": "kuehlgamaschen_fuer_pferde",
+          "fact_ids": [
+            "KG_F1",
+            "KG_F2",
+            "KG_F3",
+            "KG_F4",
+            "KG_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "KG_F1",
+              "source_id": "KERBL_COOL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Kühlgamaschen mit Geleinlagen werden zur gleichmäßigen Kühlung von Muskeln, Sehnen und Gelenken am Pferdebein angeboten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kuehlgamaschen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "b84868574ad7ba6280158595eaa76dc46e6f7331b834ad2dedc76d9facab1a11"
+            },
+            {
+              "fact_id": "KG_F2",
+              "source_id": "KERBL_COOL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Für das beschriebene Modell wird eine Anwendungszeit von etwa 20 bis 30 Minuten nach dem Training genannt.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kuehlgamaschen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "6ca3faf06eb85ef4485716fb757f5cf9bc7e484de4b4ac5d236ead0b87dbcd5e"
+            },
+            {
+              "fact_id": "KG_F3",
+              "source_id": "KERBL_COOL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Mehrere Klettverschlüsse dienen dazu, die Gamasche an das Pferdebein anzupassen; sie sollte nicht zu fest geschlossen werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kuehlgamaschen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "f2481727569f018c4a717208473eadd7d2cee8adcca228411e8638d765ffcd96"
+            },
+            {
+              "fact_id": "KG_F4",
+              "source_id": "KERBL_COOL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Nach längerer Lagerung im Gefrierfach empfiehlt der Hersteller bei diesem Modell eine Stoffschicht zwischen Gamasche und Pferdebein.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kuehlgamaschen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "29552199f18fca7606517bd219e6ac5bc7c91a3b76893a5cadbb1574e0f65e61"
+            },
+            {
+              "fact_id": "KG_F5",
+              "source_id": "KERBL_COOL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Kühlgamaschen sollen unter Aufsicht verwendet und nicht auf offenen Wunden eingesetzt werden; sie ersetzen keine tierärztliche Behandlung.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kuehlgamaschen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "647d10d7095291de21eb7b9c14d60f89f73e918d662b7832439ce4d8a5889c53"
+            }
+          ],
+          "fact_pack_hash": "1f80dea4d2cdb1e29e4eb1808c6a665fe1bd7a50819d0916ef975d4882c8cf57",
+          "source_manifest_hash": "d37925656e0f93a1ee5501bdbce16bc8149906fbd703877d9578fb2b71f80dda",
+          "claim_register_hash": "e42bf25a9f88577d3ac02705b362b6f27db40d53b69e549d260b6b1137a48f94",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "6057ddd7029f771a133d4110d0b56b96ddabb387d870d31e66db7cf9ca2c75eb"
+      }
+    },
+    {
+      "item_id": "k9-3c3435598b994d2448cd4b8b",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "TEST_REITBET",
+            "title": "Stiftung Warentest: Reitbeteiligungen richtig versichern",
+            "url": "https://www.test.de/Pferdehalter-Haftpflichtversicherung-Reitbeteiligungen-richtig-versichern-5749104-0/"
+          },
+          {
+            "source_id": "FN_FREMD",
+            "title": "Pferd und Mensch: Sicher unterwegs mit der Reitbeteiligung",
+            "url": "https://magazin.pferdesport-deutschland.de/project/leser-fragen-fn-experten-antworten-05-2022/"
+          },
+          {
+            "source_id": "ALLIANZ_FREMD",
+            "title": "Allianz: Reitbeteiligung – wer haftet bei Unfällen?",
+            "url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Wissen",
+            "href": "/wissen/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Versicherungen & Recht",
+            "href": "/wissen/wissen-versicherungen-und-recht/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Pferdehaftpflicht",
+            "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Eine Pferdehaftpflicht so auswählen, dass Fremdreiter und gegebenenfalls Reitbeteiligungen zum tatsächlichen Nutzungsmodell passen.",
+          "decision_criteria": [
+            "Fremdreiterrisiko ausdrücklich versichert",
+            "Reitbeteiligung mitversichert",
+            "Ansprüche der Reitbeteiligung",
+            "Regressansprüche von Sozialversicherern",
+            "weitere relevante Reit- und Mietsachrisiken"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-07-a81dac8246b35235",
+          "domain": "pferdeportal",
+          "article_type": "Beratung",
+          "title_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+          "fact_ids": [
+            "PH_F1",
+            "PH_F2",
+            "PH_F3",
+            "PH_F4",
+            "PH_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "PH_F1",
+              "source_id": "FN_FREMD",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Pferdehalter sollten prüfen, ob ihre Tierhalterhaftpflicht das Fremdreiterrisiko ausdrücklich einschließt.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "fc2a86abff3aec966498470db7849e2fd82cd0f6807f6c717b1639e09587b859"
+            },
+            {
+              "fact_id": "PH_F2",
+              "source_id": "FN_FREMD",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bei regelmäßiger Nutzung gegen Kostenbeteiligung kann eine Reitbeteiligung rechtlich anders einzuordnen sein als ein gelegentlicher Fremdreiter.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "37954975f812da5709bb9e0613f630f91788a8c7a8b39949489b71d2c6a5668a"
+            },
+            {
+              "fact_id": "PH_F3",
+              "source_id": "TEST_REITBET",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die Mitversicherung einer Reitbeteiligung bedeutet nicht automatisch, dass auch eigene Personenschäden der Reitbeteiligung vollständig gedeckt sind.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "05e4eb973d48cc5e5d282ceddcbc439448f00d531506e900ea2aa8ecf3e60fac"
+            },
+            {
+              "fact_id": "PH_F4",
+              "source_id": "TEST_REITBET",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Pferdehalter mit Reitbeteiligung sollten prüfen, ob Ansprüche der Reitbeteiligung und mögliche Regressansprüche von Sozialversicherungsträgern mitversichert sind.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "571386aa26ea2115de8ff66fa39d4147dc21adf7022167e3c0b396fbb191cdd4"
+            },
+            {
+              "fact_id": "PH_F5",
+              "source_id": "ALLIANZ_FREMD",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Versicherungsbedingungen können Fremdreiter, Gastreiter und Reitbeteiligte unterschiedlich beschreiben; maßgeblich ist der konkrete Tarif.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "81222effc2773d9f574dafc4283cde538d461d59116814ff0277f38a4c700ba2"
+            }
+          ],
+          "fact_pack_hash": "e6858fea0d792db9083a5e0164dfd6de01e57ee9e66e14bfc2646fa6c68d0c9a",
+          "source_manifest_hash": "9022dc6c358c0cfb7bfe20f82d6d08e0e84fe8acb469cb0c3c57ef243c90475e",
+          "claim_register_hash": "d9cce70c42f691f5e8636fc16d164c003b24d1544c050a3ea1f36206c24f6429",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "087f2be419ddc5319cfead135f0d526e3f3a6337c90e46825b756cfb04e41996"
+      }
+    },
+    {
+      "item_id": "k9-34a53bf77374419ef08b0669",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "CAV_KAPP",
+            "title": "CAVALLO: Kappzaum – so hilft er beim Longieren",
+            "url": "https://www.cavallo.de/reittraining/mit-kappzaum-optimal-longieren/"
+          },
+          {
+            "source_id": "WALD_KAPP",
+            "title": "Waldhausen Kappzaum, Leder",
+            "url": "https://www.waldhausen.com/waldhausen-kappzaum-leder/95601/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Training",
+            "href": "/training/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Longieren",
+            "href": "/training/training-longieren/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Kappzaum",
+            "href": "/training/training-longieren/kappzaum/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Einen Kappzaum auswählen, der zur Kopfform des Pferdes, zur gewünschten Arbeit und zur erforderlichen Einwirkung passt.",
+          "decision_criteria": [
+            "Nasenriemen und Jochbeinabstand",
+            "Stabilität und Naseneisen",
+            "Polsterung",
+            "Verstellbarkeit",
+            "Ringpositionen und Einsatzzweck"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-08-223908717f6923a3",
+          "domain": "pferdeportal",
+          "article_type": "Beratung",
+          "title_scope": "kappzaum_fuer_pferde",
+          "fact_ids": [
+            "KAB_F1",
+            "KAB_F2",
+            "KAB_F3",
+            "KAB_F4",
+            "KAB_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "KAB_F1",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Ein Kappzaum wirkt über den Nasenriemen und den mittleren Ring auf Nase und Genick und muss deshalb stabil und passend sitzen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kappzaum_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "ab4e67b956aae7163419f9fbf7cb0e96b30e3924bd16a4244a1072c636cb80f0"
+            },
+            {
+              "fact_id": "KAB_F2",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Zwischen Jochbein und Nasenriemen sollten nach der beschriebenen Passformregel etwa zwei Finger Abstand bleiben.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kappzaum_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "17430a190b3611335164e576c86ffc8b7d28e44aeb0ed12000eb197c7ba0b319"
+            },
+            {
+              "fact_id": "KAB_F3",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der mittlere Ring sollte auf dem Nasenrücken bleiben; ein seitlich verrutschender Kappzaum kann die Einwirkung unpräzise und unangenehm machen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kappzaum_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "27ea2bb489f7f874dd978b2dfc3a466224740af7b2d1e42a3bd79b1335dea7fc"
+            },
+            {
+              "fact_id": "KAB_F4",
+              "source_id": "CAV_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Breite, weich gepolsterte Nasenteile wirken anders als schmale, harte Konstruktionen; die Bauart beeinflusst die Druckverteilung.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kappzaum_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "5016d64c6f26e51d4fb9a9a69ae5360c153c6ebdd09e8892894df6ceaadfca40"
+            },
+            {
+              "fact_id": "KAB_F5",
+              "source_id": "WALD_KAPP",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Verstellbare Riemen, Polsterung am Nasenrücken und geeignete Einschnallringe sind zentrale Ausstattungsmerkmale eines Kappzaums.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "kappzaum_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "f8b31079560a051bb4c6ab8296922fb34e7cbd7beb6cfc7ac27c38eba9440689"
+            }
+          ],
+          "fact_pack_hash": "b99ab9cb5d6f8db20277b8fa85c7f290aaa88c65bce6898a2c2028212c01cafb",
+          "source_manifest_hash": "30a5e7ca01c5b0e5b33e8b4225f4ec8bfeaa8ddf5bd40c63c912c46aa96e980a",
+          "claim_register_hash": "c59de3b4256d081d8e91f0d969eefe24a9a51fb38e8071a0324439a7d084084a",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "aff612b3e697c98c6eef2c8dbd5886af952300c2641c14ddf07fa0ab6121307e"
+      }
+    },
+    {
+      "item_id": "k9-1ff3dfabfed47a0c47c8df13",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "WAHL_CORD",
+            "title": "Wahl UK: Corded vs Cordless Horse Clippers",
+            "url": "https://www.wahl.co.uk/content-hub/product-guides/corded-vs-cordless-horse-clippers/"
+          },
+          {
+            "source_id": "WAHL_SUPERA",
+            "title": "Wahl UK: KM Supera Equine Clipper",
+            "url": "https://www.wahl.co.uk/product/km-supera-equine/"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Ausrüstung",
+            "href": "/ausruestung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Pflegezubehör",
+            "href": "/ausruestung/ausruestung-pflegezubehoer/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Schermaschinen",
+            "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Eine Pferdeschermaschine nach Fell, Umfang der Schur, Bewegungsfreiheit und Energieversorgung auswählen.",
+          "decision_criteria": [
+            "Akku oder Kabel",
+            "Laufzeit und Ladezeit",
+            "Motor und Geschwindigkeitsstufen",
+            "Lautstärke und Vibration",
+            "Scherkopf und Einsatzbereich"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-09-1500ef836045545f",
+          "domain": "pferdeportal",
+          "article_type": "Beratung",
+          "title_scope": "schermaschinen_fuer_pferde",
+          "fact_ids": [
+            "SM_F1",
+            "SM_F2",
+            "SM_F3",
+            "SM_F4",
+            "SM_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "SM_F1",
+              "source_id": "WAHL_CORD",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bei der Wahl zwischen Kabel- und Akkuschermaschine sind Schurhäufigkeit, Mobilität und verfügbarer Netzstrom wichtige Kriterien.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "schermaschinen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "9a95182ab0133bc0a9ce55b162c943cd2814c934665a23484b41388b8d2e9767"
+            },
+            {
+              "fact_id": "SM_F2",
+              "source_id": "WAHL_CORD",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Akkumaschinen bieten mehr Bewegungsfreiheit am Pferd und vermeiden ein Kabel am Boden, das bei sensiblen Pferden stören kann.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "schermaschinen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "439ac4f491e40519cb0d2fdfffbc1f295aebb011ce839efb0ddbc842e51dc8fa"
+            },
+            {
+              "fact_id": "SM_F3",
+              "source_id": "WAHL_CORD",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die Akkulaufzeit begrenzt längere Schureinsätze; für mehrere Pferde kann ein Ersatzakku sinnvoll sein.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "schermaschinen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "ded5a8447b22108c6e56f485e6314471846b4de8fdf5815942b8f86b5e520550"
+            },
+            {
+              "fact_id": "SM_F4",
+              "source_id": "WAHL_SUPERA",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Für dichtes Fell können unterschiedliche Geschwindigkeitsstufen und ein für Pferde ausgelegtes breites Schermesser die Arbeit erleichtern.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "schermaschinen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "43b54ba1cf24bde601e361dbe09f6641fceb1eb6ae3a7bc979afd3597631d072"
+            },
+            {
+              "fact_id": "SM_F5",
+              "source_id": "WAHL_SUPERA",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Technische Auswahlmerkmale sind unter anderem Laufzeit, Ladezeit, Drehzahl, Gewicht und Schermesserbreite.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "schermaschinen_fuer_pferde",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "Beratung"
+              ],
+              "evidence_text_sha256": "fb0089b244c524d28e03e6f825c5c8aa57511d9a73feb3b5f365a4613724f203"
+            }
+          ],
+          "fact_pack_hash": "a1bcde0dabed3386eb6f3637972c13f90724f86a87c4fefb682caa8ebcf0831b",
+          "source_manifest_hash": "28388841cb4e123b32fa7cfb40bd1ba37a59aceeb5c7219e5312ccc0d32bb45c",
+          "claim_register_hash": "125c65171afeb3a91e8607ba5d29b367a2921ad0e15985e9b9a9a31e64a7a988",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "be7aab6958adce890e39a4540e850f9f9beab44c415aa3309b2a295ee58771f6"
+      }
+    },
+    {
+      "item_id": "k9-676a012f09815f814e233775",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "DUDEN_SCHAB",
+            "title": "Duden: Schabracke",
+            "url": "https://www.duden.de/rechtschreibung/Schabracke"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Ausrüstung",
+            "href": "/ausruestung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Sattel",
+            "href": "/ausruestung/ausruestung-sattel/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Schabracken",
+            "href": "/ausruestung/ausruestung-sattel/schabracken/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Die Redewendung sprachlich einordnen und ihre Verbindung zur ursprünglichen Bedeutung von Schabracke erklären.",
+          "decision_criteria": [
+            "ursprüngliche Bedeutung",
+            "übertragene Bedeutung",
+            "abwertender Sprachgebrauch",
+            "mögliche Wortherkunft",
+            "heutige Wirkung der Formulierung"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-10-23bb44a71a34ce7e",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "warum_sagt_man_du_alte_schabracke",
+          "fact_ids": [
+            "AS_F1",
+            "AS_F2",
+            "AS_F3",
+            "AS_F4",
+            "AS_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "AS_F1",
+              "source_id": "DUDEN_SCHAB",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Schabracke bezeichnet ursprünglich unter anderem eine verzierte Decke, die unter den Sattel gelegt oder über ein Pferd gebreitet wird.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "warum_sagt_man_du_alte_schabracke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "72ee41f9b775bb0aa4dc57a295030605450f693bf3a3a77ffb9ccea3bc0bdbda"
+            },
+            {
+              "fact_id": "AS_F2",
+              "source_id": "DUDEN_SCHAB",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Duden führt Schabracke in übertragener, salopp abwertender Bedeutung auch für ein altes Pferd an.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "warum_sagt_man_du_alte_schabracke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "17d96fa9b19b064ec33bb0852705704b815d7f27ed745d889b5a3c0f810b79e7"
+            },
+            {
+              "fact_id": "AS_F3",
+              "source_id": "DUDEN_SCHAB",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Duden nennt Schabracke salopp abwertend außerdem für eine alte oder als hässlich bezeichnete Frau sowie für eine alte, abgenutzte Sache.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "warum_sagt_man_du_alte_schabracke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "af3b16c88323ecdc27d042e1b1f13623f142d3227021e5c93414add7e981d6fa"
+            },
+            {
+              "fact_id": "AS_F4",
+              "source_id": "DUDEN_SCHAB",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die Herkunft des Wortes Schabracke ist nicht abschließend geklärt; Duden nennt als mögliche Herkunft ältere ungarische beziehungsweise türkische Bezeichnungen für eine Satteldecke.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "warum_sagt_man_du_alte_schabracke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "35211379bb7d71fe2a7a8243bb913c31e911f17f88839bf6f0877995f7d31c8a"
+            },
+            {
+              "fact_id": "AS_F5",
+              "source_id": "DUDEN_SCHAB",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die Anrede alte Schabracke greift damit eine übertragene, abwertende Bedeutung des Wortes auf und ist keine neutrale Bezeichnung.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "warum_sagt_man_du_alte_schabracke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "0dea343ab1e1e1595a87ba798c070ad17cc38e58b2116c77fd5694df61cd327d"
+            }
+          ],
+          "fact_pack_hash": "144b2223976ecc4e62f64adc65c07e54377d2a47a7263c2ccce778cbd46f2d2b",
+          "source_manifest_hash": "727a78cdcf05dd3151c4e3f514ecbf41ddde64d967b9dcadc12d10efa4fc7550",
+          "claim_register_hash": "460ae140d27031e32eb3cd38b2f5fb0a53d52e8881c3cca60d3da657adab6f21",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "8bc0ad8999dbfac8d62fa25281bcae9a2255e72c681159499b12a11f2f0f5651"
+      }
+    },
+    {
+      "item_id": "k9-784b73ee2bf3e2114d3af948",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "KRAEMER_SATTEL",
+            "title": "Krämer: Welche Sattelunterlagen gibt es?",
+            "url": "https://www.kraemer.de/ratgeber/schabracken-arten"
+          },
+          {
+            "source_id": "LOESDAU_SCHAB",
+            "title": "Loesdau: Schabracken für jeden Reitstil",
+            "url": "https://www.loesdau.de/eskadron-classic-sports-schabracke-bicolor-57061.html"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Ausrüstung",
+            "href": "/ausruestung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Sattel",
+            "href": "/ausruestung/ausruestung-sattel/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Schabracken",
+            "href": "/ausruestung/ausruestung-sattel/schabracken/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Schabracke und Satteldecke anhand ihrer Form, gemeinsamen Funktion und Passform zum jeweiligen Sattel unterscheiden.",
+          "decision_criteria": [
+            "Schnittform",
+            "sichtbare Stofffläche",
+            "Passform zum Satteltyp",
+            "Widerristfreiheit",
+            "Material und Pflege"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-11-b9eac0d61a2f119b",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "was_ist_der_unterschied_zwischen_schabracke_und_satteldecke",
+          "fact_ids": [
+            "SS_F1",
+            "SS_F2",
+            "SS_F3",
+            "SS_F4",
+            "SS_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "SS_F1",
+              "source_id": "KRAEMER_SATTEL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Schabracken und Satteldecken dienen beide als Sattelunterlagen und schützen den Sattel unter anderem vor Schweiß und Schmutz.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_der_unterschied_zwischen_schabracke_und_satteldecke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "a4f086f73ff757665d6047f9c1b262890cce479d9b518f721f750f510a107971"
+            },
+            {
+              "fact_id": "SS_F2",
+              "source_id": "KRAEMER_SATTEL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der grundlegende Unterschied zwischen Schabracke und Satteldecke liegt in der Schnittform.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_der_unterschied_zwischen_schabracke_und_satteldecke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "b506f094179f5064d8b85b622a88cd5cd6113569884b3a4725dead08c9b942a4"
+            },
+            {
+              "fact_id": "SS_F3",
+              "source_id": "KRAEMER_SATTEL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Satteldecken sind stärker an die Form des Sattels angepasst, während Schabracken eckiger geschnitten sind und mehr Stoff sichtbar bleibt.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_der_unterschied_zwischen_schabracke_und_satteldecke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "4f6aa2747b59d2dac58d5291dab3e05fc15c10307961c0a82b3d700d78c1cdac"
+            },
+            {
+              "fact_id": "SS_F4",
+              "source_id": "LOESDAU_SCHAB",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Sattelunterlagen müssen zur jeweiligen Sattelform passen, damit Sattelblatt oder Nähte nicht ungünstig auf Randbereiche drücken.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_der_unterschied_zwischen_schabracke_und_satteldecke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "14dd8a9e0e2b36afadd9a456e1bb7f2eea297eecf463b1921967bae21bc9edb0"
+            },
+            {
+              "fact_id": "SS_F5",
+              "source_id": "KRAEMER_SATTEL",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Eine anatomische Passform soll den Widerrist freihalten und Faltenbildung unter dem Sattel vermeiden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_der_unterschied_zwischen_schabracke_und_satteldecke",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "f2961b8a65745060ea85baad186c61e9bc617d1d8989a7684c0162e8ffe62cbd"
+            }
+          ],
+          "fact_pack_hash": "16557f345622825aa2aba728bf5dd7d760105c7a926161a2f6340c7d1c4730c2",
+          "source_manifest_hash": "ec338221221d9c9c3319567034dc72ed45de5b184545221fadee9f92f745be56",
+          "claim_register_hash": "7d32180968681d5afcc2a8dd6f894f0221135767ccc27c0f0659a82ad65f0131",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "75d13813381d84ff8bcc0a1b09f77e4014158416c62ccb1569efe747f919b435"
+      }
+    },
+    {
+      "item_id": "k9-16024ee8a6c9b5e964f452e6",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "OTTO_PLANER",
+            "title": "OTTO-Reitplatzplaner für die professionelle Reitbodenpflege",
+            "url": "https://www.ottosport.com/produkte/otto-reitplatzplaner"
+          },
+          {
+            "source_id": "OTTO_DELUXE",
+            "title": "OTTO-DELUXE Reitplatzplaner",
+            "url": "https://www.ottosport.com/produkte/otto-reitplatzplaner/otto-deluxe"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Weide",
+            "href": "/weide/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Reitplatzpflege",
+            "href": "/weide/weide-reitplatzpflege/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Reitplatzplaner",
+            "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Kurz erklären, was ein Reitplatzplaner ist, welche Pflegeaufgaben er übernimmt und wodurch sich Geräte unterscheiden.",
+          "decision_criteria": [
+            "Auflockerung",
+            "Planierung",
+            "Werkzeuge",
+            "Zugfahrzeug",
+            "Platzgröße"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-12-09c98c7313c57c19",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "was_ist_ein_reitplatzplaner",
+          "fact_ids": [
+            "RPF_F1",
+            "RPF_F2",
+            "RPF_F3",
+            "RPF_F4",
+            "RPF_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "RPF_F1",
+              "source_id": "OTTO_PLANER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Ein Reitplatzplaner ist ein Pflegegerät für Reitböden, das je nach Ausführung Werkzeuge zum Lockern und Planieren der Tretschicht kombiniert.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_ein_reitplatzplaner",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "dce528bcfd14b203066c09d1f1907c5960d759bcde086dc483821a95b4cc664c"
+            },
+            {
+              "fact_id": "RPF_F2",
+              "source_id": "OTTO_DELUXE",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Planerzinken lockern den Reitboden; ihre Arbeitstiefe kann bei geeigneten Modellen eingestellt werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_ein_reitplatzplaner",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "b9a45ce2b9e54c9ba9b0d8cd59a45c0c7c7e186f187271646d076a55df118037"
+            },
+            {
+              "fact_id": "RPF_F3",
+              "source_id": "OTTO_DELUXE",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Ein Planierschild dient dazu, Unebenheiten und Hufabdrücke im Reitboden zu nivellieren.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_ein_reitplatzplaner",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "5f167d7d3343f87b4b1ed0c0de7f1c6b742e6ecdaadc1e502109ebdba24ca856"
+            },
+            {
+              "fact_id": "RPF_F4",
+              "source_id": "OTTO_PLANER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Reitplatzplaner werden in unterschiedlichen Größen und Anhängungsarten für verschiedene Platzgrößen und Zugfahrzeuge angeboten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_ein_reitplatzplaner",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "dfd79b958e71f48c2a24cd1475ecf700220a525a55957c3f736bc6787fcc9763"
+            },
+            {
+              "fact_id": "RPF_F5",
+              "source_id": "OTTO_PLANER",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Regelmäßige Reitbodenpflege soll die Nutzungsbedingungen des Reitplatzes für Pferd und Reiter erhalten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "was_ist_ein_reitplatzplaner",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "a8964041d4ec919c9777554ad0cb75738580528388d63be492a94293359d8cff"
+            }
+          ],
+          "fact_pack_hash": "62a4daaf332af172ab1e3402cbb3f71a05e95134121cb694f6e44afdf084a922",
+          "source_manifest_hash": "b01bf4d000e337f9f60459595361ad491af3540967a055644d929d54a0685c24",
+          "claim_register_hash": "8dfc527b9c0b8987da9310a7b71e944f0f67dbcba4224e5f9435c9142e289594",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "54e530b39c4eebbf5c2488bec209a62066da3c77ada0f4516b62a651a6102ece"
+      }
+    },
+    {
+      "item_id": "k9-4dc2b290f41c1793da77ca9a",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "BEMER_SET",
+            "title": "BEMER Shop: Horse Set",
+            "url": "https://shop.bemergroup.com/en_IE/horseset_line/412300"
+          },
+          {
+            "source_id": "ACTIVO_PRO",
+            "title": "ActivoMed: Produktübersicht IMPULSELINE",
+            "url": "https://www.activomed.de/produkte"
+          },
+          {
+            "source_id": "ACTIVO_P2",
+            "title": "ActivoMed: IMPULSELINE Professional 2.0",
+            "url": "https://www.activomed.de/produkte/impulseline-magnetfelddecke/professional2.0"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Gesundheit",
+            "href": "/gesundheit/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Regeneration",
+            "href": "/gesundheit/gesundheit-regeneration/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Magnetfelddecken",
+            "href": "/gesundheit/gesundheit-regeneration/magnetfelddecken/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "BEMER und ActivoMed anhand belegbarer Ausstattung und Systemmerkmale vergleichen, ohne aus Herstellerangaben eine pauschale medizinische Überlegenheit abzuleiten.",
+          "decision_criteria": [
+            "Abdeckung und Applikatoren",
+            "Programme und Steuerung",
+            "zusätzliche Gamaschen",
+            "Massagefunktion",
+            "Passform, Handhabung und Einsatzwunsch"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-13-25ea2788c6100ccc",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "welche_magnetfelddecke_ist_besser_geeignet_bemer_oder_activomed",
+          "fact_ids": [
+            "MAG_F1",
+            "MAG_F2",
+            "MAG_F3",
+            "MAG_F4",
+            "MAG_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "MAG_F1",
+              "source_id": "BEMER_SET",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Das BEMER Horse Set umfasst eine Pferdedecke, zwei Gamaschen, Ladezubehör, Transporttasche und weiteres Zubehör.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "welche_magnetfelddecke_ist_besser_geeignet_bemer_oder_activomed",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "5753097bb55c26eda8d9e93867ec5056b4a5f0a77e1a3496aaae8b263ad65ecc"
+            },
+            {
+              "fact_id": "MAG_F2",
+              "source_id": "BEMER_SET",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Für die BEMER-Pferdedecke wird eine mittlere Flussdichte von etwa 35 Mikotesla auf maximaler Stufe und für die Gamaschen etwa 100 Mikotesla angegeben.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "welche_magnetfelddecke_ist_besser_geeignet_bemer_oder_activomed",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "3d9411aa9c0955e0fe679115f32848a2af13c04219e75f502ffbfeb236927de1"
+            },
+            {
+              "fact_id": "MAG_F3",
+              "source_id": "BEMER_SET",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Das BEMER Horse Set bietet drei Anwendungsprogramme.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "welche_magnetfelddecke_ist_besser_geeignet_bemer_oder_activomed",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "62e9c6a6f54f7859af856f37074b42de6144002c143c13f414edf7912eb7e619"
+            },
+            {
+              "fact_id": "MAG_F4",
+              "source_id": "ACTIVO_PRO",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die ActivoMed IMPULSELINE Professional Pferdedecke arbeitet mit vierzehn Magnetfeldspulen beziehungsweise Applikatoren entlang von Hals, Rücken und weiteren Körperbereichen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "welche_magnetfelddecke_ist_besser_geeignet_bemer_oder_activomed",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "01bd337fc43e3d79acb55edcf3d21d9d2a2cf59b616f5dd155fe78e41699f54c"
+            },
+            {
+              "fact_id": "MAG_F5",
+              "source_id": "ACTIVO_PRO",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "ActivoMed bietet innerhalb der IMPULSELINE unterschiedliche Deckenvarianten; bei mehreren Varianten ist zusätzlich eine Massagefunktion vorgesehen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "welche_magnetfelddecke_ist_besser_geeignet_bemer_oder_activomed",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "219b05ca2b9b2398288d01d2b1a1d1fe75e20a237866c443e44de38c5e7d3f12"
+            }
+          ],
+          "fact_pack_hash": "43a567c7a07f294634300edccd7cb83b1aadca75da59db9ea54f671ae0220f9c",
+          "source_manifest_hash": "e4eadc660f5567ad8a0abea87c0f0603809bc40b0afd562585a10e4a2994eee5",
+          "claim_register_hash": "a93897784dba6c80ea4e03e0639d184f783b595dc607be0edcf41e317912d63c",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "d34bcddcc78ca61dd9dc6cf9ab9199a084a3836ecfbbb89a04dfa8537efe9619"
+      }
+    },
+    {
+      "item_id": "k9-21f5591329fafb286a69f685",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "RIDERS_GURT",
+            "title": "RidersDeal: Longiergurt – Sitz, Größe und richtig anlegen",
+            "url": "https://www.ridersdeal.com/ratgeber/longiergurt"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Training",
+            "href": "/training/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Longieren",
+            "href": "/training/training-longieren/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Longiergurte",
+            "href": "/training/training-longieren/longiergurte/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Den Longiergurt Schritt für Schritt mittig, faltenfrei und gleichmäßig verschnallt anlegen.",
+          "decision_criteria": [
+            "Unterlage ausrichten",
+            "Gurt mittig positionieren",
+            "beidseitig locker schließen",
+            "nach einigen Schritten nachgurten",
+            "Symmetrie vor Trainingshilfen prüfen"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-14-4de3152595b310c5",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "wie_lege_ich_einen_longiergurt_an",
+          "fact_ids": [
+            "LG_F1",
+            "LG_F2",
+            "LG_F3",
+            "LG_F4",
+            "LG_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "LG_F1",
+              "source_id": "RIDERS_GURT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Eine Longiergurt-Unterlage sollte mittig und faltenfrei auf dem Pferderücken liegen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_lege_ich_einen_longiergurt_an",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "bb9037ae61a66095b5eb5f8440cc640d1929d4abc46b68a2216baaf15576c8a8"
+            },
+            {
+              "fact_id": "LG_F2",
+              "source_id": "RIDERS_GURT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der Longiergurt wird mittig auf die Unterlage gelegt, sodass die oberen Ringe symmetrisch über der Wirbelsäule liegen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_lege_ich_einen_longiergurt_an",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "7b3aa1806b28fc30d7069d4bac2d8d6ccf2bd437533b2ca08151d0d72d16e6f1"
+            },
+            {
+              "fact_id": "LG_F3",
+              "source_id": "RIDERS_GURT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der Gurt wird zunächst auf beiden Seiten locker geschlossen und erst nach einigen Schritten gleichmäßig nachgezogen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_lege_ich_einen_longiergurt_an",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "7fe05c9a63558f60a6b73386e3289cb5891ab3b37e766b5cd8d2fe82cf24eed5"
+            },
+            {
+              "fact_id": "LG_F4",
+              "source_id": "RIDERS_GURT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Beim endgültigen Angurten sollte die Spannung auf beiden Seiten symmetrisch sein und die Passform nochmals geprüft werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_lege_ich_einen_longiergurt_an",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "dd375a95f7548db0eedc91e862263bb444517483c84cf0d6031645c879c67fb8"
+            },
+            {
+              "fact_id": "LG_F5",
+              "source_id": "RIDERS_GURT",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Hilfszügel oder ähnliche Trainingshilfen sollten erst nach dem Aufwärmen des Pferdes eingehängt werden.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_lege_ich_einen_longiergurt_an",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "ea057d1ecfbf60ee610c538749c1c96ed52cb47c6ec50cdf41f740837caa57ec"
+            }
+          ],
+          "fact_pack_hash": "87bdc796b7f2392dc91b0b5aa2fd4ece52a3b0f1fc02b5698ce85174c9902670",
+          "source_manifest_hash": "48c1113cbb5b324c217c9a08a84c68fba264cc2d3ec150eee6e81f661231de76",
+          "claim_register_hash": "c71d9ee2c237ea58250e5aeff51129438a9798bfe7cce1ce7abe1d1c39ed0838",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "4af229d68c17140793df960a2843e8781136bbbbefb69b3274a240adaf5edde1"
+      }
+    },
+    {
+      "item_id": "k9-d0fe00ff92cd9bbae7e8c1a3",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "STVZO_VIII",
+            "title": "Anlage VIII StVZO – Untersuchung der Fahrzeuge",
+            "url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Transport",
+            "href": "/transport/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Anhängerpflege",
+            "href": "/transport/transport-anhaengerpflege/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "TÜV beim Pferdeanhänger",
+            "href": "/transport/transport-anhaengerpflege/tuev-beim-pferdeanhaenger/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Den HU-Prüfturnus eines Pferdeanhängers anhand von zulässiger Gesamtmasse und Bremsanlage korrekt bestimmen.",
+          "decision_criteria": [
+            "zulässige Gesamtmasse",
+            "gebremst oder ungebremst",
+            "erste oder weitere HU",
+            "gesetzliche Frist",
+            "Termin in den Fahrzeugpapieren"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-15-596934acb35ef4ef",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "wie_oft_muss_ein_pferdeanhaenger_zum_tuev",
+          "fact_ids": [
+            "HU_F1",
+            "HU_F2",
+            "HU_F3",
+            "HU_F4",
+            "HU_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "HU_F1",
+              "source_id": "STVZO_VIII",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Anhänger mit einer zulässigen Gesamtmasse über 0,75 Tonnen bis einschließlich 3,5 Tonnen müssen grundsätzlich alle 24 Monate zur Hauptuntersuchung.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_oft_muss_ein_pferdeanhaenger_zum_tuev",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "acb8ebd942c54f393177d8d9344396c17389e71ec0773316edfff63ee6dc714f"
+            },
+            {
+              "fact_id": "HU_F2",
+              "source_id": "STVZO_VIII",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Bei Anhängern bis 0,75 Tonnen oder Anhängern ohne eigene Bremsanlage beträgt die Frist bis zur ersten Hauptuntersuchung bei erstmals in Verkehr gekommenen Fahrzeugen 36 Monate.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_oft_muss_ein_pferdeanhaenger_zum_tuev",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "f1efe49a7709d7d63a59a07fa90baeb31b87151fcf09b70488f2b6a2070b19b8"
+            },
+            {
+              "fact_id": "HU_F3",
+              "source_id": "STVZO_VIII",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Für weitere Hauptuntersuchungen von Anhängern bis 0,75 Tonnen oder ohne eigene Bremsanlage gilt eine Frist von 24 Monaten.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_oft_muss_ein_pferdeanhaenger_zum_tuev",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "d7ce4637977390cdbb5fd3f6daa844f6c782dc15bde39e66a70a777704177b67"
+            },
+            {
+              "fact_id": "HU_F4",
+              "source_id": "STVZO_VIII",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Anhänger mit einer zulässigen Gesamtmasse über 3,5 Tonnen bis einschließlich 10 Tonnen müssen grundsätzlich alle 12 Monate zur Hauptuntersuchung.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_oft_muss_ein_pferdeanhaenger_zum_tuev",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "538756bc1fbc245cf7d80a35a9de43a02cd749e8ae5dbabc9d948e07697a75b4"
+            },
+            {
+              "fact_id": "HU_F5",
+              "source_id": "STVZO_VIII",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Der Prüfturnus richtet sich nach der Fahrzeugklasse und zulässigen Gesamtmasse; die Bezeichnung Pferdeanhänger allein bestimmt die Frist nicht.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_oft_muss_ein_pferdeanhaenger_zum_tuev",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "bce2f75e062be2c70ba6ff012decd2ee05931ee1de801aea04641b6bc18ba0ee"
+            }
+          ],
+          "fact_pack_hash": "0520584a2c0ff076b6db5cd31c1416703322dae975b8e9360f3913e960cf568d",
+          "source_manifest_hash": "d970023e281fb0d289cc453517aed9c02fb586c81bd7175b5251383b4c1b8b66",
+          "claim_register_hash": "123040c574ea1146fac7bb90a776ada96324f19b44c1572c0105e767b5a079f9",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "7a00f0a5e1c255e622757c6177f1a9e90d8812d8f1ce531921b759ef0f0358e8"
+      }
+    },
+    {
+      "item_id": "k9-853343bea0615b0c5a1be5dd",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "sources": [
+          {
+            "source_id": "TUEV_HESSEN_2026",
+            "title": "TÜV Hessen: Preise und Gebühren der Hauptuntersuchung 2026",
+            "url": "https://www.tuev-hessen.de/297/preise-und-gebuehren-der-hauptuntersuchung/"
+          },
+          {
+            "source_id": "TUEV_SUED_2026",
+            "title": "TÜV SÜD: Gebühren der Hauptuntersuchung 2026",
+            "url": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+          }
+        ],
+        "portal_links": [
+          {
+            "anchor": "Transport",
+            "href": "/transport/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Anhängerpflege",
+            "href": "/transport/transport-anhaengerpflege/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "TÜV beim Pferdeanhänger",
+            "href": "/transport/transport-anhaengerpflege/tuev-beim-pferdeanhaenger/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "decision_support": {
+          "decision_goal": "Die zu erwartenden HU-Kosten anhand von Gewicht, Bremsanlage, Region und Prüfstelle realistisch einordnen.",
+          "decision_criteria": [
+            "zulässige Gesamtmasse",
+            "gebremst oder ungebremst",
+            "Region und Prüfstelle",
+            "aktuelle Gebührenordnung",
+            "möglicher Aufschlag bei Überziehung"
+          ]
+        },
+        "fact_pack": {
+          "fact_pack_id": "k9-research-16-dca527180930eb71",
+          "domain": "pferdeportal",
+          "article_type": "FAQ",
+          "title_scope": "wie_teuer_ist_der_tuev_beim_pferdeanhaenger",
+          "fact_ids": [
+            "HUK_F1",
+            "HUK_F2",
+            "HUK_F3",
+            "HUK_F4",
+            "HUK_F5"
+          ],
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "claims": [
+            {
+              "fact_id": "HUK_F1",
+              "source_id": "TUEV_HESSEN_2026",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Die Kosten der Hauptuntersuchung für einen Anhänger hängen unter anderem von zulässiger Gesamtmasse, Bremsanlage, Prüforganisation und Standort ab.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_teuer_ist_der_tuev_beim_pferdeanhaenger",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "b3d0a49d7c81de7a12c380eea47687c4ac1e475b23463d1b57ee7a19c7e85423"
+            },
+            {
+              "fact_id": "HUK_F2",
+              "source_id": "TUEV_HESSEN_2026",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "TÜV Hessen nennt für 2026 an Technischen Prüfstellen für Anhänger bis 3,5 Tonnen eine HU-Gebühr von 61,00 Euro und für ungebremste Anhänger 32,90 Euro.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_teuer_ist_der_tuev_beim_pferdeanhaenger",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "f19c0918182f7b14fea680fd07f2b83f72b183ee56f632d4b3f870d71f7fc2cc"
+            },
+            {
+              "fact_id": "HUK_F3",
+              "source_id": "TUEV_HESSEN_2026",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "TÜV Hessen weist für andere Standorte 2026 als Entgelt für Anhänger bis 3,5 Tonnen 68,00 Euro und für ungebremste Anhänger 45,00 Euro aus.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_teuer_ist_der_tuev_beim_pferdeanhaenger",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "e68d1587ab6ac524f490b285f7fdd6bf1e986f9333b17a05643526a3c65cd459"
+            },
+            {
+              "fact_id": "HUK_F4",
+              "source_id": "TUEV_SUED_2026",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "TÜV SÜD nennt für Brandenburg 2026 68,00 Euro für die HU eines gebremsten Anhängers bis 3,5 Tonnen und 45,90 Euro für einen ungebremsten Anhänger.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_teuer_ist_der_tuev_beim_pferdeanhaenger",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "2a3521551ef01fa88a0e51df7f007a81f17626aad68727eb618bf60211f6365d"
+            },
+            {
+              "fact_id": "HUK_F5",
+              "source_id": "TUEV_SUED_2026",
+              "locator": "PUBLIC_SOURCE_RETRIEVED_2026-09-30",
+              "statement": "Wird die Hauptuntersuchung mehr als zwei Monate nach dem Vorführtermin durchgeführt, kann sich die reine HU-Gebühr um 20 Prozent erhöhen.",
+              "claim_status": "FULLY_SUPPORTED",
+              "subject_scope": "wie_teuer_ist_der_tuev_beim_pferdeanhaenger",
+              "time_scope": "RETRIEVED_2026-09-30",
+              "article_types": [
+                "FAQ"
+              ],
+              "evidence_text_sha256": "58629ab578a0ca32bab8eda251fad761a289d9fd1b155d8346afd8ba13d58d20"
+            }
+          ],
+          "fact_pack_hash": "2511445bbdb6cd32b590f1e5a41a14e4d057634044cf070af7d5698e31ba26ab",
+          "source_manifest_hash": "74679a2423afd449ce41a86c800862214cb3b36910f00ea01fbfa354b9dffee7",
+          "claim_register_hash": "cc2c7d5997ec80ed81f8eac793819506fe42eb487837898f91b73e02441cc960",
+          "required_block_coverage": "PASS",
+          "table_evidence_coverage": "PASS",
+          "conclusion_evidence_coverage": "PASS",
+          "article_type_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "placeholder_content_status": "PASS"
+        },
+        "product_sha256": "40ee1c349bf86a9ae6beda17a31dd5ce6f445ccf8c1fc09130353606a5ebdf7b"
+      }
+    }
+  ],
+  "station": "research"
+}
