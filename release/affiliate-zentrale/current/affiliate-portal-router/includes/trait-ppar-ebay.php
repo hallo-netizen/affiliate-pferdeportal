@@ -17,6 +17,8 @@ if (!defined('ABSPATH')) {
  */
 trait PPAR_Ebay_Trait {
     private $ebay_topic_similarity_signature_cache = array();
+    private $ebay_product_cohort_request_cache = array();
+    private $ebay_product_cohort_build_count = 0;
 
     private function ebay_topic_similarity_signature($value) {
         $value = (string) $value;
@@ -2777,6 +2779,30 @@ trait PPAR_Ebay_Trait {
         $candidates = array_values((array) $candidates);
         if (!$candidates) { return array(); }
 
+        // V6.72.171: category_product_1..3 often reach this expensive seller/title
+        // diversity stage with the exact same ordered candidate set. Cache only
+        // exact request-local input identity; any slot-specific placement/veto
+        // difference creates a different key and therefore keeps old behavior.
+        $cohort_cache_key = '';
+        if ($this->ebay_request_local_read_cache_allowed()) {
+            $fingerprint = array();
+            foreach ($candidates as $candidate) {
+                $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+                $fingerprint[] = array(
+                    'post_id' => is_array($campaign) ? absint($campaign['post_id'] ?? $campaign['_post_id'] ?? 0) : 0,
+                    'id' => is_array($campaign) ? (string)($campaign['id'] ?? '') : '',
+                    'specificity' => is_array($candidate) ? (int)($candidate['specificity'] ?? 0) : 0,
+                    'matches' => is_array($candidate) ? (int)($candidate['matches'] ?? 0) : 0,
+                    'priority' => is_array($candidate) ? (int)($candidate['priority'] ?? 0) : 0,
+                );
+            }
+            $cohort_cache_key = hash('sha256', serialize($fingerprint));
+            if (array_key_exists($cohort_cache_key, $this->ebay_product_cohort_request_cache)) {
+                return $this->ebay_product_cohort_request_cache[$cohort_cache_key];
+            }
+            $this->ebay_product_cohort_build_count++;
+        }
+
         // V6.72.169: the page/slot ranking has already narrowed the product pool.
         // Prime BUSINESS source evidence only for those surviving candidates,
         // never by normalizing the complete campaign inventory.
@@ -2853,7 +2879,11 @@ trait PPAR_Ebay_Trait {
         if (in_array($mode, array('separate','combined','automatic'), true) && method_exists($this, 'multiprovider_reorder_candidates')) {
             $out = $this->multiprovider_reorder_candidates($out, $mode);
         }
-        return array_values($out);
+        $out = array_values($out);
+        if ($cohort_cache_key !== '') {
+            $this->ebay_product_cohort_request_cache[$cohort_cache_key] = $out;
+        }
+        return $out;
     }
 
     public function ebay_accept_item($item, $seller_type, $settings = null) {
