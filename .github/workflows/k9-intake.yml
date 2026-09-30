@@ -23,7 +23,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          count=$(find inbox inbox-auto -maxdepth 1 -type f -name '*.json' 2>/dev/null | wc -l)
+          mkdir -p inbox inbox-auto
+          count=$(find inbox inbox-auto -maxdepth 1 -type f -name '*.json' | wc -l)
           if [ "$count" -eq 0 ]; then
             echo 'No pending intake; likely cleanup commit.'
             exit 0
