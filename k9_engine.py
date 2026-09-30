@@ -113,7 +113,9 @@ def write_chat_entry(job):
         ],
         "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB",
         "worker_type": job["worker_contract"]["worker_type"],
-        "output_contract": job["worker_contract"]["output_contract"]
+        "output_contract": job["worker_contract"]["output_contract"],
+        "required_output_fields": job["worker_contract"].get("required_output_fields", []),
+        "output_field_sources": job["worker_contract"].get("output_field_sources", {})
     }
     write_json(CHAT_ENTRY, entry)
     return entry

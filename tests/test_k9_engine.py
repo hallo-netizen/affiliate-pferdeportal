@@ -188,6 +188,8 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(entry["job_path"],"runtime/CURRENT_JOB.json")
         self.assertEqual(entry["submission_path"],"submissions/"+job["job_id"]+".json")
         self.assertEqual(entry["output_contract"],"K9_RESEARCH_PRODUCT_V1")
+        self.assertEqual(entry["required_output_fields"],["sources","portal_links","decision_support","fact_pack","product_sha256"])
+        self.assertEqual(entry["output_field_sources"]["portal_links"],"COPY_EXACTLY_FROM_JOB_INPUT_PRODUCTS_PORTAL_CONTEXT_PORTAL_LINKS")
         self.assertEqual(entry["execution_policy"],"WORKER_EXECUTES_ONLY_NEVER_SUPERVISES")
         self.assertEqual(entry["input_authority_rule"],"BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_THIS_STATION")
         self.assertEqual(entry["blocked_rule"],"IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY")

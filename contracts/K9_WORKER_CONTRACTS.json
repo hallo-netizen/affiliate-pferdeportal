@@ -35,7 +35,21 @@
         "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
         "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
         "INVENT_OR_CHANGE_PORTAL_LINKS"
-      ]
+      ],
+      "required_output_fields": [
+        "sources",
+        "portal_links",
+        "decision_support",
+        "fact_pack",
+        "product_sha256"
+      ],
+      "output_field_sources": {
+        "sources": "PUBLIC_RESEARCH_SOURCES",
+        "portal_links": "COPY_EXACTLY_FROM_JOB_INPUT_PRODUCTS_PORTAL_CONTEXT_PORTAL_LINKS",
+        "decision_support": "DERIVE_FROM_VERIFIED_RESEARCH_FOR_THE_BOUND_ARTICLE_TYPE_AND_TOPIC",
+        "fact_pack": "VERIFIED_RESEARCH_FACTS_ONLY",
+        "product_sha256": "HASH_COMPLETE_RESEARCH_PRODUCT_WITHOUT_PRODUCT_SHA256_FIELD"
+      }
     },
     "write": {
       "worker_type": "CHAT_WRITE_WORKER",
