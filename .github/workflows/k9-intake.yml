@@ -16,8 +16,6 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
-      - name: Hard tests
-        run: python3 -m unittest discover -s tests -p 'test_*.py'
       - name: Import exact five-field WordPress package
         id: intake
         shell: bash

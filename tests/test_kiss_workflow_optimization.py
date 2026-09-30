@@ -37,6 +37,12 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         for forbidden in ("'runtime/**'","'state/**'","'warehouse/**'","'writer_drafts/**'","'submissions/**'","'final/**'"):
             self.assertNotIn(forbidden,wf)
 
+    def test_intake_does_not_duplicate_receiver_start_suite(self):
+        intake=self.text(".github/workflows/k9-intake.yml")
+        self.assertNotIn("unittest discover",intake)
+        receiver=self.text(".github/workflows/text-start-pferdeatelier.yml")
+        self.assertIn("Hard tests once at explicit production entry",receiver)
+
     def test_runtime_hops_do_not_repeat_full_software_suite(self):
         receiver=self.text(".github/workflows/text-start-pferdeatelier.yml")
         accept=self.text(".github/workflows/k9-accept-submission.yml")

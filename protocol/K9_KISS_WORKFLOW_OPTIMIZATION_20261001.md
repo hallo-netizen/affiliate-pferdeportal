@@ -41,3 +41,6 @@ K9 now extracts the exact authoring authority directly from the unchanged, hash-
 - exact PPM package SHA-256.
 
 The bound rule object is hash-sealed into the job input and the packager fails closed if it is missing or changed. No PPM rule, threshold, content rule or quality gate is altered. This is earlier rule visibility, not a replacement checker and not a second PPM execution.
+
+## Intake duplicate removed
+The intake workflow previously ran the full software unittest suite and then immediately dispatched the station receiver, which ran the same suite again at explicit production entry. Intake now performs intake only; the existing receiver keeps the single explicit start regression check. No production or quality gate is removed.
