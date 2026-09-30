@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "f15cf32a6b3a3353695abf808aab921cb255b6d620397cf204608844dfd2fe9c",
+    "manifest_sha256": "10cf9f7ef1c1326875c78a0999d4adef364e143de8841da377f6ae4fa2a361eb",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "e6b3b8f9307dda69f11804447d424922951c08b9b316c374d81f551b6e47fb4b",
+    "current_source_manifest_sha256": "10cf9f7ef1c1326875c78a0999d4adef364e143de8841da377f6ae4fa2a361eb",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
@@ -301,7 +301,7 @@
   },
   "execution_state": {
     "state": "WORKING",
-    "authorized_next_action": "IMPLEMENT_EBAY_KISS_STORAGE_CLEANUP",
+    "authorized_next_action": "RUN_TARGETED_EBAY_KISS_TESTS",
     "bound_user_scope_action": "EBAY ONLY: KISS/RECOVERY CLEANUP + STORAGE PREVENTION + CONNECTION STATUS REPAIR. PRESERVE 6.72.166 PERFORMANCE AND ALL CURRENT EBAY FUNCTION/QUALITY/COMPLIANCE GATES.",
     "completion_condition": "TARGETED POSITIVE/NEGATIVE PASS THEN FULL RELEASE GATE THEN ONE REAL SERVER READBACK",
     "after_completion_action": "RUN SAME DATABASE/PERFORMANCE MEASUREMENT AND COMPARE",
@@ -312,7 +312,7 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": null
+    "evidence_ref": "release/affiliate-zentrale/evidence/ebay_kiss_storage_cleanup_v672167_source_checks_20260930.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
