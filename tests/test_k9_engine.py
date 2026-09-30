@@ -20,6 +20,22 @@ class K9Tests(unittest.TestCase):
         k.CHAT_ENTRY = root / "runtime/CHAT_ENTRY.json"
         k.STATUS_FILE = root / "state/STATUS.json"
         k.WAREHOUSE = root / "warehouse"
+        k.PORTAL_BINDINGS = root / "contracts/K9_PORTAL_BINDINGS.json"
+        k.write_json(k.PORTAL_BINDINGS, {
+            "contract":"K9_PORTAL_BINDINGS_V1",
+            "bindings":{
+                "kat-a":{"portal_links":[
+                    {"anchor":"Root A","href":"/a/","role":"parent_category","section_id":"criteria"},
+                    {"anchor":"Mid A","href":"/a/mid/","role":"semantic_related","section_id":"decision"},
+                    {"anchor":"Leaf A","href":"/a/mid/leaf/","role":"further_information","section_id":"further_information"}
+                ]},
+                "kat-b":{"portal_links":[
+                    {"anchor":"Root B","href":"/b/","role":"parent_category","section_id":"criteria"},
+                    {"anchor":"Mid B","href":"/b/mid/","role":"semantic_related","section_id":"decision"},
+                    {"anchor":"Leaf B","href":"/b/mid/leaf/","role":"further_information","section_id":"further_information"}
+                ]}
+            }
+        })
         k.write_json(k.LEDGER, {"contract":"K9_LEDGER_V1","generation":1,"items":[]})
         intake = root / "intake.json"
         k.write_json(intake, {
@@ -79,6 +95,7 @@ class K9Tests(unittest.TestCase):
             "production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY",
             "placeholder_content_status":"PASS"
         }
+        links = k.portal_binding({"category":f"kat-{iid}"})["portal_links"]
         product={
             "contract":"K9_RESEARCH_PRODUCT_V1",
             "sources":[{
@@ -86,6 +103,11 @@ class K9Tests(unittest.TestCase):
                 "url":f"https://example.org/{iid}",
                 "title":f"Quelle {iid}"
             }],
+            "portal_links":links,
+            "decision_support":{
+                "decision_goal":f"Passende Option für {iid} auswählen.",
+                "decision_criteria":[f"Kriterium {iid} 1",f"Kriterium {iid} 2"]
+            },
             "fact_pack":pack
         }
         product["product_sha256"]=k.stable(product)
@@ -223,6 +245,40 @@ class K9Tests(unittest.TestCase):
         row["research_product"]["product_sha256"]=k.stable(core)
         with self.assertRaisesRegex(k.K9Error,"RESEARCH_CLAIM_SOURCE_UNKNOWN"):
             k.accept(self.submission(job,[row],"bad-research.json"))
+
+    def test_research_job_contains_bound_portal_context(self):
+        job=k.prepare("research",1)["job"]
+        links=job["items"][0]["input_products"]["portal_context"]["portal_links"]
+        self.assertEqual([x["role"] for x in links],["parent_category","semantic_related","further_information"])
+
+    def test_research_missing_portal_links_is_blocked_without_state_change(self):
+        job=k.prepare("research",1)["job"]
+        row=self.research_row("a")
+        row["research_product"].pop("portal_links")
+        core=dict(row["research_product"]); core.pop("product_sha256")
+        row["research_product"]["product_sha256"]=k.stable(core)
+        before=k.load_json(k.LEDGER)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_PORTAL_LINKS_INVALID"):
+            k.accept(self.submission(job,[row],"missing-portal-links.json"))
+        self.assertEqual(before,k.load_json(k.LEDGER))
+
+    def test_research_wrong_portal_links_is_blocked(self):
+        job=k.prepare("research",1)["job"]
+        row=self.research_row("a")
+        row["research_product"]["portal_links"][2]["href"]="/invented/"
+        core=dict(row["research_product"]); core.pop("product_sha256")
+        row["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_PORTAL_BINDING_MISMATCH"):
+            k.accept(self.submission(job,[row],"wrong-portal-links.json"))
+
+    def test_research_missing_decision_support_is_blocked(self):
+        job=k.prepare("research",1)["job"]
+        row=self.research_row("a")
+        row["research_product"].pop("decision_support")
+        core=dict(row["research_product"]); core.pop("product_sha256")
+        row["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_DECISION_SUPPORT_INVALID"):
+            k.accept(self.submission(job,[row],"missing-decision-support.json"))
 
     def test_write_job_contains_complete_hash_bound_research_product(self):
         self.finish_research(2)

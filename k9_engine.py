@@ -7,6 +7,7 @@ LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
 CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
 WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
+PORTAL_BINDINGS = ROOT / "contracts" / "K9_PORTAL_BINDINGS.json"
 STATUS_FILE = ROOT / "state" / "STATUS.json"
 WAREHOUSE = ROOT / "warehouse"
 STATIONS = ("research", "write", "check", "repair")
@@ -37,6 +38,29 @@ def worker_contract(station):
     if not isinstance(value, dict):
         raise K9Error("WORKER_CONTRACT_MISSING:" + station)
     return value
+
+def portal_binding(metadata):
+    data = load_json(PORTAL_BINDINGS)
+    if data.get("contract") != "K9_PORTAL_BINDINGS_V1":
+        raise K9Error("PORTAL_BINDING_FILE_INVALID")
+    category = str(metadata.get("category") or "").strip()
+    value = data.get("bindings", {}).get(category)
+    if not isinstance(value, dict):
+        raise K9Error("PORTAL_BINDING_MISSING:" + category)
+    links = value.get("portal_links")
+    if not isinstance(links, list) or len(links) != 3:
+        raise K9Error("PORTAL_BINDING_LINK_COUNT_INVALID")
+    roles = []
+    for link in links:
+        if not isinstance(link, dict):
+            raise K9Error("PORTAL_BINDING_LINK_INVALID")
+        for key in ("anchor", "href", "role", "section_id"):
+            if not str(link.get(key) or "").strip():
+                raise K9Error("PORTAL_BINDING_LINK_FIELD_MISSING:" + key)
+        roles.append(link["role"])
+    if set(roles) != {"parent_category", "semantic_related", "further_information"} or len(roles) != len(set(roles)):
+        raise K9Error("PORTAL_BINDING_ROLES_INVALID")
+    return {"portal_links": links}
 
 def ledger():
     data = load_json(LEDGER)
@@ -206,7 +230,7 @@ def _product_result(item, stage):
 
 def _inputs_for(item, station):
     if station == "research":
-        return {}, {}
+        return {"portal_context": portal_binding(item["metadata"])}, {}
     research, research_ref = _product_result(item, "research")
     if station == "write":
         return {"research": research}, {"research": research_ref}
@@ -283,8 +307,32 @@ def _validate_research_product(row, job_item):
         raise K9Error("RESEARCH_PRODUCT_CONTRACT_INVALID")
     sources = product.get("sources")
     pack = product.get("fact_pack")
+    portal_links = product.get("portal_links")
+    decision_support = product.get("decision_support")
     if not isinstance(sources, list) or not sources or not isinstance(pack, dict):
         raise K9Error("RESEARCH_PRODUCT_INCOMPLETE")
+
+    bound_context = job_item.get("input_products", {}).get("portal_context")
+    if not isinstance(bound_context, dict):
+        raise K9Error("RESEARCH_PORTAL_CONTEXT_MISSING")
+    bound_links = bound_context.get("portal_links")
+    if not isinstance(portal_links, list) or len(portal_links) != 3:
+        raise K9Error("RESEARCH_PORTAL_LINKS_INVALID")
+    if portal_links != bound_links:
+        raise K9Error("RESEARCH_PORTAL_BINDING_MISMATCH")
+    roles = [x.get("role") for x in portal_links if isinstance(x, dict)]
+    if set(roles) != {"parent_category", "semantic_related", "further_information"} or len(roles) != 3:
+        raise K9Error("RESEARCH_PORTAL_LINK_ROLES_INVALID")
+    for link in portal_links:
+        if not isinstance(link, dict) or not all(str(link.get(k) or "").strip() for k in ("anchor","href","role","section_id")):
+            raise K9Error("RESEARCH_PORTAL_LINK_FIELD_MISSING")
+
+    if not isinstance(decision_support, dict):
+        raise K9Error("RESEARCH_DECISION_SUPPORT_INVALID")
+    goal = str(decision_support.get("decision_goal") or "").strip()
+    criteria = decision_support.get("decision_criteria")
+    if not goal or not isinstance(criteria, list) or len(criteria) < 2 or not all(str(x or "").strip() for x in criteria):
+        raise K9Error("RESEARCH_DECISION_SUPPORT_INVALID")
 
     source_ids = []
     for source in sources:

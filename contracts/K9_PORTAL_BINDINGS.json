@@ -1,0 +1,28 @@
+{
+  "contract": "K9_PORTAL_BINDINGS_V1",
+  "role": "DETERMINISTIC_NON_RESEARCH_NAVIGATION_CONTEXT",
+  "bindings": {
+    "schermaschinen-beratung": {
+      "portal_links": [
+        {
+          "anchor": "Ausrüstung",
+          "href": "/ausruestung/",
+          "role": "parent_category",
+          "section_id": "criteria"
+        },
+        {
+          "anchor": "Pflegezubehör",
+          "href": "/ausruestung/ausruestung-pflegezubehoer/",
+          "role": "semantic_related",
+          "section_id": "decision"
+        },
+        {
+          "anchor": "Schermaschinen",
+          "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+          "role": "further_information",
+          "section_id": "further_information"
+        }
+      ]
+    }
+  }
+}
