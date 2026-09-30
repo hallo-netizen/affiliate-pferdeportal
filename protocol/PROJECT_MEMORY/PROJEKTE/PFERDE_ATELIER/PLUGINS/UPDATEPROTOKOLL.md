@@ -114,3 +114,25 @@ ERGEBNIS: PASS
 FACHBÜRO_REF: TEXT; dort nur Rückverweis auf `PLUGIN_UPDATE_REF: PU-20260930-002`.  
 NOTIZ: Installation ist abgeschlossen. PSTE-Altbestände wurden noch nicht bereinigt; nächste Aktion ist ausschließlich die eingebaute begrenzte Speicherpflege, keine manuelle DB-Löschung.
 
+## PU-20260930-003 – Affiliate-Zentrale (Portal-kompatibel)
+
+DATUM: 2026-09-30  
+PLUGIN_ID: PA-E-003  
+ART: UPDATE  
+HERKUNFT: EIGEN  
+FACHBÜRO: AFFILIATE  
+VON_VERSION: 6.72.165  
+AUF_VERSION: 6.72.167  
+UPDATEQUELLE: `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.167.zip`; Installer-SHA-256 `998730894c4dbd677bbee04bff947df740800a6c6ab9524b747a0da5a5f8adc0`  
+WARUM: eBay-Lauf-/Recovery-/Statuskomplexität stark reduzieren und erneutes unnötiges eBay-Datenwachstum begrenzen, ohne Provider-, PRIVATE/BUSINESS-, Coverage-, Qualitäts-, Affiliate-, Compliance-, Veto-, Frontend- oder Performancefunktion abzusenken.  
+ABHÄNGIGKEITEN: bestehende 6.72.166-Performancepfade; eBay OAuth/Compliance; PRIVATE/BUSINESS-Ausgabe; Checkpoint/Coverage/Public-Gates; zentraler Housekeeping-Pfad.  
+FEHLERQUELLEN_GEPRÜFT: `AFFILIATE_HOBBYRAUM/FEHLERMATRIX.md`; aktuelle Release-Governance `control/release-governance/CURRENT_RELEASE.json`; 6.72.167 Full-Gate-Evidence.  
+BACKUP_ROLLBACK_REF: vorheriger realer Live-Stand 6.72.165; finaler 6.72.167-Installer ist hashgebunden; 6.72.166 blieb technische Performancebasis.  
+POSITIVTEST: eBay OAuth-Test unabhängig von Kanalpause; alter terminaler Lauf wird begrenzt historisiert; beendete nicht öffentliche eBay-Rohpayloads werden nach 7 Tagen verdichtet.  
+NEGATIVTEST: normale Runtime bleibt bei Kanalpause fail-closed; aktive, junge, listing-gebundene und öffentliche eBay-Daten bleiben unangetastet; aktuelle Checkpoint-/Coverage-/Public-Gates bleiben erhalten.  
+FACH_REGRESSION: Full Gate Run `36732596301`; WordPress 7.1.2 + MariaDB PASS; PHP-Lint 21/21 PASS; 6.72.166-Frontend-/Query-Performancepfade erhalten; Source→ZIP 27/27 byteidentisch; Fresh-Unpack PASS.  
+WORDPRESS_LIVEKONTROLLE: Nutzer bestätigt Installation/Aktivstatus von 6.72.167. Danach `Speichern & OAuth prüfen` ausgeführt; eBay OAuth laut Nutzer erfolgreich.  
+ERGEBNIS: PASS  
+FACHBÜRO_REF: technische Release-Evidence `release/affiliate-zentrale/evidence/affiliate_router_v672167_full_release_gate_20260930.md`; aktuelle technische Releaseautorität bleibt `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.  
+NOTIZ: 6.72.168 ist bereits technisch RELEASED, aber zum Abschlusszeitpunkt noch nicht live installiert; dafür bewusst kein erfundener PU-Eintrag.
+
