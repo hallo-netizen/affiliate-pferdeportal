@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 5,
+  "generation": 6,
   "items": [
     {
       "item_id": "k9-1ff3dfabfed47a0c47c8df13",
@@ -16,6 +16,11 @@
           "job_id": "K9-RESEARCH-beba25304f7d5eeb",
           "path": "warehouse/research/K9-RESEARCH-beba25304f7d5eeb.json",
           "sha256": "58d1b558d3b1eb9598113b5dc422009befca4a9b5390a7a474fb5e6c34a22357"
+        },
+        "write": {
+          "job_id": "K9-WRITE-7e47e4f167a2d032",
+          "path": "warehouse/write/K9-WRITE-7e47e4f167a2d032.json",
+          "sha256": "e95cb1405b12138a2663d0b70657ac87801c0148da95289f4be0467aea40b650"
         }
       },
       "revision": 0,
@@ -23,7 +28,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "So wählst du passende Schermaschinen für Pferde"
     }
