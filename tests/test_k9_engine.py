@@ -166,6 +166,13 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(entry["job_path"],"runtime/CURRENT_JOB.json")
         self.assertEqual(entry["submission_path"],"submissions/"+job["job_id"]+".json")
         self.assertEqual(entry["output_contract"],"K9_RESEARCH_PRODUCT_V1")
+        self.assertEqual(entry["execution_policy"],"WORKER_EXECUTES_ONLY_NEVER_SUPERVISES")
+        self.assertEqual(entry["input_authority_rule"],"BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_THIS_STATION")
+        self.assertEqual(entry["blocked_rule"],"IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY")
+        self.assertIn("CHANGE_WORKFLOW_OR_ARCHITECTURE",entry["forbidden"])
+        self.assertIn("REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",entry["forbidden"])
+        self.assertNotIn("K4",str(entry))
+        self.assertNotIn("K8",str(entry))
 
     def test_accept_removes_chat_entry(self):
         job=k.prepare("research",1)["job"]

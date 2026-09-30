@@ -71,11 +71,21 @@ def write_chat_entry(job):
         "station": job["station"],
         "item_count": job["item_count"],
         "allowed_action": "EXECUTE_EXACT_STATION_ONLY",
+        "execution_policy": "WORKER_EXECUTES_ONLY_NEVER_SUPERVISES",
+        "input_authority_rule": "BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_THIS_STATION",
+        "blocked_rule": "IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY",
         "forbidden": [
             "SEARCH_OTHER_CONCEPTS",
             "ROUTE_TO_NEXT_STATION",
             "RECONSTRUCT_JOB",
-            "USE_LEGACY_RUNTIME"
+            "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+            "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+            "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+            "CHANGE_QUALITY_GATES",
+            "RESET_OR_REPLACE_TEST_STATE",
+            "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+            "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+            "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
         ],
         "completion_rule": "RETURN_ONE_COMPLETE_K9_SUBMISSION_FOR_THIS_EXACT_JOB",
         "worker_type": job["worker_contract"]["worker_type"],
