@@ -88,6 +88,19 @@ def canonical_fact_pack(research):
         "title_scope":str(fp.get("title_scope") or ""),
     }
 
+def _trace_match(markup,fid):
+    for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',markup,re.I):
+        a=re.search(r'\bdata-fact-id=["\']([^"\']+)["\']',m.group(0),re.I)
+        if a and a.group(1)==fid:
+            return m
+    return None
+
+def _fact_target_match(markup,fid):
+    for m in re.finditer(r'<[a-z][a-z0-9]*\b[^>]*\bdata-fact-ids=["\']([^"\']+)["\'][^>]*>',markup,re.I):
+        if fid in m.group(1).split():
+            return m
+    return None
+
 def bind_canonical_article_traces(ppm_item, fact_pack):
     article=ppm_item.get("canonical_article")
     if not isinstance(article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
@@ -100,28 +113,24 @@ def bind_canonical_article_traces(ppm_item, fact_pack):
         source_hash=str(claim.get("evidence_text_sha256") or "")
         if not fid or not source_id or not source_hash:
             raise Blocked("CANONICAL_TRACE_BINDING_MISSING:"+fid)
-        existing=re.search(
-            r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*data-fact-id=["\']'+re.escape(fid)+r'["\'][^>]*>',
-            markup,re.I
-        )
-        if existing:
-            continue
-        target=re.search(
-            r'<(p|li)\b[^>]*data-fact-ids=["\'][^"\']*\b'+re.escape(fid)+r'\b[^"\']*["\'][^>]*>',
-            markup,re.I
-        )
-        if not target:
-            raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
         trace=(
             f'<span class="ppm-source-trace" data-fact-id="{fid}" '
             f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
         )
+        existing=_trace_match(markup,fid)
+        if existing:
+            markup=markup[:existing.start()]+trace+markup[existing.end():]
+            continue
+        target=_fact_target_match(markup,fid)
+        if not target:
+            raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
         markup=markup[:target.end()]+trace+markup[target.end():]
     article["body_html"]=markup
     article["body_html_sha256"]=hashlib.sha256(markup.encode("utf-8")).hexdigest()
     article["source_ids"]=[str(x.get("source_id") or "") for x in fact_pack.get("sources",[]) if isinstance(x,dict)]
     ppm_item["canonical_article"]=article
     return ppm_item
+
 
 def latest_products(ledger, root):
     items=ledger.get("items")
@@ -158,21 +167,15 @@ def bind_export_traces(html,fact_pack):
         if not fid or not sid or not source_hash: raise Blocked("PSERC_TRACE_BINDING_INVALID:"+fid)
         trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
                f'data-source-hash="{source_hash}" data-source-title="{sid}"></span>')
-        existing=re.compile(
-            r'<span\\b(?=[^>]*class=["\\\'][^"\\\']*\\bppm-source-trace\\b[^"\\\']*["\\\'])'
-            r'(?=[^>]*data-fact-id=["\\\']'+re.escape(fid)+r'["\\\'])[^>]*></span>',
-            re.I
-        )
-        if existing.search(out):
-            out=existing.sub(trace,out,count=1)
+        existing=_trace_match(out,fid)
+        if existing:
+            out=out[:existing.start()]+trace+out[existing.end():]
             continue
-        target=re.search(
-            r'<(?:p|li|td)\\b[^>]*data-fact-ids=["\\\'][^"\\\']*\\b'+re.escape(fid)+r'\\b[^"\\\']*["\\\'][^>]*>',
-            out,re.I
-        )
+        target=_fact_target_match(out,fid)
         if not target: raise Blocked("PSERC_TRACE_TARGET_MISSING:"+fid)
         out=out[:target.end()]+trace+out[target.end():]
     return out
+
 
 PHP=r'''<?php
 $ppm=$argv[1]; $pserc=$argv[2]; $payload=json_decode((string)file_get_contents($argv[3]),true);
