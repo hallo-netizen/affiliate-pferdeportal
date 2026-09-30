@@ -6,43 +6,15 @@
   "status": "OPEN_CHAT_WORKER_JOB",
   "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
   "active_job": {
-    "job_id": "K9-RESEARCH-51b228a51f6f3eb7",
+    "job_id": "K9-RESEARCH-beba25304f7d5eeb",
     "station": "research",
     "article_title": "So wählst du passende Schermaschinen für Pferde",
     "item_id": "k9-1ff3dfabfed47a0c47c8df13",
     "runtime_entry": "runtime/CHAT_ENTRY.json",
     "job_path": "runtime/CURRENT_JOB.json"
   },
-  "worker_binding": {
-    "role": "WORKER_NOT_SUPERVISOR",
-    "first_action": "READ_RUNTIME_CHAT_ENTRY_AND_EXECUTE_EXACT_JOB",
-    "forbidden": [
-      "STATUS_REPORT_BEFORE_EXECUTION",
-      "DIAGNOSE_OR_REDESIGN_WORKFLOW",
-      "PROPOSE_OR_APPLY_SYSTEM_FIX",
-      "MANUALLY_ROUTE_NEXT_STATION",
-      "RESET_TEST_STATE"
-    ],
-    "blocked_rule": "ONLY_IF_EXACT_JOB_IS_UNEXECUTABLE_RETURN_CONCRETE_INPUT_BLOCKER"
-  },
-  "routing": {
-    "chat_may_route": false,
-    "after_research_submission": "K9_AUTOMATIC_ROUTING_ONLY"
-  },
-  "quality": {
-    "language_tool": "6.8",
-    "ppm": "6.7.9",
-    "pserc_required": true,
-    "endstempel_required": true,
-    "wordpress_final_verify_required": true,
-    "publish_allowed": false
-  },
-  "preflight": {
-    "research_contract_gate": "PASS_POSITIVE_NEGATIVE_SELFTEST_36714495691",
-    "missing_portal_links": "BLOCKS",
-    "wrong_portal_links": "BLOCKS",
-    "missing_decision_support": "BLOCKS",
-    "complete_research": "PASSES"
-  },
-  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY"
+  "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION",
+  "next_action": "READ_RUNTIME_CHAT_ENTRY_AND_EXECUTE_NOW",
+  "chat_may_route": false,
+  "publish_allowed": false
 }

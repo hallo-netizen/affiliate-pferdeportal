@@ -5,9 +5,9 @@
   "repository": "hallo-netizen/affiliate-pferdeportal",
   "branch": "konzept9/greenfield-20260929",
   "job_path": "runtime/CURRENT_JOB.json",
-  "submission_path": "submissions/K9-RESEARCH-51b228a51f6f3eb7.json",
-  "job_id": "K9-RESEARCH-51b228a51f6f3eb7",
-  "job_sha256": "b2c060b61a5627bdef97c53608c6904857a8bc5f19a5af86bd70b64bf9a3392f",
+  "submission_path": "submissions/K9-RESEARCH-beba25304f7d5eeb.json",
+  "job_id": "K9-RESEARCH-beba25304f7d5eeb",
+  "job_sha256": "aefc39014724dd75cdf8d95d48f563da64e2c7d9d6fd1b99bc1d3c2942981389",
   "station": "research",
   "item_count": 1,
   "allowed_action": "EXECUTE_EXACT_STATION_ONLY",
@@ -38,5 +38,19 @@
     "REWRITE_WORKER_BINDING",
     "INVENT_OR_CHANGE_PORTAL_LINKS",
     "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION"
-  ]
+  ],
+  "required_output_fields": [
+    "sources",
+    "portal_links",
+    "decision_support",
+    "fact_pack",
+    "product_sha256"
+  ],
+  "output_field_sources": {
+    "sources": "PUBLIC_RESEARCH_SOURCES",
+    "portal_links": "COPY_EXACTLY_FROM_JOB_INPUT_PRODUCTS_PORTAL_CONTEXT_PORTAL_LINKS",
+    "decision_support": "DERIVE_FROM_VERIFIED_RESEARCH_FOR_THE_BOUND_ARTICLE_TYPE_AND_TOPIC",
+    "fact_pack": "VERIFIED_RESEARCH_FACTS_ONLY",
+    "product_sha256": "HASH_COMPLETE_RESEARCH_PRODUCT_WITHOUT_PRODUCT_SHA256_FIELD"
+  }
 }
