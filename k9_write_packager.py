@@ -264,7 +264,7 @@ def build(draft_path):
         "runtime_order":runtime_order,"search_intent":"COMMERCIAL_INVESTIGATION_ADVICE","source_hashes":[],
         "source_order_id":order_id,"source_snapshot_id":fact_pack["fact_pack_id"],"target_keyword":meta["target_keyword"],
         "three_type_local_binding":{"expected_category":expected_category,
-            "semantic_keywords":[meta["target_keyword"]]+type_meta["decision_criteria"],
+            "semantic_keywords":[meta["target_keyword"]]+list(decision.get("decision_criteria",[])),
             "wordpress_runtime_term_id_required_later":True,"wordpress_runtime_validation_performed_now":False},
         "topic":title,"canonical_article":canonical
     }
