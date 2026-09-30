@@ -5,10 +5,10 @@
   "concept": "K9",
   "contract": "K9_CURRENT_STATE_V3",
   "first_open_blocker": null,
-  "next_action": "PREPARE_CHECK",
+  "next_action": "RUN_FINALIZER",
   "operational_mode": "SYSTEM_ROUTING_ONLY",
   "orchestration_mode": "AUTO_CHAIN",
   "publish_allowed": false,
   "role": "SOLE_CURRENT_AUTHORITY",
-  "status": "AUTO_CHAIN_TRANSITION_PENDING"
+  "status": "FINALIZE_PENDING"
 }

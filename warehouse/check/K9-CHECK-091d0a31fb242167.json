@@ -1,0 +1,253 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-091d0a31fb242167",
+  "results": [
+    {
+      "item_id": "k9-6b233ed9774bd3dd530835c3",
+      "lt68_result": {
+        "article_sha256": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+        "checked_text_sha256": "1c7c4b2591b1783a82af6c1327433e79cfb187ffe131620cb4e73ccafff5cded",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 0,
+        "findings": [],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.\n\nDas Wasser gelangt dabei nicht über eine Bewässerung von oben auf den Platz. Je nach System wird Feuchtigkeit über einen geregelten Wasserstand oder über Tropfschläuche unter der Tretschicht eingebracht und anschließend durch Kapillarwirkung im Reitboden verteilt.\n\nWelche Lösung passt, hängt vom vorhandenen Bodenaufbau und von der technischen Infrastruktur der Anlage ab.\n\nBewässerung von unten am Reitplatz\n\nBeim Ebbe-Flut-System wird die Feuchtigkeit nicht durch eine Beregnung von oben auf die Oberfläche gebracht. Wasser befindet sich unterhalb der Tretschicht und wird durch eine geeignete Sandschicht nach oben transportiert. Entscheidend ist dabei die Kapillarwirkung: Feuchtigkeit wandert durch die feinen Zwischenräume des Materials in Richtung Tretschicht.\n\nDie Wassermenge wird nicht dem Zufall überlassen. Ein steuerbares System hält einen festgelegten Wasserpegel. Sinkt er in trockenen Phasen, kann Wasser zugeführt werden; bei überschüssigem Regenwasser kann Wasser wieder abgelassen werden. So wird die Feuchtigkeit über den Wasserstand reguliert. Die Oberfläche muss dafür nicht von oben beregnet werden.\n\nFür die Praxis bedeutet das: Die Bewässerung ist Teil des Bodenaufbaus und nicht nur ein zusätzliches Gerät am Platzrand. Beim Ebbe-Flut-Prinzip muss das Wasser im aufgebauten System gehalten werden, damit der geregelte Wasserstand und der Transport nach oben funktionieren können.\n\nBewässerung von unten ist technisch möglich.\n\nKapillarwirkung transportiert Feuchtigkeit zur Tretschicht.\n\nDer Wasserpegel kann automatisch geregelt werden.\n\nEbbe-Flut-Systeme für den Reitplatz\n\nEin Ebbe-Flut-System arbeitet mit einem eingefassten Aufbau, der Wasser im System hält. Beim beschriebenen Aufbau wird dafür eine wasserdichte Folie über die Fläche geführt. Darauf liegen die für Wassertransport und Reitboden nötigen Schichten. Der Platz funktioniert damit als zusammenhängendes Wasser- und Bodensystem.\n\nBei der Unterbodentropfbewässerung liegen dagegen Tropfschläuche unter der Tretschicht. Sie geben Wasser direkt im Unterboden ab; anschließend verteilt die Kapillarwirkung die Feuchtigkeit nach oben. Solche Systeme können in einzelne Bereiche gegliedert und getrennt angesteuert werden. Bohlmann beschreibt diese Variante für Reithallen außerdem als nachträglich einbaubar und während der Bewässerung nutzbar.\n\nDer zentrale Unterschied liegt damit in der Wasserführung. Ebbe-Flut regelt einen Wasserstand im aufgebauten System, während Tropfschläuche Wasser punktuell unterhalb der Tretschicht abgeben. Beide Varianten nutzen den Weg der Feuchtigkeit nach oben, benötigen dafür aber unterschiedliche technische Komponenten und eine passende Abstimmung auf den jeweiligen Reitboden.\n\nAuch die Steuerung unterscheidet sich. Beim Ebbe-Flut-System steht der Wasserpegel im Mittelpunkt; bei einer Unterbodentropfbewässerung können einzelne Sektionen getrennt versorgt werden. Damit lässt sich die Entscheidung nicht allein über den Begriff Unterflurbewässerung treffen, sondern nur über den konkreten technischen Aufbau.\n\nDer Bereich Weide bildet den übergeordneten Rahmen. Für die technische Auswahl müssen Bodenaufbau, Wasseranschluss und Steuerung zur vorhandenen Anlage passen. Auch Wartungszugang und Wasserableitung sollten vor dem Einbau feststehen.\n\nReitplatz vor dem Einbau prüfen\n\nEine Unterflurbewässerung sollte nicht allein nach dem gewünschten Komfort ausgewählt werden. Der Bodenaufbau muss mit dem vorgesehenen System zusammenpassen. Ebenso wichtig sind Wasseranschluss, verfügbarer Druck und Durchfluss sowie die Frage, wie Wartung und Steuerung später zugänglich bleiben.\n\nBeim Ebbe-Flut-System kommen weitere Anforderungen hinzu. Benötigte Anschlüsse und ein sinnvoller Weg für überschüssiges Wasser müssen bereits in der Planung berücksichtigt werden. Je nach Anlage gehören dazu Wasser, Strom und eine geeignete Möglichkeit zur Ableitung. Diese Punkte sollten geklärt sein, bevor der Bodenaufbau festgelegt wird.\n\nZusätzlich sollte geklärt werden, wie die Anlage später gewartet wird und wo überschüssiges Wasser hinfließen kann. Gerade diese Punkte entscheiden darüber, ob das System nicht nur eingebaut, sondern im laufenden Betrieb auch sinnvoll gesteuert und kontrolliert werden kann.\n\nBodenaufbau und Tretschicht prüfen.\n\nWasseranschluss, Druck und Durchfluss klären.\n\nStrom und Wasserableitung einplanen.\n\nGewünschte Steuerung vorab festlegen.\n\nEinbau im bestehenden Platz prüfen.\n\nWeitere Fragen zum Aufbau gehören in den Bereich Reitplatz. Welche Unterflurlösung passt, hängt vom konkreten Bestand und der geplanten Nutzung ab.\n\nReitplatzbewässerung kompakt vergleichen\n\nDie wichtigsten Unterschiede lassen sich knapp über Wasserführung, Steuerung und Einbauform einordnen.\n\nSystem\n\nPrinzip\n\nSteuerung\n\nEbbe-Flut\n\nKapillarwirkung im Unterbau\n\nWasserpegel automatisch\n\nTropfsystem\n\nTropfschläuche unter Tretschicht\n\nSektionen separat\n\nAbdichtung\n\nWasser bleibt im System\n\nZuführen oder Ablassen\n\nPlanung\n\nBoden und Anschlüsse\n\nAbleitung vorsehen\n\nFazit\n\nEine Reitplatzbewässerung kann tatsächlich von unten arbeiten. Beim Ebbe-Flut-Prinzip steigt Feuchtigkeit durch Kapillarwirkung in die Tretschicht, während der Wasserpegel gesteuert wird. Unterbodentropfsysteme bringen Wasser über Leitungen unter der Tretschicht ein und nutzen ebenfalls die Kapillarwirkung.\n\nWelche Variante passt, entscheidet sich am vorhandenen Bodenaufbau und an der technischen Infrastruktur. Besonders beim Ebbe-Flut-System müssen Aufbau, Anschlüsse und Wasserableitung zusammen geplant werden. Deshalb sollte die Entscheidung vor größeren Umbauten anhand der realen Platzbedingungen getroffen werden.\n\nEine Unterbodentropfbewässerung ist technisch anders aufgebaut und kann bei bestimmten Bestandsanlagen eine Alternative sein. Die Kernfrage lautet daher nicht nur, ob Bewässerung von unten möglich ist, sondern welche Technik sich mit dem vorhandenen Reitboden sinnvoll umsetzen lässt.\n\nWeiterführende Informationen\n\nFür die konkrete Planung sind Aufbau und Anschlüsse des eigenen Platzes entscheidend. Ergänzend findest du den gebundenen Themenbereich Reitplatzbewässerung. Dort lässt sich die Auswahl im Zusammenhang mit weiteren Bewässerungslösungen einordnen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "1c7c4b2591b1783a82af6c1327433e79cfb187ffe131620cb4e73ccafff5cded",
+          "content_hash": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "1c7c4b2591b1783a82af6c1327433e79cfb187ffe131620cb4e73ccafff5cded",
+            "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 0,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "return_code": 0,
+          "unresolved_finding_count": 0
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "return_code": 0,
+        "status": "PASS"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+          "content_structure_language_gate_checks": {
+            "article_type": "FAQ",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 3,
+            "conclusion_ratio": 0.1375,
+            "conclusion_word_count": 110,
+            "content_hash": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "faq_direct_answer_bound": true,
+            "faq_direct_answer_word_count": 15,
+            "faq_intro_starts_with_direct_answer": true,
+            "faq_meta_opening_hit": "",
+            "generic_heading_hits": [],
+            "heading_count": 6,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 66,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "1c7c4b2591b1783a82af6c1327433e79cfb187ffe131620cb4e73ccafff5cded",
+            "language_evidence_valid": true,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 0,
+            "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "language_unresolved_finding_count": 0,
+            "list_count": 2,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "b4dac0c64e08c171229080de1365d0889c3b96eeb5e125b1e8047fda0b0a06d7",
+            "quality_binding_hash": "f42dceaddde1947e14aeb0408fb29d7094d7a80041b50e53b90519be53e1fa9d",
+            "required_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Reitplatzbewässerung",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/"
+              },
+              "parent_category": {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              "semantic_related": {
+                "anchor": "Reitplatz",
+                "block": "decision",
+                "href": "/weide/weide-reitplatz/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "criteria",
+              "checklist",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 4,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "System",
+              "Prinzip",
+              "Steuerung"
+            ],
+            "table_heading": "Reitplatzbewässerung kompakt vergleichen",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.3333333333333333,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Ist eine Reitplatzbewässerung von unten möglich und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              {
+                "anchor": "Reitplatz",
+                "block": "decision",
+                "href": "/weide/weide-reitplatz/"
+              },
+              {
+                "anchor": "Reitplatzbewässerung",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Weide > Reitplatz > Reitplatzbewässerung > FAQ Reitplatzbewässerung",
+              "name": "FAQ Reitplatzbewässerung",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "reitplatzbewaesserung-faq",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "PASS",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 8,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 37,
+          "fail_closed_aggregate_status": "PASS",
+          "h2_count": 6,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.07142857142857142,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "FAQ",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.1375,
+            "conclusion_word_count": 110,
+            "content_hash": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.08,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 800,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 21,
+          "publish_allowed": false,
+          "quality_content_hash": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+          "required_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 8,
+          "table_body_row_count": 4,
+          "table_count": 1,
+          "technical_content_hash": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 7,
+          "used_fact_count": 8,
+          "visible_link_count": 3,
+          "word_count": 790
+        },
+        "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+        "content_sha256": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [],
+        "fail_closed_aggregate_status": "PASS",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "PASS",
+        "technical_status": "TECHNICAL_CHECK_OK"
+      },
+      "writing_rules_result": {
+        "content_sha256": "397019c5eb8c4fa1ce9d772b70e6c74d6d3e135bbbfd10443e17456c185289e3",
+        "contract": "K9_WRITING_RULES_RESULT_V1",
+        "coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+        "findings": [],
+        "publish_allowed": false,
+        "status": "PASS",
+        "table_rule_contract": "K9_MOBILE_COMPACT_TABLE_POLICY_V1",
+        "writing_rules_sha256": "b1c66fa5d872742cb2461f6653001de862a9d74531fad25d1910a50d6094c286"
+      }
+    }
+  ],
+  "station": "check"
+}
