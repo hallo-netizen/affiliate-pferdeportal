@@ -31,6 +31,8 @@ require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
 
 final class Pferdeportal_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
+    private $category_product_shared_rank_base_request_cache = array();
+    private $category_product_shared_rank_base_build_count = 0;
     private $ranked_campaign_candidate_index_request_cache = array();
     private $ranked_campaign_raw_records_request_cache = null;
     private $ranked_campaign_raw_target_keys_request_cache = array();
@@ -4243,7 +4245,151 @@ JS;
         return isset($historical[$post_id]) && $historical[$post_id] === $network;
     }
 
-    private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
+        /**
+     * V6.72.171: category_product_1..3 are one logical product bundle on the
+     * same public page. Build the expensive slot-independent context ranking
+     * once, while leaving placement, per-slot control/veto, provider strategy
+     * and final slot position decisions untouched.
+     */
+    private function category_product_shared_rank_base($context) {
+        if (!$this->ranked_campaigns_request_cache_allowed()) { return null; }
+        $context = is_array($context) ? $context : array();
+        if (!empty($context['exact_product_identifiers'])) { return null; }
+
+        $cache_context = $context;
+        unset($cache_context['slot_type'], $cache_context['banner_distribution_position']);
+        $cache_key = hash('sha256', serialize($cache_context));
+        if (array_key_exists($cache_key, $this->category_product_shared_rank_base_request_cache)) {
+            return $this->category_product_shared_rank_base_request_cache[$cache_key];
+        }
+        $this->category_product_shared_rank_base_build_count++;
+
+        $slot_type = 'category_product_1';
+        $rank_context = $context;
+        $rank_context['slot_type'] = $slot_type;
+        $rank_context['_ppar_norm_primary_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['primary_slug'] ?? ''));
+        $rank_context['_ppar_norm_post_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['post_type'] ?? ''));
+        $rank_context['_ppar_norm_ancestor_ids'] = isset($context['ancestor_ids']) && is_array($context['ancestor_ids']) ? array_map('intval', $context['ancestor_ids']) : array();
+        $rank_context['_ppar_norm_slugs'] = isset($context['slugs']) && is_array($context['slugs']) ? array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['slugs']) : array();
+        $rank_context['_ppar_norm_term_ids'] = isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array();
+        $rank_context['_ppar_norm_direct_term_slugs'] = isset($context['direct_term_slugs']) && is_array($context['direct_term_slugs']) ? array_values(array_filter(array_map(array($this, 'ranked_campaign_sanitize_key_request_cached'), $context['direct_term_slugs']))) : array();
+        $rank_context['_ppar_norm_semantic_primary_target_key'] = method_exists($this, 'automation_normalize_target_key') ? $this->automation_normalize_target_key((string) ($context['semantic_primary_target_key'] ?? '')) : '';
+        $rank_context['_ppar_norm_semantic_ancestor_target_keys'] = method_exists($this, 'automation_normalize_target_key') ? array_values(array_filter(array_map(array($this, 'automation_normalize_target_key'), (array) ($context['semantic_ancestor_target_keys'] ?? array())))) : array();
+        $rank_context['_ppar_norm_product_family_slug'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($context['product_family_slug'] ?? ''));
+
+        $posts = $this->ranked_campaign_posts_snapshot();
+        $index = $this->ranked_campaign_candidate_index('placement');
+        $positions = array();
+        foreach (array('category_product_1','category_product_2','category_product_3','category_product','*') as $placement) {
+            foreach ((array) ($index['product_by_placement'][$placement] ?? array()) as $position => $_true) {
+                $positions[(int) $position] = true;
+            }
+        }
+        if (!$positions) {
+            return $this->category_product_shared_rank_base_request_cache[$cache_key] = array();
+        }
+        ksort($positions, SORT_NUMERIC);
+
+        $raw_records = $this->ranked_campaign_raw_records_snapshot();
+        $candidates = array();
+        foreach (array_keys($positions) as $position) {
+            $position = (int) $position;
+            if (!isset($posts[$position]) || !is_object($posts[$position])) { continue; }
+
+            $record = isset($raw_records[$position]) && is_array($raw_records[$position]) ? $raw_records[$position] : array();
+            $stored = isset($record['stored']) && is_array($record['stored']) ? $record['stored'] : array();
+            $raw_targets = $this->ranked_campaign_raw_target_keys($position, $stored);
+            if ($raw_targets) {
+                $target_probe = array('automation_target_keys'=>$raw_targets);
+                $automation_rank = method_exists($this, 'automation_campaign_exact_target_rank')
+                    ? $this->automation_campaign_exact_target_rank($target_probe, $rank_context)
+                    : null;
+                $fill_post_type = (string) $rank_context['_ppar_norm_post_type'];
+                if (!$automation_rank && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) {
+                    continue;
+                }
+            }
+
+            $campaign = $this->ranked_campaign_from_post_cached($posts[$position]);
+            if (!is_array($campaign)) { continue; }
+            $runtime_campaign = $campaign;
+            $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+            if (empty($runtime_campaign['_ppar_runtime_normalized'])) {
+                $runtime_campaign['_ppar_runtime_normalized'] = 1;
+                $runtime_campaign['_ppar_norm_id'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['id'] ?? ''));
+                $runtime_campaign['_ppar_norm_network'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['network'] ?? 'manual'));
+                $runtime_campaign['_ppar_norm_creative_type'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['creative_type'] ?? 'banner'));
+                $runtime_campaign['_ppar_norm_render_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['render_mode'] ?? 'image_link'));
+                $runtime_campaign['_ppar_norm_programme_status'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['programme_status'] ?? 'unknown'));
+                $runtime_campaign['_ppar_norm_assignment_mode'] = $this->ranked_campaign_sanitize_key_request_cached((string) ($campaign['assignment_mode'] ?? 'page_tree'));
+            }
+
+            $active_allowed = !empty($runtime_campaign['active']) || $this->category_product_incident_inactive_auto_allowed($runtime_campaign, $slot_type);
+            if (!$active_allowed
+                || !$this->campaign_is_complete($runtime_campaign)
+                || !$this->rule_is_current($runtime_campaign)
+                || !$this->campaign_program_allows_delivery($runtime_campaign)
+                || !$this->otto_awin_product_campaign_seller_ready($runtime_campaign)
+                || (string) $runtime_campaign['_ppar_norm_creative_type'] !== 'product') {
+                continue;
+            }
+
+            $rank = $this->campaign_match_rank($runtime_campaign, $rank_context);
+            if (!$rank) { continue; }
+            if (!$this->campaign_health_allows_delivery($runtime_campaign)) { continue; }
+
+            $candidates[] = array(
+                'campaign' => $campaign,
+                'specificity' => (int) $rank['specificity'],
+                'matches' => (int) $rank['matches'],
+                'priority' => (int) ($campaign['priority'] ?? 0),
+                'reason' => (string) $rank['reason'],
+            );
+        }
+
+        usort($candidates, function($a, $b) {
+            foreach (array('specificity','matches') as $key) {
+                if ($a[$key] !== $b[$key]) { return ($a[$key] > $b[$key]) ? -1 : 1; }
+            }
+            if ($a['priority'] !== $b['priority']) { return ($a['priority'] > $b['priority']) ? -1 : 1; }
+            return strcmp((string) ($a['campaign']['id'] ?? ''), (string) ($b['campaign']['id'] ?? ''));
+        });
+        return $this->category_product_shared_rank_base_request_cache[$cache_key] = array_values($candidates);
+    }
+
+    private function category_product_ranked_candidates_from_shared_base($context, $slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        if (!preg_match('/^category_product_[123]$/', $slot_type)) { return null; }
+        $base = $this->category_product_shared_rank_base($context);
+        if (!is_array($base)) { return null; }
+
+        $candidates = array();
+        foreach ($base as $candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign)) { continue; }
+            $runtime_campaign = $campaign;
+            $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+            if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }
+            if (!$this->campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
+            $candidates[] = $candidate;
+        }
+
+        if (method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
+            $candidates = $this->ebay_filter_ranked_product_candidates_provider_cohort($candidates);
+        }
+        if (method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
+            $candidates = $this->multiprovider_filter_candidates_by_strategy($candidates);
+        }
+        $image_ready = array();
+        foreach ($candidates as $candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign) || !$this->product_campaign_public_image_ready($campaign)) { continue; }
+            $image_ready[] = $candidate;
+        }
+        return array_values($image_ready);
+    }
+
+private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
         if (!$this->ranked_campaigns_request_cache_allowed()) {
             return $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
         }
@@ -4251,6 +4397,18 @@ JS;
         if (array_key_exists($cache_key, $this->ranked_campaigns_request_cache)) {
             return $this->ranked_campaigns_request_cache[$cache_key];
         }
+
+        $slot_norm = $this->ranked_campaign_sanitize_key_request_cached((string) $slot_type);
+        $shared_eligible = $forced_campaign_id === ''
+            && preg_match('/^category_product_[123]$/', $slot_norm)
+            && empty($context['exact_product_identifiers']);
+        if ($shared_eligible) {
+            $shared = $this->category_product_ranked_candidates_from_shared_base($context, $slot_norm);
+            if (is_array($shared)) {
+                return $this->ranked_campaigns_request_cache[$cache_key] = $shared;
+            }
+        }
+
         $result = $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
         $this->ranked_campaigns_request_cache[$cache_key] = $result;
         return $result;
