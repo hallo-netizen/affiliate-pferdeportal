@@ -88,7 +88,7 @@ jobs:
           print('PASS exact eBay KISS/storage cleanup delta')
           PY
 
-      - name: PHP syntax all current plugin files      - name: PHP syntax all current plugin files
+      - name: PHP syntax all current plugin files
         shell: bash
         run: |
           set -euo pipefail
@@ -237,7 +237,7 @@ jobs:
           print('PASS critical eBay workflow/coverage/public-gate core byte-identical')
           PY
 
-      - name: Existing provider and banner regressions      - name: Existing provider and banner regressions
+      - name: Existing provider and banner regressions
         shell: bash
         run: |
           set -euo pipefail
@@ -492,7 +492,7 @@ jobs:
           /tmp/wp eval-file /tmp/ebay-kiss-storage-gate.php --path=/tmp/wp-site | tee /tmp/ebay-kiss-storage-gate.txt
           grep -F 'EBAY_KISS_STORAGE_WORDPRESS_MARIADB_PASS' /tmp/ebay-kiss-storage-gate.txt
 
-      - name: Product deals and partner analytics WordPress MariaDB gate      - name: Product deals and partner analytics WordPress MariaDB gate
+      - name: Product deals and partner analytics WordPress MariaDB gate
         shell: bash
         run: |
           set -euo pipefail
@@ -977,7 +977,7 @@ jobs:
           git push origin HEAD:affiliate-release-current
           echo "FINAL_RELEASE_BINDING_PUSHED"
 
-      - name: Upload combined full-gate evidence      - name: Upload combined full-gate evidence
+      - name: Upload combined full-gate evidence
         uses: actions/upload-artifact@v4
         with:
           name: affiliate-router-672167-ebay-kiss-full-gate
