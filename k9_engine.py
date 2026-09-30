@@ -407,6 +407,32 @@ def _validate_check_product(row, job_item):
         raise K9Error("CHECK_RESULT_STATUS_INVALID")
     return lt, ppm
 
+def assert_execution_only_entry(job):
+    if job.get("station") == "check":
+        return
+    if not CHAT_ENTRY.exists():
+        raise K9Error("CHAT_ENTRY_REQUIRED_FOR_CHAT_WORKER")
+    entry = load_json(CHAT_ENTRY)
+    if entry.get("job_id") != job.get("job_id") or entry.get("job_sha256") != job.get("job_sha256"):
+        raise K9Error("CHAT_ENTRY_JOB_MISMATCH")
+    if entry.get("execution_policy") != "WORKER_EXECUTES_ONLY_NEVER_SUPERVISES":
+        raise K9Error("CHAT_ENTRY_EXECUTION_POLICY_INVALID")
+    if entry.get("input_authority_rule") != "BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_THIS_STATION":
+        raise K9Error("CHAT_ENTRY_INPUT_AUTHORITY_RULE_INVALID")
+    if entry.get("blocked_rule") != "IF_EXACT_JOB_CANNOT_BE_COMPLETED_RETURN_BLOCKED_WITH_CONCRETE_INPUT_ERROR_ONLY":
+        raise K9Error("CHAT_ENTRY_BLOCKED_RULE_INVALID")
+    required_forbidden = {
+        "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+        "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+        "CHANGE_QUALITY_GATES",
+        "RESET_OR_REPLACE_TEST_STATE",
+        "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+        "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+        "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
+    }
+    if not required_forbidden.issubset(set(entry.get("forbidden") or [])):
+        raise K9Error("CHAT_ENTRY_EXECUTION_GUARD_INCOMPLETE")
+
 def validate_submission(job, submission):
     if submission.get("contract") != "K9_SUBMISSION_V1":
         raise K9Error("SUBMISSION_CONTRACT_INVALID")
@@ -442,6 +468,7 @@ def accept(path):
     job = current_job()
     if job is None:
         raise K9Error("NO_ACTIVE_JOB")
+    assert_execution_only_entry(job)
     by_id = validate_submission(job, submission)
     data = ledger()
     if data["generation"] != job["ledger_generation"]:

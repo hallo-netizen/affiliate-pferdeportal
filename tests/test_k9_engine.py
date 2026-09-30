@@ -174,6 +174,17 @@ class K9Tests(unittest.TestCase):
         self.assertNotIn("K4",str(entry))
         self.assertNotIn("K8",str(entry))
 
+    def test_accept_rejects_weakened_execution_entry_without_state_change(self):
+        job=k.prepare("research",1)["job"]
+        entry=k.load_json(k.CHAT_ENTRY)
+        entry.pop("execution_policy",None)
+        k.write_json(k.CHAT_ENTRY,entry)
+        before=k.load_json(k.LEDGER)
+        with self.assertRaisesRegex(k.K9Error,"CHAT_ENTRY_EXECUTION_POLICY_INVALID"):
+            k.accept(self.submission(job,[self.research_row("a")],"weakened-entry.json"))
+        self.assertEqual(before,k.load_json(k.LEDGER))
+        self.assertTrue(k.CURRENT_JOB.exists())
+
     def test_accept_removes_chat_entry(self):
         job=k.prepare("research",1)["job"]
         self.assertTrue(k.CHAT_ENTRY.exists())
