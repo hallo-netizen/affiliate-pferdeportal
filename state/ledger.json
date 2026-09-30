@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 47,
+  "generation": 48,
   "items": [
     {
       "item_id": "k9-6b233ed9774bd3dd530835c3",
@@ -12,6 +12,11 @@
         "title": "Ist eine Reitplatzbewässerung von unten möglich?"
       },
       "products": {
+        "check": {
+          "job_id": "K9-CHECK-a512d001b288838f",
+          "path": "warehouse/check/K9-CHECK-a512d001b288838f.json",
+          "sha256": "f11ec82c5b776cc7f05facfdfcef330116453bbff80039d376da75e0d95c3012"
+        },
         "research": {
           "job_id": "K9-RESEARCH-212dbee117f90c60",
           "path": "warehouse/research/K9-RESEARCH-212dbee117f90c60.json",
@@ -25,8 +30,8 @@
       },
       "revision": 0,
       "stages": {
-        "check": "PENDING",
-        "repair": "NOT_REQUIRED",
+        "check": "FAIL",
+        "repair": "PENDING",
         "research": "DONE",
         "write": "DONE"
       },

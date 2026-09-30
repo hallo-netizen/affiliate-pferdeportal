@@ -1,0 +1,402 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-a512d001b288838f",
+  "results": [
+    {
+      "item_id": "k9-6b233ed9774bd3dd530835c3",
+      "lt68_result": {
+        "article_sha256": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+        "checked_text_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 3,
+        "findings": [
+          {
+            "context": "...Flut-System wird die Feuchtigkeit nicht über Regner auf die Oberfläche gebracht. Wasser befindet...",
+            "length": 6,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 1082,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...nen.  Gewünschte Steuerung vorab festlegen.  Nachrüstbarkeit beim bestehenden Platz prüfen.  Weitere Frag...",
+            "length": 15,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4492,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          },
+          {
+            "context": "...bestehenden Reithallenboden kann dagegen die Nachrüstbarkeit einer Unterbodentropfbewässerung interessant...",
+            "length": 15,
+            "message": "Möglicher Tippfehler gefunden.",
+            "offset": 4919,
+            "rule_id": "GERMAN_SPELLER_RULE"
+          }
+        ],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Ja. Eine Reitplatzbewässerung von unten ist technisch möglich. Beim Ebbe-Flut-System gelangt Wasser unterhalb der Reitfläche in den Bodenaufbau und steigt durch Kapillarwirkung bis in die Tretschicht. Dadurch wird der Reitboden nicht von oben beregnet, sondern aus dem Unterbau mit Feuchtigkeit versorgt.\n\nNeben dem Ebbe-Flut-Prinzip gibt es Unterbodentropfsysteme mit Tropfschläuchen unter der Tretschicht. Beide Ansätze verfolgen dasselbe Grundziel, unterscheiden sich aber beim Aufbau und bei der Steuerung. Deshalb sollte vor der Auswahl geklärt werden, welches System zum vorhandenen Platz, zur Reithalle und zu den Anschlüssen passt.\n\nDie Frage lässt sich daher nicht nur mit einem einfachen Ja beantworten. Technisch ist die Bewässerung von unten möglich, praktisch hängt die passende Umsetzung jedoch von mehreren Bedingungen ab. Wasserführung, Regelung und vorhandene Infrastruktur müssen gemeinsam betrachtet werden, damit die gewählte Technik zum Boden und zur Nutzung passt.\n\nSo funktioniert Bewässerung von unten\n\nBeim Ebbe-Flut-System wird die Feuchtigkeit nicht über Regner auf die Oberfläche gebracht. Wasser befindet sich unterhalb der Tretschicht und wird durch eine geeignete Sandschicht nach oben transportiert. Entscheidend ist dabei die Kapillarwirkung: Feuchtigkeit wandert durch die feinen Zwischenräume des Materials in Richtung Tretschicht.\n\nDie Wassermenge wird nicht dem Zufall überlassen. Ein steuerbares System hält einen festgelegten Wasserpegel. Sinkt er in trockenen Phasen, kann Wasser zugeführt werden; bei überschüssigem Regenwasser kann Wasser wieder abgelassen werden. So wird die Feuchtigkeit über den Wasserstand reguliert. Die Oberfläche muss dafür nicht von oben beregnet werden.\n\nBewässerung von unten ist technisch möglich.\n\nKapillarwirkung transportiert Feuchtigkeit zur Tretschicht.\n\nDer Wasserpegel kann automatisch geregelt werden.\n\nEbbe-Flut und Tropfsysteme unterscheiden\n\nEin Ebbe-Flut-System arbeitet mit einem eingefassten Aufbau, der Wasser im System hält. Beim beschriebenen Aufbau wird dafür eine wasserdichte Folie über die Fläche geführt. Darauf liegen die für Wassertransport und Reitboden nötigen Schichten. Der Platz funktioniert damit als zusammenhängendes Wasser- und Bodensystem.\n\nBei der Unterbodentropfbewässerung liegen dagegen Tropfschläuche unter der Tretschicht. Sie geben Wasser direkt im Unterboden ab; anschließend verteilt die Kapillarwirkung die Feuchtigkeit nach oben. Solche Systeme können in einzelne Bereiche gegliedert und getrennt angesteuert werden. Bohlmann beschreibt diese Variante für Reithallen außerdem als nachträglich einbaubar und während der Bewässerung nutzbar.\n\nDer zentrale Unterschied liegt damit in der Wasserführung. Ebbe-Flut regelt einen Wasserstand im aufgebauten System, während Tropfschläuche Wasser punktuell unterhalb der Tretschicht abgeben. Beide Varianten nutzen den Weg der Feuchtigkeit nach oben, benötigen dafür aber unterschiedliche technische Komponenten und eine passende Abstimmung auf den jeweiligen Reitboden.\n\nDer Bereich Weide bildet den übergeordneten Rahmen. Für die konkrete Technik ist vor allem wichtig, wie der vorhandene Boden aufgebaut ist und welche Wasser- und Steuerungstechnik bereits vorhanden ist. Auch Platzgröße, Flächenform und Nutzung beeinflussen die Auslegung einer Bewässerungsanlage.\n\nVor einer Entscheidung sollte deshalb der Bestand aufgenommen werden. Dazu gehören Tretschicht und Unterbau ebenso wie Wasserzufuhr, Stromversorgung, mögliche Leitungswege und die Ableitung von überschüssigem Wasser. Erst wenn diese Punkte bekannt sind, lässt sich eine Unterflurlösung sinnvoll auf den Platz abstimmen.\n\nWas vor dem Einbau geklärt sein sollte\n\nEine Unterflurbewässerung sollte nicht allein nach dem gewünschten Komfort ausgewählt werden. Der Bodenaufbau muss mit dem vorgesehenen System zusammenpassen. Ebenso wichtig sind Wasseranschluss, verfügbarer Druck und Durchfluss sowie die Frage, wie Wartung und Steuerung später zugänglich bleiben.\n\nBeim Ebbe-Flut-System kommen weitere Anforderungen hinzu. Benötigte Anschlüsse und ein sinnvoller Weg für überschüssiges Wasser müssen bereits in der Planung berücksichtigt werden. Je nach Anlage gehören dazu Wasser, Strom und eine geeignete Möglichkeit zur Ableitung. Diese Punkte sollten geklärt sein, bevor der Bodenaufbau festgelegt wird.\n\nBodenaufbau und Tretschicht prüfen.\n\nWasseranschluss, Druck und Durchfluss klären.\n\nStrom und Wasserableitung einplanen.\n\nGewünschte Steuerung vorab festlegen.\n\nNachrüstbarkeit beim bestehenden Platz prüfen.\n\nWeitere Fragen zum Aufbau und zur technischen Einordnung eines Platzes gehören in den Bereich Reitplatz. Ob Ebbe-Flut oder Tropfbewässerung sinnvoller ist, hängt vom konkreten Bestand und der geplanten Nutzung ab.\n\nBei einem Neubau kann ein vollständiges Ebbe-Flut-System von Beginn an in den Bodenaufbau integriert werden. Bei einem bestehenden Reithallenboden kann dagegen die Nachrüstbarkeit einer Unterbodentropfbewässerung interessant sein. Entscheidend bleibt, dass Wasserführung, Steuerung und baulicher Aufbau zusammenpassen und nicht unabhängig voneinander geplant werden.\n\nSysteme kompakt vergleichen\n\nDie wichtigsten Unterschiede lassen sich knapp über Wasserführung, Steuerung und Einbauform einordnen.\n\nSystem\n\nPrinzip\n\nSteuerung\n\nEbbe-Flut\n\nKapillarwirkung im Unterbau\n\nWasserpegel automatisch\n\nTropfsystem\n\nTropfschläuche unter Tretschicht\n\nSektionen separat\n\nAbdichtung\n\nWasser bleibt im System\n\nZuführen oder Ablassen\n\nPlanung\n\nBoden und Anschlüsse\n\nAbleitung vorsehen\n\nFazit zur Bewässerung von unten\n\nEine Reitplatzbewässerung kann tatsächlich von unten arbeiten. Beim Ebbe-Flut-Prinzip steigt Feuchtigkeit durch Kapillarwirkung in die Tretschicht, während der Wasserpegel gesteuert wird. Unterbodentropfsysteme bringen Wasser über Leitungen unter der Tretschicht ein und nutzen ebenfalls die Kapillarwirkung.\n\nWelche Variante passt, entscheidet sich am vorhandenen Bodenaufbau und an der technischen Infrastruktur. Besonders beim Ebbe-Flut-System müssen Aufbau, Anschlüsse und Wasserableitung zusammen geplant werden. Deshalb sollte die Entscheidung vor größeren Umbauten anhand der realen Platzbedingungen getroffen werden.\n\nEine Unterbodentropfbewässerung ist technisch anders aufgebaut und kann bei bestimmten Bestandsanlagen eine Alternative sein. Die Kernfrage lautet daher nicht nur, ob Bewässerung von unten möglich ist, sondern welche Technik sich mit dem vorhandenen Reitboden sinnvoll umsetzen lässt.\n\nWeiterführende Informationen\n\nFür die konkrete Planung sind Aufbau und Anschlüsse des eigenen Platzes entscheidend. Ergänzend findest du den gebundenen Themenbereich Reitplatzbewässerung. Dort lässt sich die Auswahl im Zusammenhang mit weiteren Bewässerungslösungen einordnen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+          "content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+            "raw_stdout_sha256": "f2226d1d2f71a2fab4f000568cf91c36373cb388cd59fa7148d1e5e319adf40f",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 3,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[{\"value\":\"Rechner\"},{\"value\":\"Gegner\"},{\"value\":\"Rechnen\"},{\"value\":\"Redner\"},{\"value\":\"Rechter\"},{\"value\":\"Reiner\"},{\"value\":\"Renner\"},{\"value\":\"Rechnet\"},{\"value\":\"Regler\"},{\"value\":\"Reger\"},{\"value\":\"Regnet\"},{\"value\":\"Regnen\"},{\"value\":\"Rechne\"},{\"value\":\"Rekener\"},{\"value\":\"Regne\"},{\"value\":\"Lechner\"},{\"value\":\"Wegner\"},{\"value\":\"Einer\"},{\"value\":\"Seiner\"}],\"offset\":1082,\"length\":6,\"context\":{\"text\":\"...Flut-System wird die Feuchtigkeit nicht über Regner auf die Oberfläche gebracht. Wasser befindet...\",\"offset\":48,\"length\":6},\"sentence\":\"Beim Ebbe-Flut-System wird die Feuchtigkeit nicht über Regner auf die Oberfläche gebracht.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":4492,\"length\":15,\"context\":{\"text\":\"...nen.  Gewünschte Steuerung vorab festlegen.  Nachrüstbarkeit beim bestehenden Platz prüfen.  Weitere Frag...\",\"offset\":48,\"length\":15},\"sentence\":\"Nachrüstbarkeit beim bestehenden Platz prüfen.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0},{\"message\":\"Möglicher Tippfehler gefunden.\",\"shortMessage\":\"Rechtschreibfehler\",\"replacements\":[],\"offset\":4919,\"length\":15,\"context\":{\"text\":\"...bestehenden Reithallenboden kann dagegen die Nachrüstbarkeit einer Unterbodentropfbewässerung interessant...\",\"offset\":48,\"length\":15},\"sentence\":\"Bei einem bestehenden Reithallenboden kann dagegen die Nachrüstbarkeit einer Unterbodentropfbewässerung interessant sein.\",\"type\":{\"typeName\":\"UnknownWord\"},\"rule\":{\"id\":\"GERMAN_SPELLER_RULE\",\"description\":\"Möglicher Rechtschreibfehler\",\"issueType\":\"misspelling\",\"category\":{\"id\":\"TYPOS\",\"name\":\"Mögliche Tippfehler\"}},\"ignoreForIncompleteSentence\":false,\"contextForSureMatch\":0}],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "f2226d1d2f71a2fab4f000568cf91c36373cb388cd59fa7148d1e5e319adf40f",
+          "return_code": 0,
+          "unresolved_finding_count": 3
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "f2226d1d2f71a2fab4f000568cf91c36373cb388cd59fa7148d1e5e319adf40f",
+        "return_code": 0,
+        "status": "REPAIR_REQUIRED"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+          "content_structure_language_gate_checks": {
+            "article_type": "FAQ",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 3,
+            "conclusion_ratio": 0.13348946135831383,
+            "conclusion_word_count": 114,
+            "content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "faq_direct_answer_bound": true,
+            "faq_direct_answer_word_count": 15,
+            "faq_intro_starts_with_direct_answer": false,
+            "faq_meta_opening_hit": "",
+            "generic_heading_hits": [],
+            "heading_count": 6,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [
+              "So funktioniert Bewässerung von unten",
+              "Ebbe-Flut und Tropfsysteme unterscheiden",
+              "Was vor dem Einbau geklärt sein sollte",
+              "Systeme kompakt vergleichen",
+              "Fazit zur Bewässerung von unten"
+            ],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 133,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+            "language_evidence_valid": false,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 3,
+            "language_raw_report_sha256": "f2226d1d2f71a2fab4f000568cf91c36373cb388cd59fa7148d1e5e319adf40f",
+            "language_unresolved_finding_count": 3,
+            "list_count": 2,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "b4dac0c64e08c171229080de1365d0889c3b96eeb5e125b1e8047fda0b0a06d7",
+            "quality_binding_hash": "b6d0f94ed7d8dda24054ba8a751e7908a50d7401ff50fde85c01564356bdc1bc",
+            "required_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Reitplatzbewässerung",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/"
+              },
+              "parent_category": {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              "semantic_related": {
+                "anchor": "Reitplatz",
+                "block": "decision",
+                "href": "/weide/weide-reitplatz/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "criteria",
+              "checklist",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 4,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "System",
+              "Prinzip",
+              "Steuerung"
+            ],
+            "table_heading": "Systeme kompakt vergleichen",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.2222222222222222,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Ist eine Reitplatzbewässerung von unten möglich und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Weide",
+                "block": "criteria",
+                "href": "/weide/"
+              },
+              {
+                "anchor": "Reitplatz",
+                "block": "decision",
+                "href": "/weide/weide-reitplatz/"
+              },
+              {
+                "anchor": "Reitplatzbewässerung",
+                "block": "further_information",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Weide > Reitplatz > Reitplatzbewässerung > FAQ Reitplatzbewässerung",
+              "name": "FAQ Reitplatzbewässerung",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "reitplatzbewaesserung-faq",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "BLOCKED",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 8,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 36,
+          "fail_closed_aggregate_status": "BLOCKED",
+          "h2_count": 6,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.1,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "FAQ",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.13348946135831383,
+            "conclusion_word_count": 114,
+            "content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.08,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 854,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 20,
+          "publish_allowed": false,
+          "quality_content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+          "required_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 8,
+          "table_body_row_count": 4,
+          "table_count": 1,
+          "technical_content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 7,
+          "used_fact_count": 8,
+          "visible_link_count": 3,
+          "word_count": 844
+        },
+        "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+        "content_sha256": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "first_element_is_p": true,
+              "headings": 0,
+              "words": 133
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_INTRO_STRUCTURE",
+            "expected": {
+              "first_element": "p",
+              "headings": 0,
+              "word_range": [
+                30,
+                100
+              ]
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.intro",
+            "human_message": "The article needs a short introductory paragraph without a heading.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "So funktioniert Bewässerung von unten",
+              "Ebbe-Flut und Tropfsysteme unterscheiden",
+              "Was vor dem Einbau geklärt sein sollte",
+              "Systeme kompakt vergleichen",
+              "Fazit zur Bewässerung von unten"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "expected": [
+              "ist eine reitplatzbewässerung von unten möglich",
+              "reitplatzbewässerung",
+              "reitplatz",
+              "weide"
+            ],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.heading_intent_terms",
+            "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "bound_answer": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+              "meta_opening": "",
+              "starts_intro": false
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_FAQ_DIRECT_ANSWER",
+            "expected": {
+              "meta_opening": false,
+              "minimum_words": 12,
+              "must_start_intro": true
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.faq_direct_answer",
+            "human_message": "A FAQ must start with the exact bound, useful direct answer rather than meta commentary.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": {
+              "checked_text_matches": true,
+              "checked_text_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+              "content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "exception_errors": [],
+              "execution_record": {
+                "input_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+                "raw_stdout_sha256": "f2226d1d2f71a2fab4f000568cf91c36373cb388cd59fa7148d1e5e319adf40f",
+                "return_code": 0
+              },
+              "raw_finding_count": 3,
+              "raw_report_decodes": true,
+              "raw_report_sha256": "f2226d1d2f71a2fab4f000568cf91c36373cb388cd59fa7148d1e5e319adf40f",
+              "return_code": 0,
+              "unresolved_finding_count": 3
+            },
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+            "expected": {
+              "checked_text_sha256": "46c327df0a7fe954a1c188cea6eed23780f11e3892062723664a1a201c355fcd",
+              "content_hash": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "human_exceptions_only": true,
+              "raw_finding_count": 0,
+              "return_code": 0,
+              "unresolved_finding_count": 0
+            },
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "item.quality_binding.language_evidence",
+            "human_message": "The complete visible text requires exact LanguageTool 43 raw evidence with zero unresolved findings.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          }
+        ],
+        "fail_closed_aggregate_status": "BLOCKED",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "technical_status": "TECHNICAL_CHECK_OK"
+      },
+      "writing_rules_result": {
+        "content_sha256": "fa3c8eb900a4825841f0454000d3a392d82e1af76d673f24bde6f9b678a2fb26",
+        "contract": "K9_WRITING_RULES_RESULT_V1",
+        "coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+        "findings": [
+          {
+            "actual": 0.4098360655737705,
+            "code": "K9_RULE_MAIN_TEXT_RATIO_TOO_LOW",
+            "minimum": 0.5
+          }
+        ],
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "table_rule_contract": "K9_MOBILE_COMPACT_TABLE_POLICY_V1",
+        "writing_rules_sha256": "b1c66fa5d872742cb2461f6653001de862a9d74531fad25d1910a50d6094c286"
+      }
+    }
+  ],
+  "station": "check"
+}
