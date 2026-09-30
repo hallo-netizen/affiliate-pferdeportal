@@ -2,8 +2,8 @@
 
 Date: 2026-09-30
 Branch: affiliate-release-current
-Workflow run: 36757389362
-Tested head before release-binding-only commit: 42069d82ea9834f2502206b75f334f848fc22849
+Workflow run: 36761092907
+Tested head before release-binding-only commit: ba8ab294a6cd4442de15567daf03ba2c78e056ac
 Source manifest SHA-256: 375eb8de30011d1c4fbaabab56c94301bfa28b69d95e5d4deddc49dcf72c2da9
 Final installer SHA-256: ff66538939614cc97bb27ee16ec3708d5e1752640843498fdfd8c67236c848d7
 Final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip
