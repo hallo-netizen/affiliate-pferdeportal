@@ -144,3 +144,13 @@ Für den K9-Arbeitsbereich gilt:
 - Archiv: NICHT BETROFFEN.
 - Zielvertrag: unverändert.
 - Publish: weiterhin verboten.
+
+## Abschluss-Frischecheck nach Nachholung
+
+Nach dem Current-/Protokoll-Nachzug wurde derselbe Codepfad nochmals automatisch geprüft.
+
+- Run `36783935280` auf Current-Sync-Commit `dffba84634973c9e86c194a217b10fc746aa2cfe`: **FAIL** an derselben positiven PSERC-Scope-Regressionsstelle.
+- Run `36784005186` auf Protokoll-Commit `585f7011ba2d77b6b79ddebe99c4054aaaa62edc`: **FAIL** an derselben Stelle.
+- Davorliegende Schritte (Isolation, Auto-Chain-Wiring, PPM-Artikeltypbindung, kanonische Tabelle/Source-Traces) waren PASS.
+- Kein neuer Artikelbefund; 16/16 Artikel bleiben CHECK DONE.
+- Damit ist der Current-Blocker frisch bestätigt und unverändert.
