@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: EIGENES HD-002 TEXT-/SEO-PLUGIN V0.1.0 HARD LOCAL PASS / LIVE-INSTALLATION OFFEN
+STATUS: HD-002 V0.1.0 PRODUCTION CANDIDATE HARD LOCAL PASS / LIVE-INSTALLATION OFFEN
 
 ## Rolle
 
@@ -23,10 +23,10 @@ Version:
 `HDTE 0.1.0`
 
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_HARD_LOCAL_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_PRODUCTION_CANDIDATE.zip`
 
 SHA-256:
-`c6b24fdff3499c1e9a1039fae722d6ad8418df215e55a07e394408bbcac9f2a5`
+`2d3a0bd9180b30ff76e7fb0ed84a8e7cf1a4a7c0d2135999329cb5d11371a684`
 
 Eigene Identitäten:
 - Code: `HDTE_`;
@@ -72,6 +72,6 @@ DataForSEO:
 
 Kein Pferdeatelier-PSTE installieren.
 
-Vor HD-002-Liveinstallation nur noch prüfen, ob im Nachbarchat seit dem gebundenen Referenz-SHA ein neuerer Storage-/Performance-Stand veröffentlicht wurde.
+Der finale Referenzdelta-Check ist erledigt: kein neuerer Storage-/Performance-Stand vorhanden.
 
-Danach HD-002 auf Hobby Depot installieren und den V1.9.1-Ownership-Handoff real importieren.
+NEXT: zuerst HD-001 V1.9.1 live sauber abnehmen, danach HD-002 auf Hobby Depot installieren und den V1.9.1-Ownership-Handoff real importieren.
