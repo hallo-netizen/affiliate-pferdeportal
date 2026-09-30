@@ -134,10 +134,7 @@ def validate_html(markup, article_type, metadata, research, rules):
     if not allowed.issubset(set(used)): raise PackError("NOT_ALL_RESEARCH_FACTS_USED")
     if word_count(markup)<750 and article_type=="Beratung": raise PackError("BERATUNG_WORD_COUNT_BELOW_750")
 
-def build(draft_path):
-    job=load(JOB); entry=load(ENTRY); draft=load(draft_path); rules=load(RULES)
-    coverage=k9_rule_guard.validate_coverage(rules)
-    rules_sha=coverage["rules_sha256"]
+def _build_single(job,entry,rules,rules_sha,draft):
     if job.get("contract")!="K9_JOB_V1" or job.get("status")!="OPEN" or job.get("station") not in ("write","repair"):
         raise PackError("WRITE_JOB_INVALID")
     if entry.get("job_id")!=job.get("job_id") or entry.get("job_sha256")!=job.get("job_sha256"):
@@ -148,10 +145,10 @@ def build(draft_path):
         raise PackError("WRITING_RULE_COVERAGE_NOT_REQUIRED")
     if draft.get("contract")!="K9_WRITER_DRAFT_V1" or draft.get("job_id")!=job["job_id"]:
         raise PackError("WRITER_DRAFT_JOB_MISMATCH")
-    if len(job.get("items",[]))!=1 or job.get("item_count")!=1:
-        raise PackError("REALTEST_PACKAGER_EXPECTS_ONE_ITEM")
-    item=job["items"][0]; item_id=item["item_id"]
-    if draft.get("item_id")!=item_id: raise PackError("WRITER_DRAFT_ITEM_MISMATCH")
+    item_id=str(draft.get("item_id") or "").strip()
+    matches=[x for x in job.get("items",[]) if x.get("item_id")==item_id]
+    if len(matches)!=1: raise PackError("WRITER_DRAFT_ITEM_MISMATCH")
+    item=matches[0]
     meta=item["metadata"]; title=str(draft.get("title") or "").strip(); markup=str(draft.get("content_html") or "")
     if title!=meta["title"]: raise PackError("WRITER_TITLE_MISMATCH")
     research_row=item.get("input_products",{}).get("research")
@@ -281,8 +278,34 @@ def build(draft_path):
              "research_product_sha256":research["product_sha256"],"writing_rules_sha256":rules_sha,
              "writing_rules_coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1","ppm_item":ppm_item}
     product["product_sha256"]=stable(product)
-    return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],
-            "results":[{"item_id":item_id,"article_product":product}]}
+    return {"item_id":item_id,"article_product":product}
+
+def build(draft_path):
+    job=load(JOB); entry=load(ENTRY); draft=load(draft_path); rules=load(RULES)
+    coverage=k9_rule_guard.validate_coverage(rules)
+    rules_sha=coverage["rules_sha256"]
+    if draft.get("contract")!="K9_WRITER_DRAFT_V1" or draft.get("job_id")!=job.get("job_id"):
+        raise PackError("WRITER_DRAFT_JOB_MISMATCH")
+    if job.get("item_count")==1 and "items" not in draft:
+        drafts=[draft]
+    else:
+        rows=draft.get("items")
+        if not isinstance(rows,list) or len(rows)!=job.get("item_count"):
+            raise PackError("WRITER_DRAFT_BATCH_COUNT_MISMATCH")
+        ids=[str(x.get("item_id") or "") for x in rows if isinstance(x,dict)]
+        if len(ids)!=len(set(ids)) or set(ids)!=set(job.get("item_ids") or []):
+            raise PackError("WRITER_DRAFT_BATCH_ITEM_SET_MISMATCH")
+        drafts=[]
+        for row in rows:
+            drafts.append({
+                "contract":"K9_WRITER_DRAFT_V1",
+                "job_id":job["job_id"],
+                "item_id":row.get("item_id"),
+                "title":row.get("title"),
+                "content_html":row.get("content_html")
+            })
+    results=[_build_single(job,entry,rules,rules_sha,row) for row in drafts]
+    return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],"results":results}
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("draft"); ap.add_argument("--output",required=True); ns=ap.parse_args()
