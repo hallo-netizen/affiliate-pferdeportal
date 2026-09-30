@@ -1,35 +1,22 @@
 {
-  "contract": "K9_CURRENT_STATE_V3",
-  "role": "SOLE_CURRENT_AUTHORITY",
-  "concept": "K9",
+  "active_job": {
+    "article_title": "Das Wichtigste über Reitplatzplaner für Pferde",
+    "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
+    "job_id": "K9-RESEARCH-e053565c2857d4c0",
+    "job_path": "runtime/CURRENT_JOB.json",
+    "runtime_entry": "runtime/CHAT_ENTRY.json",
+    "station": "research"
+  },
   "branch": "konzept9/greenfield-20260929",
-  "status": "STOP",
-  "operational_mode": "SUPERVISOR",
-  "active_job": null,
-  "first_open_blocker": null,
-  "next_action": "RUN_ONE_CLEAN_AUTO_CHAIN_CONFIRMATION_WITHOUT_MIDRUN_FIXES",
-  "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP",
-    "preserve_existing_station_products": true,
-    "preserve_quality_gates": [
-      "LT_6_8",
-      "PPM_6_7_9",
-      "PSERC",
-      "ENDSTEMPEL",
-      "WORDPRESS_VERIFY"
-    ],
-    "do_not_reopen_completed_article": true,
-    "publish_allowed": false
-  },
-  "terminal_evidence": {
-    "stop_ref": "runtime/K9_STOP.json",
-    "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-    "final_sha256": "425e50c98ec12240ac286502b7e231e966bed1b0ad7aa930cf18337603c235e9",
-    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
-    "article_count": 1,
-    "finalizer_run_id": "36764985644",
-    "trigger_head_sha": "3c406f02e49bc502af3dfb424dd28ad12e52aa01"
-  },
   "chat_may_route": false,
-  "publish_allowed": false
+  "concept": "K9",
+  "contract": "K9_CURRENT_STATE_V3",
+  "first_open_blocker": null,
+  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY",
+  "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
+  "orchestration_mode": "STATION_ONLY",
+  "publish_allowed": false,
+  "role": "SOLE_CURRENT_AUTHORITY",
+  "status": "OPEN_CHAT_WORKER_JOB",
+  "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION"
 }
