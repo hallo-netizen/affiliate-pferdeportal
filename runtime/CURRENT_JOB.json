@@ -1,0 +1,284 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-6b233ed9774bd3dd530835c3"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "research": {
+          "job_id": "K9-RESEARCH-212dbee117f90c60",
+          "path": "warehouse/research/K9-RESEARCH-212dbee117f90c60.json",
+          "sha256": "fbbb6ea04e1a73392bbd14f78775453b3566089f0ec6cc9b1096d716145dbfe3"
+        }
+      },
+      "input_products": {
+        "research": {
+          "item_id": "k9-6b233ed9774bd3dd530835c3",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Ebbe-Flut-System oder Unterbodentropfbewässerung",
+                "vorhandener Bodenaufbau und notwendiger Systemaufbau",
+                "Wasserstand beziehungsweise Zonensteuerung",
+                "Wasser-, Strom- und Entwässerungsanschlüsse",
+                "Nachrüstbarkeit und Nutzung während der Bewässerung"
+              ],
+              "decision_goal": "Einordnen, welche technische Form der Bewässerung von unten zum vorhandenen Reitplatz oder zur Reithalle passt."
+            },
+            "fact_pack": {
+              "article_type": "FAQ",
+              "article_type_coverage": "PASS",
+              "claim_register_hash": "92f390d0103338388dd0603c9c02db917f9740555cbc12e29edcb49576a3921e",
+              "claims": [
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "6fe501b5e2dbe2acd51ecfd3498046282e810d0831a19e1383903b239bb115d3",
+                  "fact_id": "RBU_F1",
+                  "locator": "OTTO lines 38-46",
+                  "source_id": "SRC_OTTO_EBBEFLUT",
+                  "statement": "Eine Reitplatzbewässerung von unten ist technisch möglich; beim Ebbe-Flut-System wird der Reitboden von unten befeuchtet.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "aa63e0877b646e5e12b5cdca633400b4d98ad7a7014c1410b2c0699d8358c706",
+                  "fact_id": "RBU_F2",
+                  "locator": "OTTO lines 42-51",
+                  "source_id": "SRC_OTTO_EBBEFLUT",
+                  "statement": "Beim Ebbe-Flut-System transportiert Kapillarwirkung Wasser aus einer Sandschicht unterhalb des Systems nach oben in die Tretschicht.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "e0b570a527ef053532d886ff47e906f9089697b332d3553063a4cf1b1da0813f",
+                  "fact_id": "RBU_F3",
+                  "locator": "OTTO lines 49-54",
+                  "source_id": "SRC_OTTO_EBBEFLUT",
+                  "statement": "Ein Ebbe-Flut-System kann den Wasserpegel elektronisch steuern und bei Trockenheit Wasser zuführen sowie überschüssiges Regenwasser ablassen.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "955b509f13653fda88924f816d789d1767fb20eeb50945d26d0b5bc5bc7eabc1",
+                  "fact_id": "RBU_F4",
+                  "locator": "OTTO lines 68-79",
+                  "source_id": "SRC_OTTO_EBBEFLUT",
+                  "statement": "Für das beschriebene Ebbe-Flut-System wird ein wasserdicht eingefasster Aufbau benötigt, der das zur Durchfeuchtung genutzte Wasser im System hält.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "ac8a2fc1029e2baf448142b97efcdb618cb0805377ee60931163b47621c589b1",
+                  "fact_id": "RBU_F5",
+                  "locator": "Bohlmann lines 251-262",
+                  "source_id": "SRC_BOHLMANN_UNTERFLUR",
+                  "statement": "Eine andere Form der Unterflurbewässerung arbeitet mit Tropfschläuchen unter der Tretschicht; die Feuchtigkeit steigt durch Kapillarwirkung im Reitsand nach oben.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "001a7c786ffb4cd8c4b758fdf6598f1a13ad7e290e4bafcd397036815a18fa7c",
+                  "fact_id": "RBU_F6",
+                  "locator": "Bohlmann lines 262-266",
+                  "source_id": "SRC_BOHLMANN_UNTERFLUR",
+                  "statement": "Unterbodentropfbewässerung kann in Sektionen gesteuert werden und ist laut Bohlmann in Reithallen nachträglich einbaubar sowie während der Bewässerung nutzbar.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "7e4e36538401f6d41309b03877ad7d85e229faa4ce1fbd8ae35beec64b39664d",
+                  "fact_id": "RBU_F7",
+                  "locator": "BayWa lines 189-218",
+                  "source_id": "SRC_BAYWA_REITPLATZ",
+                  "statement": "Bei der Planung einer Reitplatzbewässerung müssen unter anderem Bodenaufbau, Wasseranschluss, Druck und Durchfluss, Wartung sowie Steuerung zum Platz passen.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "1326d66357e70520c62a9e0e7802985df4ee4c8a053ec9aac1002eec9cabd695",
+                  "fact_id": "RBU_F8",
+                  "locator": "Risohorse lines 60-69",
+                  "source_id": "SRC_RISOHORSE_FAQ",
+                  "statement": "Für ein Ebbe-Flut-System müssen die benötigten Anschlüsse und die Ableitung überschüssigen Wassers bereits in der Planung berücksichtigt werden.",
+                  "subject_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich",
+                  "time_scope": "RETRIEVED_2026-09-30"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeportal",
+              "fact_ids": [
+                "RBU_F1",
+                "RBU_F2",
+                "RBU_F3",
+                "RBU_F4",
+                "RBU_F5",
+                "RBU_F6",
+                "RBU_F7",
+                "RBU_F8"
+              ],
+              "fact_pack_hash": "fc91f7b75bf3c0aa38536abfed9584ee01d1179883272c7d5551cb8b794fa9c7",
+              "fact_pack_id": "k9-reitplatzbewaesserung-faq-63328768e9ed161fdfeb14c1",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "20aed99fe841af5f8ef94cfd467d301ff278795f33f04bc1bcdec2f39f83efdc",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "ist_eine_reitplatzbewaesserung_von_unten_moeglich"
+            },
+            "portal_links": [
+              {
+                "anchor": "Weide",
+                "href": "/weide/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Reitplatz",
+                "href": "/weide/weide-reitplatz/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Reitplatzbewässerung",
+                "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "347439dfb3c17ae675d1158200b62837e89bb9bc12f9f27f00e5915d47e51666",
+            "sources": [
+              {
+                "source_id": "SRC_OTTO_EBBEFLUT",
+                "title": "OTTO-Ebbe&Flut Reitplatzbau mit automatischer Bewässerung",
+                "url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau"
+              },
+              {
+                "source_id": "SRC_BOHLMANN_UNTERFLUR",
+                "title": "Reithallen Beregnungsanlagen – Unterflurbewässerung",
+                "url": "https://www.bohlmann-reitboden.de/de/reitboden/reitplatzberegnung/bewaesserung-reithalle/"
+              },
+              {
+                "source_id": "SRC_RISOHORSE_FAQ",
+                "title": "Häufige Fragen zum Risohorse Ebbe und Flut-System",
+                "url": "https://risohorse.de/de/faq/"
+              },
+              {
+                "source_id": "SRC_BAYWA_REITPLATZ",
+                "title": "Bewässerung für Reitplatz und Reithalle",
+                "url": "https://www.baywa.de/i/beratung/bewaesserung/kommunen/sportplatz/reitplatz"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-6b233ed9774bd3dd530835c3",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "reitplatzbewaesserung-faq",
+        "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+        "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+        "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+      },
+      "revision": 0,
+      "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+    }
+  ],
+  "job_id": "K9-WRITE-833e4fa969d7d122",
+  "job_sha256": "dd256d0abdb10c7ff3d7fbc27b561982136c0c85fc9bda3de2be4b90d022b30c",
+  "ledger_generation": 46,
+  "source_run_id": "36763631729",
+  "station": "write",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "INVENT_NEW_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_IN_THIS_JOB",
+    "must": [
+      "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+      "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
+      "RETURN_FINAL_ARTICLE_HTML",
+      "BIND_RESEARCH_PRODUCT_SHA256",
+      "RETURN_PPM_ITEM_BOUND_TO_SAME_FACT_PACK",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "ADD_AT_LEAST_THREE_PPM_SOURCE_TRACE_SPANS_TO_LEXICALLY_SUPPORTING_FACTUAL_PARAGRAPHS",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM",
+      "READ_COMPLETE_K9_WRITING_RULES_BEFORE_AUTHORING",
+      "APPLY_EVERY_BOUND_RULE_GROUP_NOT_A_SELECTED_SUBSET",
+      "TREAT_WRITING_RULES_COVERAGE_AS_FAIL_CLOSED"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_AND_THE_COMPLETE_K9_WRITING_RULESET_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_WRITE_WORKER"
+  }
+}
