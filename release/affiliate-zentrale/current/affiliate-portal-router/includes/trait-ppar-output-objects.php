@@ -16,7 +16,6 @@ if (!defined('ABSPATH')) {
  */
 trait PPAR_Output_Objects_Trait {
     private $output_creative_row_cache = array();
-    private $output_creative_row_cache_primed = false;
 
     private function output_request_local_read_cache_allowed() {
         if ((function_exists('is_admin') && is_admin())
@@ -29,42 +28,7 @@ trait PPAR_Output_Objects_Trait {
         return true;
     }
 
-    private function output_prime_creative_row_cache() {
-        if ($this->output_creative_row_cache_primed || !$this->output_request_local_read_cache_allowed() || !method_exists($this, 'get_campaigns')) {
-            return;
-        }
-        $hashes = array();
-        foreach ((array) $this->get_campaigns() as $campaign) {
-            if (!is_array($campaign)) { continue; }
-            $post_id = absint($campaign['post_id'] ?? 0);
-            if ($post_id <= 0) { continue; }
-            $hash = strtolower(sanitize_text_field((string) get_post_meta($post_id, '_ppar_creative_identity_hash', true)));
-            if (preg_match('/^[a-f0-9]{64}$/', $hash)) { $hashes[$hash] = true; }
-        }
-        $hashes = array_keys($hashes);
-        if (!$hashes) {
-            $this->output_creative_row_cache_primed = true;
-            return;
-        }
-        global $wpdb;
-        $table = $this->creative_library_table();
-        $all_ok = true;
-        foreach (array_chunk($hashes, 1000) as $chunk) {
-            $placeholders = implode(',', array_fill(0, count($chunk), '%s'));
-            $sql = $wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash IN ({$placeholders}) ORDER BY id DESC", $chunk);
-            $rows = $wpdb->get_results($sql, ARRAY_A);
-            if (!is_array($rows)) { $all_ok = false; continue; }
-            foreach ($chunk as $hash) { $this->output_creative_row_cache[$hash] = null; }
-            foreach ($rows as $row) {
-                if (!is_array($row)) { continue; }
-                $hash = strtolower(sanitize_text_field((string) ($row['identity_hash'] ?? '')));
-                if (preg_match('/^[a-f0-9]{64}$/', $hash) && array_key_exists($hash, $this->output_creative_row_cache) && $this->output_creative_row_cache[$hash] === null) {
-                    $this->output_creative_row_cache[$hash] = $row;
-                }
-            }
-        }
-        if ($all_ok) { $this->output_creative_row_cache_primed = true; }
-    }
+    
 
     private function output_objects_table() {
         global $wpdb;
@@ -1514,12 +1478,14 @@ trait PPAR_Output_Objects_Trait {
     private function output_creative_row($identity_hash) {
         $identity_hash = strtolower(sanitize_text_field((string) $identity_hash));
         $use_cache = $this->output_request_local_read_cache_allowed();
-        if ($use_cache) {
-            $this->output_prime_creative_row_cache();
-            if (array_key_exists($identity_hash, $this->output_creative_row_cache)) {
-                return $this->output_creative_row_cache[$identity_hash];
-            }
+        if ($use_cache && array_key_exists($identity_hash, $this->output_creative_row_cache)) {
+            return $this->output_creative_row_cache[$identity_hash];
         }
+
+        // V6.72.169: this is an exact creative-identity lookup. A normal frontend
+        // request must never normalize every campaign and preload the complete
+        // creative library merely to answer one exact hash. Cache only identities
+        // actually requested by the current page.
         global $wpdb;
         $table = $this->creative_library_table();
         $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash=%s", $identity_hash), ARRAY_A);
