@@ -1,8 +1,25 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-24
+STAND: 2026-09-30
 QUELLE: WordPress-Screenshotinventur des Nutzers + bereits vorhandene Campus-/Fachbelege
 REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Autorität.
+
+## INVENTARDELTA 2026-09-30 – REALER WORDPRESS-READBACK
+
+Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobachtung supersediert für den **installierten Betriebsstand** die älteren Versionszeilen der betroffenen Plugins. Fach-/Release-/LIVE-Autorität bleibt unverändert beim jeweiligen Fachbüro bzw. der technischen Originalquelle.
+
+| Plugin | Real beobachtet 30.09.2026 | Aktivstatus | Zuständigkeit / Hinweis |
+|---|---:|---|---|
+| Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.578** | aktiv | DESIGN; aktuellen Fachstand dort prüfen |
+| Affiliate-Zentrale (Portal-kompatibel) | **6.72.165** | aktiv | AFFILIATE; gleichversionierter Storage-Housekeeping-Ersatz im laufenden Aufräumauftrag |
+| Performance Diagnose Safe | **2.3.0** | aktiv | GEMEINSAM / Performance; passive No-Filter-Diagnose |
+| Performance Diagnose Safe | **2.2.0** | inaktiv | AUFRÄUMKANDIDAT; nicht als aktuelle Messquelle verwenden |
+| Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
+| Portal Production Machine | **6.7.9** | aktiv | TEXT; kritisch, unverändert |
+| Portal SEO Redaktionsplan Compiler | **0.28.27** | aktiv | TEXT; kritisch |
+| Portal SEO Themenengine | **0.57.12** | aktiv | TEXT; kritisch |
+
+**Arbeitsregel 30.09.2026:** Datenbank-/Performancebereinigung nur pluginweise und gegen die jeweilige aktuelle Fachquelle. Storageänderungen dürfen vorhandene Performanceoptimierungen nicht überschreiben. Kandidaten werden erst nach Installation/Readback zum beobachteten Betriebsstand.
 
 ## INVENTARDELTA 2026-09-24 – KATEGORIE-SCOPE FINAL
 
