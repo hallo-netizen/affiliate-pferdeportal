@@ -19,7 +19,6 @@ trait PPAR_Idealo_Trait {
      * expensive relevance/control/health gates. Admin/Cron/REST/CLI/AJAX keep
      * the historical full-scan path.
      */
-    private $multiprovider_gtin_candidate_index_request_cache = null;
 
     const IDEALO_REFRESH_HOOK = 'ppar_idealo_refresh_v1';
     const IDEALO_MANUAL_REFRESH_HOOK = 'ppar_idealo_manual_refresh_v1';
@@ -1045,48 +1044,81 @@ trait PPAR_Idealo_Trait {
      */
     private function multiprovider_exact_gtin_candidate_pool($wanted_gtins) {
         $wanted_gtins=$this->idealo_normalize_gtins_from_values((array)$wanted_gtins);
-        if (!$wanted_gtins || !method_exists($this,'get_campaigns')) { return array(); }
+        if (!$wanted_gtins) { return array(); }
 
         $cache_allowed=method_exists($this,'ranked_campaigns_request_cache_allowed')
             ? $this->ranked_campaigns_request_cache_allowed()
             : false;
         if (!$cache_allowed) {
-            // Non-frontend paths retain the historical full scan exactly.
-            return array_values((array)$this->get_campaigns());
+            // Admin/Cron/REST/WP-CLI keep the historical behavior unchanged.
+            return method_exists($this,'get_campaigns')
+                ? array_values((array)$this->get_campaigns())
+                : array();
         }
 
-        $campaigns=array_values((array)$this->get_campaigns());
-        if (!is_array($this->multiprovider_gtin_candidate_index_request_cache)) {
-            $index=array();
-            foreach ($campaigns as $position=>$candidate) {
-                if (!is_array($candidate) || empty($candidate['active'])) { continue; }
-                $creative_type=isset($candidate['_ppar_norm_creative_type'])
-                    ? (string)$candidate['_ppar_norm_creative_type']
-                    : sanitize_key((string)($candidate['creative_type']??''));
-                if ($creative_type!=='product') { continue; }
-                foreach ($this->multiprovider_campaign_gtins($candidate) as $gtin) {
-                    $gtin=(string)$gtin;
-                    if ($gtin==='') { continue; }
-                    if (!isset($index[$gtin])) { $index[$gtin]=array(); }
-                    $index[$gtin][(int)$position]=true;
-                }
-            }
-            $this->multiprovider_gtin_candidate_index_request_cache=$index;
+        // V6.72.169: public exact-offer lookup reuses the same cheap raw campaign
+        // snapshot/index as normal slot ranking. idealo and OTTO/Awin identities
+        // are already stored in campaign data; eBay identities are added by a
+        // targeted source lookup for only the requested GTIN(s). No full
+        // get_campaigns() normalization pass is allowed in this hot path.
+        if (!method_exists($this,'ranked_campaign_posts_snapshot')
+            || !method_exists($this,'ranked_campaign_candidate_index')
+            || !method_exists($this,'ranked_campaign_from_post_cached')) {
+            return array();
         }
 
+        $posts=$this->ranked_campaign_posts_snapshot();
         $positions=array();
+
+        $exact_index=$this->ranked_campaign_candidate_index('exact');
         foreach ($wanted_gtins as $gtin) {
-            foreach (array_keys((array)($this->multiprovider_gtin_candidate_index_request_cache[(string)$gtin]??array())) as $position) {
+            $key='GTIN:'.(string)$gtin;
+            foreach (array_keys((array)($exact_index['product_by_exact_identifier'][$key]??array())) as $position) {
                 $positions[(int)$position]=true;
             }
         }
+
+        // eBay BUSINESS historically derives GTIN from its verified source
+        // payload instead of persisting it in ppar_campaign_data. Preserve that
+        // exact cross-provider behavior with a requested-GTIN lookup only.
+        if (method_exists($this,'ebay_campaign_post_ids_for_exact_gtins')) {
+            $ebay_post_ids=$this->ebay_campaign_post_ids_for_exact_gtins($wanted_gtins);
+            if ($ebay_post_ids) {
+                $position_by_post=array();
+                foreach ($posts as $position=>$post) {
+                    if (is_object($post) && !empty($post->ID)) {
+                        $position_by_post[absint($post->ID)]=(int)$position;
+                    }
+                }
+                foreach ($ebay_post_ids as $post_id) {
+                    $post_id=absint($post_id);
+                    if ($post_id>0 && isset($position_by_post[$post_id])) {
+                        $positions[$position_by_post[$post_id]]=true;
+                    }
+                }
+            }
+        }
+
         if (!$positions) { return array(); }
         ksort($positions,SORT_NUMERIC);
+
         $out=array();
         foreach (array_keys($positions) as $position) {
-            if (isset($campaigns[$position]) && is_array($campaigns[$position])) { $out[]=$campaigns[$position]; }
+            if (!isset($posts[$position]) || !is_object($posts[$position])) { continue; }
+            $candidate=$this->ranked_campaign_from_post_cached($posts[$position]);
+            if (!is_array($candidate) || empty($candidate['active'])) { continue; }
+            $creative_type=isset($candidate['_ppar_norm_creative_type'])
+                ? (string)$candidate['_ppar_norm_creative_type']
+                : sanitize_key((string)($candidate['creative_type']??''));
+            if ($creative_type!=='product') { continue; }
+
+            // Targeted indexes are only preselection. Keep the historical exact
+            // identity check authoritative before returning a candidate.
+            $candidate_gtins=$this->multiprovider_campaign_gtins($candidate);
+            if (!array_intersect($wanted_gtins,$candidate_gtins)) { continue; }
+            $out[]=$candidate;
         }
-        return $out;
+        return array_values($out);
     }
 
     /**
