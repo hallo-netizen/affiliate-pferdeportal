@@ -1,7 +1,7 @@
 # PLUGINS – CURRENT STATE
 
-STAND: 2026-09-24
-STATUS: KATEGORIE-/PLUGINSTAND 2026-09-24 NACHGEFÜHRT / KATEGORIE-SCOPE GESCHLOSSEN / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
+STAND: 2026-09-30
+STATUS: REALER WORDPRESS-PLUGINSTAND 2026-09-30 NACHGEFÜHRT / AUFRÄUM- UND PERFORMANCEARBEIT AKTIV / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
 
 ## AUTORITÄT
 
@@ -14,6 +14,36 @@ Diese Datei ist die einzige aktuelle Standzusammenfassung des PLUGINS-Büros.
 - Fach-/Release-/LIVE-Status → zuständiges Fachbüro / technische Originalquelle
 - Fehler → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`
 - dauerhaftes WAS/WARUM → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
+
+## REALER WORDPRESS-READBACK 2026-09-30 – AKTUELLER BETRIEBSSTAND
+
+Quelle: vom Nutzer bereitgestellte aktuelle WordPress-Liste „Plugins → Installierte Plugins“. Dieser Block ist Inventar-/Betriebsreadback, keine eigenständige Fach- oder Releasefreigabe.
+
+Aktuell beobachtet:
+- Affiliate Portal Template Kit (Pferde-kompatibel): **1.50.578**, aktiv.
+- Affiliate-Zentrale (Portal-kompatibel): **6.72.165**, aktiv.
+- Performance Diagnose Safe: **2.3.0 aktiv**; ältere **2.2.0 inaktiv**.
+- Pferde Atelier – Affiliate Design Performance: **3.0.0 inaktiv**.
+- Portal Production Machine: **6.7.9**, aktiv.
+- Portal SEO Redaktionsplan Compiler: **0.28.27**, aktiv.
+- Portal SEO Themenengine: **0.57.12**, aktiv.
+
+Der frühere Kategorie-Stand weiter unten bleibt historische Scope-Dokumentation und darf diese reale Inventarbeobachtung nicht überschreiben.
+
+## AKTUELLER AUFRÄUM-/PERFORMANCEAUFTRAG 2026-09-30
+
+Ziel des laufenden Plugin-Arbeitsstrangs:
+- Datenbank nachhaltig gegen unnötiges Wachstum schützen;
+- vorhandene Altlasten kontrolliert bereinigen;
+- Performanceverbesserungen erhalten und nicht gegenseitig überschreiben;
+- Plugin für Plugin arbeiten, keine Serie von Miniversionen.
+
+Arbeitsgrenze:
+- Fach-/Release-/LIVE-Autorität bleibt im jeweiligen Fachbüro bzw. in der technischen Originalquelle.
+- Keine Datenlöschung ohne belegte Schutz-/Recoveryprüfung.
+- Keine Performanceoptimierung darf durch Storage-/Housekeepingänderungen rückgängig gemacht werden.
+- Affiliate-Zentrale **6.72.165** wurde im laufenden Auftrag durch einen gleichversionierten Storage-Housekeeping-Build ersetzt; exakter Updatebeleg steht in `UPDATEPROTOKOLL.md`.
+- PSTE **0.57.12** ist weiterhin real installiert; ein neuer PSTE-Kandidat ist **noch kein LIVE-Stand**.
 
 ## KATEGORIE-CLOSEOUT-SYNC 2026-09-24
 
