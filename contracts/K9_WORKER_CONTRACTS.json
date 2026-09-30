@@ -5,7 +5,7 @@
   "contracts": {
     "research": {
       "worker_type": "CHAT_RESEARCH_WORKER",
-      "input_rule": "USE_ONLY_THIS_JOB_ITEM_BOUND_PORTAL_CONTEXT_AND_PUBLIC_RESEARCH_SOURCES",
+      "input_rule": "USE_ONLY_THIS_JOB_ITEM_BOUND_PORTAL_CONTEXT_BOUND_SCOPE_CONTEXT_AND_PUBLIC_RESEARCH_SOURCES",
       "output_contract": "K9_RESEARCH_PRODUCT_V1",
       "must": [
         "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",

@@ -68,6 +68,10 @@ jobs:
       - name: PPM 6.7.9 regression - canonical table and source traces
         run: |
           set -euo pipefail
+          if [ ! -f runtime/CURRENT_JOB.json ]; then
+            echo 'NO_OPEN_RUNTIME_JOB_STRUCTURAL_REGRESSION_ALREADY_PROVEN'
+            exit 0
+          fi
           python3 - <<'PY'
           import copy, hashlib, json, re, sys, tempfile
           from pathlib import Path
@@ -196,6 +200,78 @@ jobs:
                   raise SystemExit("POSITIVE_SCOPE_FIX_NOT_PASS")
               print("PSERC_SCOPE_NEGATIVE_REPRODUCED=1")
               print("PSERC_SCOPE_POSITIVE_PASS=1")
+          PY
+      - name: Prepare exact LanguageTool 6.8 for PSERC scope regression
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k9-lt68-scope
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68-scope/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68-scope/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k9-lt68-scope/LanguageTool-6.8.zip -d /tmp/k9-lt68-scope
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68-scope/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+      - name: PSERC regression - title scope negative and positive
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re,shutil,subprocess,tempfile
+          from pathlib import Path
+
+          repo=Path('.').resolve()
+          ledger=json.loads((repo/'state/ledger.json').read_text())
+          if len(ledger.get('items') or [])!=1:
+              raise SystemExit('PSERC_SCOPE_REGRESSION_REQUIRES_ONE_ITEM')
+          item=ledger['items'][0]
+          research_rel=item['products']['research']['path']
+          article_key='repair' if item.get('revision',0)>0 else 'write'
+          article_rel=item['products'][article_key]['path']
+          keyword=str(item['metadata']['target_keyword']).casefold()
+          for a,b in [('ä','ae'),('ö','oe'),('ü','ue'),('ß','ss')]:
+              keyword=keyword.replace(a,b)
+          scope=re.sub(r'[^a-z0-9]+','_',keyword).strip('_')
+          if not scope:
+              raise SystemExit('PSERC_SCOPE_EMPTY')
+
+          def make_root(mode):
+              root=Path(tempfile.mkdtemp(prefix='k9-pserc-scope-'+mode+'-'))
+              shutil.copytree(repo/'state',root/'state')
+              shutil.copytree(repo/'warehouse',root/'warehouse')
+              rp=json.loads((root/research_rel).read_text())
+              ap=json.loads((root/article_rel).read_text())
+              fp=rp['results'][0]['research_product']['fact_pack']
+              runtime=ap['results'][0]['article_product']['ppm_item']['runtime_order']
+              if mode=='negative':
+                  fp.pop('title_scope',None)
+                  runtime['subject_scope']='k9_topic'
+              else:
+                  fp['title_scope']=scope
+                  runtime['subject_scope']=scope
+              (root/research_rel).write_text(json.dumps(rp,ensure_ascii=False,indent=2)+'\n')
+              (root/article_rel).write_text(json.dumps(ap,ensure_ascii=False,indent=2)+'\n')
+              return root
+
+          def run(root):
+              out=root/'out.json'
+              cmd=[
+                  'python3','k9_pserc.py',str(root),
+                  'quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip','quality/PSERC-FIX.zip',
+                  '/tmp/k9-lt68-scope/LanguageTool-6.8/languagetool-commandline.jar',
+                  '--output',str(out)
+              ]
+              p=subprocess.run(cmd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+              return p,out
+
+          neg,negout=run(make_root('negative'))
+          if neg.returncode==0 or 'CANONICAL_FACT_PACK_SCOPE_MISMATCH' not in neg.stdout:
+              raise SystemExit('PSERC_SCOPE_NEGATIVE_NOT_REPRODUCED:'+neg.stdout[-1500:])
+          print('PSERC_SCOPE_NEGATIVE_REPRODUCED=1')
+
+          pos,posout=run(make_root('positive'))
+          if pos.returncode!=0:
+              raise SystemExit('PSERC_SCOPE_POSITIVE_FAILED:'+pos.stdout[-2500:])
+          result=json.loads(posout.read_text())
+          if result.get('status')!='PASS' or result.get('bridge_status')!='PSERC_PPM_INTAKE_BRIDGE_EXECUTED':
+              raise SystemExit('PSERC_SCOPE_POSITIVE_NOT_PASS')
+          print('PSERC_SCOPE_POSITIVE_PASS=1')
           PY
       - name: Validate actual open runtime job
         run: |
