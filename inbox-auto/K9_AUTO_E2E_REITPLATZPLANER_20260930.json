@@ -1,0 +1,21 @@
+{
+  "contract": "PSERC_METADATA_ONLY_READ_ONLY_PREVIEW_V5_DUAL_STRAND",
+  "mode": "READ_ONLY_METADATA_ONLY_EXACT_FIVE_FIELDS",
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "item_count": 1,
+    "batch_sha256": "real-k9-auto-reitplatzplaner-20260930",
+    "items": [
+      {
+        "title": "Das Wichtigste über Reitplatzplaner für Pferde",
+        "target_keyword": "Reitplatzplaner für Pferde",
+        "category": "reitplatzplaner-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15"
+      }
+    ]
+  }
+}
