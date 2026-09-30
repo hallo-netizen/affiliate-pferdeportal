@@ -35,51 +35,92 @@ def build(root,pserc_path,outdir):
     ledger=load(root/"state/ledger.json")
     if ledger.get("generation",0)<1: raise Blocked("LEDGER_GENERATION_INVALID")
     items=ledger.get("items")
-    if not isinstance(items,list) or len(items)!=1 or items[0].get("stages",{}).get("check")!="DONE": raise Blocked("LEDGER_NOT_FULLY_CHECKED")
-    meta=items[0]["metadata"]; slot=meta["plan_slot"]
-    intake_files=[]
+    if not isinstance(items,list) or not items or any(x.get("stages",{}).get("check")!="DONE" for x in items): raise Blocked("LEDGER_NOT_FULLY_CHECKED")
+
+    pserc_rows=pserc.get("results")
+    if isinstance(pserc_rows,list):
+        by_item={str(x.get("item_id") or ""):x for x in pserc_rows if isinstance(x,dict)}
+        if len(by_item)!=len(items): raise Blocked("PSERC_ITEM_SET_COUNT_INVALID")
+    elif len(items)==1:
+        by_item={str(items[0].get("item_id") or ""):pserc}
+    else:
+        raise Blocked("PSERC_BATCH_RESULTS_MISSING")
+
+    intake_candidates=[]
     for candidate in sorted((root/"warehouse/intake").glob("K9-INTAKE-*.json")):
         candidate_data=load(candidate)
         candidate_items=candidate_data.get("items")
-        if not isinstance(candidate_items,list):
-            continue
-        if any(isinstance(row,dict) and isinstance(row.get("metadata"),dict) and row["metadata"].get("plan_slot")==slot for row in candidate_items):
-            intake_files.append(candidate)
-    if len(intake_files)!=1: raise Blocked("ACTIVE_INTAKE_NOT_UNIQUE")
-    intake=load(intake_files[0])
+        if isinstance(candidate_items,list):
+            intake_candidates.append((candidate,candidate_items))
+    intake_paths=[]
+    for item in items:
+        slot=item["metadata"]["plan_slot"]
+        hits=[]
+        for candidate,candidate_items in intake_candidates:
+            if any(isinstance(row,dict) and isinstance(row.get("metadata"),dict) and row["metadata"].get("plan_slot")==slot for row in candidate_items):
+                hits.append(candidate)
+        if len(hits)!=1: raise Blocked("ACTIVE_INTAKE_NOT_UNIQUE:"+str(slot))
+        intake_paths.append(hits[0])
+    unique_intakes={str(x) for x in intake_paths}
+    if len(unique_intakes)!=1: raise Blocked("ACTIVE_INTAKE_BATCH_NOT_UNIQUE")
+    intake_path=intake_paths[0]
+    intake=load(intake_path)
     batch=str(intake.get("source_batch_sha256") or "")
     if not re.fullmatch(r"[0-9a-f]{64}",batch): raise Blocked("SOURCE_BATCH_SHA_INVALID")
-    article_key="repair" if items[0].get("revision",0)>0 else "write"
-    apath=root/items[0]["products"][article_key]["path"]; apkg=load(apath)
-    rows=[x for x in apkg.get("results",[]) if x.get("item_id")==items[0]["item_id"]]
-    if len(rows)!=1: raise Blocked("LATEST_ARTICLE_NOT_UNIQUE")
-    article=rows[0].get("article_product")
-    if not isinstance(article,dict): raise Blocked("ARTICLE_PRODUCT_MISSING")
-    html=str(article.get("content_html") or "")
-    raw=html.encode("utf-8")
-    if hashlib.sha256(raw).hexdigest()!=article.get("content_sha256"): raise Blocked("ARTICLE_HASH_INVALID")
 
-    fact_pack=pserc.get("fact_pack"); plan_item=pserc.get("production_plan_item")
-    cid=str(pserc.get("canonical_article_id") or "")
-    if not isinstance(fact_pack,dict) or not isinstance(plan_item,dict) or not cid.startswith("article:"): raise Blocked("PSERC_COMPONENTS_INVALID")
-    plan_item=json.loads(json.dumps(plan_item,ensure_ascii=False))
-    plan_item["canonical_article_id"]=cid
-    canonical_article=plan_item.get("canonical_article")
-    if not isinstance(canonical_article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
-    canonical_article["body_html"]=html
-    canonical_article["body_html_sha256"]=hashlib.sha256(raw).hexdigest()
-    plan_item["canonical_article"]=canonical_article
+    fact_packs=[]
+    plan_items=[]
+    release_items=[]
+    article_rows=[]
+    for item in items:
+        iid=str(item.get("item_id") or "")
+        slot=item["metadata"]["plan_slot"]
+        article_key="repair" if item.get("revision",0)>0 else "write"
+        apath=root/item["products"][article_key]["path"]
+        apkg=load(apath)
+        rows=[x for x in apkg.get("results",[]) if x.get("item_id")==iid]
+        if len(rows)!=1: raise Blocked("LATEST_ARTICLE_NOT_UNIQUE:"+iid)
+        article=rows[0].get("article_product")
+        if not isinstance(article,dict): raise Blocked("ARTICLE_PRODUCT_MISSING:"+iid)
+        html=str(article.get("content_html") or "")
+        raw=html.encode("utf-8")
+        if hashlib.sha256(raw).hexdigest()!=article.get("content_sha256"): raise Blocked("ARTICLE_HASH_INVALID:"+iid)
 
-    bundle={"contract":"canonical_fact_pack_import_v1","fact_packs":[fact_pack]}
-    plan={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9","items":[plan_item]}
+        pr=by_item.get(iid)
+        if not isinstance(pr,dict): raise Blocked("PSERC_ITEM_RESULT_MISSING:"+iid)
+        fact_pack=pr.get("fact_pack"); plan_item=pr.get("production_plan_item")
+        cid=str(pr.get("canonical_article_id") or "")
+        if not isinstance(fact_pack,dict) or not isinstance(plan_item,dict) or not cid.startswith("article:"):
+            raise Blocked("PSERC_COMPONENTS_INVALID:"+iid)
+        plan_item=json.loads(json.dumps(plan_item,ensure_ascii=False))
+        plan_item["canonical_article_id"]=cid
+        canonical_article=plan_item.get("canonical_article")
+        if not isinstance(canonical_article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING:"+iid)
+        canonical_article["body_html"]=html
+        canonical_article["body_html_sha256"]=hashlib.sha256(raw).hexdigest()
+        plan_item["canonical_article"]=canonical_article
+
+        fact_packs.append(fact_pack)
+        plan_items.append(plan_item)
+        release_items.append({"canonical_article_id":cid,"plan_slot":slot})
+        article_rows.append({
+            "name":f"ARTICLE_{slot}.md",
+            "plan_slot":slot,
+            "sha256":hashlib.sha256(raw).hexdigest(),
+            "byte_length":len(raw),
+            "content_utf8":html
+        })
+
+    bundle={"contract":"canonical_fact_pack_import_v1","fact_packs":fact_packs}
+    plan={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9","items":plan_items}
     bh,ph=stable(bundle),stable(plan)
     release={
         "content_generation_performed_by_supervisor":False,
         "contract":"WORKFLOW_SUPERVISOR_RELEASE_V2_SIGNED",
         "exact_five_batch_sha256":batch,
-        "exact_five_item_count":1,
+        "exact_five_item_count":len(items),
         "fact_pack_bundle_sha256":bh,
-        "items":[{"canonical_article_id":cid,"plan_slot":slot}],
+        "items":release_items,
         "production_plan_sha256":ph,
         "status":"PASS",
         "wordpress_write_performed":False
@@ -99,15 +140,14 @@ def build(root,pserc_path,outdir):
     envelope["package_payload_sha256"]=stable(envelope)
     env_sha=stable(envelope)
 
-    article_row={"name":f"ARTICLE_{slot}.md","plan_slot":slot,"sha256":hashlib.sha256(raw).hexdigest(),"byte_length":len(raw),"content_utf8":html}
     manifest={
         "contract":MANIFEST_CONTRACT,
         "batch_sha256":batch,
         "runtime_generation":ledger["generation"],
-        "source_manifest_ref":str(intake_files[0].relative_to(root)),
-        "source_manifest_sha256":file_sha(intake_files[0]),
-        "article_count":1,
-        "articles":[article_row],
+        "source_manifest_ref":str(intake_path.relative_to(root)),
+        "source_manifest_sha256":file_sha(intake_path),
+        "article_count":len(article_rows),
+        "articles":article_rows,
         "import_envelope_sha256":env_sha,
         "publish_allowed":False,
         "content_mutation_performed":False
