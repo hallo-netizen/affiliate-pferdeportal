@@ -8,15 +8,15 @@
     "ref": "main",
     "path": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
   },
-  "status": "FRESH_CHAT_SINGLE_ARTICLE_AUTO_PROOF_READY_OPEN_RESEARCH_JOB",
+  "status": "FRESH_CHAT_AUTO_PROOF_WRITE_OPEN_EXECUTION_ONLY_GUARD_ACTIVE",
   "freshness": {
-    "last_relevant_technical_head": "a90e19f7f0bc6383d83b501688f1436371a038f1",
-    "last_head_selftest_run": 36709648061,
+    "last_relevant_technical_head": "cc04ca39098ef3037307c3e7c2609c09c3e07b28",
+    "last_head_selftest_run": 36712868382,
     "last_real_finalizer_run": 36709672952,
     "finalizer_input_head": "95c55ae7042754c2a962a4f8e452f5beb7692b6b",
     "terminal_package_commit": "b16299c4d661c2e54e467bbdc753dc8db46a85ec",
-    "current_head": "8fb251018242b9d1a14a0f154b07e795097dd526",
-    "freshness_result": "PASS_FRESH_CHAT_PROOF_STATE_STAGED_SELFTEST_36710944974_SUCCESS"
+    "current_head": "cc04ca39098ef3037307c3e7c2609c09c3e07b28",
+    "freshness_result": "PASS_EXECUTION_ONLY_WORKER_GUARD_SELFTEST_SUCCESS"
   },
   "proven": {
     "article_count": 1,
@@ -58,14 +58,16 @@
     "endstempel_verify": "runtime/K9_ENDSTEMPEL_VERIFY.json",
     "wordpress_verify": "runtime/K9_WORDPRESS_IMPORT_VERIFY.json"
   },
-  "first_open_blocker": "FORCED_FRESH_CHAT_REENTRY_AND_FULL_AUTO_ZERO_NUDGE_NOT_YET_PROVEN",
-  "production_readiness": "SINGLE_ARTICLE_AUTO_CHAIN_AND_TERMINAL_OUTPUT_PROVEN; FRESH_CHAT_FULL_AUTO_ZERO_NUDGE_AND_MULTI_ITEM_NOT_YET_PROVEN",
-  "next_action": "FROM_A_NEW_CHAT_ENTER_K9:PFERDEATELIER; READ_CURRENT_STATE_AND_THE_EXISTING_RUNTIME_CHAT_ENTRY; EXECUTE_ONLY_OPEN_JOB K9-RESEARCH-f44ef7e1296d1829 FOR 'So wählst du passende Schermaschinen für Pferde'; DO_NOT_RECONSTRUCT_OR_MANUALLY_ROUTE; CONTINUE AUTOMATICALLY THROUGH WRITE_LT68_PPM679_REPAIR_RECHECK_PSERC_ENDSTEMPEL_WORDPRESS_STOP; VERIFY_ZERO_MANUAL_STAGE_OR_FINALIZER_NUDGES",
+  "first_open_blocker": "FRESH_CHAT_FULL_AUTO_ZERO_NUDGE_FROM_OPEN_WRITE_THROUGH_TERMINAL_STOP_NOT_YET_PROVEN",
+  "production_readiness": "FRESH_CHAT_REENTRY_AND_RESEARCH_TO_WRITE_AUTO_TRANSITION_PROVEN; EXECUTION_ONLY_WORKER_GUARD_ACTIVE; FULL_ZERO_NUDGE_TERMINAL_CHAIN_AND_MULTI_ITEM_NOT_YET_PROVEN",
+  "next_action": "EXECUTE_EXISTING_OPEN_WRITE_JOB K9-WRITE-4608172043f2597d ONLY; TREAT SEALED RESEARCH AS AUTHORITATIVE; DO NOT REOPEN RESEARCH, CHANGE WORKFLOW, CHANGE QUALITY GATES, RESET TEST STATE, OR MANUALLY ROUTE; AFTER WRITE SUBMISSION VERIFY AUTOMATIC CHECK_REPAIR_RECHECK_FINALIZER_PSERC_ENDSTEMPEL_WORDPRESS_STOP",
   "working_binding": {
     "entry_door": "hallo-netizen/text-start issue #46 (K9:pferdeatelier)",
     "current_authority": "CURRENT_STATE.json",
     "runtime_job_entry": "runtime/CHAT_ENTRY.json only when a chat job is open",
-    "legacy_k4_k8_runtime_use": "FORBIDDEN",
+    "outside_exact_job_state_use": "FORBIDDEN",
+    "worker_execution_policy": "WORKER_EXECUTES_ONLY_NEVER_SUPERVISES",
+    "accepted_predecessor_rule": "BOUND_PREDECESSOR_PRODUCTS_ARE_AUTHORITATIVE_FOR_CURRENT_STATION",
     "chat_may_route": false,
     "publish_allowed": false
   },
@@ -82,6 +84,19 @@
     "old_runtime_cleared": true,
     "old_final_cleared": true,
     "previous_pass_archive": "archive/k9-auto-longiergurt-pass-20260930",
-    "publish_allowed": false
+    "publish_allowed": false,
+    "research_to_write": "PASS_AUTOMATIC",
+    "current_open_station": "write",
+    "current_open_job_id": "K9-WRITE-4608172043f2597d",
+    "execution_only_guard": "ACTIVE"
+  },
+  "worker_execution_only_fix": {
+    "status": "ACTIVE_AND_SELFTESTED",
+    "contract_fix_commit": "1e90274bbc326e62f6f4f6ed618356586aff7362",
+    "runtime_open_job_binding_commit": "fb7b57f38d1cb5b5ca15d85397dcb4ee4439fed9",
+    "acceptance_guard_commit": "cc04ca39098ef3037307c3e7c2609c09c3e07b28",
+    "selftest_run": 36712868382,
+    "selftest_status": "SUCCESS",
+    "behavior": "CHAT_WORKER_EXECUTES_EXACT_OPEN_STATION_ONLY; ACCEPTED_PREDECESSOR_IS_NOT_REOPENED; SYSTEM_OR_ARCHITECTURE_FIXES_ARE_FORBIDDEN; UNEXECUTABLE_INPUT_RETURNS_CONCRETE_BLOCKER_ONLY"
   }
 }
