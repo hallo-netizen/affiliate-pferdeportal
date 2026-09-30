@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-09-30
-STATUS: HD-001 V1.9.1 + HD-002 V0.1.0 LOKAL HARD PASS / LIVE-ABNAHME OFFEN
+STATUS: HD-001 V1.9.1 + HD-002 V0.1.0 PRODUCTION CANDIDATE HARD LOCAL PASS / LIVE-ABNAHME OFFEN
 
 ## Aktueller belastbarer Stand
 
@@ -37,10 +37,10 @@ Status:
 - noch nicht live installiert.
 
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_HARD_LOCAL_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.0_HD002_PRODUCTION_CANDIDATE.zip`
 
 SHA-256:
-`c6b24fdff3499c1e9a1039fae722d6ad8418df215e55a07e394408bbcac9f2a5`
+`2d3a0bd9180b30ff76e7fb0ed84a8e7cf1a4a7c0d2135999329cb5d11371a684`
 
 ## Harte Projektgrenze
 
@@ -55,9 +55,9 @@ Ab der Kopie:
 
 ## NEXT ACTION
 
-Vor Liveinstallation von HD-002 einmal Delta prüfen, ob seit dem gebundenen PSTE-Referenzstand ein neuerer Storage-/Performance-Stand vorliegt.
+Referenzdelta geprüft: kein neuerer PSTE-Storage-/Performance-Stand vorhanden.
 
-Wenn kein neuer Delta existiert:
+NEXT:
 1. HD-001 V1.9.1 live sauber abnehmen;
 2. HD-002 V0.1.0 installieren;
 3. V1.9.1-Handoff in HD-002 importieren;
