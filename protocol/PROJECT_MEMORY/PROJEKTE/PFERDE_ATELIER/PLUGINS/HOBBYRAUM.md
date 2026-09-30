@@ -20,30 +20,15 @@ ohne Fachbürobindung Plugins verändern, mehrere Reparaturwege parallel starten
 **ALS NÄCHSTES …**  
 Bei neuem Auftrag: `CURRENT_STATE.md` → `REGELWERK.md` → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → zuständiges Fachbüro → gebundener Arbeitsweg.
 
-## AKTUELLE ARBEIT
+## TEMPORÄRE AUSFÜHRUNGSBINDUNG
 
-Gebundener Nutzerauftrag 30.09.2026:
+Zielvertrag:
+`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`
 
-**Plugin für Plugin Datenbank, Performance und Aufräumen vollständig prüfen; unnötiges Wachstum nachhaltig verhindern; vorhandene Performanceoptimierungen erhalten; keine Plugin-Salami.**
+Current-/NEXT-ACTION-Autorität:
+`CURRENT_STATE.md`
 
-Aktueller reale Betriebsstand der Kernplugins:
-- Affiliate-Zentrale 6.72.165 aktiv; Storage-Housekeeping-Ersatz installiert, Performancepfade dürfen nicht verändert werden.
-- PSTE 0.57.12 aktiv.
-- PSERC 0.28.27 aktiv.
-- PPM 6.7.9 aktiv.
-
-Arbeitsreihenfolge:
-1. PSTE vollständig gegen aktuelle Fachquelle / installierte Basis prüfen und nur einen gebündelten Datenbank-/Storage-Schritt zulassen.
-2. PSERC vollständig prüfen; nur bei belegtem zusätzlichem Speicherproblem ändern.
-3. PPM vollständig prüfen; kein Verdachtsfix.
-4. Erst danach Altbestände der Datenbank kontrolliert bereinigen.
-5. Danach physische DB-Größe und dieselbe Performance-Diagnose vorher/nachher vergleichen.
-
-Harte Grenze:
-- Affiliate bleibt während des PSTE-Blocks eingefroren.
-- Kein Überschreiben oder Rückbau bereits belegter Performanceoptimierungen.
-- Keywords, Topic-Pool, Recovery-/Rollbackautoritäten und aktuelle Produktionsdaten nie blind löschen.
-- Kandidaten sind keine LIVE-Stände.
+Dieser Hobbyraum enthält nur die für die aktuell gebundene Ausführung nötigen technischen Hinweise. Ziel, Status und NEXT ACTION werden hier nicht eigenständig bestimmt.
 
 ## PSTE-KANDIDAT 0.57.13 – HARD PASS / NOCH NICHT LIVE
 
