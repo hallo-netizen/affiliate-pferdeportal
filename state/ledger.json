@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 12,
+  "generation": 13,
   "items": [
     {
       "item_id": "k9-1ff3dfabfed47a0c47c8df13",
@@ -18,9 +18,9 @@
           "sha256": "536cd9cd60f193cfa89b0718b825d64e70150a736595ad31ce0bd5350d631514"
         },
         "repair": {
-          "job_id": "K9-REPAIR-b8f6e63e319eb7c4",
-          "path": "warehouse/repair/K9-REPAIR-b8f6e63e319eb7c4.json",
-          "sha256": "9e66af7bcd28a5af9799d365444e57d2be68fbbead274e2bea99dc291bdc5fce"
+          "job_id": "K9-REPAIR-fd25fc7abd7eb4c6",
+          "path": "warehouse/repair/K9-REPAIR-fd25fc7abd7eb4c6.json",
+          "sha256": "33830f9e5c9e761564c4a4b713f5676ad1f6bd7b86549024c7e52763dddf43ad"
         },
         "research": {
           "job_id": "K9-RESEARCH-beba25304f7d5eeb",
@@ -33,10 +33,10 @@
           "sha256": "e95cb1405b12138a2663d0b70657ac87801c0148da95289f4be0467aea40b650"
         }
       },
-      "revision": 2,
+      "revision": 3,
       "stages": {
-        "check": "FAIL",
-        "repair": "PENDING",
+        "check": "PENDING",
+        "repair": "DONE",
         "research": "DONE",
         "write": "DONE"
       },
