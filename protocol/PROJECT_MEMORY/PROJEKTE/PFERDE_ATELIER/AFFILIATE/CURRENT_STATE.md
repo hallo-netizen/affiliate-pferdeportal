@@ -95,3 +95,9 @@ Die frühere Rückbindungsaktion bleibt historische Information und ist keine ak
 `PLUGIN_UPDATE_REF: PU-20260930-001`
 
 Nur Rückverweis auf das zentrale PLUGINS-Updateprotokoll. Keine zweite Updatechronik und keine Änderung der technischen Affiliate-Release-Autorität.
+
+## PLUGIN-UPDATE-RÜCKVERWEIS 2026-09-30 – EBAY/STORAGE
+
+`PLUGIN_UPDATE_REF: PU-20260930-003`
+
+Nur Rückverweis auf das zentrale PLUGINS-Updateprotokoll. Keine zweite Updatechronik; technische Releasewahrheit bleibt auf `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
