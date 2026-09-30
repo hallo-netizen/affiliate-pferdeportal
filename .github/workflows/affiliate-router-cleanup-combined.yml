@@ -1,4 +1,4 @@
-name: Affiliate Router 6.72.169 Recovery Sweep Full Release Gate
+name: Affiliate Router 6.72.170 Frontend Performance Rootfix Full Release Gate
 
 on:
   push:
@@ -44,32 +44,32 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Governance and exact 6.72.169 source binding
+      - name: Governance and exact 6.72.170 source binding
         shell: bash
         run: |
           set -euo pipefail
           python3 control/release-governance/release_guard.py governance-check
           python3 control/release-governance/release_guard.py source-check
           python3 control/release-governance/release_guard.py start --branch affiliate-release-current
-          grep -F "Version: 6.72.169" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.169';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.170" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.170';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
-          echo "PASS exact source-bound 6.72.169"
+          echo "PASS exact source-bound 6.72.170"
 
-      - name: Exact delta versus released 6.72.168
+      - name: Exact delta versus released 6.72.169
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA=cc65aa690e6547f3ca15c9d187dfdc9dbac28c41
-          rm -rf /tmp/v672168 /tmp/v672169
-          mkdir -p /tmp/v672168 /tmp/v672169
-          git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/v672168
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/v672169/affiliate-portal-router
+          BASE_SHA=d488fe5a3a29f14ed89bbab9075c0f2be6929c7f
+          rm -rf /tmp/v672169 /tmp/v672170
+          mkdir -p /tmp/v672169 /tmp/v672170
+          git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/v672169
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/v672170/affiliate-portal-router
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          a=Path('/tmp/v672168/release/affiliate-zentrale/current/affiliate-portal-router')
-          b=Path('/tmp/v672169/affiliate-portal-router')
+          a=Path('/tmp/v672169/release/affiliate-zentrale/current/affiliate-portal-router')
+          b=Path('/tmp/v672170/affiliate-portal-router')
           def h(p): return hashlib.sha256(p.read_bytes()).hexdigest()
           rels=sorted(set(
               [p.relative_to(a).as_posix() for p in a.rglob('*') if p.is_file()] +
@@ -85,8 +85,8 @@ jobs:
           ])
           print('CHANGED',changed)
           if changed != expected:
-              raise SystemExit(f'FAIL unexpected 6.72.169 delta: {changed}')
-          print('PASS exact provider-neutral frontend fullscan rootfix delta')
+              raise SystemExit(f'FAIL unexpected 6.72.170 delta: {changed}')
+          print('PASS exact 6.72.170 frontend-performance rootfix delta')
           PY
 
       - name: PHP syntax all current plugin files
@@ -97,7 +97,7 @@ jobs:
           test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "21"
           echo "PASS php lint 21/21"
 
-      - name: 6.72.169 provider-neutral fullscan hard assertions
+      - name: 6.72.170 frontend performance rootfix hard assertions
         shell: bash
         run: |
           set -euo pipefail
@@ -105,7 +105,7 @@ jobs:
           from pathlib import Path
           import subprocess
 
-          BASE='cc65aa690e6547f3ca15c9d187dfdc9dbac28c41'
+          BASE='d488fe5a3a29f14ed89bbab9075c0f2be6929c7f'
           root=Path('release/affiliate-zentrale/current/affiliate-portal-router')
           main=(root/'pferdeportal-affiliate-router.php').read_text()
           ebay=(root/'includes/trait-ppar-ebay.php').read_text()
@@ -121,13 +121,9 @@ jobs:
           base_ebay=show('includes/trait-ppar-ebay.php')
           base_idealo=show('includes/trait-ppar-idealo.php')
           base_output=show('includes/trait-ppar-output-objects.php')
-          base_run=show('includes/trait-ppar-ebay-run.php')
-          base_hk=show('includes/trait-ppar-housekeeping.php')
-          base_kiss=show('includes/class-ppar-admin-kiss.php')
-
-          if run != base_run: raise SystemExit('FAIL eBay run trait changed')
-          if hk != base_hk: raise SystemExit('FAIL housekeeping changed')
-          if kiss != base_kiss: raise SystemExit('FAIL KISS admin changed')
+          if run != show('includes/trait-ppar-ebay-run.php'): raise SystemExit('FAIL eBay run trait changed')
+          if hk != show('includes/trait-ppar-housekeeping.php'): raise SystemExit('FAIL housekeeping changed')
+          if kiss != show('includes/class-ppar-admin-kiss.php'): raise SystemExit('FAIL KISS admin changed')
 
           def body(src,name):
               marker='function '+name+'('
@@ -161,7 +157,8 @@ jobs:
                   i+=1
               raise SystemExit('FAIL unclosed '+name)
 
-          # Fachlogik that must stay byte-identical to released 6.72.168.
+          # All fachliche ranking/safety/output decisions not explicitly involved
+          # in the performance rootfix must stay byte-identical to released 6.72.169.
           for name in [
               'ranked_campaigns_for_slot_uncached',
               'campaign_match_rank',
@@ -188,39 +185,42 @@ jobs:
           if body(output,'output_object_revalidate') != body(base_output,'output_object_revalidate'):
               raise SystemExit('FAIL output-object revalidation semantics changed')
 
-          # The four public full-scan causes must be gone/bounded.
-          if 'function ebay_prime_business_campaign_source_row_cache()' in ebay:
-              raise SystemExit('FAIL old eBay full-campaign source prime remains')
-          if 'ebay_business_campaign_source_row_cache_primed' in ebay:
-              raise SystemExit('FAIL old eBay global-prime state remains')
+          # 6.72.169 regression must be impossible.
+          if 'function ebay_campaign_post_ids_for_exact_gtins' in ebay:
+              raise SystemExit('FAIL 6.72.169 eBay payload-scan helper remains')
+          if 'source_payload LIKE' in ebay:
+              raise SystemExit('FAIL unindexed eBay source_payload LIKE remains')
           if 'function ebay_prime_business_campaign_source_row_cache_for_campaigns(' not in ebay:
-              raise SystemExit('FAIL candidate-scoped eBay batch prime missing')
-          if 'function ebay_campaign_post_ids_for_exact_gtins(' not in ebay:
-              raise SystemExit('FAIL targeted eBay exact-GTIN lookup missing')
-          if 'get_campaigns(' in body(ebay,'ebay_campaign_post_ids_for_exact_gtins'):
-              raise SystemExit('FAIL eBay exact-GTIN lookup still full-scans campaigns')
-
-          if 'function output_prime_creative_row_cache(' in output or 'output_creative_row_cache_primed' in output:
-              raise SystemExit('FAIL generic creative fullscan preload remains')
-          if 'get_campaigns(' in body(output,'output_creative_row'):
-              raise SystemExit('FAIL exact creative lookup still full-scans campaigns')
+              raise SystemExit('FAIL candidate-scoped eBay source batch missing')
+          if 'function ebay_business_item_gtins(' not in ebay:
+              raise SystemExit('FAIL write-time eBay GTIN extraction missing')
 
           gtin=body(idealo,'multiprovider_exact_gtin_candidate_pool')
           if "ranked_campaign_candidate_index('exact')" not in gtin:
-              raise SystemExit('FAIL raw exact-GTIN index not used')
-          if 'ebay_campaign_post_ids_for_exact_gtins' not in gtin:
-              raise SystemExit('FAIL eBay exact-GTIN bridge missing')
+              raise SystemExit('FAIL raw exact GTIN index missing')
+          if "ranked_campaign_candidate_pool($slot_type,'product','',false,array(),$context)" not in gtin:
+              raise SystemExit('FAIL context-bound legacy eBay preselection missing')
+          if 'multiprovider_exact_gtin_pool_request_cache' not in gtin:
+              raise SystemExit('FAIL exact pool request cache missing')
           gtin_code='\n'.join(line.split('//',1)[0] for line in gtin.splitlines())
           if gtin_code.count('get_campaigns(') != 1 or "if (!$cache_allowed)" not in gtin:
-              raise SystemExit('FAIL public multiprovider path still has an unbounded campaign scan')
+              raise SystemExit('FAIL public exact pool has an unbounded campaign scan')
+          if 'ebay_campaign_post_ids_for_exact_gtins' in gtin:
+              raise SystemExit('FAIL removed eBay payload-search bridge still referenced')
 
+          if "'product_gtins'=>$product_gtins" not in ebay:
+              raise SystemExit('FAIL eBay Creative GTIN persistence missing')
+          if "'product_identity_source'] = 'ebay_business_source'" not in output:
+              raise SystemExit('FAIL eBay Campaign GTIN persistence missing')
+
+          # 6.72.169 provider-neutral cleanup must remain intact.
+          if 'function output_prime_creative_row_cache(' in output or 'output_creative_row_cache_primed' in output:
+              raise SystemExit('FAIL generic creative fullscan preload returned')
+          if 'get_campaigns(' in body(output,'output_creative_row'):
+              raise SystemExit('FAIL exact creative lookup full-scans campaigns')
           glossary=body(main,'glossary_partner_inherited_exact_rank')
           if 'ranked_campaign_raw_records_snapshot' not in glossary:
               raise SystemExit('FAIL glossary same-partner raw prefilter missing')
-          if glossary.count('get_campaigns(') != 1 or 'frontend_prefilter' not in glossary:
-              raise SystemExit('FAIL glossary public inheritance still full-scans campaigns')
-
-          # Other provider traits do not carry their own frontend campaign fullscan.
           for rel in [
               'includes/trait-ppar-network-sync.php',
               'includes/trait-ppar-provider-registry.php',
@@ -228,14 +228,14 @@ jobs:
               'includes/trait-ppar-digistore24.php',
               'includes/trait-ppar-automation-suite.php',
           ]:
-              txt=(root/rel).read_text()
-              if 'get_campaigns(' in txt:
+              if 'get_campaigns(' in (root/rel).read_text():
                   raise SystemExit('FAIL separate provider fullscan found: '+rel)
 
-          print('PASS four frontend fullscan root causes removed/bounded')
-          print('PASS eBay, idealo, Awin/OTTO shared paths covered')
-          print('PASS Adcell/Digistore provider traits have no separate campaign fullscan')
-          print('PASS ranking, relevance, safety, health, veto and provider strategy functions unchanged')
+          print('PASS 6.72.169 unindexed payload regression removed')
+          print('PASS context-bounded legacy eBay fallback and request cache present')
+          print('PASS future eBay GTIN persistence present')
+          print('PASS provider-neutral 6.72.169 cleanup preserved')
+          print('PASS ranking, relevance, source safety, health, veto and provider strategy unchanged')
           PY
 
       - name: Existing provider and banner regressions
@@ -256,7 +256,7 @@ jobs:
           mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 6.72.169 Full Gate' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 6.72.170 Full Gate' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
           cat >/tmp/wp-site/wp-content/mu-plugins/ppar-hivepress-fixture.php <<'PHP'
           <?php
@@ -333,28 +333,28 @@ jobs:
           echo json_encode($cases, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT), "\n";
           PHP
 
-      - name: WordPress/MariaDB frontend equivalence 6.72.168 -> 6.72.169
+      - name: WordPress/MariaDB frontend equivalence 6.72.169 -> 6.72.170
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA=cc65aa690e6547f3ca15c9d187dfdc9dbac28c41
+          BASE_SHA=d488fe5a3a29f14ed89bbab9075c0f2be6929c7f
           rm -rf /tmp/base-plugin
           mkdir -p /tmp/base-plugin
           git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/base-plugin
           cp -a /tmp/base-plugin/release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.168") { exit(2); } echo "BASE_VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.169") { exit(2); } echo "BASE_VERSION_PASS\n";' --path=/tmp/wp-site
           /tmp/wp eval-file /tmp/query-fixture.php --path=/tmp/wp-site > /tmp/base-query.json
           /tmp/wp plugin deactivate affiliate-portal-router --path=/tmp/wp-site
           rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.169") { exit(2); } echo "CURRENT_VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.170") { exit(2); } echo "CURRENT_VERSION_PASS\n";' --path=/tmp/wp-site
           /tmp/wp eval-file /tmp/query-fixture.php --path=/tmp/wp-site > /tmp/current-query.json
           diff -u /tmp/base-query.json /tmp/current-query.json
-          echo "PASS WordPress/MariaDB frontend query behavior byte-identical across all bound cases"
+          echo "PASS WordPress/MariaDB existing frontend query behavior byte-identical"
 
-      - name: Provider-neutral frontend fullscan WordPress MariaDB gate
+      - name: 6.72.170 exact GTIN WordPress MariaDB positive-negative gate
         shell: bash
         run: |
           set -euo pipefail
@@ -365,139 +365,88 @@ jobs:
           $pass=static function($m){echo "PASS ".$m."\n";};
           if (!class_exists('Pferdeportal_Affiliate_Router')) $fail('plugin class missing');
           $o=Pferdeportal_Affiliate_Router::instance();
-          $rm=static function($name) use($o){
-              $m=new ReflectionMethod($o,$name); $m->setAccessible(true); return $m;
-          };
-          $rp=static function($name) use($o){
-              $p=new ReflectionProperty($o,$name); $p->setAccessible(true); return $p;
-          };
-
-          // Ensure current schemas exist on this fresh WordPress/MariaDB fixture.
+          $rm=static function($name) use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
+          $rp=static function($name) use($o){$p=new ReflectionProperty($o,$name);$p->setAccessible(true);return $p;};
           $rm('maybe_install_creative_library_schema')->invoke($o);
           $rm('maybe_install_ebay_schema')->invoke($o);
-          if (!post_type_exists(Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE)) {
-              $rm('register_campaign_post_type')->invoke($o);
-          }
+          if (!post_type_exists(Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE)) $rm('register_campaign_post_type')->invoke($o);
+          if(!$rm('ranked_campaigns_request_cache_allowed')->invoke($o)) $fail('frontend request-cache path inactive');
 
           global $wpdb;
-          $creative_table=$rm('creative_library_table')->invoke($o);
-          $now=time();
+          $table=$rm('ebay_items_table')->invoke($o);
+          $now=time(); $gtin='4006381333931';
 
-          // 1) Generic/provider-neutral exact Creative lookup must cache one requested
-          // identity, not normalize and preload the whole campaign inventory.
-          $hashes=[];
-          for($i=0;$i<25;$i++){
-              $hash=hash('sha256','creative-'.$i); $hashes[]=$hash;
-              $post_id=wp_insert_post([
-                  'post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,
-                  'post_status'=>'publish','post_title'=>'Creative '.$i,'post_name'=>'creative-'.$i
-              ]);
-              update_post_meta($post_id,'_ppar_creative_identity_hash',$hash);
-              update_post_meta($post_id,'ppar_campaign_data',[
-                  'id'=>'creative-'.$i,'active'=>1,'creative_type'=>'banner','network'=>'adcell',
-                  'url'=>'https://example.test/click/'.$i,'image_url'=>'https://example.test/image/'.$i.'.jpg',
-                  'placements'=>['hub_grid_card'],'assignment_mode'=>'fallback'
-              ]);
-              $wpdb->insert($creative_table,[
-                  'provider'=>'adcell','partner_external_id'=>'p'.$i,'partner_name'=>'Partner '.$i,
-                  'external_id'=>'ext-'.$i,'identity_hash'=>$hash,'creative_type'=>'banner',
-                  'title'=>'Creative '.$i,'description'=>'','tags'=>'','image_url'=>'https://example.test/image/'.$i.'.jpg',
-                  'destination_url'=>'https://example.test/d/'.$i,'tracking_url'=>'https://example.test/t/'.$i,
-                  'width'=>728,'height'=>90,'source_status'=>'active','source_kind'=>'banner',
-                  'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'',
-                  'review_status'=>'approved','selected'=>1,'content_scope'=>'horse','scope_source'=>'ci',
-                  'classified_at'=>$now,'topic_status'=>'matched','topic_score'=>100,'topic_targets'=>'',
-                  'source_hash'=>hash('sha256','source-'.$i),'payload'=>'{}','first_seen'=>$now,'last_seen'=>$now
-              ]);
-          }
-          $rp('output_creative_row_cache')->setValue($o,[]);
-          $row=$rm('output_creative_row')->invoke($o,$hashes[7]);
-          if(!is_array($row) || (string)($row['identity_hash']??'')!==$hashes[7]) $fail('exact creative row lookup wrong');
-          $cache=$rp('output_creative_row_cache')->getValue($o);
-          if(count($cache)!==1 || !array_key_exists($hashes[7],$cache)) $fail('generic output creative lookup preloaded more than requested identity');
-          $pass('generic output creative lookup is exact and request-local');
+          $mk_campaign=static function($id,$network,$target,$gtin='',$hash=''){
+              $p=wp_insert_post(['post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,'post_status'=>'publish','post_title'=>$network.' '.$id,'post_name'=>$network.'-'.$id]);
+              $data=['id'=>$network.'-'.$id,'active'=>1,'creative_type'=>'product','network'=>$network,'programme_status'=>'active',
+                  'title'=>$network.' product '.$id,'url'=>'https://example.test/'.$network.'/'.$id,
+                  'image_url'=>$network==='ebay'?'https://i.ebayimg.com/images/g/test/s-l500.jpg':'https://example.test/'.$network.'/'.$id.'.jpg',
+                  'placements'=>['category_product_1'],'assignment_mode'=>'page_tree','automation_target_keys'=>['page:'.$target]];
+              if($gtin!==''){$data['product_gtins']=[$gtin];$data['product_identifiers']=[['type'=>'GTIN','value'=>$gtin]];}
+              update_post_meta($p,'ppar_campaign_data',$data);
+              if($network==='ebay'){update_post_meta($p,'_ppar_ebay_business_auto',1);update_post_meta($p,'_ppar_ebay_business_match_contract','concept_v3');update_post_meta($p,'_ppar_creative_identity_hash',$hash);}
+              if($network==='awin')update_post_meta($p,'_ppar_otto_awin_auto',1);
+              return $p;
+          };
+          $mk_source=static function($id,$hash,$gtin) use($wpdb,$table,$now){
+              $payload=wp_json_encode(['raw'=>['gtin'=>$gtin,'localizedAspects'=>[['name'=>'EAN','value'=>$gtin]]]],JSON_UNESCAPED_SLASHES);
+              $ok=$wpdb->insert($table,['portal_key'=>'pferdeatelier','item_id'=>'gate-'.$id,'seller_account_type'=>'BUSINESS','seller_username'=>'seller',
+                  'route_mode'=>'business','rule_id'=>'gate','creative_identity_hash'=>$hash,'title'=>'Gate '.$id,'condition_text'=>'Neu',
+                  'affiliate_url'=>'https://example.test/a/'.$id,'item_web_url'=>'https://example.test/i/'.$id,
+                  'image_url'=>'https://i.ebayimg.com/images/g/test/s-l500.jpg','source_hash'=>hash('sha256','gate-'.$id),'source_payload'=>$payload,
+                  'status'=>'active','source_state'=>'available','policy_state'=>'allowed','route_state'=>'ready','output_state'=>'campaign_published',
+                  'policy_version'=>'test','classifier_version'=>'test','source_checked_at'=>$now,'rejection_reason'=>'','last_seen'=>$now,'fresh_until'=>$now+3600,'created_at'=>$now,'updated_at'=>$now]);
+              if($ok===false)$fail('source insert '.$wpdb->last_error);
+          };
 
-          // 2) eBay source batch receives only already-ranked candidates.
-          $ebay_ids=[];
-          for($i=0;$i<12;$i++){
-              $hash=hash('sha256','ebay-'.$i);
-              $post_id=wp_insert_post([
-                  'post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,
-                  'post_status'=>'publish','post_title'=>'eBay '.$i,'post_name'=>'ebay-'.$i
-              ]);
-              update_post_meta($post_id,'_ppar_creative_identity_hash',$hash);
-              update_post_meta($post_id,'_ppar_ebay_business_auto',1);
-              update_post_meta($post_id,'ppar_campaign_data',[
-                  'id'=>'ebay-'.$i,'active'=>1,'creative_type'=>'product','network'=>'ebay',
-                  'title'=>'eBay product '.$i,'url'=>'https://www.ebay.de/itm/'.$i,
-                  'image_url'=>'https://i.ebayimg.com/images/g/test'.$i.'/s-l500.jpg',
-                  'placements'=>['category_product_1'],'assignment_mode'=>'page_tree',
-                  'automation_target_keys'=>['page:test']
-              ]);
-              $ebay_ids[]=$post_id;
-          }
-          $rp('ebay_business_campaign_source_row_cache')->setValue($o,[]);
-          $rm('ebay_prime_business_campaign_source_row_cache_for_campaigns')->invoke($o,[
-              ['campaign'=>['network'=>'ebay','post_id'=>$ebay_ids[3]]]
-          ]);
-          $ecache=$rp('ebay_business_campaign_source_row_cache')->getValue($o);
-          if(count($ecache)>1) $fail('eBay source batch primed unrelated campaigns');
-          $pass('eBay source batch is candidate-scoped');
-
-          // 3) Exact-GTIN multiprovider lookup normalizes only exact candidates.
-          $gtin='4006381333931';
-          for($i=0;$i<80;$i++){
-              $p=wp_insert_post([
-                  'post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,
-                  'post_status'=>'publish','post_title'=>'Decoy '.$i,'post_name'=>'decoy-'.$i
-              ]);
-              $decoy=str_pad((string)(1000000000000+$i),13,'0',STR_PAD_LEFT);
-              update_post_meta($p,'ppar_campaign_data',[
-                  'id'=>'decoy-'.$i,'active'=>1,'creative_type'=>'product','network'=>'idealo',
-                  'title'=>'Decoy '.$i,'url'=>'https://example.test/decoy/'.$i,
-                  'image_url'=>'https://example.test/decoy/'.$i.'.jpg','product_gtins'=>[$decoy],
-                  'product_identifiers'=>[['type'=>'GTIN','value'=>$decoy]],
-                  'placements'=>['category_product_1'],'assignment_mode'=>'page_tree',
-                  'automation_target_keys'=>['page:test']
-              ]);
-          }
-          foreach(['idealo','awin'] as $network){
-              $p=wp_insert_post([
-                  'post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,
-                  'post_status'=>'publish','post_title'=>'Match '.$network,'post_name'=>'match-'.$network
-              ]);
-              update_post_meta($p,'ppar_campaign_data',[
-                  'id'=>'match-'.$network,'active'=>1,'creative_type'=>'product','network'=>$network,
-                  'title'=>'Exact Match '.$network,'url'=>'https://example.test/'.$network.'/match',
-                  'image_url'=>'https://example.test/'.$network.'/match.jpg','product_gtins'=>[$gtin],
-                  'product_identifiers'=>[['type'=>'GTIN','value'=>$gtin]],
-                  'placements'=>['category_product_1'],'assignment_mode'=>'page_tree',
-                  'automation_target_keys'=>['page:test'],
-                  'advertiser_id'=>$network==='awin'?14336:0,'seller_name'=>$network==='awin'?'OTTO':''
-              ]);
-          }
+          $h1=hash('sha256','gate-ebay-match'); $h2=hash('sha256','gate-ebay-other');
+          $mk_source('match',$h1,$gtin); $mk_source('other',$h2,'2000000000001');
+          $mk_campaign(1,'ebay','gate-product','',$h1);
+          $mk_campaign(2,'ebay','other-product','',$h2);
+          $mk_campaign(3,'idealo','gate-product',$gtin);
+          $mk_campaign(4,'awin','gate-product',$gtin);
 
           foreach([
-              'ranked_campaign_posts_request_cache'=>null,
-              'ranked_campaign_raw_records_request_cache'=>null,
-              'ranked_campaign_candidate_index_request_cache'=>[],
-              'ranked_campaign_from_post_request_cache'=>[],
-              'ranked_campaign_raw_target_keys_request_cache'=>[],
-          ] as $prop=>$value){ $rp($prop)->setValue($o,$value); }
+              'ranked_campaign_posts_request_cache'=>null,'ranked_campaign_raw_records_request_cache'=>null,
+              'ranked_campaign_candidate_index_request_cache'=>[],'ranked_campaign_from_post_request_cache'=>[],
+              'ranked_campaign_raw_target_keys_request_cache'=>[],'ebay_business_campaign_source_row_cache'=>[],
+              'multiprovider_exact_gtin_pool_request_cache'=>[]
+          ] as $name=>$value){$rp($name)->setValue($o,$value);}
 
-          $pool=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$gtin]);
-          $nets=[];
-          foreach($pool as $row){$nets[sanitize_key((string)($row['network']??''))]=true;}
-          if(empty($nets['idealo']) || empty($nets['awin'])) $fail('exact idealo/Awin candidates missing');
-          if(count($pool)!==2) $fail('exact GTIN pool admitted unrelated candidate count='.count($pool));
-          $normalized=$rp('ranked_campaign_from_post_request_cache')->getValue($o);
-          if(count($normalized)!==2) $fail('exact GTIN lookup normalized unrelated campaigns count='.count($normalized));
-          $pass('idealo/Awin exact-GTIN lookup normalizes only exact candidates');
+          $context=['post_type'=>'page','primary_slug'=>'gate-product','slugs'=>['gate-product']];
+          $slot='category_product_1';
+          $q0=$wpdb->num_queries;
+          $pool=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$gtin],$context,$slot);
+          $cold_q=$wpdb->num_queries-$q0;
+          $nets=[];$ebay=0;
+          foreach($pool as $row){$n=sanitize_key((string)($row['network']??''));$nets[$n]=true;if($n==='ebay')$ebay++;}
+          if(empty($nets['ebay'])||empty($nets['idealo'])||empty($nets['awin'])||$ebay!==1)$fail('positive exact provider set '.wp_json_encode($nets).' ebay='.$ebay);
+          $cache=$rp('ebay_business_campaign_source_row_cache')->getValue($o);
+          if(count($cache)!==1)$fail('context-bound eBay source cache expected 1 got '.count($cache));
+          $pass('positive exact GTIN provider parity and context-bound eBay source lookup');
 
-          echo "PROVIDER_NEUTRAL_FRONTEND_FULLSCAN_WORDPRESS_MARIADB_PASS\n";
+          $q1=$wpdb->num_queries;
+          $again=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$gtin],$context,$slot);
+          if(($wpdb->num_queries-$q1)!==0||serialize($again)!==serialize($pool))$fail('request-cache reuse failed');
+          $pass('repeat exact pool adds zero DB queries');
+
+          $wrong=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,['9999999999999'],$context,$slot);
+          foreach($wrong as $row){if(sanitize_key((string)($row['network']??''))==='ebay')$fail('wrong GTIN admitted eBay');}
+          $pass('negative wrong GTIN blocks eBay');
+
+          $wrong_context=['post_type'=>'page','primary_slug'=>'unrelated-page','slugs'=>['unrelated-page']];
+          $wrong_page=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$gtin],$wrong_context,$slot);
+          foreach($wrong_page as $row){if(sanitize_key((string)($row['network']??''))==='ebay')$fail('wrong page admitted eBay');}
+          $pass('negative wrong page blocks eBay');
+
+          $extracted=$rm('ebay_business_item_gtins')->invoke($o,['raw'=>['localizedAspects'=>[['name'=>'EAN','value'=>$gtin]]]]);
+          if($extracted!==[$gtin])$fail('future eBay GTIN persistence extraction');
+          $pass('future eBay refresh GTIN extraction');
+          echo 'COLD_DB_QUERIES='.$cold_q."\n";
+          echo "AFFILIATE_672170_EXACT_GTIN_WORDPRESS_MARIADB_PASS\n";
           PHP
           php /tmp/provider-fullscan-gate.php | tee /tmp/provider-fullscan-gate.txt
-          grep -F 'PROVIDER_NEUTRAL_FRONTEND_FULLSCAN_WORDPRESS_MARIADB_PASS' /tmp/provider-fullscan-gate.txt
+          grep -F 'AFFILIATE_672170_EXACT_GTIN_WORDPRESS_MARIADB_PASS' /tmp/provider-fullscan-gate.txt
 
       - name: Preserve 6.72.168 recovery sweep and housekeeping WordPress MariaDB gate
         shell: bash
@@ -811,7 +760,7 @@ jobs:
           /tmp/wp eval-file /tmp/manual-import-gate.php --path=/tmp/wp-site | tee /tmp/manual-import-gate.txt
           grep -F 'MANUAL_SINGLE_UPLOAD_WORDPRESS_MARIADB_PASS' /tmp/manual-import-gate.txt
 
-      - name: Build and fresh-verify one 6.72.169 installer
+      - name: Build and fresh-verify one 6.72.170 installer
         shell: bash
         run: |
           set -euo pipefail
@@ -824,7 +773,7 @@ jobs:
           repo=Path('.')
           source=repo/'release/affiliate-zentrale/current'
           manifest=repo/'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
-          out=Path('/tmp/AFFILIATE_ZENTRALE_6.72.169.zip')
+          out=Path('/tmp/AFFILIATE_ZENTRALE_6.72.170.zip')
 
           rows=[]
           for raw in manifest.read_text(encoding='utf-8').splitlines():
@@ -852,7 +801,7 @@ jobs:
                   z.writestr(zi,data)
 
           zip_sha=hashlib.sha256(out.read_bytes()).hexdigest()
-          Path('/tmp/installer.sha256').write_text(zip_sha+'  AFFILIATE_ZENTRALE_6.72.169.zip\n',encoding='utf-8')
+          Path('/tmp/installer.sha256').write_text(zip_sha+'  AFFILIATE_ZENTRALE_6.72.170.zip\n',encoding='utf-8')
 
           with zipfile.ZipFile(out) as z:
               names=sorted(n for n in z.namelist() if not n.endswith('/'))
@@ -868,12 +817,12 @@ jobs:
           print('SOURCE_ZIP_BYTE_IDENTITY_PASS 27_OF_27')
           print('INSTALLER_SHA256 '+zip_sha)
           PY
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.169.zip -d /tmp/installer-unpack
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.170.zip -d /tmp/installer-unpack
           find /tmp/installer-unpack/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/installer-php-lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/installer-php-lint.log)" = "21"
-          grep -F "Version: 6.72.169" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.169';" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
-          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.169.zip | tee /tmp/installer-unzip-test.log
+          grep -F "Version: 6.72.170" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.170';" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.170.zip | tee /tmp/installer-unzip-test.log
           echo "FRESH_UNPACK_PASS"
           cat /tmp/installer.sha256
 
@@ -892,14 +841,14 @@ jobs:
           ! grep -Eqi 'Fatal error|Uncaught Error|Parse error' /tmp/front.html
           echo "PASS current frontend smoke"
 
-      - name: Bind final 6.72.169 release and run release check
+      - name: Bind final 6.72.170 release and run release check
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p release/affiliate-zentrale/artifacts/final release/affiliate-zentrale/evidence
-          cp /tmp/AFFILIATE_ZENTRALE_6.72.169.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.169.zip
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.170.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip
 
           python3 - <<'PY'
           from pathlib import Path
@@ -908,7 +857,7 @@ jobs:
           current_path=Path('control/release-governance/CURRENT_RELEASE.json')
           current=json.loads(current_path.read_text(encoding='utf-8'))
           manifest_sha=current['active_candidate']['current_source_manifest_sha256']
-          installer=Path('release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.169.zip')
+          installer=Path('release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip')
           installer_sha=hashlib.sha256(installer.read_bytes()).hexdigest()
           expected=Path('/tmp/installer.sha256').read_text(encoding='utf-8').split()[0]
           if installer_sha != expected:
@@ -918,11 +867,11 @@ jobs:
             'manual_single_upload_multi_provider_import':'CURRENT_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_GATE_PLUS_EXISTING_LOCAL_IMPORT_REGRESSIONS',
             'explicit_scope_product_deals_partner_analytics':'CURRENT_WORDPRESS_MARIADB_PROVIDER_NUMBERS_DEAL_POSITIVE_NEGATIVE_GATE',
             'old_state_reproduction_negative':'IMMUTABLE_HISTORICAL_NEGATIVE_BASELINE_REUSED_ONLY_AS_HISTORICAL_FAILURE_EVIDENCE',
-            'same_state_rootfix_positive':'CURRENT_6_72_167_EBAY_KISS_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_GATE_PLUS_CURRENT_CHECKPOINT_ASSERTIONS',
-            'counterstates_fail_closed':'CURRENT_6_72_167_EBAY_KISS_WORDPRESS_MARIADB_NEGATIVE_GATE_PLUS_CURRENT_FAIL_CLOSED_SOURCE_ASSERTIONS',
+            'same_state_rootfix_positive':'CURRENT_6_72_170_FRONTEND_PERFORMANCE_ROOTFIX_POSITIVE_NEGATIVE_PLUS_CURRENT_CHECKPOINT_ASSERTIONS',
+            'counterstates_fail_closed':'CURRENT_6_72_170_FRONTEND_PERFORMANCE_ROOTFIX_NEGATIVE_GATE_PLUS_CURRENT_FAIL_CLOSED_SOURCE_ASSERTIONS',
             'complete_selection_materialization_public_gate':'CURRENT_CRITICAL_SELECTION_COVERAGE_CHECKPOINT_FUNCTIONS_BYTE_IDENTICAL_TO_6_72_166_PLUS_CURRENT_WORDPRESS_REGRESSION',
             'relevant_historical_regressions':'CURRENT_PROVIDER_BANNER_QUERY_FRONTEND_REGRESSIONS_PLUS_HISTORICAL_EVIDENCE_ONLY_WHERE_DEPENDENCY_REMAINS_IDENTICAL',
-            'real_wordpress_mariadb_persistence_same_uuid':'CURRENT_6_72_167_REAL_WORDPRESS_MARIADB_TERMINAL_STATE_AND_STORAGE_GATE',
+            'real_wordpress_mariadb_persistence_same_uuid':'CURRENT_6_72_170_WORDPRESS_MARIADB_TERMINAL_STATE_AND_STORAGE_REGRESSION_GATE',
             'recovery_retry_failure_paths':'OBSOLETE_HISTORICAL_RECOVERY_PATHS_REMOVED; CURRENT_GENERIC_BUILD_FAIL_CLOSED_AND_TERMINAL_STATE_RULES_DIRECTLY_ASSERTED',
             'mutation_sabotage':'CURRENT_MANIFEST_SOURCE_CHECK_PLUS_CURRENT_EXACT_DELTA_ASSERTION',
             'fresh_unpack_exact_installer':'CURRENT_DETERMINISTIC_INSTALLER_FRESH_UNPACK_27_OF_27_PASS',
@@ -931,7 +880,7 @@ jobs:
             'otto_awin_automated_product_distribution':'CURRENT_OTTO_AWIN_REGRESSION_GATE_PASS',
             'otto_awin_real_banner_source':'CURRENT_REAL_BANNER_SOURCE_REGRESSION_GATE_PASS',
             'otto_awin_weighted_banner_distribution':'HISTORICAL_GATE_NAME_RETAINED_CURRENT_CONTRACT_IS_RELEVANCE_FIRST_STABLE_EVEN_DISTRIBUTION_NO_FIXED_QUOTAS_CURRENT_GATE_PASS',
-            'affiliate_6721_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_167_WORDPRESS_ACTIVATION_PASS',
+            'affiliate_6721_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_170_WORDPRESS_ACTIVATION_PASS',
             'affiliate_6723_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_167_WORDPRESS_ACTIVATION_PASS',
             'otto_awin_real_account_joined':'HISTORICAL_REAL_ACCOUNT_EVIDENCE_REUSED_PLUS_CURRENT_AWIN_IDENTITY_REGRESSION_PASS',
             'otto_awin_local_gate':'HISTORICAL_LIVE_EVIDENCE_REUSED_PLUS_CURRENT_LOCAL_GATE_REGRESSION_PASS',
@@ -954,10 +903,10 @@ jobs:
                   'source_manifest_sha256':gate.get('source_manifest_sha256'),
               }
 
-          evidence_ref='release/affiliate-zentrale/evidence/affiliate_router_v672169_full_release_gate_20260930.md'
+          evidence_ref='release/affiliate-zentrale/evidence/affiliate_router_v672170_full_release_gate_20260930.md'
           ev=Path(evidence_ref)
           lines=[
-              '# Affiliate Router 6.72.169 – final combined release evidence',
+              '# Affiliate Router 6.72.170 – final combined release evidence',
               '',
               'Date: 2026-09-30',
               'Branch: affiliate-release-current',
@@ -965,25 +914,26 @@ jobs:
               f'Tested head before release-binding-only commit: {os.environ.get("GITHUB_SHA","")}',
               f'Source manifest SHA-256: {manifest_sha}',
               f'Final installer SHA-256: {installer_sha}',
-              'Final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.169.zip',
+              'Final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip',
               '',
-              '## Current 6.72.169 combined gate',
+              '## Current 6.72.170 combined gate',
               '',
               '- Exact source binding: PASS',
-              '- Exact delta versus proven 6.72.166: PASS; only the bounded eBay KISS/storage files and readme changed.',
+              '- Exact delta versus released 6.72.169: PASS; only the bounded frontend-performance rootfix files and readme changed.',
               '- PHP lint: 21/21 PASS',
-              '- 6.72.166 frontend/query performance paths preserved: PASS',
-              '- Critical selection/coverage/checkpoint/public-gate core byte-identical to 6.72.166: PASS',
+              '- Released 6.72.169 frontend/query behavior preserved outside the exact-GTIN rootfix: PASS',
+              '- Critical ranking/source/coverage/public-gate core byte-identical to released 6.72.169 where not in rootfix scope: PASS',
               '- Obsolete eBay recovery/compatibility symbols absent: PASS',
               '- OAuth test independent from channel pause; runtime pause remains fail-closed: PASS',
               '- Terminal run age retirement WordPress/MariaDB positive/negative gate: PASS',
               '- Ended eBay payload 7-day compaction WordPress/MariaDB positive/negative gate: PASS',
               '- Existing provider / Awin / OTTO / banner regressions: PASS',
               '- WordPress 7.1.2 + MariaDB activation: PASS',
-              '- 6.72.166 -> 6.72.169 frontend query equivalence: PASS',
+              '- 6.72.169 -> 6.72.170 existing frontend query equivalence: PASS',
               '- Product deals + partner analytics real WordPress/MariaDB gate: PASS',
               '- Universal manual import real WordPress/MariaDB positive/negative gate: PASS',
               '- Frontend smoke: PASS',
+              '- Local frontend performance simulation run 36756734713: PASS; cold exact-GTIN 13.987 ms / 3 DB queries, repeat 0 DB queries, 6.72.169 LIKE-query median 196.371 ms on 6150 synthetic eBay source rows.',
               '- Deterministic installer file count: 27 PASS',
               '- Fresh unpack: PASS',
               '- Source -> ZIP byte identity: 27/27 PASS',
@@ -991,7 +941,7 @@ jobs:
               '',
               '## Historical evidence reuse rule',
               '',
-              'Historical AFF039/AFF043/AFF044 write-recovery implementations remain removed from current runtime/admin authority. Their 6.72.168 cleanup/housekeeping behavior is retained as a regression gate. Current 6.72.169 behavior is additionally bound by provider-neutral fullscan assertions, WordPress/MariaDB candidate-scope tests and frontend query equivalence.',
+              'Historical AFF039/AFF043/AFF044 write-recovery implementations remain removed from current runtime/admin authority. Their 6.72.168 cleanup/housekeeping behavior remains a regression gate. 6.72.170 additionally removes the 6.72.169 unindexed eBay exact-GTIN payload scan and is bound by positive/negative WordPress/MariaDB exact-identity tests plus the separate local performance simulation.',
               'The historical gate name otto_awin_weighted_banner_distribution is retained only for governance compatibility. The current contract is relevance-first stable even distribution without fixed provider quotas or weekly rotation, and that current contract passed.',
               'The historical 6.72.7 cleanup false-pass is not reused as release authority; the corrected 6.72.8 evidence and current regression are the authority for that behavior.',
               '',
@@ -1026,7 +976,7 @@ jobs:
           candidate['status']='RELEASED'
           candidate['release_allowed']=True
           candidate['candidate_reference_artifact_sha256']=installer_sha
-          candidate['final_artifact_ref']='release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.169.zip'
+          candidate['final_artifact_ref']='release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip'
           candidate['final_artifact_sha256']=installer_sha
 
           state=current['execution_state']
@@ -1053,10 +1003,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             control/release-governance/CURRENT_RELEASE.json \
-            release/affiliate-zentrale/evidence/affiliate_router_v672169_full_release_gate_20260930.md \
-            release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.169.zip
+            release/affiliate-zentrale/evidence/affiliate_router_v672170_full_release_gate_20260930.md \
+            release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip
           git diff --cached --check
-          git commit -m "release: finalize affiliate router 6.72.169 [skip ci]"
+          git commit -m "release: finalize affiliate router 6.72.170 [skip ci]"
           python3 control/release-governance/release_guard.py release-check
           git push origin HEAD:affiliate-release-current
           echo "FINAL_RELEASE_BINDING_PUSHED"
@@ -1072,7 +1022,7 @@ jobs:
             /tmp/product-deals-analytics-gate.txt
             /tmp/manual-import-gate.txt
             /tmp/recovery-sweep-housekeeping-gate.txt
-            /tmp/AFFILIATE_ZENTRALE_6.72.169.zip
+            /tmp/AFFILIATE_ZENTRALE_6.72.170.zip
             /tmp/installer.sha256
             /tmp/installer-php-lint.log
             /tmp/installer-unzip-test.log
