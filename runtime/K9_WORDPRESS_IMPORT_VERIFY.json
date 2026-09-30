@@ -2,6 +2,6 @@
   "contract": "K9_WORDPRESS_IMPORT_VERIFY_V1",
   "status": "PASS",
   "article_count": 1,
-  "batch_sha256": "ccba8b677e9a66f50d7415352d91af8df17cc6c10c0273c14728dbb090554b1e",
+  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
   "publish_allowed": false
 }

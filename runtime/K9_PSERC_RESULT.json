@@ -1,20 +1,20 @@
 {
   "bridge_status": "PSERC_PPM_INTAKE_BRIDGE_EXECUTED",
-  "canonical_article_id": "article:5207874abd18dad1db470264",
-  "category_slug": "schermaschinen-beratung",
+  "canonical_article_id": "article:277289349b5a5091767a01b1",
+  "category_slug": "reitplatzplaner-beratung",
   "contract": "K9_PSERC_RESULT_V1",
   "exact_five_batch": {
-    "batch_sha256": "3622f6ab80c86bf2b61f31bf7e5526d83c8a14f3d714d33f9a3708649ac8c38f",
+    "batch_sha256": "04c3601892cb2dd6b98f9e8e7abc61c7b36fe194d4eec5f30321145417f8b204",
     "content_or_format_payload_present": false,
     "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
     "item_count": 1,
     "items": [
       {
         "article_type": "Beratung",
-        "category": "schermaschinen-beratung",
-        "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
-        "target_keyword": "Schermaschinen für Pferde",
-        "title": "So wählst du passende Schermaschinen für Pferde"
+        "category": "reitplatzplaner-beratung",
+        "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+        "target_keyword": "Reitplatzplaner für Pferde",
+        "title": "Das Wichtigste über Reitplatzplaner für Pferde"
       }
     ],
     "maximum_articles": 0,
@@ -30,126 +30,119 @@
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden.",
-        "evidence_text_sha256": "2837e31fb462241b44d2fe2caf6e92573b3cdf00155ce3fdb7d5554c4bf3b1d0",
-        "fact_id": "FACT-CLIPPER-001",
-        "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
-        "source_url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/",
-        "statement": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden."
+        "evidence_text": "Hatzenbichler beschreibt Reitplatzplaner als Geräte zur Reitplatzpflege und zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen.",
+        "evidence_text_sha256": "39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a",
+        "fact_id": "FACT-REITPLATZ-001",
+        "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+        "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner",
+        "statement": "Hatzenbichler beschreibt Reitplatzplaner als Geräte zur Reitplatzpflege und zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen."
       },
       {
         "article_types": [
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter.",
-        "evidence_text_sha256": "11a69b6ac0082f4c0b52684d3b20641f837cbf5b5948c7dfd56098120d718a4a",
-        "fact_id": "FACT-CLIPPER-002",
-        "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
-        "source_url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/",
-        "statement": "Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter."
+        "evidence_text": "Zwei Reihen Striegelzinken bearbeiten den Reitboden; über die verstellbare Andruckwalze lässt sich die Tiefenführung der Zinken einstellen.",
+        "evidence_text_sha256": "382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239",
+        "fact_id": "FACT-REITPLATZ-002",
+        "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+        "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner",
+        "statement": "Zwei Reihen Striegelzinken bearbeiten den Reitboden; über die verstellbare Andruckwalze lässt sich die Tiefenführung der Zinken einstellen."
       },
       {
         "article_types": [
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben.",
-        "evidence_text_sha256": "7bbe7b41fee2df1cb9c818666b3d0aa2c1a872c2eb73a6ad8a81c2506ed27409",
-        "fact_id": "FACT-CLIPPER-003",
-        "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
-        "source_url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/",
-        "statement": "Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben."
+        "evidence_text": "Ein am Gerät montiertes Planierschild dient dazu, den Reitplatz zu ebnen.",
+        "evidence_text_sha256": "84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1",
+        "fact_id": "FACT-REITPLATZ-003",
+        "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+        "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner",
+        "statement": "Ein am Gerät montiertes Planierschild dient dazu, den Reitplatz zu ebnen."
       },
       {
         "article_types": [
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern.",
-        "evidence_text_sha256": "1adc09802f31c1931a6e4e71400bde75a9876d97427a840092ab90f78c26b439",
-        "fact_id": "FACT-CLIPPER-004",
-        "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
-        "source_url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/",
-        "statement": "Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern."
+        "evidence_text": "Die angebotenen Reitplatzplaner unterscheiden sich bei Arbeitsbreite, Gewicht und benötigter Zugleistung; diese Werte sollten zum vorhandenen Zugfahrzeug und zur Fläche passen.",
+        "evidence_text_sha256": "7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69",
+        "fact_id": "FACT-REITPLATZ-004",
+        "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+        "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner",
+        "statement": "Die angebotenen Reitplatzplaner unterscheiden sich bei Arbeitsbreite, Gewicht und benötigter Zugleistung; diese Werte sollten zum vorhandenen Zugfahrzeug und zur Fläche passen."
       },
       {
         "article_types": [
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.",
-        "evidence_text_sha256": "c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457",
-        "fact_id": "FACT-CLIPPER-005",
-        "source_id": "SRC-LISTER-COAT-TYPES-20260930",
-        "source_url": "https://www.lister-global.com/news/clipping-different-coat-types/",
-        "statement": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten."
+        "evidence_text": "Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden, eine höhenverstellbare Planierschiene gleicht Unebenheiten aus und eine Walze bearbeitet die Oberfläche nach.",
+        "evidence_text_sha256": "e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d",
+        "fact_id": "FACT-REITPLATZ-005",
+        "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+        "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/",
+        "statement": "Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden, eine höhenverstellbare Planierschiene gleicht Unebenheiten aus und eine Walze bearbeitet die Oberfläche nach."
       },
       {
         "article_types": [
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.",
-        "evidence_text_sha256": "5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd",
-        "fact_id": "FACT-CLIPPER-006",
-        "source_id": "SRC-LISTER-HOT-BLADES-20260930",
-        "source_url": "https://www.lister-global.com/news/bladesgettinghot/",
-        "statement": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden."
+        "evidence_text": "Der Platz-Max Light ist für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten.",
+        "evidence_text_sha256": "4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f",
+        "fact_id": "FACT-REITPLATZ-006",
+        "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+        "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/",
+        "statement": "Der Platz-Max Light ist für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten."
       },
       {
         "article_types": [
           "Beratung"
         ],
         "claim_status": "FULLY_SUPPORTED",
-        "evidence_text": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein.",
-        "evidence_text_sha256": "1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af",
-        "fact_id": "FACT-CLIPPER-007",
-        "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
-        "source_url": "https://www.wahl.co.uk/app/uploads/2018/08/ZB032-Horseline-Instuction-Booklet-Rev.4-10-18.pdf",
-        "statement": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein."
+        "evidence_text": "Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.",
+        "evidence_text_sha256": "95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1",
+        "fact_id": "FACT-REITPLATZ-007",
+        "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+        "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/",
+        "statement": "Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören."
       }
     ],
     "contract": "canonical_fact_pack_v1",
-    "fact_pack_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+    "fact_pack_id": "FP-K9-REITPLATZPLANER-20260930",
     "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
-    "source_snapshot_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
+    "source_snapshot_id": "FP-K9-REITPLATZPLANER-20260930",
     "sources": [
       {
-        "evidence": "Die passende Geräteklasse hängt wesentlich davon ab, wie häufig geschoren wird und ob ein einzelnes Pferd oder mehrere Tiere regelmäßig geschoren werden. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit; für dichteres oder grobes Fell sind leistungsstärkere Schermaschinen geeigneter. Bei der Auswahl ist zu entscheiden, ob Netzbetrieb verfügbar ist oder die Bewegungsfreiheit eines Akkugeräts wichtiger ist; Akkugeräte können bei Laufzeit und Leistung Grenzen haben. Bei nervösen oder jungen Pferden können geringeres Geräusch, weniger Vibration sowie ein leichtes, gut ausbalanciertes Gerät die Handhabung erleichtern.",
-        "snapshot_sha256": "bc8e1f707b2c82e0b46be9e46874f9991a4413e232ac0580e0c9673eda4cd74d",
-        "source_id": "SRC-WAHL-CLIPPER-CHOICE-20260930",
-        "source_title": "Which Clipper is Right for Me and My Horse?",
-        "source_url": "https://www.wahl.co.uk/content-hub/product-guides/which-clipper-is-right-for-me-and-my-horse/"
+        "evidence": "Hatzenbichler beschreibt Reitplatzplaner als Geräte zur Reitplatzpflege und zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen. Zwei Reihen Striegelzinken bearbeiten den Reitboden; über die verstellbare Andruckwalze lässt sich die Tiefenführung der Zinken einstellen. Ein am Gerät montiertes Planierschild dient dazu, den Reitplatz zu ebnen. Die angebotenen Reitplatzplaner unterscheiden sich bei Arbeitsbreite, Gewicht und benötigter Zugleistung; diese Werte sollten zum vorhandenen Zugfahrzeug und zur Fläche passen.",
+        "snapshot_sha256": "a65cad2ce9e507d25c3464b1639a5374aaaded53211881c55388de92fa76edf2",
+        "source_id": "SRC-HATZEN-REITPLATZ-20260930",
+        "source_title": "Reitplatzplaner – Hatzenbichler",
+        "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner"
       },
       {
-        "evidence": "Auch die Wahl des Messers sollte zum Fell passen: feinere Messer für feineres Fell, mittlere oder grobere Messer für dichteres beziehungsweise grobes Fell; ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.",
-        "snapshot_sha256": "c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457",
-        "source_id": "SRC-LISTER-COAT-TYPES-20260930",
-        "source_title": "Our guide to clipping different coat types",
-        "source_url": "https://www.lister-global.com/news/clipping-different-coat-types/"
+        "evidence": "Beim Platz-Max Light lockern und durchmischen zwei Reihen Striegelzinken den Reitboden, eine höhenverstellbare Planierschiene gleicht Unebenheiten aus und eine Walze bearbeitet die Oberfläche nach. Der Platz-Max Light ist für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten.",
+        "snapshot_sha256": "7d101f9bb590814821dc1ca1c151584e3fd939970d193d00ffa93335b234f00e",
+        "source_id": "SRC-PLATZMAX-LIGHT-20260930",
+        "source_title": "Platz-Max Light Bahnplaner",
+        "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/light/"
       },
       {
-        "evidence": "Regelmäßiges Ölen reduziert Reibung und Hitze; zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.",
-        "snapshot_sha256": "5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd",
-        "source_id": "SRC-LISTER-HOT-BLADES-20260930",
-        "source_title": "Help! My Clipper Blades Are Getting Hot",
-        "source_url": "https://www.lister-global.com/news/bladesgettinghot/"
-      },
-      {
-        "evidence": "Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein; Hautfalten sind beim Scheren zu straffen, Messer regelmäßig zu reinigen und zu ölen, und die Luftzufuhr der Maschine darf nicht blockiert sein.",
-        "snapshot_sha256": "1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af",
-        "source_id": "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930",
-        "source_title": "Horseline Instructions",
-        "source_url": "https://www.wahl.co.uk/app/uploads/2018/08/ZB032-Horseline-Instuction-Booklet-Rev.4-10-18.pdf"
+        "evidence": "Je nach Modell können Bandenrolle, Hufschlagräumer, Zackenschiene, Striegelzinken, einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören.",
+        "snapshot_sha256": "95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1",
+        "source_id": "SRC-PLATZMAX-MAXISM-20260930",
+        "source_title": "Reitplatzplaner Platz-Max Maxi-SM",
+        "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/"
       }
     ],
     "status": "SOURCE_VERIFIED_PRODUCTION_READY",
-    "title_scope": "schermaschinen_fuer_pferde"
+    "title_scope": "reitplatzplaner_fuer_pferde"
   },
   "lt68_result": {
-    "article_sha256": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
-    "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+    "article_sha256": "7226109f7e5921e9fe6ce4bfab810d0a436d642eecb7a2745b890954220b15fe",
+    "checked_text_sha256": "2540a02ebffea593e5e3c722daa9800d43923bd27b6123244a4044344037c59e",
     "contract": "K9_LT68_RESULT_V1",
     "engine": "LanguageTool 6.8 / Bestand 43",
     "finding_count": 0,
@@ -158,12 +151,12 @@
     "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
     "language_evidence": {
       "approved_exceptions": [],
-      "checked_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.\n\nDie passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.\n\nWelche Schermaschinen für Pferde passen zu Einsatz und Fell?\n\nDer erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.\n\nFür die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.\n\nEinsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest.\n\nFelltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.\n\nStromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.\n\nPferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.\n\nErgonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.\n\nMesserauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.\n\nBei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.\n\nAuch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.\n\nSchermaschinen Schritt für Schritt passend auswählen\n\nBeginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.\n\nDanach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.\n\nIm nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.\n\nDanach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung.\n\nZur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.\n\nVor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.\n\nSchermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen\n\nKriterium\n\nPrüffrage\n\nFolgerung für die Auswahl\n\nEinsatzumfang\n\nWie oft und wie viele Pferde werden geschoren?\n\nJe häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.\n\nFelltyp\n\nIst das Fell eher fein oder dicht?\n\nBei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.\n\nStromversorgung\n\nIst ein Netzanschluss sicher erreichbar?\n\nEin Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.\n\nPferdetemperament\n\nReagiert das Pferd empfindlich auf Geräusch oder Vibration?\n\nBei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.\n\nErgonomie\n\nLässt sich das Gerät leicht und ausgewogen führen?\n\nEin geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.\n\nMesser\n\nPasst das Messer zum Felltyp?\n\nEin ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nWartung\n\nWerden Messer regelmäßig gereinigt und geölt?\n\nRegelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.\n\nVorbereitung\n\nIst das Pferd trocken, sauber und gründlich gebürstet?\n\nTrockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.\n\nFazit\n\nPassende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.\n\nEbenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.\n\nRegelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.\n\nVor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.\n\nWeiterführende Informationen\n\nWenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen.\n\nDieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
-      "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
-      "content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+      "checked_text": "Ein Reitplatzplaner unterstützt die Pflege des Reitbodens. Hersteller beschreiben Geräte für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch. Zugleich unterscheiden sich Modelle bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb sollten Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam betrachtet werden.\n\nZinken in zwei Reihen bearbeiten den Reitboden, ihre Tiefenführung lässt sich über eine verstellbare Andruckwalze beeinflussen. Ein Planierschild dient dem Ebnen des Platzes. Damit steht vor dem Kauf die gewünschte Bearbeitung der Tretschicht im Mittelpunkt.\n\nReitplatzplaner für Pferde nach klaren Kriterien auswählen\n\nEin sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen Zinken in zwei Reihen den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.\n\nEbenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.\n\nFür die übergeordnete Einordnung des Platzes gehört auch der Bereich Weide in den Zusammenhang.\n\nTretschicht prüfen: Welche Bodenart soll regelmäßig bearbeitet werden?\n\nArbeitstiefe festlegen: Wie wichtig ist eine einstellbare Tiefenführung der Zinken?\n\nArbeitsbreite abgleichen: Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?\n\nZugfahrzeug berücksichtigen: Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?\n\nArbeitswerkzeuge vergleichen: Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?\n\nRandpflege einordnen: Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?\n\nReitplatzplaner nach Boden und Fahrzeug auswählen\n\nDie Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.\n\nAuch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Zinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.\n\nFür die praktische Pflegeentscheidung ist der Bereich Reitplatzpflege die passende nächste Ebene.\n\nWer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.\n\nReitplatzplaner nach wichtigen Kriterien vergleichen\n\nDie Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.\n\nPrüfpunkt\n\nGebundene Einordnung\n\nFrage für die Auswahl\n\nBodenart\n\nModelle werden unter anderem für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch beschrieben.\n\nWelche Tretschicht soll regelmäßig gepflegt werden?\n\nArbeitstiefe\n\nDie Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.\n\nWie tief soll die Bearbeitung erfolgen?\n\nPlanieren\n\nEin Planierschild dient dazu, den Reitplatz zu ebnen.\n\nWie wichtig ist das gezielte Ausgleichen der Oberfläche?\n\nArbeitsbreite\n\nReitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.\n\nWelche Breite passt zur Fläche und zum Fahrweg?\n\nZugfahrzeug\n\nGewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.\n\nWelches Fahrzeug ist bereits vorhanden?\n\nZinken und Walze\n\nZinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.\n\nWelche Arbeitsfolge wird auf dem eigenen Boden benötigt?\n\nRandpflege\n\nJe nach Modell sind Bandenrolle oder Hilfen für die Hufschlagpflege verfügbar.\n\nSollen Randbereiche regelmäßig mit bearbeitet werden?\n\nZusatzausstattung\n\nZackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.\n\nWelche Zusatzfunktion wird tatsächlich genutzt?\n\nFazit zur Auswahl eines Reitplatzplaners\n\nEin passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.\n\nDanach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.\n\nErst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.\n\nWeiterführende Informationen\n\nWenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.\n\nFür die weitere Produktauswahl findest du den gebundenen Bereich Reitplatzplaner. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+      "checked_text_sha256": "2540a02ebffea593e5e3c722daa9800d43923bd27b6123244a4044344037c59e",
+      "content_hash": "7226109f7e5921e9fe6ce4bfab810d0a436d642eecb7a2745b890954220b15fe",
       "engine": "LanguageTool 6.8 / Bestand 43",
       "execution_record": {
-        "input_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+        "input_sha256": "2540a02ebffea593e5e3c722daa9800d43923bd27b6123244a4044344037c59e",
         "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
         "return_code": 0
       },
@@ -186,21 +179,21 @@
     "article_type": "Beratung",
     "canonical_article": {
       "article_type": "Beratung",
-      "body_html": "<article>\n<section data-block=\"intro\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004\">Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.</p>\n</section>\n\n<section data-block=\"criteria\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005\">\n<h2>Welche Schermaschinen für Pferde passen zu Einsatz und Fell?</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-002\" data-source-hash=\"11a69b6ac0082f4c0b52684d3b20641f837cbf5b5948c7dfd56098120d718a4a\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-001\" data-source-hash=\"2837e31fb462241b44d2fe2caf6e92573b3cdf00155ce3fdb7d5554c4bf3b1d0\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.</p>\n<p data-fact-ids=\"FACT-CLIPPER-001\">Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich <a data-link-role=\"parent_category\" href=\"/ausruestung/\">Ausrüstung</a>. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-CLIPPER-001\"><strong>Einsatzhäufigkeit:</strong> Prüfe, wie oft und wie viele Pferde du scheren möchtest.</li>\n<li data-fact-ids=\"FACT-CLIPPER-002\"><strong>Felltyp:</strong> Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.</li>\n<li data-fact-ids=\"FACT-CLIPPER-003\"><strong>Stromversorgung:</strong> Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Pferdetemperament:</strong> Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.</li>\n<li data-fact-ids=\"FACT-CLIPPER-004\"><strong>Ergonomie:</strong> Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.</li>\n<li data-fact-ids=\"FACT-CLIPPER-005\"><strong>Messerauswahl:</strong> Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.</li>\n</ul>\n<p data-fact-ids=\"FACT-CLIPPER-003\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-003\" data-source-hash=\"7bbe7b41fee2df1cb9c818666b3d0aa2c1a872c2eb73a6ad8a81c2506ed27409\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-005\" data-source-hash=\"c9498ec723c99a612e53d85ca0111fca6826de6ed3b1f8244f7f6438e0e79457\" data-source-title=\"SRC-LISTER-COAT-TYPES-20260930\"></span>Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.</p>\n</section>\n\n<section data-block=\"decision\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen Schritt für Schritt passend auswählen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002\">Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-003\">Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-004\" data-source-hash=\"1adc09802f31c1931a6e4e71400bde75a9876d97427a840092ab90f78c26b439\" data-source-title=\"SRC-WAHL-CLIPPER-CHOICE-20260930\"></span>Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.</p>\n<p data-fact-ids=\"FACT-CLIPPER-005\">Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich <a data-link-role=\"semantic_related\" href=\"/ausruestung/ausruestung-pflegezubehoer/\">Pflegezubehör</a> die passende thematische Einordnung.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-006\" data-source-hash=\"5d34a453a20a647a7665b327f21cf0cf224746abcdf24e7e96084de37ae135fd\" data-source-title=\"SRC-LISTER-HOT-BLADES-20260930\"></span>Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-CLIPPER-007\" data-source-hash=\"1b7c605cf0dcf67e2552b98da1d007545609365bfb86c84e7c1ff7c6cbb130af\" data-source-title=\"SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930\"></span>Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.</p>\n</section>\n\n<section data-block=\"table\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen</h2>\n<table class=\"system-129-table comparison-table\" data-table=\"comparison\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<thead><tr><th>Kriterium</th><th>Prüffrage</th><th>Folgerung für die Auswahl</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-CLIPPER-001\">Einsatzumfang</td><td data-fact-ids=\"FACT-CLIPPER-001\">Wie oft und wie viele Pferde werden geschoren?</td><td data-fact-ids=\"FACT-CLIPPER-001\">Je häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-002\">Felltyp</td><td data-fact-ids=\"FACT-CLIPPER-002\">Ist das Fell eher fein oder dicht?</td><td data-fact-ids=\"FACT-CLIPPER-002\">Bei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-003\">Stromversorgung</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ist ein Netzanschluss sicher erreichbar?</td><td data-fact-ids=\"FACT-CLIPPER-003\">Ein Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Pferdetemperament</td><td data-fact-ids=\"FACT-CLIPPER-004\">Reagiert das Pferd empfindlich auf Geräusch oder Vibration?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Bei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-004\">Ergonomie</td><td data-fact-ids=\"FACT-CLIPPER-004\">Lässt sich das Gerät leicht und ausgewogen führen?</td><td data-fact-ids=\"FACT-CLIPPER-004\">Ein geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-005\">Messer</td><td data-fact-ids=\"FACT-CLIPPER-005\">Passt das Messer zum Felltyp?</td><td data-fact-ids=\"FACT-CLIPPER-005\">Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-006\">Wartung</td><td data-fact-ids=\"FACT-CLIPPER-006\">Werden Messer regelmäßig gereinigt und geölt?</td><td data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.</td></tr>\n<tr><td data-fact-ids=\"FACT-CLIPPER-007\">Vorbereitung</td><td data-fact-ids=\"FACT-CLIPPER-007\">Ist das Pferd trocken, sauber und gründlich gebürstet?</td><td data-fact-ids=\"FACT-CLIPPER-007\">Trockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.</td></tr>\n</tbody>\n</table>\n</section>\n\n<section data-block=\"conclusion\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003 FACT-CLIPPER-004 FACT-CLIPPER-005 FACT-CLIPPER-006 FACT-CLIPPER-007\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-003\">Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.</p>\n<p data-fact-ids=\"FACT-CLIPPER-004 FACT-CLIPPER-005\">Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.</p>\n<p data-fact-ids=\"FACT-CLIPPER-006\">Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.</p>\n<p data-fact-ids=\"FACT-CLIPPER-007\">Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.</p>\n</section>\n\n<section data-block=\"further_information\" data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005 FACT-CLIPPER-006\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-CLIPPER-001 FACT-CLIPPER-002 FACT-CLIPPER-005\">Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter <a data-link-role=\"further_information\" href=\"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/\">Schermaschinen</a>.</p>\n</section>\n\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.</p>\n</article>",
-      "body_html_sha256": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
-      "body_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen. Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell. Welche Schermaschinen für Pferde passen zu Einsatz und Fell? Der erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter. Für die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung . Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen. Einsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest. Felltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell. Stromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist. Pferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern. Ergonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt. Messerauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen. Bei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben. Auch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten. Schermaschinen Schritt für Schritt passend auswählen Beginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden. Danach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist. Im nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst. Danach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung. Zur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden. Vor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen. Schermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen Kriterium Prüffrage Folgerung für die Auswahl Einsatzumfang Wie oft und wie viele Pferde werden geschoren? Je häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse. Felltyp Ist das Fell eher fein oder dicht? Bei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend. Stromversorgung Ist ein Netzanschluss sicher erreichbar? Ein Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen. Pferdetemperament Reagiert das Pferd empfindlich auf Geräusch oder Vibration? Bei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern. Ergonomie Lässt sich das Gerät leicht und ausgewogen führen? Ein geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen. Messer Passt das Messer zum Felltyp? Ein ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten. Wartung Werden Messer regelmäßig gereinigt und geölt? Regelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden. Vorbereitung Ist das Pferd trocken, sauber und gründlich gebürstet? Trockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung. Fazit Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können. Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen. Weiterführende Informationen Wenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen . Dieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
-      "body_text_sha256": "55916166b32715cd9714ef7b65b2a6074e2ba53be1b9161dea3b7331d4c9476c",
+      "body_html": "<article data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Ein Reitplatzplaner unterstützt die Pflege des Reitbodens. Hersteller beschreiben Geräte für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch. Zugleich unterscheiden sich Modelle bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb sollten Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam betrachtet werden.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-003\">Zinken in zwei Reihen bearbeiten den Reitboden, ihre Tiefenführung lässt sich über eine verstellbare Andruckwalze beeinflussen. Ein Planierschild dient dem Ebnen des Platzes. Damit steht vor dem Kauf die gewünschte Bearbeitung der Tretschicht im Mittelpunkt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n</section>\n<section data-block=\"criteria\">\n<h2>Reitplatzplaner für Pferde nach klaren Kriterien auswählen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-005\">Ein sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen Zinken in zwei Reihen den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-006\">Ebenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-006\" data-source-hash=\"4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p>Für die übergeordnete Einordnung des Platzes gehört auch der Bereich <a data-link-role=\"parent_category\" href=\"/weide/\">Weide</a> in den Zusammenhang.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-REITPLATZ-001\"><strong>Tretschicht prüfen:</strong> Welche Bodenart soll regelmäßig bearbeitet werden?</li>\n<li data-fact-ids=\"FACT-REITPLATZ-002\"><strong>Arbeitstiefe festlegen:</strong> Wie wichtig ist eine einstellbare Tiefenführung der Zinken?</li>\n<li data-fact-ids=\"FACT-REITPLATZ-004\"><strong>Arbeitsbreite abgleichen:</strong> Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?</li>\n<li data-fact-ids=\"FACT-REITPLATZ-004\"><strong>Zugfahrzeug berücksichtigen:</strong> Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?</li>\n<li data-fact-ids=\"FACT-REITPLATZ-005\"><strong>Arbeitswerkzeuge vergleichen:</strong> Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?</li>\n<li data-fact-ids=\"FACT-REITPLATZ-007\"><strong>Randpflege einordnen:</strong> Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?</li>\n</ul>\n</section>\n<section data-block=\"decision\">\n<h2>Reitplatzplaner nach Boden und Fahrzeug auswählen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-004\">Die Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-007\">Auch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Zinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n<p>Für die praktische Pflegeentscheidung ist der Bereich <a data-link-role=\"semantic_related\" href=\"/weide/weide-reitplatzpflege/\">Reitplatzpflege</a> die passende nächste Ebene.</p>\n<p data-fact-ids=\"FACT-REITPLATZ-003 FACT-REITPLATZ-005\">Wer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n</section>\n<section data-block=\"table\">\n<h2>Reitplatzplaner nach wichtigen Kriterien vergleichen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Die Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Prüfpunkt</th><th>Gebundene Einordnung</th><th>Frage für die Auswahl</th></tr></thead><tbody>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-001\">Bodenart</td><td data-fact-ids=\"FACT-REITPLATZ-001\">Modelle werden unter anderem für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch beschrieben.</td><td data-fact-ids=\"FACT-REITPLATZ-001\">Welche Tretschicht soll regelmäßig gepflegt werden?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-002\">Arbeitstiefe</td><td data-fact-ids=\"FACT-REITPLATZ-002\">Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.</td><td data-fact-ids=\"FACT-REITPLATZ-002\">Wie tief soll die Bearbeitung erfolgen?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-003\">Planieren</td><td data-fact-ids=\"FACT-REITPLATZ-003\">Ein Planierschild dient dazu, den Reitplatz zu ebnen.</td><td data-fact-ids=\"FACT-REITPLATZ-003\">Wie wichtig ist das gezielte Ausgleichen der Oberfläche?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-004\">Arbeitsbreite</td><td data-fact-ids=\"FACT-REITPLATZ-004\">Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.</td><td data-fact-ids=\"FACT-REITPLATZ-004\">Welche Breite passt zur Fläche und zum Fahrweg?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-004\">Zugfahrzeug</td><td data-fact-ids=\"FACT-REITPLATZ-004\">Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.</td><td data-fact-ids=\"FACT-REITPLATZ-004\">Welches Fahrzeug ist bereits vorhanden?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-005\">Zinken und Walze</td><td data-fact-ids=\"FACT-REITPLATZ-005\">Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.</td><td data-fact-ids=\"FACT-REITPLATZ-005\">Welche Arbeitsfolge wird auf dem eigenen Boden benötigt?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-007\">Randpflege</td><td data-fact-ids=\"FACT-REITPLATZ-007\">Je nach Modell sind Bandenrolle oder Hilfen für die Hufschlagpflege verfügbar.</td><td data-fact-ids=\"FACT-REITPLATZ-007\">Sollen Randbereiche regelmäßig mit bearbeitet werden?</td></tr>\n<tr><td data-fact-ids=\"FACT-REITPLATZ-007\">Zusatzausstattung</td><td data-fact-ids=\"FACT-REITPLATZ-007\">Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.</td><td data-fact-ids=\"FACT-REITPLATZ-007\">Welche Zusatzfunktion wird tatsächlich genutzt?</td></tr>\n</tbody></table>\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit zur Auswahl eines Reitplatzplaners</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-001 FACT-REITPLATZ-004\">Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-001\" data-source-hash=\"39bbc7db1ca47b96ab24cfd1dc6bcb9b06439d0dfb602c03aefe9bd3c6f0b54a\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-004\" data-source-hash=\"7303dcc569ac4fff55fe13d18fed9315ccc07b73f5d886b983c66c59d06ecb69\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-003 FACT-REITPLATZ-005\">Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-003\" data-source-hash=\"84b143314f29d26d493b830f86d3b821395c9ecf979350fb78d0e98550c656c1\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-006 FACT-REITPLATZ-007\">Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-006\" data-source-hash=\"4cf60d98977c3d569fdc0cb61beb4b5cb6ab036baa99b7fabb6ed4a517113d3f\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-REITPLATZ-002 FACT-REITPLATZ-005\">Wenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-002\" data-source-hash=\"382eaaea24e69a40bf5a5d6ea42becf1c62d84205f9c9c1bd319c38967853239\" data-source-title=\"SRC-HATZEN-REITPLATZ-20260930\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-005\" data-source-hash=\"e6243ee673ef2aabafac0c7bffa9111f1d33db2df5ec6f7c973b04ab033a662d\" data-source-title=\"SRC-PLATZMAX-LIGHT-20260930\"></span></p>\n<p data-fact-ids=\"FACT-REITPLATZ-007\">Für die weitere Produktauswahl findest du den gebundenen Bereich <a data-link-role=\"further_information\" href=\"/weide/weide-reitplatzpflege/reitplatzplaner/\">Reitplatzplaner</a>. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.<span class=\"ppm-source-trace\" data-fact-id=\"FACT-REITPLATZ-007\" data-source-hash=\"95386554ce55f9192f93c1272dae4d8c77d89df87e29aa99cf22fd0e6f9088e1\" data-source-title=\"SRC-PLATZMAX-MAXISM-20260930\"></span></p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+      "body_html_sha256": "7226109f7e5921e9fe6ce4bfab810d0a436d642eecb7a2745b890954220b15fe",
+      "body_text": "Ein Reitplatzplaner unterstützt die Pflege des Reitbodens. Hersteller beschreiben Geräte für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch. Zugleich unterscheiden sich Modelle bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb sollten Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam betrachtet werden. Zinken in zwei Reihen bearbeiten den Reitboden, ihre Tiefenführung lässt sich über eine verstellbare Andruckwalze beeinflussen. Ein Planierschild dient dem Ebnen des Platzes. Damit steht vor dem Kauf die gewünschte Bearbeitung der Tretschicht im Mittelpunkt. Reitplatzplaner für Pferde nach klaren Kriterien auswählen Ein sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen Zinken in zwei Reihen den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten. Ebenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten. Für die übergeordnete Einordnung des Platzes gehört auch der Bereich Weide in den Zusammenhang. Tretschicht prüfen: Welche Bodenart soll regelmäßig bearbeitet werden? Arbeitstiefe festlegen: Wie wichtig ist eine einstellbare Tiefenführung der Zinken? Arbeitsbreite abgleichen: Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug? Zugfahrzeug berücksichtigen: Welche Leistung und Anbauart stehen tatsächlich zur Verfügung? Arbeitswerkzeuge vergleichen: Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt? Randpflege einordnen: Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant? Reitplatzplaner nach Boden und Fahrzeug auswählen Die Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt. Auch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Zinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen. Für die praktische Pflegeentscheidung ist der Bereich Reitplatzpflege die passende nächste Ebene. Wer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt. Reitplatzplaner nach wichtigen Kriterien vergleichen Die Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden. Prüfpunkt Gebundene Einordnung Frage für die Auswahl Bodenart Modelle werden unter anderem für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch beschrieben. Welche Tretschicht soll regelmäßig gepflegt werden? Arbeitstiefe Die Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden. Wie tief soll die Bearbeitung erfolgen? Planieren Ein Planierschild dient dazu, den Reitplatz zu ebnen. Wie wichtig ist das gezielte Ausgleichen der Oberfläche? Arbeitsbreite Reitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten. Welche Breite passt zur Fläche und zum Fahrweg? Zugfahrzeug Gewicht und benötigte Zugleistung unterscheiden sich je nach Gerät. Welches Fahrzeug ist bereits vorhanden? Zinken und Walze Zinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann. Welche Arbeitsfolge wird auf dem eigenen Boden benötigt? Randpflege Je nach Modell sind Bandenrolle oder Hilfen für die Hufschlagpflege verfügbar. Sollen Randbereiche regelmäßig mit bearbeitet werden? Zusatzausstattung Zackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden. Welche Zusatzfunktion wird tatsächlich genutzt? Fazit zur Auswahl eines Reitplatzplaners Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten. Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt. Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen. Weiterführende Informationen Wenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen. Für die weitere Produktauswahl findest du den gebundenen Bereich Reitplatzplaner . Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen. Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+      "body_text_sha256": "1f91db732c13f164af582573426cae31587ce4a4345d2de5abc8cd8d8bca74ba",
       "claim_ids": [
-        "FACT-CLIPPER-001",
-        "FACT-CLIPPER-002",
-        "FACT-CLIPPER-003",
-        "FACT-CLIPPER-004",
-        "FACT-CLIPPER-005",
-        "FACT-CLIPPER-006",
-        "FACT-CLIPPER-007"
+        "FACT-REITPLATZ-001",
+        "FACT-REITPLATZ-002",
+        "FACT-REITPLATZ-003",
+        "FACT-REITPLATZ-004",
+        "FACT-REITPLATZ-005",
+        "FACT-REITPLATZ-006",
+        "FACT-REITPLATZ-007"
       ],
-      "content_plan_hash": "cf72e3f99dda104c77b079f9589ea334400745af6830897bbd9321f5f03444d4",
-      "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
+      "content_plan_hash": "2036078e13a20325ba46f467df9c63fab419808d7796976ee6cf419a62c7d494",
+      "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
       "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
       "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
       "gold_reference_id": "K9_BERATUNG_REALTEST_001",
@@ -215,8 +208,8 @@
       "links": [
         {
           "active": true,
-          "anchor": "Ausrüstung",
-          "href": "/ausruestung/",
+          "anchor": "Weide",
+          "href": "/weide/",
           "reason": "Maschinell gebundener Portal-Hauptbereich",
           "role": "parent_category",
           "section_id": "criteria",
@@ -225,8 +218,8 @@
         },
         {
           "active": true,
-          "anchor": "Pflegezubehör",
-          "href": "/ausruestung/ausruestung-pflegezubehoer/",
+          "anchor": "Reitplatzpflege",
+          "href": "/weide/weide-reitplatzpflege/",
           "reason": "Maschinell gebundener Portal-Bereich",
           "role": "semantic_related",
           "section_id": "decision",
@@ -235,8 +228,8 @@
         },
         {
           "active": true,
-          "anchor": "Schermaschinen",
-          "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+          "anchor": "Reitplatzplaner",
+          "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
           "reason": "Maschinell gebundene Portal-Produktseite",
           "role": "further_information",
           "section_id": "further_information",
@@ -246,24 +239,23 @@
       ],
       "local_candidate_metrics": {
         "h2_count": 5,
-        "paragraph_count": 18,
+        "paragraph_count": 16,
         "table_body_row_count": 8,
         "visible_link_count": 3,
-        "word_count": 826
+        "word_count": 861
       },
       "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
-      "order_id": "k9-47c8df13",
-      "skeleton_hash": "6a272cf369b316138c6cb14ca8cab404156ab0044bb3844bf05a9a2b1e85d9bb",
-      "slug": "schermaschinen-f-r-pferde",
+      "order_id": "k9-55a2dcd9",
+      "skeleton_hash": "34132c1fcdd69f2b21a6a1b070a3562552c26340237d008b801ce54b1304c718",
+      "slug": "reitplatzplaner-fuer-pferde",
       "source_ids": [
-        "SRC-WAHL-CLIPPER-CHOICE-20260930",
-        "SRC-LISTER-COAT-TYPES-20260930",
-        "SRC-LISTER-HOT-BLADES-20260930",
-        "SRC-WAHL-HORSELINE-INSTRUCTIONS-20260930"
+        "SRC-HATZEN-REITPLATZ-20260930",
+        "SRC-PLATZMAX-LIGHT-20260930",
+        "SRC-PLATZMAX-MAXISM-20260930"
       ],
-      "title": "So wählst du passende Schermaschinen für Pferde"
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
     },
-    "canonical_article_id": "article:5207874abd18dad1db470264",
+    "canonical_article_id": "article:277289349b5a5091767a01b1",
     "contract_hashes": {
       "article_type_templates": "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f",
       "content_structure_language_gate": "756f71aa98e683b050b37fab228463569219f558729525c33c0ee0ae190e1d72",
@@ -276,34 +268,34 @@
       "table_contract": "1ab3e892c37e5a48517519afcccbf8ec01b9f08da141eef93d577acd456756c7"
     },
     "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
-    "plan_item_key": "k9-27b5c81a0da11c56",
+    "plan_item_key": "k9-0b401802eeed8574",
     "quality_binding": {
       "ai_disclosure_required": true,
       "contract": "content_structure_language_binding_v2",
       "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
       "expected_category": {
         "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
-        "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
-        "name": "Beratung Schermaschinen",
+        "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+        "name": "Beratung Reitplatzplaner",
         "semantic_binding_not_numeric_identity": true,
-        "slug": "schermaschinen-beratung",
+        "slug": "reitplatzplaner-beratung",
         "taxonomy": "category"
       },
       "intent_terms": [
-        "Schermaschinen für Pferde",
-        "Schermaschinen",
-        "Pflegezubehör",
-        "Ausrüstung"
+        "Reitplatzplaner für Pferde",
+        "Reitplatzplaner",
+        "Reitplatzpflege",
+        "Weide"
       ],
-      "internal_test_marker": "LT27B5C81A0DA1",
+      "internal_test_marker": "LT0B401802EEED",
       "language_evidence": {
         "approved_exceptions": [],
-        "checked_text": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen.\n\nDie passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.\n\nWelche Schermaschinen für Pferde passen zu Einsatz und Fell?\n\nDer erste Punkt ist die Einsatzhäufigkeit. Wer nur gelegentlich ein einzelnes Pferd schert, hat andere Anforderungen als jemand, der regelmäßig mehrere Pferde bearbeitet. Leichte Trimmer eignen sich vor allem für kürzeres, feineres Fell, Teilbereiche und Detailarbeit. Bei dichtem Fell sind leistungsstärkere Schermaschinen geeigneter.\n\nFür die grundlegende Einordnung hilft außerdem der Blick auf den Bereich Ausrüstung. Dort lässt sich die Schermaschine als Teil der gesamten Pflege- und Arbeitsausstattung einordnen.\n\nEinsatzhäufigkeit: Prüfe, wie oft und wie viele Pferde du scheren möchtest.\n\nFelltyp: Feines, kurzes Fell stellt andere Anforderungen als dichtes Fell.\n\nStromversorgung: Entscheide, ob ein Netzanschluss zuverlässig verfügbar ist oder ob Bewegungsfreiheit mit Akku wichtiger ist.\n\nPferdetemperament: Bei nervösen oder jungen Pferden können weniger Geräusch und Vibration die Handhabung erleichtern.\n\nErgonomie: Gewicht und Balance beeinflussen, wie angenehm sich die Maschine während der Arbeit führen lässt.\n\nMesserauswahl: Das Messer sollte zum Felltyp und zur gewünschten Schnittlänge passen.\n\nBei der Stromversorgung geht es um einen praktischen Abgleich. Netzgeräte setzen eine erreichbare Stromquelle voraus. Akkugeräte geben mehr Bewegungsfreiheit, können aber bei Laufzeit und Leistung Grenzen haben.\n\nAuch die Messerwahl gehört zur Kaufentscheidung. Feinere Messer passen eher zu feinerem Fell, mittlere oder gröbere Messer eher zu dichterem beziehungsweise grobem Fell. Bei dickem Fell kann ein ungeeignet feines Messer schneller stumpf werden und die Maschine stärker belasten.\n\nSchermaschinen Schritt für Schritt passend auswählen\n\nBeginne mit deinem tatsächlichen Arbeitsumfang. Für kleinere Bereiche oder feines Fell kann ein leichteres Gerät ausreichen. Für umfangreichere Schuren, dichteres Fell oder häufigeren Einsatz sollte die Maschine entsprechend leistungsfähiger gewählt werden.\n\nDanach entscheidest du, ob Netz- oder Akkubetrieb besser zu deiner Arbeitssituation passt. Ausschlaggebend ist, ob eine Stromquelle zuverlässig erreichbar ist oder Bewegungsfreiheit wichtiger ist.\n\nIm nächsten Schritt betrachtest du das Pferd selbst. Bei einem empfindlichen, jungen oder nervösen Pferd können geringeres Geräusch und weniger Vibration wichtig sein. Gleichzeitig sollte die Maschine so leicht und ausgewogen sein, dass du sie kontrolliert führen kannst.\n\nDanach kommt die Messerauswahl. Sie sollte zum Fell passen. Wer ein ungeeignetes Messer wählt, kann die Arbeit erschweren und das Material stärker beanspruchen. Für weitere Pflegethemen rund um die Ausstattung findest du im Bereich Pflegezubehör die passende thematische Einordnung.\n\nZur Entscheidung gehört außerdem die Wartung. Regelmäßiges Ölen reduziert Reibung und Hitze. Zu wenig Öl oder ein unpassendes Messer kann dazu beitragen, dass Messer und Maschine stärker belastet werden.\n\nVor dem Scheren sollte das Pferd trocken, möglichst sauber und gründlich gebürstet sein. Während der Arbeit sollten Messer regelmäßig gereinigt und geölt werden. Die Luftzufuhr der Maschine darf nicht blockiert sein, und Hautfalten sind beim Scheren zu straffen.\n\nSchermaschinen für Pferde anhand der wichtigsten Kriterien vergleichen\n\nKriterium\n\nPrüffrage\n\nFolgerung für die Auswahl\n\nEinsatzumfang\n\nWie oft und wie viele Pferde werden geschoren?\n\nJe häufiger und umfangreicher geschert wird, desto wichtiger ist eine dafür passende Geräteklasse.\n\nFelltyp\n\nIst das Fell eher fein oder dicht?\n\nBei feinem Fell kann ein leichtes Gerät ausreichen; für dichteres Fell ist eher eine leistungsstärkere Maschine passend.\n\nStromversorgung\n\nIst ein Netzanschluss sicher erreichbar?\n\nEin Akku bietet mehr Bewegungsfreiheit; bei Laufzeit und Leistung können jedoch Grenzen bestehen.\n\nPferdetemperament\n\nReagiert das Pferd empfindlich auf Geräusch oder Vibration?\n\nBei jungen oder nervösen Pferden können geringeres Geräusch und weniger Vibration die Handhabung erleichtern.\n\nErgonomie\n\nLässt sich das Gerät leicht und ausgewogen führen?\n\nEin geringes Gewicht und eine gute Balance können die kontrollierte Führung während der Schur unterstützen.\n\nMesser\n\nPasst das Messer zum Felltyp?\n\nEin ungeeignet feines Messer kann bei dickem Fell schneller stumpf werden und die Maschine stärker belasten.\n\nWartung\n\nWerden Messer regelmäßig gereinigt und geölt?\n\nRegelmäßiges Ölen vermindert Reibung und Hitze und kann unnötige Belastung vermeiden.\n\nVorbereitung\n\nIst das Pferd trocken, sauber und gründlich gebürstet?\n\nTrockenes, möglichst sauberes und gründlich gebürstetes Fell gehört zur empfohlenen Vorbereitung.\n\nFazit\n\nPassende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein.\n\nEbenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird.\n\nRegelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können.\n\nVor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.\n\nWeiterführende Informationen\n\nWenn du dich gezielt mit passenden Geräten und ihrer Einordnung beschäftigen möchtest, findest du weitere Inhalte unter Schermaschinen.\n\nDieser Beitrag wurde mit KI-Unterstützung erstellt und redaktionell geprüft.",
-        "checked_text_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
-        "content_hash": "201edf3391c458ab66ff5ff26737e397e53952b2ba320c602fd21c19bb0d355f",
+        "checked_text": "Ein Reitplatzplaner unterstützt die Pflege des Reitbodens. Hersteller beschreiben Geräte für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch. Zugleich unterscheiden sich Modelle bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb sollten Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam betrachtet werden.\n\nZinken in zwei Reihen bearbeiten den Reitboden, ihre Tiefenführung lässt sich über eine verstellbare Andruckwalze beeinflussen. Ein Planierschild dient dem Ebnen des Platzes. Damit steht vor dem Kauf die gewünschte Bearbeitung der Tretschicht im Mittelpunkt.\n\nReitplatzplaner für Pferde nach klaren Kriterien auswählen\n\nEin sinnvoller Einstieg ist die Frage, welche Arbeitsschritte der Planer übernehmen soll. Beim Platz-Max Light lockern und durchmischen Zinken in zwei Reihen den Reitboden. Danach gleicht eine höhenverstellbare Planierschiene Unebenheiten aus, bevor eine Walze die Oberfläche weiter bearbeitet. Diese Abfolge zeigt, dass Zinken, Planierschiene und Walze unterschiedliche Aufgaben erfüllen und deshalb getrennt bewertet werden sollten.\n\nEbenso wichtig ist das vorhandene Zugfahrzeug. Der Platz-Max Light ist ausdrücklich für kleinere Zugfahrzeuge mit geringer Motorleistung ausgelegt und wird für unterschiedliche Reitweisen wie Dressur, Springen und Western angeboten. Das bedeutet für die Auswahl: Erst das vorhandene Fahrzeug und der Einsatzzweck festlegen, dann die passende Geräteklasse betrachten.\n\nFür die übergeordnete Einordnung des Platzes gehört auch der Bereich Weide in den Zusammenhang.\n\nTretschicht prüfen: Welche Bodenart soll regelmäßig bearbeitet werden?\n\nArbeitstiefe festlegen: Wie wichtig ist eine einstellbare Tiefenführung der Zinken?\n\nArbeitsbreite abgleichen: Welche Breite passt zur Fläche und zum vorhandenen Fahrzeug?\n\nZugfahrzeug berücksichtigen: Welche Leistung und Anbauart stehen tatsächlich zur Verfügung?\n\nArbeitswerkzeuge vergleichen: Werden Zinken, Planierschiene und Walze in der gewünschten Kombination benötigt?\n\nRandpflege einordnen: Sind Banden- oder Hufschlagfunktionen für den eigenen Platz relevant?\n\nReitplatzplaner nach Boden und Fahrzeug auswählen\n\nDie Entscheidung wird einfacher, wenn drei Fragen nacheinander beantwortet werden. Zuerst kommt der Boden: Die Tiefenführung der Zinken muss zur gewünschten Bearbeitung passen. Danach folgt das Fahrzeug, denn Arbeitsbreite, Gewicht und benötigte Zugleistung unterscheiden sich zwischen Reitplatzplanern. Erst im dritten Schritt lohnt sich der Blick auf Komfort- und Ausstattungsdetails. So wird nicht ein großes oder aufwendig ausgestattetes Gerät automatisch bevorzugt, sondern eines, dessen Arbeitsweise zum vorhandenen System passt.\n\nAuch Sonder- und Zusatzausstattung sollte erst danach bewertet werden. Je nach Modell können Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Zinken, eine einstellbare Hackscharreihe und unterschiedliche Walzen zur Ausstattung gehören. Diese Merkmale sind dann sinnvoll einzuordnen, wenn feststeht, welche Aufgaben auf dem eigenen Platz tatsächlich regelmäßig anfallen.\n\nFür die praktische Pflegeentscheidung ist der Bereich Reitplatzpflege die passende nächste Ebene.\n\nWer vor allem eine möglichst gleichmäßige Oberfläche anstrebt, sollte besonders auf die Kombination aus Planierschild oder Planierschiene und der nachgelagerten Bearbeitung achten. Das Planierschild dient dem Ebnen, während beim Platz-Max Light zusätzlich die Walze die Oberfläche nachbearbeitet. Für die Auswahl ist deshalb nicht nur wichtig, ob ein Bauteil vorhanden ist, sondern welche Funktion es im gesamten Arbeitsablauf übernimmt.\n\nReitplatzplaner nach wichtigen Kriterien vergleichen\n\nDie Tabelle bündelt die wichtigsten Auswahlkriterien. Reitplatzplaner werden für unterschiedliche Platzarten angeboten und unterscheiden sich gleichzeitig bei Arbeitsbreite, Gewicht und Leistungsbedarf. Genau deshalb sollten Boden, Fahrzeug und gewünschte Bearbeitung gemeinsam gelesen werden.\n\nPrüfpunkt\n\nGebundene Einordnung\n\nFrage für die Auswahl\n\nBodenart\n\nModelle werden unter anderem für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch beschrieben.\n\nWelche Tretschicht soll regelmäßig gepflegt werden?\n\nArbeitstiefe\n\nDie Tiefenführung der Zinken kann bei entsprechenden Geräten eingestellt werden.\n\nWie tief soll die Bearbeitung erfolgen?\n\nPlanieren\n\nEin Planierschild dient dazu, den Reitplatz zu ebnen.\n\nWie wichtig ist das gezielte Ausgleichen der Oberfläche?\n\nArbeitsbreite\n\nReitplatzplaner werden mit unterschiedlichen Arbeitsbreiten angeboten.\n\nWelche Breite passt zur Fläche und zum Fahrweg?\n\nZugfahrzeug\n\nGewicht und benötigte Zugleistung unterscheiden sich je nach Gerät.\n\nWelches Fahrzeug ist bereits vorhanden?\n\nZinken und Walze\n\nZinken lockern und mischen, während eine Walze die Oberfläche nachbearbeiten kann.\n\nWelche Arbeitsfolge wird auf dem eigenen Boden benötigt?\n\nRandpflege\n\nJe nach Modell sind Bandenrolle oder Hilfen für die Hufschlagpflege verfügbar.\n\nSollen Randbereiche regelmäßig mit bearbeitet werden?\n\nZusatzausstattung\n\nZackenschiene, Hackscharreihe und unterschiedliche Walzen können modellabhängig angeboten werden.\n\nWelche Zusatzfunktion wird tatsächlich genutzt?\n\nFazit zur Auswahl eines Reitplatzplaners\n\nEin passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten.\n\nDanach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt.\n\nErst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.\n\nWeiterführende Informationen\n\nWenn Boden, Arbeitstiefe und Arbeitsfolge feststehen, lässt sich die Gerätesuche deutlich enger führen. Besonders Zinken, Planierschiene beziehungsweise Planierschild und Walze sollten dabei als zusammenhängende Arbeitskette betrachtet werden, weil sie unterschiedliche Schritte der Bodenbearbeitung übernehmen.\n\nFür die weitere Produktauswahl findest du den gebundenen Bereich Reitplatzplaner. Dort lässt sich die Suche anschließend auf die tatsächlich benötigten Ausstattungsmerkmale konzentrieren, etwa Randpflege, Zinken, Schienen oder Walzen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+        "checked_text_sha256": "2540a02ebffea593e5e3c722daa9800d43923bd27b6123244a4044344037c59e",
+        "content_hash": "7226109f7e5921e9fe6ce4bfab810d0a436d642eecb7a2745b890954220b15fe",
         "engine": "LanguageTool 6.8 / Bestand 43",
         "execution_record": {
-          "input_sha256": "4b619819b1f9e94582def5ea98f57c9127697d1c4f4017b8572cf423bc630627",
+          "input_sha256": "2540a02ebffea593e5e3c722daa9800d43923bd27b6123244a4044344037c59e",
           "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
           "return_code": 0
         },
@@ -319,8 +311,8 @@
       "link_bindings": [
         {
           "active": true,
-          "anchor": "Ausrüstung",
-          "href": "/ausruestung/",
+          "anchor": "Weide",
+          "href": "/weide/",
           "reason": "Maschinell gebundener Portal-Hauptbereich",
           "role": "parent_category",
           "section_id": "criteria",
@@ -329,8 +321,8 @@
         },
         {
           "active": true,
-          "anchor": "Pflegezubehör",
-          "href": "/ausruestung/ausruestung-pflegezubehoer/",
+          "anchor": "Reitplatzpflege",
+          "href": "/weide/weide-reitplatzpflege/",
           "reason": "Maschinell gebundener Portal-Bereich",
           "role": "semantic_related",
           "section_id": "decision",
@@ -339,8 +331,8 @@
         },
         {
           "active": true,
-          "anchor": "Schermaschinen",
-          "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+          "anchor": "Reitplatzplaner",
+          "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
           "reason": "Maschinell gebundene Portal-Produktseite",
           "role": "further_information",
           "section_id": "further_information",
@@ -354,8 +346,8 @@
         "entries": [
           {
             "active": true,
-            "anchor": "Ausrüstung",
-            "href": "/ausruestung/",
+            "anchor": "Weide",
+            "href": "/weide/",
             "reason": "Maschinell gebundener Portal-Hauptbereich",
             "role": "parent_category",
             "section_id": "criteria",
@@ -364,8 +356,8 @@
           },
           {
             "active": true,
-            "anchor": "Pflegezubehör",
-            "href": "/ausruestung/ausruestung-pflegezubehoer/",
+            "anchor": "Reitplatzpflege",
+            "href": "/weide/weide-reitplatzpflege/",
             "reason": "Maschinell gebundener Portal-Bereich",
             "role": "semantic_related",
             "section_id": "decision",
@@ -374,8 +366,8 @@
           },
           {
             "active": true,
-            "anchor": "Schermaschinen",
-            "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+            "anchor": "Reitplatzplaner",
+            "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
             "reason": "Maschinell gebundene Portal-Produktseite",
             "role": "further_information",
             "section_id": "further_information",
@@ -385,50 +377,50 @@
         ],
         "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
       },
-      "portal_link_registry_hash": "9a08bdb23d190fa3891d106970827f9cc34e59f77be40dcc8d57ce1b99c05549",
-      "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Schermaschinen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+      "portal_link_registry_hash": "5a6dd595e9dc6a906848a6aeeaf05abd2c130f5e8d999902a30bb4418fa63ee9",
+      "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Reitplatzplaner für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
       "type_meta": {
         "decision_criteria": [
-          "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
-          "Felltyp und benötigte Geräteklasse",
-          "Netz- oder Akkubetrieb",
-          "Geräusch, Vibration, Gewicht und Balance",
-          "Passende Messer für Felltyp und gewünschte Schnittlänge",
-          "Wartung, Kühlung und regelmäßiges Ölen"
+          "Tretschicht und Bodenart",
+          "Benötigte Arbeitstiefe",
+          "Arbeitsbreite und Platzgröße",
+          "Vorhandenes Zugfahrzeug und Leistung",
+          "Benötigte Zinken-, Planierschild- und Walzenfunktion",
+          "Banden- und Hufschlagpflege"
         ],
-        "decision_goal": "Eine passende Schermaschine für Pferde nach Einsatzumfang, Felltyp, Stromversorgung, Pferdetemperament, Ergonomie und Wartungsanforderungen auswählen."
+        "decision_goal": "Einen Reitplatzplaner auswählen, dessen Bodenbearbeitung, Arbeitsbreite und Zugfahrzeug-Anforderungen zum eigenen Reitplatz passen."
       },
       "wordpress_category": {
         "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
-        "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
-        "name": "Beratung Schermaschinen",
+        "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+        "name": "Beratung Reitplatzplaner",
         "semantic_binding_not_numeric_identity": true,
-        "slug": "schermaschinen-beratung",
+        "slug": "reitplatzplaner-beratung",
         "taxonomy": "category"
       },
       "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
     },
-    "quality_binding_hash": "12b06f092916fcf0cadd91aaa56583f3fb99c27564b47147012a98cacc9a2cf1",
+    "quality_binding_hash": "18537908be4a6cd730b6cc0b3a42e5f9b3ea9322e8c53d2ed966cc795cf20d09",
     "runtime_order": {
       "allowed_fact_ids": [
-        "FACT-CLIPPER-001",
-        "FACT-CLIPPER-002",
-        "FACT-CLIPPER-003",
-        "FACT-CLIPPER-004",
-        "FACT-CLIPPER-005",
-        "FACT-CLIPPER-006",
-        "FACT-CLIPPER-007"
+        "FACT-REITPLATZ-001",
+        "FACT-REITPLATZ-002",
+        "FACT-REITPLATZ-003",
+        "FACT-REITPLATZ-004",
+        "FACT-REITPLATZ-005",
+        "FACT-REITPLATZ-006",
+        "FACT-REITPLATZ-007"
       ],
       "article_type": "Beratung",
-      "conclusion": "Fazit Passende Schermaschinen für Pferde wählst du am zuverlässigsten, wenn du Einsatzumfang, Felltyp und Stromversorgung gemeinsam betrachtest. Für gelegentliche Detailarbeit an feinerem Fell kann ein leichteres Gerät genügen. Bei dichterem Fell und regelmäßigem Einsatz sollte die Geräteklasse entsprechend leistungsfähiger sein. Ebenso wichtig sind Pferdetemperament, Ergonomie und Messerwahl. Bei empfindlichen Pferden können geringeres Geräusch, weniger Vibration und eine gute Balance die Handhabung erleichtern. Das Messer sollte zum Fell passen, damit die Technik nicht unnötig belastet wird. Regelmäßiges Reinigen und Ölen gehört ebenfalls dazu, weil dadurch Reibung und Hitze reduziert werden können. Vor der Schur sollte das Pferd trocken, möglichst sauber und gut gebürstet sein. Während der Arbeit gehören gereinigte und geölte Messer, freie Luftzufuhr und ein sorgfältiger Umgang mit Hautfalten zum empfohlenen Vorgehen.",
+      "conclusion": "Fazit zur Auswahl eines Reitplatzplaners Ein passender Reitplatzplaner beginnt bei der eigenen Ausgangslage. Bodenart und Platzgröße bilden die erste Ebene, Arbeitsbreite, Gewicht und benötigte Zugleistung die zweite. Weil Reitplatzplaner für unterschiedliche Bodenarten beschrieben werden und ihre technischen Eckdaten variieren, ist die Abstimmung auf den eigenen Platz wichtiger als der Vergleich einzelner Ausstattungslisten. Danach entscheidet die gewünschte Arbeitsweise. Einstellbare Zinken können den Boden in einer definierten Tiefe bearbeiten, ein Planierschild ebnet die Fläche und eine nachgelagerte Walze kann die Oberfläche weiter bearbeiten. Wer diese Funktionen einzeln prüft, kann besser erkennen, welche Kombination zum eigenen Pflegeziel passt. Erst zum Schluss kommen Geräteklasse und Zusatzausstattung. Es gibt Modelle für kleinere Zugfahrzeuge mit geringer Motorleistung, während andere Geräte zusätzliche Komponenten wie Bandenrolle, Hilfen für die Hufschlagpflege, Zackenschiene, Hackscharreihe oder unterschiedliche Walzen mitbringen können. Der sinnvollste Reitplatzplaner ist deshalb derjenige, dessen Funktionen zum vorhandenen Fahrzeug und zu den regelmäßig anfallenden Pflegearbeiten passen.",
       "domain": "pferdeportal",
-      "fact_pack_hash": "b9fb70157a9ac46ffd4b595a16c3e1f3cc607002237a907904b0cec5fa3ba61e",
-      "lead": "Wer Schermaschinen für Pferde auswählt, sollte nicht nur auf Leistung oder Preis schauen. Entscheidend sind Einsatzhäufigkeit, Felltyp, Stromversorgung sowie Geräusch, Vibration, Gewicht und Balance. Besonders bei jungen oder nervösen Pferden kann die Handhabung eine wichtige Rolle spielen. Die passende Geräteklasse richtet sich deshalb nach dem tatsächlichen Einsatz. Für gelegentliche Detailarbeit gelten andere Anforderungen als für regelmäßige Schuren bei mehreren Pferden oder bei dichtem Fell.",
+      "fact_pack_hash": "9c33b169be246e31a85e494c399f5e3fd85d005f1bce6736ec45f34eb1a4c590",
+      "lead": "Ein Reitplatzplaner unterstützt die Pflege des Reitbodens. Hersteller beschreiben Geräte für Sandflächen, Plätze mit Sand und Vlies sowie Flächen mit Rindenmulch. Zugleich unterscheiden sich Modelle bei Arbeitsbreite, Gewicht und benötigter Zugleistung. Deshalb sollten Boden, Platzgröße und vorhandenes Zugfahrzeug gemeinsam betrachtet werden. Zinken in zwei Reihen bearbeiten den Reitboden, ihre Tiefenführung lässt sich über eine verstellbare Andruckwalze beeinflussen. Ein Planierschild dient dem Ebnen des Platzes. Damit steht vor dem Kauf die gewünschte Bearbeitung der Tretschicht im Mittelpunkt.",
       "links": [
         {
           "active": true,
-          "anchor": "Ausrüstung",
-          "href": "/ausruestung/",
+          "anchor": "Weide",
+          "href": "/weide/",
           "reason": "Maschinell gebundener Portal-Hauptbereich",
           "role": "parent_category",
           "section_id": "criteria",
@@ -437,8 +429,8 @@
         },
         {
           "active": true,
-          "anchor": "Pflegezubehör",
-          "href": "/ausruestung/ausruestung-pflegezubehoer/",
+          "anchor": "Reitplatzpflege",
+          "href": "/weide/weide-reitplatzpflege/",
           "reason": "Maschinell gebundener Portal-Bereich",
           "role": "semantic_related",
           "section_id": "decision",
@@ -447,8 +439,8 @@
         },
         {
           "active": true,
-          "anchor": "Schermaschinen",
-          "href": "/ausruestung/ausruestung-pflegezubehoer/schermaschinen/",
+          "anchor": "Reitplatzplaner",
+          "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
           "reason": "Maschinell gebundene Portal-Produktseite",
           "role": "further_information",
           "section_id": "further_information",
@@ -456,60 +448,60 @@
           "target_type": "portal_route"
         }
       ],
-      "order_id": "k9-47c8df13",
+      "order_id": "k9-55a2dcd9",
       "required_sections": [
         "Fazit",
         "Weiterführende Informationen"
       ],
       "section_fact_ids": [
-        "FACT-CLIPPER-001",
-        "FACT-CLIPPER-002",
-        "FACT-CLIPPER-003",
-        "FACT-CLIPPER-004",
-        "FACT-CLIPPER-005",
-        "FACT-CLIPPER-006",
-        "FACT-CLIPPER-007"
+        "FACT-REITPLATZ-001",
+        "FACT-REITPLATZ-002",
+        "FACT-REITPLATZ-003",
+        "FACT-REITPLATZ-004",
+        "FACT-REITPLATZ-005",
+        "FACT-REITPLATZ-006",
+        "FACT-REITPLATZ-007"
       ],
-      "slug": "schermaschinen-f-r-pferde",
+      "slug": "reitplatzplaner-fuer-pferde",
       "subject_label": "die Auswahl eines Reitplatzplaners für Pferde",
-      "subject_scope": "schermaschinen_fuer_pferde",
+      "subject_scope": "reitplatzplaner_fuer_pferde",
       "table_focus": [
-        "FACT-CLIPPER-001",
-        "FACT-CLIPPER-002",
-        "FACT-CLIPPER-003",
-        "FACT-CLIPPER-004"
+        "FACT-REITPLATZ-001",
+        "FACT-REITPLATZ-002",
+        "FACT-REITPLATZ-003",
+        "FACT-REITPLATZ-004"
       ],
-      "title": "So wählst du passende Schermaschinen für Pferde"
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde"
     },
     "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
     "source_hashes": [
-      "45315bdef3a1f1864fd8c9292600b672311991c21f084c6aac4ab1a5a19f18be"
+      "03dc3b45abf0b968ba5cffe53c934dfe6ee098d11dbaa03d372643af26e36553"
     ],
-    "source_order_id": "k9-47c8df13",
-    "source_snapshot_id": "FP-K9-SCHERMASCHINEN-PFERDE-20260930",
-    "target_keyword": "Schermaschinen für Pferde",
+    "source_order_id": "k9-55a2dcd9",
+    "source_snapshot_id": "FP-K9-REITPLATZPLANER-20260930",
+    "target_keyword": "Reitplatzplaner für Pferde",
     "three_type_local_binding": {
       "expected_category": {
         "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
-        "hierarchy_path": "Ausrüstung > Pflegezubehör > Schermaschinen > Beratung Schermaschinen",
-        "name": "Beratung Schermaschinen",
+        "hierarchy_path": "Weide > Reitplatzpflege > Reitplatzplaner > Beratung Reitplatzplaner",
+        "name": "Beratung Reitplatzplaner",
         "semantic_binding_not_numeric_identity": true,
-        "slug": "schermaschinen-beratung",
+        "slug": "reitplatzplaner-beratung",
         "taxonomy": "category"
       },
       "semantic_keywords": [
-        "Schermaschinen für Pferde",
-        "Einsatzhäufigkeit und Anzahl der zu scherenden Pferde",
-        "Felltyp und benötigte Geräteklasse",
-        "Netz- oder Akkubetrieb",
-        "Geräusch, Vibration, Gewicht und Balance",
-        "Passende Messer für Felltyp und gewünschte Schnittlänge",
-        "Wartung, Kühlung und regelmäßiges Ölen"
+        "Reitplatzplaner für Pferde",
+        "Tretschicht und Bodenart",
+        "Benötigte Arbeitstiefe",
+        "Arbeitsbreite und Platzgröße",
+        "Vorhandenes Zugfahrzeug und Leistung",
+        "Benötigte Zinken-, Planierschild- und Walzenfunktion",
+        "Banden- und Hufschlagpflege"
       ],
       "wordpress_runtime_term_id_required_later": true,
       "wordpress_runtime_validation_performed_now": false
     },
-    "topic": "So wählst du passende Schermaschinen für Pferde"
+    "topic": "Das Wichtigste über Reitplatzplaner für Pferde"
   },
   "publish_allowed": false,
   "status": "PASS"

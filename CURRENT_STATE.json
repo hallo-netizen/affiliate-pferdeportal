@@ -1,14 +1,35 @@
 {
-  "active_job": null,
-  "branch": "konzept9/greenfield-20260929",
-  "chat_may_route": false,
-  "concept": "K9",
   "contract": "K9_CURRENT_STATE_V3",
-  "first_open_blocker": null,
-  "next_action": "RUN_FINALIZER",
-  "operational_mode": "SYSTEM_ROUTING_ONLY",
-  "orchestration_mode": "AUTO_CHAIN",
-  "publish_allowed": false,
   "role": "SOLE_CURRENT_AUTHORITY",
-  "status": "FINALIZE_PENDING"
+  "concept": "K9",
+  "branch": "konzept9/greenfield-20260929",
+  "status": "STOP",
+  "operational_mode": "SUPERVISOR",
+  "active_job": null,
+  "first_open_blocker": null,
+  "next_action": "DESIGN_AND_PROVE_ZERO_MANUAL_NUDGE_ORCHESTRATION_AROUND_EXISTING_K9_STATIONS",
+  "work_binding": {
+    "baseline": "SCHERMASCHINEN_REAL_E2E_STOP",
+    "preserve_existing_station_products": true,
+    "preserve_quality_gates": [
+      "LT_6_8",
+      "PPM_6_7_9",
+      "PSERC",
+      "ENDSTEMPEL",
+      "WORDPRESS_VERIFY"
+    ],
+    "do_not_reopen_completed_article": true,
+    "publish_allowed": false
+  },
+  "terminal_evidence": {
+    "stop_ref": "runtime/K9_STOP.json",
+    "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+    "final_sha256": "56bc934abbe86145a7d9d3a1bbc97ed161b0a0dae77e217dde10c86580132ca9",
+    "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+    "article_count": 1,
+    "finalizer_run_id": "36739257887",
+    "trigger_head_sha": "edb23f04fb4ed72cdf3516a1de0e71d28366c220"
+  },
+  "chat_may_route": false,
+  "publish_allowed": false
 }
