@@ -14,3 +14,39 @@ jobs:
           test ! -e control
           test ! -e isolated_system4
           python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Validate actual open runtime job
+        run: |
+          set -euo pipefail
+          python3 k9_engine.py status > /tmp/k9-live-status.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          job_path=Path("runtime/CURRENT_JOB.json")
+          entry_path=Path("runtime/CHAT_ENTRY.json")
+          if not job_path.exists():
+              raise SystemExit(0)
+          if not entry_path.exists():
+              raise SystemExit("LIVE_CHAT_ENTRY_MISSING")
+          job=json.loads(job_path.read_text())
+          entry=json.loads(entry_path.read_text())
+          if entry.get("job_id") != job.get("job_id") or entry.get("job_sha256") != job.get("job_sha256"):
+              raise SystemExit("LIVE_CHAT_ENTRY_JOB_MISMATCH")
+          if entry.get("first_action") != "EXECUTE_BOUND_JOB_IMMEDIATELY":
+              raise SystemExit("LIVE_FIRST_ACTION_NOT_EXECUTE")
+          if entry.get("first_response_rule") != "NO_STATUS_REPORT_NO_DIAGNOSIS_NO_FIX_PROPOSAL_BEFORE_JOB_EXECUTION":
+              raise SystemExit("LIVE_FIRST_RESPONSE_RULE_INVALID")
+          if job.get("station") == "research":
+              required=["sources","portal_links","decision_support","fact_pack","product_sha256"]
+              if entry.get("required_output_fields") != required:
+                  raise SystemExit("LIVE_RESEARCH_OUTPUT_FIELDS_INVALID")
+              rows=job.get("items") or []
+              if len(rows) != job.get("item_count") or not rows:
+                  raise SystemExit("LIVE_RESEARCH_JOB_ITEMS_INVALID")
+              for row in rows:
+                  links=((row.get("input_products") or {}).get("portal_context") or {}).get("portal_links")
+                  if not isinstance(links,list) or len(links)!=3:
+                      raise SystemExit("LIVE_RESEARCH_PORTAL_CONTEXT_INVALID")
+                  roles={x.get("role") for x in links if isinstance(x,dict)}
+                  if roles != {"parent_category","semantic_related","further_information"}:
+                      raise SystemExit("LIVE_RESEARCH_PORTAL_ROLES_INVALID")
+          PY
