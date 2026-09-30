@@ -1,0 +1,219 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-RESEARCH-4571d4ba822044c4",
+  "results": [
+    {
+      "item_id": "k9-037886feb135ca682b8423e7",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "decision_support": {
+          "decision_criteria": [
+            "Winterfell und natürliche Isolation des Pferdes",
+            "Nässe, Wind und vorhandener Wetterschutz",
+            "Füllung und Wirkung einer ungefütterten Regendecke",
+            "Scheren, Alter, Körperzustand, Gesundheit und Akklimatisierung",
+            "Anzeichen für Überwärmung oder unzureichenden Wärmeschutz"
+          ],
+          "decision_goal": "Die FAQ soll klar beantworten, ob Pferde unter Regendecken frieren können und woran Halter erkennen, ob Decke, Wetter und Pferd zusammenpassen."
+        },
+        "fact_pack": {
+          "article_type": "FAQ",
+          "article_type_coverage": {
+            "FAQ": "COVERED"
+          },
+          "claim_register_hash": "29ef2552be8073d0cb57adb4f16c8e9824428a07f84b6a3930ca1f9ab81180e0",
+          "claims": [
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "bccf94cad9aa4f9cafbc22055ec878345850266516c019a1b5d9e16e0affa655",
+              "fact_id": "F001",
+              "locator": "Blanketing Considerations",
+              "source_id": "SRC_PSU_WINTER_WELLNESS",
+              "statement": "Ein gesundes Pferd mit intaktem Winterfell kann Kälte gut vertragen, weil das Fell isolierende Luft einschließt; Nässe, Schlamm und starker Wind verringern diese Isolationswirkung.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            },
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "6faeb1bd6c0a6b6e113543a3e3f52e17c5ce55a729570a42104600b075452a9c",
+              "fact_id": "F002",
+              "locator": "Should You Blanket a Horse?",
+              "source_id": "SRC_PSU_BLANKET_2026",
+              "statement": "Nasses Fell verliert Isolationswirkung, sodass Regen und gefrierender Niederschlag die Kältebelastung erhöhen können, auch wenn die Lufttemperatur allein noch keine Decke erfordern würde.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            },
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "d8e6ca26f64739409fa7bad2af8bbb82c1de7c699134220f556d79085a78ffa4",
+              "fact_id": "F003",
+              "locator": "Blanketing Tips",
+              "source_id": "SRC_PSU_WINTER_WELLNESS",
+              "statement": "Eine ungefütterte Regendecke kann das Fell eines ungeschorenen Pferdes anlegen und die natürliche Aufstellung der Haare begrenzen, ohne nennenswert zusätzliche Isolation zu liefern.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            },
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "78d371b86e347d8abab3ef31a639176e4ecf92bd4550baa9296b7b43ef86563f",
+              "fact_id": "F004",
+              "locator": "Blanketing Tips",
+              "source_id": "SRC_PSU_WINTER_WELLNESS",
+              "statement": "Wird einem Pferd unter einer Decke zu warm, kann es schwitzen; Feuchtigkeit unter der Decke kann später das Auskühlen begünstigen und Hautprobleme fördern.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            },
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "02b0099e25ccee3fe48f835d804ac7a9b2bab335ed3d7d1aa3e0edf09d8c4817",
+              "fact_id": "F005",
+              "locator": "When to blanket",
+              "source_id": "SRC_UMN_WINTER",
+              "statement": "Eine Decke wird eher bei geschorenen, sehr jungen, sehr alten, untergewichtigen, kranken oder noch nicht an Kälte gewöhnten Pferden benötigt sowie bei fehlendem Schutz in starker Kälte oder Nässe.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            },
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "e3ff3ee2ee1ee2e6ac9b20fce4e3acbeb5b6deb7cd249531c137c7537a45d8ff",
+              "fact_id": "F006",
+              "locator": "Blanket Fit",
+              "source_id": "SRC_PSU_BLANKET_2026",
+              "statement": "Eine Decke sollte trocken bleiben, richtig sitzen und regelmäßig abgenommen werden, damit Pferd, Haut und Sitz der Decke kontrolliert werden können.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            },
+            {
+              "article_types": [
+                "FAQ"
+              ],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "02e5827dd78d7cb73dcf328247118c06da4a0e41874b44367663d75966108a15",
+              "fact_id": "F007",
+              "locator": "Shelter",
+              "source_id": "SRC_USU_COLD",
+              "statement": "Zugang zu einem Unterstand oder Windschutz und das Trockenbleiben helfen Pferden, bei kaltem, windigem oder nassem Wetter Körperwärme zu halten.",
+              "subject_scope": "Pferde mit Regendecken oder bei der Entscheidung über Regendecken unter kühlen, nassen oder windigen Bedingungen",
+              "time_scope": "allgemeine aktuelle Empfehlungen zur Pferdehaltung"
+            }
+          ],
+          "conclusion_evidence_coverage": {
+            "fact_ids": [
+              "F001",
+              "F002",
+              "F004",
+              "F005",
+              "F007"
+            ],
+            "status": "COVERED"
+          },
+          "contradiction_status": "NO_MATERIAL_CONTRADICTION_IDENTIFIED",
+          "domain": "pferde-atelier",
+          "fact_ids": [
+            "F001",
+            "F002",
+            "F003",
+            "F004",
+            "F005",
+            "F006",
+            "F007"
+          ],
+          "fact_pack_hash": "d0ec7c4b12e231964f8fc20e645bb690b1a3d68e71abc9c837f6530008e952b0",
+          "fact_pack_id": "K9-FACTPACK-FRIEREN-REGENDECKEN-002",
+          "placeholder_content_status": "NONE",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "required_block_coverage": {
+            "direct_answer": [
+              "F001",
+              "F002",
+              "F003"
+            ],
+            "practical_check": [
+              "F006",
+              "F007"
+            ],
+            "risk_and_exceptions": [
+              "F004",
+              "F005"
+            ]
+          },
+          "source_manifest_hash": "990776f69a2d074eb4abb703bc0abfaf19cb679f38c5441cdeec79ae2d6de103",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "table_evidence_coverage": {
+            "fact_ids": [
+              "F001",
+              "F002",
+              "F003",
+              "F005"
+            ],
+            "status": "COVERED"
+          },
+          "temporal_validity_status": "CURRENT_GENERAL_GUIDANCE",
+          "title_scope": "frieren_pferde_unter_regendecken"
+        },
+        "portal_links": [
+          {
+            "anchor": "Ausrüstung",
+            "href": "/ausruestung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Decken",
+            "href": "/ausruestung/ausruestung-decken/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Regendecken",
+            "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
+        ],
+        "product_sha256": "03a05b206af5c8250e6ed351aa09cbcfb6f7c0fe3be0bb940b648c8bdfae518d",
+        "sources": [
+          {
+            "source_id": "SRC_PSU_BLANKET_2026",
+            "title": "When to Blanket a Horse",
+            "url": "https://extension.psu.edu/when-to-blanket-a-horse"
+          },
+          {
+            "source_id": "SRC_UMN_WINTER",
+            "title": "Caring for your horse in the winter",
+            "url": "https://extension.umn.edu/horse-care-and-management/caring-your-horse-winter"
+          },
+          {
+            "source_id": "SRC_PSU_WINTER_WELLNESS",
+            "title": "Equine Winter Wellness Tips",
+            "url": "https://extension.psu.edu/equine-winter-wellness-tips"
+          },
+          {
+            "source_id": "SRC_USU_COLD",
+            "title": "Caring for Horses in Cold Weather",
+            "url": "https://extension.usu.edu/equine/research/caring-for-horses-in-cold-weather"
+          }
+        ]
+      }
+    }
+  ],
+  "station": "research"
+}

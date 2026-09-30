@@ -1,22 +1,14 @@
 {
-  "active_job": {
-    "article_title": "Frieren Pferde unter Regendecken?",
-    "item_id": "k9-037886feb135ca682b8423e7",
-    "job_id": "K9-RESEARCH-4571d4ba822044c4",
-    "job_path": "runtime/CURRENT_JOB.json",
-    "runtime_entry": "runtime/CHAT_ENTRY.json",
-    "station": "research"
-  },
+  "active_job": null,
   "branch": "konzept9/greenfield-20260929",
   "chat_may_route": false,
   "concept": "K9",
   "contract": "K9_CURRENT_STATE_V3",
   "first_open_blocker": null,
-  "next_action": "EXECUTE_RUNTIME_CHAT_ENTRY",
-  "operational_mode": "EXECUTE_RUNTIME_CHAT_ENTRY_ONLY",
+  "next_action": "PREPARE_WRITE",
+  "operational_mode": "SYSTEM_ROUTING_ONLY",
   "orchestration_mode": "AUTO_CHAIN",
   "publish_allowed": false,
   "role": "SOLE_CURRENT_AUTHORITY",
-  "status": "OPEN_CHAT_WORKER_JOB",
-  "worker_mode": "EXECUTE_ONLY_NO_SUPERVISOR_NARRATION"
+  "status": "AUTO_CHAIN_TRANSITION_PENDING"
 }
