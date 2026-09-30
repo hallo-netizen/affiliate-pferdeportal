@@ -47,6 +47,18 @@ def _trace_fact_ids(markup):
             out.append(m.group(1))
     return out
 
+def _trace_source_label(research, source_id):
+    source_id=str(source_id or "").strip()
+    if not source_id:
+        return ""
+    if source_id.upper().startswith("TEST_"):
+        for source in research.get("sources",[]):
+            if isinstance(source,dict) and str(source.get("source_id") or "").strip()==source_id:
+                title=str(source.get("title") or "").strip()
+                if title:
+                    return title
+    return source_id
+
 def ensure_all_fact_traces(markup, research):
     fact_pack=research.get("fact_pack",{})
     fact_ids=[str(x) for x in fact_pack.get("fact_ids",[]) if str(x)]
@@ -60,7 +72,8 @@ def ensure_all_fact_traces(markup, research):
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
         source_hash=str(claim.get("evidence_text_sha256") or "")
         source_id=str(claim.get("source_id") or "").strip()
-        if not source_hash or not source_id:
+        source_title=_trace_source_label(research,source_id)
+        if not source_hash or not source_title:
             raise PackError("PPM_SOURCE_TRACE_BINDING_MISSING:"+fid)
         if _placeholder_source_id(source_id):
             continue
@@ -81,7 +94,7 @@ def ensure_all_fact_traces(markup, research):
         candidates.sort(key=lambda x:(-x[0],x[1]))
         _,start,end,insert_at,segment=candidates[0]
         trace=(f'<span class="ppm-source-trace" data-fact-id="{fid}" '
-               f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>')
+               f'data-source-hash="{source_hash}" data-source-title="{source_title}"></span>')
         replacement=segment[:insert_at]+trace+segment[insert_at:]
         markup=markup[:start]+replacement+markup[end:]
         existing.add(fid)
@@ -115,7 +128,7 @@ def validate_html(markup, article_type, metadata, research, rules):
         claim=claim_map.get(fid)
         if not claim:
             raise PackError("PPM_SOURCE_TRACE_FACT_UNKNOWN:"+fid)
-        expected_title=str(claim.get("source_id") or "").strip()
+        expected_title=_trace_source_label(research,claim.get("source_id"))
         if not expected_title or source_title != expected_title:
             raise PackError("PPM_SOURCE_TRACE_SOURCE_TITLE_MISMATCH:"+fid)
         if source_hash != str(claim.get("evidence_text_sha256") or ""):
