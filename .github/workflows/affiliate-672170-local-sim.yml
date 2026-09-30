@@ -190,6 +190,13 @@ jobs:
           };
           $reset();
 
+          $pre=$rm('ranked_campaign_candidate_pool')->invoke($o,$slot,'product','',false,[],$context);
+          $pre_ebay=array_values(array_filter($pre,static function($row){return is_array($row)&&sanitize_key((string)($row['network']??''))==='ebay';}));
+          echo 'DEBUG_PRE_EBAY_COUNT='.count($pre_ebay)."\n";
+          foreach(array_slice($pre_ebay,0,3) as $dbg){
+              echo 'DEBUG_PRE_EBAY_POST='.absint($dbg['post_id']??0).' GTINS='.json_encode($rm('multiprovider_campaign_gtins')->invoke($o,$dbg))."\n";
+          }
+
           $before_q=$wpdb->num_queries;
           $t0=microtime(true);
           $pool=$rm('multiprovider_exact_gtin_candidate_pool')->invoke($o,[$wanted],$context,$slot);
