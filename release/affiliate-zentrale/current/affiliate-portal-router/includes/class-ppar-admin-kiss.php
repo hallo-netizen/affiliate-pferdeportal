@@ -11,6 +11,9 @@ final class PPAR_Affiliate_Admin_KISS {
     const IMPORT_NONCE_FIELD = 'ppar_universal_import_nonce';
     const IMPORT_LAST_OPTION = 'ppar_universal_import_last_v1';
     const CHANNEL_ACTION = 'ppar_provider_channel_toggle';
+    const HOUSEKEEPING_ACTION = 'ppar_run_housekeeping_now';
+    const HOUSEKEEPING_NONCE_ACTION = 'ppar_run_housekeeping_now';
+    const HOUSEKEEPING_NONCE_FIELD = 'ppar_housekeeping_nonce';
     const DS24_INVENTORY_OPTION = 'ppar_digistore24_manual_inventory_v1';
     const DS24_MARKETPLACE_OPTION = 'ppar_digistore24_marketplace_v1';
     const MAX_SAMPLE_BYTES = 1048576;
@@ -24,6 +27,7 @@ final class PPAR_Affiliate_Admin_KISS {
         add_action('admin_head', array(__CLASS__, 'hide_legacy_navigation_css'), 10050);
         add_action('admin_post_' . self::IMPORT_ACTION, array(__CLASS__, 'handle_universal_import'));
         add_action('admin_post_' . self::CHANNEL_ACTION, array(__CLASS__, 'handle_channel_toggle'));
+        add_action('admin_post_' . self::HOUSEKEEPING_ACTION, array(__CLASS__, 'handle_housekeeping_run'));
         add_filter('pre_update_option_' . self::DS24_MARKETPLACE_OPTION, array(__CLASS__, 'preserve_manual_ds24_inventory'), 20, 3);
     }
 
@@ -212,13 +216,58 @@ final class PPAR_Affiliate_Admin_KISS {
     }
 
     public static function render_system() {
-        self::header('Steuerung & System','Chef-Veto, Automatisierung und Prüfungen bleiben vollständig verfügbar.');
+        self::header('Steuerung & System','Chef-Veto, Automatisierung, Speicherpflege und Prüfungen bleiben vollständig verfügbar.');
+        self::render_housekeeping_box();
         echo '<p style="display:flex;gap:8px;flex-wrap:wrap">';
         echo self::button('Steuerung & Veto','affiliate-portal-control',true);
         echo self::button('Automatisierung','affiliate-portal-automation');
         echo self::button('Prüfzentrum','affiliate-portal-health');
         echo '</p>';
         self::footer();
+    }
+
+    private static function render_housekeeping_box() {
+        $state = get_option('ppar_housekeeping_state_v1', array());
+        $state = is_array($state) ? $state : array();
+        $notice = sanitize_key((string)($_GET['ppar_housekeeping'] ?? ''));
+        $status = sanitize_key((string)($state['status'] ?? 'never'));
+        if ($notice === 'complete') {
+            echo '<div class="notice notice-success inline"><p>Speicherpflege abgeschlossen.</p></div>';
+        } elseif ($notice === 'deferred_busy') {
+            echo '<div class="notice notice-warning inline"><p>Speicherpflege wurde verschoben, weil ein eBay-Lauf noch offen ist.</p></div>';
+        } elseif ($notice === 'failed') {
+            echo '<div class="notice notice-error inline"><p>Speicherpflege fehlgeschlagen.</p></div>';
+        }
+        echo '<section class="postbox" style="padding:16px;margin:18px 0;max-width:900px">';
+        echo '<h2 style="margin-top:0">Speicherpflege</h2>';
+        echo '<p>Startet denselben zentralen, begrenzten Housekeeping-Lauf wie die tägliche Automatik. Aktive Providerdaten, aktuelle eBay-Läufe, Veröffentlichungen und manuelle Freigaben bleiben geschützt.</p>';
+        echo '<p><strong>Letzter Status:</strong> '.esc_html($status !== '' ? $status : 'never');
+        if (!empty($state['finished_at'])) { echo ' · '.esc_html(wp_date('d.m.Y H:i', absint($state['finished_at']))); }
+        echo '</p>';
+        echo '<p><strong>Datenbank:</strong> '.absint($state['db_deleted'] ?? 0).' gelöscht · '.absint($state['db_compacted'] ?? 0).' verdichtet';
+        echo '<br><strong>Dateien:</strong> '.absint($state['files_deleted'] ?? 0).' gelöscht · '.esc_html(size_format(absint($state['bytes_deleted'] ?? 0)));
+        echo '<br><strong>Alte Recovery-Zustände:</strong> '.absint($state['recovery_options_deleted'] ?? 0).' Optionen entfernt · '.absint($state['recovery_schedules_cleared'] ?? 0).' Zeitpläne beendet</p>';
+        if (!empty($state['last_error'])) { echo '<p class="description">'.esc_html((string)$state['last_error']).'</p>'; }
+        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+        echo '<input type="hidden" name="action" value="'.esc_attr(self::HOUSEKEEPING_ACTION).'">';
+        wp_nonce_field(self::HOUSEKEEPING_NONCE_ACTION, self::HOUSEKEEPING_NONCE_FIELD);
+        echo '<button class="button button-primary" type="submit">Speicherpflege jetzt starten</button>';
+        echo '</form></section>';
+    }
+
+    public static function handle_housekeeping_run() {
+        if (!current_user_can('manage_options')) { wp_die('Keine Berechtigung.'); }
+        check_admin_referer(self::HOUSEKEEPING_NONCE_ACTION, self::HOUSEKEEPING_NONCE_FIELD);
+        $router = class_exists('Pferdeportal_Affiliate_Router') ? Pferdeportal_Affiliate_Router::instance() : null;
+        if (!is_object($router) || !method_exists($router, 'run_housekeeping')) {
+            wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-kiss-system','ppar_housekeeping'=>'failed'), admin_url('admin.php')));
+            exit;
+        }
+        $state = $router->run_housekeeping();
+        $status = sanitize_key((string)($state['status'] ?? 'failed'));
+        if (!in_array($status, array('complete','deferred_busy'), true)) { $status = 'failed'; }
+        wp_safe_redirect(add_query_arg(array('page'=>'affiliate-portal-kiss-system','ppar_housekeeping'=>$status), admin_url('admin.php')));
+        exit;
     }
 
     private static function render_import_form() {
