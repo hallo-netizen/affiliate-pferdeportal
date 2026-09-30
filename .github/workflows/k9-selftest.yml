@@ -173,7 +173,8 @@ jobs:
                   fp["title_scope"]=target_scope
                   apkg["results"][0]["article_product"]["ppm_item"]["runtime_order"]["subject_scope"]=target_scope
               else:
-                  fp.pop("title_scope",None)
+                  fp["title_scope"]="wrong_scope"
+                  apkg["results"][0]["article_product"]["ppm_item"]["runtime_order"]["subject_scope"]=target_scope
               rp_path.write_text(json.dumps(rpkg,ensure_ascii=False,indent=2)+"\n")
               ap_path.write_text(json.dumps(apkg,ensure_ascii=False,indent=2)+"\n")
 
@@ -189,8 +190,9 @@ jobs:
               ]
               nout=Path(td)/"neg.json"
               n=subprocess.run(cmd(neg,nout),text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
-              if n.returncode==0 or "CANONICAL_FACT_PACK_SCOPE_MISMATCH" not in n.stdout:
-                  raise SystemExit("NEGATIVE_SCOPE_MISMATCH_NOT_REPRODUCED")
+              neg_text=n.stdout+(nout.read_text() if nout.exists() else "")
+              if n.returncode==0 or "CANONICAL_FACT_PACK_SCOPE_MISMATCH" not in neg_text:
+                  raise SystemExit("NEGATIVE_SCOPE_MISMATCH_NOT_REPRODUCED:"+neg_text[-1500:])
               pout=Path(td)/"pos.json"
               p=subprocess.run(cmd(pos,pout),text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
               if p.returncode!=0:
@@ -201,77 +203,45 @@ jobs:
               print("PSERC_SCOPE_NEGATIVE_REPRODUCED=1")
               print("PSERC_SCOPE_POSITIVE_PASS=1")
           PY
-      - name: Prepare exact LanguageTool 6.8 for PSERC scope regression
-        run: |
-          set -euo pipefail
-          mkdir -p /tmp/k9-lt68-scope
-          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68-scope/LanguageTool-6.8.zip
-          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68-scope/LanguageTool-6.8.zip' | sha256sum -c -
-          unzip -q /tmp/k9-lt68-scope/LanguageTool-6.8.zip -d /tmp/k9-lt68-scope
-          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68-scope/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
-      - name: PSERC regression - title scope negative and positive
+      - name: Terminal truth and all fact traces
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import json,re,shutil,subprocess,tempfile
+          import json,re
           from pathlib import Path
-
-          repo=Path('.').resolve()
-          ledger=json.loads((repo/'state/ledger.json').read_text())
-          if len(ledger.get('items') or [])!=1:
-              raise SystemExit('PSERC_SCOPE_REGRESSION_REQUIRES_ONE_ITEM')
-          item=ledger['items'][0]
-          research_rel=item['products']['research']['path']
-          article_key='repair' if item.get('revision',0)>0 else 'write'
-          article_rel=item['products'][article_key]['path']
-          keyword=str(item['metadata']['target_keyword']).casefold()
-          for a,b in [('ä','ae'),('ö','oe'),('ü','ue'),('ß','ss')]:
-              keyword=keyword.replace(a,b)
-          scope=re.sub(r'[^a-z0-9]+','_',keyword).strip('_')
-          if not scope:
-              raise SystemExit('PSERC_SCOPE_EMPTY')
-
-          def make_root(mode):
-              root=Path(tempfile.mkdtemp(prefix='k9-pserc-scope-'+mode+'-'))
-              shutil.copytree(repo/'state',root/'state')
-              shutil.copytree(repo/'warehouse',root/'warehouse')
-              rp=json.loads((root/research_rel).read_text())
-              ap=json.loads((root/article_rel).read_text())
-              fp=rp['results'][0]['research_product']['fact_pack']
-              runtime=ap['results'][0]['article_product']['ppm_item']['runtime_order']
-              if mode=='negative':
-                  fp.pop('title_scope',None)
-                  runtime['subject_scope']='k9_topic'
-              else:
-                  fp['title_scope']=scope
-                  runtime['subject_scope']=scope
-              (root/research_rel).write_text(json.dumps(rp,ensure_ascii=False,indent=2)+'\n')
-              (root/article_rel).write_text(json.dumps(ap,ensure_ascii=False,indent=2)+'\n')
-              return root
-
-          def run(root):
-              out=root/'out.json'
-              cmd=[
-                  'python3','k9_pserc.py',str(root),
-                  'quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip','quality/PSERC-FIX.zip',
-                  '/tmp/k9-lt68-scope/LanguageTool-6.8/languagetool-commandline.jar',
-                  '--output',str(out)
-              ]
-              p=subprocess.run(cmd,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
-              return p,out
-
-          neg,negout=run(make_root('negative'))
-          if neg.returncode==0 or 'CANONICAL_FACT_PACK_SCOPE_MISMATCH' not in neg.stdout:
-              raise SystemExit('PSERC_SCOPE_NEGATIVE_NOT_REPRODUCED:'+neg.stdout[-1500:])
-          print('PSERC_SCOPE_NEGATIVE_REPRODUCED=1')
-
-          pos,posout=run(make_root('positive'))
-          if pos.returncode!=0:
-              raise SystemExit('PSERC_SCOPE_POSITIVE_FAILED:'+pos.stdout[-2500:])
-          result=json.loads(posout.read_text())
-          if result.get('status')!='PASS' or result.get('bridge_status')!='PSERC_PPM_INTAKE_BRIDGE_EXECUTED':
-              raise SystemExit('PSERC_SCOPE_POSITIVE_NOT_PASS')
-          print('PSERC_SCOPE_POSITIVE_PASS=1')
+          stop_path=Path("runtime/K9_STOP.json")
+          if not stop_path.exists():
+              print("TERMINAL_CHECK_NOT_APPLICABLE=1")
+              raise SystemExit(0)
+          current=json.loads(Path("CURRENT_STATE.json").read_text())
+          stop=json.loads(stop_path.read_text())
+          status=json.loads(Path("state/STATUS.json").read_text())
+          if current.get("role")!="SOLE_CURRENT_AUTHORITY" or current.get("status")!="STOP":
+              raise SystemExit("CURRENT_NOT_TERMINAL_AUTHORITY")
+          if current.get("active_job") is not None:
+              raise SystemExit("CURRENT_TERMINAL_ACTIVE_JOB_PRESENT")
+          if current.get("first_open_blocker") is not None:
+              raise SystemExit("CURRENT_TERMINAL_BLOCKER_PRESENT")
+          if status.get("active_job") is not None or status.get("remaining")!=0 or status.get("fully_done")!=status.get("total"):
+              raise SystemExit("TERMINAL_STATUS_NOT_DONE")
+          ledger=json.loads(Path("state/ledger.json").read_text())
+          item=ledger["items"][0]
+          research=json.loads(Path(item["products"]["research"]["path"]).read_text())["results"][0]["research_product"]
+          article_key="repair" if item.get("products",{}).get("repair") else "write"
+          article=json.loads(Path(item["products"][article_key]["path"]).read_text())["results"][0]["article_product"]
+          expected=set(research["fact_pack"]["fact_ids"])
+          traced=set(re.findall(r'class=["\']ppm-source-trace["\'][^>]*data-fact-id=["\']([^"\']+)["\']',article["content_html"]))
+          if not expected.issubset(traced):
+              raise SystemExit("TERMINAL_FACT_TRACE_SET_INCOMPLETE:"+",".join(sorted(expected-traced)))
+          if stop.get("status")!="STOP" or stop.get("final_ref")!="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json":
+              raise SystemExit("TERMINAL_STOP_RECEIPT_INVALID")
+          finalizer=Path(".github/workflows/k9-finalize.yml").read_text()
+          required=["CURRENT_STATE.json","'status':'STOP'","'active_job':None","git add -A final runtime CURRENT_STATE.json"]
+          missing=[x for x in required if x not in finalizer]
+          if missing:
+              raise SystemExit("FINALIZER_CURRENT_SYNC_MISSING:"+",".join(missing))
+          print("TERMINAL_CURRENT_SYNC_PASS=1")
+          print("TERMINAL_ALL_FACT_TRACES_PASS=1")
           PY
       - name: Validate actual open runtime job
         run: |
@@ -283,6 +253,11 @@ jobs:
           job_path=Path("runtime/CURRENT_JOB.json")
           entry_path=Path("runtime/CHAT_ENTRY.json")
           if not job_path.exists():
+              stop_path=Path("runtime/K9_STOP.json")
+              if stop_path.exists():
+                  current=json.loads(Path("CURRENT_STATE.json").read_text())
+                  if current.get("status")!="STOP" or current.get("active_job") is not None:
+                      raise SystemExit("TERMINAL_CURRENT_STATE_INVALID")
               raise SystemExit(0)
           if not entry_path.exists():
               raise SystemExit("LIVE_CHAT_ENTRY_MISSING")

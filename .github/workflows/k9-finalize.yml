@@ -94,6 +94,7 @@ jobs:
           final=pathlib.Path('final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json')
           raw=final.read_bytes()
           pkg=json.loads(raw)
+          import os
           receipt={
             'contract':'K9_TERMINAL_RECEIPT_V1',
             'status':'STOP',
@@ -105,11 +106,41 @@ jobs:
             'publish_allowed':False,
           }
           pathlib.Path('runtime/K9_STOP.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          current={
+            'contract':'K9_CURRENT_STATE_V3',
+            'role':'SOLE_CURRENT_AUTHORITY',
+            'concept':'K9',
+            'branch':'konzept9/greenfield-20260929',
+            'status':'STOP',
+            'operational_mode':'SUPERVISOR',
+            'active_job':None,
+            'first_open_blocker':None,
+            'next_action':'DESIGN_AND_PROVE_ZERO_MANUAL_NUDGE_ORCHESTRATION_AROUND_EXISTING_K9_STATIONS',
+            'work_binding':{
+              'baseline':'SCHERMASCHINEN_REAL_E2E_STOP',
+              'preserve_existing_station_products':True,
+              'preserve_quality_gates':['LT_6_8','PPM_6_7_9','PSERC','ENDSTEMPEL','WORDPRESS_VERIFY'],
+              'do_not_reopen_completed_article':True,
+              'publish_allowed':False
+            },
+            'terminal_evidence':{
+              'stop_ref':'runtime/K9_STOP.json',
+              'final_ref':receipt['final_ref'],
+              'final_sha256':receipt['final_sha256'],
+              'batch_sha256':receipt['batch_sha256'],
+              'article_count':receipt['article_count'],
+              'finalizer_run_id':os.environ.get('GITHUB_RUN_ID'),
+              'trigger_head_sha':os.environ.get('GITHUB_SHA')
+            },
+            'chat_may_route':False,
+            'publish_allowed':False
+          }
+          pathlib.Path('CURRENT_STATE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
           rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER
           git config user.name 'k9-finalizer-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -A final runtime
+          git add -A final runtime CURRENT_STATE.json
           git commit -m 'K9: real PSERC ENDSTEMPEL WordPress package STOP'
           git push
       - name: Publish exact final JSON as durable release asset
