@@ -2161,3 +2161,18 @@ DAUERHAFTE REGEL:
 
 UNVERÄNDERT:
 SEO-5-Felder-Handoff, Textmaschine/Fachregeln, PPM/PSERC/PSTE, Tabellen-/Link-/LanguageTool-/Designregeln, Single Door und Publish-Sperre.
+
+
+## PLUGINS-001 – Gebündelte Datenbank-/Performance-Bereinigung
+
+WAS:
+Datenbankwachstum, Retention und Performance werden Plugin für Plugin geprüft. Zusammengehörige Ursachen werden je betroffenem Plugin gebündelt gelöst. Vorhandene Performanceoptimierungen bleiben regressionsgeschützt.
+
+WARUM:
+Viele kleine Einzelupdates erschweren Ursache/Wirkung und können bestehende Optimierungen gegenseitig zurückbauen.
+
+REGEL:
+Quellursache zuerst; danach Altbestand kontrolliert bereinigen; anschließend gleiche Speicher- und Performance-Messung wiederholen.
+
+ZIELVERTRAG:
+`ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`.
