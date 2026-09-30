@@ -126,5 +126,6 @@
     ],
     "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0"
   },
-  "publish_allowed": false
+  "publish_allowed": false,
+  "run_label": "K9_REAL_16_PACK_20260930"
 }
