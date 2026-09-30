@@ -89,6 +89,28 @@
           "section_id": "further_information"
         }
       ]
+    },
+    "reitplatzbewaesserung-faq": {
+      "portal_links": [
+        {
+          "anchor": "Weide",
+          "href": "/weide/",
+          "role": "parent_category",
+          "section_id": "criteria"
+        },
+        {
+          "anchor": "Reitplatz",
+          "href": "/weide/weide-reitplatz/",
+          "role": "semantic_related",
+          "section_id": "decision"
+        },
+        {
+          "anchor": "Reitplatzbewässerung",
+          "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+          "role": "further_information",
+          "section_id": "further_information"
+        }
+      ]
     }
   }
 }
