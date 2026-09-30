@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 30,
+  "generation": 31,
   "items": [
     {
       "item_id": "k9-16024ee8a6c9b5e964f452e6",
@@ -16,6 +16,11 @@
           "job_id": "K9-RESEARCH-5e13bb3343e89ce8",
           "path": "warehouse/research/K9-RESEARCH-5e13bb3343e89ce8.json",
           "sha256": "9fa3f53a2d3f65f8633561459e9b9d0104a5de3f2636f977dfe5783ed83f1fd5"
+        },
+        "write": {
+          "job_id": "K9-WRITE-8ec01399c3be14f9",
+          "path": "warehouse/write/K9-WRITE-8ec01399c3be14f9.json",
+          "sha256": "f0dcf375b6808958b94c05890a01ca89566fe131b68213f36cfc3569b5f4dae0"
         }
       },
       "revision": 0,
@@ -23,7 +28,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Was ist ein Reitplatzplaner?"
     }
