@@ -160,3 +160,17 @@ Fehler-/Fix-/Verwertbarkeitsnachweis:
 `protocol/PSTE_TOPIC_REUSE_AND_CONTEXT_RESUME_CLOSEOUT_20261001.md`
 
 Dieses Register kopiert keine dynamischen Fortschrittswerte und keine zweite NEXT ACTION.
+
+## PSTE-EXISTING-POTENTIAL-20261001
+
+Bereich: PFERDE ATELIER / TEXT / PSTE / THEMENVERWERTUNG
+Status: AKTIV / niedrige Konversion des gespeicherten Potenzials noch nicht auf erste Verluststufe lokalisiert
+
+Aktuelle Status-/NEXT-ACTION-Autorität:
+`PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`
+
+Autoritative Fehler-/Arbeitsquelle:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`
+
+Dieses Register kopiert keine dynamischen Zahlen und keine zweite NEXT ACTION.
+
