@@ -1,0 +1,26 @@
+{
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 2,
+    "maximum_articles": 0,
+    "maximum_articles_per_type": 0,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+        {
+            "article_type": "Beratung",
+            "category": "pferdehaftpflicht-beratung",
+            "plan_slot": "0707c44014730437d91e342bcbd7c289aa11a085482c9df7f77d1e79415ca4f1",
+            "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+            "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+        },
+        {
+            "article_type": "FAQ",
+            "category": "kappzaum-faq",
+            "plan_slot": "c508d6d8fd7c7e28b8de06158cfa29a7ba9c9c04e9bda12d36527a21acd359c3",
+            "target_keyword": "Wie longiert man ein Pferd mit einem Kappzaum",
+            "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
+        }
+    ],
+    "batch_sha256": "082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9"
+}
