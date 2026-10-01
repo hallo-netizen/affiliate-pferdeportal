@@ -3,18 +3,25 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "IDLE_READY_FOR_NEXT_EXPLICIT_BATCH",
-  "operational_mode": "NO_ACTIVE_JOB_WAITING_FOR_EXPLICIT_WORDPRESS_METADATA_BATCH",
+  "status": "EDITORIAL_REVIEW_OPEN",
+  "operational_mode": "READ_ONLY_EDITORIAL_RULE_REVIEW_BEFORE_ANY_CODE_CHANGE",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "WAIT_FOR_EXPLICIT_NEW_WORDPRESS_METADATA_BATCH_FOR_OPTIMIZED_REAL_VALIDATION",
+  "next_action": "CRITICALLY_REVIEW_LONGIERPEITSCHE_H2_AND_TABLE_VALUE_AND_DECIDE_MINIMAL_FUTURE_RULE_CHANGE",
   "work_binding": {
     "baseline": "LATEST_REAL_E2E_STOP_PLUS_EXTENDED_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT",
-    "optimization_closeout_ref": "protocol/K9_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT_20261001.md",
-    "optimization_status": "IMPLEMENTED_AND_TESTED",
-    "persistent_selftest_run_id": "36904919863",
-    "real_batch_read_only_verification_run_id": "36904542706",
-    "preserve_existing_station_products": true,
+    "editorial_review_ref": "protocol/K9_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT_20261001.md#offene-redaktionelle-nachpruefung-nach-nutzerreview--h2-und-tabellen",
+    "evidence_article": "Was ist eine Longierpeitsche?",
+    "evidence_final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1.json",
+    "review_questions": [
+      "SHOULD_TABLE_BE_CONDITIONAL_ON_REAL_INFORMATION_VALUE_INSTEAD_OF_GLOBALLY_MANDATORY",
+      "SHOULD_H2_POLICY_REQUIRE_MORE_READER_NATURAL_CONCRETE_SECTION_LANGUAGE"
+    ],
+    "current_forced_table_rules": [
+      "global.table_count_exact=1",
+      "FAQ.required_blocks contains table"
+    ],
+    "preserve_completed_batch": true,
     "preserve_terminal_evidence": true,
     "preserve_quality_gates": [
       "LT_6_8",
@@ -22,22 +29,6 @@
       "PSERC",
       "ENDSTEMPEL",
       "WORDPRESS_VERIFY"
-    ],
-    "optimized_guards": [
-      "COMPILED_WRITER_ACCEPTANCE_PLAN",
-      "CONCRETE_FIRST_PASS_WORD_BLUEPRINT",
-      "COLLECT_ALL_WRITER_FINDINGS",
-      "COLLECT_ALL_STRUCTURAL_FINDINGS",
-      "AUTHORITATIVE_DOMAIN_TERMS_FOR_LT68",
-      "PERSISTED_WRITER_PREFLIGHT_FINDINGS",
-      "DETERMINISTIC_MACHINE_OWNED_SOURCE_TRACES",
-      "TERMINAL_READINESS_PREFLIGHT"
-    ],
-    "next_real_batch_measurements": [
-      "WRITER_ATTEMPTS_PER_ARTICLE",
-      "REPAIR_CYCLES_PER_ARTICLE",
-      "LATE_FINALIZER_CONTENT_OR_STATE_FAILURES",
-      "SEQUENTIAL_INDEPENDENT_FINDING_LEAKAGE"
     ],
     "do_not_reopen_completed_article": true,
     "publish_allowed": false
@@ -54,8 +45,8 @@
     "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
     "endstempel_sha256": "d7b5944879a22976c4c561455c3eeb1c877bede5d52b6d1416aae5502b3e6447"
   },
-  "allowed_action": "ACCEPT_NEW_EXPLICIT_WORDPRESS_METADATA_BATCH_ONLY",
-  "route_lock": "NEXT_EXPLICIT_BATCH_ONLY",
+  "allowed_action": "EDITORIAL_REVIEW_ONLY",
+  "route_lock": "EDITORIAL_REVIEW_ONLY",
   "supervisor_actions_allowed": false,
   "code_change_allowed": false,
   "repair_authorized": false,
