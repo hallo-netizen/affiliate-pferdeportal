@@ -1,0 +1,238 @@
+name: Affiliate 6.72.171 Snapshot Exact Local A-B
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-672171-snapshot-ab.yml'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot-exact-local-ab:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Prepare released baseline and candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/base170 /tmp/candidate171
+          mkdir -p /tmp/base170 /tmp/candidate171
+          git archive b487061b5bc6c7d5f1a548ade9f51fd8b65a59e7 release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/base170
+          cp -a /tmp/base170/release/affiliate-zentrale/current/affiliate-portal-router /tmp/base170/plugin
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/candidate171/plugin
+          grep -F "Version: 6.72.170" /tmp/base170/plugin/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.171" /tmp/candidate171/plugin/pferdeportal-affiliate-router.php
+          find /tmp/candidate171/plugin -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/lint.log
+
+      - name: Install exact WordPress and seed real 2012 target/placement topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 672171 snapshot AB' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          cp -a /tmp/candidate171/plugin /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+          cat >/tmp/snapshot-seed.php <<'PHP'
+          <?php
+          $snapshot=json_decode(file_get_contents('/tmp/candidate171/plugin/recovery/aff043-historical-product-state-20260915.json'),true);
+          if(!is_array($snapshot)||count((array)($snapshot['rows']??[]))!==2012) throw new RuntimeException('snapshot 2012 missing');
+          update_option('ppar_enabled','1',false);
+          update_option('ppar_debug','0',false);
+          $root=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Ausrüstung','post_name'=>'ausruestung']);
+          $hub=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Sattel','post_name'=>'ausruestung-sattel','post_parent'=>$root]);
+          $leaf=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Pferdesättel','post_name'=>'pferdesaettel','post_parent'=>$hub]);
+          update_option('ppar_snapshot_ab_hub',$hub,false);
+          update_option('ppar_snapshot_ab_leaf',$leaf,false);
+
+          $banner=[
+            'id'=>'snapshot-banner','active'=>1,'creative_type'=>'banner','network'=>'manual','programme_status'=>'active',
+            'render_mode'=>'image_link','assignment_mode'=>'page_tree','automation_target_keys'=>['page:ausruestung-sattel','page:pferdesaettel'],
+            'placements'=>['hub_after_cards'],'priority'=>10,'title'=>'Snapshot Banner','image_url'=>'https://example.com/banner.jpg',
+            'url'=>'https://example.com/banner','source'=>'snapshot'
+          ];
+          $bp=wp_insert_post(['post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,'post_status'=>'publish','post_title'=>'snapshot-banner','post_name'=>'snapshot-banner']);
+          update_post_meta($bp,'ppar_campaign_data',$banner);
+
+          $active=0;$ebay=0;$idealo=0;$hub_hits=0;$leaf_hits=0;
+          foreach($snapshot['rows'] as $n=>$row){
+              if(!is_array($row)) continue;
+              $orig=sanitize_key((string)($row['network']??'manual'));
+              if($orig==='ebay')$ebay++; elseif($orig==='idealo')$idealo++;
+              $is_active=!empty($row['active']); if($is_active)$active++;
+              $targets=array_values((array)($row['automation_target_keys']??[]));
+              if($is_active&&in_array('page:ausruestung-sattel',$targets,true))$hub_hits++;
+              if($is_active&&in_array('page:pferdesaettel',$targets,true))$leaf_hits++;
+              $id='snap-'.absint($row['post_id']??($n+1));
+              $data=[
+                  'id'=>$id,'active'=>$is_active?1:0,'creative_type'=>'product',
+                  // Structural A-B: preserve exact historical topology while keeping
+                  // provider transport gates out of the timing comparison. Provider
+                  // parity is tested separately by the release gate.
+                  'network'=>'manual','programme_status'=>(string)($row['programme_status']??'active'),
+                  'render_mode'=>'image_link','health_check_enabled'=>0,
+                  'assignment_mode'=>(string)($row['assignment_mode']??'page_tree'),
+                  'page_id'=>absint($row['page_id']??0),'match_descendants'=>!empty($row['match_descendants']),
+                  'automation_target_keys'=>$targets,
+                  'placements'=>array_values((array)($row['placements']??[])),
+                  'priority'=>1000-($n%997),
+                  'title'=>'Snapshot '.strtoupper($orig).' '.$id,
+                  'description'=>'Historischer Strukturtest '.$orig,
+                  'button_text'=>'Ansehen','image_url'=>'https://example.com/'.$id.'.jpg',
+                  'url'=>'https://example.com/'.$id,'source'=>'snapshot-'.$orig,
+              ];
+              $p=wp_insert_post(['post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,'post_status'=>'publish','post_title'=>$id,'post_name'=>$id]);
+              update_post_meta($p,'ppar_campaign_data',$data);
+          }
+          if($ebay!==922||$idealo!==1090||$active!==1518) throw new RuntimeException("snapshot provider/active counts $ebay/$idealo/$active");
+          if($hub_hits<3||$leaf_hits<3) throw new RuntimeException("insufficient real target hits hub=$hub_hits leaf=$leaf_hits");
+          update_option('ppar_snapshot_ab_counts',['active'=>$active,'ebay'=>$ebay,'idealo'=>$idealo,'hub_hits'=>$hub_hits,'leaf_hits'=>$leaf_hits],false);
+          echo "SNAPSHOT_SEED_PASS active=$active ebay=$ebay idealo=$idealo hub_hits=$hub_hits leaf_hits=$leaf_hits\n";
+          PHP
+          /tmp/wp eval-file /tmp/snapshot-seed.php --path=/tmp/wp-site
+
+      - name: Install exact frontend probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/ppar-snapshot-ab.php <<'PHP'
+          <?php
+          add_action('template_redirect',static function(){
+              if(($_GET['snapshot_ab']??'')!=='1')return;
+              header('Content-Type: application/json; charset=utf-8');
+              $o=Pferdeportal_Affiliate_Router::instance();
+              $rm=static function($n)use($o){$m=new ReflectionMethod($o,$n);$m->setAccessible(true);return $m;};
+              $result=['version'=>Pferdeportal_Affiliate_Router::VERSION,'pages'=>[],'fixture'=>get_option('ppar_snapshot_ab_counts',[])];
+              $overall=hrtime(true);
+              foreach(['hub'=>'ppar_snapshot_ab_hub','leaf'=>'ppar_snapshot_ab_leaf'] as $label=>$opt){
+                  $id=absint(get_option($opt,0));$post=get_post($id);$GLOBALS['post']=$post;setup_postdata($post);
+                  $context=$rm('get_content_context')->invoke($o,$id);
+                  $t=hrtime(true);$selected=[];$hash=[];$counts=[];
+                  foreach(['hub_after_cards','category_product_1','category_product_2','category_product_3'] as $slot){
+                      $html=$rm('render_affiliate_slot_for_context')->invoke($o,$id,$context,$slot,'portal_context','');
+                      $sel=$rm('select_campaign_for_slot')->invoke($o,$context,$slot,'');
+                      $ranked=$rm('ranked_campaigns_for_slot')->invoke($o,$context,$slot,'');
+                      $selected[$slot]=(string)($sel['campaign']['id']??'');
+                      $hash[$slot]=hash('sha256',(string)$html);
+                      $counts[$slot]=count((array)$ranked);
+                  }
+                  $result['pages'][$label]=[
+                      'elapsed_ms'=>round((hrtime(true)-$t)/1e6,3),
+                      'selected'=>$selected,'html_hashes'=>$hash,'candidate_counts'=>$counts
+                  ];
+              }
+              $result['elapsed_ms']=round((hrtime(true)-$overall)/1e6,3);
+              if(property_exists($o,'category_product_shared_rank_base_build_count')){
+                  $p=new ReflectionProperty($o,'category_product_shared_rank_base_build_count');$p->setAccessible(true);
+                  $result['shared_base_builds']=(int)$p->getValue($o);
+              } else $result['shared_base_builds']=null;
+              echo wp_json_encode($result,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);exit;
+          },0);
+          PHP
+
+      - name: Run balanced one-to-one snapshot A-B
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='http://127.0.0.1:8080/?snapshot_ab=1'
+          run_round(){
+            label="$1";src="$2";out="$3"
+            rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+            cp -a "$src" /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+            php -S 127.0.0.1:8080 -t /tmp/wp-site >/tmp/server-"$label".log 2>&1 &
+            pid=$!
+            for i in $(seq 1 40);do if curl -fsS http://127.0.0.1:8080/ >/dev/null 2>&1;then break;fi;sleep .2;done
+            : >"$out"
+            for i in $(seq 1 6);do curl -fsS "$URL">>"$out";printf '\n'>>"$out";done
+            kill "$pid" 2>/dev/null||true;wait "$pid" 2>/dev/null||true
+          }
+          run_round baseA /tmp/base170/plugin /tmp/sbaseA.jsonl
+          run_round candA /tmp/candidate171/plugin /tmp/scandA.jsonl
+          run_round candB /tmp/candidate171/plugin /tmp/scandB.jsonl
+          run_round baseB /tmp/base170/plugin /tmp/sbaseB.jsonl
+
+          python3 - <<'PY'
+          import json,statistics,pathlib
+          def rows(p):return [json.loads(x) for x in pathlib.Path(p).read_text().splitlines() if x.strip()]
+          base=rows('/tmp/sbaseA.jsonl')+rows('/tmp/sbaseB.jsonl')
+          cand=rows('/tmp/scandA.jsonl')+rows('/tmp/scandB.jsonl')
+          assert {r['version'] for r in base}=={'6.72.170'}
+          assert {r['version'] for r in cand}=={'6.72.171'}
+          ref={k:base[0][k] for k in ['fixture','pages']}
+          # Timing is excluded; all functional output and ordered candidate counts
+          # must be exact for both historical Sattel contexts.
+          def functional(r):
+              return {
+                  'fixture':r['fixture'],
+                  'pages':{p:{k:v for k,v in x.items() if k!='elapsed_ms'} for p,x in r['pages'].items()}
+              }
+          fref=functional(base[0])
+          for r in base+cand:
+              if functional(r)!=fref:
+                  print('REFERENCE',json.dumps(fref,sort_keys=True))
+                  print('DIFF',json.dumps(functional(r),sort_keys=True))
+                  raise SystemExit('FAIL snapshot exact functional equivalence')
+              for p in ['hub','leaf']:
+                  ids=list(r['pages'][p]['selected'].values())
+                  if not all(ids):
+                      raise SystemExit('FAIL missing positive output '+p)
+          def vals(files,key=None):
+              out=[]
+              for f in files:
+                  rr=rows(f)[1:]
+                  for r in rr: out.append(float(r['elapsed_ms'] if key is None else r['pages'][key]['elapsed_ms']))
+              return out
+          bf=['/tmp/sbaseA.jsonl','/tmp/sbaseB.jsonl'];cf=['/tmp/scandA.jsonl','/tmp/scandB.jsonl']
+          bm=statistics.median(vals(bf));cm=statistics.median(vals(cf));gain=(bm-cm)/bm
+          bh=statistics.median(vals(bf,'hub'));ch=statistics.median(vals(cf,'hub'));gh=(bh-ch)/bh
+          bl=statistics.median(vals(bf,'leaf'));cl=statistics.median(vals(cf,'leaf'));gl=(bl-cl)/bl
+          builds=[r['shared_base_builds'] for r in cand]
+          if any(x!=2 for x in builds):raise SystemExit('FAIL expected one shared base per context '+repr(builds))
+          print('SNAPSHOT_COUNTS='+json.dumps(ref['fixture'],sort_keys=True))
+          print('BASE_672170_TOTAL_MEDIAN_MS=%.3f'%bm)
+          print('CAND_672171_TOTAL_MEDIAN_MS=%.3f'%cm)
+          print('TOTAL_SPEEDUP_PERCENT=%.2f'%(gain*100))
+          print('HUB_BASE_MS=%.3f HUB_CAND_MS=%.3f HUB_SPEEDUP_PERCENT=%.2f'%(bh,ch,gh*100))
+          print('LEAF_BASE_MS=%.3f LEAF_CAND_MS=%.3f LEAF_SPEEDUP_PERCENT=%.2f'%(bl,cl,gl*100))
+          print('OUTPUT='+json.dumps({p:ref['pages'][p]['selected'] for p in ['hub','leaf']},sort_keys=True))
+          print('CANDIDATE_COUNTS='+json.dumps({p:ref['pages'][p]['candidate_counts'] for p in ['hub','leaf']},sort_keys=True))
+          if not (cm<bm and gain>=.20 and ch<bh and cl<bl):
+              raise SystemExit('FAIL snapshot measured improvement contract')
+          print('SNAPSHOT_EXACT_LOCAL_AB_POSITIVE_NEGATIVE_PERFORMANCE_PASS')
+          PY
