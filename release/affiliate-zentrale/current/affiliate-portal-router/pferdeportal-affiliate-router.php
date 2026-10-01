@@ -4367,69 +4367,31 @@ JS;
         $base = $this->category_product_shared_rank_base($context);
         if (!is_array($base)) { return null; }
 
-        // V6.72.171 rootfix: strict relevance is the final public contract for
-        // category_product_1..3. The historical path ran control/health/provider/
-        // image gates across every broad ancestor candidate and only afterwards
-        // discarded the lower relevance tiers. Process the exact same relevance
-        // bands in descending order instead. If a higher band has no deliverable
-        // candidate we fall through to the next band, so historical fallback is
-        // preserved exactly.
-        //
-        // Contract bands mirror category_product_strict_relevance_tier_v672104():
-        // - specificity 500..999 is one combined exact/strong relevance band;
-        // - >=1000 and <500 are exact-specificity bands.
-        $bands = array();
-        $band_order = array();
+        $candidates = array();
         foreach ($base as $candidate) {
             $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
             if (!is_array($campaign)) { continue; }
             $runtime_campaign = $campaign;
             $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
             if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }
-
-            $specificity = (int) ($candidate['specificity'] ?? 0);
-            $band_key = ($specificity >= 500 && $specificity < 1000)
-                ? 'medium:500-999'
-                : 'exact:' . $specificity;
-            if (!isset($bands[$band_key])) {
-                $bands[$band_key] = array();
-                $band_order[] = $band_key;
-            }
-            $bands[$band_key][] = $candidate;
+            if (!$this->category_product_campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
+            if (!$this->category_product_campaign_health_allows_delivery($runtime_campaign)) { continue; }
+            $candidates[] = $candidate;
         }
 
-        foreach ($band_order as $band_key) {
-            $eligible = array();
-            foreach ((array) ($bands[$band_key] ?? array()) as $candidate) {
-                $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-                if (!is_array($campaign)) { continue; }
-                $runtime_campaign = $campaign;
-                $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
-                if (!$this->category_product_campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
-                if (!$this->category_product_campaign_health_allows_delivery($runtime_campaign)) { continue; }
-                $eligible[] = $candidate;
-            }
-            if (!$eligible) { continue; }
-
-            if (method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
-                $eligible = $this->ebay_filter_ranked_product_candidates_provider_cohort($eligible);
-            }
-            if (method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
-                $eligible = $this->multiprovider_filter_candidates_by_strategy($eligible);
-            }
-            if (!$eligible) { continue; }
-
-            $image_ready = array();
-            foreach ($eligible as $candidate) {
-                $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
-                if (!is_array($campaign) || !$this->category_product_public_image_ready($campaign)) { continue; }
-                $image_ready[] = $candidate;
-            }
-            if ($image_ready) {
-                return array_values($image_ready);
-            }
+        if (method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
+            $candidates = $this->ebay_filter_ranked_product_candidates_provider_cohort($candidates);
         }
-        return array();
+        if (method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
+            $candidates = $this->multiprovider_filter_candidates_by_strategy($candidates);
+        }
+        $image_ready = array();
+        foreach ($candidates as $candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign) || !$this->category_product_public_image_ready($campaign)) { continue; }
+            $image_ready[] = $candidate;
+        }
+        return array_values($image_ready);
     }
 
 private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
@@ -4914,7 +4876,90 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         return array_values($mixed);
     }
 
+    private function select_category_product_campaign_fast_v672171($context, $slot_type) {
+        $slot_type = sanitize_key((string) $slot_type);
+        if (!preg_match('/^category_product_[123]$/', $slot_type)
+            || !$this->ranked_campaigns_request_cache_allowed()
+            || !empty($context['exact_product_identifiers'])) {
+            return null;
+        }
+
+        $base = $this->category_product_shared_rank_base($context);
+        if (!is_array($base)) { return null; }
+
+        // Build relevance bands after only the cheap, truly slot-specific
+        // placement check. The historical public ranked-candidate contract stays
+        // untouched; this shortcut exists only for final rendering selection.
+        $bands = array();
+        $band_order = array();
+        foreach ($base as $candidate) {
+            $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+            if (!is_array($campaign)) { continue; }
+            $runtime_campaign = $campaign;
+            $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+            if (!$this->campaign_slot_allowed($runtime_campaign, $slot_type)) { continue; }
+
+            $specificity = (int) ($candidate['specificity'] ?? 0);
+            $band_key = ($specificity >= 500 && $specificity < 1000)
+                ? 'medium:500-999'
+                : 'exact:' . $specificity;
+            if (!isset($bands[$band_key])) {
+                $bands[$band_key] = array();
+                $band_order[] = $band_key;
+            }
+            $bands[$band_key][] = $candidate;
+        }
+
+        foreach ($band_order as $band_key) {
+            $candidates = array();
+            foreach ((array) ($bands[$band_key] ?? array()) as $candidate) {
+                $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+                if (!is_array($campaign)) { continue; }
+                $runtime_campaign = $campaign;
+                $runtime_campaign['_ppar_runtime_normalized_slot_type'] = 1;
+                if (!$this->category_product_campaign_control_allows_delivery($runtime_campaign, $slot_type)) { continue; }
+                if (!$this->category_product_campaign_health_allows_delivery($runtime_campaign)) { continue; }
+                $candidates[] = $candidate;
+            }
+            if (!$candidates) { continue; }
+
+            if (method_exists($this, 'ebay_filter_ranked_product_candidates_provider_cohort')) {
+                $candidates = $this->ebay_filter_ranked_product_candidates_provider_cohort($candidates);
+            }
+            if (method_exists($this, 'multiprovider_filter_candidates_by_strategy')) {
+                $candidates = $this->multiprovider_filter_candidates_by_strategy($candidates);
+            }
+            if (!$candidates) { continue; }
+
+            $image_ready = array();
+            foreach ($candidates as $candidate) {
+                $campaign = is_array($candidate) ? ($candidate['campaign'] ?? null) : null;
+                if (!is_array($campaign) || !$this->category_product_public_image_ready($campaign)) { continue; }
+                $image_ready[] = $candidate;
+            }
+            if (!$image_ready) { continue; }
+
+            // Same post-ranking contracts as the historical selector. The band
+            // construction mirrors strict_relevance exactly; calling it again is
+            // intentional as a semantic guard.
+            $image_ready = $this->category_product_strict_relevance_tier_v672104($image_ready, $slot_type);
+            $image_ready = $this->category_product_provider_mix_v672133($image_ready, $slot_type);
+            if (!$image_ready) { continue; }
+            $index = $this->category_product_slot_index($slot_type);
+            return $index > 0 ? ($image_ready[$index - 1] ?? null) : $image_ready[0];
+        }
+        return null;
+    }
+
     private function select_campaign_for_slot($context, $slot_type, $forced_campaign_id = '') {
+        $slot_type = sanitize_key((string) $slot_type);
+        if ($forced_campaign_id === ''
+            && preg_match('/^category_product_[123]$/', $slot_type)
+            && $this->ranked_campaigns_request_cache_allowed()
+            && empty($context['exact_product_identifiers'])) {
+            return $this->select_category_product_campaign_fast_v672171($context, $slot_type);
+        }
+
         $candidates = $this->ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id);
         $candidates = $this->category_product_strict_relevance_tier_v672104($candidates, $slot_type);
         if ($forced_campaign_id === '') {
