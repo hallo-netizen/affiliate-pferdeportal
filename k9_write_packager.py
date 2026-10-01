@@ -8,6 +8,7 @@ import k9_lt68
 import k9_ppm679
 import k9_rule_guard
 import k9_table_guard
+import k9_structural_guard
 import k9_writer_plan
 JOB=ROOT/"runtime"/"CURRENT_JOB.json"
 ENTRY=ROOT/"runtime"/"CHAT_ENTRY.json"
@@ -399,14 +400,22 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
         markup=ensure_all_fact_traces(markup,research)
     except PackError as exc:
         preflight_errors.append({"stage":"source_trace_completion","reason":str(exc)})
-    for stage,fn in (
-        ("structural",lambda: validate_html(markup,article_type,meta,research,rules)),
-        ("writing_rules",lambda: complete_rule_preflight(markup,meta,rules)),
-    ):
+    structural=k9_structural_guard.evaluate(markup,article_type,meta,research,rules)
+    if structural.get("status")!="PASS":
+        preflight_errors.append({
+            "stage":"structural",
+            "reason":"STRUCTURAL_PREFLIGHT_REPAIR_REQUIRED",
+            "findings":structural.get("findings") or [],
+        })
+    else:
         try:
-            fn()
+            validate_html(markup,article_type,meta,research,rules)
         except PackError as exc:
-            preflight_errors.append({"stage":stage,"reason":str(exc)})
+            preflight_errors.append({"stage":"structural_backstop","reason":str(exc)})
+    try:
+        complete_rule_preflight(markup,meta,rules)
+    except PackError as exc:
+        preflight_errors.append({"stage":"writing_rules","reason":str(exc)})
     lt68_preflight=None
     try:
         lt68_preflight=lt68_writer_preflight(
