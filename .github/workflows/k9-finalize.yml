@@ -34,20 +34,31 @@ jobs:
           assert s['active_job'] is None
           print('K9_FINAL_STATE_READY')
           PY
-      - name: Run PSERC final integrity gate
+      - name: Reuse exact terminal preflight PSERC evidence
         shell: bash
         run: |
           set -euo pipefail
-          python3 k9_pserc.py . quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip quality/PSERC-FIX.zip --output runtime/K9_PSERC_RESULT.json
+          test -f runtime/K9_TERMINAL_PREFLIGHT.json
+          test -f runtime/K9_PSERC_PREFLIGHT_RESULT.json
           python3 - <<'PY'
-          import json
-          x=json.load(open('runtime/K9_PSERC_RESULT.json'))
-          assert x['contract']=='K9_PSERC_RESULT_V1'
-          assert x['status']=='PASS'
-          assert x['bridge_status']=='PSERC_FINAL_INTEGRITY_ONLY_PASS'
-          assert x['mode']=='FINAL_INTEGRITY_ONLY_REUSE_PRIOR_QUALITY_EVIDENCE'
-          assert x['publish_allowed'] is False
-          print('K9_PSERC_FINAL_INTEGRITY_PASS')
+          import hashlib,json,pathlib
+          pre=json.load(open('runtime/K9_TERMINAL_PREFLIGHT.json'))
+          pserc=json.load(open('runtime/K9_PSERC_PREFLIGHT_RESULT.json'))
+          ledger_raw=pathlib.Path('state/ledger.json').read_bytes()
+          stable=lambda x: hashlib.sha256(json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+          assert pre['contract']=='K9_TERMINAL_READINESS_PREFLIGHT_V1'
+          assert pre['status']=='PASS'
+          assert pre['publish_allowed'] is False
+          assert pre['ledger_sha256']==hashlib.sha256(ledger_raw).hexdigest()
+          assert pre['pserc_result_sha256']==stable(pserc)
+          assert pre['wordpress_ledger_readiness']=='PASS'
+          assert pserc['contract']=='K9_PSERC_RESULT_V1'
+          assert pserc['status']=='PASS'
+          assert pserc['bridge_status']=='PSERC_FINAL_INTEGRITY_ONLY_PASS'
+          assert pserc['mode']=='FINAL_INTEGRITY_ONLY_REUSE_PRIOR_QUALITY_EVIDENCE'
+          assert pserc['publish_allowed'] is False
+          pathlib.Path('runtime/K9_PSERC_RESULT.json').write_text(json.dumps(pserc,ensure_ascii=False,indent=2,sort_keys=True)+'\n')
+          print('K9_PSERC_FINAL_INTEGRITY_REUSED_FROM_TERMINAL_PREFLIGHT')
           PY
       - name: Build and sign final ENDSTEMPEL JSON
         env:
