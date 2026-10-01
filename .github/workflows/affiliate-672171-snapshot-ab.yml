@@ -159,21 +159,27 @@ jobs:
               foreach(['hub'=>'ppar_snapshot_ab_hub','leaf'=>'ppar_snapshot_ab_leaf'] as $label=>$opt){
                   $id=absint(get_option($opt,0));$post=get_post($id);$GLOBALS['post']=$post;setup_postdata($post);
                   $context=$rm('get_content_context')->invoke($o,$id);
-                  $t=hrtime(true);$selected=[];$hash=[];$counts=[];
+                  $html=[];$t=hrtime(true);
                   foreach(['hub_after_cards','category_product_1','category_product_2','category_product_3'] as $slot){
-                      $html=$rm('render_affiliate_slot_for_context')->invoke($o,$id,$context,$slot,'portal_context','');
+                      $html[$slot]=$rm('render_affiliate_slot_for_context')->invoke($o,$id,$context,$slot,'portal_context','');
+                  }
+                  $render_ms=round((hrtime(true)-$t)/1e6,3);
+                  $selected=[];$hash=[];$counts=[];
+                  foreach(['hub_after_cards','category_product_1','category_product_2','category_product_3'] as $slot){
                       $sel=$rm('select_campaign_for_slot')->invoke($o,$context,$slot,'');
                       $ranked=$rm('ranked_campaigns_for_slot')->invoke($o,$context,$slot,'');
                       $selected[$slot]=(string)($sel['campaign']['id']??'');
-                      $hash[$slot]=hash('sha256',(string)$html);
+                      $hash[$slot]=hash('sha256',(string)($html[$slot]??''));
                       $counts[$slot]=count((array)$ranked);
                   }
                   $result['pages'][$label]=[
-                      'elapsed_ms'=>round((hrtime(true)-$t)/1e6,3),
+                      'elapsed_ms'=>$render_ms,
                       'selected'=>$selected,'html_hashes'=>$hash,'candidate_counts'=>$counts
                   ];
               }
-              $result['elapsed_ms']=round((hrtime(true)-$overall)/1e6,3);
+              $render_total=0.0;
+              foreach($result['pages'] as $page_result){$render_total+=(float)($page_result['elapsed_ms']??0);}
+              $result['elapsed_ms']=round($render_total,3);
               if(property_exists($o,'category_product_shared_rank_base_build_count')){
                   $p=new ReflectionProperty($o,'category_product_shared_rank_base_build_count');$p->setAccessible(true);
                   $result['shared_base_builds']=(int)$p->getValue($o);
