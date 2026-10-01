@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import hashlib, json, re
+import hashlib, json, math, re
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
@@ -72,6 +72,32 @@ def build(metadata,research,ppm_authoring_rules):
         safe_section_min=int(balance["normal_h2_section_min_words"])
         safe_section_max=int(balance["normal_h2_section_max_words"])
 
+    # Compile a concrete first-pass drafting corridor from the unchanged gates.
+    # The lower bounds are chosen so the non-table 750-word floor is already
+    # satisfied before CHECK, rather than discovered afterwards.
+    preferred_mid=(int(balance["preferred_total_words_min"])+int(balance["preferred_total_words_max"]))//2
+    conclusion_center=max(
+        1,
+        int(round(preferred_mid*((float(conclusion["target_ratio_min"])+float(conclusion["target_ratio_max"]))/2.0)))
+    )
+    conclusion_target_min=max(1,conclusion_center-5)
+    conclusion_target_max=min(
+        int(preferred_mid*float(conclusion["maximum_ratio"])),
+        conclusion_center+5
+    )
+    further_target_min=min(35,int(balance["further_information_maximum_words"]))
+    further_target_max=min(45,int(balance["further_information_maximum_words"]))
+    non_table_target_min=int(balance["hard_total_words_min"])+15
+    if not normal_blocks:
+        raise WriterPlanError("WRITER_PLAN_NORMAL_BLOCKS_MISSING:"+article_type)
+    required_normal_min=math.ceil(
+        (non_table_target_min-conclusion_target_min-further_target_min)/len(normal_blocks)
+    )
+    blueprint_normal_min=max(int(balance["normal_h2_section_min_words"]),required_normal_min)
+    blueprint_normal_max=min(int(balance["normal_h2_section_max_words"]),blueprint_normal_min+8)
+    if blueprint_normal_min>blueprint_normal_max:
+        raise WriterPlanError("WRITER_PLAN_SAFE_WORD_CORRIDOR_IMPOSSIBLE:"+article_type)
+
     plan={
         "contract":CONTRACT,
         "article_identity":{
@@ -136,6 +162,18 @@ def build(metadata,research,ppm_authoring_rules):
             "allowed_fact_ids":list(fact_pack.get("fact_ids") or []),
             "all_facts_must_be_used":True,
             "source_trace_per_fact_exact":1,
+            "source_trace_owner":"PACKAGER_DETERMINISTIC",
+            "writer_emits_source_trace_tags":False,
+        },
+        "draft_blueprint":{
+            "block_order":list(type_rules.get("required_blocks") or []),
+            "normal_blocks":normal_blocks,
+            "normal_block_target_words":[blueprint_normal_min,blueprint_normal_max],
+            "conclusion_target_words":[conclusion_target_min,conclusion_target_max],
+            "further_information_target_words":[further_target_min,further_target_max],
+            "non_table_target_words_min":non_table_target_min,
+            "table_must_not_fill_non_table_floor":balance.get("table_may_fill_word_budget") is False,
+            "writer_instruction":"DRAFT_INSIDE_THIS_CORRIDOR_BEFORE_PREFLIGHT",
         },
         "language":{
             "engine":"LanguageTool 6.8 / Bestand 43",
