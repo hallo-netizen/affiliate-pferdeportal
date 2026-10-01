@@ -1,0 +1,11 @@
+{
+  "contract": "K9_WORDPRESS_EXPORT_RECEIPT_V1",
+  "status": "PASS",
+  "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "plugin_version": "0.28.27",
+  "filename": "K9_WORDPRESS_DIRECT_IMPORT_df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0.json",
+  "wordpress_json_sha256": "1dbe208334f79e80f957c9b2aaca9ab8501767755b81dfef16bde6a81d8e37ef",
+  "article_count": 16,
+  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "publish_allowed": false
+}

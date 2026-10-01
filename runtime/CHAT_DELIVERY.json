@@ -1,14 +1,16 @@
 {
   "contract": "K9_CHAT_DELIVERY_V1",
   "status": "READY",
-  "final_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-  "final_sha256": "053a8acb1a94404134f13582545ef40ca3210cadc3b7f5c376aa7f50dfcd1242",
+  "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0.json",
+  "final_sha256": "1dbe208334f79e80f957c9b2aaca9ab8501767755b81dfef16bde6a81d8e37ef",
   "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
   "article_count": 16,
-  "filename": "GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-  "source_finalizer_run_id": "36785527375",
+  "artifact_name": "k9-wordpress-direct-import",
+  "filename": "K9_WORDPRESS_DIRECT_IMPORT_df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0.json",
+  "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+  "endstempel_sha256": "053a8acb1a94404134f13582545ef40ca3210cadc3b7f5c376aa7f50dfcd1242",
+  "finalizer_run_id": "36831041216",
   "required_surface": "CHAT_ATTACHMENT",
-  "artifact_name": "k9-wordpress-final-json",
-  "current_batch_note": "CURRENT_BATCH_WAS_ALREADY_DELIVERED_IN_CHAT; FUTURE_FINALIZERS_UPLOAD_THIS_ARTIFACT_AUTOMATICALLY",
   "publish_allowed": false
 }
