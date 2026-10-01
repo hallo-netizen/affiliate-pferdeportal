@@ -31,10 +31,10 @@ jobs:
           test ! -e warehouse
           test ! -e final
           test ! -e submissions
-          echo '0d495c59bf97569711ebb68a5492d3a9b56538a27441d0547e299c39129af006  real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json' | sha256sum -c -
-          echo '19d067f286dc600937f05be0439dd2293ac8dab721c27decafdb3f05636e9295  real_runs/20261001_longiergurt_anlegen/RESEARCH.json' | sha256sum -c -
-          echo 'b621db8e5e849f49d2af4244f2175b951ffc2b30298f5e56b99b12b059daf8b8  engine/lt68_external.py' | sha256sum -c -
-          echo 'cec8a92fa3a31223abb8da359ddfa79cb2045fe6555381a6cc38074264e948f3  engine/real_proof.py' | sha256sum -c -
+          echo '75fe2a0245c7b8d6fe3a8184da62602eb943a7fa00fc43c1798f7b1ed2dd31b0  real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json' | sha256sum -c -
+          echo 'b9f29a1c54d91f7e0107eff838c2159f83516c5831a4247f61e80223858c2559  real_runs/20261001_longiergurt_anlegen/RESEARCH.json' | sha256sum -c -
+          echo '9e0d23f5d696076205f1e5694bb91984d969e7a6cf3a64d9467988eb54c38387  engine/lt68_external.py' | sha256sum -c -
+          echo '6562a5b2b16685bf7fe1300e1d64872bf4ace99bd53a9d860b8869e1ed2bdb38  engine/real_proof.py' | sha256sum -c -
           mkdir -p /tmp/k10-out
           echo K10_REAL_INPUT_SNAPSHOT_PASS
 
