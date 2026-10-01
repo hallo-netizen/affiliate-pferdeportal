@@ -1,5 +1,13 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
+## INVENTARDELTA 2026-10-01 – TEXT/SEO
+
+Direkter WordPress-Readback aus diesem Arbeitsstrang:
+- Portal SEO Redaktionsplan Compiler: **0.28.29-kiss-storage-safe**, aktiv.
+- Portal SEO Themenengine: **0.57.15** ist der letzte direkt sichtbare Versionsreadback. Danach ist ein fortgesetzter V9-Resume operativ sichtbar; spätere Screenshots enthalten keine Versionsnummer, daher kein höherer Versionsreadback ohne Beleg.
+
+Kein Fach-/Release-PASS aus diesem Register ableiten. Für aktuellen PSTE-Arbeitsstand: `../TEXT/CURRENT_STATE.md`.
+
 STAND: 2026-10-01
 QUELLE: WordPress-Screenshotinventur des Nutzers + bereits vorhandene Campus-/Fachbelege
 REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Autorität.
@@ -16,7 +24,7 @@ Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobach
 | Performance Diagnose Safe | **2.2.0** | inaktiv | AUFRÄUMKANDIDAT; nicht als aktuelle Messquelle verwenden |
 | Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
 | Portal Production Machine | **6.7.9** | aktiv | TEXT; kritisch, unverändert |
-| Portal SEO Redaktionsplan Compiler | **0.28.27** | aktiv | TEXT; kritisch |
+| Portal SEO Redaktionsplan Compiler | **0.28.29-kiss-storage-safe** | aktiv | TEXT; kritisch |
 | Portal SEO Themenengine | **0.57.13** | aktiv | TEXT; kritisch |
 
 **Arbeitsregel 30.09.2026:** Datenbank-/Performancebereinigung nur pluginweise und gegen die jeweilige aktuelle Fachquelle. Storageänderungen dürfen vorhandene Performanceoptimierungen nicht überschreiben. Kandidaten werden erst nach Installation/Readback zum beobachteten Betriebsstand.

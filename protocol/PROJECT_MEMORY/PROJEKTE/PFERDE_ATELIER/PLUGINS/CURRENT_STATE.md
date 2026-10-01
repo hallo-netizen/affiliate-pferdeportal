@@ -1,5 +1,14 @@
 # PLUGINS – CURRENT STATE
 
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-01
+
+Dieser Block ist Inventar-/Betriebsreadback; Fach-/Releaseautorität bleibt im TEXT-Bereich bzw. technischer Originalquelle.
+
+- Portal SEO Redaktionsplan Compiler: WordPress-Seite zeigt direkt **0.28.29-kiss-storage-safe**. Damit ist 0.28.29 der belastbare installierte Versionsreadback.
+- Portal SEO Themenengine: letzter direkt sichtbarer WordPress-Versionsvergleich zeigt **0.57.15 aktuell**. Danach ist real ein fortgesetzter V9-Portalabgleich ohne Neustart sichtbar. Die bereitgestellten späteren Screenshots zeigen die Versionsnummer selbst nicht; deshalb wird hier **keine nicht sichtbare Versionsnummer erfunden**.
+- Der operative PSTE-Resume-/Themenverwertungsstand wird nicht in PLUGINS dupliziert; Routing: `../TEXT/CURRENT_STATE.md`.
+- Keine neue Plugininstallation ist aus dieser Campus-Nachholung abzuleiten.
+
 STAND: 2026-10-01
 STATUS: AFFILIATE 6.72.171 LIVE + PERFORMANCE-PASS / STORAGE-DB-BACKUP-AUFRÄUMUNG AKTIVER NÄCHSTER BLOCK / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
 

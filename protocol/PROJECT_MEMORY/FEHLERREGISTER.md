@@ -147,3 +147,16 @@ Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
 
 Autoritative Fehlerquelle:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELLEN.md`
+
+## PSTE-CONTEXT-RESUME-20261001
+
+Bereich: PFERDE ATELIER / TEXT / PSTE
+Status: RESUME-FEHLER TECHNISCH REPARIERT / OPERATIVER PORTALABGLEICH LÄUFT; Details ausschließlich aus der autoritativen Current-/Protokollquelle
+
+Aktuelle Status-/NEXT-ACTION-Autorität:
+`PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`
+
+Fehler-/Fix-/Verwertbarkeitsnachweis:
+`protocol/PSTE_TOPIC_REUSE_AND_CONTEXT_RESUME_CLOSEOUT_20261001.md`
+
+Dieses Register kopiert keine dynamischen Fortschrittswerte und keine zweite NEXT ACTION.

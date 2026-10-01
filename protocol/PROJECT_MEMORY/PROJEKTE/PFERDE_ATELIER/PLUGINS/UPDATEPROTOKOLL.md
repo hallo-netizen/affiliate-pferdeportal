@@ -154,3 +154,28 @@ Affiliate-Zentrale **6.72.171** wurde technisch fertiggestellt und vor Übergabe
 Der WordPress-Uploadvergleich des Nutzers zeigt für Affiliate-Zentrale **Aktuell 6.72.170** und für das hochgeladene falsche Paket **6.72.169**. Damit ist 6.72.170 der neue belastbare installierte Versions-Readback. Das konkrete frühere Updateereignis auf 6.72.170 wird mangels vollständiger Ausführungsdaten nicht rückwirkend als erfundene PU-ID angelegt.
 
 Der falsche 6.72.169-Installer wurde verworfen. Nächster zulässiger Installer ist ausschließlich der final gegatete 6.72.171-Installer mit SHA-256 `dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba`.
+
+## PU-20261001-001 – Portal SEO Redaktionsplan Compiler
+DATUM: 2026-10-01
+PLUGIN_ID: PA-E-017
+ART: UPDATE
+HERKUNFT: EIGEN
+FACHBÜRO: TEXT
+VON_VERSION: 0.28.27
+AUF_VERSION: 0.28.29-kiss-storage-safe
+UPDATEQUELLE: im TEXT-Arbeitsstrang lokal auf der geprüften 0.28.27-Basis gebaut
+WARUM: KISS-Handoff, Storage-/Retention-Sicherheit und Entfernung eindeutig toter Paketaltlasten ohne Inhalts-/SEO-/Qualitätsfunktionsänderung
+ABHÄNGIGKEITEN: PPM 6.7.9; Redaktionsplan-/Slotidentität; K9-5-Felder-Handoff
+FEHLERQUELLEN_GEPRÜFT: wiederholte Import-/Slotkollisionen und schneller technischer Generationsspeicherzuwachs
+BACKUP_ROLLBACK_REF: vorherige 0.28.27 bleibt Rollbackbasis; keine Löschung produktiver Inhalte
+POSITIVTEST: Paketintegrität PASS; PHP-Syntax 43/43 PASS; Redaktionsplan-/Importerpfad funktionsgleich für geschützte Fälle
+NEGATIVTEST: aktive/aktuelle/Rückfallgenerationen bleiben geschützt; Papierkorb-Slots blockieren keinen neuen legitimen Import
+FACH_REGRESSION: keine Änderung an LT 6.8 / PPM 6.7.9 / PSERC-Fachregeln / Publish-Sperre
+WORDPRESS_LIVEKONTROLLE: WordPress-Seite zeigt direkt `SEO-Redaktionsplan Metadaten-Vorschau 0.28.29-kiss-storage-safe`
+ERGEBNIS: PASS
+FACHBÜRO_REF: `../TEXT/CURRENT_STATE.md`
+NOTIZ: PSTE-Themenverwertungsarbeit ist separat; dieses Update ist keine Themenfreigabe.
+
+## LIVE-READBACK 2026-10-01 – PSTE / KEIN ERFUNDENES PU-EREIGNIS
+
+Direkter WordPress-Versionsvergleich belegt Portal SEO Themenengine **0.57.15 aktuell**. Später ist operativ ein fortgesetzter V9-Portalabgleich ohne Neustart sichtbar, die bereitgestellten späteren Screenshots zeigen jedoch keine Versionsnummer. Deshalb wird kein höheres ausgeführtes Updateereignis rückwirkend erfunden. Der technische Resume-Fix und die Themenverwertungsgrenzen stehen in `protocol/PSTE_TOPIC_REUSE_AND_CONTEXT_RESUME_CLOSEOUT_20261001.md`.

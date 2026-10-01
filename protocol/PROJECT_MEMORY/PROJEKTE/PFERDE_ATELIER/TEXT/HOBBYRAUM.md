@@ -1,5 +1,12 @@
 # PFERDE ATELIER – TEXT – HOBBYRAUM
 
+STAND: 2026-10-01
+STATUS: KEINE AKTIVE TEMPORÄRE AUSFÜHRUNGSBINDUNG / ALLE ALTEN NEXT-ACTIONS UNTEN HISTORISCH
+
+**HARD:** Dieser Hobbyraum ist keine Current- oder NEXT-ACTION-Autorität. Für aktuelle Arbeit ausschließlich `CURRENT_STATE.md` lesen. Der dort gebundene aktuelle Schritt ist, den bestehenden PSTE-Portalabgleich bis `COMPLETE` fortlaufen zu lassen. Keine neue Recherche/Produktionswelle und keine pauschale Themenfreigabe.
+
+---
+
 STAND: 2026-09-24
 STATUS: KATEGORIE-SCOPE CLOSED / SEPARATE PRODUKTIONSHISTORIE UNTEN NICHT ALS KATEGORIE-NEXT-ACTION VERWENDEN
 

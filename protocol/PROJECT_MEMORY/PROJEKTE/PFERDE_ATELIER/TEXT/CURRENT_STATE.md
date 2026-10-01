@@ -1,5 +1,44 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
+STAND: 2026-10-01
+STATUS: PSTE-CONTEXT-REFRESH LÄUFT / DANACH BESTEHENDEN THEMENBESTAND VERWERTEN / KEINE NEURECHERCHE VORHER
+
+## AKTUELLER OPERATIVER TEXT-/SEO-STAND 2026-10-01
+
+Diese Sektion supersediert für aktuelle TEXT-/SEO-Arbeit die historischen Produktions-/Kategorieblöcke weiter unten.
+
+### Eine zuständige Current-Bindung je Arbeitsbereich
+
+- **Artikelproduktion K9:** technische Current-Autorität ausschließlich
+  `konzept9/greenfield-20260929:CURRENT_STATE.json`.
+  Das Campus-TEXT-Büro kopiert daraus keinen dynamischen Produktionsstatus.
+- **PSTE-Themen-/SEO-Bestand:** aktueller operativer Zustand wird über den realen WordPress/PSTE-Readback dieses Arbeitsstrangs bestimmt. Der laufende Portalabgleich ist noch nicht `COMPLETE`; deshalb bleibt Planung fail-closed.
+- **Pluginbestand/Versionen:** ausschließlich über `../PLUGINS/CURRENT_STATE.md` und die jeweilige technische Hauptquelle.
+
+### Erster offener Blocker
+
+`PSTE_CONTEXT_REFRESH_NOT_COMPLETE`
+
+Der vorhandene Portalabgleich wird fortgesetzt und darf **nicht** durch `Gesamtbestand neu abgleichen`, `Gesamtbestand neu erfassen` oder einen neuen Recherche-/Produktionslauf ersetzt werden.
+
+### Genau eine NEXT ACTION
+
+`LET_EXISTING_PSTE_CONTEXT_REFRESH_REACH_COMPLETE`
+
+Bis `COMPLETE`:
+- keinen neuen Gesamtbestandlauf starten;
+- keine neue Produktionswelle starten;
+- keine neue Keyword-/Provider-Recherche starten;
+- keine roten/gelben Themen manuell freigeben, weil der Systemkontext noch nicht vollständig aktuell ist;
+- vorhandene gespeicherte Themen/Sandbox-Daten nicht löschen oder umklassifizieren.
+
+### Danach gebundener Folgeauftrag – noch NICHT die aktuelle NEXT ACTION
+
+Nach `COMPLETE` wird **zuerst der vorhandene Themenbestand verwertet**, bevor neue Recherche gestartet wird. Ziel und harte Grenzen stehen in:
+`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+
+Wichtig: „gespeichert“ bedeutet nicht „produktionsreif“. `BLOCKED_FOR_CATEGORY`, `STRUCTURE_GAP`, `PENDING_EXTERNAL_RELEVANCE`, `RESEARCH_KEYWORD` und rote Fachprüfung sind unterschiedliche Zustände und werden nicht pauschal freigegeben.
+
 STAND: 2026-09-24
 STATUS: KATEGORIE-SCOPE CLOSED / ÄLTERE PRODUKTIONSHISTORIE UNTEN NICHT ALS AKTUELLE KATEGORIE-NEXT-ACTION
 
