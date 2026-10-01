@@ -4,6 +4,7 @@ on:
     branches: [konzept9/greenfield-20260929]
     paths:
       - 'quality/k9_lt68.py'
+      - 'contracts/K9_LT68_DOMAIN_DICTIONARY.json'
       - '.github/workflows/k9-lt68-selftest.yml'
 permissions:
   contents: read
@@ -52,6 +53,34 @@ jobs:
           python3 - <<'PY'
           import json
           r=json.load(open('/tmp/lt-fail.json'))
+          assert r['status']=='REPAIR_REQUIRED', r
+          assert r['finding_count']>0, r
+          PY
+      - name: Equine domain dictionary positive and near-miss negative
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '<p>Die Longierpeitsche ergänzt die Longe in der Hilfengebung.</p>\n' > /tmp/k9-lt-domain-pass.html
+          python3 quality/k9_lt68.py /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/k9-lt-domain-pass.html --output /tmp/lt-domain-pass.json
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/lt-domain-pass.json'))
+          assert r['status']=='PASS', r
+          assert r['finding_count']==0, r
+          assert r['domain_dictionary_ignored_count']>=3, r
+          assert r['language_evidence']['raw_finding_count']==0, r
+          assert r['language_evidence']['unresolved_finding_count']==0, r
+          assert len(r['language_evidence']['domain_dictionary_ignored_findings'])>=3, r
+          PY
+          printf '<p>Die Longierpeitschee ergänzt die Longee in der Hilfengebungg.</p>\n' > /tmp/k9-lt-domain-fail.html
+          set +e
+          python3 quality/k9_lt68.py /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/k9-lt-domain-fail.html --output /tmp/lt-domain-fail.json
+          rc=$?
+          set -e
+          test "$rc" -eq 3
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/lt-domain-fail.json'))
           assert r['status']=='REPAIR_REQUIRED', r
           assert r['finding_count']>0, r
           PY
