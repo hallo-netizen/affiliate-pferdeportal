@@ -140,6 +140,28 @@ GENAU EINE NEXT ACTION:
 
 Erst danach: zentralen Housekeeping-Lauf ausführen, Storage erneut messen und belegen, dass die fünf Idealo-TMPs verschwunden sind. Anschließend DB-Verschlankung: PSERC/Affiliate bereits mögliche Retention zuerst; PSTE erst nach Context-Refresh-COMPLETE; danach physische Tabellenreorganisation und erneute Speicher-/Performance-Messung.
 
+## NEUER REALER AFFILIATE-AUSGABEFEHLER 2026-10-01
+
+Nutzer-Readback:
+- eBay-Produktanzeigen werden im Frontend erneut nicht sichtbar ausgespielt;
+- vorhandene Banner werden nicht zuverlässig automatisch dem fachlich passenden Ziel zugeordnet;
+- konkreter reproduzierbarer Fall: vorhandener Banner „Schabrackendesigner“ erscheint nicht auf der Produktseite/Kategorie „Schabracken“.
+
+Read-only technische Einordnung:
+- der historische reale WordPress-Bestand belegt für „Schabracken“ eine aktive eBay-BUSINESS-Kampagne mit exakter Zielbindung `page:schabracken` und den drei `category_product_1..3`-Placements; der Grundfehler ist daher nicht „Schabracken existiert nicht“ oder „nie zugeordnet“;
+- die aktuelle Banner-Automatik besitzt vor dem Zielranking ein Fachdomain-Gate. Ein Creative wie „Schabrackendesigner“ kann dort bereits auf REVIEW enden, wenn die Creative-Evidence keinen generischen Pferdebegriff enthält, obwohl „Schabracken“ selbst ein exaktes reales Portalziel ist. Dieser Pfad ist im aktuellen Sourcecode belegt und muss nach Live-Readback eng regressiv geprüft werden;
+- eBay besitzt zusätzlich einen Safe-Public-Checkpoint. Bei vorhandenem sicheren Checkpoint dürfen nur die dort enthaltenen BUSINESS-Campaign-IDs öffentlich erscheinen. Der aktuelle produktive Checkpoint-Inhalt ist noch nicht read-only belegt; deshalb wird die eBay-Ursache nicht geraten.
+
+HARD RULE:
+- Affiliate 6.72.172 bleibt der aktuelle Storage-only Kandidat; keine Banner-/eBay-Fachänderung in dieses Paket mischen.
+- Nach Installation/Readback von 6.72.172 wird VOR weiterer Storage-Housekeeping-Arbeit zuerst der reale read-only `Portalabdeckung`-Snapshot für „Schabracken“ ausgewertet und der tatsächliche Banner-Datensatz „Schabrackendesigner“ geprüft.
+- Erst den ersten exakt belegten eBay-Gatefehler fixen; keine Ranking-/Provider-/Checkpoint-Neukonstruktion auf Verdacht.
+- Bannerfix nur eng: exakte reale Produktthemen müssen als fachliche Evidence zählen können, ohne negative Fachsignale oder Veto/Safety zu lockern.
+- Positiv-/Negativ-/Realrouter-Regression zwingend vor neuem Installer.
+
+Gebundener Folgepunkt nach `INSTALL_AND_READBACK_AFFILIATE_6_72_172`:
+`READ_ONLY_DIAGNOSE_SCHABRACKEN_EBAY_AND_SCHABRACKENDESIGNER_THEN_FIX_FIRST_PROVEN_OUTPUT_GATE`.
+
 ## BILDOPTIMIERUNG ALS GEBUNDENER AUFRÄUMBLOCK 2026-10-01
 
 Aus der frischen Speicheranalyse:
