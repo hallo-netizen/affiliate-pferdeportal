@@ -100,6 +100,16 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         ):
             self.assertIn(required,finalizer)
 
+    def test_wordpress_delivery_is_actual_02827_import_contract(self):
+        exporter=self.text("k9_wordpress_export.py")
+        finalizer=self.text(".github/workflows/k9-finalize.yml")
+        self.assertIn('CONTRACT="SYSTEM4_WORDPRESS_HANDOFF_V1"',exporter)
+        self.assertIn('PLUGIN_VERSION="0.28.27"',exporter)
+        self.assertIn("K9_WORDPRESS_DIRECT_IMPORT_",finalizer)
+        self.assertIn("k9-wordpress-direct-import",finalizer)
+        self.assertNotIn("name: k9-wordpress-final-json",finalizer)
+        self.assertIn("'wordpress_contract':'SYSTEM4_WORDPRESS_HANDOFF_V1'",finalizer)
+
     def test_finalizer_keeps_all_real_gates_and_mandates_chat_file(self):
         wf=self.text(".github/workflows/k9-finalize.yml")
         for required in (

@@ -70,3 +70,16 @@ The already completed 16-article STOP was still carrying the obsolete next actio
 
 All green selftests include the unchanged K9 transition contract, PPM 6.7.9 regressions, PSERC negative/positive regression, terminal truth/fact traces and runtime-entry validation.
 
+## WordPress handoff root cause and fix
+The repeated WordPress failure was not an article failure and not a PSERC content failure. K9 delivered the signed ENDSTEMPEL package (PSERC_APPROVED_PRODUCTION_PACKAGE_V1) as the user-facing WordPress file. The existing K9 WordPress verifier only proved that the ENDSTEMPEL package contained WordPress-ready article data; it did not prove that the outer uploaded file matched the importer contract.
+
+Error history confirms the distinction:
+- PSERC_APPROVED_PRODUCTION_PACKAGE_V1 was rejected immediately with PSERC_SYSTEM4_CONTRACT_INVALID.
+- SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2 was also rejected immediately.
+- The proven 0.28.27 exporter in concept_agent/konzept8_verbot/engine/k8_wordpress_export.py emits SYSTEM4_WORDPRESS_HANDOFF_V1.
+
+K9 now preserves the ENDSTEMPEL package unchanged as signed evidence and adds one deterministic final transport adapter:
+ENDSTEMPEL package -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> chat/download.
+
+The adapter copies the already-final article bytes, metadata, fact pack and production-plan item without rewriting content. It binds the actual ledger revision count, exact body SHA-256, LT PASS, PPM 6.7.9 PASS, plugin version 0.28.27 and publish_allowed=false. The terminal receipt and chat delivery now point to the SYSTEM4_WORDPRESS_HANDOFF_V1 file; the signed ENDSTEMPEL file remains separately referenced as evidence.
+

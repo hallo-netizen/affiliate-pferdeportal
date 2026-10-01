@@ -69,19 +69,33 @@ jobs:
           final_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
           test -f "$final_path"
           python3 k9_endstempel.py verify "$final_path" | tee runtime/K9_ENDSTEMPEL_VERIFY.json
-      - name: Verify exact WordPress import contract
+      - name: Build and verify exact WordPress importer JSON
         shell: bash
         run: |
           set -euo pipefail
-          final_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
-          python3 k9_wordpress_verify.py "$final_path" --output runtime/K9_WORDPRESS_IMPORT_VERIFY.json
-          python3 - <<'PY'
+          endstempel_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+          python3 k9_wordpress_verify.py "$endstempel_path" --output runtime/K9_WORDPRESS_SOURCE_VERIFY.json
+          batch_sha="$(python3 - <<'PY'
           import json
-          x=json.load(open('runtime/K9_WORDPRESS_IMPORT_VERIFY.json'))
-          assert x['contract']=='K9_WORDPRESS_IMPORT_VERIFY_V1'
-          assert x['status']=='PASS'
-          assert x['publish_allowed'] is False
-          print('K9_WORDPRESS_IMPORT_CONTRACT_PASS')
+          print(json.load(open('runtime/K9_WORDPRESS_SOURCE_VERIFY.json'))['batch_sha256'])
+          PY
+          )"
+          wordpress_path="final/K9_WORDPRESS_DIRECT_IMPORT_${batch_sha}.json"
+          python3 k9_wordpress_export.py "$endstempel_path" state/ledger.json "$wordpress_path" --receipt runtime/K9_WORDPRESS_EXPORT_RECEIPT.json
+          python3 - <<'PY'
+          import json,pathlib
+          src=json.load(open('runtime/K9_WORDPRESS_SOURCE_VERIFY.json'))
+          exp=json.load(open('runtime/K9_WORDPRESS_EXPORT_RECEIPT.json'))
+          assert src['contract']=='K9_WORDPRESS_IMPORT_VERIFY_V1' and src['status']=='PASS'
+          assert exp['contract']=='K9_WORDPRESS_EXPORT_RECEIPT_V1' and exp['status']=='PASS'
+          assert exp['wordpress_contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
+          assert exp['plugin_version']=='0.28.27'
+          assert exp['article_count']==src['article_count']
+          assert exp['batch_sha256']==src['batch_sha256']
+          assert exp['publish_allowed'] is False
+          p=pathlib.Path('final')/exp['filename']
+          assert p.is_file()
+          print('K9_WORDPRESS_DIRECT_IMPORT_READY:'+str(p))
           PY
       - name: Lock failed finalization to report-only
         if: ${{ failure() }}
@@ -126,16 +140,22 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           import hashlib,json,pathlib
-          final=pathlib.Path('final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json')
-          raw=final.read_bytes()
-          pkg=json.loads(raw)
+          endstempel=pathlib.Path('final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json')
+          endstempel_raw=endstempel.read_bytes()
+          pkg=json.loads(endstempel_raw)
+          export=json.load(open('runtime/K9_WORDPRESS_EXPORT_RECEIPT.json'))
+          wordpress=pathlib.Path('final')/export['filename']
+          wordpress_raw=wordpress.read_bytes()
           import os
           receipt={
             'contract':'K9_TERMINAL_RECEIPT_V1',
             'status':'STOP',
             'workflow':'RESEARCH_WRITE_LT68_PPM679_REPAIR_PSERC_ENDSTEMPEL_WORDPRESS_FILE',
-            'final_ref':str(final),
-            'final_sha256':hashlib.sha256(raw).hexdigest(),
+            'final_ref':str(wordpress),
+            'final_sha256':hashlib.sha256(wordpress_raw).hexdigest(),
+            'wordpress_contract':'SYSTEM4_WORDPRESS_HANDOFF_V1',
+            'endstempel_ref':str(endstempel),
+            'endstempel_sha256':hashlib.sha256(endstempel_raw).hexdigest(),
             'batch_sha256':pkg['batch_sha256'],
             'article_count':pkg['article_manifest']['article_count'],
             'publish_allowed':False,
@@ -148,8 +168,11 @@ jobs:
             'final_sha256':receipt['final_sha256'],
             'batch_sha256':receipt['batch_sha256'],
             'article_count':receipt['article_count'],
-            'artifact_name':'k9-wordpress-final-json',
-            'filename':'GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json',
+            'artifact_name':'k9-wordpress-direct-import',
+            'filename':wordpress.name,
+            'wordpress_contract':'SYSTEM4_WORDPRESS_HANDOFF_V1',
+            'endstempel_ref':receipt['endstempel_ref'],
+            'endstempel_sha256':receipt['endstempel_sha256'],
             'finalizer_run_id':os.environ.get('GITHUB_RUN_ID'),
             'required_surface':'CHAT_ATTACHMENT',
             'publish_allowed':False
@@ -179,7 +202,10 @@ jobs:
               'batch_sha256':receipt['batch_sha256'],
               'article_count':receipt['article_count'],
               'finalizer_run_id':os.environ.get('GITHUB_RUN_ID'),
-              'trigger_head_sha':os.environ.get('GITHUB_SHA')
+              'trigger_head_sha':os.environ.get('GITHUB_SHA'),
+              'wordpress_contract':'SYSTEM4_WORDPRESS_HANDOFF_V1',
+              'endstempel_ref':receipt['endstempel_ref'],
+              'endstempel_sha256':receipt['endstempel_sha256']
             },
             'allowed_action':'DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY',
             'route_lock':'TERMINAL_CHAT_DELIVERY_ONLY',
@@ -213,14 +239,24 @@ jobs:
           print('SHA='+x['final_sha256'])
           PY
           . /tmp/release.env
-          final_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+          endstempel_path="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json"
+          wordpress_path="$(python3 - <<'PY'
+          import json
+          print(json.load(open('runtime/K9_STOP.json'))['final_ref'])
+          PY
+          )"
           gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 && { echo K9_RELEASE_REPLAY_BLOCKED; exit 2; } || true
-          gh release create "$TAG" "$final_path#GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json" --repo "$GITHUB_REPOSITORY" --target konzept9/greenfield-20260929 --title "K9 Endstempel real E2E" --notes "K9 real E2E final JSON. SHA-256: $SHA. publish_allowed=false."
+          gh release create "$TAG" \
+            "$endstempel_path#GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json" \
+            "$wordpress_path#$(basename "$wordpress_path")" \
+            --repo "$GITHUB_REPOSITORY" --target konzept9/greenfield-20260929 \
+            --title "K9 Endstempel real E2E" \
+            --notes "K9 real E2E. User-facing WordPress file contract: SYSTEM4_WORDPRESS_HANDOFF_V1. publish_allowed=false."
           echo K9_FINAL_DURABLE_RELEASE_PASS
-      - name: Upload exact WordPress JSON for chat delivery
+      - name: Upload exact WordPress importer JSON for chat delivery
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: k9-wordpress-final-json
-          path: final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json
+          name: k9-wordpress-direct-import
+          path: final/K9_WORDPRESS_DIRECT_IMPORT_*.json
           if-no-files-found: error
           retention-days: 30
