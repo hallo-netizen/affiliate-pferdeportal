@@ -398,6 +398,32 @@
         "blocker": "EXISTING_WORKFLOWS_HARD_CODE_OLD_VERSION_NUMBERS_NOT_A_SOURCE_OR_FUNCTIONAL_FAILURE",
         "workflow_change": "FORBIDDEN_NOT_USED_AS_WORKAROUND"
       }
+    },
+    "performance_no_rollback_hard_rule": {
+      "status": "HARD_ACTIVE",
+      "applies_to": "ALL_FUTURE_AFFILIATE_SOURCE_CHANGES",
+      "protected_baseline_version": "6.72.171",
+      "protected_baseline_evidence": "release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md",
+      "protected_runtime_files": [
+        "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
+        "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
+        "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php"
+      ],
+      "invariants": [
+        "NO_ROLLBACK_OR_REPLACEMENT_FROM_6_72_170_OR_OLDER",
+        "NO_OVERWRITE_OF_6_72_171_REQUEST_LOCAL_FRONTEND_CACHES",
+        "ADMIN_WORKER_UNCACHED_SEMANTICS_MUST_REMAIN",
+        "SLOT_VETO_PROVIDER_MIX_FINAL_SELECTION_PRIVATE_BUSINESS_COVERAGE_QUALITY_HEALTH_TRACKING_DESIGN_MUST_NOT_BE_WEAKENED",
+        "ANY_CHANGED_PERFORMANCE_CRITICAL_FILE_REQUIRES_EXACT_DELTA_REVIEW_AGAINST_FRESH_CURRENT_AND_6_72_171_EVIDENCE",
+        "ANY_PERFORMANCE_REGRESSION_OR_LOSS_OF_FUNCTIONAL_EQUIVALENCE_IS_FAIL_NO_INSTALLER"
+      ],
+      "current_672173_delta_proof": {
+        "compared_from_commit": "00a204d3d60c60609f13cd6f4cefee142ec799c4",
+        "compared_to_commit": "4e7ca32244bd42c22893527664400af4f85b6bc9",
+        "source_change_scope": "trait-ppar-ebay.php catalog validator only plus version/readme",
+        "performance_runtime_change": "NONE_OUTSIDE_CATALOG_VALIDATOR_BLOCK",
+        "source_guard": "PASS"
+      }
     }
   },
   "execution_state": {
