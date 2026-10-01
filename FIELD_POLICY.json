@@ -16,7 +16,10 @@
     "target_ratio_",
     "^editorial_additive\\.writer_targets\\.(?!semantics)",
     "^table_rule\\.(header|first_column)\\.preferred_words$",
-    "^table_rule\\.other_cells\\.preferred_maximum_words$"
+    "^table_rule\\.other_cells\\.preferred_maximum_words$",
+    "^editorial_additive\\.balance_policy\\.(table_may_fill_word_budget|further_information_may_fill_word_budget)$",
+    "^table_rule\\.word_budget\\.",
+    "^editorial_additive\\.conclusion_policy\\.use_conclusion_to_fill_global_word_or_paragraph_floor$"
   ],
   "superseded": [
     {
