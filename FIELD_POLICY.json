@@ -195,12 +195,12 @@
       "owner": "balance_checker"
     },
     {
-      "pattern": "^editorial_additive\\.balance_policy\\.(table_may_fill_word_budget|further_information_may_fill_word_budget|exempt_blocks)$",
+      "pattern": "^editorial_additive\\.balance_policy\\.exempt_blocks$",
       "rule_id": "words.word_budget_exclusions",
       "owner": "balance_checker"
     },
     {
-      "pattern": "^editorial_additive\\.conclusion_policy\\.(maximum_ratio|maximum_paragraphs|use_conclusion_to_fill_global_word_or_paragraph_floor)$",
+      "pattern": "^editorial_additive\\.conclusion_policy\\.(maximum_ratio|maximum_paragraphs)$",
       "rule_id": "conclusion.hard_limits",
       "owner": "balance_checker"
     },
@@ -228,11 +228,6 @@
       "pattern": "^table_rule\\.other_cells\\.(hard_maximum_words|sentences_forbidden|flow_text_forbidden)$",
       "rule_id": "table.compact_cells",
       "owner": "table_checker"
-    },
-    {
-      "pattern": "^table_rule\\.word_budget\\.",
-      "rule_id": "words.word_budget_exclusions",
-      "owner": "balance_checker"
     },
     {
       "pattern": "^table_rule\\.status$",
