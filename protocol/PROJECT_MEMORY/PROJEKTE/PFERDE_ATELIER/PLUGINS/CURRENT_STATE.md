@@ -176,6 +176,40 @@ HARD RULE:
 Gebundener Folgepunkt nach `INSTALL_AND_READBACK_AFFILIATE_6_72_172`:
 `READ_ONLY_DIAGNOSE_SCHABRACKEN_EBAY_AND_SCHABRACKENDESIGNER_THEN_FIX_FIRST_PROVEN_OUTPUT_GATE`.
 
+## NEUER REALER EBAY-PRIVATE/HIVEPRESS-FEHLER 2026-10-01
+
+Nutzer-Readback:
+- Im HivePress-Bereich „Private Anzeigen“ werden eBay-Privatanzeigen gezählt, aber es sind keine eBay-Anzeigen sichtbar.
+
+Read-only Codebefund im aktuellen kanonischen 6.72.172-Baum:
+- HivePress kann Kategorie-/Nachfahrenzahlen bereits aus der Taxonomie ermitteln.
+- Die eigentliche sichtbare Ergebnisliste wird danach zusätzlich durch `ebay_filter_stale_posts()` gefiltert.
+- Für eBay-PRIVATE prüft dieser Finalfilter u. a. den sicheren Public-Checkpoint (`private_listing_ids`), Source-Row, Seller-Typ INDIVIDUAL, Source-/Policy-State, Inhalts-Policy, Lifecycle, Control-Gate und Endzeit.
+- Dadurch ist der beobachtete Zustand „gezählt, aber 0 sichtbar“ technisch möglich, wenn der Rohbestand existiert, aber der finale Sichtbarkeitsvertrag alle eBay-Posts verwirft.
+- Die konkrete live blockierende Bedingung ist noch nicht read-only belegt; nicht raten.
+
+Nachhaltiger Zielvertrag:
+1. Gültige eBay-PRIVATE-Listings im Teilbaum „Private Anzeigen“ müssen sichtbar sein.
+2. Ungültige/stale/blocked Listings bleiben fail-closed unsichtbar.
+3. Kategorie-/Trefferzahlen dürfen nicht dauerhaft einen anderen Sichtbarkeitszustand behaupten als der finale Listing-Loop.
+4. Native HivePress-Anzeigen bleiben vollständig unverändert.
+5. Keine Öffnung von eBay-PRIVATE außerhalb des erlaubten „Private Anzeigen“-Teilbaums.
+6. Keine Rücknahme der 6.72.171-Performance-Caches.
+7. Positiv/Negativ/Performance-Test muss mindestens abdecken:
+   - parent „Private Anzeigen“ mit sichtbaren gültigen eBay-INDIVIDUAL-Listings;
+   - direkte Unterkategorie mit sichtbaren gültigen eBay-Listings;
+   - allgemeiner Anzeigenmarkt zeigt keine eBay-PRIVATE-Listings;
+   - native HivePress-Anzeige bleibt sichtbar;
+   - stale/ended/blocked/checkpoint-nicht-freigegeben bleibt unsichtbar;
+   - Count/Loop-Konsistenz für den geprüften sichtbaren Bestand;
+   - keine zusätzliche ungebremste DB-/Term-Auflösung auf normalen Portalrequests.
+
+Reihenfolge:
+- 6.72.172 unverändert installieren/readbacken; kein Mischfix in das geprüfte Storage-Paket.
+- Danach read-only den ersten live blockierenden PRIVATE-Gatepfad belegen.
+- Genau diesen ersten belegten Fehler als kleinstes Delta auf dem dann aktuellen Sourcebaum reparieren.
+- Danach kompletter eBay-PRIVATE Positiv-/Negativ-/Performance-Regressionslauf.
+
 ## BILDOPTIMIERUNG ALS GEBUNDENER AUFRÄUMBLOCK 2026-10-01
 
 Aus der frischen Speicheranalyse:
