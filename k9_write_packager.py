@@ -8,6 +8,7 @@ import k9_lt68
 import k9_ppm679
 import k9_rule_guard
 import k9_table_guard
+import k9_writer_plan
 JOB=ROOT/"runtime"/"CURRENT_JOB.json"
 ENTRY=ROOT/"runtime"/"CHAT_ENTRY.json"
 RULES=ROOT/"contracts"/"K9_WRITING_RULES.json"
@@ -163,6 +164,10 @@ def validate_html(markup, article_type, metadata, research, rules):
     if not required_trace_ids.issubset(set(trace_fact_ids)):
         missing=sorted(required_trace_ids-set(trace_fact_ids))
         raise PackError("PPM_SOURCE_TRACE_FACT_SET_MISMATCH:"+",".join(missing))
+    trace_counts={fid:trace_fact_ids.count(fid) for fid in sorted(required_trace_ids)}
+    invalid={fid:count for fid,count in trace_counts.items() if count!=1}
+    if invalid:
+        raise PackError("PPM_SOURCE_TRACE_COUNT_INVALID:DETAILS="+json.dumps(invalid,ensure_ascii=False,sort_keys=True,separators=(",",":")))
     if article_type=="Beratung" and 'data-list="criteria"' not in markup and "data-list='criteria'" not in markup:
         raise PackError("BERATUNG_CRITERIA_LIST_MISSING")
     if "ppm-ai-disclosure" not in markup: raise PackError("AI_DISCLOSURE_MISSING")
@@ -326,13 +331,13 @@ def exact_ppm_authoring_preflight(product,research):
         )
     return True
 
-def lt68_writer_preflight(markup,lt_jar):
+def lt68_writer_preflight(markup,lt_jar,authoritative_words=None):
     if lt_jar is None:
         return True
     with tempfile.TemporaryDirectory(prefix="k9-writer-lt68-preflight-") as td:
         p=Path(td)/"article.html"
         p.write_text(markup,encoding="utf-8")
-        result=k9_lt68.run(Path(lt_jar),p)
+        result=k9_lt68.run(Path(lt_jar),p,authoritative_words=authoritative_words)
     if result.get("status")!="PASS":
         ids=[]
         details=[]
@@ -383,11 +388,33 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
     research=research_row.get("research_product")
     if not isinstance(research,dict): raise PackError("RESEARCH_PRODUCT_MISSING")
     article_type=meta["article_type"]
-    validate_ppm_authoring_rules(item,article_type)
-    markup=ensure_all_fact_traces(markup,research)
-    validate_html(markup,article_type,meta,research,rules)
-    complete_rule_preflight(markup,meta,rules)
-    lt68_preflight=lt68_writer_preflight(markup,lt_jar)
+    ppm_rules=validate_ppm_authoring_rules(item,article_type)
+    bound_plan=(item.get("input_products") or {}).get("writer_acceptance_plan")
+    expected_plan=k9_writer_plan.build(meta,research,ppm_rules)
+    if not isinstance(bound_plan,dict) or bound_plan.get("contract")!="K9_WRITER_ACCEPTANCE_PLAN_V1" or bound_plan!=expected_plan:
+        raise PackError("WRITER_ACCEPTANCE_PLAN_BINDING_INVALID")
+
+    preflight_errors=[]
+    try:
+        markup=ensure_all_fact_traces(markup,research)
+    except PackError as exc:
+        preflight_errors.append({"stage":"source_trace_completion","reason":str(exc)})
+    for stage,fn in (
+        ("structural",lambda: validate_html(markup,article_type,meta,research,rules)),
+        ("writing_rules",lambda: complete_rule_preflight(markup,meta,rules)),
+    ):
+        try:
+            fn()
+        except PackError as exc:
+            preflight_errors.append({"stage":stage,"reason":str(exc)})
+    lt68_preflight=None
+    try:
+        lt68_preflight=lt68_writer_preflight(
+            markup,lt_jar,
+            authoritative_words=((bound_plan.get("language") or {}).get("authoritative_domain_terms") or [])
+        )
+    except PackError as exc:
+        preflight_errors.append({"stage":"lt68","reason":str(exc)})
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})
     link_section_map={
@@ -434,7 +461,7 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
         first_p=re.search(r"<p\b[^>]*>(.*?)</p>",intro_match.group(1),re.S|re.I) if intro_match else None
         direct_answer=text_of(first_p.group(1)) if first_p else ""
         if len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",direct_answer,re.UNICODE))<12:
-            raise PackError("FAQ_DIRECT_ANSWER_BINDING_INVALID")
+            preflight_errors.append({"stage":"faq_direct_answer","reason":"FAQ_DIRECT_ANSWER_BINDING_INVALID"})
     else:
         type_meta={"decision_goal":decision.get("decision_goal",""),"decision_criteria":decision.get("decision_criteria",[])}
     registry={
@@ -468,8 +495,10 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
     links=[dict(x) for x in link_bindings]
     order_id="k9-"+item_id[-8:]
     slug="reitplatzplaner-fuer-pferde" if meta["target_keyword"]=="Reitplatzplaner für Pferde" else re.sub(r"[^a-z0-9]+","-",meta["target_keyword"].lower()).strip("-")
-    lead=text_of(re.search(r"<section\s+data-block=[\"']intro[\"'][^>]*>(.*?)</section>",markup,re.S|re.I).group(1))
-    concl=text_of(re.search(r"<section\s+data-block=[\"']conclusion[\"'][^>]*>(.*?)</section>",markup,re.S|re.I).group(1))
+    intro_section=re.search(r"<section\s+data-block=[\"']intro[\"'][^>]*>(.*?)</section>",markup,re.S|re.I)
+    conclusion_section=re.search(r"<section\s+data-block=[\"']conclusion[\"'][^>]*>(.*?)</section>",markup,re.S|re.I)
+    lead=text_of(intro_section.group(1)) if intro_section else ""
+    concl=text_of(conclusion_section.group(1)) if conclusion_section else ""
     runtime_order={
         "allowed_fact_ids":fact_ids,"article_type":article_type,"conclusion":concl,"domain":"pferdeportal",
         "fact_pack_hash":fact_pack["fact_pack_hash"],"lead":lead,"links":links,"order_id":order_id,
@@ -488,8 +517,9 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
             "summary":direct_answer,
         })
     body_text=text_of(markup)
+    tbody_match=re.search(r"<tbody>(.*?)</tbody>",markup,re.S|re.I)
     metrics={"h2_count":len(re.findall(r"<h2\b",markup,re.I)),"paragraph_count":len(re.findall(r"<p\b",markup,re.I)),
-             "table_body_row_count":len(re.findall(r"<tr\b",re.search(r"<tbody>(.*?)</tbody>",markup,re.S|re.I).group(1),re.I)),
+             "table_body_row_count":len(re.findall(r"<tr\b",tbody_match.group(1),re.I)) if tbody_match else 0,
              "visible_link_count":len(re.findall(r"<a\b",markup,re.I)),"word_count":word_count(markup)}
     content_plan={"article_type":article_type,"required_blocks":rules["types"][article_type]["required_blocks"],"fact_ids":fact_ids,
                   "link_roles":[x["role"] for x in portal_links]}
@@ -522,7 +552,15 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
              "writing_rules_coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1","ppm_item":ppm_item}
     if isinstance(lt68_preflight,dict):
         product["lt68_preflight_result"]=lt68_preflight
-    exact_ppm_authoring_preflight(product,research)
+    try:
+        exact_ppm_authoring_preflight(product,research)
+    except PackError as exc:
+        preflight_errors.append({"stage":"ppm679","reason":str(exc)})
+    if preflight_errors:
+        raise PackError(
+            "WRITER_PREFLIGHT_ALL_FINDINGS:DETAILS="
+            +json.dumps(preflight_errors,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+        )
     product["product_sha256"]=stable(product)
     return {"item_id":item_id,"article_product":product}
 
@@ -550,7 +588,18 @@ def build(draft_path,lt_jar=None):
                 "title":row.get("title"),
                 "content_html":row.get("content_html")
             })
-    results=[_build_single(job,entry,rules,rules_sha,row,lt_jar=lt_jar) for row in drafts]
+    results=[]
+    item_errors=[]
+    for row in drafts:
+        try:
+            results.append(_build_single(job,entry,rules,rules_sha,row,lt_jar=lt_jar))
+        except PackError as exc:
+            item_errors.append({"item_id":str(row.get("item_id") or ""),"reason":str(exc)})
+    if item_errors:
+        raise PackError(
+            "WRITER_BATCH_ALL_FINDINGS:DETAILS="
+            +json.dumps(item_errors,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+        )
     return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],"results":results}
 
 def main():
