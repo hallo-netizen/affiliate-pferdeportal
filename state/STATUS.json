@@ -1,18 +1,11 @@
 {
-  "active_job": {
-    "item_count": 1,
-    "item_ids": [
-      "k9-ff5fb509c19c41dab1011be7"
-    ],
-    "job_id": "K9-WRITE-447847ccdea9ad47",
-    "station": "write"
-  },
+  "active_job": null,
   "contract": "K9_STATUS_V1",
   "fully_done": 16,
-  "ledger_generation": 67,
+  "ledger_generation": 68,
   "orchestration_mode": "AUTO_CHAIN",
-  "ready_for_check": 0,
-  "ready_for_write": 1,
+  "ready_for_check": 1,
+  "ready_for_write": 0,
   "remaining": 2,
   "repair_required": 0,
   "research_open": 1,
@@ -31,8 +24,8 @@
       "PENDING": 1
     },
     "write": {
-      "DONE": 16,
-      "PENDING": 2
+      "DONE": 17,
+      "PENDING": 1
     }
   },
   "total": 18
