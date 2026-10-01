@@ -491,7 +491,8 @@
       "source": "K9_RULE_FIELD_INVENTORY",
       "source_fields": [
         "editorial_additive.balance_policy.normal_h2_section_max_words",
-        "editorial_additive.balance_policy.normal_h2_section_min_words"
+        "editorial_additive.balance_policy.normal_h2_section_min_words",
+        "editorial_additive.balance_policy.exempt_blocks"
       ]
     },
     {
