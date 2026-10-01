@@ -50,6 +50,38 @@ Dauerhafte Arbeitsentscheidung/Warum:
 
 Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand, ersten offenen Punkt und NEXT ACTION.
 
+## FRISCHE STORAGE-BASELINE 2026-10-01 11:13–11:15 UTC
+
+Quelle: realer WordPress-Export `wordpress-speicheranalyse-20261001-111515.json`, vollständig `done=true`.
+
+- gescannte Dateien gesamt: **16.879.899.578 Bytes**
+- `wp-content/ai1wm-backups`: **13.295.750.128 Bytes**, 7 Dateien; darin zwei große `.wpress`-Backups:
+  - 01.10.2026: **7.264.453.820 Bytes**
+  - 29.09.2026: **6.031.295.633 Bytes**
+- `wp-content/wpvividbackups`: **2.109.325.928 Bytes**, 100 Dateien
+- `wp-content/uploads`: **1.042.403.409 Bytes**
+- darin fünf `ppar-idealo-feed-*.tmp`: zusammen **749.350.091 Bytes**
+- vier dieser idealo-TMP-Dateien waren bereits im 29.09.-Baselinebericht mit identischem Namen/Größe vorhanden; damit sind liegengebliebene Tempdateien real belegt.
+- Affiliate 6.72.171 löscht den jeweils normalen idealo-Downloadpfad bei Erfolg/HTTP-Fehlern, aber der zentrale Housekeeping-Disk-Pass räumt aktuell nur `ppar-affiliate-product-images` auf und erfasst verwaiste `ppar-idealo-feed-*.tmp` im Upload-Root nicht. Das ist ein belegter Zukunftsschutz-Gap, kein Grund für pauschale Dateilöschung.
+- Datenbank gesamt: **1.561.968.640 Bytes** gegenüber 1.576.435.712 Bytes am 29.09. (**-14.467.072 Bytes / ca. -0,9 %**)
+- `slfo_options`: **410.746.880 Bytes** (vorher 421.232.640)
+- `slfo_pste_candidates`: **409.108.480 Bytes** (unverändert)
+- `slfo_pste_runs`: **366.510.080 Bytes** (unverändert)
+- `slfo_pste_topic_pool`: **114.311.168 Bytes** (leicht kleiner)
+- `slfo_ppar_ebay_items`: **103.219.200 Bytes** (unverändert)
+- Autoload: **260.941 Bytes**; kein Autoload-Großproblem.
+- TEXT-Autorität meldet laufenden PSTE-Kontextabgleich. Deshalb aktuell **keine PSTE-Themen-/Sandbox-/Run-Daten löschen oder umklassifizieren**.
+
+Aktuell größter sicher trennbarer Hebel ist lokaler Backupbestand. Das alte All-in-One-Backup vom 29.09. plus der verbleibende WPvivid-Bestand belegen bereits **8,14 GB** potentiell entfernbaren lokalen Backup-Speicher, aber irreversible Löschung erst nach extern gesichertem aktuellen Rollback.
+
+ERSTER OFFENER PUNKT:
+**Aktuelles 01.10.-All-in-One-Backup extern sichern/verifizieren; erst dann alte lokale Backupbestände löschen. PSTE-Daten bleiben bis zum laufenden Kontext-Refresh-COMPLETE unberührt.**
+
+GENAU EINE NEXT ACTION:
+`SECURE_CURRENT_AIO_BACKUP_OFFSERVER_THEN_PURGE_OLD_LOCAL_BACKUPS`.
+
+Danach als gebundener Folgepunkt: genau einen Affiliate-Zentrale-Storagefix für verwaiste `ppar-idealo-feed-*.tmp` bauen/hart positiv-negativ-regressiv testen und erst danach die belegten Alt-TMPs bereinigen. Keine Plugin-Orgie und kein separater Hilfsrunner.
+
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-10-01
 
 Technische Affiliate-Releasewahrheit:
@@ -80,13 +112,7 @@ Belastbarer Stand für PA-E-003:
 - diese Messung belegt die reale Performanceverbesserung und den aktiven Affiliate-Router, darf aber ohne separaten Versions-Readback nicht allein als exakter **6.72.171-Versionbeleg** ausgegeben werden;
 - isolierter Repository-`CURRENT.zip`-Sync bleibt separat BLOCKED, solange der verfügbare Dokumentationsweg keinen bytegenauen Binärtransfer belegt; keine Ersatz-ZIP erfinden.
 
-ERSTER OFFENER PUNKT:
-**Der Affiliate-Performanceblock 6.72.171 ist live PASS. Offen ist jetzt der eigentliche Zielvertrag: aktuelle Storage-/DB-Altlasten klassifizieren, bestehende Schutz-/Retentionlogik der betroffenen Eigenplugins nutzen bzw. fehlende Schutzlogik gezielt schließen und danach logisch + physisch bereinigen. Zusätzlich ist der Server-Backupbestand selbst ein belegter Großverbraucher.**
-
-GENAU EINE NEXT ACTION:
-`FRESH_STORAGE_BASELINE_THEN_RETENTION_CLASSIFICATION`.
-
-Dieselbe WordPress-Speicheranalyse wie am 29.09.2026 neu erzeugen und gegen den 29.09.-Baselinebericht vergleichen. Bis zum frischen Baseline-Readback keine pauschale Tabellenlöschung. Bereits belegt und als Prüfschwerpunkte gebunden: `slfo_options`, `slfo_pste_candidates`, `slfo_pste_runs`, `slfo_pste_topic_pool`, `slfo_ppar_ebay_items`, Serverordner `wp-content/ai1wm-backups`, `wp-content/wpvividbackups` sowie große `ppar-idealo-feed-*.tmp`-Dateien.
+Der frühere NEXT `FRESH_STORAGE_BASELINE_THEN_RETENTION_CLASSIFICATION` ist durch die frische Baseline oben erledigt und supersediert.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
