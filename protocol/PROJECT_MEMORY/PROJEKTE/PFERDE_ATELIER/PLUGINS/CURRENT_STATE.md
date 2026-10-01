@@ -82,6 +82,20 @@ GENAU EINE NEXT ACTION:
 
 Danach als gebundener Folgepunkt: genau einen Affiliate-Zentrale-Storagefix für verwaiste `ppar-idealo-feed-*.tmp` bauen/hart positiv-negativ-regressiv testen und erst danach die belegten Alt-TMPs bereinigen. Keine Plugin-Orgie und kein separater Hilfsrunner.
 
+## BILDOPTIMIERUNG ALS GEBUNDENER AUFRÄUMBLOCK 2026-10-01
+
+Aus der frischen Speicheranalyse:
+- 375 Attachments;
+- 2.992 WebP-Dateien mit zusammen ca. 142,1 MB;
+- 737 PNG-Dateien mit zusammen ca. 135,6 MB;
+- 427 JPG-Dateien mit zusammen ca. 25,6 MB.
+Damit ist WebP bereits breit im Einsatz; eine pauschale Neu-Konvertierung ist nicht begründet.
+- Die WordPress-Medienmetadaten belegen bei typischen Artikelbildern Original + mehrere abgeleitete Größen (u.a. 300, 768, 1024 sowie HivePress-spezifische Größen). Deshalb liegt das relevante Optimierungspotenzial eher in unnötigen Original-/Dublettenbeständen, überflüssigen Größen und korrekter Frontend-Auslieferung als in einem neuen Bildformat-Plugin.
+- Der aktuelle Speicherreport zeigt mindestens drei exakte Bild-Dubletten-Gruppen mit ca. 8,5 MB unmittelbar belegtem Einsparpotenzial; keine pauschale Löschung ohne Referenzprüfung.
+- Historische Performance-Evidence zeigt Artikel-LCP mehrfach auf dem Featured Image; Bildauslieferung bleibt deshalb eigener Performance-Prüfpunkt.
+- Kein neues Bildoptimierungsplugin installieren. Erst bestehende Bildzentrale/WordPress-Größen, Referenzen und Auslieferung prüfen.
+- Bildoptimierung wird vor der finalen Performance-Abnahme erledigt, aber nach Backup-/Tempbereinigung und parallel zur DB-Verschlankung.
+
 ## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-10-01
 
 Technische Affiliate-Releasewahrheit:
