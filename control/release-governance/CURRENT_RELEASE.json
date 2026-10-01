@@ -382,18 +382,26 @@
     },
     "ebay_portal_catalog_dynamic_validation": {
       "version": "6.72.173",
-      "status": "TARGETED_LOCAL_POSITIVE_NEGATIVE_PERFORMANCE_PASS_FULL_GATE_OPEN",
+      "status": "TARGETED_LOCAL_PASS_SOURCE_GUARD_PASS_FULL_FUNCTIONAL_GATE_STILL_OPEN",
       "live_basis": "6.72.172_USER_CONFIRMED_INSTALLED_SERVER_READBACK_NOT_RECAPTURED_IN_THIS_TURN",
       "source_manifest_sha256": "e9c760bec991257fa99cc500e1dd305a5389de262baa714c1547ef036ccd821d",
       "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672173_dynamic_catalog_validation_local_gate_20261001.md",
       "scope_ref": "protocol/AFFILIATE_RELEASE_EBAY_CATALOG_DYNAMIC_VALIDATION_672173_20261001.md",
       "fixed_failure": "ebay_portal_catalog_incomplete:product_pages",
       "performance_hardlock": "NO_ROLLBACK_OF_6_72_171_REQUEST_LOCAL_CACHES_NO_EXTRA_IO_DB_NETWORK_OR_PORTAL_STRUCTURE_PARSE",
-      "next": "RUN_BOUND_RELEASE_GATES"
+      "next": "RUN_BOUND_RELEASE_GATES",
+      "ci_readback": {
+        "head": "b9c30106607d9b381f3ab6b2f6a2b46531b806fa",
+        "release_guard": "GOVERNANCE_SOURCE_TREE_START_PASS",
+        "legacy_workflow_672171_run": 36866837262,
+        "legacy_workflow_672170_run": 36866837152,
+        "blocker": "EXISTING_WORKFLOWS_HARD_CODE_OLD_VERSION_NUMBERS_NOT_A_SOURCE_OR_FUNCTIONAL_FAILURE",
+        "workflow_change": "FORBIDDEN_NOT_USED_AS_WORKAROUND"
+      }
     }
   },
   "execution_state": {
-    "state": "SOURCE_BOUND_TARGETED_LOCAL_SIM_PASS_FULL_GATE_OPEN",
+    "state": "SOURCE_GUARD_PASS_TARGETED_LOCAL_SIM_PASS_FULL_GATE_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
     "bound_user_scope_action": "Run one combined full gate on exact 6.72.173 current source. Preserve all 6.72.171 performance semantics and 6.72.172 housekeeping; no other functional change.",
     "completion_condition": "ALL_REQUIRED_GATES_PASS_ON_6_72_173_SOURCE_MANIFEST",
