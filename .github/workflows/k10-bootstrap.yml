@@ -1,0 +1,41 @@
+name: K10 one-time materialize exact tested package
+on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+permissions:
+  contents: write
+jobs:
+  materialize:
+    if: ${{ hashFiles('_bootstrap/k10_source_bundle.tar.xz') != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify and materialize exact K10 snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f _bootstrap/k10_source_bundle.tar.xz
+          ACTUAL="$(sha256sum _bootstrap/k10_source_bundle.tar.xz | awk '{print $1}')"
+          test "$ACTUAL" = "83952be3e4b8a3858dc3d40dababddfcc58a66c54fd5f001efd4f3de035bbb97"
+          cp _bootstrap/k10_source_bundle.tar.xz /tmp/k10_source_bundle.tar.xz
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          tar -xJf /tmp/k10_source_bundle.tar.xz -C .
+          test -f CURRENT_STATE.json
+          test -f RULE_CATALOG.json
+          test -f tests/test_k10.py
+          test -f .github/workflows/k10-selftest.yml
+          test ! -e warehouse
+          test ! -e final
+          test ! -e submissions
+          echo K10_EXACT_SNAPSHOT_MATERIALIZED
+      - name: Commit materialized K10 tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "k10-materializer"
+          git config user.email "k10-materializer@users.noreply.github.com"
+          git add -A
+          git commit -m "K10: materialize isolated tested rule-ledger package"
+          git push origin HEAD:konzept10-rule-ledger-20261001
