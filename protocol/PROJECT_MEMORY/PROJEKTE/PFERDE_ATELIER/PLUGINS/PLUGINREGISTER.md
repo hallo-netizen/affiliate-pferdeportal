@@ -1,6 +1,6 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-30
+STAND: 2026-10-01
 QUELLE: WordPress-Screenshotinventur des Nutzers + bereits vorhandene Campus-/Fachbelege
 REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Autorität.
 
@@ -11,7 +11,7 @@ Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobach
 | Plugin | Real beobachtet 30.09.2026 | Aktivstatus | Zuständigkeit / Hinweis |
 |---|---:|---|---|
 | Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.578** | aktiv | DESIGN; aktuellen Fachstand dort prüfen |
-| Affiliate-Zentrale (Portal-kompatibel) | **6.72.167** | aktiv | AFFILIATE; Nutzer-Readback 30.09.2026 + eBay-OAuth PASS. Technisch freigegebenes 6.72.168 wartet auf Installation; Release-/LIVE-Wahrheit bleibt bei der Affiliate-Releaseautorität. |
+| Affiliate-Zentrale (Portal-kompatibel) | **6.72.167** | aktiv | AFFILIATE; letzter ausdrücklich versionsbezogener Nutzer-Readback 30.09.2026 + eBay-OAuth PASS. Technisch freigegeben ist **6.72.171**; Installation/Versions-Readback noch offen. Releasewahrheit: `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`. |
 | Performance Diagnose Safe | **2.3.0** | aktiv | GEMEINSAM / Performance; passive No-Filter-Diagnose |
 | Performance Diagnose Safe | **2.2.0** | inaktiv | AUFRÄUMKANDIDAT; nicht als aktuelle Messquelle verwenden |
 | Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
@@ -63,7 +63,7 @@ Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorie
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.152 | aktiv | **KRITISCH · BEHALTEN**; installierte Version gegen Releaseautorität abgleichen | `../AFFILIATE/START_HERE.md` |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.167 letzter expliziter Versions-Readback | aktiv | **KRITISCH · BEHALTEN**; technischer Release **6.72.171**, Installation/Readback offen; Performance-A-B PASS | `../AFFILIATE/START_HERE.md` |
 
 ## BILD
 
