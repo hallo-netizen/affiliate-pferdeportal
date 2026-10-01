@@ -1,35 +1,41 @@
 # HOBBYRAUSCH – PLUGINREGISTER
 
-STAND: 2026-09-28
+STAND: 2026-10-01
 ROLLE: INVENTAR / WEGWEISER, KEINE PLUGIN-CURRENT-WAHRHEIT
+
+## EINE PLUGIN-WAHRHEIT
+
+Dieses Register enthält ausschließlich Plugin-ID, Name und Weg zur zuständigen Plugin-Akte.
+
+**Keine aktuelle Version, kein SHA, kein Live-Status, kein Blocker und keine NEXT ACTION werden hier gepflegt.**
+
+Die einzige aktuelle Plugin-Wahrheit liegt jeweils in:
+`PLUGINS/PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`
 
 ## Bestand
 
 ### HD-001 – Kategorie-Workflow
 
-Akte:
-`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/`
-
 Plugin:
 `Affiliate-Portal Kategorie-Workflow`
 
-Aktueller Pilot:
-**V1.9.0 Stage Hardlock**
+Akte:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/`
 
-Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
+Aktuelle Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
 
-SHA-256:
-`79d914e6896c36c0022dbae25c7c3ec24923dc453eadc499ef6cd1b88fcd83a1`
+### HD-002 – Text/SEO
 
-Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.0_HOBBY_DEPOT_STAGE_HARDLOCK.zip`
+Plugin:
+`Hobby Depot SEO Themenengine`
 
-SHA-256:
-`b63fbedaf4a474923ce6946cafec45faa5ebcea4de36cd534dd9c546d089c3c9`
+Akte:
+`PLUGIN_AKTEN/HD-002-TEXT-SEO/`
 
-Status:
-lokal positiv/negativ 241/241 PASS; Live-Rollback und Live-Retest noch offen.
+Aktuelle Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
 
-Siehe ausschließlich:
-`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`.
+## Regel
+
+Release-Artefakte, Evidence, Historie, ORIGINAL-Ablage und Updateprotokoll sind Nachweis/Archiv und niemals zweite Current-Wahrheit.
