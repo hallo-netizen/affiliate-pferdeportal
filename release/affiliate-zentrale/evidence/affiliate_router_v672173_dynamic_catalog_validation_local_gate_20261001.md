@@ -37,12 +37,26 @@ Negativfälle neuer Validator:
 - main_hubs-Metadatum 9 bei 8 search_rules: FAIL
 - business_routable_concepts 379 statt 380: FAIL
 
-## Performance-Mikromessung
-PHP, 200.000 Validator-Aufrufe auf synthetischer Topologie mit denselben Arraygrößen:
-- neuer Validator gesamt: 134 ms
-- ca. 0,67 µs pro Aufruf
+## Performance-Mikromessung – tatsächlich ausgeführt
 
-Der Fix fügt keine Datei-, DB-, Netzwerk-, Taxonomie- oder Portalstruktur-Abfrage hinzu. Er verwendet nur `count()` auf bereits geladenen Arrays innerhalb des bestehenden statischen Katalogpfads. Keine 6.72.171-Performancefunktion wurde ersetzt.
+Standalone-PHP-Test am 2026-10-01 mit PHP 8.4.23, exakt auf der 6.72.173-Count-Logik:
+- alter Validator gegen aktuellen 334/1149-Katalog: PASS als erwarteter FAIL;
+- neuer Validator gegen aktuellen 334/1149-Katalog: PASS;
+- Negativfälle product_pages falsch, article_targets verkürzt, main_hubs falsch, business_routable_concepts falsch und leere business_hub_concepts: jeweils korrekt FAIL;
+- 200.000 neue Validator-Aufrufe: 160,355 ms;
+- ca. 0,802 µs pro Aufruf.
+
+Der Fix fügt keine Datei-, DB-, Netzwerk-, Taxonomie- oder Portalstruktur-Abfrage hinzu. Er verwendet nur `count()` auf bereits geladenen Arrays innerhalb des bestehenden statischen Katalogpfads.
+
+## Performance-No-Rollback-Nachweis
+
+Vergleich exakt von installiertem/kanonischem 6.72.172-Basiscommit `00a204d3d60c60609f13cd6f4cefee142ec799c4` zum aktuellen 6.72.173-Stand:
+- `includes/trait-ppar-automation-suite.php`: **keine Änderung**;
+- `pferdeportal-affiliate-router.php`: **nur** Pluginheader + Runtime-Version 6.72.172 -> 6.72.173;
+- `includes/trait-ppar-ebay.php`: **nur** der Katalog-Validatorblock bei `ebay_portal_catalog()`;
+- kein weiterer Runtime-Code wurde verändert.
+
+Damit bleiben die in 6.72.171 belegten request-lokalen Kategorieprodukt-/Target-Rank-/Control-/Health-/Image-/eBay-Cohort-Caches außerhalb dieses Validatorblocks unverändert.
 
 ## Source-Identität
 - trait-ppar-ebay.php SHA-256: `af9f8f1cfbb17f3794d65e5b53e62e329c7755f1162dc4794db1abfaf84701ce`
