@@ -1,0 +1,68 @@
+name: K10 probe WordPress importer auth boundary
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+    paths:
+      - '.github/workflows/k10-probe-wordpress-importer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract bound PSERC importer read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main:refs/remotes/origin/main
+          git show origin/main:control/startmaster0107/runtime_packages/PSERC-FIX.zip > /tmp/pserc.zip
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/pserc.zip' | sha256sum -c -
+          rm -rf /tmp/pserc-outer /tmp/pserc-inner
+          mkdir -p /tmp/pserc-outer /tmp/pserc-inner
+          unzip -q /tmp/pserc.zip -d /tmp/pserc-outer
+          inner="$(find /tmp/pserc-outer -type f -name 'portal-seo-editorial-plan-compiler_0.28.18_ENDSTEMPEL_IMPORT_ENVELOPE_BINDING.zip' -print -quit)"
+          test -n "$inner"
+          unzip -q "$inner" -d /tmp/pserc-inner
+          echo K10_PSERC_IMPORTER_EXTRACT_PASS
+      - name: Locate importer and authentication guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== FILES ==='
+          find /tmp/pserc-inner -type f | sed 's#^/tmp/pserc-inner/##' | sort | grep -Ei 'import|admin|draft|envelope|endstempel|compiler' | head -200 || true
+          echo '=== AUTH / ACTION / DRAFT HITS ==='
+          grep -RniE "admin_post|admin_post_nopriv|current_user_can|check_admin_referer|wp_verify_nonce|wp_insert_post|wp_update_post|post_status.{0,30}draft|PSERC_APPROVED_PRODUCTION_PACKAGE_V1|PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1" /tmp/pserc-inner             --include='*.php' --include='*.json' | head -500 || true
+      - name: Fail-closed summary
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json
+          root=Path('/tmp/pserc-inner')
+          texts=[]
+          for p in root.rglob('*'):
+              if p.is_file() and p.suffix.lower() in {'.php','.json'}:
+                  try: texts.append((p,p.read_text(encoding='utf-8')))
+                  except Exception: pass
+          joined='\n'.join(t for _,t in texts)
+          out={
+            'admin_post_nopriv': bool(re.search(r'admin_post_nopriv',joined,re.I)),
+            'admin_post': bool(re.search(r'admin_post_',joined,re.I)),
+            'current_user_can': bool(re.search(r'current_user_can\s*\(',joined,re.I)),
+            'nonce_guard': bool(re.search(r'check_admin_referer|wp_verify_nonce',joined,re.I)),
+            'draft_write': bool(re.search(r"post_status.{0,60}draft|['\"]draft['\"]",joined,re.I|re.S)),
+            'wp_insert_post': bool(re.search(r'wp_insert_post\s*\(',joined,re.I)),
+          }
+          print('K10_IMPORTER_AUTH_SUMMARY='+json.dumps(out,sort_keys=True))
+          if out['admin_post_nopriv']:
+              print('K10_IMPORTER_PUBLIC_SIGNED_ROUTE_PRESENT=1')
+          else:
+              print('K10_IMPORTER_PUBLIC_SIGNED_ROUTE_PRESENT=0')
+          PY
