@@ -140,6 +140,20 @@ GENAU EINE NEXT ACTION:
 
 Erst danach: zentralen Housekeeping-Lauf ausführen, Storage erneut messen und belegen, dass die fünf Idealo-TMPs verschwunden sind. Anschließend DB-Verschlankung: PSERC/Affiliate bereits mögliche Retention zuerst; PSTE erst nach Context-Refresh-COMPLETE; danach physische Tabellenreorganisation und erneute Speicher-/Performance-Messung.
 
+## HARDLOCK – KEIN PERFORMANCE-RÜCKBAU 2026-10-01
+
+Für jede kommende Affiliate-Funktionsreparatur (eBay-Ausspielung, Portalabdeckung, Banner-Zuordnung, Tarifcheck/CHECK24) gilt verbindlich:
+
+- Ausgangsbasis ist ausschließlich der **frisch gelesene kanonische Current-Sourcebaum** auf `affiliate-release-current`.
+- Aktuellster Kandidat: **6.72.172**, aufgebaut auf dem freigegebenen Performance-Stand **6.72.171**.
+- Die 6.72.171-Performanceoptimierungen in `pferdeportal-affiliate-router.php`, `includes/trait-ppar-automation-suite.php` und `includes/trait-ppar-ebay.php` dürfen nicht entfernt, überschrieben oder durch Altcode ersetzt werden.
+- Die 6.72.172-Storageänderung in `includes/trait-ppar-housekeeping.php` bleibt ebenfalls erhalten.
+- Kein Cherry-Pick/Copy aus 6.72.170 oder älter, kein Alt-ZIP als Basis, keine Rekonstruktion.
+- Vor jedem Source-Write erneut Current, Branch-HEAD, Manifest und betroffene Datei-Hashes lesen.
+- Funktionsfix nur als **kleinstes Delta auf dem aktuellen Baum**.
+- Regression muss neben dem Fach-PASS zwingend die 6.72.171-Performance-Semantik prüfen: identische Slot-Auswahl/HTML/Kandidatenreihenfolge, request-lokale Caches weiter aktiv, Admin/Worker uncached wie bisher.
+- Bei Performanceverschlechterung oder Verlust eines belegten Cachepfads: FAIL, kein Installer.
+
 ## NEUER REALER AFFILIATE-AUSGABEFEHLER 2026-10-01
 
 Nutzer-Readback:
