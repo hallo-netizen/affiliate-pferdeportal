@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "PPM104_PARITY_IMPLEMENTED_LOCAL_21_OF_21_PASS_READY_FOR_GITHUB_MATERIALIZATION",
+  "status": "GITHUB_MATERIALIZED_SELFTEST_PASS",
   "k9_mutation_allowed": false,
   "k9_baseline_commit": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
   "verified_state": {
@@ -20,9 +20,17 @@
     "local_positive_negative_tests": "21/21 PASS",
     "receipt_model": "ONE_HARD_RULE_ONE_OWNER_ONE_CHECK_ONE_HASH_BOUND_RECEIPT",
     "final_stage": "RECEIPTS_IDENTITY_COMPLETENESS_CATALOG_HASH_RULE_VALUES_HASH_AND_IMMUTABILITY_ONLY",
-    "k9_branch_head_expected_unchanged": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555"
+    "k9_branch_head_expected_unchanged": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
+    "github_materialized_commit": "3ee2684f56e2c325156e72ad030db44f6fb99206",
+    "github_verified_commit": "245a3afd9d6af5af78b6bfbe14d73b4cf37dd5c5",
+    "github_selftest": "PASS",
+    "github_selftest_run_id": 36926140587,
+    "github_ppm_inventory": "PASS",
+    "github_ppm_inventory_run_id": 36926140664,
+    "github_isolation_boundary": "PASS",
+    "k9_branch_head_verified_unchanged": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555"
   },
-  "first_open_blocker": "GITHUB_K10_BRANCH_NOT_YET_MATERIALIZED_WITH_FULL_TESTED_LOCAL_PACKAGE",
-  "next_action": "MATERIALIZE_THIS_EXACT_TESTED_PACKAGE_TO_K10_BRANCH_THEN_RUN_GITHUB_SELFTEST_AND_VERIFY_K9_HEAD_UNCHANGED",
+  "first_open_blocker": "FIRST_REAL_K10_E2E_ARTICLE_PROOF_NOT_YET_RUN",
+  "next_action": "RUN_FIRST_REAL_K10_E2E_ARTICLE_PROOF_WITHOUT_PUBLISHING_AND_COMPARE_GATE_AND_OUTPUT_PARITY_TO_K9",
   "publish_allowed": false
 }
