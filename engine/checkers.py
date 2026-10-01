@@ -21,7 +21,7 @@ class _BalanceParser(HTMLParser):
         self.stack.pop()
 
 def article_hash(article):
-    bound={k:article.get(k) for k in ('article_type','title','target_keyword','type_meta','research_claims','required_fact_ids','allowed_fact_ids','bound_links','link_registry','runtime_link_roles','wordpress_category','heading_intent_terms','comparison_source_bindings','html')}
+    bound={k:article.get(k) for k in ('article_type','title','target_keyword','type_meta','research_claims','required_fact_ids','allowed_fact_ids','bound_links','link_registry','runtime_link_roles','wordpress_category','heading_intent_terms','comparison_source_bindings','table_decision','html')}
     return stable(bound)
 
 def _plain(value):
@@ -341,6 +341,19 @@ def editorial_receipts(article):
     plain_cf=_plain(html).casefold(); reg_hits=[x for x in legacy['known_error_regression_patterns'] if x.casefold() in plain_cf]
     unnatural_hits=[x for x in legacy['known_language_regression_phrases'] if x.casefold() in plain_cf]
     dup_ratio=_duplicate_ratio(html); intro=next((s for s in sections if s['block']=='intro'),None); intro_sim=_max_pair_similarity(_paragraphs(intro) if intro else [])
+    intro_cfg=v['intro_orientation']; intro_pars=_paragraphs(intro) if intro else []
+    first_sentence=''
+    if intro_pars:
+        ss=_sentences(intro_pars[0]); first_sentence=ss[0] if ss else intro_pars[0]
+    first_words=len(_words(first_sentence))
+    topic_tokens=_sig_tokens(article.get('target_keyword') or article.get('title') or '')
+    first_tokens=_sig_tokens(first_sentence)
+    overlap=len(topic_tokens & first_tokens)
+    intro_orientation_ok=bool(
+        first_sentence
+        and int(intro_cfg['first_sentence_minimum_words'])<=first_words<=int(intro_cfg['first_sentence_maximum_words'])
+        and overlap>=int(intro_cfg['subject_overlap_minimum_significant_tokens'])
+    )
     rows=[
       ('heading.target_phrase_control',target_ok,{'actual':exact,'min':lo,'max':hi}),('heading.keyword_staccato_forbidden',staccato_ok,{'counts':token_counts}),
       ('heading.phrase_family_repetition_forbidden',phrase_ok,{'counts':dict(lead_counts)}),('heading.duplicate_normalized_forbidden',duplicate_ok,{}),
@@ -351,6 +364,7 @@ def editorial_receipts(article):
       ('surface.known_regression_patterns_forbidden',not reg_hits,{'hits':reg_hits}),('surface.known_unnatural_language_forbidden',not unnatural_hits,{'hits':unnatural_hits}),
       ('surface.duplicate_sentence_ratio',dup_ratio<=float(legacy['content']['maximum_duplicate_sentence_ratio']),{'actual':dup_ratio}),
       ('surface.intro_similarity',intro_sim<=float(legacy['content']['maximum_intro_pair_similarity']),{'actual':intro_sim}),
+      ('intro.orientation_sentence',intro_orientation_ok,{'first_sentence':first_sentence,'words':first_words,'subject_overlap':overlap,'topic_tokens':sorted(topic_tokens)}),
     ]
     return [_receipt(rid,'editorial_checker',article,'PASS' if ok else 'FAIL',ev) for rid,ok,ev in rows]
 
@@ -413,8 +427,17 @@ def table_receipts(article):
             if pars:
                 wc=len(_words(pars[0])); ss=len(_sentences(pars[0])); summary_ok=summary_ok and int(sc['words_min'])<=wc<=int(sc['words_max']) and int(sc['sentences_min'])<=ss<=int(sc['sentences_max'])
         semantic=article.get('semantic_rule_results') or {}; value_ok=(semantic.get('table.value_required_if_present')=='PASS'); evidence['table_value_semantic_result']=semantic.get('table.value_required_if_present')
+    decision_cfg=cfg['optional_decision']; decision=article.get('table_decision') or {}
+    optional_decision_ok=True; decision_evidence={'policy':policy,'count':count,'decision':decision}
+    if policy=='OPTIONAL':
+        expected_decision=decision_cfg['include_value'] if count==1 else decision_cfg['omit_value']
+        optional_decision_ok=(
+            decision.get('decision')==expected_decision
+            and len(str(decision.get('rationale') or '').strip())>=int(decision_cfg['rationale_minimum_chars'])
+        )
+        decision_evidence['expected_decision']=expected_decision
     rows_out=[('table.required_for_comparison',presence_ok,{'count':count,'policy':policy}),('table.presence_policy',presence_ok,{'count':count,'policy':policy}),('table.minimum_rows',min_rows_ok,{}),('table.structure',structure_ok,{}),
-      ('table.canonical_classes',canonical_ok,{}),('table.compact_labels',labels_ok,{}),('table.compact_cells',cells_ok,{}),('table.post_summary_policy',summary_ok,{}),('table.value_required_if_present',value_ok,evidence)]
+      ('table.canonical_classes',canonical_ok,{}),('table.compact_labels',labels_ok,{}),('table.compact_cells',cells_ok,{}),('table.post_summary_policy',summary_ok,{}),('table.value_required_if_present',value_ok,evidence),('table.optional_decision_documented',optional_decision_ok,decision_evidence)]
     return [_receipt(rid,'table_checker',article,'PASS' if ok else 'FAIL',ev) for rid,ok,ev in rows_out]
 
 def adapter_receipts(article):
