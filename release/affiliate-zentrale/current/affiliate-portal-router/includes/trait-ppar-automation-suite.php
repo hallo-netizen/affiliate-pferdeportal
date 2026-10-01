@@ -2872,7 +2872,53 @@ trait PPAR_Automation_Suite_Trait {
         return $match[1] . ':' . $this->ranked_campaign_sanitize_key_request_cached($match[2]);
     }
 
+    /**
+     * V6.72.171: identical target-key sets are common across a product feed.
+     * Their exact target rank is a pure function of target keys + page context.
+     * Cache that result once per normal frontend request; administrative/worker
+     * paths keep the historical call-by-call behavior.
+     */
     private function automation_campaign_exact_target_rank($campaign, $context) {
+        if (!$this->ranked_campaigns_request_cache_allowed()) {
+            return $this->automation_campaign_exact_target_rank_uncached($campaign, $context);
+        }
+        $campaign = is_array($campaign) ? $campaign : array();
+        $context = is_array($context) ? $context : array();
+        $wanted = isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys'])
+            ? array_values(array_filter($campaign['automation_target_keys']))
+            : array();
+        if (!$wanted) { return null; }
+
+        // Only fields read by automation_campaign_exact_target_rank_uncached().
+        $key_context = array(
+            'wanted' => $wanted,
+            'primary_slug' => $context['primary_slug'] ?? '',
+            'post_type' => $context['post_type'] ?? '',
+            'semantic_primary_target_key' => $context['semantic_primary_target_key'] ?? '',
+            'semantic_ancestor_target_keys' => (array)($context['semantic_ancestor_target_keys'] ?? array()),
+            'slot_type' => $context['slot_type'] ?? '',
+            'direct_term_slugs' => (array)($context['direct_term_slugs'] ?? array()),
+            'slugs' => (array)($context['slugs'] ?? array()),
+            'product_family_slug' => $context['product_family_slug'] ?? '',
+            '_ppar_norm_primary_slug' => $context['_ppar_norm_primary_slug'] ?? null,
+            '_ppar_norm_post_type' => $context['_ppar_norm_post_type'] ?? null,
+            '_ppar_norm_semantic_primary_target_key' => $context['_ppar_norm_semantic_primary_target_key'] ?? null,
+            '_ppar_norm_semantic_ancestor_target_keys' => $context['_ppar_norm_semantic_ancestor_target_keys'] ?? null,
+            '_ppar_norm_direct_term_slugs' => $context['_ppar_norm_direct_term_slugs'] ?? null,
+            '_ppar_norm_slugs' => $context['_ppar_norm_slugs'] ?? null,
+            '_ppar_norm_product_family_slug' => $context['_ppar_norm_product_family_slug'] ?? null,
+        );
+        $key = hash('sha256', serialize($key_context));
+        if (array_key_exists($key, $this->automation_exact_target_rank_request_cache)) {
+            $cached = $this->automation_exact_target_rank_request_cache[$key];
+            return is_array($cached) ? $cached : null;
+        }
+        $result = $this->automation_campaign_exact_target_rank_uncached($campaign, $context);
+        $this->automation_exact_target_rank_request_cache[$key] = is_array($result) ? $result : false;
+        return $result;
+    }
+
+    private function automation_campaign_exact_target_rank_uncached($campaign, $context) {
         // campaign_from_post() already normalizes and de-duplicates these keys when the request campaign snapshot is built.
         $wanted = isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys']) ? array_values(array_filter($campaign['automation_target_keys'])) : array();
         if (!$wanted) {
