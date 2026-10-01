@@ -1,0 +1,121 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-RESEARCH-7ce57ca68dad6301",
+  "results": [
+    {
+      "item_id": "k9-ff5fb509c19c41dab1011be7",
+      "research_product": {
+        "contract": "K9_RESEARCH_PRODUCT_V1",
+        "decision_support": {
+          "decision_criteria": [
+            "Fremdreiter und Gastreiter ausdrücklich mitversichert",
+            "Reitbeteiligungen und Mithalter im Tarif geregelt",
+            "unentgeltliche und regelmäßige Nutzung sauber erfasst",
+            "Abgrenzung zwischen pferdebedingtem Schaden und eigenem Reiterverschulden",
+            "Tarifbedingungen vor Überlassung des Pferdes prüfen"
+          ],
+          "decision_goal": "Einen Pferdehaftpflicht-Tarif auswählen, der die tatsächliche Nutzung durch Fremdreiter und Reitbeteiligungen eindeutig abdeckt."
+        },
+        "fact_pack": {
+          "article_type": "Beratung",
+          "article_type_coverage": "PASS_BERATUNG",
+          "claim_register_hash": "b83bb9fd5a5134a29166fa6712afe91e890adb39ff11b685ef8f8bec824718f2",
+          "claims": [
+            {
+              "article_types": ["Beratung"],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "7f3e59651f5b8de13cae623de7bdfc9b33f0133116a66050784d8a6192bd2dbf",
+              "fact_id": "PHF_F1",
+              "locator": "Abschnitt „Welche Personen sollten mitversichert sein?“",
+              "source_id": "FINANZTIP_PFERDEHAFTPFLICHT_20261001",
+              "statement": "Ein Pferdehaftpflicht-Tarif sollte Fremdreiter und Reitbeteiligungen einschließen, wenn andere Personen das Pferd nutzen.",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-10-01"
+            },
+            {
+              "article_types": ["Beratung"],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "f087f8f2ccbb57b3d1b61ea49fc92fc8e748b8294bbc3171589f8f218f6c2d26",
+              "fact_id": "PHF_F2",
+              "locator": "Abschnitt „Welche Personen sollten mitversichert sein?“",
+              "source_id": "FINANZTIP_PFERDEHAFTPFLICHT_20261001",
+              "statement": "Wird ein Pferd regelmäßig oder gelegentlich unentgeltlich von anderen Personen geritten, sollte das Fremdreiterrisiko im Vertrag ausdrücklich berücksichtigt sein.",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-10-01"
+            },
+            {
+              "article_types": ["Beratung"],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "85d3d08150e9be6fa39048455b8b511fe83e5a81b1fe5e476d94367bfb3f7170",
+              "fact_id": "PHF_F3",
+              "locator": "Abschnitt „Mitversicherte Personen“",
+              "source_id": "ALLIANZ_PFERDEHAFTPFLICHT_20261001",
+              "statement": "Tarife können neben dem Pferdehalter auch nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- oder Fremdreiter als mitversicherte Personen einschließen.",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-10-01"
+            },
+            {
+              "article_types": ["Beratung"],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "babd93cacf69754c7eada6399f97b38154da4cfdd90ffe1d80d3bae959f66d9b",
+              "fact_id": "PHF_F4",
+              "locator": "FAQ zum Reiten oder Hüten eines fremden Pferdes",
+              "source_id": "ALLIANZ_PFERDEHAFTPFLICHT_20261001",
+              "statement": "Ob ein Fremdreiter über die Pferdehaftpflicht des Halters geschützt ist, hängt vom vereinbarten Fremdreiterrisiko des konkreten Tarifs ab; deshalb sollte der Versicherungsschutz vor der Nutzung geprüft werden.",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-10-01"
+            },
+            {
+              "article_types": ["Beratung"],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "e8a9be11bdeb581c9dadb169e00cbe3e8deb2f367b2be9772315006fe64370f8",
+              "fact_id": "PHF_F5",
+              "locator": "FAQ zum Reiten oder Hüten eines fremden Pferdes",
+              "source_id": "ALLIANZ_PFERDEHAFTPFLICHT_20261001",
+              "statement": "Ein Schaden, der nicht durch das Pferd, sondern durch ein eigenes Missgeschick des Reiters verursacht wird, fällt nicht automatisch unter die Pferdehaftpflicht und kann die Privathaftpflicht des Reiters betreffen.",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-10-01"
+            },
+            {
+              "article_types": ["Beratung"],
+              "claim_status": "FULLY_SUPPORTED",
+              "evidence_text_sha256": "a52ee19f705910d846235e107973b727dcc4b1b491cadac83f94c70d80402aad",
+              "fact_id": "PHF_F6",
+              "locator": "Das Wichtigste in Kürze",
+              "source_id": "VERBRAUCHERZENTRALE_TIERHALTERHAFTPFLICHT_20250122",
+              "statement": "Vor Abschluss einer Tierhalterhaftpflicht sollte genau geprüft werden, welche Risiken und Personen vom gewählten Vertrag tatsächlich abgedeckt werden.",
+              "subject_scope": "pferdehaftpflicht_mit_fremdreiterrisiko",
+              "time_scope": "RETRIEVED_2026-10-01"
+            }
+          ],
+          "conclusion_evidence_coverage": "PASS",
+          "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+          "domain": "pferdeatelier",
+          "fact_ids": ["PHF_F1","PHF_F2","PHF_F3","PHF_F4","PHF_F5","PHF_F6"],
+          "fact_pack_hash": "dd0b8009a95ccd4cffc773ada636113938a00d59f9ad2c7606f8732cb0d50b83",
+          "fact_pack_id": "FP-K9-PFERDEHAFTPFLICHT-FREMDREITER-20261001",
+          "placeholder_content_status": "PASS",
+          "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "required_block_coverage": "PASS",
+          "source_manifest_hash": "5d6a7fd265947ab3e6f888290c41e6b34260c5b9e6ef627714a68fc66fa527d5",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "table_evidence_coverage": "PASS",
+          "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+          "title_scope": "pferdehaftpflicht_mit_fremdreiterrisiko"
+        },
+        "portal_links": [
+          {"anchor":"Wissen","href":"/wissen/","role":"parent_category","section_id":"criteria"},
+          {"anchor":"Versicherungen & Recht","href":"/wissen/wissen-versicherungen-und-recht/","role":"semantic_related","section_id":"decision"},
+          {"anchor":"Pferdehaftpflicht","href":"/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/","role":"further_information","section_id":"further_information"}
+        ],
+        "product_sha256": "215da72ba39699f735446d696a849788481763c2df7f4a5b46f785fdbbf715db",
+        "sources": [
+          {"source_id":"FINANZTIP_PFERDEHAFTPFLICHT_20261001","title":"Finanztip: Pferdehaftpflichtversicherung Vergleich","url":"https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/"},
+          {"source_id":"ALLIANZ_PFERDEHAFTPFLICHT_20261001","title":"Allianz: Pferdehaftpflicht – Schutz vor finanziellem Risiko","url":"https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/"},
+          {"source_id":"VERBRAUCHERZENTRALE_TIERHALTERHAFTPFLICHT_20250122","title":"Verbraucherzentrale: Haftpflichtversicherung für Haustiere","url":"https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/haftpflichtversicherung-fuer-haustiere-33442"}
+        ]
+      }
+    }
+  ],
+  "station": "research"
+}
