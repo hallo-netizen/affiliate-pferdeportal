@@ -1,98 +1,142 @@
 # HD-002 – HOBBY DEPOT SEO THEMENENGINE – CURRENT
 
 STAND: 2026-10-01
-STATUS: V0.1.2 AUTO OWNER HANDOFF POSITIV+NEGATIV HARD PASS / LIVE-INSTALLATION NÄCHSTES
+STATUS: V0.1.2 LIVE BLOCKED HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING / V0.1.3 COMPLETE-WORKFLOW POSITIV+NEGATIV HARD PASS / LIVE-UPGRADE NÄCHSTES
 
-## Live-Ausgangslage
+## Harte Abnahmeregel
 
-Aktuell live:
-`Hobby Depot SEO Themenengine 0.1.1`
+**Keine Abnahme mehr über Teiltests.**
+Für diesen Workflow muss der komplette reale Pfad lokal positiv UND negativ simuliert sein:
+deployed HD-001 Owner-Handoff → HDTE Auto-Sync → Baseline → request-begrenzter Portalabgleich → finale Freshness-Gates → COMPLETE.
 
-Sichere Fresh-Install-Migration:
-COMPLETE / Backend READY.
+## Live-Stand
 
-HD-001 steht jetzt produktiv live:
-`Affiliate-Portal Kategorie-Workflow V1.9.4`
-mit erfolgreichem Deployment + Readback.
-
-## Problem in 0.1.1
-
-HDTE 0.1.1 besitzt den technischen Owner-Handoff-Importer, aber keinen normalen sichtbaren Importweg im Backend.
-
-`Gesamtbestand erfassen` benötigt den Owner-Handoff zwingend und würde ohne ihn fail-closed mit
-`HDTE_EDITORIAL_OWNERSHIP_HANDOFF_REQUIRED`
-blockieren.
-
-## Fix 0.1.2
-
-Plugin:
+Installiert live:
 `Hobby Depot SEO Themenengine 0.1.2`
 
+Owner-Handoff wurde erfolgreich automatisch übernommen und der Gesamtbestand erfasst.
+
+Live danach:
+`Portalabgleich läuft automatisch request-begrenzt weiter. BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
+
+Der Block liegt in:
+`STAGE_EDITORIAL_PLAN_SNAPSHOT`.
+
+## Root Cause
+
+Ohne importierten Redaktionsplan liefert der bestehende HDTE-Vertrag absichtlich:
+
+- contract: `HDTE_EDITORIAL_PLAN_SNAPSHOT_V1`
+- status: `NOT_AVAILABLE`
+- sha256: `NOT_AVAILABLE`
+- items: leer.
+
+V0.1.2 behandelte den gültigen Sentinel `NOT_AVAILABLE` fälschlich wie einen fehlenden 64-Hex-Hash und blockierte deshalb.
+
+## Fix V0.1.3
+
+Plugin:
+`Hobby Depot SEO Themenengine 0.1.3`
+
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.2_AUTO_OWNER_HANDOFF_HARD_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.3_PORTALABGLEICH_FULL_WORKFLOW_HARD_PASS.zip`
 
 Installer SHA-256:
-`330028c8cd38f7f27664c804dfafa7649bea70e1f3647bc18229b52f2ba06003`
+`5b3063577beb3e5dfb03799b6245f2b9aaf90f338c70e86708674e5999762b2a`
 
-Source SHA-256:
-`cf7e7766062d4c1241d2876d4d02d398ed6f81e8d1b3ebd93f0d74e0e7d32f9f`
+Source:
+`QUELLCODE_HDTE_V0.1.3_PORTALABGLEICH_FULL_WORKFLOW_HARD_PASS.zip`
 
-Beim bestehenden Button
-`Gesamtbestand erfassen`
-passiert jetzt automatisch und read-only:
+V0.1.3 akzeptiert einen nicht vorhandenen Redaktionsplan ausschließlich wenn:
+- Contract korrekt;
+- status exakt `NOT_AVAILABLE`;
+- sha256 exakt `NOT_AVAILABLE`;
+- Baseline ebenfalls exakt `NOT_AVAILABLE`;
+- items exakt leer.
 
-1. HD-001 muss Stage `deployed` besitzen.
-2. gespeicherte FINAL_APPROVED-Struktur + Research werden aus dem installierten HD-001 gelesen;
-3. dieselben installierten HD-001 Validator-/Research-Evidence-Regeln prüfen den Stand erneut;
-4. nur ein `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`-Handoff wird übernommen;
-5. HDTE speichert ausschließlich seinen eigenen Handoff-Snapshot;
-6. danach wird der normale Website-Baseline-/Portalabgleich gestartet.
+Alle abweichenden/malformed Zustände bleiben fail-closed.
 
-HD-001 wird dabei nicht verändert.
+Zusätzlich kann exakt der bereits live vorhandene V8-Job
+`BLOCKED / STAGE_EDITORIAL_PLAN_SNAPSHOT / HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
+in-place weitergeführt werden.
+Kein neuer Gesamtbestand und kein neuer Owner-Handoff nötig.
 
-## Exakter Buchbinden Positivtest
+## Komplette lokale Positivsimulation
 
-Echter Produktionskandidat / echtes Research:
-- Owner-Handoff READY;
+### Exakter Livezustand
+- HD-001 deployed;
 - 7 Owner;
-- 11 ARTICLE_ONLY;
-- 11/11 gebunden;
-- automatischer Handoff-Sync PASS;
-- HDTE Baseline CURRENT;
-- 4 produktive Content-Leaf-Kategorien;
+- 11 ARTICLE_ONLY / 11 gebunden;
+- 4 nutzbare Content-Kategorien;
 - 1 Buchbinden-Themenfamilie;
-- HD-001 Workspace vor/nach Sync unverändert.
+- 0 aktuelle Themen im Portalabgleich;
+- kein Redaktionsplan.
 
-Worktree und frisch entpackter Installer: PASS.
+Fresh Installer V0.1.3:
+Owner-Sync → Baseline → Inventory Stage → Plan Stage → Registry Stage → Sandbox Store → Sandbox IDs → Context Index → Final Structure → Final Inventory → Final Editorial Plan → **COMPLETE**.
 
-## Negativtests
+### Echter Upgrade-/Resume-Fall
+Jeder Schritt in eigenem PHP-Prozess/Request:
 
-Fail-closed:
+V0.1.2:
+`BLOCKED / STAGE_EDITORIAL_PLAN_SNAPSHOT / HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`.
+
+Danach gleiche persistierte Job-/Option-Daten unter frisch entpackter V0.1.3:
+ohne neue Baseline, ohne neuen Handoff:
+→ Stage Plan
+→ Registry
+→ Sandbox
+→ Context Index
+→ Final Structure
+→ Final Inventory
+→ Final Plan
+→ **COMPLETE**.
+
+### Nichtleerer Stresslauf
+4 Themen einschließlich Payload-Audit + Portal-Context-Batch:
+4/4 verarbeitet → **COMPLETE**.
+
+### Redaktionsplan vorhanden
+Normal hash-gebundener vorhandener Plan:
+→ **COMPLETE**.
+
+## Negative Volltests
+
+Frisch entpackter Installer:
 - HD-001 nicht deployed → `HDTE_UPSTREAM_CATEGORY_WORKFLOW_NOT_DEPLOYED`;
-- Finalpaket fehlt → `HDTE_UPSTREAM_FINAL_PACKAGE_MISSING`;
-- nicht FINAL_APPROVED → `HDTE_UPSTREAM_FINAL_PACKAGE_NOT_APPROVED`;
-- notwendige Live-Kategorie fehlt → `HDTE_UPSTREAM_OWNER_CATEGORY_SET_INCOMPLETE`;
-- gespeicherter Handoff manipuliert → `HDTE_EDITORIAL_OWNERSHIP_SNAPSHOT_HASH_MISMATCH`.
+- NOT_AVAILABLE mit nichtleeren Items → `HDTE_CONTEXT_STAGE_PLAN_NOT_AVAILABLE_ITEMS_PRESENT`;
+- verfügbarer Plan ohne Hash → `HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`;
+- staged Plan nach Write manipuliert → Stage-Readback/Length-Mismatch BLOCKED;
+- Live-Struktur vor Abschluss verändert → `HDTE_CONTEXT_REFRESH_STALE_FINAL_STRUCTURE`.
+
+Admin-Reentry:
+exakter aktuelle BLOCKED-Job wird als `CURRENT_PLAN_ABSENCE_REENTRY_PENDING` erkannt und an den vorhandenen automatischen AJAX-Worker weitergereicht.
 
 ## Paketprüfung
 
-- geändert gegenüber 0.1.1: exakt 3 Dateien;
-- Safe-Migration-/Storage-/Performance-Code sonst byte-identisch;
-- PHP Source 80/80 PASS;
-- PHP Fresh Installer 80/80 PASS;
-- Source ↔ Fresh Installer 135/135 Dateien identisch;
-- keine zusätzliche Pluginlinie / kein Companion-Plugin.
+- PHP Source: 80/80 PASS;
+- PHP Fresh Installer: 80/80 PASS;
+- Source ↔ Fresh Installer: 135/135 Dateien byteidentisch;
+- geändert ggü. 0.1.2: exakt 4 Dateien:
+  - Hauptplugin/Version;
+  - Admin-Reentry;
+  - Context-Index Sentinel-Validierung;
+  - Context-Refresh In-place-Recovery.
+- Repository, Research Archive, Sandbox Record Store, Storage Maintenance, Safe Migration und Owner-Handoff bleiben byteidentisch.
+
+Evidence:
+`HDTE_V0.1.3_FULL_WORKFLOW_POS_NEG_EVIDENCE.txt`
 
 ## NEXT ACTION
 
-V0.1.2 über V0.1.1 installieren.
+V0.1.3 über V0.1.2 installieren.
 
-Danach:
-`Hobby Depot Themenengine → Übersicht → Gesamtbestand erfassen`
+Danach nur:
+`Hobby Depot Themenengine → Übersicht`
 
-Kein manueller Owner-Handoff-Download.
-Kein manueller Owner-Handoff-Import.
+Der vorhandene BLOCKED-Portalabgleich wird automatisch request-begrenzt weitergeführt.
+Keine neue Bestandserfassung.
+Kein neuer Owner-Handoff.
+Kein neuer Research-Lauf.
 
-Bei Erfolg:
-`Gesamtbestand erfasst.`
-Danach Portalabgleich bis COMPLETE.
+Erst bei sichtbarem `Portalabgleich COMPLETE` live abnehmen.
