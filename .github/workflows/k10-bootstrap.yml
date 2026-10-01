@@ -41,6 +41,7 @@ jobs:
           test ! -e submissions
           echo "K10_SELFTEST_B64=$(base64 -w0 .github/workflows/k10-selftest.yml)"
           echo "K10_PPM_WORKFLOW_B64=$(base64 -w0 .github/workflows/k10-ppm-inventory.yml)"
+          rm -rf .github/workflows
           git checkout HEAD -- .github/workflows
           echo K10_EXACT_SNAPSHOT_MATERIALIZED
       - name: Commit materialized K10 tree without workflow mutation
