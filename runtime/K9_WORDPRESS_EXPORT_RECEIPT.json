@@ -3,9 +3,9 @@
   "status": "PASS",
   "wordpress_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
   "plugin_version": "0.28.28",
-  "filename": "K9_WORDPRESS_DIRECT_IMPORT_082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9.json",
-  "wordpress_json_sha256": "dd0841aec65e62479a1999acae9fd0990f2c855eea28f43509eb6ffe0f4a2bbb",
-  "article_count": 2,
-  "batch_sha256": "082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9",
+  "filename": "K9_WORDPRESS_DIRECT_IMPORT_7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1.json",
+  "wordpress_json_sha256": "abb27e9ee6755de53c881e45e511a16faa0071ac14b91d38c061aa51138f11de",
+  "article_count": 3,
+  "batch_sha256": "7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1",
   "publish_allowed": false
 }

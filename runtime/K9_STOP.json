@@ -2,12 +2,12 @@
   "contract": "K9_TERMINAL_RECEIPT_V1",
   "status": "STOP",
   "workflow": "RESEARCH_WRITE_LT68_PPM679_REPAIR_PSERC_ENDSTEMPEL_WORDPRESS_FILE",
-  "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9.json",
-  "final_sha256": "dd0841aec65e62479a1999acae9fd0990f2c855eea28f43509eb6ffe0f4a2bbb",
+  "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1.json",
+  "final_sha256": "abb27e9ee6755de53c881e45e511a16faa0071ac14b91d38c061aa51138f11de",
   "wordpress_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
   "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-  "endstempel_sha256": "d3de1b91363ca44072184b407fa41906172a4b4ccf8b9c92416495b4768586ce",
-  "batch_sha256": "082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9",
-  "article_count": 2,
+  "endstempel_sha256": "d7b5944879a22976c4c561455c3eeb1c877bede5d52b6d1416aae5502b3e6447",
+  "batch_sha256": "7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1",
+  "article_count": 3,
   "publish_allowed": false
 }
