@@ -18,9 +18,12 @@
         "fact_pack": {
           "article_type": "FAQ",
           "article_type_coverage": "PASS_FAQ",
+          "claim_register_hash": "947f37fc18f676928f9625d9a33e5c7243cd751d96c3c281978789840c7bb5e9",
           "claims": [
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "8b5165f0a430fd2001d16cc576781c75ce7b22ff38df4c3432d8299da7f708c6",
               "fact_id": "FACT-LONGIERPEITSCHE-001",
@@ -31,7 +34,9 @@
               "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "8712ddb0cf6ac4d05b833ecce9bcbb73865dedf55a4e6d9cfde763bf8db08517",
               "fact_id": "FACT-LONGIERPEITSCHE-002",
@@ -42,7 +47,9 @@
               "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "3911bf46df55a9dbc211f2a47d589abcd32155bc179d84eaba6a6a2753bff0c5",
               "fact_id": "FACT-LONGIERPEITSCHE-003",
@@ -53,7 +60,9 @@
               "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "9ed03115ea4703450d1a7efb2a787f9fdf472cd2320fcb390a8c26e0f1cab9e6",
               "fact_id": "FACT-LONGIERPEITSCHE-004",
@@ -64,7 +73,9 @@
               "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "47d42ccce3942232ffdb81544036c3ab14b066a9c0ea5884dc8f8b1da5213156",
               "fact_id": "FACT-LONGIERPEITSCHE-005",
@@ -75,7 +86,9 @@
               "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
             },
             {
-              "article_types": ["FAQ"],
+              "article_types": [
+                "FAQ"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "08fcb698ed85a1cf9f3e4ac4aec41f5c60ca8045c44bcc98e20b0e9041f27ac3",
               "fact_id": "FACT-LONGIERPEITSCHE-006",
@@ -97,23 +110,38 @@
             "FACT-LONGIERPEITSCHE-005",
             "FACT-LONGIERPEITSCHE-006"
           ],
+          "fact_pack_hash": "7ffa84534d1b6ce901ccbab144558ed175666d4820504b1043b9ed4585dbe39e",
           "fact_pack_id": "FP-K9-LONGIERPEITSCHE-20261001",
           "placeholder_content_status": "PASS",
           "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
           "required_block_coverage": "PASS",
+          "source_manifest_hash": "11c3c3f15582ac2e33355b89d52b7d8cae043aff33c2a6ab810927ef959d5af0",
           "status": "SOURCE_VERIFIED_PRODUCTION_READY",
           "table_evidence_coverage": "PASS",
           "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
-          "title_scope": "was_ist_eine_longierpeitsche",
-          "source_manifest_hash": "11c3c3f15582ac2e33355b89d52b7d8cae043aff33c2a6ab810927ef959d5af0",
-          "claim_register_hash": "947f37fc18f676928f9625d9a33e5c7243cd751d96c3c281978789840c7bb5e9",
-          "fact_pack_hash": "7ffa84534d1b6ce901ccbab144558ed175666d4820504b1043b9ed4585dbe39e"
+          "title_scope": "was_ist_eine_longierpeitsche"
         },
         "portal_links": [
-          {"anchor": "Training", "href": "/training/", "role": "parent_category", "section_id": "criteria"},
-          {"anchor": "Longieren", "href": "/training/training-longieren/", "role": "semantic_related", "section_id": "decision"},
-          {"anchor": "Longierpeitschen", "href": "/training/training-longieren/longierpeitschen/", "role": "further_information", "section_id": "further_information"}
+          {
+            "anchor": "Training",
+            "href": "/training/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Longieren",
+            "href": "/training/training-longieren/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Longierpeitschen",
+            "href": "/training/training-longieren/longierpeitschen/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
         ],
+        "product_sha256": "6a36169d1de68c1341b21fef7fb6e2631a26dd3299e705fa314b12c01b4605ba",
         "sources": [
           {
             "source_id": "SRC-FN-LONGIEREN-HILFEN-20261001",
@@ -135,8 +163,7 @@
             "title": "Should I carry or use a whip? | World Horse Welfare",
             "url": "https://eu.worldhorsewelfare.org/advice/should-i-carry-or-use-a-whip"
           }
-        ],
-        "product_sha256": "6a36169d1de68c1341b21fef7fb6e2631a26dd3299e705fa314b12c01b4605ba"
+        ]
       }
     }
   ],
