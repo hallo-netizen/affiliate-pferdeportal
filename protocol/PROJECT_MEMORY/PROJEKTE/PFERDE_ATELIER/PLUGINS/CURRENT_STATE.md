@@ -10,7 +10,7 @@ Dieser Block ist Inventar-/Betriebsreadback; Fach-/Releaseautorität bleibt im T
 - Keine neue Plugininstallation ist aus dieser Campus-Nachholung abzuleiten.
 
 STAND: 2026-10-01
-STATUS: AFFILIATE 6.72.171 LIVE + PERFORMANCE-PASS / STORAGE-DB-BACKUP-AUFRÄUMUNG AKTIVER NÄCHSTER BLOCK / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
+STATUS: AFFILIATE 6.72.171 LIVE / 6.72.172 IDEALO-STORAGE-HANDOFF VERIFIZIERT / BACKUPS BEREINIGT / DB-VERSCHLANKUNG OFFEN
 
 ## AUTORITÄT
 
@@ -103,6 +103,42 @@ GENAU EINE NEXT ACTION:
 `PURGE_WPVIVID_LOCAL_BACKUPS`.
 
 Danach: Affiliate-Temp-Zukunftsschutz + Alt-TMP-Bereinigung, Bildoptimierungsblock, anschließend DB-Retention/DB-Verschlankung und physische Reorganisation.
+
+## STORAGE-READBACK NACH WPVIVID-BEREINIGUNG + IDEALO-ZUKUNFTSSCHUTZ 2026-10-01
+
+Realer WordPress-Speicherexport `wordpress-speicheranalyse-20261001-114840.json`, vollständig `done=true`:
+- Gesamtscan: **1.475.744.045 Bytes**;
+- `wp-content/ai1wm-backups`: **675 Bytes**;
+- `wp-content/wpvividbackups`: **919.848 Bytes / 77 Dateien**, überwiegend verbleibende Logdateien; die alten Backup-Payloads sind physisch entfernt;
+- `wp-content/uploads`: **1.042.403.409 Bytes**;
+- fünf `ppar-idealo-feed-*.tmp`: weiterhin **749.350.091 Bytes**;
+- Datenbank weiterhin **1.561.968.640 Bytes**; Datenbank-Verschlankung ist noch nicht ausgeführt.
+
+Affiliate-Zentrale:
+- Live bleibt **6.72.171** bis zu neuem WordPress-Readback.
+- Kandidat **6.72.172** schließt ausschließlich den belegten Idealo-Temp-Retention-Gap im bestehenden Housekeeping.
+- lokaler Positiv-/Negativtest: PASS;
+- kompletter Housekeeping-Disk-Durchlauf: PASS;
+- exakter Handoff-Installer `AFFILIATE_ZENTRALE_6.72.172.zip`;
+- Handoff-SHA-256: `c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25`;
+- 27/27 Source-Identität PASS; Fresh-Unpack 27/27 PASS; PHP-Lint 21/21 PASS; Header/Runtime 6.72.172 PASS;
+- technische Autorität: `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`;
+- Repository-Binärsync bleibt wegen fehlendem bytegenauem Binär-Uploadweg formal offen; der geprüfte Handoff-Installer ist davon getrennt.
+- alte hardcodierte 6.72.170/171-CI-Jobs sind kein 6.72.172-Fehler: Governance/Source/Tree/Start PASS; Abbruch erst an fest verdrahtetem Versions-`grep`. Workflows wurden nicht umgebaut.
+
+Datenbank:
+- PSTE bleibt bis `PSTE_CONTEXT_REFRESH_COMPLETE` strikt unangetastet;
+- aktueller TEXT-Blocker ist weiterhin `PSTE_CONTEXT_REFRESH_NOT_COMPLETE`;
+- PSERC besitzt bereits Generation-Retention/Storage-Maintenance; keine neue Architektur erforderlich;
+- Affiliate-Housekeeping besitzt bereits bounded DB-Retention und eBay-Payload-Kompaktion; diese Pfade werden nach Idealo-Live-Readback im DB-Block gezielt verwendet/vermessen.
+
+ERSTER OFFENER PUNKT:
+**Den exakt geprüften Affiliate-Zentrale-6.72.172-Handoff installieren und den aktiven Versionsstand in WordPress zurücklesen.**
+
+GENAU EINE NEXT ACTION:
+`INSTALL_AND_READBACK_AFFILIATE_6_72_172`.
+
+Erst danach: zentralen Housekeeping-Lauf ausführen, Storage erneut messen und belegen, dass die fünf Idealo-TMPs verschwunden sind. Anschließend DB-Verschlankung: PSERC/Affiliate bereits mögliche Retention zuerst; PSTE erst nach Context-Refresh-COMPLETE; danach physische Tabellenreorganisation und erneute Speicher-/Performance-Messung.
 
 ## BILDOPTIMIERUNG ALS GEBUNDENER AUFRÄUMBLOCK 2026-10-01
 
