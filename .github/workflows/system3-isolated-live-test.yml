@@ -1,0 +1,86 @@
+name: System3 Isolated Live Test
+
+on:
+  pull_request:
+    paths:
+      - 'isolated_system3/**'
+      - '.github/workflows/system3-isolated-live-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-boundary-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prove exact Codex same-task return bytes
+        run: |
+          echo '0ade417f0b136c6047eb36693d2185934c356cfeaf1c65a161b83002a9022088  isolated_system3/codex_output.md' | sha256sum -c -
+          echo SYSTEM3_CODEX_RETURN_SHA_PASS
+      - name: Bind verified Codex output into runtime evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src = Path('isolated_system3/live_fixture/stage_evidence.json')
+          evidence = json.loads(src.read_text(encoding='utf-8'))
+          article = Path('isolated_system3/codex_output.md').read_text(encoding='utf-8')
+          evidence['DRAFT']['article'] = article
+          evidence['RULE_CHECK'] = {'status':'UNTRUSTED'}
+          evidence['QUALITY_CHECK'] = {'status':'UNTRUSTED'}
+          Path('/tmp/system3-runtime-evidence.json').write_text(json.dumps(evidence, ensure_ascii=False), encoding='utf-8')
+          print('SYSTEM3_CODEX_OUTPUT_BOUND_PASS')
+          PY
+      - name: Run isolated live boundary on Codex output
+        run: |
+          rm -rf isolated_system3/live_output
+          python -m isolated_system3.live_test \
+            --input isolated_system3/live_fixture/wordpress_input.json \
+            --evidence /tmp/system3-runtime-evidence.json \
+            --output isolated_system3/live_output/SYSTEM3-LIVE-001.json
+      - name: Prove output gate is non-writing and sealed
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from isolated_system3.engine import _sha256
+          p = Path('isolated_system3/live_output/SYSTEM3-LIVE-001.json')
+          assert p.is_file(), 'LIVE_OUTPUT_MISSING'
+          e = json.loads(p.read_text(encoding='utf-8'))
+          assert e['contract'] == 'SYSTEM3_WORDPRESS_DRAFT_ENVELOPE_V1'
+          assert e['publish_allowed'] is False
+          assert e['wordpress_write_allowed'] is False
+          supplied = e.pop('envelope_hash')
+          assert supplied == _sha256(e), 'LIVE_OUTPUT_HASH_FAIL'
+          assert e['result']['trace'] == ['INGRESS','CAPSULE','RESEARCH','FACT_CHECK','DRAFT','LANGUAGE','RULE_CHECK','QUALITY_CHECK','OUTPUT_GATE','DONE']
+          assert e['result']['article'] == Path('isolated_system3/codex_output.md').read_text(encoding='utf-8')
+          print('SYSTEM3_CODEX_OUTPUT_GATE_PASS')
+          PY
+      - name: Negative test forged PASS cannot bypass independent checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src = Path('/tmp/system3-runtime-evidence.json')
+          bad = json.loads(src.read_text(encoding='utf-8'))
+          bad['DRAFT']['article'] = '# Woran erkennt man eine passende Regendecke für ein Pferd?\n\nZu kurz.'
+          bad['RULE_CHECK'] = {'status':'PASS','all_rules_exact':True}
+          bad['QUALITY_CHECK'] = {'status':'PASS','quality_floor_pass':True}
+          Path('/tmp/system3-forged-pass.json').write_text(json.dumps(bad), encoding='utf-8')
+          PY
+          if python -m isolated_system3.live_test \
+            --input isolated_system3/live_fixture/wordpress_input.json \
+            --evidence /tmp/system3-forged-pass.json \
+            --output /tmp/should-not-exist.json; then
+            echo SYSTEM3_FORGED_PASS_BYPASS
+            exit 1
+          fi
+          test ! -e /tmp/should-not-exist.json
+          echo SYSTEM3_FORGED_PASS_BLOCKED

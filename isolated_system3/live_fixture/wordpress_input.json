@@ -1,0 +1,13 @@
+{
+  "article_id": "SYSTEM3-LIVE-001",
+  "article_type": "ratgeber",
+  "source_payload": {
+    "topic": "Woran erkennt man eine passende Regendecke für ein Pferd?",
+    "facts": [
+      {"name": "test_scope", "value": "isolated live-boundary test"},
+      {"name": "content_source", "value": "new independent fixture; no legacy article copied"}
+    ]
+  },
+  "ruleset_ref": "RULESET_EXTERNAL_IMMUTABLE_LIVE_TEST_V1",
+  "toolchain_ref": "TOOLCHAIN_LOCKED_LIVE_TEST_V1"
+}
