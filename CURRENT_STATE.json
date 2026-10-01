@@ -3,21 +3,44 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "BLOCKED_FINALIZER",
-  "operational_mode": "FINALIZER_BLOCKER_REPORT_ONLY",
+  "status": "STOP",
+  "operational_mode": "TERMINAL_CHAT_DELIVERY_ONLY",
   "active_job": null,
-  "first_open_blocker": {
-    "code": "FINALIZER_FAILED_BEFORE_TERMINAL_PACKAGE",
-    "evidence_run_id": "36872374157",
-    "detail": "Read the failed finalizer run. Do not repair or reroute without an explicit user instruction."
+  "first_open_blocker": null,
+  "next_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
+  "work_binding": {
+    "baseline": "LATEST_REAL_E2E_STOP",
+    "preserve_existing_station_products": true,
+    "preserve_quality_gates": [
+      "LT_6_8",
+      "PPM_6_7_9",
+      "PSERC",
+      "ENDSTEMPEL",
+      "WORDPRESS_VERIFY"
+    ],
+    "do_not_reopen_completed_article": true,
+    "publish_allowed": false
   },
-  "next_action": "REPORT_FINALIZER_BLOCKER_TO_USER",
-  "allowed_action": "REPORT_FINALIZER_BLOCKER_TO_USER_ONLY",
-  "route_lock": "FINALIZER_BLOCKER_REPORT_ONLY",
+  "terminal_evidence": {
+    "stop_ref": "runtime/K9_STOP.json",
+    "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9.json",
+    "final_sha256": "dd0841aec65e62479a1999acae9fd0990f2c855eea28f43509eb6ffe0f4a2bbb",
+    "batch_sha256": "082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9",
+    "article_count": 2,
+    "finalizer_run_id": "36872540706",
+    "trigger_head_sha": "79636dce76da22358d44677425a9485c5c907deb",
+    "wordpress_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
+    "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
+    "endstempel_sha256": "d3de1b91363ca44072184b407fa41906172a4b4ccf8b9c92416495b4768586ce"
+  },
+  "allowed_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY",
+  "route_lock": "TERMINAL_CHAT_DELIVERY_ONLY",
   "supervisor_actions_allowed": false,
-  "code_change_allowed": false,
   "repair_authorized": false,
   "all_other_actions": "DENY",
+  "code_change_allowed": false,
+  "chat_delivery_required": true,
+  "chat_delivery_manifest_ref": "runtime/CHAT_DELIVERY.json",
   "chat_may_route": false,
   "publish_allowed": false
 }

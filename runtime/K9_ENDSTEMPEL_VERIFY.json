@@ -1,8 +1,8 @@
 {
   "contract": "K9_ENDSTEMPEL_VERIFY_V1",
   "status": "PASS",
-  "final_sha256": "053a8acb1a94404134f13582545ef40ca3210cadc3b7f5c376aa7f50dfcd1242",
-  "article_count": 16,
-  "batch_sha256": "df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0",
+  "final_sha256": "d3de1b91363ca44072184b407fa41906172a4b4ccf8b9c92416495b4768586ce",
+  "article_count": 2,
+  "batch_sha256": "082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9",
   "publish_allowed": false
 }

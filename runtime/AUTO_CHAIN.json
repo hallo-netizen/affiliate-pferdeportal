@@ -1,9 +1,0 @@
-{
-  "contract": "K9_AUTO_CHAIN_V1",
-  "mode": "SERIAL_ONE_ITEM_EXISTING_STATIONS",
-  "publish_allowed": false,
-  "routing_authority": "K9_SYSTEM_ONLY",
-  "source_run_id": "36867265364",
-  "station_worker_may_select_route": false,
-  "status": "ACTIVE"
-}
