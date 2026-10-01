@@ -47,8 +47,8 @@ Der Fix fügt keine Datei-, DB-, Netzwerk-, Taxonomie- oder Portalstruktur-Abfra
 ## Source-Identität
 - trait-ppar-ebay.php SHA-256: `af9f8f1cfbb17f3794d65e5b53e62e329c7755f1162dc4794db1abfaf84701ce`
 - pferdeportal-affiliate-router.php SHA-256: `68fd0cdd512cc24120ac0ec39390b38820e633bf618f752a84b046b883657ca5`
-- readme.txt SHA-256: `f20de90340d4854fa7054ea2b25d8dca07356a82718d329e95b54d42780d6b94`
-- CURRENT_SOURCE_SHA256 SHA-256: `8fc51218e41a34595d49361bde91ee7283df90edb3bf3c869ea19973491e2821`
+- readme.txt SHA-256: `c2745e0057ba338681be8d0c13503474d3deeb2eff0ba19037ad9f5084d1b6c6`
+- CURRENT_SOURCE_SHA256 SHA-256: `e9c760bec991257fa99cc500e1dd305a5389de262baa714c1547ef036ccd821d`
 
 ## Offen
 Kompletter gebundener Release-Gate-Zyklus + WordPress/MariaDB/Frontend-Regression. Kein Installer vor diesem Gate.
