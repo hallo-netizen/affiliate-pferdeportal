@@ -10,6 +10,8 @@ k = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(k)
 ORIGINAL_CHAT_ENTRY = k.CHAT_ENTRY
 ORIGINAL_WRITING_RULES = k.WRITING_RULES
+ORIGINAL_CATEGORY_CONTEXT_PROVIDER = getattr(k, "CATEGORY_CONTEXT_PROVIDER", None)
+ORIGINAL_CATEGORY_BATCH_VALIDATOR = getattr(k, "CATEGORY_BATCH_VALIDATOR", None)
 
 class K9Tests(unittest.TestCase):
     def setUp(self):
@@ -23,29 +25,36 @@ class K9Tests(unittest.TestCase):
         k.CURRENT_STATE = root / "CURRENT_STATE.json"
         k.STATUS_FILE = root / "state/STATUS.json"
         k.WAREHOUSE = root / "warehouse"
-        k.PORTAL_BINDINGS = root / "contracts/K9_PORTAL_BINDINGS.json"
         k.WRITING_RULES = root / "contracts/K9_WRITING_RULES.json"
         k.write_json(k.WRITING_RULES, k.load_json(ORIGINAL_WRITING_RULES))
-        k.write_json(k.PORTAL_BINDINGS, {
-            "contract":"K9_PORTAL_BINDINGS_V1",
-            "bindings":{
-                "kat-a":{"portal_links":[
-                    {"anchor":"Root A","href":"/a/","role":"parent_category","section_id":"criteria"},
-                    {"anchor":"Mid A","href":"/a/mid/","role":"semantic_related","section_id":"decision"},
-                    {"anchor":"Leaf A","href":"/a/mid/leaf/","role":"further_information","section_id":"further_information"}
-                ]},
-                "kat-b":{"portal_links":[
-                    {"anchor":"Root B","href":"/b/","role":"parent_category","section_id":"criteria"},
-                    {"anchor":"Mid B","href":"/b/mid/","role":"semantic_related","section_id":"decision"},
-                    {"anchor":"Leaf B","href":"/b/mid/leaf/","role":"further_information","section_id":"further_information"}
-                ]},
-                "schermaschinen-beratung":{"portal_links":[
-                    {"anchor":"Ausrüstung","href":"/ausruestung/","role":"parent_category","section_id":"criteria"},
-                    {"anchor":"Pflegezubehör","href":"/ausruestung/ausruestung-pflegezubehoer/","role":"semantic_related","section_id":"decision"},
-                    {"anchor":"Schermaschinen","href":"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/","role":"further_information","section_id":"further_information"}
-                ]}
-            }
-        })
+        test_bindings={
+            "kat-a":{"portal_links":[
+                {"anchor":"Root A","href":"/a/","role":"parent_category","section_id":"criteria"},
+                {"anchor":"Mid A","href":"/a/mid/","role":"semantic_related","section_id":"decision"},
+                {"anchor":"Leaf A","href":"/a/mid/leaf/","role":"further_information","section_id":"further_information"}
+            ]},
+            "kat-b":{"portal_links":[
+                {"anchor":"Root B","href":"/b/","role":"parent_category","section_id":"criteria"},
+                {"anchor":"Mid B","href":"/b/mid/","role":"semantic_related","section_id":"decision"},
+                {"anchor":"Leaf B","href":"/b/mid/leaf/","role":"further_information","section_id":"further_information"}
+            ]},
+            "schermaschinen-beratung":{"portal_links":[
+                {"anchor":"Ausrüstung","href":"/ausruestung/","role":"parent_category","section_id":"criteria"},
+                {"anchor":"Pflegezubehör","href":"/ausruestung/ausruestung-pflegezubehoer/","role":"semantic_related","section_id":"decision"},
+                {"anchor":"Schermaschinen","href":"/ausruestung/ausruestung-pflegezubehoer/schermaschinen/","role":"further_information","section_id":"further_information"}
+            ]}
+        }
+        def test_category_context(metadata):
+            category=str(metadata.get("category") or "").strip()
+            if category not in test_bindings:
+                raise k.CategorySourceError("CENTRAL_CATEGORY_MISSING:"+category)
+            return test_bindings[category]
+        def test_category_batch(rows):
+            for row in rows:
+                test_category_context(row)
+            return {"status":"PASS","validated":len(rows)}
+        k.CATEGORY_CONTEXT_PROVIDER=test_category_context
+        k.CATEGORY_BATCH_VALIDATOR=test_category_batch
         k.write_json(k.LEDGER, {"contract":"K9_LEDGER_V1","generation":1,"items":[]})
         intake = root / "intake.json"
         k.write_json(intake, {
@@ -62,7 +71,27 @@ class K9Tests(unittest.TestCase):
         k.import_intake(intake)
 
     def tearDown(self):
+        if ORIGINAL_CATEGORY_CONTEXT_PROVIDER is not None:
+            k.CATEGORY_CONTEXT_PROVIDER = ORIGINAL_CATEGORY_CONTEXT_PROVIDER
+        if ORIGINAL_CATEGORY_BATCH_VALIDATOR is not None:
+            k.CATEGORY_BATCH_VALIDATOR = ORIGINAL_CATEGORY_BATCH_VALIDATOR
         self.tmp.cleanup()
+
+    def test_research_preflight_checks_all_pending_categories_before_first_job(self):
+        original = k.CATEGORY_BATCH_VALIDATOR
+        seen=[]
+        def validator(rows):
+            seen.extend(str(x.get("category")) for x in rows)
+            if "kat-b" in seen:
+                raise k.CategorySourceError("CENTRAL_CATEGORY_MISSING:kat-b")
+        k.CATEGORY_BATCH_VALIDATOR=validator
+        try:
+            with self.assertRaisesRegex(k.K9Error,"CENTRAL_CATEGORY_MISSING:kat-b"):
+                k.prepare("research",1)
+            self.assertEqual(seen,["kat-a","kat-b"])
+            self.assertFalse(k.CURRENT_JOB.exists())
+        finally:
+            k.CATEGORY_BATCH_VALIDATOR=original
 
     def submission(self, job, results, name="submission.json"):
         path = k.ROOT / name

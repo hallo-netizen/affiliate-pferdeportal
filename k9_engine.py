@@ -2,6 +2,12 @@
 import argparse, hashlib, json, re, sys, zipfile
 from pathlib import Path
 
+from k9_category_source import (
+    CategorySourceError,
+    portal_context as central_portal_context,
+    validate_batch as central_validate_batch,
+)
+
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
@@ -9,7 +15,6 @@ CHAT_ENTRY = ROOT / "runtime" / "CHAT_ENTRY.json"
 AUTO_CHAIN = ROOT / "runtime" / "AUTO_CHAIN.json"
 CURRENT_STATE = ROOT / "CURRENT_STATE.json"
 WORKER_CONTRACTS = ROOT / "contracts" / "K9_WORKER_CONTRACTS.json"
-PORTAL_BINDINGS = ROOT / "contracts" / "K9_PORTAL_BINDINGS.json"
 WRITING_RULES = ROOT / "contracts" / "K9_WRITING_RULES.json"
 STATUS_FILE = ROOT / "state" / "STATUS.json"
 WAREHOUSE = ROOT / "warehouse"
@@ -33,6 +38,9 @@ AUTO_CHAIN_ROUTING_RULE = "SYSTEM_GENERATES_NEXT_STATION_WORKER_NEVER_SELECTS_RO
 
 class K9Error(RuntimeError):
     pass
+
+CATEGORY_CONTEXT_PROVIDER = central_portal_context
+CATEGORY_BATCH_VALIDATOR = central_validate_batch
 
 def stable(obj):
     raw = json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
@@ -243,13 +251,12 @@ def worker_contract(station):
     return value
 
 def portal_binding(metadata):
-    data = load_json(PORTAL_BINDINGS)
-    if data.get("contract") != "K9_PORTAL_BINDINGS_V1":
-        raise K9Error("PORTAL_BINDING_FILE_INVALID")
-    category = str(metadata.get("category") or "").strip()
-    value = data.get("bindings", {}).get(category)
+    try:
+        value = CATEGORY_CONTEXT_PROVIDER(metadata)
+    except CategorySourceError as exc:
+        raise K9Error(str(exc)) from exc
     if not isinstance(value, dict):
-        raise K9Error("PORTAL_BINDING_MISSING:" + category)
+        raise K9Error("CENTRAL_CATEGORY_CONTEXT_INVALID")
     links = value.get("portal_links")
     if not isinstance(links, list) or len(links) != 3:
         raise K9Error("PORTAL_BINDING_LINK_COUNT_INVALID")
@@ -548,6 +555,13 @@ def prepare(station, batch_size, source_run_id="manual"):
         return {"status": "EXISTING_JOB_REUSED", "job": existing}
 
     data = ledger()
+    if station == "research":
+        pending_metadata = [x["metadata"] for x in data["items"] if eligible(x, "research")]
+        if pending_metadata:
+            try:
+                CATEGORY_BATCH_VALIDATOR(pending_metadata)
+            except CategorySourceError as exc:
+                raise K9Error(str(exc)) from exc
     items = [x for x in data["items"] if eligible(x, station)][:batch_size]
     if not items:
         return {"status": "NO_ELIGIBLE_WORK", "station": station, "report": status_report(data)}
