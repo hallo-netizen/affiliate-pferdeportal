@@ -428,6 +428,24 @@
         "performance_runtime_change": "NONE_OUTSIDE_CATALOG_VALIDATOR_BLOCK",
         "source_guard": "PASS"
       }
+    },
+    "reported_output_defects_readonly_diagnosis": {
+      "status": "CODE_PATHS_PROVEN_LIVE_STATE_BINDING_PENDING",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_output_defects_readonly_diagnosis_20261001.md",
+      "source_write": "BLOCKED_UNTIL_6_72_173_BOUND_GATE_CLOSES",
+      "ebay_private": {
+        "symptom": "HIVEPRESS_COUNTS_EBAY_PRIVATE_BUT_FRONTEND_SHOWS_NONE",
+        "proven_code_path": "EMPTY_OR_INCOMPLETE_PRIVATE_CANDIDATE_CAN_PASS_PUBLIC_VERIFY_AS_ZERO_AND_COMMIT_SAFE_CHECKPOINT",
+        "live_checkpoint_value": "NOT_YET_READ_BACK",
+        "planned_fix": "FAIL_CLOSED_CANDIDATE_GAP_CHECK_BEFORE_PUBLIC_CHECKPOINT_COMMIT"
+      },
+      "banner_assignment": {
+        "symptom": "SCHABRACKENDESIGNER_NOT_ASSIGNED_TO_SCHABRACKEN",
+        "proven_code_path": "GENERIC_CREATIVE_DOMAIN_GATE_RUNS_BEFORE_REAL_TARGET_RANKING",
+        "live_creative_record": "NOT_YET_READ_BACK",
+        "planned_fix": "EXACT_REAL_TARGET_MATCH_COUNTS_AS_CREATIVE_DOMAIN_EVIDENCE_AFTER_SAFETY_NEGATIVES"
+      },
+      "performance_rule": "NO_ROLLBACK_NO_OVERWRITE_6_72_171"
     }
   },
   "execution_state": {
