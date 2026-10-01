@@ -380,18 +380,30 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
     lt68_preflight=lt68_writer_preflight(markup,lt_jar)
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})
+    link_section_map={
+        "Beratung":{"parent_category":"criteria","semantic_related":"decision"},
+        "FAQ":{"parent_category":"answer","semantic_related":"details"},
+        "Pflege":{"parent_category":"steps","semantic_related":"risks"},
+        "Vergleich":{"parent_category":"options","semantic_related":"comparison"},
+    }
+    section_by_role=link_section_map.get(article_type)
+    if not isinstance(section_by_role,dict):
+        raise PackError("PORTAL_LINK_ARTICLE_TYPE_UNSUPPORTED:"+str(article_type))
     link_bindings=[]
     for x in portal_links:
         role=x["role"]
         if role not in LINK_REASON_BY_ROLE:
             raise PackError("PORTAL_LINK_ROLE_UNSUPPORTED:"+str(role))
+        section_id="further_information" if role=="further_information" else section_by_role.get(role)
+        if not section_id:
+            raise PackError("PORTAL_LINK_SECTION_MAPPING_MISSING:"+str(article_type)+":"+str(role))
         link_bindings.append({
             "active":True,
             "anchor":x["anchor"],
             "href":x["href"],
             "reason":LINK_REASON_BY_ROLE[role],
             "role":role,
-            "section_id":x["section_id"],
+            "section_id":section_id,
             "target_status":"publish",
             "target_type":"portal_route",
         })
