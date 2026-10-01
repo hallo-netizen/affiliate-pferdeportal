@@ -34,6 +34,34 @@ def one_product(job_item, key, contract):
         raise CheckError("K9_CHECK_PRODUCT_MISSING:"+contract)
     return product
 
+
+def reuse_or_run_lt(article, html, jar_path):
+    preflight=article.get("lt68_preflight_result")
+    if not isinstance(preflight,dict):
+        with tempfile.TemporaryDirectory(prefix="k9-check-lt68-") as td:
+            p=Path(td)/"article.html"
+            p.write_text(html,encoding="utf-8")
+            return k9_lt68.run(Path(jar_path),p)
+    article_sha=hashlib.sha256(html.encode("utf-8")).hexdigest()
+    evidence=preflight.get("language_evidence")
+    checked=k9_lt68.ppm_visible_language_text(html)
+    checked_sha=hashlib.sha256(checked.encode("utf-8")).hexdigest()
+    if preflight.get("contract")!="K9_LT68_RESULT_V1":
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_CONTRACT_INVALID")
+    if preflight.get("status")!="PASS" or int(preflight.get("finding_count") or 0)!=0:
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_NOT_PASS")
+    if preflight.get("engine")!=k9_lt68.ENGINE or preflight.get("jar_sha256")!=k9_lt68.LT_JAR_SHA256:
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_ENGINE_INVALID")
+    if preflight.get("article_sha256")!=article_sha or preflight.get("checked_text_sha256")!=checked_sha:
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_CONTENT_BINDING_INVALID")
+    if not isinstance(evidence,dict):
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_EVIDENCE_MISSING")
+    if evidence.get("content_hash")!=article_sha or evidence.get("checked_text_sha256")!=checked_sha:
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_EVIDENCE_BINDING_INVALID")
+    if evidence.get("engine")!=k9_lt68.ENGINE or int(evidence.get("unresolved_finding_count") or 0)!=0:
+        raise CheckError("K9_CHECK_LT_PREFLIGHT_EVIDENCE_STATUS_INVALID")
+    return json.loads(json.dumps(preflight))
+
 def run_job(job_path, jar_path, ppm_path):
     job=load_json(job_path)
     if job.get("contract")!="K9_JOB_V1" or job.get("status")!="OPEN" or job.get("station")!="check":
@@ -77,11 +105,9 @@ def run_job(job_path, jar_path, ppm_path):
         if article.get("writing_rules_sha256")!=writing_result.get("writing_rules_sha256"):
             raise CheckError("K9_CHECK_WRITING_RULES_BINDING_MISMATCH")
 
+        lt_result=reuse_or_run_lt(article,html,jar_path)
         with tempfile.TemporaryDirectory(prefix="k9-check-") as td:
             root=Path(td)
-            article_path=root/"article.html"
-            article_path.write_text(html,encoding="utf-8")
-            lt_result=k9_lt68.run(Path(jar_path),article_path)
             binding=ppm_item.get("quality_binding")
             if not isinstance(binding,dict):
                 raise CheckError("K9_CHECK_QUALITY_BINDING_MISSING")
