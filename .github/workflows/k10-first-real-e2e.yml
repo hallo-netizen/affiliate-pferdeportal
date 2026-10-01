@@ -31,7 +31,7 @@ jobs:
           test ! -e warehouse
           test ! -e final
           test ! -e submissions
-          echo '75fe2a0245c7b8d6fe3a8184da62602eb943a7fa00fc43c1798f7b1ed2dd31b0  real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json' | sha256sum -c -
+          echo 'fd071d1bddfd5b7826b209be442e2573ad55deb954e1fecc9b45f90df6ad3e32  real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json' | sha256sum -c -
           echo 'b9f29a1c54d91f7e0107eff838c2159f83516c5831a4247f61e80223858c2559  real_runs/20261001_longiergurt_anlegen/RESEARCH.json' | sha256sum -c -
           echo '9e0d23f5d696076205f1e5694bb91984d969e7a6cf3a64d9467988eb54c38387  engine/lt68_external.py' | sha256sum -c -
           echo '6562a5b2b16685bf7fe1300e1d64872bf4ace99bd53a9d860b8869e1ed2bdb38  engine/real_proof.py' | sha256sum -c -
