@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "GITHUB_MATERIALIZED_SELFTEST_PASS",
+  "status": "FIRST_REAL_K10_ARTICLE_PRE_RENDER_PASS_WORDPRESS_DRAFT_RENDER_PENDING",
   "k9_mutation_allowed": false,
   "k9_baseline_commit": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
   "verified_state": {
@@ -28,9 +28,33 @@
     "github_ppm_inventory": "PASS",
     "github_ppm_inventory_run_id": 36926140664,
     "github_isolation_boundary": "PASS",
-    "k9_branch_head_verified_unchanged": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555"
+    "k9_branch_head_verified_unchanged": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
+    "first_real_article": {
+      "title": "Wie lege ich einen Longiergurt an?",
+      "article_type": "FAQ",
+      "category_slug": "longiergurte-faq",
+      "wordpress_category_id": 847,
+      "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+      "github_real_run_id": 36932177611,
+      "article_rules": "84/84 PASS",
+      "system_rules": "PASS",
+      "language_tool_6_8": "PASS_0_FINDINGS",
+      "pserc_metadata_binding": "PASS",
+      "endstempel": "PASS",
+      "wordpress_import_file_verify": "PASS",
+      "package_integrity": "BLOCKED_ONLY_ON_4_REAL_WORDPRESS_RENDER_RULES",
+      "pending_render_rules": [
+        "wordpress.rendered_h1_integrity",
+        "wordpress.rendered_duplicate_heading_integrity",
+        "wordpress.rendered_adjacent_heading_integrity",
+        "integrity.rendered_evidence_class"
+      ],
+      "required_evidence_class": "SERVER_USER_TRIGGERED_TEST",
+      "required_capture_source": "HTTP_RESPONSE_AFTER_WORDPRESS_RENDER",
+      "publish_allowed": false
+    }
   },
-  "first_open_blocker": "FIRST_REAL_K10_E2E_ARTICLE_PROOF_NOT_YET_RUN",
-  "next_action": "RUN_FIRST_REAL_K10_E2E_ARTICLE_PROOF_WITHOUT_PUBLISHING_AND_COMPARE_GATE_AND_OUTPUT_PARITY_TO_K9",
+  "first_open_blocker": "REAL_WORDPRESS_DRAFT_RENDER_EVIDENCE_REQUIRED",
+  "next_action": "CREATE_REAL_UNPUBLISHED_WORDPRESS_DRAFT_FROM_VERIFIED_K10_IMPORT_THEN_CAPTURE_DESKTOP_AND_MOBILE_HTTP_RESPONSE_AFTER_WORDPRESS_RENDER_AND_RESUME_ONLY_THE_FOUR_RENDER_RECEIPTS",
   "publish_allowed": false
 }
