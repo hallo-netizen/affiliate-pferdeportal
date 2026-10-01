@@ -8,6 +8,8 @@ from k9_category_source import (
     validate_batch as central_validate_batch,
 )
 
+import k9_writer_plan
+
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "state" / "ledger.json"
 CURRENT_JOB = ROOT / "runtime" / "CURRENT_JOB.json"
@@ -372,7 +374,10 @@ def write_chat_entry(job):
         "complete_rule_application_required": bool(is_writer),
         "ppm_authoring_rules_required": bool(is_writer),
         "ppm_authoring_rules_source": ("job.items[*].input_products.ppm_authoring_rules" if is_writer else None),
-        "ppm_authoring_rules_sha256_required": bool(is_writer)
+        "ppm_authoring_rules_sha256_required": bool(is_writer),
+        "writer_acceptance_plan_required": bool(is_writer),
+        "writer_acceptance_plan_source": ("job.items[*].input_products.writer_acceptance_plan" if is_writer else None),
+        "writer_all_findings_required": bool(is_writer)
     }
     write_json(CHAT_ENTRY, entry)
     return entry
@@ -512,9 +517,11 @@ def _inputs_for(item, station):
         }, {}
     research, research_ref = _product_result(item, "research")
     if station == "write":
+        ppm_rules=ppm_authoring_rules(item["metadata"]["article_type"])
         return {
             "research": research,
-            "ppm_authoring_rules": ppm_authoring_rules(item["metadata"]["article_type"]),
+            "ppm_authoring_rules": ppm_rules,
+            "writer_acceptance_plan": k9_writer_plan.build(item["metadata"],research["research_product"],ppm_rules),
         }, {"research": research_ref}
 
     article_stage = "repair" if item.get("revision", 0) > 0 and item.get("products", {}).get("repair") else "write"
@@ -525,7 +532,9 @@ def _inputs_for(item, station):
     if station == "repair":
         check, check_ref = _product_result(item, "check")
         payload["failed_check"] = check
-        payload["ppm_authoring_rules"] = ppm_authoring_rules(item["metadata"]["article_type"])
+        ppm_rules=ppm_authoring_rules(item["metadata"]["article_type"])
+        payload["ppm_authoring_rules"] = ppm_rules
+        payload["writer_acceptance_plan"] = k9_writer_plan.build(item["metadata"],research["research_product"],ppm_rules)
         refs["failed_check"] = check_ref
     return payload, refs
 
@@ -827,6 +836,8 @@ def assert_execution_only_entry(job):
             raise K9Error("CHAT_ENTRY_WRITER_PREFLIGHT_GUARD_INVALID")
         if entry.get("ppm_authoring_rules_required") is not True or entry.get("ppm_authoring_rules_source")!="job.items[*].input_products.ppm_authoring_rules" or entry.get("ppm_authoring_rules_sha256_required") is not True:
             raise K9Error("CHAT_ENTRY_PPM_AUTHORING_RULE_BINDING_INVALID")
+        if entry.get("writer_acceptance_plan_required") is not True or entry.get("writer_acceptance_plan_source")!="job.items[*].input_products.writer_acceptance_plan" or entry.get("writer_all_findings_required") is not True:
+            raise K9Error("CHAT_ENTRY_WRITER_ACCEPTANCE_PLAN_INVALID")
         if job.get("station")=="repair" and entry.get("repair_scope_rule")!="REPAIR_ALL_REPORTED_FAILED_CHECK_FINDINGS_IN_ONE_PASS_ONLY":
             raise K9Error("CHAT_ENTRY_REPAIR_SCOPE_GUARD_INVALID")
 
