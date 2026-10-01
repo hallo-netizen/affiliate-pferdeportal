@@ -1,0 +1,54 @@
+{
+  "contract": "PFERDE_ATELIER_PLAN_B_SLIMLINE_CONTRACT_V1",
+  "mode": "SHADOW_ONLY_NOT_PRODUCTION_BOUND",
+  "single_door": true,
+  "guard": {
+    "semantics": "DUMB_EXACT_BINDING_ONLY",
+    "domain_logic_authority": "NONE",
+    "content_quality_design_authority": "NONE",
+    "workflow_choice_authority": "NONE",
+    "unknown_action_policy": "DENY",
+    "pass_transition": "AUTO_FIXED_NEXT",
+    "nonpass_transition": "STOP"
+  },
+  "chat": {
+    "workflow_navigation_authority": false,
+    "state_write_authority": false,
+    "next_step_choice_authority": false,
+    "repair_authority": false,
+    "publish_authority": false
+  },
+  "quality": {
+    "unchanged": true,
+    "required_stage_count": 12,
+    "required_stages": [
+      "research_fact_pack",
+      "textmachine_article_type_structure",
+      "table_contract",
+      "internal_links",
+      "languagetool",
+      "ppm",
+      "pserc",
+      "pste",
+      "duplicate_cannibalization",
+      "seo",
+      "design_format",
+      "publish_safety"
+    ]
+  },
+  "security_boundaries": [
+    "BOUND_INPUT",
+    "ITEM_QUALITY_PASS",
+    "FINAL_REVIEW",
+    "EXTERNAL_PSERC_FINALIZATION",
+    "GITHUB_ENDSTAMP"
+  ],
+  "phases": [
+    "ITEM_WORK",
+    "FINAL_REVIEW",
+    "EXTERNAL_FINALIZE",
+    "GITHUB_ENDSTAMP",
+    "COMPLETE"
+  ],
+  "publish_allowed": false
+}

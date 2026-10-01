@@ -1,0 +1,29 @@
+{
+  "contract": "PFERDE_ATELIER_PLAN_B_SNAPSHOT_V1",
+  "role": "INDEPENDENT_SHADOW_LINE",
+  "basis_main_sha": "c8a96e7a2f598de69134d90b143257c3559bc98a",
+  "branch": "plan-b/text-slimline-shadow-v1-20260907",
+  "draft_pr": 143,
+  "plan_a_reference_only": {
+    "draft_pr": 141,
+    "branch": "hobbyroom/b01-only-kiss-20260906",
+    "head_sha": "94917596adce04765380c60dd7ade0fb23793393",
+    "cross_import_allowed": false,
+    "cross_merge_allowed": false,
+    "automatic_fix_transfer_allowed": false
+  },
+  "hard_invariants": {
+    "quality_unchanged": true,
+    "content_unchanged": true,
+    "design_unchanged": true,
+    "security_level_not_reduced": true,
+    "single_door": true,
+    "dumb_guard": true,
+    "chat_straitjacket": true,
+    "automatic_fixed_transition_only": true,
+    "publish_allowed": false
+  },
+  "storage": "experiments/plan_b_text_slimline/",
+  "production_wiring": false,
+  "merge_allowed": false
+}
