@@ -1,0 +1,98 @@
+{
+  "contract": "K10_REAL_RESEARCH_V1",
+  "article_id": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+  "topic": "Wie lege ich einen Longiergurt an?",
+  "retrieved_at": "2026-10-01",
+  "sources": [
+    {
+      "source_id": "kraemer-longiergurte",
+      "title": "Krämer Pferdesport – Longiergurte",
+      "url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte"
+    },
+    {
+      "source_id": "ridersdeal-longiergurt",
+      "title": "RidersDeal – Longiergurt: Sitz, Größe und richtig anlegen",
+      "url": "https://www.ridersdeal.com/ratgeber/longiergurt"
+    },
+    {
+      "source_id": "fn-bodenarbeit",
+      "title": "Deutsche Reiterliche Vereinigung – Merkblatt Bodenarbeit",
+      "url": "https://www.pferd-aktuell.de/shop/downloadable/download/sample/sample_id/12/"
+    }
+  ],
+  "claims": [
+    {
+      "fact_id": "F1",
+      "source_title": "Krämer Pferdesport – Longiergurte",
+      "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+      "evidence_text_sha256": "b27c3b516fa0712f16ebd5a5b7c45c10d5c6d73e39e2036c1bec7e6ddb305914",
+      "statement": "Ein Longiergurt wird hinter dem Widerrist aufgelegt; er soll nicht auf oder gegen den Widerrist drücken und die Schulterbewegung nicht einschränken.",
+      "evidence_text": "Ein Longiergurt wird hinter dem Widerrist aufgelegt; er soll nicht auf oder gegen den Widerrist drücken und die Schulterbewegung nicht einschränken.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F2",
+      "source_title": "RidersDeal – Longiergurt: Sitz, Größe und richtig anlegen",
+      "source_url": "https://www.ridersdeal.com/ratgeber/longiergurt",
+      "evidence_text_sha256": "6e931d9899a0a786804478d90578eee9cf261f8f6263da11343948580cf89d79",
+      "statement": "Beim Anlegen werden Unterlage und Longiergurt mittig ausgerichtet, zunächst auf beiden Seiten locker geschlossen, nach einigen Schritten erneut kontrolliert und anschließend gleichmäßig nachgegurtet.",
+      "evidence_text": "Beim Anlegen werden Unterlage und Longiergurt mittig ausgerichtet, zunächst auf beiden Seiten locker geschlossen, nach einigen Schritten erneut kontrolliert und anschließend gleichmäßig nachgegurtet.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F3",
+      "source_title": "Krämer Pferdesport – Longiergurte",
+      "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+      "evidence_text_sha256": "18444adbf4fa458067ac5f4c925bbda783753ef6af5338391884eabbaae900cb",
+      "statement": "Ein korrekt passender Longiergurt soll stabil liegen und darf weder deutlich verrutschen noch unangenehmen Druck an Widerrist oder Rücken verursachen.",
+      "evidence_text": "Ein korrekt passender Longiergurt soll stabil liegen und darf weder deutlich verrutschen noch unangenehmen Druck an Widerrist oder Rücken verursachen.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F4",
+      "source_title": "Deutsche Reiterliche Vereinigung – Merkblatt Bodenarbeit",
+      "source_url": "https://www.pferd-aktuell.de/shop/downloadable/download/sample/sample_id/12/",
+      "evidence_text_sha256": "948b58d43e57b3bf78076908c061d4a48a09209b8fe34b17e14ac8acf49c8ebc",
+      "statement": "Ausrüstung in der Bodenarbeit muss pferdegerecht und richtig verschnallt sein.",
+      "evidence_text": "Ausrüstung in der Bodenarbeit muss pferdegerecht und richtig verschnallt sein.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F5",
+      "source_title": "RidersDeal – Longiergurt: Sitz, Größe und richtig anlegen",
+      "source_url": "https://www.ridersdeal.com/ratgeber/longiergurt",
+      "evidence_text_sha256": "ceb0163278bd4425aecc41404a93b8a1cd7ff183160f01294b55fca23e760861",
+      "statement": "Nach dem ersten Anlegen soll der Sitz in der Bewegung nochmals kontrolliert und bei seitlichem Verrutschen oder ungleichmäßiger Lage nachjustiert werden.",
+      "evidence_text": "Nach dem ersten Anlegen soll der Sitz in der Bewegung nochmals kontrolliert und bei seitlichem Verrutschen oder ungleichmäßiger Lage nachjustiert werden.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F6",
+      "source_title": "Krämer Pferdesport – Longiergurte",
+      "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+      "evidence_text_sha256": "02108b1e81ea7bee8fcf906b68514f600d102f6cbd59d30c499962b054cabab2",
+      "statement": "Die Ringe eines Longiergurtes dienen verschiedenen Verschnallungen; ihre Nutzung richtet sich nach Ausbildungsziel und geplanter Arbeit und setzt einen passenden, stabilen Gurtsitz voraus.",
+      "evidence_text": "Die Ringe eines Longiergurtes dienen verschiedenen Verschnallungen; ihre Nutzung richtet sich nach Ausbildungsziel und geplanter Arbeit und setzt einen passenden, stabilen Gurtsitz voraus.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  ],
+  "publish_allowed": false
+}

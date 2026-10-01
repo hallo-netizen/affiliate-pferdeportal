@@ -5,6 +5,8 @@ on:
     branches: [konzept10-rule-ledger-20261001]
     paths:
       - 'real_runs/20261001_longiergurt_anlegen/**'
+      - 'engine/lt68_external.py'
+      - 'engine/real_proof.py'
       - '.github/workflows/k10-first-real-e2e.yml'
   workflow_dispatch:
 
@@ -22,18 +24,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Assert K10 isolation and unpack exact real input
+      - name: Assert exact K10 real input snapshots
         shell: bash
         run: |
           set -euo pipefail
           test ! -e warehouse
           test ! -e final
           test ! -e submissions
-          mkdir -p /tmp/k10-real /tmp/k10-out
-          unzip -q real_runs/20261001_longiergurt_anlegen/k10_first_real_bundle.zip -d /tmp/k10-real
-          cp /tmp/k10-real/lt68_external.py engine/lt68_external.py
-          cp /tmp/k10-real/real_proof.py engine/real_proof.py
-          test "$(sha256sum real_runs/20261001_longiergurt_anlegen/k10_first_real_bundle.zip | awk '{print $1}')" = "7faaf8da25b3a3711783fe4f3a7685f82be3ae2c984e710c277c05a68ae8be5b"
+          echo '0d495c59bf97569711ebb68a5492d3a9b56538a27441d0547e299c39129af006  real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json' | sha256sum -c -
+          echo '19d067f286dc600937f05be0439dd2293ac8dab721c27decafdb3f05636e9295  real_runs/20261001_longiergurt_anlegen/RESEARCH.json' | sha256sum -c -
+          echo 'b621db8e5e849f49d2af4244f2175b951ffc2b30298f5e56b99b12b059daf8b8  engine/lt68_external.py' | sha256sum -c -
+          echo 'cec8a92fa3a31223abb8da359ddfa79cb2045fe6555381a6cc38074264e948f3  engine/real_proof.py' | sha256sum -c -
+          mkdir -p /tmp/k10-out
           echo K10_REAL_INPUT_SNAPSHOT_PASS
 
       - name: Bind current PSERC metadata read-only
@@ -87,7 +89,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python3 -m engine.lt68_external             /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar             /tmp/k10-real/ARTICLE_INPUT.json             /tmp/lt68.json
+          python3 -m engine.lt68_external             /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar             real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json             /tmp/lt68.json
           rc=$?
           echo "rc=$rc" >> "$GITHUB_OUTPUT"
           exit 0
@@ -97,7 +99,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          python3 -m engine.real_proof             /tmp/k10-real/ARTICLE_INPUT.json             /tmp/k10-real/RESEARCH.json             /tmp/pserc.json             /tmp/category.json             /tmp/lt68.json             /tmp/k10-out
+          python3 -m engine.real_proof             real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json             real_runs/20261001_longiergurt_anlegen/RESEARCH.json             /tmp/pserc.json             /tmp/category.json             /tmp/lt68.json             /tmp/k10-out
           rc=$?
           echo "rc=$rc" >> "$GITHUB_OUTPUT"
           exit 0
@@ -118,7 +120,7 @@ jobs:
         shell: bash
         run: |
           python3 - <<'PY'
-          import json, pathlib, sys
+          import json, pathlib
           lt=json.load(open('/tmp/lt68.json'))
           print('LT68_STATUS='+str(lt.get('status')))
           print('LT68_FINDINGS='+str(lt.get('finding_count')))
