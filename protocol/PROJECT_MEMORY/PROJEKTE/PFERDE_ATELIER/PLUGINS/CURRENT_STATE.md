@@ -57,9 +57,12 @@ Belastbarer Stand für PA-E-003:
 - Exact Local A-B Run `36839006440`: SUCCESS, funktionale 1:1-Gleichheit + Positiv/Negativ PASS, Median **393,694 ms → 365,895 ms**;
 - 2012er Snapshot Exact Local A-B Run `36839006513`: SUCCESS, identische Auswahl/HTML/Kandidatenzahlen, Gesamt **1248,595 ms → 249,597 ms (-80,01 %)**, Hub **-71,20 %**, Leaf/Unterkategorie **-89,87 %**;
 - final lokal frisch gebauter Installer: `AFFILIATE_ZENTRALE_6.72.171.zip`;
-- Installer SHA-256: `769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714`;
+- Installer SHA-256: `dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba`;
 - 27/27 Source-Dateien byteidentisch zum getesteten GitHub-Baum; PHP-Lint 21/21 PASS; Fresh-Unpack erneut PASS;
-- Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md`;
+- Exact-A/B-Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md`;
+- finaler Full-Gate Run `36842612555`: **SUCCESS**;
+- finale Release-Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672171_full_release_gate_20261001.md`;
+- technische Release-Autorität: **6.72.171 RELEASED / release_allowed=true**;
 - isolierter Repository-`CURRENT.zip`-Sync bleibt separat BLOCKED, solange der verfügbare Dokumentationsweg keinen bytegenauen Binärtransfer belegt; keine Ersatz-ZIP erfinden.
 
 ERSTER OFFENER PUNKT:
@@ -68,7 +71,7 @@ ERSTER OFFENER PUNKT:
 GENAU EINE NEXT ACTION:
 `INSTALL_AFFILIATE_ZENTRALE_6_72_171_AND_READBACK`.
 
-Den lokal exakt geprüften 6.72.171-Installer installieren und nur Version/Aktivstatus readbacken. Erst nach diesem Readback wird als Folgeaktion dieselbe reale Performance-Diagnose wiederholt; kein weiterer Codefix vor dem Live-Readback.
+Den final gegateten 6.72.171-Installer mit SHA-256 `dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba` installieren und nur Version/Aktivstatus readbacken. Erst nach diesem Readback wird als Folgeaktion dieselbe reale Performance-Diagnose wiederholt; kein weiterer Codefix vor dem Live-Readback.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
