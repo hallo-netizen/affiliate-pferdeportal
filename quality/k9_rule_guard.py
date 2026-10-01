@@ -5,7 +5,7 @@ from collections import Counter
 CONTRACT = "K9_WRITING_RULES_RESULT_V1"
 REQUIRED_GROUPS = {"ppm_679","lt_68","k9_structural","editorial_additive"}
 SUPPORTED_EDITORIAL_SCHEMA = {
-    "heading_policy": {"contract","target_keyword_exact_phrase_mode","exact_target_phrase_occurrences_max","exact_target_phrase_occurrences_min_when_no_title_collision","exact_target_phrase_occurrences_when_title_equals_target","significant_target_keyword_token_h2_occurrences_max","keyword_staccato_forbidden","phrase_family_repetition_forbidden","duplicate_normalized_h2_forbidden","repeated_heading_lead_word_max","natural_heading_surface_required","heading_content_relation_required","significant_keyword_stop_tokens"},
+    "heading_policy": {"contract","target_keyword_exact_phrase_mode","exact_target_phrase_occurrences_max","exact_target_phrase_occurrences_min_when_no_title_collision","exact_target_phrase_occurrences_when_title_equals_target","significant_target_keyword_token_h2_occurrences_max","keyword_staccato_forbidden","phrase_family_repetition_forbidden","duplicate_normalized_h2_forbidden","repeated_heading_lead_word_max","natural_heading_surface_required","heading_content_relation_required","significant_keyword_stop_tokens","preferred_h2_words_min","preferred_h2_words_max","hard_h2_words_max","hard_h2_chars_max","short_special_heading_exception","generic_filler_word_driven_heading_forbidden","grammatical_pattern_variety_required","section_specific_content_required"},
     "balance_policy": {"contract","hard_total_words_min","hard_total_words_max","preferred_total_words_min","preferred_total_words_max","normal_h2_section_min_words","normal_h2_section_max_words","normal_h2_longest_to_shortest_max_ratio","normal_h2_combined_minimum_ratio","exempt_blocks","table_may_fill_word_budget","further_information_maximum_words","further_information_may_fill_word_budget"},
     "conclusion_policy": {"contract","target_ratio_min","target_ratio_max","maximum_ratio","maximum_paragraphs","use_conclusion_to_fill_global_word_or_paragraph_floor"},
     "surface_policy": {"natural_german_required","artificial_generator_phrase_forbidden","keyword_staccato_forbidden","phrase_family_repetition_forbidden","template_spam_forbidden","forbidden_generator_phrases"},
@@ -91,6 +91,21 @@ def heading_findings(article_html,metadata,rules):
         count=sum(1 for row in rows if token in row["normalized"].split())
         if count>max_token:
             findings.append({"code":"K9_RULE_H2_KEYWORD_STACCATO","token":token,"actual":count,"maximum":max_token})
+    hard_words=int(cfg.get("hard_h2_words_max",9))
+    hard_chars=int(cfg.get("hard_h2_chars_max",65))
+    for row in rows:
+        heading=row["heading"]
+        word_count=len(_words(heading))
+        char_count=len(heading)
+        if word_count>hard_words or char_count>hard_chars:
+            findings.append({
+                "code":"K9_RULE_H2_TOO_LONG",
+                "heading":heading,
+                "word_count":word_count,
+                "maximum_words":hard_words,
+                "char_count":char_count,
+                "maximum_chars":hard_chars
+            })
     normalized=[row["normalized"] for row in rows if row["normalized"]]
     if cfg.get("duplicate_normalized_h2_forbidden") and len(normalized)!=len(set(normalized)):
         findings.append({"code":"K9_RULE_H2_DUPLICATE_NORMALIZED"})

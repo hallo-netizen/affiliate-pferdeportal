@@ -327,7 +327,15 @@
         "für",
         "pferd",
         "pferde"
-      ]
+      ],
+      "preferred_h2_words_min": 4,
+      "preferred_h2_words_max": 8,
+      "hard_h2_words_max": 9,
+      "hard_h2_chars_max": 65,
+      "short_special_heading_exception": true,
+      "generic_filler_word_driven_heading_forbidden": true,
+      "grammatical_pattern_variety_required": true,
+      "section_specific_content_required": true
     },
     "balance_policy": {
       "contract": "K8_SECTION_BALANCE_POLICY_V4",

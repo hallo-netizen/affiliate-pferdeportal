@@ -32,6 +32,25 @@ class K9CompleteRuleCoverageTest(unittest.TestCase):
         self.assertIn("K9_RULE_H2_KEYWORD_STACCATO",codes)
         self.assertIn("K9_RULE_H2_PHRASE_FAMILY_REPETITION",codes)
 
+    def test_h2_length_limit_rejects_overlong_heading(self):
+        html="""<article>
+        <h2>Welche Bewässerungsarten sich für unterschiedliche Reitplätze im täglichen Betrieb wirklich sinnvoll unterscheiden</h2>
+        <h2>Wasser von unten statt von oben</h2>
+        </article>"""
+        meta={"title":"Reitplatzbewässerung","target_keyword":"Reitplatzbewässerung"}
+        codes={x["code"] for x in k9_rule_guard.heading_findings(html,meta,self.rules)}
+        self.assertIn("K9_RULE_H2_TOO_LONG",codes)
+
+    def test_compact_natural_h2_stays_within_limit(self):
+        html="""<article>
+        <h2>Wie die Bewässerung von unten funktioniert</h2>
+        <h2>Wann ein Reitplatz dafür geeignet ist</h2>
+        <h2>Fazit</h2>
+        </article>"""
+        meta={"title":"Ist eine Reitplatzbewässerung von unten möglich?","target_keyword":"Reitplatzbewässerung von unten"}
+        findings=k9_rule_guard.heading_findings(html,meta,self.rules)
+        self.assertNotIn("K9_RULE_H2_TOO_LONG",{x["code"] for x in findings})
+
     def test_two_keyword_headings_do_not_trigger_staccato(self):
         html="""<article>
         <h2>Regendecken bei Wind einschätzen</h2>
