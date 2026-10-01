@@ -3,14 +3,15 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "STOP",
-  "operational_mode": "TERMINAL_CHAT_DELIVERY_ONLY",
+  "status": "MAINTENANCE_OPTIMIZATION",
+  "operational_mode": "POST_STOP_ROOT_CAUSE_OPTIMIZATION",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
+  "next_action": "IMPLEMENT_AND_TEST_WRITER_FIRST_PASS_AND_COLLECT_ALL_OPTIMIZATIONS",
   "work_binding": {
     "baseline": "LATEST_REAL_E2E_STOP",
     "preserve_existing_station_products": true,
+    "preserve_terminal_evidence": true,
     "preserve_quality_gates": [
       "LT_6_8",
       "PPM_6_7_9",
@@ -19,6 +20,12 @@
       "WORDPRESS_VERIFY"
     ],
     "do_not_reopen_completed_article": true,
+    "optimization_scope": [
+      "COMPILED_WRITER_ACCEPTANCE_PLAN",
+      "COLLECT_ALL_WRITER_FINDINGS",
+      "AUTHORITATIVE_DOMAIN_TERMS_FOR_LT68",
+      "TERMINAL_READINESS_PREFLIGHT"
+    ],
     "publish_allowed": false
   },
   "terminal_evidence": {
@@ -33,14 +40,13 @@
     "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
     "endstempel_sha256": "d7b5944879a22976c4c561455c3eeb1c877bede5d52b6d1416aae5502b3e6447"
   },
-  "allowed_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY",
-  "route_lock": "TERMINAL_CHAT_DELIVERY_ONLY",
-  "supervisor_actions_allowed": false,
+  "allowed_action": "CODE_AND_TEST_ROOT_CAUSE_OPTIMIZATIONS_ONLY",
+  "route_lock": "POST_STOP_MAINTENANCE_ONLY",
+  "supervisor_actions_allowed": true,
   "repair_authorized": false,
   "all_other_actions": "DENY",
-  "code_change_allowed": false,
-  "chat_delivery_required": true,
-  "chat_delivery_manifest_ref": "runtime/CHAT_DELIVERY.json",
+  "code_change_allowed": true,
+  "chat_delivery_required": false,
   "chat_may_route": false,
   "publish_allowed": false
 }
