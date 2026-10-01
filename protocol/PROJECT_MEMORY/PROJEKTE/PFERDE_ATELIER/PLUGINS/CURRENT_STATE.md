@@ -1,7 +1,7 @@
 # PLUGINS – CURRENT STATE
 
-STAND: 2026-09-30
-STATUS: REALER WORDPRESS-PLUGINSTAND 2026-09-30 NACHGEFÜHRT / AUFRÄUM- UND PERFORMANCEARBEIT AKTIV / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
+STAND: 2026-10-01
+STATUS: AFFILIATE-PERFORMANCE-ROOTFIX 6.72.171 LOKAL 1:1 BEWIESEN / INSTALLATION + REALER READBACK OFFEN / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
 
 ## AUTORITÄT
 
@@ -41,40 +41,34 @@ Dauerhafte Arbeitsentscheidung/Warum:
 
 Diese Current-Datei kopiert den Zielinhalt nicht; sie bindet nur aktuellen Stand, ersten offenen Punkt und NEXT ACTION.
 
-## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-09-30
+## AUFRÄUM-/PERFORMANCE-PRÜFSTAND 2026-10-01
 
-- Affiliate-Zentrale: real **6.72.167** aktiv; eBay OAuth erfolgreich geprüft. Technisch final freigegeben ist **6.72.168** als Recovery-Sweep-/Speicherpflege-Release; 6.72.167 bleibt bis Installation Live-Fallback.
-- PSTE: real **0.57.13** aktiv; WordPress-Live-Readback am 2026-09-30 bestätigt. Installationsquelle war der final geprüfte 0.57.13-Kandidat mit SHA-256 `bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248`. Die WordPress-Pluginliste bestätigt Version und Aktivstatus, nicht unabhängig den Live-Byte-Hash.
-- PSERC: real **0.28.27** aktiv; vorhandene Generation-Retention/Dry-Run-Speicherwartung reicht aus; **kein Update erforderlich**. Manueller Dry-Run + zustandsgebundene Bereinigung am 2026-09-30 erfolgreich: obsolete Generation `16115ea4650a8334d732`, 339 Options-Einträge, 7 Ready-Zeilen, 14 Candidate-Zeilen, 12,92 MB gelöscht; danach 3 geschützte Generationen, 0 weitere Löschkandidaten.
-- PPM: real **6.7.9** aktiv; kein belegter Speicherfehler und geringe aktuelle DB-Größe; **kein Update erforderlich**.
+Technische Affiliate-Releasewahrheit:
+`affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
+
+Belastbarer Stand für PA-E-003:
+- letzter ausdrücklich versionsbezogener WordPress-Readback: Affiliate-Zentrale **6.72.167 aktiv**; eBay-OAuth danach PASS;
+- danach wurden 6.72.168–6.72.170 im laufenden Performance-/Storage-Strang technisch weiterentwickelt und reale Performance-Diagnosen geliefert; die Diagnose-Datei selbst enthält keine Plugin-Versionsnummer und wird deshalb nicht als separater Versions-Readback ausgegeben;
+- realer Performancebefund vor 6.72.171: Top-Kategorie `/ausruestung/` ca. **1,65 s**, während tiefere Kategorieprodukt-Seiten wie Trensen/Pferdesättel weiter bei ca. **8,6–9,1 s** lagen;
+- Ursache: die drei öffentlichen `category_product_1..3`-Slots wiederholten große Teile desselben slot-unabhängigen Kontext-Rankings und mehrerer reiner Gates/Providerprüfungen;
+- **6.72.171** teilt dieses slot-unabhängige Ranking pro Seite und cached nur request-lokal reine, identische Prüfungen; Slot-Placement, Control/Veto, Provider-Mix und finale Auswahl bleiben pro Slot erhalten;
+- Source-Head des getesteten Runtime-Baums: `ad4db0c34552667a9d398d4b74cb7d8b7130f03a`;
+- Source-Manifest SHA-256: `5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4`;
+- Exact Local A-B Run `36839006440`: SUCCESS, funktionale 1:1-Gleichheit + Positiv/Negativ PASS, Median **393,694 ms → 365,895 ms**;
+- 2012er Snapshot Exact Local A-B Run `36839006513`: SUCCESS, identische Auswahl/HTML/Kandidatenzahlen, Gesamt **1248,595 ms → 249,597 ms (-80,01 %)**, Hub **-71,20 %**, Leaf/Unterkategorie **-89,87 %**;
+- final lokal frisch gebauter Installer: `AFFILIATE_ZENTRALE_6.72.171.zip`;
+- Installer SHA-256: `769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714`;
+- 27/27 Source-Dateien byteidentisch zum getesteten GitHub-Baum; PHP-Lint 21/21 PASS; Fresh-Unpack erneut PASS;
+- Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md`;
+- isolierter Repository-`CURRENT.zip`-Sync bleibt separat BLOCKED, solange der verfügbare Dokumentationsweg keinen bytegenauen Binärtransfer belegt; keine Ersatz-ZIP erfinden.
 
 ERSTER OFFENER PUNKT:
-PSTE 0.57.13 bleibt separat fortsetzbar; `Gesamtbestand neu abgleichen` nicht erneut verwenden. Die PSTE-Speicherpflege bleibt bis `COMPLETE` gesperrt.
-
-Affiliate-Zentrale Live-Stand: **6.72.167 aktiv**; eBay OAuth wurde danach vom Nutzer erfolgreich geprüft.
-
-Technischer Finalstand **6.72.168**:
-- 39 schreibende historische AFF039/AFF043/AFF044-Recovery-/Restore-Funktionen entfernt;
-- zugehörige Cron-/Init-/Admin-Post-/Kontrollzentrum-Pfade entfernt;
-- automatischer AFF043-Restore auf `init` vollständig entfernt;
-- read-only Incident-Fallback für `category_product_1..3` samt hashgebundenem 15.09.-Snapshot vorläufig bytegleich erhalten;
-- eBay-Core und eBay-Run gegenüber 6.72.167 bytegleich;
-- zentrale Speicherpflege mit bestehender eBay-Busy-Sperre erhalten;
-- neuer KISS-Pfad: `Affiliate-Zentrale → Steuerung & System → Speicherpflege → Speicherpflege jetzt starten`;
-- Speicherpflege entfernt zusätzlich obsolete AFF039/AFF043/AFF044-Recovery-State-Optionen/Locks/Schedules;
-- WordPress 7.1.2 + MariaDB Positiv-/Negativtest: **PASS**;
-- Full Gate Run `36734127128`: **SUCCESS**;
-- Final Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672168_full_release_gate_20260930.md`;
-- Source-Manifest-SHA-256: `c38f7eb13702f944fabdec2c8d5de85a7786e037d94201a1e12d2ed5ac128cd4`;
-- Final Installer: `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.168.zip`;
-- Installer-SHA-256: `60665d446f2b04fbfd807067fd34648c97a4d0c011c979c06f4095dfcb82d912`;
-- Release-Autorität: `RELEASED`, `release_allowed=true`;
-- 6.72.168 noch **nicht live installiert**.
+**6.72.171 ist noch nicht als reale WordPress-Installation readback-bestätigt.**
 
 GENAU EINE NEXT ACTION:
-`INSTALL_AFFILIATE_ZENTRALE_6_72_168_AND_READBACK`.
+`INSTALL_AFFILIATE_ZENTRALE_6_72_171_AND_READBACK`.
 
-Exakt den final gegateten Installer mit SHA-256 `60665d446f2b04fbfd807067fd34648c97a4d0c011c979c06f4095dfcb82d912` installieren. Danach ausschließlich Version/Aktivstatus readbacken. Anschließend: `Affiliate-Zentrale → Steuerung & System → Speicherpflege → Speicherpflege jetzt starten`. Den ausgegebenen Speicherpflege-Status und die Ergebniszahlen readbacken; erst danach dieselbe Datenbank-/Performance-Nachmessung durchführen.
+Den lokal exakt geprüften 6.72.171-Installer installieren und nur Version/Aktivstatus readbacken. Erst nach diesem Readback wird als Folgeaktion dieselbe reale Performance-Diagnose wiederholt; kein weiterer Codefix vor dem Live-Readback.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
