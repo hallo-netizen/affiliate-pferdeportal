@@ -2193,3 +2193,24 @@ Reale Messungen zeigten schnelle Oberkategorien, aber 8–9 Sekunden auf tiefere
 REGRESSIONSREGEL:
 Ein Performancefix an diesem Pfad darf nicht nur isoliert getestet werden. Pflicht ist ein exakter Vorher/Nachher-A-B-Lauf auf WordPress/MariaDB mit allen drei Produkt-Slots, Positiv-/Negativfällen, identischer fachlicher Ausgabe und gemessener Verbesserung.
 
+## PSTE-REUSE-001 – vorhandene automatische Editorialisierung bleibt Primärweg
+
+STAND:
+2026-10-01.
+
+WAS:
+Für die Verwertung gespeicherter PSTE-Begriffe wird **kein neuer Keyword→Titel-/Kategorie-Mechanismus** gebaut.
+Der bereits vorhandene Normal-Metadata-Pfad bleibt zuständig für Portalrelevanz, Familie/Gruppe, Intent, Artikeltyp, Titel, Zielkeyword und Zielkategorie.
+Retained Backlog und Normal Reentry müssen diesen vorhandenen Weg erneut nutzen.
+
+WARUM:
+Die Funktion ist im bestehenden PSTE bereits vorhanden; das aktuelle Problem ist die geringe Ausbeute bis AUTO_RESOLVED / planning-ready / READY.
+Ein zweiter Mechanismus würde KISS verletzen und könnte abweichende Titel-/Kategorieentscheidungen erzeugen.
+
+DELTA 0.57.18:
+Der lokal geprüfte Kandidat priorisiert lediglich sichere AUTO_REENTRY_ELIGIBLE-Sandbox-Kandidaten vor Retained Backlog und Provider-Recherche.
+Er ist ausdrücklich nur Teilfix und keine belegte Gesamtlösung der niedrigen Topic-Pool-Verwertbarkeit.
+
+NACHWEIS:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
+
