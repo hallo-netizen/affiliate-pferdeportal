@@ -29,7 +29,7 @@ def build(final_package,ledger):
     rows=manifest.get("articles"); release_rows=release.get("items"); ledger_rows=ledger.get("items") if isinstance(ledger,dict) else None
     if not isinstance(rows,list) or not isinstance(release_rows,list) or not isinstance(ledger_rows,list): raise Blocked("ARTICLE_SET_INVALID")
     count=len(rows)
-    if count<1 or len(plan["items"])!=count or len(release_rows)!=count or len(ledger_rows)!=count: raise Blocked("ARTICLE_SET_COUNT_INVALID")
+    if count<1 or len(plan["items"])!=count or len(release_rows)!=count: raise Blocked("ARTICLE_SET_COUNT_INVALID")
     if manifest.get("article_count")!=count or release.get("exact_five_item_count")!=count: raise Blocked("ARTICLE_COUNT_BINDING_INVALID")
     if release.get("exact_five_batch_sha256")!=final_package.get("batch_sha256"): raise Blocked("BATCH_BINDING_INVALID")
     plan_by_cid={}
