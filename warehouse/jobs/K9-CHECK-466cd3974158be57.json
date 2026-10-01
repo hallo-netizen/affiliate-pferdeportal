@@ -1,0 +1,547 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-b7c4255e949fbe8051150ba3"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "article": {
+          "job_id": "K9-WRITE-dafc5a820a1ebd11",
+          "path": "warehouse/write/K9-WRITE-dafc5a820a1ebd11.json",
+          "sha256": "61e2b8660b68afe1a044b74e855ae6367e58106920629c279c22d8b7fb1347d9"
+        },
+        "research": {
+          "job_id": "K9-RESEARCH-4d44ba6a08c085fe",
+          "path": "warehouse/research/K9-RESEARCH-4d44ba6a08c085fe.json",
+          "sha256": "e892993beb7a3f12a9db2feca4f2fd17816b205eecd5a44b953696bdc752aa21"
+        }
+      },
+      "input_products": {
+        "article": {
+          "article_product": {
+            "article_type": "FAQ",
+            "content_html": "<article data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"KZ_F2 KZ_F7\">Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.</p>\n<p data-fact-ids=\"KZ_F4 KZ_F5\">Vor dem Zirkel sollte das Pferd wichtige Bodenübungen bereits kennen. Der Einstieg an der Longe kann dann auf kleineren Zirkeln erfolgen, während du anfangs näher am Pferd bleibst und auch gerade Linien einbaust. So entsteht die Longenarbeit nicht aus einem abrupten Wechsel, sondern aus bekannten Grundlagen.</p>\n</section>\n\n<section data-block=\"answer\">\n<h2>Longieren mit Kappzaum ruhig beginnen</h2>\n<p data-fact-ids=\"KZ_F7 KZ_F1\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F7\" data-source-hash=\"5b8f825dd624fc33f32c412a63c7d3b45f74ee431a05a7e1a2869f33320777e7\" data-source-title=\"KRAEMER_LONGIEREN_20261001\"></span><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F1\" data-source-hash=\"84ac9373ca4d1136ef4dcb03691b5ae83f82724c8a6c118008c5cc4b327303b5\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Für die Longenarbeit wird die Longe grundsätzlich in den mittleren Ring des Kappzaums eingeschnallt. Über diesen Ring können Impulse auf Nase und Genick übertragen werden. Die Verbindung dient damit der feinen Steuerung, ohne dass dafür die Longe an einem Gebiss befestigt werden muss.</p>\n<p data-fact-ids=\"KZ_F5\">Beginne im Schritt auf einem eher kleineren Zirkel und halte eine konstante Verbindung zwischen Longe und Kappzaum. Am Anfang kannst du näher am Pferd mitgehen. Gerade Linien lassen sich zusätzlich einbauen, damit das Pferd nicht ausschließlich auf einer Kreislinie arbeiten muss.</p>\n<p data-fact-ids=\"KZ_F6\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F6\" data-source-hash=\"f7ed970fffac82cfcd0de46ca12c0efa6b7be4b972790dae987a479150fa8363\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Das Tempo wird erst später gesteigert. Hält das Pferd die gewünschte Dehnung im Schritt sicher, können kurze Trababschnitte folgen. Galopp ist erst vorgesehen, wenn Schritt und Trab ausbalanciert gelingen. Damit bleibt die Reihenfolge nachvollziehbar und jede neue Stufe baut auf der vorherigen auf.</p>\n</section>\n\n<section data-block=\"details\">\n<h2>Kappzaum passend und stabil einstellen</h2>\n<p data-fact-ids=\"KZ_F2\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F2\" data-source-hash=\"a48ef1ce575eb9c424e455262d0d16bcf1d49af45c073c97687d72bb59aee0b8\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Ein Kappzaum sollte bei der Longenarbeit stabil am Kopf liegen. Ein schlecht sitzender oder unter Zug verdrehter Zaum kann die Einwirkung verschlechtern und dem Pferd Probleme bereiten. Deshalb gehört die Passform vor der ersten Runde auf dem Zirkel zu den grundlegenden Kontrollen.</p>\n<p data-fact-ids=\"KZ_F3\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F3\" data-source-hash=\"f1edcf93c1437ac503e376c38881053fe80e535fd780e649dddb7f50071546a7\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Zwischen Jochbein und Nasenriemen sollten ungefähr zwei Finger Abstand bleiben. Außerdem sollte der mittlere Ring auf dem Nasenrücken bleiben. Diese beiden Punkte helfen dabei, den Sitz nicht nur nach dem ersten Eindruck, sondern anhand klarer Merkmale zu überprüfen.</p>\n<p data-fact-ids=\"KZ_F1 KZ_F7\">Die Position des mittleren Rings ist auch für die Longenführung wichtig. Dort wird die Longe befestigt, und über diesen Punkt werden die Impulse weitergegeben. Wenn du vor dem Training Sitz und Ringposition kontrollierst, verbindest du die Ausrüstungskontrolle direkt mit der späteren Einwirkung.</p>\n</section>\n\n<section data-block=\"criteria\">\n<h2>Training vor dem Zirkel vorbereiten</h2>\n<p data-fact-ids=\"KZ_F4\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F4\" data-source-hash=\"020a291a38db5ed6b08f84a0037bbf255bbaa250a5f1c3a576b8828051a08419\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Bevor das Pferd am Kappzaum longiert wird, sollte es grundlegende Bodenübungen beherrschen. Dazu gehören Antreten, Halten, Weichen, Rückwärtsrichten und Schritt-Trab-Übergänge. Diese Basis schafft einen bekannten Rahmen, bevor Abstand, Zirkel und Longenverbindung hinzukommen.</p>\n<p data-fact-ids=\"KZ_F4 KZ_F5\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F5\" data-source-hash=\"502dfd95e95057ba609153968be32644c0192477f158801c4d3b2fe5564f588a\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Sind diese Grundlagen sicher, kann der Einstieg an der Longe im Schritt erfolgen. Anfangs gehst du näher am Pferd mit und kombinierst kleinere Zirkel mit geraden Linien. Dadurch bleibt die Aufgabe überschaubar, während das Pferd die Verbindung zwischen bekannten Signalen und der neuen Arbeit am Kappzaum kennenlernt.</p>\n<p data-fact-ids=\"KZ_F5\">Der Beginn im Bereich <a data-link-role=\"parent_category\" href=\"/training/\">Training</a> muss deshalb nicht möglichst weit vom Pferd entfernt stattfinden. Die beschriebene Vorgehensweise erlaubt ausdrücklich, zunächst näher mitzugehen. Erst wenn der Ablauf stabiler wird, kann der Arbeitsrahmen erweitert werden. So bleibt die Vorbereitung eng mit dem tatsächlichen Einstieg verbunden.</p>\n</section>\n\n<section data-block=\"checklist\">\n<h2>Longieren vor jedem Start kontrollieren</h2>\n<p data-fact-ids=\"KZ_F2 KZ_F3\">Vor dem Start lohnt sich eine kurze Kontrolle von Sitz und Stabilität. Der Nasenriemen braucht Abstand zum Jochbein, der mittlere Ring soll auf dem Nasenrücken bleiben, und der Kappzaum darf sich unter der Einwirkung nicht ungünstig verdrehen.</p>\n<ul data-list=\"key_answers\">\n<li data-fact-ids=\"KZ_F3\"><strong>Abstand:</strong> etwa zwei Finger zwischen Jochbein und Nasenriemen</li>\n<li data-fact-ids=\"KZ_F3\"><strong>Ring:</strong> mittig auf dem Nasenrücken halten</li>\n<li data-fact-ids=\"KZ_F7\"><strong>Longe:</strong> am mittleren Ring einschnallen</li>\n<li data-fact-ids=\"KZ_F4\"><strong>Grundlagen:</strong> Bodenübungen vor dem Longieren sichern</li>\n<li data-fact-ids=\"KZ_F5\"><strong>Start:</strong> im Schritt und zunächst näher beginnen</li>\n</ul>\n<p data-fact-ids=\"KZ_F6\">Auch der nächste Trainingsschritt gehört in diese Kontrolle. Trab folgt erst, wenn die Arbeit im Schritt stabil gelingt. Der Galopp kommt noch später hinzu, wenn Schritt und Trab ausbalanciert funktionieren. So wird die Checkliste zugleich zu einer einfachen Reihenfolge für die Steigerung.</p>\n</section>\n\n<section data-block=\"decision\">\n<h2>Im Training Tempo schrittweise steigern</h2>\n<p data-fact-ids=\"KZ_F5 KZ_F6\">Nach dem ruhigen Einstieg im Schritt wird nicht sofort das gesamte Tempoangebot genutzt. Zunächst soll das Pferd die Dehnung im Schritt sicher halten. Danach können kurze Trababschnitte folgen. Hebt sich die Grundlage noch nicht stabil ab, bleibt der Schritt die sinnvollere Arbeitsstufe innerhalb dieser Reihenfolge.</p>\n<p data-fact-ids=\"KZ_F6\">Erst wenn Schritt und Trab ausbalanciert und über längere Abschnitte stabil gelingen, wird Galopp ergänzt. Die Reihenfolge lautet damit nicht einfach Schritt, Trab und Galopp nach Zeitplan. Entscheidend ist vielmehr, ob die vorherige Stufe bereits sicher funktioniert, bevor die nächste hinzukommt.</p>\n<p data-fact-ids=\"KZ_F5\">Beim <a data-link-role=\"semantic_related\" href=\"/training/training-longieren/\">Longieren</a> kann der Arbeitsrahmen ebenfalls mitwachsen. Zu Beginn sind kleinere Zirkel, Nähe zum Pferd und gerade Linien Teil des Einstiegs. Später kann der Zirkel vergrößert werden. Damit verändert sich nicht das Grundprinzip, sondern nur der Rahmen, in dem dieselbe Longenarbeit zunehmend selbstständiger ausgeführt wird.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Praxis im Training kompakt eingeordnet</h2>\n<p data-fact-ids=\"KZ_F3 KZ_F4 KZ_F5 KZ_F6\">Die Tabelle ordnet die wichtigsten Schritte vom Sitz des Kappzaums bis zur späteren Steigerung des Tempos.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>Schritt</th><th>Kontrolle</th><th>Nächste Stufe</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"KZ_F3\">Kappzaum</td><td data-fact-ids=\"KZ_F3\">stabiler Sitz</td><td data-fact-ids=\"KZ_F7\">Longe einhängen</td></tr>\n<tr><td data-fact-ids=\"KZ_F4\">Bodenarbeit</td><td data-fact-ids=\"KZ_F4\">Grundlagen sicher</td><td data-fact-ids=\"KZ_F5\">Schritt beginnen</td></tr>\n<tr><td data-fact-ids=\"KZ_F5\">Schritt</td><td data-fact-ids=\"KZ_F5\">Verbindung stabil</td><td data-fact-ids=\"KZ_F6\">kurz antraben</td></tr>\n<tr><td data-fact-ids=\"KZ_F6\">Trab</td><td data-fact-ids=\"KZ_F6\">ausbalanciert stabil</td><td data-fact-ids=\"KZ_F6\">Galopp ergänzen</td></tr>\n</tbody>\n</table>\n<p data-fact-ids=\"KZ_F5 KZ_F6\">Die Abfolge hält den Einstieg übersichtlich und macht deutlich, dass jede schnellere Gangart erst auf einer stabilen vorherigen Stufe aufbaut.</p>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"KZ_F2 KZ_F7\">Longieren mit Kappzaum beginnt mit der Ausrüstung: Der Zaum muss passend und stabil sitzen, und die Longe wird am mittleren Ring befestigt. Erst danach folgt die eigentliche Arbeit auf Abstand. So steht vor dem Zirkel zuerst eine klare und überprüfbare Grundlage.</p>\n<p data-fact-ids=\"KZ_F4 KZ_F5 KZ_F6\">Danach entscheidet die Reihenfolge. Bodenübungen sollten bereits sicher sein, der Einstieg erfolgt im Schritt, und Trab sowie Galopp werden erst ergänzt, wenn die vorherige Stufe stabil gelingt. Damit bleibt die Longenarbeit schrittweise aufgebaut und orientiert sich am tatsächlichen Stand des Pferdes.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"KZ_F2 KZ_F3\">Zur Ausrüstung führt der gebundene Bereich <a data-link-role=\"further_information\" href=\"/training/training-longieren/kappzaum/\">Kappzaum</a>.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+            "content_sha256": "962c8a3d2c09cea1036152ab250ebf0dac13707718a1ccc09aa9510918dca259",
+            "contract": "K9_ARTICLE_PRODUCT_V1",
+            "ppm_item": {
+              "article_type": "FAQ",
+              "canonical_article": {
+                "article_type": "FAQ",
+                "body_html": "<article data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"KZ_F2 KZ_F7\">Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.</p>\n<p data-fact-ids=\"KZ_F4 KZ_F5\">Vor dem Zirkel sollte das Pferd wichtige Bodenübungen bereits kennen. Der Einstieg an der Longe kann dann auf kleineren Zirkeln erfolgen, während du anfangs näher am Pferd bleibst und auch gerade Linien einbaust. So entsteht die Longenarbeit nicht aus einem abrupten Wechsel, sondern aus bekannten Grundlagen.</p>\n</section>\n\n<section data-block=\"answer\">\n<h2>Longieren mit Kappzaum ruhig beginnen</h2>\n<p data-fact-ids=\"KZ_F7 KZ_F1\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F7\" data-source-hash=\"5b8f825dd624fc33f32c412a63c7d3b45f74ee431a05a7e1a2869f33320777e7\" data-source-title=\"KRAEMER_LONGIEREN_20261001\"></span><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F1\" data-source-hash=\"84ac9373ca4d1136ef4dcb03691b5ae83f82724c8a6c118008c5cc4b327303b5\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Für die Longenarbeit wird die Longe grundsätzlich in den mittleren Ring des Kappzaums eingeschnallt. Über diesen Ring können Impulse auf Nase und Genick übertragen werden. Die Verbindung dient damit der feinen Steuerung, ohne dass dafür die Longe an einem Gebiss befestigt werden muss.</p>\n<p data-fact-ids=\"KZ_F5\">Beginne im Schritt auf einem eher kleineren Zirkel und halte eine konstante Verbindung zwischen Longe und Kappzaum. Am Anfang kannst du näher am Pferd mitgehen. Gerade Linien lassen sich zusätzlich einbauen, damit das Pferd nicht ausschließlich auf einer Kreislinie arbeiten muss.</p>\n<p data-fact-ids=\"KZ_F6\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F6\" data-source-hash=\"f7ed970fffac82cfcd0de46ca12c0efa6b7be4b972790dae987a479150fa8363\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Das Tempo wird erst später gesteigert. Hält das Pferd die gewünschte Dehnung im Schritt sicher, können kurze Trababschnitte folgen. Galopp ist erst vorgesehen, wenn Schritt und Trab ausbalanciert gelingen. Damit bleibt die Reihenfolge nachvollziehbar und jede neue Stufe baut auf der vorherigen auf.</p>\n</section>\n\n<section data-block=\"details\">\n<h2>Kappzaum passend und stabil einstellen</h2>\n<p data-fact-ids=\"KZ_F2\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F2\" data-source-hash=\"a48ef1ce575eb9c424e455262d0d16bcf1d49af45c073c97687d72bb59aee0b8\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Ein Kappzaum sollte bei der Longenarbeit stabil am Kopf liegen. Ein schlecht sitzender oder unter Zug verdrehter Zaum kann die Einwirkung verschlechtern und dem Pferd Probleme bereiten. Deshalb gehört die Passform vor der ersten Runde auf dem Zirkel zu den grundlegenden Kontrollen.</p>\n<p data-fact-ids=\"KZ_F3\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F3\" data-source-hash=\"f1edcf93c1437ac503e376c38881053fe80e535fd780e649dddb7f50071546a7\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Zwischen Jochbein und Nasenriemen sollten ungefähr zwei Finger Abstand bleiben. Außerdem sollte der mittlere Ring auf dem Nasenrücken bleiben. Diese beiden Punkte helfen dabei, den Sitz nicht nur nach dem ersten Eindruck, sondern anhand klarer Merkmale zu überprüfen.</p>\n<p data-fact-ids=\"KZ_F1 KZ_F7\">Die Position des mittleren Rings ist auch für die Longenführung wichtig. Dort wird die Longe befestigt, und über diesen Punkt werden die Impulse weitergegeben. Wenn du vor dem Training Sitz und Ringposition kontrollierst, verbindest du die Ausrüstungskontrolle direkt mit der späteren Einwirkung.</p>\n</section>\n\n<section data-block=\"criteria\">\n<h2>Training vor dem Zirkel vorbereiten</h2>\n<p data-fact-ids=\"KZ_F4\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F4\" data-source-hash=\"020a291a38db5ed6b08f84a0037bbf255bbaa250a5f1c3a576b8828051a08419\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Bevor das Pferd am Kappzaum longiert wird, sollte es grundlegende Bodenübungen beherrschen. Dazu gehören Antreten, Halten, Weichen, Rückwärtsrichten und Schritt-Trab-Übergänge. Diese Basis schafft einen bekannten Rahmen, bevor Abstand, Zirkel und Longenverbindung hinzukommen.</p>\n<p data-fact-ids=\"KZ_F4 KZ_F5\"><span class=\"ppm-source-trace\" data-fact-id=\"KZ_F5\" data-source-hash=\"502dfd95e95057ba609153968be32644c0192477f158801c4d3b2fe5564f588a\" data-source-title=\"CAVALLO_KAPPZAUM_20260731\"></span>Sind diese Grundlagen sicher, kann der Einstieg an der Longe im Schritt erfolgen. Anfangs gehst du näher am Pferd mit und kombinierst kleinere Zirkel mit geraden Linien. Dadurch bleibt die Aufgabe überschaubar, während das Pferd die Verbindung zwischen bekannten Signalen und der neuen Arbeit am Kappzaum kennenlernt.</p>\n<p data-fact-ids=\"KZ_F5\">Der Beginn im Bereich <a data-link-role=\"parent_category\" href=\"/training/\">Training</a> muss deshalb nicht möglichst weit vom Pferd entfernt stattfinden. Die beschriebene Vorgehensweise erlaubt ausdrücklich, zunächst näher mitzugehen. Erst wenn der Ablauf stabiler wird, kann der Arbeitsrahmen erweitert werden. So bleibt die Vorbereitung eng mit dem tatsächlichen Einstieg verbunden.</p>\n</section>\n\n<section data-block=\"checklist\">\n<h2>Longieren vor jedem Start kontrollieren</h2>\n<p data-fact-ids=\"KZ_F2 KZ_F3\">Vor dem Start lohnt sich eine kurze Kontrolle von Sitz und Stabilität. Der Nasenriemen braucht Abstand zum Jochbein, der mittlere Ring soll auf dem Nasenrücken bleiben, und der Kappzaum darf sich unter der Einwirkung nicht ungünstig verdrehen.</p>\n<ul data-list=\"key_answers\">\n<li data-fact-ids=\"KZ_F3\"><strong>Abstand:</strong> etwa zwei Finger zwischen Jochbein und Nasenriemen</li>\n<li data-fact-ids=\"KZ_F3\"><strong>Ring:</strong> mittig auf dem Nasenrücken halten</li>\n<li data-fact-ids=\"KZ_F7\"><strong>Longe:</strong> am mittleren Ring einschnallen</li>\n<li data-fact-ids=\"KZ_F4\"><strong>Grundlagen:</strong> Bodenübungen vor dem Longieren sichern</li>\n<li data-fact-ids=\"KZ_F5\"><strong>Start:</strong> im Schritt und zunächst näher beginnen</li>\n</ul>\n<p data-fact-ids=\"KZ_F6\">Auch der nächste Trainingsschritt gehört in diese Kontrolle. Trab folgt erst, wenn die Arbeit im Schritt stabil gelingt. Der Galopp kommt noch später hinzu, wenn Schritt und Trab ausbalanciert funktionieren. So wird die Checkliste zugleich zu einer einfachen Reihenfolge für die Steigerung.</p>\n</section>\n\n<section data-block=\"decision\">\n<h2>Im Training Tempo schrittweise steigern</h2>\n<p data-fact-ids=\"KZ_F5 KZ_F6\">Nach dem ruhigen Einstieg im Schritt wird nicht sofort das gesamte Tempoangebot genutzt. Zunächst soll das Pferd die Dehnung im Schritt sicher halten. Danach können kurze Trababschnitte folgen. Hebt sich die Grundlage noch nicht stabil ab, bleibt der Schritt die sinnvollere Arbeitsstufe innerhalb dieser Reihenfolge.</p>\n<p data-fact-ids=\"KZ_F6\">Erst wenn Schritt und Trab ausbalanciert und über längere Abschnitte stabil gelingen, wird Galopp ergänzt. Die Reihenfolge lautet damit nicht einfach Schritt, Trab und Galopp nach Zeitplan. Entscheidend ist vielmehr, ob die vorherige Stufe bereits sicher funktioniert, bevor die nächste hinzukommt.</p>\n<p data-fact-ids=\"KZ_F5\">Beim <a data-link-role=\"semantic_related\" href=\"/training/training-longieren/\">Longieren</a> kann der Arbeitsrahmen ebenfalls mitwachsen. Zu Beginn sind kleinere Zirkel, Nähe zum Pferd und gerade Linien Teil des Einstiegs. Später kann der Zirkel vergrößert werden. Damit verändert sich nicht das Grundprinzip, sondern nur der Rahmen, in dem dieselbe Longenarbeit zunehmend selbstständiger ausgeführt wird.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Praxis im Training kompakt eingeordnet</h2>\n<p data-fact-ids=\"KZ_F3 KZ_F4 KZ_F5 KZ_F6\">Die Tabelle ordnet die wichtigsten Schritte vom Sitz des Kappzaums bis zur späteren Steigerung des Tempos.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>Schritt</th><th>Kontrolle</th><th>Nächste Stufe</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"KZ_F3\">Kappzaum</td><td data-fact-ids=\"KZ_F3\">stabiler Sitz</td><td data-fact-ids=\"KZ_F7\">Longe einhängen</td></tr>\n<tr><td data-fact-ids=\"KZ_F4\">Bodenarbeit</td><td data-fact-ids=\"KZ_F4\">Grundlagen sicher</td><td data-fact-ids=\"KZ_F5\">Schritt beginnen</td></tr>\n<tr><td data-fact-ids=\"KZ_F5\">Schritt</td><td data-fact-ids=\"KZ_F5\">Verbindung stabil</td><td data-fact-ids=\"KZ_F6\">kurz antraben</td></tr>\n<tr><td data-fact-ids=\"KZ_F6\">Trab</td><td data-fact-ids=\"KZ_F6\">ausbalanciert stabil</td><td data-fact-ids=\"KZ_F6\">Galopp ergänzen</td></tr>\n</tbody>\n</table>\n<p data-fact-ids=\"KZ_F5 KZ_F6\">Die Abfolge hält den Einstieg übersichtlich und macht deutlich, dass jede schnellere Gangart erst auf einer stabilen vorherigen Stufe aufbaut.</p>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"KZ_F2 KZ_F7\">Longieren mit Kappzaum beginnt mit der Ausrüstung: Der Zaum muss passend und stabil sitzen, und die Longe wird am mittleren Ring befestigt. Erst danach folgt die eigentliche Arbeit auf Abstand. So steht vor dem Zirkel zuerst eine klare und überprüfbare Grundlage.</p>\n<p data-fact-ids=\"KZ_F4 KZ_F5 KZ_F6\">Danach entscheidet die Reihenfolge. Bodenübungen sollten bereits sicher sein, der Einstieg erfolgt im Schritt, und Trab sowie Galopp werden erst ergänzt, wenn die vorherige Stufe stabil gelingt. Damit bleibt die Longenarbeit schrittweise aufgebaut und orientiert sich am tatsächlichen Stand des Pferdes.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"KZ_F2 KZ_F3\">Zur Ausrüstung führt der gebundene Bereich <a data-link-role=\"further_information\" href=\"/training/training-longieren/kappzaum/\">Kappzaum</a>.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+                "body_html_sha256": "962c8a3d2c09cea1036152ab250ebf0dac13707718a1ccc09aa9510918dca259",
+                "body_text": "Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert. Vor dem Zirkel sollte das Pferd wichtige Bodenübungen bereits kennen. Der Einstieg an der Longe kann dann auf kleineren Zirkeln erfolgen, während du anfangs näher am Pferd bleibst und auch gerade Linien einbaust. So entsteht die Longenarbeit nicht aus einem abrupten Wechsel, sondern aus bekannten Grundlagen. Longieren mit Kappzaum ruhig beginnen Für die Longenarbeit wird die Longe grundsätzlich in den mittleren Ring des Kappzaums eingeschnallt. Über diesen Ring können Impulse auf Nase und Genick übertragen werden. Die Verbindung dient damit der feinen Steuerung, ohne dass dafür die Longe an einem Gebiss befestigt werden muss. Beginne im Schritt auf einem eher kleineren Zirkel und halte eine konstante Verbindung zwischen Longe und Kappzaum. Am Anfang kannst du näher am Pferd mitgehen. Gerade Linien lassen sich zusätzlich einbauen, damit das Pferd nicht ausschließlich auf einer Kreislinie arbeiten muss. Das Tempo wird erst später gesteigert. Hält das Pferd die gewünschte Dehnung im Schritt sicher, können kurze Trababschnitte folgen. Galopp ist erst vorgesehen, wenn Schritt und Trab ausbalanciert gelingen. Damit bleibt die Reihenfolge nachvollziehbar und jede neue Stufe baut auf der vorherigen auf. Kappzaum passend und stabil einstellen Ein Kappzaum sollte bei der Longenarbeit stabil am Kopf liegen. Ein schlecht sitzender oder unter Zug verdrehter Zaum kann die Einwirkung verschlechtern und dem Pferd Probleme bereiten. Deshalb gehört die Passform vor der ersten Runde auf dem Zirkel zu den grundlegenden Kontrollen. Zwischen Jochbein und Nasenriemen sollten ungefähr zwei Finger Abstand bleiben. Außerdem sollte der mittlere Ring auf dem Nasenrücken bleiben. Diese beiden Punkte helfen dabei, den Sitz nicht nur nach dem ersten Eindruck, sondern anhand klarer Merkmale zu überprüfen. Die Position des mittleren Rings ist auch für die Longenführung wichtig. Dort wird die Longe befestigt, und über diesen Punkt werden die Impulse weitergegeben. Wenn du vor dem Training Sitz und Ringposition kontrollierst, verbindest du die Ausrüstungskontrolle direkt mit der späteren Einwirkung. Training vor dem Zirkel vorbereiten Bevor das Pferd am Kappzaum longiert wird, sollte es grundlegende Bodenübungen beherrschen. Dazu gehören Antreten, Halten, Weichen, Rückwärtsrichten und Schritt-Trab-Übergänge. Diese Basis schafft einen bekannten Rahmen, bevor Abstand, Zirkel und Longenverbindung hinzukommen. Sind diese Grundlagen sicher, kann der Einstieg an der Longe im Schritt erfolgen. Anfangs gehst du näher am Pferd mit und kombinierst kleinere Zirkel mit geraden Linien. Dadurch bleibt die Aufgabe überschaubar, während das Pferd die Verbindung zwischen bekannten Signalen und der neuen Arbeit am Kappzaum kennenlernt. Der Beginn im Bereich Training muss deshalb nicht möglichst weit vom Pferd entfernt stattfinden. Die beschriebene Vorgehensweise erlaubt ausdrücklich, zunächst näher mitzugehen. Erst wenn der Ablauf stabiler wird, kann der Arbeitsrahmen erweitert werden. So bleibt die Vorbereitung eng mit dem tatsächlichen Einstieg verbunden. Longieren vor jedem Start kontrollieren Vor dem Start lohnt sich eine kurze Kontrolle von Sitz und Stabilität. Der Nasenriemen braucht Abstand zum Jochbein, der mittlere Ring soll auf dem Nasenrücken bleiben, und der Kappzaum darf sich unter der Einwirkung nicht ungünstig verdrehen. Abstand: etwa zwei Finger zwischen Jochbein und Nasenriemen Ring: mittig auf dem Nasenrücken halten Longe: am mittleren Ring einschnallen Grundlagen: Bodenübungen vor dem Longieren sichern Start: im Schritt und zunächst näher beginnen Auch der nächste Trainingsschritt gehört in diese Kontrolle. Trab folgt erst, wenn die Arbeit im Schritt stabil gelingt. Der Galopp kommt noch später hinzu, wenn Schritt und Trab ausbalanciert funktionieren. So wird die Checkliste zugleich zu einer einfachen Reihenfolge für die Steigerung. Im Training Tempo schrittweise steigern Nach dem ruhigen Einstieg im Schritt wird nicht sofort das gesamte Tempoangebot genutzt. Zunächst soll das Pferd die Dehnung im Schritt sicher halten. Danach können kurze Trababschnitte folgen. Hebt sich die Grundlage noch nicht stabil ab, bleibt der Schritt die sinnvollere Arbeitsstufe innerhalb dieser Reihenfolge. Erst wenn Schritt und Trab ausbalanciert und über längere Abschnitte stabil gelingen, wird Galopp ergänzt. Die Reihenfolge lautet damit nicht einfach Schritt, Trab und Galopp nach Zeitplan. Entscheidend ist vielmehr, ob die vorherige Stufe bereits sicher funktioniert, bevor die nächste hinzukommt. Beim Longieren kann der Arbeitsrahmen ebenfalls mitwachsen. Zu Beginn sind kleinere Zirkel, Nähe zum Pferd und gerade Linien Teil des Einstiegs. Später kann der Zirkel vergrößert werden. Damit verändert sich nicht das Grundprinzip, sondern nur der Rahmen, in dem dieselbe Longenarbeit zunehmend selbstständiger ausgeführt wird. Praxis im Training kompakt eingeordnet Die Tabelle ordnet die wichtigsten Schritte vom Sitz des Kappzaums bis zur späteren Steigerung des Tempos. Schritt Kontrolle Nächste Stufe Kappzaum stabiler Sitz Longe einhängen Bodenarbeit Grundlagen sicher Schritt beginnen Schritt Verbindung stabil kurz antraben Trab ausbalanciert stabil Galopp ergänzen Die Abfolge hält den Einstieg übersichtlich und macht deutlich, dass jede schnellere Gangart erst auf einer stabilen vorherigen Stufe aufbaut. Fazit Longieren mit Kappzaum beginnt mit der Ausrüstung: Der Zaum muss passend und stabil sitzen, und die Longe wird am mittleren Ring befestigt. Erst danach folgt die eigentliche Arbeit auf Abstand. So steht vor dem Zirkel zuerst eine klare und überprüfbare Grundlage. Danach entscheidet die Reihenfolge. Bodenübungen sollten bereits sicher sein, der Einstieg erfolgt im Schritt, und Trab sowie Galopp werden erst ergänzt, wenn die vorherige Stufe stabil gelingt. Damit bleibt die Longenarbeit schrittweise aufgebaut und orientiert sich am tatsächlichen Stand des Pferdes. Weiterführende Informationen Zur Ausrüstung führt der gebundene Bereich Kappzaum . Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+                "body_text_sha256": "e790b5c3f3d01255db3f1721b2dbeda291c34189f736a7096fb8e1b3d1479473",
+                "claim_ids": [
+                  "KZ_F1",
+                  "KZ_F2",
+                  "KZ_F3",
+                  "KZ_F4",
+                  "KZ_F5",
+                  "KZ_F6",
+                  "KZ_F7"
+                ],
+                "content_plan_hash": "f96235263e4249f7dc7a84db9162fb9ae8aed04c8870c1f0c619c6ccd2198a29",
+                "fact_pack_hash": "fb7034bc039cbbc61305ca950c42921479bbff35f6863708bea34492c6914958",
+                "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+                "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+                "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+                "gold_reference_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 31,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 2,
+                  "word_count": 1134
+                },
+                "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Training",
+                    "href": "/training/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Longieren",
+                    "href": "/training/training-longieren/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Kappzaum",
+                    "href": "/training/training-longieren/kappzaum/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "local_candidate_metrics": {
+                  "h2_count": 8,
+                  "paragraph_count": 22,
+                  "table_body_row_count": 4,
+                  "visible_link_count": 3,
+                  "word_count": 895
+                },
+                "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+                "order_id": "k9-51150ba3",
+                "skeleton_hash": "07e6b31aaa438b7d634284304069f3b78437d6c3341494545595a51a6ddc0643",
+                "slug": "wie-longiert-man-ein-pferd-mit-einem-kappzaum",
+                "source_ids": [
+                  "CAVALLO_KAPPZAUM_20260731",
+                  "KRAEMER_LONGIEREN_20261001"
+                ],
+                "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
+              },
+              "contract_hashes": [],
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "plan_item_key": "k9-c508d6d8fd7c7e28",
+              "quality_binding": {
+                "ai_disclosure_required": true,
+                "contract": "content_structure_language_binding_v2",
+                "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Training > Longieren > Kappzaum > FAQ Kappzaum",
+                  "name": "FAQ Kappzaum",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "kappzaum-faq",
+                  "taxonomy": "category"
+                },
+                "faq_direct_answer": "Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.",
+                "intent_terms": [
+                  "Wie longiert man ein Pferd mit einem Kappzaum",
+                  "Kappzaum",
+                  "Longieren",
+                  "Training"
+                ],
+                "internal_test_marker": "LTC508D6D8FD7C",
+                "language_evidence": {},
+                "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+                "link_bindings": [
+                  {
+                    "active": true,
+                    "anchor": "Training",
+                    "href": "/training/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Longieren",
+                    "href": "/training/training-longieren/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Kappzaum",
+                    "href": "/training/training-longieren/kappzaum/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "minimum_word_count": 750,
+                "portal_link_registry": {
+                  "contract": "portal_link_registry_snapshot_v2",
+                  "entries": [
+                    {
+                      "active": true,
+                      "anchor": "Training",
+                      "href": "/training/",
+                      "reason": "Maschinell gebundener Portal-Hauptbereich",
+                      "role": "parent_category",
+                      "section_id": "criteria",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Longieren",
+                      "href": "/training/training-longieren/",
+                      "reason": "Maschinell gebundener Portal-Bereich",
+                      "role": "semantic_related",
+                      "section_id": "decision",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Kappzaum",
+                      "href": "/training/training-longieren/kappzaum/",
+                      "reason": "Maschinell gebundene Portal-Produktseite",
+                      "role": "further_information",
+                      "section_id": "further_information",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    }
+                  ],
+                  "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+                },
+                "portal_link_registry_hash": "befe0336a387525b4cb3555bc76172cccf9f26254b5bf621bef80c6cae1f1dfb",
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Wie longiert man ein Pferd mit einem Kappzaum und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "type_meta": {
+                  "primary_question": "Wie longiert man ein Pferd mit einem Kappzaum?"
+                },
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Training > Longieren > Kappzaum > FAQ Kappzaum",
+                  "name": "FAQ Kappzaum",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "kappzaum-faq",
+                  "taxonomy": "category"
+                },
+                "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+              },
+              "quality_binding_hash": "6f9d8098f50db55a4b4b1133574a15cbaf97acc5b60b4d6d6b8cbfa3a7db0ddc",
+              "runtime_order": {
+                "allowed_fact_ids": [
+                  "KZ_F1",
+                  "KZ_F2",
+                  "KZ_F3",
+                  "KZ_F4",
+                  "KZ_F5",
+                  "KZ_F6",
+                  "KZ_F7"
+                ],
+                "answer": "Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.",
+                "article_type": "FAQ",
+                "conclusion": "Fazit Longieren mit Kappzaum beginnt mit der Ausrüstung: Der Zaum muss passend und stabil sitzen, und die Longe wird am mittleren Ring befestigt. Erst danach folgt die eigentliche Arbeit auf Abstand. So steht vor dem Zirkel zuerst eine klare und überprüfbare Grundlage. Danach entscheidet die Reihenfolge. Bodenübungen sollten bereits sicher sein, der Einstieg erfolgt im Schritt, und Trab sowie Galopp werden erst ergänzt, wenn die vorherige Stufe stabil gelingt. Damit bleibt die Longenarbeit schrittweise aufgebaut und orientiert sich am tatsächlichen Stand des Pferdes.",
+                "domain": "pferdeportal",
+                "fact_pack_hash": "fb7034bc039cbbc61305ca950c42921479bbff35f6863708bea34492c6914958",
+                "faq_answer": "Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.",
+                "faq_question": "Wie longiert man ein Pferd mit einem Kappzaum?",
+                "lead": "Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Training",
+                    "href": "/training/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Longieren",
+                    "href": "/training/training-longieren/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Kappzaum",
+                    "href": "/training/training-longieren/kappzaum/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "order_id": "k9-51150ba3",
+                "primary_question": "Wie longiert man ein Pferd mit einem Kappzaum?",
+                "question": "Wie longiert man ein Pferd mit einem Kappzaum?",
+                "required_sections": [
+                  "Fazit",
+                  "Weiterführende Informationen"
+                ],
+                "section_fact_ids": [
+                  "KZ_F1",
+                  "KZ_F2",
+                  "KZ_F3",
+                  "KZ_F4",
+                  "KZ_F5",
+                  "KZ_F6",
+                  "KZ_F7"
+                ],
+                "slug": "wie-longiert-man-ein-pferd-mit-einem-kappzaum",
+                "subject_label": "Wie longiert man ein Pferd mit einem Kappzaum",
+                "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                "summary": "Du longierst ein Pferd mit Kappzaum am besten schrittweise: Der Kappzaum muss stabil und passend sitzen, die Longe wird am mittleren Ring befestigt, und die eigentliche Arbeit beginnt ruhig im Schritt. Erst wenn diese Grundlagen sicher funktionieren, wird das Training erweitert.",
+                "table_focus": [
+                  "KZ_F1",
+                  "KZ_F2",
+                  "KZ_F3",
+                  "KZ_F4"
+                ],
+                "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
+              },
+              "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+              "source_hashes": [],
+              "source_order_id": "k9-51150ba3",
+              "source_snapshot_id": "FP-K9-KAPPZAUM-LONGIEREN-20261001",
+              "target_keyword": "Wie longiert man ein Pferd mit einem Kappzaum",
+              "three_type_local_binding": {
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Training > Longieren > Kappzaum > FAQ Kappzaum",
+                  "name": "FAQ Kappzaum",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "kappzaum-faq",
+                  "taxonomy": "category"
+                },
+                "semantic_keywords": [
+                  "Wie longiert man ein Pferd mit einem Kappzaum",
+                  "Kappzaum korrekt anpassen und stabil verschnallen",
+                  "Longe am mittleren Ring befestigen",
+                  "Grundlagen am Boden vor dem Zirkel sichern",
+                  "im Schritt nah am Pferd beginnen",
+                  "Tempo und Zirkel erst bei stabiler Dehnung steigern"
+                ],
+                "wordpress_runtime_term_id_required_later": true,
+                "wordpress_runtime_validation_performed_now": false
+              },
+              "topic": "Wie longiert man ein Pferd mit einem Kappzaum?"
+            },
+            "product_sha256": "f54d000dda75f10f90a083486924500ac9577b72dc1159e88657b5afba384bfe",
+            "research_product_sha256": "f2b13b9f782b714789e75a0f15640c649c07a0a250966e49da870e959607903a",
+            "title": "Wie longiert man ein Pferd mit einem Kappzaum?",
+            "writing_rules_coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+            "writing_rules_sha256": "7faa6742de5717192019ff2e44e20feddb3a6b8d6017d9747d99bd0064d0cc5a"
+          },
+          "item_id": "k9-b7c4255e949fbe8051150ba3"
+        },
+        "research": {
+          "item_id": "k9-b7c4255e949fbe8051150ba3",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Kappzaum korrekt anpassen und stabil verschnallen",
+                "Longe am mittleren Ring befestigen",
+                "Grundlagen am Boden vor dem Zirkel sichern",
+                "im Schritt nah am Pferd beginnen",
+                "Tempo und Zirkel erst bei stabiler Dehnung steigern"
+              ],
+              "decision_goal": "Das Pferd mit korrekt sitzendem Kappzaum schrittweise und kontrolliert vom Boden in die Longenarbeit führen."
+            },
+            "fact_pack": {
+              "article_type": "FAQ",
+              "article_type_coverage": "PASS_FAQ",
+              "claim_register_hash": "445f9a5f136200b119d8a77b901e6bbbbacb358ef8389d965ef25b3a6633684e",
+              "claims": [
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "84ac9373ca4d1136ef4dcb03691b5ae83f82724c8a6c118008c5cc4b327303b5",
+                  "fact_id": "KZ_F1",
+                  "locator": "Abschnitt „Wie wirkt ein Kappzaum?“",
+                  "source_id": "CAVALLO_KAPPZAUM_20260731",
+                  "statement": "Über den mittleren Ring am Nasenriemen des Kappzaums lassen sich Impulse auf Nase und Genick übertragen, sodass das Pferd über die Longenverbindung gesteuert werden kann.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "a48ef1ce575eb9c424e455262d0d16bcf1d49af45c073c97687d72bb59aee0b8",
+                  "fact_id": "KZ_F2",
+                  "locator": "Abschnitte „Welcher Kappzaum eignet sich zum Longieren?“ und „Wie soll ein Kappzaum sitzen?“",
+                  "source_id": "CAVALLO_KAPPZAUM_20260731",
+                  "statement": "Für die Longenarbeit sollte ein Kappzaum stabil und passend sitzen; ein schlecht sitzender oder bei Zug verdrehter Zaum kann die Einwirkung verschlechtern und dem Pferd Probleme bereiten.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "f1edcf93c1437ac503e376c38881053fe80e535fd780e649dddb7f50071546a7",
+                  "fact_id": "KZ_F3",
+                  "locator": "Abschnitt „Wie soll ein Kappzaum sitzen?“",
+                  "source_id": "CAVALLO_KAPPZAUM_20260731",
+                  "statement": "Zwischen Jochbein und Nasenriemen sollten etwa zwei Finger Abstand liegen, und der mittlere Ring sollte auf dem Nasenrücken bleiben.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "020a291a38db5ed6b08f84a0037bbf255bbaa250a5f1c3a576b8828051a08419",
+                  "fact_id": "KZ_F4",
+                  "locator": "Abschnitt „Vorübung 1: Vorhand bewegen“",
+                  "source_id": "CAVALLO_KAPPZAUM_20260731",
+                  "statement": "Vor dem Longieren am Kappzaum sollte das Pferd grundlegende Bodenübungen wie Antreten, Halten, Weichen, Rückwärtsrichten und Schritt-Trab-Übergänge sicher beherrschen.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "502dfd95e95057ba609153968be32644c0192477f158801c4d3b2fe5564f588a",
+                  "fact_id": "KZ_F5",
+                  "locator": "Abschnitt „Erste Schritte an Longe und Kappzaum“",
+                  "source_id": "CAVALLO_KAPPZAUM_20260731",
+                  "statement": "Der Einstieg in die Longenarbeit kann im Schritt auf kleineren Zirkeln mit konstanter Verbindung zwischen Longe und Kappzaum beginnen; anfangs kann der Mensch nah am Pferd mitgehen und gerade Linien einbauen.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "f7ed970fffac82cfcd0de46ca12c0efa6b7be4b972790dae987a479150fa8363",
+                  "fact_id": "KZ_F6",
+                  "locator": "Abschnitt „Schritt und Trab in Dehnung“",
+                  "source_id": "CAVALLO_KAPPZAUM_20260731",
+                  "statement": "Erst wenn das Pferd im Schritt die Dehnung sicher hält, sollte es in kurzen Reprisen antraben; Galopp folgt erst, wenn Schritt und Trab ausbalanciert und stabil gelingen.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "5b8f825dd624fc33f32c412a63c7d3b45f74ee431a05a7e1a2869f33320777e7",
+                  "fact_id": "KZ_F7",
+                  "locator": "Tabelle Grundausrüstung, Zeile „Trense oder Kappzaum“",
+                  "source_id": "KRAEMER_LONGIEREN_20261001",
+                  "statement": "Beim Longieren mit Kappzaum wird die Longe grundsätzlich in den mittleren Ring eingeschnallt.",
+                  "subject_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum",
+                  "time_scope": "RETRIEVED_2026-10-01"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "KZ_F1",
+                "KZ_F2",
+                "KZ_F3",
+                "KZ_F4",
+                "KZ_F5",
+                "KZ_F6",
+                "KZ_F7"
+              ],
+              "fact_pack_hash": "fb7034bc039cbbc61305ca950c42921479bbff35f6863708bea34492c6914958",
+              "fact_pack_id": "FP-K9-KAPPZAUM-LONGIEREN-20261001",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "dfaf6466cc44079e229b76540caa6d365acf6a2ee8f04b5649da764cef7f2a84",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "wie_longiert_man_ein_pferd_mit_einem_kappzaum"
+            },
+            "portal_links": [
+              {
+                "anchor": "Training",
+                "href": "/training/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Longieren",
+                "href": "/training/training-longieren/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Kappzaum",
+                "href": "/training/training-longieren/kappzaum/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "f2b13b9f782b714789e75a0f15640c649c07a0a250966e49da870e959607903a",
+            "sources": [
+              {
+                "source_id": "CAVALLO_KAPPZAUM_20260731",
+                "title": "CAVALLO: Mit Kappzaum optimal longieren",
+                "url": "https://www.cavallo.de/reittraining/mit-kappzaum-optimal-longieren/"
+              },
+              {
+                "source_id": "KRAEMER_LONGIEREN_20261001",
+                "title": "Krämer Pferdesport: Ratgeber Longieren",
+                "url": "https://www.kraemer.de/ratgeber/longieren"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-b7c4255e949fbe8051150ba3",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "kappzaum-faq",
+        "plan_slot": "c508d6d8fd7c7e28b8de06158cfa29a7ba9c9c04e9bda12d36527a21acd359c3",
+        "target_keyword": "Wie longiert man ein Pferd mit einem Kappzaum",
+        "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
+      },
+      "revision": 0,
+      "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
+    }
+  ],
+  "job_id": "K9-CHECK-466cd3974158be57",
+  "job_sha256": "1b72e346a87f90ac77da28636a60bf64ef274b8f037aee47b3542d5e47c30689",
+  "ledger_generation": 73,
+  "source_run_id": "36871025352",
+  "station": "check",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "MANUAL_PASS_BOOLEAN",
+      "CHANGE_ARTICLE",
+      "ROUTE_AROUND_FAILED_CHECK",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
+    ],
+    "input_rule": "USE_ONLY_BOUND_RESEARCH_AND_ARTICLE_PRODUCTS",
+    "must": [
+      "RUN_HASH_BOUND_LANGUAGETOOL_6_8",
+      "RUN_HASH_BOUND_PPM_6_7_9",
+      "BIND_BOTH_RESULTS_TO_EXACT_ARTICLE_SHA256",
+      "RETURN_PASS_OR_REPAIR_REQUIRED",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "RUN_COMPLETE_K9_WRITING_RULE_GUARD",
+      "BIND_WRITING_RULE_RESULT_TO_EXACT_ARTICLE_AND_RULESET_SHA256"
+    ],
+    "output_contract": "K9_SUBMISSION_V1_WITH_LT68_AND_PPM679_RESULTS",
+    "worker_type": "K9_NATIVE_MACHINE_CHECK"
+  }
+}
