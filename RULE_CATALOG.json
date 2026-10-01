@@ -30,8 +30,7 @@
       "source": "K9_RULE_FIELD_INVENTORY",
       "source_fields": [
         "editorial_additive.conclusion_policy.maximum_paragraphs",
-        "editorial_additive.conclusion_policy.maximum_ratio",
-        "editorial_additive.conclusion_policy.use_conclusion_to_fill_global_word_or_paragraph_floor"
+        "editorial_additive.conclusion_policy.maximum_ratio"
       ]
     },
     {
@@ -496,11 +495,11 @@
       ]
     },
     {
-      "check_stage": "WRITE_PREFLIGHT",
-      "classification": "HARD",
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
       "id": "words.word_budget_exclusions",
       "implementation_status": "IMPLEMENTED",
-      "owner": "balance_checker",
+      "owner": "writer_guidance",
       "scope": "ARTICLE",
       "source": "K9_RULE_FIELD_INVENTORY",
       "source_fields": [
@@ -1353,6 +1352,18 @@
       "owner": "writer_guidance",
       "scope": "ARTICLE",
       "source": "K10_USER_APPROVED_INTRO_READABILITY_TARGET_2026-10-02"
+    },
+    {
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
+      "id": "conclusion.no_padding_target",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "writer_guidance",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.conclusion_policy.use_conclusion_to_fill_global_word_or_paragraph_floor"
+      ]
     }
   ]
 }
