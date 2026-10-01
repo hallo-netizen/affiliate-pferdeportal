@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_SINGLE_TRUTH_ENTRY_V1 -->
 
-STAND: 2026-09-25
-STATUS: AKTIV / NEUAUFBAU AB NULL
+STAND: 2026-10-01
+STATUS: AKTIV / REINE NAVIGATION
 
 ## 1-KLICK-ÜBERSICHT
 
@@ -61,7 +61,7 @@ Register, Historie, Originaldateien und Hobbyraum dürfen niemals zweite Current
 
 ## Grundregeln
 
-- Start bei null;
+- das Projekt wurde ohne automatische Übernahme fremder Fachbestände gestartet; aktuelle Fachstände ausschließlich aus den zuständigen Current-Autoritäten lesen;
 - Pferde-Atelier nur als Erfahrungs-/Strukturreferenz;
 - nicht raten;
 - keine Ersatzarchitektur;
