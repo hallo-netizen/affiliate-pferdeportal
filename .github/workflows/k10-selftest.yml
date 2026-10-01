@@ -35,8 +35,8 @@ jobs:
           from engine.package_adapters import make_package_receipts
           from engine.ppm_parity_guard import verify as ppm_verify
           a=make_base(); rows=run_article_checks(a)
-          assert len(hard_rules('ARTICLE'))==84
-          assert len(rows)==84 and len({r['rule_id'] for r in rows})==84
+          assert len(hard_rules('ARTICLE'))==86
+          assert len(rows)==86 and len({r['rule_id'] for r in rows})==86
           assert all(r['subject_sha256']==article_hash(a) for r in rows)
           prows=make_package_receipts('P1','a'*64,package_pass_results())
           assert len(hard_rules('PACKAGE_INTEGRITY'))==21
