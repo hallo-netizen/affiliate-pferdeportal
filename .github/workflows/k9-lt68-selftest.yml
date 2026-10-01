@@ -55,6 +55,31 @@ jobs:
           assert r['status']=='REPAIR_REQUIRED', r
           assert r['finding_count']>0, r
           PY
+      - name: Writer LT68 early-binding positive and negative
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import k9_write_packager
+
+          jar=Path('/tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar')
+
+          bad=json.loads(Path('warehouse/write/K9-WRITE-dafc5a820a1ebd11.json').read_text())['results'][0]['article_product']['content_html']
+          try:
+              k9_write_packager.lt68_writer_preflight(bad,jar)
+          except k9_write_packager.PackError as exc:
+              if 'LT68_WRITER_PREFLIGHT_REPAIR_REQUIRED' not in str(exc):
+                  raise
+          else:
+              raise SystemExit('LT68_BAD_WRITER_DRAFT_NOT_BLOCKED')
+
+          good=json.loads(Path('warehouse/repair/K9-REPAIR-4b66ee49083f60b1.json').read_text())['results'][0]['article_product']['content_html']
+          if not k9_write_packager.lt68_writer_preflight(good,jar):
+              raise SystemExit('LT68_REPAIRED_WRITER_DRAFT_NOT_PASS')
+          print('WRITER_LT68_NEGATIVE_BLOCKED=1')
+          print('WRITER_LT68_POSITIVE_PASS=1')
+          PY
       - name: Wrong jar hash must fail closed
         shell: bash
         run: |
