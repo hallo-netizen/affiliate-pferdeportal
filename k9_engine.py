@@ -323,6 +323,17 @@ def write_chat_entry(job):
         "code_change_allowed": False,
         "all_other_actions": "DENY",
         "writer_preflight_rule": ("RUN_BOUND_WRITE_PACKAGER_PREFLIGHT_AND_FIX_ALL_FINDINGS_BEFORE_RETURN" if is_writer else None),
+        "writer_ppm679_preflight_required": bool(is_writer),
+        "writer_lt68_preflight_required": bool(is_writer),
+        "writer_first_pass_requirements": ({
+            "ppm_structural_rules_apply_before_acceptance": True,
+            "all_visible_factual_units_need_bound_fact_ids": True,
+            "duplicate_sentence_ratio_must_pass_bound_ppm679": True,
+            "non_reserved_h2_must_pass_bound_intent_terms": True,
+            "lt68_unresolved_findings_max": 0,
+            "post_table_summary_required": True,
+            "quality_change_allowed": False
+        } if is_writer else None),
         "repair_scope_rule": ("REPAIR_ALL_REPORTED_FAILED_CHECK_FINDINGS_IN_ONE_PASS_ONLY" if station == "repair" else None),
         "forbidden": [
             "SEARCH_OTHER_CONCEPTS",
