@@ -1,5 +1,12 @@
 {
-  "active_job": null,
+  "active_job": {
+    "item_count": 1,
+    "item_ids": [
+      "k9-37dd791253b97b24a395ebbe"
+    ],
+    "job_id": "K9-WRITE-43a5a55b8932162c",
+    "station": "write"
+  },
   "contract": "K9_STATUS_V1",
   "fully_done": 19,
   "ledger_generation": 81,

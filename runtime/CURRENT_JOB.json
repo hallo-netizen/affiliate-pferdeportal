@@ -1,0 +1,581 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-37dd791253b97b24a395ebbe"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "research": {
+          "job_id": "K9-RESEARCH-3716796c119ae1b4",
+          "path": "warehouse/research/K9-RESEARCH-3716796c119ae1b4.json",
+          "sha256": "353cae36519bb4c196edbdb439b9ef433807767e116bde86994c74e5f9906b84"
+        }
+      },
+      "input_products": {
+        "ppm_authoring_rules": {
+          "article_type": "FAQ",
+          "contract": "K9_PPM679_AUTHORING_RULES_V1",
+          "derived_binding_requirements": {
+            "source_trace_minimum": 3,
+            "table_value_statement_minimum_words": 8
+          },
+          "global_requirements": {
+            "max_duplicate_sentence_ratio": 0.02,
+            "max_intro_pair_similarity": 0.55,
+            "min_fact_pack_coverage_ratio": 0.75,
+            "min_h2": 4,
+            "min_paragraphs": 16,
+            "min_table_body_rows": 4,
+            "min_trace_lexical_support_ratio": 0.8,
+            "min_words": 750
+          },
+          "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+          "ppm_version": "6.7.9",
+          "quality_change_allowed": false,
+          "rules_sha256": "ca9990b20b2a9f7a8a4b7967b21c3871fdff46d0d5f7ff69e289dd92e8142cce",
+          "source_mode": "EXACT_HASH_BOUND_PPM679_PACKAGE",
+          "structure_requirements": {
+            "conclusion": {
+              "minimum_paragraphs": 2,
+              "minimum_ratio_by_type": {
+                "Beratung": 0.1,
+                "FAQ": 0.08,
+                "Pflege": 0.09,
+                "Vergleich": 0.09
+              },
+              "required_block": "conclusion"
+            },
+            "contract": "content_structure_language_gate_v2",
+            "faq": {
+              "direct_answer_minimum_words": 12,
+              "direct_answer_required": true,
+              "forbidden_meta_openings": [
+                "die ausgangsfrage besteht",
+                "die frage lässt sich",
+                "zunächst muss geprüft werden",
+                "eine belastbare antwort",
+                "die kurze antwort lautet"
+              ]
+            },
+            "headings": {
+              "forbidden_fragments": [
+                "antwort ableiten",
+                "antworten und nächste schritte",
+                "nicht belastbar",
+                "prüfpunkte",
+                "im überblick",
+                "ausgangsfrage besteht",
+                "entscheidung ableiten",
+                "teilfragen"
+              ],
+              "generic_or_technical_headings": [
+                "Die kurze Antwort",
+                "Die wichtigsten Teilfragen",
+                "Antworten und nächste Schritte im Überblick",
+                "Wann die Antwort noch nicht belastbar ist",
+                "Antworten im Überblick",
+                "Nächste Schritte",
+                "Überblick",
+                "Entscheidungsmatrix",
+                "Pflegeablauf im Überblick",
+                "Die Antwort aus Anhängelast ableiten"
+              ],
+              "maximum_words": 14,
+              "minimum_words": 2,
+              "minimum_words_between_headings": 28,
+              "near_duplicate_token_similarity": 0.72,
+              "reserved_headings": [
+                "Fazit",
+                "Weiterführende Informationen"
+              ],
+              "stopwords": [
+                "der",
+                "die",
+                "das",
+                "den",
+                "dem",
+                "des",
+                "ein",
+                "eine",
+                "einer",
+                "eines",
+                "und",
+                "oder",
+                "mit",
+                "ohne",
+                "für",
+                "von",
+                "vor",
+                "nach",
+                "bei",
+                "im",
+                "in",
+                "am",
+                "an",
+                "auf",
+                "aus",
+                "zu",
+                "zum",
+                "zur",
+                "ist",
+                "sind",
+                "wird",
+                "werden",
+                "was",
+                "wie",
+                "wann",
+                "warum",
+                "welche",
+                "welcher",
+                "welches"
+              ]
+            },
+            "intro": {
+              "first_visible_element": "p",
+              "heading_forbidden": true,
+              "maximum_words": 100,
+              "minimum_words": 30,
+              "required_block": "intro"
+            },
+            "known_language_regression_phrases": [
+              "die ausgangsfrage besteht aus mehreren eigenständigen prüfpunkten",
+              "das ergebnis grenzt normale veränderung von einem behandlungsbedürftigen befund ab",
+              "vor dem fortsetzen muss dieser arbeitsschritt nachvollziehbar beendet sein",
+              "ohne frühere ergebnisse zu überbewerten",
+              "die vorletzte kontrolle wird nicht übersprungen"
+            ],
+            "language_evidence": {
+              "checked_text_must_match_visible_text": true,
+              "human_exception_required_fields": [
+                "exception_id",
+                "exact_rule_id",
+                "exact_text",
+                "reason",
+                "approved_by_human_user",
+                "reference_file",
+                "reference_hash"
+              ],
+              "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+              "raw_finding_count_exact": 0,
+              "raw_report_json_required": true,
+              "required_engine": "LanguageTool 6.8 / Bestand 43",
+              "return_code_exact": 0,
+              "unresolved_findings_exact": 0
+            },
+            "links": {
+              "all_links_must_be_in_distinct_blocks": true,
+              "further_information_block": "further_information",
+              "relative_internal_only": true,
+              "required_count": 3,
+              "required_roles": [
+                "parent_category",
+                "semantic_related",
+                "further_information"
+              ]
+            },
+            "lists": {
+              "minimum_items_in_one_list": 4,
+              "minimum_lists": 1
+            },
+            "required_blocks_by_type": {
+              "Beratung": [
+                "intro",
+                "criteria",
+                "decision",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "FAQ": [
+                "intro",
+                "answer",
+                "details",
+                "checklist",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "Pflege": [
+                "intro",
+                "steps",
+                "risks",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "Vergleich": [
+                "intro",
+                "options",
+                "comparison",
+                "table",
+                "conclusion",
+                "further_information"
+              ]
+            },
+            "scope_limit": "Deterministic structural, binding and LanguageTool-evidence gate. It does not replace the later independent editorial matrix or user visual acceptance.",
+            "status": "QUARANTINE_CANDIDATE_NOT_RELEASED",
+            "table": {
+              "exact_count": 1,
+              "generic_column_headings_forbidden": [
+                "Punkt",
+                "Wert",
+                "Info",
+                "Information",
+                "Details",
+                "Aspekt"
+              ],
+              "generic_headings_forbidden": [
+                "Tabelle",
+                "Überblick",
+                "Zusammenfassung",
+                "Daten",
+                "Informationen"
+              ],
+              "minimum_body_rows": 4,
+              "minimum_columns": 3,
+              "minimum_unique_content_token_ratio": 0.18,
+              "required_block": "table"
+            },
+            "version": "2.0.0-wave2-quarantine",
+            "visible_test_marker_regex": "\\[LT[0-9A-Z-]{6,}\\]",
+            "wordpress_binding": {
+              "category_id_minimum": 1,
+              "forbidden_category_slugs": [
+                "uncategorized",
+                "allgemein",
+                "standard"
+              ],
+              "internal_marker_meta_key": "_ppm679_test_marker"
+            }
+          },
+          "type_requirements": {
+            "all_factual_blocks_require_trace": true,
+            "boundary": {
+              "is": "eine zentrale Frage mit geordneten Teilantworten",
+              "is_not": [
+                "Auswahlberatung ohne zentrale Frage",
+                "symmetrische Gegenueberstellung mehrerer Optionen",
+                "Pflege- oder Wartungsanleitung"
+              ]
+            },
+            "certification_evidence": {
+              "article_type": "FAQ",
+              "contract": "article_type_certification_evidence_v2",
+              "definition_hash": "ffeb6140e694095418ce875bac2978d0bd3da9ed224bd62e45fab7c191dd88ee",
+              "evidence_hash": "0f965b2173910559c598d30dbc73fd3b7ef84978ae8c7998a313302291c19eb2",
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "negative_status": "MUTATION_BLOCK_CHECK_OK",
+              "positive_status": "STRUCTURAL_CHECK_OK",
+              "version": "6.7.9"
+            },
+            "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+            "conclusion_min_ratio": 0.08,
+            "fact_trace_required": true,
+            "fact_trace_required_blocks": [
+              "intro",
+              "questions",
+              "conclusion",
+              "table"
+            ],
+            "html_contract": {
+              "allowed_tags_from_global": true,
+              "body_text_html_free": true
+            },
+            "production_allowed": false,
+            "purpose": "Eine konkrete Nutzerfrage direkt, nachvollziehbar und quellengebunden beantworten.",
+            "quality_contract": {
+              "conclusion_no_new_untraced_facts": true,
+              "duplicate_block_names_forbidden": true,
+              "topic_specific_special_logic_forbidden": true
+            },
+            "required_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "required_link_roles": [
+              "parent_category",
+              "semantic_related",
+              "further_information"
+            ],
+            "required_lists": [
+              "key_answers"
+            ],
+            "search_intent": "INFORMATIONAL_DIRECT_QUESTION",
+            "slug_contract": {
+              "derived_from_title": true
+            },
+            "structure_profile": "faq",
+            "table": "required",
+            "table_count_exact": 1,
+            "table_fact_trace_required": true,
+            "title_contract": {
+              "colon_forbidden": true,
+              "keyword_required": true,
+              "question_mark": "REQUIRED"
+            },
+            "type_meta_schema": {
+              "fields": {
+                "primary_question": {
+                  "min_length": 8,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_question"
+              ]
+            },
+            "visible_links_exact": 3
+          }
+        },
+        "research": {
+          "item_id": "k9-37dd791253b97b24a395ebbe",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Begriff und Funktion der Longierpeitsche beim Longieren",
+                "Abgrenzung als Hilfsmittel innerhalb der Longierausrüstung",
+                "Sichere Position und Handhabung durch den Longenführer",
+                "Pferdegerechter und verantwortlicher Einsatz ohne Strafe oder unnötigen Druck"
+              ],
+              "decision_goal": "Die Longierpeitsche als Hilfsmittel beim Longieren verständlich erklären und ihren sicheren, pferdegerechten Einsatz einordnen."
+            },
+            "fact_pack": {
+              "article_type": "FAQ",
+              "article_type_coverage": "PASS_FAQ",
+              "claim_register_hash": "947f37fc18f676928f9625d9a33e5c7243cd751d96c3c281978789840c7bb5e9",
+              "claims": [
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "8b5165f0a430fd2001d16cc576781c75ce7b22ff38df4c3432d8299da7f708c6",
+                  "fact_id": "FACT-LONGIERPEITSCHE-001",
+                  "locator": "Longieren – Sicherheit im Umgang mit den Hilfen (Stimme, Longe, Peitsche)",
+                  "source_id": "SRC-FN-LONGIEREN-HILFEN-20261001",
+                  "statement": "Beim Longieren zählen Stimme, Longe und Peitsche zu den Hilfen des Longenführers.",
+                  "subject_scope": "Grundfunktion der Longierpeitsche",
+                  "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "8712ddb0cf6ac4d05b833ecce9bcbb73865dedf55a4e6d9cfde763bf8db08517",
+                  "fact_id": "FACT-LONGIERPEITSCHE-002",
+                  "locator": "Learning Outcome 2.1 – equipment required for lungeing: lunge whip",
+                  "source_id": "SRC-BHS-STAGE2-LUNGE-20261001",
+                  "statement": "Die British Horse Society führt die Longierpeitsche als typische Ausrüstung für das Longieren auf.",
+                  "subject_scope": "Einordnung als Longierausrüstung",
+                  "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "3911bf46df55a9dbc211f2a47d589abcd32155bc179d84eaba6a6a2753bff0c5",
+                  "fact_id": "FACT-LONGIERPEITSCHE-003",
+                  "locator": "Learning Outcome 3.2 – lunge safely",
+                  "source_id": "SRC-BHS-STAGE2-LUNGE-20261001",
+                  "statement": "Sicheres Longieren umfasst eine passende Position des Longenführers, kontrollierte Hilfengebung und den sicheren Umgang mit der Ausrüstung.",
+                  "subject_scope": "Sichere Handhabung",
+                  "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "9ed03115ea4703450d1a7efb2a787f9fdf472cd2320fcb390a8c26e0f1cab9e6",
+                  "fact_id": "FACT-LONGIERPEITSCHE-004",
+                  "locator": "Learning Outcome 1.2 – impact of lungeing techniques, position of whip",
+                  "source_id": "SRC-BHS-STAGE3-LUNGE-20261001",
+                  "statement": "Die Position der Peitsche gehört zu den Techniken, die beim Longieren berücksichtigt werden.",
+                  "subject_scope": "Position der Peitsche",
+                  "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "47d42ccce3942232ffdb81544036c3ab14b066a9c0ea5884dc8f8b1da5213156",
+                  "fact_id": "FACT-LONGIERPEITSCHE-005",
+                  "locator": "Learning Outcome 1.1 – reasons for lungeing a horse",
+                  "source_id": "SRC-BHS-STAGE2-LUNGE-20261001",
+                  "statement": "Longieren kann unter anderem der Bewegung, dem Aufwärmen, der Gymnastizierung und der Beurteilung der Pferdebewegung dienen.",
+                  "subject_scope": "Zweck des Longierens",
+                  "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "08fcb698ed85a1cf9f3e4ac4aec41f5c60ca8045c44bcc98e20b0e9041f27ac3",
+                  "fact_id": "FACT-LONGIERPEITSCHE-006",
+                  "locator": "Guidance on carrying and using a whip; optional equipment; use without confusion, fear or pain",
+                  "source_id": "SRC-WHW-WHIP-GUIDE-20261001",
+                  "statement": "Eine Peitsche kann als optionales Trainingshilfsmittel eingesetzt werden; verantwortlicher Einsatz soll Verwirrung, Angst und Schmerz beim Pferd vermeiden.",
+                  "subject_scope": "Pferdegerechter Einsatz",
+                  "time_scope": "allgemeine Begriffs- und Anwendungserklärung"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-LONGIERPEITSCHE-001",
+                "FACT-LONGIERPEITSCHE-002",
+                "FACT-LONGIERPEITSCHE-003",
+                "FACT-LONGIERPEITSCHE-004",
+                "FACT-LONGIERPEITSCHE-005",
+                "FACT-LONGIERPEITSCHE-006"
+              ],
+              "fact_pack_hash": "7ffa84534d1b6ce901ccbab144558ed175666d4820504b1043b9ed4585dbe39e",
+              "fact_pack_id": "FP-K9-LONGIERPEITSCHE-20261001",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "11c3c3f15582ac2e33355b89d52b7d8cae043aff33c2a6ab810927ef959d5af0",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "was_ist_eine_longierpeitsche"
+            },
+            "portal_links": [
+              {
+                "anchor": "Training",
+                "href": "/training/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Longieren",
+                "href": "/training/training-longieren/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Longierpeitschen",
+                "href": "/training/training-longieren/longierpeitschen/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "6a36169d1de68c1341b21fef7fb6e2631a26dd3299e705fa314b12c01b4605ba",
+            "sources": [
+              {
+                "source_id": "SRC-FN-LONGIEREN-HILFEN-20261001",
+                "title": "Ausbildung und Qualifikationen im Umgang mit dem Pferd | FN",
+                "url": "https://app.pferd-aktuell.de/ausbildung/qualifikationen-im-umgang-mit-dem-pferd"
+              },
+              {
+                "source_id": "SRC-BHS-STAGE2-LUNGE-20261001",
+                "title": "Stage 2 Lunge Syllabus | The British Horse Society",
+                "url": "https://www.bhs.org.uk/bhs-professional-qualifications-and-careers/bhs-qualifications-and-stages/stage-2/stage-2-lunge-syllabus/"
+              },
+              {
+                "source_id": "SRC-BHS-STAGE3-LUNGE-20261001",
+                "title": "Stage 3 Lunge Syllabus | The British Horse Society",
+                "url": "https://www.bhs.org.uk/bhs-professional-qualifications-and-careers/bhs-qualifications-and-stages/stage-3/stage-3-lunge-syllabus/"
+              },
+              {
+                "source_id": "SRC-WHW-WHIP-GUIDE-20261001",
+                "title": "Should I carry or use a whip? | World Horse Welfare",
+                "url": "https://eu.worldhorsewelfare.org/advice/should-i-carry-or-use-a-whip"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-37dd791253b97b24a395ebbe",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "longierpeitschen-faq",
+        "plan_slot": "0951992e1e03a6a5c13f6bc859c19516330a65078014dc688edf08e62599b5a0",
+        "target_keyword": "Was ist eine Longierpeitsche",
+        "title": "Was ist eine Longierpeitsche?"
+      },
+      "revision": 0,
+      "title": "Was ist eine Longierpeitsche?"
+    }
+  ],
+  "job_id": "K9-WRITE-43a5a55b8932162c",
+  "job_sha256": "3c457e7c66a033d7a0ce45ad185bc094b9bb7cc9d5da5427cfae73ab6dcb21b5",
+  "ledger_generation": 81,
+  "source_run_id": "36895108757",
+  "station": "write",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "INVENT_NEW_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_AND_BOUND_EXACT_PPM679_AUTHORING_RULES_IN_THIS_JOB",
+    "must": [
+      "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+      "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
+      "RETURN_FINAL_ARTICLE_HTML",
+      "BIND_RESEARCH_PRODUCT_SHA256",
+      "RETURN_PPM_ITEM_BOUND_TO_SAME_FACT_PACK",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "BIND_ALL_RESEARCH_FACTS_TO_EXACTLY_ONE_PPM_SOURCE_TRACE_BEFORE_CHECK",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM",
+      "READ_COMPLETE_K9_WRITING_RULES_BEFORE_AUTHORING",
+      "APPLY_EVERY_BOUND_RULE_GROUP_NOT_A_SELECTED_SUBSET",
+      "TREAT_WRITING_RULES_COVERAGE_AS_FAIL_CLOSED",
+      "RUN_BOUND_WRITE_PACKAGER_PREFLIGHT_AND_FIX_ALL_FINDINGS_BEFORE_RETURN",
+      "DO_NOT_RETURN_A_DRAFT_WITH_KNOWN_RULE_FINDINGS",
+      "READ_BOUND_EXACT_PPM679_AUTHORING_RULES_BEFORE_AUTHORING",
+      "APPLY_BOUND_EXACT_PPM679_AUTHORING_RULES_BEFORE_RETURN",
+      "NEVER_WAIT_FOR_POSTWRITE_PPM_TO_DISCOVER_A_RULE_ALREADY_PRESENT_IN_BOUND_AUTHORING_RULES"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_COMPLETE_K9_WRITING_RULESET_AND_BOUND_EXACT_PPM679_AUTHORING_RULES_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_WRITE_WORKER"
+  }
+}
