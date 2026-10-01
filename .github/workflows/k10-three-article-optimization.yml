@@ -51,6 +51,7 @@ jobs:
       - name: Run three real articles with timing and protocol
         shell: bash
         run: |
+          set +e
           set -uo pipefail
           root='real_runs/20261002_three_article_optimization'
           outroot='/tmp/k10-three'
