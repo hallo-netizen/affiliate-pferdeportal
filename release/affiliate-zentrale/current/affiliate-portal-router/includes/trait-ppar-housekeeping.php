@@ -186,17 +186,54 @@ trait PPAR_Housekeeping_Trait {
         return false;
     }
 
+    private function housekeeping_delete_stale_idealo_feed_temps($uploads_base, $now) {
+        // V6.72.172: wp_tempnam('ppar-idealo-feed') writes the remote-feed
+        // transport file into the uploads root. Normal success/error paths already
+        // unlink it; this bounded sweep only catches files orphaned by a killed
+        // worker/process. Never touch a current worker, a recent file, a symlink,
+        // a subdirectory or any non-exact filename.
+        if (function_exists('get_transient') && get_transient(self::IDEALO_REFRESH_LOCK)) {
+            return array('deleted'=>0,'bytes'=>0);
+        }
+        $base = realpath((string)$uploads_base);
+        if ($base === false || !is_dir($base) || !is_readable($base)) {
+            return array('deleted'=>0,'bytes'=>0);
+        }
+        $base = rtrim($base, DIRECTORY_SEPARATOR);
+        $deleted=0;$bytes=0;$matched=0;
+        foreach ((array)scandir($base) as $name) {
+            if ($name==='.' || $name==='..') { continue; }
+            if (!preg_match('/^ppar-idealo-feed-[A-Za-z0-9]+\\.tmp$/', $name)) { continue; }
+            if (++$matched > 50) { break; }
+            $path=$base.DIRECTORY_SEPARATOR.$name;
+            if (is_link($path) || !is_file($path)) { continue; }
+            $real=realpath($path);
+            if ($real===false || dirname($real)!==$base) { continue; }
+            $mtime=@filemtime($real);
+            if ($mtime===false || $mtime > $now-DAY_IN_SECONDS) { continue; }
+            $size=max(0,(int)@filesize($real));
+            if (@unlink($real)) { $deleted++;$bytes+=$size; }
+        }
+        return array('deleted'=>$deleted,'bytes'=>$bytes);
+    }
+
     private function housekeeping_disk_pass() {
         if (!function_exists('wp_upload_dir')) { return array('deleted'=>0,'bytes'=>0); }
         $uploads = wp_upload_dir(null, false);
         if (!is_array($uploads) || !empty($uploads['error']) || empty($uploads['basedir'])) { return array('deleted'=>0,'bytes'=>0); }
+        $now=time();$deleted=0;$bytes=0;
+
+        $feed_tmp=$this->housekeeping_delete_stale_idealo_feed_temps((string)$uploads['basedir'],$now);
+        $deleted+=absint($feed_tmp['deleted']??0);
+        $bytes+=absint($feed_tmp['bytes']??0);
+
         $dir = rtrim((string)$uploads['basedir'], '/\\') . '/ppar-affiliate-product-images';
-        if (!is_dir($dir) || !is_readable($dir)) { return array('deleted'=>0,'bytes'=>0); }
-        $now=time();$deleted=0;$bytes=0;$seen=0;
+        if (!is_dir($dir) || !is_readable($dir)) { return array('deleted'=>$deleted,'bytes'=>$bytes); }
+        $seen=0;
         foreach ((array)scandir($dir) as $name) {
             if ($name==='.' || $name==='..') { continue; }
             if (++$seen > 200) { break; }
-            if (!preg_match('/^(?:ebay-|idealo-).+\.(?:jpg|jpeg|png|webp|gif)(?:\.tmp-[a-z0-9]+)?$/i', $name)) { continue; }
+            if (!preg_match('/^(?:ebay-|idealo-).+\\.(?:jpg|jpeg|png|webp|gif)(?:\\.tmp-[a-z0-9]+)?$/i', $name)) { continue; }
             $path=$dir.'/'.$name; if (!is_file($path)) { continue; }
             $mtime=@filemtime($path); $size=max(0,(int)@filesize($path));
             $is_tmp=strpos($name,'.tmp-')!==false;
