@@ -1,0 +1,590 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-68726b914aa78ebb881fa24e"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "article": {
+          "job_id": "K9-WRITE-286535d7f5198004",
+          "path": "warehouse/write/K9-WRITE-286535d7f5198004.json",
+          "sha256": "9f36e1efa678fb8b03121add21d630e5c73ed2a69e1aa4d91bc00bbbed3fc54c"
+        },
+        "research": {
+          "job_id": "K9-RESEARCH-f85856812b0584b9",
+          "path": "warehouse/research/K9-RESEARCH-f85856812b0584b9.json",
+          "sha256": "1dfbca462827fd3550120f4ef0a993f303459148cc7ef70afa9b831cb0dc15d6"
+        }
+      },
+      "input_products": {
+        "article": {
+          "article_product": {
+            "article_type": "Beratung",
+            "content_html": "<article data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-004\">Die passende Tasche für Heu sollte nicht nur möglichst viel Heu aufnehmen. Entscheidend ist, wie sie das Fressen verändert, wie sicher sie sich am vorgesehenen Ort nutzen lässt und ob dein Pferd mit der gewählten Bauform ruhig zurechtkommt. Die Systeme unterscheiden sich deutlich in Größe der Öffnungen, Material und Handhabung.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-005 FACT-HEUTASCHE-006\">Vor dem Kauf lohnt sich deshalb ein Blick auf Beschlag, Befestigung und Befüllen. Ein Modell, das in einer Box gut funktioniert, muss nicht automatisch für Nutzung am Boden oder für jedes Pferd geeignet sein. Die Auswahl sollte Dauer beim Fressen und Sicherheit verbinden.</p>\n</section>\n\n<section data-block=\"criteria\">\n<h2>Heutaschen für Pferde passend auswählen</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-001\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-001\" data-source-hash=\"d73d59c306b20f11819eb5c40584a8b562ece85ba20bf4626ce7704d9b9b9e7f\" data-source-title=\"SRC-UMN-HAYNET-20261001\"></span>Kleine und mittlere Öffnungen können die Aufnahme von Heu verlangsamen und die Zeit beim Fressen verlängern. Damit ist die Größe der Öffnungen keine Nebensache, sondern eines der wichtigsten Kriterien für die Auswahl. Wer die Zeit beim Fressen verlängern möchte, sollte die Größe der Öffnungen gezielt einbeziehen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-002 FACT-HEUTASCHE-003\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-002\" data-source-hash=\"3f6b2611f3f48e223ec9676c1a8e5ad4f090a4f26d7d598b1e0386946712c6f0\" data-source-title=\"SRC-UMN-HAYNET-20261001\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-003\" data-source-hash=\"d65e5ed644df0c1ff5898af330b1d1053cd49cbbfdf55d8a5c692770f56056b4\" data-source-title=\"SRC-UMN-HAYNET-20261001\"></span>In den beschriebenen Versuchen sank die gemessene Geschwindigkeit beim Fressen mit kleineren Öffnungen. In einer weiteren Untersuchung verlängerte sich die Dauer einer Mahlzeit mit Heu bei mittleren und kleinen Netzen deutlich gegenüber Kontrolle und großem Netz. Daraus folgt: Die gewünschte Dauer beim Fressen sollte zur Größe der Öffnungen passen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-HEUTASCHE-001\"><strong>Dauer beim Fressen:</strong> Soll das Heu deutlich langsamer aufgenommen werden?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-003\"><strong>Größe der Öffnungen:</strong> Passt die Größe der Öffnungen zum gewünschten Tempo?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-005\"><strong>Sicherheit der Hufe:</strong> Ist das Pferd beschlagen oder ohne Beschlag?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-006\"><strong>Befestigung:</strong> Lässt sich die Tasche sicher und passend positionieren?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-007\"><strong>Akzeptanz:</strong> Frisst das Pferd ruhig mit dem gewählten System?</li>\n</ul>\n<p data-fact-ids=\"FACT-HEUTASCHE-004\">Auch die Bauform gehört in die erste Auswahl. Im Bereich <a data-link-role=\"parent_category\" href=\"/fuetterung/\">Fütterung</a> treffen Netze, Konstruktionen aus Gewebe und feste Systeme auf unterschiedliche Bedingungen im Einsatz. Entscheidend ist deshalb nicht ein einzelnes Merkmal, sondern die Kombination aus Material, Zugriff auf das Heu und täglicher Handhabung.</p>\n</section>\n\n<section data-block=\"decision\">\n<h2>Sicherheit bei der Fütterung gemeinsam bewerten</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-005\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-005\" data-source-hash=\"2fb7f0e6cd38dd47f290849e978798d12279ad3732efce9bb3cddec2eb963f18\" data-source-title=\"SRC-UCONN-SLOWFEEDERS-20261001\"></span>Bei weichen Systemen für Nutzung am Boden ist der Beschlag ein wichtiger Punkt für die Sicherheit. Die zugrunde liegende Fachquelle weist darauf hin, dass sich ein Pferd mit Beschlag mit einem Hufeisen im Material verfangen kann. Ein Modell für die Nutzung am Boden sollte daher nicht allein nach Bequemlichkeit ausgewählt werden.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-006\" data-source-hash=\"6525466b712afd337052544305d31785c0b683dc306ce547d8aceccababa28df\" data-source-title=\"SRC-UCONN-SLOWFEEDERS-20261001\"></span>Taschen aus Gewebe sind häufig leicht zu befüllen, können aber einen schnelleren Zugang zum Heu ermöglichen. Höheres Aufhängen kann diesen Zugang bremsen, verändert jedoch die Haltung von Kopf und Hals beim Fressen. Die Entscheidung sollte deshalb Befüllen und Haltung beim Fressen gemeinsam berücksichtigen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-004\">Für den Transport kann eine weiche Tasche praktisch sein. Für einen festen Platz können andere Bauformen sinnvoller sein. Im Bereich <a data-link-role=\"semantic_related\" href=\"/fuetterung/fuetterung-raufutter/\">Raufutter</a> zählt der kontrollierte Zugang zum Heu.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-007\" data-source-hash=\"3e7ae76df27e2f98ae449143d585f2b4e08781c2dca210aa453fe4bddb907dc3\" data-source-title=\"SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001\"></span>Beobachte außerdem das einzelne Pferd. Ein System soll die Aufnahme verlangsamen, aber nicht dazu führen, dass das Tier ständig gegen das System arbeitet. Zeigt das Pferd deutliche Anzeichen von Frust, ist das ein Hinweis darauf, Bauform, Zugang oder Größe der Öffnungen noch einmal zu hinterfragen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-005 FACT-HEUTASCHE-007\">Für die Entscheidung ergibt sich eine Reihenfolge: gewünschte Dauer beim Fressen festlegen, Hufe und Befestigung prüfen und beobachten, wie das Pferd mit dem System umgeht. So wird aus mehreren Merkmalen eine Auswahl statt eines Kaufs nur nach Größe oder Preis.</p>\n</section>\n\n<section data-block=\"handling\">\n<h2>Raufutter im Alltag passend handhaben</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-004 FACT-HEUTASCHE-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-004\" data-source-hash=\"d02011f3988c47d4bdb8a4a440e266615efd6ccd761e3bf5e0b6a8ec3a86926d\" data-source-title=\"SRC-UCONN-SLOWFEEDERS-20261001\"></span>Die Bauform beeinflusst nicht nur den Zugriff auf das Heu, sondern auch den täglichen Umgang mit dem System. Netze, Konstruktionen aus Gewebe und feste Behälter unterscheiden sich darin, wie leicht sie sich befüllen, transportieren und am vorgesehenen Platz einsetzen lassen. Eine große Tasche hilft wenig, wenn sie umständlich zu handhaben ist.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-006 FACT-HEUTASCHE-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-007\" data-source-hash=\"3e7ae76df27e2f98ae449143d585f2b4e08781c2dca210aa453fe4bddb907dc3\" data-source-title=\"SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001\"></span>Prüfe deshalb vor dem Kauf, welche Menge an Heu tatsächlich hinein soll, wie oft neu mit Heu befüllt wird und ob die Tasche am Platz für die Fütterung gut erreichbar bleibt. Ebenso wichtig ist die Reaktion des Pferdes: Ein Modell, das sich leicht befüllen lässt, ist nur dann passend, wenn das Tier damit ruhig frisst und die gewählte Befestigung keine unnötigen Schwierigkeiten erzeugt. Im Alltag im Stall lohnt sich deshalb ein Test im Alltag mit kleiner Menge an Heu. So lässt sich beobachten, ob Befüllen, Position und Zugriff zusammen funktionieren, bevor die Tasche dauerhaft in den normalen Ablauf der Fütterung übernommen wird. Auch Reinigung und Befestigung sollten vorher praktisch ausprobiert werden.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Heutaschen nach Größe, Befestigung und Bauform vergleichen</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-004 FACT-HEUTASCHE-005 FACT-HEUTASCHE-006\">Die wichtigsten Unterschiede lassen sich praktisch prüfen. Die Tabelle verbindet Wirkung beim Fressen, Bauform und Punkte zur Sicherheit miteinander.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>Merkmal</th><th>Kontrolle</th><th>Bedeutung</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-003\">Öffnungen</td><td data-fact-ids=\"FACT-HEUTASCHE-003\">Tempo der Heuaufnahme festlegen</td><td data-fact-ids=\"FACT-HEUTASCHE-001\">kleinere Maschen bremsen stärker</td></tr>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-005\">Bodennutzung</td><td data-fact-ids=\"FACT-HEUTASCHE-005\">Beschlag auf Hufrisiko prüfen</td><td data-fact-ids=\"FACT-HEUTASCHE-005\">weiches Material kann sich verfangen</td></tr>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-006\">Befestigung</td><td data-fact-ids=\"FACT-HEUTASCHE-006\">Zugang und Kopfhaltung prüfen</td><td data-fact-ids=\"FACT-HEUTASCHE-006\">höhere Position verändert die Haltung</td></tr>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-004 FACT-HEUTASCHE-007\">Bauart</td><td data-fact-ids=\"FACT-HEUTASCHE-004\">Befüllen und Einsatz abwägen</td><td data-fact-ids=\"FACT-HEUTASCHE-007\">ruhiges Fressen bleibt entscheidend</td></tr>\n</tbody>\n</table>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-005\">Die passende Lösung verbindet die gewünschte Wirkung beim Fressen mit einer Nutzung, die zum Pferd und zum vorgesehenen Platz für die Fütterung passt.</p>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-003 FACT-HEUTASCHE-004\">Eine gute Auswahl beginnt bei der Funktion. Kleinere Öffnungen können die Zeit beim Fressen verlängern, während Bauform und Material bestimmen, wie sich das System im Alltag einsetzen lässt. Deshalb ist es sinnvoll, zuerst das gewünschte Verhalten beim Fressen festzulegen und erst danach zwischen den konkreten Ausführungen zu wählen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-005 FACT-HEUTASCHE-006 FACT-HEUTASCHE-007\">Genauso wichtig bleiben Sicherheit und Akzeptanz. Beschlag, Höhe der Befestigung, Haltung beim Fressen und das Verhalten des Pferdes gehören zusammen betrachtet. Passt eine Tasche in diesen Punkten nicht zum individuellen Einsatz, ist eine andere Bauform die bessere Wahl, auch wenn das erste Modell auf den ersten Blick praktisch wirkt.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-004\">Weitere Modelle und Einsatzbereiche findest du im gebundenen Bereich <a data-link-role=\"further_information\" href=\"/fuetterung/fuetterung-raufutter/heutaschen/\">Heutaschen</a>.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+            "content_sha256": "7fe53f906d531f54ad7384a98d41268360935737f1411324379682988cd84882",
+            "contract": "K9_ARTICLE_PRODUCT_V1",
+            "lt68_preflight_result": {
+              "article_sha256": "7fe53f906d531f54ad7384a98d41268360935737f1411324379682988cd84882",
+              "checked_text_sha256": "a0e127d5ee0e4ef8dba2bae7009907e8899dd02d92487c64c60b4c746be2d31f",
+              "contract": "K9_LT68_RESULT_V1",
+              "engine": "LanguageTool 6.8 / Bestand 43",
+              "finding_count": 0,
+              "findings": [],
+              "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+              "language_evidence": {
+                "approved_exceptions": [],
+                "checked_text": "Die passende Tasche für Heu sollte nicht nur möglichst viel Heu aufnehmen. Entscheidend ist, wie sie das Fressen verändert, wie sicher sie sich am vorgesehenen Ort nutzen lässt und ob dein Pferd mit der gewählten Bauform ruhig zurechtkommt. Die Systeme unterscheiden sich deutlich in Größe der Öffnungen, Material und Handhabung.\n\nVor dem Kauf lohnt sich deshalb ein Blick auf Beschlag, Befestigung und Befüllen. Ein Modell, das in einer Box gut funktioniert, muss nicht automatisch für Nutzung am Boden oder für jedes Pferd geeignet sein. Die Auswahl sollte Dauer beim Fressen und Sicherheit verbinden.\n\nHeutaschen für Pferde passend auswählen\n\nKleine und mittlere Öffnungen können die Aufnahme von Heu verlangsamen und die Zeit beim Fressen verlängern. Damit ist die Größe der Öffnungen keine Nebensache, sondern eines der wichtigsten Kriterien für die Auswahl. Wer die Zeit beim Fressen verlängern möchte, sollte die Größe der Öffnungen gezielt einbeziehen.\n\nIn den beschriebenen Versuchen sank die gemessene Geschwindigkeit beim Fressen mit kleineren Öffnungen. In einer weiteren Untersuchung verlängerte sich die Dauer einer Mahlzeit mit Heu bei mittleren und kleinen Netzen deutlich gegenüber Kontrolle und großem Netz. Daraus folgt: Die gewünschte Dauer beim Fressen sollte zur Größe der Öffnungen passen.\n\nDauer beim Fressen: Soll das Heu deutlich langsamer aufgenommen werden?\n\nGröße der Öffnungen: Passt die Größe der Öffnungen zum gewünschten Tempo?\n\nSicherheit der Hufe: Ist das Pferd beschlagen oder ohne Beschlag?\n\nBefestigung: Lässt sich die Tasche sicher und passend positionieren?\n\nAkzeptanz: Frisst das Pferd ruhig mit dem gewählten System?\n\nAuch die Bauform gehört in die erste Auswahl. Im Bereich Fütterung treffen Netze, Konstruktionen aus Gewebe und feste Systeme auf unterschiedliche Bedingungen im Einsatz. Entscheidend ist deshalb nicht ein einzelnes Merkmal, sondern die Kombination aus Material, Zugriff auf das Heu und täglicher Handhabung.\n\nSicherheit bei der Fütterung gemeinsam bewerten\n\nBei weichen Systemen für Nutzung am Boden ist der Beschlag ein wichtiger Punkt für die Sicherheit. Die zugrunde liegende Fachquelle weist darauf hin, dass sich ein Pferd mit Beschlag mit einem Hufeisen im Material verfangen kann. Ein Modell für die Nutzung am Boden sollte daher nicht allein nach Bequemlichkeit ausgewählt werden.\n\nTaschen aus Gewebe sind häufig leicht zu befüllen, können aber einen schnelleren Zugang zum Heu ermöglichen. Höheres Aufhängen kann diesen Zugang bremsen, verändert jedoch die Haltung von Kopf und Hals beim Fressen. Die Entscheidung sollte deshalb Befüllen und Haltung beim Fressen gemeinsam berücksichtigen.\n\nFür den Transport kann eine weiche Tasche praktisch sein. Für einen festen Platz können andere Bauformen sinnvoller sein. Im Bereich Raufutter zählt der kontrollierte Zugang zum Heu.\n\nBeobachte außerdem das einzelne Pferd. Ein System soll die Aufnahme verlangsamen, aber nicht dazu führen, dass das Tier ständig gegen das System arbeitet. Zeigt das Pferd deutliche Anzeichen von Frust, ist das ein Hinweis darauf, Bauform, Zugang oder Größe der Öffnungen noch einmal zu hinterfragen.\n\nFür die Entscheidung ergibt sich eine Reihenfolge: gewünschte Dauer beim Fressen festlegen, Hufe und Befestigung prüfen und beobachten, wie das Pferd mit dem System umgeht. So wird aus mehreren Merkmalen eine Auswahl statt eines Kaufs nur nach Größe oder Preis.\n\nRaufutter im Alltag passend handhaben\n\nDie Bauform beeinflusst nicht nur den Zugriff auf das Heu, sondern auch den täglichen Umgang mit dem System. Netze, Konstruktionen aus Gewebe und feste Behälter unterscheiden sich darin, wie leicht sie sich befüllen, transportieren und am vorgesehenen Platz einsetzen lassen. Eine große Tasche hilft wenig, wenn sie umständlich zu handhaben ist.\n\nPrüfe deshalb vor dem Kauf, welche Menge an Heu tatsächlich hinein soll, wie oft neu mit Heu befüllt wird und ob die Tasche am Platz für die Fütterung gut erreichbar bleibt. Ebenso wichtig ist die Reaktion des Pferdes: Ein Modell, das sich leicht befüllen lässt, ist nur dann passend, wenn das Tier damit ruhig frisst und die gewählte Befestigung keine unnötigen Schwierigkeiten erzeugt. Im Alltag im Stall lohnt sich deshalb ein Test im Alltag mit kleiner Menge an Heu. So lässt sich beobachten, ob Befüllen, Position und Zugriff zusammen funktionieren, bevor die Tasche dauerhaft in den normalen Ablauf der Fütterung übernommen wird. Auch Reinigung und Befestigung sollten vorher praktisch ausprobiert werden.\n\nHeutaschen nach Größe, Befestigung und Bauform vergleichen\n\nDie wichtigsten Unterschiede lassen sich praktisch prüfen. Die Tabelle verbindet Wirkung beim Fressen, Bauform und Punkte zur Sicherheit miteinander.\n\nMerkmal\n\nKontrolle\n\nBedeutung\n\nÖffnungen\n\nTempo der Heuaufnahme festlegen\n\nkleinere Maschen bremsen stärker\n\nBodennutzung\n\nBeschlag auf Hufrisiko prüfen\n\nweiches Material kann sich verfangen\n\nBefestigung\n\nZugang und Kopfhaltung prüfen\n\nhöhere Position verändert die Haltung\n\nBauart\n\nBefüllen und Einsatz abwägen\n\nruhiges Fressen bleibt entscheidend\n\nDie passende Lösung verbindet die gewünschte Wirkung beim Fressen mit einer Nutzung, die zum Pferd und zum vorgesehenen Platz für die Fütterung passt.\n\nFazit\n\nEine gute Auswahl beginnt bei der Funktion. Kleinere Öffnungen können die Zeit beim Fressen verlängern, während Bauform und Material bestimmen, wie sich das System im Alltag einsetzen lässt. Deshalb ist es sinnvoll, zuerst das gewünschte Verhalten beim Fressen festzulegen und erst danach zwischen den konkreten Ausführungen zu wählen.\n\nGenauso wichtig bleiben Sicherheit und Akzeptanz. Beschlag, Höhe der Befestigung, Haltung beim Fressen und das Verhalten des Pferdes gehören zusammen betrachtet. Passt eine Tasche in diesen Punkten nicht zum individuellen Einsatz, ist eine andere Bauform die bessere Wahl, auch wenn das erste Modell auf den ersten Blick praktisch wirkt.\n\nWeiterführende Informationen\n\nWeitere Modelle und Einsatzbereiche findest du im gebundenen Bereich Heutaschen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+                "checked_text_sha256": "a0e127d5ee0e4ef8dba2bae7009907e8899dd02d92487c64c60b4c746be2d31f",
+                "content_hash": "7fe53f906d531f54ad7384a98d41268360935737f1411324379682988cd84882",
+                "engine": "LanguageTool 6.8 / Bestand 43",
+                "execution_record": {
+                  "input_sha256": "a0e127d5ee0e4ef8dba2bae7009907e8899dd02d92487c64c60b4c746be2d31f",
+                  "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+                  "return_code": 0
+                },
+                "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+                "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+                "raw_finding_count": 0,
+                "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+                "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+                "return_code": 0,
+                "unresolved_finding_count": 0
+              },
+              "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+              "publish_allowed": false,
+              "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+              "return_code": 0,
+              "status": "PASS"
+            },
+            "ppm_item": {
+              "article_type": "Beratung",
+              "canonical_article": {
+                "article_type": "Beratung",
+                "body_html": "<article data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-004\">Die passende Tasche für Heu sollte nicht nur möglichst viel Heu aufnehmen. Entscheidend ist, wie sie das Fressen verändert, wie sicher sie sich am vorgesehenen Ort nutzen lässt und ob dein Pferd mit der gewählten Bauform ruhig zurechtkommt. Die Systeme unterscheiden sich deutlich in Größe der Öffnungen, Material und Handhabung.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-005 FACT-HEUTASCHE-006\">Vor dem Kauf lohnt sich deshalb ein Blick auf Beschlag, Befestigung und Befüllen. Ein Modell, das in einer Box gut funktioniert, muss nicht automatisch für Nutzung am Boden oder für jedes Pferd geeignet sein. Die Auswahl sollte Dauer beim Fressen und Sicherheit verbinden.</p>\n</section>\n\n<section data-block=\"criteria\">\n<h2>Heutaschen für Pferde passend auswählen</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-001\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-001\" data-source-hash=\"d73d59c306b20f11819eb5c40584a8b562ece85ba20bf4626ce7704d9b9b9e7f\" data-source-title=\"SRC-UMN-HAYNET-20261001\"></span>Kleine und mittlere Öffnungen können die Aufnahme von Heu verlangsamen und die Zeit beim Fressen verlängern. Damit ist die Größe der Öffnungen keine Nebensache, sondern eines der wichtigsten Kriterien für die Auswahl. Wer die Zeit beim Fressen verlängern möchte, sollte die Größe der Öffnungen gezielt einbeziehen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-002 FACT-HEUTASCHE-003\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-002\" data-source-hash=\"3f6b2611f3f48e223ec9676c1a8e5ad4f090a4f26d7d598b1e0386946712c6f0\" data-source-title=\"SRC-UMN-HAYNET-20261001\"></span><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-003\" data-source-hash=\"d65e5ed644df0c1ff5898af330b1d1053cd49cbbfdf55d8a5c692770f56056b4\" data-source-title=\"SRC-UMN-HAYNET-20261001\"></span>In den beschriebenen Versuchen sank die gemessene Geschwindigkeit beim Fressen mit kleineren Öffnungen. In einer weiteren Untersuchung verlängerte sich die Dauer einer Mahlzeit mit Heu bei mittleren und kleinen Netzen deutlich gegenüber Kontrolle und großem Netz. Daraus folgt: Die gewünschte Dauer beim Fressen sollte zur Größe der Öffnungen passen.</p>\n<ul data-list=\"criteria\">\n<li data-fact-ids=\"FACT-HEUTASCHE-001\"><strong>Dauer beim Fressen:</strong> Soll das Heu deutlich langsamer aufgenommen werden?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-003\"><strong>Größe der Öffnungen:</strong> Passt die Größe der Öffnungen zum gewünschten Tempo?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-005\"><strong>Sicherheit der Hufe:</strong> Ist das Pferd beschlagen oder ohne Beschlag?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-006\"><strong>Befestigung:</strong> Lässt sich die Tasche sicher und passend positionieren?</li>\n<li data-fact-ids=\"FACT-HEUTASCHE-007\"><strong>Akzeptanz:</strong> Frisst das Pferd ruhig mit dem gewählten System?</li>\n</ul>\n<p data-fact-ids=\"FACT-HEUTASCHE-004\">Auch die Bauform gehört in die erste Auswahl. Im Bereich <a data-link-role=\"parent_category\" href=\"/fuetterung/\">Fütterung</a> treffen Netze, Konstruktionen aus Gewebe und feste Systeme auf unterschiedliche Bedingungen im Einsatz. Entscheidend ist deshalb nicht ein einzelnes Merkmal, sondern die Kombination aus Material, Zugriff auf das Heu und täglicher Handhabung.</p>\n</section>\n\n<section data-block=\"decision\">\n<h2>Sicherheit bei der Fütterung gemeinsam bewerten</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-005\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-005\" data-source-hash=\"2fb7f0e6cd38dd47f290849e978798d12279ad3732efce9bb3cddec2eb963f18\" data-source-title=\"SRC-UCONN-SLOWFEEDERS-20261001\"></span>Bei weichen Systemen für Nutzung am Boden ist der Beschlag ein wichtiger Punkt für die Sicherheit. Die zugrunde liegende Fachquelle weist darauf hin, dass sich ein Pferd mit Beschlag mit einem Hufeisen im Material verfangen kann. Ein Modell für die Nutzung am Boden sollte daher nicht allein nach Bequemlichkeit ausgewählt werden.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-006\" data-source-hash=\"6525466b712afd337052544305d31785c0b683dc306ce547d8aceccababa28df\" data-source-title=\"SRC-UCONN-SLOWFEEDERS-20261001\"></span>Taschen aus Gewebe sind häufig leicht zu befüllen, können aber einen schnelleren Zugang zum Heu ermöglichen. Höheres Aufhängen kann diesen Zugang bremsen, verändert jedoch die Haltung von Kopf und Hals beim Fressen. Die Entscheidung sollte deshalb Befüllen und Haltung beim Fressen gemeinsam berücksichtigen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-004\">Für den Transport kann eine weiche Tasche praktisch sein. Für einen festen Platz können andere Bauformen sinnvoller sein. Im Bereich <a data-link-role=\"semantic_related\" href=\"/fuetterung/fuetterung-raufutter/\">Raufutter</a> zählt der kontrollierte Zugang zum Heu.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-007\" data-source-hash=\"3e7ae76df27e2f98ae449143d585f2b4e08781c2dca210aa453fe4bddb907dc3\" data-source-title=\"SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001\"></span>Beobachte außerdem das einzelne Pferd. Ein System soll die Aufnahme verlangsamen, aber nicht dazu führen, dass das Tier ständig gegen das System arbeitet. Zeigt das Pferd deutliche Anzeichen von Frust, ist das ein Hinweis darauf, Bauform, Zugang oder Größe der Öffnungen noch einmal zu hinterfragen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-005 FACT-HEUTASCHE-007\">Für die Entscheidung ergibt sich eine Reihenfolge: gewünschte Dauer beim Fressen festlegen, Hufe und Befestigung prüfen und beobachten, wie das Pferd mit dem System umgeht. So wird aus mehreren Merkmalen eine Auswahl statt eines Kaufs nur nach Größe oder Preis.</p>\n</section>\n\n<section data-block=\"handling\">\n<h2>Raufutter im Alltag passend handhaben</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-004 FACT-HEUTASCHE-006\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-004\" data-source-hash=\"d02011f3988c47d4bdb8a4a440e266615efd6ccd761e3bf5e0b6a8ec3a86926d\" data-source-title=\"SRC-UCONN-SLOWFEEDERS-20261001\"></span>Die Bauform beeinflusst nicht nur den Zugriff auf das Heu, sondern auch den täglichen Umgang mit dem System. Netze, Konstruktionen aus Gewebe und feste Behälter unterscheiden sich darin, wie leicht sie sich befüllen, transportieren und am vorgesehenen Platz einsetzen lassen. Eine große Tasche hilft wenig, wenn sie umständlich zu handhaben ist.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-006 FACT-HEUTASCHE-007\"><span class=\"ppm-source-trace\" data-fact-id=\"FACT-HEUTASCHE-007\" data-source-hash=\"3e7ae76df27e2f98ae449143d585f2b4e08781c2dca210aa453fe4bddb907dc3\" data-source-title=\"SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001\"></span>Prüfe deshalb vor dem Kauf, welche Menge an Heu tatsächlich hinein soll, wie oft neu mit Heu befüllt wird und ob die Tasche am Platz für die Fütterung gut erreichbar bleibt. Ebenso wichtig ist die Reaktion des Pferdes: Ein Modell, das sich leicht befüllen lässt, ist nur dann passend, wenn das Tier damit ruhig frisst und die gewählte Befestigung keine unnötigen Schwierigkeiten erzeugt. Im Alltag im Stall lohnt sich deshalb ein Test im Alltag mit kleiner Menge an Heu. So lässt sich beobachten, ob Befüllen, Position und Zugriff zusammen funktionieren, bevor die Tasche dauerhaft in den normalen Ablauf der Fütterung übernommen wird. Auch Reinigung und Befestigung sollten vorher praktisch ausprobiert werden.</p>\n</section>\n\n<section data-block=\"table\">\n<h2>Heutaschen nach Größe, Befestigung und Bauform vergleichen</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-004 FACT-HEUTASCHE-005 FACT-HEUTASCHE-006\">Die wichtigsten Unterschiede lassen sich praktisch prüfen. Die Tabelle verbindet Wirkung beim Fressen, Bauform und Punkte zur Sicherheit miteinander.</p>\n<table class=\"system-129-table comparison-table\">\n<thead><tr><th>Merkmal</th><th>Kontrolle</th><th>Bedeutung</th></tr></thead>\n<tbody>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-003\">Öffnungen</td><td data-fact-ids=\"FACT-HEUTASCHE-003\">Tempo der Heuaufnahme festlegen</td><td data-fact-ids=\"FACT-HEUTASCHE-001\">kleinere Maschen bremsen stärker</td></tr>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-005\">Bodennutzung</td><td data-fact-ids=\"FACT-HEUTASCHE-005\">Beschlag auf Hufrisiko prüfen</td><td data-fact-ids=\"FACT-HEUTASCHE-005\">weiches Material kann sich verfangen</td></tr>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-006\">Befestigung</td><td data-fact-ids=\"FACT-HEUTASCHE-006\">Zugang und Kopfhaltung prüfen</td><td data-fact-ids=\"FACT-HEUTASCHE-006\">höhere Position verändert die Haltung</td></tr>\n<tr><td data-fact-ids=\"FACT-HEUTASCHE-004 FACT-HEUTASCHE-007\">Bauart</td><td data-fact-ids=\"FACT-HEUTASCHE-004\">Befüllen und Einsatz abwägen</td><td data-fact-ids=\"FACT-HEUTASCHE-007\">ruhiges Fressen bleibt entscheidend</td></tr>\n</tbody>\n</table>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-005\">Die passende Lösung verbindet die gewünschte Wirkung beim Fressen mit einer Nutzung, die zum Pferd und zum vorgesehenen Platz für die Fütterung passt.</p>\n</section>\n\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-001 FACT-HEUTASCHE-003 FACT-HEUTASCHE-004\">Eine gute Auswahl beginnt bei der Funktion. Kleinere Öffnungen können die Zeit beim Fressen verlängern, während Bauform und Material bestimmen, wie sich das System im Alltag einsetzen lässt. Deshalb ist es sinnvoll, zuerst das gewünschte Verhalten beim Fressen festzulegen und erst danach zwischen den konkreten Ausführungen zu wählen.</p>\n<p data-fact-ids=\"FACT-HEUTASCHE-005 FACT-HEUTASCHE-006 FACT-HEUTASCHE-007\">Genauso wichtig bleiben Sicherheit und Akzeptanz. Beschlag, Höhe der Befestigung, Haltung beim Fressen und das Verhalten des Pferdes gehören zusammen betrachtet. Passt eine Tasche in diesen Punkten nicht zum individuellen Einsatz, ist eine andere Bauform die bessere Wahl, auch wenn das erste Modell auf den ersten Blick praktisch wirkt.</p>\n</section>\n\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p data-fact-ids=\"FACT-HEUTASCHE-004\">Weitere Modelle und Einsatzbereiche findest du im gebundenen Bereich <a data-link-role=\"further_information\" href=\"/fuetterung/fuetterung-raufutter/heutaschen/\">Heutaschen</a>.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.</p>\n</section>\n</article>",
+                "body_html_sha256": "7fe53f906d531f54ad7384a98d41268360935737f1411324379682988cd84882",
+                "body_text": "Die passende Tasche für Heu sollte nicht nur möglichst viel Heu aufnehmen. Entscheidend ist, wie sie das Fressen verändert, wie sicher sie sich am vorgesehenen Ort nutzen lässt und ob dein Pferd mit der gewählten Bauform ruhig zurechtkommt. Die Systeme unterscheiden sich deutlich in Größe der Öffnungen, Material und Handhabung. Vor dem Kauf lohnt sich deshalb ein Blick auf Beschlag, Befestigung und Befüllen. Ein Modell, das in einer Box gut funktioniert, muss nicht automatisch für Nutzung am Boden oder für jedes Pferd geeignet sein. Die Auswahl sollte Dauer beim Fressen und Sicherheit verbinden. Heutaschen für Pferde passend auswählen Kleine und mittlere Öffnungen können die Aufnahme von Heu verlangsamen und die Zeit beim Fressen verlängern. Damit ist die Größe der Öffnungen keine Nebensache, sondern eines der wichtigsten Kriterien für die Auswahl. Wer die Zeit beim Fressen verlängern möchte, sollte die Größe der Öffnungen gezielt einbeziehen. In den beschriebenen Versuchen sank die gemessene Geschwindigkeit beim Fressen mit kleineren Öffnungen. In einer weiteren Untersuchung verlängerte sich die Dauer einer Mahlzeit mit Heu bei mittleren und kleinen Netzen deutlich gegenüber Kontrolle und großem Netz. Daraus folgt: Die gewünschte Dauer beim Fressen sollte zur Größe der Öffnungen passen. Dauer beim Fressen: Soll das Heu deutlich langsamer aufgenommen werden? Größe der Öffnungen: Passt die Größe der Öffnungen zum gewünschten Tempo? Sicherheit der Hufe: Ist das Pferd beschlagen oder ohne Beschlag? Befestigung: Lässt sich die Tasche sicher und passend positionieren? Akzeptanz: Frisst das Pferd ruhig mit dem gewählten System? Auch die Bauform gehört in die erste Auswahl. Im Bereich Fütterung treffen Netze, Konstruktionen aus Gewebe und feste Systeme auf unterschiedliche Bedingungen im Einsatz. Entscheidend ist deshalb nicht ein einzelnes Merkmal, sondern die Kombination aus Material, Zugriff auf das Heu und täglicher Handhabung. Sicherheit bei der Fütterung gemeinsam bewerten Bei weichen Systemen für Nutzung am Boden ist der Beschlag ein wichtiger Punkt für die Sicherheit. Die zugrunde liegende Fachquelle weist darauf hin, dass sich ein Pferd mit Beschlag mit einem Hufeisen im Material verfangen kann. Ein Modell für die Nutzung am Boden sollte daher nicht allein nach Bequemlichkeit ausgewählt werden. Taschen aus Gewebe sind häufig leicht zu befüllen, können aber einen schnelleren Zugang zum Heu ermöglichen. Höheres Aufhängen kann diesen Zugang bremsen, verändert jedoch die Haltung von Kopf und Hals beim Fressen. Die Entscheidung sollte deshalb Befüllen und Haltung beim Fressen gemeinsam berücksichtigen. Für den Transport kann eine weiche Tasche praktisch sein. Für einen festen Platz können andere Bauformen sinnvoller sein. Im Bereich Raufutter zählt der kontrollierte Zugang zum Heu. Beobachte außerdem das einzelne Pferd. Ein System soll die Aufnahme verlangsamen, aber nicht dazu führen, dass das Tier ständig gegen das System arbeitet. Zeigt das Pferd deutliche Anzeichen von Frust, ist das ein Hinweis darauf, Bauform, Zugang oder Größe der Öffnungen noch einmal zu hinterfragen. Für die Entscheidung ergibt sich eine Reihenfolge: gewünschte Dauer beim Fressen festlegen, Hufe und Befestigung prüfen und beobachten, wie das Pferd mit dem System umgeht. So wird aus mehreren Merkmalen eine Auswahl statt eines Kaufs nur nach Größe oder Preis. Raufutter im Alltag passend handhaben Die Bauform beeinflusst nicht nur den Zugriff auf das Heu, sondern auch den täglichen Umgang mit dem System. Netze, Konstruktionen aus Gewebe und feste Behälter unterscheiden sich darin, wie leicht sie sich befüllen, transportieren und am vorgesehenen Platz einsetzen lassen. Eine große Tasche hilft wenig, wenn sie umständlich zu handhaben ist. Prüfe deshalb vor dem Kauf, welche Menge an Heu tatsächlich hinein soll, wie oft neu mit Heu befüllt wird und ob die Tasche am Platz für die Fütterung gut erreichbar bleibt. Ebenso wichtig ist die Reaktion des Pferdes: Ein Modell, das sich leicht befüllen lässt, ist nur dann passend, wenn das Tier damit ruhig frisst und die gewählte Befestigung keine unnötigen Schwierigkeiten erzeugt. Im Alltag im Stall lohnt sich deshalb ein Test im Alltag mit kleiner Menge an Heu. So lässt sich beobachten, ob Befüllen, Position und Zugriff zusammen funktionieren, bevor die Tasche dauerhaft in den normalen Ablauf der Fütterung übernommen wird. Auch Reinigung und Befestigung sollten vorher praktisch ausprobiert werden. Heutaschen nach Größe, Befestigung und Bauform vergleichen Die wichtigsten Unterschiede lassen sich praktisch prüfen. Die Tabelle verbindet Wirkung beim Fressen, Bauform und Punkte zur Sicherheit miteinander. Merkmal Kontrolle Bedeutung Öffnungen Tempo der Heuaufnahme festlegen kleinere Maschen bremsen stärker Bodennutzung Beschlag auf Hufrisiko prüfen weiches Material kann sich verfangen Befestigung Zugang und Kopfhaltung prüfen höhere Position verändert die Haltung Bauart Befüllen und Einsatz abwägen ruhiges Fressen bleibt entscheidend Die passende Lösung verbindet die gewünschte Wirkung beim Fressen mit einer Nutzung, die zum Pferd und zum vorgesehenen Platz für die Fütterung passt. Fazit Eine gute Auswahl beginnt bei der Funktion. Kleinere Öffnungen können die Zeit beim Fressen verlängern, während Bauform und Material bestimmen, wie sich das System im Alltag einsetzen lässt. Deshalb ist es sinnvoll, zuerst das gewünschte Verhalten beim Fressen festzulegen und erst danach zwischen den konkreten Ausführungen zu wählen. Genauso wichtig bleiben Sicherheit und Akzeptanz. Beschlag, Höhe der Befestigung, Haltung beim Fressen und das Verhalten des Pferdes gehören zusammen betrachtet. Passt eine Tasche in diesen Punkten nicht zum individuellen Einsatz, ist eine andere Bauform die bessere Wahl, auch wenn das erste Modell auf den ersten Blick praktisch wirkt. Weiterführende Informationen Weitere Modelle und Einsatzbereiche findest du im gebundenen Bereich Heutaschen . Dieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+                "body_text_sha256": "86ce51599f33b7d34298ba5fbd9f17f9c57424468bc1e64bb2830343b7929bd0",
+                "claim_ids": [
+                  "FACT-HEUTASCHE-001",
+                  "FACT-HEUTASCHE-002",
+                  "FACT-HEUTASCHE-003",
+                  "FACT-HEUTASCHE-004",
+                  "FACT-HEUTASCHE-005",
+                  "FACT-HEUTASCHE-006",
+                  "FACT-HEUTASCHE-007"
+                ],
+                "content_plan_hash": "0046dda995655ac5d67daa14f671407d694f5aea0be8b16dffe1df95fb8ad3bd",
+                "fact_pack_hash": "7fd9724d49ed585b39ef53e206565941de4acbf7bcbf483b06fa3f2b3056ea6b",
+                "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+                "gold_core_binding_hash": "d42fc479d52b084deb5d4092d4555b7ba5af0ccc5188df09273e69b621293bdb",
+                "gold_reference_id": "K9_BERATUNG_REALTEST_001",
+                "gold_reference_metrics": {
+                  "h2_count": 5,
+                  "paragraph_count": 31,
+                  "table_body_row_count": 8,
+                  "visible_link_count": 2,
+                  "word_count": 1134
+                },
+                "gold_reference_sha256": "652f791c3c6d8fb3ff8cd367d920a36aaa910f0df0250a41ad6bbadae9b7dabc",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Fütterung",
+                    "href": "/fuetterung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Raufutter",
+                    "href": "/fuetterung/fuetterung-raufutter/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Heutaschen",
+                    "href": "/fuetterung/fuetterung-raufutter/heutaschen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "local_candidate_metrics": {
+                  "h2_count": 6,
+                  "paragraph_count": 18,
+                  "table_body_row_count": 4,
+                  "visible_link_count": 3,
+                  "word_count": 877
+                },
+                "local_candidate_status": "STRUCTURAL_LOCAL_CANDIDATE_PENDING_MACHINE_REVIEW",
+                "order_id": "k9-881fa24e",
+                "skeleton_hash": "9aae7b702da6b02ffd2fdccf8cb03ebc54126661b1bf3d591c438d26d0535a83",
+                "slug": "heutaschen-f-r-pferde",
+                "source_ids": [
+                  "SRC-UMN-HAYNET-20261001",
+                  "SRC-UCONN-SLOWFEEDERS-20261001",
+                  "SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001"
+                ],
+                "title": "Die idealen Heutaschen für Pferde finden"
+              },
+              "contract_hashes": [],
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "plan_item_key": "k9-1d36919cfde2600c",
+              "quality_binding": {
+                "ai_disclosure_required": true,
+                "contract": "content_structure_language_binding_v2",
+                "editorial_review_status": "PENDING_INDEPENDENT_REVIEW",
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Fütterung > Raufutter > Heutaschen > Beratung Heutaschen",
+                  "name": "Beratung Heutaschen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "heutaschen-beratung",
+                  "taxonomy": "category"
+                },
+                "intent_terms": [
+                  "Heutaschen für Pferde",
+                  "Heutaschen",
+                  "Raufutter",
+                  "Fütterung"
+                ],
+                "internal_test_marker": "LT1D36919CFDE2",
+                "language_evidence": {},
+                "language_review_status": "PENDING_LANGUAGETOOL_6_8",
+                "link_bindings": [
+                  {
+                    "active": true,
+                    "anchor": "Fütterung",
+                    "href": "/fuetterung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Raufutter",
+                    "href": "/fuetterung/fuetterung-raufutter/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Heutaschen",
+                    "href": "/fuetterung/fuetterung-raufutter/heutaschen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "minimum_word_count": 750,
+                "portal_link_registry": {
+                  "contract": "portal_link_registry_snapshot_v2",
+                  "entries": [
+                    {
+                      "active": true,
+                      "anchor": "Fütterung",
+                      "href": "/fuetterung/",
+                      "reason": "Maschinell gebundener Portal-Hauptbereich",
+                      "role": "parent_category",
+                      "section_id": "criteria",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Raufutter",
+                      "href": "/fuetterung/fuetterung-raufutter/",
+                      "reason": "Maschinell gebundener Portal-Bereich",
+                      "role": "semantic_related",
+                      "section_id": "decision",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    },
+                    {
+                      "active": true,
+                      "anchor": "Heutaschen",
+                      "href": "/fuetterung/fuetterung-raufutter/heutaschen/",
+                      "reason": "Maschinell gebundene Portal-Produktseite",
+                      "role": "further_information",
+                      "section_id": "further_information",
+                      "target_status": "publish",
+                      "target_type": "portal_route"
+                    }
+                  ],
+                  "snapshot_source_sha256": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
+                },
+                "portal_link_registry_hash": "d97776be973fc2b59642a00f9b743402c2212fef1aa844c760c1daba9fba66c5",
+                "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Heutaschen für Pferde und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+                "type_meta": {
+                  "decision_criteria": [
+                    "Gewünschte Fressgeschwindigkeit und passende Öffnungs- beziehungsweise Maschenweite",
+                    "Fassungsvermögen und gewünschte Dauer bis zur nächsten Fütterung",
+                    "Sichere Nutzung bei beschlagenen oder unbeschlagenen Pferden",
+                    "Aufhängehöhe und möglichst geeignete Kopf- und Halsposition beim Fressen",
+                    "Befüllung, Transport und Reinigung im täglichen Einsatz",
+                    "Akzeptanz des Systems durch das einzelne Pferd ohne deutliches Frustrationsverhalten"
+                  ],
+                  "decision_goal": "Eine Heutasche auswählen, die Fressdauer, sichere Befestigung, Handhabung und das individuelle Fressverhalten des Pferdes sinnvoll zusammenbringt."
+                },
+                "wordpress_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Fütterung > Raufutter > Heutaschen > Beratung Heutaschen",
+                  "name": "Beratung Heutaschen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "heutaschen-beratung",
+                  "taxonomy": "category"
+                },
+                "wordpress_runtime_category_status": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING"
+              },
+              "quality_binding_hash": "da85c49a4a5a0fe320aa1121d767830229f04f84aa600f2aa438d9f9f58c303c",
+              "runtime_order": {
+                "allowed_fact_ids": [
+                  "FACT-HEUTASCHE-001",
+                  "FACT-HEUTASCHE-002",
+                  "FACT-HEUTASCHE-003",
+                  "FACT-HEUTASCHE-004",
+                  "FACT-HEUTASCHE-005",
+                  "FACT-HEUTASCHE-006",
+                  "FACT-HEUTASCHE-007"
+                ],
+                "article_type": "Beratung",
+                "conclusion": "Fazit Eine gute Auswahl beginnt bei der Funktion. Kleinere Öffnungen können die Zeit beim Fressen verlängern, während Bauform und Material bestimmen, wie sich das System im Alltag einsetzen lässt. Deshalb ist es sinnvoll, zuerst das gewünschte Verhalten beim Fressen festzulegen und erst danach zwischen den konkreten Ausführungen zu wählen. Genauso wichtig bleiben Sicherheit und Akzeptanz. Beschlag, Höhe der Befestigung, Haltung beim Fressen und das Verhalten des Pferdes gehören zusammen betrachtet. Passt eine Tasche in diesen Punkten nicht zum individuellen Einsatz, ist eine andere Bauform die bessere Wahl, auch wenn das erste Modell auf den ersten Blick praktisch wirkt.",
+                "domain": "pferdeportal",
+                "fact_pack_hash": "7fd9724d49ed585b39ef53e206565941de4acbf7bcbf483b06fa3f2b3056ea6b",
+                "lead": "Die passende Tasche für Heu sollte nicht nur möglichst viel Heu aufnehmen. Entscheidend ist, wie sie das Fressen verändert, wie sicher sie sich am vorgesehenen Ort nutzen lässt und ob dein Pferd mit der gewählten Bauform ruhig zurechtkommt. Die Systeme unterscheiden sich deutlich in Größe der Öffnungen, Material und Handhabung. Vor dem Kauf lohnt sich deshalb ein Blick auf Beschlag, Befestigung und Befüllen. Ein Modell, das in einer Box gut funktioniert, muss nicht automatisch für Nutzung am Boden oder für jedes Pferd geeignet sein. Die Auswahl sollte Dauer beim Fressen und Sicherheit verbinden.",
+                "links": [
+                  {
+                    "active": true,
+                    "anchor": "Fütterung",
+                    "href": "/fuetterung/",
+                    "reason": "Maschinell gebundener Portal-Hauptbereich",
+                    "role": "parent_category",
+                    "section_id": "criteria",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Raufutter",
+                    "href": "/fuetterung/fuetterung-raufutter/",
+                    "reason": "Maschinell gebundener Portal-Bereich",
+                    "role": "semantic_related",
+                    "section_id": "decision",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  },
+                  {
+                    "active": true,
+                    "anchor": "Heutaschen",
+                    "href": "/fuetterung/fuetterung-raufutter/heutaschen/",
+                    "reason": "Maschinell gebundene Portal-Produktseite",
+                    "role": "further_information",
+                    "section_id": "further_information",
+                    "target_status": "publish",
+                    "target_type": "portal_route"
+                  }
+                ],
+                "order_id": "k9-881fa24e",
+                "required_sections": [
+                  "Fazit",
+                  "Weiterführende Informationen"
+                ],
+                "section_fact_ids": [
+                  "FACT-HEUTASCHE-001",
+                  "FACT-HEUTASCHE-002",
+                  "FACT-HEUTASCHE-003",
+                  "FACT-HEUTASCHE-004",
+                  "FACT-HEUTASCHE-005",
+                  "FACT-HEUTASCHE-006",
+                  "FACT-HEUTASCHE-007"
+                ],
+                "slug": "heutaschen-f-r-pferde",
+                "subject_label": "Heutaschen für Pferde",
+                "subject_scope": "heutaschen_fuer_pferde",
+                "table_focus": [
+                  "FACT-HEUTASCHE-001",
+                  "FACT-HEUTASCHE-002",
+                  "FACT-HEUTASCHE-003",
+                  "FACT-HEUTASCHE-004"
+                ],
+                "title": "Die idealen Heutaschen für Pferde finden"
+              },
+              "search_intent": "COMMERCIAL_INVESTIGATION_ADVICE",
+              "source_hashes": [],
+              "source_order_id": "k9-881fa24e",
+              "source_snapshot_id": "FP-K9-HEUTASCHEN-20261001",
+              "target_keyword": "Heutaschen für Pferde",
+              "three_type_local_binding": {
+                "expected_category": {
+                  "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+                  "hierarchy_path": "Fütterung > Raufutter > Heutaschen > Beratung Heutaschen",
+                  "name": "Beratung Heutaschen",
+                  "semantic_binding_not_numeric_identity": true,
+                  "slug": "heutaschen-beratung",
+                  "taxonomy": "category"
+                },
+                "semantic_keywords": [
+                  "Heutaschen für Pferde",
+                  "Gewünschte Fressgeschwindigkeit und passende Öffnungs- beziehungsweise Maschenweite",
+                  "Fassungsvermögen und gewünschte Dauer bis zur nächsten Fütterung",
+                  "Sichere Nutzung bei beschlagenen oder unbeschlagenen Pferden",
+                  "Aufhängehöhe und möglichst geeignete Kopf- und Halsposition beim Fressen",
+                  "Befüllung, Transport und Reinigung im täglichen Einsatz",
+                  "Akzeptanz des Systems durch das einzelne Pferd ohne deutliches Frustrationsverhalten"
+                ],
+                "wordpress_runtime_term_id_required_later": true,
+                "wordpress_runtime_validation_performed_now": false
+              },
+              "topic": "Die idealen Heutaschen für Pferde finden"
+            },
+            "product_sha256": "bdfbbe1a33f9ad1584bb5ff646901b9711611d611d8d27ebfa10e69f9745db72",
+            "research_product_sha256": "0203d5fd02f63c5ec291217337f0d2156fe407b2ce049e8da68ad4102f3df982",
+            "title": "Die idealen Heutaschen für Pferde finden",
+            "writing_rules_coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+            "writing_rules_sha256": "a7ade7393b46c1eadeaa77075e0c3711cc2792c8477bf0a70bd60b7317347126"
+          },
+          "item_id": "k9-68726b914aa78ebb881fa24e"
+        },
+        "research": {
+          "item_id": "k9-68726b914aa78ebb881fa24e",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Gewünschte Fressgeschwindigkeit und passende Öffnungs- beziehungsweise Maschenweite",
+                "Fassungsvermögen und gewünschte Dauer bis zur nächsten Fütterung",
+                "Sichere Nutzung bei beschlagenen oder unbeschlagenen Pferden",
+                "Aufhängehöhe und möglichst geeignete Kopf- und Halsposition beim Fressen",
+                "Befüllung, Transport und Reinigung im täglichen Einsatz",
+                "Akzeptanz des Systems durch das einzelne Pferd ohne deutliches Frustrationsverhalten"
+              ],
+              "decision_goal": "Eine Heutasche auswählen, die Fressdauer, sichere Befestigung, Handhabung und das individuelle Fressverhalten des Pferdes sinnvoll zusammenbringt."
+            },
+            "fact_pack": {
+              "article_type": "Beratung",
+              "article_type_coverage": "PASS_BERATUNG",
+              "claim_register_hash": "4fe8006208b98cdbe593c4f141469a28917e01489bf850cbf682cd5934516d62",
+              "claims": [
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "d73d59c306b20f11819eb5c40584a8b562ece85ba20bf4626ce7704d9b9b9e7f",
+                  "fact_id": "FACT-HEUTASCHE-001",
+                  "locator": "Quick facts / Benefits of hay nets, lines 244-250 and 291-302",
+                  "source_id": "SRC-UMN-HAYNET-20261001",
+                  "statement": "Kleine und mittlere Öffnungen in Slow-Feed-Heunetzen können bei erwachsenen Pferden die Raufutteraufnahme verlangsamen und die Fresszeit verlängern.",
+                  "subject_scope": "Maschenweite und Fressdauer",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "3f6b2611f3f48e223ec9676c1a8e5ad4f090a4f26d7d598b1e0386946712c6f0",
+                  "fact_id": "FACT-HEUTASCHE-002",
+                  "locator": "Testing hay nets / feeding rates, lines 265-289",
+                  "source_id": "SRC-UMN-HAYNET-20261001",
+                  "statement": "In der Untersuchung der University of Minnesota lagen die Öffnungen der getesteten Netze bei 6 Zoll, 1,75 Zoll und 1,0 Zoll; mit kleineren Öffnungen sank die gemessene Fressrate.",
+                  "subject_scope": "Maschenweite und Fressrate",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "d65e5ed644df0c1ff5898af330b1d1053cd49cbbfdf55d8a5c692770f56056b4",
+                  "fact_id": "FACT-HEUTASCHE-003",
+                  "locator": "Benefits of hay nets, lines 289-302",
+                  "source_id": "SRC-UMN-HAYNET-20261001",
+                  "statement": "In einer zweiten Untersuchung dauerte eine Heumahlzeit mit dem mittelgroßen Netz etwas mehr als fünf Stunden und mit dem kleinen Netz 6,5 Stunden; bei Kontrolle und großem Netz waren es 3,2 beziehungsweise 3,4 Stunden.",
+                  "subject_scope": "Fressdauer nach Netzgröße",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "d02011f3988c47d4bdb8a4a440e266615efd6ccd761e3bf5e0b6a8ec3a86926d",
+                  "fact_id": "FACT-HEUTASCHE-004",
+                  "locator": "Types of Slow Feeders, lines 154-158",
+                  "source_id": "SRC-UCONN-SLOWFEEDERS-20261001",
+                  "statement": "Slow Feeder für Pferde gibt es unter anderem als Netze mit kleineren Öffnungen, als Webbing-Mesh-Konstruktionen und als feste Futterbehälter; die Bauform beeinflusst damit Handhabung und Fresszugang.",
+                  "subject_scope": "Bauform und Einsatz",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "2fb7f0e6cd38dd47f290849e978798d12279ad3732efce9bb3cddec2eb963f18",
+                  "fact_id": "FACT-HEUTASCHE-005",
+                  "locator": "Pros and Cons, lines 159-165",
+                  "source_id": "SRC-UCONN-SLOWFEEDERS-20261001",
+                  "statement": "Bei bodennah eingesetzten weichen Slow-Feedern muss die Hufsicherheit berücksichtigt werden, weil sich beschlagene Pferde mit einem Hufeisen im Material verfangen können.",
+                  "subject_scope": "Hufsicherheit und Beschlag",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "6525466b712afd337052544305d31785c0b683dc306ce547d8aceccababa28df",
+                  "fact_id": "FACT-HEUTASCHE-006",
+                  "locator": "Pros and Cons, lines 163-173",
+                  "source_id": "SRC-UCONN-SLOWFEEDERS-20261001",
+                  "statement": "Webbing-Slow-Feeder sind oft leicht zu befüllen, können aber einen schnelleren Heuzugang ermöglichen; höheres Aufhängen kann den Zugang bremsen, verändert jedoch die Kopf- und Halsposition beim Fressen.",
+                  "subject_scope": "Befüllung, Aufhängung und Fresshaltung",
+                  "time_scope": "allgemeine Produktauswahl"
+                },
+                {
+                  "article_types": [
+                    "Beratung"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "3e7ae76df27e2f98ae449143d585f2b4e08781c2dca210aa453fe4bddb907dc3",
+                  "fact_id": "FACT-HEUTASCHE-007",
+                  "locator": "Five Safety Risks To Consider",
+                  "source_id": "SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001",
+                  "statement": "Bei der Auswahl eines Slow Feeders sollte neben der verlangsamten Futteraufnahme auch beobachtet werden, ob das Pferd mit dem System ruhig frisst oder durch die Konstruktion Frustrationsverhalten zeigt.",
+                  "subject_scope": "Akzeptanz und Frustration",
+                  "time_scope": "allgemeine Produktauswahl"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-HEUTASCHE-001",
+                "FACT-HEUTASCHE-002",
+                "FACT-HEUTASCHE-003",
+                "FACT-HEUTASCHE-004",
+                "FACT-HEUTASCHE-005",
+                "FACT-HEUTASCHE-006",
+                "FACT-HEUTASCHE-007"
+              ],
+              "fact_pack_hash": "7fd9724d49ed585b39ef53e206565941de4acbf7bcbf483b06fa3f2b3056ea6b",
+              "fact_pack_id": "FP-K9-HEUTASCHEN-20261001",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "a77fc2b6d66b137e8d113bea7ce53b12869b71df1207bc87b439833c9cbadb4f",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "heutaschen_fuer_pferde"
+            },
+            "portal_links": [
+              {
+                "anchor": "Fütterung",
+                "href": "/fuetterung/",
+                "role": "parent_category",
+                "section_id": "criteria"
+              },
+              {
+                "anchor": "Raufutter",
+                "href": "/fuetterung/fuetterung-raufutter/",
+                "role": "semantic_related",
+                "section_id": "decision"
+              },
+              {
+                "anchor": "Heutaschen",
+                "href": "/fuetterung/fuetterung-raufutter/heutaschen/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "0203d5fd02f63c5ec291217337f0d2156fe407b2ce049e8da68ad4102f3df982",
+            "sources": [
+              {
+                "source_id": "SRC-UMN-HAYNET-20261001",
+                "title": "Using slow feed hay nets",
+                "url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/using-slow-feed-hay-nets"
+              },
+              {
+                "source_id": "SRC-UCONN-SLOWFEEDERS-20261001",
+                "title": "Weight Management in Horses – Slow Feeders",
+                "url": "https://extension.uconn.edu/publication/weight-management-in-horses-slow-feeders/"
+              },
+              {
+                "source_id": "SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001",
+                "title": "Horse Slow Feeder Safety",
+                "url": "https://thehorse.com/198806/horse-slow-feeder-safety/"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-68726b914aa78ebb881fa24e",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "heutaschen-beratung",
+        "plan_slot": "1d36919cfde2600ce9f164f7f79ceaea0fbfa9eec7e8739a9682efdc8e10c1ba",
+        "target_keyword": "Heutaschen für Pferde",
+        "title": "Die idealen Heutaschen für Pferde finden"
+      },
+      "revision": 0,
+      "title": "Die idealen Heutaschen für Pferde finden"
+    }
+  ],
+  "job_id": "K9-CHECK-15e31f3383fc77a8",
+  "job_sha256": "f7e0be2dc7b43e4015f8a563b20d2aaaa58f959a8c071bb86c96829764d89506",
+  "ledger_generation": 79,
+  "source_run_id": "36894626507",
+  "station": "check",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "MANUAL_PASS_BOOLEAN",
+      "CHANGE_ARTICLE",
+      "ROUTE_AROUND_FAILED_CHECK",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS"
+    ],
+    "input_rule": "USE_ONLY_BOUND_RESEARCH_AND_ARTICLE_PRODUCTS",
+    "must": [
+      "RUN_HASH_BOUND_LANGUAGETOOL_6_8",
+      "RUN_HASH_BOUND_PPM_6_7_9",
+      "BIND_BOTH_RESULTS_TO_EXACT_ARTICLE_SHA256",
+      "RETURN_PASS_OR_REPAIR_REQUIRED",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "RUN_COMPLETE_K9_WRITING_RULE_GUARD",
+      "BIND_WRITING_RULE_RESULT_TO_EXACT_ARTICLE_AND_RULESET_SHA256"
+    ],
+    "output_contract": "K9_SUBMISSION_V1_WITH_LT68_AND_PPM679_RESULTS",
+    "worker_type": "K9_NATIVE_MACHINE_CHECK"
+  }
+}

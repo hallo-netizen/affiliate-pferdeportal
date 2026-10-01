@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 79,
+  "generation": 80,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -732,6 +732,11 @@
         "title": "Die idealen Heutaschen für Pferde finden"
       },
       "products": {
+        "check": {
+          "job_id": "K9-CHECK-15e31f3383fc77a8",
+          "path": "warehouse/check/K9-CHECK-15e31f3383fc77a8.json",
+          "sha256": "af2c051f97e14552a145c08d0c3cfea0609f8c535c19fd0627ee7ff84702ebf7"
+        },
         "research": {
           "job_id": "K9-RESEARCH-f85856812b0584b9",
           "path": "warehouse/research/K9-RESEARCH-f85856812b0584b9.json",
@@ -745,7 +750,7 @@
       },
       "revision": 0,
       "stages": {
-        "check": "PENDING",
+        "check": "DONE",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
