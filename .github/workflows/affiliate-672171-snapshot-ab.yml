@@ -119,6 +119,22 @@ jobs:
               $p=wp_insert_post(['post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,'post_status'=>'publish','post_title'=>$id,'post_name'=>$id]);
               update_post_meta($p,'ppar_campaign_data',$data);
           }
+          // Three explicit positive anchors guarantee visible product output while
+          // the 2012-row historical topology remains the actual timing load.
+          for($slot=1;$slot<=3;$slot++){
+              $id='snapshot-anchor-'.$slot;
+              $data=[
+                  'id'=>$id,'active'=>1,'creative_type'=>'product','network'=>'manual','programme_status'=>'active',
+                  'render_mode'=>'image_link','health_check_enabled'=>0,'assignment_mode'=>'page_tree',
+                  'automation_target_keys'=>['page:ausruestung-sattel','page:schabracken'],
+                  'placements'=>['category_product_'.$slot],'priority'=>100000+$slot,
+                  'title'=>'Snapshot Anchor '.$slot,'description'=>'Positive output anchor',
+                  'button_text'=>'Ansehen','image_url'=>'https://example.com/anchor-'.$slot.'.jpg',
+                  'url'=>'https://example.com/anchor-'.$slot,'source'=>'snapshot-anchor',
+              ];
+              $p=wp_insert_post(['post_type'=>Pferdeportal_Affiliate_Router::CAMPAIGN_POST_TYPE,'post_status'=>'publish','post_title'=>$id,'post_name'=>$id]);
+              update_post_meta($p,'ppar_campaign_data',$data);
+          }
           if($ebay!==922||$idealo!==1090||$active!==1518) throw new RuntimeException("snapshot provider/active counts $ebay/$idealo/$active");
           if($hub_hits<3||$leaf_hits<3) throw new RuntimeException("insufficient real target hits hub=$hub_hits leaf=$leaf_hits");
           update_option('ppar_snapshot_ab_counts',['active'=>$active,'ebay'=>$ebay,'idealo'=>$idealo,'hub_hits'=>$hub_hits,'leaf_hits'=>$leaf_hits],false);
@@ -209,9 +225,10 @@ jobs:
                   print('DIFF',json.dumps(functional(r),sort_keys=True))
                   raise SystemExit('FAIL snapshot exact functional equivalence')
               for p in ['hub','leaf']:
-                  ids=list(r['pages'][p]['selected'].values())
-                  if not all(ids):
-                      raise SystemExit('FAIL missing positive output '+p)
+                  selected=r['pages'][p]['selected']
+                  product_ids=[selected.get('category_product_1',''),selected.get('category_product_2',''),selected.get('category_product_3','')]
+                  if not all(product_ids):
+                      raise SystemExit('FAIL missing positive product output '+p+' '+repr(product_ids))
           def vals(files,key=None):
               out=[]
               for f in files:
