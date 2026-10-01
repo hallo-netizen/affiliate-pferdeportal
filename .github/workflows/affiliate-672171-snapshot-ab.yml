@@ -76,13 +76,13 @@ jobs:
           update_option('ppar_debug','0',false);
           $root=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Ausrüstung','post_name'=>'ausruestung']);
           $hub=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Sattel','post_name'=>'ausruestung-sattel','post_parent'=>$root]);
-          $leaf=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Pferdesättel','post_name'=>'pferdesaettel','post_parent'=>$hub]);
+          $leaf=wp_insert_post(['post_type'=>'page','post_status'=>'publish','post_title'=>'Schabracken','post_name'=>'schabracken','post_parent'=>$hub]);
           update_option('ppar_snapshot_ab_hub',$hub,false);
           update_option('ppar_snapshot_ab_leaf',$leaf,false);
 
           $banner=[
             'id'=>'snapshot-banner','active'=>1,'creative_type'=>'banner','network'=>'manual','programme_status'=>'active',
-            'render_mode'=>'image_link','assignment_mode'=>'page_tree','automation_target_keys'=>['page:ausruestung-sattel','page:pferdesaettel'],
+            'render_mode'=>'image_link','assignment_mode'=>'page_tree','automation_target_keys'=>['page:ausruestung-sattel','page:schabracken'],
             'placements'=>['hub_after_cards'],'priority'=>10,'title'=>'Snapshot Banner','image_url'=>'https://example.com/banner.jpg',
             'url'=>'https://example.com/banner','source'=>'snapshot'
           ];
@@ -97,7 +97,7 @@ jobs:
               $is_active=!empty($row['active']); if($is_active)$active++;
               $targets=array_values((array)($row['automation_target_keys']??[]));
               if($is_active&&in_array('page:ausruestung-sattel',$targets,true))$hub_hits++;
-              if($is_active&&in_array('page:pferdesaettel',$targets,true))$leaf_hits++;
+              if($is_active&&in_array('page:schabracken',$targets,true))$leaf_hits++;
               $id='snap-'.absint($row['post_id']??($n+1));
               $data=[
                   'id'=>$id,'active'=>$is_active?1:0,'creative_type'=>'product',
