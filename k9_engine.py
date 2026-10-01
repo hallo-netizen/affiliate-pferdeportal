@@ -377,7 +377,9 @@ def write_chat_entry(job):
         "ppm_authoring_rules_sha256_required": bool(is_writer),
         "writer_acceptance_plan_required": bool(is_writer),
         "writer_acceptance_plan_source": ("job.items[*].input_products.writer_acceptance_plan" if is_writer else None),
-        "writer_all_findings_required": bool(is_writer)
+        "writer_all_findings_required": bool(is_writer),
+        "writer_retry_rule": ("IF_PREFLIGHT_BLOCKS_REPAIR_ALL_FINDINGS_FROM_RUNTIME_WRITER_PREFLIGHT_FINDINGS_IN_ONE_DRAFT_UPDATE" if is_writer else None),
+        "writer_findings_path": ("runtime/WRITER_PREFLIGHT_FINDINGS.json" if is_writer else None)
     }
     write_json(CHAT_ENTRY, entry)
     return entry
@@ -838,6 +840,8 @@ def assert_execution_only_entry(job):
             raise K9Error("CHAT_ENTRY_PPM_AUTHORING_RULE_BINDING_INVALID")
         if entry.get("writer_acceptance_plan_required") is not True or entry.get("writer_acceptance_plan_source")!="job.items[*].input_products.writer_acceptance_plan" or entry.get("writer_all_findings_required") is not True:
             raise K9Error("CHAT_ENTRY_WRITER_ACCEPTANCE_PLAN_INVALID")
+        if entry.get("writer_retry_rule")!="IF_PREFLIGHT_BLOCKS_REPAIR_ALL_FINDINGS_FROM_RUNTIME_WRITER_PREFLIGHT_FINDINGS_IN_ONE_DRAFT_UPDATE" or entry.get("writer_findings_path")!="runtime/WRITER_PREFLIGHT_FINDINGS.json":
+            raise K9Error("CHAT_ENTRY_WRITER_RETRY_RULE_INVALID")
         if job.get("station")=="repair" and entry.get("repair_scope_rule")!="REPAIR_ALL_REPORTED_FAILED_CHECK_FINDINGS_IN_ONE_PASS_ONLY":
             raise K9Error("CHAT_ENTRY_REPAIR_SCOPE_GUARD_INVALID")
 
