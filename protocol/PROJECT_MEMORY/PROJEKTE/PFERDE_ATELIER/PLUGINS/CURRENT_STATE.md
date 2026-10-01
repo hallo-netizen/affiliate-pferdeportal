@@ -1,7 +1,7 @@
 # PLUGINS – CURRENT STATE
 
 STAND: 2026-10-01
-STATUS: AFFILIATE-PERFORMANCE-LIVE-NACHMESSUNG DEUTLICH VERBESSERT / AFFILIATE-PLUGIN AKTIV BELEGT / EXAKTER 6.72.171-VERSIONS-READBACK OFFEN / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
+STATUS: AFFILIATE 6.72.171 LIVE + PERFORMANCE-PASS / STORAGE-DB-BACKUP-AUFRÄUMUNG AKTIVER NÄCHSTER BLOCK / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
 
 ## AUTORITÄT
 
@@ -22,7 +22,7 @@ Quelle: vom Nutzer bereitgestellte aktuelle WordPress-Liste „Plugins → Insta
 
 Aktuell beobachtet:
 - Affiliate Portal Template Kit (Pferde-kompatibel): **1.50.578**, aktiv.
-- Affiliate-Zentrale (Portal-kompatibel): **6.72.170**, aktiv; Nutzer-Readback 01.10.2026 im WordPress-Uploadvergleich zeigt `Aktuell 6.72.170`. Der zuvor hochgeladene falsche Altinstaller 6.72.169 wurde nicht als neuer Stand übernommen.
+- Affiliate-Zentrale (Portal-kompatibel): **6.72.171**, aktiv; Nutzer bestätigt am 01.10.2026 ausdrücklich, dass die Performance-Diagnose 10:30–10:31 UTC unter 6.72.171 lief. Der reale Performance-Readback ist PASS.
 - Performance Diagnose Safe: **2.3.0 aktiv**; ältere **2.2.0 inaktiv**.
 - Pferde Atelier – Affiliate Design Performance: **3.0.0 inaktiv**.
 - Portal Production Machine: **6.7.9**, aktiv.
@@ -72,12 +72,12 @@ Belastbarer Stand für PA-E-003:
 - isolierter Repository-`CURRENT.zip`-Sync bleibt separat BLOCKED, solange der verfügbare Dokumentationsweg keinen bytegenauen Binärtransfer belegt; keine Ersatz-ZIP erfinden.
 
 ERSTER OFFENER PUNKT:
-**Der Affiliate-Router ist in der neuen realen Diagnose aktiv und die Performanceverbesserung ist belegt; die Diagnose enthält jedoch keine Versionsnummer. Deshalb fehlt nur noch der exakte WordPress-Versions-Readback, dass aktuell 6.72.171 installiert ist.**
+**Der Affiliate-Performanceblock 6.72.171 ist live PASS. Offen ist jetzt der eigentliche Zielvertrag: aktuelle Storage-/DB-Altlasten klassifizieren, bestehende Schutz-/Retentionlogik der betroffenen Eigenplugins nutzen bzw. fehlende Schutzlogik gezielt schließen und danach logisch + physisch bereinigen. Zusätzlich ist der Server-Backupbestand selbst ein belegter Großverbraucher.**
 
 GENAU EINE NEXT ACTION:
-`READBACK_AFFILIATE_ZENTRALE_VERSION_6_72_171_ONLY`.
+`FRESH_STORAGE_BASELINE_THEN_RETENTION_CLASSIFICATION`.
 
-Nur den WordPress-Pluginstand der Affiliate-Zentrale readbacken: **Version 6.72.171 sichtbar?** Der Aktivstatus ist durch die neue Diagnose bereits belegt. Kein neuer Codefix, kein Gesamtbestandsabgleich und keine erneute DB-Bereinigung vor diesem Versionsbeleg. Die bereits vorliegende Performance-Nachmessung bleibt als Live-Evidence gebunden und wird nicht aus Vorsicht neu erfunden oder durch eine neue Pluginversion ersetzt.
+Dieselbe WordPress-Speicheranalyse wie am 29.09.2026 neu erzeugen und gegen den 29.09.-Baselinebericht vergleichen. Bis zum frischen Baseline-Readback keine pauschale Tabellenlöschung. Bereits belegt und als Prüfschwerpunkte gebunden: `slfo_options`, `slfo_pste_candidates`, `slfo_pste_runs`, `slfo_pste_topic_pool`, `slfo_ppar_ebay_items`, Serverordner `wp-content/ai1wm-backups`, `wp-content/wpvividbackups` sowie große `ppar-idealo-feed-*.tmp`-Dateien.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
