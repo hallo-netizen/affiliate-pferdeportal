@@ -25,6 +25,9 @@ PAYLOAD={
         "items":[TARGET]
     }
 }
+_batch_core=dict(PAYLOAD["next_textmachine_metadata_batch"])
+_batch_core.pop("batch_sha256",None)
+PAYLOAD["next_textmachine_metadata_batch"]["batch_sha256"]=ki.stable(_batch_core)
 
 class K9StartTransportTests(unittest.TestCase):
     @classmethod
