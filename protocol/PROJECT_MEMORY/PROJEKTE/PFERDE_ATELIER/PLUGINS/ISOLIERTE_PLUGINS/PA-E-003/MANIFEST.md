@@ -3,23 +3,26 @@
 PLUGIN_ID: PA-E-003
 NAME: Affiliate-Zentrale (Portal-kompatibel)
 
-REAL_BEOBACHTETE_VERSION: 6.72.167
-REAL_BEOBACHTETER_STATUS: AKTIV
+LETZTER_EXPLIZITER_LIVE_VERSIONSREADBACK: 6.72.167
+LETZTER_EXPLIZITER_LIVE_STATUS: AKTIV
 LIVE_UPDATE_REF: PU-20260930-003
-LIVE_READBACK: Nutzer bestätigt 6.72.167 aktiv; eBay OAuth danach erfolgreich geprüft.
+LIVE_READBACK: Nutzer bestätigte 6.72.167 aktiv; eBay OAuth danach erfolgreich. Spätere Performance-Diagnosen wurden geliefert, enthalten selbst aber keine Plugin-Versionsnummer und werden deshalb nicht als Versions-Readback umgedeutet.
 
-AKTUELLER_TECHNISCH_FREIGEGEBENER_RELEASE: 6.72.168
-FINAL_INSTALLER_REF: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.168.zip
-FINAL_INSTALLER_SHA256: 60665d446f2b04fbfd807067fd34648c97a4d0c011c979c06f4095dfcb82d912
-SOURCE_MANIFEST_SHA256: c38f7eb13702f944fabdec2c8d5de85a7786e037d94201a1e12d2ed5ac128cd4
-RELEASE_EVIDENCE: release/affiliate-zentrale/evidence/affiliate_router_v672168_full_release_gate_20260930.md
-RELEASE_GATE_RUN: 36734127128 = SUCCESS
+AKTUELLER_TECHNISCH_FREIGEGEBENER_RELEASE: 6.72.171
+SOURCE_HEAD: ad4db0c34552667a9d398d4b74cb7d8b7130f03a
+SOURCE_MANIFEST_SHA256: 5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4
+LOCAL_FINAL_INSTALLER_NAME: AFFILIATE_ZENTRALE_6.72.171.zip
+LOCAL_FINAL_INSTALLER_SHA256: 769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714
+RELEASE_EVIDENCE: release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md
+EXACT_AB_RUN: 36839006440 = SUCCESS
+SNAPSHOT_2012_AB_RUN: 36839006513 = SUCCESS
+TESTSTATUS: Funktionsgleichheit Positiv/Negativ PASS; 2012er A-B Gesamt -80,01 %, Hub -71,20 %, Leaf -89,87 %; 27/27 byteidentisch zum getesteten Sourcebaum; PHP-Lint 21/21; Fresh-Unpack PASS.
 AUTORITATIVE_FACHQUELLE: release/affiliate-zentrale/AGENTS.md -> control/release-governance/CURRENT_RELEASE.json
 RELEASE_STATUS: RELEASED / release_allowed=true
-LIVE_STATUS_6_72_168: NOCH_NICHT_INSTALLIERT
+LIVE_STATUS_6_72_171: INSTALLATION/READBACK OFFEN
 
 CURRENT_ZIP_STATUS: BLOCKED
-BLOCKER: Der verfügbare GitHub-Schreibweg erlaubt hier keinen nachgewiesenen bytegenauen Transfer des finalen ZIPs als isoliertes CURRENT.zip. Deshalb wird keine rekonstruierte Binärkopie erzeugt.
-ERFORDERLICHER_ARTIFAKTWEG: Bei autorisiertem Binär-Upload den finalen 6.72.168-Installer byteidentisch als CURRENT.zip synchronisieren und dessen SHA-256 gegen 60665d446f2b04fbfd807067fd34648c97a4d0c011c979c06f4095dfcb82d912 prüfen.
+BLOCKER: Der aktuell verwendete Campus-/GitHub-Dokumentationsweg überträgt hier keinen bereits lokal gebauten Binärinstaller als nachgewiesen byteidentisches Repository-`CURRENT.zip`. Deshalb bleibt die vorhandene isolierte Binärkopie unangetastet und es wird keine rekonstruierte/falsche CURRENT.zip behauptet.
+ERFORDERLICHER_ARTIFAKTWEG: Bei einem autorisierten Binär-Upload den exakt geprüften 6.72.171-Installer byteidentisch als `CURRENT.zip` synchronisieren und SHA-256 gegen `769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714` prüfen.
 
 ROLLE: Manifest/Blockerbeleg; keine Fach-/Release-/LIVE-Autorität.
