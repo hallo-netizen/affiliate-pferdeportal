@@ -1,23 +1,19 @@
 {
-  "contract": "K9_CURRENT_STATE_V3",
-  "role": "SOLE_CURRENT_AUTHORITY",
-  "concept": "K9",
-  "branch": "konzept9/greenfield-20260929",
-  "status": "BLOCKED_FINALIZER",
-  "operational_mode": "FINALIZER_BLOCKER_REPORT_ONLY",
   "active_job": null,
-  "first_open_blocker": {
-    "code": "FINALIZER_FAILED_BEFORE_TERMINAL_PACKAGE",
-    "evidence_run_id": "36898799635",
-    "detail": "Read the failed finalizer run. Do not repair or reroute without an explicit user instruction."
-  },
-  "next_action": "REPORT_FINALIZER_BLOCKER_TO_USER",
-  "allowed_action": "REPORT_FINALIZER_BLOCKER_TO_USER_ONLY",
-  "route_lock": "FINALIZER_BLOCKER_REPORT_ONLY",
-  "supervisor_actions_allowed": false,
-  "code_change_allowed": false,
-  "repair_authorized": false,
   "all_other_actions": "DENY",
+  "allowed_action": "SYSTEM_ROUTING_ONLY",
+  "branch": "konzept9/greenfield-20260929",
   "chat_may_route": false,
-  "publish_allowed": false
+  "code_change_allowed": false,
+  "concept": "K9",
+  "contract": "K9_CURRENT_STATE_V3",
+  "first_open_blocker": null,
+  "next_action": "RUN_FINALIZER",
+  "operational_mode": "SYSTEM_ROUTING_ONLY",
+  "publish_allowed": false,
+  "repair_authorized": false,
+  "role": "SOLE_CURRENT_AUTHORITY",
+  "route_lock": "SYSTEM_ROUTING_ONLY",
+  "status": "FINALIZE_PENDING",
+  "supervisor_actions_allowed": false
 }
