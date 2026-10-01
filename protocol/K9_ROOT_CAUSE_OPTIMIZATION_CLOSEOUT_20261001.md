@@ -169,3 +169,39 @@ Die reale Schleifenursache war nicht „zu strenge Qualität“, sondern zu spä
 5. Finalizer prüfte Zustände/PSERC, die vorher noch nicht vollständig als Terminal-Readiness geprüft waren.
 
 Diese fünf Ursachen sind jetzt geschlossen. Der nächste echte Batch dient ausschließlich der Messung, ob die erwartete Wirkung real eintritt: deutlich weniger Writer-Versuche, höchstens ein gebündelter Reparaturdurchgang pro Artikel und keine neuen Content-/State-Fehler erst im Finalizer.
+
+
+## Offene redaktionelle Nachprüfung nach Nutzerreview — H2 und Tabellen
+
+Nach dem technisch vollständig abgeschlossenen 3-Artikel-Lauf hat der Nutzer den finalen FAQ-Beitrag „Was ist eine Longierpeitsche?“ inhaltlich geprüft.
+
+### Befund 1 — Tabelle
+Die aktuelle K9-Regel erzwingt global exakt eine Tabelle (`table_count_exact: 1`) und führt bei FAQ den Block `table` als Pflichtblock.
+
+Im Longierpeitschen-FAQ ist die Tabelle formal regelkonform, aber ihr inhaltlicher Mehrwert ist fraglich:
+- „Funktion / Hilfe beim Longieren / ergänzt Stimme und Leine“
+- „Ausrüstung / Teil der Ausrüstung / für das Longieren vorgesehen“
+- „Sicherheit / Position und Handhabung / sichere Technik erhält Kontrolle“
+- „Einsatz / klar und pferdegerecht / Angst und Schmerz vermeiden“
+
+Die Tabelle verdichtet hier überwiegend bereits unmittelbar zuvor erklärten Inhalt und erzeugt dadurch den Eindruck eines Pflichtformats statt eines echten Informationsgewinns.
+
+Offene fachliche Frage:
+Soll die Tabelle künftig nur dann Pflicht sein, wenn sie einen eigenständigen Vergleichs-, Auswahl-, Strukturierungs- oder Überblicksmehrwert liefert, statt in jedem Artikel zwingend vorhanden zu sein?
+
+### Befund 2 — Zwischenüberschriften
+Die aktuelle H2-Policy verhindert Wiederholung, Keyword-Stakkato und überlange H2. Sie lässt aber weiterhin formal korrekte, jedoch abstrakte Metaformulierungen zu, zum Beispiel:
+- „Funktion beim Longieren verständlich erklärt“
+- „Hilfen beim Longieren sinnvoll abstimmen“
+- „Ausrüstung beim Longieren einordnen“
+
+Diese Überschriften benennen den Abschnitt, wirken aber eher redaktionell-generiert als natürlich gesprochen bzw. leserorientiert.
+
+Offene fachliche Frage:
+Soll die H2-Regel zusätzlich verlangen, dass die Überschrift einen konkreten Leserinhalt, eine konkrete Frage, einen konkreten Nutzen oder eine konkrete Aussage des folgenden Abschnitts natürlich benennt und abstrakte Meta-Verben wie „einordnen“, „erklären“, „abstimmen“ nur verwendet werden, wenn sie in diesem konkreten Abschnitt wirklich natürlich sind?
+
+### Arbeitsgrenze
+- Der abgeschlossene 3-Artikel-Batch bleibt unverändert und wird nicht wieder geöffnet.
+- Keine Qualitätsgate-Schwelle wird gesenkt.
+- Vor einer Regeländerung zuerst kritische redaktionelle Bewertung am finalen Longierpeitschen-Beispiel und Gegenprüfung an weiteren vorhandenen Artikelformen.
+- Erst danach minimal entscheiden, ob und wie Tabellenpflicht und H2-Natürlichkeit geändert werden.
