@@ -142,9 +142,10 @@ Affiliate-Zentrale **6.72.171** wurde technisch fertiggestellt und vor Übergabe
 
 - Source-Head: `ad4db0c34552667a9d398d4b74cb7d8b7130f03a`
 - Source-Manifest SHA-256: `5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4`
-- Installer SHA-256: `769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714`
+- finaler Installer SHA-256: `dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba`
 - Exact Local A-B Run `36839006440`: SUCCESS / Positiv+Negativ / funktional 1:1
 - 2012er Snapshot A-B Run `36839006513`: SUCCESS / funktional 1:1 / Gesamt -80,01 %, Leaf -89,87 %
+- finaler Full-Gate Run `36842612555`: SUCCESS / Source→ZIP 27/27 / Fresh-Unpack / Provider-, Storage-, Import- und Frontend-Gates PASS
 
 **Bewusst keine neue PU-ID:** Zum Zeitpunkt dieses Protokolleintrags ist die WordPress-Installation von 6.72.171 noch nicht readback-bestätigt. Dieses Updateprotokoll erfindet kein ausgeführtes Live-Update. Nach Installation/Readback wird genau dann das tatsächliche PU-Ereignis ergänzt.
 
