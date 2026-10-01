@@ -1,0 +1,140 @@
+name: K10 first real E2E article
+
+on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+    paths:
+      - 'real_runs/20261001_longiergurt_anlegen/**'
+      - '.github/workflows/k10-first-real-e2e.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Assert K10 isolation and unpack exact real input
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e warehouse
+          test ! -e final
+          test ! -e submissions
+          mkdir -p /tmp/k10-real /tmp/k10-out
+          unzip -q real_runs/20261001_longiergurt_anlegen/k10_first_real_bundle.zip -d /tmp/k10-real
+          cp /tmp/k10-real/lt68_external.py engine/lt68_external.py
+          cp /tmp/k10-real/real_proof.py engine/real_proof.py
+          test "$(sha256sum real_runs/20261001_longiergurt_anlegen/k10_first_real_bundle.zip | awk '{print $1}')" = "7faaf8da25b3a3711783fe4f3a7685f82be3ae2c984e710c277c05a68ae8be5b"
+          echo K10_REAL_INPUT_SNAPSHOT_PASS
+
+      - name: Bind current PSERC metadata read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main:refs/remotes/origin/main
+          git show origin/main:concept_agent/current/PSERC_METADATA_SNAPSHOT.json > /tmp/pserc.json
+          python3 - <<'PY'
+          import json
+          s=json.load(open('/tmp/pserc.json'))
+          target={
+            'article_type':'FAQ',
+            'category':'longiergurte-faq',
+            'plan_slot':'6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713',
+            'target_keyword':'Wie lege ich einen Longiergurt an',
+            'title':'Wie lege ich einen Longiergurt an?',
+          }
+          rows=(s.get('next_textmachine_metadata_batch') or {}).get('items') or []
+          hits=[x for x in rows if all(str(x.get(k) or '')==v for k,v in target.items())]
+          assert len(hits)==1, f'PSERC_CURRENT_METADATA_BINDING_MISSING:{len(hits)}'
+          assert s.get('system_boundary',{}).get('publish_allowed') is False
+          print('K10_PSERC_CURRENT_METADATA_PASS')
+          PY
+
+      - name: Resolve real WordPress category id
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --silent --show-error             'https://pferde-atelier.de/wp-json/wp/v2/categories?slug=longiergurte-faq'             -o /tmp/category.json
+          python3 - <<'PY'
+          import json
+          rows=json.load(open('/tmp/category.json'))
+          hits=[x for x in rows if isinstance(x,dict) and x.get('slug')=='longiergurte-faq' and int(x.get('id') or 0)>0]
+          assert len(hits)==1, f'WORDPRESS_CATEGORY_ID_NOT_UNIQUE:{len(hits)}'
+          print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
+          PY
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-lt68
+          curl --fail --location --retry 3             https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip             -o /tmp/k10-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k10-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k10-lt68/LanguageTool-6.8.zip -d /tmp/k10-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Run real LanguageTool 6.8
+        id: lt
+        shell: bash
+        run: |
+          set +e
+          python3 -m engine.lt68_external             /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar             /tmp/k10-real/ARTICLE_INPUT.json             /tmp/lt68.json
+          rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Run K10 real proof
+        id: proof
+        shell: bash
+        run: |
+          set +e
+          python3 -m engine.real_proof             /tmp/k10-real/ARTICLE_INPUT.json             /tmp/k10-real/RESEARCH.json             /tmp/pserc.json             /tmp/category.json             /tmp/lt68.json             /tmp/k10-out
+          rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload real proof evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k10-first-real-longiergurt
+          path: |
+            /tmp/lt68.json
+            /tmp/category.json
+            /tmp/k10-out
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Final real-run verdict
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          lt=json.load(open('/tmp/lt68.json'))
+          print('LT68_STATUS='+str(lt.get('status')))
+          print('LT68_FINDINGS='+str(lt.get('finding_count')))
+          report_path=pathlib.Path('/tmp/k10-out/FINAL_REPORT.json')
+          if not report_path.is_file():
+              print('K10_REAL_FINAL=BLOCKED_BEFORE_FINAL_REPORT')
+              raise SystemExit(4)
+          r=json.load(open(report_path))
+          print('K10_REAL_FINAL='+str(r.get('status')))
+          print('ARTICLE_RULES='+str(r.get('article_rules',{}).get('status')))
+          print('SYSTEM_RULES='+str(r.get('system_rules',{}).get('status')))
+          print('PSERC='+str(r.get('pserc_metadata_binding')))
+          print('ENDSTEMPEL='+str(r.get('endstempel')))
+          print('WORDPRESS_FILE_VERIFY='+str(r.get('wordpress_file_verify')))
+          findings=r.get('package_integrity',{}).get('findings') or []
+          print('PACKAGE_FINDINGS='+json.dumps(findings,ensure_ascii=False,sort_keys=True))
+          if r.get('status')!='PASS':
+              raise SystemExit(4)
+          PY
