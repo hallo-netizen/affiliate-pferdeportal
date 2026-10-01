@@ -2,74 +2,62 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-30
-STATUS: HD-002 V0.1.1 LIVE-MIGRATION PASS / PRODUKTIVER KATEGORIE-OWNER-STAND FEHLT / GESAMTBESTAND NOCH NICHT ERFASSEN
-
-## Rolle
-
-Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_TEXT_REDAKTION`.
+STAND: 2026-10-01
+STATUS: HD-001 PRODUKTIV LIVE + READBACK PASS / HD-002 V0.1.2 AUTO-HANDOFF HARD PASS / LIVE-INSTALLATION NÄCHSTES
 
 ## Live-Stand
 
-Installiert:
+HD-001:
+- produktiver Buchbinden-Pilot live;
+- Deployment abgeschlossen;
+- Schreiben und Readback erfolgreich;
+- nicht zurückrollen.
+
+HD-002 aktuell live:
 `Hobby Depot SEO Themenengine 0.1.1`
+- sichere Migration COMPLETE;
+- Backend READY;
+- Website-Gesamtbild noch nicht erfasst.
 
-Die sichere Migration ist live vollständig abgeschlossen.
-Backend ist erreichbar und READY.
+## Owner-Handoff
 
-V0.1.0 bleibt superseded.
+Der produktive Buchbinden-Handoff ist jetzt fachlich bereit:
+- 7 Owner;
+- 11 ARTICLE_ONLY;
+- 11/11 eindeutig gebunden;
+- `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`.
 
-## Aktueller sichtbarer Zustand
+## HDTE 0.1.2
 
-Übersicht zeigt:
-- Beiträge: 0;
-- Themenfamilien: 0;
-- nutzbare Kategorien: 0;
-- Website-Gesamtbild: NOT CAPTURED;
-- DataForSEO: NICHT EINGERICHTET;
-- Portalabgleich: NOT STARTED.
+0.1.2 beseitigt den manuellen Übergabeschritt.
 
-## Wichtige Sperre vor „Gesamtbestand erfassen“
+Beim Klick auf
+`Gesamtbestand erfassen`
+liest HDTE den **deployed** HD-001-Workspace read-only, validiert FINAL_APPROVED + Research erneut, übernimmt ausschließlich den gültigen Owner-Handoff in eigenen HDTE-Speicher und startet danach den normalen Baseline-/Portalabgleich.
 
-Der bisherige HD-001-Lauf war ein Testlauf und wurde vollständig zurückgerollt.
+Keine HD-001-Schreiboperation.
 
-Die dafür verwendete Testdatei:
-`kategorie-read-only-preview-hobby-depot-testlabor-20260928.json`
+Exakter Buchbinden Positivtest:
+- Auto-Sync PASS;
+- Baseline CURRENT;
+- 4 produktive Content-Kategorien;
+- 1 Themenfamilie;
+- 7 Owner / 11 Assignments;
+- HD-001 unverändert.
 
-enthält:
-- 20 Strukturknoten;
-- 27 `ARTICLE_ONLY`-Entscheidungen;
-- davon 27 ohne `owner_concept_id`.
+Negativfälle fail-closed:
+not deployed / Final fehlt / nicht final / Live-Kategorie fehlt / Handoff manipuliert.
 
-Damit ist deren Editorial-Ownership-Handoff nicht produktionsbereit.
+Installer:
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.2_AUTO_OWNER_HANDOFF_HARD_PASS.zip`
 
-Außerdem sind die Testkategorien nach Rollback nicht live vorhanden.
-
-Deshalb jetzt NICHT:
-`Gesamtbestand erfassen`.
-
-## Technischer Folgepunkt
-
-HD-002 besitzt bereits den technischen Handoff-Importer, aber der produktive Owner-Handoff muss aus einem echten, nicht zurückgerollten Hobby-Depot-Kategorienstand stammen.
-
-Ein lokaler Folgefix wird vorbereitet, damit HD-002 einen gültigen installierten HD-001-Handoff später automatisch read-only übernehmen kann. Das ersetzt aber nicht den fehlenden produktiven Kategorienstand.
+SHA:
+`330028c8cd38f7f27664c804dfafa7649bea70e1f3647bc18229b52f2ba06003`
 
 ## NEXT ACTION
 
-Zuerst echten Hobby-Depot-Kategorienstand für den Buchbinden-Pilot erzeugen und live bereitstellen.
+1. HDTE 0.1.2 installieren.
+2. `Hobby Depot Themenengine → Übersicht → Gesamtbestand erfassen`.
+3. Portalabgleich bis COMPLETE laufen lassen.
 
-Pilotpfad:
-`Fertigen → Buch & Papier → Buchbinden`
-
-Aktuell datenbelegt:
-- Einstieg;
-- Ausrüstung;
-- Material;
-- Techniken/Praxis.
-
-Noch nicht datenbelegt:
-- Fragen/Probleme;
-- FAQ.
-
-Erst nach live vorhandenem, gültigem Owner-Handoff:
-Gesamtbestand erfassen → DataForSEO anbinden → Buchbinden-Recherche.
+Erst danach DataForSEO-/Buchbinden-Themenproduktion starten.
