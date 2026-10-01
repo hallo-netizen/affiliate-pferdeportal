@@ -136,3 +136,15 @@ ERGEBNIS: PASS
 FACHBÜRO_REF: technische Release-Evidence `release/affiliate-zentrale/evidence/affiliate_router_v672167_full_release_gate_20260930.md`; aktuelle technische Releaseautorität bleibt `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.  
 NOTIZ: 6.72.168 ist bereits technisch RELEASED, aber zum Abschlusszeitpunkt noch nicht live installiert; dafür bewusst kein erfundener PU-Eintrag.
 
+## RELEASE-VORBEREITUNG 2026-10-01 – PA-E-003 / KEIN PU-EREIGNIS
+
+Affiliate-Zentrale **6.72.171** wurde technisch fertiggestellt und vor Übergabe lokal exakt gegen 6.72.170 geprüft.
+
+- Source-Head: `ad4db0c34552667a9d398d4b74cb7d8b7130f03a`
+- Source-Manifest SHA-256: `5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4`
+- Installer SHA-256: `769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714`
+- Exact Local A-B Run `36839006440`: SUCCESS / Positiv+Negativ / funktional 1:1
+- 2012er Snapshot A-B Run `36839006513`: SUCCESS / funktional 1:1 / Gesamt -80,01 %, Leaf -89,87 %
+
+**Bewusst keine neue PU-ID:** Zum Zeitpunkt dieses Protokolleintrags ist die WordPress-Installation von 6.72.171 noch nicht readback-bestätigt. Dieses Updateprotokoll erfindet kein ausgeführtes Live-Update. Nach Installation/Readback wird genau dann das tatsächliche PU-Ereignis ergänzt.
+
