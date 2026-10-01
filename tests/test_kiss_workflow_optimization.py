@@ -128,20 +128,36 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         self.assertNotIn("name: k9-wordpress-final-json",finalizer)
         self.assertIn("'wordpress_contract':'PFERDE_ATELIER_WORDPRESS_IMPORT_V1'",finalizer)
 
-    def test_pserc_reuses_quality_evidence_without_duplicate_quality_execution(self):
+    def test_pserc_runs_before_finalizer_and_reuses_prior_quality_evidence(self):
         pserc=self.text("k9_pserc.py")
+        receiver=self.text(".github/workflows/text-start-pferdeatelier.yml")
         finalizer=self.text(".github/workflows/k9-finalize.yml")
         self.assertNotIn("k9_lt68",pserc)
         self.assertNotIn("PPM679_Content_Validator::check",pserc)
         self.assertIn("PASS_REUSED_FROM_CHECK",pserc)
         self.assertIn("PSERC_FINAL_INTEGRITY_ONLY_PASS",pserc)
+        self.assertIn("k9_terminal_preflight.py",receiver)
+        self.assertIn("quality/PSERC-FIX.zip",receiver)
+        self.assertIn("K9_TERMINAL_PREFLIGHT.json",receiver)
         self.assertNotIn("Prepare exact LanguageTool 6.8",finalizer)
-        self.assertIn("Run PSERC final integrity gate",finalizer)
+        self.assertNotIn("python3 k9_pserc.py",finalizer)
+        self.assertIn("Reuse exact terminal preflight PSERC evidence",finalizer)
+        self.assertIn("pserc_result_sha256",finalizer)
+        self.assertIn("ledger_sha256",finalizer)
 
-    def test_finalizer_keeps_all_real_gates_and_mandates_chat_file(self):
-        wf=self.text(".github/workflows/k9-finalize.yml")
+    def test_terminal_path_keeps_all_real_gates_and_mandates_chat_file(self):
+        receiver=self.text(".github/workflows/text-start-pferdeatelier.yml")
+        finalizer=self.text(".github/workflows/k9-finalize.yml")
         for required in (
-            "k9_pserc.py",
+            "k9_terminal_preflight.py",
+            "quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip",
+            "quality/PSERC-FIX.zip",
+            "K9_TERMINAL_PREFLIGHT.json",
+        ):
+            self.assertIn(required,receiver)
+        for required in (
+            "K9_TERMINAL_READINESS_PREFLIGHT_V1",
+            "K9_PSERC_PREFLIGHT_RESULT.json",
             "k9_endstempel.py build",
             "k9_endstempel.py verify",
             "k9_wordpress_verify.py",
@@ -151,7 +167,7 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
             "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
             "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
         ):
-            self.assertIn(required,wf)
+            self.assertIn(required,finalizer)
 
 if __name__=="__main__":
     unittest.main()
