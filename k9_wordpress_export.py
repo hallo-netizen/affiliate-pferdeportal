@@ -15,6 +15,24 @@ def load(path):
 
 def sha_text(value): return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
+def ledger_article_done(row):
+    if not isinstance(row,dict):
+        return False
+    stages=row.get("stages")
+    if not isinstance(stages,dict) or stages.get("check")!="DONE":
+        return False
+    repair=stages.get("repair")
+    if repair=="NOT_REQUIRED":
+        return True
+    if repair!="DONE":
+        return False
+    products=row.get("products")
+    if not isinstance(products,dict):
+        return False
+    if int(row.get("revision") or 0)<1:
+        return False
+    return isinstance(products.get("repair"),dict) and isinstance(products.get("check"),dict)
+
 def build(final_package,ledger):
     if final_package.get("contract")!="PSERC_APPROVED_PRODUCTION_PACKAGE_V1" or final_package.get("endstamp_contract")!="PFERDE_ATELIER_ENDSTEMPEL_RELEASE_V1" or final_package.get("status")!="ENDSTEMPEL_PASS":
         raise Blocked("ENDSTEMPEL_NOT_PASS")
@@ -46,7 +64,7 @@ def build(final_package,ledger):
     for row in ledger_rows:
         meta=row.get("metadata") if isinstance(row,dict) else None; slot=str(meta.get("plan_slot") or "") if isinstance(meta,dict) else ""
         if not slot or slot in ledger_by_slot: raise Blocked("LEDGER_SLOT_INVALID")
-        if row.get("stages",{}).get("check")!="DONE" or row.get("stages",{}).get("repair")!="NOT_REQUIRED": raise Blocked("LEDGER_ARTICLE_NOT_DONE:"+slot)
+        if not ledger_article_done(row): raise Blocked("LEDGER_ARTICLE_NOT_DONE:"+slot)
         ledger_by_slot[slot]=row
     articles=[]; seen=set()
     for index,row in enumerate(rows):
