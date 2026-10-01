@@ -419,8 +419,12 @@
       ],
       "current_672173_delta_proof": {
         "compared_from_commit": "00a204d3d60c60609f13cd6f4cefee142ec799c4",
-        "compared_to_commit": "4e7ca32244bd42c22893527664400af4f85b6bc9",
-        "source_change_scope": "trait-ppar-ebay.php catalog validator only plus version/readme",
+        "compared_to_commit": "d9abddc408566fd32e8ce8aa06d59f8e4d73ed66",
+        "automation_suite_runtime_delta": "NONE",
+        "main_router_runtime_delta": "VERSION_METADATA_ONLY",
+        "ebay_trait_runtime_delta": "EBAY_PORTAL_CATALOG_VALIDATOR_BLOCK_ONLY",
+        "executed_validator_positive_negative": "PASS",
+        "executed_validator_benchmark": "200000_CALLS_160_355_MS_0_802_US_PER_CALL_PHP_8_4_23",
         "performance_runtime_change": "NONE_OUTSIDE_CATALOG_VALIDATOR_BLOCK",
         "source_guard": "PASS"
       }
