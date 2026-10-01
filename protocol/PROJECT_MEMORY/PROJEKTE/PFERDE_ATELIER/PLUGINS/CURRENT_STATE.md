@@ -82,6 +82,28 @@ GENAU EINE NEXT ACTION:
 
 Danach als gebundener Folgepunkt: genau einen Affiliate-Zentrale-Storagefix für verwaiste `ppar-idealo-feed-*.tmp` bauen/hart positiv-negativ-regressiv testen und erst danach die belegten Alt-TMPs bereinigen. Keine Plugin-Orgie und kein separater Hilfsrunner.
 
+## STORAGE-READBACK NACH BACKUP-LÖSCHUNG 2026-10-01 11:24–11:25 UTC
+
+Quelle: realer WordPress-Export `wordpress-speicheranalyse-20261001-112548.json`, vollständig `done=true`.
+
+- Gesamtscan: **3.584.150.125 Bytes** statt 16.879.899.578 Bytes vorher.
+- Differenz: **-13.295.749.453 Bytes**.
+- `wp-content/ai1wm-backups`: nur noch **675 Bytes / 5 Kleinstdateien** statt 13.295.750.128 Bytes.
+- Damit wurden die großen All-in-One-`.wpress`-Backups vollständig aus dem lokalen Serverbestand entfernt.
+- `wp-content/wpvividbackups`: weiterhin **2.109.325.928 Bytes / 100 Dateien**, unverändert.
+- `wp-content/uploads`: weiterhin **1.042.403.409 Bytes**, unverändert.
+- fünf `ppar-idealo-feed-*.tmp`: weiterhin **749.350.091 Bytes**, unverändert.
+- Datenbank: weiterhin **1.561.968.640 Bytes**, unverändert.
+- Schlussfolgerung: bisherige Einsparung stammt praktisch vollständig aus der All-in-One-Backup-Löschung; WPvivid, Idealo-TMP und DB sind noch offen.
+
+ERSTER OFFENER PUNKT:
+**WPvivid-Altbestand 2,109 GB ist noch vollständig vorhanden.**
+
+GENAU EINE NEXT ACTION:
+`PURGE_WPVIVID_LOCAL_BACKUPS`.
+
+Danach: Affiliate-Temp-Zukunftsschutz + Alt-TMP-Bereinigung, Bildoptimierungsblock, anschließend DB-Retention/DB-Verschlankung und physische Reorganisation.
+
 ## BILDOPTIMIERUNG ALS GEBUNDENER AUFRÄUMBLOCK 2026-10-01
 
 Aus der frischen Speicheranalyse:
