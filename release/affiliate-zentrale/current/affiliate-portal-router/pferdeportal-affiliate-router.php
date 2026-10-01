@@ -7502,8 +7502,16 @@ JS;
         if ($portal_key === '' || !method_exists($this, 'control_slot_gate')) { return true; }
         $slot_type = sanitize_key((string) $slot_type);
         if ($slot_type === '') { return true; }
-        $slot_gate = $this->control_slot_gate($portal_key, $slot_type);
-        return !is_wp_error($slot_gate);
+
+        // The slot veto is identical for every candidate of the same slot.
+        // Evaluate it once per normal frontend request, never hundreds of times
+        // inside the product-candidate loop.
+        $slot_key = $portal_key . '|' . $slot_type;
+        if (!array_key_exists($slot_key, $this->category_product_slot_control_request_cache)) {
+            $slot_gate = $this->control_slot_gate($portal_key, $slot_type);
+            $this->category_product_slot_control_request_cache[$slot_key] = !is_wp_error($slot_gate);
+        }
+        return !empty($this->category_product_slot_control_request_cache[$slot_key]);
     }
 
     private function category_product_campaign_health_allows_delivery($campaign) {
