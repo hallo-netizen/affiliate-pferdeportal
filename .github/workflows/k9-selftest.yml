@@ -284,10 +284,10 @@ jobs:
           import json,re
           from pathlib import Path
           stop_path=Path("runtime/K9_STOP.json")
-          if not stop_path.exists():
+          current=json.loads(Path("CURRENT_STATE.json").read_text())
+          if not stop_path.exists() or current.get("status")!="STOP":
               print("TERMINAL_CHECK_NOT_APPLICABLE=1")
               raise SystemExit(0)
-          current=json.loads(Path("CURRENT_STATE.json").read_text())
           stop=json.loads(stop_path.read_text())
           status=json.loads(Path("state/STATUS.json").read_text())
           if current.get("role")!="SOLE_CURRENT_AUTHORITY" or current.get("status")!="STOP":
