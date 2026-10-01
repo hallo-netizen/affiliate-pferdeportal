@@ -3,13 +3,13 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "STOP",
-  "operational_mode": "TERMINAL_CHAT_DELIVERY_ONLY",
+  "status": "IDLE_READY_FOR_NEXT_EXPLICIT_BATCH",
+  "operational_mode": "NO_ACTIVE_JOB_WAITING_FOR_EXPLICIT_WORDPRESS_METADATA_BATCH",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
+  "next_action": "WAIT_FOR_EXPLICIT_NEW_WORDPRESS_METADATA_BATCH_AFTER_PSTE_SELECTION",
   "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP",
+    "baseline": "LATEST_REAL_E2E_STOP_PLUS_WRITER_EARLY_BINDING_HARDENING",
     "preserve_existing_station_products": true,
     "preserve_quality_gates": [
       "LT_6_8",
@@ -18,29 +18,44 @@
       "ENDSTEMPEL",
       "WORDPRESS_VERIFY"
     ],
+    "writer_first_pass_preflight": [
+      "K9_WRITING_RULES",
+      "PPM_6_7_9",
+      "LT_6_8"
+    ],
+    "lt_preflight_evidence_reuse": true,
+    "lt_preflight_tamper_fail_closed": true,
     "do_not_reopen_completed_article": true,
+    "new_batch_source_rule": "EXPLICIT_WORDPRESS_METADATA_BATCH_AFTER_PSTE_SELECTION_ONLY",
     "publish_allowed": false
   },
-  "terminal_evidence": {
-    "stop_ref": "runtime/K9_STOP.json",
-    "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9.json",
-    "final_sha256": "dd0841aec65e62479a1999acae9fd0990f2c855eea28f43509eb6ffe0f4a2bbb",
+  "last_completed_batch": {
     "batch_sha256": "082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9",
     "article_count": 2,
     "finalizer_run_id": "36872540706",
-    "trigger_head_sha": "79636dce76da22358d44677425a9485c5c907deb",
-    "wordpress_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
-    "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-    "endstempel_sha256": "d3de1b91363ca44072184b407fa41906172a4b4ccf8b9c92416495b4768586ce"
+    "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_082d5b49f73f9e57c850a1d969ee2b65b0b1634afdff09ddebb84f69e9c174a9.json",
+    "final_sha256": "dd0841aec65e62479a1999acae9fd0990f2c855eea28f43509eb6ffe0f4a2bbb",
+    "publish_allowed": false
   },
-  "allowed_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY",
-  "route_lock": "TERMINAL_CHAT_DELIVERY_ONLY",
+  "writer_hardening_evidence": {
+    "protocol_ref": "protocol/K9_WRITER_EARLY_BINDING_CLOSEOUT_20261001.md",
+    "code_baseline_commit": "9b1914744058cdc1b0d4953126f35d997e0952cd",
+    "runs": {
+      "ppm_early_binding": "36874190237",
+      "lt_writer_pos_neg": "36874234247",
+      "combined_check": "36874532830",
+      "lt_reuse_tamper": "36874572438",
+      "greenfield_regression": "36874572430"
+    },
+    "status": "PASS"
+  },
+  "allowed_action": "ACCEPT_NEW_EXPLICIT_WORDPRESS_METADATA_BATCH_ONLY",
+  "route_lock": "EXPLICIT_NEW_BATCH_ONLY",
   "supervisor_actions_allowed": false,
   "repair_authorized": false,
   "all_other_actions": "DENY",
   "code_change_allowed": false,
-  "chat_delivery_required": true,
-  "chat_delivery_manifest_ref": "runtime/CHAT_DELIVERY.json",
+  "chat_delivery_required": false,
   "chat_may_route": false,
   "publish_allowed": false
 }
