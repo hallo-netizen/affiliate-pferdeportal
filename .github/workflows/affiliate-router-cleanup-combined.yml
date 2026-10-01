@@ -168,12 +168,10 @@ jobs:
           ]:
               if body(main,name)!=body(base_main,name):
                   raise SystemExit('FAIL fach/output semantics changed: '+name)
-          for name in [
-              'ebay_business_campaign_source_allows_delivery_base',
-              'ebay_public_checkpoint_allows_business_campaign',
-          ]:
-              if body(ebay,name)!=body(base_ebay,name):
-                  raise SystemExit('FAIL eBay safety semantics changed: '+name)
+          if body(ebay,'ebay_business_campaign_source_allows_delivery_base')!=body(base_ebay,'ebay_business_campaign_source_allows_delivery_base'):
+              raise SystemExit('FAIL eBay source safety semantics changed')
+          # The public checkpoint function lives in trait-ppar-ebay-run.php.
+          # That complete trait is already asserted byte-identical above.
 
           required_main=[
               'category_product_shared_rank_base',
