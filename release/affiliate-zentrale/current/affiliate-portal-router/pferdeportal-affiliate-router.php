@@ -31,6 +31,8 @@ require_once __DIR__ . '/includes/trait-ppar-housekeeping.php';
 
 final class Pferdeportal_Affiliate_Router {
     private $ranked_campaigns_request_cache = array();
+    private $automation_exact_target_rank_request_cache = array();
+    private $category_product_slot_control_request_cache = array();
     private $category_product_shared_rank_base_request_cache = array();
     private $category_product_shared_rank_base_build_count = 0;
     private $category_product_control_base_request_cache = array();
