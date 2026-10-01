@@ -133,3 +133,39 @@ Acceptance target:
 - no regression in any quality gate
 - no repeated one-error-at-a-time diagnostic loop
 - finalizer discovers no article-quality defect that terminal preflight could have detected
+
+
+## Zusatzschluss nach hartem 3er-Lauf-Review
+
+Zwei weitere Schleifenursachen wurden nach dem realen 3er-Lauf geschlossen, ohne irgendein Qualitätsgate oder eine Schwelle zu verändern.
+
+### 1. Quellen-Traces sind jetzt vollständig maschinengeführt
+Der Writer darf die unsichtbaren `ppm-source-trace`-Tags nicht mehr als eigenständige Verantwortung tragen. Vor der Writer-Abnahme entfernt der Packager vorhandene leere Trace-Tags und erzeugt aus der versiegelten Recherche deterministisch exakt einen kanonischen Trace pro Fakt.
+
+Damit kann der reale Heutaschen-Fehler „derselbe Fakt zweimal getraced“ nicht mehr als Writer-Schleife entstehen. Sichtbarer Artikeltext bleibt unverändert.
+
+### 2. Konkreter First-Pass-Wortbauplan
+Der Writer erhält zusätzlich zu den unveränderten harten Regeln einen daraus berechneten sicheren Schreibkorridor pro Artikeltyp:
+- konkrete Zielspanne je normalem Hauptabschnitt;
+- konkrete Zielspanne fürs Fazit;
+- konkrete Zielspanne für „Weiterführende Informationen“;
+- Mindestziel für Nicht-Tabellen-Wörter.
+
+Der Bauplan ist nur ein Sicherheitsziel innerhalb der bestehenden Grenzen. Er ersetzt oder lockert keine Regel. Sein unterer Zielrand ist so berechnet, dass der harte 750-Wörter-Nicht-Tabellen-Floor bereits beim ersten Entwurf erreicht werden kann, statt erst im CHECK aufzufallen.
+
+### Evidence
+- deterministische Trace-Ownership: commits `d4ad60ec8cbfabe11881e2ddf1575ff71c027291`, `87359f157599fe7e9cf0ca838763b8a8683d7341`, `e3f91e0228080d36da0403b4ef1b933483b9b65b`;
+- konkreter First-Pass-Bauplan: `ffeaf77558ab24ccff2463ddc607653e096ad983`;
+- Regressionstests: `09223477efdf336222747ac3050904bc259dbb96`, `f93f11a0f88e447af9d132cab4814f626b80141f`;
+- vollständiger K9 greenfield selftest auf aktuellem HEAD: Run `36904919863` — SUCCESS.
+
+## Ergebnis der Ursachenprüfung
+
+Die reale Schleifenursache war nicht „zu strenge Qualität“, sondern zu späte bzw. zu verteilte Regelanwendung:
+1. harte Regeln waren vorhanden, aber noch nicht als kompakter First-Pass-Akzeptanzplan verdichtet;
+2. unabhängige Writer-/Struktur-/LT-/PPM-Fehler wurden früher teilweise nacheinander sichtbar;
+3. Fachbegriffe aus autoritativen Metadaten wurden von LT 6.8 unnötig als Rechtschreibfehler behandelt;
+4. unsichtbare Quellen-Traces lagen teilweise beim Writer statt vollständig in deterministischer Maschinenhand;
+5. Finalizer prüfte Zustände/PSERC, die vorher noch nicht vollständig als Terminal-Readiness geprüft waren.
+
+Diese fünf Ursachen sind jetzt geschlossen. Der nächste echte Batch dient ausschließlich der Messung, ob die erwartete Wirkung real eintritt: deutlich weniger Writer-Versuche, höchstens ein gebündelter Reparaturdurchgang pro Artikel und keine neuen Content-/State-Fehler erst im Finalizer.
