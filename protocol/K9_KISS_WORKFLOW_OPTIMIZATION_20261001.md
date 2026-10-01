@@ -109,3 +109,27 @@ Historical evidence showed one completed article (plan slot 5999b9b0...) had two
 
 Future WRITE/REPAIR packaging now binds traces for every bound research fact before LT/PPM, including legacy TEST_/dummy/example/placeholder source IDs when they resolve to a real bound source. PSERC uses the same source-label rule and only verifies; it never repairs or mutates article content. The PSERC scope regression now uses one immutable real article fixture that already satisfies this prerequisite instead of the historical mixed 16-article batch.
 
+## Editorial H2 rule after user review — natural but compact
+Applies to future WRITE/REPAIR output only.
+
+The earlier anti-staccato rule is strengthened without making headings long:
+- headings must name the concrete thought of the following section;
+- generic generator constructions and interchangeable filler words must not drive the heading;
+- grammatical patterns should visibly vary across the article;
+- preferred H2 length: 4–8 words;
+- hard maximum: 9 words and 65 characters;
+- short special headings such as "Fazit" remain allowed;
+- existing keyword-occurrence, duplicate-heading and phrase-family limits remain unchanged.
+
+Implementation:
+- writer-visible in contracts/K9_WRITING_RULES.json;
+- hard maximum enforced by quality/k9_rule_guard.py;
+- current head ebac4e73fee5160665bb2324b1650e9c035559fa;
+- K9 combined check selftest 36837043028 SUCCESS;
+- K9 greenfield selftest 36837043110 SUCCESS.
+
+## Closeout state after imported 16-article batch
+The completed 16-article package was delivered, imported into WordPress and reviewed by the user. K9 therefore no longer has a delivery action pending.
+
+CURRENT_STATE is now idle and may only accept a new explicit WordPress metadata batch. Topic discovery, stored-topic triage and Sandbox reuse belong to PSTE and must not be invented inside K9. The next K9 batch may begin only after PSTE/WordPress emits the exact five-field metadata handoff.
+

@@ -3,13 +3,18 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "STOP",
-  "operational_mode": "TERMINAL_CHAT_DELIVERY_ONLY",
+  "status": "IDLE_READY_FOR_NEXT_EXPLICIT_BATCH",
+  "operational_mode": "NO_ACTIVE_JOB_WAITING_FOR_EXPLICIT_WORDPRESS_METADATA_BATCH",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
+  "next_action": "WAIT_FOR_EXPLICIT_NEW_WORDPRESS_METADATA_BATCH_AFTER_PSTE_TOPIC_SELECTION",
   "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP",
+    "baseline": "LATEST_COMPLETED_16_ARTICLE_BATCH_PLUS_CURRENT_GREEN_CODELINE",
+    "current_code_head": "ebac4e73fee5160665bb2324b1650e9c035559fa",
+    "current_green_runs": [
+      36837043028,
+      36837043110
+    ],
     "preserve_existing_station_products": true,
     "preserve_quality_gates": [
       "LT_6_8",
@@ -19,9 +24,20 @@
       "WORDPRESS_VERIFY"
     ],
     "do_not_reopen_completed_article": true,
+    "new_batch_source_rule": "EXPLICIT_WORDPRESS_METADATA_BATCH_AFTER_PSTE_SELECTION_ONLY",
     "publish_allowed": false
   },
-  "terminal_evidence": {
+  "allowed_action": "ACCEPT_NEW_EXPLICIT_WORDPRESS_METADATA_BATCH_ONLY",
+  "route_lock": "IDLE_NO_ROUTE_WITHOUT_NEW_EXPLICIT_BATCH",
+  "supervisor_actions_allowed": false,
+  "repair_authorized": false,
+  "all_other_actions": "DENY",
+  "code_change_allowed": false,
+  "chat_delivery_required": false,
+  "chat_delivery_manifest_ref": "runtime/CHAT_DELIVERY.json",
+  "chat_may_route": false,
+  "publish_allowed": false,
+  "last_completed_batch_evidence": {
     "stop_ref": "runtime/K9_STOP.json",
     "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_df59b8428c5e3f0750c5523091c00a1172975109823ee816d2234cf9052505d0.json",
     "final_sha256": "1dbe208334f79e80f957c9b2aaca9ab8501767755b81dfef16bde6a81d8e37ef",
@@ -33,14 +49,5 @@
     "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
     "endstempel_sha256": "053a8acb1a94404134f13582545ef40ca3210cadc3b7f5c376aa7f50dfcd1242"
   },
-  "allowed_action": "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT_ONLY",
-  "route_lock": "TERMINAL_CHAT_DELIVERY_ONLY",
-  "supervisor_actions_allowed": false,
-  "repair_authorized": false,
-  "all_other_actions": "DENY",
-  "code_change_allowed": false,
-  "chat_delivery_required": true,
-  "chat_delivery_manifest_ref": "runtime/CHAT_DELIVERY.json",
-  "chat_may_route": false,
-  "publish_allowed": false
+  "note": "The previously completed 16-article batch was delivered, imported and user-reviewed. K9 is idle. Topic discovery/selection belongs to PSTE; K9 must not start from stored topics directly and must wait for a new explicit five-field WordPress metadata batch."
 }
