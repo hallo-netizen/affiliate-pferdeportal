@@ -141,6 +141,68 @@ jobs:
           git diff --cached --quiet || git commit -m 'K9: accept check and prepare deterministic next state'
           git push
 
+      - name: Run terminal readiness preflight before finalizer
+        if: ${{ inputs.station == 'check' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f runtime/FINALIZE_TRIGGER ]; then
+            echo 'K9_TERMINAL_PREFLIGHT_NOT_NEEDED'
+            exit 0
+          fi
+          set +e
+          python3 k9_terminal_preflight.py .             quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip             quality/PSERC-FIX.zip             --pserc-output runtime/K9_PSERC_PREFLIGHT_RESULT.json             --output runtime/K9_TERMINAL_PREFLIGHT.json             | tee /tmp/K9_TERMINAL_PREFLIGHT_STDOUT.json
+          rc=${PIPESTATUS[0]}
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            reason="$(python3 - <<'PY'
+          import json
+          from pathlib import Path
+          text=Path('/tmp/K9_TERMINAL_PREFLIGHT_STDOUT.json').read_text()
+          try:
+              print(json.loads(text).get('reason') or 'TERMINAL_PREFLIGHT_FAILED')
+          except Exception:
+              print('TERMINAL_PREFLIGHT_FAILED')
+          PY
+          )"
+            rm -f runtime/FINALIZE_REQUIRED runtime/FINALIZE_TRIGGER
+            REASON="$reason" python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          current={
+              'contract':'K9_CURRENT_STATE_V3',
+              'role':'SOLE_CURRENT_AUTHORITY',
+              'concept':'K9',
+              'branch':'konzept9/greenfield-20260929',
+              'status':'BLOCKED_TERMINAL_PREFLIGHT',
+              'operational_mode':'TERMINAL_PREFLIGHT_BLOCKER_REPORT_ONLY',
+              'active_job':None,
+              'first_open_blocker':{'code':'TERMINAL_READINESS_PREFLIGHT_FAILED','detail':os.environ['REASON']},
+              'next_action':'REPAIR_EXACT_PREFLIGHT_FINDING_BEFORE_FINALIZER',
+              'allowed_action':'REPORT_TERMINAL_PREFLIGHT_BLOCKER_ONLY',
+              'route_lock':'TERMINAL_PREFLIGHT_BLOCKER_REPORT_ONLY',
+              'supervisor_actions_allowed':False,
+              'code_change_allowed':False,
+              'repair_authorized':False,
+              'all_other_actions':'DENY',
+              'chat_may_route':False,
+              'publish_allowed':False
+          }
+          Path('CURRENT_STATE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n')
+          PY
+            git config user.name 'k9-terminal-preflight-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add -A runtime CURRENT_STATE.json
+            git diff --cached --quiet || git commit -m 'K9: persist terminal preflight blocker before finalizer'
+            git push
+            exit "$rc"
+          fi
+          git config user.name 'k9-terminal-preflight-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add runtime/K9_TERMINAL_PREFLIGHT.json runtime/K9_PSERC_PREFLIGHT_RESULT.json
+          git diff --cached --quiet || git commit -m 'K9: persist terminal readiness PASS before finalizer'
+          git push
+
       - name: Automatically continue native check inside auto-chain
         if: ${{ steps.transition.outputs.next_check == '1' }}
         env:
