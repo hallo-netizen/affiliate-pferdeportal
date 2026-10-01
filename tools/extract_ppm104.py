@@ -81,8 +81,26 @@ if len(rows)!=104:
 ids=[r["legacy_rule_id"] for r in rows]
 if len(ids)!=len(set(ids)):
     raise SystemExit("PPM_LEGACY_RULE_ID_DUPLICATE")
+legacy_values={}
+with zipfile.ZipFile(PACKAGE) as zf:
+    validator=zf.read("portal-production-machine/includes/content-validator.php").decode("utf-8")
+    constants={}
+    for name in ("MIN_WORDS","MIN_PARAGRAPHS","MIN_H2","MIN_TABLE_BODY_ROWS","MIN_FACT_PACK_COVERAGE_RATIO","MIN_TRACE_LEXICAL_SUPPORT_RATIO","MAX_DUPLICATE_SENTENCE_RATIO","MAX_INTRO_PAIR_SIMILARITY"):
+        m=re.search(r"const\\s+"+re.escape(name)+r"\\s*=\\s*([^;]+);",validator)
+        if not m:
+            raise SystemExit("PPM_CONSTANT_MISSING:"+name)
+        raw=m.group(1).strip()
+        constants[name]=float(raw) if "." in raw else int(raw)
+    legacy_values["content_validator_constants"]=constants
+    for key,member in {
+        "structure_contract":"portal-production-machine/contracts/content-structure-language-gate-v2.json",
+        "known_error_contract":"portal-production-machine/contracts/known-error-gate-v1.json",
+        "article_type_templates":"portal-production-machine/contracts/article-type-templates.json",
+    }.items():
+        legacy_values[key]=json.loads(zf.read(member).decode("utf-8"))
+
 report={
-    "contract":"K10_PPM679_EXACT_104_RULE_INVENTORY_V1",
+    "contract":"K10_PPM679_EXACT_104_RULE_INVENTORY_V2",
     "status":"PASS",
     "source_commit":"2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
     "package_sha256":actual,
@@ -90,6 +108,7 @@ report={
     "actual_total":len(rows),
     "group_counts":counts,
     "rules":rows,
+    "legacy_values":legacy_values,
     "publish_allowed":False,
 }
 OUT.write_text(json.dumps(report,ensure_ascii=False,indent=2,sort_keys=True)+"\n",encoding="utf-8")
