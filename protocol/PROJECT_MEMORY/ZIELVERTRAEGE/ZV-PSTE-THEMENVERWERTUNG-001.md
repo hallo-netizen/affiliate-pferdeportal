@@ -14,6 +14,8 @@ Keine neue Architektur, kein neues Plugin und keine zweite Themen-Datenbank.
 
 Verwendet werden ausschließlich die bereits vorhandenen PSTE-Felder, Status, Reason-Codes, Portal-Kontextdaten und der bestehende Normal-Reentry-/Planungsweg.
 
+**Ausdrücklich Teil des Ziels:** vorhandene einzelne Keywords, Suchfragen, Gruppen/Familien und bereits gespeicherte Evidenz sollen – soweit der bestehende Normal-Metadata-Pfad sie eindeutig auflösen kann – automatisch in **guten redaktionellen Titel + Zielkeyword + Artikeltyp + Zielkategorie** überführt werden. Diese Funktion ist bereits vorhanden und soll genutzt/repariert werden, nicht neu erfunden werden.
+
 ## Harte Nicht-Missverständnis-Regeln
 
 1. **Gespeichert ≠ produktionsreif.**
