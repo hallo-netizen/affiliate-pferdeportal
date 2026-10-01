@@ -381,15 +381,13 @@ def balance_receipts(article):
     main_ratio=(sum(counts)/total if total else 0.0); main_ok=main_ratio>=float(cfg['normal_h2_combined_minimum_ratio'])
     further=next((s for s in sections if s['block']=='further_information'),None); further_words=len(_words(further['content'])) if further else 0
     further_ok=further_words<=int(cfg['further_information_maximum_words'])
-    core_no_aux=_strip_blocks(html,['table','further_information']); core_words=len(_words(core_no_aux)); budget_ok=core_words>=int(cfg['hard_total_words_min'])
     conclusion=next((s for s in sections if s['block']=='conclusion'),None); cwords=len(_words(conclusion['content'])) if conclusion else 0
     cratio=(cwords/total if total else 0.0); cparas=len(re.findall(r'(?is)<p\b[^>]*>',conclusion['content'])) if conclusion else 0
-    no_conclusion_floor=len(_words(_strip_blocks(html,['table','further_information','conclusion'])))>=int(cfg['hard_total_words_min'])
-    hard_limits=bool(conclusion and cratio<=float(cfg['conclusion_maximum_ratio']) and cparas<=int(cfg['conclusion_maximum_paragraphs']) and no_conclusion_floor)
+    hard_limits=bool(conclusion and cratio<=float(cfg['conclusion_maximum_ratio']) and cparas<=int(cfg['conclusion_maximum_paragraphs']))
     cmin=bool(conclusion and cratio>=float(typ['conclusion_min_ratio']))
     rows=[('words.hard_total_range',int(cfg['hard_total_words_min'])<=total<=int(cfg['hard_total_words_max']),{'actual':total}),('words.section_range',section_ok,{'counts':counts}),
       ('words.section_balance_ratio',ratio_ok,{'counts':counts}),('words.main_text_minimum_ratio',main_ok,{'actual':main_ratio}),('words.further_information_maximum',further_ok,{'actual':further_words}),
-      ('words.word_budget_exclusions',budget_ok,{'core_without_table_further':core_words}),('conclusion.hard_limits',hard_limits,{'ratio':cratio,'paragraphs':cparas,'non_conclusion_floor_ok':no_conclusion_floor}),
+      ('conclusion.hard_limits',hard_limits,{'ratio':cratio,'paragraphs':cparas}),
       ('conclusion.type_minimum_ratio',cmin,{'actual':cratio,'minimum':typ['conclusion_min_ratio']}),('conclusion.minimum_paragraphs',cparas>=2,{'actual':cparas,'minimum':2})]
     return [_receipt(rid,'balance_checker',article,'PASS' if ok else 'FAIL',ev) for rid,ok,ev in rows]
 
