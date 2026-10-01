@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 65,
+  "generation": 66,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -641,6 +641,44 @@
         "write": "DONE"
       },
       "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+    },
+    {
+      "item_id": "k9-ff5fb509c19c41dab1011be7",
+      "metadata": {
+        "article_type": "Beratung",
+        "category": "pferdehaftpflicht-beratung",
+        "plan_slot": "0707c44014730437d91e342bcbd7c289aa11a085482c9df7f77d1e79415ca4f1",
+        "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+        "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+    },
+    {
+      "item_id": "k9-b7c4255e949fbe8051150ba3",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "kappzaum-faq",
+        "plan_slot": "c508d6d8fd7c7e28b8de06158cfa29a7ba9c9c04e9bda12d36527a21acd359c3",
+        "target_keyword": "Wie longiert man ein Pferd mit einem Kappzaum",
+        "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
+      },
+      "products": {},
+      "revision": 0,
+      "stages": {
+        "check": "PENDING",
+        "repair": "NOT_REQUIRED",
+        "research": "PENDING",
+        "write": "PENDING"
+      },
+      "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
     }
   ]
 }
