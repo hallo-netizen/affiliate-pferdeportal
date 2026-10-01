@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-30
-STATUS: HD-001 V1.9.4 ROOT-CAUSE FIX POS+NEG HARD PASS / LIVE-RETEST OFFEN · HD-002 V0.1.1 LIVE-MIGRATION PASS
+STAND: 2026-10-01
+STATUS: HD-001 V1.9.4 ROOT-CAUSE FIX POS+NEG HARD PASS / LETZTER TESTLAUF VOLLSTÄNDIG ZURÜCKGEROLLT / LIVE-RETEST OFFEN · HD-002 V0.1.1 LIVE-MIGRATION PASS
 
 ## HD-001 – Kategorie-Workflow
 
@@ -36,6 +36,11 @@ Beweise:
 Installer SHA:
 `85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
 
+## Live-Zustand
+
+Der V1.9.3-Diagnose-Testlauf wurde vollständig zurückgerollt.
+Es gibt daher aktuell keinen aktiven Dry-Run.
+
 ## HD-002 – Themenengine
 
 V0.1.1 Live-Migration COMPLETE.
@@ -44,6 +49,6 @@ Weiterhin kein `Gesamtbestand erfassen`, solange HD-001 nicht live erfolgreich d
 
 ## NEXT ACTION
 
-HD-001 V1.9.4 installieren → bestehenden 7-CREATE-Dry-Run genau einmal anwenden.
+HD-001 V1.9.4 installieren → denselben Buchbinden READ_ONLY_PREVIEW erneut übernehmen → Finalfreigabe → neue WordPress-Vorschau → Apply.
 
-Kein neuer Research-Lauf, keine neue Strukturdatei, kein neuer Dry-Run.
+Kein neuer Research-Lauf.
