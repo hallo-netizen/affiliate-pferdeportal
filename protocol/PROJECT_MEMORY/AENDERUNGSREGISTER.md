@@ -2176,3 +2176,20 @@ Quellursache zuerst; danach Altbestand kontrolliert bereinigen; anschließend gl
 
 ZIELVERTRAG:
 `ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`.
+
+## PLUGINS-002 – Kategorieprodukt-Ranking nur einmal pro öffentlicher Seite
+
+STAND: 2026-10-01 / VERBINDLICH.
+
+WAS:
+Bei Affiliate-Seiten mit den drei öffentlichen `category_product_1..3`-Plätzen wird das slot-unabhängige Kontext-Ranking pro Seitenaufruf genau einmal gebildet und request-lokal wiederverwendet. Reine identische Target-/Control-/Health-/Image-/eBay-Prüfungen dürfen ebenfalls nur request-lokal memoisiert werden.
+
+UNVERÄNDERT PRO SLOT:
+Placement, Slot-Veto, Provider-Mix, finale Auswahl, PRIVATE/BUSINESS, Coverage, Quality, Health, Tracking und Design.
+
+WARUM:
+Reale Messungen zeigten schnelle Oberkategorien, aber 8–9 Sekunden auf tieferen Kategorieprodukt-Seiten. Der 1:1-A-B-Test mit der vorhandenen 2012er Produkttopologie bewies, dass die wiederholte dreifache Bearbeitung desselben großen Kandidatenbestands die maßgebliche vermeidbare Last war. 6.72.171 behält die Ausgabe 1:1 bei und reduziert im Snapshot-A-B den Leaf-Renderer um 89,87 %.
+
+REGRESSIONSREGEL:
+Ein Performancefix an diesem Pfad darf nicht nur isoliert getestet werden. Pflicht ist ein exakter Vorher/Nachher-A-B-Lauf auf WordPress/MariaDB mit allen drei Produkt-Slots, Positiv-/Negativfällen, identischer fachlicher Ausgabe und gemessener Verbesserung.
+
