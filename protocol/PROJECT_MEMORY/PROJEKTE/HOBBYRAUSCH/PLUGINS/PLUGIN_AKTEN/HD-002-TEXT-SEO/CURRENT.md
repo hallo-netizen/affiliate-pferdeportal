@@ -1,142 +1,138 @@
 # HD-002 – HOBBY DEPOT SEO THEMENENGINE – CURRENT
 
 STAND: 2026-10-01
-STATUS: V0.1.2 LIVE BLOCKED HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING / V0.1.3 COMPLETE-WORKFLOW POSITIV+NEGATIV HARD PASS / LIVE-UPGRADE NÄCHSTES
+STATUS: LIVE WEITER BLOCKED PLAN_HASH_MISSING / V0.1.3 NICHT ABGENOMMEN / V0.1.4 SERVER-SIDE RESUME COMPLETE-WORKFLOW POS+NEG HARD PASS / LIVE-UPGRADE NÄCHSTES
 
 ## Harte Abnahmeregel
 
-**Keine Abnahme mehr über Teiltests.**
+**Keine Teilabnahme.**
 Für diesen Workflow muss der komplette reale Pfad lokal positiv UND negativ simuliert sein:
-deployed HD-001 Owner-Handoff → HDTE Auto-Sync → Baseline → request-begrenzter Portalabgleich → finale Freshness-Gates → COMPLETE.
+deployed HD-001 Owner-Handoff → Auto-Sync → Baseline → Admin-Reentry → request-begrenzter Portalabgleich → finale Freshness-Gates → COMPLETE.
 
 ## Live-Stand
 
-Installiert live:
-`Hobby Depot SEO Themenengine 0.1.2`
+HD-001 produktiv:
+PASS / deployed / Readback PASS.
 
-Owner-Handoff wurde erfolgreich automatisch übernommen und der Gesamtbestand erfasst.
+HDTE:
+- Owner-Handoff wurde übernommen;
+- Gesamtbestand wurde erfasst;
+- Portalabgleich bleibt live sichtbar BLOCKED:
+  `HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`.
 
-Live danach:
-`Portalabgleich läuft automatisch request-begrenzt weiter. BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
+Nach dem 0.1.3-Fortsetzungsversuch war auf der Übersicht weiterhin derselbe Blocker sichtbar.
+Damit ist 0.1.3 **nicht live abgenommen**.
 
-Der Block liegt in:
-`STAGE_EDITORIAL_PLAN_SNAPSHOT`.
+## Korrektur der 0.1.3-Abnahme
 
-## Root Cause
+0.1.3 hatte den PHP-Worker request-getrennt bis COMPLETE getestet, aber die allererste Wiederaufnahme des gespeicherten BLOCKED-Jobs hing im Backend noch an einem Browser-JavaScript-Autostart.
 
-Ohne importierten Redaktionsplan liefert der bestehende HDTE-Vertrag absichtlich:
+Dieser Browser-Start war nicht als echter Admin-Request-Pfad positiv/negativ bewiesen.
 
-- contract: `HDTE_EDITORIAL_PLAN_SNAPSHOT_V1`
-- status: `NOT_AVAILABLE`
-- sha256: `NOT_AVAILABLE`
-- items: leer.
-
-V0.1.2 behandelte den gültigen Sentinel `NOT_AVAILABLE` fälschlich wie einen fehlenden 64-Hex-Hash und blockierte deshalb.
-
-## Fix V0.1.3
+## V0.1.4
 
 Plugin:
-`Hobby Depot SEO Themenengine 0.1.3`
+`Hobby Depot SEO Themenengine 0.1.4`
 
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.3_PORTALABGLEICH_FULL_WORKFLOW_HARD_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.4_SERVER_SIDE_RESUME_FULL_WORKFLOW_HARD_PASS.zip`
 
 Installer SHA-256:
-`5b3063577beb3e5dfb03799b6245f2b9aaf90f338c70e86708674e5999762b2a`
+`02d52e326cce990833fb6661885d3ba5e30ab6461af76e8b0a2ebdcc3b78c12d`
 
-Source:
-`QUELLCODE_HDTE_V0.1.3_PORTALABGLEICH_FULL_WORKFLOW_HARD_PASS.zip`
+Source SHA-256:
+`0ec35019433040ef1ff0f1567a2252c78f763eaa59b6f342b24d98c749f32a72`
 
-V0.1.3 akzeptiert einen nicht vorhandenen Redaktionsplan ausschließlich wenn:
-- Contract korrekt;
-- status exakt `NOT_AVAILABLE`;
-- sha256 exakt `NOT_AVAILABLE`;
-- Baseline ebenfalls exakt `NOT_AVAILABLE`;
-- items exakt leer.
+### Fix
 
-Alle abweichenden/malformed Zustände bleiben fail-closed.
+Die Themenengine-Übersicht startet den exakt bekannten recoverablen BLOCKED-Zustand jetzt **serverseitig**.
 
-Zusätzlich kann exakt der bereits live vorhandene V8-Job
-`BLOCKED / STAGE_EDITORIAL_PLAN_SNAPSHOT / HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
-in-place weitergeführt werden.
-Kein neuer Gesamtbestand und kein neuer Owner-Handoff nötig.
+Automatische Wiederaufnahme nur wenn gleichzeitig:
+- Contract = `HDTE_CONTEXT_REFRESH_JOB_V8_DYNAMIC_CONTEXT_REBASE_ROOTFIX`;
+- Status = `BLOCKED`;
+- Phase = `STAGE_EDITORIAL_PLAN_SNAPSHOT`;
+- Fehler = `HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`;
+- aktuelle Baseline = `HDTE_SITE_BASELINE_V1`;
+- Baseline-Plan = `NOT_AVAILABLE`;
+- aktueller Plan-Snapshot exakt `NOT_AVAILABLE / NOT_AVAILABLE / items=[]`;
+- Inventory- und Structure-Hash des Jobs weiterhin zur Baseline passen.
 
-## Komplette lokale Positivsimulation
+Ein altes fehlendes Jobfeld `editorial_plan_sha256` wird nur dann toleriert, wenn die aktuellen Baseline-/Snapshot-Beweise den NOT_AVAILABLE-Zustand vollständig bestätigen.
+
+## Komplette Positivsimulation
 
 ### Exakter Livezustand
-- HD-001 deployed;
-- 7 Owner;
-- 11 ARTICLE_ONLY / 11 gebunden;
-- 4 nutzbare Content-Kategorien;
-- 1 Buchbinden-Themenfamilie;
-- 0 aktuelle Themen im Portalabgleich;
-- kein Redaktionsplan.
-
-Fresh Installer V0.1.3:
-Owner-Sync → Baseline → Inventory Stage → Plan Stage → Registry Stage → Sandbox Store → Sandbox IDs → Context Index → Final Structure → Final Inventory → Final Editorial Plan → **COMPLETE**.
-
-### Echter Upgrade-/Resume-Fall
-Jeder Schritt in eigenem PHP-Prozess/Request:
+0 Themen / 4 Kategorien / 1 Familie / kein Redaktionsplan.
 
 V0.1.2:
 `BLOCKED / STAGE_EDITORIAL_PLAN_SNAPSHOT / HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`.
 
-Danach gleiche persistierte Job-/Option-Daten unter frisch entpackter V0.1.3:
-ohne neue Baseline, ohne neuen Handoff:
-→ Stage Plan
-→ Registry
-→ Sandbox
-→ Context Index
-→ Final Structure
-→ Final Inventory
-→ Final Plan
-→ **COMPLETE**.
+V0.1.3 Admin-Status ohne Browser-Autostart:
+bleibt BLOCKED.
 
-### Nichtleerer Stresslauf
-4 Themen einschließlich Payload-Audit + Portal-Context-Batch:
-4/4 verarbeitet → **COMPLETE**.
+V0.1.4:
+Admin-Aufruf allein:
+BLOCKED → RUNNING; Plan Stage PASS.
 
-### Redaktionsplan vorhanden
-Normal hash-gebundener vorhandener Plan:
-→ **COMPLETE**.
+Danach jeder Folgeschritt in eigenem PHP-Prozess/Request:
+- STAGE_ARTICLE_TYPE_REGISTRY
+- SANDBOX_RECORD_STORE_MIGRATION
+- STAGE_SANDBOX_RECORD_IDS
+- BUILD_FAMILY_SHARDED_CONTEXT_INDEX
+- FINAL_FRESH_STRUCTURE
+- FINAL_FRESH_INVENTORY
+- FINAL_FRESH_EDITORIAL_PLAN
+- COMPLETE
+
+Ergebnis: **COMPLETE**.
+
+### Weitere Positivfälle
+- alter BLOCKED-Job ohne gespeichertes `editorial_plan_sha256` → COMPLETE;
+- kompletter Neuablauf mit 0 Themen → COMPLETE;
+- 4-Themen-Stresslauf → COMPLETE;
+- echter vorhandener Redaktionsplan → COMPLETE.
 
 ## Negative Volltests
 
-Frisch entpackter Installer:
-- HD-001 nicht deployed → `HDTE_UPSTREAM_CATEGORY_WORKFLOW_NOT_DEPLOYED`;
-- NOT_AVAILABLE mit nichtleeren Items → `HDTE_CONTEXT_STAGE_PLAN_NOT_AVAILABLE_ITEMS_PRESENT`;
+Automatische Wiederaufnahme bleibt aus bei:
+- malformed NOT_AVAILABLE mit nichtleeren Items;
+- aktuellem vorhandenen Redaktionsplan;
+- Structure-Hash-Mismatch;
+- anderem Fehlercode;
+- anderer Phase.
+
+Weitere Fail-closed-Tests:
 - verfügbarer Plan ohne Hash → `HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`;
-- staged Plan nach Write manipuliert → Stage-Readback/Length-Mismatch BLOCKED;
-- Live-Struktur vor Abschluss verändert → `HDTE_CONTEXT_REFRESH_STALE_FINAL_STRUCTURE`.
+- Stage-Artefakt manipuliert → `HDTE_CONTEXT_STAGE_EDITORIAL_PLAN_LENGTH_MISMATCH`;
+- finale Live-Struktur driftet → `HDTE_CONTEXT_REFRESH_STALE_FINAL_STRUCTURE`;
+- HD-001 nicht deployed → `HDTE_UPSTREAM_CATEGORY_WORKFLOW_NOT_DEPLOYED`.
 
-Admin-Reentry:
-exakter aktuelle BLOCKED-Job wird als `CURRENT_PLAN_ABSENCE_REENTRY_PENDING` erkannt und an den vorhandenen automatischen AJAX-Worker weitergereicht.
+## Fresh-Installer
 
-## Paketprüfung
-
-- PHP Source: 80/80 PASS;
-- PHP Fresh Installer: 80/80 PASS;
-- Source ↔ Fresh Installer: 135/135 Dateien byteidentisch;
-- geändert ggü. 0.1.2: exakt 4 Dateien:
+- kompletter exakter Resume-Ablauf auf frisch entpackter ZIP → COMPLETE;
+- alle obigen Negativfälle auf frisch entpackter ZIP → PASS;
+- PHP Source 80/80 PASS;
+- PHP Installer 80/80 PASS;
+- Source ↔ Installer 135/135 byteidentisch;
+- gegenüber 0.1.3 exakt 3 Dateien geändert:
   - Hauptplugin/Version;
-  - Admin-Reentry;
-  - Context-Index Sentinel-Validierung;
-  - Context-Refresh In-place-Recovery.
-- Repository, Research Archive, Sandbox Record Store, Storage Maintenance, Safe Migration und Owner-Handoff bleiben byteidentisch.
+  - Admin server-side reentry;
+  - Context-Refresh recovery gate.
 
 Evidence:
-`HDTE_V0.1.3_FULL_WORKFLOW_POS_NEG_EVIDENCE.txt`
+`HDTE_V0.1.4_COMPLETE_WORKFLOW_POS_NEG_EVIDENCE.txt`
 
 ## NEXT ACTION
 
-V0.1.3 über V0.1.2 installieren.
+V0.1.4 installieren.
 
 Danach nur:
 `Hobby Depot Themenengine → Übersicht`
 
-Der vorhandene BLOCKED-Portalabgleich wird automatisch request-begrenzt weitergeführt.
-Keine neue Bestandserfassung.
-Kein neuer Owner-Handoff.
-Kein neuer Research-Lauf.
+Kein neuer Gesamtbestand.
+Kein neuer Handoff.
+Kein Research-Neustart.
 
-Erst bei sichtbarem `Portalabgleich COMPLETE` live abnehmen.
+Der gespeicherte BLOCKED-Job wird beim Admin-Aufruf serverseitig validiert und fortgesetzt.
+Live-Abnahme erst bei sichtbarem:
+`Portalabgleich COMPLETE`.
