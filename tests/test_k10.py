@@ -46,7 +46,7 @@ def make_base():
     def para(fid,prefix,n,with_trace=False,link=''):
         tr=trace(fid,f'Fachquelle {fid}',hashes[fid]) if with_trace else ''
         return f'<p data-fact-ids="{fid}">{tr} {words(prefix,n)} {link}</p>'
-    intro='<section data-block="intro">'+para('F1','Einleitung Training Pferde',99,True,'<a data-link-role="parent_category" href="/training/">Training</a>')+'</section>'
+    intro='<section data-block="intro"><p data-fact-ids="F1">'+trace('F1','Fachquelle F1',hashes['F1'])+' Eine Longierpeitsche unterstützt die Hilfengebung beim Longieren und ergänzt Stimme und Longe. '+words('Einleitung Training Pferde',82)+' <a data-link-role="parent_category" href="/training/">Training</a></p></section>'
     answer='<section data-block="answer"><h2>Welche Aufgabe die Longierpeitsche hat</h2>'+''.join([
       para('F2','Aufgabe Longierpeitsche Longieren A',55,True),para('F2','Aufgabe Longierpeitsche Longieren B',54),
       para('F2','Aufgabe Longierpeitsche Longieren C',54),para('F2','Aufgabe Longierpeitsche Longieren D',54)])+'</section>'
@@ -72,6 +72,7 @@ def make_base():
       'wordpress_category':{'id':12,'slug':'training'},
       'heading_intent_terms':['Aufgabe','Longierpeitsche','Stimme','Longe','Zusammenspiel','Sicherer','Einsatz','Longieren'],
       'comparison_source_bindings':[],
+      'table_decision':{'decision':'OMIT_NO_ADDED_VALUE','rationale':'FAQ enthält eine klare Schrittfolge ohne zusätzlichen Tabellenmehrwert.'},
       'html':html,'external_results':{'LanguageTool 6.8':'PASS'},'semantic_rule_results':{}
     }
 
@@ -119,6 +120,17 @@ class K10Tests(unittest.TestCase):
         a['semantic_rule_results']['table.value_required_if_present']='FAIL'
         result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertIn('HARD_RULE_NOT_PASS:table.value_required_if_present',result['findings'])
+
+    def test_missing_optional_table_decision_blocks(self):
+        a=make_base(); a.pop('table_decision',None)
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:table.optional_decision_documented',result['findings'])
+
+    def test_missing_intro_orientation_blocks(self):
+        a=make_base()
+        a['html']=a['html'].replace('Eine Longierpeitsche unterstützt die Hilfengebung beim Longieren und ergänzt Stimme und Longe.','Heute betrachten wir zunächst einige wichtige praktische Punkte für den Alltag.')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:intro.orientation_sentence',result['findings'])
 
     def test_missing_receipt_blocks_without_content_recheck(self):
         a=make_base(); receipts=run_article_checks(a); receipts=[r for r in receipts if r['rule_id']!='title.colon_forbidden']
