@@ -49,8 +49,18 @@ def load_domain_dictionary() -> tuple[set[str], str]:
         raise LTError("LT68_DOMAIN_DICTIONARY_DUPLICATE_WORD")
     return set(normalized), sha256_bytes(raw)
 
-def apply_domain_dictionary(checked: str, report: dict) -> tuple[dict, list[dict], str]:
+def apply_domain_dictionary(checked: str, report: dict, authoritative_words=None) -> tuple[dict, list[dict], str, str]:
     words, dictionary_sha = load_domain_dictionary()
+    authoritative=set()
+    for raw in authoritative_words or []:
+        if not isinstance(raw,str) or not raw.strip():
+            raise LTError("LT68_AUTHORITATIVE_DOMAIN_WORD_INVALID")
+        token=raw.strip()
+        if not re.fullmatch(r"[A-Za-zÄÖÜäöüß-]+",token):
+            raise LTError("LT68_AUTHORITATIVE_DOMAIN_WORD_NOT_EXACT_TOKEN:"+token[:40])
+        authoritative.add(token.casefold())
+    words=set(words)|authoritative
+    authoritative_sha=sha256_bytes(json.dumps(sorted(authoritative),ensure_ascii=False,separators=(",",":")).encode("utf-8"))
     matches=report.get("matches")
     if not isinstance(matches,list):
         raise LTError("LT68_MATCHES_INVALID")
@@ -73,13 +83,14 @@ def apply_domain_dictionary(checked: str, report: dict) -> tuple[dict, list[dict
                 "token":token,
                 "offset":offset,
                 "length":length,
-                "context":str(context.get("text") or "")
+                "context":str(context.get("text") or ""),
+                "source":"AUTHORITATIVE_ARTICLE_METADATA" if token.casefold() in authoritative else "STATIC_DOMAIN_DICTIONARY"
             })
         else:
             kept.append(raw)
     filtered=dict(report)
     filtered["matches"]=kept
-    return filtered, ignored, dictionary_sha
+    return filtered, ignored, dictionary_sha, authoritative_sha
 
 def ppm_visible_language_text(article_html: str) -> str:
     """Exact Python copy of PPM 6.7.9 Wave-2 visible_language_text()."""
@@ -93,7 +104,7 @@ def ppm_visible_language_text(article_html: str) -> str:
             lines.append(value)
     return "\n\n".join(lines)
 
-def run(jar: Path, article_path: Path) -> dict:
+def run(jar: Path, article_path: Path, authoritative_words=None) -> dict:
     if not jar.is_file():
         raise LTError("LT68_JAR_MISSING")
     actual = file_sha256(jar)
@@ -125,7 +136,7 @@ def run(jar: Path, article_path: Path) -> dict:
     except json.JSONDecodeError as exc:
         raise LTError("LT68_REPORT_INVALID") from exc
 
-    report, domain_ignored, domain_dictionary_sha = apply_domain_dictionary(checked, report_unfiltered)
+    report, domain_ignored, domain_dictionary_sha, authoritative_domain_terms_sha = apply_domain_dictionary(checked, report_unfiltered, authoritative_words)
     matches = report.get("matches") if isinstance(report, dict) else None
     if not isinstance(matches, list):
         raise LTError("LT68_MATCHES_INVALID")
@@ -160,6 +171,7 @@ def run(jar: Path, article_path: Path) -> dict:
         "raw_report_unfiltered_json": raw_report_unfiltered,
         "raw_report_unfiltered_sha256": raw_unfiltered_sha,
         "domain_dictionary_sha256": domain_dictionary_sha,
+        "authoritative_domain_terms_sha256": authoritative_domain_terms_sha,
         "domain_dictionary_ignored_findings": domain_ignored,
         "raw_finding_count": len(matches),
         "unresolved_finding_count": len(matches),
@@ -185,6 +197,7 @@ def run(jar: Path, article_path: Path) -> dict:
         "finding_count": len(findings),
         "findings": findings,
         "domain_dictionary_sha256": domain_dictionary_sha,
+        "authoritative_domain_terms_sha256": authoritative_domain_terms_sha,
         "domain_dictionary_ignored_count": len(domain_ignored),
         "language_evidence": evidence,
         "status": "PASS" if not findings else "REPAIR_REQUIRED",
