@@ -15,6 +15,9 @@ def verify():
     findings=[]
     for p in ROOT.rglob('*'):
         rel=p.relative_to(ROOT)
+        # Git metadata is repository history/transport state, not active K10 project content.
+        if rel.parts and rel.parts[0]=='.git':
+            continue
         if any(part in FORBIDDEN_NAMES for part in rel.parts):
             # Python bytecode caches are build byproducts, ignored after being flagged for cleanup.
             if '__pycache__' in rel.parts:
