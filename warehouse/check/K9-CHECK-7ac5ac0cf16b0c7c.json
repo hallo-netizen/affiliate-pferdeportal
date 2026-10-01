@@ -1,0 +1,675 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-7ac5ac0cf16b0c7c",
+  "results": [
+    {
+      "item_id": "k9-ff5fb509c19c41dab1011be7",
+      "lt68_result": {
+        "article_sha256": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+        "checked_text_sha256": "5c76a8a47501f615780ff1bdcb484470e9159d56fc347c3082b3a6659caed4e7",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 0,
+        "findings": [],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Wenn andere Menschen dein Pferd reiten, reicht der Blick auf den Namen des Tarifs nicht aus. Entscheidend ist, ob Fremdreiter und Reitbeteiligungen im konkreten Vertrag tatsächlich eingeschlossen sind. Dieser Punkt sollte vor dem Abschluss geklärt sein.\n\nBei einer Pferdehaftpflicht zählt deshalb nicht nur, dass überhaupt Versicherungsschutz besteht. Vor Vertragsabschluss sollte geprüft werden, welche Risiken und Personen der gewählte Vertrag abdeckt. Für das Fremdreiterrisiko muss die tatsächliche Nutzung zu den Bedingungen passen.\n\nPferdehaftpflicht mit Fremdreiterrisiko richtig auswählen\n\nTarife können neben dem Pferdehalter weitere Personen einbeziehen. Dazu können nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- oder Fremdreiter gehören. Für deine Auswahl ist wichtig, diese Gruppen nicht gleichzusetzen, sondern die tatsächlich beteiligten Personen wiederzufinden.\n\nBesonders relevant ist die Frage, ob andere Personen das Pferd regelmäßig oder gelegentlich unentgeltlich reiten. In diesem Fall sollte das Fremdreiterrisiko im Vertrag ausdrücklich berücksichtigt sein. Eine Formulierung, die nur den Halter nennt, beantwortet diese Frage noch nicht.\n\nHilfreich ist eine kurze Bestandsaufnahme vor dem Tarifvergleich. Notiere, wer das Pferd nutzt, wie häufig das geschieht und ob die Nutzung nur gelegentlich oder dauerhaft organisiert ist. Diese Einordnung verändert keine Vertragsbedingungen, macht aber sichtbar, welche Personengruppen du im Tarif gezielt wiederfinden musst.\n\nVergleiche anschließend nicht nur Überschriften oder Werbeaussagen, sondern die konkrete Beschreibung des versicherten Personenkreises. So erkennst du schneller, ob dein eigener Nutzungsalltag überhaupt zu dem passt, was der Tarif tatsächlich nennt.\n\nZur übergeordneten Einordnung gehört der Bereich Wissen. Dort lässt sich das Versicherungsthema in den größeren Zusammenhang einordnen, ohne die konkrete Tarifprüfung zu ersetzen.\n\nFremdreiter: ausdrücklich prüfen, ob Gast- oder Fremdreiter mitversichert sind.\n\nReitbeteiligung: klären, wie regelmäßige Nutzung im Tarif eingeordnet wird.\n\nMithalter: kontrollieren, ob diese Personengruppe genannt und erfasst ist.\n\nHüter: prüfen, ob nicht gewerbsmäßige Betreuung vom Vertrag umfasst wird.\n\nNutzungsform: gelegentliche und regelmäßige Überlassung getrennt betrachten.\n\nNutzung des Pferdes sauber einordnen\n\nOb ein Fremdreiter über die Pferdehaftpflicht des Halters geschützt ist, hängt vom vereinbarten Fremdreiterrisiko des konkreten Tarifs ab. Deshalb ist die Vertragsprüfung der entscheidende Schritt, bevor das Pferd anderen Personen überlassen wird. Eine pauschale Annahme ersetzt diese Prüfung nicht.\n\nWichtig ist auch die Abgrenzung. Ein Schaden, der nicht durch das Pferd, sondern durch ein eigenes Missgeschick des Reiters verursacht wird, fällt nicht automatisch unter die Pferdehaftpflicht. Dann kann die Privathaftpflicht des Reiters eine Rolle spielen.\n\nFür die Auswahl bedeutet das: Prüfe nicht nur die Bezeichnung „Fremdreiterrisiko“, sondern auch, welche Person in welcher Eigenschaft geschützt sein soll. Dann lässt sich erkennen, ob dein Alltag mit dem Pferd von der beschriebenen Nutzung im Tarif erfasst wird.\n\nEine praktische Reihenfolge hilft beim Vergleich. Zuerst ordnest du die Personen ein, danach die Nutzung und zuletzt den möglichen Schadenhergang. Damit wird sichtbar, welche Fragen der Tarif beantworten muss und welche Punkte außerhalb der Pferdehaftpflicht liegen können.\n\nIm Bereich Versicherungen & Recht lässt sich die Entscheidung weiter einordnen. Der konkrete Vertrag bleibt dabei die maßgebliche Grundlage für die Frage, welche Nutzung tatsächlich abgesichert ist.\n\nWenn andere Personen dein Pferd nutzen, sollten Fremdreiter und Reitbeteiligungen in der Auswahl ausdrücklich berücksichtigt werden. Beim Tarifvergleich kannst du deshalb gezielt nach den Personengruppen suchen, die bei dir tatsächlich vorkommen, statt nur allgemeine Leistungslisten zu lesen.\n\nVertragswortlaut vor der Nutzung prüfen\n\nVor Abschluss einer Tierhalterhaftpflicht sollte genau geprüft werden, welche Risiken und Personen der gewählte Vertrag tatsächlich abdeckt. Für das Fremdreiterrisiko heißt das praktisch: Der Personenkreis darf nicht nur vermutet werden, sondern muss sich im Tarif nachvollziehbar wiederfinden.\n\nOb ein Fremdreiter über die Pferdehaftpflicht des Halters geschützt ist, hängt vom vereinbarten Fremdreiterrisiko des konkreten Tarifs ab. Deshalb ist es sinnvoll, den Wortlaut schon vor der Überlassung des Pferdes zu prüfen und nicht erst nach einem Schaden.\n\nRegelmäßige oder gelegentliche unentgeltliche Nutzung und die im Tarif genannten Personengruppen gehören zusammen betrachtet. Reitbeteiligte, Mithalter, Hüter sowie Gast- oder Fremdreiter können ausdrücklich einbezogen sein. Für den Vergleich ist deshalb entscheidend, ob die eigene Nutzung in diesen Beschreibungen klar wiederzufinden ist. Prüfe die Rollen nacheinander und halte fest, welche davon im eigenen Alltag tatsächlich vorkommen. So bleibt die Auswahl auf den persönlichen Nutzungsfall begrenzt, ohne den Tarif über seinen Wortlaut hinaus auszulegen.\n\nDiese Punkte gehören in den Vergleich\n\nFremdreiter, Reitbeteiligungen und die konkrete Nutzungsform bilden den Kern des Tarifvergleichs.\n\nPrüfpunkt\n\nTarifwortlaut\n\nAbgleich\n\nFremdreiter\n\nausdrücklich genannt\n\nNutzung abgleichen\n\nNutzungsform\n\ngelegentlich oder regelmäßig\n\nVertrag prüfen\n\nWeitere Personen\n\nReitbeteiligte Mithalter Hüter\n\nRollen abgleichen\n\nSchadenursache\n\nPferd oder Reiter\n\nHaftpflicht zuordnen\n\nDie Tabelle reduziert den Vergleich auf Personenkreis, Nutzungsform und Schadenursache und hält die zentralen Prüfschritte kompakt zusammen.\n\nFazit zur passenden Absicherung\n\nEine passende Pferdehaftpflicht mit Fremdreiterrisiko erkennst du nicht allein am Tarifnamen. Entscheidend ist, ob die konkrete Nutzung und die beteiligten Personen in den Bedingungen erfasst sind. Genau deshalb sollte der Leistungsumfang vor Abschluss und vor der Überlassung des Pferdes geprüft werden.\n\nWer Fremdreiter oder Reitbeteiligungen einbindet, sollte deren Absicherung ausdrücklich mitdenken. Gleichzeitig bleibt wichtig, zwischen einem durch das Pferd verursachten Schaden und einem eigenen Missgeschick des Reiters zu unterscheiden. So entsteht eine Auswahl, die sich an der tatsächlichen Nutzung orientiert und nicht an pauschalen Annahmen oder bloßen Tarifbezeichnungen.\n\nWeiterführende Informationen zur Pferdehaftpflicht\n\nWeitere Hinweise zum Thema findest du im gebundenen Bereich Pferdehaftpflicht. Für die Tarifwahl bleibt entscheidend, die dortige Einordnung mit den Bedingungen des konkreten Vertrags abzugleichen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "5c76a8a47501f615780ff1bdcb484470e9159d56fc347c3082b3a6659caed4e7",
+          "content_hash": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "5c76a8a47501f615780ff1bdcb484470e9159d56fc347c3082b3a6659caed4e7",
+            "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 0,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "return_code": 0,
+          "unresolved_finding_count": 0
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "return_code": 0,
+        "status": "PASS"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 2,
+            "conclusion_ratio": 0.1073512252042007,
+            "conclusion_word_count": 92,
+            "content_hash": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [],
+            "heading_count": 6,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [
+              "Nutzung des Pferdes sauber einordnen",
+              "Vertragswortlaut vor der Nutzung prüfen",
+              "Diese Punkte gehören in den Vergleich",
+              "Fazit zur passenden Absicherung"
+            ],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 71,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "5c76a8a47501f615780ff1bdcb484470e9159d56fc347c3082b3a6659caed4e7",
+            "language_evidence_valid": true,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 0,
+            "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "language_unresolved_finding_count": 0,
+            "list_count": 1,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "6f2b9231b7b3526377c79bb23bbcf15bbd0e613075ce348cb19c53f7698f6e7c",
+            "quality_binding_hash": "021d1a2c1661b4a00b979b2bf6185e083cb2fd9d41b7e1e311c49d235191109f",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Pferdehaftpflicht",
+                "block": "further_information",
+                "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/"
+              },
+              "parent_category": {
+                "anchor": "Wissen",
+                "block": "criteria",
+                "href": "/wissen/"
+              },
+              "semantic_related": {
+                "anchor": "Versicherungen & Recht",
+                "block": "decision",
+                "href": "/wissen/wissen-versicherungen-und-recht/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "coverage",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 4,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Prüfpunkt",
+              "Tarifwortlaut",
+              "Abgleich"
+            ],
+            "table_heading": "Diese Punkte gehören in den Vergleich",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.20833333333333334,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Pferdehaftpflicht mit Fremdreiterrisiko und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Wissen",
+                "block": "criteria",
+                "href": "/wissen/"
+              },
+              {
+                "anchor": "Versicherungen & Recht",
+                "block": "decision",
+                "href": "/wissen/wissen-versicherungen-und-recht/"
+              },
+              {
+                "anchor": "Pferdehaftpflicht",
+                "block": "further_information",
+                "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Wissen > Versicherungen & Recht > Pferdehaftpflicht > Beratung Pferdehaftpflicht",
+              "name": "Beratung Pferdehaftpflicht",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "pferdehaftpflicht-beratung",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "BLOCKED",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0.0392156862745098,
+          "fact_pack_claim_count": 6,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 35,
+          "fail_closed_aggregate_status": "BLOCKED",
+          "h2_count": 6,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.07142857142857142,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.1073512252042007,
+            "conclusion_word_count": 92,
+            "content_hash": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 857,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 22,
+          "publish_allowed": false,
+          "quality_content_hash": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 6,
+          "table_body_row_count": 4,
+          "table_count": 1,
+          "technical_content_hash": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 6,
+          "used_fact_count": 6,
+          "visible_link_count": 3,
+          "word_count": 847
+        },
+        "content_quality_status": "BLOCKED_CONTENT_QUALITY_CHECK",
+        "content_sha256": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "ffbfcbebc5181a3202758b0a7a32cc4d670f838aa8de69682ec5bb12ca6501aa",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[4]@byte_1855.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Hilfreich ist eine kurze Bestandsaufnahme vor dem Tarifvergleich. Notiere, wer das Pferd nutzt, wie häufig das geschieht und ob die Nutzung nur gelegentlich oder dauerhaft organ",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a0248e2fb351380cb176fa2252bf142cb60fe05620c3c2dd4a2061adf1d932c2",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[5]@byte_2191.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Vergleiche anschließend nicht nur Überschriften oder Werbeaussagen, sondern die konkrete Beschreibung des versicherten Personenkreises. So erkennst du schneller, ob dein eigener",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "7ab959f5a597aa17156cfd978beb5a757981b23b7683a54b3f1e861448ded7b9",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[6]@byte_2727.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Fremdreiter:</strong> ausdrücklich prüfen, ob Gast- oder Fremdreiter mitversichert sind.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "fd1753c0e4cf29b6e6192498d81b1c3630048d2f9f93ee900a7aa6ea20004ede",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[7]@byte_2835.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Reitbeteiligung:</strong> klären, wie regelmäßige Nutzung im Tarif eingeordnet wird.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "fad56e3babd559da9395f7e49c2092bc449ea6d7a540e30c82ec8ecc6f904659",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[8]@byte_2940.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Mithalter:</strong> kontrollieren, ob diese Personengruppe genannt und erfasst ist.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "612b1b274a09c5fecf83a377b30559d26af6a71078310a3b13d42fe6067461f8",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[9]@byte_3041.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Hüter:</strong> prüfen, ob nicht gewerbsmäßige Betreuung vom Vertrag umfasst wird.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "c3319891367b10384c29fc7f86ee262a716d77ccf230f288fa2c270a83fa4dd4",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[10]@byte_3145.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <li><strong>Nutzungsform:</strong> gelegentliche und regelmäßige Überlassung getrennt betrachten.</li>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "4b1aa51faadd7c61606513f69d16b00a2deff2de0197b9c0f06596112fc0e966",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[13]@byte_4171.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Für die Auswahl bedeutet das: Prüfe nicht nur die Bezeichnung „Fremdreiterrisiko“, sondern auch, welche Person in welcher Eigenschaft geschützt sein soll. Dann lässt sich erkenn",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "e4e4361cc5f81527aeae0ad90d6f940fb1eb06ff38a5f3341cfe3cf124fd01bb",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[14]@byte_4449.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Eine praktische Reihenfolge hilft beim Vergleich. Zuerst ordnest du die Personen ein, danach die Nutzung und zuletzt den möglichen Schadenhergang. Damit wird sichtbar, welche Fr",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "dfb3baf787f2cf01c08d5c1d5c8cb7e36e94bd52047af9e9b9c800ce3aeaf076",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[21]@byte_7721.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>ausdrücklich genannt</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "eb2b4257cd8bbe1d2e3385bdb509c7f0ac99e51076aacb041c27e69a6dee9524",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[22]@byte_7751.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Nutzung abgleichen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "6c4055ed22a3a25a9c0a611bb3ad5db134a1630b161752c0b0b7173f7357a99e",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[24]@byte_7832.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>gelegentlich oder regelmäßig</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d69940ea8d9221cb996a66bd7a40da38c7f7998842770b0a4a720fdcdb5392dd",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[25]@byte_7871.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Vertrag prüfen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "7d44351612855fff5de4169eadb084ca10630317ab8f57fe249107510a8049c0",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[27]@byte_7953.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Reitbeteiligte Mithalter Hüter</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "d38d640f38c0193daef787c793561a53c715474a5bbc0cbba9c437fbe7fba851",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[28]@byte_7993.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Rollen abgleichen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "83859cb3de12f7b3e4fd5ef43a49723b722b5464c9992e8f9082f9a9757ef30f",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[30]@byte_8082.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Pferd oder Reiter</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a3f097edc79770b3e7bcbc0d2044349f3941b1888ea7f5bc16ea6fc881a67ef7",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[31]@byte_8108.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <td>Haftpflicht zuordnen</td>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": "missing",
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_FACT_REFS_MISSING",
+            "evidence_hash": "a9ce360d537a8a04cd636aeaf1e35afbf4162b0ce37185bc7ba120ff50146299",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "one or more bound fact ids",
+            "failed_rule": "EVERY_FACTUAL_VISIBLE_UNIT_REQUIRES_FACT_REFERENCES",
+            "field_path": "content.factual_units[32]@byte_8161.data-fact-ids",
+            "item_index": null,
+            "reason": "Eine sichtbare inhaltliche Einheit besitzt keine Faktreferenz. Fundstelle: <p>Die Tabelle reduziert den Vergleich auf Personenkreis, Nutzungsform und Schadenursache und hält die zentralen Prüfschritte kompakt zusammen.</p>",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": 0.0392156862745098,
+            "detected_at": "2026-10-01T13:32:15+00:00",
+            "error_code": "BLOCKED_CONTENT_DUPLICATE_SENTENCE_RATIO",
+            "evidence_hash": "3428098701ccdea19871a46c666725ae141244ba3b87cac5ae70d7f602a7b852",
+            "evidence_refs": [
+              "includes/content-validator.php",
+              "contracts/article-type-templates.json",
+              "contracts/table-contract-v1.json"
+            ],
+            "expected": "at most 0.02",
+            "failed_rule": "DUPLICATE_SENTENCE_RATIO_MUST_NOT_EXCEED_2_PERCENT",
+            "field_path": "content.duplicate_sentence_ratio",
+            "item_index": null,
+            "reason": "Der sichtbare Artikel wiederholt zu viele vollständige Sätze.",
+            "server_state_hash": "k9-native",
+            "severity": "BLOCKING",
+            "validator_id": "PPM679_Content_Validator",
+            "validator_version": "6.7.9"
+          },
+          {
+            "action_context": "k9_native_article_control",
+            "actual": [
+              "Nutzung des Pferdes sauber einordnen",
+              "Vertragswortlaut vor der Nutzung prüfen",
+              "Diese Punkte gehören in den Vergleich",
+              "Fazit zur passenden Absicherung"
+            ],
+            "component": "PPM679_Content_Structure_Language_Gate",
+            "error_code": "BLOCKED_WAVE2_HEADING_INTENT_MISMATCH",
+            "expected": [
+              "pferdehaftpflicht mit fremdreiterrisiko",
+              "pferdehaftpflicht",
+              "versicherungen recht",
+              "wissen"
+            ],
+            "failed_rule": "CONTENT_STRUCTURE_LANGUAGE_GATE_V2_FAIL_CLOSED",
+            "field_path": "content.heading_intent_terms",
+            "human_message": "Every non-reserved heading must contain a bound topic or intent term.",
+            "server_state_hash": "k9-native",
+            "source_files": [
+              "includes/content-structure-language-gate.php",
+              "contracts/content-structure-language-gate-v2.json"
+            ]
+          }
+        ],
+        "fail_closed_aggregate_status": "BLOCKED",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "REPAIR_REQUIRED",
+        "technical_status": "BLOCKED_TECHNICAL_CHECK"
+      },
+      "writing_rules_result": {
+        "content_sha256": "c117f297468add9ee54ee18414cee9c6e2db9ba1e94a0d9efd63435791a26b82",
+        "contract": "K9_WRITING_RULES_RESULT_V1",
+        "coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+        "findings": [],
+        "publish_allowed": false,
+        "status": "PASS",
+        "table_rule_contract": "K9_MOBILE_COMPACT_TABLE_POLICY_V1",
+        "writing_rules_sha256": "7faa6742de5717192019ff2e44e20feddb3a6b8d6017d9747d99bd0064d0cc5a"
+      }
+    }
+  ],
+  "station": "check"
+}
