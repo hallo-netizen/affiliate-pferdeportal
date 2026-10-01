@@ -179,3 +179,26 @@ NOTIZ: PSTE-Themenverwertungsarbeit ist separat; dieses Update ist keine Themenf
 ## LIVE-READBACK 2026-10-01 – PSTE / KEIN ERFUNDENES PU-EREIGNIS
 
 Direkter WordPress-Versionsvergleich belegt Portal SEO Themenengine **0.57.15 aktuell**. Später ist operativ ein fortgesetzter V9-Portalabgleich ohne Neustart sichtbar, die bereitgestellten späteren Screenshots zeigen jedoch keine Versionsnummer. Deshalb wird kein höheres ausgeführtes Updateereignis rückwirkend erfunden. Der technische Resume-Fix und die Themenverwertungsgrenzen stehen in `protocol/PSTE_TOPIC_REUSE_AND_CONTEXT_RESUME_CLOSEOUT_20261001.md`.
+
+
+## PU-20261001-002 – Affiliate-Zentrale (Portal-kompatibel)
+
+DATUM: 2026-10-01  
+PLUGIN_ID: PA-E-003  
+ART: UPDATE  
+HERKUNFT: EIGEN  
+FACHBÜRO: AFFILIATE  
+VON_VERSION: 6.72.171  
+AUF_VERSION: 6.72.172  
+UPDATEQUELLE: geprüfter Handoff-Installer `AFFILIATE_ZENTRALE_6.72.172.zip`; SHA-256 `c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25`  
+WARUM: vorhandenen zentralen Housekeeping-Lauf so ergänzen, dass ausschließlich verwaiste, mindestens 24 Stunden alte `ppar-idealo-feed-*.tmp` im Upload-Root sicher entfernt werden können; kein neuer Hilfsrunner.  
+ABHÄNGIGKEITEN: 6.72.171-Performanceoptimierungen; Affiliate-Housekeeping; Idealo-Worker-Lock.  
+FEHLERQUELLEN_GEPRÜFT: aktuelle Affiliate-Release-Governance; Storage-Evidence 6.72.172; Performance-Hardlock.  
+BACKUP_ROLLBACK_REF: technischer Vorstand 6.72.171; dessen Performance-Evidence bleibt unverändert gebunden.  
+POSITIVTEST: exaktes TMP-Muster, Alter >=24h, reguläre Datei im direkten Upload-Root wird durch den gebundenen Housekeeping-Pfad erfasst; lokaler Housekeeping-Disk-Test PASS.  
+NEGATIVTEST: aktiver Idealo-Worker-Lock, junge Dateien, Symlinks, Unterordner und abweichende Dateinamen bleiben ausgeschlossen; PHP-Lint 21/21, Fresh-Unpack 27/27 PASS.  
+FACH_REGRESSION: keine Ranking-, Provider-, Slot-, Veto-, Tracking-, Publish-, Import- oder Frontendänderung; 6.72.171-Performancepfade nicht zurückgebaut.  
+WORDPRESS_LIVEKONTROLLE: Nutzer bestätigt im laufenden Chat ausdrücklich, dass 6.72.172 bereits installiert ist. Ein neuer unabhängiger Screenshot/Byte-Readback wurde in diesem Abschlussblock nicht erneut erhoben; deshalb keine weitergehende Byteidentitätsbehauptung.  
+ERGEBNIS: PASS  
+FACHBÜRO_REF: technische Autorität bleibt `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`; Evidence `release/affiliate-zentrale/evidence/affiliate_router_v672172_idealo_temp_storage_local_gate_20261001.md`.  
+NOTIZ: 6.72.173 ist derzeit nur Source-Kandidat mit offenem Full-Gate und ausdrücklich noch kein installiertes Updateereignis.
