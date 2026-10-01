@@ -36,16 +36,26 @@
   },
   "active_candidate": {
     "version": "6.72.172",
-    "status": "CANDIDATE_LOCAL_PASS",
+    "status": "VERIFIED_HANDOFF_PACKAGE_READY",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "286fcedf2e7fa1eca441abb52d46254bf39f0d0fd6c63daa81f032d8e605e33c",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": null,
+    "candidate_reference_artifact_sha256": "c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25",
     "final_artifact_ref": null,
-    "final_artifact_sha256": null
+    "final_artifact_sha256": null,
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.172.zip",
+    "handoff_artifact_bytes": 766700,
+    "handoff_package_checks": {
+      "source_manifest_identity": "27_OF_27_PASS",
+      "fresh_unpack_identity": "27_OF_27_PASS",
+      "fresh_unpack_php_lint": "21_OF_21_PASS",
+      "version_header_runtime": "6.72.172_6.72.172_PASS",
+      "zip_integrity": "PASS",
+      "repository_binary_sync": "BLOCKED_NO_BYTE_EXACT_BINARY_UPLOAD_PATH"
+    }
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -362,7 +372,7 @@
     },
     "idealo_temp_storage_rootfix": {
       "version": "6.72.172",
-      "status": "LOCAL_POSITIVE_NEGATIVE_FULL_HOUSEKEEPING_PASS_RELEASE_GATE_OPEN",
+      "status": "VERIFIED_HANDOFF_PACKAGE_READY_LIVE_INSTALL_READBACK_OPEN",
       "live_basis_version": "6.72.171",
       "live_stale_files": 5,
       "live_stale_bytes": 749350091,
@@ -375,15 +385,16 @@
         "IDEALO_REFRESH_LOCK_BLOCKS",
         "MAX_50_MATCHES_PER_RUN"
       ],
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672172_idealo_temp_storage_local_gate_20261001.md"
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672172_idealo_temp_storage_local_gate_20261001.md",
+      "handoff_sha256": "c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25"
     }
   },
   "execution_state": {
-    "state": "SOURCE_BOUND_LOCAL_PASS",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "AFFILIATE 6.72.172 IDEALO-TEMP-STORAGE-ROOTFIX ONLY; no unrelated source change.",
-    "completion_condition": "EXACT_SOURCE_AND_PACKAGE_GATE_PASS_BEFORE_LIVE_INSTALL",
-    "after_completion_action": "ONE 6.72.172 INSTALLER HANDOFF; THEN REAL HOUSEKEEPING READBACK AND STORAGE RE-SCAN",
+    "state": "VERIFIED_HANDOFF_PACKAGE_READY",
+    "authorized_next_action": "REAL_WORDPRESS_INSTALL_READBACK_6_72_172",
+    "bound_user_scope_action": "Install exactly verified AFFILIATE_ZENTRALE_6.72.172.zip; read back active version; then run central housekeeping and storage re-scan.",
+    "completion_condition": "WORDPRESS_READBACK_6_72_172_ACTIVE_THEN_HOUSEKEEPING_COMPLETE_AND_IDEALO_TMP_STORAGE_REMOVED",
+    "after_completion_action": "RE-SCAN STORAGE; THEN CONTINUE DATABASE RETENTION/COMPACTION BLOCK",
     "no_optional_detours": true,
     "sequence": 45,
     "authorized_change_prefixes": [
