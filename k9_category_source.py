@@ -100,9 +100,18 @@ def _resolve(metadata, central, portal):
     main_slug=str(p["main_slug"]).strip().strip("/")
     hub_slug=str(p["hub_slug"]).strip().strip("/")
     product_slug=str(p["product_slug"]).strip().strip("/")
+    section_map={
+        "Beratung":{"parent_category":"criteria","semantic_related":"decision"},
+        "FAQ":{"parent_category":"answer","semantic_related":"details"},
+        "Pflege":{"parent_category":"steps","semantic_related":"risks"},
+        "Vergleich":{"parent_category":"options","semantic_related":"comparison"},
+    }
+    placements=section_map.get(article_type)
+    if not isinstance(placements,dict):
+        raise CategorySourceError("CENTRAL_CATEGORY_ARTICLE_TYPE_UNSUPPORTED:"+category+":"+article_type)
     links=[
-        {"anchor":str(p["main_hub"]).strip(),"href":f"/{main_slug}/","role":"parent_category","section_id":"criteria"},
-        {"anchor":str(p["hub"]).strip(),"href":f"/{main_slug}/{hub_slug}/","role":"semantic_related","section_id":"decision"},
+        {"anchor":str(p["main_hub"]).strip(),"href":f"/{main_slug}/","role":"parent_category","section_id":placements["parent_category"]},
+        {"anchor":str(p["hub"]).strip(),"href":f"/{main_slug}/{hub_slug}/","role":"semantic_related","section_id":placements["semantic_related"]},
         {"anchor":str(p["product"]).strip(),"href":f"/{main_slug}/{hub_slug}/{product_slug}/","role":"further_information","section_id":"further_information"},
     ]
     return {
