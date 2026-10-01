@@ -6,12 +6,12 @@ sys.path.insert(0,str(ROOT))
 
 from engine.catalog_guard import validate_catalog
 from engine.checkers import run_article_checks, article_hash
-from engine.final_integrity import verify_article, verify_system, verify_package
+from engine.final_integrity import verify_article, verify_system, verify_package, verify_package_pre_wordpress
 from engine.isolation_guard import verify as isolation_verify
 from engine.owner_guard import verify as owner_verify
 from engine.field_coverage import audit as field_audit
 from engine.system_guard import run_system_checks
-from engine.package_adapters import make_package_receipts
+from engine.package_adapters import make_package_receipts, make_pre_wordpress_package_receipts
 from engine.ppm_parity_guard import verify as ppm_parity_verify
 from engine.core import hard_rules
 from engine.package_adapters import PACKAGE_RESULT_MAP
@@ -147,6 +147,31 @@ class K10Tests(unittest.TestCase):
     def test_package_missing_endstempel_blocks_without_article_recheck(self):
         pid='P1'; psha='a'*64; receipts=make_package_receipts(pid,psha,{**package_pass_results(),'ENDSTEMPEL':'FAIL'})
         result=verify_package(pid,psha,receipts); self.assertIn('HARD_RULE_NOT_PASS:endstempel.signature',result['findings'])
+
+    def test_pre_wordpress_stage_passes_without_render_receipts_but_full_stop_stays_blocked(self):
+        pid='P1'; psha='a'*64; results=package_pass_results()
+        for key in ('WORDPRESS_RENDERED_H1','WORDPRESS_RENDERED_DUPLICATE_HEADINGS','WORDPRESS_RENDERED_ADJACENT_HEADINGS','WORDPRESS_RENDERED_EVIDENCE_CLASS'):
+            results[key]='PENDING_NO_WRITE_RENDER'
+        receipts=make_pre_wordpress_package_receipts(pid,psha,results)
+        expected={r['id'] for r in hard_rules('PACKAGE_INTEGRITY') if r.get('check_stage')!='WORDPRESS_VERIFY'}
+        pending={r['id'] for r in hard_rules('PACKAGE_INTEGRITY') if r.get('check_stage')=='WORDPRESS_VERIFY'}
+        self.assertEqual(len(receipts),17)
+        self.assertEqual({r['rule_id'] for r in receipts},expected)
+        pre=verify_package_pre_wordpress(pid,psha,receipts)
+        self.assertEqual(pre['status'],'READY_FOR_WORDPRESS_DRAFT_IMPORT',pre)
+        self.assertEqual(set(pre['pending_wordpress_rule_ids']),pending)
+        full=verify_package(pid,psha,receipts)
+        self.assertEqual(full['status'],'BLOCKED')
+        for rid in pending:
+            self.assertIn('MISSING_HARD_RULE_RECEIPT:'+rid,full['findings'])
+
+    def test_pre_wordpress_stage_still_blocks_any_failed_pre_wordpress_rule(self):
+        pid='P1'; psha='a'*64; results=package_pass_results(); results['ENDSTEMPEL']='FAIL'
+        receipts=make_pre_wordpress_package_receipts(pid,psha,results)
+        pre=verify_package_pre_wordpress(pid,psha,receipts)
+        self.assertEqual(pre['status'],'BLOCKED')
+        self.assertIn('HARD_RULE_NOT_PASS:endstempel.signature',pre['findings'])
+
 
     def test_ppm104_parity_is_exact_and_single_owner(self):
         r=ppm_parity_verify(); self.assertEqual(r['status'],'PASS',r)
