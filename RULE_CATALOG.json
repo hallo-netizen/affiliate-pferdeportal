@@ -1,0 +1,1331 @@
+{
+  "classifications": {
+    "DESCRIPTIVE": "metadata or intent; not itself a machine blocker",
+    "HARD": "must be machine checked and blocks on failure",
+    "TARGET": "writer guidance only; never silently promoted to blocker"
+  },
+  "contract": "K10_CENTRAL_RULE_CATALOG_V2",
+  "principle": "ONE_HARD_RULE_ONE_OWNER_ONE_CONTENT_CHECK_THEN_RECEIPT_ONLY",
+  "publish_allowed": false,
+  "rules": [
+    {
+      "check_stage": "LANGUAGE_GATE",
+      "classification": "HARD",
+      "id": "lt68.language_zero_unresolved",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "lt68_adapter",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.surface_policy.natural_german_required"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "conclusion.hard_limits",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.conclusion_policy.maximum_paragraphs",
+        "editorial_additive.conclusion_policy.maximum_ratio",
+        "editorial_additive.conclusion_policy.use_conclusion_to_fill_global_word_or_paragraph_floor"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "conclusion.type_minimum_ratio",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "types.*.conclusion_min_ratio"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.conclusion_no_new_untraced_facts",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.conclusion_no_new_untraced_facts"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.trace_binding",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.source_trace_contract.class",
+        "global.source_trace_contract.data_fact_id_source",
+        "global.source_trace_contract.data_source_hash_source",
+        "global.source_trace_contract.data_source_title_source",
+        "global.source_trace_contract.minimum_count",
+        "global.source_trace_contract.placement",
+        "global.source_trace_contract.required_attributes"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.trace_required",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.all_factual_blocks_require_trace",
+        "global.fact_trace_required"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.trace_required_blocks",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "types.*.fact_trace_required_blocks"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.duplicate_normalized_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.duplicate_normalized_h2_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.grammatical_variety",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.grammatical_pattern_variety_required"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.hard_length",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.hard_h2_chars_max",
+        "editorial_additive.heading_policy.hard_h2_words_max"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.keyword_staccato_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.keyword_staccato_forbidden",
+        "editorial_additive.heading_policy.significant_keyword_stop_tokens",
+        "editorial_additive.heading_policy.significant_target_keyword_token_h2_occurrences_max"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.natural_concrete_section_language",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.generic_filler_word_driven_heading_forbidden",
+        "editorial_additive.heading_policy.heading_content_relation_required",
+        "editorial_additive.heading_policy.natural_heading_surface_required",
+        "editorial_additive.heading_policy.section_specific_content_required",
+        "editorial_additive.heading_policy.short_special_heading_exception"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.phrase_family_repetition_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.phrase_family_repetition_forbidden",
+        "editorial_additive.heading_policy.repeated_heading_lead_word_max"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.target_phrase_control",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.heading_policy.exact_target_phrase_occurrences_max",
+        "editorial_additive.heading_policy.exact_target_phrase_occurrences_min_when_no_title_collision",
+        "editorial_additive.heading_policy.exact_target_phrase_occurrences_when_title_equals_target",
+        "editorial_additive.heading_policy.target_keyword_exact_phrase_mode"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.required_roles",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.required_link_roles"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.visible_exact",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.visible_links_exact"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.duplicate_block_names_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.duplicate_block_names_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.required_blocks",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "types.*.required_blocks"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.required_lists",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "types.*.required_lists"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "surface.non_template_language",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.surface_policy.artificial_generator_phrase_forbidden",
+        "editorial_additive.surface_policy.forbidden_generator_phrases",
+        "editorial_additive.surface_policy.template_spam_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "surface.repetition_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.surface_policy.keyword_staccato_forbidden",
+        "editorial_additive.surface_policy.phrase_family_repetition_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.canonical_classes",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.canonical_table_classes"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.compact_cells",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "table_rule.other_cells.flow_text_forbidden",
+        "table_rule.other_cells.hard_maximum_words",
+        "table_rule.other_cells.sentences_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.compact_labels",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "table_rule.first_column.maximum_words",
+        "table_rule.first_column.multiword_exception",
+        "table_rule.first_column.sentences_forbidden",
+        "table_rule.header.maximum_words",
+        "table_rule.header.multiword_exception",
+        "table_rule.header.sentences_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.post_summary_policy",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.post_table_summary_policy.location",
+        "global.post_table_summary_policy.new_facts_forbidden",
+        "global.post_table_summary_policy.paragraphs_exact",
+        "global.post_table_summary_policy.purpose",
+        "global.post_table_summary_policy.required",
+        "global.post_table_summary_policy.sentences_max",
+        "global.post_table_summary_policy.sentences_min",
+        "global.post_table_summary_policy.words_max",
+        "global.post_table_summary_policy.words_min"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.required_for_comparison",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K10_USER_APPROVED_TABLE_POLICY_2026-10-01"
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.value_required_if_present",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K10_USER_APPROVED_TABLE_VALUE_RULE_2026-10-01"
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "title.colon_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.title_colon_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "title.keyword_required",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.title_keyword_required"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "type.metadata_schema",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "types.*.type_meta_schema.fields.comparison_criteria.min_items",
+        "types.*.type_meta_schema.fields.comparison_criteria.type",
+        "types.*.type_meta_schema.fields.comparison_criteria.unique_items",
+        "types.*.type_meta_schema.fields.comparison_targets.min_items",
+        "types.*.type_meta_schema.fields.comparison_targets.type",
+        "types.*.type_meta_schema.fields.comparison_targets.unique_items",
+        "types.*.type_meta_schema.fields.decision_criteria.min_items",
+        "types.*.type_meta_schema.fields.decision_criteria.type",
+        "types.*.type_meta_schema.fields.decision_criteria.unique_items",
+        "types.*.type_meta_schema.fields.decision_goal.min_length",
+        "types.*.type_meta_schema.fields.decision_goal.type",
+        "types.*.type_meta_schema.fields.primary_question.min_length",
+        "types.*.type_meta_schema.fields.primary_question.type",
+        "types.*.type_meta_schema.fields.procedure_goal.min_length",
+        "types.*.type_meta_schema.fields.procedure_goal.type",
+        "types.*.type_meta_schema.fields.procedure_steps.min_items",
+        "types.*.type_meta_schema.fields.procedure_steps.type",
+        "types.*.type_meta_schema.fields.procedure_steps.unique_items",
+        "types.*.type_meta_schema.fields.risk_controls.min_items",
+        "types.*.type_meta_schema.fields.risk_controls.type",
+        "types.*.type_meta_schema.fields.risk_controls.unique_items",
+        "types.*.type_meta_schema.required"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "type.question_mark_policy",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "types.*.question_mark"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "words.further_information_maximum",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.balance_policy.further_information_maximum_words"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "words.hard_total_range",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.balance_policy.hard_total_words_max",
+        "editorial_additive.balance_policy.hard_total_words_min"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "words.main_text_minimum_ratio",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.balance_policy.normal_h2_combined_minimum_ratio"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "words.section_balance_ratio",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.balance_policy.normal_h2_longest_to_shortest_max_ratio"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "words.section_range",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.balance_policy.normal_h2_section_max_words",
+        "editorial_additive.balance_policy.normal_h2_section_min_words"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "words.word_budget_exclusions",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "editorial_additive.balance_policy.exempt_blocks",
+        "editorial_additive.balance_policy.further_information_may_fill_word_budget",
+        "editorial_additive.balance_policy.table_may_fill_word_budget",
+        "table_rule.word_budget.missing_article_words_must_be_added_to_normal_prose",
+        "table_rule.word_budget.table_words_count_toward_article_minimum"
+      ]
+    },
+    {
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
+      "id": "conclusion.target_ratio",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "writer_guidance",
+      "scope": "ARTICLE",
+      "source": "K9 conclusion target range"
+    },
+    {
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
+      "id": "heading.preferred_words",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "writer_guidance",
+      "scope": "ARTICLE",
+      "source": "K9 heading preferred range"
+    },
+    {
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
+      "id": "words.preferred_total_range",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "writer_guidance",
+      "scope": "ARTICLE",
+      "source": "K9 preferred total range"
+    },
+    {
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
+      "id": "writer.safety_targets",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "writer_guidance",
+      "scope": "ARTICLE",
+      "source": "K9 writer targets"
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "endstempel.signature",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "endstempel_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "ENDSTEMPEL"
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "pserc.final_integrity",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "pserc_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PSERC"
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "wordpress.final_verify",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "wordpress_verify_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "WORDPRESS_VERIFY"
+    },
+    {
+      "check_stage": "ALL_STAGES",
+      "classification": "HARD",
+      "id": "publish.allowed",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "safety_checker",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.publish_allowed",
+        "table_rule.publish_allowed"
+      ]
+    },
+    {
+      "check_stage": "BASELINE_BOOTSTRAP",
+      "classification": "HARD",
+      "id": "baseline.external_gate_hash_binding",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "baseline_guard",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "coverage.rule_groups.lt_68.source_sha256",
+        "coverage.rule_groups.ppm_679.source_sha256",
+        "source_ppm_sha256"
+      ]
+    },
+    {
+      "check_stage": "CATALOG_BOOTSTRAP",
+      "classification": "HARD",
+      "id": "meta.catalog_coverage_fail_closed",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "catalog_guard",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "coverage.fail_closed",
+        "coverage.future_rule_policy",
+        "coverage.policy",
+        "coverage.required_rule_groups"
+      ]
+    },
+    {
+      "check_stage": "CATALOG_BOOTSTRAP",
+      "classification": "HARD",
+      "id": "meta.catalog_owner_binding",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "catalog_guard",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "coverage.rule_groups.editorial_additive.enforced_by",
+        "coverage.rule_groups.k9_structural.enforced_by",
+        "coverage.rule_groups.lt_68.enforced_by",
+        "coverage.rule_groups.ppm_679.enforced_by"
+      ]
+    },
+    {
+      "check_stage": "CATALOG_BOOTSTRAP",
+      "classification": "HARD",
+      "id": "table.rule_active",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "catalog_guard",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "table_rule.status"
+      ]
+    },
+    {
+      "check_stage": "ISOLATION_BOOTSTRAP",
+      "classification": "HARD",
+      "id": "isolation.no_legacy_runtime_dependency",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "isolation_guard",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "runtime_dependency_on_legacy"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.topic_specific_special_logic_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "SYSTEM",
+      "source": "K9_RULE_FIELD_INVENTORY",
+      "source_fields": [
+        "global.topic_specific_special_logic_forbidden"
+      ]
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.body_h1_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.title_not_repeated_in_body",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.visible_test_marker_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.machine_status_word_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.paragraph_floor",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.h2_floor",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.required_blocks_nonempty",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.section_ids_unique",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.section_order",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.section_h2_exact_one",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.section_paragraph_required",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.list_minimum_items",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.intro_first",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.intro_structure",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.adjacent_headings_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.faq_direct_answer",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.text_between_headings_minimum",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "structure.html_balanced",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.intent_binding",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "heading.semantic_duplicate_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "surface.known_regression_patterns_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "surface.known_unnatural_language_forbidden",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "surface.duplicate_sentence_ratio",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "surface.intro_similarity",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.real_source_trace",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.source_label_option_match",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.visible_unit_fact_refs",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.referenced_fact_exists",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.referenced_fact_verified",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.referenced_fact_type_allowed",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.numeric_claim_supported",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.fact_pack_coverage",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.trace_lexical_support",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "facts.runtime_fact_allowlist",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "fact_trace_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.bound_pairs_exact",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.registry_active",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.section_placement",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.relative_internal_only",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.further_information_position",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.distributed_across_blocks",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.runtime_roles_bound",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "links.not_clustered_at_end",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.presence_policy",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.minimum_rows",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.structure",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "conclusion.minimum_paragraphs",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "balance_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "wordpress.semantic_category_binding",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "structural_checker",
+      "scope": "ARTICLE",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WORDPRESS_VERIFY",
+      "classification": "HARD",
+      "id": "wordpress.rendered_h1_integrity",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "wordpress_verify_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WORDPRESS_VERIFY",
+      "classification": "HARD",
+      "id": "wordpress.rendered_duplicate_heading_integrity",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "wordpress_verify_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WORDPRESS_VERIFY",
+      "classification": "HARD",
+      "id": "wordpress.rendered_adjacent_heading_integrity",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "wordpress_verify_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.content_validator_contract_supported",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.article_type_definition_bound",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.article_content_hash_bound",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.section_requirements_present",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.section_requirements_hash",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.canonical_validation_binding",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.wave2_contract",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.quality_binding_present",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.quality_binding_hash",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.internal_marker_bound",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.link_registry_hash",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.language_delta_evidence",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.language_evidence",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "lt68_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "FINAL_INTEGRITY",
+      "classification": "HARD",
+      "id": "integrity.known_error_contract",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "integrity_guard",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "WORDPRESS_VERIFY",
+      "classification": "HARD",
+      "id": "integrity.rendered_evidence_class",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "wordpress_verify_adapter",
+      "scope": "PACKAGE_INTEGRITY",
+      "source": "PPM679_EXACT_104_PARITY",
+      "source_fields": []
+    },
+    {
+      "check_stage": "SYSTEM_PREFLIGHT",
+      "classification": "HARD",
+      "id": "meta.ppm104_parity",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "catalog_guard",
+      "scope": "SYSTEM",
+      "source": "K10_PPM679_104_PARITY_MAP_V1",
+      "source_fields": []
+    }
+  ]
+}

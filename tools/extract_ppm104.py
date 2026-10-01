@@ -22,7 +22,6 @@ def sha256(path:Path)->str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def parse(text:str, member:str, method:str):
-    # Rule identity is the actual validator call: error code + failed rule.
     rx=re.compile(r"self::"+re.escape(method)+r"\(\s*'([^']+)'\s*,\s*'([^']+)'",re.S)
     out=[]
     for m in rx.finditer(text):
@@ -75,7 +74,6 @@ with zipfile.ZipFile(PACKAGE) as zf:
         chosen.append(hit)
     counts["rendered_dom_w4"]=len(chosen)
     rows.extend(chosen)
-
 if len(rows)!=104:
     raise SystemExit("PPM_TOTAL_SCOPE_MISMATCH:"+str(len(rows)))
 ids=[r["legacy_rule_id"] for r in rows]
@@ -98,7 +96,6 @@ with zipfile.ZipFile(PACKAGE) as zf:
         "article_type_templates":"portal-production-machine/contracts/article-type-templates.json",
     }.items():
         legacy_values[key]=json.loads(zf.read(member).decode("utf-8"))
-
 report={
     "contract":"K10_PPM679_EXACT_104_RULE_INVENTORY_V2",
     "status":"PASS",

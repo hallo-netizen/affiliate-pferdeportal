@@ -3,11 +3,14 @@
 Eigenständiger Entwicklungsbereich für Konzept 10.
 
 ## Harte Trennung
-- K9-Produktion bleibt unverändert auf `konzept9/greenfield-20260929`.
-- K10 arbeitet ausschließlich auf `konzept10-rule-ledger-20261001`.
-- Der K10-Dateibaum enthält keinen K9-Code, keine K9-Artikel, keine K9-Runtime und keine K9-Workflows.
-- K9 wird nur read-only über den Baseline-Commit `2cc8167fa1e31b4ffa2ff76c9819314be4b98555` referenziert.
+- K9-Produktion bleibt auf `hallo-netizen/affiliate-pferdeportal` / `konzept9/greenfield-20260929`.
+- K10 arbeitet ausschließlich auf `konzept10-rule-ledger-20261001` und in dessen K10-Dateibaum.
+- K10 enthält keine K9-Artikel, keine K9-Runtime, keine K9-Warehouse-Produkte, keine K9-Submissions und keine K9-Workflows.
+- K10 kennt K9 nur über `K9_BASELINE_REFERENCE.json`.
 - `publish_allowed=false`.
 
 ## K10-Prinzip
-Eine harte Regel wird genau einmal von genau einem Owner inhaltlich geprüft. Danach gilt nur noch der hashgebundene Receipt. Spätere Stationen prüfen Identität, Vollständigkeit, Katalog-Hash und Unverändertheit – nicht dieselbe Inhaltsregel erneut.
+Ein zentraler Regelkatalog. Jede harte Regel hat genau einen zuständigen Prüfer. Nach erfolgreicher Prüfung wird ein hashgebundener Receipt/Haken erzeugt. Nachgelagerte Stationen prüfen nur noch Receipt, Identität, Vollständigkeit und Unverändertheit. Dieselbe Regel wird nicht erneut inhaltlich geprüft.
+
+## Aktuelle Autorität
+`CURRENT_STATE.json`

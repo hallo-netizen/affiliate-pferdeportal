@@ -1,0 +1,39 @@
+{
+  "contract": "K10_LEGACY_TEXTMACHINE_PROOF_V1",
+  "purpose": "READ_ONLY_PARITY_EVIDENCE_NOT_RUNTIME_DEPENDENCY",
+  "historical_full_scope": {
+    "project_rules": 151,
+    "ppm_6_7_9": 104,
+    "content_guard": 30,
+    "design_guard": 15,
+    "external_links": 2,
+    "repairable": 102,
+    "hard_block": 49
+  },
+  "ppm_partition": {
+    "repairable": 89,
+    "hard_integrity": 15,
+    "repair_owner_distribution": {
+      "DRAFT_WORKER": 83,
+      "PARENT_TITLE_MACHINE": 3,
+      "PORTAL_LINK_MACHINE": 2,
+      "PARENT_CATEGORY_MACHINE": 1
+    }
+  },
+  "evidence": [
+    {
+      "workflow_run": 35196161649,
+      "head": "63b8d415cbbe9adccd9c05c7ca44a668862dbdc2",
+      "result": "SUCCESS",
+      "proof": "45 previously open PPM rules + 4 WAVE4 requirements exact negative evidence"
+    },
+    {
+      "workflow_run": 35197658651,
+      "head": "e960f103a84065a64ca535ed0a3b0ffc30b9568b",
+      "result": "SUCCESS",
+      "proof": "TEXTMASCHINE_REGELN_FULL_PASS:151/151:102_REPAIR:49_HARD_BLOCK"
+    }
+  ],
+  "k10_parity_status": "MAPPING_OPEN",
+  "warning": "Historical PASS proves legacy scope, but K10 must still prove that no legacy PPM semantic requirement is lost during consolidation into fewer central rules."
+}

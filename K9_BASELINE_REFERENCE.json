@@ -3,9 +3,13 @@
   "source_repository": "hallo-netizen/affiliate-pferdeportal",
   "source_branch": "konzept9/greenfield-20260929",
   "source_commit": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
-  "ppm_version": "6.7.9",
-  "ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+  "source_current_state_blob_sha": "ddcfb8b7495d555b0975f75ed4dfea17995c7a27",
+  "source_k9_contract_blob_sha": "4f78f69b274eca1bfa2a2d19dd95630e3f5233c0",
+  "source_writing_rules_blob_sha": "6f24586df18a8f831a33a16e4e80b34841ac84f0",
+  "source_table_rule_blob_sha": "e04910517ae30bb7dd55f5b1e35c26a77d87d7e4",
+  "goal_source": "control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json@main",
+  "goal_source_blob_sha": "72631476977083d47fc5602cd02b069bf9706023",
+  "goal": "MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE",
   "copy_policy": "REFERENCE_ONLY_NO_K9_RUNTIME_OR_ARTICLE_CONTENT",
-  "k9_mutation_allowed": false,
   "publish_allowed": false
 }

@@ -1,0 +1,18 @@
+{
+  "contract": "K10_TEXTMACHINE_SCOPE_REFERENCE_V1",
+  "project_rule_count": 151,
+  "groups": {
+    "PPM_6_7_9": {"count": 104, "repairable": 89, "hard_block": 15},
+    "CONTENT_GUARD": {"count": 30, "repairable": 2, "hard_block": 28},
+    "DESIGN_GUARD": {"count": 15, "repairable": 9, "hard_block": 6},
+    "EXTERNAL_LINKS": {"count": 2, "repairable": 2, "hard_block": 0}
+  },
+  "repairable_total": 102,
+  "hard_block_total": 49,
+  "languagetool": {
+    "version": "6.8",
+    "sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+    "mode": "DYNAMIC_EXTERNAL_RULE_ENGINE_NOT_DUPLICATED"
+  },
+  "k10_principle": "CONTENT_RULES_CHECK_ONCE_BY_OWNER; HARD_INTEGRITY_RULES_VALIDATE_BINDING_AND_IMMUTABILITY; FINAL_STAGE_DOES_NOT_RECHECK_PASSED_CONTENT_RULES"
+}

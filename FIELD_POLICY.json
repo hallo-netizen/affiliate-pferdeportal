@@ -1,0 +1,245 @@
+{
+  "contract": "K10_FIELD_POLICY_V2",
+  "descriptive_patterns": [
+    "^contract$",
+    "\\.contract$",
+    "^source$",
+    "^coverage\\.rule_groups\\..*\\.(source|semantics)$",
+    "\\.purpose$",
+    "\\.search_intent$",
+    "\\.structure_profile$",
+    "^editorial_additive\\.writer_targets\\.semantics$",
+    "^table_rule\\.purpose$"
+  ],
+  "target_patterns": [
+    "preferred_",
+    "target_ratio_",
+    "^editorial_additive\\.writer_targets\\.(?!semantics)",
+    "^table_rule\\.(header|first_column)\\.preferred_words$",
+    "^table_rule\\.other_cells\\.preferred_maximum_words$"
+  ],
+  "superseded": [
+    {
+      "pattern": "^global\\.table_count_exact$",
+      "replaced_by": "table.conditional_value_policy",
+      "reason": "K10_USER_APPROVED_TABLE_POLICY_2026-10-01"
+    }
+  ],
+  "hard_bindings": [
+    {
+      "pattern": "^coverage\\.(fail_closed|future_rule_policy|policy|required_rule_groups)$",
+      "rule_id": "meta.catalog_coverage_fail_closed",
+      "owner": "catalog_guard"
+    },
+    {
+      "pattern": "^coverage\\.rule_groups\\..*\\.enforced_by$",
+      "rule_id": "meta.catalog_owner_binding",
+      "owner": "catalog_guard"
+    },
+    {
+      "pattern": "^(source_ppm_sha256|coverage\\.rule_groups\\.(lt_68|ppm_679)\\.source_sha256)$",
+      "rule_id": "baseline.external_gate_hash_binding",
+      "owner": "baseline_guard"
+    },
+    {
+      "pattern": "^runtime_dependency_on_legacy$",
+      "rule_id": "isolation.no_legacy_runtime_dependency",
+      "owner": "isolation_guard"
+    },
+    {
+      "pattern": "^global\\.title_keyword_required$",
+      "rule_id": "title.keyword_required",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^global\\.title_colon_forbidden$",
+      "rule_id": "title.colon_forbidden",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^global\\.duplicate_block_names_forbidden$",
+      "rule_id": "structure.duplicate_block_names_forbidden",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^global\\.topic_specific_special_logic_forbidden$",
+      "rule_id": "structure.topic_specific_special_logic_forbidden",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^global\\.visible_links_exact$",
+      "rule_id": "links.visible_exact",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^global\\.required_link_roles$",
+      "rule_id": "links.required_roles",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^types\\.\\*\\.question_mark$",
+      "rule_id": "type.question_mark_policy",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^types\\.\\*\\.required_blocks$",
+      "rule_id": "structure.required_blocks",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^types\\.\\*\\.required_lists$",
+      "rule_id": "structure.required_lists",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^types\\.\\*\\.type_meta_schema\\.",
+      "rule_id": "type.metadata_schema",
+      "owner": "structural_checker"
+    },
+    {
+      "pattern": "^global\\.(fact_trace_required|all_factual_blocks_require_trace)$",
+      "rule_id": "facts.trace_required",
+      "owner": "fact_trace_checker"
+    },
+    {
+      "pattern": "^global\\.source_trace_contract\\.",
+      "rule_id": "facts.trace_binding",
+      "owner": "fact_trace_checker"
+    },
+    {
+      "pattern": "^types\\.\\*\\.fact_trace_required_blocks$",
+      "rule_id": "facts.trace_required_blocks",
+      "owner": "fact_trace_checker"
+    },
+    {
+      "pattern": "^global\\.conclusion_no_new_untraced_facts$",
+      "rule_id": "facts.conclusion_no_new_untraced_facts",
+      "owner": "fact_trace_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.(target_keyword_exact_phrase_mode|exact_target_phrase_occurrences_.*)$",
+      "rule_id": "heading.target_phrase_control",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.(significant_target_keyword_token_h2_occurrences_max|keyword_staccato_forbidden|significant_keyword_stop_tokens)$",
+      "rule_id": "heading.keyword_staccato_forbidden",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.(phrase_family_repetition_forbidden|repeated_heading_lead_word_max)$",
+      "rule_id": "heading.phrase_family_repetition_forbidden",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.duplicate_normalized_h2_forbidden$",
+      "rule_id": "heading.duplicate_normalized_forbidden",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.(hard_h2_words_max|hard_h2_chars_max)$",
+      "rule_id": "heading.hard_length",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.(natural_heading_surface_required|heading_content_relation_required|generic_filler_word_driven_heading_forbidden|section_specific_content_required|short_special_heading_exception)$",
+      "rule_id": "heading.natural_concrete_section_language",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.heading_policy\\.grammatical_pattern_variety_required$",
+      "rule_id": "heading.grammatical_variety",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.surface_policy\\.natural_german_required$",
+      "rule_id": "lt68.language_zero_unresolved",
+      "owner": "lt68_adapter"
+    },
+    {
+      "pattern": "^editorial_additive\\.surface_policy\\.(artificial_generator_phrase_forbidden|forbidden_generator_phrases|template_spam_forbidden)$",
+      "rule_id": "surface.non_template_language",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.surface_policy\\.(keyword_staccato_forbidden|phrase_family_repetition_forbidden)$",
+      "rule_id": "surface.repetition_forbidden",
+      "owner": "editorial_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.balance_policy\\.(hard_total_words_min|hard_total_words_max)$",
+      "rule_id": "words.hard_total_range",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.balance_policy\\.(normal_h2_section_min_words|normal_h2_section_max_words)$",
+      "rule_id": "words.section_range",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.balance_policy\\.normal_h2_longest_to_shortest_max_ratio$",
+      "rule_id": "words.section_balance_ratio",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.balance_policy\\.normal_h2_combined_minimum_ratio$",
+      "rule_id": "words.main_text_minimum_ratio",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.balance_policy\\.further_information_maximum_words$",
+      "rule_id": "words.further_information_maximum",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.balance_policy\\.(table_may_fill_word_budget|further_information_may_fill_word_budget|exempt_blocks)$",
+      "rule_id": "words.word_budget_exclusions",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^editorial_additive\\.conclusion_policy\\.(maximum_ratio|maximum_paragraphs|use_conclusion_to_fill_global_word_or_paragraph_floor)$",
+      "rule_id": "conclusion.hard_limits",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^types\\.\\*\\.conclusion_min_ratio$",
+      "rule_id": "conclusion.type_minimum_ratio",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^global\\.canonical_table_classes$",
+      "rule_id": "table.canonical_classes",
+      "owner": "table_checker"
+    },
+    {
+      "pattern": "^global\\.post_table_summary_policy\\.",
+      "rule_id": "table.post_summary_policy",
+      "owner": "table_checker"
+    },
+    {
+      "pattern": "^table_rule\\.(header|first_column)\\.(maximum_words|multiword_exception|sentences_forbidden)$",
+      "rule_id": "table.compact_labels",
+      "owner": "table_checker"
+    },
+    {
+      "pattern": "^table_rule\\.other_cells\\.(hard_maximum_words|sentences_forbidden|flow_text_forbidden)$",
+      "rule_id": "table.compact_cells",
+      "owner": "table_checker"
+    },
+    {
+      "pattern": "^table_rule\\.word_budget\\.",
+      "rule_id": "words.word_budget_exclusions",
+      "owner": "balance_checker"
+    },
+    {
+      "pattern": "^table_rule\\.status$",
+      "rule_id": "table.rule_active",
+      "owner": "catalog_guard"
+    },
+    {
+      "pattern": "^(global|table_rule)\\.publish_allowed$",
+      "rule_id": "publish.allowed",
+      "owner": "safety_checker"
+    }
+  ]
+}

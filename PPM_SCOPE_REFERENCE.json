@@ -1,0 +1,43 @@
+{
+  "contract": "K10_PPM_SCOPE_REFERENCE_V1",
+  "source": "K9_BASELINE_AND_SYSTEM4_NEGATIVE_RULE_AUDIT",
+  "ppm_version": "6.7.9",
+  "ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+  "reachable_rule_count": 104,
+  "repairable_rule_count": 89,
+  "hard_integrity_rule_count": 15,
+  "repair_owner_distribution": {
+    "DRAFT_WORKER": 83,
+    "PARENT_TITLE_MACHINE": 3,
+    "PORTAL_LINK_MACHINE": 2,
+    "PARENT_CATEGORY_MACHINE": 1
+  },
+  "hard_integrity_codes": [
+    "BLOCKED_WAVE2_CONTRACT_MISSING",
+    "BLOCKED_WAVE2_QUALITY_BINDING_MISSING",
+    "BLOCKED_WAVE2_QUALITY_BINDING_HASH",
+    "BLOCKED_WAVE2_INTERNAL_MARKER_MISSING",
+    "BLOCKED_WAVE2_LINK_REGISTRY_HASH",
+    "BLOCKED_MAINBLOCK1_LANGUAGE_DELTA_EVIDENCE",
+    "BLOCKED_WAVE2_LANGUAGE_EVIDENCE",
+    "BLOCKED_VALIDATION_CONTRACT_VERSION_MISSING",
+    "BLOCKED_SECTION_REQUIREMENTS_HASH_MISMATCH",
+    "BLOCKED_VALIDATION_CONTRACT_VERSION_UNKNOWN",
+    "BLOCKED_CONTENT_TYPE_DEFINITION_MISSING",
+    "BLOCKED_CONTENT_HASH_MISMATCH",
+    "BLOCKED_KNOWN_ERROR_CONTRACT_MISSING",
+    "W4_R8_0790_LOCAL_EXECUTED_TEST_EVIDENCE_MISSING"
+  ],
+  "note": "Historical matrix contains 15 hard rule entries; BLOCKED_VALIDATION_CONTRACT_VERSION_UNKNOWN is reached through two rule IDs but one error code.",
+  "evidence": [
+    "isolated_system4a/TEXTMASCHINE_RULE_SCOPE_20260917.md",
+    "isolated_system4a/TEXTMASCHINE_FEHLERKLASSIFIKATION_20260917.md",
+    "isolated_system4/test_textmachine_hardblock_matrix.py",
+    "isolated_system4/test_textmachine_ppm_negative_gaps.py"
+  ],
+  "k10_role": {
+    "repairable_89": "MIGRATE_TO_SINGLE_OWNER_CONTENT_CHECKS_AND_RECEIPTS",
+    "hard_integrity_15": "KEEP_AS_FINAL_INTEGRITY_OR_BINDING_CHECKS",
+    "monolithic_ppm_final_recheck": "FORBIDDEN_IN_K10"
+  }
+}
