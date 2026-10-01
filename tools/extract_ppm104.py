@@ -86,7 +86,7 @@ with zipfile.ZipFile(PACKAGE) as zf:
     validator=zf.read("portal-production-machine/includes/content-validator.php").decode("utf-8")
     constants={}
     for name in ("MIN_WORDS","MIN_PARAGRAPHS","MIN_H2","MIN_TABLE_BODY_ROWS","MIN_FACT_PACK_COVERAGE_RATIO","MIN_TRACE_LEXICAL_SUPPORT_RATIO","MAX_DUPLICATE_SENTENCE_RATIO","MAX_INTRO_PAIR_SIMILARITY"):
-        m=re.search(r"const\\s+"+re.escape(name)+r"\\s*=\\s*([^;]+);",validator)
+        m=re.search(r"const\s+"+re.escape(name)+r"\s*=\s*([^;]+);",validator)
         if not m:
             raise SystemExit("PPM_CONSTANT_MISSING:"+name)
         raw=m.group(1).strip()
