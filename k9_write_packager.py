@@ -222,14 +222,24 @@ def complete_rule_preflight(markup, metadata, rules):
     findings.extend(table_findings)
     if writing.get("status")!="PASS" or findings:
         codes=[]
+        details=[]
         for finding in findings:
             if isinstance(finding,dict):
                 code=str(finding.get("code") or finding.get("error_code") or "UNKNOWN")
+                detail=dict(finding)
+                detail["code"]=code
             else:
                 code=str(finding)
+                detail={"code":code}
             if code and code not in codes:
                 codes.append(code)
-        raise PackError("WRITING_PREFLIGHT_REPAIR_REQUIRED:"+",".join(codes or ["UNKNOWN"]))
+            details.append(detail)
+        raise PackError(
+            "WRITING_PREFLIGHT_REPAIR_REQUIRED:"
+            + ",".join(codes or ["UNKNOWN"])
+            + ":DETAILS="
+            + json.dumps(details,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+        )
     return True
 
 
