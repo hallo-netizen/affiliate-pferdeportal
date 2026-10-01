@@ -1,0 +1,61 @@
+name: K10 isolated selftest
+on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Hard isolation boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e quality
+          test ! -e warehouse
+          test ! -e final
+          test ! -e submissions
+          test ! -e CURRENT_STATE_K9.json
+          echo K10_ISOLATION_BOUNDARY_PASS
+      - name: K10 positive and negative suite
+        run: |
+          rm -rf engine/__pycache__ tests/__pycache__
+          python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Exact rule and receipt counts
+        run: |
+          python3 - <<'PY'
+          from engine.core import hard_rules
+          from engine.checkers import run_article_checks, article_hash
+          from tests.test_k10 import make_base, package_pass_results
+          from engine.package_adapters import make_package_receipts
+          from engine.ppm_parity_guard import verify as ppm_verify
+          a=make_base(); rows=run_article_checks(a)
+          assert len(hard_rules('ARTICLE'))==84
+          assert len(rows)==84 and len({r['rule_id'] for r in rows})==84
+          assert all(r['subject_sha256']==article_hash(a) for r in rows)
+          prows=make_package_receipts('P1','a'*64,package_pass_results())
+          assert len(hard_rules('PACKAGE_INTEGRITY'))==21
+          assert len(prows)==21 and len({r['rule_id'] for r in prows})==21
+          p=ppm_verify(); assert p['status']=='PASS' and p['legacy_rule_count']==104
+          assert p['repairable_content_count']==89 and p['hard_integrity_count']==15 and p['approved_table_policy_changes']==3
+          print('K10_RULE_RECEIPT_COUNTS_PASS')
+          PY
+      - name: Re-extract immutable PPM baseline
+        shell: bash
+        env:
+          BASE: 2cc8167fa1e31b4ffa2ff76c9819314be4b98555
+        run: |
+          set -euo pipefail
+          git show "$BASE:quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip" > /tmp/ppm679.zip
+          python3 tools/extract_ppm104.py /tmp/ppm679.zip /tmp/ppm104.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/ppm104.json'))
+          assert x['actual_total']==104
+          print('K10_PPM_REEXTRACT_PASS')
+          PY
