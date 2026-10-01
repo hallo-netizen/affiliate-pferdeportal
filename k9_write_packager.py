@@ -69,7 +69,7 @@ def ensure_all_fact_traces(markup, research):
     # Source traces are machine-owned metadata. Remove any empty trace tags emitted
     # by a writer/repair draft and rebuild exactly one canonical trace per fact.
     markup=re.sub(
-        r'<span\\b[^>]*class=["\\'][^"\\']*\\bppm-source-trace\\b[^"\\']*["\\'][^>]*>\\s*</span>',
+        r"""<span\\b[^>]*class=["'][^"']*\\bppm-source-trace\\b[^"']*["'][^>]*>\\s*</span>""",
         '',
         markup,
         flags=re.I,
