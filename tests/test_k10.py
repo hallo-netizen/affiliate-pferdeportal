@@ -237,4 +237,18 @@ class K10Tests(unittest.TestCase):
             receipts=run_article_checks(a); result=verify_article(a['article_id'],article_hash(a),receipts)
             self.assertIn('HARD_RULE_NOT_PASS:'+rid,result['findings'],rid)
 
+    def test_legitimate_source_title_containing_test_is_allowed(self):
+        a=make_base()
+        a['research_claims']['F2']['source_title']='CAVALLO – Schermaschinen im Test'
+        a['html']=a['html'].replace('data-source-title="Fachquelle F2"','data-source-title="CAVALLO – Schermaschinen im Test"')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertNotIn('HARD_RULE_NOT_PASS:facts.real_source_trace',result['findings'])
+
+    def test_placeholder_source_title_still_blocks(self):
+        a=make_base()
+        a['research_claims']['F2']['source_title']='Test'
+        a['html']=a['html'].replace('data-source-title="Fachquelle F2"','data-source-title="Test"')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:facts.real_source_trace',result['findings'])
+
 if __name__=='__main__': unittest.main(verbosity=2)
