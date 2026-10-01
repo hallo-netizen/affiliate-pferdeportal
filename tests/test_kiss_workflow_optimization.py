@@ -118,15 +118,25 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         ):
             self.assertIn(required,packager)
 
-    def test_wordpress_delivery_is_actual_02827_import_contract(self):
+    def test_wordpress_delivery_is_compact_02828_import_contract(self):
         exporter=self.text("k9_wordpress_export.py")
         finalizer=self.text(".github/workflows/k9-finalize.yml")
-        self.assertIn('CONTRACT="SYSTEM4_WORDPRESS_HANDOFF_V1"',exporter)
-        self.assertIn('PLUGIN_VERSION="0.28.27"',exporter)
+        self.assertIn('CONTRACT="PFERDE_ATELIER_WORDPRESS_IMPORT_V1"',exporter)
+        self.assertIn('PLUGIN_VERSION="0.28.28"',exporter)
         self.assertIn("K9_WORDPRESS_DIRECT_IMPORT_",finalizer)
         self.assertIn("k9-wordpress-direct-import",finalizer)
         self.assertNotIn("name: k9-wordpress-final-json",finalizer)
-        self.assertIn("'wordpress_contract':'SYSTEM4_WORDPRESS_HANDOFF_V1'",finalizer)
+        self.assertIn("'wordpress_contract':'PFERDE_ATELIER_WORDPRESS_IMPORT_V1'",finalizer)
+
+    def test_pserc_reuses_quality_evidence_without_duplicate_quality_execution(self):
+        pserc=self.text("k9_pserc.py")
+        finalizer=self.text(".github/workflows/k9-finalize.yml")
+        self.assertNotIn("k9_lt68",pserc)
+        self.assertNotIn("PPM679_Content_Validator::check",pserc)
+        self.assertIn("PASS_REUSED_FROM_CHECK",pserc)
+        self.assertIn("PSERC_FINAL_INTEGRITY_ONLY_PASS",pserc)
+        self.assertNotIn("Prepare exact LanguageTool 6.8",finalizer)
+        self.assertIn("Run PSERC final integrity gate",finalizer)
 
     def test_finalizer_keeps_all_real_gates_and_mandates_chat_file(self):
         wf=self.text(".github/workflows/k9-finalize.yml")
@@ -138,7 +148,7 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
             "runtime/CHAT_DELIVERY.json",
             "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
             "k9-wordpress-direct-import",
-            "SYSTEM4_WORDPRESS_HANDOFF_V1",
+            "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
             "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
         ):
             self.assertIn(required,wf)

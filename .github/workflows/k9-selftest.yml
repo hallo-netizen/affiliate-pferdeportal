@@ -209,10 +209,6 @@ jobs:
             echo 'PSERC_TERMINAL_SCOPE_REGRESSION_NOT_APPLICABLE_DURING_ACTIVE_PRODUCTION'
             exit 0
           fi
-          mkdir -p /tmp/k9-lt68
-          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k9-lt68/LanguageTool-6.8.zip
-          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
-          unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
           python3 - <<'PY'
           import copy, hashlib, json, shutil, subprocess, tempfile
           from pathlib import Path
@@ -260,7 +256,7 @@ jobs:
               if p.returncode!=0:
                   raise SystemExit("POSITIVE_SCOPE_FIX_FAILED:"+p.stdout[-1200:])
               result=json.loads(pout.read_text())
-              if result.get("status")!="PASS" or result.get("bridge_status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
+              if result.get("status")!="PASS" or result.get("bridge_status")!="PSERC_FINAL_INTEGRITY_ONLY_PASS":
                   raise SystemExit("POSITIVE_SCOPE_FIX_NOT_PASS")
               print("PSERC_SCOPE_NEGATIVE_REPRODUCED=1")
               print("PSERC_SCOPE_POSITIVE_PASS=1")
@@ -299,7 +295,7 @@ jobs:
           traced=set(re.findall(r'class=["\']ppm-source-trace["\'][^>]*data-fact-id=["\']([^"\']+)["\']',article["content_html"]))
           if not expected.issubset(traced):
               raise SystemExit("TERMINAL_FACT_TRACE_SET_INCOMPLETE:"+",".join(sorted(expected-traced)))
-          if stop.get("status")!="STOP" or stop.get("final_ref")!="final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json":
+          if stop.get("status")!="STOP" or "K9_WORDPRESS_DIRECT_IMPORT_" not in str(stop.get("final_ref") or ""):
               raise SystemExit("TERMINAL_STOP_RECEIPT_INVALID")
           finalizer=Path(".github/workflows/k9-finalize.yml").read_text()
           required=["CURRENT_STATE.json","'status':'STOP'","'active_job':None","git add -A final runtime CURRENT_STATE.json"]

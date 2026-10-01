@@ -72,7 +72,7 @@ def build(root,pserc_path,outdir):
         iid=str(item.get("item_id") or "")
         row=pserc_by_id.get(iid)
         if not isinstance(row,dict): raise Blocked("PSERC_ITEM_MISSING:"+iid)
-        if row.get("bridge_status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED" or row.get("publish_allowed") is not False:
+        if row.get("bridge_status")!="PSERC_FINAL_INTEGRITY_ONLY_PASS" or row.get("publish_allowed") is not False:
             raise Blocked("PSERC_ITEM_NOT_PASS:"+iid)
         meta=item.get("metadata",{})
         slot=str(meta.get("plan_slot") or "")
@@ -138,7 +138,7 @@ def build(root,pserc_path,outdir):
         "fact_pack_bundle_sha256":bh,
         "production_plan":plan,
         "production_plan_sha256":ph,
-        "source":"KONZEPT9_ISOLATED_REAL_PSERC_LT68_PPM679_PASS",
+        "source":"KONZEPT9_PSERC_FINAL_INTEGRITY_REUSES_LT68_PPM679_PASS",
         "workflow_release":release,
         "workflow_release_sha256":rh
     }

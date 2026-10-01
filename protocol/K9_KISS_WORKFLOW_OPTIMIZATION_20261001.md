@@ -95,3 +95,11 @@ Directly after the single article table and before the table section closes:
 - not a second conclusion.
 
 The rule is writer-visible in contracts/K9_WRITING_RULES.json and fail-closed in k9_write_packager.py before a draft can be accepted.
+
+## KISS phase 2 — PSERC and compact handoffs
+PSERC no longer executes LanguageTool 6.8 or the PPM 6.7.9 content validator a second time after CHECK PASS. It verifies the immutable article hash against the stored LT/PPM/writing PASS evidence, verifies fact/source traces, scope, plan_slot/canonical identity and category, and reuses the already bound evidence for ENDSTEMPEL. No article content is rewritten.
+
+WordPress -> K9 accepts the compact PSERC_TEXTMACHINE_METADATA_BATCH_V2 directly. The historical full snapshot remains backward-compatible only.
+
+K9 -> WordPress emits PFERDE_ATELIER_WORDPRESS_IMPORT_V1 with only article_id, plan_slot, title, slug, target_keyword, category, article_type and body, plus minimal batch/count/publish metadata. The signed ENDSTEMPEL package remains internal evidence.
+\n

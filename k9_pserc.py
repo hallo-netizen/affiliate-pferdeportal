@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
-import argparse, copy, hashlib, json, re, subprocess, sys, tempfile, zipfile
+import argparse, copy, hashlib, json, re, subprocess, tempfile, zipfile
 from pathlib import Path
-
-HERE=Path(__file__).resolve().parent
-sys.path.insert(0,str(HERE/"quality"))
-import k9_lt68
 
 PPM_SHA="acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1"
 PSERC_SHA="77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314"
 PSERC_INNER="PSERC-FIX/portal-seo-editorial-plan-compiler_0.28.18_ENDSTEMPEL_IMPORT_ENVELOPE_BINDING.zip"
+INTEGRITY_STATUS="PSERC_FINAL_INTEGRITY_ONLY_PASS"
 
 class Blocked(RuntimeError): pass
 
@@ -27,141 +24,57 @@ def load(p):
     return x
 
 def canonical_fact_pack(research):
-    fp=research.get("fact_pack")
-    sources=research.get("sources")
+    fp=research.get("fact_pack"); sources=research.get("sources")
     if not isinstance(fp,dict) or not isinstance(sources,list): raise Blocked("RESEARCH_PRODUCT_INVALID")
-    by_id={str(x.get("source_id")):x for x in sources if isinstance(x,dict)}
-    def canonical_source_id(raw_id,src):
-        raw_id=str(raw_id or "").strip()
-        lowered=raw_id.casefold()
-        if any(token in lowered for token in ("test_","dummy","example","placeholder")):
-            url=str((src or {}).get("url") or "").strip()
-            title=str((src or {}).get("title") or "").strip()
-            basis=url or title
-            if not basis: raise Blocked("PLACEHOLDER_SOURCE_WITHOUT_REAL_BINDING:"+raw_id)
-            return "SRC_"+hashlib.sha256(basis.encode("utf-8")).hexdigest()[:16].upper()
-        return raw_id
-    canonical_sources={}
-    claims=[]
+    by_id={str(x.get("source_id") or ""):x for x in sources if isinstance(x,dict)}
+    canonical_sources={}; claims=[]
     for raw in fp.get("claims",[]):
         if not isinstance(raw,dict): raise Blocked("CLAIM_INVALID")
-        raw_sid=str(raw.get("source_id") or "")
-        src=by_id.get(raw_sid)
+        raw_sid=str(raw.get("source_id") or "").strip(); src=by_id.get(raw_sid)
         if not src: raise Blocked("CLAIM_SOURCE_UNKNOWN:"+raw_sid)
-        sid=canonical_source_id(raw_sid,src)
+        sid=str(src.get("title") or "").strip() if raw_sid.upper().startswith("TEST_") else raw_sid
+        if not sid: raise Blocked("CLAIM_SOURCE_CANONICAL_ID_MISSING:"+raw_sid)
         canonical_sources[sid]=src
-        statement=str(raw.get("statement") or "")
-        evidence=str(raw.get("display_statement") or statement)
-        claims.append({
-            "article_types":list(raw.get("article_types") or [fp.get("article_type")]),
-            "claim_status":str(raw.get("claim_status") or ""),
-            "evidence_text":evidence,
-            "evidence_text_sha256":str(raw.get("evidence_text_sha256") or ""),
-            "fact_id":str(raw.get("fact_id") or ""),
-            "source_id":sid,
-            "source_url":str(src.get("url") or ""),
-            "statement":statement,
-        })
+        statement=str(raw.get("statement") or ""); evidence=str(raw.get("display_statement") or statement)
+        claims.append({"article_types":list(raw.get("article_types") or [fp.get("article_type")]),"claim_status":str(raw.get("claim_status") or ""),"evidence_text":evidence,"evidence_text_sha256":str(raw.get("evidence_text_sha256") or ""),"fact_id":str(raw.get("fact_id") or ""),"source_id":sid,"source_url":str(src.get("url") or ""),"statement":statement})
     if not claims: raise Blocked("FACT_PACK_EMPTY")
     canon_sources=[]
     for sid,src in canonical_sources.items():
         related=[x for x in claims if x["source_id"]==sid]
         evidence=" ".join(x["evidence_text"] for x in related).strip() or str(src.get("title") or "")
-        canon_sources.append({
-            "evidence":evidence,
-            "snapshot_sha256":hashlib.sha256(evidence.encode()).hexdigest(),
-            "source_id":sid,
-            "source_title":str(src.get("title") or sid),
-            "source_url":str(src.get("url") or ""),
-        })
+        canon_sources.append({"evidence":evidence,"snapshot_sha256":hashlib.sha256(evidence.encode()).hexdigest(),"source_id":sid,"source_title":str(src.get("title") or sid),"source_url":str(src.get("url") or "")})
     fpid=str(fp.get("fact_pack_id") or "")
     if not fpid: raise Blocked("FACT_PACK_ID_MISSING")
-    return {
-        "contract":"canonical_fact_pack_v1",
-        "article_type":str(fp.get("article_type") or ""),
-        "fact_pack_id":fpid,
-        "source_snapshot_id":fpid,
-        "claims":claims,
-        "sources":canon_sources,
-        "status":"SOURCE_VERIFIED_PRODUCTION_READY",
-        "production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY",
-        "title_scope":str(fp.get("title_scope") or ""),
-    }
+    return {"contract":"canonical_fact_pack_v1","article_type":str(fp.get("article_type") or ""),"fact_pack_id":fpid,"source_snapshot_id":fpid,"claims":claims,"sources":canon_sources,"status":"SOURCE_VERIFIED_PRODUCTION_READY","production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY","title_scope":str(fp.get("title_scope") or "")}
 
-def _attr_value(tag,name):
-    m=re.search(name+r'="([^"]+)"',tag,re.I)
-    if m: return m.group(1)
-    m=re.search(name+r"='([^']+)'",tag,re.I)
+def _attr(tag,name):
+    m=re.search(r"\b"+re.escape(name)+r'=["\']([^"\']+)["\']',tag,re.I)
     return m.group(1) if m else ""
 
-def _full_trace_match(markup,fid):
-    for m in re.finditer(r'<span[^>]*></span>',markup,re.I):
-        tag=m.group(0)
-        if "ppm-source-trace" not in tag:
-            continue
-        if _attr_value(tag,"data-fact-id")==fid:
-            return m
-    return None
-
-def _trace_candidate(markup,fid,statement):
-    statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(statement or "").casefold()))
-    candidates=[]
-    for tagname in ("p","li","td"):
-        pattern="<"+tagname+r"(?: [^>]*)?>.*?</"+tagname+">"
-        opener_pattern="<"+tagname+r"(?: [^>]*)?>"
-        for m in re.finditer(pattern,markup,re.I|re.S):
-            segment=m.group(0)
-            opener=re.match(opener_pattern,segment,re.I)
-            if not opener:
-                continue
-            value=_attr_value(opener.group(0),"data-fact-ids")
-            if not value or fid not in value.split():
-                continue
-            visible=re.sub(r"<[^>]+>"," ",segment)
-            visible_tokens=set(re.findall(r"[a-z0-9äöüß]+",visible.casefold()))
-            score=len(statement_tokens & visible_tokens)
-            candidates.append((score,m.start(),opener.end(),segment))
-    if not candidates:
-        return None
-    candidates.sort(key=lambda x:(-x[0],x[1]))
-    return candidates[0]
-
-def bind_canonical_article_traces(ppm_item, fact_pack):
-    article=ppm_item.get("canonical_article")
-    if not isinstance(article,dict): raise Blocked("CANONICAL_ARTICLE_MISSING")
-    markup=str(article.get("body_html") or "")
-    if not markup: raise Blocked("CANONICAL_ARTICLE_HTML_MISSING")
+def verify_trace_bindings(markup,fact_pack):
+    tags=[m.group(0) for m in re.finditer(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*></span>',markup,re.I)]
+    by_fact={}
+    for tag in tags:
+        fid=_attr(tag,"data-fact-id")
+        if fid: by_fact.setdefault(fid,[]).append(tag)
     for claim in fact_pack.get("claims",[]):
-        if not isinstance(claim,dict): continue
-        fid=str(claim.get("fact_id") or "").strip()
-        source_id=str(claim.get("source_id") or "").strip()
-        source_hash=str(claim.get("evidence_text_sha256") or "").strip()
-        statement=str(claim.get("statement") or "")
-        if not fid or not source_id or not source_hash:
-            raise Blocked("CANONICAL_TRACE_BINDING_MISSING:"+fid)
-        while True:
-            existing=_full_trace_match(markup,fid)
-            if not existing:
-                break
-            markup=markup[:existing.start()]+markup[existing.end():]
-        candidate=_trace_candidate(markup,fid,statement)
-        if not candidate:
-            raise Blocked("CANONICAL_TRACE_TARGET_MISSING:"+fid)
-        _,start_pos,open_len,segment=candidate
-        trace=(
-            f'<span class="ppm-source-trace" data-fact-id="{fid}" '
-            f'data-source-hash="{source_hash}" data-source-title="{source_id}"></span>'
-        )
-        replacement_segment=segment[:open_len]+trace+segment[open_len:]
-        markup=markup[:start_pos]+replacement_segment+markup[start_pos+len(segment):]
-    article["body_html"]=markup
-    article["body_html_sha256"]=hashlib.sha256(markup.encode("utf-8")).hexdigest()
-    article["source_ids"]=[str(x.get("source_id") or "") for x in fact_pack.get("sources",[]) if isinstance(x,dict)]
-    ppm_item["canonical_article"]=article
-    return ppm_item
+        fid=str(claim.get("fact_id") or ""); rows=by_fact.get(fid,[])
+        if len(rows)!=1: raise Blocked("PSERC_TRACE_COUNT_INVALID:"+fid)
+        if _attr(rows[0],"data-source-hash")!=str(claim.get("evidence_text_sha256") or ""): raise Blocked("PSERC_TRACE_HASH_MISMATCH:"+fid)
+        if _attr(rows[0],"data-source-title")!=str(claim.get("source_id") or ""): raise Blocked("PSERC_TRACE_SOURCE_MISMATCH:"+fid)
 
+def verify_existing_quality(article,checkrow):
+    html=str(article.get("content_html") or ""); sha=hashlib.sha256(html.encode()).hexdigest()
+    if not html or article.get("content_sha256")!=sha: raise Blocked("PSERC_ARTICLE_HASH_INVALID")
+    lt=checkrow.get("lt68_result"); ppm=checkrow.get("ppm679_result"); writing=checkrow.get("writing_rules_result")
+    if not isinstance(lt,dict) or lt.get("status")!="PASS" or lt.get("article_sha256")!=sha: raise Blocked("PSERC_PRIOR_LT68_EVIDENCE_INVALID")
+    evidence=lt.get("language_evidence")
+    if not isinstance(evidence,dict) or evidence.get("content_hash")!=sha: raise Blocked("PSERC_PRIOR_LT68_CONTENT_BINDING_INVALID")
+    if not isinstance(ppm,dict) or ppm.get("status")!="PASS" or ppm.get("content_sha256")!=sha or ppm.get("ppm_package_sha256")!=PPM_SHA: raise Blocked("PSERC_PRIOR_PPM679_EVIDENCE_INVALID")
+    if not isinstance(writing,dict) or writing.get("status")!="PASS" or writing.get("content_sha256")!=sha: raise Blocked("PSERC_PRIOR_WRITING_EVIDENCE_INVALID")
+    return sha,lt,ppm,writing
 
-def latest_products(ledger, root):
+def latest_products(ledger,root):
     items=ledger.get("items")
     if not isinstance(items,list) or not items: raise Blocked("LEDGER_ITEMS_INVALID")
     out=[]
@@ -172,9 +85,7 @@ def latest_products(ledger, root):
         article_ref=item.get("products",{}).get(article_key,{}).get("path")
         check_ref=item.get("products",{}).get("check",{}).get("path")
         if not all(isinstance(x,str) for x in (research_ref,article_ref,check_ref)): raise Blocked("PRODUCT_REF_MISSING")
-        research_pkg=load(root/research_ref)
-        article_pkg=load(root/article_ref)
-        check_pkg=load(root/check_ref)
+        research_pkg=load(root/research_ref); article_pkg=load(root/article_ref); check_pkg=load(root/check_ref)
         iid=item["item_id"]
         def row(pkg):
             hits=[x for x in pkg.get("results",[]) if x.get("item_id")==iid]
@@ -183,181 +94,80 @@ def latest_products(ledger, root):
         out.append((item,row(research_pkg)["research_product"],row(article_pkg)["article_product"],row(check_pkg)))
     return out
 
-
-PHP=r'''<?php
-$ppm=$argv[1]; $pserc=$argv[2]; $payload=json_decode((string)file_get_contents($argv[3]),true);
-if(!is_array($payload)){fwrite(STDERR,"PAYLOAD_INVALID\n");exit(2);}
+MAPPING_PHP=r'''<?php
+$ppm=$argv[1];$pserc=$argv[2];$payload=json_decode((string)file_get_contents($argv[3]),true);
+if(!is_array($payload)||!is_array($payload['items']??null)){fwrite(STDERR,"PAYLOAD_INVALID\n");exit(2);}
 require $ppm.'/tests/normal-draft-production/fixture-builder.php';
-require $pserc.'/includes/class-pserc-stable-json.php';
 require $pserc.'/includes/class-pserc-plan-slot-identity.php';
-require $pserc.'/includes/class-pserc-metadata-boundary.php';
-require $pserc.'/includes/class-pserc-production-reader.php';
-require $pserc.'/includes/class-pserc-ppm-intake-bridge.php';
-nd_reset();
-$item=(array)$payload['item']; $pack=(array)$payload['fact_pack']; $header=(array)$payload['header'];
-$cid=(string)$payload['canonical_article_id']; $externalSlot=(string)$payload['plan_slot'];
-if((string)($item['canonical_article_id']??'')!==$cid){fwrite(STDERR,"CANONICAL_ID_MISMATCH\n");exit(2);}
-$matches=[];
-foreach((array)(PPM679_Editorial_Plan_Registry::plan()['slots']??[]) as $candidate){
- if(is_array($candidate)&&hash_equals(PSERC_Plan_Slot_Identity::token($candidate),$externalSlot)){$matches[]=$candidate;}
+$index=[];
+foreach((array)(PPM679_Editorial_Plan_Registry::plan()['slots']??[]) as $slot){
+ if(!is_array($slot))continue;
+ $token=PSERC_Plan_Slot_Identity::token($slot);
+ if(isset($index[$token])){fwrite(STDERR,"PLAN_SLOT_REGISTRY_DUPLICATE\n");exit(2);}
+ $index[$token]=['canonical_article_id'=>(string)($slot['canonical_article_id']??''),'category_slug'=>(string)($slot['category_slug']??'')];
 }
-if(count($matches)!==1){fwrite(STDERR,"PLAN_SLOT_REGISTRY_MATCH_NOT_UNIQUE\n");exit(2);}
-$slot=$matches[0]; $item['canonical_article_id']=(string)$slot['canonical_article_id']; unset($item['plan_slot']);
-$cat=(array)($item['quality_binding']['wordpress_category']??[]);
-if(empty($cat['name'])||empty($cat['slug'])||(string)($cat['taxonomy']??'')!=='category'){fwrite(STDERR,"WORDPRESS_CATEGORY_BINDING_MISSING\n");exit(2);}
-$seedItem=$item; $seedItem['quality_binding']['wordpress_category']['id']=900001; nd_seed_terms([$seedItem]);
-$bundle=['contract'=>'canonical_fact_pack_import_v1','fact_packs'=>[$pack]];
-$imp=PPM679_Admin::import_fact_pack_bundle($bundle);
-if(empty($imp['ok'])){echo json_encode(['ok'=>false,'status'=>'PPM_FACT_PACK_IMPORT_BLOCKED','detail'=>$imp]);exit(0);}
-$expectedSource=PPM679_Storage::fact_pack_hash((string)($item['source_snapshot_id']??''));
-if($expectedSource===''){fwrite(STDERR,"SOURCE_HASH_BINDING_MISMATCH\n");exit(2);}
-$item['source_hashes']=[$expectedSource];
-$activeContracts=PPM679_Plan_Validator::active_contract_hashes();
-$item['contract_hashes']=$activeContracts;
-$item['gold_core_binding']='FOUR_TYPE_APPROVED_GOLD_CORE_V1';
-$plan=$header;
-$plan['plan_id']='k9-final-'.substr(hash('sha256',$cid.'|'.$externalSlot),0,20);
-$plan['gold_core_binding']='FOUR_TYPE_APPROVED_GOLD_CORE_V1';
-$plan['contract_hashes']=$activeContracts;
-$plan['items']=[$item];
-$batch=['contract'=>'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status'=>'PASS','item_count'=>1,'maximum_articles'=>0,'maximum_articles_per_type'=>0,'publish_allowed'=>false,'content_or_format_payload_present'=>false,'items'=>[['title'=>(string)($item['topic']??''),'target_keyword'=>(string)($item['target_keyword']??''),'category'=>(string)($slot['category_slug']??''),'article_type'=>(string)($item['article_type']??''),'plan_slot'=>$externalSlot]]];
-$tmp=$batch; unset($tmp['batch_sha256']); $batch['batch_sha256']=PSERC_Stable_Json::hash($tmp);
-$snapshot=['ok'=>true,'version'=>'6.7.9','plan'=>PPM679_Editorial_Plan_Registry::plan()];
-$runtime=nd_runtime($plan,'k9-'.substr(hash('sha256',$cid.'|'.$payload['content_sha256'].'|'.$externalSlot),0,40));
-$r=PSERC_PPM_Intake_Bridge::execute($batch,$plan,$runtime,$snapshot);
-echo json_encode(['bridge'=>$r,'canonical_article_id'=>(string)$slot['canonical_article_id'],'category_slug'=>(string)$slot['category_slug'],'batch'=>$batch,'item'=>$item],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+$out=[];
+foreach($payload['items'] as $row){
+ $token=(string)($row['plan_slot']??'');
+ if(!isset($index[$token])){fwrite(STDERR,"PLAN_SLOT_REGISTRY_MATCH_MISSING\n");exit(2);}
+ $out[$token]=$index[$token];
+}
+echo json_encode(['ok'=>true,'items'=>$out],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 ?>'''
 
-def _validate_bridge(wrapper):
-    bridge=wrapper.get("bridge") if isinstance(wrapper,dict) else None
-    if not isinstance(bridge,dict) or bridge.get("ok") is not True or bridge.get("status")!="PSERC_PPM_INTAKE_BRIDGE_EXECUTED":
-        detail={"bridge_status":bridge.get("status") if isinstance(bridge,dict) else None}
-        if isinstance(bridge,dict):
-            ppm=bridge.get("ppm_result")
-            artifact=ppm.get("artifact") if isinstance(ppm,dict) else None
-            if isinstance(artifact,dict):
-                detail["ppm_status"]=artifact.get("status")
-                errors=artifact.get("errors")
-                if isinstance(errors,list) and errors and isinstance(errors[0],dict):
-                    detail["first_error"]={
-                        "error_code":errors[0].get("error_code"),
-                        "failed_rule":errors[0].get("failed_rule"),
-                        "field_path":errors[0].get("field_path"),
-                        "actual":errors[0].get("actual"),
-                        "expected":errors[0].get("expected"),
-                    }
-        raise Blocked("PSERC_BRIDGE_NOT_PASS:"+json.dumps(detail,ensure_ascii=False,sort_keys=True))
-    ppm_result=bridge.get("ppm_result")
-    artifact=ppm_result.get("artifact") if isinstance(ppm_result,dict) else None
-    if not isinstance(artifact,dict) or artifact.get("status")!="NORMAL_DRAFT_END_TO_END_READBACK_PASS_AWAITING_USER_CONTENT_REVIEW_NO_PUBLISH":
-        raise Blocked("PSERC_PPM_ARTIFACT_NOT_PASS")
-    check_only=artifact.get("check_only")
-    rows=check_only.get("items") if isinstance(check_only,dict) else None
-    if not isinstance(rows,list) or len(rows)!=1:
-        raise Blocked("PSERC_CHECK_ITEM_INVALID")
-    pr=rows[0]
-    checks=pr.get("checks")
-    if pr.get("technical_status")!="TECHNICAL_CHECK_OK" or pr.get("content_quality_status")!="CONTENT_QUALITY_CHECK_OK":
-        raise Blocked("PSERC_CONTENT_CHECK_NOT_PASS")
-    if not isinstance(checks,dict) or checks.get("fail_closed_aggregate_status")!="PASS":
-        raise Blocked("PSERC_FAIL_CLOSED_NOT_PASS")
-    return bridge,artifact
+def map_slots(ppm_root,pserc_root,requests,tmpdir):
+    script=tmpdir/"map.php"; script.write_text(MAPPING_PHP,encoding="utf-8")
+    payload=tmpdir/"map.json"; payload.write_text(json.dumps({"items":requests},ensure_ascii=False),encoding="utf-8")
+    proc=subprocess.run(["php",str(script),str(ppm_root),str(pserc_root),str(payload)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=60)
+    if proc.returncode!=0: raise Blocked("PSERC_SLOT_MAPPING_FAILED:"+(proc.stderr or proc.stdout)[:300])
+    try: wrapper=json.loads(proc.stdout)
+    except Exception as exc: raise Blocked("PSERC_SLOT_MAPPING_OUTPUT_INVALID") from exc
+    if not isinstance(wrapper,dict) or wrapper.get("ok") is not True or not isinstance(wrapper.get("items"),dict): raise Blocked("PSERC_SLOT_MAPPING_NOT_PASS")
+    return wrapper["items"]
 
-def run(root, ppm_zip, pserc_zip, lt_jar):
-    root=Path(root)
+def run(root,ppm_zip,pserc_zip):
+    root=Path(root); ppm_zip=Path(ppm_zip); pserc_zip=Path(pserc_zip)
     if sha_file(ppm_zip)!=PPM_SHA: raise Blocked("PPM_PACKAGE_HASH_MISMATCH")
     if sha_file(pserc_zip)!=PSERC_SHA: raise Blocked("PSERC_PACKAGE_HASH_MISMATCH")
-    ledger=load(root/"state/ledger.json")
-    products=latest_products(ledger,root)
-    if not products: raise Blocked("K9_PSERC_NO_ITEMS")
-
-    with tempfile.TemporaryDirectory(prefix="k9-pserc-") as td:
-        td=Path(td)
-        ppm_dir=td/"ppm"; pouter=td/"pouter"; pdir=td/"pserc"
-        ppm_dir.mkdir(); pouter.mkdir(); pdir.mkdir()
+    products=latest_products(load(root/"state/ledger.json"),root)
+    requests=[{"plan_slot":str(item.get("metadata",{}).get("plan_slot") or "")} for item,_,_,_ in products]
+    if any(not x["plan_slot"] for x in requests): raise Blocked("PSERC_PLAN_SLOT_MISSING")
+    with tempfile.TemporaryDirectory(prefix="k9-pserc-integrity-") as td:
+        td=Path(td); ppm_dir=td/"ppm"; outer=td/"outer"; pserc_dir=td/"pserc"
+        ppm_dir.mkdir(); outer.mkdir(); pserc_dir.mkdir()
         with zipfile.ZipFile(ppm_zip) as z: z.extractall(ppm_dir)
-        with zipfile.ZipFile(pserc_zip) as z: z.extractall(pouter)
-        inner=pouter/PSERC_INNER
+        with zipfile.ZipFile(pserc_zip) as z: z.extractall(outer)
+        inner=outer/PSERC_INNER
         if not inner.is_file(): raise Blocked("PSERC_INNER_ZIP_MISSING")
-        with zipfile.ZipFile(inner) as z: z.extractall(pdir)
-        script=td/"run.php"; script.write_text(PHP,encoding="utf-8")
-
+        with zipfile.ZipFile(inner) as z: z.extractall(pserc_dir)
+        mappings=map_slots(ppm_dir/"portal-production-machine",pserc_dir/"portal-seo-editorial-plan-compiler",requests,td)
         results=[]
-        for idx,(item,research,article,checkrow) in enumerate(products):
-            html=str(article.get("content_html") or "")
-            if not html: raise Blocked("ARTICLE_HTML_MISSING:"+str(item.get("item_id") or idx))
-            ppm_item=copy.deepcopy(article.get("ppm_item"))
+        for item,research,article,checkrow in products:
+            meta=item.get("metadata") or {}; slot=str(meta.get("plan_slot") or ""); mapped=mappings.get(slot)
+            if not isinstance(mapped,dict): raise Blocked("PSERC_SLOT_MAPPING_RESULT_MISSING:"+slot)
+            if str(mapped.get("category_slug") or "")!=str(meta.get("category") or ""): raise Blocked("PSERC_SLOT_CATEGORY_MISMATCH:"+slot)
+            cid=str(mapped.get("canonical_article_id") or "")
+            if not cid.startswith("article:"): raise Blocked("PSERC_CANONICAL_ARTICLE_ID_INVALID:"+slot)
+            sha,lt,ppm,writing=verify_existing_quality(article,checkrow)
+            fact_pack=canonical_fact_pack(research); ppm_item=copy.deepcopy(article.get("ppm_item"))
             if not isinstance(ppm_item,dict): raise Blocked("PPM_ITEM_MISSING")
-            binding=ppm_item.get("quality_binding")
-            if not isinstance(binding,dict): raise Blocked("QUALITY_BINDING_MISSING")
-            canonical_id="article:"+hashlib.sha256((item["item_id"]+"|"+article["content_sha256"]).encode()).hexdigest()[:24]
-            ppm_item["canonical_article_id"]=canonical_id
-            fp=canonical_fact_pack(research)
-            ppm_item=bind_canonical_article_traces(ppm_item,fp)
-            canonical_article=ppm_item.get("canonical_article")
-            final_html=str(canonical_article.get("body_html") or "") if isinstance(canonical_article,dict) else ""
-            if not final_html: raise Blocked("CANONICAL_ARTICLE_HTML_MISSING:"+str(item.get("item_id") or idx))
-            if k9_lt68.ppm_visible_language_text(final_html)!=k9_lt68.ppm_visible_language_text(html):
-                raise Blocked("CANONICAL_TRACE_BINDING_CHANGED_VISIBLE_TEXT:"+str(item.get("item_id") or idx))
-            article_path=td/f"article-{idx}.html"
-            article_path.write_text(final_html,encoding="utf-8")
-            lt=k9_lt68.run(Path(lt_jar),article_path)
-            if lt.get("status")!="PASS": raise Blocked("PSERC_LT_NOT_PASS:"+str(item.get("item_id") or idx))
-            binding["language_evidence"]=lt["language_evidence"]
-            ppm_item["quality_binding_hash"]=stable(binding)
-            ppm_item["source_snapshot_id"]=fp["fact_pack_id"]
-            header={"contract":"production_plan_v4","plan_contract_version":"4.0.0","required_plugin_version":"6.7.9"}
-            payload={
-                "item":ppm_item,
-                "fact_pack":fp,
-                "header":header,
-                "canonical_article_id":canonical_id,
-                "plan_slot":item["metadata"]["plan_slot"],
-                "content_sha256":article["content_sha256"],
-            }
-            payload_path=td/f"payload-{idx}.json"
-            payload_path.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
-            proc=subprocess.run(
-                ["php",str(script),str(ppm_dir/"portal-production-machine"),str(pdir/"portal-seo-editorial-plan-compiler"),str(payload_path)],
-                text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=180
-            )
-            if proc.returncode!=0:
-                raise Blocked("PSERC_EXECUTION_FAILED:"+str(item.get("item_id") or idx)+":"+(proc.stderr or proc.stdout)[:500])
-            try: wrapper=json.loads(proc.stdout)
-            except Exception as exc: raise Blocked("PSERC_OUTPUT_INVALID:"+str(item.get("item_id") or idx)) from exc
-            try:
-                bridge,artifact=_validate_bridge(wrapper)
-            except Blocked as exc:
-                raise Blocked(str(item.get("item_id") or idx)+":"+str(exc)) from exc
-            results.append({
-                "item_id":item["item_id"],
-                "plan_slot":item["metadata"]["plan_slot"],
-                "bridge_status":bridge["status"],
-                "canonical_article_id":wrapper["canonical_article_id"],
-                "category_slug":wrapper["category_slug"],
-                "exact_five_batch":wrapper["batch"],
-                "production_plan_item":wrapper["item"],
-                "fact_pack":fp,
-                "lt68_result":lt,
-                "ppm_status":artifact["status"],
-                "publish_allowed":False,
-            })
-
-    return {
-        "contract":"K9_PSERC_RESULT_V1",
-        "status":"PASS",
-        "bridge_status":"PSERC_PPM_INTAKE_BRIDGE_EXECUTED",
-        "article_count":len(results),
-        "items":results,
-        "publish_allowed":False,
-    }
+            runtime=ppm_item.get("runtime_order"); subject_scope=str(runtime.get("subject_scope") or "").strip() if isinstance(runtime,dict) else ""; title_scope=str(fact_pack.get("title_scope") or "").strip()
+            if not title_scope or title_scope!=subject_scope: raise Blocked("CANONICAL_FACT_PACK_SCOPE_MISMATCH")
+            quality=ppm_item.get("quality_binding"); category=quality.get("wordpress_category") if isinstance(quality,dict) else None
+            if not isinstance(quality,dict): raise Blocked("QUALITY_BINDING_MISSING")
+            if not isinstance(category,dict) or category.get("taxonomy")!="category" or category.get("slug")!=meta.get("category"): raise Blocked("PSERC_WORDPRESS_CATEGORY_BINDING_INVALID")
+            canonical=ppm_item.get("canonical_article"); html=str(article.get("content_html") or "")
+            if not isinstance(canonical,dict) or canonical.get("body_html")!=html or canonical.get("body_html_sha256")!=sha: raise Blocked("PSERC_CANONICAL_ARTICLE_BINDING_INVALID")
+            verify_trace_bindings(html,fact_pack)
+            ppm_item["canonical_article_id"]=cid; ppm_item["source_snapshot_id"]=fact_pack["fact_pack_id"]; quality["language_evidence"]=copy.deepcopy(lt["language_evidence"]); ppm_item["quality_binding_hash"]=stable(quality)
+            results.append({"item_id":item["item_id"],"plan_slot":slot,"bridge_status":INTEGRITY_STATUS,"canonical_article_id":cid,"category_slug":meta["category"],"production_plan_item":ppm_item,"fact_pack":fact_pack,"quality_evidence":{"lt68_status":"PASS_REUSED_FROM_CHECK","lt68_article_sha256":lt["article_sha256"],"ppm679_status":"PASS_REUSED_FROM_CHECK","ppm679_content_sha256":ppm["content_sha256"],"writing_rules_status":"PASS_REUSED_FROM_CHECK","writing_rules_content_sha256":writing["content_sha256"]},"publish_allowed":False})
+    return {"contract":"K9_PSERC_RESULT_V1","status":"PASS","bridge_status":INTEGRITY_STATUS,"mode":"FINAL_INTEGRITY_ONLY_REUSE_PRIOR_QUALITY_EVIDENCE","article_count":len(results),"items":results,"publish_allowed":False}
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("root"); ap.add_argument("ppm"); ap.add_argument("pserc"); ap.add_argument("lt_jar"); ap.add_argument("--output",required=True); a=ap.parse_args()
-    try: out=run(a.root,Path(a.ppm),Path(a.pserc),Path(a.lt_jar))
+    ap=argparse.ArgumentParser(); ap.add_argument("root"); ap.add_argument("ppm"); ap.add_argument("pserc"); ap.add_argument("--output",required=True); a=ap.parse_args()
+    try: out=run(a.root,a.ppm,a.pserc)
     except Exception as exc:
-        print(json.dumps({"contract":"K9_PSERC_RESULT_V1","status":"BLOCKED","reason":str(exc),"publish_allowed":False},ensure_ascii=False,indent=2))
-        raise SystemExit(2)
+        print(json.dumps({"contract":"K9_PSERC_RESULT_V1","status":"BLOCKED","reason":str(exc),"publish_allowed":False},ensure_ascii=False,indent=2)); raise SystemExit(2)
     Path(a.output).write_text(json.dumps(out,ensure_ascii=False,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-    print(json.dumps({"status":"K9_PSERC_PASS","item_count":out.get("item_count"),"canonical_article_id":out.get("canonical_article_id")},indent=2))
+    print(json.dumps({"status":"K9_PSERC_PASS","article_count":out["article_count"],"mode":out["mode"]},indent=2))
 if __name__=="__main__": main()
