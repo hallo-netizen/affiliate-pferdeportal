@@ -1,0 +1,43 @@
+{
+  "contract": "K10_FIRST_REAL_ARTICLE_PRE_RENDER_EVIDENCE_V1",
+  "status": "PASS_UNTIL_REAL_WORDPRESS_RENDER",
+  "article": {
+    "title": "Wie lege ich einen Longiergurt an?",
+    "article_type": "FAQ",
+    "category_slug": "longiergurte-faq",
+    "wordpress_category_id": 847,
+    "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+    "article_sha256": "7c83b6f47d3d446c9d946efba821643c5d71f7f582bac939e3b69b1e0053d3c5"
+  },
+  "run": {
+    "github_run_id": 36932177611,
+    "head_sha": "ae8d3cb2d2fa4e38de8a4a48d32aa2f82bd0188d"
+  },
+  "passes": {
+    "article_rules": "84/84 PASS",
+    "system_rules": "PASS",
+    "lt68": "PASS_0_FINDINGS",
+    "pserc_metadata_binding": "PASS",
+    "endstempel": "PASS",
+    "wordpress_file_verify": "PASS"
+  },
+  "blocker": {
+    "code": "REAL_WORDPRESS_DRAFT_RENDER_EVIDENCE_REQUIRED",
+    "pending_rules": [
+      "wordpress.rendered_h1_integrity",
+      "wordpress.rendered_duplicate_heading_integrity",
+      "wordpress.rendered_adjacent_heading_integrity",
+      "integrity.rendered_evidence_class"
+    ],
+    "ppm_requires": {
+      "evidence_class": "SERVER_USER_TRIGGERED_TEST",
+      "capture_source": "HTTP_RESPONSE_AFTER_WORDPRESS_RENDER",
+      "exact_post_id": true,
+      "exact_readback_content_hash": true,
+      "desktop_viewport_min_width": 1024,
+      "mobile_viewport_max_width": 767
+    },
+    "local_simulation_allowed": false
+  },
+  "publish_allowed": false
+}
