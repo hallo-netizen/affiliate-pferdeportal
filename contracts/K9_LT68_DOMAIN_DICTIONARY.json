@@ -1,0 +1,20 @@
+{
+  "contract": "K9_LT68_DOMAIN_DICTIONARY_V1",
+  "status": "ACTIVE",
+  "purpose": "Exact Pferde-Fachwoerter fuer LanguageTool 6.8, ohne Abschaltung einer Sprachregel.",
+  "applies_to_rule_id": "GERMAN_SPELLER_RULE",
+  "matching_mode": "EXACT_VISIBLE_TOKEN_CASEFOLD",
+  "words": [
+    "Hilfengebung",
+    "Longe",
+    "Longierpeitsche",
+    "Longierpeitschen"
+  ],
+  "safeguards": {
+    "other_rule_ids_remain_blocking": true,
+    "partial_matches_forbidden": true,
+    "unknown_spelling_findings_remain_blocking": true,
+    "engine_version_unchanged": "LanguageTool 6.8 / Bestand 43"
+  },
+  "publish_allowed": false
+}
