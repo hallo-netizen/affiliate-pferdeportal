@@ -202,3 +202,63 @@ WORDPRESS_LIVEKONTROLLE: Nutzer bestätigt im laufenden Chat ausdrücklich, dass
 ERGEBNIS: PASS  
 FACHBÜRO_REF: technische Autorität bleibt `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`; Evidence `release/affiliate-zentrale/evidence/affiliate_router_v672172_idealo_temp_storage_local_gate_20261001.md`.  
 NOTIZ: 6.72.173 ist derzeit nur Source-Kandidat mit offenem Full-Gate und ausdrücklich noch kein installiertes Updateereignis.
+
+## PU-20261001-003 – Portal SEO Redaktionsplan Compiler
+
+DATUM: 2026-10-01
+PLUGIN_ID: PA-E-017
+ART: UPDATE
+HERKUNFT: EIGEN
+FACHBÜRO: TEXT
+VON_VERSION: 0.28.29-kiss-storage-safe
+AUF_VERSION: 0.28.30
+UPDATEQUELLE: lokal aus dem aktuellen 0.28.29-Paket gebaut; PSTE-V5-Binding-Kompatibilität ergänzt
+WARUM: `PSERC_SEO_CAPABILITY_BINDING_BLOCKED` im INIT-Pfad beseitigen, ohne LT/PPM/PSERC-Fachregeln oder 5-Felder-Handoff zu ändern.
+ABHÄNGIGKEITEN: PSTE Compiler-Read-Capability; PPM 6.7.9; K9 5-Felder-Handoff.
+POSITIVTEST: reale Runtime-Matrix mit korrekter PSTE-Capability PASS; INIT kann in OCCUPIED übergehen.
+NEGATIVTEST: falsche/fehlende Capability, falsches Schema/Hash/Schreibrecht weiterhin fail-closed BLOCK.
+FACH_REGRESSION: Qualitätsgates unverändert; publish_allowed=false.
+WORDPRESS_LIVEKONTROLLE: Nutzer installierte 0.28.30; unmittelbar danach bestand der gleiche Bindungsfehler weiter. Erst nach anschließendem PSTE-Reinstall verschwand der Livefehler und der PSERC-Lauf erreichte später COMPLETE.
+ERGEBNIS: PASS ALS PSERC-SEITE / der erste Livefehler war durch den damals geladenen PSTE-Dateistand weiterhin sichtbar.
+FACHBÜRO_REF: `../TEXT/CURRENT_STATE.md`.
+
+## PU-20261001-004 – Portal SEO Themenengine
+
+DATUM: 2026-10-01
+PLUGIN_ID: PA-E-019
+ART: UPDATE / REINSTALL MIT NEUER VERSION
+HERKUNFT: EIGEN
+FACHBÜRO: TEXT
+VON_VERSION: 0.57.16-KANDIDAT
+AUF_VERSION: 0.57.17
+UPDATEQUELLE: geprüfter 0.57.16-Bestand; Funktionscode unverändert, neue eindeutige Versionskennung 0.57.17
+WARUM: gleiche Versionsnummer beim Reinstall vermeiden und den tatsächlich geladenen Pluginstand eindeutig ersetzen.
+ABHÄNGIGKEITEN: PSTE Compiler-Read-Capability; PSERC 0.28.30.
+POSITIVTEST: PHP 79/79 PASS; PSTE Runtime-Capability PASS; PSERC-0.28.30-Bindung PASS; kompletter INIT-Positivpfad PASS.
+NEGATIVTEST: fehlender/falscher Provider bzw. ungültige Capability weiterhin BLOCK; Publish-Sperre unverändert.
+WORDPRESS_LIVEKONTROLLE: Nutzer installierte 0.57.17; der nachfolgende PSERC-/Snapshot-Weg erreichte real COMPLETE. Kein separat archivierter Pluginlisten-Screenshot wird daraus erfunden.
+ERGEBNIS: PASS.
+FACHBÜRO_REF: `../TEXT/CURRENT_STATE.md`.
+
+## RELEASE-VORBEREITUNG 2026-10-01 – PSTE 0.57.18 / KEIN PU-EREIGNIS
+
+Kandidat:
+`PSTE-0.57.18-EXISTING-POTENTIAL-FIRST-HARD-PASS.zip`
+
+Zweck:
+sichere `AUTO_REENTRY_ELIGIBLE`-Sandbox-Kandidaten vor Retained Backlog und Provider-Recherche über den bestehenden Normal-Reentry verwerten.
+
+Prüfung:
+- PHP-Lint 79/79 PASS;
+- Sandbox-Reentry Positiv PASS;
+- gemischter Positiv/Negativ-Reentry PASS;
+- Provider-Aufruf in Reuse-Phase BLOCK;
+- keine eligible Sandbox erzeugt keinen künstlichen Kandidaten;
+- Fresh-Unpack Wiederholung PASS.
+
+Grenze:
+0.57.18 ändert nicht die bereits vorhandene Keyword/Familien→Titel/Artikeltyp/Kategorie-Automatik und ist **keine belegte Gesamtlösung** für die geringe READY-Ausbeute des gespeicherten Topic-Pools.
+
+Live:
+nicht als installiert belegt. Die bereits laufende Recherchewelle wird dafür nicht unterbrochen.
+
