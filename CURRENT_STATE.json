@@ -3,13 +3,17 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K9",
   "branch": "konzept9/greenfield-20260929",
-  "status": "MAINTENANCE_OPTIMIZATION",
-  "operational_mode": "POST_STOP_ROOT_CAUSE_OPTIMIZATION",
+  "status": "IDLE_READY_FOR_NEXT_EXPLICIT_BATCH",
+  "operational_mode": "NO_ACTIVE_JOB_WAITING_FOR_EXPLICIT_WORDPRESS_METADATA_BATCH",
   "active_job": null,
   "first_open_blocker": null,
-  "next_action": "IMPLEMENT_AND_TEST_WRITER_FIRST_PASS_AND_COLLECT_ALL_OPTIMIZATIONS",
+  "next_action": "WAIT_FOR_EXPLICIT_NEW_WORDPRESS_METADATA_BATCH_FOR_OPTIMIZED_REAL_VALIDATION",
   "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP",
+    "baseline": "LATEST_REAL_E2E_STOP_PLUS_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT",
+    "optimization_closeout_ref": "protocol/K9_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT_20261001.md",
+    "optimization_status": "IMPLEMENTED_AND_TESTED",
+    "persistent_selftest_run_id": "36904605031",
+    "real_batch_read_only_verification_run_id": "36904542706",
     "preserve_existing_station_products": true,
     "preserve_terminal_evidence": true,
     "preserve_quality_gates": [
@@ -19,13 +23,21 @@
       "ENDSTEMPEL",
       "WORDPRESS_VERIFY"
     ],
-    "do_not_reopen_completed_article": true,
-    "optimization_scope": [
+    "optimized_guards": [
       "COMPILED_WRITER_ACCEPTANCE_PLAN",
       "COLLECT_ALL_WRITER_FINDINGS",
+      "COLLECT_ALL_STRUCTURAL_FINDINGS",
       "AUTHORITATIVE_DOMAIN_TERMS_FOR_LT68",
+      "PERSISTED_WRITER_PREFLIGHT_FINDINGS",
       "TERMINAL_READINESS_PREFLIGHT"
     ],
+    "next_real_batch_measurements": [
+      "WRITER_ATTEMPTS_PER_ARTICLE",
+      "REPAIR_CYCLES_PER_ARTICLE",
+      "LATE_FINALIZER_CONTENT_OR_STATE_FAILURES",
+      "SEQUENTIAL_INDEPENDENT_FINDING_LEAKAGE"
+    ],
+    "do_not_reopen_completed_article": true,
     "publish_allowed": false
   },
   "terminal_evidence": {
@@ -40,13 +52,12 @@
     "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
     "endstempel_sha256": "d7b5944879a22976c4c561455c3eeb1c877bede5d52b6d1416aae5502b3e6447"
   },
-  "allowed_action": "CODE_AND_TEST_ROOT_CAUSE_OPTIMIZATIONS_ONLY",
-  "route_lock": "POST_STOP_MAINTENANCE_ONLY",
-  "supervisor_actions_allowed": true,
+  "allowed_action": "ACCEPT_NEW_EXPLICIT_WORDPRESS_METADATA_BATCH_ONLY",
+  "route_lock": "NEXT_EXPLICIT_BATCH_ONLY",
+  "supervisor_actions_allowed": false,
+  "code_change_allowed": false,
   "repair_authorized": false,
   "all_other_actions": "DENY",
-  "code_change_allowed": true,
-  "chat_delivery_required": false,
   "chat_may_route": false,
   "publish_allowed": false
 }
