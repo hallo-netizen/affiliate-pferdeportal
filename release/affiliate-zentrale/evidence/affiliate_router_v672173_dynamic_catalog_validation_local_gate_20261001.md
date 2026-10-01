@@ -52,3 +52,20 @@ Der Fix fügt keine Datei-, DB-, Netzwerk-, Taxonomie- oder Portalstruktur-Abfra
 
 ## Offen
 Kompletter gebundener Release-Gate-Zyklus + WordPress/MariaDB/Frontend-Regression. Kein Installer vor diesem Gate.
+
+
+## CI-Readback auf aktuellem 6.72.173-Head
+
+GitHub-Head nach Manifest-/Readme-Korrektur:
+`b9c30106607d9b381f3ab6b2f6a2b46531b806fa`
+
+Automatisch gestartete Alt-Workflows:
+- Run 36866837262: Governance PASS, Source PASS, Tree PASS, Start PASS; danach Abbruch ausschließlich am fest codierten `grep Version: 6.72.171`.
+- Run 36866837152: Source PASS; danach Abbruch ausschließlich am fest codierten `grep Version: 6.72.170`.
+
+Damit ist belegt:
+- aktuelles 6.72.173-Manifest ist vom Release-Guard konsistent lesbar;
+- kein Source-/Governance-Fehler wurde durch den Fix erzeugt;
+- die vorhandenen alten Workflows sind als 6.72.173-Full-Gate nicht verwendbar, weil ihre Versionsnummern hart verdrahtet sind.
+
+Die Workflowdateien werden **nicht** als Workaround geändert, weil `.github/workflows/` im Release-Scope gesperrt ist und kein CI-Umbau Teil dieses Funktionsfixes ist.
