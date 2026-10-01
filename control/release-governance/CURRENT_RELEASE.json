@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 160,
+  "generation": 161,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "375eb8de30011d1c4fbaabab56c94301bfa28b69d95e5d4deddc49dcf72c2da9",
+    "manifest_sha256": "5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,11 +41,11 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "375eb8de30011d1c4fbaabab56c94301bfa28b69d95e5d4deddc49dcf72c2da9",
+    "current_source_manifest_sha256": "5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "ff66538939614cc97bb27ee16ec3708d5e1752640843498fdfd8c67236c848d7",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip",
-    "final_artifact_sha256": "ff66538939614cc97bb27ee16ec3708d5e1752640843498fdfd8c67236c848d7"
+    "candidate_reference_artifact_sha256": "769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714",
+    "final_artifact_ref": "CONVERSATION_ARTIFACT:AFFILIATE_ZENTRALE_6.72.171.zip",
+    "final_artifact_sha256": "769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714"
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -301,6 +301,36 @@
           "wrong page no eBay"
         ],
         "note": "A stale queued 6.72.169 finalizer rebound the old ZIP after 6.72.170 source opened; reset before full 6.72.170 gate. No plugin source rollback occurred."
+      },
+      "current_block_20261001": {
+        "status": "LOCAL_EXACT_AB_PASS_RELEASED_LIVE_READBACK_OPEN",
+        "candidate_version": "6.72.171",
+        "source_head": "ad4db0c34552667a9d398d4b74cb7d8b7130f03a",
+        "source_manifest_sha256": "5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4",
+        "local_installer_sha256": "769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714",
+        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md",
+        "exact_ab_run": 36839006440,
+        "snapshot_ab_run": 36839006513,
+        "exact_ab": {
+          "baseline_median_ms": 393.694,
+          "candidate_median_ms": 365.895,
+          "speedup_percent": 7.06,
+          "result": "POSITIVE_NEGATIVE_FUNCTIONAL_EQUIVALENCE_PASS"
+        },
+        "snapshot_ab": {
+          "rows": 2012,
+          "active": 1518,
+          "ebay": 922,
+          "idealo": 1090,
+          "baseline_total_median_ms": 1248.595,
+          "candidate_total_median_ms": 249.597,
+          "total_speedup_percent": 80.01,
+          "hub_speedup_percent": 71.2,
+          "leaf_speedup_percent": 89.87,
+          "result": "EXACT_FUNCTIONAL_EQUIVALENCE_AND_PERFORMANCE_PASS"
+        },
+        "repository_binary_sync": "BLOCKED_NO_BYTE_EXACT_BINARY_TRANSFER_USED",
+        "next": "INSTALL_6_72_171_AND_REAL_READBACK_THEN_SAME_PERFORMANCE_DIAGNOSIS"
       }
     },
     "category_completion": {
@@ -334,9 +364,9 @@
   "execution_state": {
     "state": "FINAL_RELEASE_BOUND",
     "authorized_next_action": "FINALIZE_RELEASE",
-    "bound_user_scope_action": "AFFILIATE 6.72.171 ONLY: SHARE SLOT-INDEPENDENT CATEGORY_PRODUCT CONTEXT RANKING ONCE PER PAGE REQUEST; KEEP SLOT PLACEMENT/CONTROL/VETO/PROVIDER MIX/SELECTION PER SLOT; NO TEMPLATE OR QUALITY CHANGE.",
-    "completion_condition": "RELEASE_CHECK_PASS_THEN_ONE_REAL_SERVER_READBACK",
-    "after_completion_action": "ONE_REAL_SERVER_READBACK_THEN_RUN_SAME_DATABASE_PERFORMANCE_MEASUREMENT",
+    "bound_user_scope_action": "AFFILIATE 6.72.171 SOURCE/LOCAL INSTALLER FINAL: NO FURTHER SOURCE CHANGE. EXACT 6.72.170->6.72.171 POSITIVE/NEGATIVE A-B PASS AND 2012-ROW SNAPSHOT A-B PERFORMANCE PASS. REPOSITORY BINARY SYNC REMAINS SEPARATE; OPERATIVE INSTALL/READBACK IS OWNED BY PLUGINS CURRENT.",
+    "completion_condition": "SOURCE_MANIFEST + LOCAL BYTE-IDENTICAL INSTALLER + A-B EVIDENCE BOUND; REPOSITORY BINARY COPY MAY REMAIN BLOCKED WITHOUT BYTE-EXACT TRANSFER",
+    "after_completion_action": "PLUGINS CURRENT: INSTALL 6.72.171, READ BACK VERSION/ACTIVE, THEN RUN SAME REAL PERFORMANCE DIAGNOSIS",
     "no_optional_detours": true,
     "sequence": 44,
     "authorized_change_prefixes": [
@@ -344,7 +374,7 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672168_recovery_sweep_targeted_20260930.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672171_category_product_performance_rootfix_20261001.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
