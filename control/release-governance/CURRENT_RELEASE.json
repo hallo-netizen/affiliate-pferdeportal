@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 165,
+  "generation": 166,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "286fcedf2e7fa1eca441abb52d46254bf39f0d0fd6c63daa81f032d8e605e33c",
+    "manifest_sha256": "8fc51218e41a34595d49361bde91ee7283df90edb3bf3c869ea19973491e2821",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,27 +35,19 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.172",
-    "status": "VERIFIED_HANDOFF_PACKAGE_READY",
+    "version": "6.72.173",
+    "status": "SOURCE_BOUND_TARGETED_LOCAL_SIM_PASS_FULL_GATE_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "286fcedf2e7fa1eca441abb52d46254bf39f0d0fd6c63daa81f032d8e605e33c",
+    "current_source_manifest_sha256": "8fc51218e41a34595d49361bde91ee7283df90edb3bf3c869ea19973491e2821",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25",
+    "candidate_reference_artifact_sha256": null,
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.172.zip",
-    "handoff_artifact_bytes": 766700,
-    "handoff_package_checks": {
-      "source_manifest_identity": "27_OF_27_PASS",
-      "fresh_unpack_identity": "27_OF_27_PASS",
-      "fresh_unpack_php_lint": "21_OF_21_PASS",
-      "version_header_runtime": "6.72.172_6.72.172_PASS",
-      "zip_integrity": "PASS",
-      "repository_binary_sync": "BLOCKED_NO_BYTE_EXACT_BINARY_UPLOAD_PATH"
-    }
+    "handoff_artifact_filename": null,
+    "handoff_artifact_bytes": null
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -64,9 +56,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "IDEALO_TEMP_STORAGE_RETENTION_ROOTFIX_6_72_172",
-    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_IDEALO_TEMP_STORAGE_ROOTFIX_672172_20261001.md",
-    "current_focus_reason": "LIVE STORAGE READBACK 2026-10-01: 5 orphan ppar-idealo-feed-*.tmp files consume 749,350,091 bytes. Add only bounded cleanup to existing Affiliate-Zentrale housekeeping; no new plugin.",
+    "current_focus": "EBAY_PORTAL_CATALOG_DYNAMIC_VALIDATION_6_72_173",
+    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_EBAY_CATALOG_DYNAMIC_VALIDATION_672173_20261001.md",
+    "current_focus_reason": "User-reported Portalabdeckung failure proven to come from historical fixed 329/1124 counts while current hash-bound catalog contains 334/1149. Fix only this first proven failure; preserve 6.72.171 performance and 6.72.172 housekeeping.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -387,16 +379,27 @@
       ],
       "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672172_idealo_temp_storage_local_gate_20261001.md",
       "handoff_sha256": "c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25"
+    },
+    "ebay_portal_catalog_dynamic_validation": {
+      "version": "6.72.173",
+      "status": "TARGETED_LOCAL_POSITIVE_NEGATIVE_PERFORMANCE_PASS_FULL_GATE_OPEN",
+      "live_basis": "6.72.172_USER_CONFIRMED_INSTALLED_SERVER_READBACK_NOT_RECAPTURED_IN_THIS_TURN",
+      "source_manifest_sha256": "8fc51218e41a34595d49361bde91ee7283df90edb3bf3c869ea19973491e2821",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672173_dynamic_catalog_validation_local_gate_20261001.md",
+      "scope_ref": "protocol/AFFILIATE_RELEASE_EBAY_CATALOG_DYNAMIC_VALIDATION_672173_20261001.md",
+      "fixed_failure": "ebay_portal_catalog_incomplete:product_pages",
+      "performance_hardlock": "NO_ROLLBACK_OF_6_72_171_REQUEST_LOCAL_CACHES_NO_EXTRA_IO_DB_NETWORK_OR_PORTAL_STRUCTURE_PARSE",
+      "next": "RUN_BOUND_RELEASE_GATES"
     }
   },
   "execution_state": {
-    "state": "VERIFIED_HANDOFF_PACKAGE_READY",
-    "authorized_next_action": "REAL_WORDPRESS_INSTALL_READBACK_6_72_172",
-    "bound_user_scope_action": "Install exactly verified AFFILIATE_ZENTRALE_6.72.172.zip; read back active version; then run central housekeeping and storage re-scan.",
-    "completion_condition": "WORDPRESS_READBACK_6_72_172_ACTIVE_THEN_HOUSEKEEPING_COMPLETE_AND_IDEALO_TMP_STORAGE_REMOVED",
-    "after_completion_action": "RE-SCAN STORAGE; THEN CONTINUE DATABASE RETENTION/COMPACTION BLOCK",
+    "state": "SOURCE_BOUND_TARGETED_LOCAL_SIM_PASS_FULL_GATE_OPEN",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Run one combined full gate on exact 6.72.173 current source. Preserve all 6.72.171 performance semantics and 6.72.172 housekeeping; no other functional change.",
+    "completion_condition": "ALL_REQUIRED_GATES_PASS_ON_6_72_173_SOURCE_MANIFEST",
+    "after_completion_action": "BUILD_ONE_6_72_173_INSTALLER_THEN_REAL_WORDPRESS_READBACK",
     "no_optional_detours": true,
-    "sequence": 45,
+    "sequence": 46,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -404,7 +407,7 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672172_idealo_temp_storage_local_gate_20261001.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672173_dynamic_catalog_validation_local_gate_20261001.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
