@@ -26,5 +26,29 @@ class K9WriterEarlyBindingTest(unittest.TestCase):
         ):
             k9_write_packager.exact_ppm_authoring_preflight(article,self.research())
 
+
+    def test_source_traces_are_machine_canonicalized_exactly_once(self):
+        research={
+            "fact_pack":{
+                "fact_ids":["F1"],
+                "claims":[{
+                    "fact_id":"F1",
+                    "source_id":"S1",
+                    "evidence_text_sha256":"HASH1",
+                    "statement":"Heunetze können die Fressdauer verlängern."
+                }]
+            },
+            "sources":[{"source_id":"S1","title":"Quelle"}]
+        }
+        stale='<span class="ppm-source-trace" data-fact-id="F1" data-source-hash="OLD" data-source-title="OLD"></span>'
+        markup='<p data-fact-ids="F1">'+stale+stale+'Heunetze können die Fressdauer verlängern.</p>'
+        out=k9_write_packager.ensure_all_fact_traces(markup,research)
+        self.assertEqual(out.count('class="ppm-source-trace"'),1)
+        self.assertIn('data-fact-id="F1"',out)
+        self.assertIn('data-source-hash="HASH1"',out)
+        self.assertIn('data-source-title="S1"',out)
+        self.assertNotIn('data-source-hash="OLD"',out)
+        self.assertEqual(k9_write_packager.text_of(markup),k9_write_packager.text_of(out))
+
 if __name__=="__main__":
     unittest.main()
