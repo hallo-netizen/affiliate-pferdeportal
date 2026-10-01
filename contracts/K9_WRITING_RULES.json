@@ -237,6 +237,7 @@
         "source_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
         "semantics": "ALL_RULES_IN_BOUND_PPM_PACKAGE_WITHOUT_SELECTIVE_COPY",
         "enforced_by": [
+          "K9_WRITE_PACKAGER_PPM679_PREFLIGHT",
           "K9_NATIVE_PPM679_CHECK"
         ]
       },
@@ -245,6 +246,7 @@
         "source_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
         "semantics": "ALL_LANGUAGE_FINDINGS_FROM_BOUND_LT68_ENGINE",
         "enforced_by": [
+          "K9_WRITE_PACKAGER_LT68_PREFLIGHT",
           "K9_NATIVE_LT68_CHECK"
         ]
       },
