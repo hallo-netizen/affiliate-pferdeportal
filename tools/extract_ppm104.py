@@ -44,11 +44,18 @@ with zipfile.ZipFile(PACKAGE) as zf:
     for group,(member,expected,method) in SPECS.items():
         text=zf.read(member).decode("utf-8")
         parsed=parse(text,member,method)
+        unique={}
+        for row in parsed:
+            key=(row["error_code"],row["failed_rule"])
+            unique.setdefault(key,row)
+        parsed=list(unique.values())
         counts[group]=len(parsed)
         if len(parsed)!=expected:
-            raise SystemExit(f"PPM_SCOPE_COUNT_MISMATCH:{group}:{len(parsed)}:{expected}")
+            raw=len(parse(text,member,method))
+            raise SystemExit(f"PPM_SCOPE_COUNT_MISMATCH:{group}:unique={len(parsed)}:raw={raw}:expected={expected}")
         for row in parsed:
             row["legacy_group"]=group
+            row["legacy_rule_id"]=member+":"+row["error_code"]+":"+row["failed_rule"]
         rows.extend(parsed)
     text=zf.read(RENDERED).decode("utf-8")
     parsed=parse(text,RENDERED,"error")
