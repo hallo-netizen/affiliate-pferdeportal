@@ -3,7 +3,7 @@
 STAND: 2026-10-01
 STATUS: KEINE AKTIVE TEMPORÄRE AUSFÜHRUNGSBINDUNG / ALLE ALTEN NEXT-ACTIONS UNTEN HISTORISCH
 
-**HARD:** Dieser Hobbyraum ist keine Current- oder NEXT-ACTION-Autorität. Für aktuelle Arbeit ausschließlich `CURRENT_STATE.md` lesen. Der dort gebundene aktuelle Schritt ist, den bestehenden PSTE-Portalabgleich bis `COMPLETE` fortlaufen zu lassen. Keine neue Recherche/Produktionswelle und keine pauschale Themenfreigabe.
+**HARD:** Dieser Hobbyraum ist keine Current- oder NEXT-ACTION-Autorität. Für aktuelle Arbeit ausschließlich `CURRENT_STATE.md` lesen und dessen Frischecheck/NEXT ACTION übernehmen. Dieser Hobbyraum enthält keine eigene dynamische Statuswahrheit.
 
 ---
 
