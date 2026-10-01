@@ -1,0 +1,25 @@
+name: K10 inspect PPM rendered evidence contract
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract rendered evidence contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show 2cc8167fa1e31b4ffa2ff76c9819314be4b98555:quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip > /tmp/ppm.zip
+          unzip -q /tmp/ppm.zip -d /tmp/ppm
+          ROOT=/tmp/ppm/portal-production-machine
+          echo '=== rendered-dom-validator evidence ==='
+          grep -n -C 8 -E 'evidence_class|capture_source|simulation_only|LOCAL_EXECUTED_TEST|SERVER|HTTP|rendered' "$ROOT/includes/rendered-dom-validator.php" || true
+          echo '=== fixture builder ==='
+          grep -n -C 8 -E 'evidence_class|capture_source|simulation_only|LOCAL_EXECUTED_TEST|SERVER|HTTP' "$ROOT/tests/qf03-wordpress-draft-readback-dom/fixture-builder.php" || true
+          echo '=== positive test ==='
+          sed -n '1,260p' "$ROOT/tests/qf03-wordpress-draft-readback-dom/test-qf03-rendered-dom-positive.php"
