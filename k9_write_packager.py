@@ -316,7 +316,7 @@ def lt68_writer_preflight(markup,lt_jar):
             if rid not in ids:
                 ids.append(rid)
         raise PackError("LT68_WRITER_PREFLIGHT_REPAIR_REQUIRED:"+str(result.get("finding_count") or 0)+":"+",".join(ids or ["UNKNOWN"]))
-    return True
+    return result
 
 
 def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
@@ -347,7 +347,7 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
     markup=ensure_all_fact_traces(markup,research)
     validate_html(markup,article_type,meta,research,rules)
     complete_rule_preflight(markup,meta,rules)
-    lt68_writer_preflight(markup,lt_jar)
+    lt68_preflight=lt68_writer_preflight(markup,lt_jar)
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})
     link_bindings=[]
@@ -468,6 +468,8 @@ def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
              "content_sha256":hashlib.sha256(markup.encode()).hexdigest(),
              "research_product_sha256":research["product_sha256"],"writing_rules_sha256":rules_sha,
              "writing_rules_coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1","ppm_item":ppm_item}
+    if isinstance(lt68_preflight,dict):
+        product["lt68_preflight_result"]=lt68_preflight
     exact_ppm_authoring_preflight(product,research)
     product["product_sha256"]=stable(product)
     return {"item_id":item_id,"article_product":product}
