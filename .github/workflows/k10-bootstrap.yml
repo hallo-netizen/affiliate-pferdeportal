@@ -6,7 +6,6 @@ permissions:
   contents: write
 jobs:
   materialize:
-    if: ${{ hashFiles('_bootstrap/k10_source_bundle.tar.xz') != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
