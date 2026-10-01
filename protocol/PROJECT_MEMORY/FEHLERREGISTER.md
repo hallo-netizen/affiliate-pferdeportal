@@ -76,6 +76,11 @@ Bereich: PRODUKTVERGLEICH
 Status: AKTIV  
 Autoritative Fehlerquelle: `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELLEN.md`
 
+## HOBBYRAUSCH-HDTE-LIVE
+Bereich: HOBBYRAUSCH / TEXT_REDAKTION / HD-002  
+Status: AKTIV / Details ausschließlich aus der autoritativen Plugin-Current  
+Autoritative Fehlerquelle: `PROJEKTE/HOBBYRAUSCH/PLUGINS/PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
+
 ## Regel für neue Fehler
 Neue reale Fehler erhalten eindeutige ID, Bereich, Status und genau einen autoritativen Hauptort. Keine ausführliche Fehlerwahrheit an zwei Orten.
 
