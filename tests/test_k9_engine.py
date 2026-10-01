@@ -399,7 +399,7 @@ class K9Tests(unittest.TestCase):
             "conclusion_evidence_coverage":"PASS","article_type_coverage":"PASS_BERATUNG",
             "temporal_validity_status":"PASS","contradiction_status":"NO_MATERIAL_CONTRADICTIONS_FOUND",
             "production_readiness_status":"SOURCE_VERIFIED_PRODUCTION_READY",
-            "placeholder_content_status":"NONE"
+            "placeholder_content_status":"PASS"
         }
         product={
             "contract":"K9_RESEARCH_PRODUCT_V1",
