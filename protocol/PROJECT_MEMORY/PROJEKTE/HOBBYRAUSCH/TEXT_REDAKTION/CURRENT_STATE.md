@@ -3,61 +3,74 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-01
-STATUS: HD-001 PRODUKTIV LIVE + READBACK PASS / HD-002 V0.1.2 AUTO-HANDOFF HARD PASS / LIVE-INSTALLATION NÄCHSTES
+STATUS: HD-001 PRODUKTIV LIVE PASS / HDTE 0.1.2 LIVE PORTALABGLEICH BLOCKED / HDTE 0.1.3 COMPLETE-WORKFLOW POS+NEG HARD PASS / LIVE-UPGRADE NÄCHSTES
 
-## Live-Stand
+## HD-001
 
-HD-001:
-- produktiver Buchbinden-Pilot live;
-- Deployment abgeschlossen;
+Produktiver Buchbinden-Pilot:
+- live deployed;
 - Schreiben und Readback erfolgreich;
-- nicht zurückrollen.
-
-HD-002 aktuell live:
-`Hobby Depot SEO Themenengine 0.1.1`
-- sichere Migration COMPLETE;
-- Backend READY;
-- Website-Gesamtbild noch nicht erfasst.
-
-## Owner-Handoff
-
-Der produktive Buchbinden-Handoff ist jetzt fachlich bereit:
+- nicht zurückrollen;
 - 7 Owner;
 - 11 ARTICLE_ONLY;
-- 11/11 eindeutig gebunden;
-- `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`.
+- 11/11 gebunden.
 
-## HDTE 0.1.2
+## HDTE Live
 
-0.1.2 beseitigt den manuellen Übergabeschritt.
+Installiert:
+`Hobby Depot SEO Themenengine 0.1.2`
 
-Beim Klick auf
-`Gesamtbestand erfassen`
-liest HDTE den **deployed** HD-001-Workspace read-only, validiert FINAL_APPROVED + Research erneut, übernimmt ausschließlich den gültigen Owner-Handoff in eigenen HDTE-Speicher und startet danach den normalen Baseline-/Portalabgleich.
+Auto-Owner-Handoff:
+PASS.
 
-Keine HD-001-Schreiboperation.
+Gesamtbestand:
+erfasst.
 
-Exakter Buchbinden Positivtest:
-- Auto-Sync PASS;
-- Baseline CURRENT;
-- 4 produktive Content-Kategorien;
-- 1 Themenfamilie;
-- 7 Owner / 11 Assignments;
-- HD-001 unverändert.
+Portalabgleich:
+`BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
 
-Negativfälle fail-closed:
-not deployed / Final fehlt / nicht final / Live-Kategorie fehlt / Handoff manipuliert.
+## Ursache
+
+Ein bewusst nicht vorhandener Redaktionsplan wird im bestehenden Snapshot-Vertrag mit
+`status=NOT_AVAILABLE`, `sha256=NOT_AVAILABLE`, `items=[]`
+repräsentiert.
+
+0.1.2 verwarf diesen gültigen Zustand fälschlich als fehlenden Hash.
+
+## HDTE 0.1.3
 
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.2_AUTO_OWNER_HANDOFF_HARD_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.3_PORTALABGLEICH_FULL_WORKFLOW_HARD_PASS.zip`
 
 SHA:
-`330028c8cd38f7f27664c804dfafa7649bea70e1f3647bc18229b52f2ba06003`
+`5b3063577beb3e5dfb03799b6245f2b9aaf90f338c70e86708674e5999762b2a`
+
+Kompletter lokaler Workflow – nicht nur Teiltest:
+- deployed HD-001 Handoff;
+- Auto-Sync 7 Owner / 11 Assignments;
+- Baseline;
+- request-getrennter Portalabgleich;
+- Context Index;
+- finale Structure/Inventory/Plan-Gates;
+- COMPLETE.
+
+Exakter alte 0.1.2 BLOCKED-Zustand wurde persistiert und danach unter 0.1.3 ohne neue Baseline bis COMPLETE fortgeführt.
+
+Zusätzlich 4-Themen-Stresslauf bis COMPLETE.
+
+Negative Fälle:
+not deployed / malformed NOT_AVAILABLE / Hash fehlt / Stage manipuliert / Live-Struktur driftet → jeweils BLOCKED.
+
+Fresh Installer:
+80/80 PHP PASS.
+135/135 Dateiparität.
 
 ## NEXT ACTION
 
-1. HDTE 0.1.2 installieren.
-2. `Hobby Depot Themenengine → Übersicht → Gesamtbestand erfassen`.
-3. Portalabgleich bis COMPLETE laufen lassen.
+0.1.3 installieren und nur die Themenengine-Übersicht öffnen.
 
-Erst danach DataForSEO-/Buchbinden-Themenproduktion starten.
+Der vorhandene BLOCKED-Job wird automatisch fortgesetzt.
+
+Keine neue Bestandserfassung.
+Kein neuer Handoff.
+Keine DataForSEO-Recherche vor Portalabgleich COMPLETE.
