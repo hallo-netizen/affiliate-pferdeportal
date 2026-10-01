@@ -2,31 +2,31 @@
   "active_job": null,
   "contract": "K9_STATUS_V1",
   "fully_done": 18,
-  "ledger_generation": 76,
-  "orchestration_mode": "AUTO_CHAIN",
+  "ledger_generation": 77,
+  "orchestration_mode": "STATION_ONLY",
   "ready_for_check": 0,
   "ready_for_write": 0,
-  "remaining": 0,
+  "remaining": 3,
   "repair_required": 0,
-  "research_open": 0,
+  "research_open": 3,
   "stations": {
     "check": {
       "DONE": 18,
-      "PENDING": 0
+      "PENDING": 3
     },
     "repair": {
       "DONE": 0,
-      "NOT_REQUIRED": 18,
+      "NOT_REQUIRED": 21,
       "PENDING": 0
     },
     "research": {
       "DONE": 18,
-      "PENDING": 0
+      "PENDING": 3
     },
     "write": {
       "DONE": 18,
-      "PENDING": 0
+      "PENDING": 3
     }
   },
-  "total": 18
+  "total": 21
 }
