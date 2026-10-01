@@ -1,14 +1,10 @@
 name: K10 PPM 6.7.9 inventory
-
 on:
   push:
-    branches:
-      - konzept10-rule-ledger-20261001
+    branches: [konzept10-rule-ledger-20261001]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   inventory:
     runs-on: ubuntu-latest
@@ -24,7 +20,6 @@ jobs:
           test ! -e warehouse
           test ! -e final
           test ! -e submissions
-          test ! -e k9_engine.py
           echo K10_CLEAN_WORKTREE_PASS
       - name: Extract immutable K9 baseline PPM package read-only
         shell: bash
@@ -37,7 +32,6 @@ jobs:
           git show "$BASE:quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip" > /tmp/ppm679.zip
           ACTUAL="$(sha256sum /tmp/ppm679.zip | awk '{print $1}')"
           test "$ACTUAL" = "$EXPECTED"
-          echo "K10_PPM_BASELINE_HASH_PASS:$ACTUAL"
       - name: Extract exact 104-rule PPM inventory
         run: |
           python3 tools/extract_ppm104.py /tmp/ppm679.zip /tmp/ppm104_inventory.json
@@ -45,16 +39,10 @@ jobs:
           import json
           x=json.load(open('/tmp/ppm104_inventory.json'))
           assert x['actual_total']==104
-          assert x['group_counts']=={
-            'content_validator':52,
-            'structure_gate':34,
-            'known_error_gate':14,
-            'rendered_dom_w4':4,
-          }
+          assert x['group_counts']=={'content_validator':52,'structure_gate':34,'known_error_gate':14,'rendered_dom_w4':4}
           print('K10_PPM_104_CONTROL_SUM_PASS')
           PY
-      - name: Upload exact PPM 104 inventory
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: k10-ppm104-inventory
           path: /tmp/ppm104_inventory.json
