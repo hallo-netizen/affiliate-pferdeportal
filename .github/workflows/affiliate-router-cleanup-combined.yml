@@ -1,4 +1,4 @@
-name: Affiliate Router 6.72.170 Frontend Performance Rootfix Full Release Gate
+name: Affiliate Router 6.72.171 Category Product Performance Full Release Gate
 
 on:
   push:
@@ -44,32 +44,32 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Governance and exact 6.72.170 source binding
+      - name: Governance and exact 6.72.171 source binding
         shell: bash
         run: |
           set -euo pipefail
           python3 control/release-governance/release_guard.py governance-check
           python3 control/release-governance/release_guard.py source-check
           python3 control/release-governance/release_guard.py start --branch affiliate-release-current
-          grep -F "Version: 6.72.170" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.170';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.171" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.171';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
-          echo "PASS exact source-bound 6.72.170"
+          echo "PASS exact source-bound 6.72.171"
 
-      - name: Exact delta versus released 6.72.169
+      - name: Exact delta versus released 6.72.170
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA=d488fe5a3a29f14ed89bbab9075c0f2be6929c7f
-          rm -rf /tmp/v672169 /tmp/v672170
-          mkdir -p /tmp/v672169 /tmp/v672170
-          git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/v672169
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/v672170/affiliate-portal-router
+          BASE_SHA=b487061b5bc6c7d5f1a548ade9f51fd8b65a59e7
+          rm -rf /tmp/v672170 /tmp/v672171
+          mkdir -p /tmp/v672170 /tmp/v672171
+          git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/v672170
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/v672171/affiliate-portal-router
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          a=Path('/tmp/v672169/release/affiliate-zentrale/current/affiliate-portal-router')
-          b=Path('/tmp/v672170/affiliate-portal-router')
+          a=Path('/tmp/v672170/release/affiliate-zentrale/current/affiliate-portal-router')
+          b=Path('/tmp/v672171/affiliate-portal-router')
           def h(p): return hashlib.sha256(p.read_bytes()).hexdigest()
           rels=sorted(set(
               [p.relative_to(a).as_posix() for p in a.rglob('*') if p.is_file()] +
@@ -77,16 +77,14 @@ jobs:
           ))
           changed=[r for r in rels if not (a/r).is_file() or not (b/r).is_file() or h(a/r)!=h(b/r)]
           expected=sorted([
+              'includes/trait-ppar-automation-suite.php',
               'includes/trait-ppar-ebay.php',
-              'includes/trait-ppar-idealo.php',
-              'includes/trait-ppar-output-objects.php',
               'pferdeportal-affiliate-router.php',
-              'readme.txt',
           ])
           print('CHANGED',changed)
           if changed != expected:
-              raise SystemExit(f'FAIL unexpected 6.72.170 delta: {changed}')
-          print('PASS exact 6.72.170 frontend-performance rootfix delta')
+              raise SystemExit(f'FAIL unexpected 6.72.171 delta: {changed}')
+          print('PASS exact 6.72.170 -> 6.72.171 category-product performance delta')
           PY
 
       - name: PHP syntax all current plugin files
@@ -97,7 +95,7 @@ jobs:
           test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "21"
           echo "PASS php lint 21/21"
 
-      - name: 6.72.170 frontend performance rootfix hard assertions
+      - name: 6.72.171 category-product performance hard assertions
         shell: bash
         run: |
           set -euo pipefail
@@ -105,25 +103,26 @@ jobs:
           from pathlib import Path
           import subprocess
 
-          BASE='d488fe5a3a29f14ed89bbab9075c0f2be6929c7f'
+          BASE='b487061b5bc6c7d5f1a548ade9f51fd8b65a59e7'
           root=Path('release/affiliate-zentrale/current/affiliate-portal-router')
           main=(root/'pferdeportal-affiliate-router.php').read_text()
+          auto=(root/'includes/trait-ppar-automation-suite.php').read_text()
           ebay=(root/'includes/trait-ppar-ebay.php').read_text()
-          idealo=(root/'includes/trait-ppar-idealo.php').read_text()
-          output=(root/'includes/trait-ppar-output-objects.php').read_text()
-          run=(root/'includes/trait-ppar-ebay-run.php').read_text()
-          hk=(root/'includes/trait-ppar-housekeeping.php').read_text()
-          kiss=(root/'includes/class-ppar-admin-kiss.php').read_text()
 
           def show(rel):
               return subprocess.check_output(['git','show',f'{BASE}:release/affiliate-zentrale/current/affiliate-portal-router/{rel}'],text=True)
-          base_main=show('pferdeportal-affiliate-router.php')
-          base_ebay=show('includes/trait-ppar-ebay.php')
-          base_idealo=show('includes/trait-ppar-idealo.php')
-          base_output=show('includes/trait-ppar-output-objects.php')
-          if run != show('includes/trait-ppar-ebay-run.php'): raise SystemExit('FAIL eBay run trait changed')
-          if hk != show('includes/trait-ppar-housekeeping.php'): raise SystemExit('FAIL housekeeping changed')
-          if kiss != show('includes/class-ppar-admin-kiss.php'): raise SystemExit('FAIL KISS admin changed')
+          # Files outside the three-file performance delta must stay byte-identical.
+          for rel in [
+              'includes/class-ppar-admin-kiss.php',
+              'includes/trait-ppar-ebay-run.php',
+              'includes/trait-ppar-housekeeping.php',
+              'includes/trait-ppar-idealo.php',
+              'includes/trait-ppar-output-objects.php',
+              'includes/trait-ppar-provider-registry.php',
+              'includes/trait-ppar-network-sync.php',
+          ]:
+              if (root/rel).read_text()!=show(rel):
+                  raise SystemExit('FAIL non-scope runtime file changed: '+rel)
 
           def body(src,name):
               marker='function '+name+'('
@@ -153,89 +152,70 @@ jobs:
                       elif c=='{': depth+=1
                       elif c=='}':
                           depth-=1
-                          if depth==0: return src[start:i+1]
+                          if depth==0:return src[start:i+1]
                   i+=1
               raise SystemExit('FAIL unclosed '+name)
 
-          # All fachliche ranking/safety/output decisions not explicitly involved
-          # in the performance rootfix must stay byte-identical to released 6.72.169.
+          base_main=show('pferdeportal-affiliate-router.php')
+          base_ebay=show('includes/trait-ppar-ebay.php')
           for name in [
-              'ranked_campaigns_for_slot_uncached',
               'campaign_match_rank',
-              'campaign_control_allows_delivery',
-              'campaign_health_allows_delivery',
+              'category_product_strict_relevance_tier_v672104',
+              'category_product_provider_mix_v672133',
               'campaign_source_allows_delivery',
               'render_banner',
           ]:
-              if body(main,name) != body(base_main,name):
-                  raise SystemExit('FAIL core ranking/output semantics changed: '+name)
+              if body(main,name)!=body(base_main,name):
+                  raise SystemExit('FAIL fach/output semantics changed: '+name)
           for name in [
-              'ebay_business_campaign_source_allows_delivery',
               'ebay_business_campaign_source_allows_delivery_base',
+              'ebay_public_checkpoint_allows_business_campaign',
           ]:
-              if body(ebay,name) != body(base_ebay,name):
-                  raise SystemExit('FAIL eBay safety/source semantics changed: '+name)
-          for name in [
-              'multiprovider_filter_candidates_by_strategy',
-              'multiprovider_reorder_candidates',
-              'multiprovider_campaigns_share_exact_gtin',
-          ]:
-              if body(idealo,name) != body(base_idealo,name):
-                  raise SystemExit('FAIL multiprovider strategy semantics changed: '+name)
-          if body(output,'output_object_revalidate') != body(base_output,'output_object_revalidate'):
-              raise SystemExit('FAIL output-object revalidation semantics changed')
+              if body(ebay,name)!=body(base_ebay,name):
+                  raise SystemExit('FAIL eBay safety semantics changed: '+name)
 
-          # 6.72.169 regression must be impossible.
-          if 'function ebay_campaign_post_ids_for_exact_gtins' in ebay:
-              raise SystemExit('FAIL 6.72.169 eBay payload-scan helper remains')
+          required_main=[
+              'category_product_shared_rank_base',
+              'category_product_ranked_candidates_from_shared_base',
+              'select_category_product_campaign_fast_v672171',
+              'category_product_campaign_control_allows_delivery',
+              'category_product_campaign_health_allows_delivery',
+              'category_product_public_image_ready',
+              'category_product_shared_rank_base_request_cache',
+          ]
+          for token in required_main:
+              if token not in main: raise SystemExit('FAIL missing 6.72.171 main optimization '+token)
+          for token in [
+              'automation_exact_target_rank_request_cache',
+              'automation_campaign_exact_target_rank_uncached',
+          ]:
+              if token not in auto and token not in main:
+                  raise SystemExit('FAIL missing target-rank request cache '+token)
+          for token in [
+              'ebay_topic_duplicate_pair_request_cache',
+              'ebay_product_cohort_request_cache',
+              'ebay_business_campaign_source_allowed_request_cache',
+          ]:
+              if token not in ebay: raise SystemExit('FAIL missing eBay request cache '+token)
+
+          # New caches must remain normal-frontend/request-local only.
+          if "if (!$this->ranked_campaigns_request_cache_allowed())" not in body(auto,'automation_campaign_exact_target_rank'):
+              raise SystemExit('FAIL automation cache lacks frontend guard')
+          if "if (!$this->ranked_campaigns_request_cache_allowed())" not in body(main,'category_product_shared_rank_base'):
+              raise SystemExit('FAIL shared category-product base lacks frontend guard')
+          if "ebay_request_local_read_cache_allowed()" not in body(ebay,'ebay_filter_ranked_product_candidates_provider_cohort'):
+              raise SystemExit('FAIL eBay cohort cache lacks request-local guard')
+
+          # 6.72.170 exact-GTIN rootfix remains present.
           if 'source_payload LIKE' in ebay:
-              raise SystemExit('FAIL unindexed eBay source_payload LIKE remains')
-          if 'function ebay_prime_business_campaign_source_row_cache_for_campaigns(' not in ebay:
-              raise SystemExit('FAIL candidate-scoped eBay source batch missing')
-          if 'function ebay_business_item_gtins(' not in ebay:
-              raise SystemExit('FAIL write-time eBay GTIN extraction missing')
+              raise SystemExit('FAIL unindexed eBay source_payload LIKE returned')
+          if 'multiprovider_exact_gtin_pool_request_cache' not in (root/'includes/trait-ppar-idealo.php').read_text():
+              raise SystemExit('FAIL 6.72.170 exact-GTIN request cache lost')
 
-          gtin=body(idealo,'multiprovider_exact_gtin_candidate_pool')
-          if "ranked_campaign_candidate_index('exact')" not in gtin:
-              raise SystemExit('FAIL raw exact GTIN index missing')
-          if "ranked_campaign_candidate_pool($slot_type,'product','',false,array(),$context)" not in gtin:
-              raise SystemExit('FAIL context-bound legacy eBay preselection missing')
-          if 'multiprovider_exact_gtin_pool_request_cache' not in gtin:
-              raise SystemExit('FAIL exact pool request cache missing')
-          gtin_code='\n'.join(line.split('//',1)[0] for line in gtin.splitlines())
-          if gtin_code.count('get_campaigns(') != 1 or "if (!$cache_allowed)" not in gtin:
-              raise SystemExit('FAIL public exact pool has an unbounded campaign scan')
-          if 'ebay_campaign_post_ids_for_exact_gtins' in gtin:
-              raise SystemExit('FAIL removed eBay payload-search bridge still referenced')
-
-          if "'product_gtins'=>$product_gtins" not in ebay:
-              raise SystemExit('FAIL eBay Creative GTIN persistence missing')
-          if "'product_identity_source'] = 'ebay_business_source'" not in output:
-              raise SystemExit('FAIL eBay Campaign GTIN persistence missing')
-
-          # 6.72.169 provider-neutral cleanup must remain intact.
-          if 'function output_prime_creative_row_cache(' in output or 'output_creative_row_cache_primed' in output:
-              raise SystemExit('FAIL generic creative fullscan preload returned')
-          if 'get_campaigns(' in body(output,'output_creative_row'):
-              raise SystemExit('FAIL exact creative lookup full-scans campaigns')
-          glossary=body(main,'glossary_partner_inherited_exact_rank')
-          if 'ranked_campaign_raw_records_snapshot' not in glossary:
-              raise SystemExit('FAIL glossary same-partner raw prefilter missing')
-          for rel in [
-              'includes/trait-ppar-network-sync.php',
-              'includes/trait-ppar-provider-registry.php',
-              'includes/trait-ppar-provider-intake.php',
-              'includes/trait-ppar-digistore24.php',
-              'includes/trait-ppar-automation-suite.php',
-          ]:
-              if 'get_campaigns(' in (root/rel).read_text():
-                  raise SystemExit('FAIL separate provider fullscan found: '+rel)
-
-          print('PASS 6.72.169 unindexed payload regression removed')
-          print('PASS context-bounded legacy eBay fallback and request cache present')
-          print('PASS future eBay GTIN persistence present')
-          print('PASS provider-neutral 6.72.169 cleanup preserved')
-          print('PASS ranking, relevance, source safety, health, veto and provider strategy unchanged')
+          print('PASS exact three-file performance scope')
+          print('PASS ranking/relevance/provider/source/output safety preserved')
+          print('PASS caches are frontend/request-local')
+          print('PASS 6.72.170 exact-GTIN rootfix preserved')
           PY
 
       - name: Existing provider and banner regressions
@@ -333,28 +313,28 @@ jobs:
           echo json_encode($cases, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT), "\n";
           PHP
 
-      - name: WordPress/MariaDB frontend equivalence 6.72.169 -> 6.72.170
+      - name: WordPress/MariaDB frontend equivalence 6.72.170 -> 6.72.171
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA=d488fe5a3a29f14ed89bbab9075c0f2be6929c7f
+          BASE_SHA=b487061b5bc6c7d5f1a548ade9f51fd8b65a59e7
           rm -rf /tmp/base-plugin
           mkdir -p /tmp/base-plugin
           git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/base-plugin
           cp -a /tmp/base-plugin/release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.169") { exit(2); } echo "BASE_VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.170") { exit(2); } echo "BASE_VERSION_PASS\n";' --path=/tmp/wp-site
           /tmp/wp eval-file /tmp/query-fixture.php --path=/tmp/wp-site > /tmp/base-query.json
           /tmp/wp plugin deactivate affiliate-portal-router --path=/tmp/wp-site
           rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.170") { exit(2); } echo "CURRENT_VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.171") { exit(2); } echo "CURRENT_VERSION_PASS\n";' --path=/tmp/wp-site
           /tmp/wp eval-file /tmp/query-fixture.php --path=/tmp/wp-site > /tmp/current-query.json
           diff -u /tmp/base-query.json /tmp/current-query.json
           echo "PASS WordPress/MariaDB existing frontend query behavior byte-identical"
 
-      - name: 6.72.170 exact GTIN WordPress MariaDB positive-negative gate
+      - name: Preserve 6.72.170 exact GTIN WordPress MariaDB positive-negative gate
         shell: bash
         run: |
           set -euo pipefail
@@ -760,7 +740,7 @@ jobs:
           /tmp/wp eval-file /tmp/manual-import-gate.php --path=/tmp/wp-site | tee /tmp/manual-import-gate.txt
           grep -F 'MANUAL_SINGLE_UPLOAD_WORDPRESS_MARIADB_PASS' /tmp/manual-import-gate.txt
 
-      - name: Build and fresh-verify one 6.72.170 installer
+      - name: Build and fresh-verify one 6.72.171 installer
         shell: bash
         run: |
           set -euo pipefail
@@ -773,56 +753,41 @@ jobs:
           repo=Path('.')
           source=repo/'release/affiliate-zentrale/current'
           manifest=repo/'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
-          out=Path('/tmp/AFFILIATE_ZENTRALE_6.72.170.zip')
+          out=Path('/tmp/AFFILIATE_ZENTRALE_6.72.171.zip')
 
           rows=[]
           for raw in manifest.read_text(encoding='utf-8').splitlines():
-              if not raw.strip():
-                  continue
-              digest, rel = raw.split(None,1)
-              rel=rel.strip()
-              rows.append((digest,rel))
-          if len(rows)!=27:
-              raise SystemExit(f'FAIL manifest rows {len(rows)} != 27')
+              if not raw.strip(): continue
+              digest,rel=raw.split(None,1); rows.append((digest,rel.strip()))
+          if len(rows)!=27: raise SystemExit(f'FAIL manifest rows {len(rows)} != 27')
 
-          if out.exists():
-              out.unlink()
+          if out.exists(): out.unlink()
           with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
               for digest,rel in sorted(rows,key=lambda x:x[1]):
-                  p=source/rel
-                  data=p.read_bytes()
-                  got=hashlib.sha256(data).hexdigest()
-                  if got!=digest:
-                      raise SystemExit(f'FAIL source hash {rel}: {got} != {digest}')
-                  zi=zipfile.ZipInfo(rel)
-                  zi.date_time=(2026,9,30,0,0,0)
-                  zi.compress_type=zipfile.ZIP_DEFLATED
-                  zi.external_attr=0o100644 << 16
+                  p=source/rel; data=p.read_bytes(); got=hashlib.sha256(data).hexdigest()
+                  if got!=digest: raise SystemExit(f'FAIL source hash {rel}: {got} != {digest}')
+                  zi=zipfile.ZipInfo(rel); zi.date_time=(2026,10,1,0,0,0); zi.compress_type=zipfile.ZIP_DEFLATED; zi.external_attr=0o100644<<16
                   z.writestr(zi,data)
 
           zip_sha=hashlib.sha256(out.read_bytes()).hexdigest()
-          Path('/tmp/installer.sha256').write_text(zip_sha+'  AFFILIATE_ZENTRALE_6.72.170.zip\n',encoding='utf-8')
-
+          Path('/tmp/installer.sha256').write_text(zip_sha+'  AFFILIATE_ZENTRALE_6.72.171.zip\n',encoding='utf-8')
           with zipfile.ZipFile(out) as z:
               names=sorted(n for n in z.namelist() if not n.endswith('/'))
               expected=sorted(rel for _,rel in rows)
-              if names!=expected:
-                  raise SystemExit('FAIL ZIP file list differs from source manifest')
+              if names!=expected: raise SystemExit('FAIL ZIP file list differs from source manifest')
               for digest,rel in rows:
-                  data=z.read(rel)
-                  got=hashlib.sha256(data).hexdigest()
-                  if got!=digest:
-                      raise SystemExit(f'FAIL ZIP byte identity {rel}: {got} != {digest}')
+                  got=hashlib.sha256(z.read(rel)).hexdigest()
+                  if got!=digest: raise SystemExit(f'FAIL ZIP byte identity {rel}: {got} != {digest}')
           print('INSTALLER_FILE_COUNT_PASS 27')
           print('SOURCE_ZIP_BYTE_IDENTITY_PASS 27_OF_27')
           print('INSTALLER_SHA256 '+zip_sha)
           PY
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.170.zip -d /tmp/installer-unpack
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.171.zip -d /tmp/installer-unpack
           find /tmp/installer-unpack/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/installer-php-lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/installer-php-lint.log)" = "21"
-          grep -F "Version: 6.72.170" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.170';" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
-          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.170.zip | tee /tmp/installer-unzip-test.log
+          grep -F "Version: 6.72.171" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.171';" /tmp/installer-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.171.zip | tee /tmp/installer-unzip-test.log
           echo "FRESH_UNPACK_PASS"
           cat /tmp/installer.sha256
 
@@ -841,155 +806,91 @@ jobs:
           ! grep -Eqi 'Fatal error|Uncaught Error|Parse error' /tmp/front.html
           echo "PASS current frontend smoke"
 
-      - name: Bind final 6.72.170 release and run release check
+      - name: Bind final 6.72.171 release and run release check
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p release/affiliate-zentrale/artifacts/final release/affiliate-zentrale/evidence
-          cp /tmp/AFFILIATE_ZENTRALE_6.72.170.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.171.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.171.zip
 
           python3 - <<'PY'
           from pathlib import Path
-          import hashlib, json, os
+          import hashlib,json,os
 
           current_path=Path('control/release-governance/CURRENT_RELEASE.json')
           current=json.loads(current_path.read_text(encoding='utf-8'))
-          manifest_sha=current['active_candidate']['current_source_manifest_sha256']
-          installer=Path('release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip')
+          manifest_sha=hashlib.sha256(Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_bytes()).hexdigest()
+          if manifest_sha!='5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4':
+              raise SystemExit('FAIL unexpected 6.72.171 source manifest '+manifest_sha)
+          installer=Path('release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.171.zip')
           installer_sha=hashlib.sha256(installer.read_bytes()).hexdigest()
           expected=Path('/tmp/installer.sha256').read_text(encoding='utf-8').split()[0]
-          if installer_sha != expected:
-              raise SystemExit(f'FAIL final installer SHA changed after fresh verification: {installer_sha} != {expected}')
+          if installer_sha!=expected: raise SystemExit('FAIL final installer SHA changed after fresh verification')
 
-          gate_rationale={
-            'manual_single_upload_multi_provider_import':'CURRENT_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_GATE_PLUS_EXISTING_LOCAL_IMPORT_REGRESSIONS',
-            'explicit_scope_product_deals_partner_analytics':'CURRENT_WORDPRESS_MARIADB_PROVIDER_NUMBERS_DEAL_POSITIVE_NEGATIVE_GATE',
-            'old_state_reproduction_negative':'IMMUTABLE_HISTORICAL_NEGATIVE_BASELINE_REUSED_ONLY_AS_HISTORICAL_FAILURE_EVIDENCE',
-            'same_state_rootfix_positive':'CURRENT_6_72_170_FRONTEND_PERFORMANCE_ROOTFIX_POSITIVE_NEGATIVE_PLUS_CURRENT_CHECKPOINT_ASSERTIONS',
-            'counterstates_fail_closed':'CURRENT_6_72_170_FRONTEND_PERFORMANCE_ROOTFIX_NEGATIVE_GATE_PLUS_CURRENT_FAIL_CLOSED_SOURCE_ASSERTIONS',
-            'complete_selection_materialization_public_gate':'CURRENT_CRITICAL_SELECTION_COVERAGE_CHECKPOINT_FUNCTIONS_BYTE_IDENTICAL_TO_6_72_166_PLUS_CURRENT_WORDPRESS_REGRESSION',
-            'relevant_historical_regressions':'CURRENT_PROVIDER_BANNER_QUERY_FRONTEND_REGRESSIONS_PLUS_HISTORICAL_EVIDENCE_ONLY_WHERE_DEPENDENCY_REMAINS_IDENTICAL',
-            'real_wordpress_mariadb_persistence_same_uuid':'CURRENT_6_72_170_WORDPRESS_MARIADB_TERMINAL_STATE_AND_STORAGE_REGRESSION_GATE',
-            'recovery_retry_failure_paths':'OBSOLETE_HISTORICAL_RECOVERY_PATHS_REMOVED; CURRENT_GENERIC_BUILD_FAIL_CLOSED_AND_TERMINAL_STATE_RULES_DIRECTLY_ASSERTED',
-            'mutation_sabotage':'CURRENT_MANIFEST_SOURCE_CHECK_PLUS_CURRENT_EXACT_DELTA_ASSERTION',
-            'fresh_unpack_exact_installer':'CURRENT_DETERMINISTIC_INSTALLER_FRESH_UNPACK_27_OF_27_PASS',
-            'source_zip_byte_identity':'CURRENT_SOURCE_TO_ZIP_BYTE_IDENTITY_27_OF_27_PASS',
-            'final_sha256':'CURRENT_FINAL_INSTALLER_SHA256_BOUND_AFTER_FRESH_VERIFY',
-            'otto_awin_automated_product_distribution':'CURRENT_OTTO_AWIN_REGRESSION_GATE_PASS',
-            'otto_awin_real_banner_source':'CURRENT_REAL_BANNER_SOURCE_REGRESSION_GATE_PASS',
-            'otto_awin_weighted_banner_distribution':'HISTORICAL_GATE_NAME_RETAINED_CURRENT_CONTRACT_IS_RELEVANCE_FIRST_STABLE_EVEN_DISTRIBUTION_NO_FIXED_QUOTAS_CURRENT_GATE_PASS',
-            'affiliate_6721_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_170_WORDPRESS_ACTIVATION_PASS',
-            'affiliate_6723_activation_smoke':'HISTORICAL_GATE_NAME_SUPERSEDED_BY_CURRENT_6_72_167_WORDPRESS_ACTIVATION_PASS',
-            'otto_awin_real_account_joined':'HISTORICAL_REAL_ACCOUNT_EVIDENCE_REUSED_PLUS_CURRENT_AWIN_IDENTITY_REGRESSION_PASS',
-            'otto_awin_local_gate':'HISTORICAL_LIVE_EVIDENCE_REUSED_PLUS_CURRENT_LOCAL_GATE_REGRESSION_PASS',
-            'otto_awin_real_run_started':'HISTORICAL_LIVE_RUN_EVIDENCE_REUSED_CURRENT_WORKER_REGRESSION_PASS',
-            'otto_awin_offers_stage':'HISTORICAL_LIVE_STAGE_EVIDENCE_REUSED_CURRENT_WORKER_REGRESSION_PASS',
-            'otto_awin_feed_fail_closed':'HISTORICAL_LIVE_FAIL_CLOSED_EVIDENCE_REUSED_CURRENT_SOURCE_GATE_REGRESSION_PASS',
-            'otto_awin_first_functional_plugin_test':'HISTORICAL_FAILURE_SUPERSEDED_BY_6_72_6_TO_6_72_8_FIX_EVIDENCE_AND_CURRENT_FULL_REGRESSION_PASS',
-            'otto_awin_large_feed_download':'HISTORICAL_LIVE_DOWNLOAD_EVIDENCE_REUSED_CURRENT_WORKER_REGRESSION_PASS',
-            'awin_6725_progress_wpcron_rootfix':'HISTORICAL_LIVE_PROGRESS_PASS_REUSED_CURRENT_AUTOMATION_REGRESSION_PASS',
-            'otto_awin_6726_relevance_prefilter':'HISTORICAL_POSITIVE_NEGATIVE_AND_LIVE_AUTOSTOP_EVIDENCE_REUSED_CURRENT_REGRESSION_PASS',
-            'otto_awin_6727_exact_run_cleanup':'HISTORICAL_6_72_7_FALSE_PASS_NOT_REUSED_AS_FINAL_AUTHORITY; SUPERSEDED_BY_6_72_8_AND_CURRENT_TESTS',
-            'otto_awin_6728_cleanup_provenance':'HISTORICAL_CORRECTED_POSITIVE_NEGATIVE_EVIDENCE_PLUS_CURRENT_CLEANUP_REGRESSION_PASS',
-          }
-
-          prior={}
-          for name,gate in current.get('required_release_gates',{}).items():
-              prior[name]={
-                  'status':gate.get('status'),
-                  'evidence_ref':gate.get('evidence_ref'),
-                  'source_manifest_sha256':gate.get('source_manifest_sha256'),
-              }
-
-          evidence_ref='release/affiliate-zentrale/evidence/affiliate_router_v672170_full_release_gate_20260930.md'
+          evidence_ref='release/affiliate-zentrale/evidence/affiliate_router_v672171_full_release_gate_20261001.md'
           ev=Path(evidence_ref)
           lines=[
-              '# Affiliate Router 6.72.170 – final combined release evidence',
-              '',
-              'Date: 2026-09-30',
+              '# Affiliate Router 6.72.171 – final combined release evidence','',
+              'Date: 2026-10-01',
               'Branch: affiliate-release-current',
               f'Workflow run: {os.environ.get("GITHUB_RUN_ID","")}',
               f'Tested head before release-binding-only commit: {os.environ.get("GITHUB_SHA","")}',
               f'Source manifest SHA-256: {manifest_sha}',
               f'Final installer SHA-256: {installer_sha}',
-              'Final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip',
-              '',
-              '## Current 6.72.170 combined gate',
-              '',
+              'Final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.171.zip','',
+              '## Current combined gate','',
               '- Exact source binding: PASS',
-              '- Exact delta versus released 6.72.169: PASS; only the bounded frontend-performance rootfix files and readme changed.',
+              '- Exact delta versus released 6.72.170: PASS; only main router, automation target-rank cache and eBay request-local cache changed.',
               '- PHP lint: 21/21 PASS',
-              '- Released 6.72.169 frontend/query behavior preserved outside the exact-GTIN rootfix: PASS',
-              '- Critical ranking/source/coverage/public-gate core byte-identical to released 6.72.169 where not in rootfix scope: PASS',
-              '- Obsolete eBay recovery/compatibility symbols absent: PASS',
-              '- OAuth test independent from channel pause; runtime pause remains fail-closed: PASS',
-              '- Terminal run age retirement WordPress/MariaDB positive/negative gate: PASS',
-              '- Ended eBay payload 7-day compaction WordPress/MariaDB positive/negative gate: PASS',
               '- Existing provider / Awin / OTTO / banner regressions: PASS',
-              '- WordPress 7.1.2 + MariaDB activation: PASS',
-              '- 6.72.169 -> 6.72.170 existing frontend query equivalence: PASS',
-              '- Product deals + partner analytics real WordPress/MariaDB gate: PASS',
-              '- Universal manual import real WordPress/MariaDB positive/negative gate: PASS',
+              '- WordPress 7.1.2 + MariaDB activation/regressions: PASS',
+              '- 6.72.170 -> 6.72.171 existing frontend query equivalence: PASS',
+              '- 6.72.170 exact-GTIN positive/negative rootfix regression: PASS',
+              '- Recovery sweep + housekeeping regression: PASS',
+              '- Product deals + partner analytics gate: PASS',
+              '- Universal manual import positive/negative gate: PASS',
               '- Frontend smoke: PASS',
-              '- Local frontend performance simulation run 36756734713: PASS; cold exact-GTIN 13.987 ms / 3 DB queries, repeat 0 DB queries, 6.72.169 LIKE-query median 196.371 ms on 6150 synthetic eBay source rows.',
+              '- Exact local A-B run 36839006440: PASS; functional 1:1; 393.694 ms -> 365.895 ms (7.06 %).',
+              '- 2012-row snapshot exact A-B run 36839006513: PASS; functional 1:1; total 1248.595 ms -> 249.597 ms (80.01 %), hub 71.20 %, leaf 89.87 % faster.',
               '- Deterministic installer file count: 27 PASS',
-              '- Fresh unpack: PASS',
               '- Source -> ZIP byte identity: 27/27 PASS',
-              '- Fresh-unpack PHP lint: 21/21 PASS',
-              '',
-              '## Historical evidence reuse rule',
-              '',
-              'Historical AFF039/AFF043/AFF044 write-recovery implementations remain removed from current runtime/admin authority. Their 6.72.168 cleanup/housekeeping behavior remains a regression gate. 6.72.170 additionally removes the 6.72.169 unindexed eBay exact-GTIN payload scan and is bound by positive/negative WordPress/MariaDB exact-identity tests plus the separate local performance simulation.',
-              'The historical gate name otto_awin_weighted_banner_distribution is retained only for governance compatibility. The current contract is relevance-first stable even distribution without fixed provider quotas or weekly rotation, and that current contract passed.',
-              'The historical 6.72.7 cleanup false-pass is not reused as release authority; the corrected 6.72.8 evidence and current regression are the authority for that behavior.',
-              '',
-              '## Required-gate binding',
-              ''
-          ]
-          for name in current.get('required_release_gates',{}):
-              rationale=gate_rationale.get(name)
-              if not rationale:
-                  raise SystemExit('FAIL missing rationale for gate '+name)
-              p=prior[name]
-              lines.append(f'- {name}: PASS — {rationale}; prior_status={p["status"]}; prior_evidence={p["evidence_ref"] or "NONE"}')
-          lines += [
-              '',
-              '## Result',
-              '',
+              '- Fresh-unpack PHP lint: 21/21 PASS','',
+              '## Result','',
               'FULL_COMBINED_RELEASE_GATE=PASS',
-              'RELEASE_CHECK_REQUIRED=YES',
-              'REAL_SERVER_READBACK_REQUIRED_AFTER_RELEASE=YES',
-              ''
+              'REAL_SERVER_READBACK_REQUIRED_AFTER_RELEASE=YES',''
           ]
           ev.write_text('\n'.join(lines),encoding='utf-8')
           evidence_sha=hashlib.sha256(ev.read_bytes()).hexdigest()
 
-          for name,gate in current.get('required_release_gates',{}).items():
+          for gate in current.get('required_release_gates',{}).values():
               gate['status']='PASS'
               gate['evidence_ref']=evidence_ref
               gate['evidence_sha256']=evidence_sha
               gate['source_manifest_sha256']=manifest_sha
 
           candidate=current['active_candidate']
+          candidate['version']='6.72.171'
           candidate['status']='RELEASED'
           candidate['release_allowed']=True
+          candidate['current_source_manifest_sha256']=manifest_sha
+          candidate['source_file_count']=27
           candidate['candidate_reference_artifact_sha256']=installer_sha
-          candidate['final_artifact_ref']='release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip'
+          candidate['final_artifact_ref']='release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.171.zip'
           candidate['final_artifact_sha256']=installer_sha
+          current['source_authority']['manifest_sha256']=manifest_sha
 
           state=current['execution_state']
           state['state']='FINAL_RELEASE_BOUND'
           state['authorized_next_action']='FINALIZE_RELEASE'
-          state['completion_condition']='RELEASE_CHECK_PASS_THEN_ONE_REAL_SERVER_READBACK'
-          state['after_completion_action']='ONE_REAL_SERVER_READBACK_THEN_RUN_SAME_DATABASE_PERFORMANCE_MEASUREMENT'
+          state['completion_condition']='RELEASE_CHECK_PASS_THEN_REAL_WORDPRESS_INSTALL_READBACK'
+          state['after_completion_action']='PLUGINS CURRENT: INSTALL 6.72.171, READ BACK, THEN SAME REAL PERFORMANCE DIAGNOSIS'
           state['authorized_change_prefixes']=[
               'release/affiliate-zentrale/evidence/',
               'release/affiliate-zentrale/artifacts/final/',
               'control/release-governance/CURRENT_RELEASE.json'
           ]
-
           current['generation']=int(current.get('generation',0))+1
           current_path.write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print('FINAL_EVIDENCE_SHA256 '+evidence_sha)
@@ -1003,10 +904,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
             control/release-governance/CURRENT_RELEASE.json \
-            release/affiliate-zentrale/evidence/affiliate_router_v672170_full_release_gate_20260930.md \
-            release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.170.zip
+            release/affiliate-zentrale/evidence/affiliate_router_v672171_full_release_gate_20261001.md \
+            release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.171.zip
           git diff --cached --check
-          git commit -m "release: finalize affiliate router 6.72.170 [skip ci]"
+          git commit -m "release: finalize affiliate router 6.72.171 [skip ci]"
           python3 control/release-governance/release_guard.py release-check
           git push origin HEAD:affiliate-release-current
           echo "FINAL_RELEASE_BINDING_PUSHED"
@@ -1014,7 +915,7 @@ jobs:
       - name: Upload combined full-gate evidence
         uses: actions/upload-artifact@v4
         with:
-          name: affiliate-router-672168-recovery-sweep-full-gate
+          name: affiliate-router-672171-category-product-performance-full-gate
           path: |
             /tmp/php-lint.log
             /tmp/base-query.json
@@ -1022,7 +923,7 @@ jobs:
             /tmp/product-deals-analytics-gate.txt
             /tmp/manual-import-gate.txt
             /tmp/recovery-sweep-housekeeping-gate.txt
-            /tmp/AFFILIATE_ZENTRALE_6.72.170.zip
+            /tmp/AFFILIATE_ZENTRALE_6.72.171.zip
             /tmp/installer.sha256
             /tmp/installer-php-lint.log
             /tmp/installer-unzip-test.log
