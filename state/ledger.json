@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 72,
+  "generation": 73,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -696,6 +696,11 @@
           "job_id": "K9-RESEARCH-4d44ba6a08c085fe",
           "path": "warehouse/research/K9-RESEARCH-4d44ba6a08c085fe.json",
           "sha256": "e892993beb7a3f12a9db2feca4f2fd17816b205eecd5a44b953696bdc752aa21"
+        },
+        "write": {
+          "job_id": "K9-WRITE-dafc5a820a1ebd11",
+          "path": "warehouse/write/K9-WRITE-dafc5a820a1ebd11.json",
+          "sha256": "61e2b8660b68afe1a044b74e855ae6367e58106920629c279c22d8b7fb1347d9"
         }
       },
       "revision": 0,
@@ -703,7 +708,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Wie longiert man ein Pferd mit einem Kappzaum?"
     }
