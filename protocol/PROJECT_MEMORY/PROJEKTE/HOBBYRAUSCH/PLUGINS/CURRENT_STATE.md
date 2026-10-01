@@ -3,60 +3,53 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-01
-STATUS: HD-001 V1.9.4 LIVE PASS · HD-002 V0.1.2 LIVE BLOCKED PLAN_HASH_MISSING · HD-002 V0.1.3 COMPLETE-WORKFLOW POS+NEG HARD PASS / LIVE-UPGRADE NÄCHSTES
+STATUS: HD-001 V1.9.4 LIVE PASS · HDTE LIVE PLAN_HASH_MISSING BLOCKED · HDTE V0.1.4 SERVER-SIDE RESUME COMPLETE-WORKFLOW POS+NEG HARD PASS / LIVE-UPGRADE NÄCHSTES
 
-## HD-001 – Kategorie-Workflow
+## HD-001
 
 `Affiliate-Portal Kategorie-Workflow V1.9.4`
 
-Live:
-- produktiver Buchbinden-Pilot deployed;
-- Schreiben und Readback erfolgreich;
-- Bestand bleibt stehen;
-- Owner-Handoff 7 Owner / 11 ARTICLE_ONLY / 11 gebunden.
+Live produktiv:
+Deployment + Readback PASS.
+Nicht zurückrollen.
 
-## HD-002 – Themenengine
+## HD-002
 
-Live:
-`0.1.2`
-
-Auto-Owner-Handoff und Baseline:
+Owner-Handoff und Gesamtbestand:
 PASS.
 
-Portalabgleich live:
-`BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
+Live Portalabgleich:
+`BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`.
 
-Root Cause:
-gültiger `NOT_AVAILABLE`-Redaktionsplan-Sentinel wurde als fehlender SHA behandelt.
+0.1.3 nicht live abgenommen, weil der Admin-Reentry noch vom Browser-JavaScript-Autostart abhing.
 
-## V0.1.3
+## V0.1.4
 
 Installer SHA:
-`5b3063577beb3e5dfb03799b6245f2b9aaf90f338c70e86708674e5999762b2a`
+`02d52e326cce990833fb6661885d3ba5e30ab6461af76e8b0a2ebdcc3b78c12d`
 
-Kompletter Workflow lokal simuliert:
-- exakt liveähnlicher Zustand mit 0 Themen / 4 Kategorien / 1 Familie / kein Redaktionsplan → COMPLETE;
-- alter 0.1.2-BLOCKED-Job → gleiche persistierte Daten unter 0.1.3 requestweise bis COMPLETE;
-- Stresslauf 4 Themen → COMPLETE;
-- vorhandener Redaktionsplan → COMPLETE.
+Fix:
+exakt bekannter BLOCKED-Zustand wird beim Öffnen der Übersicht serverseitig validiert und wieder auf RUNNING gesetzt.
+
+Kompletter lokaler Workflow:
+- exakter 0-Themen-Livezustand;
+- Admin server-side resume;
+- jeder Folgeschritt eigener Request;
+- COMPLETE.
+
+Weitere Positivfälle:
+missing legacy plan field / fresh workflow / 4 Themen / vorhandener Plan → COMPLETE.
 
 Negativ:
-- upstream not deployed;
-- malformed NOT_AVAILABLE;
-- fehlender echter Hash;
-- staged artifact manipuliert;
-- finale Struktur driftet;
-→ jeweils fail-closed BLOCKED.
+malformed absent plan / actual plan present / structure mismatch / wrong error / wrong phase / missing hash / tampered stage / final structure drift / upstream not deployed → fail-closed.
 
-Paket:
-- Source PHP 80/80;
-- Fresh Installer PHP 80/80;
-- Source↔Installer 135/135;
-- 4 Dateien gegenüber 0.1.2 geändert;
-- Storage/Safe-Migration/Owner-Handoff sonst unverändert.
+Fresh Installer:
+- 80/80 PHP PASS;
+- 135/135 source-installer parity;
+- kompletter Pos/Neg-Test wiederholt PASS.
 
 ## NEXT ACTION
 
-HDTE 0.1.3 über 0.1.2 installieren → Themenengine-Übersicht öffnen → vorhandenen Job automatisch bis `Portalabgleich COMPLETE` laufen lassen.
+HDTE 0.1.4 installieren → Themenengine-Übersicht öffnen.
 
-Keine neue Bestandserfassung.
+Kein neuer Gesamtbestand.
