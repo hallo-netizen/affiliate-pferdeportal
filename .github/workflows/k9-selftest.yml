@@ -222,6 +222,14 @@ jobs:
 
           def prepare(dst, positive):
               shutil.copytree(root,dst,dirs_exist_ok=True)
+              # This regression proves the NEW integrity-only PSERC path on one
+              # article that already contains complete pre-check source traces.
+              # The finished 16-article legacy batch contains historical rows
+              # whose traces were only completed by the old mutating PSERC step.
+              # Do not rewrite those completed products just to test the new path.
+              ledger_copy=json.loads((dst/"state/ledger.json").read_text())
+              ledger_copy["items"]=[copy.deepcopy(item)]
+              (dst/"state/ledger.json").write_text(json.dumps(ledger_copy,ensure_ascii=False,indent=2)+"\n")
               rp_path=dst/item["products"]["research"]["path"]
               ap_path=dst/item["products"]["repair"]["path"]
               rpkg=json.loads(rp_path.read_text())
