@@ -8,6 +8,8 @@ import k9_lt68
 import k9_ppm679
 import k9_rule_guard
 import k9_table_guard
+sys.path.insert(0,str(HERE.parent.resolve()))
+import k9_writer_plan
 
 class CheckError(RuntimeError):
     pass
@@ -48,13 +50,13 @@ def source_trace_count_findings(html, fact_pack):
     ]
 
 
-def reuse_or_run_lt(article, html, jar_path):
+def reuse_or_run_lt(article, html, jar_path, authoritative_words=None):
     preflight=article.get("lt68_preflight_result")
     if not isinstance(preflight,dict):
         with tempfile.TemporaryDirectory(prefix="k9-check-lt68-") as td:
             p=Path(td)/"article.html"
             p.write_text(html,encoding="utf-8")
-            return k9_lt68.run(Path(jar_path),p)
+            return k9_lt68.run(Path(jar_path),p,authoritative_words=authoritative_words)
     article_sha=hashlib.sha256(html.encode("utf-8")).hexdigest()
     evidence=preflight.get("language_evidence")
     checked=k9_lt68.ppm_visible_language_text(html)
@@ -119,7 +121,10 @@ def run_job(job_path, jar_path, ppm_path):
         if article.get("writing_rules_sha256")!=writing_result.get("writing_rules_sha256"):
             raise CheckError("K9_CHECK_WRITING_RULES_BINDING_MISMATCH")
 
-        lt_result=reuse_or_run_lt(article,html,jar_path)
+        lt_result=reuse_or_run_lt(
+            article,html,jar_path,
+            authoritative_words=k9_writer_plan.authoritative_domain_terms(item.get("metadata") or {},research)
+        )
         with tempfile.TemporaryDirectory(prefix="k9-check-") as td:
             root=Path(td)
             binding=ppm_item.get("quality_binding")
