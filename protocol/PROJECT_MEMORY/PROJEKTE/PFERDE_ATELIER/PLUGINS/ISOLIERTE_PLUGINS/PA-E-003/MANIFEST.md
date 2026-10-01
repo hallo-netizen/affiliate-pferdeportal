@@ -3,10 +3,10 @@
 PLUGIN_ID: PA-E-003
 NAME: Affiliate-Zentrale (Portal-kompatibel)
 
-LETZTER_EXPLIZITER_LIVE_VERSIONSREADBACK: 6.72.167
+LETZTER_EXPLIZITER_LIVE_VERSIONSREADBACK: 6.72.170
 LETZTER_EXPLIZITER_LIVE_STATUS: AKTIV
 LIVE_UPDATE_REF: PU-20260930-003
-LIVE_READBACK: Nutzer bestätigte 6.72.167 aktiv; eBay OAuth danach erfolgreich. Spätere Performance-Diagnosen wurden geliefert, enthalten selbst aber keine Plugin-Versionsnummer und werden deshalb nicht als Versions-Readback umgedeutet.
+LIVE_READBACK: WordPress-Uploadvergleich des Nutzers am 01.10.2026 zeigt `Aktuell 6.72.170`; das daneben hochgeladene 6.72.169-Paket war veraltet und wurde verworfen.
 
 AKTUELLER_TECHNISCH_FREIGEGEBENER_RELEASE: 6.72.171
 SOURCE_HEAD: ad4db0c34552667a9d398d4b74cb7d8b7130f03a
