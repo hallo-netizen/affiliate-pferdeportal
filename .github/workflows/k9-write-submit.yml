@@ -44,9 +44,73 @@ jobs:
           fi
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
           out="/tmp/${job_id}.submission.json"
+          set +e
           python3 k9_write_packager.py "$draft" \
             --lt-jar /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar \
-            --output "$out"
+            --output "$out" \
+            2> /tmp/K9_WRITER_PREFLIGHT_ERROR.json
+          rc=$?
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            JOB_ID="$job_id" python3 - <<'PY'
+          import json,os,pathlib
+          raw=pathlib.Path('/tmp/K9_WRITER_PREFLIGHT_ERROR.json').read_text(encoding='utf-8').strip()
+          try:
+              err=json.loads(raw)
+          except Exception:
+              err={'contract':'K9_WRITE_PACKAGER_V1','status':'BLOCKED','reason':raw or 'WRITER_PREFLIGHT_FAILED'}
+          job=json.load(open('runtime/CURRENT_JOB.json'))
+          findings={
+              'contract':'K9_WRITER_PREFLIGHT_FINDINGS_V1',
+              'status':'REPAIR_REQUIRED',
+              'job_id':os.environ['JOB_ID'],
+              'station':job.get('station'),
+              'item_ids':job.get('item_ids'),
+              'all_independent_findings_collected':True,
+              'packager_error':err,
+              'repair_rule':'REPAIR_ALL_REPORTED_FINDINGS_IN_ONE_DRAFT_UPDATE',
+              'publish_allowed':False
+          }
+          pathlib.Path('runtime/WRITER_PREFLIGHT_FINDINGS.json').write_text(json.dumps(findings,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          current={
+              'contract':'K9_CURRENT_STATE_V3',
+              'role':'SOLE_CURRENT_AUTHORITY',
+              'concept':'K9',
+              'branch':'konzept9/greenfield-20260929',
+              'status':'OPEN_CHAT_WORKER_JOB',
+              'operational_mode':'EXECUTE_RUNTIME_CHAT_ENTRY_ONLY',
+              'active_job':{
+                  'job_id':job.get('job_id'),
+                  'station':job.get('station'),
+                  'article_title':(job.get('items') or [{}])[0].get('title'),
+                  'item_id':(job.get('items') or [{}])[0].get('item_id'),
+                  'runtime_entry':'runtime/CHAT_ENTRY.json',
+                  'job_path':'runtime/CURRENT_JOB.json'
+              },
+              'first_open_blocker':{
+                  'code':'WRITER_PREFLIGHT_REPAIR_REQUIRED',
+                  'findings_ref':'runtime/WRITER_PREFLIGHT_FINDINGS.json'
+              },
+              'next_action':'REPAIR_ALL_WRITER_PREFLIGHT_FINDINGS_IN_ONE_DRAFT_UPDATE',
+              'allowed_action':'EXECUTE_RUNTIME_CHAT_ENTRY_ONLY',
+              'route_lock':'EXACT_RUNTIME_CHAT_ENTRY_ONLY',
+              'supervisor_actions_allowed':False,
+              'code_change_allowed':False,
+              'all_other_actions':'DENY',
+              'chat_may_route':False,
+              'publish_allowed':False
+          }
+          pathlib.Path('CURRENT_STATE.json').write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+            git config user.name 'k9-write-packager-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add runtime/WRITER_PREFLIGHT_FINDINGS.json CURRENT_STATE.json
+            git diff --cached --quiet || git commit -m 'K9: persist complete writer preflight findings'
+            git push
+            cat /tmp/K9_WRITER_PREFLIGHT_ERROR.json >&2
+            exit "$rc"
+          fi
+          rm -f runtime/WRITER_PREFLIGHT_FINDINGS.json
           python3 k9_engine.py accept "$out" | tee K9_WRITE_ACCEPT_RESULT.json
           test ! -f runtime/CURRENT_JOB.json
           test ! -f runtime/CHAT_ENTRY.json
