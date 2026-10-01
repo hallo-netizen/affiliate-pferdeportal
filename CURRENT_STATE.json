@@ -9,10 +9,10 @@
   "first_open_blocker": null,
   "next_action": "WAIT_FOR_EXPLICIT_NEW_WORDPRESS_METADATA_BATCH_FOR_OPTIMIZED_REAL_VALIDATION",
   "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP_PLUS_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT",
+    "baseline": "LATEST_REAL_E2E_STOP_PLUS_EXTENDED_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT",
     "optimization_closeout_ref": "protocol/K9_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT_20261001.md",
     "optimization_status": "IMPLEMENTED_AND_TESTED",
-    "persistent_selftest_run_id": "36904605031",
+    "persistent_selftest_run_id": "36904919863",
     "real_batch_read_only_verification_run_id": "36904542706",
     "preserve_existing_station_products": true,
     "preserve_terminal_evidence": true,
@@ -25,10 +25,12 @@
     ],
     "optimized_guards": [
       "COMPILED_WRITER_ACCEPTANCE_PLAN",
+      "CONCRETE_FIRST_PASS_WORD_BLUEPRINT",
       "COLLECT_ALL_WRITER_FINDINGS",
       "COLLECT_ALL_STRUCTURAL_FINDINGS",
       "AUTHORITATIVE_DOMAIN_TERMS_FOR_LT68",
       "PERSISTED_WRITER_PREFLIGHT_FINDINGS",
+      "DETERMINISTIC_MACHINE_OWNED_SOURCE_TRACES",
       "TERMINAL_READINESS_PREFLIGHT"
     ],
     "next_real_batch_measurements": [
