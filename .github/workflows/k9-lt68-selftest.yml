@@ -75,10 +75,31 @@ jobs:
               raise SystemExit('LT68_BAD_WRITER_DRAFT_NOT_BLOCKED')
 
           good=json.loads(Path('warehouse/repair/K9-REPAIR-4b66ee49083f60b1.json').read_text())['results'][0]['article_product']['content_html']
-          if not k9_write_packager.lt68_writer_preflight(good,jar):
+          good_result=k9_write_packager.lt68_writer_preflight(good,jar)
+          if good_result.get('status')!='PASS':
               raise SystemExit('LT68_REPAIRED_WRITER_DRAFT_NOT_PASS')
+
+          import sys
+          sys.path.insert(0,str(Path('quality').resolve()))
+          import k9_check
+          reused=k9_check.reuse_or_run_lt({'lt68_preflight_result':good_result},good,Path('/tmp/this-jar-must-not-be-used.jar'))
+          if reused.get('article_sha256')!=good_result.get('article_sha256'):
+              raise SystemExit('LT68_PREFLIGHT_REUSE_FAILED')
+
+          tampered=json.loads(json.dumps(good_result))
+          tampered['article_sha256']='0'*64
+          try:
+              k9_check.reuse_or_run_lt({'lt68_preflight_result':tampered},good,Path('/tmp/this-jar-must-not-be-used.jar'))
+          except k9_check.CheckError as exc:
+              if 'CONTENT_BINDING_INVALID' not in str(exc):
+                  raise
+          else:
+              raise SystemExit('LT68_TAMPERED_PREFLIGHT_NOT_BLOCKED')
+
           print('WRITER_LT68_NEGATIVE_BLOCKED=1')
           print('WRITER_LT68_POSITIVE_PASS=1')
+          print('WRITER_LT68_REUSE_PASS=1')
+          print('WRITER_LT68_TAMPER_BLOCKED=1')
           PY
       - name: Wrong jar hash must fail closed
         shell: bash
