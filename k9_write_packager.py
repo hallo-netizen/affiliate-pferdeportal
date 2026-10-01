@@ -76,8 +76,6 @@ def ensure_all_fact_traces(markup, research):
         source_title=_trace_source_label(research,source_id)
         if not source_hash or not source_title:
             raise PackError("PPM_SOURCE_TRACE_BINDING_MISSING:"+fid)
-        if _placeholder_source_id(source_id):
-            continue
         statement_tokens=set(re.findall(r"[a-z0-9äöüß]+",str(claim.get("statement") or "").casefold()))
         candidates=[]
         for m in re.finditer(r"<p\b[^>]*>.*?</p>",markup,re.I|re.S):
@@ -157,7 +155,7 @@ def validate_html(markup, article_type, metadata, research, rules):
             raise PackError("PPM_SOURCE_TRACE_HASH_MISMATCH:"+fid)
     required_trace_ids=set(
         str(x.get("fact_id") or "") for x in claims
-        if isinstance(x,dict) and str(x.get("fact_id") or "") and not _placeholder_source_id(x.get("source_id"))
+        if isinstance(x,dict) and str(x.get("fact_id") or "")
     )
     if not required_trace_ids.issubset(set(trace_fact_ids)):
         missing=sorted(required_trace_ids-set(trace_fact_ids))

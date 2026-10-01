@@ -620,6 +620,8 @@ def _validate_research_product(row, job_item):
         title = str(source.get("title") or "").strip()
         if not sid or not url or not title:
             raise K9Error("RESEARCH_SOURCE_REQUIRED_FIELD_MISSING")
+        if any(token in sid.casefold() for token in ("test_","dummy","example","placeholder")):
+            raise K9Error("RESEARCH_SOURCE_ID_PLACEHOLDER_FORBIDDEN")
         source_ids.append(sid)
     if len(source_ids) != len(set(source_ids)):
         raise K9Error("RESEARCH_SOURCE_ID_DUPLICATE")
@@ -636,6 +638,8 @@ def _validate_research_product(row, job_item):
         raise K9Error("RESEARCH_FACT_PACK_REQUIRED_FIELD_MISSING")
     if pack.get("status") != "SOURCE_VERIFIED_PRODUCTION_READY" or pack.get("production_readiness_status") != "SOURCE_VERIFIED_PRODUCTION_READY":
         raise K9Error("RESEARCH_FACT_PACK_NOT_PRODUCTION_READY")
+    if pack.get("placeholder_content_status") != "PASS":
+        raise K9Error("RESEARCH_PLACEHOLDER_CONTENT_NOT_PASS")
     fact_ids = pack.get("fact_ids")
     claims = pack.get("claims")
     if not isinstance(fact_ids, list) or not fact_ids or not isinstance(claims, list) or not claims:

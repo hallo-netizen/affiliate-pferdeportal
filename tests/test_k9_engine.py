@@ -301,6 +301,16 @@ class K9Tests(unittest.TestCase):
         self.assertEqual(before,k.load_json(k.LEDGER))
         self.assertTrue(k.CURRENT_JOB.exists())
 
+    def test_research_placeholder_source_id_is_blocked(self):
+        job=k.prepare("research",1)["job"]
+        row=self.research_row("a")
+        row["research_product"]["sources"][0]["source_id"]="TEST_PLACEHOLDER"
+        row["research_product"]["fact_pack"]["claims"][0]["source_id"]="TEST_PLACEHOLDER"
+        core=dict(row["research_product"]); core.pop("product_sha256")
+        row["research_product"]["product_sha256"]=k.stable(core)
+        with self.assertRaisesRegex(k.K9Error,"RESEARCH_SOURCE_ID_PLACEHOLDER_FORBIDDEN"):
+            k.accept(self.submission(job,[row],"placeholder-source.json"))
+
     def test_research_unknown_source_is_blocked(self):
         job=k.prepare("research",1)["job"]
         row=self.research_row("a")
