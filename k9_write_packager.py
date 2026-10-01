@@ -588,6 +588,10 @@ def build(draft_path,lt_jar=None):
                 "title":row.get("title"),
                 "content_html":row.get("content_html")
             })
+    results=build_rows(job,entry,rules,rules_sha,drafts,lt_jar=lt_jar)
+    return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],"results":results}
+
+def build_rows(job,entry,rules,rules_sha,drafts,lt_jar=None):
     results=[]
     item_errors=[]
     for row in drafts:
@@ -600,7 +604,7 @@ def build(draft_path,lt_jar=None):
             "WRITER_BATCH_ALL_FINDINGS:DETAILS="
             +json.dumps(item_errors,ensure_ascii=False,sort_keys=True,separators=(",",":"))
         )
-    return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],"results":results}
+    return results
 
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("draft"); ap.add_argument("--lt-jar"); ap.add_argument("--output",required=True); ns=ap.parse_args()
