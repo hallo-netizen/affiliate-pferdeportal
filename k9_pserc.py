@@ -78,9 +78,24 @@ def verify_existing_quality(article,checkrow):
     if not isinstance(writing,dict) or writing.get("status")!="PASS" or writing.get("content_sha256")!=sha: raise Blocked("PSERC_PRIOR_WRITING_EVIDENCE_INVALID")
     return sha,lt,ppm,writing
 
-def latest_products(ledger,root):
+def active_intake_items(root,ledger):
     items=ledger.get("items")
     if not isinstance(items,list) or not items: raise Blocked("LEDGER_ITEMS_INVALID")
+    ledger_ids=[str(x.get("item_id") or "") for x in items]
+    candidates=[]
+    for candidate in sorted((Path(root)/"warehouse/intake").glob("K9-INTAKE-*.json")):
+        data=load(candidate); rows=data.get("items")
+        if not isinstance(rows,list) or not rows: continue
+        ids=[str(x.get("item_id") or "") for x in rows if isinstance(x,dict)]
+        if len(ids)!=len(rows) or any(not x for x in ids) or len(ids)>len(ledger_ids): continue
+        if ids==ledger_ids[-len(ids):]: candidates.append((candidate,data,ids))
+    if len(candidates)!=1: raise Blocked("ACTIVE_INTAKE_SUFFIX_NOT_UNIQUE")
+    candidate,data,ids=candidates[0]
+    by_id={str(x.get("item_id") or ""):x for x in items}
+    return candidate,data,[by_id[x] for x in ids]
+
+def latest_products(ledger,root):
+    _,_,items=active_intake_items(root,ledger)
     out=[]
     for item in items:
         if item.get("stages",{}).get("check")!="DONE": raise Blocked("ARTICLE_NOT_CHECK_PASS")
