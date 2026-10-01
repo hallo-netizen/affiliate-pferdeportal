@@ -1,7 +1,7 @@
 # PLUGINS – CURRENT STATE
 
 STAND: 2026-10-01
-STATUS: AFFILIATE-PERFORMANCE-ROOTFIX 6.72.171 LOKAL 1:1 BEWIESEN / INSTALLATION + REALER READBACK OFFEN / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
+STATUS: AFFILIATE-PERFORMANCE-LIVE-NACHMESSUNG DEUTLICH VERBESSERT / AFFILIATE-PLUGIN AKTIV BELEGT / EXAKTER 6.72.171-VERSIONS-READBACK OFFEN / KEINE ZWEITE FACH-/RELEASE-WAHRHEIT
 
 ## AUTORITÄT
 
@@ -63,15 +63,21 @@ Belastbarer Stand für PA-E-003:
 - finaler Full-Gate Run `36842612555`: **SUCCESS**;
 - finale Release-Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672171_full_release_gate_20261001.md`;
 - technische Release-Autorität: **6.72.171 RELEASED / release_allowed=true**;
+- neue reale Performance-Diagnose Safe 2.3.0 vom **01.10.2026 10:30–10:31 UTC** liegt vor; Messmodus `PASSIVE_NO_FILTERS`;
+- die Diagnose führt `affiliate-portal-router/pferdeportal-affiliate-router.php` als **aktiv** auf, enthält aber selbst **keine Plugin-Versionsnummer**;
+- reale Zeiten dieser Diagnose: `/ausruestung/` **1,560219 s**, `/ausruestung/ausruestung-sattel/` **2,308272 s**, `.../pferdesaettel/` **4,634054 s**, `.../trensen/` **4,537820 s**;
+- gegen den zuvor dokumentierten 6.72.170-Befund (~1,65 s / ~8,85 s / ~9,09 s / ~8,62 s) sind alle vier Vergleichsseiten schneller; die drei tiefen Kategorieproduktseiten verbessern sich um ca. **73,9 % / 49,0 % / 47,4 %**;
+- alle vier Vergleichsrequests liefern **HTTP 200** und `last_php_error = null`;
+- diese Messung belegt die reale Performanceverbesserung und den aktiven Affiliate-Router, darf aber ohne separaten Versions-Readback nicht allein als exakter **6.72.171-Versionbeleg** ausgegeben werden;
 - isolierter Repository-`CURRENT.zip`-Sync bleibt separat BLOCKED, solange der verfügbare Dokumentationsweg keinen bytegenauen Binärtransfer belegt; keine Ersatz-ZIP erfinden.
 
 ERSTER OFFENER PUNKT:
-**6.72.170 ist aktuell real installiert; 6.72.171 ist technisch RELEASED, aber noch nicht als reale WordPress-Installation readback-bestätigt.**
+**Der Affiliate-Router ist in der neuen realen Diagnose aktiv und die Performanceverbesserung ist belegt; die Diagnose enthält jedoch keine Versionsnummer. Deshalb fehlt nur noch der exakte WordPress-Versions-Readback, dass aktuell 6.72.171 installiert ist.**
 
 GENAU EINE NEXT ACTION:
-`INSTALL_AFFILIATE_ZENTRALE_6_72_171_AND_READBACK`.
+`READBACK_AFFILIATE_ZENTRALE_VERSION_6_72_171_ONLY`.
 
-Den final gegateten 6.72.171-Installer mit SHA-256 `dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba` installieren und nur Version/Aktivstatus readbacken. Erst nach diesem Readback wird als Folgeaktion dieselbe reale Performance-Diagnose wiederholt; kein weiterer Codefix vor dem Live-Readback.
+Nur den WordPress-Pluginstand der Affiliate-Zentrale readbacken: **Version 6.72.171 sichtbar?** Der Aktivstatus ist durch die neue Diagnose bereits belegt. Kein neuer Codefix, kein Gesamtbestandsabgleich und keine erneute DB-Bereinigung vor diesem Versionsbeleg. Die bereits vorliegende Performance-Nachmessung bleibt als Live-Evidence gebunden und wird nicht aus Vorsicht neu erfunden oder durch eine neue Pluginversion ersetzt.
 
 ### PSTE-KANDIDATENDELTA NACH ABSCHLUSSPRÜFUNG 2026-09-30
 
