@@ -34,8 +34,19 @@ jobs:
           echo "item_count=$item_count" >> "$GITHUB_OUTPUT"
           draft="writer_drafts/${job_id}.json"
           test -f "$draft"
+          mkdir -p /tmp/k9-lt68
+          if [ ! -f /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar ]; then
+            curl --fail --location --retry 3 \
+              https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
+              -o /tmp/k9-lt68/LanguageTool-6.8.zip
+            echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k9-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+            unzip -q /tmp/k9-lt68/LanguageTool-6.8.zip -d /tmp/k9-lt68
+          fi
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
           out="/tmp/${job_id}.submission.json"
-          python3 k9_write_packager.py "$draft" --output "$out"
+          python3 k9_write_packager.py "$draft" \
+            --lt-jar /tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar \
+            --output "$out"
           python3 k9_engine.py accept "$out" | tee K9_WRITE_ACCEPT_RESULT.json
           test ! -f runtime/CURRENT_JOB.json
           test ! -f runtime/CHAT_ENTRY.json
