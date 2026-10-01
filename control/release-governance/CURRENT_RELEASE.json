@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 162,
+  "generation": 163,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,16 +36,16 @@
   },
   "active_candidate": {
     "version": "6.72.171",
-    "status": "RELEASED",
-    "release_allowed": true,
+    "status": "CANDIDATE",
+    "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "5094f6df73c172b01819294d3dd455002fa244aa9676da0ebbbb4b058530dda4",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714",
-    "final_artifact_ref": "CONVERSATION_ARTIFACT:AFFILIATE_ZENTRALE_6.72.171.zip",
-    "final_artifact_sha256": "769bcf21e7b89da68bc97cd32a284124174ad1e712575a16c4b55d5db8298714"
+    "candidate_reference_artifact_sha256": null,
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -364,8 +364,8 @@
   "execution_state": {
     "state": "WORKING",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "AFFILIATE 6.72.171 FINAL FULL GATE ONLY: reuse the exact locally proven source; no source changes; validate existing provider/storage/import regressions, 6.72.170->6.72.171 equivalence, fresh installer and release binding.",
-    "completion_condition": "FULL 6.72.171 RELEASE GATE PASS THEN FINAL INSTALLER REPOSITORY BINDING",
+    "bound_user_scope_action": "AFFILIATE 6.72.171 FINAL FULL GATE ONLY: exact source already proven in local A-B; no further source change.",
+    "completion_condition": "FULL 6.72.171 RELEASE GATE PASS THEN FINAL INSTALLER BINDING",
     "after_completion_action": "PLUGINS CURRENT: INSTALL 6.72.171 AND READBACK",
     "no_optional_detours": true,
     "sequence": 44,
