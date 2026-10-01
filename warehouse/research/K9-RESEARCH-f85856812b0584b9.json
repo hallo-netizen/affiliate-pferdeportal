@@ -23,7 +23,9 @@
           "claim_register_hash": "4fe8006208b98cdbe593c4f141469a28917e01489bf850cbf682cd5934516d62",
           "claims": [
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "d73d59c306b20f11819eb5c40584a8b562ece85ba20bf4626ce7704d9b9b9e7f",
               "fact_id": "FACT-HEUTASCHE-001",
@@ -34,7 +36,9 @@
               "time_scope": "allgemeine Produktauswahl"
             },
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "3f6b2611f3f48e223ec9676c1a8e5ad4f090a4f26d7d598b1e0386946712c6f0",
               "fact_id": "FACT-HEUTASCHE-002",
@@ -45,7 +49,9 @@
               "time_scope": "allgemeine Produktauswahl"
             },
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "d65e5ed644df0c1ff5898af330b1d1053cd49cbbfdf55d8a5c692770f56056b4",
               "fact_id": "FACT-HEUTASCHE-003",
@@ -56,7 +62,9 @@
               "time_scope": "allgemeine Produktauswahl"
             },
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "d02011f3988c47d4bdb8a4a440e266615efd6ccd761e3bf5e0b6a8ec3a86926d",
               "fact_id": "FACT-HEUTASCHE-004",
@@ -67,7 +75,9 @@
               "time_scope": "allgemeine Produktauswahl"
             },
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "2fb7f0e6cd38dd47f290849e978798d12279ad3732efce9bb3cddec2eb963f18",
               "fact_id": "FACT-HEUTASCHE-005",
@@ -78,7 +88,9 @@
               "time_scope": "allgemeine Produktauswahl"
             },
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "6525466b712afd337052544305d31785c0b683dc306ce547d8aceccababa28df",
               "fact_id": "FACT-HEUTASCHE-006",
@@ -89,7 +101,9 @@
               "time_scope": "allgemeine Produktauswahl"
             },
             {
-              "article_types": ["Beratung"],
+              "article_types": [
+                "Beratung"
+              ],
               "claim_status": "FULLY_SUPPORTED",
               "evidence_text_sha256": "3e7ae76df27e2f98ae449143d585f2b4e08781c2dca210aa453fe4bddb907dc3",
               "fact_id": "FACT-HEUTASCHE-007",
@@ -124,15 +138,42 @@
           "title_scope": "heutaschen_fuer_pferde"
         },
         "portal_links": [
-          {"anchor": "Fütterung", "href": "/fuetterung/", "role": "parent_category", "section_id": "criteria"},
-          {"anchor": "Raufutter", "href": "/fuetterung/fuetterung-raufutter/", "role": "semantic_related", "section_id": "decision"},
-          {"anchor": "Heutaschen", "href": "/fuetterung/fuetterung-raufutter/heutaschen/", "role": "further_information", "section_id": "further_information"}
+          {
+            "anchor": "Fütterung",
+            "href": "/fuetterung/",
+            "role": "parent_category",
+            "section_id": "criteria"
+          },
+          {
+            "anchor": "Raufutter",
+            "href": "/fuetterung/fuetterung-raufutter/",
+            "role": "semantic_related",
+            "section_id": "decision"
+          },
+          {
+            "anchor": "Heutaschen",
+            "href": "/fuetterung/fuetterung-raufutter/heutaschen/",
+            "role": "further_information",
+            "section_id": "further_information"
+          }
         ],
         "product_sha256": "0203d5fd02f63c5ec291217337f0d2156fe407b2ce049e8da68ad4102f3df982",
         "sources": [
-          {"source_id": "SRC-UMN-HAYNET-20261001", "title": "Using slow feed hay nets", "url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/using-slow-feed-hay-nets"},
-          {"source_id": "SRC-UCONN-SLOWFEEDERS-20261001", "title": "Weight Management in Horses – Slow Feeders", "url": "https://extension.uconn.edu/publication/weight-management-in-horses-slow-feeders/"},
-          {"source_id": "SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001", "title": "Horse Slow Feeder Safety", "url": "https://thehorse.com/198806/horse-slow-feeder-safety/"}
+          {
+            "source_id": "SRC-UMN-HAYNET-20261001",
+            "title": "Using slow feed hay nets",
+            "url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/using-slow-feed-hay-nets"
+          },
+          {
+            "source_id": "SRC-UCONN-SLOWFEEDERS-20261001",
+            "title": "Weight Management in Horses – Slow Feeders",
+            "url": "https://extension.uconn.edu/publication/weight-management-in-horses-slow-feeders/"
+          },
+          {
+            "source_id": "SRC-THEHORSE-SLOWFEEDER-SAFETY-20261001",
+            "title": "Horse Slow Feeder Safety",
+            "url": "https://thehorse.com/198806/horse-slow-feeder-safety/"
+          }
         ]
       }
     }
