@@ -30,6 +30,15 @@ class WriterPlanTests(unittest.TestCase):
         self.assertEqual(plan["word_budget"]["hard_total_min"],750)
         self.assertEqual(plan["word_budget"]["hard_total_max"],900)
         self.assertEqual(plan["fact_binding"]["source_trace_per_fact_exact"],1)
+        self.assertEqual(plan["fact_binding"]["source_trace_owner"],"PACKAGER_DETERMINISTIC")
+        self.assertFalse(plan["fact_binding"]["writer_emits_source_trace_tags"])
+        bp=plan["draft_blueprint"]
+        self.assertGreaterEqual(
+            len(bp["normal_blocks"])*bp["normal_block_target_words"][0]
+            +bp["conclusion_target_words"][0]
+            +bp["further_information_target_words"][0],
+            bp["non_table_target_words_min"]
+        )
         self.assertEqual(plan["portal_links"][0]["section_id"],"answer")
         self.assertEqual(plan["portal_links"][1]["section_id"],"details")
         self.assertEqual(plan["table"]["other_cells_hard_max_words"],7)
@@ -37,6 +46,20 @@ class WriterPlanTests(unittest.TestCase):
         self.assertIn("Longierpeitsche",plan["language"]["authoritative_domain_terms"])
         self.assertIn("Longierpeitschen",plan["language"]["authoritative_domain_terms"])
         self.assertEqual(len(plan["plan_sha256"]),64)
+
+
+    def test_safe_blueprint_guarantees_non_table_floor_for_all_article_types(self):
+        for article_type in ("FAQ","Beratung","Vergleich","Pflege"):
+            meta=dict(META); meta["article_type"]=article_type
+            plan=p.build(meta,RESEARCH,PPM)
+            bp=plan["draft_blueprint"]
+            lower=(
+                len(bp["normal_blocks"])*bp["normal_block_target_words"][0]
+                +bp["conclusion_target_words"][0]
+                +bp["further_information_target_words"][0]
+            )
+            self.assertGreaterEqual(lower,plan["word_budget"]["hard_total_min"],article_type)
+            self.assertLessEqual(bp["normal_block_target_words"][1],plan["word_budget"]["normal_section_max"],article_type)
 
     def test_plan_is_deterministic(self):
         self.assertEqual(p.build(META,RESEARCH,PPM),p.build(META,RESEARCH,PPM))
