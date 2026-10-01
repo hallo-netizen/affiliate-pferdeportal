@@ -22,7 +22,7 @@ Quelle: vom Nutzer bereitgestellte aktuelle WordPress-Liste „Plugins → Insta
 
 Aktuell beobachtet:
 - Affiliate Portal Template Kit (Pferde-kompatibel): **1.50.578**, aktiv.
-- Affiliate-Zentrale (Portal-kompatibel): **6.72.167**, aktiv; Nutzer bestätigt Installation, danach eBay-OAuth erfolgreich geprüft. `PLUGIN_UPDATE_REF: PU-20260930-003`.
+- Affiliate-Zentrale (Portal-kompatibel): **6.72.170**, aktiv; Nutzer-Readback 01.10.2026 im WordPress-Uploadvergleich zeigt `Aktuell 6.72.170`. Der zuvor hochgeladene falsche Altinstaller 6.72.169 wurde nicht als neuer Stand übernommen.
 - Performance Diagnose Safe: **2.3.0 aktiv**; ältere **2.2.0 inaktiv**.
 - Pferde Atelier – Affiliate Design Performance: **3.0.0 inaktiv**.
 - Portal Production Machine: **6.7.9**, aktiv.
@@ -47,7 +47,7 @@ Technische Affiliate-Releasewahrheit:
 `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`.
 
 Belastbarer Stand für PA-E-003:
-- letzter ausdrücklich versionsbezogener WordPress-Readback: Affiliate-Zentrale **6.72.167 aktiv**; eBay-OAuth danach PASS;
+- letzter ausdrücklich versionsbezogener WordPress-Readback: Affiliate-Zentrale **6.72.170 aktiv** (01.10.2026, WordPress-Uploadvergleich);
 - danach wurden 6.72.168–6.72.170 im laufenden Performance-/Storage-Strang technisch weiterentwickelt und reale Performance-Diagnosen geliefert; die Diagnose-Datei selbst enthält keine Plugin-Versionsnummer und wird deshalb nicht als separater Versions-Readback ausgegeben;
 - realer Performancebefund vor 6.72.171: Top-Kategorie `/ausruestung/` ca. **1,65 s**, während tiefere Kategorieprodukt-Seiten wie Trensen/Pferdesättel weiter bei ca. **8,6–9,1 s** lagen;
 - Ursache: die drei öffentlichen `category_product_1..3`-Slots wiederholten große Teile desselben slot-unabhängigen Kontext-Rankings und mehrerer reiner Gates/Providerprüfungen;
@@ -66,7 +66,7 @@ Belastbarer Stand für PA-E-003:
 - isolierter Repository-`CURRENT.zip`-Sync bleibt separat BLOCKED, solange der verfügbare Dokumentationsweg keinen bytegenauen Binärtransfer belegt; keine Ersatz-ZIP erfinden.
 
 ERSTER OFFENER PUNKT:
-**6.72.171 ist noch nicht als reale WordPress-Installation readback-bestätigt.**
+**6.72.170 ist aktuell real installiert; 6.72.171 ist technisch RELEASED, aber noch nicht als reale WordPress-Installation readback-bestätigt.**
 
 GENAU EINE NEXT ACTION:
 `INSTALL_AFFILIATE_ZENTRALE_6_72_171_AND_READBACK`.
