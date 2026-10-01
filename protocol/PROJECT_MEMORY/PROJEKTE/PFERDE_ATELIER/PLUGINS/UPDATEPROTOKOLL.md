@@ -149,3 +149,8 @@ Affiliate-Zentrale **6.72.171** wurde technisch fertiggestellt und vor Übergabe
 
 **Bewusst keine neue PU-ID:** Zum Zeitpunkt dieses Protokolleintrags ist die WordPress-Installation von 6.72.171 noch nicht readback-bestätigt. Dieses Updateprotokoll erfindet kein ausgeführtes Live-Update. Nach Installation/Readback wird genau dann das tatsächliche PU-Ereignis ergänzt.
 
+## LIVE-READBACK 2026-10-01 – PA-E-003 / KEIN NEUES PU-EREIGNIS
+
+Der WordPress-Uploadvergleich des Nutzers zeigt für Affiliate-Zentrale **Aktuell 6.72.170** und für das hochgeladene falsche Paket **6.72.169**. Damit ist 6.72.170 der neue belastbare installierte Versions-Readback. Das konkrete frühere Updateereignis auf 6.72.170 wird mangels vollständiger Ausführungsdaten nicht rückwirkend als erfundene PU-ID angelegt.
+
+Der falsche 6.72.169-Installer wurde verworfen. Nächster zulässiger Installer ist ausschließlich der final gegatete 6.72.171-Installer mit SHA-256 `dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba`.
