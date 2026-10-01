@@ -295,11 +295,25 @@ def exact_ppm_authoring_preflight(product,research):
     errors=[e for e in (result.get("errors") or []) if isinstance(e,dict) and e.get("error_code")!="BLOCKED_WAVE2_LANGUAGE_EVIDENCE"]
     if errors:
         codes=[]
+        details=[]
         for e in errors:
             code=str(e.get("error_code") or "UNKNOWN")
             if code not in codes:
                 codes.append(code)
-        raise PackError("PPM679_AUTHORING_PREFLIGHT_REPAIR_REQUIRED:"+",".join(codes))
+            details.append({
+                "error_code":code,
+                "field_path":e.get("field_path") or e.get("field"),
+                "failed_rule":e.get("failed_rule"),
+                "expected":e.get("expected"),
+                "actual":e.get("actual"),
+                "reason":e.get("reason"),
+            })
+        raise PackError(
+            "PPM679_AUTHORING_PREFLIGHT_REPAIR_REQUIRED:"
+            + ",".join(codes)
+            + ":DETAILS="
+            + json.dumps(details,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+        )
     return True
 
 def lt68_writer_preflight(markup,lt_jar):
@@ -311,11 +325,27 @@ def lt68_writer_preflight(markup,lt_jar):
         result=k9_lt68.run(Path(lt_jar),p)
     if result.get("status")!="PASS":
         ids=[]
+        details=[]
         for finding in result.get("findings") or []:
             rid=str(finding.get("rule_id") or "UNKNOWN")
             if rid not in ids:
                 ids.append(rid)
-        raise PackError("LT68_WRITER_PREFLIGHT_REPAIR_REQUIRED:"+str(result.get("finding_count") or 0)+":"+",".join(ids or ["UNKNOWN"]))
+            details.append({
+                "rule_id":rid,
+                "message":finding.get("message"),
+                "context":finding.get("context"),
+                "offset":finding.get("offset"),
+                "length":finding.get("length"),
+                "replacements":finding.get("replacements"),
+            })
+        raise PackError(
+            "LT68_WRITER_PREFLIGHT_REPAIR_REQUIRED:"
+            + str(result.get("finding_count") or 0)
+            + ":"
+            + ",".join(ids or ["UNKNOWN"])
+            + ":DETAILS="
+            + json.dumps(details,ensure_ascii=False,sort_keys=True,separators=(",",":"))
+        )
     return result
 
 
