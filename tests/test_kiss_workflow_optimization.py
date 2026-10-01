@@ -119,7 +119,8 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
             "k9_wordpress_verify.py",
             "runtime/CHAT_DELIVERY.json",
             "DELIVER_FINAL_WORDPRESS_FILE_IN_CHAT",
-            "k9-wordpress-final-json",
+            "k9-wordpress-direct-import",
+            "SYSTEM4_WORDPRESS_HANDOFF_V1",
             "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
         ):
             self.assertIn(required,wf)
