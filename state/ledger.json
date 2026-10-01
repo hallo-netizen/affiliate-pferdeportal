@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 82,
+  "generation": 83,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -767,6 +767,11 @@
         "title": "Was ist eine Longierpeitsche?"
       },
       "products": {
+        "check": {
+          "job_id": "K9-CHECK-6c9a91592dc7946c",
+          "path": "warehouse/check/K9-CHECK-6c9a91592dc7946c.json",
+          "sha256": "d00465cf7db2075f8fe2c9e5791548d3ce5ca5514222e964a9ded0d2cb65c38a"
+        },
         "research": {
           "job_id": "K9-RESEARCH-3716796c119ae1b4",
           "path": "warehouse/research/K9-RESEARCH-3716796c119ae1b4.json",
@@ -780,7 +785,7 @@
       },
       "revision": 0,
       "stages": {
-        "check": "PENDING",
+        "check": "DONE",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
