@@ -4,10 +4,13 @@
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/Releaseautorität bleibt im TEXT-Bereich bzw. technischer Originalquelle.
 
-- Portal SEO Redaktionsplan Compiler: WordPress-Seite zeigt direkt **0.28.29-kiss-storage-safe**. Damit ist 0.28.29 der belastbare installierte Versionsreadback.
-- Portal SEO Themenengine: letzter direkt sichtbarer WordPress-Versionsvergleich zeigt **0.57.15 aktuell**. Danach ist real ein fortgesetzter V9-Portalabgleich ohne Neustart sichtbar. Die bereitgestellten späteren Screenshots zeigen die Versionsnummer selbst nicht; deshalb wird hier **keine nicht sichtbare Versionsnummer erfunden**.
-- Der operative PSTE-Resume-/Themenverwertungsstand wird nicht in PLUGINS dupliziert; Routing: `../TEXT/CURRENT_STATE.md`.
-- Keine neue Plugininstallation ist aus dieser Campus-Nachholung abzuleiten.
+- Portal SEO Redaktionsplan Compiler: im aktuellen Arbeitsstrang wurde **0.28.30** installiert; der zunächst weiter bestehende `PSERC_SEO_CAPABILITY_BINDING_BLOCKED` verschwand erst nach anschließendem PSTE-Austausch. Der spätere reale PSERC-Lauf erreichte `COMPLETE`.
+- Portal SEO Themenengine: im aktuellen Arbeitsstrang wurde der neu nummerierte **0.57.17**-Reinstall-Kandidat installiert; danach erreichte der reale PSERC/Snapshot-Weg `COMPLETE`. Diese Aussage stützt sich auf den Nutzer-Installationsschritt + nachfolgenden erfolgreichen Workflow, nicht auf einen separat archivierten Pluginlisten-Screenshot.
+- Danach lokal gebaut: **PSTE 0.57.18 – EXISTING POTENTIAL FIRST**. Dieser Kandidat ist **nicht als live installiert belegt** und darf nicht als aktueller Live-Stand ausgegeben werden.
+- 0.57.18 ist nur ein Teilfix: sichere `AUTO_REENTRY_ELIGIBLE`-Sandbox-Kandidaten vor Retained Backlog/Provider verwerten. Er ändert die bereits vorhandene Titel-/Familien-/Kategorie-Automatik nicht.
+- Der offene Verwertungsfehler liegt fachlich im TEXT-Bereich: zu wenige gespeicherte Kandidaten erreichen trotz vorhandener Auto-Editorialisierung planning-ready/READY. Routing: `../TEXT/CURRENT_STATE.md`.
+- Die bereits laufende Recherchewelle wird nicht für einen Pluginwechsel unterbrochen.
+
 
 STAND: 2026-10-01
 STATUS: AFFILIATE 6.72.171 LIVE / 6.72.172 IDEALO-STORAGE-HANDOFF VERIFIZIERT / BACKUPS BEREINIGT / DB-VERSCHLANKUNG OFFEN
