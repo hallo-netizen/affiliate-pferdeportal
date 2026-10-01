@@ -1,0 +1,257 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-86b37dddc9f3f766",
+  "results": [
+    {
+      "item_id": "k9-7044b11fa198db7b17753884",
+      "lt68_result": {
+        "article_sha256": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+        "checked_text_sha256": "e45fb2ad179ee259afbcfe1148d8db23a163c3c5105ac35a2919129dd8a8c13a",
+        "contract": "K9_LT68_RESULT_V1",
+        "domain_dictionary_ignored_count": 0,
+        "domain_dictionary_sha256": "6181034c2222fb8da04f656a1015bec8e6b8ffe82564d80050183cb7a75f892e",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 0,
+        "findings": [],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Bei einem aufgehängten Heunetz zählt nicht nur, dass das Pferd bequem an das Heu kommt. Die Höhe muss so gewählt werden, dass das Netz weder unnötig hoch hängt noch Beine oder Hufe in eine gefährliche Nähe zum Material geraten.\n\nEine tiefere Fütterungsposition kommt der natürlichen Haltung von Kopf und Hals näher. Bei einem Netz muss dieser Vorteil aber immer mit dem möglichen Risiko des Verfangens abgewogen werden.\n\nHeunetze bei der Fütterung passend aufhängen\n\nAls einfache Orientierung gilt: Das untere Ende eines aufgehängten Heunetzes sollte ungefähr auf Widerristhöhe des Pferdes liegen. Diese Höhe verbindet einen gut erreichbaren Futterplatz mit einer Position, bei der das Netz nicht unnötig tief hängt.\n\nZu hoch angebracht ist ebenfalls ungünstig. Dann kann Heustaub leichter in Augen und Nüstern fallen. Zu tief aufgehängt steigt dagegen das Risiko, dass sich das Pferd mit einem Bein oder Huf im Netz verfängt.\n\nFür die Praxis bedeutet das: Richte die Höhe zuerst am Widerrist deines Pferdes aus und prüfe anschließend, ob das gefüllte Netz seine Position behält. Im Bereich Fütterung ist die sichere Befestigung deshalb genauso wichtig wie die eigentliche Futtermenge.\n\nDie Größe des Pferdes und die konkrete Aufhängung spielen ebenfalls eine Rolle. Entscheidend ist nicht eine starre Zentimeterangabe, sondern eine Position, die einen natürlichen Zugang erlaubt, ohne das Netz in den Bereich von Beinen und Hufen absinken zu lassen.\n\nDie Widerristhöhe ist deshalb eine Ausgangsorientierung und keine einmalige Einstellung für jede Situation. Nach dem Befüllen sollte geprüft werden, ob das Netz tatsächlich so hängt, wie es vorgesehen war, und ob die Befestigung die Position während des Fressens zuverlässig hält.\n\nRaufutter sicher im Netz anbieten\n\nHängt das Netz deutlich über der empfohlenen Orientierung, frisst das Pferd mit höherem Kopf. Dabei kann Heustaub leichter nach unten in Richtung Augen und Nüstern gelangen. Eine hohe Position ist deshalb nicht automatisch sicherer.\n\nEine tiefere Position unterstützt zwar eher die natürliche Haltung beim Fressen. Gleichzeitig steigt bei einem frei hängenden Netz die Gefahr, dass ein Pferd mit Bein oder Huf in das Material gerät. Genau dieser Zielkonflikt bestimmt die richtige Höhe.\n\nWorld Horse Welfare empfiehlt Futter und Raufutter nach Möglichkeit bodennah anzubieten. Bei Heunetzen lässt sich dieses Prinzip jedoch nicht ohne Sicherheitsprüfung übertragen. Im Bereich Raufutter muss deshalb immer zwischen natürlicher Fresshaltung und sicherer Nutzung abgewogen werden.\n\nWenn du das Netz neu aufhängst, beobachte das Pferd zunächst beim Fressen. Bleibt das Netz oberhalb der Hufe, erreicht das Pferd das Heu ohne Verrenkungen und verändert sich die Position auch bei sinkendem Füllstand nicht ungünstig, passt die gewählte Höhe deutlich besser.\n\nBesonders bei einem frei beweglichen Netz lohnt sich diese Kontrolle mehrfach. Die sichere Position muss auch dann erhalten bleiben, wenn das Pferd Heu herauszieht und sich das Netz dabei bewegt. So lässt sich besser erkennen, ob die gewählte Höhe dauerhaft passend ist.\n\nFütterung mit sicherer Aufhängung vorbereiten\n\nVor jeder Nutzung lohnt sich eine kurze Kontrolle. Besonders wichtig sind die Höhe des unteren Netzendes, die Befestigung und die Frage, ob sich das Netz beim Fressen stark nach unten ziehen kann.\n\nHöhe: Unteres Ende ungefähr auf Widerristhöhe.\n\nOben: Heustaub soll nicht ins Gesicht fallen.\n\nUnten: Beine und Hufe dürfen nicht hängen bleiben.\n\nFresshaltung: Möglichst natürliche Position erhalten.\n\nAchte auch darauf, wie weit das Netz im Laufe der Mahlzeit absinkt. Ein zunächst passend aufgehängtes Netz kann sich durch Bewegung und weniger Inhalt anders verhalten. Die sichere Höhe sollte deshalb nicht nur direkt nach dem Befüllen beurteilt werden.\n\nKleine und mittlere Öffnungen können die Aufnahme von Heu verlangsamen und die Fressdauer verlängern. Die Maschenweite löst aber nicht die Frage der sicheren Aufhängung. Höhe und Öffnungsgröße müssen deshalb getrennt geprüft und anschließend zusammen passend gewählt werden.\n\nFür die tägliche Kontrolle reicht deshalb kein Blick auf die Maschen. Entscheidend bleibt, wo sich das untere Netzende befindet und ob das Pferd beim Fressen genügend Abstand mit Beinen und Hufen hält. Erst danach lässt sich die gewählte Lösung sinnvoll beurteilen.\n\nHeunetze nach Höhe und Risiko vergleichen\n\nDie wichtigsten Unterschiede lassen sich direkt gegenüberstellen. Dabei zählt immer die Verbindung aus erreichbarer Fressposition und möglichst geringem Risiko.\n\nPosition\n\nMöglicher Vorteil\n\nWichtiges Risiko\n\nWiderristhöhe\n\ngute Orientierung beim Aufhängen\n\nkorrekte Befestigung bleibt nötig\n\ndeutlich höher\n\nAbstand zu den Hufen\n\nStaub gelangt leichter ins Gesicht\n\ndeutlich tiefer\n\nnatürlichere Haltung beim Fressen\n\nhöheres Risiko des Verfangens\n\nbodennah\n\nnatürliche Futterposition\n\nNetzsicherheit besonders sorgfältig prüfen\n\nEine mittlere, am Widerrist orientierte Aufhängung verbindet die praktische Erreichbarkeit mit einer besseren Kontrolle des Risikos des Verfangens.\n\nFazit\n\nFür ein aufgehängtes Heunetz ist Widerristhöhe eine brauchbare Orientierung für das untere Ende. Zu hohe und zu tiefe Positionen bringen jeweils eigene Nachteile mit sich und sollten deshalb vermieden werden.\n\nDie beste Lösung verbindet eine möglichst natürliche Fresshaltung mit sicherem Abstand zu Beinen und Hufen. Maschenweite und verlängerte Fressdauer sind zusätzliche Punkte, ersetzen aber niemals die Prüfung der sicheren Aufhängung.\n\nKontrolliere die Aufhängung deshalb nach dem Befüllen und während der ersten Nutzung erneut. So bleibt die gewählte Höhe nicht nur theoretisch passend, sondern auch im tatsächlichen Einsatz sicher.\n\nWeiterführende Informationen\n\nWeitere Hinweise zu Größen, Maschen und Einsatzbereichen findest du im gebundenen Bereich Heunetze.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "e45fb2ad179ee259afbcfe1148d8db23a163c3c5105ac35a2919129dd8a8c13a",
+          "content_hash": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+          "domain_dictionary_ignored_findings": [],
+          "domain_dictionary_sha256": "6181034c2222fb8da04f656a1015bec8e6b8ffe82564d80050183cb7a75f892e",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "e45fb2ad179ee259afbcfe1148d8db23a163c3c5105ac35a2919129dd8a8c13a",
+            "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 0,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "raw_report_unfiltered_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_unfiltered_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "return_code": 0,
+          "unresolved_finding_count": 0
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "return_code": 0,
+        "status": "PASS"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+          "content_structure_language_gate_checks": {
+            "article_type": "FAQ",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 3,
+            "conclusion_ratio": 0.10620525059665871,
+            "conclusion_word_count": 89,
+            "content_hash": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "faq_direct_answer_bound": true,
+            "faq_direct_answer_word_count": 39,
+            "faq_intro_starts_with_direct_answer": true,
+            "faq_meta_opening_hit": "",
+            "generic_heading_hits": [],
+            "heading_count": 6,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 67,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "e45fb2ad179ee259afbcfe1148d8db23a163c3c5105ac35a2919129dd8a8c13a",
+            "language_evidence_valid": true,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 0,
+            "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "language_unresolved_finding_count": 0,
+            "list_count": 1,
+            "maximum_list_items": 4,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "6ff63b7617a82c7fa84e2478e5646cbce988be3981372eb269766265e6f511a6",
+            "quality_binding_hash": "454b5ec26992d484473741fa63a85552d8c020d5fcfdc2ae740913fcf9990930",
+            "required_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Heunetze",
+                "block": "further_information",
+                "href": "/fuetterung/fuetterung-raufutter/heunetze/"
+              },
+              "parent_category": {
+                "anchor": "Fütterung",
+                "block": "answer",
+                "href": "/fuetterung/"
+              },
+              "semantic_related": {
+                "anchor": "Raufutter",
+                "block": "details",
+                "href": "/fuetterung/fuetterung-raufutter/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 4,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Position",
+              "Möglicher Vorteil",
+              "Wichtiges Risiko"
+            ],
+            "table_heading": "Heunetze nach Höhe und Risiko vergleichen",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.24324324324324326,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Wie hoch muss ein Heunetz hängen und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Fütterung",
+                "block": "answer",
+                "href": "/fuetterung/"
+              },
+              {
+                "anchor": "Raufutter",
+                "block": "details",
+                "href": "/fuetterung/fuetterung-raufutter/"
+              },
+              {
+                "anchor": "Heunetze",
+                "block": "further_information",
+                "href": "/fuetterung/fuetterung-raufutter/heunetze/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Fütterung > Raufutter > Heunetze > FAQ Heunetze",
+              "name": "FAQ Heunetze",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "heunetze-faq",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "PASS",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 5,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 35,
+          "fail_closed_aggregate_status": "PASS",
+          "h2_count": 6,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.08823529411764706,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "FAQ",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.10620525059665871,
+            "conclusion_word_count": 89,
+            "content_hash": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 4,
+            "required_conclusion_ratio": 0.08,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 838,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 23,
+          "publish_allowed": false,
+          "quality_content_hash": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+          "required_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 5,
+          "table_body_row_count": 4,
+          "table_count": 1,
+          "technical_content_hash": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 4,
+          "used_fact_count": 5,
+          "visible_link_count": 3,
+          "word_count": 828
+        },
+        "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+        "content_sha256": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [],
+        "fail_closed_aggregate_status": "PASS",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "PASS",
+        "technical_status": "TECHNICAL_CHECK_OK"
+      },
+      "writing_rules_result": {
+        "content_sha256": "49004c77d6fb043a7187cbdcbee4bea622d07e70dbd6424a79a385019bd733fe",
+        "contract": "K9_WRITING_RULES_RESULT_V1",
+        "coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+        "findings": [],
+        "publish_allowed": false,
+        "status": "PASS",
+        "table_rule_contract": "K9_MOBILE_COMPACT_TABLE_POLICY_V1",
+        "writing_rules_sha256": "a7ade7393b46c1eadeaa77075e0c3711cc2792c8477bf0a70bd60b7317347126"
+      }
+    }
+  ],
+  "station": "check"
+}

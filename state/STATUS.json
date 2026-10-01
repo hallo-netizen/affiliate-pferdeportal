@@ -1,18 +1,18 @@
 {
   "active_job": null,
   "contract": "K9_STATUS_V1",
-  "fully_done": 20,
-  "ledger_generation": 85,
+  "fully_done": 21,
+  "ledger_generation": 86,
   "orchestration_mode": "AUTO_CHAIN",
-  "ready_for_check": 1,
+  "ready_for_check": 0,
   "ready_for_write": 0,
-  "remaining": 1,
+  "remaining": 0,
   "repair_required": 0,
   "research_open": 0,
   "stations": {
     "check": {
-      "DONE": 20,
-      "PENDING": 1
+      "DONE": 21,
+      "PENDING": 0
     },
     "repair": {
       "DONE": 0,
