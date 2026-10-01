@@ -1,5 +1,8 @@
 name: K10 inspect PPM rendered evidence contract
 on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+    paths: ['.github/workflows/k10-inspect-rendered-contract.yml']
   workflow_dispatch:
 permissions:
   contents: read
