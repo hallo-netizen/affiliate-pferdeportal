@@ -83,3 +83,15 @@ ENDSTEMPEL package -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> chat/download.
 
 The adapter copies the already-final article bytes, metadata, fact pack and production-plan item without rewriting content. It binds the actual ledger revision count, exact body SHA-256, LT PASS, PPM 6.7.9 PASS, plugin version 0.28.27 and publish_allowed=false. The terminal receipt and chat delivery now point to the SYSTEM4_WORDPRESS_HANDOFF_V1 file; the signed ENDSTEMPEL file remains separately referenced as evidence.
 
+## Editorial rule added after user review — post-table recap
+Applies only to future WRITE/REPAIR output; the already imported 16-article batch is not changed.
+
+Directly after the single article table and before the table section closes:
+- exactly one short prose paragraph;
+- 1–2 sentences;
+- 12–35 words;
+- briefly reflect/summarize the table;
+- no new facts;
+- not a second conclusion.
+
+The rule is writer-visible in contracts/K9_WRITING_RULES.json and fail-closed in k9_write_packager.py before a draft can be accepted.

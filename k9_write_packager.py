@@ -109,6 +109,27 @@ def validate_html(markup, article_type, metadata, research, rules):
         if f'data-block="{block}"' not in markup and f"data-block='{block}'" not in markup:
             raise PackError("REQUIRED_BLOCK_MISSING:"+block)
     if markup.lower().count("<table") != 1: raise PackError("TABLE_COUNT_NOT_EXACT_ONE")
+    summary_cfg=(rules.get("global",{}) or {}).get("post_table_summary_policy")
+    if not isinstance(summary_cfg,dict) or summary_cfg.get("required") is not True:
+        raise PackError("POST_TABLE_SUMMARY_RULE_MISSING")
+    table_section=re.search(r'(?is)<section\b[^>]*data-block\s*=\s*(["\'])table\1[^>]*>(.*?)</section>',markup)
+    if not table_section:
+        raise PackError("TABLE_SECTION_MISSING")
+    table_body=table_section.group(2)
+    table_match=re.search(r"(?is)<table\b[^>]*>.*?</table>",table_body)
+    if not table_match:
+        raise PackError("TABLE_OPEN_TAG_MISSING")
+    after_table=table_body[table_match.end():]
+    paragraphs=re.findall(r"(?is)<p\b[^>]*>(.*?)</p>",after_table)
+    if len(paragraphs)!=int(summary_cfg.get("paragraphs_exact",1)):
+        raise PackError("POST_TABLE_SUMMARY_PARAGRAPH_COUNT_INVALID")
+    summary_text=text_of(paragraphs[0])
+    summary_words=len(re.findall(r"\b[\wÄÖÜäöüß-]+\b",summary_text,re.UNICODE))
+    if summary_words<int(summary_cfg.get("words_min",12)) or summary_words>int(summary_cfg.get("words_max",35)):
+        raise PackError("POST_TABLE_SUMMARY_WORD_RANGE_INVALID")
+    sentence_count=len([x for x in re.split(r"(?<=[.!?])\s+",summary_text) if x.strip()])
+    if sentence_count<int(summary_cfg.get("sentences_min",1)) or sentence_count>int(summary_cfg.get("sentences_max",2)):
+        raise PackError("POST_TABLE_SUMMARY_SENTENCE_COUNT_INVALID")
     table_open=re.search(r"<table\b([^>]*)>",markup,re.I)
     if not table_open:
         raise PackError("TABLE_OPEN_TAG_MISSING")

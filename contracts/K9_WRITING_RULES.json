@@ -35,6 +35,17 @@
       "data_source_hash_source": "BOUND_RESEARCH_CLAIM.evidence_text_sha256",
       "data_source_title_source": "BOUND_RESEARCH_SOURCE.title_BY_CLAIM_SOURCE_ID",
       "placement": "INSIDE_A_VISIBLE_FACTUAL_UNIT_THAT_LEXICALLY_SUPPORTS_THE_SAME_FACT"
+    },
+    "post_table_summary_policy": {
+      "required": true,
+      "location": "IMMEDIATELY_AFTER_TABLE_BEFORE_TABLE_SECTION_END",
+      "paragraphs_exact": 1,
+      "sentences_min": 1,
+      "sentences_max": 2,
+      "words_min": 12,
+      "words_max": 35,
+      "new_facts_forbidden": true,
+      "purpose": "SHORT_TABLE_RECAP_NOT_SECOND_CONCLUSION"
     }
   },
   "types": {

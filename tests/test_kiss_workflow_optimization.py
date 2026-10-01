@@ -100,6 +100,24 @@ class KissWorkflowOptimizationTests(unittest.TestCase):
         ):
             self.assertIn(required,finalizer)
 
+    def test_post_table_summary_rule_is_writer_visible_and_enforced(self):
+        rules=json.loads(self.text("contracts/K9_WRITING_RULES.json"))
+        cfg=rules["global"]["post_table_summary_policy"]
+        self.assertTrue(cfg["required"])
+        self.assertEqual(cfg["paragraphs_exact"],1)
+        self.assertEqual(cfg["sentences_min"],1)
+        self.assertEqual(cfg["sentences_max"],2)
+        self.assertEqual(cfg["words_min"],12)
+        self.assertEqual(cfg["words_max"],35)
+        packager=self.text("k9_write_packager.py")
+        for required in (
+            "POST_TABLE_SUMMARY_RULE_MISSING",
+            "POST_TABLE_SUMMARY_PARAGRAPH_COUNT_INVALID",
+            "POST_TABLE_SUMMARY_WORD_RANGE_INVALID",
+            "POST_TABLE_SUMMARY_SENTENCE_COUNT_INVALID",
+        ):
+            self.assertIn(required,packager)
+
     def test_wordpress_delivery_is_actual_02827_import_contract(self):
         exporter=self.text("k9_wordpress_export.py")
         finalizer=self.text(".github/workflows/k9-finalize.yml")
