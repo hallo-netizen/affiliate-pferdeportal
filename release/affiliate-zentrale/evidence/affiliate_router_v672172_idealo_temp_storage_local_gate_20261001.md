@@ -49,3 +49,28 @@ Ergebnis: `LOCAL_FULL_HOUSEKEEPING_POSITIVE_NEGATIVE_PASS`.
 
 ## Releasegrenze
 Noch kein Live-Install und keine Löschung der fünf realen Tempdateien durch den Kandidaten vor exakter Paket-/Quellprüfung. 6.72.171 bleibt Live-Rollbackbasis.
+
+
+## Exakter Installationskandidat
+
+Ausgangspunkt war ausschließlich der bereits final gegatete Installer 6.72.171 mit SHA-256
+`dbe630c72f5273abb5c3b48223bbed00498be0a0578f18eca3f001e92bb03fba`.
+
+Für 6.72.172 wurden gegenüber diesem Installer exakt drei Plugin-Dateien verändert:
+- `includes/trait-ppar-housekeeping.php` -> SHA-256 `0216897c626953919a5adf51f6b7622b2236f88935dde5de26fc79d8eb80b551`
+- `pferdeportal-affiliate-router.php` -> SHA-256 `2b3bca221e48fdba7e1b3b69ee87da8e4c396ecc9f2e351df839cffc15759f82`
+- `readme.txt` -> SHA-256 `374552a098d4fc010354ac83b53cbcd92e6f6b7ab14983f1c70f3f4d4b9e0fc8`
+
+Der gebaute Handoff-Installer:
+- Datei: `AFFILIATE_ZENTRALE_6.72.172.zip`
+- SHA-256: `c9fd44b97793422890a46b87dcdcbc88ce52ae26437b77173a64c9d976b73a25`
+- Größe: 766700 Bytes
+- Source-Manifest-Identität: 27/27 PASS
+- Fresh-Unpack-Identität: 27/27 PASS
+- Fresh-Unpack PHP-Lint: 21/21 PASS
+- Header-/Runtime-Version: 6.72.172 / 6.72.172 PASS
+- ZIP-Integrität: PASS
+
+Die automatischen alten 6.72.170/171-Workflows sind für 6.72.172 nicht als Release-Gate verwendbar, weil sie ihre erwartete Versionsnummer fest verdrahten. Belegt: Governance-/Source-/Tree-/Start-Checks PASS; Abbruch erst beim harten `grep Version: 6.72.171`. Die Workflowdateien wurden wegen Scope-/KISS-Grenze nicht umgebaut.
+
+Repository-Binärsync des neuen ZIP ist über den verfügbaren Schreibweg nicht bytegenau ausgeführt. Das ändert die geprüften Handoff-Bytes nicht; Live-Status bleibt bis Installation + WordPress-Readback 6.72.171.
