@@ -179,17 +179,32 @@ trait PPAR_Ebay_Trait {
             return new WP_Error('ebay_portal_catalog_source_mismatch', 'Pferde-Atelier-eBay-Zielkatalog stimmt nicht mit der mitgelieferten Portalstruktur überein.');
         }
         $counts = is_array($decoded['counts'] ?? null) ? $decoded['counts'] : array();
-        $required_counts = array('main_hubs'=>8, 'hub_pages'=>59, 'product_pages'=>329, 'article_categories'=>1124);
-        foreach ($required_counts as $key=>$expected) {
-            if (absint($counts[$key] ?? 0) !== $expected) {
-                return new WP_Error('ebay_portal_catalog_incomplete', 'Pferde-Atelier-eBay-Zielkatalog ist unvollständig: ' . sanitize_key($key));
-            }
-        }
         $products = array_values((array) ($decoded['product_targets'] ?? array()));
         $articles = array_values((array) ($decoded['article_targets'] ?? array()));
         $rules = array_values((array) ($decoded['search_rules'] ?? array()));
-        if (count($products) !== 329 || count($articles) !== 1124 || count($rules) !== 8) {
-            return new WP_Error('ebay_portal_catalog_count_mismatch', 'Pferde-Atelier-eBay-Zielkatalog stimmt nicht mit den Sollzahlen überein.');
+        $business_concepts = array_values((array) ($decoded['business_concepts'] ?? array()));
+        $business_hub_concepts = array_values((array) ($decoded['business_hub_concepts'] ?? array()));
+
+        // V6.72.173: Katalogintegritaet wird gegen den tatsaechlich mitgelieferten,
+        // bereits per source_sha256 an die Portalstruktur gebundenen Inhalt geprueft.
+        // Historische Gesamtzahlen (329/1124) duerfen legitime Strukturzuwachse nicht
+        // mehr als Fehler klassifizieren. Keine zweite Portalstruktur wird geparst.
+        $actual_counts = array(
+            'main_hubs' => count($rules),
+            'hub_pages' => count($business_hub_concepts),
+            'product_pages' => count($products),
+            'article_categories' => count($articles),
+            'business_concepts' => count($business_concepts),
+            'business_hub_concepts' => count($business_hub_concepts),
+            'business_routable_concepts' => count($business_concepts) + count($business_hub_concepts),
+        );
+        foreach ($actual_counts as $key => $actual) {
+            if (!array_key_exists($key, $counts) || absint($counts[$key]) !== $actual) {
+                return new WP_Error('ebay_portal_catalog_incomplete', 'Pferde-Atelier-eBay-Zielkatalog ist inkonsistent: ' . sanitize_key($key));
+            }
+        }
+        if (!$products || !$articles || !$rules || !$business_concepts || !$business_hub_concepts) {
+            return new WP_Error('ebay_portal_catalog_count_mismatch', 'Pferde-Atelier-eBay-Zielkatalog enthält keine vollständige nutzbare Zielstruktur.');
         }
         $allowed_buckets = array('pferde-ponys','sattel-zaumzeug','decken-schutz','stall-weide-haltung','fuetterung-pflege','anhaenger-transport','reitbekleidung-zubehoer','sonstiges');
         $product_slugs = array();
