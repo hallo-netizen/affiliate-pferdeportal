@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 84,
+  "generation": 85,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -806,6 +806,11 @@
           "job_id": "K9-RESEARCH-3598db658c3d1e25",
           "path": "warehouse/research/K9-RESEARCH-3598db658c3d1e25.json",
           "sha256": "d5634cd242dc6cbc81ac63d7bc16379b0b3968b7a9b3aa0d1c8bc4782b8cabf6"
+        },
+        "write": {
+          "job_id": "K9-WRITE-151cf61f788638b1",
+          "path": "warehouse/write/K9-WRITE-151cf61f788638b1.json",
+          "sha256": "8ae28393f95d8c73ec21ca70cad0db0cc03cf606256aa350c4e4e728acc99de6"
         }
       },
       "revision": 0,
@@ -813,7 +818,7 @@
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
         "research": "DONE",
-        "write": "PENDING"
+        "write": "DONE"
       },
       "title": "Wie hoch muss ein Heunetz hängen?"
     }
