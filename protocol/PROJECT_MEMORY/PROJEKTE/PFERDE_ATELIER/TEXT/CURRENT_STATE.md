@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-01
-STATUS: PSTE-CONTEXT-REFRESH LÄUFT / DANACH BESTEHENDEN THEMENBESTAND VERWERTEN / KEINE NEURECHERCHE VORHER
+STATUS: PORTALABGLEICH COMPLETE / VORHANDENES THEMENPOTENZIAL WIRD ZU SCHWACH VERWERTET / LAUFENDE RECHERCHEWELLE NICHT UNTERBRECHEN
 
 ## AKTUELLER OPERATIVER TEXT-/SEO-STAND 2026-10-01
 
@@ -12,32 +12,85 @@ Diese Sektion supersediert für aktuelle TEXT-/SEO-Arbeit die historischen Produ
 - **Artikelproduktion K9:** technische Current-Autorität ausschließlich
   `konzept9/greenfield-20260929:CURRENT_STATE.json`.
   Das Campus-TEXT-Büro kopiert daraus keinen dynamischen Produktionsstatus.
-- **PSTE-Themen-/SEO-Bestand:** aktueller operativer Zustand wird über den realen WordPress/PSTE-Readback dieses Arbeitsstrangs bestimmt. Der laufende Portalabgleich ist noch nicht `COMPLETE`; deshalb bleibt Planung fail-closed.
+- **PSTE-Themen-/SEO-Bestand:** diese Datei ist die aktuelle Campus-Fachautorität; reale WordPress/PSTE-Readbacks bleiben operative Evidenz.
 - **Pluginbestand/Versionen:** ausschließlich über `../PLUGINS/CURRENT_STATE.md` und die jeweilige technische Hauptquelle.
+
+### Belastbarer aktueller PSTE-/PSERC-Readback
+
+Der zuvor offene Portalabgleich ist abgeschlossen.
+
+Letzter belegter Produktionsvorlauf:
+- PSERC-Lauf: `COMPLETE`;
+- Themen: 23;
+- geeignet: 23;
+- geprüft: 23;
+- READY: 2;
+- Snapshot danach aktualisiert;
+- kompakter 5-Felder-Handoff mit 2 Artikeln erzeugt;
+- diese 2 Artikel wurden anschließend in K9 vollständig bis STOP produziert.
+
+Der Nutzer meldet danach am 01.10.2026 eine **neue bereits laufende Recherchewelle mit sehr magerer Ausbeute**.
+Für diese laufende Welle liegt in der Campusquelle noch kein terminaler Zahlen-/Reason-Code-Readback vor.
+Deshalb keine Ausfallursache raten.
+
+### Frisch belegte vorhandene Automatik
+
+Die automatische redaktionelle Aufbereitung ist bereits vorhanden und darf nicht neu erfunden werden.
+
+Der bestehende PSTE-Normal-Metadata-Pfad kann vorhandene einzelne Keywords/Suchfragen sowie Familien-/Gruppenkontext – soweit eindeutig belegbar – automatisch auflösen in:
+- Familie/Gruppe;
+- Artikeltyp;
+- guten redaktionellen Titel;
+- Zielkeyword;
+- Zielkategorie.
+
+Der Retained-Backlog-Weg führt gespeicherte `topic_pool`-Zeilen bereits **ohne Provider-Aufruf** erneut durch diesen Normalpfad und danach durch Planning-Readiness.
+
+Detaillierter Nachweis/Fehlerprotokoll:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
 
 ### Erster offener Blocker
 
-`PSTE_CONTEXT_REFRESH_NOT_COMPLETE`
+`PSTE_EXISTING_POTENTIAL_LOW_CONVERSION_NOT_LOCALIZED`
 
-Der vorhandene Portalabgleich wird fortgesetzt und darf **nicht** durch `Gesamtbestand neu abgleichen`, `Gesamtbestand neu erfassen` oder einen neuen Recherche-/Produktionslauf ersetzt werden.
+Bedeutung:
+Nicht die Titel-/Kategorie-Automatik fehlt.
+Der offene Fehler ist, dass **zu wenige bereits gespeicherte Kandidaten durch den vorhandenen Aufbereitungsweg bis AUTO_RESOLVED / planning-ready / READY gelangen**.
+
+Noch nicht belastbar bestimmt ist, an welcher Stufe die größte Menge ausfällt:
+Portalrelevanz, Familie, Intent/Artikeltyp, Titel, Kategorie/STRUCTURE_GAP, Planning-Readiness, Kontext oder Reentry.
 
 ### Genau eine NEXT ACTION
 
-`LET_EXISTING_PSTE_CONTEXT_REFRESH_REACH_COMPLETE`
+`AFTER_CURRENT_RESEARCH_WAVE_COMPLETE_RUN_READ_ONLY_EXISTING_POTENTIAL_CONVERSION_FUNNEL_AUDIT`
 
-Bis `COMPLETE`:
-- keinen neuen Gesamtbestandlauf starten;
-- keine neue Produktionswelle starten;
-- keine neue Keyword-/Provider-Recherche starten;
-- keine roten/gelben Themen manuell freigeben, weil der Systemkontext noch nicht vollständig aktuell ist;
-- vorhandene gespeicherte Themen/Sandbox-Daten nicht löschen oder umklassifizieren.
+Verbindlicher Arbeitsweg:
+1. die bereits laufende Recherchewelle nicht abbrechen oder durch einen neuen Lauf ersetzen;
+2. nach ihrem terminalen Readback **keine weitere Provider-Recherche starten**;
+3. vorhandenen Bestand read-only als Funnel auswerten:
+   `GESPEICHERT → SOURCE QUERY → PORTALRELEVANZ → FAMILIE → ARTIKELTYP → TITEL/ZIELKEYWORD → KATEGORIE → PLANNING-READINESS → CONTEXT CURRENT → READY`;
+4. je Verluststufe Anzahl + führende Reason-Codes bestimmen;
+5. besonders Lane B aus `ZV-PSTE-THEMENVERWERTUNG-001` herausarbeiten:
+   Evidenz vorhanden, nur bestehende Titel-/Familien-/Kategorie-/Reentry-Automatik muss greifen;
+6. erst danach den kleinsten belegten Fix umsetzen.
 
-### Danach gebundener Folgeauftrag – noch NICHT die aktuelle NEXT ACTION
+### 0.57.18-Kandidat
 
-Nach `COMPLETE` wird **zuerst der vorhandene Themenbestand verwertet**, bevor neue Recherche gestartet wird. Ziel und harte Grenzen stehen in:
-`protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+Der lokal geprüfte Kandidat `PSTE 0.57.18 – EXISTING POTENTIAL FIRST` ist **nur ein Teilfix**:
+sichere `AUTO_REENTRY_ELIGIBLE`-Sandbox-Kandidaten werden vor Retained-Backlog und vor Provider-Recherche durch den bestehenden Normal-Reentry geführt.
 
-Wichtig: „gespeichert“ bedeutet nicht „produktionsreif“. `BLOCKED_FOR_CATEGORY`, `STRUCTURE_GAP`, `PENDING_EXTERNAL_RELEVANCE`, `RESEARCH_KEYWORD` und rote Fachprüfung sind unterschiedliche Zustände und werden nicht pauschal freigegeben.
+Er ist **nicht** als Lösung für die niedrige Gesamtverwertbarkeit des gespeicherten Topic-Pools abgenommen.
+Die laufende Recherchewelle wird nicht für diesen Kandidaten unterbrochen.
+
+### Harte Grenzen
+
+- kein pauschales Freigeben gespeicherter Themen;
+- keine neue Themen-Datenbank;
+- keine neue Titel-/Kategorie-Architektur;
+- bestehende Normal-Metadata-/Title-/Family-/Reentry-Wege verwenden;
+- Dubletten-, Kannibalisierungs-, Kategorie-, Artikeltyp-, Titel-, Plan-Slot-, PSTE-/PSERC- und Publish-Regeln unverändert;
+- `PENDING_EXTERNAL_RELEVANCE`, echte `STRUCTURE_GAP`, Dubletten und Nicht-Redaktionelles nicht künstlich produzieren;
+- kein Publish.
 
 STAND: 2026-09-24
 STATUS: KATEGORIE-SCOPE CLOSED / ÄLTERE PRODUKTIONSHISTORIE UNTEN NICHT ALS AKTUELLE KATEGORIE-NEXT-ACTION
