@@ -137,6 +137,14 @@ jobs:
           print('WORDPRESS_FILE_VERIFY='+str(r.get('wordpress_file_verify')))
           findings=r.get('package_integrity',{}).get('findings') or []
           print('PACKAGE_FINDINGS='+json.dumps(findings,ensure_ascii=False,sort_keys=True))
-          if r.get('status')!='PASS':
+          expected={
+            'wordpress.rendered_h1_integrity',
+            'wordpress.rendered_duplicate_heading_integrity',
+            'wordpress.rendered_adjacent_heading_integrity',
+            'integrity.rendered_evidence_class',
+          }
+          pending=set((r.get('package_integrity') or {}).get('pending_wordpress_rule_ids') or [])
+          if r.get('status')!='READY_FOR_WORDPRESS_DRAFT_IMPORT' or pending!=expected:
               raise SystemExit(4)
+          print('K10_REAL_PRE_WORDPRESS_PASS=1')
           PY
