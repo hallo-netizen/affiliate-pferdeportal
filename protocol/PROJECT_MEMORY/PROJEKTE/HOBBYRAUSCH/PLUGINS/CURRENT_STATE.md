@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-01
-STATUS: HD-001 V1.9.4 LIVE DEPLOY+READBACK PASS · HD-002 V0.1.2 AUTO-OWNER-HANDOFF HARD PASS / LIVE-INSTALLATION NÄCHSTES
+STATUS: HD-001 V1.9.4 LIVE PASS · HD-002 V0.1.2 LIVE BLOCKED PLAN_HASH_MISSING · HD-002 V0.1.3 COMPLETE-WORKFLOW POS+NEG HARD PASS / LIVE-UPGRADE NÄCHSTES
 
 ## HD-001 – Kategorie-Workflow
 
@@ -13,48 +13,50 @@ Live:
 - produktiver Buchbinden-Pilot deployed;
 - Schreiben und Readback erfolgreich;
 - Bestand bleibt stehen;
-- nicht zurückrollen.
-
-Owner-Handoff:
-- 7 Owner;
-- 11 ARTICLE_ONLY;
-- 11/11 gebunden;
-- READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING.
+- Owner-Handoff 7 Owner / 11 ARTICLE_ONLY / 11 gebunden.
 
 ## HD-002 – Themenengine
 
-Live aktuell:
-`0.1.1` / Migration COMPLETE / READY.
+Live:
+`0.1.2`
 
-Neuer Kandidat:
-`0.1.2 AUTO OWNER HANDOFF HARD PASS`
+Auto-Owner-Handoff und Baseline:
+PASS.
+
+Portalabgleich live:
+`BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
+
+Root Cause:
+gültiger `NOT_AVAILABLE`-Redaktionsplan-Sentinel wurde als fehlender SHA behandelt.
+
+## V0.1.3
 
 Installer SHA:
-`330028c8cd38f7f27664c804dfafa7649bea70e1f3647bc18229b52f2ba06003`
+`5b3063577beb3e5dfb03799b6245f2b9aaf90f338c70e86708674e5999762b2a`
 
-0.1.2 übernimmt beim bestehenden Button
-`Gesamtbestand erfassen`
-den deployed HD-001 Owner-Handoff automatisch read-only.
-
-Positiv:
-- echter Buchbinden-Stand;
-- 7 Owner / 11 Assignments;
-- Baseline CURRENT;
-- 4 produktive Content-Leaf-Kategorien;
-- 1 Themenfamilie;
-- HD-001 unverändert.
+Kompletter Workflow lokal simuliert:
+- exakt liveähnlicher Zustand mit 0 Themen / 4 Kategorien / 1 Familie / kein Redaktionsplan → COMPLETE;
+- alter 0.1.2-BLOCKED-Job → gleiche persistierte Daten unter 0.1.3 requestweise bis COMPLETE;
+- Stresslauf 4 Themen → COMPLETE;
+- vorhandener Redaktionsplan → COMPLETE.
 
 Negativ:
-not deployed / Final fehlt / nicht FINAL_APPROVED / Live-Kategorie fehlt / Handoff manipuliert → jeweils BLOCKED.
+- upstream not deployed;
+- malformed NOT_AVAILABLE;
+- fehlender echter Hash;
+- staged artifact manipuliert;
+- finale Struktur driftet;
+→ jeweils fail-closed BLOCKED.
 
 Paket:
 - Source PHP 80/80;
 - Fresh Installer PHP 80/80;
-- 135/135 Datei-Parität;
-- nur 3 Dateien gegenüber 0.1.1 geändert.
+- Source↔Installer 135/135;
+- 4 Dateien gegenüber 0.1.2 geändert;
+- Storage/Safe-Migration/Owner-Handoff sonst unverändert.
 
 ## NEXT ACTION
 
-HDTE 0.1.2 installieren → `Hobby Depot Themenengine → Übersicht → Gesamtbestand erfassen`.
+HDTE 0.1.3 über 0.1.2 installieren → Themenengine-Übersicht öffnen → vorhandenen Job automatisch bis `Portalabgleich COMPLETE` laufen lassen.
 
-Kein manueller Handoff-Import.
+Keine neue Bestandserfassung.
