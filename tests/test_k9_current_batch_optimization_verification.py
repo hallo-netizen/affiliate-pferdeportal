@@ -17,7 +17,10 @@ class CurrentThreeArticleOptimizationVerification(unittest.TestCase):
             )
         self.assertEqual(result["status"],"PASS")
         self.assertEqual(result["article_count"],3)
-        self.assertEqual(result["active_intake_batch_sha256"],"7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1")
+        self.assertEqual(result["active_intake_batch_sha256"],"0dcf795be2b348e33bb20915624324ecf52f25d201f209cf0fba85a414ca7ae4")
         self.assertEqual(result["wordpress_ledger_readiness"],"PASS")
+        stop=json.loads((ROOT/"runtime/K9_STOP.json").read_text(encoding="utf-8"))
+        self.assertEqual(stop["batch_sha256"],"7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1")
+        self.assertEqual(stop["article_count"],3)
 
 if __name__=="__main__": unittest.main()
