@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-09-30
-STATUS: BUCHBINDEN RESEARCH COMPLETE / LIVE-ROOT-CAUSE BEWIESEN / V1.9.4 EXAKTER PRODUKTIONSPFAD POS+NEG HARD PASS / LIVE-RETEST NÄCHSTES
+STAND: 2026-10-01
+STATUS: BUCHBINDEN RESEARCH COMPLETE / LIVE-ROOT-CAUSE BEWIESEN / V1.9.4 EXAKTER PRODUKTIONSPFAD POS+NEG HARD PASS / LETZTER TESTLAUF VOLLSTÄNDIG ZURÜCKGEROLLT / LIVE-RETEST NÄCHSTES
 
 ## Harte Abnahmeregel
 
@@ -66,17 +66,36 @@ Regression:
 - PHP Installer 17/17 PASS;
 - Runtime-Parität 22/22 PASS.
 
+## Aktueller Live-Zustand
+
+Der Diagnose-Testlauf wurde vollständig zurückgerollt.
+
+Sichtbarer WordPress-Stand:
+- `Testlauf vollständig zurückgerollt.`
+- `Rollback abgeschlossen. Der technische Testbestand ist zurückgesetzt.`
+
+Deshalb:
+- kein aktiver Deployment-Run;
+- kein aktiver Dry-Run;
+- kein direktes `Geprüften Plan anwenden` möglich.
+
+## Produktionsdatei
+
+Weiterhin derselbe fachlich geprüfte:
+`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json`
+
+Kein neuer Research-Lauf erforderlich.
+
 ## NEXT ACTION
 
-V1.9.4 installieren.
-
-Dann den bereits vorhandenen 7-CREATE-Dry-Run genau einmal über
-`Geprüften Plan anwenden`
-ausführen.
-
-Kein neuer Research-Lauf.
-Keine neue Datei.
-Kein neuer Dry-Run.
+1. V1.9.4 installieren.
+2. den bestehenden fachlich geprüften READ_ONLY_PREVIEW erneut über `Neue Datei übernehmen` laden.
+3. `Finale Struktur freigeben`.
+4. `WordPress-Vorschau erstellen`.
+5. neuen Plan anwenden.
 
 Erwartung:
 `Deployment abgeschlossen` und `Schreiben und Readback erfolgreich.`
+
+Bei Fehler:
+keine Abnahme; exakte Fehlermeldung auswerten.
