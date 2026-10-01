@@ -1,4 +1,5 @@
 from .receipt import make_receipt
+from .core import hard_rules
 
 BASE_MAPPING=[
   ('pserc.final_integrity','pserc_adapter','PSERC'),
@@ -29,10 +30,20 @@ PARITY_PACKAGE_MAPPING=[
 
 PACKAGE_RESULT_MAP=BASE_MAPPING+PARITY_PACKAGE_MAPPING
 
-def make_package_receipts(package_id,package_sha256,external_results):
+def _make_selected(package_id,package_sha256,external_results,allowed_rule_ids):
     rows=[]
     for rid,owner,key in PACKAGE_RESULT_MAP:
+        if rid not in allowed_rule_ids:
+            continue
         value=external_results.get(key)
         status='PASS' if value=='PASS' else 'FAIL'
         rows.append(make_receipt(rid,owner,'PACKAGE_INTEGRITY',package_id,package_sha256,status,{'external_result':value,'external_key':key}))
     return rows
+
+def make_package_receipts(package_id,package_sha256,external_results):
+    allowed={r['id'] for r in hard_rules('PACKAGE_INTEGRITY')}
+    return _make_selected(package_id,package_sha256,external_results,allowed)
+
+def make_pre_wordpress_package_receipts(package_id,package_sha256,external_results):
+    allowed={r['id'] for r in hard_rules('PACKAGE_INTEGRITY') if r.get('check_stage')!='WORDPRESS_VERIFY'}
+    return _make_selected(package_id,package_sha256,external_results,allowed)
