@@ -243,7 +243,6 @@ jobs:
                   "python3","k9_pserc.py",str(d),
                   "quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip",
                   "quality/PSERC-FIX.zip",
-                  "/tmp/k9-lt68/LanguageTool-6.8/languagetool-commandline.jar",
                   "--output",str(out)
               ]
               nout=Path(td)/"neg.json"
