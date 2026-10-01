@@ -11,11 +11,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Detect one-time bundle
+        id: probe
+        shell: bash
+        run: |
+          if test -f _bootstrap/k10_source_bundle.tar.xz; then
+            echo "has_bundle=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_bundle=false" >> "$GITHUB_OUTPUT"
+            echo K10_BOOTSTRAP_ALREADY_CONSUMED
+          fi
       - name: Verify and materialize exact K10 snapshot
+        if: steps.probe.outputs.has_bundle == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          test -f _bootstrap/k10_source_bundle.tar.xz
           ACTUAL="$(sha256sum _bootstrap/k10_source_bundle.tar.xz | awk '{print $1}')"
           test "$ACTUAL" = "83952be3e4b8a3858dc3d40dababddfcc58a66c54fd5f001efd4f3de035bbb97"
           cp _bootstrap/k10_source_bundle.tar.xz /tmp/k10_source_bundle.tar.xz
@@ -25,11 +35,16 @@ jobs:
           test -f RULE_CATALOG.json
           test -f tests/test_k10.py
           test -f .github/workflows/k10-selftest.yml
+          test -f .github/workflows/k10-ppm-inventory.yml
           test ! -e warehouse
           test ! -e final
           test ! -e submissions
+          echo "K10_SELFTEST_B64=$(base64 -w0 .github/workflows/k10-selftest.yml)"
+          echo "K10_PPM_WORKFLOW_B64=$(base64 -w0 .github/workflows/k10-ppm-inventory.yml)"
+          git checkout HEAD -- .github/workflows
           echo K10_EXACT_SNAPSHOT_MATERIALIZED
-      - name: Commit materialized K10 tree
+      - name: Commit materialized K10 tree without workflow mutation
+        if: steps.probe.outputs.has_bundle == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -38,3 +53,6 @@ jobs:
           git add -A
           git commit -m "K10: materialize isolated tested rule-ledger package"
           git push origin HEAD:konzept10-rule-ledger-20261001
+      - name: Bootstrap no-op after consumption
+        if: steps.probe.outputs.has_bundle != 'true'
+        run: echo K10_BOOTSTRAP_NOOP_PASS
