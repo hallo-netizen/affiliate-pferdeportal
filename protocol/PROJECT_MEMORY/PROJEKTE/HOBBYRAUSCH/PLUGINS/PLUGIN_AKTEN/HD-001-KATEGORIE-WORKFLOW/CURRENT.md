@@ -1,6 +1,6 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-09-30
+STAND: 2026-10-01
 STATUS: V1.9.4 TERM-NAME READBACK FIX / LIVE-ROOT-CAUSE BEWIESEN / SOURCE+FRESH-INSTALLER POSITIV+NEGATIV HARD PASS / LIVE-RETEST OFFEN
 
 ## Harte Abnahmeregel
@@ -89,18 +89,29 @@ Regression:
 - Fresh-Installer PHP-Lint 17/17 PASS;
 - Source↔Installer Runtime-Parität 22/22 byteidentisch.
 
+## Aktueller Live-Zustand
+
+Der letzte V1.9.3-Diagnoselauf wurde **vollständig zurückgerollt**.
+
+WordPress zeigt:
+- `Testlauf vollständig zurückgerollt.`
+- `Rollback abgeschlossen. Der technische Testbestand ist zurückgesetzt.`
+
+Damit existiert **kein aktiver Dry-Run mehr**.
+
 ## NEXT ACTION
 
-V1.9.4 über V1.9.3 installieren.
+1. V1.9.4 über V1.9.3 installieren.
+2. In `Kategorien` denselben bereits geprüften `HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json` erneut als neuen Arbeitsstand übernehmen.
+3. `Finale Struktur freigeben`.
+4. `WordPress-Vorschau erstellen`.
+5. neuen 7-CREATE-Plan über `Geprüften Plan anwenden` ausführen.
 
-Der letzte Diagnose-Apply wurde automatisch zurückgerollt; der bestehende Dry-Run bleibt unverändert auf 7 CREATE.
-
-Dann genau einmal:
-`Kategorien → Geprüften Plan anwenden`.
+Kein neuer Research-Lauf.
+Keine neue fachliche Strukturdatei erzeugen.
 
 Erwartung:
 `Deployment abgeschlossen` + `Schreiben und Readback erfolgreich.`
 
-Kein neuer Research-Lauf.
-Keine neue Strukturdatei.
-Kein neuer Dry-Run nötig.
+Bei irgendeinem Fehler:
+keine Abnahme; exakte Fehlermeldung auswerten.
