@@ -5,9 +5,9 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 from .core import stable, load_values, catalog_hash, values_hash
 from .checkers import run_article_checks, article_hash
-from .final_integrity import verify_article, verify_system, verify_package
+from .final_integrity import verify_article, verify_system, verify_package_pre_wordpress
 from .system_guard import run_system_checks
-from .package_adapters import make_package_receipts, PACKAGE_RESULT_MAP
+from .package_adapters import make_pre_wordpress_package_receipts, PACKAGE_RESULT_MAP
 
 class Blocked(RuntimeError): pass
 
@@ -105,10 +105,10 @@ def main():
       'LANGUAGE_DELTA_EVIDENCE':'PASS' if no_mutation else 'FAIL','LANGUAGE_EVIDENCE':'PASS' if lt.get('finding_count')==0 else 'FAIL','KNOWN_ERROR_CONTRACT':'PASS',
       'CONTENT_VALIDATOR_CONTRACT_SUPPORTED':'PASS'
     })
-    prec=make_package_receipts(article['article_id']+':package',psha,external); pver=verify_package(article['article_id']+':package',psha,prec)
+    prec=make_pre_wordpress_package_receipts(article['article_id']+':package',psha,external); pver=verify_package_pre_wordpress(article['article_id']+':package',psha,prec)
     save(outdir/'ARTICLE_RESOLVED.json',article); save(outdir/'ARTICLE_RECEIPTS.json',arec); save(outdir/'SYSTEM_RECEIPTS.json',srec); save(outdir/'WORDPRESS_IMPORT.json',wp); save(outdir/'PACKAGE.json',package); save(outdir/'PACKAGE_RECEIPTS.json',prec)
-    report={'contract':'K10_FIRST_REAL_E2E_PROOF_V1','status':'PASS' if pver['status']=='PASS' else 'BLOCKED_AT_PACKAGE_INTEGRITY','article_title':article['title'],'article_id':article['article_id'],'article_sha256':ah,'article_rules':aver,'system_rules':sver,'lt68':{'status':lt.get('status'),'finding_count':lt.get('finding_count'),'ignored_spelling_count':lt.get('ignored_spelling_count')},'pserc_metadata_binding':'PASS','wordpress_category':article['wordpress_category'],'endstempel':endstamp,'wordpress_file_verify':'PASS' if wp_verify else 'FAIL','package_integrity':pver,'package_external_results':external,'publish_allowed':False}
-    save(outdir/'FINAL_REPORT.json',report); print(json.dumps(report,ensure_ascii=False,indent=2)); raise SystemExit(0 if report['status']=='PASS' else 4)
+    report={'contract':'K10_FIRST_REAL_E2E_PROOF_V1','status':'READY_FOR_WORDPRESS_DRAFT_IMPORT' if pver['status']=='READY_FOR_WORDPRESS_DRAFT_IMPORT' else 'BLOCKED_AT_PACKAGE_INTEGRITY','article_title':article['title'],'article_id':article['article_id'],'article_sha256':ah,'article_rules':aver,'system_rules':sver,'lt68':{'status':lt.get('status'),'finding_count':lt.get('finding_count'),'ignored_spelling_count':lt.get('ignored_spelling_count')},'pserc_metadata_binding':'PASS','wordpress_category':article['wordpress_category'],'endstempel':endstamp,'wordpress_file_verify':'PASS' if wp_verify else 'FAIL','package_integrity':pver,'package_external_results':external,'publish_allowed':False}
+    save(outdir/'FINAL_REPORT.json',report); print(json.dumps(report,ensure_ascii=False,indent=2)); raise SystemExit(0 if report['status']=='READY_FOR_WORDPRESS_DRAFT_IMPORT' else 4)
 if __name__=='__main__':
     try: main()
     except Blocked as exc:
