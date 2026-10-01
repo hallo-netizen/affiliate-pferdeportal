@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 66,
+  "generation": 67,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -651,12 +651,18 @@
         "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
         "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
       },
-      "products": {},
+      "products": {
+        "research": {
+          "job_id": "K9-RESEARCH-7ce57ca68dad6301",
+          "path": "warehouse/research/K9-RESEARCH-7ce57ca68dad6301.json",
+          "sha256": "8fc83d6c0d052d67e8757ad735b4a6090f1299e4aa9d6295bc92ade388bad608"
+        }
+      },
       "revision": 0,
       "stages": {
         "check": "PENDING",
         "repair": "NOT_REQUIRED",
-        "research": "PENDING",
+        "research": "DONE",
         "write": "PENDING"
       },
       "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
