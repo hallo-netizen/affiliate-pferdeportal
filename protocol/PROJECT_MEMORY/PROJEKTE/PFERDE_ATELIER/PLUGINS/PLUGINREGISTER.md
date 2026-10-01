@@ -11,7 +11,7 @@ Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobach
 | Plugin | Real beobachtet 30.09.2026 | Aktivstatus | Zuständigkeit / Hinweis |
 |---|---:|---|---|
 | Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.578** | aktiv | DESIGN; aktuellen Fachstand dort prüfen |
-| Affiliate-Zentrale (Portal-kompatibel) | **6.72.167** | aktiv | AFFILIATE; letzter ausdrücklich versionsbezogener Nutzer-Readback 30.09.2026 + eBay-OAuth PASS. Technisch freigegeben ist **6.72.171**; Installation/Versions-Readback noch offen. Releasewahrheit: `affiliate-release-current:control/release-governance/CURRENT_RELEASE.json`. |
+| Affiliate-Zentrale (Portal-kompatibel) | **6.72.170** | aktiv | AFFILIATE; WordPress-Uploadvergleich 01.10.2026 zeigt `Aktuell 6.72.170`. Ein hochgeladenes 6.72.169-Paket war veraltet und wurde verworfen. Technisch freigegeben ist **6.72.171**; Installation/Versions-Readback noch offen. |
 | Performance Diagnose Safe | **2.3.0** | aktiv | GEMEINSAM / Performance; passive No-Filter-Diagnose |
 | Performance Diagnose Safe | **2.2.0** | inaktiv | AUFRÄUMKANDIDAT; nicht als aktuelle Messquelle verwenden |
 | Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
@@ -63,7 +63,7 @@ Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorie
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.167 letzter expliziter Versions-Readback | aktiv | **KRITISCH · BEHALTEN**; technischer Release **6.72.171**, Installation/Readback offen; Performance-A-B PASS | `../AFFILIATE/START_HERE.md` |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.170 letzter expliziter Versions-Readback | aktiv | **KRITISCH · BEHALTEN**; technischer Release **6.72.171**, Installation/Readback offen; Performance-A-B + Full Gate PASS | `../AFFILIATE/START_HERE.md` |
 
 ## BILD
 
