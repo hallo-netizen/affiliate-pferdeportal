@@ -1,0 +1,118 @@
+# HOBBYRAUSCH – PLUGINS – UPDATEPROTOKOLL
+
+ROLLE: HISTORIE / WAS + WARUM + BELEGE, KEINE CURRENT-WAHRHEIT
+
+Aktuelle Version, Live-Status, Blocker und NEXT ACTION ausschließlich aus der jeweiligen:
+`PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`
+
+## PU-20261001-001 – HD-001 Kategorie-Workflow
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PLUGIN:
+`Affiliate-Portal Kategorie-Workflow`
+
+ART:
+Eigenentwicklung / getrennte Hobby-Depot-Pluginlinie.
+
+FACHBÜRO:
+`SEO_KATEGORIEN`
+
+VON / AUF:
+Fehlerkette V1.9.1–V1.9.3 → V1.9.4.
+
+WARUM:
+Live-Deployment scheiterte im Readback beim Knoten `Techniken & Praxis`, weil WordPress Taxonomie-Namen mit `&` intern escaped speichert. Der Readback verglich zuvor Rohwert gegen Klartext.
+
+ÄNDERUNG:
+Readback normalisiert ausschließlich WordPress-Core-Termname-Escaping; echte semantische Namensabweichungen bleiben fail-closed.
+
+ABHÄNGIGKEITEN / SCHNITTSTELLEN:
+WordPress Taxonomie-Readback; kein Pferdeatelier-Runtimebezug.
+
+ROLLBACK:
+Vorherige Fehlversuche wurden automatisch erfolgreich zurückgerollt.
+
+POSITIVTEST:
+Exakter echter 7-CREATE-Buchbinden-Pfad inklusive Core-Escaping PASS.
+
+NEGATIVTEST:
+Falscher Name, doppelte Kodierung, falscher Slug/Parent/Meta bleiben BLOCKED; Rollback PASS.
+
+REGRESSION:
+Source 251/251 PASS; Fresh Installer 251/251 PASS; PHP Source 25/25; PHP Installer 17/17; Runtime-Parität 22/22.
+
+LIVE-NACHWEIS:
+V1.9.4 produktiver Deployment-Run: Schreiben + Readback PASS.
+
+RELEASE:
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.4_TERM_NAME_READBACK_FIX_HARD_PASS.zip`
+
+INSTALLER SHA-256:
+`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
+
+SOURCE SHA-256:
+`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+---
+
+## PU-20261001-002 – HD-002 Hobby Depot SEO Themenengine
+
+PLUGIN-ID:
+`HD-002-TEXT-SEO`
+
+PLUGIN:
+`Hobby Depot SEO Themenengine`
+
+ART:
+Eigenentwicklung / eigenständige Hobby-Depot-Linie; Pferdeatelier-PSTE nur frühere Referenzbasis, keine Runtime-Abhängigkeit.
+
+FACHBÜRO:
+`TEXT_REDAKTION`
+
+VON / AUF:
+V0.1.1 → V0.1.4 über die belegten Zwischenstände V0.1.2 und V0.1.3.
+
+WARUM:
+- automatischer read-only Owner-Handoff aus deployed HD-001 nötig;
+- gültiger `NOT_AVAILABLE`-Redaktionsplan wurde in 0.1.2 als fehlender Hash blockiert;
+- 0.1.3 konnte den PHP-Worker fortsetzen, bewies aber den realen ersten Admin-Reentry nicht vollständig;
+- 0.1.4 setzt exakt den bekannten recoverablen BLOCKED-State beim Öffnen der Übersicht serverseitig zurück auf RUNNING.
+
+ABHÄNGIGKEITEN / SCHNITTSTELLEN:
+Read-only Handoff aus HD-001; eigener HDTE-Speicher; keine Schreiboperation in HD-001.
+
+POSITIVTEST:
+Kompletter echter Pfad lokal:
+deployed HD-001 → Owner-Sync → Baseline → Admin-Reentry → jeder Folgeschritt eigener Request → finale Freshness-Gates → COMPLETE.
+
+Zusätzlich:
+Legacy-Job ohne Planfeld, kompletter Neuablauf, 4-Themen-Stresslauf und vorhandener Redaktionsplan → COMPLETE.
+
+NEGATIVTEST:
+Malformed NOT_AVAILABLE, vorhandener echter Plan im falschen Recovery-State, Structure-Mismatch, falscher Fehler/Phase, fehlender echter Hash, manipulierte Stage, finale Strukturdrift, upstream nicht deployed → fail-closed.
+
+REGRESSION / PAKET:
+PHP Source 80/80 PASS; PHP Fresh Installer 80/80 PASS; Source↔Installer 135/135 byteidentisch.
+
+LIVE-GRENZE:
+V0.1.4 lokal vollständig abgenommen, live noch NICHT abgenommen. Live bleibt der gespeicherte Portalabgleich bis zum erfolgreichen Upgrade sichtbar bei `HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`.
+
+RELEASE:
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.4_SERVER_SIDE_RESUME_FULL_WORKFLOW_HARD_PASS.zip`
+
+INSTALLER SHA-256:
+`02d52e326cce990833fb6661885d3ba5e30ab6461af76e8b0a2ebdcc3b78c12d`
+
+SOURCE SHA-256:
+`0ec35019433040ef1ff0f1567a2252c78f763eaa59b6f342b24d98c749f32a72`
+
+EVIDENCE:
+`HDTE_V0.1.4_COMPLETE_WORKFLOW_POS_NEG_EVIDENCE.txt`
+
+CURRENT:
+`PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
