@@ -1,0 +1,567 @@
+{
+  "contract": "K9_JOB_V1",
+  "item_count": 1,
+  "item_ids": [
+    "k9-7044b11fa198db7b17753884"
+  ],
+  "items": [
+    {
+      "input_product_refs": {
+        "research": {
+          "job_id": "K9-RESEARCH-3598db658c3d1e25",
+          "path": "warehouse/research/K9-RESEARCH-3598db658c3d1e25.json",
+          "sha256": "d5634cd242dc6cbc81ac63d7bc16379b0b3968b7a9b3aa0d1c8bc4782b8cabf6"
+        }
+      },
+      "input_products": {
+        "ppm_authoring_rules": {
+          "article_type": "FAQ",
+          "contract": "K9_PPM679_AUTHORING_RULES_V1",
+          "derived_binding_requirements": {
+            "source_trace_minimum": 3,
+            "table_value_statement_minimum_words": 8
+          },
+          "global_requirements": {
+            "max_duplicate_sentence_ratio": 0.02,
+            "max_intro_pair_similarity": 0.55,
+            "min_fact_pack_coverage_ratio": 0.75,
+            "min_h2": 4,
+            "min_paragraphs": 16,
+            "min_table_body_rows": 4,
+            "min_trace_lexical_support_ratio": 0.8,
+            "min_words": 750
+          },
+          "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+          "ppm_version": "6.7.9",
+          "quality_change_allowed": false,
+          "rules_sha256": "ca9990b20b2a9f7a8a4b7967b21c3871fdff46d0d5f7ff69e289dd92e8142cce",
+          "source_mode": "EXACT_HASH_BOUND_PPM679_PACKAGE",
+          "structure_requirements": {
+            "conclusion": {
+              "minimum_paragraphs": 2,
+              "minimum_ratio_by_type": {
+                "Beratung": 0.1,
+                "FAQ": 0.08,
+                "Pflege": 0.09,
+                "Vergleich": 0.09
+              },
+              "required_block": "conclusion"
+            },
+            "contract": "content_structure_language_gate_v2",
+            "faq": {
+              "direct_answer_minimum_words": 12,
+              "direct_answer_required": true,
+              "forbidden_meta_openings": [
+                "die ausgangsfrage besteht",
+                "die frage lässt sich",
+                "zunächst muss geprüft werden",
+                "eine belastbare antwort",
+                "die kurze antwort lautet"
+              ]
+            },
+            "headings": {
+              "forbidden_fragments": [
+                "antwort ableiten",
+                "antworten und nächste schritte",
+                "nicht belastbar",
+                "prüfpunkte",
+                "im überblick",
+                "ausgangsfrage besteht",
+                "entscheidung ableiten",
+                "teilfragen"
+              ],
+              "generic_or_technical_headings": [
+                "Die kurze Antwort",
+                "Die wichtigsten Teilfragen",
+                "Antworten und nächste Schritte im Überblick",
+                "Wann die Antwort noch nicht belastbar ist",
+                "Antworten im Überblick",
+                "Nächste Schritte",
+                "Überblick",
+                "Entscheidungsmatrix",
+                "Pflegeablauf im Überblick",
+                "Die Antwort aus Anhängelast ableiten"
+              ],
+              "maximum_words": 14,
+              "minimum_words": 2,
+              "minimum_words_between_headings": 28,
+              "near_duplicate_token_similarity": 0.72,
+              "reserved_headings": [
+                "Fazit",
+                "Weiterführende Informationen"
+              ],
+              "stopwords": [
+                "der",
+                "die",
+                "das",
+                "den",
+                "dem",
+                "des",
+                "ein",
+                "eine",
+                "einer",
+                "eines",
+                "und",
+                "oder",
+                "mit",
+                "ohne",
+                "für",
+                "von",
+                "vor",
+                "nach",
+                "bei",
+                "im",
+                "in",
+                "am",
+                "an",
+                "auf",
+                "aus",
+                "zu",
+                "zum",
+                "zur",
+                "ist",
+                "sind",
+                "wird",
+                "werden",
+                "was",
+                "wie",
+                "wann",
+                "warum",
+                "welche",
+                "welcher",
+                "welches"
+              ]
+            },
+            "intro": {
+              "first_visible_element": "p",
+              "heading_forbidden": true,
+              "maximum_words": 100,
+              "minimum_words": 30,
+              "required_block": "intro"
+            },
+            "known_language_regression_phrases": [
+              "die ausgangsfrage besteht aus mehreren eigenständigen prüfpunkten",
+              "das ergebnis grenzt normale veränderung von einem behandlungsbedürftigen befund ab",
+              "vor dem fortsetzen muss dieser arbeitsschritt nachvollziehbar beendet sein",
+              "ohne frühere ergebnisse zu überbewerten",
+              "die vorletzte kontrolle wird nicht übersprungen"
+            ],
+            "language_evidence": {
+              "checked_text_must_match_visible_text": true,
+              "human_exception_required_fields": [
+                "exception_id",
+                "exact_rule_id",
+                "exact_text",
+                "reason",
+                "approved_by_human_user",
+                "reference_file",
+                "reference_hash"
+              ],
+              "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+              "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+              "raw_finding_count_exact": 0,
+              "raw_report_json_required": true,
+              "required_engine": "LanguageTool 6.8 / Bestand 43",
+              "return_code_exact": 0,
+              "unresolved_findings_exact": 0
+            },
+            "links": {
+              "all_links_must_be_in_distinct_blocks": true,
+              "further_information_block": "further_information",
+              "relative_internal_only": true,
+              "required_count": 3,
+              "required_roles": [
+                "parent_category",
+                "semantic_related",
+                "further_information"
+              ]
+            },
+            "lists": {
+              "minimum_items_in_one_list": 4,
+              "minimum_lists": 1
+            },
+            "required_blocks_by_type": {
+              "Beratung": [
+                "intro",
+                "criteria",
+                "decision",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "FAQ": [
+                "intro",
+                "answer",
+                "details",
+                "checklist",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "Pflege": [
+                "intro",
+                "steps",
+                "risks",
+                "table",
+                "conclusion",
+                "further_information"
+              ],
+              "Vergleich": [
+                "intro",
+                "options",
+                "comparison",
+                "table",
+                "conclusion",
+                "further_information"
+              ]
+            },
+            "scope_limit": "Deterministic structural, binding and LanguageTool-evidence gate. It does not replace the later independent editorial matrix or user visual acceptance.",
+            "status": "QUARANTINE_CANDIDATE_NOT_RELEASED",
+            "table": {
+              "exact_count": 1,
+              "generic_column_headings_forbidden": [
+                "Punkt",
+                "Wert",
+                "Info",
+                "Information",
+                "Details",
+                "Aspekt"
+              ],
+              "generic_headings_forbidden": [
+                "Tabelle",
+                "Überblick",
+                "Zusammenfassung",
+                "Daten",
+                "Informationen"
+              ],
+              "minimum_body_rows": 4,
+              "minimum_columns": 3,
+              "minimum_unique_content_token_ratio": 0.18,
+              "required_block": "table"
+            },
+            "version": "2.0.0-wave2-quarantine",
+            "visible_test_marker_regex": "\\[LT[0-9A-Z-]{6,}\\]",
+            "wordpress_binding": {
+              "category_id_minimum": 1,
+              "forbidden_category_slugs": [
+                "uncategorized",
+                "allgemein",
+                "standard"
+              ],
+              "internal_marker_meta_key": "_ppm679_test_marker"
+            }
+          },
+          "type_requirements": {
+            "all_factual_blocks_require_trace": true,
+            "boundary": {
+              "is": "eine zentrale Frage mit geordneten Teilantworten",
+              "is_not": [
+                "Auswahlberatung ohne zentrale Frage",
+                "symmetrische Gegenueberstellung mehrerer Optionen",
+                "Pflege- oder Wartungsanleitung"
+              ]
+            },
+            "certification_evidence": {
+              "article_type": "FAQ",
+              "contract": "article_type_certification_evidence_v2",
+              "definition_hash": "ffeb6140e694095418ce875bac2978d0bd3da9ed224bd62e45fab7c191dd88ee",
+              "evidence_hash": "0f965b2173910559c598d30dbc73fd3b7ef84978ae8c7998a313302291c19eb2",
+              "gold_core_binding": "FOUR_TYPE_APPROVED_GOLD_CORE_V1",
+              "negative_status": "MUTATION_BLOCK_CHECK_OK",
+              "positive_status": "STRUCTURAL_CHECK_OK",
+              "version": "6.7.9"
+            },
+            "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+            "conclusion_min_ratio": 0.08,
+            "fact_trace_required": true,
+            "fact_trace_required_blocks": [
+              "intro",
+              "questions",
+              "conclusion",
+              "table"
+            ],
+            "html_contract": {
+              "allowed_tags_from_global": true,
+              "body_text_html_free": true
+            },
+            "production_allowed": false,
+            "purpose": "Eine konkrete Nutzerfrage direkt, nachvollziehbar und quellengebunden beantworten.",
+            "quality_contract": {
+              "conclusion_no_new_untraced_facts": true,
+              "duplicate_block_names_forbidden": true,
+              "topic_specific_special_logic_forbidden": true
+            },
+            "required_blocks": [
+              "intro",
+              "answer",
+              "details",
+              "checklist",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "required_link_roles": [
+              "parent_category",
+              "semantic_related",
+              "further_information"
+            ],
+            "required_lists": [
+              "key_answers"
+            ],
+            "search_intent": "INFORMATIONAL_DIRECT_QUESTION",
+            "slug_contract": {
+              "derived_from_title": true
+            },
+            "structure_profile": "faq",
+            "table": "required",
+            "table_count_exact": 1,
+            "table_fact_trace_required": true,
+            "title_contract": {
+              "colon_forbidden": true,
+              "keyword_required": true,
+              "question_mark": "REQUIRED"
+            },
+            "type_meta_schema": {
+              "fields": {
+                "primary_question": {
+                  "min_length": 8,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "primary_question"
+              ]
+            },
+            "visible_links_exact": 3
+          }
+        },
+        "research": {
+          "item_id": "k9-7044b11fa198db7b17753884",
+          "research_product": {
+            "contract": "K9_RESEARCH_PRODUCT_V1",
+            "decision_support": {
+              "decision_criteria": [
+                "Unteres Ende des aufgehängten Netzes ungefähr auf Widerristhöhe",
+                "Zu hohe Position wegen Staub und unnatürlicher Fresshaltung vermeiden",
+                "Zu tiefe Position nur nutzen, wenn Verfangrisiko für Beine und Hufe sicher beherrscht wird",
+                "Bodennahe Fütterung ist natürlicher, erfordert bei Netzen aber besondere Sicherheitsmaßnahmen"
+              ],
+              "decision_goal": "Erklären, wie hoch ein Heunetz sicher hängen sollte und warum Höhe, natürliche Fresshaltung und Verfangrisiko gegeneinander abgewogen werden müssen."
+            },
+            "fact_pack": {
+              "article_type": "FAQ",
+              "article_type_coverage": "PASS_FAQ",
+              "claim_register_hash": "10446e5c65a78b39f5939567842648f29942ec4becb85bb1d9ecc7d313316cc2",
+              "claims": [
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "154905f22bde2b616054c330fedbc670938d82fa036237cb236cd3c92822fa5a",
+                  "fact_id": "FACT-HEUNETZ-HOEHE-001",
+                  "locator": "Hay Feeding – recommendation for hay rack, net, or bag",
+                  "source_id": "SRC-PSU-HORSE-STALL-DESIGN-20261001",
+                  "statement": "Wenn ein Heunetz oder Heusack aufgehängt wird, empfiehlt Penn State, dass sich sein unteres Ende ungefähr auf Widerristhöhe des Pferdes befindet.",
+                  "subject_scope": "Aufhängehöhe eines Heunetzes",
+                  "time_scope": "allgemeine Fütterungs- und Sicherheitsberatung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "324d4cdb01ff0bf45857debad06ac2a3b129224001203f9acbc645740ad05a47",
+                  "fact_id": "FACT-HEUNETZ-HOEHE-002",
+                  "locator": "Hay Feeding – too high / too low safety explanation",
+                  "source_id": "SRC-PSU-HORSE-STALL-DESIGN-20261001",
+                  "statement": "Ein zu hoch angebrachtes Heunetz kann dazu führen, dass Heustaub in Augen und Nüstern fällt; ein zu niedriges Netz kann das Risiko erhöhen, dass sich das Pferd darin verfängt.",
+                  "subject_scope": "Risiken einer ungeeigneten Höhe",
+                  "time_scope": "allgemeine Fütterungs- und Sicherheitsberatung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "fe5a453c8c43b2adf3ccc1cdf40cee3f275e391bf896d028e89a7fd206a5a5cc",
+                  "fact_id": "FACT-HEUNETZ-HOEHE-003",
+                  "locator": "Hay feeder height and natural posture discussion",
+                  "source_id": "SRC-PSU-HAY-FEEDERS-20261001",
+                  "statement": "Eine tiefere Fütterungsposition kommt der natürlichen Kopf- und Halshaltung des Pferdes näher, kann bei Netzen aber das Risiko erhöhen, dass Beine oder Hufe im Material hängen bleiben.",
+                  "subject_scope": "Natürliche Fresshaltung und Sicherheitsabwägung",
+                  "time_scope": "allgemeine Fütterungs- und Sicherheitsberatung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "74a2db982fc1acb424688829625f4e936e73aaf50200211c8dd798971319f04d",
+                  "fact_id": "FACT-HEUNETZ-HOEHE-004",
+                  "locator": "Choke in horses – prevention advice",
+                  "source_id": "SRC-WHW-CHOKE-20261001",
+                  "statement": "World Horse Welfare empfiehlt, Raufutter und Futter nach Möglichkeit vom Boden anzubieten; Heunetze können jedoch eingesetzt werden, um die Fresszeit zu verlängern.",
+                  "subject_scope": "Bodenfütterung und Heunetze",
+                  "time_scope": "aktuelle allgemeine Fütterungsberatung"
+                },
+                {
+                  "article_types": [
+                    "FAQ"
+                  ],
+                  "claim_status": "FULLY_SUPPORTED",
+                  "evidence_text_sha256": "8bdbee177534df13832fa8c6a1deb5f4d2262eacfb425a57872ddb65dcd9a9ba",
+                  "fact_id": "FACT-HEUNETZ-HOEHE-005",
+                  "locator": "Quick facts – small- and medium-holed hay nets",
+                  "source_id": "SRC-UMN-SLOW-FEED-HAY-NETS-20261001",
+                  "statement": "Kleine und mittlere Öffnungen bei Heunetzen können die Aufnahme von Raufutter verlangsamen und die Fressdauer bei erwachsenen Pferden verlängern.",
+                  "subject_scope": "Funktion von Heunetzen als Slow Feeder",
+                  "time_scope": "allgemeine Fütterungsberatung"
+                }
+              ],
+              "conclusion_evidence_coverage": "PASS",
+              "contradiction_status": "PASS_NO_DIRECT_CONTRADICTION_IN_ACTIVE_ATOMIC_FACTS",
+              "domain": "pferdeatelier",
+              "fact_ids": [
+                "FACT-HEUNETZ-HOEHE-001",
+                "FACT-HEUNETZ-HOEHE-002",
+                "FACT-HEUNETZ-HOEHE-003",
+                "FACT-HEUNETZ-HOEHE-004",
+                "FACT-HEUNETZ-HOEHE-005"
+              ],
+              "fact_pack_hash": "1926ed65f9e7db8347691d084b34cd39ca0398c725c793c2cd987f3d497395a6",
+              "fact_pack_id": "FP-K9-HEUNETZ-HOEHE-20261001",
+              "placeholder_content_status": "PASS",
+              "production_readiness_status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "required_block_coverage": "PASS",
+              "source_manifest_hash": "ad3c74e654add11aa08cdab746860faa647249ad8caaf99316f41797a974340c",
+              "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+              "table_evidence_coverage": "PASS",
+              "temporal_validity_status": "PASS_RETRIEVAL_DATE_BOUND",
+              "title_scope": "wie_hoch_muss_ein_heunetz_haengen"
+            },
+            "portal_links": [
+              {
+                "anchor": "Fütterung",
+                "href": "/fuetterung/",
+                "role": "parent_category",
+                "section_id": "answer"
+              },
+              {
+                "anchor": "Raufutter",
+                "href": "/fuetterung/fuetterung-raufutter/",
+                "role": "semantic_related",
+                "section_id": "details"
+              },
+              {
+                "anchor": "Heunetze",
+                "href": "/fuetterung/fuetterung-raufutter/heunetze/",
+                "role": "further_information",
+                "section_id": "further_information"
+              }
+            ],
+            "product_sha256": "953ab4b4b0b5d868b634afda81e0e63e8978ac4f7c0a8876992621c182a2dac3",
+            "sources": [
+              {
+                "source_id": "SRC-PSU-HORSE-STALL-DESIGN-20261001",
+                "title": "Horse Stall Design",
+                "url": "https://extension.psu.edu/horse-stall-design"
+              },
+              {
+                "source_id": "SRC-PSU-HAY-FEEDERS-20261001",
+                "title": "Hay Feeders and the Potential to Reduce Hay Waste",
+                "url": "https://extension.psu.edu/hay-feeders-and-the-potential-to-reduce-hay-waste"
+              },
+              {
+                "source_id": "SRC-WHW-CHOKE-20261001",
+                "title": "Choke in horses",
+                "url": "https://www.worldhorsewelfare.org/advice/choke-in-horses"
+              },
+              {
+                "source_id": "SRC-UMN-SLOW-FEED-HAY-NETS-20261001",
+                "title": "Using slow feed hay nets",
+                "url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/using-slow-feed-hay-nets"
+              }
+            ]
+          }
+        }
+      },
+      "item_id": "k9-7044b11fa198db7b17753884",
+      "metadata": {
+        "article_type": "FAQ",
+        "category": "heunetze-faq",
+        "plan_slot": "5ee075292a576e1794c1ca6cc6a3f39fb7089a12465a590e85f21e75689afd77",
+        "target_keyword": "Wie hoch muss ein Heunetz hängen",
+        "title": "Wie hoch muss ein Heunetz hängen?"
+      },
+      "revision": 0,
+      "title": "Wie hoch muss ein Heunetz hängen?"
+    }
+  ],
+  "job_id": "K9-WRITE-151cf61f788638b1",
+  "job_sha256": "5dc7f9811c9710de0bfdfb2ad2521c80c79c38c5c9ca80364fd5ca502962ab99",
+  "ledger_generation": 84,
+  "source_run_id": "36898091897",
+  "station": "write",
+  "status": "OPEN",
+  "worker_contract": {
+    "forbidden": [
+      "DO_NEW_RESEARCH",
+      "INVENT_NEW_FACTS",
+      "ROUTE_TO_CHECK",
+      "RETURN_PARTIAL_BATCH",
+      "USE_ANY_STATE_OUTSIDE_THIS_EXACT_JOB",
+      "REOPEN_OR_REEVALUATE_ACCEPTED_PREDECESSOR_STATION",
+      "CHANGE_WORKFLOW_OR_ARCHITECTURE",
+      "CHANGE_QUALITY_GATES",
+      "RESET_OR_REPLACE_TEST_STATE",
+      "CREATE_ALTERNATIVE_ROUTE_OR_FALLBACK",
+      "PERFORM_SUPERVISOR_OR_SYSTEM_FIXES",
+      "DISCUSS_OR_SELECT_OTHER_CONCEPT_VERSIONS",
+      "WRITE_DIRECTLY_TO_SUBMISSIONS",
+      "HAND_BUILD_FINAL_K9_ARTICLE_PRODUCT"
+    ],
+    "input_rule": "USE_ONLY_THE_SEALED_RESEARCH_PRODUCT_AND_BOUND_EXACT_PPM679_AUTHORING_RULES_IN_THIS_JOB",
+    "must": [
+      "RETURN_ONE_COMPLETE_RESULT_PER_ITEM",
+      "USE_ONLY_FACTS_FROM_BOUND_RESEARCH_PRODUCT",
+      "RETURN_FINAL_ARTICLE_HTML",
+      "BIND_RESEARCH_PRODUCT_SHA256",
+      "RETURN_PPM_ITEM_BOUND_TO_SAME_FACT_PACK",
+      "HASH_COMPLETE_ARTICLE_PRODUCT",
+      "EXECUTE_EXACT_OPEN_STATION_ONLY",
+      "TREAT_BOUND_PREDECESSOR_PRODUCTS_AS_AUTHORITATIVE_INPUT",
+      "IF_UNEXECUTABLE_RETURN_ONLY_CONCRETE_INPUT_BLOCKER",
+      "WRITE_TO_BOUND_WRITER_DRAFT_PATH_NOT_SUBMISSIONS",
+      "SATISFY_K9_WRITING_RULES_BEFORE_RETURN",
+      "LET_K9_WRITE_PACKAGER_BUILD_ARTICLE_PRODUCT_AND_SUBMISSION",
+      "USE_CANONICAL_TABLE_CLASSES_SYSTEM_129_TABLE_AND_COMPARISON_TABLE",
+      "BIND_ALL_RESEARCH_FACTS_TO_EXACTLY_ONE_PPM_SOURCE_TRACE_BEFORE_CHECK",
+      "SOURCE_TRACE_FACT_ID_SOURCE_ID_AND_HASH_MUST_COPY_BOUND_RESEARCH_CLAIM",
+      "READ_COMPLETE_K9_WRITING_RULES_BEFORE_AUTHORING",
+      "APPLY_EVERY_BOUND_RULE_GROUP_NOT_A_SELECTED_SUBSET",
+      "TREAT_WRITING_RULES_COVERAGE_AS_FAIL_CLOSED",
+      "RUN_BOUND_WRITE_PACKAGER_PREFLIGHT_AND_FIX_ALL_FINDINGS_BEFORE_RETURN",
+      "DO_NOT_RETURN_A_DRAFT_WITH_KNOWN_RULE_FINDINGS",
+      "READ_BOUND_EXACT_PPM679_AUTHORING_RULES_BEFORE_AUTHORING",
+      "APPLY_BOUND_EXACT_PPM679_AUTHORING_RULES_BEFORE_RETURN",
+      "NEVER_WAIT_FOR_POSTWRITE_PPM_TO_DISCOVER_A_RULE_ALREADY_PRESENT_IN_BOUND_AUTHORING_RULES"
+    ],
+    "output_contract": "K9_WRITER_DRAFT_V1",
+    "output_field_sources": {
+      "content_html": "WRITE_FROM_BOUND_RESEARCH_COMPLETE_K9_WRITING_RULESET_AND_BOUND_EXACT_PPM679_AUTHORING_RULES_ONLY",
+      "contract": "LITERAL_K9_WRITER_DRAFT_V1",
+      "item_id": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM",
+      "job_id": "COPY_EXACTLY_FROM_CURRENT_JOB",
+      "title": "COPY_EXACTLY_FROM_CURRENT_JOB_ITEM_TITLE"
+    },
+    "required_output_fields": [
+      "contract",
+      "job_id",
+      "item_id",
+      "title",
+      "content_html"
+    ],
+    "worker_type": "CHAT_WRITE_WORKER"
+  }
+}
