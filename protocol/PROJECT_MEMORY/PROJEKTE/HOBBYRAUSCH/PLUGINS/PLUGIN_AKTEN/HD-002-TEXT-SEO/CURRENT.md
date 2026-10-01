@@ -1,103 +1,98 @@
 # HD-002 – HOBBY DEPOT SEO THEMENENGINE – CURRENT
 
-STAND: 2026-09-30
-STATUS: V0.1.1 FRESH-INSTALL-MIGRATION-FIX HARD LOCAL PASS / LIVE-RETEST OFFEN
+STAND: 2026-10-01
+STATUS: V0.1.2 AUTO OWNER HANDOFF POSITIV+NEGATIV HARD PASS / LIVE-INSTALLATION NÄCHSTES
 
-## Aktueller Kandidat
+## Live-Ausgangslage
+
+Aktuell live:
+`Hobby Depot SEO Themenengine 0.1.1`
+
+Sichere Fresh-Install-Migration:
+COMPLETE / Backend READY.
+
+HD-001 steht jetzt produktiv live:
+`Affiliate-Portal Kategorie-Workflow V1.9.4`
+mit erfolgreichem Deployment + Readback.
+
+## Problem in 0.1.1
+
+HDTE 0.1.1 besitzt den technischen Owner-Handoff-Importer, aber keinen normalen sichtbaren Importweg im Backend.
+
+`Gesamtbestand erfassen` benötigt den Owner-Handoff zwingend und würde ohne ihn fail-closed mit
+`HDTE_EDITORIAL_OWNERSHIP_HANDOFF_REQUIRED`
+blockieren.
+
+## Fix 0.1.2
 
 Plugin:
-`Hobby Depot SEO Themenengine`
-
-Version:
-`0.1.1`
+`Hobby Depot SEO Themenengine 0.1.2`
 
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.1_FRESH_INSTALL_MIGRATION_FIX_HARD_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.2_AUTO_OWNER_HANDOFF_HARD_PASS.zip`
 
-SHA-256:
-`6230a7e7db47dc1c337106051cd658e2093e0a3873dbb4d9225749538123577d`
+Installer SHA-256:
+`330028c8cd38f7f27664c804dfafa7649bea70e1f3647bc18229b52f2ba06003`
 
-## Live gefundener Fehler in 0.1.0
+Source SHA-256:
+`cf7e7766062d4c1241d2876d4d02d398ed6f81e8d1b3ebd93f0d74e0e7d32f9f`
 
-Fehlercode:
-`HDTE_SITE_BASELINE_REQUIRED`
+Beim bestehenden Button
+`Gesamtbestand erfassen`
+passiert jetzt automatisch und read-only:
 
-Ursache:
-Die sichere Startmigration verlangte bei einer vollständig neuen Hobby-Depot-Installation bereits in `EDITORIAL_INIT` einen Website-Baseline-Snapshot.
+1. HD-001 muss Stage `deployed` besitzen.
+2. gespeicherte FINAL_APPROVED-Struktur + Research werden aus dem installierten HD-001 gelesen;
+3. dieselben installierten HD-001 Validator-/Research-Evidence-Regeln prüfen den Stand erneut;
+4. nur ein `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`-Handoff wird übernommen;
+5. HDTE speichert ausschließlich seinen eigenen Handoff-Snapshot;
+6. danach wird der normale Website-Baseline-/Portalabgleich gestartet.
 
-Dieser Snapshot kann im Backend aber erst nach erfolgreichem READY-Start und Import des Kategorie-/Owner-Handoffs erzeugt werden.
+HD-001 wird dabei nicht verändert.
 
-Damit entstand auf einer Neuinstallation ein echter Start-Deadlock.
+## Exakter Buchbinden Positivtest
 
-V0.1.0:
-**SUPERSEDED / NICHT WEITER VERWENDEN.**
+Echter Produktionskandidat / echtes Research:
+- Owner-Handoff READY;
+- 7 Owner;
+- 11 ARTICLE_ONLY;
+- 11/11 gebunden;
+- automatischer Handoff-Sync PASS;
+- HDTE Baseline CURRENT;
+- 4 produktive Content-Leaf-Kategorien;
+- 1 Buchbinden-Themenfamilie;
+- HD-001 Workspace vor/nach Sync unverändert.
 
-## Fix 0.1.1
+Worktree und frisch entpackter Installer: PASS.
 
-Eine fehlende Baseline ist ausschließlich dann zulässig, wenn der eigene HDTE-Datenbestand maschinell als vollständig leer bewiesen ist:
+## Negativtests
 
-- Identity-Modus = `EMPTY_NEW_INSTALL`;
-- Topic Pool = 0;
-- Candidates = 0;
-- Occurrences = 0;
-- Assignments = 0;
-- History = 0;
-- Payload-Integrity-Total = 0;
-- Abschlussprüfung bestätigt weiterhin leeren Bestand.
+Fail-closed:
+- HD-001 nicht deployed → `HDTE_UPSTREAM_CATEGORY_WORKFLOW_NOT_DEPLOYED`;
+- Finalpaket fehlt → `HDTE_UPSTREAM_FINAL_PACKAGE_MISSING`;
+- nicht FINAL_APPROVED → `HDTE_UPSTREAM_FINAL_PACKAGE_NOT_APPROVED`;
+- notwendige Live-Kategorie fehlt → `HDTE_UPSTREAM_OWNER_CATEGORY_SET_INCOMPLETE`;
+- gespeicherter Handoff manipuliert → `HDTE_EDITORIAL_OWNERSHIP_SNAPSHOT_HASH_MISMATCH`.
 
-Nur dann wird die baselineabhängige Altbestandsmigration übersprungen und der sichere Erststart abgeschlossen.
+## Paketprüfung
 
-Sobald eigener Bestand existiert, bleibt die Baseline zwingend und fail-closed.
-
-## Harte lokale Prüfung
-
-Alter Fehler reproduziert:
-- 0.1.0 → `HDTE_SITE_BASELINE_REQUIRED` bei `EDITORIAL_INIT`: PASS.
-
-0.1.1 Positiv:
-- kompletter öffentlicher Fresh-Install-Ablauf: Start → 14 request-bounded Schritte → COMPLETE: PASS;
-- Fortsetzen eines bereits bei `EDITORIAL_INIT` pausierten Fresh-Install-Jobs: PASS.
-
-0.1.1 Negativ:
-- bestehender Bestand ohne Baseline: BLOCKED `HDTE_SITE_BASELINE_REQUIRED`;
-- Daten erscheinen während Fresh Install: BLOCKED `HDTE_EMPTY_INSTALL_UNEXPECTED_CANDIDATES`;
-- Payload-Bestand > 0 ohne Baseline: BLOCKED `HDTE_SITE_BASELINE_REQUIRED`;
-- bestehender Bestand mit gültiger Baseline nutzt unverändert den normalen Editorial-Migrationsweg.
-
-Regression:
-- PHP-Lint 80/80 PASS;
-- Project Boundary PASS;
-- Ownership 11/11 PASS;
-- Frage≠FAQ 12/12 PASS;
-- Family Identity 8/8 PASS;
-- HD-001 → HD-002 Buchbinden E2E 9/9 PASS;
-- Worktree ↔ Fresh-Unpack 135/135 byte-identisch.
-
-Performance-/Storage-Schutz:
-Diese vier kritischen Dateien sind gegenüber 0.1.0 byte-identisch:
-- `class-hdte-repository.php`;
-- `class-hdte-research-archive.php`;
-- `class-hdte-sandbox-record-store.php`;
-- `class-hdte-storage-maintenance.php`.
-
-Änderungsfläche 0.1.0 → 0.1.1:
-exakt 2 Dateien:
-- Pluginversion;
-- Safe-Migration-Job.
-
-## Beleggrenze
-
-Noch kein Live-Retest mit 0.1.1.
+- geändert gegenüber 0.1.1: exakt 3 Dateien;
+- Safe-Migration-/Storage-/Performance-Code sonst byte-identisch;
+- PHP Source 80/80 PASS;
+- PHP Fresh Installer 80/80 PASS;
+- Source ↔ Fresh Installer 135/135 Dateien identisch;
+- keine zusätzliche Pluginlinie / kein Companion-Plugin.
 
 ## NEXT ACTION
 
-V0.1.1 über die installierte V0.1.0 ersetzen.
+V0.1.2 über V0.1.1 installieren.
 
-Danach im Backend:
-**Hobby Depot Themenengine → Sichere Migration fortsetzen**
+Danach:
+`Hobby Depot Themenengine → Übersicht → Gesamtbestand erfassen`
 
-Erwartung:
-der bereits pausierte Fresh-Install-Job läuft bis COMPLETE und die Themenengine wird READY.
+Kein manueller Owner-Handoff-Download.
+Kein manueller Owner-Handoff-Import.
 
-Danach erst:
-Owner-Handoff importieren → Gesamtbestand erfassen → Buchbinden-E2E.
+Bei Erfolg:
+`Gesamtbestand erfasst.`
+Danach Portalabgleich bis COMPLETE.
