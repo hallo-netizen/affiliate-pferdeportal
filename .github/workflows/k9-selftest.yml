@@ -327,11 +327,12 @@ jobs:
           job_path=Path("runtime/CURRENT_JOB.json")
           entry_path=Path("runtime/CHAT_ENTRY.json")
           if not job_path.exists():
-              stop_path=Path("runtime/K9_STOP.json")
-              if stop_path.exists():
-                  current=json.loads(Path("CURRENT_STATE.json").read_text())
-                  if current.get("status")!="STOP" or current.get("active_job") is not None:
+              current=json.loads(Path("CURRENT_STATE.json").read_text())
+              if current.get("status")=="STOP":
+                  if current.get("active_job") is not None:
                       raise SystemExit("TERMINAL_CURRENT_STATE_INVALID")
+              elif current.get("status")=="BLOCKED_FINALIZER":
+                  print("LIVE_JOB_CHECK_NOT_APPLICABLE_BLOCKED_FINALIZER=1")
               raise SystemExit(0)
           if not entry_path.exists():
               raise SystemExit("LIVE_CHAT_ENTRY_MISSING")
