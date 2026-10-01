@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, hashlib, json, sys, tempfile
+import argparse, hashlib, json, re, sys, tempfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -33,6 +33,19 @@ def one_product(job_item, key, contract):
     if not isinstance(product,dict):
         raise CheckError("K9_CHECK_PRODUCT_MISSING:"+contract)
     return product
+
+
+def source_trace_count_findings(html, fact_pack):
+    fact_ids=[str(x) for x in fact_pack.get("fact_ids",[]) if str(x)]
+    counts={fid:0 for fid in fact_ids}
+    for tag in re.findall(r'<span\b[^>]*class=["\'][^"\']*\bppm-source-trace\b[^"\']*["\'][^>]*>',html,re.I):
+        m=re.search(r'\bdata-fact-id=["\']([^"\']+)["\']',tag,re.I)
+        if m and m.group(1) in counts:
+            counts[m.group(1)]+=1
+    return [
+        {"code":"K9_RULE_SOURCE_TRACE_COUNT_INVALID","fact_id":fid,"actual":counts[fid],"expected":1}
+        for fid in fact_ids if counts[fid]!=1
+    ]
 
 
 def reuse_or_run_lt(article, html, jar_path):
@@ -98,9 +111,10 @@ def run_job(job_path, jar_path, ppm_path):
             minimum=int((rules.get("editorial_additive",{}).get("balance_policy",{}) or {}).get("hard_total_words_min") or 0)
             if minimum and int(table_result.get("non_table_word_count") or 0)<minimum:
                 table_findings.append({"code":"K9_RULE_TABLE_CANNOT_FILL_ARTICLE_WORD_FLOOR","actual_non_table_words":int(table_result.get("non_table_word_count") or 0),"minimum":minimum})
-        writing_result["findings"]=list(writing_result.get("findings") or [])+table_findings
+        trace_findings=source_trace_count_findings(html,fact_pack)
+        writing_result["findings"]=list(writing_result.get("findings") or [])+table_findings+trace_findings
         writing_result["table_rule_contract"]=table_result.get("rule_contract")
-        if table_findings:
+        if table_findings or trace_findings:
             writing_result["status"]="REPAIR_REQUIRED"
         if article.get("writing_rules_sha256")!=writing_result.get("writing_rules_sha256"):
             raise CheckError("K9_CHECK_WRITING_RULES_BINDING_MISMATCH")
