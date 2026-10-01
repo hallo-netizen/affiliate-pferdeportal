@@ -120,7 +120,7 @@
     "facts": {
       "minimum_fact_pack_coverage_ratio": 0.75,
       "minimum_trace_lexical_support_ratio": 0.8,
-      "required_selected_fact_coverage_ratio": 1.0
+      "required_selected_fact_coverage_ratio": 1
     },
     "faq": {
       "direct_answer_minimum_words": 12,
@@ -302,7 +302,13 @@
     },
     "sentences_forbidden": true,
     "table_words_count_toward_article_minimum": false,
-    "target_unique_content_token_ratio": 0.22
+    "target_unique_content_token_ratio": 0.22,
+    "optional_decision": {
+      "required_for_optional_types": true,
+      "omit_value": "OMIT_NO_ADDED_VALUE",
+      "include_value": "INCLUDE_ADDED_VALUE",
+      "rationale_minimum_chars": 12
+    }
   },
   "types": {
     "Beratung": {
@@ -461,5 +467,13 @@
         ]
       }
     }
+  },
+  "intro_orientation": {
+    "first_sentence_required": true,
+    "first_sentence_minimum_words": 6,
+    "first_sentence_maximum_words": 32,
+    "subject_overlap_minimum_significant_tokens": 1,
+    "preferred_intro_words_min": 60,
+    "preferred_intro_words_max": 80
   }
 }
