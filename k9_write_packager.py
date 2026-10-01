@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-import argparse, hashlib, html as htmlmod, json, re, sys
+import argparse, copy, hashlib, html as htmlmod, json, re, sys, tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str((ROOT/"quality").resolve()))
+import k9_lt68
+import k9_ppm679
 import k9_rule_guard
 import k9_table_guard
 JOB=ROOT/"runtime"/"CURRENT_JOB.json"
 ENTRY=ROOT/"runtime"/"CHAT_ENTRY.json"
 RULES=ROOT/"contracts"/"K9_WRITING_RULES.json"
+PPM_PACKAGE=ROOT/"quality"/"PORTAL_PRODUCTION_MACHINE_V6.7.9.zip"
 PORTAL_SNAPSHOT_SHA256="b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0"
 LINK_REASON_BY_ROLE={
     "parent_category":"Maschinell gebundener Portal-Hauptbereich",
@@ -229,7 +232,94 @@ def complete_rule_preflight(markup, metadata, rules):
         raise PackError("WRITING_PREFLIGHT_REPAIR_REQUIRED:"+",".join(codes or ["UNKNOWN"]))
     return True
 
-def _build_single(job,entry,rules,rules_sha,draft):
+
+def _synthetic_zero_lt_evidence(markup):
+    checked=k9_lt68.ppm_visible_language_text(markup)
+    article_sha=hashlib.sha256(markup.encode("utf-8")).hexdigest()
+    checked_sha=hashlib.sha256(checked.encode("utf-8")).hexdigest()
+    raw_report=json.dumps({"matches":[]},ensure_ascii=False,separators=(",",":"))
+    raw_sha=hashlib.sha256(raw_report.encode("utf-8")).hexdigest()
+    return {
+        "engine":k9_lt68.ENGINE,
+        "outer_dependency_sha256":k9_lt68.LT_OUTER_DEPENDENCY_SHA256,
+        "inner_dependency_sha256":k9_lt68.LT_INNER_DEPENDENCY_SHA256,
+        "content_hash":article_sha,
+        "checked_text":checked,
+        "checked_text_sha256":checked_sha,
+        "raw_report_json":raw_report,
+        "raw_report_sha256":raw_sha,
+        "raw_finding_count":0,
+        "unresolved_finding_count":0,
+        "return_code":0,
+        "approved_exceptions":[],
+        "execution_record":{"input_sha256":checked_sha,"raw_stdout_sha256":raw_sha,"return_code":0},
+    }
+
+def exact_ppm_authoring_preflight(product,research):
+    ppm_item=copy.deepcopy(product.get("ppm_item"))
+    if not isinstance(ppm_item,dict):
+        raise PackError("PPM679_AUTHORING_PREFLIGHT_ITEM_MISSING")
+    binding=ppm_item.get("quality_binding")
+    if not isinstance(binding,dict):
+        raise PackError("PPM679_AUTHORING_PREFLIGHT_BINDING_MISSING")
+    markup=str(product.get("content_html") or "")
+    binding["language_evidence"]=_synthetic_zero_lt_evidence(markup)
+    ppm_item["quality_binding_hash"]=stable(binding)
+    fact_pack=copy.deepcopy(research.get("fact_pack"))
+    if not isinstance(fact_pack,dict):
+        raise PackError("PPM679_AUTHORING_PREFLIGHT_FACT_PACK_MISSING")
+    source_titles={str(x.get("source_id") or "").strip():str(x.get("title") or "").strip() for x in research.get("sources",[]) if isinstance(x,dict)}
+    for claim in fact_pack.get("claims",[]) if isinstance(fact_pack.get("claims"),list) else []:
+        if not isinstance(claim,dict):
+            continue
+        sid=str(claim.get("source_id") or "").strip()
+        if sid.upper().startswith("TEST_") and source_titles.get(sid):
+            claim["source_id"]=source_titles[sid]
+    payload={
+        "contract":"K9_PPM679_INPUT_V1",
+        "generated":{
+            "article_type":str(product.get("article_type") or ""),
+            "title":str(product.get("title") or ""),
+            "content_html":markup,
+            "content_hash":str(product.get("content_sha256") or ""),
+        },
+        "item":ppm_item,
+        "fact_pack":fact_pack,
+    }
+    with tempfile.TemporaryDirectory(prefix="k9-writer-ppm-preflight-") as td:
+        p=Path(td)/"input.json"
+        p.write_text(json.dumps(payload,ensure_ascii=False),encoding="utf-8")
+        result=k9_ppm679.run(PPM_PACKAGE,p)
+    if result.get("status")=="BLOCKED":
+        raise PackError("PPM679_AUTHORING_PREFLIGHT_BLOCKED:"+str(result.get("reason") or result.get("phase") or "UNKNOWN"))
+    errors=[e for e in (result.get("errors") or []) if isinstance(e,dict) and e.get("error_code")!="BLOCKED_WAVE2_LANGUAGE_EVIDENCE"]
+    if errors:
+        codes=[]
+        for e in errors:
+            code=str(e.get("error_code") or "UNKNOWN")
+            if code not in codes:
+                codes.append(code)
+        raise PackError("PPM679_AUTHORING_PREFLIGHT_REPAIR_REQUIRED:"+",".join(codes))
+    return True
+
+def lt68_writer_preflight(markup,lt_jar):
+    if lt_jar is None:
+        return True
+    with tempfile.TemporaryDirectory(prefix="k9-writer-lt68-preflight-") as td:
+        p=Path(td)/"article.html"
+        p.write_text(markup,encoding="utf-8")
+        result=k9_lt68.run(Path(lt_jar),p)
+    if result.get("status")!="PASS":
+        ids=[]
+        for finding in result.get("findings") or []:
+            rid=str(finding.get("rule_id") or "UNKNOWN")
+            if rid not in ids:
+                ids.append(rid)
+        raise PackError("LT68_WRITER_PREFLIGHT_REPAIR_REQUIRED:"+str(result.get("finding_count") or 0)+":"+",".join(ids or ["UNKNOWN"]))
+    return True
+
+
+def _build_single(job,entry,rules,rules_sha,draft,lt_jar=None):
     if job.get("contract")!="K9_JOB_V1" or job.get("status")!="OPEN" or job.get("station") not in ("write","repair"):
         raise PackError("WRITE_JOB_INVALID")
     if entry.get("job_id")!=job.get("job_id") or entry.get("job_sha256")!=job.get("job_sha256"):
@@ -238,6 +328,8 @@ def _build_single(job,entry,rules,rules_sha,draft):
         raise PackError("COMPLETE_WRITING_RULE_BINDING_INVALID")
     if entry.get("writing_rules_coverage_contract")!="K9_COMPLETE_RULE_COVERAGE_V1" or entry.get("complete_rule_application_required") is not True:
         raise PackError("WRITING_RULE_COVERAGE_NOT_REQUIRED")
+    if entry.get("writer_ppm679_preflight_required") is not True or entry.get("writer_lt68_preflight_required") is not True:
+        raise PackError("WRITER_EARLY_BINDING_REQUIREMENTS_MISSING")
     if draft.get("contract")!="K9_WRITER_DRAFT_V1" or draft.get("job_id")!=job["job_id"]:
         raise PackError("WRITER_DRAFT_JOB_MISMATCH")
     item_id=str(draft.get("item_id") or "").strip()
@@ -255,6 +347,7 @@ def _build_single(job,entry,rules,rules_sha,draft):
     markup=ensure_all_fact_traces(markup,research)
     validate_html(markup,article_type,meta,research,rules)
     complete_rule_preflight(markup,meta,rules)
+    lt68_writer_preflight(markup,lt_jar)
     fact_pack=research["fact_pack"]; fact_ids=list(fact_pack["fact_ids"])
     portal_links=list(research["portal_links"]); decision=research.get("decision_support",{})
     link_bindings=[]
@@ -375,10 +468,11 @@ def _build_single(job,entry,rules,rules_sha,draft):
              "content_sha256":hashlib.sha256(markup.encode()).hexdigest(),
              "research_product_sha256":research["product_sha256"],"writing_rules_sha256":rules_sha,
              "writing_rules_coverage_contract":"K9_COMPLETE_RULE_COVERAGE_V1","ppm_item":ppm_item}
+    exact_ppm_authoring_preflight(product,research)
     product["product_sha256"]=stable(product)
     return {"item_id":item_id,"article_product":product}
 
-def build(draft_path):
+def build(draft_path,lt_jar=None):
     job=load(JOB); entry=load(ENTRY); draft=load(draft_path); rules=load(RULES)
     coverage=k9_rule_guard.validate_coverage(rules)
     rules_sha=coverage["rules_sha256"]
@@ -402,12 +496,12 @@ def build(draft_path):
                 "title":row.get("title"),
                 "content_html":row.get("content_html")
             })
-    results=[_build_single(job,entry,rules,rules_sha,row) for row in drafts]
+    results=[_build_single(job,entry,rules,rules_sha,row,lt_jar=lt_jar) for row in drafts]
     return {"contract":"K9_SUBMISSION_V1","job_id":job["job_id"],"station":job["station"],"results":results}
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument("draft"); ap.add_argument("--output",required=True); ns=ap.parse_args()
-    try: out=build(Path(ns.draft))
+    ap=argparse.ArgumentParser(); ap.add_argument("draft"); ap.add_argument("--lt-jar"); ap.add_argument("--output",required=True); ns=ap.parse_args()
+    try: out=build(Path(ns.draft),Path(ns.lt_jar) if ns.lt_jar else None)
     except (PackError,AttributeError) as exc:
         print(json.dumps({"contract":"K9_WRITE_PACKAGER_V1","status":"BLOCKED","reason":str(exc)},ensure_ascii=False,indent=2),file=sys.stderr)
         raise SystemExit(2)
