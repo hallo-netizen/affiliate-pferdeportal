@@ -1,6 +1,6 @@
 {
   "contract": "K9_LEDGER_V1",
-  "generation": 70,
+  "generation": 71,
   "items": [
     {
       "item_id": "k9-bfc0c6806fa88f0c55a2dcd9",
@@ -653,9 +653,9 @@
       },
       "products": {
         "check": {
-          "job_id": "K9-CHECK-7ac5ac0cf16b0c7c",
-          "path": "warehouse/check/K9-CHECK-7ac5ac0cf16b0c7c.json",
-          "sha256": "5f9b6df960ff8383d4d5f36074e703b63539167dd6b97d58ac290fce4404fd53"
+          "job_id": "K9-CHECK-eb75f2e2097626ac",
+          "path": "warehouse/check/K9-CHECK-eb75f2e2097626ac.json",
+          "sha256": "57cbcf522e54a27cda86dd0462aa815d1fd05f5b3c6472aedbb73ecc21215a14"
         },
         "repair": {
           "job_id": "K9-REPAIR-e9b15e6f95bc2453",
@@ -675,8 +675,8 @@
       },
       "revision": 1,
       "stages": {
-        "check": "PENDING",
-        "repair": "DONE",
+        "check": "DONE",
+        "repair": "NOT_REQUIRED",
         "research": "DONE",
         "write": "DONE"
       },

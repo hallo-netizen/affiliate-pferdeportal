@@ -1,0 +1,245 @@
+{
+  "contract": "K9_SUBMISSION_V1",
+  "job_id": "K9-CHECK-eb75f2e2097626ac",
+  "results": [
+    {
+      "item_id": "k9-ff5fb509c19c41dab1011be7",
+      "lt68_result": {
+        "article_sha256": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+        "checked_text_sha256": "ddbd907b65f2ee03899bd49e6f0d4cd91660a3e5ee200c261ee16090cdc44a01",
+        "contract": "K9_LT68_RESULT_V1",
+        "engine": "LanguageTool 6.8 / Bestand 43",
+        "finding_count": 0,
+        "findings": [],
+        "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+        "jar_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "language_evidence": {
+          "approved_exceptions": [],
+          "checked_text": "Wenn andere Menschen dein Pferd reiten, reicht der Blick auf den Namen des Tarifs nicht aus. Entscheidend ist, ob Fremdreiter und Reitbeteiligungen im konkreten Vertrag tatsächlich eingeschlossen sind. Dieser Punkt sollte vor dem Abschluss geklärt sein.\n\nBei einer Pferdehaftpflicht zählt deshalb nicht nur, dass überhaupt Versicherungsschutz besteht. Vor Vertragsabschluss sollte geprüft werden, welche Risiken und Personen der gewählte Vertrag abdeckt. Für das Fremdreiterrisiko muss die tatsächliche Nutzung zu den Bedingungen passen.\n\nPferdehaftpflicht mit Fremdreiterrisiko richtig auswählen\n\nTarife können neben dem Pferdehalter weitere Personen einbeziehen. Dazu können nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- oder Fremdreiter gehören. Für deine Auswahl ist wichtig, diese Gruppen nicht gleichzusetzen, sondern die tatsächlich beteiligten Personen wiederzufinden.\n\nBesonders relevant ist die Frage, ob andere Personen das Pferd regelmäßig oder gelegentlich unentgeltlich reiten. In diesem Fall sollte das Fremdreiterrisiko im Vertrag ausdrücklich berücksichtigt sein. Eine Formulierung, die nur den Halter nennt, beantwortet diese Frage noch nicht.\n\nHilfreich ist eine kurze Bestandsaufnahme vor dem Tarifvergleich. Notiere, wer das Pferd nutzt, wie häufig das geschieht und ob die Nutzung nur gelegentlich oder dauerhaft organisiert ist. Diese Einordnung verändert keine Vertragsbedingungen, macht aber sichtbar, welche Personengruppen du im Tarif gezielt wiederfinden musst.\n\nVergleiche anschließend nicht nur Überschriften oder Werbeaussagen, sondern die konkrete Beschreibung des versicherten Personenkreises. So erkennst du schneller, ob dein eigener Nutzungsalltag überhaupt zu dem passt, was der Tarif tatsächlich nennt.\n\nZur übergeordneten Einordnung gehört der Bereich Wissen. Dort lässt sich das Versicherungsthema in den größeren Zusammenhang einordnen, ohne die konkrete Tarifprüfung zu ersetzen.\n\nFremdreiter: ausdrücklich prüfen, ob Gast- oder Fremdreiter mitversichert sind.\n\nReitbeteiligung: klären, wie regelmäßige Nutzung im Tarif eingeordnet wird.\n\nMithalter: kontrollieren, ob diese Personengruppe genannt und erfasst ist.\n\nHüter: prüfen, ob nicht gewerbsmäßige Betreuung vom Vertrag umfasst wird.\n\nNutzungsform: gelegentliche und regelmäßige Überlassung getrennt betrachten.\n\nPferdehaftpflicht zur Nutzung passend einordnen\n\nDer Schutz eines Fremdreiters richtet sich nach dem Fremdreiterrisiko, das im konkreten Tarif vereinbart wurde. Deshalb ist die Vertragsprüfung der entscheidende Schritt, bevor das Pferd anderen Personen überlassen wird. Eine pauschale Annahme ersetzt diese Prüfung nicht.\n\nWichtig ist auch die Abgrenzung. Ein Schaden, der nicht durch das Pferd, sondern durch ein eigenes Missgeschick des Reiters verursacht wird, fällt nicht automatisch unter die Pferdehaftpflicht. Dann kann die Privathaftpflicht des Reiters eine Rolle spielen.\n\nFür die Auswahl bedeutet das: Prüfe nicht nur die Bezeichnung „Fremdreiterrisiko“, sondern auch, welche Person in welcher Eigenschaft geschützt sein soll. Dann lässt sich erkennen, ob dein Alltag mit dem Pferd von der beschriebenen Nutzung im Tarif erfasst wird.\n\nEine praktische Reihenfolge hilft beim Vergleich. Zuerst ordnest du die Personen ein, danach die Nutzung und zuletzt den möglichen Schadenhergang. Damit wird sichtbar, welche Fragen der Tarif beantworten muss und welche Punkte außerhalb der Pferdehaftpflicht liegen können.\n\nIm Bereich Versicherungen & Recht lässt sich die Entscheidung weiter einordnen. Der konkrete Vertrag bleibt dabei die maßgebliche Grundlage für die Frage, welche Nutzung tatsächlich abgesichert ist.\n\nWenn andere Personen dein Pferd nutzen, sollten Fremdreiter und Reitbeteiligungen in der Auswahl ausdrücklich berücksichtigt werden. Beim Tarifvergleich kannst du deshalb gezielt nach den Personengruppen suchen, die bei dir tatsächlich vorkommen, statt nur allgemeine Leistungslisten zu lesen.\n\nVersicherungen & Recht vorab prüfen\n\nVor Abschluss einer Tierhalterhaftpflicht sollte genau geprüft werden, welche Risiken und Personen der gewählte Vertrag tatsächlich abdeckt. Für das Fremdreiterrisiko heißt das praktisch: Der Personenkreis darf nicht nur vermutet werden, sondern muss sich im Tarif nachvollziehbar wiederfinden.\n\nOb ein Fremdreiter über die Pferdehaftpflicht des Halters geschützt ist, hängt vom vereinbarten Fremdreiterrisiko des konkreten Tarifs ab. Deshalb ist es sinnvoll, den Wortlaut schon vor der Überlassung des Pferdes zu prüfen und nicht erst nach einem Schaden.\n\nRegelmäßige oder gelegentliche unentgeltliche Nutzung und die im Tarif genannten Personengruppen gehören zusammen betrachtet. Reitbeteiligte, Mithalter, Hüter sowie Gast- oder Fremdreiter können ausdrücklich einbezogen sein. Für den Vergleich ist deshalb entscheidend, ob die eigene Nutzung in diesen Beschreibungen klar wiederzufinden ist. Prüfe die Rollen nacheinander und halte fest, welche davon im eigenen Alltag tatsächlich vorkommen. So bleibt die Auswahl auf den persönlichen Nutzungsfall begrenzt, ohne den Tarif über seinen Wortlaut hinaus auszulegen.\n\nWissen für den Tarifvergleich nutzen\n\nFremdreiter, Reitbeteiligungen und die konkrete Nutzungsform bilden den Kern des Tarifvergleichs.\n\nPrüfpunkt\n\nTarifwortlaut\n\nAbgleich\n\nFremdreiter\n\nausdrücklich genannt\n\nNutzung abgleichen\n\nNutzungsform\n\ngelegentlich oder regelmäßig\n\nVertrag prüfen\n\nWeitere Personen\n\nReitbeteiligte Mithalter Hüter\n\nRollen abgleichen\n\nSchadenursache\n\nPferd oder Reiter\n\nHaftpflicht zuordnen\n\nDie Tabelle reduziert den Vergleich auf Personenkreis, Nutzungsform und Schadenursache und hält die zentralen Prüfschritte kompakt zusammen.\n\nFazit\n\nEine passende Pferdehaftpflicht mit Fremdreiterrisiko erkennst du nicht allein am Tarifnamen. Entscheidend ist, ob die konkrete Nutzung und die beteiligten Personen in den Bedingungen erfasst sind. Genau deshalb sollte der Leistungsumfang vor Abschluss und vor der Überlassung des Pferdes geprüft werden.\n\nWer Fremdreiter oder Reitbeteiligungen einbindet, sollte deren Absicherung ausdrücklich mitdenken. Gleichzeitig bleibt wichtig, zwischen einem durch das Pferd verursachten Schaden und einem eigenen Missgeschick des Reiters zu unterscheiden. So entsteht eine Auswahl, die sich an der tatsächlichen Nutzung orientiert und nicht an pauschalen Annahmen oder bloßen Tarifbezeichnungen.\n\nWeiterführende Informationen\n\nWeitere Hinweise zum Thema findest du im gebundenen Bereich Pferdehaftpflicht. Für die Tarifwahl bleibt entscheidend, die dortige Einordnung mit den Bedingungen des konkreten Vertrags abzugleichen.\n\nDieser Beitrag wurde mithilfe von KI vorformuliert und anschließend redaktionell geprüft und überarbeitet.",
+          "checked_text_sha256": "ddbd907b65f2ee03899bd49e6f0d4cd91660a3e5ee200c261ee16090cdc44a01",
+          "content_hash": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+          "engine": "LanguageTool 6.8 / Bestand 43",
+          "execution_record": {
+            "input_sha256": "ddbd907b65f2ee03899bd49e6f0d4cd91660a3e5ee200c261ee16090cdc44a01",
+            "raw_stdout_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "return_code": 0
+          },
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count": 0,
+          "raw_report_json": "{\"software\":{\"name\":\"LanguageTool\",\"version\":null,\"buildDate\":null,\"apiVersion\":1,\"premium\":false,\"status\":\"\"},\"warnings\":{\"incompleteResults\":false},\"language\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"detectedLanguage\":{\"name\":\"German (Germany)\",\"code\":\"de-DE\",\"confidence\":1.0,\"source\":null}},\"matches\":[],\"sentenceRanges\":[],\"extendedSentenceRanges\":[]}",
+          "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+          "return_code": 0,
+          "unresolved_finding_count": 0
+        },
+        "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+        "publish_allowed": false,
+        "raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+        "return_code": 0,
+        "status": "PASS"
+      },
+      "ppm679_result": {
+        "checks": {
+          "content_hash": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+          "content_structure_language_gate_checks": {
+            "article_type": "Beratung",
+            "body_h1_count": 0,
+            "conclusion_paragraph_count": 2,
+            "conclusion_ratio": 0.1050767414403778,
+            "conclusion_word_count": 89,
+            "content_hash": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+            "contract": "content_structure_language_gate_v2",
+            "contract_hash": "cb8eaafac29e44cad6d9e15dc7923705609f83361a7bdcab07adc51dccad8e3d",
+            "generic_heading_hits": [],
+            "heading_count": 6,
+            "heading_spacing_errors": [],
+            "html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "intent_heading_misses": [],
+            "internal_test_marker_valid": true,
+            "internal_test_marker_visible": false,
+            "intro_heading_count": 0,
+            "intro_starts_with_paragraph": true,
+            "intro_word_count": 71,
+            "known_language_regression_hits": [],
+            "language_checked_text_sha256": "ddbd907b65f2ee03899bd49e6f0d4cd91660a3e5ee200c261ee16090cdc44a01",
+            "language_evidence_valid": true,
+            "language_exception_errors": [],
+            "language_raw_finding_count": 0,
+            "language_raw_report_sha256": "cc55084ea3e9f976e8ca91c81646582a2f8dc01f26ae2e506b287c2616a402c5",
+            "language_unresolved_finding_count": 0,
+            "list_count": 1,
+            "maximum_list_items": 5,
+            "near_duplicate_headings": [],
+            "portal_link_registry_hash": "6f2b9231b7b3526377c79bb23bbcf15bbd0e613075ce348cb19c53f7698f6e7c",
+            "quality_binding_hash": "c716b8a17ee3fb223ba1f1be996deafa2f5f3adc0912edc5332ec2321242bcae",
+            "required_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "resolved_link_roles": {
+              "further_information": {
+                "anchor": "Pferdehaftpflicht",
+                "block": "further_information",
+                "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/"
+              },
+              "parent_category": {
+                "anchor": "Wissen",
+                "block": "criteria",
+                "href": "/wissen/"
+              },
+              "semantic_related": {
+                "anchor": "Versicherungen & Recht",
+                "block": "decision",
+                "href": "/wissen/wissen-versicherungen-und-recht/"
+              }
+            },
+            "scope_limit": "deterministic structure, bindings and LanguageTool evidence; no final editorial or visual PASS",
+            "section_blocks": [
+              "intro",
+              "criteria",
+              "decision",
+              "coverage",
+              "table",
+              "conclusion",
+              "further_information"
+            ],
+            "table_body_rows": 4,
+            "table_columns": 3,
+            "table_count": 1,
+            "table_headers": [
+              "Prüfpunkt",
+              "Tarifwortlaut",
+              "Abgleich"
+            ],
+            "table_heading": "Wissen für den Tarifvergleich nutzen",
+            "table_tag_balance": true,
+            "table_unique_content_token_ratio": 0.20833333333333334,
+            "table_value_statement": "Die Tabelle bündelt die wichtigsten Auswahlkriterien für Pferdehaftpflicht mit Fremdreiterrisiko und macht die entscheidenden Prüfpunkte direkt vergleichbar.",
+            "title_repeated_in_body": false,
+            "version": "6.7.9-wave2-quarantine",
+            "visible_internal_links": [
+              {
+                "anchor": "Wissen",
+                "block": "criteria",
+                "href": "/wissen/"
+              },
+              {
+                "anchor": "Versicherungen & Recht",
+                "block": "decision",
+                "href": "/wissen/wissen-versicherungen-und-recht/"
+              },
+              {
+                "anchor": "Pferdehaftpflicht",
+                "block": "further_information",
+                "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/"
+              }
+            ],
+            "wordpress_category": {
+              "category_source_snapshot_hash": "b86a160e6b8cf720077830422ca6b574203ce171fdc65d357fe9c6bed039c2e0",
+              "hierarchy_path": "Wissen > Versicherungen & Recht > Pferdehaftpflicht > Beratung Pferdehaftpflicht",
+              "name": "Beratung Pferdehaftpflicht",
+              "semantic_binding_not_numeric_identity": true,
+              "slug": "pferdehaftpflicht-beratung",
+              "taxonomy": "category"
+            },
+            "wordpress_category_binding_mode": "SEMANTIC_SNAPSHOT_BOUND_LIVE_ID_PENDING",
+            "wordpress_category_valid": true
+          },
+          "content_structure_language_gate_status": "PASS",
+          "draft_create_allowed": false,
+          "duplicate_sentence_ratio": 0,
+          "fact_pack_claim_count": 6,
+          "fact_pack_coverage_ratio": 1,
+          "factual_unit_count": 35,
+          "fail_closed_aggregate_status": "PASS",
+          "h2_count": 6,
+          "internal_link_roles": [
+            "parent_category",
+            "semantic_related"
+          ],
+          "intro_pair_similarity": 0.07142857142857142,
+          "known_error_gate_checks": {
+            "adjacent_heading_count": 0,
+            "article_type": "Beratung",
+            "basic_html_balance": {
+              "ok": true,
+              "unclosed": [],
+              "unexpected_closing": []
+            },
+            "body_h1_count": 0,
+            "conclusion_ratio": 0.1050767414403778,
+            "conclusion_word_count": 89,
+            "content_hash": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+            "contract": "known_error_gate_v1",
+            "contract_hash": "2d7f3f5e237ac0e1fd0cc55a132f8b53950520924ca66ef8cab4edf5a07b4286",
+            "duplicate_heading_count": 0,
+            "generic_heading_matches": [],
+            "invalid_internal_link_count": 0,
+            "known_regression_pattern_count": 0,
+            "known_regression_patterns": [],
+            "links_clustered_at_end": false,
+            "maximum_items_in_one_list": 5,
+            "required_conclusion_ratio": 0.1,
+            "required_minimum_list_items": 4,
+            "scope_limit": "known concrete defects only; no general editorial-quality claim",
+            "title_repeated_in_body": false,
+            "total_word_count": 847,
+            "version": "6.7.9-wave1-quarantine",
+            "visible_link_count": 3,
+            "visible_test_marker_found": false
+          },
+          "known_error_gate_status": "PASS",
+          "paragraph_count": 22,
+          "publish_allowed": false,
+          "quality_content_hash": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "source_trace_count": 6,
+          "table_body_row_count": 4,
+          "table_count": 1,
+          "technical_content_hash": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+          "trace_lexical_support_ratio": 1,
+          "trace_units": 6,
+          "used_fact_count": 6,
+          "visible_link_count": 3,
+          "word_count": 837
+        },
+        "content_quality_status": "CONTENT_QUALITY_CHECK_OK",
+        "content_sha256": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+        "contract": "K9_PPM679_RESULT_V1",
+        "errors": [],
+        "fail_closed_aggregate_status": "PASS",
+        "ppm_package_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "ppm_version": "6.7.9",
+        "publish_allowed": false,
+        "status": "PASS",
+        "technical_status": "TECHNICAL_CHECK_OK"
+      },
+      "writing_rules_result": {
+        "content_sha256": "6cd7bf7003cdfd30f2e9bf269042410f0dcf2abdcfa9e7602d0002f2fa5ca851",
+        "contract": "K9_WRITING_RULES_RESULT_V1",
+        "coverage_contract": "K9_COMPLETE_RULE_COVERAGE_V1",
+        "findings": [],
+        "publish_allowed": false,
+        "status": "PASS",
+        "table_rule_contract": "K9_MOBILE_COMPACT_TABLE_POLICY_V1",
+        "writing_rules_sha256": "7faa6742de5717192019ff2e44e20feddb3a6b8d6017d9747d99bd0064d0cc5a"
+      }
+    }
+  ],
+  "station": "check"
+}
