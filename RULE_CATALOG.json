@@ -1326,6 +1326,33 @@
       "scope": "SYSTEM",
       "source": "K10_PPM679_104_PARITY_MAP_V1",
       "source_fields": []
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "intro.orientation_sentence",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "editorial_checker",
+      "scope": "ARTICLE",
+      "source": "K10_USER_APPROVED_INTRO_ORIENTATION_RULE_2026-10-02"
+    },
+    {
+      "check_stage": "WRITE_PREFLIGHT",
+      "classification": "HARD",
+      "id": "table.optional_decision_documented",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "table_checker",
+      "scope": "ARTICLE",
+      "source": "K10_USER_APPROVED_OPTIONAL_TABLE_DECISION_RULE_2026-10-02"
+    },
+    {
+      "check_stage": "WRITE_GUIDANCE",
+      "classification": "TARGET",
+      "id": "intro.preferred_total_words",
+      "implementation_status": "IMPLEMENTED",
+      "owner": "writer_guidance",
+      "scope": "ARTICLE",
+      "source": "K10_USER_APPROVED_INTRO_READABILITY_TARGET_2026-10-02"
     }
   ]
 }
