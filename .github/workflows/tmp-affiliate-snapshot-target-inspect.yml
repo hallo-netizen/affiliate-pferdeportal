@@ -1,0 +1,43 @@
+name: TEMP Affiliate Snapshot Target Inspect
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-snapshot-target-inspect.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect active Sattel targets
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, collections, pathlib
+          p=pathlib.Path('release/affiliate-zentrale/current/affiliate-portal-router/recovery/aff043-historical-product-state-20260915.json')
+          d=json.loads(p.read_text())
+          c=collections.Counter()
+          hub=0
+          for row in d.get('rows',[]):
+              if not row.get('active'):
+                  continue
+              targets=list(row.get('automation_target_keys') or [])
+              if 'page:ausruestung-sattel' not in targets:
+                  continue
+              hub += 1
+              for key in targets:
+                  if not str(key).startswith('page:'):
+                      continue
+                  if key in ('page:ausruestung','page:ausruestung-sattel'):
+                      continue
+                  c[key]+=1
+          print('ACTIVE_HUB_HITS',hub)
+          for key,n in c.most_common(30):
+              print('CHILD',n,key)
+          PY
