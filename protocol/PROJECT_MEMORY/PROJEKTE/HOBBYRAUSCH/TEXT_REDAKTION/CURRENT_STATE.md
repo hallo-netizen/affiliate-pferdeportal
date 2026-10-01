@@ -3,74 +3,77 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-01
-STATUS: HD-001 PRODUKTIV LIVE PASS / HDTE 0.1.2 LIVE PORTALABGLEICH BLOCKED / HDTE 0.1.3 COMPLETE-WORKFLOW POS+NEG HARD PASS / LIVE-UPGRADE NÄCHSTES
+STATUS: HD-001 PRODUKTIV LIVE PASS / HDTE LIVE WEITER BLOCKED PLAN_HASH_MISSING / V0.1.3 NICHT ABGENOMMEN / V0.1.4 COMPLETE ADMIN→REQUEST WORKFLOW POS+NEG HARD PASS
 
 ## HD-001
 
 Produktiver Buchbinden-Pilot:
-- live deployed;
+- deployed;
 - Schreiben und Readback erfolgreich;
-- nicht zurückrollen;
-- 7 Owner;
-- 11 ARTICLE_ONLY;
-- 11/11 gebunden.
+- Bestand bleibt live;
+- 7 Owner / 11 ARTICLE_ONLY / 11 gebunden.
 
 ## HDTE Live
 
-Installiert:
-`Hobby Depot SEO Themenengine 0.1.2`
-
-Auto-Owner-Handoff:
+Owner-Handoff:
 PASS.
 
 Gesamtbestand:
 erfasst.
 
 Portalabgleich:
-`BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`
+weiterhin
+`BLOCKED · HDTE_CONTEXT_STAGE_PLAN_HASH_MISSING`.
 
-## Ursache
+0.1.3 ist deshalb nicht live abgenommen.
 
-Ein bewusst nicht vorhandener Redaktionsplan wird im bestehenden Snapshot-Vertrag mit
-`status=NOT_AVAILABLE`, `sha256=NOT_AVAILABLE`, `items=[]`
-repräsentiert.
+## Warum 0.1.3 nicht genügte
 
-0.1.2 verwarf diesen gültigen Zustand fälschlich als fehlenden Hash.
+Der PHP-Worker war request-getrennt getestet.
+Nicht vollständig bewiesen war der reale erste Backend-Einstieg:
+BLOCKED-Job → Browser-JavaScript → erster AJAX-Request.
 
-## HDTE 0.1.3
+Live blieb der Job auf BLOCKED.
+
+## HDTE 0.1.4
 
 Installer:
-`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.3_PORTALABGLEICH_FULL_WORKFLOW_HARD_PASS.zip`
+`HOBBY_DEPOT_SEO_THEMENENGINE_V0.1.4_SERVER_SIDE_RESUME_FULL_WORKFLOW_HARD_PASS.zip`
 
 SHA:
-`5b3063577beb3e5dfb03799b6245f2b9aaf90f338c70e86708674e5999762b2a`
+`02d52e326cce990833fb6661885d3ba5e30ab6461af76e8b0a2ebdcc3b78c12d`
 
-Kompletter lokaler Workflow – nicht nur Teiltest:
-- deployed HD-001 Handoff;
-- Auto-Sync 7 Owner / 11 Assignments;
-- Baseline;
-- request-getrennter Portalabgleich;
-- Context Index;
-- finale Structure/Inventory/Plan-Gates;
-- COMPLETE.
+0.1.4 macht die erste Wiederaufnahme serverseitig beim Öffnen der Übersicht.
+Der Browser ist nicht mehr Voraussetzung dafür, den bekannten Blocked-State zurück auf RUNNING zu setzen.
 
-Exakter alte 0.1.2 BLOCKED-Zustand wurde persistiert und danach unter 0.1.3 ohne neue Baseline bis COMPLETE fortgeführt.
+## Vollständige lokale Abnahme
 
-Zusätzlich 4-Themen-Stresslauf bis COMPLETE.
+Exakter 0-Themen-Livezustand:
+- alter Fehler reproduziert;
+- Admin-Aufruf → RUNNING;
+- jeder Folgeschritt separater Request;
+- bis COMPLETE.
 
-Negative Fälle:
-not deployed / malformed NOT_AVAILABLE / Hash fehlt / Stage manipuliert / Live-Struktur driftet → jeweils BLOCKED.
+Zusätzlich:
+- fehlendes altes Job-Planfeld → COMPLETE;
+- kompletter Neuablauf → COMPLETE;
+- 4-Themen-Stresslauf → COMPLETE;
+- vorhandener Redaktionsplan → COMPLETE.
+
+Negativ:
+malformed NOT_AVAILABLE / vorhandener Plan / Structure-Mismatch / falscher Fehler / falsche Phase / fehlender echter Hash / manipulierte Stage / finale Strukturdrift / upstream nicht deployed
+→ jeweils fail-closed.
 
 Fresh Installer:
-80/80 PHP PASS.
-135/135 Dateiparität.
+80/80 PHP PASS; 135/135 Dateiparität; kompletter Pos/Neg-Ablauf erneut PASS.
 
 ## NEXT ACTION
 
-0.1.3 installieren und nur die Themenengine-Übersicht öffnen.
-
-Der vorhandene BLOCKED-Job wird automatisch fortgesetzt.
+0.1.4 installieren → nur `Hobby Depot Themenengine → Übersicht` öffnen.
 
 Keine neue Bestandserfassung.
-Kein neuer Handoff.
-Keine DataForSEO-Recherche vor Portalabgleich COMPLETE.
+Kein Handoff-Import.
+Kein Research-Neustart.
+
+Live-Abnahme erst bei:
+`Portalabgleich COMPLETE`.
