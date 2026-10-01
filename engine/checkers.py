@@ -224,7 +224,7 @@ def fact_receipts(article):
         if t.get('data-source-title')!=str(claim.get('source_title') or ''): attrs_ok=False; binding_find.append('title:'+fid)
         if t.get('data-source-hash')!=str(claim.get('evidence_text_sha256') or ''): attrs_ok=False; binding_find.append('hash:'+fid)
         title=str(t.get('data-source-title') or ''); h=str(t.get('data-source-hash') or '')
-        placeholder=bool(re.fullmatch(r'(?i)\\s*(?:test|dummy|example|beispiel|placeholder)(?:\\s+(?:quelle|source|f?\\d+))*\\s*',title))
+        placeholder=bool(re.fullmatch(r'(?i)\s*(?:test|dummy|example|beispiel|placeholder)(?:\s+(?:quelle|source|f?\d+))*\s*',title))
         if placeholder: real_ok=False; real_find.append('title:'+fid)
         if not re.fullmatch(r'[0-9a-fA-F]{64}',h) or len(set(h.casefold()))<4: real_ok=False; real_find.append('hash:'+fid)
     used_ids=set(_data_fact_ids(html)); known_ids=set(claims); unknown=sorted(used_ids-known_ids)
