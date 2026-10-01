@@ -196,7 +196,7 @@
     },
     {
       "pattern": "^editorial_additive\\.balance_policy\\.exempt_blocks$",
-      "rule_id": "words.word_budget_exclusions",
+      "rule_id": "words.section_range",
       "owner": "balance_checker"
     },
     {
