@@ -1,56 +1,11 @@
 {
-  "contract": "K9_CURRENT_STATE_V3",
+  "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
-  "concept": "K9",
-  "branch": "konzept9/greenfield-20260929",
-  "status": "EDITORIAL_REVIEW_OPEN",
-  "operational_mode": "READ_ONLY_EDITORIAL_RULE_REVIEW_BEFORE_ANY_CODE_CHANGE",
-  "active_job": null,
-  "first_open_blocker": null,
-  "next_action": "CRITICALLY_REVIEW_LONGIERPEITSCHE_H2_AND_TABLE_VALUE_AND_DECIDE_MINIMAL_FUTURE_RULE_CHANGE",
-  "work_binding": {
-    "baseline": "LATEST_REAL_E2E_STOP_PLUS_EXTENDED_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT",
-    "editorial_review_ref": "protocol/K9_ROOT_CAUSE_OPTIMIZATION_CLOSEOUT_20261001.md#offene-redaktionelle-nachpruefung-nach-nutzerreview--h2-und-tabellen",
-    "evidence_article": "Was ist eine Longierpeitsche?",
-    "evidence_final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1.json",
-    "review_questions": [
-      "SHOULD_TABLE_BE_CONDITIONAL_ON_REAL_INFORMATION_VALUE_INSTEAD_OF_GLOBALLY_MANDATORY",
-      "SHOULD_H2_POLICY_REQUIRE_MORE_READER_NATURAL_CONCRETE_SECTION_LANGUAGE"
-    ],
-    "current_forced_table_rules": [
-      "global.table_count_exact=1",
-      "FAQ.required_blocks contains table"
-    ],
-    "preserve_completed_batch": true,
-    "preserve_terminal_evidence": true,
-    "preserve_quality_gates": [
-      "LT_6_8",
-      "PPM_6_7_9",
-      "PSERC",
-      "ENDSTEMPEL",
-      "WORDPRESS_VERIFY"
-    ],
-    "do_not_reopen_completed_article": true,
-    "publish_allowed": false
-  },
-  "terminal_evidence": {
-    "stop_ref": "runtime/K9_STOP.json",
-    "final_ref": "final/K9_WORDPRESS_DIRECT_IMPORT_7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1.json",
-    "final_sha256": "abb27e9ee6755de53c881e45e511a16faa0071ac14b91d38c061aa51138f11de",
-    "batch_sha256": "7e432df903a68c6a1a0a08dedcffa005647917b690de34c5180cb0b27ac897d1",
-    "article_count": 3,
-    "finalizer_run_id": "36901389154",
-    "trigger_head_sha": "0fee54d7ee943ace2987d8186df9a0ebd08c19c7",
-    "wordpress_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
-    "endstempel_ref": "final/GEN1_7_ARTIKEL_PSERC_APPROVED_PRODUCTION_PACKAGE_107008_FINAL.json",
-    "endstempel_sha256": "d7b5944879a22976c4c561455c3eeb1c877bede5d52b6d1416aae5502b3e6447"
-  },
-  "allowed_action": "EDITORIAL_REVIEW_ONLY",
-  "route_lock": "EDITORIAL_REVIEW_ONLY",
-  "supervisor_actions_allowed": false,
-  "code_change_allowed": false,
-  "repair_authorized": false,
-  "all_other_actions": "DENY",
-  "chat_may_route": false,
+  "concept": "K10",
+  "status": "DEDICATED_CLEAN_K10_BRANCH_CREATED_PPM104_INVENTORY_RUNNING",
+  "k9_mutation_allowed": false,
+  "k9_baseline_commit": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
+  "first_open_blocker": "LEGACY_PPM_104_TO_K10_SEMANTIC_PARITY_MAPPING",
+  "next_action": "EXTRACT_EXACT_PPM_6_7_9_RULE_INVENTORY_FROM_HASH_BOUND_BASELINE_PACKAGE_AND_MAP_EACH_RULE_ONCE",
   "publish_allowed": false
 }

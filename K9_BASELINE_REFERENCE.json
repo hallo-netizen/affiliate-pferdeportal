@@ -1,0 +1,11 @@
+{
+  "contract": "K10_K9_BASELINE_REFERENCE_V1",
+  "source_repository": "hallo-netizen/affiliate-pferdeportal",
+  "source_branch": "konzept9/greenfield-20260929",
+  "source_commit": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
+  "ppm_version": "6.7.9",
+  "ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+  "copy_policy": "REFERENCE_ONLY_NO_K9_RUNTIME_OR_ARTICLE_CONTENT",
+  "k9_mutation_allowed": false,
+  "publish_allowed": false
+}

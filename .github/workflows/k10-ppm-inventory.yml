@@ -1,0 +1,67 @@
+name: K10 PPM 6.7.9 inventory
+
+on:
+  push:
+    branches:
+      - konzept10-rule-ledger-20261001
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Assert clean K10 worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e quality
+          test ! -e warehouse
+          test ! -e final
+          test ! -e submissions
+          test ! -e k9_engine.py
+          echo K10_CLEAN_WORKTREE_PASS
+      - name: Extract immutable K9 baseline PPM package read-only
+        shell: bash
+        env:
+          BASE: 2cc8167fa1e31b4ffa2ff76c9819314be4b98555
+          EXPECTED: acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1
+        run: |
+          set -euo pipefail
+          git cat-file -e "$BASE^{commit}"
+          git show "$BASE:quality/PORTAL_PRODUCTION_MACHINE_V6.7.9.zip" > /tmp/ppm679.zip
+          ACTUAL="$(sha256sum /tmp/ppm679.zip | awk '{print $1}')"
+          test "$ACTUAL" = "$EXPECTED"
+          echo "K10_PPM_BASELINE_HASH_PASS:$ACTUAL"
+      - name: Inventory PPM source rules
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,re,zipfile,hashlib
+          z='/tmp/ppm679.zip'
+          members={
+            'content_validator':'portal-production-machine/includes/content-validator.php',
+            'structure_gate':'portal-production-machine/includes/content-structure-language-gate.php',
+            'known_error_gate':'portal-production-machine/includes/known-error-gate.php',
+            'rendered_dom':'portal-production-machine/includes/rendered-dom-validator.php',
+          }
+          out={'contract':'K10_PPM679_SOURCE_INVENTORY_V1','package_sha256':hashlib.sha256(open(z,'rb').read()).hexdigest(),'files':{}}
+          with zipfile.ZipFile(z) as zf:
+            for key,name in members.items():
+              text=zf.read(name).decode('utf-8')
+              rows=[]
+              for ln,line in enumerate(text.splitlines(),1):
+                codes=re.findall(r'(?:BLOCKED|W4_R8)_[A-Z0-9_]+',line)
+                for code in codes:
+                  rows.append({'line':ln,'code':code,'source':line.strip()[:400]})
+              out['files'][key]={'member':name,'occurrences':len(rows),'unique_codes':len(set(r['code'] for r in rows)),'rows':rows}
+          print('K10_PPM_SOURCE_INVENTORY_BEGIN')
+          print(json.dumps(out,ensure_ascii=False,sort_keys=True))
+          print('K10_PPM_SOURCE_INVENTORY_END')
+          print('K10_PPM_COUNTS:'+json.dumps({k:{'occurrences':v['occurrences'],'unique_codes':v['unique_codes']} for k,v in out['files'].items()},sort_keys=True))
+          PY
