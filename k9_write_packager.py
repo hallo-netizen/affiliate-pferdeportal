@@ -66,10 +66,18 @@ def _trace_source_label(research, source_id):
     return source_id
 
 def ensure_all_fact_traces(markup, research):
+    # Source traces are machine-owned metadata. Remove any empty trace tags emitted
+    # by a writer/repair draft and rebuild exactly one canonical trace per fact.
+    markup=re.sub(
+        r'<span\\b[^>]*class=["\\'][^"\\']*\\bppm-source-trace\\b[^"\\']*["\\'][^>]*>\\s*</span>',
+        '',
+        markup,
+        flags=re.I,
+    )
     fact_pack=research.get("fact_pack",{})
     fact_ids=[str(x) for x in fact_pack.get("fact_ids",[]) if str(x)]
     claims={str(x.get("fact_id") or ""):x for x in fact_pack.get("claims",[]) if isinstance(x,dict)}
-    existing=set(_trace_fact_ids(markup))
+    existing=set()
     for fid in fact_ids:
         if fid in existing:
             continue
