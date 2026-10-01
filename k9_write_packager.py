@@ -52,7 +52,7 @@ def _trace_source_label(research, source_id):
     source_id=str(source_id or "").strip()
     if not source_id:
         return ""
-    if source_id.upper().startswith("TEST_"):
+    if _placeholder_source_id(source_id):
         for source in research.get("sources",[]):
             if isinstance(source,dict) and str(source.get("source_id") or "").strip()==source_id:
                 title=str(source.get("title") or "").strip()

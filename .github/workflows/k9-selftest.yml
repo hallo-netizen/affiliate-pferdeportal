@@ -210,39 +210,44 @@ jobs:
             exit 0
           fi
           python3 - <<'PY'
-          import copy, hashlib, json, shutil, subprocess, tempfile
+          import copy, json, re, shutil, subprocess, tempfile
           from pathlib import Path
 
           root=Path(".").resolve()
           ledger=json.loads((root/"state/ledger.json").read_text())
-          item=ledger["items"][0]
-          research_path=root/item["products"]["research"]["path"]
-          article_path=root/item["products"]["repair"]["path"]
-          target_scope="schermaschinen_fuer_pferde"
+
+          def product(item,key,product_key):
+              path=root/item["products"][key]["path"]
+              pkg=json.loads(path.read_text())
+              hits=[x for x in pkg["results"] if x["item_id"]==item["item_id"]]
+              if len(hits)!=1:
+                  raise SystemExit("PSERC_FIXTURE_PRODUCT_NOT_UNIQUE")
+              return hits[0][product_key]
+
+          selected=None
+          for item in ledger["items"]:
+              article_key="repair" if item.get("revision",0)>0 else "write"
+              research=product(item,"research","research_product")
+              article=product(item,article_key,"article_product")
+              expected=set(research["fact_pack"]["fact_ids"])
+              traced=set(re.findall(r'class=["\']ppm-source-trace["\'][^>]*data-fact-id=["\']([^"\']+)["\']',article["content_html"]))
+              if expected.issubset(traced):
+                  selected=copy.deepcopy(item)
+                  break
+          if selected is None:
+              raise SystemExit("PSERC_NO_IMMUTABLE_REAL_FIXTURE")
 
           def prepare(dst, positive):
               shutil.copytree(root,dst,dirs_exist_ok=True)
-              # This regression proves the NEW integrity-only PSERC path on one
-              # article that already contains complete pre-check source traces.
-              # The finished 16-article legacy batch contains historical rows
-              # whose traces were only completed by the old mutating PSERC step.
-              # Do not rewrite those completed products just to test the new path.
-              ledger_copy=json.loads((dst/"state/ledger.json").read_text())
-              ledger_copy["items"]=[copy.deepcopy(item)]
-              (dst/"state/ledger.json").write_text(json.dumps(ledger_copy,ensure_ascii=False,indent=2)+"\n")
-              rp_path=dst/item["products"]["research"]["path"]
-              ap_path=dst/item["products"]["repair"]["path"]
-              rpkg=json.loads(rp_path.read_text())
-              apkg=json.loads(ap_path.read_text())
-              fp=rpkg["results"][0]["research_product"]["fact_pack"]
-              if positive:
-                  fp["title_scope"]=target_scope
-                  apkg["results"][0]["article_product"]["ppm_item"]["runtime_order"]["subject_scope"]=target_scope
-              else:
-                  fp["title_scope"]="wrong_scope"
-                  apkg["results"][0]["article_product"]["ppm_item"]["runtime_order"]["subject_scope"]=target_scope
-              rp_path.write_text(json.dumps(rpkg,ensure_ascii=False,indent=2)+"\n")
-              ap_path.write_text(json.dumps(apkg,ensure_ascii=False,indent=2)+"\n")
+              local_ledger=json.loads((dst/"state/ledger.json").read_text())
+              local_ledger["items"]=[selected]
+              (dst/"state/ledger.json").write_text(json.dumps(local_ledger,ensure_ascii=False,indent=2)+"\n")
+              if not positive:
+                  rp_path=dst/selected["products"]["research"]["path"]
+                  rpkg=json.loads(rp_path.read_text())
+                  hit=[x for x in rpkg["results"] if x["item_id"]==selected["item_id"]][0]
+                  hit["research_product"]["fact_pack"]["title_scope"]="wrong_scope"
+                  rp_path.write_text(json.dumps(rpkg,ensure_ascii=False,indent=2)+"\n")
 
           with tempfile.TemporaryDirectory() as td:
               neg=Path(td)/"neg"; pos=Path(td)/"pos"

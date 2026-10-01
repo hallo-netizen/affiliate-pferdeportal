@@ -103,3 +103,9 @@ WordPress -> K9 accepts the compact PSERC_TEXTMACHINE_METADATA_BATCH_V2 directly
 
 K9 -> WordPress emits PFERDE_ATELIER_WORDPRESS_IMPORT_V1 with only article_id, plan_slot, title, slug, target_keyword, category, article_type and body, plus minimal batch/count/publish metadata. The signed ENDSTEMPEL package remains internal evidence.
 \n
+
+## PSERC immutable-article prerequisite closed
+Historical evidence showed one completed article (plan slot 5999b9b0...) had two facts (PH_F3/PH_F4) whose real source carried the legacy source id TEST_REITBET. The writer packager deliberately skipped trace insertion for placeholder-looking source IDs, and old PSERC later inserted those traces.
+
+Future WRITE/REPAIR packaging now binds traces for every bound research fact before LT/PPM, including legacy TEST_/dummy/example/placeholder source IDs when they resolve to a real bound source. PSERC uses the same source-label rule and only verifies; it never repairs or mutates article content. The PSERC scope regression now uses one immutable real article fixture that already satisfies this prerequisite instead of the historical mixed 16-article batch.
+

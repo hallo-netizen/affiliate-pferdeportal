@@ -23,6 +23,10 @@ def load(p):
     if not isinstance(x,dict): raise Blocked("JSON_OBJECT_REQUIRED")
     return x
 
+def _placeholder_source_id(value):
+    value=str(value or "").strip().casefold()
+    return any(token in value for token in ("test_", "dummy", "example", "placeholder"))
+
 def canonical_fact_pack(research):
     fp=research.get("fact_pack"); sources=research.get("sources")
     if not isinstance(fp,dict) or not isinstance(sources,list): raise Blocked("RESEARCH_PRODUCT_INVALID")
@@ -32,7 +36,7 @@ def canonical_fact_pack(research):
         if not isinstance(raw,dict): raise Blocked("CLAIM_INVALID")
         raw_sid=str(raw.get("source_id") or "").strip(); src=by_id.get(raw_sid)
         if not src: raise Blocked("CLAIM_SOURCE_UNKNOWN:"+raw_sid)
-        sid=str(src.get("title") or "").strip() if raw_sid.upper().startswith("TEST_") else raw_sid
+        sid=str(src.get("title") or "").strip() if _placeholder_source_id(raw_sid) else raw_sid
         if not sid: raise Blocked("CLAIM_SOURCE_CANONICAL_ID_MISSING:"+raw_sid)
         canonical_sources[sid]=src
         statement=str(raw.get("statement") or ""); evidence=str(raw.get("display_statement") or statement)
