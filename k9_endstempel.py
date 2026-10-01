@@ -19,6 +19,22 @@ def load(p):
     if not isinstance(x,dict): raise Blocked("JSON_OBJECT_REQUIRED:"+str(p))
     return x
 
+def active_intake_items(root,ledger):
+    items=ledger.get("items")
+    if not isinstance(items,list) or not items: raise Blocked("LEDGER_ITEMS_INVALID")
+    ledger_ids=[str(x.get("item_id") or "") for x in items]
+    candidates=[]
+    for candidate in sorted((Path(root)/"warehouse/intake").glob("K9-INTAKE-*.json")):
+        data=load(candidate); rows=data.get("items")
+        if not isinstance(rows,list) or not rows: continue
+        ids=[str(x.get("item_id") or "") for x in rows if isinstance(x,dict)]
+        if len(ids)!=len(rows) or any(not x for x in ids) or len(ids)>len(ledger_ids): continue
+        if ids==ledger_ids[-len(ids):]: candidates.append((candidate,data,ids))
+    if len(candidates)!=1: raise Blocked("ACTIVE_INTAKE_SUFFIX_NOT_UNIQUE")
+    candidate,data,ids=candidates[0]
+    by_id={str(x.get("item_id") or ""):x for x in items}
+    return candidate,data,[by_id[x] for x in ids]
+
 def load_private():
     raw=os.environ.get("ENDSTEMPEL_PRIVATE_KEY","").encode()
     if not raw: raise Blocked("ENDSTEMPEL_SECRET_MISSING")
@@ -34,9 +50,8 @@ def build(root,pserc_path,outdir):
     if pserc.get("publish_allowed") is not False: raise Blocked("PSERC_PUBLISH_FLAG_INVALID")
     ledger=load(root/"state/ledger.json")
     if ledger.get("generation",0)<1: raise Blocked("LEDGER_GENERATION_INVALID")
-    items=ledger.get("items")
-    if not isinstance(items,list) or not items: raise Blocked("LEDGER_ITEMS_INVALID")
-    if any(x.get("stages",{}).get("check")!="DONE" for x in items): raise Blocked("LEDGER_NOT_FULLY_CHECKED")
+    intake_file,intake,items=active_intake_items(root,ledger)
+    if any(x.get("stages",{}).get("check")!="DONE" for x in items): raise Blocked("ACTIVE_INTAKE_NOT_FULLY_CHECKED")
 
     pserc_rows=pserc.get("items")
     if not isinstance(pserc_rows,list) or len(pserc_rows)!=len(items): raise Blocked("PSERC_ARTICLE_SET_COUNT_INVALID")
@@ -45,21 +60,6 @@ def build(root,pserc_path,outdir):
 
     slots=[str(x.get("metadata",{}).get("plan_slot") or "") for x in items]
     if any(not x for x in slots): raise Blocked("PLAN_SLOT_MISSING")
-    slot_set=set(slots)
-    intake_files=[]
-    for candidate in sorted((root/"warehouse/intake").glob("K9-INTAKE-*.json")):
-        candidate_data=load(candidate)
-        candidate_items=candidate_data.get("items")
-        if not isinstance(candidate_items,list):
-            continue
-        candidate_slots={
-            str(row.get("metadata",{}).get("plan_slot") or "")
-            for row in candidate_items if isinstance(row,dict)
-        }
-        if slot_set.issubset(candidate_slots):
-            intake_files.append(candidate)
-    if len(intake_files)!=1: raise Blocked("ACTIVE_INTAKE_NOT_UNIQUE")
-    intake=load(intake_files[0])
     batch=str(intake.get("source_batch_sha256") or "")
     if not re.fullmatch(r"[0-9a-f]{64}",batch): raise Blocked("SOURCE_BATCH_SHA_INVALID")
 
@@ -150,8 +150,8 @@ def build(root,pserc_path,outdir):
         "contract":MANIFEST_CONTRACT,
         "batch_sha256":batch,
         "runtime_generation":ledger["generation"],
-        "source_manifest_ref":str(intake_files[0].relative_to(root)),
-        "source_manifest_sha256":file_sha(intake_files[0]),
+        "source_manifest_ref":str(intake_file.relative_to(root)),
+        "source_manifest_sha256":file_sha(intake_file),
         "article_count":len(article_rows),
         "articles":article_rows,
         "import_envelope_sha256":env_sha,
