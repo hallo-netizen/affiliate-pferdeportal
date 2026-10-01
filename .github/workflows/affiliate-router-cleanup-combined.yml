@@ -1,4 +1,5 @@
 name: Affiliate Router 6.72.171 Category Product Performance Full Release Gate
+# 6.72.171 full-gate retry after candidate state binding
 
 on:
   push:
