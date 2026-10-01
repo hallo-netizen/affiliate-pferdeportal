@@ -44,7 +44,8 @@ jobs:
           x=json.load(open('runtime/K9_PSERC_RESULT.json'))
           assert x['contract']=='K9_PSERC_RESULT_V1'
           assert x['status']=='PASS'
-          assert x['bridge_status']=='PSERC_FINAL_INTEGRITY_ONLY_PASS'\n          assert x['mode']=='FINAL_INTEGRITY_ONLY_REUSE_PRIOR_QUALITY_EVIDENCE'
+          assert x['bridge_status']=='PSERC_FINAL_INTEGRITY_ONLY_PASS'
+          assert x['mode']=='FINAL_INTEGRITY_ONLY_REUSE_PRIOR_QUALITY_EVIDENCE'
           assert x['publish_allowed'] is False
           print('K9_PSERC_FINAL_INTEGRITY_PASS')
           PY
