@@ -16,9 +16,6 @@ if (!defined('ABSPATH')) {
  * - keine Änderung an Design, HivePress oder anderen Plugins.
  */
 trait PPAR_Automation_Suite_Trait {
-    /** V6.72.171: pre-normalized page/category hierarchy rank context per request. */
-    private $automation_hierarchy_rank_context_cache = array();
-
     private function automation_edges_table() {
         global $wpdb;
         return $wpdb->prefix . 'ppar_target_edges';
@@ -2881,137 +2878,10 @@ trait PPAR_Automation_Suite_Trait {
      * Cache that result once per normal frontend request; administrative/worker
      * paths keep the historical call-by-call behavior.
      */
-    private function automation_hierarchy_rank_context($context) {
-        $context=is_array($context)?$context:array();
-        $post_type=isset($context['_ppar_norm_post_type'])
-            ? (string)$context['_ppar_norm_post_type']
-            : $this->ranked_campaign_sanitize_key_request_cached((string)($context['post_type']??''));
-        if (!in_array($post_type,array('page','category_archive'),true)) { return null; }
-
-        $primary=isset($context['_ppar_norm_primary_slug'])
-            ? (string)$context['_ppar_norm_primary_slug']
-            : $this->ranked_campaign_sanitize_key_request_cached((string)($context['primary_slug']??''));
-        if ($primary==='') { return null; }
-
-        $slugs=isset($context['_ppar_norm_slugs']) && is_array($context['_ppar_norm_slugs'])
-            ? $context['_ppar_norm_slugs']
-            : array_map(array($this,'ranked_campaign_sanitize_key_request_cached'),(array)($context['slugs']??array()));
-        $family=isset($context['_ppar_norm_product_family_slug'])
-            ? (string)$context['_ppar_norm_product_family_slug']
-            : $this->ranked_campaign_sanitize_key_request_cached((string)($context['product_family_slug']??''));
-
-        $semantic_primary=isset($context['_ppar_norm_semantic_primary_target_key'])
-            ? (string)$context['_ppar_norm_semantic_primary_target_key']
-            : (method_exists($this,'automation_normalize_target_key') ? $this->automation_normalize_target_key((string)($context['semantic_primary_target_key']??'')) : '');
-        $semantic_ancestors=isset($context['_ppar_norm_semantic_ancestor_target_keys']) && is_array($context['_ppar_norm_semantic_ancestor_target_keys'])
-            ? $context['_ppar_norm_semantic_ancestor_target_keys']
-            : array_values(array_filter(array_map(array($this,'automation_normalize_target_key'),(array)($context['semantic_ancestor_target_keys']??array()))));
-
-        $cache_payload=array($post_type,$primary,$slugs,$family,$semantic_primary,$semantic_ancestors);
-        $cache_key=hash('sha256',serialize($cache_payload));
-        if (isset($this->automation_hierarchy_rank_context_cache[$cache_key])) {
-            return $this->automation_hierarchy_rank_context_cache[$cache_key];
-        }
-
-        $prefix=$post_type==='page'?'page:':'category:';
-        $ancestor_set=array();
-        foreach($slugs as $slug){
-            $slug=(string)$slug;
-            if($slug!=='' && $slug!==$primary){$ancestor_set[$prefix.$slug]=true;}
-        }
-        $semantic_ancestor_set=array();
-        foreach($semantic_ancestors as $key){$key=(string)$key;if($key!==''){$semantic_ancestor_set[$key]=true;}}
-
-        return $this->automation_hierarchy_rank_context_cache[$cache_key]=array(
-            'post_type'=>$post_type,
-            'primary'=>$primary,
-            'primary_key'=>$prefix.$primary,
-            'journal_key'=>'journal:'.$primary,
-            'ancestor_set'=>$ancestor_set,
-            'family'=>$family,
-            'semantic_primary'=>$semantic_primary,
-            'semantic_ancestor_set'=>$semantic_ancestor_set,
-        );
-    }
-
-    /**
-     * V6.72.171: semantically identical fast path for the ordinary page/category
-     * hierarchy used by category product cards. It avoids serialize/hash and
-     * repeated array_unique/array_intersect for every campaign candidate.
-     */
-    private function automation_campaign_hierarchy_target_rank_fast($campaign,$context) {
-        $h=$this->automation_hierarchy_rank_context($context);
-        if (!is_array($h)) { return false; } // false => use historical generic path
-
-        $wanted=isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys'])
-            ? array_values(array_filter($campaign['automation_target_keys']))
-            : array();
-        if(!$wanted){return null;}
-
-        $ancestor_matches=array();
-        foreach($wanted as $wanted_key){
-            $wanted_key=(string)$wanted_key;
-            if($wanted_key===$h['primary_key']){
-                return array('specificity'=>520,'matches'=>1,'reason'=>'Exakte Zielkante: '.$h['primary_key'].'.');
-            }
-        }
-        foreach($wanted as $wanted_key){
-            $wanted_key=(string)$wanted_key;
-            if(isset($h['ancestor_set'][$wanted_key])){$ancestor_matches[$wanted_key]=true;}
-        }
-        if($ancestor_matches){
-            $keys=array_keys($ancestor_matches);
-            return array('specificity'=>430,'matches'=>count($keys),'reason'=>'Passender uebergeordneter Themenkreis: '.implode(', ',$keys).'.');
-        }
-
-        if($h['post_type']==='page'){
-            foreach($wanted as $wanted_key){
-                if(!preg_match('/^category:([a-z0-9_-]+)$/',(string)$wanted_key,$m)){continue;}
-                if(method_exists($this,'portal_structure_product_family_for_category')
-                    && $this->portal_structure_product_family_for_category($m[1])===$h['primary']){
-                    return array('specificity'=>510,'matches'=>1,'reason'=>'Exakte Portal-Produktfamilie: page:'.$h['primary'].' <-> '.$wanted_key.'.');
-                }
-            }
-        } elseif($h['post_type']==='category_archive' && $h['family']!==''){
-            if(in_array('page:'.$h['family'],$wanted,true)){
-                return array('specificity'=>510,'matches'=>1,'reason'=>'Exakte Portal-Produktfamilie: category:'.$h['primary'].' -> page:'.$h['family'].'.');
-            }
-            if(method_exists($this,'portal_structure_product_family_for_category')){
-                foreach($wanted as $wanted_key){
-                    if(!preg_match('/^category:([a-z0-9_-]+)$/',(string)$wanted_key,$m)){continue;}
-                    if($this->portal_structure_product_family_for_category($m[1])===$h['family']){
-                        return array('specificity'=>500,'matches'=>1,'reason'=>'Gleiche Portal-Produktfamilie: '.$h['family'].'.');
-                    }
-                }
-            }
-        }
-
-        $matches=array();
-        foreach($wanted as $wanted_key){
-            $wanted_key=(string)$wanted_key;
-            if($wanted_key===$h['journal_key']){$matches[$wanted_key]=true;}
-            if($h['semantic_primary']!=='' && $wanted_key===$h['semantic_primary']){$matches[$wanted_key]=true;}
-            if(isset($h['semantic_ancestor_set'][$wanted_key])){$matches[$wanted_key]=true;}
-        }
-        if(!$matches){return null;}
-        $keys=array_keys($matches);
-        if($h['semantic_primary']!=='' && isset($matches[$h['semantic_primary']])){
-            return array('specificity'=>560,'matches'=>count($keys),'reason'=>'Glossar-Bedeutungshierarchie: exakte passende Hauptseite '.$h['semantic_primary'].'.');
-        }
-        $semantic_ancestor_matches=array();
-        foreach($keys as $key){if(isset($h['semantic_ancestor_set'][$key])){$semantic_ancestor_matches[]=$key;}}
-        if($semantic_ancestor_matches){
-            return array('specificity'=>530,'matches'=>count($keys),'reason'=>'Glossar-Bedeutungshierarchie: passender uebergeordneter Themenast '.implode(', ',$semantic_ancestor_matches).'.');
-        }
-        return array('specificity'=>520,'matches'=>count($keys),'reason'=>'Exakte automatisierte Zielkante: '.implode(', ',$keys).'.');
-    }
-
     private function automation_campaign_exact_target_rank($campaign, $context) {
         if (!$this->ranked_campaigns_request_cache_allowed()) {
             return $this->automation_campaign_exact_target_rank_uncached($campaign, $context);
         }
-        $fast=$this->automation_campaign_hierarchy_target_rank_fast($campaign,$context);
-        if($fast!==false){return $fast;}
         $campaign = is_array($campaign) ? $campaign : array();
         $context = is_array($context) ? $context : array();
         $wanted = isset($campaign['automation_target_keys']) && is_array($campaign['automation_target_keys'])
