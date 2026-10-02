@@ -1,5 +1,6 @@
 import hashlib
 import unittest
+from unittest.mock import patch
 
 from engine.wordpress_batch_export import combine, BatchBlocked
 
@@ -53,7 +54,8 @@ class BatchExportTests(unittest.TestCase):
         rows=[{k:d["articles"][0][k] for k in ("article_type","category","plan_slot","target_keyword","title")} for d in docs]
         return intake(rows),docs
 
-    def test_positive_three_article_batch_preserves_input_order(self):
+    @patch('engine.wordpress_batch_export.verify_writer_contract', return_value={'status':'PASS'})
+    def test_positive_three_article_batch_preserves_input_order(self, _writer):
         i,docs=self.make_three()
         out=combine(i,[docs[2],docs[0],docs[1]])
         self.assertEqual(out["article_count"],3)
@@ -61,13 +63,15 @@ class BatchExportTests(unittest.TestCase):
         self.assertTrue(all(x["body"].startswith('<article class="ppm-generated ppm-type-faq"') for x in out["articles"]))
         self.assertFalse(out["publish_allowed"])
 
-    def test_wrong_article_id_slot_binding_blocks(self):
+    @patch('engine.wordpress_batch_export.verify_writer_contract', return_value={'status':'PASS'})
+    def test_wrong_article_id_slot_binding_blocks(self, _writer):
         i,docs=self.make_three()
         docs[0]["articles"][0]["article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
         with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_PLAN_SLOT_MISMATCH"):
             combine(i,docs)
 
-    def test_bare_article_html_blocks(self):
+    @patch('engine.wordpress_batch_export.verify_writer_contract', return_value={'status':'PASS'})
+    def test_bare_article_html_blocks(self, _writer):
         i,docs=self.make_three()
         row=docs[0]["articles"][0]
         row["body"]=row["body"].replace('<article class="ppm-generated ppm-type-faq" data-article-type="FAQ">','<article>')
@@ -75,15 +79,22 @@ class BatchExportTests(unittest.TestCase):
         with self.assertRaisesRegex(BatchBlocked,"SINGLE_HTML_INVALID"):
             combine(i,docs)
 
-    def test_missing_article_blocks(self):
+    @patch('engine.wordpress_batch_export.verify_writer_contract', return_value={'status':'PASS'})
+    def test_missing_article_blocks(self, _writer):
         i,docs=self.make_three()
         with self.assertRaisesRegex(BatchBlocked,"BATCH_ARTICLE_MISSING"):
             combine(i,docs[:2])
 
-    def test_identity_mismatch_blocks(self):
+    @patch('engine.wordpress_batch_export.verify_writer_contract', return_value={'status':'PASS'})
+    def test_identity_mismatch_blocks(self, _writer):
         i,docs=self.make_three()
         docs[1]["articles"][0]["title"]="Falscher Titel"
         with self.assertRaisesRegex(BatchBlocked,"BATCH_IDENTITY_MISMATCH"):
+            combine(i,docs)
+
+    def test_missing_writer_provenance_blocks_batch(self):
+        i,docs=self.make_three()
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_WRITER_PROVENANCE_MISSING"):
             combine(i,docs)
 
 if __name__=="__main__":
