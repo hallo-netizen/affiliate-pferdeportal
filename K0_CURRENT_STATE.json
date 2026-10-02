@@ -2,11 +2,29 @@
   "contract": "K0_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "HOBBY_DISCGOLF_ACCEPTANCE_PENDING",
-  "first_open_blocker": "K0_HOBBY_DISCGOLF_ACCEPTANCE_NOT_YET_EXECUTED",
-  "next_action": "RUN_K0_HOBBY_DISCGOLF_ACCEPTANCE",
+  "status": "READY_FOR_REAL_CHAT_ACCEPTANCE",
+  "first_open_blocker": null,
+  "next_action": "UPLOAD_K0_HOBBY_DISCGOLF_INPUT_AND_RUN_K0_START_IN_NEW_CHAT",
   "start_command": "K0:start",
+  "start_door": {
+    "repository": "hallo-netizen/text-start",
+    "issue": 48,
+    "title": "K0:start"
+  },
   "portal_assignment": "AUTO_ONLY",
+  "verified_head": "225a700a407566156c25bfb0fb2e99f4057b7ac0",
+  "evidence": {
+    "selftest_run": 37020240982,
+    "selftest_status": "SUCCESS",
+    "hobby_discgolf_acceptance_run": 37020241199,
+    "hobby_discgolf_acceptance_status": "SUCCESS",
+    "portal_auto_detected": "hobby",
+    "table_structure": "PASS",
+    "language_tool_6_8": "PASS_ZERO_FINDINGS",
+    "ppm_6_7_9_parity": "PASS_104_OF_104"
+  },
+  "performance_regression_allowed": false,
+  "quality_reduction_allowed": false,
   "publish_allowed": false,
   "k9_unchanged": true,
   "k10_unchanged": true
