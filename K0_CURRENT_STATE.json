@@ -3,14 +3,14 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "REWRITE16_CANONICAL_WRITER_PATH_IN_PROGRESS",
+  "status": "REWRITE16_CANONICAL_WRITER_PATH_COMPLETE_BATCH_PENDING",
   "first_open_blocker": {
-    "code": "REWRITE16_ITEM_14_CANONICAL_AUTHORING_NOT_YET_ACCEPTED",
-    "item_index": 14,
-    "title": "Wie oft muss ein Pferdeanhänger zum TÜV?",
-    "detail": "AUTHORING_CONTEXT is present and text-free; WRITER_JOB/SEALED_WRITER_PRODUCT/WORDPRESS_SINGLE are absent. Item 13 is now fully canonical and verified. This is the next sequential routing/persist blocker."
+    "code": "REWRITE16_FINAL_BATCH_NOT_YET_BUILT",
+    "item_index": null,
+    "title": "Finale 16er-WordPress-Datei",
+    "detail": "All 16 canonical WORDPRESS_SINGLE.json outputs are complete and verified individually. The final combined WordPress batch has not yet been freshly assembled and batch-verified."
   },
-  "next_action": "RETRY_AUTHORING_CONTEXT_ITEM_14_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH",
+  "next_action": "ASSEMBLE_AND_VERIFY_FRESH_CANONICAL_REWRITE16_WORDPRESS_BATCH",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -35,7 +35,7 @@
   },
   "rewrite16": {
     "total": 16,
-    "canonical_wordpress_single_complete_count": 15,
+    "canonical_wordpress_single_complete_count": 16,
     "complete_indices": [
       0,
       1,
@@ -51,24 +51,23 @@
       11,
       12,
       13,
+      14,
       15
     ],
-    "remaining_indices": [
-      14
-    ],
+    "remaining_indices": [],
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3"
   },
   "freshness": {
     "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
-    "last_checked_branch_head_sha": "441525ca96af71e065278425db14d5b4b675d4fb",
-    "latest_writer_accept_run": 37067718513,
+    "last_checked_branch_head_sha": "c1e202381f7f9999c7ac52206681e202801912f2",
+    "latest_writer_accept_run": 37068362131,
     "latest_writer_accept_result": "SUCCESS",
     "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "ITEM13_CANONICAL_WORDPRESS_SINGLE_PASS; ITEM14_REMAINS"
+    "delta_result": "ITEM14_CANONICAL_WORDPRESS_SINGLE_PASS; ALL_16_SINGLES_COMPLETE; FINAL_BATCH_PENDING"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
