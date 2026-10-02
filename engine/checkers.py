@@ -340,7 +340,31 @@ def editorial_receipts(article):
             a,b=hrows[i][1],hrows[j][1]; sim=len(a&b)/len(a|b) if a|b else 0
             if sim>=threshold: sem_bad.append((hrows[i][0],hrows[j][0],sim))
     forbidden=[x.casefold() for x in v['surface']['forbidden_generator_phrases']]
-    non_template_ok=not any(p in _plain(html).casefold() for p in forbidden)
+    plain_surface=_plain(html).casefold()
+    non_template_ok=not any(p in plain_surface for p in forbidden)
+
+    # Direct informational FAQ must not drift into purchase/selection/decision copy.
+    # This closes the proven K9 "alte Schabracke" failure family without weakening
+    # legitimate decision-support FAQs.
+    faq_direct_info=False
+    if article.get('article_type')=='FAQ':
+        title_cf=_plain(article.get('title')).casefold()
+        decision_title=bool(re.search(r'\\b(welche|welcher|welches)\\b.*\\b(besser|geeignet|wählen|auswählen|kaufen)\\b',title_cf))
+        procedural_title=bool(re.match(r'^(wie (lege|legt|mache|macht|reinige|pflegt|pflege|verwende|nutze|benutze)\\b)',title_cf))
+        faq_direct_info=not decision_title and not procedural_title
+    decision_terms=(
+        'muss-kriterien',
+        'zusatzmerkmale',
+        'passform',
+        'größtmögliche ausstattung',
+        'vor der entscheidung',
+        'praktische kontrolle',
+        'zum tatsächlichen bedarf',
+        'vorgesehenen einsatz',
+    )
+    faq_decision_hits=sorted({term for term in decision_terms if term in plain_surface}) if faq_direct_info else []
+    if len(faq_decision_hits)>=3:
+        non_template_ok=False
     sentences=[_norm(x) for x in _sentences(html) if len(_words(x))>=5]; repeats=Counter(sentences)
     repetition_ok=all(n==1 for n in repeats.values())
     plain_cf=_plain(html).casefold(); reg_hits=[x for x in legacy['known_error_regression_patterns'] if x.casefold() in plain_cf]
@@ -363,7 +387,7 @@ def editorial_receipts(article):
       ('heading.target_phrase_control',target_ok,{'actual':exact,'min':lo,'max':hi}),('heading.keyword_staccato_forbidden',staccato_ok,{'counts':token_counts}),
       ('heading.phrase_family_repetition_forbidden',phrase_ok,{'counts':dict(lead_counts)}),('heading.duplicate_normalized_forbidden',duplicate_ok,{}),
       ('heading.hard_length',hard_ok,{}),('heading.natural_concrete_section_language',natural_ok,{'findings':natural_find}),
-      ('heading.grammatical_variety',grammar_ok,{'endings':dict(end_counts)}),('surface.non_template_language',non_template_ok,{}),
+      ('heading.grammatical_variety',grammar_ok,{'endings':dict(end_counts)}),('surface.non_template_language',non_template_ok,{'faq_direct_info':faq_direct_info,'decision_hits':faq_decision_hits}),
       ('surface.repetition_forbidden',repetition_ok,{'duplicates':{k:v for k,v in repeats.items() if v>1}}),
       ('heading.intent_binding',intent_ok,{'bad':intent_bad,'terms':sorted(intent_terms)}),('heading.semantic_duplicate_forbidden',not sem_bad,{'bad':sem_bad}),
       ('surface.known_regression_patterns_forbidden',not reg_hits,{'hits':reg_hits}),('surface.known_unnatural_language_forbidden',not unnatural_hits,{'hits':unnatural_hits}),
