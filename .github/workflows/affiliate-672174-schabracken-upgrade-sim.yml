@@ -125,7 +125,7 @@ jobs:
           PHP
           /tmp/wp eval-file /tmp/seed.php --path=/tmp/wp-site
 
-      - name: NEGATIVE reproduce current multi-target early-review
+      - name: POSITIVE actual automatic multi-target materialization
         shell: bash
         run: |
           set -euo pipefail
@@ -137,14 +137,20 @@ jobs:
           $id=absint(get_option('ppar_test_schabracken_creative_id'));
           $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",$id),ARRAY_A);
           $res=$o->output_plan_creative($row,true);
+          if(absint($res['active']??0)<1)throw new RuntimeException('automatic materialization failed '.wp_json_encode($res));
           $objects=$wpdb->prefix.'ppar_output_objects';
           $identity=(string)get_option('ppar_test_schabracken_identity');
-          $obj=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$objects} WHERE creative_identity_hash=%s AND output_type='portal_banner' ORDER BY id DESC LIMIT 1",$identity),ARRAY_A);
-          if(!is_array($obj)) throw new RuntimeException('output object missing '.wp_json_encode($res));
-          if(($obj['status']??'')==='published') throw new RuntimeException('expected multi-target current source to remain non-published');
-          if(!in_array(($obj['decision_source']??''),['creative_domain_signal_missing','automatic'],true)) throw new RuntimeException('unexpected current blocker '.wp_json_encode($obj));
-          echo "CURRENT_MULTI_TARGET_NONPUBLISH_REPRODUCED_PASS\n";
-          echo wp_json_encode(['plan'=>$res,'object'=>['status'=>$obj['status'],'source'=>$obj['decision_source'],'reason'=>$obj['decision_reason']]],JSON_UNESCAPED_SLASHES)."\n";
+          $obj=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$objects} WHERE creative_identity_hash=%s AND output_type='portal_banner' AND status='published' ORDER BY id DESC LIMIT 1",$identity),ARRAY_A);
+          if(!is_array($obj))throw new RuntimeException('published object missing');
+          $page=absint(get_option('ppar_test_schabracken_page'));
+          if(($obj['target_key']??'')!=='page:'.$page)throw new RuntimeException('wrong automatic target '.wp_json_encode($obj));
+          if(($obj['slot_id']??'')!=='product_after_category_tiles')throw new RuntimeException('wrong automatic slot '.wp_json_encode($obj));
+          $m=new ReflectionMethod($o,'campaign_from_post');$m->setAccessible(true);
+          $campaign=$m->invoke($o,get_post(absint($obj['campaign_post_id']??0)));
+          if(!is_array($campaign)||empty($campaign['active']))throw new RuntimeException('campaign inactive');
+          if(!in_array('page:schabracken',(array)($campaign['automation_target_keys']??[]),true))throw new RuntimeException('frontend target missing');
+          if(!in_array('product_after_category_tiles',(array)($campaign['placements']??[]),true))throw new RuntimeException('frontend placement missing');
+          echo "ACTUAL_AUTO_TARGET_SLOT_ACTIVE_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/current-multitarget.php --path=/tmp/wp-site
 
