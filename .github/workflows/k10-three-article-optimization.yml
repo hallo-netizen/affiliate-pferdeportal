@@ -1,4 +1,4 @@
-# K10_FINAL_GREEN_RERUN_20261002
+# K10_BATCH_LT68_PREFLIGHT_20261002
 name: K10 three-article optimization run
 
 on:
@@ -6,7 +6,12 @@ on:
     branches: [konzept10-rule-ledger-20261001]
     paths:
       - 'real_runs/20261002_three_article_optimization/**'
+      - 'engine/preflight.py'
+      - 'engine/lt68_external.py'
+      - 'engine/real_proof.py'
       - 'engine/optimization_proof.py'
+      - 'engine/checkers.py'
+      - 'engine/final_integrity.py'
       - '.github/workflows/k10-three-article-optimization.yml'
   workflow_dispatch:
 
@@ -37,34 +42,18 @@ jobs:
           print('K10_CURRENT_PSERC_SNAPSHOT_BOUND=1')
           PY
 
-      - name: Download exact LanguageTool 6.8 once
+      - name: Prepare all three articles with exact K10 preflight
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/k10-lt68
-          curl --fail --location --retry 3 \
-            https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip \
-            -o /tmp/k10-lt68/LanguageTool-6.8.zip
-          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k10-lt68/LanguageTool-6.8.zip' | sha256sum -c -
-          unzip -q /tmp/k10-lt68/LanguageTool-6.8.zip -d /tmp/k10-lt68
-          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
-
-      - name: Run three real articles with timing and protocol
-        shell: bash
-        run: |
-          set +e
-          set -uo pipefail
           root='real_runs/20261002_three_article_optimization'
           outroot='/tmp/k10-three'
           mkdir -p "$outroot"
-          overall_rc=0
           for name in reitplatzplaner regendecken schermaschinen; do
-            echo "=== K10_REAL_ITEM:$name ==="
             article="$root/$name/ARTICLE_INPUT.json"
             od="$outroot/$name"
             mkdir -p "$od"
             cp "$article" "$od/ARTICLE_INPUT.json"
-
             python3 - "$article" "$od/RESEARCH.json" <<'PY'
           import json,sys
           a=json.load(open(sys.argv[1],encoding='utf-8'))
@@ -77,98 +66,109 @@ jobs:
           r={'contract':'K10_REAL_RESEARCH_V1','article_id':a['article_id'],'topic':a['title'],'retrieved_at':'2026-10-02','sources':sources,'claims':claims,'publish_allowed':False}
           json.dump(r,open(sys.argv[2],'w',encoding='utf-8'),ensure_ascii=False,indent=2,sort_keys=True)
           PY
-
             slug="$(python3 - "$article" <<'PY'
           import json,sys
           print(json.load(open(sys.argv[1],encoding='utf-8'))['wordpress_category']['slug'])
           PY
             )"
+            curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$slug" -o "$od/category.json"
+            start="$(date +%s%3N)"
+            python3 -m engine.preflight "$article" "$od/category.json" "$od/preflight"
+            end="$(date +%s%3N)"
+            echo "$((end-start))" > "$od/preflight_ms"
+          done
+          python3 - "$outroot" <<'PY'
+          import json,sys,pathlib
+          root=pathlib.Path(sys.argv[1])
+          items=[]
+          for name in ('reitplatzplaner','regendecken','schermaschinen'):
+              od=root/name
+              items.append({'article':str(od/'preflight'/'ARTICLE_PREPARED.json'),'output':str(od/'lt68.json')})
+          json.dump({'contract':'K10_LT68_BATCH_MANIFEST_V1','items':items},open(root/'LT_BATCH_MANIFEST.json','w'),indent=2)
+          PY
 
-            total_start="$(date +%s%3N)"
-            cat_start="$(date +%s%3N)"
-            curl --fail --location --retry 3 --silent --show-error \
-              "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$slug" \
-              -o "$od/category.json"
-            cat_rc=$?
-            cat_end="$(date +%s%3N)"
+      - name: Download exact LanguageTool 6.8 once
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k10-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k10-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k10-lt68/LanguageTool-6.8.zip -d /tmp/k10-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
 
-            lt_start="$(date +%s%3N)"
-            python3 -m engine.lt68_external \
-              /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar \
-              "$article" "$od/lt68.json"
-            lt_rc=$?
-            lt_end="$(date +%s%3N)"
+      - name: Run exact LanguageTool 6.8 once for all three articles
+        shell: bash
+        run: |
+          set -euo pipefail
+          start="$(date +%s%3N)"
+          python3 -m engine.lt68_external --batch             /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar             /tmp/k10-three/LT_BATCH_MANIFEST.json
+          end="$(date +%s%3N)"
+          echo "$((end-start))" > /tmp/k10-three/LT_BATCH_MS
+          echo 'K10_LT68_JAVA_PROCESS_COUNT=1'
+          echo "K10_LT68_BATCH_MS=$((end-start))"
 
+      - name: Finalize three articles from hash-bound preflight receipts
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          root='real_runs/20261002_three_article_optimization'
+          outroot='/tmp/k10-three'
+          overall_rc=0
+          batch_ms="$(cat "$outroot/LT_BATCH_MS")"
+          for name in reitplatzplaner regendecken schermaschinen; do
+            od="$outroot/$name"
+            article="$od/preflight/ARTICLE_PREPARED.json"
             proof_start="$(date +%s%3N)"
-            python3 -m engine.optimization_proof \
-              "$article" "$od/RESEARCH.json" /tmp/pserc.json "$od/category.json" "$od/lt68.json" "$od/proof"
+            python3 -m engine.optimization_proof               "$article" "$od/RESEARCH.json" /tmp/pserc.json "$od/category.json" "$od/lt68.json" "$od/proof"               "$od/preflight/ARTICLE_RECEIPTS_PRE_LT68.json"
             proof_rc=$?
             proof_end="$(date +%s%3N)"
-            total_end="$proof_end"
-
-            python3 - "$name" "$article" "$od" "$cat_rc" "$lt_rc" "$proof_rc" \
-              "$((cat_end-cat_start))" "$((lt_end-lt_start))" "$((proof_end-proof_start))" "$((total_end-total_start))" <<'PY'
+            python3 - "$name" "$article" "$od" "$proof_rc" "$((proof_end-proof_start))" "$batch_ms" <<'PY'
           import json,sys,pathlib,re
           name,ap,od=sys.argv[1],sys.argv[2],pathlib.Path(sys.argv[3])
-          cat_rc,lt_rc,proof_rc=map(int,sys.argv[4:7])
-          cat_ms,lt_ms,proof_ms,total_ms=map(int,sys.argv[7:11])
-          a=json.load(open(ap,encoding='utf-8'))
-          lt=json.load(open(od/'lt68.json',encoding='utf-8')) if (od/'lt68.json').is_file() else {}
-          fp=od/'proof'/'FINAL_REPORT.json'
-          report=json.load(open(fp,encoding='utf-8')) if fp.is_file() else {}
-          html=a.get('html','')
-          intro=re.search(r'(?is)<section\b[^>]*data-block=["\']intro["\'][^>]*>(.*?)</section>',html)
-          text=re.sub(r'(?s)<[^>]+>',' ',intro.group(1) if intro else '')
-          words=re.findall(r'\b[\wÄÖÜäöüß-]+\b',text)
-          first=(re.split(r'(?<=[.!?])\s+',re.sub(r'\s+',' ',text).strip())[0] if text.strip() else '')
-          first_words=len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',first))
+          proof_rc=int(sys.argv[4]); proof_ms=int(sys.argv[5]); batch_ms=int(sys.argv[6])
+          a=json.load(open(ap,encoding='utf-8')); lt=json.load(open(od/'lt68.json',encoding='utf-8'))
+          report=json.load(open(od/'proof'/'FINAL_REPORT.json',encoding='utf-8')) if (od/'proof'/'FINAL_REPORT.json').is_file() else {}
+          preflight=json.load(open(od/'preflight'/'PREFLIGHT_REPORT.json',encoding='utf-8'))
           protocol={
-            'contract':'K10_THREE_ARTICLE_OPTIMIZATION_ITEM_V1',
-            'name':name,'title':a['title'],'article_type':a['article_type'],
-            'word_count_visible':len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',re.sub(r'(?s)<[^>]+>',' ',html))),
-            'intro_word_count':len(words),'first_sentence':first,'first_sentence_words':first_words,
-            'table_decision':a.get('table_decision'),'table_present':'<table' in html.lower(),
-            'timing_ms':{'category_binding':cat_ms,'language_tool':lt_ms,'k10_proof':proof_ms,'machine_total':total_ms},
-            'return_codes':{'category':cat_rc,'language_tool':lt_rc,'proof':proof_rc},
+            'contract':'K10_THREE_ARTICLE_OPTIMIZATION_ITEM_V2','name':name,'title':a['title'],'article_type':a['article_type'],
+            'preflight_status':preflight.get('status'),'preflight_ms':int((od/'preflight_ms').read_text().strip()),
             'lt68':{'status':lt.get('status'),'finding_count':lt.get('finding_count')},
-            'proof_status':report.get('status'),
+            'language_tool_batch_total_ms':batch_ms,'language_tool_java_process_count':1,
+            'proof_ms':proof_ms,'proof_status':report.get('status'),
             'article_rules':(report.get('article_rules') or {}).get('status'),
-            'article_findings':(report.get('article_rules') or {}).get('findings') or [],
             'system_rules':(report.get('system_rules') or {}).get('status'),
-            'pserc':report.get('pserc_metadata_binding'),
-            'endstempel':report.get('endstempel'),
+            'pserc':report.get('pserc_metadata_binding'),'endstempel':report.get('endstempel'),
             'wordpress_file_verify':report.get('wordpress_file_verify'),
             'normal_terminal_stop':'PASS' if report.get('status')=='READY_FOR_WORDPRESS_DRAFT_IMPORT' else 'BLOCKED',
-            'publish_allowed':False,
+            'content_recheck_after_preflight':False,'return_code':proof_rc,'publish_allowed':False
           }
           json.dump(protocol,open(od/'PROTOCOL.json','w',encoding='utf-8'),ensure_ascii=False,indent=2,sort_keys=True)
           print('K10_ITEM_PROTOCOL='+json.dumps(protocol,ensure_ascii=False,sort_keys=True))
           PY
-
-            if [ "$cat_rc" -ne 0 ] || [ "$lt_rc" -ne 0 ] || [ "$proof_rc" -ne 0 ]; then overall_rc=1; fi
+            if [ "$proof_rc" -ne 0 ]; then overall_rc=1; fi
           done
-
           python3 - "$outroot" <<'PY'
           import json,sys,pathlib,statistics
           root=pathlib.Path(sys.argv[1])
           rows=[json.load(open(p,encoding='utf-8')) for p in sorted(root.glob('*/PROTOCOL.json'))]
           ok=all(r['normal_terminal_stop']=='PASS' for r in rows)
-          totals=[r['timing_ms']['machine_total'] for r in rows]
           summary={
-            'contract':'K10_THREE_ARTICLE_OPTIMIZATION_SUMMARY_V1',
-            'status':'PASS' if ok else 'BLOCKED',
-            'article_count':len(rows),
-            'items':rows,
-            'machine_total_ms_sum':sum(totals),
-            'machine_total_ms_mean':round(statistics.mean(totals),1) if totals else None,
-            'publish_allowed':False,
+            'contract':'K10_THREE_ARTICLE_OPTIMIZATION_SUMMARY_V2','status':'PASS' if ok else 'BLOCKED',
+            'article_count':len(rows),'items':rows,
+            'language_tool_java_process_count':1,
+            'language_tool_batch_total_ms':int((root/'LT_BATCH_MS').read_text().strip()),
+            'preflight_ms_sum':sum(r['preflight_ms'] for r in rows),
+            'proof_ms_sum':sum(r['proof_ms'] for r in rows),
+            'publish_allowed':False
           }
           json.dump(summary,open(root/'SUMMARY.json','w',encoding='utf-8'),ensure_ascii=False,indent=2,sort_keys=True)
           print('K10_THREE_ARTICLE_SUMMARY='+json.dumps(summary,ensure_ascii=False,sort_keys=True))
           if not ok: raise SystemExit(4)
           PY
-          summary_rc=$?
-          if [ "$summary_rc" -ne 0 ]; then overall_rc=1; fi
+          rc=$?
+          if [ "$rc" -ne 0 ]; then overall_rc=1; fi
           exit "$overall_rc"
 
       - name: Upload protocols and verified import files

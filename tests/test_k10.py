@@ -9,6 +9,7 @@ from engine.checkers import run_article_checks, run_article_content_checks, arti
 from engine.final_integrity import verify_article, verify_article_pre_lt68, verify_system, verify_package, verify_package_pre_wordpress
 from engine.preflight import materialize_trace_bindings, preflight_article
 from engine.lt68_external import visible_text
+import engine.lt68_external as lt68
 from engine.isolation_guard import verify as isolation_verify
 from engine.owner_guard import verify as owner_verify
 from engine.field_coverage import audit as field_audit
@@ -119,6 +120,32 @@ class K10Tests(unittest.TestCase):
         prepared['external_results']={'LanguageTool 6.8':'PASS'}
         full=list(receipts)+adapter_receipts(prepared)
         self.assertEqual(verify_article(prepared['article_id'],article_hash(prepared),full)['status'],'PASS')
+
+
+    def test_lt68_batch_invokes_java_once_for_multiple_articles(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); jar=root/'lt.jar'; jar.write_bytes(b'x')
+            a1=make_base(); a2=make_base(); a2['article_id']='A2'; a2['title']='Was ist eine zweite Longierpeitsche?'; a2['target_keyword']='Was ist eine zweite Longierpeitsche'; a2['type_meta']={'primary_question':'Was ist eine zweite Longierpeitsche?'}
+            p1=root/'a1.json'; p2=root/'a2.json'
+            p1.write_text(json.dumps(a1,ensure_ascii=False),encoding='utf-8'); p2.write_text(json.dumps(a2,ensure_ascii=False),encoding='utf-8')
+            raw={'matches':[],'language':{'code':'de-DE'},'software':{'name':'LanguageTool'},'warnings':{}}
+            with mock.patch.object(lt68,'sha_file',return_value=lt68.JAR_SHA256), mock.patch.object(lt68,'_invoke',return_value=raw) as invoke:
+                reports=lt68.run_many(jar,[p1,p2])
+            self.assertEqual(invoke.call_count,1)
+            self.assertEqual([x['article_id'] for x in reports],['A1','A2'])
+            self.assertTrue(all(x['status']=='PASS' for x in reports))
+
+    def test_lt68_batch_fails_closed_on_cross_boundary_finding(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); jar=root/'lt.jar'; jar.write_bytes(b'x')
+            a1=make_base(); a2=make_base(); a2['article_id']='A2'
+            p1=root/'a1.json'; p2=root/'a2.json'
+            p1.write_text(json.dumps(a1,ensure_ascii=False),encoding='utf-8'); p2.write_text(json.dumps(a2,ensure_ascii=False),encoding='utf-8')
+            boundary=len(visible_text(a1['html']))+1
+            raw={'matches':[{'offset':boundary,'length':1,'rule':{'id':'TEST'},'message':'boundary'}],'language':{'code':'de-DE'},'software':{'name':'LanguageTool'},'warnings':{}}
+            with mock.patch.object(lt68,'sha_file',return_value=lt68.JAR_SHA256), mock.patch.object(lt68,'_invoke',return_value=raw):
+                with self.assertRaises(lt68.Blocked):
+                    lt68.run_many(jar,[p1,p2])
 
     def test_field_inventory_is_complete(self):
         r=field_audit(); self.assertEqual(r['status'],'PASS',r); self.assertEqual(r['total'],151); self.assertEqual(r['bad'],[])

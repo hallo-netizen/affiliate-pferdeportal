@@ -5,6 +5,12 @@ on:
     branches: [konzept10-rule-ledger-20261001]
     paths:
       - 'real_runs/20261002_live_scale_tuev/**'
+      - 'engine/preflight.py'
+      - 'engine/lt68_external.py'
+      - 'engine/real_proof.py'
+      - 'engine/optimization_proof.py'
+      - 'engine/checkers.py'
+      - 'engine/final_integrity.py'
       - '.github/workflows/k10-live-scale-e2e.yml'
   workflow_dispatch:
 
@@ -45,6 +51,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p /tmp/k10-live
           slug="$(python3 - <<'PY'
           import json
           print(json.load(open('real_runs/20261002_live_scale_tuev/ARTICLE_INPUT.json'))['wordpress_category']['slug'])
@@ -61,57 +68,65 @@ jobs:
           print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
           PY
 
-      - name: Download exact LanguageTool 6.8
+      - name: Exact K10 article preflight before LanguageTool
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/k10-lt68 /tmp/k10-live
+          start="$(date +%s%3N)"
+          python3 -m engine.preflight             real_runs/20261002_live_scale_tuev/ARTICLE_INPUT.json             /tmp/category.json             /tmp/k10-live/preflight
+          end="$(date +%s%3N)"
+          echo "$((end-start))" > /tmp/k10-live/preflight_ms
+          echo "K10_EXACT_PREFLIGHT_PASS_MS=$((end-start))"
+
+      - name: Download exact LanguageTool 6.8 after preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-lt68
           curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k10-lt68/LanguageTool-6.8.zip
           echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k10-lt68/LanguageTool-6.8.zip' | sha256sum -c -
           unzip -q /tmp/k10-lt68/LanguageTool-6.8.zip -d /tmp/k10-lt68
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
 
-      - name: Run live article with end-to-end timing
+      - name: Run LanguageTool and hash-bound final proof
         shell: bash
         run: |
           set +e
           set -uo pipefail
-          article='real_runs/20261002_live_scale_tuev/ARTICLE_INPUT.json'
+          article='/tmp/k10-live/preflight/ARTICLE_PREPARED.json'
           research='real_runs/20261002_live_scale_tuev/RESEARCH.json'
           start_epoch="$(git show -s --format=%ct "$START_COMMIT")"
           machine_start="$(date +%s%3N)"
+          lt_start="$machine_start"
           python3 -m engine.lt68_external /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar "$article" /tmp/k10-live/lt68.json
           lt_rc=$?
           lt_end="$(date +%s%3N)"
-          python3 -m engine.optimization_proof "$article" "$research" /tmp/pserc.json /tmp/category.json /tmp/k10-live/lt68.json /tmp/k10-live/proof
+          python3 -m engine.optimization_proof             "$article" "$research" /tmp/pserc.json /tmp/category.json /tmp/k10-live/lt68.json /tmp/k10-live/proof             /tmp/k10-live/preflight/ARTICLE_RECEIPTS_PRE_LT68.json
           proof_rc=$?
           proof_end="$(date +%s%3N)"
           python3 - "$article" "$start_epoch" "$machine_start" "$lt_end" "$proof_end" "$lt_rc" "$proof_rc" <<'PY'
-          import json,sys,time,pathlib,re
+          import json,sys,pathlib
           ap,start_epoch,machine_start,lt_end,proof_end,lt_rc,proof_rc=sys.argv[1:]
           a=json.load(open(ap))
           lt=json.load(open('/tmp/k10-live/lt68.json')) if pathlib.Path('/tmp/k10-live/lt68.json').is_file() else {}
           rp=pathlib.Path('/tmp/k10-live/proof/FINAL_REPORT.json')
           report=json.load(open(rp)) if rp.is_file() else {}
-          end_epoch_ms=int(proof_end)
+          preflight_ms=int(pathlib.Path('/tmp/k10-live/preflight_ms').read_text().strip())
           p={
-            'contract':'K10_LIVE_SCALE_E2E_PROTOCOL_V1',
-            'article_title':a['title'],
-            'article_type':a['article_type'],
+            'contract':'K10_LIVE_SCALE_E2E_PROTOCOL_V2',
+            'article_title':a['title'],'article_type':a['article_type'],
             'research_start_commit':'1633a766c41a4d878320ae889c702de996306e57',
-            'wall_from_research_start_ms':end_epoch_ms-int(start_epoch)*1000,
+            'wall_from_original_research_start_ms':int(proof_end)-int(start_epoch)*1000,
+            'preflight_ms':preflight_ms,
             'language_tool_ms':int(lt_end)-int(machine_start),
             'proof_ms':int(proof_end)-int(lt_end),
-            'machine_validation_ms':int(proof_end)-int(machine_start),
-            'lt68_status':lt.get('status'),
-            'lt68_findings':lt.get('finding_count'),
+            'machine_validation_ms':preflight_ms+int(proof_end)-int(machine_start),
+            'lt68_status':lt.get('status'),'lt68_findings':lt.get('finding_count'),
             'article_rules':(report.get('article_rules') or {}).get('status'),
             'system_rules':(report.get('system_rules') or {}).get('status'),
-            'pserc':report.get('pserc_metadata_binding'),
-            'endstempel':report.get('endstempel'),
-            'wordpress_file_verify':report.get('wordpress_file_verify'),
-            'terminal_status':report.get('status'),
-            'publish_allowed':False,
+            'pserc':report.get('pserc_metadata_binding'),'endstempel':report.get('endstempel'),
+            'wordpress_file_verify':report.get('wordpress_file_verify'),'terminal_status':report.get('status'),
+            'content_recheck_after_preflight':False,'publish_allowed':False,
             'return_codes':{'lt68':int(lt_rc),'proof':int(proof_rc)}
           }
           json.dump(p,open('/tmp/k10-live/PROTOCOL.json','w'),ensure_ascii=False,indent=2,sort_keys=True)
