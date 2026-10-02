@@ -1,0 +1,88 @@
+{
+  "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "batch_sha256": "2d40c41dedfa09eea5c3d3624db0c799e70d8dd3b771c7fea1f040ffbcbb142b",
+  "article_count": 1,
+  "publish_allowed": false,
+  "signing_deferred": true,
+  "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+  "no_legacy_status": "PASS",
+  "test_suite_status": "PASS",
+  "wordpress_review": {
+    "file_format": "JSON",
+    "mime_type": "application/json",
+    "intended_next_step": "WORDPRESS_DIRECT_IMPORT",
+    "plugin_name": "Portal SEO Editorial Plan Compiler",
+    "plugin_version_verified_against": "0.28.30",
+    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "ppm_version_verified_against": "6.7.9",
+    "direct_wordpress_upload_ready": true,
+    "direct_upload_block_reason": null,
+    "required_downstream_components": []
+  },
+  "articles": [
+    {
+      "index": 0,
+      "article_id": "article:f363ad9f8d1f7e91a81ea740",
+      "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+      "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+      "category": "pferdehaftpflicht-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "final_draft_sha256": "14eed620b5a8c322b50c7704198a3433a2964190e4fce1cdf7c71edc861f83a9",
+      "revision_count": 4,
+      "body": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p>Wenn andere Menschen dein Pferd reiten oder betreuen, sollte die Pferdehalter-Haftpflicht diese Nutzung eindeutig abdecken. Begriffe wie Fremdreiter, Gastreiter, Reitbeteiligung oder Tierhüter werden in Tarifen nicht immer identisch verwendet. Deshalb reicht es nicht, nur nach dem Stichwort Fremdreiterrisiko zu suchen. Entscheidend ist, wer laut Bedingungen tatsächlich mitversichert ist und ob Ansprüche dieser Personen gegen den Halter ebenfalls erfasst werden.</p>\n</section>\n<section data-block=\"people\">\n<h2>Fremdreiter, Gastreiter und Reitbeteiligung unterscheiden</h2>\n<p>Ein Fremdreiter nutzt das Pferd, ohne selbst Halter zu sein. Das kann eine Freundin sein, die gelegentlich ausreitet, oder eine Person, die das Pferd regelmäßig bewegt. Manche Versicherer verwenden zusätzlich den Begriff Gastreiter für eher gelegentliche Nutzung und behandeln feste Reitbeteiligungen gesondert. Gerade bei regelmäßigen Reitbeteiligungen sollte nicht angenommen werden, dass sie automatisch unter dieselbe Klausel fallen. Wichtig ist außerdem, ob die Reitbeteiligung selbst Ansprüche gegen den Halter geltend machen kann, wenn sie durch das Pferd verletzt wird. Solche Personenschäden können versicherungstechnisch besonders relevant sein. Wer sein Pferd mehreren Menschen überlässt, sollte die reale Nutzung deshalb schriftlich mit den Definitionen im Tarif abgleichen und im Zweifel eine eindeutige Bestätigung des Versicherers einholen.</p>\n\n<p>Auch wenn eine Person nur selten reitet, sollte geklärt sein, ob ihre Nutzung privat und unentgeltlich bleibt. Sobald Geld fließt oder eine gewerbliche Tätigkeit berührt wird, können andere Bedingungen gelten. Solche Unterschiede gehören ausdrücklich zum Versicherer, statt aus allgemeinen Begriffen wie Gastreiter oder Reitbeteiligung selbst abgeleitet zu werden.</p>\n\n</section>\n<section data-block=\"care\">\n<h2>Auch Betreuung ohne Reiten kann versichert sein</h2>\n<p>Nicht jede Person, die mit dem Pferd umgeht, sitzt im Sattel. Jemand kann das Tier führen, auf die Weide bringen, verladen oder während des Urlaubs versorgen. In solchen Situationen ist eher die Rolle als Tierhüter oder Betreuungsperson relevant. Gute Tarife beschreiben, ob solche Personen mitversichert sind und unter welchen Bedingungen. Das ist besonders wichtig in privaten Stallgemeinschaften, bei Urlaubsvertretungen oder wenn mehrere Familienmitglieder regelmäßig Aufgaben übernehmen. Die Begriffe können sich überschneiden, sollten aber nicht einfach gleichgesetzt werden. Die Übersicht hilft bei der Orientierung.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Person</th><th>Nutzung</th><th>Prüfpunkt</th></tr></thead><tbody>\n<tr><td>Fremdreiter</td><td>Reiten</td><td>Einschluss</td></tr>\n<tr><td>Gastreiter</td><td>Gelegentlich</td><td>Umfang</td></tr>\n<tr><td>Reitbeteiligung</td><td>Regelmäßig</td><td>Ansprüche</td></tr>\n<tr><td>Tierhüter</td><td>Betreuung</td><td>Mitversicherung</td></tr>\n</tbody></table>\n<p>Verbindlich bleibt immer die Definition im jeweiligen Bedingungswerk.</p>\n\n<p>Bei Urlaubsvertretungen ist außerdem sinnvoll, Kontaktdaten und wichtige Hinweise zum Pferd weiterzugeben. Versicherungsschutz verhindert keinen Unfall, kann aber die finanziellen Folgen abdecken. Eine Person, die das Pferd betreut, sollte deshalb wissen, wie es geführt wird, welche Besonderheiten bestehen und wen sie im Notfall erreichen kann.</p>\n\n</section>\n<section data-block=\"coverage\">\n<h2>Deckungssumme und Ausschlüsse gehören mit in den Vergleich</h2>\n<p>Die mitversicherten Personen sind nur ein Teil der Entscheidung. Schäden durch Pferde können Personen, Sachen und Vermögen betreffen und im Einzelfall sehr hohe Summen erreichen. Deshalb sollte auch die Versicherungssumme zum eigenen Sicherheitsbedürfnis passen. Prüfe zusätzlich Selbstbeteiligung, Flurschäden, Schäden an gemieteten Stallungen oder Transportern sowie mögliche Einschränkungen bei Veranstaltungen oder besonderen Nutzungen. Nicht jeder Punkt ist für jeden Halter gleich wichtig. Wer mit dem Pferd regelmäßig auf Turniere fährt, hat andere Risiken als jemand, dessen Pferd den Hof kaum verlässt. Der Vergleich wird übersichtlicher, wenn zuerst die tatsächliche Haltung und Nutzung notiert und anschließend nur Tarife betrachtet werden, die diese Situationen ausdrücklich abdecken.</p>\n\n<p>Wer einen Tarif vergleicht, sollte nicht nur die höchste Deckungssumme markieren. Ebenso wichtig ist, ob relevante Schadenarten tatsächlich eingeschlossen sind und welche Selbstbeteiligung anfällt. Ein niedriger Beitrag kann unattraktiv werden, wenn für typische Situationen der eigenen Haltung Ausschlüsse gelten. Der Vergleich sollte deshalb immer Leistungen und Preis gemeinsam berücksichtigen.</p>\n\n</section>\n<section data-block=\"conditions\">\n<h2>Die Versicherungsbedingungen sind wichtiger als Werbeaussagen</h2>\n<p>Produktseiten fassen Leistungen oft kurz zusammen, doch maßgeblich sind die Bedingungen des konkreten Tarifs. Dort sollte nachvollziehbar stehen, welche Personen mitversichert sind, welche Schäden ausgeschlossen werden und ob besondere Voraussetzungen gelten. Die Allianz nennt beispielsweise nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- oder Fremdreiter als mitversichert. Das lässt sich aber nicht automatisch auf andere Anbieter übertragen. Vor Abschluss sollten aktuelle Bedingungen gespeichert oder heruntergeladen werden, damit spätere Änderungen nachvollziehbar bleiben. Wer eine ungewöhnliche Konstellation hat, etwa entgeltliche Nutzung oder mehrere regelmäßige Reiter, sollte diese vor Vertragsabschluss ausdrücklich schildern. Eine schriftliche Antwort ist deutlich belastbarer als eine allgemeine Werbeaussage.</p>\n\n<p>Auch spätere Änderungen der Nutzung sollten dem Versicherungsschutz folgen. Kommt etwa eine feste Reitbeteiligung hinzu oder wird das Pferd häufiger von anderen Personen bewegt, lohnt eine erneute Prüfung der Bedingungen. Versicherungsverträge passen sich nicht automatisch an veränderte Stallabläufe an. Eine kurze schriftliche Nachfrage kann hier deutlich mehr Sicherheit schaffen als eine alte Annahme.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Eine Pferdehaftpflicht mit Fremdreiterrisiko passt dann, wenn sie die tatsächliche Nutzung deines Pferdes vollständig abbildet. Entscheidend ist nicht das Wort Fremdreiter auf der Produktseite, sondern die konkrete Definition im Tarif. Prüfe, ob gelegentliche Reiter, feste Reitbeteiligungen und Betreuungspersonen erfasst sind und wie Ansprüche dieser Personen geregelt werden. Danach gehören Versicherungssumme, Selbstbeteiligung und wichtige Ausschlüsse in den Vergleich. Je genauer du beschreibst, wer dein Pferd wie nutzt, desto leichter erkennst du Lücken. Bei besonderen Konstellationen sollte der Versicherer die Deckung schriftlich bestätigen, bevor du dich auf einen Tarif verlässt.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für den Abschluss sind immer die aktuellen Versicherungsbedingungen maßgeblich. Speichere die Tarifunterlagen und kläre ungewöhnliche Nutzungen oder entgeltliche Reitbeteiligungen vor Vertragsbeginn schriftlich mit dem Anbieter.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Pferdehaftpflicht – Allianz",
+              "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Beratung",
+          "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+          "topic": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "pferdehaftpflicht-beratung",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-c46ccb6c9f9075a9148257bf",
+          "job_sha256": "e7a3d0b2e4aea3b6cfe9c4245f7cc44ac9ec156ce8fa2a62dc0e555050e768e7",
+          "draft_sha256": "e216ece80319d13d6690d64b8681748b45de4fcad8c88ea3cc69e50be2c595d9",
+          "identity_sha256": "08464172c05fcd883b43484ed62b454f98df133179a6199b6352ed01e8768fd2",
+          "visible_text_sha256": "165b8ee5e23bab511a5b51e4c7582f7ded58a500548b01046b2c048abbfb1fe4",
+          "section_structure_sha256": "992129d021e2d9b797f4a63438368b9065e6806112c5adad49f372e69cc76c2d",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 826,
+          "conclusion_ratio": 0.106538,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "353708d66cd33cff6eef6964bfe27a42f6424c45cb47a1b2bd5b0a722442620f"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "14eed620b5a8c322b50c7704198a3433a2964190e4fce1cdf7c71edc861f83a9"
+      }
+    }
+  ]
+}
