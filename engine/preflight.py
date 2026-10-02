@@ -5,6 +5,7 @@ from .core import load_values
 from .checkers import run_article_content_checks, article_hash
 from .final_integrity import verify_article_pre_lt68
 from .html_design import materialize_canonical_root, validate_canonical_html
+from .writer_contract_guard import verify_package as verify_writer_contract
 
 class Blocked(RuntimeError): pass
 
@@ -105,6 +106,10 @@ def materialize_trace_bindings(article):
     return out,{'inserted':inserted,'inserted_count':len(inserted),'visible_text_changed':False}
 
 def preflight_article(article):
+    try:
+        writer_metrics=verify_writer_contract(article)
+    except Exception as exc:
+        raise Blocked('K10_WRITER_CONTRACT_BLOCKED:'+str(exc))
     designed,design_binding=materialize_canonical_root(article)
     prepared,binding=materialize_trace_bindings(designed)
     design_validation=validate_canonical_html(prepared)
@@ -119,6 +124,10 @@ def preflight_article(article):
       'design_binding':design_binding,
       'design_validation':design_validation,
       'trace_materialization':binding,
+      'writer_contract_status':'PASS',
+      'writer_policy_sha256':writer_metrics['policy_sha256'],
+      'writer_total_words':writer_metrics['total_words'],
+      'writer_conclusion_ratio':writer_metrics['conclusion_ratio'],
       'verification':verification,
       'publish_allowed':False,
     }
