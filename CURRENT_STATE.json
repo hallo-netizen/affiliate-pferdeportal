@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "SILENT_BATCH_PRODUCTION_READY",
+  "status": "CANONICAL_WORDPRESS_EXPORT_REAL_PASS_AWAITING_LIVE_IMPORT_RESULT",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "6cb344925df9b74c4c6fc73ca2b2f14aab88e600",
+    "verified_commit": "57188d5a112453f59af49c1706f6685300af52d1",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -363,35 +363,78 @@
       "publish_allowed": false
     },
     "general_wordpress_export_fix": {
+      "status": "PASS_REAL_THREE_ARTICLE_REGRESSION",
       "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
-      "previous_invalid_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
-      "root_cause": "K10_SYNTHESIZED_ARTICLE_ID_FROM_PLAN_SLOT",
-      "article_id_from_plan_slot_forbidden": true,
-      "plan_slot_preserved_as_routing_identity": true,
-      "current_batch_hash_authorities": [
-        "source_batch_sha256",
-        "next_textmachine_metadata_batch.batch_sha256",
-        "batch_sha256"
+      "importer_observed": "0.28.30-pste-v5-binding-safe",
+      "supersedes_wrong_intermediate_fixes": [
+        "ARTICLE_ID_EQUALS_PLAN_SLOT",
+        "ARTICLE_ID_REMOVED"
       ],
-      "direct_wordpress_upload_shape": "PROVEN_K9_SYSTEM4_WORDPRESS_HANDOFF_V1",
-      "regression_commit": "6cb344925df9b74c4c6fc73ca2b2f14aab88e600",
-      "selftest_run_id": 37002131038,
-      "selftest_result": "PASS",
-      "ppm_inventory_run_id": 37002131033,
-      "ppm_inventory_result": "PASS",
-      "independent_neighbor_e2e_run_id": 37002131073,
-      "independent_neighbor_e2e_result": "PASS",
-      "live_tuev_e2e_run_id": 37002131079,
-      "live_tuev_e2e_result": "PASS",
-      "three_article_e2e_run_id": 37002131061,
-      "three_article_e2e_result": "PASS",
-      "quality_reduction": false,
+      "historical_guard_reapplied": "M34_CANONICAL_SLOT_REGISTRY_BINDING",
+      "five_field_input_contract_unchanged": true,
+      "canonical_resolution": "PLAN_SLOT_TO_EXACTLY_ONE_PPM679_REGISTRY_SLOT_TO_CANONICAL_ARTICLE_ID",
+      "title_fallback_allowed": false,
+      "article_id_required": true,
+      "article_id_source": "EXISTING_HASH_BOUND_PPM679_EDITORIAL_PLAN_REGISTRY",
+      "slot_roundtrip": "SHA256(pserc-plan-slot-v2|canonical_article_id)==plan_slot",
+      "real_registry_probe_run_id": 37005945077,
+      "real_registry_probe_result": "SUCCESS",
+      "real_bindings": {
+        "0c5e5534fa0496a7a411cc1c9649297988b5ceb7650f9a52615a533c52e31eea": "article:eb4d5d3579472338a1d0a0bb",
+        "13bf93f90053f03f308a5617a3ef1ab06b371881da4e98415d45c4bb1bf3a4b5": "article:790adf98228aec2e82a241ca",
+        "0b2b9df06d431904df77ea5839ea704ddb4b059071e16609553ca3160c5f1df2": "article:7143719c27af511a0766c1b1"
+      },
+      "real_production_runs": [
+        {
+          "run_id": 37006180597,
+          "result": "SUCCESS",
+          "title": "Ist Mash bei Magenproblemen für Pferde geeignet?"
+        },
+        {
+          "run_id": 37006186620,
+          "result": "SUCCESS",
+          "title": "Ist ein Sperrriemen für Pferde sinnvoll oder sollte man darauf verzichten?"
+        },
+        {
+          "run_id": 37006195370,
+          "result": "SUCCESS",
+          "title": "Wie wird der Sperrriemen richtig verschnallt?"
+        }
+      ],
+      "selftests": [
+        {
+          "run_id": 37006180314,
+          "result": "SUCCESS"
+        },
+        {
+          "run_id": 37006186652,
+          "result": "SUCCESS"
+        },
+        {
+          "run_id": 37006195369,
+          "result": "SUCCESS"
+        }
+      ],
+      "ppm_inventory": [
+        {
+          "run_id": 37006180359,
+          "result": "SUCCESS"
+        },
+        {
+          "run_id": 37006186564,
+          "result": "SUCCESS"
+        },
+        {
+          "run_id": 37006195348,
+          "result": "SUCCESS"
+        }
+      ],
       "k9_changed": false,
       "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "CONSUME_CURRENT_ATTACHMENT_SILENTLY_AND_EXPORT_SYSTEM4_WORDPRESS_HANDOFF_V1_TO_FINAL_VERIFIED_OUTPUT",
+  "next_action": "IMPORT_K10_PFERDEATELIER_3_FAQ_WORDPRESS_IMPORT_FINAL_CANONICAL_JSON_AND_CAPTURE_THE_REAL_WORDPRESS_IMPORT_RESULT",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",
