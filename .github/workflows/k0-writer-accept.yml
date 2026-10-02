@@ -16,6 +16,7 @@ concurrency:
 jobs:
   accept:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,7 +36,7 @@ jobs:
           draft="${drafts[0]}"
           test -f "$draft"
           python3 - "$BEFORE" "$draft" <<'PY' > /tmp/k0-writer.env
-          import json, re, subprocess, sys
+          import json,re,subprocess,sys
           before,draft=sys.argv[1:3]
           d=json.load(open(draft,encoding='utf-8'))
           if d.get('contract')!='K0_WRITER_DRAFT_V1':
@@ -55,14 +56,15 @@ jobs:
                   candidates.append(p)
           if len(candidates)!=1:
               raise SystemExit('K0_WRITER_PARENT_JOB_MATCH_NOT_UNIQUE:'+str(len(candidates)))
-          job=candidates[0]
-          run_dir=job.rsplit('/',1)[0]
+          job=candidates[0]; run_dir=job.rsplit('/',1)[0]
           current_raw=open(job,'rb').read()
           parent_raw=subprocess.check_output(['git','show',before+':'+job])
           if current_raw!=parent_raw:
               raise SystemExit('K0_WRITER_JOB_CHANGED_WITH_DRAFT')
           if subprocess.run(['git','cat-file','-e',before+':'+run_dir+'/SEALED_WRITER_PRODUCT.json'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
               raise SystemExit('K0_WRITER_JOB_ALREADY_SEALED')
+          if subprocess.run(['git','cat-file','-e',before+':'+run_dir+'/WORDPRESS_SINGLE.json'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:
+              raise SystemExit('K0_WORDPRESS_SINGLE_ALREADY_EXISTS')
           print('DRAFT_PATH='+draft)
           print('JOB_PATH='+job)
           print('RUN_DIR='+run_dir)
@@ -76,15 +78,122 @@ jobs:
           python3 -m engine.k0_writer_station seal "$JOB_PATH" "$DRAFT_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
           python3 -m engine.k0_writer_station verify "$JOB_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
 
-      - name: Persist sealed writer product
+      - name: Automatic portal assignment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json > /tmp/k0-portal.json
+          python3 - <<'PY'
+          import json,os
+          x=json.load(open('/tmp/k0-portal.json'))
+          j=json.load(open(os.environ['JOB_PATH']))
+          assert x['status']=='PASS' and x['item_count']==1,x
+          assert x['items'][0]['status']=='AUTO_DETECTED',x
+          assert x['items'][0]['portal_id']==j['portal_id'],(x,j)
+          print('K0_PORTAL_AUTO_PASS')
+          PY
+
+      - name: K0 structure semantic writer and PPM 6.7.9 gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_production_gate /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-gates.json'))
+          assert x['status']=='PASS',x
+          assert x['structure_table']=='PASS',x
+          assert x['semantic_intent_status']=='PASS',x
+          assert x['anti_boilerplate_status']=='PASS',x
+          assert x['writer_contract_status']=='PASS',x
+          assert x['ppm679_status']=='PASS' and x['ppm679_rule_count']==104,x
+          print('K0_GATES_PASS')
+          PY
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k0-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k0-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k0-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k0-lt68/LanguageTool-6.8.zip -d /tmp/k0-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Real LanguageTool 6.8 gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-lt68-result.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-lt68-result.json'))
+          assert x['status']=='PASS' and x['finding_count']==0,x
+          print('K0_LT68_PASS')
+          PY
+
+      - name: Resolve canonical article id from exact PPM registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k0-binding
+          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"             -o /tmp/k0-binding/ppm679.zip
+          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PSERC-FIX.zip"             -o /tmp/k0-binding/pserc-fix.zip
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/k0-binding/ppm679.zip' | sha256sum -c -
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/k0-binding/pserc-fix.zip' | sha256sum -c -
+          python3 -m engine.canonical_binding "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-binding/ppm679.zip /tmp/k0-binding/pserc-fix.zip /tmp/k0-binding/CANONICAL_BINDINGS.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-binding/CANONICAL_BINDINGS.json'))
+          assert x['status']=='PASS' and len(x['bindings'])==1,x
+          print('K0_CANONICAL_ARTICLE_ID_PASS')
+          PY
+
+      - name: Build and reverify WordPress 0.28.30 direct import
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-binding/CANONICAL_BINDINGS.json /tmp/WORDPRESS_SINGLE.json
+          python3 -m engine.k0_wordpress_export verify /tmp/WORDPRESS_SINGLE.json "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_WORDPRESS_VERIFY.json
+          python3 - <<'PY'
+          import hashlib,json,re
+          doc=json.load(open('/tmp/WORDPRESS_SINGLE.json'))
+          assert doc['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
+          assert doc['wordpress_review']['plugin_version_verified_against']=='0.28.30'
+          assert doc['wordpress_review']['plugin_build_verified_against']=='0.28.30-pste-v5-binding-safe'
+          assert doc['wordpress_review']['direct_wordpress_upload_ready'] is True
+          a=doc['articles'][0]
+          assert re.fullmatch(r'article:[0-9a-f]{24}',a['article_id'])
+          assert hashlib.sha256(('pserc-plan-slot-v2|'+a['article_id']).encode()).hexdigest()==a['plan_slot']
+          print('K0_WORDPRESS_02830_ARTICLE_ID_SHAPE_PASS')
+          PY
+
+      - name: Persist only fully verified canonical outputs
         shell: bash
         run: |
           set -euo pipefail
           test ! -f "$RUN_DIR/SEALED_WRITER_PRODUCT.json"
+          test ! -f "$RUN_DIR/WORDPRESS_SINGLE.json"
           cp /tmp/K0_SEALED_WRITER_PRODUCT.json "$RUN_DIR/SEALED_WRITER_PRODUCT.json"
+          cp /tmp/WORDPRESS_SINGLE.json "$RUN_DIR/WORDPRESS_SINGLE.json"
+          cp /tmp/K0_WORDPRESS_VERIFY.json "$RUN_DIR/WORDPRESS_VERIFY.json"
           git rm "$DRAFT_PATH"
           git config user.name 'k0-writer-station-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add "$RUN_DIR/SEALED_WRITER_PRODUCT.json"
-          git commit -m "K0: seal canonical writer product"
+          git add "$RUN_DIR/SEALED_WRITER_PRODUCT.json" "$RUN_DIR/WORDPRESS_SINGLE.json" "$RUN_DIR/WORDPRESS_VERIFY.json"
+          git commit -m "K0: seal writer and persist verified WordPress single"
           git push
+
+      - name: Upload canonical single delivery
+        uses: actions/upload-artifact@v4
+        with:
+          name: k0-wordpress-single-${{ github.run_id }}
+          path: |
+            /tmp/WORDPRESS_SINGLE.json
+            /tmp/K0_WORDPRESS_VERIFY.json
+            /tmp/K0_SEALED_WRITER_PRODUCT.json
+            /tmp/k0-binding/CANONICAL_BINDINGS.json
+            /tmp/k0-gates.json
+            /tmp/k0-lt68-result.json
+          if-no-files-found: error
+          retention-days: 30
