@@ -583,3 +583,33 @@ Korrektur:
 
 Neue NEXT ACTION:
 `RUN_REAL_K10_PRODUCTION_FROM_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_TO_VERIFIED_WORDPRESS_IMPORT_FILE`
+
+
+## K10 realer Produktionsstart – Chatrolle WRITE_ONLY – 2026-10-02
+
+Korrektur der Rollenverteilung für den nächsten neuen Chat:
+
+Der neue Chat ist **ausschließlich Schreiber**.
+
+Er darf:
+- Current/Routing lesen;
+- die beigefügte echte Fünf-Feld-Datei übernehmen;
+- die für den Artikel nötigen Fakten recherchieren;
+- den zugewiesenen Artikel schreiben;
+- den geschriebenen Artikel an die bestehende K10-Maschine übergeben.
+
+Er darf **nicht**:
+- K10 prüfen oder auditieren;
+- K10 testen;
+- K10 diagnostizieren;
+- K10 reparieren;
+- Regeln oder Architektur verändern;
+- selbst eine System-/Qualitätsprüfung zum Arbeitsauftrag machen.
+
+Die bestehenden Prüfungen bleiben unverändert Aufgabe der K10-Maschine nach der Schreibübergabe:
+Preflight -> LanguageTool 6.8 -> Artikelregeln -> Systemregeln -> PSERC -> ENDSTEMPEL -> WordPress-Dateiverifikation.
+
+Keine Qualitätsabsenkung. Keine Architekturänderung. publish_allowed=false.
+
+NEXT ACTION:
+`WRITE_ONE_FRESH_ASSIGNED_ARTICLE_FROM_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_HAND_IT_TO_THE_EXISTING_K10_MACHINE_WITHOUT_CHAT_SIDE_TESTING_OR_REPAIR`
