@@ -99,12 +99,24 @@ def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dic
     if lt.get("status")!="PASS" or int(lt.get("finding_count") or 0)!=0:
         raise ExportBlocked("WORDPRESS_LT68_NOT_PASS")
 
+    bindings=snapshot.get("canonical_article_bindings") or {}
+    if not isinstance(bindings,dict):
+        raise ExportBlocked("WORDPRESS_CANONICAL_BINDINGS_INVALID")
+    plan_slot=str(binding["plan_slot"])
+    article_id=str(bindings.get(plan_slot) or "")
+    if not re.fullmatch(r"article:[0-9a-f]{24}",article_id):
+        raise ExportBlocked("WORDPRESS_CANONICAL_ARTICLE_ID_MISSING:"+plan_slot)
+    expected_slot=hashlib.sha256(("pserc-plan-slot-v2|"+article_id).encode("utf-8")).hexdigest()
+    if expected_slot!=plan_slot:
+        raise ExportBlocked("WORDPRESS_CANONICAL_PLAN_SLOT_MISMATCH:"+plan_slot)
+
     fact_pack=_fact_pack(article,research)
     wp_category=article.get("wordpress_category") or {}
     if not str(wp_category.get("slug") or "").strip():
         raise ExportBlocked("WORDPRESS_CATEGORY_BINDING_MISSING")
 
     plan_item={
+        "canonical_article_id":article_id,
         "article_type":binding["article_type"],
         "target_keyword":binding["target_keyword"],
         "topic":binding["title"],
@@ -134,6 +146,7 @@ def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dic
 
     row={
         "index":0,
+        "article_id":article_id,
         "title":binding["title"],
         "target_keyword":binding["target_keyword"],
         "category":binding["category"],
@@ -161,9 +174,9 @@ def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dic
         },
     }
 
-    # Critical invariant: plan_slot is a routing token, never an article_id.
-    if "article_id" in row:
-        raise ExportBlocked("WORDPRESS_ARTICLE_ID_MUST_NOT_BE_SYNTHESIZED_FROM_PLAN_SLOT")
+    # Critical invariant: article_id comes only from canonical registry resolution.
+    if row["article_id"]==row["plan_slot"]:
+        raise ExportBlocked("WORDPRESS_ARTICLE_ID_EQUALS_PLAN_SLOT_FORBIDDEN")
 
     return {
         "contract":CONTRACT,
