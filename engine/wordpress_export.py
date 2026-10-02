@@ -1,5 +1,6 @@
 from __future__ import annotations
 import hashlib, json, re
+from .html_design import validate_canonical_html
 
 CONTRACT = "SYSTEM4_WORDPRESS_HANDOFF_V1"
 PLUGIN_VERSION = "0.28.30"
@@ -82,6 +83,7 @@ def _fact_pack(article: dict, research: dict) -> dict:
     }
 
 def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dict:
+    validate_canonical_html(article)
     binding=article.get("planning_binding") or {}
     required=("title","target_keyword","category","article_type","plan_slot")
     if any(not str(binding.get(k) or "").strip() for k in required):
