@@ -478,7 +478,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA=3b8d8f3f0e4d57c49f2df7c265a60051e3b71488
+          BASE_SHA=b365ac6ddd1bf24b169aeec2477b0559cb4422a2
           rm -rf /tmp/base-plugin
           mkdir -p /tmp/base-plugin
           git archive "$BASE_SHA" release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/base-plugin
