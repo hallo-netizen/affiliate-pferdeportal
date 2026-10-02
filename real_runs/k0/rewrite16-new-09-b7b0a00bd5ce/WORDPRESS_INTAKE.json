@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "Journal",
+      "category": "pferdewissen-grundlagen",
+      "plan_slot": "d3bd7d12876803b80f744294f27be814ff65bc3cf0af95989bdab4538f9da3e6",
+      "target_keyword": "Warum sagt man alte Schabracke",
+      "title": "Warum sagt man eigentlich „alte Schabracke“?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "b7b0a00bd5ceacf939043d13f982a583b10abaf4efbf2539ca64a5854c055027"
+}
