@@ -1,0 +1,56 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+    "target_keyword": "Wie lege ich einen Longiergurt an",
+    "title": "Wie lege ich einen Longiergurt an?"
+  },
+  "planning_binding": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+    "target_keyword": "Wie lege ich einen Longiergurt an",
+    "title": "Wie lege ich einen Longiergurt an?"
+  },
+  "article_id": "article:7b003121b663cd27a5df29d0",
+  "article_type": "FAQ",
+  "title": "Wie lege ich einen Longiergurt an?",
+  "target_keyword": "Wie lege ich einen Longiergurt an",
+  "category": "longiergurte-faq",
+  "html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n\n<p>Lege den Longiergurt mittig hinter den Widerrist, richte Unterlage und Gurt faltenfrei aus und schließe ihn zunächst nur locker. Ziehe anschließend beide Seiten schrittweise und möglichst gleichmäßig nach. Nach einigen Schritten kontrollierst du noch einmal, ob der Gurt mittig liegt, nicht nach vorn gerutscht ist und weder Widerrist noch Ellbogen einengt.</p>\n\n<h2>Vor dem Auflegen kurz vorbereiten</h2>\n<p>Das Pferd sollte sauber sein, besonders im Bereich von Rücken, Gurtlage und Unterlage. Sand oder eingetrockneter Schmutz kann unter Druck scheuern. Kontrolliere außerdem Gurt, Schnallen und Ringe auf Schäden. Wenn du eine Unterlage verwendest, sollte sie groß genug sein, damit keine harte Kante direkt unter dem Gurt liegt.</p>\n\n<h2>Die richtige Position hinter dem Widerrist</h2>\n<p>Der Gurt liegt nicht auf dem höchsten Punkt des Widerrists, sondern etwas dahinter. Die genaue Position hängt von Bauart und Pferderücken ab. Wichtig ist, dass Schulter und Ellbogen frei bleiben und der Gurt nicht nach vorn zieht. Bei Modellen mit Bogen oder Kammer sollte über der Wirbelsäule ausreichend Platz bleiben. Richte alles zunächst im Stand symmetrisch aus.</p>\n\n<h2>Erst locker schließen, dann nachgurten</h2>\n<p>Ziehe den Bauchgurt nicht sofort vollständig fest. Schließe ihn zunächst so, dass der Longiergurt sicher liegt, aber noch ohne starken Druck. Danach kannst du abwechselnd auf beiden Seiten nachgurten. Einseitiges starkes Anziehen kann den Gurt verdrehen. Die endgültige Weite soll stabil genug sein, dass nichts rutscht, ohne die Atmung oder Bewegung des Pferdes unnötig einzuschränken.</p>\n\n<h2>Nach ein paar Schritten erneut kontrollieren</h2>\n<p>Lass das Pferd einige Schritte vorwärtsgehen und überprüfe den Sitz erneut. Fell und Unterlage können sich setzen, sodass ein vorsichtiges Nachgurten nötig wird. Kontrolliere, ob die seitlichen Ringe auf gleicher Höhe liegen und der Gurt noch mittig ist. Wandert er deutlich, sollte zuerst die Passform geprüft werden, statt einfach fester zu gurten.</p>\n\n<h2>Leinen und Hilfszügel erst danach befestigen</h2>\n<p>Longen, Doppellonge oder Hilfszügel werden erst angebracht, wenn der Gurt korrekt sitzt. Nutze nur die dafür vorgesehenen Ringe. Leinen müssen frei laufen und dürfen sich nicht an Schnallen oder anderen Beschlägen verhaken. Bei neuen Einstellungen ist es sinnvoll, zunächst im Schritt zu beobachten, wie sich der Zug auf den Gurt auswirkt.</p>\n\n<h2>Eine einfache Reihenfolge</h2>\n<ol>\n<li>Pferd und Ausrüstung kontrollieren.</li>\n<li>Unterlage faltenfrei auflegen.</li>\n<li>Longiergurt mittig positionieren.</li>\n<li>Beidseitig locker schließen.</li>\n<li>Schrittweise gleichmäßig nachgurten.</li>\n<li>Einige Schritte führen und Sitz nachprüfen.</li>\n<li>Erst danach Leinen oder Hilfszügel einhängen.</li>\n</ol>\n\n<h2>Nach der Arbeit Druckstellen ausschließen</h2>\n<p>Nimm Gurt und Unterlage ab und sieh dir Fell und Haut an. Auffällige Scheuerstellen, stark abgegrenzte Druckbereiche oder Empfindlichkeit können auf eine unpassende Lage oder Form hinweisen. Kleine Korrekturen an der Verschnallung helfen nur, wenn der Grundaufbau des Gurts zum Pferd passt.</p>\n\n<h2>Fazit</h2>\n<p>Ein Longiergurt wird sauber, mittig und zunächst locker aufgelegt. Entscheidend sind die Position hinter dem Widerrist, gleichmäßiges Nachgurten und eine zweite Kontrolle nach einigen Schritten. Erst wenn der Gurt ruhig und symmetrisch liegt, werden weitere Leinen oder Hilfszügel befestigt. So bleibt die Ausrüstung übersichtlich und der Sitz lässt sich jederzeit nachvollziehen.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "PROCEDURAL_INFORMATIONAL"
+  },
+  "table_decision": {
+    "decision": "OMIT_NO_ADDED_VALUE",
+    "exception_code": "LINEAR_SEQUENCE",
+    "rationale": "Das Thema ist ein linearer Ablauf; eine zusätzliche Tabelle würde die Schrittfolge verschlechtern."
+  },
+  "lt_authoritative_terms": [
+    "Longiergurt",
+    "Doppellonge",
+    "Widerrist"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "longiergurte-faq",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://www.ridersdeal.com/ratgeber/longiergurt",
+      "source_title": "Longiergurt: Sitz, Größe & richtig anlegen – RidersDeal",
+      "evidence_text": "Ein Longiergurt wird mit Unterlage mittig und faltenfrei hinter dem Widerrist aufgelegt, zunächst locker und dann auf beiden Seiten gleichmäßig geschlossen. Nach einigen Schritten wird der Sitz erneut kontrolliert; die Ringe sollen symmetrisch liegen und der Gurt darf weder drücken noch verrutschen.",
+      "evidence_text_sha256": "4265735c928d81b9a8dc2692299f79fae74a8d7f89d2909d18d92e2365a78a59",
+      "statement": "Ein Longiergurt wird mittig und faltenfrei aufgelegt, schrittweise gleichmäßig geschlossen und nach einigen Schritten erneut kontrolliert.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
