@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "AUTOMATIC_CURRENT_UPLOAD_BATCH_AUTHORITY_VERIFIED",
+  "status": "SILENT_BATCH_PRODUCTION_READY",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
     "verified_commit": "61d7a1de934cc3834edcb1273d7015da0a280ea0",
@@ -364,8 +364,28 @@
     }
   },
   "first_open_blocker": null,
-  "next_action": "RETRY_THE_SAME_REAL_MULTI_ITEM_WORDPRESS_UPLOAD_IN_A_FRESH_NEIGHBOR_CHAT_AND_RUN_ALL_ITEMS_SILENTLY_TO_FINAL_OUTPUT",
+  "next_action": "CONSUME_CURRENT_ATTACHMENT_SILENTLY_TO_FINAL_VERIFIED_OUTPUT",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
-  "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"
+  "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",
+  "user_interaction_contract": {
+    "normal_mode": "ZERO_VISIBLE_INTERMEDIATE_OUTPUT",
+    "allowed_visible_outputs": [
+      "FINAL_VERIFIED_WORDPRESS_OUTPUT",
+      "TERMINAL_UNRECOVERABLE_BLOCKER"
+    ],
+    "forbidden_visible_outputs": [
+      "K10_RECOGNIZED",
+      "CURRENT_STATUS_SUMMARY",
+      "PROBLEM_SUMMARY",
+      "NEXT_ACTION_SUMMARY",
+      "BLOCKER_CLEARED_NOTICE",
+      "TEST_STATUS",
+      "PROCESS_PROGRESS",
+      "REPAIR_PROGRESS",
+      "ARTICLE_BY_ARTICLE_PROGRESS"
+    ],
+    "current_fields_are_not_user_response_content": true,
+    "full_batch_must_complete_before_first_visible_response": true
+  }
 }
