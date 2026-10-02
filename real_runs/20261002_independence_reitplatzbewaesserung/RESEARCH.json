@@ -1,0 +1,108 @@
+{
+  "contract": "K10_REAL_RESEARCH_V1",
+  "article_id": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+  "topic": "Ist eine Reitplatzbewässerung von unten möglich?",
+  "retrieved_at": "2026-10-02",
+  "sources": [
+    {
+      "source_id": "S1",
+      "title": "OTTO Sport – Ebb&Flow riding arena construction with automatic watering",
+      "url": "https://www.ottosport.com/en/services/otto-ebbflow-system"
+    },
+    {
+      "source_id": "S2",
+      "title": "Risohorse – Frequently asked questions about the Ebb-and-Flow riding surface system",
+      "url": "https://risohorse.de/en/faq/"
+    },
+    {
+      "source_id": "S3",
+      "title": "EHG Reitplatzbau – Subsurface Irrigation",
+      "url": "https://www.ehg-reitplatzbau.de/en/products/ebb-and-flow-system/subsurface-irrigation"
+    },
+    {
+      "source_id": "S4",
+      "title": "WTS – Equestrian Arena Irrigation",
+      "url": "https://www.wtsnz.co.nz/post/equestrian-arena-irrigation"
+    },
+    {
+      "source_id": "S5",
+      "title": "IDA Development – Arena Moisture Control System",
+      "url": "https://idadevelops.com/arena-moisture-control-system/"
+    }
+  ],
+  "claims": [
+    {
+      "fact_id": "F1",
+      "source_title": "OTTO Sport – Ebb&Flow riding arena construction with automatic watering",
+      "source_url": "https://www.ottosport.com/en/services/otto-ebbflow-system",
+      "statement": "Beim OTTO-Ebb&Flow-System wird der Reitplatz von unten bewässert; eine Sandschicht transportiert Wasser durch Kapillarwirkung aus dem Unterbau nach oben in die Tretschicht.",
+      "evidence_text": "Das System führt Wasser unterhalb der Tretschicht zu. Eine Sandschicht über den Wasserleitungen nutzt die Kapillarwirkung, um Feuchtigkeit nach oben in den Reitboden zu transportieren.",
+      "evidence_text_sha256": "a599c03c84f450421101f14d25c5ba1a20043b497c1632dbe314fab076c3619f",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F2",
+      "source_title": "OTTO Sport – Ebb&Flow riding arena construction with automatic watering",
+      "source_url": "https://www.ottosport.com/en/services/otto-ebbflow-system",
+      "statement": "Beim Ebbe-und-Flut-System wird der Wasserstand geregelt; bei Trockenheit kann Wasser zugeführt und bei zu viel Niederschlag überschüssiges Wasser abgeführt werden.",
+      "evidence_text": "Wasserleitungen, Schächte und Ventile halten einen vorgegebenen Wasserstand. Das System kann bei Trockenheit Wasser zuführen und bei starkem Regen überschüssiges Wasser über Auslässe abführen.",
+      "evidence_text_sha256": "a7f94d223b6f3415817598e95e6166609db363b8ec6ab4a2004c7e1bdd12e82e",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F3",
+      "source_title": "Risohorse – Frequently asked questions about the Ebb-and-Flow riding surface system",
+      "source_url": "https://risohorse.de/en/faq/",
+      "statement": "Ein Ebbe-und-Flut-Reitboden kann mit wasserdichter Folie, Drainagerohren und einem Kontrollschacht aufgebaut werden; der Wasserstand im Schacht steuert die Feuchtigkeit der Tretschicht.",
+      "evidence_text": "Der beschriebene Aufbau nutzt eine wasserdichte Folie als Basis, darüber Drainagerohre und einen Kontrollschacht. Eine Regelung mit Drucksensor passt den Wasserstand und damit die Feuchtigkeit im Reitboden an.",
+      "evidence_text_sha256": "de26eb01400aff71e9822100a90d7938fd3873f14fc3a951e563165f5044e8b1",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F4",
+      "source_title": "EHG Reitplatzbau – Subsurface Irrigation",
+      "source_url": "https://www.ehg-reitplatzbau.de/en/products/ebb-and-flow-system/subsurface-irrigation",
+      "statement": "Unterflurbewässerung kann auch über Matten mit integrierten Bewässerungsschläuchen und Drainageöffnungen erfolgen, auf die anschließend die Tretschicht aufgebracht wird.",
+      "evidence_text": "EHG beschreibt eine Unterflurlösung mit speziellen Matten auf der Basisschicht. In deren Nuten liegen Bewässerungsschläuche; Drainageöffnungen sind integriert und darüber wird die Tretschicht eingebaut.",
+      "evidence_text_sha256": "1f0782767588a807d2f5546b17b0960fa366085529ca48ba3e7242a8da94e407",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F5",
+      "source_title": "WTS – Equestrian Arena Irrigation",
+      "source_url": "https://www.wtsnz.co.nz/post/equestrian-arena-irrigation",
+      "statement": "Ebbe-und-Flut-Systeme sind besonders gut für Neubauten geeignet, weil das unterirdische Rohrnetz Teil des gesamten Reitplatzaufbaus ist; bei bestehenden Plätzen ist eine oberirdische Lösung oft einfacher.",
+      "evidence_text": "WTS ordnet Ebbe-und-Flut-Systeme vor allem dem Neubau zu, weil das unterirdische Rohrnetz in die Arenakonstruktion integriert werden muss. Bei bestehenden Arenen sind oberirdische oder randseitige Regner häufig die einfachere Lösung.",
+      "evidence_text_sha256": "1349345680d7c40a197db510d46387e6e70e31a8b938312ffb77fbbc57c181bd",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F6",
+      "source_title": "IDA Development – Arena Moisture Control System",
+      "source_url": "https://idadevelops.com/arena-moisture-control-system/",
+      "statement": "Einzelne Unterflur- und Feuchteregulierungssysteme werden ausdrücklich sowohl für Neubauten als auch zur Nachrüstung bestehender Reitplätze angeboten.",
+      "evidence_text": "IDA beschreibt sein unterirdisches Feuchteregulierungssystem sowohl für neue Reitplätze als auch für die Nachrüstung bestehender Reitflächen.",
+      "evidence_text_sha256": "a40eb460fea8ef51301dacee8db05dbfef404909cd6f5eb7b6f1eebe22b6f2c9",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  ],
+  "publish_allowed": false
+}
