@@ -3,14 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "REWRITE16_FINAL_BATCH_BLOCKED_ITEM14_DESIGN_CLASS",
-  "first_open_blocker": {
-    "code": "REWRITE16_ITEM_14_BATCH_CANONICAL_TABLE_CLASS_MISSING",
-    "item_index": 14,
-    "title": "Wie oft muss ein Pferdeanhänger zum TÜV?",
-    "detail": "Fresh wordpress_batch_export validation found that item 14 is the only single whose table root lacks the required comparison-table class. The existing item-14 WORDPRESS_SINGLE is individually verified but is not eligible for the final batch. It must not be edited directly; item 14 must be re-authored through the canonical K0 route."
-  },
-  "next_action": "REAUTHOR_ITEM_14_SEQUENTIALLY_THROUGH_CANONICAL_K0_PATH_FOR_BATCH_VALID_TABLE_BINDING",
+  "status": "REWRITE16_CANONICAL_WORDPRESS_BATCH_COMPLETE",
+  "first_open_blocker": null,
+  "next_action": "STOP_REWRITE16_COMPLETE",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -35,7 +30,7 @@
   },
   "rewrite16": {
     "total": 16,
-    "canonical_wordpress_single_complete_count": 15,
+    "canonical_wordpress_single_complete_count": 16,
     "complete_indices": [
       0,
       1,
@@ -51,24 +46,26 @@
       11,
       12,
       13,
+      14,
       15
     ],
-    "remaining_indices": [
-      14
-    ],
+    "remaining_indices": [],
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
-    "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3"
+    "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
+    "final_wordpress_batch_status": "PASS_READY_FOR_DIRECT_IMPORT",
+    "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_16.json",
+    "final_wordpress_batch_sha256": "fd2aa1d2dc0fe1a993dd00a85be5f52cafa212e8525b8d0f5874fec9b2580e60"
   },
   "freshness": {
     "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
     "last_checked_branch_head_sha": "c1e202381f7f9999c7ac52206681e202801912f2",
-    "latest_writer_accept_run": 37068362131,
+    "latest_writer_accept_run": 37069333875,
     "latest_writer_accept_result": "SUCCESS",
     "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "FINAL_BATCH_VALIDATION_BLOCKED_ONLY_ON_ITEM14_TABLE_COMPARISON_CLASS; DIRECT_WORDPRESS_EDIT_FORBIDDEN; CANONICAL_REAUTHOR_REQUIRED"
+    "delta_result": "ALL_16_CANONICAL_SINGLES_COMPLETE; FRESH_16_ARTICLE_WORDPRESS_BATCH_PASS; ITEM14_REAUTHORED_CANONICALLY"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
