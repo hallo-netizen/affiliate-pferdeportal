@@ -115,6 +115,8 @@ def verify(package, portal):
     if rows[0].get('job_identity')!=ident:
         raise Blocked('K0_PORTAL_IDENTITY_MISMATCH')
 
+    semantic_intent=_verify_semantic_intent(package,ident,body)
+
     h2=[_plain(x) for x in re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',body)]
     if len(h2)<4 or len(h2)!=len(set(x.casefold() for x in h2)):
         raise Blocked('K0_HEADING_STRUCTURE_INVALID')
