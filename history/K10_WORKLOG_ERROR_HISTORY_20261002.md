@@ -445,3 +445,123 @@ Aktueller Blocker:
 
 Nächste Current-Aktion:
 `RUN_ONE_SMALL_MULTI_ARTICLE_K10_BATCH_FROM_FRESH_RESEARCH_AND_MEASURE_FIRST_PASS_RATE_AND_END_TO_END_VARIANCE`
+
+
+## K10 Optimierung nach realem E2E-Test – 2026-10-02
+
+### Ziel
+
+Ohne Qualitätsabsenkung und ohne Architekturwechsel wurden die drei im realen Lauf sichtbar gewordenen Optimierungspunkte geschlossen:
+
+1. vereinfachten Vorabcheck durch die echten K10-Regel-Owner vor LanguageTool ersetzen;
+2. fehlende Source-Traces deterministisch aus bereits gebundenen Fact-IDs und Research-Claims materialisieren;
+3. LanguageTool 6.8 für Mehrartikelläufe in einem einzigen Java-Prozess ausführen.
+
+### Implementierung
+
+Kerncommit:
+`4135fab77e9f258be435acafe66d240f7ce6d1b1`
+
+Testkorrektur:
+`e35b7635c26ae86aa0be60a11cabfcd78b30dbb2`
+
+Workflow-Bindung:
+`d8ddb52914a1401d0a96fcad9e8a0e3b9120829e`
+
+Historische Altlast aus automatischer Regression genommen:
+`90f1d77e9feaf1c7fbf0f6d7a6a3246a77a03607`
+
+### Exakter Preflight
+
+Neu: `engine/preflight.py`
+
+Der Preflight verwendet dieselben K10-Artikelchecker und erzeugt deren normale hashgebundene Receipts bereits vor LanguageTool.
+
+Nach LanguageTool werden diese Content-Regeln nicht erneut inhaltlich geprüft. Der finale Proof übernimmt die Preflight-Receipts, ergänzt ausschließlich den echten LT68-Receipt und prüft danach Identität, Hash, Vollständigkeit und Status.
+
+Damit bleibt das K10-Prinzip erhalten:
+**eine harte Regel -> ein Owner -> eine Inhaltsprüfung -> ein Receipt**.
+
+Positiv-/Negativtests:
+- unsupported numeric claim wird vor LT68 geblockt;
+- fehlender Conclusion-Trace wird deterministisch aus vorhandenem Fact-ID/Claim ergänzt;
+- sichtbarer Text bleibt dabei unverändert;
+- Preflight-Receipts + echter LT-Receipt ergeben einen vollständigen Artikel-PASS;
+- LT-Batch ruft die Engine bei mehreren Artikeln genau einmal auf;
+- Cross-Boundary-LT-Finding blockiert fail-closed.
+
+### Realer Einzeltest nach Optimierung
+
+Run:
+`36986342204`
+
+Artifact:
+`11218105119`
+
+Artikel:
+„Wie oft muss ein Pferdeanhänger zum TÜV?“
+
+Ergebnis:
+**READY_FOR_WORDPRESS_DRAFT_IMPORT**
+
+Nachweise:
+- Preflight: PASS / 217 ms
+- LanguageTool 6.8: PASS / 0 Findings / 13.906 ms
+- finaler Proof: PASS / 712 ms
+- Content-Recheck nach Preflight: false
+- PSERC: PASS
+- ENDSTEMPEL: PASS
+- WordPress-Dateiverifikation: PASS
+- publish_allowed=false
+
+### Realer Dreierlauf mit einem LanguageTool-Prozess
+
+Run:
+`36986342158`
+
+Artifact:
+`11217332231`
+
+Alle drei Artikel:
+- Reitplatzplaner: PASS
+- Regendecken: PASS
+- Schermaschinen: PASS
+
+Alle:
+- Preflight: READY_FOR_LT68
+- LT68: PASS / 0 Findings
+- Artikelregeln: PASS
+- Systemregeln: PASS
+- PSERC: PASS
+- ENDSTEMPEL: PASS
+- WordPress-Dateiverifikation: PASS
+
+Messwerte:
+- Preflight gesamt: 630 ms
+- LanguageTool Batch für 3 Artikel: 21.571 ms
+- LanguageTool Java-Prozesse: **1**
+- Proof gesamt: 1.961 ms
+- Validierungskern gesamt: 24.162 ms
+
+Der ältere Dreierlauf lag bei 43.935 ms für seine damalige Maschinenstrecke. Die Scopes sind nicht vollständig identisch, weil der alte Wert Category-Binding enthielt und der neue Kernwert nicht; die Richtung der Einsparung durch einen LT-Prozess ist dennoch real belegt.
+
+### Historischer Workflow
+
+Run `36986523354` des alten Longiergurt-Snapshots wurde durch aktuelle Regeln bei
+`table.optional_decision_documented`
+geblockt.
+
+Das ist kein Current-Fehler: Der historische Input stammt aus der Zeit vor der verpflichtenden optionalen Tabellenentscheidung. Der Snapshot wurde nicht nachträglich verändert. Stattdessen ist `.github/workflows/k10-first-real-e2e.yml` jetzt nur noch manuell/historisch und kein automatisches Current-Regressionsgate mehr.
+
+### Abschlussprüfung
+
+Finale Tests auf Commit `90f1d77e9feaf1c7fbf0f6d7a6a3246a77a03607`:
+- isolated selftest Run `36986680834`: PASS
+- PPM 6.7.9 inventory Run `36986680960`: 104/104 PASS
+- K9 Head unverändert: `2cc8167fa1e31b4ffa2ff76c9819314be4b98555`
+- publish_allowed=false
+- first_open_blocker=null
+
+### Nächster Schritt
+
+`RUN_INDEPENDENT_NEIGHBOR_CHAT_TEST_WITH_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_K10_START_COMMAND`

@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "FRESH_REAL_E2E_PASS_WITH_ONE_CONTENT_REPAIR_SPEED_GAIN_ESTABLISHED",
+  "status": "OPTIMIZATIONS_PASS_READY_FOR_INDEPENDENT_NEIGHBOR_CHAT_TEST",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "147e62ab3d2668edfee8c477ca0290de7dd35c5d",
+    "verified_commit": "90f1d77e9feaf1c7fbf0f6d7a6a3246a77a03607",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -65,8 +65,8 @@
       "Editorial false positive closed: table INCLUDE_ADDED_VALUE is no longer sufficient when most action cells are tautological.",
       "Editorial false positive closed: unpunctuated noun-enumeration H2 are blocked by the existing natural-concrete H2 owner."
     ],
-    "final_green_run_id": 36978375237,
-    "final_green_artifact_id": 11214760852,
+    "final_green_run_id": 36986342158,
+    "final_green_artifact_id": 11217332231,
     "publish_allowed": false,
     "editorial_review": {
       "reviewed_run_id": 36938796049,
@@ -151,10 +151,71 @@
       "observed_speed_ratio_vs_k9_research_start_to_stop": 4.58,
       "comparison_note": "K10 timing is real wall time from a GitHub research-start marker through fresh web research, writing, one blocked pass, repair, rerun and verified WordPress import file. Research and writing were performed interactively in this chat rather than by an autonomous GitHub research/writer chain, so the comparison is useful but not perfectly identical.",
       "publish_allowed": false
+    },
+    "optimization_20261002": {
+      "exact_preflight_before_lt68": {
+        "status": "PASS",
+        "principle": "SAME_K10_ARTICLE_RULE_OWNERS_AND_RECEIPTS_BEFORE_LT68",
+        "content_recheck_after_preflight": false,
+        "numeric_claim_mismatch_blocks_before_lt68": true,
+        "trace_materialization": "DETERMINISTIC_FROM_EXISTING_DATA_FACT_IDS_AND_BOUND_RESEARCH_CLAIMS",
+        "trace_materialization_changes_visible_text": false,
+        "positive_negative_tests": "PASS"
+      },
+      "lt68_batch": {
+        "status": "PASS",
+        "article_count": 3,
+        "java_process_count": 1,
+        "batch_ms": 21571,
+        "previous_three_article_validation_ms": 43935,
+        "current_validation_core_ms": 24162,
+        "current_validation_core_components": {
+          "preflight_ms_sum": 630,
+          "lt68_batch_ms": 21571,
+          "proof_ms_sum": 1961
+        },
+        "note": "Current core excludes category REST lookup and LT download time; previous total included category binding. Directional speed gain is real, but figures are not perfectly identical scopes."
+      },
+      "real_single_regression": {
+        "run_id": 36986342204,
+        "artifact_id": 11218105119,
+        "result": "READY_FOR_WORDPRESS_DRAFT_IMPORT",
+        "preflight_ms": 217,
+        "language_tool_ms": 13906,
+        "proof_ms": 712,
+        "content_recheck_after_preflight": false,
+        "language_tool_findings": 0,
+        "pserc": "PASS",
+        "endstempel": "PASS",
+        "wordpress_file_verify": "PASS"
+      },
+      "real_three_article_regression": {
+        "run_id": 36986342158,
+        "artifact_id": 11217332231,
+        "result": "PASS",
+        "all_three_preflight": "READY_FOR_LT68",
+        "all_three_lt68": "PASS_0_FINDINGS",
+        "all_three_final": "READY_FOR_WORDPRESS_DRAFT_IMPORT",
+        "pserc": "PASS",
+        "endstempel": "PASS",
+        "wordpress_file_verify": "PASS"
+      },
+      "final_selftest_run_id": 36986680834,
+      "final_ppm_inventory_run_id": 36986680960,
+      "historical_snapshot_cleanup": {
+        "old_workflow": ".github/workflows/k10-first-real-e2e.yml",
+        "non_current_failure_run_id": 36986523354,
+        "reason": "Historical Longiergurt input predates mandatory table.optional_decision_documented and is correctly blocked by current rules.",
+        "action": "RETIRED_FROM_AUTOMATIC_REGRESSION_AND_RETAINED_MANUAL_HISTORY_ONLY"
+      },
+      "quality_reduction": false,
+      "new_hard_rule_added": false,
+      "owner_changed": false,
+      "k9_changed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "RUN_ONE_SMALL_MULTI_ARTICLE_K10_BATCH_FROM_FRESH_RESEARCH_AND_MEASURE_FIRST_PASS_RATE_AND_END_TO_END_VARIANCE",
+  "next_action": "RUN_INDEPENDENT_NEIGHBOR_CHAT_TEST_WITH_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_K10_START_COMMAND",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"
