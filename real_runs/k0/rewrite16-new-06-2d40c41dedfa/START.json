@@ -4,5 +4,6 @@
   "batch_sha256": "2d40c41dedfa09eea5c3d3624db0c799e70d8dd3b771c7fea1f040ffbcbb142b",
   "mode": "NORMAL_CANONICAL_PATH",
   "new_wordpress_post_required": true,
-  "publish_allowed": false
+  "publish_allowed": false,
+  "revision_trigger": 1
 }
