@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "OPTIMIZATIONS_PASS_READY_FOR_INDEPENDENT_NEIGHBOR_CHAT_TEST",
+  "status": "READY_FOR_REAL_NEIGHBOR_CHAT_PRODUCTION_RUN",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "90f1d77e9feaf1c7fbf0f6d7a6a3246a77a03607",
+    "verified_commit": "881a9785a59aac368001cff228a28c8982a1a583",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -212,10 +212,18 @@
       "new_hard_rule_added": false,
       "owner_changed": false,
       "k9_changed": false
+    },
+    "production_handoff": {
+      "mode": "REAL_K10_PRODUCTION",
+      "test_mode": false,
+      "input_contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+      "exact_five_field_input": true,
+      "intended_result": "VERIFIED_WORDPRESS_IMPORT_FILE",
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "RUN_INDEPENDENT_NEIGHBOR_CHAT_TEST_WITH_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_K10_START_COMMAND",
+  "next_action": "RUN_REAL_K10_PRODUCTION_FROM_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_TO_VERIFIED_WORDPRESS_IMPORT_FILE",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"

@@ -565,3 +565,21 @@ Finale Tests auf Commit `90f1d77e9feaf1c7fbf0f6d7a6a3246a77a03607`:
 ### Nächster Schritt
 
 `RUN_INDEPENDENT_NEIGHBOR_CHAT_TEST_WITH_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_K10_START_COMMAND`
+
+
+## K10 Übergabe auf realen Nachbarchat-Lauf korrigiert – 2026-10-02
+
+Die vorherige Current-Formulierung enthielt ausdrücklich „independent neighbor chat test“.
+Das war für die gewünschte Übergabe falsch, weil ein neuer Chat dadurch den Auftrag als Test statt als reale Produktion behandeln konnte.
+
+Korrektur:
+- Modus: **REAL_K10_PRODUCTION**
+- test_mode: **false**
+- Eingang: echte PSERC-Fünf-Feld-WordPress-Metadaten
+- Ziel: normaler K10-Durchlauf bis zur verifizierten WordPress-Importdatei
+- keine Sonderbehandlung als Test
+- keine Qualitätsabsenkung
+- publish_allowed=false
+
+Neue NEXT ACTION:
+`RUN_REAL_K10_PRODUCTION_FROM_FRESH_EXACT_FIVE_FIELD_WORDPRESS_INPUT_TO_VERIFIED_WORDPRESS_IMPORT_FILE`
