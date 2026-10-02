@@ -9,6 +9,7 @@ from .final_integrity import verify_article, verify_article_pre_lt68, verify_sys
 from .system_guard import run_system_checks
 from .package_adapters import make_pre_wordpress_package_receipts, PACKAGE_RESULT_MAP
 from .wordpress_export import build_single as build_wordpress_general
+from .html_design import validate_canonical_html
 
 class Blocked(RuntimeError): pass
 
@@ -78,6 +79,7 @@ def main():
     validate_research(article,research)
     if not plan_match(article,snapshot): raise Blocked('PSERC_CURRENT_METADATA_BINDING_MISSING')
     article=resolve_category(article,category)
+    design_receipt=validate_canonical_html(article)
     if lt.get('status')!='PASS' or lt.get('engine')!='LanguageTool 6.8 / Bestand 43' or lt.get('html_sha256')!=sha_text(article['html']): raise Blocked('LT68_REAL_RESULT_INVALID')
     article['external_results']={'LanguageTool 6.8':'PASS'}
     ah=article_hash(article)
@@ -123,7 +125,7 @@ def main():
     })
     prec=make_pre_wordpress_package_receipts(article['article_id']+':package',psha,external); pver=verify_package_pre_wordpress(article['article_id']+':package',psha,prec)
     save(outdir/'ARTICLE_RESOLVED.json',article); save(outdir/'ARTICLE_RECEIPTS.json',arec); save(outdir/'SYSTEM_RECEIPTS.json',srec); save(outdir/'WORDPRESS_IMPORT.json',wp); save(outdir/'PACKAGE.json',package); save(outdir/'PACKAGE_RECEIPTS.json',prec)
-    report={'contract':'K10_FIRST_REAL_E2E_PROOF_V1','status':'READY_FOR_WORDPRESS_DRAFT_IMPORT' if pver['status']=='READY_FOR_WORDPRESS_DRAFT_IMPORT' else 'BLOCKED_AT_PACKAGE_INTEGRITY','article_title':article['title'],'article_id':article['article_id'],'article_sha256':ah,'article_rules':aver,'system_rules':sver,'lt68':{'status':lt.get('status'),'finding_count':lt.get('finding_count'),'ignored_spelling_count':lt.get('ignored_spelling_count')},'pserc_metadata_binding':'PASS','wordpress_category':article['wordpress_category'],'endstempel':endstamp,'wordpress_file_verify':'PASS' if wp_verify else 'FAIL','package_integrity':pver,'package_external_results':external,'publish_allowed':False}
+    report={'contract':'K10_FIRST_REAL_E2E_PROOF_V1','status':'READY_FOR_WORDPRESS_DRAFT_IMPORT' if pver['status']=='READY_FOR_WORDPRESS_DRAFT_IMPORT' else 'BLOCKED_AT_PACKAGE_INTEGRITY','article_title':article['title'],'article_id':article['article_id'],'article_sha256':ah,'article_rules':aver,'system_rules':sver,'lt68':{'status':lt.get('status'),'finding_count':lt.get('finding_count'),'ignored_spelling_count':lt.get('ignored_spelling_count')},'pserc_metadata_binding':'PASS','canonical_frontend_html':design_receipt,'wordpress_category':article['wordpress_category'],'endstempel':endstamp,'wordpress_file_verify':'PASS' if wp_verify else 'FAIL','package_integrity':pver,'package_external_results':external,'publish_allowed':False}
     save(outdir/'FINAL_REPORT.json',report); print(json.dumps(report,ensure_ascii=False,indent=2)); raise SystemExit(0 if report['status']=='READY_FOR_WORDPRESS_DRAFT_IMPORT' else 4)
 if __name__=='__main__':
     try: main()
