@@ -65,7 +65,7 @@ jobs:
           PHP
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.174") { exit(2); } echo "PLUGIN_672174_ACTIVE\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.175") { exit(2); } echo "PLUGIN_672174_ACTIVE\n";' --path=/tmp/wp-site
 
       - name: Seed realistic verified Schabrackendesigner creative
         shell: bash
@@ -334,9 +334,9 @@ jobs:
           $count=absint($wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$objects} WHERE creative_identity_hash=%s",$identity)));
           $version=(string)get_option('ppar_full_pool_automation_version_v1','');
           if($count!==0) throw new RuntimeException('negative reproduction unexpectedly materialized');
-          if($version!=='6.72.174') throw new RuntimeException('worker did not mark current version complete '.$version);
+          if($version!=='6.72.175') throw new RuntimeException('worker did not mark current version complete '.$version);
           echo "STALE_CURSOR_SKIP_REPRODUCED_PASS\n";
-          echo "BUG_PROVEN: automatic worker can finish 6.72.174 while skipping the older Schabrackendesigner row.\n";
+          echo "BUG_PROVEN: automatic worker can finish 6.72.175 while skipping the older Schabrackendesigner row.\n";
           PHP
           /tmp/wp eval-file /tmp/stale-cursor.php --path=/tmp/wp-site
 
