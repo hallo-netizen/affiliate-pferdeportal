@@ -1,0 +1,48 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzbewaesserung-faq",
+    "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+    "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+    "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+  },
+  "planning_binding": {
+    "article_type": "FAQ",
+    "category": "reitplatzbewaesserung-faq",
+    "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+    "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+    "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+  },
+  "article_id": "article:40e70bdf41f7ebc44ca0c188",
+  "html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n\n<p>Ja. Reitplätze können über ein sogenanntes Ebbe-Flut-System von unten bewässert werden. Dabei wird Wasser nicht mit Regnern auf die Oberfläche gebracht, sondern unterhalb der Tretschicht gehalten und über Kapillarwirkung nach oben transportiert. Der Wasserstand lässt sich je nach System steuern. Damit das funktioniert, müssen Unterbau, Abdichtung, Drainage und Tretschicht aufeinander abgestimmt sein.</p>\n\n<h2>So gelangt das Wasser in die Tretschicht</h2>\n<p>Das Grundprinzip ähnelt dem Verhalten eines Schwamms oder eines Zuckerwürfels: Feuchtigkeit steigt in feinen Poren nach oben. Beim Ebbe-Flut-Reitplatz befindet sich unter der eigentlichen Tretschicht ein kontrollierter Wasserbereich. Die Sandschicht darüber zieht Feuchtigkeit kapillar nach oben. Dadurch kann die Oberfläche von unten gleichmäßig feucht gehalten werden. Entscheidend ist eine durchgängige kapillare Verbindung. Wenn Material, Körnung oder Schichtdicke nicht dazu passen, funktioniert der Wassertransport nur ungleichmäßig.</p>\n\n<h2>Der Aufbau ist anspruchsvoller als bei normaler Beregnung</h2>\n<p>Ein solches System wird nicht einfach unter einen vorhandenen Reitplatz gelegt. Es braucht einen dafür geplanten Unterbau, eine sichere Wasserführung und eine geeignete Tretschicht. Hersteller wie OTTO Sport beschreiben dafür spezielle Matten- und Sandsysteme, bei denen die Einbauhöhe so gewählt wird, dass die Kapillarität vom Unterbau bis in die Reitschicht erhalten bleibt. Wer einen bestehenden Platz umrüsten möchte, muss deshalb zunächst prüfen lassen, ob Aufbau und Höhen überhaupt geeignet sind.</p>\n\n<h2>Was sich im täglichen Betrieb verändert</h2>\n<p>Die Bewässerung läuft weitgehend unabhängig davon, ob gerade geritten wird. Es entstehen keine Sprühpausen und keine nassen Zonen durch schlecht eingestellte Regner. Gleichzeitig wird der Wasserhaushalt stärker über Technik gesteuert. Pumpen, Sensoren, Zu- und Ablauf sowie der gewünschte Wasserstand müssen funktionieren. Bei starkem Regen muss überschüssiges Wasser sicher abgeführt werden können. Das System ersetzt also nicht die Platzpflege, sondern verändert vor allem die Art, wie Feuchtigkeit in der Tretschicht gehalten wird.</p>\n\n<h2>Wasserstand und Bodenpflege gehören zusammen</h2>\n<p>Auch bei Bewässerung von unten bleibt das Abziehen und Lockern des Reitbodens notwendig. Die richtige Feuchte kann die Pflege erleichtern, verhindert aber keine Hufschläge oder Verdichtung. Wird der Wasserstand zu hoch gefahren, kann die Oberfläche zu weich werden; liegt er zu niedrig, trocknet sie stärker ab. Die passende Einstellung hängt unter anderem von Sand, Fasern, Wetter und Nutzungsintensität ab. Sinnvoll ist deshalb ein System, dessen Wasserstand nachvollziehbar geregelt und kontrolliert werden kann.</p>\n\n<h2>Die wichtigsten Systemteile</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Teil</th><th>Funktion</th><th>Prüfen</th></tr></thead><tbody>\n<tr><td>Unterbau</td><td>Wasser führen</td><td>Dichtheit</td></tr>\n<tr><td>Sandschicht</td><td>Feuchte transportieren</td><td>Körnung</td></tr>\n<tr><td>Steuerung</td><td>Pegel regeln</td><td>Funktion</td></tr>\n<tr><td>Ablauf</td><td>Überschuss abführen</td><td>Entwässerung</td></tr>\n</tbody></table>\n<p>Die Technik funktioniert nur dann zuverlässig, wenn diese Elemente als Gesamtsystem geplant sind. Einzelne Komponenten lassen sich nicht beliebig austauschen.</p>\n\n<h2>Für welche Anlagen lohnt sich das Prinzip?</h2>\n<p>Interessant ist die Technik vor allem dort, wo eine möglichst gleichmäßige Feuchte und hohe Verfügbarkeit des Platzes wichtig sind. Dem stehen höhere Anforderungen an Bau, Planung und Technik gegenüber. Für kleine Anlagen kann eine klassische Beregnung wirtschaftlich einfacher sein. Bei Neubauten oder intensiv genutzten Plätzen kann das Ebbe-Flut-Prinzip dagegen attraktiv sein, wenn Wasserführung, Wartung und Betrieb von Anfang an mitgedacht werden.</p>\n\n<h2>Fazit</h2>\n<p>Bewässerung von unten ist technisch möglich und wird auf Reitplätzen real eingesetzt. Sie basiert auf einem steuerbaren Wasserstand unterhalb der Tretschicht und der Kapillarwirkung des Bodens. Der Vorteil liegt in einer gleichmäßigen Feuchte ohne Beregnung von oben. Voraussetzung ist jedoch ein dafür geeigneter, sorgfältig geplanter Platzaufbau. Wer das System erwägt, sollte deshalb nicht nur die Bewässerungstechnik vergleichen, sondern den kompletten Bodenaufbau einschließlich Entwässerung planen lassen.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": null,
+    "rationale": "Die Systemteile und ihre Funktionen lassen sich kompakt gegenüberstellen und erleichtern das Verständnis des technischen Aufbaus."
+  },
+  "lt_authoritative_terms": [
+    "Ebbe-Flut-System",
+    "Kapillarwirkung",
+    "Tretschicht",
+    "OTTO Sport",
+    "Wasserstand"
+  ],
+  "research_claims": {
+    "F1": {
+      "source_url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau",
+      "source_title": "OTTO-Ebbe&Flut Reitplatzbau",
+      "evidence_text": "Eine Reitplatzbewässerung von unten ist technisch möglich. Beim Ebbe-Flut-System wird Wasser unterhalb der Tretschicht geregelt und über Kapillarwirkung in die Tretschicht transportiert; der Wasserpegel wird gesteuert.",
+      "statement": "Ebbe-Flut-Reitplätze bewässern die Tretschicht von unten über einen gesteuerten Wasserstand und Kapillarwirkung.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
