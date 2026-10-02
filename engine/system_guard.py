@@ -28,7 +28,7 @@ def run_system_checks():
         prov.get('lt68_sha256')=='2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8'
     )
     cov=field_audit(); own=owner_verify(); iso=isolation_verify(); ppm_parity=ppm_parity_verify()
-    table_ok=(values.get('table',{}).get('presence_policy')=={'FAQ':'OPTIONAL','Beratung':'OPTIONAL','Vergleich':'REQUIRED','Pflege':'OPTIONAL'} and float(values['table'].get('minimum_unique_content_token_ratio',0))==0.18)
+    table_ok=(values.get('table',{}).get('presence_policy')=={'FAQ':'REQUIRED_UNLESS_EXCEPTION','Beratung':'REQUIRED_UNLESS_EXCEPTION','Vergleich':'REQUIRED','Pflege':'REQUIRED_UNLESS_EXCEPTION'} and set((values.get('table',{}).get('omission_exception') or {}).get('allowed_codes') or [])=={'LINEAR_SEQUENCE','EXISTING_CHECKLIST_EQUIVALENT','INSUFFICIENT_RELATIONAL_DIMENSIONS','NUANCE_LOSS'} and float(values['table'].get('minimum_unique_content_token_ratio',0))==0.18)
     topic_ok=not any(str(r.get('id','')).startswith('topic.') or r.get('topic_override') for r in catalog.get('rules',[]))
     publish_ok=(catalog.get('publish_allowed') is False and goal.get('publish_allowed') is False and ref.get('publish_allowed') is False and values['global'].get('publish_allowed') is False)
     rows=[

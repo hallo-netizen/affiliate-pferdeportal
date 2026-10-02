@@ -481,7 +481,8 @@ def table_receipts(article):
             decision_evidence['allowed_exception_codes']=sorted(allowed_exceptions)
             decision_evidence['exception_code']=exception_code
         decision_evidence['expected_decision']=expected_decision
-    rows_out=[('table.required_for_comparison',presence_ok,{'count':count,'policy':policy}),('table.presence_policy',presence_ok,{'count':count,'policy':policy}),('table.minimum_rows',min_rows_ok,{}),('table.structure',structure_ok,{}),
+    comparison_required_ok=(count==1 if typ=='Vergleich' else True)
+    rows_out=[('table.required_for_comparison',comparison_required_ok,{'count':count,'policy':policy,'article_type':typ}),('table.presence_policy',presence_ok,{'count':count,'policy':policy}),('table.minimum_rows',min_rows_ok,{}),('table.structure',structure_ok,{}),
       ('table.canonical_classes',canonical_ok,{}),('table.compact_labels',labels_ok,{}),('table.compact_cells',cells_ok,{}),('table.post_summary_policy',summary_ok,{}),('table.value_required_if_present',value_ok,evidence),('table.optional_decision_documented',optional_decision_ok,decision_evidence)]
     return [_receipt(rid,'table_checker',article,'PASS' if ok else 'FAIL',ev) for rid,ok,ev in rows_out]
 
