@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.176
+ * Version: 6.72.177
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -116,7 +116,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.176';
+    const VERSION = '6.72.177';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -316,6 +316,9 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'maybe_restore_v67294_banner_state'), 26);
         add_action('init', array($this, 'maybe_restore_published_banner_campaign_consistency_v672100'), 27);
         add_action('init', array($this, 'ensure_full_pool_automation'), 29);
+        // V6.72.177: Repair only stale published page banners whose stored hub slot
+        // contradicts the real design page type. Admin-only and one-time: no frontend cost.
+        add_action('admin_init', array($this, 'maybe_repair_v672177_page_banner_slot_mismatch'), 32);
         add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30);
         add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31);
         add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
@@ -943,6 +946,104 @@ JS;
             $block = preg_replace('/^<section\\b/i', '<section data-ppar-journal-position="mid-categories"', $block, 1);
         }
         return substr($without, 0, $insert_at) . $block . substr($without, $insert_at);
+    }
+
+    /**
+     * V6.72.177 – one-time repair for the live Schabracken failure class.
+     *
+     * 6.72.175/176 proved the Schabrackendesigner chain with a test fixture that
+     * forced the Schabracken page to hub2. The real design contract derives the
+     * type from the WordPress page hierarchy; a depth-2 page is category and its
+     * wide slot is product_after_category_tiles. This repair does not invent a
+     * target or rewrite source data. It only re-runs the existing authoritative
+     * planner for already published page banners whose stored hub_after_cards
+     * materialization contradicts the design plugin's current page type.
+     *
+     * Runs only in wp-admin and only until every detected mismatch is atomically
+     * replanned. Normal frontend requests pay no extra query/cache cost.
+     */
+    public function maybe_repair_v672177_page_banner_slot_mismatch() {
+        if (!is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $done_key = 'ppar_v672177_page_banner_slot_replan_done';
+        if ((string) get_option($done_key, '') === 'done') { return; }
+        if (!class_exists('Pferde_Template_Kit')
+            || !is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))
+            || !method_exists($this, 'output_objects_table')
+            || !method_exists($this, 'creative_library_table')
+            || !method_exists($this, 'output_plan_creative')
+            || !method_exists($this, 'output_campaign_by_post_id')) {
+            return;
+        }
+
+        global $wpdb;
+        $objects = $this->output_objects_table();
+        $creative = $this->creative_library_table();
+        $rows = $wpdb->get_results(
+            "SELECT id,portal_key,creative_identity_hash,target_key,slot_id,status,campaign_post_id FROM {$objects}"
+            . " WHERE output_type='portal_banner' AND target_type='page' AND target_key='page:schabracken'"
+            . " AND slot_id='hub_after_cards' AND status='published' AND campaign_post_id>0 ORDER BY id ASC LIMIT 10",
+            ARRAY_A
+        );
+        if (!is_array($rows)) { return; }
+
+        $failed = false;
+        $repaired = 0;
+        foreach ($rows as $object) {
+            $campaign_id = absint($object['campaign_post_id'] ?? 0);
+            $campaign = $campaign_id > 0 ? $this->output_campaign_by_post_id($campaign_id) : null;
+            if (!is_array($campaign) || empty($campaign['active'])) { continue; }
+            $page_id = absint($campaign['page_id'] ?? 0);
+            if ($page_id <= 0 || get_post_type($page_id) !== 'page') { continue; }
+
+            $design_type = sanitize_key((string) call_user_func(array('Pferde_Template_Kit', 'affiliate_page_type'), $page_id));
+            if (!in_array($design_type, array('category', 'leaf'), true)) { continue; }
+
+            $slug = sanitize_key((string) get_post_field('post_name', $page_id));
+            $expected_target_key = $slug !== '' ? 'page:' . $slug : '';
+            if ($expected_target_key === '' || !hash_equals($expected_target_key, sanitize_key((string) ($object['target_key'] ?? '')))) { continue; }
+
+            $identity = strtolower(sanitize_text_field((string) ($object['creative_identity_hash'] ?? '')));
+            if (!preg_match('/^[a-f0-9]{64}$/', $identity)) { continue; }
+            $source = $wpdb->get_row($wpdb->prepare(
+                "SELECT * FROM {$creative} WHERE identity_hash=%s AND creative_type='banner' AND source_status='active' AND availability_state='active' LIMIT 1",
+                $identity
+            ), ARRAY_A);
+            if (!is_array($source)) { continue; }
+
+            $portal_key = sanitize_key((string) ($object['portal_key'] ?? ''));
+            $plan = $this->output_plan_creative($source, true, $portal_key);
+            if (!is_array($plan)) {
+                $failed = true;
+                continue;
+            }
+
+            // The authoritative proof is the newly published canonical object, not
+            // unrelated secondary output warnings from the same creative plan.
+            $replacement = $wpdb->get_row($wpdb->prepare(
+                "SELECT id,status,campaign_post_id FROM {$objects} WHERE portal_key=%s AND creative_identity_hash=%s"
+                . " AND output_type='portal_banner' AND target_type='page' AND target_key=%s"
+                . " AND slot_id='product_after_category_tiles' ORDER BY id DESC LIMIT 1",
+                $portal_key,
+                $identity,
+                $expected_target_key
+            ), ARRAY_A);
+            if (!is_array($replacement)
+                || sanitize_key((string) ($replacement['status'] ?? '')) !== 'published'
+                || absint($replacement['campaign_post_id'] ?? 0) <= 0) {
+                $failed = true;
+                continue;
+            }
+            $repaired++;
+        }
+
+        if (!$failed) {
+            update_option($done_key, 'done', false);
+            update_option('ppar_v672177_page_banner_slot_replan_result', array(
+                'repaired'=>$repaired,
+                'checked'=>count($rows),
+                'completed_at'=>time(),
+            ), false);
+        }
     }
 
     public function register_shortcodes() {

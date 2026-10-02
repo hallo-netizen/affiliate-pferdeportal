@@ -873,3 +873,20 @@ Belegt im E2E:
 
 **Status:** FIXED_SOURCE_RELEASED_6_72_176 / REAL_WORDPRESS_LIVE_FLASH_PAYLOAD_READBACK_OPEN.
 
+
+
+### AFF-ERR-042 – Live-Nachtrag 02.10.2026: 6.72.176 Schabracke weiterhin FAIL
+
+**Live-Befund:** Nach Installation/Readback von 6.72.176 bleibt der Schabrackendesigner auf der realen Schabracken-Seite unsichtbar. Damit ist AFF-ERR-042 nicht geschlossen.
+
+**Nachgeholter Testfehler:** Der grüne 6.72.175/176-Schabracken-Test verwendete ein synthetisches Designfixture, das den Slug `schabracken` fest als `hub2` klassifizierte. Das echte Designplugin klassifiziert aus der WordPress-Seitenhierarchie. `Ausrüstung -> Sattel -> Schabracken` ist strukturell `category`, nicht `hub2`.
+
+**Realer Slotvertrag:** `hub1/hub2 -> hub_after_cards`; `category/leaf -> product_after_category_tiles`. Der echte Kategorie-Renderer besitzt den `product_after_category_tiles`-Mount bereits. Der 6.72.176-Hub-Mount ist damit für echte Hubseiten nicht widerlegt; falsch war die Schabracken-Abnahme auf einem künstlich erzwungenen Hubtyp.
+
+**6.72.177 Kandidat:** ausschließlich ein admin-only, einmaliger, exakt auf `page:schabracken` begrenzter Replan bereits veröffentlichter Altmaterialisierung `hub_after_cards`, und nur wenn das echte Design den verknüpften realen Seitentyp als `category` oder `leaf` zurückliefert. Replan erfolgt ausschließlich über den bestehenden autoritativen `output_plan_creative()`-Pfad und gilt nur als erfolgreich, wenn danach ein veröffentlichter `product_after_category_tiles`-Output existiert.
+
+**Performance-Hardlock:** eBay-`render_banner()` und alle geschützten Performance-/Runtime-Traits bleiben gegenüber 6.72.176 unverändert. Der vom Nutzer beobachtete Größenwechsel der eBay-Kachel ist kein aktueller Fixauftrag, solange keine messbare Performanceverschlechterung belegt ist.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672177_schabracken_real_hierarchy_rootfix_20261002.md`
+
+**Status:** LIVE_FAIL_6_72_176 / TEST_FIXTURE_CONTEXT_MISMATCH_PROVEN / 6_72_177_LOCAL_CANDIDATE_PASS / EXACT_WORDPRESS_MARIADB_FULL_GATE_OPEN.
