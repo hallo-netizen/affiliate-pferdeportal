@@ -2,7 +2,7 @@
   "contract": "K0_WORDPRESS_ASSEMBLY_PARTIAL_V1",
   "status": "NOT_IMPORTABLE",
   "batch_sha256": "e59b7179e52a2379ec2b88a8d7a77692311883e4c13b9d27a651c66a00906ecd",
-  "next_index": 4,
+  "next_index": 8,
   "articles": [
     {
       "index": 0,
@@ -258,6 +258,262 @@
         "status": "PASS",
         "ppm_version": "6.7.9",
         "content_sha256": "44c967636cb7467deb69d2f9c8da837931e4996ce75d83ecc2e5ce3500fb3278"
+      }
+    },
+    {
+      "index": 0,
+      "article_id": "article:f78a6387af81e400c31c447f",
+      "title": "Longiergurte mit Bogen im Ratgeber",
+      "target_keyword": "Longiergurte mit Bogen",
+      "category": "longiergurte-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+      "final_draft_sha256": "b5e747f1baf55ac7847be48a1667e2aeecf9816240bba0eabf2249b068a853c5",
+      "revision_count": 4,
+      "body": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p>Longiergurte mit Bogen sollen über Widerrist und Wirbelsäule mehr Freiraum schaffen als flach aufliegende Konstruktionen. Das kann bei Pferden mit ausgeprägtem Widerrist oder empfindlicher Rückenmitte sinnvoll sein. Der Bogen allein macht einen Gurt aber noch nicht passend. Breite, Auflagefläche, Polsterung, seitliche Stabilität und die geplante Arbeit müssen zusammenpassen. Entscheidend ist, wie der Gurt in Bewegung liegt und wie sich Zug über die befestigten Leinen verteilt.</p>\n</section>\n<section data-block=\"shape\">\n<h2>Der Bogen soll Freiraum schaffen, nicht nur auffallen</h2>\n<p>Bei vielen Modellen überspannt der obere Teil den Widerrist wie eine kleine Brücke. Dadurch liegt der Gurt nicht direkt auf der Wirbelsäulenrinne. Je nach Konstruktion ist dieser Bereich fest, flexibel oder teilweise anpassbar. Sinnvoll ist ein Bogen nur dann, wenn er tatsächlich Abstand hält, ohne den gesamten Gurt instabil zu machen. Ein sehr hoher Aufbau kann zwar viel Platz schaffen, aber seitlich leichter kippen, wenn die übrige Form nicht zum Pferderücken passt. Prüfe deshalb nicht nur, wie der Gurt im Stand aussieht. Im Schritt und Trab sollte der Freiraum erhalten bleiben, während die seitlichen Auflageflächen ruhig liegen. Berührt der Bogen den Widerrist oder wandert der Gurt bei jedem Richtungswechsel, stimmt die Gesamtpassform nicht.</p>\n\n<p>Ein weiterer Punkt ist die Form des Bogens im Verhältnis zur Rückenbreite. Ein enger, hoher Aufbau kann bei einem schmalen Pferd gut funktionieren, auf einem breiteren Rücken aber instabil werden. Umgekehrt kann ein sehr weiter Bogen seitlich zu wenig Halt geben. Deshalb sollte nicht nur die Höhe, sondern auch die seitliche Führung betrachtet werden.</p>\n\n</section>\n<section data-block=\"contact\">\n<h2>Auflagefläche und Polsterung bestimmen den Komfort</h2>\n<p>Breite Polster verteilen Druck großflächiger, doch besonders dicke Unterlagen sind nicht automatisch besser. Zu viel Material kann einen eigentlich passenden Gurt anheben oder seitlich instabil machen. Wichtig ist eine gleichmäßige Auflage ohne harte Kanten. Feste Seitenteile können dem Gurt Form geben, während weichere Unterfütterungen kleine Unterschiede im Rücken ausgleichen. Achte darauf, dass nichts direkt auf Dornfortsätze oder empfindliche Muskelbereiche drückt. Nach der Arbeit sollten Fell und Haut gleichmäßig aussehen; klar begrenzte Druckstellen oder Scheuerbereiche sprechen gegen die aktuelle Passform. Auch Schweißspuren können Hinweise geben, sollten aber nie allein bewertet werden. Entscheidend bleibt der Gesamteindruck während und nach der Bewegung.</p>\n\n<p>Unterlagen dürfen außerdem keine Falten werfen oder unter dem Gurt seitlich herausgezogen werden. Besonders bei längerer Arbeit können kleine Unebenheiten unangenehm werden. Nach dem Auflegen sollte die Unterlage glattgezogen und im Verlauf der ersten Einheiten beobachtet werden, ob sie an ihrer Position bleibt oder sich sichtbar verschiebt.</p>\n\n</section>\n<section data-block=\"hardware\">\n<h2>Ringe und Bauart müssen zur geplanten Arbeit passen</h2>\n<p>Wer nur klassisch longiert, braucht meist weniger Befestigungspunkte als jemand, der mit Doppellonge oder variabler Bodenarbeit arbeitet. Zusätzliche Ringe sind nur dann nützlich, wenn ihre Position sinnvoll ist und die Leinen frei laufen können. Stabilität ist wichtiger als die reine Anzahl. Die Bauart beeinflusst zudem das Gefühl am Pferd. Ein fester Bogen bietet viel Formstabilität, ein flexibler Aufbau kann sich stärker anpassen. Die folgende Übersicht zeigt typische Schwerpunkte.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Bauart</th><th>Stärke</th><th>Achten auf</th></tr></thead><tbody>\n<tr><td>Fester Bogen</td><td>Stabilität</td><td>Weite</td></tr>\n<tr><td>Flexibler Bogen</td><td>Anpassung</td><td>Seitstabilität</td></tr>\n<tr><td>Breite Polster</td><td>Druckverteilung</td><td>Auflage</td></tr>\n<tr><td>Mehrere Ringe</td><td>Variabilität</td><td>Position</td></tr>\n</tbody></table>\n<p>Die passende Ausführung hängt vom Pferd und von der Arbeitsweise ab, nicht von möglichst umfangreicher Ausstattung.</p>\n\n<p>Bei regelmäßigem Einsatz lohnt auch die Kontrolle der Ringbefestigungen. Nähte, Schrauben oder Nieten müssen dauerhaft belastbar sein, weil über Doppellonge und Hilfszügel wiederholt Zug entsteht. Bewegliche Teile sollten leichtgängig bleiben, ohne scharfkantig zu werden. Ein sauber verarbeiteter Ring an der richtigen Position ist wertvoller als viele zusätzliche Befestigungen.</p>\n\n</section>\n<section data-block=\"check\">\n<h2>Die Passform immer in Bewegung kontrollieren</h2>\n<p>Lege den Gurt mittig auf, prüfe den Freiraum über dem Widerrist und führe das Pferd anschließend einige Minuten. Beobachte, ob der Gurt beim Handwechsel verrutscht, ob eine Seite nach vorn zieht oder ob sich Druck unter einzelnen Auflageflächen konzentriert. Auch Ellbogen und Schulter müssen frei bleiben. Werden Doppellonge oder Hilfszügel verwendet, sollte die Kontrolle mit den tatsächlich eingesetzten Leinen wiederholt werden, weil zusätzlicher Zug die Lage verändern kann. Ein Gurt, der ohne Leinen ruhig sitzt, kann unter Belastung trotzdem kippen. Deshalb ist die dynamische Kontrolle wichtiger als ein kurzer Blick im Stand. Bei wiederkehrenden Druckstellen oder deutlicher Empfindlichkeit sollte nicht einfach stärker gegurtet, sondern die Form grundsätzlich neu beurteilt werden.</p>\n\n<p>Dokumentiere bei neuen Gurten ruhig die erste Einstellung, etwa durch Fotos von Lage und Einstellung. So lässt sich später erkennen, ob sich Material gedehnt hat oder der Gurt anders sitzt. Gerade bei jungen Pferden oder Veränderungen der Muskulatur kann eine Passform, die anfangs gut war, nach einigen Monaten erneut überprüft werden müssen.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Longiergurte mit Bogen können Pferden mit ausgeprägtem Widerrist oder empfindlicher Rückenmitte mehr Freiraum bieten. Für die Auswahl sollte der Bogen aber nie isoliert betrachtet werden. Entscheidend sind ruhige Seitstabilität, gleichmäßige Auflage, passende Polsterung und sinnvoll platzierte Ringe. Ein Modell mit vielen Funktionen ist nicht automatisch besser als ein einfacher Gurt, der sauber liegt. Prüfe den Sitz zuerst ohne Zug und anschließend in der tatsächlichen Arbeit. Bleibt der Gurt auch bei Richtungswechseln mittig und frei über der Wirbelsäule, ist das deutlich aussagekräftiger als Form, Preis oder Zahl der Befestigungspunkte allein.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für die Feinabstimmung sind Herstellerangaben zur Bogenweite, Gurtlänge und vorgesehenen Ringnutzung hilfreich. Bei auffälliger Rückenempfindlichkeit sollte die Ursache unabhängig vom Longiergurt fachlich geklärt werden.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Longiergurt – Equimero",
+              "source_url": "https://www.equimero.de/produkt/longiergurt/"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Beratung",
+          "target_keyword": "Longiergurte mit Bogen",
+          "topic": "Longiergurte mit Bogen im Ratgeber",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "longiergurte-beratung",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-da04f0d3d37ea49bb506726d",
+          "job_sha256": "800e100ee4bbc1fc56f045010a378f9661415dd84ba454f04de8d57f3a844c80",
+          "draft_sha256": "3781fea6b25cacdcf30d025aa9a07610d0bb2c627535be6d456c85fed2a80c7d",
+          "identity_sha256": "44e0abc32e03011a5983bd1a4b1f41e68684558695e90b0b629f072da60432ad",
+          "visible_text_sha256": "b174b0967efe684be088259d0c5471901e24076cb9af1667bdd916dc7e3c1374",
+          "section_structure_sha256": "1b716090086a6bf8b993345b51ffe18923a2770c37d9b46bddd19df0f47fa681",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 846,
+          "conclusion_ratio": 0.105201,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "32c6d7d47c1a9dce3b561667d4ee7be4d0c94bb4ad733ca412393ea59dd72c03"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "b5e747f1baf55ac7847be48a1667e2aeecf9816240bba0eabf2249b068a853c5"
+      }
+    },
+    {
+      "index": 0,
+      "article_id": "article:09c961ebeec074c32324fcc5",
+      "title": "Passende Kühlgamaschen für Pferde wählen",
+      "target_keyword": "Kühlgamaschen für Pferde",
+      "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+      "final_draft_sha256": "3437ade6472bc9803ed3a3ee6ba8330fb0c8cc4919c6df0f36874525e76e0d88",
+      "revision_count": 4,
+      "body": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p>Kühlgamaschen sollen Wärme aus dem Pferdebein ableiten und dabei möglichst gleichmäßig anliegen. Dafür gibt es Gelmodelle, austauschbare Kühlpacks, wasserbasierte Manschetten und Systeme, die über Verdunstung arbeiten. Welche Variante passt, hängt von Einsatzort, gewünschter Kühlfläche, Dauer und Handhabung ab. Wichtig ist nicht, welches Produkt sich am kältesten anfühlt, sondern ob Temperatur, Sitz und Anwendungsdauer kontrollierbar bleiben.</p>\n</section>\n<section data-block=\"purpose\">\n<h2>Der Anlass entscheidet über die passende Kühlung</h2>\n<p>Nach intensiver Arbeit wird Kälte häufig genutzt, um erwärmte Strukturen an den unteren Gliedmaßen abzukühlen. Auch im Rahmen einer tierärztlich begleiteten Behandlung kann gezielte Kühlung eine Rolle spielen. Diese Situationen sind aber nicht gleich. Nach normaler Belastung geht es meist um eine begrenzte, gut kontrollierbare Abkühlung; bei Verletzungen, deutlicher Schwellung oder Lahmheit muss dagegen zuerst geklärt werden, was dahintersteckt. Kühlgamaschen ersetzen keine Diagnose. Für die Produktauswahl ist daher wichtig, wie oft gekühlt werden soll und wie groß die betroffene Fläche ist. Wer nur gelegentlich nach Trainingseinheiten kühlt, hat andere Anforderungen als ein Stall, in dem mehrere Pferde regelmäßig versorgt werden. Je klarer der Einsatz feststeht, desto leichter lässt sich die Technik sinnvoll auswählen.</p>\n\n<p>Auch nach normalem Training sollte nicht automatisch jedes Pferdebein gleich behandelt werden. Manche Pferde reagieren auf Belastung kaum mit zusätzlicher Wärme, andere zeigen deutliche Unterschiede zwischen einzelnen Gliedmaßen. Ein kurzer Vergleich vor und nach der Arbeit hilft, Veränderungen überhaupt wahrzunehmen und Kühlung gezielter statt routinemäßig ohne Anlass einzusetzen.</p>\n\n</section>\n<section data-block=\"systems\">\n<h2>Gel, Kühlpack und Wasser haben unterschiedliche Stärken</h2>\n<p>Gelgamaschen und herausnehmbare Kühlpacks sind unkompliziert und mobil. Sie benötigen jedoch eine kalte Lagerung und erwärmen sich während der Anwendung. Wasserbasierte Systeme können über längere Zeit eine gleichmäßigere Temperatur liefern, sind dafür aufwendiger und weniger flexibel beim Transport. Verdunstungsmodelle funktionieren ohne Gefrierfach, ihre Wirkung hängt aber stärker von Umgebung und Material ab. Die Übersicht zeigt die wichtigsten Unterschiede.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>System</th><th>Stärke</th><th>Nachteil</th></tr></thead><tbody>\n<tr><td>Gel</td><td>Einfach</td><td>Erwärmung</td></tr>\n<tr><td>Kühlpack</td><td>Austauschbar</td><td>Kühlung nötig</td></tr>\n<tr><td>Wasser</td><td>Konstant</td><td>Aufwand</td></tr>\n<tr><td>Verdunstung</td><td>Mobil</td><td>Umgebung</td></tr>\n</tbody></table>\n<p>Keines dieser Systeme ist generell überlegen. Entscheidend ist, welche Temperaturführung und Handhabung im eigenen Stall zuverlässig umgesetzt werden kann.</p>\n\n<p>Bei Gel- und Packmodellen ist außerdem wichtig, wie schnell die Elemente nach einer Anwendung wieder einsatzbereit sind. Wer mehrere Pferde nacheinander versorgt, braucht gegebenenfalls zusätzliche Packs oder mehr Kühlkapazität. Wasserbasierte Systeme benötigen dagegen eine zuverlässige Wasserquelle und genügend Platz, damit Schläuche oder Anschlüsse sicher geführt werden können.</p>\n\n</section>\n<section data-block=\"fit\">\n<h2>Die Kühlfläche muss gleichmäßig am Bein anliegen</h2>\n<p>Eine Manschette, die nur punktuell Kontakt hat, kühlt ungleichmäßig. Zu eng geschlossene Modelle können zusätzlichen Druck erzeugen, während zu lockere Gamaschen rutschen und Bereiche auslassen. Sinnvoll sind breite, anpassbare Flächen und Verschlüsse, die sich ohne starkes Einschnüren schließen lassen. Am Röhrbein und rund um den Fesselbereich sollte der Sitz stabil bleiben, ohne Hautfalten einzuklemmen. Auch starkes Winterfell kann den direkten Wärmeübergang verändern. Prüfe deshalb während der ersten Anwendungen, ob die Kühlung dort ankommt, wo sie gewünscht ist. Bei stark gefrorenen Elementen ist besondere Vorsicht sinnvoll: Extreme Kälte direkt auf der Haut ist nicht automatisch besser. Herstellerangaben zu Vorbereitung und maximaler Anwendung sollten eingehalten werden.</p>\n\n<p>Achte auch darauf, ob sich die Gamasche an unterschiedlichen Beinpositionen gleichmäßig anlegt. Manche Modelle sitzen im Stand gut, öffnen sich aber bei Bewegung oder rutschen am Fesselbereich. Für die Anwendung sollte das Pferd möglichst ruhig stehen können. Starkes Verrutschen ist ein Zeichen dafür, dass Form oder Verschluss nicht zur Anatomie passen.</p>\n\n</section>\n<section data-block=\"handling\">\n<h2>Reinigung und Alltagstauglichkeit werden oft unterschätzt</h2>\n<p>Kühlgamaschen werden schnell feucht, schmutzig und mit Stallstaub belastet. Materialien sollten sich deshalb unkompliziert reinigen und vollständig trocknen lassen. Bei Modellen mit Kühlpacks ist praktisch, wenn Ersatzpacks erhältlich sind und sich einzeln tauschen lassen. Akkus oder Pumpen wasserbasierter Systeme brauchen einen sicheren Platz und sollten nicht im Weg liegen. Wer häufig unterwegs kühlt, sollte zudem Transport und Lagerung bedenken: Ein Produkt, das nur mit großem Gefrierschrank funktioniert, ist auf dem Turnier möglicherweise unpraktisch. Kontrolliere nach der Anwendung Haut und Fell auf Druckstellen oder ungewöhnliche Reaktionen. Wird ein Bein wiederholt auffällig warm oder geschwollen, gehört die Ursache geklärt und nicht nur länger gekühlt.</p>\n\n<p>Beschrifte austauschbare Packs oder Manschetten, wenn mehrere Pferde dieselbe Kühlstation nutzen. Das erleichtert hygienische Trennung und verhindert Verwechslungen. Nach jeder Anwendung sollten feuchte Textilien vollständig trocknen können. Klettverschlüsse halten länger zuverlässig, wenn Haare und Einstreu regelmäßig entfernt werden. Solche kleinen Pflegeschritte entscheiden im Alltag oft über die tatsächliche Nutzungsdauer.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Passende Kühlgamaschen verbinden eine ausreichende Kühlfläche mit sicherem Sitz und einer Anwendung, die sich im Alltag wirklich kontrollieren lässt. Für gelegentliche Nutzung sind Gel- oder Packmodelle oft praktisch, während wasserbasierte Systeme bei häufigen oder längeren Anwendungen Vorteile haben können. Die Bauart allein entscheidet jedoch nicht über die Qualität. Achte auf gleichmäßigen Kontakt, einfache Reinigung, verfügbare Ersatzteile und eine Temperatur, die das Pferd gut toleriert. Vor allem bei anhaltender Wärme, Schwellung oder Lahmheit sollte die Kühlung nicht zum Ersatz für eine fachliche Abklärung werden. Ein gutes Produkt unterstützt die Anwendung, löst aber nicht die Ursache eines Problems.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für einen konkreten Gesundheitsbefund sollten Dauer und Häufigkeit der Kühlung mit Tierarzt oder behandelnder Fachperson abgestimmt werden. Herstellerangaben helfen zusätzlich bei Vorbereitung und Reinigung des gewählten Systems.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Can Cold Therapy Safeguard Sport Horses From Injury? – The Horse",
+              "source_url": "https://thehorse.com/189211/can-cold-therapy-safeguard-sport-horses-from-injury/"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Beratung",
+          "target_keyword": "Kühlgamaschen für Pferde",
+          "topic": "Passende Kühlgamaschen für Pferde wählen",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "gesundheit-regeneration-kuehlgamaschen-beratung",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-9629d5a4bb05a87da3ce0b1b",
+          "job_sha256": "a9bf4bcdf8043071499d4ffd672d2d5d8b179f3c7dde9f5fb39c7680afdf6096",
+          "draft_sha256": "7676269b69a0f9c07227693101fba0c172404f975cec4080faf60ea8a774bf6b",
+          "identity_sha256": "dd1b08bfc9c258c8efceee798c26c48df76b877b72e76eada70d018fb6257d3f",
+          "visible_text_sha256": "be9ad61da0cb7f383235dc8e7f39a1087c438d5790f9fac16e383d2cb5e117aa",
+          "section_structure_sha256": "ce486cd229c2477d46467416ef894c0cb98908416c82a391a19d6418afc51dd9",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 825,
+          "conclusion_ratio": 0.116364,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "203611e73d763ddb392796625a5a4f7c74fb2c8a00efb5b55b6d274920ba8b39"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "3437ade6472bc9803ed3a3ee6ba8330fb0c8cc4919c6df0f36874525e76e0d88"
+      }
+    },
+    {
+      "index": 0,
+      "article_id": "article:f363ad9f8d1f7e91a81ea740",
+      "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+      "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+      "category": "pferdehaftpflicht-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "5999b9b00de2a1756101c5ebfb2b547c6ff2b9360bd9bae0988696a795ff6288",
+      "final_draft_sha256": "14eed620b5a8c322b50c7704198a3433a2964190e4fce1cdf7c71edc861f83a9",
+      "revision_count": 4,
+      "body": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p>Wenn andere Menschen dein Pferd reiten oder betreuen, sollte die Pferdehalter-Haftpflicht diese Nutzung eindeutig abdecken. Begriffe wie Fremdreiter, Gastreiter, Reitbeteiligung oder Tierhüter werden in Tarifen nicht immer identisch verwendet. Deshalb reicht es nicht, nur nach dem Stichwort Fremdreiterrisiko zu suchen. Entscheidend ist, wer laut Bedingungen tatsächlich mitversichert ist und ob Ansprüche dieser Personen gegen den Halter ebenfalls erfasst werden.</p>\n</section>\n<section data-block=\"people\">\n<h2>Fremdreiter, Gastreiter und Reitbeteiligung unterscheiden</h2>\n<p>Ein Fremdreiter nutzt das Pferd, ohne selbst Halter zu sein. Das kann eine Freundin sein, die gelegentlich ausreitet, oder eine Person, die das Pferd regelmäßig bewegt. Manche Versicherer verwenden zusätzlich den Begriff Gastreiter für eher gelegentliche Nutzung und behandeln feste Reitbeteiligungen gesondert. Gerade bei regelmäßigen Reitbeteiligungen sollte nicht angenommen werden, dass sie automatisch unter dieselbe Klausel fallen. Wichtig ist außerdem, ob die Reitbeteiligung selbst Ansprüche gegen den Halter geltend machen kann, wenn sie durch das Pferd verletzt wird. Solche Personenschäden können versicherungstechnisch besonders relevant sein. Wer sein Pferd mehreren Menschen überlässt, sollte die reale Nutzung deshalb schriftlich mit den Definitionen im Tarif abgleichen und im Zweifel eine eindeutige Bestätigung des Versicherers einholen.</p>\n\n<p>Auch wenn eine Person nur selten reitet, sollte geklärt sein, ob ihre Nutzung privat und unentgeltlich bleibt. Sobald Geld fließt oder eine gewerbliche Tätigkeit berührt wird, können andere Bedingungen gelten. Solche Unterschiede gehören ausdrücklich zum Versicherer, statt aus allgemeinen Begriffen wie Gastreiter oder Reitbeteiligung selbst abgeleitet zu werden.</p>\n\n</section>\n<section data-block=\"care\">\n<h2>Auch Betreuung ohne Reiten kann versichert sein</h2>\n<p>Nicht jede Person, die mit dem Pferd umgeht, sitzt im Sattel. Jemand kann das Tier führen, auf die Weide bringen, verladen oder während des Urlaubs versorgen. In solchen Situationen ist eher die Rolle als Tierhüter oder Betreuungsperson relevant. Gute Tarife beschreiben, ob solche Personen mitversichert sind und unter welchen Bedingungen. Das ist besonders wichtig in privaten Stallgemeinschaften, bei Urlaubsvertretungen oder wenn mehrere Familienmitglieder regelmäßig Aufgaben übernehmen. Die Begriffe können sich überschneiden, sollten aber nicht einfach gleichgesetzt werden. Die Übersicht hilft bei der Orientierung.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Person</th><th>Nutzung</th><th>Prüfpunkt</th></tr></thead><tbody>\n<tr><td>Fremdreiter</td><td>Reiten</td><td>Einschluss</td></tr>\n<tr><td>Gastreiter</td><td>Gelegentlich</td><td>Umfang</td></tr>\n<tr><td>Reitbeteiligung</td><td>Regelmäßig</td><td>Ansprüche</td></tr>\n<tr><td>Tierhüter</td><td>Betreuung</td><td>Mitversicherung</td></tr>\n</tbody></table>\n<p>Verbindlich bleibt immer die Definition im jeweiligen Bedingungswerk.</p>\n\n<p>Bei Urlaubsvertretungen ist außerdem sinnvoll, Kontaktdaten und wichtige Hinweise zum Pferd weiterzugeben. Versicherungsschutz verhindert keinen Unfall, kann aber die finanziellen Folgen abdecken. Eine Person, die das Pferd betreut, sollte deshalb wissen, wie es geführt wird, welche Besonderheiten bestehen und wen sie im Notfall erreichen kann.</p>\n\n</section>\n<section data-block=\"coverage\">\n<h2>Deckungssumme und Ausschlüsse gehören mit in den Vergleich</h2>\n<p>Die mitversicherten Personen sind nur ein Teil der Entscheidung. Schäden durch Pferde können Personen, Sachen und Vermögen betreffen und im Einzelfall sehr hohe Summen erreichen. Deshalb sollte auch die Versicherungssumme zum eigenen Sicherheitsbedürfnis passen. Prüfe zusätzlich Selbstbeteiligung, Flurschäden, Schäden an gemieteten Stallungen oder Transportern sowie mögliche Einschränkungen bei Veranstaltungen oder besonderen Nutzungen. Nicht jeder Punkt ist für jeden Halter gleich wichtig. Wer mit dem Pferd regelmäßig auf Turniere fährt, hat andere Risiken als jemand, dessen Pferd den Hof kaum verlässt. Der Vergleich wird übersichtlicher, wenn zuerst die tatsächliche Haltung und Nutzung notiert und anschließend nur Tarife betrachtet werden, die diese Situationen ausdrücklich abdecken.</p>\n\n<p>Wer einen Tarif vergleicht, sollte nicht nur die höchste Deckungssumme markieren. Ebenso wichtig ist, ob relevante Schadenarten tatsächlich eingeschlossen sind und welche Selbstbeteiligung anfällt. Ein niedriger Beitrag kann unattraktiv werden, wenn für typische Situationen der eigenen Haltung Ausschlüsse gelten. Der Vergleich sollte deshalb immer Leistungen und Preis gemeinsam berücksichtigen.</p>\n\n</section>\n<section data-block=\"conditions\">\n<h2>Die Versicherungsbedingungen sind wichtiger als Werbeaussagen</h2>\n<p>Produktseiten fassen Leistungen oft kurz zusammen, doch maßgeblich sind die Bedingungen des konkreten Tarifs. Dort sollte nachvollziehbar stehen, welche Personen mitversichert sind, welche Schäden ausgeschlossen werden und ob besondere Voraussetzungen gelten. Die Allianz nennt beispielsweise nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- oder Fremdreiter als mitversichert. Das lässt sich aber nicht automatisch auf andere Anbieter übertragen. Vor Abschluss sollten aktuelle Bedingungen gespeichert oder heruntergeladen werden, damit spätere Änderungen nachvollziehbar bleiben. Wer eine ungewöhnliche Konstellation hat, etwa entgeltliche Nutzung oder mehrere regelmäßige Reiter, sollte diese vor Vertragsabschluss ausdrücklich schildern. Eine schriftliche Antwort ist deutlich belastbarer als eine allgemeine Werbeaussage.</p>\n\n<p>Auch spätere Änderungen der Nutzung sollten dem Versicherungsschutz folgen. Kommt etwa eine feste Reitbeteiligung hinzu oder wird das Pferd häufiger von anderen Personen bewegt, lohnt eine erneute Prüfung der Bedingungen. Versicherungsverträge passen sich nicht automatisch an veränderte Stallabläufe an. Eine kurze schriftliche Nachfrage kann hier deutlich mehr Sicherheit schaffen als eine alte Annahme.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Eine Pferdehaftpflicht mit Fremdreiterrisiko passt dann, wenn sie die tatsächliche Nutzung deines Pferdes vollständig abbildet. Entscheidend ist nicht das Wort Fremdreiter auf der Produktseite, sondern die konkrete Definition im Tarif. Prüfe, ob gelegentliche Reiter, feste Reitbeteiligungen und Betreuungspersonen erfasst sind und wie Ansprüche dieser Personen geregelt werden. Danach gehören Versicherungssumme, Selbstbeteiligung und wichtige Ausschlüsse in den Vergleich. Je genauer du beschreibst, wer dein Pferd wie nutzt, desto leichter erkennst du Lücken. Bei besonderen Konstellationen sollte der Versicherer die Deckung schriftlich bestätigen, bevor du dich auf einen Tarif verlässt.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für den Abschluss sind immer die aktuellen Versicherungsbedingungen maßgeblich. Speichere die Tarifunterlagen und kläre ungewöhnliche Nutzungen oder entgeltliche Reitbeteiligungen vor Vertragsbeginn schriftlich mit dem Anbieter.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Pferdehaftpflicht – Allianz",
+              "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Beratung",
+          "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+          "topic": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "pferdehaftpflicht-beratung",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-c46ccb6c9f9075a9148257bf",
+          "job_sha256": "e7a3d0b2e4aea3b6cfe9c4245f7cc44ac9ec156ce8fa2a62dc0e555050e768e7",
+          "draft_sha256": "e216ece80319d13d6690d64b8681748b45de4fcad8c88ea3cc69e50be2c595d9",
+          "identity_sha256": "08464172c05fcd883b43484ed62b454f98df133179a6199b6352ed01e8768fd2",
+          "visible_text_sha256": "165b8ee5e23bab511a5b51e4c7582f7ded58a500548b01046b2c048abbfb1fe4",
+          "section_structure_sha256": "992129d021e2d9b797f4a63438368b9065e6806112c5adad49f372e69cc76c2d",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 826,
+          "conclusion_ratio": 0.106538,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "353708d66cd33cff6eef6964bfe27a42f6424c45cb47a1b2bd5b0a722442620f"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "14eed620b5a8c322b50c7704198a3433a2964190e4fce1cdf7c71edc861f83a9"
+      }
+    },
+    {
+      "index": 0,
+      "article_id": "article:98d25b1963465407779b7354",
+      "title": "So findest du einen passenden Kappzaum für dein Pferd",
+      "target_keyword": "Kappzaum für Pferde",
+      "category": "kappzaum-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+      "final_draft_sha256": "1033d4897f31b6329a3d90fae70f58f5f409c9f38a98be5cac1ddc84cbf5a10c",
+      "revision_count": 4,
+      "body": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p>Ein Kappzaum soll klare Signale am Pferdekopf ermöglichen, ohne das Maul zu belasten. Dafür muss er stabil liegen und darf weder Auge, Jochbein noch den empfindlicheren unteren Nasenbereich beeinträchtigen. Bei der Auswahl sind Kopfform, Nasenriemen, Gewicht, Polsterung und die geplante Arbeit wichtiger als ein besonders massiver Beschlag. Ein guter Kappzaum fühlt sich nicht spektakulär an, sondern bleibt ruhig und lässt sich mit kleinen Signalen bedienen.</p>\n</section>\n<section data-block=\"nose\">\n<h2>Der Nasenriemen entscheidet über Sitz und Einwirkung</h2>\n<p>Der Nasenriemen sollte auf dem festen Teil des Nasenbeins liegen. Wird er zu tief verschnallt, kann Druck auf weichere Strukturen entstehen; sitzt er sehr locker oder zu hoch, kann der Zaum leichter verrutschen. Seine Form muss zur Nase des Pferdes passen und darf an keiner Stelle punktuell einschneiden. Manche Modelle besitzen einen starren Nasenbereich oder eine Konstruktion mit Metalleinlage, andere sind weicher aufgebaut. Ein festeres Modell vermittelt Signale direkter, verlangt aber eine entsprechend feine Hand. Weichere Varianten können angenehmer wirken, wenn sie trotzdem stabil genug bleiben. Prüfe außerdem, ob sich der Nasenriemen fein genug einstellen lässt. Ein Kappzaum, der nur zwischen deutlich zu eng und deutlich zu locker gewählt werden kann, passt unabhängig von Material oder Preis nicht gut.</p>\n\n<p>Auch die Breite des Nasenriemens beeinflusst, wie sich Druck verteilt. Sehr schmale Konstruktionen wirken auf eine kleinere Fläche, während breite Riemen bei manchen Köpfen näher an Jochbein oder empfindliche Bereiche geraten können. Die ideale Form ergibt sich deshalb aus Anatomie und Einwirkung. Pauschale Aussagen wie „breiter ist immer weicher“ greifen zu kurz.</p>\n\n</section>\n<section data-block=\"stability\">\n<h2>Seitenteile und Genickstück müssen den Zaum stabilisieren</h2>\n<p>Beim Longieren oder bei seitlicher Handarbeit wirkt Zug nicht nur nach hinten, sondern auch zur Seite. Dadurch kann ein schlecht sitzender Zaum Richtung Auge oder Jochbein wandern. Backenstücke und Kehlriemen sollten den Nasenriemen daher in Position halten, ohne das Pferd einzuschnüren. Ein ausreichend breites Genickstück kann Druck besser verteilen, sofern es hinter den Ohren genug Platz lässt. Besonders aussagekräftig ist eine Kontrolle in Bewegung: Wechsle die Hand, führe einige Bögen und beobachte, ob der Kappzaum seine Lage behält. Muss der Zaum ständig neu ausgerichtet werden, ist die Form wahrscheinlich ungeeignet. Mehr Festziehen löst dieses Problem oft nicht, sondern erhöht nur den Druck an anderen Stellen.</p>\n\n<p>Achte außerdem darauf, wie die Schnallen im Verhältnis zu den Gesichtsknochen liegen. Eine formal passende Länge kann trotzdem ungünstig sein, wenn eine Schnalle genau auf einem Knochenvorsprung sitzt. Bei Leder verändern sich Lage und Weite nach einigen Einsätzen leicht. Deshalb sollte die Einstellung nach der Einreit- beziehungsweise Eingewöhnungsphase nochmals kontrolliert werden.</p>\n\n</section>\n<section data-block=\"types\">\n<h2>Die Bauart sollte zur eigenen Arbeit passen</h2>\n<p>Für klassisches Longieren ist ein stabiler mittlerer Ring wichtig. Bei Handarbeit können seitliche Ringe nützlich sein, während für Doppellonge zusätzliche Befestigungsmöglichkeiten interessant werden. Ein schwerer traditioneller Kappzaum kann sehr direkt wirken, ein leichteres Modell ist bei feiner Bodenarbeit oft angenehmer. Die Übersicht zeigt typische Unterschiede.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Bauart</th><th>Merkmal</th><th>Einsatz</th></tr></thead><tbody>\n<tr><td>Starr</td><td>Direkt</td><td>Erfahren</td></tr>\n<tr><td>Gepolstert</td><td>Weicher</td><td>Vielseitig</td></tr>\n<tr><td>Leicht</td><td>Handlich</td><td>Handarbeit</td></tr>\n<tr><td>Mehrfachring</td><td>Variabel</td><td>Doppellonge</td></tr>\n</tbody></table>\n<p>Die Grenzen sind fließend. Wichtiger als die Bezeichnung bleibt, ob der Zaum am konkreten Pferdekopf stabil und druckfrei liegt.</p>\n\n<p>Manche Kappzäume erlauben das Abnehmen einzelner Ringe oder das Umrüsten von Beschlägen. Das kann praktisch sein, wenn zwischen Longieren und Handarbeit gewechselt wird. Solche Modularität ist aber nur dann ein Vorteil, wenn Umbauten sicher befestigt werden können. Lose oder schlecht sitzende Teile dürfen niemals zum Preis für zusätzliche Variabilität werden.</p>\n\n</section>\n<section data-block=\"test\">\n<h2>Vor dem Kauf zählt die Kontrolle am Pferd</h2>\n<p>Wenn möglich, sollte ein Kappzaum nicht nur nach Größenangabe ausgewählt werden. Miss Kopf und Nasenumfang und vergleiche die Werte mit den Herstellerangaben. Nach dem Auflegen prüfst du Abstand zu Augen, Jochbein und weichem Nasenbereich. Anschließend sollte der Zaum mit leichtem seitlichem Zug getestet werden. Er darf sich etwas bewegen, aber nicht deutlich verdrehen. Beobachte auch, ob Schnallen oder Ringe an ungünstigen Stellen liegen. Nach einer kurzen Arbeitseinheit lohnt ein Blick auf Fell und Haut. Scheuerstellen, starke Druckabdrücke oder Empfindlichkeit sind Warnzeichen. Wenn der Zaum nur durch sehr straffes Verschnallen stabil bleibt, ist meist nicht die Einstellung, sondern die Grundform das Problem.</p>\n\n<p>Wenn mehrere Größen infrage kommen, sollte nicht automatisch die engere gewählt werden, nur weil sie ruhiger erscheint. Stabilität muss aus passender Form entstehen und nicht aus einer sehr straffen Einstellung. Ein guter Test ist, ob sich der Zaum nach leichter Korrektur wieder neutral setzt und das Pferd Maul, Kiefer und Genick entspannt bewegen kann.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Ein passender Kappzaum sitzt auf dem festen Nasenbein, bleibt seitlich stabil und lässt Auge, Jochbein und Genick frei. Die beste Wahl ergibt sich aus Kopfform und Arbeitsweise, nicht aus möglichst schwerer oder umfangreicher Ausstattung. Prüfe zuerst den Nasenriemen, danach Seitenteile und Genickstück und erst dann zusätzliche Ringe oder besondere Funktionen. Ein einfacher Zaum, der ruhig liegt und fein eingesetzt werden kann, ist wertvoller als ein komplexes Modell, das am Pferdekopf wandert. Wenn du den Sitz im Stand und in Bewegung kontrollierst, lassen sich viele Fehlkäufe bereits vor längerer Nutzung erkennen.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Herstellermaße helfen bei der Vorauswahl, ersetzen aber nicht die Passformkontrolle am Pferd. Bei anhaltenden Druckstellen oder deutlicher Empfindlichkeit sollte die Ursache fachlich abgeklärt werden.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+              "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Beratung",
+          "target_keyword": "Kappzaum für Pferde",
+          "topic": "So findest du einen passenden Kappzaum für dein Pferd",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "kappzaum-beratung",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-c0cc0ce7399ab14b85ad11f4",
+          "job_sha256": "e3ec0984e9b0f7accdf32719569382987971303b9cf358646a478a19a4ac02d2",
+          "draft_sha256": "c5be219d50847431f887a8d9d3aa3183b146961e4be95ccfef890a65f4811899",
+          "identity_sha256": "a8fb2e25e21a5222b19adc0884c99349a2d203184e00e874b723f74fc33da646",
+          "visible_text_sha256": "db2bd929055ade4e77b04e8c9b6e2180745a942e4061e1cd0f9c4babc432f387",
+          "section_structure_sha256": "3438850cf53052139674cde922b28d8dfc5f80b1ff6e84904dce6a23ded47411",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 832,
+          "conclusion_ratio": 0.108173,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "f4a70691ee2b6292803d6960f931982465c4a73f2d8da02e1df0f3b971934a59"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "1033d4897f31b6329a3d90fae70f58f5f409c9f38a98be5cac1ddc84cbf5a10c"
       }
     }
   ]
