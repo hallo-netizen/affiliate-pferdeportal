@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.175
+ * Version: 6.72.176
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -116,7 +116,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.175';
+    const VERSION = '6.72.176';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -2710,7 +2710,19 @@ JS;
         $availability = isset($banner['availability']) ? trim(strtr((string)$banner['availability'], $replacements)) : '';
         $seller_name = isset($banner['seller_name']) ? trim(strtr((string)$banner['seller_name'], $replacements)) : '';
         $creative_type = sanitize_key((string)($banner['creative_type'] ?? 'banner'));
-        $is_glossary_single_slot = in_array(sanitize_key((string)$slot_type), array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
+        $network = sanitize_key((string)($banner['network'] ?? ''));
+        $normalized_slot_type = sanitize_key((string)$slot_type);
+        // V6.72.176: Das Portal-Design baut eBay-BUSINESS-Produktkarten auf
+        // Hub-/Kategorie-Rastern nach DOMContentLoaded aus Bild, Titel, Preis und
+        // CTA neu auf. Der Beschreibungstext bleibt dabei absichtlich unsichtbar.
+        // Er bleibt vollstaendig im Kampagnen-/Quelldatensatz erhalten, wird aber
+        // nicht mehr als spaeter verworfener DOM-Text ausgeliefert.
+        if ($network === 'ebay'
+            && $creative_type === 'product'
+            && preg_match('/^(?:category|hub)_product_[123]$/', $normalized_slot_type)) {
+            $description = '';
+        }
+        $is_glossary_single_slot = in_array($normalized_slot_type, array('glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner'), true);
         $is_breed_single_slot = in_array(sanitize_key((string)$slot_type), array('breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner'), true);
         $is_classic_post_slot = sanitize_key((string)$slot_type) === 'post_inline_banner';
         $uses_editorial_single_chrome = $is_glossary_single_slot || $is_breed_single_slot || $is_classic_post_slot;
@@ -5155,12 +5167,26 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
             return $content;
         }
 
-        // V2.2.3: Automatisch vom Designplugin verwaltete Portal-Seiten duerfen
-        // niemals zusaetzliche alte Template-Slots aus dem Router erhalten.
-        // Die integrierten Rasterkarten werden ausschliesslich ueber den Datenfilter befuellt.
+        // V6.72.176: Designverwaltete Hub-Seiten beziehen ihre integrierten
+        // Karten weiterhin ausschliesslich ueber den bestehenden Datenfilter.
+        // Der separate, breite hub_after_cards-Slot besitzt dort jedoch keinen
+        // Mount-Punkt. Deshalb wird genau dieser eine Wide-Slot serverseitig
+        // nach dem fertig gerenderten Hub-Inhalt angehaengt – nur wenn ein reales
+        // Creative existiert und nur wenn der Slot nicht bereits vorhanden ist.
+        // Start/Kategorie sowie alle Grid-Karten bleiben unveraendert.
         if (class_exists('Pferde_Template_Kit') && is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))) {
             $design_type = (string) Pferde_Template_Kit::affiliate_page_type($post_id);
-            if (in_array($design_type, array('start', 'hub1', 'hub2', 'category'), true)) {
+            if (in_array($design_type, array('hub1', 'hub2'), true)) {
+                $slot_marker = 'data-ppar-slot="hub_after_cards"';
+                if (strpos((string) $content, $slot_marker) === false) {
+                    $wide_slot = $this->render_affiliate_slot($post_id, 'hub_after_cards', 'primary_product', '');
+                    if (strpos((string) $wide_slot, $slot_marker) !== false) {
+                        $content .= "\n" . $wide_slot;
+                    }
+                }
+                return $content . $this->debug_comment('design_auto_layout_protected_with_hub_wide_slot', $post_id, $design_type, '', '');
+            }
+            if (in_array($design_type, array('start', 'category'), true)) {
                 return $content . $this->debug_comment('design_auto_layout_protected', $post_id, $design_type, '', '');
             }
         }
