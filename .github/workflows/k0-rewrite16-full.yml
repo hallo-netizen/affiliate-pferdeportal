@@ -1,0 +1,180 @@
+name: K0 rewrite16 full acceptance
+
+on:
+  push:
+    branches: [tmp/k0-rewrite16-content-20261002]
+    paths:
+      - 'real_runs/k0_batch/20261002_rewrite16/**'
+      - '.github/workflows/k0-rewrite16-full.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Normalize batch and article packages
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k0rewrite/articles /tmp/k0rewrite/gates /tmp/k0rewrite/lt /tmp/k0rewrite/singles /tmp/k0rewrite/final
+          python3 - <<'PY'
+          import hashlib,json,pathlib,re
+          base=pathlib.Path('real_runs/k0_batch/20261002_rewrite16')
+          intake=json.loads((base/'WORDPRESS_INTAKE.json').read_text())
+          core=dict(intake); core.pop('batch_sha256',None)
+          stable=json.dumps(core,ensure_ascii=False,sort_keys=True,separators=(',',':'))
+          intake['batch_sha256']=hashlib.sha256(stable.encode()).hexdigest()
+          pathlib.Path('/tmp/k0rewrite/intake.json').write_text(json.dumps(intake,ensure_ascii=False,indent=2)+'\n')
+          assert intake['item_count']==16 and len(intake['items'])==16
+          seen=set()
+          bindings={}
+          for idx,item in enumerate(intake['items']):
+              p=base/'articles'/f'{idx:02d}.json'
+              x=json.loads(p.read_text())
+              assert x['contract']=='K0_ARTICLE_PACKAGE_V1'
+              assert x['identity']==item,(idx,x['identity'],item)
+              x['planning_binding']=item
+              x['article_type']=item['article_type']
+              x['title']=item['title']
+              x['target_keyword']=item['target_keyword']
+              x['category']=item['category']
+              x.setdefault('wordpress_category',{'id':None,'slug':item['category'],'taxonomy':'category'})
+              x['final_draft_sha256']=hashlib.sha256(x['html'].encode()).hexdigest()
+              for c in (x.get('research_claims') or {}).values():
+                  c['evidence_text_sha256']=hashlib.sha256(c['evidence_text'].encode()).hexdigest()
+              aid=str(x.get('article_id') or '')
+              assert re.fullmatch(r'article:[0-9a-f]{24}',aid),(idx,aid)
+              slot=hashlib.sha256(('pserc-plan-slot-v2|'+aid).encode()).hexdigest()
+              assert slot==item['plan_slot'],(idx,slot,item['plan_slot'])
+              assert item['plan_slot'] not in seen
+              seen.add(item['plan_slot']); bindings[item['plan_slot']]=aid
+              pathlib.Path(f'/tmp/k0rewrite/articles/{idx:02d}.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+          pathlib.Path('/tmp/k0rewrite/snapshot.json').write_text(json.dumps({
+              'source_batch_sha256':intake['batch_sha256'],
+              'canonical_article_bindings':bindings
+          },ensure_ascii=False,indent=2)+'\n')
+          print('K0_REWRITE16_NORMALIZE_PASS:'+intake['batch_sha256'])
+          PY
+
+      - name: Automatic Pferdeatelier portal assignment
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_portal_resolver /tmp/k0rewrite/intake.json K0_PORTAL_REGISTRY.json > /tmp/k0rewrite/portal-all.json
+          python3 - <<'PY'
+          import json,pathlib
+          p=json.load(open('/tmp/k0rewrite/portal-all.json'))
+          assert p['status']=='PASS' and p['item_count']==16,p
+          assert all(x['portal_id']=='pferdeatelier' and x['status']=='AUTO_DETECTED' for x in p['items']),p
+          for i,row in enumerate(p['items']):
+              one={'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS','source_batch_sha256':p['source_batch_sha256'],'item_count':1,'items':[row],'publish_allowed':False}
+              pathlib.Path(f'/tmp/k0rewrite/portal-{i:02d}.json').write_text(json.dumps(one,ensure_ascii=False,indent=2)+'\n')
+          print('K0_REWRITE16_PORTAL_PASS')
+          PY
+
+      - name: K0 semantic structure table and PPM 6.7.9 gates
+        run: |
+          set -euo pipefail
+          for i in $(seq -w 0 15); do
+            python3 -m engine.k0_production_gate "/tmp/k0rewrite/articles/$i.json" "/tmp/k0rewrite/portal-$i.json" "/tmp/k0rewrite/gates/$i.json"
+          done
+          python3 - <<'PY'
+          import glob,json
+          rows=[json.load(open(p)) for p in sorted(glob.glob('/tmp/k0rewrite/gates/*.json'))]
+          assert len(rows)==16
+          assert all(x['status']=='PASS' and x['semantic_intent_status']=='PASS' and x['anti_boilerplate_status']=='PASS' and x['ppm679_rule_count']==104 for x in rows),rows
+          print('K0_REWRITE16_GATES_PASS')
+          PY
+
+      - name: Download exact LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k0-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k0-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k0-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k0-lt68/LanguageTool-6.8.zip -d /tmp/k0-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: LanguageTool 6.8 all 16
+        run: |
+          set -euo pipefail
+          for i in $(seq -w 0 15); do
+            python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar "/tmp/k0rewrite/articles/$i.json" "/tmp/k0rewrite/lt/$i.json"
+          done
+          python3 - <<'PY'
+          import glob,json
+          rows=[json.load(open(p)) for p in sorted(glob.glob('/tmp/k0rewrite/lt/*.json'))]
+          assert len(rows)==16
+          bad=[(i,x) for i,x in enumerate(rows) if x.get('status')!='PASS' or x.get('finding_count')!=0]
+          assert not bad,bad
+          print('K0_REWRITE16_LT68_PASS')
+          PY
+
+      - name: Build PSERC 0.28.30 WordPress singles and batch
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,pathlib
+          from engine.wordpress_export import build_single
+          from engine.wordpress_batch_export import combine
+          intake=json.load(open('/tmp/k0rewrite/intake.json'))
+          snapshot=json.load(open('/tmp/k0rewrite/snapshot.json'))
+          research={'created_at_utc':'2026-10-02T16:30:00Z'}
+          singles=[]
+          for i in range(16):
+              a=json.load(open(f'/tmp/k0rewrite/articles/{i:02d}.json'))
+              lt=json.load(open(f'/tmp/k0rewrite/lt/{i:02d}.json'))
+              doc=build_single(a,research,snapshot,lt)
+              pathlib.Path(f'/tmp/k0rewrite/singles/{i:02d}.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2)+'\n')
+              singles.append(doc)
+          out=combine(intake,singles)
+          assert out['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
+          assert out['article_count']==16
+          assert out['wordpress_review']['plugin_version_verified_against']=='0.28.30'
+          assert out['wordpress_review']['direct_wordpress_upload_ready'] is True
+          assert out['publish_allowed'] is False
+          p=pathlib.Path('/tmp/k0rewrite/final/K0_WORDPRESS_REWRITE16_DIRECT_IMPORT.json')
+          p.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print('K0_REWRITE16_WORDPRESS_BATCH_PASS:'+out['batch_sha256'])
+          PY
+          sha256sum /tmp/k0rewrite/final/K0_WORDPRESS_REWRITE16_DIRECT_IMPORT.json > /tmp/k0rewrite/final/SHA256.txt
+
+      - name: Final contamination and uniqueness proof
+        run: |
+          python3 - <<'PY'
+          import json,re,hashlib
+          p='/tmp/k0rewrite/final/K0_WORDPRESS_REWRITE16_DIRECT_IMPORT.json'
+          x=json.load(open(p))
+          badphrases=[
+            'Für die Praxis heißt das: Betrachte',
+            'Trenne Muss-Kriterien von bloßen Zusatzmerkmalen',
+            'Ein guter Vergleich beginnt mit einer klaren Reihenfolge',
+            'Die Tabelle ordnet vier praktische Prüfpunkte knapp',
+            'Der letzte Schritt ist die praktische Kontrolle am konkreten Fall',
+          ]
+          bodies='\n'.join(a['body'] for a in x['articles'])
+          assert not any(p.lower() in bodies.lower() for p in badphrases)
+          ids=[a['article_id'] for a in x['articles']]
+          slots=[a['plan_slot'] for a in x['articles']]
+          assert len(set(ids))==16 and len(set(slots))==16
+          sch=[a for a in x['articles'] if 'alte Schabracke' in a['title']]
+          assert len(sch)==1
+          assert sch[0]['category']=='pferdewissen-grundlagen'
+          assert sch[0]['article_type']=='Journal'
+          print('K0_REWRITE16_FINAL_PROOF_PASS')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-rewrite16-final
+          path: |
+            /tmp/k0rewrite/final/K0_WORDPRESS_REWRITE16_DIRECT_IMPORT.json
+            /tmp/k0rewrite/final/SHA256.txt
+            /tmp/k0rewrite/gates
+            /tmp/k0rewrite/lt
+          if-no-files-found: error
+          retention-days: 30
