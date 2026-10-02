@@ -225,9 +225,10 @@ jobs:
           $m=new ReflectionMethod($o,'campaign_from_post');$m->setAccessible(true);
           $campaign=$m->invoke($o,get_post(absint($obj['campaign_post_id']??0)));
           if(!is_array($campaign)||empty($campaign['active']))throw new RuntimeException('campaign inactive');
-          if(!in_array($targetKey,(array)($campaign['automation_target_keys']??[]),true))throw new RuntimeException('campaign target missing');
+          $frontendTarget='page:schabracken';
+          if(!in_array($frontendTarget,(array)($campaign['automation_target_keys']??[]),true))throw new RuntimeException('campaign frontend target missing '.wp_json_encode($campaign['automation_target_keys']??[]));
           echo "TARGET_TO_SLOT_TO_ACTIVE_CAMPAIGN_PASS\n";
-          echo wp_json_encode(['target'=>$obj['target_key'],'slot'=>$obj['slot_id'],'active'=>$campaign['active'],'placements'=>$campaign['placements']],JSON_UNESCAPED_SLASHES)."\n";
+          echo wp_json_encode(['object_target'=>$obj['target_key'],'frontend_target'=>$frontendTarget,'slot'=>$obj['slot_id'],'active'=>$campaign['active'],'placements'=>$campaign['placements']],JSON_UNESCAPED_SLASHES)."\n";
           PHP
           /tmp/wp eval-file /tmp/chosen-materialize.php --path=/tmp/wp-site
 
