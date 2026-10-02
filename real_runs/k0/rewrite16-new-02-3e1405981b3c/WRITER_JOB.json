@@ -1,0 +1,66 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzbewaesserung-faq",
+    "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+    "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+    "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:fdaf6d38322b60510157e026",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "OTTO-Ebbe&Flut Reitplatzbau",
+          "source_url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+      "topic": "Ist eine Reitplatzbewässerung von unten möglich?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzbewaesserung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-614ad400f6d39143f5b52540",
+  "job_sha256": "ff4fcd04e78edbab31c93a5dca685d3843ea89d99a78ec1428742826a9007d49"
+}
