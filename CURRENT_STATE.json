@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "THREE_REAL_ARTICLE_OPTIMIZATION_PASS_READY_FOR_NEXT_SCALE_TEST",
+  "status": "EDITORIAL_REVIEW_COMPLETE_TARGETED_RETEST_REQUIRED_BEFORE_SCALE",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
     "verified_commit": "8fa26288c82b6a9d74db5096eb6403f93dbb274f",
@@ -65,10 +65,41 @@
     ],
     "final_green_run_id": 36938796049,
     "final_green_artifact_id": 11198898150,
-    "publish_allowed": false
+    "publish_allowed": false,
+    "editorial_review": {
+      "reviewed_run_id": 36938796049,
+      "reviewed_artifact_id": 11198898150,
+      "reviewed_workload_commit": "8fa26288c82b6a9d74db5096eb6403f93dbb274f",
+      "result": "EXISTING_RULE_ENFORCEMENT_FALSE_POSITIVES_FOUND",
+      "scale_decision": "ONE_TARGETED_RETEST_BEFORE_SCALE",
+      "findings": [
+        {
+          "article": "Das Wichtigste über Reitplatzplaner für Pferde",
+          "rule": "table_policy",
+          "result": "FAIL_EDITORIAL",
+          "finding": "INCLUDE_ADDED_VALUE passed although the table largely restates its own criterion labels and does not provide enough independent decision value."
+        },
+        {
+          "article": "Frieren Pferde unter Regendecken?",
+          "rule": "h2_policy",
+          "result": "FAIL_EDITORIAL",
+          "finding": "H2 'Wärme Feuchtigkeit und Passform direkt kontrollieren' is not sufficiently natural section language."
+        },
+        {
+          "article": "So wählst du passende Schermaschinen für Pferde",
+          "rule": "h2_policy",
+          "result": "FAIL_EDITORIAL",
+          "finding": "H2 'Akku Kabel und Leistung passend abwägen' and 'Messer Gewicht und Wartung im Alltag prüfen' are not sufficiently natural section language."
+        }
+      ],
+      "new_rule_added": false,
+      "architecture_change_required": false,
+      "quality_reduction_allowed": false,
+      "k9_change_allowed": false
+    }
   },
-  "first_open_blocker": null,
-  "next_action": "EDITORIALLY_REVIEW_THE_THREE_FINAL_GREEN_REAL_ARTICLES_AND_RECORD_ONE_SCALE_DECISION",
+  "first_open_blocker": "EDITORIAL_ENFORCEMENT_FALSE_POSITIVES_TABLE_ADDED_VALUE_AND_H2_NATURALNESS",
+  "next_action": "REPAIR_ONLY_THE_EXISTING_TABLE_ADDED_VALUE_AND_H2_NATURALNESS_ENFORCEMENT_GAPS_THEN_RERUN_THE_SAME_THREE_ARTICLES_ONCE",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"
