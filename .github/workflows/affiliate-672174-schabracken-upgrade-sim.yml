@@ -1,0 +1,266 @@
+name: Schabrackendesigner automatic upgrade simulation
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-672174-schabracken-upgrade-sim.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+
+      - name: Install isolated WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Schabracken Simulation' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-template-fixture.php <<'PHP'
+          <?php
+          class Pferde_Template_Kit {
+              public static function affiliate_contract_version(){ return '1.0'; }
+              public static function design_profile(){ return 'pferde_atelier'; }
+              public static function design_profile_contract_version(){ return '1.0'; }
+              public static function affiliate_page_type($id){
+                  $p=get_post($id);
+                  return ($p && $p->post_name==='schabracken') ? 'hub2' : 'page_unclassified';
+              }
+          }
+          PHP
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.174") { exit(2); } echo "PLUGIN_672174_ACTIVE\n";' --path=/tmp/wp-site
+
+      - name: Seed realistic verified Schabrackendesigner creative
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/seed.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $o->maybe_install_creative_library_schema();
+          $page=wp_insert_post([
+              'post_type'=>'page','post_status'=>'publish','post_title'=>'Schabracken',
+              'post_name'=>'schabracken','post_content'=>'Schabracken für Pferde und Reitsport.'
+          ]);
+          if(!$page||is_wp_error($page)) throw new RuntimeException('page seed failed');
+          update_option('ppar_test_schabracken_page',absint($page),false);
+          $table=$wpdb->prefix.'ppar_creative_library';
+          $identity=hash('sha256','schabrackendesigner-fixture');
+          $payload=[
+              '_dimension_state'=>'verified',
+              '_image_sha256'=>str_repeat('a',64),
+              '_image_mime'=>'image/jpeg',
+              '_image_bytes'=>12345,
+              '_measured_at'=>time(),
+          ];
+          $data=[
+              'provider'=>'manual','partner_external_id'=>'schabrackendesigner','partner_name'=>'Schabrackendesigner',
+              'external_id'=>'schabrackendesigner-banner-1','identity_hash'=>$identity,'creative_type'=>'banner',
+              'title'=>'Schabrackendesigner','description'=>'Individuelle Schabracken gestalten','tags'=>'schabrackendesigner schabracken',
+              'image_url'=>'https://example.test/schabrackendesigner-1200x150.jpg',
+              'destination_url'=>'https://example.test/schabracken',
+              'tracking_url'=>'https://example.test/affiliate/schabrackendesigner',
+              'width'=>1200,'height'=>150,'source_status'=>'active','source_kind'=>'banner',
+              'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'fixture',
+              'review_status'=>'review','selected'=>0,'content_scope'=>'unclassified','scope_source'=>'',
+              'classified_at'=>0,'topic_status'=>'auto_verified','topic_score'=>0,'topic_targets'=>'[]',
+              'source_hash'=>hash('sha256','schabrackendesigner-source-v1'),
+              'payload'=>wp_json_encode($payload,JSON_UNESCAPED_SLASHES),
+              'first_seen'=>time(),'last_seen'=>time()
+          ];
+          $ok=$wpdb->insert($table,$data);
+          if(!$ok) throw new RuntimeException('creative insert failed '.$wpdb->last_error);
+          update_option('ppar_test_schabracken_creative_id',absint($wpdb->insert_id),false);
+          update_option('ppar_test_schabracken_identity',$identity,false);
+          echo "SEED_PASS page={$page} creative={$wpdb->insert_id}\n";
+          PHP
+          /tmp/wp eval-file /tmp/seed.php --path=/tmp/wp-site
+
+      - name: POSITIVE full materialization without any backend click
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/materialize.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $table=$wpdb->prefix.'ppar_creative_library';
+          $id=absint(get_option('ppar_test_schabracken_creative_id'));
+          $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",$id),ARRAY_A);
+          $res=$o->output_plan_creative($row,true);
+          if(absint($res['active']??0)<1) throw new RuntimeException('not active '.wp_json_encode($res));
+          $objects=$wpdb->prefix.'ppar_output_objects';
+          $identity=(string)get_option('ppar_test_schabracken_identity');
+          $obj=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$objects} WHERE creative_identity_hash=%s AND output_type='portal_banner' ORDER BY id DESC LIMIT 1",$identity),ARRAY_A);
+          if(!is_array($obj)) throw new RuntimeException('output object missing');
+          if(($obj['status']??'')!=='published') throw new RuntimeException('object not published '.wp_json_encode($obj));
+          $page=absint(get_option('ppar_test_schabracken_page'));
+          if(($obj['target_key']??'')!=='page:'.$page) throw new RuntimeException('wrong target '.wp_json_encode($obj));
+          $campaign_id=absint($obj['campaign_post_id']??0);
+          if($campaign_id<=0) throw new RuntimeException('campaign missing');
+          $m=new ReflectionMethod($o,'campaign_from_post'); $m->setAccessible(true);
+          $campaign=$m->invoke($o,get_post($campaign_id));
+          if(!is_array($campaign)||empty($campaign['active'])) throw new RuntimeException('campaign inactive '.wp_json_encode($campaign));
+          if(!in_array('page:'.$page,(array)($campaign['automation_target_keys']??[]),true)) throw new RuntimeException('campaign target key missing '.wp_json_encode($campaign));
+          if(!in_array('product_after_category_tiles',(array)($campaign['placements']??[]),true)) throw new RuntimeException('wrong placement '.wp_json_encode($campaign));
+          echo "FULL_MATERIALIZATION_AUTO_ACTIVE_PASS\n";
+          echo wp_json_encode(['plan'=>$res,'object'=>['status'=>$obj['status'],'target'=>$obj['target_key'],'slot'=>$obj['slot_id']],'campaign'=>['active'=>$campaign['active'],'targets'=>$campaign['automation_target_keys'],'placements'=>$campaign['placements']]],JSON_UNESCAPED_SLASHES)."\n";
+          PHP
+          /tmp/wp eval-file /tmp/materialize.php --path=/tmp/wp-site
+
+      - name: Reset materialized fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/reset.php <<'PHP'
+          <?php
+          global $wpdb;
+          $identity=(string)get_option('ppar_test_schabracken_identity');
+          $objects=$wpdb->prefix.'ppar_output_objects';
+          $ids=$wpdb->get_col($wpdb->prepare("SELECT campaign_post_id FROM {$objects} WHERE creative_identity_hash=%s",$identity));
+          foreach((array)$ids as $pid){ if(absint($pid)>0) wp_delete_post(absint($pid),true); }
+          $wpdb->delete($objects,['creative_identity_hash'=>$identity]);
+          delete_option('ppar_full_pool_automation_cursor_v1');
+          delete_option('ppar_full_pool_automation_version_v1');
+          wp_clear_scheduled_hook(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK);
+          wp_clear_scheduled_hook(Pferdeportal_Affiliate_Router::AUTOMATION_CRON_HOOK);
+          echo "RESET_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/reset.php --path=/tmp/wp-site
+
+      - name: NEGATIVE reproduce stale previous-version cursor skip
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/stale-cursor.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $creative_id=absint(get_option('ppar_test_schabracken_creative_id'));
+          update_option('ppar_full_pool_automation_version_v1','6.72.173',false);
+          update_option('ppar_full_pool_automation_cursor_v1',$creative_id,false);
+          $o->ensure_full_pool_automation();
+          if(!wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK)) throw new RuntimeException('worker not automatically scheduled');
+          $o->run_full_pool_automation_worker();
+          $identity=(string)get_option('ppar_test_schabracken_identity');
+          $objects=$wpdb->prefix.'ppar_output_objects';
+          $count=absint($wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$objects} WHERE creative_identity_hash=%s",$identity)));
+          $version=(string)get_option('ppar_full_pool_automation_version_v1','');
+          if($count!==0) throw new RuntimeException('negative reproduction unexpectedly materialized');
+          if($version!=='6.72.174') throw new RuntimeException('worker did not mark current version complete '.$version);
+          echo "STALE_CURSOR_SKIP_REPRODUCED_PASS\n";
+          echo "BUG_PROVEN: automatic worker can finish 6.72.174 while skipping the older Schabrackendesigner row.\n";
+          PHP
+          /tmp/wp eval-file /tmp/stale-cursor.php --path=/tmp/wp-site
+
+      - name: POSITIVE simulate exact cursor-version rootfix behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/rootfix-sim.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $creative_id=absint(get_option('ppar_test_schabracken_creative_id'));
+          update_option('ppar_full_pool_automation_version_v1','6.72.173',false);
+          update_option('ppar_full_pool_automation_cursor_v1',$creative_id,false);
+          // Proposed minimal upgrade behavior: a cursor that is not bound to
+          // the current plugin version must never be inherited.
+          $completed=(string)get_option('ppar_full_pool_automation_version_v1','');
+          if($completed!==Pferdeportal_Affiliate_Router::VERSION){
+              delete_option('ppar_full_pool_automation_cursor_v1');
+          }
+          $o->run_full_pool_automation_worker();
+          $identity=(string)get_option('ppar_test_schabracken_identity');
+          $objects=$wpdb->prefix.'ppar_output_objects';
+          $obj=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$objects} WHERE creative_identity_hash=%s AND output_type='portal_banner' ORDER BY id DESC LIMIT 1",$identity),ARRAY_A);
+          if(!is_array($obj)||($obj['status']??'')!=='published') throw new RuntimeException('rootfix simulation did not publish '.wp_json_encode($obj));
+          $m=new ReflectionMethod($o,'campaign_from_post');$m->setAccessible(true);
+          $campaign=$m->invoke($o,get_post(absint($obj['campaign_post_id']??0)));
+          if(!is_array($campaign)||empty($campaign['active'])) throw new RuntimeException('rootfix campaign inactive');
+          echo "CURSOR_RESET_ROOTFIX_MATERIALIZES_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/rootfix-sim.php --path=/tmp/wp-site
+
+      - name: NEGATIVE inactive, bad-format and veto remain blocked
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/negative-contracts.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $table=$wpdb->prefix.'ppar_creative_library';
+          $identity=(string)get_option('ppar_test_schabracken_identity');
+          $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash=%s",$identity),ARRAY_A);
+          if(!is_array($row)) throw new RuntimeException('row missing');
+
+          $inactive=$row; $inactive['availability_state']='inactive';
+          $r=$o->output_plan_creative($inactive,true);
+          if(absint($r['active']??0)!==0) throw new RuntimeException('inactive fail-open '.wp_json_encode($r));
+
+          $bad=$row; $bad['identity_hash']=hash('sha256','bad-format'); $bad['width']=300; $bad['height']=300;
+          $r=$o->output_plan_creative($bad,true);
+          if(absint($r['active']??0)!==0) throw new RuntimeException('bad format fail-open '.wp_json_encode($r));
+
+          $portal=null;
+          foreach($o->output_portal_registry() as $p){ if(($p['adapter']??'')==='wordpress_local'){ $portal=$p; break; } }
+          if(!$portal) throw new RuntimeException('portal missing');
+          $veto=$row; $veto['identity_hash']=hash('sha256','veto-fixture');
+          $saved=$o->output_set_portal_decision((string)$portal['key'],$veto['identity_hash'],'veto','simulation veto',[]);
+          if(is_wp_error($saved)) throw new RuntimeException($saved->get_error_message());
+          $r=$o->output_plan_creative($veto,true);
+          if(absint($r['active']??0)!==0) throw new RuntimeException('veto fail-open '.wp_json_encode($r));
+
+          echo "NEGATIVE_CONTRACTS_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/negative-contracts.php --path=/tmp/wp-site
+
+      - name: Static no-performance-rollback check
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F 'category_product_shared_rank_base_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php >/dev/null
+          grep -F 'select_category_product_campaign_fast_v672171' release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php >/dev/null
+          grep -F 'automation_exact_target_rank_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php >/dev/null
+          grep -F 'ebay_product_cohort_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php >/dev/null
+          grep -F 'multiprovider_exact_gtin_pool_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-idealo.php >/dev/null
+          echo "PERFORMANCE_HARDLOCKS_PRESENT_PASS"
