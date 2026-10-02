@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "magnetfelddecken-faq",
+      "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+      "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+      "title": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "9e0d35d3610c4c6b81ba6aa49c318e4abf57635b8c69592c69be000026ec8fb8"
+}
