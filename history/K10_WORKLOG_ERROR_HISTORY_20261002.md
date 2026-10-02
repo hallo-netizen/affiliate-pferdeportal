@@ -867,3 +867,71 @@ Begleitprüfungen:
 Die frühere Aussage in diesem Dokument, `article_id` solle im WordPress-Artikelrow vollständig entfallen, ist **superseded und falsch**.
 Gültig ist ausschließlich:
 **article_id ist Pflicht und muss aus der bestehenden kanonischen PPM-Registry zum plan_slot aufgelöst werden.**
+
+
+## K10 Frontend-HTML-/Exportfehler grundsätzlich geschlossen – 2026-10-02
+
+### Befund
+Die realen K10-WordPress-Dateien enthielten als Artikelwurzel nur `<article>`.
+Der bewährte K9/System4-Designvertrag verlangt dagegen:
+`<article class="ppm-generated ppm-type-<artikeltyp>" data-article-type="<Artikeltyp>">`.
+
+Der historische System4-Design-Guard behandelt fehlende `ppm-generated`-, Artikeltyp-Klasse und `data-article-type` ausdrücklich als Designfehler.
+Das erklärt die Frontend-Abweichung plausibel und schließt einen K10-HTML-Drift nachweislich.
+
+### Zusätzliche Prüfung
+K10 exportierte keine aktiven HTML-Befehle:
+- kein `<style>`;
+- kein `<script>`;
+- kein `<iframe>`;
+- kein `<form>`;
+- kein inline `style=`;
+- kein Eventhandler;
+- kein `javascript:`.
+
+Preflight fügt weiterhin ausschließlich unsichtbare, faktengebundene `ppm-source-trace`-Spans ein.
+Der sichtbare Text bleibt dabei unverändert.
+
+### Grundfix
+- `engine/html_design.py`: deterministische kanonische Root-Bindung für bislang nacktes `<article>`;
+- widersprüchliche/teilweise Root-Bindungen werden nicht still repariert, sondern BLOCKED;
+- aktive/inline HTML-Befehle BLOCKED;
+- Tabellen ohne `system-129-table comparison-table` BLOCKED;
+- sichtbare Textänderung durch Designmaterialisierung BLOCKED;
+- WordPress-Exporter akzeptiert nur bereits kanonisches HTML;
+- Finalizer prüft den Designvertrag erneut;
+- `engine/wordpress_batch_export.py`: validierter Mehrartikel-Export in Originalreihenfolge des aktuellen Uploads.
+
+### Hardtests
+Selftest Run 37008844669: SUCCESS.
+PPM Inventory Run 37008844590: SUCCESS.
+
+Positiv/negativ geprüft:
+- nacktes Root wird vor den Textchecks deterministisch gebunden;
+- sichtbarer Text bleibt unverändert;
+- gültige Root-Bindung bleibt unverändert;
+- fehlende/konfliktierende Klassen BLOCKED;
+- falsches `data-article-type` BLOCKED;
+- `style/script/iframe/form/on*= /javascript:` BLOCKED;
+- falsche Tabellenklasse BLOCKED;
+- WordPress-Export mit nacktem Root BLOCKED;
+- 3er-Batch PASS;
+- falsche article_id/plan_slot-Bindung BLOCKED;
+- fehlender Batchartikel BLOCKED;
+- Identitätsdrift BLOCKED.
+
+### Reale Nachweise
+37008915898 SUCCESS — Mash FAQ.
+37008927163 SUCCESS — Sperrriemen sinnvoll FAQ.
+37008935953 SUCCESS — Sperrriemen verschnallen FAQ.
+
+Bei allen drei:
+- WordPress-Root = `ppm-generated ppm-type-faq` + `data-article-type="FAQ"`;
+- sichtbarer Text gegenüber vorherigem K10-Export unverändert;
+- restliches HTML unterhalb des Root-Tags unverändert;
+- keine aktiven HTML-Befehle;
+- echte canonical article_id;
+- article_id -> plan_slot Roundtrip PASS;
+- Body-SHA PASS;
+- READY_FOR_WORDPRESS_DRAFT_IMPORT;
+- publish_allowed=false.
