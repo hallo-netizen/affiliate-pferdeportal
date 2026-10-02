@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "GENERIC_RESEARCH_FIRST_PRODUCTION_READY_FOR_REAL_TEST",
+  "status": "GENERIC_RESEARCH_FIRST_PRODUCTION_PASS_READY_FOR_FRESH_NEIGHBOR_REAL_RUN",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "f19dda3d9f8c39b235ad6e7f56ce7dfc75fee55b",
+    "verified_commit": "b745b4063d9e27a2896f63cab99a8add04b8c118",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -296,11 +296,30 @@
         "reitplatzbewaesserung": 36991154784,
         "three_article": 36991154825
       },
-      "result": "PASS_READY_FOR_FRESH_REAL_JOB"
+      "result": "PASS_READY_FOR_FRESH_REAL_JOB",
+      "real_smoke": {
+        "workload_commit": "b745b4063d9e27a2896f63cab99a8add04b8c118",
+        "run_id": 36991872643,
+        "artifact_id": 11219549635,
+        "result": "READY_FOR_WORDPRESS_DRAFT_IMPORT",
+        "research_entry_gate": "PASS",
+        "preflight": "READY_FOR_LT68",
+        "language_tool_6_8": "PASS_0_FINDINGS",
+        "article_rules": "PASS",
+        "system_rules": "PASS",
+        "pserc": "PASS",
+        "endstempel": "PASS",
+        "wordpress_file_verify": "PASS",
+        "wordpress_slug": "ist-eine-reitplatzbewaesserung-von-unten-moeglich",
+        "hardcoded_longiergurt_slug_present": false,
+        "publish_allowed": false
+      },
+      "post_smoke_selftest_run_id": 36991872648,
+      "post_smoke_ppm_run_id": 36991872649
     }
   },
   "first_open_blocker": null,
-  "next_action": "RUN_ONE_FRESH_ARTICLE_THROUGH_GENERIC_RESEARCH_FIRST_K10_PRODUCTION_TO_VERIFIED_WORDPRESS_IMPORT",
+  "next_action": "RUN_FRESH_NEIGHBOR_CHAT_REAL_PRODUCTION_FOR_NEW_PSERC_SLOT_USING_ONLY_ATTACHED_FIVE_FIELD_INPUT_AND_K10_START_COMMAND",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"

@@ -644,3 +644,44 @@ Nachweise:
 - bestehender Dreierlauf: Run `36991154825` PASS
 - publish_allowed=false
 - K9 unverändert.
+
+
+## Generischer Produktionsweg – realer Smoke-PASS – 2026-10-02
+
+Nach dem Umbau wurde der neue generische Pfad nicht nur per Unit-/Negativtest geprüft, sondern mit einem bereits bewiesenen echten Reitplatzbewässerungs-Paket durchlaufen.
+
+Workload-Commit:
+`b745b4063d9e27a2896f63cab99a8add04b8c118`
+
+Generischer Workflow:
+`.github/workflows/k10-production-e2e.yml`
+
+Run:
+`36991872643`
+
+Artifact:
+`11219549635`
+
+Ergebnis:
+- generisches Research-Eingangsgate: PASS
+- WordPress-Kategorie live: PASS / ID 349
+- Preflight: READY_FOR_LT68
+- LanguageTool 6.8: PASS / 0 Findings
+- Artikelregeln: PASS
+- Systemregeln: PASS
+- PSERC: PASS
+- ENDSTEMPEL: PASS
+- WordPress-Dateiverifikation: PASS
+- terminal: READY_FOR_WORDPRESS_DRAFT_IMPORT
+- publish_allowed=false
+
+Zusätzlich wurde die erzeugte WordPress-Datei direkt aus dem Workflow-Artefakt kontrolliert:
+- Slug: `ist-eine-reitplatzbewaesserung-von-unten-moeglich`
+- der historische harte Longiergurt-Slug ist entfernt.
+
+Begleitchecks desselben Workload-Commits:
+- Selftest Run `36991872648`: PASS
+- PPM Run `36991872649`: PASS / 104 von 104
+- K9-Head weiterhin exakt `2cc8167fa1e31b4ffa2ff76c9819314be4b98555`.
+
+Damit ist der generische Research-first-Produktionsweg real belegt. Nächster Schritt ist ein frischer Nachbarchat mit einem neuen PSERC-Slot.
