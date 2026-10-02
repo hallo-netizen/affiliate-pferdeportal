@@ -1,0 +1,52 @@
+name: K0 portal-neutral selftest
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: K0 portal assignment positive and negative tests
+        run: |
+          python3 -m unittest tests.test_k0_portal_resolver -v
+
+      - name: Inherited K10 rule-ledger regression suite
+        run: |
+          rm -rf engine/__pycache__ tests/__pycache__
+          python3 -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: PPM 6.7.9 exact parity remains intact
+        run: |
+          python3 - <<'PY'
+          from engine.ppm_parity_guard import verify
+          r=verify()
+          assert r['status']=='PASS', r
+          assert r['legacy_rule_count']==104, r
+          assert r['repairable_content_count']==89, r
+          assert r['hard_integrity_count']==15, r
+          print('K0_PPM679_104_PARITY_PASS')
+          PY
+
+      - name: K0 current hardlocks
+        run: |
+          python3 - <<'PY'
+          import json
+          c=json.load(open('K0_CURRENT_STATE.json'))
+          g=json.load(open('K0_GOAL_CONTRACT.json'))
+          assert c['publish_allowed'] is False
+          assert c['k9_unchanged'] is True and c['k10_unchanged'] is True
+          assert g['hard_rules']['quality_reduction_allowed'] is False
+          assert g['hard_rules']['performance_regression_allowed'] is False
+          assert g['hard_rules']['portal_must_be_auto_detected'] is True
+          print('K0_HARDLOCKS_PASS')
+          PY
