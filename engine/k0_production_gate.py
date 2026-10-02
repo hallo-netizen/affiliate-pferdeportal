@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .ppm_parity_guard import verify as verify_ppm
 from .writer_contract_guard import verify_package as verify_writer_contract
+from .k0_product_property_research import ARTICLE_TYPE as PROPERTY_WINNER_TYPE, SEARCH_INTENT as PROPERTY_WINNER_INTENT, validate_packet as validate_property_packet, Blocked as PropertyResearchBlocked
 
 class Blocked(RuntimeError):
     pass
@@ -16,7 +17,7 @@ ALLOWED_TABLE_EXCEPTIONS={
     'NUANCE_LOSS',
 }
 
-# Hard stop against the K9 boilerplate contamination that turned factual FAQ
+# Hard stop against a proven invalid boilerplate family that turned factual FAQ
 # into generic purchase/decision copy. These strings are not style preferences;
 # they are fingerprints of the proven bad template family.
 FORBIDDEN_BOILERPLATE=(
@@ -43,6 +44,8 @@ INFORMATIONAL_DECISION_TERMS=(
 def _expected_intent(article_type,title):
     typ=str(article_type or '').strip()
     t=_plain(title).casefold()
+    if typ==PROPERTY_WINNER_TYPE:
+        return PROPERTY_WINNER_INTENT
     if typ=='Beratung':
         return 'DECISION_SUPPORT'
     if typ=='Vergleich':
@@ -122,6 +125,26 @@ def verify(package, portal):
 
     semantic_intent=_verify_semantic_intent(package,ident,body)
 
+    property_result=None
+    if str(ident.get('article_type') or '')==PROPERTY_WINNER_TYPE:
+        pc=package.get('production_context') if isinstance(package.get('production_context'),dict) else {}
+        try:
+            property_result=validate_property_packet(ident,pc.get('property_research'))
+        except PropertyResearchBlocked as exc:
+            raise Blocked('K0_PROPERTY_RESEARCH_BLOCKED:'+str(exc)) from exc
+        plain=_plain(body)
+        first_words=' '.join(_words(body)[:180]).casefold()
+        winner=property_result['winner']
+        winner_model=str(winner['model']).casefold()
+        if winner_model not in first_words:
+            raise Blocked('K0_PROPERTY_WINNER_DIRECT_ANSWER_MISSING:'+winner['model'])
+        winner_value=('%g' % float(winner['value'])).casefold()
+        if winner_value not in plain.casefold():
+            raise Blocked('K0_PROPERTY_WINNER_VALUE_MISSING:'+winner_value)
+        for row in property_result['candidates']:
+            if str(row['model']).casefold() not in plain.casefold():
+                raise Blocked('K0_PROPERTY_CANDIDATE_NOT_USED:'+row['model'])
+
     h2=[_plain(x) for x in re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',body)]
     if len(h2)<4 or len(h2)!=len(set(x.casefold() for x in h2)):
         raise Blocked('K0_HEADING_STRUCTURE_INVALID')
@@ -132,8 +155,8 @@ def verify(package, portal):
     table_present=bool(re.search(r'(?is)<table\b',body))
     typ=str(ident['article_type'])
     table_decision=package.get('table_decision') or {}
-    if typ=='Vergleich' and not table_present:
-        raise Blocked('K0_TABLE_REQUIRED_FOR_VERGLEICH')
+    if typ in {'Vergleich',PROPERTY_WINNER_TYPE} and not table_present:
+        raise Blocked('K0_TABLE_REQUIRED_FOR_PRODUCT_COMPARISON_TYPE')
     if typ in {'Beratung','FAQ','Pflege'} and not table_present:
         if table_decision.get('exception_code') not in ALLOWED_TABLE_EXCEPTIONS:
             raise Blocked('K0_TABLE_REQUIRED_UNLESS_DEFINED_EXCEPTION')
@@ -172,6 +195,8 @@ def verify(package, portal):
       'writer_policy_sha256':writer_metrics['policy_sha256'],
       'writer_total_words':writer_metrics['total_words'],
       'writer_conclusion_ratio':writer_metrics['conclusion_ratio'],
+      'property_research_status':'PASS' if property_result else 'NOT_REQUIRED',
+      'property_winner_product_key':property_result['winner']['product_key'] if property_result else None,
       'ppm679_status':'PASS',
       'ppm679_rule_count':104,
       'body_sha256':_sha(body),
