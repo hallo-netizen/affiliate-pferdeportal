@@ -1,0 +1,17 @@
+{
+  "contract": "K0_PORTAL_NEUTRAL_GOAL_V1",
+  "baseline": "K10_RULE_LEDGER_ARCHITECTURE_FORKED_NOT_SHARED",
+  "goal": "ONE_UPLOAD_ONE_COMMAND_AUTOMATIC_PORTAL_ASSIGNMENT_FULL_QUALITY_PIPELINE",
+  "hard_rules": {
+    "portal_must_be_auto_detected": true,
+    "portal_must_not_be_supplied_in_start_command": true,
+    "input_identity_exact_five_fields": true,
+    "language_tool_6_8_required": true,
+    "ppm_6_7_9_parity_required": true,
+    "quality_reduction_allowed": false,
+    "performance_regression_allowed": false,
+    "publish_allowed": false,
+    "k9_change_allowed": false,
+    "k10_change_allowed": false
+  }
+}
