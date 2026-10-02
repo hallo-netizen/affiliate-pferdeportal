@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "magnetfelddecken-faq",
+    "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+    "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+    "title": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "BEMER Horse Blanket / ActivoMed IMPULSELINE Professional 2.0",
+          "source_url": "https://bemergroup.com/en_AT/animal-line/Products/horse-set/horse-blanket"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+      "topic": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "magnetfelddecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
