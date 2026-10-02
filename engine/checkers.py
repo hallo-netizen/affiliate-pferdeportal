@@ -467,7 +467,10 @@ def adapter_receipts(article):
     ok=(article.get('external_results') or {}).get('LanguageTool 6.8')=='PASS'
     return [_receipt('lt68.language_zero_unresolved','lt68_adapter',article,'PASS' if ok else 'FAIL',{'external_result':(article.get('external_results') or {}).get('LanguageTool 6.8')})]
 
+def run_article_content_checks(article):
+    return structural_receipts(article)+fact_receipts(article)+editorial_receipts(article)+balance_receipts(article)+table_receipts(article)
+
 def run_article_checks(article):
-    return structural_receipts(article)+fact_receipts(article)+editorial_receipts(article)+balance_receipts(article)+table_receipts(article)+adapter_receipts(article)
+    return run_article_content_checks(article)+adapter_receipts(article)
 
 run_once=run_article_checks

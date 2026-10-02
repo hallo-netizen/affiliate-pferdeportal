@@ -5,8 +5,10 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 
 from engine.catalog_guard import validate_catalog
-from engine.checkers import run_article_checks, article_hash
-from engine.final_integrity import verify_article, verify_system, verify_package, verify_package_pre_wordpress
+from engine.checkers import run_article_checks, run_article_content_checks, article_hash, adapter_receipts
+from engine.final_integrity import verify_article, verify_article_pre_lt68, verify_system, verify_package, verify_package_pre_wordpress
+from engine.preflight import materialize_trace_bindings, preflight_article
+from engine.lt68_external import visible_text
 from engine.isolation_guard import verify as isolation_verify
 from engine.owner_guard import verify as owner_verify
 from engine.field_coverage import audit as field_audit
@@ -80,6 +82,44 @@ def package_pass_results():
     return {key:'PASS' for _,_,key in PACKAGE_RESULT_MAP}
 
 class K10Tests(unittest.TestCase):
+
+    def test_preflight_uses_exact_article_rules_before_lt68(self):
+        a=make_base()
+        prepared,receipts,report=preflight_article(a)
+        expected={r['id'] for r in hard_rules('ARTICLE') if r['id']!='lt68.language_zero_unresolved'}
+        self.assertEqual(report['status'],'READY_FOR_LT68',report)
+        self.assertEqual({r['rule_id'] for r in receipts},expected)
+        self.assertEqual(len(receipts),len(expected))
+        self.assertEqual(verify_article_pre_lt68(prepared['article_id'],article_hash(prepared),receipts)['status'],'READY_FOR_LT68')
+
+    def test_preflight_blocks_unsupported_numeric_claim_before_lt68(self):
+        a=make_base()
+        a['html']=a['html'].replace('Aufgabe Longierpeitsche Longieren A','Aufgabe Longierpeitsche Longieren 999 A',1)
+        prepared,receipts,report=preflight_article(a)
+        self.assertEqual(report['status'],'BLOCKED')
+        self.assertIn('HARD_RULE_NOT_PASS:facts.numeric_claim_supported',report['verification']['findings'])
+
+    def test_preflight_materializes_missing_conclusion_trace_without_visible_change(self):
+        a=make_base()
+        h=a['research_claims']['F5']['evidence_text_sha256']
+        marker=trace('F5','Fachquelle F5',h)
+        before=visible_text(a['html'])
+        a['html']=a['html'].replace(marker,'',1)
+        prepared,binding=materialize_trace_bindings(a)
+        self.assertEqual(visible_text(prepared['html']),before)
+        self.assertIn(marker,prepared['html'])
+        self.assertTrue(any(x['fact_id']=='F5' and x['block']=='conclusion' for x in binding['inserted']))
+        _,_,report=preflight_article(a)
+        self.assertEqual(report['status'],'READY_FOR_LT68',report)
+
+    def test_preflight_receipts_compose_with_lt68_receipt_without_content_recheck(self):
+        a=make_base()
+        prepared,receipts,report=preflight_article(a)
+        self.assertEqual(report['status'],'READY_FOR_LT68',report)
+        prepared['external_results']={'LanguageTool 6.8':'PASS'}
+        full=list(receipts)+adapter_receipts(prepared)
+        self.assertEqual(verify_article(prepared['article_id'],article_hash(prepared),full)['status'],'PASS')
+
     def test_field_inventory_is_complete(self):
         r=field_audit(); self.assertEqual(r['status'],'PASS',r); self.assertEqual(r['total'],151); self.assertEqual(r['bad'],[])
 

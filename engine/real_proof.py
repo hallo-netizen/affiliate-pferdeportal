@@ -4,8 +4,8 @@ from pathlib import Path
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
 from .core import stable, load_values, catalog_hash, values_hash
-from .checkers import run_article_checks, article_hash
-from .final_integrity import verify_article, verify_system, verify_package_pre_wordpress
+from .checkers import run_article_checks, article_hash, adapter_receipts
+from .final_integrity import verify_article, verify_article_pre_lt68, verify_system, verify_package_pre_wordpress
 from .system_guard import run_system_checks
 from .package_adapters import make_pre_wordpress_package_receipts, PACKAGE_RESULT_MAP
 
@@ -63,9 +63,9 @@ def build_wordpress(article,plan_slot):
     return {'contract':'PFERDE_ATELIER_WORDPRESS_IMPORT_V1','source':'K10_REAL_PROOF','article_count':1,'publish_allowed':False,'articles':[row]}
 
 def main():
-    if len(sys.argv)!=7:
-        raise SystemExit('usage: real_proof.py ARTICLE RESEARCH PLAN_SNAPSHOT CATEGORY_JSON LT_RESULT OUTDIR')
-    ap,rp,sp,cp,lp,outdir=map(Path,sys.argv[1:])
+    if len(sys.argv) not in (7,8):
+        raise SystemExit('usage: real_proof.py ARTICLE RESEARCH PLAN_SNAPSHOT CATEGORY_JSON LT_RESULT OUTDIR [PRE_LT68_RECEIPTS]')
+    ap,rp,sp,cp,lp,outdir=map(Path,sys.argv[1:7]); pre_receipts_path=Path(sys.argv[7]) if len(sys.argv)==8 else None
     outdir.mkdir(parents=True,exist_ok=True)
     article=load(ap); research=load(rp); snapshot=load(sp); category=load(cp); lt=load(lp)
     validate_research(article,research)
@@ -74,7 +74,15 @@ def main():
     if lt.get('status')!='PASS' or lt.get('engine')!='LanguageTool 6.8 / Bestand 43' or lt.get('html_sha256')!=sha_text(article['html']): raise Blocked('LT68_REAL_RESULT_INVALID')
     article['external_results']={'LanguageTool 6.8':'PASS'}
     ah=article_hash(article)
-    arec=run_article_checks(article); aver=verify_article(article['article_id'],ah,arec)
+    if pre_receipts_path is not None:
+        pre_receipts=load(pre_receipts_path)
+        if not isinstance(pre_receipts,list): raise Blocked('PREFLIGHT_RECEIPTS_NOT_LIST')
+        prever=verify_article_pre_lt68(article['article_id'],ah,pre_receipts)
+        if prever['status']!='READY_FOR_LT68': raise Blocked('PREFLIGHT_RECEIPTS_INVALID:'+json.dumps(prever['findings'],ensure_ascii=False))
+        arec=list(pre_receipts)+adapter_receipts(article)
+    else:
+        arec=run_article_checks(article)
+    aver=verify_article(article['article_id'],ah,arec)
     sid,ssha,srec=run_system_checks(); sver=verify_system(sid,ssha,srec)
     if aver['status']!='PASS': raise Blocked('ARTICLE_RULES_NOT_PASS:'+json.dumps(aver['findings'],ensure_ascii=False))
     if sver['status']!='PASS': raise Blocked('SYSTEM_RULES_NOT_PASS:'+json.dumps(sver['findings'],ensure_ascii=False))

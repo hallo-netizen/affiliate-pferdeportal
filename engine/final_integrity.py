@@ -42,6 +42,17 @@ def _verify_required(scope, subject_id, subject_sha256, receipts, required_rows)
 def verify_scope(scope, subject_id, subject_sha256, receipts):
     return _verify_required(scope,subject_id,subject_sha256,receipts,hard_rules(scope))
 
+ARTICLE_LT68_RULE_ID='lt68.language_zero_unresolved'
+
+def verify_article_pre_lt68(article_id, article_sha256, receipts):
+    rows=[r for r in hard_rules('ARTICLE') if r['id']!=ARTICLE_LT68_RULE_ID]
+    out=_verify_required('ARTICLE',article_id,article_sha256,receipts,rows)
+    out['required_receipt_count']=len(rows)
+    out['pending_rule_ids']=[ARTICLE_LT68_RULE_ID]
+    if out['status']=='PASS':
+        out['status']='READY_FOR_LT68'
+    return out
+
 def verify_article(article_id, article_sha256, receipts):
     return verify_scope('ARTICLE',article_id,article_sha256,receipts)
 
