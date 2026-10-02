@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "kappzaum-faq",
+    "plan_slot": "160c801f6e1b6c99065f287083a6b5fbc93a545764e04e7c833531904d77bb5d",
+    "target_keyword": "Kann man mit Kappzaum spazieren gehen",
+    "title": "Kann man mit Kappzaum spazieren gehen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+          "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Kann man mit Kappzaum spazieren gehen",
+      "topic": "Kann man mit Kappzaum spazieren gehen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "kappzaum-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
