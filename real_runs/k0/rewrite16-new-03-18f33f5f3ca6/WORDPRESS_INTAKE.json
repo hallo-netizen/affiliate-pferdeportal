@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "kappzaum-faq",
+      "plan_slot": "160c801f6e1b6c99065f287083a6b5fbc93a545764e04e7c833531904d77bb5d",
+      "target_keyword": "Kann man mit Kappzaum spazieren gehen",
+      "title": "Kann man mit Kappzaum spazieren gehen?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "18f33f5f3ca6f1f63231e296c5a26f7ff5351e8af891969767c4d37ba4ef5a57"
+}
