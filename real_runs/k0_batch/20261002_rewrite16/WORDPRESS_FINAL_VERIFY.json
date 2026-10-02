@@ -1,0 +1,18 @@
+{
+  "contract": "K0_REWRITE16_WORDPRESS_BATCH_VERIFY_V1",
+  "status": "PASS",
+  "batch_sha256": "e59b7179e52a2379ec2b88a8d7a77692311883e4c13b9d27a651c66a00906ecd",
+  "wordpress_json_sha256": "fd2aa1d2dc0fe1a993dd00a85be5f52cafa212e8525b8d0f5874fec9b2580e60",
+  "article_count": 16,
+  "article_id_unique_count": 16,
+  "plan_slot_unique_count": 16,
+  "canonical_article_id_roundtrip": "PASS",
+  "body_hash_binding": "PASS",
+  "intake_identity_binding": "PASS",
+  "order_binding": "PASS",
+  "plugin_version": "0.28.30",
+  "plugin_build": "0.28.30-pste-v5-binding-safe",
+  "direct_wordpress_upload_ready": true,
+  "old_invalidated_export_reused": false,
+  "publish_allowed": false
+}
