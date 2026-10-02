@@ -1,14 +1,10 @@
 name: K10 first real E2E article
 
 on:
-  push:
-    branches: [konzept10-rule-ledger-20261001]
-    paths:
-      - 'real_runs/20261001_longiergurt_anlegen/**'
-      - 'engine/lt68_external.py'
-      - 'engine/real_proof.py'
-      - '.github/workflows/k10-first-real-e2e.yml'
   workflow_dispatch:
+
+# Historical snapshot from before the mandatory optional-table decision rule.
+# It is retained as evidence only and is not a Current regression gate.
 
 permissions:
   contents: read
