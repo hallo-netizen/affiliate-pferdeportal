@@ -5,6 +5,7 @@ on:
     branches: [konzept0-portal-neutral-20261002]
     paths:
       - 'tests/fixtures/k0_hobby_discgolf.html'
+      - 'tests/fixtures/k0_hobby_discgolf_article.json'
       - 'tests/fixtures/K0_HOBBY_TEST_DISCGOLF_INPUT.json'
       - '.github/workflows/k0-hobby-acceptance.yml'
       - 'engine/k0_portal_resolver.py'
