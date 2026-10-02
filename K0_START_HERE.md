@@ -1,5 +1,17 @@
 # K0 START
 
+## Zuständige Current-Autorität
+
+Diese Datei ist **nur Navigation**.
+
+Einzige aktuelle K0-Status-/Blocker-/NEXT-ACTION-Autorität:
+`K0_CURRENT_STATE.json`
+
+Pflichtweg für Status-/Fortsetzungsfragen:
+`K0_START_HERE.md -> K0_CURRENT_STATE.json -> Frischecheck -> genau eine NEXT ACTION`
+
+Keine andere K0-Datei, Evidence, History, Run-Datei oder Übergabe darf als CURRENT verwendet werden.
+
 ## Zentraler Befehl
 
 `K0:start`
