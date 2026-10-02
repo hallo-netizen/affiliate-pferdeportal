@@ -1,0 +1,58 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "tuev-beim-pferdeanhaenger-faq",
+    "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+    "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+    "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+  },
+  "planning_binding": {
+    "article_type": "FAQ",
+    "category": "tuev-beim-pferdeanhaenger-faq",
+    "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+    "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+    "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+  },
+  "article_id": "article:2ff55b21f209f7d67e0d6b86",
+  "article_type": "FAQ",
+  "title": "Wie teuer ist der TÜV beim Pferdeanhänger?",
+  "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+  "category": "tuev-beim-pferdeanhaenger-faq",
+  "html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n\n<p>Für die Hauptuntersuchung eines Pferdeanhängers gibt es keinen einzigen bundesweit identischen Preis. Die Gebühr hängt unter anderem von zulässiger Gesamtmasse, Bundesland und Prüforganisation ab. Deshalb ist die aktuelle Preisliste von TÜV, DEKRA, GTÜ oder einer anderen anerkannten Prüforganisation am eigenen Wohnort die verlässlichste Quelle für den konkreten Betrag.</p>\n\n<h2>Warum der Preis nicht überall gleich ist</h2>\n<p>Prüforganisationen veröffentlichen regionale Gebührenlisten. Anhänger werden zudem nach Gewichtsklassen beziehungsweise Fahrzeugart eingeordnet. Ein kleiner ungebremster Anhänger kann deshalb anders bepreist sein als ein größerer gebremster Pferdeanhänger. Auch Änderungen der Gebühren im Laufe der Zeit machen feste Preisangaben schnell veraltet.</p>\n\n<h2>Das zulässige Gesamtgewicht ist wichtig</h2>\n<p>Für die Gebühren zählt nicht, wie schwer der Anhänger an diesem Tag tatsächlich beladen ist, sondern welche Fahrzeugklasse und zulässige Gesamtmasse in den Papieren stehen. Bei Pferdeanhängern liegt diese je nach Modell deutlich höher als bei kleinen Freizeittrailern. Wer den Preis vorab wissen möchte, sollte deshalb die Zulassungsbescheinigung zur Hand haben und genau nach der passenden Anhängerklasse fragen.</p>\n\n<h2>Nachprüfung kann zusätzliche Kosten verursachen</h2>\n<p>Werden erhebliche Mängel festgestellt, muss der Anhänger nach der Reparatur erneut vorgeführt werden. Für diese Nachprüfung können weitere Gebühren anfallen. Es lohnt sich daher, leicht erkennbare Mängel vor dem Termin zu beheben: defekte Leuchten, beschädigte Reifen, schwergängige Bremsen oder offensichtliche Schäden an Kupplung und Aufbau sollten nicht erst bei der HU auffallen.</p>\n\n<h2>Reparaturen sind nicht Teil der Prüfgebühr</h2>\n<p>Die HU-Gebühr deckt die Untersuchung ab, nicht notwendige Reparaturen. Wenn beispielsweise Reifen, Bremsenteile oder Beleuchtung erneuert werden müssen, kommen diese Kosten separat hinzu. Gerade bei älteren Pferdeanhängern kann die technische Vorbereitung deshalb teurer sein als die Prüfung selbst. Eine kurze Kontrolle in einer Werkstatt kann sinnvoll sein, wenn der Zustand unklar ist.</p>\n\n<h2>Welche Kostenarten auftreten können</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Posten</th><th>Wann</th><th>Abhängig von</th></tr></thead><tbody>\n<tr><td>HU</td><td>Regulär</td><td>Gewichtsklasse</td></tr>\n<tr><td>Nachprüfung</td><td>Bei Mängeln</td><td>Prüfumfang</td></tr>\n<tr><td>Reparatur</td><td>Bei Defekt</td><td>Schaden</td></tr>\n<tr><td>Werkstattcheck</td><td>Optional</td><td>Betrieb</td></tr>\n</tbody></table>\n<p>Nur die eigentliche HU und eine mögliche Nachprüfung sind Gebühren der Prüforganisation; Reparaturen werden separat berechnet.</p>\n\n<h2>So bekommst du vorab den exakten Preis</h2>\n<p>Suche die aktuelle Gebührenübersicht der gewünschten Prüforganisation für dein Bundesland oder rufe die Prüfstelle an. Halte die zulässige Gesamtmasse des Anhängers bereit. Damit lässt sich der Betrag eindeutig zuordnen. Online genannte Pauschalpreise ohne Datum, Region oder Gewichtsklasse sollten nur als grobe Orientierung verstanden werden.</p>\n\n<h2>Fazit</h2>\n<p>Wie teuer der TÜV beim Pferdeanhänger ist, hängt von Region, Prüforganisation und Fahrzeugklasse ab. Ein fester deutschlandweiter Betrag wäre deshalb irreführend. Am zuverlässigsten ist die aktuelle Gebührenliste der gewählten Prüfstelle. Zusätzlich solltest du mögliche Kosten für Nachprüfung oder Reparaturen einplanen, wenn der Anhänger technische Mängel hat.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": null,
+    "rationale": "Die möglichen Kostenarten lassen sich sinnvoll trennen, ohne einen veraltbaren Pauschalpreis vorzutäuschen."
+  },
+  "lt_authoritative_terms": [
+    "TÜV",
+    "Hauptuntersuchung",
+    "DEKRA",
+    "GTÜ",
+    "ADAC"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "tuev-beim-pferdeanhaenger-faq",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://www.adac.de/rund-ums-fahrzeug/reparatur-pflege-wartung/hu-und-au/tuev-kosten/",
+      "source_title": "TÜV-Kosten: Preise und Infos zur Hauptuntersuchung – ADAC",
+      "evidence_text": "Die Kosten der Hauptuntersuchung für Anhänger sind nicht bundesweit als ein einziger Festbetrag anzugeben. Sie hängen unter anderem von Fahrzeugart, zulässiger Gesamtmasse, Bundesland und Prüforganisation ab; deshalb sollte für einen Pferdeanhänger die aktuelle Preisübersicht der gewählten Prüfstelle herangezogen werden.",
+      "evidence_text_sha256": "da49745882c9a6fef747ce4be76dd9d2dcb3b78db016abb57d294bd2fb4aa302",
+      "statement": "HU-Kosten für Anhänger variieren nach Fahrzeugart, Gesamtmasse, Bundesland und Prüforganisation.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
