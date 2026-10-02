@@ -129,3 +129,22 @@ Ziel ist besonders **Lane B**:
 vorhandene Evidenz reicht, und nur bestehende automatische Zuordnung/Titel/Reentry muss erneut sauber greifen.
 
 Keine neue Architektur, kein neues Themenlager, kein pauschales Freigeben.
+
+
+## DELTA 2026-10-02 – ROOTCAUSE BELEGT / TITELFUNDS ERSCHLOSSEN
+
+Realer Live-Readback unter PSTE 0.57.26:
+- Bestandsaufbereitung COMPLETE;
+- 695 neue Titelkandidaten aus vorhandenem Material;
+- 8 davon zusätzlich für PSERC prüfbar;
+- 36 vollständig aufbereitet;
+- keine Provider-Abfrage;
+- Completion: `EXISTING_TITLE_CANDIDATES_GENERATED_NO_PROVIDER_CALL`.
+
+Belegter Rootcause:
+Ein vorhandenes aber leeres `editorial_title` konnte im Kontextpfad den Fallback auf vorhandene Query-Felder verhindern. Dadurch entstand `PSTE_CONTEXT_QUERY_MISSING` trotz gespeichertem Recherchematerial. 0.57.26 repariert diesen Fallback und nutzt vorhandene Fragen/redaktionelle Formulierungen als nicht-produktionsautorisierende Titelkandidaten.
+
+UI-Nachbefund:
+Wenn die Seite im RUNNING-Zustand gerendert wurde und der AJAX-Status später COMPLETE wird, wird nur der Statuskasten aktualisiert. COMPLETE-Aktionsformulare werden nicht nachträglich in den DOM eingefügt. Ein frischer Seitenrender bei COMPLETE zeigt dagegen den Exportbutton. Lokale Positiv-/Negativsimulation reproduziert beide Wege.
+
+Aktuelle NEXT ACTION steht ausschließlich in TEXT/CURRENT_STATE.md.
