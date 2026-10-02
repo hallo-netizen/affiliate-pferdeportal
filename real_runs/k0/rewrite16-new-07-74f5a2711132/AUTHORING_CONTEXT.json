@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "kappzaum-beratung",
+    "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+    "target_keyword": "Kappzaum für Pferde",
+    "title": "So findest du einen passenden Kappzaum für dein Pferd"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+          "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Kappzaum für Pferde",
+      "topic": "So findest du einen passenden Kappzaum für dein Pferd",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "kappzaum-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
