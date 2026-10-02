@@ -193,3 +193,48 @@ K9 blieb auf `2cc8167fa1e31b4ffa2ff76c9819314be4b98555` unverändert.
 - Hobbyraum: nicht verwendet.
 - Paul/Worker/Parallelbranch außerhalb des getrennten K10-Branches: nicht betroffen.
 - Pluginentwicklung: nicht betroffen.
+
+
+## Redaktionelle Prüfung der drei final grünen Artikel – 2026-10-02
+
+**Geprüfte Grundlage:** Workflow Run `36938796049`, Artifact `11198898150` (`k10-three-article-optimization`), Workload-Commit `8fa26288c82b6a9d74db5096eb6403f93dbb274f`.
+
+Die drei finalen Endfassungen wurden als normale Artikel gelesen, nicht nur über die Maschinenprotokolle bewertet.
+
+### Reitplatzplaner
+
+- Einstieg: redaktionell PASS.
+- H2: redaktionell PASS.
+- Lesbarkeit und praktischer Nutzwert: insgesamt PASS.
+- Tabellenentscheidung: **FAIL gegen die bereits geltende Tabellenregel**.
+- Begründung: Die Tabelle wurde als `INCLUDE_ADDED_VALUE` freigegeben, liefert aber in mehreren Zeilen überwiegend tautologische Wiederholungen, z. B. `Walzen | Einebnung | Einebnung prüfen`, `Hufschlagräumer | Randpflege | Randpflege prüfen` und `Arbeitsbreite | Arbeitsbreite nutzen | Zugfahrzeug prüfen`. Damit ist der behauptete eigenständige Informations-/Entscheidungsmehrwert nicht ausreichend belegt.
+- Bewertung: kein neuer Tabellenstandard; vorhandene Mehrwertregel wurde zu schwach durchgesetzt.
+
+### Regendecken
+
+- Einstieg: redaktionell PASS.
+- Tabellenentscheidung `OMIT_NO_ADDED_VALUE`: redaktionell PASS.
+- Lesbarkeit und praktischer Nutzwert: insgesamt PASS.
+- H2-Naturalness: **Befund gegen die bereits geltende H2-Regel** bei `Wärme Feuchtigkeit und Passform direkt kontrollieren`. Die Aufzählung ist sprachlich nicht natürlich genug.
+- Bewertung: keine neue Stilregel; vorhandene Regel `NATURAL_CONCRETE_SECTION_LANGUAGE_MUST_BE_HARD_CHECKED` hat diesen Fall nicht zuverlässig abgefangen.
+
+### Schermaschinen
+
+- Einstieg: redaktionell PASS.
+- Tabellenentscheidung `OMIT_NO_ADDED_VALUE`: redaktionell PASS.
+- Lesbarkeit und praktischer Nutzwert: insgesamt PASS.
+- H2-Naturalness: **Befund gegen die bereits geltende H2-Regel** bei `Akku Kabel und Leistung passend abwägen` sowie `Messer Gewicht und Wartung im Alltag prüfen`.
+- Bewertung: keine neue Stilregel; vorhandene Naturalness-Prüfung ist für solche Aufzählungsüberschriften zu schwach.
+
+### Scale-Entscheidung
+
+**Entscheidung: `ONE_TARGETED_RETEST_BEFORE_SCALE`.**
+
+Kein größerer K10-Scale-Batch vor einem gezielten Retest derselben drei Artikel.
+
+Grund:
+1. Ein als Mehrwert freigegebenes Tabellenartefakt erfüllt die bestehende Mehrwertregel redaktionell nicht zuverlässig.
+2. Mehrere H2 bestehen die Maschine, obwohl sie die bereits geltende Naturalness-Regel redaktionell nicht sauber erfüllen.
+3. Die Grundarchitektur, LT 6.8, PSERC, ENDSTEMPEL und WordPress-Dateiverifikation bleiben grün; es gibt keinen Grund für Architekturumbau oder Qualitätsabsenkung.
+
+**Keine neue Regel beschlossen. Keine Qualitätsgrenze geändert. Kein K9-Eingriff.**
