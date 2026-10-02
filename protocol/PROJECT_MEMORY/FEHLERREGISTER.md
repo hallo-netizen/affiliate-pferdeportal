@@ -164,7 +164,7 @@ Dieses Register kopiert keine dynamischen Fortschrittswerte und keine zweite NEX
 ## PSTE-EXISTING-POTENTIAL-20261001
 
 Bereich: PFERDE ATELIER / TEXT / PSTE / THEMENVERWERTUNG
-Status: AKTIV / niedrige Konversion des gespeicherten Potenzials noch nicht auf erste Verluststufe lokalisiert
+Status: ROOTCAUSE TEILWEISE BEHOBEN / 695 TITELKANDIDATEN LIVE ERZEUGT / EXPORT-AKTION NACH AJAX-COMPLETE ERST NACH RELOAD SICHTBAR
 
 Aktuelle Status-/NEXT-ACTION-Autorität:
 `PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`
@@ -172,5 +172,5 @@ Aktuelle Status-/NEXT-ACTION-Autorität:
 Autoritative Fehler-/Arbeitsquelle:
 `protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`
 
-Dieses Register kopiert keine dynamischen Zahlen und keine zweite NEXT ACTION.
+Dieses Register kopiert keine zweite NEXT ACTION.
 
