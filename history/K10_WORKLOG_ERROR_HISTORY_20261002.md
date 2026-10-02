@@ -1062,3 +1062,16 @@ Geprüfter Arbeitsstand: 1ec9487b99be77996be70e7ed24c177718607200
 - NEXT ACTION: normaler K10-Produktionsbetrieb mit Tabelle als Standard und den vier definierten Ausnahmen
 - publish_allowed=false
 - K0/K9 in dieser Nachholung nicht verändert
+
+
+## Abschlussnachholung – Writer-Provenance-Hardlock nicht kanonisch genug
+
+Beim Abschlusscheck wurde ein offener K10-Fehler festgestellt.
+
+- `.github/workflows/k10-production-e2e.yml` akzeptiert weiterhin ein bereits fertiges `ARTICLE_INPUT.json`.
+- Der Workflow erzeugt den Writer-Nachweis anschließend selbst mit `writer_contract_guard stamp`.
+- Damit beweist der Nachweis nicht, dass der Text aus einem echten kanonischen Writer-Ausgang stammt.
+- Die früheren Runs 37039691150 und 37039691069 bleiben technische Tests ihrer damaligen Prüflogik, gelten aber nicht mehr als Herkunftsbeweis.
+- K10 ist deshalb bis zur Reparatur dieses Texteingangs oder zum Rückbau des fehlerhaften Provenance-Hardlocks BLOCKED.
+- Qualitätsregeln, LT 6.8, PPM 6.7.9, PSERC und WordPress-Verträge werden dadurch nicht abgesenkt.
+- publish_allowed=false.
