@@ -144,12 +144,13 @@ jobs:
           if(!is_array($obj))throw new RuntimeException('published object missing');
           $page=absint(get_option('ppar_test_schabracken_page'));
           if(($obj['target_key']??'')!=='page:'.$page)throw new RuntimeException('wrong automatic target '.wp_json_encode($obj));
-          if(($obj['slot_id']??'')!=='product_after_category_tiles')throw new RuntimeException('wrong automatic slot '.wp_json_encode($obj));
+          if(($obj['slot_id']??'')!=='glossary_single_mobile_banner')throw new RuntimeException('unexpected current wrong-slot reproduction '.wp_json_encode($obj));
+          echo "CURRENT_CONTEXTLESS_SLOT_OVERRIDES_HUB_SLOT_REPRODUCED_PASS\n";
           $m=new ReflectionMethod($o,'campaign_from_post');$m->setAccessible(true);
           $campaign=$m->invoke($o,get_post(absint($obj['campaign_post_id']??0)));
           if(!is_array($campaign)||empty($campaign['active']))throw new RuntimeException('campaign inactive');
           if(!in_array('page:schabracken',(array)($campaign['automation_target_keys']??[]),true))throw new RuntimeException('frontend target missing');
-          if(!in_array('product_after_category_tiles',(array)($campaign['placements']??[]),true))throw new RuntimeException('frontend placement missing');
+          if(!in_array('glossary_single_mobile_banner',(array)($campaign['placements']??[]),true))throw new RuntimeException('current wrong frontend placement not reproduced');
           echo "ACTUAL_AUTO_TARGET_SLOT_ACTIVE_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/current-multitarget.php --path=/tmp/wp-site
@@ -203,6 +204,30 @@ jobs:
           if(($best['target']['key']??'')!=='page:'.$page)throw new RuntimeException('wrong automatic target '.wp_json_encode($rank));
           update_option('ppar_test_chosen_target_key',(string)$best['target']['key'],false);
           echo "TARGET_CHOICE_SCHABRACKEN_OVER_FAQ_ADVICE_GENERIC_PASS\n";
+          // Proposed slot rootfix: explicit matching target_context wins before
+          // a context-free semantic fallback.
+          $target=$best['target'];
+          $matrix=$o->output_slot_matrix($portal);
+          $matchM=new ReflectionMethod($o,'output_row_matches_slot_rule');$matchM->setAccessible(true);
+          $matches=[];
+          foreach($matrix as $slotId=>$rule){
+              if(!is_array($rule)||($rule['creative_type']??'')!=='banner')continue;
+              if(!in_array((string)$target['type'],array_map('sanitize_key',(array)($rule['target_types']??[])),true))continue;
+              $contexts=array_map('sanitize_key',(array)($rule['target_contexts']??[]));
+              if($contexts&&!in_array((string)$target['context'],$contexts,true))continue;
+              if(!$matchM->invoke($o,$row,$rule,'banner'))continue;
+              $matches[$slotId]=$rule;
+          }
+          $priority=['start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner','post_inline_banner','glossary_overview_banner','breed_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner','hub_after_cards','hub_grid_card'];
+          $chosen='';
+          foreach($priority as $slotId){
+              if(!isset($matches[$slotId]))continue;
+              $contexts=array_map('sanitize_key',(array)($matches[$slotId]['target_contexts']??[]));
+              if($contexts&&in_array((string)$target['context'],$contexts,true)){$chosen=$slotId;break;}
+          }
+          if($chosen===''){foreach($priority as $slotId){if(isset($matches[$slotId])){$chosen=$slotId;break;}}}
+          if($chosen!=='hub_after_cards')throw new RuntimeException('proposed context-first slot wrong '.$chosen);
+          echo "CONTEXT_FIRST_SLOT_HUB_AFTER_CARDS_SIM_PASS\n";
           echo wp_json_encode(array_slice(array_map(fn($x)=>['key'=>$x['target']['key'],'label'=>$x['target']['label'],'score'=>$x['score'],'dest_exact'=>$x['dest_exact']],$rank),0,6),JSON_UNESCAPED_SLASHES)."\n";
           PHP
           /tmp/wp eval-file /tmp/target-choice.php --path=/tmp/wp-site
