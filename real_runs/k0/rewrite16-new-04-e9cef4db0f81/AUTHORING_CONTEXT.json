@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "longiergurte-beratung",
+    "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+    "target_keyword": "Longiergurte mit Bogen",
+    "title": "Longiergurte mit Bogen im Ratgeber"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Longiergurt – Equimero",
+          "source_url": "https://www.equimero.de/produkt/longiergurt/"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Longiergurte mit Bogen",
+      "topic": "Longiergurte mit Bogen im Ratgeber",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
