@@ -82,5 +82,6 @@
   "k9_unchanged": true,
   "k10_dependency": false,
   "k10_separate_current_ref": "konzept10-rule-ledger-20261001:CURRENT_STATE.json",
-  "publish_allowed": false
+  "publish_allowed": false,
+  "k10_unchanged": true
 }
