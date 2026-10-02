@@ -1,0 +1,66 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "magnetfelddecken-faq",
+    "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+    "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+    "title": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:2eae4c2fbe4dd6b1db6bada2",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "BEMER Horse Blanket / ActivoMed IMPULSELINE Professional 2.0",
+          "source_url": "https://bemergroup.com/en_AT/animal-line/Products/horse-set/horse-blanket"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+      "topic": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "magnetfelddecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-75cb861f878d71558e06ba94",
+  "job_sha256": "197ee05a1b00501a90a69bc82b08b6aba34e1ec76525cdd9f534b996427e5eb6"
+}
