@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "EDITORIAL_REVIEW_COMPLETE_TARGETED_RETEST_REQUIRED_BEFORE_SCALE",
+  "status": "TARGETED_EDITORIAL_RETEST_PASS_READY_FOR_SMALL_SCALE_BATCH",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "8fa26288c82b6a9d74db5096eb6403f93dbb274f",
+    "verified_commit": "6e0b7be9f28adf31079d8e1cdd370e89a5e8eff7",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -53,18 +53,20 @@
     ],
     "timing": {
       "article_count": 3,
-      "machine_total_ms_sum": 34191,
-      "machine_total_ms_mean": 11397,
-      "note": "Includes category binding, LanguageTool 6.8 and K10 proof/finalization to verified WordPress import file."
+      "machine_total_ms_sum": 43935,
+      "machine_total_ms_mean": 14645,
+      "note": "Targeted editorial retest; includes category binding, LanguageTool 6.8 and K10 proof/finalization to verified WordPress import file."
     },
     "optimization_findings_closed": [
       "Incorrect K10-only auxiliary 750-word padding hardlock removed; original quality limits unchanged.",
       "Legitimate source titles containing the word Test no longer trigger placeholder-source block; true placeholder sources remain blocked.",
       "Intro orientation sentence enforced for all article types.",
-      "Optional table choice must be explicitly documented as added value or no added value."
+      "Optional table choice must be explicitly documented as added value or no added value.",
+      "Editorial false positive closed: table INCLUDE_ADDED_VALUE is no longer sufficient when most action cells are tautological.",
+      "Editorial false positive closed: unpunctuated noun-enumeration H2 are blocked by the existing natural-concrete H2 owner."
     ],
-    "final_green_run_id": 36938796049,
-    "final_green_artifact_id": 11198898150,
+    "final_green_run_id": 36978375237,
+    "final_green_artifact_id": 11214760852,
     "publish_allowed": false,
     "editorial_review": {
       "reviewed_run_id": 36938796049,
@@ -96,10 +98,30 @@
       "architecture_change_required": false,
       "quality_reduction_allowed": false,
       "k9_change_allowed": false
+    },
+    "targeted_editorial_retest": {
+      "repair_commit": "a7a910634e41b9031edb807dbd4fbca54d1e1d20",
+      "final_test_commit": "6e0b7be9f28adf31079d8e1cdd370e89a5e8eff7",
+      "three_article_run_id": 36978375237,
+      "three_article_artifact_id": 11214760852,
+      "three_article_result": "PASS",
+      "isolated_selftest_run_id": 36978562825,
+      "isolated_selftest_result": "PASS",
+      "ppm_inventory_run_id": 36978562813,
+      "ppm_inventory_result": "104/104 PASS",
+      "findings_closed": [
+        "Existing table added-value rule now blocks predominantly tautological action rows instead of trusting the semantic PASS flag alone.",
+        "Existing H2 naturalness rule now blocks clear unpunctuated noun enumerations that previously passed."
+      ],
+      "new_rule_added": false,
+      "owner_changed": false,
+      "architecture_change_required": false,
+      "quality_reduction": false,
+      "k9_changed": false
     }
   },
-  "first_open_blocker": "EDITORIAL_ENFORCEMENT_FALSE_POSITIVES_TABLE_ADDED_VALUE_AND_H2_NATURALNESS",
-  "next_action": "REPAIR_ONLY_THE_EXISTING_TABLE_ADDED_VALUE_AND_H2_NATURALNESS_ENFORCEMENT_GAPS_THEN_RERUN_THE_SAME_THREE_ARTICLES_ONCE",
+  "first_open_blocker": null,
+  "next_action": "RUN_ONE_SMALL_K10_LIVE_BATCH_WITH_END_TO_END_TIMING_FROM_RESEARCH_START_TO_VERIFIED_WORDPRESS_IMPORT_FILE",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"

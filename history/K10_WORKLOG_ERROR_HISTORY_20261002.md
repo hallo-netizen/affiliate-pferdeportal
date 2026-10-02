@@ -238,3 +238,68 @@ Grund:
 3. Die Grundarchitektur, LT 6.8, PSERC, ENDSTEMPEL und WordPress-Dateiverifikation bleiben grün; es gibt keinen Grund für Architekturumbau oder Qualitätsabsenkung.
 
 **Keine neue Regel beschlossen. Keine Qualitätsgrenze geändert. Kein K9-Eingriff.**
+
+
+## Gezielter Editorial-Retest – PASS – 2026-10-02
+
+Nach der redaktionellen Prüfung wurde ausschließlich die bestehende Durchsetzung von `table.value_required_if_present` und `heading.natural_concrete_section_language` geschärft. Es wurde **keine neue Regel** angelegt, kein Owner geändert und kein Qualitätsniveau abgesenkt.
+
+### Reparatur
+
+Commit: `a7a910634e41b9031edb807dbd4fbca54d1e1d20`
+
+- H2-Naturalness: klare unpunktierte Nomen-Aufzählungen wie `Akku Kabel und Leistung ...` werden nun unter dem bereits bestehenden H2-Owner blockiert.
+- Tabellenmehrwert: ein vorab gesetztes semantisches PASS reicht nicht mehr aus, wenn die Tabelle überwiegend nur vorhandene Begriffe plus generische Handlungswörter wiederholt.
+- Reitplatzplaner-Tabelle wurde inhaltlich auf echte Beziehungen zwischen Kriterium, Hauptnutzen und zusammen zu prüfender Größe umgestellt.
+- Regendecken-H2 korrigiert auf `Wärme, Feuchtigkeit und Passform direkt kontrollieren`.
+- Schermaschinen-H2 korrigiert auf `Akku, Kabel und Leistung passend abwägen` sowie `Messer, Gewicht und Wartung im Alltag prüfen`.
+
+### Realer Dreier-Retest
+
+Workflow Run: `36978375237`  
+Artifact: `11214760852`  
+Ergebnis: **SUCCESS**
+
+Alle drei Artikel:
+- Artikelregeln: PASS
+- LanguageTool 6.8: PASS / 0 Findings
+- PSERC: PASS
+- ENDSTEMPEL: PASS
+- WordPress-Importdatei: PASS
+- `publish_allowed=false`
+
+Zusätzliche Belege:
+- Reitplatzplaner: `heading.natural_concrete_section_language = PASS`; `table.value_required_if_present = PASS`; `tautological_action_rows = []`.
+- Regendecken: korrigierte H2 im Endartefakt; H2-Naturalness PASS.
+- Schermaschinen: beide korrigierten H2 im Endartefakt; H2-Naturalness PASS.
+
+Maschinenstrecke im Retest:
+- Reitplatzplaner: 17.743 s
+- Regendecken: 11.586 s
+- Schermaschinen: 14.606 s
+- Summe: 43.935 s
+- Mittel: 14.645 s/Artikel
+
+### Selbsttest-Zwischenbefund
+
+Der erste isolierte Selbsttest auf `a7a9106...` (Run `36978375274`) war rot, obwohl der reale Dreierlauf grün war.
+
+Ursache: Der neu hinzugefügte positive Tabellen-Test hängte eine zusätzliche Tabelle an einen bereits großen künstlichen Testartikel und überschritt dadurch ausschließlich die unveränderte 900-Wörter-Obergrenze. Die neue Tabellenprüfung selbst war nicht fehlerhaft.
+
+Lösung: Nur die Testassertion wurde isoliert auf den zuständigen Receipt `table.value_required_if_present` begrenzt. Keine Produktionsregel wurde gelockert.
+
+Test-Fix-Commit: `6e0b7be9f28adf31079d8e1cdd370e89a5e8eff7`
+
+Danach:
+- K10 isolated selftest Run `36978562825` → **SUCCESS**
+- K10 PPM 6.7.9 inventory Run `36978562813` → **SUCCESS / 104 von 104**
+
+### Ergebnis
+
+Der Editorial-Blocker ist geschlossen.  
+`first_open_blocker = null`.
+
+Nächste Current-Aktion:
+`RUN_ONE_SMALL_K10_LIVE_BATCH_WITH_END_TO_END_TIMING_FROM_RESEARCH_START_TO_VERIFIED_WORDPRESS_IMPORT_FILE`
+
+K9 blieb unverändert. `publish_allowed=false`.
