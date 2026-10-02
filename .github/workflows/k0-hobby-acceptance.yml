@@ -1,0 +1,102 @@
+name: K0 Hobby Discgolf acceptance
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - 'tests/fixtures/k0_hobby_discgolf.html'
+      - 'tests/fixtures/K0_HOBBY_TEST_DISCGOLF_INPUT.json'
+      - '.github/workflows/k0-hobby-acceptance.yml'
+      - 'engine/k0_portal_resolver.py'
+      - 'K0_PORTAL_REGISTRY.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Automatic portal assignment
+        run: |
+          python3 -m engine.k0_portal_resolver tests/fixtures/K0_HOBBY_TEST_DISCGOLF_INPUT.json K0_PORTAL_REGISTRY.json > /tmp/portal.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/portal.json'))
+          assert x['status']=='PASS',x
+          assert x['items'][0]['portal_id']=='hobby',x
+          assert x['items'][0]['status']=='AUTO_DETECTED',x
+          assert 'portal' not in json.load(open('tests/fixtures/K0_HOBBY_TEST_DISCGOLF_INPUT.json'))['items'][0]
+          print('K0_HOBBY_AUTO_PORTAL_PASS')
+          PY
+
+      - name: Table and structural acceptance
+        run: |
+          python3 - <<'PY'
+          import html,re
+          from pathlib import Path
+          s=Path('tests/fixtures/k0_hobby_discgolf.html').read_text()
+          assert '<table' in s
+          th=re.findall(r'(?is)<th\b[^>]*>(.*?)</th>',s)
+          trs=re.findall(r'(?is)<tbody>.*?</tbody>',s)
+          assert len(th)>=3
+          assert all(len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',re.sub(r'<[^>]+>',' ',x)))<=3 for x in th)
+          rows=re.findall(r'(?is)<tr\b[^>]*>(.*?)</tr>',trs[0])
+          assert len(rows)>=4
+          for row in rows:
+            cells=re.findall(r'(?is)<td\b[^>]*>(.*?)</td>',row)
+            assert len(cells)>=3
+            first=re.sub(r'<[^>]+>',' ',html.unescape(cells[0]))
+            assert len(re.findall(r'\b[\wÄÖÜäöüß-]+\b',first))<=3
+          h2=[re.sub(r'<[^>]+>',' ',html.unescape(x)).strip() for x in re.findall(r'(?is)<h2\b[^>]*>(.*?)</h2>',s)]
+          assert len(h2)>=4
+          assert len(h2)==len(set(h2))
+          assert s.count('data-block="table"')==1
+          assert s.count('data-block="intro"')==1
+          print('K0_HOBBY_STRUCTURE_TABLE_PASS')
+          PY
+
+      - name: PPM 6.7.9 exact parity
+        run: |
+          python3 - <<'PY'
+          from engine.ppm_parity_guard import verify
+          r=verify()
+          assert r['status']=='PASS',r
+          assert r['legacy_rule_count']==104,r
+          print('K0_PPM679_104_PARITY_PASS')
+          PY
+
+      - name: Download exact LanguageTool 6.8
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/lt68/LanguageTool-6.8.zip -d /tmp/lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Exact Discgolf visible text through LT 6.8
+        run: |
+          python3 - <<'PY'
+          import html,json,re,subprocess,tempfile
+          from pathlib import Path
+          s=Path('tests/fixtures/k0_hobby_discgolf.html').read_text()
+          rows=[]
+          for m in re.finditer(r'(?is)<(h2|p|li|th|td)\b[^>]*>(.*?)</\1>',s):
+              v=html.unescape(re.sub(r'<[^>]+>',' ',m.group(2)))
+              v=re.sub(r'\s+',' ',v).strip()
+              if v: rows.append(v)
+          text='\n\n'.join(rows)
+          p=Path('/tmp/discgolf.txt');p.write_text(text)
+          cp=subprocess.run(['java','-Xmx1024m','-jar','/tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar','--json','-l','de-DE',str(p)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
+          assert cp.returncode==0,cp.stderr
+          report=json.loads(cp.stdout)
+          matches=report.get('matches') or []
+          if matches:
+              print(json.dumps(matches,ensure_ascii=False,indent=2))
+              raise SystemExit('K0_DISCGOLF_LT68_FINDINGS:'+str(len(matches)))
+          print('K0_DISCGOLF_LT68_ZERO_FINDINGS_PASS')
+          PY
