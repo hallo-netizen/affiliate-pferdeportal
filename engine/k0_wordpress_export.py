@@ -3,6 +3,7 @@ import hashlib, json, re, sys
 from pathlib import Path
 
 from .k0_portal_resolver import validate_intake
+from .writer_contract_guard import verify_package as verify_writer_contract
 
 CONTRACT='SYSTEM4_WORDPRESS_HANDOFF_V1'
 PLUGIN_VERSION='0.28.27'
@@ -36,6 +37,10 @@ def build(intake, package, portal, gate, lt):
 
     body=str(package.get('html') or '')
     body_sha=_sha(body)
+    try:
+        writer_metrics=verify_writer_contract(package)
+    except Exception as exc:
+        raise Blocked('K0_WORDPRESS_WRITER_CONTRACT_BLOCKED:'+str(exc))
     if not body or package.get('final_draft_sha256')!=body_sha:
         raise Blocked('K0_ARTICLE_BODY_HASH_INVALID')
 
@@ -51,6 +56,8 @@ def build(intake, package, portal, gate, lt):
         raise Blocked('K0_GATE_BINDING_INVALID')
     if gate.get('semantic_intent_status')!='PASS' or gate.get('anti_boilerplate_status')!='PASS':
         raise Blocked('K0_SEMANTIC_GATE_NOT_PASS')
+    if gate.get('writer_contract_status')!='PASS' or gate.get('writer_policy_sha256')!=writer_metrics.get('policy_sha256'):
+        raise Blocked('K0_WRITER_GATE_NOT_PASS')
 
     if lt.get('status')!='PASS' or int(lt.get('finding_count') or 0)!=0:
         raise Blocked('K0_LT68_NOT_PASS')
@@ -71,7 +78,7 @@ def build(intake, package, portal, gate, lt):
       'final_draft_sha256':body_sha,
       'revision_count':int(package.get('revision_count') or 1),
       'body':body,
-      'production_context':context,
+      'production_context':{**context,'writer_provenance':package.get('writer_provenance')},
       'languagetool':{
         'status':'PASS',
         'engine':'LanguageTool 6.8',
