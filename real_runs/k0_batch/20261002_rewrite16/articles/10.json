@@ -1,0 +1,57 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+    "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+    "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+  },
+  "planning_binding": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+    "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+    "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+  },
+  "article_id": "article:0403a67125f7ec7af49ffaa1",
+  "article_type": "FAQ",
+  "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?",
+  "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+  "category": "schabracken-faq",
+  "html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n\n<p>Der wichtigste Unterschied liegt im Schnitt. Eine Schabracke ist meist deutlich größer und rechteckiger, während eine Satteldecke stärker der Form des Sattels folgt. Beide liegen zwischen Pferderücken und Sattel und erfüllen ähnliche Grundaufgaben: Sie schützen den Sattel vor Schweiß und Schmutz und können je nach Material Feuchtigkeit aufnehmen oder verteilen.</p>\n\n<h2>So erkennt man eine Schabracke</h2>\n<p>Schabracken reichen seitlich und häufig auch vor und hinter dem Sattel sichtbar heraus. Dadurch entsteht mehr Fläche für Steppungen, Logos oder dekorative Einfassungen. Es gibt sie passend zu Dressur-, Spring- und Vielseitigkeitssätteln. Trotz der größeren Grundform ist der obere Verlauf meist so gearbeitet, dass Widerrist und Wirbelsäule nicht unnötig belastet werden.</p>\n\n<h2>Eine Satteldecke folgt stärker der Sattelform</h2>\n<p>Satteldecken sind kompakter geschnitten. Ihre Außenlinie orientiert sich enger an den Sattelblättern und ist dadurch weniger sichtbar. Manche klassischen Modelle wirken beinahe wie eine zusätzliche Polsterschicht unter dem Sattel. Die kleinere Form kann praktisch sein, wenn wenig Stoff gewünscht ist oder ein traditioneller Look bevorzugt wird. Die Funktion bleibt jedoch grundsätzlich vergleichbar mit der einer Schabracke.</p>\n\n<h2>Polsterung ist kein fester Unterschied</h2>\n<p>Weder Schabracke noch Satteldecke sind automatisch dicker oder dünner. Beide gibt es leicht, stark gesteppt, mit Funktionsmaterialien oder mit zusätzlicher Polsterung. Wer Druckprobleme mit mehr Material lösen möchte, sollte vorsichtig sein: Jede zusätzliche Schicht verändert die Passform des Sattels. Eine Unterlage kann einen unpassenden Sattel nicht korrigieren. Bei Passformproblemen gehört zuerst der Sattel selbst überprüft.</p>\n\n<h2>Dressur, Springen und Vielseitigkeit</h2>\n<p>Bei Schabracken ist die Zuordnung zum Satteltyp besonders sichtbar. Dressurmodelle sind meist länger und gerader, Springschabracken kürzer und stärker nach vorn geschnitten. Vielseitigkeitsschabracken liegen dazwischen. Bei Satteldecken gilt ebenfalls: Die Form sollte zum Sattel passen, damit kein Stoff ungünstig unter Kanten oder Pauschen gerät. Ein Modell für den falschen Satteltyp kann trotz richtiger Größe schlecht liegen.</p>\n\n<h2>Schabracke und Satteldecke im Vergleich</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Merkmal</th><th>Schabracke</th><th>Satteldecke</th></tr></thead><tbody>\n<tr><td>Schnitt</td><td>Rechteckiger</td><td>Sattelnah</td></tr>\n<tr><td>Fläche</td><td>Größer</td><td>Kompakter</td></tr>\n<tr><td>Optik</td><td>Sichtbarer</td><td>Dezenter</td></tr>\n<tr><td>Funktion</td><td>Unterlage</td><td>Unterlage</td></tr>\n</tbody></table>\n<p>Die Tabelle zeigt: Funktional liegen beide nah beieinander. Der auffälligste Unterschied bleibt die äußere Form.</p>\n\n<h2>Worauf es beim Auflegen ankommt</h2>\n<p>Egal welche Variante du verwendest: Die Unterlage sollte sauber und faltenfrei liegen. Ziehe sie im Bereich des Widerrists leicht in die Sattelkammer, damit sie nicht straff aufliegt. Nähte, Einfassungen oder Klettverschlüsse dürfen nicht zwischen Sattel und Pferd drücken. Nach dem Reiten lohnt ein Blick auf Schweißbild, Fell und mögliche Scheuerstellen.</p>\n\n<h2>Fazit</h2>\n<p>Schabracke und Satteldecke unterscheiden sich vor allem im Schnitt, nicht in ihrer grundlegenden Aufgabe. Die Schabracke ist meist größer und rechteckiger, die Satteldecke enger an die Sattelform angepasst. Welche Variante besser passt, ist häufig eine Frage von Satteltyp, Material und persönlicher Vorliebe. Wichtiger als der Name ist, dass die Unterlage zum Sattel passt, sauber liegt und keine zusätzliche Druckstelle erzeugt.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": null,
+    "rationale": "Die Unterschiede in Schnitt, Fläche und Optik lassen sich sinnvoll nebeneinander darstellen."
+  },
+  "lt_authoritative_terms": [
+    "Schabracke",
+    "Satteldecke",
+    "Widerrist",
+    "Krämer"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "schabracken-faq",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://www.kraemer.de/ratgeber/schabracken-arten",
+      "source_title": "Welche Sattelunterlagen gibt es? – Krämer",
+      "evidence_text": "Schabracke und Satteldecke erfüllen als Sattelunterlage ähnliche Grundfunktionen, unterscheiden sich aber vor allem im Schnitt: Satteldecken sind stärker an die Sattelform angepasst, Schabracken sind eckiger beziehungsweise rechteckiger und zeigen mehr Stoff.",
+      "evidence_text_sha256": "e9cb416b35e81e122ee1cd7a02f54a5ea54c4fc733b3b17d39c64bf530b5be3a",
+      "statement": "Schabracke und Satteldecke unterscheiden sich vor allem im Schnitt; die Grundfunktion als Sattelunterlage ist ähnlich.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
