@@ -1,0 +1,100 @@
+{
+  "contract": "K0_REWRITE16_FINAL_EVIDENCE_V1",
+  "status": "PASS",
+  "article_count": 16,
+  "canonical_runs": [
+    {
+      "index": 0,
+      "run_id": 37044049686
+    },
+    {
+      "index": 1,
+      "run_id": 37043345932
+    },
+    {
+      "index": 2,
+      "run_id": 37043923052
+    },
+    {
+      "index": 3,
+      "run_id": 37043924668
+    },
+    {
+      "index": 4,
+      "run_id": 37043930167
+    },
+    {
+      "index": 5,
+      "run_id": 37043938337
+    },
+    {
+      "index": 6,
+      "run_id": 37043943689
+    },
+    {
+      "index": 7,
+      "run_id": 37043950012
+    },
+    {
+      "index": 8,
+      "run_id": 37043957689
+    },
+    {
+      "index": 9,
+      "run_id": 37043409347
+    },
+    {
+      "index": 10,
+      "run_id": 37043976942
+    },
+    {
+      "index": 11,
+      "run_id": 37043982308
+    },
+    {
+      "index": 12,
+      "run_id": 37043986882
+    },
+    {
+      "index": 13,
+      "run_id": 37044069964
+    },
+    {
+      "index": 14,
+      "run_id": 37043441581
+    },
+    {
+      "index": 15,
+      "run_id": 37043999253
+    }
+  ],
+  "writer_contract": "PASS_ALL_16",
+  "section_balance": "PASS_ALL_16",
+  "conclusion_ratio": "PASS_ALL_16",
+  "further_information": "PASS_ALL_16",
+  "languagetool_6_8": "PASS_ALL_16",
+  "ppm_6_7_9": "PASS_ALL_16_104_OF_104",
+  "wordpress_single_export": "PASS_ALL_16",
+  "combined_batch_sha256": "e59b7179e52a2379ec2b88a8d7a77692311883e4c13b9d27a651c66a00906ecd",
+  "combined_file_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
+  "combined_filename": "K0_WORDPRESS_REWRITE16_FINAL_e59b7179e52a2379ec2b88a8d7a77692311883e4c13b9d27a651c66a00906ecd.json",
+  "word_range": [
+    771,
+    869
+  ],
+  "conclusion_ratio_range": [
+    0.102113,
+    0.120238
+  ],
+  "schabracke": {
+    "category": "pferdewissen-grundlagen",
+    "article_type": "Journal",
+    "plan_slot": "d3bd7d12876803b80f744294f27be814ff65bc3cf0af95989bdab4538f9da3e6"
+  },
+  "old_bad_export": {
+    "status": "INVALIDATED_DO_NOT_IMPORT",
+    "sha256": "f3d5f74fbb32c03b2c23d70db57eb3d25b19dc01d31ba8603d18a23913c913c2"
+  },
+  "direct_wordpress_upload_ready": true,
+  "publish_allowed": false
+}
