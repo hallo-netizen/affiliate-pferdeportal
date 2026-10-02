@@ -44,6 +44,7 @@ jobs:
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
           /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Perf Audit' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          /tmp/wp config set SAVEQUERIES true --raw --path=/tmp/wp-site
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
           cat >/tmp/wp-site/wp-content/mu-plugins/pferde-template-fixture.php <<'PHP'
           <?php
@@ -117,6 +118,8 @@ jobs:
           if(substr_count($html,'data-ppar-slot="hub_after_cards"')!==1)throw new RuntimeException('mount failed');
           echo 'COLD_QUERY_DELTA='.$delta."\n";
           echo 'COLD_MS='.number_format($elapsed,3,'.','')."\n";
+          $slice=array_slice((array)$wpdb->queries,$before);
+          foreach($slice as $i=>$q){echo 'COLD_Q'.($i+1).'='.(string)($q[0]??'')."\n";}
           echo "COLD_NO_NETWORK_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/cold.php --path=/tmp/wp-site | tee /tmp/cold.txt
@@ -149,9 +152,53 @@ jobs:
           if(substr_count($html,'data-ppar-slot="hub_after_cards"')!==1)throw new RuntimeException('warm mount failed');
           echo 'WARM_QUERY_DELTA='.$delta."\n";
           echo 'WARM_MS='.number_format($elapsed,3,'.','')."\n";
+          $slice=array_slice((array)$wpdb->queries,$before);
+          foreach($slice as $i=>$q){echo 'WARM_Q'.($i+1).'='.(string)($q[0]??'')."\n";}
           echo "WARM_NO_NETWORK_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/warm.php --path=/tmp/wp-site | tee /tmp/warm.txt
+
+      - name: Same direct renderer 6.72.175 versus 6.72.176 query parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/direct-measure.php <<'PHP'
+          <?php
+          global $wpdb,$wp_query,$wp_the_query,$post;
+          $expected=(string)getenv('EXPECTED_VERSION');
+          if(Pferdeportal_Affiliate_Router::VERSION!==$expected)throw new RuntimeException('wrong version');
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $post=get_post($page);
+          $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;$wp_query->the_post();
+          add_filter('pre_http_request',function(){throw new RuntimeException('NETWORK_CALL_DURING_DIRECT_RENDER');},PHP_INT_MIN,3);
+          $before=(int)$wpdb->num_queries;
+          $t0=hrtime(true);
+          $m=new ReflectionMethod($o,'render_affiliate_slot');$m->setAccessible(true);
+          $html=$m->invoke($o,$page,'hub_after_cards','primary_product','');
+          $elapsed=(hrtime(true)-$t0)/1000000;
+          $delta=(int)$wpdb->num_queries-$before;
+          if(strpos((string)$html,'data-ppar-slot="hub_after_cards"')===false)throw new RuntimeException('direct render failed');
+          echo $expected.'_DIRECT_QUERY_DELTA='.$delta."\n";
+          echo $expected.'_DIRECT_MS='.number_format($elapsed,3,'.','')."\n";
+          PHP
+
+          EXPECTED_VERSION=6.72.176 /tmp/wp eval-file /tmp/direct-measure.php --path=/tmp/wp-site | tee /tmp/direct176.txt
+
+          /tmp/wp plugin deactivate affiliate-portal-router --path=/tmp/wp-site
+          rm -rf /tmp/base175 /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          mkdir -p /tmp/base175
+          git archive 32d61bce11161b339a360c4dec92be712f733424 release/affiliate-zentrale/current/affiliate-portal-router | tar -x -C /tmp/base175
+          cp -a /tmp/base175/release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          EXPECTED_VERSION=6.72.175 /tmp/wp eval-file /tmp/direct-measure.php --path=/tmp/wp-site | tee /tmp/direct175.txt
+
+          q176="$(sed -n 's/^6.72.176_DIRECT_QUERY_DELTA=//p' /tmp/direct176.txt | tail -1)"
+          q175="$(sed -n 's/^6.72.175_DIRECT_QUERY_DELTA=//p' /tmp/direct175.txt | tail -1)"
+          test -n "$q176" && test -n "$q175"
+          test "$q176" = "$q175"
+          echo "DIRECT_RENDER_QUERY_PARITY_PASS=$q176"
 
       - name: Hardlock source audit
         shell: bash
