@@ -87,7 +87,7 @@ Exporter: `engine/k0_wordpress_export.py`
 
 Gate: `engine/k0_production_gate.py`
 
-WordPress-Importer: `Portal SEO Editorial Plan Compiler 0.28.27`
+WordPress-Importer: `Portal SEO Editorial Plan Compiler 0.28.30-pste-v5-binding-safe`
 
 WordPress-Vertrag: `SYSTEM4_WORDPRESS_HANDOFF_V1`
 
