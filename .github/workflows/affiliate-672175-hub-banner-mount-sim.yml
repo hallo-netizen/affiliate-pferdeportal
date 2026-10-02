@@ -172,6 +172,32 @@ jobs:
           $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
           $wp_query->the_post();
 
+          $ctxM=new ReflectionMethod($o,'get_content_context'); $ctxM->setAccessible(true);
+          $ctx=$ctxM->invoke($o,$page);
+          $ctx['slot_type']='hub_after_cards';
+          $from=new ReflectionMethod($o,'campaign_from_post'); $from->setAccessible(true);
+          $campaign=$from->invoke($o,get_post(absint(get_option('ppar_test_campaign_id'))));
+          $checks=[];
+          foreach([
+              'campaign_is_complete',
+              'rule_is_current',
+              'campaign_program_allows_delivery',
+              'overview_wide_banner_campaign_eligible',
+              'campaign_slot_allowed',
+              'campaign_control_allows_delivery',
+              'campaign_health_allows_delivery'
+          ] as $method){
+              $rm=new ReflectionMethod($o,$method);$rm->setAccessible(true);
+              $checks[$method]=in_array($method,['overview_wide_banner_campaign_eligible','campaign_slot_allowed','campaign_control_allows_delivery'],true)
+                  ? $rm->invoke($o,$campaign,'hub_after_cards')
+                  : $rm->invoke($o,$campaign);
+          }
+          $rankM=new ReflectionMethod($o,'campaign_match_rank');$rankM->setAccessible(true);
+          $checks['campaign_match_rank']=$rankM->invoke($o,$campaign,$ctx);
+          $poolM=new ReflectionMethod($o,'ranked_campaigns_for_slot_uncached');$poolM->setAccessible(true);
+          $checks['ranked_count']=count((array)$poolM->invoke($o,$ctx,'hub_after_cards',''));
+          echo "HUB_SELECTION_DIAG ".wp_json_encode($checks,JSON_UNESCAPED_SLASHES)."\n";
+
           $render=new ReflectionMethod($o,'render_affiliate_slot');
           $render->setAccessible(true);
           $banner=$render->invoke($o,$page,'hub_after_cards','primary_product','');
