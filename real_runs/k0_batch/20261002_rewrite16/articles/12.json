@@ -1,0 +1,68 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "magnetfelddecken-faq",
+    "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+    "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+    "title": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?"
+  },
+  "planning_binding": {
+    "article_type": "FAQ",
+    "category": "magnetfelddecken-faq",
+    "plan_slot": "e8c73ae9008889fb168c5527d2fe6d55c7779627eed61952538afd131ad1e57f",
+    "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+    "title": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?"
+  },
+  "article_id": "article:6f2ceb50c5159e3e7d5e44ac",
+  "article_type": "FAQ",
+  "title": "Welche Magnetfelddecke ist besser geeignet BEMER oder ActivoMed?",
+  "target_keyword": "Welche Magnetfelddecke ist besser geeignet Bemer oder ActivoMed",
+  "category": "magnetfelddecken-faq",
+  "html": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n\n<p>Ob BEMER oder ActivoMed besser geeignet ist, lässt sich nicht pauschal beantworten. Die Systeme unterscheiden sich vor allem in Aufbau, Bedienung und Ausstattung. BEMER arbeitet bei seiner Pferdedecke laut Hersteller mit 19 Spulen und einem akkubetriebenen Signalcontroller. ActivoMed nennt bei der IMPULSELINE Professional 2.0 unter anderem 14 Magnetfeldspulen, mehrere Programme und optional eine Massagefunktion. Welche Lösung besser passt, hängt deshalb vom gewünschten Einsatz und von der Handhabung ab.</p>\n\n<h2>Was BEMER bei der Pferdedecke bietet</h2>\n<p>Die BEMER Horse-Blanket ist als integriertes System aufgebaut. Nach Herstellerangaben sind 19 Spulen in die Decke eingearbeitet, die über einen akkubetriebenen Controller angesteuert werden. Die Passform lässt sich an mehreren Stellen anpassen, zudem werden atmungsaktive Bereiche genannt. Für Nutzer, die ein möglichst geschlossenes, vorkonfiguriertes System möchten, kann diese Bauweise praktisch sein.</p>\n\n<h2>Wie ActivoMed die Ausstattung erweitert</h2>\n<p>ActivoMed beschreibt die IMPULSELINE Professional 2.0 als System mit 14 Magnetfeldspulen und verschiedenen Programmen beziehungsweise Sequenzen. Je nach Ausstattung kann zusätzlich eine Massagefunktion integriert sein. Dadurch gibt es mehr Möglichkeiten, die Anwendung technisch zu variieren. Mehr Programme sind aber nicht automatisch besser: Entscheidend ist, ob die zusätzlichen Funktionen im eigenen Alltag überhaupt gebraucht und korrekt bedient werden.</p>\n\n<h2>Bedienung ist im Alltag wichtiger als Datenblätter</h2>\n<p>Ein System, das regelmäßig genutzt werden soll, muss zum Stallalltag passen. Dazu gehören Ladezeiten, Steuerung, Anlegen der Decke und die Frage, wie empfindlich die Technik bei Schmutz und Feuchtigkeit ist. Wer mehrere Pferde betreut, bewertet eine einfache und schnelle Handhabung möglicherweise höher als zusätzliche Programme. Bei einem einzelnen Pferd können andere Aspekte im Vordergrund stehen. Vor einem Kauf lohnt es sich deshalb, beide Systeme praktisch vorführen zu lassen.</p>\n\n<h2>Passform darf bei Technik nicht untergehen</h2>\n<p>Unabhängig vom Hersteller muss die Decke ruhig liegen und darf weder scheuern noch unangenehm spannen. Eine technisch aufwendige Decke bringt wenig, wenn sie auf dem konkreten Pferd verrutscht. Achte auf Rückenlänge, Brustverschluss und seitliche Stabilität. Besonders bei sensiblen Pferden ist auch relevant, wie schwer und steif sich das Material anfühlt.</p>\n\n<h2>BEMER und ActivoMed im Vergleich</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Merkmal</th><th>BEMER</th><th>ActivoMed</th></tr></thead><tbody>\n<tr><td>Spulen</td><td>19</td><td>14</td></tr>\n<tr><td>Controller</td><td>Akkubetrieben</td><td>Programmgesteuert</td></tr>\n<tr><td>Programme</td><td>Systemgebunden</td><td>Mehrere</td></tr>\n<tr><td>Massage</td><td>Nicht genannt</td><td>Optional</td></tr>\n</tbody></table>\n<p>Die Tabelle fasst nur die von den Herstellern genannten Ausstattungsunterschiede zusammen. Sie sagt nichts darüber aus, welches System medizinisch wirksamer ist.</p>\n\n<h2>Was du vor einer Entscheidung klären solltest</h2>\n<ul>\n<li>Passt die Decke sicher auf dein Pferd?</li>\n<li>Wie einfach sind Steuerung und Laden im Stallalltag?</li>\n<li>Welche Programme oder Zusatzfunktionen würdest du tatsächlich nutzen?</li>\n<li>Wie sehen Service, Garantie und Ersatzteilversorgung aus?</li>\n<li>Ist die Anwendung mit Tierarzt oder Therapeut abgestimmt, wenn ein konkretes gesundheitliches Ziel verfolgt wird?</li>\n</ul>\n\n<h2>Fazit</h2>\n<p>BEMER wirkt in der Ausstattung stärker als geschlossenes Deckensystem, während ActivoMed mehr Programm- und Zusatzoptionen anbietet. Daraus lässt sich kein allgemeiner Sieger ableiten. Für die Auswahl sind Passform, Bedienbarkeit und der tatsächliche Einsatzzweck entscheidend. Herstellerangaben zu technischen Merkmalen lassen sich vergleichen; Aussagen zur gesundheitlichen Wirkung sollten davon getrennt und bei konkreten Beschwerden mit fachkundigen Personen besprochen werden.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": null,
+    "rationale": "Herstellerangaben zu Spulen, Programmen und Zusatzfunktionen lassen sich direkt vergleichen."
+  },
+  "lt_authoritative_terms": [
+    "BEMER",
+    "ActivoMed",
+    "IMPULSELINE",
+    "Magnetfelddecke"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "magnetfelddecken-faq",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://bemergroup.com/en_AT/animal-line/Products/horse-set/horse-blanket",
+      "source_title": "Horse Blankets – BEMER Group",
+      "evidence_text": "Die BEMER Pferdedecke arbeitet laut Hersteller mit 19 Spulen, integriertem akkubetriebenem Signalcontroller, verstellbarer Passform und atmungsaktiven Einsätzen.",
+      "evidence_text_sha256": "2fc2431f4ed3707f734b532fec24845db5eda04537d167683e989685b746d255",
+      "statement": "BEMER nennt für die Pferdedecke 19 Spulen, einen akkubetriebenen Controller und verstellbare Passform.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    "F2": {
+      "source_url": "https://www.activomed.de/produkte/impulseline-magnetfelddecke/professional2.0",
+      "source_title": "IMPULSELINE Professional 2.0 – Activomed",
+      "evidence_text": "Die ActivoMed IMPULSELINE Professional 2.0 arbeitet laut Hersteller mit 14 Magnetfeldspulen, mehreren Programmen und Sequenzen sowie optionaler Massagefunktion. Welche Decke besser passt, hängt daher von gewünschter Ausstattung, Passform, Bedienung und Einsatz ab; Herstellerangaben ersetzen keine tierärztliche Diagnose.",
+      "evidence_text_sha256": "01ca4b482bed6e20bb596ad1bcdf17b38f6a51e1c2cef23045765893924a3f4b",
+      "statement": "ActivoMed nennt 14 Magnetfeldspulen, mehrere Programme und optional Massagefunktion.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
