@@ -24,7 +24,7 @@ def single(idx,title,keyword,category,article_type,article_id):
         "index":0,"article_id":article_id,"title":title,"target_keyword":keyword,
         "category":category,"article_type":article_type,"plan_slot":ps,
         "final_draft_sha256":hashlib.sha256(body.encode()).hexdigest(),
-        "revision_count":1,"body":body,"production_context":{},
+        "revision_count":1,"body":body,"production_context":{"writer_provenance":{"contract":"CANONICAL_WRITER_RECEIPT_V1","status":"PASS"}},
         "languagetool":{"status":"PASS","finding_count":0},
         "ppm679":{"status":"PASS"}
       }]
@@ -94,6 +94,7 @@ class BatchExportTests(unittest.TestCase):
 
     def test_missing_writer_provenance_blocks_batch(self):
         i,docs=self.make_three()
+        docs[0]['articles'][0]['production_context'].pop('writer_provenance',None)
         with self.assertRaisesRegex(BatchBlocked,"SINGLE_WRITER_PROVENANCE_MISSING"):
             combine(i,docs)
 
