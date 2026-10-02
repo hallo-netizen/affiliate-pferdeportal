@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 178,
+  "generation": 179,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -150,7 +150,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "LIVE_FAIL_SCHABRACKEN_CATEGORY_REPLAN_CANDIDATE_6_72_177",
+      "status": "LIVE_FAIL_UNRESOLVED_READ_ONLY_ROOTCAUSE_PROOF_REQUIRED",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -170,7 +170,7 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/shared_overview_banner_source_gate_20260918.txt",
       "source_manifest_sha256": "4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7",
       "source_gate": "21_OF_21_PASS",
-      "live_status": "FAIL_SCHABRACKENDESIGNER_6_72_176"
+      "live_status": "FAIL_SCHABRACKENDESIGNER_6_72_176_NO_LATER_LIVE_PASS_PROVEN"
     },
     "awin_banner_source": {
       "status": "UNBOUND_REAL_SOURCE_REQUIRED",
@@ -484,9 +484,11 @@
       "correct_wide_slot": "product_after_category_tiles",
       "synthetic_test_type": "hub2",
       "synthetic_test_slot": "hub_after_cards",
-      "candidate_version": "6.72.177",
-      "candidate_status": "LOCAL_POSITIVE_NEGATIVE_PASS_FULL_GATE_OPEN",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672177_schabracken_real_hierarchy_rootfix_20261002.md"
+      "candidate_version": "6.72.180",
+      "candidate_status": "LOCAL_POSITIVE_NEGATIVE_PASS_NOT_RELEASE_PROOF_READ_ONLY_ROOTCAUSE_PROOF_REQUIRED",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672177_schabracken_real_hierarchy_rootfix_20261002.md",
+      "current_next": "COMPARE_WORKING_VS_FAILING_BANNER_ASSIGNMENT_CHAIN",
+      "current_authority_note": "Historical 6.72.177 fields were superseded; sole current status/next action is execution_state in this file."
     },
     "target_identity_real_url_rootfix": {
       "version": "6.72.180",
