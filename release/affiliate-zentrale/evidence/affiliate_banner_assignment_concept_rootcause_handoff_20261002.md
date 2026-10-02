@@ -68,3 +68,26 @@ READ-ONLY compare the complete target-assignment chain for Schabrackendesigner/S
 - no rollback of 6.72.171 performance hardlocks;
 - no provider/eBay/Idealo/GTIN/housekeeping/render semantics changes;
 - no protocol/STARTMASTER routing for this Affiliate workstream.
+
+
+## Closeout process deviations / documentation limits
+
+### Unauthorized side branches created during this chat
+The Affiliate AGENTS file forbids probe/staging/side branches for release work. Nevertheless these temporary branches were created during the chat:
+- affiliate-v672178-target-identity-rootfix-20261002 @ 8461bce3430a9e394b03942ae6d7a9c98d9cc68b
+- affiliate-v672179-local-hardtest-20261002 @ fbfb948ebdb8e24590652e9b66ca592578aa04b5
+- affiliate-v672180-version-only-localproof-20261002 @ b2d0a092ab14a2ce3d76516be71a045519ca475e
+
+They are NOT current authority and must never be used for status, next action or source selection. The connected GitHub toolset in this chat exposes no branch/ref deletion action, so they could not be deleted here. The sole authoritative branch remains affiliate-release-current.
+
+### Stale governance README wording
+control/release-governance/README.md still contains historical wording that names a Base64 chunk source. This conflicts with the stronger, current AGENTS + CURRENT_RELEASE source authority, which binds the direct committed tree:
+release/affiliate-zentrale/current/affiliate-portal-router/
+plus CURRENT_SOURCE_SHA256.txt.
+The README is not current authority and was not modified because the current authorized change prefixes do not include it.
+
+### Error register
+protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md still ends the Schabracken sequence at the 6.72.177 candidate. It was not modified because protocol/ is outside the current authorized change prefixes. This evidence file records the later delta; CURRENT_RELEASE.json remains the sole current truth.
+
+### PLUGINS isolated artifact
+The closeout prompt requires an isolated PLUGINS/CURRENT.zip only when the PLUGINS office is available. Repository-wide GitHub search found no PROJEKTE/PFERDE_ATELIER/PLUGINS/ISOLIERTE_PLUGINS path or central PLUGINS update protocol in the accessible GitHub sources. The user also explicitly required this closeout WITHOUT Library access. Therefore no isolated CURRENT.zip was replaced or invented. The canonical source tree remains the only bound technical source.
