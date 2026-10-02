@@ -3,9 +3,12 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "REWRITE16_FINAL_CANONICAL_WORDPRESS_BATCH_COMPLETE",
-  "first_open_blocker": null,
-  "next_action": "DELIVER_FINAL_CANONICAL_REWRITE16_WORDPRESS_BATCH",
+  "status": "EIGENSCHAFTSSIEGER_INTEGRATION_TESTING",
+  "first_open_blocker": {
+    "code": "EIGENSCHAFTSSIEGER_SELFTEST_PENDING",
+    "detail": "Neue Beitragsart, Research-Hardlock, zentrale Produkt-Eigenschaftsablage und Writer-Bypass-Regressionstests sind implementiert; vollständiger Branch-Selftest steht noch aus."
+  },
+  "next_action": "RUN_FULL_K0_SELFTEST_AND_CLOSE_EIGENSCHAFTSSIEGER_INTEGRATION",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -66,7 +69,7 @@
     "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "ALL_16_CANONICAL_SINGLES_PASS; FINAL_BATCH_PASS; ITEM14_BATCH_TABLE_CLASS_FIXED_VIA_CANONICAL_REAUTHOR; OLD_INVALIDATED_EXPORT_NOT_REUSED"
+    "delta_result": "EIGENSCHAFTSSIEGER_IMPLEMENTED_PENDING_FULL_SELFTEST; ACTIVE_K9_REFERENCES_BEING_REMOVED; WRITER_BYPASS_LOCK_REGRESSION_ADDED"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -77,9 +80,19 @@
   },
   "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json",
   "history_ref": "history/K0_WORKLOG_ERROR_HISTORY_20261002.md",
-  "k9_unchanged": true,
   "k10_dependency": false,
   "k10_separate_current_ref": "konzept10-rule-ledger-20261001:CURRENT_STATE.json",
   "publish_allowed": false,
-  "k10_unchanged": true
+  "k10_unchanged": true,
+  "article_types": {
+    "eigenschaftssieger": {
+      "article_type": "Eigenschaftssieger",
+      "search_intent": "PRODUCT_PROPERTY_SUPERLATIVE",
+      "research_before_writer": true,
+      "central_store_ref": "K0_PRODUCT_PROPERTY_STORE.json",
+      "ranking_independent_of_affiliate": true,
+      "table_required": true,
+      "status": "TESTING"
+    }
+  }
 }
