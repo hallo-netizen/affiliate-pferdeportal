@@ -5,5 +5,5 @@
   "mode": "NORMAL_CANONICAL_PATH",
   "new_wordpress_post_required": true,
   "publish_allowed": false,
-  "revision_trigger": 2
+  "revision_trigger": 3
 }
