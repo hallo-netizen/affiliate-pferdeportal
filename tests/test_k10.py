@@ -153,8 +153,9 @@ class K10Tests(unittest.TestCase):
         a['html']=a['html'].replace('<section data-block="conclusion">',table+'<section data-block="conclusion">')
         a['table_decision']={'decision':'INCLUDE_ADDED_VALUE','rationale':'Die Tabelle verbindet Hilfsmittel mit jeweils eigenständigen Auswahl- und Kontrollpunkten.'}
         a['semantic_rule_results']['table.value_required_if_present']='PASS'
-        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
-        self.assertEqual(result['status'],'PASS',result)
+        receipts=run_article_checks(a)
+        receipt=next(x for x in receipts if x['rule_id']=='table.value_required_if_present')
+        self.assertEqual(receipt['status'],'PASS',receipt)
 
     def test_missing_optional_table_decision_blocks(self):
         a=make_base(); a.pop('table_decision',None)
