@@ -223,19 +223,18 @@ jobs:
           PHP
           /tmp/wp eval-file /tmp/proposed.php --path=/tmp/wp-site
 
-      - name: NEGATIVE duplicate and empty-slot guards
+      - name: NEGATIVE duplicate guard and remove campaign
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/negative.php <<'PHP'
+          cat >/tmp/negative-duplicate.php <<'PHP'
           <?php
-          global $wpdb;
           $o=Pferdeportal_Affiliate_Router::instance();
           $page=absint(get_option('ppar_test_page'));
-
           $render=new ReflectionMethod($o,'render_affiliate_slot');
           $render->setAccessible(true);
           $banner=$render->invoke($o,$page,'hub_after_cards','primary_product','');
+          if(trim((string)$banner)==='') throw new RuntimeException('duplicate fixture banner missing');
           $existing='<div>DESIGN</div>'.$banner;
           $proposed=$existing;
           if(Pferde_Template_Kit::affiliate_page_type($page)==='hub2'
@@ -244,15 +243,29 @@ jobs:
               $proposed .= "\n".$banner;
           }
           if(substr_count($proposed,'data-ppar-slot="hub_after_cards"')!==1) throw new RuntimeException('duplicate guard failed');
-
           $campaignId=absint(get_option('ppar_test_campaign_id'));
           if($campaignId>0) wp_delete_post($campaignId,true);
-
-          $empty=$render->invoke($o,$page,'hub_after_cards','primary_product','');
-          if(trim((string)$empty)!=='') throw new RuntimeException('empty slot fail-open');
-          echo "NEGATIVE_DUPLICATE_EMPTY_GUARDS_PASS\n";
+          if($campaignId>0 && get_post($campaignId)) throw new RuntimeException('campaign delete failed');
+          echo "NEGATIVE_DUPLICATE_GUARD_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/negative.php --path=/tmp/wp-site
+          /tmp/wp eval-file /tmp/negative-duplicate.php --path=/tmp/wp-site
+
+      - name: NEGATIVE empty slot on fresh request
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/negative-empty.php <<'PHP'
+          <?php
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $render=new ReflectionMethod($o,'render_affiliate_slot');
+          $render->setAccessible(true);
+          $empty=$render->invoke($o,$page,'hub_after_cards','primary_product','');
+          if(strpos((string)$empty,'ppar-overview-wide-banner-link')!==false) throw new RuntimeException('empty slot rendered real banner');
+          if(strpos((string)$empty,'data-ppar-slot="hub_after_cards"')!==false) throw new RuntimeException('empty slot rendered wrapper');
+          echo "NEGATIVE_EMPTY_FRESH_REQUEST_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/negative-empty.php --path=/tmp/wp-site
 
       - name: Preserve performance hardlocks
         shell: bash
