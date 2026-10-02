@@ -1,0 +1,47 @@
+name: K10 canonical binding real probe
+
+on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+    paths:
+      - 'engine/canonical_binding.py'
+      - '.github/workflows/k10-canonical-binding.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  canonical-binding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download exact bound registries
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-canonical
+          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"             -o /tmp/k10-canonical/ppm679.zip
+          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PSERC-FIX.zip"             -o /tmp/k10-canonical/pserc-fix.zip
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/k10-canonical/ppm679.zip' | sha256sum -c -
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/k10-canonical/pserc-fix.zip' | sha256sum -c -
+      - name: Resolve current real three-item upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.canonical_binding             real_runs/production/20261002_sperrriemen_verschnallen/WORDPRESS_INTAKE.json             /tmp/k10-canonical/ppm679.zip             /tmp/k10-canonical/pserc-fix.zip             /tmp/k10-canonical/bindings.json
+          python3 - <<'PY'
+          import hashlib,json,re
+          p=json.load(open('/tmp/k10-canonical/bindings.json',encoding='utf-8'))
+          assert p['status']=='PASS',p
+          assert len(p['bindings'])==3,p
+          for slot,aid in p['bindings'].items():
+              assert re.fullmatch(r'article:[0-9a-f]{24}',aid),aid
+              assert hashlib.sha256(('pserc-plan-slot-v2|'+aid).encode()).hexdigest()==slot,(slot,aid)
+          print('K10_REAL_CANONICAL_THREE_SLOT_PASS:'+json.dumps(p['bindings'],sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k10-canonical-bindings-${{ github.run_id }}
+          path: /tmp/k10-canonical/bindings.json
+          if-no-files-found: error
