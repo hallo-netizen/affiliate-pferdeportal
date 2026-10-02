@@ -5,7 +5,7 @@
   "status": "TABLE_DEFAULT_REQUIRED_WITH_EXCEPTIONS_VERIFIED",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "57188d5a112453f59af49c1706f6685300af52d1",
+    "verified_commit": "1ec9487b99be77996be70e7ed24c177718607200",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -533,6 +533,19 @@
       "baseline_goal_unchanged": "MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE",
       "k0_changed": false,
       "k9_changed": false
+    },
+    "closeout_freshness": {
+      "status": "PASS",
+      "verified_commit": "1ec9487b99be77996be70e7ed24c177718607200",
+      "isolated_selftest_run_id": 37015363516,
+      "isolated_selftest_result": "SUCCESS",
+      "ppm_inventory_run_id": 37015363469,
+      "ppm_inventory_result": "104/104 PASS",
+      "goal_contract_synced": true,
+      "start_here_superseded_table_guidance_removed": true,
+      "first_open_blocker": null,
+      "next_action": "NORMAL_K10_PRODUCTION_WITH_TABLE_DEFAULT_REQUIRED_AND_DEFINED_OMISSION_EXCEPTIONS",
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,

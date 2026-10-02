@@ -1048,3 +1048,17 @@ Nachholung:
 - generisches „steht schon im Text / nicht nötig“ ausdrücklich nicht ausreichend;
 - alte, inzwischen überholte optionale Tabellenpassage aus K10_START_HERE entfernt;
 - K0 und K9 nicht verändert.
+
+
+## Abschluss-/Frischecheck nach Zielvertrag-Sync – 2026-10-02
+
+Geprüfter Arbeitsstand: 1ec9487b99be77996be70e7ed24c177718607200
+
+- K10 isolated selftest Run 37015363516: SUCCESS
+- K10 PPM 6.7.9 inventory Run 37015363469: SUCCESS, 104/104
+- Zielvertrag auf aktuelle Tabellenregel synchronisiert
+- überholte optionale Tabellenpassage aus START_HERE entfernt
+- erster offener Blocker: keiner
+- NEXT ACTION: normaler K10-Produktionsbetrieb mit Tabelle als Standard und den vier definierten Ausnahmen
+- publish_allowed=false
+- K0/K9 in dieser Nachholung nicht verändert
