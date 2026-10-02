@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "READY_FOR_AUTOMATIC_CURRENT_UPLOAD_BATCH_PRODUCTION",
+  "status": "AUTOMATIC_CURRENT_UPLOAD_BATCH_AUTHORITY_VERIFIED",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "78166859c32dd540fe5a5b787aa8baf80bef3c55",
+    "verified_commit": "61d7a1de934cc3834edcb1273d7015da0a280ea0",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -347,10 +347,24 @@
       "per_article_binding": "EXACTLY_ONE_MATCH_IN_CURRENT_UPLOAD",
       "on_missing_valid_attachment": "BLOCK_INPUT_REQUIRED",
       "on_valid_attachment": "START_SILENT_PRODUCTION_IMMEDIATELY"
+    },
+    "automatic_batch_authority_fix": {
+      "commit": "61d7a1de934cc3834edcb1273d7015da0a280ea0",
+      "selftest_run_id": 36998129858,
+      "selftest_result": "PASS_44_TESTS",
+      "ppm_inventory_run_id": 36998129823,
+      "ppm_inventory_result": "104/104 PASS",
+      "multi_item_positive": "PASS_3_ITEM_UPLOAD_WITHOUT_EXTERNAL_SNAPSHOT",
+      "stale_external_snapshot_negative": "PASS_BLOCKED",
+      "external_main_pserc_snapshot_required": false,
+      "manual_metadata_sync_required": false,
+      "quality_reduction": false,
+      "k9_changed": false,
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "RUN_FRESH_MULTI_ITEM_WORDPRESS_UPLOAD_DIRECTLY_THROUGH_K10_WITHOUT_MANUAL_PSERC_SYNC",
+  "next_action": "RETRY_THE_SAME_REAL_MULTI_ITEM_WORDPRESS_UPLOAD_IN_A_FRESH_NEIGHBOR_CHAT_AND_RUN_ALL_ITEMS_SILENTLY_TO_FINAL_OUTPUT",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"
