@@ -455,10 +455,11 @@ class K10Tests(unittest.TestCase):
         self.assertIn('HARD_RULE_NOT_PASS:facts.real_source_trace',result['findings'])
 
 
-    def test_wordpress_export_uses_proven_system4_handoff_and_never_synthesizes_article_id(self):
+    def test_wordpress_export_binds_registry_article_id_to_plan_slot(self):
         import hashlib
         a=make_base()
-        slot='7'*64
+        article_id='article:1234567890abcdef12345678'
+        slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode()).hexdigest()
         a['planning_binding']={
           'article_type':'FAQ','category':'training','plan_slot':slot,
           'target_keyword':a['target_keyword'],'title':a['title']
@@ -467,7 +468,7 @@ class K10Tests(unittest.TestCase):
         for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
             claim['source_url']=f'https://example.org/source-{idx}'
         research={'contract':'K10_REAL_RESEARCH_V1','retrieved_at':'2026-10-02T00:00:00Z'}
-        snapshot={'source_batch_sha256':'8'*64}
+        snapshot={'source_batch_sha256':'8'*64,'canonical_article_bindings':{slot:article_id}}
         lt={'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
         out=build_wordpress_export(a,research,snapshot,lt)
         self.assertEqual(out['contract'],'SYSTEM4_WORDPRESS_HANDOFF_V1')
@@ -476,20 +477,59 @@ class K10Tests(unittest.TestCase):
         self.assertIs(out['wordpress_review']['direct_wordpress_upload_ready'],True)
         row=out['articles'][0]
         self.assertEqual(set(row),{
-          'index','title','target_keyword','category','article_type','plan_slot',
+          'index','article_id','title','target_keyword','category','article_type','plan_slot',
           'final_draft_sha256','revision_count','body','production_context',
           'languagetool','ppm679',
         })
-        self.assertNotIn('article_id',row)
+        self.assertEqual(row['article_id'],article_id)
+        self.assertNotEqual(row['article_id'],row['plan_slot'])
         self.assertEqual(row['plan_slot'],slot)
+        self.assertEqual(hashlib.sha256(('pserc-plan-slot-v2|'+row['article_id']).encode()).hexdigest(),row['plan_slot'])
+        self.assertEqual(row['production_context']['production_plan_item']['canonical_article_id'],article_id)
         self.assertEqual(row['final_draft_sha256'],hashlib.sha256(a['html'].encode()).hexdigest())
         self.assertEqual(row['body'],a['html'])
 
-    def test_wordpress_export_blocks_without_current_batch_binding(self):
+    def test_wordpress_export_blocks_without_canonical_registry_binding(self):
+        import hashlib
         a=make_base()
-        slot='7'*64
+        article_id='article:1234567890abcdef12345678'
+        slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode()).hexdigest()
         a['planning_binding']={
           'article_type':'FAQ','category':'training','plan_slot':slot,
+          'target_keyword':a['target_keyword'],'title':a['title']
+        }
+        for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
+            claim['source_url']=f'https://example.org/source-{idx}'
+        with self.assertRaisesRegex(WordPressExportBlocked,'WORDPRESS_CANONICAL_ARTICLE_ID_MISSING'):
+            build_wordpress_export(
+              a,{'retrieved_at':'2026-10-02T00:00:00Z'},
+              {'source_batch_sha256':'8'*64,'canonical_article_bindings':{}},
+              {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
+            )
+
+    def test_wordpress_export_blocks_wrong_canonical_article_id_for_slot(self):
+        import hashlib
+        a=make_base()
+        correct='article:1234567890abcdef12345678'
+        wrong='article:abcdef1234567890abcdef12'
+        slot=hashlib.sha256(('pserc-plan-slot-v2|'+correct).encode()).hexdigest()
+        a['planning_binding']={
+          'article_type':'FAQ','category':'training','plan_slot':slot,
+          'target_keyword':a['target_keyword'],'title':a['title']
+        }
+        for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
+            claim['source_url']=f'https://example.org/source-{idx}'
+        with self.assertRaisesRegex(WordPressExportBlocked,'WORDPRESS_CANONICAL_PLAN_SLOT_MISMATCH'):
+            build_wordpress_export(
+              a,{'retrieved_at':'2026-10-02T00:00:00Z'},
+              {'source_batch_sha256':'8'*64,'canonical_article_bindings':{slot:wrong}},
+              {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
+            )
+
+    def test_wordpress_export_blocks_without_current_batch_binding(self):
+        a=make_base()
+        a['planning_binding']={
+          'article_type':'FAQ','category':'training','plan_slot':'7'*64,
           'target_keyword':a['target_keyword'],'title':a['title']
         }
         for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
