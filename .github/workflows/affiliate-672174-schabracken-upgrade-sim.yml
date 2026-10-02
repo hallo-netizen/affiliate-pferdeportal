@@ -321,7 +321,7 @@ jobs:
           PHP
           /tmp/wp eval-file /tmp/sql-rootfix.php --path=/tmp/wp-site
 
-      - name: NEGATIVE reproduce stale previous-version cursor skip
+      - name: POSITIVE previous-version cursor resets and old creative is processed
         shell: bash
         run: |
           set -euo pipefail
@@ -330,19 +330,21 @@ jobs:
           global $wpdb;
           $o=Pferdeportal_Affiliate_Router::instance();
           $creative_id=absint(get_option('ppar_test_schabracken_creative_id'));
-          update_option('ppar_full_pool_automation_version_v1','6.72.173',false);
+          update_option('ppar_full_pool_automation_version_v1','6.72.174',false);
           update_option('ppar_full_pool_automation_cursor_v1',$creative_id,false);
           $o->ensure_full_pool_automation();
+          $state=(string)get_option('ppar_full_pool_automation_version_v1','');
+          $cursor=absint(get_option('ppar_full_pool_automation_cursor_v1',999999));
+          if($state!=='running:6.72.175' || $cursor!==0) throw new RuntimeException('version-bound cursor reset failed '.wp_json_encode(['state'=>$state,'cursor'=>$cursor]));
           if(!wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK)) throw new RuntimeException('worker not automatically scheduled');
           $o->run_full_pool_automation_worker();
           $identity=(string)get_option('ppar_test_schabracken_identity');
           $objects=$wpdb->prefix.'ppar_output_objects';
-          $count=absint($wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$objects} WHERE creative_identity_hash=%s",$identity)));
+          $count=absint($wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$objects} WHERE creative_identity_hash=%s AND status='published'",$identity)));
           $version=(string)get_option('ppar_full_pool_automation_version_v1','');
-          if($count!==0) throw new RuntimeException('negative reproduction unexpectedly materialized');
+          if($count<1) throw new RuntimeException('automatic worker skipped older Schabrackendesigner row');
           if($version!=='6.72.175') throw new RuntimeException('worker did not mark current version complete '.$version);
-          echo "STALE_CURSOR_SKIP_REPRODUCED_PASS\n";
-          echo "BUG_PROVEN: automatic worker can finish 6.72.175 while skipping the older Schabrackendesigner row.\n";
+          echo "VERSION_BOUND_CURSOR_AUTOMATIC_REPLAN_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/stale-cursor.php --path=/tmp/wp-site
 
