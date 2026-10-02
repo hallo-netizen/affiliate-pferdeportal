@@ -303,3 +303,145 @@ Nächste Current-Aktion:
 `RUN_ONE_SMALL_K10_LIVE_BATCH_WITH_END_TO_END_TIMING_FROM_RESEARCH_START_TO_VERIFIED_WORDPRESS_IMPORT_FILE`
 
 K9 blieb unverändert. `publish_allowed=false`.
+
+
+## Frischer realer End-to-End-Test ab Recherche – 2026-10-02
+
+**Artikel:** „Wie oft muss ein Pferdeanhänger zum TÜV?“  
+**Typ:** FAQ  
+**PSERC-Plan-Slot:** `53c8c859fbbc1b9a2a17ffe53efaf31d74520ac7a89aebc1e84ec9a6ea95ea6f`
+
+### Messstart
+
+Research-Startmarker:
+- Commit `1633a766c41a4d878320ae889c702de996306e57`
+- GitHub-Zeit: 2026-10-02 08:00:33 UTC
+- Scope: frische Recherche → Schreiben → K10-Prüfung → verifizierte WordPress-Importdatei
+
+Die Recherche wurde nach diesem Marker frisch gegen aktuelle Quellen durchgeführt:
+- StVZO § 29;
+- Anlage VIII StVZO;
+- TÜV Rheinland Anhänger-HU.
+
+### Erster realer Durchlauf
+
+Workload-Commit:
+`7fb82705177512c8f397dd3a66ece4e546c36e00`
+
+Workflow Run:
+`36981858130`
+
+Ergebnis:
+**BLOCKED**
+
+Vor dem realen Lauf lokaler Struktur-Preflight:
+- 766 Wörter;
+- Einleitung 61 Wörter;
+- 16 Absätze;
+- normale H2-Abschnitte 179 / 171 / 220 Wörter;
+- 3 gebundene interne Links;
+- 4 Listenelemente;
+- optionale Tabelle bewusst `OMIT_NO_ADDED_VALUE`.
+
+Im realen Lauf:
+- PSERC-Bindung: PASS
+- WordPress-Kategorie live: PASS / ID 1061
+- LanguageTool 6.8: PASS / 0 Findings
+- Block bei Artikelregeln:
+  - `facts.conclusion_no_new_untraced_facts`
+  - `facts.numeric_claim_supported`
+
+Gemessene Zeit bis zum Block:
+**187.291 ms = ca. 3:07 min**
+
+### Ursache und Reparatur
+
+Kein K10-Systemfehler.
+
+Der Artikel selbst war an vier Stellen nicht exakt genug an die gebundenen Fakten gekoppelt:
+- „750 Kilogramm“ statt des im Fakt gebundenen „0,75 Tonnen“;
+- im Fazit fehlte der sichtbare F6-Trace;
+- „§ 29“ war als zusätzliche Zahl im Fließtext nicht durch den dort gebundenen F5-Fakt abgedeckt.
+
+Die harten Gates haben diese Abweichungen korrekt geblockt.
+
+Reparatur:
+- Einheiten exakt auf `0,75 Tonnen` gebunden;
+- fehlenden F6-Trace ergänzt;
+- „§ 29 StVZO“ im Fließtext ohne Informationsverlust zu „die StVZO“ vereinfacht.
+
+Repair-Preflight:
+- numeric_bad = []
+- untraced_conclusion = []
+
+Repair-Commit:
+`147e62ab3d2668edfee8c477ca0290de7dd35c5d`
+
+### Zweiter realer Durchlauf
+
+Workflow Run:
+`36982026936`
+
+Artifact:
+`11215459134`
+
+Ergebnis:
+**SUCCESS / READY_FOR_WORDPRESS_DRAFT_IMPORT**
+
+Final:
+- LanguageTool 6.8: PASS / 0 Findings
+- Artikelregeln: PASS
+- Systemregeln: PASS
+- PSERC: PASS
+- ENDSTEMPEL: PASS
+- WordPress-Dateiverifikation: PASS
+- `publish_allowed=false`
+
+Maschinenstrecke im finalen Lauf:
+- LanguageTool: 9.170 s
+- K10-Proof: 1.270 s
+- gesamte Validierung: **10.440 s**
+
+Gemessene reale Wandzeit vom Research-Startmarker bis zur final verifizierten WordPress-Datei:
+**287.955 ms = ca. 4:48 min**
+
+Diese 4:48 Minuten enthalten ausdrücklich:
+- frische Recherche;
+- Artikelerstellung;
+- ersten realen Block;
+- Fehleranalyse;
+- Reparatur;
+- zweiten vollständigen Lauf;
+- verifizierte WordPress-Importdatei.
+
+### Vergleich mit K9
+
+Historisch belegter K9-Wert:
+- Research-Start → STOP: ca. **21:59 min** = 1.319 s
+
+Aktueller K10-Wert:
+- frische Recherche → verifizierte WordPress-Datei inklusive einer Reparaturrunde: ca. **4:48 min** = 287,955 s
+
+Beobachtetes Verhältnis:
+- K10 in diesem Test ca. **4,58× schneller** als der belegte K9-Research-Start→STOP-Lauf.
+
+Einschränkung:
+Die K10-Recherche und das Schreiben wurden in diesem Chat interaktiv durchgeführt, nicht durch eine vollständig autonome GitHub-Research/Writer-Kette. Der Vergleich ist deshalb deutlich aussagekräftiger als die frühere 10–15-Sekunden-Prüfstrecke, aber noch nicht vollkommen identisch zur K9-Automation.
+
+### Bewertung
+
+**Weiterarbeit an K10 ist nach diesem Test sinnvoll.**
+
+Begründung:
+- echter frischer Artikel;
+- harte Gates haben reale Faktenbindungsfehler korrekt gestoppt;
+- eine Reparaturrunde genügte;
+- final alle Qualitätsgates grün;
+- trotz Reparatur vollständige Wandzeit unter fünf Minuten;
+- K9 blieb unverändert auf `2cc8167fa1e31b4ffa2ff76c9819314be4b98555`.
+
+Aktueller Blocker:
+`null`
+
+Nächste Current-Aktion:
+`RUN_ONE_SMALL_MULTI_ARTICLE_K10_BATCH_FROM_FRESH_RESEARCH_AND_MEASURE_FIRST_PASS_RATE_AND_END_TO_END_VARIANCE`
