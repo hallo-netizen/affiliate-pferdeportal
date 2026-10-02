@@ -1,0 +1,66 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "Journal",
+    "category": "pferdewissen-grundlagen",
+    "plan_slot": "d3bd7d12876803b80f744294f27be814ff65bc3cf0af95989bdab4538f9da3e6",
+    "target_keyword": "Warum sagt man alte Schabracke",
+    "title": "Warum sagt man eigentlich „alte Schabracke“?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:c3432583b655b0dae5b996a0",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Schabracke – Duden",
+          "source_url": "https://www.duden.de/rechtschreibung/Schabracke"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "Journal",
+      "target_keyword": "Warum sagt man alte Schabracke",
+      "topic": "Warum sagt man eigentlich „alte Schabracke“?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdewissen-grundlagen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-17a4cf44957540527be2483e",
+  "job_sha256": "0e7ae6be459e0a3012236aa430044d1e17ef53d2fc4f033d3f2746c323f03a23"
+}
