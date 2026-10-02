@@ -42,6 +42,31 @@ jobs:
           set -euo pipefail
           python3 -m engine.production_entry bind "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/pserc.json
 
+      - name: Resolve canonical article identity from existing registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-canonical
+          curl --fail --location --retry 3 --silent --show-error \
+            "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip" \
+            -o /tmp/k10-canonical/ppm679.zip
+          curl --fail --location --retry 3 --silent --show-error \
+            "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PSERC-FIX.zip" \
+            -o /tmp/k10-canonical/pserc-fix.zip
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/k10-canonical/ppm679.zip' | sha256sum -c -
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/k10-canonical/pserc-fix.zip' | sha256sum -c -
+          python3 -m engine.canonical_binding "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k10-canonical/ppm679.zip /tmp/k10-canonical/pserc-fix.zip /tmp/k10-canonical/bindings.json
+          python3 - <<'PY'
+          import json
+          p='/tmp/pserc.json'
+          s=json.load(open(p,encoding='utf-8'))
+          b=json.load(open('/tmp/k10-canonical/bindings.json',encoding='utf-8'))
+          assert b.get('status')=='PASS'
+          s['canonical_article_bindings']=b['bindings']
+          open(p,'w',encoding='utf-8').write(json.dumps(s,ensure_ascii=False,indent=2)+'\n')
+          print('K10_CANONICAL_BINDING_PASS:'+json.dumps(b['bindings'],ensure_ascii=False,sort_keys=True))
+          PY
+
       - name: Require real research before article pipeline
         shell: bash
         run: |
