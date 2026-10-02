@@ -1,5 +1,6 @@
 from __future__ import annotations
-import hashlib, html, json, re
+import hashlib, html, json, re, sys
+from pathlib import Path
 
 CONTRACT='CANONICAL_WRITER_RECEIPT_V1'
 POLICY_CONTRACT='CANONICAL_WRITER_QUALITY_POLICY_V1'
@@ -142,3 +143,28 @@ def verify_package(article):
     if actual!=expected:
         raise WriterContractBlocked('WRITER_PROVENANCE_INVALID_OR_STALE')
     return inspect_html(str(article.get('html') or ''))
+
+
+def main():
+    if len(sys.argv)<3:
+        raise SystemExit('usage: writer_contract_guard.py stamp IN OUT | verify IN')
+    mode=sys.argv[1]
+    try:
+        if mode=='stamp' and len(sys.argv)==4:
+            article=json.loads(Path(sys.argv[2]).read_text(encoding='utf-8'))
+            out=bind_receipt(article)
+            Path(sys.argv[3]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            print(json.dumps({'contract':CONTRACT,'status':'PASS','receipt':out['writer_provenance']},ensure_ascii=False))
+            return
+        if mode=='verify' and len(sys.argv)==3:
+            article=json.loads(Path(sys.argv[2]).read_text(encoding='utf-8'))
+            metrics=verify_package(article)
+            print(json.dumps({'contract':CONTRACT,'status':'PASS','metrics':metrics},ensure_ascii=False))
+            return
+        raise WriterContractBlocked('WRITER_GUARD_USAGE_INVALID')
+    except Exception as exc:
+        print(json.dumps({'contract':CONTRACT,'status':'BLOCKED','reason':str(exc),'publish_allowed':False},ensure_ascii=False))
+        raise SystemExit(2)
+
+if __name__=='__main__':
+    main()
