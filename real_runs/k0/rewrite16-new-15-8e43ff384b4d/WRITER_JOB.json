@@ -1,0 +1,66 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "tuev-beim-pferdeanhaenger-faq",
+    "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+    "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+    "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:e5ed50e2c1bc8bcf1be46302",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "TÜV-Kosten: Preise und Infos zur Hauptuntersuchung – ADAC",
+          "source_url": "https://www.adac.de/rund-ums-fahrzeug/reparatur-pflege-wartung/hu-und-au/tuev-kosten/"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+      "topic": "Wie teuer ist der TÜV beim Pferdeanhänger?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "tuev-beim-pferdeanhaenger-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-c6e6c275a3207c2cef1135ed",
+  "job_sha256": "d7120527582a00a9f44d0a893d4f760561282d88b63ede643baee401d677004e"
+}
