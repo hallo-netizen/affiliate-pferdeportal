@@ -802,3 +802,68 @@ Regression:
 - Independent Reitplatzbewässerung E2E 37002131073 SUCCESS
 - Live TÜV E2E 37002131079 SUCCESS
 - Three-article optimization E2E 37002131061 SUCCESS
+
+
+## K10 WordPress-Export – vorherige article_id-Korrektur war falsch; M34 endgültig wiederhergestellt — 2026-10-02
+
+### Neuer realer Fehler
+Der reale WordPress-Importer Build `0.28.30-pste-v5-binding-safe` blockierte die nach dem vorherigen Fix erzeugte Datei mit:
+- `PSERC_SYSTEM4_ARTICLE_FIELD_INVALID`
+- Feld: `article_id`
+
+Damit war bewiesen:
+1. `article_id = plan_slot` war falsch;
+2. `article_id` ganz zu entfernen war ebenfalls falsch.
+
+### Fehlerhistorie erneut geprüft
+Die bestehende Known-Error-Historie enthält den bereits früher real überwundenen Fall **M34 – Reapplied legacy PPM handoff guards after B01**.
+
+Die dortige gültige Lösung wird jetzt wieder exakt verwendet:
+- äußerer SEO-/WordPress-Handoff bleibt bei exakt fünf Feldern;
+- `plan_slot` wird intern gegen `PPM679_Editorial_Plan_Registry::plan()['slots']` aufgelöst;
+- Vergleich erfolgt mit `PSERC_Plan_Slot_Identity::token(candidate)`;
+- exakt ein Treffer ist Pflicht;
+- dessen `canonical_article_id` wird übernommen;
+- kein Titel-Fallback;
+- fehlender oder mehrdeutiger Slot blockiert fail-closed;
+- zusätzlich gilt die kryptografische Gegenprobe
+  `SHA256("pserc-plan-slot-v2|" + canonical_article_id) == plan_slot`.
+
+### Reale Registry-Auflösung des aktuellen 3er-Batches
+Realprobe Run `37005945077`: **SUCCESS**.
+
+- Mash:
+  `0c5e5534fa0496a7a411cc1c9649297988b5ceb7650f9a52615a533c52e31eea`
+  -> `article:eb4d5d3579472338a1d0a0bb`
+- Sperrriemen sinnvoll:
+  `13bf93f90053f03f308a5617a3ef1ab06b371881da4e98415d45c4bb1bf3a4b5`
+  -> `article:790adf98228aec2e82a241ca`
+- Sperrriemen verschnallen:
+  `0b2b9df06d431904df77ea5839ea704ddb4b059071e16609553ca3160c5f1df2`
+  -> `article:7143719c27af511a0766c1b1`
+
+Alle drei Roundtrip-Hashes PASS.
+
+### Reale K10-Produktionsregression
+Nach Korrektur der Reihenfolge (unverändertes 5-Feld-Intake-Gate zuerst, kanonische ID erst danach anhängen):
+- Run `37006180597` — Mash — SUCCESS
+- Run `37006186620` — Sperrriemen sinnvoll — SUCCESS
+- Run `37006195370` — Sperrriemen verschnallen — SUCCESS
+
+Alle drei erzeugten `proof/WORDPRESS_IMPORT.json`:
+- Contract `SYSTEM4_WORDPRESS_HANDOFF_V1`;
+- echte `article_id` vorhanden;
+- `article_id != plan_slot`;
+- Domain-Hash-Roundtrip PASS;
+- Body-SHA PASS;
+- `publish_allowed=false`.
+
+Begleitprüfungen:
+- Selftests `37006180314`, `37006186652`, `37006195369`: SUCCESS
+- PPM-Inventarläufe `37006180359`, `37006186564`, `37006195348`: SUCCESS
+- K9 unverändert.
+
+### Korrektur der vorherigen Historienaussage
+Die frühere Aussage in diesem Dokument, `article_id` solle im WordPress-Artikelrow vollständig entfallen, ist **superseded und falsch**.
+Gültig ist ausschließlich:
+**article_id ist Pflicht und muss aus der bestehenden kanonischen PPM-Registry zum plan_slot aufgelöst werden.**
