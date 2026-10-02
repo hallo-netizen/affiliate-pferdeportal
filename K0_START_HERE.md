@@ -77,7 +77,11 @@ Repository: `hallo-netizen/affiliate-pferdeportal`
 
 Branch: `konzept0-portal-neutral-20261002`
 
-Workflow: `.github/workflows/k0-production-e2e.yml`
+Canonical authoring workflow: `.github/workflows/k0-authoring-context.yml`
+
+Canonical writer/production workflow: `.github/workflows/k0-writer-accept.yml`
+
+Direkter `ARTICLE_PACKAGE.json`-Produktionsstart ist entfernt und verboten.
 
 Exporter: `engine/k0_wordpress_export.py`
 
@@ -111,3 +115,20 @@ Ein Artikel darf den WordPress-Export **nicht** erreichen, wenn:
 - bekannte K9-Schablonen wie „Für die Praxis heißt das: Betrachte …“, „Trenne Muss-Kriterien …“, „Ein guter Vergleich beginnt …“ oder die alte generische Tabellenform wieder auftauchen.
 
 Diese Sperre ist in `engine/k0_production_gate.py` technisch erzwungen und in `engine/k0_wordpress_export.py` nochmals als Pflicht-Gate gebunden.
+
+
+## PRODUKTIONSWEG-HARDLOCK
+
+Ein sichtbarer Artikeltext darf K0 ausschließlich als `K0_WRITER_DRAFT_V1` betreten.
+
+Verboten:
+- fertigen Artikel als `ARTICLE_PACKAGE.json` in den Produktionslauf legen;
+- Writer-Nachweis nachträglich auf einen fertigen Artikel stempeln;
+- Produktion direkt aus einem frei angelegten Artikelpaket starten;
+- WordPress-Export ohne versiegeltes Writer-Produkt.
+
+Zwingende Kette:
+
+`5-Feld-Intake -> textfreier AUTHORING_CONTEXT -> unveränderbarer WRITER_JOB -> K0_WRITER_DRAFT_V1 -> Writer-Seal -> K0/PPM/LT -> kanonische article_id -> WordPress 0.28.30`
+
+Nur `.github/workflows/k0-writer-accept.yml` darf aus einem Writer-Draft ein `K0_ARTICLE_PACKAGE_V1` erzeugen.
