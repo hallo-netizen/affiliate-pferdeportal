@@ -68,6 +68,8 @@
     "publish_allowed": false
   },
   "first_open_blocker": null,
-  "next_action": "REVIEW_THE_THREE_REAL_ARTICLES_EDITORIALLY_AND_DECIDE_BETWEEN_ONE_MORE_TARGETED_TEST_OR_SMALL_K10_LIVE_BATCH_WITH_TIMING_COMPARISON",
-  "publish_allowed": false
+  "next_action": "EDITORIALLY_REVIEW_THE_THREE_FINAL_GREEN_REAL_ARTICLES_AND_RECORD_ONE_SCALE_DECISION",
+  "publish_allowed": false,
+  "goal_contract_ref": "K10_GOAL_CONTRACT.json",
+  "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"
 }
