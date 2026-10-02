@@ -1,0 +1,99 @@
+name: Build exact 6.72.172 fallback
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-672172-fallback-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-fallback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build and verify exact 6.72.172 fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC_SHA=00a204d3d60c60609f13cd6f4cefee142ec799c4
+          rm -rf /tmp/fallback-src /tmp/fallback-unpack
+          mkdir -p /tmp/fallback-src /tmp/fallback-unpack
+          git archive "$SRC_SHA" release/affiliate-zentrale/current release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt | tar -x -C /tmp/fallback-src
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile, re
+
+          root=Path('/tmp/fallback-src/release/affiliate-zentrale')
+          source=root/'current'
+          manifest=root/'CURRENT_SOURCE_SHA256.txt'
+          rows=[]
+          for raw in manifest.read_text(encoding='utf-8').splitlines():
+              if not raw.strip(): continue
+              digest,rel=raw.split(None,1)
+              rows.append((digest,rel.strip()))
+          if len(rows)!=27:
+              raise SystemExit(f'FAIL manifest rows {len(rows)} != 27')
+
+          for digest,rel in rows:
+              p=source/rel
+              if not p.is_file():
+                  raise SystemExit('FAIL missing '+rel)
+              got=hashlib.sha256(p.read_bytes()).hexdigest()
+              if got!=digest:
+                  raise SystemExit(f'FAIL source hash {rel}: {got} != {digest}')
+
+          main=(source/'affiliate-portal-router/pferdeportal-affiliate-router.php').read_text(encoding='utf-8')
+          if 'Version: 6.72.172' not in main or "const VERSION = '6.72.172';" not in main:
+              raise SystemExit('FAIL version is not exact 6.72.172')
+
+          out=Path('/tmp/AFFILIATE_ZENTRALE_6.72.172_FALLBACK_VERIFIED.zip')
+          with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for digest,rel in sorted(rows,key=lambda x:x[1]):
+                  data=(source/rel).read_bytes()
+                  zi=zipfile.ZipInfo(rel)
+                  zi.date_time=(2026,10,1,0,0,0)
+                  zi.compress_type=zipfile.ZIP_DEFLATED
+                  zi.external_attr=0o100644<<16
+                  z.writestr(zi,data)
+
+          with zipfile.ZipFile(out) as z:
+              names=sorted(n for n in z.namelist() if not n.endswith('/'))
+              expected=sorted(rel for _,rel in rows)
+              if names!=expected:
+                  raise SystemExit('FAIL ZIP file list')
+              for digest,rel in rows:
+                  got=hashlib.sha256(z.read(rel)).hexdigest()
+                  if got!=digest:
+                      raise SystemExit(f'FAIL ZIP byte identity {rel}: {got} != {digest}')
+          sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          Path('/tmp/fallback.sha256').write_text(sha+'  '+out.name+'\n',encoding='utf-8')
+          print('FALLBACK_SOURCE_IDENTITY_PASS_27_OF_27')
+          print('FALLBACK_SHA256 '+sha)
+          print('FALLBACK_BYTES '+str(out.stat().st_size))
+          PY
+
+          find /tmp/fallback-src/release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/fallback-php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/fallback-php-lint.log)" = "21"
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.172_FALLBACK_VERIFIED.zip -d /tmp/fallback-unpack
+          grep -F "Version: 6.72.172" /tmp/fallback-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.172';" /tmp/fallback-unpack/affiliate-portal-router/pferdeportal-affiliate-router.php
+          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.172_FALLBACK_VERIFIED.zip
+          echo "FALLBACK_672172_FULL_STATIC_VERIFY_PASS"
+
+      - name: Upload exact fallback
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-router-672172-fallback-verified
+          path: |
+            /tmp/AFFILIATE_ZENTRALE_6.72.172_FALLBACK_VERIFIED.zip
+            /tmp/fallback.sha256
+            /tmp/fallback-php-lint.log
+          if-no-files-found: error
