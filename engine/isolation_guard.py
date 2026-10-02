@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 ALLOWED_REFERENCE_FILES={
     'K9_BASELINE_REFERENCE.json','K10_START_HERE.md','README.md','CURRENT_STATE.json'
 }
-FORBIDDEN_NAMES={'runtime','warehouse','submissions','writer_drafts','final','__pycache__'}
+FORBIDDEN_NAMES={'runtime','warehouse','submissions','final','__pycache__'}
 FORBIDDEN_ACTIVE_PATTERNS=(
     r'\bimport\s+k9_',r'\bfrom\s+k9_',r'\bk9_engine\.py\b',r'\bk9_write_packager\.py\b',
     r'\bK9_STOP\.json\b',r'\bK9_WORDPRESS_DIRECT_IMPORT_[0-9a-f]+'
@@ -15,6 +15,20 @@ def verify():
     findings=[]
     for p in ROOT.rglob('*'):
         rel=p.relative_to(ROOT)
+        if rel.parts and rel.parts[0]=='writer_drafts':
+            if p.is_dir():
+                continue
+            if p.suffix!='.json':
+                findings.append('K0_WRITER_DRAFT_NON_JSON:'+str(rel))
+                continue
+            try:
+                draft=json.loads(p.read_text(encoding='utf-8'))
+            except Exception:
+                findings.append('K0_WRITER_DRAFT_INVALID_JSON:'+str(rel))
+                continue
+            if draft.get('contract')!='K0_WRITER_DRAFT_V1' or draft.get('publish_allowed') is not False or not re.fullmatch(r'k0w-[0-9a-f]{24}',str(draft.get('job_id') or '')):
+                findings.append('FORBIDDEN_NON_K0_WRITER_DRAFT:'+str(rel))
+            continue
         # Git metadata is repository history/transport state, not active K10 project content.
         if rel.parts and rel.parts[0]=='.git':
             continue
