@@ -22,7 +22,9 @@
     "Kapillarwirkung",
     "Tretschicht",
     "OTTO Sport",
-    "Wasserpegel"
+    "Wasserpegel",
+    "Regnern",
+    "Beregnungspausen"
   ],
   "production_context": {
     "fact_pack": {
@@ -48,6 +50,6 @@
       }
     }
   },
-  "revision_count": 3,
+  "revision_count": 4,
   "publish_allowed": false
 }
