@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdedecken-regendecken-faq",
+    "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+    "target_keyword": "Frieren Pferde unter Regendecken",
+    "title": "Frieren Pferde unter Regendecken?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "When to Blanket a Horse – Penn State Extension",
+          "source_url": "https://extension.psu.edu/when-to-blanket-a-horse"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Frieren Pferde unter Regendecken",
+      "topic": "Frieren Pferde unter Regendecken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
