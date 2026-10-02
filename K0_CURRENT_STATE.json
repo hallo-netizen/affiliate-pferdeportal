@@ -2,9 +2,9 @@
   "contract": "K0_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "READY_FOR_REAL_CHAT_ACCEPTANCE",
+  "status": "READY_FOR_NORMAL_CHAT_PRODUCTION",
   "first_open_blocker": null,
-  "next_action": "UPLOAD_K0_HOBBY_DISCGOLF_INPUT_AND_RUN_K0_START_IN_NEW_CHAT",
+  "next_action": "NORMAL_K0_PRODUCTION_FROM_CURRENT_UPLOAD",
   "start_command": "K0:start",
   "start_door": {
     "repository": "hallo-netizen/text-start",
@@ -12,16 +12,25 @@
     "title": "K0:start"
   },
   "portal_assignment": "AUTO_ONLY",
-  "verified_head": "225a700a407566156c25bfb0fb2e99f4057b7ac0",
+  "production_entry": ".github/workflows/k0-production-e2e.yml",
+  "wordpress_export": {
+    "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+    "exporter": "engine/k0_wordpress_export.py",
+    "plugin_version_verified_against": "0.28.27",
+    "ppm_version": "6.7.9",
+    "direct_wordpress_upload_ready": true
+  },
   "evidence": {
-    "selftest_run": 37020240982,
-    "selftest_status": "SUCCESS",
-    "hobby_discgolf_acceptance_run": 37020241199,
-    "hobby_discgolf_acceptance_status": "SUCCESS",
+    "real_chat_production_run": 37022568142,
+    "real_chat_production_status": "SUCCESS",
+    "input_batch_sha256": "f113f5a638f78651de7faaae0b6ba67e0c12645eb8f951b205d285addaca6565",
     "portal_auto_detected": "hobby",
-    "table_structure": "PASS",
+    "structure_table": "PASS",
     "language_tool_6_8": "PASS_ZERO_FINDINGS",
-    "ppm_6_7_9_parity": "PASS_104_OF_104"
+    "ppm_6_7_9_parity": "PASS_104_OF_104",
+    "wordpress_export_verify": "PASS",
+    "final_filename": "K0_WORDPRESS_DIRECT_IMPORT_f113f5a638f78651de7faaae0b6ba67e0c12645eb8f951b205d285addaca6565.json",
+    "final_sha256": "dbfbd3d5562a69875eb905940acc3fccde693c02f15aa9c4baa96eeb57a95ef6"
   },
   "performance_regression_allowed": false,
   "quality_reduction_allowed": false,
