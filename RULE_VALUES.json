@@ -295,9 +295,9 @@
     "minimum_unique_content_token_ratio": 0.18,
     "other_cells_hard_maximum_words": 7,
     "presence_policy": {
-      "Beratung": "OPTIONAL",
-      "FAQ": "OPTIONAL",
-      "Pflege": "OPTIONAL",
+      "Beratung": "REQUIRED_UNLESS_EXCEPTION",
+      "FAQ": "REQUIRED_UNLESS_EXCEPTION",
+      "Pflege": "REQUIRED_UNLESS_EXCEPTION",
       "Vergleich": "REQUIRED"
     },
     "sentences_forbidden": true,
@@ -310,7 +310,7 @@
       "rationale_minimum_chars": 12
     },
     "selection_guidance": {
-      "mode": "NEUTRAL_NO_TABLE_QUOTA",
+      "mode": "TABLE_REQUIRED_UNLESS_DEFINED_EXCEPTION",
       "added_value_includes": [
         "SIDE_BY_SIDE_COMPARISON",
         "DECISION_COMPRESSION",
@@ -336,6 +336,27 @@
         "COMPACT_MATRIX_CREATES_REAL_SIDE_BY_SIDE_VALUE",
         "READER_CAN_DECIDE_OR_CHECK_FASTER_THAN_IN_PROSE",
         "RELATIONSHIP_BETWEEN_MULTIPLE_CRITERIA_AND_OUTCOMES_BECOMES_CLEARER"
+      ]
+    },
+    "omission_exception": {
+      "required_for_no_table": true,
+      "allowed_codes": [
+        "LINEAR_SEQUENCE",
+        "EXISTING_CHECKLIST_EQUIVALENT",
+        "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+        "NUANCE_LOSS"
+      ],
+      "rationale_minimum_chars": 20,
+      "definitions": {
+        "LINEAR_SEQUENCE": "Der Kerninhalt ist eine Reihenfolge/Anleitung; eine Matrix würde den Ablauf schlechter statt besser erfassbar machen.",
+        "EXISTING_CHECKLIST_EQUIVALENT": "Eine bestehende Liste oder Checkliste bietet bereits denselben Scan-/Kontrollnutzen; eine Tabelle hätte keine eigene Funktion.",
+        "INSUFFICIENT_RELATIONAL_DIMENSIONS": "Es gibt nicht mindestens vier sinnvolle Zeilen und drei sinnvolle Spalten ohne Fülltext.",
+        "NUANCE_LOSS": "Eine tabellarische Verdichtung würde fachlich wichtige Bedingungen oder Einschränkungen zu stark vereinfachen."
+      },
+      "forbidden_as_sole_reason": [
+        "FACTS_ALREADY_EXIST_IN_PROSE",
+        "TABLE_NOT_NECESSARY",
+        "TEXT_IS_CLEAR_WITHOUT_TABLE"
       ]
     }
   },

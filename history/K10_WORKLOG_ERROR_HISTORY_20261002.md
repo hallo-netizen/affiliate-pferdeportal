@@ -979,3 +979,33 @@ Korrektur für zukünftige Artikel:
 - vor OMIT wird ein 4×3-Kandidat auf echten Vergleichs-/Entscheidungs-/Kontrollnutzen geprüft;
 - lineare Inhalte, gleichwertige Checklisten, Fülltext oder Nuancenverlust sprechen weiter für OMIT;
 - bestehende fertige drei Artikel werden nicht verändert.
+
+
+## Tabellenregel umgekehrt: Tabelle Standard, Weglassen Ausnahme – 2026-10-02
+
+Nutzerentscheidung:
+Die bisherige OPTIONAL-Logik wurde als zu leicht in Richtung Weglassen bewertet.
+
+Neue Regel:
+- Beratung: REQUIRED_UNLESS_EXCEPTION
+- FAQ: REQUIRED_UNLESS_EXCEPTION
+- Pflege: REQUIRED_UNLESS_EXCEPTION
+- Vergleich: REQUIRED
+
+Zulässige Ausnahmen:
+- LINEAR_SEQUENCE
+- EXISTING_CHECKLIST_EQUIVALENT
+- INSUFFICIENT_RELATIONAL_DIMENSIONS
+- NUANCE_LOSS
+
+Nicht ausreichend:
+- Fakten stehen bereits im Fließtext;
+- Tabelle ist nicht nötig;
+- Text ist auch ohne Tabelle klar.
+
+Bewertung der letzten drei Texte, ohne sie zu verändern:
+- Mash/Magenprobleme: unter neuer Regel wäre Tabelle der Normalfall.
+- Sperrriemen sinnvoll/verzichten: unter neuer Regel wäre Tabelle der Normalfall.
+- Sperrriemen richtig verschnallen: Weglassen ist mit LINEAR_SEQUENCE bzw. EXISTING_CHECKLIST_EQUIVALENT plausibel.
+
+Bestehende drei Artikeltexte bleiben unverändert.

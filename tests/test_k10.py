@@ -79,7 +79,7 @@ def make_base():
       'wordpress_category':{'id':12,'slug':'training'},
       'heading_intent_terms':['Aufgabe','Longierpeitsche','Stimme','Longe','Zusammenspiel','Sicherer','Einsatz','Longieren'],
       'comparison_source_bindings':[],
-      'table_decision':{'decision':'OMIT_NO_ADDED_VALUE','rationale':'FAQ enthält eine klare Schrittfolge ohne zusätzlichen Tabellenmehrwert.'},
+      'table_decision':{'decision':'OMIT_NO_ADDED_VALUE','exception_code':'EXISTING_CHECKLIST_EQUIVALENT','rationale':'Die vorhandene Checkliste bietet bereits denselben Scan- und Kontrollnutzen; eine zusätzliche Tabelle hätte keine eigene Funktion.'},
       'html':html,'external_results':{'LanguageTool 6.8':'PASS'},'semantic_rule_results':{}
     }
 
@@ -285,9 +285,24 @@ class K10Tests(unittest.TestCase):
         result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertEqual(result['status'],'PASS',result)
 
-    def test_faq_without_table_passes(self):
-        a=make_base(); self.assertNotIn('<table',a['html']); result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+    def test_faq_without_table_passes_only_with_defined_exception(self):
+        a=make_base(); self.assertNotIn('<table',a['html'])
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertEqual(result['status'],'PASS',result)
+
+    def test_faq_without_table_and_without_exception_blocks(self):
+        a=make_base()
+        a['table_decision']={'decision':'OMIT_NO_ADDED_VALUE','rationale':'Der Text ist auch ohne Tabelle verständlich genug.'}
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:table.presence_policy',result['findings'])
+        self.assertIn('HARD_RULE_NOT_PASS:table.optional_decision_documented',result['findings'])
+
+    def test_faq_without_table_with_unknown_exception_blocks(self):
+        a=make_base()
+        a['table_decision']={'decision':'OMIT_NO_ADDED_VALUE','exception_code':'TEXT_ALREADY_CLEAR','rationale':'Der Text ist bereits klar und braucht deshalb keine zusätzliche Darstellung.'}
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:table.presence_policy',result['findings'])
+
 
     def test_comparison_without_table_blocks(self):
         a=make_base(); a['article_type']='Vergleich'; a['title']='Longierpeitschen vergleichen'; a['target_keyword']='Longierpeitschen vergleichen'; a['type_meta']={'comparison_targets':['A','B'],'comparison_criteria':['Preis','Einsatz']}

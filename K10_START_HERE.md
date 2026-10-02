@@ -118,3 +118,19 @@ Tabelle **weglassen**, wenn:
 Tabelle **einbauen**, wenn die Matrix einen echten Beziehungs-/Vergleichs-/Entscheidungsnutzen bringt.
 
 Keine Quote. Weder „möglichst viele“ noch „möglichst wenige“ Tabellen.
+
+
+## TABELLEN-GRUNDSATZ – STANDARD IST TABELLE
+Für `Beratung`, `FAQ` und `Pflege` gilt künftig: **Eine Tabelle gehört grundsätzlich in den Artikel.**
+
+Weglassen ist nur mit genau einer definierten Ausnahme erlaubt:
+- `LINEAR_SEQUENCE`
+- `EXISTING_CHECKLIST_EQUIVALENT`
+- `INSUFFICIENT_RELATIONAL_DIMENSIONS`
+- `NUANCE_LOSS`
+
+„Steht schon im Fließtext“, „nicht nötig“ oder „Text ist auch so klar“ sind **keine** ausreichenden Ausnahmen.
+
+`Vergleich` bleibt ohne Ausnahme tabellenpflichtig.
+
+Keine Tabellenquote. Die Regel ist: Tabelle als Normalfall, Ausnahme nur fachlich begründet.

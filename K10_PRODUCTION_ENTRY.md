@@ -84,3 +84,17 @@ Wenn 1–3 klar ja und 4 ebenfalls ja: Tabelle ist echter Mehrwert, auch wenn di
 Wenn der Inhalt linear ist oder eine Liste denselben Nutzen bereits gleich gut erfüllt: Tabelle weglassen.
 
 Die bestehende Kompaktheitsregel für Kopfzeile/linke Spalte und das Verbot von Fließtext in Tabellen bleiben unverändert.
+
+
+## TABLE DEFAULT REQUIRED
+Bei Beratung, FAQ und Pflege muss zunächst eine echte Tabelle gebaut werden können. Nur wenn einer der vier Ausnahmegründe objektiv zutrifft, darf sie entfallen.
+
+Ausnahmen:
+1. `LINEAR_SEQUENCE` – Schrittfolge würde durch Matrix schlechter.
+2. `EXISTING_CHECKLIST_EQUIVALENT` – vorhandene Checkliste erfüllt bereits exakt denselben Scan-Zweck.
+3. `INSUFFICIENT_RELATIONAL_DIMENSIONS` – keine vier sinnvollen Zeilen × drei sinnvollen Spalten ohne Fülltext.
+4. `NUANCE_LOSS` – Tabelle würde wichtige Bedingungen fachlich verzerren/vereinfachen.
+
+Bei OMIT muss `table_decision.exception_code` einen dieser Werte enthalten und die Begründung muss konkret sein.
+
+Die Qualitätsregeln für vorhandene Tabellen bleiben unverändert.

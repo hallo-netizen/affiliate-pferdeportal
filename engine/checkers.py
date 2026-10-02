@@ -420,7 +420,25 @@ def _table_tautological_action_rows(rows):
 
 def table_receipts(article):
     v=load_values(); cfg=v['table']; legacy=v['ppm_parity']['table']; html=article['html']; typ=article['article_type']; tables=re.findall(r'(?is)<table\b[^>]*>.*?</table>',html)
-    count=len(tables); policy=cfg['presence_policy'][typ]; presence_ok=(count==1 if policy=='REQUIRED' else count<=1)
+    count=len(tables); policy=cfg['presence_policy'][typ]
+    omission_cfg=cfg.get('omission_exception') or {}
+    decision=article.get('table_decision') or {}
+    exception_code=str(decision.get('exception_code') or '')
+    exception_rationale=str(decision.get('rationale') or '').strip()
+    allowed_exceptions=set(omission_cfg.get('allowed_codes') or [])
+    omission_exception_ok=(
+        count==0
+        and policy=='REQUIRED_UNLESS_EXCEPTION'
+        and decision.get('decision')==cfg['optional_decision']['omit_value']
+        and exception_code in allowed_exceptions
+        and len(exception_rationale)>=int(omission_cfg.get('rationale_minimum_chars') or 0)
+    )
+    if policy=='REQUIRED':
+        presence_ok=(count==1)
+    elif policy=='REQUIRED_UNLESS_EXCEPTION':
+        presence_ok=(count==1 or omission_exception_ok)
+    else:
+        presence_ok=(count<=1)
     canonical_ok=True; labels_ok=True; cells_ok=True; summary_ok=True; value_ok=True; min_rows_ok=True; structure_ok=True; evidence={}
     exceptions=set(article.get('table_multiword_exceptions') or [])
     if count==1:
@@ -452,12 +470,16 @@ def table_receipts(article):
         evidence['tautological_action_rows']=tautological_rows
     decision_cfg=cfg['optional_decision']; decision=article.get('table_decision') or {}
     optional_decision_ok=True; decision_evidence={'policy':policy,'count':count,'decision':decision}
-    if policy=='OPTIONAL':
+    if policy in ('OPTIONAL','REQUIRED_UNLESS_EXCEPTION'):
         expected_decision=decision_cfg['include_value'] if count==1 else decision_cfg['omit_value']
         optional_decision_ok=(
             decision.get('decision')==expected_decision
             and len(str(decision.get('rationale') or '').strip())>=int(decision_cfg['rationale_minimum_chars'])
         )
+        if policy=='REQUIRED_UNLESS_EXCEPTION' and count==0:
+            optional_decision_ok=optional_decision_ok and omission_exception_ok
+            decision_evidence['allowed_exception_codes']=sorted(allowed_exceptions)
+            decision_evidence['exception_code']=exception_code
         decision_evidence['expected_decision']=expected_decision
     rows_out=[('table.required_for_comparison',presence_ok,{'count':count,'policy':policy}),('table.presence_policy',presence_ok,{'count':count,'policy':policy}),('table.minimum_rows',min_rows_ok,{}),('table.structure',structure_ok,{}),
       ('table.canonical_classes',canonical_ok,{}),('table.compact_labels',labels_ok,{}),('table.compact_cells',cells_ok,{}),('table.post_summary_policy',summary_ok,{}),('table.value_required_if_present',value_ok,evidence),('table.optional_decision_documented',optional_decision_ok,decision_evidence)]
