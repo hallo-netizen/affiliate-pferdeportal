@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "tuev-beim-pferdeanhaenger-faq",
+      "plan_slot": "53c8c859fbbc1b9a2a17ffe53efaf31d74520ac7a89aebc1e84ec9a6ea95ea6f",
+      "target_keyword": "Wie oft muss ein Pferdeanhänger zum TÜV",
+      "title": "Wie oft muss ein Pferdeanhänger zum TÜV?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "3536435dba9cf0a0fdc1d91e71d0ecdd47d96cb314a50fa667c5fce53429c68e"
+}
