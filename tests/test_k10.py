@@ -20,6 +20,7 @@ from engine.core import hard_rules
 from engine.package_adapters import PACKAGE_RESULT_MAP
 from engine.real_proof import slug_from_title
 from engine.production_entry import validate as validate_production_entry, build_job_metadata_snapshot, Blocked as ProductionEntryBlocked
+from engine.wordpress_export import build_single as build_wordpress_export, ExportBlocked as WordPressExportBlocked
 
 
 def words(prefix,n):
@@ -452,5 +453,51 @@ class K10Tests(unittest.TestCase):
         a['html']=a['html'].replace('data-source-title="Fachquelle F2"','data-source-title="Test"')
         result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertIn('HARD_RULE_NOT_PASS:facts.real_source_trace',result['findings'])
+
+
+    def test_wordpress_export_uses_proven_system4_handoff_and_never_synthesizes_article_id(self):
+        import hashlib
+        a=make_base()
+        slot='7'*64
+        a['planning_binding']={
+          'article_type':'FAQ','category':'training','plan_slot':slot,
+          'target_keyword':a['target_keyword'],'title':a['title']
+        }
+        a['publish_allowed']=False
+        for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
+            claim['source_url']=f'https://example.org/source-{idx}'
+        research={'contract':'K10_REAL_RESEARCH_V1','retrieved_at':'2026-10-02T00:00:00Z'}
+        snapshot={'source_batch_sha256':'8'*64}
+        lt={'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
+        out=build_wordpress_export(a,research,snapshot,lt)
+        self.assertEqual(out['contract'],'SYSTEM4_WORDPRESS_HANDOFF_V1')
+        self.assertEqual(out['batch_sha256'],'8'*64)
+        self.assertEqual(out['article_count'],1)
+        self.assertIs(out['wordpress_review']['direct_wordpress_upload_ready'],True)
+        row=out['articles'][0]
+        self.assertEqual(set(row),{
+          'index','title','target_keyword','category','article_type','plan_slot',
+          'final_draft_sha256','revision_count','body','production_context',
+          'languagetool','ppm679',
+        })
+        self.assertNotIn('article_id',row)
+        self.assertEqual(row['plan_slot'],slot)
+        self.assertEqual(row['final_draft_sha256'],hashlib.sha256(a['html'].encode()).hexdigest())
+        self.assertEqual(row['body'],a['html'])
+
+    def test_wordpress_export_blocks_without_current_batch_binding(self):
+        a=make_base()
+        slot='7'*64
+        a['planning_binding']={
+          'article_type':'FAQ','category':'training','plan_slot':slot,
+          'target_keyword':a['target_keyword'],'title':a['title']
+        }
+        for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
+            claim['source_url']=f'https://example.org/source-{idx}'
+        with self.assertRaisesRegex(WordPressExportBlocked,'WORDPRESS_BATCH_SHA256_MISSING'):
+            build_wordpress_export(
+              a,{'retrieved_at':'2026-10-02T00:00:00Z'},{},
+              {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
+            )
 
 if __name__=='__main__': unittest.main(verbosity=2)
