@@ -104,6 +104,19 @@ class K10Tests(unittest.TestCase):
         self.assertEqual(result['status'],'BLOCKED')
         self.assertEqual(sum(x=='HARD_RULE_NOT_PASS:heading.natural_concrete_section_language' for x in result['findings']),1)
 
+    def test_negative_missing_enumeration_separator_h2_blocks_once(self):
+        a=make_base()
+        a['html']=a['html'].replace('Stimme und Longe im Zusammenspiel','Stimme Longe und Zusammenspiel nutzen')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertEqual(result['status'],'BLOCKED')
+        self.assertEqual(sum(x=='HARD_RULE_NOT_PASS:heading.natural_concrete_section_language' for x in result['findings']),1)
+
+    def test_positive_enumeration_h2_with_comma_passes(self):
+        a=make_base()
+        a['html']=a['html'].replace('Stimme und Longe im Zusammenspiel','Stimme, Longe und Zusammenspiel nutzen')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertEqual(result['status'],'PASS',result)
+
     def test_faq_without_table_passes(self):
         a=make_base(); self.assertNotIn('<table',a['html']); result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertEqual(result['status'],'PASS',result)
@@ -120,6 +133,28 @@ class K10Tests(unittest.TestCase):
         a['semantic_rule_results']['table.value_required_if_present']='FAIL'
         result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertIn('HARD_RULE_NOT_PASS:table.value_required_if_present',result['findings'])
+
+    def test_tautological_table_blocks_even_with_semantic_pass(self):
+        a=make_base()
+        h=a['research_claims']['F2']['evidence_text_sha256']
+        tr=trace('F2','Fachquelle F2',h)
+        table=f'<section data-block="table"><h2>Hilfsmittel beim Longieren gezielt auswählen</h2><table class="system-129-table comparison-table"><thead><tr><th>Hilfsmittel</th><th>Zweck</th><th>Kontrolle</th></tr></thead><tbody><tr><td data-fact-ids="F2">Longierpeitsche</td><td data-fact-ids="F2">Hilfe beim Longieren</td><td data-fact-ids="F2">Longierpeitsche prüfen</td></tr><tr><td data-fact-ids="F3">Stimme</td><td data-fact-ids="F3">Hilfen beim Longieren</td><td data-fact-ids="F3">Stimme kontrollieren</td></tr><tr><td data-fact-ids="F3">Longe</td><td data-fact-ids="F3">Zusammenspiel</td><td data-fact-ids="F3">Longe prüfen</td></tr><tr><td data-fact-ids="F4">Abstand</td><td data-fact-ids="F4">Sicherer Einsatz</td><td data-fact-ids="F4">Kontrolle beim Longieren</td></tr></tbody></table><p data-fact-ids="F2">{tr} Die Tabelle ordnet Aufgabe, Longierpeitsche und Hilfe beim Longieren für Training und sicheren Einsatz knapp als Entscheidungshilfe.</p></section>'
+        a['html']=a['html'].replace('<section data-block="conclusion">',table+'<section data-block="conclusion">')
+        a['table_decision']={'decision':'INCLUDE_ADDED_VALUE','rationale':'Die Tabelle soll Hilfsmittel und Kontrollen als Entscheidungshilfe verbinden.'}
+        a['semantic_rule_results']['table.value_required_if_present']='PASS'
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:table.value_required_if_present',result['findings'])
+
+    def test_non_tautological_table_passes_with_semantic_pass(self):
+        a=make_base()
+        h=a['research_claims']['F2']['evidence_text_sha256']
+        tr=trace('F2','Fachquelle F2',h)
+        table=f'<section data-block="table"><h2>Hilfsmittel beim Longieren gezielt auswählen</h2><table class="system-129-table comparison-table"><thead><tr><th>Hilfsmittel</th><th>Zweck</th><th>Kontrolle</th></tr></thead><tbody><tr><td data-fact-ids="F2">Longierpeitsche</td><td data-fact-ids="F2">Hilfe beim Longieren</td><td data-fact-ids="F2">Aufgabe im Training</td></tr><tr><td data-fact-ids="F3">Stimme</td><td data-fact-ids="F3">Hilfen beim Longieren</td><td data-fact-ids="F3">Longe im Zusammenspiel</td></tr><tr><td data-fact-ids="F3">Longe</td><td data-fact-ids="F3">Zusammenspiel</td><td data-fact-ids="F3">Stimme beim Longieren</td></tr><tr><td data-fact-ids="F4">Abstand</td><td data-fact-ids="F4">Sicherer Einsatz</td><td data-fact-ids="F4">Kontrolle beim Longieren</td></tr></tbody></table><p data-fact-ids="F2">{tr} Die Tabelle ordnet Aufgabe, Longierpeitsche und Hilfe beim Longieren für Training und sicheren Einsatz knapp als Entscheidungshilfe.</p></section>'
+        a['html']=a['html'].replace('<section data-block="conclusion">',table+'<section data-block="conclusion">')
+        a['table_decision']={'decision':'INCLUDE_ADDED_VALUE','rationale':'Die Tabelle verbindet Hilfsmittel mit jeweils eigenständigen Auswahl- und Kontrollpunkten.'}
+        a['semantic_rule_results']['table.value_required_if_present']='PASS'
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertEqual(result['status'],'PASS',result)
 
     def test_missing_optional_table_decision_blocks(self):
         a=make_base(); a.pop('table_decision',None)

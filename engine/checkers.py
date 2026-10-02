@@ -293,6 +293,9 @@ def fact_receipts(article):
     ]
     return [_receipt(rid,'fact_trace_checker',article,'PASS' if ok else 'FAIL',ev) for rid,ok,ev in rows]
 
+def _heading_missing_enumeration_separator(value):
+    return bool(re.search(r'^\s*[A-ZÄÖÜ][\wÄÖÜäöüß-]+\s+[A-ZÄÖÜ][\wÄÖÜäöüß-]+\s+(?:und|oder)\s+[A-ZÄÖÜ][\wÄÖÜäöüß-]+\b',str(value or '')))
+
 def editorial_receipts(article):
     v=load_values(); cfg=v['heading']; legacy=v['ppm_parity']; html=article['html']; sections=_sections(html)
     headings=[s['heading'] for s in sections if s['heading']]; norm=[_norm(x) for x in headings]
@@ -317,6 +320,7 @@ def editorial_receipts(article):
     for s in sections:
         hn=_norm(s['heading'])
         if not hn or hn in SPECIAL_HEADINGS: continue
+        if _heading_missing_enumeration_separator(s['heading']): natural_find.append('enumeration_punctuation:'+s['heading']); continue
         if hn in generic or any(f and f in hn for f in fragments): natural_find.append('generic:'+s['heading']); continue
         if any(_norm(p) in hn for p in cfg['abstract_meta_patterns']): natural_find.append('abstract:'+s['heading']); continue
         ht={x for x in hn.split() if len(x)>=4 and x not in stop and x not in meta_tokens}; ct=set(_norm(s['text']).split())
@@ -399,6 +403,21 @@ def _table_parts(table):
         if cells: rows.append(cells)
     return headers,rows
 
+def _table_tautological_action_rows(rows):
+    action_words={'prüfen','pruefen','kontrollieren','beurteilen','wählen','waehlen','nutzen','einstellen'}
+    bad=[]
+    for idx,row in enumerate(rows,1):
+        if len(row)<3: continue
+        prior=set()
+        for cell in row[:-1]:
+            prior.update(_norm(cell).split())
+        last=set(_norm(row[-1]).split())
+        content={x for x in last if x not in action_words}
+        actions=last-content
+        if content and actions and content.issubset(prior):
+            bad.append({'row':idx,'cells':row})
+    return bad
+
 def table_receipts(article):
     v=load_values(); cfg=v['table']; legacy=v['ppm_parity']['table']; html=article['html']; typ=article['article_type']; tables=re.findall(r'(?is)<table\b[^>]*>.*?</table>',html)
     count=len(tables); policy=cfg['presence_policy'][typ]; presence_ok=(count==1 if policy=='REQUIRED' else count<=1)
@@ -425,7 +444,12 @@ def table_receipts(article):
             pars=re.findall(r'(?is)<p\b[^>]*>(.*?)</p>',after); sc=v['global']['post_table_summary']; summary_ok=len(pars)==int(sc['paragraphs_exact'])
             if pars:
                 wc=len(_words(pars[0])); ss=len(_sentences(pars[0])); summary_ok=summary_ok and int(sc['words_min'])<=wc<=int(sc['words_max']) and int(sc['sentences_min'])<=ss<=int(sc['sentences_max'])
-        semantic=article.get('semantic_rule_results') or {}; value_ok=(semantic.get('table.value_required_if_present')=='PASS'); evidence['table_value_semantic_result']=semantic.get('table.value_required_if_present')
+        semantic=article.get('semantic_rule_results') or {}
+        tautological_rows=_table_tautological_action_rows(rows)
+        tautology_ok=(not rows or len(tautological_rows)*2<len(rows))
+        value_ok=(semantic.get('table.value_required_if_present')=='PASS' and tautology_ok)
+        evidence['table_value_semantic_result']=semantic.get('table.value_required_if_present')
+        evidence['tautological_action_rows']=tautological_rows
     decision_cfg=cfg['optional_decision']; decision=article.get('table_decision') or {}
     optional_decision_ok=True; decision_evidence={'policy':policy,'count':count,'decision':decision}
     if policy=='OPTIONAL':
