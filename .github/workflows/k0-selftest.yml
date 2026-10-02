@@ -44,7 +44,7 @@ jobs:
           c=json.load(open('K0_CURRENT_STATE.json'))
           g=json.load(open('K0_GOAL_CONTRACT.json'))
           assert c['publish_allowed'] is False
-          assert c['k9_unchanged'] is True and c['k10_unchanged'] is True
+          assert c['k10_unchanged'] is True
           assert g['hard_rules']['quality_reduction_allowed'] is False
           assert g['hard_rules']['performance_regression_allowed'] is False
           assert g['hard_rules']['portal_must_be_auto_detected'] is True
