@@ -526,6 +526,13 @@
       "k0_changed": false,
       "k9_changed": false,
       "publish_allowed": false
+    },
+    "target_contract_sync": {
+      "status": "SYNCED_TO_CURRENT_USER_APPROVED_TABLE_POLICY",
+      "target_file": "K10_GOAL_CONTRACT.json",
+      "baseline_goal_unchanged": "MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE",
+      "k0_changed": false,
+      "k9_changed": false
     }
   },
   "first_open_blocker": null,

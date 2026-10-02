@@ -1033,3 +1033,18 @@ Historische ältere E2E-Artikel ohne neuen Ausnahme-Metadatensatz blockieren erw
 
 Die letzten drei aktuellen Artikeltexte wurden nicht verändert.
 K0 und K9 wurden nicht verändert.
+
+
+## Abschlussnachholung: Zielvertrag auf neue Tabellenregel synchronisiert – 2026-10-02
+
+Bei der Abschlussprüfung wurde ein echtes Delta gefunden:
+K10_GOAL_CONTRACT.json enthielt noch die vorherige OPTIONAL-Tabellenformulierung, obwohl die vom Nutzer danach beschlossene Regel bereits implementiert und getestet war.
+
+Nachholung:
+- Zielbasis MAXIMIZE_MEDIUM_WITHOUT_ANY_GATE_OR_QUALITY_CHANGE unverändert;
+- explizite Tabellenregel im Zielvertrag auf REQUIRED_UNLESS_EXCEPTION für FAQ/Beratung/Pflege aktualisiert;
+- Vergleich bleibt REQUIRED ohne Ausnahme;
+- vier zulässige Ausnahmegründe im Zielvertrag fest gebunden;
+- generisches „steht schon im Text / nicht nötig“ ausdrücklich nicht ausreichend;
+- alte, inzwischen überholte optionale Tabellenpassage aus K10_START_HERE entfernt;
+- K0 und K9 nicht verändert.

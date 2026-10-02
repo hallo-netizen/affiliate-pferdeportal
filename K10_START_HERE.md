@@ -98,28 +98,6 @@ Diese Elemente sind Pferdeatelier-/System4-Kompatibilitätslogik und **keine all
 K0 bleibt technisch und vertraglich eigenständig.
 
 
-## TABELLENAUSWAHL – NEUTRAL, KEINE TABELLENQUOTE
-Bei optionalen Artikeltypen darf `OMIT_NO_ADDED_VALUE` **nicht** allein damit begründet werden, dass die Fakten bereits im Fließtext stehen.
-
-Eine Tabelle kann Mehrwert schaffen, obwohl sie keine neuen Fakten enthält, wenn sie vorhandene Fakten sinnvoll **in Beziehung setzt**, zum Beispiel:
-- Kriterien direkt gegenüberstellt;
-- Entscheidungssituationen verdichtet;
-- „passend / kritisch“ oder „Prüfpunkt / Konsequenz“ schnell erfassbar macht;
-- mehrere unabhängige Prüfpunkte in einer echten Matrix zusammenführt.
-
-Vor `OMIT_NO_ADDED_VALUE` gedanklich einen kompakten Kandidaten mit mindestens 4 sinnvollen Zeilen und 3 sinnvollen Spalten prüfen.
-
-Tabelle **weglassen**, wenn:
-- der Inhalt überwiegend linear oder schrittweise ist;
-- eine vorhandene Liste/Checkliste denselben Scan-Nutzen bereits gleich gut liefert;
-- eine 4×3-Tabelle nur mit Fülltext zustande käme;
-- wichtige fachliche Nuancen durch die Tabellenform verloren gingen.
-
-Tabelle **einbauen**, wenn die Matrix einen echten Beziehungs-/Vergleichs-/Entscheidungsnutzen bringt.
-
-Keine Quote. Weder „möglichst viele“ noch „möglichst wenige“ Tabellen.
-
-
 ## TABELLEN-GRUNDSATZ – STANDARD IST TABELLE
 Für `Beratung`, `FAQ` und `Pflege` gilt künftig: **Eine Tabelle gehört grundsätzlich in den Artikel.**
 
