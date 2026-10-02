@@ -1,0 +1,9 @@
+{
+  "contract": "K0_WORDPRESS_EXPORT_VERIFY_V1",
+  "status": "PASS",
+  "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "batch_sha256": "3536435dba9cf0a0fdc1d91e71d0ecdd47d96cb314a50fa667c5fce53429c68e",
+  "article_count": 1,
+  "body_sha256": "373ae548d435ec671fd47df4f22986ecde40de7edc4c49c630d9d4286b4e591c",
+  "publish_allowed": false
+}
