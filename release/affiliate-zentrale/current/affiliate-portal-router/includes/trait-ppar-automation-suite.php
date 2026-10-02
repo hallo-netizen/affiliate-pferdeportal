@@ -3199,14 +3199,29 @@ trait PPAR_Automation_Suite_Trait {
 
     /** V6.72.82 – Vollautomatik: der komplette aktive Pool nimmt teil. */
     public function ensure_full_pool_automation() {
-        if ((string)get_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, '') === self::VERSION) { return; }
+        $state = (string) get_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, '');
+        $running_state = 'running:' . self::VERSION;
+        if ($state === self::VERSION || $state === $running_state) { return; }
+
+        // V6.72.175: Ein Cursor gehoert immer exakt zu der Version, die ihn
+        // begonnen hat. Ein offener Cursor der Vorversion darf nach einem Update
+        // niemals den Anfang des aktiven Pools ueberspringen. Der running-Marker
+        // verhindert zugleich, dass normale init-Aufrufe den aktuellen Lauf
+        // immer wieder auf 0 zuruecksetzen.
+        delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+        update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, $running_state, false);
+
         // Altbestand bereinigen: fruehere Versionen speicherten ein bewusstes
-        // „aus Automatik entfernen“ als review. Im neuen Vertrag ist genau dieser
-        // Fall ein dauerhaftes Veto; ein bloss fehlender Klick bleibt automatic.
-        if (method_exists($this,'output_portal_decisions_table')) {
+        // „aus Automatik entfernen“ als review. Der Payload gehoert heute zur
+        // zentralen Control-Tabelle; die alte Kompatibilitaetstabelle besitzt
+        // bewusst keine payload-Spalte.
+        if (method_exists($this,'control_decisions_table')) {
             global $wpdb;
-            $decisions=$this->output_portal_decisions_table();
-            $wpdb->query("UPDATE {$decisions} SET manual_status='veto', reason='Werbemittel ausdruecklich aus der Vollautomatik entfernt.', updated_at=" . time() . " WHERE manual_status='review' AND payload LIKE '%\"removed_from_automation\":1%'");
+            $decisions=$this->control_decisions_table();
+            $wpdb->query(
+                "UPDATE {$decisions} SET status='veto', reason='Werbemittel ausdruecklich aus der Vollautomatik entfernt.', updated_at=" . time()
+                . " WHERE scope_type='creative' AND status='review' AND payload LIKE '%\"removed_from_automation\":1%'"
+            );
         }
         // Quellen zuerst neu synchronisieren, damit neue Provider-Metadaten
         // (u.a. ADCELL-Werbemittelkategorie) vor der Replanung im Pool liegen.
