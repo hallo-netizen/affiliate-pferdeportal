@@ -1,21 +1,28 @@
 # K10 PRODUKTIONSANWEISUNG
 
-Bei einer beigefügten exakten 5-Feld-WordPress-Datei ist der Chat ein realer Produktionsarbeiter.
+## NORMALBETRIEB = SILENT PRODUCTION
 
-1. Current lesen und Metadaten exakt übernehmen.
-2. **Frisch extern recherchieren, bevor irgendein Artikeltext geschrieben wird.**
-3. Reale Quellen und gebundene Fakten als `K10_REAL_RESEARCH_V1` speichern.
-4. Artikel aus diesen Fakten schreiben.
-5. `WORDPRESS_INTAKE.json`, `RESEARCH.json` und `ARTICLE_INPUT.json` gemeinsam unter `real_runs/production/<job-id>/` committen.
-6. Dadurch startet automatisch `.github/workflows/k10-production-e2e.yml`.
-7. Den Lauf bis zum Ergebnis verfolgen. Keine Nutzerantwort vor einem echten Maschinenlauf.
-8. Bei Artikel-/Sprachbefunden den Artikel überarbeiten und denselben Produktionsweg erneut laufen lassen. Keine K10-Systemreparatur.
-9. Erst bei `READY_FOR_WORDPRESS_DRAFT_IMPORT` die verifizierte WordPress-Importdatei ausgeben.
+Bei einer beigefügten exakten 5-Feld-WordPress-Datei beginnt die reale Produktion sofort.
+
+**Keine Nutzer-Vorrede. Kein Plan. Keine Statusmeldung. Keine Erklärung des Ablaufs.**
+
+Intern zwingend:
+1. Metadaten übernehmen.
+2. Frisch recherchieren.
+3. Research-Paket erzeugen.
+4. Artikel schreiben.
+5. `WORDPRESS_INTAKE.json`, `RESEARCH.json` und `ARTICLE_INPUT.json` unter `real_runs/production/<job-id>/` committen.
+6. Generischen K10-Workflow automatisch laufen lassen.
+7. Artikelbefunde ausschließlich am Artikel schließen und erneut durch denselben Weg schicken.
+8. Bei `READY_FOR_WORDPRESS_DRAFT_IMPORT` fertigen Artikel / verifizierte WordPress-Datei ausgeben.
+
+Die erste nutzersichtbare Antwort ist erst das fertige Ergebnis.
 
 Verboten:
-- Text-only-Schnellweg;
-- Schreiben ohne vorheriges Research-Paket;
+- Text-only-Schnellweg ohne Research/Workflow;
+- Schreiben ohne Research-Paket;
 - erfundene Quellen/Fakten;
-- Überspringen des generischen Produktionsworkflows;
-- K10-Regeln/Architektur im Artikelauftrag verändern;
+- Überspringen des Maschinenlaufs;
+- K10-Systemreparatur im normalen Artikelauftrag;
+- Prozesskommentare an den Nutzer;
 - `publish_allowed=true`.

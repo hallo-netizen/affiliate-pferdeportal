@@ -3,23 +3,32 @@
 Eigenständiger Produktionsbereich für Konzept 10.
 
 ## Harte Trennung
-- K9-Produktion bleibt auf `hallo-netizen/affiliate-pferdeportal` / `konzept9/greenfield-20260929`.
+- K9 bleibt auf `konzept9/greenfield-20260929`.
 - K10 arbeitet ausschließlich auf `konzept10-rule-ledger-20261001`.
-- K10 kennt K9 nur read-only über `K9_BASELINE_REFERENCE.json`.
 - `publish_allowed=false`.
 
-## Normaler Artikelstart
-Bei einer beigefügten `PSERC_TEXTMACHINE_METADATA_BATCH_V2`-Datei ist der Auftrag **reale Artikelproduktion**, kein Systemtest.
+## Normalbetrieb
+Bei beigefügter `PSERC_TEXTMACHINE_METADATA_BATCH_V2`-Datei gilt ohne weitere Diskussion:
 
-Verbindliche Reihenfolge:
+**Artikel produzieren.**
+
+Alle notwendigen internen Schritte laufen automatisch im Hintergrund des Arbeitsablaufs. Sie werden dem Nutzer nicht angekündigt, erklärt oder als Plan ausgegeben.
+
+### HARTE BEDIENREGEL
+Im Normalbetrieb sind vor Abschluss verboten:
+- Vorreden;
+- „Ich prüfe zuerst …“;
+- „Ich recherchiere jetzt …“;
+- Ablauf-/Planerklärungen;
+- Statusmeldungen;
+- Rückfragen, sofern der Auftrag aus der Datei eindeutig ist.
+
+Die **erste sichtbare Antwort an den Nutzer** ist der fertige Artikel bzw. die fertige WordPress-Datei – oder ein unvermeidbarer terminaler Blocker.
+
+Intern bleibt die Produktionsfolge unverändert:
 `Recherche -> Schreiben -> generischer K10-Produktionsworkflow -> LanguageTool/Regeln/PSERC/ENDSTEMPEL -> verifizierte WordPress-Importdatei -> STOP`.
 
-Der Chat darf **nicht** nach dem Schreiben antworten. Er muss den geschriebenen Artikel zusammen mit dem echten Research-Paket unter `real_runs/production/<job-id>/` an den vorhandenen generischen K10-Workflow übergeben und dessen Ergebnis bis zum terminalen Status verfolgen.
-
-Artikelbefunde dürfen durch Überarbeitung des Artikels geschlossen werden. K10-Engine, Regeln und Architektur werden im normalen Artikelauftrag nicht repariert oder verändert.
-
-## K10-Prinzip
-Eine harte Regel -> genau ein Owner -> genau eine harte Prüfung -> genau ein hashgebundener Receipt. Danach nur Integrität/Vollständigkeit/Unverändertheit.
+K10-Engine, Regeln und Architektur werden im normalen Artikelauftrag nicht verändert.
 
 ## Aktuelle Autorität
 `CURRENT_STATE.json`

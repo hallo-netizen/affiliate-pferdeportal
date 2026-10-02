@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "GENERIC_RESEARCH_FIRST_PRODUCTION_PASS_READY_FOR_FRESH_NEIGHBOR_REAL_RUN",
+  "status": "GENERIC_SILENT_PRODUCTION_READY_FOR_FRESH_REAL_RUN",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "b745b4063d9e27a2896f63cab99a8add04b8c118",
+    "verified_commit": "36b7d1f15282686abdfd5517b71a9b45bf36ad86",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -245,7 +245,17 @@
         "REPAIR_K10_ENGINE_OR_RULES_DURING_ARTICLE_JOB"
       ],
       "wordpress_slug": "DERIVED_FROM_CURRENT_ARTICLE_TITLE",
-      "publish_allowed": false
+      "publish_allowed": false,
+      "user_visible_mode": "SILENT_NORMAL_OPERATION",
+      "first_user_visible_response": "FINAL_ARTICLE_OR_VERIFIED_WORDPRESS_FILE_OR_TERMINAL_BLOCKER",
+      "forbidden_user_visible_before_completion": [
+        "PREAMBLE",
+        "PLAN",
+        "I_WILL_CHECK",
+        "I_WILL_RESEARCH",
+        "STATUS_UPDATE",
+        "PROCESS_EXPLANATION"
+      ]
     },
     "independent_neighbor_chat_test": {
       "input_contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
@@ -319,7 +329,7 @@
     }
   },
   "first_open_blocker": null,
-  "next_action": "RUN_FRESH_NEIGHBOR_CHAT_REAL_PRODUCTION_FOR_NEW_PSERC_SLOT_USING_ONLY_ATTACHED_FIVE_FIELD_INPUT_AND_K10_START_COMMAND",
+  "next_action": "RUN_FRESH_NEIGHBOR_CHAT_REAL_PRODUCTION_SILENTLY_FROM_ATTACHED_FIVE_FIELD_INPUT_TO_FINAL_OUTPUT",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"

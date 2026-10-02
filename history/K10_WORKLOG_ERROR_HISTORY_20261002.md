@@ -685,3 +685,17 @@ Begleitchecks desselben Workload-Commits:
 - K9-Head weiterhin exakt `2cc8167fa1e31b4ffa2ff76c9819314be4b98555`.
 
 Damit ist der generische Research-first-Produktionsweg real belegt. Nächster Schritt ist ein frischer Nachbarchat mit einem neuen PSERC-Slot.
+
+
+## Normalbetrieb auf stille Produktion korrigiert – 2026-10-02
+
+Befund:
+Der Nachbarchat antwortete vor der eigentlichen Arbeit mit einer Prozessankündigung („Ich nehme die Datei als K10-Intake … ich prüfe zuerst …“). Das ist im normalen Produktionsbetrieb unerwünscht.
+
+Korrektur:
+- Normalbetrieb = `SILENT_NORMAL_OPERATION`.
+- Keine Vorrede, kein Plan, keine Statusmeldung, keine Prozessbeschreibung.
+- Interne Recherche und Prüfungen bleiben vollständig erhalten, werden aber nicht angekündigt.
+- Erste nutzersichtbare Antwort erst bei fertigem Artikel / verifizierter WordPress-Datei oder unvermeidbarem terminalem Blocker.
+- Kein Qualitätsgate geändert.
+- Kein Produktionsschritt entfernt.
