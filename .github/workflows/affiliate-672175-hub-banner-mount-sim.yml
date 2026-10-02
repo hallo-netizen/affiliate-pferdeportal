@@ -267,6 +267,92 @@ jobs:
           PHP
           /tmp/wp eval-file /tmp/negative-empty.php --path=/tmp/wp-site
 
+      - name: eBay card long-description payload positive-negative simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/ebay-description.php <<'PHP'
+          <?php
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $ctxM=new ReflectionMethod($o,'get_content_context');$ctxM->setAccessible(true);
+          $ctx=$ctxM->invoke($o,$page);
+          $render=new ReflectionMethod($o,'render_banner');$render->setAccessible(true);
+          $group=['id'=>'ebay-description-sim'];
+          $marker='EBAY_LONG_DESCRIPTION_MARKER_';
+          $long=$marker.str_repeat('L',12000);
+          $banner=[
+              'mode'=>'image_link',
+              'network'=>'ebay',
+              'creative_type'=>'product',
+              'url'=>'https://www.ebay.de/itm/123456789',
+              'image_url'=>'https://i.ebayimg.com/images/g/fixture/s-l1600.jpg',
+              'title'=>'eBay Testprodukt',
+              'description'=>$long,
+              'button_text'=>'Bei eBay ansehen',
+              'price'=>'99.99',
+              'currency'=>'EUR',
+              'availability'=>'Verfügbar',
+              'seller_name'=>'ebay-seller',
+              'target'=>'_blank',
+              'dimensions'=>'150x150',
+          ];
+
+          foreach(['category_product_1','hub_product_1'] as $slot){
+              $current=$render->invoke($o,$banner,$page,$ctx,$group,$slot);
+              if(strpos($current,$marker)===false || strpos($current,'ppar-banner-description')===false){
+                  throw new RuntimeException('current long description not reproduced for '.$slot);
+              }
+              $currentBytes=strlen($current);
+
+              // Proposed minimal behavior: data remains in campaign/source; only
+              // the card HTML omits description for eBay product cards that the
+              // portal design later rebuilds from image/title/price/CTA anyway.
+              $slim=$banner;
+              if(sanitize_key((string)$slim['network'])==='ebay'
+                 && sanitize_key((string)$slim['creative_type'])==='product'
+                 && preg_match('/^(?:category|hub)_product_[123]$/',sanitize_key($slot))){
+                  $slim['description']='';
+              }
+              $slimHtml=$render->invoke($o,$slim,$page,$ctx,$group,$slot);
+              if(strpos($slimHtml,$marker)!==false || strpos($slimHtml,'ppar-banner-description')!==false){
+                  throw new RuntimeException('proposed slim card still ships long description for '.$slot);
+              }
+              foreach(['eBay Testprodukt','99.99','ebay-seller','ppar-banner-image','ppar-banner-button'] as $required){
+                  if(strpos($slimHtml,$required)===false) throw new RuntimeException('functional card field lost '.$required.' '.$slot);
+              }
+              $saved=$currentBytes-strlen($slimHtml);
+              if($saved<11500) throw new RuntimeException('payload saving too small '.$slot.' '.$saved);
+              echo 'EBAY_CARD_SLIM_POSITIVE '.$slot.' bytes_before='.$currentBytes.' bytes_after='.strlen($slimHtml).' saved='.$saved."\n";
+          }
+
+          // NEGATIVE: another provider keeps its description exactly as before.
+          $other=$banner;
+          $other['network']='awin';
+          $other['description']='NON_EBAY_DESCRIPTION_MUST_STAY';
+          $otherHtml=$render->invoke($o,$other,$page,$ctx,$group,'category_product_1');
+          if(strpos($otherHtml,'NON_EBAY_DESCRIPTION_MUST_STAY')===false || strpos($otherHtml,'ppar-banner-description')===false){
+              throw new RuntimeException('non-eBay description regression');
+          }
+          echo "NON_EBAY_DESCRIPTION_PRESERVED_PASS\n";
+
+          // NEGATIVE / no function loss: PRIVATE eBay detail content retains its
+          // short description. Only product-card markup is under consideration.
+          $privateM=new ReflectionMethod($o,'ebay_listing_content');$privateM->setAccessible(true);
+          $private=$privateM->invoke($o,[
+              'price_value'=>'49.99','currency'=>'EUR','condition_text'=>'Gebraucht',
+              'shipping_value'=>'4.99','location_text'=>'Krefeld','seller_username'=>'private-seller',
+              'item_end_at'=>time()+86400,
+              'short_description'=>'PRIVATE_DETAIL_DESCRIPTION_MUST_STAY',
+              'affiliate_url'=>'https://www.ebay.de/itm/987654321',
+          ]);
+          if(strpos($private,'PRIVATE_DETAIL_DESCRIPTION_MUST_STAY')===false){
+              throw new RuntimeException('PRIVATE listing detail text lost');
+          }
+          echo "PRIVATE_DETAIL_DESCRIPTION_PRESERVED_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/ebay-description.php --path=/tmp/wp-site
+
       - name: Preserve performance hardlocks
         shell: bash
         run: |
