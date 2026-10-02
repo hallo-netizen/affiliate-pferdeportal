@@ -1,0 +1,168 @@
+name: Affiliate 6.72.176 performance preservation audit
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-672176-performance-preservation-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+
+      - name: Install isolated WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Perf Audit' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-template-fixture.php <<'PHP'
+          <?php
+          class Pferde_Template_Kit {
+              public static function affiliate_contract_version(){ return '1.0'; }
+              public static function design_profile(){ return 'pferde_atelier'; }
+              public static function design_profile_contract_version(){ return '1.0'; }
+              public static function affiliate_page_type($id){
+                  $p=get_post($id);
+                  return ($p && $p->post_name==='schabracken') ? 'hub2' : 'page_unclassified';
+              }
+          }
+          PHP
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp option update ppar_enabled 1 --path=/tmp/wp-site
+          /tmp/wp option update ppar_template_enabled 1 --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.176") { exit(2); } echo "VERSION_PASS\n";' --path=/tmp/wp-site
+
+      - name: Seed exact hub banner fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/seed.php <<'PHP'
+          <?php
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=wp_insert_post([
+              'post_type'=>'page','post_status'=>'publish','post_title'=>'Schabracken',
+              'post_name'=>'schabracken','post_content'=>'<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>'
+          ]);
+          if(!$page||is_wp_error($page)) throw new RuntimeException('page seed failed');
+          update_option('ppar_test_page',$page,false);
+          $blank=new ReflectionMethod($o,'central_blank_campaign');$blank->setAccessible(true);
+          $campaign=array_merge($blank->invoke($o),[
+              'id'=>'schabrackendesigner-hub-banner','name'=>'Schabrackendesigner Hub Banner',
+              'partner'=>'Schabrackendesigner','creative_type'=>'banner','network'=>'manual',
+              'render_mode'=>'image_link','active'=>true,'assignment_mode'=>'exact_page',
+              'page_id'=>$page,'match_descendants'=>false,'priority'=>999,
+              'placements'=>['hub_after_cards'],'label'=>'Anzeige','title'=>'Schabrackendesigner',
+              'description'=>'Testbeschreibung','button_text'=>'Mehr erfahren',
+              'image_url'=>'https://www.example.com/schabrackendesigner-1200x150.jpg',
+              'url'=>'https://www.example.com/schabracken','target'=>'_blank',
+              'dimensions'=>'1200x150','source'=>'manual',
+          ]);
+          $save=new ReflectionMethod($o,'save_campaign_record');$save->setAccessible(true);
+          $id=$save->invoke($o,$campaign,0);
+          if(is_wp_error($id)||absint($id)<=0) throw new RuntimeException('campaign seed failed');
+          echo "SEED_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/seed.php --path=/tmp/wp-site
+
+      - name: Cold hub mount DB and network audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/cold.php <<'PHP'
+          <?php
+          global $wpdb,$wp_query,$wp_the_query,$post;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $post=get_post($page);
+          $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;$wp_query->the_post();
+          add_filter('pre_http_request',function(){throw new RuntimeException('NETWORK_CALL_DURING_HUB_MOUNT');},PHP_INT_MIN,3);
+          $before=(int)$wpdb->num_queries;
+          $t0=hrtime(true);
+          $m=new ReflectionMethod($o,'auto_inject_template_affiliate_slots');$m->setAccessible(true);
+          $html=$m->invoke($o,'<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>');
+          $elapsed=(hrtime(true)-$t0)/1000000;
+          $delta=(int)$wpdb->num_queries-$before;
+          if(substr_count($html,'data-ppar-slot="hub_after_cards"')!==1)throw new RuntimeException('mount failed');
+          echo 'COLD_QUERY_DELTA='.$delta."\n";
+          echo 'COLD_MS='.number_format($elapsed,3,'.','')."\n";
+          echo "COLD_NO_NETWORK_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/cold.php --path=/tmp/wp-site | tee /tmp/cold.txt
+
+      - name: Warm-request incremental DB and network audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/warm.php <<'PHP'
+          <?php
+          global $wpdb,$wp_query,$wp_the_query,$post;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $post=get_post($page);
+          $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;$wp_query->the_post();
+          add_filter('pre_http_request',function(){throw new RuntimeException('NETWORK_CALL_DURING_HUB_MOUNT');},PHP_INT_MIN,3);
+
+          // Warm the existing campaign snapshot through the already-existing hub-grid path.
+          $o->provide_hub_grid_affiliate_data([], 'hub2', [
+              'contract'=>Pferdeportal_Affiliate_Router::CONTRACT_VERSION,
+              'object_id'=>$page,'placement_index'=>1,'placement_mode'=>'grid','allow_placeholder'=>false,
+          ]);
+          $before=(int)$wpdb->num_queries;
+          $t0=hrtime(true);
+          $m=new ReflectionMethod($o,'auto_inject_template_affiliate_slots');$m->setAccessible(true);
+          $html=$m->invoke($o,'<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>');
+          $elapsed=(hrtime(true)-$t0)/1000000;
+          $delta=(int)$wpdb->num_queries-$before;
+          if(substr_count($html,'data-ppar-slot="hub_after_cards"')!==1)throw new RuntimeException('warm mount failed');
+          echo 'WARM_QUERY_DELTA='.$delta."\n";
+          echo 'WARM_MS='.number_format($elapsed,3,'.','')."\n";
+          echo "WARM_NO_NETWORK_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/warm.php --path=/tmp/wp-site | tee /tmp/warm.txt
+
+      - name: Hardlock source audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find release/affiliate-zentrale/current/affiliate-portal-router -type f | wc -l)" = "27"
+          grep -F 'category_product_shared_rank_base_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php >/dev/null
+          grep -F 'select_category_product_campaign_fast_v672171' release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php >/dev/null
+          grep -F 'automation_exact_target_rank_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php >/dev/null
+          grep -F 'ebay_product_cohort_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php >/dev/null
+          grep -F 'ebay_business_campaign_source_allowed_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php >/dev/null
+          grep -F 'multiprovider_exact_gtin_pool_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-idealo.php >/dev/null
+          ! grep -F 'source_payload LIKE' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php
+          echo "PERFORMANCE_HARDLOCK_SOURCE_PASS"
