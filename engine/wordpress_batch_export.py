@@ -3,6 +3,7 @@ import hashlib, json, re, sys
 from pathlib import Path
 
 from .html_design import validate_canonical_html, DesignBlocked
+from .writer_contract_guard import verify_package as verify_writer_contract
 
 CONTRACT="SYSTEM4_WORDPRESS_HANDOFF_V1"
 
@@ -53,6 +54,13 @@ def combine(intake: dict, singles: list[dict]) -> dict:
             validate_canonical_html({"article_type":str(row.get("article_type") or ""),"html":body})
         except DesignBlocked as exc:
             raise BatchBlocked("SINGLE_HTML_INVALID:"+slot+":"+str(exc)) from exc
+        prov=((row.get('production_context') or {}).get('writer_provenance'))
+        if not isinstance(prov,dict):
+            raise BatchBlocked('SINGLE_WRITER_PROVENANCE_MISSING:'+slot)
+        try:
+            verify_writer_contract({'article_id':aid,'html':body,'writer_provenance':prov})
+        except Exception as exc:
+            raise BatchBlocked('SINGLE_WRITER_PROVENANCE_INVALID:'+slot+':'+str(exc)) from exc
         if review is None:
             review=dict(doc.get("wordpress_review") or {})
         rows_by_slot[slot]=row
