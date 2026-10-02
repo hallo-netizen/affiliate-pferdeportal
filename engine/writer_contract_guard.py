@@ -133,6 +133,7 @@ def issue_receipt(article):
 
 def bind_receipt(article):
     out=json.loads(json.dumps(article))
+    out['final_draft_sha256']=sha_text(str(out.get('html') or ''))
     out['writer_provenance']=issue_receipt(out)
     return out
 
