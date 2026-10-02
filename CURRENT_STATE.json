@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "GENERIC_SILENT_PRODUCTION_READY_FOR_FRESH_REAL_RUN",
+  "status": "TUEV_KOSTEN_REAL_RUN_PASS_READY_FOR_NEXT_BERATUNG_TEST",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "36b7d1f15282686abdfd5517b71a9b45bf36ad86",
+    "verified_commit": "11abb6c0fa3fe80cc5ae1241d9d555ea30b89cc2",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -326,10 +326,52 @@
       },
       "post_smoke_selftest_run_id": 36991872648,
       "post_smoke_ppm_run_id": 36991872649
+    },
+    "latest_real_neighbor_run": {
+      "title": "Wie teuer ist der TÜV beim Pferdeanhänger?",
+      "article_type": "FAQ",
+      "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+      "first_machine_run_id": 36993169722,
+      "second_machine_run_id": 36993631553,
+      "third_machine_run_id": 36993798202,
+      "final_machine_run_id": 36993907444,
+      "final_artifact_id": 11220167729,
+      "machine_runs_total": 4,
+      "failed_runs": 3,
+      "final_result": "READY_FOR_WORDPRESS_DRAFT_IMPORT",
+      "final_lt68": "PASS_0_FINDINGS",
+      "final_article_rules": "PASS",
+      "final_system_rules": "PASS",
+      "final_pserc": "PASS",
+      "final_endstempel": "PASS",
+      "final_wordpress_file_verify": "PASS",
+      "final_wordpress_slug": "wie-teuer-ist-der-tuev-beim-pferdeanhaenger",
+      "first_run_findings": [
+        "structure.title_not_repeated_in_body",
+        "structure.paragraph_floor",
+        "heading.intent_binding",
+        "words.hard_total_range",
+        "words.section_range",
+        "table.minimum_rows",
+        "table.compact_labels",
+        "table.post_summary_policy",
+        "table.value_required_if_present"
+      ],
+      "second_run_findings": [
+        "facts.numeric_claim_supported",
+        "facts.trace_lexical_support",
+        "heading.natural_concrete_section_language"
+      ],
+      "third_run_findings": [
+        "LT68 GERMAN_SPELLER_RULE: GTÜ",
+        "LT68 GERMAN_SPELLER_RULE: KÜS"
+      ],
+      "measured_first_machine_run_to_final_completion_seconds": 499,
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "RUN_FRESH_NEIGHBOR_CHAT_REAL_PRODUCTION_SILENTLY_FROM_ATTACHED_FIVE_FIELD_INPUT_TO_FINAL_OUTPUT",
+  "next_action": "RUN_FRESH_BERATUNG_ARTICLE_THROUGH_SILENT_GENERIC_K10_PRODUCTION_AND_MEASURE_FIRST_PASS_RATE_AND_REPAIR_ROUNDS",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"

@@ -699,3 +699,47 @@ Korrektur:
 - Erste nutzersichtbare Antwort erst bei fertigem Artikel / verifizierter WordPress-Datei oder unvermeidbarem terminalem Blocker.
 - Kein Qualitätsgate geändert.
 - Kein Produktionsschritt entfernt.
+
+
+## Realer Nachbarchat – TÜV-Kosten final PASS – 2026-10-02
+
+Artikel: `Wie teuer ist der TÜV beim Pferdeanhänger?`
+Plan-Slot: `f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b`
+
+Maschinenläufe:
+1. Run `36993169722` – BLOCKED, 9 Artikelbefunde gleichzeitig:
+   - structure.title_not_repeated_in_body
+   - structure.paragraph_floor
+   - heading.intent_binding
+   - words.hard_total_range
+   - words.section_range
+   - table.minimum_rows
+   - table.compact_labels
+   - table.post_summary_policy
+   - table.value_required_if_present
+2. Run `36993631553` – BLOCKED:
+   - facts.numeric_claim_supported
+   - facts.trace_lexical_support
+   - heading.natural_concrete_section_language
+3. Run `36993798202` – Artikel-Preflight READY_FOR_LT68; LT 6.8 blockierte nur `GTÜ` und `KÜS` als GERMAN_SPELLER_RULE.
+4. Run `36993907444` – SUCCESS.
+
+Final:
+- READY_FOR_WORDPRESS_DRAFT_IMPORT
+- LT 6.8: PASS / 0 Findings
+- Artikelregeln: PASS
+- Systemregeln: PASS
+- PSERC: PASS
+- ENDSTEMPEL: PASS
+- WordPress-Dateiverifikation: PASS
+- WordPress-Slug: `wie-teuer-ist-der-tuev-beim-pferdeanhaenger`
+- Artifact: `11220167729`
+- publish_allowed=false
+
+Gemessene Strecke erster Maschinenstart bis finaler Laufabschluss:
+`10:01:49Z -> 10:10:08Z = 499 s = 8:19 min`.
+
+Bewertung für die nächste Optimierungsprüfung:
+Die reine Maschine ist schnell; der Zeitverlust entstand durch drei Reparaturrunden. Der nächste Realtest soll deshalb bewusst einen neuen `Beratung`-Artikel verwenden, um Erstpassrate und Reparaturschleifen außerhalb des FAQ-Typs zu messen.
+
+K9 blieb exakt auf `2cc8167fa1e31b4ffa2ff76c9819314be4b98555`.
