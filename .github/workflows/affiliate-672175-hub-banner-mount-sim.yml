@@ -1,0 +1,247 @@
+name: Affiliate 6.72.175 hub banner mount simulation
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/affiliate-672175-hub-banner-mount-sim.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+
+      - name: Install isolated WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Hub Banner Sim' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-template-fixture.php <<'PHP'
+          <?php
+          class Pferde_Template_Kit {
+              public static function affiliate_contract_version(){ return '1.0'; }
+              public static function design_profile(){ return 'pferde_atelier'; }
+              public static function design_profile_contract_version(){ return '1.0'; }
+              public static function affiliate_page_type($id){
+                  $p=get_post($id);
+                  return ($p && $p->post_name==='schabracken') ? 'hub2' : 'page_unclassified';
+              }
+          }
+          PHP
+
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.175") { exit(2); } echo "VERSION_PASS\n";' --path=/tmp/wp-site
+
+      - name: Seed realistic Schabrackendesigner creative
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/seed.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $o->maybe_install_creative_library_schema();
+
+          $page=wp_insert_post([
+              'post_type'=>'page','post_status'=>'publish','post_title'=>'Schabracken',
+              'post_name'=>'schabracken','post_content'=>'<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>'
+          ]);
+          if(!$page||is_wp_error($page)) throw new RuntimeException('page seed failed');
+          wp_insert_term('Schabracken FAQ','category',['slug'=>'schabracken-faq']);
+          wp_insert_term('Schabracken Beratung','category',['slug'=>'schabracken-beratung']);
+          update_option('ppar_test_page',$page,false);
+
+          $table=$wpdb->prefix.'ppar_creative_library';
+          $identity=hash('sha256','schabrackendesigner-hub-mount');
+          $payload=[
+              '_dimension_state'=>'verified',
+              '_image_sha256'=>str_repeat('a',64),
+              '_image_mime'=>'image/jpeg',
+              '_image_bytes'=>12345,
+              '_measured_at'=>time(),
+          ];
+          $data=[
+              'provider'=>'manual','partner_external_id'=>'schabrackendesigner','partner_name'=>'Schabrackendesigner',
+              'external_id'=>'schabrackendesigner-banner-1','identity_hash'=>$identity,'creative_type'=>'banner',
+              'title'=>'Schabrackendesigner','description'=>'Individuelle Schabracken gestalten','tags'=>'schabrackendesigner schabracken',
+              'image_url'=>'https://www.example.com/schabrackendesigner-1200x150.jpg',
+              'destination_url'=>'https://www.example.com/schabracken',
+              'tracking_url'=>'https://www.example.com/affiliate/schabrackendesigner',
+              'width'=>1200,'height'=>150,'source_status'=>'active','source_kind'=>'banner',
+              'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'fixture',
+              'review_status'=>'review','selected'=>0,'content_scope'=>'unclassified','scope_source'=>'',
+              'classified_at'=>0,'topic_status'=>'auto_verified','topic_score'=>0,'topic_targets'=>'[]',
+              'source_hash'=>hash('sha256','schabrackendesigner-source-v1'),
+              'payload'=>wp_json_encode($payload,JSON_UNESCAPED_SLASHES),
+              'first_seen'=>time(),'last_seen'=>time()
+          ];
+          if(!$wpdb->insert($table,$data)) throw new RuntimeException('creative insert '.$wpdb->last_error);
+          update_option('ppar_test_creative_id',absint($wpdb->insert_id),false);
+          update_option('ppar_test_identity',$identity,false);
+
+          $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",$wpdb->insert_id),ARRAY_A);
+          $res=$o->output_plan_creative($row,true);
+          if(absint($res['active']??0)<1) throw new RuntimeException('materialization failed '.wp_json_encode($res));
+
+          $objects=$wpdb->prefix.'ppar_output_objects';
+          $obj=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$objects} WHERE creative_identity_hash=%s AND output_type='portal_banner' AND status='published' ORDER BY id DESC LIMIT 1",$identity),ARRAY_A);
+          if(!is_array($obj)) throw new RuntimeException('output object missing');
+          if(($obj['target_key']??'')!=='page:'.$page) throw new RuntimeException('wrong target '.wp_json_encode($obj));
+          if(($obj['slot_id']??'')!=='hub_after_cards') throw new RuntimeException('wrong expected slot '.wp_json_encode($obj));
+          echo "MATERIALIZED_HUB_AFTER_CARDS_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/seed.php --path=/tmp/wp-site
+
+      - name: NEGATIVE reproduce missing real hub mount
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/repro.php <<'PHP'
+          <?php
+          global $wp_query,$post;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $post=get_post($page);
+          $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_query->the_post();
+
+          $m=new ReflectionMethod($o,'auto_inject_template_affiliate_slots');
+          $m->setAccessible(true);
+          $input='<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>';
+          $actual=$m->invoke($o,$input);
+
+          if(strpos($actual,'data-ppar-slot="hub_after_cards"')!==false){
+              throw new RuntimeException('current source unexpectedly mounted hub_after_cards');
+          }
+          if(strpos($actual,'ECHTES HUB2 DESIGN')===false){
+              throw new RuntimeException('design content damaged');
+          }
+
+          $grid=$o->provide_hub_grid_affiliate_data([], 'hub2', [
+              'contract'=>Pferdeportal_Affiliate_Router::CONTRACT_VERSION,
+              'object_id'=>$page,
+              'placement_index'=>1,
+              'placement_mode'=>'grid',
+              'allow_placeholder'=>false,
+          ]);
+          if(!empty($grid['active'])){
+              throw new RuntimeException('wide banner incorrectly leaked into hub_grid_card '.wp_json_encode($grid));
+          }
+
+          echo "CURRENT_MOUNT_GAP_REPRODUCED_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/repro.php --path=/tmp/wp-site
+
+      - name: POSITIVE simulate minimal server-side hub-after-cards mount
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/proposed.php <<'PHP'
+          <?php
+          global $wp_query,$post;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+          $post=get_post($page);
+          $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_query->the_post();
+
+          $render=new ReflectionMethod($o,'render_affiliate_slot');
+          $render->setAccessible(true);
+          $banner=$render->invoke($o,$page,'hub_after_cards','primary_product','');
+          if(trim((string)$banner)==='') throw new RuntimeException('rendered hub banner empty');
+          if(strpos($banner,'data-ppar-slot="hub_after_cards"')===false) throw new RuntimeException('slot marker missing');
+          if(strpos($banner,'ppar-overview-wide-banner-link')===false) throw new RuntimeException('wide banner markup missing');
+          if(strpos($banner,'ppar-banner-description')!==false) throw new RuntimeException('wide banner unexpectedly ships description text');
+          if(strpos($banner,'Schabrackendesigner')!==false) throw new RuntimeException('wide banner unexpectedly ships title/description chrome');
+
+          $input='<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>';
+          $proposed=$input;
+          if(Pferde_Template_Kit::affiliate_page_type($page)==='hub2'
+             && strpos($proposed,'data-ppar-slot="hub_after_cards"')===false
+             && trim($banner)!==''){
+              $proposed .= "\n".$banner;
+          }
+
+          if(substr_count($proposed,'data-ppar-slot="hub_after_cards"')!==1) throw new RuntimeException('mount count not exactly one');
+          if(strpos($proposed,'ECHTES HUB2 DESIGN')===false) throw new RuntimeException('design content lost');
+          echo "PROPOSED_SERVER_MOUNT_POSITIVE_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/proposed.php --path=/tmp/wp-site
+
+      - name: NEGATIVE duplicate and empty-slot guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/negative.php <<'PHP'
+          <?php
+          global $wpdb;
+          $o=Pferdeportal_Affiliate_Router::instance();
+          $page=absint(get_option('ppar_test_page'));
+
+          $render=new ReflectionMethod($o,'render_affiliate_slot');
+          $render->setAccessible(true);
+          $banner=$render->invoke($o,$page,'hub_after_cards','primary_product','');
+          $existing='<div>DESIGN</div>'.$banner;
+          $proposed=$existing;
+          if(Pferde_Template_Kit::affiliate_page_type($page)==='hub2'
+             && strpos($proposed,'data-ppar-slot="hub_after_cards"')===false
+             && trim($banner)!==''){
+              $proposed .= "\n".$banner;
+          }
+          if(substr_count($proposed,'data-ppar-slot="hub_after_cards"')!==1) throw new RuntimeException('duplicate guard failed');
+
+          $identity=(string)get_option('ppar_test_identity');
+          $objects=$wpdb->prefix.'ppar_output_objects';
+          $ids=$wpdb->get_col($wpdb->prepare("SELECT campaign_post_id FROM {$objects} WHERE creative_identity_hash=%s",$identity));
+          foreach((array)$ids as $pid){ if(absint($pid)>0) wp_delete_post(absint($pid),true); }
+          $wpdb->delete($objects,['creative_identity_hash'=>$identity]);
+
+          $empty=$render->invoke($o,$page,'hub_after_cards','primary_product','');
+          if(trim((string)$empty)!=='') throw new RuntimeException('empty slot fail-open');
+          echo "NEGATIVE_DUPLICATE_EMPTY_GUARDS_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/negative.php --path=/tmp/wp-site
+
+      - name: Preserve performance hardlocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F 'category_product_shared_rank_base_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php >/dev/null
+          grep -F 'select_category_product_campaign_fast_v672171' release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php >/dev/null
+          grep -F 'automation_exact_target_rank_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php >/dev/null
+          grep -F 'ebay_product_cohort_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-ebay.php >/dev/null
+          grep -F 'multiprovider_exact_gtin_pool_request_cache' release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-idealo.php >/dev/null
+          echo PERFORMANCE_HARDLOCKS_PASS
