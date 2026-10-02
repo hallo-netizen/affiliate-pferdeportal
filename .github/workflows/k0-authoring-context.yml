@@ -1,0 +1,78 @@
+name: K0 authoring context accept
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - 'real_runs/k0/**/AUTHORING_CONTEXT.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: k0-authoring-context
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve exact authoring context
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          mapfile -t contexts < <(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- 'real_runs/k0/**/AUTHORING_CONTEXT.json')
+          if [ "${#contexts[@]}" -ne 1 ]; then
+            echo "K0_REQUIRES_EXACTLY_ONE_AUTHORING_CONTEXT:${#contexts[@]}" >&2
+            exit 2
+          fi
+          context="${contexts[0]}"
+          rd="${context%/AUTHORING_CONTEXT.json}"
+          [[ "$rd" =~ ^real_runs/k0/[A-Za-z0-9._-]+$ ]] || { echo "K0_RUN_DIR_INVALID:$rd" >&2; exit 2; }
+          test -f "$rd/WORDPRESS_INTAKE.json" || { echo "K0_INTAKE_MISSING" >&2; exit 2; }
+          test ! -f "$rd/WRITER_JOB.json" || { echo "K0_WRITER_JOB_ALREADY_EXISTS" >&2; exit 2; }
+          echo "RUN_DIR=$rd" >> "$GITHUB_ENV"
+
+      - name: Automatic portal assignment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json > /tmp/k0-portal.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-portal.json'))
+          assert x['status']=='PASS' and x['item_count']==1,x
+          assert x['items'][0]['status']=='AUTO_DETECTED',x
+          print('K0_AUTHORING_PORTAL_PASS')
+          PY
+
+      - name: Prepare canonical writer job from text-free context
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_writer_station prepare "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-portal.json "$RUN_DIR/AUTHORING_CONTEXT.json" /tmp/WRITER_JOB.json
+          python3 - <<'PY'
+          import json,os
+          j=json.load(open('/tmp/WRITER_JOB.json'))
+          assert j['contract']=='K0_WRITER_JOB_V1'
+          assert j['status']=='OPEN'
+          assert j['publish_allowed'] is False
+          print('K0_WRITER_JOB_PREPARED')
+          PY
+
+      - name: Persist immutable writer job
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/WRITER_JOB.json "$RUN_DIR/WRITER_JOB.json"
+          git config user.name 'k0-authoring-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add "$RUN_DIR/WRITER_JOB.json"
+          git commit -m "K0: prepare canonical writer job"
+          git push
