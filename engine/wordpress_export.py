@@ -87,7 +87,7 @@ def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dic
     if any(not str(binding.get(k) or "").strip() for k in required):
         raise ExportBlocked("WORDPRESS_PLANNING_BINDING_INCOMPLETE")
 
-    batch_sha=str(snapshot.get("source_batch_sha256") or "")
+    batch_sha=str(snapshot.get("source_batch_sha256") or (snapshot.get("next_textmachine_metadata_batch") or {}).get("batch_sha256") or snapshot.get("batch_sha256") or "")
     if not re.fullmatch(r"[0-9a-f]{64}",batch_sha):
         raise ExportBlocked("WORDPRESS_BATCH_SHA256_MISSING")
 
