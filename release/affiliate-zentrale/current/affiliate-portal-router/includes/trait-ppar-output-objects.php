@@ -1004,7 +1004,7 @@ trait PPAR_Output_Objects_Trait {
         $combined = trim($specific . ' ' . $this->output_text($partner_text));
         $combined_has_domain = false;
         foreach ($domain_terms as $term) { if ($term !== '' && $this->output_term_present($combined, $term)) { $combined_has_domain = true; break; } }
-        if (!$combined_has_domain && $manual_status !== 'approved') {
+        if (!$combined_has_domain && $real_target_evidence_key === '' && $manual_status !== 'approved') {
             return array('status'=>'review','confidence'=>0,'reason'=>'Kein belastbarer Bezug zum Fachprofil dieses Portals.','target'=>null,'source'=>'portal_domain_signal_missing');
         }
         $source_tokens = $this->output_tokens($combined);
