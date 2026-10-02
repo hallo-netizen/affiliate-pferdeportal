@@ -1009,3 +1009,27 @@ Bewertung der letzten drei Texte, ohne sie zu verändern:
 - Sperrriemen richtig verschnallen: Weglassen ist mit LINEAR_SEQUENCE bzw. EXISTING_CHECKLIST_EQUIVALENT plausibel.
 
 Bestehende drei Artikeltexte bleiben unverändert.
+
+
+## Tabellenregel verifiziert – Standardtabelle mit Ausnahmen – 2026-10-02
+
+Implementierung abgeschlossen:
+- FAQ/Beratung/Pflege = REQUIRED_UNLESS_EXCEPTION;
+- Vergleich = REQUIRED;
+- vier zulässige Ausnahmegründe;
+- generische OMIT-Begründungen reichen nicht;
+- table.required_for_comparison greift nur noch tatsächlich bei Vergleich;
+- System-Guard kennt die neue Policy.
+
+Hardtests:
+- Selftest 37013297572 SUCCESS;
+- PPM 37013297504 SUCCESS 104/104;
+- gültige definierte Ausnahme PASS;
+- fehlende Ausnahme BLOCK;
+- unbekannte Ausnahme BLOCK;
+- Vergleich ohne Tabelle BLOCK.
+
+Historische ältere E2E-Artikel ohne neuen Ausnahme-Metadatensatz blockieren erwartungsgemäß unter der neuen Regel. Das ist keine Regression des aktuellen Systems, sondern die gewünschte strengere Regelwirkung.
+
+Die letzten drei aktuellen Artikeltexte wurden nicht verändert.
+K0 und K9 wurden nicht verändert.

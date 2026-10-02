@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "CANONICAL_WORDPRESS_EXPORT_AND_FRONTEND_HTML_REAL_PASS",
+  "status": "TABLE_DEFAULT_REQUIRED_WITH_EXCEPTIONS_VERIFIED",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
     "verified_commit": "57188d5a112453f59af49c1706f6685300af52d1",
@@ -494,7 +494,8 @@
       "publish_allowed": false
     },
     "table_default_policy": {
-      "status": "IMPLEMENTED_PENDING_TEST",
+      "status": "PASS",
+      "implementation_commit": "f8ad7e6a2f3bc72a4dfc5520cdc93ea5160eeb5c",
       "applies_to": "K10_ONLY",
       "Beratung": "REQUIRED_UNLESS_EXCEPTION",
       "FAQ": "REQUIRED_UNLESS_EXCEPTION",
@@ -506,13 +507,29 @@
         "INSUFFICIENT_RELATIONAL_DIMENSIONS",
         "NUANCE_LOSS"
       ],
-      "existing_last_three_article_texts_modified": false,
+      "invalid_omit_reasons": [
+        "FACTS_ALREADY_EXIST_IN_PROSE",
+        "TABLE_NOT_NECESSARY",
+        "TEXT_IS_CLEAR_WITHOUT_TABLE"
+      ],
+      "isolated_selftest_run_id": 37013297572,
+      "isolated_selftest_result": "SUCCESS",
+      "ppm_inventory_run_id": 37013297504,
+      "ppm_inventory_result": "104/104 PASS",
+      "last_three_article_texts_modified": false,
+      "last_three_critical_classification": {
+        "Ist Mash bei Magenproblemen für Pferde geeignet?": "TABLE_DEFAULT",
+        "Ist ein Sperrriemen für Pferde sinnvoll oder sollte man darauf verzichten?": "TABLE_DEFAULT",
+        "Wie wird der Sperrriemen richtig verschnallt?": "OMISSION_EXCEPTION_PLAUSIBLE_LINEAR_OR_CHECKLIST"
+      },
+      "historical_old_fixture_e2e_failures_expected": true,
       "k0_changed": false,
+      "k9_changed": false,
       "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "VERIFY_TABLE_DEFAULT_REQUIRED_POSITIVE_NEGATIVE_TESTS; THEN NORMAL_K10_PRODUCTION",
+  "next_action": "NORMAL_K10_PRODUCTION_WITH_TABLE_DEFAULT_REQUIRED_AND_DEFINED_OMISSION_EXCEPTIONS",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",
