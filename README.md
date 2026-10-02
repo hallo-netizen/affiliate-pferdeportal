@@ -1,7 +1,17 @@
 # K10 Rule Ledger
 
-K10 ersetzt die monolithische Mehrfachprüfung durch einen zentralen Regelkatalog. Jede harte Regel hat genau einen Owner und erzeugt nach einmaliger Prüfung einen hashgebundenen Receipt. Nachgelagerte Stufen prüfen nur Receipt, Identität, Vollständigkeit, Katalog-/Regelwerte-Hash und Unverändertheit.
+K10 ist der getrennte Entwicklungsbereich für die Regel-/Receipt-Architektur des Pferdeatelier-Textsystems.
 
-Aktueller Nachweis: 104/104 PPM-6.7.9-Regeln exakt inventarisiert und gemappt; 89 fachliche Regeln, 15 Integritätsregeln; 3 alte Tabellenpflicht-Regeln ausdrücklich durch die genehmigte K10-Tabellenregel ersetzt. Lokale Positiv-/Negativsuite: 21/21 PASS.
+## Einstieg
+1. `K10_START_HERE.md` lesen.
+2. Von dort genau eine Current-Autorität verwenden: `CURRENT_STATE.json`.
+3. Frischecheck gegen Branch und relevante Workflow-Läufe durchführen.
+4. Nur die dort gebundene NEXT ACTION ausführen.
 
-K9 wird nicht importiert oder verändert. Die einzige K9-Bindung ist die unveränderliche Baseline-Referenz. `publish_allowed=false`.
+## Architekturprinzip
+Eine harte Regel hat genau einen fachlichen Owner, wird genau einmal inhaltlich geprüft und erzeugt genau einen hashgebundenen Receipt. Nachgelagerte Stufen prüfen nur Identität, Vollständigkeit, Hash-Bindung und Unverändertheit.
+
+## Harte Trennung
+K9 bleibt eigenständiges Produktionssystem. K10 darf K9 nicht verändern. Die K9-Baseline wird nur read-only referenziert.
+
+Aktuelle Status-, Test-, Branch-, Blocker- und NEXT-ACTION-Wahrheit steht **ausschließlich** in `CURRENT_STATE.json`; dieses README enthält bewusst keine dynamischen Statuskopien.
