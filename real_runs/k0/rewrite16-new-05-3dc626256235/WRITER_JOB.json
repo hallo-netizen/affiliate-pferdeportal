@@ -1,0 +1,66 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+    "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+    "target_keyword": "Kühlgamaschen für Pferde",
+    "title": "Passende Kühlgamaschen für Pferde wählen"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:8712e122487081914bec269e",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Can Cold Therapy Safeguard Sport Horses From Injury? – The Horse",
+          "source_url": "https://thehorse.com/189211/can-cold-therapy-safeguard-sport-horses-from-injury/"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Kühlgamaschen für Pferde",
+      "topic": "Passende Kühlgamaschen für Pferde wählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-regeneration-kuehlgamaschen-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-9629d5a4bb05a87da3ce0b1b",
+  "job_sha256": "a9bf4bcdf8043071499d4ffd672d2d5d8b179f3c7dde9f5fb39c7680afdf6096"
+}
