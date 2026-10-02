@@ -26,3 +26,18 @@ Verboten:
 - K10-Systemreparatur im normalen Artikelauftrag;
 - Prozesskommentare an den Nutzer;
 - `publish_allowed=true`.
+
+
+## JOB-BINDING – HART
+Die Produktionsidentität kommt ausschließlich aus der **in diesem Chat aktuell angehängten** `PSERC_TEXTMACHINE_METADATA_BATCH_V2`-Datei.
+
+Current/History dienen nur der Maschinensteuerung und dürfen keinen Artikelinhalt auswählen.
+
+Bei gültiger Datei:
+`attachment.title + target_keyword + category + article_type + plan_slot = alleiniger Auftrag`.
+
+Nie:
+- letzten Current-Artikel fortsetzen;
+- letzten erfolgreichen Artikel anzeigen;
+- alte Vorschau als neues Input interpretieren;
+- Current-Status als Artikelauftrag behandeln.

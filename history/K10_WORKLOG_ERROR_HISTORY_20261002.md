@@ -743,3 +743,17 @@ Bewertung für die nächste Optimierungsprüfung:
 Die reine Maschine ist schnell; der Zeitverlust entstand durch drei Reparaturrunden. Der nächste Realtest soll deshalb bewusst einen neuen `Beratung`-Artikel verwenden, um Erstpassrate und Reparaturschleifen außerhalb des FAQ-Typs zu messen.
 
 K9 blieb exakt auf `2cc8167fa1e31b4ffa2ff76c9819314be4b98555`.
+
+
+## Routingfehler: Current als Artikelauftrag missverstanden – 2026-10-02
+
+Befund:
+Ein frischer Nachbarchat erhielt den neuen Beratungs-Input, antwortete aber mit dem abgeschlossenen TÜV-Kosten-Lauf. Ursache war nicht der Produktionsworkflow, sondern die Current-Formulierung: Status und `latest_real_neighbor_run` enthielten das vorige TÜV-Thema und wurden vom Chat als aktuelle Arbeitsidentität interpretiert.
+
+Korrektur:
+- letzter Realartikel aus Current entfernt; bleibt ausschließlich Historie;
+- Current-Status neutral: `READY_FOR_ATTACHED_FIVE_FIELD_INPUT_ONLY`;
+- neue harte Bindung: Artikelidentität kommt ausschließlich aus dem aktuell angehängten 5-Feld-Intake;
+- Current/History dürfen keinen Artikel auswählen;
+- ohne Attachment fail closed `INPUT_REQUIRED`, niemals Wiederverwendung des letzten Artikels;
+- Silent Production bleibt unverändert.

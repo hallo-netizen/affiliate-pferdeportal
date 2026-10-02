@@ -35,3 +35,15 @@ K10-Engine, Regeln und Architektur werden im normalen Artikelauftrag nicht verä
 
 ## Produktionsanweisung
 `K10_PRODUCTION_ENTRY.md`
+
+
+## AUFTRAGSAUTORITÄT – HART
+Bei jedem neuen Artikelauftrag bestimmt **ausschließlich die aktuell angehängte 5-Feld-Datei** den Artikel.
+
+- `CURRENT_STATE.json` bestimmt nur den Zustand der K10-Maschine.
+- Current darf **niemals** Titel, Thema, Kategorie oder Plan-Slot für den neuen Artikel auswählen.
+- Historie, letzter Lauf und frühere Anhänge dürfen **niemals** als neuer Auftrag verwendet werden.
+- Nach gültigem Attachment: dessen fünf Felder übernehmen und sofort still produzieren.
+- Ohne gültiges Attachment: `INPUT_REQUIRED`; niemals den letzten Artikel wiederverwenden.
+
+Insbesondere ist es verboten, nach `K10:pferdeatelier` den Current-Stand zusammenzufassen oder den zuletzt fertigen Artikel als aktuellen Auftrag zu behandeln.
