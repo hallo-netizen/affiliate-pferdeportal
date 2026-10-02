@@ -32,6 +32,9 @@ def _job_core(intake, portal, ctx):
         raise Blocked('K0_WRITER_PORTAL_BINDING_INVALID')
     if ctx.get('contract')!=AUTHORING_CONTEXT_CONTRACT or ctx.get('publish_allowed') is not False:
         raise Blocked('K0_AUTHORING_CONTEXT_INVALID')
+    run_instance_id=str(ctx.get('run_instance_id') or '')
+    if not re.fullmatch(r'run:[0-9a-f]{24}',run_instance_id):
+        raise Blocked('K0_AUTHORING_CONTEXT_RUN_INSTANCE_INVALID')
     if ctx.get('identity')!=ident:
         raise Blocked('K0_AUTHORING_CONTEXT_IDENTITY_MISMATCH')
     for forbidden in ('html','body','content_html','draft','article_text'):
@@ -48,6 +51,7 @@ def _job_core(intake, portal, ctx):
       'status':'OPEN',
       'identity':ident,
       'portal_id':prows[0]['portal_id'],
+      'run_instance_id':run_instance_id,
       'content_profile':cp,
       'production_context':pc,
       'writer_policy':POLICY,
