@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "reitplatzplaner-beratung",
+    "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+    "target_keyword": "Reitplatzplaner für Pferde",
+    "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Reitplatzplaner – Hatzenbichler",
+          "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Reitplatzplaner für Pferde",
+      "topic": "Das Wichtigste über Reitplatzplaner für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzplaner-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
