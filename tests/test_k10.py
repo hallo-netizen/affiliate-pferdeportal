@@ -21,6 +21,7 @@ from engine.package_adapters import PACKAGE_RESULT_MAP
 from engine.real_proof import slug_from_title
 from engine.production_entry import validate as validate_production_entry, build_job_metadata_snapshot, Blocked as ProductionEntryBlocked
 from engine.wordpress_export import build_single as build_wordpress_export, ExportBlocked as WordPressExportBlocked
+from engine.html_design import materialize_canonical_root, DesignBlocked as HtmlDesignBlocked
 
 
 def words(prefix,n):
@@ -458,6 +459,7 @@ class K10Tests(unittest.TestCase):
     def test_wordpress_export_binds_registry_article_id_to_plan_slot(self):
         import hashlib
         a=make_base()
+        a,_=materialize_canonical_root(a)
         article_id='article:1234567890abcdef12345678'
         slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode()).hexdigest()
         a['planning_binding']={
@@ -492,6 +494,7 @@ class K10Tests(unittest.TestCase):
     def test_wordpress_export_blocks_without_canonical_registry_binding(self):
         import hashlib
         a=make_base()
+        a,_=materialize_canonical_root(a)
         article_id='article:1234567890abcdef12345678'
         slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode()).hexdigest()
         a['planning_binding']={
@@ -510,6 +513,7 @@ class K10Tests(unittest.TestCase):
     def test_wordpress_export_blocks_wrong_canonical_article_id_for_slot(self):
         import hashlib
         a=make_base()
+        a,_=materialize_canonical_root(a)
         correct='article:1234567890abcdef12345678'
         wrong='article:abcdef1234567890abcdef12'
         slot=hashlib.sha256(('pserc-plan-slot-v2|'+correct).encode()).hexdigest()
@@ -528,6 +532,7 @@ class K10Tests(unittest.TestCase):
 
     def test_wordpress_export_blocks_without_current_batch_binding(self):
         a=make_base()
+        a,_=materialize_canonical_root(a)
         a['planning_binding']={
           'article_type':'FAQ','category':'training','plan_slot':'7'*64,
           'target_keyword':a['target_keyword'],'title':a['title']
@@ -537,6 +542,25 @@ class K10Tests(unittest.TestCase):
         with self.assertRaisesRegex(WordPressExportBlocked,'WORDPRESS_BATCH_SHA256_MISSING'):
             build_wordpress_export(
               a,{'retrieved_at':'2026-10-02T00:00:00Z'},{},
+              {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
+            )
+
+
+    def test_wordpress_export_hard_blocks_bare_article_root(self):
+        import hashlib
+        a=make_base()
+        article_id='article:1234567890abcdef12345678'
+        slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode()).hexdigest()
+        a['planning_binding']={
+          'article_type':'FAQ','category':'training','plan_slot':slot,
+          'target_keyword':a['target_keyword'],'title':a['title']
+        }
+        for idx,(fid,claim) in enumerate(a['research_claims'].items(),1):
+            claim['source_url']=f'https://example.org/source-{idx}'
+        with self.assertRaisesRegex(HtmlDesignBlocked,'DESIGN_CANONICAL_ROOT_NOT_MATERIALIZED'):
+            build_wordpress_export(
+              a,{'retrieved_at':'2026-10-02T00:00:00Z'},
+              {'source_batch_sha256':'8'*64,'canonical_article_bindings':{slot:article_id}},
               {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
             )
 
