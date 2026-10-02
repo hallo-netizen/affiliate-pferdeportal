@@ -388,7 +388,7 @@ trait PPAR_Output_Objects_Trait {
 
 
     /**
-     * V6.72.178 – eine Zielidentität über alle Schichten.
+     * V6.72.179 – eine Zielidentität über alle Schichten.
      *
      * Ausgabeobjekte verwenden historisch type:<ID>, Kampagnen/Automation
      * type:<slug>. Beide Formen bezeichnen dasselbe reale WordPress-Ziel und
@@ -416,6 +416,32 @@ trait PPAR_Output_Objects_Trait {
             if (hash_equals((string) $candidate, $key)) { return true; }
         }
         return false;
+    }
+
+    /**
+     * Resolve a target key only when it maps to exactly one real target.
+     * Exact stored keys win. Slug aliases are accepted only when unique across
+     * the current real target set, so hierarchical duplicate slugs fail closed.
+     */
+    private function output_resolve_target_key($targets, $key) {
+        $key = sanitize_text_field((string) $key);
+        if ($key === '' || !is_array($targets)) { return null; }
+        $exact = array();
+        $aliases = array();
+        foreach ($targets as $target) {
+            if (!is_array($target)) { continue; }
+            $stored = sanitize_text_field((string) ($target['key'] ?? ''));
+            if ($stored !== '' && hash_equals($stored, $key)) {
+                $exact[] = $target;
+                continue;
+            }
+            if ($this->output_target_key_matches($target, $key)) {
+                $aliases[] = $target;
+            }
+        }
+        if (count($exact) === 1) { return $exact[0]; }
+        if (count($exact) > 1) { return null; }
+        return count($aliases) === 1 ? $aliases[0] : null;
     }
 
     /** Echte öffentliche Ziel-URL nur bei Bedarf und request-lokal auflösen. */
@@ -925,26 +951,25 @@ trait PPAR_Output_Objects_Trait {
             } else {
                 $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['banner_target_types'] ?? array('page','category')))));
             }
-            foreach ((array) $targets as $target) {
-                if (!is_array($target)) { continue; }
-                if (!$this->output_target_key_matches($target, $fixed_target_key)) { continue; }
-                if (!in_array(sanitize_key((string) ($target['type'] ?? '')), $wanted_types, true)) {
-                    return new WP_Error('control_fixed_target_type_invalid', 'Festes Portalziel ist für diesen Ausgabetyp nicht zulässig.');
-                }
-                if (method_exists($this, 'control_target_gate')) {
-                    $target_gate = $this->control_target_gate($portal_key, (string) ($target['key'] ?? ''));
-                    if (is_wp_error($target_gate)) { return $target_gate; }
-                }
-                return array(
-                    'status'=>'ready',
-                    'confidence'=>100,
-                    'reason'=>(string) ($manual['reason'] ?? 'Chefentscheidung mit festem Portalziel.'),
-                    'target'=>$target,
-                    'alternatives'=>array(),
-                    'source'=>'manual_fixed_target',
-                );
+            $target = $this->output_resolve_target_key($targets, $fixed_target_key);
+            if (!is_array($target)) {
+                return new WP_Error('control_fixed_target_missing', 'Fest vorgegebenes Portalziel existiert nicht eindeutig oder ist nicht erreichbar.');
             }
-            return new WP_Error('control_fixed_target_missing', 'Fest vorgegebenes Portalziel existiert nicht mehr oder ist nicht erreichbar.');
+            if (!in_array(sanitize_key((string) ($target['type'] ?? '')), $wanted_types, true)) {
+                return new WP_Error('control_fixed_target_type_invalid', 'Festes Portalziel ist für diesen Ausgabetyp nicht zulässig.');
+            }
+            if (method_exists($this, 'control_target_gate')) {
+                $target_gate = $this->control_target_gate($portal_key, (string) ($target['key'] ?? ''));
+                if (is_wp_error($target_gate)) { return $target_gate; }
+            }
+            return array(
+                'status'=>'ready',
+                'confidence'=>100,
+                'reason'=>(string) ($manual['reason'] ?? 'Chefentscheidung mit festem Portalziel.'),
+                'target'=>$target,
+                'alternatives'=>array(),
+                'source'=>'manual_fixed_target',
+            );
         }
         // eBay-BUSINESS ist ein harter eigener Zielvertrag. Nach Veto/Review bzw.
         // einem expliziten Chefziel darf die Automatik NIEMALS in die generische
