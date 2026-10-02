@@ -1,0 +1,98 @@
+{
+  "contract": "K10_REAL_RESEARCH_V1",
+  "article_id": "53c8c859fbbc1b9a2a17ffe53efaf31d74520ac7a89aebc1e84ec9a6ea95ea6f",
+  "topic": "Wie oft muss ein Pferdeanhänger zum TÜV?",
+  "retrieved_at": "2026-10-02",
+  "sources": [
+    {
+      "source_id": "S1",
+      "title": "Gesetze im Internet – § 29 StVZO Untersuchung der Kraftfahrzeuge und Anhänger",
+      "url": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html"
+    },
+    {
+      "source_id": "S2",
+      "title": "Gesetze im Internet – Anlage VIII StVZO Untersuchung der Fahrzeuge",
+      "url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    },
+    {
+      "source_id": "S3",
+      "title": "TÜV Rheinland – Hauptuntersuchung (HU) für Anhänger",
+      "url": "https://www.tuv.com/germany/de/lp/lp-haupt-und-abgasuntersuchung/distribution-pages/hu-f%C3%BCr-anh%C3%A4nger/"
+    }
+  ],
+  "claims": [
+    {
+      "fact_id": "F1",
+      "source_title": "Gesetze im Internet – § 29 StVZO Untersuchung der Kraftfahrzeuge und Anhänger",
+      "source_url": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html",
+      "evidence_text_sha256": "a96865b4ef32e3bd36f30022047cb025e559d95b57332d065fc5fc6f7ba243fd",
+      "statement": "Zulassungspflichtige und kennzeichenpflichtige Fahrzeuge müssen nach § 29 StVZO in den regelmäßigen Zeitabständen der Anlage VIII zur Hauptuntersuchung vorgeführt werden.",
+      "evidence_text": "Zulassungspflichtige und kennzeichenpflichtige Fahrzeuge müssen nach § 29 StVZO in den regelmäßigen Zeitabständen der Anlage VIII zur Hauptuntersuchung vorgeführt werden.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F2",
+      "source_title": "Gesetze im Internet – Anlage VIII StVZO Untersuchung der Fahrzeuge",
+      "source_url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html",
+      "evidence_text_sha256": "5b9fb0644f5716261789f9e4b78a7d6a0a98ffc87f160022ca547b470b279ea5",
+      "statement": "Anhänger mit einer zulässigen Gesamtmasse über 0,75 Tonnen bis einschließlich 3,5 Tonnen müssen alle 24 Monate zur Hauptuntersuchung.",
+      "evidence_text": "Anhänger mit einer zulässigen Gesamtmasse über 0,75 Tonnen bis einschließlich 3,5 Tonnen müssen alle 24 Monate zur Hauptuntersuchung.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F3",
+      "source_title": "Gesetze im Internet – Anlage VIII StVZO Untersuchung der Fahrzeuge",
+      "source_url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html",
+      "evidence_text_sha256": "8c384dee2170e249fc39db8edace409bbd15d3bad67055b7ccaa8e33ce803966",
+      "statement": "Anhänger bis 0,75 Tonnen zulässiger Gesamtmasse oder ohne eigene Bremsanlage haben bei erstmaliger Inbetriebnahme eine erste HU-Frist von 36 Monaten und danach 24 Monate.",
+      "evidence_text": "Anhänger bis 0,75 Tonnen zulässiger Gesamtmasse oder ohne eigene Bremsanlage haben bei erstmaliger Inbetriebnahme eine erste HU-Frist von 36 Monaten und danach 24 Monate.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F4",
+      "source_title": "Gesetze im Internet – Anlage VIII StVZO Untersuchung der Fahrzeuge",
+      "source_url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html",
+      "evidence_text_sha256": "c71d4e08e8f59d544c18f356d96ff2a4776bb9e6e2f9fc6b371c406b8adaaed6",
+      "statement": "Anhänger mit einer zulässigen Gesamtmasse über 3,5 Tonnen bis einschließlich 10 Tonnen müssen alle 12 Monate zur Hauptuntersuchung.",
+      "evidence_text": "Anhänger mit einer zulässigen Gesamtmasse über 3,5 Tonnen bis einschließlich 10 Tonnen müssen alle 12 Monate zur Hauptuntersuchung.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F5",
+      "source_title": "Gesetze im Internet – § 29 StVZO Untersuchung der Kraftfahrzeuge und Anhänger",
+      "source_url": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html",
+      "evidence_text_sha256": "168d8c773da3454eb13d8d4823c86c10b89094dfde2f7612198ad2bbf4a1e1c7",
+      "statement": "Die Prüfplakette weist den spätesten Monat der Hauptuntersuchung aus; ihre Gültigkeit endet mit Ablauf dieses Monats. Der Untersuchungsbericht ist mindestens bis zur nächsten HU aufzubewahren.",
+      "evidence_text": "Die Prüfplakette weist den spätesten Monat der Hauptuntersuchung aus; ihre Gültigkeit endet mit Ablauf dieses Monats. Der Untersuchungsbericht ist mindestens bis zur nächsten HU aufzubewahren.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    },
+    {
+      "fact_id": "F6",
+      "source_title": "TÜV Rheinland – Hauptuntersuchung (HU) für Anhänger",
+      "source_url": "https://www.tuv.com/germany/de/lp/lp-haupt-und-abgasuntersuchung/distribution-pages/hu-f%C3%BCr-anh%C3%A4nger/",
+      "evidence_text_sha256": "b9cb3a151a239dbb0b5d00927aa849d88b71d851f3eb7803a4b3f8878126b29a",
+      "statement": "Bei der Anhänger-HU werden unter anderem Rahmen, Lichtanlage, Reifen, Aufhängung und Bremsen geprüft. Der nächste HU-Termin steht in der Zulassungsbescheinigung Teil I und auf der Prüfplakette.",
+      "evidence_text": "Bei der Anhänger-HU werden unter anderem Rahmen, Lichtanlage, Reifen, Aufhängung und Bremsen geprüft. Der nächste HU-Termin steht in der Zulassungsbescheinigung Teil I und auf der Prüfplakette.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ]
+    }
+  ],
+  "publish_allowed": false
+}
