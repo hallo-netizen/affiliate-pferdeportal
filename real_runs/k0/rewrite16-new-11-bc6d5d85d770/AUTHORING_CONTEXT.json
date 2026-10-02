@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzplaner-faq",
+    "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+    "target_keyword": "Was ist ein Reitplatzplaner",
+    "title": "Was ist ein Reitplatzplaner?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Reitbahnplaner – Wikipedia",
+          "source_url": "https://de.wikipedia.org/wiki/Reitbahnplaner"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist ein Reitplatzplaner",
+      "topic": "Was ist ein Reitplatzplaner?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzplaner-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
