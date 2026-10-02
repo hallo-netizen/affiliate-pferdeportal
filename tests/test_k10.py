@@ -88,7 +88,8 @@ def package_pass_results():
 
 class K10Tests(unittest.TestCase):
 
-    def test_preflight_uses_exact_article_rules_before_lt68(self):
+    @mock.patch('engine.preflight.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_preflight_uses_exact_article_rules_before_lt68(self, _writer):
         a=make_base()
         prepared,receipts,report=preflight_article(a)
         expected={r['id'] for r in hard_rules('ARTICLE') if r['id']!='lt68.language_zero_unresolved'}
@@ -97,14 +98,16 @@ class K10Tests(unittest.TestCase):
         self.assertEqual(len(receipts),len(expected))
         self.assertEqual(verify_article_pre_lt68(prepared['article_id'],article_hash(prepared),receipts)['status'],'READY_FOR_LT68')
 
-    def test_preflight_blocks_unsupported_numeric_claim_before_lt68(self):
+    @mock.patch('engine.preflight.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_preflight_blocks_unsupported_numeric_claim_before_lt68(self, _writer):
         a=make_base()
         a['html']=a['html'].replace('Aufgabe Longierpeitsche Longieren A','Aufgabe Longierpeitsche Longieren 999 A',1)
         prepared,receipts,report=preflight_article(a)
         self.assertEqual(report['status'],'BLOCKED')
         self.assertIn('HARD_RULE_NOT_PASS:facts.numeric_claim_supported',report['verification']['findings'])
 
-    def test_preflight_materializes_missing_conclusion_trace_without_visible_change(self):
+    @mock.patch('engine.preflight.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_preflight_materializes_missing_conclusion_trace_without_visible_change(self, _writer):
         a=make_base()
         h=a['research_claims']['F5']['evidence_text_sha256']
         marker=trace('F5','Fachquelle F5',h)
@@ -131,7 +134,8 @@ class K10Tests(unittest.TestCase):
         result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
         self.assertIn('HARD_RULE_NOT_PASS:facts.trace_binding',result['findings'])
 
-    def test_preflight_receipts_compose_with_lt68_receipt_without_content_recheck(self):
+    @mock.patch('engine.preflight.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_preflight_receipts_compose_with_lt68_receipt_without_content_recheck(self, _writer):
         a=make_base()
         prepared,receipts,report=preflight_article(a)
         self.assertEqual(report['status'],'READY_FOR_LT68',report)
@@ -471,7 +475,8 @@ class K10Tests(unittest.TestCase):
         self.assertIn('HARD_RULE_NOT_PASS:facts.real_source_trace',result['findings'])
 
 
-    def test_wordpress_export_binds_registry_article_id_to_plan_slot(self):
+    @mock.patch('engine.wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_wordpress_export_binds_registry_article_id_to_plan_slot(self, _writer):
         import hashlib
         a=make_base()
         a,_=materialize_canonical_root(a)
@@ -506,7 +511,8 @@ class K10Tests(unittest.TestCase):
         self.assertEqual(row['final_draft_sha256'],hashlib.sha256(a['html'].encode()).hexdigest())
         self.assertEqual(row['body'],a['html'])
 
-    def test_wordpress_export_blocks_without_canonical_registry_binding(self):
+    @mock.patch('engine.wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_wordpress_export_blocks_without_canonical_registry_binding(self, _writer):
         import hashlib
         a=make_base()
         a,_=materialize_canonical_root(a)
@@ -525,7 +531,8 @@ class K10Tests(unittest.TestCase):
               {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
             )
 
-    def test_wordpress_export_blocks_wrong_canonical_article_id_for_slot(self):
+    @mock.patch('engine.wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_wordpress_export_blocks_wrong_canonical_article_id_for_slot(self, _writer):
         import hashlib
         a=make_base()
         a,_=materialize_canonical_root(a)
@@ -545,7 +552,8 @@ class K10Tests(unittest.TestCase):
               {'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8 / Bestand 43'}
             )
 
-    def test_wordpress_export_blocks_without_current_batch_binding(self):
+    @mock.patch('engine.wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':820,'conclusion_ratio':0.11})
+    def test_wordpress_export_blocks_without_current_batch_binding(self, _writer):
         a=make_base()
         a,_=materialize_canonical_root(a)
         a['planning_binding']={
