@@ -1,0 +1,6 @@
+{
+  "contract": "K0_CHAT_START_V1",
+  "start_command": "K0:start",
+  "batch_sha256": "f113f5a638f78651de7faaae0b6ba67e0c12645eb8f951b205d285addaca6565",
+  "publish_allowed": false
+}
