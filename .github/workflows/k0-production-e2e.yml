@@ -1,0 +1,156 @@
+name: K0 real chat production
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - 'real_runs/k0/**/START.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve exactly one K0 chat job
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t starts < <(git diff --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- 'real_runs/k0/**/START.json')
+          if [ "${#starts[@]}" -ne 1 ]; then
+            echo "K0_REQUIRES_EXACTLY_ONE_START:${#starts[@]}" >&2
+            exit 2
+          fi
+          start="${starts[0]}"
+          rd="${start%/START.json}"
+          [[ "$rd" =~ ^real_runs/k0/[A-Za-z0-9._-]+$ ]] || { echo "K0_RUN_DIR_INVALID:$rd" >&2; exit 2; }
+          for f in WORDPRESS_INTAKE.json ARTICLE_PACKAGE.json START.json; do
+            test -f "$rd/$f" || { echo "K0_JOB_FILE_MISSING:$f" >&2; exit 2; }
+          done
+          echo "RUN_DIR=$rd" >> "$GITHUB_ENV"
+
+      - name: Validate start binding
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,os
+          rd=os.environ['RUN_DIR']
+          start=json.load(open(rd+'/START.json'))
+          intake=json.load(open(rd+'/WORDPRESS_INTAKE.json'))
+          assert start.get('contract')=='K0_CHAT_START_V1',start
+          assert start.get('start_command')=='K0:start',start
+          assert start.get('batch_sha256')==intake.get('batch_sha256'),start
+          assert start.get('publish_allowed') is False,start
+          print('K0_CHAT_START_BINDING_PASS')
+          PY
+
+      - name: Automatic portal assignment
+        shell: bash
+        run: |
+          python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json > /tmp/k0-portal.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-portal.json'))
+          assert x['status']=='PASS',x
+          assert all(i['status']=='AUTO_DETECTED' for i in x['items']),x
+          print('K0_PORTAL_AUTO_PASS')
+          PY
+
+      - name: K0 structure and PPM 6.7.9 gates
+        shell: bash
+        run: |
+          python3 -m engine.k0_production_gate "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-portal.json /tmp/k0-gates.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-gates.json'))
+          assert x['status']=='PASS',x
+          assert x['structure_table']=='PASS',x
+          assert x['ppm679_status']=='PASS' and x['ppm679_rule_count']==104,x
+          print('K0_GATES_PASS')
+          PY
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k0-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k0-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k0-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k0-lt68/LanguageTool-6.8.zip -d /tmp/k0-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Real LanguageTool 6.8 gate
+        shell: bash
+        run: |
+          python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-lt68-result.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-lt68-result.json'))
+          assert x['status']=='PASS' and x['finding_count']==0,x
+          print('K0_LT68_PASS')
+          PY
+
+      - name: Build real PSERC 0.28.27 WordPress export
+        shell: bash
+        run: |
+          set -euo pipefail
+          batch="$(python3 - <<'PY'
+          import json,os
+          print(json.load(open(os.environ['RUN_DIR']+'/WORDPRESS_INTAKE.json'))['batch_sha256'])
+          PY
+          )"
+          mkdir -p /tmp/k0-final
+          out="/tmp/k0-final/K0_WORDPRESS_DIRECT_IMPORT_${batch}.json"
+          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json "$out"
+          python3 -m engine.k0_wordpress_export verify "$out" "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-final/K0_WORDPRESS_VERIFY.json
+          sha256sum "$out" | awk '{print $1}' > /tmp/k0-final/K0_WORDPRESS_SHA256.txt
+          echo "K0_FINAL_FILE=$out" >> "$GITHUB_ENV"
+
+      - name: Final delivery receipt
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          p=pathlib.Path(os.environ['K0_FINAL_FILE'])
+          raw=p.read_bytes()
+          doc=json.loads(raw)
+          rec={
+            'contract':'K0_CHAT_DELIVERY_V1',
+            'status':'READY_FOR_CHAT_DELIVERY',
+            'filename':p.name,
+            'sha256':hashlib.sha256(raw).hexdigest(),
+            'wordpress_contract':doc['contract'],
+            'article_count':doc['article_count'],
+            'direct_wordpress_upload_ready':doc['wordpress_review']['direct_wordpress_upload_ready'],
+            'plugin_version':doc['wordpress_review']['plugin_version_verified_against'],
+            'ppm_version':doc['wordpress_review']['ppm_version_verified_against'],
+            'publish_allowed':False,
+          }
+          pathlib.Path('/tmp/k0-final/K0_CHAT_DELIVERY.json').write_text(json.dumps(rec,ensure_ascii=False,indent=2)+'\n')
+          assert rec['wordpress_contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
+          assert rec['direct_wordpress_upload_ready'] is True
+          assert rec['plugin_version']=='0.28.27'
+          print('K0_CHAT_DELIVERY_READY')
+          PY
+
+      - name: Upload final Chat delivery
+        uses: actions/upload-artifact@v4
+        with:
+          name: k0-chat-delivery-${{ github.run_id }}
+          path: |
+            /tmp/k0-final/K0_WORDPRESS_DIRECT_IMPORT_*.json
+            /tmp/k0-final/K0_WORDPRESS_VERIFY.json
+            /tmp/k0-final/K0_WORDPRESS_SHA256.txt
+            /tmp/k0-final/K0_CHAT_DELIVERY.json
+            /tmp/k0-portal.json
+            /tmp/k0-gates.json
+            /tmp/k0-lt68-result.json
+          if-no-files-found: error
+          retention-days: 30
