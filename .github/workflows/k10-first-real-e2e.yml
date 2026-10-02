@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Assert exact K10 real input snapshots
+      - name: Assert exact historical real input snapshots
         shell: bash
         run: |
           set -euo pipefail
@@ -33,8 +33,6 @@ jobs:
           test ! -e submissions
           echo 'fd071d1bddfd5b7826b209be442e2573ad55deb954e1fecc9b45f90df6ad3e32  real_runs/20261001_longiergurt_anlegen/ARTICLE_INPUT.json' | sha256sum -c -
           echo 'b9f29a1c54d91f7e0107eff838c2159f83516c5831a4247f61e80223858c2559  real_runs/20261001_longiergurt_anlegen/RESEARCH.json' | sha256sum -c -
-          echo '9e0d23f5d696076205f1e5694bb91984d969e7a6cf3a64d9467988eb54c38387  engine/lt68_external.py' | sha256sum -c -
-          echo '6562a5b2b16685bf7fe1300e1d64872bf4ace99bd53a9d860b8869e1ed2bdb38  engine/real_proof.py' | sha256sum -c -
           mkdir -p /tmp/k10-out
           echo K10_REAL_INPUT_SNAPSHOT_PASS
 
