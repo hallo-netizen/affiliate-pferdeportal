@@ -107,7 +107,7 @@ class K10Tests(unittest.TestCase):
         a['html']=a['html'].replace(marker,'',1)
         prepared,binding=materialize_trace_bindings(a)
         self.assertEqual(visible_text(prepared['html']),before)
-        self.assertIn(marker,prepared['html'])
+        self.assertRegex(prepared['html'],r'<span class="ppm-source-trace"[^>]*data-fact-id="F5"[^>]*data-source-title="Fachquelle F5"[^>]*data-source-hash="'+h+r'"[^>]*></span>')
         self.assertTrue(any(x['fact_id']=='F5' and x['block']=='conclusion' for x in binding['inserted']))
         _,_,report=preflight_article(a)
         self.assertEqual(report['status'],'READY_FOR_LT68',report)
