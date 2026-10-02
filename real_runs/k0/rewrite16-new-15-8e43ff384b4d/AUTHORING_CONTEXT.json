@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "tuev-beim-pferdeanhaenger-faq",
+    "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+    "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+    "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "TÜV-Kosten: Preise und Infos zur Hauptuntersuchung – ADAC",
+          "source_url": "https://www.adac.de/rund-ums-fahrzeug/reparatur-pflege-wartung/hu-und-au/tuev-kosten/"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+      "topic": "Wie teuer ist der TÜV beim Pferdeanhänger?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "tuev-beim-pferdeanhaenger-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
