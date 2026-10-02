@@ -144,13 +144,13 @@ jobs:
           if(!is_array($obj))throw new RuntimeException('published object missing');
           $page=absint(get_option('ppar_test_schabracken_page'));
           if(($obj['target_key']??'')!=='page:'.$page)throw new RuntimeException('wrong automatic target '.wp_json_encode($obj));
-          if(($obj['slot_id']??'')!=='glossary_single_mobile_banner')throw new RuntimeException('unexpected current wrong-slot reproduction '.wp_json_encode($obj));
-          echo "CURRENT_CONTEXTLESS_SLOT_OVERRIDES_HUB_SLOT_REPRODUCED_PASS\n";
+          if(($obj['slot_id']??'')!=='hub_after_cards')throw new RuntimeException('wrong target-derived slot '.wp_json_encode($obj));
+          echo "ACTUAL_CONTEXT_FIRST_HUB_SLOT_PASS\n";
           $m=new ReflectionMethod($o,'campaign_from_post');$m->setAccessible(true);
           $campaign=$m->invoke($o,get_post(absint($obj['campaign_post_id']??0)));
           if(!is_array($campaign)||empty($campaign['active']))throw new RuntimeException('campaign inactive');
           if(!in_array('page:schabracken',(array)($campaign['automation_target_keys']??[]),true))throw new RuntimeException('frontend target missing');
-          if(!in_array('glossary_single_mobile_banner',(array)($campaign['placements']??[]),true))throw new RuntimeException('current wrong frontend placement not reproduced');
+          if(!in_array('hub_after_cards',(array)($campaign['placements']??[]),true))throw new RuntimeException('frontend hub placement missing');
           echo "ACTUAL_AUTO_TARGET_SLOT_ACTIVE_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/current-multitarget.php --path=/tmp/wp-site
@@ -359,8 +359,8 @@ jobs:
           update_option('ppar_full_pool_automation_cursor_v1',$creative_id,false);
           $o->ensure_full_pool_automation();
           $state=(string)get_option('ppar_full_pool_automation_version_v1','');
-          $cursor=absint(get_option('ppar_full_pool_automation_cursor_v1',999999));
-          if($state!=='running:6.72.175' || $cursor!==0) throw new RuntimeException('version-bound cursor reset failed '.wp_json_encode(['state'=>$state,'cursor'=>$cursor]));
+          $cursor_raw=get_option('ppar_full_pool_automation_cursor_v1',false);
+          if($state!=='running:6.72.175' || $cursor_raw!==false) throw new RuntimeException('version-bound cursor reset failed '.wp_json_encode(['state'=>$state,'cursor'=>$cursor_raw]));
           if(!wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK)) throw new RuntimeException('worker not automatically scheduled');
           $o->run_full_pool_automation_worker();
           $identity=(string)get_option('ppar_test_schabracken_identity');
