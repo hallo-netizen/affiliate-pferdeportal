@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib, html, json, re, sys
 from pathlib import Path
 
-CONTRACT='CANONICAL_WRITER_RECEIPT_V1'
+SEAL_CONTRACT='K0_WRITER_SEAL_V1'
 POLICY_CONTRACT='CANONICAL_WRITER_QUALITY_POLICY_V1'
 
 POLICY={
@@ -111,61 +111,49 @@ def inspect_html(article_html):
       'further_information_words':further['word_count'],
     }
 
-def issue_receipt(article):
+def verify_package(article):
+    if not isinstance(article,dict):
+        raise WriterContractBlocked('WRITER_PACKAGE_INVALID')
     body=str(article.get('html') or '')
     metrics=inspect_html(body)
-    core={
-      'contract':CONTRACT,
-      'status':'PASS',
-      'route':'CANONICAL_WRITER_CONTRACT_ONLY',
-      'article_id':str(article.get('article_id') or ''),
-      'visible_text_sha256':sha_text(_plain(body)),
-      'section_structure_sha256':stable(metrics['normal_h2_sections']),
-      'policy_sha256':metrics['policy_sha256'],
-      'section_balance_status':'PASS',
-      'conclusion_status':'PASS',
-      'further_information_status':'PASS',
-      'total_words':metrics['total_words'],
-      'conclusion_ratio':round(metrics['conclusion_ratio'],6),
-      'publish_allowed':False,
-    }
-    return {**core,'receipt_sha256':stable(core)}
-
-def bind_receipt(article):
-    out=json.loads(json.dumps(article))
-    out['final_draft_sha256']=sha_text(str(out.get('html') or ''))
-    out['writer_provenance']=issue_receipt(out)
-    return out
-
-def verify_package(article):
     actual=article.get('writer_provenance')
     if not isinstance(actual,dict):
         raise WriterContractBlocked('WRITER_PROVENANCE_MISSING')
-    expected=issue_receipt(article)
-    if actual!=expected:
-        raise WriterContractBlocked('WRITER_PROVENANCE_INVALID_OR_STALE')
-    return inspect_html(str(article.get('html') or ''))
-
+    if actual.get('contract')!=SEAL_CONTRACT or actual.get('status')!='PASS':
+        raise WriterContractBlocked('WRITER_PROVENANCE_CONTRACT_INVALID')
+    if actual.get('route')!='K0_WRITER_DRAFT_ONLY':
+        raise WriterContractBlocked('WRITER_PROVENANCE_ROUTE_INVALID')
+    if actual.get('publish_allowed') is not False:
+        raise WriterContractBlocked('WRITER_PROVENANCE_PUBLISH_INVALID')
+    required=('job_id','job_sha256','draft_sha256','identity_sha256','visible_text_sha256','section_structure_sha256','policy_sha256','seal_sha256')
+    if any(not str(actual.get(k) or '') for k in required):
+        raise WriterContractBlocked('WRITER_PROVENANCE_FIELD_MISSING')
+    if actual.get('visible_text_sha256')!=sha_text(_plain(body)):
+        raise WriterContractBlocked('WRITER_VISIBLE_TEXT_BINDING_INVALID')
+    if actual.get('section_structure_sha256')!=stable(metrics['normal_h2_sections']):
+        raise WriterContractBlocked('WRITER_SECTION_STRUCTURE_BINDING_INVALID')
+    if actual.get('policy_sha256')!=metrics['policy_sha256']:
+        raise WriterContractBlocked('WRITER_POLICY_BINDING_INVALID')
+    if int(actual.get('total_words') or 0)!=metrics['total_words']:
+        raise WriterContractBlocked('WRITER_TOTAL_WORD_BINDING_INVALID')
+    if round(float(actual.get('conclusion_ratio') or 0),6)!=round(metrics['conclusion_ratio'],6):
+        raise WriterContractBlocked('WRITER_CONCLUSION_BINDING_INVALID')
+    core=dict(actual); declared=core.pop('seal_sha256',None)
+    if declared!=stable(core):
+        raise WriterContractBlocked('WRITER_SEAL_HASH_INVALID')
+    if article.get('final_draft_sha256')!=sha_text(body):
+        raise WriterContractBlocked('WRITER_FINAL_DRAFT_HASH_INVALID')
+    return metrics
 
 def main():
-    if len(sys.argv)<3:
-        raise SystemExit('usage: writer_contract_guard.py stamp IN OUT | verify IN')
-    mode=sys.argv[1]
+    if len(sys.argv)!=3 or sys.argv[1]!='verify':
+        raise SystemExit('usage: writer_contract_guard.py verify SEALED_WRITER_PRODUCT')
     try:
-        if mode=='stamp' and len(sys.argv)==4:
-            article=json.loads(Path(sys.argv[2]).read_text(encoding='utf-8'))
-            out=bind_receipt(article)
-            Path(sys.argv[3]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-            print(json.dumps({'contract':CONTRACT,'status':'PASS','receipt':out['writer_provenance']},ensure_ascii=False))
-            return
-        if mode=='verify' and len(sys.argv)==3:
-            article=json.loads(Path(sys.argv[2]).read_text(encoding='utf-8'))
-            metrics=verify_package(article)
-            print(json.dumps({'contract':CONTRACT,'status':'PASS','metrics':metrics},ensure_ascii=False))
-            return
-        raise WriterContractBlocked('WRITER_GUARD_USAGE_INVALID')
+        article=json.loads(Path(sys.argv[2]).read_text(encoding='utf-8'))
+        metrics=verify_package(article)
+        print(json.dumps({'contract':SEAL_CONTRACT,'status':'PASS','metrics':metrics},ensure_ascii=False))
     except Exception as exc:
-        print(json.dumps({'contract':CONTRACT,'status':'BLOCKED','reason':str(exc),'publish_allowed':False},ensure_ascii=False))
+        print(json.dumps({'contract':SEAL_CONTRACT,'status':'BLOCKED','reason':str(exc),'publish_allowed':False},ensure_ascii=False))
         raise SystemExit(2)
 
 if __name__=='__main__':
