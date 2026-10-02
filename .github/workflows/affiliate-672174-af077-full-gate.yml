@@ -1,5 +1,6 @@
 name: Affiliate Router 6.72.174 AF-077 Full Gate
 # Exact AF-077 gate on released 6.72.173 baseline; no functional/performance rollback allowed.
+# Retry after README newline-only correction.
 
 on:
   push:
