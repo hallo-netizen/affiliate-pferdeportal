@@ -4,6 +4,7 @@ from pathlib import Path
 from .core import load_values
 from .checkers import run_article_content_checks, article_hash
 from .final_integrity import verify_article_pre_lt68
+from .html_design import materialize_canonical_root, validate_canonical_html
 
 class Blocked(RuntimeError): pass
 
@@ -104,7 +105,9 @@ def materialize_trace_bindings(article):
     return out,{'inserted':inserted,'inserted_count':len(inserted),'visible_text_changed':False}
 
 def preflight_article(article):
-    prepared,binding=materialize_trace_bindings(article)
+    designed,design_binding=materialize_canonical_root(article)
+    prepared,binding=materialize_trace_bindings(designed)
+    design_validation=validate_canonical_html(prepared)
     receipts=run_article_content_checks(prepared)
     verification=verify_article_pre_lt68(prepared['article_id'],article_hash(prepared),receipts)
     report={
@@ -113,6 +116,8 @@ def preflight_article(article):
       'article_id':prepared['article_id'],
       'article_sha256':article_hash(prepared),
       'receipt_count':len(receipts),
+      'design_binding':design_binding,
+      'design_validation':design_validation,
       'trace_materialization':binding,
       'verification':verification,
       'publish_allowed':False,
