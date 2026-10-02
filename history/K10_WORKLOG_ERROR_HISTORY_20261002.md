@@ -935,3 +935,23 @@ Bei allen drei:
 - Body-SHA PASS;
 - READY_FOR_WORDPRESS_DRAFT_IMPORT;
 - publish_allowed=false.
+
+
+## Architekturentscheidung: Frontend-/WordPress-Fix bleibt ausschließlich K10 – 2026-10-02
+
+Nutzerentscheidung:
+Der bestätigte PASS der korrigierten K10-WordPress-Datei wird als dauerhafter K10-Fix übernommen, **nicht** als Vorlage für K0.
+
+Fest gebunden:
+- K10/Pferdeatelier behält die System4-Frontend-Hülle `ppm-generated ppm-type-*` + `data-article-type`;
+- K10 löst `plan_slot` intern gegen die PPM-6.7.9-Registry zur echten `canonical_article_id` auf;
+- K10 exportiert über `SYSTEM4_WORDPRESS_HANDOFF_V1`;
+- K10 besitzt eigenen validierten Mehrartikel-Exporter;
+- diese Komponenten bleiben K10-lokal.
+
+Explizit verboten:
+- K10-Code nach K0 kopieren;
+- K0 von K10-Branch, K10-Current, PPM679-Registry oder System4-WordPress-Handoff abhängig machen;
+- Pferdeatelier-Frontendklassen als allgemeine K0-Regeln übernehmen.
+
+K0 wurde bei dieser Entscheidung nicht verändert.

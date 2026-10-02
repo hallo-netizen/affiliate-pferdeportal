@@ -79,3 +79,20 @@ Erste sichtbare Antwort:
 - echter terminaler, nicht automatisch schließbarer Blocker.
 
 Bei Mehrartikel-Dateien muss zuerst der gesamte Batch vollständig abgearbeitet werden.
+
+
+## K10-SCOPE – NICHT AUF K0 ÜBERTRAGEN
+Die aktuelle Frontend-/WordPress-Kompatibilitätsbindung ist **ausschließlich K10/Pferdeatelier**.
+
+Dazu gehören insbesondere:
+- `ppm-generated`;
+- `ppm-type-*`;
+- `data-article-type`;
+- PPM-6.7.9-Registry-Auflösung `plan_slot -> canonical_article_id`;
+- `SYSTEM4_WORDPRESS_HANDOFF_V1`;
+- K10-Mehrartikel-WordPress-Exporter.
+
+Diese Elemente sind Pferdeatelier-/System4-Kompatibilitätslogik und **keine allgemeine Textmaschinenlogik**.
+
+**HARD RULE:** Nichts davon nach K0 kopieren, importieren, referenzieren oder dort als Vorgabe übernehmen.
+K0 bleibt technisch und vertraglich eigenständig.

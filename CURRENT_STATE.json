@@ -466,10 +466,36 @@
       "article_id_plan_slot_roundtrip": "PASS_3_OF_3",
       "body_hash": "PASS_3_OF_3",
       "publish_allowed": false
+    },
+    "k10_only_frontend_export_scope": {
+      "status": "BOUND",
+      "applies_to": "K10_PFERDEATELIER_ONLY",
+      "do_not_port_to": [
+        "K0"
+      ],
+      "k0_dependency": false,
+      "k0_inheritance": false,
+      "k0_shared_code": false,
+      "k0_shared_contract": false,
+      "k0_shared_frontend_classes": false,
+      "k0_shared_wordpress_export": false,
+      "rationale": "PFERDEATELIER_FRONTEND_AND_WORDPRESS_IMPORT_COMPATIBILITY_BINDING_NOT_GENERIC_TEXTMACHINE_LOGIC",
+      "protected_components": [
+        "engine/html_design.py",
+        "engine/canonical_binding.py",
+        "engine/wordpress_export.py",
+        "engine/wordpress_batch_export.py",
+        "PFERDEATELIER_SYSTEM4_WORDPRESS_HANDOFF",
+        "PPM679_CANONICAL_ARTICLE_ID_REGISTRY_BINDING",
+        "ppm-generated",
+        "ppm-type-*",
+        "data-article-type"
+      ],
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "NORMAL_K10_PRODUCTION_FROM_CURRENT_WORDPRESS_UPLOAD_WITH_CANONICAL_SYSTEM4_EXPORT_AND_FRONTEND_HTML",
+  "next_action": "NORMAL_K10_PRODUCTION_ONLY; DO_NOT_COPY_K10_FRONTEND_OR_WORDPRESS_EXPORT_BINDINGS_TO_K0",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",

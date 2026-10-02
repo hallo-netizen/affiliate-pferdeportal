@@ -53,3 +53,16 @@ Für jeden Artikel:
 4. bei mehreren Artikeln automatisch bis zum Ende weiterarbeiten.
 
 Ein historischer oder auf GitHub liegender Metadatenbestand besitzt gegenüber dem aktuellen Upload **keine Job-Autorität**.
+
+
+## PORTAL-/EXPORT-BINDUNG IST K10-LOKAL
+Die K10-Produktionsausgabe bindet den fertigen Text an die bestehende Pferdeatelier-/System4-Frontend- und WordPress-Schnittstelle.
+
+Diese Bindung ist absichtlich **nicht portabel**:
+- kein Shared Module mit K0;
+- kein Import von K10-Code in K0;
+- kein gemeinsamer Current;
+- kein gemeinsamer Exportvertrag;
+- keine automatische Vererbung der Pferdeatelier-HTML-Klassen an andere Portale.
+
+Eine spätere zentrale Textmaschine darf eigene Portalprofile definieren, aber **dieser konkrete K10-Fix bleibt in K10**.
