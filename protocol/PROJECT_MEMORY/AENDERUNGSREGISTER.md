@@ -2214,3 +2214,18 @@ Er ist ausdrücklich nur Teilfix und keine belegte Gesamtlösung der niedrigen T
 NACHWEIS:
 `protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
 
+
+
+## PSTE-REUSE-002 – gespeichertes Recherchematerial darf vor Produktionsfreigabe als Titelkandidat nutzbar werden
+
+STAND:
+2026-10-02.
+
+WAS:
+PSTE 0.57.26 nutzt vorhandene Fragen, gespeicherte redaktionelle Formulierungen und den bestehenden Titelpfad, um nicht-autorisierende Titelkandidaten aus dem vorhandenen Fundus zu erzeugen. Zusätzlich fällt die Kontextquery bei leerem `editorial_title` auf vorhandene Query-Felder zurück.
+
+WARUM:
+Der Fundus war vorhanden, wurde aber wegen eines falschen Leerwert-Fallbacks und zu enger Kopplung an spätere Aufbereitungsstufen nicht ausreichend als Titeloberfläche nutzbar. Live wurden danach 695 Titelkandidaten erzeugt.
+
+GRENZE:
+Titelkandidat ist keine Produktionsfreigabe. Kategorie-, Dubletten-, Artikeltyp-, Planning-, PSERC- und Publish-Gates bleiben unverändert. Keine neue externe Recherche im Bestandslauf.
