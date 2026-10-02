@@ -1,0 +1,88 @@
+{
+  "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "batch_sha256": "b7b0a00bd5ceacf939043d13f982a583b10abaf4efbf2539ca64a5854c055027",
+  "article_count": 1,
+  "publish_allowed": false,
+  "signing_deferred": true,
+  "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+  "no_legacy_status": "PASS",
+  "test_suite_status": "PASS",
+  "wordpress_review": {
+    "file_format": "JSON",
+    "mime_type": "application/json",
+    "intended_next_step": "WORDPRESS_DIRECT_IMPORT",
+    "plugin_name": "Portal SEO Editorial Plan Compiler",
+    "plugin_version_verified_against": "0.28.30",
+    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "ppm_version_verified_against": "6.7.9",
+    "direct_wordpress_upload_ready": true,
+    "direct_upload_block_reason": null,
+    "required_downstream_components": []
+  },
+  "articles": [
+    {
+      "index": 0,
+      "article_id": "article:cf3b0b8f487bf47c0bbbc3f9",
+      "title": "Warum sagt man eigentlich „alte Schabracke“?",
+      "target_keyword": "Warum sagt man alte Schabracke",
+      "category": "pferdewissen-grundlagen",
+      "article_type": "Journal",
+      "plan_slot": "d3bd7d12876803b80f744294f27be814ff65bc3cf0af95989bdab4538f9da3e6",
+      "final_draft_sha256": "091dba00af91158013f7c878a3289444747b5236cfaff67393781b911238c79e",
+      "revision_count": 3,
+      "body": "<article class=\"ppm-generated ppm-type-journal\" data-article-type=\"Journal\">\n<section data-block=\"intro\">\n<p>„Alte Schabracke“ ist heute eine abwertende Redewendung. Das Kuriose daran: Schabracke war ursprünglich kein Schimpfwort, sondern ein ganz normales Wort aus der Pferdewelt. Es bezeichnete eine Decke beziehungsweise einen Teil des Sattelzeugs. Erst später kamen übertragene Bedeutungen hinzu. So konnte dasselbe Wort im Stall sachlich bleiben und außerhalb des Pferdebereichs zu einer spöttischen Bezeichnung werden.</p>\n</section>\n<section data-block=\"origin\">\n<h2>Am Anfang stand eine Decke für Pferd und Sattel</h2>\n<p>Historisch bezeichnete die Schabracke eine oft verzierte Decke, die mit Sattelzeug und Reiterei verbunden war. Auch heute ist das Wort im Pferdesport völlig normal: Eine Schabracke liegt unter dem Sattel und unterscheidet sich vor allem durch ihren Schnitt von anderen Sattelunterlagen. Wer im Stall sagt, dass die Schabracke gewaschen werden muss, verwendet also ein sachliches Fachwort. Mit einer Beleidigung hat diese Bedeutung nichts zu tun. Die Wortgeschichte führt laut Wörterbuchangaben wahrscheinlich über ältere ungarische oder türkische Bezeichnungen für Sattel- oder Pferdedecken. Solche sprachlichen Wanderungen passen zur langen Geschichte von Reiterei, Militär und Ausrüstung in Europa. Ganz eindeutig lässt sich jede Zwischenstufe der Herkunft allerdings nicht belegen.</p>\n\n<p>Auch die heutige Form der Schabracke zeigt, wie selbstverständlich sich Wörter weiterentwickeln können. Moderne Reiter denken beim Begriff an gesteppte Sattelunterlagen in vielen Farben, während historische Ausführungen häufig stärker repräsentativen Charakter hatten. Der Kern bleibt dennoch ähnlich: Es geht um ein textiles Element im Zusammenhang mit Pferd und Sattel.</p>\n\n</section>\n<section data-block=\"change\">\n<h2>Wie aus dem Sachwort eine abwertende Bezeichnung wurde</h2>\n<p>Wörter können im Lauf der Zeit zusätzliche bildliche Bedeutungen entwickeln. Bei Schabracke entstand neben dem neutralen Pferdebegriff eine salopp-abwertende Verwendung. Duden nennt unter anderem Bedeutungen für ein altes Pferd, eine alte oder als hässlich bezeichnete Frau sowie für eine alte, abgenutzte Sache. Der genaue Übergang lässt sich nicht auf einen einzelnen Moment festlegen. Sprachlich liegt aber nahe, dass Vorstellungen von Alter, Abnutzung und wenig ansprechendem Aussehen auf andere Dinge und schließlich auf Menschen übertragen wurden. Solche Bedeutungsverschiebungen gibt es bei vielen Alltagswörtern. Wichtig ist deshalb, die sachliche Herkunft von der späteren Wertung zu trennen: Die Schabracke als Ausrüstungsgegenstand ist neutral, die Personenbezeichnung eindeutig nicht.</p>\n\n<p>Solche Übertragungen entstehen nicht nach einem festen sprachlichen Plan. Ein Wort wird zunächst scherzhaft oder bildlich verwendet, taucht häufiger in ähnlichen Situationen auf und kann schließlich eine eigenständige Nebenbedeutung bekommen. Dass diese Nebenbedeutung negativ ist, verändert die ursprüngliche Fachbedeutung nicht. Beide können jahrzehntelang parallel nebeneinander bestehen.</p>\n\n</section>\n<section data-block=\"phrase\">\n<h2>Warum die Kombination mit „alt“ besonders deutlich wirkt</h2>\n<p>Die Wendung „alte Schabracke“ verstärkt die negative Nebenbedeutung gleich doppelt. „Alt“ kann sich zwar neutral auf das Lebensalter beziehen, in dieser Kombination klingt es aber eher nach verbraucht, unansehnlich oder ausgedient. Wird der Ausdruck gegen eine Person gerichtet, ist er deshalb spöttisch bis beleidigend. Unter engen Freunden kann so etwas scherzhaft gemeint sein, doch die abwertende Bedeutung verschwindet dadurch nicht. Der Tonfall entscheidet nur darüber, wie hart die Bemerkung im konkreten Gespräch wirkt. Interessant ist der Kontrast zum Stall: Dort kann unmittelbar danach jemand völlig neutral fragen, welche Schabracke unter den Sattel soll. Die gleiche Lautfolge trägt also je nach Zusammenhang zwei sehr unterschiedliche Bedeutungen.</p>\n\n<p>Gerade deshalb sollte die Wendung nicht mit der neutralen Verwendung im Pferdesport verwechselt werden. Eine Reiterin, die eine alte Schabracke aussortiert, beschreibt tatsächlich einen gebrauchten Gegenstand. Wird dagegen eine Person so genannt, dient derselbe Ausdruck als Wertung. Grammatisch ähnlich, kommunikativ aber vollständig verschieden – der Zusammenhang macht den Unterschied.</p>\n\n</section>\n<section data-block=\"language\">\n<h2>Warum solche Pferdewörter in der Alltagssprache weiterleben</h2>\n<p>Redewendungen bewahren häufig Bilder aus Berufen und Lebenswelten, die im heutigen Alltag weniger präsent sind. Begriffe aus Landwirtschaft, Handwerk, Jagd oder Reiterei konnten sich deshalb weit über ihren ursprünglichen Bereich hinaus verbreiten. Wer eine Redewendung benutzt, denkt meist nicht mehr darüber nach, aus welchem Gegenstand das Bild entstanden ist. Genau das macht „alte Schabracke“ zu einem schönen Beispiel für Pferdewissen: Ein bis heute gebräuchlicher Ausrüstungsbegriff hat parallel eine völlig andere sprachliche Karriere gemacht. Für Reiterinnen und Reiter wirkt die Wendung dadurch fast doppeldeutig. Sie zeigt, dass Sprache alte Sachwelten konservieren kann, selbst wenn sich die übertragene Bedeutung längst verselbstständigt hat.</p>\n\n<p>Pferdehaltung hat viele Spuren in der Sprache hinterlassen, weil Pferde über Jahrhunderte Verkehr, Arbeit, Militär und Landwirtschaft prägten. Manche Bilder sind heute noch verständlich, andere wirken rätselhaft. Solche Begriffe zu erklären ist deshalb mehr als Wortklauberei: Sie zeigen, welche Gegenstände und Tätigkeiten früher so selbstverständlich waren, dass daraus Redewendungen entstehen konnten.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>„Alte Schabracke“ wurde nicht als Pferdebeleidigung erfunden. Ausgangspunkt ist ein sachlicher Begriff für eine Sattel- oder Pferdedecke. Später entwickelte sich daneben eine salopp-abwertende Verwendung für alte oder als unansehnlich bezeichnete Dinge, Tiere und Menschen. Das zusätzliche Wort „alt“ verstärkt diese Wertung. Im Pferdesport blieb die ursprüngliche Bedeutung dagegen erhalten und ist bis heute neutral. Gerade diese Doppelrolle macht den Ausdruck interessant: Im Stall kann die Schabracke ein ganz normaler Ausrüstungsgegenstand sein, während dieselbe Bezeichnung für eine Person verletzend wirkt. Der Kontext entscheidet sofort, welche Bedeutung gemeint ist.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für Wortbedeutung und Herkunft ist ein aktuelles Wörterbuch die sinnvollste Referenz. Weitere Begriffe aus Reiterei und Pferdehaltung lassen sich ähnlich auf ihre ursprüngliche und übertragene Bedeutung untersuchen.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Schabracke – Duden",
+              "source_url": "https://www.duden.de/rechtschreibung/Schabracke"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Journal",
+          "target_keyword": "Warum sagt man alte Schabracke",
+          "topic": "Warum sagt man eigentlich „alte Schabracke“?",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "pferdewissen-grundlagen",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-17a4cf44957540527be2483e",
+          "job_sha256": "0e7ae6be459e0a3012236aa430044d1e17ef53d2fc4f033d3f2746c323f03a23",
+          "draft_sha256": "48a761066171b2256d2b65355e22c32a3aa9af163400ed2c7a39a34b42e98b4f",
+          "identity_sha256": "98780c7fcf058934e43e309805b563aa4e9c365cadcc735a80c38bcd8f0e1058",
+          "visible_text_sha256": "91a82fa1738c698f19c175d6f9452e09dc68cde6b78ed1370c568d66909e38e5",
+          "section_structure_sha256": "fabd3e4a8e77156f6215ab4aee318eba74b51a5a1db1ffac00f8103093016635",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 823,
+          "conclusion_ratio": 0.105711,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "43fb1753466323373e79316cfdc909da2773766fb429e59ce4605929493c8136"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "091dba00af91158013f7c878a3289444747b5236cfaff67393781b911238c79e"
+      }
+    }
+  ]
+}
