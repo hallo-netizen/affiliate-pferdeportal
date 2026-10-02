@@ -78,5 +78,7 @@
     "direct_wordpress_upload_ready_for_completed_singles": true
   },
   "history_ref": "history/K0_WORKLOG_ERROR_HISTORY_20261002.md",
-  "publish_allowed": false
+  "publish_allowed": false,
+  "k9_unchanged": true,
+  "k10_unchanged": true
 }
