@@ -840,3 +840,36 @@ Belegt im E2E:
 **Evidence / Arbeitsbindung:** `release/affiliate-zentrale/evidence/awin_672142_live_pass_banner_targeturl_next_20260921.txt`.
 
 **Status:** OPEN / READ_ONLY_ROOTCAUSE_PROOF_REQUIRED.
+
+## AFF-ERR-042 — Bannerkette nur teilgeprüft: Zielwahl korrekt, reale Hub-Ausgabe trotzdem fehlend
+
+**Datum / Arbeitsbindung:** 02.10.2026.
+
+**Symptom:** Der reale Schabrackendesigner-Banner blieb trotz zunächst grünem Zielklassifikationstest unsichtbar.
+
+**Belegte Root Cause:** Die frühe Prüfung deckte nur einen Teil der realen Kette ab. In 6.72.174 war die Realziel-Evidenz bei mehreren verwandten Zielen noch zu eng. 6.72.175 reparierte Zielwahl, Zielkontext und Slotableitung; danach zeigte die vollständige WordPress/MariaDB-Simulation den nächsten echten Restfehler: der fachlich korrekt gewählte `hub_after_cards`-Querbanner hatte auf designverwalteten Hub-1/Hub-2-Seiten keinen realen serverseitigen Mount-Punkt.
+
+**Nicht wiederholen:** Banneränderungen nie aus Klassifikation/Planung allein abnehmen. Verbindlicher Positivpfad ist: reales Creative → reale Zielmenge → Zielwahl → Zielkontext → Slotwahl → aktive Kampagne → realer serverseitiger Mount/Renderer → finales HTML. Negativfälle: Mehrdeutigkeit, Veto, inaktiv, falsches Format, leerer Slot und Duplikat müssen fail-closed bleiben.
+
+**Rootfix 6.72.176:** Genau `hub_after_cards` wird auf Hub-1/Hub-2 serverseitig einmal nach dem fertigen Hub-Inhalt gemountet; Start-, Kategorie- und Grid-Pfade bleiben unverändert.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672174_af077_full_gate_20261002.md`; `release/affiliate-zentrale/evidence/affiliate_router_v672175_automatic_banner_full_gate_20261002.md`; `release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md`. Targeted 6.72.176 WordPress/MariaDB simulation run `36997037385`; full gate run `36997283155`.
+
+**Status:** FIXED_SOURCE_RELEASED_6_72_176 / REAL_WORDPRESS_LIVE_READBACK_OPEN.
+
+## AFF-ERR-043 — eBay-BUSINESS-Produktkarten lieferten später verworfene Langbeschreibung im initialen HTML aus
+
+**Datum / Arbeitsbindung:** 02.10.2026.
+
+**Symptom:** Beim Laden einzelner eBay-Produktkarten war zunächst langer Beschreibungstext sichtbar; nach Abschluss des Design-Runtime-Aufbaus verschwand er wieder.
+
+**Belegte Root Cause:** Die Affiliate-Zentrale renderte bei eBay-BUSINESS-Produkten in `category_product_1..3` / `hub_product_1..3` die Kampagnenbeschreibung vollständig in das initiale Karten-HTML. Das Portal-Design baut diese Produktkarten nach DOMContentLoaded aus Bild, Titel, Preis, Verkäufer und CTA neu auf und verwirft den Beschreibungstext. Damit wurde unnötiger HTML-/DOM-Payload ausgeliefert.
+
+**Nicht wiederholen:** Datenquelle und Frontend-Payload trennen. Vollständige eBay-Quelldaten und PRIVATE-Detailbeschreibung bleiben erhalten; nur bei eBay-BUSINESS-Produktkarten in Hub-/Kategorie-Produktrastern darf die später verworfene Beschreibung bereits serverseitig aus dem Karten-HTML entfallen. Nicht-eBay-Karten bleiben unverändert.
+
+**Positiv/Negativ:** 12k synthetische Langbeschreibung reduziert den getesteten Karten-Payload um ca. 12.074 Byte; Titel/Bild/Preis/Verkäufer/CTA bleiben erhalten. Nicht-eBay-Beschreibung bleibt erhalten. PRIVATE-eBay-Detailbeschreibung bleibt erhalten.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md`; targeted WordPress/MariaDB simulation run `36997037385`; full gate run `36997283155`.
+
+**Status:** FIXED_SOURCE_RELEASED_6_72_176 / REAL_WORDPRESS_LIVE_FLASH_PAYLOAD_READBACK_OPEN.
+
