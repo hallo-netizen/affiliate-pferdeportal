@@ -285,7 +285,7 @@ jobs:
           PHP
           /tmp/wp eval-file /tmp/reset.php --path=/tmp/wp-site
 
-      - name: NEGATIVE reproduce automatic-start legacy decision SQL defect
+      - name: POSITIVE automatic-start legacy decision SQL fixed
         shell: bash
         run: |
           set -euo pipefail
@@ -296,10 +296,10 @@ jobs:
           delete_option('ppar_full_pool_automation_version_v1');
           $wpdb->last_error='';
           $o->ensure_full_pool_automation();
-          if(stripos((string)$wpdb->last_error,"Unknown column 'payload'")===false){
-              throw new RuntimeException('expected legacy payload SQL defect not reproduced: '.$wpdb->last_error);
+          if($wpdb->last_error!==''){
+              throw new RuntimeException('automatic-start SQL error: '.$wpdb->last_error);
           }
-          echo "LEGACY_DECISION_PAYLOAD_SQL_DEFECT_REPRODUCED_PASS\n";
+          echo "AUTOMATIC_START_SQL_CLEAN_PASS\n";
           PHP
           /tmp/wp eval-file /tmp/sql-defect.php --path=/tmp/wp-site
 
