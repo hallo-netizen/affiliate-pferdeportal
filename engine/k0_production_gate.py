@@ -3,6 +3,7 @@ import hashlib, html, json, re, sys
 from pathlib import Path
 
 from .ppm_parity_guard import verify as verify_ppm
+from .writer_contract_guard import verify_package as verify_writer_contract
 
 class Blocked(RuntimeError):
     pass
@@ -106,6 +107,10 @@ def verify(package, portal):
         raise Blocked('K0_ARTICLE_BODY_EMPTY')
     if package.get('final_draft_sha256')!=_sha(body):
         raise Blocked('K0_ARTICLE_BODY_SHA_MISMATCH')
+    try:
+        writer_metrics=verify_writer_contract(package)
+    except Exception as exc:
+        raise Blocked('K0_WRITER_CONTRACT_BLOCKED:'+str(exc))
 
     if portal.get('contract')!='K0_PORTAL_ASSIGNMENT_V1' or portal.get('status')!='PASS':
         raise Blocked('K0_PORTAL_ASSIGNMENT_NOT_PASS')
@@ -163,6 +168,10 @@ def verify(package, portal):
       'semantic_intent':semantic_intent,
       'semantic_intent_status':'PASS',
       'anti_boilerplate_status':'PASS',
+      'writer_contract_status':'PASS',
+      'writer_policy_sha256':writer_metrics['policy_sha256'],
+      'writer_total_words':writer_metrics['total_words'],
+      'writer_conclusion_ratio':writer_metrics['conclusion_ratio'],
       'ppm679_status':'PASS',
       'ppm679_rule_count':104,
       'body_sha256':_sha(body),
