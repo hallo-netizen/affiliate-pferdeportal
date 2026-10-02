@@ -113,6 +113,20 @@ class K10Tests(unittest.TestCase):
         _,_,report=preflight_article(a)
         self.assertEqual(report['status'],'READY_FOR_LT68',report)
 
+    def test_trace_binding_accepts_html_escaped_source_title(self):
+        a=make_base()
+        a['research_claims']['F1']['source_title']='Fachquelle F1 & Partner'
+        a['html']=a['html'].replace('data-source-title="Fachquelle F1"','data-source-title="Fachquelle F1 &amp; Partner"')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertNotIn('HARD_RULE_NOT_PASS:facts.trace_binding',result['findings'])
+
+    def test_trace_binding_still_blocks_different_escaped_source_title(self):
+        a=make_base()
+        a['research_claims']['F1']['source_title']='Fachquelle F1 & Partner'
+        a['html']=a['html'].replace('data-source-title="Fachquelle F1"','data-source-title="Fachquelle F1 &amp; Andere"')
+        result=verify_article(a['article_id'],article_hash(a),run_article_checks(a))
+        self.assertIn('HARD_RULE_NOT_PASS:facts.trace_binding',result['findings'])
+
     def test_preflight_receipts_compose_with_lt68_receipt_without_content_recheck(self):
         a=make_base()
         prepared,receipts,report=preflight_article(a)
