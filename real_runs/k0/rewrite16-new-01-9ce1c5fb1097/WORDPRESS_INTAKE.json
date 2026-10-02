@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "pferdedecken-regendecken-faq",
+      "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+      "target_keyword": "Frieren Pferde unter Regendecken",
+      "title": "Frieren Pferde unter Regendecken?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "9ce1c5fb10978ec62e1b597ee596756aa0a76093921ac1b75beb9d3506ae92e3"
+}
