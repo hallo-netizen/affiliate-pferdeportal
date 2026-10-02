@@ -141,3 +141,12 @@ Nicht importieren:
 - Keine Produktionslogik, Qualitätsregel, LT-/PPM-/WordPress-Bindung oder Publish-Regel geändert.
 - Für die aktuelle K0-Fortsetzung gilt ausschließlich die K0-Current auf dem K0-Branch. Andere Arbeitsbereiche werden nicht zu einer gemeinsamen Statuswahrheit zusammengesetzt.
 - `tmp/k0-rewrite16-content-20261002` ist nur alter Sonderweg-Nachweis, keine Current-/NEXT-ACTION-Autorität. Seine alten kombinierten Exporte bleiben widerrufen.
+
+
+### E9 – Abschluss-Frischecheck nach Bürotür-Fix
+- Frischecheck gegen Branch-Head `0751522ecf9e513da9a302d6f1a1c0447681e902` durchgeführt.
+- Neuester K0-Selftest auf diesem Head: Run `37062998789` = **SUCCESS**.
+- Seit dem 14/16-Produktionsstand gab es **keinen weiteren kanonischen Writer-/WordPress-Produktionsfortschritt**; die späteren Änderungen betrafen Current-/Bürotür-/History-Closeout.
+- Der fachliche Status bleibt daher unverändert: 14/16 kanonische WordPress-Singles vollständig; Artikel 13 und 14 offen; erster Blocker weiterhin Artikel 13.
+- NEXT ACTION bleibt ausschließlich aus `K0_CURRENT_STATE.json`: `RETRY_AUTHORING_CONTEXT_ITEM_13_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH`.
+- Keine Qualitäts-, LT-, PPM-, WordPress- oder Publish-Regel wurde durch diesen Abschlusscheck geändert.
