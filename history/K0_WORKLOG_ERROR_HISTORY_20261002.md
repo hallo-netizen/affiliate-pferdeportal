@@ -124,3 +124,12 @@ Nicht importieren:
 - K9-Produktion selbst wurde durch den K0-Fix nicht als Produktionspfad umgebaut.
 - Plugins wurden in diesem Arbeitsstrang nicht entwickelt oder geändert.
 - Kein Publish.
+
+
+### E7 – Abschlussrefresh entfernte kurz das K10-Isolationsfeld
+- Beim Closeout-Refresh von `K0_CURRENT_STATE.json` wurde `k10_unchanged` zunächst entfernt, obwohl der K0-Selftest dieses Feld als Isolations-Hardlock verlangt.
+- Selftest Run `37061273870`: FAIL ausschließlich bei `K0 current hardlocks` mit `KeyError: k10_unchanged`.
+- Feld wiederhergestellt; K10 bleibt zugleich als separater Arbeitsbereich über seine eigene Current referenziert und ist keine K0-Abhängigkeit.
+- Reparatur-Commit: `ebdef6afba593e419358b2a224ac272b5b6cbe56`.
+- Finaler K0-Selftest Run `37061356909`: SUCCESS.
+- Kein Produktionsfortschritt verändert; K0 bleibt 14/16 mit Artikel 13 als erstem offenen Blocker.
