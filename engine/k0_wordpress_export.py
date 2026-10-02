@@ -49,6 +49,8 @@ def build(intake, package, portal, gate, lt):
         raise Blocked('K0_GATES_NOT_PASS')
     if gate.get('body_sha256')!=body_sha or gate.get('ppm679_status')!='PASS' or gate.get('ppm679_rule_count')!=104:
         raise Blocked('K0_GATE_BINDING_INVALID')
+    if gate.get('semantic_intent_status')!='PASS' or gate.get('anti_boilerplate_status')!='PASS':
+        raise Blocked('K0_SEMANTIC_GATE_NOT_PASS')
 
     if lt.get('status')!='PASS' or int(lt.get('finding_count') or 0)!=0:
         raise Blocked('K0_LT68_NOT_PASS')
