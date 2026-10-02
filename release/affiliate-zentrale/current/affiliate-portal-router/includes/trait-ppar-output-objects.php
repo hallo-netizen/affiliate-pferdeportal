@@ -923,6 +923,72 @@ trait PPAR_Output_Objects_Trait {
         if ($specific_has_negative && $specific_has_domain && $manual_status !== 'approved') {
             return array('status'=>'review','confidence'=>50,'reason'=>'Creative enthält widersprüchliche Fachsignale und benötigt eine Sichtprüfung.','target'=>null,'source'=>'creative_conflict');
         }
+
+        // V6.72.174 AF-077: Ein eindeutiger Treffer auf ein reales, erlaubtes
+        // Portalziel ist selbst belastbare Creative-Fachevidenz. Dieser Zusatz
+        // greift ausschließlich dort, wo der bisherige generische Domain-Test
+        // ohnehin auf REVIEW abbrechen würde. Safety, Negativsignale und Veto
+        // wurden oben bereits unverändert geprüft.
+        $targets = null;
+        $wanted_types = null;
+        $real_target_evidence_key = '';
+        if (!$specific_has_domain && $manual_status !== 'approved') {
+            $targets = $this->output_portal_targets($portal);
+            if (is_wp_error($targets)) {
+                return $targets;
+            }
+            $is_listing = in_array($output_type, array('hivepress_listing','portal_listing'), true);
+            if ($is_listing) {
+                $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['listing_target_types'] ?? array('hp_listing_category')))));
+            } elseif ($output_type === 'product_campaign') {
+                $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['product_target_types'] ?? array('page','category')))));
+            } else {
+                $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['banner_target_types'] ?? array('page','category')))));
+            }
+
+            $specific_tokens = $this->output_tokens($specific);
+            $destination_tokens = $this->output_tokens($this->output_destination_semantic_text($row));
+            $strong_target_keys = array();
+            foreach ((array) $targets as $candidate_target) {
+                if (!is_array($candidate_target)) { continue; }
+                $candidate_type = sanitize_key((string) ($candidate_target['type'] ?? ''));
+                if (!in_array($candidate_type, $wanted_types, true)) { continue; }
+                $candidate_key = sanitize_text_field((string) ($candidate_target['key'] ?? ''));
+                if ($candidate_key === '') { continue; }
+                if (method_exists($this, 'control_target_gate')) {
+                    $candidate_gate = $this->control_target_gate($portal_key, $candidate_key);
+                    if (is_wp_error($candidate_gate)) { continue; }
+                }
+
+                $strong = false;
+                $slug_norm = $this->output_text(str_replace(array('-','_'),' ',(string)($candidate_target['slug'] ?? '')));
+                $slug_tokens = $this->output_tokens($slug_norm);
+                if ($destination_tokens && $slug_tokens && !array_diff($slug_tokens, $destination_tokens)) {
+                    $strong = true;
+                }
+                if (!$strong && $specific_tokens) {
+                    $label_parts = preg_split('/\s+>\s+/', (string) ($candidate_target['label'] ?? ''));
+                    $leaf_norm = $this->output_text($label_parts ? end($label_parts) : (string) ($candidate_target['label'] ?? ''));
+                    $leaf_tokens = $this->output_tokens($leaf_norm);
+                    foreach ($specific_tokens as $source_token) {
+                        foreach ($leaf_tokens as $target_token) {
+                            if (strlen($source_token) >= 7 && strlen($target_token) >= 7
+                                && (strpos($source_token, $target_token) !== false || strpos($target_token, $source_token) !== false)) {
+                                $strong = true;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+                if ($strong) {
+                    $strong_target_keys[$candidate_key] = true;
+                }
+            }
+            if (count($strong_target_keys) === 1) {
+                $real_target_evidence_key = (string) array_key_first($strong_target_keys);
+                $specific_has_domain = true;
+            }
+        }
         if (!$specific_has_domain && $manual_status !== 'approved') {
             return array('status'=>'review','confidence'=>0,'reason'=>'Das Partnerprofil passt, aber das konkrete Creative besitzt noch keinen belastbaren Fachbezug.','target'=>null,'source'=>'creative_domain_signal_missing');
         }
@@ -945,17 +1011,21 @@ trait PPAR_Output_Objects_Trait {
         if (!$source_tokens) {
             return array('status'=>'review','confidence'=>0,'reason'=>'Keine verwertbaren Klassifikationssignale.','target'=>null,'source'=>'insufficient_data');
         }
-        $targets = $this->output_portal_targets($portal);
-        if (is_wp_error($targets)) {
-            return $targets;
+        if (!is_array($targets)) {
+            $targets = $this->output_portal_targets($portal);
+            if (is_wp_error($targets)) {
+                return $targets;
+            }
         }
-        $is_listing = in_array($output_type, array('hivepress_listing','portal_listing'), true);
-        if ($is_listing) {
-            $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['listing_target_types'] ?? array('hp_listing_category')))));
-        } elseif ($output_type === 'product_campaign') {
-            $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['product_target_types'] ?? array('page','category')))));
-        } else {
-            $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['banner_target_types'] ?? array('page','category')))));
+        if (!is_array($wanted_types)) {
+            $is_listing = in_array($output_type, array('hivepress_listing','portal_listing'), true);
+            if ($is_listing) {
+                $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['listing_target_types'] ?? array('hp_listing_category')))));
+            } elseif ($output_type === 'product_campaign') {
+                $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['product_target_types'] ?? array('page','category')))));
+            } else {
+                $wanted_types = array_values(array_filter(array_map('sanitize_key', (array) ($portal['banner_target_types'] ?? array('page','category')))));
+            }
         }
 
         // V6.72.48 LIVE-Rootfix: „Automatik verwenden“ aus dem sichtbaren
@@ -1050,6 +1120,12 @@ trait PPAR_Output_Objects_Trait {
             }
             $hits = array_values(array_unique($hits));
             $score = min(60, count($hits) * 12);
+            if ($real_target_evidence_key !== '' && $real_target_evidence_key === sanitize_text_field((string) ($target['key'] ?? ''))) {
+                // Derselbe eindeutige Realziel-Beweis, der den generischen
+                // Domain-Frühabbruch ersetzt, muss auch in der bestehenden
+                // Rangfolge eindeutig gewinnen. Keine Sonderregel pro Anbieter.
+                $score += 260;
+            }
             $destination_semantic = $this->output_destination_semantic_text($row);
             $target_slug_norm = $this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
             if ($destination_semantic !== '' && $target_slug_norm !== '') {
