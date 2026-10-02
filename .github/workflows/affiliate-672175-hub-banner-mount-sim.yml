@@ -63,7 +63,9 @@ jobs:
 
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.175") { exit(2); } echo "VERSION_PASS\n";' --path=/tmp/wp-site
+          /tmp/wp option update ppar_enabled 1 --path=/tmp/wp-site
+          /tmp/wp option update ppar_template_enabled 1 --path=/tmp/wp-site
+          /tmp/wp eval 'if (Pferdeportal_Affiliate_Router::VERSION !== "6.72.175") { exit(2); } if (get_option("ppar_enabled")!=="1") { exit(3); } echo "VERSION_AND_AFFILIATE_ENABLED_PASS\n";' --path=/tmp/wp-site
 
       - name: Seed valid active Schabrackendesigner hub banner
         shell: bash
