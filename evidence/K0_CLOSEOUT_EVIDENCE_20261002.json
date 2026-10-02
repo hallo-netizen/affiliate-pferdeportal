@@ -1,0 +1,95 @@
+{
+  "contract": "K0_CLOSEOUT_EVIDENCE_V1",
+  "role": "EVIDENCE_ONLY_NOT_CURRENT_AUTHORITY",
+  "created_at_utc": "2026-10-02T20:20:00Z",
+  "branch": "konzept0-portal-neutral-20261002",
+  "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
+  "observed_head_before_evidence_commit": "9812a2f12ac2693b4a10b81f3429ca2f1500e8b1",
+  "goal_refs": {
+    "k0": "K0_GOAL_CONTRACT.json",
+    "global": "main:control/startmaster0107/ZIELVERTRAG_REASONING_MEDIUM_MAX_STARTMASTER0107.json"
+  },
+  "canonical_route": {
+    "authoring_workflow": ".github/workflows/k0-authoring-context.yml",
+    "writer_workflow": ".github/workflows/k0-writer-accept.yml",
+    "authoring_context_contract": "K0_AUTHORING_CONTEXT_V1",
+    "writer_job_contract": "K0_WRITER_JOB_V1",
+    "writer_draft_contract": "K0_WRITER_DRAFT_V1",
+    "writer_seal_contract": "K0_WRITER_SEAL_V1",
+    "direct_article_package_start_allowed": false,
+    "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+    "plugin_version": "0.28.30",
+    "plugin_build": "0.28.30-pste-v5-binding-safe",
+    "ppm_version": "6.7.9",
+    "publish_allowed": false
+  },
+  "tests": {
+    "k0_selftest_run": 37059664443,
+    "k0_selftest_result": "SUCCESS",
+    "portal_assignment_positive_negative": "PASS",
+    "inherited_k10_suite": "PASS_AFTER_K0_ISOLATION_ADAPTATION",
+    "ppm679_parity": "PASS",
+    "writer_ingress_negatives": [
+      "AUTHORING_CONTEXT_WITH_ARTICLE_TEXT_BLOCKED",
+      "DIRECT_ARTICLE_WITHOUT_WRITER_SEAL_BLOCKED",
+      "READY_ARTICLE_AS_WRITER_DRAFT_BLOCKED",
+      "ONLY_WRITER_DRAFT_ROUTE_CAN_CREATE_VERIFIED_PACKAGE"
+    ]
+  },
+  "rewrite16": {
+    "total": 16,
+    "canonical_wordpress_single_complete_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      15
+    ],
+    "canonical_wordpress_single_complete_count": 14,
+    "pending_indices": [
+      13,
+      14
+    ],
+    "pending": [
+      {
+        "index": 13,
+        "title": "Wie lege ich einen Longiergurt an?",
+        "state": "AUTHORING_CONTEXT_PRESENT_TEXT_FREE_WRITER_JOB_ABSENT"
+      },
+      {
+        "index": 14,
+        "title": "Wie oft muss ein Pferdeanhänger zum TÜV?",
+        "state": "AUTHORING_CONTEXT_PRESENT_TEXT_FREE_WRITER_JOB_ABSENT"
+      }
+    ],
+    "latest_writer_accept_run": 37058612043,
+    "latest_writer_accept_result": "SUCCESS",
+    "item14_initial_authoring_run": 37056827345,
+    "item14_initial_authoring_failure": "PERSIST_IMMUTABLE_WRITER_JOB_NON_FAST_FORWARD",
+    "item13_initial_authoring_state": "CANCELLED_BY_CONCURRENT_AUTHORING_SUBMISSIONS",
+    "schabracke_category": "pferdewissen-grundlagen",
+    "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
+    "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT"
+  },
+  "wordpress_single_invariants": {
+    "checked_count": 14,
+    "canonical_article_id_required": true,
+    "article_id_pattern": "article:[0-9a-f]{24}",
+    "plan_slot_roundtrip_required": "SHA256(pserc-plan-slot-v2|article_id)==plan_slot",
+    "direct_wordpress_upload_ready": true,
+    "publish_allowed": false
+  },
+  "notes": [
+    "K0_CURRENT_STATE.json must be updated after this evidence to replace the stale 16/16-ready-import claim.",
+    "This file is evidence only and must never be used as NEXT_ACTION authority."
+  ]
+}
