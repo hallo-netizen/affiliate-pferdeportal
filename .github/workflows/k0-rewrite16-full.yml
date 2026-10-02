@@ -102,14 +102,27 @@ jobs:
       - name: LanguageTool 6.8 all 16
         run: |
           set -euo pipefail
+          rc=0
           for i in $(seq -w 0 15); do
-            python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar "/tmp/k0rewrite/articles/$i.json" "/tmp/k0rewrite/lt/$i.json"
+            python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar "/tmp/k0rewrite/articles/$i.json" "/tmp/k0rewrite/lt/$i.json" || rc=1
           done
           python3 - <<'PY'
           import glob,json
           rows=[json.load(open(p)) for p in sorted(glob.glob('/tmp/k0rewrite/lt/*.json'))]
           assert len(rows)==16
-          bad=[(i,x) for i,x in enumerate(rows) if x.get('status')!='PASS' or x.get('finding_count')!=0]
+          bad=[]
+          for i,x in enumerate(rows):
+              if x.get('status')!='PASS' or x.get('finding_count')!=0:
+                  bad.append({
+                      'index':i,
+                      'article_id':x.get('article_id'),
+                      'finding_count':x.get('finding_count'),
+                      'findings':[
+                          {'rule_id':f.get('rule_id'),'message':f.get('message'),'context':f.get('context')}
+                          for f in (x.get('findings') or [])
+                      ]
+                  })
+          print('K0_REWRITE16_LT68_BAD='+json.dumps(bad,ensure_ascii=False))
           assert not bad,bad
           print('K0_REWRITE16_LT68_PASS')
           PY
