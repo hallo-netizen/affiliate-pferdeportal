@@ -1,0 +1,88 @@
+{
+  "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "batch_sha256": "bc6d5d85d770a37bd0e6ade7d7dc671f9215768254118d6b8670a12d664027b0",
+  "article_count": 1,
+  "publish_allowed": false,
+  "signing_deferred": true,
+  "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+  "no_legacy_status": "PASS",
+  "test_suite_status": "PASS",
+  "wordpress_review": {
+    "file_format": "JSON",
+    "mime_type": "application/json",
+    "intended_next_step": "WORDPRESS_DIRECT_IMPORT",
+    "plugin_name": "Portal SEO Editorial Plan Compiler",
+    "plugin_version_verified_against": "0.28.30",
+    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "ppm_version_verified_against": "6.7.9",
+    "direct_wordpress_upload_ready": true,
+    "direct_upload_block_reason": null,
+    "required_downstream_components": []
+  },
+  "articles": [
+    {
+      "index": 0,
+      "article_id": "article:6ff9535e7ae20e22298ee842",
+      "title": "Was ist ein Reitplatzplaner?",
+      "target_keyword": "Was ist ein Reitplatzplaner",
+      "category": "reitplatzplaner-faq",
+      "article_type": "FAQ",
+      "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+      "final_draft_sha256": "8030e1c8e97ced6ca7e300551da3aa99acf93dba1526434d18895de169fd0b09",
+      "revision_count": 5,
+      "body": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p>Ein Reitplatzplaner ist ein Pflegegerät für Reitböden. Er wird hinter einem Traktor oder einem anderen geeigneten Zugfahrzeug geführt und bearbeitet die Tretschicht. Je nach Bauart lockert er verdichtete Bereiche, verteilt verschobenes Material, ebnet die Oberfläche und holt den Hufschlag von der Bande zurück. Reitplatzplaner werden auch Reitbahnplaner genannt und gehören auf vielen Anlagen zur regelmäßigen Bodenpflege.</p>\n</section>\n<section data-block=\"task\">\n<h2>Warum ein Reitplatz regelmäßig geplant wird</h2>\n<p>Beim Reiten wird die Tretschicht ständig verschoben. An der Bande sammelt sich Material, in Wendungen entstehen stärkere Belastungen und häufig genutzte Linien können verdichten. Ohne Pflege entwickelt sich dadurch eine ungleichmäßige Oberfläche. Ein Reitplatzplaner soll das Material wieder verteilen und die obere Schicht in einen möglichst einheitlichen Zustand bringen. Das ist nicht nur eine Frage der Optik. Gleichmäßige Bodenverhältnisse erleichtern eine vorhersehbare Nutzung des Platzes. Wie oft geplant werden muss, hängt von Bodenart, Feuchtigkeit und Zahl der gerittenen Pferde ab. Eine stark genutzte Halle braucht meist häufiger Pflege als ein kleiner privater Außenplatz. Sinnvoll ist es, sichtbare Veränderungen früh zu bearbeiten, statt erst zu reagieren, wenn tiefe Hufschläge oder starke Verdichtungen entstanden sind.</p>\n\n<p>Auch die Fahrtrichtung beeinflusst das Ergebnis. Wer immer dieselben Bahnen fährt, kann bestimmte Bereiche stärker bearbeiten als andere. Je nach Platzform kann es sinnvoll sein, die Linien gelegentlich zu variieren und Randbereiche bewusst einzubeziehen. Entscheidend bleibt eine ruhige Fahrweise, bei der Material verteilt und nicht nur von einer Stelle zur nächsten geschoben wird.</p>\n\n</section>\n<section data-block=\"parts\">\n<h2>Zinken, Schild und Walze haben verschiedene Aufgaben</h2>\n<p>Die genaue Ausstattung unterscheidet sich von Modell zu Modell. Typisch sind Zinken zum Lockern, ein Planierschild zum Verteilen und eine Walze oder ein Nachlaufelement für die Oberfläche. Ein Bandenräumer kann Material vom Rand wieder in die Reitfläche holen. Die Übersicht zeigt die Grundfunktionen.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Bauteil</th><th>Aufgabe</th><th>Bereich</th></tr></thead><tbody>\n<tr><td>Zinken</td><td>Lockern</td><td>Tretschicht</td></tr>\n<tr><td>Schild</td><td>Ebnen</td><td>Fläche</td></tr>\n<tr><td>Walze</td><td>Beruhigen</td><td>Nachlauf</td></tr>\n<tr><td>Bandenräumer</td><td>Zurückführen</td><td>Rand</td></tr>\n</tbody></table>\n<p>Nicht jeder Platz braucht jedes Bauteil. Wichtig ist, dass die vorhandenen Werkzeuge zum Reitboden passen und sich kontrolliert einstellen lassen.</p>\n\n<p>Bei verstellbaren Zinken sollte kontrolliert werden, ob alle Elemente auf gleicher Höhe arbeiten. Ein verbogener oder falsch eingestellter Zinken kann sichtbare Spuren hinterlassen. Auch Schild und Nachlauf sollten frei von festgesetztem Material bleiben. Regelmäßige Sichtkontrollen helfen, Verschleiß früh zu erkennen und eine gleichmäßige Bearbeitung zu erhalten.</p>\n\n</section>\n<section data-block=\"depth\">\n<h2>Die richtige Arbeitstiefe schützt den Unterbau</h2>\n<p>Ein Planer soll in der Tretschicht arbeiten und nicht unnötig in darunterliegende Schichten eingreifen. Deshalb ist die Arbeitstiefe ein zentraler Einstellpunkt. Bei Sand-Vlies-Gemischen oder dünneren Reitschichten kann eine zu tiefe Einstellung Material vermischen oder den Aufbau stören. Zu flache Zinken lösen dagegen Verdichtungen kaum. Wer den Boden nicht selbst gebaut hat, sollte zunächst klären, wie die Schichten aufgebaut sind und wie dick die Tretschicht tatsächlich ist. Viele Geräte erlauben eine definierte Höhen- oder Tiefeneinstellung. Diese sollte an einer kleinen Fläche kontrolliert werden, bevor der ganze Platz bearbeitet wird. Nach starkem Regen, längerer Trockenheit oder Veränderungen am Boden kann eine andere Einstellung nötig sein als im normalen Betrieb.</p>\n\n<p>Ein erster Testdurchgang an einer kleinen Stelle ist besonders sinnvoll, wenn die Einstellung verändert wurde. Danach kann geprüft werden, wie tief die Zinken tatsächlich arbeiten und ob Fremdmaterial aus unteren Schichten auftaucht. Erst wenn das Ergebnis passt, sollte die gesamte Fläche bearbeitet werden. So lässt sich ein falsch eingestellter Durchgang früh stoppen.</p>\n\n</section>\n<section data-block=\"use\">\n<h2>Regelmäßige leichte Pflege ist meist sinnvoller</h2>\n<p>Ein Reitplatzplaner wird nicht nur eingesetzt, wenn der Boden bereits deutlich uneben ist. Häufige, moderate Pflege kann verhindern, dass sich Hufschläge und Verdichtungen stark aufbauen. Dafür sollte möglichst gleichmäßig gefahren werden, mit sinnvollen Überlappungen und ohne hektische Richtungswechsel. Besonders am Rand braucht es Aufmerksamkeit, weil dort Material schnell nach außen wandert. Ein Bandenräumer kann diese Arbeit erleichtern, muss aber so eingestellt sein, dass er die Umrandung nicht beschädigt. Auch Feuchtigkeit beeinflusst das Ergebnis: Sehr trockene oder sehr nasse Tretschichten verhalten sich anders als ein gut eingestellter Boden. Der Planer ersetzt deshalb weder Bewässerung noch Drainage, sondern ist ein Teil der gesamten Reitplatzpflege.</p>\n\n<p>Nach der Pflege sollte die Oberfläche nicht nur glatt aussehen, sondern sich über die Fläche möglichst ähnlich anfühlen. Auffällige weiche oder harte Zonen können auf Unterschiede in der Feuchtigkeit, Materialverschiebung oder Probleme im Unterbau hinweisen. Der Reitplatzplaner kann solche Ursachen nicht immer beheben. Wiederkehrende Stellen sollten deshalb gezielt beobachtet und gegebenenfalls fachlich untersucht werden.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Ein Reitplatzplaner ist ein spezialisiertes Pflegegerät, das die Tretschicht lockert, verteilt und je nach Ausstattung glättet oder am Rand zurückführt. Seine Wirkung hängt stärker von der richtigen Einstellung als von möglichst vielen Bauteilen ab. Entscheidend sind Bodenaufbau, Arbeitstiefe, Fahrweise und Pflegehäufigkeit. Wer regelmäßig mit moderater Tiefe arbeitet und den Zustand des Platzes beobachtet, kann Unebenheiten früh ausgleichen und den Hufschlag begrenzen. Der Planer ist damit kein Gerät, das man nur gelegentlich zum Ebnen einsetzt, sondern ein Werkzeug für die kontinuierliche Pflege eines Reitbodens. Richtig eingestellt hilft er dabei, die vorhandene Bodenstruktur über viele Pflegegänge hinweg gleichmäßiger zu erhalten.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für eine sichere Einstellung sind Aufbau und Stärke der Tretschicht wichtig. Herstellerangaben zum Gerät und Unterlagen zum Reitboden sollten deshalb gemeinsam betrachtet werden.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Reitbahnplaner – Wikipedia",
+              "source_url": "https://de.wikipedia.org/wiki/Reitbahnplaner"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "FAQ",
+          "target_keyword": "Was ist ein Reitplatzplaner",
+          "topic": "Was ist ein Reitplatzplaner?",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "reitplatzplaner-faq",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-b052683e9aef3e16bf00a767",
+          "job_sha256": "6942f8b4b972413212eb570ab7bcfcb98151e43f0960d7454c480617d46c09b2",
+          "draft_sha256": "441b6356a6bf139346098fc930dcb6e3025ed09a8d2dab73ae5864d83fab5bcf",
+          "identity_sha256": "0a1011b9e24a37b9d5885df27b86fbf7622a55d201d18c05595f3512bc608429",
+          "visible_text_sha256": "0145406b1f3342abd740578dc9b1fb5ea507ee6f49622f19144a56a32833b486",
+          "section_structure_sha256": "14af53292b4387ce66a11e5feec77ffdfb4d664d3401e523dff8d7bfdd640598",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 820,
+          "conclusion_ratio": 0.119512,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "47f1712ffde2bc88d02ef98acb64a349b18fc319ac996a84aedf4db2951044cd"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "8030e1c8e97ced6ca7e300551da3aa99acf93dba1526434d18895de169fd0b09"
+      }
+    }
+  ]
+}
