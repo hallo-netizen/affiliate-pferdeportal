@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "schermaschinen-beratung",
+      "plan_slot": "27b5c81a0da11c5628d223bebc55603923f05304f57c66ff191620efd15707bd",
+      "target_keyword": "Schermaschinen für Pferde",
+      "title": "So wählst du passende Schermaschinen für Pferde"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "2a584c01ee951d2f0a16dc9a3b8c5ddd548914839883118fc50d6eee47f51f94"
+}
