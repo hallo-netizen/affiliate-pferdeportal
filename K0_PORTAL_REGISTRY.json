@@ -1,0 +1,13 @@
+{
+  "contract": "K0_PORTAL_REGISTRY_V1",
+  "assignment_mode": "UNIQUE_CATEGORY_REGISTRY_MATCH",
+  "portal_field_in_job_forbidden": true,
+  "profiles": [
+    {
+      "portal_id": "hobby",
+      "display_name": "Hobby",
+      "category_exact": ["discgolf-beratung"],
+      "category_prefixes": []
+    }
+  ]
+}
