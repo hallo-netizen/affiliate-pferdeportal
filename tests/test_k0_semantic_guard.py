@@ -34,6 +34,11 @@ def package(identity, body, intent, table_exception='NUANCE_LOSS'):
     }
 
 
+def verify_semantic(pkg, port):
+    with patch('engine.k0_production_gate.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}), \
+         patch('engine.k0_production_gate.verify_ppm', return_value={'status':'PASS','legacy_rule_count':104}):
+        return g.verify(pkg,port)
+
 GOOD_SCHABRACKE = """<article data-article-type="FAQ">
 <h2>Woher kommt das Wort Schabracke?</h2>
 <p>Schabracke bezeichnet ursprünglich eine verzierte Sattel- oder Pferdedecke. Der Begriff wurde später auch übertragen verwendet.</p>
@@ -68,20 +73,19 @@ class TestK0SemanticGuard(unittest.TestCase):
             'title':'Warum sagt man du alte Schabracke?',
         }
 
-    @patch('engine.k0_production_gate.verify_ppm', return_value={'status':'PASS','legacy_rule_count':104})
-    def test_good_informational_faq_passes(self, _):
-        r=g.verify(package(self.identity,GOOD_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
+    def test_good_informational_faq_passes(self):
+        r=verify_semantic(package(self.identity,GOOD_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
         self.assertEqual(r['status'],'PASS')
         self.assertEqual(r['semantic_intent_status'],'PASS')
         self.assertEqual(r['anti_boilerplate_status'],'PASS')
 
     def test_exact_k9_failure_family_is_blocked(self):
         with self.assertRaisesRegex(g.Blocked,'K0_TEMPLATE_BOILERPLATE_CONTAMINATION'):
-            g.verify(package(self.identity,BAD_K9_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
+            verify_semantic(package(self.identity,BAD_K9_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
 
     def test_faq_cannot_be_misbound_as_commercial_advice(self):
         with self.assertRaisesRegex(g.Blocked,'K0_SEARCH_INTENT_MISMATCH'):
-            g.verify(package(self.identity,GOOD_SCHABRACKE,'DECISION_SUPPORT'), portal(self.identity))
+            verify_semantic(package(self.identity,GOOD_SCHABRACKE,'DECISION_SUPPORT'), portal(self.identity))
 
     def test_informational_faq_decision_contamination_blocks_even_without_exact_fingerprint(self):
         body="""<article>
@@ -91,7 +95,7 @@ class TestK0SemanticGuard(unittest.TestCase):
 <h2>Heute</h2><p>Die Wortbedeutung bleibt sprachlich zu erklären.</p>
 </article>"""
         with self.assertRaisesRegex(g.Blocked,'K0_INFORMATIONAL_FAQ_DECISION_CONTAMINATION'):
-            g.verify(package(self.identity,body,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
+            verify_semantic(package(self.identity,body,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
 
 
 if __name__=='__main__':
