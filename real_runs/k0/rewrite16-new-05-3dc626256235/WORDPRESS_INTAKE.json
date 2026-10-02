@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+      "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+      "target_keyword": "Kühlgamaschen für Pferde",
+      "title": "Passende Kühlgamaschen für Pferde wählen"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "3dc626256235f7780a552350a0144bffd3bbb9901ade756aa99d2391f0e79d65"
+}
