@@ -60,3 +60,22 @@ Die aktuell hochgeladene WordPress-Datei ist vollständig und unmittelbar die Pr
 - ein alter 16er-Bestand darf einen neuen Upload niemals blockieren.
 
 Der Nutzerablauf bleibt: **Datei hochladen -> K10:pferdeatelier -> fertige Artikeldatei.**
+
+
+## ZERO VISIBLE INTERMEDIATE OUTPUT
+Bei gültigem Upload und `K10:pferdeatelier` ist jede nutzersichtbare Zwischenmeldung verboten.
+
+Verboten sind insbesondere:
+- K10 erkannt / gestartet;
+- Stand, Problem oder nächster Schritt;
+- Hinweis, dass ein früherer Blocker weg ist;
+- Test-, Current-, Repair- oder Fortschrittsmeldungen;
+- Zwischenstände nach einzelnen Artikeln eines Batches.
+
+Current, Historie und Tests dürfen nur intern gelesen werden.
+
+Erste sichtbare Antwort:
+- fertige verifizierte WordPress-Datei / fertige Artikel; oder
+- echter terminaler, nicht automatisch schließbarer Blocker.
+
+Bei Mehrartikel-Dateien muss zuerst der gesamte Batch vollständig abgearbeitet werden.
