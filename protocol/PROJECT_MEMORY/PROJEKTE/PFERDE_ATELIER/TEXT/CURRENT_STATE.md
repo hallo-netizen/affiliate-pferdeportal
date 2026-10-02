@@ -1,97 +1,76 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-10-01
-STATUS: PORTALABGLEICH COMPLETE / VORHANDENES THEMENPOTENZIAL WIRD ZU SCHWACH VERWERTET / LAUFENDE RECHERCHEWELLE NICHT UNTERBRECHEN
+STAND: 2026-10-02
+STATUS: PSTE 0.57.26 LIVE / 695 TITELKANDIDATEN AUS BESTAND ERZEUGT / EXPORT NOCH NICHT AUSGEFÜHRT
 
-## AKTUELLER OPERATIVER TEXT-/SEO-STAND 2026-10-01
+## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
-Diese Sektion supersediert für aktuelle TEXT-/SEO-Arbeit die historischen Produktions-/Kategorieblöcke weiter unten.
+- **PSTE-Themen-/SEO-Bestand:** diese Datei.
+- **Artikelproduktion K9:** ausschließlich `konzept9/greenfield-20260929:CURRENT_STATE.json`.
+- **Plugin-Inventar/Updatechronik:** `../PLUGINS/CURRENT_STATE.md`; keine zweite Fachwahrheit.
 
-### Eine zuständige Current-Bindung je Arbeitsbereich
+## AKTUELLER BELASTBARER LIVE-STAND
 
-- **Artikelproduktion K9:** technische Current-Autorität ausschließlich
-  `konzept9/greenfield-20260929:CURRENT_STATE.json`.
-  Das Campus-TEXT-Büro kopiert daraus keinen dynamischen Produktionsstatus.
-- **PSTE-Themen-/SEO-Bestand:** diese Datei ist die aktuelle Campus-Fachautorität; reale WordPress/PSTE-Readbacks bleiben operative Evidenz.
-- **Pluginbestand/Versionen:** ausschließlich über `../PLUGINS/CURRENT_STATE.md` und die jeweilige technische Hauptquelle.
+Realer WordPress-Readback des Nutzers vom 02.10.2026:
+- Portal SEO Themenengine **0.57.26** aktiv.
+- Speicherpflege **COMPLETE**; sichtbarer gespeicherter Einsparwert **646,3 MB**.
+- Bestandsaufbereitung/Titelbildung **COMPLETE**.
+- **695 neue Titelkandidaten** aus bereits gespeichertem Material.
+- davon **8 zusätzlich für PSERC prüfbar**.
+- **36 vollständig aufbereitet**.
+- Provider-Abfragen: **ausgeschlossen**.
+- Completion-Code: `EXISTING_TITLE_CANDIDATES_GENERATED_NO_PROVIDER_CALL`.
 
-### Belastbarer aktueller PSTE-/PSERC-Readback
+Damit ist der frühere Befund „kein weiteres vorhandenes Potenzial“ widerlegt. Der Fundus war vorhanden; die bisherige Aufbereitung erreichte die Titelstufe nicht ausreichend.
 
-Der zuvor offene Portalabgleich ist abgeschlossen.
+## BELEGTER URSACHENFIX 0.57.26
 
-Letzter belegter Produktionsvorlauf:
-- PSERC-Lauf: `COMPLETE`;
-- Themen: 23;
-- geeignet: 23;
-- geprüft: 23;
-- READY: 2;
-- Snapshot danach aktualisiert;
-- kompakter 5-Felder-Handoff mit 2 Artikeln erzeugt;
-- diese 2 Artikel wurden anschließend in K9 vollständig bis STOP produziert.
+Der vorhandene Normal-Metadata-/Titelweg wurde so repariert, dass gespeicherte Fragen/redaktionelle Formulierungen als **Titelkandidaten** nutzbar werden können, ohne Produktionsfreigabe zu umgehen.
 
-Der Nutzer meldet danach am 01.10.2026 eine **neue bereits laufende Recherchewelle mit sehr magerer Ausbeute**.
-Für diese laufende Welle liegt in der Campusquelle noch kein terminaler Zahlen-/Reason-Code-Readback vor.
-Deshalb keine Ausfallursache raten.
+Zusätzlich wurde der konkrete Kontextfehler behoben, bei dem ein vorhandenes aber leeres `editorial_title` den Fallback auf gespeicherte Query-Felder verhinderte und fälschlich `PSTE_CONTEXT_QUERY_MISSING` erzeugte.
 
-### Frisch belegte vorhandene Automatik
-
-Die automatische redaktionelle Aufbereitung ist bereits vorhanden und darf nicht neu erfunden werden.
-
-Der bestehende PSTE-Normal-Metadata-Pfad kann vorhandene einzelne Keywords/Suchfragen sowie Familien-/Gruppenkontext – soweit eindeutig belegbar – automatisch auflösen in:
-- Familie/Gruppe;
-- Artikeltyp;
-- guten redaktionellen Titel;
-- Zielkeyword;
-- Zielkategorie.
-
-Der Retained-Backlog-Weg führt gespeicherte `topic_pool`-Zeilen bereits **ohne Provider-Aufruf** erneut durch diesen Normalpfad und danach durch Planning-Readiness.
-
-Detaillierter Nachweis/Fehlerprotokoll:
-`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
-
-### Erster offener Blocker
-
-`PSTE_EXISTING_POTENTIAL_LOW_CONVERSION_NOT_LOCALIZED`
-
-Bedeutung:
-Nicht die Titel-/Kategorie-Automatik fehlt.
-Der offene Fehler ist, dass **zu wenige bereits gespeicherte Kandidaten durch den vorhandenen Aufbereitungsweg bis AUTO_RESOLVED / planning-ready / READY gelangen**.
-
-Noch nicht belastbar bestimmt ist, an welcher Stufe die größte Menge ausfällt:
-Portalrelevanz, Familie, Intent/Artikeltyp, Titel, Kategorie/STRUCTURE_GAP, Planning-Readiness, Kontext oder Reentry.
-
-### Genau eine NEXT ACTION
-
-`AFTER_CURRENT_RESEARCH_WAVE_COMPLETE_RUN_READ_ONLY_EXISTING_POTENTIAL_CONVERSION_FUNNEL_AUDIT`
-
-Verbindlicher Arbeitsweg:
-1. die bereits laufende Recherchewelle nicht abbrechen oder durch einen neuen Lauf ersetzen;
-2. nach ihrem terminalen Readback **keine weitere Provider-Recherche starten**;
-3. vorhandenen Bestand read-only als Funnel auswerten:
-   `GESPEICHERT → SOURCE QUERY → PORTALRELEVANZ → FAMILIE → ARTIKELTYP → TITEL/ZIELKEYWORD → KATEGORIE → PLANNING-READINESS → CONTEXT CURRENT → READY`;
-4. je Verluststufe Anzahl + führende Reason-Codes bestimmen;
-5. besonders Lane B aus `ZV-PSTE-THEMENVERWERTUNG-001` herausarbeiten:
-   Evidenz vorhanden, nur bestehende Titel-/Familien-/Kategorie-/Reentry-Automatik muss greifen;
-6. erst danach den kleinsten belegten Fix umsetzen.
-
-### 0.57.18-Kandidat
-
-Der lokal geprüfte Kandidat `PSTE 0.57.18 – EXISTING POTENTIAL FIRST` ist **nur ein Teilfix**:
-sichere `AUTO_REENTRY_ELIGIBLE`-Sandbox-Kandidaten werden vor Retained-Backlog und vor Provider-Recherche durch den bestehenden Normal-Reentry geführt.
-
-Er ist **nicht** als Lösung für die niedrige Gesamtverwertbarkeit des gespeicherten Topic-Pools abgenommen.
-Die laufende Recherchewelle wird nicht für diesen Kandidaten unterbrochen.
-
-### Harte Grenzen
-
-- kein pauschales Freigeben gespeicherter Themen;
+Unverändert:
 - keine neue Themen-Datenbank;
-- keine neue Titel-/Kategorie-Architektur;
-- bestehende Normal-Metadata-/Title-/Family-/Reentry-Wege verwenden;
-- Dubletten-, Kannibalisierungs-, Kategorie-, Artikeltyp-, Titel-, Plan-Slot-, PSTE-/PSERC- und Publish-Regeln unverändert;
-- `PENDING_EXTERNAL_RELEVANCE`, echte `STRUCTURE_GAP`, Dubletten und Nicht-Redaktionelles nicht künstlich produzieren;
+- keine DataForSEO-/Provider-Abfrage im Bestandslauf;
+- keine Artikel-/Kategorie-Writes;
+- Dubletten-, Kategorie-, Artikeltyp-, Planning-, PSERC- und Publish-Gates bleiben zuständig.
+
+## ERSTER OFFENER FEHLER/BLOCKER
+
+`PSTE_05726_COMPLETE_UI_EXPORT_ACTION_NOT_RENDERED_UNTIL_RELOAD`
+
+Der Live-Lauf wechselte im Browser per AJAX von RUNNING auf COMPLETE. Der bereits gerenderte RUNNING-Zweig aktualisiert danach nur den Statuskasten; er fügt die COMPLETE-Aktionsformulare nicht dynamisch ein. Deshalb war der angekündigte Button im sichtbaren Screenshot nach Laufende nicht vorhanden.
+
+Lokale Positiv-/Negativsimulation 02.10.2026:
+- COMPLETE bei frischem Seitenrender → Startbutton vorhanden: PASS.
+- COMPLETE bei frischem Seitenrender → **„Titelkandidaten kompakt exportieren“** vorhanden: PASS.
+- initial RUNNING → Exportbutton nicht im DOM: PASS.
+- AJAX kann Status auf COMPLETE ändern, fügt Exportformular aber nicht nachträglich ein: reproduziert/PASS.
+
+KISS-Folge: **kein neues Plugin nötig**, um jetzt an die 695 Titel zu gelangen; ein harter Reload der Übersicht rendert den COMPLETE-Zweig mit Exportbutton.
+
+## GENAU EINE NEXT ACTION
+
+`RELOAD_PSTE_OVERVIEW_THEN_EXPORT_695_TITLE_CANDIDATES`
+
+1. WordPress → SEO Themenengine → Übersicht **neu laden**.
+2. Im Block „Titel aus vorhandenem Material erzeugen“ **„Titelkandidaten kompakt exportieren“** klicken.
+3. Die erzeugte JSON-Datei dem nächsten Chat geben.
+4. Erst diese 695 Titel fachlich/dedupliziert auswerten; **keine neue externe Recherche und kein erneuter Bestandslauf vorher**.
+
+## NICHT ANFASSEN
+
+- keine neue DataForSEO-Recherche;
+- Speicherpflege nicht erneut starten;
+- 0.57.26 nicht wegen des fehlenden Buttons sofort wieder patchen;
+- keine manuelle Produktionsfreigabe für die 695;
+- keine Gate-Absenkung;
 - kein Publish.
 
+Detailliertes Fehler-/Arbeitsprotokoll:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
+
+---
 STAND: 2026-09-24
 STATUS: KATEGORIE-SCOPE CLOSED / ÄLTERE PRODUKTIONSHISTORIE UNTEN NICHT ALS AKTUELLE KATEGORIE-NEXT-ACTION
 
