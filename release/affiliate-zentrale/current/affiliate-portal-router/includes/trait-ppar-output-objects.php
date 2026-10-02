@@ -386,6 +386,71 @@ trait PPAR_Output_Objects_Trait {
         return implode(' > ', array_filter($parts));
     }
 
+
+    /**
+     * V6.72.178 – eine Zielidentität über alle Schichten.
+     *
+     * Ausgabeobjekte verwenden historisch type:<ID>, Kampagnen/Automation
+     * type:<slug>. Beide Formen bezeichnen dasselbe reale WordPress-Ziel und
+     * dürfen an Schichtgrenzen niemals direkt als verschiedene Ziele behandelt
+     * werden. Die bestehende Speicherung bleibt kompatibel; aufgelöst wird nur
+     * beim Vergleich.
+     */
+    private function output_target_identity_keys($target) {
+        if (!is_array($target)) { return array(); }
+        $keys = array();
+        $stored = sanitize_text_field((string) ($target['key'] ?? ''));
+        if ($stored !== '') { $keys[] = $stored; }
+        $canonical = $this->output_campaign_target_key($target);
+        if ($canonical !== '') { $keys[] = $canonical; }
+        $type = sanitize_key((string) ($target['type'] ?? ''));
+        $id = absint($target['id'] ?? 0);
+        if ($type !== '' && $id > 0) { $keys[] = $type . ':' . $id; }
+        return array_values(array_unique(array_filter(array_map('sanitize_text_field', $keys))));
+    }
+
+    private function output_target_key_matches($target, $key) {
+        $key = sanitize_text_field((string) $key);
+        if ($key === '') { return false; }
+        foreach ($this->output_target_identity_keys($target) as $candidate) {
+            if (hash_equals((string) $candidate, $key)) { return true; }
+        }
+        return false;
+    }
+
+    /** Echte öffentliche Ziel-URL nur bei Bedarf und request-lokal auflösen. */
+    private function output_target_public_url($target) {
+        if (!is_array($target)) { return ''; }
+        static $cache = array();
+        $type = sanitize_key((string) ($target['type'] ?? ''));
+        $id = absint($target['id'] ?? 0);
+        if ($type === '' || $id <= 0) { return ''; }
+        $cache_key = $type . ':' . $id;
+        if (array_key_exists($cache_key, $cache)) { return (string) $cache[$cache_key]; }
+        $url = '';
+        if (in_array($type, array('page','post','uge_term','pa_breed'), true) && function_exists('get_permalink')) {
+            $url = (string) get_permalink($id);
+        } elseif (in_array($type, array('category','hp_listing_category','uge_group','pa_breed_group'), true)
+            && function_exists('get_term') && function_exists('get_term_link')) {
+            $term = get_term($id, $type);
+            if ($term && !is_wp_error($term)) {
+                $resolved = get_term_link($term, $type);
+                if (!is_wp_error($resolved)) { $url = (string) $resolved; }
+            }
+        }
+        $cache[$cache_key] = esc_url_raw($url);
+        return (string) $cache[$cache_key];
+    }
+
+    private function output_target_public_url_path($target) {
+        $url = $this->output_target_public_url($target);
+        if ($url === '') { return ''; }
+        $path = wp_parse_url($url, PHP_URL_PATH);
+        if (!is_string($path) || $path === '') { return ''; }
+        $path = rawurldecode($path);
+        return '/' . trim(preg_replace('~/+~', '/', $path), '/') . '/';
+    }
+
     private function output_collect_local_targets() {
         $targets = array();
         if (function_exists('get_pages')) {
@@ -862,7 +927,7 @@ trait PPAR_Output_Objects_Trait {
             }
             foreach ((array) $targets as $target) {
                 if (!is_array($target)) { continue; }
-                if ((string) ($target['key'] ?? '') !== $fixed_target_key) { continue; }
+                if (!$this->output_target_key_matches($target, $fixed_target_key)) { continue; }
                 if (!in_array(sanitize_key((string) ($target['type'] ?? '')), $wanted_types, true)) {
                     return new WP_Error('control_fixed_target_type_invalid', 'Festes Portalziel ist für diesen Ausgabetyp nicht zulässig.');
                 }
@@ -964,7 +1029,10 @@ trait PPAR_Output_Objects_Trait {
                 $leaf_hit = false;
                 $slug_norm = $this->output_text(str_replace(array('-','_'),' ',(string)($candidate_target['slug'] ?? '')));
                 $slug_tokens = $this->output_tokens($slug_norm);
-                if ($destination_tokens && $slug_tokens && !array_diff($slug_tokens, $destination_tokens)) {
+                $target_url_path = $this->output_target_public_url_path($candidate_target);
+                $target_url_tokens = $this->output_tokens(str_replace('/', ' ', $target_url_path));
+                $target_url_confirms_slug = $slug_tokens && $target_url_tokens && !array_diff($slug_tokens, $target_url_tokens);
+                if ($destination_tokens && $target_url_confirms_slug && !array_diff($slug_tokens, $destination_tokens)) {
                     $destination_exact = true;
                 }
                 if ($specific_tokens) {
@@ -1153,10 +1221,13 @@ trait PPAR_Output_Objects_Trait {
             if ($destination_semantic !== '' && $target_slug_norm !== '') {
                 $dest_tokens = $this->output_tokens($destination_semantic);
                 $slug_tokens = $this->output_tokens($target_slug_norm);
+                $target_url_path = $this->output_target_public_url_path($target);
+                $target_url_tokens = $this->output_tokens(str_replace('/', ' ', $target_url_path));
+                $target_url_confirms_slug = $slug_tokens && $target_url_tokens && !array_diff($slug_tokens, $target_url_tokens);
                 $missing = array_diff($slug_tokens, $dest_tokens);
-                if ($slug_tokens && !$missing) {
-                    // Direkte Shop-/Landingpage-Zielkante ist der staerkste
-                    // automatische Creative-Beweis fuer exakt dieses Portalziel.
+                if ($target_url_confirms_slug && $slug_tokens && !$missing) {
+                    // Starker Ziel-URL-Beweis nur, wenn die reale WordPress-URL
+                    // den Zielslug selbst bestätigt. Stringtreffer allein reichen nicht.
                     $score += 260;
                 } elseif ($slug_tokens) {
                     $score += min(60, count(array_intersect($slug_tokens,$dest_tokens))*30);
