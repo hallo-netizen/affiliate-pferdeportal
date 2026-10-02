@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "TABLE_DEFAULT_REQUIRED_WITH_EXCEPTIONS_VERIFIED",
+  "status": "SEMANTIC_ANTI_BOILERPLATE_AND_TABLE_POLICY_VERIFIED",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
     "verified_commit": "1ec9487b99be77996be70e7ed24c177718607200",
@@ -64,7 +64,8 @@
       "Optional table choice must be explicitly documented as added value or no added value.",
       "Editorial false positive closed: table INCLUDE_ADDED_VALUE is no longer sufficient when most action cells are tautological.",
       "Editorial false positive closed: unpunctuated noun-enumeration H2 are blocked by the existing natural-concrete H2 owner.",
-      "HTML-escaped source titles are decoded before exact trace binding; real source mismatches remain blocked."
+      "HTML-escaped source titles are decoded before exact trace binding; real source mismatches remain blocked.",
+      "Proven K9 boilerplate contamination family hard-blocked; direct informational FAQ can no longer drift into purchase/selection/decision copy without failing surface.non_template_language."
     ],
     "final_green_run_id": 36986342158,
     "final_green_artifact_id": 11217332231,
@@ -546,10 +547,25 @@
       "first_open_blocker": null,
       "next_action": "NORMAL_K10_PRODUCTION_WITH_TABLE_DEFAULT_REQUIRED_AND_DEFINED_OMISSION_EXCEPTIONS",
       "publish_allowed": false
+    },
+    "semantic_anti_boilerplate_guard": {
+      "status": "PASS",
+      "implementation_commit": "ed4ced562c12212697c02f9d296be77090a9b185",
+      "regression_test_commit": "1b026a57e13806ff7cc2bb6fb7f9e868aae76441",
+      "isolated_selftest_run_id": 37030534485,
+      "isolated_selftest_result": "SUCCESS",
+      "ppm_inventory_run_id": 37030534488,
+      "ppm_inventory_result": "104/104 PASS",
+      "old_k9_schabracke_failure_family": "BLOCKED",
+      "clean_informational_faq": "PASS",
+      "decision_support_faq": "PASS_NOT_MISCLASSIFIED",
+      "quality_reduction": false,
+      "performance_regression": false,
+      "k9_changed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "NORMAL_K10_PRODUCTION_WITH_TABLE_DEFAULT_REQUIRED_AND_DEFINED_OMISSION_EXCEPTIONS",
+  "next_action": "NORMAL_K10_PRODUCTION_WITH_SEMANTIC_ANTI_BOILERPLATE_AND_TABLE_POLICY",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",
