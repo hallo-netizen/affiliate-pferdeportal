@@ -562,6 +562,17 @@
       "quality_reduction": false,
       "performance_regression": false,
       "k9_changed": false
+    },
+    "writer_provenance_hardlock": {
+      "status": "PASS",
+      "k10_selftest_run": 37039691150,
+      "k10_selftest_result": "SUCCESS",
+      "ppm_inventory_run": 37039691069,
+      "ppm_inventory_result": "SUCCESS",
+      "direct_article_without_writer_receipt": "BLOCKED",
+      "wordpress_export_without_writer_receipt": "BLOCKED",
+      "batch_export_without_writer_receipt": "BLOCKED",
+      "quality_reduction": false
     }
   },
   "first_open_blocker": null,
