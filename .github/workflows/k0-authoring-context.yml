@@ -52,11 +52,20 @@ jobs:
           print('K0_AUTHORING_PORTAL_PASS')
           PY
 
-      - name: Prepare canonical writer job from text-free context
+      - name: Bind unique run instance and prepare canonical writer job
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_writer_station prepare "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-portal.json "$RUN_DIR/AUTHORING_CONTEXT.json" /tmp/WRITER_JOB.json
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib
+          rd=os.environ['RUN_DIR']
+          p=pathlib.Path(rd)/'AUTHORING_CONTEXT.json'
+          x=json.loads(p.read_text())
+          x['run_instance_id']='run:'+hashlib.sha256(rd.encode()).hexdigest()[:24]
+          pathlib.Path('/tmp/K0_AUTHORING_CONTEXT_BOUND.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+          print(x['run_instance_id'])
+          PY
+          python3 -m engine.k0_writer_station prepare "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-portal.json /tmp/K0_AUTHORING_CONTEXT_BOUND.json /tmp/WRITER_JOB.json
           python3 - <<'PY'
           import json,os
           j=json.load(open('/tmp/WRITER_JOB.json'))
