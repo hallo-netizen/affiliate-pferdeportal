@@ -1,0 +1,160 @@
+name: K10 independent neighbor chat E2E Reitplatzbewässerung
+
+on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+    paths:
+      - 'real_runs/20261002_independence_reitplatzbewaesserung/**'
+      - 'engine/preflight.py'
+      - 'engine/lt68_external.py'
+      - 'engine/real_proof.py'
+      - 'engine/optimization_proof.py'
+      - 'engine/checkers.py'
+      - 'engine/final_integrity.py'
+      - '.github/workflows/k10-independence-reitplatzbewaesserung.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+      START_COMMIT: 8676244e3dbb6891f88294b3346f4330470155e3
+      RUN_DIR: real_runs/20261002_independence_reitplatzbewaesserung
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate exact five-field WordPress intake and current PSERC binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main:refs/remotes/origin/main
+          git show origin/main:concept_agent/current/PSERC_METADATA_SNAPSHOT.json > /tmp/pserc.json
+          python3 - <<'PY'
+          import json, os
+          rd=os.environ['RUN_DIR']
+          intake=json.load(open(f'{rd}/WORDPRESS_INTAKE.json'))
+          article=json.load(open(f'{rd}/ARTICLE_INPUT.json'))
+          pserc=json.load(open('/tmp/pserc.json'))
+          assert intake.get('contract')=='PSERC_TEXTMACHINE_METADATA_BATCH_V2'
+          assert intake.get('status')=='READY_FOR_TEXTMACHINE_METADATA_INTAKE'
+          assert intake.get('item_count')==1
+          assert intake.get('content_or_format_payload_present') is False
+          assert intake.get('publish_allowed') is False
+          rows=intake.get('items') or []
+          assert len(rows)==1
+          item=rows[0]
+          keys=('article_type','category','plan_slot','target_keyword','title')
+          assert set(item)==set(keys), f'INTAKE_NOT_EXACT_FIVE_FIELDS:{sorted(item)}'
+          assert all(not isinstance(item[k],(dict,list)) for k in keys)
+          bind=article.get('planning_binding') or {}
+          assert all(str(item[k])==str(bind[k]) for k in keys), 'ARTICLE_PLANNING_BINDING_MISMATCH'
+          current=((pserc.get('next_textmachine_metadata_batch') or {}).get('items') or [])
+          hits=[x for x in current if all(str(x.get(k) or '')==str(item.get(k) or '') for k in keys)]
+          assert len(hits)==1, f'PSERC_CURRENT_METADATA_BINDING_MISSING:{len(hits)}'
+          assert pserc.get('system_boundary',{}).get('publish_allowed') is False
+          print('K10_INDEPENDENT_WORDPRESS_INTAKE_PASS')
+          PY
+
+      - name: Resolve real WordPress category id
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-independent
+          slug="$(python3 - <<'PY'
+          import json, os
+          rd=os.environ['RUN_DIR']
+          print(json.load(open(f'{rd}/ARTICLE_INPUT.json'))['wordpress_category']['slug'])
+          PY
+          )"
+          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$slug" -o /tmp/category.json
+          python3 - <<'PY'
+          import json, os
+          rd=os.environ['RUN_DIR']
+          a=json.load(open(f'{rd}/ARTICLE_INPUT.json'))
+          rows=json.load(open('/tmp/category.json'))
+          slug=a['wordpress_category']['slug']
+          hits=[x for x in rows if isinstance(x,dict) and x.get('slug')==slug and int(x.get('id') or 0)>0]
+          assert len(hits)==1, f'WORDPRESS_CATEGORY_ID_NOT_UNIQUE:{len(hits)}'
+          print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
+          PY
+
+      - name: Exact K10 article preflight before LanguageTool
+        shell: bash
+        run: |
+          set -euo pipefail
+          start="$(date +%s%3N)"
+          python3 -m engine.preflight "$RUN_DIR/ARTICLE_INPUT.json" /tmp/category.json /tmp/k10-independent/preflight
+          end="$(date +%s%3N)"
+          echo "$((end-start))" > /tmp/k10-independent/preflight_ms
+          echo "K10_EXACT_PREFLIGHT_PASS_MS=$((end-start))"
+
+      - name: Download exact LanguageTool 6.8 after preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k10-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k10-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k10-lt68/LanguageTool-6.8.zip -d /tmp/k10-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: Run LanguageTool and hash-bound final proof
+        shell: bash
+        run: |
+          set +e
+          set -uo pipefail
+          article='/tmp/k10-independent/preflight/ARTICLE_PREPARED.json'
+          research="$RUN_DIR/RESEARCH.json"
+          start_epoch="$(git show -s --format=%ct "$START_COMMIT")"
+          machine_start="$(date +%s%3N)"
+          python3 -m engine.lt68_external /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar "$article" /tmp/k10-independent/lt68.json
+          lt_rc=$?
+          lt_end="$(date +%s%3N)"
+          python3 -m engine.optimization_proof "$article" "$research" /tmp/pserc.json /tmp/category.json /tmp/k10-independent/lt68.json /tmp/k10-independent/proof /tmp/k10-independent/preflight/ARTICLE_RECEIPTS_PRE_LT68.json
+          proof_rc=$?
+          proof_end="$(date +%s%3N)"
+          python3 - "$article" "$start_epoch" "$machine_start" "$lt_end" "$proof_end" "$lt_rc" "$proof_rc" <<'PY'
+          import json,sys,pathlib
+          ap,start_epoch,machine_start,lt_end,proof_end,lt_rc,proof_rc=sys.argv[1:]
+          a=json.load(open(ap))
+          lt=json.load(open('/tmp/k10-independent/lt68.json')) if pathlib.Path('/tmp/k10-independent/lt68.json').is_file() else {}
+          rp=pathlib.Path('/tmp/k10-independent/proof/FINAL_REPORT.json')
+          report=json.load(open(rp)) if rp.is_file() else {}
+          preflight_ms=int(pathlib.Path('/tmp/k10-independent/preflight_ms').read_text().strip())
+          p={
+            'contract':'K10_INDEPENDENT_NEIGHBOR_CHAT_E2E_PROTOCOL_V1',
+            'article_title':a['title'],'article_type':a['article_type'],
+            'research_start_commit':os.environ.get('START_COMMIT','') if False else '8676244e3dbb6891f88294b3346f4330470155e3',
+            'wall_from_neighbor_chat_start_ms':int(proof_end)-int(start_epoch)*1000,
+            'preflight_ms':preflight_ms,
+            'language_tool_ms':int(lt_end)-int(machine_start),
+            'proof_ms':int(proof_end)-int(lt_end),
+            'machine_validation_ms':preflight_ms+int(proof_end)-int(machine_start),
+            'lt68_status':lt.get('status'),'lt68_findings':lt.get('finding_count'),
+            'article_rules':(report.get('article_rules') or {}).get('status'),
+            'system_rules':(report.get('system_rules') or {}).get('status'),
+            'pserc':report.get('pserc_metadata_binding'),'endstempel':report.get('endstempel'),
+            'wordpress_file_verify':report.get('wordpress_file_verify'),'terminal_status':report.get('status'),
+            'content_recheck_after_preflight':False,'publish_allowed':False,
+            'return_codes':{'lt68':int(lt_rc),'proof':int(proof_rc)}
+          }
+          json.dump(p,open('/tmp/k10-independent/PROTOCOL.json','w'),ensure_ascii=False,indent=2,sort_keys=True)
+          print('K10_INDEPENDENT_E2E_PROTOCOL='+json.dumps(p,ensure_ascii=False,sort_keys=True))
+          PY
+          if [ "$lt_rc" -ne 0 ] || [ "$proof_rc" -ne 0 ]; then exit 4; fi
+
+      - name: Upload independent E2E evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k10-independent-reitplatzbewaesserung
+          path: /tmp/k10-independent
+          if-no-files-found: error
+          retention-days: 30
