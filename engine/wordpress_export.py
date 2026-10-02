@@ -1,6 +1,7 @@
 from __future__ import annotations
 import hashlib, json, re
 from .html_design import validate_canonical_html
+from .writer_contract_guard import verify_package as verify_writer_contract
 
 CONTRACT = "SYSTEM4_WORDPRESS_HANDOFF_V1"
 PLUGIN_VERSION = "0.28.30"
@@ -84,6 +85,10 @@ def _fact_pack(article: dict, research: dict) -> dict:
 
 def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dict:
     validate_canonical_html(article)
+    try:
+        writer_metrics=verify_writer_contract(article)
+    except Exception as exc:
+        raise ExportBlocked('WORDPRESS_WRITER_CONTRACT_BLOCKED:'+str(exc))
     binding=article.get("planning_binding") or {}
     required=("title","target_keyword","category","article_type","plan_slot")
     if any(not str(binding.get(k) or "").strip() for k in required):
@@ -160,6 +165,13 @@ def build_single(article: dict, research: dict, snapshot: dict, lt: dict) -> dic
         "production_context":{
             "fact_pack":fact_pack,
             "production_plan_item":plan_item,
+            "writer_provenance":article.get("writer_provenance"),
+            "writer_quality":{
+                "status":"PASS",
+                "policy_sha256":writer_metrics["policy_sha256"],
+                "total_words":writer_metrics["total_words"],
+                "conclusion_ratio":writer_metrics["conclusion_ratio"],
+            },
         },
         "languagetool":{
             "status":"PASS",
