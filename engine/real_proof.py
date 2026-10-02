@@ -8,6 +8,7 @@ from .checkers import run_article_checks, article_hash, adapter_receipts
 from .final_integrity import verify_article, verify_article_pre_lt68, verify_system, verify_package_pre_wordpress
 from .system_guard import run_system_checks
 from .package_adapters import make_pre_wordpress_package_receipts, PACKAGE_RESULT_MAP
+from .wordpress_export import build_single as build_wordpress_general
 
 class Blocked(RuntimeError): pass
 
@@ -65,11 +66,8 @@ def slug_from_title(title):
         raise Blocked('WORDPRESS_SLUG_EMPTY')
     return value
 
-def build_wordpress(article,plan_slot):
-    slug=slug_from_title(article['title'])
-    row={'article_id':article['article_id'],'plan_slot':plan_slot,'title':article['title'],'slug':slug,'target_keyword':article['target_keyword'],'category':article['wordpress_category']['slug'],'article_type':article['article_type'],'body':article['html']}
-    if any(not str(row[k]).strip() for k in row): raise Blocked('WORDPRESS_FIELD_EMPTY')
-    return {'contract':'PFERDE_ATELIER_WORDPRESS_IMPORT_V1','source':'K10_REAL_PROOF','article_count':1,'publish_allowed':False,'articles':[row]}
+def build_wordpress(article,research,snapshot,lt):
+    return build_wordpress_general(article,research,snapshot,lt)
 
 def main():
     if len(sys.argv) not in (7,8):
@@ -96,8 +94,8 @@ def main():
     if aver['status']!='PASS': raise Blocked('ARTICLE_RULES_NOT_PASS:'+json.dumps(aver['findings'],ensure_ascii=False))
     if sver['status']!='PASS': raise Blocked('SYSTEM_RULES_NOT_PASS:'+json.dumps(sver['findings'],ensure_ascii=False))
     plan_slot=article['planning_binding']['plan_slot']
-    wp=build_wordpress(article,plan_slot)
-    wp_verify=(wp['contract']=='PFERDE_ATELIER_WORDPRESS_IMPORT_V1' and wp['article_count']==1 and wp['publish_allowed'] is False and wp['articles'][0]['body']==article['html'])
+    wp=build_wordpress(article,research,snapshot,lt)
+    wp_verify=(wp['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1' and wp['article_count']==1 and wp['publish_allowed'] is False and wp['articles'][0]['body']==article['html'] and wp['articles'][0]['plan_slot']==plan_slot and 'article_id' not in wp['articles'][0])
     section_requirements={'article_type':article['article_type'],'required_blocks':load_values()['types'][article['article_type']]['required_blocks'],'required_lists':load_values()['types'][article['article_type']]['required_lists']}
     quality_binding={'catalog_sha256':catalog_hash(),'rule_values_sha256':values_hash(),'article_receipts_sha256':stable(arec),'system_receipts_sha256':stable(srec),'wordpress_category':article['wordpress_category']}
     package_core={'contract':'K10_REAL_ARTICLE_PACKAGE_V1','status':'CONTENT_AND_SYSTEM_PASS','article_id':article['article_id'],'article_sha256':ah,'plan_slot':plan_slot,'metadata':{k:article['planning_binding'][k] for k in ('title','target_keyword','category','article_type','plan_slot')},'research_sha256':stable(research),'section_requirements':section_requirements,'section_requirements_sha256':stable(section_requirements),'quality_binding':quality_binding,'quality_binding_sha256':stable(quality_binding),'link_registry_sha256':stable(article['link_registry']),'language_evidence_sha256':stable(lt),'wordpress_import_sha256':stable(wp),'publish_allowed':False}
