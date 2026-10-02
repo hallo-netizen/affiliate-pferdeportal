@@ -15,6 +15,67 @@ ALLOWED_TABLE_EXCEPTIONS={
     'NUANCE_LOSS',
 }
 
+# Hard stop against the K9 boilerplate contamination that turned factual FAQ
+# into generic purchase/decision copy. These strings are not style preferences;
+# they are fingerprints of the proven bad template family.
+FORBIDDEN_BOILERPLATE=(
+    'für die praxis heißt das: betrachte',
+    'trenne muss-kriterien von bloßen zusatzmerkmalen',
+    'ein guter vergleich beginnt mit einer klaren reihenfolge',
+    'die tabelle ordnet vier praktische prüfpunkte knapp',
+    'vor der entscheidung lohnt sich eine bewusste gewichtung',
+    'die praktische kontrolle sollte direkt am vorgesehenen einsatz ansetzen',
+    'der letzte schritt ist die praktische kontrolle am konkreten fall',
+)
+
+INFORMATIONAL_DECISION_TERMS=(
+    'muss-kriterien',
+    'zusatzmerkmale',
+    'passform',
+    'größtmögliche ausstattung',
+    'vor der entscheidung',
+    'praktische kontrolle',
+    'zum tatsächlichen bedarf',
+    'vorgesehenen einsatz',
+)
+
+def _expected_intent(article_type,title):
+    typ=str(article_type or '').strip()
+    t=_plain(title).casefold()
+    if typ=='Beratung':
+        return 'DECISION_SUPPORT'
+    if typ=='Vergleich':
+        return 'COMPARISON_DECISION'
+    if typ=='Pflege':
+        return 'PROCEDURAL_GUIDANCE'
+    if typ=='FAQ':
+        if re.search(r'\b(welche|welcher|welches)\b.*\b(besser|geeignet|wählen|auswählen|kaufen)\b',t):
+            return 'DECISION_SUPPORT'
+        if re.match(r'^(wie (lege|legt|mache|macht|reinige|pflegt|pflege|verwende|nutze|benutze)\b)',t):
+            return 'PROCEDURAL_INFORMATIONAL'
+        return 'INFORMATIONAL_DIRECT_QUESTION'
+    return 'INFORMATIONAL'
+
+def _verify_semantic_intent(package,ident,body):
+    profile=package.get('content_profile')
+    if not isinstance(profile,dict):
+        raise Blocked('K0_CONTENT_PROFILE_MISSING')
+    expected=_expected_intent(ident.get('article_type'),ident.get('title'))
+    actual=str(profile.get('search_intent') or '').strip()
+    if actual!=expected:
+        raise Blocked('K0_SEARCH_INTENT_MISMATCH:'+actual+':EXPECTED:'+expected)
+
+    plain=_plain(body).casefold()
+    fingerprints=[p for p in FORBIDDEN_BOILERPLATE if p in plain]
+    if fingerprints:
+        raise Blocked('K0_TEMPLATE_BOILERPLATE_CONTAMINATION:'+','.join(fingerprints))
+
+    if expected=='INFORMATIONAL_DIRECT_QUESTION':
+        hits=sorted({term for term in INFORMATIONAL_DECISION_TERMS if term in plain})
+        if len(hits)>=3:
+            raise Blocked('K0_INFORMATIONAL_FAQ_DECISION_CONTAMINATION:'+','.join(hits))
+    return expected
+
 def _load(path):
     x=json.loads(Path(path).read_text(encoding='utf-8'))
     if not isinstance(x,dict):
@@ -97,6 +158,9 @@ def verify(package, portal):
       'portal_status':'AUTO_DETECTED',
       'article_type':typ,
       'structure_table':'PASS',
+      'semantic_intent':semantic_intent,
+      'semantic_intent_status':'PASS',
+      'anti_boilerplate_status':'PASS',
       'ppm679_status':'PASS',
       'ppm679_rule_count':104,
       'body_sha256':_sha(body),
