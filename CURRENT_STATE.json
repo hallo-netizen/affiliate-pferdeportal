@@ -5,7 +5,7 @@
   "status": "SILENT_BATCH_PRODUCTION_READY",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "61d7a1de934cc3834edcb1273d7015da0a280ea0",
+    "verified_commit": "6cb344925df9b74c4c6fc73ca2b2f14aab88e600",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -361,10 +361,37 @@
       "quality_reduction": false,
       "k9_changed": false,
       "publish_allowed": false
+    },
+    "general_wordpress_export_fix": {
+      "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+      "previous_invalid_contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
+      "root_cause": "K10_SYNTHESIZED_ARTICLE_ID_FROM_PLAN_SLOT",
+      "article_id_from_plan_slot_forbidden": true,
+      "plan_slot_preserved_as_routing_identity": true,
+      "current_batch_hash_authorities": [
+        "source_batch_sha256",
+        "next_textmachine_metadata_batch.batch_sha256",
+        "batch_sha256"
+      ],
+      "direct_wordpress_upload_shape": "PROVEN_K9_SYSTEM4_WORDPRESS_HANDOFF_V1",
+      "regression_commit": "6cb344925df9b74c4c6fc73ca2b2f14aab88e600",
+      "selftest_run_id": 37002131038,
+      "selftest_result": "PASS",
+      "ppm_inventory_run_id": 37002131033,
+      "ppm_inventory_result": "PASS",
+      "independent_neighbor_e2e_run_id": 37002131073,
+      "independent_neighbor_e2e_result": "PASS",
+      "live_tuev_e2e_run_id": 37002131079,
+      "live_tuev_e2e_result": "PASS",
+      "three_article_e2e_run_id": 37002131061,
+      "three_article_e2e_result": "PASS",
+      "quality_reduction": false,
+      "k9_changed": false,
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "CONSUME_CURRENT_ATTACHMENT_SILENTLY_TO_FINAL_VERIFIED_OUTPUT",
+  "next_action": "CONSUME_CURRENT_ATTACHMENT_SILENTLY_AND_EXPORT_SYSTEM4_WORDPRESS_HANDOFF_V1_TO_FINAL_VERIFIED_OUTPUT",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",

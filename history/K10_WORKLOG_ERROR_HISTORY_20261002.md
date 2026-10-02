@@ -776,3 +776,29 @@ Minimalfix:
 - stale/fremde Metadatenbindung blockiert weiterhin fail-closed;
 - Research-, LT-, Artikelregel-, Systemregel-, PSERC-, ENDSTEMPEL- und WordPress-Verifikationsgates unverändert;
 - publish_allowed=false.
+
+
+## K10 WordPress-Exportvertrag korrigiert — 2026-10-02
+
+Befund:
+K10 erzeugte den eigenen Vertrag `PFERDE_ATELIER_WORDPRESS_IMPORT_V1` und setzte dabei `article_id = plan_slot`.
+Der `plan_slot` ist jedoch ein abgeleiteter Routing-Token und keine kanonische Artikel-ID. Der reale WordPress-Importer blockierte mit `PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH`.
+
+Beleg:
+Der bereits real verwendete direkte WordPress-Vertrag ist `SYSTEM4_WORDPRESS_HANDOFF_V1`. Frühere K9-Dateien dieses Vertrags wurden vom Importer akzeptiert und erreichten die Kollisionsprüfung.
+
+Fix:
+- K10 exportiert jetzt `SYSTEM4_WORDPRESS_HANDOFF_V1`;
+- `article_id` wird im WordPress-Artikelrow nicht mehr synthetisiert;
+- `plan_slot` bleibt unverändert als Routingidentität;
+- Body, Body-SHA, LT 6.8, PPM 6.7.9 und Produktionskontext werden gebunden;
+- aktuelle und historische autoritative Batch-Hash-Lagen werden unterstützt, ohne freien Fallback;
+- Qualitätsregeln unverändert;
+- `publish_allowed=false`.
+
+Regression:
+- Selftest 37002131038 SUCCESS
+- PPM inventory 37002131033 SUCCESS
+- Independent Reitplatzbewässerung E2E 37002131073 SUCCESS
+- Live TÜV E2E 37002131079 SUCCESS
+- Three-article optimization E2E 37002131061 SUCCESS
