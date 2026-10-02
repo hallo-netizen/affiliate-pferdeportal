@@ -1,0 +1,55 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "Journal",
+    "category": "pferdewissen-grundlagen",
+    "plan_slot": "d3bd7d12876803b80f744294f27be814ff65bc3cf0af95989bdab4538f9da3e6",
+    "target_keyword": "Warum sagt man alte Schabracke",
+    "title": "Warum sagt man eigentlich „alte Schabracke“?"
+  },
+  "planning_binding": {
+    "article_type": "Journal",
+    "category": "pferdewissen-grundlagen",
+    "plan_slot": "d3bd7d12876803b80f744294f27be814ff65bc3cf0af95989bdab4538f9da3e6",
+    "target_keyword": "Warum sagt man alte Schabracke",
+    "title": "Warum sagt man eigentlich „alte Schabracke“?"
+  },
+  "article_id": "article:cf3b0b8f487bf47c0bbbc3f9",
+  "article_type": "Journal",
+  "title": "Warum sagt man eigentlich „alte Schabracke“?",
+  "target_keyword": "Warum sagt man alte Schabracke",
+  "category": "pferdewissen-grundlagen",
+  "html": "<article class=\"ppm-generated ppm-type-journal\" data-article-type=\"Journal\">\n\n<p>„Alte Schabracke“ klingt heute eindeutig abwertend. Das Merkwürdige daran: Das Wort Schabracke hat seinen Ursprung nicht als Schimpfwort, sondern im Umfeld von Pferd und Sattel. Gemeint war zunächst eine Decke oder ein Tuch, das zum Sattel beziehungsweise zur Ausrüstung eines Pferdes gehörte. Erst später bekam das Wort übertragene, abwertende Bedeutungen für Personen und abgenutzte Dinge.</p>\n\n<h2>Schabracke war zuerst ein ganz normales Sachwort</h2>\n<p>Im Pferdebereich ist Schabracke bis heute ein neutraler Begriff. Gemeint ist eine Sattelunterlage, meist in rechteckiger oder annähernd rechteckiger Form. Historisch bezeichnete das Wort auch verzierte Decken, die zum Sattelzeug gehörten oder über ein Pferd gelegt wurden. Mit einer Beleidigung hatte das zunächst nichts zu tun. Wer heute im Reitsport von einer Schabracke spricht, meint deshalb in aller Regel schlicht Ausrüstung.</p>\n\n<h2>Wie aus einem Gegenstand ein Schimpfwort wurde</h2>\n<p>Wörter wandern im Lauf der Zeit oft in übertragene Bedeutungen. Bei Schabracke entstand neben dem sachlichen Gebrauch eine salopp-abwertende Verwendung. Duden führt unter anderem Bedeutungen für ein altes Pferd, eine alte oder als hässlich bezeichnete Frau sowie eine alte, abgenutzte Sache auf. Der Sprung vom Gegenstand zur Abwertung ist sprachgeschichtlich nicht ungewöhnlich: Eigenschaften eines alten, verschlissenen oder auffälligen Gegenstands werden bildlich auf anderes übertragen.</p>\n\n<h2>Warum gerade „alte Schabracke“?</h2>\n<p>Die Kombination verstärkt die ohnehin abwertende Nebenbedeutung. „Alt“ beschreibt dabei nicht nur ein Lebensalter, sondern kann zusätzlich den Eindruck von verbraucht oder unansehnlich hervorrufen. Zusammen wirkt die Wendung deshalb wesentlich härter als das neutrale Pferdewort. Als Bezeichnung für eine Person ist sie nicht sachlich, sondern spöttisch bis beleidigend. Unter engen Freunden kann der Ton scherzhaft gemeint sein, die abwertende Herkunft verschwindet dadurch aber nicht.</p>\n\n<h2>Die Herkunft des Wortes ist selbst spannend</h2>\n<p>Die genaue Wortgeschichte ist nicht vollständig eindeutig. Wörterbücher verweisen auf ältere ungarische beziehungsweise türkische Bezeichnungen im Zusammenhang mit Sattel- oder Pferdedecken. Solche Wanderungen passen zur Geschichte von Reiterei, Militär und Ausrüstung in Europa. Das deutsche Wort hat sich anschließend verselbstständigt und bekam neben der sachlichen Bedeutung zusätzliche bildliche Verwendungen.</p>\n\n<h2>Im Stall bleibt das Wort völlig normal</h2>\n<p>Das führt zu einer kuriosen Doppelrolle: Im Reitsport ist „Schabracke“ ein alltäglicher, neutraler Fachbegriff. Außerhalb dieses Zusammenhangs kann dasselbe Wort stark abwertend klingen. Der Kontext entscheidet daher sofort, welche Bedeutung gemeint ist. „Die Schabracke liegt im Spind“ hat keinerlei negative Färbung. „Du alte Schabracke“ richtet das Wort dagegen gegen eine Person und nutzt genau die übertragene Nebenbedeutung.</p>\n\n<h2>Sprache konserviert alte Bilder</h2>\n<p>Viele Redewendungen funktionieren ähnlich. Sie bewahren Vorstellungen, die im Alltag längst nicht mehr bewusst sind. Wer eine Wendung benutzt, denkt selten über die ursprüngliche Sache dahinter nach. Gerade deshalb sind solche Begriffe für Pferdewissen interessant: Sie zeigen, wie eng Alltagssprache, Handwerk, Tierhaltung und historische Ausrüstung miteinander verbunden sein können. Ein Pferdebegriff lebt so außerhalb des Stalls in völlig anderer Bedeutung weiter.</p>\n\n<h2>Was man sich merken kann</h2>\n<ul>\n<li>Schabracke ist im Pferdesport ein neutraler Fachbegriff.</li>\n<li>Die Personenbezeichnung ist eine spätere, abwertende Übertragung.</li>\n<li>„Alte Schabracke“ verstärkt diese negative Nebenbedeutung.</li>\n<li>Die genaue Wortherkunft wird mit älteren ungarischen und türkischen Bezeichnungen in Verbindung gebracht.</li>\n</ul>\n\n<h2>Fazit</h2>\n<p>„Alte Schabracke“ ist keine ursprüngliche Pferdebeleidigung, sondern das Ergebnis eines Bedeutungswandels. Aus einem sachlichen Wort für eine Sattel- oder Pferdedecke entwickelte sich eine bildliche, salopp-abwertende Verwendung. Im Pferdebereich blieb die ursprüngliche Bedeutung erhalten. Genau deshalb wirkt die Wendung heute so kurios: Dasselbe Wort kann im Stall vollkommen neutral und im Gespräch über eine Person ziemlich beleidigend sein.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL"
+  },
+  "table_decision": {
+    "decision": "OMIT_NO_ADDED_VALUE",
+    "exception_code": "NUANCE_LOSS",
+    "rationale": "Sprachgeschichte wird als zusammenhängende Entwicklung verständlicher als in einer Vergleichstabelle."
+  },
+  "lt_authoritative_terms": [
+    "Schabracke",
+    "Duden"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "pferdewissen-grundlagen",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://www.duden.de/rechtschreibung/Schabracke",
+      "source_title": "Schabracke – Duden",
+      "evidence_text": "Der Ausdruck „Schabracke“ bezeichnet ursprünglich unter anderem eine Sattel- oder Zierdecke. Duden führt außerdem salopp-abwertende übertragene Bedeutungen wie altes Pferd, alte Frau oder alte abgenutzte Sache auf; daraus erklärt sich die Redewendung „alte Schabracke“.",
+      "evidence_text_sha256": "2fe75b2e7132a8371d8e7d2908afd499697e312698cc505eee8d10be5dd5143b",
+      "statement": "Schabracke bezeichnet ursprünglich eine Sattel- oder Zierdecke und besitzt daneben salopp-abwertende übertragene Bedeutungen.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Journal"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
