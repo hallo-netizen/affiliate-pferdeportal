@@ -55,20 +55,20 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/k10-production
           slug="$(python3 - <<'PY'
-import json,os
-print(json.load(open(os.environ['RUN_DIR']+'/ARTICLE_INPUT.json'))['wordpress_category']['slug'])
-PY
-)"
+          import json,os
+          print(json.load(open(os.environ['RUN_DIR']+'/ARTICLE_INPUT.json'))['wordpress_category']['slug'])
+          PY
+          )"
           curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$slug" -o /tmp/category.json
           python3 - <<'PY'
-import json,os
-a=json.load(open(os.environ['RUN_DIR']+'/ARTICLE_INPUT.json'))
-rows=json.load(open('/tmp/category.json'))
-slug=a['wordpress_category']['slug']
-hits=[x for x in rows if isinstance(x,dict) and x.get('slug')==slug and int(x.get('id') or 0)>0]
-assert len(hits)==1, f'WORDPRESS_CATEGORY_ID_NOT_UNIQUE:{len(hits)}'
-print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
-PY
+          import json,os
+          a=json.load(open(os.environ['RUN_DIR']+'/ARTICLE_INPUT.json'))
+          rows=json.load(open('/tmp/category.json'))
+          slug=a['wordpress_category']['slug']
+          hits=[x for x in rows if isinstance(x,dict) and x.get('slug')==slug and int(x.get('id') or 0)>0]
+          assert len(hits)==1, f'WORDPRESS_CATEGORY_ID_NOT_UNIQUE:{len(hits)}'
+          print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
+          PY
 
       - name: Exact K10 preflight
         shell: bash
@@ -94,15 +94,15 @@ PY
           python3 -m engine.lt68_external /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar "$article" /tmp/k10-production/lt68.json
           python3 -m engine.optimization_proof "$article" "$RUN_DIR/RESEARCH.json" /tmp/pserc.json /tmp/category.json /tmp/k10-production/lt68.json /tmp/k10-production/proof /tmp/k10-production/preflight/ARTICLE_RECEIPTS_PRE_LT68.json
           python3 - <<'PY'
-import json
-r=json.load(open('/tmp/k10-production/proof/FINAL_REPORT.json'))
-assert r.get('status')=='READY_FOR_WORDPRESS_DRAFT_IMPORT', r
-assert r.get('pserc_metadata_binding')=='PASS'
-assert r.get('endstempel')=='PASS'
-assert r.get('wordpress_file_verify')=='PASS'
-assert r.get('publish_allowed') is False
-print('K10_GENERIC_REAL_PRODUCTION_PASS')
-PY
+          import json
+          r=json.load(open('/tmp/k10-production/proof/FINAL_REPORT.json'))
+          assert r.get('status')=='READY_FOR_WORDPRESS_DRAFT_IMPORT', r
+          assert r.get('pserc_metadata_binding')=='PASS'
+          assert r.get('endstempel')=='PASS'
+          assert r.get('wordpress_file_verify')=='PASS'
+          assert r.get('publish_allowed') is False
+          print('K10_GENERIC_REAL_PRODUCTION_PASS')
+          PY
 
       - name: Upload verified WordPress result
         if: always()
