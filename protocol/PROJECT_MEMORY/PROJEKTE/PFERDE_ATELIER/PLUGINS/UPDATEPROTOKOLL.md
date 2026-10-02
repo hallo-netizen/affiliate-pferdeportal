@@ -262,3 +262,25 @@ Grenze:
 Live:
 nicht als installiert belegt. Die bereits laufende Recherchewelle wird dafür nicht unterbrochen.
 
+
+
+## PU-20261002-001 – Portal SEO Themenengine
+
+DATUM: 2026-10-02
+PLUGIN_ID: PA-E-019
+ART: UPDATE
+HERKUNFT: EIGEN
+FACHBÜRO: TEXT
+VON_VERSION: 0.57.25
+AUF_VERSION: 0.57.26
+UPDATEQUELLE: `PSTE-0.57.26-STORED-MATERIAL-TO-TITLE-CANDIDATES-ROOTFIX-HARD-PASS.zip`
+INSTALLER_SHA256: `d7d00c1b13144fc584a593993714721ec9a8679e7d65f017e1bc2ed10c1306d6`
+WARUM: gespeicherten Recherchefundus in sichtbare Titelkandidaten überführen und falsches `PSTE_CONTEXT_QUERY_MISSING` bei leerem editorial_title beseitigen.
+ABHÄNGIGKEITEN: bestehender Normal-Metadata-/Titelpfad; Topic-Pool/Sandbox; PSERC bleibt nachgelagertes Gate.
+POSITIVTEST: lokaler Bestands-/Titelpfad vor Ausgabe geprüft; frischer COMPLETE-Render zeigt Start- und Exportbutton; Live-Readback erzeugt 695 Titelkandidaten, 8 zusätzlich PSERC-prüfbar, 36 vollständig aufbereitet.
+NEGATIVTEST: kein Provideraufruf im Bestandslauf; keine Produktionsautorität aus Titelkandidaten; RUNNING→AJAX-COMPLETE reproduziert fehlendes dynamisches Einfügen des Exportformulars.
+FACH_REGRESSION: Speicherpflege-/Sandbox-Schutz und Produktions-/Publish-Gates bleiben gebunden.
+WORDPRESS_LIVEKONTROLLE: Nutzer-Screenshot zeigt Portal SEO Themenengine 0.57.26 und COMPLETE mit 695/8/36.
+ERGEBNIS: PASS FÜR TITELGENERIERUNG / UI-NACHLAUF-FEHLER DOKUMENTIERT.
+FACHBÜRO_REF: `../TEXT/CURRENT_STATE.md`.
+NOTIZ: Kein weiteres Plugin für den UI-Nachlauf nötig; Reload rendert bei COMPLETE den Exportbutton.
