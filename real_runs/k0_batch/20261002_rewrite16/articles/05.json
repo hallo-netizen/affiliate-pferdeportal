@@ -1,0 +1,56 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+    "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+    "target_keyword": "Kühlgamaschen für Pferde",
+    "title": "Passende Kühlgamaschen für Pferde wählen"
+  },
+  "planning_binding": {
+    "article_type": "Beratung",
+    "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+    "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+    "target_keyword": "Kühlgamaschen für Pferde",
+    "title": "Passende Kühlgamaschen für Pferde wählen"
+  },
+  "article_id": "article:09c961ebeec074c32324fcc5",
+  "article_type": "Beratung",
+  "title": "Passende Kühlgamaschen für Pferde wählen",
+  "target_keyword": "Kühlgamaschen für Pferde",
+  "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+  "html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n\n<p>Kühlgamaschen sollen Pferdebeine gezielt und möglichst gleichmäßig abkühlen. Dafür gibt es Gelmodelle aus dem Gefrierfach, Varianten mit Kühlpacks, wasserbasierte Systeme und Manschetten, durch die kaltes Wasser zirkuliert. Welche Lösung sinnvoll ist, hängt von Anlass, gewünschter Kühlfläche, Handhabung und Passform ab. Entscheidend ist nicht, wie kalt sich das Produkt in der Hand anfühlt, sondern wie kontrolliert die Temperatur am Pferdebein erreicht und gehalten wird.</p>\n\n<h2>Wann Kühlen überhaupt sinnvoll ist</h2>\n<p>Nach intensiver Belastung wird Kälte häufig genutzt, um Wärme aus den unteren Gliedmaßen abzuleiten. Auch nach tierärztlicher Empfehlung kann gezielte Kühlung Teil eines Behandlungsplans sein. Die Dauer und Intensität sollten sich dabei am Anlass orientieren. Bei Verletzungen, deutlicher Lahmheit, starker Schwellung oder anhaltender Wärme gehört die Ursache abgeklärt. Kühlgamaschen ersetzen keine Diagnose und sollten nicht dazu führen, auffällige Symptome einfach zu überdecken.</p>\n\n<h2>Gel, Kühlpack oder Wasser?</h2>\n<p>Gelgamaschen und herausnehmbare Kühlpacks sind unkompliziert und mobil, benötigen aber eine ausreichend kalte Lagerung. Sie erwärmen sich während der Anwendung zunehmend. Systeme mit fließendem oder zirkulierendem Wasser können länger eine relativ konstante Temperatur liefern, sind dafür aufwendiger und weniger transportabel. Bei allen Varianten zählt, wie viel Fläche tatsächlich Kontakt hat und ob die Kälte gleichmäßig verteilt wird.</p>\n\n<h2>Die Passform entscheidet über die Kühlwirkung</h2>\n<p>Eine Manschette, die nur punktuell anliegt, kühlt ungleichmäßig. Zu eng verschnallte Modelle können zusätzlich Druck erzeugen, während zu lockere Gamaschen rutschen. Sinnvoll sind breite, gleichmäßig anliegende Flächen und Verschlüsse, die sich fein einstellen lassen. Besonders am Röhrbein und um den Fesselbereich sollte die Gamasche stabil sitzen, ohne Hautfalten einzuklemmen. Ein dicker Fellbesatz kann den direkten Wärmeübergang ebenfalls beeinflussen.</p>\n\n<h2>Zu kalt ist nicht automatisch besser</h2>\n<p>Extreme Kälte direkt auf der Haut ist nicht das Ziel. Sehr stark gefrorene Elemente können unangenehm sein und lokale Kältereize erzeugen. Halte dich an die Herstellerangaben und kontrolliere Haut und Verhalten während der Anwendung. Wenn das Pferd deutlich ausweicht, stampft oder die Gamasche nicht toleriert, sollte die Anwendung beendet und die Ursache geprüft werden. Auch nach dem Kühlen lohnt sich ein Blick auf Haut, Temperatur und mögliche Druckstellen.</p>\n\n<h2>Systeme im Überblick</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>System</th><th>Vorteil</th><th>Nachteil</th></tr></thead><tbody>\n<tr><td>Gel</td><td>Einfach</td><td>Erwärmt</td></tr>\n<tr><td>Kühlpack</td><td>Austauschbar</td><td>Gefrierfach</td></tr>\n<tr><td>Wasser</td><td>Konstant</td><td>Aufwendig</td></tr>\n<tr><td>Verdunstung</td><td>Mobil</td><td>Wetterabhängig</td></tr>\n</tbody></table>\n<p>Die passende Technik hängt davon ab, ob du zu Hause, im Stall oder unterwegs kühlst und wie lange eine Anwendung dauern soll.</p>\n\n<h2>Praktische Details vor dem Kauf</h2>\n<ul>\n<li>Reicht die Gamasche über die gewünschte Kühlzone?</li>\n<li>Sind Kühlpacks leicht entnehmbar und austauschbar?</li>\n<li>Lässt sich das Material hygienisch reinigen?</li>\n<li>Kann die Weite an unterschiedliche Beine angepasst werden?</li>\n<li>Ist Ersatz für Gel- oder Packelemente erhältlich?</li>\n</ul>\n\n<h2>Fazit</h2>\n<p>Gute Kühlgamaschen verbinden ausreichende Kühlfläche mit sicherer Passform und kontrollierter Anwendung. Für gelegentliches Kühlen sind einfache Gel- oder Packmodelle oft praktisch; bei häufigen oder längeren Anwendungen können wasserbasierte Systeme Vorteile haben. Wichtiger als die Bauart ist, dass Kälte gleichmäßig ankommt, die Gamasche nicht drückt und der Grund für eine auffällige Wärme oder Schwellung fachlich geklärt wird.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": null,
+    "rationale": "Die Kühltechniken unterscheiden sich in Handhabung, Temperaturkonstanz und Mobilität."
+  },
+  "lt_authoritative_terms": [
+    "Kühlgamaschen",
+    "Röhrbein",
+    "Fesselbereich"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "gesundheit-regeneration-kuehlgamaschen-beratung",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://thehorse.com/189211/can-cold-therapy-safeguard-sport-horses-from-injury/",
+      "source_title": "Can Cold Therapy Safeguard Sport Horses From Injury? – The Horse",
+      "evidence_text": "Kälteanwendungen an Pferdebeinen sollen Gewebe gezielt abkühlen; die therapeutische Wirkung hängt von tatsächlich erreichter Temperatur, Anwendungsart und Anlass ab. Kühlgamaschen unterscheiden sich daher vor allem darin, wie gleichmäßig und kontrolliert sie kühlen und wie gut sie sitzen.",
+      "evidence_text_sha256": "38dc28dfce68d5b43b3b7c69ac0d339d871be9969b3d123b99d39509992b3ab1",
+      "statement": "Kälteanwendungen unterscheiden sich in Temperaturführung, Anwendungsart und Passform.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
