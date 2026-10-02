@@ -1,0 +1,66 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+    "target_keyword": "Wie lege ich einen Longiergurt an",
+    "title": "Wie lege ich einen Longiergurt an?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:49380f5b9cb6126673b42ef2",
+  "content_profile": {
+    "search_intent": "PROCEDURAL_INFORMATIONAL"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Longiergurt: Sitz, Größe & richtig anlegen – RidersDeal",
+          "source_url": "https://www.ridersdeal.com/ratgeber/longiergurt"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie lege ich einen Longiergurt an",
+      "topic": "Wie lege ich einen Longiergurt an?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-4dc37100b08db4b9fb6cdab5",
+  "job_sha256": "187c0f76dbc5c12d95afdded019764e7c117d26ee5f888c829eb1a971a033ee8"
+}
