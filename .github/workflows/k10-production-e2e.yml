@@ -1,0 +1,114 @@
+name: K10 generic real production E2E
+
+on:
+  push:
+    branches: [konzept10-rule-ledger-20261001]
+    paths:
+      - 'real_runs/production/**'
+
+permissions:
+  contents: read
+
+jobs:
+  production-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ENDSTEMPEL_PRIVATE_KEY: ${{ secrets.ENDSTEMPEL_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve exactly one changed production job
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t dirs < <(git diff --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- 'real_runs/production/**' | awk -F/ 'NF>=4 {print $1"/"$2"/"$3}' | sort -u)
+          if [ "${#dirs[@]}" -ne 1 ]; then
+            echo "K10_PRODUCTION_REQUIRES_EXACTLY_ONE_CHANGED_JOB_DIR:${#dirs[@]}" >&2
+            exit 2
+          fi
+          rd="${dirs[0]}"
+          [[ "$rd" =~ ^real_runs/production/[A-Za-z0-9._-]+$ ]] || { echo "K10_PRODUCTION_RUN_DIR_INVALID:$rd" >&2; exit 2; }
+          for f in WORDPRESS_INTAKE.json RESEARCH.json ARTICLE_INPUT.json; do
+            test -f "$rd/$f" || { echo "K10_PRODUCTION_FILE_MISSING:$f" >&2; exit 2; }
+          done
+          echo "RUN_DIR=$rd" >> "$GITHUB_ENV"
+
+      - name: Bind current PSERC metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main:refs/remotes/origin/main
+          git show origin/main:concept_agent/current/PSERC_METADATA_SNAPSHOT.json > /tmp/pserc.json
+
+      - name: Require real research before article pipeline
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.production_entry "$RUN_DIR" /tmp/pserc.json
+
+      - name: Resolve WordPress category
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-production
+          slug="$(python3 - <<'PY'
+import json,os
+print(json.load(open(os.environ['RUN_DIR']+'/ARTICLE_INPUT.json'))['wordpress_category']['slug'])
+PY
+)"
+          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$slug" -o /tmp/category.json
+          python3 - <<'PY'
+import json,os
+a=json.load(open(os.environ['RUN_DIR']+'/ARTICLE_INPUT.json'))
+rows=json.load(open('/tmp/category.json'))
+slug=a['wordpress_category']['slug']
+hits=[x for x in rows if isinstance(x,dict) and x.get('slug')==slug and int(x.get('id') or 0)>0]
+assert len(hits)==1, f'WORDPRESS_CATEGORY_ID_NOT_UNIQUE:{len(hits)}'
+print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
+PY
+
+      - name: Exact K10 preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.preflight "$RUN_DIR/ARTICLE_INPUT.json" /tmp/category.json /tmp/k10-production/preflight
+
+      - name: Download exact LanguageTool 6.8
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k10-lt68
+          curl --fail --location --retry 3 https://github.com/jxmorris12/language_tool_python/releases/download/LanguageTool-6.8/LanguageTool-6.8.zip -o /tmp/k10-lt68/LanguageTool-6.8.zip
+          echo '6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d  /tmp/k10-lt68/LanguageTool-6.8.zip' | sha256sum -c -
+          unzip -q /tmp/k10-lt68/LanguageTool-6.8.zip -d /tmp/k10-lt68
+          echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
+
+      - name: LanguageTool and final K10 proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          article='/tmp/k10-production/preflight/ARTICLE_PREPARED.json'
+          python3 -m engine.lt68_external /tmp/k10-lt68/LanguageTool-6.8/languagetool-commandline.jar "$article" /tmp/k10-production/lt68.json
+          python3 -m engine.optimization_proof "$article" "$RUN_DIR/RESEARCH.json" /tmp/pserc.json /tmp/category.json /tmp/k10-production/lt68.json /tmp/k10-production/proof /tmp/k10-production/preflight/ARTICLE_RECEIPTS_PRE_LT68.json
+          python3 - <<'PY'
+import json
+r=json.load(open('/tmp/k10-production/proof/FINAL_REPORT.json'))
+assert r.get('status')=='READY_FOR_WORDPRESS_DRAFT_IMPORT', r
+assert r.get('pserc_metadata_binding')=='PASS'
+assert r.get('endstempel')=='PASS'
+assert r.get('wordpress_file_verify')=='PASS'
+assert r.get('publish_allowed') is False
+print('K10_GENERIC_REAL_PRODUCTION_PASS')
+PY
+
+      - name: Upload verified WordPress result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k10-production-${{ github.run_id }}
+          path: /tmp/k10-production
+          if-no-files-found: error
+          retention-days: 30

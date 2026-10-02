@@ -1,5 +1,5 @@
 from __future__ import annotations
-import base64, copy, hashlib, json, os, re, sys
+import base64, copy, hashlib, json, os, re, sys, unicodedata
 from pathlib import Path
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
@@ -56,8 +56,17 @@ def load_private():
     if not isinstance(key,Ed25519PrivateKey): raise Blocked('ENDSTEMPEL_PRIVATE_KEY_NOT_ED25519')
     return key
 
+def slug_from_title(title):
+    value=str(title or '').strip().lower()
+    value=value.translate(str.maketrans({'ä':'ae','ö':'oe','ü':'ue','ß':'ss'}))
+    value=unicodedata.normalize('NFKD',value).encode('ascii','ignore').decode('ascii')
+    value=re.sub(r'[^a-z0-9]+','-',value).strip('-')
+    if not value:
+        raise Blocked('WORDPRESS_SLUG_EMPTY')
+    return value
+
 def build_wordpress(article,plan_slot):
-    slug='wie-lege-ich-einen-longiergurt-an'
+    slug=slug_from_title(article['title'])
     row={'article_id':article['article_id'],'plan_slot':plan_slot,'title':article['title'],'slug':slug,'target_keyword':article['target_keyword'],'category':article['wordpress_category']['slug'],'article_type':article['article_type'],'body':article['html']}
     if any(not str(row[k]).strip() for k in row): raise Blocked('WORDPRESS_FIELD_EMPTY')
     return {'contract':'PFERDE_ATELIER_WORDPRESS_IMPORT_V1','source':'K10_REAL_PROOF','article_count':1,'publish_allowed':False,'articles':[row]}

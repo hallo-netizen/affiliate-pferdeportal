@@ -18,6 +18,8 @@ from engine.package_adapters import make_package_receipts, make_pre_wordpress_pa
 from engine.ppm_parity_guard import verify as ppm_parity_verify
 from engine.core import hard_rules
 from engine.package_adapters import PACKAGE_RESULT_MAP
+from engine.real_proof import slug_from_title
+from engine.production_entry import validate as validate_production_entry, Blocked as ProductionEntryBlocked
 
 
 def words(prefix,n):
@@ -160,6 +162,39 @@ class K10Tests(unittest.TestCase):
             with mock.patch.object(lt68,'sha_file',return_value=lt68.JAR_SHA256), mock.patch.object(lt68,'_invoke',return_value=raw):
                 with self.assertRaises(lt68.Blocked):
                     lt68.run_many(jar,[p1,p2])
+
+    def test_wordpress_slug_is_derived_from_current_title(self):
+        self.assertEqual(slug_from_title('Kann man mit Kappzaum spazieren gehen?'),'kann-man-mit-kappzaum-spazieren-gehen')
+        self.assertEqual(slug_from_title('Wie oft muss ein Pferdeanhänger zum TÜV?'),'wie-oft-muss-ein-pferdeanhaenger-zum-tuev')
+
+    def test_wordpress_slug_is_not_historical_constant(self):
+        self.assertEqual(slug_from_title('Passende Kühlgamaschen für Pferde wählen'),'passende-kuehlgamaschen-fuer-pferde-waehlen')
+        self.assertNotEqual(slug_from_title('Passende Kühlgamaschen für Pferde wählen'),'wie-lege-ich-einen-longiergurt-an')
+
+    def test_generic_production_entry_positive_and_missing_research_negative(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            item={'article_type':'FAQ','category':'training','plan_slot':'A1','target_keyword':'Was ist eine Longierpeitsche','title':'Was ist eine Longierpeitsche?'}
+            intake={'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE','item_count':1,'maximum_articles':0,'maximum_articles_per_type':0,'publish_allowed':False,'content_or_format_payload_present':False,'items':[item]}
+            intake['batch_sha256']=hashlib.sha256(json.dumps(intake,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            a=make_base(); a['article_id']='A1'; a['planning_binding']={**item,'source_ref':'main:concept_agent/current/PSERC_METADATA_SNAPSHOT.json'}; a['publish_allowed']=False
+            claims=[]
+            sources=[]
+            for idx,(fid,cl) in enumerate(a['research_claims'].items(),1):
+                url=f'https://example.org/source-{idx}'
+                cl['source_url']=url
+                claims.append({'fact_id':fid,**cl})
+                sources.append({'source_id':f'S{idx}','title':cl['source_title'],'url':url})
+            research={'contract':'K10_REAL_RESEARCH_V1','article_id':'A1','topic':a['title'],'retrieved_at':'2026-10-02','sources':sources,'claims':claims,'publish_allowed':False}
+            pserc={'system_boundary':{'publish_allowed':False},'next_textmachine_metadata_batch':{'items':[item]}}
+            for name,obj in [('WORDPRESS_INTAKE.json',intake),('RESEARCH.json',research),('ARTICLE_INPUT.json',a),('pserc.json',pserc)]:
+                (root/name).write_text(json.dumps(obj,ensure_ascii=False),encoding='utf-8')
+            report=validate_production_entry(root,root/'pserc.json')
+            self.assertEqual(report['status'],'READY_FOR_K10_PREFLIGHT',report)
+            (root/'RESEARCH.json').unlink()
+            with self.assertRaises(FileNotFoundError):
+                validate_production_entry(root,root/'pserc.json')
 
     def test_field_inventory_is_complete(self):
         r=field_audit(); self.assertEqual(r['status'],'PASS',r); self.assertEqual(r['total'],151); self.assertEqual(r['bad'],[])
