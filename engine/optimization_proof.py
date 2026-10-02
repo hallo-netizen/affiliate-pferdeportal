@@ -1,6 +1,8 @@
 from __future__ import annotations
 from . import real_proof as rp
 
+# Uses the canonical System4 WordPress exporter.
+
 if __name__=='__main__':
     try:
         rp.main()
