@@ -299,6 +299,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (!class_exists("Pferdeportal_Affiliate_Router") || Pferdeportal_Affiliate_Router::VERSION !== "6.72.174") { exit(2); } echo "AF077_PLUGIN_ACTIVE_PASS\n";' --path=/tmp/wp-site
           cat >/tmp/af077-common.php <<'PHP'
           <?php
           function af077_router_portal(){
