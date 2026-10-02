@@ -22,7 +22,12 @@
     "Satteldecke",
     "Dressursattel",
     "Springsattel",
-    "Widerrist"
+    "Widerrist",
+    "Steppungen",
+    "Widerristfreiheit",
+    "Strupfenschlaufen",
+    "Pausche",
+    "Sattelnah"
   ],
   "production_context": {
     "fact_pack": {
@@ -48,6 +53,6 @@
       }
     }
   },
-  "revision_count": 3,
+  "revision_count": 4,
   "publish_allowed": false
 }
