@@ -955,3 +955,27 @@ Explizit verboten:
 - Pferdeatelier-Frontendklassen als allgemeine K0-Regeln übernehmen.
 
 K0 wurde bei dieser Entscheidung nicht verändert.
+
+
+## Kritische Tabellenprüfung an den letzten drei FAQ-Texten – 2026-10-02
+
+Die Texte bleiben unverändert.
+
+Befund:
+Die technische Tabellenprüfung ist nicht zu streng beim Zulassen einer guten Tabelle. Die Auswahlentscheidung war jedoch zu stark in Richtung OMIT verzerrt, weil INCLUDE viele Qualitätsanforderungen erfüllen muss, während OMIT bislang mit einer kurzen Begründung bestehen konnte.
+
+Einzelprüfung:
+- Mash/Magenprobleme: OMIT ist fachlich vertretbar, aber zu konservativ. Eine kompakte Entscheidungsmatrix aus Raufutter, Stärke/Zucker, Portionierung und Beschwerdebild hätte realen Scan-/Entscheidungswert erzeugen können.
+- Sperrriemen sinnvoll/verzichten: OMIT ist ebenfalls zu konservativ. Funktion, Passform, Pferdereaktion und Druckzeichen eignen sich für eine echte Gegenüberstellung; eine Tabelle hätte Entscheidungskompression geliefert.
+- Sperrriemen richtig verschnallen: OMIT bleibt überzeugend. Der Inhalt ist überwiegend Lage-/Weite-/Kontrollablauf und die vorhandene Checkliste bietet bereits nahezu denselben Scan-Nutzen.
+
+Schluss:
+0/3 Tabellen ist bei genau diesen drei Texten ein Hinweis auf einen Selection-Bias, nicht auf einen Fehler der Tabellenformat-Regeln.
+
+Korrektur für zukünftige Artikel:
+- keine Tabellenquote;
+- vorhandene Fakten dürfen durch relationale Verdichtung echten Tabellenmehrwert erzeugen;
+- „steht schon im Fließtext“ reicht nicht mehr als Entscheidungsprinzip;
+- vor OMIT wird ein 4×3-Kandidat auf echten Vergleichs-/Entscheidungs-/Kontrollnutzen geprüft;
+- lineare Inhalte, gleichwertige Checklisten, Fülltext oder Nuancenverlust sprechen weiter für OMIT;
+- bestehende fertige drei Artikel werden nicht verändert.

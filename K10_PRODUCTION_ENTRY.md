@@ -66,3 +66,21 @@ Diese Bindung ist absichtlich **nicht portabel**:
 - keine automatische Vererbung der Pferdeatelier-HTML-Klassen an andere Portale.
 
 Eine spätere zentrale Textmaschine darf eigene Portalprofile definieren, aber **dieser konkrete K10-Fix bleibt in K10**.
+
+
+## KRITISCHER TABLE-CANDIDATE-TEST
+Für FAQ, Beratung und Pflege ist die Tabelle optional. Die Entscheidung muss in beide Richtungen gleich streng sein.
+
+Nicht zulässig als alleinige OMIT-Begründung:
+`Die Aussagen stehen bereits im Fließtext.`
+
+Vor dem Weglassen prüfen:
+1. Gibt es mindestens vier eigenständige Kriterien/Prüfpunkte?
+2. Lassen sie sich in mindestens drei sinnvollen Spalten relational darstellen?
+3. Wird dadurch Vergleich, Entscheidung oder Kontrolle schneller erfassbar?
+4. Funktioniert das ohne Fülltext und ohne fachliche Vereinfachung?
+
+Wenn 1–3 klar ja und 4 ebenfalls ja: Tabelle ist echter Mehrwert, auch wenn die zugrunde liegenden Fakten bereits im Text stehen.
+Wenn der Inhalt linear ist oder eine Liste denselben Nutzen bereits gleich gut erfüllt: Tabelle weglassen.
+
+Die bestehende Kompaktheitsregel für Kopfzeile/linke Spalte und das Verbot von Fließtext in Tabellen bleiben unverändert.

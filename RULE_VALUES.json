@@ -308,6 +308,35 @@
       "omit_value": "OMIT_NO_ADDED_VALUE",
       "include_value": "INCLUDE_ADDED_VALUE",
       "rationale_minimum_chars": 12
+    },
+    "selection_guidance": {
+      "mode": "NEUTRAL_NO_TABLE_QUOTA",
+      "added_value_includes": [
+        "SIDE_BY_SIDE_COMPARISON",
+        "DECISION_COMPRESSION",
+        "QUICK_CHECK_MATRIX",
+        "RELATION_BETWEEN_CRITERION_AND_CONSEQUENCE"
+      ],
+      "added_value_does_not_require_new_facts": true,
+      "omission_must_not_be_based_only_on": "FACTS_ALREADY_EXIST_IN_PROSE",
+      "candidate_test": {
+        "minimum_meaningful_rows": 4,
+        "minimum_meaningful_columns": 3,
+        "require_independent_row_meaning": true,
+        "filler_forbidden": true,
+        "oversimplification_forbidden": true
+      },
+      "omit_when": [
+        "CONTENT_IS_PRIMARILY_LINEAR_OR_SEQUENTIAL",
+        "EXISTING_LIST_OR_CHECKLIST_PROVIDES_EQUIVALENT_SCAN_VALUE",
+        "MEANINGFUL_4_BY_3_MATRIX_WOULD_REQUIRE_FILLER",
+        "TABLE_WOULD_OVERSIMPLIFY_IMPORTANT_NUANCE"
+      ],
+      "include_when": [
+        "COMPACT_MATRIX_CREATES_REAL_SIDE_BY_SIDE_VALUE",
+        "READER_CAN_DECIDE_OR_CHECK_FASTER_THAN_IN_PROSE",
+        "RELATIONSHIP_BETWEEN_MULTIPLE_CRITERIA_AND_OUTCOMES_BECOMES_CLEARER"
+      ]
     }
   },
   "types": {
