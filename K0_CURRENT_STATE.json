@@ -3,14 +3,14 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "REWRITE16_CANONICAL_WRITER_PATH_COMPLETE_BATCH_PENDING",
+  "status": "REWRITE16_FINAL_BATCH_BLOCKED_ITEM14_DESIGN_CLASS",
   "first_open_blocker": {
-    "code": "REWRITE16_FINAL_BATCH_NOT_YET_BUILT",
-    "item_index": null,
-    "title": "Finale 16er-WordPress-Datei",
-    "detail": "All 16 canonical WORDPRESS_SINGLE.json outputs are complete and verified individually. The final combined WordPress batch has not yet been freshly assembled and batch-verified."
+    "code": "REWRITE16_ITEM_14_BATCH_CANONICAL_TABLE_CLASS_MISSING",
+    "item_index": 14,
+    "title": "Wie oft muss ein Pferdeanhänger zum TÜV?",
+    "detail": "Fresh wordpress_batch_export validation found that item 14 is the only single whose table root lacks the required comparison-table class. The existing item-14 WORDPRESS_SINGLE is individually verified but is not eligible for the final batch. It must not be edited directly; item 14 must be re-authored through the canonical K0 route."
   },
-  "next_action": "ASSEMBLE_AND_VERIFY_FRESH_CANONICAL_REWRITE16_WORDPRESS_BATCH",
+  "next_action": "REAUTHOR_ITEM_14_SEQUENTIALLY_THROUGH_CANONICAL_K0_PATH_FOR_BATCH_VALID_TABLE_BINDING",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -35,7 +35,7 @@
   },
   "rewrite16": {
     "total": 16,
-    "canonical_wordpress_single_complete_count": 16,
+    "canonical_wordpress_single_complete_count": 15,
     "complete_indices": [
       0,
       1,
@@ -51,10 +51,11 @@
       11,
       12,
       13,
-      14,
       15
     ],
-    "remaining_indices": [],
+    "remaining_indices": [
+      14
+    ],
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3"
@@ -67,7 +68,7 @@
     "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "ITEM14_CANONICAL_WORDPRESS_SINGLE_PASS; ALL_16_SINGLES_COMPLETE; FINAL_BATCH_PENDING"
+    "delta_result": "FINAL_BATCH_VALIDATION_BLOCKED_ONLY_ON_ITEM14_TABLE_COMPARISON_CLASS; DIRECT_WORDPRESS_EDIT_FORBIDDEN; CANONICAL_REAUTHOR_REQUIRED"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
