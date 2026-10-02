@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzbewaesserung-faq",
+    "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+    "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+    "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "OTTO-Ebbe&Flut Reitplatzbau",
+          "source_url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+      "topic": "Ist eine Reitplatzbewässerung von unten möglich?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzbewaesserung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
