@@ -65,6 +65,13 @@ jobs:
           pathlib.Path('/tmp/K0_AUTHORING_CONTEXT_BOUND.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
           print(x['run_instance_id'])
           PY
+          python3 -m engine.k0_product_property_research bind /tmp/K0_AUTHORING_CONTEXT_BOUND.json K0_PRODUCT_PROPERTY_STORE.json /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json > /tmp/k0-property-research.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-property-research.json'))
+          assert x['status'] in {'PASS','NOT_REQUIRED'},x
+          print('K0_PROPERTY_RESEARCH_'+x['status'])
+          PY
           python3 -m engine.k0_writer_station prepare "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-portal.json /tmp/K0_AUTHORING_CONTEXT_BOUND.json /tmp/WRITER_JOB.json
           python3 - <<'PY'
           import json,os
@@ -80,8 +87,11 @@ jobs:
         run: |
           set -euo pipefail
           cp /tmp/WRITER_JOB.json "$RUN_DIR/WRITER_JOB.json"
+          if ! cmp -s K0_PRODUCT_PROPERTY_STORE.json /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json; then
+            cp /tmp/K0_PRODUCT_PROPERTY_STORE_NEXT.json K0_PRODUCT_PROPERTY_STORE.json
+          fi
           git config user.name 'k0-authoring-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add "$RUN_DIR/WRITER_JOB.json"
+          git add "$RUN_DIR/WRITER_JOB.json" K0_PRODUCT_PROPERTY_STORE.json
           git commit -m "K0: prepare canonical writer job"
           git push
