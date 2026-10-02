@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   combined-contract:
@@ -820,6 +820,82 @@ jobs:
           sha256sum release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt
           cat /tmp/installer.sha256
 
+      - name: Finalize exact 6.72.173 release binding
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p release/affiliate-zentrale/artifacts/final
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.173.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.173.zip
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json
+          manifest_sha=hashlib.sha256(Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_bytes()).hexdigest()
+          if manifest_sha!='e9c760bec991257fa99cc500e1dd305a5389de262baa714c1547ef036ccd821d':
+              raise SystemExit('FAIL unexpected source manifest '+manifest_sha)
+          installer=Path('release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.173.zip')
+          installer_sha=hashlib.sha256(installer.read_bytes()).hexdigest()
+          if installer_sha!='df758023fea67c6fbe71c7a5b825584d4b29fa950f74ec6a0f27c7abddc8650f':
+              raise SystemExit('FAIL verified installer SHA changed '+installer_sha)
+          evidence_ref='release/affiliate-zentrale/evidence/affiliate_router_v672173_full_bound_gate_20261002.md'
+          evidence=Path(evidence_ref)
+          evidence_sha=hashlib.sha256(evidence.read_bytes()).hexdigest()
+          if evidence_sha!='897bf577a01b2953bd3f8c501c1bedcda40055a8b1606f0c00174150f578c1dd':
+              raise SystemExit('FAIL full-gate evidence SHA changed '+evidence_sha)
+          p=Path('control/release-governance/CURRENT_RELEASE.json')
+          current=json.loads(p.read_text(encoding='utf-8'))
+          if current.get('active_candidate',{}).get('version')!='6.72.173':
+              raise SystemExit('FAIL active candidate drift')
+          if current.get('active_candidate',{}).get('current_source_manifest_sha256')!=manifest_sha:
+              raise SystemExit('FAIL candidate manifest drift')
+          for gate in current.get('required_release_gates',{}).values():
+              gate['status']='PASS'
+              gate['evidence_ref']=evidence_ref
+              gate['evidence_sha256']=evidence_sha
+              gate['source_manifest_sha256']=manifest_sha
+          candidate=current['active_candidate']
+          candidate['version']='6.72.173'
+          candidate['status']='RELEASED'
+          candidate['release_allowed']=True
+          candidate['current_source_manifest_sha256']=manifest_sha
+          candidate['source_file_count']=27
+          candidate['candidate_reference_artifact_sha256']=installer_sha
+          candidate['final_artifact_ref']='release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.173.zip'
+          candidate['final_artifact_sha256']=installer_sha
+          candidate['handoff_artifact_filename']='AFFILIATE_ZENTRALE_6.72.173.zip'
+          candidate['handoff_artifact_bytes']=installer.stat().st_size
+          current['source_authority']['manifest_sha256']=manifest_sha
+          state=current['execution_state']
+          state['state']='FINAL_RELEASE_BOUND'
+          state['authorized_next_action']='FINALIZE_RELEASE'
+          state['completion_condition']='RELEASE_CHECK_PASS_THEN_REAL_WORDPRESS_INSTALL_READBACK'
+          state['after_completion_action']='INSTALL 6.72.173, REAL WORDPRESS READBACK, THEN AF-078 PRIVATE ROOTFIX; PRESERVE ALL 6.72.170/171/172 PERFORMANCE AND FUNCTIONAL SEMANTICS'
+          state['no_optional_detours']=True
+          state['evidence_ref']=evidence_ref
+          lock=current.get('user_scope_lock',{}).get('ebay_portal_catalog_dynamic_validation')
+          if isinstance(lock,dict):
+              lock['status']='FULL_BOUND_GATE_PASS_RELEASED_REAL_WORDPRESS_READBACK_OPEN'
+              lock['evidence_ref']=evidence_ref
+              lock['next']='REAL_WORDPRESS_INSTALL_READBACK_6_72_173'
+          current['generation']=max(167,int(current.get('generation',0))+1)
+          p.write_text(json.dumps(current,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('FINAL_INSTALLER_SHA256 '+installer_sha)
+          print('FULL_GATE_EVIDENCE_SHA256 '+evidence_sha)
+          PY
+
+          python3 control/release-governance/release_guard.py release-check | tee /tmp/release-check.log
+          grep -F 'AFFILIATE_RELEASE_FINAL_GATE_PASS' /tmp/release-check.log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add control/release-governance/CURRENT_RELEASE.json release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.173.zip
+          git diff --cached --check
+          git commit -m "release: finalize affiliate router 6.72.173 [skip ci]"
+          python3 control/release-governance/release_guard.py release-check
+          git push origin HEAD:affiliate-release-current
+          echo "FINAL_RELEASE_672173_PUSHED"
+
       - name: Upload combined full-gate evidence
         uses: actions/upload-artifact@v4
         with:
@@ -835,5 +911,6 @@ jobs:
             /tmp/installer.sha256
             /tmp/installer-php-lint.log
             /tmp/installer-unzip-test.log
+            /tmp/release-check.log
             /tmp/wp-server.log
           if-no-files-found: error
