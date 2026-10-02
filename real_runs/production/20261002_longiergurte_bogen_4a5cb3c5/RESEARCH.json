@@ -1,0 +1,108 @@
+{
+  "contract": "K10_REAL_RESEARCH_V1",
+  "article_id": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+  "topic": "Longiergurte mit Bogen im Ratgeber",
+  "retrieved_at": "2026-10-02",
+  "sources": [
+    {
+      "source_id": "S1",
+      "title": "IPZV e.V. – Longierabzeichen II",
+      "url": "https://www.ipzv.de/asset/CEC152C4-CFD2-4C7F-82FFA850F99D8060/"
+    },
+    {
+      "source_id": "S2",
+      "title": "Passier – Horst Becker Longiergurt",
+      "url": "https://www.passier.com/de/Horst-Becker-Longiergurt~p166151"
+    },
+    {
+      "source_id": "S3",
+      "title": "Kavalkade – Longieren mit Longiergurt: Worauf es bei der Auswahl ankommt",
+      "url": "https://kavalkade.de/blog/longieren-mit-longiergurt/"
+    },
+    {
+      "source_id": "S4",
+      "title": "Equimero – Longiergurt",
+      "url": "https://www.equimero.de/produkt/longiergurt/"
+    },
+    {
+      "source_id": "S5",
+      "title": "Krämer Pferdesport – Longiergurte",
+      "url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte"
+    }
+  ],
+  "claims": [
+    {
+      "fact_id": "F1",
+      "source_title": "IPZV e.V. – Longierabzeichen II",
+      "source_url": "https://www.ipzv.de/asset/CEC152C4-CFD2-4C7F-82FFA850F99D8060/",
+      "statement": "Der IPZV nennt als Kriterien für einen guten Longiergurt stabiles, leicht zu reinigendes Material, eine breite Auflage möglichst mit Widerristaussparung, passend angebrachte stabile Ringe und einen Bauchgurt mit mittigem Ring.",
+      "evidence_text": "Der IPZV führt bei einem guten Longiergurt stabiles und pflegeleichtes Material, eine breite Auflage mit möglichst freiem Widerrist, stabile Ringe für variable Verschnallungen und einen mittigen Ring am Bauchgurt als Auswahlkriterien auf.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ],
+      "evidence_text_sha256": "c47e61391670e0fd97131fa5b56cf792656161259e365d82348c078464d74e74"
+    },
+    {
+      "fact_id": "F2",
+      "source_title": "Passier – Horst Becker Longiergurt",
+      "source_url": "https://www.passier.com/de/Horst-Becker-Longiergurt~p166151",
+      "statement": "Passier beschreibt bei seinem Horst-Becker-Longiergurt ein flexibles Bügelsystem über dem Widerrist, das die Dornfortsätze frei lässt; außerdem besitzt das Modell fünf Ringe auf jeder Seite.",
+      "evidence_text": "Passier nennt ein flexibles Bügelsystem oberhalb des Widerrists zur Freihaltung der Dornfortsätze und fünf seitliche Ringe je Gurtseite.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ],
+      "evidence_text_sha256": "cb69757549785de51893f4e63ece81d488c13885f55c27cd59676af9c0a05950"
+    },
+    {
+      "fact_id": "F3",
+      "source_title": "Kavalkade – Longieren mit Longiergurt: Worauf es bei der Auswahl ankommt",
+      "source_url": "https://kavalkade.de/blog/longieren-mit-longiergurt/",
+      "statement": "Kavalkade beschreibt den Bügel-Longiergurt als Konstruktion, bei der ein flexibler Bügel den Gurt von der Wirbelsäule abhebt; zusätzlich nennt der Hersteller Wollpauschen, mehrere große Ringe und einen beweglichen Ring für eine tiefe Verschnallung.",
+      "evidence_text": "Beim Kavalkade-Bügelgurt hebt ein flexibler Bügel den Gurt von der Wirbelsäule ab; das Modell kombiniert diese Bauweise mit Wollpauschen, mehreren großen Ringen und einem beweglichen Ring für tiefe Verschnallungen.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ],
+      "evidence_text_sha256": "6ebc7821aaf1ad5b7da44a6aef60284201c36e3a63f32cbd1bb3fdb813ada9e0"
+    },
+    {
+      "fact_id": "F4",
+      "source_title": "Equimero – Longiergurt",
+      "source_url": "https://www.equimero.de/produkt/longiergurt/",
+      "statement": "Equimero verwendet bei seinem Longiergurt zwei unterschiedlich ausgelegte Carbonbögen: Der vordere ist flexibler, der hintere stabiler; zusätzlich sind austauschbare Filzpolster in unterschiedlichen Stärken vorgesehen.",
+      "evidence_text": "Equimero beschreibt einen flexibleren vorderen und einen stabileren hinteren Carbonbogen sowie austauschbare Filzpolster in mehreren Stärken, um die Auflage an unterschiedliche Widerristformen anzupassen.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ],
+      "evidence_text_sha256": "5e365270ecd42aee9fd05e9aa0d1aa14ff26819e46972dff6deab3e917a4a58a"
+    },
+    {
+      "fact_id": "F5",
+      "source_title": "Krämer Pferdesport – Longiergurte",
+      "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+      "statement": "Krämer betont bei der Auswahl die Passform: Ein Longiergurt soll nicht auf oder gegen den Widerrist drücken, die Brücke zwischen seitlichen Polstern sollte ausreichend flexibel sein, und ausreichend Ringe erweitern die Verschnallmöglichkeiten.",
+      "evidence_text": "Krämer stellt die Passform über das Material: Der Gurt soll den Widerrist frei lassen, die Verbindung zwischen Polstern ausreichend flexibel sein und genügend seitliche Ringe für unterschiedliche Verschnallungen bieten.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ],
+      "evidence_text_sha256": "71799eeb7007a39b0f5e36865f1c9d97707f574a397afc60c74c402dcf02d805"
+    },
+    {
+      "fact_id": "F6",
+      "source_title": "Krämer Pferdesport – Longiergurte",
+      "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+      "statement": "Krämer weist darauf hin, dass sowohl Leder- als auch Nylongurte passend oder unpassend sitzen können; entscheidend sind korrekter Sitz und Stabilität, nicht das Material allein.",
+      "evidence_text": "Krämer erläutert, dass Leder nicht automatisch stabiler oder passender als Nylon ist und dass korrekter Sitz sowie rutschfreie Lage für die Auswahl wichtiger sind als das Material allein.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ],
+      "evidence_text_sha256": "de5484622036c54debda5a75ba653aede8b37572378e0edf373c892330fc49c0"
+    }
+  ],
+  "publish_allowed": false
+}
