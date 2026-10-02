@@ -134,6 +134,24 @@ jobs:
           $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
           $wp_query->the_post();
 
+          $render=new ReflectionMethod($o,'render_affiliate_slot'); $render->setAccessible(true);
+          $direct=$render->invoke($o,$page,'hub_after_cards','primary_product','');
+          $diag=[
+              'enabled'=>get_option('ppar_enabled'),
+              'template_enabled'=>get_option('ppar_template_enabled'),
+              'is_admin'=>is_admin(),
+              'is_feed'=>is_feed(),
+              'is_preview'=>is_preview(),
+              'in_the_loop'=>in_the_loop(),
+              'is_main_query'=>is_main_query(),
+              'is_singular_page'=>is_singular('page'),
+              'is_front_page'=>is_front_page(),
+              'get_the_ID'=>get_the_ID(),
+              'design_type'=>Pferde_Template_Kit::affiliate_page_type($page),
+              'direct_has_slot'=>strpos((string)$direct,'data-ppar-slot="hub_after_cards"')!==false,
+          ];
+          echo 'AUTO_INJECT_PRECONDITION_DIAG '.wp_json_encode($diag)."\n";
+
           $m=new ReflectionMethod($o,'auto_inject_template_affiliate_slots');
           $m->setAccessible(true);
           $input='<div class="pftk-hub2">ECHTES HUB2 DESIGN</div>';
