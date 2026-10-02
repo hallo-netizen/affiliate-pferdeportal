@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .k0_portal_resolver import validate_intake
 from .writer_contract_guard import POLICY, inspect_html, stable, sha_text, verify_package
+from .k0_product_property_research import ARTICLE_TYPE as PROPERTY_WINNER_TYPE, validate_packet as validate_property_packet, Blocked as PropertyResearchBlocked
 
 JOB_CONTRACT='K0_WRITER_JOB_V1'
 DRAFT_CONTRACT='K0_WRITER_DRAFT_V1'
@@ -46,6 +47,13 @@ def _job_core(intake, portal, ctx):
     pc=ctx.get('production_context')
     if not isinstance(pc,dict) or not isinstance(pc.get('fact_pack'),dict) or not isinstance(pc.get('production_plan_item'),dict):
         raise Blocked('K0_AUTHORING_CONTEXT_RESEARCH_MISSING')
+    if ident.get('article_type')==PROPERTY_WINNER_TYPE:
+        try:
+            property_result=validate_property_packet(ident,pc.get('property_research'))
+        except PropertyResearchBlocked as exc:
+            raise Blocked('K0_PROPERTY_RESEARCH_BLOCKED:'+str(exc)) from exc
+        if str(cp.get('search_intent') or '')!=property_result.get('search_intent'):
+            raise Blocked('K0_PROPERTY_RESEARCH_INTENT_MISMATCH')
     return {
       'contract':JOB_CONTRACT,
       'status':'OPEN',
