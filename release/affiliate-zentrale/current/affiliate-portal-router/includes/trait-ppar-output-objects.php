@@ -948,7 +948,7 @@ trait PPAR_Output_Objects_Trait {
 
             $specific_tokens = $this->output_tokens($specific);
             $destination_tokens = $this->output_tokens($this->output_destination_semantic_text($row));
-            $strong_target_keys = array();
+            $strong_target_evidence = array();
             foreach ((array) $targets as $candidate_target) {
                 if (!is_array($candidate_target)) { continue; }
                 $candidate_type = sanitize_key((string) ($candidate_target['type'] ?? ''));
@@ -960,13 +960,14 @@ trait PPAR_Output_Objects_Trait {
                     if (is_wp_error($candidate_gate)) { continue; }
                 }
 
-                $strong = false;
+                $destination_exact = false;
+                $leaf_hit = false;
                 $slug_norm = $this->output_text(str_replace(array('-','_'),' ',(string)($candidate_target['slug'] ?? '')));
                 $slug_tokens = $this->output_tokens($slug_norm);
                 if ($destination_tokens && $slug_tokens && !array_diff($slug_tokens, $destination_tokens)) {
-                    $strong = true;
+                    $destination_exact = true;
                 }
-                if (!$strong && $specific_tokens) {
+                if ($specific_tokens) {
                     $label_parts = preg_split('/\s+>\s+/', (string) ($candidate_target['label'] ?? ''));
                     $leaf_norm = $this->output_text($label_parts ? end($label_parts) : (string) ($candidate_target['label'] ?? ''));
                     $leaf_tokens = $this->output_tokens($leaf_norm);
@@ -974,19 +975,40 @@ trait PPAR_Output_Objects_Trait {
                         foreach ($leaf_tokens as $target_token) {
                             if (strlen($source_token) >= 7 && strlen($target_token) >= 7
                                 && (strpos($source_token, $target_token) !== false || strpos($target_token, $source_token) !== false)) {
-                                $strong = true;
+                                $leaf_hit = true;
                                 break 2;
                             }
                         }
                     }
                 }
-                if ($strong) {
-                    $strong_target_keys[$candidate_key] = true;
+                if (!$destination_exact && !$leaf_hit) { continue; }
+                $evidence_score = ($destination_exact ? 1000 : 0) + ($leaf_hit ? 300 : 0);
+                // A canonical product/page edge may beat derivative FAQ/advice
+                // targets only when the external destination itself confirms
+                // the page slug. Pure word similarity never gets this bonus.
+                if ($destination_exact && $candidate_type === 'page') {
+                    $evidence_score += 100;
                 }
+                $strong_target_evidence[$candidate_key] = max(
+                    absint($strong_target_evidence[$candidate_key] ?? 0),
+                    $evidence_score
+                );
             }
-            if (count($strong_target_keys) === 1) {
-                $real_target_evidence_key = (string) array_key_first($strong_target_keys);
-                $specific_has_domain = true;
+            if ($strong_target_evidence) {
+                arsort($strong_target_evidence, SORT_NUMERIC);
+                $evidence_keys = array_keys($strong_target_evidence);
+                $best_key = (string) ($evidence_keys[0] ?? '');
+                $best_score = absint($strong_target_evidence[$best_key] ?? 0);
+                $second_score = isset($evidence_keys[1]) ? absint($strong_target_evidence[$evidence_keys[1]] ?? 0) : 0;
+                // Preserve the 6.72.174 single-real-target behavior. With several
+                // related portal targets, require materially stronger exact
+                // destination evidence instead of arbitrary first-match choice.
+                $unique_single = count($strong_target_evidence) === 1;
+                $clear_destination_winner = $best_score >= 1000 && ($best_score - $second_score) >= 400;
+                if ($best_key !== '' && ($unique_single || $clear_destination_winner)) {
+                    $real_target_evidence_key = $best_key;
+                    $specific_has_domain = true;
+                }
             }
         }
         if (!$specific_has_domain && $manual_status !== 'approved') {
