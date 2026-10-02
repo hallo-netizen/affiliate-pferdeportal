@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.178
+ * Version: 6.72.179
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -116,7 +116,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.178';
+    const VERSION = '6.72.179';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -316,9 +316,9 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'maybe_restore_v67294_banner_state'), 26);
         add_action('init', array($this, 'maybe_restore_published_banner_campaign_consistency_v672100'), 27);
         add_action('init', array($this, 'ensure_full_pool_automation'), 29);
-        // V6.72.178: Repair stale page-banner bindings through the canonical
+        // V6.72.179: Repair stale page-banner bindings through the canonical
         // target-identity resolver. Admin-only and one-time: no frontend cost.
-        add_action('admin_init', array($this, 'maybe_repair_v672178_page_banner_target_identity_mismatch'), 32);
+        add_action('admin_init', array($this, 'maybe_repair_v672179_page_banner_target_identity_mismatch'), 32);
         add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30);
         add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31);
         add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
@@ -949,14 +949,14 @@ JS;
     }
 
     /**
-     * V6.72.178 – ursächlicher Replan für widersprüchliche Seitenziel-Identitäten.
+     * V6.72.179 – ursächlicher Replan für widersprüchliche Seitenziel-Identitäten.
      * Historische Ausgabeobjekte verwenden page:<ID>; Kampagnen/Automation
      * verwenden page:<slug>. Beide Formen werden über das reale WordPress-Ziel
      * aufgelöst. Gilt für alle category/leaf-Seiten, nicht für einen einzelnen Slug.
      */
-    public function maybe_repair_v672178_page_banner_target_identity_mismatch() {
+    public function maybe_repair_v672179_page_banner_target_identity_mismatch() {
         if (!is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
-        $done_key = 'ppar_v672178_page_banner_target_identity_replan_done';
+        $done_key = 'ppar_v672179_page_banner_target_identity_replan_done';
         if ((string) get_option($done_key, '') === 'done') { return; }
         if (!class_exists('Pferde_Template_Kit')
             || !is_callable(array('Pferde_Template_Kit', 'affiliate_page_type'))
@@ -1019,7 +1019,12 @@ JS;
             ), ARRAY_A);
             $replacement_ok = false;
             foreach ((array)$replacements as $replacement) {
-                if (sanitize_key((string)($replacement['status'] ?? '')) !== 'published' || absint($replacement['campaign_post_id'] ?? 0) <= 0) { continue; }
+                $replacement_campaign_id = absint($replacement['campaign_post_id'] ?? 0);
+                if (sanitize_key((string)($replacement['status'] ?? '')) !== 'published' || $replacement_campaign_id <= 0) { continue; }
+                $replacement_campaign = $this->output_campaign_by_post_id($replacement_campaign_id);
+                if (!is_array($replacement_campaign)
+                    || empty($replacement_campaign['active'])
+                    || absint($replacement_campaign['page_id'] ?? 0) !== $page_id) { continue; }
                 if ($this->output_target_key_matches($real_target, (string)($replacement['target_key'] ?? ''))) { $replacement_ok = true; break; }
             }
             if (!$replacement_ok) { $failed = true; continue; }
@@ -1027,7 +1032,7 @@ JS;
         }
         if (!$failed) {
             update_option($done_key, 'done', false);
-            update_option('ppar_v672178_page_banner_target_identity_replan_result', array('repaired'=>$repaired,'checked'=>$checked,'completed_at'=>time()), false);
+            update_option('ppar_v672179_page_banner_target_identity_replan_result', array('repaired'=>$repaired,'checked'=>$checked,'completed_at'=>time()), false);
         }
     }
 
