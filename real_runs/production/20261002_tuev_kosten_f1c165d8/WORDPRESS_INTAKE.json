@@ -1,0 +1,19 @@
+{
+  "batch_sha256": "d1129467293fa2c657bf2031b81e5c20d0ff7169cdeb5ccdd90370fc2e6cbfad",
+  "content_or_format_payload_present": false,
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "tuev-beim-pferdeanhaenger-faq",
+      "plan_slot": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+      "target_keyword": "Wie teuer ist der TÜV beim Pferdeanhänger",
+      "title": "Wie teuer ist der TÜV beim Pferdeanhänger?"
+    }
+  ],
+  "maximum_articles": 0,
+  "maximum_articles_per_type": 0,
+  "publish_allowed": false,
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE"
+}

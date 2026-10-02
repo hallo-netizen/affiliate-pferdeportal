@@ -1,0 +1,98 @@
+{
+  "contract": "K10_REAL_RESEARCH_V1",
+  "article_id": "f1c165d83a4d24d1c3ab7fe632f9e97c1f0898a8b67a2e5253a842ba46cd456b",
+  "topic": "Wie teuer ist der TÜV beim Pferdeanhänger?",
+  "retrieved_at": "2026-10-02",
+  "sources": [
+    {
+      "source_id": "S1",
+      "title": "ADAC – Kosten Hauptuntersuchung: Infos und Preise zum TÜV",
+      "url": "https://www.adac.de/rund-ums-fahrzeug/reparatur-pflege-wartung/hu-und-au/tuev-kosten/"
+    },
+    {
+      "source_id": "S2",
+      "title": "TÜV SÜD – TÜV-Kosten/-Gebühren für HU und AU 2026",
+      "url": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren"
+    },
+    {
+      "source_id": "S3",
+      "title": "Gesetze im Internet – Anlage VIII StVZO Untersuchung der Fahrzeuge",
+      "url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    }
+  ],
+  "claims": [
+    {
+      "fact_id": "F1",
+      "source_title": "ADAC – Kosten Hauptuntersuchung: Infos und Preise zum TÜV",
+      "source_url": "https://www.adac.de/rund-ums-fahrzeug/reparatur-pflege-wartung/hu-und-au/tuev-kosten/",
+      "statement": "Die Kosten der Hauptuntersuchung unterscheiden sich regional; größere und schwerere Fahrzeuge sind grundsätzlich teurer, und die HU wird von TÜV, DEKRA, GTÜ, KÜS und weiteren anerkannten Prüforganisationen angeboten.",
+      "evidence_text": "Der ADAC nennt regionale Preisunterschiede, höhere Kosten bei größeren und schwereren Fahrzeugen und führt TÜV, DEKRA, GTÜ, KÜS sowie weitere amtlich anerkannte Prüforganisationen als Anbieter der Hauptuntersuchung auf.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ],
+      "evidence_text_sha256": "cb1428f6d17665da0f9118a077cc3b39f6bbce4f66bfc922ec9f0d97d6c9edf7"
+    },
+    {
+      "fact_id": "F2",
+      "source_title": "TÜV SÜD – TÜV-Kosten/-Gebühren für HU und AU 2026",
+      "source_url": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren",
+      "statement": "TÜV SÜD nennt für Nordrhein-Westfalen 2026 für Anhänger mit Bremse bis 3,5 Tonnen 68,00 Euro und für Anhänger ohne Bremse 45,90 Euro.",
+      "evidence_text": "In der TÜV-SÜD-Entgelttabelle für Nordrhein-Westfalen 2026 stehen für Anhänger mit Bremse bis 3,5 Tonnen 68,00 Euro und für Anhänger ohne Bremse 45,90 Euro.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ],
+      "evidence_text_sha256": "f68b068cdd40949bd3417e7a8adc36a8284d6134125e0607f1cf0a8f16e7135a"
+    },
+    {
+      "fact_id": "F3",
+      "source_title": "TÜV SÜD – TÜV-Kosten/-Gebühren für HU und AU 2026",
+      "source_url": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren",
+      "statement": "TÜV SÜD nennt für Bayern 2026 für Anhänger bis 3,5 Tonnen 63,30 Euro und für Anhänger ohne Bremse 32,90 Euro.",
+      "evidence_text": "In der TÜV-SÜD-Entgelttabelle für Bayern 2026 stehen für Anhänger bis 3,5 Tonnen 63,30 Euro und für Anhänger ohne Bremse 32,90 Euro.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ],
+      "evidence_text_sha256": "5a381ebf735c0dd74696c1abed735326d344470765721002bcaa3f3320b89449"
+    },
+    {
+      "fact_id": "F4",
+      "source_title": "TÜV SÜD – TÜV-Kosten/-Gebühren für HU und AU 2026",
+      "source_url": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren",
+      "statement": "Wird die Hauptuntersuchung mehr als zwei Monate nach dem Vorführtermin durchgeführt, erhöht TÜV SÜD das reine HU-Entgelt um 20 Prozent.",
+      "evidence_text": "TÜV SÜD erläutert für seine 2026er Entgelte: Wird die Hauptuntersuchung mehr als zwei Monate nach dem Vorführtermin durchgeführt, erhöht sich das reine HU-Entgelt um das 0,2-Fache.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ],
+      "evidence_text_sha256": "1cf88e43f7d862950dac6a6e09c2cb442d3deb94a46023102e3a7fb37cdeca24"
+    },
+    {
+      "fact_id": "F5",
+      "source_title": "Gesetze im Internet – Anlage VIII StVZO Untersuchung der Fahrzeuge",
+      "source_url": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html",
+      "statement": "Anhänger mit einer zulässigen Gesamtmasse über 0,75 Tonnen bis einschließlich 3,5 Tonnen müssen grundsätzlich alle 24 Monate zur Hauptuntersuchung.",
+      "evidence_text": "Anlage VIII StVZO nennt für Anhänger mit einer zulässigen Gesamtmasse über 0,75 Tonnen bis einschließlich 3,5 Tonnen einen Hauptuntersuchungsabstand von 24 Monaten.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ],
+      "evidence_text_sha256": "2fc6a573256524ff0de69a57c0cba8094f6b8c1c5e4cb2197b2d942811b685a2"
+    },
+    {
+      "fact_id": "F6",
+      "source_title": "TÜV SÜD – TÜV-Kosten/-Gebühren für HU und AU 2026",
+      "source_url": "https://www.tuvsud.com/de-de/branchen/mobilitaet-und-automotive/hauptuntersuchung/gebuehren",
+      "statement": "Bei TÜV SÜD sind Prüfplakette, Bericht und Erläuterung der Befunde in der HU-Gebühr enthalten; zusätzliche Entgelte können unter anderem für Reiseaufwand, Datenbeschaffung oder Ergänzungsprüfungen anfallen.",
+      "evidence_text": "TÜV SÜD nennt Prüfplakette, Bericht und Erläuterung der Befunde als in der Gebühr enthalten und weist auf mögliche zusätzliche Gebühren für Reiseaufwendungen, Datenbeschaffung und Ergänzungsprüfungen hin.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "FAQ"
+      ],
+      "evidence_text_sha256": "77e0a7a9c87c3c3adb0ff76712e4c2d5c2f419b5f880391497803536de683b55"
+    }
+  ],
+  "publish_allowed": false
+}
