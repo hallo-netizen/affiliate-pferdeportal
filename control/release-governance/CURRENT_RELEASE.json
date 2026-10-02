@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 177,
+  "generation": 178,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.180",
-    "status": "CANDIDATE_LOCAL_POSNEG_PASS_FULL_GATE_OPEN",
+    "status": "CANDIDATE_LOCAL_POSNEG_PASS_ROOTCAUSE_PROOF_REQUIRED",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "VERSION_ONLY_REPACK_LOCAL_PROOF_6_72_180",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672177_schabracken_real_hierarchy_rootfix_20261002.md",
-    "current_focus_reason": "6.72.176 live Schabracke FAIL. The prior Schabracken acceptance fixture forced slug schabracken to hub2, while the real design hierarchy classifies the real depth-2 page as category. Correct wide slot is product_after_category_tiles. Fix only an exact stale published page:schabracken hub_after_cards materialization through the existing authoritative planner; preserve eBay 6.72.176 payload behavior and all earlier performance/function hardlocks.",
+    "current_focus": "BANNER_ASSIGNMENT_CONCEPT_ROOTCAUSE_READONLY",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_banner_assignment_concept_rootcause_handoff_20261002.md",
+    "current_focus_reason": "User explicitly rejected further Schabracken microfix/release-gate work. Before any additional fix or release action, compare the complete banner-assignment concept end-to-end against at least one known-working real page and prove the first exact divergence. No guessing.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -490,22 +490,43 @@
     },
     "target_identity_real_url_rootfix": {
       "version": "6.72.180",
-      "status": "LOCAL_POSITIVE_NEGATIVE_74_OF_74_PASS_FULL_GATE_OPEN",
+      "status": "LOCAL_POSITIVE_NEGATIVE_74_OF_74_PASS_NOT_RELEASE_PROOF",
       "baseline": "6.72.179_CANDIDATE",
-      "scope": "VERSION_ONLY_REPACK_OF_EXACT_PROVEN_FUNCTIONAL_CODE",
+      "scope": "VERSION_ONLY_REPACK_OF_LOCALLY_TESTED_TARGET_IDENTITY_CODE",
       "performance_hardlock": "NO_ROLLBACK_NO_FUNCTION_CHANGE",
       "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672180_version_only_localproof_20261002.md",
-      "next": "RUN_BOUND_RELEASE_GATES"
+      "interpretation": "LOCAL_DIRECT_METHOD_EVIDENCE_ONLY_NOT_WORDPRESS_MARIADB_FULL_GATE_NOT_LIVE_PROOF"
+    },
+    "banner_assignment_concept_rootcause": {
+      "status": "READ_ONLY_ROOTCAUSE_PROOF_REQUIRED",
+      "failing_case": "SCHABRACKENDESIGNER -> SCHABRACKEN",
+      "required_comparison": "FULL_CHAIN_AGAINST_AT_LEAST_ONE_KNOWN_WORKING_REAL_BANNER_PAGE_PAIR",
+      "chain": [
+        "CREATIVE_SOURCE",
+        "SAFETY_CONTROL_GATES",
+        "TARGET_EVIDENCE_CLASSIFICATION",
+        "REAL_TARGET_IDENTITY",
+        "DESIGN_PAGE_TYPE_CONTEXT",
+        "SLOT_SELECTION",
+        "PERSISTED_OUTPUT_OBJECT",
+        "CAMPAIGN_TARGET_KEYS_PAGE_ID",
+        "RUNTIME_EXACT_TARGET_MATCH",
+        "RENDERER_MOUNT",
+        "FINAL_PUBLIC_HTML"
+      ],
+      "stop_rule": "STOP_AT_FIRST_PROVEN_DIVERGENCE",
+      "fix_rule": "NO_FIX_BEFORE_ROOTCAUSE_PROOF",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_banner_assignment_concept_rootcause_handoff_20261002.md"
     }
   },
   "execution_state": {
-    "state": "LOCAL_POSITIVE_NEGATIVE_PASS_FULL_GATE_OPEN",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Keep the exact 6.72.179 proven functional code and use 6.72.180 as a version-only repack so different install/proof states never share a version number. No functional or performance changes.",
-    "completion_condition": "EXACT_6_72_180_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_FULL_GATE_PASS_THEN_RELEASE_CHECK",
-    "after_completion_action": "IF AND ONLY IF FULL GATE PASSES, INSTALL FINAL 6.72.180 ONCE AND VERIFY MULTIPLE REAL TARGET URLS INCLUDING SCHABRACKEN.",
+    "state": "READ_ONLY_ROOTCAUSE_PROOF_REQUIRED",
+    "authorized_next_action": "COMPARE_WORKING_VS_FAILING_BANNER_ASSIGNMENT_CHAIN",
+    "bound_user_scope_action": "Read-only compare the complete banner-assignment chain for Schabrackendesigner/Schabracken against at least one known-working real banner/page pair. Capture concrete values at every stage and stop at the first proven divergence. No source fix, new version, release gate, installer or live install before this proof.",
+    "completion_condition": "FIRST_EXACT_END_TO_END_DIVERGENCE_PROVEN_AND_RECORDED",
+    "after_completion_action": "FIX_ONLY_THE_FIRST_PROVEN_ROOTCAUSE_THEN_RUN_ONE_BOUND_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_FULL_GATE",
     "no_optional_detours": true,
-    "sequence": 50,
+    "sequence": 51,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -513,7 +534,7 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672180_version_only_localproof_20261002.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_banner_assignment_concept_rootcause_handoff_20261002.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
