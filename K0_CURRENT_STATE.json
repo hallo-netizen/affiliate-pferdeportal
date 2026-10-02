@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "REWRITE16_CANONICAL_WORDPRESS_BATCH_COMPLETE",
+  "status": "REWRITE16_FINAL_CANONICAL_WORDPRESS_BATCH_COMPLETE",
   "first_open_blocker": null,
-  "next_action": "STOP_REWRITE16_COMPLETE",
+  "next_action": "DELIVER_FINAL_CANONICAL_REWRITE16_WORDPRESS_BATCH",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -53,19 +53,20 @@
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
-    "final_wordpress_batch_status": "PASS_READY_FOR_DIRECT_IMPORT",
-    "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_16.json",
-    "final_wordpress_batch_sha256": "fd2aa1d2dc0fe1a993dd00a85be5f52cafa212e8525b8d0f5874fec9b2580e60"
+    "final_wordpress_batch_status": "PASS",
+    "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json",
+    "final_wordpress_batch_sha256": "fd2aa1d2dc0fe1a993dd00a85be5f52cafa212e8525b8d0f5874fec9b2580e60",
+    "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json"
   },
   "freshness": {
     "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
-    "last_checked_branch_head_sha": "c1e202381f7f9999c7ac52206681e202801912f2",
-    "latest_writer_accept_run": 37069333875,
-    "latest_writer_accept_result": "SUCCESS",
+    "last_checked_branch_head_sha": "a48554e0ce9211f4ac466be05bd0a4427a555433",
+    "latest_writer_accept_run": 37069142268,
+    "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
     "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "ALL_16_CANONICAL_SINGLES_COMPLETE; FRESH_16_ARTICLE_WORDPRESS_BATCH_PASS; ITEM14_REAUTHORED_CANONICALLY"
+    "delta_result": "ALL_16_CANONICAL_SINGLES_PASS; FINAL_BATCH_PASS; ITEM14_BATCH_TABLE_CLASS_FIXED_VIA_CANONICAL_REAUTHOR; OLD_INVALIDATED_EXPORT_NOT_REUSED"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
