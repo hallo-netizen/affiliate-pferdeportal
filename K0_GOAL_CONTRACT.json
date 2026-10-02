@@ -12,6 +12,11 @@
     "performance_regression_allowed": false,
     "publish_allowed": false,
     "k9_change_allowed": false,
-    "k10_change_allowed": false
+    "k10_change_allowed": false,
+    "ready_article_input_forbidden": true,
+    "writer_draft_is_only_text_ingress": true,
+    "writer_self_stamping_forbidden": true,
+    "canonical_article_id_required_for_wordpress": true,
+    "wordpress_plugin_binding": "0.28.30-pste-v5-binding-safe"
   }
 }
