@@ -63,10 +63,17 @@ jobs:
           print('K0_PORTAL_AUTO_PASS')
           PY
 
+      - name: Canonical writer quality contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.writer_contract_guard stamp "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-writer-bound.json
+          python3 -m engine.writer_contract_guard verify /tmp/k0-writer-bound.json
+
       - name: K0 structure and PPM 6.7.9 gates
         shell: bash
         run: |
-          python3 -m engine.k0_production_gate "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-portal.json /tmp/k0-gates.json
+          python3 -m engine.k0_production_gate /tmp/k0-writer-bound.json /tmp/k0-portal.json /tmp/k0-gates.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-gates.json'))
@@ -89,7 +96,7 @@ jobs:
       - name: Real LanguageTool 6.8 gate
         shell: bash
         run: |
-          python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-lt68-result.json
+          python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/k0-writer-bound.json /tmp/k0-lt68-result.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-lt68-result.json'))
@@ -108,7 +115,7 @@ jobs:
           )"
           mkdir -p /tmp/k0-final
           out="/tmp/k0-final/K0_WORDPRESS_DIRECT_IMPORT_${batch}.json"
-          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json "$out"
+          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-writer-bound.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json "$out"
           python3 -m engine.k0_wordpress_export verify "$out" "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-final/K0_WORDPRESS_VERIFY.json
           sha256sum "$out" | awk '{print $1}' > /tmp/k0-final/K0_WORDPRESS_SHA256.txt
           echo "K0_FINAL_FILE=$out" >> "$GITHUB_ENV"
@@ -149,6 +156,7 @@ jobs:
             /tmp/k0-final/K0_WORDPRESS_VERIFY.json
             /tmp/k0-final/K0_WORDPRESS_SHA256.txt
             /tmp/k0-final/K0_CHAT_DELIVERY.json
+            /tmp/k0-writer-bound.json
             /tmp/k0-portal.json
             /tmp/k0-gates.json
             /tmp/k0-lt68-result.json
