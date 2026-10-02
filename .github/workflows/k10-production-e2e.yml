@@ -98,11 +98,18 @@ jobs:
           print('K10_WORDPRESS_CATEGORY_PASS:'+str(hits[0]['id']))
           PY
 
+      - name: Canonical writer quality contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.writer_contract_guard stamp "$RUN_DIR/ARTICLE_INPUT.json" /tmp/k10-writer-bound.json
+          python3 -m engine.writer_contract_guard verify /tmp/k10-writer-bound.json
+
       - name: Exact K10 preflight
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.preflight "$RUN_DIR/ARTICLE_INPUT.json" /tmp/category.json /tmp/k10-production/preflight
+          python3 -m engine.preflight /tmp/k10-writer-bound.json /tmp/category.json /tmp/k10-production/preflight
 
       - name: Download exact LanguageTool 6.8
         shell: bash
