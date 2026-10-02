@@ -53,7 +53,7 @@ def _sections(html):
     return out
 
 def _attrs(tag):
-    return {k.lower():v for k,_,v in re.findall(r'([\w:-]+)\s*=\s*(["\'])(.*?)\2',tag,re.S)}
+    return {k.lower():htmlmod.unescape(v) for k,_,v in re.findall(r'([\w:-]+)\s*=\s*(["\'])(.*?)\2',tag,re.S)}
 
 def _trace_tags(html,trace_class='ppm-source-trace'):
     out=[]
