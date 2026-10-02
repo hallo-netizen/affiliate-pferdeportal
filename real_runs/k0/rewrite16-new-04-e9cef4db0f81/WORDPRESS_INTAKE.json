@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "longiergurte-beratung",
+      "plan_slot": "4a5cb3c5e9265835dafb8213c00ce6575407e9b79024b613778517ce6d545c55",
+      "target_keyword": "Longiergurte mit Bogen",
+      "title": "Longiergurte mit Bogen im Ratgeber"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "e9cef4db0f815b5b3b2717cab2671f4db681649abf04250981f644abf741de55"
+}
