@@ -6,7 +6,31 @@
     {
       "portal_id": "hobby",
       "display_name": "Hobby",
-      "category_exact": ["discgolf-beratung"],
+      "category_exact": [
+        "discgolf-beratung"
+      ],
+      "category_prefixes": []
+    },
+    {
+      "portal_id": "pferdeatelier",
+      "display_name": "Pferdeatelier",
+      "category_exact": [
+        "reitplatzplaner-beratung",
+        "pferdedecken-regendecken-faq",
+        "reitplatzbewaesserung-faq",
+        "kappzaum-faq",
+        "longiergurte-beratung",
+        "gesundheit-regeneration-kuehlgamaschen-beratung",
+        "pferdehaftpflicht-beratung",
+        "kappzaum-beratung",
+        "schermaschinen-beratung",
+        "schabracken-faq",
+        "reitplatzplaner-faq",
+        "magnetfelddecken-faq",
+        "longiergurte-faq",
+        "tuev-beim-pferdeanhaenger-faq",
+        "pferdewissen-grundlagen"
+      ],
       "category_prefixes": []
     }
   ]
