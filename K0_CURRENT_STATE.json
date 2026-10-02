@@ -1,79 +1,82 @@
 {
   "contract": "K0_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
+  "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "REWRITE16_CANONICAL_PASS_READY_FOR_WORDPRESS_IMPORT",
-  "first_open_blocker": null,
-  "next_action": "IMPORT_K0_WORDPRESS_REWRITE16_FINAL_AFTER_OLD_TRASH_IS_PERMANENTLY_EMPTIED",
-  "start_command": "K0:start",
-  "start_door": {
-    "repository": "hallo-netizen/text-start",
-    "issue": 48,
-    "title": "K0:start"
+  "status": "REWRITE16_CANONICAL_WRITER_PATH_IN_PROGRESS",
+  "first_open_blocker": {
+    "code": "REWRITE16_ITEM_13_CANONICAL_AUTHORING_NOT_YET_ACCEPTED",
+    "item_index": 13,
+    "title": "Wie lege ich einen Longiergurt an?",
+    "detail": "AUTHORING_CONTEXT is present and text-free; WRITER_JOB/SEALED_WRITER_PRODUCT/WORDPRESS_SINGLE are absent after the initial concurrent authoring submissions. This is a routing/persist state, not an article-quality failure."
   },
-  "portal_assignment": "AUTO_ONLY",
-  "production_entry": ".github/workflows/k0-production-e2e.yml",
+  "next_action": "RETRY_AUTHORING_CONTEXT_ITEM_13_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH",
+  "work_binding": {
+    "start_command": "K0:start",
+    "start_ref": "K0_START_HERE.md",
+    "goal_ref": "K0_GOAL_CONTRACT.json",
+    "canonical_route": [
+      "PSERC_TEXTMACHINE_METADATA_BATCH_V2_EXACT_FIVE_FIELDS",
+      "K0_AUTHORING_CONTEXT_V1_TEXT_FREE",
+      "K0_WRITER_JOB_V1_IMMUTABLE",
+      "K0_WRITER_DRAFT_V1_ONLY_TEXT_INGRESS",
+      "K0_WRITER_SEAL_V1",
+      "K0_PRODUCTION_GATES_AND_PPM_6_7_9",
+      "LANGUAGETOOL_6_8",
+      "CANONICAL_ARTICLE_ID_FROM_PPM679_REGISTRY",
+      "SYSTEM4_WORDPRESS_HANDOFF_V1_0_28_30"
+    ],
+    "direct_article_package_start_allowed": false,
+    "writer_self_stamping_allowed": false,
+    "alternate_route_allowed": false,
+    "quality_reduction_allowed": false,
+    "performance_regression_allowed": false,
+    "publish_allowed": false
+  },
+  "rewrite16": {
+    "total": 16,
+    "canonical_wordpress_single_complete_count": 14,
+    "complete_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      15
+    ],
+    "remaining_indices": [
+      13,
+      14
+    ],
+    "schabracke_category": "pferdewissen-grundlagen",
+    "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
+    "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3"
+  },
+  "freshness": {
+    "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
+    "latest_writer_accept_run": 37058612043,
+    "latest_writer_accept_result": "SUCCESS",
+    "k0_selftest_run": 37059664443,
+    "k0_selftest_result": "SUCCESS",
+    "ppm679_parity": "PASS",
+    "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json"
+  },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
     "exporter": "engine/k0_wordpress_export.py",
-    "plugin_version_verified_against": "0.28.27",
-    "ppm_version": "6.7.9",
-    "direct_wordpress_upload_ready": true
+    "plugin_version_verified_against": "0.28.30",
+    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "canonical_article_id_required": true,
+    "direct_wordpress_upload_ready_for_completed_singles": true
   },
-  "evidence": {
-    "real_chat_production_run": 37022568142,
-    "real_chat_production_status": "SUCCESS",
-    "input_batch_sha256": "f113f5a638f78651de7faaae0b6ba67e0c12645eb8f951b205d285addaca6565",
-    "portal_auto_detected": "hobby",
-    "structure_table": "PASS",
-    "language_tool_6_8": "PASS_ZERO_FINDINGS",
-    "ppm_6_7_9_parity": "PASS_104_OF_104",
-    "wordpress_export_verify": "PASS",
-    "final_filename": "K0_WORDPRESS_DIRECT_IMPORT_f113f5a638f78651de7faaae0b6ba67e0c12645eb8f951b205d285addaca6565.json",
-    "final_sha256": "dbfbd3d5562a69875eb905940acc3fccde693c02f15aa9c4baa96eeb57a95ef6",
-    "semantic_guard_selftest_run": 37029873663,
-    "semantic_guard_selftest_status": "SUCCESS",
-    "old_k9_schabracke_failure_family": "BLOCKED",
-    "good_informational_faq": "PASS",
-    "faq_commercial_intent_mismatch": "BLOCKED",
-    "informational_decision_contamination": "BLOCKED"
-  },
-  "performance_regression_allowed": false,
-  "quality_reduction_allowed": false,
-  "publish_allowed": false,
-  "k9_unchanged": true,
-  "k10_unchanged": true,
-  "semantic_hardlock": {
-    "required_content_profile": true,
-    "search_intent_must_match_article_type": true,
-    "old_k9_boilerplate_family_forbidden": true,
-    "informational_faq_decision_contamination_forbidden": true,
-    "wordpress_export_requires_semantic_gate_pass": true
-  },
-  "last_rewrite16": {
-    "status": "SUCCESS_CANONICAL_NORMAL_PATH",
-    "article_count": 16,
-    "all_writer_contract": "PASS",
-    "all_section_balance": "PASS",
-    "all_conclusion": "PASS",
-    "all_further_information": "PASS",
-    "language_tool_6_8": "PASS_ALL_16",
-    "ppm_6_7_9": "PASS_ALL_16_104_OF_104",
-    "direct_wordpress_upload_ready": true,
-    "combined_batch_sha256": "e59b7179e52a2379ec2b88a8d7a77692311883e4c13b9d27a651c66a00906ecd",
-    "combined_file_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
-    "final_filename": "K0_WORDPRESS_REWRITE16_FINAL_e59b7179e52a2379ec2b88a8d7a77692311883e4c13b9d27a651c66a00906ecd.json",
-    "word_range": [
-      771,
-      869
-    ],
-    "conclusion_ratio_range": [
-      0.102113,
-      0.120238
-    ],
-    "schabracke_reclassified_to": "pferdewissen-grundlagen",
-    "evidence_ref": "evidence/K0_REWRITE16_FINAL_EVIDENCE_20261002.json",
-    "old_bad_export_status": "INVALIDATED_DO_NOT_IMPORT",
-    "publish_allowed": false
-  }
+  "history_ref": "history/K0_WORKLOG_ERROR_HISTORY_20261002.md",
+  "publish_allowed": false
 }
