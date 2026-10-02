@@ -6,7 +6,8 @@ from .k0_portal_resolver import validate_intake
 from .writer_contract_guard import verify_package as verify_writer_contract
 
 CONTRACT='SYSTEM4_WORDPRESS_HANDOFF_V1'
-PLUGIN_VERSION='0.28.27'
+PLUGIN_VERSION='0.28.30'
+PLUGIN_BUILD='0.28.30-pste-v5-binding-safe'
 PPM_VERSION='6.7.9'
 FIVE_FIELDS=('article_type','category','plan_slot','target_keyword','title')
 
@@ -22,11 +23,20 @@ def _load(path):
 def _sha(value):
     return hashlib.sha256(str(value).encode('utf-8')).hexdigest()
 
-def build(intake, package, portal, gate, lt):
+def build(intake, package, portal, gate, lt, bindings):
     rows=validate_intake(intake)
     if len(rows)!=1:
         raise Blocked('K0_SINGLE_EXPORT_REQUIRES_ONE_ARTICLE')
     identity=rows[0]
+    if bindings.get('contract')!='K10_CANONICAL_ARTICLE_BINDINGS_V1' or bindings.get('status')!='PASS':
+        raise Blocked('K0_CANONICAL_BINDINGS_NOT_PASS')
+    bmap=bindings.get('bindings') or {}
+    article_id=str(bmap.get(identity['plan_slot']) or '')
+    if not re.fullmatch(r'article:[0-9a-f]{24}',article_id):
+        raise Blocked('K0_CANONICAL_ARTICLE_ID_INVALID')
+    expected_slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode('utf-8')).hexdigest()
+    if expected_slot!=identity['plan_slot']:
+        raise Blocked('K0_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH')
 
     if package.get('contract')!='K0_ARTICLE_PACKAGE_V1':
         raise Blocked('K0_ARTICLE_PACKAGE_CONTRACT_INVALID')
@@ -70,6 +80,7 @@ def build(intake, package, portal, gate, lt):
 
     article={
       'index':0,
+      'article_id':article_id,
       'title':identity['title'],
       'target_keyword':identity['target_keyword'],
       'category':identity['category'],
@@ -105,6 +116,7 @@ def build(intake, package, portal, gate, lt):
         'intended_next_step':'WORDPRESS_DIRECT_IMPORT',
         'plugin_name':'Portal SEO Editorial Plan Compiler',
         'plugin_version_verified_against':PLUGIN_VERSION,
+        'plugin_build_verified_against':PLUGIN_BUILD,
         'ppm_version_verified_against':PPM_VERSION,
         'direct_wordpress_upload_ready':True,
         'direct_upload_block_reason':None,
@@ -120,12 +132,17 @@ def verify_export(doc, intake):
     if doc.get('batch_sha256')!=intake.get('batch_sha256'):
         raise Blocked('K0_WORDPRESS_BATCH_MISMATCH')
     review=doc.get('wordpress_review') or {}
-    if review.get('plugin_version_verified_against')!=PLUGIN_VERSION or review.get('direct_wordpress_upload_ready') is not True:
+    if review.get('plugin_version_verified_against')!=PLUGIN_VERSION or review.get('plugin_build_verified_against')!=PLUGIN_BUILD or review.get('direct_wordpress_upload_ready') is not True:
         raise Blocked('K0_WORDPRESS_REVIEW_INVALID')
     arts=doc.get('articles') or []
     if len(arts)!=1:
         raise Blocked('K0_WORDPRESS_ARTICLE_COUNT_INVALID')
     art=arts[0]; ident=rows[0]
+    article_id=str(art.get('article_id') or '')
+    if not re.fullmatch(r'article:[0-9a-f]{24}',article_id):
+        raise Blocked('K0_WORDPRESS_ARTICLE_ID_INVALID')
+    if hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode('utf-8')).hexdigest()!=ident['plan_slot']:
+        raise Blocked('K0_WORDPRESS_ARTICLE_ID_PLAN_SLOT_MISMATCH')
     for key in FIVE_FIELDS:
         if str(art.get(key) or '')!=str(ident[key]):
             raise Blocked('K0_WORDPRESS_IDENTITY_MISMATCH:'+key)
@@ -146,13 +163,13 @@ def verify_export(doc, intake):
 
 def main():
     if len(sys.argv)<2:
-        raise SystemExit('usage: k0_wordpress_export.py export INTAKE PACKAGE PORTAL GATE LT OUT | verify OUT INTAKE RECEIPT')
+        raise SystemExit('usage: k0_wordpress_export.py export INTAKE PACKAGE PORTAL GATE LT CANONICAL_BINDINGS OUT | verify OUT INTAKE RECEIPT')
     try:
         mode=sys.argv[1]
-        if mode=='export' and len(sys.argv)==8:
-            out=build(*[_load(p) for p in sys.argv[2:7]])
-            Path(sys.argv[7]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-            print(json.dumps({'contract':'K0_WORDPRESS_EXPORT_V1','status':'PASS','output':sys.argv[7],'sha256':_sha(Path(sys.argv[7]).read_text(encoding='utf-8')),'publish_allowed':False},ensure_ascii=False))
+        if mode=='export' and len(sys.argv)==9:
+            out=build(*[_load(p) for p in sys.argv[2:8]])
+            Path(sys.argv[8]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            print(json.dumps({'contract':'K0_WORDPRESS_EXPORT_V1','status':'PASS','output':sys.argv[8],'sha256':_sha(Path(sys.argv[8]).read_text(encoding='utf-8')),'publish_allowed':False},ensure_ascii=False))
             return
         if mode=='verify' and len(sys.argv)==5:
             receipt=verify_export(_load(sys.argv[2]),_load(sys.argv[3]))
