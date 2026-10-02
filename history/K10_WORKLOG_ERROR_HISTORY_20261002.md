@@ -757,3 +757,22 @@ Korrektur:
 - Current/History dürfen keinen Artikel auswählen;
 - ohne Attachment fail closed `INPUT_REQUIRED`, niemals Wiederverwendung des letzten Artikels;
 - Silent Production bleibt unverändert.
+
+
+## Altbindung an Main-PSERC entfernt – aktueller Upload ist Job-Autorität – 2026-10-02
+
+Befund:
+Ein neuer WordPress-Upload mit drei gültigen FAQ-Aufträgen wurde im Nachbarchat blockiert, weil der generische K10-Workflow weiterhin `main:concept_agent/current/PSERC_METADATA_SNAPSHOT.json` als zwingende Job-Metadatenquelle geladen hat. Das widersprach der bereits gültigen Current-/Bedienregel, wonach ausschließlich der aktuelle Upload den Artikelauftrag bestimmt.
+
+Zusätzlicher Befund:
+`engine/production_entry.py` akzeptierte nur `item_count == 1`, obwohl der reale WordPress-Export mehrere Artikel enthalten kann.
+
+Minimalfix:
+- keine Abfrage des historischen Main-PSERC-Snapshots mehr im generischen K10-Produktionsworkflow;
+- Lauf erzeugt die aktuelle Job-/PSERC-Metadatenbindung deterministisch aus genau `WORDPRESS_INTAKE.json`;
+- `item_count >= 1` zugelassen;
+- pro Artikel muss exakt ein 5-Feld-Datensatz im aktuellen Upload passen;
+- alter Metadatenbestand kann neuen Upload nicht blockieren;
+- stale/fremde Metadatenbindung blockiert weiterhin fail-closed;
+- Research-, LT-, Artikelregel-, Systemregel-, PSERC-, ENDSTEMPEL- und WordPress-Verifikationsgates unverändert;
+- publish_allowed=false.

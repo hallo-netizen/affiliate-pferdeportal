@@ -41,3 +41,15 @@ Nie:
 - letzten erfolgreichen Artikel anzeigen;
 - alte Vorschau als neues Input interpretieren;
 - Current-Status als Artikelauftrag behandeln.
+
+
+## MEHRARTIKEL-DATEI – AUTOMATISCH
+Eine gültige `PSERC_TEXTMACHINE_METADATA_BATCH_V2`-Datei mit einem oder mehreren Artikeln wird ohne manuelle Zwischenpflege verarbeitet.
+
+Für jeden Artikel:
+1. exakt passenden 5-Feld-Datensatz aus dem aktuellen Upload binden;
+2. aktuelle Job-Metadatenbindung automatisch aus demselben Upload erzeugen;
+3. recherchieren, schreiben und durch denselben K10-Weg führen;
+4. bei mehreren Artikeln automatisch bis zum Ende weiterarbeiten.
+
+Ein historischer oder auf GitHub liegender Metadatenbestand besitzt gegenüber dem aktuellen Upload **keine Job-Autorität**.

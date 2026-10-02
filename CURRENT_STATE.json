@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "READY_FOR_ATTACHED_FIVE_FIELD_INPUT_ONLY",
+  "status": "READY_FOR_AUTOMATIC_CURRENT_UPLOAD_BATCH_PRODUCTION",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
     "verified_commit": "78166859c32dd540fe5a5b787aa8baf80bef3c55",
@@ -328,7 +328,12 @@
       "post_smoke_ppm_run_id": 36991872649
     },
     "active_job_binding": {
-      "job_source": "ATTACHED_PSERC_TEXTMACHINE_METADATA_BATCH_V2_ONLY",
+      "job_source": "CURRENT_ATTACHED_PSERC_TEXTMACHINE_METADATA_BATCH_V2_ONLY",
+      "valid_item_count": "ONE_OR_MORE",
+      "current_upload_is_runtime_metadata_authority": true,
+      "external_main_pserc_snapshot_required": false,
+      "manual_metadata_sync_required": false,
+      "stale_previous_batch_may_block": false,
       "current_may_select_article": false,
       "history_may_select_article": false,
       "previous_run_may_select_article": false,
@@ -339,12 +344,13 @@
         "article_type",
         "plan_slot"
       ],
+      "per_article_binding": "EXACTLY_ONE_MATCH_IN_CURRENT_UPLOAD",
       "on_missing_valid_attachment": "BLOCK_INPUT_REQUIRED",
       "on_valid_attachment": "START_SILENT_PRODUCTION_IMMEDIATELY"
     }
   },
   "first_open_blocker": null,
-  "next_action": "CONSUME_THE_ATTACHED_FIVE_FIELD_INPUT_AS_THE_SOLE_ARTICLE_JOB_AND_RUN_SILENT_PRODUCTION_TO_FINAL_OUTPUT",
+  "next_action": "RUN_FRESH_MULTI_ITEM_WORDPRESS_UPLOAD_DIRECTLY_THROUGH_K10_WITHOUT_MANUAL_PSERC_SYNC",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"

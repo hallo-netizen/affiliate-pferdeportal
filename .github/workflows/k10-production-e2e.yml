@@ -36,12 +36,11 @@ jobs:
           done
           echo "RUN_DIR=$rd" >> "$GITHUB_ENV"
 
-      - name: Bind current PSERC metadata
+      - name: Bind current uploaded WordPress intake as job metadata
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main:refs/remotes/origin/main
-          git show origin/main:concept_agent/current/PSERC_METADATA_SNAPSHOT.json > /tmp/pserc.json
+          python3 -m engine.production_entry bind "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/pserc.json
 
       - name: Require real research before article pipeline
         shell: bash

@@ -19,7 +19,7 @@ from engine.ppm_parity_guard import verify as ppm_parity_verify
 from engine.core import hard_rules
 from engine.package_adapters import PACKAGE_RESULT_MAP
 from engine.real_proof import slug_from_title
-from engine.production_entry import validate as validate_production_entry, Blocked as ProductionEntryBlocked
+from engine.production_entry import validate as validate_production_entry, build_job_metadata_snapshot, Blocked as ProductionEntryBlocked
 
 
 def words(prefix,n):
@@ -187,13 +187,63 @@ class K10Tests(unittest.TestCase):
                 claims.append({'fact_id':fid,**cl})
                 sources.append({'source_id':f'S{idx}','title':cl['source_title'],'url':url})
             research={'contract':'K10_REAL_RESEARCH_V1','article_id':'A1','topic':a['title'],'retrieved_at':'2026-10-02','sources':sources,'claims':claims,'publish_allowed':False}
-            pserc={'system_boundary':{'publish_allowed':False},'next_textmachine_metadata_batch':{'items':[item]}}
+            pserc=build_job_metadata_snapshot(intake)
             for name,obj in [('WORDPRESS_INTAKE.json',intake),('RESEARCH.json',research),('ARTICLE_INPUT.json',a),('pserc.json',pserc)]:
                 (root/name).write_text(json.dumps(obj,ensure_ascii=False),encoding='utf-8')
             report=validate_production_entry(root,root/'pserc.json')
             self.assertEqual(report['status'],'READY_FOR_K10_PREFLIGHT',report)
             (root/'RESEARCH.json').unlink()
             with self.assertRaises(FileNotFoundError):
+                validate_production_entry(root,root/'pserc.json')
+
+
+    def test_generic_production_entry_accepts_current_three_item_upload_without_external_snapshot(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            items=[
+              {'article_type':'FAQ','category':'faq-a','plan_slot':'1'*64,'target_keyword':'Frage A','title':'Frage A?'},
+              {'article_type':'FAQ','category':'faq-b','plan_slot':'2'*64,'target_keyword':'Frage B','title':'Frage B?'},
+              {'article_type':'FAQ','category':'faq-c','plan_slot':'3'*64,'target_keyword':'Frage C','title':'Frage C?'},
+            ]
+            intake={'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE','item_count':3,'maximum_articles':0,'maximum_articles_per_type':0,'publish_allowed':False,'content_or_format_payload_present':False,'items':items}
+            intake['batch_sha256']=hashlib.sha256(json.dumps(intake,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            item=items[1]
+            a=make_base(); a['article_id']=item['plan_slot']; a['article_type']='FAQ'; a['title']=item['title']; a['target_keyword']=item['target_keyword']; a['planning_binding']={**item,'source_ref':'CURRENT_UPLOADED_WORDPRESS_INTAKE'}; a['publish_allowed']=False
+            claims=[]; sources=[]
+            for idx,(fid,cl) in enumerate(a['research_claims'].items(),1):
+                url=f'https://example.org/current-upload-{idx}'
+                cl['source_url']=url
+                claims.append({'fact_id':fid,**cl})
+                sources.append({'source_id':f'S{idx}','title':cl['source_title'],'url':url})
+            research={'contract':'K10_REAL_RESEARCH_V1','article_id':item['plan_slot'],'topic':a['title'],'retrieved_at':'2026-10-02','sources':sources,'claims':claims,'publish_allowed':False}
+            pserc=build_job_metadata_snapshot(intake)
+            for name,obj in [('WORDPRESS_INTAKE.json',intake),('RESEARCH.json',research),('ARTICLE_INPUT.json',a),('pserc.json',pserc)]:
+                (root/name).write_text(json.dumps(obj,ensure_ascii=False),encoding='utf-8')
+            report=validate_production_entry(root,root/'pserc.json')
+            self.assertEqual(report['status'],'READY_FOR_K10_PREFLIGHT',report)
+            self.assertEqual(report['source_batch_item_count'],3)
+            self.assertEqual(report['metadata_authority'],'CURRENT_UPLOADED_WORDPRESS_INTAKE')
+
+    def test_generic_production_entry_rejects_stale_external_metadata_snapshot(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            item={'article_type':'FAQ','category':'faq-new','plan_slot':'4'*64,'target_keyword':'Neue Frage','title':'Neue Frage?'}
+            intake={'contract':'PSERC_TEXTMACHINE_METADATA_BATCH_V2','status':'READY_FOR_TEXTMACHINE_METADATA_INTAKE','item_count':1,'maximum_articles':0,'maximum_articles_per_type':0,'publish_allowed':False,'content_or_format_payload_present':False,'items':[item]}
+            intake['batch_sha256']=hashlib.sha256(json.dumps(intake,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            a=make_base(); a['article_id']=item['plan_slot']; a['article_type']='FAQ'; a['title']=item['title']; a['target_keyword']=item['target_keyword']; a['planning_binding']={**item,'source_ref':'CURRENT_UPLOADED_WORDPRESS_INTAKE'}; a['publish_allowed']=False
+            claims=[]; sources=[]
+            for idx,(fid,cl) in enumerate(a['research_claims'].items(),1):
+                url=f'https://example.org/stale-check-{idx}'
+                cl['source_url']=url
+                claims.append({'fact_id':fid,**cl})
+                sources.append({'source_id':f'S{idx}','title':cl['source_title'],'url':url})
+            research={'contract':'K10_REAL_RESEARCH_V1','article_id':item['plan_slot'],'topic':a['title'],'retrieved_at':'2026-10-02','sources':sources,'claims':claims,'publish_allowed':False}
+            stale={'system_boundary':{'publish_allowed':False},'next_textmachine_metadata_batch':{'items':[{'article_type':'FAQ','category':'old','plan_slot':'5'*64,'target_keyword':'Alt','title':'Alt?'}]}}
+            for name,obj in [('WORDPRESS_INTAKE.json',intake),('RESEARCH.json',research),('ARTICLE_INPUT.json',a),('pserc.json',stale)]:
+                (root/name).write_text(json.dumps(obj,ensure_ascii=False),encoding='utf-8')
+            with self.assertRaisesRegex(ProductionEntryBlocked,'JOB_METADATA_BINDING_MISMATCH_CURRENT_UPLOAD_REQUIRED'):
                 validate_production_entry(root,root/'pserc.json')
 
     def test_field_inventory_is_complete(self):

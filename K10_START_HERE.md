@@ -47,3 +47,16 @@ Bei jedem neuen Artikelauftrag bestimmt **ausschließlich die aktuell angehängt
 - Ohne gültiges Attachment: `INPUT_REQUIRED`; niemals den letzten Artikel wiederverwenden.
 
 Insbesondere ist es verboten, nach `K10:pferdeatelier` den Current-Stand zusammenzufassen oder den zuletzt fertigen Artikel als aktuellen Auftrag zu behandeln.
+
+
+## AUTOMATISCHE BATCH-AUTORITÄT
+Die aktuell hochgeladene WordPress-Datei ist vollständig und unmittelbar die Produktionsautorität – auch bei mehreren Artikeln.
+
+- kein manuelles Aktualisieren einer PSERC-Metadatenquelle;
+- kein Warten auf einen alten GitHub-Snapshot;
+- `item_count >= 1` ist zulässig;
+- jeder Artikel wird automatisch exakt an einen Datensatz aus dem aktuellen Upload gebunden;
+- der Lauf erzeugt seine PSERC-/Metadatenbindung automatisch aus dem aktuellen Upload;
+- ein alter 16er-Bestand darf einen neuen Upload niemals blockieren.
+
+Der Nutzerablauf bleibt: **Datei hochladen -> K10:pferdeatelier -> fertige Artikeldatei.**
