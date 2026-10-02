@@ -62,13 +62,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
-    "last_checked_branch_head_sha": "0751522ecf9e513da9a302d6f1a1c0447681e902",
+    "last_checked_branch_head_sha": "b81b70b156fcf130d47900e66ac52d513c4e9029",
     "latest_writer_accept_run": 37058612043,
     "latest_writer_accept_result": "SUCCESS",
-    "latest_k0_selftest_run": 37062998789,
+    "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "NO_RELEVANT_PRODUCTION_DELTA_AFTER_14_OF_16; ONLY_CURRENT_DOOR_HISTORY_CLOSEOUT_COMMITS"
+    "delta_result": "NO_RELEVANT_PRODUCTION_DELTA_AFTER_14_OF_16; CLOSEOUT_CURRENT_HISTORY_ONLY"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
