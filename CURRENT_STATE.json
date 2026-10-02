@@ -2,7 +2,7 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "CANONICAL_WORDPRESS_EXPORT_REAL_PASS_AWAITING_LIVE_IMPORT_RESULT",
+  "status": "CANONICAL_WORDPRESS_EXPORT_AND_FRONTEND_HTML_REAL_PASS",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
     "verified_commit": "57188d5a112453f59af49c1706f6685300af52d1",
@@ -431,10 +431,45 @@
       ],
       "k9_changed": false,
       "publish_allowed": false
+    },
+    "canonical_frontend_html_fix": {
+      "contract": "K10_CANONICAL_HTML_BINDING_V1",
+      "required_root": [
+        "ppm-generated",
+        "ppm-type-*",
+        "data-article-type"
+      ],
+      "visible_text_mutation": false,
+      "active_html_forbidden": true,
+      "wordpress_export_requires_pre_materialized_canonical_html": true,
+      "batch_exporter": "engine/wordpress_batch_export.py",
+      "positive_negative_selftest_run": 37008844669,
+      "ppm_inventory_run": 37008844590,
+      "real_runs": [
+        {
+          "run_id": 37008915898,
+          "title": "Ist Mash bei Magenproblemen für Pferde geeignet?",
+          "result": "SUCCESS"
+        },
+        {
+          "run_id": 37008927163,
+          "title": "Ist ein Sperrriemen für Pferde sinnvoll oder sollte man darauf verzichten?",
+          "result": "SUCCESS"
+        },
+        {
+          "run_id": 37008935953,
+          "title": "Wie wird der Sperrriemen richtig verschnallt?",
+          "result": "SUCCESS"
+        }
+      ],
+      "exact_diff_vs_previous_k10": "ROOT_BINDING_ONLY_VISIBLE_TEXT_UNCHANGED",
+      "article_id_plan_slot_roundtrip": "PASS_3_OF_3",
+      "body_hash": "PASS_3_OF_3",
+      "publish_allowed": false
     }
   },
   "first_open_blocker": null,
-  "next_action": "IMPORT_K10_PFERDEATELIER_3_FAQ_WORDPRESS_IMPORT_FINAL_CANONICAL_JSON_AND_CAPTURE_THE_REAL_WORDPRESS_IMPORT_RESULT",
+  "next_action": "NORMAL_K10_PRODUCTION_FROM_CURRENT_WORDPRESS_UPLOAD_WITH_CANONICAL_SYSTEM4_EXPORT_AND_FRONTEND_HTML",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md",
