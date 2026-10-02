@@ -1,0 +1,58 @@
+{
+  "contract": "K0_ARTICLE_PACKAGE_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "kappzaum-beratung",
+    "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+    "target_keyword": "Kappzaum für Pferde",
+    "title": "So findest du einen passenden Kappzaum für dein Pferd"
+  },
+  "planning_binding": {
+    "article_type": "Beratung",
+    "category": "kappzaum-beratung",
+    "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+    "target_keyword": "Kappzaum für Pferde",
+    "title": "So findest du einen passenden Kappzaum für dein Pferd"
+  },
+  "article_id": "article:98d25b1963465407779b7354",
+  "article_type": "Beratung",
+  "title": "So findest du einen passenden Kappzaum für dein Pferd",
+  "target_keyword": "Kappzaum für Pferde",
+  "category": "kappzaum-beratung",
+  "html": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n\n<p>Ein Kappzaum soll klare Signale ermöglichen, ohne das Pferdemaul zu belasten. Damit das funktioniert, muss er stabil auf dem Kopf liegen und darf weder Auge, Jochbein noch den weichen Teil der Nase beeinträchtigen. Für die Auswahl sind deshalb Kopfform, Nasenriemen, Polsterung, Beschläge und der geplante Einsatz wichtiger als die Frage, welches Modell besonders massiv aussieht.</p>\n\n<h2>Der Nasenriemen ist der wichtigste Bereich</h2>\n<p>Der Nasenriemen sollte auf dem festen Nasenbein liegen. Sitzt er zu tief, kann Druck auf empfindliche Strukturen entstehen; sitzt er zu hoch oder zu locker, verliert der Zaum an Stabilität. Seine Form muss zur Nase des Pferdes passen. Manche Modelle haben einen relativ starren Nasenbereich, andere sind weicher gepolstert oder flexibler. Entscheidend ist, dass die Einwirkung verständlich bleibt und der Zaum nicht bei jedem seitlichen Signal verdreht.</p>\n\n<h2>Seitenteile dürfen nicht ins Auge ziehen</h2>\n<p>Beim Longieren entsteht Zug nicht nur nach hinten, sondern auch seitlich. Dadurch kann ein schlecht passender Kappzaum Richtung Auge oder Jochbogen wandern. Achte darauf, dass Backenstücke und Kehlriemen den Zaum in Position halten, ohne zu eng verschnallt zu werden. Ein Genickstück mit ausreichend Breite kann den Druck besser verteilen. Nach einigen Minuten Arbeit sollte die Position noch genauso stabil sein wie beim Aufzäumen.</p>\n\n<h2>Schwerer Beschlag ist kein Qualitätsbeweis</h2>\n<p>Traditionelle Kappzäume können einen schweren, metallverstärkten Nasenbereich haben. Das bietet eine sehr direkte Einwirkung, ist aber nicht für jedes Pferd oder jede Hand passend. Leichtere Modelle mit stabiler Leder- oder Textilkonstruktion können für feine Bodenarbeit angenehmer sein. Wer viel longiert, braucht vor allem belastbare Ringe und eine Form, die unter Zug nicht verrutscht. Das Gewicht sollte immer im Verhältnis zur Kopfgröße stehen.</p>\n\n<h2>Welche Arbeit möchtest du damit machen?</h2>\n<p>Für klassische Longenarbeit ist ein mittlerer Nasenring besonders wichtig. Bei Handarbeit können seitliche Ringe zusätzlich nützlich sein. Wer mit Doppellonge arbeitet, achtet auf genügend Freiraum und darauf, dass Leinen nicht an Schnallen hängen bleiben. Für Spaziergänge reicht ein übersichtliches, gut sitzendes Modell oft völlig aus. Ein sehr komplexer Zaum bringt keinen Vorteil, wenn seine zusätzlichen Ringe und Einstellungen nicht genutzt werden.</p>\n\n<h2>Bauarten im kurzen Vergleich</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Bauart</th><th>Gefühl</th><th>Geeignet für</th></tr></thead><tbody>\n<tr><td>Starr</td><td>Direkt</td><td>Erfahrene Hände</td></tr>\n<tr><td>Gepolstert</td><td>Weicher</td><td>Allround</td></tr>\n<tr><td>Leicht</td><td>Unauffällig</td><td>Handarbeit</td></tr>\n<tr><td>Mehrfachring</td><td>Variabel</td><td>Doppellonge</td></tr>\n</tbody></table>\n<p>Die Grenzen zwischen den Bauarten sind fließend. Passform und saubere Verarbeitung bleiben wichtiger als die Bezeichnung des Modells.</p>\n\n<h2>So kontrollierst du den Sitz</h2>\n<ul>\n<li>Nasenriemen auf dem festen Nasenbein platzieren.</li>\n<li>Abstand zu Auge und Jochbein prüfen.</li>\n<li>Seitliche Stabilität bei leichtem Zug testen.</li>\n<li>Genickstück und Backenstücke auf Druck kontrollieren.</li>\n<li>Nach der Arbeit Fell und Haut auf Scheuerstellen ansehen.</li>\n</ul>\n\n<h2>Fazit</h2>\n<p>Ein passender Kappzaum sitzt ruhig, verteilt Druck nachvollziehbar und lässt sich mit kleinen Signalen bedienen. Die beste Wahl richtet sich nach Kopfform und Arbeit, nicht nach möglichst schwerer oder umfangreicher Ausstattung. Beginne bei der Passform des Nasenriemens, prüfe anschließend die seitliche Stabilität und wähle nur so viele Ringe und Einstellmöglichkeiten, wie du tatsächlich brauchst. Ein gut sitzender einfacher Kappzaum ist wertvoller als ein vielseitiges Modell, das am Pferdekopf wandert.</p>\n</article>",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "table_decision": {
+    "decision": "INCLUDE_ADDED_VALUE",
+    "exception_code": null,
+    "rationale": "Bauarten unterscheiden sich in Einwirkung und typischem Einsatz."
+  },
+  "lt_authoritative_terms": [
+    "Kappzaum",
+    "Nasenbein",
+    "Jochbein",
+    "Doppellonge",
+    "RidersDeal"
+  ],
+  "wordpress_category": {
+    "id": null,
+    "slug": "kappzaum-beratung",
+    "taxonomy": "category"
+  },
+  "research_claims": {
+    "F1": {
+      "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen",
+      "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+      "evidence_text": "Für die Wahl eines Kappzaums sind Passform, Polsterung, verstellbare Backenstücke und ein stabiler Sitz wichtig. Der Nasenriemen soll auf dem festen Nasenbein liegen, nicht zu tief sitzen und weder Jochbogen noch Auge beeinträchtigen.",
+      "evidence_text_sha256": "30c791a57d965f5960fc6a885544c0736f63302ffd5d663bfe18a670bea88288",
+      "statement": "Passform und stabiler Sitz sind zentrale Auswahlkriterien; der Nasenriemen gehört auf das feste Nasenbein.",
+      "claim_status": "FULLY_SUPPORTED",
+      "article_types": [
+        "Beratung"
+      ]
+    }
+  },
+  "revision_count": 1,
+  "publish_allowed": false
+}
