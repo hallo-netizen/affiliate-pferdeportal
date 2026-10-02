@@ -5,12 +5,12 @@
   "branch": "konzept0-portal-neutral-20261002",
   "status": "REWRITE16_CANONICAL_WRITER_PATH_IN_PROGRESS",
   "first_open_blocker": {
-    "code": "REWRITE16_ITEM_13_CANONICAL_AUTHORING_NOT_YET_ACCEPTED",
-    "item_index": 13,
-    "title": "Wie lege ich einen Longiergurt an?",
-    "detail": "AUTHORING_CONTEXT is present and text-free; WRITER_JOB/SEALED_WRITER_PRODUCT/WORDPRESS_SINGLE are absent. This is a routing/persist blocker, not an article-quality failure."
+    "code": "REWRITE16_ITEM_14_CANONICAL_AUTHORING_NOT_YET_ACCEPTED",
+    "item_index": 14,
+    "title": "Wie oft muss ein Pferdeanhänger zum TÜV?",
+    "detail": "AUTHORING_CONTEXT is present and text-free; WRITER_JOB/SEALED_WRITER_PRODUCT/WORDPRESS_SINGLE are absent. Item 13 is now fully canonical and verified. This is the next sequential routing/persist blocker."
   },
-  "next_action": "RETRY_AUTHORING_CONTEXT_ITEM_13_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH",
+  "next_action": "RETRY_AUTHORING_CONTEXT_ITEM_14_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -35,7 +35,7 @@
   },
   "rewrite16": {
     "total": 16,
-    "canonical_wordpress_single_complete_count": 14,
+    "canonical_wordpress_single_complete_count": 15,
     "complete_indices": [
       0,
       1,
@@ -50,10 +50,10 @@
       10,
       11,
       12,
+      13,
       15
     ],
     "remaining_indices": [
-      13,
       14
     ],
     "schabracke_category": "pferdewissen-grundlagen",
@@ -62,13 +62,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
-    "last_checked_branch_head_sha": "b81b70b156fcf130d47900e66ac52d513c4e9029",
-    "latest_writer_accept_run": 37058612043,
+    "last_checked_branch_head_sha": "441525ca96af71e065278425db14d5b4b675d4fb",
+    "latest_writer_accept_run": 37067718513,
     "latest_writer_accept_result": "SUCCESS",
     "latest_k0_selftest_run": 37066451294,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "NO_RELEVANT_PRODUCTION_DELTA_AFTER_14_OF_16; CLOSEOUT_CURRENT_HISTORY_ONLY"
+    "delta_result": "ITEM13_CANONICAL_WORDPRESS_SINGLE_PASS; ITEM14_REMAINS"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
