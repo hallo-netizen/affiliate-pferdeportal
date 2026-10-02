@@ -8,7 +8,7 @@
     "code": "REWRITE16_ITEM_13_CANONICAL_AUTHORING_NOT_YET_ACCEPTED",
     "item_index": 13,
     "title": "Wie lege ich einen Longiergurt an?",
-    "detail": "AUTHORING_CONTEXT is present and text-free; WRITER_JOB/SEALED_WRITER_PRODUCT/WORDPRESS_SINGLE are absent after the initial concurrent authoring submissions. This is a routing/persist state, not an article-quality failure."
+    "detail": "AUTHORING_CONTEXT is present and text-free; WRITER_JOB/SEALED_WRITER_PRODUCT/WORDPRESS_SINGLE are absent. This is a routing/persist blocker, not an article-quality failure."
   },
   "next_action": "RETRY_AUTHORING_CONTEXT_ITEM_13_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH",
   "work_binding": {
@@ -62,23 +62,25 @@
   },
   "freshness": {
     "validated_code_head_sha": "e99cd028c108b313d10eccba3b255467fbd6b8b0",
+    "last_checked_branch_head_sha": "c6ae5e0d231110b908122fe13f2678f8db4e7990",
     "latest_writer_accept_run": 37058612043,
     "latest_writer_accept_result": "SUCCESS",
-    "k0_selftest_run": 37059664443,
-    "k0_selftest_result": "SUCCESS",
+    "latest_k0_selftest_run": 37060185266,
+    "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json"
+    "delta_result": "NO_PRODUCTION_PROGRESS_AFTER_14_OF_16_CURRENT"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
-    "exporter": "engine/k0_wordpress_export.py",
-    "plugin_version_verified_against": "0.28.30",
-    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "plugin_version": "0.28.30",
+    "plugin_build": "0.28.30-pste-v5-binding-safe",
     "canonical_article_id_required": true,
-    "direct_wordpress_upload_ready_for_completed_singles": true
+    "publish_allowed": false
   },
+  "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json",
   "history_ref": "history/K0_WORKLOG_ERROR_HISTORY_20261002.md",
-  "publish_allowed": false,
   "k9_unchanged": true,
-  "k10_unchanged": true
+  "k10_dependency": false,
+  "k10_separate_current_ref": "konzept10-rule-ledger-20261001:CURRENT_STATE.json",
+  "publish_allowed": false
 }
