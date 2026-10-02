@@ -1,0 +1,13 @@
+{
+  "contract": "K0_CURRENT_STATE_V1",
+  "role": "SOLE_CURRENT_AUTHORITY",
+  "branch": "konzept0-portal-neutral-20261002",
+  "status": "HOBBY_DISCGOLF_ACCEPTANCE_PENDING",
+  "first_open_blocker": "K0_HOBBY_DISCGOLF_ACCEPTANCE_NOT_YET_EXECUTED",
+  "next_action": "RUN_K0_HOBBY_DISCGOLF_ACCEPTANCE",
+  "start_command": "K0:start",
+  "portal_assignment": "AUTO_ONLY",
+  "publish_allowed": false,
+  "k9_unchanged": true,
+  "k10_unchanged": true
+}
