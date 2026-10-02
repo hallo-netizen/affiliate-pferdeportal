@@ -613,3 +613,34 @@ Keine Qualitätsabsenkung. Keine Architekturänderung. publish_allowed=false.
 
 NEXT ACTION:
 `WRITE_ONE_FRESH_ASSIGNED_ARTICLE_FROM_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_HAND_IT_TO_THE_EXISTING_K10_MACHINE_WITHOUT_CHAT_SIDE_TESTING_OR_REPAIR`
+
+
+## Generischer Research-first-Produktionsweg – 2026-10-02
+
+Auslöser: Ein neuer Nachbarchat schrieb den Kappzaum-Artikel unmittelbar, ohne nachweisbare frische Recherche und ohne einen Artikel-Workflow-Run. Auf dem K10-Branch liefen danach nur Selftest/PPM; damit war der Text-only-Schnellweg real belegt.
+
+Ursachen:
+1. Current band den Chat als `WRITE_ONLY` und machte den Maschinenlauf nicht zu einer harten Abschlussbedingung.
+2. Die vorhandenen E2E-Workflows waren an konkrete Beispielartikel gebunden und boten für einen beliebigen neuen Artikel keinen generischen Produktionsweg.
+3. `engine/real_proof.py` enthielt noch einen historischen hart codierten Longiergurt-Slug.
+
+Korrektur:
+- `K10_START_HERE.md` und Bürotür #47 binden normale Artikelaufträge jetzt an:
+  `frische Recherche -> Schreiben -> generischer K10-Workflow -> Prüf-/Finalisierungskette -> WordPress-Datei -> STOP`.
+- Neue verbindliche Produktionsanweisung: `K10_PRODUCTION_ENTRY.md`.
+- Neuer generischer Einstieg: `engine/production_entry.py`.
+  Er blockiert fehlende/ungültige Research-Pakete, nicht exakt fünf Intake-Felder, PSERC-Abweichungen, Research-/Artikel-Faktenabweichungen und Publish-Freigaben.
+- Neuer generischer Workflow: `.github/workflows/k10-production-e2e.yml`, ausgelöst durch genau einen Jobordner unter `real_runs/production/<job-id>/`.
+- Hart codierter Longiergurt-Slug entfernt; WordPress-Slug wird deterministisch aus dem aktuellen Artikeltitel erzeugt.
+- Kein K10-Systemrepair im normalen Artikelauftrag; Artikelbefunde werden nur am Artikel geschlossen.
+
+Nachweise:
+- Implementierung: `28266dd93bcc9e220671798200bbfe4ec839df16`
+- Workflow-Syntaxfix: `f19dda3d9f8c39b235ad6e7f56ce7dfc75fee55b`
+- Selftest: Run `36991292156` PASS
+- PPM 6.7.9: Run `36991292277` PASS / 104 von 104
+- bestehender TÜV-E2E: Run `36991154841` PASS
+- bestehender Reitplatzbewässerung-E2E: Run `36991154784` PASS
+- bestehender Dreierlauf: Run `36991154825` PASS
+- publish_allowed=false
+- K9 unverändert.

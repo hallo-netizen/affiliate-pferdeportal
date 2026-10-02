@@ -2,10 +2,10 @@
   "contract": "K10_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K10",
-  "status": "READY_FOR_REAL_K10_WRITE_ONLY_PRODUCTION",
+  "status": "GENERIC_RESEARCH_FIRST_PRODUCTION_READY_FOR_REAL_TEST",
   "verified_state": {
     "branch": "konzept10-rule-ledger-20261001",
-    "verified_commit": "8f7ac94f0e144f62004635c5022924cd9ae63dfd",
+    "verified_commit": "f19dda3d9f8c39b235ad6e7f56ce7dfc75fee55b",
     "isolated_selftest": "PASS",
     "ppm_6_7_9_inventory": "104/104 PASS",
     "central_rule_model": "ONE_HARD_RULE_ONE_OWNER_ONE_HASH_BOUND_RECEIPT",
@@ -216,36 +216,35 @@
     },
     "production_handoff": {
       "mode": "REAL_K10_PRODUCTION",
-      "chat_role": "WRITE_ONLY",
+      "chat_role": "ARTICLE_PRODUCER",
       "test_mode": false,
-      "input_contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
-      "exact_five_field_input": true,
-      "chat_must_do": [
-        "READ_CURRENT_ROUTING",
-        "USE_ATTACHED_FIVE_FIELD_INPUT",
-        "RESEARCH_REQUIRED_FACTS_FOR_THE_ASSIGNED_ARTICLE",
-        "WRITE_THE_ASSIGNED_ARTICLE",
-        "HAND_OFF_WRITTEN_ARTICLE_TO_EXISTING_K10_MACHINE"
+      "research_before_writing": true,
+      "generic_workflow": ".github/workflows/k10-production-e2e.yml",
+      "production_entry": "K10_PRODUCTION_ENTRY.md",
+      "required_job_files": [
+        "WORDPRESS_INTAKE.json",
+        "RESEARCH.json",
+        "ARTICLE_INPUT.json"
       ],
-      "chat_must_not_do": [
-        "AUDIT_K10",
-        "TEST_K10",
-        "DIAGNOSE_K10",
-        "REPAIR_K10",
-        "CHANGE_K10_RULES",
-        "CHANGE_K10_ARCHITECTURE",
-        "RUN_EDITORIAL_SYSTEM_REVIEW_AS_A_CHAT_TASK"
-      ],
-      "downstream_machine_role": [
-        "K10_PREFLIGHT",
+      "sequence": [
+        "FRESH_RESEARCH",
+        "WRITE_ARTICLE",
+        "GENERIC_K10_WORKFLOW",
         "LANGUAGETOOL_6_8",
         "ARTICLE_RULES",
         "SYSTEM_RULES",
         "PSERC",
         "ENDSTEMPEL",
-        "WORDPRESS_IMPORT_VERIFY"
+        "WORDPRESS_IMPORT_VERIFY",
+        "STOP"
       ],
-      "intended_result": "WRITTEN_ARTICLE_HANDED_TO_EXISTING_K10_MACHINE",
+      "chat_must_not": [
+        "TEXT_ONLY_FAST_PATH",
+        "SKIP_RESEARCH",
+        "SKIP_MACHINE_RUN",
+        "REPAIR_K10_ENGINE_OR_RULES_DURING_ARTICLE_JOB"
+      ],
+      "wordpress_slug": "DERIVED_FROM_CURRENT_ARTICLE_TITLE",
       "publish_allowed": false
     },
     "independent_neighbor_chat_test": {
@@ -286,10 +285,22 @@
       "new_hard_rule_added": false,
       "k9_changed": false,
       "publish_allowed": false
+    },
+    "generic_production_path": {
+      "implementation_commit": "28266dd93bcc9e220671798200bbfe4ec839df16",
+      "workflow_syntax_fix_commit": "f19dda3d9f8c39b235ad6e7f56ce7dfc75fee55b",
+      "selftest_run_id": 36991292156,
+      "ppm_run_id": 36991292277,
+      "existing_regression_runs": {
+        "tuev": 36991154841,
+        "reitplatzbewaesserung": 36991154784,
+        "three_article": 36991154825
+      },
+      "result": "PASS_READY_FOR_FRESH_REAL_JOB"
     }
   },
   "first_open_blocker": null,
-  "next_action": "WRITE_ONE_FRESH_ASSIGNED_ARTICLE_FROM_EXACT_FIVE_FIELD_WORDPRESS_INPUT_AND_HAND_IT_TO_THE_EXISTING_K10_MACHINE_WITHOUT_CHAT_SIDE_TESTING_OR_REPAIR",
+  "next_action": "RUN_ONE_FRESH_ARTICLE_THROUGH_GENERIC_RESEARCH_FIRST_K10_PRODUCTION_TO_VERIFIED_WORDPRESS_IMPORT",
   "publish_allowed": false,
   "goal_contract_ref": "K10_GOAL_CONTRACT.json",
   "history_ref": "history/K10_WORKLOG_ERROR_HISTORY_20261002.md"
