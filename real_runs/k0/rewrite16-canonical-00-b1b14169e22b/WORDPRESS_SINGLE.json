@@ -1,0 +1,88 @@
+{
+  "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "batch_sha256": "b1b14169e22b319042ad1d02bb4f91a30677b8efd798f61b8a291b57c1dfbc85",
+  "article_count": 1,
+  "publish_allowed": false,
+  "signing_deferred": true,
+  "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+  "no_legacy_status": "PASS",
+  "test_suite_status": "PASS",
+  "wordpress_review": {
+    "file_format": "JSON",
+    "mime_type": "application/json",
+    "intended_next_step": "WORDPRESS_DIRECT_IMPORT",
+    "plugin_name": "Portal SEO Editorial Plan Compiler",
+    "plugin_version_verified_against": "0.28.30",
+    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "ppm_version_verified_against": "6.7.9",
+    "direct_wordpress_upload_ready": true,
+    "direct_upload_block_reason": null,
+    "required_downstream_components": []
+  },
+  "articles": [
+    {
+      "index": 0,
+      "article_id": "article:277289349b5a5091767a01b1",
+      "title": "Das Wichtigste über Reitplatzplaner für Pferde",
+      "target_keyword": "Reitplatzplaner für Pferde",
+      "category": "reitplatzplaner-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+      "final_draft_sha256": "e0941df56151aa5b8049ced048cb92f249ee2255257117a44201cc29a98df43d",
+      "revision_count": 4,
+      "body": "<article class=\"ppm-generated ppm-type-beratung\" data-article-type=\"Beratung\">\n<section data-block=\"intro\">\n<p>Ein Reitplatzplaner soll die Oberfläche nicht einfach nur glattziehen. Er muss die Tretschicht so bearbeiten, dass Unebenheiten verschwinden, der Hufschlag zurückgeführt wird und der Boden anschließend wieder gleichmäßig nutzbar ist. Welches Gerät dazu passt, hängt vom vorhandenen Reitboden, der Platzgröße und dem Zugfahrzeug ab. Deshalb lohnt es sich, zuerst den eigenen Platz zu betrachten und erst danach Arbeitsbreite, Zinken, Schild, Walze und weitere Ausstattung zu vergleichen.</p>\n</section>\n<section data-block=\"criteria\">\n<h2>Der Reitboden gibt die Auswahl vor</h2>\n<p>Der wichtigste Ausgangspunkt ist die Tretschicht. Ein tiefer Sandboden reagiert anders auf Zinken als ein Sand-Vlies-Gemisch oder eine dünnere Reitschicht über einem empfindlichen Unterbau. Zu tief arbeitende Werkzeuge können Material aus tieferen Schichten nach oben holen, während zu flache Einstellungen Verdichtungen kaum lösen. Vor dem Kauf sollte deshalb bekannt sein, wie dick die Tretschicht ist, wie stark sie zur Verdichtung neigt und ob Fasern oder andere Zuschläge enthalten sind. Eine gut einstellbare Arbeitstiefe ist in der Praxis meist wertvoller als möglichst viele Anbauteile. Auch die Feuchtigkeit spielt eine Rolle: Trockener Sand verhält sich beim Planen anders als ein gleichmäßig feuchter Boden. Wer die Bodenart kennt, kann Herstellerangaben zu Zinkenform, Arbeitsbereich und Nachlauf wesentlich sinnvoller einordnen.</p>\n\n<p>Auch der Pflegezustand des Platzes gehört in diese Bestandsaufnahme. Ein Boden, der bereits starke Mulden, harte Fahrspuren oder sehr unterschiedliche Feuchtebereiche zeigt, braucht zunächst eine andere Behandlung als eine gleichmäßig aufgebaute Fläche. Solche Beobachtungen helfen dabei, die nötige Eingriffstiefe realistisch einzuschätzen und den Planer nicht unnötig aggressiv einzustellen.</p>\n\n</section>\n<section data-block=\"fit\">\n<h2>Arbeitsbreite und Zugfahrzeug müssen zusammenpassen</h2>\n<p>Breitere Geräte schaffen große Flächen schneller, brauchen aber mehr Zugleistung und ausreichend Platz zum Wenden. Auf kleinen Außenplätzen kann ein kompakter Reitplatzplaner deshalb praktischer sein als ein schweres Profimodell. Wichtig sind die vorhandene Anhängung, das Eigengewicht und die Leistung des Zugfahrzeugs. Ein Gerät, das nur mit Mühe gezogen wird, arbeitet nicht automatisch besser. Ebenso sollte die Breite so gewählt werden, dass Ecken und Übergänge noch sauber erreicht werden können. Wer mit Traktor, Hoflader oder Quad arbeitet, muss außerdem prüfen, welche Kupplung und welche vom Hersteller genannten Leistungsdaten gelten. Die passende Kombination sorgt dafür, dass der Planer gleichmäßig geführt werden kann und nicht bei jeder Kurve seitlich versetzt oder den Boden unnötig aufschiebt.</p>\n\n<p>Für die tägliche Nutzung zählt zudem, wie schnell sich das Gerät an- und abhängen lässt. Muss vor jeder Pflege lange umgebaut werden, wird selbst ein leistungsfähiger Planer in kleinen Betrieben oft seltener eingesetzt. Eine einfache Handhabung kann deshalb wichtiger sein als zusätzliche Funktionen, die nur gelegentlich benötigt werden.</p>\n\n</section>\n<section data-block=\"tools\">\n<h2>Zinken, Schild, Walze und Randhilfe sinnvoll kombinieren</h2>\n<p>Die wichtigsten Bauteile haben unterschiedliche Aufgaben. Zinken lockern die obere Schicht, ein Planierschild verteilt Material und eine Walze oder ein anderes Nachlaufelement beruhigt die Oberfläche. Ein Bandenräumer kann zusätzlich den hochgeschobenen Hufschlag von der Umrandung zurück in die Fläche holen. Gerade an der Bande zeigt sich häufig, ob ein Gerät zum Platz passt. Die folgende Übersicht hilft, die Funktionen auseinanderzuhalten, ohne einzelne Bauteile überzubewerten.</p>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Bauteil</th><th>Aufgabe</th><th>Prüfpunkt</th></tr></thead><tbody>\n<tr><td>Zinken</td><td>Lockern</td><td>Arbeitstiefe</td></tr>\n<tr><td>Schild</td><td>Ebnen</td><td>Materialfluss</td></tr>\n<tr><td>Walze</td><td>Beruhigen</td><td>Verdichtung</td></tr>\n<tr><td>Bandenräumer</td><td>Zurückführen</td><td>Abstand</td></tr>\n</tbody></table>\n<p>Ein gutes Gesamtpaket lässt sich nachvollziehbar einstellen und bearbeitet die Tretschicht gleichmäßig, ohne den Unterbau zu stören. Für einen einfachen Platz kann weniger Ausstattung ausreichen, wenn die vorhandenen Funktionen sauber arbeiten.</p>\n\n<p>Achte bei verstellbaren Elementen darauf, ob die Einstellungen reproduzierbar sind. Skalen, definierte Rastpunkte oder gut sichtbare Anschläge erleichtern es, nach Wetterwechseln wieder zu einer bewährten Einstellung zurückzukehren. Das ist besonders praktisch, wenn mehrere Personen denselben Planer nutzen und die Pflege trotzdem möglichst gleichmäßig bleiben soll.</p>\n\n</section>\n<section data-block=\"practice\">\n<h2>Im Alltag zählen Einstellung und regelmäßige Pflege</h2>\n<p>Auch der beste Reitplatzplaner gleicht eine falsche Anwendung nicht aus. Vor der ersten Nutzung sollte die Arbeitstiefe vorsichtig eingestellt und an einer kleinen Fläche kontrolliert werden. Danach lohnt sich eine gleichmäßige Fahrweise mit überlappenden Bahnen, damit keine Streifen oder Wellen entstehen. Wie oft geplant werden muss, hängt von Nutzung, Wetter und Boden ab. Ein stark frequentierter Platz benötigt meist häufiger leichte Pflege als eine private Fläche mit wenigen Pferden. Sinnvoll ist es, auf sichtbare Veränderungen zu reagieren: deutlicher Hufschlag, verschobenes Material oder verdichtete Zonen zeigen, dass Pflege nötig wird. Regelmäßiges, moderates Bearbeiten ist in der Regel bodenschonender als seltene, sehr aggressive Durchgänge. Nach starkem Regen oder außergewöhnlicher Trockenheit sollte die Einstellung erneut geprüft werden.</p>\n\n<p>Nach einigen Durchgängen lohnt sich ein Vergleich mit dem Zustand vor der Bearbeitung. Bleiben bestimmte Bereiche dauerhaft tiefer oder härter, ist nicht automatisch mehr Arbeitstiefe die Lösung. Ursache können auch Materialverteilung, Entwässerung oder eine beschädigte Trennschicht sein. Dann sollte zuerst der Bodenaufbau geprüft werden, bevor weiter aggressiver geplant wird.</p>\n\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Bei Reitplatzplanern für Pferde entscheidet nicht die größte Arbeitsbreite oder die längste Ausstattungsliste, sondern die passende Kombination aus Boden, Gerät und Zugfahrzeug. Kläre zuerst Aufbau und Stärke der Tretschicht, danach Leistungsbedarf und Platzverhältnisse. Zinken, Schild, Walze und Bandenräumer sollten eine klar erkennbare Aufgabe erfüllen und sich kontrolliert einstellen lassen. Wenn der Planer in der richtigen Tiefe arbeitet, am Rand sauber geführt werden kann und regelmäßig statt nur gelegentlich extrem eingesetzt wird, bleibt die Oberfläche gleichmäßiger und der Unterbau wird geschont. So wird aus dem Gerät ein verlässliches Pflegewerkzeug statt nur ein schwerer Anhänger für den Reitplatz.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für die konkrete Auswahl sind Aufbauplan des Reitbodens und Herstellerangaben zur zulässigen Arbeitstiefe besonders hilfreich. Bei unbekanntem Unterbau sollte die vorhandene Schichtung vor einer tiefen Bearbeitung geklärt werden.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "Reitplatzplaner – Hatzenbichler",
+              "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+            }
+          ],
+          "claims": []
+        },
+        "production_plan_item": {
+          "article_type": "Beratung",
+          "target_keyword": "Reitplatzplaner für Pferde",
+          "topic": "Das Wichtigste über Reitplatzplaner für Pferde",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "reitplatzplaner-beratung",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-67d25107b9dab2e9a336c02a",
+          "job_sha256": "9f851bb00ecc6f096da65846490a038d0bde1fe5742faf26016aba8422522522",
+          "draft_sha256": "5bec83731eb6f2daaeb1b75f8a5d08514a9994ed4647a3bc56407aa7b0cd3e18",
+          "identity_sha256": "ebae28c831501e229ba3bc3c7ce10624b8224a985d81be855c2e3d02b5c25ddf",
+          "visible_text_sha256": "434a0972fa3f7cf7bd5e6fbcfd36bfd04f5423097899790b8886dd875323d643",
+          "section_structure_sha256": "e4e9ca2424de45434e8762cb01bde83d2ee78f2993551b9a95fc98813b1d48f2",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 869,
+          "conclusion_ratio": 0.110472,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "b9bdb32f4ee67806c43a70817c7417d08954647883ad18267657ad422202660e"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "e0941df56151aa5b8049ced048cb92f249ee2255257117a44201cc29a98df43d"
+      }
+    }
+  ]
+}
