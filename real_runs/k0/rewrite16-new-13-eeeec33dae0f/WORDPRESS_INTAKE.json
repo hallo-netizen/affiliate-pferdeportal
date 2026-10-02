@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "longiergurte-faq",
+      "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+      "target_keyword": "Wie lege ich einen Longiergurt an",
+      "title": "Wie lege ich einen Longiergurt an?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "eeeec33dae0f2b8ee4f9db0cbe0ef25534870ae7c41ea0d7c0a0596778d314c1"
+}
