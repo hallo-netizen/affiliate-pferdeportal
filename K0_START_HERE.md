@@ -59,14 +59,15 @@ Job-Identität:
 1. aktuellen Upload binden;
 2. Portal automatisch erkennen;
 3. Recherche;
-4. **Artikel schreiben**;
-5. K0-Regeln prüfen;
-6. PPM 6.7.9;
-7. LanguageTool 6.8;
-8. reparierbare Fehler intern beheben und weiterlaufen;
-9. `SYSTEM4_WORDPRESS_HANDOFF_V1` erzeugen;
-10. Export verifizieren;
-11. finale Datei an Chat ausgeben.
+4. intern `content_profile.search_intent` binden;
+5. **Artikel schreiben**;
+6. K0-Regeln prüfen, inklusive Search-Intent-Konsistenz und Anti-Boilerplate-Gate;
+7. PPM 6.7.9;
+8. LanguageTool 6.8;
+9. reparierbare Fehler intern beheben und weiterlaufen;
+10. `SYSTEM4_WORDPRESS_HANDOFF_V1` erzeugen;
+11. Export verifizieren;
+12. finale Datei an Chat ausgeben.
 
 Kein Warten auf `weiter`.
 
@@ -100,3 +101,13 @@ Der alte `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` ist kein WordPress-Endvertrag.
 - keine Vorabprüfung im Normalbetrieb;
 - keine sichtbaren Zwischenmeldungen;
 - kein Stopp bei intern lösbaren Fehlern.
+
+
+## Semantik-Hardlock
+
+Ein Artikel darf den WordPress-Export **nicht** erreichen, wenn:
+- `article_type` und `content_profile.search_intent` nicht zusammenpassen;
+- ein informationales FAQ in Kauf-, Auswahl-, Passform-, Bedarfs- oder Entscheidungslogik kippt;
+- bekannte K9-Schablonen wie „Für die Praxis heißt das: Betrachte …“, „Trenne Muss-Kriterien …“, „Ein guter Vergleich beginnt …“ oder die alte generische Tabellenform wieder auftauchen.
+
+Diese Sperre ist in `engine/k0_production_gate.py` technisch erzwungen und in `engine/k0_wordpress_export.py` nochmals als Pflicht-Gate gebunden.
