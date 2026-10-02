@@ -78,25 +78,14 @@ jobs:
           unzip -q /tmp/lt68/LanguageTool-6.8.zip -d /tmp/lt68
           echo '2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8  /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar' | sha256sum -c -
 
-      - name: Exact Discgolf visible text through LT 6.8
+      - name: Exact Discgolf article through K0-bound LT 6.8
         run: |
+          set -euo pipefail
+          python3 -m engine.lt68_external /tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar tests/fixtures/k0_hobby_discgolf_article.json /tmp/k0-lt68.json
           python3 - <<'PY'
-          import html,json,re,subprocess,tempfile
-          from pathlib import Path
-          s=Path('tests/fixtures/k0_hobby_discgolf.html').read_text()
-          rows=[]
-          for m in re.finditer(r'(?is)<(h2|p|li|th|td)\b[^>]*>(.*?)</\1>',s):
-              v=html.unescape(re.sub(r'<[^>]+>',' ',m.group(2)))
-              v=re.sub(r'\s+',' ',v).strip()
-              if v: rows.append(v)
-          text='\n\n'.join(rows)
-          p=Path('/tmp/discgolf.txt');p.write_text(text)
-          cp=subprocess.run(['java','-Xmx1024m','-jar','/tmp/lt68/LanguageTool-6.8/languagetool-commandline.jar','--json','-l','de-DE',str(p)],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
-          assert cp.returncode==0,cp.stderr
-          report=json.loads(cp.stdout)
-          matches=report.get('matches') or []
-          if matches:
-              print(json.dumps(matches,ensure_ascii=False,indent=2))
-              raise SystemExit('K0_DISCGOLF_LT68_FINDINGS:'+str(len(matches)))
+          import json
+          r=json.load(open('/tmp/k0-lt68.json'))
+          assert r['status']=='PASS',r
+          assert r['finding_count']==0,r
           print('K0_DISCGOLF_LT68_ZERO_FINDINGS_PASS')
           PY
