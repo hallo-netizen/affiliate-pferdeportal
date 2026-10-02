@@ -133,3 +133,11 @@ Nicht importieren:
 - Reparatur-Commit: `ebdef6afba593e419358b2a224ac272b5b6cbe56`.
 - Finaler K0-Selftest Run `37061356909`: SUCCESS.
 - Kein Produktionsfortschritt verändert; K0 bleibt 14/16 mit Artikel 13 als erstem offenen Blocker.
+
+
+### E8 – K0-START_HERE ohne ausdrückliche Current-Zuordnung
+- Abschlussprüfung: `K0_START_HERE.md` nannte den K0-Startweg, aber nicht ausdrücklich `K0_CURRENT_STATE.json` als alleinige Current-Autorität.
+- Minimalfix: `K0_START_HERE.md` ist jetzt ausdrücklich Navigation und routet genau auf `K0_CURRENT_STATE.json -> Frischecheck -> genau eine NEXT ACTION`.
+- Keine Produktionslogik, Qualitätsregel, LT-/PPM-/WordPress-Bindung oder Publish-Regel geändert.
+- Für die aktuelle K0-Fortsetzung gilt ausschließlich die K0-Current auf dem K0-Branch. Andere Arbeitsbereiche werden nicht zu einer gemeinsamen Statuswahrheit zusammengesetzt.
+- `tmp/k0-rewrite16-content-20261002` ist nur alter Sonderweg-Nachweis, keine Current-/NEXT-ACTION-Autorität. Seine alten kombinierten Exporte bleiben widerrufen.
