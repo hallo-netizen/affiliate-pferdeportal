@@ -4,11 +4,14 @@ on:
   push:
     branches: [konzept0-portal-neutral-20261002]
     paths:
-      - 'real_runs/k0/**/START.json'
-  workflow_dispatch:
+      - 'real_runs/k0/**/SEALED_WRITER_PRODUCT.json'
 
 permissions:
   contents: read
+
+concurrency:
+  group: k0-production-sealed-writer
+  cancel-in-progress: false
 
 jobs:
   production:
@@ -19,66 +22,74 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Resolve exactly one K0 chat job
+      - name: Resolve exactly one sealed K0 writer product
         shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
-          mapfile -t starts < <(git diff --name-only "${{ github.event.before }}" "$GITHUB_SHA" -- 'real_runs/k0/**/START.json')
-          if [ "${#starts[@]}" -ne 1 ]; then
-            echo "K0_REQUIRES_EXACTLY_ONE_START:${#starts[@]}" >&2
+          mapfile -t sealed < <(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- 'real_runs/k0/**/SEALED_WRITER_PRODUCT.json')
+          if [ "${#sealed[@]}" -ne 1 ]; then
+            echo "K0_REQUIRES_EXACTLY_ONE_SEALED_WRITER_PRODUCT:${#sealed[@]}" >&2
             exit 2
           fi
-          start="${starts[0]}"
-          rd="${start%/START.json}"
+          product="${sealed[0]}"
+          rd="${product%/SEALED_WRITER_PRODUCT.json}"
           [[ "$rd" =~ ^real_runs/k0/[A-Za-z0-9._-]+$ ]] || { echo "K0_RUN_DIR_INVALID:$rd" >&2; exit 2; }
-          for f in WORDPRESS_INTAKE.json ARTICLE_PACKAGE.json START.json; do
+          for f in WORDPRESS_INTAKE.json WRITER_JOB.json SEALED_WRITER_PRODUCT.json; do
             test -f "$rd/$f" || { echo "K0_JOB_FILE_MISSING:$f" >&2; exit 2; }
           done
           echo "RUN_DIR=$rd" >> "$GITHUB_ENV"
 
-      - name: Validate start binding
+      - name: Verify sealed writer provenance before any quality gate
         shell: bash
         run: |
+          set -euo pipefail
+          python3 -m engine.k0_writer_station verify "$RUN_DIR/WRITER_JOB.json" "$RUN_DIR/SEALED_WRITER_PRODUCT.json"
           python3 - <<'PY'
           import json,os
           rd=os.environ['RUN_DIR']
-          start=json.load(open(rd+'/START.json'))
           intake=json.load(open(rd+'/WORDPRESS_INTAKE.json'))
-          assert start.get('contract')=='K0_CHAT_START_V1',start
-          assert start.get('start_command')=='K0:start',start
-          assert start.get('batch_sha256')==intake.get('batch_sha256'),start
-          assert start.get('publish_allowed') is False,start
-          print('K0_CHAT_START_BINDING_PASS')
+          job=json.load(open(rd+'/WRITER_JOB.json'))
+          product=json.load(open(rd+'/SEALED_WRITER_PRODUCT.json'))
+          assert intake.get('contract')=='PSERC_TEXTMACHINE_METADATA_BATCH_V2'
+          assert intake.get('item_count')==1 and len(intake.get('items') or [])==1
+          assert intake.get('publish_allowed') is False
+          assert job.get('identity')==intake['items'][0]
+          assert product.get('identity')==intake['items'][0]
+          assert product.get('publish_allowed') is False
+          assert (product.get('writer_provenance') or {}).get('route')=='K0_WRITER_DRAFT_ONLY'
+          print('K0_SEALED_WRITER_ROUTE_PASS')
           PY
 
       - name: Automatic portal assignment
         shell: bash
         run: |
+          set -euo pipefail
           python3 -m engine.k0_portal_resolver "$RUN_DIR/WORDPRESS_INTAKE.json" K0_PORTAL_REGISTRY.json > /tmp/k0-portal.json
           python3 - <<'PY'
-          import json
+          import json,os
           x=json.load(open('/tmp/k0-portal.json'))
+          job=json.load(open(os.environ['RUN_DIR']+'/WRITER_JOB.json'))
           assert x['status']=='PASS',x
-          assert all(i['status']=='AUTO_DETECTED' for i in x['items']),x
+          assert len(x['items'])==1 and x['items'][0]['status']=='AUTO_DETECTED',x
+          assert x['items'][0]['portal_id']==job['portal_id'],(x,job)
           print('K0_PORTAL_AUTO_PASS')
           PY
 
-      - name: Canonical writer quality contract
+      - name: K0 structure semantic and PPM 6.7.9 gates
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.writer_contract_guard stamp "$RUN_DIR/ARTICLE_PACKAGE.json" /tmp/k0-writer-bound.json
-          python3 -m engine.writer_contract_guard verify /tmp/k0-writer-bound.json
-
-      - name: K0 structure and PPM 6.7.9 gates
-        shell: bash
-        run: |
-          python3 -m engine.k0_production_gate /tmp/k0-writer-bound.json /tmp/k0-portal.json /tmp/k0-gates.json
+          python3 -m engine.k0_production_gate "$RUN_DIR/SEALED_WRITER_PRODUCT.json" /tmp/k0-portal.json /tmp/k0-gates.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-gates.json'))
           assert x['status']=='PASS',x
           assert x['structure_table']=='PASS',x
+          assert x['semantic_intent_status']=='PASS',x
+          assert x['anti_boilerplate_status']=='PASS',x
+          assert x['writer_contract_status']=='PASS',x
           assert x['ppm679_status']=='PASS' and x['ppm679_rule_count']==104,x
           print('K0_GATES_PASS')
           PY
@@ -96,7 +107,8 @@ jobs:
       - name: Real LanguageTool 6.8 gate
         shell: bash
         run: |
-          python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar /tmp/k0-writer-bound.json /tmp/k0-lt68-result.json
+          set -euo pipefail
+          python3 -m engine.lt68_external /tmp/k0-lt68/LanguageTool-6.8/languagetool-commandline.jar "$RUN_DIR/SEALED_WRITER_PRODUCT.json" /tmp/k0-lt68-result.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-lt68-result.json'))
@@ -104,7 +116,24 @@ jobs:
           print('K0_LT68_PASS')
           PY
 
-      - name: Build real PSERC 0.28.27 WordPress export
+      - name: Resolve canonical article id from exact PPM registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/k0-binding
+          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip"             -o /tmp/k0-binding/ppm679.zip
+          curl --fail --location --retry 3 --silent --show-error             "https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/control/startmaster0107/runtime_packages/PSERC-FIX.zip"             -o /tmp/k0-binding/pserc-fix.zip
+          echo 'acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1  /tmp/k0-binding/ppm679.zip' | sha256sum -c -
+          echo '77a14aca97f46d60bc9001d66327abb68dd9cac9ad111f8ecefa1a8afd345314  /tmp/k0-binding/pserc-fix.zip' | sha256sum -c -
+          python3 -m engine.canonical_binding "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-binding/ppm679.zip /tmp/k0-binding/pserc-fix.zip /tmp/k0-binding/CANONICAL_BINDINGS.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-binding/CANONICAL_BINDINGS.json'))
+          assert x['status']=='PASS' and len(x['bindings'])==1,x
+          print('K0_CANONICAL_ARTICLE_ID_PASS')
+          PY
+
+      - name: Build and reverify WordPress 0.28.30 direct import
         shell: bash
         run: |
           set -euo pipefail
@@ -115,10 +144,29 @@ jobs:
           )"
           mkdir -p /tmp/k0-final
           out="/tmp/k0-final/K0_WORDPRESS_DIRECT_IMPORT_${batch}.json"
-          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-writer-bound.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json "$out"
+          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" "$RUN_DIR/SEALED_WRITER_PRODUCT.json" /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-binding/CANONICAL_BINDINGS.json "$out"
           python3 -m engine.k0_wordpress_export verify "$out" "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/k0-final/K0_WORDPRESS_VERIFY.json
           sha256sum "$out" | awk '{print $1}' > /tmp/k0-final/K0_WORDPRESS_SHA256.txt
           echo "K0_FINAL_FILE=$out" >> "$GITHUB_ENV"
+
+      - name: Final importer-shape proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,re
+          p=os.environ['K0_FINAL_FILE']
+          doc=json.load(open(p))
+          assert doc['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
+          assert doc['wordpress_review']['plugin_version_verified_against']=='0.28.30'
+          assert doc['wordpress_review']['plugin_build_verified_against']=='0.28.30-pste-v5-binding-safe'
+          assert doc['wordpress_review']['direct_wordpress_upload_ready'] is True
+          assert doc['article_count']==1
+          a=doc['articles'][0]
+          assert re.fullmatch(r'article:[0-9a-f]{24}',a['article_id'])
+          assert hashlib.sha256(('pserc-plan-slot-v2|'+a['article_id']).encode()).hexdigest()==a['plan_slot']
+          print('K0_WORDPRESS_02830_ARTICLE_ID_SHAPE_PASS')
+          PY
 
       - name: Final delivery receipt
         shell: bash
@@ -126,8 +174,7 @@ jobs:
           python3 - <<'PY'
           import hashlib,json,os,pathlib
           p=pathlib.Path(os.environ['K0_FINAL_FILE'])
-          raw=p.read_bytes()
-          doc=json.loads(raw)
+          raw=p.read_bytes(); doc=json.loads(raw)
           rec={
             'contract':'K0_CHAT_DELIVERY_V1',
             'status':'READY_FOR_CHAT_DELIVERY',
@@ -137,13 +184,12 @@ jobs:
             'article_count':doc['article_count'],
             'direct_wordpress_upload_ready':doc['wordpress_review']['direct_wordpress_upload_ready'],
             'plugin_version':doc['wordpress_review']['plugin_version_verified_against'],
+            'plugin_build':doc['wordpress_review']['plugin_build_verified_against'],
             'ppm_version':doc['wordpress_review']['ppm_version_verified_against'],
+            'writer_route':'K0_WRITER_DRAFT_ONLY',
             'publish_allowed':False,
           }
           pathlib.Path('/tmp/k0-final/K0_CHAT_DELIVERY.json').write_text(json.dumps(rec,ensure_ascii=False,indent=2)+'\n')
-          assert rec['wordpress_contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
-          assert rec['direct_wordpress_upload_ready'] is True
-          assert rec['plugin_version']=='0.28.27'
           print('K0_CHAT_DELIVERY_READY')
           PY
 
@@ -156,7 +202,7 @@ jobs:
             /tmp/k0-final/K0_WORDPRESS_VERIFY.json
             /tmp/k0-final/K0_WORDPRESS_SHA256.txt
             /tmp/k0-final/K0_CHAT_DELIVERY.json
-            /tmp/k0-writer-bound.json
+            /tmp/k0-binding/CANONICAL_BINDINGS.json
             /tmp/k0-portal.json
             /tmp/k0-gates.json
             /tmp/k0-lt68-result.json
