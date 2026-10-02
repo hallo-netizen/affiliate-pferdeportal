@@ -50,7 +50,7 @@ GOOD_SCHABRACKE = """<article data-article-type="FAQ">
 <p>Im Pferdesport bleibt Schabracke ein neutraler Fachbegriff. Die abwertende Redewendung und die sachliche Bezeichnung sollten klar getrennt werden.</p>
 </article>"""
 
-BAD_K9_SCHABRACKE = """<article data-article-type="FAQ">
+BAD_TEMPLATE_SCHABRACKE = """<article data-article-type="FAQ">
 <h2>Schabracken verständlich eingeordnet</h2>
 <p>Für die Praxis heißt das: Betrachte ursprüngliche Bedeutung im konkreten Einsatz und vergleiche das Ergebnis anschließend mit den übrigen Anforderungen.</p>
 <p>Betrachte übertragene Bedeutung gemeinsam mit Nutzung, Passform und den weiteren gebundenen Kriterien.</p>
@@ -79,9 +79,9 @@ class TestK0SemanticGuard(unittest.TestCase):
         self.assertEqual(r['semantic_intent_status'],'PASS')
         self.assertEqual(r['anti_boilerplate_status'],'PASS')
 
-    def test_exact_k9_failure_family_is_blocked(self):
+    def test_exact_invalid_template_family_is_blocked(self):
         with self.assertRaisesRegex(g.Blocked,'K0_TEMPLATE_BOILERPLATE_CONTAMINATION'):
-            verify_semantic(package(self.identity,BAD_K9_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
+            verify_semantic(package(self.identity,BAD_TEMPLATE_SCHABRACKE,'INFORMATIONAL_DIRECT_QUESTION'), portal(self.identity))
 
     def test_faq_cannot_be_misbound_as_commercial_advice(self):
         with self.assertRaisesRegex(g.Blocked,'K0_SEARCH_INTENT_MISMATCH'):
