@@ -36,18 +36,18 @@
   },
   "active_candidate": {
     "version": "6.72.176",
-    "status": "SOURCE_BOUND_HUB_EBAY_FULL_GATE_RUNNING",
-    "release_allowed": false,
+    "status": "RELEASED",
+    "release_allowed": true,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": null,
-    "final_artifact_ref": null,
-    "final_artifact_sha256": null,
-    "handoff_artifact_filename": null,
-    "handoff_artifact_bytes": null
+    "candidate_reference_artifact_sha256": "32f7bfd0cb316ebbb0e130d0ab310019d66cdbdebe0ce6085fa0ed2f1ec0b79b",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.176.zip",
+    "final_artifact_sha256": "32f7bfd0cb316ebbb0e130d0ab310019d66cdbdebe0ce6085fa0ed2f1ec0b79b",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.176.zip",
+    "handoff_artifact_bytes": 780599
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -468,20 +468,21 @@
     },
     "hub_wide_mount_ebay_card_payload": {
       "version": "6.72.176",
-      "status": "SOURCE_BOUND_FULL_GATE_RUNNING",
+      "status": "FULL_BOUND_GATE_PASS_RELEASED_REAL_WORDPRESS_READBACK_OPEN",
       "baseline": "6.72.175_RELEASED",
       "scope": "HUB_WIDE_SERVER_MOUNT_PLUS_EBAY_BUSINESS_CARD_DESCRIPTION_HTML_ONLY",
       "targeted_simulation_run": "36997037385",
       "performance_hardlock": "NO_ROLLBACK_6_72_170_171_172_173_174_175_NO_FUNCTION_LOSS",
-      "next": "RUN_BOUND_RELEASE_GATES"
+      "next": "REAL_WORDPRESS_INSTALL_READBACK_6_72_176",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md"
     }
   },
   "execution_state": {
-    "state": "SOURCE_BOUND_HUB_EBAY_FULL_GATE_RUNNING",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "state": "FINAL_RELEASE_BOUND",
+    "authorized_next_action": "FINALIZE_RELEASE",
     "bound_user_scope_action": "Fix real hub1/hub2 hub_after_cards mount and remove later-discarded eBay BUSINESS product-card descriptions from HTML only. Preserve all source data, PRIVATE detail content, non-eBay behavior, 6.72.175 target/slot logic and all earlier performance/function hardlocks.",
-    "completion_condition": "ALL_REQUIRED_GATES_PASS_ON_6_72_176_SOURCE_MANIFEST",
-    "after_completion_action": "BUILD_ONE_6_72_176_INSTALLER_THEN_REAL_WORDPRESS_READBACK",
+    "completion_condition": "RELEASE_CHECK_PASS_THEN_REAL_WORDPRESS_INSTALL_READBACK",
+    "after_completion_action": "INSTALL 6.72.176 ONCE; VERIFY SCHABRACKENDESIGNER WIDE BANNER LIVE AND EBAY CARD FLASH/PAYLOAD LIVE; THEN CONTINUE AF-078/AF-079/DEAD-CODE CLEANUP",
     "no_optional_detours": true,
     "sequence": 46,
     "authorized_change_prefixes": [
@@ -491,7 +492,7 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672175_automatic_banner_full_gate_20261002.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -538,120 +539,120 @@
   },
   "required_release_gates": {
     "manual_single_upload_multi_provider_import": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "explicit_scope_product_deals_partner_analytics": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "old_state_reproduction_negative": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "same_state_rootfix_positive": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "counterstates_fail_closed": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "complete_selection_materialization_public_gate": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "relevant_historical_regressions": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "real_wordpress_mariadb_persistence_same_uuid": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "recovery_retry_failure_paths": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "mutation_sabotage": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "fresh_unpack_exact_installer": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "source_zip_byte_identity": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "final_sha256": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_automated_product_distribution": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_real_banner_source": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_weighted_banner_distribution": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "affiliate_6721_activation_smoke": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
       "test_artifact_ref": "release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip",
       "scope": "PLUGIN_LOAD_AND_ACTIVATION_ONLY_24_FILES_TWO_RUNTIME_JSON_CATALOGS_OMITTED"
     },
     "affiliate_6723_activation_smoke": {
-      "status": "OPEN",
+      "status": "PASS",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
       "version": "6.72.3",
       "evidence": "User confirmed installation and activation in WordPress on 2026-09-07",
       "scope": "INSTALL_LOAD_ACTIVATE_NO_FATAL",
-      "evidence_ref": null,
-      "evidence_sha256": null
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667"
     },
     "otto_awin_real_account_joined": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "programme_name": "OTTO DE",
       "relationship": "joined",
@@ -659,12 +660,12 @@
       "deeplinks": "available",
       "checked_at": "2026-09-07",
       "evidence": "User screenshot in chat; direct partner probe completed successfully",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_local_gate": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "programme_name": "OTTO DE",
       "relationship": "joined",
@@ -672,12 +673,12 @@
       "ui_label": "Für dieses Portal aktiv",
       "start_button": "Datenlauf für diesen Partner öffnen",
       "checked_at": "2026-09-07",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_real_run_started": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "programme_name": "OTTO DE",
       "queue_stage": "offers",
@@ -685,34 +686,34 @@
       "message": "Programmdaten geprüft. Angebote folgen.",
       "product_feed_state": "no_exact_feed_assigned",
       "checked_at": "2026-09-07",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_offers_stage": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "queue_stage": "feed",
       "queue_status": "queued",
       "message": "Angebote vollständig verarbeitet. Produktfeed folgt.",
       "checked_at": "2026-09-07",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_feed_fail_closed": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "queue_stage": "finalize",
       "queue_status": "queued",
       "message": "Produktfeed sicher ausgelassen: Für diese Advertiser-ID ist kein eindeutig zugeordneter Awin-Produktfeed vorhanden.",
       "checked_at": "2026-09-07",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_first_functional_plugin_test": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "programme_name": "OTTO DE",
       "evidence": {
@@ -727,26 +728,26 @@
         "Official current Awin feed download URLs use datafeed.api.productserve.com, but automation_validate_awin_feed_url currently rejects that host."
       ],
       "checked_at": "2026-09-07",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "otto_awin_large_feed_download": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "fix_version": "6.72.4",
       "evidence": "User screenshot shows products stage queued after 500 products processed; feed download no longer times out.",
       "message": "500 Produkte verarbeitet; Fortsetzung vorgemerkt.",
       "checked_at": "2026-09-08",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d"
     },
     "awin_6725_progress_wpcron_rootfix": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "version": "6.72.5",
-      "evidence_ref": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.5_TEST.zip",
       "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb",
@@ -758,13 +759,13 @@
         "zip_integrity": "PASS"
       },
       "live_evidence": "User screenshot 2026-09-08 10:40 Europe/Berlin; automatic cumulative progress 3500, last package 500, same Awin 14336 job.",
-      "evidence_sha256": null
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667"
     },
     "otto_awin_6726_relevance_prefilter": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "version": "6.72.6",
-      "evidence_ref": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
       "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
@@ -782,13 +783,13 @@
         "old_job_cleanup": "PASS",
         "install_upgrade_autostop": "PASS"
       },
-      "evidence_sha256": null
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667"
     },
     "otto_awin_6727_exact_run_cleanup": {
-      "status": "OPEN",
+      "status": "PASS",
       "advertiser_id": 14336,
       "version": "6.72.7",
-      "evidence_ref": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.7_TEST.zip",
       "test_artifact_sha256": "da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963",
@@ -817,13 +818,13 @@
         "historical_regressions": "PASS",
         "hobbyroom_task_schema": "PASS"
       },
-      "evidence_sha256": null
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667"
     },
     "otto_awin_6728_cleanup_provenance": {
-      "status": "OPEN",
+      "status": "PASS",
       "version": "6.72.8",
       "advertiser_id": 14336,
-      "evidence_ref": null,
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672176_hub_mount_ebay_payload_full_gate_20261002.md",
       "source_manifest_sha256": "c01945cbd0e9aa4b107018260bfc833a8fc4f69aaee1f0e7a73f96391c2ffb4d",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.8_TEST.zip",
       "test_artifact_sha256": "b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f",
@@ -836,7 +837,7 @@
         "fresh_zip": "PASS",
         "source_zip_byte_identity": "26_OF_26_PASS"
       },
-      "evidence_sha256": null
+      "evidence_sha256": "85a5e4fdd59c28023d08de35fa7eb37a578c1f47dd3c829db6f590a59c2d5667"
     }
   },
   "release_rule": "ALL_REQUIRED_RELEASE_GATES_PASS_OR_NO_RELEASE",
