@@ -1,0 +1,8 @@
+{
+  "contract": "K0_CHAT_START_V1",
+  "start_command": "K0:start",
+  "batch_sha256": "e9cef4db0f815b5b3b2717cab2671f4db681649abf04250981f644abf741de55",
+  "mode": "NORMAL_CANONICAL_PATH",
+  "new_wordpress_post_required": true,
+  "publish_allowed": false
+}
