@@ -127,11 +127,12 @@ jobs:
           set -euo pipefail
           cat >/tmp/actual-mount.php <<'PHP'
           <?php
-          global $wp_query,$post;
+          global $wp_query,$wp_the_query,$post;
           $o=Pferdeportal_Affiliate_Router::instance();
           $page=absint(get_option('ppar_test_page'));
           $post=get_post($page);
           $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;
           $wp_query->the_post();
 
           $render=new ReflectionMethod($o,'render_affiliate_slot'); $render->setAccessible(true);
@@ -190,11 +191,12 @@ jobs:
           set -euo pipefail
           cat >/tmp/direct.php <<'PHP'
           <?php
-          global $wp_query,$post;
+          global $wp_query,$wp_the_query,$post;
           $o=Pferdeportal_Affiliate_Router::instance();
           $page=absint(get_option('ppar_test_page'));
           $post=get_post($page);
           $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;
           $wp_query->the_post();
 
           $ctxM=new ReflectionMethod($o,'get_content_context'); $ctxM->setAccessible(true);
@@ -220,11 +222,12 @@ jobs:
           set -euo pipefail
           cat >/tmp/negative-duplicate.php <<'PHP'
           <?php
-          global $wp_query,$post;
+          global $wp_query,$wp_the_query,$post;
           $o=Pferdeportal_Affiliate_Router::instance();
           $page=absint(get_option('ppar_test_page'));
           $post=get_post($page);
           $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;
           $wp_query->the_post();
 
           $render=new ReflectionMethod($o,'render_affiliate_slot'); $render->setAccessible(true);
@@ -251,11 +254,12 @@ jobs:
           set -euo pipefail
           cat >/tmp/negative-empty.php <<'PHP'
           <?php
-          global $wp_query,$post;
+          global $wp_query,$wp_the_query,$post;
           $o=Pferdeportal_Affiliate_Router::instance();
           $page=absint(get_option('ppar_test_page'));
           $post=get_post($page);
           $wp_query=new WP_Query(['page_id'=>$page,'post_type'=>'page']);
+          $wp_the_query=$wp_query;
           $wp_query->the_post();
 
           $m=new ReflectionMethod($o,'auto_inject_template_affiliate_slots'); $m->setAccessible(true);
