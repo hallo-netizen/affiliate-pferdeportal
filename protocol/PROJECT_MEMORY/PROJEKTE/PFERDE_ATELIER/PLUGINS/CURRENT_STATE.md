@@ -1,15 +1,16 @@
 # PLUGINS – CURRENT STATE
 
-## TEXT-/SEO-PLUGIN-DELTA 2026-10-01
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-02
 
-Dieser Block ist Inventar-/Betriebsreadback; Fach-/Releaseautorität bleibt im TEXT-Bereich bzw. technischer Originalquelle.
+Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
 
-- Portal SEO Redaktionsplan Compiler: im aktuellen Arbeitsstrang wurde **0.28.30** installiert; der zunächst weiter bestehende `PSERC_SEO_CAPABILITY_BINDING_BLOCKED` verschwand erst nach anschließendem PSTE-Austausch. Der spätere reale PSERC-Lauf erreichte `COMPLETE`.
-- Portal SEO Themenengine: im aktuellen Arbeitsstrang wurde der neu nummerierte **0.57.17**-Reinstall-Kandidat installiert; danach erreichte der reale PSERC/Snapshot-Weg `COMPLETE`. Diese Aussage stützt sich auf den Nutzer-Installationsschritt + nachfolgenden erfolgreichen Workflow, nicht auf einen separat archivierten Pluginlisten-Screenshot.
-- Danach lokal gebaut: **PSTE 0.57.18 – EXISTING POTENTIAL FIRST**. Dieser Kandidat ist **nicht als live installiert belegt** und darf nicht als aktueller Live-Stand ausgegeben werden.
-- 0.57.18 ist nur ein Teilfix: sichere `AUTO_REENTRY_ELIGIBLE`-Sandbox-Kandidaten vor Retained Backlog/Provider verwerten. Er ändert die bereits vorhandene Titel-/Familien-/Kategorie-Automatik nicht.
-- Der offene Verwertungsfehler liegt fachlich im TEXT-Bereich: zu wenige gespeicherte Kandidaten erreichen trotz vorhandener Auto-Editorialisierung planning-ready/READY. Routing: `../TEXT/CURRENT_STATE.md`.
-- Die bereits laufende Recherchewelle wird nicht für einen Pluginwechsel unterbrochen.
+- Portal SEO Redaktionsplan Compiler: **0.28.30** im aktuellen Arbeitsstrang installiert; späterer realer PSERC-Lauf erreichte COMPLETE.
+- Portal SEO Themenengine: **0.57.26 live belegt** durch Nutzer-Screenshot vom 02.10.2026.
+- PSTE 0.57.26 Live-Ergebnis: Speicherpflege COMPLETE / 646,3 MB eingespart; Bestandsaufbereitung COMPLETE; 695 neue Titelkandidaten; 8 zusätzlich PSERC-prüfbar; 36 vollständig aufbereitet; keine Provider-Abfrage.
+- Plugin-Updateereignis: `PU-20261002-001`.
+- Fachstatus/NEXT ACTION ausschließlich: `../TEXT/CURRENT_STATE.md`.
+- Isolierte Binärkopie `ISOLIERTE_PLUGINS/.../CURRENT.zip` wurde in diesem Chat **nicht** in GitHub synchronisiert; der geprüfte Installer liegt als Chat-Artefakt vor. Keine falsche Binärsynchronisierung behaupten.
+
 
 
 STAND: 2026-10-01
