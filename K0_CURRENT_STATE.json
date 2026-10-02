@@ -2,9 +2,9 @@
   "contract": "K0_CURRENT_STATE_V1",
   "role": "SOLE_CURRENT_AUTHORITY",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "READY_FOR_NORMAL_CHAT_PRODUCTION",
-  "first_open_blocker": null,
-  "next_action": "IMPORT_REWRITE16_WORDPRESS_FILE_AFTER_TRASH_PERMANENTLY_EMPTIED",
+  "status": "REWRITE16_WRITER_CONTRACT_REPAIR_REQUIRED",
+  "first_open_blocker": "REWRITE16_ALL_16_BLOCKED_AT_CANONICAL_WRITER_QUALITY_CONTRACT",
+  "next_action": "REPAIR_REWRITE16_TO_WRITER_CONTRACT_THEN_RERUN_NORMAL_K0_PATH",
   "start_command": "K0:start",
   "start_door": {
     "repository": "hallo-netizen/text-start",
@@ -51,20 +51,16 @@
     "wordpress_export_requires_semantic_gate_pass": true
   },
   "last_rewrite16": {
-    "status": "SUCCESS",
-    "source": "K9_AFFECTED_16_FULL_REWRITE",
-    "production_branch": "tmp/k0-rewrite16-content-20261002",
-    "workflow_run": 37036519735,
-    "article_count": 16,
-    "portal": "pferdeatelier",
-    "language_tool_6_8": "PASS_ALL_16",
-    "ppm_6_7_9": "PASS_ALL_16_104_OF_104",
-    "semantic_anti_boilerplate": "PASS_ALL_16",
-    "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
-    "wordpress_plugin_version": "0.28.30",
-    "direct_wordpress_upload_ready": true,
-    "final_sha256": "f3d5f74fbb32c03b2c23d70db57eb3d25b19dc01d31ba8603d18a23913c913c2",
-    "schabracke_reclassified_to": "pferdewissen-grundlagen",
+    "status": "INVALIDATED_DO_NOT_IMPORT",
+    "reason": "WRITER_CONTRACT_BYPASS_DISCOVERED_AND_HARDLOCKED",
+    "old_workflow_run": 37036519735,
+    "old_final_sha256": "f3d5f74fbb32c03b2c23d70db57eb3d25b19dc01d31ba8603d18a23913c913c2",
+    "new_jobs_created": 16,
+    "new_jobs_status": "ALL_BLOCKED_AT_WRITER_QUALITY_CONTRACT",
+    "latest_run": 37041729090,
+    "latest_blocker": "WRITER_TOTAL_WORD_RANGE:576:750:900",
+    "canonical_writer_lock": "ACTIVE",
+    "wordpress_export_from_old_batch_allowed": false,
     "publish_allowed": false
   }
 }
