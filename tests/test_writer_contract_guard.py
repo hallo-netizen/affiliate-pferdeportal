@@ -33,12 +33,14 @@ class WriterContractGuardTests(unittest.TestCase):
     def test_short_h2_sections_are_blocked_before_receipt(self):
         a=good_article()
         a['html']=a['html'].replace(words(135,'Kriterium'),words(35,'Kriterium'))
+        a['html']=a['html'].replace(words(75,'Einleitung'),words(180,'Einleitung'))
         with self.assertRaisesRegex(WriterContractBlocked,'WRITER_H2_WORD_RANGE'):
             bind_receipt(a)
 
     def test_short_conclusion_is_blocked_before_receipt(self):
         a=good_article()
         a['html']=a['html'].replace(words(88,'Fazitwort'),words(20,'Fazitwort'))
+        a['html']=a['html'].replace(words(75,'Einleitung'),words(150,'Einleitung'))
         with self.assertRaisesRegex(WriterContractBlocked,'WRITER_CONCLUSION_TOO_SHORT'):
             bind_receipt(a)
 
