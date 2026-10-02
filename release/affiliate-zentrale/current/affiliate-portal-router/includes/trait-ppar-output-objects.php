@@ -1350,6 +1350,20 @@ trait PPAR_Output_Objects_Trait {
         $priority = $creative_type === 'product'
             ? array('hub_product_1','category_product_1','journal_product_1','hub_product_2','category_product_2','journal_product_2','hub_product_3','category_product_3','journal_product_3')
             : array('start_after_topics','product_after_category_tiles','glossary_single_desktop_banner','glossary_single_mobile_banner','breed_single_desktop_banner','breed_single_mobile_banner','post_inline_banner','glossary_overview_banner','breed_overview_banner','journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner','hub_after_cards','hub_grid_card');
+
+        // V6.72.175: Das gewaehlte Portalziel bestimmt zuerst seinen realen
+        // Werbeplatzkontext. Ein explizit passender Hub-/Kategorie-/Journal-Slot
+        // muss vor einem kontextlosen semantischen Fallback gewinnen. Die
+        // bestehende Prioritaet innerhalb derselben Kontextstufe bleibt erhalten.
+        if ($target_context !== '') {
+            foreach ($priority as $slot_id) {
+                if (!isset($matches[$slot_id])) { continue; }
+                $contexts = array_map('sanitize_key', (array) ($matches[$slot_id]['target_contexts'] ?? array()));
+                if ($contexts && in_array($target_context, $contexts, true)) {
+                    return array('slot_id'=>$slot_id,'rule'=>$matches[$slot_id]);
+                }
+            }
+        }
         foreach ($priority as $slot_id) { if (isset($matches[$slot_id])) { return array('slot_id'=>$slot_id,'rule'=>$matches[$slot_id]); } }
         $slot_id = array_key_first($matches);
         return array('slot_id'=>$slot_id,'rule'=>$matches[$slot_id]);
