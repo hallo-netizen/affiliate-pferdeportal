@@ -1,0 +1,38 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "gesundheit-regeneration-kuehlgamaschen-beratung",
+    "plan_slot": "307f0a6f59c3d8c1cef8fd88c59754aada60fef9aee6de617a7f0e7b1419da0b",
+    "target_keyword": "Kühlgamaschen für Pferde",
+    "title": "Passende Kühlgamaschen für Pferde wählen"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Can Cold Therapy Safeguard Sport Horses From Injury? – The Horse",
+          "source_url": "https://thehorse.com/189211/can-cold-therapy-safeguard-sport-horses-from-injury/"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Kühlgamaschen für Pferde",
+      "topic": "Passende Kühlgamaschen für Pferde wählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-regeneration-kuehlgamaschen-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
