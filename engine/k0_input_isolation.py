@@ -101,6 +101,17 @@ def validate(payload, run_instance_id):
 
     pc = payload['production_context']
     fp = pc['fact_pack']
+
+    freshness = payload.get('research_freshness_receipt')
+    if not isinstance(freshness, dict) or freshness.get('contract') != 'K0_RESEARCH_FRESHNESS_GUARD_V1' or freshness.get('status') != 'PASS':
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_FRESHNESS_RECEIPT_MISSING')
+    if freshness.get('historical_fact_pack_reuse') is not False or freshness.get('historical_research_packet_reuse') is not False:
+        raise Blocked('K0_INPUT_ISOLATION_HISTORICAL_RESEARCH_REUSE_NOT_BLOCKED')
+    if freshness.get('fact_pack_sha256') != _stable(fp):
+        raise Blocked('K0_INPUT_ISOLATION_FACT_PACK_FRESHNESS_HASH_MISMATCH')
+    if freshness.get('research_claims_sha256') != _stable(claims):
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_CLAIMS_FRESHNESS_HASH_MISMATCH')
+
     receipt = {
         'contract': CONTRACT,
         'status': 'PASS',
@@ -119,6 +130,7 @@ def validate(payload, run_instance_id):
         'fact_pack_sha256': _stable(fp),
         'research_claims_sha256': _stable(claims),
         'research_source_urls_sha256': _stable(sorted(urls)),
+        'research_freshness_receipt_sha256': _stable(freshness),
         'publish_allowed': False,
     }
     return receipt
