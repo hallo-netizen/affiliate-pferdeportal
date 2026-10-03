@@ -2,13 +2,14 @@
 
 PLUGIN_ID: PA-E-019
 NAME: Portal SEO Themenengine
-REAL_BEOBACHTETE_VERSION: 0.57.12
-REAL_CURRENT_FALLBACK_SHA256: 0cf9c4004f9c237ac60a70a324c431193f8ddcce640ce1a2d08ddbdf901fdc9b
-KANDIDAT_VERSION: 0.57.13
-KANDIDAT_SHA256: bb5f3cc84dc00fa85e2c0ddf48c8994a4788c2595c6d98f0d440780377060248
-KANDIDAT_EVIDENCE: ../../PSTE_0.57.13_CANDIDATE_EVIDENCE_20260930.md
-PRUEFSTATUS: Kandidat HARD PASS / NOCH NICHT LIVE.
+REAL_BEOBACHTETE_VERSION: 0.57.26
+REAL_LIVE_INSTALLER_SHA256: d7d00c1b13144fc584a593993714721ec9a8679e7d65f017e1bc2ed10c1306d6
+KANDIDAT_VERSION: 0.57.27
+KANDIDAT_NAME: PSTE-0.57.27-PRODUCTWAHL-CLASSIFICATION-CANDIDATE.zip
+KANDIDAT_SHA256: 414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79
+KANDIDAT_EVIDENCE: ../../../../../PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md
+PRUEFSTATUS: LOKALER KANDIDAT / ZIP PASS / PHP 80-80 PASS / PRODUKTWAHL POS-NEG 13-13 PASS / NICHT LIVE / KEIN PRODUKTIONS-PASS
 CURRENT_ZIP_STATUS: BLOCKED
 KANDIDAT_ZIP_REPO_STATUS: BLOCKED
-BLOCKER: Der in diesem Chat verfügbare GitHub-Schreibweg kann Text/Git-Objekte schreiben, aber den lokal erzeugten ZIP-Bytebestand nicht direkt als Repository-Binärdatei übernehmen. Keine erfundene oder rekonstruierte ZIP wurde eingecheckt.
+BLOCKER: Der verfügbare GitHub-Schreibweg kann Textdateien, aber den lokal geprüften ZIP-Bytebestand nicht als identische Repository-Binärdatei synchronisieren. Keine rekonstruierte oder falsche CURRENT.zip einchecken.
 ROLLE: Manifest/Blockerbeleg; keine Fach-/Release-/LIVE-Autorität.
