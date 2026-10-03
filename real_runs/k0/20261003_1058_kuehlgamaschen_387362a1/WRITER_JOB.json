@@ -1,0 +1,82 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-regeneration-kuehlgamaschen-faq",
+    "plan_slot": "28ecc3ae064ab04c5e867125d889a696c03406e48ab67e10a44e0b47578f9c5c",
+    "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+    "title": "Sind Kühlgamaschen für Pferde sinnvoll?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:7f4a03d1651779e52ac59401",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "McCarthy et al. 2025 – In vivo effects of cold therapy and bandaging",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/39996479/"
+        },
+        {
+          "source_title": "Thermodynamic effects of commercially available ice boots",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/29445615/"
+        },
+        {
+          "source_title": "A comparison of seven methods for continuous therapeutic cooling",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/25385194/"
+        },
+        {
+          "source_title": "Distal limb immersion in ice and water",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/39842089/"
+        }
+      ],
+      "claims": [
+        "Kühlboots können die Temperatur am Pferdebein messbar senken.",
+        "Ein 2025 untersuchtes Kompressions-Kühlsystem senkte die Kerntemperatur von Beugesehnen stärker als Eisboots.",
+        "Für intensive digitale Kryotherapie bei Laminitis sind Eis-Wasser-Verfahren nicht mit einfacher Kühlung nach Training gleichzusetzen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+      "topic": "Sind Kühlgamaschen für Pferde sinnvoll?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-a8daa9bb7c48e684245864cb",
+  "job_sha256": "f4fa57f1d95cd66a0368a0f2a66d50d235d364d87d755cd7d3146b16877cf8c7"
+}
