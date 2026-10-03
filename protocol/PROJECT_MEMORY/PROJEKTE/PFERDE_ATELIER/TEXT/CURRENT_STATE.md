@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-03
-STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695ER VOLLEXPORT VORLIEGEND / EXAKTE TITELDEDUP 694
+STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695ER VOLLEXPORT VORLIEGEND / 694 EXAKT EINDEUTIGE TITEL / FRISCHER NORMALPFAD 0 VON 694 PASS
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -23,6 +23,23 @@ Realer WordPress-Readback vom 02.10.2026:
 - Completion: `EXISTING_TITLE_CANDIDATES_GENERATED_NO_PROVIDER_CALL`.
 
 Der vollständige Live-Export liegt jetzt vor: `pste-global-seo-topic-map-20261003-194321-utc.json` aus PSTE 0.57.26. Exakt über `title_candidate_evidence.contract = PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1` wurden **695 Titelkandidaten** extrahiert. Alle 695 besitzen einen nichtleeren `editorial_title`. Exakte Titel-Deduplizierung ergibt **694 eindeutige Titel**; genau eine zusätzliche Dublettenzeile wurde zusammengeführt. Keine semantische Dublettenentscheidung wurde dabei erfunden.
+
+
+Frischer Zielvertrags-/Normalpfad-Readback am 03.10.2026:
+- exakt die vorhandene 0.57.26-Implementierung `PSTE_Normal_Metadata_Path::applyToPayload()` lokal read-only gegen den realen Export + dessen `site_baseline` erneut ausgeführt;
+- **694/694** exakt eindeutige Titel erneut geprüft;
+- Provider-Aufrufe **0**; Writes **0**;
+- `NORMAL_PASS`: **0/694**;
+- `SANDBOX_REQUIRED`: **694/694**;
+- frische Hauptverluste:
+  - Portalrelevanz nicht bewiesen: **146**;
+  - Portalrelevanz bewiesen, Familienzuordnung nicht bewiesen: **364**;
+  - redaktionelle Themen-Normalisierung nicht PASS: **172**;
+  - Typ-/Intent-/Dual-Strand-Block: **11**.
+- zusätzlich **6** Kollisionsgruppen über den bereits vorhandenen `semantic_fingerprint`; sie wurden **nicht automatisch zusammengeführt**, weil der Dubletten-/Kannibalisierungsweg nicht umgangen werden darf.
+
+Wichtig für den aktiven Zielvertrag:
+Die 694 Titel dürfen **nicht manuell als Ersatz für den bestehenden Normal-Metadata-Pfad** in Beitragsarten/Kategorien durchsortiert werden. Der Zielvertrag verlangt ausdrücklich Nutzung/Reparatur des vorhandenen Pfads. Solange `NORMAL_PASS=0`, gibt es keine belastbare Produktionsverteilung.
 
 
 
@@ -66,21 +83,25 @@ Daher:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_694_TITLE_CANDIDATES_NEED_SEMANTIC_DEDUP_AND_ARTICLE_TYPE_DISTRIBUTION`
+`PSTE_694_FRESH_NORMAL_PATH_ZERO_PASS`
 
-Der 695er Export ist nicht mehr der Blocker. Offen ist jetzt die belastbare **semantische Deduplizierung und Beitragsart-Verteilung** der 694 exakt eindeutigen Titel. Produktwahl darf nur nach der lokal geprüften 0.57.27-Regel zugeordnet werden; unklare Fälle bleiben Review statt geraten.
+Der frühere Export-Blocker ist erledigt. Der frische Replay beweist jetzt den eigentlichen Engpass: **kein einziger der 694 exakt eindeutigen Titel erreicht im bestehenden Normal-Metadata-Pfad NORMAL_PASS**. Eine manuelle Beitragsart-Verteilung wäre ein Zielvertrags-Bypass.
+
+Größter frischer interner Block:
+**364 × `PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN`**.
 
 ## GENAU EINE NEXT ACTION
 
-`SEMANTIC_DEDUP_AND_ARTICLE_TYPE_DISTRIBUTION_OF_694`
+`SPLIT_364_FAMILY_ASSIGNMENT_MISSES_BY_EXISTING_EVIDENCE_ONLY`
 
-1. Mit den 694 exakt eindeutigen Titeln weiterarbeiten.
-2. Semantische Dubletten/Kannibalisierung konservativ prüfen.
-3. Beitragsarten FAQ / Beratung / Vergleich / Pflege / Journal / Produktwahl nur bei belastbarer Evidenz zuordnen.
-4. Produktwahl ausschließlich nach der geprüften 0.57.27-Regel; A-vs-B bleibt Vergleich, allgemeine Kaufkriterien bleiben Beratung.
-5. Unklare Fälle als REVIEW belassen; keine Zuordnung erfinden.
-6. Danach neue belastbare Artikelkandidaten mit Titel + Zielkeyword + Artikeltyp + Zielkategorie/Strukturlücke ausgeben.
-7. **Keine neue DataForSEO-/Provider-Recherche vorher.**
+1. Die **364 frischen Familienzuordnungsfehler** ausschließlich mit den bereits vorhandenen `family_resolution`-/`family_membership`-/Portal-Baseline-Daten aufteilen:
+   - echte interne Resolver-/Reentry-Fälle → Lane B;
+   - echte Struktur-/Zuordnungsentscheidungen → Lane C.
+2. Keine neue Familienlogik, keinen neuen Klassifikator und keine neue Recherche erfinden.
+3. Erst nach dieser Trennung den **bestehenden** Family-/Normal-Metadata-Pfad ursächlich reparieren, falls ein belegter Resolverfehler vorliegt.
+4. Beitragsart, Zielkeyword, Kategorie und Plan-Slot erst aus einem echten `NORMAL_PASS` übernehmen.
+5. Die 6 `semantic_fingerprint`-Kollisionsgruppen nur als Dubletten-/Kannibalisierungs-Review führen, nicht automatisch mergen.
+6. **Keine neue DataForSEO-/Provider-Recherche vorher.**
 
 ## NICHT ANFASSEN
 
