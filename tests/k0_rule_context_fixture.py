@@ -2,19 +2,19 @@ def rule_context(identity):
     typ=identity['article_type']
     if typ=='Beratung':
         type_meta={'decision_goal':'Eine passende Entscheidung anhand der Kriterien treffen.','decision_criteria':['Kriterium A','Kriterium B']}
-        blocks=('intro','decision','further_information')
+        blocks=('criteria','decision','further_information')
         list_name='criteria'
     elif typ=='FAQ':
         type_meta={'primary_question':identity['title']}
-        blocks=('intro','details','further_information')
+        blocks=('answer','details','further_information')
         list_name='key_answers'
     elif typ=='Pflege':
         type_meta={'procedure_goal':'Den Ablauf sicher und nachvollziehbar durchführen.','procedure_steps':['Schritt A','Schritt B'],'risk_controls':['Risiko A']}
-        blocks=('intro','risks','further_information')
+        blocks=('steps','risks','further_information')
         list_name='steps'
     elif typ=='Vergleich':
         type_meta={'comparison_targets':['Option A','Option B'],'comparison_criteria':['Kriterium A','Kriterium B']}
-        blocks=('intro','comparison','further_information')
+        blocks=('options','comparison','further_information')
         list_name='advantages'
     else:
         type_meta={}
