@@ -2,8 +2,8 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-01
-STATUS: AKTIV / OPERATIVE FACHARBEIT GEBUNDEN
+STAND: 2026-10-03
+STATUS: AKTIV / OPERATIVE FACHARBEIT AUF SEO_KATEGORIEN / HD-001 GEBUNDEN
 
 ## Rolle
 
@@ -11,23 +11,28 @@ Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_PROJEKTLEITUNG`.
 
 ## Aktueller belastbarer Stand
 
-Hobbyrausch ist nicht mehr im leeren Projektstart.
+Der Nutzer hat den Kategorie-Zielrahmen am 2026-10-03 ausdrücklich erweitert.
 
-Die aktuell laufende operative Facharbeit ist an das zuständige Fachbüro `TEXT_REDAKTION` gebunden.
+Die aktuell priorisierte operative Facharbeit ist deshalb an
+`SEO_KATEGORIEN`
+gebunden.
 
-Dynamische Plugin-, Fehler-, Test- und Live-Details werden hier ausdrücklich **nicht kopiert**.
+Dynamische Plugin-, Fehler-, Test- und Live-Details werden hier nicht kopiert.
 
 ## Erster offener Blocker
 
 Projektleitungsseitig keiner.
 
+Der fachliche/technische Blocker steht ausschließlich in der zuständigen
+`SEO_KATEGORIEN/CURRENT_STATE.md`.
+
 ## NEXT ACTION
 
-Keine parallele Projektleitungsarbeit starten.
+Keine parallele Projektleitungs- oder TEXT_REDAKTION-Fortsetzung starten.
 
 Aktuelle Facharbeit über:
-`TEXT_REDAKTION/START_HERE.md` → Autoritätsplan → `TEXT_REDAKTION/CURRENT_STATE.md`
+`SEO_KATEGORIEN/START_HERE.md` → Autoritätsplan → `SEO_KATEGORIEN/CURRENT_STATE.md`
 
 fortführen.
 
-Erst nach Abschluss dieses Fachschritts entscheidet die Projektleitung über den nächsten Büroübergang.
+Erst nach Abschluss/Rückgabe dieses Fachschritts entscheidet die Projektleitung über den nächsten Büroübergang.
