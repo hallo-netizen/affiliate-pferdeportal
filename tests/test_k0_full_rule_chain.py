@@ -15,10 +15,13 @@ def package_from_article(a):
       'target_keyword':a['target_keyword'],
       'title':a['title'],
     }
+    claims=copy.deepcopy(a['research_claims'])
+    for idx,(fid,row) in enumerate(claims.items(),1):
+        row.setdefault('source_url',f'https://example.test/source-{idx}')
     rc={
       'contract':RULE_CONTEXT_CONTRACT,
       'type_meta':copy.deepcopy(a['type_meta']),
-      'research_claims':copy.deepcopy(a['research_claims']),
+      'research_claims':claims,
       'required_fact_ids':copy.deepcopy(a['required_fact_ids']),
       'allowed_fact_ids':copy.deepcopy(a['allowed_fact_ids']),
       'bound_links':copy.deepcopy(a['bound_links']),
