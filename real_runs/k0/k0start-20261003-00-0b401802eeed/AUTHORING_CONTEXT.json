@@ -1,1 +1,188 @@
-{"contract":"K0_AUTHORING_CONTEXT_V1","identity":{"article_type":"Beratung","category":"reitplatzplaner-beratung","plan_slot":"0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15","target_keyword":"Reitplatzplaner für Pferde","title":"Das Wichtigste über Reitplatzplaner für Pferde"},"content_profile":{"search_intent":"DECISION_SUPPORT"},"production_context":{"fact_pack":{"contract":"canonical_fact_pack_v1","status":"SOURCE_VERIFIED_PRODUCTION_READY","sources":[{"source_title":"Reitplatzplaner – Hatzenbichler","source_url":"https://www.hatzenbichler.com/de/striegeltechnik"},{"source_title":"Reitplatzplaner im Pferde Atelier","source_url":"https://pferde-atelier.de/weide/weide-reitplatzpflege/reitplatzplaner/"},{"source_title":"Beratung Reitplatzplaner – Pferde Atelier","source_url":"https://pferde-atelier.de/category/reitplatzplaner-beratung/"},{"source_title":"Installation Reitplatzplaner – Pferde Atelier","source_url":"https://pferde-atelier.de/category/reitplatzplaner-installation/"}],"claims":["Reitplatzplaner werden zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen angeboten und müssen zur jeweiligen Tretschicht passen.","Bei Reitplatzplanern beeinflussen Zinken, Planierleisten, Walzen und Randräumer die Bearbeitung; Arbeitstiefe, Arbeitsbreite und Zugfahrzeug müssen zum vorhandenen Reitboden passen.","Ein Reitplatzplaner sollte nach Boden, Zugfahrzeug, kontrollierbarer Arbeitstiefe, Wendigkeit und verfügbaren Verschleißteilen ausgewählt werden.","Vor der vollständigen Bearbeitung sollte ein Reitplatzplaner auf einer kleinen Testfläche mit zurückhaltender Grundeinstellung erprobt und anschließend schrittweise angepasst werden."]},"production_plan_item":{"article_type":"Beratung","target_keyword":"Reitplatzplaner für Pferde","topic":"Das Wichtigste über Reitplatzplaner für Pferde","quality_binding":{"wordpress_category":{"slug":"reitplatzplaner-beratung","taxonomy":"category"}}}},"rule_context":{"contract":"K0_AUTHORING_RULE_CONTEXT_V1","type_meta":{"decision_goal":"Einen Reitplatzplaner auswählen, der Tretschicht, Zugfahrzeug und tägliche Platzpflege sinnvoll zusammenbringt.","decision_criteria":["Tretschicht und Arbeitstiefe","Arbeitsbreite und Zugfahrzeug","Planierwerkzeuge und Randpflege","Einstellung und Wartung"]},"research_claims":{"F1":{"source_title":"Reitplatzplaner – Hatzenbichler","source_url":"https://www.hatzenbichler.com/de/striegeltechnik","evidence_text_sha256":"b17f0df9918b2e7f7a2c40930a5797acac235135d8e60950ad9317d2e3fdbfbf","statement":"Reitplatzplaner werden zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen angeboten und müssen zur jeweiligen Tretschicht passen.","evidence_text":"Reitplatzplaner werden zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen angeboten und müssen zur jeweiligen Tretschicht passen.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},"F2":{"source_title":"Reitplatzplaner im Pferde Atelier","source_url":"https://pferde-atelier.de/weide/weide-reitplatzpflege/reitplatzplaner/","evidence_text_sha256":"f448a40788f8c6883bb7b7a7a3653c2279f8d6093a2cfc389849d50561f245df","statement":"Bei Reitplatzplanern beeinflussen Zinken, Planierleisten, Walzen und Randräumer die Bearbeitung; Arbeitstiefe, Arbeitsbreite und Zugfahrzeug müssen zum vorhandenen Reitboden passen.","evidence_text":"Bei Reitplatzplanern beeinflussen Zinken, Planierleisten, Walzen und Randräumer die Bearbeitung; Arbeitstiefe, Arbeitsbreite und Zugfahrzeug müssen zum vorhandenen Reitboden passen.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},"F3":{"source_title":"Beratung Reitplatzplaner – Pferde Atelier","source_url":"https://pferde-atelier.de/category/reitplatzplaner-beratung/","evidence_text_sha256":"358befe832f73833dc057d6e4e7287ed8f4b99aa3f28a6f8dbcce9d9186a6936","statement":"Ein Reitplatzplaner sollte nach Boden, Zugfahrzeug, kontrollierbarer Arbeitstiefe, Wendigkeit und verfügbaren Verschleißteilen ausgewählt werden.","evidence_text":"Ein Reitplatzplaner sollte nach Boden, Zugfahrzeug, kontrollierbarer Arbeitstiefe, Wendigkeit und verfügbaren Verschleißteilen ausgewählt werden.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},"F4":{"source_title":"Installation Reitplatzplaner – Pferde Atelier","source_url":"https://pferde-atelier.de/category/reitplatzplaner-installation/","evidence_text_sha256":"1165cdbd8035bab4fd8dd9f75011235948d89cafbecb4eb4f91fb7d022b88ee4","statement":"Vor der vollständigen Bearbeitung sollte ein Reitplatzplaner auf einer kleinen Testfläche mit zurückhaltender Grundeinstellung erprobt und anschließend schrittweise angepasst werden.","evidence_text":"Vor der vollständigen Bearbeitung sollte ein Reitplatzplaner auf einer kleinen Testfläche mit zurückhaltender Grundeinstellung erprobt und anschließend schrittweise angepasst werden.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]}},"required_fact_ids":["F1","F2","F3","F4"],"allowed_fact_ids":["F1","F2","F3","F4"],"bound_links":[{"role":"parent_category","href":"/weide/weide-reitplatzpflege/reitplatzplaner/","anchor":"Reitplatzplaner","block":"intro"},{"role":"semantic_related","href":"/category/reitplatzplaner-beratung/","anchor":"Beratung zu Reitplatzplanern","block":"decision"},{"role":"further_information","href":"/weide/weide-reitplatzpflege/","anchor":"Reitplatzpflege","block":"further_information"}],"link_registry":[{"href":"/weide/weide-reitplatzpflege/reitplatzplaner/","active":true},{"href":"/category/reitplatzplaner-beratung/","active":true},{"href":"/weide/weide-reitplatzpflege/","active":true}],"runtime_link_roles":["parent_category","semantic_related","further_information"],"wordpress_category":{"id":0,"slug":"reitplatzplaner-beratung","taxonomy":"category","id_source":"WORDPRESS_REST_RESOLVE_AT_RUNTIME"},"heading_intent_terms":["Reitplatzplaner","Tretschicht","Arbeitsbreite","Zugfahrzeug","Zinken","Randräumer","Einstellung"],"comparison_source_bindings":[],"table_decision":{"decision":"OMIT_NO_ADDED_VALUE","exception_code":"EXISTING_CHECKLIST_EQUIVALENT","rationale":"Die verpflichtende Kriterienliste bündelt die Auswahlpunkte bereits direkt; eine zusätzliche Tabelle würde dieselbe Entscheidung nur wiederholen."},"semantic_rule_results":{},"table_multiword_exceptions":[],"expected_list_name":"criteria"},"publish_allowed":false}
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "reitplatzplaner-beratung",
+    "plan_slot": "0b401802eeed8574d9c80f7eb5e1abb03c0ac5dbf82fa8b8a95deb7abf3bec15",
+    "target_keyword": "Reitplatzplaner für Pferde",
+    "title": "Das Wichtigste über Reitplatzplaner für Pferde"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Reitplatzplaner – Hatzenbichler",
+          "source_url": "https://www.hatzenbichler.com/de/striegeltechnik"
+        },
+        {
+          "source_title": "Reitplatzplaner im Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/weide/weide-reitplatzpflege/reitplatzplaner/"
+        },
+        {
+          "source_title": "Beratung Reitplatzplaner – Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/category/reitplatzplaner-beratung/"
+        },
+        {
+          "source_title": "Installation Reitplatzplaner – Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/category/reitplatzplaner-installation/"
+        }
+      ],
+      "claims": [
+        "Reitplatzplaner werden zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen angeboten und müssen zur jeweiligen Tretschicht passen.",
+        "Bei Reitplatzplanern beeinflussen Zinken, Planierleisten, Walzen und Randräumer die Bearbeitung; Arbeitstiefe, Arbeitsbreite und Zugfahrzeug müssen zum vorhandenen Reitboden passen.",
+        "Ein Reitplatzplaner sollte nach Boden, Zugfahrzeug, kontrollierbarer Arbeitstiefe, Wendigkeit und verfügbaren Verschleißteilen ausgewählt werden.",
+        "Vor der vollständigen Bearbeitung sollte ein Reitplatzplaner auf einer kleinen Testfläche mit zurückhaltender Grundeinstellung erprobt und anschließend schrittweise angepasst werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Reitplatzplaner für Pferde",
+      "topic": "Das Wichtigste über Reitplatzplaner für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzplaner-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Einen Reitplatzplaner auswählen, der Tretschicht, Zugfahrzeug und tägliche Platzpflege sinnvoll zusammenbringt.",
+      "decision_criteria": [
+        "Tretschicht und Arbeitstiefe",
+        "Arbeitsbreite und Zugfahrzeug",
+        "Planierwerkzeuge und Randpflege",
+        "Einstellung und Wartung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Reitplatzplaner – Hatzenbichler",
+        "source_url": "https://www.hatzenbichler.com/de/striegeltechnik",
+        "evidence_text_sha256": "b17f0df9918b2e7f7a2c40930a5797acac235135d8e60950ad9317d2e3fdbfbf",
+        "statement": "Reitplatzplaner werden zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen angeboten und müssen zur jeweiligen Tretschicht passen.",
+        "evidence_text": "Reitplatzplaner werden zum Planieren von Sand-, Sand-Vlies- und Rindenmulchplätzen angeboten und müssen zur jeweiligen Tretschicht passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Reitplatzplaner im Pferde Atelier",
+        "source_url": "https://pferde-atelier.de/weide/weide-reitplatzpflege/reitplatzplaner/",
+        "evidence_text_sha256": "f448a40788f8c6883bb7b7a7a3653c2279f8d6093a2cfc389849d50561f245df",
+        "statement": "Bei Reitplatzplanern beeinflussen Zinken, Planierleisten, Walzen und Randräumer die Bearbeitung; Arbeitstiefe, Arbeitsbreite und Zugfahrzeug müssen zum vorhandenen Reitboden passen.",
+        "evidence_text": "Bei Reitplatzplanern beeinflussen Zinken, Planierleisten, Walzen und Randräumer die Bearbeitung; Arbeitstiefe, Arbeitsbreite und Zugfahrzeug müssen zum vorhandenen Reitboden passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Beratung Reitplatzplaner – Pferde Atelier",
+        "source_url": "https://pferde-atelier.de/category/reitplatzplaner-beratung/",
+        "evidence_text_sha256": "358befe832f73833dc057d6e4e7287ed8f4b99aa3f28a6f8dbcce9d9186a6936",
+        "statement": "Ein Reitplatzplaner sollte nach Boden, Zugfahrzeug, kontrollierbarer Arbeitstiefe, Wendigkeit und verfügbaren Verschleißteilen ausgewählt werden.",
+        "evidence_text": "Ein Reitplatzplaner sollte nach Boden, Zugfahrzeug, kontrollierbarer Arbeitstiefe, Wendigkeit und verfügbaren Verschleißteilen ausgewählt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Installation Reitplatzplaner – Pferde Atelier",
+        "source_url": "https://pferde-atelier.de/category/reitplatzplaner-installation/",
+        "evidence_text_sha256": "1165cdbd8035bab4fd8dd9f75011235948d89cafbecb4eb4f91fb7d022b88ee4",
+        "statement": "Vor der vollständigen Bearbeitung sollte ein Reitplatzplaner auf einer kleinen Testfläche mit zurückhaltender Grundeinstellung erprobt und anschließend schrittweise angepasst werden.",
+        "evidence_text": "Vor der vollständigen Bearbeitung sollte ein Reitplatzplaner auf einer kleinen Testfläche mit zurückhaltender Grundeinstellung erprobt und anschließend schrittweise angepasst werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+        "anchor": "Reitplatzplaner",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/reitplatzplaner-beratung/",
+        "anchor": "Beratung zu Reitplatzplanern",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/weide/weide-reitplatzpflege/",
+        "anchor": "Reitplatzpflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzplaner-beratung/",
+        "active": true
+      },
+      {
+        "href": "/weide/weide-reitplatzpflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reitplatzplaner-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Reitplatzplaner",
+      "Tretschicht",
+      "Arbeitsbreite",
+      "Zugfahrzeug",
+      "Zinken",
+      "Randräumer",
+      "Einstellung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die verpflichtende Kriterienliste bündelt die Auswahlpunkte bereits direkt; eine zusätzliche Tabelle würde dieselbe Entscheidung nur wiederholen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
