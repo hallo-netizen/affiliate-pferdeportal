@@ -47,7 +47,12 @@ def package_from_article(a):
 
 def with_valid_table(a):
     a=copy.deepcopy(a)
-    # Make room in the global word budget while keeping normal sections comfortably above minimum.
+    # Make room in the global word budget without reducing the paragraph floor.
+    short={
+      'answer':'<p data-fact-ids="F2">Aufgabe und Longierpeitsche bleiben beim Longieren als Hilfe im Training klar.</p>',
+      'details':'<p data-fact-ids="F3">Stimme und Longe bleiben beim Longieren im Zusammenspiel klar verständlich.</p>',
+      'checklist':'<p data-fact-ids="F4">Sicherer Einsatz braucht beim Longieren Kontrolle und ausreichenden Abstand zum Pferd.</p>',
+    }
     for block in ('answer','details','checklist'):
         pat=re.compile(r'(?is)(<section data-block="'+block+r'">.*?)(</section>)')
         m=pat.search(a['html'])
@@ -55,7 +60,7 @@ def with_valid_table(a):
         ps=list(re.finditer(r'(?is)<p\b[^>]*>.*?</p>',body))
         if ps:
             q=ps[-1]
-            body=body[:q.start()]+body[q.end():]
+            body=body[:q.start()]+short[block]+body[q.end():]
             a['html']=a['html'][:m.start()]+body+m.group(2)+a['html'][m.end():]
     h=a['research_claims']['F2']['evidence_text_sha256']
     tr=f'<span class="ppm-source-trace" data-fact-id="F2" data-source-hash="{h}" data-source-title="Fachquelle F2"></span>'
