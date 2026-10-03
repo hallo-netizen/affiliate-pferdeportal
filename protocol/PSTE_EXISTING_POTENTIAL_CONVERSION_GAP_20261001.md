@@ -243,3 +243,23 @@ Erster frischer interner Block:
 `PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN` bei **364** Kandidaten.
 
 Aktueller Status/NEXT ACTION ausschließlich in TEXT/CURRENT_STATE.md.
+
+
+## DELTA 2026-10-03 – ZIELVERTRAGS-LANES NACH FRISCHEM NORMALPFAD
+
+Aus 694 exakt eindeutigen Titeln und dem frischen 0.57.26-Normalpfad-Replay:
+
+- A DIREKT PLANBAR: **0**
+- B OHNE NEUE EXTERNE RECHERCHE REPARIERBAR: **0 aktuell bewiesen**
+- C STRUKTUR-/MENSCHENENTSCHEIDUNG: **548**
+- D GEPRÜFT PARKEN / NICHT PRODUZIEREN: **146**
+
+D = frische Portalrelevanz nicht bewiesen; gemäß Zielvertrag ohne neue Evidenz parken.
+
+C = Portalrelevanz vorhanden, aber der bestehende Pfad verlangt interne Klärung/Review. Besonders:
+- 364 Familienzuordnungsfehler;
+- davon frische Familienauflösung 345 NO_MATCH / 19 REVIEW_REQUIRED;
+- bevorzugte Familienmitgliedschaft 0 PASS.
+
+Daraus folgt ausdrücklich:
+Keine manuelle Beitragsart-/Kategorieverteilung als Ersatzpfad. Zuerst konkrete C-Familien-/Strukturentscheidung, dann normaler Reentry.
