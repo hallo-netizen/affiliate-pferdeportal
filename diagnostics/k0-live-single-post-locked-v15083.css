@@ -1,0 +1,760 @@
+/* Pferde Atelier – Einzelbeitrag LOCK V1.50.83
+   Ausschließlich dieser Bereich wird hier gesteuert. */
+
+:root {
+  --pa-single-surface: #faf7f0;
+  --pa-single-heading: #35422a;
+  --pa-single-heading-secondary: #6a7f4a;
+  --pa-single-text: #555b55;
+  --pa-single-accent: #c89214;
+  --pa-single-line: rgba(106,127,74,.42);
+  --pa-single-heading-font: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --pa-single-body-font: Arial, Helvetica, sans-serif;
+}
+
+/* Titelkasten: mittig, kleiner, identischer heller Hintergrund */
+html body.single-post article .entry-header {
+  box-sizing: border-box !important;
+  width: min(calc(100vw - 32px), var(--pftk-post-reading-width, 760px)) !important;
+  max-width: none !important;
+  margin: 0 0 var(--pftk-title-image-gap, 12px) 50% !important;
+  padding: 0 !important;
+  transform: translateX(-50%) !important;
+  border: 1px solid var(--pa-single-line) !important;
+  border-radius: var(--pftk-global-card-radius, 12px) !important;
+  background: var(--pa-single-surface) !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-header .entry-title {
+  position: relative !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 24px 72px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--pa-single-heading) !important;
+  font-family: var(--pa-single-heading-font) !important;
+  font-size: clamp(24px, 2.35vw, 32px) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.18 !important;
+  text-align: center !important;
+}
+html body.single-post article .entry-header .entry-title::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 18px !important;
+  display: block !important;
+  width: 46px !important;
+  height: 46px !important;
+  transform: translateY(-50%) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url("hufeisen-variante-3-durchgezogen-exakt.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-header .entry-title::after { content: none !important; display: none !important; }
+html body.single-post article .entry-header .entry-meta,
+html body.single-post article .entry-header .entry-meta * {
+  color: var(--pa-single-text) !important;
+  font-family: var(--pa-single-body-font) !important;
+}
+
+/* Beitragsfoto: exakt derselbe Hintergrund */
+html body.single-post article .post-thumb,
+html body.single-post article .post-thumb-img-content,
+html body.single-post article .ast-blog-featured-section,
+html body.single-post article .entry-content > figure:first-of-type,
+html body.single-post article .entry-content > .wp-block-image:first-of-type {
+  box-sizing: border-box !important;
+  padding: 8px !important;
+  border: 1px solid rgba(106,127,74,.32) !important;
+  border-radius: var(--pftk-global-card-radius, 12px) !important;
+  background: var(--pa-single-surface) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+html body.single-post article .entry-content > figure:first-of-type figcaption,
+html body.single-post article .entry-content > .wp-block-image:first-of-type figcaption,
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media figcaption,
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media .wp-element-caption,
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media .wp-caption-text {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 8px 4px 2px !important;
+  border: 0 !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* V1.50.83 – EINZIGE ÄNDERUNG: gemeinsamer Rahmen um Beitragsfoto + bestehenden Introblock */
+html body.single-post article .entry-content > .pa-photo-intro-frame {
+  box-sizing: border-box !important;
+  display: flow-root !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 0 30px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(106,127,74,.32) !important;
+  border-radius: var(--pftk-global-card-radius, 12px) !important;
+  background: var(--pa-single-surface) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 16px 16px 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: calc(var(--pftk-global-card-radius, 12px) - 2px) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media > figure,
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media > picture,
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media > a:has(> img),
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media img {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+  left: auto !important;
+  right: auto !important;
+}
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-photo-intro-media img {
+  height: auto !important;
+  border-radius: 0 !important;
+  object-fit: cover !important;
+}
+html body.single-post article .entry-content > .pa-photo-intro-frame > .pa-article-intro {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 20px 16px 14px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Fließtext: zuverlässig Grau, unabhängig von altem Theme-/Zusatz-CSS */
+html body.single-post article .entry-content {
+  color: var(--pa-single-text) !important;
+  font-family: var(--pa-single-body-font) !important;
+  font-size: 17px !important;
+  line-height: 1.72 !important;
+}
+html body.single-post article .pa-article-intro .pa-article-intro-first:first-letter {
+  float: left !important;
+  margin: .04em .12em 0 0 !important;
+  color: var(--pa-single-heading) !important;
+  font-family: var(--pa-single-heading-font) !important;
+  font-size: 3.25em !important;
+  font-weight: 600 !important;
+  line-height: .82 !important;
+}
+
+html body.single-post article .entry-content p,
+html body.single-post article .entry-content li,
+html body.single-post article .entry-content blockquote,
+html body.single-post article .entry-content figcaption,
+html body.single-post article .entry-content td,
+html body.single-post article .entry-content dd,
+html body.single-post article .entry-content dt {
+  color: var(--pa-single-text) !important;
+  font-family: var(--pa-single-body-font) !important;
+}
+
+/* Überschriften: kein Porcelain, Oliv, Zwischenüberschriften linksbündig */
+html body.single-post article .entry-content h2,
+html body.single-post article .entry-content h3,
+html body.single-post article .entry-content h4 {
+  position: relative !important;
+  margin-top: 1.65em !important;
+  padding-left: 16px !important;
+  color: var(--pa-single-heading) !important;
+  font-family: var(--pa-single-heading-font) !important;
+  font-weight: 600 !important;
+  line-height: 1.22 !important;
+  text-align: left !important;
+}
+html body.single-post article .entry-content h2 { font-size: clamp(27px, 2.4vw, 33px) !important; }
+html body.single-post article .entry-content h3 { color: var(--pa-single-heading-secondary) !important; font-size: clamp(23px, 2vw, 28px) !important; }
+html body.single-post article .entry-content h4 { font-size: clamp(20px, 1.6vw, 23px) !important; }
+html body.single-post article .entry-content h2::before,
+html body.single-post article .entry-content h3::before,
+html body.single-post article .entry-content h4::before {
+  content: "" !important;
+  position: absolute !important;
+  top: .08em !important;
+  bottom: .08em !important;
+  left: 0 !important;
+  width: 3px !important;
+  border-radius: 2px !important;
+  background: var(--pa-single-accent) !important;
+}
+
+/* Alle hinterlegten Inhaltsbereiche: exakt derselbe helle Ton */
+html body.single-post article .entry-content > .pa-article-intro,
+html body.single-post article .entry-content .pa-article-list > li,
+html body.single-post article .entry-content .pa-praxistipp-auto,
+html body.single-post article .entry-content .pa-fazit-auto,
+html body.single-post article .entry-content ul.pa-weiter-links a {
+  background: var(--pa-single-surface) !important;
+}
+html body.single-post article .entry-content > .pa-article-intro,
+html body.single-post article .entry-content .pa-praxistipp-auto,
+html body.single-post article .entry-content .pa-fazit-auto,
+html body.single-post article .entry-content .pa-article-list > li,
+html body.single-post article .entry-content ul.pa-weiter-links a {
+  border-color: var(--pa-single-line) !important;
+}
+/* Aufzählungen: bestätigtes Design mit Haken und Einzelrahmen */
+html body.single-post article .entry-content ul.pa-article-list,
+html body.single-post article .entry-content ol.pa-article-list {
+  list-style: none !important;
+  margin: 20px 0 28px !important;
+  padding: 0 !important;
+  display: grid !important;
+  gap: 10px !important;
+}
+html body.single-post article .entry-content .pa-article-list > li {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 13px 16px 13px 48px !important;
+  border: 1px solid rgba(106,127,74,.28) !important;
+  border-radius: 10px !important;
+  background: var(--pa-single-surface) !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-content ul.pa-article-list > li::before,
+html body.single-post article .entry-content ol.pa-article-list > li::before {
+  content: "✓" !important;
+  position: absolute !important;
+  left: 15px !important;
+  top: 13px !important;
+  width: 22px !important;
+  height: 22px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: var(--pa-single-accent) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+}
+
+/* Fazit: bestätigter Rahmen, heller Hintergrund bleibt */
+html body.single-post article .entry-content .pa-fazit-auto {
+  position: relative !important;
+  margin: 48px 0 34px !important;
+  padding: 24px 26px !important;
+  border: 1px solid rgba(106,127,74,.50) !important;
+  border-radius: var(--pftk-global-card-radius, 12px) !important;
+  background: var(--pa-single-surface) !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-content .pa-fazit-auto::before {
+  content: none !important;
+  display: none !important;
+}
+html body.single-post article .entry-content .pa-fazit-auto > h2,
+html body.single-post article .entry-content .pa-fazit-auto > h3 {
+  margin-top: 0 !important;
+  padding-left: 0 !important;
+}
+html body.single-post article .entry-content .pa-fazit-auto > h2::before,
+html body.single-post article .entry-content .pa-fazit-auto > h3::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Tabellen: transparent, nur innere Linien, vollständig im eigenen Wrapper scrollbar */
+html body.single-post article .entry-content figure.wp-block-table,
+html body.single-post article .entry-content .wp-block-table {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 28px !important;
+  padding: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* V1.50.459 / Contract V94: Tabellen-Grunddesign darf nicht von einer
+   Produktionsmaschinen-Sonderklasse abhängen. Standard-WordPress-Tabellen und
+   kompatible direkte Tabellen erhalten deshalb dieselbe ruhige Primärlinienlogik.
+   Die bestehende spezielle Vier-Spalten-Mobilregel für system-129 bleibt separat. */
+html body.single-post article .entry-content > table,
+html body.single-post article .entry-content figure.wp-block-table > table,
+html body.single-post article .entry-content .wp-block-table > table,
+html body.single-post article .entry-content .comparison-table-wrap > table {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-collapse: collapse !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-content > table th,
+html body.single-post article .entry-content > table td,
+html body.single-post article .entry-content figure.wp-block-table > table th,
+html body.single-post article .entry-content figure.wp-block-table > table td,
+html body.single-post article .entry-content .wp-block-table > table th,
+html body.single-post article .entry-content .wp-block-table > table td,
+html body.single-post article .entry-content .comparison-table-wrap > table th,
+html body.single-post article .entry-content .comparison-table-wrap > table td {
+  box-sizing: border-box !important;
+  padding: 10px 12px !important;
+  vertical-align: top !important;
+  border: 0 !important;
+  border-right: 1px solid var(--pa-single-heading) !important;
+  border-bottom: 1px solid var(--pa-single-heading) !important;
+  background: transparent !important;
+}
+html body.single-post article .entry-content > table th,
+html body.single-post article .entry-content figure.wp-block-table > table th,
+html body.single-post article .entry-content .wp-block-table > table th,
+html body.single-post article .entry-content .comparison-table-wrap > table th {
+  color: var(--pa-single-heading) !important;
+  font-family: var(--pa-single-heading-font) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--pa-single-heading) !important;
+}
+html body.single-post article .entry-content > table th:last-child,
+html body.single-post article .entry-content > table td:last-child,
+html body.single-post article .entry-content figure.wp-block-table > table th:last-child,
+html body.single-post article .entry-content figure.wp-block-table > table td:last-child,
+html body.single-post article .entry-content .wp-block-table > table th:last-child,
+html body.single-post article .entry-content .wp-block-table > table td:last-child,
+html body.single-post article .entry-content .comparison-table-wrap > table th:last-child,
+html body.single-post article .entry-content .comparison-table-wrap > table td:last-child {
+  border-right: 0 !important;
+}
+html body.single-post article .entry-content > table tr:last-child td,
+html body.single-post article .entry-content figure.wp-block-table > table tr:last-child td,
+html body.single-post article .entry-content .wp-block-table > table tr:last-child td,
+html body.single-post article .entry-content .comparison-table-wrap > table tr:last-child td {
+  border-bottom: 0 !important;
+}
+html body.single-post article .entry-content .system-129-table.comparison-table {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 640px !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-collapse: collapse !important;
+  table-layout: auto !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-content .system-129-table.comparison-table th,
+html body.single-post article .entry-content .system-129-table.comparison-table td {
+  min-width: 150px !important;
+  padding: 10px 12px !important;
+  overflow-wrap: anywhere !important;
+  border: 0 !important;
+  border-right: 1px solid var(--pa-single-heading) !important;
+  border-bottom: 1px solid var(--pa-single-heading) !important;
+  background: transparent !important;
+}
+html body.single-post article .entry-content .system-129-table.comparison-table th {
+  color: var(--pa-single-heading) !important;
+  font-family: var(--pa-single-heading-font) !important;
+  border-bottom: 2px solid var(--pa-single-heading) !important;
+}
+html body.single-post article .entry-content .system-129-table.comparison-table th:last-child,
+html body.single-post article .entry-content .system-129-table.comparison-table td:last-child {
+  border-right: 0 !important;
+}
+html body.single-post article .entry-content .system-129-table.comparison-table tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+@media (max-width: 700px) {
+  html body.single-post article .entry-content .pa-fazit-auto {
+    padding: 20px 18px !important;
+  }
+  html body.single-post article .pa-article-intro .pa-article-intro-first:first-letter {
+    font-size: 2.8em !important;
+  }
+  html body.single-post article .entry-header .entry-title {
+    padding: 20px 56px !important;
+    font-size: clamp(22px, calc(20.32px + 0.524vw), 24px) !important;
+  }
+  html body.single-post article .entry-header .entry-title::before {
+    left: 12px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+}
+
+
+
+
+/* V1.50.113: Mobile Tabelle bleibt eine echte Vier-Spalten-Tabelle.
+   Kein Karten-/Stack-Layout, keine Scrollleiste, keine Minischrift in Datenzellen. */
+@media (max-width: 700px) {
+  html body.single-post article .entry-content .comparison-table-wrap {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table {
+    display: table !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table tr {
+    display: table-row !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table th,
+  html body.single-post article .entry-content .system-129-table.comparison-table td {
+    display: table-cell !important;
+    min-width: 0 !important;
+    width: auto !important;
+    padding: 6px 4px !important;
+    vertical-align: top !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table th {
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    font-size: clamp(12px, 3.25vw, 14px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.015em !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table td {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: auto !important;
+    font-size: 14px !important;
+    line-height: 1.38 !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table th:nth-child(1),
+  html body.single-post article .entry-content .system-129-table.comparison-table td:nth-child(1) { width: 28% !important; }
+  html body.single-post article .entry-content .system-129-table.comparison-table th:nth-child(2),
+  html body.single-post article .entry-content .system-129-table.comparison-table td:nth-child(2) { width: 20% !important; }
+  html body.single-post article .entry-content .system-129-table.comparison-table th:nth-child(3),
+  html body.single-post article .entry-content .system-129-table.comparison-table td:nth-child(3) { width: 27.5% !important; }
+  html body.single-post article .entry-content .system-129-table.comparison-table th:nth-child(4),
+  html body.single-post article .entry-content .system-129-table.comparison-table td:nth-child(4) { width: 24.5% !important; }
+}
+
+
+/* V1.50.124 / Option 1b: Lange Tabellenüberschriften dürfen im
+   Tablet-/Zwischenbereich ausschließlich an normalen Wortgrenzen umbrechen.
+   Keine zusätzliche Schriftverkleinerung, keine Trennung innerhalb eines Wortes. */
+@media (min-width: 701px) and (max-width: 980px) {
+  html body.single-post article .entry-content .comparison-table-wrap {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table th,
+  html body.single-post article .entry-content .system-129-table.comparison-table td {
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    padding-left: clamp(5px, 0.9vw, 10px) !important;
+    padding-right: clamp(5px, 0.9vw, 10px) !important;
+  }
+  html body.single-post article .entry-content .system-129-table.comparison-table th {
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    line-height: 1.25 !important;
+  }
+}
+
+/* V1.50.291 – isolierte Kompatibilität für strukturierte Produktionsmaschinen-Beiträge.
+   article.ppm-generated wird auch innerhalb eines zusätzlichen WordPress-/Block-Wrappers erkannt.
+   Normale Einzelbeiträge und alle übrigen Portalbereiche bleiben unverändert. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* Gemeinsamer Rahmen nur um das nachträglich eingefügte Bild und den vorhandenen Introblock. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame {
+  box-sizing: border-box !important;
+  display: flow-root !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 0 30px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(106,127,74,.32) !important;
+  border-radius: var(--pftk-global-card-radius, 12px) !important;
+  background: var(--pa-single-surface) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 16px 16px 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: calc(var(--pftk-global-card-radius, 12px) - 2px) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media > figure,
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media > picture,
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media > a:has(> img),
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media img {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+  left: auto !important;
+  right: auto !important;
+}
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media img {
+  height: auto !important;
+  border-radius: 0 !important;
+  object-fit: cover !important;
+}
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media figcaption,
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media .wp-element-caption,
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-photo-intro-media .wp-caption-text {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 8px 4px 2px !important;
+  border: 0 !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-photo-intro-frame > .pa-article-intro {
+  box-sizing: border-box !important;
+  display: block !important;
+  position: static !important;
+  float: none !important;
+  clear: both !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 20px 16px 14px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Ohne Foto bleibt der strukturierte Introblock neutral; kein Vollseitenrahmen. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > .pa-article-intro {
+  background: transparent !important;
+}
+
+/* Vorhandener Fazitblock erhält das bestätigte Fazitdesign direkt – ohne zweiten Wrapper. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 > section[data-block="conclusion"].pa-fazit-auto {
+  background: var(--pa-single-surface) !important;
+}
+
+/* V1.50.362/V1.50.364 – Herkunftsunabhängiges Design für echte
+   Aufzählungen. Strukturierte Produktionsmaschinen-Beiträge verwenden
+   für UL-Aufzählungen denselben hell hinterlegten Listeneintrag. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 ul.pa-article-list > li {
+  background: var(--pa-single-surface) !important;
+  background-image: none !important;
+  border-color: var(--pa-single-line) !important;
+}
+
+/* V1.50.364 – Semantische Trennung von Aufzählung und Schrittfolge.
+   UL-Aufzählungen bleiben einzeln hell hinterlegt. Geordnete OL-Schritte
+   werden neutral dargestellt, damit Pflege- und Anleitungsbeiträge nicht
+   nahezu vollständig aus farbigen Karten bestehen. */
+html body.single-post article .entry-content ol.pa-article-list {
+  counter-reset: pa-article-step !important;
+  gap: 0 !important;
+}
+html body.single-post article .entry-content ol.pa-article-list > li,
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 ol.pa-article-list > li {
+  counter-increment: pa-article-step !important;
+  padding: 11px 0 11px 46px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--pa-single-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html body.single-post article .entry-content ol.pa-article-list > li::before,
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 ol.pa-article-list > li::before {
+  content: counter(pa-article-step) !important;
+  top: 10px !important;
+  background: #fff !important;
+  color: var(--pa-single-accent) !important;
+  border: 1px solid var(--pa-single-accent) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+}
+
+
+/* V1.50.290 – ausschließlich der verbindliche KI-Hinweis am Artikelende
+   wird kleiner dargestellt. Sonstige Textgrößen bleiben unverändert. */
+html body.single-post article .entry-content p.pa-ai-disclaimer-v150290 {
+  font-size: 0.82em !important;
+}
+
+/* V1.50.293 – ausschließlich Initialbuchstabe strukturierter Beiträge.
+   Sichtbare Buchstabenhoehe auf zwei Textzeilen kalibriert; Browser-Fallback
+   ohne initial-letter-Unterstuetzung bleibt ebenfalls auf zwei Zeilen begrenzt. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 .pa-article-intro .pa-article-intro-first:first-letter {
+  float: left !important;
+  margin: .02em .12em 0 0 !important;
+  font-size: 3.7em !important;
+  line-height: .78 !important;
+}
+@supports (initial-letter: 2.05 2) {
+  html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 .pa-article-intro .pa-article-intro-first:first-letter {
+    float: none !important;
+    initial-letter: 2.05 2 !important;
+    margin: 0 .12em 0 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+}
+@supports (-webkit-initial-letter: 2.05 2) {
+  html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 .pa-article-intro .pa-article-intro-first:first-letter {
+    float: none !important;
+    -webkit-initial-letter: 2.05 2 !important;
+    margin: 0 .12em 0 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+}
+
+/* V1.50.296 – ausschließlich H3-Zwischenüberschriften der strukturierten
+   Produktionsmaschinen-Beiträge: bestätigtes Dunkeloliv und dieselbe
+   sichtbare Größe wie die regulären großen H2-Zwischenüberschriften.
+   Normale ältere Einzelbeiträge und alle übrigen Bereiche bleiben unverändert. */
+html body.single-post article .entry-content article.ppm-generated.pa-ppm-compat-v150291 h3 {
+  color: var(--pa-single-heading) !important;
+  font-size: clamp(27px, 2.4vw, 33px) !important;
+}
+
+/* V1.50.314 – ausschließlich Textlinks innerhalb des redaktionellen
+   Inhalts von Einzelbeiträgen. Struktur-, Bild-, Karten- und Buttonlinks
+   bleiben vom neuen Farbsystem ausgenommen. */
+html body.single-post article .entry-content p a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content blockquote a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content figcaption a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content td a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content dd a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content dt a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content ul:not(.pa-weiter-links):not(.wp-block-buttons) li a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)),
+html body.single-post article .entry-content ol:not(.wp-block-buttons) li a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)) {
+  color: #555b55 !important;
+  text-decoration: underline !important;
+}
+html body.single-post article .entry-content p a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content p a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content blockquote a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content blockquote a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content figcaption a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content figcaption a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content td a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content td a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content dd a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content dd a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content dt a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content dt a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content ul:not(.pa-weiter-links):not(.wp-block-buttons) li a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content ul:not(.pa-weiter-links):not(.wp-block-buttons) li a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible,
+html body.single-post article .entry-content ol:not(.wp-block-buttons) li a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):hover,
+html body.single-post article .entry-content ol:not(.wp-block-buttons) li a:not(.button):not(.wp-element-button):not(.wp-block-button__link):not([class*="button"]):not([class*="btn"]):not([class*="cta"]):not(:has(img)):not(:has(picture)):not(:has(svg)):focus-visible {
+  color: #9A6400 !important;
+  text-decoration: underline !important;
+}
+
+/* V1.50.466 / Contract V101: hard table-following-content spacing invariant.
+   Root cause: V94 generalized table normalization and set margin:0 on direct tables;
+   that silently violated the already-binding V83/V94 28px spacing contract for
+   direct tables and, in the Pferde stylesheet, comparison-table-wrap blocks.
+   Spacing therefore belongs to the OUTER table block, never the inner table. */
+html body.single-post article .entry-content > figure.wp-block-table,
+html body.single-post article .entry-content > .wp-block-table,
+html body.single-post article .entry-content > .comparison-table-wrap,
+html body.single-post article .entry-content > table {
+  margin-bottom: 28px !important;
+}
+html body.single-post article .entry-content > figure.wp-block-table > table,
+html body.single-post article .entry-content > .wp-block-table > table,
+html body.single-post article .entry-content > .comparison-table-wrap > table {
+  margin-bottom: 0 !important;
+}
+
