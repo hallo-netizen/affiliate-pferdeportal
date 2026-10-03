@@ -1,9 +1,10 @@
 import unittest
 
 from engine.k0_input_isolation import validate, Blocked
+from tests.k0_freshness_fixture import bind_freshness
 
 def context(source_url='https://example.org/fresh-source'):
-    return {
+    return bind_freshness({
         'production_context': {
             'fact_pack': {
                 'contract': 'canonical_fact_pack_v1',
@@ -22,7 +23,7 @@ def context(source_url='https://example.org/fresh-source'):
                 }
             }
         },
-    }
+    })
 
 class TestK0InputIsolation(unittest.TestCase):
     def test_fresh_external_research_passes(self):
@@ -30,6 +31,12 @@ class TestK0InputIsolation(unittest.TestCase):
         self.assertEqual(r['status'], 'PASS')
         self.assertFalse(r['historical_article_content_allowed'])
         self.assertTrue(r['current_upload_identity_authority'])
+
+    def test_missing_freshness_receipt_blocks(self):
+        x = context()
+        x.pop('research_freshness_receipt', None)
+        with self.assertRaisesRegex(Blocked, 'RESEARCH_FRESHNESS_RECEIPT_MISSING'):
+            validate(x, 'run:' + 'f'*24)
 
     def test_repository_source_blocks(self):
         with self.assertRaisesRegex(Blocked, 'HISTORICAL_OR_PORTAL_SOURCE_FORBIDDEN'):
