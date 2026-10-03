@@ -12,8 +12,6 @@ Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für P
 - Isolierte `CURRENT.zip` bleibt mangels bytegenauem Binär-Uploadweg BLOCKED; Manifest wurde auf Kandidatenstand aktualisiert.
 - Fachstatus/NEXT ACTION ausschließlich: `../TEXT/CURRENT_STATE.md`.
 
-# PLUGINS – CURRENT STATE
-
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-02
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
