@@ -37,14 +37,6 @@ jobs:
           print('K0_PPM679_104_PARITY_PASS')
           PY
 
-      - name: Temporary chat delivery artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: wordpress-final-canonical-chat-delivery
-          path: real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json
-          if-no-files-found: error
-          retention-days: 1
-
       - name: K0 current hardlocks
         run: |
           python3 - <<'PY'
