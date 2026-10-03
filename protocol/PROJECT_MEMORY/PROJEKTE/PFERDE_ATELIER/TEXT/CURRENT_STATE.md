@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-03
-STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695ER VOLLEXPORT VORLIEGEND / 694 EXAKT EINDEUTIGE TITEL / FRISCHER NORMALPFAD 0 VON 694 PASS
+STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695ER VOLLEXPORT VORLIEGEND / 694 EXAKT EINDEUTIGE TITEL / ZIELVERTRAGS-LANES A0 B0 C548 D146
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -37,6 +37,17 @@ Frischer Zielvertrags-/Normalpfad-Readback am 03.10.2026:
   - redaktionelle Themen-Normalisierung nicht PASS: **172**;
   - Typ-/Intent-/Dual-Strand-Block: **11**.
 - zusätzlich **6** Kollisionsgruppen über den bereits vorhandenen `semantic_fingerprint`; sie wurden **nicht automatisch zusammengeführt**, weil der Dubletten-/Kannibalisierungsweg nicht umgangen werden darf.
+
+
+Frische Zielvertrags-Lane-Klassifikation aus genau diesem Replay:
+- **A DIREKT PLANBAR: 0**
+- **B OHNE NEUE EXTERNE RECHERCHE REPARIERBAR: 0 aktuell bewiesen**
+- **C STRUKTUR-/MENSCHENENTSCHEIDUNG: 548**
+- **D GEPRÜFT PARKEN / NICHT PRODUZIEREN: 146**
+
+Warum B aktuell 0:
+Kein Replay-Fall ist mit der vorhandenen Evidenz bereits als eindeutiger interner Reparaturfall bewiesen. Bei den 364 Familienfehlern lautet die frische Familienauflösung **345 × NO_MATCH / 19 × REVIEW_REQUIRED**; die bevorzugte Familienmitgliedschaft ist **0 × PASS**. Eine automatische B-Hochstufung wäre geraten.
+
 
 Wichtig für den aktiven Zielvertrag:
 Die 694 Titel dürfen **nicht manuell als Ersatz für den bestehenden Normal-Metadata-Pfad** in Beitragsarten/Kategorien durchsortiert werden. Der Zielvertrag verlangt ausdrücklich Nutzung/Reparatur des vorhandenen Pfads. Solange `NORMAL_PASS=0`, gibt es keine belastbare Produktionsverteilung.
@@ -83,25 +94,25 @@ Daher:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_694_FRESH_NORMAL_PATH_ZERO_PASS`
+`PSTE_C_LANE_548_REQUIRES_CONCRETE_STRUCTURE_OR_ASSIGNMENT_DECISIONS`
 
-Der frühere Export-Blocker ist erledigt. Der frische Replay beweist jetzt den eigentlichen Engpass: **kein einziger der 694 exakt eindeutigen Titel erreicht im bestehenden Normal-Metadata-Pfad NORMAL_PASS**. Eine manuelle Beitragsart-Verteilung wäre ein Zielvertrags-Bypass.
+Der Bestand ist jetzt zielvertragskonform klassifiziert: **A0 / B0 / C548 / D146**. Es gibt aktuell keinen belastbaren A- oder B-Kandidaten, der ohne konkrete C-Entscheidung weiter darf.
 
-Größter frischer interner Block:
-**364 × `PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN`**.
+Größter C-Block:
+**364 Familienzuordnungen**; frisch **345 NO_MATCH / 19 REVIEW_REQUIRED / 0 bevorzugte Membership-PASS**.
 
 ## GENAU EINE NEXT ACTION
 
-`SPLIT_364_FAMILY_ASSIGNMENT_MISSES_BY_EXISTING_EVIDENCE_ONLY`
+`DECIDE_C_LANE_FAMILY_OR_STRUCTURE_FOR_364_THEN_NORMAL_REENTRY`
 
-1. Die **364 frischen Familienzuordnungsfehler** ausschließlich mit den bereits vorhandenen `family_resolution`-/`family_membership`-/Portal-Baseline-Daten aufteilen:
-   - echte interne Resolver-/Reentry-Fälle → Lane B;
-   - echte Struktur-/Zuordnungsentscheidungen → Lane C.
-2. Keine neue Familienlogik, keinen neuen Klassifikator und keine neue Recherche erfinden.
-3. Erst nach dieser Trennung den **bestehenden** Family-/Normal-Metadata-Pfad ursächlich reparieren, falls ein belegter Resolverfehler vorliegt.
-4. Beitragsart, Zielkeyword, Kategorie und Plan-Slot erst aus einem echten `NORMAL_PASS` übernehmen.
-5. Die 6 `semantic_fingerprint`-Kollisionsgruppen nur als Dubletten-/Kannibalisierungs-Review führen, nicht automatisch mergen.
-6. **Keine neue DataForSEO-/Provider-Recherche vorher.**
+1. Die **364** Familienfälle als C-Lane einzeln gegen den vorhandenen Portal-Baseline-Bestand entscheiden:
+   - vorhandene eindeutige Familie → konkrete Familienzuordnungsentscheidung;
+   - keine passende vorhandene Familie → echte Strukturentscheidung / Struktur-Gap;
+   - unklar → REVIEW belassen.
+2. Keine neue automatische Zuordnungslogik und keine Beitragsart manuell als Ersatzweg erfinden.
+3. Jede konkrete C-Entscheidung danach wieder durch den **bestehenden Normal-Metadata-/Reentry-Weg** schicken.
+4. Erst ein echter `NORMAL_PASS` darf Zielkeyword + Artikeltyp + Zielkategorie + später Plan-Slot liefern.
+5. **Keine neue DataForSEO-/Provider-Recherche vorher.**
 
 ## NICHT ANFASSEN
 
