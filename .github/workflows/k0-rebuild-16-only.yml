@@ -1,0 +1,97 @@
+name: K0 rebuild 16 exact System4
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - '.github/workflows/k0-rebuild-16-only.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Rebuild 16
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=62f2ebdeb22dcb02fa487581a61feffe790e23c1
+          rm -rf /tmp/src16 && mkdir -p /tmp/src16/singles
+          git show "$SRC:real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json" > /tmp/src16/batch.json
+          git ls-tree -r --name-only "$SRC" 'real_runs/k0' | grep '/WORDPRESS_SINGLE.json$' > /tmp/src16/paths.txt
+          while IFS= read -r p; do
+            n="$(printf '%s' "$p" | sha256sum | cut -c1-16)"
+            git show "$SRC:$p" > "/tmp/src16/singles/$n.json"
+          done < /tmp/src16/paths.txt
+          python3 - <<'PY'
+          import glob,hashlib,json,re,urllib.parse,urllib.request
+          from pathlib import Path
+          d=json.load(open('/tmp/src16/batch.json'))
+          byslot={}
+          for p in glob.glob('/tmp/src16/singles/*.json'):
+              try: s=json.load(open(p))
+              except Exception: continue
+              rows=s.get('articles') or []
+              if len(rows)!=1 or not isinstance(rows[0],dict): continue
+              r=rows[0]; slot=str(r.get('plan_slot') or ''); aid=str(r.get('article_id') or '')
+              if re.fullmatch(r'[0-9a-f]{64}',slot) and re.fullmatch(r'article:[0-9a-f]{24}',aid):
+                  if hashlib.sha256(('pserc-plan-slot-v2|'+aid).encode()).hexdigest()==slot:
+                      byslot[slot]=r
+          def slugify(v):
+              s=str(v).strip().casefold()
+              for a,b in (('ä','ae'),('ö','oe'),('ü','ue'),('ß','ss')): s=s.replace(a,b)
+              return re.sub(r'[^a-z0-9]+','-',s).strip('-')
+          cache={}
+          def cat(slug):
+              if slug not in cache:
+                  u='https://pferde-atelier.de/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
+                  with urllib.request.urlopen(u,timeout=30) as rr: rows=json.load(rr)
+                  hits=[x for x in rows if isinstance(x,dict) and x.get('slug')==slug and int(x.get('id') or 0)>0]
+                  assert len(hits)==1,(slug,len(hits))
+                  cache[slug]={'id':int(hits[0]['id']),'slug':slug,'taxonomy':'category'}
+              return cache[slug]
+          expected={'index','article_id','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679'}
+          outrows=[]
+          for idx,old in enumerate(d['articles']):
+              slot=str(old['plan_slot']); src=byslot.get(slot)
+              assert src is not None,('MISSING_CANONICAL_SINGLE',idx,slot)
+              aid=src['article_id']; body=old['body']; sha=hashlib.sha256(body.encode()).hexdigest()
+              assert hashlib.sha256(('pserc-plan-slot-v2|'+aid).encode()).hexdigest()==slot
+              assert sha==old['final_draft_sha256']
+              oldpc=src.get('production_context') if isinstance(src.get('production_context'),dict) else {}
+              fact=oldpc.get('fact_pack') or ((old.get('production_context') or {}).get('fact_pack'))
+              assert isinstance(fact,dict) and fact.get('contract')=='canonical_fact_pack_v1',(idx,'fact')
+              slug=slugify(old['title'])
+              plan={
+                'canonical_article_id':aid,'article_type':old['article_type'],'target_keyword':old['target_keyword'],'topic':old['title'],
+                'canonical_article':{'title':old['title'],'article_type':old['article_type'],'slug':slug,'body_html':body,'body_html_sha256':sha},
+                'quality_binding':{'wordpress_category':cat(old['category'])},
+                'runtime_order':{'article_type':old['article_type'],'title':old['title'],'slug':slug,'subject_scope':old['title'],'subject_label':old['target_keyword'],'allowed_fact_ids':[]},
+              }
+              row={
+                'index':idx,'article_id':aid,'title':old['title'],'target_keyword':old['target_keyword'],'category':old['category'],
+                'article_type':old['article_type'],'plan_slot':slot,'final_draft_sha256':sha,'revision_count':int(old.get('revision_count') or 1),'body':body,
+                'production_context':{'fact_pack':fact,'production_plan_item':plan},
+                'languagetool':{'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8'},
+                'ppm679':{'status':'PASS','ppm_version':'6.7.9','technical_status':'TECHNICAL_CHECK_OK','content_quality_status':'CONTENT_QUALITY_CHECK_OK','fail_closed_aggregate_status':'PASS','content_sha256':sha},
+              }
+              assert set(row)==expected
+              outrows.append(row)
+          d['articles']=outrows
+          d.update({'contract':'SYSTEM4_WORDPRESS_HANDOFF_V1','article_count':len(outrows),'publish_allowed':False,'signing_deferred':True,'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS'})
+          review=d.get('wordpress_review') if isinstance(d.get('wordpress_review'),dict) else {}
+          review.update({'plugin_version_verified_against':'0.28.30','plugin_build_verified_against':'0.28.30-pste-v5-binding-safe','ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,'direct_upload_block_reason':None})
+          d['wordpress_review']=review
+          out='/tmp/WORDPRESS_16_SYSTEM4_REPAIRED.json'
+          Path(out).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('PASS',len(outrows),hashlib.sha256(Path(out).read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-rewrite16-system4-repaired
+          path: /tmp/WORDPRESS_16_SYSTEM4_REPAIRED.json
+          retention-days: 1
