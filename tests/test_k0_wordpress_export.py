@@ -33,14 +33,15 @@ def deps(i):
     portal={'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS','items':[{'portal_id':'hobby','status':'AUTO_DETECTED','job_identity':ident}]}
     gate={'contract':'K0_PRODUCTION_GATES_V1','status':'PASS','body_sha256':sha,'semantic_intent_status':'PASS','anti_boilerplate_status':'PASS','writer_contract_status':'PASS','writer_policy_sha256':'writer-policy','ppm679_status':'PASS','ppm679_rule_count':104}
     lt={'status':'PASS','finding_count':0,'html_sha256':sha}
+    full_rules={'contract':'K0_FULL_RULE_FINAL_V1','status':'PASS','html_sha256':sha}
     category=[{'id':321,'slug':ident['category']}]
-    return p,portal,gate,lt,category
+    return p,portal,gate,lt,full_rules,category
 
 class TestK0WordPressExport(unittest.TestCase):
     def test_exact_proven_system4_shape(self):
-        i=intake(); p,portal,gate,lt,category=deps(i)
+        i=intake(); p,portal,gate,lt,full_rules,category=deps(i)
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
-            out=w.build(i,p,portal,gate,lt,bindings(i),category)
+            out=w.build(i,p,portal,gate,lt,full_rules,bindings(i),category)
         self.assertEqual(out['contract'],'SYSTEM4_WORDPRESS_HANDOFF_V1')
         a=out['articles'][0]
         self.assertEqual(set(a),set(w.ARTICLE_FIELDS))
@@ -59,13 +60,13 @@ class TestK0WordPressExport(unittest.TestCase):
         wrong='article:000000000000000000000000'
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
             with self.assertRaisesRegex(w.Blocked,'K0_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH'):
-                w.build(i,p,portal,gate,lt,{'contract':'K10_CANONICAL_ARTICLE_BINDINGS_V1','status':'PASS','bindings':{PLAN_SLOT:wrong}},category)
+                w.build(i,p,portal,gate,lt,full_rules,{'contract':'K10_CANONICAL_ARTICLE_BINDINGS_V1','status':'PASS','bindings':{PLAN_SLOT:wrong}},category)
 
     def test_missing_live_category_blocks(self):
         i=intake(); p,portal,gate,lt,category=deps(i)
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
             with self.assertRaisesRegex(w.Blocked,'K0_WORDPRESS_CATEGORY_ID_NOT_UNIQUE'):
-                w.build(i,p,portal,gate,lt,bindings(i),[])
+                w.build(i,p,portal,gate,lt,full_rules,bindings(i),[])
 
     def test_nested_id_mismatch_blocks_verification(self):
         i=intake(); p,portal,gate,lt,category=deps(i)
