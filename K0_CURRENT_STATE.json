@@ -45,7 +45,10 @@
       "CANONICAL_ID_BINDING",
       "PUBLISH_SAFETY",
       "OTHER_PLUGINS_OR_DESIGN_AREAS"
-    ]
+    ],
+    "historical_content_as_writer_input_allowed": false,
+    "final_github_link_delivery_allowed": false,
+    "final_chat_file_delivery_required": true
   },
   "rewrite16": {
     "total": 16,
@@ -335,5 +338,51 @@
     ],
     "historical_outputs_role": "HISTORY_EVIDENCE_ONLY_NEVER_PRODUCTION_SUBSTITUTE",
     "fail_closed_code": "K0_FRESH_EXECUTION_REQUIRED"
+  },
+  "content_isolation_hardlock": {
+    "status": "ACTIVE",
+    "scope": "RESEARCH_WRITER_REPAIR",
+    "current_upload_identity_authority": true,
+    "fresh_external_research_required": true,
+    "old_article_content_allowed": false,
+    "old_writer_draft_allowed": false,
+    "old_repair_text_allowed": false,
+    "old_fact_pack_allowed": false,
+    "old_research_packet_allowed": false,
+    "old_real_run_output_allowed": false,
+    "old_recovery_or_archive_content_allowed": false,
+    "live_portal_article_as_research_allowed": false,
+    "allowed_additional_inputs": [
+      "FRESH_EXTERNAL_RESEARCH_THIS_RUN",
+      "CURRENT_K0_RULES",
+      "CURRENT_WORDPRESS_CATEGORY_BINDING",
+      "CURRENT_INTERNAL_LINK_BINDINGS"
+    ],
+    "technical_history_use_only": [
+      "HASH_EVIDENCE",
+      "GATE_EVIDENCE",
+      "NEGATIVE_REGRESSION_EVIDENCE",
+      "HISTORICAL_TEXT_OVERLAP_DETECTION"
+    ],
+    "machine_guards": [
+      "K0_FRESH_INPUT_ISOLATION_V1",
+      "K0_HISTORICAL_CONTENT_GUARD_V1"
+    ],
+    "historical_text_overlap_words": 18,
+    "fail_closed_codes": [
+      "K0_INPUT_ISOLATION_BLOCKED",
+      "K0_HISTORICAL_TEXT_REUSE_BLOCKED"
+    ]
+  },
+  "chat_file_delivery_hardlock": {
+    "status": "ACTIVE",
+    "final_output_must_be_chat_file": true,
+    "github_link_as_final_output_allowed": false,
+    "raw_link_as_final_output_allowed": false,
+    "actions_link_as_final_output_allowed": false,
+    "artifact_link_as_final_output_allowed": false,
+    "exact_verified_bytes_required": true,
+    "hash_recheck_before_chat_delivery": true,
+    "fail_closed_code": "K0_CHAT_FILE_DELIVERY_REQUIRED"
   }
 }
