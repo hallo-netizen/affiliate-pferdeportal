@@ -125,6 +125,13 @@ def validate_rule_context(ctx,identity):
         blocks.append(block)
     if len(set(blocks))!=len(blocks):
         raise Blocked('K0_RULE_CONTEXT_LINK_BLOCKS_NOT_DISTINCT')
+    by_role={str(x.get('role') or ''):x for x in links if isinstance(x,dict)}
+    if str((by_role.get('further_information') or {}).get('block') or '')!='further_information':
+        raise Blocked('K0_RULE_CONTEXT_FURTHER_LINK_POSITION_INVALID')
+    non_main={'intro','conclusion','further_information','table'}
+    for role in ('parent_category','semantic_related'):
+        if str((by_role.get(role) or {}).get('block') or '') in non_main:
+            raise Blocked('K0_RULE_CONTEXT_MAIN_LINK_DISTRIBUTION_INVALID:'+role)
 
     registry=ctx.get('link_registry')
     if not isinstance(registry,list):
