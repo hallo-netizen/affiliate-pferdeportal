@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-09-16
+STAND: 2026-10-03
 
 Zweck: **Was wurde geändert – und warum?**
 
@@ -367,3 +367,22 @@ REGEL:
 
 BELEG:
 `PROJEKTE/PFERDE_ATELIER/LANDINGPAGES/START_HERE.md`
+
+
+## HOBBYRAUSCH-HD001-20261003 – Kategorie-Ziel vom Pilot zum vollautomatischen Gesamtweg erweitert
+
+WAS:
+Für Hobbyrausch/HD-001 wurde ein eigener aktiver Zielvertrag angelegt. Der erfolgreiche V1.9.4-Buchbinden-Pilot bleibt produktive Basis, ist aber nicht mehr das Endziel der Kategoriearbeit.
+
+WARUM:
+Der Nutzer hat den Zielrahmen ausdrücklich erweitert: DataForSEO soll die konkreten sichtbaren Bezeichnungen und die Hierarchie bestimmen; Hauptportal, Magazin und HivePress müssen gemeinsam bis WordPress-Publish, sichtbarer Frontend-Navigation und Readback geführt werden.
+
+REGEL:
+- Konzept bestimmt Geschäftslogik und Strukturprinzip;
+- DataForSEO bestimmt innerhalb dieser Grenzen konkrete Namen und Parent-/Child-Hierarchie;
+- keine feste Root+4-Kinder-Grenze als Zielarchitektur;
+- Hobbyfinder bleibt vom SEO-Baum getrennt;
+- Vollautomatik ist Normalweg;
+- keine Abnahme ohne lokale Positiv-/Negativ-E2E-Simulation bis Frontend plus realen Endzustands-Readback;
+- V1.9.4 bleibt live und darf nicht zurückgerollt oder aus alten Dateien rekonstruiert werden;
+- technische Weiterentwicklung erst nach bytegenauer Bindung der echten V1.9.4-Source.
