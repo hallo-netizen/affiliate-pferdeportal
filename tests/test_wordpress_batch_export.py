@@ -65,7 +65,7 @@ class BatchExportTests(unittest.TestCase):
     def test_wrong_canonical_article_id_slot_binding_blocks(self):
         i,docs=self.make_three()
         docs[0]["articles"][0]["production_context"]["production_plan_item"]["canonical_article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH"):
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_BINDING_MISMATCH"):
             combine(i,docs)
 
     def test_only_top_level_article_id_blocks(self):
