@@ -82,7 +82,11 @@ jobs:
           assert j['writer_rule_bundle']['contract']=='K0_FULL_RULE_BUNDLE_V1',j
           assert j['writer_rule_binding']['article_hard_rule_count']>0,j
           assert j['rule_context']['contract']=='K0_AUTHORING_RULE_CONTEXT_V1',j
-          print('K0_WRITER_ALL_RULES_BOUND_BEFORE_WRITING')
+          assert j['input_isolation']['contract']=='K0_FRESH_INPUT_ISOLATION_V1',j
+          assert j['input_isolation']['status']=='PASS',j
+          assert j['input_isolation']['historical_article_content_allowed'] is False,j
+          assert j['input_isolation']['historical_fact_pack_allowed'] is False,j
+          print('K0_WRITER_ALL_RULES_AND_FRESH_INPUT_ISOLATION_BOUND')
           PY
 
       - name: Persist immutable writer job
