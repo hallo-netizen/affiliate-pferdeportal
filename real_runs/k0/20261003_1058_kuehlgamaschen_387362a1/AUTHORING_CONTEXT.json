@@ -1,0 +1,54 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-regeneration-kuehlgamaschen-faq",
+    "plan_slot": "28ecc3ae064ab04c5e867125d889a696c03406e48ab67e10a44e0b47578f9c5c",
+    "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+    "title": "Sind Kühlgamaschen für Pferde sinnvoll?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "McCarthy et al. 2025 – In vivo effects of cold therapy and bandaging",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/39996479/"
+        },
+        {
+          "source_title": "Thermodynamic effects of commercially available ice boots",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/29445615/"
+        },
+        {
+          "source_title": "A comparison of seven methods for continuous therapeutic cooling",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/25385194/"
+        },
+        {
+          "source_title": "Distal limb immersion in ice and water",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/39842089/"
+        }
+      ],
+      "claims": [
+        "Kühlboots können die Temperatur am Pferdebein messbar senken.",
+        "Ein 2025 untersuchtes Kompressions-Kühlsystem senkte die Kerntemperatur von Beugesehnen stärker als Eisboots.",
+        "Für intensive digitale Kryotherapie bei Laminitis sind Eis-Wasser-Verfahren nicht mit einfacher Kühlung nach Training gleichzusetzen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+      "topic": "Sind Kühlgamaschen für Pferde sinnvoll?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
