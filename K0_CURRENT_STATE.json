@@ -82,13 +82,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
-    "last_checked_branch_head_sha": "fd984b1a3c6ba7e4b541c4a52a9ed297b5c56816",
+    "last_checked_branch_head_sha": "1d74bf50d8ae0c146305ad8e15e450af0973b347",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
     "latest_k0_selftest_run": 37136204080,
     "latest_k0_selftest_result": "SUCCESS_LINK_DISTRIBUTION_REGRESSION",
     "ppm679_parity": "PASS",
-    "delta_result": "LINK_DISTRIBUTION_CODE_AND_REGRESSION_PASS; REAL_ARTICLE_REGEN_NOT_RUN; H2_RENDERING_GAP_OPEN"
+    "delta_result": "LINK_DISTRIBUTION_CODE_AND_REGRESSION_PASS; REAL_ARTICLE_REGEN_NOT_RUN; H2_RENDERING_GAP_OPEN; SILENT_START_REPO_RULE_NOT_PRODUCT_GUARANTEE"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -202,7 +202,7 @@
     "alternate_or_historical_fallback": "FORBIDDEN"
   },
   "silent_start": {
-    "status": "PASS",
+    "status": "REPO_RULE_PRESENT_PRODUCT_LEVEL_SILENCE_NOT_GUARANTEED",
     "command": "K0:start",
     "visible_preamble_allowed": false,
     "visible_status_allowed": false,
@@ -216,7 +216,11 @@
     "main_router_merge_sha": "b45791dc575027253db3d8d85f803ed12dc68e42",
     "regression_selftest_run": 37129907068,
     "regression_selftest_attempt": 2,
-    "regression_selftest_result": "SUCCESS"
+    "regression_selftest_result": "SUCCESS",
+    "repo_router_rule_present": true,
+    "product_level_preamble_observed": true,
+    "repo_selftest_proves_only_router_text": true,
+    "in_current_fix_scope": false
   },
   "link_distribution": {
     "status": "CODE_AND_REGRESSION_PASS",
