@@ -50,3 +50,14 @@ jobs:
           assert g['hard_rules']['portal_must_be_auto_detected'] is True
           print('K0_HARDLOCKS_PASS')
           PY
+
+      - name: K0 fresh-chat main router hardlock
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          git show origin/main:K0_START_HERE.md > /tmp/K0_MAIN_START_HERE.md
+          grep -F 'konzept0-portal-neutral-20261002' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'konzept0-portal-neutral-20261002:K0_START_HERE.md' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'keine Fallback-Autorität' /tmp/K0_MAIN_START_HERE.md
+          echo 'K0_MAIN_FRESH_CHAT_ROUTER_PASS'
