@@ -3,12 +3,12 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "WORDPRESS_DUAL_ID_BINDING_SIMULATION_PASS_REAL_REIMPORT_PENDING",
+  "status": "WORDPRESS_PROVEN_K10_IMPORT_CONTRACT_RESTORED_REAL_REIMPORT_PENDING",
   "first_open_blocker": {
     "code": "REAL_WORDPRESS_REIMPORT_PENDING",
-    "detail": "Realer Fehler article_id wurde auf fehlende doppelte kanonische Bindung eingegrenzt. K0 exportiert jetzt article_id oben und dieselbe canonical_article_id im production_context; Positiv-/Negativmatrix und kompletter K0-Selftest PASS. Reale WordPress-Wiederimportbestätigung steht noch aus."
+    "detail": "Die K0-WordPress-Ausgabe war vom bereits funktionierenden K10-Importvertrag abgewichen. Der Export ist auf PFERDE_ATELIER_WORDPRESS_IMPORT_V1 mit article_id=plan_slot, Pflichtfeld slug und exakt acht Importfeldern zurückgesetzt. Vollständiger K0-Selftest 37113497533 PASS; reale WordPress-Wiederimportbestätigung steht noch aus."
   },
-  "next_action": "REAL_WORDPRESS_REIMPORT_DUAL_ID_FIXED_K0_FILE",
+  "next_action": "REAL_WORDPRESS_REIMPORT_PROVEN_K10_CONTRACT_FILE",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -22,7 +22,7 @@
       "K0_PRODUCTION_GATES_AND_PPM_6_7_9",
       "LANGUAGETOOL_6_8",
       "CANONICAL_ARTICLE_ID_FROM_PPM679_REGISTRY",
-      "SYSTEM4_WORDPRESS_HANDOFF_V1_0_28_30"
+      "PFERDE_ATELIER_WORDPRESS_IMPORT_V1_PROVEN_K10_SCHEMA"
     ],
     "direct_article_package_start_allowed": false,
     "writer_self_stamping_allowed": false,
@@ -56,26 +56,39 @@
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
-    "final_wordpress_batch_status": "PASS",
+    "final_wordpress_batch_status": "PASS_K10_IMPORT_SCHEMA",
     "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json",
-    "final_wordpress_batch_sha256": "fd2aa1d2dc0fe1a993dd00a85be5f52cafa212e8525b8d0f5874fec9b2580e60",
+    "final_wordpress_batch_sha256": "7a5d33f8da04d48d0b93d1a30e35ca9c1ffc747a542c4657d2d2f289c0c93c67",
     "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json"
   },
   "freshness": {
-    "validated_code_head_sha": "62f2ebdeb22dcb02fa487581a61feffe790e23c1",
-    "last_checked_branch_head_sha": "58103c228eb3ba651f39f3c25381331a799fd630",
+    "validated_code_head_sha": "e4f09044e836e2007cba042ff4149df134410964",
+    "last_checked_branch_head_sha": "e4f09044e836e2007cba042ff4149df134410964",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37113125431,
-    "latest_k0_selftest_result": "SUCCESS_91_TESTS_PLUS_PPM679_PARITY_AND_HARDLOCKS",
+    "latest_k0_selftest_run": 37113497533,
+    "latest_k0_selftest_result": "SUCCESS_PROVEN_K10_WORDPRESS_IMPORT_SCHEMA",
     "ppm679_parity": "PASS",
-    "delta_result": "WORDPRESS_DUAL_CANONICAL_ID_BINDING_POSITIVE_NEGATIVE_PASS; TOP_ONLY_BLOCK; NESTED_ONLY_BLOCK; MISMATCH_BLOCK; PPM679_104_PARITY_PASS"
+    "delta_result": "ROOT_CAUSE_PROVEN: K0_EXPORT_DIVERGED_FROM_WORKING_K10_IMPORT_SCHEMA; RESTORED article_id=plan_slot + slug + exact 8-field WordPress row; PPM679 parity unchanged"
   },
   "wordpress_export": {
-    "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+    "contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
+    "source": "K0_CANONICAL_WORKFLOW",
     "plugin_version": "0.28.30",
     "plugin_build": "0.28.30-pste-v5-binding-safe",
-    "canonical_article_id_required": true,
+    "article_id_equals_plan_slot": true,
+    "slug_required": true,
+    "exact_article_fields": [
+      "article_id",
+      "article_type",
+      "body",
+      "category",
+      "plan_slot",
+      "slug",
+      "target_keyword",
+      "title"
+    ],
+    "internal_canonical_article_id_exported": false,
     "publish_allowed": false
   },
   "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json",
@@ -101,16 +114,23 @@
   "legacy_reference_policy": "FORBIDDEN_IN_ACTIVE_K0_STATUS_HANDOFF_AND_PRODUCTION",
   "old_chat_or_archive_authority": false,
   "wordpress_import_contract": {
-    "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
-    "plugin_version": "0.28.30",
-    "plugin_build": "0.28.30-pste-v5-binding-safe",
-    "top_level_article_id_required": true,
-    "canonical_article_id_location": "production_context.production_plan_item.canonical_article_id",
-    "dual_id_equality_required": true,
-    "plan_slot_binding": "SHA256(\"pserc-plan-slot-v2|\" + article_id)",
-    "exact_article_field_set_locked": true,
-    "regression_source": "REAL_IMPORT PSERC_SYSTEM4_ARTICLE_FIELD_INVALID field=article_id; original K0 had valid top-level article_id but missing nested canonical_article_id",
-    "simulation_run": 37113125431,
+    "contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
+    "provenance": "PROVEN_K10_REAL_WORDPRESS_IMPORT_SCHEMA",
+    "article_id_rule": "article_id == plan_slot",
+    "slug_rule": "slug_from_current_title_required",
+    "exact_article_fields": [
+      "article_id",
+      "article_type",
+      "body",
+      "category",
+      "plan_slot",
+      "slug",
+      "target_keyword",
+      "title"
+    ],
+    "k0_internal_fields_must_not_leak_to_wordpress": true,
+    "regression_cause": "K0 commit a1cce38a38bbeb81fc6f4aa402ced9298dcbc70a replaced the working WordPress boundary with a registry-derived article:... id and non-import fields; subsequent repair attempts compounded the mismatch.",
+    "regression_test_run": 37113497533,
     "real_reimport_status": "PENDING"
   }
 }
