@@ -77,3 +77,5 @@ body.single-post .entry-content article.ppm-generated>section[data-block]:not([d
           git add pferde-template-kit_V1.50.421.php
           git commit -m "K0: fix structured single-post H2 spacing only"
           git push origin HEAD:tmp/k0-h2-render-fix-20261003
+
+# trigger
