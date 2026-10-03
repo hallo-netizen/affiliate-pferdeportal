@@ -5,6 +5,7 @@ from pathlib import Path
 from .html_design import validate_canonical_html, DesignBlocked
 
 CONTRACT="SYSTEM4_WORDPRESS_HANDOFF_V1"
+WORDPRESS_ARTICLE_FIELDS={"index","title","target_keyword","category","article_type","plan_slot","final_draft_sha256","revision_count","body","production_context","languagetool","ppm679"}
 
 class BatchBlocked(RuntimeError): pass
 
@@ -35,6 +36,8 @@ def combine(intake: dict, singles: list[dict]) -> dict:
         if not isinstance(rows,list) or len(rows)!=1 or not isinstance(rows[0],dict):
             raise BatchBlocked("SINGLE_WORDPRESS_ARTICLE_INVALID")
         row=rows[0]
+        if set(row)!=WORDPRESS_ARTICLE_FIELDS:
+            raise BatchBlocked("SINGLE_ARTICLE_FIELDS_INVALID")
         slot=str(row.get("plan_slot") or "")
         if not re.fullmatch(r"[0-9a-f]{64}",slot):
             raise BatchBlocked("SINGLE_PLAN_SLOT_INVALID")
