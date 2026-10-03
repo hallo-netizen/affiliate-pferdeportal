@@ -92,7 +92,7 @@ def build(intake, package, portal, gate, lt, bindings):
 
     # Exact proven K10 WordPress article schema.
     article={
-      'article_id':identity['plan_slot'],
+      'article_id':canonical_id,
       'plan_slot':identity['plan_slot'],
       'title':identity['title'],
       'slug':slug_from_title(identity['title']),
@@ -122,10 +122,14 @@ def verify_export(doc, intake):
     art=arts[0]; ident=rows[0]
     if set(art)!=set(WORDPRESS_ARTICLE_FIELDS):
         raise Blocked('K0_WORDPRESS_ARTICLE_FIELDS_INVALID')
-    if str(art.get('article_id') or '')!=ident['plan_slot']:
-        raise Blocked('K0_WORDPRESS_ARTICLE_ID_MUST_EQUAL_PLAN_SLOT')
+    article_id=str(art.get('article_id') or '')
+    if not re.fullmatch(r'article:[0-9a-f]{24}',article_id):
+        raise Blocked('K0_WORDPRESS_ARTICLE_ID_INVALID')
     if str(art.get('plan_slot') or '')!=ident['plan_slot']:
         raise Blocked('K0_WORDPRESS_PLAN_SLOT_MISMATCH')
+    expected_slot=hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode('utf-8')).hexdigest()
+    if expected_slot!=ident['plan_slot']:
+        raise Blocked('K0_WORDPRESS_CANONICAL_PLAN_SLOT_MISMATCH')
     if str(art.get('slug') or '')!=slug_from_title(ident['title']):
         raise Blocked('K0_WORDPRESS_SLUG_MISMATCH')
     for key in ('title','target_keyword','category','article_type'):
@@ -140,7 +144,7 @@ def verify_export(doc, intake):
       'wordpress_contract':CONTRACT,
       'article_count':1,
       'body_sha256':_sha(body),
-      'article_id_equals_plan_slot':True,
+      'canonical_article_id_plan_slot_roundtrip':'PASS',
       'slug_status':'PASS',
       'publish_allowed':False,
     }
