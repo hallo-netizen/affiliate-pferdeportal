@@ -1,0 +1,28 @@
+name: K0 fixed WordPress delivery
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - '.github/workflows/k0-fixed-wordpress-delivery.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-user3-wordpress-fixed
+          path: real_runs/k0_batch/20261003_user3/WORDPRESS_FINAL_CANONICAL.json
+          if-no-files-found: error
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-rewrite16-wordpress-fixed
+          path: real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json
+          if-no-files-found: error
+          retention-days: 1
