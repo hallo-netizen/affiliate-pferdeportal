@@ -1,6 +1,7 @@
 import hashlib, json, unittest
 from engine.writer_contract_guard import WriterContractBlocked, verify_package
 from engine.k0_writer_station import prepare, seal, verify, Blocked as StationBlocked
+from tests.k0_rule_context_fixture import rule_context
 
 def stable_json(x):
     return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':'))
@@ -42,6 +43,7 @@ def context(i):
       'identity':ident,
       'content_profile':{'search_intent':'DECISION_SUPPORT'},
       'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},
+      'rule_context':rule_context(ident),
       'publish_allowed':False
     }
 
