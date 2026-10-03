@@ -156,16 +156,17 @@ jobs:
           python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-binding/CANONICAL_BINDINGS.json /tmp/WORDPRESS_SINGLE.json
           python3 -m engine.k0_wordpress_export verify /tmp/WORDPRESS_SINGLE.json "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_WORDPRESS_VERIFY.json
           python3 - <<'PY'
-          import hashlib,json,re
+          import json,re
+          from engine.k0_wordpress_export import slug_from_title
           doc=json.load(open('/tmp/WORDPRESS_SINGLE.json'))
-          assert doc['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
-          assert doc['wordpress_review']['plugin_version_verified_against']=='0.28.30'
-          assert doc['wordpress_review']['plugin_build_verified_against']=='0.28.30-pste-v5-binding-safe'
-          assert doc['wordpress_review']['direct_wordpress_upload_ready'] is True
+          assert doc['contract']=='PFERDE_ATELIER_WORDPRESS_IMPORT_V1'
+          assert doc['source']=='K0_CANONICAL_WORKFLOW'
           a=doc['articles'][0]
-          assert re.fullmatch(r'article:[0-9a-f]{24}',a['article_id'])
-          assert hashlib.sha256(('pserc-plan-slot-v2|'+a['article_id']).encode()).hexdigest()==a['plan_slot']
-          print('K0_WORDPRESS_02830_ARTICLE_ID_SHAPE_PASS')
+          assert re.fullmatch(r'[0-9a-f]{64}',a['article_id'])
+          assert a['article_id']==a['plan_slot']
+          assert a['slug']==slug_from_title(a['title'])
+          assert set(a)=={'article_id','plan_slot','title','slug','target_keyword','category','article_type','body'}
+          print('K0_WORDPRESS_PROVEN_IMPORT_SCHEMA_PASS')
           PY
 
       - name: Persist only fully verified canonical outputs
