@@ -314,5 +314,26 @@
     "ppm_679": "PASS_ALL_THREE",
     "link_distribution": "PASS_ALL_THREE",
     "rendering_regression": "PASS_LOCAL_VISUAL_PLUS_FRESH_STRUCTURED_OUTPUT"
+  },
+  "fresh_execution_hardlock": {
+    "status": "ACTIVE",
+    "trigger": "EACH_NEW_USER_UPLOAD_PLUS_K0_START",
+    "rule": "ALWAYS_NEW_K0_PRODUCTION_RUN",
+    "identical_batch_hash_may_reuse_previous_output": false,
+    "previous_wordpress_single_as_new_result_allowed": false,
+    "previous_wordpress_batch_as_new_result_allowed": false,
+    "previous_writer_or_gate_pass_as_new_execution_proof_allowed": false,
+    "required_fresh_proofs": [
+      "NEW_RUN_ID_OR_RUN_PATH",
+      "FRESH_RESEARCH_OR_FACT_PACK_BINDING",
+      "FRESH_WRITER_RUN",
+      "FRESH_PRE_LT_FULL_RULE_PASS",
+      "FRESH_LANGUAGETOOL_6_8",
+      "FRESH_FINAL_RULE_PASS",
+      "FRESH_SYSTEM4_WORDPRESS_HANDOFF_V1",
+      "FRESH_OUTPUT_VERIFICATION"
+    ],
+    "historical_outputs_role": "HISTORY_EVIDENCE_ONLY_NEVER_PRODUCTION_SUBSTITUTE",
+    "fail_closed_code": "K0_FRESH_EXECUTION_REQUIRED"
   }
 }
