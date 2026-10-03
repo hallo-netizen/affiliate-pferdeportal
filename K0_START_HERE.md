@@ -22,8 +22,10 @@ Verboten:
 
 Die erste sichtbare Antwort ist ausschließlich:
 
-1. die **fertige verifizierte WordPress-Datei**, oder
+1. die **fertige verifizierte WordPress-Datei als echte Datei/Download im Chat**, oder
 2. ein **echter terminaler Blocker**, der intern nicht lösbar ist.
+
+**Nicht zulässig als Endausgabe:** GitHub-Link, Raw-Link, Actions-Link, Artifact-Link oder bloßer Repository-Pfad. Kann die exakte verifizierte Datei nicht in den Chat materialisiert/angehängt werden, lautet der terminale Blocker `K0_CHAT_FILE_DELIVERY_REQUIRED`.
 
 
 ## Frische Ausführung — HARDLOCK
@@ -46,7 +48,32 @@ Pflicht vor sichtbarer Enddatei:
 - frischer SYSTEM4_WORDPRESS_HANDOFF_V1;
 - frische Verifikation dieses neuen Outputs.
 
-Frühere Runs dürfen ausschließlich als Historie/Evidence gelesen werden, niemals als Produktionsersatz.
+Frühere Runs dürfen ausschließlich von technischen Guards für Hash-/Gate-/Negativtest-Evidence betrachtet werden. **Recherche, Writer und Repair dürfen alte Artikeltexte oder alte Produktionsinhalte weder lesen noch als Quelle erhalten.**
+
+## Inhaltsisolation — HARDLOCK
+
+Für jeden neuen Artikel gilt: **inhaltlich neu von Null.**
+
+Maßgebliche Auftrags-/Artikelidentität:
+- ausschließlich der aktuelle hochgeladene K0-Handoff.
+
+Zusätzlich zulässige Inputs:
+- frische externe Recherche dieses neuen Runs;
+- aktuelle K0-Regeln;
+- aktuelle WordPress-Kategorieauflösung;
+- aktuelle interne Link-Bindungen.
+
+Als Inhalts-, Fakten-, Struktur- oder Formulierungsquelle strikt verboten:
+- frühere Artikel;
+- frühere Writer-Drafts;
+- frühere Repair-Texte;
+- frühere Fact-Packs und Research-Pakete;
+- frühere `AUTHORING_CONTEXT.json`, `SEALED_WRITER_PRODUCT.json`, `WORDPRESS_SINGLE.json` oder `WORDPRESS_BATCH.json`;
+- Inhalte aus `real_runs/**`, `recovery/**`, `archive/**` oder `writer_drafts/**`;
+- bestehende Artikel auf `pferde-atelier.de` als Recherchequelle;
+- Repository-/GitHub-Dateien mit alten Artikelinhalten als Recherchequelle.
+
+Vor Export muss der K0-Historical-Content-Guard PASS sein. Er blockiert erkannte Textübernahme aus historischen Artikelbeständen.
 
 ## Produktionsweg
 
