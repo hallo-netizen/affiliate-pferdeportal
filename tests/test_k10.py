@@ -53,9 +53,9 @@ def make_base():
     def para(fid,prefix,n,with_trace=False,link=''):
         tr=trace(fid,f'Fachquelle {fid}',hashes[fid]) if with_trace else ''
         return f'<p data-fact-ids="{fid}">{tr} {words(prefix,n)} {link}</p>'
-    intro='<section data-block="intro"><p data-fact-ids="F1">'+trace('F1','Fachquelle F1',hashes['F1'])+' Eine Longierpeitsche unterstützt die Hilfengebung beim Longieren und ergänzt Stimme und Longe. '+words('Einleitung Training Pferde',82)+' <a data-link-role="parent_category" href="/training/">Training</a></p></section>'
+    intro='<section data-block="intro"><p data-fact-ids="F1">'+trace('F1','Fachquelle F1',hashes['F1'])+' Eine Longierpeitsche unterstützt die Hilfengebung beim Longieren und ergänzt Stimme und Longe. '+words('Einleitung Training Pferde',82)+'</p></section>'
     answer='<section data-block="answer"><h2>Welche Aufgabe die Longierpeitsche hat</h2>'+''.join([
-      para('F2','Aufgabe Longierpeitsche Longieren A',55,True),para('F2','Aufgabe Longierpeitsche Longieren B',54),
+      para('F2','Aufgabe Longierpeitsche Longieren A',55,True,'<a data-link-role="parent_category" href="/training/">Training</a>'),para('F2','Aufgabe Longierpeitsche Longieren B',54),
       para('F2','Aufgabe Longierpeitsche Longieren C',54),para('F2','Aufgabe Longierpeitsche Longieren D',54)])+'</section>'
     details='<section data-block="details"><h2>Stimme und Longe im Zusammenspiel</h2>'+''.join([
       para('F3','Stimme Longe Zusammenspiel A',55,True,'<a data-link-role="semantic_related" href="/training/longieren/">Longieren</a>'),
@@ -67,7 +67,7 @@ def make_base():
     further='<section data-block="further_information"><h2>Weiterführende Informationen</h2><p>'+words('Weitere Hinweise',30)+' <a data-link-role="further_information" href="/training/longierpeitschen/">Longierpeitschen</a></p></section>'
     html='<article>'+intro+answer+details+checklist+conclusion+further+'</article>'
     bound_links=[
-      {'role':'parent_category','href':'/training/','anchor':'Training','block':'intro'},
+      {'role':'parent_category','href':'/training/','anchor':'Training','block':'answer'},
       {'role':'semantic_related','href':'/training/longieren/','anchor':'Longieren','block':'details'},
       {'role':'further_information','href':'/training/longierpeitschen/','anchor':'Longierpeitschen','block':'further_information'},
     ]
