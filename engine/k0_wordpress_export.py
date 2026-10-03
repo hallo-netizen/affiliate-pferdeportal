@@ -41,7 +41,7 @@ def _category_binding(identity, category_payload):
         raise Blocked('K0_WORDPRESS_CATEGORY_ID_NOT_UNIQUE:'+slug+':'+str(len(hits)))
     return {'id':int(hits[0]['id']),'slug':slug,'taxonomy':'category'}
 
-def build(intake, package, portal, gate, lt, bindings, category_payload):
+def build(intake, package, portal, gate, lt, full_rules, bindings, category_payload):
     rows=validate_intake(intake)
     if len(rows)!=1:
         raise Blocked('K0_SINGLE_EXPORT_REQUIRES_ONE_ARTICLE')
@@ -84,6 +84,11 @@ def build(intake, package, portal, gate, lt, bindings, category_payload):
 
     if lt.get('status')!='PASS' or int(lt.get('finding_count') or 0)!=0 or lt.get('html_sha256')!=body_sha:
         raise Blocked('K0_LT68_NOT_PASS')
+
+    if full_rules.get('contract')!='K0_FULL_RULE_FINAL_V1' or full_rules.get('status')!='PASS':
+        raise Blocked('K0_FULL_RULE_FINAL_NOT_PASS')
+    if full_rules.get('html_sha256')!=body_sha:
+        raise Blocked('K0_FULL_RULE_FINAL_BODY_HASH_MISMATCH')
 
     context=package.get('production_context')
     if not isinstance(context,dict) or not isinstance(context.get('fact_pack'),dict) or not isinstance(context.get('production_plan_item'),dict):
@@ -206,13 +211,13 @@ def verify_export(doc, intake):
 
 def main():
     if len(sys.argv)<2:
-        raise SystemExit('usage: k0_wordpress_export.py export INTAKE PACKAGE PORTAL GATE LT CANONICAL_BINDINGS CATEGORY_JSON OUT | verify OUT INTAKE RECEIPT')
+        raise SystemExit('usage: k0_wordpress_export.py export INTAKE PACKAGE PORTAL GATE LT FULL_RULE_FINAL CANONICAL_BINDINGS CATEGORY_JSON OUT | verify OUT INTAKE RECEIPT')
     try:
         mode=sys.argv[1]
-        if mode=='export' and len(sys.argv)==10:
-            out=build(*[_load(p) for p in sys.argv[2:9]])
-            Path(sys.argv[9]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-            print(json.dumps({'contract':'K0_WORDPRESS_EXPORT_V3','status':'PASS','output':sys.argv[9],'sha256':_sha(Path(sys.argv[9]).read_text(encoding='utf-8')),'publish_allowed':False},ensure_ascii=False))
+        if mode=='export' and len(sys.argv)==11:
+            out=build(*[_load(p) for p in sys.argv[2:10]])
+            Path(sys.argv[10]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            print(json.dumps({'contract':'K0_WORDPRESS_EXPORT_V3','status':'PASS','output':sys.argv[10],'sha256':_sha(Path(sys.argv[10]).read_text(encoding='utf-8')),'publish_allowed':False},ensure_ascii=False))
             return
         if mode=='verify' and len(sys.argv)==5:
             receipt=verify_export(_load(sys.argv[2]),_load(sys.argv[3]))
