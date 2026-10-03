@@ -1,58 +1,58 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-10-01
-STATUS: V1.9.4 LIVE DEPLOY + READBACK PASS / PRODUKTIVER BUCHBINDEN-BESTAND STEHT / NICHT ZURÜCKROLLEN
+STAND: 2026-10-03
+STATUS: V1.9.4 LIVE PASS BLEIBT / NEUER HD-001-ZIELVERTRAG AKTIV / NACHFOLGER NOCH NICHT GEBAUT / SOURCE-BYTES BLOCKED
 
 ## Harte Abnahmeregel
 
 **Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-## Live-Abnahme
+Für den neuen Zielvertrag:
+keine Abnahme ohne vollständige Positiv-/Negativ-E2E-Simulation bis zum Frontend-Endzustand.
+
+## Live-Basis
 
 Installiert:
 `Affiliate-Portal Kategorie-Workflow V1.9.4`
 
-Der produktive Buchbinden-Pilot wurde nach dem lokal hart getesteten Term-Name-Readback-Fix erneut ausgeführt.
+Produktiver Buchbinden-Stand:
+- Deployment abgeschlossen;
+- Schreiben + Readback erfolgreich;
+- bestehender Bestand bleibt live;
+- nicht zurückrollen.
 
-Live sichtbarer Endzustand:
-- `Deployment abgeschlossen`
-- `✓ Schreiben und Readback erfolgreich.`
+Installer SHA:
+`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`.
 
-Damit ist der produktive 7-Knoten-Buchbinden-Stand live vorhanden und readback-verifiziert.
+## Neues Ziel
 
-**Nicht zurückrollen.**
-**Arbeitsstand nicht zurücksetzen.**
+Autoritative Zielquelle:
+`../../../SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-## Root Cause des vorherigen Fehlers
+V1.9.4 ist nur die belastbare Live-Basis. Für das neue Gesamtziel existiert noch kein belegter Nachfolgekandidat.
 
-V1.9.3 diagnostizierte:
-`node:hdc-21557545f2e7cc51 | Feld: name`
+## Source-Bindung
 
-Knoten:
-`Techniken & Praxis`
+Erwarteter V1.9.4-Source-SHA-256:
+`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`.
 
-WordPress speichert den Taxonomie-Namen intern escaped als
-`Techniken &amp; Praxis`.
+Unter `ORIGINAL/` liegen die echten V1.9.4-Source-Bytes aktuell nicht vor.
 
-V1.9.4 normalisiert ausschließlich dieses WordPress-Core-Escaping beim Readback.
+## Weiterhin gültiger V1.9.4-Nachweis
 
-## Lokale Beweise V1.9.4
-
-- alter Code reproduziert den Livefehler wortgleich;
+- alter Code reproduzierte den früheren Live-Readbackfehler wortgleich;
 - echter 7-CREATE-Buchbinden-Pfad PASS;
-- echte falsche Namen / doppelte Kodierung / falscher Slug / Parent / Meta bleiben BLOCKED;
+- falsche Namen / doppelte Kodierung / falscher Slug / Parent / Meta bleiben BLOCKED;
 - Source 251/251 PASS;
 - Fresh Installer 251/251 PASS;
 - PHP Source 25/25;
 - PHP Installer 17/17;
 - Runtime-Parität 22/22.
 
-Installer SHA:
-`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
+Diese Belege werden nicht auf den neuen Nachfolgekandidaten übertragen.
 
 ## NEXT ACTION
 
-HD-001 bleibt unverändert live stehen.
+Echte V1.9.4-Source-Bytes beschaffen/binden → SHA-256 prüfen → erst danach isolierten Nachfolgekandidaten bauen.
 
-Nächster Arbeitsbereich ist HD-002:
-produktiven Owner-Handoff read-only übernehmen → Website-Gesamtbestand erfassen.
+Kein Live-Umbau auf Basis rekonstruierter oder geratener Dateien.
