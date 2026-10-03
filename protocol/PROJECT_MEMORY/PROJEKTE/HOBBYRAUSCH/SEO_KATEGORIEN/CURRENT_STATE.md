@@ -2,49 +2,50 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-01
-STATUS: BUCHBINDEN RESEARCH COMPLETE / V1.9.4 LIVE DEPLOY + READBACK PASS / PRODUKTIVER KATEGORIENSTAND STEHT
+STAND: 2026-10-03
+STATUS: HD-001 ZIELVERTRAG NEU GEBUNDEN / V1.9.4 LIVE-BASIS BLEIBT / TECHNISCHE WEITERENTWICKLUNG REOPENED / SOURCE-BYTES BLOCKED
 
 ## Harte Abnahmeregel
 
 **Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
 
-## Live-Endzustand HD-001
+Für das neue Gesamtziel gilt zusätzlich:
+kein Ziel-PASS ohne lokale Positiv-/Negativ-E2E-Simulation bis zum Frontend-Endzustand und anschließenden realen WordPress-/Frontend-Readback.
 
-Produktiver Buchbinden-Pilot:
-- Deployment abgeschlossen;
-- Schreiben und Readback erfolgreich;
-- automatischer Rollback nicht ausgeführt;
-- Bestand bleibt live.
+## Verbindlicher Zielvertrag
 
-Der vorherige Readback-Fehler bei `Techniken & Praxis` wurde in V1.9.4 lokal wortgleich reproduziert und behoben.
+`ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-## Aktive Pilotstruktur
+Ziel:
+Konzept → DataForSEO bestimmt konkrete sichtbare Namen und Abwärtshierarchie → Hauptportal + Magazin + HivePress → WordPress → Publish → sichtbare Frontend-Navigation → Readback.
 
-Content:
-- Buchbinden
-  - Einstieg
-  - Ausrüstung
-  - Material
-  - Techniken & Praxis
+## Belastbarer Live-Ausgangsstand
 
-Zusätzlich:
-- Marketplace: Buchbinden Set
-- Magazine: Buchbinden Online
+HD-001 V1.9.4 bleibt unverändert produktiv:
+- Buchbinden-Pilot live;
+- Deployment PASS;
+- Schreiben + Readback PASS;
+- kein Rollback.
 
-Fragen/Probleme und FAQ wurden mangels ausreichender eigenständiger Research-Evidenz nicht künstlich als Kategorien erzeugt.
+Der bestehende Live-PASS ist Ausgangsbasis, nicht Erfüllung des neuen Zielvertrags.
 
-## Editorial Ownership
+## Erster offener Blocker
 
-Gebundener Research-Stand:
-- Kategorie-Owner: 7;
-- ARTICLE_ONLY-Zuordnungen: 11;
-- eindeutig gebunden: 11/11;
-- Status: `READY_FOR_DOWNSTREAM_EDITORIAL_PLANNING`.
+`HD001_V194_SOURCE_BYTES_NOT_BOUND`
+
+Erwarteter Source-SHA-256:
+`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`.
+
+Die aktuelle HD-001-Originalablage enthält die V1.9.4-Source-Bytes nicht. Ein Hash-Hinweis ist kein Ersatz für die Source.
 
 ## NEXT ACTION
 
-Keine weitere Kategoriearbeit und kein Rollback.
+Exakte V1.9.4-Source-Bytes binden und bytegenau gegen
+`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`
+prüfen.
 
-Übergabe an HD-002:
-Owner-Handoff read-only übernehmen → Gesamtbestand erfassen → Portalabgleich.
+Erst bei PASS:
+isolierten Nachfolgekandidaten für DataForSEO-gesteuerte variable Mehr-Ebenen-Hierarchie + Hauptportal/Magazin/HivePress + Publish/Frontend-Navigation/Readback bauen.
+
+Bis dahin:
+keine DataForSEO-Paid-Calls, keine WordPress-Writes, kein Live-Publish und kein Rollback.
