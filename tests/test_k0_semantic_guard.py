@@ -36,8 +36,9 @@ def package(identity, body, intent, table_exception='NUANCE_LOSS'):
 
 def verify_semantic(pkg, port):
     with patch('engine.k0_production_gate.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}), \
-         patch('engine.k0_production_gate.verify_ppm', return_value={'status':'PASS','legacy_rule_count':104}):
-        return g.verify(pkg,port)
+         patch('engine.k0_production_gate.verify_ppm', return_value={'status':'PASS','legacy_rule_count':104}), \
+         patch('engine.k0_production_gate.verify_full_rules_pre_lt68', return_value={'status':'READY_FOR_LT68','required_receipt_count':84,'catalog_sha256':'c','rule_values_sha256':'v'}):
+        return g.verify(pkg,port,[{'id':1,'slug':pkg['identity']['category']}])
 
 GOOD_SCHABRACKE = """<article data-article-type="FAQ">
 <h2>Woher kommt das Wort Schabracke?</h2>
