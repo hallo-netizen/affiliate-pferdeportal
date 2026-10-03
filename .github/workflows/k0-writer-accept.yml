@@ -93,11 +93,29 @@ jobs:
           print('K0_PORTAL_AUTO_PASS')
           PY
 
+      - name: Resolve live WordPress category before full content checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          category_slug="$(python3 - <<'PY'
+          import json,os
+          d=json.load(open(os.environ['RUN_DIR']+'/WORDPRESS_INTAKE.json'))
+          print(d['items'][0]['category'])
+          PY
+          )"
+          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$category_slug" -o /tmp/k0-category.json
+          python3 - <<'PY'
+          import json
+          rows=json.load(open('/tmp/k0-category.json'))
+          assert isinstance(rows,list) and len(rows)==1 and int(rows[0].get('id') or 0)>0,rows
+          print('K0_LIVE_CATEGORY_PASS')
+          PY
+
       - name: K0 structure semantic writer and PPM 6.7.9 gates
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_production_gate /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json
+          python3 -m engine.k0_production_gate /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-category.json /tmp/k0-gates.json
           python3 - <<'PY'
           import json
           x=json.load(open('/tmp/k0-gates.json'))
@@ -107,7 +125,9 @@ jobs:
           assert x['anti_boilerplate_status']=='PASS',x
           assert x['writer_contract_status']=='PASS',x
           assert x['ppm679_status']=='PASS' and x['ppm679_rule_count']==104,x
-          print('K0_GATES_PASS')
+          assert x['all_rules_pre_lt68_status']=='PASS',x
+          assert int(x['all_rules_required_receipt_count'])>0,x
+          print('K0_ALL_RULES_PRE_LT68_PASS')
           PY
 
       - name: Download exact LanguageTool 6.8
@@ -132,6 +152,19 @@ jobs:
           print('K0_LT68_PASS')
           PY
 
+      - name: Full all-rules final gate after LanguageTool
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_full_rules final /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-category.json /tmp/k0-lt68-result.json /tmp/k0-full-rule-final.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-full-rule-final.json'))
+          assert x['status']=='PASS',x
+          assert int(x['article_hard_rule_count'])>0,x
+          print('K0_ALL_RULES_FINAL_PASS')
+          PY
+
       - name: Resolve canonical article id from exact PPM registry
         shell: bash
         run: |
@@ -153,14 +186,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          category_slug="$(python3 - <<'PY'
-          import json,os
-          d=json.load(open(os.environ['RUN_DIR']+'/WORDPRESS_INTAKE.json'))
-          print(d['items'][0]['category'])
-          PY
-          )"
-          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$category_slug" -o /tmp/k0-category.json
-          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-binding/CANONICAL_BINDINGS.json /tmp/k0-category.json /tmp/WORDPRESS_SINGLE.json
+          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-full-rule-final.json /tmp/k0-binding/CANONICAL_BINDINGS.json /tmp/k0-category.json /tmp/WORDPRESS_SINGLE.json
           python3 -m engine.k0_wordpress_export verify /tmp/WORDPRESS_SINGLE.json "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_WORDPRESS_VERIFY.json
           python3 - <<'PY'
           import hashlib,json,re
@@ -206,5 +232,6 @@ jobs:
             /tmp/k0-binding/CANONICAL_BINDINGS.json
             /tmp/k0-gates.json
             /tmp/k0-lt68-result.json
+            /tmp/k0-full-rule-final.json
           if-no-files-found: error
           retention-days: 30
