@@ -1,26 +1,41 @@
+import hashlib
+import json
 import unittest
 
 from engine.k0_input_isolation import validate, Blocked
 
+def stable(x):
+    return hashlib.sha256(json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+
 def context(source_url='https://example.org/fresh-source'):
+    fact_pack = {
+        'contract': 'canonical_fact_pack_v1',
+        'status': 'SOURCE_VERIFIED_PRODUCTION_READY',
+        'sources': [{'source_title': 'Fresh', 'source_url': source_url}],
+        'claims': ['Fresh claim'],
+    }
+    research_claims = {
+        'F1': {
+            'source_title': 'Fresh',
+            'source_url': source_url,
+            'statement': 'Fresh claim',
+        }
+    }
     return {
         'production_context': {
-            'fact_pack': {
-                'contract': 'canonical_fact_pack_v1',
-                'status': 'SOURCE_VERIFIED_PRODUCTION_READY',
-                'sources': [{'source_title': 'Fresh', 'source_url': source_url}],
-                'claims': ['Fresh claim'],
-            },
+            'fact_pack': fact_pack,
             'production_plan_item': {},
         },
         'rule_context': {
-            'research_claims': {
-                'F1': {
-                    'source_title': 'Fresh',
-                    'source_url': source_url,
-                    'statement': 'Fresh claim',
-                }
-            }
+            'research_claims': research_claims,
+        },
+        'research_freshness_receipt': {
+            'contract':'K0_RESEARCH_FRESHNESS_GUARD_V1',
+            'status':'PASS',
+            'historical_fact_pack_reuse':False,
+            'historical_research_packet_reuse':False,
+            'fact_pack_sha256':stable(fact_pack),
+            'research_claims_sha256':stable(research_claims),
         },
     }
 
@@ -30,6 +45,12 @@ class TestK0InputIsolation(unittest.TestCase):
         self.assertEqual(r['status'], 'PASS')
         self.assertFalse(r['historical_article_content_allowed'])
         self.assertTrue(r['current_upload_identity_authority'])
+
+    def test_missing_freshness_receipt_blocks(self):
+        x = context()
+        x.pop('research_freshness_receipt')
+        with self.assertRaisesRegex(Blocked, 'RESEARCH_FRESHNESS_RECEIPT_MISSING'):
+            validate(x, 'run:' + 'f'*24)
 
     def test_repository_source_blocks(self):
         with self.assertRaisesRegex(Blocked, 'HISTORICAL_OR_PORTAL_SOURCE_FORBIDDEN'):
