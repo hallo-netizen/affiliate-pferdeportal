@@ -3,12 +3,12 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "WORDPRESS_PROVEN_K10_IMPORT_CONTRACT_RESTORED_REAL_REIMPORT_PENDING",
+  "status": "WORDPRESS_COMPACT_CANONICAL_ID_IMPORTER_SIMULATION_PASS_REAL_REIMPORT_PENDING",
   "first_open_blocker": {
     "code": "REAL_WORDPRESS_REIMPORT_PENDING",
-    "detail": "Die K0-WordPress-Ausgabe war vom bereits funktionierenden K10-Importvertrag abgewichen. Der Export ist auf PFERDE_ATELIER_WORDPRESS_IMPORT_V1 mit article_id=plan_slot, Pflichtfeld slug und exakt acht Importfeldern zurückgesetzt. Vollständiger K0-Selftest 37113497533 PASS; reale WordPress-Wiederimportbestätigung steht noch aus."
+    "detail": "Die beiden realen 0.28.30-Fehler sind reproduziert und ursächlich getrennt: article_id=plan_slot erzeugt CANONICAL_PLAN_SLOT_MISMATCH; fehlender slug erzeugt ARTICLE_FIELD_INVALID field=slug. K0 exportiert jetzt PFERDE_ATELIER_WORDPRESS_IMPORT_V1 mit echter canonical article:... ID, daraus gebundenem plan_slot und kanonischem Top-Level slug. Importer-Normalisierung PASS; realer WordPress-Wiederimport steht noch aus."
   },
-  "next_action": "REAL_WORDPRESS_REIMPORT_PROVEN_K10_CONTRACT_FILE",
+  "next_action": "REAL_WORDPRESS_REIMPORT_COMPACT_CANONICAL_ID_FIXED_FILE",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -62,14 +62,14 @@
     "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json"
   },
   "freshness": {
-    "validated_code_head_sha": "e4f09044e836e2007cba042ff4149df134410964",
+    "validated_code_head_sha": "751847e32b04b57fd0e99d2de76faf56af90f095",
     "last_checked_branch_head_sha": "e4f09044e836e2007cba042ff4149df134410964",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37113497533,
-    "latest_k0_selftest_result": "SUCCESS_PROVEN_K10_WORDPRESS_IMPORT_SCHEMA",
+    "latest_k0_selftest_run": 37116040364,
+    "latest_k0_selftest_result": "SUCCESS_92_TESTS_PPM679_104_104_HARDLOCKS_PASS",
     "ppm679_parity": "PASS",
-    "delta_result": "ROOT_CAUSE_PROVEN: K0_EXPORT_DIVERGED_FROM_WORKING_K10_IMPORT_SCHEMA; RESTORED article_id=plan_slot + slug + exact 8-field WordPress row; PPM679 parity unchanged"
+    "delta_result": "COMPACT_CANONICAL_ARTICLE_ID_PLUS_TOPLEVEL_SLUG_IMPORTER_NORMALIZE_PASS; BOTH_REAL_FAILURES_REPRODUCED_NEGATIVE"
   },
   "wordpress_export": {
     "contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
@@ -115,10 +115,9 @@
   "old_chat_or_archive_authority": false,
   "wordpress_import_contract": {
     "contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
-    "provenance": "PROVEN_K10_REAL_WORDPRESS_IMPORT_SCHEMA",
-    "article_id_rule": "article_id == plan_slot",
-    "slug_rule": "slug_from_current_title_required",
-    "exact_article_fields": [
+    "plugin_version": "0.28.30",
+    "plugin_build": "0.28.30-pste-v5-binding-safe",
+    "article_fields": [
       "article_id",
       "article_type",
       "body",
@@ -128,9 +127,17 @@
       "target_keyword",
       "title"
     ],
-    "k0_internal_fields_must_not_leak_to_wordpress": true,
-    "regression_cause": "K0 commit a1cce38a38bbeb81fc6f4aa402ced9298dcbc70a replaced the working WordPress boundary with a registry-derived article:... id and non-import fields; subsequent repair attempts compounded the mismatch.",
-    "regression_test_run": 37113497533,
+    "article_id_rule": "canonical article:[0-9a-f]{24}",
+    "plan_slot_rule": "SHA256(\"pserc-plan-slot-v2|\" + article_id)",
+    "slug_rule": "canonical slug_from_current_title required",
+    "regression_proof": {
+      "article_id_equals_plan_slot": "BLOCK: PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH",
+      "missing_slug": "BLOCK: PSERC_SYSTEM4_ARTICLE_FIELD_INVALID field=slug",
+      "wrong_canonical_id": "BLOCK: PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH",
+      "noncanonical_slug": "BLOCK: PSERC_SYSTEM4_POST_SLUG_NOT_CANONICAL",
+      "corrected_three_article_payload": "PASS: PSERC_SYSTEM4_PAYLOAD_VALID"
+    },
+    "simulation_basis": "PSERC System4 importer normalizePayload path; real 0.28.30 errors match the same field extraction/order",
     "real_reimport_status": "PENDING"
   }
 }
