@@ -1,0 +1,82 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdehaftpflicht-beratung",
+    "plan_slot": "759950a74a337da2c8d8ece5783df3b7d2e0a4a043ec83bccfff55d9b5c5db2d",
+    "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+    "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:cba19fed10d6b8edfdd0ca55",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Bund der Versicherten – Pferdehalterhaftpflicht",
+          "source_url": "https://www.bundderversicherten.de/de/gut-versichert/pferdehalterhaftpflicht"
+        },
+        {
+          "source_title": "Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung",
+          "source_url": "https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf"
+        },
+        {
+          "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+          "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/"
+        },
+        {
+          "source_title": "Allianz – Reitbeteiligung und Haftung",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/"
+        }
+      ],
+      "claims": [
+        "Fremdreiterrisiko und Reitbeteiligungen werden in Verbraucherempfehlungen als wichtige Leistungsmerkmale genannt.",
+        "Fremdreiter, Reitbeteiligungen und private Tierhüter können in Bedingungen als unterschiedliche mitversicherte Personengruppen geführt werden.",
+        "Ansprüche mitreitender Personen und Regressforderungen von Sozialversicherungsträgern müssen in den konkreten Bedingungen geprüft werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+      "topic": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdehaftpflicht-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-f2fcd99711e4781c9c826c6d",
+  "job_sha256": "888122ded55ca6899b3317e98d551e8ee9183814a3b3e9210769c4eff45881f2"
+}
