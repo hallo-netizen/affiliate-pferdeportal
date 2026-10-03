@@ -20,7 +20,7 @@ def single(idx,title,keyword,category,article_type,article_id):
       "test_suite_status":"PASS",
       "wordpress_review":{"direct_wordpress_upload_ready":True},
       "articles":[{
-        "index":0,"title":title,"target_keyword":keyword,
+        "index":0,"article_id":article_id,"title":title,"target_keyword":keyword,
         "category":category,"article_type":article_type,"plan_slot":ps,
         "final_draft_sha256":hashlib.sha256(body.encode()).hexdigest(),
         "revision_count":1,"body":body,
@@ -68,10 +68,22 @@ class BatchExportTests(unittest.TestCase):
         with self.assertRaisesRegex(BatchBlocked,"SINGLE_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH"):
             combine(i,docs)
 
-    def test_top_level_article_id_is_blocked(self):
+    def test_only_top_level_article_id_blocks(self):
         i,docs=self.make_three()
-        docs[0]["articles"][0]["article_id"]="article:111111111111111111111111"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_TOPLEVEL_ARTICLE_ID_FORBIDDEN"):
+        docs[0]["articles"][0]["production_context"]["production_plan_item"].pop("canonical_article_id")
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_CANONICAL_ARTICLE_ID_MISSING"):
+            combine(i,docs)
+
+    def test_only_nested_article_id_blocks(self):
+        i,docs=self.make_three()
+        docs[0]["articles"][0].pop("article_id")
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_FIELDS_INVALID"):
+            combine(i,docs)
+
+    def test_mismatched_dual_article_id_blocks(self):
+        i,docs=self.make_three()
+        docs[0]["articles"][0]["production_context"]["production_plan_item"]["canonical_article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_BINDING_MISMATCH"):
             combine(i,docs)
 
     def test_bare_article_html_blocks(self):
