@@ -1,24 +1,21 @@
 # K0 START — ROUTER ONLY
 
-Diese Datei ist ausschließlich die öffentliche **K0-Eingangstür auf main**. Sie enthält keine K0-Current-Wahrheit.
+Bei `K0:start`:
 
-## Bei `K0:start`
+1. auf `konzept0-portal-neutral-20261002:K0_START_HERE.md` wechseln;
+2. **NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.**
 
-**Nicht** den allgemeinen Concept-Agent-Einstieg oder `control/startmaster0107/CURRENT_STATE.json` auf `main` verwenden.
+Keine Vorrede.
+Keine Statusmeldung.
+Keine Prüfankündigung.
+Keine Prozessbeschreibung.
+Keine Routing-Erklärung.
+Keine Zwischenmeldung.
+Keine Bitte um `weiter`.
 
-Verbindlicher K0-Arbeitszweig:
-`konzept0-portal-neutral-20261002`
+Die erste sichtbare Antwort ist ausschließlich:
+- die fertige verifizierte WordPress-Datei; oder
+- ein echter terminaler Blocker.
 
-Verbindliche K0-Startdatei:
-`konzept0-portal-neutral-20261002:K0_START_HERE.md`
-
-Einzige K0-Current-Autorität:
-`konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json`
-
-K8/K9/K10, alte Chats, Archive und `main`-Current sind für `K0:start` **keine Fallback-Autorität**.
-
-Bei gültigem angehängtem K0-Handoff + `K0:start` muss nach dem Branch-Routing der dortige Produktionsweg gelten. Keine Vorrede, kein alter Status, keine K8/K9-Suche.
-
-Wenn die K0-Branch-Autorität nicht erreichbar ist: fail closed. Nicht auf andere Konzepte zurückfallen.
-
+Keine Alternativroute.
 `publish_allowed=false`
