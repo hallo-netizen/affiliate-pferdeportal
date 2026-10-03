@@ -1,0 +1,177 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdedecken-regendecken-faq",
+    "plan_slot": "23330868f4b0c79781d83d539e3f5854b31d0667fa48ba45c084911b243568fe",
+    "target_keyword": "Frieren Pferde unter Regendecken",
+    "title": "Frieren Pferde unter Regendecken?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "When to Blanket a Horse – Penn State Extension",
+          "source_url": "https://extension.psu.edu/when-to-blanket-a-horse"
+        },
+        {
+          "source_title": "Regendecken im Pferde Atelier",
+          "source_url": "https://pferde-atelier.de/ausruestung/ausruestung-decken/pferdedecken-regendecken/"
+        }
+      ],
+      "claims": [
+        "Ein intaktes Winterfell isoliert ein Pferd, während Nässe und Schlamm die isolierende Wirkung des Haarkleids vermindern können.",
+        "Regendecken oder andere Decken können besonders bei nassem Wetter, fehlendem Schutz, geschorenen Pferden sowie jungen, alten oder dünnen Pferden sinnvoll sein.",
+        "Eine Pferdedecke muss regelmäßig abgenommen werden, damit Passform, Hautzustand und Körperkondition kontrolliert werden können; eine nasse Decke sollte getrocknet werden.",
+        "Bei Regendecken sind Wetterschutz, Atmungsaktivität, Schulterfreiheit und ein scheuerfreier Sitz für den täglichen Einsatz wichtig."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Frieren Pferde unter Regendecken",
+      "topic": "Frieren Pferde unter Regendecken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Frieren Pferde unter Regendecken?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "When to Blanket a Horse – Penn State Extension",
+        "source_url": "https://extension.psu.edu/when-to-blanket-a-horse",
+        "evidence_text_sha256": "3dc6cf754705e15a329eca58284d8d2ed92db9ae1d6f14f8f0ed48486a5117fc",
+        "statement": "Ein intaktes Winterfell isoliert ein Pferd, während Nässe und Schlamm die isolierende Wirkung des Haarkleids vermindern können.",
+        "evidence_text": "Ein intaktes Winterfell isoliert ein Pferd, während Nässe und Schlamm die isolierende Wirkung des Haarkleids vermindern können.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "When to Blanket a Horse – Penn State Extension",
+        "source_url": "https://extension.psu.edu/when-to-blanket-a-horse",
+        "evidence_text_sha256": "12ff593caa88ddab34d9c3ba94d6ab16843f5a3ca76605afdce8f9dd54d0cfbd",
+        "statement": "Regendecken oder andere Decken können besonders bei nassem Wetter, fehlendem Schutz, geschorenen Pferden sowie jungen, alten oder dünnen Pferden sinnvoll sein.",
+        "evidence_text": "Regendecken oder andere Decken können besonders bei nassem Wetter, fehlendem Schutz, geschorenen Pferden sowie jungen, alten oder dünnen Pferden sinnvoll sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "When to Blanket a Horse – Penn State Extension",
+        "source_url": "https://extension.psu.edu/when-to-blanket-a-horse",
+        "evidence_text_sha256": "dd56e32d70576e64eb46a92811c713ad4c65c47ebe09137c6405ff32cc2e32b8",
+        "statement": "Eine Pferdedecke muss regelmäßig abgenommen werden, damit Passform, Hautzustand und Körperkondition kontrolliert werden können; eine nasse Decke sollte getrocknet werden.",
+        "evidence_text": "Eine Pferdedecke muss regelmäßig abgenommen werden, damit Passform, Hautzustand und Körperkondition kontrolliert werden können; eine nasse Decke sollte getrocknet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Regendecken im Pferde Atelier",
+        "source_url": "https://pferde-atelier.de/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "evidence_text_sha256": "bd1d87fb1e339f4c787c8e9d882e7c02d4d03027cdcf469e4b7e545c4a247c1d",
+        "statement": "Bei Regendecken sind Wetterschutz, Atmungsaktivität, Schulterfreiheit und ein scheuerfreier Sitz für den täglichen Einsatz wichtig.",
+        "evidence_text": "Bei Regendecken sind Wetterschutz, Atmungsaktivität, Schulterfreiheit und ein scheuerfreier Sitz für den täglichen Einsatz wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "anchor": "FAQ zu Regendecken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/ausruestung/ausruestung-decken/",
+        "anchor": "Decken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-faq/",
+        "active": true
+      },
+      {
+        "href": "/ausruestung/ausruestung-decken/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecke",
+      "Winterfell",
+      "Nässe",
+      "Wetterschutz",
+      "Passform",
+      "Körperzustand",
+      "Decke",
+      "Wind",
+      "Schur",
+      "Unterstand"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Ob ein Pferd friert, hängt gleichzeitig von Fell, Nässe, Wind, Schur, Körperzustand und Haltung ab; eine Matrix würde diese Wechselwirkung zu stark vereinfachen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
