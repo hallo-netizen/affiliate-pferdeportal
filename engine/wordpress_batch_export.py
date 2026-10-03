@@ -1,5 +1,5 @@
 from __future__ import annotations
-import json, re, sys
+import hashlib, json, re, sys
 from pathlib import Path
 
 from .html_design import validate_canonical_html, DesignBlocked
@@ -33,8 +33,11 @@ def combine(intake: dict, singles: list[dict]) -> dict:
         slot=str(row.get("plan_slot") or "")
         if not re.fullmatch(r"[0-9a-f]{64}",slot):
             raise BatchBlocked("SINGLE_PLAN_SLOT_INVALID")
-        if str(row.get("article_id") or "")!=slot:
-            raise BatchBlocked("SINGLE_ARTICLE_ID_MUST_EQUAL_PLAN_SLOT")
+        aid=str(row.get("article_id") or "")
+        if not re.fullmatch(r"article:[0-9a-f]{24}",aid):
+            raise BatchBlocked("SINGLE_ARTICLE_ID_INVALID")
+        if hashlib.sha256(("pserc-plan-slot-v2|"+aid).encode("utf-8")).hexdigest()!=slot:
+            raise BatchBlocked("SINGLE_CANONICAL_PLAN_SLOT_MISMATCH")
         if str(row.get("slug") or "")!=slug_from_title(str(row.get("title") or "")):
             raise BatchBlocked("SINGLE_SLUG_MISMATCH")
         if slot in rows_by_slot:
