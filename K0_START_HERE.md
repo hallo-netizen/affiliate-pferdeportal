@@ -31,6 +31,8 @@ Die erste sichtbare Antwort ist ausschließlich:
 
 Portalzuordnung automatisch.
 
+Interne Links: exakt 3; `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
+
 Repository: `hallo-netizen/affiliate-pferdeportal`
 
 Branch: `konzept0-portal-neutral-20261002`
