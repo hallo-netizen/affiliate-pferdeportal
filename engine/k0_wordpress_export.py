@@ -21,6 +21,12 @@ def _load(path):
         raise Blocked('JSON_OBJECT_REQUIRED:'+str(path))
     return x
 
+def _load_category_payload(path):
+    x=json.loads(Path(path).read_text(encoding='utf-8'))
+    if not isinstance(x,list):
+        raise Blocked('CATEGORY_JSON_LIST_REQUIRED:'+str(path))
+    return x
+
 def _sha(value):
     return hashlib.sha256(str(value).encode('utf-8')).hexdigest()
 
@@ -215,7 +221,8 @@ def main():
     try:
         mode=sys.argv[1]
         if mode=='export' and len(sys.argv)==11:
-            out=build(*[_load(p) for p in sys.argv[2:10]])
+            args=[_load(p) for p in sys.argv[2:9]] + [_load_category_payload(sys.argv[9])]
+            out=build(*args)
             Path(sys.argv[10]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
             print(json.dumps({'contract':'K0_WORDPRESS_EXPORT_V3','status':'PASS','output':sys.argv[10],'sha256':_sha(Path(sys.argv[10]).read_text(encoding='utf-8')),'publish_allowed':False},ensure_ascii=False))
             return
