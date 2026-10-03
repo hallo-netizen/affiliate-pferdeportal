@@ -99,7 +99,8 @@
         "status": "PASS",
         "ppm_version": "6.7.9",
         "content_sha256": "2dcccf3b65d375c8e99cf521faf461c9aa04c1a9511a5e0c8f1e572068fc0736"
-      }
+      },
+      "article_id": "article:f82f0d5e9c6a3a454d5ced35"
     }
   ]
 }
