@@ -22,7 +22,6 @@
   "articles": [
     {
       "index": 0,
-      "article_id": "article:f82f0d5e9c6a3a454d5ced35",
       "title": "Welche Schermaschine für Pferde ist die leiseste?",
       "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
       "category": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
@@ -69,7 +68,8 @@
               "slug": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
               "taxonomy": "category"
             }
-          }
+          },
+          "canonical_article_id": "article:f82f0d5e9c6a3a454d5ced35"
         },
         "writer_provenance": {
           "contract": "K0_WRITER_SEAL_V1",
