@@ -1,0 +1,197 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-regeneration-kuehlgamaschen-faq",
+    "plan_slot": "28ecc3ae064ab04c5e867125d889a696c03406e48ab67e10a44e0b47578f9c5c",
+    "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+    "title": "Sind Kühlgamaschen für Pferde sinnvoll?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Quintanar et al. 2018 – Thermodynamic effects of commercially available ice boots",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/29445615/"
+        },
+        {
+          "source_title": "Quintanar et al. 2018 – Thermodynamic effects of commercially available ice boots",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/29445615/"
+        },
+        {
+          "source_title": "McCarthy et al. 2025 – In vivo effects of cold therapy and bandaging",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/39996479/"
+        },
+        {
+          "source_title": "van Eps et al. 2015 – Seven methods for continuous therapeutic cooling",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/25385194/"
+        },
+        {
+          "source_title": "Ciamillo et al. 2025 – Distal limb immersion in ice and water",
+          "source_url": "https://pubmed.ncbi.nlm.nih.gov/39842089/"
+        }
+      ],
+      "claims": [
+        "Bei sechs gesunden Sportpferden senkte eine kommerzielle Eisgamasche nach Belastung die gemessene Temperatur am Röhrbein signifikant gegenüber dem unbehandelten Bein.",
+        "Nach zwanzig Minuten Anwendung dauerte es in dieser Untersuchung im Mittel etwa 14,67 Minuten, bis der Temperaturunterschied zum Kontrollbein wieder verschwunden war.",
+        "Ein untersuchtes Kompressions-Kühlsystem kühlte die Beugesehnen schneller und gleichmäßiger als Eisboots; unterschiedliche Kühlsysteme wirken daher nicht gleich stark.",
+        "Eis-Wasser-Immersion von Huf und Fesselregion erreichte bei langdauernder digitaler Kryotherapie deutlich niedrigere Hufwandtemperaturen als mehrere trockene Kühlanwendungen.",
+        "Bei klinisch relevanter Langzeitkühlung senkte Eis-Wasser-Immersion die Lamellentemperatur deutlich, während Eispack- und Sleeve-Systeme in dieser Studie nicht vergleichbar wirksam waren."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+      "topic": "Sind Kühlgamaschen für Pferde sinnvoll?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Sind Kühlgamaschen für Pferde sinnvoll?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Quintanar et al. 2018 – Thermodynamic effects of commercially available ice boots",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/29445615/",
+        "evidence_text_sha256": "e47d33665a2b2a4a1aa3e70fe55b7aa028e89e7d7b6893603363cbe7f8b18bf4",
+        "statement": "Bei sechs gesunden Sportpferden senkte eine kommerzielle Eisgamasche nach Belastung die gemessene Temperatur am Röhrbein signifikant gegenüber dem unbehandelten Bein.",
+        "evidence_text": "In der Studie wurden sechs gesunde Sportpferde belastet; anschließend wurde ein Bein 20 Minuten mit einer kommerziellen Eisgamasche gekühlt, während das andere unbehandelt blieb. Die Temperatur im Bereich des dritten Mittelhandknochens war nach der Kühlung am behandelten Bein deutlich niedriger.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Quintanar et al. 2018 – Thermodynamic effects of commercially available ice boots",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/29445615/",
+        "evidence_text_sha256": "7582fd7dbdca05957eb80e07e3f403fa4eefa089d51f36dd8d7626293d9d043e",
+        "statement": "Nach zwanzig Minuten Anwendung dauerte es in dieser Untersuchung im Mittel etwa 14,67 Minuten, bis der Temperaturunterschied zum Kontrollbein wieder verschwunden war.",
+        "evidence_text": "Nach dem Entfernen der Eisgamasche wurden die Beine alle zwei Minuten thermografisch kontrolliert. Die Autoren berichten, dass sich der Temperaturunterschied im Mittel nach rund 14,67 Minuten wieder ausgeglichen hatte.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "McCarthy et al. 2025 – In vivo effects of cold therapy and bandaging",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/39996479/",
+        "evidence_text_sha256": "313d0d78e21cb166edefc269896458f7aa25705e9f125453d22fa4875a591967",
+        "statement": "Ein untersuchtes Kompressions-Kühlsystem kühlte die Beugesehnen schneller und gleichmäßiger als Eisboots; unterschiedliche Kühlsysteme wirken daher nicht gleich stark.",
+        "evidence_text": "Bei sechs Pferden sank die Kerntemperatur der oberflächlichen und tiefen Beugesehne unter einem Kompressions-Kühlsystem stärker als unter Eisboots; die Autoren bewerten das System für die untersuchte Anwendung als überlegen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "van Eps et al. 2015 – Seven methods for continuous therapeutic cooling",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/25385194/",
+        "evidence_text_sha256": "173436d10b320a079e2ec3e925f09a89e5921307c59a79f889410a5130362e58",
+        "statement": "Eis-Wasser-Immersion von Huf und Fesselregion erreichte bei langdauernder digitaler Kryotherapie deutlich niedrigere Hufwandtemperaturen als mehrere trockene Kühlanwendungen.",
+        "evidence_text": "Beim achtstündigen Vergleich verschiedener Kühlmethoden erreichten Verfahren mit Eis-Wasser-Immersion von Huf und mindestens Fesselregion anhaltend deutlich niedrigere Hufwandtemperaturen als mehrere trockene Anwendungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Ciamillo et al. 2025 – Distal limb immersion in ice and water",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/39842089/",
+        "evidence_text_sha256": "9b00d90b72c120dd270b1476b3b270e3bfbc3df7a9472037b21011e8d288ec37",
+        "statement": "Bei klinisch relevanter Langzeitkühlung senkte Eis-Wasser-Immersion die Lamellentemperatur deutlich, während Eispack- und Sleeve-Systeme in dieser Studie nicht vergleichbar wirksam waren.",
+        "evidence_text": "Unter klinisch relevanten Bedingungen senkten zwei Formen der Eis-Wasser-Immersion die gemessene beziehungsweise geschätzte Lamellentemperatur deutlich; Eispack- und Sleeve-Anwendungen erreichten in derselben Untersuchung keine vergleichbare Absenkung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/gesundheit/gesundheit-regeneration/gesundheit-regeneration-kuehlgamaschen/",
+        "anchor": "Kühlgamaschen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-sicherheit/",
+        "anchor": "Sicherheit bei Kühlgamaschen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/gesundheit/gesundheit-regeneration/",
+        "anchor": "Regeneration",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/gesundheit/gesundheit-regeneration/gesundheit-regeneration-kuehlgamaschen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-sicherheit/",
+        "active": true
+      },
+      {
+        "href": "/gesundheit/gesundheit-regeneration/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
+      "taxonomy": "category"
+    },
+    "heading_intent_terms": [
+      "Kühlgamaschen",
+      "Kühlung",
+      "Pferdebein",
+      "Regeneration",
+      "Kryotherapie",
+      "Belastung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine klar gegliederte Liste zu Nutzen, Grenzen und Warnzeichen beantwortet die FAQ schneller; eine zusätzliche Tabelle würde dieselben Aussagen nur wiederholen und keinen eigenen Kontrollwert liefern."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
