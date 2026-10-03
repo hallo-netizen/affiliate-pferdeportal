@@ -1,0 +1,55 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+    "plan_slot": "20720b5afc6b05f8467edf9e77640d9f4afeedbb2c2482331db3df5335f2a427",
+    "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+    "title": "Welche Schermaschine für Pferde ist die leiseste?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "VOSS.farming easyCUT Pferdeschermaschine",
+          "source_url": "https://www.weidezaun.info/voss-farming-easycut-pferdeschermaschine-blau.html"
+        },
+        {
+          "source_title": "Eider EG 720 Herstellerkatalog",
+          "source_url": "https://eiderlandgeraete.de/wp-content/uploads/2019/02/katalog-2017.pdf"
+        },
+        {
+          "source_title": "Aesculap Bonum Pro",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/product/aesculap-akkuschermaschine-bonum-pro/1042092/1018326"
+        },
+        {
+          "source_title": "Heiniger Xperience 2-Speed",
+          "source_url": "https://heiniger-large-animals.com/produkte/schermaschine/show/xperience-2-speed"
+        }
+      ],
+      "claims": [
+        "VOSS easyCUT und Eider EG 720 werden mit etwa 60 dB(A) angegeben.",
+        "Aesculap Bonum Pro wird mit 65 dB(A) angegeben.",
+        "Heiniger Xperience 2-Speed wird mit 68 dB(A) angegeben.",
+        "Herstellerangaben sind wegen unterschiedlicher Messbedingungen nicht zwingend vollständig direkt vergleichbar."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+      "topic": "Welche Schermaschine für Pferde ist die leiseste?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false
+}
