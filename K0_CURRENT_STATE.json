@@ -21,7 +21,7 @@
       "LANGUAGETOOL_6_8",
       "ALL_HARD_ARTICLE_RULES_FINAL",
       "CANONICAL_ARTICLE_ID_FROM_PPM679_REGISTRY",
-      "SYSTEM4_WORDPRESS_HANDOFF_V1_K10_COMPAT_STRUCTURE"
+      "SYSTEM4_WORDPRESS_HANDOFF_V1_CANONICAL_STRUCTURE"
     ],
     "direct_article_package_start_allowed": false,
     "writer_self_stamping_allowed": false,
