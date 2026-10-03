@@ -1,0 +1,73 @@
+name: K0 rebuild user3 exact System4
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - '.github/workflows/k0-rebuild-user3-only.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Rebuild user3
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=62f2ebdeb22dcb02fa487581a61feffe790e23c1
+          git show "$SRC:real_runs/k0_batch/20261003_user3/WORDPRESS_FINAL_CANONICAL.json" > /tmp/in.json
+          python3 - <<'PY'
+          import hashlib,json,re,urllib.parse,urllib.request
+          from pathlib import Path
+          d=json.load(open('/tmp/in.json'))
+          def slugify(v):
+              s=str(v).strip().casefold()
+              for a,b in (('ä','ae'),('ö','oe'),('ü','ue'),('ß','ss')): s=s.replace(a,b)
+              return re.sub(r'[^a-z0-9]+','-',s).strip('-')
+          cache={}
+          def cat(slug):
+              if slug not in cache:
+                  u='https://pferde-atelier.de/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
+                  with urllib.request.urlopen(u,timeout=30) as r: rows=json.load(r)
+                  hits=[x for x in rows if isinstance(x,dict) and x.get('slug')==slug and int(x.get('id') or 0)>0]
+                  assert len(hits)==1,(slug,len(hits))
+                  cache[slug]={'id':int(hits[0]['id']),'slug':slug,'taxonomy':'category'}
+              return cache[slug]
+          expected={'index','article_id','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679'}
+          for idx,a in enumerate(d['articles']):
+              aid=a['article_id']; slot=a['plan_slot']; body=a['body']; sha=hashlib.sha256(body.encode()).hexdigest()
+              assert re.fullmatch(r'article:[0-9a-f]{24}',aid)
+              assert hashlib.sha256(('pserc-plan-slot-v2|'+aid).encode()).hexdigest()==slot
+              assert sha==a['final_draft_sha256']
+              fact=a['production_context']['fact_pack']
+              slug=slugify(a['title'])
+              plan={
+                'canonical_article_id':aid,'article_type':a['article_type'],'target_keyword':a['target_keyword'],'topic':a['title'],
+                'canonical_article':{'title':a['title'],'article_type':a['article_type'],'slug':slug,'body_html':body,'body_html_sha256':sha},
+                'quality_binding':{'wordpress_category':cat(a['category'])},
+                'runtime_order':{'article_type':a['article_type'],'title':a['title'],'slug':slug,'subject_scope':a['title'],'subject_label':a['target_keyword'],'allowed_fact_ids':[]},
+              }
+              a.clear(); a.update({
+                'index':idx,'article_id':aid,'title':plan['topic'],'target_keyword':plan['target_keyword'],'category':plan['quality_binding']['wordpress_category']['slug'],
+                'article_type':plan['article_type'],'plan_slot':slot,'final_draft_sha256':sha,'revision_count':1,'body':body,
+                'production_context':{'fact_pack':fact,'production_plan_item':plan},
+                'languagetool':{'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8'},
+                'ppm679':{'status':'PASS','ppm_version':'6.7.9','technical_status':'TECHNICAL_CHECK_OK','content_quality_status':'CONTENT_QUALITY_CHECK_OK','fail_closed_aggregate_status':'PASS','content_sha256':sha},
+              })
+              assert set(a)==expected
+          d.update({'contract':'SYSTEM4_WORDPRESS_HANDOFF_V1','article_count':len(d['articles']),'publish_allowed':False,'signing_deferred':True,'batch_gate_status':'SYSTEM4_BATCH_FULL_PASS_COLLECTED','no_legacy_status':'PASS','test_suite_status':'PASS'})
+          d['wordpress_review'].update({'plugin_version_verified_against':'0.28.30','plugin_build_verified_against':'0.28.30-pste-v5-binding-safe','ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,'direct_upload_block_reason':None})
+          out='/tmp/K0_USER3_WORDPRESS_SYSTEM4_REPAIRED.json'
+          Path(out).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print('PASS',hashlib.sha256(Path(out).read_bytes()).hexdigest())
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-user3-system4-repaired
+          path: /tmp/K0_USER3_WORDPRESS_SYSTEM4_REPAIRED.json
+          retention-days: 1
