@@ -1869,3 +1869,10 @@ NICHT ALS PASS BEHAUPTET:
 DARUM:
 Git-/Ref-/Campus-Restore + automatische Tresorsicherung + lokaler Notfalltest = real PASS.
 `GITHUB_KOMPLETT_PASS` = weiterhin OFFEN.
+
+## 2026-10-03 – ROUTING-NACHHOLFIX CURRENT/HOBBYRAUM
+- Befund: ältere Projekt-/TEXT-START_HERE-Texte nannten den Hobbyraum noch als NEXT-ACTION-Quelle, obwohl der aktuelle Hobbyraum ausdrücklich keine Current-/NEXT-ACTION-Autorität ist.
+- KISS-Fix: nur die Wegweisertexte nachgezogen; keine neue Tür, kein neuer Statusspeicher.
+- Ergebnis: `START_HERE → CURRENT_STATE → Frischecheck → NEXT ACTION`; Hobbyraum nur bei aktiver temporärer Bindung.
+- Dauerhaftes WARUM: `AENDERUNGSREGISTER.md → ARCH-053`.
+
