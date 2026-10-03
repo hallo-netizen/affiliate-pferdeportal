@@ -22,7 +22,6 @@
   "articles": [
     {
       "index": 0,
-      "article_id": "article:11bf036b5c0473935b65167e",
       "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
       "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
       "category": "pferdehaftpflicht-beratung",
@@ -68,7 +67,8 @@
               "slug": "pferdehaftpflicht-beratung",
               "taxonomy": "category"
             }
-          }
+          },
+          "canonical_article_id": "article:11bf036b5c0473935b65167e"
         },
         "writer_provenance": {
           "contract": "K0_WRITER_SEAL_V1",
@@ -102,7 +102,6 @@
     },
     {
       "index": 1,
-      "article_id": "article:ac0c731bda49c9c8dee25d50",
       "title": "Sind Kühlgamaschen für Pferde sinnvoll?",
       "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
       "category": "gesundheit-regeneration-kuehlgamaschen-faq",
@@ -148,7 +147,8 @@
               "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
               "taxonomy": "category"
             }
-          }
+          },
+          "canonical_article_id": "article:ac0c731bda49c9c8dee25d50"
         },
         "writer_provenance": {
           "contract": "K0_WRITER_SEAL_V1",
@@ -182,7 +182,6 @@
     },
     {
       "index": 2,
-      "article_id": "article:f82f0d5e9c6a3a454d5ced35",
       "title": "Welche Schermaschine für Pferde ist die leiseste?",
       "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
       "category": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
@@ -229,7 +228,8 @@
               "slug": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
               "taxonomy": "category"
             }
-          }
+          },
+          "canonical_article_id": "article:f82f0d5e9c6a3a454d5ced35"
         },
         "writer_provenance": {
           "contract": "K0_WRITER_SEAL_V1",
