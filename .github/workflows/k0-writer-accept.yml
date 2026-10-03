@@ -153,20 +153,30 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-binding/CANONICAL_BINDINGS.json /tmp/WORDPRESS_SINGLE.json
+          category_slug="$(python3 - <<'PY'
+          import json,os
+          d=json.load(open(os.environ['RUN_DIR']+'/WORDPRESS_INTAKE.json'))
+          print(d['items'][0]['category'])
+          PY
+          )"
+          curl --fail --location --retry 3 --silent --show-error "https://pferde-atelier.de/wp-json/wp/v2/categories?slug=$category_slug" -o /tmp/k0-category.json
+          python3 -m engine.k0_wordpress_export export "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_SEALED_WRITER_PRODUCT.json /tmp/k0-portal.json /tmp/k0-gates.json /tmp/k0-lt68-result.json /tmp/k0-binding/CANONICAL_BINDINGS.json /tmp/k0-category.json /tmp/WORDPRESS_SINGLE.json
           python3 -m engine.k0_wordpress_export verify /tmp/WORDPRESS_SINGLE.json "$RUN_DIR/WORDPRESS_INTAKE.json" /tmp/K0_WORDPRESS_VERIFY.json
           python3 - <<'PY'
-          import json,re
-          from engine.k0_wordpress_export import slug_from_title
+          import hashlib,json,re
           doc=json.load(open('/tmp/WORDPRESS_SINGLE.json'))
-          assert doc['contract']=='PFERDE_ATELIER_WORDPRESS_IMPORT_V1'
-          assert doc['source']=='K0_CANONICAL_WORKFLOW'
+          assert doc['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
           a=doc['articles'][0]
-          assert re.fullmatch(r'[0-9a-f]{64}',a['article_id'])
-          assert a['article_id']==a['plan_slot']
-          assert a['slug']==slug_from_title(a['title'])
-          assert set(a)=={'article_id','plan_slot','title','slug','target_keyword','category','article_type','body'}
-          print('K0_WORDPRESS_PROVEN_IMPORT_SCHEMA_PASS')
+          assert re.fullmatch(r'article:[0-9a-f]{24}',a['article_id'])
+          assert hashlib.sha256(('pserc-plan-slot-v2|'+a['article_id']).encode()).hexdigest()==a['plan_slot']
+          pc=a['production_context']
+          assert set(pc)=={'fact_pack','production_plan_item'}
+          pi=pc['production_plan_item']
+          assert pi['canonical_article_id']==a['article_id']
+          assert pi['canonical_article']['body_html']==a['body']
+          assert pi['canonical_article']['body_html_sha256']==a['final_draft_sha256']
+          assert pi['quality_binding']['wordpress_category']['slug']==a['category']
+          print('K0_WORDPRESS_EXACT_K10_COMPAT_SCHEMA_PASS')
           PY
 
       - name: Persist only fully verified canonical outputs
