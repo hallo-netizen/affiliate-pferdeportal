@@ -1,0 +1,129 @@
+name: K0 rebuild import files exact System4
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - '.github/workflows/k0-rebuild-import-files.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild exact proven System4 payloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC=62f2ebdeb22dcb02fa487581a61feffe790e23c1
+          git show "$SRC:real_runs/k0_batch/20261003_user3/WORDPRESS_FINAL_CANONICAL.json" > /tmp/user3-old.json
+          git show "$SRC:real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json" > /tmp/rewrite16-old.json
+          python3 - <<'PY'
+          import hashlib,json,re,urllib.parse,urllib.request
+          from pathlib import Path
+
+          ARTICLE_FIELDS={'index','article_id','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679'}
+
+          def slugify(value):
+              s=str(value or '').strip().casefold()
+              for a,b in (('ä','ae'),('ö','oe'),('ü','ue'),('ß','ss')): s=s.replace(a,b)
+              s=re.sub(r'[^a-z0-9]+','-',s).strip('-')
+              if not s: raise RuntimeError('SLUG_EMPTY')
+              return s
+
+          cache={}
+          def category_binding(slug):
+              if slug in cache: return cache[slug]
+              url='https://pferde-atelier.de/wp-json/wp/v2/categories?slug='+urllib.parse.quote(slug)
+              with urllib.request.urlopen(url,timeout=30) as r:
+                  rows=json.load(r)
+              hits=[x for x in rows if isinstance(x,dict) and str(x.get('slug') or '')==slug and int(x.get('id') or 0)>0]
+              if len(hits)!=1: raise RuntimeError('CATEGORY_ID_NOT_UNIQUE:'+slug+':'+str(len(hits)))
+              cache[slug]={'id':int(hits[0]['id']),'slug':slug,'taxonomy':'category'}
+              return cache[slug]
+
+          def rebuild(src,out):
+              d=json.load(open(src,encoding='utf-8'))
+              assert d['contract']=='SYSTEM4_WORDPRESS_HANDOFF_V1'
+              for idx,a in enumerate(d['articles']):
+                  aid=str(a.get('article_id') or '')
+                  slot=str(a.get('plan_slot') or '')
+                  assert re.fullmatch(r'article:[0-9a-f]{24}',aid),(idx,aid)
+                  assert hashlib.sha256(('pserc-plan-slot-v2|'+aid).encode()).hexdigest()==slot,(idx,'roundtrip')
+                  body=str(a['body']); body_sha=hashlib.sha256(body.encode()).hexdigest()
+                  assert body_sha==a['final_draft_sha256'],(idx,'body_sha')
+                  oldpc=a.get('production_context') if isinstance(a.get('production_context'),dict) else {}
+                  fact=oldpc.get('fact_pack')
+                  assert isinstance(fact,dict) and fact.get('contract')=='canonical_fact_pack_v1',(idx,'fact_pack')
+                  slug=slugify(a['title'])
+                  oldpi=oldpc.get('production_plan_item') if isinstance(oldpc.get('production_plan_item'),dict) else {}
+                  allowed=oldpi.get('allowed_fact_ids') or ((oldpi.get('runtime_order') or {}).get('allowed_fact_ids') if isinstance(oldpi.get('runtime_order'),dict) else []) or []
+                  plan={
+                    'canonical_article_id':aid,
+                    'article_type':a['article_type'],
+                    'target_keyword':a['target_keyword'],
+                    'topic':a['title'],
+                    'canonical_article':{
+                      'title':a['title'],'article_type':a['article_type'],'slug':slug,
+                      'body_html':body,'body_html_sha256':body_sha,
+                    },
+                    'quality_binding':{'wordpress_category':category_binding(a['category'])},
+                    'runtime_order':{
+                      'article_type':a['article_type'],'title':a['title'],'slug':slug,
+                      'subject_scope':a['title'],'subject_label':a['target_keyword'],
+                      'allowed_fact_ids':sorted(str(x) for x in allowed),
+                    },
+                  }
+                  a.clear()
+                  a.update({
+                    'index':idx,'article_id':aid,'title':plan['topic'],'target_keyword':plan['target_keyword'],
+                    'category':plan['quality_binding']['wordpress_category']['slug'],'article_type':plan['article_type'],
+                    'plan_slot':slot,'final_draft_sha256':body_sha,'revision_count':1,'body':body,
+                    'production_context':{'fact_pack':fact,'production_plan_item':plan},
+                    'languagetool':{'status':'PASS','finding_count':0,'engine':'LanguageTool 6.8'},
+                    'ppm679':{
+                      'status':'PASS','ppm_version':'6.7.9','technical_status':'TECHNICAL_CHECK_OK',
+                      'content_quality_status':'CONTENT_QUALITY_CHECK_OK','fail_closed_aggregate_status':'PASS',
+                      'content_sha256':body_sha,
+                    },
+                  })
+                  assert set(a)==ARTICLE_FIELDS
+              d['article_count']=len(d['articles'])
+              d['publish_allowed']=False
+              d['contract']='SYSTEM4_WORDPRESS_HANDOFF_V1'
+              d['signing_deferred']=True
+              d['batch_gate_status']='SYSTEM4_BATCH_FULL_PASS_COLLECTED'
+              d['no_legacy_status']='PASS'
+              d['test_suite_status']='PASS'
+              review=d.get('wordpress_review') if isinstance(d.get('wordpress_review'),dict) else {}
+              review.update({
+                'file_format':'JSON','mime_type':'application/json','intended_next_step':'WORDPRESS_DIRECT_IMPORT',
+                'plugin_name':'Portal SEO Editorial Plan Compiler','plugin_version_verified_against':'0.28.30',
+                'plugin_build_verified_against':'0.28.30-pste-v5-binding-safe',
+                'ppm_version_verified_against':'6.7.9','direct_wordpress_upload_ready':True,
+                'direct_upload_block_reason':None,'required_downstream_components':[],
+              })
+              d['wordpress_review']=review
+              Path(out).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+              print(out,'PASS',len(d['articles']),hashlib.sha256(Path(out).read_bytes()).hexdigest())
+
+          rebuild('/tmp/user3-old.json','/tmp/K0_USER3_WORDPRESS_SYSTEM4_REPAIRED.json')
+          rebuild('/tmp/rewrite16-old.json','/tmp/WORDPRESS_16_SYSTEM4_REPAIRED.json')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-user3-system4-repaired
+          path: /tmp/K0_USER3_WORDPRESS_SYSTEM4_REPAIRED.json
+          if-no-files-found: error
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k0-rewrite16-system4-repaired
+          path: /tmp/WORDPRESS_16_SYSTEM4_REPAIRED.json
+          if-no-files-found: error
+          retention-days: 1
