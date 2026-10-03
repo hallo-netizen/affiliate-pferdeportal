@@ -48,12 +48,6 @@ def _job_core(intake, portal, ctx):
     pc=ctx.get('production_context')
     if not isinstance(pc,dict) or not isinstance(pc.get('fact_pack'),dict) or not isinstance(pc.get('production_plan_item'),dict):
         raise Blocked('K0_AUTHORING_CONTEXT_RESEARCH_MISSING')
-    try:
-        rule_context=validate_rule_context(ctx.get('rule_context'),ident)
-        full_rule_bundle=writer_rule_bundle(ident.get('article_type'))
-        full_rule_binding=rule_binding(full_rule_bundle)
-    except Exception as exc:
-        raise Blocked('K0_AUTHORING_FULL_RULE_CONTEXT_INVALID:'+str(exc)) from exc
     if ident.get('article_type')==PROPERTY_WINNER_TYPE:
         try:
             property_result=validate_property_packet(ident,pc.get('property_research'))
@@ -61,6 +55,12 @@ def _job_core(intake, portal, ctx):
             raise Blocked('K0_PROPERTY_RESEARCH_BLOCKED:'+str(exc)) from exc
         if str(cp.get('search_intent') or '')!=property_result.get('search_intent'):
             raise Blocked('K0_PROPERTY_RESEARCH_INTENT_MISMATCH')
+    try:
+        rule_context=validate_rule_context(ctx.get('rule_context'),ident)
+        full_rule_bundle=writer_rule_bundle(ident.get('article_type'))
+        full_rule_binding=rule_binding(full_rule_bundle)
+    except Exception as exc:
+        raise Blocked('K0_AUTHORING_FULL_RULE_CONTEXT_INVALID:'+str(exc)) from exc
     return {
       'contract':JOB_CONTRACT,
       'status':'OPEN',
