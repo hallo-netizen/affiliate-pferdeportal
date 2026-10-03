@@ -20,8 +20,8 @@ aus dem bloßen Betreten dieses Büros Schreibrechte ableiten, Fachregeln eigenm
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
 
-- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
-- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **AKTUELLER BÜROSTAND + NEXT ACTION:** `CURRENT_STATE.md`
+- **TEMPORÄRE AUSFÜHRUNGSFLÄCHE:** `HOBBYRAUM.md` nur bei ausdrücklicher CURRENT-Bindung
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
 - **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
@@ -76,8 +76,8 @@ Pflichtreihenfolge:
 Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
 
 Vor jeder Änderung:
-1. `CURRENT_STATE.md`;
-2. `HOBBYRAUM.md`;
+1. `CURRENT_STATE.md` + Frischecheck + dessen NEXT ACTION;
+2. `HOBBYRAUM.md` nur bei ausdrücklich aktiver CURRENT-Bindung;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
 4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
 5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
