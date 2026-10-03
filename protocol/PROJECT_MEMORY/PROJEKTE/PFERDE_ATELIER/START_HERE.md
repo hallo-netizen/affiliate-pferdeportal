@@ -26,7 +26,7 @@ das zuständige Büro auswählen und dessen `START_HERE.md` öffnen.
 Für jedes Büro gilt genau eine Quelle pro Frage:
 
 - **Was ist der aktuelle Fach-/Bestandsstand?** → Büro-`CURRENT_STATE.md`
-- **Was wird JETZT bearbeitet / was ist NEXT ACTION?** → Büro-`HOBBYRAUM.md`
+- **Was wird JETZT bearbeitet / was ist NEXT ACTION?** → Büro-`CURRENT_STATE.md`
 - **Welche Fehler sind bekannt?** → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → jeweilige Originalquelle
 - **Welches Ziel gilt?** → `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → Hauptquelle
 - **Warum wurde etwas geändert?** → `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
