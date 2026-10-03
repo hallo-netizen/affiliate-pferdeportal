@@ -30,3 +30,5 @@ jobs:
           unzip -q "$inner" -d /tmp/pserc-inner
           echo '=== ARTICLE ID HITS ==='
           grep -RniE "PSERC_SYSTEM4_ARTICLE_FIELD_INVALID|article_id|canonical_article_id|plan_slot" /tmp/pserc-inner --include='*.php' | head -1000 || true
+
+# rerun 2026-10-03 article-id proof
