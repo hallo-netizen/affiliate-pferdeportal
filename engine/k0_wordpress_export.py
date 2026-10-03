@@ -10,7 +10,7 @@ PLUGIN_VERSION='0.28.30'
 PLUGIN_BUILD='0.28.30-pste-v5-binding-safe'
 PPM_VERSION='6.7.9'
 FIVE_FIELDS=('article_type','category','plan_slot','target_keyword','title')
-WORDPRESS_ARTICLE_FIELDS=('index','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679')
+WORDPRESS_ARTICLE_FIELDS=('index','article_id','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679')
 
 class Blocked(RuntimeError):
     pass
@@ -84,6 +84,7 @@ def build(intake, package, portal, gate, lt, bindings):
 
     article={
       'index':0,
+      'article_id':article_id,
       'title':identity['title'],
       'target_keyword':identity['target_keyword'],
       'category':identity['category'],
@@ -143,13 +144,18 @@ def verify_export(doc, intake):
     art=arts[0]; ident=rows[0]
     if set(art)!=set(WORDPRESS_ARTICLE_FIELDS):
         raise Blocked('K0_WORDPRESS_ARTICLE_FIELDS_INVALID')
-    if 'article_id' in art or 'canonical_article_id' in art:
-        raise Blocked('K0_WORDPRESS_TOPLEVEL_ARTICLE_ID_FORBIDDEN')
+    if 'canonical_article_id' in art:
+        raise Blocked('K0_WORDPRESS_TOPLEVEL_CANONICAL_ARTICLE_ID_FORBIDDEN')
+    article_id=str(art.get('article_id') or '')
+    if not re.fullmatch(r'article:[0-9a-f]{24}',article_id):
+        raise Blocked('K0_WORDPRESS_ARTICLE_ID_INVALID')
     pc=art.get('production_context') if isinstance(art.get('production_context'),dict) else {}
     pi=pc.get('production_plan_item') if isinstance(pc.get('production_plan_item'),dict) else {}
-    article_id=str(pi.get('canonical_article_id') or '')
-    if not re.fullmatch(r'article:[0-9a-f]{24}',article_id):
+    nested_article_id=str(pi.get('canonical_article_id') or '')
+    if not re.fullmatch(r'article:[0-9a-f]{24}',nested_article_id):
         raise Blocked('K0_WORDPRESS_CANONICAL_ARTICLE_ID_MISSING_IN_PRODUCTION_CONTEXT')
+    if nested_article_id!=article_id:
+        raise Blocked('K0_WORDPRESS_ARTICLE_ID_BINDING_MISMATCH')
     if hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode('utf-8')).hexdigest()!=ident['plan_slot']:
         raise Blocked('K0_WORDPRESS_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH')
     for key in FIVE_FIELDS:
