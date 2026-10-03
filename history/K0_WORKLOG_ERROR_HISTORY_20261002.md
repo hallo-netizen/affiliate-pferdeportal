@@ -174,3 +174,17 @@ Nicht importieren:
 - Tabellenlogik wurde nicht geändert. Für Kühlgamaschen war `OMIT_NO_ADDED_VALUE / EXISTING_CHECKLIST_EQUIVALENT` eine ausdrücklich gebundene Tabellenentscheidung.
 - Nutzer-Hardlock für die Fortsetzung: **nur Rendering-Abstand reparieren; Linkverteilung nicht neu konzipieren; alles andere unverändert lassen.**
 
+### E12 – frischer Chat konnte zunächst auf falsche Startwahrheit fallen
+- Ein frischer K0-Chat las auf `main` den allgemeinen alten Current-Pfad statt direkt den K0-Branch.
+- Ursache: auf `main` fehlte die eindeutige K0-Routingtür; der K0-Branch besaß zwar seine Current-Autorität, war für einen frischen Chat aber nicht ausreichend vorgeschaltet.
+- Minimalfix wurde auf `main` über PR #490 gemergt: `main:K0_START_HERE.md` routet auf `konzept0-portal-neutral-20261002:K0_START_HERE.md`.
+- K0-Regressionstest für den Router wurde ergänzt.
+- Dieser Routingfix ändert keine Artikel-, LT-, PPM-, Tabellen-, WordPress- oder Publish-Regel.
+
+### E13 – Repo-Hardlock kann die erste sichtbare Chat-Vorrede nicht zuverlässig verhindern
+- Trotz Repo-Regel `NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.` wurden in bereits laufenden/frischen Chats weiterhin sichtbare Startformulierungen wie „Ich starte K0 … ich prüfe zuerst …“ beobachtet.
+- Befund: diese erste Chat-Ausgabe kann entstehen, bevor der Repo-Einstieg gelesen und angewandt wurde.
+- Deshalb ist ein Repo-Selftest für die Startdatei **kein Beleg**, dass die Chat-Oberfläche garantiert keine erste Arbeitsmeldung ausgibt.
+- Status darf daher nicht als produktseitig garantiertes `PASS` geführt werden.
+- Kein weiterer Eingriff in Artikelproduktion oder Qualitätsregeln daraus abgeleitet.
+
