@@ -121,6 +121,32 @@ Der alte `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` ist kein WordPress-Endvertrag.
 - kein Stopp bei intern lösbaren Fehlern.
 
 
+## VOLLSTÄNDIGER REGELWEG — HARDLOCK
+
+Für jeden neuen Artikel gilt ohne Ausnahme:
+
+1. **Vor dem Schreiben** wird aus den kanonischen Regelquellen das vollständige aktuelle Artikel-Regelpaket gebunden.
+2. Der `WRITER_JOB` enthält dieses vollständige Regelpaket und den vollständigen artikelbezogenen Regelkontext (u. a. Typregeln, Faktenbindung, interne Links, Listen, Tabellenentscheidung, Überschriftenbindung und WordPress-Kategorie).
+3. Der Writer darf nur gegen genau dieses gebundene Regelpaket schreiben. Ein verkürztes K0-Sonderregelpaket ist verboten.
+4. **Nach dem Schreiben** wird der fertige Artikel gegen sämtliche aktuell als HARD klassifizierten Artikelregeln geprüft.
+5. LanguageTool 6.8 ist Teil des finalen Vollchecks.
+6. Fehlt eine Regel, ein benötigter Regelkontext oder ein PASS-Nachweis, ist der Lauf BLOCKED.
+7. Eine WordPress-Datei darf erst erzeugt werden, wenn der vollständige finale Artikel-Regelcheck PASS ist.
+
+Aktueller Vollcheck:
+- 85 HARD-Artikelregeln insgesamt;
+- vollständiger Inhalts-/Strukturcheck vor LanguageTool;
+- anschließend LanguageTool 6.8;
+- final exakt derselbe Artikel erneut als vollständiger Regelstand gebunden.
+
+Insbesondere zwingend:
+- vorgeschriebene Listen/Aufzählungen;
+- exakt gebundene interne Links und Linkrollen;
+- vorgeschriebener kurzer Absatz direkt nach einer vorhandenen Tabelle;
+- alle übrigen Regeln aus `RULE_CATALOG.json` + `RULE_VALUES.json`.
+
+`PPM 6.7.9 parity PASS` allein ist **kein Artikelqualitäts-PASS**. Es bestätigt nur die Regelabbildung und darf niemals den vollständigen Artikelcheck ersetzen.
+
 ## Semantik-Hardlock
 
 Ein Artikel darf den WordPress-Export **nicht** erreichen, wenn:
