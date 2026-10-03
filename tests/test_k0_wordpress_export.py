@@ -71,7 +71,7 @@ class TestK0WordPressExport(unittest.TestCase):
     def test_nested_id_mismatch_blocks_verification(self):
         i=intake(); p,portal,gate,lt,full_rules,category=deps(i)
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
-            out=w.build(i,p,portal,gate,lt,bindings(i),category)
+            out=w.build(i,p,portal,gate,lt,full_rules,bindings(i),category)
         out['articles'][0]['production_context']['production_plan_item']['canonical_article_id']='article:000000000000000000000000'
         with self.assertRaisesRegex(w.Blocked,'NESTED_CANONICAL_ID_MISMATCH'):
             w.verify_export(out,i)
