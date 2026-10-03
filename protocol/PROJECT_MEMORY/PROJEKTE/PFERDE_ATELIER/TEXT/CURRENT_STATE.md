@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-03
-STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695ER VOLLEXPORT VORLIEGEND / 694 EXAKT EINDEUTIGE TITEL / ZIELVERTRAGS-LANES A0 B0 C548 D146
+STATUS: PSTE 0.57.26 LIVE / 0.57.28 NACHHALTIGER FAMILIEN-/STRUKTUR-KANDIDAT LOKAL HARD-PASS / 695ER VOLLEXPORT VORLIEGEND / 694 EXAKT EINDEUTIGE TITEL
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -54,65 +54,87 @@ Die 694 Titel dürfen **nicht manuell als Ersatz für den bestehenden Normal-Met
 
 
 
-## BELASTBARER LOKALER DELTA-STAND – PSTE 0.57.27
+## BELASTBARER LOKALER KANDIDAT – PSTE 0.57.28
 
-Lokaler Kandidat:
-`PSTE-0.57.27-PRODUCTWAHL-CLASSIFICATION-CANDIDATE.zip`
+Kandidat:
+`PSTE-0.57.28-SUSTAINABLE-FAMILY-STRUCTURE-ROUTING-CANDIDATE.zip`
 
 SHA-256:
-`414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`
+`a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`
 
-Basis:
-PSTE 0.57.26 / SHA-256 `d7d00c1b13144fc584a593993714721ec9a8679e7d65f017e1bc2ed10c1306d6`.
+Exakte Basis:
+PSTE 0.57.27 Produktwahl-Kandidat / SHA-256 `414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`.
 
-Delta ausschließlich:
-- neue Beitragsart-Erkennung **Produktwahl** für konkrete Produktfragen mit prüfbarem Auswahlkriterium;
-- direkte A-vs-B-Fälle bleiben aus Produktwahl ausgeschlossen und im vorhandenen Vergleichsweg;
-- getrennte Kandidatenexporte `EDITORIAL` / `PRODUCTWAHL`;
-- manuelle Beitragsart-Korrektur in der Übersicht als Review-Override ohne Produktionsautorität;
-- keine zweite Themen-Datenbank und keine Änderung des vorhandenen Normal-Metadata-/Titel-/Storage-Kerns.
+Zielvertragskonformer Zweck:
+- **keine Einmalliste für die aktuellen 694 Begriffe**, sondern Reparatur des bestehenden Normalpfads für aktuelle und zukünftige Begriffe;
+- konservative deutsche Familien-Morphologie repariert reale Fehlformen wie `Gebiss ↔ Gebisse` und `striegelt ↔ Striegel`;
+- neuer read-only `PSTE_Family_Structure_Router` macht einen echten Familien-`NO_MATCH` nach bereits bewiesener Portalrelevanz generisch als `STRUCTURE_GAP` sichtbar, **wenn keine sinnvolle bestehende Nachbarfamilie vorhanden ist**;
+- sobald eine bestehende Familie als nah/plausibel erscheint, bleibt der Fall REVIEW statt eine neue Familie zu erfinden;
+- keine Familie/Kategorie wird automatisch neu angelegt und keine Produktionsautorität erzeugt;
+- danach bleibt eine echte Strukturentscheidung + normaler Reentry verpflichtend;
+- Produktwahl aus 0.57.27 bleibt enthalten und wird um einen konservativen grammatischen Superlativ-Fallback ergänzt; direkte A-vs-B-Fälle bleiben Vergleich, reine Informationsflächen bleiben ausgeschlossen;
+- solange Produktwahl downstream nicht registriert ist, wird ein Produktwahl-Match im Normalpfad ausdrücklich `RETAINED_NON_PRODUCING` statt falsch als FAQ/Beratung weitergereicht.
 
-Frisch lokal geprüft am 03.10.2026:
-- ZIP-Integrität: PASS.
-- PHP-Lint: **80/80 PASS**.
-- Produktwahl Positiv/Negativ + Manual-Override: **13/13 PASS**.
-- realer vorhandener 326er Sandboxbestand: **0 Produktwahl-MATCH / 0 REVIEW / 326 NO_MATCH**; damit keine künstliche Umklassifizierung dieses Samples.
-- geschützte Storage-/Normalpfad-Dateien gegenüber 0.57.26 hashidentisch: PASS.
-- manueller Override kopiert kein `payload_json`; er schreibt nur die vorhandenen Review-Felder plus einen History-Eintrag.
-- Export bleibt read-only, `production_authority=false`, keine Provider-Abfrage, kein Artikel-/Kategorie-Write.
+Exakter Dateidelta 0.57.27 → 0.57.28:
+- geändert: `includes/class-pste-family-identity-v2.php`;
+- neu: `includes/class-pste-family-structure-router.php`;
+- geändert: `includes/class-pste-normal-metadata-path.php`;
+- geändert: `includes/class-pste-product-choice-classifier.php`;
+- geändert: `portal-seo-topic-engine.php`;
+- alle übrigen Dateien unverändert.
+
+Frische lokale Hard-Evidence:
+- ZIP-Integrität: PASS;
+- Fresh-Unpack PHP-Lint: **81/81 PASS**;
+- realer 694er Read-only-Replay:
+  - `STRUCTURE_GAP`: **320**;
+  - `SANDBOX_REQUIRED`: **371**;
+  - `RETAINED_NON_PRODUCING`: **3**;
+  - `NORMAL_PASS`: **0**;
+- alle 694 Replay-Fälle: Write-Flags false;
+- Familienresolver gegenüber 0.57.27: **0 bestehende MATCH-Regressionen**, genau 3 zusätzliche konservative MATCH-Fälle:
+  - `Wie striegelt man Pferde am besten?` → Striegel;
+  - `Was ist das sanfteste Gebiss für Pferde?` → Gebisse;
+  - `Ist ein Baucher-Gebiss auf einem Turnier erlaubt?` → Gebisse;
+- Strukturrouter synthetisch Positiv/Negativ: **6/6 PASS**, inklusive zukünftiger unbekannter Begriffe;
+- Produktwahl Positiv/Negativ: **14/14 PASS**;
+- realer vorhandener 326er Sandboxbestand: **326/326 NO_MATCH** für Produktwahl, keine künstliche Umklassifizierung;
+- Repository/Admin/DataForSEO/Research Archive/Sandbox Store/Storage Maintenance/DB Write Guard/Storage Codec/Title Composer/Title Diversity/Title Pipeline/Intent Profile/Category Gap gegenüber 0.57.27 unverändert.
+
+Grenzen:
+- 0.57.28 ist **nicht live installiert/readback-bestätigt**;
+- keine neue Provider-/DataForSEO-Recherche;
+- keine Gate-Absenkung;
+- keine automatische Taxonomieanlage;
+- kein Produktions-PASS für Produktwahl.
 
 ## HARTE GRENZE PRODUKTWAHL
 
-`Produktwahl` ist aktuell **nur als PSTE-Kandidatenklassifikation** belegt.
+`Produktwahl` ist aktuell **nur als PSTE-Kandidatenklassifikation** belegt; 0.57.28 hält solche Treffer deshalb ausdrücklich nicht-produzierend fest.
 
 Der vorhandene nachgelagerte Produktionssnapshot registriert weiterhin nur:
 `FAQ`, `Beratung`, `Vergleich`, `Pflege`, `Journal`.
 
 Daher:
 - keine Übergabe von `Produktwahl` an Textmaschine/PPM/PSERC, solange der Nutzer dort nicht den eigenen Schreibregelsatz festgelegt und der vorhandene Registrierungsweg ihn aufgenommen hat;
-- 0.57.27 ist **kein Live-Release und kein Produktions-PASS**.
+- 0.57.28 ist **kein Live-Release und kein Produktions-PASS**.
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_C_LANE_548_REQUIRES_CONCRETE_STRUCTURE_OR_ASSIGNMENT_DECISIONS`
+`PSTE_05728_NEEDS_WORDPRESS_LIVE_READBACK`
 
-Der Bestand ist jetzt zielvertragskonform klassifiziert: **A0 / B0 / C548 / D146**. Es gibt aktuell keinen belastbaren A- oder B-Kandidaten, der ohne konkrete C-Entscheidung weiter darf.
-
-Größter C-Block:
-**364 Familienzuordnungen**; frisch **345 NO_MATCH / 19 REVIEW_REQUIRED / 0 bevorzugte Membership-PASS**.
+Die nachhaltige lokale Reparatur ist als 0.57.28-Kandidat gebaut und hart geprüft. Offen ist jetzt **nicht** mehr eine 364er Einmal-Handsortierung, sondern die reale WordPress-Bestätigung, dass exakt dieser Kandidat geladen ist und der vorhandene Bestands-/Normalpfad dieselben fail-closed Zustände liefert.
 
 ## GENAU EINE NEXT ACTION
 
-`DECIDE_C_LANE_FAMILY_OR_STRUCTURE_FOR_364_THEN_NORMAL_REENTRY`
+`INSTALL_05728_THEN_LIVE_READBACK_NO_NEW_RESEARCH`
 
-1. Die **364** Familienfälle als C-Lane einzeln gegen den vorhandenen Portal-Baseline-Bestand entscheiden:
-   - vorhandene eindeutige Familie → konkrete Familienzuordnungsentscheidung;
-   - keine passende vorhandene Familie → echte Strukturentscheidung / Struktur-Gap;
-   - unklar → REVIEW belassen.
-2. Keine neue automatische Zuordnungslogik und keine Beitragsart manuell als Ersatzweg erfinden.
-3. Jede konkrete C-Entscheidung danach wieder durch den **bestehenden Normal-Metadata-/Reentry-Weg** schicken.
-4. Erst ein echter `NORMAL_PASS` darf Zielkeyword + Artikeltyp + Zielkategorie + später Plan-Slot liefern.
-5. **Keine neue DataForSEO-/Provider-Recherche vorher.**
+1. PSTE 0.57.28 in WordPress installieren/aktualisieren.
+2. Version/Aktivstatus real zurücklesen.
+3. Den **vorhandenen Bestands-/Normalpfad** erneut ausführen und Ergebnis read-only exportieren/prüfen.
+4. Erwartung ist **nicht** künstlich mehr READY, sondern saubere Trennung: echte Struktur-Gaps, echte Reviews und nicht-produzierende Produktwahl-Treffer.
+5. Erst nach Live-Readback die konkreten `STRUCTURE_GAP`-Entscheidungen treffen und anschließend normalen Reentry verwenden.
+6. **Keine neue DataForSEO-/Provider-Recherche vorher.**
 
 ## NICHT ANFASSEN
 
