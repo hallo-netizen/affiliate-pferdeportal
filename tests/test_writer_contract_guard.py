@@ -38,7 +38,7 @@ def portal(i):
 
 def context(i):
     ident=i['items'][0]
-    return {
+    return bind_freshness({
       'contract':'K0_AUTHORING_CONTEXT_V1',
       'run_instance_id':'run:1234567890abcdef12345678',
       'identity':ident,
@@ -46,7 +46,7 @@ def context(i):
       'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},
       'rule_context':rule_context(ident),
       'publish_allowed':False
-    }
+    })
 
 def good_html():
     return f"""<article>
