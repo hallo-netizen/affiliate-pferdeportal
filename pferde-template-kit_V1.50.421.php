@@ -8037,6 +8037,20 @@ body.home .pftk-home-ad-wide-v150172{margin-bottom:0!important}
 body.home .pftk-home-ad-gap-v150238{display:block!important;width:100%!important;height:44px!important;min-height:44px!important;flex:0 0 44px!important;background:transparent!important}
 body.pftk-hub1-pilot-v150210 .pa223-hero figure{position:relative!important;isolation:isolate!important}
 body.pftk-hub1-pilot-v150210 .pa223-hero figure::after{content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:20!important;pointer-events:none!important;box-sizing:border-box!important;border:1px solid rgba(53,66,42,.28)!important}
+/* K0: only normalize vertical spacing of structured article sections.
+   Kubio/theme section defaults must not create large gaps above H2 headings. */
+body.single-post .entry-content article.ppm-generated>section[data-block]:not([data-block="conclusion"]){
+  margin-block:0!important;
+  padding-block:0!important;
+  min-height:0!important;
+  height:auto!important;
+}
+body.single-post .entry-content article.ppm-generated>section[data-block]:not([data-block="conclusion"])+section[data-block]:not([data-block="conclusion"]){
+  margin-top:32px!important;
+}
+body.single-post .entry-content article.ppm-generated>section[data-block]:not([data-block="conclusion"])>h2:first-child{
+  margin-top:0!important;
+}
 </style>
         <?php
     }
