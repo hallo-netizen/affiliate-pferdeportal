@@ -148,3 +148,52 @@ UI-Nachbefund:
 Wenn die Seite im RUNNING-Zustand gerendert wurde und der AJAX-Status später COMPLETE wird, wird nur der Statuskasten aktualisiert. COMPLETE-Aktionsformulare werden nicht nachträglich in den DOM eingefügt. Ein frischer Seitenrender bei COMPLETE zeigt dagegen den Exportbutton. Lokale Positiv-/Negativsimulation reproduziert beide Wege.
 
 Aktuelle NEXT ACTION steht ausschließlich in TEXT/CURRENT_STATE.md.
+
+## DELTA 2026-10-03 – PRODUKTWAHL-KLASSIFIKATION / LOKALER 0.57.27-KANDIDAT
+
+Nutzerentscheidung:
+Die neue Beitragsart heißt **Produktwahl**.
+
+Abgrenzung:
+- konkrete kaufbare Produktfamilie muss durch vorhandene Familienzuordnung bewiesen sein;
+- die Suchfrage muss auf ein konkretes Produkt bzw. eine sehr kleine Spitzenauswahl hinauslaufen;
+- nötig ist ein entscheidendes, prüfbares Auswahlmerkmal wie leiseste, günstigste, leichteste, stärkste, längste Akkulaufzeit oder eng gebundene „beste für X“-Frage;
+- direkte A-vs-B-Fälle bleiben **Vergleich**;
+- allgemeine Kaufkriterien bleiben **Beratung**;
+- reine Informationsfragen bleiben FAQ/Wissen;
+- Superlativ ohne bewiesene Produktfamilie darf nicht zu Produktwahl werden.
+
+Lokaler Kandidat:
+`PSTE-0.57.27-PRODUCTWAHL-CLASSIFICATION-CANDIDATE.zip`
+SHA-256 `414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`.
+
+Exakte Basis:
+PSTE 0.57.26, SHA-256 `d7d00c1b13144fc584a593993714721ec9a8679e7d65f017e1bc2ed10c1306d6`.
+
+Exakter Dateidelta:
+- neu: `includes/class-pste-product-choice-classifier.php`;
+- geändert: `includes/class-pste-admin.php`;
+- geändert: `includes/class-pste-repository.php`;
+- geändert: `portal-seo-topic-engine.php`;
+- übriger Pluginbaum unverändert.
+
+Frische lokale Evidence 03.10.2026:
+- ZIP-Integrität PASS;
+- PHP-Lint 80/80 PASS;
+- Produktwahl Positiv/Negativ inklusive Manual-Override 13/13 PASS;
+- realer 326er Sandboxbestand: 0 MATCH / 0 REVIEW_REQUIRED / 326 NO_MATCH;
+- Storage-/Normalpfad-Hardlockdateien gegenüber 0.57.26 hashidentisch: Research Archive, Sandbox Record Store, Storage Maintenance, DB Write Guard, Storage Codec, Normal Metadata Path, Title Composer, Title Diversity, Title Pipeline, Intent Profile;
+- Exportpfad read-only: keine Provider-Abfrage, kein Artikel-/Kategorie-Write, keine Produktionsautorität;
+- manueller Review-Override kopiert kein `payload_json`; er schreibt nur `manual_article_type`, `manual_note`, Review-Zeit/Nutzer und einen History-Eintrag.
+
+Grenzen / ausdrücklich NICHT bewiesen:
+- keine 695er Vollklassifikation, weil der reale 695er Export noch nicht als Datei vorliegt;
+- kein WordPress-Live-Readback für 0.57.27;
+- kein Produktions-PASS für Produktwahl;
+- downstream registriert der vorhandene Produktionssnapshot Produktwahl noch nicht;
+- keine breite neue FAQ/Pflege/Sicherheit/Journal-Verteilung implementiert oder bewiesen;
+- kein 0.57.28-Kandidat vorhanden.
+
+Aktueller Status und genau eine NEXT ACTION ausschließlich aus
+`protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`.
+
