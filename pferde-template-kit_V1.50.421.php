@@ -8060,7 +8060,7 @@ body.single-post .entry-content article.ppm-generated>section[data-block]>h2:fir
   margin-bottom:32px!important;
 }
 body.single-post .entry-content article.ppm-generated>section[data-block="conclusion"]{
-  margin-top:8px!important;
+  margin-top:32px!important;
   min-height:0!important;
   height:auto!important;
 }
