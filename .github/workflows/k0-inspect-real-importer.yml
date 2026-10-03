@@ -1,0 +1,37 @@
+name: K0 inspect real importer validator
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - '.github/workflows/k0-inspect-real-importer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Inspect exact importer validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main:refs/remotes/origin/main
+          git show origin/main:control/startmaster0107/runtime_packages/PSERC-FIX.zip > /tmp/pserc.zip
+          rm -rf /tmp/outer /tmp/inner
+          mkdir -p /tmp/outer /tmp/inner
+          unzip -q /tmp/pserc.zip -d /tmp/outer
+          echo '=== OUTER FILES ==='
+          find /tmp/outer -maxdepth 3 -type f -printf '%p\n' | sort | head -200
+          inner="$(find /tmp/outer -type f -name '*.zip' -print -quit || true)"
+          if [ -n "$inner" ]; then
+            unzip -q "$inner" -d /tmp/inner
+          else
+            cp -a /tmp/outer/. /tmp/inner/
+          fi
+          echo '=== MATCHES ==='
+          grep -RniE 'PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH|PSERC_SYSTEM4_ARTICLE_FIELD_INVALID|article_id|plan_slot|slug' /tmp/inner --include='*.php' | head -2000
