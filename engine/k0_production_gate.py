@@ -5,6 +5,7 @@ from pathlib import Path
 from .ppm_parity_guard import verify as verify_ppm
 from .writer_contract_guard import verify_package as verify_writer_contract
 from .k0_product_property_research import ARTICLE_TYPE as PROPERTY_WINNER_TYPE, SEARCH_INTENT as PROPERTY_WINNER_INTENT, validate_packet as validate_property_packet, Blocked as PropertyResearchBlocked
+from .k0_full_rules import verify_pre_lt68 as verify_full_rules_pre_lt68
 
 class Blocked(RuntimeError):
     pass
@@ -97,7 +98,7 @@ def _words(value):
 def _sha(value):
     return hashlib.sha256(str(value).encode('utf-8')).hexdigest()
 
-def verify(package, portal):
+def verify(package, portal, category_payload):
     if package.get('contract')!='K0_ARTICLE_PACKAGE_V1':
         raise Blocked('K0_ARTICLE_PACKAGE_CONTRACT_INVALID')
     ident=package.get('identity')
@@ -181,6 +182,13 @@ def verify(package, portal):
     if ppm.get('status')!='PASS' or ppm.get('legacy_rule_count')!=104:
         raise Blocked('K0_PPM679_PARITY_NOT_PASS')
 
+    try:
+        full_rules=verify_full_rules_pre_lt68(package,category_payload)
+    except Exception as exc:
+        raise Blocked('K0_FULL_RULES_BLOCKED:'+str(exc)) from exc
+    if full_rules.get('status')!='READY_FOR_LT68':
+        raise Blocked('K0_FULL_RULES_NOT_READY_FOR_LT68')
+
     return {
       'contract':'K0_PRODUCTION_GATES_V1',
       'status':'PASS',
@@ -199,21 +207,25 @@ def verify(package, portal):
       'property_winner_product_key':property_result['winner']['product_key'] if property_result else None,
       'ppm679_status':'PASS',
       'ppm679_rule_count':104,
+      'all_rules_pre_lt68_status':'PASS',
+      'all_rules_required_receipt_count':full_rules.get('required_receipt_count'),
+      'all_rules_catalog_sha256':full_rules.get('catalog_sha256'),
+      'all_rules_values_sha256':full_rules.get('rule_values_sha256'),
       'body_sha256':_sha(body),
       'publish_allowed':False,
     }
 
 def main():
-    if len(sys.argv)!=4:
-        raise SystemExit('usage: k0_production_gate.py ARTICLE_PACKAGE PORTAL_ASSIGNMENT OUT')
+    if len(sys.argv)!=5:
+        raise SystemExit('usage: k0_production_gate.py ARTICLE_PACKAGE PORTAL_ASSIGNMENT CATEGORY_JSON OUT')
     try:
-        out=verify(_load(sys.argv[1]),_load(sys.argv[2]))
+        out=verify(_load(sys.argv[1]),_load(sys.argv[2]),_load(sys.argv[3]))
     except Blocked as exc:
         out={'contract':'K0_PRODUCTION_GATES_V1','status':'BLOCKED','reason':str(exc),'publish_allowed':False}
-        Path(sys.argv[3]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        Path(sys.argv[4]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(out,ensure_ascii=False))
         raise SystemExit(2)
-    Path(sys.argv[3]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    Path(sys.argv[4]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(out,ensure_ascii=False))
 
 if __name__=='__main__':
