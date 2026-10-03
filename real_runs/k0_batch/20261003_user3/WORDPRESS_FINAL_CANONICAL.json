@@ -98,7 +98,8 @@
         "status": "PASS",
         "ppm_version": "6.7.9",
         "content_sha256": "2ca22ce6cc15b87f460d80e9abd4c74f383d10124ca3ae2786c6e43652ce4576"
-      }
+      },
+      "article_id": "article:11bf036b5c0473935b65167e"
     },
     {
       "index": 1,
@@ -178,7 +179,8 @@
         "status": "PASS",
         "ppm_version": "6.7.9",
         "content_sha256": "92c58dfde3dd6bdea4b10157db0666c5bc77ea62059337c9a587d3e9b0646e08"
-      }
+      },
+      "article_id": "article:ac0c731bda49c9c8dee25d50"
     },
     {
       "index": 2,
@@ -259,7 +261,8 @@
         "status": "PASS",
         "ppm_version": "6.7.9",
         "content_sha256": "2dcccf3b65d375c8e99cf521faf461c9aa04c1a9511a5e0c8f1e572068fc0736"
-      }
+      },
+      "article_id": "article:f82f0d5e9c6a3a454d5ced35"
     }
   ]
 }
