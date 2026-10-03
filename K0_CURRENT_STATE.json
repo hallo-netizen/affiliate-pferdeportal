@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "LINK_DISTRIBUTION_FIXED_RENDERING_GAP_OPEN",
-  "first_open_blocker": "WORDPRESS_SINGLE_POST_LARGE_VERTICAL_GAPS_ABOVE_H2_RENDERING_NOT_FIXED",
-  "next_action": "FIX_ONLY_SINGLE_POST_H2_RENDERING_SPACING_THEN_RUN_ONE_FRESH_K0_ARTICLE_REGRESSION",
+  "status": "RENDERING_CODE_FIXED_LOCAL_VISUAL_PASS_FRESH_REGRESSION_OPEN",
+  "first_open_blocker": "FRESH_REAL_K0_ARTICLE_RENDERING_AND_LINK_REGRESSION_NOT_RUN",
+  "next_action": "RUN_ONE_FRESH_K0_ARTICLE_REGRESSION_VERIFY_RENDERING_AND_LINKS_THEN_ALLOW_BATCH",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -82,13 +82,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
-    "last_checked_branch_head_sha": "1d74bf50d8ae0c146305ad8e15e450af0973b347",
+    "last_checked_branch_head_sha": "152a191b52cce6dc2c309da84def949cb8a71628",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
     "latest_k0_selftest_run": 37136204080,
     "latest_k0_selftest_result": "SUCCESS_LINK_DISTRIBUTION_REGRESSION",
     "ppm679_parity": "PASS",
-    "delta_result": "LINK_DISTRIBUTION_CODE_AND_REGRESSION_PASS; REAL_ARTICLE_REGEN_NOT_RUN; H2_RENDERING_GAP_OPEN; SILENT_START_REPO_RULE_NOT_PRODUCT_GUARANTEE"
+    "delta_result": "LINK_DISTRIBUTION_CODE_AND_REGRESSION_PASS; H2_RENDERING_CODE_FIX_MAIN_223524C_AND_LOCAL_VISUAL_NEGATIVE_POSITIVE_PASS; FRESH_REAL_ARTICLE_REGRESSION_NOT_RUN; SILENT_START_REPO_RULE_NOT_PRODUCT_GUARANTEE"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -233,11 +233,21 @@
     "fresh_real_article_after_fix": "NOT_RUN"
   },
   "rendering_spacing": {
-    "status": "OPEN",
+    "status": "CODE_FIX_AND_LOCAL_VISUAL_PASS",
     "symptom": "LARGE_VERTICAL_GAPS_ABOVE_H2_IN_WORDPRESS_SINGLE_POST_PREVIEW",
     "article_html_extra_blank_paragraphs_before_h2": "NOT_OBSERVED",
     "article_html_extra_br_before_h2": "NOT_OBSERVED",
-    "render_root_cause": "NOT_YET_ISOLATED",
-    "rendering_code_changed_in_this_fix": "NO"
+    "render_root_cause": "STRUCTURED_ARTICLE_SECTION_DEFAULT_SPACING_COLLIDES_WITH_SINGLE_POST_H2_MARGIN",
+    "fix_scope": "ONLY_STRUCTURED_SINGLE_POST_SECTION_VERTICAL_SPACING",
+    "fix_ref": "main:223524c664b8b24e9da61cd5e9ccd8749385b58c",
+    "fix_file": "pferde-template-kit_V1.50.421.php",
+    "k0_branch_contains_design_plugin_source": false,
+    "local_visual_negative_test": "PASS_GAP_REPRODUCED_APPROX_149PX",
+    "local_visual_positive_test": "PASS_NORMALIZED_32PX",
+    "legacy_non_structured_regression": "PASS_UNCHANGED",
+    "table_logic_changed": false,
+    "link_distribution_changed": false,
+    "live_wordpress_after_fix": "NOT_RUN",
+    "fresh_real_k0_article_after_fix": "NOT_RUN"
   }
 }
