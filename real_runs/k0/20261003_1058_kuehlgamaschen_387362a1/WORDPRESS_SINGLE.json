@@ -22,7 +22,6 @@
   "articles": [
     {
       "index": 0,
-      "article_id": "article:ac0c731bda49c9c8dee25d50",
       "title": "Sind Kühlgamaschen für Pferde sinnvoll?",
       "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
       "category": "gesundheit-regeneration-kuehlgamaschen-faq",
@@ -68,7 +67,8 @@
               "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
               "taxonomy": "category"
             }
-          }
+          },
+          "canonical_article_id": "article:ac0c731bda49c9c8dee25d50"
         },
         "writer_provenance": {
           "contract": "K0_WRITER_SEAL_V1",
