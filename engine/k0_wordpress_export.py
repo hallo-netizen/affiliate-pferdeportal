@@ -10,6 +10,7 @@ PLUGIN_VERSION='0.28.30'
 PLUGIN_BUILD='0.28.30-pste-v5-binding-safe'
 PPM_VERSION='6.7.9'
 FIVE_FIELDS=('article_type','category','plan_slot','target_keyword','title')
+WORDPRESS_ARTICLE_FIELDS=('index','title','target_keyword','category','article_type','plan_slot','final_draft_sha256','revision_count','body','production_context','languagetool','ppm679')
 
 class Blocked(RuntimeError):
     pass
@@ -140,6 +141,8 @@ def verify_export(doc, intake):
     if len(arts)!=1:
         raise Blocked('K0_WORDPRESS_ARTICLE_COUNT_INVALID')
     art=arts[0]; ident=rows[0]
+    if set(art)!=set(WORDPRESS_ARTICLE_FIELDS):
+        raise Blocked('K0_WORDPRESS_ARTICLE_FIELDS_INVALID')
     if 'article_id' in art or 'canonical_article_id' in art:
         raise Blocked('K0_WORDPRESS_TOPLEVEL_ARTICLE_ID_FORBIDDEN')
     pc=art.get('production_context') if isinstance(art.get('production_context'),dict) else {}
