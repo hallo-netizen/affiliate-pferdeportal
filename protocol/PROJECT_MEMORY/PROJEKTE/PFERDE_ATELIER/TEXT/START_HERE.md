@@ -15,7 +15,7 @@ Quellen finden, aktuelle/historische Dateistände unterscheiden und bei einem au
 aus dem bloßen Betreten dieses Büros Schreibrechte ableiten, Fachregeln eigenmächtig ändern oder einen Arbeitsweg erfinden.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `QUELLEN_AKTUELL/START_HERE.md` → gebundener Ziel-/Arbeitsweg.
+`CURRENT_STATE.md` lesen → Frischecheck → exakt dessen NEXT ACTION. `HOBBYRAUM.md` nur bei einer von CURRENT ausdrücklich gebundenen temporären Ausführung.
 
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
