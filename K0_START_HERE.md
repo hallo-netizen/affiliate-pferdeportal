@@ -25,7 +25,7 @@ Wenn eine gültige K0-Datei angehängt ist und der Nutzer `K0:start` schreibt:
 Vor dem Schreiben verboten:
 - Current lesen;
 - Branch prüfen;
-- Repository prüfen;
+- Repository allgemein diagnostisch prüfen;
 - Workflowstatus prüfen;
 - alten Laufstatus prüfen;
 - Blocker suchen;
@@ -120,6 +120,26 @@ Der alte `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` ist kein WordPress-Endvertrag.
 - keine sichtbaren Zwischenmeldungen;
 - kein Stopp bei intern lösbaren Fehlern.
 
+
+## WRITER-DATEN VOR JEDEM TEXT — HARDLOCK
+
+Der Writer darf **niemals direkt aus dem 5-Feld-Intake oder aus Chat-Erinnerung schreiben**.
+
+Nach Recherche und Authoring muss zuerst der neu erzeugte `WRITER_JOB.json` geladen werden. Genau dieser Job ist die Schreibautorität und enthält das vollständige aktuelle Regelpaket.
+
+Das Laden des neu erzeugten `WRITER_JOB.json` ist Produktionsarbeit und **keine** verbotene Vorabdiagnose.
+
+Der Authoring-Kontext muss vor Writer-Start vollständig binden:
+- Artikeltyp-Metadaten;
+- strukturierte, belegte Fakten und erlaubte Fakt-IDs;
+- die drei konkreten internen Links samt Rollen und Zielblöcken;
+- Link-Registry;
+- WordPress-Kategorie;
+- Heading-Intent-Begriffe;
+- Vergleichsbindungen, falls erforderlich;
+- Tabellenentscheidung samt Begründung und erforderlichem semantischem Nachweis.
+
+Fehlt einer dieser Punkte, darf kein `WRITER_JOB` entstehen und es darf kein Artikeltext geschrieben werden.
 
 ## VOLLSTÄNDIGER REGELWEG — HARDLOCK
 
