@@ -79,7 +79,10 @@ jobs:
           assert j['contract']=='K0_WRITER_JOB_V1'
           assert j['status']=='OPEN'
           assert j['publish_allowed'] is False
-          print('K0_WRITER_JOB_PREPARED')
+          assert j['writer_rule_bundle']['contract']=='K0_FULL_RULE_BUNDLE_V1',j
+          assert j['writer_rule_binding']['article_hard_rule_count']>0,j
+          assert j['rule_context']['contract']=='K0_AUTHORING_RULE_CONTEXT_V1',j
+          print('K0_WRITER_ALL_RULES_BOUND_BEFORE_WRITING')
           PY
 
       - name: Persist immutable writer job
