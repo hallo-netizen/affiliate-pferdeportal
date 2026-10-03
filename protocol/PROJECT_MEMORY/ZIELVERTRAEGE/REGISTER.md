@@ -1,6 +1,6 @@
 # ZIELVERTRAGSREGISTER
 
-STAND: 2026-09-16
+STAND: 2026-10-03
 
 ## Pflichtfelder
 
@@ -305,6 +305,33 @@ VERANTWORTLICHER BEREICH:
 
 PASS-BEDINGUNG:
 Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Den aktuellen technischen/LIVE-Stand ausschließlich aus `PROJEKTE/PFERDE_ATELIER/BILD/CURRENT_STATE.md` lesen.
+
+NACHFOLGER:
+keiner belegt.
+
+
+## ZV-HOBBYRAUSCH-HD001-001 – Automatische DataForSEO-SEO-Hierarchie bis Frontend
+
+TITEL:
+HOBBYRAUSCH HD-001 – AUTOMATISCHE DATAFORSEO-SEO-HIERARCHIE BIS FRONTEND
+
+GELTUNGSBEREICH:
+HOBBYRAUSCH / SEO_KATEGORIEN / HD-001
+
+STATUS:
+AKTIV
+
+FASSUNG:
+1.0 / 2026-10-03
+
+HAUPTQUELLE:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
+
+VERANTWORTLICHER BEREICH:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/`
+
+PASS-BEDINGUNG:
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Insbesondere DataForSEO-gesteuerte sichtbare Namen und Mehr-Ebenen-Hierarchie, Hauptportal + Magazin + HivePress, WordPress-Publish, sichtbare Frontend-Navigation, Readback sowie vollständige lokale Positiv-/Negativ-E2E-Simulation.
 
 NACHFOLGER:
 keiner belegt.
