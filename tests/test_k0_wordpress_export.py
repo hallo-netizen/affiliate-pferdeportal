@@ -28,7 +28,7 @@ def bindings(i):
     return {'contract':'K10_CANONICAL_ARTICLE_BINDINGS_V1','status':'PASS','bindings':{i['items'][0]['plan_slot']:ARTICLE_ID}}
 
 class TestK0WordPressExport(unittest.TestCase):
-    def test_02830_direct_shape_forbids_top_level_article_id(self):
+    def test_02830_direct_shape_requires_dual_article_id_binding(self):
         i=intake(); ident=i['items'][0]; body='<article><p>Test</p></article>'; sha=hashlib.sha256(body.encode()).hexdigest()
         p={'contract':'K0_ARTICLE_PACKAGE_V1','identity':ident,'html':body,'final_draft_sha256':sha,'revision_count':1,'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},'writer_provenance':{'contract':'K0_WRITER_SEAL_V1'},'publish_allowed':False}
         portal={'contract':'K0_PORTAL_ASSIGNMENT_V1','status':'PASS','items':[{'portal_id':'hobby','status':'AUTO_DETECTED','job_identity':ident}]}
@@ -40,11 +40,26 @@ class TestK0WordPressExport(unittest.TestCase):
         self.assertEqual(out['wordpress_review']['plugin_version_verified_against'],'0.28.30')
         self.assertEqual(out['wordpress_review']['plugin_build_verified_against'],'0.28.30-pste-v5-binding-safe')
         self.assertTrue(out['wordpress_review']['direct_wordpress_upload_ready'])
-        self.assertNotIn('article_id',out['articles'][0])
+        self.assertEqual(out['articles'][0]['article_id'],ARTICLE_ID)
         self.assertNotIn('canonical_article_id',out['articles'][0])
         self.assertEqual(out['articles'][0]['production_context']['production_plan_item']['canonical_article_id'],ARTICLE_ID)
         self.assertEqual(hashlib.sha256(('pserc-plan-slot-v2|'+ARTICLE_ID).encode()).hexdigest(),out['articles'][0]['plan_slot'])
         self.assertEqual(w.verify_export(out,i)['status'],'PASS')
+
+        only_top=json.loads(json.dumps(out))
+        only_top['articles'][0]['production_context']['production_plan_item'].pop('canonical_article_id')
+        with self.assertRaisesRegex(w.Blocked,'K0_WORDPRESS_CANONICAL_ARTICLE_ID_MISSING_IN_PRODUCTION_CONTEXT'):
+            w.verify_export(only_top,i)
+
+        only_nested=json.loads(json.dumps(out))
+        only_nested['articles'][0].pop('article_id')
+        with self.assertRaisesRegex(w.Blocked,'K0_WORDPRESS_ARTICLE_FIELDS_INVALID'):
+            w.verify_export(only_nested,i)
+
+        mismatch=json.loads(json.dumps(out))
+        mismatch['articles'][0]['production_context']['production_plan_item']['canonical_article_id']='article:000000000000000000000000'
+        with self.assertRaisesRegex(w.Blocked,'K0_WORDPRESS_ARTICLE_ID_BINDING_MISMATCH'):
+            w.verify_export(mismatch,i)
 
     def test_missing_canonical_article_id_blocks(self):
         i=intake(); ident=i['items'][0]; body='<article><p>Test</p></article>'; sha=hashlib.sha256(body.encode()).hexdigest()
