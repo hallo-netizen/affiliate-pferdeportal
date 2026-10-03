@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-03
-STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695-TITEL-EXPORT NOCH NICHT VORLIEGEND
+STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695ER VOLLEXPORT VORLIEGEND / EXAKTE TITELDEDUP 694
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -22,7 +22,7 @@ Realer WordPress-Readback vom 02.10.2026:
 - Provider-Abfragen: **0**.
 - Completion: `EXISTING_TITLE_CANDIDATES_GENERATED_NO_PROVIDER_CALL`.
 
-Der vollständige 695er Titelkandidaten-Export liegt in diesem Arbeitsstand weiterhin **nicht als auswertbare Datei vor**. Ohne diese Datei keine erfundene Vollklassifikation.
+Der vollständige Live-Export liegt jetzt vor: `pste-global-seo-topic-map-20261003-194321-utc.json` aus PSTE 0.57.26. Exakt über `title_candidate_evidence.contract = PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1` wurden **695 Titelkandidaten** extrahiert. Alle 695 besitzen einen nichtleeren `editorial_title`. Exakte Titel-Deduplizierung ergibt **694 eindeutige Titel**; genau eine zusätzliche Dublettenzeile wurde zusammengeführt. Keine semantische Dublettenentscheidung wurde dabei erfunden.
 
 
 
@@ -66,20 +66,21 @@ Daher:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_695_TITLE_CANDIDATE_EXPORT_NOT_AVAILABLE_FOR_FULL_DISTRIBUTION`
+`PSTE_694_TITLE_CANDIDATES_NEED_SEMANTIC_DEDUP_AND_ARTICLE_TYPE_DISTRIBUTION`
 
-Die 695 real erzeugten Titelkandidaten sind noch nicht als Datei im aktuellen Arbeitsstand vorhanden. Dadurch kann die vollständige fachliche Deduplizierung/Verteilung in FAQ, Beratung, Vergleich, Pflege, Journal, Produktwahl usw. noch nicht belastbar abgeschlossen werden.
+Der 695er Export ist nicht mehr der Blocker. Offen ist jetzt die belastbare **semantische Deduplizierung und Beitragsart-Verteilung** der 694 exakt eindeutigen Titel. Produktwahl darf nur nach der lokal geprüften 0.57.27-Regel zugeordnet werden; unklare Fälle bleiben Review statt geraten.
 
 ## GENAU EINE NEXT ACTION
 
-`EXPORT_LIVE_05726_FULL_TOPIC_MAP_AND_EXTRACT_695`
+`SEMANTIC_DEDUP_AND_ARTICLE_TYPE_DISTRIBUTION_OF_694`
 
-1. WordPress → **SEO Themenengine** → **Einstellungen**.
-2. Im Abschnitt **„Longtails recherchieren, Titel bilden und Kategorien zuordnen“** auf **„Gesamte Themenkarte exportieren“** klicken.
-3. Die erzeugte Datei `pste-global-seo-topic-map-…-utc.json` dem Arbeitschat geben.
-4. Daraus exakt die vorhandenen Titelkandidaten mit `title_candidate_evidence.contract = PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1` extrahieren; `editorial_title` ist der Titel.
-5. Danach ausschließlich diesen Bestand fachlich/dedupliziert weiterverarbeiten; 0.57.27-Produktwahlregel als geprüften lokalen Delta-Stand übernehmen.
-6. **Keine neue DataForSEO-/Provider-Recherche vorher.**
+1. Mit den 694 exakt eindeutigen Titeln weiterarbeiten.
+2. Semantische Dubletten/Kannibalisierung konservativ prüfen.
+3. Beitragsarten FAQ / Beratung / Vergleich / Pflege / Journal / Produktwahl nur bei belastbarer Evidenz zuordnen.
+4. Produktwahl ausschließlich nach der geprüften 0.57.27-Regel; A-vs-B bleibt Vergleich, allgemeine Kaufkriterien bleiben Beratung.
+5. Unklare Fälle als REVIEW belassen; keine Zuordnung erfinden.
+6. Danach neue belastbare Artikelkandidaten mit Titel + Zielkeyword + Artikeltyp + Zielkategorie/Strukturlücke ausgeben.
+7. **Keine neue DataForSEO-/Provider-Recherche vorher.**
 
 ## NICHT ANFASSEN
 
