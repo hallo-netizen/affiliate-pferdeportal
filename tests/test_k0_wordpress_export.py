@@ -44,7 +44,7 @@ class TestK0WordPressExport(unittest.TestCase):
         self.assertEqual(out['source'],'K0_CANONICAL_WORKFLOW')
         a=out['articles'][0]
         self.assertEqual(set(a),set(w.WORDPRESS_ARTICLE_FIELDS))
-        self.assertEqual(a['article_id'],PLAN_SLOT)
+        self.assertEqual(a['article_id'],CANONICAL_ID)
         self.assertEqual(a['plan_slot'],PLAN_SLOT)
         self.assertEqual(a['slug'],'was-braucht-man-fuer-discgolf')
         self.assertNotIn('production_context',a)
@@ -64,12 +64,20 @@ class TestK0WordPressExport(unittest.TestCase):
             with self.assertRaisesRegex(w.Blocked,'K0_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH'):
                 w.build(i,p,portal,gate,lt,{'contract':'K10_CANONICAL_ARTICLE_BINDINGS_V1','status':'PASS','bindings':{PLAN_SLOT:wrong}})
 
-    def test_wordpress_article_id_must_equal_plan_slot(self):
+    def test_wordpress_article_id_must_bind_to_plan_slot(self):
         i=intake(); p,portal,gate,lt=deps(i)
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
             out=w.build(i,p,portal,gate,lt,bindings(i))
-        out['articles'][0]['article_id']='0'*64
-        with self.assertRaisesRegex(w.Blocked,'ARTICLE_ID_MUST_EQUAL_PLAN_SLOT'):
+        out['articles'][0]['article_id']='article:000000000000000000000000'
+        with self.assertRaisesRegex(w.Blocked,'CANONICAL_PLAN_SLOT_MISMATCH'):
+            w.verify_export(out,i)
+
+    def test_wordpress_article_id_format_blocks(self):
+        i=intake(); p,portal,gate,lt=deps(i)
+        with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
+            out=w.build(i,p,portal,gate,lt,bindings(i))
+        out['articles'][0]['article_id']=PLAN_SLOT
+        with self.assertRaisesRegex(w.Blocked,'ARTICLE_ID_INVALID'):
             w.verify_export(out,i)
 
 if __name__=='__main__':
