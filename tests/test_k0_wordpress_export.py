@@ -56,20 +56,20 @@ class TestK0WordPressExport(unittest.TestCase):
         self.assertEqual(w.verify_export(out,i)['status'],'PASS')
 
     def test_wrong_internal_canonical_binding_blocks(self):
-        i=intake(); p,portal,gate,lt,category=deps(i)
+        i=intake(); p,portal,gate,lt,full_rules,category=deps(i)
         wrong='article:000000000000000000000000'
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
             with self.assertRaisesRegex(w.Blocked,'K0_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH'):
                 w.build(i,p,portal,gate,lt,full_rules,{'contract':'K10_CANONICAL_ARTICLE_BINDINGS_V1','status':'PASS','bindings':{PLAN_SLOT:wrong}},category)
 
     def test_missing_live_category_blocks(self):
-        i=intake(); p,portal,gate,lt,category=deps(i)
+        i=intake(); p,portal,gate,lt,full_rules,category=deps(i)
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
             with self.assertRaisesRegex(w.Blocked,'K0_WORDPRESS_CATEGORY_ID_NOT_UNIQUE'):
                 w.build(i,p,portal,gate,lt,full_rules,bindings(i),[])
 
     def test_nested_id_mismatch_blocks_verification(self):
-        i=intake(); p,portal,gate,lt,category=deps(i)
+        i=intake(); p,portal,gate,lt,full_rules,category=deps(i)
         with patch('engine.k0_wordpress_export.verify_writer_contract', return_value={'policy_sha256':'writer-policy','total_words':800,'conclusion_ratio':0.11}):
             out=w.build(i,p,portal,gate,lt,bindings(i),category)
         out['articles'][0]['production_context']['production_plan_item']['canonical_article_id']='article:000000000000000000000000'
