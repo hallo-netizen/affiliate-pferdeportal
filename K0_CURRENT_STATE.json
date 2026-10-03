@@ -101,10 +101,7 @@
   },
   "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json",
   "history_ref": "history/K0_WORKLOG_ERROR_HISTORY_20261002.md",
-  "k10_dependency": false,
-  "k10_separate_current_ref": "konzept10-rule-ledger-20261001:CURRENT_STATE.json",
   "publish_allowed": false,
-  "k10_unchanged": true,
   "article_types": {
     "eigenschaftssieger": {
       "article_type": "Eigenschaftssieger",
@@ -119,7 +116,7 @@
       "status": "BLOCKED_PENDING_COMPLETE_FULL_RULE_TYPE_PROFILE"
     }
   },
-  "legacy_reference_policy": "FORBIDDEN_IN_ACTIVE_K0_STATUS_HANDOFF_AND_PRODUCTION",
+  "legacy_reference_policy": "NO_ALTERNATE_OR_HISTORICAL_ROUTE_IN_ACTIVE_K0",
   "old_chat_or_archive_authority": false,
   "wordpress_import_contract": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -182,16 +179,11 @@
     "main_merge_sha": "077b3b27b8704839fd75bb04749e4a38f0139187",
     "branch_router_ref": "konzept0-portal-neutral-20261002:K0_START_HERE.md",
     "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
-    "forbidden_fallbacks": [
-      "main:concept_agent/START_HERE.md",
-      "main:control/startmaster0107/CURRENT_STATE.json",
-      "K8_CURRENT",
-      "K9_CURRENT",
-      "K10_CURRENT"
-    ],
     "regression_test": "tests/test_k0_start_router.py",
     "main_router_selftest_run": 37129604410,
     "main_router_selftest_result": "SUCCESS",
-    "fail_closed_on_missing_router": true
+    "fail_closed_on_missing_router": true,
+    "alternate_route_allowed": false,
+    "alternate_or_historical_fallback": "FORBIDDEN"
   }
 }
