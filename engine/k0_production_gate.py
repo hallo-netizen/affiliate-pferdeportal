@@ -87,6 +87,12 @@ def _load(path):
         raise Blocked('JSON_OBJECT_REQUIRED:'+str(path))
     return x
 
+def _load_category_payload(path):
+    x=json.loads(Path(path).read_text(encoding='utf-8'))
+    if not isinstance(x,list):
+        raise Blocked('CATEGORY_JSON_LIST_REQUIRED:'+str(path))
+    return x
+
 def _plain(value):
     value=re.sub(r'(?is)<[^>]+>',' ',str(value or ''))
     value=html.unescape(value)
@@ -219,7 +225,7 @@ def main():
     if len(sys.argv)!=5:
         raise SystemExit('usage: k0_production_gate.py ARTICLE_PACKAGE PORTAL_ASSIGNMENT CATEGORY_JSON OUT')
     try:
-        out=verify(_load(sys.argv[1]),_load(sys.argv[2]),_load(sys.argv[3]))
+        out=verify(_load(sys.argv[1]),_load(sys.argv[2]),_load_category_payload(sys.argv[3]))
     except Blocked as exc:
         out={'contract':'K0_PRODUCTION_GATES_V1','status':'BLOCKED','reason':str(exc),'publish_allowed':False}
         Path(sys.argv[4]).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
