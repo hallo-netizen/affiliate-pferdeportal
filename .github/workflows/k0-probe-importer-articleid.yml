@@ -1,0 +1,32 @@
+name: K0 probe importer article id
+
+on:
+  push:
+    branches: [konzept0-portal-neutral-20261002]
+    paths:
+      - '.github/workflows/k0-probe-importer-articleid.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract importer and show article_id validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main:refs/remotes/origin/main
+          git show origin/main:control/startmaster0107/runtime_packages/PSERC-FIX.zip > /tmp/pserc.zip
+          rm -rf /tmp/pserc-outer /tmp/pserc-inner
+          mkdir -p /tmp/pserc-outer /tmp/pserc-inner
+          unzip -q /tmp/pserc.zip -d /tmp/pserc-outer
+          inner="$(find /tmp/pserc-outer -type f -name '*.zip' -print -quit)"
+          test -n "$inner"
+          unzip -q "$inner" -d /tmp/pserc-inner
+          echo '=== ARTICLE ID HITS ==='
+          grep -RniE "PSERC_SYSTEM4_ARTICLE_FIELD_INVALID|article_id|canonical_article_id|plan_slot" /tmp/pserc-inner --include='*.php' | head -1000 || true
