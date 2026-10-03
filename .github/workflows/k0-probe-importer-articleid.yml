@@ -16,19 +16,28 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Extract importer and show article_id validator
+      - name: Extract every bound importer candidate
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin main:refs/remotes/origin/main
           git show origin/main:control/startmaster0107/runtime_packages/PSERC-FIX.zip > /tmp/pserc.zip
-          rm -rf /tmp/pserc-outer /tmp/pserc-inner
-          mkdir -p /tmp/pserc-outer /tmp/pserc-inner
+          sha256sum /tmp/pserc.zip
+          rm -rf /tmp/pserc-outer /tmp/pserc-all
+          mkdir -p /tmp/pserc-outer /tmp/pserc-all
           unzip -q /tmp/pserc.zip -d /tmp/pserc-outer
-          inner="$(find /tmp/pserc-outer -type f -name '*.zip' -print -quit)"
-          test -n "$inner"
-          unzip -q "$inner" -d /tmp/pserc-inner
-          echo '=== ARTICLE ID HITS ==='
-          grep -RniE "PSERC_SYSTEM4_ARTICLE_FIELD_INVALID|article_id|canonical_article_id|plan_slot" /tmp/pserc-inner --include='*.php' | head -1000 || true
-
-# rerun 2026-10-03 article-id proof
+          echo '=== OUTER FILES ==='
+          find /tmp/pserc-outer -maxdepth 4 -type f | sort
+          n=0
+          while IFS= read -r z; do
+            n=$((n+1)); d="/tmp/pserc-all/z$n"; mkdir -p "$d"
+            echo "=== ZIP $n: $z ==="
+            unzip -q "$z" -d "$d" || true
+            find "$d" -maxdepth 4 -type f | sort | head -200
+            echo '--- VERSION/BUILD ---'
+            grep -RniE "Version:|PSERC_VERSION|PSERC_BUILD|0\.28\." "$d" --include='*.php' | head -100 || true
+            echo '--- EXACT IMPORT ERROR ---'
+            grep -RniE "PSERC_SYSTEM4_ARTICLE_FIELD_INVALID|SYSTEM4_WORDPRESS_IMPORT|ARTICLE_FIELD_INVALID" "$d" --include='*.php' | head -100 || true
+            echo '--- ARTICLE FIELD SCHEMAS ---'
+            grep -RniE "article_id|canonical_article_id|plan_slot" "$d" --include='*.php' | grep -Ei "required|field|keys|preg_match|invalid|system4|import" | head -300 || true
+          done < <(find /tmp/pserc-outer -type f -name '*.zip' | sort)
