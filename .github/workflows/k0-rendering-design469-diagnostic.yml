@@ -51,6 +51,14 @@ jobs:
                   css_candidates.append(s)
           Path('diagnostics/k0-design150469-css-candidates.txt').write_text(
               '\n\n---\n\n'.join(css_candidates),encoding='utf-8')
+          # Exact single-post/design excerpts for K0 rendering regression
+          chunks=[]
+          for pat in (r'body\\.single-post',r'pftk-post',r'entry-content',r'ppm-generated'):
+              for m in re.finditer(pat,text,re.I):
+                  lo=max(0,m.start()-4500); hi=min(len(text),m.end()+6500)
+                  chunks.append(f'PATTERN={pat}\\nOFFSET={m.start()}\\n'+text[lo:hi])
+          Path('diagnostics/k0-design150469-singlepost-exact.txt').write_text(
+              '\\n\\n========== EXACT HIT ==========\\n\\n'.join(chunks),encoding='utf-8')
           summary={
             'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
             'bytes':p.stat().st_size,
@@ -68,7 +76,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add diagnostics/k0-design150469-rendering-snippets.txt diagnostics/k0-design150469-css-candidates.txt diagnostics/k0-design150469-summary.json
+          git add diagnostics/k0-design150469-rendering-snippets.txt diagnostics/k0-design150469-css-candidates.txt diagnostics/k0-design150469-singlepost-exact.txt diagnostics/k0-design150469-summary.json
           git diff --cached --quiet && exit 0
           git commit -m "diag: extract design 1.50.469 article spacing rules"
           git push origin HEAD:tmp/k0-rendering-design469-20261003
