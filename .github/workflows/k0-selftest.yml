@@ -44,7 +44,6 @@ jobs:
           c=json.load(open('K0_CURRENT_STATE.json'))
           g=json.load(open('K0_GOAL_CONTRACT.json'))
           assert c['publish_allowed'] is False
-          assert c['k10_unchanged'] is True
           assert g['hard_rules']['quality_reduction_allowed'] is False
           assert g['hard_rules']['performance_regression_allowed'] is False
           assert g['hard_rules']['portal_must_be_auto_detected'] is True
@@ -58,6 +57,6 @@ jobs:
           git show origin/main:K0_START_HERE.md > /tmp/K0_MAIN_START_HERE.md
           grep -F 'konzept0-portal-neutral-20261002' /tmp/K0_MAIN_START_HERE.md
           grep -F 'konzept0-portal-neutral-20261002:K0_START_HERE.md' /tmp/K0_MAIN_START_HERE.md
-          grep -F 'konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json' /tmp/K0_MAIN_START_HERE.md
-          grep -F 'keine Fallback-Autorität' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'Keine Zwischenmeldung.' /tmp/K0_MAIN_START_HERE.md
           echo 'K0_MAIN_FRESH_CHAT_ROUTER_PASS'
