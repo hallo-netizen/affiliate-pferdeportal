@@ -1,0 +1,74 @@
+name: K0 Rendering Design 1.50.469 Diagnostic
+
+on:
+  push:
+    branches:
+      - tmp/k0-rendering-design469-20261003
+    paths:
+      - .github/workflows/k0-rendering-design469-diagnostic.yml
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: tmp/k0-rendering-design469-20261003
+          fetch-depth: 0
+      - name: Reconstruct exact design source
+        shell: bash
+        run: |
+          bash protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/GLOSSAR/reconstruct-design-1.50.469.sh
+          mkdir -p diagnostics
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, json, hashlib
+          p=Path('/tmp/design-1.50.469/pferde-template-kit.php')
+          text=p.read_text(encoding='utf-8')
+          needles=[
+            r'ppm-generated',r'ppm-type-',r'entry-content',r'\bh2\b',
+            r'margin-top',r'margin-bottom',r'margin-block',r'\bsection\b',
+            r'is_single',r'is_singular',r'astra'
+          ]
+          rx=re.compile('|'.join(needles),re.I)
+          spans=[]
+          for m in rx.finditer(text):
+              lo=max(0,m.start()-900); hi=min(len(text),m.end()+1300)
+              spans.append(text[lo:hi])
+          merged=[]
+          for s in spans:
+              if not merged or s not in merged[-1]:
+                  merged.append(s)
+          Path('diagnostics/k0-design150469-rendering-snippets.txt').write_text(
+              '\n\n===== HIT =====\n\n'.join(merged),encoding='utf-8')
+          css_candidates=[]
+          for m in re.finditer(r'(?is)([^\n]{0,500}(?:h2|entry-content|ppm-generated|section)[^\n]{0,1200})',text):
+              s=m.group(1)
+              if any(k in s.lower() for k in ('margin','padding','display','gap','line-height')):
+                  css_candidates.append(s)
+          Path('diagnostics/k0-design150469-css-candidates.txt').write_text(
+              '\n\n---\n\n'.join(css_candidates),encoding='utf-8')
+          summary={
+            'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+            'bytes':p.stat().st_size,
+            'ppm_generated_occurrences':len(re.findall(r'ppm-generated',text,re.I)),
+            'entry_content_occurrences':len(re.findall(r'entry-content',text,re.I)),
+            'h2_occurrences':len(re.findall(r'\bh2\b',text,re.I)),
+            'section_occurrences':len(re.findall(r'\bsection\b',text,re.I)),
+            'margin_top_occurrences':len(re.findall(r'margin-top',text,re.I)),
+          }
+          Path('diagnostics/k0-design150469-summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+          print(summary)
+          PY
+      - name: Commit diagnostic evidence
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diagnostics/k0-design150469-rendering-snippets.txt diagnostics/k0-design150469-css-candidates.txt diagnostics/k0-design150469-summary.json
+          git diff --cached --quiet && exit 0
+          git commit -m "diag: extract design 1.50.469 article spacing rules"
+          git push origin HEAD:tmp/k0-rendering-design469-20261003
