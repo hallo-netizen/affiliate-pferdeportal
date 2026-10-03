@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FRESH_REAL_REGRESSION_PASS_BATCH_ALLOWED",
+  "status": "USER_3_ARTICLE_BATCH_FULL_PASS_WORDPRESS_READY",
   "first_open_blocker": null,
-  "next_action": "RUN_USER_3_ARTICLE_BATCH_AND_COMBINE_VERIFIED_WORDPRESS_FILE",
+  "next_action": "DELIVER_WORDPRESS_BATCH_FILE_FOR_USER_IMPORT",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -82,13 +82,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
-    "last_checked_branch_head_sha": "72f179acd6ae0859ba3a22449c249a0e0904225f",
-    "latest_writer_accept_run": 37147496645,
-    "latest_writer_accept_result": "SUCCESS_FRESH_RENDERING_LINK_REGRESSION",
+    "last_checked_branch_head_sha": "794029cc717999f53effb845582c0afe8c3c99b8",
+    "latest_writer_accept_run": 37148297780,
+    "latest_writer_accept_result": "SUCCESS_USER_BATCH_ARTICLE_2_FINAL",
     "latest_k0_selftest_run": 37147241043,
     "latest_k0_selftest_result": "SUCCESS_RENDERING_FIX_CURRENT_SYNC",
     "ppm679_parity": "PASS",
-    "delta_result": "LINK_DISTRIBUTION_FRESH_REAL_PASS; H2_RENDERING_CODE_FIX_AND_LOCAL_VISUAL_PASS; FRESH_STRUCTURED_WORDPRESS_OUTPUT_PASS; USER_3_ARTICLE_BATCH_ALLOWED"
+    "delta_result": "USER_3_ARTICLE_BATCH_FULL_PASS_COLLECTED; WORDPRESS_BATCH_READY; PUBLISH_FALSE"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -253,5 +253,27 @@
     "k0_selftest_result": "SUCCESS",
     "fresh_regression_wordpress_single_ref": "real_runs/k0/fresh-20261003-1818-fremdreiter-759950a7/WORDPRESS_SINGLE.json",
     "fresh_regression_writer_accept_run": 37147496645
+  },
+  "latest_user_batch": {
+    "input_batch_sha256": "70423281b69b3cfa28413ab2a7dcfa8a25cde4e5a526ee787cbbd79a317d471e",
+    "article_count": 3,
+    "status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+    "publish_allowed": false,
+    "wordpress_batch_path": "real_runs/k0/batch-70423281b69b3cfa/WORDPRESS_BATCH.json",
+    "batch_verify_path": "real_runs/k0/batch-70423281b69b3cfa/BATCH_VERIFY.json",
+    "article_titles": [
+      "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+      "Sind Kühlgamaschen für Pferde sinnvoll?",
+      "Welche Schermaschine für Pferde ist die leiseste?"
+    ],
+    "writer_runs": {
+      "fremdreiterrisiko": 37147496645,
+      "kuehlgamaschen": 37148297780,
+      "schermaschine": 37147959075
+    },
+    "languagetool_68": "PASS_ALL_THREE",
+    "ppm_679": "PASS_ALL_THREE",
+    "link_distribution": "PASS_ALL_THREE",
+    "rendering_regression": "PASS_LOCAL_VISUAL_PLUS_FRESH_STRUCTURED_OUTPUT"
   }
 }
