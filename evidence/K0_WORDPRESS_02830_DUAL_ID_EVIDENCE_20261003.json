@@ -1,0 +1,56 @@
+{
+  "contract": "K0_WORDPRESS_02830_DUAL_ID_EVIDENCE_V1",
+  "created_at_utc": "2026-10-03T09:28:00Z",
+  "status": "SIMULATION_PASS_REAL_REIMPORT_PENDING",
+  "real_failure": {
+    "result_contract": "PSERC_SYSTEM4_WORDPRESS_IMPORT_RESULT_V1",
+    "reason_code": "PSERC_SYSTEM4_ARTICLE_FIELD_INVALID",
+    "field": "article_id",
+    "plugin_version": "0.28.30",
+    "plugin_build": "0.28.30-pste-v5-binding-safe",
+    "redaktionsplan_read_attempted": false,
+    "redaktionsplan_write_attempted": false
+  },
+  "root_cause": {
+    "top_level_article_id_format": "VALID_article_colon_24hex",
+    "top_level_article_id_plan_slot_roundtrip": "PASS_ALL_3",
+    "missing_binding": "production_context.production_plan_item.canonical_article_id",
+    "correction": "Require top-level article_id and identical nested canonical_article_id; both bind to plan_slot."
+  },
+  "regression_matrix": [
+    {
+      "case": "dual_matching",
+      "expected": "PASS",
+      "result": "PASS"
+    },
+    {
+      "case": "top_only_missing_nested",
+      "expected": "BLOCK",
+      "result": "BLOCK"
+    },
+    {
+      "case": "nested_only_missing_top",
+      "expected": "BLOCK",
+      "result": "BLOCK"
+    },
+    {
+      "case": "dual_mismatch",
+      "expected": "BLOCK",
+      "result": "BLOCK"
+    },
+    {
+      "case": "wrong_top_id_for_plan_slot",
+      "expected": "BLOCK",
+      "result": "BLOCK"
+    }
+  ],
+  "github_selftest": {
+    "run_id": 37113125431,
+    "result": "SUCCESS",
+    "test_count": 91,
+    "ppm679_parity": "PASS_104_104",
+    "hardlocks": "PASS"
+  },
+  "corrected_batch_ref": "real_runs/k0_batch/20261003_user3/WORDPRESS_FINAL_CANONICAL.json",
+  "publish_allowed": false
+}
