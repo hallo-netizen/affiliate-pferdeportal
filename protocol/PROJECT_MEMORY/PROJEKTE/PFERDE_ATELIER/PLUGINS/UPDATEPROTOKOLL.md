@@ -284,3 +284,33 @@ WORDPRESS_LIVEKONTROLLE: Nutzer-Screenshot zeigt Portal SEO Themenengine 0.57.26
 ERGEBNIS: PASS FÜR TITELGENERIERUNG / UI-NACHLAUF-FEHLER DOKUMENTIERT.
 FACHBÜRO_REF: `../TEXT/CURRENT_STATE.md`.
 NOTIZ: Kein weiteres Plugin für den UI-Nachlauf nötig; Reload rendert bei COMPLETE den Exportbutton.
+
+## RELEASE-VORBEREITUNG 2026-10-03 – PSTE 0.57.27 / KEIN PU-EREIGNIS
+
+Kandidat:
+`PSTE-0.57.27-PRODUCTWAHL-CLASSIFICATION-CANDIDATE.zip`
+
+SHA-256:
+`414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`
+
+Basis:
+PSTE 0.57.26 / `d7d00c1b13144fc584a593993714721ec9a8679e7d65f017e1bc2ed10c1306d6`.
+
+Zweck:
+- Produktwahl als vorgelagerte Kandidatenklassifikation;
+- getrennte Exporte Produktwahl/redaktionell;
+- manuelle Review-Korrektur ohne Produktionsautorität.
+
+Prüfung:
+- ZIP-Integrität PASS;
+- PHP-Lint 80/80 PASS;
+- Produktwahl Positiv/Negativ + Manual-Override 13/13 PASS;
+- 326er Realsample 0 MATCH / 0 REVIEW / 326 NO_MATCH;
+- geschützter Storage-/Normalpfad unverändert;
+- kein `payload_json`-Kopieren im neuen Manual-Override.
+
+Grenze:
+0.57.27 ist nicht live installiert/readback-bestätigt. Der nachgelagerte Produktionsstand registriert `Produktwahl` noch nicht. Der reale 695er Titelkandidaten-Export liegt für die Vollauswertung nicht vor.
+
+**Bewusst keine PU-ID:** kein ausgeführtes WordPress-Update.
+
