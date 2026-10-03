@@ -2161,3 +2161,82 @@ DAUERHAFTE REGEL:
 
 UNVERÄNDERT:
 SEO-5-Felder-Handoff, Textmaschine/Fachregeln, PPM/PSERC/PSTE, Tabellen-/Link-/LanguageTool-/Designregeln, Single Door und Publish-Sperre.
+
+
+## PLUGINS-001 – Gebündelte Datenbank-/Performance-Bereinigung
+
+WAS:
+Datenbankwachstum, Retention und Performance werden Plugin für Plugin geprüft. Zusammengehörige Ursachen werden je betroffenem Plugin gebündelt gelöst. Vorhandene Performanceoptimierungen bleiben regressionsgeschützt.
+
+WARUM:
+Viele kleine Einzelupdates erschweren Ursache/Wirkung und können bestehende Optimierungen gegenseitig zurückbauen.
+
+REGEL:
+Quellursache zuerst; danach Altbestand kontrolliert bereinigen; anschließend gleiche Speicher- und Performance-Messung wiederholen.
+
+ZIELVERTRAG:
+`ZIELVERTRAEGE/ZV-PLUGINS-CLEANUP-001.md`.
+
+## PLUGINS-002 – Kategorieprodukt-Ranking nur einmal pro öffentlicher Seite
+
+STAND: 2026-10-01 / VERBINDLICH.
+
+WAS:
+Bei Affiliate-Seiten mit den drei öffentlichen `category_product_1..3`-Plätzen wird das slot-unabhängige Kontext-Ranking pro Seitenaufruf genau einmal gebildet und request-lokal wiederverwendet. Reine identische Target-/Control-/Health-/Image-/eBay-Prüfungen dürfen ebenfalls nur request-lokal memoisiert werden.
+
+UNVERÄNDERT PRO SLOT:
+Placement, Slot-Veto, Provider-Mix, finale Auswahl, PRIVATE/BUSINESS, Coverage, Quality, Health, Tracking und Design.
+
+WARUM:
+Reale Messungen zeigten schnelle Oberkategorien, aber 8–9 Sekunden auf tieferen Kategorieprodukt-Seiten. Der 1:1-A-B-Test mit der vorhandenen 2012er Produkttopologie bewies, dass die wiederholte dreifache Bearbeitung desselben großen Kandidatenbestands die maßgebliche vermeidbare Last war. 6.72.171 behält die Ausgabe 1:1 bei und reduziert im Snapshot-A-B den Leaf-Renderer um 89,87 %.
+
+REGRESSIONSREGEL:
+Ein Performancefix an diesem Pfad darf nicht nur isoliert getestet werden. Pflicht ist ein exakter Vorher/Nachher-A-B-Lauf auf WordPress/MariaDB mit allen drei Produkt-Slots, Positiv-/Negativfällen, identischer fachlicher Ausgabe und gemessener Verbesserung.
+
+## PSTE-REUSE-001 – vorhandene automatische Editorialisierung bleibt Primärweg
+
+STAND:
+2026-10-01.
+
+WAS:
+Für die Verwertung gespeicherter PSTE-Begriffe wird **kein neuer Keyword→Titel-/Kategorie-Mechanismus** gebaut.
+Der bereits vorhandene Normal-Metadata-Pfad bleibt zuständig für Portalrelevanz, Familie/Gruppe, Intent, Artikeltyp, Titel, Zielkeyword und Zielkategorie.
+Retained Backlog und Normal Reentry müssen diesen vorhandenen Weg erneut nutzen.
+
+WARUM:
+Die Funktion ist im bestehenden PSTE bereits vorhanden; das aktuelle Problem ist die geringe Ausbeute bis AUTO_RESOLVED / planning-ready / READY.
+Ein zweiter Mechanismus würde KISS verletzen und könnte abweichende Titel-/Kategorieentscheidungen erzeugen.
+
+DELTA 0.57.18:
+Der lokal geprüfte Kandidat priorisiert lediglich sichere AUTO_REENTRY_ELIGIBLE-Sandbox-Kandidaten vor Retained Backlog und Provider-Recherche.
+Er ist ausdrücklich nur Teilfix und keine belegte Gesamtlösung der niedrigen Topic-Pool-Verwertbarkeit.
+
+NACHWEIS:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`.
+
+
+
+## PSTE-REUSE-002 – gespeichertes Recherchematerial darf vor Produktionsfreigabe als Titelkandidat nutzbar werden
+
+STAND:
+2026-10-02.
+
+WAS:
+PSTE 0.57.26 nutzt vorhandene Fragen, gespeicherte redaktionelle Formulierungen und den bestehenden Titelpfad, um nicht-autorisierende Titelkandidaten aus dem vorhandenen Fundus zu erzeugen. Zusätzlich fällt die Kontextquery bei leerem `editorial_title` auf vorhandene Query-Felder zurück.
+
+WARUM:
+Der Fundus war vorhanden, wurde aber wegen eines falschen Leerwert-Fallbacks und zu enger Kopplung an spätere Aufbereitungsstufen nicht ausreichend als Titeloberfläche nutzbar. Live wurden danach 695 Titelkandidaten erzeugt.
+
+GRENZE:
+Titelkandidat ist keine Produktionsfreigabe. Kategorie-, Dubletten-, Artikeltyp-, Planning-, PSERC- und Publish-Gates bleiben unverändert. Keine neue externe Recherche im Bestandslauf.
+
+## ARCH-053 – CURRENT_STATE ist alleinige NEXT-ACTION-Autorität
+WAS:
+Projekt-/Büro-Wegweiser wurden auf die bereits geltende Ein-Wahrheit-Regel nachgezogen: `START_HERE → genau eine CURRENT_STATE → Frischecheck → genau deren NEXT ACTION`. Der Hobbyraum bleibt ausschließlich temporäre Ausführungsfläche.
+
+WARUM:
+TEXT-Hobbyraum erklärte bereits selbst, keine Current-/NEXT-ACTION-Autorität zu sein, während ältere START_HERE-Texte ihn noch als NEXT-ACTION-Quelle auswiesen. Das erzeugte eine reale Routing-Widersprüchlichkeit.
+
+REGEL:
+START_HERE navigiert. CURRENT_STATE trägt aktuellen Stand, ersten Blocker und genau eine NEXT ACTION. HOBBYRAUM nur bei ausdrücklich aktiver temporärer Arbeitsbindung; keine zweite dynamische Wahrheit.
+

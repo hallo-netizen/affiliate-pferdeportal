@@ -18,15 +18,15 @@ den installierten Pluginbestand inventarisieren, Fachzuständigkeiten verlinken,
 Fachlogik, Code, Release- oder LIVE-Status eines Plugins in diesem Büro neu erfinden; Plugins allein aufgrund einer Bewertung löschen/aktualisieren; Fachbüro-Wahrheiten kopieren; API-Keys, Passwörter, Tokens, Lizenzschlüssel oder andere Secrets speichern.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `PLUGINREGISTER.md` → bei Updates `UPDATEPROTOKOLL.md`.
+`CURRENT_STATE.md` → dort Frischecheck + genau eine NEXT ACTION → bei Ausführung ggf. `HOBBYRAUM.md`; Inventar `PLUGINREGISTER.md`; tatsächlich ausgeführte Updates `UPDATEPROTOKOLL.md`.
 
 ## EINE WAHRHEIT – ROLLENTRENNUNG
 
 Dieses Büro ist **Kontrollpult und Karteikasten**, nicht Eigentümer der Fachlogik.
 
 - Installierter Pferde-Atelier-Bestand + betriebliche Bewertung → `PLUGINREGISTER.md`.
-- Aktueller Bürostand → `CURRENT_STATE.md`.
-- Aktuelle Arbeit / NEXT ACTION → `HOBBYRAUM.md`.
+- Aktueller Bürostand + erster offener Punkt + genau eine NEXT ACTION → `CURRENT_STATE.md`.
+- `HOBBYRAUM.md` → nur temporäre Ausführungsfläche der von `CURRENT_STATE.md` gebundenen Arbeit; keine eigene Current-/NEXT-ACTION-Wahrheit.
 - Update-Chronik → `UPDATEPROTOKOLL.md`.
 - Update-/Pflegeregeln → `REGELWERK.md`.
 - Campusweiter Plugin-/Installer-Dateibeleg → `protocol/PROJECT_MEMORY/WORDPRESS_REGISTER.md`.
@@ -46,7 +46,7 @@ Dieses Büro ist **Kontrollpult und Karteikasten**, nicht Eigentümer der Fachlo
 
 ## PFLICHT VOR JEDER TECHNISCHEN PLUGIN-AKTION
 
-1. `CURRENT_STATE.md` und `HOBBYRAUM.md` lesen.
+1. `CURRENT_STATE.md` lesen und dessen Frischecheck/NEXT ACTION übernehmen; `HOBBYRAUM.md` nur lesen, wenn dort die aktuelle Ausführung temporär gebunden ist.
 2. `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → relevante autoritative Fehlerquelle prüfen.
 3. Zuständiges Fachbüro + dessen CURRENT_STATE/HOBBYRAUM lesen.
 4. Bekannte Wiederholungsfehler, Abhängigkeiten, Rollback- und Testgrenzen prüfen.

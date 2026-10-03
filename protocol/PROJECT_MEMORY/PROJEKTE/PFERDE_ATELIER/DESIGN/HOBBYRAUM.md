@@ -1,7 +1,16 @@
 # DESIGN – HOBBYRAUM
 
-STAND: 2026-09-07
+STAND: 2026-09-24
 STATUS: FREI / SCRIPT-ONLY-STANDARD
+
+## KATEGORIE-KONTROLLPUNKT 2026-09-24
+
+Aktuell gebundener Template-Kit-Stand im abgeschlossenen Kategorie-Scope: **1.50.559**.
+Kategorie-/Breadcrumb-Map 1149/1149, Readback PASS.
+
+Der unten beschriebene 1.50.472-Runnerauftrag ist **abgeschlossene Historie** und keine aktuelle Pluginbasis für Kategoriearbeit.
+
+NEXT ACTION Kategorie/Struktur: **NONE**.
 
 ## HARTE OBERREGEL
 

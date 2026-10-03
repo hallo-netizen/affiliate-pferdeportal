@@ -1,8 +1,52 @@
 # PFERDE-ATELIER – PLUGINREGISTER
 
-STAND: 2026-09-12
+## INVENTARDELTA 2026-10-01 – TEXT/SEO
+
+Direkter WordPress-Readback aus diesem Arbeitsstrang:
+- Portal SEO Redaktionsplan Compiler: **0.28.29-kiss-storage-safe**, aktiv.
+- Portal SEO Themenengine: **0.57.15** ist der letzte direkt sichtbare Versionsreadback. Danach ist ein fortgesetzter V9-Resume operativ sichtbar; spätere Screenshots enthalten keine Versionsnummer, daher kein höherer Versionsreadback ohne Beleg.
+
+Kein Fach-/Release-PASS aus diesem Register ableiten. Für aktuellen PSTE-Arbeitsstand: `../TEXT/CURRENT_STATE.md`.
+
+STAND: 2026-10-01
 QUELLE: WordPress-Screenshotinventur des Nutzers + bereits vorhandene Campus-/Fachbelege
 REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Autorität.
+
+## INVENTARDELTA 2026-09-30 – REALER WORDPRESS-READBACK
+
+Quelle: aktuelle vom Nutzer bereitgestellte WordPress-Pluginliste. Diese Beobachtung supersediert für den **installierten Betriebsstand** die älteren Versionszeilen der betroffenen Plugins. Fach-/Release-/LIVE-Autorität bleibt unverändert beim jeweiligen Fachbüro bzw. der technischen Originalquelle.
+
+| Plugin | Real beobachtet 30.09.2026 | Aktivstatus | Zuständigkeit / Hinweis |
+|---|---:|---|---|
+| Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.578** | aktiv | DESIGN; aktuellen Fachstand dort prüfen |
+| Affiliate-Zentrale (Portal-kompatibel) | **6.72.170** | aktiv | AFFILIATE; WordPress-Uploadvergleich 01.10.2026 zeigt `Aktuell 6.72.170`. Ein hochgeladenes 6.72.169-Paket war veraltet und wurde verworfen. Technisch freigegeben ist **6.72.171**; Installation/Versions-Readback noch offen. |
+| Performance Diagnose Safe | **2.3.0** | aktiv | GEMEINSAM / Performance; passive No-Filter-Diagnose |
+| Performance Diagnose Safe | **2.2.0** | inaktiv | AUFRÄUMKANDIDAT; nicht als aktuelle Messquelle verwenden |
+| Pferde Atelier – Affiliate Design Performance | **3.0.0** | inaktiv | DESIGN; nicht als aktive Performancebasis behandeln |
+| Portal Production Machine | **6.7.9** | aktiv | TEXT; kritisch, unverändert |
+| Portal SEO Redaktionsplan Compiler | **0.28.29-kiss-storage-safe** | aktiv | TEXT; kritisch |
+| Portal SEO Themenengine | **0.57.13** | aktiv | TEXT; kritisch |
+
+**Arbeitsregel 30.09.2026:** Datenbank-/Performancebereinigung nur pluginweise und gegen die jeweilige aktuelle Fachquelle. Storageänderungen dürfen vorhandene Performanceoptimierungen nicht überschreiben. Kandidaten werden erst nach Installation/Readback zum beobachteten Betriebsstand.
+
+## INVENTARDELTA 2026-09-24 – KATEGORIE-SCOPE FINAL
+
+Quelle: Nutzer-Readbacks plus finale technische Current-Autorität des Kategorieabschlusses. Diese Werte superseden für den Kategorieauftrag die entsprechenden älteren Registerzeilen; alle fachfremden Registerzeilen bleiben unverändert.
+
+| ID | Plugin | Aktuell gebundener Kategorie-Stand 24.09.2026 | Fachbüro |
+|---|---|---:|---|
+| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | **1.50.559** | DESIGN |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | **6.72.152** | AFFILIATE |
+| PA-E-004 | Allgemeine Bildzentrale | **2.7.6** | BILD |
+| PA-E-013 | Portal Link Policy Runtime Verifier | **1.0.0** | TEXT |
+| PA-E-014 | Portal Production Center | **1.1.1** | TEXT |
+| PA-E-015 | Portal Production Link Policy Gate | **1.0.1** | TEXT |
+| PA-E-016 | Portal Production Machine | **6.7.9** | TEXT |
+| PA-E-017 | Portal SEO Redaktionsplan Compiler | **0.28.23** | TEXT |
+| PA-E-019 | Portal SEO Themenengine | **0.57.13** | TEXT |
+| PA-E-027 | Portal Category Structure Repair Guard | **1.0.1** | GEMEINSAM |
+
+**Regel:** Dies ist Inventar-/Routing-Synchronisierung. Fach-/Release-/LIVE-Wahrheit bleibt im jeweiligen Fachbüro/technischen Original. Kategorie-/Strukturscope ist laut technischer Current-Autorität geschlossen; daraus folgt keine allgemeine Updatefreigabe für fachfremde Plugins.
 
 ## LEGENDE
 
@@ -20,20 +64,20 @@ REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Auto
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | 1.50.472 | aktiv | **KRITISCH · BEHALTEN** | `../DESIGN/START_HERE.md` |
+| PA-E-001 | Affiliate Portal Template Kit (Pferde-kompatibel) | 1.50.559 | aktiv | **KRITISCH · BEHALTEN** | `../DESIGN/START_HERE.md` |
 | PA-E-002 | Pferde Atelier – Anzeigenmarkt & Journal Breadcrumbs | 1.1.1 | aktiv | **WICHTIG · BEHALTEN**; Schnittstelle zu HIVEPRESS | `../DESIGN/START_HERE.md` + `../HIVEPRESS/START_HERE.md` |
 
 ## AFFILIATE
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.17 | aktiv | **KRITISCH · BEHALTEN**; installierte Version gegen Releaseautorität abgleichen | `../AFFILIATE/START_HERE.md` |
+| PA-E-003 | Affiliate-Zentrale (Portal-kompatibel) | 6.72.170 letzter expliziter Versions-Readback | aktiv | **KRITISCH · BEHALTEN**; technischer Release **6.72.171**, Installation/Readback offen; Performance-A-B + Full Gate PASS | `../AFFILIATE/START_HERE.md` |
 
 ## BILD
 
 | ID | Plugin | Beobachtete Version | Status | Einschätzung | Hauptverweis |
 |---|---|---:|---|---|---|
-| PA-E-004 | Allgemeine Bildzentrale | 2.6.9 | aktiv | **WICHTIG · BEHALTEN** | `../BILD/START_HERE.md` |
+| PA-E-004 | Allgemeine Bildzentrale | 2.7.6 | aktiv | **WICHTIG · BEHALTEN** | `../BILD/START_HERE.md` |
 
 ## HIVEPRESS / ANZEIGENMARKT
 
@@ -56,9 +100,9 @@ REGEL: Beobachteter Installationsstand ist keine automatische Release-/LIVE-Auto
 | PA-E-014 | Portal Production Center | 1.1.1 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-015 | Portal Production Link Policy Gate | 1.0.1 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-016 | Portal Production Machine | 6.7.9 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
-| PA-E-017 | Portal SEO Redaktionsplan Compiler | 0.28.20 | aktiv | **KRITISCH · BEHALTEN**; Fach-/Releasebeleg frisch abgleichen | `../TEXT/START_HERE.md` |
+| PA-E-017 | Portal SEO Redaktionsplan Compiler | 0.28.23 | aktiv | **KRITISCH · BEHALTEN**; Fach-/Releasebeleg frisch abgleichen | `../TEXT/START_HERE.md` |
 | PA-E-018 | Portal SEO Redaktionsplan Compiler | 0.28.16 | **inaktiv** | **ALTREST · ENTFERNUNG PRÜFEN**; erst Abhängigkeit/Rollback/Pluginroot klären | `../TEXT/START_HERE.md` |
-| PA-E-019 | Portal SEO Themenengine | 0.56.25 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
+| PA-E-019 | Portal SEO Themenengine | 0.57.13 | aktiv | **KRITISCH · BEHALTEN** | `../TEXT/START_HERE.md` |
 | PA-E-020 | PPM-Quellpaket Exporter | 1.0.0 | aktiv | **HILFSWERKZEUG · AUFRÄUMKANDIDAT**, wenn Nachweisexport nicht mehr gebraucht wird | `../TEXT/START_HERE.md` |
 | PA-E-021 | SEO-Quellpaket Exporter | 1.0.0 | aktiv | **HILFSWERKZEUG · AUFRÄUMKANDIDAT**, wenn Nachweisexport nicht mehr gebraucht wird | `../TEXT/START_HERE.md` |
 

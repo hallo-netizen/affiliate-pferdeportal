@@ -1,45 +1,30 @@
 # PLUGINS – HOBBYRAUM
 
-STAND: 2026-09-12
-STATUS: FREI
+STAND: 2026-09-30
+STATUS: TEMPORÄRE AUSFÜHRUNGSFLÄCHE / KEINE CURRENT- ODER NEXT-ACTION-AUTORITÄT
 
-## 1-KLICK-ÜBERSICHT
+## ROLLE
 
-**WAS IST DAS?**  
-Der einzige aktuelle Arbeitsraum des PLUGINS-Büros.
+Diese Datei ist nur temporäre Ausführungsfläche. Sie führt keinen eigenen aktuellen Status, keinen eigenen Blocker und keine eigene NEXT ACTION.
 
-**HIER BIST DU RICHTIG, WENN …**  
-ein konkretes Plugin inventarisiert, aktualisiert, deaktiviert, ersetzt, auf Abhängigkeiten geprüft oder als Aufräumkandidat untersucht werden soll.
+## VERBINDLICHE ROUTE
 
-**DU DARFST …**  
-genau einen gebundenen Plugin-Arbeitsauftrag aufnehmen und dessen Inventar-/Update-Nachweis führen.
+`START_HERE.md`
+→ `CURRENT_STATE.md`
+→ Frischecheck
+→ genau eine NEXT ACTION aus `CURRENT_STATE.md`
+→ zuständiges Fachbüro / technische Originalquelle.
 
-**DU DARFST NICHT …**  
-ohne Fachbürobindung Plugins verändern, mehrere Reparaturwege parallel starten, Bewertung mit Freigabe verwechseln oder Fach-/Releasewahrheit hier duplizieren.
+## RÜCKGABE
 
-**ALS NÄCHSTES …**  
-Bei neuem Auftrag: `CURRENT_STATE.md` → `REGELWERK.md` → `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → zuständiges Fachbüro → gebundener Arbeitsweg.
+Nach belastbarer Arbeit:
+- technische Evidence bleibt an der Fach-/Releasequelle;
+- tatsächliche Plugininstallation wird genau einmal in `UPDATEPROTOKOLL.md` protokolliert;
+- Inventarreadback wird in `PLUGINREGISTER.md` nachgeführt;
+- aktueller operativer Stand und NEXT ACTION werden ausschließlich in `CURRENT_STATE.md` geführt.
 
-## AKTUELLE ARBEIT
-
-Keine technische Pluginarbeit gebunden.
-
-NEXT ACTION: `NONE`.
-
-## WENN EIN UPDATE BEAUFTRAGT WIRD
-
-Der Hobbyraum bindet genau:
-
-- Plugin-ID aus `PLUGINREGISTER.md`;
-- zuständiges Fachbüro;
-- beobachtete Ausgangsversion;
-- Zielversion/Updatequelle;
-- betroffene Abhängigkeiten;
-- Test-/Rollbackweg;
-- vorgesehene `PU-YYYYMMDD-NNN`-Update-ID.
-
-Nach Abschluss wird das Update genau einmal im `UPDATEPROTOKOLL.md` protokolliert; das Fachbüro erhält nur den Rückverweis auf die PU-ID.
+Historische PSTE-, PSERC-, PPM- oder Affiliate-Zwischenstände werden hier nicht als aktuelle Wahrheit geführt.
 
 ## STOP
 
-Bei unklarer Zuständigkeit, unklarer Abhängigkeit, fehlendem Rollback, bekanntem Fehler-Treffer oder widersprüchlichem Versions-/Releasebeleg: **STOP / PRÜFEN**, nicht raten.
+Bei widersprüchlichem Current-/Release-/Livebeleg: **BLOCKED – NICHT RATEN**.

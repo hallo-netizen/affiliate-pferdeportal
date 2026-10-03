@@ -57,6 +57,21 @@ Release-/Governance-Autorität ebenfalls auf `affiliate-release-current`:
 - `control/release-governance/CURRENT_RELEASE.json`
 - `release/affiliate-zentrale/AGENTS.md`
 
+## PFERDE-ATELIER-KATEGORIEINTEGRATION
+
+Bereich: PFERDE ATELIER / KATEGORIEN / PLUGIN-STRUKTUR  
+Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
+
+Autoritative Fehler-/Änderungsquelle:
+Branch `affiliate-release-current` →
+`protocol/PFERDE_ATELIER_CATEGORY_CHANGE_MASTER_20260922.md`
+
+Aktuelle Status-/Blocker-/NEXT-ACTION-Autorität:
+Branch `affiliate-release-current` →
+`control/release-governance/CURRENT_RELEASE.json`
+
+Dieses Register kopiert keine Fehlerdetails und keine NEXT ACTION.
+
 ## BILD-249-LOCAL-PREVIEW
 
 Bereich: BILD  
@@ -132,3 +147,30 @@ Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle
 
 Autoritative Fehlerquelle:
 `PROJEKTE/PFERDE_ATELIER/PRODUKTVERGLEICH/FEHLERQUELLEN.md`
+
+## PSTE-CONTEXT-RESUME-20261001
+
+Bereich: PFERDE ATELIER / TEXT / PSTE
+Status: RESUME-FEHLER TECHNISCH REPARIERT / OPERATIVER PORTALABGLEICH LÄUFT; Details ausschließlich aus der autoritativen Current-/Protokollquelle
+
+Aktuelle Status-/NEXT-ACTION-Autorität:
+`PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`
+
+Fehler-/Fix-/Verwertbarkeitsnachweis:
+`protocol/PSTE_TOPIC_REUSE_AND_CONTEXT_RESUME_CLOSEOUT_20261001.md`
+
+Dieses Register kopiert keine dynamischen Fortschrittswerte und keine zweite NEXT ACTION.
+
+## PSTE-EXISTING-POTENTIAL-20261001
+
+Bereich: PFERDE ATELIER / TEXT / PSTE / THEMENVERWERTUNG
+Status: ROOTCAUSE TEILWEISE BEHOBEN / 695 TITELKANDIDATEN LIVE ERZEUGT / EXPORT-AKTION NACH AJAX-COMPLETE ERST NACH RELOAD SICHTBAR
+
+Aktuelle Status-/NEXT-ACTION-Autorität:
+`PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`
+
+Autoritative Fehler-/Arbeitsquelle:
+`protocol/PSTE_EXISTING_POTENTIAL_CONVERSION_GAP_20261001.md`
+
+Dieses Register kopiert keine zweite NEXT ACTION.
+

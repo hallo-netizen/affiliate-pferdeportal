@@ -15,13 +15,13 @@ Quellen finden, aktuelle/historische Dateistände unterscheiden und bei einem au
 aus dem bloßen Betreten dieses Büros Schreibrechte ableiten, Fachregeln eigenmächtig ändern oder einen Arbeitsweg erfinden.
 
 **ALS NÄCHSTES …**  
-`CURRENT_STATE.md` → `HOBBYRAUM.md` → `QUELLEN_AKTUELL/START_HERE.md` → gebundener Ziel-/Arbeitsweg.
+`CURRENT_STATE.md` lesen → Frischecheck → exakt dessen NEXT ACTION. `HOBBYRAUM.md` nur bei einer von CURRENT ausdrücklich gebundenen temporären Ausführung.
 
 
 ## SCHNELLWEGWEISER – EINE WAHRHEIT
 
-- **AKTUELLER BÜROSTAND:** `CURRENT_STATE.md`
-- **AKTUELLE ARBEIT / NEXT ACTION:** `HOBBYRAUM.md`
+- **AKTUELLER BÜROSTAND + NEXT ACTION:** `CURRENT_STATE.md`
+- **TEMPORÄRE AUSFÜHRUNGSFLÄCHE:** `HOBBYRAUM.md` nur bei ausdrücklicher CURRENT-Bindung
 - **FEHLER:** `protocol/PROJECT_MEMORY/FEHLERREGISTER.md` → dort zur autoritativen Fehlerquelle
 - **ZIELVERTRAG:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/REGISTER.md` → dort zur Hauptquelle
 - **WARUM GEÄNDERT:** `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`
@@ -76,8 +76,8 @@ Pflichtreihenfolge:
 Direktes Betreten dieses Büros überspringt keine Campus-Leitungen.
 
 Vor jeder Änderung:
-1. `CURRENT_STATE.md`;
-2. `HOBBYRAUM.md`;
+1. `CURRENT_STATE.md` + Frischecheck + dessen NEXT ACTION;
+2. `HOBBYRAUM.md` nur bei ausdrücklich aktiver CURRENT-Bindung;
 3. `protocol/PROJECT_MEMORY/HANDLUNGSVERZEICHNIS.md`;
 4. relevante Einträge in `protocol/PROJECT_MEMORY/FEHLERREGISTER.md`;
 5. relevante Einträge in `protocol/PROJECT_MEMORY/AENDERUNGSREGISTER.md`;
