@@ -78,6 +78,7 @@ class BatchExportTests(unittest.TestCase):
     def test_identity_mismatch_blocks(self):
         i,docs=self.make_three()
         docs[1]["articles"][0]["title"]="Falscher Titel"
+        docs[1]["articles"][0]["slug"]=slug_from_title("Falscher Titel")
         with self.assertRaisesRegex(BatchBlocked,"BATCH_IDENTITY_MISMATCH"):
             combine(i,docs)
 
