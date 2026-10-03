@@ -1,0 +1,19 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "maximum_articles": 0,
+  "maximum_articles_per_type": 0,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "pferdehaftpflicht-beratung",
+      "plan_slot": "759950a74a337da2c8d8ece5783df3b7d2e0a4a043ec83bccfff55d9b5c5db2d",
+      "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+      "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+    }
+  ],
+  "batch_sha256": "ae3b6c461f6e8d847e2b67f30c35c06f85553462c7d41bbc86a78adc314e4620"
+}
