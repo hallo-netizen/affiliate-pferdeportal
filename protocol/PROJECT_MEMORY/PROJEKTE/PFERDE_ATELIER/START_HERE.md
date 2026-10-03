@@ -63,7 +63,7 @@ Der Gebäudeeingang selbst führt **keine zweite aktuelle Fachwahrheit**.
 Der Gebäudeeingang enthält keine temporären Chat-Zustände.
 
 Für jedes Büro gilt:
-`START_HERE.md` → `CURRENT_STATE.md` → `HOBBYRAUM.md` → gebundener Arbeitsweg.
+`START_HERE.md` → genau eine `CURRENT_STATE.md` → Frischecheck → genau deren NEXT ACTION. `HOBBYRAUM.md` nur bei ausdrücklich aktiver temporärer CURRENT-Bindung.
 
 Parallel arbeitende Chats/Worker werden ausschließlich im zuständigen Büro/Hobbyraum oder Paul-Eingang gebunden.
 
