@@ -102,6 +102,13 @@ class K0FullRuleChainTests(unittest.TestCase):
         with self.assertRaisesRegex(Blocked,'links.visible_exact'):
             verify_pre_lt68(p,cat)
 
+    def test_parent_and_related_links_must_be_in_main_body(self):
+        a=make_base()
+        a['bound_links'][0]['block']='intro'
+        p,cat=package_from_article(a)
+        with self.assertRaisesRegex(Blocked,'K0_RULE_CONTEXT_MAIN_LINK_DISTRIBUTION_INVALID'):
+            verify_pre_lt68(p,cat)
+
     def test_missing_required_list_blocks(self):
         a=make_base()
         a['html']=re.sub(r'(?is)<ul\b[^>]*data-list="key_answers"[^>]*>.*?</ul>','',a['html'])
