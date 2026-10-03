@@ -197,3 +197,32 @@ Grenzen / ausdrücklich NICHT bewiesen:
 Aktueller Status und genau eine NEXT ACTION ausschließlich aus
 `protocol/PROJECT_MEMORY/PROJEKTE/PFERDE_ATELIER/TEXT/CURRENT_STATE.md`.
 
+
+## DELTA 2026-10-03 – LIVE-EXPORTBUTTON ROOTCAUSE / 0.57.26.1 HOTFIX
+
+Realer WordPress-Screenshot widerlegt den früheren Satz, ein frischer COMPLETE-Seitenrender zeige in jedem Fall den Exportbutton.
+
+Frisch gegen die exakte 0.57.26-Basis geprüft:
+- `renderExistingCandidateOverview()` erhält nur `PSTE_Breadth_Research_Queue::peek()`;
+- das Exportformular `Titelkandidaten kompakt exportieren` wurde nur bei `existing_only && status === COMPLETE` gerendert;
+- der Exporthandler selbst (`exportTitleCandidates()`) liest die gespeicherten Kandidaten dagegen paginiert direkt aus dem Topic-Pool über `adminTopicPoolPage()` und benötigt diese Queue-Bedingung nicht;
+- daher konnte ein nicht mehr passender aktueller Queue-Snapshot den vorhandenen Exportzugang unsichtbar machen, obwohl die 695 Titelkandidaten gespeichert sind.
+
+KISS-Fix:
+`PSTE-0.57.26.1-EXPORT-BUTTON-VISIBILITY-HOTFIX.zip`
+SHA-256 `47a335482fa9a1f826b3cfd336a01dce9faf76ca3ea47f63652855b10dc1645f`.
+
+Delta ausschließlich:
+- Admin-UI: Exportformular im stabilen inaktiven Zustand unabhängig von `existing_only + COMPLETE` sichtbar;
+- Hauptdatei: Version 0.57.26.1.
+
+Lokale Evidence:
+- ZIP PASS;
+- PHP-Lint 79/79 PASS;
+- Export-Wiring PASS;
+- genau 2 Dateien geändert;
+- geschützte Storage-/Normalpfad-Dateien unverändert.
+
+Grenze:
+- noch kein WordPress-Live-Readback für 0.57.26.1;
+- 0.57.27 Produktwahl bleibt separater lokaler Kandidat und muss diesen UI-Fix vor einem späteren Release ebenfalls enthalten.
