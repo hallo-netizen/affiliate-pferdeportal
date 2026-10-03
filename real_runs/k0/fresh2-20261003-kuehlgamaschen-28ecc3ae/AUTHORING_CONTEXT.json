@@ -191,5 +191,6 @@
     "table_multiword_exceptions": [],
     "expected_list_name": "key_answers"
   },
-  "publish_allowed": false
+  "publish_allowed": false,
+  "serial_retry": 1
 }
