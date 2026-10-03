@@ -24,3 +24,4 @@
 "heading_intent_terms":["Kühlgamaschen","Kühlung","Pferdebein","Regeneration","Kryotherapie","Belastung"],"comparison_source_bindings":[],
 "table_decision":{"decision":"OMIT_NO_ADDED_VALUE","exception_code":"EXISTING_CHECKLIST_EQUIVALENT","rationale":"Die kompakte Liste trennt sinnvolle Anwendung, Grenzen und Warnzeichen bereits schneller als eine zusätzliche Matrix; eine Tabelle hätte keinen eigenen Kontrollwert."},
 "semantic_rule_results":{},"table_multiword_exceptions":[],"expected_list_name":"key_answers"},"publish_allowed":false}
+
