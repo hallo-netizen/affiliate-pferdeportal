@@ -4,7 +4,8 @@ import unittest
 from engine.wordpress_batch_export import combine, BatchBlocked
 from engine.k0_wordpress_export import slug_from_title
 
-def single(idx,title,keyword,category,article_type,plan_slot):
+def single(idx,title,keyword,category,article_type,article_id):
+    plan_slot=hashlib.sha256(("pserc-plan-slot-v2|"+article_id).encode()).hexdigest()
     body=f'<article class="ppm-generated ppm-type-{article_type.lower()}" data-article-type="{article_type}"><section data-block="intro"><p>Einleitung {idx}.</p></section><section data-block="conclusion"><h2>Fazit</h2><p>Fazit {idx}.</p></section></article>'
     return {
       "contract":"PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
@@ -12,7 +13,7 @@ def single(idx,title,keyword,category,article_type,plan_slot):
       "article_count":1,
       "publish_allowed":False,
       "articles":[{
-        "article_id":plan_slot,"plan_slot":plan_slot,"title":title,"slug":slug_from_title(title),
+        "article_id":article_id,"plan_slot":plan_slot,"title":title,"slug":slug_from_title(title),
         "target_keyword":keyword,"category":category,"article_type":article_type,"body":body
       }]
     }
@@ -33,9 +34,9 @@ def intake(rows):
 class BatchExportTests(unittest.TestCase):
     def make_three(self):
         specs=[
-          ("A?","A","faq-a","FAQ","1"*64),
-          ("B?","B","faq-b","FAQ","2"*64),
-          ("C?","C","faq-c","FAQ","3"*64),
+          ("A?","A","faq-a","FAQ","article:111111111111111111111111"),
+          ("B?","B","faq-b","FAQ","article:222222222222222222222222"),
+          ("C?","C","faq-c","FAQ","article:333333333333333333333333"),
         ]
         docs=[single(i,*x) for i,x in enumerate(specs)]
         rows=[{k:d["articles"][0][k] for k in ("article_type","category","plan_slot","target_keyword","title")} for d in docs]
@@ -47,14 +48,20 @@ class BatchExportTests(unittest.TestCase):
         self.assertEqual(out["contract"],"PFERDE_ATELIER_WORDPRESS_IMPORT_V1")
         self.assertEqual(out["article_count"],3)
         self.assertEqual([x["title"] for x in out["articles"]],["A?","B?","C?"])
-        self.assertTrue(all(x["article_id"]==x["plan_slot"] for x in out["articles"]))
+        self.assertTrue(all(hashlib.sha256(("pserc-plan-slot-v2|"+x["article_id"]).encode()).hexdigest()==x["plan_slot"] for x in out["articles"]))
         self.assertTrue(all(x["slug"]==slug_from_title(x["title"]) for x in out["articles"]))
         self.assertFalse(out["publish_allowed"])
 
-    def test_article_id_must_equal_plan_slot(self):
+    def test_article_id_must_bind_to_plan_slot(self):
         i,docs=self.make_three()
-        docs[0]["articles"][0]["article_id"]="f"*64
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_MUST_EQUAL_PLAN_SLOT"):
+        docs[0]["articles"][0]["article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_CANONICAL_PLAN_SLOT_MISMATCH"):
+            combine(i,docs)
+
+    def test_article_id_format_blocks(self):
+        i,docs=self.make_three()
+        docs[0]["articles"][0]["article_id"]=docs[0]["articles"][0]["plan_slot"]
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_INVALID"):
             combine(i,docs)
 
     def test_slug_mismatch_blocks(self):
