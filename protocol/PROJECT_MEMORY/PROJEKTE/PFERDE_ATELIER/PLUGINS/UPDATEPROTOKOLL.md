@@ -314,3 +314,36 @@ Grenze:
 
 **Bewusst keine PU-ID:** kein ausgeführtes WordPress-Update.
 
+
+
+## RELEASE-VORBEREITUNG 2026-10-03 – PSTE 0.57.28 / KEIN PU-EREIGNIS
+
+Kandidat:
+`PSTE-0.57.28-SUSTAINABLE-FAMILY-STRUCTURE-ROUTING-CANDIDATE.zip`
+
+SHA-256:
+`a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`
+
+Basis:
+PSTE 0.57.27 / `414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`.
+
+Zweck:
+- nachhaltige Reparatur des bestehenden Family-/Normalpfads für aktuelle und zukünftige Begriffe;
+- echte familienlose portalrelevante Begriffe als `STRUCTURE_GAP` statt unspezifischem Sandbox-Kreisverkehr markieren;
+- vorhandene Familiennähe/Mehrdeutigkeit weiterhin REVIEW;
+- Produktwahl-Fälle bis Downstream-Registrierung nicht-produzierend halten.
+
+Prüfung:
+- ZIP-Integrität PASS;
+- Fresh-Unpack PHP-Lint 81/81 PASS;
+- realer 694er Read-only-Replay: 320 STRUCTURE_GAP / 371 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING / 0 NORMAL_PASS;
+- 0 bestehende Family-MATCH-Regressionen;
+- 3 zusätzliche konservative Family-Matches;
+- Strukturrouter 6/6 Positiv/Negativ/Zukunft PASS;
+- Produktwahl 14/14 PASS;
+- 326er Realsample 0 Produktwahl-MATCH;
+- geschützte Repository-/Storage-/Admin-/Provider-/Titel-/Intentpfade gegenüber 0.57.27 unverändert.
+
+Grenze:
+Nicht live installiert. Keine PU-ID, keine Release-/Live-Freigabe, keine neue Provider-Recherche, kein Publish.
+
