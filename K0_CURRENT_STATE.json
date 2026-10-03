@@ -94,5 +94,7 @@
       "writer_bypass_allowed": false,
       "status": "PASS"
     }
-  }
+  },
+  "legacy_reference_policy": "FORBIDDEN_IN_ACTIVE_K0_STATUS_HANDOFF_AND_PRODUCTION",
+  "old_chat_or_archive_authority": false
 }
