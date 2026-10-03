@@ -3,12 +3,12 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "WORDPRESS_COMPACT_CANONICAL_ID_IMPORTER_SIMULATION_PASS_REAL_REIMPORT_PENDING",
+  "status": "WORDPRESS_SYSTEM4_COMPAT_EXPORT_RESTORED_REAL_REIMPORT_PENDING",
   "first_open_blocker": {
     "code": "REAL_WORDPRESS_REIMPORT_PENDING",
-    "detail": "Die beiden realen 0.28.30-Fehler sind reproduziert und ursächlich getrennt: article_id=plan_slot erzeugt CANONICAL_PLAN_SLOT_MISMATCH; fehlender slug erzeugt ARTICLE_FIELD_INVALID field=slug. K0 exportiert jetzt PFERDE_ATELIER_WORDPRESS_IMPORT_V1 mit echter canonical article:... ID, daraus gebundenem plan_slot und kanonischem Top-Level slug. Importer-Normalisierung PASS; realer WordPress-Wiederimport steht noch aus."
+    "detail": "Der reale 0.28.30-Importfehler PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH wurde auf die zwischenzeitlich falsche Compact/PFERDE-Ausgabe article_id=plan_slot zurückgeführt. K0 exportiert wieder SYSTEM4_WORDPRESS_HANDOFF_V1 mit kanonischer article:... ID aus PPM 6.7.9, SHA256-Roundtrip zum plan_slot, vollständig gebundenem production_plan_item/canonical_article und live aufgelöster WordPress-Kategorie. Rebuilt 3er und 16er sind strukturell PASS; realer WordPress-Wiederimport steht noch aus."
   },
-  "next_action": "REAL_WORDPRESS_REIMPORT_COMPACT_CANONICAL_ID_FIXED_FILE",
+  "next_action": "REAL_WORDPRESS_REIMPORT_REPAIRED_SYSTEM4_FILE",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -22,7 +22,7 @@
       "K0_PRODUCTION_GATES_AND_PPM_6_7_9",
       "LANGUAGETOOL_6_8",
       "CANONICAL_ARTICLE_ID_FROM_PPM679_REGISTRY",
-      "PFERDE_ATELIER_WORDPRESS_IMPORT_V1_PROVEN_K10_SCHEMA"
+      "SYSTEM4_WORDPRESS_HANDOFF_V1_K10_COMPAT_STRUCTURE"
     ],
     "direct_article_package_start_allowed": false,
     "writer_self_stamping_allowed": false,
@@ -56,39 +56,45 @@
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
-    "final_wordpress_batch_status": "PASS_K10_IMPORT_SCHEMA",
+    "final_wordpress_batch_status": "REBUILT_SYSTEM4_COMPAT_PENDING_REAL_IMPORT",
     "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json",
     "final_wordpress_batch_sha256": "7a5d33f8da04d48d0b93d1a30e35ca9c1ffc747a542c4657d2d2f289c0c93c67",
-    "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json"
+    "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json",
+    "repaired_system4_sha256": "32c0c86ba6800d9aa8ee86497a7db5b22357d13d789e80d9d372570a53da9cbb",
+    "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT"
   },
   "freshness": {
-    "validated_code_head_sha": "751847e32b04b57fd0e99d2de76faf56af90f095",
-    "last_checked_branch_head_sha": "e4f09044e836e2007cba042ff4149df134410964",
+    "validated_code_head_sha": "d44c589d94207b5f2dc990a34bae6391be8c78cc",
+    "last_checked_branch_head_sha": "d44c589d94207b5f2dc990a34bae6391be8c78cc",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37116040364,
-    "latest_k0_selftest_result": "SUCCESS_92_TESTS_PPM679_104_104_HARDLOCKS_PASS",
+    "latest_k0_selftest_run": 37116589022,
+    "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "COMPACT_CANONICAL_ARTICLE_ID_PLUS_TOPLEVEL_SLUG_IMPORTER_NORMALIZE_PASS; BOTH_REAL_FAILURES_REPRODUCED_NEGATIVE"
+    "delta_result": "SYSTEM4_K10_COMPAT_EXPORT_RESTORED; LIVE_CATEGORY_BINDING_REQUIRED; COMPACT_PFERDE_EXPORT_INVALIDATED; USER3_AND_REWRITE16_REBUILT"
   },
   "wordpress_export": {
-    "contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
-    "source": "K0_CANONICAL_WORKFLOW",
+    "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
     "plugin_version": "0.28.30",
     "plugin_build": "0.28.30-pste-v5-binding-safe",
-    "article_id_equals_plan_slot": true,
-    "slug_required": true,
-    "exact_article_fields": [
-      "article_id",
-      "article_type",
-      "body",
-      "category",
-      "plan_slot",
-      "slug",
-      "target_keyword",
-      "title"
+    "article_id_rule": "canonical article:[0-9a-f]{24} from PPM 6.7.9 registry",
+    "plan_slot_rule": "SHA256(\"pserc-plan-slot-v2|\" + article_id)",
+    "production_context_fields": [
+      "fact_pack",
+      "production_plan_item"
     ],
-    "internal_canonical_article_id_exported": false,
+    "production_plan_item_requires": [
+      "canonical_article_id",
+      "article_type",
+      "target_keyword",
+      "topic",
+      "canonical_article",
+      "quality_binding",
+      "runtime_order"
+    ],
+    "live_wordpress_category_binding_required": true,
+    "compact_pferde_import_contract_forbidden": true,
+    "article_id_equals_plan_slot_forbidden": true,
     "publish_allowed": false
   },
   "evidence_ref": "evidence/K0_CLOSEOUT_EVIDENCE_20261002.json",
@@ -114,30 +120,25 @@
   "legacy_reference_policy": "FORBIDDEN_IN_ACTIVE_K0_STATUS_HANDOFF_AND_PRODUCTION",
   "old_chat_or_archive_authority": false,
   "wordpress_import_contract": {
-    "contract": "PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
+    "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
     "plugin_version": "0.28.30",
     "plugin_build": "0.28.30-pste-v5-binding-safe",
-    "article_fields": [
-      "article_id",
-      "article_type",
-      "body",
-      "category",
-      "plan_slot",
-      "slug",
-      "target_keyword",
-      "title"
-    ],
     "article_id_rule": "canonical article:[0-9a-f]{24}",
     "plan_slot_rule": "SHA256(\"pserc-plan-slot-v2|\" + article_id)",
-    "slug_rule": "canonical slug_from_current_title required",
+    "nested_canonical_binding_required": true,
+    "live_wordpress_category_binding_required": true,
     "regression_proof": {
       "article_id_equals_plan_slot": "BLOCK: PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH",
-      "missing_slug": "BLOCK: PSERC_SYSTEM4_ARTICLE_FIELD_INVALID field=slug",
-      "wrong_canonical_id": "BLOCK: PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH",
-      "noncanonical_slug": "BLOCK: PSERC_SYSTEM4_POST_SLUG_NOT_CANONICAL",
-      "corrected_three_article_payload": "PASS: PSERC_SYSTEM4_PAYLOAD_VALID"
+      "missing_or_incomplete_system4_binding": "BLOCKED_BY_K0_EXPORT_VERIFY",
+      "canonical_id_slot_roundtrip": "PASS",
+      "exact_system4_structure_selftest": "PASS"
     },
-    "simulation_basis": "PSERC System4 importer normalizePayload path; real 0.28.30 errors match the same field extraction/order",
     "real_reimport_status": "PENDING"
+  },
+  "user3": {
+    "status": "REBUILT_SYSTEM4_COMPAT_PENDING_REAL_IMPORT",
+    "article_count": 3,
+    "repaired_system4_sha256": "e5469cadc6cdb120d736556baba4718119b56cdb702f06e1c778da991fb4f9ed",
+    "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT"
   }
 }
