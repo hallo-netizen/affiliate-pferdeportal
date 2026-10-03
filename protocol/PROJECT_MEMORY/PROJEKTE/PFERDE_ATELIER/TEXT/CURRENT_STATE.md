@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-03
-STATUS: PSTE 0.57.26 LIVE / 0.57.26.1 EXPORT-BUTTON-HOTFIX LOKAL GEPRÜFT / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695-TITEL-EXPORT NOCH NICHT VORLIEGEND
+STATUS: PSTE 0.57.26 LIVE / 0.57.27 PRODUKTWAHL-KANDIDAT LOKAL GEPRÜFT / 695-TITEL-EXPORT NOCH NICHT VORLIEGEND
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -25,35 +25,6 @@ Realer WordPress-Readback vom 02.10.2026:
 Der vollständige 695er Titelkandidaten-Export liegt in diesem Arbeitsstand weiterhin **nicht als auswertbare Datei vor**. Ohne diese Datei keine erfundene Vollklassifikation.
 
 
-## LIVE-UI-ROOTCAUSE 03.10.2026 / EXPORT-HOTFIX
-
-Realer WordPress-Screenshot vom 03.10.2026 zeigt unter `SEO Themenengine → Übersicht` bei stabilem Seitenrender:
-- `Vorhandenes Material in Titelkandidaten umwandeln` sichtbar;
-- **`Titelkandidaten kompakt exportieren` nicht sichtbar**.
-
-Der lokal frisch gegen die exakte 0.57.26-Basis geprüfte Code belegt den Rootcause:
-- der Exporthandler `pste_export_title_candidates` ist in 0.57.26 vorhanden und read-only;
-- die UI zeigt sein Formular aber nur, wenn **die aktuell von `PSTE_Breadth_Research_Queue::peek()` gelesene Queue zugleich `existing_only` und `COMPLETE` ist**;
-- die 695 gespeicherten Titelkandidaten selbst liegen dagegen im Topic-Pool und der Exporthandler liest sie unabhängig von dieser Queue-Bedingung;
-- damit ist die Export-Sichtbarkeit fälschlich an den aktuellen Queue-Snapshot gekoppelt.
-
-Lokaler KISS-Hotfix auf exakter Live-Basis 0.57.26:
-`PSTE-0.57.26.1-EXPORT-BUTTON-VISIBILITY-HOTFIX.zip`
-SHA-256:
-`47a335482fa9a1f826b3cfd336a01dce9faf76ca3ea47f63652855b10dc1645f`
-
-Delta gegen 0.57.26 ausschließlich:
-- `includes/class-pste-admin.php`: Exportformular im stabilen inaktiven Zustand nicht mehr an `existing_only + COMPLETE` koppeln;
-- `portal-seo-topic-engine.php`: Version 0.57.26.1.
-
-Frische lokale Prüfung:
-- ZIP PASS;
-- PHP-Lint **79/79 PASS**;
-- Export-Wiring vorhanden PASS;
-- exakt 2 geänderte Dateien;
-- Repository/Research Archive/Sandbox Store/Storage Maintenance/DB Guard/Storage Codec/Normal Metadata/Title Composer/Title Diversity/Title Pipeline/Intent Profile gegenüber 0.57.26 unverändert.
-
-0.57.26.1 ist **noch nicht live installiert** und erzeugt keine Produktionsfreigabe.
 
 ## BELASTBARER LOKALER DELTA-STAND – PSTE 0.57.27
 
@@ -101,13 +72,13 @@ Die 695 real erzeugten Titelkandidaten sind noch nicht als Datei im aktuellen Ar
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_057261_EXPORT_VISIBILITY_HOTFIX_THEN_EXPORT_695`
+`EXPORT_LIVE_05726_FULL_TOPIC_MAP_AND_EXTRACT_695`
 
-1. Den lokal geprüften Live-Basis-Hotfix `PSTE-0.57.26.1-EXPORT-BUTTON-VISIBILITY-HOTFIX.zip` in WordPress installieren/aktualisieren.
-2. Danach exakt `SEO Themenengine → Übersicht` öffnen.
-3. **`Titelkandidaten kompakt exportieren`** ausführen.
-4. Die erzeugte JSON-Datei dem Arbeitschat geben.
-5. Danach ausschließlich den 695er Bestand fachlich/dedupliziert weiterverarbeiten; 0.57.27-Produktwahlregel als geprüften lokalen Delta-Stand übernehmen.
+1. WordPress → **SEO Themenengine** → **Einstellungen**.
+2. Im Abschnitt **„Longtails recherchieren, Titel bilden und Kategorien zuordnen“** auf **„Gesamte Themenkarte exportieren“** klicken.
+3. Die erzeugte Datei `pste-global-seo-topic-map-…-utc.json` dem Arbeitschat geben.
+4. Daraus exakt die vorhandenen Titelkandidaten mit `title_candidate_evidence.contract = PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1` extrahieren; `editorial_title` ist der Titel.
+5. Danach ausschließlich diesen Bestand fachlich/dedupliziert weiterverarbeiten; 0.57.27-Produktwahlregel als geprüften lokalen Delta-Stand übernehmen.
 6. **Keine neue DataForSEO-/Provider-Recherche vorher.**
 
 ## NICHT ANFASSEN
