@@ -1,0 +1,9 @@
+HD-001 / AFFILIATE-PORTAL KATEGORIE-WORKFLOW V1.9.4
+ROLE: EXPECTED SOURCE IDENTITY ONLY
+STATUS: SOURCE_BYTES_NOT_PRESENT_IN_THIS_ORIGINAL_DIRECTORY
+EXPECTED_SHA256: 12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01
+RECORDED: 2026-10-03
+
+Wichtig:
+Diese Datei ist KEINE Source und KEIN Ersatz für die Source-Bytes.
+Ein technischer Nachfolgekandidat darf erst gebaut werden, wenn die echten V1.9.4-Source-Bytes vorliegen und exakt gegen diesen SHA-256 geprüft wurden.
