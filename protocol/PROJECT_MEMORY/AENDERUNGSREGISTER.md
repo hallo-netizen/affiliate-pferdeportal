@@ -2240,3 +2240,26 @@ TEXT-Hobbyraum erklärte bereits selbst, keine Current-/NEXT-ACTION-Autorität z
 REGEL:
 START_HERE navigiert. CURRENT_STATE trägt aktuellen Stand, ersten Blocker und genau eine NEXT ACTION. HOBBYRAUM nur bei ausdrücklich aktiver temporärer Arbeitsbindung; keine zweite dynamische Wahrheit.
 
+
+
+## PSTE-REUSE-003 – Familien-No-Match wird nachhaltig als Review oder Strukturentscheidung getrennt
+
+STAND:
+2026-10-03.
+
+WAS:
+Der bestehende PSTE-Normalpfad erhält keine zweite Zuordnungsmaschine, sondern eine eng begrenzte Reparatur seiner Familien-/Strukturgrenze:
+- sichere deutsche Flexionsvarianten dürfen dieselbe vorhandene Familie treffen;
+- echte Family-V2-NO_MATCH-Fälle ohne sinnvolle bestehende Nachbarfamilie werden nach bewiesener Portalrelevanz als `STRUCTURE_GAP` markiert;
+- vorhandene Nähe/Mehrdeutigkeit bleibt REVIEW;
+- keine Familie/Kategorie wird automatisch erzeugt.
+
+WARUM:
+Der reale 694er Replay zeigte, dass ein großer Teil vorhandener Evidenz nicht wegen fehlender Titel, sondern an der Familiengrenze in einem generischen Sandbox-Zustand hängenblieb. Eine manuelle Einmalliste für 364 aktuelle Fälle hätte zukünftige Begriffe nicht gelöst und den Zielvertrag nicht nachhaltig erfüllt.
+
+REGEL:
+Neue oder zukünftige Begriffe benutzen denselben bestehenden Normalpfad. `STRUCTURE_GAP` ist niemals Produktions-PASS; nach einer echten Strukturentscheidung ist normaler Reentry verpflichtend. Dubletten-/Kannibalisierungs-/Typ-/Kategorie-/Plan-/PSERC-/Publish-Gates bleiben unverändert.
+
+KANDIDAT:
+PSTE 0.57.28 / SHA-256 `a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`.
+
