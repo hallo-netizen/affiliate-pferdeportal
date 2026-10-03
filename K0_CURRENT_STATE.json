@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "RENDERING_REGRESSION_FIX_MERGED_HARDLOCK_PASS_LOCAL_RETEST_AND_TEST_ARTICLE_PENDING",
-  "first_open_blocker": "LOCAL_HARD_POSITIVE_NEGATIVE_RENDERING_RETEST_AND_FRESH_TEST_ARTICLE_HTML_PREVIEW_PENDING",
-  "next_action": "RUN_HARD_LOCAL_NEGATIVE_POSITIVE_RENDERING_AND_LINK_TEST_THEN_FRESH_K0_TEST_ARTICLE_WITH_HTML_PREVIEW",
+  "status": "RENDERING_HARD_LOCAL_RETEST_PASS_HTML_PREVIEW_READY",
+  "first_open_blocker": "LIVE_WORDPRESS_AFTER_FIX_NOT_RUN",
+  "next_action": "AFTER_USER_HTML_REVIEW_RUN_LIVE_WORDPRESS_TEST_ARTICLE_READBACK",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -251,7 +251,7 @@
     ]
   },
   "rendering_spacing": {
-    "status": "REGRESSION_FIX_MERGED_HARDLOCK_PASS_LOCAL_RETEST_PENDING",
+    "status": "REGRESSION_FIX_MERGED_HARDLOCK_AND_FRESH_LOCAL_RETEST_PASS",
     "symptom": "LARGE_VERTICAL_GAPS_ABOVE_H2_IN_WORDPRESS_SINGLE_POST_PREVIEW",
     "article_html_extra_blank_paragraphs_before_h2": "NOT_OBSERVED",
     "article_html_extra_br_before_h2": "NOT_OBSERVED",
@@ -280,8 +280,18 @@
     ],
     "hardlock_run": 37149795336,
     "hardlock_result": "SUCCESS",
-    "fresh_local_retest_after_cfe238c": "PENDING",
-    "fresh_test_article_html_preview_after_cfe238c": "PENDING"
+    "fresh_local_retest_after_cfe238c": "PASS",
+    "fresh_test_article_html_preview_after_cfe238c": "PASS_LOCAL_HTML_PREVIEW_USING_LATEST_VERIFIED_K0_KUEHLGAMASCHEN_OUTPUT",
+    "fresh_local_retest_metrics": {
+      "ordinary_h2_above_px": 32,
+      "ordinary_h2_below_px": 32,
+      "fazit_gap_amplification": "NOT_OBSERVED",
+      "source_trace_layout": "HIDDEN",
+      "positive_exact_3_links": "PASS",
+      "negative_missing_semantic_link": "BLOCK_AS_REQUIRED"
+    },
+    "local_preview_article_title": "Sind Kühlgamaschen für Pferde sinnvoll?",
+    "local_preview_note": "Preview uses latest verified K0 article HTML with merged cfe238c rendering CSS; this is not a new writer run."
   },
   "latest_user_batch": {
     "input_batch_sha256": "70423281b69b3cfa28413ab2a7dcfa8a25cde4e5a526ee787cbbd79a317d471e",
