@@ -20,10 +20,11 @@ def single(idx,title,keyword,category,article_type,article_id):
       "test_suite_status":"PASS",
       "wordpress_review":{"direct_wordpress_upload_ready":True},
       "articles":[{
-        "index":0,"article_id":article_id,"title":title,"target_keyword":keyword,
+        "index":0,"title":title,"target_keyword":keyword,
         "category":category,"article_type":article_type,"plan_slot":ps,
         "final_draft_sha256":hashlib.sha256(body.encode()).hexdigest(),
-        "revision_count":1,"body":body,"production_context":{},
+        "revision_count":1,"body":body,
+        "production_context":{"production_plan_item":{"canonical_article_id":article_id}},
         "languagetool":{"status":"PASS","finding_count":0},
         "ppm679":{"status":"PASS"}
       }]
@@ -61,10 +62,16 @@ class BatchExportTests(unittest.TestCase):
         self.assertTrue(all(x["body"].startswith('<article class="ppm-generated ppm-type-faq"') for x in out["articles"]))
         self.assertFalse(out["publish_allowed"])
 
-    def test_wrong_article_id_slot_binding_blocks(self):
+    def test_wrong_canonical_article_id_slot_binding_blocks(self):
         i,docs=self.make_three()
-        docs[0]["articles"][0]["article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_PLAN_SLOT_MISMATCH"):
+        docs[0]["articles"][0]["production_context"]["production_plan_item"]["canonical_article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH"):
+            combine(i,docs)
+
+    def test_top_level_article_id_is_blocked(self):
+        i,docs=self.make_three()
+        docs[0]["articles"][0]["article_id"]="article:111111111111111111111111"
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_TOPLEVEL_ARTICLE_ID_FORBIDDEN"):
             combine(i,docs)
 
     def test_bare_article_html_blocks(self):
