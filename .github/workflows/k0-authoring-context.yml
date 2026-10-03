@@ -52,6 +52,20 @@ jobs:
           print('K0_AUTHORING_PORTAL_PASS')
           PY
 
+      - name: Hard fresh-research reuse gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_research_freshness_guard "$RUN_DIR/AUTHORING_CONTEXT.json" /tmp/k0-research-freshness.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-research-freshness.json'))
+          assert x['status']=='PASS',x
+          assert x['historical_fact_pack_reuse'] is False,x
+          assert x['historical_research_packet_reuse'] is False,x
+          print('K0_FRESH_RESEARCH_REUSE_GUARD_PASS')
+          PY
+
       - name: Bind unique run instance and prepare canonical writer job
         shell: bash
         run: |
@@ -62,6 +76,7 @@ jobs:
           p=pathlib.Path(rd)/'AUTHORING_CONTEXT.json'
           x=json.loads(p.read_text())
           x['run_instance_id']='run:'+hashlib.sha256(rd.encode()).hexdigest()[:24]
+          x['research_freshness_receipt']=json.load(open('/tmp/k0-research-freshness.json'))
           pathlib.Path('/tmp/K0_AUTHORING_CONTEXT_BOUND.json').write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
           print(x['run_instance_id'])
           PY
@@ -86,6 +101,7 @@ jobs:
           assert j['input_isolation']['status']=='PASS',j
           assert j['input_isolation']['historical_article_content_allowed'] is False,j
           assert j['input_isolation']['historical_fact_pack_allowed'] is False,j
+          assert j['input_isolation']['research_freshness_receipt_sha256'],j
           print('K0_WRITER_ALL_RULES_AND_FRESH_INPUT_ISOLATION_BOUND')
           PY
 
