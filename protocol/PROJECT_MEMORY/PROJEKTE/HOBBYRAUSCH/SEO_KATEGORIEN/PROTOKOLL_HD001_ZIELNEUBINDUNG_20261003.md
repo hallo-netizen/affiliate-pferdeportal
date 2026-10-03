@@ -74,3 +74,39 @@ Technische Weiterentwicklung ist jetzt sauber gebunden, aber noch durch die fehl
 ## NEXT
 
 Exakte V1.9.4-Source-Bytes beschaffen/binden → SHA-256 gegen `12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01` prüfen → erst danach Nachfolgekandidat bauen.
+
+
+## Abschlussprüfung
+
+Die oben beschriebene Autoritäts-/Zielneubindung wurde nach dem Schreiben frisch zurückgelesen.
+
+Positiv:
+- Campus-Branch → Autoritätsplan → HOBBYRAUSCH_SEO_KATEGORIEN → genau eine Current: PASS;
+- neuer Zielvertrag aktiv und aus Current gebunden: PASS;
+- DataForSEO-Rolle für sichtbare Namen + Parent-/Child-Hierarchie: PASS;
+- Frontend-Publish/Navigation/Readback im Zielvertrag: PASS;
+- V1.9.4-Livebasis bleibt erhalten: PASS;
+- Source-Blocker ist eindeutig und hashgebunden: PASS.
+
+Negativ:
+- Hobbyraum ist keine zweite Current: PASS;
+- kein erfundener V1.9.5-/Nachfolgekandidat: PASS;
+- alte TEXT_REDAKTION-Projektroute ist nicht mehr aktive Projektleitungsroute: PASS;
+- Zielvertrag ist genau einmal im Register eingetragen: PASS;
+- Hashnotiz wird nicht als Source-Bytes ausgegeben: PASS.
+
+Wichtig:
+Diese Tests nehmen ausschließlich die Autoritäts-/Zielneubindung ab.
+Die geforderte technische Positiv-/Negativ-E2E-Simulation des neuen Gesamtwegs ist ausdrücklich noch OFFEN und kann erst nach Bindung der echten V1.9.4-Source und Bau eines Kandidaten erfolgen.
+
+PROTOKOLLCHECK
+FEHLER: PASS
+PROTOKOLL: PASS
+WARUM: PASS
+CURRENT_AUTORITAET: PASS
+HOBBYRAUM_EXECUTION: NICHT_BETROFFEN
+ZIELVERTRAG: PASS
+ARCHIV: NICHT_BETROFFEN
+EINE_WAHRHEIT: PASS
+TESTS: PASS
+TECHNISCHE_CHECKS: PASS
