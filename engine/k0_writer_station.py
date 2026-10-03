@@ -5,6 +5,7 @@ from pathlib import Path
 from .k0_portal_resolver import validate_intake
 from .writer_contract_guard import POLICY, inspect_html, stable, sha_text, verify_package
 from .k0_product_property_research import ARTICLE_TYPE as PROPERTY_WINNER_TYPE, validate_packet as validate_property_packet, Blocked as PropertyResearchBlocked
+from .k0_full_rules import writer_rule_bundle, validate_rule_context, rule_binding
 
 JOB_CONTRACT='K0_WRITER_JOB_V1'
 DRAFT_CONTRACT='K0_WRITER_DRAFT_V1'
@@ -47,6 +48,12 @@ def _job_core(intake, portal, ctx):
     pc=ctx.get('production_context')
     if not isinstance(pc,dict) or not isinstance(pc.get('fact_pack'),dict) or not isinstance(pc.get('production_plan_item'),dict):
         raise Blocked('K0_AUTHORING_CONTEXT_RESEARCH_MISSING')
+    try:
+        rule_context=validate_rule_context(ctx.get('rule_context'),ident)
+        full_rule_bundle=writer_rule_bundle(ident.get('article_type'))
+        full_rule_binding=rule_binding(full_rule_bundle)
+    except Exception as exc:
+        raise Blocked('K0_AUTHORING_FULL_RULE_CONTEXT_INVALID:'+str(exc)) from exc
     if ident.get('article_type')==PROPERTY_WINNER_TYPE:
         try:
             property_result=validate_property_packet(ident,pc.get('property_research'))
@@ -62,6 +69,9 @@ def _job_core(intake, portal, ctx):
       'run_instance_id':run_instance_id,
       'content_profile':cp,
       'production_context':pc,
+      'rule_context':rule_context,
+      'writer_rule_bundle':full_rule_bundle,
+      'writer_rule_binding':full_rule_binding,
       'writer_policy':POLICY,
       'writer_policy_sha256':stable(POLICY),
       'publish_allowed':False,
@@ -86,6 +96,15 @@ def seal(job, draft):
         raise Blocked('K0_WRITER_JOB_HASH_INVALID')
     if job.get('writer_policy_sha256')!=stable(POLICY) or job.get('writer_policy')!=POLICY:
         raise Blocked('K0_WRITER_POLICY_DRIFT')
+    try:
+        current_bundle=writer_rule_bundle(job.get('identity',{}).get('article_type'))
+        current_binding=rule_binding(current_bundle)
+    except Exception as exc:
+        raise Blocked('K0_WRITER_FULL_RULE_BUNDLE_INVALID:'+str(exc)) from exc
+    if job.get('writer_rule_bundle')!=current_bundle or job.get('writer_rule_binding')!=current_binding:
+        raise Blocked('K0_WRITER_FULL_RULE_BUNDLE_DRIFT')
+    if validate_rule_context(job.get('rule_context'),job.get('identity') or {})!=job.get('rule_context'):
+        raise Blocked('K0_WRITER_RULE_CONTEXT_DRIFT')
 
     allowed={'contract','job_id','title','content_html','table_decision','lt_authoritative_terms','revision_count','publish_allowed'}
     if set(draft)-allowed:
@@ -103,6 +122,8 @@ def seal(job, draft):
     table=draft.get('table_decision')
     if not isinstance(table,dict):
         raise Blocked('K0_WRITER_DRAFT_TABLE_DECISION_MISSING')
+    if table!=job.get('rule_context',{}).get('table_decision'):
+        raise Blocked('K0_WRITER_DRAFT_TABLE_DECISION_NOT_PREBOUND')
     terms=draft.get('lt_authoritative_terms')
     if not isinstance(terms,list):
         raise Blocked('K0_WRITER_DRAFT_LT_TERMS_INVALID')
@@ -118,6 +139,10 @@ def seal(job, draft):
       'visible_text_sha256':sha_text(_plain_for_seal(body)),
       'section_structure_sha256':stable(metrics['normal_h2_sections']),
       'policy_sha256':metrics['policy_sha256'],
+      'full_rule_bundle_sha256':job['writer_rule_binding']['bundle_sha256'],
+      'full_rule_catalog_sha256':job['writer_rule_binding']['catalog_sha256'],
+      'full_rule_values_sha256':job['writer_rule_binding']['rule_values_sha256'],
+      'full_rule_hard_count':job['writer_rule_binding']['article_hard_rule_count'],
       'total_words':metrics['total_words'],
       'conclusion_ratio':round(metrics['conclusion_ratio'],6),
       'section_balance_status':'PASS',
@@ -132,6 +157,8 @@ def seal(job, draft):
       'html':body,
       'final_draft_sha256':sha_text(body),
       'content_profile':job['content_profile'],
+      'rule_context':job['rule_context'],
+      'writer_rule_binding':job['writer_rule_binding'],
       'table_decision':table,
       'lt_authoritative_terms':terms,
       'production_context':job['production_context'],
@@ -162,11 +189,17 @@ def verify(job, package):
         raise Blocked('K0_WRITER_PACKAGE_INTENT_MISMATCH')
     if package.get('production_context')!=job.get('production_context'):
         raise Blocked('K0_WRITER_PACKAGE_CONTEXT_MISMATCH')
+    if package.get('rule_context')!=job.get('rule_context'):
+        raise Blocked('K0_WRITER_PACKAGE_RULE_CONTEXT_MISMATCH')
+    if package.get('writer_rule_binding')!=job.get('writer_rule_binding'):
+        raise Blocked('K0_WRITER_PACKAGE_FULL_RULE_BINDING_MISMATCH')
     prov=package.get('writer_provenance') or {}
     if prov.get('job_id')!=job.get('job_id') or prov.get('job_sha256')!=job.get('job_sha256'):
         raise Blocked('K0_WRITER_PACKAGE_JOB_BINDING_INVALID')
     if prov.get('identity_sha256')!=stable(job['identity']):
         raise Blocked('K0_WRITER_PACKAGE_IDENTITY_HASH_INVALID')
+    if prov.get('full_rule_bundle_sha256')!=job['writer_rule_binding']['bundle_sha256'] or prov.get('full_rule_hard_count')!=job['writer_rule_binding']['article_hard_rule_count']:
+        raise Blocked('K0_WRITER_PACKAGE_FULL_RULE_PROVENANCE_INVALID')
     metrics=verify_package(package)
     return {
       'contract':'K0_WRITER_SEAL_VERIFY_V1',
