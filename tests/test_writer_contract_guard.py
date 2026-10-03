@@ -65,7 +65,7 @@ def draft(job, body=None):
       'job_id':job['job_id'],
       'title':job['identity']['title'],
       'content_html':body or good_html(),
-      'table_decision':{'decision':'INCLUDE_ADDED_VALUE','exception_code':None,'rationale':'Test'},
+      'table_decision':job['rule_context']['table_decision'],
       'lt_authoritative_terms':[],
       'revision_count':1,
       'publish_allowed':False
