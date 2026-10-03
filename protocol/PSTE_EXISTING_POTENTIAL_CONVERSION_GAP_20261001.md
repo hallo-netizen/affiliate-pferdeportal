@@ -211,3 +211,35 @@ Der bereits vorhandene vollständige Exportweg ist in PSTE 0.57.26 belegt:
 und nichtleerem `editorial_title` herausziehen.
 
 Kein Plugin-Update erforderlich. Keine neue Recherche erforderlich.
+
+
+## DELTA 2026-10-03 – 694ER FRISCHER NORMALPFAD-REPLAY / ZIELVERTRAGSPRÜFUNG
+
+Basis:
+- realer Export `pste-global-seo-topic-map-20261003-194321-utc.json`;
+- PSTE 0.57.26;
+- 695 Titelkandidaten, nach exakter Titel-Deduplizierung 694;
+- exakt vorhandener `PSTE_Normal_Metadata_Path::applyToPayload()`;
+- lokaler read-only Replay mit Export-`site_baseline`;
+- Provider-Aufrufe 0, Writes 0.
+
+Frisches Ergebnis:
+- `NORMAL_PASS`: **0/694**;
+- `SANDBOX_REQUIRED`: **694/694**;
+- Portalrelevanz nicht bewiesen: **146**;
+- Portalrelevanz bewiesen, Familienzuordnung nicht bewiesen: **364**;
+- Editorial-Topic-Normalisierung nicht PASS: **172**;
+- Typ-/Intent-/Dual-Strand-Block: **11**.
+
+Dubletten:
+- 1 exakt gleicher Titel wurde bereits technisch zusammengeführt (695 → 694);
+- zusätzlich 6 Kollisionsgruppen mit identischem bestehendem `semantic_fingerprint`;
+- keine davon automatisch semantisch gemergt, weil Dubletten-/Kannibalisierungs-Gates erhalten bleiben.
+
+Zielvertragsfolgerung:
+Die frühere Arbeitshypothese „694 jetzt manuell semantisch deduplizieren und Beitragsarten verteilen“ darf **nicht** als Ersatzweg verwendet werden. `ZV-PSTE-THEMENVERWERTUNG-001` verlangt ausdrücklich den bestehenden Normal-Metadata-Pfad zu nutzen/reparieren statt einen neuen Keyword→Titel/Typ/Kategorie-Mechanismus daneben zu bauen.
+
+Erster frischer interner Block:
+`PSTE_PORTAL_RELEVANCE_PROVEN_FAMILY_ASSIGNMENT_NOT_PROVEN` bei **364** Kandidaten.
+
+Aktueller Status/NEXT ACTION ausschließlich in TEXT/CURRENT_STATE.md.
