@@ -2,31 +2,18 @@ import hashlib
 import unittest
 
 from engine.wordpress_batch_export import combine, BatchBlocked
+from engine.k0_wordpress_export import slug_from_title
 
-def slot(article_id):
-    return hashlib.sha256(("pserc-plan-slot-v2|"+article_id).encode()).hexdigest()
-
-def single(idx,title,keyword,category,article_type,article_id):
-    ps=slot(article_id)
+def single(idx,title,keyword,category,article_type,plan_slot):
     body=f'<article class="ppm-generated ppm-type-{article_type.lower()}" data-article-type="{article_type}"><section data-block="intro"><p>Einleitung {idx}.</p></section><section data-block="conclusion"><h2>Fazit</h2><p>Fazit {idx}.</p></section></article>'
     return {
-      "contract":"SYSTEM4_WORDPRESS_HANDOFF_V1",
-      "batch_sha256":"a"*64,
+      "contract":"PFERDE_ATELIER_WORDPRESS_IMPORT_V1",
+      "source":"K0_CANONICAL_WORKFLOW",
       "article_count":1,
       "publish_allowed":False,
-      "signing_deferred":True,
-      "batch_gate_status":"SYSTEM4_BATCH_FULL_PASS_COLLECTED",
-      "no_legacy_status":"PASS",
-      "test_suite_status":"PASS",
-      "wordpress_review":{"direct_wordpress_upload_ready":True},
       "articles":[{
-        "index":0,"article_id":article_id,"title":title,"target_keyword":keyword,
-        "category":category,"article_type":article_type,"plan_slot":ps,
-        "final_draft_sha256":hashlib.sha256(body.encode()).hexdigest(),
-        "revision_count":1,"body":body,
-        "production_context":{"production_plan_item":{"canonical_article_id":article_id}},
-        "languagetool":{"status":"PASS","finding_count":0},
-        "ppm679":{"status":"PASS"}
+        "article_id":plan_slot,"plan_slot":plan_slot,"title":title,"slug":slug_from_title(title),
+        "target_keyword":keyword,"category":category,"article_type":article_type,"body":body
       }]
     }
 
@@ -46,9 +33,9 @@ def intake(rows):
 class BatchExportTests(unittest.TestCase):
     def make_three(self):
         specs=[
-          ("A?","A","faq-a","FAQ","article:111111111111111111111111"),
-          ("B?","B","faq-b","FAQ","article:222222222222222222222222"),
-          ("C?","C","faq-c","FAQ","article:333333333333333333333333"),
+          ("A?","A","faq-a","FAQ","1"*64),
+          ("B?","B","faq-b","FAQ","2"*64),
+          ("C?","C","faq-c","FAQ","3"*64),
         ]
         docs=[single(i,*x) for i,x in enumerate(specs)]
         rows=[{k:d["articles"][0][k] for k in ("article_type","category","plan_slot","target_keyword","title")} for d in docs]
@@ -57,40 +44,29 @@ class BatchExportTests(unittest.TestCase):
     def test_positive_three_article_batch_preserves_input_order(self):
         i,docs=self.make_three()
         out=combine(i,[docs[2],docs[0],docs[1]])
+        self.assertEqual(out["contract"],"PFERDE_ATELIER_WORDPRESS_IMPORT_V1")
         self.assertEqual(out["article_count"],3)
         self.assertEqual([x["title"] for x in out["articles"]],["A?","B?","C?"])
-        self.assertTrue(all(x["body"].startswith('<article class="ppm-generated ppm-type-faq"') for x in out["articles"]))
+        self.assertTrue(all(x["article_id"]==x["plan_slot"] for x in out["articles"]))
+        self.assertTrue(all(x["slug"]==slug_from_title(x["title"]) for x in out["articles"]))
         self.assertFalse(out["publish_allowed"])
 
-    def test_wrong_canonical_article_id_slot_binding_blocks(self):
+    def test_article_id_must_equal_plan_slot(self):
         i,docs=self.make_three()
-        docs[0]["articles"][0]["production_context"]["production_plan_item"]["canonical_article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_BINDING_MISMATCH"):
+        docs[0]["articles"][0]["article_id"]="f"*64
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_MUST_EQUAL_PLAN_SLOT"):
             combine(i,docs)
 
-    def test_only_top_level_article_id_blocks(self):
+    def test_slug_mismatch_blocks(self):
         i,docs=self.make_three()
-        docs[0]["articles"][0]["production_context"]["production_plan_item"].pop("canonical_article_id")
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_CANONICAL_ARTICLE_ID_MISSING"):
-            combine(i,docs)
-
-    def test_only_nested_article_id_blocks(self):
-        i,docs=self.make_three()
-        docs[0]["articles"][0].pop("article_id")
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_FIELDS_INVALID"):
-            combine(i,docs)
-
-    def test_mismatched_dual_article_id_blocks(self):
-        i,docs=self.make_three()
-        docs[0]["articles"][0]["production_context"]["production_plan_item"]["canonical_article_id"]="article:aaaaaaaaaaaaaaaaaaaaaaaa"
-        with self.assertRaisesRegex(BatchBlocked,"SINGLE_ARTICLE_ID_BINDING_MISMATCH"):
+        docs[0]["articles"][0]["slug"]="falsch"
+        with self.assertRaisesRegex(BatchBlocked,"SINGLE_SLUG_MISMATCH"):
             combine(i,docs)
 
     def test_bare_article_html_blocks(self):
         i,docs=self.make_three()
         row=docs[0]["articles"][0]
         row["body"]=row["body"].replace('<article class="ppm-generated ppm-type-faq" data-article-type="FAQ">','<article>')
-        row["final_draft_sha256"]=hashlib.sha256(row["body"].encode()).hexdigest()
         with self.assertRaisesRegex(BatchBlocked,"SINGLE_HTML_INVALID"):
             combine(i,docs)
 
