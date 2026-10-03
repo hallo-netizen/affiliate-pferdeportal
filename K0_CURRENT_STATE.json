@@ -64,12 +64,12 @@
     "full_rule_recheck_status": "NOT_RUN"
   },
   "freshness": {
-    "validated_code_head_sha": "ecaf82dfef940c8a050c7c139afcd289cd6f8a9d",
-    "last_checked_branch_head_sha": "ecaf82dfef940c8a050c7c139afcd289cd6f8a9d",
+    "validated_code_head_sha": "25c7a59de87f4863e133e8b94ed3fff5c97fb4da",
+    "last_checked_branch_head_sha": "25c7a59de87f4863e133e8b94ed3fff5c97fb4da",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37120426101,
-    "latest_k0_selftest_result": "SUCCESS",
+    "latest_k0_selftest_run": 37120568587,
+    "latest_k0_selftest_result": "SUCCESS_93_TESTS",
     "ppm679_parity": "PASS",
     "delta_result": "FULL_RULE_BUNDLE_BEFORE_WRITER; 84_PRE_LT68_PLUS_LT68_EQUALS_85_FINAL_HARD_RULES; LINKS_LISTS_POST_TABLE_SUMMARY_NEGATIVES_BLOCK; WORDPRESS_EXPORT_REQUIRES_FULL_RULE_FINAL_PASS"
   },
@@ -164,7 +164,7 @@
       "missing_post_table_summary": "BLOCK",
       "valid_complete_article": "PASS"
     },
-    "selftest_run": 37120375651,
+    "selftest_run": 37120568587,
     "selftest_result": "SUCCESS_93_TESTS",
     "ppm679_parity": "PASS_104_104",
     "hardlocks": "PASS"
