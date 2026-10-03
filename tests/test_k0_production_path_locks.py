@@ -94,7 +94,7 @@ class ProductionPathLocks(unittest.TestCase):
         job['identity']['title']='Manipulierter Titel'
         draft={
             'contract':'K0_WRITER_DRAFT_V1','job_id':job['job_id'],'title':'Manipulierter Titel',
-            'content_html':body(),'table_decision':{'decision':'EXCLUDE','exception_code':'NUANCE_LOSS','rationale':'Test'},
+            'content_html':body(),'table_decision':job['rule_context']['table_decision'],
             'lt_authoritative_terms':[],'revision_count':1,'publish_allowed':False
         }
         with self.assertRaisesRegex(WriterBlocked,'JOB_HASH_INVALID'):
