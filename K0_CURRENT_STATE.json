@@ -3,7 +3,7 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FULL_RULE_CHAIN_AND_FRESH_CHAT_ROUTER_FIXED_READY_FOR_FRESH_TEST_ARTICLES",
+  "status": "FULL_RULE_CHAIN_AND_SILENT_FRESH_CHAT_START_FIXED_READY_FOR_FRESH_TEST_ARTICLES",
   "first_open_blocker": null,
   "next_action": "RUN_FRESH_FICTIONAL_TEST_ARTICLES_THROUGH_K0_START",
   "work_binding": {
@@ -66,12 +66,12 @@
     "full_rule_recheck_status": "NOT_RUN"
   },
   "freshness": {
-    "validated_code_head_sha": "719dba9edb29b51596f3c5074fce0c08426ef548",
-    "last_checked_branch_head_sha": "719dba9edb29b51596f3c5074fce0c08426ef548",
+    "validated_code_head_sha": "02d222e7a9c24d2151f08093f0196878104549f5",
+    "last_checked_branch_head_sha": "02d222e7a9c24d2151f08093f0196878104549f5",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37129604410,
-    "latest_k0_selftest_result": "SUCCESS_WITH_MAIN_FRESH_CHAT_ROUTER_HARDLOCK",
+    "latest_k0_selftest_run": 37129907068,
+    "latest_k0_selftest_result": "SUCCESS_SILENT_START_HARDLOCK",
     "ppm679_parity": "PASS",
     "delta_result": "FULL_RULE_BUNDLE_BEFORE_WRITER; LINKS_LISTS_POST_TABLE_SUMMARY_NEGATIVES_BLOCK; WORDPRESS_EXPORT_REQUIRES_FULL_RULE_FINAL_PASS; MAIN_K0_START_ROUTER_HARDLOCK_PASS"
   },
@@ -185,5 +185,22 @@
     "fail_closed_on_missing_router": true,
     "alternate_route_allowed": false,
     "alternate_or_historical_fallback": "FORBIDDEN"
+  },
+  "silent_start": {
+    "status": "PASS",
+    "command": "K0:start",
+    "visible_preamble_allowed": false,
+    "visible_status_allowed": false,
+    "visible_process_description_allowed": false,
+    "visible_routing_explanation_allowed": false,
+    "visible_intermediate_messages_allowed": false,
+    "first_visible_output": [
+      "FINAL_VERIFIED_WORDPRESS_FILE",
+      "TERMINAL_BLOCKER_ONLY"
+    ],
+    "main_router_merge_sha": "b45791dc575027253db3d8d85f803ed12dc68e42",
+    "regression_selftest_run": 37129907068,
+    "regression_selftest_attempt": 2,
+    "regression_selftest_result": "SUCCESS"
   }
 }
