@@ -1,0 +1,42 @@
+{
+  "contract": "K0_WORDPRESS_BATCH_EXPORT_V3",
+  "status": "PASS",
+  "article_count": 3,
+  "batch_sha256": "70423281b69b3cfa28413ab2a7dcfa8a25cde4e5a526ee787cbbd79a317d471e",
+  "publish_allowed": false,
+  "source_singles": [
+    "real_runs/k0/fresh-user-20261003-2024z-fremdreiter-759950a7-r2/WORDPRESS_SINGLE.json",
+    "real_runs/k0/fresh-user-20261003-2032z-kuehlgamaschen-28ecc3ae-r2/WORDPRESS_SINGLE.json",
+    "real_runs/k0/fresh-user-20261003-2035z-schermaschine-20720b5a-r2/WORDPRESS_SINGLE.json"
+  ],
+  "source_single_blob_shas": [
+    "14ed8263773af523491ba0085e7cced8c63356dd",
+    "7bd521ee7397f88a405d16259e586294c56b6e31",
+    "65eb5e168ee3dabecde5bb7f5ebcf359cbeda312"
+  ],
+  "source_verifies": [
+    "real_runs/k0/fresh-user-20261003-2024z-fremdreiter-759950a7-r2/WORDPRESS_VERIFY.json",
+    "real_runs/k0/fresh-user-20261003-2032z-kuehlgamaschen-28ecc3ae-r2/WORDPRESS_VERIFY.json",
+    "real_runs/k0/fresh-user-20261003-2035z-schermaschine-20720b5a-r2/WORDPRESS_VERIFY.json"
+  ],
+  "source_verify_blob_shas": [
+    "977ae8c7a75400ecc1e5f247485662eb15253218",
+    "977ae8c7a75400ecc1e5f247485662eb15253218",
+    "977ae8c7a75400ecc1e5f247485662eb15253218"
+  ],
+  "plan_slots": [
+    "759950a74a337da2c8d8ece5783df3b7d2e0a4a043ec83bccfff55d9b5c5db2d",
+    "28ecc3ae064ab04c5e867125d889a696c03406e48ab67e10a44e0b47578f9c5c",
+    "20720b5afc6b05f8467edf9e77640d9f4afeedbb2c2482331db3df5335f2a427"
+  ],
+  "titles": [
+    "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+    "Sind Kühlgamaschen für Pferde sinnvoll?",
+    "Welche Schermaschine für Pferde ist die leiseste?"
+  ],
+  "all_single_documents_verified": true,
+  "ordering_matches_intake": true,
+  "fresh_outputs_only": true,
+  "combined_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "combined_repo_path": "real_runs/k0/batch-70423281b69b3cfa-fresh-user-r2/WORDPRESS_BATCH.json"
+}
