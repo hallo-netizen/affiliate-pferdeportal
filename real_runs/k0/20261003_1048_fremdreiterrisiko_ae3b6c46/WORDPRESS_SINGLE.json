@@ -22,7 +22,6 @@
   "articles": [
     {
       "index": 0,
-      "article_id": "article:11bf036b5c0473935b65167e",
       "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
       "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
       "category": "pferdehaftpflicht-beratung",
@@ -68,7 +67,8 @@
               "slug": "pferdehaftpflicht-beratung",
               "taxonomy": "category"
             }
-          }
+          },
+          "canonical_article_id": "article:11bf036b5c0473935b65167e"
         },
         "writer_provenance": {
           "contract": "K0_WRITER_SEAL_V1",
