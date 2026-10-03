@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FULL_RULE_CHAIN_AND_SILENT_FRESH_CHAT_START_FIXED_READY_FOR_FRESH_TEST_ARTICLES",
-  "first_open_blocker": null,
-  "next_action": "RUN_FRESH_FICTIONAL_TEST_ARTICLES_THROUGH_K0_START",
+  "status": "LINK_DISTRIBUTION_FIXED_RENDERING_GAP_OPEN",
+  "first_open_blocker": "WORDPRESS_SINGLE_POST_LARGE_VERTICAL_GAPS_ABOVE_H2_RENDERING_NOT_FIXED",
+  "next_action": "FIX_ONLY_SINGLE_POST_H2_RENDERING_SPACING_THEN_RUN_ONE_FRESH_K0_ARTICLE_REGRESSION",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -30,7 +30,22 @@
     "performance_regression_allowed": false,
     "publish_allowed": false,
     "public_start_router_ref": "main:K0_START_HERE.md",
-    "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json"
+    "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
+    "scope_lock": [
+      "ONLY_SINGLE_POST_H2_RENDERING_SPACING",
+      "EXISTING_INTERNAL_LINK_DISTRIBUTION_LOCK"
+    ],
+    "do_not_touch": [
+      "WRITER_CONTENT_RULES_EXCEPT_EXISTING_LINK_DISTRIBUTION_LOCK",
+      "TABLE_LOGIC",
+      "ARTICLE_TYPES",
+      "LANGUAGETOOL_6_8",
+      "PPM_6_7_9",
+      "WORDPRESS_HANDOFF_CONTRACT",
+      "CANONICAL_ID_BINDING",
+      "PUBLISH_SAFETY",
+      "OTHER_PLUGINS_OR_DESIGN_AREAS"
+    ]
   },
   "rewrite16": {
     "total": 16,
@@ -66,14 +81,14 @@
     "full_rule_recheck_status": "NOT_RUN"
   },
   "freshness": {
-    "validated_code_head_sha": "02d222e7a9c24d2151f08093f0196878104549f5",
-    "last_checked_branch_head_sha": "02d222e7a9c24d2151f08093f0196878104549f5",
+    "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
+    "last_checked_branch_head_sha": "fd984b1a3c6ba7e4b541c4a52a9ed297b5c56816",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37129907068,
-    "latest_k0_selftest_result": "SUCCESS_SILENT_START_HARDLOCK",
+    "latest_k0_selftest_run": 37136204080,
+    "latest_k0_selftest_result": "SUCCESS_LINK_DISTRIBUTION_REGRESSION",
     "ppm679_parity": "PASS",
-    "delta_result": "FULL_RULE_BUNDLE_BEFORE_WRITER; LINKS_LISTS_POST_TABLE_SUMMARY_NEGATIVES_BLOCK; WORDPRESS_EXPORT_REQUIRES_FULL_RULE_FINAL_PASS; MAIN_K0_START_ROUTER_HARDLOCK_PASS"
+    "delta_result": "LINK_DISTRIBUTION_CODE_AND_REGRESSION_PASS; REAL_ARTICLE_REGEN_NOT_RUN; H2_RENDERING_GAP_OPEN"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -202,5 +217,23 @@
     "regression_selftest_run": 37129907068,
     "regression_selftest_attempt": 2,
     "regression_selftest_result": "SUCCESS"
+  },
+  "link_distribution": {
+    "status": "CODE_AND_REGRESSION_PASS",
+    "rule": "EXACTLY_3_INTERNAL_LINKS; parent_category + semantic_related in two distinct main-text blocks; further_information only in further_information; intro/conclusion/table are not main-text blocks",
+    "code_commit": "fd90514ba2738d282784d5255102cc109aa4cd1b",
+    "regression_commit": "f5fcbb417dfe47a2d11421559d9fd8fd29d4a36a",
+    "start_binding_commit": "87044b5733f4ea10800fa5f881a66d672b6d4741",
+    "selftest_run": 37136204080,
+    "selftest_result": "SUCCESS",
+    "fresh_real_article_after_fix": "NOT_RUN"
+  },
+  "rendering_spacing": {
+    "status": "OPEN",
+    "symptom": "LARGE_VERTICAL_GAPS_ABOVE_H2_IN_WORDPRESS_SINGLE_POST_PREVIEW",
+    "article_html_extra_blank_paragraphs_before_h2": "NOT_OBSERVED",
+    "article_html_extra_br_before_h2": "NOT_OBSERVED",
+    "render_root_cause": "NOT_YET_ISOLATED",
+    "rendering_code_changed_in_this_fix": "NO"
   }
 }
