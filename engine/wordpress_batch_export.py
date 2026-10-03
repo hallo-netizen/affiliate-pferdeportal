@@ -36,13 +36,17 @@ def combine(intake: dict, singles: list[dict]) -> dict:
             raise BatchBlocked("SINGLE_WORDPRESS_ARTICLE_INVALID")
         row=rows[0]
         slot=str(row.get("plan_slot") or "")
-        aid=str(row.get("article_id") or "")
         if not re.fullmatch(r"[0-9a-f]{64}",slot):
             raise BatchBlocked("SINGLE_PLAN_SLOT_INVALID")
+        if "article_id" in row or "canonical_article_id" in row:
+            raise BatchBlocked("SINGLE_TOPLEVEL_ARTICLE_ID_FORBIDDEN:"+slot)
+        pc=row.get("production_context") if isinstance(row.get("production_context"),dict) else {}
+        pi=pc.get("production_plan_item") if isinstance(pc.get("production_plan_item"),dict) else {}
+        aid=str(pi.get("canonical_article_id") or "")
         if not re.fullmatch(r"article:[0-9a-f]{24}",aid):
-            raise BatchBlocked("SINGLE_ARTICLE_ID_INVALID:"+slot)
+            raise BatchBlocked("SINGLE_CANONICAL_ARTICLE_ID_MISSING:"+slot)
         if _slot(aid)!=slot:
-            raise BatchBlocked("SINGLE_ARTICLE_ID_PLAN_SLOT_MISMATCH:"+slot)
+            raise BatchBlocked("SINGLE_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH:"+slot)
         if slot in rows_by_slot:
             raise BatchBlocked("SINGLE_PLAN_SLOT_DUPLICATE:"+slot)
 
