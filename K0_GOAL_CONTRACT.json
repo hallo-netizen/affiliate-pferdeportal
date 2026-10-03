@@ -19,6 +19,15 @@
     "wordpress_plugin_binding": "0.28.30-pste-v5-binding-safe",
     "eigenschaftssieger_research_before_writer_required": true,
     "product_property_store_required": true,
-    "affiliate_must_not_determine_property_winner": true
+    "affiliate_must_not_determine_property_winner": true,
+    "current_upload_is_assignment_identity_authority": true,
+    "fresh_research_per_new_run_required": true,
+    "historical_article_content_as_input_forbidden": true,
+    "historical_writer_draft_as_input_forbidden": true,
+    "historical_repair_text_as_input_forbidden": true,
+    "historical_fact_pack_or_research_reuse_forbidden": true,
+    "historical_real_run_output_as_content_input_forbidden": true,
+    "final_verified_wordpress_file_must_be_delivered_as_chat_file": true,
+    "github_or_artifact_link_as_final_delivery_forbidden": true
   }
 }
