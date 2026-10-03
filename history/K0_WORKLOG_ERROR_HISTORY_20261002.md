@@ -150,3 +150,27 @@ Nicht importieren:
 - Der fachliche Status bleibt daher unverändert: 14/16 kanonische WordPress-Singles vollständig; Artikel 13 und 14 offen; erster Blocker weiterhin Artikel 13.
 - NEXT ACTION bleibt ausschließlich aus `K0_CURRENT_STATE.json`: `RETRY_AUTHORING_CONTEXT_ITEM_13_SEQUENTIALLY_THROUGH_CANONICAL_K0_WRITER_PATH`.
 - Keine Qualitäts-, LT-, PPM-, WordPress- oder Publish-Regel wurde durch diesen Abschlusscheck geändert.
+
+## 2026-10-03 – Delta: interne Linkverteilung / offener Rendering-Abstand
+
+### E10 – Interne Links waren formal vollständig, aber falsch verteilt
+- Reale 3er-Ausgabe zeigte bei Kühlgamaschen drei gebundene interne Links, davon jedoch nur einen im eigentlichen Hauptteil; ein Link lag im Intro, einer im Hauptteil, einer in `further_information`.
+- Nutzerbindung: exakt drei interne Links bleiben bestehen; `parent_category` und `semantic_related` müssen in zwei verschiedenen Haupttextblöcken liegen; `further_information` bleibt ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
+- Minimalfix ausschließlich in der Linkverteilung:
+  - `engine/k0_full_rules.py`: Regelkontext blockiert `parent_category` oder `semantic_related` außerhalb des Haupttexts;
+  - Regressionstest ergänzt;
+  - `K0_START_HERE.md` bindet dieselbe Verteilung.
+- Relevante Commits:
+  - `fd90514ba2738d282784d5255102cc109aa4cd1b`
+  - `f5fcbb417dfe47a2d11421559d9fd8fd29d4a36a`
+  - `87044b5733f4ea10800fa5f881a66d672b6d4741`
+- K0-Selftest Run `37136204080` auf Head `87044b5733f4ea10800fa5f881a66d672b6d4741`: **SUCCESS**.
+- Noch nicht belegt: frische reale Artikelproduktion nach diesem Linkfix. Der PASS belegt Code/Regression, nicht einen neuen real importierten Artikel.
+
+### E11 – Große sichtbare Lücken vor Zwischenüberschriften bleiben offen
+- Im ausgegebenen Kühlgamaschen-Artikel sind vor den betroffenen H2 keine zusätzlichen Leerabsätze oder `<br>` als Ursache belegt.
+- Die großen vertikalen Abstände entstehen daher im Renderingpfad; die konkrete aktive CSS-/Renderursache ist noch **nicht abschließend isoliert**.
+- Am Rendering wurde in diesem Arbeitsabschnitt **noch nichts geändert**.
+- Tabellenlogik wurde nicht geändert. Für Kühlgamaschen war `OMIT_NO_ADDED_VALUE / EXISTING_CHECKLIST_EQUIVALENT` eine ausdrücklich gebundene Tabellenentscheidung.
+- Nutzer-Hardlock für die Fortsetzung: **nur Rendering-Abstand reparieren; Linkverteilung nicht neu konzipieren; alles andere unverändert lassen.**
+
