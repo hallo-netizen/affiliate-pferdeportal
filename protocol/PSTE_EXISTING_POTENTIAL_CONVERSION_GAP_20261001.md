@@ -263,3 +263,58 @@ C = Portalrelevanz vorhanden, aber der bestehende Pfad verlangt interne Klärung
 
 Daraus folgt ausdrücklich:
 Keine manuelle Beitragsart-/Kategorieverteilung als Ersatzpfad. Zuerst konkrete C-Familien-/Strukturentscheidung, dann normaler Reentry.
+
+
+## DELTA 2026-10-03 – NACHHALTIGE FAMILIEN-/STRUKTUR-REPARATUR / PSTE 0.57.28
+
+Nutzeranforderung:
+Keine Einmalreparatur nur für die aktuellen Begriffe. Die Lösung muss auch zukünftige Begriffe im bestehenden PSTE-Weg behandeln.
+
+Lokaler Kandidat:
+`PSTE-0.57.28-SUSTAINABLE-FAMILY-STRUCTURE-ROUTING-CANDIDATE.zip`
+
+SHA-256:
+`a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`
+
+Basis:
+0.57.27 Produktwahl-Kandidat / `414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`.
+
+Rootcause-/KISS-Reparatur:
+1. Familienidentität:
+   - deutsches End-`s` wird nicht mehr aus Doppel-`ss` abgeschnitten; dadurch `Gebiss ↔ Gebisse` korrekt;
+   - ausschließlich konservative Verbflexionen `-t/-st` dürfen denselben vorhandenen Subject-Head treffen; dadurch z. B. `striegelt ↔ Striegel`;
+   - beliebige unbekannte Kompositpräfixe bleiben verboten.
+2. Familien-/Struktur-Routing:
+   - nach Portalrelevanz-PASS und echtem Family-V2-`NO_MATCH` ohne sinnvollen bestehenden Familiennachbarn wird der Fall generisch `STRUCTURE_GAP`;
+   - REVIEW/nahe bestehende Familie bleibt REVIEW;
+   - keine neue Familie/Kategorie wird erzeugt, kein Gate umgangen.
+3. Produktwahl:
+   - vorhandene 0.57.27-Regel bleibt;
+   - konservativer grammatischer Superlativ-Fallback ergänzt Fälle wie `sanfteste`, ohne Familiennomen wie `Pferdebürste` als Kriterium zu missdeuten;
+   - im Normalpfad bleiben erkannte Produktwahl-Fälle `RETAINED_NON_PRODUCING`, solange downstream kein Produktwahl-Regelsatz registriert ist.
+
+Exakter Delta 0.57.27 → 0.57.28:
+- geändert `class-pste-family-identity-v2.php`;
+- neu `class-pste-family-structure-router.php`;
+- geändert `class-pste-normal-metadata-path.php`;
+- geändert `class-pste-product-choice-classifier.php`;
+- geändert `portal-seo-topic-engine.php`;
+- sonst unverändert.
+
+Frische lokale Hardtests:
+- ZIP PASS;
+- Fresh-Unpack PHP **81/81 PASS**;
+- 694er realer Read-only-Replay: **320 STRUCTURE_GAP / 371 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING / 0 NORMAL_PASS**;
+- 694/694 Write-Flags false;
+- bestehende Family-MATCH-Regressionen: **0**;
+- zusätzliche konservative Family-Matches: **3**;
+- Strukturrouter Zukunfts-/Positiv-/Negativmatrix: **6/6 PASS**;
+- Produktwahl Positiv/Negativ: **14/14 PASS**;
+- 326er realer Sandboxbestand Produktwahl: **0 MATCH / 326 NO_MATCH**;
+- geschützte Repository-/Storage-/Admin-/Provider-/Titel-/Intentpfade gegenüber 0.57.27 unverändert.
+
+Bedeutung:
+Der frühere Schritt „364 Familienfälle einmalig von Hand entscheiden“ ist als alleinige Lösung supersediert. 0.57.28 repariert die wiederkehrende Systementscheidung: echte bestehende Familie → konservativ matchen; vorhandene Nähe/Mehrdeutigkeit → REVIEW; keine bestehende semantische Nachbarfamilie bei bewiesener Portalrelevanz → STRUCTURE_GAP. Die anschließende Strukturentscheidung bleibt zielvertragsgemäß menschlich und läuft danach über normalen Reentry.
+
+Grenze:
+0.57.28 ist lokal HARD-PASS, aber noch **nicht live installiert**. Keine Release-/Live-Aussage vor WordPress-Readback.
