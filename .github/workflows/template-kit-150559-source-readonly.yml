@@ -1,51 +1,68 @@
-name: Template Kit 1.50.559 Source Readonly
+name: K0 Rendering Active Template Diagnostic
 
 on:
   push:
     branches:
-      - template-kit-150559-source-readonly-20260925
+      - tmp/k0-rendering-diagnostic-20261003
+    paths:
+      - .github/workflows/template-kit-150559-source-readonly.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  fetch-current-template-source:
+  inspect-active-template:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch exact installed main file read-only
+      - uses: actions/checkout@v4
+        with:
+          ref: tmp/k0-rendering-diagnostic-20261003
+          fetch-depth: 0
+
+      - name: Fetch installed template source read-only
         shell: bash
         run: |
-          set -u
-          mkdir -p out
+          set -euo pipefail
+          mkdir -p /tmp/k0-render diagnostics
           URL='https://pferde-atelier.de/wp-content/plugins/affiliate-portal-template-kit/pferde-template-kit.php'
-          STATUS="$(curl -A 'Mozilla/5.0' -L --silent --show-error --connect-timeout 15 --max-time 90 -D out/headers.txt -o out/pferde-template-kit.php -w '%{http_code}' "$URL" || true)"
-          printf '%s\n' "$STATUS" > out/http_status.txt
-          printf '%s\n' "$URL" > out/url.txt
+          STATUS="$(curl -A 'Mozilla/5.0' -L --silent --show-error --connect-timeout 15 --max-time 90 -o /tmp/k0-render/pferde-template-kit.php -w '%{http_code}' "$URL")"
+          test "$STATUS" = "200"
           python3 - <<'PY'
-          import hashlib, json, re
           from pathlib import Path
-          status=Path('out/http_status.txt').read_text().strip()
-          p=Path('out/pferde-template-kit.php')
-          result={'http_status':status}
-          if p.is_file():
-              raw=p.read_bytes()
-              text=raw.decode('utf-8',errors='replace')
-              hm=re.search(r'^\s*\*\s*Version:\s*([0-9.]+)\s*$',text,re.M)
-              cm=re.search(r"const\s+VERSION\s*=\s*'([^']+)'\s*;",text)
-              result.update({
-                  'bytes':len(raw),
-                  'sha256':hashlib.sha256(raw).hexdigest(),
-                  'header_version':hm.group(1) if hm else None,
-                  'const_version':cm.group(1) if cm else None,
-                  'prefix':text[:300],
-              })
-          Path('out/summary.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
-          print(json.dumps(result,sort_keys=True))
+          import hashlib,re,json
+          p=Path('/tmp/k0-render/pferde-template-kit.php')
+          raw=p.read_bytes()
+          text=raw.decode('utf-8',errors='replace')
+          lines=text.splitlines()
+          keys=re.compile(r'(?i)(single|entry-content|\bh2\b|section|margin-(top|bottom)|margin\s*:|wp_head|style)')
+          hits=[]
+          for i,line in enumerate(lines,1):
+              if keys.search(line):
+                  lo=max(1,i-2); hi=min(len(lines),i+2)
+                  chunk='\n'.join(f'{n:05d}: {lines[n-1]}' for n in range(lo,hi+1))
+                  hits.append(chunk)
+          seen=[]
+          for h in hits:
+              if h not in seen: seen.append(h)
+          Path('diagnostics/k0-rendering-active-template-extract.txt').write_text(
+              '\n\n---\n\n'.join(seen),encoding='utf-8')
+          m={
+            'sha256':hashlib.sha256(raw).hexdigest(),
+            'bytes':len(raw),
+            'line_count':len(lines),
+            'header_version':(re.search(r'^\s*\*\s*Version:\s*([0-9.]+)\s*$',text,re.M) or [None,None])[1],
+            'const_version':(re.search(r"const\s+VERSION\s*=\s*'([^']+)'\s*;",text) or [None,None])[1],
+          }
+          Path('diagnostics/k0-rendering-active-template-summary.json').write_text(json.dumps(m,indent=2)+'\n')
+          print(m)
           PY
 
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: template-kit-150559-exact-main-source
-          path: out/
-          if-no-files-found: error
+      - name: Commit diagnostic extract only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diagnostics/k0-rendering-active-template-extract.txt diagnostics/k0-rendering-active-template-summary.json
+          git diff --cached --quiet && exit 0
+          git commit -m "diag: capture active template single-post spacing selectors"
+          git push origin HEAD:tmp/k0-rendering-diagnostic-20261003
