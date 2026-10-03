@@ -2229,3 +2229,14 @@ Der Fundus war vorhanden, wurde aber wegen eines falschen Leerwert-Fallbacks und
 
 GRENZE:
 Titelkandidat ist keine Produktionsfreigabe. Kategorie-, Dubletten-, Artikeltyp-, Planning-, PSERC- und Publish-Gates bleiben unverändert. Keine neue externe Recherche im Bestandslauf.
+
+## ARCH-053 – CURRENT_STATE ist alleinige NEXT-ACTION-Autorität
+WAS:
+Projekt-/Büro-Wegweiser wurden auf die bereits geltende Ein-Wahrheit-Regel nachgezogen: `START_HERE → genau eine CURRENT_STATE → Frischecheck → genau deren NEXT ACTION`. Der Hobbyraum bleibt ausschließlich temporäre Ausführungsfläche.
+
+WARUM:
+TEXT-Hobbyraum erklärte bereits selbst, keine Current-/NEXT-ACTION-Autorität zu sein, während ältere START_HERE-Texte ihn noch als NEXT-ACTION-Quelle auswiesen. Das erzeugte eine reale Routing-Widersprüchlichkeit.
+
+REGEL:
+START_HERE navigiert. CURRENT_STATE trägt aktuellen Stand, ersten Blocker und genau eine NEXT ACTION. HOBBYRAUM nur bei ausdrücklich aktiver temporärer Arbeitsbindung; keine zweite dynamische Wahrheit.
+
