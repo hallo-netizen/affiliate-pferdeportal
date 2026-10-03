@@ -1,5 +1,19 @@
 # PLUGINS – CURRENT STATE
 
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-03
+
+Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
+
+- Portal SEO Themenengine **0.57.26 live belegt**.
+- Lokaler Entwicklungskandidat **0.57.27** ergänzt ausschließlich Produktwahl-Klassifikation, getrennte Kandidatenexporte und manuelle Review-Korrektur.
+- Kandidat-SHA-256: `414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`.
+- Lokale Evidence: ZIP PASS; PHP 80/80; Produktwahl Positiv/Negativ 13/13; 326er Bestand 0 künstliche Produktwahl-Treffer.
+- **Kein WordPress-Update auf 0.57.27 belegt; keine PU-ID.**
+- Isolierte `CURRENT.zip` bleibt mangels bytegenauem Binär-Uploadweg BLOCKED; Manifest wurde auf Kandidatenstand aktualisiert.
+- Fachstatus/NEXT ACTION ausschließlich: `../TEXT/CURRENT_STATE.md`.
+
+# PLUGINS – CURRENT STATE
+
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-02
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
