@@ -1,0 +1,105 @@
+{
+  "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+  "batch_sha256": "149206af7fee610f1430e13546f73f75de2b60b4bad9295f900b03b4bfae5b6d",
+  "article_count": 1,
+  "publish_allowed": false,
+  "signing_deferred": true,
+  "batch_gate_status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+  "no_legacy_status": "PASS",
+  "test_suite_status": "PASS",
+  "wordpress_review": {
+    "file_format": "JSON",
+    "mime_type": "application/json",
+    "intended_next_step": "WORDPRESS_DIRECT_IMPORT",
+    "plugin_name": "Portal SEO Editorial Plan Compiler",
+    "plugin_version_verified_against": "0.28.30",
+    "plugin_build_verified_against": "0.28.30-pste-v5-binding-safe",
+    "ppm_version_verified_against": "6.7.9",
+    "direct_wordpress_upload_ready": true,
+    "direct_upload_block_reason": null,
+    "required_downstream_components": []
+  },
+  "articles": [
+    {
+      "index": 0,
+      "article_id": "article:f82f0d5e9c6a3a454d5ced35",
+      "title": "Welche Schermaschine für Pferde ist die leiseste?",
+      "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+      "category": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+      "article_type": "FAQ",
+      "plan_slot": "20720b5afc6b05f8467edf9e77640d9f4afeedbb2c2482331db3df5335f2a427",
+      "final_draft_sha256": "2dcccf3b65d375c8e99cf521faf461c9aa04c1a9511a5e0c8f1e572068fc0736",
+      "revision_count": 2,
+      "body": "<article class=\"ppm-generated ppm-type-faq\" data-article-type=\"FAQ\">\n<section data-block=\"intro\">\n<p>Eine einzelne „leiseste“ Pferdeschermaschine lässt sich nicht für den gesamten Markt sicher bestimmen, weil Hersteller Geräuschwerte nicht immer unter denselben Bedingungen angeben. Unter den aktuell gut dokumentierten Vollschurmaschinen mit veröffentlichten Werten liegen die VOSS easyCUT und die Eider EG 720 mit jeweils rund 60 dB(A) besonders niedrig. Zum Vergleich: Für die Aesculap Bonum Pro werden 65 dB(A) angegeben, für die Heiniger Xperience 2-Speed 68 dB(A).</p>\n</section>\n<section data-block=\"values\">\n<h2>Veröffentlichte Werte zur Lautstärke zeigen klare Unterschiede</h2>\n<p>Für einen brauchbaren Vergleich sind konkrete Schalldruckangaben hilfreicher als Formulierungen wie „sehr leise“. VOSS nennt für die easyCUT etwa 60 dB(A) bei zwei Leistungsstufen mit rund 2.200 beziehungsweise 2.600 Doppelhüben pro Minute. Auch für die Eider EG 720 werden 60 dB(A) angegeben. Aesculap nennt für die Bonum Pro 65 dB(A) bei etwa 2.500 Hüben pro Minute, Heiniger für die Xperience 2-Speed 68 dB(A) bei 2.600 beziehungsweise 2.900 Doppelhüben. Innerhalb dieser Auswahl liegen die beiden 60-dB-Modelle damit beim veröffentlichten Zahlenwert vorn. Ein Unterschied von wenigen Dezibel sollte trotzdem nicht isoliert betrachtet werden.</p>\n<p>Gerade bei einem geräuschempfindlichen Pferd ist es sinnvoll, solche Zahlen als Vorauswahl zu verwenden. Sie reduzieren die Zahl möglicher Geräte, ersetzen aber keinen Eindruck davon, wie ruhig die Maschine unter Last tatsächlich läuft.</p>\n</section>\n<section data-block=\"measurement\">\n<h2>Warum Angaben in Dezibel nicht immer direkt vergleichbar sind</h2>\n<p>Geräuschmessungen hängen vom Abstand zur Maschine, vom Messverfahren und von der Betriebssituation ab. Bei manchen Geräten wird ausdrücklich ein Emissionsschalldruckpegel genannt, bei anderen nur ein allgemeiner Geräuschpegel. Zusätzlich verändert sich der praktische Eindruck durch Tonhöhe, Vibrationen und den Zustand der Schermesser. Eine Maschine mit stumpfen oder falsch eingestellten Messern kann unangenehmer wirken als dasselbe Modell in gutem Zustand. Deshalb ist eine Herstellerangabe von 60 dB(A) ein nützlicher Anhaltspunkt, aber kein absoluter Beweis dafür, dass ein Pferd genau diese Maschine als ruhigste empfindet. Für schreckhafte Tiere zählt das Gesamtverhalten des Geräts.</p>\n<p>Auch der Untergrund und die Umgebung verändern die Wahrnehmung. In einer geschlossenen Stallgasse reflektieren Wände Schall stärker als auf einem offenen Putzplatz, sodass dasselbe Gerät für das Pferd unterschiedlich laut wirken kann.</p>\n</section>\n<section data-block=\"horse\">\n<h2>Für sensible Pferde zählen auch Vibration und Laufkultur</h2>\n<p>Pferde reagieren nicht nur auf Lautstärke. Das Brummen im Griff, Luftstrom, Kabelbewegung und die erste Berührung am Fell können ebenfalls Unruhe auslösen. Die Heiniger Xperience wird beispielsweise zusätzlich als vibrationsarm beschrieben, obwohl ihr veröffentlichter Wert mit 68 dB(A) über den 60-dB-Modellen liegt. Leichte Akku- oder Teilschurmaschinen können am Kopf oder an empfindlichen Stellen angenehmer sein, sind aber nicht automatisch für eine komplette Schur von dichtem Winterfell geeignet. Wenn ein Pferd nervös reagiert, hilft es, die ausgeschaltete Maschine zunächst zu zeigen, sie in Entfernung laufen zu lassen und die Annäherung schrittweise zu gestalten.</p>\n<p>Ein ruhiges Antrainieren kann deshalb mehr bewirken als der Wechsel um wenige Dezibel. Bleibt das Pferd bei der Annäherung entspannt, lässt sich später besser beurteilen, ob wirklich der Motor die Unruhe auslöst oder ob eher Berührung und Vibration dafür verantwortlich sind.</p>\n</section>\n<section data-block=\"choice\">\n<h2>Leise allein reicht für eine gute Vollschur nicht aus</h2>\n<p>Eine niedrige Geräuschangabe ist nur ein Teil der Eignung. Für eine komplette Pferdeschur müssen Leistung, Hubzahl, Messerbreite und Wärmeentwicklung zum Fell passen. Die easyCUT arbeitet laut Anbieter mit 150 Watt Motorleistung und zwei Stufen bis etwa 2.600 Doppelhübe pro Minute. Die Bonum Pro kombiniert 65 dB(A) mit Akkuantrieb, ungefähr 2.500 Hüben und passenden Messersätzen für Pferdeschur beziehungsweise Pferde-Feinschur. Mit 250 Watt und bis zu 2.900 Doppelhüben ist die Xperience 2-Speed auf eine anspruchsvolle Vollschur ausgelegt. Wer sehr dichtes Fell schert, sollte deshalb Lautstärke und Arbeitsleistung gemeinsam betrachten.</p>\n<p>Für Teilschuren kann dagegen ein kleineres, noch leichteres Gerät sinnvoll sein. Solche Maschinen sind aber nicht direkt mit kräftigen Vollschurmaschinen vergleichbar, weil sie für andere Fellmengen und Arbeitszeiten ausgelegt sind.</p>\n</section>\n<section data-block=\"table\">\n<h2>Geräuschwerte im Vergleich</h2>\n<table class=\"system-129-table comparison-table\"><thead><tr><th>Modell</th><th>Lautstärke</th><th>Antrieb</th></tr></thead><tbody>\n<tr><td>VOSS easyCUT</td><td>ca. 60 dB</td><td>Netz</td></tr>\n<tr><td>Eider EG 720</td><td>60 dB</td><td>Netz</td></tr>\n<tr><td>Bonum Pro</td><td>65 dB</td><td>Akku</td></tr>\n<tr><td>Xperience 2-Speed</td><td>68 dB</td><td>Netz</td></tr>\n</tbody></table>\n</section>\n<section data-block=\"conclusion\">\n<h2>Fazit</h2>\n<p>Unter den hier verglichenen Pferdeschermaschinen mit veröffentlichten Geräuschwerten sind die VOSS easyCUT und die Eider EG 720 mit etwa 60 dB(A) die niedrigsten Angaben. Das bedeutet aber nicht automatisch, dass sie in jeder Situation die leisesten oder für jedes Pferd die besten Geräte sind. Messbedingungen, Vibrationen und Scherleistung beeinflussen den praktischen Eindruck. Für ein geräuschempfindliches Pferd lohnt sich deshalb ein Blick auf den Wert in Dezibel, zugleich aber auch auf Laufruhe, Leistung und Eignung für die geplante Voll- oder Teilschur.</p>\n<p>Wer maximale Ruhe sucht, sollte deshalb die technischen Daten zuerst eingrenzen und das verbleibende Gerät möglichst am eigenen Pferd testen.</p>\n</section>\n<section data-block=\"further_information\">\n<h2>Weiterführende Informationen</h2>\n<p>Für belastbare Vergleiche sollten technische Daten möglichst direkt vom Hersteller oder aus aktuellen Produktunterlagen stammen. Bei sehr empfindlichen Pferden kann zusätzlich ein Probelauf mit dem konkreten Gerät sinnvoller sein als ein Vergleich allein nach Dezibel.</p>\n<p class=\"ppm-ai-disclosure\">Dieser Beitrag wurde mithilfe von KI vorformuliert und redaktionell geprüft.</p>\n</section>\n</article>",
+      "production_context": {
+        "fact_pack": {
+          "contract": "canonical_fact_pack_v1",
+          "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+          "sources": [
+            {
+              "source_title": "VOSS.farming easyCUT Pferdeschermaschine",
+              "source_url": "https://www.weidezaun.info/voss-farming-easycut-pferdeschermaschine-blau.html"
+            },
+            {
+              "source_title": "Eider EG 720 Herstellerkatalog",
+              "source_url": "https://eiderlandgeraete.de/wp-content/uploads/2019/02/katalog-2017.pdf"
+            },
+            {
+              "source_title": "Aesculap Bonum Pro",
+              "source_url": "https://www.aesculap-schermaschinen.de/de/product/aesculap-akkuschermaschine-bonum-pro/1042092/1018326"
+            },
+            {
+              "source_title": "Heiniger Xperience 2-Speed",
+              "source_url": "https://heiniger-large-animals.com/produkte/schermaschine/show/xperience-2-speed"
+            }
+          ],
+          "claims": [
+            "VOSS easyCUT und Eider EG 720 werden mit etwa 60 dB(A) angegeben.",
+            "Aesculap Bonum Pro wird mit 65 dB(A) angegeben.",
+            "Heiniger Xperience 2-Speed wird mit 68 dB(A) angegeben.",
+            "Herstellerangaben sind wegen unterschiedlicher Messbedingungen nicht zwingend vollständig direkt vergleichbar."
+          ]
+        },
+        "production_plan_item": {
+          "article_type": "FAQ",
+          "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+          "topic": "Welche Schermaschine für Pferde ist die leiseste?",
+          "quality_binding": {
+            "wordpress_category": {
+              "slug": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+              "taxonomy": "category"
+            }
+          }
+        },
+        "writer_provenance": {
+          "contract": "K0_WRITER_SEAL_V1",
+          "status": "PASS",
+          "route": "K0_WRITER_DRAFT_ONLY",
+          "job_id": "k0w-d3f27fd22a95e82a1829bcb5",
+          "job_sha256": "9bb38296db9381b6ec31f6027c250ca2ce7d495b4eafec1e8cf69a3b89a3d465",
+          "draft_sha256": "ad3937d426d16be6c71695bd54331eb6874a61c72faa898b5ba15ced94195046",
+          "identity_sha256": "6e7f0a2a7e6d0f2e92b7e988e7bb411cc7a46595544a011119ccf20cefc02c72",
+          "visible_text_sha256": "8f9fcb5aa5fc7abe6ba785776af430ab2f6af02553b5b7815d4f0a3fd9e2cd41",
+          "section_structure_sha256": "b763d3f35d55303d026cbdd2a158a5aac40344e8c3914638766efa31d27bbfe9",
+          "policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+          "total_words": 789,
+          "conclusion_ratio": 0.12801,
+          "section_balance_status": "PASS",
+          "conclusion_status": "PASS",
+          "further_information_status": "PASS",
+          "publish_allowed": false,
+          "seal_sha256": "a71e6d6aa981d30cd0f7b319cb88714fdabaf70e5db6cb2952def161a89a7869"
+        }
+      },
+      "languagetool": {
+        "status": "PASS",
+        "engine": "LanguageTool 6.8"
+      },
+      "ppm679": {
+        "status": "PASS",
+        "ppm_version": "6.7.9",
+        "content_sha256": "2dcccf3b65d375c8e99cf521faf461c9aa04c1a9511a5e0c8f1e572068fc0736"
+      }
+    }
+  ]
+}
