@@ -47,6 +47,14 @@ jobs:
           assert g['hard_rules']['quality_reduction_allowed'] is False
           assert g['hard_rules']['performance_regression_allowed'] is False
           assert g['hard_rules']['portal_must_be_auto_detected'] is True
+          assert g['hard_rules']['historical_article_content_as_input_forbidden'] is True
+          assert g['hard_rules']['historical_fact_pack_or_research_reuse_forbidden'] is True
+          assert g['hard_rules']['final_verified_wordpress_file_must_be_delivered_as_chat_file'] is True
+          assert g['hard_rules']['github_or_artifact_link_as_final_delivery_forbidden'] is True
+          assert c['content_isolation_hardlock']['status']=='ACTIVE'
+          assert c['content_isolation_hardlock']['old_article_content_allowed'] is False
+          assert c['chat_file_delivery_hardlock']['status']=='ACTIVE'
+          assert c['chat_file_delivery_hardlock']['final_output_must_be_chat_file'] is True
           print('K0_HARDLOCKS_PASS')
           PY
 
@@ -59,4 +67,7 @@ jobs:
           grep -F 'konzept0-portal-neutral-20261002:K0_START_HERE.md' /tmp/K0_MAIN_START_HERE.md
           grep -F 'NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.' /tmp/K0_MAIN_START_HERE.md
           grep -F 'Keine Zwischenmeldung.' /tmp/K0_MAIN_START_HERE.md
+          grep -F '**Inhaltsisolation:**' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'K0_CHAT_FILE_DELIVERY_REQUIRED' /tmp/K0_MAIN_START_HERE.md
+          grep -F 'GitHub-' /tmp/K0_MAIN_START_HERE.md
           echo 'K0_MAIN_FRESH_CHAT_ROUTER_PASS'
