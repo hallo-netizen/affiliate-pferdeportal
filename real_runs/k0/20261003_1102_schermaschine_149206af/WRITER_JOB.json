@@ -1,0 +1,83 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+    "plan_slot": "20720b5afc6b05f8467edf9e77640d9f4afeedbb2c2482331db3df5335f2a427",
+    "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+    "title": "Welche Schermaschine für Pferde ist die leiseste?"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:46a56fcf7daee607db0935bd",
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "VOSS.farming easyCUT Pferdeschermaschine",
+          "source_url": "https://www.weidezaun.info/voss-farming-easycut-pferdeschermaschine-blau.html"
+        },
+        {
+          "source_title": "Eider EG 720 Herstellerkatalog",
+          "source_url": "https://eiderlandgeraete.de/wp-content/uploads/2019/02/katalog-2017.pdf"
+        },
+        {
+          "source_title": "Aesculap Bonum Pro",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/product/aesculap-akkuschermaschine-bonum-pro/1042092/1018326"
+        },
+        {
+          "source_title": "Heiniger Xperience 2-Speed",
+          "source_url": "https://heiniger-large-animals.com/produkte/schermaschine/show/xperience-2-speed"
+        }
+      ],
+      "claims": [
+        "VOSS easyCUT und Eider EG 720 werden mit etwa 60 dB(A) angegeben.",
+        "Aesculap Bonum Pro wird mit 65 dB(A) angegeben.",
+        "Heiniger Xperience 2-Speed wird mit 68 dB(A) angegeben.",
+        "Herstellerangaben sind wegen unterschiedlicher Messbedingungen nicht zwingend vollständig direkt vergleichbar."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+      "topic": "Welche Schermaschine für Pferde ist die leiseste?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-d3f27fd22a95e82a1829bcb5",
+  "job_sha256": "9bb38296db9381b6ec31f6027c250ca2ce7d495b4eafec1e8cf69a3b89a3d465"
+}
