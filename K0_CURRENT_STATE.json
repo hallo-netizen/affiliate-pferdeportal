@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "USER_3_ARTICLE_BATCH_FULL_PASS_WORDPRESS_READY",
-  "first_open_blocker": null,
-  "next_action": "DELIVER_WORDPRESS_BATCH_FILE_FOR_USER_IMPORT",
+  "status": "RENDERING_REGRESSION_FIX_MERGED_HARDLOCK_PASS_LOCAL_RETEST_AND_TEST_ARTICLE_PENDING",
+  "first_open_blocker": "LOCAL_HARD_POSITIVE_NEGATIVE_RENDERING_RETEST_AND_FRESH_TEST_ARTICLE_HTML_PREVIEW_PENDING",
+  "next_action": "RUN_HARD_LOCAL_NEGATIVE_POSITIVE_RENDERING_AND_LINK_TEST_THEN_FRESH_K0_TEST_ARTICLE_WITH_HTML_PREVIEW",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -230,16 +230,34 @@
     "start_binding_commit": "87044b5733f4ea10800fa5f881a66d672b6d4741",
     "selftest_run": 37136204080,
     "selftest_result": "SUCCESS",
-    "fresh_real_article_after_fix": "PASS_EXACTLY_3_DISTRIBUTED_LINKS"
+    "fresh_real_article_after_fix": "PASS_EXACTLY_3_DISTRIBUTED_LINKS",
+    "latest_user_batch_html_recheck": "PASS_EXACTLY_3_LINKS_ALL_THREE",
+    "kuehlgamaschen_visible_bindings": [
+      {
+        "role": "parent_category",
+        "anchor": "Kühlgamaschen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "anchor": "Sicherheit bei Kühlgamaschen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "anchor": "Regeneration",
+        "block": "further_information"
+      }
+    ]
   },
   "rendering_spacing": {
-    "status": "CODE_FIX_AND_LOCAL_VISUAL_PASS",
+    "status": "REGRESSION_FIX_MERGED_HARDLOCK_PASS_LOCAL_RETEST_PENDING",
     "symptom": "LARGE_VERTICAL_GAPS_ABOVE_H2_IN_WORDPRESS_SINGLE_POST_PREVIEW",
     "article_html_extra_blank_paragraphs_before_h2": "NOT_OBSERVED",
     "article_html_extra_br_before_h2": "NOT_OBSERVED",
     "render_root_cause": "STRUCTURED_ARTICLE_SECTION_DEFAULT_SPACING_COLLIDES_WITH_SINGLE_POST_H2_MARGIN",
     "fix_scope": "ONLY_STRUCTURED_SINGLE_POST_SECTION_VERTICAL_SPACING",
-    "fix_ref": "main:223524c664b8b24e9da61cd5e9ccd8749385b58c",
+    "fix_ref": "main:cfe238cf83bacf7e55ef804864b46dea5338e21c",
     "fix_file": "pferde-template-kit_V1.50.421.php",
     "k0_branch_contains_design_plugin_source": false,
     "local_visual_negative_test": "PASS_GAP_REPRODUCED_APPROX_149PX",
@@ -252,7 +270,18 @@
     "k0_selftest_run": 37147241043,
     "k0_selftest_result": "SUCCESS",
     "fresh_regression_wordpress_single_ref": "real_runs/k0/fresh-20261003-1818-fremdreiter-759950a7/WORDPRESS_SINGLE.json",
-    "fresh_regression_writer_accept_run": 37147496645
+    "fresh_regression_writer_accept_run": 37147496645,
+    "regression_root_cause": "PPM_SOURCE_TRACE_METADATA_PARTICIPATED_IN_STRUCTURED_SECTION_LAYOUT_AND_AMPLIFIED_FLEX_GAPS; CONCLUSION_HAS_MULTIPLE_TRACE_SPANS",
+    "fix_changes": [
+      "PPM_SOURCE_TRACE_DISPLAY_NONE_IN_STRUCTURED_ARTICLE",
+      "STRUCTURED_SECTION_ROW_GAP_ZERO",
+      "VISIBLE_H2_MARGIN_BOTTOM_32PX",
+      "CONCLUSION_TRANSITION_NORMALIZED"
+    ],
+    "hardlock_run": 37149795336,
+    "hardlock_result": "SUCCESS",
+    "fresh_local_retest_after_cfe238c": "PENDING",
+    "fresh_test_article_html_preview_after_cfe238c": "PENDING"
   },
   "latest_user_batch": {
     "input_batch_sha256": "70423281b69b3cfa28413ab2a7dcfa8a25cde4e5a526ee787cbbd79a317d471e",
