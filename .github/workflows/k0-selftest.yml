@@ -2,7 +2,7 @@ name: K0 portal-neutral selftest
 
 on:
   push:
-    branches: [konzept0-portal-neutral-20261002]
+    branches: [konzept0-portal-neutral-20261002, fix/k0-freshness-regression-tests-20261003]
   pull_request:
     branches: [konzept0-portal-neutral-20261002]
   workflow_dispatch:
