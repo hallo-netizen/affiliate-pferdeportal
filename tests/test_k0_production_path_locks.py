@@ -5,6 +5,7 @@ import unittest
 from engine.k0_production_gate import verify as verify_gate, Blocked as GateBlocked
 from engine.k0_writer_station import prepare, seal, Blocked as WriterBlocked
 from engine.writer_contract_guard import verify_package, WriterContractBlocked
+from tests.k0_rule_context_fixture import rule_context
 
 def stable(x):
     return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':'))
@@ -45,6 +46,7 @@ def context(i):
         'identity':i['items'][0],
         'content_profile':{'search_intent':'DECISION_SUPPORT'},
         'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},
+        'rule_context':rule_context(i['items'][0]),
         'publish_allowed':False
     }
 
@@ -74,7 +76,7 @@ class ProductionPathLocks(unittest.TestCase):
             'publish_allowed':False,
         }
         with self.assertRaisesRegex(GateBlocked,'WRITER_CONTRACT_BLOCKED'):
-            verify_gate(package,portal(i))
+            verify_gate(package,portal(i),[{'id':1,'slug':i['items'][0]['category']}])
 
     def test_forged_ready_article_cannot_pass_writer_contract(self):
         i=intake()
