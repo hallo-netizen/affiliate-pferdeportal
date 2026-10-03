@@ -1,0 +1,5 @@
+{
+  "contract":"PSERC_TEXTMACHINE_METADATA_BATCH_V2","status":"READY_FOR_TEXTMACHINE_METADATA_INTAKE","item_count":1,"maximum_articles":0,"maximum_articles_per_type":0,"publish_allowed":false,"content_or_format_payload_present":false,
+  "items":[{"article_type":"FAQ","category":"gesundheit-regeneration-kuehlgamaschen-faq","plan_slot":"28ecc3ae064ab04c5e867125d889a696c03406e48ab67e10a44e0b47578f9c5c","target_keyword":"Sind Kühlgamaschen für Pferde sinnvoll","title":"Sind Kühlgamaschen für Pferde sinnvoll?"}],
+  "batch_sha256":"387362a1ae348b6ef147605b1107d843865d7d35a448d448f9b5c447ab1ea6ec"
+}
