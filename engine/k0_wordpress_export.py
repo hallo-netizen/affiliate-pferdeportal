@@ -78,9 +78,11 @@ def build(intake, package, portal, gate, lt, bindings):
     if not isinstance(context,dict) or not isinstance(context.get('fact_pack'),dict) or not isinstance(context.get('production_plan_item'),dict):
         raise Blocked('K0_PRODUCTION_CONTEXT_MISSING')
 
+    plan_item=dict(context.get('production_plan_item') or {})
+    plan_item['canonical_article_id']=article_id
+
     article={
       'index':0,
-      'article_id':article_id,
       'title':identity['title'],
       'target_keyword':identity['target_keyword'],
       'category':identity['category'],
@@ -89,7 +91,7 @@ def build(intake, package, portal, gate, lt, bindings):
       'final_draft_sha256':body_sha,
       'revision_count':int(package.get('revision_count') or 1),
       'body':body,
-      'production_context':{**context,'writer_provenance':package.get('writer_provenance')},
+      'production_context':{**context,'production_plan_item':plan_item,'writer_provenance':package.get('writer_provenance')},
       'languagetool':{
         'status':'PASS',
         'engine':'LanguageTool 6.8',
@@ -138,11 +140,15 @@ def verify_export(doc, intake):
     if len(arts)!=1:
         raise Blocked('K0_WORDPRESS_ARTICLE_COUNT_INVALID')
     art=arts[0]; ident=rows[0]
-    article_id=str(art.get('article_id') or '')
+    if 'article_id' in art or 'canonical_article_id' in art:
+        raise Blocked('K0_WORDPRESS_TOPLEVEL_ARTICLE_ID_FORBIDDEN')
+    pc=art.get('production_context') if isinstance(art.get('production_context'),dict) else {}
+    pi=pc.get('production_plan_item') if isinstance(pc.get('production_plan_item'),dict) else {}
+    article_id=str(pi.get('canonical_article_id') or '')
     if not re.fullmatch(r'article:[0-9a-f]{24}',article_id):
-        raise Blocked('K0_WORDPRESS_ARTICLE_ID_INVALID')
+        raise Blocked('K0_WORDPRESS_CANONICAL_ARTICLE_ID_MISSING_IN_PRODUCTION_CONTEXT')
     if hashlib.sha256(('pserc-plan-slot-v2|'+article_id).encode('utf-8')).hexdigest()!=ident['plan_slot']:
-        raise Blocked('K0_WORDPRESS_ARTICLE_ID_PLAN_SLOT_MISMATCH')
+        raise Blocked('K0_WORDPRESS_CANONICAL_ARTICLE_ID_PLAN_SLOT_MISMATCH')
     for key in FIVE_FIELDS:
         if str(art.get(key) or '')!=str(ident[key]):
             raise Blocked('K0_WORDPRESS_IDENTITY_MISMATCH:'+key)
