@@ -75,6 +75,18 @@ Als Inhalts-, Fakten-, Struktur- oder Formulierungsquelle strikt verboten:
 
 Vor Export muss der K0-Historical-Content-Guard PASS sein. Er blockiert erkannte Textübernahme aus historischen Artikelbeständen.
 
+## Chat-Dateiausgabe — HARDLOCK
+
+Nach erfolgreicher Verifikation:
+1. die **exakten Bytes** der frisch verifizierten WordPress-Datei dieses Runs laden;
+2. den Hash gegen den verifizierten Output dieses Runs prüfen;
+3. diese exakte Datei in den Chat-Arbeitsbereich materialisieren/ablegen;
+4. dem Nutzer **diese Chat-Datei als Download** ausgeben.
+
+Ein Repository-/GitHub-/Raw-/Actions-/Artifact-Link darf weder die Datei ersetzen noch als alleinige Endausgabe erscheinen.
+
+Wenn Schritt 1–3 technisch nicht möglich ist: **keinen GitHub-Link ausgeben**, sondern fail-closed mit `K0_CHAT_FILE_DELIVERY_REQUIRED`.
+
 ## Produktionsweg
 
 `Upload -> K0:start -> Recherche -> Writer -> vollständige Regeln -> LanguageTool 6.8 -> finale Regeln -> SYSTEM4_WORDPRESS_HANDOFF_V1 -> Verifikation -> Datei`
