@@ -110,11 +110,10 @@ Der alte `SYSTEM4_ARTICLE_BATCH_CHAT_HANDOFF_V2` ist kein WordPress-Endvertrag.
 
 ## Hardlocks
 
-- **Legacy-Systemnamen sind in aktivem K0-Status, aktiven K0-Übergaben und aktiver K0-Produktion verboten.** Alte Chats, Archive und historische Protokolle sind niemals Current-Autorität.
+- **Es gilt ausschließlich der gebundene K0-Weg. Andere oder historische Wege besitzen keine Start-, Status- oder Fallback-Autorität.**
 
 - keine Qualitätsreduzierung;
 - keine Performance-Regressionsänderung;
-- K10 unverändert;
 - kein manuelles Portal;
 - keine Vorabprüfung im Normalbetrieb;
 - keine sichtbaren Zwischenmeldungen;
