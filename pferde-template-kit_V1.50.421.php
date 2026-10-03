@@ -8052,6 +8052,9 @@ body.single-post .entry-content article.ppm-generated>section[data-block]:not([d
   min-height:0!important;
   height:auto!important;
 }
+body.single-post .entry-content article.ppm-generated>section[data-block]:not([data-block="conclusion"])>:last-child{
+  margin-bottom:0!important;
+}
 body.single-post .entry-content article.ppm-generated>section[data-block]+section[data-block]:not([data-block="conclusion"]){
   margin-top:32px!important;
 }
