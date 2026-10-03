@@ -125,7 +125,7 @@ def verify_package(article):
         raise WriterContractBlocked('WRITER_PROVENANCE_ROUTE_INVALID')
     if actual.get('publish_allowed') is not False:
         raise WriterContractBlocked('WRITER_PROVENANCE_PUBLISH_INVALID')
-    required=('job_id','job_sha256','draft_sha256','identity_sha256','visible_text_sha256','section_structure_sha256','policy_sha256','seal_sha256')
+    required=('job_id','job_sha256','draft_sha256','identity_sha256','visible_text_sha256','section_structure_sha256','policy_sha256','full_rule_bundle_sha256','full_rule_catalog_sha256','full_rule_values_sha256','full_rule_hard_count','seal_sha256')
     if any(not str(actual.get(k) or '') for k in required):
         raise WriterContractBlocked('WRITER_PROVENANCE_FIELD_MISSING')
     if actual.get('visible_text_sha256')!=sha_text(_plain(body)):
