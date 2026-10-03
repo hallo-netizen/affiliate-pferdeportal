@@ -36,13 +36,13 @@ def combine(intake: dict, singles: list[dict]) -> dict:
         if not isinstance(rows,list) or len(rows)!=1 or not isinstance(rows[0],dict):
             raise BatchBlocked("SINGLE_WORDPRESS_ARTICLE_INVALID")
         row=rows[0]
-        if set(row)!=WORDPRESS_ARTICLE_FIELDS:
-            raise BatchBlocked("SINGLE_ARTICLE_FIELDS_INVALID")
         slot=str(row.get("plan_slot") or "")
         if not re.fullmatch(r"[0-9a-f]{64}",slot):
             raise BatchBlocked("SINGLE_PLAN_SLOT_INVALID")
         if "article_id" in row or "canonical_article_id" in row:
             raise BatchBlocked("SINGLE_TOPLEVEL_ARTICLE_ID_FORBIDDEN:"+slot)
+        if set(row)!=WORDPRESS_ARTICLE_FIELDS:
+            raise BatchBlocked("SINGLE_ARTICLE_FIELDS_INVALID")
         pc=row.get("production_context") if isinstance(row.get("production_context"),dict) else {}
         pi=pc.get("production_plan_item") if isinstance(pc.get("production_plan_item"),dict) else {}
         aid=str(pi.get("canonical_article_id") or "")
