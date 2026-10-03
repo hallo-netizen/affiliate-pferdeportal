@@ -3,24 +3,23 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "WORDPRESS_SYSTEM4_COMPAT_EXPORT_RESTORED_REAL_REIMPORT_PENDING",
-  "first_open_blocker": {
-    "code": "REAL_WORDPRESS_REIMPORT_PENDING",
-    "detail": "Der reale 0.28.30-Importfehler PSERC_SYSTEM4_CANONICAL_PLAN_SLOT_MISMATCH wurde auf die zwischenzeitlich falsche Compact/PFERDE-Ausgabe article_id=plan_slot zurückgeführt. K0 exportiert wieder SYSTEM4_WORDPRESS_HANDOFF_V1 mit kanonischer article:... ID aus PPM 6.7.9, SHA256-Roundtrip zum plan_slot, vollständig gebundenem production_plan_item/canonical_article und live aufgelöster WordPress-Kategorie. Rebuilt 3er und 16er sind strukturell PASS; realer WordPress-Wiederimport steht noch aus."
-  },
-  "next_action": "REAL_WORDPRESS_REIMPORT_REPAIRED_SYSTEM4_FILE",
+  "status": "FULL_RULE_CHAIN_FIXED_READY_FOR_FRESH_TEST_ARTICLES",
+  "first_open_blocker": null,
+  "next_action": "RUN_FRESH_FICTIONAL_TEST_ARTICLES_THROUGH_K0_START",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
     "goal_ref": "K0_GOAL_CONTRACT.json",
     "canonical_route": [
       "PSERC_TEXTMACHINE_METADATA_BATCH_V2_EXACT_FIVE_FIELDS",
-      "K0_AUTHORING_CONTEXT_V1_TEXT_FREE",
+      "K0_AUTHORING_CONTEXT_V1_TEXT_FREE_WITH_COMPLETE_RULE_CONTEXT",
+      "FULL_CANONICAL_RULE_BUNDLE_BOUND_BEFORE_WRITER",
       "K0_WRITER_JOB_V1_IMMUTABLE",
       "K0_WRITER_DRAFT_V1_ONLY_TEXT_INGRESS",
-      "K0_WRITER_SEAL_V1",
-      "K0_PRODUCTION_GATES_AND_PPM_6_7_9",
+      "K0_WRITER_SEAL_V1_WITH_FULL_RULE_PROVENANCE",
+      "ALL_HARD_ARTICLE_RULES_PRE_LT68",
       "LANGUAGETOOL_6_8",
+      "ALL_HARD_ARTICLE_RULES_FINAL",
       "CANONICAL_ARTICLE_ID_FROM_PPM679_REGISTRY",
       "SYSTEM4_WORDPRESS_HANDOFF_V1_K10_COMPAT_STRUCTURE"
     ],
@@ -56,22 +55,23 @@
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
-    "final_wordpress_batch_status": "REBUILT_SYSTEM4_COMPAT_PENDING_REAL_IMPORT",
+    "final_wordpress_batch_status": "INVALIDATED_PENDING_FULL_RULE_RECHECK",
     "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json",
     "final_wordpress_batch_sha256": "7a5d33f8da04d48d0b93d1a30e35ca9c1ffc747a542c4657d2d2f289c0c93c67",
     "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json",
     "repaired_system4_sha256": "32c0c86ba6800d9aa8ee86497a7db5b22357d13d789e80d9d372570a53da9cbb",
-    "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT"
+    "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT",
+    "full_rule_recheck_status": "NOT_RUN"
   },
   "freshness": {
-    "validated_code_head_sha": "d44c589d94207b5f2dc990a34bae6391be8c78cc",
-    "last_checked_branch_head_sha": "d44c589d94207b5f2dc990a34bae6391be8c78cc",
+    "validated_code_head_sha": "ecaf82dfef940c8a050c7c139afcd289cd6f8a9d",
+    "last_checked_branch_head_sha": "ecaf82dfef940c8a050c7c139afcd289cd6f8a9d",
     "latest_writer_accept_run": 37069142268,
     "latest_writer_accept_result": "SUCCESS_AFTER_CANONICAL_REAUTHOR_ITEM14",
-    "latest_k0_selftest_run": 37116589022,
+    "latest_k0_selftest_run": 37120426101,
     "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "SYSTEM4_K10_COMPAT_EXPORT_RESTORED; LIVE_CATEGORY_BINDING_REQUIRED; COMPACT_PFERDE_EXPORT_INVALIDATED; USER3_AND_REWRITE16_REBUILT"
+    "delta_result": "FULL_RULE_BUNDLE_BEFORE_WRITER; 84_PRE_LT68_PLUS_LT68_EQUALS_85_FINAL_HARD_RULES; LINKS_LISTS_POST_TABLE_SUMMARY_NEGATIVES_BLOCK; WORDPRESS_EXPORT_REQUIRES_FULL_RULE_FINAL_PASS"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -114,7 +114,7 @@
       "ranking_independent_of_affiliate": true,
       "table_required": true,
       "writer_bypass_allowed": false,
-      "status": "PASS"
+      "status": "BLOCKED_PENDING_COMPLETE_FULL_RULE_TYPE_PROFILE"
     }
   },
   "legacy_reference_policy": "FORBIDDEN_IN_ACTIVE_K0_STATUS_HANDOFF_AND_PRODUCTION",
@@ -136,9 +136,42 @@
     "real_reimport_status": "PENDING"
   },
   "user3": {
-    "status": "REBUILT_SYSTEM4_COMPAT_PENDING_REAL_IMPORT",
+    "status": "INVALIDATED_RULE_GAP_DO_NOT_IMPORT",
     "article_count": 3,
     "repaired_system4_sha256": "e5469cadc6cdb120d736556baba4718119b56cdb702f06e1c778da991fb4f9ed",
-    "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT"
+    "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT",
+    "full_rule_recheck_status": "NOT_RUN"
+  },
+  "full_rule_chain": {
+    "status": "PASS_READY_FOR_FRESH_REAL_ARTICLE_TEST",
+    "rule_sources": [
+      "RULE_CATALOG.json",
+      "RULE_VALUES.json",
+      "FIELD_POLICY.json",
+      "TEXTMACHINE_SCOPE_REFERENCE.json"
+    ],
+    "article_hard_rule_count": 85,
+    "pre_lt68_hard_rule_count": 84,
+    "final_hard_rule_count": 85,
+    "complete_rules_bound_before_writer": true,
+    "writer_job_contains_complete_rule_bundle": true,
+    "writer_job_contains_complete_article_rule_context": true,
+    "final_wordpress_export_requires_full_rule_pass": true,
+    "ppm679_parity_is_not_article_quality_pass": true,
+    "required_regression_proofs": {
+      "missing_internal_links": "BLOCK",
+      "missing_required_list": "BLOCK",
+      "missing_post_table_summary": "BLOCK",
+      "valid_complete_article": "PASS"
+    },
+    "selftest_run": 37120375651,
+    "selftest_result": "SUCCESS_93_TESTS",
+    "ppm679_parity": "PASS_104_104",
+    "hardlocks": "PASS"
+  },
+  "pre_fix_k0_outputs": {
+    "status": "QUALITY_PASS_INVALIDATED_PENDING_FULL_RULE_RECHECK",
+    "reason": "Pre-fix K0 used a reduced writer rule package and reduced production content gate. Existing content may be correct, but its old K0 PASS is not accepted as proof of all-rule compliance.",
+    "do_not_treat_as_full_rule_verified": true
   }
 }
