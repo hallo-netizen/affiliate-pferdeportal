@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-04
-STATUS: PSTE 0.57.28 LIVE BELEGT / START BESTANDSAUFBEREITUNG KORREKT BLOCKIERT DURCH AKTIVEN EINZELLAUF / 0.57.29 UI-GUARD LOKAL HARD-PASS
+STATUS: PSTE 0.57.28 LIVE / AKTIVER EINZELLAUF PAUSED_ERROR / 0.57.30 SANDBOX-DATAFLOW-ROOTFIX LOKAL HARD-PASS
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -12,29 +12,47 @@ STATUS: PSTE 0.57.28 LIVE BELEGT / START BESTANDSAUFBEREITUNG KORREKT BLOCKIERT 
 
 ## LIVE-READBACK 2026-10-04
 
-Nutzer-Screenshot belegt:
-- Portal SEO Themenengine **0.57.28 aktiv**;
-- Klick auf **„Vorhandenes Material in Titelkandidaten umwandeln“** wird mit exakt `PSTE_RESEARCH_JOB_ALREADY_ACTIVE` blockiert;
-- damit ist ein bereits gespeicherter aktiver **Einzellauf** vorhanden. Die Bestandsaufbereitung darf gemäß bestehender Parallelitätssperre nicht gleichzeitig starten.
+Nutzer-Screenshot belegt im gespeicherten Einzellauf:
+- Server-Driver: **BLOCKED · `PSTE_DRIVER_REPEATED_SYSTEM_FAILURE`**;
+- gespeicherter Einzellauf: **PAUSED_ERROR**;
+- Datenquellen 3 von 3;
+- Fragen COMPLETE;
+- Abschluss **SANDBOX_BATCH 0/15**;
+- exakter Fehler: **`PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`**;
+- Systemstatus: **HÄNGT-BLOCKED · `PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`**.
 
-Frisch im 0.57.28-Code geprüft:
-- der Backend-Block ist korrekt und schützt vor parallelem Research-/Bestandslauf;
-- UI-Fehler: `Übersicht → Titel aus vorhandenem Material erzeugen` prüft bisher aktive Breadth-/Storage-Zustände, aber **nicht** den aktiven `PSTE_Research_Job`; dadurch bleibt der Startbutton sichtbar, obwohl der Handler anschließend korrekt blockiert.
+Frisch gegen den 0.57.29-Code reproduziert:
+- `PSTE_Sandbox_Record_Contract::fromNormalPath()` berechnet bei V2 die Hashes der echten Portal-/Nearest-/Exclusion-Komponenten;
+- `applyToRecord()` übernahm diese Komponenten aber **nur für den Legacy-Vertrag**;
+- neue V2-Records behielten dadurch leere Top-Level-Komponenten, während `sandbox_dataflow` die Hashes der echten Komponenten trug;
+- der persistenznahe Self-Check blockiert danach korrekt mit exakt `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`.
+Damit ist die Ursache **reproduziert und nicht geraten**.
 
-Lokaler KISS-Kandidat:
-`PSTE-0.57.29-ACTIVE-JOB-GUARD-CANDIDATE.zip`
-SHA-256 `e5baf380157236103a5c15c0cee8da2c750daef207cd4fe9efef6f9791e7f880`.
+Lokaler Rootfix-Kandidat:
+`PSTE-0.57.30-SANDBOX-DATAFLOW-ROOTFIX-CANDIDATE.zip`
+SHA-256:
+`c2f0e9e05f2ffddeea2c7ee022dd18ad04f9f5820ebbab4eabfab1253c235aa4`.
 
-Delta 0.57.28 → 0.57.29 ausschließlich:
-- `includes/class-pste-admin.php`: aktiven Einzellauf read-only erkennen, Startbutton ausblenden, Status/Phase/Fortschritt zeigen und exakt nach **Einstellungen** zum aktiven Lauf verlinken;
-- `portal-seo-topic-engine.php`: Version 0.57.29.
+Fix:
+- V2-Komponenten werden nur transient vom Producer an `applyToRecord()` mitgegeben;
+- dort vor Persistenz gegen die bereits berechneten Hashes validiert;
+- exakt einmal als Record-Komponenten gespeichert;
+- aus `sandbox_dataflow` vor Speicherung wieder entfernt;
+- alle bestehenden Drift-/Hash-Gates bleiben fail-closed.
 
-Hardtests:
+Frische Tests:
+- 0.57.29 Vorher-Negativtest reproduziert exakt `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`;
+- 0.57.30 Positivtest Record-Bindung PASS;
+- Negativtest nach absichtlicher Portal-Komponentenmutation blockiert weiterhin exakt mit `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`;
+- kein transienter Komponenten-Leak in `sandbox_dataflow`;
+- UI-Guard Regression **5/5 PASS**;
+- Fresh-Unpack PHP-Lint **81/81 PASS**;
 - ZIP-Integrität PASS;
-- PHP-Lint **81/81 PASS**;
-- UI-Guard Positiv/Negativ **5/5 PASS**;
-- exakt **2 Dateien geändert**;
-- Normalpfad, Familienlogik, Produktwahl, Repository, Storage, Providerpfade vollständig unverändert.
+- 0 Stray-Backup-Dateien;
+- Delta 0.57.29 → 0.57.30 exakt **2 Dateien**:
+  - `includes/class-pste-sandbox-record-contract.php`;
+  - `portal-seo-topic-engine.php`;
+- Familien-/Struktur-/Normalpfad-/Produktwahl-/Admin-/Repository-/Driver-/Storage-/Titel-/Intent-Dateien gegenüber 0.57.29 hashidentisch.
 
 ## AKTUELLER BELASTBARER LIVE-STAND
 
@@ -147,20 +165,20 @@ Daher:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_RESEARCH_JOB_ALREADY_ACTIVE`
+`PSTE_05730_NEEDS_LIVE_INSTALL_AND_RESUME_READBACK`
 
-Ein gespeicherter Einzellauf ist real aktiv und blockiert zu Recht den parallelen Start der Bestandsaufbereitung. Zusätzlich war die Übersicht irreführend, weil sie den Startbutton trotzdem anzeigte.
+Der konkrete wiederholte Systemfehler ist lokal ursächlich reproduziert und mit 0.57.30 repariert. Offen ist nur noch der Live-Beweis.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05729_AND_RESOLVE_EXISTING_SINGLE_JOB_THEN_START_EXISTING_ONLY`
+`INSTALL_05730_THEN_RESUME_SAVED_BLOCK_ONCE`
 
-1. PSTE **0.57.29** installieren.
-2. `SEO Themenengine → Übersicht` öffnen. Der Startbutton darf bei aktivem Einzellauf nicht mehr erscheinen; stattdessen muss dessen Status/Phase/Fortschritt angezeigt werden.
-3. **„Aktiven Einzellauf unter Einstellungen öffnen“** anklicken.
-4. Unter `SEO Themenengine → Einstellungen → Longtails recherchieren, Titel bilden und Kategorien zuordnen` den gespeicherten Einzellauf über den bestehenden Server-Driver bis terminalen Zustand führen; bei `PAUSED_ERROR`/zulässigem Review exakt vorhandenen Recovery-Button verwenden, nicht löschen/bypassen.
-5. Erst wenn kein aktiver Einzellauf mehr vorhanden ist, `Übersicht → Titel aus vorhandenem Material erzeugen → Vorhandenes Material in Titelkandidaten umwandeln`.
-6. Keine neue DataForSEO-/Provider-Recherche.
+1. PSTE **0.57.30** installieren.
+2. `SEO Themenengine → Einstellungen → Longtails recherchieren, Titel bilden und Kategorien zuordnen` öffnen.
+3. Beim vorhandenen **Gespeicherten Einzellauf** genau einmal **„Gespeicherten Block erneut prüfen“** klicken.
+4. Erwartung: `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT` darf nicht erneut auftreten; `SANDBOX_BATCH` muss über 0/15 weiterlaufen oder ein **neuer anderer** fail-closed Fehlercode erscheinen.
+5. Bei neuem Fehlercode nicht mehrfach klicken, sondern diesen exakten Code als nächsten Blocker übernehmen.
+6. Keine neue Produktionswelle und keine neue DataForSEO-/Provider-Recherche starten.
 
 ## NICHT ANFASSEN
 
