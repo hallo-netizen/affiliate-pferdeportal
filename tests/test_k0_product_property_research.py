@@ -4,6 +4,7 @@ import unittest
 
 from engine.k0_product_property_research import ARTICLE_TYPE, SEARCH_INTENT, Blocked, bind_store, validate_packet
 from engine.k0_writer_station import prepare, Blocked as WriterBlocked
+from tests.k0_rule_context_fixture import rule_context
 
 def stable(x):
     return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':'))
@@ -56,10 +57,26 @@ def context(with_research=True):
     ident=identity()
     pc={'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':ARTICLE_TYPE}}
     if with_research: pc['property_research']=packet()
+    rc=rule_context(ident)
+    digest=lambda x: hashlib.sha256(stable(x).encode()).hexdigest()
     return {
         'contract':'K0_AUTHORING_CONTEXT_V1','run_instance_id':'run:1234567890abcdef12345678',
         'identity':ident,'content_profile':{'search_intent':SEARCH_INTENT},
-        'production_context':pc,'publish_allowed':False
+        'production_context':pc,
+        'fresh_research':{
+            'contract':'K0_FRESH_RESEARCH_RECEIPT_V1',
+            'research_session_id':'research:444444444444444444444444',
+            'mode':'FRESH_FROM_CURRENT_ASSIGNMENT',
+            'assignment_identity_sha256':digest(ident),
+            'research_payload_sha256':digest({'fact_pack':pc['fact_pack'],'research_claims':rc['research_claims']}),
+            'full_topic_research_required':True,
+            'historical_text_used':False,
+            'historical_research_artifact_used':False,
+            'historical_similarity_blocking':False,
+            'historical_information_blacklist':False,
+        },
+        'rule_context':rc,
+        'publish_allowed':False
     }
 
 class PropertyResearchTests(unittest.TestCase):
