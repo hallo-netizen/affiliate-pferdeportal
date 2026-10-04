@@ -1,0 +1,2665 @@
+{
+  "contract": "K0_WRITER_JOB_V1",
+  "status": "OPEN",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdehaftpflicht-beratung",
+    "plan_slot": "759950a74a337da2c8d8ece5783df3b7d2e0a4a043ec83bccfff55d9b5c5db2d",
+    "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+    "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+  },
+  "portal_id": "pferdeatelier",
+  "run_instance_id": "run:99d53f26bd0e7102c6038a7f",
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/"
+        },
+        {
+          "source_title": "Uelzener Pferdehaftpflichtversicherung",
+          "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/"
+        },
+        {
+          "source_title": "GHV Pferdehalterhaftpflicht",
+          "source_url": "https://www.ghv-versicherung.de/pferd/pferdehalterhaftpflicht"
+        }
+      ],
+      "claims": [
+        "Allianz führt neben dem Pferdehalter unter anderem Reitbeteiligte, Hüter sowie Gast- und Fremdreiter als mitversicherte Personen auf.",
+        "Uelzener bezeichnet Fremdreiter als unregelmäßige und unentgeltliche Reiter eines Pferdes und schließt Fremd- sowie Gastreiter in die genannten Pferdehaftpflichttarife ein.",
+        "Uelzener grenzt die regelmäßige Reitbeteiligung vom gelegentlichen Gastreiter ab und nennt beide Personengruppen als mitversichert.",
+        "GHV beschreibt Schutz für Reitbeteiligungen und Fremdreiter bei Schäden an Dritten und erwähnt zugleich deren mögliche Ansprüche gegen den Pferdehalter.",
+        "Allianz unterscheidet Schäden, die das fremde Pferd während des Reitens verursacht, von Schäden aus einem eigenen Missgeschick des Reiters; für Letztere wird auf die private Haftpflicht verwiesen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "allowed_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "source_retrieval_provenance": {
+      "contract": "K0_RUN_BOUND_SOURCE_RETRIEVAL_PROVENANCE_V1",
+      "status": "PASS",
+      "retrieval_run_id": "research:4327f125e2b89bc1e8b9f42a",
+      "retrieved_at_utc": "2026-10-04T08:36:00Z",
+      "sources": [
+        {
+          "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+          "retrieved_at_utc": "2026-10-04T08:36:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Uelzener Pferdehaftpflichtversicherung",
+          "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+          "retrieved_at_utc": "2026-10-04T08:36:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "GHV Pferdehalterhaftpflicht",
+          "source_url": "https://www.ghv-versicherung.de/pferd/pferdehalterhaftpflicht",
+          "retrieved_at_utc": "2026-10-04T08:36:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        }
+      ],
+      "historical_research_used": false,
+      "publish_allowed": false
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine Pferdehaftpflicht auswählen, deren Fremdreiterrisiko zum tatsächlichen Nutzungsalltag des Pferdes passt.",
+      "decision_criteria": [
+        "Versicherter Personenkreis",
+        "Schäden gegenüber Dritten",
+        "Ansprüche von Fremdreitern",
+        "Abgrenzung zur privaten Haftpflicht"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+        "statement": "Allianz führt neben dem Pferdehalter unter anderem Reitbeteiligte, Hüter sowie Gast- und Fremdreiter als mitversicherte Personen auf.",
+        "evidence_text": "Allianz führt neben dem Pferdehalter unter anderem Reitbeteiligte, Hüter sowie Gast- und Fremdreiter als mitversicherte Personen auf.",
+        "evidence_text_sha256": "394f75c5f1782ee036b1ffd9c8d2ac79d320e9aa957b74534c31569f4ee764cf",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Uelzener Pferdehaftpflichtversicherung",
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "statement": "Uelzener bezeichnet Fremdreiter als unregelmäßige und unentgeltliche Reiter eines Pferdes und schließt Fremd- sowie Gastreiter in die genannten Pferdehaftpflichttarife ein.",
+        "evidence_text": "Uelzener bezeichnet Fremdreiter als unregelmäßige und unentgeltliche Reiter eines Pferdes und schließt Fremd- sowie Gastreiter in die genannten Pferdehaftpflichttarife ein.",
+        "evidence_text_sha256": "9af8ff642af91767b994664171f93b323199d75ec82c655c868373fc7520353d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Uelzener Pferdehaftpflichtversicherung",
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "statement": "Uelzener grenzt die regelmäßige Reitbeteiligung vom gelegentlichen Gastreiter ab und nennt beide Personengruppen als mitversichert.",
+        "evidence_text": "Uelzener grenzt die regelmäßige Reitbeteiligung vom gelegentlichen Gastreiter ab und nennt beide Personengruppen als mitversichert.",
+        "evidence_text_sha256": "611f0da9e9d8928803cc87ce1fcd24662b60c7b2eb6cf431fbf31e04ea712919",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "GHV Pferdehalterhaftpflicht",
+        "source_url": "https://www.ghv-versicherung.de/pferd/pferdehalterhaftpflicht",
+        "statement": "GHV beschreibt Schutz für Reitbeteiligungen und Fremdreiter bei Schäden an Dritten und erwähnt zugleich deren mögliche Ansprüche gegen den Pferdehalter.",
+        "evidence_text": "GHV beschreibt Schutz für Reitbeteiligungen und Fremdreiter bei Schäden an Dritten und erwähnt zugleich deren mögliche Ansprüche gegen den Pferdehalter.",
+        "evidence_text_sha256": "3d18e3dbb1de9a3cf3a930625c44203ded9c682a312389aa2a3f8e659f285c10",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+        "statement": "Allianz unterscheidet Schäden, die das fremde Pferd während des Reitens verursacht, von Schäden aus einem eigenen Missgeschick des Reiters; für Letztere wird auf die private Haftpflicht verwiesen.",
+        "evidence_text": "Allianz unterscheidet Schäden, die das fremde Pferd während des Reitens verursacht, von Schäden aus einem eigenen Missgeschick des Reiters; für Letztere wird auf die private Haftpflicht verwiesen.",
+        "evidence_text_sha256": "5ddb68c07cfbd3253893a786686bc603fdcc86c6e27907b2f5f217656ef0b180",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "anchor": "Beratung zur Pferdehaftpflicht",
+        "block": "decision"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/",
+        "anchor": "Pferde Atelier",
+        "block": "coverage_scope"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "anchor": "Pferdehaftpflicht-Beratung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "active": true
+      },
+      {
+        "href": "/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdehaftpflicht-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdehaftpflicht",
+      "Fremdreiterrisiko",
+      "Personen",
+      "Vertrag",
+      "Tarifwahl",
+      "Schutz",
+      "Fremdreiter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Eine Tabelle würde unterschiedliche Haftungssituationen und Tarifformulierungen zu stark vereinfachen; die Abgrenzungen brauchen erklärenden Kontext."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria",
+    "identity_sha256": "667aac1955f8782de95063941fbcc30d973190f64e5e673ce7d2aaf23a448d55",
+    "catalog_sha256": "747276597c8088eb2b4d5ab1fe5d65affd1c9122ce54cfd7b3b699162adb368c",
+    "rule_values_sha256": "640387c55b85dd17d513549addb28b8c5f219543846aa147ad0f06fe8017f814"
+  },
+  "writer_rule_bundle": {
+    "contract": "K0_FULL_RULE_BUNDLE_V1",
+    "article_type": "Beratung",
+    "catalog_sha256": "747276597c8088eb2b4d5ab1fe5d65affd1c9122ce54cfd7b3b699162adb368c",
+    "rule_values_sha256": "640387c55b85dd17d513549addb28b8c5f219543846aa147ad0f06fe8017f814",
+    "field_policy_sha256": "82e60ea72ba9065ed11487db553cd1e2a616541c045747f9f681f37106ed45c9",
+    "scope_reference_sha256": "09bdaeee95495000e8fde2b22fe886efdb1e4a52a2405b18e74666c82a9a0098",
+    "article_hard_rule_count": 85,
+    "article_hard_rule_ids": [
+      "lt68.language_zero_unresolved",
+      "conclusion.hard_limits",
+      "conclusion.type_minimum_ratio",
+      "facts.conclusion_no_new_untraced_facts",
+      "facts.trace_binding",
+      "facts.trace_required",
+      "facts.trace_required_blocks",
+      "heading.duplicate_normalized_forbidden",
+      "heading.grammatical_variety",
+      "heading.hard_length",
+      "heading.keyword_staccato_forbidden",
+      "heading.natural_concrete_section_language",
+      "heading.phrase_family_repetition_forbidden",
+      "heading.target_phrase_control",
+      "links.required_roles",
+      "links.visible_exact",
+      "structure.duplicate_block_names_forbidden",
+      "structure.required_blocks",
+      "structure.required_lists",
+      "surface.non_template_language",
+      "surface.repetition_forbidden",
+      "table.canonical_classes",
+      "table.compact_cells",
+      "table.compact_labels",
+      "table.post_summary_policy",
+      "table.required_for_comparison",
+      "table.value_required_if_present",
+      "title.colon_forbidden",
+      "title.keyword_required",
+      "type.metadata_schema",
+      "type.question_mark_policy",
+      "words.further_information_maximum",
+      "words.hard_total_range",
+      "words.main_text_minimum_ratio",
+      "words.section_balance_ratio",
+      "words.section_range",
+      "structure.body_h1_forbidden",
+      "structure.title_not_repeated_in_body",
+      "structure.visible_test_marker_forbidden",
+      "structure.machine_status_word_forbidden",
+      "structure.paragraph_floor",
+      "structure.h2_floor",
+      "structure.required_blocks_nonempty",
+      "structure.section_ids_unique",
+      "structure.section_order",
+      "structure.section_h2_exact_one",
+      "structure.section_paragraph_required",
+      "structure.list_minimum_items",
+      "structure.intro_first",
+      "structure.intro_structure",
+      "structure.adjacent_headings_forbidden",
+      "structure.faq_direct_answer",
+      "structure.text_between_headings_minimum",
+      "structure.html_balanced",
+      "heading.intent_binding",
+      "heading.semantic_duplicate_forbidden",
+      "surface.known_regression_patterns_forbidden",
+      "surface.known_unnatural_language_forbidden",
+      "surface.duplicate_sentence_ratio",
+      "surface.intro_similarity",
+      "facts.real_source_trace",
+      "facts.source_label_option_match",
+      "facts.visible_unit_fact_refs",
+      "facts.referenced_fact_exists",
+      "facts.referenced_fact_verified",
+      "facts.referenced_fact_type_allowed",
+      "facts.numeric_claim_supported",
+      "facts.fact_pack_coverage",
+      "facts.trace_lexical_support",
+      "facts.runtime_fact_allowlist",
+      "links.bound_pairs_exact",
+      "links.registry_active",
+      "links.section_placement",
+      "links.relative_internal_only",
+      "links.further_information_position",
+      "links.distributed_across_blocks",
+      "links.runtime_roles_bound",
+      "links.not_clustered_at_end",
+      "table.presence_policy",
+      "table.minimum_rows",
+      "table.structure",
+      "conclusion.minimum_paragraphs",
+      "wordpress.semantic_category_binding",
+      "intro.orientation_sentence",
+      "table.optional_decision_documented"
+    ],
+    "article_target_rule_ids": [
+      "words.word_budget_exclusions",
+      "conclusion.target_ratio",
+      "heading.preferred_words",
+      "words.preferred_total_range",
+      "writer.safety_targets",
+      "intro.preferred_total_words",
+      "conclusion.no_padding_target"
+    ],
+    "rule_catalog": {
+      "classifications": {
+        "DESCRIPTIVE": "metadata or intent; not itself a machine blocker",
+        "HARD": "must be machine checked and blocks on failure",
+        "TARGET": "writer guidance only; never silently promoted to blocker"
+      },
+      "contract": "K10_CENTRAL_RULE_CATALOG_V2",
+      "principle": "ONE_HARD_RULE_ONE_OWNER_ONE_CONTENT_CHECK_THEN_RECEIPT_ONLY",
+      "publish_allowed": false,
+      "rules": [
+        {
+          "check_stage": "LANGUAGE_GATE",
+          "classification": "HARD",
+          "id": "lt68.language_zero_unresolved",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "lt68_adapter",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.surface_policy.natural_german_required"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "conclusion.hard_limits",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.conclusion_policy.maximum_paragraphs",
+            "editorial_additive.conclusion_policy.maximum_ratio"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "conclusion.type_minimum_ratio",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "types.*.conclusion_min_ratio"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.conclusion_no_new_untraced_facts",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.conclusion_no_new_untraced_facts"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.trace_binding",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.source_trace_contract.class",
+            "global.source_trace_contract.data_fact_id_source",
+            "global.source_trace_contract.data_source_hash_source",
+            "global.source_trace_contract.data_source_title_source",
+            "global.source_trace_contract.minimum_count",
+            "global.source_trace_contract.placement",
+            "global.source_trace_contract.required_attributes"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.trace_required",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.all_factual_blocks_require_trace",
+            "global.fact_trace_required"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.trace_required_blocks",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "types.*.fact_trace_required_blocks"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.duplicate_normalized_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.duplicate_normalized_h2_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.grammatical_variety",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.grammatical_pattern_variety_required"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.hard_length",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.hard_h2_chars_max",
+            "editorial_additive.heading_policy.hard_h2_words_max"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.keyword_staccato_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.keyword_staccato_forbidden",
+            "editorial_additive.heading_policy.significant_keyword_stop_tokens",
+            "editorial_additive.heading_policy.significant_target_keyword_token_h2_occurrences_max"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.natural_concrete_section_language",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.generic_filler_word_driven_heading_forbidden",
+            "editorial_additive.heading_policy.heading_content_relation_required",
+            "editorial_additive.heading_policy.natural_heading_surface_required",
+            "editorial_additive.heading_policy.section_specific_content_required",
+            "editorial_additive.heading_policy.short_special_heading_exception"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.phrase_family_repetition_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.phrase_family_repetition_forbidden",
+            "editorial_additive.heading_policy.repeated_heading_lead_word_max"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.target_phrase_control",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.heading_policy.exact_target_phrase_occurrences_max",
+            "editorial_additive.heading_policy.exact_target_phrase_occurrences_min_when_no_title_collision",
+            "editorial_additive.heading_policy.exact_target_phrase_occurrences_when_title_equals_target",
+            "editorial_additive.heading_policy.target_keyword_exact_phrase_mode"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.required_roles",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.required_link_roles"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.visible_exact",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.visible_links_exact"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.duplicate_block_names_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.duplicate_block_names_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.required_blocks",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "types.*.required_blocks"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.required_lists",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "types.*.required_lists"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "surface.non_template_language",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.surface_policy.artificial_generator_phrase_forbidden",
+            "editorial_additive.surface_policy.forbidden_generator_phrases",
+            "editorial_additive.surface_policy.template_spam_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "surface.repetition_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.surface_policy.keyword_staccato_forbidden",
+            "editorial_additive.surface_policy.phrase_family_repetition_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.canonical_classes",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.canonical_table_classes"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.compact_cells",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "table_rule.other_cells.flow_text_forbidden",
+            "table_rule.other_cells.hard_maximum_words",
+            "table_rule.other_cells.sentences_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.compact_labels",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "table_rule.first_column.maximum_words",
+            "table_rule.first_column.multiword_exception",
+            "table_rule.first_column.sentences_forbidden",
+            "table_rule.header.maximum_words",
+            "table_rule.header.multiword_exception",
+            "table_rule.header.sentences_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.post_summary_policy",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.post_table_summary_policy.location",
+            "global.post_table_summary_policy.new_facts_forbidden",
+            "global.post_table_summary_policy.paragraphs_exact",
+            "global.post_table_summary_policy.purpose",
+            "global.post_table_summary_policy.required",
+            "global.post_table_summary_policy.sentences_max",
+            "global.post_table_summary_policy.sentences_min",
+            "global.post_table_summary_policy.words_max",
+            "global.post_table_summary_policy.words_min"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.required_for_comparison",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K10_USER_APPROVED_TABLE_POLICY_2026-10-01"
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.value_required_if_present",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K10_USER_APPROVED_TABLE_VALUE_RULE_2026-10-01"
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "title.colon_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.title_colon_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "title.keyword_required",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.title_keyword_required"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "type.metadata_schema",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "types.*.type_meta_schema.fields.comparison_criteria.min_items",
+            "types.*.type_meta_schema.fields.comparison_criteria.type",
+            "types.*.type_meta_schema.fields.comparison_criteria.unique_items",
+            "types.*.type_meta_schema.fields.comparison_targets.min_items",
+            "types.*.type_meta_schema.fields.comparison_targets.type",
+            "types.*.type_meta_schema.fields.comparison_targets.unique_items",
+            "types.*.type_meta_schema.fields.decision_criteria.min_items",
+            "types.*.type_meta_schema.fields.decision_criteria.type",
+            "types.*.type_meta_schema.fields.decision_criteria.unique_items",
+            "types.*.type_meta_schema.fields.decision_goal.min_length",
+            "types.*.type_meta_schema.fields.decision_goal.type",
+            "types.*.type_meta_schema.fields.primary_question.min_length",
+            "types.*.type_meta_schema.fields.primary_question.type",
+            "types.*.type_meta_schema.fields.procedure_goal.min_length",
+            "types.*.type_meta_schema.fields.procedure_goal.type",
+            "types.*.type_meta_schema.fields.procedure_steps.min_items",
+            "types.*.type_meta_schema.fields.procedure_steps.type",
+            "types.*.type_meta_schema.fields.procedure_steps.unique_items",
+            "types.*.type_meta_schema.fields.risk_controls.min_items",
+            "types.*.type_meta_schema.fields.risk_controls.type",
+            "types.*.type_meta_schema.fields.risk_controls.unique_items",
+            "types.*.type_meta_schema.required"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "type.question_mark_policy",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "types.*.question_mark"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "words.further_information_maximum",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.balance_policy.further_information_maximum_words"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "words.hard_total_range",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.balance_policy.hard_total_words_max",
+            "editorial_additive.balance_policy.hard_total_words_min"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "words.main_text_minimum_ratio",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.balance_policy.normal_h2_combined_minimum_ratio"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "words.section_balance_ratio",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.balance_policy.normal_h2_longest_to_shortest_max_ratio"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "words.section_range",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.balance_policy.normal_h2_section_max_words",
+            "editorial_additive.balance_policy.normal_h2_section_min_words",
+            "editorial_additive.balance_policy.exempt_blocks"
+          ]
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "words.word_budget_exclusions",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.balance_policy.exempt_blocks",
+            "editorial_additive.balance_policy.further_information_may_fill_word_budget",
+            "editorial_additive.balance_policy.table_may_fill_word_budget",
+            "table_rule.word_budget.missing_article_words_must_be_added_to_normal_prose",
+            "table_rule.word_budget.table_words_count_toward_article_minimum"
+          ]
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "conclusion.target_ratio",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K9 conclusion target range"
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "heading.preferred_words",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K9 heading preferred range"
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "words.preferred_total_range",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K9 preferred total range"
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "writer.safety_targets",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K9 writer targets"
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "endstempel.signature",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "endstempel_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "ENDSTEMPEL"
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "pserc.final_integrity",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "pserc_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PSERC"
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "wordpress.final_verify",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "wordpress_verify_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "WORDPRESS_VERIFY"
+        },
+        {
+          "check_stage": "ALL_STAGES",
+          "classification": "HARD",
+          "id": "publish.allowed",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "safety_checker",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.publish_allowed",
+            "table_rule.publish_allowed"
+          ]
+        },
+        {
+          "check_stage": "BASELINE_BOOTSTRAP",
+          "classification": "HARD",
+          "id": "baseline.external_gate_hash_binding",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "baseline_guard",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "coverage.rule_groups.lt_68.source_sha256",
+            "coverage.rule_groups.ppm_679.source_sha256",
+            "source_ppm_sha256"
+          ]
+        },
+        {
+          "check_stage": "CATALOG_BOOTSTRAP",
+          "classification": "HARD",
+          "id": "meta.catalog_coverage_fail_closed",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "catalog_guard",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "coverage.fail_closed",
+            "coverage.future_rule_policy",
+            "coverage.policy",
+            "coverage.required_rule_groups"
+          ]
+        },
+        {
+          "check_stage": "CATALOG_BOOTSTRAP",
+          "classification": "HARD",
+          "id": "meta.catalog_owner_binding",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "catalog_guard",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "coverage.rule_groups.editorial_additive.enforced_by",
+            "coverage.rule_groups.k9_structural.enforced_by",
+            "coverage.rule_groups.lt_68.enforced_by",
+            "coverage.rule_groups.ppm_679.enforced_by"
+          ]
+        },
+        {
+          "check_stage": "CATALOG_BOOTSTRAP",
+          "classification": "HARD",
+          "id": "table.rule_active",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "catalog_guard",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "table_rule.status"
+          ]
+        },
+        {
+          "check_stage": "ISOLATION_BOOTSTRAP",
+          "classification": "HARD",
+          "id": "isolation.no_legacy_runtime_dependency",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "isolation_guard",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "runtime_dependency_on_legacy"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.topic_specific_special_logic_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "SYSTEM",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "global.topic_specific_special_logic_forbidden"
+          ]
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.body_h1_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.title_not_repeated_in_body",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.visible_test_marker_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.machine_status_word_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.paragraph_floor",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.h2_floor",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.required_blocks_nonempty",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.section_ids_unique",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.section_order",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.section_h2_exact_one",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.section_paragraph_required",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.list_minimum_items",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.intro_first",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.intro_structure",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.adjacent_headings_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.faq_direct_answer",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.text_between_headings_minimum",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "structure.html_balanced",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.intent_binding",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "heading.semantic_duplicate_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "surface.known_regression_patterns_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "surface.known_unnatural_language_forbidden",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "surface.duplicate_sentence_ratio",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "surface.intro_similarity",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.real_source_trace",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.source_label_option_match",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.visible_unit_fact_refs",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.referenced_fact_exists",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.referenced_fact_verified",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.referenced_fact_type_allowed",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.numeric_claim_supported",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.fact_pack_coverage",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.trace_lexical_support",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "facts.runtime_fact_allowlist",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "fact_trace_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.bound_pairs_exact",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.registry_active",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.section_placement",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.relative_internal_only",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.further_information_position",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.distributed_across_blocks",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.runtime_roles_bound",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "links.not_clustered_at_end",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.presence_policy",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.minimum_rows",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.structure",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "conclusion.minimum_paragraphs",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "balance_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "wordpress.semantic_category_binding",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "structural_checker",
+          "scope": "ARTICLE",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WORDPRESS_VERIFY",
+          "classification": "HARD",
+          "id": "wordpress.rendered_h1_integrity",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "wordpress_verify_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WORDPRESS_VERIFY",
+          "classification": "HARD",
+          "id": "wordpress.rendered_duplicate_heading_integrity",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "wordpress_verify_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WORDPRESS_VERIFY",
+          "classification": "HARD",
+          "id": "wordpress.rendered_adjacent_heading_integrity",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "wordpress_verify_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.content_validator_contract_supported",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.article_type_definition_bound",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.article_content_hash_bound",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.section_requirements_present",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.section_requirements_hash",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.canonical_validation_binding",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.wave2_contract",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.quality_binding_present",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.quality_binding_hash",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.internal_marker_bound",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.link_registry_hash",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.language_delta_evidence",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.language_evidence",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "lt68_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "FINAL_INTEGRITY",
+          "classification": "HARD",
+          "id": "integrity.known_error_contract",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "integrity_guard",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WORDPRESS_VERIFY",
+          "classification": "HARD",
+          "id": "integrity.rendered_evidence_class",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "wordpress_verify_adapter",
+          "scope": "PACKAGE_INTEGRITY",
+          "source": "PPM679_EXACT_104_PARITY",
+          "source_fields": []
+        },
+        {
+          "check_stage": "SYSTEM_PREFLIGHT",
+          "classification": "HARD",
+          "id": "meta.ppm104_parity",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "catalog_guard",
+          "scope": "SYSTEM",
+          "source": "K10_PPM679_104_PARITY_MAP_V1",
+          "source_fields": []
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "intro.orientation_sentence",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "editorial_checker",
+          "scope": "ARTICLE",
+          "source": "K10_USER_APPROVED_INTRO_ORIENTATION_RULE_2026-10-02"
+        },
+        {
+          "check_stage": "WRITE_PREFLIGHT",
+          "classification": "HARD",
+          "id": "table.optional_decision_documented",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "table_checker",
+          "scope": "ARTICLE",
+          "source": "K10_USER_APPROVED_OPTIONAL_TABLE_DECISION_RULE_2026-10-02"
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "intro.preferred_total_words",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K10_USER_APPROVED_INTRO_READABILITY_TARGET_2026-10-02"
+        },
+        {
+          "check_stage": "WRITE_GUIDANCE",
+          "classification": "TARGET",
+          "id": "conclusion.no_padding_target",
+          "implementation_status": "IMPLEMENTED",
+          "owner": "writer_guidance",
+          "scope": "ARTICLE",
+          "source": "K9_RULE_FIELD_INVENTORY",
+          "source_fields": [
+            "editorial_additive.conclusion_policy.use_conclusion_to_fill_global_word_or_paragraph_floor"
+          ]
+        }
+      ]
+    },
+    "rule_values": {
+      "balance": {
+        "conclusion_maximum_paragraphs": 3,
+        "conclusion_maximum_ratio": 0.15,
+        "exempt_blocks": [
+          "table",
+          "conclusion",
+          "further_information"
+        ],
+        "further_information_maximum_words": 60,
+        "further_information_may_fill_word_budget": false,
+        "hard_total_words_max": 900,
+        "hard_total_words_min": 750,
+        "normal_h2_combined_minimum_ratio": 0.5,
+        "normal_h2_longest_to_shortest_max_ratio": 1.5,
+        "normal_h2_section_max_words": 220,
+        "normal_h2_section_min_words": 100,
+        "table_may_fill_word_budget": false,
+        "use_conclusion_to_fill_global_word_or_paragraph_floor": false
+      },
+      "contract": "K10_RULE_VALUES_V1",
+      "global": {
+        "canonical_table_classes": [
+          "system-129-table",
+          "comparison-table"
+        ],
+        "duplicate_block_names_forbidden": true,
+        "post_table_summary": {
+          "new_facts_forbidden": true,
+          "paragraphs_exact": 1,
+          "required": true,
+          "sentences_max": 2,
+          "sentences_min": 1,
+          "words_max": 35,
+          "words_min": 12
+        },
+        "publish_allowed": false,
+        "required_link_roles": [
+          "parent_category",
+          "semantic_related",
+          "further_information"
+        ],
+        "source_trace": {
+          "class": "ppm-source-trace",
+          "minimum_count": 3,
+          "required_attributes": [
+            "data-fact-id",
+            "data-source-hash",
+            "data-source-title"
+          ]
+        },
+        "title_colon_forbidden": true,
+        "title_keyword_required": true,
+        "visible_links_exact": 3
+      },
+      "heading": {
+        "abstract_meta_patterns": [
+          "verständlich erklärt",
+          "sinnvoll abstimmen",
+          "einordnen"
+        ],
+        "content_overlap_min_significant_tokens": 1,
+        "exact_target_phrase_occurrences_max": 2,
+        "exact_target_phrase_occurrences_min_when_no_title_collision": 1,
+        "exact_target_phrase_occurrences_when_title_equals_target": 0,
+        "hard_h2_chars_max": 65,
+        "hard_h2_words_max": 9,
+        "repeated_heading_end_word_max": 2,
+        "repeated_heading_lead_word_max": 2,
+        "significant_keyword_stop_tokens": [
+          "der",
+          "die",
+          "das",
+          "ein",
+          "eine",
+          "einen",
+          "einem",
+          "einer",
+          "und",
+          "oder",
+          "mit",
+          "ohne",
+          "unter",
+          "ueber",
+          "über",
+          "von",
+          "zu",
+          "zum",
+          "zur",
+          "im",
+          "in",
+          "am",
+          "an",
+          "auf",
+          "ist",
+          "sind",
+          "wie",
+          "was",
+          "welche",
+          "welcher",
+          "welches",
+          "warum",
+          "kann",
+          "man",
+          "fuer",
+          "für",
+          "pferd",
+          "pferde"
+        ],
+        "significant_target_keyword_token_h2_occurrences_max": 2
+      },
+      "ppm_parity": {
+        "content": {
+          "maximum_duplicate_sentence_ratio": 0.02,
+          "maximum_intro_pair_similarity": 0.55,
+          "minimum_h2": 4,
+          "minimum_paragraphs": 16,
+          "minimum_words": 750
+        },
+        "facts": {
+          "minimum_fact_pack_coverage_ratio": 0.75,
+          "minimum_trace_lexical_support_ratio": 0.8,
+          "required_selected_fact_coverage_ratio": 1
+        },
+        "faq": {
+          "direct_answer_minimum_words": 12,
+          "direct_answer_required": true,
+          "forbidden_meta_openings": [
+            "die ausgangsfrage besteht",
+            "die frage lässt sich",
+            "zunächst muss geprüft werden",
+            "eine belastbare antwort",
+            "die kurze antwort lautet"
+          ]
+        },
+        "forbidden_machine_status_words": [
+          "TECHNICAL_CHECK_OK",
+          "CONTENT_QUALITY_CHECK_OK",
+          "BLOCKED_TECHNICAL_CHECK",
+          "BLOCKED_CONTENT_QUALITY_CHECK",
+          "PUBLISH_ALLOWED",
+          "OUTPUT_GATE_REQUIRED",
+          "CERTIFIED",
+          "SYSTEM4_FULL_CHECK_PASS"
+        ],
+        "headings": {
+          "forbidden_fragments": [
+            "antwort ableiten",
+            "antworten und nächste schritte",
+            "nicht belastbar",
+            "prüfpunkte",
+            "im überblick",
+            "ausgangsfrage besteht",
+            "entscheidung ableiten",
+            "teilfragen"
+          ],
+          "generic_or_technical_headings": [
+            "Die kurze Antwort",
+            "Die wichtigsten Teilfragen",
+            "Antworten und nächste Schritte im Überblick",
+            "Wann die Antwort noch nicht belastbar ist",
+            "Antworten im Überblick",
+            "Nächste Schritte",
+            "Überblick",
+            "Entscheidungsmatrix",
+            "Pflegeablauf im Überblick",
+            "Die Antwort aus Anhängelast ableiten"
+          ],
+          "legacy_maximum_words": 14,
+          "legacy_minimum_words": 2,
+          "minimum_words_between_headings": 28,
+          "near_duplicate_token_similarity": 0.72,
+          "reserved_headings": [
+            "Fazit",
+            "Weiterführende Informationen"
+          ]
+        },
+        "intro": {
+          "first_visible_element": "p",
+          "heading_forbidden": true,
+          "maximum_words": 100,
+          "minimum_words": 30,
+          "required_block": "intro"
+        },
+        "known_bad_headings": [
+          "Die kurze Antwort",
+          "Die wichtigsten Teilfragen",
+          "Antworten und nächste Schritte im Überblick",
+          "Wann die Antwort noch nicht belastbar ist",
+          "Entscheidungsmatrix",
+          "Vergleichsmatrix",
+          "Pflegeablauf im Überblick"
+        ],
+        "known_error_minimum_list_items": 4,
+        "known_error_regression_patterns": [
+          "Der fachliche Grund ist, dass",
+          "Die konkrete Handlung lautet",
+          "Als belastbares Ergebnis muss",
+          "Dadurch bleibt erkennbar",
+          "Eine Annahme kann den fehlenden Beleg"
+        ],
+        "known_language_regression_phrases": [
+          "die ausgangsfrage besteht aus mehreren eigenständigen prüfpunkten",
+          "das ergebnis grenzt normale veränderung von einem behandlungsbedürftigen befund ab",
+          "vor dem fortsetzen muss dieser arbeitsschritt nachvollziehbar beendet sein",
+          "ohne frühere ergebnisse zu überbewerten",
+          "die vorletzte kontrolle wird nicht übersprungen"
+        ],
+        "language_evidence": {
+          "checked_text_must_match_visible_text": true,
+          "human_exception_required_fields": [
+            "exception_id",
+            "exact_rule_id",
+            "exact_text",
+            "reason",
+            "approved_by_human_user",
+            "reference_file",
+            "reference_hash"
+          ],
+          "inner_dependency_sha256": "6a7f6b67b779ae9505f7579f0c41453ea8d1bd72ae750bdc2c55ba974281467d",
+          "outer_dependency_sha256": "187f7c2efe7762049e9f00553dafe686e269bbf62220abe2f2715fe55df8605a",
+          "raw_finding_count_exact": 0,
+          "raw_report_json_required": true,
+          "required_engine": "LanguageTool 6.8 / Bestand 43",
+          "return_code_exact": 0,
+          "unresolved_findings_exact": 0
+        },
+        "links": {
+          "all_links_must_be_in_distinct_blocks": true,
+          "further_information_block": "further_information",
+          "relative_internal_only": true,
+          "required_count": 3,
+          "required_roles": [
+            "parent_category",
+            "semantic_related",
+            "further_information"
+          ]
+        },
+        "lists": {
+          "minimum_items_in_one_list": 4,
+          "minimum_lists": 1
+        },
+        "table": {
+          "generic_column_headings_forbidden": [
+            "Punkt",
+            "Wert",
+            "Info",
+            "Information",
+            "Details",
+            "Aspekt"
+          ],
+          "generic_headings_forbidden": [
+            "Tabelle",
+            "Überblick",
+            "Zusammenfassung",
+            "Daten",
+            "Informationen"
+          ],
+          "minimum_body_rows": 4,
+          "minimum_columns": 3,
+          "minimum_unique_content_token_ratio": 0.18
+        },
+        "visible_test_marker_regex": "\\[LT[0-9A-Z-]{6,}\\]",
+        "wordpress_binding": {
+          "category_id_minimum": 1,
+          "forbidden_category_slugs": [
+            "uncategorized",
+            "allgemein",
+            "standard"
+          ],
+          "internal_marker_meta_key": "_ppm679_test_marker"
+        }
+      },
+      "provenance": {
+        "baseline_commit": "2cc8167fa1e31b4ffa2ff76c9819314be4b98555",
+        "lt68_sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "ppm_sha256": "acbda93bd1c4292de7aaf88db2195631103991ff508b36c88cb694714818abd1",
+        "table_rule_blob_sha": "e04910517ae30bb7dd55f5b1e35c26a77d87d7e4",
+        "writing_rules_blob_sha": "6f24586df18a8f831a33a16e4e80b34841ac84f0"
+      },
+      "surface": {
+        "forbidden_generator_phrases": [
+          "Beim Thema „",
+          "Unter dem Aspekt „",
+          "Der Aspekt „",
+          "gibt die fachliche Richtung vor",
+          "hält die Auswahl am Bedarf",
+          "schafft damit einen sachlichen Anschluss"
+        ]
+      },
+      "table": {
+        "first_column_maximum_words": 3,
+        "flow_text_forbidden": true,
+        "header_maximum_words": 3,
+        "minimum_unique_content_token_ratio": 0.18,
+        "other_cells_hard_maximum_words": 7,
+        "presence_policy": {
+          "Beratung": "REQUIRED_UNLESS_EXCEPTION",
+          "FAQ": "REQUIRED_UNLESS_EXCEPTION",
+          "Pflege": "REQUIRED_UNLESS_EXCEPTION",
+          "Vergleich": "REQUIRED"
+        },
+        "sentences_forbidden": true,
+        "table_words_count_toward_article_minimum": false,
+        "target_unique_content_token_ratio": 0.22,
+        "optional_decision": {
+          "required_for_optional_types": true,
+          "omit_value": "OMIT_NO_ADDED_VALUE",
+          "include_value": "INCLUDE_ADDED_VALUE",
+          "rationale_minimum_chars": 12
+        },
+        "selection_guidance": {
+          "mode": "TABLE_REQUIRED_UNLESS_DEFINED_EXCEPTION",
+          "added_value_includes": [
+            "SIDE_BY_SIDE_COMPARISON",
+            "DECISION_COMPRESSION",
+            "QUICK_CHECK_MATRIX",
+            "RELATION_BETWEEN_CRITERION_AND_CONSEQUENCE"
+          ],
+          "added_value_does_not_require_new_facts": true,
+          "omission_must_not_be_based_only_on": "FACTS_ALREADY_EXIST_IN_PROSE",
+          "candidate_test": {
+            "minimum_meaningful_rows": 4,
+            "minimum_meaningful_columns": 3,
+            "require_independent_row_meaning": true,
+            "filler_forbidden": true,
+            "oversimplification_forbidden": true
+          },
+          "omit_when": [
+            "CONTENT_IS_PRIMARILY_LINEAR_OR_SEQUENTIAL",
+            "EXISTING_LIST_OR_CHECKLIST_PROVIDES_EQUIVALENT_SCAN_VALUE",
+            "MEANINGFUL_4_BY_3_MATRIX_WOULD_REQUIRE_FILLER",
+            "TABLE_WOULD_OVERSIMPLIFY_IMPORTANT_NUANCE"
+          ],
+          "include_when": [
+            "COMPACT_MATRIX_CREATES_REAL_SIDE_BY_SIDE_VALUE",
+            "READER_CAN_DECIDE_OR_CHECK_FASTER_THAN_IN_PROSE",
+            "RELATIONSHIP_BETWEEN_MULTIPLE_CRITERIA_AND_OUTCOMES_BECOMES_CLEARER"
+          ]
+        },
+        "omission_exception": {
+          "required_for_no_table": true,
+          "allowed_codes": [
+            "LINEAR_SEQUENCE",
+            "EXISTING_CHECKLIST_EQUIVALENT",
+            "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+            "NUANCE_LOSS"
+          ],
+          "rationale_minimum_chars": 20,
+          "definitions": {
+            "LINEAR_SEQUENCE": "Der Kerninhalt ist eine Reihenfolge/Anleitung; eine Matrix würde den Ablauf schlechter statt besser erfassbar machen.",
+            "EXISTING_CHECKLIST_EQUIVALENT": "Eine bestehende Liste oder Checkliste bietet bereits denselben Scan-/Kontrollnutzen; eine Tabelle hätte keine eigene Funktion.",
+            "INSUFFICIENT_RELATIONAL_DIMENSIONS": "Es gibt nicht mindestens vier sinnvolle Zeilen und drei sinnvolle Spalten ohne Fülltext.",
+            "NUANCE_LOSS": "Eine tabellarische Verdichtung würde fachlich wichtige Bedingungen oder Einschränkungen zu stark vereinfachen."
+          },
+          "forbidden_as_sole_reason": [
+            "FACTS_ALREADY_EXIST_IN_PROSE",
+            "TABLE_NOT_NECESSARY",
+            "TEXT_IS_CLEAR_WITHOUT_TABLE"
+          ]
+        }
+      },
+      "types": {
+        "Beratung": {
+          "conclusion_min_ratio": 0.1,
+          "fact_trace_required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "conclusion",
+            "table"
+          ],
+          "question_mark": "OPTIONAL",
+          "required_blocks": [
+            "intro",
+            "criteria",
+            "decision",
+            "conclusion",
+            "further_information"
+          ],
+          "required_lists": [
+            "criteria"
+          ],
+          "type_meta_schema": {
+            "fields": {
+              "decision_criteria": {
+                "min_items": 2,
+                "type": "list",
+                "unique_items": true
+              },
+              "decision_goal": {
+                "min_length": 8,
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision_goal",
+              "decision_criteria"
+            ]
+          }
+        },
+        "FAQ": {
+          "conclusion_min_ratio": 0.08,
+          "fact_trace_required_blocks": [
+            "intro",
+            "questions",
+            "conclusion",
+            "table"
+          ],
+          "question_mark": "REQUIRED",
+          "required_blocks": [
+            "intro",
+            "answer",
+            "details",
+            "checklist",
+            "conclusion",
+            "further_information"
+          ],
+          "required_lists": [
+            "key_answers"
+          ],
+          "type_meta_schema": {
+            "fields": {
+              "primary_question": {
+                "min_length": 8,
+                "type": "string"
+              }
+            },
+            "required": [
+              "primary_question"
+            ]
+          }
+        },
+        "Pflege": {
+          "conclusion_min_ratio": 0.09,
+          "fact_trace_required_blocks": [
+            "intro",
+            "steps",
+            "risks",
+            "conclusion",
+            "table"
+          ],
+          "question_mark": "OPTIONAL",
+          "required_blocks": [
+            "intro",
+            "steps",
+            "risks",
+            "conclusion",
+            "further_information"
+          ],
+          "required_lists": [
+            "steps",
+            "risks"
+          ],
+          "type_meta_schema": {
+            "fields": {
+              "procedure_goal": {
+                "min_length": 8,
+                "type": "string"
+              },
+              "procedure_steps": {
+                "min_items": 2,
+                "type": "list",
+                "unique_items": true
+              },
+              "risk_controls": {
+                "min_items": 1,
+                "type": "list",
+                "unique_items": true
+              }
+            },
+            "required": [
+              "procedure_goal",
+              "procedure_steps",
+              "risk_controls"
+            ]
+          }
+        },
+        "Vergleich": {
+          "conclusion_min_ratio": 0.09,
+          "fact_trace_required_blocks": [
+            "intro",
+            "options",
+            "comparison",
+            "conclusion",
+            "table"
+          ],
+          "question_mark": "OPTIONAL",
+          "required_blocks": [
+            "intro",
+            "options",
+            "comparison",
+            "table",
+            "conclusion",
+            "further_information"
+          ],
+          "required_lists": [
+            "advantages",
+            "disadvantages"
+          ],
+          "type_meta_schema": {
+            "fields": {
+              "comparison_criteria": {
+                "min_items": 2,
+                "type": "list",
+                "unique_items": true
+              },
+              "comparison_targets": {
+                "min_items": 2,
+                "type": "list",
+                "unique_items": true
+              }
+            },
+            "required": [
+              "comparison_targets",
+              "comparison_criteria"
+            ]
+          }
+        }
+      },
+      "intro_orientation": {
+        "first_sentence_required": true,
+        "first_sentence_minimum_words": 6,
+        "first_sentence_maximum_words": 32,
+        "subject_overlap_minimum_significant_tokens": 1,
+        "preferred_intro_words_min": 60,
+        "preferred_intro_words_max": 80
+      }
+    },
+    "field_policy": {
+      "contract": "K10_FIELD_POLICY_V2",
+      "descriptive_patterns": [
+        "^contract$",
+        "\\.contract$",
+        "^source$",
+        "^coverage\\.rule_groups\\..*\\.(source|semantics)$",
+        "\\.purpose$",
+        "\\.search_intent$",
+        "\\.structure_profile$",
+        "^editorial_additive\\.writer_targets\\.semantics$",
+        "^table_rule\\.purpose$"
+      ],
+      "target_patterns": [
+        "preferred_",
+        "target_ratio_",
+        "^editorial_additive\\.writer_targets\\.(?!semantics)",
+        "^table_rule\\.(header|first_column)\\.preferred_words$",
+        "^table_rule\\.other_cells\\.preferred_maximum_words$",
+        "^editorial_additive\\.balance_policy\\.(table_may_fill_word_budget|further_information_may_fill_word_budget)$",
+        "^table_rule\\.word_budget\\.",
+        "^editorial_additive\\.conclusion_policy\\.use_conclusion_to_fill_global_word_or_paragraph_floor$"
+      ],
+      "superseded": [
+        {
+          "pattern": "^global\\.table_count_exact$",
+          "replaced_by": "table.conditional_value_policy",
+          "reason": "K10_USER_APPROVED_TABLE_POLICY_2026-10-01"
+        }
+      ],
+      "hard_bindings": [
+        {
+          "pattern": "^coverage\\.(fail_closed|future_rule_policy|policy|required_rule_groups)$",
+          "rule_id": "meta.catalog_coverage_fail_closed",
+          "owner": "catalog_guard"
+        },
+        {
+          "pattern": "^coverage\\.rule_groups\\..*\\.enforced_by$",
+          "rule_id": "meta.catalog_owner_binding",
+          "owner": "catalog_guard"
+        },
+        {
+          "pattern": "^(source_ppm_sha256|coverage\\.rule_groups\\.(lt_68|ppm_679)\\.source_sha256)$",
+          "rule_id": "baseline.external_gate_hash_binding",
+          "owner": "baseline_guard"
+        },
+        {
+          "pattern": "^runtime_dependency_on_legacy$",
+          "rule_id": "isolation.no_legacy_runtime_dependency",
+          "owner": "isolation_guard"
+        },
+        {
+          "pattern": "^global\\.title_keyword_required$",
+          "rule_id": "title.keyword_required",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^global\\.title_colon_forbidden$",
+          "rule_id": "title.colon_forbidden",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^global\\.duplicate_block_names_forbidden$",
+          "rule_id": "structure.duplicate_block_names_forbidden",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^global\\.topic_specific_special_logic_forbidden$",
+          "rule_id": "structure.topic_specific_special_logic_forbidden",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^global\\.visible_links_exact$",
+          "rule_id": "links.visible_exact",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^global\\.required_link_roles$",
+          "rule_id": "links.required_roles",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^types\\.\\*\\.question_mark$",
+          "rule_id": "type.question_mark_policy",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^types\\.\\*\\.required_blocks$",
+          "rule_id": "structure.required_blocks",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^types\\.\\*\\.required_lists$",
+          "rule_id": "structure.required_lists",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^types\\.\\*\\.type_meta_schema\\.",
+          "rule_id": "type.metadata_schema",
+          "owner": "structural_checker"
+        },
+        {
+          "pattern": "^global\\.(fact_trace_required|all_factual_blocks_require_trace)$",
+          "rule_id": "facts.trace_required",
+          "owner": "fact_trace_checker"
+        },
+        {
+          "pattern": "^global\\.source_trace_contract\\.",
+          "rule_id": "facts.trace_binding",
+          "owner": "fact_trace_checker"
+        },
+        {
+          "pattern": "^types\\.\\*\\.fact_trace_required_blocks$",
+          "rule_id": "facts.trace_required_blocks",
+          "owner": "fact_trace_checker"
+        },
+        {
+          "pattern": "^global\\.conclusion_no_new_untraced_facts$",
+          "rule_id": "facts.conclusion_no_new_untraced_facts",
+          "owner": "fact_trace_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.(target_keyword_exact_phrase_mode|exact_target_phrase_occurrences_.*)$",
+          "rule_id": "heading.target_phrase_control",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.(significant_target_keyword_token_h2_occurrences_max|keyword_staccato_forbidden|significant_keyword_stop_tokens)$",
+          "rule_id": "heading.keyword_staccato_forbidden",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.(phrase_family_repetition_forbidden|repeated_heading_lead_word_max)$",
+          "rule_id": "heading.phrase_family_repetition_forbidden",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.duplicate_normalized_h2_forbidden$",
+          "rule_id": "heading.duplicate_normalized_forbidden",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.(hard_h2_words_max|hard_h2_chars_max)$",
+          "rule_id": "heading.hard_length",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.(natural_heading_surface_required|heading_content_relation_required|generic_filler_word_driven_heading_forbidden|section_specific_content_required|short_special_heading_exception)$",
+          "rule_id": "heading.natural_concrete_section_language",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.heading_policy\\.grammatical_pattern_variety_required$",
+          "rule_id": "heading.grammatical_variety",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.surface_policy\\.natural_german_required$",
+          "rule_id": "lt68.language_zero_unresolved",
+          "owner": "lt68_adapter"
+        },
+        {
+          "pattern": "^editorial_additive\\.surface_policy\\.(artificial_generator_phrase_forbidden|forbidden_generator_phrases|template_spam_forbidden)$",
+          "rule_id": "surface.non_template_language",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.surface_policy\\.(keyword_staccato_forbidden|phrase_family_repetition_forbidden)$",
+          "rule_id": "surface.repetition_forbidden",
+          "owner": "editorial_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.balance_policy\\.(hard_total_words_min|hard_total_words_max)$",
+          "rule_id": "words.hard_total_range",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.balance_policy\\.(normal_h2_section_min_words|normal_h2_section_max_words)$",
+          "rule_id": "words.section_range",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.balance_policy\\.normal_h2_longest_to_shortest_max_ratio$",
+          "rule_id": "words.section_balance_ratio",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.balance_policy\\.normal_h2_combined_minimum_ratio$",
+          "rule_id": "words.main_text_minimum_ratio",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.balance_policy\\.further_information_maximum_words$",
+          "rule_id": "words.further_information_maximum",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.balance_policy\\.exempt_blocks$",
+          "rule_id": "words.section_range",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^editorial_additive\\.conclusion_policy\\.(maximum_ratio|maximum_paragraphs)$",
+          "rule_id": "conclusion.hard_limits",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^types\\.\\*\\.conclusion_min_ratio$",
+          "rule_id": "conclusion.type_minimum_ratio",
+          "owner": "balance_checker"
+        },
+        {
+          "pattern": "^global\\.canonical_table_classes$",
+          "rule_id": "table.canonical_classes",
+          "owner": "table_checker"
+        },
+        {
+          "pattern": "^global\\.post_table_summary_policy\\.",
+          "rule_id": "table.post_summary_policy",
+          "owner": "table_checker"
+        },
+        {
+          "pattern": "^table_rule\\.(header|first_column)\\.(maximum_words|multiword_exception|sentences_forbidden)$",
+          "rule_id": "table.compact_labels",
+          "owner": "table_checker"
+        },
+        {
+          "pattern": "^table_rule\\.other_cells\\.(hard_maximum_words|sentences_forbidden|flow_text_forbidden)$",
+          "rule_id": "table.compact_cells",
+          "owner": "table_checker"
+        },
+        {
+          "pattern": "^table_rule\\.status$",
+          "rule_id": "table.rule_active",
+          "owner": "catalog_guard"
+        },
+        {
+          "pattern": "^(global|table_rule)\\.publish_allowed$",
+          "rule_id": "publish.allowed",
+          "owner": "safety_checker"
+        }
+      ]
+    },
+    "scope_reference": {
+      "contract": "K10_TEXTMACHINE_SCOPE_REFERENCE_V1",
+      "project_rule_count": 151,
+      "groups": {
+        "PPM_6_7_9": {
+          "count": 104,
+          "repairable": 89,
+          "hard_block": 15
+        },
+        "CONTENT_GUARD": {
+          "count": 30,
+          "repairable": 2,
+          "hard_block": 28
+        },
+        "DESIGN_GUARD": {
+          "count": 15,
+          "repairable": 9,
+          "hard_block": 6
+        },
+        "EXTERNAL_LINKS": {
+          "count": 2,
+          "repairable": 2,
+          "hard_block": 0
+        }
+      },
+      "repairable_total": 102,
+      "hard_block_total": 49,
+      "languagetool": {
+        "version": "6.8",
+        "sha256": "2122882e800d312a0543d895c56c0a84a9bb131c9b9846efd8fc033129353ae8",
+        "mode": "DYNAMIC_EXTERNAL_RULE_ENGINE_NOT_DUPLICATED"
+      },
+      "k10_principle": "CONTENT_RULES_CHECK_ONCE_BY_OWNER; HARD_INTEGRITY_RULES_VALIDATE_BINDING_AND_IMMUTABILITY; FINAL_STAGE_DOES_NOT_RECHECK_PASSED_CONTENT_RULES"
+    },
+    "publish_allowed": false,
+    "bundle_sha256": "8f5192a6545f0f6b068f4a9dc8e5314b922602e4a6555176937e607083002492"
+  },
+  "writer_rule_binding": {
+    "contract": "K0_WRITER_RULE_BINDING_V1",
+    "catalog_sha256": "747276597c8088eb2b4d5ab1fe5d65affd1c9122ce54cfd7b3b699162adb368c",
+    "rule_values_sha256": "640387c55b85dd17d513549addb28b8c5f219543846aa147ad0f06fe8017f814",
+    "bundle_sha256": "8f5192a6545f0f6b068f4a9dc8e5314b922602e4a6555176937e607083002492",
+    "article_hard_rule_count": 85,
+    "article_hard_rule_ids": [
+      "lt68.language_zero_unresolved",
+      "conclusion.hard_limits",
+      "conclusion.type_minimum_ratio",
+      "facts.conclusion_no_new_untraced_facts",
+      "facts.trace_binding",
+      "facts.trace_required",
+      "facts.trace_required_blocks",
+      "heading.duplicate_normalized_forbidden",
+      "heading.grammatical_variety",
+      "heading.hard_length",
+      "heading.keyword_staccato_forbidden",
+      "heading.natural_concrete_section_language",
+      "heading.phrase_family_repetition_forbidden",
+      "heading.target_phrase_control",
+      "links.required_roles",
+      "links.visible_exact",
+      "structure.duplicate_block_names_forbidden",
+      "structure.required_blocks",
+      "structure.required_lists",
+      "surface.non_template_language",
+      "surface.repetition_forbidden",
+      "table.canonical_classes",
+      "table.compact_cells",
+      "table.compact_labels",
+      "table.post_summary_policy",
+      "table.required_for_comparison",
+      "table.value_required_if_present",
+      "title.colon_forbidden",
+      "title.keyword_required",
+      "type.metadata_schema",
+      "type.question_mark_policy",
+      "words.further_information_maximum",
+      "words.hard_total_range",
+      "words.main_text_minimum_ratio",
+      "words.section_balance_ratio",
+      "words.section_range",
+      "structure.body_h1_forbidden",
+      "structure.title_not_repeated_in_body",
+      "structure.visible_test_marker_forbidden",
+      "structure.machine_status_word_forbidden",
+      "structure.paragraph_floor",
+      "structure.h2_floor",
+      "structure.required_blocks_nonempty",
+      "structure.section_ids_unique",
+      "structure.section_order",
+      "structure.section_h2_exact_one",
+      "structure.section_paragraph_required",
+      "structure.list_minimum_items",
+      "structure.intro_first",
+      "structure.intro_structure",
+      "structure.adjacent_headings_forbidden",
+      "structure.faq_direct_answer",
+      "structure.text_between_headings_minimum",
+      "structure.html_balanced",
+      "heading.intent_binding",
+      "heading.semantic_duplicate_forbidden",
+      "surface.known_regression_patterns_forbidden",
+      "surface.known_unnatural_language_forbidden",
+      "surface.duplicate_sentence_ratio",
+      "surface.intro_similarity",
+      "facts.real_source_trace",
+      "facts.source_label_option_match",
+      "facts.visible_unit_fact_refs",
+      "facts.referenced_fact_exists",
+      "facts.referenced_fact_verified",
+      "facts.referenced_fact_type_allowed",
+      "facts.numeric_claim_supported",
+      "facts.fact_pack_coverage",
+      "facts.trace_lexical_support",
+      "facts.runtime_fact_allowlist",
+      "links.bound_pairs_exact",
+      "links.registry_active",
+      "links.section_placement",
+      "links.relative_internal_only",
+      "links.further_information_position",
+      "links.distributed_across_blocks",
+      "links.runtime_roles_bound",
+      "links.not_clustered_at_end",
+      "table.presence_policy",
+      "table.minimum_rows",
+      "table.structure",
+      "conclusion.minimum_paragraphs",
+      "wordpress.semantic_category_binding",
+      "intro.orientation_sentence",
+      "table.optional_decision_documented"
+    ],
+    "publish_allowed": false
+  },
+  "input_isolation": {
+    "contract": "K0_FRESH_INPUT_ISOLATION_V1",
+    "status": "PASS",
+    "run_instance_id": "run:99d53f26bd0e7102c6038a7f",
+    "current_upload_identity_authority": true,
+    "fresh_external_research_only": true,
+    "historical_article_content_allowed": false,
+    "historical_writer_draft_allowed": false,
+    "historical_fact_pack_allowed": false,
+    "historical_research_packet_allowed": false,
+    "historical_repair_text_allowed": false,
+    "historical_run_output_allowed": false,
+    "live_portal_content_as_research_allowed": false,
+    "current_k0_rules_allowed": true,
+    "live_category_and_internal_link_binding_allowed": true,
+    "fact_pack_sha256": "420635309bfa389884b16715f6f18e003ef9b67db837c49e275c8b8a3280c3bb",
+    "research_claims_sha256": "454b33c9f9863b7bb49f5006bc14ff799fb65c844f02158b9f4b5da8a25951e0",
+    "research_source_urls_sha256": "065408d50982a0e3cc3117d850376278e1aeb2202650b3c94cdc9684a9e39bc0",
+    "research_freshness_receipt_sha256": "6ff33b31cc73a485a7d04e2451e9bd0d173a780267365992a4455a179efe3b39",
+    "publish_allowed": false
+  },
+  "research_freshness_receipt": {
+    "contract": "K0_RESEARCH_FRESHNESS_GUARD_V1",
+    "status": "PASS",
+    "fact_pack_sha256": "420635309bfa389884b16715f6f18e003ef9b67db837c49e275c8b8a3280c3bb",
+    "research_claims_sha256": "454b33c9f9863b7bb49f5006bc14ff799fb65c844f02158b9f4b5da8a25951e0",
+    "compared_historical_contexts": 38,
+    "historical_fact_pack_reuse": false,
+    "historical_research_packet_reuse": false,
+    "publish_allowed": false
+  },
+  "writer_policy": {
+    "contract": "CANONICAL_WRITER_QUALITY_POLICY_V1",
+    "total_words_min": 750,
+    "total_words_max": 900,
+    "normal_h2_words_min": 100,
+    "normal_h2_words_max": 220,
+    "normal_h2_max_ratio": 1.5,
+    "conclusion_ratio_min": 0.1,
+    "conclusion_ratio_max": 0.15,
+    "conclusion_max_paragraphs": 3,
+    "further_information_required": true,
+    "further_information_max_words": 60,
+    "required_section_blocks": [
+      "conclusion",
+      "further_information"
+    ],
+    "special_blocks": [
+      "table",
+      "conclusion",
+      "further_information"
+    ]
+  },
+  "writer_policy_sha256": "083ebdf7730e7b7fb1ee69368310ba5d74597da3c185aef5b5942cf7918f8aad",
+  "publish_allowed": false,
+  "job_id": "k0w-9fe89bff9073ba4c20bdaeee",
+  "job_sha256": "82295e912692577c97bd9e122d6d1833a9dd98335eba13bb3877c4003a139147"
+}
