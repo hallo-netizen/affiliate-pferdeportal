@@ -3243,6 +3243,22 @@ trait PPAR_Automation_Suite_Trait {
                     }
                     continue;
                 }
+                // 6.72.184 live-fix: Migration bedeutet echte Neubewertung der
+                // automatischen Bannerkante. Eine bereits gespeicherte alte Kante
+                // darf die reale/decodierte Ziel-URL nicht ueberstimmen.
+                // Nur abgeleitete automatische Fachwerte werden verworfen; manuelle
+                // Control-/FIXED-Entscheidungen liegen separat und bleiben erhalten.
+                $row_id = absint($row['id'] ?? 0);
+                if ($row_id > 0) {
+                    $wpdb->update($table, array(
+                        'topic_score'=>0,
+                        'topic_targets'=>'[]',
+                        'classified_at'=>0,
+                    ), array('id'=>$row_id));
+                    $row['topic_score'] = 0;
+                    $row['topic_targets'] = '[]';
+                    $row['classified_at'] = 0;
+                }
                 $result = $this->output_plan_creative($row, true);
                 if (is_array($result) && absint($result['active'] ?? 0) > 0) { $materialized++; }
             }
