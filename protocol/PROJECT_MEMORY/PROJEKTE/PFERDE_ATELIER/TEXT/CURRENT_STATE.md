@@ -594,21 +594,73 @@ Positiv/Negativ:
 - Queue/Driver/Admin/Repository-Code gegenüber 0.57.35 unverändert.
 
 
+## FINALER KISS-KANDIDAT PSTE 0.57.37 – KOMPLETTER LOKALER WORKFLOW POSITIV/NEGATIV
+
+Kandidat:
+`PSTE-0.57.37-FINAL-KISS-INCREMENTAL-REENTRY-HARDPASS.zip`
+
+SHA-256:
+`84640c9bdd72bad551cc492e87943c8bd9c9684f357335de6c6a6bd0e0916347`
+
+Rootcause der wiederholten Volläufe:
+- ein normaler Artikel-Lösch-/Änderungsfall wurde unnötig über manuellen `Gesamtbestand neu abgleichen` geführt;
+- 0.57.36 behandelte `trash` im Portal-Kontextbestand noch als existierenden Artikel;
+- der UI-Knopf `Gespeicherten Block erneut prüfen` leitete den Existing-Only-PAUSED_ERROR nicht über einen sicheren Rebind-/Resume-Pfad;
+- der Context-Browserloop hatte einen festen 900-Schritte-Guard und zwang bei großen Vollabgleichen zu manuellen Fortsetzungen.
+
+0.57.37 KISS:
+- WordPress-Inventar für Inhaltsabdeckung berücksichtigt nur `publish` und `draft`; `trash` / `auto-draft` blockieren nicht;
+- der gespeicherte Existing-Only-Lauf besitzt einen eigenen sicheren Resume/Rebind-Pfad;
+- bei unverändertem Context-Binding läuft er vom gespeicherten Cursor weiter;
+- bei geänderter Inventory-/Plan-Bindung wird **nur der providerfreie lokale Bestandsaudit** ab Cursor 0 neu gerechnet, nicht der 4472er Portal-Kontext und nicht die komplette Sandbox-Bindung;
+- ein normaler zukünftiger Artikel-Löschfall nutzt Safe-Baseline-Rebase + kompaktes Runtime-Context-Rehydrate und startet **keinen** `PSTE_Context_Refresh::start/processBatch`;
+- ein ausdrücklich gestarteter echter Vollabgleich darf weiter voll laufen; sein Browser-Loop besitzt statt des nachweislich zu kleinen 900-Limits einen 12000er Hard-Ceiling plus echten Stall-Guard.
+
+Exakte lokale Simulation des aktuellen realen Szenarios:
+- Ausgang: Existing-Only `PAUSED_ERROR` bei 3680 Bestandszeilen + geänderte Inventory/Plan-Bindung;
+- Resume/Rebind → lokaler Bestandsaudit sauber neu, **0 Context-Refresh-Starts / 0 Context-Refresh-ProcessBatch / 0 Provider**;
+- Abschluss nach 113 Queue-Ticks = 1 providerfreier Sandbox-Reentry-Schritt + 112 lokale 40er Repository-Batches;
+- final: COMPLETE / 4472 verarbeitet / 695 gespeicherte Titel neu geprüft;
+- gleiche Bindung ab Cursor 3680: nur 20 verbleibende Repository-Batches bis COMPLETE, **kein Neustart**;
+- Negativ: Provideraufruf im lokalen Audit → hart `PSTE_RETAINED_BACKLOG_PROVIDER_CALL_CONTRACT_VIOLATION`;
+- Negativ: Sandbox-Reentry versucht Provider/Handoff/Artikel-/Taxonomie-Write → hart `PSTE_EXISTING_POTENTIAL_REENTRY_BOUNDARY_VIOLATION`.
+
+Zusätzliche Positiv/Negativ-Nachweise:
+- Existing-Only Resume-Matrix **6/6 PASS**;
+- normaler Artikel-Lösch-/Änderungsweg **3/3 PASS**: dynamische Rebase ohne Voll-Context; Context unvollständig bzw. Struktur stale blockieren;
+- Trash-Semantik **4/4 PASS**: publish/draft blockieren, trash/auto-draft nicht;
+- 695 realer Stored-Title-Replay: **2 NORMAL_PASS / 19 RETAINED_NON_PRODUCING / 356 SANDBOX_REQUIRED / 318 STRUCTURE_GAP**, 0 Fehler;
+- Repository-Immutable-Invariant 695: **0 Fehler**;
+- alter Livebug `Ist es sinnvoll, Pferde zu scheren?`: SANDBOX_REQUIRED, Titel unverändert, kein Repository-Throw;
+- `Welche Schermaschine für Pferde ist die leiseste?`: Schermaschinen / Produktwahl / RETAINED_NON_PRODUCING, kein Gesundheit/Fell-Misrouting;
+- vollständiger 4472-Semantiknachweis bleibt gültig: Normal-Metadata-/Repository-/Family-/Productwahl-/Normalizer-/Intent-/Quality-Core von 0.57.36 → 0.57.37 byteidentisch; der exakte 0.57.36-4472-Replay war **4472/4472, 0 Fehler** mit 83 NORMAL_PASS / 25 RETAINED_NON_PRODUCING / 2625 SANDBOX_REQUIRED / 1739 STRUCTURE_GAP;
+- UI→AJAX→Existing-Only-Resume-Route statisch exakt gebunden;
+- PHP-Lint **81/81 PASS**;
+- JSON **54/54 PASS**;
+- Fresh-Unpack byteidentisch / PHP **81/81 PASS**;
+- 0 Backup-/Stray-Dateien.
+
+Testreport:
+`PSTE-0.57.37-FINAL-HARDPASS-TESTREPORT.json`.
+
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05736_LOCAL_FULL_REPLAY_PASS_LIVE_READBACK_OPEN`
+`PSTE_05737_FINAL_LOCAL_FULL_WORKFLOW_HARD_PASS_LIVE_READBACK_OPEN`
 
-Der reale 0.57.35-Fehler ist exakt reproduziert und ursächlich repariert. Der vollständige lokale Datenpfad inklusive 4472er Normalpfad und 695er Repository-Immutable-Invariant ist grün. Offen ist nur der reale WordPress-Readback von exakt 0.57.36.
+Die aktuellen Wiederholungs-/Resume-/Trash-Fehler sind im bestehenden PSTE-Weg konsolidiert repariert und der komplette betroffene Workflow lokal positiv/negativ simuliert. Offen ist nur der reale WordPress-Readback von exakt 0.57.37.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05736_AND_RESUME_EXISTING_ONLY_ONCE`
+`INSTALL_EXACT_05737_THEN_RESUME_EXISTING_ONLY_WITHOUT_MANUAL_FULL_CONTEXT_RESTART`
 
-1. Nur `PSTE-0.57.36-FINAL-CONSOLIDATED-LIVEBUG-FIX.zip` installieren.
-2. In `SEO Themenengine → Übersicht` beim gespeicherten PAUSED_ERROR **`Gespeicherten Block erneut prüfen`** verwenden.
-3. Keine neue Produktionswelle und keinen zweiten Existing-Only-Start erzeugen.
-4. Lauf bis COMPLETE beobachten.
-5. Danach Gesamte Themenkarte exportieren und Live-Readback gegen 0.57.36 durchführen.
+1. Keinen weiteren `Gesamtbestand neu abgleichen` starten.
+2. Exakt `PSTE-0.57.37-FINAL-KISS-INCREMENTAL-REENTRY-HARDPASS.zip` installieren.
+3. Falls ein bereits laufender Portalabgleich noch aktiv ist: nur diesen einen laufenden Job bis COMPLETE auslaufen lassen; nicht neu starten.
+4. Danach beim gespeicherten Existing-Only-PAUSED_ERROR einmal `Gespeicherten Block erneut prüfen`.
+5. Der Resume-Pfad darf danach keinen neuen 4472er Portalabgleich starten. Bei gleicher Bindung wird ab gespeicherten Cursor fortgesetzt; bei geänderter Bindung wird nur der lokale providerfreie Bestandsaudit neu gerechnet.
+6. Nach Existing-Only COMPLETE: Gesamte Themenkarte exportieren → Live-Readback → Redaktionsplan/Artikelproduktion.
+7. Keine Produktionswelle vor diesem Live-Readback.
 
 ## NICHT ANFASSEN
 
