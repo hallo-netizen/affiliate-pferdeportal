@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-04
-STATUS: PSTE 0.57.32 LIVE EXPORT-READBACK PASS / 695 BESTEHENDE TITEL PERSISTENT REVALIDIERT / 694 EXAKT EINDEUTIGE TITEL / 320 STRUKTUR / 372 REVIEW / 3 NICHT PRODUZIEREND
+STATUS: 0.57.32 LIVE-READBACK PASS / 694 EINDEUTIGE TITEL VOLLSTÄNDIG IN A-B-C-D NACH ZIELVERTRAG KLASSIFIZIERT / LANE-B 110 ENTSCHEIDUNGEN VORBEREITET
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -313,21 +313,63 @@ Belastbare Struktur-Gap-Aufteilung:
 Nicht produzierend:
 - **3 Produktwahl-Fälle**, weiterhin absichtlich ohne Produktionsautorität.
 
+## FACHLICHE BESTANDSKLASSIFIZIERUNG 2026-10-04
+
+Quelle:
+- realer 0.57.32-Export `pste-global-seo-topic-map-20261004-082759-utc.json`;
+- 695 persistierte Titelkandidaten / 694 exakt eindeutige Titel;
+- ausschließlich vorhandene Portal-/Export-Evidenz; keine Provider-/DataForSEO-Neurecherche.
+
+Zielvertrags-Lanes für die 694 eindeutigen Titel:
+- **A direkt planbar: 0**;
+- **B ohne neue externe Recherche reparierbar: 110**;
+- **C Struktur-/Menschenentscheidung: 389**;
+- **D geprüft parken / nicht produzieren: 195**.
+
+Lane B – 110:
+- 92 bestehende Familienbindung vorhanden; redaktionelle Relation kann aus Titel + vorhandener Familie bestätigt und danach normal reentered werden;
+- 9 Fälle lassen sich aus aktuellem Portalbestand sicher an eine bereits vorhandene Familie binden;
+- 9 Fälle besitzen eine konkrete manuelle Artikeltypentscheidung mit bereits vorhandener Zielkategorie.
+
+Lane C – 389:
+- 269 STRUCTURE_GAP ohne sicheren bestehenden Strukturhinweis;
+- 51 STRUCTURE_GAP mit vorhandenem `structural_context_hint`;
+- 33 Familienfälle ohne sichere bestehende Familienbindung;
+- 34 redaktionelle Relationsfälle, die nicht sicher automatisch bestätigt wurden;
+- 2 Pferdehaftpflicht-Fälle mit klarer Kosten-/Vergleichsintention, aber fehlender entsprechender Familienkategorie.
+
+Lane D – 195:
+- 145 eindeutige Titel bleiben gemäß Zielvertragsregel 5 bei fehlender realer externer Relevanzevidenz geparkt;
+- 46 klare Head-/Keyword-/Transaktionsvarianten werden nicht künstlich zu Artikeln gemacht;
+- 1 off-topic/nicht-redaktioneller Fall;
+- 3 Produktwahl-Fälle bleiben `RETAINED_NON_PRODUCING`.
+Zusätzlich existiert genau 1 physische Dublettenzeile zum logischen Titel `Schritt für Schritt Pferdebürsten waschen`; keine automatische DB-Löschung.
+
+Persistierte Arbeitsartefakte in der persönlichen Projektbibliothek:
+- `/Pferdeatelier/PSTE-05732-EXISTING-EVIDENCE-DECISIONS-2026-10-04.json`
+  - Library-ID: `libfile_b0d70c5f78748191b045730eac16e5f1`
+- `/Pferdeatelier/PSTE-05732-LANE-B-110-DECISIONS.json`
+  - Library-ID: `libfile_a0aa30a875188191b361446d51ebcf5c`
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_695_STRUCTURE_AND_REVIEW_DECISIONS_NOT_YET_RESOLVED`
+`PSTE_05732_LANE_B_110_NOT_YET_APPLIED_THROUGH_EXISTING_REVIEW_REENTRY`
 
-Der technische Persistenzfehler ist behoben und live exportseitig bewiesen. Offen ist jetzt die fachliche Bearbeitung der **320 Strukturentscheidungen** und **372 Review-Fälle** aus genau diesem vorhandenen Bestand. Keine neue Themen-/Provider-Recherche davor.
+Die 694 eindeutigen Titel sind vollständig A/B/C/D-klassifiziert. Solange **110 Lane-B-Fälle** mit bereits vorhandener Evidenz noch nicht über die bestehenden Review-/Normal-Reentry-Pfade angewendet und readback-bestätigt sind, darf keine neue externe Recherche gestartet werden.
 
 ## GENAU EINE NEXT ACTION
 
-`PROCESS_05732_320_STRUCTURE_AND_372_REVIEW_FROM_EXISTING_EVIDENCE`
+`APPLY_05732_LANE_B_110_THROUGH_EXISTING_REVIEW_AND_NORMAL_REENTRY`
 
-1. Exakte Dublette `Schritt für Schritt Pferdebürsten waschen` nur einmal fachlich führen; keine automatische DB-Löschung.
-2. 320 Struktur-Gaps zuerst nach vorhandenem `structural_context_hint` bündeln; 51 Fälle besitzen bereits einen belegten Portal-Seitenkontext, 269 nicht.
-3. 372 Review-Fälle strikt nach erstem offenen Gate bearbeiten: 172 Normalisierung → 146 Portalrelevanz → 42 Familienzuordnung → 8 Semantik/Intent → 4 Artikeltyp.
-4. Nur vorhandene Export-/Portal-Evidenz verwenden; keine neue DataForSEO-/Provider-Recherche.
-5. Produktwahl-3 bleiben `RETAINED_NON_PRODUCING`, bis Downstream-Regelsatz registriert ist.
+1. Ausschließlich die 110 vorbereiteten Lane-B-Entscheidungen verwenden.
+2. Keine neue Architektur und **kein neues Plugin**.
+3. Bestehende PSTE-Felder/Review-/Sandbox-/Normal-Reentry-Pfade verwenden:
+   - 92 vorhandene Familienrelationen fachlich bestätigen und normal reentry;
+   - 9 sichere bestehende Familienbindungen setzen und normal reentry;
+   - 9 vorbereitete Artikeltyp-/Zielkategorieentscheidungen setzen und normal reentry.
+4. Danach Export-Readback: Welche der 110 erreichen NORMAL_PASS/planbare Metadaten, welche bleiben mit neuem exakten Gate offen?
+5. Erst danach Lane C bearbeiten. Lane D bleibt geparkt.
+6. Keine Provider-/DataForSEO-Neurecherche; kein Publish.
 
 ## NICHT ANFASSEN
 
