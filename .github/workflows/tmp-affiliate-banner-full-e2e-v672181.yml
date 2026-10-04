@@ -4,8 +4,8 @@ on:
   push:
     branches: [affiliate-release-current]
     paths:
-      - '.github/workflows/tmp-affiliate-banner-full-e2e-v672182.yml'
-      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672182.php'
+      - '.github/workflows/tmp-affiliate-banner-full-e2e-v672181.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672181.php'
       - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
   workflow_dispatch:
 
@@ -56,7 +56,7 @@ jobs:
           set -euo pipefail
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/lint.log)" = "21"
-          php -l AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672182.php
+          php -l AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672181.php
           echo "PASS PHP syntax"
 
       - name: Install exact WordPress and activate current plugin
@@ -96,5 +96,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672182.php" --path=/tmp/wp-site | tee /tmp/banner-full-e2e.log
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672181.php" --path=/tmp/wp-site | tee /tmp/banner-full-e2e.log
           grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_PASS' /tmp/banner-full-e2e.log
