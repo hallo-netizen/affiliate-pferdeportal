@@ -20,7 +20,11 @@
           "source_url": "https://www.duden.de/rechtschreibung/Schabracke"
         }
       ],
-      "claims": []
+      "claims": [
+        "Schabracke bezeichnet ursprünglich eine Sattel- oder Zierdecke aus dem Pferdebereich.",
+        "Duden führt für Schabracke zusätzlich salopp-abwertende Bedeutungen wie altes Pferd, alte Frau oder alte abgenutzte Sache.",
+        "Die Wendung alte Schabracke nutzt diese übertragene abwertende Bedeutung; sie ist von der neutralen Sachbedeutung der Sattelunterlage zu unterscheiden."
+      ]
     },
     "production_plan_item": {
       "article_type": "FAQ",
@@ -34,6 +38,119 @@
       }
     }
   },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Warum sagt man du alte Schabracke?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Schabracke – Duden",
+        "source_url": "https://www.duden.de/rechtschreibung/Schabracke",
+        "evidence_text_sha256": "888fc4dbf059dd8adcb513c5379619fca42a2f54fc88a624a7504879ad421b8b",
+        "statement": "Schabracke bezeichnet ursprünglich eine Sattel- oder Zierdecke aus dem Pferdebereich.",
+        "evidence_text": "Schabracke bezeichnet ursprünglich eine Sattel- oder Zierdecke aus dem Pferdebereich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Schabracke – Duden",
+        "source_url": "https://www.duden.de/rechtschreibung/Schabracke",
+        "evidence_text_sha256": "a39727e5d230eb0d7bd7e083ce3eff447f8005a3685c96f87c92943d086af0f0",
+        "statement": "Duden führt für Schabracke zusätzlich salopp-abwertende Bedeutungen wie altes Pferd, alte Frau oder alte abgenutzte Sache.",
+        "evidence_text": "Duden führt für Schabracke zusätzlich salopp-abwertende Bedeutungen wie altes Pferd, alte Frau oder alte abgenutzte Sache.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Schabracke – Duden",
+        "source_url": "https://www.duden.de/rechtschreibung/Schabracke",
+        "evidence_text_sha256": "e203c3e3ccbc2fa3a3987de4ab5b4dff67dc61923a1a6c94a6519a470499e71e",
+        "statement": "Die Wendung alte Schabracke nutzt diese übertragene abwertende Bedeutung; sie ist von der neutralen Sachbedeutung der Sattelunterlage zu unterscheiden.",
+        "evidence_text": "Die Wendung alte Schabracke nutzt diese übertragene abwertende Bedeutung; sie ist von der neutralen Sachbedeutung der Sattelunterlage zu unterscheiden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/schabracken/",
+        "anchor": "Schabracken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/ausruestung/ausruestung-sattel/",
+        "anchor": "Sattel",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/ausruestung/",
+        "anchor": "Ausrüstung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/schabracken/",
+        "active": true
+      },
+      {
+        "href": "/ausruestung/ausruestung-sattel/",
+        "active": true
+      },
+      {
+        "href": "/ausruestung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schabracken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schabracke",
+      "Redewendung",
+      "Bedeutung",
+      "Schimpfwort",
+      "Sattelunterlage",
+      "Herkunft"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Die sprachgeschichtliche Entwicklung und die abwertende Bedeutung würden in einer Tabelle zu stark verkürzt und missverständlich vereinfacht."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
   "publish_allowed": false,
-  "retry_token": 1
+  "retry_token": 2
 }
