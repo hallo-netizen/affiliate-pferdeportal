@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-10-03
-STATUS: PSTE 0.57.26 LIVE / 0.57.28 NACHHALTIGER FAMILIEN-/STRUKTUR-KANDIDAT LOKAL HARD-PASS / 695ER VOLLEXPORT VORLIEGEND / 694 EXAKT EINDEUTIGE TITEL
+STAND: 2026-10-04
+STATUS: PSTE 0.57.28 LIVE BELEGT / START BESTANDSAUFBEREITUNG KORREKT BLOCKIERT DURCH AKTIVEN EINZELLAUF / 0.57.29 UI-GUARD LOKAL HARD-PASS
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -9,6 +9,32 @@ STATUS: PSTE 0.57.26 LIVE / 0.57.28 NACHHALTIGER FAMILIEN-/STRUKTUR-KANDIDAT LOK
 - **Artikelproduktion K9:** ausschließlich `konzept9/greenfield-20260929:CURRENT_STATE.json`.
 - **Plugin-Inventar/Updatechronik:** `../PLUGINS/CURRENT_STATE.md`; keine zweite Fachwahrheit.
 - **Aktiver Themenverwertungs-Zielvertrag:** `protocol/PROJECT_MEMORY/ZIELVERTRAEGE/ZV-PSTE-THEMENVERWERTUNG-001.md`.
+
+## LIVE-READBACK 2026-10-04
+
+Nutzer-Screenshot belegt:
+- Portal SEO Themenengine **0.57.28 aktiv**;
+- Klick auf **„Vorhandenes Material in Titelkandidaten umwandeln“** wird mit exakt `PSTE_RESEARCH_JOB_ALREADY_ACTIVE` blockiert;
+- damit ist ein bereits gespeicherter aktiver **Einzellauf** vorhanden. Die Bestandsaufbereitung darf gemäß bestehender Parallelitätssperre nicht gleichzeitig starten.
+
+Frisch im 0.57.28-Code geprüft:
+- der Backend-Block ist korrekt und schützt vor parallelem Research-/Bestandslauf;
+- UI-Fehler: `Übersicht → Titel aus vorhandenem Material erzeugen` prüft bisher aktive Breadth-/Storage-Zustände, aber **nicht** den aktiven `PSTE_Research_Job`; dadurch bleibt der Startbutton sichtbar, obwohl der Handler anschließend korrekt blockiert.
+
+Lokaler KISS-Kandidat:
+`PSTE-0.57.29-ACTIVE-JOB-GUARD-CANDIDATE.zip`
+SHA-256 `e5baf380157236103a5c15c0cee8da2c750daef207cd4fe9efef6f9791e7f880`.
+
+Delta 0.57.28 → 0.57.29 ausschließlich:
+- `includes/class-pste-admin.php`: aktiven Einzellauf read-only erkennen, Startbutton ausblenden, Status/Phase/Fortschritt zeigen und exakt nach **Einstellungen** zum aktiven Lauf verlinken;
+- `portal-seo-topic-engine.php`: Version 0.57.29.
+
+Hardtests:
+- ZIP-Integrität PASS;
+- PHP-Lint **81/81 PASS**;
+- UI-Guard Positiv/Negativ **5/5 PASS**;
+- exakt **2 Dateien geändert**;
+- Normalpfad, Familienlogik, Produktwahl, Repository, Storage, Providerpfade vollständig unverändert.
 
 ## AKTUELLER BELASTBARER LIVE-STAND
 
@@ -121,20 +147,20 @@ Daher:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05728_NEEDS_WORDPRESS_LIVE_READBACK`
+`PSTE_RESEARCH_JOB_ALREADY_ACTIVE`
 
-Die nachhaltige lokale Reparatur ist als 0.57.28-Kandidat gebaut und hart geprüft. Offen ist jetzt **nicht** mehr eine 364er Einmal-Handsortierung, sondern die reale WordPress-Bestätigung, dass exakt dieser Kandidat geladen ist und der vorhandene Bestands-/Normalpfad dieselben fail-closed Zustände liefert.
+Ein gespeicherter Einzellauf ist real aktiv und blockiert zu Recht den parallelen Start der Bestandsaufbereitung. Zusätzlich war die Übersicht irreführend, weil sie den Startbutton trotzdem anzeigte.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05728_THEN_LIVE_READBACK_NO_NEW_RESEARCH`
+`INSTALL_05729_AND_RESOLVE_EXISTING_SINGLE_JOB_THEN_START_EXISTING_ONLY`
 
-1. PSTE 0.57.28 in WordPress installieren/aktualisieren.
-2. Version/Aktivstatus real zurücklesen.
-3. Den **vorhandenen Bestands-/Normalpfad** erneut ausführen und Ergebnis read-only exportieren/prüfen.
-4. Erwartung ist **nicht** künstlich mehr READY, sondern saubere Trennung: echte Struktur-Gaps, echte Reviews und nicht-produzierende Produktwahl-Treffer.
-5. Erst nach Live-Readback die konkreten `STRUCTURE_GAP`-Entscheidungen treffen und anschließend normalen Reentry verwenden.
-6. **Keine neue DataForSEO-/Provider-Recherche vorher.**
+1. PSTE **0.57.29** installieren.
+2. `SEO Themenengine → Übersicht` öffnen. Der Startbutton darf bei aktivem Einzellauf nicht mehr erscheinen; stattdessen muss dessen Status/Phase/Fortschritt angezeigt werden.
+3. **„Aktiven Einzellauf unter Einstellungen öffnen“** anklicken.
+4. Unter `SEO Themenengine → Einstellungen → Longtails recherchieren, Titel bilden und Kategorien zuordnen` den gespeicherten Einzellauf über den bestehenden Server-Driver bis terminalen Zustand führen; bei `PAUSED_ERROR`/zulässigem Review exakt vorhandenen Recovery-Button verwenden, nicht löschen/bypassen.
+5. Erst wenn kein aktiver Einzellauf mehr vorhanden ist, `Übersicht → Titel aus vorhandenem Material erzeugen → Vorhandenes Material in Titelkandidaten umwandeln`.
+6. Keine neue DataForSEO-/Provider-Recherche.
 
 ## NICHT ANFASSEN
 
