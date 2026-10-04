@@ -1,0 +1,183 @@
+{
+  "contract": "PSTE_TOPIC_FAMILY_DISAMBIGUATION_V1",
+  "status": "DECIDED_INTERNAL_MAPPING_NOT_YET_APPLIED_LIVE",
+  "source_export": "pste-global-seo-topic-map-20261004-082759-utc.json",
+  "source_plugin_version": "0.57.32",
+  "scope": {
+    "topic_family_count": 256,
+    "duplicate_family_name_groups": 11,
+    "duplicate_physical_family_rows": 22
+  },
+  "rule": "One normalized internal topic family identity may have exactly one canonical semantic owner. Visible WordPress labels may remain unchanged. Distinct editorial intents must use distinct internal family identities. Exact duplicate portal paths must be consolidated, not merely renamed.",
+  "decisions": [
+    {
+      "visible_family": "Bremsenfallen",
+      "product_page_id": 372,
+      "portal_path": "Gesundheit > Fell & Haut > Schutz vor Bremsenstichen",
+      "internal_family": "Schutz vor Bremsenstichen",
+      "role": "HEALTH_CONTEXT"
+    },
+    {
+      "visible_family": "Bremsenfallen",
+      "product_page_id": 398,
+      "portal_path": "Gesundheit > Insekten & Schutz > Bremsenfallen",
+      "internal_family": "Bremsenfallen",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Dualgassen",
+      "product_page_id": 405,
+      "portal_path": "Training > Bodenarbeit > Dualgassen",
+      "internal_family": "Dualgassen",
+      "role": "FOUNDATION_EQUIPMENT"
+    },
+    {
+      "visible_family": "Dualgassen",
+      "product_page_id": 419,
+      "portal_path": "Training > Bodenhindernisse > Dualgassen Training",
+      "internal_family": "Dualgassen-Training",
+      "role": "TRAINING_USE"
+    },
+    {
+      "visible_family": "Ekzemerdecken",
+      "product_page_id": 373,
+      "portal_path": "Gesundheit > Fell & Haut > Ekzemerdecken",
+      "internal_family": "Sommerekzem & Hautschutz",
+      "role": "HEALTH_CONTEXT"
+    },
+    {
+      "visible_family": "Ekzemerdecken",
+      "product_page_id": 399,
+      "portal_path": "Gesundheit > Insekten & Schutz > Ekzemerdecken",
+      "internal_family": "Ekzemerdecken",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Fliegenmasken",
+      "product_page_id": 371,
+      "portal_path": "Gesundheit > Fell & Haut > Augen- & Gesichtsschutz",
+      "internal_family": "Augen- & Gesichtsschutz",
+      "role": "HEALTH_CONTEXT"
+    },
+    {
+      "visible_family": "Fliegenmasken",
+      "product_page_id": 397,
+      "portal_path": "Gesundheit > Insekten & Schutz > Fliegenmasken",
+      "internal_family": "Fliegenmasken",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Fliegensprays",
+      "product_page_id": 370,
+      "portal_path": "Gesundheit > Fell & Haut > Insektenschutz für Haut & Fell",
+      "internal_family": "Insektenschutz für Haut & Fell",
+      "role": "HEALTH_CONTEXT"
+    },
+    {
+      "visible_family": "Fliegensprays",
+      "product_page_id": 396,
+      "portal_path": "Gesundheit > Insekten & Schutz > Fliegensprays",
+      "internal_family": "Fliegensprays",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Fohlenhalfter",
+      "product_page_id": 177,
+      "portal_path": "Ausrüstung > Halfter & Stricke > Fohlenhalfter",
+      "internal_family": "Fohlenhalfter",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Fohlenhalfter",
+      "product_page_id": 426,
+      "portal_path": "Training > Hilfsmittel > Halftertraining Fohlen",
+      "internal_family": "Fohlen-Halftertraining",
+      "role": "TRAINING_USE"
+    },
+    {
+      "visible_family": "Kühlgamaschen",
+      "product_page_id": 364,
+      "portal_path": "Gesundheit > Erste Hilfe > aktue Kühlung",
+      "internal_family": "Akute Kühlung",
+      "role": "ACUTE_CARE"
+    },
+    {
+      "visible_family": "Kühlgamaschen",
+      "product_page_id": 386,
+      "portal_path": "Gesundheit > Regeneration > Kühlgamaschen",
+      "internal_family": "Kühlgamaschen",
+      "role": "PRODUCT_REGENERATION"
+    },
+    {
+      "visible_family": "Schermaschinen",
+      "product_page_id": 184,
+      "portal_path": "Ausrüstung > Pflegezubehör > Schermaschinen",
+      "internal_family": "Schermaschinen",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Schermaschinen",
+      "product_page_id": 374,
+      "portal_path": "Gesundheit > Fell & Haut > Scheren & Fellgesundheit",
+      "internal_family": "Pferdeschur & Fellgesundheit",
+      "role": "HEALTH_CONTEXT"
+    },
+    {
+      "visible_family": "Seniorenfutter",
+      "product_page_id": 348,
+      "portal_path": "Fütterung > Spezialfutter > Seniorenfutter",
+      "internal_family": "Seniorenfutter",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Seniorenfutter",
+      "product_page_id": 391,
+      "portal_path": "Gesundheit > Senioren > Fütterung im Alter",
+      "internal_family": "Fütterung im Alter",
+      "role": "HEALTH_CONTEXT"
+    },
+    {
+      "visible_family": "Sicherheitshalfter",
+      "product_page_id": 176,
+      "portal_path": "Ausrüstung > Halfter & Stricke > Sicherheitshalfter",
+      "internal_family": "Sicherheitshalfter",
+      "role": "PRODUCT_FAMILY"
+    },
+    {
+      "visible_family": "Sicherheitshalfter",
+      "product_page_id": 431,
+      "portal_path": "Training > Hilfsmittel > Sicheres Halftertraining",
+      "internal_family": "Sicheres Halftertraining",
+      "role": "TRAINING_USE"
+    },
+    {
+      "visible_family": "Weidezaungeräte",
+      "product_page_id": 282,
+      "portal_path": "Weide > Zauntechnik > Weidezaungeräte",
+      "internal_family": "Weidezaungeräte",
+      "role": "TRUE_DUPLICATE_CANONICAL_OWNER_OPEN"
+    },
+    {
+      "visible_family": "Weidezaungeräte",
+      "product_page_id": 283,
+      "portal_path": "Weide > Zauntechnik > Weidezaungeräte",
+      "internal_family": "Weidezaungeräte",
+      "role": "TRUE_DUPLICATE_CANONICAL_OWNER_OPEN"
+    }
+  ],
+  "validation": {
+    "proposed_distinct_internal_names_collision_with_other_existing_family_names": 0,
+    "duplicate_groups_resolved_by_internal_disambiguation": 10,
+    "exact_duplicate_groups_remaining_for_consolidation": 1,
+    "exact_duplicate_group": "Weidezaungeräte / product_page_id 282 vs 283",
+    "expected_unique_internal_family_names_after_10_renames_before_consolidation": 255,
+    "expected_physical_family_rows_after_weidezaungeraete_consolidation": 255
+  },
+  "live_safety": {
+    "wordpress_categories_deleted": false,
+    "wordpress_pages_deleted": false,
+    "visible_names_changed": false,
+    "editorial_plan_changed": false,
+    "pste_live_state_changed": false
+  }
+}
