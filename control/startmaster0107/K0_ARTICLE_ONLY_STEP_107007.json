@@ -1,0 +1,13 @@
+{
+  "contract": "PFERDE_ATELIER_K0_ARTICLE_ONLY_STEP_BUNDLE_V1",
+  "step_id": "RUN_NEW_ARTICLE_BATCH_NO_STOP",
+  "sequence": 107007,
+  "authorized_inputs": [
+    {
+      "ref": "K0_START_HERE.md",
+      "sha256": "34553f319e794129a9eea5d1aee6c14f1a4711475503c6b9903ae3c5ae319236"
+    }
+  ],
+  "instruction": "K0:start. Execute only the current upload as article production. Route only through main:K0_START_HERE.md to the K0 branch Current. Produce the article through the existing quality chain and verified WordPress handoff. Do not change code, workflows, configuration, plugins, presentation, routing, or any system state beyond the bound article-run evidence. If required runtime evidence or any gate is missing, stop with the exact terminal production blocker. No alternate route. No publish.",
+  "publish_allowed": false
+}
