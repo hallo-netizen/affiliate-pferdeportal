@@ -910,4 +910,11 @@ Belegt im E2E:
 
 **PERFORMANCE:** keine Provider-/DB-/Remote-Abfrage im neuen Rassenweg; vorhandene request-lokale Ranking-/Kandidaten-Caches bleiben unangetastet.
 
-**Status:** FIXED_SOURCE_LOCAL_KISS_POSNEG_PASS / PERFORMANCE_RECHECK_PASS / INSTALLER_6_72_181_BUILT / LIVE_READBACK_OPEN.
+**Status:** ROOTFIX_6_72_182_SOURCE_AND_INSTALLER_FULL_E2E_PASS / LIVE_READBACK_OPEN.
+
+
+### 04.10.2026 – Vollständiger E2E-Nachweis / 6.72.181 superseded
+
+Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorfilter vor dem Ranking nicht vollständig erfasst waren. Der vollständige WordPress+MariaDB-End-to-End-Gate reproduzierte zwei echte Root Causes: reale Slot-Aliase konnten den technischen Fallback vor dem Ranking verlieren; ein direkt passendes Banner-Placement konnte den technischen Formatvertrag umgehen.
+
+6.72.182 führt den Bannerpfad auf dasselbe KISS-Prinzip wie den funktionierenden eBay/Idealo-Produktpfad zurück: Kandidaten -> technische Gültigkeit -> Relevanz -> Auswahl -> Renderer. Source-Gate Run 37216563071: 21/21 PASS. Installiertes ZIP-Gate Run 37216941150: 21/21 PASS, 27/27 Manifestidentität, Performance-Hardlock PASS. 6.72.181 ist damit superseded und darf nicht mehr als aktueller Installationskandidat verwendet werden.
