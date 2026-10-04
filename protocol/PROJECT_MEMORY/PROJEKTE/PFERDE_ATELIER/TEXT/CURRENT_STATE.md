@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-04
-STATUS: LIVE-BESTANDSAUFBEREITUNG MIT REVALIDIERUNGS-PERSISTENZ COMPLETE / 695 VORHANDENE TITELKANDIDATEN NEU GEPRÜFT / 320 STRUKTUR / 372 REVIEW / 3 NICHT PRODUZIEREND
+STATUS: PSTE 0.57.32 LIVE EXPORT-READBACK PASS / 695 BESTEHENDE TITEL PERSISTENT REVALIDIERT / 694 EXAKT EINDEUTIGE TITEL / 320 STRUKTUR / 372 REVIEW / 3 NICHT PRODUZIEREND
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -265,21 +265,69 @@ Hardtests:
 - Negativ: falscher Titelkandidatenvertrag BLOCK;
 - Normal-Metadata-Pfad 0.57.28 → 0.57.32 hashidentisch; deshalb bleibt die bereits hart simulierte 694er Verteilung fachlich: **320 STRUCTURE_GAP / 371 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING**.
 
+## REALER EXPORT-READBACK PSTE 0.57.32 – PASS
+
+Export:
+`pste-global-seo-topic-map-20261004-082759-utc.json`
+
+Belegt im Export:
+- `source_plugin.version = 0.57.32`;
+- Gesamtbestand: **4472 Kandidaten**;
+- gespeicherte Titelkandidaten mit `PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1`: **695**;
+- exakt dieselben **695 candidate_id** wie im 0.57.31-Export;
+- **695/695 Zielzeilen wurden verändert/persistiert**;
+- `editorial_title`: **0 Änderungen**;
+- `production_title`: **0 Änderungen**;
+- `target_keyword`: **0 Änderungen**;
+- `title_candidate_evidence`: **0 Änderungen**;
+- Normalpfad-Transitionen:
+  - **320** `SANDBOX_REQUIRED → STRUCTURE_GAP`;
+  - **372** `SANDBOX_REQUIRED → SANDBOX_REQUIRED`;
+  - **3** `SANDBOX_REQUIRED → RETAINED_NON_PRODUCING`.
+- exakte Titel-Deduplizierung: **694 eindeutige Titel**;
+- genau eine Dublettengruppe:
+  - `Schritt für Schritt Pferdebürsten waschen`;
+  - 2 Kandidatenzeilen / 1 zusätzliche Dublette.
+
+Damit ist der 0.57.32-Persistenzfix **live exportseitig bestätigt**.
+
+Belastbare Arbeitsaufteilung der 372 Review-Fälle, exklusiv nach erstem offenen Gate:
+- **172** redaktionelle Themen-Normalisierung REVIEW;
+- **146** Portalrelevanz / externe Evidenz REVIEW;
+- **42** Familienzuordnung REVIEW;
+- **8** Semantik-/Intent-Konsens REVIEW;
+- **4** Artikeltyp noch nicht bewiesen.
+
+Belastbare Struktur-Gap-Aufteilung:
+- **320** `STRUCTURE_GAP`;
+- davon **51** mit bestehendem strukturellem Seitenhinweis:
+  - Reitplatz 21;
+  - Longieren 13;
+  - Verladen 7;
+  - Paddock 5;
+  - Putzplatz 2;
+  - Hufe 2;
+  - Offenstall 1;
+- **269** ohne solchen Seitenhinweis.
+
+Nicht produzierend:
+- **3 Produktwahl-Fälle**, weiterhin absichtlich ohne Produktionsautorität.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05732_REVALIDATION_PERSISTENCE_NEEDS_FULL_EXPORT_READBACK`
+`PSTE_695_STRUCTURE_AND_REVIEW_DECISIONS_NOT_YET_RESOLVED`
 
-Die 695 vorhandenen Titelkandidaten wurden live sichtbar neu klassifiziert und persistiert. Offen ist jetzt nur noch der vollständige Export-Readback, damit die gespeicherten Kandidatenzeilen byte-/feldgenau gegen den vorherigen Export geprüft und anschließend die 320 Struktur- bzw. 372 Review-Fälle belastbar weiterbearbeitet werden können.
+Der technische Persistenzfehler ist behoben und live exportseitig bewiesen. Offen ist jetzt die fachliche Bearbeitung der **320 Strukturentscheidungen** und **372 Review-Fälle** aus genau diesem vorhandenen Bestand. Keine neue Themen-/Provider-Recherche davor.
 
 ## GENAU EINE NEXT ACTION
 
-`EXPORT_FULL_TOPIC_MAP_AFTER_05732_REVALIDATION`
+`PROCESS_05732_320_STRUCTURE_AND_372_REVIEW_FROM_EXISTING_EVIDENCE`
 
-1. `SEO Themenengine → Einstellungen`.
-2. Abschnitt `Longtails recherchieren, Titel bilden und Kategorien zuordnen`.
-3. **`Gesamte Themenkarte exportieren`**.
-4. Exportdatei im Arbeitschat prüfen.
-5. Erst danach 320 Strukturentscheidungen und 372 Review-Fälle nach vorhandener Evidenz weiterbearbeiten; keine neue Provider-/DataForSEO-Recherche.
+1. Exakte Dublette `Schritt für Schritt Pferdebürsten waschen` nur einmal fachlich führen; keine automatische DB-Löschung.
+2. 320 Struktur-Gaps zuerst nach vorhandenem `structural_context_hint` bündeln; 51 Fälle besitzen bereits einen belegten Portal-Seitenkontext, 269 nicht.
+3. 372 Review-Fälle strikt nach erstem offenen Gate bearbeiten: 172 Normalisierung → 146 Portalrelevanz → 42 Familienzuordnung → 8 Semantik/Intent → 4 Artikeltyp.
+4. Nur vorhandene Export-/Portal-Evidenz verwenden; keine neue DataForSEO-/Provider-Recherche.
+5. Produktwahl-3 bleiben `RETAINED_NON_PRODUCING`, bis Downstream-Regelsatz registriert ist.
 
 ## NICHT ANFASSEN
 
