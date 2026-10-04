@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from urllib.parse import urlparse
 
 CONTRACT = 'K0_FRESH_INPUT_ISOLATION_V1'
@@ -102,6 +103,32 @@ def validate(payload, run_instance_id):
     pc = payload['production_context']
     fp = pc['fact_pack']
 
+    provenance = payload.get('research_retrieval_provenance')
+    if not isinstance(provenance, dict) or provenance.get('contract') != 'K0_RESEARCH_RETRIEVAL_PROVENANCE_V1' or provenance.get('status') != 'PASS':
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_PROVENANCE_MISSING')
+    if provenance.get('run_instance_id') != run_instance_id:
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_RUN_MISMATCH')
+    if provenance.get('source_urls_sha256') != _stable(sorted(urls)):
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_SOURCE_SET_MISMATCH')
+    retrievals = provenance.get('retrievals')
+    if not isinstance(retrievals, list) or len(retrievals) != len(urls):
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_ROWS_INVALID')
+    seen = set()
+    for row in retrievals:
+        if not isinstance(row, dict):
+            raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_ROW_INVALID')
+        url = str(row.get('source_url') or '').strip()
+        if url not in allowed or url in seen:
+            raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_URL_INVALID:' + url)
+        seen.add(url)
+        if str(row.get('retrieved_at_utc') or '').strip() == '':
+            raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_TIME_MISSING:' + url)
+        digest = str(row.get('retrieved_content_sha256') or '')
+        if not re.fullmatch(r'[0-9a-f]{64}', digest):
+            raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_CONTENT_HASH_INVALID:' + url)
+    if seen != allowed:
+        raise Blocked('K0_INPUT_ISOLATION_RESEARCH_RETRIEVAL_SOURCE_SET_MISMATCH')
+
     freshness = payload.get('research_freshness_receipt')
     if not isinstance(freshness, dict) or freshness.get('contract') != 'K0_RESEARCH_FRESHNESS_GUARD_V1' or freshness.get('status') != 'PASS':
         raise Blocked('K0_INPUT_ISOLATION_RESEARCH_FRESHNESS_RECEIPT_MISSING')
@@ -131,6 +158,7 @@ def validate(payload, run_instance_id):
         'research_claims_sha256': _stable(claims),
         'research_source_urls_sha256': _stable(sorted(urls)),
         'research_freshness_receipt_sha256': _stable(freshness),
+        'research_retrieval_provenance_sha256': _stable(provenance),
         'publish_allowed': False,
     }
     return receipt
