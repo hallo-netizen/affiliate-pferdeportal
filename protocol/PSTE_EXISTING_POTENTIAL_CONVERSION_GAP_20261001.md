@@ -528,3 +528,40 @@ Tests:
 - kein 4472er Vollpool-PASS behauptet, da dieser lokale Vergleich in ein Tool-Timeout lief.
 
 Live-Readback 0.57.33 offen.
+
+
+## DELTA 2026-10-04 – EXISTING-ONLY AUDIT-REUSE-FEHLER / PSTE 0.57.34
+
+Live-Readback 0.57.33:
+- Version 0.57.33 aktiv;
+- Existing-Only-Lauf gestartet;
+- sofort COMPLETE;
+- 0 vorhandene Titelkandidaten neu geprüft;
+- alle Revalidierungszähler 0;
+- Abschluss EXISTING_POTENTIAL_EXHAUSTED_NO_PROVIDER_CALL.
+
+Rootcause:
+`startQueue()` konnte den alten vollständigen Retained-Backlog-Audit wiederverwenden. Die Audit-Hash-Semantik deckte die in 0.57.33 geänderten Normalpfad-Abhängigkeiten nicht vollständig ab. Deshalb wurde `local_backlog_complete` bereits beim Start gesetzt und der lokale Bestandslauf übersprungen.
+
+0.57.34:
+- Existing-Only (`provider_fallback_allowed=false`) darf einen vollständigen Audit-Receipt nicht mehr als Grund zum Überspringen des lokalen Bestands verwenden;
+- providerfähige Produktionswellen dürfen einen gültigen Audit weiterhin wiederverwenden;
+- sichere Cancel-Continuation bleibt unverändert möglich;
+- kein neuer Provideraufruf, keine neue Architektur, keine Gate-Absenkung.
+
+Kandidat:
+`PSTE-0.57.34-EXISTING-ONLY-FORCE-REAUDIT-CANDIDATE.zip`
+SHA-256:
+`6e12c2a5f63f353ca93374252bdb0ea6e5dadd0a3e1f1bf9df305077a771568e`
+
+Tests:
+- PHP-Lint 81/81 PASS;
+- ZIP PASS;
+- exakt 2 Dateien geändert;
+- Existing-only + valid audit => kein Reuse / Rescan PASS;
+- providerfähige Welle + valid audit => Reuse PASS;
+- providerfähige Welle + invalid audit => kein Reuse PASS;
+- Cancel-Continuation bleibt PASS;
+- 0.57.33-Normalpfad-Dateien gegenüber 0.57.34 byteidentisch.
+
+Live-Readback 0.57.34 offen.
