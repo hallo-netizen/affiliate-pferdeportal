@@ -1,0 +1,175 @@
+name: TEMP Affiliate Banner Upgrade E2E 6.72.184
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-banner-upgrade-e2e-v672184.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upgrade-183-to-184:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Source syntax and version
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "Version: 6.72.184" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.184';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/lint.log)" = "21"
+          php -l AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php
+          php -l AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php
+          echo "PASS source syntax/version"
+
+      - name: Performance KISS hardlock
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=a381aff4eb3f41754186f4bad86ce1a7e0823a29
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          cur=Path('release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          old=subprocess.check_output(['git','show','a381aff4eb3f41754186f4bad86ce1a7e0823a29:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'],text=True)
+          def body(src,name):
+              marker='function '+name+'('
+              start=src.find(marker)
+              if start<0: raise SystemExit('FAIL missing '+name)
+              brace=src.find('{',start); depth=0; state='code'; esc=False; i=brace
+              while i<len(src):
+                  c=src[i]; n=src[i+1] if i+1<len(src) else ''
+                  if state=='sq':
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c=="'": state='code'
+                  elif state=='dq':
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c=='"': state='code'
+                  elif state=='line':
+                      if c=='\n': state='code'
+                  elif state=='block':
+                      if c=='*' and n=='/': state='code'; i+=1
+                  else:
+                      if c=="'": state='sq'
+                      elif c=='"': state='dq'
+                      elif c=='/' and n=='/': state='line'; i+=1
+                      elif c=='#': state='line'
+                      elif c=='/' and n=='*': state='block'; i+=1
+                      elif c=='{': depth+=1
+                      elif c=='}':
+                          depth-=1
+                          if depth==0:return src[start:i+1]
+                  i+=1
+              raise SystemExit('FAIL unclosed '+name)
+          protected=[
+            'ranked_campaigns_request_cache_allowed',
+            'ranked_campaign_sanitize_key_request_cached',
+            'ranked_campaign_sanitize_text_request_cached',
+            'ranked_campaigns_request_cache_key',
+            'select_category_product_campaign_fast_v672171',
+            'ranked_campaign_candidate_pool',
+            'category_product_provider_mix_v672133',
+            'render_banner',
+            'banner_distribution_reorder_candidates',
+            'banner_distribution_stable_index',
+            'category_product_shared_rank_base',
+          ]
+          for name in protected:
+              if body(cur,name)!=body(old,name):
+                  raise SystemExit('FAIL protected performance function changed '+name)
+          hot=body(cur,'ranked_campaigns_for_slot_uncached')
+          marker="V6.72.184 KISS"
+          pos=hot.find(marker)
+          if pos<0: raise SystemExit('FAIL missing 6.72.184 KISS filter')
+          addition=hot[pos:pos+900]
+          for forbidden in ['$wpdb','get_post_meta(','wp_remote_','output_plan_creative(']:
+              if forbidden in addition: raise SystemExit('FAIL new frontend cost '+forbidden)
+          print('PASS performance KISS hardlock')
+          PY
+
+      - name: Install WordPress and baseline 6.72.183
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site /tmp/base183
+          mkdir -p /tmp/wp-site /tmp/base183
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Upgrade E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          PHP
+          unzip -q release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip -d /tmp/base183
+          cp -a /tmp/base183/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.183"){exit(2);} echo "PASS baseline 6.72.183 active\n";' --path=/tmp/wp-site
+
+      - name: Reproduce real failure state on 6.72.183
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php" --path=/tmp/wp-site | tee /tmp/seed.log
+          grep -F 'PRE_UPGRADE_reproduces_wrong_legacy_banner' /tmp/seed.log
+          grep -F 'UPGRADE_SEED_672183_PASS' /tmp/seed.log
+
+      - name: Upgrade exact same WordPress to current 6.72.184 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.184"){exit(2);} echo "PASS upgraded plugin 6.72.184 active\n";' --path=/tmp/wp-site
+
+      - name: Complete positive negative upgrade workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php" --path=/tmp/wp-site | tee /tmp/assert.log
+          grep -F 'FULL_672183_TO_672184_BANNER_MIGRATION_E2E_PASS' /tmp/assert.log
