@@ -3,9 +3,12 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FRESH_REAL_REGRESSION_PASS_BATCH_ALLOWED",
-  "first_open_blocker": null,
-  "next_action": "RUN_USER_3_ARTICLE_BATCH_AND_COMBINE_VERIFIED_WORDPRESS_FILE",
+  "status": "REWRITE16_FULL_RULE_RECHECK_BLOCKED",
+  "first_open_blocker": {
+    "code": "REWRITE16_ITEM_07_KAPPZAUM_FULL_RULE_PRE_LT68_BLOCKED",
+    "detail": "Latest canonical writer run 37213914240 failed after Writer Seal PASS at K0 full pre-LT rule gate: facts.conclusion_no_new_untraced_facts, facts.trace_lexical_support, heading.natural_concrete_section_language."
+  },
+  "next_action": "REPAIR_ONLY_REWRITE16_ITEM_07_KAPPZAUM_CURRENT_DRAFT_AGAINST_THE_THREE_REPORTED_FULL_RULE_FINDINGS_AND_RERUN_EXISTING_K0_WRITER_ACCEPT_UNTIL_PASS",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -72,23 +75,58 @@
     "schabracke_category": "pferdewissen-grundlagen",
     "old_combined_export_status": "INVALIDATED_DO_NOT_IMPORT",
     "old_combined_export_sha256": "c9a4dbfa517cb8af9f914bbb6b24090b4b3bc8c3ca7d526f65460b7a6024b7e3",
-    "final_wordpress_batch_status": "INVALIDATED_PENDING_FULL_RULE_RECHECK",
-    "final_wordpress_batch_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_CANONICAL.json",
+    "final_wordpress_batch_status": "INVALIDATED_BY_LATER_FULL_RULE_RECHECK_DO_NOT_IMPORT",
+    "final_wordpress_batch_ref": "real_runs/k0_batch/20261004_rewrite16_current/WORDPRESS_BATCH.json",
     "final_wordpress_batch_sha256": "7a5d33f8da04d48d0b93d1a30e35ca9c1ffc747a542c4657d2d2f289c0c93c67",
     "final_wordpress_batch_verify_ref": "real_runs/k0_batch/20261002_rewrite16/WORDPRESS_FINAL_VERIFY.json",
     "repaired_system4_sha256": "32c0c86ba6800d9aa8ee86497a7db5b22357d13d789e80d9d372570a53da9cbb",
     "old_repo_export_status": "DO_NOT_IMPORT_STALE_COMPACT_CONTRACT",
-    "full_rule_recheck_status": "NOT_RUN"
+    "full_rule_recheck_status": "IN_PROGRESS_BLOCKED_AT_ITEM_07_KAPPZAUM",
+    "current_full_rule_blockers": [
+      {
+        "index": 7,
+        "title": "So findest du einen passenden Kappzaum für dein Pferd",
+        "latest_writer_run": 37213914240,
+        "findings": [
+          "facts.conclusion_no_new_untraced_facts",
+          "facts.trace_lexical_support",
+          "heading.natural_concrete_section_language"
+        ]
+      },
+      {
+        "index": 9,
+        "title": "Warum sagt man eigentlich „alte Schabracke“?",
+        "latest_writer_run": 37213890726,
+        "findings": [
+          "facts.conclusion_no_new_untraced_facts",
+          "heading.natural_concrete_section_language"
+        ]
+      }
+    ],
+    "real_wordpress_import": {
+      "status": "BLOCKED_DO_NOT_RETRY_YET",
+      "result_contract": "PSERC_SYSTEM4_WORDPRESS_IMPORT_RESULT_V1",
+      "plugin_version": "0.28.30",
+      "plugin_build": "0.28.30-pste-v5-binding-safe",
+      "index": 0,
+      "field": "article_id",
+      "reason": "PSERC_SYSTEM4_ARTICLE_FIELD_INVALID",
+      "redaktionsplan_read_attempted": false,
+      "redaktionsplan_write_attempted": false,
+      "publish_allowed": false,
+      "result_sha256": "f7f9e44d59d94437cfcf14d6965fface07760bbd29b256d6f8ed7bbd15211f2f",
+      "note": "This import used the now-invalidated 14:44 batch. Resolve full-rule recheck first; then verify final regenerated batch against real importer boundary before any new real import."
+    }
   },
   "freshness": {
-    "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
-    "last_checked_branch_head_sha": "72f179acd6ae0859ba3a22449c249a0e0904225f",
-    "latest_writer_accept_run": 37147496645,
-    "latest_writer_accept_result": "SUCCESS_FRESH_RENDERING_LINK_REGRESSION",
+    "validated_code_head_sha": "70022838dfd8cfd97e394e3d50bc0c0f7de54b58",
+    "last_checked_branch_head_sha": "73e3d1b5393cfd2d63dba63c6d0b76b7ea74942b",
+    "latest_writer_accept_run": 37213914240,
+    "latest_writer_accept_result": "FAIL_FULL_RULE_PRE_LT68_KAPPZAUM",
     "latest_k0_selftest_run": 37147241043,
     "latest_k0_selftest_result": "SUCCESS_RENDERING_FIX_CURRENT_SYNC",
     "ppm679_parity": "PASS",
-    "delta_result": "LINK_DISTRIBUTION_FRESH_REAL_PASS; H2_RENDERING_CODE_FIX_AND_LOCAL_VISUAL_PASS; FRESH_STRUCTURED_WORDPRESS_OUTPUT_PASS; USER_3_ARTICLE_BATCH_ALLOWED"
+    "delta_result": "16ER_BATCH_1444_INVALIDATED_BY_LATER_FULL_RULE_RECHECK; ITEM_07_KAPPZAUM_FIRST_BLOCKER; ITEM_09_SCHABRACKE_SECOND_BLOCKER; REAL_WORDPRESS_IMPORT_OF_INVALIDATED_BATCH_BLOCKED_AT_ARTICLE_ID_WITHOUT_READ_OR_WRITE"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
