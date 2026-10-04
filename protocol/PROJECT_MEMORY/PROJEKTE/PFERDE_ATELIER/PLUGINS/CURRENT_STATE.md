@@ -4,11 +4,11 @@ Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für P
 
 - Portal SEO Themenengine **0.57.28 live belegt**.
 - Live gespeicherter Einzellauf: `PAUSED_ERROR` / `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`.
-- Neuester lokaler Kandidat: **0.57.30** Sandbox-Dataflow-V2-Rootfix.
-- ZIP: `PSTE-0.57.30-SANDBOX-DATAFLOW-ROOTFIX-CANDIDATE.zip`
-- SHA-256: `c2f0e9e05f2ffddeea2c7ee022dd18ad04f9f5820ebbab4eabfab1253c235aa4`.
-- Tests: Vorherfehler exakt reproduziert; Positiv PASS; negativer Drift-Guard PASS; UI 5/5; PHP 81/81; ZIP PASS; exakt 2 Dateien geändert.
-- **0.57.30 noch nicht live installiert/readback-bestätigt; keine PU-ID.**
+- Neuester lokaler Kandidat: **0.57.31** – replay-sicherer lokaler FINALIZE-Recovery nach tatsächlicher UI→Driver-Simulation.
+- ZIP: `PSTE-0.57.31-REPLAY-SAFE-LOCAL-FINALIZE-RECOVERY-CANDIDATE.zip`
+- SHA-256: `35f670fc8a44310b1cb858764e506b0af950ac3941790bb1f5ee93e4a4270430`.
+- Tests: 0.57.30 echter Resume-Pfad FAIL (SINGLE_PARKED); 0.57.31 sicherer Drift Recovery+Advance PASS; unsicherer Providerfehler bleibt Park FAIL-CLOSED; Contract-Rootfix PASS; PHP 81/81.
+- **0.57.30 verworfen; 0.57.31 noch nicht live installiert/readback-bestätigt; keine PU-ID.**
 - Fachstatus/NEXT ACTION ausschließlich: `../TEXT/CURRENT_STATE.md`.
 
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-03
