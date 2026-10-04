@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-04
-STATUS: PSTE 0.57.28 LIVE / AKTIVER EINZELLAUF PAUSED_ERROR / 0.57.31 REPLAY-SAFE LOCAL-FINALIZE-RECOVERY LOKAL HARD-PASS
+STATUS: PSTE 0.57.31 LIVE / REALER 695ER VERGLEICH: 695/695 TITELKANDIDATEN UNVERÄNDERT / 0.57.32 REVALIDATION-PERSISTENCE LOKAL HARD-PASS
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -197,24 +197,68 @@ Frische lokale Simulation:
   - **„Gespeicherter Einzellauf:“**
   - **„Gespeicherten Block erneut prüfen“**.
 
+## REALER EXPORTVERGLEICH 0.57.26 → 0.57.31
+
+Verglichen:
+- `pste-global-seo-topic-map-20261003-194321-utc.json` / PSTE 0.57.26;
+- `pste-global-seo-topic-map-20261004-074909-utc.json` / PSTE 0.57.31.
+
+Ergebnis:
+- beide Exporte enthalten 4472 Kandidaten;
+- exakt dieselben **695** gespeicherten Titelkandidaten sind vorhanden;
+- **695/695 sind als vollständige Kandidatenobjekte byte-/wertgleich**;
+- damit hat 0.57.31 für diesen 695er Bestand **keine persistierte fachliche Verbesserung** erzeugt;
+- im Gesamtpool änderten sich 52 Kandidaten, aber nicht die 695 Zielkandidaten.
+
+Rootcause im Code:
+`PSTE_Repository::reanalyzeRetainedBacklogBatch()` berechnet den aktuellen Normalpfad zwar neu. Bei einem erneuten Nicht-PASS wird das frische Ergebnis für einen bereits vorhandenen Titelkandidaten aber verworfen. Persistiert werden dort bisher nur:
+- ein **neu** erzeugter Titelkandidat, wenn vorher kein Titel existierte;
+- NORMAL_PASS-Promotionen;
+- bestimmte Demotionen bereits planbarer Zeilen.
+
+Dadurch blieb die gesamte 695er Zielmenge trotz neuer Familien-/Strukturlogik unverändert.
+
+## LOKALER KANDIDAT PSTE 0.57.32
+
+`PSTE-0.57.32-TITLE-CANDIDATE-REVALIDATION-PERSISTENCE-CANDIDATE.zip`
+
+SHA-256:
+`c021ed852d89b6ae87fb4b6e347f49e6a0906b512671951044ea9a55ee06f772`
+
+Fix:
+- bereits vorhandene `PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1`-Titel werden beim Bestandslauf **nicht neu erzeugt**;
+- stattdessen wird ihr frisch berechneter fail-closed Revalidierungszustand persistiert;
+- Original-`editorial_title` und `title_candidate_evidence` bleiben unverändert;
+- `production_title` bleibt leer;
+- Compilerstatus bleibt `BLOCKED_BEFORE_COMPILER`;
+- NORMAL_PASS darf diesen speziellen Persistenzpfad nicht benutzen;
+- Raw-Query-Felder dürfen sich nicht ändern;
+- UI zählt künftig zusätzlich: vorhandene Titelkandidaten neu geprüft / Strukturentscheidung nötig / Review nötig / nicht produzierend.
+
+Hardtests:
+- Fresh PHP-Lint **81/81 PASS**;
+- ZIP-Integrität PASS;
+- Positiv: Titel/Evidenz bleiben erhalten, STRUCTURE_GAP-Diagnostik bleibt erhalten, Produktionsautorität bleibt aus;
+- Negativ: NORMAL_PASS-Misrouting BLOCK;
+- Negativ: Raw-Source-Mutation BLOCK;
+- Negativ: falscher Titelkandidatenvertrag BLOCK;
+- Normal-Metadata-Pfad 0.57.28 → 0.57.32 hashidentisch; deshalb bleibt die bereits hart simulierte 694er Verteilung fachlich: **320 STRUCTURE_GAP / 371 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING**.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05731_NEEDS_LIVE_INSTALL_AND_EXACT_RESUME_READBACK`
-
-Der Live-Lauf steht weiterhin bei `PAUSED_ERROR` mit `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`. 0.57.31 ist lokal bis zum echten Resume-/Parkpfad positiv und negativ simuliert; offen ist nur der reale WordPress-Readback.
+`PSTE_05732_NEEDS_LIVE_INSTALL_AND_695_REVALIDATION_READBACK`
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05731_AND_OBSERVE_EXISTING_SAVED_SINGLE_RUN`
+`INSTALL_05732_RUN_EXISTING_ONLY_EXPORT_AND_VERIFY_695_CHANGED`
 
-1. **Nicht 0.57.30 installieren.**
-2. PSTE **0.57.31** installieren.
-3. `SEO Themenengine → Einstellungen` öffnen.
-4. Im vorhandenen Abschnitt **„Longtails recherchieren, Titel bilden und Kategorien zuordnen“** den Block **„Gespeicherter Einzellauf:“** beobachten.
-5. Durch den Versionswechsel darf der sichere lokale Recovery-Pfad den gespeicherten `PAUSED_ERROR` selbst wieder aufnehmen. Falls der Block noch `PAUSED_ERROR` zeigt, exakt den vorhandenen Button **„Gespeicherten Block erneut prüfen“** einmal anklicken.
-6. Erfolgsnachweis: `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT` verschwindet und **„Abschluss SANDBOX_BATCH 0/15“** geht über 0/15 hinaus oder ein neuer anderer fail-closed Fehlercode erscheint.
-7. Bei neuem Fehler nicht mehrfach klicken; exakten sichtbaren Code übernehmen.
-8. Keine neue Produktionswelle und keine neue DataForSEO-/Provider-Recherche.
+1. PSTE **0.57.32** installieren.
+2. `SEO Themenengine → Übersicht → Titel aus vorhandenem Material erzeugen → Vorhandenes Material in Titelkandidaten umwandeln`.
+3. Bis COMPLETE laufen lassen.
+4. Danach `SEO Themenengine → Einstellungen → Gesamte Themenkarte exportieren`.
+5. Neuen Export gegen den 04.10.-0.57.31-Export prüfen.
+6. PASS nur, wenn die vorhandenen 695 Kandidaten nun als revalidiert sichtbar/persistiert sind und Titel/Evidenz unverändert bleiben.
+7. Keine neue Provider-/DataForSEO-Recherche.
 
 ## NICHT ANFASSEN
 
