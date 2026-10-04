@@ -14,6 +14,25 @@ class K0StartRouterTests(unittest.TestCase):
         self.assertIn("K0_CURRENT_STATE.json",text)
         self.assertNotIn("control/startmaster0107/CURRENT_STATE.json",text)
 
+    def test_goal_contract_makes_current_upload_the_general_assignment_authority(self):
+        g=json.loads(Path("K0_GOAL_CONTRACT.json").read_text(encoding="utf-8"))
+        h=g["hard_rules"]
+        self.assertTrue(h["current_valid_upload_is_assignment_authority"])
+        self.assertFalse(h["stale_current_history_or_prior_run_may_select_or_block_current_upload"])
+        self.assertTrue(h["terminal_blocker_requires_current_run_evidence"])
+        self.assertTrue(h["fresh_research_required_for_every_new_upload"])
+        self.assertTrue(h["historical_text_or_research_artifact_as_content_source_forbidden"])
+        self.assertTrue(h["historical_information_blacklist_forbidden"])
+        self.assertTrue(h["independently_rediscovered_same_facts_or_sources_allowed"])
+        self.assertTrue(h["topic_specific_start_logic_forbidden"])
+
+    def test_start_hardlock_forbids_stale_status_as_terminal_blocker(self):
+        text=Path("K0_START_HERE.md").read_text(encoding="utf-8")
+        self.assertIn("allgemein für jeden gültigen K0-Upload",text)
+        self.assertIn("dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren",text)
+        self.assertIn("nach Bindung des aktuellen Uploads",text)
+        self.assertIn("historische Informationen sind **keine Ausschlussliste**",text)
+
     def test_current_binds_only_k0_router(self):
         cur=json.loads(Path("K0_CURRENT_STATE.json").read_text(encoding="utf-8"))
         self.assertEqual(cur["concept"],"K0")
