@@ -545,21 +545,70 @@ Grenzen:
 - Productwahl bleibt downstream separat geblockt.
 
 
+## LIVE-READBACK 0.57.35 – REPOSITORY-TITELIMMUTABILITÄT HAT KORREKT GEBLOCKT
+
+Nutzer-Screenshot belegt:
+- 0.57.35 aktiv;
+- Existing-Only-Lauf real gestartet;
+- `PAUSED_ERROR` nach **3680 Bestandszeilen**;
+- **387** vorhandene Titelkandidaten neu geprüft;
+- **137** Strukturentscheidung nötig;
+- **233** Review nötig;
+- **16** nicht produzierend;
+- Fehler: `PSTE_RETAINED_TITLE_CANDIDATE_PASS_TITLE_MUTATION`.
+
+Exakte Rootcause lokal reproduziert:
+- Kandidat: `Ist es sinnvoll, Pferde zu scheren?`;
+- 0.57.35: Stored-Title-Validator lehnt die gespeicherte Form ab; der Composer-Fallback erzeugt `Ist es sinnvoll Pferde zu scheren?` ohne Komma;
+- derselbe Lauf markiert diese geänderte Form anschließend `NORMAL_PASS`;
+- der Repository-Guard blockiert das korrekt, weil ein persistierter Stored-Title-Kandidat bei Revalidierung nicht stillschweigend umgeschrieben werden darf.
+
+Der frühere lokale 0.57.35-Nachweis war an dieser Stelle unvollständig: Der 695er Replay prüfte Normalpfad-Status, aber nicht zusätzlich den Repository-PASS-Invariant `stored editorial_title/evidence immutable`. Der Live-Guard hat genau diese Testlücke offengelegt.
+
+## FINALER KANDIDAT PSTE 0.57.36 – STORED-TITLE IMMUTABILITY ROOTFIX
+
+Kandidat:
+`PSTE-0.57.36-FINAL-CONSOLIDATED-LIVEBUG-FIX.zip`
+
+SHA-256:
+`6757a1d6f96ff6448ee90b8b87640c5a330e7f5a24df6ebe81bf5f2fc8a99dc3`
+
+KISS-Fix:
+- gespeicherte Titelkandidaten werden bei Revalidierung **nie** stillschweigend durch einen neu komponierten Titel ersetzt;
+- besteht die exakt gespeicherte Form den harten Titelpfad nicht, bleibt der Originaltitel + seine Evidenz erhalten und der Fall bleibt fail-closed im Review;
+- keine Änderung an Queue/Driver/Admin/Repository/Familienmapping/Provider/Publish;
+- gegenüber 0.57.35 exakt **2 Dateien** geändert: `class-pste-normal-metadata-path.php` + Versionsdatei.
+
+Positiv/Negativ:
+- 0.57.35 Problemfall lokal exakt reproduziert: `NORMAL_PASS` + Titelmutation → Repository-Guard würde werfen;
+- 0.57.36 derselbe Fall: `SANDBOX_REQUIRED`, Originaltitel unverändert, Evidenz unverändert, `production_title` leer;
+- gesamter 695er Stored-Title-Bestand: **2 NORMAL_PASS / 19 RETAINED_NON_PRODUCING / 356 SANDBOX_REQUIRED / 318 STRUCTURE_GAP**;
+- Repository-Immutable-Prüfung über alle 695: **0 Fehler**; beide NORMAL_PASS-Titel byte-/wertgleich zum gespeicherten Titel; alle Nicht-PASS werden durch den vorhandenen Repository-Revalidation-Helper titel-/evidenztreu und ohne Production-Title gehalten;
+- kompletter 4472er Normalpfad: **4472/4472**, **0 Fehler**, **83 NORMAL_PASS / 25 RETAINED_NON_PRODUCING / 2625 SANDBOX_REQUIRED / 1739 STRUCTURE_GAP**;
+- `Welche Schermaschine für Pferde ist die leiseste?` → `Schermaschinen` / `Produktwahl` / `RETAINED_NON_PRODUCING`; kein Gesundheit/Fell-Misrouting;
+- Stored-Title-Fallbacks im gesamten 4472er Replay: **0**;
+- PASS-Titelmutationen im gesamten 4472er Replay: **0**;
+- PHP-Lint **81/81 PASS**;
+- JSON **54/54 PASS**;
+- Fresh-Unpack byteidentisch zum getesteten Source;
+- Queue/Driver/Admin/Repository-Code gegenüber 0.57.35 unverändert.
+
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05735_LOCAL_FULL_WORKFLOW_HARD_PASS_LIVE_READBACK_OPEN`
+`PSTE_05736_LOCAL_FULL_REPLAY_PASS_LIVE_READBACK_OPEN`
 
-Der komplette lokale Existing-Material-Workflow ist positiv/negativ und auf dem vollständigen 4472er Bestand hart bestanden. Offen ist nur der reale WordPress-Readback von exakt 0.57.35.
+Der reale 0.57.35-Fehler ist exakt reproduziert und ursächlich repariert. Der vollständige lokale Datenpfad inklusive 4472er Normalpfad und 695er Repository-Immutable-Invariant ist grün. Offen ist nur der reale WordPress-Readback von exakt 0.57.36.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05735_AND_RUN_EXISTING_ONLY_ONCE`
+`INSTALL_EXACT_05736_AND_RESUME_EXISTING_ONLY_ONCE`
 
-1. Nur `PSTE-0.57.35-CONSOLIDATED-FULL-WORKFLOW-HARDPASS-CANDIDATE.zip` installieren.
-2. `SEO Themenengine → Übersicht → Titel aus vorhandenem Material erzeugen → Vorhandenes Material in Titelkandidaten umwandeln`.
-3. Keine Produktionswelle starten.
-4. Live-Ergebnis mit lokalen Erwartungswerten vergleichen.
-5. Danach Gesamte Themenkarte exportieren und Live-Readback durchführen.
+1. Nur `PSTE-0.57.36-FINAL-CONSOLIDATED-LIVEBUG-FIX.zip` installieren.
+2. In `SEO Themenengine → Übersicht` beim gespeicherten PAUSED_ERROR **`Gespeicherten Block erneut prüfen`** verwenden.
+3. Keine neue Produktionswelle und keinen zweiten Existing-Only-Start erzeugen.
+4. Lauf bis COMPLETE beobachten.
+5. Danach Gesamte Themenkarte exportieren und Live-Readback gegen 0.57.36 durchführen.
 
 ## NICHT ANFASSEN
 
