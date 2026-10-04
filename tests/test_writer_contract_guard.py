@@ -37,13 +37,28 @@ def portal(i):
 
 def context(i):
     ident=i['items'][0]
+    pc={'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}}
+    rc=rule_context(ident)
+    digest=lambda x: hashlib.sha256(stable_json(x).encode()).hexdigest()
     return {
       'contract':'K0_AUTHORING_CONTEXT_V1',
       'run_instance_id':'run:1234567890abcdef12345678',
       'identity':ident,
       'content_profile':{'search_intent':'DECISION_SUPPORT'},
-      'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},
-      'rule_context':rule_context(ident),
+      'production_context':pc,
+      'fresh_research':{
+        'contract':'K0_FRESH_RESEARCH_RECEIPT_V1',
+        'research_session_id':'research:333333333333333333333333',
+        'mode':'FRESH_FROM_CURRENT_ASSIGNMENT',
+        'assignment_identity_sha256':digest(ident),
+        'research_payload_sha256':digest({'fact_pack':pc['fact_pack'],'research_claims':rc['research_claims']}),
+        'full_topic_research_required':True,
+        'historical_text_used':False,
+        'historical_research_artifact_used':False,
+        'historical_similarity_blocking':False,
+        'historical_information_blacklist':False,
+      },
+      'rule_context':rc,
       'publish_allowed':False
     }
 
