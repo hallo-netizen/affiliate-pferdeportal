@@ -445,6 +445,45 @@ Tests:
 - lokaler Scan-Pfad bei `local_backlog_complete=false` weiterhin gebunden;
 - alle fachlichen 0.57.33 Normalpfad-Dateien hashidentisch.
 
+## FAMILIEN-DISAMBIGUIERUNG 2026-10-04 – 11 DOPPELTE FAMILIENNAMEN GEPRÜFT
+
+Quelle:
+- realer PSTE-0.57.32-Export mit 256 Topic-Familien;
+- exakt 11 doppelte normalisierte Familiennamen / 22 physische Familienzeilen.
+
+Entscheidung:
+10 Gruppen werden **nur intern** semantisch getrennt; sichtbare WordPress-Namen müssen dafür nicht geändert werden:
+- Bremsenfallen: Fell-&-Haut-Zweig → `Schutz vor Bremsenstichen`; Insekten-&-Schutz-Zweig → `Bremsenfallen`.
+- Dualgassen: Bodenarbeit → `Dualgassen`; Bodenhindernisse → `Dualgassen-Training`.
+- Ekzemerdecken: Fell-&-Haut-Zweig → `Sommerekzem & Hautschutz`; Insekten-&-Schutz-Zweig → `Ekzemerdecken`.
+- Fliegenmasken: Fell-&-Haut-Zweig → `Augen- & Gesichtsschutz`; Insekten-&-Schutz-Zweig → `Fliegenmasken`.
+- Fliegensprays: Fell-&-Haut-Zweig → `Insektenschutz für Haut & Fell`; Insekten-&-Schutz-Zweig → `Fliegensprays`.
+- Fohlenhalfter: Ausrüstung → `Fohlenhalfter`; Training → `Fohlen-Halftertraining`.
+- Kühlgamaschen: Erste Hilfe → `Akute Kühlung`; Regeneration → `Kühlgamaschen`.
+- Schermaschinen: Ausrüstung → `Schermaschinen`; Gesundheit/Fell → `Pferdeschur & Fellgesundheit`.
+- Seniorenfutter: Fütterung → `Seniorenfutter`; Gesundheit/Senioren → `Fütterung im Alter`.
+- Sicherheitshalfter: Ausrüstung → `Sicherheitshalfter`; Training → `Sicheres Halftertraining`.
+
+Eine Gruppe ist **keine semantische Doppelbelegung, sondern echte Struktur-Dublette**:
+- `Weidezaungeräte`, product_page_id 282 und 283;
+- gleicher sichtbarer Portalpfad `Weide > Zauntechnik > Weidezaungeräte`;
+- identische Artikeltypen FAQ/Beratung/Vergleich/Installation/Kosten;
+- deshalb nicht künstlich umbenennen, sondern vor Live-Änderung einen kanonischen Besitzer bestimmen und die andere Struktur sauber konsolidieren.
+
+Validierung:
+- keiner der 10 neuen internen Familienbegriffe kollidiert mit einer bestehenden anderen Topic-Family;
+- nach den 10 internen Trennungen bleiben 255 eindeutige interne Familiennamen bei weiterhin 256 physischen Familienzeilen;
+- nach späterer Konsolidierung der echten Weidezaungeräte-Dublette wären 255 physische Familien / 255 eindeutige interne Familien vorhanden.
+
+Autoritative Mapping-Datei:
+`protocol/PSTE_TOPIC_FAMILY_DISAMBIGUATION_20261004.json`.
+
+Wichtig:
+- noch keine WordPress-Kategorie gelöscht;
+- keine sichtbaren Namen geändert;
+- Redaktionsplan noch nicht umgehängt;
+- Live-PSTE noch nicht verändert.
+
 ## ERSTER OFFENER BLOCKER
 
 `PSTE_05733_EXISTING_ONLY_AUDIT_REUSE_SKIPPED_RESCAN`
