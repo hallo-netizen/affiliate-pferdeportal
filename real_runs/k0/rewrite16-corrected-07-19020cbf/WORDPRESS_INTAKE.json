@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "Beratung",
+      "category": "kappzaum-beratung",
+      "plan_slot": "19020cbf4c886a65fe3bc488b17872ed387d26bdc19ed1fdc4dd2078caa9f684",
+      "target_keyword": "Kappzaum für Pferde",
+      "title": "So findest du ein optimales Kappzaum für Pferde"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "3280da118ad597d24bbbf0683b63228c128befc4c87d1426888e90dee1ee2f64"
+}
