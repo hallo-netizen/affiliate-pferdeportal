@@ -3,7 +3,7 @@ $GLOBALS['e2e_failures']=array(); $GLOBALS['e2e_passes']=array();
 function chk($cond,$name,$detail=''){ if($cond){$GLOBALS['e2e_passes'][]=$name; echo "PASS $name".($detail!==''?" :: $detail":"")."\n";}else{$GLOBALS['e2e_failures'][]=$name.($detail!==''?" :: $detail":""); echo "FAIL $name".($detail!==''?" :: $detail":"")."\n";}}
 function contains_text($hay,$needle){ return strpos((string)$hay,(string)$needle)!==false; }
 if (!class_exists('Pferdeportal_Affiliate_Router')) { fwrite(STDERR,"FATAL plugin class missing\n"); exit(2); }
-if (Pferdeportal_Affiliate_Router::VERSION !== '6.72.181') { fwrite(STDERR,"FATAL wrong version ".Pferdeportal_Affiliate_Router::VERSION."\n"); exit(2); }
+if (Pferdeportal_Affiliate_Router::VERSION !== '6.72.182') { fwrite(STDERR,"FATAL wrong version ".Pferdeportal_Affiliate_Router::VERSION."\n"); exit(2); }
 $o=Pferdeportal_Affiliate_Router::instance();
 $rm=function($name)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
 $rp=function($name)use($o){$p=new ReflectionProperty($o,$name);$p->setAccessible(true);return $p;};
