@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-04
-STATUS: PSTE 0.57.28 LIVE / AKTIVER EINZELLAUF PAUSED_ERROR / 0.57.30 SANDBOX-DATAFLOW-ROOTFIX LOKAL HARD-PASS
+STATUS: PSTE 0.57.28 LIVE / AKTIVER EINZELLAUF PAUSED_ERROR / 0.57.31 REPLAY-SAFE LOCAL-FINALIZE-RECOVERY LOKAL HARD-PASS
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -163,22 +163,58 @@ Daher:
 - keine Übergabe von `Produktwahl` an Textmaschine/PPM/PSERC, solange der Nutzer dort nicht den eigenen Schreibregelsatz festgelegt und der vorhandene Registrierungsweg ihn aufgenommen hat;
 - 0.57.28 ist **kein Live-Release und kein Produktions-PASS**.
 
+## LOKALER NACHPRÜFBEFUND 0.57.30 → 0.57.31
+
+Die lokale Vollsimulation des **tatsächlichen Resume-Wegs** hat einen weiteren Fehler in 0.57.30 aufgedeckt:
+
+- Originalbutton im UI: **„Gespeicherten Block erneut prüfen“**.
+- 0.57.30-Handler ruft nur den Server-Driver.
+- Der 0.57.30-Driver behandelt einen `PAUSED_ERROR`-Einzellauf sofort als `SINGLE_PARKED`.
+- Damit würde der aktuelle lokale Finalize-Fehler **nicht** erneut geprüft, sondern der gespeicherte Lauf archiviert/entfernt.
+- 0.57.30 ist deshalb **supersediert und darf nicht installiert werden**.
+
+Neuer Kandidat:
+`PSTE-0.57.31-REPLAY-SAFE-LOCAL-FINALIZE-RECOVERY-CANDIDATE.zip`
+
+SHA-256:
+`35f670fc8a44310b1cb858764e506b0af950ac3941790bb1f5ee93e4a4270430`
+
+Delta 0.57.30 → 0.57.31:
+- `includes/class-pste-research-job.php`: exakt `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT` als replay-sicherer lokaler FINALIZE-Fehler gebunden;
+- `includes/class-pste-research-driver.php`: vor dem Parken eines `PAUSED_ERROR`-Jobs wird der vorhandene sichere Recovery-Pfad `PSTE_Research_Job::current()` ausgeführt; nur wenn der Job danach weiterhin PAUSED/UNKNOWN ist, bleibt das bisherige Parken aktiv;
+- `portal-seo-topic-engine.php`: Version 0.57.31.
+
+Frische lokale Simulation:
+- 0.57.30 bei exakt sicherem PAUSED_ERROR: `SINGLE_PARKED`, 0 Advance, 1 Park → **FAIL**;
+- 0.57.31 bei exakt `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`: 1 Recovery + 1 Advance + 0 Park → **PASS**;
+- 0.57.31 bei absichtlich unsicherem `PSTE_UNSAFE_PROVIDER_FAILURE`: 0 Advance + 1 Park → **FAIL-CLOSED PASS**;
+- 0.57.31 Sandbox-Dataflow-Rootfix positiv: PASS;
+- nach absichtlicher Portal-Komponentenmutation blockiert weiterhin exakt `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`;
+- Replay-Safe-Klassifikation: Portal-Component-Drift = SAFE; erfundener Providerfehler = NOT_SAFE;
+- Fresh-Unpack PHP-Lint **81/81 PASS**;
+- Originalbezeichnungen im 0.57.31-Code unverändert belegt:
+  - **„Server-Driver:“**
+  - **„Gespeicherter Einzellauf:“**
+  - **„Gespeicherten Block erneut prüfen“**.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05730_NEEDS_LIVE_INSTALL_AND_RESUME_READBACK`
+`PSTE_05731_NEEDS_LIVE_INSTALL_AND_EXACT_RESUME_READBACK`
 
-Der konkrete wiederholte Systemfehler ist lokal ursächlich reproduziert und mit 0.57.30 repariert. Offen ist nur noch der Live-Beweis.
+Der Live-Lauf steht weiterhin bei `PAUSED_ERROR` mit `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`. 0.57.31 ist lokal bis zum echten Resume-/Parkpfad positiv und negativ simuliert; offen ist nur der reale WordPress-Readback.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05730_THEN_RESUME_SAVED_BLOCK_ONCE`
+`INSTALL_05731_AND_OBSERVE_EXISTING_SAVED_SINGLE_RUN`
 
-1. PSTE **0.57.30** installieren.
-2. `SEO Themenengine → Einstellungen → Longtails recherchieren, Titel bilden und Kategorien zuordnen` öffnen.
-3. Beim vorhandenen **Gespeicherten Einzellauf** genau einmal **„Gespeicherten Block erneut prüfen“** klicken.
-4. Erwartung: `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT` darf nicht erneut auftreten; `SANDBOX_BATCH` muss über 0/15 weiterlaufen oder ein **neuer anderer** fail-closed Fehlercode erscheinen.
-5. Bei neuem Fehlercode nicht mehrfach klicken, sondern diesen exakten Code als nächsten Blocker übernehmen.
-6. Keine neue Produktionswelle und keine neue DataForSEO-/Provider-Recherche starten.
+1. **Nicht 0.57.30 installieren.**
+2. PSTE **0.57.31** installieren.
+3. `SEO Themenengine → Einstellungen` öffnen.
+4. Im vorhandenen Abschnitt **„Longtails recherchieren, Titel bilden und Kategorien zuordnen“** den Block **„Gespeicherter Einzellauf:“** beobachten.
+5. Durch den Versionswechsel darf der sichere lokale Recovery-Pfad den gespeicherten `PAUSED_ERROR` selbst wieder aufnehmen. Falls der Block noch `PAUSED_ERROR` zeigt, exakt den vorhandenen Button **„Gespeicherten Block erneut prüfen“** einmal anklicken.
+6. Erfolgsnachweis: `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT` verschwindet und **„Abschluss SANDBOX_BATCH 0/15“** geht über 0/15 hinaus oder ein neuer anderer fail-closed Fehlercode erscheint.
+7. Bei neuem Fehler nicht mehrfach klicken; exakten sichtbaren Code übernehmen.
+8. Keine neue Produktionswelle und keine neue DataForSEO-/Provider-Recherche.
 
 ## NICHT ANFASSEN
 
