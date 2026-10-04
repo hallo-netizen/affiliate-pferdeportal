@@ -1,0 +1,184 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "kappzaum-faq",
+    "plan_slot": "7b7ca2faa5cb88860823d0142e4c223dda8f8ee8c338d81b75b08ffa88e94ad2",
+    "target_keyword": "Kappzaum über Trense",
+    "title": "Kann man einen Kappzaum über einer Trense tragen?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Potucek – Der Kappzaum",
+          "source_url": "https://www.potucek.de/2017/11/06/der-kappzaum/"
+        },
+        {
+          "source_title": "PICADERA – Kappzaum mit Gebiss kombinieren",
+          "source_url": "https://picadera.de/kappzaum-mit-gebiss-kombinieren"
+        },
+        {
+          "source_title": "PICADERA – Semizäume für Trense, Kandare & Kappzaum",
+          "source_url": "https://picadera.de/produkt-kategorie/zaeume/semizaeume-unterlegriemen"
+        },
+        {
+          "source_title": "PICADERA – Trensenzubehör",
+          "source_url": "https://picadera.de/produkt-kategorie/trensen/trensenzubehoer"
+        },
+        {
+          "source_title": "Reitsport.de – Kappzaum",
+          "source_url": "https://www.reitsport.de/lexikon/kappzaum"
+        }
+      ],
+      "claims": [
+        "Ein Kappzaum kann zusammen mit einem Trensenzaum verwendet werden; bei der kombinierten Verschnallung muss darauf geachtet werden, dass die Maulwinkel nicht eingeklemmt werden.",
+        "Für die Nutzung mit Trense können spezielle Gebissriemen am Kappzaum verwendet werden, sodass Kappzaum und Gebiss funktional kombiniert werden.",
+        "Bei dafür vorgesehenen Kappzaummodellen kann ein Gebiss über separate Gebissriemen an kleinen D-Ringen des Kappzaums befestigt werden.",
+        "Ein Semizaum mit Trensengebiss kann über einem Kappzaum verschnallt werden, um beide Zäumungen gleichzeitig zu nutzen.",
+        "Bei der Kombination mit einem Semizaum bleibt das Gebiss über eine direkte Verbindung zum Genick ausgerichtet; bei separaten Gebissriemen kann je nach Bauart ein Verkippen des Gebisses auftreten.",
+        "Ein klassischer Kappzaum wirkt über Nasenrücken, Kinnlade und Genick und besitzt für sich genommen kein Gebiss; für jede Kombination bleibt die passende Lage am Pferdekopf entscheidend."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Kappzaum über Trense",
+      "topic": "Kann man einen Kappzaum über einer Trense tragen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "kappzaum-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Kann man einen Kappzaum über einer Trense tragen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Potucek – Der Kappzaum",
+        "source_url": "https://www.potucek.de/2017/11/06/der-kappzaum/",
+        "evidence_text_sha256": "2f719f0f0ed545fafaf5231ce21eff59f0f9071ceebf54f01e48225a3b53a917",
+        "statement": "Ein Kappzaum kann zusammen mit einem Trensenzaum verwendet werden; bei der kombinierten Verschnallung muss darauf geachtet werden, dass die Maulwinkel nicht eingeklemmt werden.",
+        "evidence_text": "Ein Kappzaum kann zusammen mit einem Trensenzaum verwendet werden; bei der kombinierten Verschnallung muss darauf geachtet werden, dass die Maulwinkel nicht eingeklemmt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": ["FAQ"]
+      },
+      "F2": {
+        "source_title": "Potucek – Der Kappzaum",
+        "source_url": "https://www.potucek.de/2017/11/06/der-kappzaum/",
+        "evidence_text_sha256": "dc37110f050d0b1169d704f6a811c6306f7439f9506fc9b01d4a37793b8da19f",
+        "statement": "Für die Nutzung mit Trense können spezielle Gebissriemen am Kappzaum verwendet werden, sodass Kappzaum und Gebiss funktional kombiniert werden.",
+        "evidence_text": "Für die Nutzung mit Trense können spezielle Gebissriemen am Kappzaum verwendet werden, sodass Kappzaum und Gebiss funktional kombiniert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": ["FAQ"]
+      },
+      "F3": {
+        "source_title": "PICADERA – Kappzaum mit Gebiss kombinieren",
+        "source_url": "https://picadera.de/kappzaum-mit-gebiss-kombinieren",
+        "evidence_text_sha256": "f93689e5ee3e5321f068153470cffd8fcb6f8776da1b085a1be0ef98bf05be7f",
+        "statement": "Bei dafür vorgesehenen Kappzaummodellen kann ein Gebiss über separate Gebissriemen an kleinen D-Ringen des Kappzaums befestigt werden.",
+        "evidence_text": "Bei dafür vorgesehenen Kappzaummodellen kann ein Gebiss über separate Gebissriemen an kleinen D-Ringen des Kappzaums befestigt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": ["FAQ"]
+      },
+      "F4": {
+        "source_title": "PICADERA – Semizäume für Trense, Kandare & Kappzaum",
+        "source_url": "https://picadera.de/produkt-kategorie/zaeume/semizaeume-unterlegriemen",
+        "evidence_text_sha256": "a584850d38a8e052089c64c809f5cad66376cd805f75f0268abe59384a12bcc7",
+        "statement": "Ein Semizaum mit Trensengebiss kann über einem Kappzaum verschnallt werden, um beide Zäumungen gleichzeitig zu nutzen.",
+        "evidence_text": "Ein Semizaum mit Trensengebiss kann über einem Kappzaum verschnallt werden, um beide Zäumungen gleichzeitig zu nutzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": ["FAQ"]
+      },
+      "F5": {
+        "source_title": "PICADERA – Trensenzubehör",
+        "source_url": "https://picadera.de/produkt-kategorie/trensen/trensenzubehoer",
+        "evidence_text_sha256": "e64f4cee0a3dbcd979449efb586dd48ff682ab16e7d0d7ea58e2c19fe6edebbc",
+        "statement": "Bei der Kombination mit einem Semizaum bleibt das Gebiss über eine direkte Verbindung zum Genick ausgerichtet; bei separaten Gebissriemen kann je nach Bauart ein Verkippen des Gebisses auftreten.",
+        "evidence_text": "Bei der Kombination mit einem Semizaum bleibt das Gebiss über eine direkte Verbindung zum Genick ausgerichtet; bei separaten Gebissriemen kann je nach Bauart ein Verkippen des Gebisses auftreten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": ["FAQ"]
+      },
+      "F6": {
+        "source_title": "Reitsport.de – Kappzaum",
+        "source_url": "https://www.reitsport.de/lexikon/kappzaum",
+        "evidence_text_sha256": "0048ef81775fb29fcc9b4d6a485145d3d88aa88af0c8ac19239430105be60b8e",
+        "statement": "Ein klassischer Kappzaum wirkt über Nasenrücken, Kinnlade und Genick und besitzt für sich genommen kein Gebiss; für jede Kombination bleibt die passende Lage am Pferdekopf entscheidend.",
+        "evidence_text": "Ein klassischer Kappzaum wirkt über Nasenrücken, Kinnlade und Genick und besitzt für sich genommen kein Gebiss; für jede Kombination bleibt die passende Lage am Pferdekopf entscheidend.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": ["FAQ"]
+      }
+    },
+    "required_fact_ids": ["F1", "F2", "F3", "F4", "F5", "F6"],
+    "allowed_fact_ids": ["F1", "F2", "F3", "F4", "F5", "F6"],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/training/training-longieren/kappzaum/",
+        "anchor": "Kappzaum",
+        "block": "details"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/kappzaum-faq/",
+        "anchor": "FAQ Kappzaum",
+        "block": "checklist"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Longieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/training/training-longieren/kappzaum/",
+        "active": true
+      },
+      {
+        "href": "/category/kappzaum-faq/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": ["parent_category", "semantic_related", "further_information"],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "kappzaum-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Kappzaum",
+      "Trense",
+      "Gebiss",
+      "Semizaum",
+      "Gebissriemen",
+      "Passform",
+      "Maulwinkel"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+      "rationale": "Die Frage verlangt vor allem eine bedingte Ja-Antwort und Hinweise zur korrekten Kombination; eine sinnvolle Matrix mit mindestens vier eigenständigen Zeilen und drei Spalten wäre ohne Füllinhalte nicht belastbar."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
