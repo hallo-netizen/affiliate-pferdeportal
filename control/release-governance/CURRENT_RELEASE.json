@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 187,
+  "generation": 188,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "adc68fc5cf28df1baf6688f615ce49885c19d5fbbffaa71147baba9412667084",
+    "manifest_sha256": "63218434f3d853fd3a9035cd600caae8a7ba36be5525a9096b4a7dcc9a41ea5d",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,19 +36,19 @@
   },
   "active_candidate": {
     "version": "6.72.184",
-    "status": "LIVE_FAIL_STALE_LIBRARY_EDGE_NEGATIVE_PROVEN_FIX_BOUND",
+    "status": "STALE_LIBRARY_EDGE_RED_GREEN_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "adc68fc5cf28df1baf6688f615ce49885c19d5fbbffaa71147baba9412667084",
+    "current_source_manifest_sha256": "63218434f3d853fd3a9035cd600caae8a7ba36be5525a9096b4a7dcc9a41ea5d",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
-    "candidate_reference_scope": "6_72_184_LIVE_FAIL; STALE_CREATIVE_LIBRARY_EDGE_NEGATIVE_PROVEN_IN_WORDPRESS_MARIADB_RUNS_37227361318_AND_37227361328; FIX_NOT_YET_GREEN",
+    "candidate_reference_artifact_sha256": "46bcc02b2284fbbb0830b9f254d178f15ad0be072cbb3b40ee7fd658d4e1e437",
+    "candidate_reference_scope": "LIVE_FAIL_REPRODUCED_AS_STALE_CREATIVE_LIBRARY_EDGE; NEGATIVE_RUNS_37227361318_37227361328; FIXED_IDENTICAL_GATE_SOURCE_37227561289_20_OF_20_PASS; ZIP_37227561276_20_OF_20_PLUS_FRESH_21_OF_21_PLUS_DESTINATION_26_OF_26_PLUS_MANIFEST_27_OF_27_PLUS_PERFORMANCE_HARDLOCK_PASS; REAL_LIVE_READBACK_OPEN",
     "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip",
-    "final_artifact_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
+    "final_artifact_sha256": "46bcc02b2284fbbb0830b9f254d178f15ad0be072cbb3b40ee7fd658d4e1e437",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.184.zip",
-    "handoff_artifact_bytes": 792763
+    "handoff_artifact_bytes": 793009
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_LIBRARY_SINGLE_TRUTH_LEGACY_AUTO_MIGRATION_6_72_184_FULL_E2E_PASS",
+    "current_focus": "BANNER_LIBRARY_SINGLE_TRUTH_STALE_EDGE_REEVALUATION_6_72_184_RED_GREEN_PASS",
     "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672184_live_banner_migration_full_e2e_20261004.md",
-    "current_focus_reason": "Real screenshot proved 6.72.183 still displayed a legacy SanoVet feeding banner on Schabracken. 6.72.184 makes Creative-Library/output_object_v4 the sole automatic banner source, migrates only active banners in background batches, prevents the generic full creative pool rescan for this banner-only release, preserves fixed manual banner overrides, and leaves eBay/Idealo product campaigns unchanged. Source upgrade and installed ZIP gates are green; real production readback remains open.",
+    "current_focus_reason": "Real screenshot proved the first 6.72.184 installer could still preserve a stale wrong Creative-Library edge. Exact negative fixture now reproduces destination=feeding with stored target=Schabracken. Banner-only migration now clears only derived automatic edge fields before the existing planner recomputes from the real/decoded destination URL. Frontend hotpaths remain unchanged. Source and ZIP red-green gates are green; corrected real production readback remains open.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -124,7 +124,7 @@
       "topicless_final_fallback_required": true,
       "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION",
       "performance_recheck": {
-        "status": "PASS_SOURCE_AND_INSTALLED_ZIP",
+        "status": "PASS_SOURCE_AND_INSTALLED_ZIP_AFTER_STALE_EDGE_FIX",
         "protected_fast_paths": "UNCHANGED",
         "new_frontend_db_queries": 0,
         "new_frontend_http_calls": 0,
@@ -171,10 +171,16 @@
         "scope": "ACTIVE_BANNERS_ONLY",
         "execution": "ADMIN_TRIGGERED_BACKGROUND_BATCHES",
         "generic_full_pool_rescan": "FORBIDDEN_FOR_6_72_184",
+        "stale_automatic_edge_policy": "CLEAR_DERIVED_TOPIC_EDGE_BEFORE_EXISTING_DESTINATION_REPLAN",
+        "manual_fixed_control_preserved": true,
         "products_replanned": false,
         "ebay_product_campaign_unchanged": "PASS",
         "idealo_product_campaign_unchanged": "PASS",
-        "remote_http_calls_in_gate": 0
+        "remote_http_calls_in_gate": 0,
+        "negative_source_run": 37227361318,
+        "negative_zip_run": 37227361328,
+        "positive_source_run": 37227561289,
+        "positive_zip_run": 37227561276
       }
     },
     "awin_catalog_refresh": {
@@ -212,7 +218,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "6_72_184_BANNER_LIBRARY_MIGRATION_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
+      "status": "6_72_184_STALE_LIBRARY_EDGE_RED_GREEN_SOURCE_AND_ZIP_PASS_LIVE_READBACK_OPEN",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -584,32 +590,43 @@
     }
   },
   "execution_state": {
-    "state": "FIX_FIRST_PROVEN_STALE_LIBRARY_EDGE_FAILURE",
-    "authorized_next_action": "IN_BANNER_ONLY_MIGRATION_CLEAR_ONLY_AUTOMATIC_STORED_BANNER_TOPIC_EDGE_BEFORE_REPLANNING_EACH_ACTIVE_BANNER; KEEP_FRONTEND_HOTPATH_UNCHANGED; RERUN_IDENTICAL_RED_GATE_TO_GREEN",
-    "bound_user_scope_action": "Fix exactly the proven stale central banner edge: during the one-time 6.72.184 banner-only admin/background migration, clear the old automatic topic_targets-derived edge for each active banner before calling the existing output planner, so the existing destination classifier recomputes once from the real/decoded destination URL and stores the replacement edge. Preserve manual controls/FIXED assignments. Do not alter frontend ranking, rendering, eBay, Idealo, products, provider architecture, or performance hotpaths.",
-    "completion_condition": "IDENTICAL_WORDPRESS_MARIADB_STALE_EDGE_GATE_GREEN_AND_PERFORMANCE_HARDLOCK_PASS_AND_ZIP_FULL_REGRESSION_PASS",
-    "after_completion_action": "BIND_NEW_TESTED_INSTALLER_AND_REQUIRE_REAL_SCHABRACKEN_READBACK",
+    "state": "CORRECTED_INSTALLER_6_72_184_STALE_EDGE_RED_GREEN_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
+    "authorized_next_action": "INSTALL_CORRECTED_6_72_184_SHA_46BCC02B_ON_REAL_WORDPRESS_AND_READBACK_SCHABRACKEN_PLUS_REAL_BANNERS",
+    "bound_user_scope_action": "Install exactly the corrected AFFILIATE_ZENTRALE_6.72.184.zip with SHA-256 46bcc02b2284fbbb0830b9f254d178f15ad0be072cbb3b40ee7fd658d4e1e437 over the currently installed Affiliate-Zentrale. Allow the banner-only migration worker to run, then read back Schabracken first. The SanoVet feeding banner must not win there. Then check representative page/category/post/glossary/breed slots. Do not rebuild before a real failure of this corrected installer is proven.",
+    "completion_condition": "REAL_WORDPRESS_CORRECTED_6_72_184_SCHABRACKEN_AND_REPRESENTATIVE_BANNER_READBACK_PASS",
+    "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_FAILURE",
     "no_optional_detours": true,
-    "sequence": 58,
+    "sequence": 59,
     "authorized_change_prefixes": [
-      "release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php",
-      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php",
+      "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "release/affiliate-zentrale/evidence/",
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md"
     ],
-    "negative_proof": {
-      "source_upgrade_run": 37227361318,
-      "zip_upgrade_run": 37227361328,
-      "result": "FAIL_AS_REQUIRED",
-      "exact_failure": "POST_UPGRADE_stale_edge_recomputed_from_real_destination",
-      "stored_wrong_target": "Ausrüstung Upgrade E2E > Schabracken Upgrade E2E",
-      "real_destination": "https://example.com/fuetterung-upgrade-e2e/",
-      "performance_hardlock": "PASS"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672184_live_banner_migration_full_e2e_20261004.md",
+    "evidence_sha256": "d039b90094a6e51a0c3d74e7ba534b3233381d1b831fc11cbf898f933532d654",
+    "current_source_manifest_sha256": "63218434f3d853fd3a9035cd600caae8a7ba36be5525a9096b4a7dcc9a41ea5d",
+    "corrected_installer": {
+      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip",
+      "sha256": "46bcc02b2284fbbb0830b9f254d178f15ad0be072cbb3b40ee7fd658d4e1e437",
+      "bytes": 793009,
+      "git_blob_sha": "4cc3f5fc9b3444320fbb943b633612a7cb2ade9b",
+      "negative_source_run": 37227361318,
+      "negative_zip_run": 37227361328,
+      "positive_source_run": 37227561289,
+      "positive_zip_run": 37227561276,
+      "red_case": "REAL_DESTINATION_FEEDING_STORED_EDGE_SCHABRACKEN",
+      "red_result": "FAIL_AS_REQUIRED",
+      "green_result": "20_OF_20_PASS",
+      "fresh_library_banner": "21_OF_21_PASS",
+      "destination_library": "26_OF_26_PASS",
+      "package_files": "27_OF_27_PASS",
+      "php_lint": "21_OF_21_PASS",
+      "performance": "PASS_NO_FRONTEND_HOTPATH_CHANGE_ZERO_NEW_FRONTEND_DB_HTTP_URL_RECLASSIFICATION"
     },
-    "performance_lock": "NO_FRONTEND_FUNCTION_CHANGE; NO_NEW_FRONTEND_DB_HTTP_OR_URL_ANALYSIS"
+    "superseded_installer_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
