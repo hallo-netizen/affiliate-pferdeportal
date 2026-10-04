@@ -484,23 +484,82 @@ Wichtig:
 - Redaktionsplan noch nicht umgehängt;
 - Live-PSTE noch nicht verändert.
 
+## FINALER LOKALER KANDIDAT PSTE 0.57.35 – KONSOLIDIERT / FULL WORKFLOW HARD PASS
+
+Kandidat:
+`PSTE-0.57.35-CONSOLIDATED-FULL-WORKFLOW-HARDPASS-CANDIDATE.zip`
+
+SHA-256:
+`b29b3403863a83d181a0529c4d3504768aca04af03cc298faee3eb5d1e39be98`
+
+0.57.35 konsolidiert:
+- Existing-Only-Force-Reaudit aus 0.57.34;
+- interne eindeutige Familienidentitäten für die 11 früher doppelt benannten Familien;
+- normaler Familien-/Artikeltyp-/Repository-Weg, keine Chat-Entscheidungsdatei;
+- keine neue Architektur, keine Providerrecherche, keine Gate-Absenkung.
+
+Vollständige lokale Simulation auf realem 0.57.32-Export:
+- **4472/4472 Kandidaten verarbeitet, 0 Fehler**;
+- Ergebnis: **86 NORMAL_PASS / 25 RETAINED_NON_PRODUCING / 2622 SANDBOX_REQUIRED / 1739 STRUCTURE_GAP**;
+- gespeicherte 695 Titelkandidaten: **3 NORMAL_PASS / 19 RETAINED_NON_PRODUCING / 355 SANDBOX_REQUIRED / 318 STRUCTURE_GAP**.
+
+Existing-Only-Orchestrierung zweimal komplett:
+- Run 1: COMPLETE / 4472 verarbeitet / 695 revalidiert / 318 Struktur / 355 Review / 19 nicht produzierend / 3 promoted / 0 Provider / kein Audit-Reuse;
+- Run 2: exakt dieselben Werte;
+- Driver: IDLE / `PSTE_DRIVER_NO_ACTIVE_WORK`, 113 Ticks, 112 Repository-Batches, kein Research-Job-Restzustand.
+
+Drei lokal promotionfähige Kandidaten bis Compiler-Capability-Check:
+1. `Wie striegelt man Pferde am besten?` → Striegel / FAQ / Kategorie 67;
+2. `Muss man unter ein Reitpad eine Schabracke tragen?` → Schabracken / FAQ / Kategorie 84;
+3. `Ist es sinnvoll, Pferde zu scheren?` → interne Familie `Scheren bei Pferden` / FAQ / Kategorie 714.
+
+Schermaschinen-Trennung:
+- produktbezogene Maschinenfragen bleiben interne Familie `Schermaschinen`;
+- Gesundheits-/Schurfragen laufen über `Scheren bei Pferden`;
+- `Welche Schermaschine für Pferde ist die leiseste?` → `Schermaschinen` / `Produktwahl` / `RETAINED_NON_PRODUCING` wegen weiterhin nicht registriertem Productwahl-Downstream; kein Gesundheits-Misrouting.
+
+Positive/Negative Hardtests:
+- Family-Routing **25/25 PASS**;
+- bestehende Family-Identity-Fixture-Regressionsmatrix **88/88 PASS**;
+- interne Familien-Selfname-Matrix **11/11 PASS**;
+- Duplicate-Family-Guard **2/2 PASS**;
+- Negativmatrix **15/15 PASS**;
+- Repository-Helper **6/6 PASS**;
+- UI/Boundary **14/14 PASS**;
+- PHP-Lint **81/81 PASS**;
+- JSON-Parse **54/54 PASS**;
+- Fresh-Unpack byteidentisch zum getesteten Source;
+- 0 stray Backup-Dateien.
+
+Registry:
+- 1149 Leaf-Kategorien unverändert im Registry-Bestand;
+- 256 Familien;
+- **0 doppelte interne Familiennamen**;
+- 11 Familien intern disambiguiert.
+
+Grenzen:
+- Existing-Only macht 0 Providercalls;
+- kein Publish;
+- keine Artikel-/Taxonomie-Writes;
+- kein Produktionshandoff im Existing-Only-Lauf;
+- Productwahl bleibt downstream separat geblockt.
+
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05733_EXISTING_ONLY_AUDIT_REUSE_SKIPPED_RESCAN`
+`PSTE_05735_LOCAL_FULL_WORKFLOW_HARD_PASS_LIVE_READBACK_OPEN`
 
-0.57.33 ist live installiert, aber der Existing-Only-Lauf hat wegen eines wiederverwendeten alten Audit-Receipts den lokalen Bestand nicht erneut durchlaufen. Die sichtbaren Nullzähler sind damit ein Orchestrierungsfehler, kein fachliches Ergebnis.
+Der komplette lokale Existing-Material-Workflow ist positiv/negativ und auf dem vollständigen 4472er Bestand hart bestanden. Offen ist nur der reale WordPress-Readback von exakt 0.57.35.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05734_AND_RERUN_EXISTING_ONLY`
+`INSTALL_EXACT_05735_AND_RUN_EXISTING_ONLY_ONCE`
 
-1. `PSTE-0.57.34-EXISTING-ONLY-FORCE-REAUDIT-CANDIDATE.zip` in WordPress installieren.
-2. `SEO Themenengine → Übersicht`.
-3. Abschnitt `Titel aus vorhandenem Material erzeugen`.
-4. `Vorhandenes Material in Titelkandidaten umwandeln` starten.
-5. Erwartung für den echten Lauf: `vorhandene Titelkandidaten neu geprüft` darf **nicht 0** bleiben.
-6. Keine Produktionswelle starten.
-7. Danach Screenshot und anschließend Themenkarten-Export für den Live-Readback.
+1. Nur `PSTE-0.57.35-CONSOLIDATED-FULL-WORKFLOW-HARDPASS-CANDIDATE.zip` installieren.
+2. `SEO Themenengine → Übersicht → Titel aus vorhandenem Material erzeugen → Vorhandenes Material in Titelkandidaten umwandeln`.
+3. Keine Produktionswelle starten.
+4. Live-Ergebnis mit lokalen Erwartungswerten vergleichen.
+5. Danach Gesamte Themenkarte exportieren und Live-Readback durchführen.
 
 ## NICHT ANFASSEN
 
