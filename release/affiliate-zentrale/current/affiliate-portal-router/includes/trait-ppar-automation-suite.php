@@ -3197,11 +3197,96 @@ trait PPAR_Automation_Suite_Trait {
         if(!$failed){ update_option($done_key,'done',false); }
     }
 
+    /**
+     * V6.72.184 KISS – bestehende Banner einmalig in die autoritative
+     * Creative-Library-Zielzuordnung ueberfuehren. Ausschliesslich Banner,
+     * ausschliesslich Hintergrundarbeit, kein Frontend-Scan und keine Provider-
+     * Remoteaufrufe. Produktreihen bleiben unberuehrt.
+     */
+    public function ensure_banner_library_migration_v672184() {
+        if (self::VERSION !== '6.72.184' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $state = sanitize_key((string)get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, ''));
+        if ($state === 'done') { return; }
+        if ($state !== 'running') {
+            delete_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR);
+            update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, 'running', false);
+        }
+        if (!wp_next_scheduled(self::BANNER_LIBRARY_MIGRATION_HOOK)) {
+            wp_schedule_single_event(time() + 1, self::BANNER_LIBRARY_MIGRATION_HOOK);
+        }
+    }
+
+    public function run_banner_library_migration_v672184() {
+        if (self::VERSION !== '6.72.184' || !method_exists($this, 'creative_library_table') || !method_exists($this, 'output_plan_creative')) { return; }
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $cursor = absint(get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, 0));
+        $limit = 50;
+        $processed = 0;
+        $materialized = 0;
+        $last = $cursor;
+        $deadline = microtime(true) + 12.0;
+        $more = false;
+
+        do {
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table} WHERE id>%d AND creative_type='banner' AND source_status='active' AND availability_state='active' ORDER BY id ASC LIMIT %d",
+                $last, $limit
+            ), ARRAY_A);
+            if (!is_array($rows) || !$rows) { $more = false; break; }
+            foreach ($rows as $row) {
+                $last = max($last, absint($row['id'] ?? 0));
+                $processed++;
+                if (absint($row['width'] ?? 0) <= 0 || absint($row['height'] ?? 0) <= 0) {
+                    if (method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+                $result = $this->output_plan_creative($row, true);
+                if (is_array($result) && absint($result['active'] ?? 0) > 0) { $materialized++; }
+            }
+            update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, $last, false);
+            $more = count($rows) === $limit;
+        } while ($more && microtime(true) < $deadline);
+
+        $previous = get_option('ppar_banner_library_migration_result_v672184', array());
+        $previous = is_array($previous) ? $previous : array();
+        update_option('ppar_banner_library_migration_result_v672184', array(
+            'processed'=>absint($previous['processed'] ?? 0) + $processed,
+            'materialized'=>absint($previous['materialized'] ?? 0) + $materialized,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        ), false);
+
+        if ($more) {
+            if (!wp_next_scheduled(self::BANNER_LIBRARY_MIGRATION_HOOK)) {
+                wp_schedule_single_event(time() + 3, self::BANNER_LIBRARY_MIGRATION_HOOK);
+            }
+            return;
+        }
+
+        delete_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR);
+        update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, 'done', false);
+    }
+
     /** V6.72.82 – Vollautomatik: der komplette aktive Pool nimmt teil. */
     public function ensure_full_pool_automation() {
         $state = (string) get_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, '');
         $running_state = 'running:' . self::VERSION;
         if ($state === self::VERSION || $state === $running_state) { return; }
+
+        // V6.72.184 ist bewusst ein reines Banner-Migrationsrelease. Der bisherige
+        // Versionswechsel-Nachlauf ueber den gesamten Creative-Pool (inkl. tausender
+        // Produktzeilen) ist hier unnoetig. Der dedizierte Bannerworker oben ist die
+        // einzige Migration; eBay/Idealo/Produkte werden nicht neu geplant.
+        if (self::VERSION === '6.72.184') {
+            if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::FULL_POOL_WORKER_HOOK); }
+            delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
+            update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
+            return;
+        }
 
         // V6.72.175: Ein Cursor gehoert immer exakt zu der Version, die ihn
         // begonnen hat. Ein offener Cursor der Vorversion darf nach einem Update
