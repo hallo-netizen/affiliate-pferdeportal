@@ -1,11 +1,11 @@
-name: TEMP Affiliate Banner Full E2E 6.72.181
+name: TEMP Affiliate Banner Full E2E 6.72.182 SOURCE
 
 on:
   push:
     branches: [affiliate-release-current]
     paths:
-      - '.github/workflows/tmp-affiliate-banner-full-e2e-v672181.yml'
-      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672181.php'
+      - '.github/workflows/tmp-affiliate-banner-full-e2e-v672182.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672182.php'
       - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
   workflow_dispatch:
 
@@ -45,10 +45,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F "Version: 6.72.181" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.181';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.182" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.182';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
-          echo "PASS exact 6.72.181 source bound"
+          echo "PASS exact 6.72.182 source bound"
 
       - name: PHP syntax all plugin files and E2E fixture
         shell: bash
@@ -56,7 +56,7 @@ jobs:
           set -euo pipefail
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/lint.log)" = "21"
-          php -l AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672181.php
+          php -l AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672182.php
           echo "PASS PHP syntax"
 
       - name: Install exact WordPress and activate current plugin
@@ -90,11 +90,11 @@ jobs:
           PHP
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if (!class_exists("Pferdeportal_Affiliate_Router") || Pferdeportal_Affiliate_Router::VERSION !== "6.72.181") { exit(2); } echo "PASS plugin active 6.72.181\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if (!class_exists("Pferdeportal_Affiliate_Router") || Pferdeportal_Affiliate_Router::VERSION !== "6.72.182") { exit(2); } echo "PASS plugin active 6.72.182\n";' --path=/tmp/wp-site
 
       - name: COMPLETE WordPress MariaDB banner workflow positive negative
         shell: bash
         run: |
           set -euo pipefail
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672181.php" --path=/tmp/wp-site | tee /tmp/banner-full-e2e.log
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672182.php" --path=/tmp/wp-site | tee /tmp/banner-full-e2e.log
           grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_PASS' /tmp/banner-full-e2e.log
