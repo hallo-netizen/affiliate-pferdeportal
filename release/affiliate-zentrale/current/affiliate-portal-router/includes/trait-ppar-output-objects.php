@@ -858,9 +858,13 @@ trait PPAR_Output_Objects_Trait {
         return $target;
     }
 
-    /** V6.72.85 – lokale Ziel-URL-Evidenz ohne Tracking-Aufruf. */
+    /** KISS-Ziel-URL-Evidenz: nur echte/decodierte Zielseiten, nie Tracking-Fallback. */
     private function output_destination_semantic_text($row) {
         if (!is_array($row)) { return ''; }
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+        $destination_source=sanitize_key((string)($payload['_destination_source']??''));
+        if ($destination_source === 'tracking_fallback') { return ''; }
         $url=trim((string)($row['destination_url']??''));
         if($url==='' && method_exists($this,'creative_library_destination_from_tracking')){
             $url=(string)$this->creative_library_destination_from_tracking((string)($row['tracking_url']??''));
@@ -868,7 +872,194 @@ trait PPAR_Output_Objects_Trait {
         if($url===''){return '';}
         for($i=0;$i<3;$i++){$d=rawurldecode(html_entity_decode($url,ENT_QUOTES,'UTF-8'));if($d===$url){break;}$url=$d;}
         $p=wp_parse_url($url); if(!is_array($p)){return '';}
-        return $this->output_text(str_replace(array('-','_','&','='),' ',(string)($p['path']??'').' '.(string)($p['query']??'')));
+        $host=preg_replace('/^www\./i','',(string)($p['host']??''));
+        return $this->output_text(str_replace(array('-','_','&','=','.'),' ',trim($host.' '.(string)($p['path']??'').' '.(string)($p['query']??''))));
+    }
+
+    private function output_banner_destination_source($row) {
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+        $source=sanitize_key((string)($payload['_destination_source']??''));
+        if (in_array($source,array('provider_explicit','decoded_tracking','tracking_fallback','unknown'),true)) { return $source; }
+        $destination=esc_url_raw((string)($row['destination_url']??''));
+        $tracking=esc_url_raw((string)($row['tracking_url']??''));
+        if ($destination!=='' && $destination!==$tracking) { return 'provider_explicit'; }
+        return $destination!=='' ? 'tracking_fallback' : 'unknown';
+    }
+
+    private function output_banner_library_records($row) {
+        $records=json_decode((string)($row['topic_targets']??''),true);
+        if (!is_array($records)) { return array(); }
+        if (isset($records['portal_key'])) { $records=array($records); }
+        return array_values(array_filter($records,'is_array'));
+    }
+
+    private function output_banner_stored_destination_classification($row,$portal) {
+        if (sanitize_key((string)($row['creative_type']??''))!=='banner') { return null; }
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        if($portal_key===''){return null;}
+        $record=null;
+        foreach($this->output_banner_library_records($row) as $candidate){
+            if(sanitize_key((string)($candidate['portal_key']??''))===$portal_key){$record=$candidate;break;}
+        }
+        if(!is_array($record)){return null;}
+        $state=sanitize_key((string)($record['state']??''));
+        $target_key=sanitize_text_field((string)($record['target_key']??''));
+        if(!in_array($state,array('mapped','general'),true)||$target_key===''){return null;}
+        $targets=$this->output_portal_targets($portal);
+        if(is_wp_error($targets)){return $targets;}
+        $target=$this->output_resolve_target_key($targets,$target_key);
+        if(!is_array($target)){return null;}
+        if(method_exists($this,'control_target_gate')){
+            $gate=$this->control_target_gate($portal_key,(string)($target['key']??''));
+            if(is_wp_error($gate)){return null;}
+        }
+        if($state==='general'){$target['_ppar_general_fallback_anchor']=1;}
+        $level=sanitize_key((string)($record['level']??($state==='general'?'general':'exact')));
+        return array(
+            'status'=>'ready',
+            'confidence'=>absint($record['confidence']??($state==='general'?1:100)),
+            'reason'=>$state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.',
+            'target'=>$target,
+            'alternatives'=>array(),
+            'source'=>$state==='general'?'creative_library_general_fallback':'creative_library_destination_map',
+            '_ppar_destination_level'=>$level,
+        );
+    }
+
+    private function output_banner_destination_classification($row,$portal) {
+        $stored=$this->output_banner_stored_destination_classification($row,$portal);
+        if(is_wp_error($stored)||is_array($stored)){return $stored;}
+        $destination_source=$this->output_banner_destination_source($row);
+        if(!in_array($destination_source,array('provider_explicit','decoded_tracking'),true)){
+            return array('status'=>'review','confidence'=>0,'reason'=>'Keine belastbare echte Ziel-URL; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unknown');
+        }
+        $semantic=$this->output_destination_semantic_text($row);
+        if($semantic===''){
+            return array('status'=>'review','confidence'=>0,'reason'=>'Ziel-URL enthält keinen verwertbaren Themenhinweis; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unmapped');
+        }
+        $targets=$this->output_portal_targets($portal);
+        if(is_wp_error($targets)){return $targets;}
+        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        $dest_tokens=$this->output_tokens($semantic);
+        $ranked=array();
+        foreach((array)$targets as $target){
+            if(!is_array($target)){continue;}
+            $type=sanitize_key((string)($target['type']??''));
+            if(!in_array($type,$wanted,true)){continue;}
+            if(method_exists($this,'control_target_gate')){
+                $gate=$this->control_target_gate($portal_key,(string)($target['key']??''));
+                if(is_wp_error($gate)){continue;}
+            }
+            $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
+            $slug_tokens=$this->output_tokens($slug_norm);
+            $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
+            $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
+            $leaf_tokens=$this->output_tokens($leaf_norm);
+            $matched=array();
+            foreach(array_values(array_unique(array_merge($slug_tokens,$leaf_tokens))) as $tt){
+                if(strlen($tt)<5){continue;}
+                foreach($dest_tokens as $dt){
+                    if($dt===$tt || (strlen($dt)>=6 && strlen($tt)>=6 && (strpos($dt,$tt)!==false || strpos($tt,$dt)!==false)) || substr($dt,0,6)===substr($tt,0,6)){
+                        $matched[$tt]=true;break;
+                    }
+                }
+            }
+            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
+            $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) : count($matched)*140;
+            if($score<=0){continue;}
+            $ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);
+        }
+        usort($ranked,static function($a,$b){$c=(int)$b['score']<=>(int)$a['score'];if($c!==0)return $c;$c=(int)$b['matches']<=>(int)$a['matches'];if($c!==0)return $c;return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);});
+        if(!$ranked){
+            return array('status'=>'review','confidence'=>0,'reason'=>'Ziel-URL passt zu keinem Portalziel; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unmapped');
+        }
+        $best=$ranked[0];$second=$ranked[1]??null;
+        $margin=(int)$best['score']-(int)($second['score']??0);
+        $accept=!empty($best['exact']) ? ($second===null || $margin>=100) : ((int)$best['score']>=140 && ($second===null || $margin>=70));
+        if(!$accept){
+            return array('status'=>'review','confidence'=>0,'reason'=>'Ziel-URL ist zwischen mehreren Portalzielen nicht eindeutig; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_ambiguous');
+        }
+        $target=$best['target'];
+        $target['_ppar_destination_match_level']=!empty($best['exact'])?'exact':'extended';
+        return array(
+            'status'=>'ready',
+            'confidence'=>!empty($best['exact'])?100:80,
+            'reason'=>!empty($best['exact'])?'Eindeutige Zuordnung aus echter Ziel-URL.':'Eindeutiger weiterer Themenbereich aus echter Ziel-URL.',
+            'target'=>$target,
+            'alternatives'=>array(),
+            'source'=>'banner_destination_url',
+            '_ppar_destination_level'=>!empty($best['exact'])?'exact':'extended',
+        );
+    }
+
+    private function output_banner_compatible_slots($row,$portal) {
+        $matrix=$this->output_slot_matrix($portal);
+        if(is_wp_error($matrix)||!is_array($matrix)){return array();}
+        $slots=array();
+        foreach($matrix as $slot_id=>$rule){
+            if(!is_array($rule)||sanitize_key((string)($rule['creative_type']??''))!=='banner'){continue;}
+            if($this->output_row_matches_slot_rule($row,$rule,'banner')){$slots[]=sanitize_key((string)$slot_id);}
+        }
+        return array_values(array_unique(array_filter($slots)));
+    }
+
+    private function output_banner_general_fallback_classification($row,$portal,$compatible_slots) {
+        if(!$compatible_slots){return null;}
+        $matrix=$this->output_slot_matrix($portal);
+        $targets=$this->output_portal_targets($portal);
+        if(is_wp_error($matrix)||is_wp_error($targets)||!is_array($matrix)||!is_array($targets)){return null;}
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        foreach($compatible_slots as $slot_id){
+            $rule=is_array($matrix[$slot_id]??null)?$matrix[$slot_id]:array();
+            if(!$rule){continue;}
+            $types=array_map('sanitize_key',(array)($rule['target_types']??array()));
+            $contexts=array_map('sanitize_key',(array)($rule['target_contexts']??array()));
+            foreach($targets as $target){
+                if(!is_array($target)||absint($target['id']??0)<=0){continue;}
+                if($types && !in_array(sanitize_key((string)($target['type']??'')),$types,true)){continue;}
+                if($contexts && !in_array(sanitize_key((string)($target['context']??'')),$contexts,true)){continue;}
+                if(method_exists($this,'control_target_gate')&&is_wp_error($this->control_target_gate($portal_key,(string)($target['key']??'')))){continue;}
+                $target['_ppar_general_fallback_anchor']=1;
+                return array(
+                    'classification'=>array('status'=>'ready','confidence'=>1,'reason'=>'Kein eindeutiges Zielthema: allgemeiner technisch gültiger Banner-Fallback.','target'=>$target,'alternatives'=>array(),'source'=>'banner_general_fallback','_ppar_destination_level'=>'general'),
+                    'slot'=>array('slot_id'=>$slot_id,'rule'=>$rule),
+                );
+            }
+        }
+        return null;
+    }
+
+    private function output_store_banner_library_assignment($row,$portal,$classification,$compatible_slots) {
+        if(!is_array($row)||sanitize_key((string)($row['creative_type']??''))!=='banner'||!method_exists($this,'creative_library_table')){return;}
+        $row_id=absint($row['id']??0);if($row_id<=0){return;}
+        $portal_key=sanitize_key((string)($portal['key']??''));if($portal_key===''){return;}
+        $target=is_array($classification['target']??null)?$classification['target']:array();
+        $target_key=sanitize_text_field((string)($target['key']??''));
+        if($target_key===''){return;}
+        $records=$this->output_banner_library_records($row);
+        $records=array_values(array_filter($records,static function($record)use($portal_key){return sanitize_key((string)($record['portal_key']??''))!==$portal_key;}));
+        $general=!empty($target['_ppar_general_fallback_anchor'])||sanitize_key((string)($classification['source']??''))==='banner_general_fallback';
+        $records[]=array(
+            'portal_key'=>$portal_key,
+            'state'=>$general?'general':'mapped',
+            'level'=>$general?'general':sanitize_key((string)($classification['_ppar_destination_level']??($target['_ppar_destination_match_level']??'exact'))),
+            'target_key'=>$target_key,
+            'target_label'=>sanitize_text_field((string)($target['label']??'')),
+            'confidence'=>absint($classification['confidence']??0),
+            'source'=>sanitize_key((string)($classification['source']??'')),
+            'destination_source'=>$this->output_banner_destination_source($row),
+            'destination_url'=>esc_url_raw((string)($row['destination_url']??'')),
+            'compatible_slots'=>array_values(array_unique(array_map('sanitize_key',(array)$compatible_slots))),
+            'updated_at'=>time(),
+        );
+        global $wpdb;
+        $wpdb->update($this->creative_library_table(),array(
+            'topic_score'=>absint($classification['confidence']??0),
+            'topic_targets'=>wp_json_encode($records,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
+            'classified_at'=>time(),
+        ),array('id'=>$row_id));
     }
 
     private function output_creative_specific_text($row) {
@@ -996,6 +1187,15 @@ trait PPAR_Output_Objects_Trait {
                 'target'=>null,'alternatives'=>array(),'source'=>'ebay_business_contract_missing',
             );
         }
+
+        // KISS: Banner werden ausschließlich einmal aus ihrer echten Ziel-URL
+        // klassifiziert und danach aus der Creative-Library wiederverwendet.
+        // Die große generische Text-/Partnerklassifikation bleibt Produkten und
+        // anderen Ausgabetypen vorbehalten.
+        if ($output_type === 'portal_banner' && sanitize_key((string)($row['creative_type']??'')) === 'banner') {
+            return $this->output_banner_destination_classification($row,$portal);
+        }
+
         $specific_evidence = $this->output_creative_evidence_text($row, $portal, $output_type);
         if (is_wp_error($specific_evidence)) {
             return $specific_evidence;
