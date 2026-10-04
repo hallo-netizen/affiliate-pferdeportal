@@ -1,0 +1,233 @@
+name: TEMP Affiliate Banner Destination Library ZIP E2E 6.72.183
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-banner-destination-library-zip-e2e-v672183.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+      - 'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  zip-full-e2e:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Build exact current ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.183.zip
+          (
+            cd release/affiliate-zentrale/current
+            zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.183.zip affiliate-portal-router
+          )
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.183.zip | tee /tmp/zip.sha256
+          echo "ZIP_SHA256=$(awk '{print $1}' /tmp/zip.sha256)" >> "$GITHUB_ENV"
+          echo "ZIP_BYTES=$(stat -c%s /tmp/AFFILIATE_ZENTRALE_6.72.183.zip)" >> "$GITHUB_ENV"
+
+      - name: ZIP structure manifest and source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/zipcheck
+          mkdir -p /tmp/zipcheck
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.183.zip -d /tmp/zipcheck
+          ROOT=/tmp/zipcheck/affiliate-portal-router
+          test -d "$ROOT"
+          test "$(find "$ROOT" -type f | wc -l)" = "27"
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" = "21"
+          grep -F "Version: 6.72.183" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.183';" "$ROOT/pferdeportal-affiliate-router.php"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('/tmp/zipcheck')
+          expected={}
+          for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines():
+              if not line.strip(): continue
+              h,rel=line.split('  ',1); expected[rel]=h
+          files={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+                 for p in root.rglob('*') if p.is_file()}
+          if set(files)!=set(expected):
+              raise SystemExit(f'FAIL manifest path mismatch missing={sorted(set(expected)-set(files))} extra={sorted(set(files)-set(expected))}')
+          bad=[p for p,h in files.items() if expected[p]!=h]
+          if bad: raise SystemExit('FAIL manifest hash mismatch '+repr(bad))
+          print('PASS ZIP 27/27 manifest byte identity')
+          PY
+
+      - name: Performance hardlock
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          base='f5832a28d36dba64402036c052dc262f4f36440d'
+          cur=Path('/tmp/zipcheck/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          old=subprocess.check_output(['git','show',f'{base}:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'],text=True)
+          def body(src,name):
+              marker='function '+name+'('; start=src.find(marker)
+              if start<0: raise SystemExit('FAIL missing '+name)
+              brace=src.find('{',start); depth=0; state='code'; esc=False; i=brace
+              while i<len(src):
+                  c=src[i]; n=src[i+1] if i+1<len(src) else ''
+                  if state=='sq':
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c=="'": state='code'
+                  elif state=='dq':
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c=='"': state='code'
+                  elif state=='line':
+                      if c=='\n': state='code'
+                  elif state=='block':
+                      if c=='*' and n=='/': state='code'; i+=1
+                  else:
+                      if c=="'": state='sq'
+                      elif c=='"': state='dq'
+                      elif c=='/' and n=='/': state='line'; i+=1
+                      elif c=='#': state='line'
+                      elif c=='/' and n=='*': state='block'; i+=1
+                      elif c=='{': depth+=1
+                      elif c=='}':
+                          depth-=1
+                          if depth==0:return src[start:i+1]
+                  i+=1
+              raise SystemExit('FAIL unclosed '+name)
+          protected=[
+            'ranked_campaigns_request_cache_allowed','ranked_campaign_sanitize_key_request_cached',
+            'ranked_campaign_sanitize_text_request_cached','ranked_campaigns_request_cache_key',
+            'select_category_product_campaign_fast_v672171','ranked_campaign_candidate_pool',
+            'ranked_campaigns_for_slot','category_product_provider_mix_v672133','render_banner',
+            'banner_distribution_reorder_candidates','banner_distribution_stable_index',
+            'category_product_shared_rank_base'
+          ]
+          for name in protected:
+              if body(cur,name)!=body(old,name):
+                  raise SystemExit('FAIL protected performance function changed '+name)
+          hot=body(cur,'campaign_match_rank')
+          for forbidden in ['$wpdb','wp_remote_','get_post_meta(']:
+              if forbidden in hot: raise SystemExit('FAIL frontend rank new cost '+forbidden)
+          print('PASS performance hardlock')
+          PY
+
+      - name: PHP lint unpacked ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          find /tmp/zipcheck/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/zip-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/zip-lint.log)" = "21"
+          php -l AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php
+          php -l AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php
+          echo "PASS ZIP PHP lint 21/21"
+
+      - name: Install fresh WordPress from ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Destination Library ZIP E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          add_action('init', static function(){
+              if (!post_type_exists('uge_term')) register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+          },1);
+          PHP
+          cp -a /tmp/zipcheck/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (!class_exists("Pferdeportal_Affiliate_Router") || Pferdeportal_Affiliate_Router::VERSION !== "6.72.183") { exit(2); } echo "PASS ZIP plugin active 6.72.183\n";' --path=/tmp/wp-site
+
+      - name: Existing full banner workflow regression from ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php" --path=/tmp/wp-site | tee /tmp/zip-old.log
+          grep -F 'SUMMARY passes=21 failures=0' /tmp/zip-old.log
+          grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_PASS' /tmp/zip-old.log
+
+      - name: Reset database for destination-library ZIP gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp db reset --yes --path=/tmp/wp-site
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Destination Library ZIP E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+      - name: COMPLETE destination-library ZIP workflow to HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php" --path=/tmp/wp-site | tee /tmp/zip-destination.log
+          grep -F 'SUMMARY passes=26 failures=0' /tmp/zip-destination.log
+          grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/zip-destination.log
+          echo "ZIP_FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS"
+
+      - name: Commit exact tested ZIP
+        shell: bash
+        env:
+          TARGET_BRANCH: affiliate-release-current
+        run: |
+          set -euo pipefail
+          mkdir -p release/affiliate-zentrale/artifacts/final
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.183.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip
+          if git diff --cached --quiet; then
+            echo "Artifact already identical"
+          else
+            git commit -m "affiliate: publish tested 6.72.183 destination-library installer"
+            git push origin "HEAD:$TARGET_BRANCH"
+          fi
+          echo "PASS TESTED_ZIP_COMMITTED sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
