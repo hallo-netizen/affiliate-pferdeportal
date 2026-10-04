@@ -3998,38 +3998,79 @@ JS;
         $term_ids = isset($context['_ppar_norm_term_ids']) && is_array($context['_ppar_norm_term_ids']) ? $context['_ppar_norm_term_ids'] : (isset($context['term_ids']) && is_array($context['term_ids']) ? array_map('intval', $context['term_ids']) : array());
         $haystack = strtolower((string) ($context['haystack'] ?? ''));
         $page_id = isset($campaign['page_id']) ? (int) $campaign['page_id'] : 0;
+        $slot_type = sanitize_key((string) ($context['slot_type'] ?? ''));
+        $required_creative_type = $this->slot_required_creative_type($slot_type);
+
+        // KISS 04.10.2026: Pferderassen tragen fuer Banner keinen belastbaren
+        // feineren Themenvorteil. Alle technisch gueltigen Rassenbanner liegen
+        // deshalb in derselben Stufe; die bestehende stabile Partner-/Creative-
+        // Verteilung entscheidet. Keine zweite Verteilungsmaschine.
+        if ($required_creative_type === 'banner' && in_array($slot_type, array(
+            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
+        ), true)) {
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen: themenneutrale stabile Bannerverteilung.');
+        }
+
+        // KISS 04.10.2026: Eine bereits materialisierte exakte Zielkante darf
+        // niemals von einem spaeteren breiteren URL-/Texttreffer abgeschnitten
+        // werden. Nur exakte Stufe hier vorziehen; breitere Treffer bleiben
+        // weiter unten in derselben bestehenden Themenstufe vergleichbar.
+        $automation_rank = null;
+        if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
+            $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
+            if ($required_creative_type === 'banner' && is_array($automation_rank)
+                && (int) ($automation_rank['specificity'] ?? 0) >= 500) {
+                return $automation_rank;
+            }
+        }
 
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
-        if ($destination_rank) { return $destination_rank; }
+        if (is_array($destination_rank) && (int) ($destination_rank['specificity'] ?? 0) >= 500) { return $destination_rank; }
         $runtime_page_topic_rank = $this->banner_runtime_page_topic_rank($campaign, $context);
+        if (is_array($runtime_page_topic_rank) && (int) ($runtime_page_topic_rank['specificity'] ?? 0) >= 500) { return $runtime_page_topic_rank; }
+
+        if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
+            if ($automation_rank === null) {
+                $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
+            }
+            // Banner duerfen nach einer fehlenden exakten Zielkante immer
+            // in die naechste Stufe (Themenkreis/allgemeiner/technischer Fallback)
+            // weiterlaufen. Produkt-Creatives bleiben dagegen fail-closed.
+            $fill_post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
+            if ($required_creative_type !== 'banner'
+                && !$automation_rank
+                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) { return null; }
+        }
+
+        $runtime_semantic_rank = $this->glossary_campaign_runtime_semantic_rank($campaign, $context);
+        if (is_array($runtime_semantic_rank) && (int) ($runtime_semantic_rank['specificity'] ?? 0) >= 500) { return $runtime_semantic_rank; }
+        $partner_exact_rank = $this->glossary_partner_inherited_exact_rank($campaign, $context);
+        if (is_array($partner_exact_rank) && (int) ($partner_exact_rank['specificity'] ?? 0) >= 500) { return $partner_exact_rank; }
+
+        // Explizit direkt gebundene Seite ist ebenfalls exakte Stufe.
+        if ($mode === 'exact_page') {
+            return ($page_id > 0 && $post_id === $page_id)
+                ? array('specificity' => 500, 'matches' => 1, 'reason' => 'Direkt ausgewählte Seite.')
+                : null;
+        }
+        if ($mode === 'page_tree' && $page_id > 0 && $post_id === $page_id) {
+            return array('specificity' => 500, 'matches' => 1, 'reason' => 'Direkt ausgewählter Hub/Bereich.');
+        }
+
+        // Kein exakter Treffer: vorhandene breitere Themenbeweise duerfen
+        // weiterhin gewinnen. Danach folgen unveraendert allgemeiner und
+        // technisch gueltiger Pflicht-Fallback.
+        if ($destination_rank) { return $destination_rank; }
         if ($runtime_page_topic_rank) { return $runtime_page_topic_rank; }
+        if ($automation_rank) { return $automation_rank; }
+        if ($runtime_semantic_rank) { return $runtime_semantic_rank; }
+        if ($partner_exact_rank) { return $partner_exact_rank; }
 
         if ($mode === 'fallback') {
             // V6.72.69: globale Banner-Hierarchie. Ein ausdrücklich allgemeiner
             // Shop-/Portal-Fallback kommt nach exakten/breiten Themen-Treffern,
             // aber vor dem letzten rein technischen Pflicht-Fallback.
             return array('specificity' => 100, 'matches' => 1, 'reason' => 'Allgemeiner Shop-/Portal-Fallback.');
-        }
-        if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
-            $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
-            if ($automation_rank) { return $automation_rank; }
-            // Banner duerfen nach einer fehlenden exakten Zielkante immer
-            // in die naechste Stufe (Themenkreis/allgemeiner/technischer Fallback)
-            // weiterlaufen. Produkt-Creatives bleiben dagegen fail-closed.
-            $fill_post_type = isset($context['_ppar_norm_post_type']) ? (string)$context['_ppar_norm_post_type'] : sanitize_key((string) ($context['post_type'] ?? ''));
-            if ($this->slot_required_creative_type((string)($context['slot_type'] ?? '')) !== 'banner'
-                && !in_array($fill_post_type, array('uge_term','post','uge_group_archive','pa_breed_group_archive'), true)) { return null; }
-        }
-        $runtime_semantic_rank = $this->glossary_campaign_runtime_semantic_rank($campaign, $context);
-        if ($runtime_semantic_rank) { return $runtime_semantic_rank; }
-        $breed_runtime_rank = $this->breed_campaign_runtime_semantic_rank($campaign, $context);
-        if ($breed_runtime_rank) { return $breed_runtime_rank; }
-        $partner_exact_rank = $this->glossary_partner_inherited_exact_rank($campaign, $context);
-        if ($partner_exact_rank) { return $partner_exact_rank; }
-        if ($mode === 'exact_page') {
-            return ($page_id > 0 && $post_id === $page_id)
-                ? array('specificity' => 500, 'matches' => 1, 'reason' => 'Direkt ausgewählte Seite.')
-                : null;
         }
         if ($mode === 'page_tree' || $mode === 'auto_topic') {
             $auto_label = sanitize_text_field((string)($campaign['auto_topic_label'] ?? ''));
@@ -4089,7 +4130,17 @@ JS;
         if (array_key_exists($raw, $cache)) { return $cache[$raw]; }
         $slot_type = sanitize_key($raw);
         if ($slot_type === 'category_product' || preg_match('/^(?:hub_product|category_product|journal_product)_[123]$/', $slot_type) || $slot_type === 'post_bottom_products') { return $cache[$raw] = 'product'; }
-        if (in_array($slot_type, array('hub_after_cards', 'product_after_category_tiles', 'post_inline_banner', 'anzeigenmarkt_top_banner', 'anzeigenmarkt_category_banner', 'journal_banner', 'glossary_single_desktop_banner', 'glossary_single_mobile_banner', 'breed_single_banner', 'breed_single_desktop_banner', 'breed_single_mobile_banner', 'glossary_overview_banner', 'breed_overview_banner', 'start_after_topics'), true)) { return $cache[$raw] = 'banner'; }
+        if (in_array($slot_type, array(
+            'start_after_topics',
+            'top_info','mid_content','bottom_recommendation',
+            'post_after_intro','post_mid_content','post_bottom_recommendation','post_inline_banner',
+            'hub_top_cta','hub_after_cards','hub_grid_card','hub_mid_banner',
+            'category_recommendation','product_after_category_tiles','produkt_recommendation',
+            'template_top','template_after_intro','template_after_selected','template_mid','template_mid_banner','template_bottom',
+            'journal_banner','anzeigenmarkt_top_banner','anzeigenmarkt_category_banner',
+            'glossary_single_banner','glossary_single_desktop_banner','glossary_single_mobile_banner','glossary_overview_banner',
+            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
+        ), true)) { return $cache[$raw] = 'banner'; }
         return $cache[$raw] = '';
     }
 
