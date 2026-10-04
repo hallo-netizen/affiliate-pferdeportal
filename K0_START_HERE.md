@@ -31,6 +31,17 @@ Die erste sichtbare Antwort ist ausschließlich:
 
 Portalzuordnung automatisch.
 
+## Auftragsautorität — HARDLOCK
+
+Diese Regel gilt **allgemein für jeden gültigen K0-Upload**, unabhängig von Thema, Artikeltyp oder Kategorie:
+
+- der aktuell angehängte gültige Upload ist die einzige Auftragsidentität für den neu gestarteten Lauf;
+- `K0_CURRENT_STATE.json`, History, frühere Runs und frühere Outputs dürfen den aktuellen Upload weder auswählen, ersetzen noch blockieren;
+- ein terminaler Blocker ist nur gültig, wenn er **nach Bindung des aktuellen Uploads** aus genau diesem aktuellen Lauf/Gate stammt;
+- jeder neue Upload wird fachlich neu bewertet und neu recherchiert;
+- historische Texte oder Research-Artefakte dürfen nicht als Inhaltsquelle übernommen werden;
+- historische Informationen sind **keine Ausschlussliste**: unabhängig neu gefundene gleiche Fakten oder Quellen bleiben zulässig.
+
 Interne Links: exakt 3; `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
 
 Repository: `hallo-netizen/affiliate-pferdeportal`
