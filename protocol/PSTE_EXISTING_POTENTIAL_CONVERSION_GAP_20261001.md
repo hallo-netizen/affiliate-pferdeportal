@@ -348,3 +348,36 @@ Tests:
 - UI-Guard Positiv/Negativ 5/5 PASS;
 - exakt 2 Dateien geändert;
 - keine Fach-/Research-/Storage-/Provider-/Normalpfadänderung.
+
+
+## DELTA 2026-10-04 – SANDBOX-DATAFLOW-V2 ROOTCAUSE / PSTE 0.57.30
+
+Live-Fehler:
+`PSTE_DRIVER_REPEATED_SYSTEM_FAILURE:PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`
+bei gespeichertem Einzellauf `PAUSED_ERROR`, Abschluss `SANDBOX_BATCH 0/15`.
+
+Rootcause frisch lokal reproduziert:
+`fromNormalPath()` berechnete für V2 die Hashes der echten Record-Komponenten. `applyToRecord()` schrieb diese Komponenten aber nur für den Legacy-Vertrag auf den Record. Dadurch entstand bei neuen V2-Admits ein Record mit leeren Portal-/Nearest-/Exclusion-Feldern und gleichzeitig Hashes der echten Komponenten im `sandbox_dataflow`. Der vorhandene Self-Consistency-Guard blockierte deshalb korrekt.
+
+0.57.30:
+- transportiert die V2-Komponenten ausschließlich transient vom Producer zu `applyToRecord()`;
+- validiert sie vor Persistenz gegen die bestehenden Hashes;
+- speichert sie genau einmal auf dem Record;
+- entfernt den transienten Transport vor Speicherung des kompakten `sandbox_dataflow`;
+- alle Drift-Gates bleiben unverändert aktiv.
+
+Kandidat:
+`PSTE-0.57.30-SANDBOX-DATAFLOW-ROOTFIX-CANDIDATE.zip`
+SHA-256 `c2f0e9e05f2ffddeea2c7ee022dd18ad04f9f5820ebbab4eabfab1253c235aa4`.
+
+Tests:
+- 0.57.29 Vorher-Negativtest: exakter Portal-Component-Drift reproduziert;
+- 0.57.30 Positivtest PASS;
+- absichtliche nachträgliche Komponentenmutation weiterhin BLOCK;
+- UI-Guard 5/5 PASS;
+- PHP 81/81 PASS;
+- ZIP PASS;
+- exakt 2 Dateien geändert;
+- fachliche Familien-/Produktwahl-/Normalpfadlogik unverändert.
+
+Live-Readback 0.57.30 noch offen.
