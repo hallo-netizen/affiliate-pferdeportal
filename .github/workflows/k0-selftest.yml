@@ -2,7 +2,7 @@ name: K0 portal-neutral selftest
 
 on:
   push:
-    branches: [konzept0-portal-neutral-20261002]
+    branches: [test/k0-full-regression-20261004]
   workflow_dispatch:
 
 permissions:
