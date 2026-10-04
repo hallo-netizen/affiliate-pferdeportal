@@ -7,6 +7,7 @@ on:
       - '.github/workflows/tmp-affiliate-banner-upgrade-zip-e2e-v672184.yml'
       - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php'
       - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php'
       - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
   workflow_dispatch:
 
@@ -210,11 +211,11 @@ jobs:
           cp /tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php /tmp/wp-fresh/wp-content/mu-plugins/
           cp -a /tmp/zip184/affiliate-portal-router /tmp/wp-fresh/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-fresh
-          sed "s/6\.72\.183/6.72.184/g" AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php >/tmp/full184.php
+          cp AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php /tmp/full184.php
           sed "s/6\.72\.183/6.72.184/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest184.php
           /tmp/wp eval-file /tmp/full184.php --path=/tmp/wp-fresh | tee /tmp/full184.log
           grep -F 'SUMMARY passes=21 failures=0' /tmp/full184.log
-          grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_PASS' /tmp/full184.log
+          grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_672184_LIBRARY_SOURCE_PASS' /tmp/full184.log
           /tmp/wp eval-file /tmp/dest184.php --path=/tmp/wp-fresh | tee /tmp/dest184.log
           grep -F 'SUMMARY passes=26 failures=0' /tmp/dest184.log
           grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest184.log
