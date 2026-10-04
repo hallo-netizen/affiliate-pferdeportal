@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "RENDERING_HARD_LOCAL_RETEST_PASS_HTML_PREVIEW_READY",
-  "first_open_blocker": "LIVE_WORDPRESS_AFTER_FIX_NOT_RUN",
-  "next_action": "AFTER_USER_HTML_REVIEW_RUN_LIVE_WORDPRESS_TEST_ARTICLE_READBACK",
+  "status": "FRESHNESS_REGRESSION_REPAIRED_FULL_SELFTEST_PASS_READY_FOR_FRESH_K0_RUN",
+  "first_open_blocker": "NONE_MACHINE_SIDE",
+  "next_action": "ON_NEXT_VALID_CURRENT_CHAT_UPLOAD_PLUS_K0_START_RUN_FULL_FRESH_K0_PRODUCTION_FROM_ZERO",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -84,14 +84,14 @@
     "full_rule_recheck_status": "NOT_RUN"
   },
   "freshness": {
-    "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
-    "last_checked_branch_head_sha": "794029cc717999f53effb845582c0afe8c3c99b8",
+    "validated_code_head_sha": "2d10588eb500490c3c36c05ce2e56700b5145385",
+    "last_checked_branch_head_sha": "2d10588eb500490c3c36c05ce2e56700b5145385",
     "latest_writer_accept_run": 37148297780,
     "latest_writer_accept_result": "SUCCESS_USER_BATCH_ARTICLE_2_FINAL",
-    "latest_k0_selftest_run": 37147241043,
-    "latest_k0_selftest_result": "SUCCESS_RENDERING_FIX_CURRENT_SYNC",
+    "latest_k0_selftest_run": "ISOLATED_REPAIR_BRANCH_EVIDENCE_COMMIT_498b5e4",
+    "latest_k0_selftest_result": "SUCCESS_108_TESTS_FRESHNESS_REGRESSION_REPAIR",
     "ppm679_parity": "PASS",
-    "delta_result": "USER_3_ARTICLE_BATCH_FULL_PASS_COLLECTED; WORDPRESS_BATCH_READY; PUBLISH_FALSE"
+    "delta_result": "FRESHNESS_REGRESSION_REPAIRED; 108_TESTS_PASS; READY_FOR_NEW_FRESH_RUN; OLD_BATCH_REUSE_FORBIDDEN"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -384,5 +384,34 @@
     "exact_verified_bytes_required": true,
     "hash_recheck_before_chat_delivery": true,
     "fail_closed_code": "K0_CHAT_FILE_DELIVERY_REQUIRED"
+  },
+  "freshness_regression_repair": {
+    "status": "PASS",
+    "original_failed_selftest_run": 37153131743,
+    "original_result": "FAIL_3_FAILURES_11_ERRORS",
+    "root_causes": [
+      "FRESHNESS_ISOLATION_RAN_BEFORE_PREEXISTING_BLOCKERS_AND_MASKED_EXPECTED_FAILURES",
+      "TEST_FIXTURES_LACKED_REQUIRED_FRESH_RESEARCH_SOURCES_AND_FRESHNESS_RECEIPT",
+      "HISTORICAL_GUARD_WORD_REGEX_TOKENIZED_TEXT_INCORRECTLY",
+      "VALIDATED_FRESHNESS_RECEIPT_WAS_NOT_RETAINED_IN_IMMUTABLE_WRITER_JOB_FOR_SEAL_RECHECK"
+    ],
+    "protections_weakened": false,
+    "full_selftest_count": 108,
+    "full_selftest_result": "PASS",
+    "positive_negative_result": "PASS",
+    "isolated_test_evidence_commit": "498b5e4abbb5ae1e4246849b259a369dd902542c",
+    "merged_fix_commit": "2d10588eb500490c3c36c05ce2e56700b5145385",
+    "merged_files": [
+      "engine/k0_historical_content_guard.py",
+      "engine/k0_writer_station.py",
+      "tests/test_k0_input_isolation.py",
+      "tests/test_k0_production_path_locks.py",
+      "tests/test_writer_contract_guard.py"
+    ],
+    "previous_blocker_order_restored": true,
+    "fresh_research_fail_closed_preserved": true,
+    "historical_content_reuse_guard_preserved": true,
+    "old_output_reuse_forbidden": true,
+    "publish_allowed": false
   }
 }
