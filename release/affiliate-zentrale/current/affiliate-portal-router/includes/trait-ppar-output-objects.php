@@ -2316,7 +2316,12 @@ trait PPAR_Output_Objects_Trait {
         $auto_contract_banner = $this->output_auto_contract_banner_allowed($row, $classification, $slot, $output_type);
         $auto_product = $auto_ebay_business || $auto_otto_awin_product;
         $auto_publish = $auto_product || $auto_contract_banner;
-        $campaign['active'] = $auto_publish; $campaign['assignment_mode'] = 'page_tree'; $campaign['match_descendants'] = $auto_category_banner;
+        $general_banner_fallback = $output_type === 'portal_banner'
+            && (!empty($target['_ppar_general_fallback_anchor'])
+                || in_array(sanitize_key((string)($classification['source']??'')),array('banner_general_fallback','creative_library_general_fallback'),true));
+        $campaign['active'] = $auto_publish;
+        $campaign['assignment_mode'] = $general_banner_fallback ? 'fallback' : 'page_tree';
+        $campaign['match_descendants'] = $general_banner_fallback ? false : $auto_category_banner;
         // V6.72.89: page_id ist ausschliesslich fuer echte Seiten. Eine WordPress-
         // Kategorie-ID darf niemals als Seiten-ID gespeichert werden; sonst geht die
         // exakte category:<slug>-Bindung fuer normale Kategorien (z. B. Reithelme) verloren.
@@ -2333,8 +2338,13 @@ trait PPAR_Output_Objects_Trait {
         } else {
             $auto_placements = array();
         }
-        $campaign['automation_target_keys'] = $auto_targets ? $auto_targets : ((!empty($target['_ppar_glossary_neutral_anchor']) || !empty($target['_ppar_breed_neutral_anchor'])) ? array() : array($target_key));
-        $campaign['placements'] = $auto_placements ? $auto_placements : array($slot_id);
+        $campaign['automation_target_keys'] = $general_banner_fallback
+            ? array()
+            : ($auto_targets ? $auto_targets : ((!empty($target['_ppar_glossary_neutral_anchor']) || !empty($target['_ppar_breed_neutral_anchor'])) ? array() : array($target_key)));
+        $compatible_banner_slots = array_values(array_unique(array_filter(array_map('sanitize_key',(array)($classification['_ppar_banner_compatible_slots']??array())))));
+        $campaign['placements'] = ($output_type === 'portal_banner' && $compatible_banner_slots)
+            ? $compatible_banner_slots
+            : ($auto_placements ? $auto_placements : array($slot_id));
         $campaign['priority'] = $auto_ebay_business
             ? absint($payload['ebay_quality_score'] ?? ($classification['confidence'] ?? 0))
             : (($auto_otto_awin_product || $auto_contract_banner) ? absint($classification['confidence'] ?? 0) : absint($campaign['priority'] ?? 0));
@@ -2411,14 +2421,18 @@ trait PPAR_Output_Objects_Trait {
             ? 'Verifiziertes eBay-BUSINESS-Produkt automatisch in den freigegebenen Produktslots aktiviert.'
             : ($auto_otto_awin_product
                 ? 'Verifiziertes OTTO-Produkt aus dem freigegebenen Awin-Programm automatisch für passende Produktplätze und Beiträge aktiviert.'
-                : ($auto_category_banner
-                    ? 'Verifizierter grosser Kategorie-Querbanner automatisch fuer den passendsten Themenast aktiviert.'
-                    : 'Inaktive Kampagne aus exakt verknüpftem Creative, Ziel und Designslot vorbereitet.'));
+                : ($general_banner_fallback
+                    ? 'Verifizierter Banner ohne eindeutiges Zielthema automatisch in den allgemeinen technisch gültigen Fallback-Pool aktiviert.'
+                    : ($auto_category_banner
+                        ? 'Verifizierter grosser Kategorie-Querbanner automatisch fuer den passendsten Themenast aktiviert.'
+                        : 'Inaktive Kampagne aus exakt verknüpftem Creative, Ziel und Designslot vorbereitet.')));
         $decision_source = $auto_ebay_business
             ? 'ebay_verified_product_concept'
             : ($auto_otto_awin_product
                 ? 'otto_awin_verified_product'
-                : ($auto_category_banner ? 'category_large_banner_v1' : (string) ($object['decision_source'] ?? 'automatic')));
+                : ($general_banner_fallback
+                    ? 'banner_general_fallback'
+                    : ($auto_category_banner ? 'category_large_banner_v1' : (string) ($object['decision_source'] ?? 'automatic'))));
         $wpdb->update($this->output_objects_table(), array(
             'campaign_post_id'=>$campaign_id,
             'status'=>$auto_publish ? 'published' : 'draft',
@@ -2514,13 +2528,38 @@ trait PPAR_Output_Objects_Trait {
             foreach ($output_types as $output_type) {
                 $classification = $this->output_classify_for_portal($row, $portal, $output_type);
                 if (is_wp_error($classification)) { $result['blocked']++; $result['errors'][$classification->get_error_code()]=$classification->get_error_message(); continue; }
+
+                $compatible_banner_slots = $output_type === 'portal_banner'
+                    ? $this->output_banner_compatible_slots($row,$portal)
+                    : array();
+
                 $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
                 $slot = array('slot_id'=>''); $status = sanitize_key((string) ($classification['status'] ?? 'review'));
                 if ($status === 'blocked' && sanitize_key((string) ($classification['source'] ?? '')) === 'source_state') { $status = 'blocked_source'; }
-                if (in_array($output_type, array('portal_banner','product_campaign'), true) && $status === 'ready') {
+
+                // Kein eindeutiges Zielthema ist bei Bannern kein Fehler.
+                // Nach Safety/Format wird daraus bewusst der allgemeine Pool.
+                if ($output_type === 'portal_banner' && $status === 'review'
+                    && strpos(sanitize_key((string)($classification['source']??'')),'banner_destination_') === 0) {
+                    $fallback = $this->output_banner_general_fallback_classification($row,$portal,$compatible_banner_slots);
+                    if (is_array($fallback)) {
+                        $classification = $fallback['classification'];
+                        $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
+                        $slot = is_array($fallback['slot'] ?? null) ? $fallback['slot'] : array('slot_id'=>'');
+                        $status = 'ready';
+                    }
+                }
+
+                if (in_array($output_type, array('portal_banner','product_campaign'), true) && $status === 'ready' && empty($slot['slot_id'])) {
                     $slot = $this->output_format_slot($row, $portal, $target, $output_type === 'product_campaign' ? 'product' : 'banner');
                     if (is_wp_error($slot)) { $status='blocked_format'; $classification['reason']=$slot->get_error_message(); $slot=array('slot_id'=>''); }
                 }
+
+                if ($output_type === 'portal_banner' && $status === 'ready') {
+                    $classification['_ppar_banner_compatible_slots']=$compatible_banner_slots;
+                    $this->output_store_banner_library_assignment($row,$portal,$classification,$compatible_banner_slots);
+                }
+
                 if (in_array($output_type, array('hivepress_listing','portal_listing'), true) && $status === 'ready') {
                     $listing_format = $this->output_listing_asset_compatibility($row, $portal);
                     if (is_wp_error($listing_format)) { $status='blocked_format'; $classification['reason']=$listing_format->get_error_message(); }
