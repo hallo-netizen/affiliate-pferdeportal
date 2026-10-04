@@ -281,3 +281,13 @@ Nicht importieren:
   - Freshness-Reparatur: PR #499 / Merge-Fix `2d10588eb500490c3c36c05ce2e56700b5145385`;
   - Rendering-Main-Head: `f853fb61384385fb97d5de020b7ea6903890ea35`;
   - frischer Testartikel-Produktionscommit: `2e515462a425f826aa711fca2dda53058891e58b`.
+
+
+### E23 – Freshness-Guard beweist derzeit nur Neuheit/Isolation, nicht tatsächliche frische Quellenabfrage
+- Abschluss-Nachholprüfung des Testartikels zeigte eine wichtigere Lücke:
+  - `engine/k0_input_isolation.py` prüft URL-Syntax/Host, Hash-Bindungen, Nichtwiederverwendung und Historien-Isolation;
+  - es führt **keinen externen Quellenabruf** durch und beweist nicht, dass die im `AUTHORING_CONTEXT.json` eingetragenen Quellen in diesem Run tatsächlich frisch gelesen/verifiziert wurden.
+- Der Test-`AUTHORING_CONTEXT.json` wurde in diesem Chat manuell aufgebaut. Deshalb ist sein maschineller Freshness-PASS **kein belastbarer Beleg für echte frische Recherche**.
+- Folge: Der Testlauf `real_runs/k0/test-20261004-fremdreiter-ae3b6c46` bleibt als **Mechanik-/Pipeline-PASS** erhalten, darf aber **nicht als Abnahmebeleg für die Nutzerregel „jeder Artikel mit echter frischer Recherche von Null“** verwendet werden.
+- Keine vorhandene Output-Datei dieses Testlaufs löschen; Status fachlich auf `DO_NOT_USE_AS_FRESH_RESEARCH_ACCEPTANCE_EVIDENCE` setzen.
+- Nächster Rootfix muss die Recherche-Frische an tatsächliche, laufbezogene Source-Retrieval-Evidence binden und positiv/negativ testen. Erst danach denselben Testartikel erneut von Null durch K0 führen und Vorschau/Chat-Datei liefern.
