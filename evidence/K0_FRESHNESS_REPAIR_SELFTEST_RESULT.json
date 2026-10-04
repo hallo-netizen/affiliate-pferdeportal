@@ -1,0 +1,6 @@
+{
+  "contract": "K0_FRESHNESS_REPAIR_SELFTEST_RESULT_V1",
+  "status": "FAIL",
+  "job_status": "failure",
+  "publish_allowed": false
+}
