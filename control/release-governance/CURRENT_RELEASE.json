@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 180,
+  "generation": 181,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "e046ec7c45317f283799caaef78287eb375b1c7c5b5eae9cf9eb3c052e1fc286",
+    "manifest_sha256": "62bb2ff2b22c97fbfef6b9d64bccfa1d06e41fdecd3ca8b33c4a764bc40415f8",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,15 +36,15 @@
   },
   "active_candidate": {
     "version": "6.72.180",
-    "status": "KISS_BANNER_GLOBAL_RELEVANCE_LOCAL_POSNEG_PASS_FULL_GATE_OPEN",
+    "status": "KISS_BANNER_GLOBAL_RELEVANCE_LOCAL_POSNEG_PERFORMANCE_PRESERVED_FULL_GATE_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "e046ec7c45317f283799caaef78287eb375b1c7c5b5eae9cf9eb3c052e1fc286",
+    "current_source_manifest_sha256": "62bb2ff2b22c97fbfef6b9d64bccfa1d06e41fdecd3ca8b33c4a764bc40415f8",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "SOURCE_CHANGED_LOCAL_KISS_POSNEG_PASS_NO_PACKAGE_FULL_GATE_OPEN",
+    "candidate_reference_scope": "SOURCE_CHANGED_LOCAL_KISS_POSNEG_PERFORMANCE_RECHECK_PASS_NO_PACKAGE_FULL_GATE_OPEN",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_KISS_GLOBAL_RELEVANCE_IMPLEMENTED_FULL_GATE_OPEN",
+    "current_focus": "BANNER_KISS_GLOBAL_RELEVANCE_PERFORMANCE_RECHECK_PASS_FULL_GATE_OPEN",
     "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_banner_kiss_global_relevance_local_posneg_20261004.md",
-    "current_focus_reason": "User explicitly bound one global banner order for pages, categories, posts and glossary: exact topic -> extended topic -> general fallback -> any technically valid active banner. Pferderassen are theme-neutral and reuse the existing stable partner/creative distribution. Root cause fixed in the central router only; local exact-method positive/negative tests pass; WordPress/MariaDB full gate remains open.",
+    "current_focus_reason": "KISS banner order is implemented globally for pages/categories/posts/glossary; breeds use theme-neutral existing stable distribution. Performance recheck found no rollback of 6.72.171/6.72.176 fast paths. One duplicate target-rank call introduced by the first KISS edit was found and removed. Current WordPress/MariaDB full gate remains open.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -122,7 +122,16 @@
         "breeds": "THEME_NEUTRAL_EXISTING_STABLE_PARTNER_CREATIVE_DISTRIBUTION"
       },
       "topicless_final_fallback_required": true,
-      "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION"
+      "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION",
+      "performance_recheck": {
+        "status": "PASS_LOCAL_SOURCE_COMPARISON",
+        "duplicate_target_rank_call": "FOUND_AND_REMOVED",
+        "new_db_calls": 0,
+        "new_remote_calls": 0,
+        "breed_path": "EARLIER_EXIT_THAN_BEFORE",
+        "protected_672171_fast_paths": "IDENTICAL",
+        "protected_672176_renderer_and_ranking": "IDENTICAL"
+      }
     },
     "awin_catalog_refresh": {
       "programme_list": "INDEPENDENT_READ_ONLY_REFRESH_REQUIRED_LAST_KNOWN_GOOD_ON_FAILURE",
@@ -531,13 +540,13 @@
     }
   },
   "execution_state": {
-    "state": "SOURCE_FIX_LOCAL_KISS_POSNEG_PASS_FULL_GATE_REQUIRED",
+    "state": "SOURCE_FIX_LOCAL_KISS_POSNEG_PERFORMANCE_PASS_FULL_GATE_REQUIRED",
     "authorized_next_action": "RUN_CURRENT_SOURCE_WORDPRESS_MARIADB_BANNER_FULL_GATE",
-    "bound_user_scope_action": "Run one current-manifest WordPress/MariaDB positive-negative banner gate covering page, category, post, glossary, theme-free fallback and breed stable distribution. Preserve all 6.72.171 performance hardlocks. No new version/installer before that gate passes.",
+    "bound_user_scope_action": "Run one current-manifest WordPress/MariaDB positive-negative banner gate covering page, category, post, glossary, theme-free fallback and breed stable distribution, with performance regression assertions. Do not modify workflow architecture or performance fast paths.",
     "completion_condition": "CURRENT_MANIFEST_WORDPRESS_MARIADB_BANNER_POSNEG_AND_PERFORMANCE_REGRESSION_GATE_PASS",
     "after_completion_action": "RELEASE_CHECK_THEN_BUILD_ONE_INSTALLER_AND_RUN_ONE_REAL_SERVER_READBACK",
     "no_optional_detours": true,
-    "sequence": 52,
+    "sequence": 53,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -546,7 +555,8 @@
       "control/release-governance/CURRENT_RELEASE.json"
     ],
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_banner_kiss_global_relevance_local_posneg_20261004.md",
-    "evidence_sha256": "95edc4e3efcbf25aaad1a69aa0ff09ae8fe24a247aa32bbac1243940b263b06d"
+    "evidence_sha256": "1bdd978f4882aa2a8ca2f59eb1deb379a510a122f06091e78832f6340db4a5fa",
+    "current_gate_limitation": "Existing auto-triggered 6.72.170/6.72.171 workflows are version-hardcoded and stop at version grep before functional tests; workflow changes are forbidden by current scope, so those red runs are not functional failures."
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
