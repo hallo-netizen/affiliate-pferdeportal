@@ -937,3 +937,24 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 **Installer:** `AFFILIATE_ZENTRALE_6.72.183.zip`, SHA-256 `3f689f076efc4318ed1188b86e51e66410f193d5256de7ddc54a91dc4aab6895`.
 
 **Status:** SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS / PERFORMANCE_PASS / LIVE_PRODUCTION_READBACK_OPEN.
+
+
+## AFF-ERR-046 — Legacy-Automatik blieb parallel zur neuen Banner-Sammelstelle auslieferbar
+
+**Datum:** 04.10.2026.
+
+**Symptom:** Auf der realen Schabracken-Seite blieb unter 6.72.183 ein fachlich falscher SanoVet-Fütterungsbanner sichtbar, obwohl die neue Creative-Library-Zielzuordnung lokal grün getestet war.
+
+**Root Cause:** 6.72.183 machte die Creative-Library nur für neu bzw. neu materialisierte Banner zur gespeicherten Ziel-URL-Wahrheit. Historische automatische Bannerkampagnen durften weiterhin parallel am Frontend-Ranking teilnehmen. Gleichzeitig fehlte ein gezielter Upgrade-Lauf, der den bereits vorhandenen aktiven Bannerbestand einmalig durch die neue Sammelstelle führt. Ein generischer Versions-Nachlauf hätte unnötig den gesamten Creative-Pool inklusive Produktzeilen erneut verarbeitet.
+
+**KISS-Fix 6.72.184:** Für automatische Banner ist nur noch Creative-Library -> output_object_v4 autoritativ. Historische automatische Banner werden aus dem automatischen Pool ausgeschlossen; bestehende manuelle FIXED-Zuweisungen bleiben über ihren bisherigen Sonderpfad erhalten. Ein Banner-only-Migrationsworker verarbeitet ausschließlich aktive Banner aus der Creative-Library. Der generische Vollpool-Rescan wird für 6.72.184 nicht gestartet. eBay-/Idealo-/Produktkampagnen werden nicht neu geplant.
+
+**Nicht wiederholen:** Nie zwei automatische Bannerquellen parallel zulassen. Neue Zuordnungsarchitektur muss auch den bestehenden Live-Bestand migrieren oder explizit sperren. Banner-only-Reparaturen dürfen keinen generischen Produkt-/Creative-Vollscan auslösen. Keine neue Frontend-DB-/HTTP-/URL-Neuklassifikation; Performance-Hotpaths bleiben geschützt.
+
+**Beweis Source-Upgrade:** Run 37223477984 = SUCCESS; 6.72.183-Fehler reproduziert, Upgrade 6.72.184, Legacy-Automatik ausgeschlossen, Banner-only-Migration, korrekter Schabracken-Banner sichtbar, SanoVet nicht sichtbar, manuelle FIXED-Ausnahme erhalten, eBay/Idealo bytegleich, keine Remoteaufrufe; 20/20 PASS.
+
+**Beweis installiertes ZIP:** Run 37223792210 = SUCCESS; Upgrade-Kette 20/20 PASS, frischer Library-Bannerpfad 21/21 PASS, Ziel-URL-Sammelstelle 26/26 PASS, ZIP 27/27 Manifest-Byteidentität, Performance-Hardlock PASS.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.184.zip`, SHA-256 `bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`.
+
+**Status:** SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS / LIVE_PRODUCTION_READBACK_OPEN. Noch kein Live-PASS für 6.72.184.
