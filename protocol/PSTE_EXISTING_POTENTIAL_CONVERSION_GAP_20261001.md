@@ -442,3 +442,45 @@ Lokale Tests:
 PHP 81/81 PASS; ZIP PASS; Positiv/Negativ-Revalidation PASS. Normal-Metadata-Pfad hashidentisch zu 0.57.28; erwartete 694er fachliche Verteilung bleibt 320 STRUCTURE_GAP / 371 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING.
 
 Live-Readback offen.
+
+
+## DELTA 2026-10-04 – VOLLSTÄNDIGE A/B/C/D-BESTANDSKLASSIFIZIERUNG NACH 0.57.32
+
+Basis:
+- realer 0.57.32-Export `pste-global-seo-topic-map-20261004-082759-utc.json`;
+- 695 persistierte Titelkandidaten;
+- 694 exakt eindeutige Titel;
+- keine neue Provider-/DataForSEO-Recherche.
+
+Ergebnis für die 694 eindeutigen Titel:
+- A DIREKT PLANBAR: **0**;
+- B OHNE NEUE EXTERNE RECHERCHE REPARIERBAR: **110**;
+- C STRUKTUR-/MENSCHENENTSCHEIDUNG: **389**;
+- D GEPRÜFT PARKEN / NICHT PRODUZIEREN: **195**.
+
+B = 110:
+- 92 vorhandene Familie + vorhandener Titel; redaktionelle Relation aus vorhandenem Bestand bestätigbar, danach normaler Reentry;
+- 9 sichere bestehende Familienbindungen aus dem aktuellen Portalbestand;
+- 9 konkrete Artikeltyp-/Zielkategorieentscheidungen mit bereits vorhandener Kategorie.
+
+C = 389:
+- 269 STRUCTURE_GAP ohne sicheren `structural_context_hint`;
+- 51 STRUCTURE_GAP mit vorhandenem `structural_context_hint`;
+- 33 Familienzuordnungen ohne sichere aktuelle Bindung;
+- 34 redaktionelle Relationsentscheidungen;
+- 2 klare Pferdehaftpflicht-Intentionen Kosten/Vergleich, für die in dieser Familie die entsprechende Typkategorie fehlt.
+
+D = 195:
+- 145 eindeutige Titel wegen fehlender realer externer Relevanzevidenz weiter geparkt;
+- 46 Head-/Keyword-/Transaktionsvarianten `DISCOVERY_ONLY`;
+- 1 nicht-redaktioneller Off-topic-Fall;
+- 3 Produktwahl-Fälle weiter `RETAINED_NON_PRODUCING`.
+
+Dublette:
+`Schritt für Schritt Pferdebürsten waschen` liegt physisch zweimal vor; logisch nur einmal führen, keine automatische DB-Löschung.
+
+Persistierte Entscheidungsartefakte:
+- `/Pferdeatelier/PSTE-05732-EXISTING-EVIDENCE-DECISIONS-2026-10-04.json`
+- `/Pferdeatelier/PSTE-05732-LANE-B-110-DECISIONS.json`
+
+Die Artefakte erteilen keine Produktionsautorität. Zielvertragsgemäß folgt für B ausschließlich der vorhandene Review-/Normal-Reentry-Weg; kein neues Plugin und keine neue Architektur.
