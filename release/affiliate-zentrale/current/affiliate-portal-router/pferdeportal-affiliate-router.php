@@ -4044,6 +4044,19 @@ JS;
             }
         }
 
+        // KISS: Automatisch aus der Creative-Library materialisierte Banner
+        // besitzen bereits ihre gespeicherte Zielkante. Im Frontend wird diese
+        // nicht noch einmal aus URL/Titel/Partnertext erraten.
+        $library_banner = $required_creative_type === 'banner'
+            && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
+        if ($library_banner) {
+            if (is_array($automation_rank)) { return $automation_rank; }
+            if ($mode === 'fallback') {
+                return array('specificity'=>100,'matches'=>1,'reason'=>'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.');
+            }
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Gespeicherte Banner-Zielkante passt hier nicht; technisch gueltiger letzter Fallback.');
+        }
+
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
         if (is_array($destination_rank) && (int) ($destination_rank['specificity'] ?? 0) >= 500) { return $destination_rank; }
         $runtime_page_topic_rank = $this->banner_runtime_page_topic_rank($campaign, $context);
