@@ -133,9 +133,32 @@ chk(contains_text($glossHtml,'exact-glossary'),'glossary_exact_visible');
 $breedA=$make_campaign('breed-a',array('assignment_mode'=>'page_tree','automation_target_keys'=>array('pa_breed:other-breed'),'placements'=>array('breed_single_desktop_banner'),'dimensions'=>'400x400','priority'=>999,'partner'=>'breed-partner-a'));
 $breedB=$make_campaign('breed-b',array('assignment_mode'=>'fallback','placements'=>array('breed_single_desktop_banner'),'dimensions'=>'400x400','priority'=>1,'partner'=>'breed-partner-b'));
 $set_active_only(array('breed-a','breed-b'));
+$breedCtx1=$getctx($breed1); $breedCtx2=$getctx($breed2); $breedCtx3=$getctx($breed3);
+$selBreed1=$rm('select_campaign_for_slot')->invoke($o,$breedCtx1,'breed_single_desktop_banner','');
+$selBreed2=$rm('select_campaign_for_slot')->invoke($o,$breedCtx2,'breed_single_desktop_banner','');
+$selBreed3=$rm('select_campaign_for_slot')->invoke($o,$breedCtx3,'breed_single_desktop_banner','');
+echo "TRACE breed_selected=".json_encode(array(
+  (string)($selBreed1['campaign']['id']??''),
+  (string)($selBreed2['campaign']['id']??''),
+  (string)($selBreed3['campaign']['id']??'')
+))."\n";
+foreach(array(1=>$selBreed1,2=>$selBreed2,3=>$selBreed3) as $n=>$sel){
+  $camp=is_array($sel['campaign']??null)?$sel['campaign']:array();
+  $gb=$rm('campaign_to_group_banner')->invoke($o,$camp);
+  echo "TRACE breed_group_banner_".$n."=".json_encode(array(
+    'campaign'=>(string)($camp['id']??''),
+    'group'=>(string)($gb[0]['id']??''),
+    'banner'=>(string)($gb[1]['id']??''),
+    'url'=>(string)($gb[1]['url']??'')
+  ))."\n";
+}
 $breedHtml1=$render_post($breed1,'breed_single_desktop_banner');
 $breedHtml2=$render_post($breed2,'breed_single_desktop_banner');
 $breedHtml3=$render_post($breed3,'breed_single_desktop_banner');
+foreach(array(1=>$breedHtml1,2=>$breedHtml2,3=>$breedHtml3) as $n=>$h){
+  preg_match('/href="([^"]+)"/',$h,$m);
+  echo "TRACE breed_html_href_".$n."=".($m[1]??'')."\n";
+}
 echo "TRACE breed1_candidates=".json_encode($ids($ranked($getctx($breed1),'breed_single_desktop_banner')) ?? array())."\n";
 echo "TRACE breed2_candidates=".json_encode($ids($ranked($getctx($breed2),'breed_single_desktop_banner')) ?? array())."\n";
 echo "TRACE breed3_candidates=".json_encode($ids($ranked($getctx($breed3),'breed_single_desktop_banner')) ?? array())."\n";
