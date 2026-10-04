@@ -1,0 +1,205 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdehaftpflicht-beratung",
+    "plan_slot": "759950a74a337da2c8d8ece5783df3b7d2e0a4a043ec83bccfff55d9b5c5db2d",
+    "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+    "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+  },
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Bundesministerium der Justiz – § 833 BGB Haftung des Tierhalters",
+          "source_url": "https://www.gesetze-im-internet.de/bgb/__833.html"
+        },
+        {
+          "source_title": "Bundesministerium der Justiz – § 834 BGB Haftung des Tieraufsehers",
+          "source_url": "https://www.gesetze-im-internet.de/bgb/__834.html"
+        },
+        {
+          "source_title": "Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung, 25. März 2025",
+          "source_url": "https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf"
+        },
+        {
+          "source_title": "Allianz – Reitbeteiligung und Pferdehaftpflicht",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/"
+        },
+        {
+          "source_title": "Die Haftpflichtkasse – Tierhalter-Haftpflichtversicherung Pferd",
+          "source_url": "https://www.haftpflichtkasse.de--www.haftpflichtkasse.de/versicherungen/privatkunden/tierhalter/"
+        }
+      ],
+      "claims": [
+        "§ 833 BGB verpflichtet den Tierhalter grundsätzlich zum Ersatz, wenn das Tier einen Menschen verletzt oder eine Sache beschädigt.",
+        "§ 834 BGB erfasst auch Personen, die die Aufsicht über ein Tier vertraglich übernehmen; bei nachgewiesener Sorgfalt kann ihre Haftung entfallen.",
+        "Das BdV-Infoblatt nennt für Pferdehalter das Fremdreiterrisiko, Reitbeteiligungen, privates Tierhüterrisiko und Mietsachschäden als wichtige Deckungsmerkmale.",
+        "Die Allianz unterscheidet gelegentliche oder unentgeltliche Fremdreiter von regelmäßigen Reitbeteiligungen und rät dazu, die Mitversicherung weiterer Reiter ausdrücklich zu klären.",
+        "Die aktuelle Leistungsübersicht der Haftpflichtkasse nennt unter anderem Reitbeteiligungen, Fremdreiter sowie Schäden an Stallungen, Reithallen und Pferdetransportanhängern."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "allowed_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine Pferdehaftpflicht passend zu Fremdreitern, Reitbeteiligung und tatsächlicher Nutzung auswählen.",
+      "decision_criteria": [
+        "mitversicherter Personenkreis",
+        "Art und Häufigkeit der Fremdnutzung",
+        "Tierhüterrisiko",
+        "Mietsachschäden",
+        "private oder gewerbliche Nutzung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Bundesministerium der Justiz – § 833 BGB Haftung des Tierhalters",
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__833.html",
+        "statement": "§ 833 BGB verpflichtet den Tierhalter grundsätzlich zum Ersatz, wenn das Tier einen Menschen verletzt oder eine Sache beschädigt.",
+        "evidence_text": "§ 833 BGB regelt die Haftung des Tierhalters für durch das Tier verursachte Personen- und Sachschäden.",
+        "evidence_text_sha256": "2352e5dfd22edb19f1f6ccf92f166d2a858893dde9806113ba9f44a182e577ae",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Bundesministerium der Justiz – § 834 BGB Haftung des Tieraufsehers",
+        "source_url": "https://www.gesetze-im-internet.de/bgb/__834.html",
+        "statement": "§ 834 BGB erfasst auch Personen, die die Aufsicht über ein Tier vertraglich übernehmen; bei nachgewiesener Sorgfalt kann ihre Haftung entfallen.",
+        "evidence_text": "§ 834 BGB behandelt die Verantwortlichkeit eines vertraglich eingesetzten Tieraufsehers und nennt die Sorgfalt als mögliche Entlastung.",
+        "evidence_text_sha256": "b6b7c5be05ebc539ed296c063c14c0abf6117dfe1f8a5116b806b59b334ebc21",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung, 25. März 2025",
+        "source_url": "https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf",
+        "statement": "Das BdV-Infoblatt nennt für Pferdehalter das Fremdreiterrisiko, Reitbeteiligungen, privates Tierhüterrisiko und Mietsachschäden als wichtige Deckungsmerkmale.",
+        "evidence_text": "Das BdV führt Fremdreiterrisiko, Reitbeteiligungen, Tierhüterrisiko und Mietsachschäden als relevante Bestandteile einer Pferdehalterhaftpflicht auf.",
+        "evidence_text_sha256": "9afb9b334fa50081b3287073c723193a0a8837854cd50c884bfd9c7ffcdddf5c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Allianz – Reitbeteiligung und Pferdehaftpflicht",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/",
+        "statement": "Die Allianz unterscheidet gelegentliche oder unentgeltliche Fremdreiter von regelmäßigen Reitbeteiligungen und rät dazu, die Mitversicherung weiterer Reiter ausdrücklich zu klären.",
+        "evidence_text": "Die Allianz beschreibt Fremdreiter als gelegentliche oder unentgeltliche Nutzer und Reitbeteiligungen als regelmäßige Nutzung mit Beteiligung an Kosten oder Pflege.",
+        "evidence_text_sha256": "31077d65aa070d09510f4c4ac9351073e56226c3a70c6fc55321f00c2c011f88",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Die Haftpflichtkasse – Tierhalter-Haftpflichtversicherung Pferd",
+        "source_url": "https://www.haftpflichtkasse.de--www.haftpflichtkasse.de/versicherungen/privatkunden/tierhalter/",
+        "statement": "Die aktuelle Leistungsübersicht der Haftpflichtkasse nennt unter anderem Reitbeteiligungen, Fremdreiter sowie Schäden an Stallungen, Reithallen und Pferdetransportanhängern.",
+        "evidence_text": "Die Haftpflichtkasse führt die Mitversicherung von Reitbeteiligungen und Fremdreitern sowie verschiedene Mietsachschäden als Leistungen ihrer Pferdehaftpflicht auf.",
+        "evidence_text_sha256": "6a71b2685eb8dac883a6a59f4e85ef491e460a04bfe7b1d9b05622407a2f5e76",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "anchor": "Pferdehaftpflicht",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/wissen/wissen-versicherungen-und-recht/reitbeteiligungsvertrag/",
+        "anchor": "Reitbeteiligungsvertrag",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/reitbeteiligungsvertrag/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdehaftpflicht-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Fremdreiter",
+      "Reitbeteiligung",
+      "Versicherungsbedingungen",
+      "Nutzung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Kriterienliste bildet die Auswahlfragen bereits vollständig und scanbar ab; eine zusätzliche Tabelle würde denselben Kontrollnutzen nur wiederholen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "NOT_APPLICABLE"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
