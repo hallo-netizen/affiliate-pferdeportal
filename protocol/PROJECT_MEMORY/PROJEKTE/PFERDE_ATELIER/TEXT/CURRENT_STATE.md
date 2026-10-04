@@ -404,22 +404,64 @@ Tests:
 - 695er Zielkohorte vollständig replayed.
 - kein 4472er Vollpool-PASS behauptet; Vollpoolvergleich lief lokal in ein Tool-Timeout.
 
+## LIVE-READBACK 0.57.33 – BESTANDSLAUF FÄLSCHLICH WIEDERVERWENDET ALTEN AUDIT
+
+Nutzer-Screenshot belegt:
+- Plugin `Portal SEO Themenengine 0.57.33` aktiv;
+- Startmeldung `Bestandsaufbereitung gestartet: ausschließlich vorhandene Daten, keine Provider-Abfrage.`;
+- Abschluss sofort `Bestandsaufbereitung COMPLETE`;
+- Zähler vollständig 0: 0 neue Titelkandidaten / 0 vorhandene Titelkandidaten neu geprüft / 0 Strukturentscheidung / 0 Review / 0 nicht produzierend / 0 zusätzlich PSERC-prüfbar;
+- Completion `EXISTING_POTENTIAL_EXHAUSTED_NO_PROVIDER_CALL`.
+
+Frisch am 0.57.33-Quellcode reproduzierte Rootcause:
+`startQueue()` setzte `local_backlog_complete=true`, sobald `canReuseBacklogAudit()` den vorhandenen abgeschlossenen Audit-Receipt als gültig ansah. Diese Audit-Semantik hashte jedoch nicht die in 0.57.33 geänderten Normalpfad-Abhängigkeiten. Dadurch wurde beim ausdrücklich gestarteten Existing-Only-Lauf der lokale 695er Bestand vollständig übersprungen.
+
+Wichtig:
+Der 0.57.33-Normalpfad selbst ist damit nicht live widerlegt; der Live-Lauf hat ihn gar nicht ausgeführt.
+
+## LOKALER KANDIDAT PSTE 0.57.34 – EXISTING-ONLY FORCE REAUDIT
+
+Kandidat:
+`PSTE-0.57.34-EXISTING-ONLY-FORCE-REAUDIT-CANDIDATE.zip`
+
+SHA-256:
+`6e12c2a5f63f353ca93374252bdb0ea6e5dadd0a3e1f1bf9df305077a771568e`
+
+KISS-Fix:
+- bestehender Audit-Receipt darf weiterhin bei normalen providerfähigen Produktionswellen wiederverwendet werden;
+- der ausdrücklich manuell gestartete Existing-Only-Lauf (`provider_fallback_allowed=false`) erzwingt dagegen immer den lokalen Bestands-Rescan;
+- keine neue Architektur, keine neue DB, kein Provideraufruf, keine Gate-Absenkung;
+- Normal-Metadata-/Familien-/Titel-/Repository-Logik gegenüber 0.57.33 byteidentisch.
+
+Tests:
+- PHP-Lint 81/81 PASS;
+- ZIP-Integrität PASS;
+- exakt 2 Dateien geändert: Breadth-Queue + Pluginversion;
+- Branchmatrix PASS:
+  - Existing-only + gültiger alter Audit → **kein Reuse**, lokaler Rescan;
+  - Provider-Welle + gültiger Audit → Reuse weiterhin erlaubt;
+  - Provider-Welle + ungültiger Audit → kein Reuse;
+  - validierte Cancel-Continuation → vorhandene Fortsetzung bleibt erlaubt;
+- lokaler Scan-Pfad bei `local_backlog_complete=false` weiterhin gebunden;
+- alle fachlichen 0.57.33 Normalpfad-Dateien hashidentisch.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05733_LOCAL_HARD_PASS_LIVE_READBACK_OPEN`
+`PSTE_05733_EXISTING_ONLY_AUDIT_REUSE_SKIPPED_RESCAN`
 
-Die generische WordPress-interne Reentry-Reparatur ist auf der realen 695er Zielkohorte lokal positiv/negativ bestanden. Offen ist der reale WordPress-Readback nach Installation von 0.57.33 und erneutem Bestandslauf.
+0.57.33 ist live installiert, aber der Existing-Only-Lauf hat wegen eines wiederverwendeten alten Audit-Receipts den lokalen Bestand nicht erneut durchlaufen. Die sichtbaren Nullzähler sind damit ein Orchestrierungsfehler, kein fachliches Ergebnis.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05733_RUN_EXISTING_MATERIAL_AND_READBACK`
+`INSTALL_05734_AND_RERUN_EXISTING_ONLY`
 
-1. `PSTE-0.57.33-WORDPRESS-SAFE-EXISTING-TOPIC-REENTRY-CANDIDATE.zip` in WordPress installieren.
+1. `PSTE-0.57.34-EXISTING-ONLY-FORCE-REAUDIT-CANDIDATE.zip` in WordPress installieren.
 2. `SEO Themenengine → Übersicht`.
 3. Abschnitt `Titel aus vorhandenem Material erzeugen`.
 4. `Vorhandenes Material in Titelkandidaten umwandeln` starten.
-5. Ergebnis ablesen; keine Produktionswelle starten.
-6. Erst nach Live-PASS die gesamte Themenkarte erneut exportieren.
+5. Erwartung für den echten Lauf: `vorhandene Titelkandidaten neu geprüft` darf **nicht 0** bleiben.
+6. Keine Produktionswelle starten.
+7. Danach Screenshot und anschließend Themenkarten-Export für den Live-Readback.
 
 ## NICHT ANFASSEN
 
