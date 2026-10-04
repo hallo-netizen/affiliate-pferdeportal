@@ -21,6 +21,17 @@ def context(source_url='https://example.org/fresh-source'):
             'statement': 'Fresh claim',
         }
     }
+    provenance = {
+        'contract':'K0_RESEARCH_RETRIEVAL_PROVENANCE_V1',
+        'status':'PASS',
+        'run_instance_id':'run:' + 'a'*24,
+        'source_urls_sha256':stable([source_url]),
+        'retrievals':[{
+            'source_url':source_url,
+            'retrieved_at_utc':'2026-10-04T09:00:00Z',
+            'retrieved_content_sha256':'1'*64,
+        }],
+    }
     return {
         'production_context': {
             'fact_pack': fact_pack,
@@ -29,6 +40,7 @@ def context(source_url='https://example.org/fresh-source'):
         'rule_context': {
             'research_claims': research_claims,
         },
+        'research_retrieval_provenance': provenance,
         'research_freshness_receipt': {
             'contract':'K0_RESEARCH_FRESHNESS_GUARD_V1',
             'status':'PASS',
@@ -45,6 +57,18 @@ class TestK0InputIsolation(unittest.TestCase):
         self.assertEqual(r['status'], 'PASS')
         self.assertFalse(r['historical_article_content_allowed'])
         self.assertTrue(r['current_upload_identity_authority'])
+
+    def test_missing_retrieval_provenance_blocks(self):
+        x = context()
+        x.pop('research_retrieval_provenance')
+        with self.assertRaisesRegex(Blocked, 'RESEARCH_RETRIEVAL_PROVENANCE_MISSING'):
+            validate(x, 'run:' + 'a'*24)
+
+    def test_retrieval_provenance_must_match_run(self):
+        x = context()
+        x['research_retrieval_provenance']['run_instance_id'] = 'run:' + 'b'*24
+        with self.assertRaisesRegex(Blocked, 'RESEARCH_RETRIEVAL_RUN_MISMATCH'):
+            validate(x, 'run:' + 'a'*24)
 
     def test_missing_freshness_receipt_blocks(self):
         x = context()
