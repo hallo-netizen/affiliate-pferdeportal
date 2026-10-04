@@ -318,3 +318,33 @@ Der frühere Schritt „364 Familienfälle einmalig von Hand entscheiden“ ist 
 
 Grenze:
 0.57.28 ist lokal HARD-PASS, aber noch **nicht live installiert**. Keine Release-/Live-Aussage vor WordPress-Readback.
+
+
+## DELTA 2026-10-04 – AKTIVER EINZELLAUF BLOCKIERT BESTANDSAUFBEREITUNG / 0.57.29 UI-GUARD
+
+Realer 0.57.28-Live-Screenshot:
+- Version 0.57.28 aktiv;
+- Start Bestandsaufbereitung endet mit `PSTE_RESEARCH_JOB_ALREADY_ACTIVE`.
+
+Codebefund:
+`PSTE_Breadth_Research_Queue::startExistingOnly()` blockiert korrekt, sobald `PSTE_Research_Job::peek()` einen aktiven Einzellauf liefert. Parallelität bleibt damit fail-closed.
+
+Der eigentliche neue Fehler ist UI-seitig:
+`renderExistingCandidateOverview()` zeigte den Startbutton auch bei aktivem Einzellauf, weil dort nur Storage- und Breadth-Zustände berücksichtigt wurden.
+
+0.57.29 repariert ausschließlich diese Sicht-/Routinglücke:
+- aktiven Einzellauf read-only prüfen;
+- Startbutton bei aktivem Einzellauf nicht rendern;
+- Status/Phase/Fortschritt anzeigen;
+- direkter Link auf `Einstellungen` zum vorhandenen Lauf;
+- bei ungültigem Jobzustand ebenfalls fail-closed statt Startbutton.
+
+Kandidat:
+`PSTE-0.57.29-ACTIVE-JOB-GUARD-CANDIDATE.zip`
+SHA-256 `e5baf380157236103a5c15c0cee8da2c750daef207cd4fe9efef6f9791e7f880`.
+
+Tests:
+- PHP 81/81 PASS;
+- UI-Guard Positiv/Negativ 5/5 PASS;
+- exakt 2 Dateien geändert;
+- keine Fach-/Research-/Storage-/Provider-/Normalpfadänderung.
