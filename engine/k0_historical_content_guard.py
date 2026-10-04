@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import re
@@ -24,6 +25,27 @@ def _shingles(words, width=SHINGLE_WORDS):
     if len(words) < width:
         return {}
     return {' '.join(words[i:i+width]): i for i in range(len(words)-width+1)}
+
+def _stable_json(value):
+    return hashlib.sha256(
+        json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+    ).hexdigest()
+
+def _is_exact_current_source_draft(path, package):
+    if path.parent.name != 'writer_drafts' or path.suffix.casefold() != '.json':
+        return False
+    try:
+        draft = json.loads(path.read_text(encoding='utf-8'))
+    except Exception:
+        return False
+    provenance = package.get('writer_provenance') if isinstance(package, dict) else None
+    if not isinstance(provenance, dict):
+        return False
+    return bool(
+        draft.get('contract') == 'K0_WRITER_DRAFT_V1'
+        and str(draft.get('job_id') or '') == str(provenance.get('job_id') or '')
+        and _stable_json(draft) == str(provenance.get('draft_sha256') or '')
+    )
 
 def _json_texts(value, parent_key=''):
     if isinstance(value, dict):
@@ -78,6 +100,8 @@ def verify(package, current_run_dir, repo_root='.'):
     scanned = 0
 
     for path in _candidate_paths(root):
+        if _is_exact_current_source_draft(path, package):
+            continue
         rp = path.resolve()
         try:
             rp.relative_to(current)
