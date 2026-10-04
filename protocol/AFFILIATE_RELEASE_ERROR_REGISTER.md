@@ -918,3 +918,22 @@ Belegt im E2E:
 Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorfilter vor dem Ranking nicht vollständig erfasst waren. Der vollständige WordPress+MariaDB-End-to-End-Gate reproduzierte zwei echte Root Causes: reale Slot-Aliase konnten den technischen Fallback vor dem Ranking verlieren; ein direkt passendes Banner-Placement konnte den technischen Formatvertrag umgehen.
 
 6.72.182 führt den Bannerpfad auf dasselbe KISS-Prinzip wie den funktionierenden eBay/Idealo-Produktpfad zurück: Kandidaten -> technische Gültigkeit -> Relevanz -> Auswahl -> Renderer. Source-Gate Run 37216563071: 21/21 PASS. Installiertes ZIP-Gate Run 37216941150: 21/21 PASS, 27/27 Manifestidentität, Performance-Hardlock PASS. 6.72.181 ist damit superseded und darf nicht mehr als aktueller Installationskandidat verwendet werden.
+
+
+## AFF-ERR-045 — Banner-Zielzuordnung hatte keine zentrale dauerhafte Ziel-URL-Wahrheit
+
+**Datum:** 04.10.2026.
+
+**Symptom:** Trotz lokaler Ranking-/Slot-Fixes änderte sich live sichtbar nichts zuverlässig. Die Tests konnten grün sein, obwohl reale Providerbanner ihre Zielzuordnung nicht dauerhaft aus einer einzigen Quelle erhielten.
+
+**Root Cause:** Die Creative-Library besaß bereits `destination_url` und `topic_targets`, war aber nicht die alleinige Autorität. `topic_targets` konnte bei Assetprüfung wieder geleert werden; die Domain der Ziel-URL wurde in der Semantik nicht berücksichtigt; Tracking-Fallback konnte wie eine echte Zielseite behandelt werden; materialisierte Banner wurden im Frontend erneut aus URL/Text/Partnerdaten interpretiert.
+
+**KISS-Fix 6.72.183:** Keine neue Tabelle. Die bestehende Creative-Library speichert einmal Ziel-URL-Provenienz, Portal-Zielkante und technisch kompatible Slots. Echte/decodierte Ziel-URL wird inklusive Domain einmal klassifiziert. Ohne eindeutiges Ziel entsteht ein allgemeiner technisch gültiger Fallback ohne Fake-Thema. Geänderte Ziel-URL leert die alte Kante und erzwingt Neuplanung. Output-Object-Banner lesen im Frontend nur noch die gespeicherte Kante; keine erneute URL-/Textklassifikation.
+
+**Beweis Source:** Run 37219933282 = SUCCESS; alter Vollpfad 21/21 PASS; neue Library-Kette 26/26 PASS; Performance-Hardlock PASS.
+
+**Beweis installiertes ZIP:** Run 37220236448 = SUCCESS; ZIP 27/27 manifestidentisch; alter Vollpfad 21/21 PASS; Library-Kette 26/26 PASS; Frontend 1000 Rank-Aufrufe mit 0 zusätzlichen DB-Queries und 0 HTTP.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.183.zip`, SHA-256 `3f689f076efc4318ed1188b86e51e66410f193d5256de7ddc54a91dc4aab6895`.
+
+**Status:** SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS / PERFORMANCE_PASS / LIVE_PRODUCTION_READBACK_OPEN.
