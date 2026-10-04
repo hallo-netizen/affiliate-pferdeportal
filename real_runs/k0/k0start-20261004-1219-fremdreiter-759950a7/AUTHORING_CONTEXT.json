@@ -7,16 +7,30 @@
     "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
     "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
   },
-  "content_profile": {"search_intent": "DECISION_SUPPORT"},
+  "content_profile": {
+    "search_intent": "DECISION_SUPPORT"
+  },
   "production_context": {
     "fact_pack": {
       "contract": "canonical_fact_pack_v1",
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
-        {"source_title":"Bund der Versicherten – Pferdehaftpflicht","source_url":"https://www.bundderversicherten.de/de/gut-versichert/pferdehalterhaftpflicht"},
-        {"source_title":"Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung","source_url":"https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf"},
-        {"source_title":"Finanztip – Pferdehaftpflichtversicherung","source_url":"https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/"},
-        {"source_title":"Allianz – Reitbeteiligung und Haftung","source_url":"https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/"}
+        {
+          "source_title": "Bund der Versicherten – Pferdehaftpflicht",
+          "source_url": "https://www.bundderversicherten.de/de/gut-versichert/pferdehalterhaftpflicht"
+        },
+        {
+          "source_title": "Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung",
+          "source_url": "https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf"
+        },
+        {
+          "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+          "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/"
+        },
+        {
+          "source_title": "Allianz – Reitbeteiligung und Haftung",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/"
+        }
       ],
       "claims": [
         "Eine Pferdehalterhaftpflicht schützt vor finanziellen Folgen von Schäden durch das Pferd; Fremdreiter und Reitbeteiligungen können im Tarif mitversichert sein.",
@@ -28,46 +42,174 @@
       ]
     },
     "production_plan_item": {
-      "article_type":"Beratung",
-      "target_keyword":"Pferdehaftpflicht mit Fremdreiterrisiko",
-      "topic":"Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
-      "quality_binding":{"wordpress_category":{"slug":"pferdehaftpflicht-beratung","taxonomy":"category"}}
+      "article_type": "Beratung",
+      "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+      "topic": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdehaftpflicht-beratung",
+          "taxonomy": "category"
+        }
+      }
     }
   },
   "rule_context": {
-    "contract":"K0_AUTHORING_RULE_CONTEXT_V1",
-    "type_meta":{
-      "decision_goal":"Den Versicherungsschutz für Fremdreiter und Reitbeteiligungen anhand der tatsächlichen Nutzung und der Vertragsbedingungen passend auswählen.",
-      "decision_criteria":["Fremdreiterrisiko","Reitbeteiligung","Eigenschäden und Regress","Versicherungssumme"]
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Den Versicherungsschutz für Fremdreiter und Reitbeteiligungen anhand der tatsächlichen Nutzung und der Vertragsbedingungen passend auswählen.",
+      "decision_criteria": [
+        "Fremdreiterrisiko",
+        "Reitbeteiligung",
+        "Eigenschäden und Regress",
+        "Versicherungssumme"
+      ]
     },
-    "research_claims":{
-      "F1":{"source_title":"Bund der Versicherten – Pferdehaftpflicht","source_url":"https://www.bundderversicherten.de/de/gut-versichert/pferdehalterhaftpflicht","evidence_text_sha256":"78976529e3bf1e34d2be88106a96e64f0c6e68629196dbdf127428ad5a65968a","statement":"Eine Pferdehalterhaftpflicht schützt vor finanziellen Folgen von Schäden durch das Pferd; Fremdreiter und Reitbeteiligungen können im Tarif mitversichert sein.","evidence_text":"Eine Pferdehalterhaftpflicht schützt vor finanziellen Folgen von Schäden durch das Pferd; Fremdreiter und Reitbeteiligungen können im Tarif mitversichert sein.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},
-      "F2":{"source_title":"Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung","source_url":"https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf","evidence_text_sha256":"576ba59c41aa0e54b432e5b95fb6c2e7513599f3446b83d777c92c7944f1295b","statement":"Fremdreiterrisiko meint im Allgemeinen Ansprüche unentgeltlich reitender fremder Personen gegen den versicherten Tierhalter; Reitbeteiligungen sollten ausdrücklich mitversichert sein.","evidence_text":"Fremdreiterrisiko meint im Allgemeinen Ansprüche unentgeltlich reitender fremder Personen gegen den versicherten Tierhalter; Reitbeteiligungen sollten ausdrücklich mitversichert sein.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},
-      "F3":{"source_title":"Finanztip – Pferdehaftpflichtversicherung","source_url":"https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/","evidence_text_sha256":"b248619f06c00a03b055c2f732a2dacc544f198addd0e8f2104d0f332010e341","statement":"Ein guter Tarif sollte Fremdhüter ohne Bezahlung, Fremdreiter und Reitbeteiligungen einschließen; die konkrete Nutzung muss bei Vertragsabschluss passend angegeben werden.","evidence_text":"Ein guter Tarif sollte Fremdhüter ohne Bezahlung, Fremdreiter und Reitbeteiligungen einschließen; die konkrete Nutzung muss bei Vertragsabschluss passend angegeben werden.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},
-      "F4":{"source_title":"Finanztip – Pferdehaftpflichtversicherung","source_url":"https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/","evidence_text_sha256":"8c5e678ab94730d24583a90de9350a512501130986b42732a632b2eff9ab7d82","statement":"Finanztip empfiehlt mindestens zehn Millionen Euro Versicherungssumme für Personen- und Sachschäden und nennt auch Regressansprüche von Sozialversicherungsträgern als wichtiges Leistungsmerkmal.","evidence_text":"Finanztip empfiehlt mindestens zehn Millionen Euro Versicherungssumme für Personen- und Sachschäden und nennt auch Regressansprüche von Sozialversicherungsträgern als wichtiges Leistungsmerkmal.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},
-      "F5":{"source_title":"Allianz – Reitbeteiligung und Haftung","source_url":"https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/","evidence_text_sha256":"6ee766360be99963f0f06097425af36e1df7df44eb73c5d045b3834aba357780","statement":"Gelegentliche oder regelmäßige unentgeltliche Reiter werden als Fremdreiter eingeordnet; eine bezahlte regelmäßige Reitbeteiligung kann haftungsrechtlich anders behandelt werden.","evidence_text":"Gelegentliche oder regelmäßige unentgeltliche Reiter werden als Fremdreiter eingeordnet; eine bezahlte regelmäßige Reitbeteiligung kann haftungsrechtlich anders behandelt werden.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]},
-      "F6":{"source_title":"Allianz – Reitbeteiligung und Haftung","source_url":"https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/","evidence_text_sha256":"62822194a839c09dbe801272dba4d84a7983eb39616eba8b15e142591ff7b902","statement":"Eigenschäden von Mitreitern und Regressforderungen sind nicht in jedem Tarif gleich geregelt; deshalb müssen die konkreten Versicherungsbedingungen geprüft werden.","evidence_text":"Eigenschäden von Mitreitern und Regressforderungen sind nicht in jedem Tarif gleich geregelt; deshalb müssen die konkreten Versicherungsbedingungen geprüft werden.","claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]}
+    "research_claims": {
+      "F1": {
+        "source_title": "Bund der Versicherten – Pferdehaftpflicht",
+        "source_url": "https://www.bundderversicherten.de/de/gut-versichert/pferdehalterhaftpflicht",
+        "evidence_text_sha256": "78976529e3bf1e34d2be88106a96e64f0c6e68629196dbdf127428ad5a65968a",
+        "statement": "Eine Pferdehalterhaftpflicht schützt vor finanziellen Folgen von Schäden durch das Pferd; Fremdreiter und Reitbeteiligungen können im Tarif mitversichert sein.",
+        "evidence_text": "Eine Pferdehalterhaftpflicht schützt vor finanziellen Folgen von Schäden durch das Pferd; Fremdreiter und Reitbeteiligungen können im Tarif mitversichert sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Bund der Versicherten – Infoblatt Tierhalterhaftpflichtversicherung",
+        "source_url": "https://www.bundderversicherten.de/downloads/infoblaetter/haftpflicht-unfall-und-rechtsschutz/bdv-infoblatt-tierhalterhaftpflichtversicherung.pdf",
+        "evidence_text_sha256": "576ba59c41aa0e54b432e5b95fb6c2e7513599f3446b83d777c92c7944f1295b",
+        "statement": "Fremdreiterrisiko meint im Allgemeinen Ansprüche unentgeltlich reitender fremder Personen gegen den versicherten Tierhalter; Reitbeteiligungen sollten ausdrücklich mitversichert sein.",
+        "evidence_text": "Fremdreiterrisiko meint im Allgemeinen Ansprüche unentgeltlich reitender fremder Personen gegen den versicherten Tierhalter; Reitbeteiligungen sollten ausdrücklich mitversichert sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/",
+        "evidence_text_sha256": "b248619f06c00a03b055c2f732a2dacc544f198addd0e8f2104d0f332010e341",
+        "statement": "Ein guter Tarif sollte Fremdhüter ohne Bezahlung, Fremdreiter und Reitbeteiligungen einschließen; die konkrete Nutzung muss bei Vertragsabschluss passend angegeben werden.",
+        "evidence_text": "Ein guter Tarif sollte Fremdhüter ohne Bezahlung, Fremdreiter und Reitbeteiligungen einschließen; die konkrete Nutzung muss bei Vertragsabschluss passend angegeben werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "Finanztip – Pferdehaftpflichtversicherung",
+        "source_url": "https://www.finanztip.de/haftpflichtversicherung/pferdehaftpflicht/",
+        "evidence_text_sha256": "8c5e678ab94730d24583a90de9350a512501130986b42732a632b2eff9ab7d82",
+        "statement": "Finanztip empfiehlt mindestens zehn Millionen Euro Versicherungssumme für Personen- und Sachschäden und nennt auch Regressansprüche von Sozialversicherungsträgern als wichtiges Leistungsmerkmal.",
+        "evidence_text": "Finanztip empfiehlt mindestens zehn Millionen Euro Versicherungssumme für Personen- und Sachschäden und nennt auch Regressansprüche von Sozialversicherungsträgern als wichtiges Leistungsmerkmal.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Allianz – Reitbeteiligung und Haftung",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/",
+        "evidence_text_sha256": "6ee766360be99963f0f06097425af36e1df7df44eb73c5d045b3834aba357780",
+        "statement": "Gelegentliche oder regelmäßige unentgeltliche Reiter werden als Fremdreiter eingeordnet; eine bezahlte regelmäßige Reitbeteiligung kann haftungsrechtlich anders behandelt werden.",
+        "evidence_text": "Gelegentliche oder regelmäßige unentgeltliche Reiter werden als Fremdreiter eingeordnet; eine bezahlte regelmäßige Reitbeteiligung kann haftungsrechtlich anders behandelt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_title": "Allianz – Reitbeteiligung und Haftung",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/reitbeteiligung/",
+        "evidence_text_sha256": "62822194a839c09dbe801272dba4d84a7983eb39616eba8b15e142591ff7b902",
+        "statement": "Eigenschäden von Mitreitern und Regressforderungen sind nicht in jedem Tarif gleich geregelt; deshalb müssen die konkreten Versicherungsbedingungen geprüft werden.",
+        "evidence_text": "Eigenschäden von Mitreitern und Regressforderungen sind nicht in jedem Tarif gleich geregelt; deshalb müssen die konkreten Versicherungsbedingungen geprüft werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
     },
-    "required_fact_ids":["F1","F2","F3","F4","F5","F6"],
-    "allowed_fact_ids":["F1","F2","F3","F4","F5","F6"],
-    "bound_links":[
-      {"role":"parent_category","href":"/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/","anchor":"Pferdehaftpflicht","block":"intro"},
-      {"role":"semantic_related","href":"/category/pferdehaftpflicht-beratung/","anchor":"Beratung Pferdehaftpflicht","block":"decision"},
-      {"role":"further_information","href":"/wissen/wissen-versicherungen-und-recht/","anchor":"Versicherungen und Recht","block":"further_information"}
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
     ],
-    "link_registry":[
-      {"href":"/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/","active":true},
-      {"href":"/category/pferdehaftpflicht-beratung/","active":true},
-      {"href":"/wissen/wissen-versicherungen-und-recht/","active":true}
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
     ],
-    "runtime_link_roles":["parent_category","semantic_related","further_information"],
-    "wordpress_category":{"id":0,"slug":"pferdehaftpflicht-beratung","taxonomy":"category","id_source":"WORDPRESS_REST_RESOLVE_AT_RUNTIME"},
-    "heading_intent_terms":["Pferdehaftpflicht","Fremdreiterrisiko","Reitbeteiligung","Versicherungsschutz","Bedingungen","Haftung"],
-    "comparison_source_bindings":[],
-    "table_decision":{"decision":"OMIT_NO_ADDED_VALUE","exception_code":"EXISTING_CHECKLIST_EQUIVALENT","rationale":"Die Kriterienliste bündelt die entscheidenden Prüfpunkte bereits scanbar; eine zusätzliche Tabelle würde denselben Kontrollnutzen nur wiederholen."},
-    "semantic_rule_results":{},
-    "table_multiword_exceptions":[],
-    "expected_list_name":"criteria"
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "anchor": "Pferdehaftpflicht",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "anchor": "Beratung Pferdehaftpflicht",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen und Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/pferdehaftpflicht/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdehaftpflicht-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdehaftpflicht",
+      "Fremdreiterrisiko",
+      "Reitbeteiligung",
+      "Versicherungsschutz",
+      "Bedingungen",
+      "Haftung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Kriterienliste bündelt die entscheidenden Prüfpunkte bereits scanbar; eine zusätzliche Tabelle würde denselben Kontrollnutzen nur wiederholen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
   },
-  "publish_allowed":false
+  "publish_allowed": false
 }
