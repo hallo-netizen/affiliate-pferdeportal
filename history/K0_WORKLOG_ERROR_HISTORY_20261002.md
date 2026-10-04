@@ -188,3 +188,80 @@ Nicht importieren:
 - Status darf daher nicht als produktseitig garantiertes `PASS` geführt werden.
 - Kein weiterer Eingriff in Artikelproduktion oder Qualitätsregeln daraus abgeleitet.
 
+
+
+## 2026-10-03/04 – Delta: Fresh-Run-/Inhaltsisolation, Rendering-Fix und frischer K0-Testartikel
+
+### E14 – Frischer K0-Start konnte alte fertige Ausgabe desselben Batch-Hashes wiederverwenden
+- Beobachteter Fehlweg: neuer Auftrag wurde zunächst gegen K9 geprüft und anschließend eine bereits vorhandene K0-`WORDPRESS_BATCH.json` desselben Batch-Hashes als Ergebnis akzeptiert.
+- Korrektur: K0-Fresh-Execution-Hardlock. Neuer Upload + `K0:start` verlangt immer einen neuen Run mit neuer Run-Identität und frischer Gate-Kette.
+- Alte `WORDPRESS_SINGLE.json`/`WORDPRESS_BATCH.json`, Writer-, LT-, PPM- oder Export-PASS dürfen einen neuen Auftrag nicht ersetzen.
+- Main-Router-Merge: `9a00fb6ee60fd908521e0be345754684e8a60e02`.
+- K0 bleibt alleiniger Produktionsweg; K9/K10 sind keine Laufroute.
+
+### E15 – Alte Inhalte waren noch nicht hart genug als Writer-/Repair-Quelle ausgeschlossen
+- Ziel: Jeder neue Artikel inhaltlich von Null; aktueller Upload ist Auftrags-/Artikelidentität.
+- Erlaubt: frische Recherche dieses Runs, aktuelle K0-Regeln, aktuelle Kategorie-/Link-Bindungen.
+- Verboten: alte Artikel, frühere Writer-/Repair-Texte, alte Fact-/Research-Pakete, frühere `real_runs/**`, `recovery/**`, Archive und bestehende Pferdeatelier-Artikel als Recherchequelle.
+- Zusätzlich gebunden: finale verifizierte WordPress-Datei muss als echte Chat-Datei geliefert werden; GitHub-/Raw-/Actions-/Artifact-Link ist keine Endausgabe.
+- Main-Router-Merge: `cff4ae618b2990d72856debaec9a12edce2de51f`.
+
+### E16 – Freshness-Hardlock brach bestehende K0-Selftests
+- Roter Selftest: Run `37153131743`, Ergebnis 3 Failures + 11 Errors.
+- Hauptursachen:
+  - Freshness-Isolation lief vor bestehenden Blockern und überdeckte erwartete Negativfälle;
+  - mehrere Test-Fixtures hatten noch keine frischen Research-Sources/Freshness-Receipts;
+  - Historical-Guard-Tokenisierung war fehlerhaft;
+  - validierter Freshness-Receipt wurde nicht in den immutable Writer-Job für die Seal-Nachprüfung übernommen.
+- Reparatur ohne Schutzabschwächung:
+  - bestehende Blocker-Reihenfolge wiederhergestellt;
+  - Fixtures angepasst;
+  - Tokenisierung korrigiert;
+  - Freshness-Receipt im Writer-Job gebunden.
+- Positiv-/Negativtest: PASS.
+- Vollständiger Reparatur-Selftest: 108/108 PASS.
+- Merge/Fix: `2d10588eb500490c3c36c05ce2e56700b5145385`.
+- Nachlauf-Selftest auf K0-Branch: Run `37184150503` = SUCCESS.
+
+### E17 – Rendering-Abstand wurde durch doppelte vertikale Margins vergrößert
+- Lokaler Negativtest reproduzierte 64 px Übergang: 32 px Rest-Margin des letzten sichtbaren Elements + 32 px Section-`margin-top`.
+- Positivtest mit ausschließlich dieser Korrektur: normale H2 32/32 px, Liste/Fazit-Übergang 32 px.
+- Kein Farb-, Linien-, Karten-, Schrift-, Inhalts-, Tabellen-, LT-, PPM- oder Importer-Umbau.
+- Main-Merge: `f853fb61384385fb97d5de020b7ea6903890ea35`.
+- Main-Head beim Abschlussrefresh: exakt derselbe Commit.
+- Live-WordPress-Readback dieses Designfixes wurde in diesem Chat nicht durchgeführt.
+
+### E18 – Freshness-Guard blockierte den aktuellen Writer-Draft fälschlich gegen sich selbst
+- Frischer Testlauf: `real_runs/k0/test-20261004-fremdreiter-ae3b6c46`.
+- Writer-Accept Run `37184874665` und Wiederholung `37185114685`: FAIL.
+- Writer-Seal selbst war jeweils PASS; Blocker:
+  `K0_HISTORICAL_TEXT_REUSE_BLOCKED:writer_drafts/test-20261004-fremdreiter-ae3b6c46.json`.
+- Ursache: Historical-Content-Guard verglich den frisch zu prüfenden aktuellen Draft als vermeintliche Historie mit seinem eigenen versiegelten Text.
+- Minimalfix: ausschließlich den exakt aktuellen Source-Draft vom Historien-Scan ausschließen; echte historische Drafts bleiben blockiert.
+- Reparaturcommit: `7c9293d4b0ac1038eaa049aecb9bb06b9dfaa804`.
+- K0-Selftest danach: Run `37185402642` = SUCCESS.
+
+### E19 – Frischer Testartikel hatte anschließend zwei echte LanguageTool-6.8-Funde
+- Writer-Accept Run `37185402627`: FAIL erst bei LanguageTool 6.8.
+- Vor LT waren Historical-Guard, Writer-Contract, PPM 6.7.9/104 Regeln und alle 84 Pre-LT-Hardrules PASS.
+- LT 6.8 meldete exakt 2 Funde:
+  - `GERMAN_WORD_REPEAT_BEGINNING_RULE`;
+  - `DE_SUBJECT_VERB_AGREEMENT`.
+- Nur diese Textfunde wurden im frischen Draft repariert; Commit `5837c9d9a114b9618f491ef217bb500249767cdc`.
+
+### E20 – Frischer K0-Testartikel vollständig PASS
+- Artikel: „Pferdehaftpflicht mit Fremdreiterrisiko auswählen“.
+- Writer-Accept Run `37185472620`: SUCCESS.
+- Parallel-Selftest Run `37185472673`: SUCCESS.
+- Persistenzcommit des fertigen Outputs: `2e515462a425f826aa711fca2dda53058891e58b`.
+- Run-ID: `run:f83847e91c2fec0d855df87f`.
+- Historical-Content-Guard: PASS, `historical_text_reuse=NOT_DETECTED`, 79 historische Dateien geprüft.
+- Writer: 756 Wörter, Fazit-Ratio 0.100529, Writer/Section/Fazit/Weiterführende-Informationen PASS.
+- Pre-LT: 84 Hardrules PASS; PPM 6.7.9 = PASS, 104 Regeln.
+- LanguageTool 6.8: PASS, 0 Findings.
+- Finale Regeln: PASS (WordPress-Export wurde nur nach finalem Full-Rule-PASS erzeugt).
+- `WORDPRESS_SINGLE.json`: `SYSTEM4_WORDPRESS_HANDOFF_V1`, `direct_wordpress_upload_ready=true`, `publish_allowed=false`.
+- Artikel-ID: `article:11bf036b5c0473935b65167e`.
+- Finaler Body-Hash: `df66e162267769c5e8273ac525ad68ccc4ebf65b473cf00daf5f9396706fe0d0`.
+- `WORDPRESS_VERIFY.json`: PASS, canonical binding PASS.
+- Offene Benutzeranforderung nach diesem PASS: echte Chat-Datei materialisieren und HTML-Vorschau aus genau diesem verifizierten Body erzeugen. Keine neue Produktion nötig.
