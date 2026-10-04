@@ -18,7 +18,7 @@ def _plain(value):
     return re.sub(r'\s+', ' ', value).strip()
 
 def _words(value):
-    return re.findall(r'[\\wÄÖÜäöüß-]+', _plain(value).casefold(), re.UNICODE)
+    return re.findall(r'[\wÄÖÜäöüß-]+', _plain(value).casefold(), re.UNICODE)
 
 def _shingles(words, width=SHINGLE_WORDS):
     if len(words) < width:

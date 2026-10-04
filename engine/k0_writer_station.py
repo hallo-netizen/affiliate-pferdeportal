@@ -40,10 +40,6 @@ def _job_core(intake, portal, ctx):
         raise Blocked('K0_AUTHORING_CONTEXT_RUN_INSTANCE_INVALID')
     if ctx.get('identity')!=ident:
         raise Blocked('K0_AUTHORING_CONTEXT_IDENTITY_MISMATCH')
-    try:
-        input_isolation=validate_input_isolation(ctx,run_instance_id)
-    except Exception as exc:
-        raise Blocked('K0_INPUT_ISOLATION_BLOCKED:'+str(exc)) from exc
     for forbidden in ('html','body','content_html','draft','article_text'):
         if forbidden in ctx:
             raise Blocked('K0_AUTHORING_CONTEXT_TEXT_PAYLOAD_FORBIDDEN:'+forbidden)
@@ -66,6 +62,10 @@ def _job_core(intake, portal, ctx):
         full_rule_binding=rule_binding(full_rule_bundle)
     except Exception as exc:
         raise Blocked('K0_AUTHORING_FULL_RULE_CONTEXT_INVALID:'+str(exc)) from exc
+    try:
+        input_isolation=validate_input_isolation(ctx,run_instance_id)
+    except Exception as exc:
+        raise Blocked('K0_INPUT_ISOLATION_BLOCKED:'+str(exc)) from exc
     return {
       'contract':JOB_CONTRACT,
       'status':'OPEN',
@@ -78,6 +78,7 @@ def _job_core(intake, portal, ctx):
       'writer_rule_bundle':full_rule_bundle,
       'writer_rule_binding':full_rule_binding,
       'input_isolation':input_isolation,
+      'research_freshness_receipt':ctx['research_freshness_receipt'],
       'writer_policy':POLICY,
       'writer_policy_sha256':stable(POLICY),
       'publish_allowed':False,

@@ -40,13 +40,30 @@ def portal(i):
     }
 
 def context(i):
+    ident=i['items'][0]
+    rc=rule_context(ident)
+    fact_pack={
+        'contract':'canonical_fact_pack_v1',
+        'status':'SOURCE_VERIFIED_PRODUCTION_READY',
+        'sources':[{'source_title':row['source_title'],'source_url':row['source_url']} for row in rc['research_claims'].values()],
+        'claims':[row['statement'] for row in rc['research_claims'].values()],
+    }
+    freshness={
+        'contract':'K0_RESEARCH_FRESHNESS_GUARD_V1',
+        'status':'PASS',
+        'historical_fact_pack_reuse':False,
+        'historical_research_packet_reuse':False,
+        'fact_pack_sha256':hashlib.sha256(stable(fact_pack).encode()).hexdigest(),
+        'research_claims_sha256':hashlib.sha256(stable(rc['research_claims']).encode()).hexdigest(),
+    }
     return {
         'contract':'K0_AUTHORING_CONTEXT_V1',
         'run_instance_id':'run:aaaaaaaaaaaaaaaaaaaaaaaa',
-        'identity':i['items'][0],
+        'identity':ident,
         'content_profile':{'search_intent':'DECISION_SUPPORT'},
-        'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},
-        'rule_context':rule_context(i['items'][0]),
+        'production_context':{'fact_pack':fact_pack,'production_plan_item':{'article_type':'Beratung'}},
+        'rule_context':rc,
+        'research_freshness_receipt':freshness,
         'publish_allowed':False
     }
 
