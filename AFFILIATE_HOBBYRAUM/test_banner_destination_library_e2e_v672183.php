@@ -31,7 +31,7 @@ $make=function($external,$title,$destination,$tracking,$width=1200,$height=120)u
   $raw=array(
     'creative_id'=>$external,'creative_type'=>'banner','creative_title'=>$title,
     'creative_description'=>'','creative_tag'=>'Pferd',
-    'image_source'=>'https://img.example.test/'.$external.'.jpg',
+    'image_source'=>'https://example.com/'.$external.'.jpg',
     'destination_url'=>$destination,'tracking_url'=>$tracking,
     'width'=>(string)$width,'height'=>(string)$height,'status'=>'active'
   );
@@ -62,7 +62,7 @@ $render=function($post_id,$slot)use($rm,$o){return (string)$rm('render_affiliate
 $getctx=function($id)use($rm,$o){return $rm('get_content_context')->invoke($o,$id);};
 
 // 1) Existing banner: real destination URL -> durable exact edge -> rendered HTML.
-$sch=$make('dest-schabracken','Schabracken Banner','https://shop.example.test/schabracken/','https://shop.example.test/click/schabracken');
+$sch=$make('dest-schabracken','Schabracken Banner','https://example.com/schabracken/','https://example.com/click/schabracken');
 $payload=json_decode((string)$sch['payload'],true);
 dchk(($payload['_destination_source']??'')==='provider_explicit','explicit_destination_source_stored');
 $r=$plan($sch); dchk((int)($r['active']??0)>0,'existing_banner_materialized_active');
@@ -79,14 +79,14 @@ dchk(in_array('page:schabracken',(array)($camp['automation_target_keys']??array(
 dchk(in_array('product_after_category_tiles',(array)($camp['placements']??array()),true),'campaign_contains_compatible_category_slot');
 
 // 2) Future banner imported later follows same path automatically.
-$helmet=$make('dest-reithelme','Reithelme Banner','https://shop.example.test/reithelme/','https://shop.example.test/click/reithelme');
+$helmet=$make('dest-reithelme','Reithelme Banner','https://example.com/reithelme/','https://example.com/click/reithelme');
 $r=$plan($helmet);dchk((int)($r['active']??0)>0,'future_banner_materialized_active');
 $helmet=$refresh($helmet);$hrec=$records($helmet);dchk(strpos((string)($hrec[0]['target_label']??''),'Reithelme')!==false,'future_banner_maps_from_destination_url');
 $html=$render($reithelme,'product_after_category_tiles');
 dchk(strpos($html,'dest-reithelme')!==false,'future_banner_visible_in_final_html');
 
 // 3) No trustworthy destination => general fallback, not invented topic and not empty.
-$general=$make('dest-general','Allgemeiner Banner','','https://shop.example.test/general-click');
+$general=$make('dest-general','Allgemeiner Banner','','https://example.com/general-click');
 $payload=json_decode((string)$general['payload'],true);
 dchk(($payload['_destination_source']??'')==='tracking_fallback','tracking_only_marked_as_nonsemantic');
 $r=$plan($general);dchk((int)($r['active']??0)>0,'tracking_only_banner_materialized_as_general_fallback');
@@ -97,17 +97,17 @@ $html=$render($haltung,'product_after_category_tiles');
 dchk(strpos($html,'dest-general')!==false,'general_fallback_visible_on_unmatched_page');
 
 // 4) Technical negative: square banner may exist, but never fills wide category slot.
-$square=$make('dest-square','Quadrat Banner','https://shop.example.test/schabracken/','https://shop.example.test/click/square',400,400);
+$square=$make('dest-square','Quadrat Banner','https://example.com/schabracken/','https://example.com/click/square',400,400);
 $r=$plan($square);$squareCamp=$campaign($square);
 $html=$render($schabracken,'product_after_category_tiles');
 dchk(strpos($html,'dest-square')===false,'invalid_geometry_never_fills_wide_slot');
 dchk(!in_array('product_after_category_tiles',(array)($squareCamp['placements']??array()),true),'invalid_geometry_not_stored_for_wide_slot');
 
 // 5) Changed target URL invalidates old mapping and produces a new edge.
-$mutable=$make('dest-mutable','Wechsel Banner','https://shop.example.test/schabracken/','https://shop.example.test/click/mutable');
+$mutable=$make('dest-mutable','Wechsel Banner','https://example.com/schabracken/','https://example.com/click/mutable');
 $plan($mutable);$mutable=$refresh($mutable);
 $before=$records($mutable);dchk(strpos((string)($before[0]['target_label']??''),'Schabracken')!==false,'mutable_initial_edge_schabracken');
-$mutable2=$make('dest-mutable','Wechsel Banner','https://shop.example.test/reithelme/','https://shop.example.test/click/mutable');
+$mutable2=$make('dest-mutable','Wechsel Banner','https://example.com/reithelme/','https://example.com/click/mutable');
 $cleared=$records($mutable2);
 dchk(empty($cleared),'changed_destination_clears_old_mapping_before_replan');
 $plan($mutable2);$mutable2=$refresh($mutable2);$after=$records($mutable2);
@@ -117,7 +117,7 @@ dchk(strpos((string)($after[0]['target_label']??''),'Reithelme')!==false,'change
 $rankMethod=$rm('campaign_match_rank');
 $camp=$campaign($sch);
 $ctx=$getctx($haltung);$ctx['slot_type']='product_after_category_tiles';
-$camp['destination_url']='https://shop.example.test/haltung/';
+$camp['destination_url']='https://example.com/haltung/';
 $q0=(int)$wpdb->num_queries;$h0=$http_calls;
 $rank=null;for($i=0;$i<1000;$i++){$rank=$rankMethod->invoke($o,$camp,$ctx);}
 $q1=(int)$wpdb->num_queries;$h1=$http_calls;
