@@ -1,0 +1,19 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "maximum_articles": 0,
+  "maximum_articles_per_type": 0,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "kappzaum-faq",
+      "plan_slot": "7b7ca2faa5cb88860823d0142e4c223dda8f8ee8c338d81b75b08ffa88e94ad2",
+      "target_keyword": "Kappzaum über Trense",
+      "title": "Kann man einen Kappzaum über einer Trense tragen?"
+    }
+  ],
+  "batch_sha256": "07dbf429b3debde0506ccc7278a7fd4379588d897075aef13fc60ca369b1527f"
+}
