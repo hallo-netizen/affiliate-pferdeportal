@@ -78,6 +78,7 @@ def _job_core(intake, portal, ctx):
       'writer_rule_bundle':full_rule_bundle,
       'writer_rule_binding':full_rule_binding,
       'input_isolation':input_isolation,
+      'research_freshness_receipt':ctx['research_freshness_receipt'],
       'writer_policy':POLICY,
       'writer_policy_sha256':stable(POLICY),
       'publish_allowed':False,
