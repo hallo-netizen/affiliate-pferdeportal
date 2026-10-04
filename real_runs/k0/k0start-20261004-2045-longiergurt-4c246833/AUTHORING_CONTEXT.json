@@ -1,0 +1,185 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+    "target_keyword": "Wie lege ich einen Longiergurt an",
+    "title": "Wie lege ich einen Longiergurt an?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "BUSSE – Größenfinder Longiergurt",
+          "source_url": "https://www.busse-reitsport.de/ratgeber/groessenfinder/longiergurt/"
+        },
+        {
+          "source_title": "Pferd und Mensch – Ausbildung Jungpferde",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/ausbildung-jungpferde-09-2024/"
+        },
+        {
+          "source_title": "RidersDeal – Longiergurt: Sitz, Größe & richtig anlegen",
+          "source_url": "https://www.ridersdeal.com/ratgeber/longiergurt"
+        },
+        {
+          "source_title": "Krämer Pferdesport – Longiergurte",
+          "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte"
+        }
+      ],
+      "claims": [
+        "Der Longiergurt soll hinter dem Widerrist liegen; Schulter und Ellbogen müssen Bewegungsfreiheit behalten, und der Bauchgurt wird etwa eine Handbreit hinter dem Ellbogen geschlossen.",
+        "Ein Longiergurt wird zunächst aufgelegt, dann geschlossen und nur so weit angezogen, dass er weder nach hinten rutscht noch das Pferd durch zu starken Druck einengt.",
+        "Beim Anlegen wird der Longiergurt mittig aufgelegt, zunächst locker geschlossen und anschließend auf beiden Seiten gleichmäßig nachgegurtet; der Sitz wird danach erneut kontrolliert.",
+        "Eine Longiergurt-Unterlage oder gefaltete Schabracke kann unter dem Gurt liegen; entscheidend bleibt, dass der Gurt widerrist- und schulterfrei sitzt und nicht nach vorn in die Ellbogenbeuge rutscht."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie lege ich einen Longiergurt an",
+      "topic": "Wie lege ich einen Longiergurt an?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie lege ich einen Longiergurt an?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "BUSSE – Größenfinder Longiergurt",
+        "source_url": "https://www.busse-reitsport.de/ratgeber/groessenfinder/longiergurt/",
+        "evidence_text_sha256": "bc427f7039b2b7f7cbfae36de48ab413d27b49c9625192cd8b013c8a28e74858",
+        "statement": "Der Longiergurt soll hinter dem Widerrist liegen; Schulter und Ellbogen müssen Bewegungsfreiheit behalten, und der Bauchgurt wird etwa eine Handbreit hinter dem Ellbogen geschlossen.",
+        "evidence_text": "Der Longiergurt soll hinter dem Widerrist liegen; Schulter und Ellbogen müssen Bewegungsfreiheit behalten, und der Bauchgurt wird etwa eine Handbreit hinter dem Ellbogen geschlossen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Pferd und Mensch – Ausbildung Jungpferde",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/ausbildung-jungpferde-09-2024/",
+        "evidence_text_sha256": "696a1bc82d28318643a8d7f09255ad4d104b8156fc1b8f6efbbf50ce33b4850e",
+        "statement": "Ein Longiergurt wird zunächst aufgelegt, dann geschlossen und nur so weit angezogen, dass er weder nach hinten rutscht noch das Pferd durch zu starken Druck einengt.",
+        "evidence_text": "Ein Longiergurt wird zunächst aufgelegt, dann geschlossen und nur so weit angezogen, dass er weder nach hinten rutscht noch das Pferd durch zu starken Druck einengt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "RidersDeal – Longiergurt: Sitz, Größe & richtig anlegen",
+        "source_url": "https://www.ridersdeal.com/ratgeber/longiergurt",
+        "evidence_text_sha256": "ab23c37e1e7dec650f4bfbc4150a15ba0c121bc96c7a37c6948b90784e4ef90a",
+        "statement": "Beim Anlegen wird der Longiergurt mittig aufgelegt, zunächst locker geschlossen und anschließend auf beiden Seiten gleichmäßig nachgegurtet; der Sitz wird danach erneut kontrolliert.",
+        "evidence_text": "Beim Anlegen wird der Longiergurt mittig aufgelegt, zunächst locker geschlossen und anschließend auf beiden Seiten gleichmäßig nachgegurtet; der Sitz wird danach erneut kontrolliert.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Krämer Pferdesport – Longiergurte",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+        "evidence_text_sha256": "5a968d280eff8a0bb93be4dc2a1a1d6fd1ad418359b32825ad4954fb8fd53470",
+        "statement": "Eine Longiergurt-Unterlage oder gefaltete Schabracke kann unter dem Gurt liegen; entscheidend bleibt, dass der Gurt widerrist- und schulterfrei sitzt und nicht nach vorn in die Ellbogenbeuge rutscht.",
+        "evidence_text": "Eine Longiergurt-Unterlage oder gefaltete Schabracke kann unter dem Gurt liegen; entscheidend bleibt, dass der Gurt widerrist- und schulterfrei sitzt und nicht nach vorn in die Ellbogenbeuge rutscht.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/training/training-longieren/longiergurte/",
+        "anchor": "Longiergurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/longiergurte-faq/",
+        "anchor": "FAQ zu Longiergurten",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Longieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/training/training-longieren/longiergurte/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-faq/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "longiergurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Longiergurt",
+      "Widerrist",
+      "Schulterfreiheit",
+      "Ellbogen",
+      "Gurtlage",
+      "Unterlage",
+      "Sitz",
+      "nachgurten",
+      "Kontrolle",
+      "Longieren"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die richtige Reihenfolge beim Anlegen lässt sich als kurze Schrittfolge klarer darstellen als in einer Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
