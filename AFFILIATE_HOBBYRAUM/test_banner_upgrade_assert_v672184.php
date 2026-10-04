@@ -15,6 +15,7 @@ $render=function($id,$slot)use($rm,$o){return (string)$rm('render_affiliate_slot
 // 1) New automatic contract is immediate: legacy automatic source can no longer win.
 $preMigration=$render((int)$f['sch'],'product_after_category_tiles');
 uchk(strpos($preMigration,'legacy-sanovet')===false,'automatic_pool_rejects_legacy_banner_before_migration');
+uchk(strpos($preMigration,'stale-sanovet-library')!==false,'PRE_MIGRATION_stale_library_edge_reproduces_live_failure',substr(strip_tags($preMigration),0,160));
 
 // 2) This release must NOT restart the full 4000-row product/banner pool.
 $call('ensure_full_pool_automation');
@@ -37,6 +38,13 @@ uchk(absint($result['processed']??0)>=1,'banner_only_migration_processed_rows',w
 $after=$render((int)$f['sch'],'product_after_category_tiles');
 uchk(strpos($after,'library-schabracken')!==false,'POST_UPGRADE_relevant_library_banner_visible',substr(strip_tags($after),0,160));
 uchk(strpos($after,'legacy-sanovet')===false,'POST_UPGRADE_wrong_sanovet_absent');
+uchk(strpos($after,'stale-sanovet-library')===false,'POST_UPGRADE_stale_library_sanovet_absent');
+
+$staleRow=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$creativeTable} WHERE identity_hash=%s",(string)$f['stale_identity']),ARRAY_A);
+$staleTargets=is_array($staleRow)?json_decode((string)($staleRow['topic_targets']??''),true):array();
+$staleTargets=is_array($staleTargets)?$staleTargets:array();
+$staleFirst=$staleTargets[0]??array();
+uchk(strpos((string)($staleFirst['target_label']??''),'Fütterung')!==false,'POST_UPGRADE_stale_edge_recomputed_from_real_destination',wp_json_encode($staleFirst));
 
 global $wpdb;
 $creativeTable=$call('creative_library_table');
