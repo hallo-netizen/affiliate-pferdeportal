@@ -890,3 +890,24 @@ Belegt im E2E:
 **Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672177_schabracken_real_hierarchy_rootfix_20261002.md`
 
 **Status:** LIVE_FAIL_6_72_176 / TEST_FIXTURE_CONTEXT_MISMATCH_PROVEN / 6_72_177_LOCAL_CANDIDATE_PASS / EXACT_WORDPRESS_MARIADB_FULL_GATE_OPEN.
+
+
+## AFF-ERR-044 — Relevanzreihenfolge konnte exakte Zielkante hinter breiterem Runtime-Treffer verlieren
+
+**Datum / Arbeitsbindung:** 04.10.2026.
+
+**Symptom:** Die verbindliche Bannerreihenfolge `exakt -> weiterer Themenkreis -> allgemeiner/technisch gültiger Fallback` war im zentralen Runtime-Ranking nicht durchgehend garantiert. Ein früher zurückgegebener URL-/Runtime-Thementreffer konnte eine später vorhandene exakte gespeicherte Zielkante abschneiden. Gleichzeitig waren einzelne Banner-Slot-Aliase, insbesondere `category_recommendation`, im zentralen Creative-Type-Gate nicht als Banner typisiert; dadurch war der letzte themenfreie Pflicht-Fallback nicht auf jeder Ebene gleich abgesichert.
+
+**Root Cause:** Mehrere Relevanzquellen wurden in einer Reihenfolge mit frühen Returns ausgewertet, statt die bereits materialisierte exakte Zielkante zuerst als harte Themenstufe zu behandeln. Die technische Banner-Slotliste und die Banner-Distributionsliste waren außerdem nicht vollständig deckungsgleich.
+
+**Nutzerentscheidung 04.10.2026:** Seiten, Kategorien, Beiträge und Glossar verwenden einheitlich: 1) exaktes Thema, 2) weiterer Themenkreis, 3) danach Thema egal, sofern Banner aktiv und technisch/slotseitig gültig ist. Für Pferderassen gilt kein künstlicher Themenzwang; technisch gültige Rassenbanner werden in einer gemeinsamen Relevanzstufe durch die bereits vorhandene stabile Partner-/Creative-Verteilung verteilt.
+
+**Nicht wiederholen:** Keine neue Sonderlogik pro Seite/Kategorie/Provider. Eine zentrale Bannerreihenfolge; technisch ungültige Banner bleiben ausgeschlossen. Rassen nutzen die bestehende stabile Verteilung, keine zweite Verteilungsmaschine. 6.72.171-Performancepfade, Request-Caches, Providerlogik, eBay/Idealo/GTIN/Housekeeping und Renderer bleiben unverändert.
+
+**POSITIV:** exakte gespeicherte Zielkante gewinnt auf Seite/Kategorie/Beitrag/Glossar vor breiterem URL-/Runtime-Thementreffer; breiter Themenkreis gewinnt vor themenfreiem Fallback; ohne Themenmatch bleibt ein technisch gültiger aktiver Banner lieferbar; `category_recommendation` und äquivalente Banner-Slots erhalten dieselbe Banner-Fallbacklogik.
+
+**NEGATIV:** Produkt-Slots erhalten keinen Banner-Pflichtfallback; technisch falsches Format/Veto/inaktiv bleibt ausgeschlossen; Rassen-Themenbegriffe erzeugen keinen künstlichen Vorrang.
+
+**PERFORMANCE:** keine Provider-/DB-/Remote-Abfrage im neuen Rassenweg; vorhandene request-lokale Ranking-/Kandidaten-Caches bleiben unangetastet.
+
+**Status:** ROOT_CAUSE_PROVEN / LOCAL_KISS_POSNEG_PRETEST_PASS / SOURCE_FIX_IN_PROGRESS.
