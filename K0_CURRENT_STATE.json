@@ -291,5 +291,24 @@
     "k0_selftest_result": "SUCCESS",
     "fresh_regression_wordpress_single_ref": "real_runs/k0/fresh-20261003-1818-fremdreiter-759950a7/WORDPRESS_SINGLE.json",
     "fresh_regression_writer_accept_run": 37147496645
+  },
+  "fresh_run_isolation": {
+    "status": "PASS_HARDLOCK_ACTIVE",
+    "current_upload_only_assignment_authority": true,
+    "new_upload_starts_new_run": true,
+    "prior_run_state_must_not_override_new_upload": true,
+    "fresh_research_receipt_required": true,
+    "new_research_session_required": true,
+    "historical_article_text_as_input": "FORBIDDEN",
+    "historical_research_artifact_as_input": "FORBIDDEN",
+    "exact_prior_sealed_body_reuse": "BLOCK",
+    "historical_similarity_as_blocker": false,
+    "historical_information_blacklist": false,
+    "independently_rediscovered_same_sources_facts_allowed": true,
+    "full_topic_research_required_each_new_run": true,
+    "code_commit": "03317f060e707c69bf97f9971179ea5fdb91d932",
+    "selftest_run": 37221400727,
+    "selftest_result": "SUCCESS_99_TESTS",
+    "publish_allowed": false
   }
 }
