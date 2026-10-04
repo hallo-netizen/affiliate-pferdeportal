@@ -351,25 +351,38 @@ Persistierte Arbeitsartefakte in der persönlichen Projektbibliothek:
 - `/Pferdeatelier/PSTE-05732-LANE-B-110-DECISIONS.json`
   - Library-ID: `libfile_a0aa30a875188191b361446d51ebcf5c`
 
+
+## KORREKTUR 2026-10-04 – CHAT-SEITIGE 110ER ENTSCHEIDUNG NICHT AUTORITATIV
+
+Frische Prüfung des realen PSTE-0.57.32-Codes und einzelner 110er Chat-Auswertungen zeigt: Die im Chat erzeugte Datei `PSTE-05732-LANE-B-110-DECISIONS.json` darf **nicht** als WordPress-Entscheidungsquelle angewendet werden.
+
+Konkreter Gegenbeleg:
+- Titel: `Wie heißt die Decke unterm Sattel beim Pferd?`;
+- der aktuelle Family-V2-Pfad hatte `Unterdecken` als Match, während die redaktionelle Normalisierung korrekt `REVIEW_REQUIRED` / `EDITORIAL_TOPIC_FAMILY_NOT_SEMANTICALLY_PRESENT` hält;
+- eine pauschale Chat-Regel „bestehendes Family-Match bestätigen“ würde damit einen fachlich falschen Match automatisieren.
+
+Folge:
+- die 110er Chat-Klassifikation ist **nur Audit/Arbeitsanalyse**, keine Freigabe und kein Apply-Paket;
+- keine der 110 Entscheidungen wird außerhalb von WordPress in den Bestand geschrieben;
+- die vorhandene WordPress-Oberfläche `SEO Themenengine → Themenprüfung` ist der autoritative manuelle Review-/Korrekturweg;
+- dort existieren bereits die Originalaktionen `Beitragsart korrigieren` und `Entscheidung speichern` inklusive normaler Gate-/Historienlogik;
+- kein Bulk-Bypass, kein Import einer Chat-Entscheidungsdatei.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05732_LANE_B_110_NOT_YET_APPLIED_THROUGH_EXISTING_REVIEW_REENTRY`
+`PSTE_WORDPRESS_REVIEW_PROCESS_MUST_REMAIN_AUTHORITATIVE`
 
-Die 694 eindeutigen Titel sind vollständig A/B/C/D-klassifiziert. Solange **110 Lane-B-Fälle** mit bereits vorhandener Evidenz noch nicht über die bestehenden Review-/Normal-Reentry-Pfade angewendet und readback-bestätigt sind, darf keine neue externe Recherche gestartet werden.
+Die 695 Titel sind technisch korrekt in 320 Struktur / 372 Review / 3 nicht produzierend klassifiziert. Die anschließenden fachlichen Entscheidungen dürfen nicht aus einer Chat-Heuristik in WordPress übernommen werden. Mindestens ein konkreter 110er Chat-Fall ist als falscher Auto-Match widerlegt.
 
 ## GENAU EINE NEXT ACTION
 
-`APPLY_05732_LANE_B_110_THROUGH_EXISTING_REVIEW_AND_NORMAL_REENTRY`
+`USE_EXISTING_WORDPRESS_THEMENPRUEFUNG_AND_DERIVE_ONLY_VALIDATED_GENERIC_AUTOMATION`
 
-1. Ausschließlich die 110 vorbereiteten Lane-B-Entscheidungen verwenden.
-2. Keine neue Architektur und **kein neues Plugin**.
-3. Bestehende PSTE-Felder/Review-/Sandbox-/Normal-Reentry-Pfade verwenden:
-   - 92 vorhandene Familienrelationen fachlich bestätigen und normal reentry;
-   - 9 sichere bestehende Familienbindungen setzen und normal reentry;
-   - 9 vorbereitete Artikeltyp-/Zielkategorieentscheidungen setzen und normal reentry.
-4. Danach Export-Readback: Welche der 110 erreichen NORMAL_PASS/planbare Metadaten, welche bleiben mit neuem exakten Gate offen?
-5. Erst danach Lane C bearbeiten. Lane D bleibt geparkt.
-6. Keine Provider-/DataForSEO-Neurecherche; kein Publish.
+1. Operative Entscheidungen ausschließlich in WordPress unter `SEO Themenengine → Themenprüfung` führen.
+2. Keine 110er Chat-Datei importieren/anwenden.
+3. Vor jeder weiteren Automatisierung die Review-Gruppen gegen reale Gegenbeispiele prüfen und nur generische Regeln automatisieren, die positive **und** negative Tests bestehen.
+4. Kein neuer externer Provider-/DataForSEO-Lauf.
+5. Keine Gate-Absenkung und kein Bulk-Bypass.
 
 ## NICHT ANFASSEN
 
