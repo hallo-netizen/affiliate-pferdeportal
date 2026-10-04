@@ -7,7 +7,7 @@ from engine.k0_input_isolation import validate, Blocked
 def stable(x):
     return hashlib.sha256(json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
-def context(source_url='https://example.org/fresh-source'):
+def context(source_url='https://example.org/fresh-source', run_id='run:' + 'a'*24):
     fact_pack = {
         'contract': 'canonical_fact_pack_v1',
         'status': 'SOURCE_VERIFIED_PRODUCTION_READY',
@@ -24,7 +24,7 @@ def context(source_url='https://example.org/fresh-source'):
     provenance = {
         'contract':'K0_RESEARCH_RETRIEVAL_PROVENANCE_V1',
         'status':'PASS',
-        'run_instance_id':'run:' + 'a'*24,
+        'run_instance_id':run_id,
         'source_urls_sha256':stable([source_url]),
         'retrievals':[{
             'source_url':source_url,
@@ -71,27 +71,27 @@ class TestK0InputIsolation(unittest.TestCase):
             validate(x, 'run:' + 'a'*24)
 
     def test_missing_freshness_receipt_blocks(self):
-        x = context()
+        x = context(run_id='run:' + 'f'*24)
         x.pop('research_freshness_receipt')
         with self.assertRaisesRegex(Blocked, 'RESEARCH_FRESHNESS_RECEIPT_MISSING'):
             validate(x, 'run:' + 'f'*24)
 
     def test_repository_source_blocks(self):
         with self.assertRaisesRegex(Blocked, 'HISTORICAL_OR_PORTAL_SOURCE_FORBIDDEN'):
-            validate(context('https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/old.json'), 'run:' + 'b'*24)
+            validate(context('https://raw.githubusercontent.com/hallo-netizen/affiliate-pferdeportal/main/old.json', 'run:' + 'b'*24), 'run:' + 'b'*24)
 
     def test_live_portal_article_as_research_blocks(self):
         with self.assertRaisesRegex(Blocked, 'HISTORICAL_OR_PORTAL_SOURCE_FORBIDDEN'):
-            validate(context('https://pferde-atelier.de/alter-artikel/'), 'run:' + 'c'*24)
+            validate(context('https://pferde-atelier.de/alter-artikel/', 'run:' + 'c'*24), 'run:' + 'c'*24)
 
     def test_historical_repo_path_reference_blocks(self):
-        x = context()
+        x = context(run_id='run:' + 'd'*24)
         x['note'] = 'recovery/current16-input/old.md'
         with self.assertRaisesRegex(Blocked, 'HISTORY_REFERENCE_FORBIDDEN'):
             validate(x, 'run:' + 'd'*24)
 
     def test_claim_must_belong_to_current_fact_pack(self):
-        x = context()
+        x = context(run_id='run:' + 'e'*24)
         x['rule_context']['research_claims']['F1']['source_url'] = 'https://other.example/fact'
         with self.assertRaisesRegex(Blocked, 'CLAIM_SOURCE_NOT_IN_FRESH_FACT_PACK'):
             validate(x, 'run:' + 'e'*24)
