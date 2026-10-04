@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 179,
+  "generation": 180,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "96aa0861a05d7444776418b6f567bbff30272fb30426d0b8c81a1ae02282e1b9",
+    "manifest_sha256": "e046ec7c45317f283799caaef78287eb375b1c7c5b5eae9cf9eb3c052e1fc286",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,15 +36,15 @@
   },
   "active_candidate": {
     "version": "6.72.180",
-    "status": "CANDIDATE_LOCAL_POSNEG_PASS_ROOTCAUSE_PROOF_REQUIRED",
+    "status": "KISS_BANNER_GLOBAL_RELEVANCE_LOCAL_POSNEG_PASS_FULL_GATE_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "96aa0861a05d7444776418b6f567bbff30272fb30426d0b8c81a1ae02282e1b9",
+    "current_source_manifest_sha256": "e046ec7c45317f283799caaef78287eb375b1c7c5b5eae9cf9eb3c052e1fc286",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "5fb0dbfe6c92e6e8df40c3dd206a519d228a04c890affd7a3fb37f6d1749a2f5",
-    "candidate_reference_scope": "LOCAL_EXACT_SOURCE_ZIP_NOT_FINAL",
+    "candidate_reference_artifact_sha256": null,
+    "candidate_reference_scope": "SOURCE_CHANGED_LOCAL_KISS_POSNEG_PASS_NO_PACKAGE_FULL_GATE_OPEN",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_ASSIGNMENT_CONCEPT_ROOTCAUSE_READONLY",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_banner_assignment_concept_rootcause_handoff_20261002.md",
-    "current_focus_reason": "User explicitly rejected further Schabracken microfix/release-gate work. Before any additional fix or release action, compare the complete banner-assignment concept end-to-end against at least one known-working real page and prove the first exact divergence. No guessing.",
+    "current_focus": "BANNER_KISS_GLOBAL_RELEVANCE_IMPLEMENTED_FULL_GATE_OPEN",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_banner_kiss_global_relevance_local_posneg_20261004.md",
+    "current_focus_reason": "User explicitly bound one global banner order for pages, categories, posts and glossary: exact topic -> extended topic -> general fallback -> any technically valid active banner. Pferderassen are theme-neutral and reuse the existing stable partner/creative distribution. Root cause fixed in the central router only; local exact-method positive/negative tests pass; WordPress/MariaDB full gate remains open.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -113,7 +113,16 @@
         "SLOT",
         "OUTPUT",
         "GLOBAL_EMERGENCY_STOP"
-      ]
+      ],
+      "level_policy": {
+        "pages": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
+        "categories": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
+        "posts": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
+        "glossary": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
+        "breeds": "THEME_NEUTRAL_EXISTING_STABLE_PARTNER_CREATIVE_DISTRIBUTION"
+      },
+      "topicless_final_fallback_required": true,
+      "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION"
     },
     "awin_catalog_refresh": {
       "programme_list": "INDEPENDENT_READ_ONLY_REFRESH_REQUIRED_LAST_KNOWN_GOOD_ON_FAILURE",
@@ -150,7 +159,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "LIVE_FAIL_UNRESOLVED_READ_ONLY_ROOTCAUSE_PROOF_REQUIRED",
+      "status": "SOURCE_KISS_RELEVANCE_FIX_LOCAL_PASS_LIVE_READBACK_OPEN",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -522,13 +531,13 @@
     }
   },
   "execution_state": {
-    "state": "READ_ONLY_ROOTCAUSE_PROOF_REQUIRED",
-    "authorized_next_action": "COMPARE_WORKING_VS_FAILING_BANNER_ASSIGNMENT_CHAIN",
-    "bound_user_scope_action": "Read-only compare the complete banner-assignment chain for Schabrackendesigner/Schabracken against at least one known-working real banner/page pair. Capture concrete values at every stage and stop at the first proven divergence. No source fix, new version, release gate, installer or live install before this proof.",
-    "completion_condition": "FIRST_EXACT_END_TO_END_DIVERGENCE_PROVEN_AND_RECORDED",
-    "after_completion_action": "FIX_ONLY_THE_FIRST_PROVEN_ROOTCAUSE_THEN_RUN_ONE_BOUND_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_FULL_GATE",
+    "state": "SOURCE_FIX_LOCAL_KISS_POSNEG_PASS_FULL_GATE_REQUIRED",
+    "authorized_next_action": "RUN_CURRENT_SOURCE_WORDPRESS_MARIADB_BANNER_FULL_GATE",
+    "bound_user_scope_action": "Run one current-manifest WordPress/MariaDB positive-negative banner gate covering page, category, post, glossary, theme-free fallback and breed stable distribution. Preserve all 6.72.171 performance hardlocks. No new version/installer before that gate passes.",
+    "completion_condition": "CURRENT_MANIFEST_WORDPRESS_MARIADB_BANNER_POSNEG_AND_PERFORMANCE_REGRESSION_GATE_PASS",
+    "after_completion_action": "RELEASE_CHECK_THEN_BUILD_ONE_INSTALLER_AND_RUN_ONE_REAL_SERVER_READBACK",
     "no_optional_detours": true,
-    "sequence": 51,
+    "sequence": 52,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -536,7 +545,8 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_banner_assignment_concept_rootcause_handoff_20261002.md"
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_banner_kiss_global_relevance_local_posneg_20261004.md",
+    "evidence_sha256": "95edc4e3efcbf25aaad1a69aa0ff09ae8fe24a247aa32bbac1243940b263b06d"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
