@@ -1,90 +1,145 @@
-# Affiliate Router 6.72.184 – Live-Banner-Migration – Full E2E
+# Affiliate Router 6.72.184 – Banner-Library-Migration – Live-Fail Red/Green Full E2E
 
 Datum: 2026-10-04
 Workstream: AFFILIATE_ZENTRALE
 Version: 6.72.184
 Branch: affiliate-release-current
+Release: NICHT freigegeben; realer WordPress-Readback des korrigierten Installers offen.
 
-## Reale Ausgangslage
+## Ziel
 
-Auf der echten Schabracken-Seite war unter 6.72.183 weiterhin ein fachlich falscher SanoVet-Fütterungsbanner sichtbar. Damit war 6.72.183 live NICHT bestanden.
+Eine einzige automatische Bannerwahrheit über die Creative-Library:
+echte/decodierte Ziel-URL einmal auswerten -> Zielkante zentral speichern -> Frontend nur aus gespeicherter Zuordnung verteilen.
+Reihenfolge: exakt -> weiterer Themenkreis -> allgemein -> irgendein technisch gültiger aktiver Banner.
+Manuelle FIXED-Zuweisungen bleiben separat vorrangig.
+Keine Provider-Sonderlogik, keine zweite Frontend-Analyse, keine neuen Frontend-DB-/HTTP-Aufrufe.
 
-Root Cause:
-- 6.72.183 machte die Creative-Library zwar für neu/materialisiert erzeugte Banner zur gespeicherten Ziel-URL-Wahrheit.
-- Historische automatische Bannerkampagnen durften aber weiterhin parallel am Frontend-Ranking teilnehmen.
-- Zusätzlich existierte kein gezielter Upgrade-Lauf, der den vorhandenen Bannerbestand einmalig durch die neue Ziel-URL-Sammelstelle zieht.
-- Der generische Versions-Nachlauf würde stattdessen den gesamten Creative-Pool inklusive Produktzeilen erneut bearbeiten.
+## Reale Live-Negativevidence
 
-## KISS-Fix 6.72.184
+Der erste 6.72.184-Liveversuch zeigte auf der echten Schabracken-Seite weiterhin den SanoVet-Fütterungsbanner.
+Damit war der frühere 6.72.184-Installer mit SHA
+`bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`
+NICHT abnahmefähig und ist superseded.
 
-1. Automatische Bannerquelle ist ausschließlich `source=output_object_v4`, also die Creative-Library-Materialisierung.
-2. Historische/manuelle Kampagnen dürfen den automatischen Bannerpool nicht mehr parallel überstimmen.
-3. Feste manuelle Bannerzuordnungen bleiben über den bestehenden Fixed-Pfad wirksam.
-4. Ein eigener Banner-only-Migrationsworker verarbeitet nur aktive Banner aus der Creative-Library.
-5. Der generische Vollpool-Nachlauf wird für dieses reine Bannerrelease nicht gestartet.
-6. eBay-/Idealo-/Produktkampagnen werden nicht neu geplant.
-7. Frontend-Hotpath: keine neue DB-Abfrage, kein Remoteaufruf, keine URL-Neuanalyse.
+## Fehlender Gegenfall der alten Simulation
 
-## Source Upgrade E2E
+Der alte Test belegte:
+- Legacy-Automatik außerhalb der Creative-Library wird gesperrt.
+- Ein noch nicht materialisierter korrekter Library-Banner wird migriert.
 
-Run: 37223477984
-Ergebnis: SUCCESS
+Er belegte jedoch nicht:
+- echte Ziel-URL = Fütterung,
+- gleichzeitig bereits gespeicherte falsche Creative-Library-Kante = Schabracken,
+- anschließend Upgrade/Migration.
 
-Auf derselben WordPress-7.1.2/MariaDB-Installation:
-- 6.72.183 reproduziert falschen Legacy-Banner: PASS
-- relevanter Banner liegt unmaterialisiert in Creative-Library: PASS
-- Upgrade auf 6.72.184: PASS
-- Legacy-Automatik wird vor Migration ausgeschlossen: PASS
-- alter Vollpool-Event/Cursor entfernt, kein Rescan: PASS
-- Banner-only-Migration vollständig: PASS
-- relevanter Schabracken-Banner danach sichtbar: PASS
-- falscher SanoVet-Banner danach nicht sichtbar: PASS
-- gespeicherte Schabracken-Zielkante vorhanden: PASS
-- feste Legacy-Ausnahme bleibt sichtbar: PASS
-- feste Legacy-Ausnahme mischt nicht in Automatik: PASS
-- eBay-Produktkampagne bytegleich: PASS
-- Idealo-Produktkampagne bytegleich: PASS
-- zukünftiger Banner nutzt dieselbe Sammelstelle: PASS
-- keine Remoteaufrufe: PASS
+Genau dieser fehlende Zustand wurde nach dem Live-Fail ergänzt.
 
-Gesamt: 20/20 PASS.
+## Root Cause
 
-## Finales ZIP E2E
+`output_banner_destination_classification()` verwendet eine vorhandene gespeicherte Library-Kante als autoritative Eingabe.
+Der Banner-only-Migrationsworker von 6.72.184 rief denselben Planner auf, ohne die alte automatische Kante für die ausdrücklich angeordnete Re-Evaluation vorher zu verwerfen.
 
-Run: 37223792210
-Ergebnis: SUCCESS
+Folge:
+Eine alte falsche Kante konnte sich bei der Migration selbst bestätigen, obwohl die in derselben Library-Zeile gespeicherte echte Ziel-URL auf ein anderes Thema zeigte.
+
+## Roter Beweis vor Fix
+
+Source Upgrade Run: `37227361318`
+ZIP Upgrade Run: `37227361328`
+
+WordPress 7.1.2 + MariaDB.
+
+Fixture:
+- Creative: SanoVet/Fütterung.
+- echte Ziel-URL: `https://example.com/fuetterung-upgrade-e2e/`
+- absichtlich alter gespeicherter Target: `Ausrüstung Upgrade E2E > Schabracken Upgrade E2E`.
+
+Ergebnis:
+- falscher gespeicherter Zustand vor Migration reproduziert: PASS.
+- Migration läuft: PASS.
+- Performance-Hardlock: PASS.
+- entscheidende Assertion `POST_UPGRADE_stale_edge_recomputed_from_real_destination`: FAIL.
+- gespeicherter Target blieb Schabracken.
+
+Damit ist der reale Fehler als fehlender Gegenfall reproduziert.
+
+## KISS-Fix
+
+Nur im bestehenden einmaligen Banner-only-Migrationsworker:
+- für den gerade bearbeiteten aktiven Banner werden die abgeleiteten automatischen Felder `topic_targets`, `topic_score` und `classified_at` zurückgesetzt;
+- danach läuft unverändert der bestehende zentrale Planner;
+- der bestehende Ziel-URL-Klassifizierer wertet die echte/decodierte Ziel-URL neu aus;
+- die neue Kante wird wieder zentral in der Creative-Library gespeichert.
+
+Nicht geändert:
+- Frontend-Ranking,
+- Renderer,
+- Request-Caches,
+- Performance-Hotpaths,
+- eBay,
+- Idealo,
+- Produktpfade,
+- Providerarchitektur,
+- manuelle FIXED-/Control-Entscheidungen.
+
+## Grüner Beweis nach Fix
+
+Source Upgrade Run: `37227561289`
+Ergebnis: SUCCESS.
+
+Exakt derselbe vorher rote Gegenfall:
+- `PRE_MIGRATION_stale_library_edge_reproduces_live_failure`: PASS.
+- `POST_UPGRADE_stale_library_sanovet_absent`: PASS.
+- `POST_UPGRADE_stale_edge_recomputed_from_real_destination`: PASS.
+- gespeicherte neue Kante: `Fütterung Upgrade E2E`.
+- Quelle der neuen Kante: `banner_destination_url`.
+- Ziel-URL bleibt `https://example.com/fuetterung-upgrade-e2e/`.
+- Upgrade-Gate: 20/20 PASS.
+- manuelle FIXED-Ausnahme: PASS.
+- eBay-Produktkampagne unverändert: PASS.
+- Idealo-Produktkampagne unverändert: PASS.
+- Remoteaufrufe: 0.
+- Performance-KISS-Hardlock: PASS.
+
+## Finales getestetes ZIP
+
+ZIP Full E2E Run: `37227561276`
+Ergebnis: SUCCESS.
 
 Artifact:
 `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip`
 
 SHA-256:
-`bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`
+`46bcc02b2284fbbb0830b9f254d178f15ad0be072cbb3b40ee7fd658d4e1e437`
 
 Bytes:
-`792763`
+`793009`
 
 Git blob:
-`21acf77857298b59cf1c9de085a37a71c763ad13`
+`4cc3f5fc9b3444320fbb943b633612a7cb2ade9b`
 
-Nachweise:
-- ZIP 27/27 Manifest-Byteidentität: PASS
-- PHP lint 21/21: PASS
-- Performance-KISS-Hardlock: PASS
-- exaktes Upgrade 6.72.183 -> installiertes ZIP 6.72.184: 20/20 PASS
-- frischer kompletter Bannerpfad mit Library-Quelle: 21/21 PASS
-- frische Ziel-URL-Sammelstelle: 26/26 PASS
-- keine Remoteaufrufe im Frontend-/Migrationstest: PASS
-- eBay und Idealo im Upgrade unverändert: PASS
+Source-Manifest:
+`63218434f3d853fd3a9035cd600caae8a7ba36be5525a9096b4a7dcc9a41ea5d`
+27 Dateien.
 
-## Testhistorie
+ZIP-Nachweise:
+- Upgrade mit exakt dem vorher roten stale-edge-Gegenfall: 20/20 PASS.
+- frischer kompletter Library-Bannerpfad: 21/21 PASS.
+- frische Ziel-URL-Sammelstelle: 26/26 PASS.
+- ZIP Source-Byteidentität: 27/27 PASS.
+- PHP lint: 21/21 PASS.
+- Performance-KISS-Hardlock: PASS.
+- keine neuen Frontend-DB-/HTTP-Aufrufe.
+- keine Frontend-URL-Neuklassifikation.
+- eBay/Idealo unverändert.
 
-Der erste ZIP-Gate-Lauf 37223643412 wurde absichtlich nicht abgenommen: Der historische 21er-Test erzeugte automatische Banner direkt als Legacy-Kampagnen außerhalb der Creative-Library. 6.72.184 blockiert genau diese parallele Quelle; deshalb wurde der Testfixture auf den neuen verbindlichen Vertrag umgestellt und der komplette Gate erneut ausgeführt. Erst Run 37223792210 wurde als finaler PASS verwendet.
+## Status
 
-## Live-Status
-
-Produktiv auf pferde-atelier.de wurde 6.72.184 noch nicht installiert/readback-geprüft.
+Lokaler/CI-Nachweis inklusive NEGATIV -> FIX -> POSITIV ist vollständig.
 
 `release_allowed=false`
 
-Nächste Aktion:
-6.72.184 auf dem echten WordPress installieren und die reale Schabracken-Seite sowie weitere Bannerplätze zurücklesen.
+Offen ist ausschließlich der reale Produktionsnachweis des korrigierten Installers:
+exakt diesen neuen 6.72.184-Installer auf dem echten WordPress installieren, Banner-only-Migration laufen lassen und zuerst Schabracken readback-prüfen. Danach repräsentativ Seite, Kategorie, Beitrag, Glossar und Rasse.
+
+Kein weiterer Umbau vor einem real belegten Fehler dieses korrigierten Installers.
