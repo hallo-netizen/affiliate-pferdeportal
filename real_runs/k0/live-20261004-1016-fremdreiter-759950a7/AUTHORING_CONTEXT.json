@@ -1,0 +1,225 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "pferdehaftpflicht-beratung",
+    "plan_slot": "759950a74a337da2c8d8ece5783df3b7d2e0a4a043ec83bccfff55d9b5c5db2d",
+    "target_keyword": "Pferdehaftpflicht mit Fremdreiterrisiko",
+    "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung zur Auswahl einer Pferdehaftpflicht mit Fremdreiterrisiko für gelegentliche Fremdreiter und regelmäßige Reitbeteiligungen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/"
+        },
+        {
+          "source_title": "Uelzener Pferdehaftpflichtversicherung",
+          "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/"
+        },
+        {
+          "source_title": "GHV Pferdehalterhaftpflicht",
+          "source_url": "https://www.ghv-versicherung.de/pferd/pferdehalterhaftpflicht"
+        }
+      ],
+      "claims": [
+        "Die Allianz nennt nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- und Fremdreiter als mitversicherte Personen.",
+        "Uelzener beschreibt Fremdreiter als Personen, die ein Pferd unregelmäßig und unentgeltlich reiten, und versichert Fremd- und Gastreiter in allen genannten Tarifen.",
+        "Uelzener unterscheidet regelmäßige Reitbeteiligungen von gelegentlichen Gastreitern und nennt beide als mitversichert.",
+        "GHV nennt Versicherungsschutz für Reitbeteiligungen und Fremdreiter bei Schäden gegenüber Dritten und außerdem Ansprüche dieser Personen gegenüber dem Pferdehalter.",
+        "Allianz erklärt, dass Schäden durch das fremde Pferd in der Regel über das Fremdreiterrisiko des Halters geschützt sind, während ein Schaden allein durch das eigene Missgeschick des Reiters nicht von der Pferdehaftpflicht erfasst wird."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "allowed_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "source_retrieval_provenance": {
+      "contract": "K0_RUN_BOUND_SOURCE_RETRIEVAL_PROVENANCE_V1",
+      "status": "PASS",
+      "retrieval_run_id": "research:1b174dfd2177fa641ab89d70",
+      "retrieved_at_utc": "2026-10-04T08:16:00Z",
+      "sources": [
+        {
+          "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+          "retrieved_at_utc": "2026-10-04T08:16:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Uelzener Pferdehaftpflichtversicherung",
+          "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+          "retrieved_at_utc": "2026-10-04T08:16:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "GHV Pferdehalterhaftpflicht",
+          "source_url": "https://www.ghv-versicherung.de/pferd/pferdehalterhaftpflicht",
+          "retrieved_at_utc": "2026-10-04T08:16:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        }
+      ],
+      "historical_research_used": false,
+      "publish_allowed": false
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine Pferdehaftpflicht auswählen, deren Fremdreiterrisiko zum tatsächlichen Nutzungsalltag des Pferdes passt.",
+      "decision_criteria": [
+        "Versicherter Personenkreis",
+        "Schäden gegenüber Dritten",
+        "Ansprüche von Fremdreitern",
+        "Abgrenzung zur privaten Haftpflicht"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+        "statement": "Die Allianz nennt nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- und Fremdreiter als mitversicherte Personen.",
+        "evidence_text": "Die Allianz nennt nicht gewerbsmäßige Miteigentümer, Mithalter, Reitbeteiligte, Hüter sowie Gast- und Fremdreiter als mitversicherte Personen.",
+        "evidence_text_sha256": "be61effd97eb14ca5c106f14cc0a3f041841e79fd215e7a33cb17793ae7f6fd8",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Uelzener Pferdehaftpflichtversicherung",
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "statement": "Uelzener beschreibt Fremdreiter als Personen, die ein Pferd unregelmäßig und unentgeltlich reiten, und versichert Fremd- und Gastreiter in allen genannten Tarifen.",
+        "evidence_text": "Uelzener beschreibt Fremdreiter als Personen, die ein Pferd unregelmäßig und unentgeltlich reiten, und versichert Fremd- und Gastreiter in allen genannten Tarifen.",
+        "evidence_text_sha256": "f3d03a08a62da151d169ee352141ee676de263746704a344fdefb482b7c1b50b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Uelzener Pferdehaftpflichtversicherung",
+        "source_url": "https://uelzener.de/pferd/pferde-haftpflichtversicherung/",
+        "statement": "Uelzener unterscheidet regelmäßige Reitbeteiligungen von gelegentlichen Gastreitern und nennt beide als mitversichert.",
+        "evidence_text": "Uelzener unterscheidet regelmäßige Reitbeteiligungen von gelegentlichen Gastreitern und nennt beide als mitversichert.",
+        "evidence_text_sha256": "b97854ce2fd03c1e494b223cc865da21d0d3267f4cd42f5f1230fdafe2153c21",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_title": "GHV Pferdehalterhaftpflicht",
+        "source_url": "https://www.ghv-versicherung.de/pferd/pferdehalterhaftpflicht",
+        "statement": "GHV nennt Versicherungsschutz für Reitbeteiligungen und Fremdreiter bei Schäden gegenüber Dritten und außerdem Ansprüche dieser Personen gegenüber dem Pferdehalter.",
+        "evidence_text": "GHV nennt Versicherungsschutz für Reitbeteiligungen und Fremdreiter bei Schäden gegenüber Dritten und außerdem Ansprüche dieser Personen gegenüber dem Pferdehalter.",
+        "evidence_text_sha256": "838222127bf8d5fc93b8d61726ccdb156f27ff35b225c40b8add6249af8c2c35",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+        "statement": "Allianz erklärt, dass Schäden durch das fremde Pferd in der Regel über das Fremdreiterrisiko des Halters geschützt sind, während ein Schaden allein durch das eigene Missgeschick des Reiters nicht von der Pferdehaftpflicht erfasst wird.",
+        "evidence_text": "Allianz erklärt, dass Schäden durch das fremde Pferd in der Regel über das Fremdreiterrisiko des Halters geschützt sind, während ein Schaden allein durch das eigene Missgeschick des Reiters nicht von der Pferdehaftpflicht erfasst wird.",
+        "evidence_text_sha256": "68d212c76dbda88923a0629509e47c97c03d274a3381f1d4b056eef5e53c4e7c",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "anchor": "Beratung zur Pferdehaftpflicht",
+        "block": "decision"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/",
+        "anchor": "Pferde Atelier",
+        "block": "coverage_scope"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "anchor": "Pferdehaftpflicht-Beratung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "active": true
+      },
+      {
+        "href": "/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdehaftpflicht-beratung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdehaftpflicht-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferdehaftpflicht",
+      "Fremdreiterrisiko",
+      "Personen",
+      "Vertrag",
+      "Tarifwahl",
+      "Schutz",
+      "Fremdreiter"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "NUANCE_LOSS",
+      "rationale": "Eine Tabelle würde unterschiedliche Haftungssituationen und Tarifformulierungen zu stark vereinfachen; die Abgrenzungen brauchen erklärenden Kontext."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
+  "publish_allowed": false
+}
