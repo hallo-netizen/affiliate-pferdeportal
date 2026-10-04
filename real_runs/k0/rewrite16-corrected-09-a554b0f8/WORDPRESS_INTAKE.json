@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "content_or_format_payload_present": false,
+  "item_count": 1,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "a554b0f86f23cda760d2a03f839934cbc4dda269d961ff891e763a684283352b",
+      "target_keyword": "Warum sagt man du alte Schabracke",
+      "title": "Warum sagt man du alte Schabracke?"
+    }
+  ],
+  "publish_allowed": false,
+  "batch_sha256": "0799b9cae133ec5bad7ba63e8a41f49a2824b3ea6136db62977b3dd06f8d84f4"
+}
