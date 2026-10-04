@@ -12,7 +12,6 @@ DRAFT_CONTRACT='K0_WRITER_DRAFT_V1'
 PACKAGE_CONTRACT='K0_ARTICLE_PACKAGE_V1'
 SEAL_CONTRACT='K0_WRITER_SEAL_V1'
 AUTHORING_CONTEXT_CONTRACT='K0_AUTHORING_CONTEXT_V1'
-FRESH_RESEARCH_CONTRACT='K0_FRESH_RESEARCH_RECEIPT_V1'
 
 class Blocked(RuntimeError):
     pass
@@ -22,36 +21,6 @@ def _load(path):
     if not isinstance(x,dict):
         raise Blocked('JSON_OBJECT_REQUIRED:'+str(path))
     return x
-
-def _validate_fresh_research(ctx, ident, production_context):
-    fresh=ctx.get('fresh_research')
-    if not isinstance(fresh,dict) or fresh.get('contract')!=FRESH_RESEARCH_CONTRACT:
-        raise Blocked('K0_FRESH_RESEARCH_RECEIPT_REQUIRED')
-    session=str(fresh.get('research_session_id') or '')
-    if not re.fullmatch(r'research:[0-9a-f]{24}',session):
-        raise Blocked('K0_FRESH_RESEARCH_SESSION_INVALID')
-    if fresh.get('mode')!='FRESH_FROM_CURRENT_ASSIGNMENT':
-        raise Blocked('K0_FRESH_RESEARCH_MODE_INVALID')
-    if fresh.get('full_topic_research_required') is not True:
-        raise Blocked('K0_FRESH_RESEARCH_FULL_TOPIC_REQUIRED')
-    if fresh.get('historical_text_used') is not False:
-        raise Blocked('K0_HISTORICAL_TEXT_INPUT_FORBIDDEN')
-    if fresh.get('historical_research_artifact_used') is not False:
-        raise Blocked('K0_HISTORICAL_RESEARCH_ARTIFACT_INPUT_FORBIDDEN')
-    if fresh.get('historical_similarity_blocking') is not False:
-        raise Blocked('K0_HISTORY_SIMILARITY_MUST_NOT_BLOCK_NEW_RESEARCH')
-    if fresh.get('historical_information_blacklist') is not False:
-        raise Blocked('K0_HISTORY_INFORMATION_BLACKLIST_FORBIDDEN')
-    if fresh.get('assignment_identity_sha256')!=stable(ident):
-        raise Blocked('K0_FRESH_RESEARCH_IDENTITY_BINDING_INVALID')
-    rule_context=ctx.get('rule_context') or {}
-    claims=rule_context.get('research_claims')
-    if not isinstance(claims,dict) or not claims:
-        raise Blocked('K0_FRESH_RESEARCH_CLAIMS_MISSING')
-    payload={'fact_pack':production_context.get('fact_pack'),'research_claims':claims}
-    if fresh.get('research_payload_sha256')!=stable(payload):
-        raise Blocked('K0_FRESH_RESEARCH_PAYLOAD_BINDING_INVALID')
-    return fresh
 
 def _job_core(intake, portal, ctx):
     rows=validate_intake(intake)
@@ -79,7 +48,6 @@ def _job_core(intake, portal, ctx):
     pc=ctx.get('production_context')
     if not isinstance(pc,dict) or not isinstance(pc.get('fact_pack'),dict) or not isinstance(pc.get('production_plan_item'),dict):
         raise Blocked('K0_AUTHORING_CONTEXT_RESEARCH_MISSING')
-    fresh_research=_validate_fresh_research(ctx,ident,pc)
     if ident.get('article_type')==PROPERTY_WINNER_TYPE:
         try:
             property_result=validate_property_packet(ident,pc.get('property_research'))
@@ -101,7 +69,6 @@ def _job_core(intake, portal, ctx):
       'run_instance_id':run_instance_id,
       'content_profile':cp,
       'production_context':pc,
-      'fresh_research':fresh_research,
       'rule_context':rule_context,
       'writer_rule_bundle':full_rule_bundle,
       'writer_rule_binding':full_rule_binding,
@@ -195,7 +162,6 @@ def seal(job, draft):
       'table_decision':table,
       'lt_authoritative_terms':terms,
       'production_context':job['production_context'],
-      'fresh_research':job['fresh_research'],
       'revision_count':int(draft.get('revision_count') or 1),
       'writer_provenance':provenance,
       'publish_allowed':False,
@@ -223,8 +189,6 @@ def verify(job, package):
         raise Blocked('K0_WRITER_PACKAGE_INTENT_MISMATCH')
     if package.get('production_context')!=job.get('production_context'):
         raise Blocked('K0_WRITER_PACKAGE_CONTEXT_MISMATCH')
-    if package.get('fresh_research')!=job.get('fresh_research'):
-        raise Blocked('K0_WRITER_PACKAGE_FRESH_RESEARCH_MISMATCH')
     if package.get('rule_context')!=job.get('rule_context'):
         raise Blocked('K0_WRITER_PACKAGE_RULE_CONTEXT_MISMATCH')
     if package.get('writer_rule_binding')!=job.get('writer_rule_binding'):

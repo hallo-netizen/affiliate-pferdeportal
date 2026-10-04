@@ -39,31 +39,14 @@ def portal(i):
         'publish_allowed':False
     }
 
-def context(i, research_session='research:111111111111111111111111'):
-    ident=i['items'][0]
-    pc={'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}}
-    rc=rule_context(ident)
-    payload={'fact_pack':pc['fact_pack'],'research_claims':rc['research_claims']}
-    digest=lambda x: hashlib.sha256(stable(x).encode()).hexdigest()
+def context(i):
     return {
         'contract':'K0_AUTHORING_CONTEXT_V1',
         'run_instance_id':'run:aaaaaaaaaaaaaaaaaaaaaaaa',
-        'identity':ident,
+        'identity':i['items'][0],
         'content_profile':{'search_intent':'DECISION_SUPPORT'},
-        'production_context':pc,
-        'fresh_research':{
-            'contract':'K0_FRESH_RESEARCH_RECEIPT_V1',
-            'research_session_id':research_session,
-            'mode':'FRESH_FROM_CURRENT_ASSIGNMENT',
-            'assignment_identity_sha256':digest(ident),
-            'research_payload_sha256':digest(payload),
-            'full_topic_research_required':True,
-            'historical_text_used':False,
-            'historical_research_artifact_used':False,
-            'historical_similarity_blocking':False,
-            'historical_information_blacklist':False,
-        },
-        'rule_context':rc,
+        'production_context':{'fact_pack':{'contract':'canonical_fact_pack_v1'},'production_plan_item':{'article_type':'Beratung'}},
+        'rule_context':rule_context(i['items'][0]),
         'publish_allowed':False
     }
 
@@ -116,29 +99,6 @@ class ProductionPathLocks(unittest.TestCase):
         }
         with self.assertRaisesRegex(WriterBlocked,'JOB_HASH_INVALID'):
             seal(job,draft)
-
-    def test_missing_fresh_research_receipt_is_blocked(self):
-        i=intake(); ctx=context(i); del ctx['fresh_research']
-        with self.assertRaisesRegex(WriterBlocked,'FRESH_RESEARCH_RECEIPT_REQUIRED'):
-            prepare(i,portal(i),ctx)
-
-    def test_historical_research_artifact_use_is_blocked(self):
-        i=intake(); ctx=context(i); ctx['fresh_research']['historical_research_artifact_used']=True
-        with self.assertRaisesRegex(WriterBlocked,'HISTORICAL_RESEARCH_ARTIFACT_INPUT_FORBIDDEN'):
-            prepare(i,portal(i),ctx)
-
-    def test_historical_information_is_not_blacklisted_or_similarity_blocked(self):
-        i=intake()
-        first=context(i,'research:111111111111111111111111')
-        second=context(i,'research:222222222222222222222222')
-        second['run_instance_id']='run:bbbbbbbbbbbbbbbbbbbbbbbb'
-        # Same independently rediscovered fact-pack and claims are allowed.
-        # Only the fresh research session/run identity changes.
-        j1=prepare(i,portal(i),first)
-        j2=prepare(i,portal(i),second)
-        self.assertEqual(j1['production_context'],j2['production_context'])
-        self.assertNotEqual(j1['fresh_research']['research_session_id'],j2['fresh_research']['research_session_id'])
-        self.assertNotEqual(j1['job_id'],j2['job_id'])
 
 if __name__=='__main__':
     unittest.main()

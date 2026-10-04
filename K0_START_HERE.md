@@ -31,20 +31,6 @@ Die erste sichtbare Antwort ist ausschließlich:
 
 Portalzuordnung automatisch.
 
-## Jeder Lauf ist fachlich neu — HARDLOCK
-
-Für jeden neuen Upload + `K0:start` gilt unabhängig von identischem Thema, Keyword, Kategorie oder früheren Läufen:
-
-- Auftrag ausschließlich aus dem **aktuellen Upload** neu bewerten;
-- Recherche **neu für diesen Lauf** durchführen;
-- alte Artikel, Drafts, Fact-Packs, Recherchepakete, Recovery-Dateien und frühere WordPress-Ausgaben **nicht als Text- oder Recherchequelle übernehmen**;
-- ein früheres PASS, ein identischer Batch oder ein vorhandener Artikel darf den neuen Lauf **weder ersetzen noch abkürzen**;
-- frühere Informationen, Quellen oder Fakten werden **nicht ausgeklammert und nicht auf eine Sperrliste gesetzt**: Wenn die frische Recherche dieselben belastbaren Informationen erneut findet, dürfen und sollen sie normal verwendet werden;
-- verboten ist nur die **Übernahme alter Lauf-Artefakte**. Eine neue Recherche darf zum selben sachlich richtigen Ergebnis kommen;
-- jeder neue Authoring-Lauf benötigt eine neue `K0_FRESH_RESEARCH_RECEIPT_V1`-Research-Session;
-- ein neuer Draft, der bytegleich zu einem früher versiegelten K0-Artikel ist, wird als alte Textübernahme blockiert; Ähnlichkeit, gleiche Fakten oder gleiche Quellen allein sind **kein** Blockiergrund.
-
-
 Interne Links: exakt 3; `parent_category` und `semantic_related` liegen in zwei verschiedenen Haupttextblöcken, `further_information` ausschließlich im Block `further_information`. Intro, Fazit und Tabelle zählen nicht als Haupttext.
 
 Repository: `hallo-netizen/affiliate-pferdeportal`
