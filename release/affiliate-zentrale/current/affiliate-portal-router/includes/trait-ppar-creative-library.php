@@ -465,11 +465,13 @@ trait PPAR_Creative_Library_Trait {
         $payload['_image_mime'] = sanitize_text_field((string) ($evidence['mime'] ?? ''));
         $payload['_image_bytes'] = absint($evidence['bytes'] ?? 0);
         $payload['_measured_at'] = absint($evidence['measured_at'] ?? time());
-        // Der Bildprüfer bestätigt ausschließlich das Asset. Portal- und Zielstatus
-        // bleiben im zentralen Ausgabeobjekt-Modell und werden nicht global zurückgeschrieben.
+        // Der Bildprüfer bestätigt ausschließlich das Asset. Eine bereits
+        // gespeicherte Ziel-URL-Zuordnung darf dabei niemals wieder gelöscht
+        // werden. Das ist die zentrale Banner-Sammelstelle.
         $topic_status = 'auto_verified';
-        $topic_score = 0;
-        $topic_targets = '[]';
+        $topic_score = absint($row['topic_score'] ?? 0);
+        $topic_targets = trim((string)($row['topic_targets'] ?? ''));
+        if ($topic_targets === '') { $topic_targets = '[]'; }
         $wpdb->update($table, array(
             'width'=>$width,
             'height'=>$height,
@@ -613,11 +615,20 @@ trait PPAR_Creative_Library_Trait {
         if ($tracking_url === '' && $html !== '') {
             $tracking_url = esc_url_raw($this->creative_library_html_attr($html, 'a', 'href'));
         }
+        // KISS: Die Sammelstelle unterscheidet echte Zielseiten von einem
+        // bloßen Trackinglink. Nur echte/decodierte Zielseiten dürfen später
+        // als Themenbeweis dienen. Ohne Zielseite bleibt der Banner ein
+        // allgemeiner technischer Fallback statt eine geratene Kategorie.
+        $destination_source = $destination_url !== '' ? 'provider_explicit' : '';
         if ($destination_url === '') {
             $destination_url = $this->creative_library_destination_from_tracking($tracking_url);
+            if ($destination_url !== '') {
+                $destination_source = 'decoded_tracking';
+            }
         }
         if ($destination_url === '') {
             $destination_url = $tracking_url;
+            $destination_source = $destination_url !== '' ? 'tracking_fallback' : 'unknown';
         }
         $type = $this->creative_library_normalize_type($this->creative_library_mapped_value($row, $mapping, 'creative_type'));
         if (in_array($type, array('banner','product'), true) && $image_url === '') {
@@ -655,6 +666,7 @@ trait PPAR_Creative_Library_Trait {
             '_image_mime'=>'',
             '_image_bytes'=>0,
             '_measured_at'=>0,
+            '_destination_source'=>$destination_source,
             '_preverify_topic_status'=>'portal_pending',
             '_preverify_topic_score'=>0,
             '_preverify_topic_targets'=>array(),
