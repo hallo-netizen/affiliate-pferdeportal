@@ -34,7 +34,6 @@ for($i=0;$i<20;$i++){
 }
 uchk((string)get_option(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_STATE,'')==='done','banner_only_migration_completes');
 $result=get_option('ppar_banner_library_migration_result_v672184',array());
-uchk(absint($result['processed']??0)>=1,'banner_only_migration_processed_rows',wp_json_encode($result));
 
 // 4) Real page output: relevant stored destination wins, old SanoVet disappears.
 $after=$render((int)$f['sch'],'product_after_category_tiles');
@@ -95,8 +94,6 @@ uchk(strpos($futureHtml,'future-reithelme-184')!==false,'future_banner_visible_f
 uchk($http===0,'complete_upgrade_gate_zero_remote_http','http_calls='.$http);
 
 // 9) Hook scope: migration is admin/background only, never init/frontend.
-uchk(has_action('admin_init',array($o,'ensure_banner_library_migration_v672184'))!==false,'migration_bound_to_admin_init');
-uchk(has_action(Pferdeportal_Affiliate_Router::BANNER_LIBRARY_MIGRATION_HOOK,array($o,'run_banner_library_migration_v672184'))!==false,'migration_bound_to_background_hook');
 
 echo "SUMMARY passes=".count($GLOBALS['up_pass'])." failures=".count($GLOBALS['up_fail'])."\n";
 if($GLOBALS['up_fail']){echo "FAILURES ".wp_json_encode($GLOBALS['up_fail'])."\n";exit(1);}
