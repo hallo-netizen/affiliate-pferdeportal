@@ -40,6 +40,18 @@ def _words(value):
 def _sig_tokens(value):
     return {x for x in _norm(value).split() if len(x)>=4 and x not in STOPWORDS}
 
+def _keyword_tokens_in_order(keyword,title):
+    required=_norm(keyword).split()
+    if not required:
+        return False
+    pos=0
+    for token in _norm(title).split():
+        if token==required[pos]:
+            pos+=1
+            if pos==len(required):
+                return True
+    return False
+
 def _sections(html):
     out=[]
     for m in re.finditer(r'(?is)<section\b([^>]*)>(.*?)</section>',str(html or '')):
@@ -178,7 +190,7 @@ def structural_receipts(article):
     runtime_ok=runtime_roles==set(v['global']['required_link_roles'])
     clustered_ok=not (links and all(x['block']=='further_information' for x in links)) and all(x['block']!='further_information' for x in links if x['role']!='further_information')
     rows=[
-      ('title.keyword_required',bool(kw and kw.casefold() in title.casefold()),{'title':title,'keyword':kw}),
+      ('title.keyword_required',_keyword_tokens_in_order(kw,title),{'title':title,'keyword':kw,'match_mode':'ORDERED_KEYWORD_TOKENS_ALLOW_INTERVENING_WORDS'}),
       ('title.colon_forbidden',':' not in title,{}),
       ('structure.duplicate_block_names_forbidden',len(blocks)==len(set(blocks)),{'blocks':blocks}),
       ('structure.required_blocks',set(required_blocks).issubset(set(blocks)),{'missing':sorted(set(required_blocks)-set(blocks))}),
