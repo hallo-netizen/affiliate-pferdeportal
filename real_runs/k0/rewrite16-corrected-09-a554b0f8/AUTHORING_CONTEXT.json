@@ -1,0 +1,39 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "a554b0f86f23cda760d2a03f839934cbc4dda269d961ff891e763a684283352b",
+    "target_keyword": "Warum sagt man du alte Schabracke",
+    "title": "Warum sagt man du alte Schabracke?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Schabracke – Duden",
+          "source_url": "https://www.duden.de/rechtschreibung/Schabracke"
+        }
+      ],
+      "claims": []
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Warum sagt man du alte Schabracke",
+      "topic": "Warum sagt man du alte Schabracke?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schabracken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "publish_allowed": false,
+  "retry_token": 1
+}
