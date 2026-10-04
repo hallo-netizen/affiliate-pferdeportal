@@ -1,0 +1,215 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-regeneration-kuehlgamaschen-faq",
+    "plan_slot": "28ecc3ae064ab04c5e867125d889a696c03406e48ab67e10a44e0b47578f9c5c",
+    "target_keyword": "Sind Kühlgamaschen für Pferde sinnvoll",
+    "title": "Sind Kühlgamaschen für Pferde sinnvoll?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Thieme Tiermedizin – Medical Training Kühlungsmethoden",
+          "source_url": "https://tiermedizin.thieme.de/pferd-co/fachbeitraege/detail/medical-training-kuehlungsmethoden-und-wasserschlauch-gelassen-meistern-1705"
+        },
+        {
+          "source_title": "Equine Veterinary Education – Treatment of tendinopathies",
+          "source_url": "https://beva.onlinelibrary.wiley.com/doi/10.1111/eve.13987?af=R"
+        },
+        {
+          "source_title": "Pferd und Mensch – Bandagen als Beinschutz",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/bandagen-03-2026/"
+        }
+      ],
+      "claims": [
+        "Thieme beschreibt Kälteanwendungen beim Pferd sowohl als Wellness als auch als therapeutische Maßnahme, insbesondere bei entzündlichen Vorgängen sowie Erkrankungen oder Verletzungen an den Gliedmaßen.",
+        "Als Möglichkeiten zur Kühlung von Pferdebeinen nennt Thieme unter anderem Wasserschlauch, Eis, kaltes Wasser mit Watte oder Bandagen, Kühlgamaschen und spezielle Schlauchsysteme.",
+        "Equine Veterinary Education führt Kälte als einfache, kostengünstige physikalische Maßnahme in der akuten Phase von Sehnenverletzungen auf und nennt kaltes Abspritzen als praktische Anwendung.",
+        "Pferd und Mensch berichtet, dass Bandagen und Gamaschen während Bewegung die Wärmeabgabe durch Konvektion einschränken und dadurch höhere Spitzentemperaturen am Pferdebein entstehen können als ohne Abdeckung.",
+        "Pferd und Mensch bewertet das Kühlen der Pferdebeine nach dem Training als sinnvoll, besonders nach Arbeit mit Bandagen oder Gamaschen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "allowed_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "source_retrieval_provenance": {
+      "contract": "K0_RUN_BOUND_SOURCE_RETRIEVAL_PROVENANCE_V1",
+      "status": "PASS",
+      "retrieval_run_id": "research:cooling-r2-20261004-0850",
+      "retrieved_at_utc": "2026-10-04T08:50:00Z",
+      "sources": [
+        {
+          "source_title": "Thieme Tiermedizin – Medical Training Kühlungsmethoden",
+          "source_url": "https://tiermedizin.thieme.de/pferd-co/fachbeitraege/detail/medical-training-kuehlungsmethoden-und-wasserschlauch-gelassen-meistern-1705",
+          "retrieved_at_utc": "2026-10-04T08:50:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Equine Veterinary Education – Treatment of tendinopathies",
+          "source_url": "https://beva.onlinelibrary.wiley.com/doi/10.1111/eve.13987?af=R",
+          "retrieved_at_utc": "2026-10-04T08:50:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Pferd und Mensch – Bandagen als Beinschutz",
+          "source_url": "https://magazin.pferdesport-deutschland.de/project/bandagen-03-2026/",
+          "retrieved_at_utc": "2026-10-04T08:50:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        }
+      ],
+      "historical_research_used": false,
+      "publish_allowed": false
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Sind Kühlgamaschen für Pferde sinnvoll?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Thieme Tiermedizin – Medical Training Kühlungsmethoden",
+        "source_url": "https://tiermedizin.thieme.de/pferd-co/fachbeitraege/detail/medical-training-kuehlungsmethoden-und-wasserschlauch-gelassen-meistern-1705",
+        "statement": "Thieme beschreibt Kälteanwendungen beim Pferd sowohl als Wellness als auch als therapeutische Maßnahme, insbesondere bei entzündlichen Vorgängen sowie Erkrankungen oder Verletzungen an den Gliedmaßen.",
+        "evidence_text": "Thieme beschreibt Kälteanwendungen beim Pferd sowohl als Wellness als auch als therapeutische Maßnahme, insbesondere bei entzündlichen Vorgängen sowie Erkrankungen oder Verletzungen an den Gliedmaßen.",
+        "evidence_text_sha256": "6ed9919ebf05538164af3c1ef2d8c8067669c593ea319466c59e5281ad01aa2b",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Thieme Tiermedizin – Medical Training Kühlungsmethoden",
+        "source_url": "https://tiermedizin.thieme.de/pferd-co/fachbeitraege/detail/medical-training-kuehlungsmethoden-und-wasserschlauch-gelassen-meistern-1705",
+        "statement": "Als Möglichkeiten zur Kühlung von Pferdebeinen nennt Thieme unter anderem Wasserschlauch, Eis, kaltes Wasser mit Watte oder Bandagen, Kühlgamaschen und spezielle Schlauchsysteme.",
+        "evidence_text": "Als Möglichkeiten zur Kühlung von Pferdebeinen nennt Thieme unter anderem Wasserschlauch, Eis, kaltes Wasser mit Watte oder Bandagen, Kühlgamaschen und spezielle Schlauchsysteme.",
+        "evidence_text_sha256": "ce94c3d11fd504eaaf8de7762efa513cd0b16d6b53e2756bff606f13cf52c01d",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Equine Veterinary Education – Treatment of tendinopathies",
+        "source_url": "https://beva.onlinelibrary.wiley.com/doi/10.1111/eve.13987?af=R",
+        "statement": "Equine Veterinary Education führt Kälte als einfache, kostengünstige physikalische Maßnahme in der akuten Phase von Sehnenverletzungen auf und nennt kaltes Abspritzen als praktische Anwendung.",
+        "evidence_text": "Equine Veterinary Education führt Kälte als einfache, kostengünstige physikalische Maßnahme in der akuten Phase von Sehnenverletzungen auf und nennt kaltes Abspritzen als praktische Anwendung.",
+        "evidence_text_sha256": "8163dc7621bbbd349b5f054b73c7bfdf754c95167c97fb6017dc448f81fe4b40",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferd und Mensch – Bandagen als Beinschutz",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/bandagen-03-2026/",
+        "statement": "Pferd und Mensch berichtet, dass Bandagen und Gamaschen während Bewegung die Wärmeabgabe durch Konvektion einschränken und dadurch höhere Spitzentemperaturen am Pferdebein entstehen können als ohne Abdeckung.",
+        "evidence_text": "Pferd und Mensch berichtet, dass Bandagen und Gamaschen während Bewegung die Wärmeabgabe durch Konvektion einschränken und dadurch höhere Spitzentemperaturen am Pferdebein entstehen können als ohne Abdeckung.",
+        "evidence_text_sha256": "a40e89253109e7dad6ef8ad34fe58ea993923a2fa921be10602534a1537f0716",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Pferd und Mensch – Bandagen als Beinschutz",
+        "source_url": "https://magazin.pferdesport-deutschland.de/project/bandagen-03-2026/",
+        "statement": "Pferd und Mensch bewertet das Kühlen der Pferdebeine nach dem Training als sinnvoll, besonders nach Arbeit mit Bandagen oder Gamaschen.",
+        "evidence_text": "Pferd und Mensch bewertet das Kühlen der Pferdebeine nach dem Training als sinnvoll, besonders nach Arbeit mit Bandagen oder Gamaschen.",
+        "evidence_text_sha256": "cfadc571c42cd5be2cef3e9e770777cc0ee1ed39bbcb1323acc84921f365f164",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "anchor": "Kühlgamaschen für Pferde",
+        "block": "details"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/",
+        "anchor": "Pferde Atelier",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "anchor": "FAQ zu Kühlgamaschen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/gesundheit-regeneration-kuehlgamaschen-faq/",
+        "active": true
+      },
+      {
+        "href": "/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "gesundheit-regeneration-kuehlgamaschen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Kühlgamaschen",
+      "Kühlung",
+      "Pferdebein",
+      "Kälte",
+      "Training",
+      "Wasser",
+      "Gamaschen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Checkliste bildet die praktische Frage nach Kühlgamaschen bereits übersichtlich ab; eine zusätzliche Tabelle hätte keinen eigenen Scan-Nutzen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
