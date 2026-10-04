@@ -8,6 +8,7 @@ $rm=function($name)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(t
 $call=function($name,...$args)use($rm,$o){return $rm($name)->invokeArgs($o,$args);};
 $f=get_option('ppar_v672184_upgrade_fixture',array());
 if(!is_array($f)||empty($f['sch'])){fwrite(STDERR,"FATAL fixture missing\n");exit(2);}
+global $wpdb;
 $http=0;
 add_filter('pre_http_request',function($pre,$args,$url)use(&$http){$http++;return new WP_Error('upgrade_e2e_network_forbidden','network forbidden');},10,3);
 $render=function($id,$slot)use($rm,$o){return (string)$rm('render_affiliate_slot')->invoke($o,$id,$slot,'portal_context','');};
@@ -46,7 +47,6 @@ $staleTargets=is_array($staleTargets)?$staleTargets:array();
 $staleFirst=$staleTargets[0]??array();
 uchk(strpos((string)($staleFirst['target_label']??''),'Fütterung')!==false,'POST_UPGRADE_stale_edge_recomputed_from_real_destination',wp_json_encode($staleFirst));
 
-global $wpdb;
 $creativeTable=$call('creative_library_table');
 $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$creativeTable} WHERE identity_hash=%s",(string)$f['library_identity']),ARRAY_A);
 $targets=is_array($row)?json_decode((string)($row['topic_targets']??''),true):array();
