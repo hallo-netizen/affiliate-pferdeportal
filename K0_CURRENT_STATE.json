@@ -26,5 +26,6 @@
     "performance_regression_allowed": false,
     "publish_allowed": false
   },
-  "publish_allowed": false
+  "publish_allowed": false,
+  "old_chat_or_archive_authority": false
 }
