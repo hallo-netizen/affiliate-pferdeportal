@@ -368,21 +368,58 @@ Folge:
 - dort existieren bereits die Originalaktionen `Beitragsart korrigieren` und `Entscheidung speichern` inklusive normaler Gate-/Historienlogik;
 - kein Bulk-Bypass, kein Import einer Chat-Entscheidungsdatei.
 
+## LOKALER KANDIDAT PSTE 0.57.33 – WORDPRESS-SAFE EXISTING-TOPIC REENTRY
+
+Kandidat:
+`PSTE-0.57.33-WORDPRESS-SAFE-EXISTING-TOPIC-REENTRY-CANDIDATE.zip`
+
+SHA-256:
+`57803212686b7256cf26994bbb25be913c39c757753b9dab92c5e37c34ae1e1b`
+
+Zweck:
+Nur generische, positiv/negativ validierte Regeln im bestehenden PSTE-Normalpfad automatisieren. WordPress/PSTE bleibt alleinige operative Autorität; kein Import der Chat-110er-Datei, kein neuer Runner, kein Bulk-Bypass.
+
+Realer 695er Zielkohorten-Replay:
+- 0.57.32: 320 STRUCTURE_GAP / 372 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING / 0 NORMAL_PASS.
+- 0.57.33 lokal: 320 STRUCTURE_GAP / 354 SANDBOX_REQUIRED / 19 RETAINED_NON_PRODUCING / 2 NORMAL_PASS.
+- 16 bisherige Reviews werden korrekt als nicht-produzierende Familienkopf-/Keywordvarianten geparkt.
+- 2 werden über den bestehenden Normalpfad NORMAL_PASS:
+  - `Wie striegelt man Pferde am besten?` → Striegel / FAQ / Kategorie 67.
+  - `Muss man unter ein Reitpad eine Schabracke tragen?` → Schabracken / FAQ / Kategorie 84.
+- alle 320 Strukturfälle bleiben Strukturfälle; die 3 bisherigen Produktwahl-Holds bleiben nicht-produzierend.
+
+Negativbelege:
+- `Wie heißt die Decke unterm Sattel beim Pferd?` bleibt REVIEW und wird nicht Unterdecken zugeordnet.
+- `Schabracken pferd dressur` bleibt REVIEW.
+- `Welche balance pads für pferde?` bleibt wegen Titel-/Grammatikqualität blockiert.
+- `Müssen stützräder in der luft hängen?` bleibt wegen Titelqualität blockiert.
+- `Pferde Schabracken waschen` bleibt REVIEW.
+- falscher Titel-Evidenzvertrag oder bereits gesetzte Produktions-/Familienautorität benutzt den Stored-Title-Revalidation-Pfad nicht.
+- `Beste Regendecken` bleibt als nicht belegter Superlativ blockiert.
+
+Tests:
+- PHP-Lint 81/81 PASS.
+- Fresh-Unpack PHP-Lint 81/81 PASS.
+- ZIP PASS.
+- 695er Zielkohorte vollständig replayed.
+- kein 4472er Vollpool-PASS behauptet; Vollpoolvergleich lief lokal in ein Tool-Timeout.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_WORDPRESS_REVIEW_PROCESS_MUST_REMAIN_AUTHORITATIVE`
+`PSTE_05733_LOCAL_HARD_PASS_LIVE_READBACK_OPEN`
 
-Die 695 Titel sind technisch korrekt in 320 Struktur / 372 Review / 3 nicht produzierend klassifiziert. Die anschließenden fachlichen Entscheidungen dürfen nicht aus einer Chat-Heuristik in WordPress übernommen werden. Mindestens ein konkreter 110er Chat-Fall ist als falscher Auto-Match widerlegt.
+Die generische WordPress-interne Reentry-Reparatur ist auf der realen 695er Zielkohorte lokal positiv/negativ bestanden. Offen ist der reale WordPress-Readback nach Installation von 0.57.33 und erneutem Bestandslauf.
 
 ## GENAU EINE NEXT ACTION
 
-`USE_EXISTING_WORDPRESS_THEMENPRUEFUNG_AND_DERIVE_ONLY_VALIDATED_GENERIC_AUTOMATION`
+`INSTALL_05733_RUN_EXISTING_MATERIAL_AND_READBACK`
 
-1. Operative Entscheidungen ausschließlich in WordPress unter `SEO Themenengine → Themenprüfung` führen.
-2. Keine 110er Chat-Datei importieren/anwenden.
-3. Vor jeder weiteren Automatisierung die Review-Gruppen gegen reale Gegenbeispiele prüfen und nur generische Regeln automatisieren, die positive **und** negative Tests bestehen.
-4. Kein neuer externer Provider-/DataForSEO-Lauf.
-5. Keine Gate-Absenkung und kein Bulk-Bypass.
+1. `PSTE-0.57.33-WORDPRESS-SAFE-EXISTING-TOPIC-REENTRY-CANDIDATE.zip` in WordPress installieren.
+2. `SEO Themenengine → Übersicht`.
+3. Abschnitt `Titel aus vorhandenem Material erzeugen`.
+4. `Vorhandenes Material in Titelkandidaten umwandeln` starten.
+5. Ergebnis ablesen; keine Produktionswelle starten.
+6. Erst nach Live-PASS die gesamte Themenkarte erneut exportieren.
 
 ## NICHT ANFASSEN
 
