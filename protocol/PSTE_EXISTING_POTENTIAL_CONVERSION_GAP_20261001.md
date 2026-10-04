@@ -484,3 +484,47 @@ Persistierte Entscheidungsartefakte:
 - `/Pferdeatelier/PSTE-05732-LANE-B-110-DECISIONS.json`
 
 Die Artefakte erteilen keine Produktionsautorität. Zielvertragsgemäß folgt für B ausschließlich der vorhandene Review-/Normal-Reentry-Weg; kein neues Plugin und keine neue Architektur.
+
+
+## DELTA 2026-10-04 – WORDPRESS-SAFE GENERISCHE BESTANDS-REENTRY-REPARATUR / PSTE 0.57.33
+
+Die Chat-seitige 110er Klassifikation bleibt ausdrücklich kein Apply-Paket. Operative Autorität bleibt WordPress/PSTE.
+
+Kandidat:
+`PSTE-0.57.33-WORDPRESS-SAFE-EXISTING-TOPIC-REENTRY-CANDIDATE.zip`
+SHA-256:
+`57803212686b7256cf26994bbb25be913c39c757753b9dab92c5e37c34ae1e1b`
+
+KISS-Delta:
+- keine neue Architektur, kein neues Plugin, keine zweite DB, kein Chat-Import;
+- konservative Portalidentitäts- und Family-V2-Semantik im bestehenden Normalpfad;
+- zusätzliche Qualifier bleiben REVIEW;
+- reine Familienkopf-/Keywordvarianten ohne Artikelintent werden fail-closed RETAINED_NON_PRODUCING;
+- gespeicherte Titel werden nur über die bestehende Title-Pipeline revalidiert;
+- Frageerkennung, Target-Keyword-Familiensemantik und Titelqualitätsguards generisch nachgezogen.
+
+Exakter 695er Zielkohorten-Replay:
+- vorher: 320 STRUCTURE_GAP / 372 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING / 0 NORMAL_PASS;
+- 0.57.33 lokal: 320 STRUCTURE_GAP / 354 SANDBOX_REQUIRED / 19 RETAINED_NON_PRODUCING / 2 NORMAL_PASS.
+
+Neue NORMAL_PASS:
+- `Wie striegelt man Pferde am besten?` → Striegel / FAQ / Kategorie 67;
+- `Muss man unter ein Reitpad eine Schabracke tragen?` → Schabracken / FAQ / Kategorie 84.
+
+Negativmatrix:
+- Decke-unterm-Sattel bleibt REVIEW, keine Unterdecken-Autozuordnung;
+- Dressur-Qualifier bleibt REVIEW;
+- Balance-Pads-Grammatik bleibt blockiert;
+- Stützräder-Titelqualität bleibt blockiert;
+- `Pferde Schabracken waschen` bleibt REVIEW;
+- falscher Titelkandidatenvertrag bzw. vorhandene Produktions-/Familienautorität verhindert den speziellen Stored-Title-Revalidation-Pfad;
+- nicht-fragender unbelegter Superlativ bleibt blockiert.
+
+Tests:
+- PHP 81/81 PASS;
+- Fresh-Unpack PHP 81/81 PASS;
+- ZIP PASS;
+- vollständiger 695er Zielkohorten-Replay;
+- kein 4472er Vollpool-PASS behauptet, da dieser lokale Vergleich in ein Tool-Timeout lief.
+
+Live-Readback 0.57.33 offen.
