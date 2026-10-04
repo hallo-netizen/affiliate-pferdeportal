@@ -2,13 +2,14 @@
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
 
-- Portal SEO Themenengine **0.57.28 live belegt**.
+- Portal SEO Themenengine **0.57.32 live exportseitig belegt**.
 - Live gespeicherter Einzellauf: `PAUSED_ERROR` / `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`.
-- Neuester lokaler Kandidat: **0.57.31** – replay-sicherer lokaler FINALIZE-Recovery nach tatsächlicher UI→Driver-Simulation.
-- ZIP: `PSTE-0.57.31-REPLAY-SAFE-LOCAL-FINALIZE-RECOVERY-CANDIDATE.zip`
-- SHA-256: `35f670fc8a44310b1cb858764e506b0af950ac3941790bb1f5ee93e4a4270430`.
+- Neuester/live geprüfter Stand: **0.57.32** – Revalidierungs-Persistenz für vorhandene Titelkandidaten.
+- ZIP: `PSTE-0.57.32-TITLE-CANDIDATE-REVALIDATION-PERSISTENCE-CANDIDATE.zip`
+- SHA-256: `c021ed852d89b6ae87fb4b6e347f49e6a0906b512671951044ea9a55ee06f772`.
 - Tests: 0.57.30 echter Resume-Pfad FAIL (SINGLE_PARKED); 0.57.31 sicherer Drift Recovery+Advance PASS; unsicherer Providerfehler bleibt Park FAIL-CLOSED; Contract-Rootfix PASS; PHP 81/81.
 - **0.57.30 verworfen; 0.57.31 noch nicht live installiert/readback-bestätigt; keine PU-ID.**
+- Live-Readback 0.57.32: 695 vorhandene Titelkandidaten persistent revalidiert; 320 STRUCTURE_GAP / 372 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING; Export-Readback PASS.
 - Fachstatus/NEXT ACTION ausschließlich: `../TEXT/CURRENT_STATE.md`.
 
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-03
