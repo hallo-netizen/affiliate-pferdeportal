@@ -66,6 +66,7 @@ $render_context=function($content_id,$context,$slot)use($rm,$o){return (string)$
 $getctx=function($id)use($rm,$o){return $rm('get_content_context')->invoke($o,$id);};
 $getcatctx=function($term_id)use($rm,$o){$t=get_term($term_id,'category');return $rm('get_category_archive_context')->invoke($o,$t);};
 $ranked=function($ctx,$slot)use($rm,$o){return $rm('ranked_campaigns_for_slot')->invoke($o,$ctx,$slot,'');};
+$ids=function($rows){$o=[];foreach((array)$rows as $r){$o[]=(string)($r['campaign']['id']??'').':'.(int)($r['specificity']??-1);}return $o;};
 
 // --- Core inventory ---
 $tech=$make_campaign('tech-wide',array(
@@ -162,7 +163,6 @@ chk(trim($productHtml)==='' || !contains_text($productHtml,'ppar-affiliate-slot'
 $set_active_only(array('tech-wide','invalid-wide'));
 $rankReal=$ranked($catNoneCtx,'category_recommendation');
 $rankCanonical=$ranked($catNoneCtx,'product_after_category_tiles');
-$ids=function($rows){$o=[];foreach((array)$rows as $r){$o[]=(string)($r['campaign']['id']??'').':'.(int)($r['specificity']??-1);}return $o;};
 echo "TRACE canonical_candidates=".json_encode($ids($rankCanonical))."\n";
 echo "TRACE real_alias_candidates=".json_encode($ids($rankReal))."\n";
 chk(count($rankCanonical)>0,'canonical_candidate_pool_nonempty');
