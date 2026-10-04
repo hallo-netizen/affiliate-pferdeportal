@@ -3,8 +3,8 @@
 Datum: 2026-10-04
 Workstream: AFFILIATE_ZENTRALE
 Branch: affiliate-release-current
-Source commit: e9dd765bc0e72f5ce0f17f6cbaaa796bd5cd8193
-Source manifest SHA-256: e046ec7c45317f283799caaef78287eb375b1c7c5b5eae9cf9eb3c052e1fc286
+Source functional commit: 95454463ddd5058eaa699875d349a39c598fc4d6
+Source manifest SHA-256: 62bb2ff2b22c97fbfef6b9d64bccfa1d06e41fdecd3ca8b33c4a764bc40415f8
 Pluginversion unverändert: 6.72.180
 Release: NICHT freigegeben
 
@@ -115,3 +115,41 @@ Noch offen:
 - erst danach Release-Check/Installer/Live-Readback.
 
 Kein Versionssprung, kein ZIP, keine Liveinstallation in diesem Schritt.
+
+
+## Performance-Nachprüfung 04.10.2026
+
+Zusätzlicher Review nach Nutzerhinweis auf möglichen Performance-Rückbau:
+
+- 6.72.171-Performancefunktionen gegen den belegten 6.72.171-Stand direkt verglichen:
+  - ranked_campaigns_request_cache_allowed(): IDENTISCH
+  - ranked_campaign_sanitize_key_request_cached(): IDENTISCH
+  - ranked_campaign_sanitize_text_request_cached(): IDENTISCH
+  - ranked_campaigns_request_cache_key(): IDENTISCH
+  - select_category_product_campaign_fast_v672171(): IDENTISCH
+  - ranked_campaign_candidate_pool(): IDENTISCH
+  - ranked_campaigns_for_slot(): IDENTISCH
+  - category_product_provider_mix_v672133(): IDENTISCH
+  - category_product_shared_rank_base(): IDENTISCH
+  - automation_campaign_exact_target_rank(): IDENTISCH
+  - automation_campaign_exact_target_rank_uncached(): IDENTISCH
+- render_banner() ist gegenüber 6.72.171 später verändert worden, aber gegenüber dem belegten 6.72.176-Stand IDENTISCH. Damit stammt diese Änderung nicht aus dem aktuellen KISS-Fix; sie ist der bereits belegte eBay-BUSINESS-Payload-Fix.
+- Gegen 6.72.176 sind zusätzlich IDENTISCH:
+  - render_banner()
+  - ranked_campaigns_request_cache_allowed()
+  - ranked_campaigns_request_cache_key()
+  - select_category_product_campaign_fast_v672171()
+  - ranked_campaign_candidate_pool()
+  - ranked_campaigns_for_slot()
+  - category_product_provider_mix_v672133()
+  - banner_distribution_reorder_candidates()
+  - banner_distribution_stable_index()
+- Die beiden aktuell geänderten Funktionen enthalten keine DB-Abfrage und keinen Remote-Request.
+- Im ersten KISS-Stand war bei einem Nichttreffer ein zweiter Aufruf von automation_campaign_exact_target_rank() möglich. Dieser unnötige Doppelaufruf wurde in Commit 95454463ddd5058eaa699875d349a39c598fc4d6 entfernt.
+- Nach Cleanup gibt es im zentralen Rankingpfad nur noch einen Aufrufpunkt für die gespeicherte Zielkante.
+- Rassenbanner verlassen campaign_match_rank() vor URL-/Glossar-/Rassensemantik und verursachen dadurch weniger Rankingarbeit als vorher.
+- slot_required_creative_type() bleibt statisch request-lokal gecacht; die erweiterte Aliasliste erzeugt keine DB-/Remote-Arbeit.
+
+Ergebnis: KEIN belegter Rückbau oder Überschreiben der 6.72.171/6.72.176-Performanceverbesserungen durch den aktuellen Banner-KISS-Fix.
+
+Offen bleibt weiterhin ein aktueller WordPress/MariaDB-Gesamtgate. Die vorhandenen automatisch gestarteten 6.72.170/6.72.171-Workflows sind versionshart codiert und brechen vor ihren eigentlichen Tests am Versions-Grep ab; sie dürfen nicht als Funktions-Fail gewertet werden. Eine Workflowänderung ist nach aktuellem Scope ausdrücklich verboten.
