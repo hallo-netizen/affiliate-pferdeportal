@@ -958,3 +958,26 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 **Installer:** `AFFILIATE_ZENTRALE_6.72.184.zip`, SHA-256 `bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`.
 
 **Status:** SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS / LIVE_PRODUCTION_READBACK_OPEN. Noch kein Live-PASS für 6.72.184.
+
+
+## AFF-ERR-047 — Gespeicherte falsche Creative-Library-Kante wurde bei Banner-Migration blind wiederverwendet
+
+**Datum:** 04.10.2026.
+
+**Live-Befund:** Nach dem ersten 6.72.184-Liveversuch blieb auf Schabracken der SanoVet-Fütterungsbanner sichtbar. Damit war der bisherige 6.72.184-Nachweis unvollständig und der alte Installer nicht abnahmefähig.
+
+**Fehlender Gegenfall im alten Test:** Der frühere Upgrade-Test kannte einen Legacy-Banner außerhalb der Creative-Library und einen unmaterialisierten korrekten Library-Banner. Er enthielt aber keinen Banner, dessen echte Ziel-URL bereits auf Fütterung zeigt, während in der Creative-Library noch eine alte falsche Zielkante auf Schabracken gespeichert ist.
+
+**Bewiesene Root Cause:** `output_banner_destination_classification()` verwendet eine vorhandene gespeicherte Library-Kante vor der erneuten Ziel-URL-Auswertung. Der 6.72.184-Banner-Migrationsworker rief deshalb den normalen Planner auf, ohne die alte automatische Kante vorher zu verwerfen. Eine falsche alte Kante konnte sich damit selbst bestätigen.
+
+**NEGATIV-Beweis vor Fix:** WordPress 7.1.2 + MariaDB, Source-Run `37227361318` und ZIP-Run `37227361328`: echte Ziel-URL `/fuetterung-upgrade-e2e/`, gespeicherte Kante `Schabracken Upgrade E2E`. Der identische Upgrade-Gate wird gezielt ROT bei `POST_UPGRADE_stale_edge_recomputed_from_real_destination`. Performance-Hardlock bleibt PASS.
+
+**KISS-Fix:** Nur im einmaligen Banner-only-Migrationsworker werden vor der bestehenden Planung die abgeleiteten automatischen Felder `topic_targets`, `topic_score` und `classified_at` für den jeweiligen aktiven Banner zurückgesetzt. Danach läuft unverändert der bestehende Ziel-URL-Klassifizierer und speichert die neue Kante. Manuelle Control-/FIXED-Entscheidungen liegen separat und bleiben erhalten. Keine Änderung am Frontend-Ranking, Renderer oder Performance-Hotpath.
+
+**POSITIV-Beweis nach Fix:** Source-Run `37227561289` = SUCCESS, exakt derselbe vorher rote Zustand wird korrigiert: gespeicherte Kante wechselt von Schabracken auf Fütterung; 20/20 PASS; eBay und Idealo unverändert; FIXED-Ausnahme erhalten; 0 Remoteaufrufe. ZIP-Run `37227561276` = SUCCESS; 20/20 Upgrade, 21/21 kompletter Bannerpfad, 26/26 Ziel-URL-Sammelstelle, 27/27 Manifest-Byteidentität, PHP 21/21, Performance-Hardlock PASS.
+
+**Neuer getesteter Installer:** `AFFILIATE_ZENTRALE_6.72.184.zip`, SHA-256 `46bcc02b2284fbbb0830b9f254d178f15ad0be072cbb3b40ee7fd658d4e1e437`, 793009 Bytes. Der frühere 6.72.184-Installer mit SHA `bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06` ist superseded und darf nicht mehr installiert werden.
+
+**Nicht wiederholen:** Eine Migrationsprüfung muss auch einen bereits falsch gespeicherten zentralen Zustand enthalten. Eine gespeicherte automatische Kante darf bei einer ausdrücklich angeordneten Re-Evaluation nicht ihre eigene Eingabe sein. Kein Frontend-Reklassifizieren als Ersatz.
+
+**Status:** NEGATIVE_REPRODUCTION_PASS / FIXED_SOURCE_AND_ZIP_FULL_E2E_PASS / REAL_WORDPRESS_READBACK_OPEN.
