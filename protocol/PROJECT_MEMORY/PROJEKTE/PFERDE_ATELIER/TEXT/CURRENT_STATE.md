@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
 STAND: 2026-10-04
-STATUS: PSTE 0.57.31 LIVE / REALER 695ER VERGLEICH: 695/695 TITELKANDIDATEN UNVERÄNDERT / 0.57.32 REVALIDATION-PERSISTENCE LOKAL HARD-PASS
+STATUS: LIVE-BESTANDSAUFBEREITUNG MIT REVALIDIERUNGS-PERSISTENZ COMPLETE / 695 VORHANDENE TITELKANDIDATEN NEU GEPRÜFT / 320 STRUKTUR / 372 REVIEW / 3 NICHT PRODUZIEREND
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -53,6 +53,27 @@ Frische Tests:
   - `includes/class-pste-sandbox-record-contract.php`;
   - `portal-seo-topic-engine.php`;
 - Familien-/Struktur-/Normalpfad-/Produktwahl-/Admin-/Repository-/Driver-/Storage-/Titel-/Intent-Dateien gegenüber 0.57.29 hashidentisch.
+
+## LIVE-READBACK 2026-10-04 – REVALIDIERUNGSPERSISTENZ
+
+Nutzer-Screenshot belegt nach dem Bestandslauf:
+- `Bestandsaufbereitung COMPLETE`;
+- `0 neue Titelkandidaten`;
+- **`695 vorhandene Titelkandidaten neu geprüft`**;
+- **`320 Strukturentscheidung nötig`**;
+- **`372 Review nötig`**;
+- **`3 nicht produzierend`**;
+- `0 zusätzlich für PSERC prüfbar`;
+- `vollständig aufbereitet 37`;
+- `Provider-Abfragen: ausgeschlossen`;
+- Completion: `EXISTING_POTENTIAL_EXHAUSTED_NO_PROVIDER_CALL`.
+
+Einordnung:
+`0 neue Titelkandidaten` ist in diesem Lauf korrekt, weil keine neuen Titel erzeugt werden sollten. Der belegte Erfolg des 0.57.32-Revalidierungspfads ist die sichtbare Persistenz der **695 bereits vorhandenen** Titelkandidaten in die drei fail-closed Folgeklassen.
+
+Die Verteilung ist mit der vorherigen 694er Deduplikationssimulation konsistent:
+- 695 Live-Zeilen = 320 Struktur + 372 Review + 3 nicht produzierend;
+- nach Zusammenführung der einen bekannten exakten Titel-Dublette ergibt sich erwartbar 694 = 320 Struktur + 371 Review + 3 nicht produzierend.
 
 ## AKTUELLER BELASTBARER LIVE-STAND
 
@@ -246,19 +267,19 @@ Hardtests:
 
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05732_NEEDS_LIVE_INSTALL_AND_695_REVALIDATION_READBACK`
+`PSTE_05732_REVALIDATION_PERSISTENCE_NEEDS_FULL_EXPORT_READBACK`
+
+Die 695 vorhandenen Titelkandidaten wurden live sichtbar neu klassifiziert und persistiert. Offen ist jetzt nur noch der vollständige Export-Readback, damit die gespeicherten Kandidatenzeilen byte-/feldgenau gegen den vorherigen Export geprüft und anschließend die 320 Struktur- bzw. 372 Review-Fälle belastbar weiterbearbeitet werden können.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_05732_RUN_EXISTING_ONLY_EXPORT_AND_VERIFY_695_CHANGED`
+`EXPORT_FULL_TOPIC_MAP_AFTER_05732_REVALIDATION`
 
-1. PSTE **0.57.32** installieren.
-2. `SEO Themenengine → Übersicht → Titel aus vorhandenem Material erzeugen → Vorhandenes Material in Titelkandidaten umwandeln`.
-3. Bis COMPLETE laufen lassen.
-4. Danach `SEO Themenengine → Einstellungen → Gesamte Themenkarte exportieren`.
-5. Neuen Export gegen den 04.10.-0.57.31-Export prüfen.
-6. PASS nur, wenn die vorhandenen 695 Kandidaten nun als revalidiert sichtbar/persistiert sind und Titel/Evidenz unverändert bleiben.
-7. Keine neue Provider-/DataForSEO-Recherche.
+1. `SEO Themenengine → Einstellungen`.
+2. Abschnitt `Longtails recherchieren, Titel bilden und Kategorien zuordnen`.
+3. **`Gesamte Themenkarte exportieren`**.
+4. Exportdatei im Arbeitschat prüfen.
+5. Erst danach 320 Strukturentscheidungen und 372 Review-Fälle nach vorhandener Evidenz weiterbearbeiten; keine neue Provider-/DataForSEO-Recherche.
 
 ## NICHT ANFASSEN
 
