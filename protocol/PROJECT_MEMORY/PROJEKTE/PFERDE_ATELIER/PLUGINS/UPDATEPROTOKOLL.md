@@ -347,3 +347,33 @@ Prüfung:
 Grenze:
 Nicht live installiert. Keine PU-ID, keine Release-/Live-Freigabe, keine neue Provider-Recherche, kein Publish.
 
+
+
+## RELEASE-VORBEREITUNG 2026-10-04 – PSTE 0.57.30 / KEIN PU-EREIGNIS
+
+Kandidat:
+`PSTE-0.57.30-SANDBOX-DATAFLOW-ROOTFIX-CANDIDATE.zip`
+
+SHA-256:
+`c2f0e9e05f2ffddeea2c7ee022dd18ad04f9f5820ebbab4eabfab1253c235aa4`
+
+Basis:
+PSTE 0.57.29.
+
+WARUM:
+Live gespeicherter Einzellauf hängt bei `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`. Der V2-Producer berechnete korrekte Komponentenhashes, aber `applyToRecord()` persistierte die gebundenen Komponenten nur beim Legacy-Vertrag.
+
+FIX:
+V2-Komponenten transient an `applyToRecord()`, vor Persistenz hash-validieren, genau einmal am Record speichern, transienten Transport vor `sandbox_dataflow`-Persistenz entfernen.
+
+POSITIVTEST:
+Vorherfehler auf 0.57.29 exakt reproduziert; 0.57.30 Record-Bindung PASS.
+
+NEGATIVTEST:
+Nachträgliche Mutation der Portal-Komponente blockiert weiterhin exakt mit `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT`.
+
+REGRESSION:
+UI-Guard 5/5; PHP 81/81; ZIP PASS; nur Contract + Versionsdatei geändert; Familien-/Produktwahl-/Normalpfad-/Driver-/Storage-Fachlogik unverändert.
+
+LIVE:
+Noch nicht installiert/readback-bestätigt. Keine PU-ID.
