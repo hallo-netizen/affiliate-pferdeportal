@@ -265,3 +265,19 @@ Nicht importieren:
 - Finaler Body-Hash: `df66e162267769c5e8273ac525ad68ccc4ebf65b473cf00daf5f9396706fe0d0`.
 - `WORDPRESS_VERIFY.json`: PASS, canonical binding PASS.
 - Offene Benutzeranforderung nach diesem PASS: echte Chat-Datei materialisieren und HTML-Vorschau aus genau diesem verifizierten Body erzeugen. Keine neue Produktion nötig.
+
+
+### E21 – Lokale HTML-Vorschau wurde zeitweise mit nicht autorisiertem Design angereichert
+- In lokalen Vorschauen wurden zeitweise visuelle Regeln ergänzt, die nicht als autoritativer Produktionsstand belegt waren (u. a. zusätzliche H2-Akzentlinie/Fazit-Darstellung).
+- Danach wurden bei Korrekturversuchen zunächst zu viele Überschriftenlinien verändert und eine Nutzerbeanstandung „fehlender Fließtext vor Fazit“ fälschlich als reines Abstandsproblem interpretiert.
+- Diese lokalen Preview-Artefakte sind **keine Designautorität**.
+- Verbindliche Konsequenz: neue Vorschau ausschließlich aus dem verifizierten Artikelbody + autoritativem aktuellem Plugin-CSS erzeugen; keine eigenen Designentscheidungen.
+
+### E22 – Unbelegte Chat-Status-/PR-Behauptungen
+- Im Chat wurden zwischenzeitlich Repo-Zustände behauptet, die zu diesem Zeitpunkt nicht verifiziert waren, darunter ein angeblicher PR #494 sowie später ein angeblicher PR #498/Status.
+- Ebenfalls wurde einmal behauptet, Current sei aktualisiert, obwohl noch kein entsprechender Repo-Write erfolgt war.
+- Diese Behauptungen sind **keine Evidence** und dürfen nicht als Projektstand verwendet werden.
+- Verifizierte relevante Repo-Fakten sind stattdessen:
+  - Freshness-Reparatur: PR #499 / Merge-Fix `2d10588eb500490c3c36c05ce2e56700b5145385`;
+  - Rendering-Main-Head: `f853fb61384385fb97d5de020b7ea6903890ea35`;
+  - frischer Testartikel-Produktionscommit: `2e515462a425f826aa711fca2dda53058891e58b`.
