@@ -447,12 +447,15 @@
   },
   "closeout_refresh_20261004": {
     "basis_production_head": "2e515462a425f826aa711fca2dda53058891e58b",
-    "history_update_commit": "f8ac2e7f558707d2e06924586268a2c3a2b944ac",
+    "history_update_commit": "11c8042fa9790cc03f787d292318295f816bab7b",
     "main_design_head": "f853fb61384385fb97d5de020b7ea6903890ea35",
     "relevant_change_since_previous_current": true,
     "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
     "start_router_ref": "main:K0_START_HERE.md -> konzept0-portal-neutral-20261002:K0_START_HERE.md",
     "one_truth_check": "PASS",
-    "library_used": false
+    "library_used": false,
+    "previous_current_commit": "1d56e38636ce07436a474c859579610e1b2a12f5",
+    "previous_current_selftest_run": 37186137590,
+    "previous_current_selftest_result": "SUCCESS"
   }
 }
