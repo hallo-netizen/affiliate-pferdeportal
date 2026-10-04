@@ -4,10 +4,10 @@
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
 
-- Portal SEO Themenengine **0.57.26 live belegt**.
-- Neuester lokaler Entwicklungskandidat: **0.57.28** – nachhaltige Familien-Morphologie + generisches fail-closed Familien-/Struktur-Routing + Produktwahl-Sicherheitsbindung.
-- Kandidat: `PSTE-0.57.28-SUSTAINABLE-FAMILY-STRUCTURE-ROUTING-CANDIDATE.zip`
-- SHA-256: `a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`.
+- Portal SEO Themenengine **0.57.28 live belegt**; Bestandsstart aktuell durch vorhandenen Einzellauf korrekt mit `PSTE_RESEARCH_JOB_ALREADY_ACTIVE` blockiert.
+- Neuester lokaler Entwicklungskandidat: **0.57.29** – 0.57.28 unverändert plus fail-closed UI-Guard für bereits aktive Einzelläufe vor Bestandsaufbereitung.
+- Kandidat: `PSTE-0.57.29-ACTIVE-JOB-GUARD-CANDIDATE.zip`
+- SHA-256: `e5baf380157236103a5c15c0cee8da2c750daef207cd4fe9efef6f9791e7f880`.
 - Basis: 0.57.27 / `414b18f99e676516464790c842eedebc71a72a701c32bb95bd2d924d45ae9c79`.
 - Lokale Evidence: ZIP PASS; Fresh-Unpack PHP 81/81; 694er Replay 320 STRUCTURE_GAP / 371 SANDBOX / 3 Produktwahl-Hold / 0 NORMAL_PASS; Family-Regression 0; Strukturrouter 6/6; Produktwahl 14/14; 326er Bestand 0 künstliche Produktwahl-Treffer.
 - **Kein WordPress-Update auf 0.57.28 belegt; keine PU-ID.**
