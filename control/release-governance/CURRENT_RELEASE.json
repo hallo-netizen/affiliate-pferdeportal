@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 185,
+  "generation": 186,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.184",
-    "status": "BANNER_LIBRARY_MIGRATION_SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
+    "status": "LIVE_FAIL_SCHABRACKEN_STALE_LIBRARY_EDGE_REPRODUCTION_BOUND",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,7 +44,7 @@
     "current_source_manifest_sha256": "adc68fc5cf28df1baf6688f615ce49885c19d5fbbffaa71147baba9412667084",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
-    "candidate_reference_scope": "UPGRADE_6_72_183_TO_6_72_184_20_OF_20_PASS_PLUS_FRESH_LIBRARY_BANNER_21_OF_21_PASS_PLUS_DESTINATION_LIBRARY_26_OF_26_PASS_ZIP_27_OF_27_PASS_PERFORMANCE_HARDLOCK_PASS_LIVE_NOT_RUN",
+    "candidate_reference_scope": "PREVIOUS_6_72_184_ZIP_INVALIDATED_BY_REAL_SCHABRACKEN_FAIL; EXACT_STALE_LIBRARY_EDGE_NEGATIVE_REPRODUCTION_REQUIRED_BEFORE_FIX",
     "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip",
     "final_artifact_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.184.zip",
@@ -584,37 +584,22 @@
     }
   },
   "execution_state": {
-    "state": "INSTALLER_6_72_184_BANNER_LIBRARY_MIGRATION_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
-    "authorized_next_action": "INSTALL_6_72_184_ON_REAL_WORDPRESS_AND_READBACK_SCHABRACKEN_PLUS_REAL_BANNERS",
-    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.184.zip over the currently installed 6.72.183 on the real WordPress. Allow the banner-only migration worker to run, then read back Schabracken first and verify the previous SanoVet feeding banner no longer wins, followed by representative page/category/post/glossary/breed banner slots. Do not rebuild before a real 6.72.184 live failure is proven.",
-    "completion_condition": "REAL_WORDPRESS_6_72_184_INSTALL_SCHABRACKEN_AND_REPRESENTATIVE_BANNER_READBACK_PASS",
-    "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_6_72_184_FAILURE",
+    "state": "LIVE_FAIL_REPRODUCE_STALE_LIBRARY_EDGE_BEFORE_FIX",
+    "authorized_next_action": "ADD_EXACT_STALE_LIBRARY_EDGE_NEGATIVE_CASE_TO_EXISTING_6_72_184_UPGRADE_FIXTURE_AND_RUN_EXISTING_WORDPRESS_MARIADB_GATE; DO_NOT_CHANGE_PRODUCTION_SOURCE_UNTIL_NEGATIVE_REPRODUCTION_IS_PROVEN",
+    "bound_user_scope_action": "Real screenshot shows SanoVet feeding banner still visible on Schabracken after the 6.72.184 live attempt. Reproduce the missing counterstate: an output_object_v4/Creative-Library banner whose real destination is feeding but whose already-persisted library edge still points to Schabracken. The existing gate must go RED on current source before any fix. No frontend/performance changes.",
+    "completion_condition": "CURRENT_6_72_184_GATE_FAILS_SPECIFICALLY_BECAUSE_STALE_STORED_LIBRARY_EDGE_SURVIVES_MIGRATION",
+    "after_completion_action": "FIX_ONLY_STALE_LIBRARY_EDGE_REEVALUATION_IN_BANNER_MIGRATION_THEN_RERUN_IDENTICAL_GATE_POSITIVE",
     "no_optional_detours": true,
-    "sequence": 56,
+    "sequence": 57,
     "authorized_change_prefixes": [
-      "release/affiliate-zentrale/current/",
-      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-      "release/affiliate-zentrale/evidence/",
-      "release/affiliate-zentrale/artifacts/final/",
+      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php",
+      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672184_live_banner_migration_full_e2e_20261004.md",
-    "evidence_sha256": "c516ab2cf3f588ea1704a7a14878e0cfa6afeda1e52dc500fc59e1128b505e55",
-    "current_gate_limitation": "The real pferde-atelier.de production install/readback has not yet been executed. Historical hard-coded version workflows may remain red and are not current functional gates.",
-    "current_installer": {
-      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip",
-      "sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
-      "bytes": 792763,
-      "git_blob_sha": "21acf77857298b59cf1c9de085a37a71c763ad13",
-      "source_upgrade_e2e_run": 37223477984,
-      "zip_full_e2e_run": 37223792210,
-      "upgrade_chain": "20_OF_20_PASS",
-      "library_banner_full_chain": "21_OF_21_PASS",
-      "destination_library_chain": "26_OF_26_PASS",
-      "package_files": "27_OF_27_PASS",
-      "performance": "PASS_NO_NEW_FRONTEND_DB_HTTP_OR_URL_RECLASSIFICATION",
-      "real_failure_reproduced_before_fix": "PASS_LEGACY_SANOVET_ON_SCHABRACKEN_FIXTURE"
-    }
+    "current_gate_limitation": "Previous fixture did not seed an already-persisted wrong Creative-Library destination edge. Therefore its green migration result did not cover the live counterstate.",
+    "live_failure_evidence": "User screenshot 2026-10-04 20:58 Europe/Berlin: SanoVet feeding banner visibly remains on Schabracken.",
+    "performance_lock": "NO_PRODUCTION_SOURCE_CHANGE_IN_NEGATIVE_REPRODUCTION_PHASE"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -639,7 +624,9 @@
       "release/affiliate-zentrale/artifacts/final/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "control/release-governance/CURRENT_RELEASE.json",
-      "protocol/AFFILIATE_RELEASE_"
+      "protocol/AFFILIATE_RELEASE_",
+      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php",
+      "AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php"
     ],
     "forbidden_prefixes": [
       ".github/workflows/",
