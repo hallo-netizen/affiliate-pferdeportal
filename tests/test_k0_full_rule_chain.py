@@ -5,6 +5,7 @@ from engine.k0_full_rules import (
     verify_pre_lt68, verify_final,
 )
 from tests.test_k10 import make_base
+from engine.checkers import structural_receipts
 
 
 def package_from_article(a):
@@ -94,6 +95,24 @@ class K0FullRuleChainTests(unittest.TestCase):
         final=verify_final(p,cat,{'status':'PASS','finding_count':0})
         self.assertEqual(final['status'],'PASS',final)
         self.assertEqual(final['article_hard_rule_count'],85)
+
+    def test_title_keyword_allows_intervening_grammar_words(self):
+        a=make_base()
+        a['target_keyword']='Kappzaum über Trense'
+        a['title']='Kann man einen Kappzaum über einer Trense tragen?'
+        row=next(r for r in structural_receipts(a) if r['rule_id']=='title.keyword_required')
+        self.assertEqual(row['status'],'PASS',row)
+
+    def test_title_keyword_still_requires_all_keyword_words_in_order(self):
+        for title in (
+            'Kann man einen Kappzaum über einem Gebiss tragen?',
+            'Kann man eine Trense über einem Kappzaum tragen?',
+        ):
+            a=make_base()
+            a['target_keyword']='Kappzaum über Trense'
+            a['title']=title
+            row=next(r for r in structural_receipts(a) if r['rule_id']=='title.keyword_required')
+            self.assertEqual(row['status'],'FAIL',row)
 
     def test_missing_internal_links_blocks(self):
         a=make_base()
