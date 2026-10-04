@@ -411,3 +411,34 @@ Kandidat:
 SHA-256 `35f670fc8a44310b1cb858764e506b0af950ac3941790bb1f5ee93e4a4270430`.
 
 0.57.31 noch nicht live installiert.
+
+
+## DELTA 2026-10-04 – REALER 695ER VERGLEICH / 0.57.32 PERSISTENCE-ROOTFIX
+
+Realer Exportvergleich:
+- 0.57.26: `pste-global-seo-topic-map-20261003-194321-utc.json`;
+- 0.57.31: `pste-global-seo-topic-map-20261004-074909-utc.json`;
+- 4472 Kandidaten in beiden Dateien;
+- exakt dieselben 695 `PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1`-Kandidaten;
+- **695/695 vollständig unverändert**.
+
+Rootcause:
+`reanalyzeRetainedBacklogBatch()` verwirft bei bereits vorhandenem Titel und erneutem Normalpfad-Nicht-PASS das frisch berechnete Payload. Dadurch konnte 0.57.28/31 intern STRUCTURE_GAP/REVIEW/Productwahl-Hold berechnen, ohne dass diese neue Klassifikation für die 695 gespeichert wurde.
+
+0.57.32:
+- persistiert ausschließlich fail-closed Revalidierungszustände bereits vorhandener Titelkandidaten;
+- Originaltitel und Titelkandidaten-Evidenz unverändert;
+- production_title leer;
+- Compiler blockiert;
+- Raw-Source-Invariant hart;
+- NORMAL_PASS-Misrouting hart blockiert;
+- zusätzliche UI-Zähler für Revalidierung statt irreführender alleiniger „neue Titel“-Metrik.
+
+Kandidat:
+`PSTE-0.57.32-TITLE-CANDIDATE-REVALIDATION-PERSISTENCE-CANDIDATE.zip`
+SHA-256 `c021ed852d89b6ae87fb4b6e347f49e6a0906b512671951044ea9a55ee06f772`.
+
+Lokale Tests:
+PHP 81/81 PASS; ZIP PASS; Positiv/Negativ-Revalidation PASS. Normal-Metadata-Pfad hashidentisch zu 0.57.28; erwartete 694er fachliche Verteilung bleibt 320 STRUCTURE_GAP / 371 SANDBOX_REQUIRED / 3 RETAINED_NON_PRODUCING.
+
+Live-Readback offen.
