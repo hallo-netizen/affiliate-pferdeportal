@@ -1,6 +1,6 @@
 <?php
-$failures=[]; $passes=[];
-function chk($cond,$name,$detail=''){ global $failures,$passes; if($cond){$passes[]=$name; echo "PASS $name".($detail!==''?" :: $detail":"")."\n";}else{$failures[]=$name.($detail!==''?" :: $detail":""); echo "FAIL $name".($detail!==''?" :: $detail":"")."\n";}}
+$GLOBALS['e2e_failures']=array(); $GLOBALS['e2e_passes']=array();
+function chk($cond,$name,$detail=''){ if($cond){$GLOBALS['e2e_passes'][]=$name; echo "PASS $name".($detail!==''?" :: $detail":"")."\n";}else{$GLOBALS['e2e_failures'][]=$name.($detail!==''?" :: $detail":""); echo "FAIL $name".($detail!==''?" :: $detail":"")."\n";}}
 function contains_text($hay,$needle){ return strpos((string)$hay,(string)$needle)!==false; }
 if (!class_exists('Pferdeportal_Affiliate_Router')) { fwrite(STDERR,"FATAL plugin class missing\n"); exit(2); }
 if (Pferdeportal_Affiliate_Router::VERSION !== '6.72.181') { fwrite(STDERR,"FATAL wrong version ".Pferdeportal_Affiliate_Router::VERSION."\n"); exit(2); }
@@ -115,6 +115,9 @@ $badPost=$make_campaign('bad-post-square',array('assignment_mode'=>'page_tree','
 $generalPost=$make_campaign('general-post',array('assignment_mode'=>'fallback','placements'=>array('post_inline_banner'),'dimensions'=>'1000x100','priority'=>999,'partner'=>'pgpost'));
 $set_active_only(array('exact-post','bad-post-square','general-post'));
 $postHtml=$render_post($post,'post_inline_banner');
+$postRank=$ranked($getctx($post),'post_inline_banner');
+echo "TRACE post_candidates=".json_encode($ids($postRank) ?? array())."\n";
+echo "TRACE post_html=".substr(preg_replace('/\s+/',' ',strip_tags($postHtml)),0,220)."\n";
 chk(contains_text($postHtml,'exact-post'),'post_exact_visible');
 chk(!contains_text($postHtml,'bad-post-square'),'post_invalid_geometry_blocked');
 
@@ -132,6 +135,9 @@ $set_active_only(array('breed-a','breed-b'));
 $breedHtml1=$render_post($breed1,'breed_single_desktop_banner');
 $breedHtml2=$render_post($breed2,'breed_single_desktop_banner');
 $breedHtml3=$render_post($breed3,'breed_single_desktop_banner');
+echo "TRACE breed1_candidates=".json_encode($ids($ranked($getctx($breed1),'breed_single_desktop_banner')) ?? array())."\n";
+echo "TRACE breed2_candidates=".json_encode($ids($ranked($getctx($breed2),'breed_single_desktop_banner')) ?? array())."\n";
+echo "TRACE breed3_candidates=".json_encode($ids($ranked($getctx($breed3),'breed_single_desktop_banner')) ?? array())."\n";
 chk(trim($breedHtml1)!==''&&trim($breedHtml2)!==''&&trim($breedHtml3)!=='','breed_all_visible');
 $breedUrls=array();
 foreach(array($breedHtml1,$breedHtml2,$breedHtml3) as $h){if(contains_text($h,'breed-a'))$breedUrls[]='a';elseif(contains_text($h,'breed-b'))$breedUrls[]='b';else $breedUrls[]='?';}
@@ -165,6 +171,6 @@ chk(count($rankReal)>0,'REAL_alias_candidate_pool_nonempty');
 // 10. No outbound provider/network calls in the complete render gate.
 chk($http_calls===0,'no_remote_http_calls_during_render','http_calls='.$http_calls);
 
-echo "SUMMARY passes=".count($passes)." failures=".count($failures)."\n";
-if($failures){echo "FAILURES ".json_encode($failures,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";exit(1);}
+echo "SUMMARY passes=".count($GLOBALS['e2e_passes'])." failures=".count($GLOBALS['e2e_failures'])."\n";
+if($GLOBALS['e2e_failures']){echo "FAILURES ".json_encode($GLOBALS['e2e_failures'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)."\n";exit(1);}
 echo "FULL_WORDPRESS_MARIADB_BANNER_E2E_PASS\n";
