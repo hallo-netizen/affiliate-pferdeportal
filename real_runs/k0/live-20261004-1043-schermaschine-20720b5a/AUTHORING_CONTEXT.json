@@ -1,0 +1,237 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+    "plan_slot": "20720b5afc6b05f8467edf9e77640d9f4afeedbb2c2482331db3df5335f2a427",
+    "target_keyword": "Welche Schermaschine für Pferde ist die leiseste",
+    "title": "Welche Schermaschine für Pferde ist die leiseste?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Kerbl – Aesculap Durati Horse",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-durati-horse-195678"
+        },
+        {
+          "source_title": "Kerbl – Aesculap Favorita CLi",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-favorita-cli-195692"
+        },
+        {
+          "source_title": "Kerbl – Aesculap Bonum Pro",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-bonum-pro-1018326"
+        },
+        {
+          "source_title": "Kerbl – Aesculap Econom II",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-schermaschine-econom-ii-7517"
+        },
+        {
+          "source_title": "Aesculap – Die richtige Pferdeschur-Maschine",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/grosstier-schermaschinen/wissenswertes-pferdeschur/richtige-pferdeschur-maschine"
+        }
+      ],
+      "claims": [
+        "Kerbl gibt für die Aesculap Durati Horse einen Schalldruckpegel von 63 dB an; das Modell ist für die Pferdeteilschur vorgesehen.",
+        "Kerbl gibt für die Aesculap Favorita CLi ebenfalls einen Schalldruckpegel von 63 dB an.",
+        "Kerbl gibt für die Aesculap Bonum Pro einen Schalldruckpegel von 65 dB(A) an und beschreibt das Modell als geräuscharm.",
+        "Kerbl gibt für die Aesculap Econom II einen Schalldruckpegel von 73 dB an; das Modell ist für die Pferdeschur und Rinderschur vorgesehen.",
+        "Aesculap empfiehlt für Teilschuren an Beinen, Kopf und kleinen Körperflächen unter anderem die Durati Horse und Favorita CLi, während für die Komplettschur unter anderem Econom II, Econom CL und Bonum Pro genannt werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "allowed_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "source_retrieval_provenance": {
+      "contract": "K0_RUN_BOUND_SOURCE_RETRIEVAL_PROVENANCE_V1",
+      "status": "PASS",
+      "retrieval_run_id": "research:clipper-20261004-0843",
+      "retrieved_at_utc": "2026-10-04T08:43:00Z",
+      "sources": [
+        {
+          "source_title": "Kerbl – Aesculap Durati Horse",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-durati-horse-195678",
+          "retrieved_at_utc": "2026-10-04T08:43:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Kerbl – Aesculap Favorita CLi",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-favorita-cli-195692",
+          "retrieved_at_utc": "2026-10-04T08:43:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Kerbl – Aesculap Bonum Pro",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-bonum-pro-1018326",
+          "retrieved_at_utc": "2026-10-04T08:43:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Kerbl – Aesculap Econom II",
+          "source_url": "https://www.kerbl.com/de/produkt/aesculap-schermaschine-econom-ii-7517",
+          "retrieved_at_utc": "2026-10-04T08:43:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        },
+        {
+          "source_title": "Aesculap – Die richtige Pferdeschur-Maschine",
+          "source_url": "https://www.aesculap-schermaschinen.de/de/grosstier-schermaschinen/wissenswertes-pferdeschur/richtige-pferdeschur-maschine",
+          "retrieved_at_utc": "2026-10-04T08:43:00Z",
+          "retrieval_evidence": "LIVE_WEB_RETRIEVAL_THIS_RUN"
+        }
+      ],
+      "historical_research_used": false,
+      "publish_allowed": false
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Schermaschine für Pferde ist die leiseste?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Kerbl – Aesculap Durati Horse",
+        "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-durati-horse-195678",
+        "statement": "Kerbl gibt für die Aesculap Durati Horse einen Schalldruckpegel von 63 dB an; das Modell ist für die Pferdeteilschur vorgesehen.",
+        "evidence_text": "Kerbl gibt für die Aesculap Durati Horse einen Schalldruckpegel von 63 dB an; das Modell ist für die Pferdeteilschur vorgesehen.",
+        "evidence_text_sha256": "58f7c3065594892ec67ae4118d1a5afbd8d1ce079a48f0e90159acd4ac845da9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Kerbl – Aesculap Favorita CLi",
+        "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-favorita-cli-195692",
+        "statement": "Kerbl gibt für die Aesculap Favorita CLi ebenfalls einen Schalldruckpegel von 63 dB an.",
+        "evidence_text": "Kerbl gibt für die Aesculap Favorita CLi ebenfalls einen Schalldruckpegel von 63 dB an.",
+        "evidence_text_sha256": "b6005e057e409c61f13b01ef6737346ae1420380838124e4faadb494d704fbd5",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Kerbl – Aesculap Bonum Pro",
+        "source_url": "https://www.kerbl.com/de/produkt/aesculap-akkuschermaschine-bonum-pro-1018326",
+        "statement": "Kerbl gibt für die Aesculap Bonum Pro einen Schalldruckpegel von 65 dB(A) an und beschreibt das Modell als geräuscharm.",
+        "evidence_text": "Kerbl gibt für die Aesculap Bonum Pro einen Schalldruckpegel von 65 dB(A) an und beschreibt das Modell als geräuscharm.",
+        "evidence_text_sha256": "0de2f3fc698266b68df42d8758085fb4eeed318259a1eed5acabb218fd1389d9",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Kerbl – Aesculap Econom II",
+        "source_url": "https://www.kerbl.com/de/produkt/aesculap-schermaschine-econom-ii-7517",
+        "statement": "Kerbl gibt für die Aesculap Econom II einen Schalldruckpegel von 73 dB an; das Modell ist für die Pferdeschur und Rinderschur vorgesehen.",
+        "evidence_text": "Kerbl gibt für die Aesculap Econom II einen Schalldruckpegel von 73 dB an; das Modell ist für die Pferdeschur und Rinderschur vorgesehen.",
+        "evidence_text_sha256": "6471227c3bf8a0cf51ee94a1fa47ad447bbcbd4a99bce59b7fc73f39a21994f2",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Aesculap – Die richtige Pferdeschur-Maschine",
+        "source_url": "https://www.aesculap-schermaschinen.de/de/grosstier-schermaschinen/wissenswertes-pferdeschur/richtige-pferdeschur-maschine",
+        "statement": "Aesculap empfiehlt für Teilschuren an Beinen, Kopf und kleinen Körperflächen unter anderem die Durati Horse und Favorita CLi, während für die Komplettschur unter anderem Econom II, Econom CL und Bonum Pro genannt werden.",
+        "evidence_text": "Aesculap empfiehlt für Teilschuren an Beinen, Kopf und kleinen Körperflächen unter anderem die Durati Horse und Favorita CLi, während für die Komplettschur unter anderem Econom II, Econom CL und Bonum Pro genannt werden.",
+        "evidence_text_sha256": "3958239157daaccb16f8682dfe1b96a27aa4b7157781900cb3613fcab4a12132",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/gesundheit-fellpflege-und-saison-schermaschinen-faq/",
+        "anchor": "FAQ zu Schermaschinen",
+        "block": "details"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/",
+        "anchor": "Pferde Atelier",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheit-fellpflege-und-saison-schermaschinen-faq/",
+        "anchor": "Schermaschinen für Pferde",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/gesundheit-fellpflege-und-saison-schermaschinen-faq/",
+        "active": true
+      },
+      {
+        "href": "/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "gesundheit-fellpflege-und-saison-schermaschinen-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schermaschine",
+      "Pferde",
+      "leise",
+      "Geräusch",
+      "Schalldruck",
+      "Teilschur",
+      "Komplettschur"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": null,
+      "rationale": "Die Tabelle stellt veröffentlichte Schalldruckpegel und den vorgesehenen Schurbereich mehrerer Modelle direkt nebeneinander."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
