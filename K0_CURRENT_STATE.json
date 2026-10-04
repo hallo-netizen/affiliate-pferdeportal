@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FRESH_TEST_ARTICLE_FULL_K0_PASS_CHAT_FILE_AND_HTML_PREVIEW_PENDING",
-  "first_open_blocker": "FINAL_VERIFIED_CHAT_ATTACHMENT_AND_HTML_PREVIEW_NOT_YET_DELIVERED",
-  "next_action": "MATERIALIZE_EXACT_VERIFIED_WORDPRESS_SINGLE_TO_CHAT_AND_GENERATE_HTML_PREVIEW_FROM_THE_SAME_VERIFIED_BODY_USING_ONLY_AUTHORITATIVE_CURRENT_DESIGN_CSS",
+  "status": "TEST_ARTICLE_MACHINE_CHAIN_PASS_BUT_REAL_FRESH_RESEARCH_PROVENANCE_NOT_PROVEN",
+  "first_open_blocker": "K0_REAL_FRESH_RESEARCH_RETRIEVAL_EVIDENCE_NOT_BOUND_TO_AUTHORING_CONTEXT",
+  "next_action": "ADD_ONE_MINIMAL_RUN_BOUND_SOURCE_RETRIEVAL_PROVENANCE_GATE_WITH_POSITIVE_NEGATIVE_TESTS_THEN_RERUN_THE_TEST_ARTICLE_FROM_ZERO_AND_ONLY_AFTER_FULL_PASS_DELIVER_CHAT_FILE_AND_HTML_PREVIEW",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -418,7 +418,7 @@
     "publish_allowed": false
   },
   "fresh_test_article_20261004": {
-    "status": "FULL_K0_PASS",
+    "status": "MACHINE_CHAIN_PASS_DO_NOT_USE_AS_FRESH_RESEARCH_ACCEPTANCE_EVIDENCE",
     "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
     "run_dir": "real_runs/k0/test-20261004-fremdreiter-ae3b6c46",
     "run_instance_id": "run:f83847e91c2fec0d855df87f",
@@ -443,19 +443,48 @@
     "direct_wordpress_upload_ready": true,
     "publish_allowed": false,
     "chat_file_delivered": false,
-    "html_preview_delivered": false
+    "html_preview_delivered": false,
+    "research_provenance_verified": false,
+    "mechanical_pipeline_pass": true,
+    "acceptance_for_user_fresh_research_rule": false,
+    "invalidated_for_import": false,
+    "note": "Keep as pipeline evidence only. Do not treat as proof that sources were freshly retrieved in this run."
   },
   "closeout_refresh_20261004": {
     "basis_production_head": "2e515462a425f826aa711fca2dda53058891e58b",
-    "history_update_commit": "11c8042fa9790cc03f787d292318295f816bab7b",
+    "history_update_commit": "cd8f0178480ee790e530b3b7c8f610dc0d82cf2d",
     "main_design_head": "f853fb61384385fb97d5de020b7ea6903890ea35",
     "relevant_change_since_previous_current": true,
     "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
     "start_router_ref": "main:K0_START_HERE.md -> konzept0-portal-neutral-20261002:K0_START_HERE.md",
     "one_truth_check": "PASS",
     "library_used": false,
-    "previous_current_commit": "1d56e38636ce07436a474c859579610e1b2a12f5",
-    "previous_current_selftest_run": 37186137590,
-    "previous_current_selftest_result": "SUCCESS"
+    "previous_current_commit": "11fcb3a844c78198ca881cdfd7124c1d7e45dfe7",
+    "previous_current_selftest_run": 37186224768,
+    "previous_current_selftest_result": "SUCCESS",
+    "delta_after_nachholpruefung": "REAL_FRESH_RESEARCH_PROVENANCE_GAP_FOUND"
+  },
+  "research_provenance_gap": {
+    "status": "OPEN_ROOT_BLOCKER",
+    "discovered_at_closeout": true,
+    "current_freshness_guard_proves": [
+      "URL_SYNTAX_AND_NONBLOCKED_HOST",
+      "FACT_PACK_AND_RESEARCH_CLAIM_HASH_BINDING",
+      "NO_EXACT_HISTORICAL_FACT_PACK_REUSE",
+      "NO_EXACT_HISTORICAL_RESEARCH_PACKET_REUSE",
+      "NO_HISTORICAL_ARTICLE_OR_DRAFT_CONTENT_REFERENCE"
+    ],
+    "current_freshness_guard_does_not_prove": [
+      "SOURCE_WAS_FETCHED_IN_THIS_RUN",
+      "SOURCE_CONTENT_WAS_READ_IN_THIS_RUN",
+      "CLAIM_WAS_DERIVED_FROM_CURRENT_SOURCE_RETRIEVAL"
+    ],
+    "affected_test_run": "real_runs/k0/test-20261004-fremdreiter-ae3b6c46",
+    "machine_writer_accept_run": 37185472620,
+    "machine_selftest_run": 37185472673,
+    "history_ref": "history/K0_WORKLOG_ERROR_HISTORY_20261002.md#E23",
+    "required_rootfix": "RUN_BOUND_SOURCE_RETRIEVAL_PROVENANCE_GATE",
+    "quality_reduction_allowed": false,
+    "publish_allowed": false
   }
 }
