@@ -910,4 +910,4 @@ Belegt im E2E:
 
 **PERFORMANCE:** keine Provider-/DB-/Remote-Abfrage im neuen Rassenweg; vorhandene request-lokale Ranking-/Kandidaten-Caches bleiben unangetastet.
 
-**Status:** FIXED_SOURCE_LOCAL_KISS_POSNEG_PASS / PERFORMANCE_RECHECK_PASS / CURRENT_MANIFEST_BOUND / WORDPRESS_MARIADB_FULL_GATE_OPEN.
+**Status:** FIXED_SOURCE_LOCAL_KISS_POSNEG_PASS / PERFORMANCE_RECHECK_PASS / INSTALLER_6_72_181_BUILT / LIVE_READBACK_OPEN.
