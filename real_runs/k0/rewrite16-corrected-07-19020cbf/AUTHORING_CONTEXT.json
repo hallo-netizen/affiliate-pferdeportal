@@ -20,7 +20,11 @@
           "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen"
         }
       ],
-      "claims": []
+      "claims": [
+        "Für die Wahl eines Kappzaums sind Passform und stabiler Sitz zentral; der Nasenriemen soll auf dem festen Nasenbein liegen und nicht zu tief sitzen.",
+        "Backenstücke und Kehlriemen müssen den Kappzaum so stabilisieren, dass er bei seitlichem Zug nicht Richtung Auge oder Jochbogen wandert.",
+        "Material, Gewicht und Zahl der Ringe sind nachrangig gegenüber Passform und geplantem Einsatz; ein schwerer oder besonders komplexer Kappzaum ist nicht automatisch besser."
+      ]
     },
     "production_plan_item": {
       "article_type": "Beratung",
@@ -34,6 +38,127 @@
       }
     }
   },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Einen Kappzaum anhand von Passform, Stabilität und geplantem Einsatz passend für das Pferd auswählen.",
+      "decision_criteria": [
+        "Passform am Nasenbein",
+        "Seitliche Stabilität",
+        "Gewicht und Beschläge",
+        "Geplanter Einsatz"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+        "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen",
+        "evidence_text_sha256": "7a0353a9eb4be814fc09acfbb5457997f3c0c75a33101bf3bc7abbc95b349a96",
+        "statement": "Für die Wahl eines Kappzaums sind Passform und stabiler Sitz zentral; der Nasenriemen soll auf dem festen Nasenbein liegen und nicht zu tief sitzen.",
+        "evidence_text": "Für die Wahl eines Kappzaums sind Passform und stabiler Sitz zentral; der Nasenriemen soll auf dem festen Nasenbein liegen und nicht zu tief sitzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+        "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen",
+        "evidence_text_sha256": "b02d2df9e3ee24494d974873101557c49c2bd9ec4e483cf1a97137895537a724",
+        "statement": "Backenstücke und Kehlriemen müssen den Kappzaum so stabilisieren, dass er bei seitlichem Zug nicht Richtung Auge oder Jochbogen wandert.",
+        "evidence_text": "Backenstücke und Kehlriemen müssen den Kappzaum so stabilisieren, dass er bei seitlichem Zug nicht Richtung Auge oder Jochbogen wandert.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_title": "Kappzaum Pferd: Wirkung, Arten & richtig anlegen – RidersDeal",
+        "source_url": "https://www.ridersdeal.com/ratgeber/kappzaum-pferd-wirkung-einsetzen",
+        "evidence_text_sha256": "19e63c5515d2a6248c439ac31130f27a21cf58e3623f6e0a51a11337d7e1d1c6",
+        "statement": "Material, Gewicht und Zahl der Ringe sind nachrangig gegenüber Passform und geplantem Einsatz; ein schwerer oder besonders komplexer Kappzaum ist nicht automatisch besser.",
+        "evidence_text": "Material, Gewicht und Zahl der Ringe sind nachrangig gegenüber Passform und geplantem Einsatz; ein schwerer oder besonders komplexer Kappzaum ist nicht automatisch besser.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/training/training-longieren/kappzaum/",
+        "anchor": "Kappzaum",
+        "block": "criteria"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/training/training-longieren/",
+        "anchor": "Longieren",
+        "block": "decision"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/longiergurte/",
+        "anchor": "Longiergurte",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/training/training-longieren/kappzaum/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/longiergurte/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "kappzaum-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Kappzaum",
+      "Passform",
+      "Nasenriemen",
+      "Longieren",
+      "Stabilität",
+      "Bodenarbeit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": null,
+      "rationale": "Die Bauarten und Prüfpunkte lassen sich in einer kompakten Tabelle schneller vergleichen und behalten einen eigenen Entscheidungsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": [],
+    "expected_list_name": "criteria"
+  },
   "publish_allowed": false,
-  "retry_token": 1
+  "retry_token": 2
 }
