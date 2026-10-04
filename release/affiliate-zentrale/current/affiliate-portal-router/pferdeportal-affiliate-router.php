@@ -4030,9 +4030,8 @@ JS;
         if (is_array($runtime_page_topic_rank) && (int) ($runtime_page_topic_rank['specificity'] ?? 0) >= 500) { return $runtime_page_topic_rank; }
 
         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
-            if ($automation_rank === null) {
-                $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
-            }
+            // automation_rank wurde oben bereits genau einmal bestimmt. Kein
+            // zweiter Cache-/Resolver-Aufruf bei einem echten Nichttreffer.
             // Banner duerfen nach einer fehlenden exakten Zielkante immer
             // in die naechste Stufe (Themenkreis/allgemeiner/technischer Fallback)
             // weiterlaufen. Produkt-Creatives bleiben dagegen fail-closed.
