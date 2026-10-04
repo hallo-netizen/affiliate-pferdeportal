@@ -188,3 +188,28 @@ Nicht importieren:
 - Status darf daher nicht als produktseitig garantiertes `PASS` geführt werden.
 - Kein weiterer Eingriff in Artikelproduktion oder Qualitätsregeln daraus abgeleitet.
 
+
+
+## 2026-10-04 – Delta: 16er-Vollregel-Recheck und realer WordPress-Importblock
+
+### E14 – 16er-Batch 14:44 ist durch spätere Vollregel-Reparaturen überholt
+- Am 2026-10-04T14:44:54Z wurde `real_runs/k0_batch/20261004_rewrite16_current/WORDPRESS_BATCH.json` aus damals vorhandenen 16 `WORDPRESS_SINGLE.json` gesammelt.
+- Danach wurden die Originalartikel Kappzaum und Schabracke erneut mit dem vollständigen aktuellen Regelpaket gebunden und textlich repariert.
+- Dadurch ist der 14:44-Batch nicht mehr der aktuelle Endstand und darf nicht erneut importiert werden.
+- Letzter Kappzaum-Writer-Lauf: `37213914240` = FAIL mit
+  `facts.conclusion_no_new_untraced_facts`,
+  `facts.trace_lexical_support`,
+  `heading.natural_concrete_section_language`.
+- Letzter Schabracke-Writer-Lauf: `37213890726` = FAIL mit
+  `facts.conclusion_no_new_untraced_facts`,
+  `heading.natural_concrete_section_language`.
+- Beide Writer-Seals selbst waren PASS; Blocker liegt im vollständigen Pre-LT-Regelgate.
+- K0-Selftest auf aktuellem Head bleibt SUCCESS; das ist kein Artikel-PASS.
+
+### E15 – realer WordPress-Import des überholten 16er-Batches blockiert bei article_id
+- Reales Importresultat: `PSERC_SYSTEM4_WORDPRESS_IMPORT_BLOCKED`.
+- Plugin: `0.28.30`, Build `0.28.30-pste-v5-binding-safe`.
+- Block bereits bei Index 0, Feld `article_id`, Reason `PSERC_SYSTEM4_ARTICLE_FIELD_INVALID`.
+- `redaktionsplan_read_attempted=false`, `redaktionsplan_write_attempted=false`, `publish_allowed=false`.
+- Dieser Importfehler ist nach dem aktuellen Vollregel-Blocker zu behandeln; vor einem neuen Realimport muss die dann neu erzeugte finale 16er-Datei gegen die reale Importer-Grenze positiv/negativ simuliert werden.
+- Historische article_id-/Importer-Fehler vom 2026-10-03 sind ausdrücklich zu berücksichtigen; kein weiterer Realimport auf Verdacht.
