@@ -2553,7 +2553,7 @@ JS;
         if (!$campaign || empty($campaign['active']) || !$this->campaign_is_complete($campaign) || !$this->rule_is_current($campaign) || !$this->campaign_program_allows_delivery($campaign) || !$this->campaign_source_allows_delivery($campaign) || !$this->campaign_control_allows_delivery($campaign, $slot_type) || !$this->campaign_health_allows_delivery($campaign)) { return null; }
         $required = $this->slot_required_creative_type($slot_type);
         if ($required !== '' && sanitize_key((string)($campaign['creative_type'] ?? 'banner')) !== $required) { return null; }
-        if ($this->overview_wide_banner_slot($slot_type) && !$this->overview_wide_banner_campaign_eligible($campaign, $slot_type)) { return null; }
+        if ($required === 'banner' && !$this->campaign_matches_contract_slot_rule($campaign, $slot_type)) { return null; }
         if ($required === 'product' && !$this->product_campaign_public_image_ready($campaign)) { return null; }
         return array('campaign'=>$campaign,'specificity'=>1000,'matches'=>1,'priority'=>1000,'reason'=>$reason);
     }
@@ -3642,8 +3642,26 @@ JS;
         foreach ((array) $this->output_portal_registry() as $portal) {
             if (!is_array($portal) || empty($portal['enabled'])) { continue; }
             $matrix = $this->output_slot_matrix($portal);
-            if (is_array($matrix) && !empty($matrix[$slot_type]) && is_array($matrix[$slot_type])) {
+            if (!is_array($matrix)) { continue; }
+            if (!empty($matrix[$slot_type]) && is_array($matrix[$slot_type])) {
                 $rule = $matrix[$slot_type];
+                break;
+            }
+
+            // KISS: Runtime-Aliase wie category_recommendation duerfen nicht
+            // zwischen Slotname und technischer Matrix verloren gehen. Nur wenn
+            // die bestehende Aliasgruppe genau EINE eindeutige kanonische Regel
+            // ergibt, darf diese verwendet werden. Mehrdeutige Desktop/Mobil-
+            // Gruppen bleiben fail-closed.
+            $alias_rules = array();
+            foreach ((array) $this->equivalent_slot_names($slot_type) as $alias) {
+                $alias = sanitize_key((string) $alias);
+                if ($alias === '' || $alias === $slot_type || empty($matrix[$alias]) || !is_array($matrix[$alias])) { continue; }
+                $candidate_rule = $matrix[$alias];
+                $alias_rules[hash('sha256', serialize($candidate_rule))] = $candidate_rule;
+            }
+            if (count($alias_rules) === 1) {
+                $rule = reset($alias_rules);
                 break;
             }
         }
@@ -3685,15 +3703,17 @@ JS;
             ? (isset($campaign['placements']) && is_array($campaign['placements']) ? $campaign['placements'] : array())
             : (isset($campaign['placements']) && is_array($campaign['placements']) ? array_map('sanitize_key', $campaign['placements']) : array());
         $accepted = $this->equivalent_slot_names($slot_type);
-        if (!empty(array_intersect($accepted, $placements)) || in_array('*', $placements, true)) { return true; }
-        // V6.72.69: Alle Bannerplaetze nutzen denselben zentralen Bannerbestand.
-        // Historische/manuelle Placement-Listen duerfen die Vollautomatik nicht
-        // blockieren. Wiederverwendung ist aber nur erlaubt, wenn die kanonische
-        // Slotmatrix Creative-Typ, Format, Mindestgroesse und Upscale hart akzeptiert.
+        $placement_match = !empty(array_intersect($accepted, $placements)) || in_array('*', $placements, true);
+
+        // KISS: Bei Bannern ist Placement nur Herkunft/Hint und darf niemals
+        // den technischen Werbeplatzvertrag ueberspringen. Gleichzeitig darf
+        // ein fachfremdes Placement den letzten globalen Fallback nicht sperren:
+        // technisch passend = lieferbar, Thema/Placement entscheidet erst danach
+        // ueber die Relevanzstufe.
         if ($this->slot_required_creative_type($slot_type) === 'banner') {
             return $this->campaign_matches_contract_slot_rule($campaign, $slot_type);
         }
-        return false;
+        return $placement_match;
     }
 
     /**
@@ -4883,10 +4903,6 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
                 continue;
             }
             if ($required_type !== '' && $runtime_campaign['_ppar_norm_creative_type'] !== $required_type) { continue; }
-            if ($this->overview_wide_banner_slot($slot_type) && !$this->overview_wide_banner_campaign_eligible($runtime_campaign, $slot_type)) { continue; }
-            if ($this->category_large_banner_slot($slot_type) && !$this->category_large_banner_campaign_eligible($runtime_campaign, $slot_type)) { continue; }
-            if (in_array($slot_type, array('glossary_single_desktop_banner','glossary_single_mobile_banner'), true) && !$this->campaign_matches_contract_slot_rule($runtime_campaign, $slot_type)) { continue; }
-            if (in_array($slot_type, array('breed_single_desktop_banner','breed_single_mobile_banner'), true) && !$this->campaign_matches_contract_slot_rule($runtime_campaign, $slot_type)) { continue; }
             if ($exact_mode) {
                 if (!$this->affiliate_campaign_matches_exact_identifiers($runtime_campaign, $exact_identifiers)) { continue; }
                 // Productwissen exact identity is the fachliche target decision.
