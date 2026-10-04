@@ -1,0 +1,194 @@
+name: TEMP Affiliate Banner Destination Library E2E 6.72.183 SOURCE
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-banner-destination-library-e2e-v672183.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+      - 'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-full-e2e:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Bind exact 6.72.183 source and manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "Version: 6.72.183" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.183';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('release/affiliate-zentrale/current')
+          expected={}
+          for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines():
+              if not line.strip(): continue
+              h,rel=line.split('  ',1); expected[rel]=h
+          files={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+                 for p in (root/'affiliate-portal-router').rglob('*') if p.is_file()}
+          assert set(files)==set(expected),(set(expected)-set(files),set(files)-set(expected))
+          bad=[p for p,h in files.items() if expected[p]!=h]
+          assert not bad,bad
+          print('PASS source manifest 27/27 byte identity')
+          PY
+
+      - name: PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/lint.log)" = "21"
+          php -l AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php
+          php -l AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php
+          echo "PASS PHP lint"
+
+      - name: Performance hardlock
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=f5832a28d36dba64402036c052dc262f4f36440d
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          base='f5832a28d36dba64402036c052dc262f4f36440d'
+          cur=Path('release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          old=subprocess.check_output(['git','show',f'{base}:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'],text=True)
+          def body(src,name):
+              marker='function '+name+'('; start=src.find(marker)
+              if start<0: raise SystemExit('FAIL missing '+name)
+              brace=src.find('{',start); depth=0; state='code'; esc=False; i=brace
+              while i<len(src):
+                  c=src[i]; n=src[i+1] if i+1<len(src) else ''
+                  if state=='sq':
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c=="'": state='code'
+                  elif state=='dq':
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c=='"': state='code'
+                  elif state=='line':
+                      if c=='\n': state='code'
+                  elif state=='block':
+                      if c=='*' and n=='/': state='code'; i+=1
+                  else:
+                      if c=="'": state='sq'
+                      elif c=='"': state='dq'
+                      elif c=='/' and n=='/': state='line'; i+=1
+                      elif c=='#': state='line'
+                      elif c=='/' and n=='*': state='block'; i+=1
+                      elif c=='{': depth+=1
+                      elif c=='}':
+                          depth-=1
+                          if depth==0:return src[start:i+1]
+                  i+=1
+              raise SystemExit('FAIL unclosed '+name)
+          protected=[
+            'ranked_campaigns_request_cache_allowed','ranked_campaign_sanitize_key_request_cached',
+            'ranked_campaign_sanitize_text_request_cached','ranked_campaigns_request_cache_key',
+            'select_category_product_campaign_fast_v672171','ranked_campaign_candidate_pool',
+            'ranked_campaigns_for_slot','category_product_provider_mix_v672133','render_banner',
+            'banner_distribution_reorder_candidates','banner_distribution_stable_index',
+            'category_product_shared_rank_base'
+          ]
+          for name in protected:
+              if body(cur,name)!=body(old,name):
+                  raise SystemExit('FAIL protected performance function changed '+name)
+          hot=body(cur,'campaign_match_rank')
+          for forbidden in ['$wpdb','wp_remote_','get_post_meta(']:
+              if forbidden in hot: raise SystemExit('FAIL frontend rank new cost '+forbidden)
+          print('PASS performance hardlock')
+          PY
+
+      - name: Install fresh WordPress and source plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Destination Library E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          add_action('init', static function(){
+              if (!post_type_exists('uge_term')) register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+          },1);
+          PHP
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if (!class_exists("Pferdeportal_Affiliate_Router") || Pferdeportal_Affiliate_Router::VERSION !== "6.72.183") { exit(2); } echo "PASS plugin active 6.72.183\n";' --path=/tmp/wp-site
+
+      - name: Existing full banner workflow regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672183.php" --path=/tmp/wp-site | tee /tmp/full-old.log
+          grep -F 'SUMMARY passes=21 failures=0' /tmp/full-old.log
+          grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_PASS' /tmp/full-old.log
+
+      - name: Reset WordPress database for destination-library gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp db reset --yes --path=/tmp/wp-site
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Destination Library E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+      - name: COMPLETE destination-library workflow to HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php" --path=/tmp/wp-site | tee /tmp/destination-library.log
+          grep -F 'failures=0' /tmp/destination-library.log
+          grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/destination-library.log
