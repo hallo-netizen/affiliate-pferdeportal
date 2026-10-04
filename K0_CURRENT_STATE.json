@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FRESH_REAL_REGRESSION_PASS_BATCH_ALLOWED",
-  "first_open_blocker": null,
-  "next_action": "RUN_USER_3_ARTICLE_BATCH_AND_COMBINE_VERIFIED_WORDPRESS_FILE",
+  "status": "RENDERING_HARD_LOCAL_RETEST_PASS_HTML_PREVIEW_READY",
+  "first_open_blocker": "LIVE_WORDPRESS_AFTER_FIX_NOT_RUN",
+  "next_action": "AFTER_USER_HTML_REVIEW_RUN_LIVE_WORDPRESS_TEST_ARTICLE_READBACK",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -45,7 +45,10 @@
       "CANONICAL_ID_BINDING",
       "PUBLISH_SAFETY",
       "OTHER_PLUGINS_OR_DESIGN_AREAS"
-    ]
+    ],
+    "historical_content_as_writer_input_allowed": false,
+    "final_github_link_delivery_allowed": false,
+    "final_chat_file_delivery_required": true
   },
   "rewrite16": {
     "total": 16,
@@ -82,13 +85,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "87044b5733f4ea10800fa5f881a66d672b6d4741",
-    "last_checked_branch_head_sha": "72f179acd6ae0859ba3a22449c249a0e0904225f",
-    "latest_writer_accept_run": 37147496645,
-    "latest_writer_accept_result": "SUCCESS_FRESH_RENDERING_LINK_REGRESSION",
+    "last_checked_branch_head_sha": "794029cc717999f53effb845582c0afe8c3c99b8",
+    "latest_writer_accept_run": 37148297780,
+    "latest_writer_accept_result": "SUCCESS_USER_BATCH_ARTICLE_2_FINAL",
     "latest_k0_selftest_run": 37147241043,
     "latest_k0_selftest_result": "SUCCESS_RENDERING_FIX_CURRENT_SYNC",
     "ppm679_parity": "PASS",
-    "delta_result": "LINK_DISTRIBUTION_FRESH_REAL_PASS; H2_RENDERING_CODE_FIX_AND_LOCAL_VISUAL_PASS; FRESH_STRUCTURED_WORDPRESS_OUTPUT_PASS; USER_3_ARTICLE_BATCH_ALLOWED"
+    "delta_result": "USER_3_ARTICLE_BATCH_FULL_PASS_COLLECTED; WORDPRESS_BATCH_READY; PUBLISH_FALSE"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -230,16 +233,34 @@
     "start_binding_commit": "87044b5733f4ea10800fa5f881a66d672b6d4741",
     "selftest_run": 37136204080,
     "selftest_result": "SUCCESS",
-    "fresh_real_article_after_fix": "PASS_EXACTLY_3_DISTRIBUTED_LINKS"
+    "fresh_real_article_after_fix": "PASS_EXACTLY_3_DISTRIBUTED_LINKS",
+    "latest_user_batch_html_recheck": "PASS_EXACTLY_3_LINKS_ALL_THREE",
+    "kuehlgamaschen_visible_bindings": [
+      {
+        "role": "parent_category",
+        "anchor": "Kühlgamaschen",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "anchor": "Sicherheit bei Kühlgamaschen",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "anchor": "Regeneration",
+        "block": "further_information"
+      }
+    ]
   },
   "rendering_spacing": {
-    "status": "CODE_FIX_AND_LOCAL_VISUAL_PASS",
+    "status": "REGRESSION_FIX_MERGED_HARDLOCK_AND_FRESH_LOCAL_RETEST_PASS",
     "symptom": "LARGE_VERTICAL_GAPS_ABOVE_H2_IN_WORDPRESS_SINGLE_POST_PREVIEW",
     "article_html_extra_blank_paragraphs_before_h2": "NOT_OBSERVED",
     "article_html_extra_br_before_h2": "NOT_OBSERVED",
     "render_root_cause": "STRUCTURED_ARTICLE_SECTION_DEFAULT_SPACING_COLLIDES_WITH_SINGLE_POST_H2_MARGIN",
     "fix_scope": "ONLY_STRUCTURED_SINGLE_POST_SECTION_VERTICAL_SPACING",
-    "fix_ref": "main:223524c664b8b24e9da61cd5e9ccd8749385b58c",
+    "fix_ref": "main:cfe238cf83bacf7e55ef804864b46dea5338e21c",
     "fix_file": "pferde-template-kit_V1.50.421.php",
     "k0_branch_contains_design_plugin_source": false,
     "local_visual_negative_test": "PASS_GAP_REPRODUCED_APPROX_149PX",
@@ -252,6 +273,116 @@
     "k0_selftest_run": 37147241043,
     "k0_selftest_result": "SUCCESS",
     "fresh_regression_wordpress_single_ref": "real_runs/k0/fresh-20261003-1818-fremdreiter-759950a7/WORDPRESS_SINGLE.json",
-    "fresh_regression_writer_accept_run": 37147496645
+    "fresh_regression_writer_accept_run": 37147496645,
+    "regression_root_cause": "PPM_SOURCE_TRACE_METADATA_PARTICIPATED_IN_STRUCTURED_SECTION_LAYOUT_AND_AMPLIFIED_FLEX_GAPS; CONCLUSION_HAS_MULTIPLE_TRACE_SPANS",
+    "fix_changes": [
+      "PPM_SOURCE_TRACE_DISPLAY_NONE_IN_STRUCTURED_ARTICLE",
+      "STRUCTURED_SECTION_ROW_GAP_ZERO",
+      "VISIBLE_H2_MARGIN_BOTTOM_32PX",
+      "CONCLUSION_TRANSITION_NORMALIZED"
+    ],
+    "hardlock_run": 37149795336,
+    "hardlock_result": "SUCCESS",
+    "fresh_local_retest_after_cfe238c": "PASS",
+    "fresh_test_article_html_preview_after_cfe238c": "PASS_LOCAL_HTML_PREVIEW_USING_LATEST_VERIFIED_K0_KUEHLGAMASCHEN_OUTPUT",
+    "fresh_local_retest_metrics": {
+      "ordinary_h2_above_px": 32,
+      "ordinary_h2_below_px": 32,
+      "fazit_gap_amplification": "NOT_OBSERVED",
+      "source_trace_layout": "HIDDEN",
+      "positive_exact_3_links": "PASS",
+      "negative_missing_semantic_link": "BLOCK_AS_REQUIRED"
+    },
+    "local_preview_article_title": "Sind Kühlgamaschen für Pferde sinnvoll?",
+    "local_preview_note": "Preview uses latest verified K0 article HTML with merged cfe238c rendering CSS; this is not a new writer run."
+  },
+  "latest_user_batch": {
+    "input_batch_sha256": "70423281b69b3cfa28413ab2a7dcfa8a25cde4e5a526ee787cbbd79a317d471e",
+    "article_count": 3,
+    "status": "SYSTEM4_BATCH_FULL_PASS_COLLECTED",
+    "publish_allowed": false,
+    "wordpress_batch_path": "real_runs/k0/batch-70423281b69b3cfa/WORDPRESS_BATCH.json",
+    "batch_verify_path": "real_runs/k0/batch-70423281b69b3cfa/BATCH_VERIFY.json",
+    "article_titles": [
+      "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+      "Sind Kühlgamaschen für Pferde sinnvoll?",
+      "Welche Schermaschine für Pferde ist die leiseste?"
+    ],
+    "writer_runs": {
+      "fremdreiterrisiko": 37147496645,
+      "kuehlgamaschen": 37148297780,
+      "schermaschine": 37147959075
+    },
+    "languagetool_68": "PASS_ALL_THREE",
+    "ppm_679": "PASS_ALL_THREE",
+    "link_distribution": "PASS_ALL_THREE",
+    "rendering_regression": "PASS_LOCAL_VISUAL_PLUS_FRESH_STRUCTURED_OUTPUT"
+  },
+  "fresh_execution_hardlock": {
+    "status": "ACTIVE",
+    "trigger": "EACH_NEW_USER_UPLOAD_PLUS_K0_START",
+    "rule": "ALWAYS_NEW_K0_PRODUCTION_RUN",
+    "identical_batch_hash_may_reuse_previous_output": false,
+    "previous_wordpress_single_as_new_result_allowed": false,
+    "previous_wordpress_batch_as_new_result_allowed": false,
+    "previous_writer_or_gate_pass_as_new_execution_proof_allowed": false,
+    "required_fresh_proofs": [
+      "NEW_RUN_ID_OR_RUN_PATH",
+      "FRESH_RESEARCH_OR_FACT_PACK_BINDING",
+      "FRESH_WRITER_RUN",
+      "FRESH_PRE_LT_FULL_RULE_PASS",
+      "FRESH_LANGUAGETOOL_6_8",
+      "FRESH_FINAL_RULE_PASS",
+      "FRESH_SYSTEM4_WORDPRESS_HANDOFF_V1",
+      "FRESH_OUTPUT_VERIFICATION"
+    ],
+    "historical_outputs_role": "HISTORY_EVIDENCE_ONLY_NEVER_PRODUCTION_SUBSTITUTE",
+    "fail_closed_code": "K0_FRESH_EXECUTION_REQUIRED"
+  },
+  "content_isolation_hardlock": {
+    "status": "ACTIVE",
+    "scope": "RESEARCH_WRITER_REPAIR",
+    "current_upload_identity_authority": true,
+    "fresh_external_research_required": true,
+    "old_article_content_allowed": false,
+    "old_writer_draft_allowed": false,
+    "old_repair_text_allowed": false,
+    "old_fact_pack_allowed": false,
+    "old_research_packet_allowed": false,
+    "old_real_run_output_allowed": false,
+    "old_recovery_or_archive_content_allowed": false,
+    "live_portal_article_as_research_allowed": false,
+    "allowed_additional_inputs": [
+      "FRESH_EXTERNAL_RESEARCH_THIS_RUN",
+      "CURRENT_K0_RULES",
+      "CURRENT_WORDPRESS_CATEGORY_BINDING",
+      "CURRENT_INTERNAL_LINK_BINDINGS"
+    ],
+    "technical_history_use_only": [
+      "HASH_EVIDENCE",
+      "GATE_EVIDENCE",
+      "NEGATIVE_REGRESSION_EVIDENCE",
+      "HISTORICAL_TEXT_OVERLAP_DETECTION"
+    ],
+    "machine_guards": [
+      "K0_FRESH_INPUT_ISOLATION_V1",
+      "K0_HISTORICAL_CONTENT_GUARD_V1"
+    ],
+    "historical_text_overlap_words": 18,
+    "fail_closed_codes": [
+      "K0_INPUT_ISOLATION_BLOCKED",
+      "K0_HISTORICAL_TEXT_REUSE_BLOCKED"
+    ]
+  },
+  "chat_file_delivery_hardlock": {
+    "status": "ACTIVE",
+    "final_output_must_be_chat_file": true,
+    "github_link_as_final_output_allowed": false,
+    "raw_link_as_final_output_allowed": false,
+    "actions_link_as_final_output_allowed": false,
+    "artifact_link_as_final_output_allowed": false,
+    "exact_verified_bytes_required": true,
+    "hash_recheck_before_chat_delivery": true,
+    "fail_closed_code": "K0_CHAT_FILE_DELIVERY_REQUIRED"
   }
 }

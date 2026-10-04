@@ -78,6 +78,19 @@ jobs:
           python3 -m engine.k0_writer_station seal "$JOB_PATH" "$DRAFT_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
           python3 -m engine.k0_writer_station verify "$JOB_PATH" /tmp/K0_SEALED_WRITER_PRODUCT.json
 
+      - name: Hard historical-content isolation gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m engine.k0_historical_content_guard /tmp/K0_SEALED_WRITER_PRODUCT.json "$RUN_DIR" /tmp/k0-history-isolation.json
+          python3 - <<'PY'
+          import json
+          x=json.load(open('/tmp/k0-history-isolation.json'))
+          assert x['status']=='PASS',x
+          assert x['historical_text_reuse']=='NOT_DETECTED',x
+          print('K0_HISTORICAL_CONTENT_ISOLATION_PASS')
+          PY
+
       - name: Automatic portal assignment
         shell: bash
         run: |
@@ -233,5 +246,6 @@ jobs:
             /tmp/k0-gates.json
             /tmp/k0-lt68-result.json
             /tmp/k0-full-rule-final.json
+            /tmp/k0-history-isolation.json
           if-no-files-found: error
           retention-days: 30
