@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 184,
+  "generation": 185,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "5dcf66b13d61b5f715df4373eb524d980b7fcbb5a8bf2aeb535e0dc45ed798e8",
+    "manifest_sha256": "adc68fc5cf28df1baf6688f615ce49885c19d5fbbffaa71147baba9412667084",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,20 +35,20 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.183",
-    "status": "DESTINATION_LIBRARY_SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
+    "version": "6.72.184",
+    "status": "BANNER_LIBRARY_MIGRATION_SOURCE_AND_INSTALLED_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "5dcf66b13d61b5f715df4373eb524d980b7fcbb5a8bf2aeb535e0dc45ed798e8",
+    "current_source_manifest_sha256": "adc68fc5cf28df1baf6688f615ce49885c19d5fbbffaa71147baba9412667084",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "3f689f076efc4318ed1188b86e51e66410f193d5256de7ddc54a91dc4aab6895",
-    "candidate_reference_scope": "SOURCE_21_OF_21_PLUS_DESTINATION_LIBRARY_26_OF_26_PASS_ZIP_SAME_PASS_PERFORMANCE_HARDLOCK_PASS_LIVE_NOT_RUN",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip",
-    "final_artifact_sha256": "3f689f076efc4318ed1188b86e51e66410f193d5256de7ddc54a91dc4aab6895",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.183.zip",
-    "handoff_artifact_bytes": 791323
+    "candidate_reference_artifact_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
+    "candidate_reference_scope": "UPGRADE_6_72_183_TO_6_72_184_20_OF_20_PASS_PLUS_FRESH_LIBRARY_BANNER_21_OF_21_PASS_PLUS_DESTINATION_LIBRARY_26_OF_26_PASS_ZIP_27_OF_27_PASS_PERFORMANCE_HARDLOCK_PASS_LIVE_NOT_RUN",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip",
+    "final_artifact_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.184.zip",
+    "handoff_artifact_bytes": 792763
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_DESTINATION_LIBRARY_SINGLE_TRUTH_6_72_183_FULL_E2E_PASS",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672183_destination_library_full_e2e_zip_pass_20261004.md",
-    "current_focus_reason": "User required a KISS, future-proof banner solution: one central destination-URL collection, one persisted portal mapping, then distribution. 6.72.183 makes the existing Creative-Library the single banner mapping authority. Real/decoded destination URL including host is classified once; no target becomes a general technical fallback; changed URL invalidates the old edge; output_object_v4 banners do not reclassify URL/text on frontend. Source and installed ZIP both pass the old 21/21 full chain and the new 26/26 destination-library chain. Performance hardlock passes; live production readback remains open.",
+    "current_focus": "BANNER_LIBRARY_SINGLE_TRUTH_LEGACY_AUTO_MIGRATION_6_72_184_FULL_E2E_PASS",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672184_live_banner_migration_full_e2e_20261004.md",
+    "current_focus_reason": "Real screenshot proved 6.72.183 still displayed a legacy SanoVet feeding banner on Schabracken. 6.72.184 makes Creative-Library/output_object_v4 the sole automatic banner source, migrates only active banners in background batches, prevents the generic full creative pool rescan for this banner-only release, preserves fixed manual banner overrides, and leaves eBay/Idealo product campaigns unchanged. Source upgrade and installed ZIP gates are green; real production readback remains open.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -163,6 +163,18 @@
         "zip_destination_library": "26_OF_26_PASS",
         "zip_manifest": "27_OF_27_PASS",
         "performance": "PASS_ZERO_NEW_FRONTEND_DB_ZERO_FRONTEND_HTTP"
+      },
+      "automatic_source_authority": "CREATIVE_LIBRARY_OUTPUT_OBJECT_V4_ONLY",
+      "legacy_automatic_campaigns": "BLOCKED_FROM_AUTOMATIC_POOL",
+      "manual_fixed_legacy": "PRESERVED_VIA_EXISTING_FIXED_PATH_ONLY",
+      "migration_672184": {
+        "scope": "ACTIVE_BANNERS_ONLY",
+        "execution": "ADMIN_TRIGGERED_BACKGROUND_BATCHES",
+        "generic_full_pool_rescan": "FORBIDDEN_FOR_6_72_184",
+        "products_replanned": false,
+        "ebay_product_campaign_unchanged": "PASS",
+        "idealo_product_campaign_unchanged": "PASS",
+        "remote_http_calls_in_gate": 0
       }
     },
     "awin_catalog_refresh": {
@@ -200,7 +212,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "6_72_183_DESTINATION_LIBRARY_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
+      "status": "6_72_184_BANNER_LIBRARY_MIGRATION_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -220,7 +232,7 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/shared_overview_banner_source_gate_20260918.txt",
       "source_manifest_sha256": "4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7",
       "source_gate": "21_OF_21_PASS",
-      "live_status": "LAST_REAL_LIVE_FAIL_STILL_6_72_176_UNTIL_6_72_183_PRODUCTION_INSTALL_READBACK"
+      "live_status": "REAL_SCREENSHOT_FAIL_6_72_183_SANOVET_ON_SCHABRACKEN; 6_72_184_FIX_ZIP_FULL_E2E_PASS_LIVE_NOT_RUN"
     },
     "awin_banner_source": {
       "status": "UNBOUND_REAL_SOURCE_REQUIRED",
@@ -572,13 +584,13 @@
     }
   },
   "execution_state": {
-    "state": "INSTALLER_6_72_183_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
-    "authorized_next_action": "INSTALL_6_72_183_ON_REAL_WORDPRESS_AND_READBACK_REAL_BANNERS",
-    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.183.zip on the real WordPress when live installation is initiated. Then read back actual existing provider banners across page/category/post/glossary/breed and verify stored Creative-Library destination mapping, visible HTML and performance. Do not rebuild before a real live failure is proven.",
-    "completion_condition": "REAL_WORDPRESS_6_72_183_INSTALL_REAL_BANNER_READBACK_AND_PERFORMANCE_PASS",
-    "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_FAILURE",
+    "state": "INSTALLER_6_72_184_BANNER_LIBRARY_MIGRATION_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
+    "authorized_next_action": "INSTALL_6_72_184_ON_REAL_WORDPRESS_AND_READBACK_SCHABRACKEN_PLUS_REAL_BANNERS",
+    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.184.zip over the currently installed 6.72.183 on the real WordPress. Allow the banner-only migration worker to run, then read back Schabracken first and verify the previous SanoVet feeding banner no longer wins, followed by representative page/category/post/glossary/breed banner slots. Do not rebuild before a real 6.72.184 live failure is proven.",
+    "completion_condition": "REAL_WORDPRESS_6_72_184_INSTALL_SCHABRACKEN_AND_REPRESENTATIVE_BANNER_READBACK_PASS",
+    "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_6_72_184_FAILURE",
     "no_optional_detours": true,
-    "sequence": 55,
+    "sequence": 56,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -586,20 +598,22 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672183_destination_library_full_e2e_zip_pass_20261004.md",
-    "evidence_sha256": "27fc4a2ca3812de4110b217beaa2308fdcbe99d65bcc7447fec869e6d1248ef0",
-    "current_gate_limitation": "Existing auto-triggered 6.72.170/6.72.171 workflows are version-hardcoded and stop at version grep before functional tests; workflow changes are forbidden by current scope, so those red runs are not functional failures.",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672184_live_banner_migration_full_e2e_20261004.md",
+    "evidence_sha256": "c516ab2cf3f588ea1704a7a14878e0cfa6afeda1e52dc500fc59e1128b505e55",
+    "current_gate_limitation": "The real pferde-atelier.de production install/readback has not yet been executed. Historical hard-coded version workflows may remain red and are not current functional gates.",
     "current_installer": {
-      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip",
-      "sha256": "3f689f076efc4318ed1188b86e51e66410f193d5256de7ddc54a91dc4aab6895",
-      "bytes": 791323,
-      "git_blob_sha": "b3fc195c684c6eb11d567ab63637acf0481308d6",
-      "source_full_e2e_run": 37219933282,
-      "zip_full_e2e_run": 37220236448,
-      "legacy_full_chain": "21_OF_21_PASS",
+      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip",
+      "sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
+      "bytes": 792763,
+      "git_blob_sha": "21acf77857298b59cf1c9de085a37a71c763ad13",
+      "source_upgrade_e2e_run": 37223477984,
+      "zip_full_e2e_run": 37223792210,
+      "upgrade_chain": "20_OF_20_PASS",
+      "library_banner_full_chain": "21_OF_21_PASS",
       "destination_library_chain": "26_OF_26_PASS",
       "package_files": "27_OF_27_PASS",
-      "performance": "PASS_NO_FRONTEND_DB_OR_HTTP_REGRESSION"
+      "performance": "PASS_NO_NEW_FRONTEND_DB_HTTP_OR_URL_RECLASSIFICATION",
+      "real_failure_reproduced_before_fix": "PASS_LEGACY_SANOVET_ON_SCHABRACKEN_FIXTURE"
     }
   },
   "branch_policy": {
