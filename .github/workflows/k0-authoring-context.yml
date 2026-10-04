@@ -42,16 +42,16 @@ jobs:
             exit 2
           fi
           research_session="$(python3 - "$context" <<'PY'
-import json,re,sys
-x=json.load(open(sys.argv[1],encoding='utf-8'))
-f=x.get('fresh_research') or {}
-if f.get('contract')!='K0_FRESH_RESEARCH_RECEIPT_V1':
-    raise SystemExit('K0_FRESH_RESEARCH_RECEIPT_REQUIRED')
-sid=str(f.get('research_session_id') or '')
-if not re.fullmatch(r'research:[0-9a-f]{24}',sid):
-    raise SystemExit('K0_FRESH_RESEARCH_SESSION_INVALID')
-print(sid)
-PY
+          import json,re,sys
+          x=json.load(open(sys.argv[1],encoding='utf-8'))
+          f=x.get('fresh_research') or {}
+          if f.get('contract')!='K0_FRESH_RESEARCH_RECEIPT_V1':
+              raise SystemExit('K0_FRESH_RESEARCH_RECEIPT_REQUIRED')
+          sid=str(f.get('research_session_id') or '')
+          if not re.fullmatch(r'research:[0-9a-f]{24}',sid):
+              raise SystemExit('K0_FRESH_RESEARCH_SESSION_INVALID')
+          print(sid)
+          PY
           )"
           if git grep -F -q "$research_session" "$BEFORE" -- real_runs/k0 2>/dev/null; then
             echo "K0_FRESH_RESEARCH_SESSION_ALREADY_USED:$research_session" >&2
