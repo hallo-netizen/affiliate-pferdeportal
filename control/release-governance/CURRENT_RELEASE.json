@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 182,
+  "generation": 183,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "715f8dd0566838bb857f3decff1f0d8741439af6d34f900f1cae60e4943c38c7",
+    "manifest_sha256": "89818bbc67d9be274f364af00ca4512563e877defb94475f3a09f2f8491a33bc",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,20 +35,20 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.181",
-    "status": "INSTALLER_HARD_LOCAL_POSNEG_PERFORMANCE_PASS_LIVE_READBACK_OPEN",
+    "version": "6.72.182",
+    "status": "INSTALLER_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "715f8dd0566838bb857f3decff1f0d8741439af6d34f900f1cae60e4943c38c7",
+    "current_source_manifest_sha256": "89818bbc67d9be274f364af00ca4512563e877defb94475f3a09f2f8491a33bc",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "56e2b698361a10d9c83c99b1da9ff82bb3b3f62106811e1ed3f69c6eb44488a3",
-    "candidate_reference_scope": "HARD_LOCAL_POSNEG_PERFORMANCE_PASS_INSTALLER_BUILT_LIVE_NOT_RUN",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.181.zip",
-    "final_artifact_sha256": "56e2b698361a10d9c83c99b1da9ff82bb3b3f62106811e1ed3f69c6eb44488a3",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.181.zip",
-    "handoff_artifact_bytes": 1537791
+    "candidate_reference_artifact_sha256": "a74a4cd2a2831ba31dfbd5485e6a3c1f61792cd47d5b9b2dc9403f13a638593b",
+    "candidate_reference_scope": "SOURCE_21_OF_21_PASS_ZIP_21_OF_21_PASS_PERFORMANCE_HARDLOCK_PASS_LIVE_NOT_RUN",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.182.zip",
+    "final_artifact_sha256": "a74a4cd2a2831ba31dfbd5485e6a3c1f61792cd47d5b9b2dc9403f13a638593b",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.182.zip",
+    "handoff_artifact_bytes": 1538866
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_KISS_6_72_181_INSTALLER_BUILT_LIVE_READBACK_OPEN",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672181_kiss_banner_hard_local_installer_20261004.md",
-    "current_focus_reason": "User requested uninterrupted completion to plugin with hard local positive/negative simulation. Exact current PHP ranking methods passed 63/63 local assertions; performance hardlocks were preserved; installer 6.72.181 was built from the fully gated 6.72.176 package with exactly the three proven changed files and 27/27 package path validation. Live install/readback remains open.",
+    "current_focus": "BANNER_KISS_PRODUCT_PATTERN_6_72_182_SOURCE_AND_ZIP_FULL_E2E_PASS",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672182_banner_product_pattern_full_e2e_zip_pass_20261004.md",
+    "current_focus_reason": "Banner routing now follows the same KISS sequence as the working eBay/Idealo product routing: candidate supply -> one technical slot gate -> relevance -> stable selection -> renderer. Full WordPress/MariaDB source and installed-ZIP gates both pass 21/21. Performance hardlocks preserved. Only real production install/readback remains.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -131,6 +131,15 @@
         "breed_path": "EARLIER_EXIT_THAN_BEFORE",
         "protected_672171_fast_paths": "IDENTICAL",
         "protected_672176_renderer_and_ranking": "IDENTICAL"
+      },
+      "product_path_inspiration": {
+        "principle": "CANDIDATES_THEN_TECHNICAL_GATE_THEN_RELEVANCE_THEN_SELECTION_THEN_RENDER",
+        "source_full_e2e_run": 37216563071,
+        "zip_full_e2e_run": 37216941150,
+        "source_assertions": "21_OF_21_PASS",
+        "zip_assertions": "21_OF_21_PASS",
+        "manifest_identity": "27_OF_27_PASS",
+        "performance_hardlock": "PASS"
       }
     },
     "awin_catalog_refresh": {
@@ -540,13 +549,13 @@
     }
   },
   "execution_state": {
-    "state": "INSTALLER_BUILT_HARD_LOCAL_PASS_LIVE_READBACK_OPEN",
-    "authorized_next_action": "INSTALL_6_72_181_ON_REAL_WORDPRESS_AND_READBACK_BANNER_OUTPUT",
-    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.181.zip on the real WordPress only when live installation is explicitly initiated, then read back page/category/post/glossary/breed banner output and performance. Do not rebuild before a real failure is proven.",
-    "completion_condition": "REAL_WORDPRESS_6_72_181_INSTALL_AND_READBACK_PASS",
+    "state": "INSTALLER_6_72_182_FULL_E2E_PASS_LIVE_READBACK_OPEN",
+    "authorized_next_action": "INSTALL_6_72_182_ON_REAL_WORDPRESS_AND_READBACK",
+    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.182.zip on the real WordPress, then read back banner output on page/category/post/glossary/breed and check frontend performance. Do not rebuild unless a real live failure is proven.",
+    "completion_condition": "REAL_WORDPRESS_6_72_182_INSTALL_AND_READBACK_PASS",
     "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_FAILURE",
     "no_optional_detours": true,
-    "sequence": 54,
+    "sequence": 55,
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
       "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
@@ -554,16 +563,17 @@
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json"
     ],
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672181_kiss_banner_hard_local_installer_20261004.md",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672182_banner_product_pattern_full_e2e_zip_pass_20261004.md",
     "evidence_sha256": "1bdd978f4882aa2a8ca2f59eb1deb379a510a122f06091e78832f6340db4a5fa",
     "current_gate_limitation": "Existing auto-triggered 6.72.170/6.72.171 workflows are version-hardcoded and stop at version grep before functional tests; workflow changes are forbidden by current scope, so those red runs are not functional failures.",
     "current_installer": {
-      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.181.zip",
-      "sha256": "56e2b698361a10d9c83c99b1da9ff82bb3b3f62106811e1ed3f69c6eb44488a3",
-      "bytes": 1537791,
-      "git_blob_sha": "6ab1608a2fe164623e6a6de55bc2ec57bfdae629",
-      "build_commit": "29f50c2fe9bc525daf0d8f4c3ed222dc5605ef75",
-      "hard_local_assertions": "63_OF_63_PASS",
+      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.182.zip",
+      "sha256": "a74a4cd2a2831ba31dfbd5485e6a3c1f61792cd47d5b9b2dc9403f13a638593b",
+      "bytes": 1538866,
+      "git_blob_sha": "2873c726b1e51cc3aeae9b7d8c26a1d88b35d68d",
+      "build_commit": "b8e12902640851c4ad275c5e2d5635b596bdf147",
+      "source_full_e2e": "21_OF_21_PASS",
+      "zip_full_e2e": "21_OF_21_PASS",
       "package_files": "27_OF_27_PASS",
       "performance": "PASS_NO_ROLLBACK"
     }
