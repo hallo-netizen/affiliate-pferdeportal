@@ -381,3 +381,33 @@ Tests:
 - fachliche Familien-/Produktwahl-/Normalpfadlogik unverändert.
 
 Live-Readback 0.57.30 noch offen.
+
+
+## DELTA 2026-10-04 – 0.57.30 RESUME-PFAD NEGATIV / 0.57.31 REPLAY-SAFE-RECOVERY
+
+Nach Nutzerforderung wurde nicht nur der Contract-Fix, sondern der **tatsächliche UI→AJAX→Driver→Job-Pfad lokal simuliert**.
+
+Originalbezeichnung:
+`Gespeicherten Block erneut prüfen`.
+
+Befund 0.57.30:
+Der Button ruft `pste_research_advance`; dessen Handler kickt nur den Driver. Der Driver sah den gespeicherten Einzellauf als `PAUSED_ERROR` und parkte ihn direkt als `SINGLE_PARKED`, ohne den reparierten lokalen FINALIZE-Schritt erneut auszuführen. Lokale Simulation: current=0 / advance=0 / park=1. Deshalb ist 0.57.30 als Live-Kandidat verworfen.
+
+0.57.31:
+- `PSTE_SANDBOX_DATAFLOW_PORTAL_COMPONENT_DRIFT` wird exakt als replay-sicherer lokaler FINALIZE-Code ergänzt;
+- der Driver lässt vor dem bisherigen Park-Fallback `PSTE_Research_Job::current()` den bereits vorhandenen sicheren Recovery-Pfad ausführen;
+- wird der Job dadurch RUNNING, läuft der normale Driver weiter;
+- bleibt er PAUSED/UNKNOWN, greift unverändert das bisherige Park-Fallback.
+
+Lokale Positiv-/Negativmatrix:
+- sicherer aktueller Driftfehler: Recovery 1 / Advance 1 / Park 0 = PASS;
+- absichtlich unsicherer Providerfehler: Recovery-Check 1 / Advance 0 / Park 1 = FAIL-CLOSED PASS;
+- Sandbox-Dataflow-Contract-Fix aus 0.57.30 bleibt PASS;
+- absichtliche Komponentenmutation bleibt BLOCK;
+- PHP 81/81 PASS.
+
+Kandidat:
+`PSTE-0.57.31-REPLAY-SAFE-LOCAL-FINALIZE-RECOVERY-CANDIDATE.zip`
+SHA-256 `35f670fc8a44310b1cb858764e506b0af950ac3941790bb1f5ee93e4a4270430`.
+
+0.57.31 noch nicht live installiert.
