@@ -3,9 +3,9 @@
   "role": "SOLE_CURRENT_AUTHORITY",
   "concept": "K0",
   "branch": "konzept0-portal-neutral-20261002",
-  "status": "FRESHNESS_REGRESSION_REPAIRED_FULL_SELFTEST_PASS_READY_FOR_FRESH_K0_RUN",
-  "first_open_blocker": "NONE_MACHINE_SIDE",
-  "next_action": "ON_NEXT_VALID_CURRENT_CHAT_UPLOAD_PLUS_K0_START_RUN_FULL_FRESH_K0_PRODUCTION_FROM_ZERO",
+  "status": "FRESH_TEST_ARTICLE_FULL_K0_PASS_CHAT_FILE_AND_HTML_PREVIEW_PENDING",
+  "first_open_blocker": "FINAL_VERIFIED_CHAT_ATTACHMENT_AND_HTML_PREVIEW_NOT_YET_DELIVERED",
+  "next_action": "MATERIALIZE_EXACT_VERIFIED_WORDPRESS_SINGLE_TO_CHAT_AND_GENERATE_HTML_PREVIEW_FROM_THE_SAME_VERIFIED_BODY_USING_ONLY_AUTHORITATIVE_CURRENT_DESIGN_CSS",
   "work_binding": {
     "start_command": "K0:start",
     "start_ref": "K0_START_HERE.md",
@@ -85,13 +85,13 @@
   },
   "freshness": {
     "validated_code_head_sha": "2d10588eb500490c3c36c05ce2e56700b5145385",
-    "last_checked_branch_head_sha": "2d10588eb500490c3c36c05ce2e56700b5145385",
-    "latest_writer_accept_run": 37148297780,
-    "latest_writer_accept_result": "SUCCESS_USER_BATCH_ARTICLE_2_FINAL",
-    "latest_k0_selftest_run": "ISOLATED_REPAIR_BRANCH_EVIDENCE_COMMIT_498b5e4",
-    "latest_k0_selftest_result": "SUCCESS_108_TESTS_FRESHNESS_REGRESSION_REPAIR",
+    "last_checked_branch_head_sha": "2e515462a425f826aa711fca2dda53058891e58b",
+    "latest_writer_accept_run": 37185472620,
+    "latest_writer_accept_result": "SUCCESS_FRESH_TEST_ARTICLE_FULL_CHAIN",
+    "latest_k0_selftest_run": 37185472673,
+    "latest_k0_selftest_result": "SUCCESS",
     "ppm679_parity": "PASS",
-    "delta_result": "FRESHNESS_REGRESSION_REPAIRED; 108_TESTS_PASS; READY_FOR_NEW_FRESH_RUN; OLD_BATCH_REUSE_FORBIDDEN"
+    "delta_result": "FRESH_TEST_ARTICLE_COMPLETED_FROM_ZERO; FULL_K0_CHAIN_PASS; CHAT_ATTACHMENT_AND_HTML_PREVIEW_PENDING"
   },
   "wordpress_export": {
     "contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
@@ -254,13 +254,13 @@
     ]
   },
   "rendering_spacing": {
-    "status": "REGRESSION_FIX_MERGED_HARDLOCK_AND_FRESH_LOCAL_RETEST_PASS",
+    "status": "DOUBLE_MARGIN_FIX_MERGED_LOCAL_POSITIVE_NEGATIVE_PASS_LIVE_READBACK_PENDING",
     "symptom": "LARGE_VERTICAL_GAPS_ABOVE_H2_IN_WORDPRESS_SINGLE_POST_PREVIEW",
     "article_html_extra_blank_paragraphs_before_h2": "NOT_OBSERVED",
     "article_html_extra_br_before_h2": "NOT_OBSERVED",
     "render_root_cause": "STRUCTURED_ARTICLE_SECTION_DEFAULT_SPACING_COLLIDES_WITH_SINGLE_POST_H2_MARGIN",
     "fix_scope": "ONLY_STRUCTURED_SINGLE_POST_SECTION_VERTICAL_SPACING",
-    "fix_ref": "main:cfe238cf83bacf7e55ef804864b46dea5338e21c",
+    "fix_ref": "main:f853fb61384385fb97d5de020b7ea6903890ea35",
     "fix_file": "pferde-template-kit_V1.50.421.php",
     "k0_branch_contains_design_plugin_source": false,
     "local_visual_negative_test": "PASS_GAP_REPRODUCED_APPROX_149PX",
@@ -294,7 +294,10 @@
       "negative_missing_semantic_link": "BLOCK_AS_REQUIRED"
     },
     "local_preview_article_title": "Sind Kühlgamaschen für Pferde sinnvoll?",
-    "local_preview_note": "Preview uses latest verified K0 article HTML with merged cfe238c rendering CSS; this is not a new writer run."
+    "local_preview_note": "Preview uses latest verified K0 article HTML with merged cfe238c rendering CSS; this is not a new writer run.",
+    "double_margin_root_cause": "LAST_VISIBLE_CHILD_MARGIN_BOTTOM_32PX_PLUS_NEXT_SECTION_MARGIN_TOP_32PX",
+    "double_margin_negative_test": "PASS_REPRODUCED_64PX",
+    "double_margin_positive_test": "PASS_NORMALIZED_32PX"
   },
   "latest_user_batch": {
     "input_batch_sha256": "70423281b69b3cfa28413ab2a7dcfa8a25cde4e5a526ee787cbbd79a317d471e",
@@ -413,5 +416,43 @@
     "historical_content_reuse_guard_preserved": true,
     "old_output_reuse_forbidden": true,
     "publish_allowed": false
+  },
+  "fresh_test_article_20261004": {
+    "status": "FULL_K0_PASS",
+    "title": "Pferdehaftpflicht mit Fremdreiterrisiko auswählen",
+    "run_dir": "real_runs/k0/test-20261004-fremdreiter-ae3b6c46",
+    "run_instance_id": "run:f83847e91c2fec0d855df87f",
+    "production_commit": "2e515462a425f826aa711fca2dda53058891e58b",
+    "writer_accept_run": 37185472620,
+    "writer_accept_result": "SUCCESS",
+    "selftest_run": 37185472673,
+    "selftest_result": "SUCCESS",
+    "historical_content_guard": "PASS_NOT_DETECTED_79_FILES_SCANNED",
+    "pre_lt68_hard_rules": "PASS_84",
+    "ppm_679": "PASS_104_RULES",
+    "languagetool_68": "PASS_0_FINDINGS",
+    "final_full_rules": "PASS",
+    "writer_total_words": 756,
+    "conclusion_ratio": 0.100529,
+    "article_id": "article:11bf036b5c0473935b65167e",
+    "final_draft_sha256": "df66e162267769c5e8273ac525ad68ccc4ebf65b473cf00daf5f9396706fe0d0",
+    "wordpress_single_ref": "real_runs/k0/test-20261004-fremdreiter-ae3b6c46/WORDPRESS_SINGLE.json",
+    "wordpress_verify_ref": "real_runs/k0/test-20261004-fremdreiter-ae3b6c46/WORDPRESS_VERIFY.json",
+    "wordpress_contract": "SYSTEM4_WORDPRESS_HANDOFF_V1",
+    "wordpress_verify": "PASS_CANONICAL_BINDING_PASS",
+    "direct_wordpress_upload_ready": true,
+    "publish_allowed": false,
+    "chat_file_delivered": false,
+    "html_preview_delivered": false
+  },
+  "closeout_refresh_20261004": {
+    "basis_production_head": "2e515462a425f826aa711fca2dda53058891e58b",
+    "history_update_commit": "f8ac2e7f558707d2e06924586268a2c3a2b944ac",
+    "main_design_head": "f853fb61384385fb97d5de020b7ea6903890ea35",
+    "relevant_change_since_previous_current": true,
+    "current_authority_ref": "konzept0-portal-neutral-20261002:K0_CURRENT_STATE.json",
+    "start_router_ref": "main:K0_START_HERE.md -> konzept0-portal-neutral-20261002:K0_START_HERE.md",
+    "one_truth_check": "PASS",
+    "library_used": false
   }
 }
