@@ -164,7 +164,11 @@ echo "TRACE breed2_candidates=".json_encode($ids($ranked($getctx($breed2),'breed
 echo "TRACE breed3_candidates=".json_encode($ids($ranked($getctx($breed3),'breed_single_desktop_banner')) ?? array())."\n";
 chk(trim($breedHtml1)!==''&&trim($breedHtml2)!==''&&trim($breedHtml3)!=='','breed_all_visible');
 $breedUrls=array();
-foreach(array($breedHtml1,$breedHtml2,$breedHtml3) as $h){if(contains_text($h,'breed-a'))$breedUrls[]='a';elseif(contains_text($h,'breed-b'))$breedUrls[]='b';else $breedUrls[]='?';}
+foreach(array($breedHtml1,$breedHtml2,$breedHtml3) as $h){
+  if(contains_text($h,'https://click.example.test/breed-a'))$breedUrls[]='a';
+  elseif(contains_text($h,'https://click.example.test/breed-b'))$breedUrls[]='b';
+  else $breedUrls[]='?';
+}
 chk(count(array_unique($breedUrls))>=2,'breed_stable_distribution_uses_multiple_banners',implode(',',$breedUrls));
 
 // 7. Manual override precedence and NONE.
