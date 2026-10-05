@@ -2,6 +2,18 @@
 $GLOBALS['p']=array();$GLOBALS['f']=array();
 function ck187($ok,$name,$detail=''){echo ($ok?'PASS ':'FAIL ').$name.($detail!==''?' :: '.$detail:'')."\n";if($ok)$GLOBALS['p'][]=$name;else$GLOBALS['f'][]=$name;}
 if(!class_exists('Pferdeportal_Affiliate_Router')){fwrite(STDERR,"FATAL plugin missing\n");exit(2);}
+if(!class_exists('Pferde_Template_Kit')){class Pferde_Template_Kit{
+ public static function affiliate_contract_version(){return '1.0';}
+ public static function design_profile(){return 'pferde_atelier';}
+ public static function design_profile_contract_version(){return '1.0';}
+ public static function affiliate_page_type($id){return get_post_field('post_parent',(int)$id)?'category':'hub1';}
+}}
+if(!post_type_exists('uge_term'))register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
+if(!taxonomy_exists('uge_group'))register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
+if(!post_type_exists('pa_breed'))register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
+if(!taxonomy_exists('pa_breed_group'))register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+if(!post_type_exists('hp_listing'))register_post_type('hp_listing',array('public'=>true,'supports'=>array('title','editor')));
+if(!taxonomy_exists('hp_listing_category'))register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
 if(Pferdeportal_Affiliate_Router::VERSION!=='6.72.187'){fwrite(STDERR,"FATAL version ".Pferdeportal_Affiliate_Router::VERSION."\n");exit(2);}
 $o=Pferdeportal_Affiliate_Router::instance();
 $rm=function($name)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
