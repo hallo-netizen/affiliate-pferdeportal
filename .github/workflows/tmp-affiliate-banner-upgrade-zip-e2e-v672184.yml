@@ -2,7 +2,7 @@ name: TEMP Affiliate Banner Upgrade ZIP E2E 6.72.185
 
 on:
   push:
-    branches: [affiliate-release-current, affiliate-672185-version-separation]
+    branches: [affiliate-release-current]
     paths:
       - '.github/workflows/tmp-affiliate-banner-upgrade-zip-e2e-v672184.yml'
       - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php'
@@ -231,5 +231,5 @@ jobs:
           git config user.email "hallo@oliver-beil.de"
           git add release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
           git commit -m "affiliate: publish tested 6.72.185 banner migration installer"
-          git push origin HEAD:affiliate-672185-version-separation
+          git push origin HEAD:affiliate-release-current
           echo "PASS TESTED_ZIP_COMMITTED sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
