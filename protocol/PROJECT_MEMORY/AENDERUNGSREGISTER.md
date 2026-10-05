@@ -2263,3 +2263,17 @@ Neue oder zukünftige Begriffe benutzen denselben bestehenden Normalpfad. `STRUC
 KANDIDAT:
 PSTE 0.57.28 / SHA-256 `a8df7248f38eaf2b23ce1fe30020b6c0aa2aef1881be9fe107c12da07ae11c41`.
 
+
+
+## PSTE-REUSE-004 – Journal-Bestandsartikel müssen über denselben Extension-Vertrag inventarisiert werden
+
+STAND: 2026-10-05 / VERBINDLICH.
+
+WAS:
+Bestehende WordPress-Artikel aus registrierten Artikeltyp-Erweiterungen (aktuell Journal/Magazin) dürfen im PSTE-Inventar nicht kategorielos werden, nur weil ihre Kategorie nicht zur normalen Portal-/Produktfamilienstruktur gehört. Der bestehende Read-only-Inventarpfad muss registrierte Extension-Kategorien über die vorhandene Extension-Registry/-Routing-Autorität erkennen.
+
+WARUM:
+Der reale Fall `Wie alt werden Pferde?` zeigt: Kandidatenrouting kennt Kategorie 1486 `Pferdegesundheit verstehen` / Journal korrekt, während derselbe veröffentlichte WordPress-Artikel im allgemeinen Inventar mit leerer Kategorie erscheint. Das trennt Kandidaten- und Bestandswahrheit und kann Abdeckungs-/Dublettenentscheidungen schwächen.
+
+KISS:
+Keine neue Kategoriearchitektur, kein neuer Runner, keine zweite Themenquelle. Nur denselben bereits registrierten Extension-Vertrag auch beim Lesen bestehender WordPress-Artikel verwenden. Reguläre Produktionskategorien, Multi-Category-Hardblock, Trash-Semantik, Provider-/Publish-Grenzen bleiben unverändert.
