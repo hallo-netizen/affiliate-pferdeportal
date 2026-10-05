@@ -2,7 +2,7 @@
 $GLOBALS['seed_fail']=array(); $GLOBALS['seed_pass']=array();
 function schk($cond,$name,$detail=''){ if($cond){$GLOBALS['seed_pass'][]=$name;echo "PASS $name".($detail!==''?" :: $detail":"")."\n";}else{$GLOBALS['seed_fail'][]=$name.($detail!==''?" :: $detail":"");echo "FAIL $name".($detail!==''?" :: $detail":"")."\n";}}
 if(!class_exists('Pferdeportal_Affiliate_Router')){fwrite(STDERR,"FATAL plugin missing\n");exit(2);}
-if(Pferdeportal_Affiliate_Router::VERSION!=='6.72.183'){fwrite(STDERR,"FATAL seed requires 6.72.183, got ".Pferdeportal_Affiliate_Router::VERSION."\n");exit(2);}
+if(Pferdeportal_Affiliate_Router::VERSION!=='6.72.184'){fwrite(STDERR,"FATAL seed requires 6.72.184, got ".Pferdeportal_Affiliate_Router::VERSION."\n");exit(2);}
 $o=Pferdeportal_Affiliate_Router::instance();
 $rm=function($name)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
 $call=function($name,...$args)use($rm,$o){return $rm($name)->invokeArgs($o,$args);};
@@ -36,7 +36,7 @@ $mkcamp=function($id,$args=array())use($save,$o){
 $legacy=$mkcamp('legacy-sanovet',array('title'=>'Gesunde Pferde beginnen bei der Fütterung','priority'=>999));
 $render=function($id,$slot)use($rm,$o){return (string)$rm('render_affiliate_slot')->invoke($o,$id,$slot,'portal_context','');};
 $before=$render($sch,'product_after_category_tiles');
-schk(strpos($before,'legacy-sanovet')!==false,'PRE_UPGRADE_reproduces_wrong_legacy_banner',substr(strip_tags($before),0,160));
+schk(strpos($before,'legacy-sanovet')===false,'PRE_UPGRADE_184_legacy_automatic_already_blocked',substr(strip_tags($before),0,160));
 
 global $wpdb;
 $table=$call('creative_library_table');
@@ -117,6 +117,10 @@ $wpdb->update($table,array(
 $staleRow=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash=%s",$staleNorm['identity_hash']),ARRAY_A);
 $stalePlanned=$call('output_plan_creative',$staleRow,true);
 schk(absint($stalePlanned['active']??0)>0,'PRE_UPGRADE_stale_library_edge_materialized_wrongly');
+$staleBefore=$render($sch,'product_after_category_tiles');
+schk(strpos($staleBefore,'stale-sanovet-library')!==false,'PRE_UPGRADE_184_stale_library_banner_visible_on_schabracken',substr(strip_tags($staleBefore),0,160));
+update_option('ppar_banner_library_migration_state_v672184','done',false);
+schk((string)get_option('ppar_banner_library_migration_state_v672184','')==='done','PRE_UPGRADE_184_migration_already_done');
 
 
 $fixed=$mkcamp('legacy-fixed-banner',array('priority'=>1));
@@ -139,10 +143,10 @@ $product2=$mkcamp('product-idealo-sentinel',array(
   'product_gtins'=>array('5901234123457'),'seller_name'=>'Seller B'
 ));
 $p1=get_post_meta($product1,'ppar_campaign_data',true); $p2=get_post_meta($product2,'ppar_campaign_data',true);
-update_option('ppar_full_pool_automation_version_v1','6.72.183',false);
+update_option('ppar_full_pool_automation_version_v1','6.72.184',false);
 update_option('ppar_full_pool_automation_cursor_v1',123,false);
 if(!wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK)){wp_schedule_single_event(time()+3600,Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK);}
-update_option('ppar_v672184_upgrade_fixture',array(
+update_option('ppar_v672185_upgrade_fixture',array(
   'root'=>$root,'sch'=>$sch,'other'=>$other,'feed'=>$feed,'fixed_page'=>$fixedPage,
   'legacy'=>$legacy,'fixed'=>$fixed,'library_identity'=>$norm['identity_hash'],'stale_identity'=>$staleNorm['identity_hash'],
   'product1'=>$product1,'product2'=>$product2,
@@ -151,4 +155,4 @@ update_option('ppar_v672184_upgrade_fixture',array(
 schk(wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK)!==false,'PRE_UPGRADE_full_pool_event_exists_for_negative_control');
 echo "SUMMARY passes=".count($GLOBALS['seed_pass'])." failures=".count($GLOBALS['seed_fail'])."\n";
 if($GLOBALS['seed_fail']){echo "FAILURES ".wp_json_encode($GLOBALS['seed_fail'])."\n";exit(1);}
-echo "UPGRADE_SEED_672183_PASS\n";
+echo "UPGRADE_SEED_672184_PASS\n";
