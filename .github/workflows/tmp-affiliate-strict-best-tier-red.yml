@@ -9,7 +9,7 @@ on:
       - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   positive:
