@@ -927,9 +927,67 @@ trait PPAR_Output_Objects_Trait {
         );
     }
 
+    /**
+     * Providerneutraler Banner-Themenvertrag.
+     *
+     * Nur ein vom Provider explizit geliefertes Werbemittel-Thema darf hier
+     * wirken. Es wird nicht frei semantisch geraten: Nur wenn der normalisierte
+     * Themenname exakt zu genau EINEM erlaubten realen Portalziel (Slug oder
+     * Blattbezeichnung) passt, entsteht eine exakte Zielkante. Mehrdeutigkeit
+     * oder fehlende Metadaten fallen unverändert auf die bestehende
+     * Ziel-URL-/Fallback-Logik zurueck.
+     */
+    private function output_banner_provider_topic_classification($row,$portal) {
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+        $topic_name=sanitize_text_field((string)($payload['provider_topic_name']??''));
+        $topic_source=sanitize_key((string)($payload['provider_topic_source']??''));
+        if($topic_name===''||$topic_source===''){return null;}
+        $topic_norm=$this->output_text($topic_name);
+        if($topic_norm===''){return null;}
+
+        $targets=$this->output_portal_targets($portal);
+        if(is_wp_error($targets)){return $targets;}
+        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        $matches=array();
+
+        foreach((array)$targets as $target){
+            if(!is_array($target)){continue;}
+            $type=sanitize_key((string)($target['type']??''));
+            if(!in_array($type,$wanted,true)){continue;}
+            $target_key=sanitize_text_field((string)($target['key']??''));
+            if($target_key===''){continue;}
+            if(method_exists($this,'control_target_gate')){
+                $gate=$this->control_target_gate($portal_key,$target_key);
+                if(is_wp_error($gate)){continue;}
+            }
+            $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
+            $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
+            $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
+            if($topic_norm!==$slug_norm&&$topic_norm!==$leaf_norm){continue;}
+            $matches[$target_key]=$target;
+        }
+
+        if(count($matches)!==1){return null;}
+        $target=reset($matches);
+        $target['_ppar_destination_match_level']='exact';
+        return array(
+            'status'=>'ready',
+            'confidence'=>100,
+            'reason'=>'Explizites Provider-Werbemittelthema passt exakt und eindeutig zu einem Portalziel.',
+            'target'=>$target,
+            'alternatives'=>array(),
+            'source'=>'banner_provider_topic_exact',
+            '_ppar_destination_level'=>'exact',
+        );
+    }
+
     private function output_banner_destination_classification($row,$portal) {
         $stored=$this->output_banner_stored_destination_classification($row,$portal);
         if(is_wp_error($stored)||is_array($stored)){return $stored;}
+        $provider_topic=$this->output_banner_provider_topic_classification($row,$portal);
+        if(is_wp_error($provider_topic)||is_array($provider_topic)){return $provider_topic;}
         $destination_source=$this->output_banner_destination_source($row);
         if(!in_array($destination_source,array('provider_explicit','decoded_tracking'),true)){
             return array('status'=>'review','confidence'=>0,'reason'=>'Keine belastbare echte Ziel-URL; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unknown');
