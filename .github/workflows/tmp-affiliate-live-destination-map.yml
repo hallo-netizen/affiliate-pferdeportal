@@ -1,0 +1,26 @@
+name: TEMP Affiliate Live Destination Map
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-live-destination-map.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read exact public redirect targets without following
+        shell: bash
+        run: |
+          set -euo pipefail
+          for id in 374472 393901 467974 452177 607373 375241 322270 391771 322674 321102; do
+            echo "=== ADCELL $id ==="
+            curl -sS -I --max-redirs 0 "https://t.adcell.com/p/click?promoId=$id&slotId=98720" | grep -Ei '^(HTTP/|location:|cache-control:)' || true
+          done
+          echo "=== AWIN 4654108 / 118619 ==="
+          curl -sS -I --max-redirs 0 'https://www.awin1.com/cread.php?s=4654108&v=118619&q=593761&r=2990695' | grep -Ei '^(HTTP/|location:|cache-control:)' || true
