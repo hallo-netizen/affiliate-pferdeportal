@@ -14,13 +14,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/pserc && mkdir -p /tmp/pserc
+          rm -rf /tmp/pserc /tmp/pserc2 && mkdir -p /tmp/pserc /tmp/pserc2
           unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc
+          INNER="$(find /tmp/pserc -type f -name '*.zip' | head -1)"
+          test -n "$INNER"
+          unzip -q "$INNER" -d /tmp/pserc2
           echo '=== TREE ==='
-          find /tmp/pserc -maxdepth 3 -type f | sort
+          find /tmp/pserc2 -maxdepth 3 -type f | sort | head -120
           echo '=== VERSION ==='
-          grep -R -n -E 'Version:|PSERC_VERSION|PLUGIN_VERSION|pste-v5-binding-safe' /tmp/pserc | head -80 || true
+          grep -R -n -E 'Version:|PSERC_VERSION|PLUGIN_VERSION|pste-v5-binding-safe' /tmp/pserc2 | head -120 || true
           echo '=== BINDING FILE ==='
-          B="$(find /tmp/pserc -type f -name 'class-pserc-seo-source-binding.php' | head -1)"
+          B="$(find /tmp/pserc2 -type f -name 'class-pserc-seo-source-binding.php' | head -1)"
           test -n "$B"
-          sed -n '1,320p' "$B"
+          sed -n '1,360p' "$B"
