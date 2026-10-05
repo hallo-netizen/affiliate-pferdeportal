@@ -377,3 +377,31 @@ UI-Guard 5/5; PHP 81/81; ZIP PASS; nur Contract + Versionsdatei geändert; Famil
 
 LIVE:
 Noch nicht installiert/readback-bestätigt. Keine PU-ID.
+
+
+## RELEASE-VORBEREITUNG 2026-10-05 – PSTE 0.57.38 / KEIN PU-EREIGNIS / NICHT FINAL
+
+Kandidat:
+`PSTE-0.57.38-EDITORIAL-PLAN-COVERAGE-ROOTFIX-HARDPASS.zip`
+
+SHA-256:
+`6a6df39e6f66d612fcf998cf3e232bb58056d222ba06679a82af3cfabd288bf8`
+
+Zweck:
+- realen PSERC-5-Felder-Batch `next_textmachine_metadata_batch.items` als Editorial-Plan-Abdeckung in PSTE lesen;
+- bereits geplante/geschriebene 16 Artikel nicht erneut planbar machen.
+
+Belegte Tests:
+- echter 4472er Export + echter 16er PSERC-Batch;
+- alt 0/16 Plan-Treffer, 0.57.38 16/16;
+- 0 falsche zusätzliche Cross-Topic-Treffer;
+- PHP 81/81; JSON 54/54; Fresh-Unpack byteidentisch.
+
+Nachträglich vor Live-Abnahme gefundener Blocker:
+- bestehende Journal-/Magazinartikel werden im allgemeinen WordPress-Inventar nicht über die vorhandene Extension-Kategorieautorität aufgelöst;
+- Realfall `Wie alt werden Pferde?` / Post-ID 15974 erscheint inventarseitig ohne Kategorie, obwohl Kandidatenrouting Kategorie 1486 `Pferdegesundheit verstehen` / Journal eindeutig kennt;
+- Rootcause: `PSTE_Snapshot::inventory()` bindet nur reguläre `structure()['items']`-Kategorien.
+
+Ergebnis:
+**NICHT FINAL / KEINE LIVE-ABNAHME / KEINE PU-ID.**
+0.57.38 ist technische Basis für genau einen konsolidierten Folgefix; kein weiteres Einzelflick-Release vor vollständiger 1:1 Positiv-/Negativ-/Regression-Simulation.
