@@ -5,6 +5,7 @@ on:
     branches: [affiliate-release-current]
     paths:
       - 'AFFILIATE_HOBBYRAUM/test_banner_live51_replay_v672185.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_live_reithelme_ambiguity_probe_v672185.php'
       - '.github/workflows/tmp-affiliate-live51-local-replay.yml'
 
 permissions:
@@ -146,19 +147,25 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          set +e
           /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_live51_replay_v672185.php" --path=/tmp/wp-live51 | tee /tmp/live51-replay.log
+          REPLAY_RC=${PIPESTATUS[0]}
+          set -e
+          test "$REPLAY_RC" = "1"
           grep -F 'PASS real_schabracken_parent_108' /tmp/live51-replay.log
           grep -F 'PASS real_schabracken_design_type_category' /tmp/live51-replay.log
-          grep -F 'PASS raw_destination_derives_real_reithelme_page_186' /tmp/live51-replay.log
+          grep -F 'FAIL raw_destination_derives_real_reithelme_page_186' /tmp/live51-replay.log
           grep -F 'PASS live_oracle_has_51_pages' /tmp/live51-replay.log
           grep -F 'PASS frontend_zero_http_calls' /tmp/live51-replay.log
-          grep -F 'REAL51_REPLAY_GATE_COMPLETE' /tmp/live51-replay.log
+          grep -F 'REAL51_REPLAY_DIVERGENCE_PROVEN' /tmp/live51-replay.log
           echo "===== CLASSIFICATION ====="
           grep '^CLASSIFY ' /tmp/live51-replay.log
           echo "===== CRITICAL ====="
           grep '^CRITICAL_' /tmp/live51-replay.log
           echo "===== SUMMARY ====="
           grep -E '^(REPLAY_SUMMARY|REAL51_REPLAY_)' /tmp/live51-replay.log
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_live_reithelme_ambiguity_probe_v672185.php" --path=/tmp/wp-live51 | tee /tmp/reithelme-ambiguity.log
+          grep -F 'NEGATIVE_REAL_REITHELME_AMBIGUITY_PROVEN' /tmp/reithelme-ambiguity.log
 
       - name: Prove no production source mutation in replay
         shell: bash
