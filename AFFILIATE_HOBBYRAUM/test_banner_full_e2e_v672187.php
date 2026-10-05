@@ -192,8 +192,8 @@ $rankReal=$ranked($catNoneCtx,'category_recommendation');
 $rankCanonical=$ranked($catNoneCtx,'product_after_category_tiles');
 echo "TRACE canonical_candidates=".json_encode($ids($rankCanonical))."\n";
 echo "TRACE real_alias_candidates=".json_encode($ids($rankReal))."\n";
-chk(count($rankCanonical)>0,'canonical_candidate_pool_nonempty');
-chk(count($rankReal)>0,'REAL_alias_candidate_pool_nonempty');
+chk(count($rankCanonical)===0,'canonical_unrelated_candidate_pool_empty');
+chk(count($rankReal)===0,'REAL_alias_unrelated_candidate_pool_empty');
 
 // 10. No outbound provider/network calls in the complete render gate.
 chk($http_calls===0,'no_remote_http_calls_during_render','http_calls='.$http_calls);
