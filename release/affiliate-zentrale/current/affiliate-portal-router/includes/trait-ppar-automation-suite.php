@@ -3198,35 +3198,94 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     /**
-     * V6.72.185 KISS – bestehende Banner einmalig in die autoritative
-     * Creative-Library-Zielzuordnung ueberfuehren. Ausschliesslich Banner,
-     * ausschliesslich Hintergrundarbeit, kein Frontend-Scan und keine Provider-
-     * Remoteaufrufe. Produktreihen bleiben unberuehrt.
+     * V6.72.187 KISS – reale Banner-Zielkanten beim Upgrade einmalig frisch
+     * aus der autoritativen Ziel-URL ableiten. Nur aktive Banner; keine Produkte,
+     * kein Frontend-Scan, keine Provider-Remoteaufrufe.
      */
-    public function ensure_banner_library_migration_v672185() {
-        if (self::VERSION !== '6.72.185' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+    public function ensure_banner_library_migration_v672187() {
+        if (self::VERSION !== '6.72.187' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
         $state = sanitize_key((string)get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, ''));
         if ($state === 'done') { return; }
         if ($state !== 'running') {
             delete_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR);
             update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, 'running', false);
         }
-        if (!wp_next_scheduled(self::BANNER_LIBRARY_MIGRATION_HOOK)) {
-            wp_schedule_single_event(time() + 1, self::BANNER_LIBRARY_MIGRATION_HOOK);
-        }
+
+        // Erster begrenzter Batch sofort im Admin-Upgrade-Request. Dadurch ist die
+        // Korrektur nicht davon abhängig, ob WP-Cron vor dem ersten Live-Readback
+        // bereits gelaufen ist. Der Worker selbst bleibt hart zeit-/mengenbegrenzt.
+        $this->run_banner_library_migration_v672187();
     }
 
-    public function run_banner_library_migration_v672185() {
-        if (self::VERSION !== '6.72.185' || !method_exists($this, 'creative_library_table') || !method_exists($this, 'output_plan_creative')) { return; }
+    /**
+     * Repariert ausschließlich eine bereits materialisierte automatische
+     * Bannerkampagne, wenn die echte Ziel-URL jetzt eindeutig exact ist.
+     * Das ist Backend-Migrationsarbeit; Frontend-Hotpaths bleiben unberührt.
+     */
+    private function repair_exact_banner_campaign_target_v672187($row, $portal, $classification) {
+        if (!is_array($row) || !is_array($portal) || !is_array($classification)
+            || !method_exists($this, 'output_objects_table')
+            || !method_exists($this, 'output_campaign_by_post_id')
+            || !method_exists($this, 'save_campaign_record')
+            || !method_exists($this, 'output_campaign_target_key')) { return 0; }
+
+        $level = sanitize_key((string)($classification['_ppar_destination_level'] ?? ''));
+        $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
+        if ($level !== 'exact' || !$target) { return 0; }
+
+        $runtime_target = sanitize_text_field((string)$this->output_campaign_target_key($target));
+        $identity = strtolower(sanitize_text_field((string)($row['identity_hash'] ?? '')));
+        $portal_key = sanitize_key((string)($portal['key'] ?? ''));
+        if ($runtime_target === '' || !preg_match('/^[a-f0-9]{64}$/', $identity) || $portal_key === '') { return 0; }
+
+        global $wpdb;
+        $objects = $this->output_objects_table();
+        $campaign_ids = $wpdb->get_col($wpdb->prepare(
+            "SELECT DISTINCT campaign_post_id FROM {$objects} WHERE portal_key=%s AND creative_identity_hash=%s AND output_type='portal_banner' AND campaign_post_id>0",
+            $portal_key, $identity
+        ));
+        $repaired = 0;
+        foreach ((array)$campaign_ids as $campaign_id) {
+            $campaign_id = absint($campaign_id);
+            if ($campaign_id <= 0) { continue; }
+            $campaign = $this->output_campaign_by_post_id($campaign_id);
+            if (!is_array($campaign)
+                || sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'banner'
+                || sanitize_key((string)($campaign['source'] ?? '')) !== 'output_object_v4') { continue; }
+            $manual = sanitize_key((string)($campaign['quality_manual_status'] ?? ''));
+            if (in_array($manual, array('blocked','rejected','veto','paused_manual','blocked_manual'), true)) { continue; }
+
+            $campaign['assignment_mode'] = 'page_tree';
+            $campaign['automation_target_keys'] = array($runtime_target);
+            $campaign['match_descendants'] = false;
+            $campaign['auto_topic_label'] = sanitize_text_field((string)($target['label'] ?? ''));
+            $campaign['auto_topic_score'] = absint($classification['confidence'] ?? 100);
+            $campaign['auto_topic_reason'] = sanitize_text_field((string)($classification['reason'] ?? 'Eindeutige Ziel-URL-Zuordnung.'));
+            $campaign['destination_url'] = esc_url_raw((string)($row['destination_url'] ?? ($campaign['destination_url'] ?? '')));
+            if ($this->save_campaign_record($campaign, $campaign_id)) { $repaired++; }
+        }
+        return $repaired;
+    }
+
+    public function run_banner_library_migration_v672187() {
+        if (self::VERSION !== '6.72.187'
+            || !method_exists($this, 'creative_library_table')
+            || !method_exists($this, 'output_plan_creative')
+            || !method_exists($this, 'output_portal_registry')
+            || !method_exists($this, 'output_banner_destination_classification')
+            || !method_exists($this, 'output_store_banner_library_assignment')) { return; }
+
         global $wpdb;
         $table = $this->creative_library_table();
         $cursor = absint(get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, 0));
         $limit = 50;
         $processed = 0;
         $materialized = 0;
+        $target_repaired = 0;
         $last = $cursor;
         $deadline = microtime(true) + 12.0;
         $more = false;
+        $portals = array_values((array)$this->output_portal_registry());
 
         do {
             $rows = $wpdb->get_results($wpdb->prepare(
@@ -3234,43 +3293,63 @@ trait PPAR_Automation_Suite_Trait {
                 $last, $limit
             ), ARRAY_A);
             if (!is_array($rows) || !$rows) { $more = false; break; }
+
             foreach ($rows as $row) {
                 $last = max($last, absint($row['id'] ?? 0));
                 $processed++;
+                $row_id = absint($row['id'] ?? 0);
+                if ($row_id <= 0) { continue; }
+
+                // Alte automatische Kante darf sich nicht selbst bestätigen.
+                $wpdb->update($table, array(
+                    'topic_score'=>0,
+                    'topic_targets'=>'[]',
+                    'classified_at'=>0,
+                ), array('id'=>$row_id));
+                $row['topic_score'] = 0;
+                $row['topic_targets'] = '[]';
+                $row['classified_at'] = 0;
+
+                // Fachkante wird auch dann neu gespeichert, wenn die Bildmaße noch
+                // nicht verifiziert sind. Das verhindert genau den Live-Zustand,
+                // in dem ein vorhandener Reithelm-Banner mangels frischer Kante
+                // im allgemeinen Pool verschwindet.
+                foreach ($portals as $portal) {
+                    if (!is_array($portal) || empty($portal['enabled'])) { continue; }
+                    $classification = $this->output_banner_destination_classification($row, $portal);
+                    if (is_wp_error($classification) || !is_array($classification)
+                        || sanitize_key((string)($classification['status'] ?? '')) !== 'ready') { continue; }
+                    $compatible = method_exists($this, 'output_banner_compatible_slots')
+                        ? $this->output_banner_compatible_slots($row, $portal)
+                        : array();
+                    $this->output_store_banner_library_assignment($row, $portal, $classification, $compatible);
+                    $target_repaired += $this->repair_exact_banner_campaign_target_v672187($row, $portal, $classification);
+                }
+
                 if (absint($row['width'] ?? 0) <= 0 || absint($row['height'] ?? 0) <= 0) {
                     if (method_exists($this, 'creative_library_schedule_asset_verification')) {
                         $this->creative_library_schedule_asset_verification(5);
                     }
                     continue;
                 }
-                // 6.72.184 live-fix: Migration bedeutet echte Neubewertung der
-                // automatischen Bannerkante. Eine bereits gespeicherte alte Kante
-                // darf die reale/decodierte Ziel-URL nicht ueberstimmen.
-                // Nur abgeleitete automatische Fachwerte werden verworfen; manuelle
-                // Control-/FIXED-Entscheidungen liegen separat und bleiben erhalten.
-                $row_id = absint($row['id'] ?? 0);
-                if ($row_id > 0) {
-                    $wpdb->update($table, array(
-                        'topic_score'=>0,
-                        'topic_targets'=>'[]',
-                        'classified_at'=>0,
-                    ), array('id'=>$row_id));
-                    $row['topic_score'] = 0;
-                    $row['topic_targets'] = '[]';
-                    $row['classified_at'] = 0;
-                }
-                $result = $this->output_plan_creative($row, true);
+
+                // Vollständige Materialisierung nutzt anschließend denselben
+                // bestehenden Planner. Keine zweite Bannerarchitektur.
+                $fresh = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d", $row_id), ARRAY_A);
+                $result = $this->output_plan_creative(is_array($fresh) ? $fresh : $row, true);
                 if (is_array($result) && absint($result['active'] ?? 0) > 0) { $materialized++; }
             }
+
             update_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, $last, false);
             $more = count($rows) === $limit;
         } while ($more && microtime(true) < $deadline);
 
-        $previous = get_option('ppar_banner_library_migration_result_v672185', array());
+        $previous = get_option('ppar_banner_library_migration_result_v672187', array());
         $previous = is_array($previous) ? $previous : array();
-        update_option('ppar_banner_library_migration_result_v672185', array(
+        update_option('ppar_banner_library_migration_result_v672187', array(
             'processed'=>absint($previous['processed'] ?? 0) + $processed,
             'materialized'=>absint($previous['materialized'] ?? 0) + $materialized,
+            'target_repaired'=>absint($previous['target_repaired'] ?? 0) + $target_repaired,
             'cursor'=>$last,
             'updated_at'=>time(),
             'done'=>!$more,
@@ -3293,11 +3372,10 @@ trait PPAR_Automation_Suite_Trait {
         $running_state = 'running:' . self::VERSION;
         if ($state === self::VERSION || $state === $running_state) { return; }
 
-        // V6.72.185 ist bewusst ein reines Banner-Migrationsrelease. Der bisherige
-        // Versionswechsel-Nachlauf ueber den gesamten Creative-Pool (inkl. tausender
-        // Produktzeilen) ist hier unnoetig. Der dedizierte Bannerworker oben ist die
-        // einzige Migration; eBay/Idealo/Produkte werden nicht neu geplant.
-        if (self::VERSION === '6.72.185') {
+        // 6.72.185/6.72.187 sind reine Banner-Migrationsreleases. Kein generischer
+        // Creative-/Produkt-Vollscan. 6.72.187 räumt zusätzlich einen eventuell von
+        // 6.72.186 geplanten Vollpool-Worker ab, bevor er laufen kann.
+        if (in_array(self::VERSION, array('6.72.185','6.72.187'), true)) {
             if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::FULL_POOL_WORKER_HOOK); }
             delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
