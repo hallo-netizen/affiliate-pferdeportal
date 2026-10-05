@@ -107,3 +107,31 @@ Required before release:
 9. Read back Schabracken page 193 independently; no Schabracken-specific creative may be invented.
 
 Release remains blocked until these gates pass.
+
+
+## Runner-proven source/package pre-gates
+
+These checks were read back from actual GitHub runners after the initial evidence was written.
+
+- Exact 6.72.188 version/source commit `f7c6ee13719c235d04207c9c93ad28b8ccae08cc` triggered workflow run `37328047111`, job `111823721205`.
+- In that job the command `find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/lint.log` completed successfully under `set -euo pipefail`.
+- The job failed only on the following stale assertion `grep -F "Version: 6.72.171" ...`. Therefore the full PHP syntax command had already passed before the obsolete version gate stopped the job.
+- The exact source tree at that commit contains 21 PHP files: full current-source PHP syntax gate = **21/21 PASS**.
+- Blob comparison from `f7c6ee13719c235d04207c9c93ad28b8ccae08cc` to current `bec5ca0f0e775bd5dae7bba7d3036c4719738828` proves **zero PHP-file changes**. Only `readme.txt` changed inside the plugin source after that lint.
+- Exact source comparison from manifest-binding commit `4d9082ccbf31b2ecef44a0d9058eba83fc524825` to current `bec5ca0f0e775bd5dae7bba7d3036c4719738828` proves **27/27 plugin source files byte-identical by Git blob identity**.
+- Legacy ZIP workflow run `37328221191`, job `111824304115`, successfully completed its **Build exact current ZIP** step from that exact 27-file source.
+- Runner-built ZIP SHA256: `e10b112aaccdcd9585512ad36db29a2bee1838cf4eeb0b39c9d9f8ee7b47a1fe`; size: `795051` bytes.
+- That ZIP was **not persisted as a release artifact**. The next workflow step stopped on its stale hard-coded `Version: 6.72.183` assertion before fresh-unpack identity, ZIP PHP lint and WordPress/MariaDB could run.
+- Therefore no final installer, ZIP WordPress/MariaDB PASS or live PASS is claimed.
+
+### Gate status after runner readback
+- Full current-source PHP syntax: **PASS 21/21**.
+- Current 27-file source identity: **PASS**.
+- Exact-current-source ZIP construction: **PASS (runner temporary ZIP only)**.
+- Fresh-unpack ZIP byte identity: **OPEN**.
+- WordPress/MariaDB source positive/negative gate: **OPEN**.
+- WordPress/MariaDB exact-ZIP gate: **OPEN**.
+- Persisted final 6.72.188 installer: **OPEN / absent**.
+- Live install, ADCELL resync and Reithelme/Schabracken readback: **OPEN**.
+
+Release remains blocked.
