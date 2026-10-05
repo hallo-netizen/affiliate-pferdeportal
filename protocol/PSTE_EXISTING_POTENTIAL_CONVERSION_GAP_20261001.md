@@ -565,3 +565,23 @@ Tests:
 - 0.57.33-Normalpfad-Dateien gegenüber 0.57.34 byteidentisch.
 
 Live-Readback 0.57.34 offen.
+
+
+## DELTA 2026-10-05 – JOURNAL-/MAGAZIN-BESTANDSARTIKEL VERLIEREN IN DER PSTE-INVENTARANSICHT IHRE KATEGORIE
+
+Realer Beleg:
+- WordPress-Beitrag `Wie alt werden Pferde?` / Post-ID 15974 erscheint in der zentralen Themenkarte als `WORDPRESS / PUBLISH`, aber ohne Kategorie und ohne Artikeltyp.
+- Im realen Export ist derselbe bestehende Beitrag in `closest_existing_matches` mit `category_name=""` vorhanden.
+- Derselbe Themenkandidat besitzt gleichzeitig eine eindeutig belegte Journal-Zuordnung: Kategorie-ID 1486, `Pferdegesundheit verstehen`, Slug `pferdegesundheit-verstehen`, Artikeltyp `Journal`.
+
+Exakte Rootcause im 0.57.38-Code:
+- `PSTE_Snapshot::inventory()` liest zwar die WordPress-Kategoriebeziehungen, übernimmt aber nur Kategorien, die in `PSTE_Snapshot::structure()['items']` als reguläre Portal-/Produktionskategorien aufgelöst wurden.
+- Journal-/Magazin-Kategorien werden dagegen über den separaten vorhandenen `PSTE_Article_Type_Extension_Router` gebunden.
+- Eine gültige Journal-Kategorie wie ID 1486 kann deshalb für Kandidaten korrekt aufgelöst werden, während derselbe bereits veröffentlichte WordPress-Journalartikel im allgemeinen Inventar ohne Kategorie/Familie/Artikeltyp erscheint.
+- Das ist kein fehlender WordPress-Beitrag und kein Beleg dafür, dass die Journal-Zuordnung des Kandidaten falsch ist; es ist eine Lücke im Read-only-Inventarmapping bestehender Artikel.
+
+Folge:
+- 0.57.38 behebt den PSERC-Plan-Abdeckungsfehler, aber **nicht** dieses Journal-Inventarmapping.
+- 0.57.38 darf deshalb nicht als finaler Gesamtstand für die nächste Produktionswelle abgenommen werden.
+- Der Fix muss den bestehenden WordPress-Inventarpfad so ergänzen, dass registrierte Artikeltyp-Erweiterungskategorien (aktuell Journal) als gültige bestehende Artikelkategorien gelesen werden, ohne sie künstlich in die normale Portal-/Produktfamilienstruktur umzubauen.
+- Danach zwingend 1:1 lokal positiv/negativ gegen den realen Export und die echten bestehenden Journalartikel prüfen; keine neue Architektur und kein Vollabgleich nur wegen dieser Zuordnungslücke.
