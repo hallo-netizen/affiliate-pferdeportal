@@ -644,23 +644,73 @@ Testreport:
 `PSTE-0.57.37-FINAL-HARDPASS-TESTREPORT.json`.
 
 
+## LOKALER ROOTFIX PSTE 0.57.38 – PSERC-PLANABDECKUNG 1:1 GEGEN ECHTE DATEN
+
+Realer Live-Beleg aus Export 0.57.36:
+- Kandidat `Warum sagt man du alte Schabracke?` war trotz bereits geschriebenem/geplantem Artikel wieder `planning_suitability=YES` / `AUTO_RESOLVED`;
+- sein `portal_context.matches` war leer.
+
+Exakte Ursache:
+- PSTE erwartete Editorial-Plan-Felder wie `category_name` / `plan_slot_sha256`;
+- der reale aktuelle PSERC-Snapshot liefert die 5-Feld-Bindung unter `next_textmachine_metadata_batch.items` mit `category` / `plan_slot`;
+- dadurch wurde der reale PSERC-Plan im PSTE-Familienindex faktisch mit **0 Treffern** abgebildet;
+- bereits geschriebene/geplante Artikel konnten deshalb erneut als offene Themen erscheinen.
+
+Kandidat:
+`PSTE-0.57.38-EDITORIAL-PLAN-COVERAGE-ROOTFIX-HARDPASS.zip`
+
+SHA-256:
+`6a6df39e6f66d612fcf998cf3e232bb58056d222ba06679a82af3cfabd288bf8`
+
+KISS-Fix:
+- `PSTE_Snapshot::editorialPlan()` akzeptiert und normalisiert die reale PSERC-Struktur `next_textmachine_metadata_batch.items`;
+- Kategorie-Slug/-ID/-Name wird gegen die vorhandene PSTE-Struktur aufgelöst;
+- `title`, `target_keyword`, `category`, `article_type`, `topic_family`, `plan_slot` werden vollständig in den bestehenden Context-Index überführt;
+- der bestehende manuelle Importpfad erhält dieselbe 5-Feld-Unterstützung;
+- keine neue Architektur, kein neuer Runner, kein Provider, kein Publish, kein neuer Produktionsweg.
+
+1:1 lokale Positiv/Negativ-Prüfung mit echten Daten:
+- echter 0.57.36-Export: **4472 Kandidaten**;
+- echter aktueller PSERC-Metadatenbatch: **16 Artikel**;
+- alter 0.57.37-Vertrag gegen exakt diesen PSERC-Batch reproduziert: **0 Editorial-Plan-Treffer**;
+- 0.57.38: **16/16** PSERC-Artikel werden als `EDITORIAL_PLAN / ANSWER_EQUIVALENT` erkannt und auf `ALREADY_COVERED` / `planning_suitability=NO` gesetzt;
+- kompletter 4472er Context-Replay: **4472/4472**, **0 Fehler**, exakt **16** Editorial-Plan-Abdeckungen, **0** zusätzliche falsche Cross-Topic-Treffer;
+- `Warum sagt man du alte Schabracke?` wird korrekt geblockt;
+- ebenso die beiden weiteren zuvor fälschlich weiterhin planbaren geschriebenen/geplanten Fälle `Pferdehaftpflicht mit Fremdreiterrisiko auswählen` und `So findest du ein optimales Kappzaum für Pferde`;
+- Negativtest falsche Familie: kein Treffer;
+- Trash-Negativ: trash blockiert nicht;
+- publish/draft-Positiv: blockieren;
+- 0.57.37 Resume-/Incremental-/Trash-Core gegenüber 0.57.38 byteidentisch.
+
+Regression/Packaging:
+- exakt 3 Dateien geändert: `class-pste-snapshot.php`, `class-pste-admin.php`, Versionsdatei;
+- PHP-Lint **81/81 PASS**;
+- JSON **54/54 PASS**;
+- Fresh-Unpack byteidentisch zum getesteten Source;
+- 136 Dateien im Paket.
+
+Testreport:
+`PSTE-0.57.38-EDITORIAL-PLAN-COVERAGE-ROOTFIX-TESTREPORT.json`
+SHA-256:
+`1294f0a5334fe0f76e16c43ad5d4e6bec02184515e1039c015d0e2dedb8765db`.
+
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05737_FINAL_LOCAL_FULL_WORKFLOW_HARD_PASS_LIVE_READBACK_OPEN`
+`PSTE_05738_LOCAL_1TO1_PLAN_COVERAGE_HARD_PASS_LIVE_READBACK_OPEN`
 
-Die aktuellen Wiederholungs-/Resume-/Trash-Fehler sind im bestehenden PSTE-Weg konsolidiert repariert und der komplette betroffene Workflow lokal positiv/negativ simuliert. Offen ist nur der reale WordPress-Readback von exakt 0.57.37.
+Der konkrete Snapshot→PSERC-Plan→PSTE-Context→Already-covered-Pfad ist mit den echten 4472 Exportkandidaten und dem echten 16er PSERC-Batch lokal positiv/negativ vollständig bestanden. Der übrige 0.57.37 Resume-/Incremental-Core ist byteidentisch. Offen ist nur der reale WordPress-Readback von exakt 0.57.38.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05737_THEN_RESUME_EXISTING_ONLY_WITHOUT_MANUAL_FULL_CONTEXT_RESTART`
+`INSTALL_EXACT_05738_THEN_SINGLE_LIVE_READBACK`
 
-1. Keinen weiteren `Gesamtbestand neu abgleichen` starten.
-2. Exakt `PSTE-0.57.37-FINAL-KISS-INCREMENTAL-REENTRY-HARDPASS.zip` installieren.
-3. Falls ein bereits laufender Portalabgleich noch aktiv ist: nur diesen einen laufenden Job bis COMPLETE auslaufen lassen; nicht neu starten.
-4. Danach beim gespeicherten Existing-Only-PAUSED_ERROR einmal `Gespeicherten Block erneut prüfen`.
-5. Der Resume-Pfad darf danach keinen neuen 4472er Portalabgleich starten. Bei gleicher Bindung wird ab gespeicherten Cursor fortgesetzt; bei geänderter Bindung wird nur der lokale providerfreie Bestandsaudit neu gerechnet.
-6. Nach Existing-Only COMPLETE: Gesamte Themenkarte exportieren → Live-Readback → Redaktionsplan/Artikelproduktion.
-7. Keine Produktionswelle vor diesem Live-Readback.
+1. Exakt `PSTE-0.57.38-EDITORIAL-PLAN-COVERAGE-ROOTFIX-HARDPASS.zip` installieren.
+2. Keinen manuellen `Gesamtbestand neu abgleichen` starten.
+3. Den vorhandenen Existing-Only-/Resume-Weg genau einmal fortsetzen, falls noch ein gespeicherter Lauf offen ist; andernfalls keinen neuen Vollabgleich erzeugen.
+4. Danach `Gesamte Themenkarte exportieren`.
+5. Live-Readback muss insbesondere beweisen, dass die 16 aktuellen PSERC-Planartikel nicht mehr als neu planbar erscheinen.
+6. Erst danach Redaktionsplan/Artikelproduktion.
 
 ## NICHT ANFASSEN
 
