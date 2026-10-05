@@ -9,6 +9,21 @@ $rp=function($name)use($o){$p=new ReflectionProperty($o,$name);$p->setAccessible
 $call=function($name,...$args)use($rm,$o){return $rm($name)->invokeArgs($o,$args);};
 update_option('ppar_enabled','1',false);update_option('ppar_assignments_v1',array(),false);delete_option('ppar_debug');
 
+// Test isolation: this gate may run after other disposable regression fixtures.
+// Deactivate only pre-existing test campaigns in this disposable WordPress DB.
+foreach((array)$call('get_campaigns') as $existingCampaign){
+  $pid=absint($existingCampaign['post_id']??0);
+  if($pid<=0)continue;
+  $d=get_post_meta($pid,'ppar_campaign_data',true);
+  if(!is_array($d))continue;
+  $d['active']=0;
+  update_post_meta($pid,'ppar_campaign_data',$d);
+}
+try{$rp('campaigns_request_cache')->setValue($o,null);}catch(Throwable $e){}
+foreach(array('ranked_campaigns_request_cache','ranked_campaign_candidate_index_request_cache','ranked_campaign_raw_records_request_cache','ranked_campaign_from_post_request_cache','automation_exact_target_rank_request_cache') as $prop){
+  try{$rp($prop)->setValue($o,array());}catch(Throwable $e){}
+}
+
 $http=0;
 add_filter('pre_http_request',function($pre,$args,$url)use(&$http){$http++;return new WP_Error('blocked','network forbidden in strict-tier positive gate');},PHP_INT_MAX,3);
 
