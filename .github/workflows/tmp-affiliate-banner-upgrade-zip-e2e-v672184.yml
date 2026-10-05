@@ -224,7 +224,11 @@ jobs:
           /tmp/wp eval-file /tmp/dest186.php --path=/tmp/wp-fresh | tee /tmp/dest185.log
           grep -F 'SUMMARY passes=26 failures=0' /tmp/dest185.log
           grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest185.log
-          echo "PASS fresh ZIP legacy 21/21 + destination 26/26"
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672186.php" --path=/tmp/wp-fresh | tee /tmp/tier186zip.log
+          grep -F 'STRICT_BEST_TIER_ALL_ACTIVE_CONTEXTS_672186_PASS' /tmp/tier186zip.log
+          grep -F '"failures":0' /tmp/tier186zip.log
+          grep -F 'PASS PERFORMANCE_zero_frontend_http :: http=0' /tmp/tier186zip.log
+          echo "PASS fresh ZIP legacy 21/21 + destination 26/26 + strict-tier 139/139"
 
       - name: Commit tested manifest and installer
         shell: bash
