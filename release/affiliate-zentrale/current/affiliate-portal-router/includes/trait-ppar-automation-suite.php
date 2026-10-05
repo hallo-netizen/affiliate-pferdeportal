@@ -1991,7 +1991,7 @@ trait PPAR_Automation_Suite_Trait {
                 : 'ADCELL-Programmlauf abgeschlossen: Banner/Deeplink verarbeitet; kein eindeutiges CSV-Werbemittel verfügbar.';
             $this->automation_complete_job($job, $counts, $details, $status, $message);
 
-            // V6.72.188 – Reithelm-/Themenfix: Erst NACH abgeschlossenem ADCELL-Lauf
+            // V6.72.189 – Reithelm-/Themenfix: Erst NACH abgeschlossenem ADCELL-Lauf
             // liegt die echte Werbemittelkategorie sicher in der Creative-Library.
             // Jetzt genau einmal den Vollpool neu planen. Ein frueher 90s-Lauf kann
             // damit keine veraltete Allgemein-Zuordnung dauerhaft konservieren.
@@ -3122,29 +3122,29 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
-     * V6.72.188 – Rootfix-Nachlauf fuer den live bewiesenen ADCELL-405-Fall
+     * V6.72.189 – Rootfix-Nachlauf fuer den live bewiesenen ADCELL-405-Fall
      * plus providerneutrale Themenkante. 6.72.88/6.72.187 koennen auf einzelnen
-     * Installationen bereits "done" sein; deshalb braucht 6.72.188 einen eigenen Lauf.
+     * Installationen bereits "done" sein; deshalb braucht 6.72.189 einen eigenen Lauf.
      * Kein API-Zugriff im Frontend.
      */
-    public function maybe_upgrade_adcell_topic_metadata_v672188() {
-        $key = 'ppar_v672188_adcell_topic_resync_state';
+    public function maybe_upgrade_adcell_topic_metadata_v672189() {
+        $key = 'ppar_v672189_adcell_topic_resync_state';
         $state = sanitize_key((string)get_option($key, ''));
         if (in_array($state, array('scheduled','running','done'), true)) { return; }
         update_option($key, 'scheduled', false);
-        if (!wp_next_scheduled('ppar_v672188_adcell_topic_resync')) {
-            wp_schedule_single_event(time()+1, 'ppar_v672188_adcell_topic_resync');
+        if (!wp_next_scheduled('ppar_v672189_adcell_topic_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672189_adcell_topic_resync');
         }
     }
 
-    public function run_v672188_adcell_topic_resync() {
-        $key = 'ppar_v672188_adcell_topic_resync_state';
+    public function run_v672189_adcell_topic_resync() {
+        $key = 'ppar_v672189_adcell_topic_resync_state';
         update_option($key, 'running', false);
         $result = $this->automation_start_all_adcell_programmes();
         if (is_wp_error($result)) {
             update_option($key, 'retry', false);
-            if (!wp_next_scheduled('ppar_v672188_adcell_topic_resync')) {
-                wp_schedule_single_event(time()+300, 'ppar_v672188_adcell_topic_resync');
+            if (!wp_next_scheduled('ppar_v672189_adcell_topic_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672189_adcell_topic_resync');
             }
             return;
         }
