@@ -1,7 +1,7 @@
 # Affiliate Router 6.72.185 – Version Separation + Stale-Edge Red/Green Full E2E
 
 Datum: 2026-10-05
-Branch: affiliate-672185-version-separation
+Branch: affiliate-release-current
 
 ## Anlass
 
@@ -20,7 +20,7 @@ Der korrigierte Banner-Migrationsstand darf nicht erneut als 6.72.184 ausgeliefe
 Ausgangsbasis ist ausdrücklich der fehlerhafte erste 6.72.184-Installer:
 SHA-256 `bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`.
 
-Source-Run: `37277975992` = SUCCESS.
+Source-Run: `37278423032` = SUCCESS.
 
 Bewiesen:
 - fehlerhafte 6.72.184 aktiv;
@@ -40,13 +40,13 @@ Upgrade-Gate: **23/23 PASS**.
 
 ## Finales ZIP
 
-ZIP-Run: `37277994704` = SUCCESS.
+ZIP-Run: `37278423041` = SUCCESS.
 
 Installer:
 `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip`
 
 SHA-256:
-`a0e4c28fa28d91455e288a45d6d932c49869ab0ad80353fd606fcce8e2a14f2a`
+`13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28`
 
 Bytes:
 `793173`
