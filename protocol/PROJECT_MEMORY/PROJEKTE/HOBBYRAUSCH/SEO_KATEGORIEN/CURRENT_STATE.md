@@ -3,116 +3,107 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: V1.9.8 FULL-HIERARCHY LOCAL HARD PASS / LIVE-INSTALLATION UND REALER FRONTEND-READBACK OFFEN
-
-## Zielvertrag
-
-`ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
-
-Ziel:
-Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → sichtbares Frontend → Readback.
+STATUS: V1.9.9 PFERDEATELIER-TAXONOMIE LOKAL HARD PASS / LIVE-INSTALLATION UND REALER FRONTEND-READBACK OFFEN
 
 ## Live-Wahrheit
 
-Livebestand wurde während der lokalen E2E-Arbeit nicht verändert.
+Livebestand wurde während der lokalen Prüfung nicht verändert.
 
 Real zuletzt beobachtet:
 - `Buchbinden` ist sichtbar;
-- die vier Content-Leafs sind im bisherigen Live-Stand noch nicht sichtbar.
+- die Content-Kategorien waren im bisherigen Live-Stand auf der Seite nicht sichtbar.
 
-V1.9.7 bleibt verworfen.
+V1.9.7 und V1.9.8 sind verworfen und dürfen nicht installiert werden.
 
-## V1.9.8 – lokaler finaler Kandidat
+## Harte Root Cause
 
-Die bisher offenen technischen Punkte sind lokal geschlossen:
+Der funktionierende Pferdeatelier-Aufbau wurde erneut gegen die reale Portalstruktur und das reale Template-Kit geprüft.
 
-- variable native Page-Hierarchie statt Root+4;
-- `Fertigen → Buch & Papier → Buchbinden` als 3-Seiten-Kette;
-- keine feste `MAX_CONTENT_CHILDREN_PER_TOPIC=4`-Grenze im Full-Hierarchy-Weg;
-- Page→Taxonomy über internen unsichtbaren Bridge-Term;
-- sichtbare Leaf-Kategorien nativ darunter;
-- wiederholbare kurze Leaf-Namen in getrennten Hobby-Kontexten;
-- gemeinsame Strukturplanung für Content, Magazin und HivePress bei technisch getrennten Zielsträngen;
-- Magazin über eigene hierarchische `journal_cat`;
-- HivePress über `hp_listing_category`;
-- Sparse-/Delta-Erweiterungen bleiben erhalten;
-- kein automatisches Löschen vorhandener Knoten;
-- Publish/Readback bis zum sichtbaren Frontend-Endzustand;
-- Idempotenz: zweiter identischer Lauf = 0 unnötige Writes.
+Bewährtes Muster:
+- Level 1–3 = echte WordPress-Seiten über `post_parent`;
+- Level 4 = echte WordPress-`category`-Terme mit `parent=0`;
+- keine technischen Bridge-Terme;
+- Kategorien besitzen kontextuell eindeutige Namen/Slugs, z. B. `FAQ Trensen` / `trensen-faq`;
+- die Ebene-3-Seite ermittelt die zugehörigen Kategorien über den fachlichen Produkt-/Seitenkontext und rendert sie sichtbar.
 
-## Frisch geprüfte lokale Evidenz
+V1.9.8 hatte dieses Muster falsch mit technischen Bridge-Termen nachgebaut.
 
-Reale aufgezeichnete Buchbinden-DataForSEO-Evidenz wurde im lokalen Replay verwendet; keine neuen Paid-Calls.
+## V1.9.9 – korrigierter lokaler Kandidat
 
-Builder:
-- Buchbinden Full-Hierarchy PASS;
-- mehrere Hobbys PASS;
-- gemeinsames `Fertigen` nur einmal;
-- `Einstieg` je Hobby konfliktfrei;
-- >4 evidenzbelegte Leafs möglich;
-- nicht belegte optionale FAQ wird nicht künstlich erzeugt.
+V1.9.9 übernimmt das Pferdeatelier-Prinzip ohne Verbindung zum Pferdeportal:
 
-Kompletter POSITIV-E2E:
-- Global Coverage PASS;
-- Detail Research PASS;
-- Spezialisierung PASS;
-- FINAL Validator PASS;
-- FINAL Evidence PASS;
-- Deployment Preflight PASS;
-- Write/Publish/technischer Readback PASS;
-- native Page-Tiefe 3 PASS;
-- Frontend-Readback PASS;
-- exakt Einstieg / Ausrüstung / Material / Techniken & Praxis sichtbar;
-- kein Bridge-/Magazin-/HivePress-Leak;
-- zweiter identischer Lauf: 0 Writes.
+- Page-Hierarchie 1–3 nativ;
+- Content-Leafs bleiben echte Root-`category`-Terme;
+- kein Bridge-Term;
+- stabile logische Bindung über `_apkw_parent_concept_id`;
+- technischer Speichername wird kontextuell eindeutig, z. B. `Einstieg Buchbinden`;
+- technischer Slug bleibt kontextuell, z. B. `buchbinden-einstieg`;
+- sichtbares Frontend-Label bleibt kurz: `Einstieg`;
+- bestehende Buchbinden-Term-IDs bleiben erhalten;
+- Magazin bleibt eigene `journal_cat`;
+- HivePress bleibt eigene `hp_listing_category`;
+- keine automatische Löschung;
+- Sparse-/Delta-Erweiterung bleibt erhalten.
 
-Kompletter NEGATIV-E2E:
-- unbekannter Parent BLOCKED;
-- unbelegtes DataForSEO-Keyword BLOCKED;
-- doppelter Leaf unter demselben Hobby BLOCKED;
-- fehlender Marketplace-Pillar BLOCKED;
-- stilles Entfernen bestehender Knoten BLOCKED;
-- Bridge-Manipulation BLOCKED;
-- Page-Parent-Drift BLOCKED;
-- neue Kategorie ohne neue Research-Evidenz BLOCKED;
-- Mutation nach Approval invalidiert Receipt.
+## Harte lokale Prüfung
 
-Regression/Fresh-Unpack:
-- bestehende Suite: 270/270 PASS;
-- Fresh-Source: 270/270 PASS;
-- Full-Builder-Flex PASS;
-- Full-E2E POSITIV PASS;
-- Full-E2E NEGATIV PASS;
-- Source↔Installer Runtime: 25/25 byteidentisch;
+Wichtiger Recheck:
+Der frühere einzelne Test `full-e2e-positive.php` war standalone nicht belastbar und fiel bereits in der unveränderten alten V1.9.8-Quelle an der DataForSEO-Evidenzbindung durch.
+Dieser Scheintest wurde verworfen/korrigiert; der tatsächliche vollständige Positivlauf ist jetzt standalone grün.
+
+Frischer V1.9.9-Stand:
+- Regression: 270/270 PASS;
+- Full Builder Flex: PASS;
+- echter Buchbinden-Altbestand: PASS;
+- kompletter Positiv-E2E: PASS;
+- kompletter Negativ-E2E: PASS;
+- Fresh-Source nach ZIP-Entpacken: erneut alles PASS;
+- Runtime Source↔Installer: 19/19 byteidentisch;
 - Installer PHP-Lint: 19/19 PASS.
+
+Realer Buchbinden-Altbestand:
+- bestehende V1.9.4-Bindungen werden direkt erkannt;
+- Einstieg / Ausrüstung / Material / Techniken & Praxis werden ohne Bridge sichtbar;
+- bestehende vier Term-IDs bleiben erhalten;
+- kontextuelle Umbenennung kann kontrolliert auf denselben IDs erfolgen;
+- Magazin/HivePress leaken nicht in Content.
+
+## Negativabdeckung
+
+BLOCKED bei:
+- unbekanntem Parent;
+- unbelegtem DataForSEO-Keyword;
+- doppeltem Leaf unter demselben Hobby;
+- fehlendem Marketplace-Pillar;
+- stillem Entfernen bestehender Knoten;
+- manipuliertem `_apkw_parent_concept_id`;
+- Page-Parent-Drift;
+- neuer Kategorie ohne neue Research-Evidenz;
+- Mutation nach Approval.
 
 ## Artefakte
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.8_FULL_HIERARCHY_E2E_HARD_PASS.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.9_PFERDEATELIER_TAXONOMY_E2E_HARD_PASS.zip`
 
 SHA-256:
-`60ea8d4c235805d66e6795223b1bfbd392cc0109556cfbf5631d9d0109b4585c`
+`601a7c7e8a796a12cb9f27388899cdd82264e460314284e29f5ef0018c33e05a`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.8_FULL_HIERARCHY_E2E_HARD_PASS.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.9_PFERDEATELIER_TAXONOMY_E2E_HARD_PASS.zip`
 
 SHA-256:
-`340af0e4927971c746d97ba2aad8bab1e7efc269c70e12d21319734e7a363c10`
-
-## Beleggrenze
-
-V1.9.8 ist noch nicht live auf Hobby Depot installiert.
-Darum gibt es noch keinen realen WordPress-/Frontend-PASS für V1.9.8.
+`6ace7bb651025729da6a80d055076c689ee5ff3ba619ec783c1bebb07cda25e9`
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V198_LIVE_INSTALL_AND_FRONTEND_READBACK_OPEN`
+`HD001_V199_LIVE_INSTALL_AND_FRONTEND_READBACK_OPEN`
 
 ## NEXT ACTION
 
-Exakt V1.9.8 über den aktuellen Kategorie-Workflow installieren; keinen Reset und keine neue Konzeptschleife.
+Exakt V1.9.9 installieren.
+Kein Reset, keine neue Research-Runde.
 
-Danach den bestehenden Buchbinden-Stand über den vorgesehenen Publish-/Republish-Weg ausführen und real prüfen.
+Danach den vorhandenen Buchbinden-Stand einmal durch den vorgesehenen Publish/Republish-Weg laufen lassen und das echte Frontend prüfen.
 
-PASS erst, wenn das echte Frontend die erwartete Hierarchie und Leafs zeigt. Bei Abweichung STOP und konkreten Live-Delta prüfen; nicht raten und nicht blind eine neue Version bauen.
+PASS erst, wenn die Seite `Buchbinden` die vier Content-Kategorien sichtbar zeigt.
