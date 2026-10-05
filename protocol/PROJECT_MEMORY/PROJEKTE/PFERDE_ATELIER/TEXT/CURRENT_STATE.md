@@ -695,22 +695,77 @@ SHA-256:
 `1294f0a5334fe0f76e16c43ad5d4e6bec02184515e1039c015d0e2dedb8765db`.
 
 
+## LOKALER ROOTFIX PSTE 0.57.39 – JOURNAL/MAGAZIN-INVENTAR KATEGORIE + TYP
+
+Screenshot-/Exportbefund:
+- In der Themenkarte erscheinen bestehende WordPress-Journalartikel wie `Wie alt werden Pferde?` und `Können Pferde schwimmen?` mit leerer Kategorie und leerem Artikeltyp.
+- Im realen 0.57.36-Export sind die bestehenden WordPress-Matches für Post 15974 (`Wie alt werden Pferde?`) und Post 16029 (`Können Pferde schwimmen?`) ebenfalls mit leerem `category_name` gespeichert.
+- Gleichzeitig ist die Journal-Zielbindung im selben Export eindeutig vorhanden:
+  - `Wie alt werden Pferde?` → term 1486 / `Pferdegesundheit verstehen` / Journal / family `cb4b7270...`;
+  - `Können Pferde schwimmen?` → term 1500 / `Pferdewissen & Grundlagen` / Journal / family `3fcebcdb...`.
+
+Exakte Rootcause in 0.57.38:
+1. `PSTE_Snapshot::inventory()` und `compilerInventoryPage()` akzeptierten für bestehende WordPress-Posts nur Kategorien aus der **Core-Produktionsstruktur** `structure()['items']`.
+2. Die signierten Journal-/Magazin-Kategorien liegen absichtlich im additiven `ARTICLE_TYPE_EXTENSION_MANIFEST_V1` und damit außerhalb dieser Core-Leaf-Struktur.
+3. Folge: Ein WordPress-Post in einer gültigen Journal-Kategorie wurde als `category_id=0 / category_name='' / article_type=''` in das PSTE-Inventar aufgenommen.
+4. Zusätzlich berechnete `PSTE_Analytics::topicRows()` den Artikeltyp noch einmal aus dem sichtbaren Kategorienamen und ignorierte einen bereits sauber gelieferten Inventory-`article_type`. Für flache Journal-Kategorien wie `Pferdegesundheit verstehen` ergab auch dieser Weg keinen Typ.
+
+Kandidat:
+`PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip`
+
+SHA-256:
+`10a6e28e52639071ccde56d4c96f0ae3a37aae1d93bd8e2c51368f13f8e342f9`
+
+KISS-Fix:
+- signierte additive Extension-Kategorien werden **nur read-only für das WordPress-Inventar** nach Term-ID aufgelöst;
+- sie werden nicht in die Core-Produktionshierarchie hineingeschrieben;
+- Journal-Family-Key wird für bestehende WordPress-Artikel exakt mit derselben bereits vorhandenen Formel des Extension-Routers gebildet: `PSTE_EXTENSION_EXPLICIT_SCOPE_V1|journal|<exact topic identity>`;
+- Themenkarte übernimmt vorhandenen Inventory-`article_type` und verwendet die alte Namensinferenz nur noch als Fallback;
+- unbekannte/nicht signierte Kategorien bleiben fail-closed unzugeordnet;
+- Kollision Extension-Term-ID ↔ Core-Produktionskategorie blockiert hart.
+
+1:1 lokale Positiv-/Negativprüfung:
+- 0.57.38 exakt reproduziert:
+  - Post 15974 → Kategorie leer / Typ leer / 0 Context-Matches;
+  - Post 16029 → Kategorie leer / Typ leer / 0 Context-Matches.
+- 0.57.39:
+  - Post 15974 → `Pferdegesundheit verstehen` / `Journal` / exakt 1 WORDPRESS ANSWER_EQUIVALENT / same_topic_family=true;
+  - Post 16029 → `Pferdewissen & Grundlagen` / `Journal` / exakt 1 WORDPRESS ANSWER_EQUIVALENT / same_topic_family=true;
+  - regulärer Core-Fall `FAQ Sperrriemen` bleibt unverändert;
+  - unbekannte WordPress-Kategorie bleibt leer/unzugeordnet: PASS;
+  - Extension/Core-Term-Kollision: harter Block PASS;
+  - Themenkarte: 0.57.38 zeigte leeren Typ, 0.57.39 zeigt `Journal`.
+- exakt 3 Dateien gegenüber 0.57.38 geändert: Snapshot, Analytics, Versionsdatei;
+- Normal-Metadata, Repository, Extension-Router, Family-Identity, Title-Pipeline und Context-Evaluator byteidentisch zu 0.57.38;
+- der komplette 0.57.38 Editorial-Plan-Rootfix-Abschnitt ist byteidentisch;
+- PHP-Lint **81/81 PASS**;
+- JSON **54/54 PASS**;
+- Fresh-Unpack **136/136 Dateien byteidentisch**.
+
+Testreport:
+`PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-TESTREPORT.json`
+SHA-256:
+`005c4a4d5c9ebf1437c0c882e5f00e19d3cea078e86c1bdb54a0e6d1b0c8105e`.
+
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05738_LOCAL_1TO1_PLAN_COVERAGE_HARD_PASS_LIVE_READBACK_OPEN`
+`PSTE_05739_LOCAL_JOURNAL_INVENTORY_AND_PLAN_COVERAGE_HARD_PASS_LIVE_READBACK_OPEN`
 
-Der konkrete Snapshot→PSERC-Plan→PSTE-Context→Already-covered-Pfad ist mit den echten 4472 Exportkandidaten und dem echten 16er PSERC-Batch lokal positiv/negativ vollständig bestanden. Der übrige 0.57.37 Resume-/Incremental-Core ist byteidentisch. Offen ist nur der reale WordPress-Readback von exakt 0.57.38.
+0.57.39 konsolidiert den 0.57.38-PSERC-Planabdeckungsfix mit der jetzt gefundenen Journal-/Magazin-Inventarzuordnung. Beide konkreten Livefehler sind lokal mit echten Exportidentitäten positiv/negativ reproduziert und repariert. Offen ist nur der reale WordPress-Readback von exakt 0.57.39.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05738_THEN_SINGLE_LIVE_READBACK`
+`INSTALL_EXACT_05739_THEN_VERIFY_THEMENKARTE_WITHOUT_FULL_REBUILD`
 
-1. Exakt `PSTE-0.57.38-EDITORIAL-PLAN-COVERAGE-ROOTFIX-HARDPASS.zip` installieren.
-2. Keinen manuellen `Gesamtbestand neu abgleichen` starten.
-3. Den vorhandenen Existing-Only-/Resume-Weg genau einmal fortsetzen, falls noch ein gespeicherter Lauf offen ist; andernfalls keinen neuen Vollabgleich erzeugen.
-4. Danach `Gesamte Themenkarte exportieren`.
-5. Live-Readback muss insbesondere beweisen, dass die 16 aktuellen PSERC-Planartikel nicht mehr als neu planbar erscheinen.
-6. Erst danach Redaktionsplan/Artikelproduktion.
+1. 0.57.38 nicht mehr installieren; exakt `PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip` installieren.
+2. **Keinen** `Gesamtbestand neu abgleichen` starten.
+3. Direkt `SEO Themenengine → Themenkarte` neu laden.
+4. Live-Sichtprüfung:
+   - `Wie alt werden Pferde?` muss als WORDPRESS/PUBLISH mit Kategorie `Pferdegesundheit verstehen` und Typ `Journal` erscheinen;
+   - `Können Pferde schwimmen?` muss mit Kategorie `Pferdewissen & Grundlagen` und Typ `Journal` erscheinen.
+5. Danach `Gesamte Themenkarte exportieren` und einmaliger Live-Readback.
+6. Wenn PASS: ohne weiteren Vollabgleich direkt Redaktionsplan/Artikelproduktion.
 
 ## NICHT ANFASSEN
 
