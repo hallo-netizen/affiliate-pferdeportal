@@ -1149,6 +1149,13 @@ trait PPAR_Automation_Suite_Trait {
                 'creative_tag'=>sanitize_text_field(implode(' | ',$tag_parts)),
                 'promotion_category_id'=>$category_id,
                 'promotion_category_name'=>$category_name,
+                // Providerneutraler Importvertrag: Ein Provider darf ein explizit
+                // geliefertes Werbemittel-Thema transportieren. Die zentrale
+                // Output-Logik entscheidet spaeter allein, ob es exakt zu einem
+                // realen Portalziel passt. Kein Providername steckt im Vertrag.
+                'provider_topic_id'=>$category_id > 0 ? (string)$category_id : '',
+                'provider_topic_name'=>$category_name,
+                'provider_topic_source'=>$category_name !== '' ? 'provider_promotion_category' : '',
                 'image_source'=>$image,
                 'destination_url'=>$click,
                 'tracking_url'=>$click,
@@ -1984,7 +1991,7 @@ trait PPAR_Automation_Suite_Trait {
                 : 'ADCELL-Programmlauf abgeschlossen: Banner/Deeplink verarbeitet; kein eindeutiges CSV-Werbemittel verfügbar.';
             $this->automation_complete_job($job, $counts, $details, $status, $message);
 
-            // V6.72.87 – Reithelm-/Themenfix: Erst NACH abgeschlossenem ADCELL-Lauf
+            // V6.72.188 – Reithelm-/Themenfix: Erst NACH abgeschlossenem ADCELL-Lauf
             // liegt die echte Werbemittelkategorie sicher in der Creative-Library.
             // Jetzt genau einmal den Vollpool neu planen. Ein frueher 90s-Lauf kann
             // damit keine veraltete Allgemein-Zuordnung dauerhaft konservieren.
@@ -3115,29 +3122,29 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
-     * V6.72.187 – Rootfix-Nachlauf fuer den live bewiesenen ADCELL-405-Fall.
-     * 6.72.88 ist auf bestehenden Installationen bereits "done"; deshalb braucht
-     * der korrigierte Kategorien-Transport genau einen neuen Hintergrundlauf.
+     * V6.72.188 – Rootfix-Nachlauf fuer den live bewiesenen ADCELL-405-Fall
+     * plus providerneutrale Themenkante. 6.72.88/6.72.187 koennen auf einzelnen
+     * Installationen bereits "done" sein; deshalb braucht 6.72.188 einen eigenen Lauf.
      * Kein API-Zugriff im Frontend.
      */
-    public function maybe_upgrade_adcell_topic_metadata_v672187() {
-        $key = 'ppar_v672187_adcell_topic_resync_state';
+    public function maybe_upgrade_adcell_topic_metadata_v672188() {
+        $key = 'ppar_v672188_adcell_topic_resync_state';
         $state = sanitize_key((string)get_option($key, ''));
         if (in_array($state, array('scheduled','running','done'), true)) { return; }
         update_option($key, 'scheduled', false);
-        if (!wp_next_scheduled('ppar_v672187_adcell_topic_resync')) {
-            wp_schedule_single_event(time()+1, 'ppar_v672187_adcell_topic_resync');
+        if (!wp_next_scheduled('ppar_v672188_adcell_topic_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672188_adcell_topic_resync');
         }
     }
 
-    public function run_v672187_adcell_topic_resync() {
-        $key = 'ppar_v672187_adcell_topic_resync_state';
+    public function run_v672188_adcell_topic_resync() {
+        $key = 'ppar_v672188_adcell_topic_resync_state';
         update_option($key, 'running', false);
         $result = $this->automation_start_all_adcell_programmes();
         if (is_wp_error($result)) {
             update_option($key, 'retry', false);
-            if (!wp_next_scheduled('ppar_v672187_adcell_topic_resync')) {
-                wp_schedule_single_event(time()+300, 'ppar_v672187_adcell_topic_resync');
+            if (!wp_next_scheduled('ppar_v672188_adcell_topic_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672188_adcell_topic_resync');
             }
             return;
         }
