@@ -18,3 +18,23 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run readonly live probe
         run: python3 AFFILIATE_HOBBYRAUM/live_schabracken_readonly_probe.py
+
+      - name: Inspect exact winning ADCELL creative
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== CLICK HEADERS NO FOLLOW ==='
+          curl -sS -I --max-redirs 0 'https://t.adcell.com/p/click?promoId=467974&slotId=98720' || true
+          echo '=== IMAGE FETCH ==='
+          curl -fsSL --max-time 30 'https://t.adcell.com/p/image?promoId=467974&slotId=98720' -o /tmp/live-banner
+          file /tmp/live-banner
+          sha256sum /tmp/live-banner
+          stat -c '%s bytes' /tmp/live-banner
+
+      - name: Upload exact live banner image
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-schabracken-banner-467974
+          path: /tmp/live-banner
+          if-no-files-found: error
+          retention-days: 2
