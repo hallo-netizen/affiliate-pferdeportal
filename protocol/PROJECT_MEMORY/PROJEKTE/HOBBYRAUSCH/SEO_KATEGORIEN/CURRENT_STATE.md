@@ -3,73 +3,36 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: V1.10.0 GESAMTPORTAL-ENGINE LOKAL HARD PASS / REALER GESAMTBESTAND-EINGANG AUS HD-002 OFFEN / KEIN RELEASE
+STATUS: V1.9.9 CONTENT-PILOT LIVE PASS / V1.10.0 ENGINE-TESTS PASS / REALER GESAMTPORTAL-E2E BLOCKED / KEIN RELEASE
 
-## Ziel
+## Zielautorität
 
-Konzept + echte Hobbykandidaten + DataForSEO → vollständiger Portalbaum:
-- 8 Hauptwelten;
-- variable Seitenhierarchie;
-- Content-Kategorien;
-- Magazin;
-- HivePress;
-- WordPress-Publish;
-- sichtbares Frontend;
-- Readback;
-- spätere Delta-Erweiterung ohne Gesamtumbau.
+`ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-## V1.9.9
+Ziel unverändert:
+Konzept + echter Hobbybestand + DataForSEO → 8 Hauptwelten → variable Seitenhierarchie + Content-Kategorien + Magazin + HivePress → WordPress Publish → sichtbares Frontend → Readback → spätere Delta-Erweiterung.
 
-Taxonomie-/Frontend-Pilot live bestätigt:
+## Belastbarer Live-Stand
+
+V1.9.9 Content-Pilot real bestätigt:
 - Buchbinden sichtbar;
 - Einstieg / Ausrüstung / Material / Techniken & Praxis sichtbar;
-- ein veröffentlichter Testartikel ist über alle vier Kategorien im Frontend sichtbar.
+- ein veröffentlichter Testartikel ist über die vier Kategorien im Frontend sichtbar.
 
-Damit ist die technische WordPress-/Frontend-Abbildung für den Content-Strang real belegt.
+Livebestand nicht zurückrollen.
 
-## V1.10.0 – Gesamtportal-Engine
+## V1.10.0 Arbeitsstand
 
-Lokale Arbeitskopie vorhanden:
+Lokale Arbeitskopie:
 `/mnt/data/hd001-v1100-work`
 
-Version:
+Plugin-Header:
 `1.10.0`
 
-Neu vorhanden:
-- `class-apkw-portal-discovery.php`;
-- Portalprofil mit exakt 8 Konzeptwelten;
-- DataForSEO Overview-Dedupe/Synonymgruppierung;
-- automatische Weltzuordnung erst nach pro-Hobby DataForSEO-Suggestions;
-- variable Concept-Batches;
-- getrennte `journal_cat`-/`hp_listing_category`-Stränge;
-- Admin-Portalprofil-Import und Resume;
-- kein Publish während der Discovery.
-
-## Konzept/DataForSEO-Vertrag
-
-Konzept gibt nur Leitplanken:
-- 8 Welten;
-- Geschäftsmodell;
-- erlaubte Stränge;
-- bekannte bereits bestätigte Parent-Pfade;
-- Kandidaten-/Leaf-Regeln.
-
-DataForSEO entscheidet:
-- ob ein Rohkandidat echte Nachfrage hat;
-- Synonym-/Core-Keyword-Gruppierung;
-- welche Kandidaten canonical weiterlaufen;
-- pro Hobby die evidenzbasierte Weltzuordnung;
-- welche Leaf-Gruppen genügend echte Keyword-Unterstützung haben;
-- Marketplace-/Magazin-Evidenz.
-
-Rohliste ist ausdrücklich **keine Taxonomie**.
-
-## Harte lokale Tests
-
-Frisch geprüft:
-- Altregression: 270/270 PASS;
-- V1.10.0 Portal Discovery PASS;
-- Auto-World-Routing PASS;
+Frisch am 2026-10-05 erneut ausgeführt:
+- Legacy Regression: 270/270 PASS;
+- Portal Discovery PASS;
+- World Routing PASS;
 - Concept Auto World PASS;
 - Eight Worlds E2E PASS;
 - Portal Scale PASS;
@@ -77,50 +40,55 @@ Frisch geprüft:
 - Admin Portal PASS;
 - Portal Resume PASS.
 
-Skalierungstest:
-- 844 Rohkandidaten;
-- exakt 2 DataForSEO Overview-Batches;
-- 844 positive Fixture-Kandidaten;
-- 34 Concept-Batches bei Batchgröße 25.
+Bewiesen ist damit die Maschine, nicht der reale Gesamtportal-Endlauf.
 
-8-Welten-E2E:
-- Gestalten;
-- Fertigen;
-- Technik;
-- Forschen;
-- Pflanzen;
-- Tiere;
-- Bewegen;
-- Sammeln;
-alle korrekt geroutet.
+Skalierungsfixture:
+844 synthetische Rohkandidaten, 2 Overview-Batches, 34 Concept-Batches bei Batchgröße 25.
 
-Ambige Weltzuordnung bleibt fail-closed und wird nicht als Hobbyseite promotet.
+Acht getestete Konzeptwelten:
+Gestalten / Fertigen / Technik / Forschen / Pflanzen / Tiere / Bewegen / Sammeln.
 
-## Wichtige Beleggrenze
+## Konzept/DataForSEO-Vertrag
 
-Die 844er Prüfung ist **Skalierungs-/Maschinenbeweis**, nicht der reale Hobby-Depot-Bestand.
+Konzept setzt Leitplanken.
+DataForSEO entscheidet innerhalb dieser Leitplanken:
+- Nachfrage;
+- Synonyme/Core-Keyword-Gruppen;
+- canonical Hobby-Seeds;
+- evidenzbasierte Weltzuordnung;
+- tragfähige Unterintentionen/Leafs;
+- Marketplace-/Magazin-Evidenz.
 
-Der autoritative HD-002-Stand sagt:
-`Gesamtbestand: erfasst`.
-
-Dieser echte Bestand liegt jedoch im HD-002-Live-Speicher. Im aktuell verfügbaren Library-/Containerbestand wurde weder:
-- ein vollständiger HD-002-Gesamtbestandsexport,
-- noch die HD-002-V0.1.4-Source
-gefunden.
-
-Deshalb wird die reale Kandidatenliste **nicht aus Erinnerung rekonstruiert** und nicht durch synthetische Hobbys ersetzt.
+Rohliste ist keine Taxonomie.
+Ambige Evidenz bleibt fail-closed.
 
 ## ERSTER OFFENER BLOCKER
 
 `HD001_V1100_REAL_HD002_INVENTORY_INPUT_NOT_BOUND`
 
-## NEXT ACTION
+Der autoritative HD-002-Stand sagt:
+`Gesamtbestand: erfasst`.
 
-Den bereits erfassten echten HD-002-Gesamtbestand read-only als Kandidatenquelle binden.
+Für HD-001 liegt dieser reale Bestand aktuell jedoch nicht als belastbar gebundene read-only Kandidatenquelle vor.
+Weder manuelle Rekonstruktion noch synthetische Ersatzliste ist zulässig.
 
-Kein neuer Gesamtbestand.
-Keine manuelle erfundene Hobbyliste.
-Keine neuen Kategorien aus dem Kopf.
+## EXAKT EINE NEXT ACTION
 
-Nach Bindung:
-echter Gesamtbestand → DataForSEO Overview → Synonym-/Demand-Filter → pro-Hobby Suggestions → 8-Welten-Routing → vollständiger Content-/Magazin-/HivePress-Baum → komplette Positiv-/Negativ-E2E-Simulation → erst dann Release/Live-Publish.
+Den bereits erfassten echten HD-002-Gesamtbestand **read-only** exportieren/übernehmen und unverändert als `hobby_candidates`-Eingang an V1.10.0 Portal Discovery binden.
+
+Danach in einem vollständigen realen lokalen Lauf:
+echter Gesamtbestand → DataForSEO Overview → Synonym-/Demand-Filter → per-Hobby Suggestions → 8-Welten-Routing → Content + Magazin + HivePress → WordPress/Frontend-Simulation → Positiv-/Negativ-E2E.
+
+Erst bei diesem Gesamt-PASS darf ein V1.10.x Release-/Uploadkandidat entstehen.
+
+## NICHT ANFASSEN
+
+- keinen neuen Gesamtbestand erfassen;
+- keine Hobbyliste aus Chatgedächtnis bauen;
+- V1.9.9-Livebestand nicht zurückrollen;
+- keinen Live-Publish aus V1.10.0 vor vollständigem realem E2E.
+
+## Packaging-Hinweis
+
+Arbeitskopie ist noch kein Release.
+`README.txt` nennt noch Version 1.9.6 und muss erst im späteren Release-/Packaging-Schritt bereinigt werden.
