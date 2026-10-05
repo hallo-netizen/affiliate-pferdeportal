@@ -2,6 +2,12 @@
 $GLOBALS['sf']=array();
 function sck($ok,$name,$detail=''){echo ($ok?'PASS ':'FAIL ').$name.($detail!==''?' :: '.$detail:'')."\n";if(!$ok)$GLOBALS['sf'][]=$name;}
 if(!class_exists('Pferdeportal_Affiliate_Router')||Pferdeportal_Affiliate_Router::VERSION!=='6.72.186'){fwrite(STDERR,"FATAL seed requires 6.72.186\n");exit(2);}
+if(!class_exists('Pferde_Template_Kit')){class Pferde_Template_Kit{
+ public static function affiliate_contract_version(){return '1.0';}
+ public static function design_profile(){return 'pferde_atelier';}
+ public static function design_profile_contract_version(){return '1.0';}
+ public static function affiliate_page_type($id){$p=get_post((int)$id);if(!$p)return '';$par=(int)$p->post_parent;if($par<=0)return 'hub1';$pp=get_post($par);return ($pp&&(int)$pp->post_parent===0)?'hub2':'category';}
+}}
 $o=Pferdeportal_Affiliate_Router::instance();
 $rm=function($n)use($o){$m=new ReflectionMethod($o,$n);$m->setAccessible(true);return $m;};
 $rp=function($n)use($o){$p=new ReflectionProperty($o,$n);$p->setAccessible(true);return $p;};
