@@ -1,0 +1,96 @@
+name: TEMP Affiliate Live Schabracken Readonly
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-live-schabracken-readonly.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-readonly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read real public Schabracken delivery state
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://pferde-atelier.de/ausruestung/ausruestung-sattel/schabracken/'
+          for mode in normal repeat cachebuster nocache; do
+            case "$mode" in
+              normal) U="$URL"; EXTRA=();;
+              repeat) U="$URL"; EXTRA=();;
+              cachebuster) U="${URL}?ppar_probe_20261005=1"; EXTRA=();;
+              nocache) U="${URL}?ppar_probe_20261005=2"; EXTRA=(-H 'Cache-Control: no-cache' -H 'Pragma: no-cache');;
+            esac
+            echo "===== MODE $mode ====="
+            curl -fsSL --max-time 30 -D "/tmp/$mode.headers" "${EXTRA[@]}" "$U" -o "/tmp/$mode.html"
+            echo "--- STATUS/CACHE HEADERS ---"
+            grep -Ei '^(HTTP/|date:|age:|cache-control:|x-cache:|x-litespeed-cache:|x-litespeed-tag:|server:|vary:|cf-cache-status:)' "/tmp/$mode.headers" || true
+            echo "--- PLUGIN VERSION ASSETS ---"
+            grep -Eo 'affiliate-portal-router/[^"'\'' >]+[?&]ver=[0-9.]+' "/tmp/$mode.html" | sort -u || true
+            echo "--- BANNER HTML FRAGMENTS ---"
+            python3 - "/tmp/$mode.html" <<'PY'
+import re,sys,html
+raw=open(sys.argv[1],encoding='utf-8',errors='replace').read()
+patterns=[
+ r'<a[^>]+class=["\'][^"\']*ppar-overview-wide-banner-link[^"\']*["\'][^>]*>.*?</a>',
+ r'<a[^>]+class=["\'][^"\']*ppar-category-large-banner-link[^"\']*["\'][^>]*>.*?</a>',
+ r'<div[^>]+data-ppar-slot=["\']product_after_category_tiles["\'][^>]*>.*?</div>',
+ r'<div[^>]+data-ppar-slot=["\']category_recommendation["\'][^>]*>.*?</div>',
+]
+hits=[]
+for p in patterns:
+    hits += re.findall(p,raw,re.I|re.S)
+for i,h in enumerate(hits[:20],1):
+    h=re.sub(r'\s+',' ',h)
+    print(f'BANNER[{i}]',html.unescape(h[:5000]))
+print('BANNER_HIT_COUNT',len(hits))
+for marker in ['SanoVet','sanovet','Gesunde Pferde','Fütterung','Schabracken Designer','ppar-overview-wide-banner-link','product_after_category_tiles']:
+    print('MARKER',marker,raw.lower().find(marker.lower()))
+m=re.search(r'<body[^>]+class=["\']([^"\']+)["\']',raw,re.I)
+print('BODY_CLASS',m.group(1) if m else '')
+PY
+          done
+
+      - name: Read real WordPress page hierarchy
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --max-time 30 'https://pferde-atelier.de/wp-json/wp/v2/pages?slug=schabracken&_fields=id,parent,slug,link,status,title' -o /tmp/page.json
+          cat /tmp/page.json
+          python3 - <<'PY'
+import json,urllib.request
+rows=json.load(open('/tmp/page.json'))
+if not rows: raise SystemExit('NO_SCHABRACKEN_PAGE')
+p=rows[0]
+print('SCHABRACKEN',p)
+parent=p.get('parent',0)
+depth=0
+while parent and depth<10:
+    with urllib.request.urlopen(f'https://pferde-atelier.de/wp-json/wp/v2/pages/{parent}?_fields=id,parent,slug,link,status,title',timeout=30) as r:
+        q=json.load(r)
+    print('PARENT',q)
+    parent=q.get('parent',0); depth+=1
+PY
+
+      - name: Cross-request fingerprint
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum /tmp/normal.html /tmp/repeat.html /tmp/cachebuster.html /tmp/nocache.html
+          python3 - <<'PY'
+from pathlib import Path
+import re,hashlib
+for mode in ['normal','repeat','cachebuster','nocache']:
+    s=Path('/tmp/'+mode+'.html').read_text(errors='replace')
+    def extract(p):
+        m=re.search(p,s,re.I|re.S)
+        return re.sub(r'\s+',' ',m.group(0)) if m else ''
+    frag=extract(r'<a[^>]+class=["\'][^"\']*ppar-(?:overview-wide|category-large)-banner-link[^"\']*["\'][^>]*>.*?</a>')
+    print(mode,'FRAG_SHA',hashlib.sha256(frag.encode()).hexdigest(),'FRAG',frag[:3000])
+PY
