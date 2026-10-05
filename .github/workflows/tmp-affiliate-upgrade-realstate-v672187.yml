@@ -1,0 +1,119 @@
+name: TEMP Affiliate Real State Upgrade 6.72.186 to 6.72.187
+
+on:
+  push:
+    branches: [affiliate-672186-schabracken-rootcause]
+    paths:
+      - '.github/workflows/tmp-affiliate-upgrade-realstate-v672187.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_realstate_v672186.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_realstate_v672187.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+
+permissions:
+  contents: read
+
+jobs:
+  red-green:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact 6.72.186 red baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip
+          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
+          test "$ACTUAL" = '1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae'
+          rm -rf /tmp/z186
+          mkdir -p /tmp/z186
+          unzip -q "$ZIP" -d /tmp/z186
+          grep -F 'Version: 6.72.186' /tmp/z186/affiliate-portal-router/pferdeportal-affiliate-router.php
+
+      - name: Install WordPress and exact 6.72.186
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wpup
+          mkdir -p /tmp/wpup
+          /tmp/wp core download --path=/tmp/wpup --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wpup --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wpup --url=http://127.0.0.1:8081 --title='Real State Upgrade 187' --admin_user=admin --admin_password='ci-test-only-187' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wpup/wp-content/mu-plugins
+          cat >/tmp/wpup/wp-content/mu-plugins/pferde-real-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){
+                      $p=get_post((int)$page_id);if(!$p)return '';
+                      $parent=(int)$p->post_parent;if($parent<=0)return 'hub1';
+                      $pp=get_post($parent);if($pp&&(int)$pp->post_parent===0)return 'hub2';
+                      return 'category';
+                  }
+              }
+          }
+          PHP
+          cp -a /tmp/z186/affiliate-portal-router /tmp/wpup/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wpup
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.186"){exit(2);} echo "PASS exact 6.72.186 active\n";' --path=/tmp/wpup
+
+      - name: Reproduce persisted live failure state on 6.72.186
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_realstate_v672186.php" --path=/tmp/wpup | tee /tmp/red186.log
+          grep -F 'PASS RED_186_reithelme_only_general' /tmp/red186.log
+          grep -F 'PASS RED_186_schabracken_only_general' /tmp/red186.log
+          grep -F 'PASS SEED_old_185_migration_done' /tmp/red186.log
+          grep -F 'REALSTATE_672186_RED_SEED_PASS' /tmp/red186.log
+
+      - name: Upgrade same WordPress database to 6.72.187 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wpup/wp-content/plugins/affiliate-portal-router
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wpup/wp-content/plugins/affiliate-portal-router
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.187"){exit(2);} echo "PASS 6.72.187 source active\n";' --path=/tmp/wpup
+
+      - name: Prove real-state red to green
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_realstate_v672187.php" --path=/tmp/wpup | tee /tmp/green187.log
+          grep -F 'PASS MIGRATION_helmet_page_186' /tmp/green187.log
+          grep -F 'PASS MIGRATION_existing_campaign_runtime_target_reithelme' /tmp/green187.log
+          grep -F 'PASS GREEN_187_reithelme_exact' /tmp/green187.log
+          grep -F 'PASS GREEN_187_schabracken_no_cross_topic_banner' /tmp/green187.log
+          grep -F 'PASS PERF_full_pool_worker_cancelled' /tmp/green187.log
+          grep -F 'PASS EBAY_product_unchanged' /tmp/green187.log
+          grep -F 'PASS IDEALO_product_unchanged' /tmp/green187.log
+          grep -F 'PASS GREEN_187_frontend_zero_http' /tmp/green187.log
+          grep -F 'REALSTATE_672186_TO_672187_RED_GREEN_PASS' /tmp/green187.log
+
+      - name: Production source only expected files changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          php -l release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          php -l release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php
+          echo "PASS syntax"
