@@ -33,3 +33,9 @@ jobs:
               p=re.search(r'promoId=(\d+)',href,re.I)
               print(name,"PROMO",p.group(1) if p else "NONE","HREF",href)
           PY
+
+      - name: Resolve current winning promo without following
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sS -I --max-redirs 0 'https://t.adcell.com/p/click?promoId=185797&slotId=98720' || true
