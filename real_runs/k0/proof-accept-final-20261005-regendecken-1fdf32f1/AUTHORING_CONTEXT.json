@@ -1,0 +1,181 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "pferdedecken-regendecken-faq",
+    "plan_slot": "1fdf32f1e83969aef73ce363cccbf9c754d46136694615c02f3289cf46141003",
+    "target_keyword": "Frieren Pferde unter Regendecken",
+    "title": "Frieren Pferde unter Regendecken?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Penn State Extension – When to Blanket a Horse",
+          "source_url": "https://extension.psu.edu/when-to-blanket-a-horse"
+        },
+        {
+          "source_title": "World Horse Welfare – Rugging horses",
+          "source_url": "https://eu.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug"
+        },
+        {
+          "source_title": "Penn State Extension – Equine Winter Wellness Tips",
+          "source_url": "https://extension.psu.edu/equine-winter-wellness-tips"
+        }
+      ],
+      "claims": [
+        "Das Winterfell eines Pferdes isoliert, indem es Luft im Haarkleid festhält; Nässe und starker Wind können diese natürliche Isolationswirkung deutlich verringern.",
+        "Ob ein Pferd zusätzlichen Deckenschutz braucht, hängt unter anderem von Schur, Alter, Körperzustand, Gewöhnung an Kälte, verfügbarem Unterstand sowie nassem und windigem Wetter ab.",
+        "Eine ungefütterte Regendecke schützt vor Nässe, liefert aber kaum zusätzliche Wärme; zugleich kann sie das Winterfell anlegen und damit dessen natürliche Luftpolsterung verringern.",
+        "Eine zu warme Decke kann dazu führen, dass ein Pferd schwitzt; Sitz, Trockenheit und Wärme unter der Decke sollten deshalb regelmäßig kontrolliert werden."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Frieren Pferde unter Regendecken",
+      "topic": "Frieren Pferde unter Regendecken?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdedecken-regendecken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Frieren Pferde unter Regendecken?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Penn State Extension – When to Blanket a Horse",
+        "source_url": "https://extension.psu.edu/when-to-blanket-a-horse",
+        "evidence_text_sha256": "00e857751702cfc26bebc7fe9791a43b986c95b66f6fde12e23f4a8984f45269",
+        "statement": "Das Winterfell eines Pferdes isoliert, indem es Luft im Haarkleid festhält; Nässe und starker Wind können diese natürliche Isolationswirkung deutlich verringern.",
+        "evidence_text": "Das Winterfell eines Pferdes isoliert, indem es Luft im Haarkleid festhält; Nässe und starker Wind können diese natürliche Isolationswirkung deutlich verringern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "World Horse Welfare – Rugging horses",
+        "source_url": "https://eu.worldhorsewelfare.org/advice/rugging-horses-when-does-your-horse-need-a-rug",
+        "evidence_text_sha256": "fddee63509f7ba5c1ccf856661452b239a56a9a4489edcf945bb0e7030e80e4b",
+        "statement": "Ob ein Pferd zusätzlichen Deckenschutz braucht, hängt unter anderem von Schur, Alter, Körperzustand, Gewöhnung an Kälte, verfügbarem Unterstand sowie nassem und windigem Wetter ab.",
+        "evidence_text": "Ob ein Pferd zusätzlichen Deckenschutz braucht, hängt unter anderem von Schur, Alter, Körperzustand, Gewöhnung an Kälte, verfügbarem Unterstand sowie nassem und windigem Wetter ab.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Penn State Extension – Equine Winter Wellness Tips",
+        "source_url": "https://extension.psu.edu/equine-winter-wellness-tips",
+        "evidence_text_sha256": "e481f67324a1bda8d32239feeb6d4b535c0a018601f8cc873420cc45230a2e32",
+        "statement": "Eine ungefütterte Regendecke schützt vor Nässe, liefert aber kaum zusätzliche Wärme; zugleich kann sie das Winterfell anlegen und damit dessen natürliche Luftpolsterung verringern.",
+        "evidence_text": "Eine ungefütterte Regendecke schützt vor Nässe, liefert aber kaum zusätzliche Wärme; zugleich kann sie das Winterfell anlegen und damit dessen natürliche Luftpolsterung verringern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Penn State Extension – Equine Winter Wellness Tips",
+        "source_url": "https://extension.psu.edu/equine-winter-wellness-tips",
+        "evidence_text_sha256": "6ddddb467c51c0279f6803c0425849ea92fda4747e2449f3ca3a9ab3d8934289",
+        "statement": "Eine zu warme Decke kann dazu führen, dass ein Pferd schwitzt; Sitz, Trockenheit und Wärme unter der Decke sollten deshalb regelmäßig kontrolliert werden.",
+        "evidence_text": "Eine zu warme Decke kann dazu führen, dass ein Pferd schwitzt; Sitz, Trockenheit und Wärme unter der Decke sollten deshalb regelmäßig kontrolliert werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "anchor": "Regendecken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "anchor": "Beratung zu Regendecken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "anchor": "Pflege von Regendecken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-decken/pferdedecken-regendecken/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-beratung/",
+        "active": true
+      },
+      {
+        "href": "/category/pferdedecken-regendecken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdedecken-regendecken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Regendecke",
+      "Regendecken",
+      "Winterfell",
+      "Nässe",
+      "Wind",
+      "Schutz",
+      "Wärme",
+      "Passform",
+      "Schur",
+      "Kontrolle"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Entscheidung hängt von mehreren Bedingungen am einzelnen Pferd ab; eine kurze Checkliste ist dafür hilfreicher als eine zusätzliche Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
