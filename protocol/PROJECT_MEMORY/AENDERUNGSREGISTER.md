@@ -457,3 +457,23 @@ REGEL:
 
 LOKALE EVIDENZ:
 Vor Fix wurde der Live-Fehler hart reproduziert. Nach Fix: 275/275 PASS; Fresh Source 275/275 PASS; Source↔Installer 23/23 byteidentisch; Source-PHP 17/17 PASS; Installer-PHP 17/17 PASS; echte Buchbinden-Topologie mit exakt vier Content-Kindern geprüft.
+
+
+## HOBBYRAUSCH-HD001-20261005-D – WordPress-Hierarchieübersetzung vor Frontend-Fix
+
+WAS:
+Der zuvor gebaute V1.9.7-Frontend-Linkblock wurde vor Live-Installation verworfen. Eine nachgelagerte harte Prüfung zeigte, dass der eigentliche Fehler tiefer liegt: Der Buchbinden-Pilot übersetzt den fachlichen Baum nicht in die vorgesehene WordPress-Tiefe.
+
+WARUM:
+Der Fachvertrag lautet SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE. Der Pilot erzeugt technisch nur Buchbinden als Seite und die vier Leafs als Core-Kategorien. WordPress kann eine Taxonomie-Kategorie nicht nativ als Kind einer Seite führen; der aktuelle Writer setzt bei diesem Adapterwechsel den nativen Term-Parent auf 0 und speichert nur eine logische Meta-Beziehung. Ein sichtbarer Linkblock würde dies nur kaschieren.
+
+ZUSÄTZLICHE BEFUNDE:
+- Validator erlaubt Level 1..20, Builder erzeugt jedoch nur Root-Seite + maximal vier direkte Kategorie-Kinder;
+- wiederkehrende sichtbare Leafs wie „Einstieg“ werden APKW-seitig global blockiert;
+- Content und Magazin teilen aktuell die Core-Taxonomie category;
+- native Term-Hierarchie funktioniert nur innerhalb derselben hierarchischen Taxonomie;
+- HivePress listing_category ist upstream hierarchisch definiert;
+- WordPress-Core-Escaping von „&“ ist separat korrekt behandelt und nicht die Ursache.
+
+REGEL:
+Kein weiterer Live-Installer, bis ein exakter WordPress-Übersetzungsvertrag für die vollständige Fachhierarchie lokal positiv und negativ bis zum Frontend bewiesen ist.
