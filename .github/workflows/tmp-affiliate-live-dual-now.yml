@@ -1,0 +1,38 @@
+name: TEMP Affiliate Live Dual NOW
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-live-dual-now.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  dual-now:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe Reithelme and Schabracken repeatedly
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re, urllib.request, time, json
+          pages={
+            "reithelme":"https://pferde-atelier.de/ausruestung/ausruestung-reiterbedarf/reithelme/",
+            "schabracken":"https://pferde-atelier.de/ausruestung/ausruestung-sattel/schabracken/",
+          }
+          pat=re.compile(r'<a[^>]+class=["\'][^"\']*ppar-overview-wide-banner-link[^"\']*["\'][^>]+href=["\']([^"\']+)["\']',re.I)
+          pid=re.compile(r'promoId=(\d+)',re.I)
+          for name,url in pages.items():
+              for mode in ("normal","bust"):
+                  for i in range(1,9):
+                      u=url if mode=="normal" else url+("?ppar_probe_now=%d_%d"%(int(time.time()),i))
+                      req=urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0","Cache-Control":"no-cache","Pragma":"no-cache"})
+                      with urllib.request.urlopen(req,timeout=30) as r:
+                          raw=r.read().decode("utf-8","replace"); h=dict(r.headers.items())
+                      m=pat.search(raw); href=m.group(1) if m else ""; pm=pid.search(href)
+                      print("NOW",json.dumps({"page":name,"mode":mode,"n":i,"promo":pm.group(1) if pm else "","href":href,"age":h.get("Age",""),"cache":h.get("X-LiteSpeed-Cache",h.get("Cf-Cache-Status",""))},ensure_ascii=False))
+          PY
