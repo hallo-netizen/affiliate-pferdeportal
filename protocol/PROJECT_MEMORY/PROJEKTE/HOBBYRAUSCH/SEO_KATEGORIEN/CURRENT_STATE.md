@@ -3,107 +3,124 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: V1.9.9 PFERDEATELIER-TAXONOMIE LOKAL HARD PASS / LIVE-INSTALLATION UND REALER FRONTEND-READBACK OFFEN
+STATUS: V1.10.0 GESAMTPORTAL-ENGINE LOKAL HARD PASS / REALER GESAMTBESTAND-EINGANG AUS HD-002 OFFEN / KEIN RELEASE
 
-## Live-Wahrheit
+## Ziel
 
-Livebestand wurde während der lokalen Prüfung nicht verändert.
+Konzept + echte Hobbykandidaten + DataForSEO → vollständiger Portalbaum:
+- 8 Hauptwelten;
+- variable Seitenhierarchie;
+- Content-Kategorien;
+- Magazin;
+- HivePress;
+- WordPress-Publish;
+- sichtbares Frontend;
+- Readback;
+- spätere Delta-Erweiterung ohne Gesamtumbau.
 
-Real zuletzt beobachtet:
-- `Buchbinden` ist sichtbar;
-- die Content-Kategorien waren im bisherigen Live-Stand auf der Seite nicht sichtbar.
+## V1.9.9
 
-V1.9.7 und V1.9.8 sind verworfen und dürfen nicht installiert werden.
+Taxonomie-/Frontend-Pilot live bestätigt:
+- Buchbinden sichtbar;
+- Einstieg / Ausrüstung / Material / Techniken & Praxis sichtbar;
+- ein veröffentlichter Testartikel ist über alle vier Kategorien im Frontend sichtbar.
 
-## Harte Root Cause
+Damit ist die technische WordPress-/Frontend-Abbildung für den Content-Strang real belegt.
 
-Der funktionierende Pferdeatelier-Aufbau wurde erneut gegen die reale Portalstruktur und das reale Template-Kit geprüft.
+## V1.10.0 – Gesamtportal-Engine
 
-Bewährtes Muster:
-- Level 1–3 = echte WordPress-Seiten über `post_parent`;
-- Level 4 = echte WordPress-`category`-Terme mit `parent=0`;
-- keine technischen Bridge-Terme;
-- Kategorien besitzen kontextuell eindeutige Namen/Slugs, z. B. `FAQ Trensen` / `trensen-faq`;
-- die Ebene-3-Seite ermittelt die zugehörigen Kategorien über den fachlichen Produkt-/Seitenkontext und rendert sie sichtbar.
+Lokale Arbeitskopie vorhanden:
+`/mnt/data/hd001-v1100-work`
 
-V1.9.8 hatte dieses Muster falsch mit technischen Bridge-Termen nachgebaut.
+Version:
+`1.10.0`
 
-## V1.9.9 – korrigierter lokaler Kandidat
+Neu vorhanden:
+- `class-apkw-portal-discovery.php`;
+- Portalprofil mit exakt 8 Konzeptwelten;
+- DataForSEO Overview-Dedupe/Synonymgruppierung;
+- automatische Weltzuordnung erst nach pro-Hobby DataForSEO-Suggestions;
+- variable Concept-Batches;
+- getrennte `journal_cat`-/`hp_listing_category`-Stränge;
+- Admin-Portalprofil-Import und Resume;
+- kein Publish während der Discovery.
 
-V1.9.9 übernimmt das Pferdeatelier-Prinzip ohne Verbindung zum Pferdeportal:
+## Konzept/DataForSEO-Vertrag
 
-- Page-Hierarchie 1–3 nativ;
-- Content-Leafs bleiben echte Root-`category`-Terme;
-- kein Bridge-Term;
-- stabile logische Bindung über `_apkw_parent_concept_id`;
-- technischer Speichername wird kontextuell eindeutig, z. B. `Einstieg Buchbinden`;
-- technischer Slug bleibt kontextuell, z. B. `buchbinden-einstieg`;
-- sichtbares Frontend-Label bleibt kurz: `Einstieg`;
-- bestehende Buchbinden-Term-IDs bleiben erhalten;
-- Magazin bleibt eigene `journal_cat`;
-- HivePress bleibt eigene `hp_listing_category`;
-- keine automatische Löschung;
-- Sparse-/Delta-Erweiterung bleibt erhalten.
+Konzept gibt nur Leitplanken:
+- 8 Welten;
+- Geschäftsmodell;
+- erlaubte Stränge;
+- bekannte bereits bestätigte Parent-Pfade;
+- Kandidaten-/Leaf-Regeln.
 
-## Harte lokale Prüfung
+DataForSEO entscheidet:
+- ob ein Rohkandidat echte Nachfrage hat;
+- Synonym-/Core-Keyword-Gruppierung;
+- welche Kandidaten canonical weiterlaufen;
+- pro Hobby die evidenzbasierte Weltzuordnung;
+- welche Leaf-Gruppen genügend echte Keyword-Unterstützung haben;
+- Marketplace-/Magazin-Evidenz.
 
-Wichtiger Recheck:
-Der frühere einzelne Test `full-e2e-positive.php` war standalone nicht belastbar und fiel bereits in der unveränderten alten V1.9.8-Quelle an der DataForSEO-Evidenzbindung durch.
-Dieser Scheintest wurde verworfen/korrigiert; der tatsächliche vollständige Positivlauf ist jetzt standalone grün.
+Rohliste ist ausdrücklich **keine Taxonomie**.
 
-Frischer V1.9.9-Stand:
-- Regression: 270/270 PASS;
-- Full Builder Flex: PASS;
-- echter Buchbinden-Altbestand: PASS;
-- kompletter Positiv-E2E: PASS;
-- kompletter Negativ-E2E: PASS;
-- Fresh-Source nach ZIP-Entpacken: erneut alles PASS;
-- Runtime Source↔Installer: 19/19 byteidentisch;
-- Installer PHP-Lint: 19/19 PASS.
+## Harte lokale Tests
 
-Realer Buchbinden-Altbestand:
-- bestehende V1.9.4-Bindungen werden direkt erkannt;
-- Einstieg / Ausrüstung / Material / Techniken & Praxis werden ohne Bridge sichtbar;
-- bestehende vier Term-IDs bleiben erhalten;
-- kontextuelle Umbenennung kann kontrolliert auf denselben IDs erfolgen;
-- Magazin/HivePress leaken nicht in Content.
+Frisch geprüft:
+- Altregression: 270/270 PASS;
+- V1.10.0 Portal Discovery PASS;
+- Auto-World-Routing PASS;
+- Concept Auto World PASS;
+- Eight Worlds E2E PASS;
+- Portal Scale PASS;
+- Portal Negative PASS;
+- Admin Portal PASS;
+- Portal Resume PASS.
 
-## Negativabdeckung
+Skalierungstest:
+- 844 Rohkandidaten;
+- exakt 2 DataForSEO Overview-Batches;
+- 844 positive Fixture-Kandidaten;
+- 34 Concept-Batches bei Batchgröße 25.
 
-BLOCKED bei:
-- unbekanntem Parent;
-- unbelegtem DataForSEO-Keyword;
-- doppeltem Leaf unter demselben Hobby;
-- fehlendem Marketplace-Pillar;
-- stillem Entfernen bestehender Knoten;
-- manipuliertem `_apkw_parent_concept_id`;
-- Page-Parent-Drift;
-- neuer Kategorie ohne neue Research-Evidenz;
-- Mutation nach Approval.
+8-Welten-E2E:
+- Gestalten;
+- Fertigen;
+- Technik;
+- Forschen;
+- Pflanzen;
+- Tiere;
+- Bewegen;
+- Sammeln;
+alle korrekt geroutet.
 
-## Artefakte
+Ambige Weltzuordnung bleibt fail-closed und wird nicht als Hobbyseite promotet.
 
-Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.9_PFERDEATELIER_TAXONOMY_E2E_HARD_PASS.zip`
+## Wichtige Beleggrenze
 
-SHA-256:
-`601a7c7e8a796a12cb9f27388899cdd82264e460314284e29f5ef0018c33e05a`
+Die 844er Prüfung ist **Skalierungs-/Maschinenbeweis**, nicht der reale Hobby-Depot-Bestand.
 
-Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.9_PFERDEATELIER_TAXONOMY_E2E_HARD_PASS.zip`
+Der autoritative HD-002-Stand sagt:
+`Gesamtbestand: erfasst`.
 
-SHA-256:
-`6ace7bb651025729da6a80d055076c689ee5ff3ba619ec783c1bebb07cda25e9`
+Dieser echte Bestand liegt jedoch im HD-002-Live-Speicher. Im aktuell verfügbaren Library-/Containerbestand wurde weder:
+- ein vollständiger HD-002-Gesamtbestandsexport,
+- noch die HD-002-V0.1.4-Source
+gefunden.
+
+Deshalb wird die reale Kandidatenliste **nicht aus Erinnerung rekonstruiert** und nicht durch synthetische Hobbys ersetzt.
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V199_LIVE_INSTALL_AND_FRONTEND_READBACK_OPEN`
+`HD001_V1100_REAL_HD002_INVENTORY_INPUT_NOT_BOUND`
 
 ## NEXT ACTION
 
-Exakt V1.9.9 installieren.
-Kein Reset, keine neue Research-Runde.
+Den bereits erfassten echten HD-002-Gesamtbestand read-only als Kandidatenquelle binden.
 
-Danach den vorhandenen Buchbinden-Stand einmal durch den vorgesehenen Publish/Republish-Weg laufen lassen und das echte Frontend prüfen.
+Kein neuer Gesamtbestand.
+Keine manuelle erfundene Hobbyliste.
+Keine neuen Kategorien aus dem Kopf.
 
-PASS erst, wenn die Seite `Buchbinden` die vier Content-Kategorien sichtbar zeigt.
+Nach Bindung:
+echter Gesamtbestand → DataForSEO Overview → Synonym-/Demand-Filter → pro-Hobby Suggestions → 8-Welten-Routing → vollständiger Content-/Magazin-/HivePress-Baum → komplette Positiv-/Negativ-E2E-Simulation → erst dann Release/Live-Publish.
