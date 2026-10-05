@@ -1,17 +1,18 @@
-name: TEMP Affiliate Strict Best Banner Tier RED
+name: TEMP Affiliate Strict Best Banner Tier 6.72.186
 
 on:
   push:
-    branches: [affiliate-release-current]
+    branches: [affiliate-672186-strict-tier]
     paths:
       - '.github/workflows/tmp-affiliate-strict-best-tier-red.yml'
-      - 'AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_v672185.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672186.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
 
 permissions:
   contents: read
 
 jobs:
-  red:
+  positive:
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -31,23 +32,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify exact production ZIP
+      - name: PHP lint current source
         shell: bash
         run: |
           set -euo pipefail
-          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
-          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
-          test "$ACTUAL" = '13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28'
-          echo "PASS exact production ZIP $ACTUAL"
+          while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' | sort)
+          echo "PASS PHP lint"
 
-      - name: Install WordPress and exact ZIP
+      - name: Install WordPress and 6.72.186 source
         shell: bash
         run: |
           set -euo pipefail
           curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
           chmod +x /tmp/wp
-          rm -rf /tmp/wp-tier /tmp/plugin-tier
-          mkdir -p /tmp/wp-tier /tmp/plugin-tier
+          rm -rf /tmp/wp-tier
+          mkdir -p /tmp/wp-tier
           /tmp/wp core download --path=/tmp/wp-tier --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-tier --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
           /tmp/wp core install --path=/tmp/wp-tier --url=http://127.0.0.1:8081 --title='Strict Banner Tier RED' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
@@ -71,21 +70,32 @@ jobs:
               if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
           },1);
           PHP
-          unzip -q release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip -d /tmp/plugin-tier
-          cp -a /tmp/plugin-tier/affiliate-portal-router /tmp/wp-tier/wp-content/plugins/affiliate-portal-router
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-tier/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-tier
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS version 6.72.185\n";' --path=/tmp/wp-tier
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.186"){exit(2);} echo "PASS version 6.72.186\n";' --path=/tmp/wp-tier
 
-      - name: Run strict best-tier negative proof
+      - name: Run all-context strict-tier positive proof
         shell: bash
         run: |
-          set +e
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_v672185.php" --path=/tmp/wp-tier | tee /tmp/tier-red.log
-          RC=${PIPESTATUS[0]}
-          set -e
-          grep -F 'FAIL ONE_EXACT_position2_must_stay_exact' /tmp/tier-red.log
-          grep -F 'FAIL ONE_EXACT_general_never_enters_delivery' /tmp/tier-red.log
-          grep -F 'PASS ONE_EXACT_position1_exact' /tmp/tier-red.log
-          grep -F 'PASS FRONTEND_zero_http_calls' /tmp/tier-red.log
-          test "$RC" -ne 0
-          echo "EXPECTED_RED_STRICT_BEST_TIER_PROVEN"
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672186.php" --path=/tmp/wp-tier | tee /tmp/tier186.log
+          grep -F 'STRICT_BEST_TIER_ALL_ACTIVE_CONTEXTS_672186_PASS' /tmp/tier186.log
+          grep -F '"failures":0' /tmp/tier186.log
+          grep -F 'PASS PERFORMANCE_zero_frontend_http :: http=0' /tmp/tier186.log
+
+      - name: Existing banner regression 21 of 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed "s/6\\.72\\.185/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php >/tmp/full186.php
+          /tmp/wp eval-file /tmp/full186.php --path=/tmp/wp-tier | tee /tmp/full186.log
+          grep -F 'SUMMARY passes=21 failures=0' /tmp/full186.log
+
+      - name: Existing destination regression 26 of 26
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed "s/6\\.72\\.183/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest186.php
+          /tmp/wp eval-file /tmp/dest186.php --path=/tmp/wp-tier | tee /tmp/dest186.log
+          grep -F 'SUMMARY passes=26 failures=0' /tmp/dest186.log
+          grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest186.log
