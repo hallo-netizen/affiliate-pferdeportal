@@ -39,6 +39,55 @@ jobs:
           while IFS= read -r f; do php -l "$f" >/dev/null; done < <(find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' | sort)
           echo "PASS PHP lint"
 
+      - name: Performance hardlock unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          cur=Path('release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          old=subprocess.check_output(['git','show','a381aff4eb3f41754186f4bad86ce1a7e0823a29:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'],text=True)
+          def body(src,name):
+              m='function '+name+'('; s=src.find(m)
+              if s<0: raise SystemExit('FAIL missing '+name)
+              b=src.find('{',s); d=0; st='c'; esc=False; i=b
+              while i<len(src):
+                  ch=src[i]; nx=src[i+1] if i+1<len(src) else ''
+                  if st=='sq':
+                      if esc: esc=False
+                      elif ch=='\\': esc=True
+                      elif ch=="'": st='c'
+                  elif st=='dq':
+                      if esc: esc=False
+                      elif ch=='\\': esc=True
+                      elif ch=='"': st='c'
+                  elif st=='ln':
+                      if ch=='\n': st='c'
+                  elif st=='bl':
+                      if ch=='*' and nx=='/': st='c'; i+=1
+                  else:
+                      if ch=="'": st='sq'
+                      elif ch=='"': st='dq'
+                      elif ch=='/' and nx=='/': st='ln'; i+=1
+                      elif ch=='#': st='ln'
+                      elif ch=='/' and nx=='*': st='bl'; i+=1
+                      elif ch=='{': d+=1
+                      elif ch=='}':
+                          d-=1
+                          if d==0: return src[s:i+1]
+                  i+=1
+              raise SystemExit('FAIL unclosed '+name)
+          protected=['ranked_campaigns_request_cache_allowed','ranked_campaign_sanitize_key_request_cached','ranked_campaign_sanitize_text_request_cached','ranked_campaigns_request_cache_key','select_category_product_campaign_fast_v672171','ranked_campaign_candidate_pool','category_product_provider_mix_v672133','render_banner','banner_distribution_reorder_candidates','banner_distribution_stable_index','category_product_shared_rank_base']
+          for n in protected:
+              if body(cur,n)!=body(old,n): raise SystemExit('FAIL protected performance function changed '+n)
+          for n in ['banner_strict_best_relevance_tier_v672186','ranked_campaigns_for_slot','select_campaign_for_slot_position']:
+              x=body(cur,n)
+              for bad in ['$wpdb','get_post_meta(','get_posts(','get_option(','wp_remote_','output_plan_creative(']:
+                  if bad in x: raise SystemExit('FAIL new frontend cost '+n+' '+bad)
+          print('PASS performance hardlock protected bodies identical and strict-tier path memory-only')
+          PY
+
       - name: Install WordPress and 6.72.186 source
         shell: bash
         run: |
