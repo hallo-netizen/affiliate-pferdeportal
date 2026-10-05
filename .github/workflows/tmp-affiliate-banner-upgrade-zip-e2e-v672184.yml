@@ -188,20 +188,28 @@ jobs:
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
           /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS exact baseline 6.72.185 active\n";' --path=/tmp/wp-site
 
-      - name: Reproduce failure then upgrade from built ZIP
+      - name: Prove exact 6.72.185 RED then same WordPress built 6.72.186 GREEN
         shell: bash
         run: |
           set -euo pipefail
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php" --path=/tmp/wp-site | tee /tmp/seed184zip.log
-          grep -F 'PRE_UPGRADE_184_stale_library_banner_visible_on_schabracken' /tmp/seed184zip.log
-          grep -F 'UPGRADE_SEED_672184_PASS' /tmp/seed184zip.log
+          set +e
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_v672185.php" --path=/tmp/wp-site | tee /tmp/red185.log
+          RED_RC=${PIPESTATUS[0]}
+          set -e
+          test "$RED_RC" -ne 0
+          grep -F 'PASS ONE_EXACT_position1_exact' /tmp/red185.log
+          grep -F 'FAIL ONE_EXACT_position2_must_stay_exact' /tmp/red185.log
+          grep -F 'FAIL ONE_EXACT_general_never_enters_delivery' /tmp/red185.log
+          grep -F 'PASS FRONTEND_zero_http_calls' /tmp/red185.log
+
           rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           cp -a /tmp/zip184/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.186"){exit(2);} echo "PASS ZIP upgraded plugin 6.72.186 active\n";' --path=/tmp/wp-site
-          sed "s/6\\.72\\.185/6.72.186/g" "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php" >/tmp/assert186.php
-          /tmp/wp eval-file /tmp/assert186.php --path=/tmp/wp-site | tee /tmp/assert184zip.log
-          grep -F 'FULL_672184_TO_672185_BANNER_MIGRATION_E2E_PASS' /tmp/assert184zip.log
-          echo "PASS exact ZIP upgrade positive negative"
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.186"){exit(2);} echo "PASS built ZIP 6.72.186 active\n";' --path=/tmp/wp-site
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672186.php" --path=/tmp/wp-site | tee /tmp/green186.log
+          grep -F 'STRICT_BEST_TIER_ALL_ACTIVE_CONTEXTS_672186_PASS' /tmp/green186.log
+          grep -F '"failures":0' /tmp/green186.log
+          grep -F 'PASS PERFORMANCE_zero_frontend_http :: http=0' /tmp/green186.log
+          echo "PASS exact 6.72.185 RED to built 6.72.186 GREEN"
 
       - name: Fresh ZIP regression gates
         shell: bash
