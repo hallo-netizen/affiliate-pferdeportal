@@ -1,0 +1,114 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "Beratung",
+    "category": "discgolf-beratung",
+    "plan_slot": "5d3d43eebb1f755c178415b811fb1241a0ef022739ca7f7896a491792ca126e9",
+    "target_keyword": "Discgolf Ausrüstung",
+    "title": "Was braucht man für Discgolf?"
+  },
+  "content_profile": {
+    "search_intent": "COMMERCIAL_INVESTIGATION_BEGINNER_GUIDE"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {"source_title":"PDGA – Learn to Play","source_url":"https://www.pdga.com/seniors/learn-play"},
+        {"source_title":"Innova – Disc Golf Frequently Asked Questions","source_url":"https://www.innovadiscs.com/home/disc-golf-faq/"},
+        {"source_title":"PDGA – Simplified Rules of Disc Golf","source_url":"https://www.pdga.com/rules/simplified-rules-disc-golf"},
+        {"source_title":"Innova – Mid-Range Discs","source_url":"https://www.innovadiscs.com/disc-golf-discs/mid-range-discs/"}
+      ],
+      "claims": [
+        "Für eine lockere Runde reicht grundsätzlich eine Scheibe; wer sich verbessern will, nutzt typischerweise Putter, Midrange und Driver für unterschiedliche Spielsituationen.",
+        "Ein typisches Einsteiger-Set besteht aus Putter, Midrange und Fairway Driver; diese drei Scheibentypen decken kurze Putts, kontrollierte Annäherungen und längere Würfe ab.",
+        "Anfänger sollten nicht mit vielen schnellen Scheiben beginnen, sondern zunächst zwei oder drei leichtere Scheiben nutzen und besonders sehr schnelle Driver vermeiden.",
+        "Für offizielles beziehungsweise wettkampforientiertes Spiel müssen zugelassene Disc-Golf-Scheiben verwendet werden; die PDGA führt dafür technische Standards und zugelassene Modelle.",
+        "Midrange-Scheiben sind auf Kontrolle und Genauigkeit ausgelegt und eignen sich für viele Würfe zwischen kurzen Putts und langen Drives."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "Discgolf Ausrüstung",
+      "topic": "Was braucht man für Discgolf?",
+      "quality_binding": {
+        "wordpress_category": {"slug":"discgolf-beratung","taxonomy":"category"}
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Eine sinnvolle Discgolf-Grundausstattung für den Einstieg auswählen",
+      "decision_criteria": ["Scheibentyp","Kontrolle","Einsteigerfreundlichkeit","Regeltauglichkeit","Erweiterbarkeit"]
+    },
+    "research_claims": {
+      "F1": {
+        "source_title":"PDGA – Learn to Play",
+        "source_url":"https://www.pdga.com/seniors/learn-play",
+        "evidence_text_sha256":"4a7692b01bbe04e31f4d00bbaa2c2ae78342fc845fcb5fe978f002edb0861986",
+        "statement":"Für eine lockere Runde reicht grundsätzlich eine Scheibe; wer sich verbessern will, nutzt typischerweise Putter, Midrange und Driver für unterschiedliche Spielsituationen.",
+        "evidence_text":"Für eine lockere Runde reicht grundsätzlich eine Scheibe; wer sich verbessern will, nutzt typischerweise Putter, Midrange und Driver für unterschiedliche Spielsituationen.",
+        "claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]
+      },
+      "F2": {
+        "source_title":"PDGA – Learn to Play",
+        "source_url":"https://www.pdga.com/seniors/learn-play",
+        "evidence_text_sha256":"a6f8cd9cc13d7de6d0ac6269ea179d0432a3526e2427684e55f6742d1cec17a3",
+        "statement":"Ein typisches Einsteiger-Set besteht aus Putter, Midrange und Fairway Driver; diese drei Scheibentypen decken kurze Putts, kontrollierte Annäherungen und längere Würfe ab.",
+        "evidence_text":"Ein typisches Einsteiger-Set besteht aus Putter, Midrange und Fairway Driver; diese drei Scheibentypen decken kurze Putts, kontrollierte Annäherungen und längere Würfe ab.",
+        "claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]
+      },
+      "F3": {
+        "source_title":"Innova – Disc Golf Frequently Asked Questions",
+        "source_url":"https://www.innovadiscs.com/home/disc-golf-faq/",
+        "evidence_text_sha256":"e8bb8ef27332201fa565c6274acf4ade4351dda6b8e9eae0e8573ab7a5fdb740",
+        "statement":"Anfänger sollten nicht mit vielen schnellen Scheiben beginnen, sondern zunächst zwei oder drei leichtere Scheiben nutzen und besonders sehr schnelle Driver vermeiden.",
+        "evidence_text":"Anfänger sollten nicht mit vielen schnellen Scheiben beginnen, sondern zunächst zwei oder drei leichtere Scheiben nutzen und besonders sehr schnelle Driver vermeiden.",
+        "claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]
+      },
+      "F4": {
+        "source_title":"PDGA – Simplified Rules of Disc Golf",
+        "source_url":"https://www.pdga.com/rules/simplified-rules-disc-golf",
+        "evidence_text_sha256":"7d5ca26c91a7fa194ffdf3a444ea2958c533fa0f1b659f7220fb6a8ebb3070c9",
+        "statement":"Für offizielles beziehungsweise wettkampforientiertes Spiel müssen zugelassene Disc-Golf-Scheiben verwendet werden; die PDGA führt dafür technische Standards und zugelassene Modelle.",
+        "evidence_text":"Für offizielles beziehungsweise wettkampforientiertes Spiel müssen zugelassene Disc-Golf-Scheiben verwendet werden; die PDGA führt dafür technische Standards und zugelassene Modelle.",
+        "claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]
+      },
+      "F5": {
+        "source_title":"Innova – Mid-Range Discs",
+        "source_url":"https://www.innovadiscs.com/disc-golf-discs/mid-range-discs/",
+        "evidence_text_sha256":"2de395604f8908a25a8080a3e2376fc663a431ed233b36a03806f169d8618054",
+        "statement":"Midrange-Scheiben sind auf Kontrolle und Genauigkeit ausgelegt und eignen sich für viele Würfe zwischen kurzen Putts und langen Drives.",
+        "evidence_text":"Midrange-Scheiben sind auf Kontrolle und Genauigkeit ausgelegt und eignen sich für viele Würfe zwischen kurzen Putts und langen Drives.",
+        "claim_status":"FULLY_SUPPORTED","article_types":["Beratung"]
+      }
+    },
+    "required_fact_ids":["F1","F2","F3","F4","F5"],
+    "allowed_fact_ids":["F1","F2","F3","F4","F5"],
+    "bound_links":[
+      {"role":"parent_category","href":"/hobbys/discgolf/","anchor":"Discgolf","block":"criteria"},
+      {"role":"semantic_related","href":"/category/discgolf-grundlagen/","anchor":"Discgolf Grundlagen","block":"decision"},
+      {"role":"further_information","href":"/hobbys/","anchor":"Hobbys entdecken","block":"further_information"}
+    ],
+    "link_registry":[
+      {"href":"/hobbys/discgolf/","active":true},
+      {"href":"/category/discgolf-grundlagen/","active":true},
+      {"href":"/hobbys/","active":true}
+    ],
+    "runtime_link_roles":["parent_category","semantic_related","further_information"],
+    "wordpress_category":{"id":0,"slug":"discgolf-beratung","taxonomy":"category","id_source":"WORDPRESS_REST_RESOLVE_AT_RUNTIME"},
+    "heading_intent_terms":["Discgolf Ausrüstung","Midrange","Putter","Driver","Einsteiger","Scheiben","Starterset","PDGA"],
+    "comparison_source_bindings":[],
+    "table_decision":{
+      "decision":"INCLUDE_ADDED_VALUE",
+      "exception_code":null,
+      "rationale":"Eine kompakte Gegenüberstellung zeigt Einsteigern schnell, welche Ausrüstung sofort nötig, sinnvoll oder erst später wichtig ist."
+    },
+    "semantic_rule_results":{"table.value_required_if_present":"PASS"},
+    "table_multiword_exceptions":[],
+    "expected_list_name":"criteria"
+  },
+  "publish_allowed": false
+}
