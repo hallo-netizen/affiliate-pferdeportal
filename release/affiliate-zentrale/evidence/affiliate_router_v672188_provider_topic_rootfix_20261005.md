@@ -135,3 +135,34 @@ These checks were read back from actual GitHub runners after the initial evidenc
 - Live install, ADCELL resync and Reithelme/Schabracken readback: **OPEN**.
 
 Release remains blocked.
+
+
+## Live POST proof invalidates the 6.72.187/188 transport assumption
+
+A fresh read-only live diagnostic was executed on the installed Router 6.72.186 on 2026-10-05T15:44:00Z.
+
+Exact bounded request:
+- endpoint: `/affiliate/promotion/getPromoCategories`
+- HTTP method: `POST`
+- programme: `10787`
+- expected promotion category: `14727`
+- starts_sync: false
+- writes_database: false
+- follows_tracking_links: false
+
+Observed real ADCELL response:
+- HTTP: `405`
+- API status: `405`
+- API message: `undefined method "getPromoCategories"`
+- expected category present: false
+- expected category name: empty
+- items: 0
+
+This disproves the previous transport-only assumption that changing `getPromoCategories` from GET to POST was sufficient. The failure text points to the route/method name itself being unresolved, not merely the HTTP verb.
+
+Consequences:
+- 6.72.188 remains **not releasable**.
+- Existing 6.72.188 provider-neutral `provider_topic_*` design is not yet disproven; its ADCELL input transport is.
+- WordPress/MariaDB and installer gates are not the next meaningful action until the real ADCELL promotion-category route/method is proven.
+- No ranking, frontend, AWIN, eBay, Digistore24 or Idealo change is authorized.
+- Next action is one bounded, read-only ADCELL promotion-category route-family probe with the known-working banner endpoint as positive control.
