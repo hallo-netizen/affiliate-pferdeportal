@@ -1,0 +1,202 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "longiergurte-faq",
+    "plan_slot": "6ee476b7ef6c754e75fc284dac8f5e5bbb2f60f6001029c0838af15638b56713",
+    "target_keyword": "Wie lege ich einen Longiergurt an",
+    "title": "Wie lege ich einen Longiergurt an?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Longiergurte",
+          "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte"
+        },
+        {
+          "source_title": "FUNDIS Reitsport – Longiergurte",
+          "source_url": "https://www.fundis-reitsport.de/pferd/longierbedarf/longiergurte/"
+        },
+        {
+          "source_title": "FUNDIS Reitsport – Pferde korrekt longieren",
+          "source_url": "https://www.fundis-reitsport.de/blog/ausbildung/pferde-korrekt-longieren/"
+        },
+        {
+          "source_title": "Pferderevue – Schnurgurt: Warum Profis auf ihn schwören",
+          "source_url": "https://www.pferderevue.at/magazin/ausruestung/2018/2018/09/schnurgurt--warum-ihn-profis-empfehlen.html"
+        },
+        {
+          "source_title": "Pferderevue – Wie Longiergurte den Trainingserfolg negativ beeinflussen können",
+          "source_url": "https://www.pferderevue.at/content/pferderevue/pferderevue/de/aktuelles/ausruestung/2018/07/wie-longiergurte-den-trainingserfolg-negativ-beeinflussen-koenne.html"
+        }
+      ],
+      "claims": [
+        "Ein Longiergurt wird hinter dem Widerrist aufgelegt. Er soll so passen, dass er nicht auf oder gegen den Widerrist drückt; als Unterlage kann eine Longiergurtunterlage oder eine passend gefaltete Schabracke verwendet werden.",
+        "Der Longiergurt soll fest genug sitzen, um stabil zu liegen, aber nicht so eng, dass die freie Bewegung des Pferdes eingeschränkt wird.",
+        "Eine Longierunterlage kann zwischen Pferderücken und Longiergurt liegen, damit der Gurt nicht direkt auf Fell und Widerrist aufliegt.",
+        "Beim Gurten sollte schrittweise und wechselseitig nachgegurtet werden, statt den Gurt auf einer Seite sofort stark anzuziehen.",
+        "Ein Longiergurt kann im Rückenbereich erheblichen Druck erzeugen; deshalb sind passende Form, Widerristfreiheit und ein kontrollierter Sitz besonders wichtig."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Wie lege ich einen Longiergurt an",
+      "topic": "Wie lege ich einen Longiergurt an?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "longiergurte-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Wie lege ich einen Longiergurt an?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Longiergurte",
+        "source_url": "https://www.kraemer.de/Themen/Longieren-Bodenarbeit/Longierzubehoer/Longiergurte",
+        "evidence_text_sha256": "c5d1d9bfe5e8263822c3dec4dc49cc5341db44b3b784a6476f8508aa30d215b9",
+        "statement": "Ein Longiergurt wird hinter dem Widerrist aufgelegt. Er soll so passen, dass er nicht auf oder gegen den Widerrist drückt; als Unterlage kann eine Longiergurtunterlage oder eine passend gefaltete Schabracke verwendet werden.",
+        "evidence_text": "Ein Longiergurt wird hinter dem Widerrist aufgelegt. Er soll so passen, dass er nicht auf oder gegen den Widerrist drückt; als Unterlage kann eine Longiergurtunterlage oder eine passend gefaltete Schabracke verwendet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "FUNDIS Reitsport – Longiergurte",
+        "source_url": "https://www.fundis-reitsport.de/pferd/longierbedarf/longiergurte/",
+        "evidence_text_sha256": "6bde9d599502afc7fcd26371fd66374bccb929a09cd1e49dd55400e559207e0c",
+        "statement": "Der Longiergurt soll fest genug sitzen, um stabil zu liegen, aber nicht so eng, dass die freie Bewegung des Pferdes eingeschränkt wird.",
+        "evidence_text": "Der Longiergurt soll fest genug sitzen, um stabil zu liegen, aber nicht so eng, dass die freie Bewegung des Pferdes eingeschränkt wird.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "FUNDIS Reitsport – Pferde korrekt longieren",
+        "source_url": "https://www.fundis-reitsport.de/blog/ausbildung/pferde-korrekt-longieren/",
+        "evidence_text_sha256": "14414f669b6d81671115709191e836e21844d250671fc48b697a2c2fb8605c38",
+        "statement": "Eine Longierunterlage kann zwischen Pferderücken und Longiergurt liegen, damit der Gurt nicht direkt auf Fell und Widerrist aufliegt.",
+        "evidence_text": "Eine Longierunterlage kann zwischen Pferderücken und Longiergurt liegen, damit der Gurt nicht direkt auf Fell und Widerrist aufliegt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Pferderevue – Schnurgurt: Warum Profis auf ihn schwören",
+        "source_url": "https://www.pferderevue.at/magazin/ausruestung/2018/2018/09/schnurgurt--warum-ihn-profis-empfehlen.html",
+        "evidence_text_sha256": "ee3991d0f0364d6690ef4180020892d2e8dc1acaf5f1db2d136461a658378eeb",
+        "statement": "Beim Gurten sollte schrittweise und wechselseitig nachgegurtet werden, statt den Gurt auf einer Seite sofort stark anzuziehen.",
+        "evidence_text": "Beim Gurten sollte schrittweise und wechselseitig nachgegurtet werden, statt den Gurt auf einer Seite sofort stark anzuziehen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_title": "Pferderevue – Wie Longiergurte den Trainingserfolg negativ beeinflussen können",
+        "source_url": "https://www.pferderevue.at/content/pferderevue/pferderevue/de/aktuelles/ausruestung/2018/07/wie-longiergurte-den-trainingserfolg-negativ-beeinflussen-koenne.html",
+        "evidence_text_sha256": "538236fa94372835f4dd33060f0dc53a165d4b3abe66b6ca0dfa336f1cf0bdf6",
+        "statement": "Ein Longiergurt kann im Rückenbereich erheblichen Druck erzeugen; deshalb sind passende Form, Widerristfreiheit und ein kontrollierter Sitz besonders wichtig.",
+        "evidence_text": "Ein Longiergurt kann im Rückenbereich erheblichen Druck erzeugen; deshalb sind passende Form, Widerristfreiheit und ein kontrollierter Sitz besonders wichtig.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/training/training-longieren/longiergurte/",
+        "anchor": "Longiergurte",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/longiergurte-sicherheit/",
+        "anchor": "Sicherheit Longiergurte",
+        "block": "checklist"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-longieren/",
+        "anchor": "Longieren",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/training/training-longieren/longiergurte/",
+        "active": true
+      },
+      {
+        "href": "/category/longiergurte-sicherheit/",
+        "active": true
+      },
+      {
+        "href": "/training/training-longieren/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "longiergurte-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Longiergurt",
+      "anlegen",
+      "Widerrist",
+      "Unterlage",
+      "Bauchgurt",
+      "Sitz",
+      "nachgurten",
+      "Wirbelsäule",
+      "Passform"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Frage lässt sich mit einer klaren Schrittfolge und einer kurzen Sitzkontrolle verständlicher beantworten als mit einer zusätzlichen Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
