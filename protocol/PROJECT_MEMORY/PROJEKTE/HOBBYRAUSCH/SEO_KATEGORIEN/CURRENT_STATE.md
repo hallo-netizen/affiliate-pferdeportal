@@ -3,116 +3,122 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: LIVE: BUCHBINDEN SICHTBAR / UNTERKATEGORIEN NICHT SICHTBAR / V1.9.7 FRONTEND-ENDSTATE LOKAL HARD PASS / LIVE-UPDATE OFFEN
+STATUS: BLOCKED – WORDPRESS-HIERARCHIEÜBERSETZUNG NICHT ZIELKONFORM / V1.9.7 VERWORFEN
 
 ## Harte Abnahmeregel
 
-**Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation bis zum sichtbaren Frontend-Endzustand und anschließenden realen WordPress-/Frontend-Readback.**
+Keine Abnahme ohne lokale Positiv- UND Negativsimulation bis zum echten WordPress-/Frontend-Endzustand.
 
-Ein technischer WordPress-Objekt-Readback allein ist ausdrücklich **kein PASS**.
+Ein technischer Objekt-Readback oder ein optischer Linkblock ersetzt keine korrekte WordPress-Taxonomie-/Seitenhierarchie.
 
-## Zielvertrag
+## Verbindlicher Zielvertrag
 
 `ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-Ziel:
-Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → sichtbare Frontend-Struktur/Navigation → Readback.
+Fachliches Ziel:
+`SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE`
+plus getrennte Magazin- und HivePress-Stränge.
 
-## Tatsächlich beobachteter Livezustand
+## Reale Live-Wahrheit
 
-Am 2026-10-05 real im Frontend beobachtet:
-- Seite `Buchbinden` ist sichtbar;
-- die vorgesehenen direkten Content-Kinder `Einstieg`, `Ausrüstung`, `Material`, `Techniken & Praxis` sind auf der Buchbinden-Seite **nicht sichtbar**;
-- damit ist der bisherige Endzustand **NICHT PASS**.
+- `Buchbinden` ist im Frontend sichtbar.
+- Die vorgesehenen Unterkategorien sind dort nicht als echte untergeordnete Struktur sichtbar.
+- Livebestand nicht verändern, bis die WordPress-Übersetzung hart geklärt ist.
 
-## Exakte Ursache
+## Harte technische Befunde
 
-Der bestehende Writer erzeugt:
-- `Buchbinden` als WordPress-Seite;
-- die vier Kinder als WordPress-Taxonomie-Terme.
+### 1. Der reale Buchbinden-Pilot bildet die Solltiefe nicht ab
 
-Da ein Taxonomie-Term nicht nativ Kind einer WordPress-Seite sein kann, wird die fachliche Beziehung nur über `_apkw_parent_concept_id` gespeichert.
+Aktuelles Pilotpaket:
+- `Buchbinden` = Level 1 = `wordpress_page`;
+- `Einstieg`, `Ausrüstung`, `Material`, `Techniken & Praxis` = Level 2 = WordPress-`category`.
 
-Der bisherige Readback prüfte diese technische Bindung, aber es gab:
-- keinen persistenten Frontend-Navigationsblock in der Elternseite;
-- keinen Menü-Write;
-- keinen Frontend-Endzustandscheck auf tatsächlich sichtbare/verlinkte Kinder.
+Die konzeptionellen oberen Seiten
+`Fertigen → Buch & Papier`
+fehlen im technisch erzeugten Baum.
 
-Dadurch konnte Write + technischer Readback PASS sein, obwohl die Buchbinden-Seite im Frontend leer blieb.
+### 2. WordPress-native Elternschaft bricht am Übergang Seite → Taxonomie
 
-## V1.9.7 – Frontend-Endstate-Kandidat
+Der bestehende Writer kann nativ:
+- Seite → Seite über `post_parent`;
+- Term → Term nur innerhalb derselben Taxonomie über `parent`.
 
-KISS-Fix auf derselben Pluginlinie:
-- kein Zusatzplugin;
-- kein Theme-Umbau;
-- kein Laufzeit-`the_content`-Filter;
-- keine neue DataForSEO-Recherche;
-- kein Neuaufbau des bestehenden Baums.
+Bei Seite → Kategorie setzt der Writer den nativen Term-Parent auf 0 und speichert lediglich
+`_apkw_parent_concept_id`.
 
-Der Writer erzeugt für Seiten mit direkten Content-Kindern einen persistenten verwalteten Navigationsblock im echten `post_content` der Elternseite:
-`<!-- APKW:CHILDREN:BEGIN --> ... <!-- APKW:CHILDREN:END -->`
+Damit ist eine Kategorie technisch **kein nativer WordPress-Child der Seite**.
 
-Eigenschaften:
-- nur direkte Content-Kinder;
-- echte WordPress-Links via `get_permalink` / `get_term_link`;
-- Marketplace/HivePress und Magazin bleiben getrennt;
-- vorhandener redaktioneller Seiteninhalt außerhalb des verwalteten Blocks bleibt erhalten;
-- spätere Sparse-Erweiterungen aktualisieren nur diesen Block;
-- kein kompletter Neuaufbau;
-- Block-Tampering/kaputte Marker fail-closed;
-- Frontend-Mismatch nach Write → automatischer Rollback einschließlich ursprünglichem Seiteninhalt.
+### 3. Der Writer kann Tiefe, der Builder nicht
 
-## Harte lokale E2E-Evidenz
+Validator:
+- Level 1..20 zulässig;
+- Parent-Level wird hart geprüft.
 
-Vor-Fix realistisch reproduziert:
-- Deployment/Write PASS;
-- technischer Readback PASS;
-- Seite `publish`;
-- Seiteninhalt leer;
-- Frontend-Endzustand FAIL.
+Writer:
+- Page→Page und Category→Category können hierarchisch geschrieben werden.
 
-Nach Fix:
-- exakte reale Buchbinden-Topologie verwendet;
-- sichtbar/verlinkt erwartet und geprüft: `Einstieg`, `Ausrüstung`, `Material`, `Techniken & Praxis`;
-- `Buchbinden Set` und `Buchbinden Online` dürfen nicht in den Content-Block leaken;
-- spätere fünfte Content-Kategorie wird ergänzt, bestehende vier bleiben;
-- zweiter identischer Lauf erzeugt keine unnötigen Writes;
-- manuelle Inhalte außerhalb des verwalteten Blocks bleiben erhalten;
-- Manipulation / fehlender Frontend-Endzustand / kaputte Marker → BLOCKED bzw. Rollback.
+Concept Builder:
+- erzeugt derzeit pro Seed nur eine Root-Seite auf Level 1;
+- erzeugt maximal 4 direkte `category`-Kinder auf Level 2;
+- `MAX_CONTENT_CHILDREN_PER_TOPIC=4`;
+- erzeugt keine `Fertigen → Buch & Papier → Buchbinden`-Kette.
 
-Gesamtsuite:
-- 275/275 PASS;
-- Fresh-Source 275/275 PASS;
-- Source↔Installer Runtime 23/23 byteidentisch;
-- Source PHP 17/17 PASS;
-- Installer PHP 17/17 PASS.
+### 4. Wiederkehrende Leaf-Namen skalieren derzeit nicht
 
-V1.9.7 Installer SHA-256:
-`89790e0b12b4c72c96c8c5a9387dabc160c21707d6147e65898303eef70a0f40`
+Harter lokaler Test mit zwei verschiedenen Hobbyseiten und jeweils Leaf `Einstieg`:
+BLOCKED durch:
+- `VISIBLE_NAME_DUPLICATE_GLOBAL`;
+- `SLUG_DUPLICATE_WITHIN_BLOCK`;
+- `PACKAGE_TARGET_SLUG_COLLISION`.
 
-V1.9.7 Source SHA-256:
-`7d324512d2d0e89faac82be50b54bd580facb4e2eef782eba32ab0ce8378af1a`
+WordPress selbst erlaubt bei hierarchischen Taxonomien gleiche Child-Namen unter verschiedenen Eltern; der aktuelle APKW-Validator ist hier strenger als WordPress.
 
-## Beleggrenze
+Da die aktuellen Hobby-Leafs wegen Seite→Kategorie aber native Root-Terme sind, fehlt ihnen genau der WordPress-Taxonomie-Parent, der diese Wiederholung sauber trennen könnte.
 
-V1.9.7 ist **noch nicht live installiert**.
-Es gibt daher noch keinen realen Frontend-PASS.
+### 5. Content und Magazin teilen aktuell dieselbe WordPress-Taxonomie
 
-Die lokale E2E-Simulation nutzt den echten Plugin-Code und die echte Buchbinden-Paket-/Knotentopologie mit WordPress-API-kompatibler Testumgebung. Sie ist kein vollständiger Clone des IONOS-/Theme-Hostings. Der Live-Screenshot bestätigt jedoch exakt den lokal reproduzierten Fehlerzustand.
+Content-Leafs und Magazin-Knoten verwenden beide die Core-Taxonomie `category`.
+Die Trennung existiert nur im APKW-`block`, nicht als getrennte WordPress-Taxonomie.
+
+### 6. HivePress
+
+HivePress definiert `listing_category` ausdrücklich hierarchisch; die reale Taxonomie ist `hp_listing_category`.
+Native HivePress Term→Term-Tiefe ist damit technisch vorgesehen.
+
+Vor einem produktiven Tiefenbaum muss auf Hobby Depot selbst zusätzlich `get_taxonomy('hp_listing_category')->hierarchical === true` real zurückgelesen werden.
+
+### 7. Sonderzeichen / Darstellung
+
+Der frühere Fehler bei `Techniken & Praxis` ist geklärt:
+WordPress speichert den Namen intern escaped als `Techniken &amp; Praxis`.
+V1.9.4 normalisiert dies beim Readback; im Browser wird korrekt `Techniken & Praxis` dargestellt.
+Das ist **nicht** der aktuelle Strukturfehler.
+
+## V1.9.7
+
+V1.9.7 ist **NICHT FREIGEGEBEN / NICHT INSTALLIEREN**.
+
+Der dortige Managed-Linkblock hätte die fehlende native WordPress-Hierarchie nur optisch überdeckt und löst weder:
+- die Solltiefe,
+- die Seite→Taxonomie-Grenze,
+- wiederkehrende Leaf-Namen,
+- noch die Content/Magazin-Taxonomie-Trennung.
+
+## ERSTER BLOCKER
+
+`HD001_WORDPRESS_HIERARCHY_TRANSLATION_MISMATCH`
 
 ## NEXT ACTION
 
-V1.9.7 über den aktuellen Kategorie-Workflow installieren.
+Keine neue Pluginversion und kein Live-Write.
 
-Danach genau einmal den bestehenden Publish-/Republish-Weg ausführen.
+Als nächstes wird genau ein technischer WordPress-Übersetzungsvertrag für den fertigen Fachbaum festgelegt und lokal hart bewiesen:
 
-Erwarteter realer Endzustand:
-`Buchbinden` bleibt sichtbar und zeigt exakt die vier verlinkten Content-Kinder:
-- Einstieg
-- Ausrüstung
-- Material
-- Techniken & Praxis
+1. wie `SEITE → SEITE → SEITE → KATEGORIE` technisch in WordPress abgebildet wird;
+2. wie wiederkehrende Leaf-Namen wie `Einstieg` je Hobby konfliktfrei funktionieren;
+3. wie Content-Kategorien und Magazin technisch sauber getrennt bleiben;
+4. wie HivePress separat hierarchisch bleibt;
+5. wie diese Struktur im Frontend ohne Theme-Trick sichtbar wird;
+6. wie spätere Deltas ohne Gesamtumbau ergänzt werden.
 
-Keine neue DataForSEO-Recherche.
-Keine neuen Kategorien.
-Kein weiterer Pluginumbau vor diesem realen Frontend-Readback.
+Erst nach Positiv-/Negativ-E2E dieser Übersetzung darf ein neuer Kandidat gebaut werden.
