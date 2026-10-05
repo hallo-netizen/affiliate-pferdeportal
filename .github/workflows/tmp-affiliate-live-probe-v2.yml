@@ -1,0 +1,20 @@
+name: TEMP Affiliate Live Probe V2
+
+on:
+  push:
+    branches:
+      - affiliate-release-current
+    paths:
+      - '.github/workflows/tmp-affiliate-live-probe-v2.yml'
+      - 'AFFILIATE_HOBBYRAUM/live_schabracken_readonly_probe.py'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run readonly live probe
+        run: python3 AFFILIATE_HOBBYRAUM/live_schabracken_readonly_probe.py
