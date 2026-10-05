@@ -434,3 +434,26 @@ Echte Buchbinden-Preview mit 7 Knoten + 1 synthetischer Extension-Knoten → 7 U
 
 LOKALE EVIDENZ:
 V1.9.6 263/263 PASS; Fresh Source 263/263 PASS; Runtime Source↔Installer 23/23 byteidentisch; Installer PHP 17/17 PASS.
+
+
+## HOBBYRAUSCH-HD001-20261005-C – Sichtbarer Frontend-Endzustand ist zwingender Teil der Abnahme
+
+WAS:
+Beim realen Buchbinden-Pilot wurde ein bisher übersehener Endzustandsfehler gefunden: `Buchbinden` war als WordPress-Seite sichtbar, die vier fachlich gebundenen Content-Unterkategorien aber nicht. Der alte Writer speicherte die Cross-Adapter-Beziehung nur als Metadaten und der alte Readback prüfte ausschließlich technische WordPress-Objekte.
+
+WARUM:
+Ein WordPress-Seitenobjekt und Taxonomie-Terme können technisch korrekt existieren, ohne dass die Beziehung auf der Seite sichtbar wird. Genau dieser Zustand war live vorhanden und wurde lokal reproduziert: Write PASS + technischer Readback PASS + publish PASS, aber Frontend FAIL.
+
+REGEL:
+- technischer WordPress-Readback allein ist niemals End-PASS;
+- Seiten mit direkten Content-Kindern müssen diese Kinder persistent im sichtbaren Seiteninhalt verlinken;
+- hierfür wird ein klar markierter, vom Workflow verwalteter Block im `post_content` verwendet;
+- kein zweites Plugin, kein Theme-Hack und kein Laufzeit-`the_content`-Filter;
+- Magazin/HivePress dürfen nicht in den Content-Kinderblock leaken;
+- vorhandener redaktioneller Inhalt außerhalb des Managed Blocks bleibt unberührt;
+- Sparse-Erweiterungen ändern nur den notwendigen Block;
+- fehlender/manipulierter sichtbarer Endzustand blockiert bzw. löst Rollback aus;
+- Abnahme erst nach realem Frontend-Readback.
+
+LOKALE EVIDENZ:
+Vor Fix wurde der Live-Fehler hart reproduziert. Nach Fix: 275/275 PASS; Fresh Source 275/275 PASS; Source↔Installer 23/23 byteidentisch; Source-PHP 17/17 PASS; Installer-PHP 17/17 PASS; echte Buchbinden-Topologie mit exakt vier Content-Kindern geprüft.
