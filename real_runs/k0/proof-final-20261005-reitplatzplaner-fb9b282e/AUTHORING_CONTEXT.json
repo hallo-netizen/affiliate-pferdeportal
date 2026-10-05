@@ -1,0 +1,184 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzplaner-faq",
+    "plan_slot": "fb9b282e561584c5203bd7058dcff93976f87421092f2d95f3df42ab579659c5",
+    "target_keyword": "Was ist ein Reitplatzplaner",
+    "title": "Was ist ein Reitplatzplaner?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Hatzenbichler – Reitplatzplaner",
+          "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner"
+        },
+        {
+          "source_title": "BM Horse – Reitplatzplaner Equus Profi",
+          "source_url": "https://bmhorse.com/de/produkt/reitplatzplaner-equus-profi/"
+        },
+        {
+          "source_title": "Platz-Max – Reitplatzplaner Maxi-SM",
+          "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/"
+        },
+        {
+          "source_title": "Vielitz – Reitplatzplaner",
+          "source_url": "https://www.vielitz.de/sonstiges/reitplatzplaner/"
+        }
+      ],
+      "claims": [
+        "Ein Reitplatzplaner ist ein Gerät zur Reitplatzpflege; Striegelzinken bearbeiten die Tretschicht, ein Planierschild ebnet die Oberfläche, und eine Walze kann die Tiefenführung unterstützen.",
+        "Bei Reitplatzplanern können Zinken den Boden lockern und mischen, eine Nivellierschiene Unebenheiten glätten und eine einstellbare Arbeitstiefe die Bearbeitung an unterschiedliche Bedingungen anpassen.",
+        "Ein Reitplatzplaner kann mit Hufschlagräumer, Striegelzinken und Walze ausgestattet sein; der Hufschlagräumer führt Material vom Rand zurück, während Zinken die Tretschicht lockern und durchmischen.",
+        "Bei einem Reitplatzplaner arbeiten Zinken, Planierschiene und Walze nacheinander zusammen, um den Boden zu lockern, Material zu verteilen und die Oberfläche wieder gleichmäßiger abzulegen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist ein Reitplatzplaner",
+      "topic": "Was ist ein Reitplatzplaner?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzplaner-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist ein Reitplatzplaner?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Hatzenbichler – Reitplatzplaner",
+        "source_url": "https://www.hatzenbichler.com/de/reiplatzplaner",
+        "evidence_text_sha256": "c8f87d6c626cb4801abb8fc8fd1530ec90782334459351948107979f843e2752",
+        "statement": "Ein Reitplatzplaner ist ein Gerät zur Reitplatzpflege; Striegelzinken bearbeiten die Tretschicht, ein Planierschild ebnet die Oberfläche, und eine Walze kann die Tiefenführung unterstützen.",
+        "evidence_text": "Ein Reitplatzplaner ist ein Gerät zur Reitplatzpflege; Striegelzinken bearbeiten die Tretschicht, ein Planierschild ebnet die Oberfläche, und eine Walze kann die Tiefenführung unterstützen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "BM Horse – Reitplatzplaner Equus Profi",
+        "source_url": "https://bmhorse.com/de/produkt/reitplatzplaner-equus-profi/",
+        "evidence_text_sha256": "2205ae2c2095bdced8bf17924698fc381e268b9ff6e4de978e04e444d7367c7a",
+        "statement": "Bei Reitplatzplanern können Zinken den Boden lockern und mischen, eine Nivellierschiene Unebenheiten glätten und eine einstellbare Arbeitstiefe die Bearbeitung an unterschiedliche Bedingungen anpassen.",
+        "evidence_text": "Bei Reitplatzplanern können Zinken den Boden lockern und mischen, eine Nivellierschiene Unebenheiten glätten und eine einstellbare Arbeitstiefe die Bearbeitung an unterschiedliche Bedingungen anpassen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Platz-Max – Reitplatzplaner Maxi-SM",
+        "source_url": "https://www.platz-max.com/de/reitplatzplaner/bahnplaner/maxi-sm/",
+        "evidence_text_sha256": "796a48b56528d9e3b3a1f6a0709382f955c5476c6df7151665f450fe4bd0fbdc",
+        "statement": "Ein Reitplatzplaner kann mit Hufschlagräumer, Striegelzinken und Walze ausgestattet sein; der Hufschlagräumer führt Material vom Rand zurück, während Zinken die Tretschicht lockern und durchmischen.",
+        "evidence_text": "Ein Reitplatzplaner kann mit Hufschlagräumer, Striegelzinken und Walze ausgestattet sein; der Hufschlagräumer führt Material vom Rand zurück, während Zinken die Tretschicht lockern und durchmischen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Vielitz – Reitplatzplaner",
+        "source_url": "https://www.vielitz.de/sonstiges/reitplatzplaner/",
+        "evidence_text_sha256": "ae93ce1361509f3eabf9f6201e238b43ea61eb7cb45d071af90c34b925c143b8",
+        "statement": "Bei einem Reitplatzplaner arbeiten Zinken, Planierschiene und Walze nacheinander zusammen, um den Boden zu lockern, Material zu verteilen und die Oberfläche wieder gleichmäßiger abzulegen.",
+        "evidence_text": "Bei einem Reitplatzplaner arbeiten Zinken, Planierschiene und Walze nacheinander zusammen, um den Boden zu lockern, Material zu verteilen und die Oberfläche wieder gleichmäßiger abzulegen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+        "anchor": "Reitplatzplaner",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/reitplatzplaner-installation/",
+        "anchor": "Einstellung von Reitplatzplanern",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/weide/weide-reitplatzpflege/",
+        "anchor": "Reitplatzpflege",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/weide/weide-reitplatzpflege/reitplatzplaner/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzplaner-installation/",
+        "active": true
+      },
+      {
+        "href": "/weide/weide-reitplatzpflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reitplatzplaner-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Reitplatzplaner",
+      "Tretschicht",
+      "Striegelzinken",
+      "Planierleiste",
+      "Walze",
+      "Arbeitstiefe",
+      "Hufschlagräumer",
+      "Bodenpflege",
+      "Reitplatzpflege"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Bauteile und ihre Aufgaben lassen sich im Text und in einer kompakten Checkliste klarer erklären als in einer zusätzlichen Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
