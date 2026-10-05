@@ -1,0 +1,167 @@
+name: TEMP Affiliate Live51 Local Replay 6.72.185
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - 'AFFILIATE_HOBBYRAUM/test_banner_live51_replay_v672185.php'
+      - '.github/workflows/tmp-affiliate-live51-local-replay.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live51-replay:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Verify exact 6.72.185 installer and protected performance code
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
+          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
+          test "$ACTUAL" = '13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28'
+          rm -rf /tmp/live185zip
+          mkdir -p /tmp/live185zip
+          unzip -q "$ZIP" -d /tmp/live185zip
+          grep -F 'Version: 6.72.185' /tmp/live185zip/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.185';" /tmp/live185zip/affiliate-portal-router/pferdeportal-affiliate-router.php
+          test "$(find /tmp/live185zip/affiliate-portal-router -type f | wc -l)" = "27"
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          cur=Path('/tmp/live185zip/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          old=subprocess.check_output(['git','show','a381aff4eb3f41754186f4bad86ce1a7e0823a29:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'],text=True)
+          def body(src,name):
+              marker='function '+name+'('
+              start=src.find(marker)
+              if start<0: raise SystemExit('FAIL missing '+name)
+              brace=src.find('{',start)
+              depth=0; state='code'; i=brace
+              while i<len(src):
+                  c=src[i]; n=src[i+1] if i+1<len(src) else ''
+                  if state=='sq':
+                      if c=="\\": i+=1
+                      elif c=="'": state='code'
+                  elif state=='dq':
+                      if c=="\\": i+=1
+                      elif c=='"': state='code'
+                  elif state=='line':
+                      if c=='\n': state='code'
+                  elif state=='block':
+                      if c=='*' and n=='/': state='code'; i+=1
+                  else:
+                      if c=="'": state='sq'
+                      elif c=='"': state='dq'
+                      elif c=='/' and n=='/': state='line'; i+=1
+                      elif c=='#': state='line'
+                      elif c=='/' and n=='*': state='block'; i+=1
+                      elif c=='{': depth+=1
+                      elif c=='}':
+                          depth-=1
+                          if depth==0:return src[start:i+1]
+                  i+=1
+              raise SystemExit('FAIL unclosed '+name)
+          protected=[
+            'ranked_campaigns_request_cache_allowed','ranked_campaign_sanitize_key_request_cached',
+            'ranked_campaign_sanitize_text_request_cached','ranked_campaigns_request_cache_key',
+            'select_category_product_campaign_fast_v672171','ranked_campaign_candidate_pool',
+            'category_product_provider_mix_v672133','render_banner',
+            'banner_distribution_reorder_candidates','banner_distribution_stable_index',
+            'category_product_shared_rank_base'
+          ]
+          for name in protected:
+              if body(cur,name)!=body(old,name): raise SystemExit('FAIL protected performance function changed '+name)
+          hot=body(cur,'ranked_campaigns_for_slot_uncached')
+          p=hot.find('V6.72.184 KISS')
+          if p<0: raise SystemExit('FAIL missing KISS marker')
+          addition=hot[p:p+900]
+          for forbidden in ['$wpdb','get_post_meta(','wp_remote_','output_plan_creative(']:
+              if forbidden in addition: raise SystemExit('FAIL new frontend cost '+forbidden)
+          print('PASS performance KISS hardlock')
+          PY
+          echo "PASS exact tested 6.72.185 artifact and performance lock"
+
+      - name: Install exact WordPress MariaDB replay environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-live51
+          mkdir -p /tmp/wp-live51
+          /tmp/wp core download --path=/tmp/wp-live51 --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-live51 --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-live51 --url=http://127.0.0.1:8080 --title='Affiliate Live51 Replay' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-live51/wp-content/mu-plugins
+          cat >/tmp/wp-live51/wp-content/mu-plugins/pferde-real-hierarchy-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){
+                      $p=get_post((int)$page_id);
+                      if(!$p) return '';
+                      $parent=(int)$p->post_parent;
+                      if($parent<=0) return 'hub1';
+                      $pp=get_post($parent);
+                      if($pp && (int)$pp->post_parent===0) return 'hub2';
+                      return 'category';
+                  }
+              }
+          }
+          PHP
+          cp -a /tmp/live185zip/affiliate-portal-router /tmp/wp-live51/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-live51
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS 6.72.185 active\n";' --path=/tmp/wp-live51
+
+      - name: Replay exact live51 pages and observed live banner pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_live51_replay_v672185.php" --path=/tmp/wp-live51 | tee /tmp/live51-replay.log
+          grep -F 'PASS real_schabracken_parent_108' /tmp/live51-replay.log
+          grep -F 'PASS real_schabracken_design_type_category' /tmp/live51-replay.log
+          grep -F 'PASS raw_destination_derives_real_reithelme_page_186' /tmp/live51-replay.log
+          grep -F 'PASS live_oracle_has_51_pages' /tmp/live51-replay.log
+          grep -F 'PASS frontend_zero_http_calls' /tmp/live51-replay.log
+          grep -F 'REAL51_REPLAY_GATE_COMPLETE' /tmp/live51-replay.log
+          echo "===== CLASSIFICATION ====="
+          grep '^CLASSIFY ' /tmp/live51-replay.log
+          echo "===== CRITICAL ====="
+          grep '^CRITICAL_' /tmp/live51-replay.log
+          echo "===== SUMMARY ====="
+          grep -E '^(REPLAY_SUMMARY|REAL51_REPLAY_)' /tmp/live51-replay.log
+
+      - name: Prove no production source mutation in replay
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- release/affiliate-zentrale/current/affiliate-portal-router
+          echo "PASS replay changed no plugin production source"
