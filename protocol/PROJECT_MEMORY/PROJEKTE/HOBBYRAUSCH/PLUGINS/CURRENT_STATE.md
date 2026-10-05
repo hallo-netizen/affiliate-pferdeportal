@@ -2,33 +2,32 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-03
-STATUS: HD-001 V1.9.4 LIVE PASS + NEUER ZIELVERTRAG AKTIV / HD-001 SOURCE-BYTES BLOCKED / HDTE 0.1.4 LOKAL PASS BLEIBT, LIVE-UPGRADE PAUSIERT
+STAND: 2026-10-05
+STATUS: HD-001 V1.9.9 LIVE CONTENT-PASS / V1.10.0 ENGINE-TESTS PASS ABER KEIN RELEASE / HD-002 PARALLEL-UPGRADE PAUSIERT
 
 ## HD-001
 
-`Affiliate-Portal Kategorie-Workflow V1.9.4`
+Einzige Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
 
-Live produktiv:
-Deployment + Readback PASS.
-Nicht zurückrollen.
+Live:
+V1.9.9 Content-Pilot real bestätigt.
 
-Neuer Zielvertrag:
-`../SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
+Entwicklung:
+V1.10.0 portalweite Engine lokal auf Maschinenebene positiv/negativ geprüft.
 
-Für den Nachfolgekandidaten fehlen im autoritativen Originalordner noch die exakten V1.9.4-Source-Bytes.
+Aktueller Blocker und NEXT ACTION ausschließlich aus der HD-001-Plugin-Current.
 
-## HD-002 / HDTE
+Kein isoliertes V1.10.0 `CURRENT.zip`, solange der reale Gesamtportal-E2E nicht abgeschlossen ist.
 
-Owner-Handoff und Gesamtbestand:
-PASS.
+## HD-002
 
-HDTE 0.1.4 bleibt lokal vollständig positiv/negativ geprüft.
+Einzige Plugin-Wahrheit:
+`PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
 
-Der zuvor vorgesehene Live-Upgrade-Schritt wird während der ausdrücklich wieder geöffneten HD-001-Kategoriearbeit nicht parallel gestartet.
+Der bereits erfasste Gesamtbestand bleibt bestehen.
+Kein neuer Gesamtbestand und kein paralleler Research-Neustart.
 
 ## NEXT ACTION
 
-HD-001-Source-Bindung über die HD-001-Pluginakte und SEO_KATEGORIEN-Current abschließen.
-
-Danach entscheidet die zuständige Current-Autorität über den Nachfolgekandidaten.
+Für die aktuelle Kategoriearbeit ausschließlich der NEXT ACTION der HD-001-Plugin-Current folgen.
