@@ -1,8 +1,8 @@
-name: TEMP Affiliate Banner Upgrade E2E 6.72.184
+name: TEMP Affiliate Banner Upgrade E2E 6.72.185
 
 on:
   push:
-    branches: [affiliate-release-current]
+    branches: [affiliate-release-current, affiliate-672185-version-separation]
     paths:
       - '.github/workflows/tmp-affiliate-banner-upgrade-e2e-v672184.yml'
       - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php'
@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  upgrade-183-to-184:
+  upgrade-184-to-185:
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -48,8 +48,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F "Version: 6.72.184" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.184';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.185" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.185';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/lint.log)" = "21"
           php -l AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php
@@ -114,16 +114,16 @@ jobs:
               if body(cur,name)!=body(old,name):
                   raise SystemExit('FAIL protected performance function changed '+name)
           hot=body(cur,'ranked_campaigns_for_slot_uncached')
-          marker="V6.72.184 KISS"
+          marker="V6.72.185 KISS"
           pos=hot.find(marker)
-          if pos<0: raise SystemExit('FAIL missing 6.72.184 KISS filter')
+          if pos<0: raise SystemExit('FAIL missing 6.72.185 KISS filter')
           addition=hot[pos:pos+900]
           for forbidden in ['$wpdb','get_post_meta(','wp_remote_','output_plan_creative(']:
               if forbidden in addition: raise SystemExit('FAIL new frontend cost '+forbidden)
           print('PASS performance KISS hardlock')
           PY
 
-      - name: Install WordPress and baseline 6.72.183
+      - name: Install WordPress and bad baseline 6.72.184
         shell: bash
         run: |
           set -euo pipefail
@@ -146,26 +146,27 @@ jobs:
               }
           }
           PHP
-          unzip -q release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip -d /tmp/base183
+          git show 5f28fb69c2bd215e49c44c6e8c26ac7b8836f1bf:release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip > /tmp/bad184.zip
+          unzip -q /tmp/bad184.zip -d /tmp/base183
           cp -a /tmp/base183/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.183"){exit(2);} echo "PASS baseline 6.72.183 active\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.184"){exit(2);} echo "PASS bad baseline 6.72.184 active\n";' --path=/tmp/wp-site
 
-      - name: Reproduce real failure state on 6.72.183
+      - name: Reproduce stale-edge failure state on bad 6.72.184
         shell: bash
         run: |
           set -euo pipefail
           /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php" --path=/tmp/wp-site | tee /tmp/seed.log
-          grep -F 'PRE_UPGRADE_reproduces_wrong_legacy_banner' /tmp/seed.log
-          grep -F 'UPGRADE_SEED_672183_PASS' /tmp/seed.log
+          grep -F 'PRE_UPGRADE_184_stale_library_banner_visible_on_schabracken' /tmp/seed.log
+          grep -F 'UPGRADE_SEED_672184_PASS' /tmp/seed.log
 
-      - name: Upgrade exact same WordPress to current 6.72.184 source
+      - name: Upgrade exact same WordPress from bad 6.72.184 to current 6.72.185 source
         shell: bash
         run: |
           set -euo pipefail
           rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.184"){exit(2);} echo "PASS upgraded plugin 6.72.184 active\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS upgraded plugin 6.72.185 active\n";' --path=/tmp/wp-site
 
       - name: Complete positive negative upgrade workflow
         shell: bash
