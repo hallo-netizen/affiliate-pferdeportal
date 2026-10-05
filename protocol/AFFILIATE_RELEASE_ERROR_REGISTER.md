@@ -1027,3 +1027,24 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 **Nicht wiederholen:** Rotation darf niemals eine schwächere Relevanzstufe betreten, solange mindestens ein Kandidat der besseren Stufe vorhanden ist. Ein einzelner best-tier-Banner bleibt fix. Eine Sonderregel für einen Contenttyp darf keine vorhandene exakte gespeicherte Zielkante neutralisieren.
 
 **Status:** NEGATIVE_6_72_185_PROVEN / 6_72_186_SOURCE_AND_EXACT_ZIP_RED_GREEN_PASS / REAL_WORDPRESS_READBACK_OPEN.
+
+
+## AFF-ERR-050 — 6.72.186 Best-Tier-Regel lokal grün, realer Live-Kandidatenbestand liefert trotzdem Guardian
+
+**Datum:** 05.10.2026.
+
+**Realer Live-Befund:** Nach Installation des exakt getesteten 6.72.186-Installers zeigt die reale Schabracken-Seite weiterhin einen fachlich falschen Banner, jetzt Guardian Horse. Frischer öffentlicher Read-only-Readback nach Installation liefert auf Reithelme und Schabracken jeweils Promo `185797`, mehrfach normal und mit Cache-Bust identisch.
+
+**Live-Evidence:** Benutzer-Screenshot 05.10.2026 13:32 lokal; Probe-Commit `6d54e1fa622771a9effa9e106eef97af6407e9cb`; Run `37304066825`.
+
+**Was dadurch widerlegt ist:** Der 6.72.186-Universaltest 139/139 beweist die Best-Tier-Auswahl nur für den kontrollierten Kandidaten-/Zielkantenbestand des Test-Fixtures. Er beweist NICHT, dass der reale WordPress-/Creative-Library-Bestand für Seite 186 Reithelme und Seite 193 Schabracken den fachlich richtigen Kandidaten mit der richtigen gespeicherten Zielkante überhaupt in die höchste Relevanzstufe einspeist.
+
+**Noch nicht bewiesene Root Cause:** Es ist noch offen, ob der fachlich genaue Banner real fehlt/inaktiv/technisch ungeeignet ist, eine falsche bzw. fehlende `automation_target_keys`-Kante besitzt, durch Assignment/Placement/Control vor dem Ranking ausscheidet oder ob Promo `185797` im realen Bestand selbst fälschlich eine zu hohe Specificity erhält. NICHT RATEN.
+
+**Verbindliche Diagnose vor jedem Fix:** Reale Kandidatenliste für Seite 186 und 193 read-only erfassen, einschließlich Campaign/Creative/Promo-ID, `active`, `source`, `assignment_mode`, `automation_target_keys`, `destination_url` samt Provenienz, `placements`, technische Slot-Eignung, `specificity`, Ranking-`reason` und tatsächlich ausgewählte Position. Reithelm-Creative `322674` ausdrücklich gegen den realen Bestand prüfen; ebenso jeden real vorhandenen Schabracken-spezifischen Banner.
+
+**Performance-Hardlock:** Keine neue Frontend-DB-Abfrage, kein Frontend-HTTP, keine URL-Neuklassifikation beim Seitenaufruf, kein Vollscan im Hotpath. Diagnose read-only/außerhalb des öffentlichen Hotpaths. Geschützte Performancepfade bleiben unangetastet.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672186_live_fail_guardian_rootcause_open_20261005.md`
+
+**Status:** LIVE_6_72_186_FAIL / ROOT_CAUSE_OPEN / NO_NEW_FIX_BEFORE_REAL_POOL_AND_RANK_DIAGNOSIS.
