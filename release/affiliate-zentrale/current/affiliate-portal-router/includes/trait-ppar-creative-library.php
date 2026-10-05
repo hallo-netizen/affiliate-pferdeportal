@@ -736,6 +736,20 @@ trait PPAR_Creative_Library_Trait {
             'source_status'=>$source_status,
             'source_kind'=>$normalized['source_kind'],
         );
+        if ($type === 'banner') {
+            $provider_topic_fingerprint = array();
+            foreach (array('provider_topic_id','provider_topic_name','provider_topic_source') as $topic_key) {
+                if (array_key_exists($topic_key, $source_payload_for_hash) && trim((string)$source_payload_for_hash[$topic_key]) !== '') {
+                    $provider_topic_fingerprint[$topic_key] = (string)$source_payload_for_hash[$topic_key];
+                }
+            }
+            if ($provider_topic_fingerprint) {
+                $source_fingerprint['provider_topic_payload_hash'] = hash(
+                    'sha256',
+                    wp_json_encode($provider_topic_fingerprint, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                );
+            }
+        }
         if ($type === 'product') {
             $source_fingerprint['product_payload_hash'] = hash(
                 'sha256',
