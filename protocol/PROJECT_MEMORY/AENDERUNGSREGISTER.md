@@ -477,3 +477,28 @@ ZUSÄTZLICHE BEFUNDE:
 
 REGEL:
 Kein weiterer Live-Installer, bis ein exakter WordPress-Übersetzungsvertrag für die vollständige Fachhierarchie lokal positiv und negativ bis zum Frontend bewiesen ist.
+
+
+## HOBBYRAUSCH-HD001-20261005-E – V1.9.8 WordPress-Hierarchieübersetzung lokal bewiesen
+
+WAS:
+Die zuvor blockierte WordPress-Abbildung SEITE→SEITE→SEITE→KATEGORIE wurde lokal ohne neue Pluginlinie gelöst. Page-Hierarchie bleibt nativ. Für die technische Page→Taxonomy-Grenze wird ein interner Taxonomie-Bridge genutzt; sichtbare Leafs hängen nativ darunter und bleiben logisch an die Page-concept_id gebunden. Der Bridge selbst ist kein sichtbarer Navigationspunkt.
+
+WARUM:
+WordPress kann Page→Page und Term→Term nativ, aber keine Page als nativen Term-Parent. Der alte Pilot speicherte deshalb nur die logische Parent-Bindung und blieb im Frontend leer. Der Bridge verbindet beide nativen Hierarchien ohne falsche object_id und ohne die Fachhierarchie zu verändern.
+
+REGEL:
+- Bridge ist rein technisch und frontend-unsichtbar;
+- sichtbare Leafs bleiben echte WordPress-Terme;
+- Frontend-Ausgabe kommt aus der echten nativen Struktur;
+- sichtbarer Frontend-Endzustand ist Teil des Writer-Readbacks;
+- gleiche kurze Leaf-Namen sind nur bei verschiedenen Page-Kontexten, verschiedenen technischen Slugs und getrennten Intent-Ownern zulässig;
+- gleicher Parent oder technische Slug-/Intent-Kollision bleibt BLOCKED;
+- Magazin wird separat über hierarchisches journal_cat geführt;
+- HivePress bleibt separat über hp_listing_category.
+
+EVIDENZ:
+270/270 lokale Suite PASS. Exakter Zielbaum Fertigen→Buch & Papier→Buchbinden sowie zweites Hobby Nähen geprüft. Zusätzlich echte HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1 lokal migriert: vier bestehende Content-Term-IDs unverändert erhalten, Frontend danach exakt vier Leafs sichtbar, keine Marketplace-/Magazin-/Bridge-Leaks.
+
+OFFEN:
+Der alte Concept Builder erzeugt weiterhin nur Root-Seite + max. 4 direkte Kinder. Kein Release vor vollständigem Builder-/DataForSEO-E2E-PASS.
