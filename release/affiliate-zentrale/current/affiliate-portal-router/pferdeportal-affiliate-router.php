@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.185
+ * Version: 6.72.186
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -116,7 +116,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.185';
+    const VERSION = '6.72.186';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -4026,20 +4026,9 @@ JS;
         $slot_type = sanitize_key((string) ($context['slot_type'] ?? ''));
         $required_creative_type = $this->slot_required_creative_type($slot_type);
 
-        // KISS 04.10.2026: Pferderassen tragen fuer Banner keinen belastbaren
-        // feineren Themenvorteil. Alle technisch gueltigen Rassenbanner liegen
-        // deshalb in derselben Stufe; die bestehende stabile Partner-/Creative-
-        // Verteilung entscheidet. Keine zweite Verteilungsmaschine.
-        if ($required_creative_type === 'banner' && in_array($slot_type, array(
-            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
-        ), true)) {
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen: themenneutrale stabile Bannerverteilung.');
-        }
-
-        // KISS 04.10.2026: Eine bereits materialisierte exakte Zielkante darf
-        // niemals von einem spaeteren breiteren URL-/Texttreffer abgeschnitten
-        // werden. Nur exakte Stufe hier vorziehen; breitere Treffer bleiben
-        // weiter unten in derselben bestehenden Themenstufe vergleichbar.
+        // V6.72.186: Eine gespeicherte exakte Zielkante ist auf jeder Ebene
+        // bindend, auch bei Pferderassen. Erst wenn KEIN exakter Treffer existiert,
+        // darf die historische themenneutrale Rassenverteilung greifen.
         $automation_rank = null;
         if (!empty($campaign['automation_target_keys']) && method_exists($this, 'automation_campaign_exact_target_rank')) {
             $automation_rank = $this->automation_campaign_exact_target_rank($campaign, $context);
@@ -4047,6 +4036,14 @@ JS;
                 && (int) ($automation_rank['specificity'] ?? 0) >= 500) {
                 return $automation_rank;
             }
+        }
+
+        // Kein exakter Rassentreffer: bestehende neutrale Verteilung bleibt als
+        // letzte Rassenregel erhalten. Keine zweite Verteilungsmaschine.
+        if ($required_creative_type === 'banner' && in_array($slot_type, array(
+            'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
+        ), true)) {
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen ohne exakte Zielkante: themenneutrale stabile Bannerverteilung.');
         }
 
         // KISS: Automatisch aus der Creative-Library materialisierte Banner
@@ -4585,9 +4582,32 @@ JS;
         return array_values($image_ready);
     }
 
+private function banner_strict_best_relevance_tier_v672186($candidates, $slot_type) {
+        $candidates = array_values((array) $candidates);
+        if (!$candidates || $this->slot_required_creative_type($slot_type) !== 'banner') {
+            return $candidates;
+        }
+
+        // Fachliche Hierarchie zuerst, Rotation erst danach:
+        // exakt -> Themenkreis -> allgemein -> technisch. Nur die beste
+        // vorhandene Stufe bleibt ausgabefaehig. Reine In-Memory-Filterung:
+        // keine DB-Abfrage, kein HTTP, keine URL-Neuklassifikation.
+        $best_band = $this->banner_distribution_relevance_band((int) ($candidates[0]['specificity'] ?? 0));
+        $best = array();
+        foreach ($candidates as $candidate) {
+            if (!is_array($candidate)) { continue; }
+            if ($this->banner_distribution_relevance_band((int) ($candidate['specificity'] ?? 0)) !== $best_band) {
+                continue;
+            }
+            $best[] = $candidate;
+        }
+        return array_values($best);
+    }
+
 private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
         if (!$this->ranked_campaigns_request_cache_allowed()) {
-            return $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
+            $result = $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
+            return $this->banner_strict_best_relevance_tier_v672186($result, $slot_type);
         }
         $cache_key = $this->ranked_campaigns_request_cache_key($context, $slot_type, $forced_campaign_id);
         if (array_key_exists($cache_key, $this->ranked_campaigns_request_cache)) {
@@ -4606,6 +4626,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         }
 
         $result = $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
+        $result = $this->banner_strict_best_relevance_tier_v672186($result, $slot_type);
         $this->ranked_campaigns_request_cache[$cache_key] = $result;
         return $result;
     }
@@ -5198,7 +5219,10 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
                     return $candidate;
                 }
             }
-            return null;
+
+            // V6.72.186: Ein einziger fachlich bester Banner bleibt fix.
+            // Niemals fuer "Abwechslung" in eine schwaechere Themenstufe fallen.
+            return $candidates[0] ?? null;
         }
 
         $candidates = $this->ranked_campaigns_for_slot($rank_context, $slot_type);
