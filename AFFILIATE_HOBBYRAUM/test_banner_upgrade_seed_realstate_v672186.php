@@ -10,6 +10,7 @@ update_option('ppar_enabled','1',false); update_option('ppar_assignments_v1',arr
 
 $call('maybe_install_creative_library_schema'); $call('maybe_install_output_objects_schema');
 if(method_exists($o,'maybe_install_control_contract_schema'))$call('maybe_install_control_contract_schema');
+$call('persist_network_settings','adcell',array('enabled'=>1,'username'=>'fixture-user','password'=>'fixture-pass','base_url'=>'https://www.adcell.de/api/v2/','test_path'=>'','csv_feed_url'=>''));
 
 $pages=array(
  95=>array('Ausrüstung','ausruestung',0),
