@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 193,
+  "generation": 194,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_STRICT_BEST_RELEVANCE_TIER_6_72_186_RED_GREEN_PASS",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672186_strict_best_banner_tier_full_e2e_20261005.md",
-    "current_focus_reason": "6.72.185 allowed weaker fallback banners to remain deliverable after the best topic match was known; second-position selection could therefore leave exact and choose general. 6.72.186 keeps only the best existing banner relevance band in memory before distribution. One best banner stays fixed; multiple best banners rotate only within that band. Breed exact stored target edges now precede neutral breed fallback. Source and exact ZIP are red-green proven; real Reithelme/Schabracken readback remains open.",
+    "current_focus": "BANNER_6_72_186_LIVE_FAIL_REAL_POOL_AND_RANK_DIAGNOSIS",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672186_live_fail_guardian_rootcause_open_20261005.md",
+    "current_focus_reason": "6.72.186 strict best-tier selection is locally/CI red-green proven, but real WordPress still delivers Guardian Horse promo 185797 on Reithelme and Schabracken. Therefore the open problem is no longer lower-tier escape in the synthetic fixture; the real candidate pool, stored target edges, technical eligibility and per-candidate specificity/reason for page 186 and 193 must be diagnosed read-only before any new fix.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -119,7 +119,7 @@
         "categories": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
         "posts": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
         "glossary": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
-        "breeds": "THEME_NEUTRAL_EXISTING_STABLE_PARTNER_CREATIVE_DISTRIBUTION"
+        "breeds": "EXACT_STORED_EDGE_FIRST_THEN_THEME_NEUTRAL_EXISTING_STABLE_PARTNER_CREATIVE_DISTRIBUTION"
       },
       "topicless_final_fallback_required": true,
       "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION",
@@ -259,7 +259,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "6_72_186_STRICT_BEST_TIER_SOURCE_AND_ZIP_PASS_LIVE_READBACK_OPEN",
+      "status": "LIVE_6_72_186_FAIL_REAL_POOL_AND_RANK_DIAGNOSIS_OPEN",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -279,7 +279,7 @@
       "evidence_ref": "release/affiliate-zentrale/evidence/shared_overview_banner_source_gate_20260918.txt",
       "source_manifest_sha256": "4c5471425ffd7226cf12dd8f50937b26d78d9f4aa48a3af18b5f0ca7272c05a7",
       "source_gate": "21_OF_21_PASS",
-      "live_status": "REAL_SCREENSHOT_FAIL_6_72_183_SANOVET_ON_SCHABRACKEN; 6_72_184_FIX_ZIP_FULL_E2E_PASS_LIVE_NOT_RUN"
+      "live_status": "REAL_SCREENSHOT_FAIL_6_72_186_GUARDIAN_ON_SCHABRACKEN; FRESH_READONLY_PROBE_RUN_37304066825_PROMO_185797_ON_REITHELME_AND_SCHABRACKEN; ROOT_CAUSE_OPEN"
     },
     "awin_banner_source": {
       "status": "UNBOUND_REAL_SOURCE_REQUIRED",
@@ -664,7 +664,9 @@
       "live_probe_run": 37304066825,
       "reithelme_promo": "185797",
       "schabracken_promo": "185797",
-      "repeated_normal_and_cache_bust": true
+      "repeated_normal_and_cache_bust": true,
+      "error_register_id": "AFF-ERR-050",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672186_live_fail_guardian_rootcause_open_20261005.md"
     }
   },
   "branch_policy": {
