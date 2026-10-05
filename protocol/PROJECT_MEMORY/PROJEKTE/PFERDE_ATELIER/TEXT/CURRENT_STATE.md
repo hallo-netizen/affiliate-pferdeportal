@@ -1,7 +1,7 @@
 # PFERDE ATELIER – TEXT – CURRENT STATE
 
-STAND: 2026-10-04
-STATUS: 0.57.32 LIVE-READBACK PASS / 694 EINDEUTIGE TITEL VOLLSTÄNDIG IN A-B-C-D NACH ZIELVERTRAG KLASSIFIZIERT / LANE-B 110 ENTSCHEIDUNGEN VORBEREITET
+STAND: 2026-10-05
+STATUS: 0.57.38 PSERC-PLANABDECKUNG LOKAL HARD-PASS / NEUER JOURNAL-INVENTAR-MAPPING-FEHLER EXAKT BELEGT / 0.57.38 NICHT FINAL
 
 ## EINE ZUSTÄNDIGE CURRENT-BINDUNG
 
@@ -748,24 +748,54 @@ SHA-256:
 `005c4a4d5c9ebf1437c0c882e5f00e19d3cea078e86c1bdb54a0e6d1b0c8105e`.
 
 
+## DELTA 2026-10-05 – MAGAZIN/JOURNAL-BESTANDSARTIKEL OHNE KATEGORIE IN DER THEMENKARTE
+
+Realer Nutzer-Screenshot + realer Export belegen:
+- `Wie alt werden Pferde?` erscheint als bestehender `WORDPRESS / PUBLISH`-Artikel, aber in der zentralen Themenkarte mit leerer Kategorie und leerem Artikeltyp;
+- realer WordPress-Post: ID **15974**;
+- im realen Export erscheint derselbe WordPress-Treffer in `closest_existing_matches` mit `category_name=""`;
+- der zugehörige PSTE-Kandidat ist dagegen korrekt und eindeutig als **Journal** geroutet:
+  - Kategorie-ID **1486**
+  - Kategorie **Pferdegesundheit verstehen**
+  - Slug `pferdegesundheit-verstehen`
+  - Artikeltyp **Journal**
+  - Extension-Route **PASS**.
+
+Exakte Rootcause im 0.57.38-Code:
+- `PSTE_Snapshot::inventory()` übernimmt WordPress-Kategorien nur, wenn deren Term-ID in `PSTE_Snapshot::structure()['items']` als reguläre Portal-/Produktionskategorie aufgelöst wurde;
+- Journal-/Magazin-Kategorien werden aber über den separaten bestehenden `PSTE_Article_Type_Extension_Router` aufgelöst;
+- dadurch kennt der Kandidatenpfad Kategorie 1486 korrekt, während der allgemeine WordPress-Inventarpfad denselben bestehenden Journalartikel kategorielos darstellt.
+
+Einordnung:
+- kein Beleg für fehlende WordPress-Kategorie am Artikel;
+- kein Beleg für falsches Journal-Routing des Kandidaten;
+- **Read-only-Inventarmapping-Gap bestehender Journalartikel**;
+- 0.57.38 behebt den PSERC-Plan-Abdeckungsfehler, aber diesen Journal-Inventarfehler noch nicht;
+- deshalb ist 0.57.38 **kein finaler Produktionsstand**.
+
 ## ERSTER OFFENER BLOCKER
 
-`PSTE_05739_LOCAL_JOURNAL_INVENTORY_AND_PLAN_COVERAGE_HARD_PASS_LIVE_READBACK_OPEN`
+`PSTE_JOURNAL_EXISTING_ARTICLE_CATEGORY_MAPPING_GAP`
 
-0.57.39 konsolidiert den 0.57.38-PSERC-Planabdeckungsfix mit der jetzt gefundenen Journal-/Magazin-Inventarzuordnung. Beide konkreten Livefehler sind lokal mit echten Exportidentitäten positiv/negativ reproduziert und repariert. Offen ist nur der reale WordPress-Readback von exakt 0.57.39.
+Bestehende Journal-/Magazinartikel können im WordPress-Inventar der PSTE ohne Kategorie/Familie/Artikeltyp erscheinen, obwohl dieselbe Journal-Kategorie im Extension-Routing eindeutig registriert und für Kandidaten korrekt auflösbar ist. Das gefährdet Bestands-/Abdeckungslogik und muss vor der nächsten Produktionswelle geschlossen werden.
 
 ## GENAU EINE NEXT ACTION
 
-`INSTALL_EXACT_05739_THEN_VERIFY_THEMENKARTE_WITHOUT_FULL_REBUILD`
+`FIX_JOURNAL_INVENTORY_MAPPING_THEN_FULL_LOCAL_1TO1_POSITIVE_NEGATIVE`
 
-1. 0.57.38 nicht mehr installieren; exakt `PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip` installieren.
-2. **Keinen** `Gesamtbestand neu abgleichen` starten.
-3. Direkt `SEO Themenengine → Themenkarte` neu laden.
-4. Live-Sichtprüfung:
-   - `Wie alt werden Pferde?` muss als WORDPRESS/PUBLISH mit Kategorie `Pferdegesundheit verstehen` und Typ `Journal` erscheinen;
-   - `Können Pferde schwimmen?` muss mit Kategorie `Pferdewissen & Grundlagen` und Typ `Journal` erscheinen.
-5. Danach `Gesamte Themenkarte exportieren` und einmaliger Live-Readback.
-6. Wenn PASS: ohne weiteren Vollabgleich direkt Redaktionsplan/Artikelproduktion.
+1. Auf Basis von 0.57.38 ausschließlich den bestehenden Read-only-Inventarpfad ergänzen: registrierte Artikeltyp-Erweiterungskategorien müssen bei bestehenden WordPress-Artikeln als gültige Kategorie/Familie/Artikeltyp erkannt werden.
+2. Keine Journal-Kategorie in die normale Produktfamilienstruktur zwängen; vorhandenen Extension-Registry-/Router-Weg nutzen.
+3. Danach **kompletten betroffenen Workflow lokal 1:1** gegen den realen Export simulieren:
+   - bestehender Journalartikel `Wie alt werden Pferde?` → Kategorie 1486 / Journal / Existing;
+   - regulärer FAQ/Beratung/etc.-Artikel → unverändert;
+   - unbekannte/nicht registrierte Kategorie → weiterhin fail-closed/leer, keine erfundene Zuordnung;
+   - mehrere Produktionskategorien → bestehender Hard-Block bleibt;
+   - publish/draft zählen, trash/auto-draft nicht;
+   - 16/16 PSERC-Plan-Abdeckung aus 0.57.38 bleibt PASS;
+   - keine neuen Cross-Topic-Treffer;
+   - Resume-/Incremental-/Provider-/Publish-Grenzen unverändert.
+4. Erst bei vollständigem Positiv-/Negativ-/Regression-PASS genau **einen konsolidierten Kandidaten** ausgeben.
+5. Danach genau ein Live-Readback → Gesamte Themenkarte exportieren → Redaktionsplan → Artikelproduktion.
 
 ## NICHT ANFASSEN
 
