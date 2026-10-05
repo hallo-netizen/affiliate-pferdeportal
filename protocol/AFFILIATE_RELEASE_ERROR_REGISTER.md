@@ -1000,3 +1000,30 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 **Nicht wiederholen:** Zwei unterschiedliche installierbare Builds dürfen niemals dieselbe Versionsnummer tragen. Ein korrigierter einmaliger Migrationslauf benötigt eine neue Versions-/State-Generation.
 
 **Status:** FIXED_SOURCE_AND_ZIP_FULL_E2E_PASS / REAL_WORDPRESS_READBACK_OPEN.
+
+
+## AFF-ERR-049 — Bannerrotation durfte aus der besten Fachstufe in schwächere Fallbackstufen fallen
+
+**Datum:** 05.10.2026.
+
+**Realer Anlass:** Reithelme und Schabracken zeigten live wechselnde, fachlich falsche Banner. Ein früherer Einzel-Crawl war als Live-Oracle unzuverlässig; frische Read-only-Abrufe zeigten ebenfalls wechselnde reale Ausgaben. Entscheidend war deshalb der reproduzierbare Auswahlvertrag gegen den exakten bisherigen Installer.
+
+**Bewiesener Kernfehler 6.72.185:** Bei einem exakten Banner plus mehreren allgemeinen Bannern war Position 1 exact, Position 2 fiel jedoch auf general. Die Rangliste hielt schwächere Relevanzstufen nach der Sortierung weiterhin ausgabefähig, und die zweite Positionsauswahl verlangte einen anderen Banner. Bei nur einem exact wurde daher unzulässig general/technical gewählt.
+
+**Zusatzfehler Pferderassen:** Die historische themenneutrale Rassenregel lag vor der Auswertung einer bereits gespeicherten exakten Zielkante und konnte exact schon an Position 1 neutralisieren.
+
+**NEGATIV-Beweis:** Exakter 6.72.185-Installer SHA `13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28`. Fokussierter Run `37293474957`: Position 1 exact PASS, Position 2 general FAIL, 0 Frontend-HTTP. All-Context-Run `37293850326`: derselbe lower-tier escape auf Startseite, Hub, Kategorie/Produktseite, Kategoriearchiv, klassischen Beiträgen, Journal, Anzeigenmarkt/HivePress, Glossar und Rassen-Übersichten; Rassen-Einzelartikel zusätzlich mit exact-precedence-Fehler.
+
+**KISS-Fix 6.72.186:** Nach dem bestehenden Ranking wird für Banner ausschließlich die beste vorhandene Relevanzstufe im Speicher behalten. Ein einzelner bester Banner bleibt fix; mehrere gleich beste Banner rotieren nur untereinander. Exakte gespeicherte Zielkanten werden bei Pferderassen vor der neutralen Rassenfallbackregel geprüft.
+
+**Performance:** Keine neue DB-Abfrage, kein HTTP, keine Frontend-Ziel-URL-Auswertung. Geschützte Performancefunktionen einschließlich `banner_distribution_reorder_candidates`, `banner_distribution_stable_index` und `render_banner` bleiben gegenüber Baseline `a381aff4eb3f41754186f4bad86ce1a7e0823a29` körperidentisch.
+
+**POSITIV Source:** Run `37295037827`: Universaltest 139/139 PASS, 0 Frontend-HTTP, alter Banner-Gesamttest 21/21 PASS, Ziel-URL-Library 26/26 PASS, Performance-Hardlock PASS.
+
+**POSITIV exakte ZIP:** Run `37295977106`: exakte 6.72.185 zunächst ROT, dieselbe WordPress-Installation nach Upgrade auf gebaute 6.72.186 GRÜN; strict-tier 139/139 PASS; Fresh-ZIP 21/21 + 26/26 PASS; 27/27 Manifest-Byteidentität; PHP 21/21; Performance-Hardlock PASS.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.186.zip`, SHA-256 `1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae`, 793558 Bytes.
+
+**Nicht wiederholen:** Rotation darf niemals eine schwächere Relevanzstufe betreten, solange mindestens ein Kandidat der besseren Stufe vorhanden ist. Ein einzelner best-tier-Banner bleibt fix. Eine Sonderregel für einen Contenttyp darf keine vorhandene exakte gespeicherte Zielkante neutralisieren.
+
+**Status:** NEGATIVE_6_72_185_PROVEN / 6_72_186_SOURCE_AND_EXACT_ZIP_RED_GREEN_PASS / REAL_WORDPRESS_READBACK_OPEN.
