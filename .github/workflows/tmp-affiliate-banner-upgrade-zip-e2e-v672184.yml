@@ -149,17 +149,17 @@ jobs:
           print('PASS performance KISS hardlock')
           PY
 
-      - name: Install WordPress bad baseline 6.72.184
+      - name: Install exact previous 6.72.185 baseline
         shell: bash
         run: |
           set -euo pipefail
           curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
           chmod +x /tmp/wp
-          rm -rf /tmp/wp-site /tmp/base183
-          mkdir -p /tmp/wp-site /tmp/base183
+          rm -rf /tmp/wp-site /tmp/base185
+          mkdir -p /tmp/wp-site /tmp/base185
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate ZIP Upgrade E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 6.72.185 to 6.72.186 E2E' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
           cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
           <?php
@@ -180,12 +180,13 @@ jobs:
               if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
           },1);
           PHP
-          git show 5f28fb69c2bd215e49c44c6e8c26ac7b8836f1bf:release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip > /tmp/bad184.zip
-          echo 'bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06  /tmp/bad184.zip' | sha256sum -c -
-          unzip -q /tmp/bad184.zip -d /tmp/base183
-          cp -a /tmp/base183/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          BASEZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
+          ACTUAL=$(sha256sum "$BASEZIP" | awk '{print $1}')
+          test "$ACTUAL" = '13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28'
+          unzip -q "$BASEZIP" -d /tmp/base185
+          cp -a /tmp/base185/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.184"){exit(2);} echo "PASS bad baseline 6.72.184 active\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS exact baseline 6.72.185 active\n";' --path=/tmp/wp-site
 
       - name: Reproduce failure then upgrade from built ZIP
         shell: bash
