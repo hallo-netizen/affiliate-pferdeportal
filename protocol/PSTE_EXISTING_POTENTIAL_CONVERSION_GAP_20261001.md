@@ -585,3 +585,36 @@ Folge:
 - 0.57.38 darf deshalb nicht als finaler Gesamtstand für die nächste Produktionswelle abgenommen werden.
 - Der Fix muss den bestehenden WordPress-Inventarpfad so ergänzen, dass registrierte Artikeltyp-Erweiterungskategorien (aktuell Journal) als gültige bestehende Artikelkategorien gelesen werden, ohne sie künstlich in die normale Portal-/Produktfamilienstruktur umzubauen.
 - Danach zwingend 1:1 lokal positiv/negativ gegen den realen Export und die echten bestehenden Journalartikel prüfen; keine neue Architektur und kein Vollabgleich nur wegen dieser Zuordnungslücke.
+
+
+## DELTA 2026-10-05 – PSTE 0.57.39 JOURNAL-INVENTAR-ROOTFIX
+
+Kandidat:
+`PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip`
+SHA-256:
+`10a6e28e52639071ccde56d4c96f0ae3a37aae1d93bd8e2c51368f13f8e342f9`
+
+Fix:
+- vorhandene signierte Artikeltyp-Erweiterungskategorien werden read-only im WordPress-Inventar erkannt;
+- kein Umbau der Core-Produktionshierarchie;
+- Themenkarte verwendet den im Inventar gebundenen Artikeltyp;
+- unbekannte/nicht signierte Kategorien bleiben fail-closed unzugeordnet;
+- Kollision Extension-Term-ID/Core-Kategorie blockiert.
+
+1:1 Realtests:
+- 0.57.38 reproduziert Post 15974 und 16029 jeweils ohne Kategorie/Typ/Context-Match;
+- 0.57.39: Post 15974 `Wie alt werden Pferde?` → Kategorie 1486 `Pferdegesundheit verstehen` / Journal / exakt 1 WORDPRESS ANSWER_EQUIVALENT / same_topic_family=true;
+- Post 16029 `Können Pferde schwimmen?` → Kategorie `Pferdewissen & Grundlagen` / Journal / exakt 1 WORDPRESS ANSWER_EQUIVALENT / same_topic_family=true;
+- regulärer Core-Fall unverändert;
+- unbekannte Kategorie bleibt unzugeordnet;
+- Extension/Core-Term-Kollision hard-block.
+
+Regression:
+- 0.57.38 PSERC-Planabdeckungsfix byteidentisch;
+- Normal-Metadata, Repository, Extension-Router, Family-Identity, Title-Pipeline und Context-Evaluator byteidentisch;
+- PHP 81/81 PASS;
+- JSON 54/54 PASS;
+- Fresh-Unpack 136/136 byteidentisch.
+
+Live:
+0.57.39 noch nicht installiert/readback-bestätigt.
