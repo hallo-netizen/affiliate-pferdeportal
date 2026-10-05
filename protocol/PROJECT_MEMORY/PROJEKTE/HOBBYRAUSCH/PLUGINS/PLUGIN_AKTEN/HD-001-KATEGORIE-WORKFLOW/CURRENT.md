@@ -1,58 +1,49 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-05
-STATUS: BLOCKED – WORDPRESS-HIERARCHIEÜBERSETZUNG FALSCH / V1.9.7 VERWORFEN
+STATUS: V1.9.8 HIERARCHIE-PROTOTYP LOKAL HARD PASS / KEIN RELEASE / BUILDER OFFEN
 
-## Livebestand
+## Live
 
-Livebestand unverändert lassen.
+Livebestand unverändert.
+V1.9.7 NICHT installieren.
 
-Beobachtet:
-- `Buchbinden` sichtbar;
-- vorgesehene Unterstruktur nicht als echte WordPress-Hierarchie sichtbar.
+## V1.9.8 lokaler Stand
 
-## Harte Ursache
+Kein neuer Pluginzweig. Exakte Weiterarbeit auf der bestehenden Linie.
 
-Der Pilot übersetzt den Fachbaum derzeit so:
+Bewiesen:
+- native Page-Hierarchie bleibt `post_parent`;
+- Page→Category-Grenze erhält technischen Taxonomie-Bridge;
+- sichtbare Leafs hängen nativ unter diesem Bridge;
+- logische concept_id-/parent_concept_id-Bindung bleibt;
+- Bridge bleibt unsichtbar;
+- Frontend-Renderer liest die echte WordPress-Struktur;
+- Frontend-Struktur ist Teil des Deployment-Readbacks;
+- gleiche kurze Leaf-Namen sind in getrennten Hobby-Kontexten zulässig, bei gleichem Parent weiter BLOCKED;
+- Magazin = eigene hierarchische `journal_cat`;
+- HivePress = eigene `hp_listing_category`;
+- keine Cross-Strang-Leaks.
 
-`Buchbinden [page] → Einstieg/Ausrüstung/Material/Techniken & Praxis [category]`
+Tests:
+- 270/270 PASS.
 
-Der Sollbaum ist dagegen mindestens:
+Echter Buchbinden-Altbestand aus der realen Preview lokal migriert:
+- vier Content-Kategorien behalten ihre IDs;
+- werden nativ unter genau einen Bridge verschoben;
+- sichtbar danach exakt Einstieg / Ausrüstung / Material / Techniken & Praxis;
+- HivePress/Magazin/Bridge unsichtbar im Contentblock;
+- PASS.
 
-`Fertigen [page] → Buch & Papier [page] → Buchbinden [page] → Leaf-Kategorie → Beiträge`
+## Offener Blocker
 
-Der Writer setzt einen nativen Parent nur bei gleichem technischen Ziel:
-- page→page = nativ;
-- category→category = nativ;
-- hp_listing_category→hp_listing_category = nativ;
-- page→category = **nicht nativ**, Term-Parent 0 + nur logische Meta-Bindung.
+`HD001_CONCEPT_BUILDER_FULL_HIERARCHY_NOT_YET_RESOLVED`
 
-## Weitere harte Befunde
-
-- Validator unterstützt Level 1..20.
-- Concept Builder erzeugt trotzdem nur Root-Seite + maximal 4 direkte Kategorien.
-- `MAX_CONTENT_CHILDREN_PER_TOPIC=4`.
-- Zwei Hobbys mit jeweils sichtbarem Leaf `Einstieg` werden aktuell vom APKW-Validator global blockiert.
-- Content und Magazin verwenden aktuell beide WordPress-`category`.
-- HivePress Core konfiguriert Listing-Kategorien hierarchisch; produktiver Site-Readback der Taxonomie-Eigenschaft bleibt vor Nutzung tiefer Ebenen Pflicht.
-- `Techniken & Praxis`: `&amp;` ist WordPress-Core-Speicherescaping, V1.9.4 Readback-Fix korrekt; kein aktueller Strukturblocker.
-
-## V1.9.7
-
-**NICHT INSTALLIEREN.**
-
-Der Frontend-Linkblock wäre nur eine optische Reparatur auf einer nicht zielkonformen technischen Taxonomieübersetzung.
-
-## ERSTER BLOCKER
-
-`HD001_WORDPRESS_HIERARCHY_TRANSLATION_MISMATCH`
+Der Writer kann die gewünschte Tiefe jetzt korrekt abbilden.
+Der alte Builder erzeugt weiterhin nur eine Root-Seite + maximal vier direkte Content-Kategorien.
 
 ## NEXT ACTION
 
-Kein weiterer Installer.
+Builder auf variable 1–3 Page-Ebenen und evidenzgetriebene Leaf-Struktur umbauen und danach gesamten DataForSEO→Frontend-Workflow lokal positiv/negativ durchlaufen lassen.
 
-Zuerst den exakten WordPress-Übersetzungsvertrag für:
-`SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE`
-plus Magazin und HivePress lokal Positiv/Negativ bis Frontend beweisen.
-
-Danach erst minimaler Codefix auf der bestehenden Pluginlinie.
+Kein Installer vor diesem Gesamt-PASS.
