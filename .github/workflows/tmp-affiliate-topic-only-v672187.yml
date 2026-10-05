@@ -147,7 +147,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          sed "s/6\\.72\\.183/6.72.187/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest187.php
-          /tmp/wp eval-file /tmp/dest187.php --path=/tmp/wp187 | tee /tmp/dest187.log
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672187.php" --path=/tmp/wp187 | tee /tmp/dest187.log
           grep -F 'SUMMARY passes=26 failures=0' /tmp/dest187.log
           grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest187.log
