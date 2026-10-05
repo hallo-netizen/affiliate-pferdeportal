@@ -1,0 +1,103 @@
+name: TEMP Affiliate Schabracken Root Cause 6.72.186
+
+on:
+  push:
+    branches: [affiliate-672186-schabracken-rootcause]
+    paths:
+      - '.github/workflows/tmp-affiliate-schabracken-rootcause-v672186.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_real_schabracken_pool_v672186.php'
+
+permissions:
+  contents: read
+
+jobs:
+  rootcause:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact 6.72.186 production ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip
+          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
+          test "$ACTUAL" = '1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae'
+          rm -rf /tmp/z186
+          mkdir -p /tmp/z186
+          unzip -q "$ZIP" -d /tmp/z186
+          grep -F 'Version: 6.72.186' /tmp/z186/affiliate-portal-router/pferdeportal-affiliate-router.php
+          echo "PASS exact 6.72.186 ZIP"
+
+      - name: Install exact WordPress and hierarchy contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-rootcause
+          mkdir -p /tmp/wp-rootcause
+          /tmp/wp core download --path=/tmp/wp-rootcause --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-rootcause --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-rootcause --url=http://127.0.0.1:8080 --title='Schabracken Root Cause' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-rootcause/wp-content/mu-plugins
+          cat >/tmp/wp-rootcause/wp-content/mu-plugins/pferde-real-hierarchy-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){
+                      $p=get_post((int)$page_id); if(!$p)return '';
+                      $parent=(int)$p->post_parent;
+                      if($parent<=0)return 'hub1';
+                      $pp=get_post($parent);
+                      if($pp && (int)$pp->post_parent===0)return 'hub2';
+                      return 'category';
+                  }
+              }
+          }
+          PHP
+          cp -a /tmp/z186/affiliate-portal-router /tmp/wp-rootcause/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-rootcause
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.186"){exit(2);} echo "PASS 6.72.186 active\n";' --path=/tmp/wp-rootcause
+
+      - name: Run real observed pool diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_real_schabracken_pool_v672186.php" --path=/tmp/wp-rootcause | tee /tmp/rootcause.log
+          grep -F 'PASS GUARDIAN_is_general' /tmp/rootcause.log
+          grep -F 'PASS REITHELM_target_page_186' /tmp/rootcause.log
+          grep -F 'PASS SCHABRACKEN_has_no_exact_or_extended_candidate_in_observed_real_pool' /tmp/rootcause.log
+          grep -F 'PASS SCHABRACKEN_best_available_band_is_general' /tmp/rootcause.log
+          grep -F 'PASS REITHELME_selects_exact_322674' /tmp/rootcause.log
+          grep -F 'PASS FRONTEND_zero_http_calls' /tmp/rootcause.log
+          grep -F 'REAL_SCHABRACKEN_POOL_ROOTCAUSE_672186_PASS' /tmp/rootcause.log
+          echo "===== CLASSIFY ====="
+          grep '^CLASSIFY ' /tmp/rootcause.log
+          echo "===== RANKS ====="
+          grep -E '^(RAW193|STRICT193|SELECT193|RAW186|STRICT186|SELECT186)' /tmp/rootcause.log
+
+      - name: Prove no production mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- release/affiliate-zentrale/current/affiliate-portal-router release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip
+          echo "PASS production unchanged"
