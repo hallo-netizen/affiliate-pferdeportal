@@ -1,92 +1,90 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-05
-STATUS: V1.9.4 INSTALLIERT / NICHT FRONTEND-PUBLISHED ABGENOMMEN / V1.9.6 LOKAL HARD PASS
+STATUS: LIVE-FEHLER REPRODUZIERT / V1.9.7 FRONTEND-ENDSTATE LOKAL HARD PASS / LIVE-UPDATE OFFEN
 
-## Ausgangslage
+## Reale Live-Wahrheit
 
-V1.9.4 ist der installierte Produktionsstand.
+Aktuell beobachtet:
+- `Buchbinden` ist im Frontend sichtbar;
+- direkte Unterkategorien sind dort nicht sichtbar.
 
-Bisher bewiesen:
-- DataForSEO live angebunden;
-- Buchbinden Research PASS;
-- WordPress-Write + technischer Readback PASS.
+Damit ist der bisherige Workflow trotz technischem Write-/Readback **nicht end-to-end abgenommen**.
 
-Nicht bewiesen:
-- veröffentlichte Frontend-Struktur;
-- sichtbare Navigation.
+## Root Cause
 
-Der frühere Begriff „Deployment abgeschlossen“ darf deshalb nicht als „veröffentlicht“ gelesen werden.
+`Buchbinden` = WordPress-Seite.
+Direkte Kinder = WordPress-Taxonomie-Terme.
 
-## V1.9.6 Kandidat
+Cross-Adapter-Parenting wurde bisher nur logisch über `_apkw_parent_concept_id` gespeichert.
+Es existierte kein persistenter Frontend-Renderer für diese Beziehung.
+
+Der bisherige Readback prüfte die WordPress-Objekte und Metadaten, nicht den tatsächlichen sichtbaren Seiteninhalt.
+
+## V1.9.7
 
 Gleiche Pluginlinie, kein Zusatzplugin.
 
-### Publish
-- WordPress-Seiten Zielstatus `publish`;
-- Draft→Publish kontrolliert migrierbar;
-- Status Bestandteil von Preflight/Fingerprint/Readback;
-- Statusabweichung fail-closed + Rollback.
+Gezielter Fix:
+- persistenter verwalteter Kinderblock im `post_content` der Elternseite;
+- direkte Content-Kinder werden dort mit echten WordPress-Links ausgegeben;
+- HivePress-/Marketplace- und Magazin-Knoten werden ausgeschlossen;
+- redaktioneller Inhalt außerhalb des Blocks bleibt erhalten;
+- Sparse-Erweiterung ergänzt/ändert nur den Block;
+- keine automatische Löschung;
+- kein Laufzeit-Frontendfilter;
+- Block gehört zum strukturellen Readback;
+- Frontend-Mismatch → Rollback.
 
-### Keine Freigabeschleifen
-- fachliche/technische Gates bleiben;
-- signierte Receipts werden im Normalweg automatisch nach Hard-PASS erzeugt;
-- keine zusätzliche Benutzer-Review-Schleife.
+## Harte Positiv-/Negativ-E2E
 
-### Inkrementelle Erweiterung
-Contract:
-`APKW_INCREMENTAL_CATEGORY_EXTENSION_V1`
+Vor Fix:
+- Write PASS;
+- technischer Readback PASS;
+- Publish-Status PASS;
+- Frontend FAIL wegen leerem Seiteninhalt.
 
-Regeln:
-- Sparse Extension enthält nur neue/geänderte Knoten;
-- Merge immer gegen produktive Baseline;
-- bestehende nicht genannte Knoten bleiben erhalten;
-- kein automatisches Delete/Retirement;
-- project_id muss passen;
-- optionaler Baseline-Hash muss passen;
-- Parent muss in Baseline oder Extension existieren;
-- vollständiger gemergter Baum durchläuft danach die bestehenden Validator-/Research-/Deployment-Gates;
-- Writer schreibt am Ende nur CREATE/UPDATE/ADOPT/UNCHANGED-Deltas.
+Nach Fix mit echter Buchbinden-Topologie:
+- Einstieg sichtbar/verlinkt PASS;
+- Ausrüstung sichtbar/verlinkt PASS;
+- Material sichtbar/verlinkt PASS;
+- Techniken & Praxis sichtbar/verlinkt PASS;
+- Buchbinden Set nicht im Contentblock PASS;
+- Buchbinden Online nicht im Contentblock PASS;
+- Idempotenz PASS;
+- spätere zusätzliche Kategorie ohne Gesamtumbau PASS;
+- bestehender Seiteninhalt erhalten PASS;
+- Managed-Block-Tamper BLOCKED;
+- kaputte Marker BLOCKED;
+- Frontend-Endzustand manipuliert → Readback FAIL + Rollback PASS;
+- Rename/Delta ohne Parent-Neuaufbau PASS.
 
-### Realer Buchbinden-Merge-Test
-
-Echte Preview-Baseline:
-7 Knoten.
-
-Test-Extension:
-1 synthetischer neuer Kindknoten.
-
-Ergebnis:
-- 7 UNCHANGED;
-- 1 ADDED;
-- 0 RETIRED;
-- automatic_delete=false;
-- PASS.
-
-## Tests
-
-- 263/263 PASS;
-- Fresh Source 263/263 PASS;
+Gesamtsuite:
+- 275/275 PASS;
+- Fresh Source 275/275 PASS;
 - Runtime-Parität 23/23 PASS;
+- Source PHP 17/17 PASS;
 - Installer PHP 17/17 PASS.
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.6_INCREMENTAL_EXTENSION_DIRECT_PUBLISH_HARD_PASS.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.7_FRONTEND_ENDSTATE_HARD_PASS.zip`
 
 Installer SHA-256:
-`22d63c37ef61b42452751d40bb3fee11b7048241fb94e0706b76e5b5c8df8dc8`
+`89790e0b12b4c72c96c8c5a9387dabc160c21707d6147e65898303eef70a0f40`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.6_INCREMENTAL_EXTENSION_DIRECT_PUBLISH_HARD_PASS.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.7_FRONTEND_ENDSTATE_HARD_PASS.zip`
 
 Source SHA-256:
-`59d39226f2ef2f3ebaf97fb3802348677368e7ed07c48f9eacfeb20b16c3bfc8`
+`7d324512d2d0e89faac82be50b54bd580facb4e2eef782eba32ab0ce8378af1a`
 
 ## Beleggrenze
 
-V1.9.6 ist noch nicht live installiert.
-Keine Behauptung von Publish/Frontend-PASS vor realem WordPress-Readback.
+Noch kein Live-PASS für V1.9.7.
+Keine weitere Version bauen, bevor der reale Frontend-Readback dieses exakt simulierte Ergebnis bestätigt oder widerlegt.
 
 ## NEXT ACTION
 
-V1.9.6 installieren → Kategorien → **„Bestehenden Stand jetzt veröffentlichen“** → Readback prüfen.
+V1.9.7 installieren → bestehenden Buchbinden-Stand einmal veröffentlichen/republishen → Frontend prüfen.
+
+PASS nur wenn Buchbinden im sichtbaren Seiteninhalt exakt die vier direkten Content-Kinder zeigt.
