@@ -35,3 +35,14 @@ The transport/root cause is now narrower than before:
 - Live ADCELL POST proof 2026-10-05T15:44:00Z.
 - Live ADCELL category route-family probe 2026-10-05T15:51:05Z.
 - Official ADCELL API v2 documentation entry page.
+
+
+## Public research exhaustion
+Research after the live route-family proof found no public authoritative parameter contract for `/affiliate/promotion/getPromotionCategories`.
+
+- Official ADCELL API v2 documentation is reachable but authentication-gated.
+- Public web search, GitHub code search and archive/cache search produced no authoritative request schema for this method.
+- Public HKM/ADCELL promotion pages confirm the programme and banner inventory but do not expose the promotion-category API request schema.
+- Existing live probe already received a structured validation payload: response `data` had index `0`, but the diagnostic summarizer preserved only the key and discarded the value.
+- Therefore the next and only justified diagnostic step is to repeat the same already-proven `getPromotionCategories` request and preserve the existing validation detail from `data[0]`.
+- This step must not try alternative parameter names, start a sync, write database state, follow tracking links, or modify production source.
