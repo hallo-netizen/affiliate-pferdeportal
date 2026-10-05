@@ -148,7 +148,8 @@ ck($max193<200,'SCHABRACKEN_has_no_exact_or_extended_candidate_in_observed_real_
 ck($max193===100,'SCHABRACKEN_best_available_band_is_general','max='.$max193);
 ck($max186>=500,'REITHELME_has_exact_candidate','max='.$max186);
 $sel186id=(string)($sel186['campaign']['id']??'');
-ck(strpos($sel186id,'322674')!==false,'REITHELME_selects_exact_322674',$sel186id);
+$sel186dest=(string)($sel186['campaign']['destination_url']??'');
+ck(strpos($sel186dest,'/reithelme-sicherheitswesten/reithelme.html')!==false,'REITHELME_selects_exact_322674',$sel186id.' '.$sel186dest);
 ck($http===0,'FRONTEND_zero_http_calls','http='.$http);
 
 echo 'SUMMARY passes='.(10-count($GLOBALS['fails'])).' failures='.count($GLOBALS['fails'])."\n";
