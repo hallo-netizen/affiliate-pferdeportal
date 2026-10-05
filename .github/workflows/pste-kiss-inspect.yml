@@ -27,3 +27,5 @@ jobs:
           B="$(find /tmp/pserc2 -type f -name 'class-pserc-seo-source-binding.php' | head -1)"
           test -n "$B"
           sed -n '1,360p' "$B"
+          echo '=== CAPABILITY CONTRACT ==='
+          cat "$(find /tmp/pserc2 -type f -path '*/contracts/seo-engine-capability-binding-v2.json' | head -1)"
