@@ -3198,13 +3198,13 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     /**
-     * V6.72.184 KISS – bestehende Banner einmalig in die autoritative
+     * V6.72.185 KISS – bestehende Banner einmalig in die autoritative
      * Creative-Library-Zielzuordnung ueberfuehren. Ausschliesslich Banner,
      * ausschliesslich Hintergrundarbeit, kein Frontend-Scan und keine Provider-
      * Remoteaufrufe. Produktreihen bleiben unberuehrt.
      */
-    public function ensure_banner_library_migration_v672184() {
-        if (self::VERSION !== '6.72.184' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+    public function ensure_banner_library_migration_v672185() {
+        if (self::VERSION !== '6.72.185' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
         $state = sanitize_key((string)get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_STATE, ''));
         if ($state === 'done') { return; }
         if ($state !== 'running') {
@@ -3216,8 +3216,8 @@ trait PPAR_Automation_Suite_Trait {
         }
     }
 
-    public function run_banner_library_migration_v672184() {
-        if (self::VERSION !== '6.72.184' || !method_exists($this, 'creative_library_table') || !method_exists($this, 'output_plan_creative')) { return; }
+    public function run_banner_library_migration_v672185() {
+        if (self::VERSION !== '6.72.185' || !method_exists($this, 'creative_library_table') || !method_exists($this, 'output_plan_creative')) { return; }
         global $wpdb;
         $table = $this->creative_library_table();
         $cursor = absint(get_option(self::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR, 0));
@@ -3266,9 +3266,9 @@ trait PPAR_Automation_Suite_Trait {
             $more = count($rows) === $limit;
         } while ($more && microtime(true) < $deadline);
 
-        $previous = get_option('ppar_banner_library_migration_result_v672184', array());
+        $previous = get_option('ppar_banner_library_migration_result_v672185', array());
         $previous = is_array($previous) ? $previous : array();
-        update_option('ppar_banner_library_migration_result_v672184', array(
+        update_option('ppar_banner_library_migration_result_v672185', array(
             'processed'=>absint($previous['processed'] ?? 0) + $processed,
             'materialized'=>absint($previous['materialized'] ?? 0) + $materialized,
             'cursor'=>$last,
@@ -3293,11 +3293,11 @@ trait PPAR_Automation_Suite_Trait {
         $running_state = 'running:' . self::VERSION;
         if ($state === self::VERSION || $state === $running_state) { return; }
 
-        // V6.72.184 ist bewusst ein reines Banner-Migrationsrelease. Der bisherige
+        // V6.72.185 ist bewusst ein reines Banner-Migrationsrelease. Der bisherige
         // Versionswechsel-Nachlauf ueber den gesamten Creative-Pool (inkl. tausender
         // Produktzeilen) ist hier unnoetig. Der dedizierte Bannerworker oben ist die
         // einzige Migration; eBay/Idealo/Produkte werden nicht neu geplant.
-        if (self::VERSION === '6.72.184') {
+        if (self::VERSION === '6.72.185') {
             if (function_exists('wp_clear_scheduled_hook')) { wp_clear_scheduled_hook(self::FULL_POOL_WORKER_HOOK); }
             delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
             update_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION, self::VERSION, false);
