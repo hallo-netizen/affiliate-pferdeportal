@@ -4582,7 +4582,7 @@ JS;
         return array_values($image_ready);
     }
 
-private function banner_strict_best_relevance_tier_v672186($candidates, $slot_type) {
+private function banner_strict_best_relevance_tier_v672187($candidates, $slot_type) {
         $candidates = array_values((array) $candidates);
         if (!$candidates || $this->slot_required_creative_type($slot_type) !== 'banner') {
             return $candidates;
@@ -4593,6 +4593,16 @@ private function banner_strict_best_relevance_tier_v672186($candidates, $slot_ty
         // vorhandene Stufe bleibt ausgabefaehig. Reine In-Memory-Filterung:
         // keine DB-Abfrage, kein HTTP, keine URL-Neuklassifikation.
         $best_band = $this->banner_distribution_relevance_band((int) ($candidates[0]['specificity'] ?? 0));
+
+        // V6.72.187: Automatische Banner duerfen auf fachlich gebundenen
+        // Portalplaetzen niemals aus einem portalweiten General-/Technical-Pool
+        // kommen. Ohne mindestens echten Themenkreis (>=200) bleibt der Slot leer.
+        // Manuelle FIXED-Zuweisungen laufen separat ueber fixed_campaign_selection()
+        // und sind hiervon bewusst nicht betroffen.
+        if ($best_band < 3) {
+            return array();
+        }
+
         $best = array();
         foreach ($candidates as $candidate) {
             if (!is_array($candidate)) { continue; }
@@ -4607,7 +4617,7 @@ private function banner_strict_best_relevance_tier_v672186($candidates, $slot_ty
 private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaign_id = '') {
         if (!$this->ranked_campaigns_request_cache_allowed()) {
             $result = $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
-            return $this->banner_strict_best_relevance_tier_v672186($result, $slot_type);
+            return $this->banner_strict_best_relevance_tier_v672187($result, $slot_type);
         }
         $cache_key = $this->ranked_campaigns_request_cache_key($context, $slot_type, $forced_campaign_id);
         if (array_key_exists($cache_key, $this->ranked_campaigns_request_cache)) {
@@ -4626,7 +4636,7 @@ private function ranked_campaigns_for_slot($context, $slot_type, $forced_campaig
         }
 
         $result = $this->ranked_campaigns_for_slot_uncached($context, $slot_type, $forced_campaign_id);
-        $result = $this->banner_strict_best_relevance_tier_v672186($result, $slot_type);
+        $result = $this->banner_strict_best_relevance_tier_v672187($result, $slot_type);
         $this->ranked_campaigns_request_cache[$cache_key] = $result;
         return $result;
     }
