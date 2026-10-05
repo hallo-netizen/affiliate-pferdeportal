@@ -1,0 +1,150 @@
+name: TEMP Affiliate Verify 6.72.187
+on:
+  push:
+    branches: [affiliate-672186-schabracken-rootcause]
+    paths:
+      - '.github/workflows/tmp-affiliate-build-v672187.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_realstate_v672186.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_realstate_v672187.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672187.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672187.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672187.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build and verify ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "Version: 6.72.187" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          (cd release/affiliate-zentrale/current && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/MANIFEST187.txt
+          test "$(grep -cve '^[[:space:]]*$' /tmp/MANIFEST187.txt)" = 27
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.187.zip affiliate-portal-router)
+          rm -rf /tmp/z187 && mkdir -p /tmp/z187
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.187.zip -d /tmp/z187
+          test "$(find /tmp/z187/affiliate-portal-router -type f | wc -l)" = 27
+          find /tmp/z187/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l >/tmp/lint187
+          test "$(grep -c '^No syntax errors detected' /tmp/lint187)" = 21
+          (cd /tmp/z187 && sha256sum $(find affiliate-portal-router -type f | sort)) >/tmp/ZIPMANIFEST187.txt
+          diff -u /tmp/MANIFEST187.txt /tmp/ZIPMANIFEST187.txt
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.187.zip
+          stat -c%s /tmp/AFFILIATE_ZENTRALE_6.72.187.zip
+      - name: Performance hardlock
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          cur=Path('/tmp/z187/affiliate-portal-router/pferdeportal-affiliate-router.php').read_text()
+          old=subprocess.check_output(['git','show','a381aff4eb3f41754186f4bad86ce1a7e0823a29:release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'],text=True)
+          def body(src,n):
+              s=src.find('function '+n+'('); b=src.find('{',s); d=0; st='c'; esc=False; i=b
+              if s<0: raise SystemExit('missing '+n)
+              while i<len(src):
+                  x=src[i]; y=src[i+1] if i+1<len(src) else ''
+                  if st=='sq':
+                      if esc: esc=False
+                      elif x=='\\': esc=True
+                      elif x=="'": st='c'
+                  elif st=='dq':
+                      if esc: esc=False
+                      elif x=='\\': esc=True
+                      elif x=='"': st='c'
+                  elif st=='ln':
+                      if x=='\n': st='c'
+                  elif st=='bl':
+                      if x=='*' and y=='/': st='c'; i+=1
+                  else:
+                      if x=="'": st='sq'
+                      elif x=='"': st='dq'
+                      elif x=='/' and y=='/': st='ln'; i+=1
+                      elif x=='#': st='ln'
+                      elif x=='/' and y=='*': st='bl'; i+=1
+                      elif x=='{': d+=1
+                      elif x=='}':
+                          d-=1
+                          if d==0:return src[s:i+1]
+                  i+=1
+              raise SystemExit('unclosed '+n)
+          protected=['ranked_campaigns_request_cache_allowed','ranked_campaign_sanitize_key_request_cached','ranked_campaign_sanitize_text_request_cached','ranked_campaigns_request_cache_key','select_category_product_campaign_fast_v672171','ranked_campaign_candidate_pool','category_product_provider_mix_v672133','render_banner','banner_distribution_reorder_candidates','banner_distribution_stable_index','category_product_shared_rank_base']
+          for n in protected:
+              if body(cur,n)!=body(old,n): raise SystemExit('FAIL protected '+n)
+          for n in ['banner_strict_best_relevance_tier_v672187','ranked_campaigns_for_slot','select_campaign_for_slot_position']:
+              x=body(cur,n)
+              for bad in ['$wpdb','get_post_meta(','get_posts(','get_option(','wp_remote_','output_plan_creative(']:
+                  if bad in x: raise SystemExit('FAIL frontend cost '+n+' '+bad)
+          print('PASS performance hardlock')
+          PY
+      - name: Install exact 6.72.186 and reproduce RED
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wpup /tmp/z186 && mkdir -p /tmp/wpup /tmp/z186
+          /tmp/wp core download --path=/tmp/wpup --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wpup --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wpup --url=http://127.0.0.1 --title=test --admin_user=admin --admin_password=testpass --admin_email=ci@example.test --skip-email
+          B=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip
+          test "$(sha256sum "$B"|awk '{print $1}')" = 1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae
+          unzip -q "$B" -d /tmp/z186
+          cp -a /tmp/z186/affiliate-portal-router /tmp/wpup/wp-content/plugins/
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wpup
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_realstate_v672186.php" --path=/tmp/wpup | tee /tmp/red186
+          grep -F REALSTATE_672186_RED_SEED_PASS /tmp/red186
+      - name: Same database built ZIP GREEN
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wpup/wp-content/plugins/affiliate-portal-router
+          cp -a /tmp/z187/affiliate-portal-router /tmp/wpup/wp-content/plugins/
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.187")exit(2);' --path=/tmp/wpup
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_realstate_v672187.php" --path=/tmp/wpup | tee /tmp/green187
+          grep -F 'PASS GREEN_187_reithelme_exact' /tmp/green187
+          grep -F 'PASS GREEN_187_schabracken_no_cross_topic_banner' /tmp/green187
+          grep -F 'PASS PERF_full_pool_worker_cancelled' /tmp/green187
+          grep -F 'PASS EBAY_product_unchanged' /tmp/green187
+          grep -F 'PASS IDEALO_product_unchanged' /tmp/green187
+          grep -F REALSTATE_672186_TO_672187_RED_GREEN_PASS /tmp/green187
+      - name: Fresh built ZIP all-context regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wordpress2; CREATE DATABASE wordpress2; GRANT ALL ON wordpress2.* TO 'wordpress'@'%'; FLUSH PRIVILEGES;"
+          rm -rf /tmp/wpf && mkdir -p /tmp/wpf
+          /tmp/wp core download --path=/tmp/wpf --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wpf --dbname=wordpress2 --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wpf --url=http://127.0.0.1 --title=test --admin_user=admin --admin_password=testpass --admin_email=ci@example.test --skip-email
+          cp -a /tmp/z187/affiliate-portal-router /tmp/wpf/wp-content/plugins/
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wpf
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672187.php" --path=/tmp/wpf | tee /tmp/all187
+          grep -F 'SUMMARY187 {"scenarios":16,"passes":185,"failures":0,"http":0}' /tmp/all187
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672187.php" --path=/tmp/wpf | tee /tmp/full187
+          grep -F 'SUMMARY passes=21 failures=0' /tmp/full187
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672187.php" --path=/tmp/wpf | tee /tmp/dest187
+          grep -F 'SUMMARY passes=26 failures=0' /tmp/dest187
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-672187-tested
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.187.zip
+          compression-level: 0
