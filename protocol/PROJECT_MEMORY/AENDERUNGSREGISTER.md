@@ -531,3 +531,28 @@ Source SHA-256 `340af0e4927971c746d97ba2aad8bab1e7efc269c70e12d21319734e7a363c10
 
 GRENZE:
 Noch kein V1.9.8-Live-PASS. Nächste Aktion ist ausschließlich Installation plus realer WordPress-/Frontend-Readback.
+
+
+## HOBBYRAUSCH-HD001-20261005-G – Pferdeatelier-Taxonomie statt technischer Bridge
+
+WAS:
+Nach erneuter harter Prüfung der real funktionierenden Pferdeatelier-Struktur wurde das V1.9.8-Bridge-Modell verworfen. V1.9.9 bildet die WordPress-Übersetzung nach dem bewährten Pferdeatelier-Prinzip ab.
+
+WARUM:
+Im Pferdeatelier sind Level-4-Themenkategorien echte Root-Terms der WordPress-Taxonomie category (`parent_slug=""` / technisch parent=0). Ihre Zugehörigkeit zur Level-3-Seite wird über Produkt-/Kontextschlüssel und den Renderer hergestellt. V1.9.8 hatte fälschlich zusätzliche technische Bridge-Terme eingeführt.
+
+REGEL:
+- Level 1–3 = native WordPress-Seiten;
+- Level 4 = echte Root-category-Terme;
+- kein technischer Bridge;
+- logische Seitenbindung bleibt stabil;
+- Speichername/Slug müssen kontextuell eindeutig sein;
+- sichtbares Frontend-Label darf kurz bleiben;
+- Magazin und HivePress bleiben technisch getrennt;
+- bestehende IDs dürfen bei Migration nicht unnötig ersetzt werden.
+
+EVIDENZ:
+270/270 Regression PASS; Full Builder PASS; echter Buchbinden-Altbestand PASS; kompletter Positiv-E2E PASS; kompletter Negativ-E2E PASS; Fresh-Unpack erneut PASS; Runtime-Parität 19/19; Installer PHP 19/19 PASS.
+
+WICHTIG:
+Der zuvor behauptete einzelne `full-e2e-positive.php`-PASS war nicht belastbar; standalone fiel er auch in der unveränderten alten V1.9.8-Quelle an der DataForSEO-Evidenzbindung durch. Dieser Scheintest wurde im V1.9.9-Abschlusslauf korrigiert und durch einen standalone grün laufenden Gesamt-E2E ersetzt.
