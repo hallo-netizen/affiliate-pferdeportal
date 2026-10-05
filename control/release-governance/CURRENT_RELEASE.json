@@ -632,8 +632,8 @@
   },
   "execution_state": {
     "state": "ADCELL_6_72_187_ROOTFIX_SOURCE_GATES_OPEN",
-    "authorized_next_action": "RUN_6_72_187_CURRENT_SOURCE_GATES_THEN_BUILD_EXACT_ZIP_AND_REQUIRE_REAL_LIVE_READBACK",
-    "bound_user_scope_action": "Root cause is proven: ADCELL banner import works, but getPromoCategories was called with GET and live returns HTTP 405. 6.72.187 binds POST only for that endpoint and schedules one ADCELL background resync because the old 6.72.88 resync is already done. Do not change banner ranking, frontend hotpaths, AWIN, eBay, Digistore24, Idealo, or other provider adapters in this fix.",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Run the bound 6.72.187 source gates only. Proven root cause/fix scope remains ADCELL getPromoCategories GET->POST plus one-time ADCELL topic resync. No banner-ranking, frontend-hotpath, or other-provider changes.",
     "completion_condition": "SOURCE_AND_ZIP_WORDPRESS_MARIADB_GATES_PASS_AND_LIVE_REITHELME_186_NO_LONGER_FALLS_BACK_BECAUSE_322674_LACKS_CATEGORY_METADATA",
     "after_completion_action": "THEN_AUDIT_ALL_PROVIDERS_AGAINST_ONE_PROVIDER_NEUTRAL_IMPORT_SIGNAL_CONTRACT_WITHOUT_REOPENING_THE_PROVEN_ADCELL_FIX",
     "no_optional_detours": true,
