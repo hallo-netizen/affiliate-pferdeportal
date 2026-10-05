@@ -3,68 +3,86 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: HD-001 V1.9.4 LIVE-BASIS / DATAFORSEO LIVE-ANBINDUNG BEWIESEN / DIREKTE KATEGORIEARBEIT AKTIV
+STATUS: V1.9.4 LIVE PASS / V1.9.5 DIRECT-PUBLISH-KANDIDAT LOKAL HARD PASS / LIVE-INSTALLATION NÄCHSTES
 
 ## Harte Abnahmeregel
 
-**Keine Datei, kein Pluginstand und kein Produktionsschritt gilt als abnahmefähig ohne dokumentierte lokale Positiv- UND Negativsimulation.**
+**Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation und realen WordPress-/Frontend-Readback.**
 
-## Verbindlicher Zielvertrag
+## Zielvertrag
 
 `ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-Ziel:
-Konzept → DataForSEO → konkrete sichtbare Namen und Hierarchie → Hauptportal + Magazin + HivePress → WordPress → Publish → Frontend-Navigation → Readback.
+Ziel bleibt:
+Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → Frontend-Navigation → Readback.
 
-## Belastbarer Live-Ausgangsstand
+## Live-Basis
 
-HD-001 V1.9.4 bleibt produktiv:
-- Buchbinden-Pilot live;
-- Deployment PASS;
-- Schreiben + Readback PASS;
+Installiert bleibt bis zum realen Update:
+`Affiliate-Portal Kategorie-Workflow V1.9.4`
+
+Buchbinden:
+- Research COMPLETE;
+- Deployment + Readback PASS;
+- bestehender Bestand bleibt erhalten;
 - kein Rollback.
 
-## DataForSEO – live bewiesener WordPress-Weg
+DataForSEO ist im WordPress-Backend real angebunden und live bewiesen.
 
-DataForSEO ist über das Kategorie-Plugin im WordPress-Backend real angebunden und wurde live benutzt.
+## Exakte Source-Bindung wiedergefunden
 
-Beleg 2026-09-28:
-- DataForSEO-Verbindung PASS;
-- kostenlose Konzept-Vorprüfung PASS;
-- SEO-Erstentwurf erfolgreich;
-- 4 Paid-Calls;
-- Gesamtkosten 0.06804 USD;
-- Overview 17 Treffer;
-- je 50 Suggestions für `kerzen gießen`, `kerzen selber machen`, `buchbinden`.
+Die echte V1.9.4-Source und der echte Installer wurden im Campus-Archiv der Library gefunden und lokal bytegenau gebunden.
 
-Beleg 2026-09-30:
-- Buchbinden Research LIVE COMPLETE;
-- Global-Coverage erledigt;
-- Detailresearch erledigt;
-- Spezialisierungs-Tiefenprüfung 5/5 Content-Knoten erledigt.
+V1.9.4 Source SHA-256:
+`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`
 
-Damit ist fehlender DataForSEO-Zugang ausdrücklich **KEIN Blocker**.
+V1.9.4 Installer SHA-256:
+`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
 
-## Source-Bytes
+Der frühere Source-Blocker ist damit geschlossen.
 
-Die fehlenden V1.9.4-Source-Bytes blockieren nur einen Code-Umbau des Plugins.
-Sie blockieren **nicht** den bestehenden live bewiesenen DataForSEO-Researchweg im installierten Plugin.
+## V1.9.5 – lokaler Kandidat
+
+KISS-Delta auf exakt V1.9.4:
+- DataForSEO-/Research-/Ownership-Kern nicht umgebaut;
+- WordPress-Seiten werden direkt `publish`;
+- bestehende V1.9.4-Draft-Seiten können über exakt gebundene Final-/Research-Pakete sicher auf Publish migrieren;
+- Publish-Status ist Teil von Plan/Fingerprint/Readback;
+- Statusfehler → fail-closed + automatischer Rollback;
+- im Normalweg werden Initial-/Global-/Final-Receipts nach vollständigem Hard-PASS automatisch serverseitig signiert;
+- keine zusätzliche menschliche Review-/Deploy-Freigabeschleife im Normalweg;
+- bereits `deployed` stehender V1.9.4-Bestand erhält direkten Publish-Migrationsweg ohne Research-Neustart.
+
+Lokale Abnahme:
+- V1.9.4 Baseline vor Änderung: 251/251 PASS;
+- V1.9.5 aktuell: 256/256 PASS;
+- Fresh-Source: 256/256 PASS;
+- Source↔Installer Runtime: 22/22 byteidentisch;
+- Production PHP-Lint Source: 17/17 PASS;
+- Installer PHP-Lint: PASS.
+
+V1.9.5 Installer SHA-256:
+`9108b69487ec50fa36def974bfe0c12b5edfc8d099b3eda2c71e4fe0035f470c`
+
+V1.9.5 Source SHA-256:
+`70846ca354165e7ca8a85f59b870ca3aa3707c7f2645810842f440433404dd85`
+
+## Weiterhin offen für das Gesamtziel
+
+Der alte Concept-Builder erzeugt noch nicht den vollständigen Portalbaum der acht Hauptwelten; der reale Buchbinden-Pilot beginnt technisch erst bei `Buchbinden`.
+Die konzeptionelle obere Kette ist:
+`Fertigen → Buch & Papier → Buchbinden`.
+
+Frontend-Design/Navigation ist im Hobby-Depot-Campus noch nicht gebunden. Deshalb wird kein Theme-/Menüslot geraten.
 
 ## NEXT ACTION
 
-KISS:
-den bestehenden HD-001-/DataForSEO-Weg direkt für die fertige Hobby-Depot-Kategoriearbeit benutzen.
+V1.9.5 im WordPress-Backend über V1.9.4 installieren.
 
-Keine neue Konzeptphase.
-Keine Ersatz-Taxonomie.
-Keine externe Keyword-Schätzung.
-Keine neue Architektur.
+Danach in `Kategorien` beim bereits `deployed` Buchbinden-Stand:
+**„Bestehenden Stand direkt veröffentlichen“**.
 
-Aus dem fertigen Konzept und realer DataForSEO-Evidenz unmittelbar den gemeinsamen Zielbaum für:
-1. Hauptportal / Hobbywelten;
-2. Magazin / Journal;
-3. HivePress / Anbieter
+Dieser Schritt darf keine neue Recherche starten und keine Kategorie neu erfinden.
+Er muss den gebundenen Livebestand prüfen, notwendige Draft-Seiten auf Publish setzen und anschließend Readback liefern.
 
-ableiten und erst danach gegen Dubletten, Parent-/Child-Fehler und Kannibalisierung prüfen.
-
-Wenn der bestehende V1.9.4-Workflow den vollständigen Zielbaum technisch nicht ausdrücken kann, ist genau diese belegte Funktionsgrenze der erste technische Blocker; nicht die DataForSEO-Anbindung.
+Erst nach diesem realen Publish-Readback: Frontend-Sichtprüfung und danach Erweiterung des Builders auf den vollständigen acht-Welten-Baum.
