@@ -3,104 +3,116 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: V1.9.4 INSTALLIERT / FRONTEND-PUBLISH NOCH NICHT PASS / V1.9.6 INKREMENTELLER KANDIDAT LOKAL HARD PASS
+STATUS: LIVE: BUCHBINDEN SICHTBAR / UNTERKATEGORIEN NICHT SICHTBAR / V1.9.7 FRONTEND-ENDSTATE LOKAL HARD PASS / LIVE-UPDATE OFFEN
 
 ## Harte Abnahmeregel
 
-**Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation und realen WordPress-/Frontend-Readback.**
+**Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation bis zum sichtbaren Frontend-Endzustand und anschließenden realen WordPress-/Frontend-Readback.**
+
+Ein technischer WordPress-Objekt-Readback allein ist ausdrücklich **kein PASS**.
 
 ## Zielvertrag
 
 `ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
 Ziel:
-Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → Frontend-Navigation → Readback.
+Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → sichtbare Frontend-Struktur/Navigation → Readback.
 
-## Tatsächlicher aktueller Livezustand
+## Tatsächlich beobachteter Livezustand
 
-Installiert ist weiterhin der bestehende V1.9.4-Bestand.
+Am 2026-10-05 real im Frontend beobachtet:
+- Seite `Buchbinden` ist sichtbar;
+- die vorgesehenen direkten Content-Kinder `Einstieg`, `Ausrüstung`, `Material`, `Techniken & Praxis` sind auf der Buchbinden-Seite **nicht sichtbar**;
+- damit ist der bisherige Endzustand **NICHT PASS**.
 
-Wichtig:
-- WordPress-Objekte wurden geschrieben und technisch zurückgelesen;
-- das ist **nicht** gleichbedeutend mit veröffentlichter Frontend-Struktur;
-- die reale Sichtprüfung ist noch offen;
-- insbesondere darf der bisherige Status `deployed` nicht als `frontend published` interpretiert werden.
+## Exakte Ursache
 
-## V1.9.6 – lokaler Kandidat
+Der bestehende Writer erzeugt:
+- `Buchbinden` als WordPress-Seite;
+- die vier Kinder als WordPress-Taxonomie-Terme.
 
-Basis:
-exakt verifizierte V1.9.4-Quelle.
+Da ein Taxonomie-Term nicht nativ Kind einer WordPress-Seite sein kann, wird die fachliche Beziehung nur über `_apkw_parent_concept_id` gespeichert.
 
-Enthält V1.9.5:
-- direkte Page-Publish-Migration;
-- Publish-Status in Plan/Fingerprint/Readback;
-- automatische Hard-Gate-Receipts;
-- keine zusätzliche menschliche Review-/Deploy-Freigabeschleife im Normalweg.
+Der bisherige Readback prüfte diese technische Bindung, aber es gab:
+- keinen persistenten Frontend-Navigationsblock in der Elternseite;
+- keinen Menü-Write;
+- keinen Frontend-Endzustandscheck auf tatsächlich sichtbare/verlinkte Kinder.
 
-Zusätzlich V1.9.6:
-- echte inkrementelle Kategorie-Erweiterung;
-- Erweiterungspaket enthält nur neue/geänderte Knoten;
-- Server merged das Delta gegen die produktive Lifecycle-Baseline;
-- nicht genannte Alt-Knoten bleiben vollständig erhalten;
-- stabile `concept_id` bleibt Identität;
-- neue Knoten = ADDED;
-- Änderungen = UPDATED;
-- Restbestand = UNCHANGED;
-- fehlende Alt-Knoten sind **niemals** automatische Löschung;
-- Delete-/Retirement-Intent im Extension-Vertrag = BLOCKED;
-- falsche project_id = BLOCKED;
-- optional falscher Baseline-Hash = BLOCKED;
-- unbekannter Parent = BLOCKED.
+Dadurch konnte Write + technischer Readback PASS sein, obwohl die Buchbinden-Seite im Frontend leer blieb.
 
-Realer lokaler Buchbinden-Strukturtest:
-- Baseline: 7 echte Buchbinden-Knoten;
-- Sparse Extension: 1 synthetischer Test-Kindknoten;
-- Ergebnis: 7 UNCHANGED + 1 ADDED;
-- 0 RETIRED;
-- automatic_delete=false.
+## V1.9.7 – Frontend-Endstate-Kandidat
 
-Gesamttests:
-- 263/263 PASS;
-- Fresh-Source 263/263 PASS;
-- Runtime Source↔Installer 23/23 byteidentisch;
+KISS-Fix auf derselben Pluginlinie:
+- kein Zusatzplugin;
+- kein Theme-Umbau;
+- kein Laufzeit-`the_content`-Filter;
+- keine neue DataForSEO-Recherche;
+- kein Neuaufbau des bestehenden Baums.
+
+Der Writer erzeugt für Seiten mit direkten Content-Kindern einen persistenten verwalteten Navigationsblock im echten `post_content` der Elternseite:
+`<!-- APKW:CHILDREN:BEGIN --> ... <!-- APKW:CHILDREN:END -->`
+
+Eigenschaften:
+- nur direkte Content-Kinder;
+- echte WordPress-Links via `get_permalink` / `get_term_link`;
+- Marketplace/HivePress und Magazin bleiben getrennt;
+- vorhandener redaktioneller Seiteninhalt außerhalb des verwalteten Blocks bleibt erhalten;
+- spätere Sparse-Erweiterungen aktualisieren nur diesen Block;
+- kein kompletter Neuaufbau;
+- Block-Tampering/kaputte Marker fail-closed;
+- Frontend-Mismatch nach Write → automatischer Rollback einschließlich ursprünglichem Seiteninhalt.
+
+## Harte lokale E2E-Evidenz
+
+Vor-Fix realistisch reproduziert:
+- Deployment/Write PASS;
+- technischer Readback PASS;
+- Seite `publish`;
+- Seiteninhalt leer;
+- Frontend-Endzustand FAIL.
+
+Nach Fix:
+- exakte reale Buchbinden-Topologie verwendet;
+- sichtbar/verlinkt erwartet und geprüft: `Einstieg`, `Ausrüstung`, `Material`, `Techniken & Praxis`;
+- `Buchbinden Set` und `Buchbinden Online` dürfen nicht in den Content-Block leaken;
+- spätere fünfte Content-Kategorie wird ergänzt, bestehende vier bleiben;
+- zweiter identischer Lauf erzeugt keine unnötigen Writes;
+- manuelle Inhalte außerhalb des verwalteten Blocks bleiben erhalten;
+- Manipulation / fehlender Frontend-Endzustand / kaputte Marker → BLOCKED bzw. Rollback.
+
+Gesamtsuite:
+- 275/275 PASS;
+- Fresh-Source 275/275 PASS;
+- Source↔Installer Runtime 23/23 byteidentisch;
+- Source PHP 17/17 PASS;
 - Installer PHP 17/17 PASS.
 
-V1.9.6 Installer SHA-256:
-`22d63c37ef61b42452751d40bb3fee11b7048241fb94e0706b76e5b5c8df8dc8`
+V1.9.7 Installer SHA-256:
+`89790e0b12b4c72c96c8c5a9387dabc160c21707d6147e65898303eef70a0f40`
 
-V1.9.6 Source SHA-256:
-`59d39226f2ef2f3ebaf97fb3802348677368e7ed07c48f9eacfeb20b16c3bfc8`
+V1.9.7 Source SHA-256:
+`7d324512d2d0e89faac82be50b54bd580facb4e2eef782eba32ab0ce8378af1a`
 
-## Flexibilitätsvertrag
+## Beleggrenze
 
-Der Kategorienbaum ist kein Einmalbau.
+V1.9.7 ist **noch nicht live installiert**.
+Es gibt daher noch keinen realen Frontend-PASS.
 
-Spätere Ergänzungen müssen möglich sein für:
-- neue Hobbyseiten;
-- neue Zwischenebenen;
-- neue Leaf-Kategorien;
-- neue Magazin-Intents;
-- neue HivePress-/Marketplace-Intents;
-- kontrollierte Umbenennungen oder Parent-Verschiebungen.
-
-Dafür darf niemals ein kompletter Neuaufbau des vorhandenen Baums erforderlich sein.
-
-## Noch offen
-
-Der Concept-Builder erzeugt weiterhin noch nicht automatisch den vollständigen 8-Welten-Gesamtbaum.
-Die konzeptionelle obere Referenz für Buchbinden bleibt:
-`Fertigen → Buch & Papier → Buchbinden`.
-
-Frontend-Navigation ist weiterhin noch nicht real gebunden/readback-geprüft.
+Die lokale E2E-Simulation nutzt den echten Plugin-Code und die echte Buchbinden-Paket-/Knotentopologie mit WordPress-API-kompatibler Testumgebung. Sie ist kein vollständiger Clone des IONOS-/Theme-Hostings. Der Live-Screenshot bestätigt jedoch exakt den lokal reproduzierten Fehlerzustand.
 
 ## NEXT ACTION
 
-V1.9.6 über den aktuellen Pluginstand installieren.
+V1.9.7 über den aktuellen Kategorie-Workflow installieren.
 
-Danach:
-1. `Kategorien` öffnen;
-2. **„Bestehenden Stand jetzt veröffentlichen“** ausführen;
-3. realen WordPress-Readback prüfen;
-4. anschließend Frontend-Sichtprüfung.
+Danach genau einmal den bestehenden Publish-/Republish-Weg ausführen.
 
-Erst danach wird der vollständige 8-Welten-/DataForSEO-Baum inkrementell erzeugt.
+Erwarteter realer Endzustand:
+`Buchbinden` bleibt sichtbar und zeigt exakt die vier verlinkten Content-Kinder:
+- Einstieg
+- Ausrüstung
+- Material
+- Techniken & Praxis
+
+Keine neue DataForSEO-Recherche.
+Keine neuen Kategorien.
+Kein weiterer Pluginumbau vor diesem realen Frontend-Readback.
