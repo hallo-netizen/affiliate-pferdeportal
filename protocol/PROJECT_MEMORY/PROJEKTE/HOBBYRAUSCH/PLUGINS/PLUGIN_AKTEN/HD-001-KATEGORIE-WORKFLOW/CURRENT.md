@@ -1,71 +1,92 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-05
-STATUS: V1.9.4 LIVE PASS / V1.9.5 LOKAL HARD PASS / LIVE-UPDATE OFFEN
+STATUS: V1.9.4 INSTALLIERT / NICHT FRONTEND-PUBLISHED ABGENOMMEN / V1.9.6 LOKAL HARD PASS
 
-## Live-Basis
+## Ausgangslage
 
-Aktuell installiert:
-`Affiliate-Portal Kategorie-Workflow V1.9.4`
+V1.9.4 ist der installierte Produktionsstand.
 
-Live:
-- Buchbinden Deployment PASS;
-- Readback PASS;
+Bisher bewiesen:
 - DataForSEO live angebunden;
-- Bestand nicht zurückrollen.
+- Buchbinden Research PASS;
+- WordPress-Write + technischer Readback PASS.
 
-V1.9.4 Installer SHA-256:
-`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
+Nicht bewiesen:
+- veröffentlichte Frontend-Struktur;
+- sichtbare Navigation.
 
-V1.9.4 Source SHA-256:
-`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`
+Der frühere Begriff „Deployment abgeschlossen“ darf deshalb nicht als „veröffentlicht“ gelesen werden.
 
-Die exakten V1.9.4-Bytes wurden im Library-Campus-Archiv wiedergefunden und verifiziert.
+## V1.9.6 Kandidat
 
-## V1.9.5 Kandidat
+Gleiche Pluginlinie, kein Zusatzplugin.
 
-Keine neue Pluginlinie.
-Keine neue Architektur.
-Exakte V1.9.4-Weiterentwicklung.
+### Publish
+- WordPress-Seiten Zielstatus `publish`;
+- Draft→Publish kontrolliert migrierbar;
+- Status Bestandteil von Preflight/Fingerprint/Readback;
+- Statusabweichung fail-closed + Rollback.
 
-Änderungen:
-- WordPress-Seiten direkt `publish`;
-- Publish-Status in Preflight/Fingerprint/Readback;
-- V1.9.4 Draft→Publish einmalig migrierbar;
-- danach Statusdrift fail-closed;
-- Readback-Statusfehler → automatischer Rollback;
-- Normalroute: Review-Receipts automatisch nach Hard-PASS;
-- kein Review-Haken und keine zusätzliche Deploy-Freigabe im Normalweg;
-- für bestehenden `deployed`-Stand direkter Publish-Migrationsschritt mit denselben Final-/Research-Paketen.
+### Keine Freigabeschleifen
+- fachliche/technische Gates bleiben;
+- signierte Receipts werden im Normalweg automatisch nach Hard-PASS erzeugt;
+- keine zusätzliche Benutzer-Review-Schleife.
 
-Tests:
-- Baseline 251/251 PASS;
-- V1.9.5 256/256 PASS;
-- Fresh Source 256/256 PASS;
-- Runtime-Parität 22/22 PASS;
-- Source PHP 17/17 PASS;
-- Installer PHP PASS.
+### Inkrementelle Erweiterung
+Contract:
+`APKW_INCREMENTAL_CATEGORY_EXTENSION_V1`
+
+Regeln:
+- Sparse Extension enthält nur neue/geänderte Knoten;
+- Merge immer gegen produktive Baseline;
+- bestehende nicht genannte Knoten bleiben erhalten;
+- kein automatisches Delete/Retirement;
+- project_id muss passen;
+- optionaler Baseline-Hash muss passen;
+- Parent muss in Baseline oder Extension existieren;
+- vollständiger gemergter Baum durchläuft danach die bestehenden Validator-/Research-/Deployment-Gates;
+- Writer schreibt am Ende nur CREATE/UPDATE/ADOPT/UNCHANGED-Deltas.
+
+### Realer Buchbinden-Merge-Test
+
+Echte Preview-Baseline:
+7 Knoten.
+
+Test-Extension:
+1 synthetischer neuer Kindknoten.
+
+Ergebnis:
+- 7 UNCHANGED;
+- 1 ADDED;
+- 0 RETIRED;
+- automatic_delete=false;
+- PASS.
+
+## Tests
+
+- 263/263 PASS;
+- Fresh Source 263/263 PASS;
+- Runtime-Parität 23/23 PASS;
+- Installer PHP 17/17 PASS.
 
 Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.5_DIRECT_PUBLISH_AUTO_GATES_HARD_PASS.zip`
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.6_INCREMENTAL_EXTENSION_DIRECT_PUBLISH_HARD_PASS.zip`
 
 Installer SHA-256:
-`9108b69487ec50fa36def974bfe0c12b5edfc8d099b3eda2c71e4fe0035f470c`
+`22d63c37ef61b42452751d40bb3fee11b7048241fb94e0706b76e5b5c8df8dc8`
 
 Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.5_DIRECT_PUBLISH_AUTO_GATES_HARD_PASS.zip`
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.6_INCREMENTAL_EXTENSION_DIRECT_PUBLISH_HARD_PASS.zip`
 
 Source SHA-256:
-`70846ca354165e7ca8a85f59b870ca3aa3707c7f2645810842f440433404dd85`
+`59d39226f2ef2f3ebaf97fb3802348677368e7ed07c48f9eacfeb20b16c3bfc8`
 
 ## Beleggrenze
 
-V1.9.5 ist **noch nicht live installiert**.
-Kein Live-PASS behaupten, bevor WordPress-Write + Publish + Readback real gelaufen sind.
+V1.9.6 ist noch nicht live installiert.
+Keine Behauptung von Publish/Frontend-PASS vor realem WordPress-Readback.
 
 ## NEXT ACTION
 
-V1.9.5 installieren → `Kategorien` öffnen → **„Bestehenden Stand direkt veröffentlichen“** → realen Readback prüfen.
-
-Keine neue Research-Runde.
-Keine Baum-Neuerzeugung vor diesem Publish-PASS.
+V1.9.6 installieren → Kategorien → **„Bestehenden Stand jetzt veröffentlichen“** → Readback prüfen.
