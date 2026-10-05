@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 210,
+  "generation": 211,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+    "manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+    "current_source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
     "candidate_reference_scope": "6.72.186 LIVE-FAILED BASE; 6.72.187/6.72.188 ADCELL category contract disproven; 6.72.189 binds live-proven /affiliate/promotion/getPromotionCategories GET + scalar programId and fresh version-specific ADCELL topic resync. Source manifest bound; release gates open.",
@@ -639,8 +639,8 @@
     "no_optional_detours": true,
     "sequence": 67,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_adcell_category_contract_rootfix_20261005.md",
-    "evidence_sha256": "8a55dbe7e462f3e9b00ad87ebfe9f0ffe418d561fe596e9f9e3fdd8de94b68a0",
-    "current_source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+    "evidence_sha256": "ad25dda222f78ca87b1a7d3067c2bf9612cedac31e7855edf52a54db31bc84fa",
+    "current_source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
     "final_installer": null,
     "live_fail_evidence": {
       "version": "6.72.186",
@@ -655,7 +655,7 @@
     },
     "pre_gate_proof": {
       "source_file_count": 27,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "exact_contract": "/affiliate/promotion/getPromotionCategories GET + programId",
       "validation_detail": "parameter \"programId\" is required",
       "source_php_lint": "OPEN",
@@ -751,109 +751,109 @@
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "explicit_scope_product_deals_partner_analytics": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "old_state_reproduction_negative": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "same_state_rootfix_positive": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "counterstates_fail_closed": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "complete_selection_materialization_public_gate": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "relevant_historical_regressions": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "real_wordpress_mariadb_persistence_same_uuid": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "recovery_retry_failure_paths": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "mutation_sabotage": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "fresh_unpack_exact_installer": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "source_zip_byte_identity": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "final_sha256": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_automated_product_distribution": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_real_banner_source": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_weighted_banner_distribution": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "affiliate_6721_activation_smoke": {
       "status": "OPEN",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "test_artifact_ref": "release/affiliate-zentrale/evidence/affiliate-zentrale_v6.72.1_ACTIVATION_SMOKE_ONLY.zip",
       "scope": "PLUGIN_LOAD_AND_ACTIVATION_ONLY_24_FILES_TWO_RUNTIME_JSON_CATALOGS_OMITTED"
     },
     "affiliate_6723_activation_smoke": {
       "status": "OPEN",
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "version": "6.72.3",
       "evidence": "User confirmed installation and activation in WordPress on 2026-09-07",
       "scope": "INSTALL_LOAD_ACTIVATE_NO_FATAL",
@@ -871,7 +871,7 @@
       "evidence": "User screenshot in chat; direct partner probe completed successfully",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_local_gate": {
       "status": "OPEN",
@@ -884,7 +884,7 @@
       "checked_at": "2026-09-07",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_real_run_started": {
       "status": "OPEN",
@@ -897,7 +897,7 @@
       "checked_at": "2026-09-07",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_offers_stage": {
       "status": "OPEN",
@@ -908,7 +908,7 @@
       "checked_at": "2026-09-07",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_feed_fail_closed": {
       "status": "OPEN",
@@ -919,7 +919,7 @@
       "checked_at": "2026-09-07",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_first_functional_plugin_test": {
       "status": "OPEN",
@@ -939,7 +939,7 @@
       "checked_at": "2026-09-07",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "otto_awin_large_feed_download": {
       "status": "OPEN",
@@ -950,14 +950,14 @@
       "checked_at": "2026-09-08",
       "evidence_ref": null,
       "evidence_sha256": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37"
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264"
     },
     "awin_6725_progress_wpcron_rootfix": {
       "status": "OPEN",
       "advertiser_id": 14336,
       "version": "6.72.5",
       "evidence_ref": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.5_TEST.zip",
       "test_artifact_sha256": "4072bd07d852f27e41a7bafeb8755edccdfd5d0aa87f178eae6a89203008bddb",
       "package_checks": {
@@ -975,7 +975,7 @@
       "advertiser_id": 14336,
       "version": "6.72.6",
       "evidence_ref": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.6_TEST.zip",
       "test_artifact_sha256": "f57137aba613aa0e7bab77d353a21e1358db723ac099c37cf60b81fbad60197e",
       "package_checks": {
@@ -999,7 +999,7 @@
       "advertiser_id": 14336,
       "version": "6.72.7",
       "evidence_ref": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.7_TEST.zip",
       "test_artifact_sha256": "da320ebd016ec0ba3f4e040ca2cbcf0478d1614ab4b6a323579289404835e963",
       "package_checks": {
@@ -1034,7 +1034,7 @@
       "version": "6.72.8",
       "advertiser_id": 14336,
       "evidence_ref": null,
-      "source_manifest_sha256": "6b3176b46950f49c4723d1740b9b8972d1172f4197c7c7ec2f7df83937aecf37",
+      "source_manifest_sha256": "c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264",
       "test_artifact_filename": "Affiliate-Zentrale_6.72.8_TEST.zip",
       "test_artifact_sha256": "b906c21e3825a53cfe8d01237b0cbc3041a90c5518f7d74e81e1b025f3c2a01f",
       "checks": {
