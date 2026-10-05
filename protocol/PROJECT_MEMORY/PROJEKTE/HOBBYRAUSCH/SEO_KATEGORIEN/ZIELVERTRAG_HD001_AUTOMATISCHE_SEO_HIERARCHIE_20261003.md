@@ -96,11 +96,13 @@ Zusätzlich zu prüfen:
 
 Nach lokaler Abnahme bleibt ein realer WordPress-/Frontend-Readback für den produktiven Endzustand erforderlich.
 
-## Technische Startgrenze
+## Technische Startbedingung
 
-Die technische Weiterentwicklung darf erst auf der exakt gebundenen V1.9.4-Quelle beginnen.
+Die technische Weiterentwicklung darf nur auf der exakt gebundenen V1.9.4-Quelle erfolgen.
 
 Erwarteter Source-SHA-256:
 `12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`.
 
-Die Source-Bytes sind in der aktuellen HD-001-Originalablage noch nicht vorhanden. Bis sie bytegleich gebunden sind, ist kein Nachfolgekandidat zulässig.
+Ob diese Startbedingung aktuell erfüllt ist, wird **nicht** in diesem Zielvertrag als dynamischer Status geführt.
+Dafür gilt ausschließlich die zuständige Current-Autorität:
+`CURRENT_STATE.md` bzw. die HD-001-Plugin-Current.
