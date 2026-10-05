@@ -114,9 +114,9 @@ jobs:
               if body(cur,name)!=body(old,name):
                   raise SystemExit('FAIL protected performance function changed '+name)
           hot=body(cur,'ranked_campaigns_for_slot_uncached')
-          marker="V6.72.185 KISS"
+          marker="V6.72.184 KISS"
           pos=hot.find(marker)
-          if pos<0: raise SystemExit('FAIL missing 6.72.185 KISS filter')
+          if pos<0: raise SystemExit('FAIL missing 6.72.184 KISS filter')
           addition=hot[pos:pos+900]
           for forbidden in ['$wpdb','get_post_meta(','wp_remote_','output_plan_creative(']:
               if forbidden in addition: raise SystemExit('FAIL new frontend cost '+forbidden)
@@ -147,6 +147,7 @@ jobs:
           }
           PHP
           git show 5f28fb69c2bd215e49c44c6e8c26ac7b8836f1bf:release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip > /tmp/bad184.zip
+          echo 'bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06  /tmp/bad184.zip' | sha256sum -c -
           unzip -q /tmp/bad184.zip -d /tmp/base183
           cp -a /tmp/base183/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
@@ -173,4 +174,4 @@ jobs:
         run: |
           set -euo pipefail
           /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php" --path=/tmp/wp-site | tee /tmp/assert.log
-          grep -F 'FULL_672183_TO_672184_BANNER_MIGRATION_E2E_PASS' /tmp/assert.log
+          grep -F 'FULL_672184_TO_672185_BANNER_MIGRATION_E2E_PASS' /tmp/assert.log
