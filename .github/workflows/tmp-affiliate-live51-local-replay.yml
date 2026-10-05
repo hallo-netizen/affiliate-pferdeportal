@@ -51,6 +51,7 @@ jobs:
           grep -F 'Version: 6.72.185' /tmp/live185zip/affiliate-portal-router/pferdeportal-affiliate-router.php
           grep -F "const VERSION = '6.72.185';" /tmp/live185zip/affiliate-portal-router/pferdeportal-affiliate-router.php
           test "$(find /tmp/live185zip/affiliate-portal-router -type f | wc -l)" = "27"
+          git fetch --no-tags origin a381aff4eb3f41754186f4bad86ce1a7e0823a29
           python3 - <<'PY'
           import subprocess
           from pathlib import Path
