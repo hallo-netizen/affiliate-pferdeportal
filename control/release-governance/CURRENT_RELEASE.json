@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 201,
+  "generation": 202,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -639,7 +639,7 @@
     "no_optional_detours": true,
     "sequence": 62,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672187_adcell_category_transport_rootfix_20261005.md",
-    "evidence_sha256": "6975eb481e9fe32a07e8ff9e2cbd7cb51df79657411665f91b88bea4daf6cd3d",
+    "evidence_sha256": "efa5f8825f40989d85ef2d33cf10fa0d2abf2d6f48f798f672faa159276a0ed0",
     "current_source_manifest_sha256": "47a8383144dbc5daa56579fff41cce1f4c63a91bcfb85ab82d37f4ddf240cbfb",
     "final_installer": null,
     "live_fail_evidence": {
