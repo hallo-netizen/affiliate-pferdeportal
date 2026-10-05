@@ -1,0 +1,33 @@
+name: TEMP Affiliate Live Banner Images
+
+on:
+  push:
+    branches:
+      - affiliate-release-current
+    paths:
+      - '.github/workflows/tmp-affiliate-live-images.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch only public banner images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/live-images
+          for id in 374472 393901 467974 452177 607373 375241 322270 391771 322674 321102; do
+            curl -fsSL --max-time 30 "https://t.adcell.com/p/image?promoId=${id}&slotId=98720" -o "/tmp/live-images/${id}.img"
+            file "/tmp/live-images/${id}.img"
+            sha256sum "/tmp/live-images/${id}.img"
+          done
+      - name: Upload images
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-ausruestung-banner-images
+          path: /tmp/live-images
+          retention-days: 2
