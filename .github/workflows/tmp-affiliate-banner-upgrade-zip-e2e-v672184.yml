@@ -197,7 +197,8 @@ jobs:
           rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           cp -a /tmp/zip184/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.186"){exit(2);} echo "PASS ZIP upgraded plugin 6.72.186 active\n";' --path=/tmp/wp-site
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php" --path=/tmp/wp-site | tee /tmp/assert184zip.log
+          sed "s/6\\.72\\.185/6.72.186/g" "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php" >/tmp/assert186.php
+          /tmp/wp eval-file /tmp/assert186.php --path=/tmp/wp-site | tee /tmp/assert184zip.log
           grep -F 'FULL_672184_TO_672185_BANNER_MIGRATION_E2E_PASS' /tmp/assert184zip.log
           echo "PASS exact ZIP upgrade positive negative"
 
@@ -215,12 +216,12 @@ jobs:
           cp /tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php /tmp/wp-fresh/wp-content/mu-plugins/
           cp -a /tmp/zip184/affiliate-portal-router /tmp/wp-fresh/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-fresh
-          cp AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php /tmp/full184.php
-          sed "s/6\.72\.183/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest185.php
-          /tmp/wp eval-file /tmp/full184.php --path=/tmp/wp-fresh | tee /tmp/full184.log
+          sed "s/6\\.72\\.185/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php >/tmp/full186.php
+          sed "s/6\\.72\\.183/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest186.php
+          /tmp/wp eval-file /tmp/full186.php --path=/tmp/wp-fresh | tee /tmp/full184.log
           grep -F 'SUMMARY passes=21 failures=0' /tmp/full184.log
           grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_672185_LIBRARY_SOURCE_PASS' /tmp/full184.log
-          /tmp/wp eval-file /tmp/dest185.php --path=/tmp/wp-fresh | tee /tmp/dest185.log
+          /tmp/wp eval-file /tmp/dest186.php --path=/tmp/wp-fresh | tee /tmp/dest185.log
           grep -F 'SUMMARY passes=26 failures=0' /tmp/dest185.log
           grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest185.log
           echo "PASS fresh ZIP legacy 21/21 + destination 26/26"
@@ -233,6 +234,6 @@ jobs:
           git config user.name "hallo-netizen"
           git config user.email "hallo@oliver-beil.de"
           git add release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip
-          git commit -m "affiliate: publish tested 6.72.186 banner migration installer"
+          git commit -m "affiliate: publish tested 6.72.186 strict-tier installer"
           git push origin HEAD:affiliate-672186-strict-tier
           echo "PASS TESTED_ZIP_COMMITTED sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
