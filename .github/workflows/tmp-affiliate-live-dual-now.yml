@@ -1,4 +1,4 @@
-name: TEMP Affiliate Live Dual NOW
+name: TEMP Affiliate Live Dual NOW 6.72.186
 
 on:
   push:
@@ -28,11 +28,21 @@ jobs:
           pid=re.compile(r'promoId=(\d+)',re.I)
           for name,url in pages.items():
               for mode in ("normal","bust"):
-                  for i in range(1,9):
+                  for i in range(1,5):
                       u=url if mode=="normal" else url+("?ppar_probe_now=%d_%d"%(int(time.time()),i))
                       req=urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0","Cache-Control":"no-cache","Pragma":"no-cache"})
                       with urllib.request.urlopen(req,timeout=30) as r:
                           raw=r.read().decode("utf-8","replace"); h=dict(r.headers.items())
                       m=pat.search(raw); href=m.group(1) if m else ""; pm=pid.search(href)
-                      print("NOW",json.dumps({"page":name,"mode":mode,"n":i,"promo":pm.group(1) if pm else "","href":href,"age":h.get("Age",""),"cache":h.get("X-LiteSpeed-Cache",h.get("Cf-Cache-Status",""))},ensure_ascii=False))
+                      promo=pm.group(1) if pm else ""
+                      print("NOW",json.dumps({"page":name,"mode":mode,"n":i,"promo":promo,"href":href,"age":h.get("Age",""),"cache":h.get("X-LiteSpeed-Cache",h.get("Cf-Cache-Status",""))},ensure_ascii=False))
+                      if promo:
+                          rr=urllib.request.Request("https://t.adcell.com/p/click?promoId="+promo+"&slotId=98720",method="HEAD",headers={"User-Agent":"Mozilla/5.0"})
+                          opener=urllib.request.build_opener(urllib.request.HTTPHandler())
+                          try:
+                              resp=opener.open(rr,timeout=20)
+                              loc=resp.headers.get("Location","")
+                          except urllib.error.HTTPError as e:
+                              loc=e.headers.get("Location","")
+                          print("DEST",json.dumps({"page":name,"promo":promo,"location":loc},ensure_ascii=False))
           PY
