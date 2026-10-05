@@ -1,0 +1,184 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "reitplatzbewaesserung-faq",
+    "plan_slot": "916a0af7de7981275f29d95e854778ed6ffa5147f1cdff4aae4592f37ba27892",
+    "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+    "title": "Ist eine Reitplatzbewässerung von unten möglich?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "OTTO-Ebbe&Flut Reitplatzbau mit automatischer Bewässerung",
+          "source_url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau"
+        },
+        {
+          "source_title": "Risohorse FAQ – Ebbe und Flut-Reitbodensystem",
+          "source_url": "https://risohorse.de/de/faq/"
+        },
+        {
+          "source_title": "tegra – EBBE & FLUT Reitbodensysteme",
+          "source_url": "https://www.derreitboden.de/reitboeden-und-reitboedensysteme/ebbe-flut/"
+        },
+        {
+          "source_title": "tegra – Beschreibung und Bedienungsanleitung Ebbe & Flut",
+          "source_url": "https://www.derreitboden.de/wp-content/uploads/ebbe_flut_bedienung.pdf"
+        }
+      ],
+      "claims": [
+        "Bei einem Ebbe-Flut-Reitplatz kann die Tretschicht von unten bewässert werden; Wasser steigt durch Kapillarwirkung aus dem unteren Aufbau in den Reitboden.",
+        "Ein Ebbe-Flut-System arbeitet mit einer wasserdichten Folie, Drainagerohren und einem Regulierungsschacht, über den der Wasserstand im Reitboden gesteuert wird.",
+        "Ebbe-Flut-Reitbodensysteme können im Innen- und Außenbereich eingesetzt werden und zielen auf einen über die Reitfläche gleichmäßigen Feuchtegehalt der Tretschicht.",
+        "Der Wasserstand eines Ebbe-Flut-Reitbodens wird über Zu- oder Abpumpen geregelt und kann bei heißem, trockenem Wetter angepasst werden, wenn die Verdunstung stärker ist."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Ist eine Reitplatzbewässerung von unten möglich",
+      "topic": "Ist eine Reitplatzbewässerung von unten möglich?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "reitplatzbewaesserung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Ist eine Reitplatzbewässerung von unten möglich?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "OTTO-Ebbe&Flut Reitplatzbau mit automatischer Bewässerung",
+        "source_url": "https://www.ottosport.com/leistungen/otto-ebbeflut-reitplatzbau",
+        "evidence_text_sha256": "05a9e8d413088e6704d8a48581f68aacd9b377c3584bf6907ae279953da0780d",
+        "statement": "Bei einem Ebbe-Flut-Reitplatz kann die Tretschicht von unten bewässert werden; Wasser steigt durch Kapillarwirkung aus dem unteren Aufbau in den Reitboden.",
+        "evidence_text": "Bei einem Ebbe-Flut-Reitplatz kann die Tretschicht von unten bewässert werden; Wasser steigt durch Kapillarwirkung aus dem unteren Aufbau in den Reitboden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Risohorse FAQ – Ebbe und Flut-Reitbodensystem",
+        "source_url": "https://risohorse.de/de/faq/",
+        "evidence_text_sha256": "7e68ba58e834924f4b5e0112886fe02f83966e18d0d0ee638559807b019e615d",
+        "statement": "Ein Ebbe-Flut-System arbeitet mit einer wasserdichten Folie, Drainagerohren und einem Regulierungsschacht, über den der Wasserstand im Reitboden gesteuert wird.",
+        "evidence_text": "Ein Ebbe-Flut-System arbeitet mit einer wasserdichten Folie, Drainagerohren und einem Regulierungsschacht, über den der Wasserstand im Reitboden gesteuert wird.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "tegra – EBBE & FLUT Reitbodensysteme",
+        "source_url": "https://www.derreitboden.de/reitboeden-und-reitboedensysteme/ebbe-flut/",
+        "evidence_text_sha256": "14ae6667de6fe174e0eca291867d33e7c377259a0b307beb9c3afee6f2f3ba50",
+        "statement": "Ebbe-Flut-Reitbodensysteme können im Innen- und Außenbereich eingesetzt werden und zielen auf einen über die Reitfläche gleichmäßigen Feuchtegehalt der Tretschicht.",
+        "evidence_text": "Ebbe-Flut-Reitbodensysteme können im Innen- und Außenbereich eingesetzt werden und zielen auf einen über die Reitfläche gleichmäßigen Feuchtegehalt der Tretschicht.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "tegra – Beschreibung und Bedienungsanleitung Ebbe & Flut",
+        "source_url": "https://www.derreitboden.de/wp-content/uploads/ebbe_flut_bedienung.pdf",
+        "evidence_text_sha256": "951d6c3844bba213403808fce07e6eb9df53f4149cd09c61e2bff444fd330941",
+        "statement": "Der Wasserstand eines Ebbe-Flut-Reitbodens wird über Zu- oder Abpumpen geregelt und kann bei heißem, trockenem Wetter angepasst werden, wenn die Verdunstung stärker ist.",
+        "evidence_text": "Der Wasserstand eines Ebbe-Flut-Reitbodens wird über Zu- oder Abpumpen geregelt und kann bei heißem, trockenem Wetter angepasst werden, wenn die Verdunstung stärker ist.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+        "anchor": "Reitplatzbewässerung",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/category/reitplatzbewaesserung-installation/",
+        "anchor": "Installation von Reitplatzbewässerung",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/weide/weide-reitplatz/",
+        "anchor": "Reitplatz",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/weide/weide-reitplatz/reitplatzbewaesserung/",
+        "active": true
+      },
+      {
+        "href": "/category/reitplatzbewaesserung-installation/",
+        "active": true
+      },
+      {
+        "href": "/weide/weide-reitplatz/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "reitplatzbewaesserung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Reitplatzbewässerung",
+      "Ebbe-Flut",
+      "Unterflur",
+      "Kapillarwirkung",
+      "Wasserstand",
+      "Drainage",
+      "Tretschicht",
+      "Regulierung",
+      "Bewässerung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Eine kurze Checkliste beantwortet die Voraussetzungen und Grenzen verständlicher als eine zusätzliche Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
