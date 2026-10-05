@@ -405,3 +405,45 @@ Nachträglich vor Live-Abnahme gefundener Blocker:
 Ergebnis:
 **NICHT FINAL / KEINE LIVE-ABNAHME / KEINE PU-ID.**
 0.57.38 ist technische Basis für genau einen konsolidierten Folgefix; kein weiteres Einzelflick-Release vor vollständiger 1:1 Positiv-/Negativ-/Regression-Simulation.
+
+
+## RELEASE-VORBEREITUNG 2026-10-05 – PSTE 0.57.39 / KEIN PU-EREIGNIS
+
+Kandidat:
+`PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip`
+
+SHA-256:
+`10a6e28e52639071ccde56d4c96f0ae3a37aae1d93bd8e2c51368f13f8e342f9`
+
+Basis:
+PSTE 0.57.38; dessen PSERC-Editorial-Plan-Abdeckungsfix bleibt byteidentisch erhalten.
+
+WARUM:
+Bestehende Journal-/Magazinartikel wurden im allgemeinen PSTE-WordPress-Inventar ohne Kategorie/Familie/Artikeltyp gelesen, obwohl dieselbe Extension-Kategorie im Kandidatenrouting eindeutig registriert war.
+
+FIX:
+- signierte additive Extension-Kategorien werden read-only bei bestehendem WordPress-Inventar aufgelöst;
+- keine Aufnahme in die Core-Produktionshierarchie;
+- Themenkarte übernimmt den gelieferten Inventory-Artikeltyp;
+- unbekannte/nicht signierte Kategorien bleiben unzugeordnet;
+- Extension/Core-Term-Kollision blockiert hart.
+
+POSITIVTEST:
+- Post 15974 `Wie alt werden Pferde?` → Kategorie `Pferdegesundheit verstehen` / Journal / 1 WORDPRESS ANSWER_EQUIVALENT / same_topic_family=true;
+- Post 16029 `Können Pferde schwimmen?` → Kategorie `Pferdewissen & Grundlagen` / Journal / 1 WORDPRESS ANSWER_EQUIVALENT / same_topic_family=true;
+- regulärer Core-Fall bleibt unverändert.
+
+NEGATIVTEST:
+- unbekannte WordPress-Kategorie bleibt leer/unzugeordnet;
+- Extension/Core-Term-ID-Kollision hard-block;
+- keine zusätzliche Produktions-/Publish-Autorität.
+
+REGRESSION:
+- exakt 3 Dateien gegenüber 0.57.38 geändert: Snapshot, Analytics, Versionsdatei;
+- Normal-Metadata, Repository, Extension-Router, Family-Identity, Title-Pipeline, Context-Evaluator und kompletter 0.57.38-Planabdeckungsfix unverändert;
+- PHP 81/81 PASS;
+- JSON 54/54 PASS;
+- Fresh-Unpack 136/136 byteidentisch.
+
+LIVE:
+Noch nicht installiert/readback-bestätigt. **Keine PU-ID.**
