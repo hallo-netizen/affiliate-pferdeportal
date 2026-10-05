@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: V1.9.4 LIVE PASS / V1.9.5 DIRECT-PUBLISH-KANDIDAT LOKAL HARD PASS / LIVE-INSTALLATION NÄCHSTES
+STATUS: V1.9.4 INSTALLIERT / FRONTEND-PUBLISH NOCH NICHT PASS / V1.9.6 INKREMENTELLER KANDIDAT LOKAL HARD PASS
 
 ## Harte Abnahmeregel
 
@@ -13,76 +13,94 @@ STATUS: V1.9.4 LIVE PASS / V1.9.5 DIRECT-PUBLISH-KANDIDAT LOKAL HARD PASS / LIVE
 
 `ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-Ziel bleibt:
+Ziel:
 Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → Frontend-Navigation → Readback.
 
-## Live-Basis
+## Tatsächlicher aktueller Livezustand
 
-Installiert bleibt bis zum realen Update:
-`Affiliate-Portal Kategorie-Workflow V1.9.4`
+Installiert ist weiterhin der bestehende V1.9.4-Bestand.
 
-Buchbinden:
-- Research COMPLETE;
-- Deployment + Readback PASS;
-- bestehender Bestand bleibt erhalten;
-- kein Rollback.
+Wichtig:
+- WordPress-Objekte wurden geschrieben und technisch zurückgelesen;
+- das ist **nicht** gleichbedeutend mit veröffentlichter Frontend-Struktur;
+- die reale Sichtprüfung ist noch offen;
+- insbesondere darf der bisherige Status `deployed` nicht als `frontend published` interpretiert werden.
 
-DataForSEO ist im WordPress-Backend real angebunden und live bewiesen.
+## V1.9.6 – lokaler Kandidat
 
-## Exakte Source-Bindung wiedergefunden
+Basis:
+exakt verifizierte V1.9.4-Quelle.
 
-Die echte V1.9.4-Source und der echte Installer wurden im Campus-Archiv der Library gefunden und lokal bytegenau gebunden.
+Enthält V1.9.5:
+- direkte Page-Publish-Migration;
+- Publish-Status in Plan/Fingerprint/Readback;
+- automatische Hard-Gate-Receipts;
+- keine zusätzliche menschliche Review-/Deploy-Freigabeschleife im Normalweg.
 
-V1.9.4 Source SHA-256:
-`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`
+Zusätzlich V1.9.6:
+- echte inkrementelle Kategorie-Erweiterung;
+- Erweiterungspaket enthält nur neue/geänderte Knoten;
+- Server merged das Delta gegen die produktive Lifecycle-Baseline;
+- nicht genannte Alt-Knoten bleiben vollständig erhalten;
+- stabile `concept_id` bleibt Identität;
+- neue Knoten = ADDED;
+- Änderungen = UPDATED;
+- Restbestand = UNCHANGED;
+- fehlende Alt-Knoten sind **niemals** automatische Löschung;
+- Delete-/Retirement-Intent im Extension-Vertrag = BLOCKED;
+- falsche project_id = BLOCKED;
+- optional falscher Baseline-Hash = BLOCKED;
+- unbekannter Parent = BLOCKED.
 
-V1.9.4 Installer SHA-256:
-`85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`
+Realer lokaler Buchbinden-Strukturtest:
+- Baseline: 7 echte Buchbinden-Knoten;
+- Sparse Extension: 1 synthetischer Test-Kindknoten;
+- Ergebnis: 7 UNCHANGED + 1 ADDED;
+- 0 RETIRED;
+- automatic_delete=false.
 
-Der frühere Source-Blocker ist damit geschlossen.
+Gesamttests:
+- 263/263 PASS;
+- Fresh-Source 263/263 PASS;
+- Runtime Source↔Installer 23/23 byteidentisch;
+- Installer PHP 17/17 PASS.
 
-## V1.9.5 – lokaler Kandidat
+V1.9.6 Installer SHA-256:
+`22d63c37ef61b42452751d40bb3fee11b7048241fb94e0706b76e5b5c8df8dc8`
 
-KISS-Delta auf exakt V1.9.4:
-- DataForSEO-/Research-/Ownership-Kern nicht umgebaut;
-- WordPress-Seiten werden direkt `publish`;
-- bestehende V1.9.4-Draft-Seiten können über exakt gebundene Final-/Research-Pakete sicher auf Publish migrieren;
-- Publish-Status ist Teil von Plan/Fingerprint/Readback;
-- Statusfehler → fail-closed + automatischer Rollback;
-- im Normalweg werden Initial-/Global-/Final-Receipts nach vollständigem Hard-PASS automatisch serverseitig signiert;
-- keine zusätzliche menschliche Review-/Deploy-Freigabeschleife im Normalweg;
-- bereits `deployed` stehender V1.9.4-Bestand erhält direkten Publish-Migrationsweg ohne Research-Neustart.
+V1.9.6 Source SHA-256:
+`59d39226f2ef2f3ebaf97fb3802348677368e7ed07c48f9eacfeb20b16c3bfc8`
 
-Lokale Abnahme:
-- V1.9.4 Baseline vor Änderung: 251/251 PASS;
-- V1.9.5 aktuell: 256/256 PASS;
-- Fresh-Source: 256/256 PASS;
-- Source↔Installer Runtime: 22/22 byteidentisch;
-- Production PHP-Lint Source: 17/17 PASS;
-- Installer PHP-Lint: PASS.
+## Flexibilitätsvertrag
 
-V1.9.5 Installer SHA-256:
-`9108b69487ec50fa36def974bfe0c12b5edfc8d099b3eda2c71e4fe0035f470c`
+Der Kategorienbaum ist kein Einmalbau.
 
-V1.9.5 Source SHA-256:
-`70846ca354165e7ca8a85f59b870ca3aa3707c7f2645810842f440433404dd85`
+Spätere Ergänzungen müssen möglich sein für:
+- neue Hobbyseiten;
+- neue Zwischenebenen;
+- neue Leaf-Kategorien;
+- neue Magazin-Intents;
+- neue HivePress-/Marketplace-Intents;
+- kontrollierte Umbenennungen oder Parent-Verschiebungen.
 
-## Weiterhin offen für das Gesamtziel
+Dafür darf niemals ein kompletter Neuaufbau des vorhandenen Baums erforderlich sein.
 
-Der alte Concept-Builder erzeugt noch nicht den vollständigen Portalbaum der acht Hauptwelten; der reale Buchbinden-Pilot beginnt technisch erst bei `Buchbinden`.
-Die konzeptionelle obere Kette ist:
+## Noch offen
+
+Der Concept-Builder erzeugt weiterhin noch nicht automatisch den vollständigen 8-Welten-Gesamtbaum.
+Die konzeptionelle obere Referenz für Buchbinden bleibt:
 `Fertigen → Buch & Papier → Buchbinden`.
 
-Frontend-Design/Navigation ist im Hobby-Depot-Campus noch nicht gebunden. Deshalb wird kein Theme-/Menüslot geraten.
+Frontend-Navigation ist weiterhin noch nicht real gebunden/readback-geprüft.
 
 ## NEXT ACTION
 
-V1.9.5 im WordPress-Backend über V1.9.4 installieren.
+V1.9.6 über den aktuellen Pluginstand installieren.
 
-Danach in `Kategorien` beim bereits `deployed` Buchbinden-Stand:
-**„Bestehenden Stand direkt veröffentlichen“**.
+Danach:
+1. `Kategorien` öffnen;
+2. **„Bestehenden Stand jetzt veröffentlichen“** ausführen;
+3. realen WordPress-Readback prüfen;
+4. anschließend Frontend-Sichtprüfung.
 
-Dieser Schritt darf keine neue Recherche starten und keine Kategorie neu erfinden.
-Er muss den gebundenen Livebestand prüfen, notwendige Draft-Seiten auf Publish setzen und anschließend Readback liefern.
-
-Erst nach diesem realen Publish-Readback: Frontend-Sichtprüfung und danach Erweiterung des Builders auf den vollständigen acht-Welten-Baum.
+Erst danach wird der vollständige 8-Welten-/DataForSEO-Baum inkrementell erzeugt.
