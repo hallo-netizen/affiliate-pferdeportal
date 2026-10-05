@@ -386,3 +386,26 @@ REGEL:
 - keine Abnahme ohne lokale Positiv-/Negativ-E2E-Simulation bis Frontend plus realen Endzustands-Readback;
 - V1.9.4 bleibt live und darf nicht zurückgerollt oder aus alten Dateien rekonstruiert werden;
 - technische Weiterentwicklung erst nach bytegenauer Bindung der echten V1.9.4-Source.
+
+
+## HOBBYRAUSCH-HD001-20261005 – V1.9.5 Direct Publish auf echter V1.9.4-Basis
+
+WAS:
+Die zuvor nur in GitHub fehlenden exakten V1.9.4-Source-/Installer-Bytes wurden im Library-Campus-Archiv wiedergefunden und gegen die dokumentierten SHA-256 verifiziert. Darauf wurde V1.9.5 als kleinster KISS-Nachfolger gebaut.
+
+WARUM:
+Der produktive Buchbinden-Pilot war technisch readback-geprüft, WordPress-Seiten wurden aber noch als Draft erzeugt und der Normalweg enthielt unnötige menschliche Review-/Deploy-Freigabeschleifen. Für die gewünschte Sichtprüfung auf der noch nicht öffentlich zugänglichen Site müssen gebundene Seiten direkt veröffentlicht werden.
+
+REGEL:
+- V1.9.4-Livebestand bleibt Ausgangsbasis;
+- keine neue Pluginlinie;
+- Research-/Ownership-Gates bleiben erhalten;
+- serverseitige signierte Receipts bleiben erhalten, werden im Normalweg aber automatisch nach Hard-PASS erzeugt;
+- WordPress-Seiten-Zielstatus = publish;
+- Status gehört zu Preflight/Fingerprint/Readback;
+- V1.9.4-Draft-Baseline darf einmalig sicher auf Publish migrieren;
+- danach Statusdrift fail-closed;
+- keine Live-Abnahme ohne realen WordPress-Publish + Readback.
+
+LOKALE EVIDENZ:
+251/251 V1.9.4-Baseline PASS; V1.9.5 256/256 PASS; Fresh-Source 256/256 PASS; Runtime-Parität 22/22 PASS.
