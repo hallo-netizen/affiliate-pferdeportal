@@ -46,3 +46,19 @@ Two observed failures are stale-gate/version bindings, not functional failures:
 
 ## Required next gate
 Synchronize CURRENT_RELEASE to 6.72.187 and the exact manifest hash, then re-run/observe current applicable gates. Build no final installer and claim no live PASS until source/ZIP WordPress-MariaDB proof and real live readback complete.
+
+
+## Targeted local red/green harness
+A focused PHP harness using the exact 6.72.187 ADCELL transport contract and the real live IDs `program 10787 / promo 322674 / category 14727` passed 9/9:
+
+- category GET rejected before HTTP;
+- banner POST rejected, preserving existing banner GET contract;
+- banner import remains technically valid;
+- promo 322674 remains importable;
+- category id 14727 preserved;
+- category name `Reithelme` enters normalized row;
+- title carries `Reithelme`;
+- description carries `Werbemittelkategorie: Reithelme`;
+- observed transport order is exactly banner GET then category POST.
+
+This is a local wiring proof only. Real ADCELL POST success and the resulting live page selection remain release-blocking until installation/readback.
