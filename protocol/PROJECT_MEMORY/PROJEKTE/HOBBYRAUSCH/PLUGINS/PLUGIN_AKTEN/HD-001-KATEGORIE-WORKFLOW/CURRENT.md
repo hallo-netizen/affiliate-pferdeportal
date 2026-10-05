@@ -1,57 +1,54 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-05
-STATUS: V1.9.9 PFERDEATELIER-TAXONOMIE LOCAL HARD PASS / LIVE-READBACK OFFEN
+STATUS: V1.10.0 PORTAL-WEITE ENGINE LOKAL HARD PASS / ECHTER HD-002-BESTAND NOCH NICHT GEBUNDEN / KEIN RELEASE
 
-## Harte Korrektur
+## Live
 
-V1.9.7 und V1.9.8 NICHT installieren.
+V1.9.9 Content-Pilot real bestätigt:
+Buchbinden + vier Kategorien + zugeordneter Testartikel im Frontend sichtbar.
 
-Der funktionierende Pferdeatelier-Aufbau wurde erneut direkt geprüft:
-- drei Seitenebenen nativ;
-- Ebene-4-Kategorien sind Root-`category`-Terme;
-- kein technischer Bridge;
-- Kontext steckt in Kategorie-Name/Slug und Routing/Renderer.
+## V1.10.0
 
-## V1.9.9
+Gesamtportal-Arbeitskopie vorhanden und lokal geprüft.
 
-Korrigierte gleiche Pluginlinie.
+Funktion:
+- bis 5000 Rohkandidaten;
+- DataForSEO Overview in bounded batches;
+- Null-/Missing-Kandidaten getrennt;
+- Core-Keyword/Synonymgruppen;
+- canonical Seed-Auswahl;
+- Concept-Batches;
+- 8 Konzeptwelten;
+- Weltzuordnung aus DataForSEO-Suggestions;
+- variable Hierarchie;
+- getrennte Content/Magazin/HivePress-Ziele;
+- Resume ohne erneute bereits gespeicherte Overview-Batches.
 
-Content:
-- Level 1–3 WordPress-Seiten;
-- Level 4 Root-`category`, `parent=0`;
-- stabile logische Bindung an die Ebene-3-Seite;
-- Speichername kontextuell eindeutig;
-- Frontend-Bezeichnung kurz;
-- bestehende IDs bleiben migrierbar.
+Tests:
+- Legacy 270/270 PASS;
+- Portal Discovery PASS;
+- World Routing PASS;
+- 8 Worlds E2E PASS;
+- Portal Scale PASS;
+- Portal Negative PASS;
+- Admin/Resume PASS.
 
-Magazin:
-- `journal_cat` separat.
+## Kein falscher PASS
 
-HivePress:
-- `hp_listing_category` separat.
+Der reale vollständige Hobby-Depot-Baum ist noch **nicht** erzeugt.
 
-## Prüfung
+Grund:
+Der bereits erfasste echte Gesamtbestand ist laut HD-002-Current vorhanden, aber im aktuell verfügbaren Archiv nicht als exportierte Kandidatenliste und nicht als HD-002-Source verfügbar.
 
-- 270/270 PASS;
-- Full Builder Flex PASS;
-- realer Buchbinden-Altbestand PASS;
-- Full E2E Positiv PASS;
-- Full E2E Negativ PASS;
-- Fresh-Unpack erneut PASS;
-- Runtime-Parität 19/19;
-- Installer PHP 19/19 PASS.
-
-Installer SHA-256:
-`601a7c7e8a796a12cb9f27388899cdd82264e460314284e29f5ef0018c33e05a`
-
-Source SHA-256:
-`6ace7bb651025729da6a80d055076c689ee5ff3ba619ec783c1bebb07cda25e9`
+Keine Rekonstruktion aus Chatgedächtnis.
 
 ## ERSTER BLOCKER
 
-`HD001_V199_LIVE_INSTALL_AND_FRONTEND_READBACK_OPEN`
+`HD001_V1100_REAL_HD002_INVENTORY_INPUT_NOT_BOUND`
 
 ## NEXT ACTION
 
-V1.9.9 installieren → Buchbinden publish/republish → echtes Frontend prüfen.
+Echten HD-002-Gesamtbestand read-only übernehmen/exportieren und unverändert als `hobby_candidates`-Quelle an Portal Discovery binden.
+
+Danach erst kompletter realer DataForSEO→Gesamtbaum→WordPress-E2E.
