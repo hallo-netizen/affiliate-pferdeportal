@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_LIBRARY_SINGLE_TRUTH_STALE_EDGE_REEVALUATION_6_72_184_RED_GREEN_PASS",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672184_live_banner_migration_full_e2e_20261004.md",
-    "current_focus_reason": "Real screenshot proved the first 6.72.184 installer could still preserve a stale wrong Creative-Library edge. Exact negative fixture now reproduces destination=feeding with stored target=Schabracken. Banner-only migration now clears only derived automatic edge fields before the existing planner recomputes from the real/decoded destination URL. Frontend hotpaths remain unchanged. Source and ZIP red-green gates are green; corrected real production readback remains open.",
+    "current_focus": "BANNER_LIBRARY_SINGLE_TRUTH_6_72_185_VERSION_SEPARATED_RED_GREEN_PASS",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672185_version_separation_full_e2e_20261005.md",
+    "current_focus_reason": "The corrected stale-edge migration is now a distinct 6.72.185 installer and uses distinct 6.72.185 migration state/cursor/hook/result keys. Exact bad 6.72.184 -> 6.72.185 upgrade is green even when the old 6.72.184 migration state is already done. Frontend performance hotpaths remain unchanged.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -124,7 +124,7 @@
       "topicless_final_fallback_required": true,
       "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION",
       "performance_recheck": {
-        "status": "PASS_SOURCE_AND_INSTALLED_ZIP_AFTER_STALE_EDGE_FIX",
+        "status": "PASS_6_72_185_SOURCE_AND_INSTALLED_ZIP",
         "protected_fast_paths": "UNCHANGED",
         "new_frontend_db_queries": 0,
         "new_frontend_http_calls": 0,
@@ -181,6 +181,25 @@
         "negative_zip_run": 37227361328,
         "positive_source_run": 37227561289,
         "positive_zip_run": 37227561276
+      },
+      "migration_672185": {
+        "scope": "ACTIVE_BANNERS_ONLY",
+        "old_184_done_state_must_not_suppress": true,
+        "distinct_state_cursor_hook_result": true,
+        "generic_full_pool_rescan": "FORBIDDEN",
+        "stale_automatic_edge_policy": "CLEAR_DERIVED_TOPIC_EDGE_BEFORE_EXISTING_DESTINATION_REPLAN",
+        "manual_fixed_control_preserved": true,
+        "products_replanned": false,
+        "ebay_product_campaign_unchanged": "PASS",
+        "idealo_product_campaign_unchanged": "PASS",
+        "remote_http_calls_in_gate": 0,
+        "source_upgrade_run": 37277975992,
+        "zip_upgrade_run": 37277994704,
+        "upgrade_assertions": "23_OF_23_PASS",
+        "fresh_banner_assertions": "21_OF_21_PASS",
+        "destination_library_assertions": "26_OF_26_PASS",
+        "package_identity": "27_OF_27_PASS",
+        "performance_hardlock": "PASS"
       }
     },
     "awin_catalog_refresh": {
@@ -218,7 +237,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "6_72_184_STALE_LIBRARY_EDGE_RED_GREEN_SOURCE_AND_ZIP_PASS_LIVE_READBACK_OPEN",
+      "status": "6_72_185_VERSION_SEPARATED_SOURCE_AND_ZIP_PASS_LIVE_READBACK_OPEN",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -608,7 +627,8 @@
     "bad_184_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
     "final_185_sha256": "a0e4c28fa28d91455e288a45d6d932c49869ab0ad80353fd606fcce8e2a14f2a",
     "final_185_bytes": 793173,
-    "current_source_manifest_sha256": "1ae468e75c28d3e98f5e0ee2b28ce7371558f9108b91c58d2161fce9b1b9a1f7"
+    "current_source_manifest_sha256": "1ae468e75c28d3e98f5e0ee2b28ce7371558f9108b91c58d2161fce9b1b9a1f7",
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672185_version_separation_full_e2e_20261005.md"
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
