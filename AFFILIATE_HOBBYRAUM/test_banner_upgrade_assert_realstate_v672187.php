@@ -33,10 +33,7 @@ echo 'HELMET_CAMPAIGN '.wp_json_encode(array('id'=>$helmetCampaign,'mode'=>$camp
 ack(sanitize_key((string)($campaignData['assignment_mode']??''))==='page_tree','MIGRATION_existing_campaign_page_tree');
 ack(in_array('page:reithelme',(array)($campaignData['automation_target_keys']??array()),true),'MIGRATION_existing_campaign_runtime_target_reithelme');
 
-// Generic full-pool work must be cancelled for this banner-only release.
-update_option(Pferdeportal_Affiliate_Router::OPTION_FULL_POOL_AUTOMATION_CURSOR,123,false);
-wp_schedule_single_event(time()+300,Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK);
-$call('ensure_full_pool_automation');
+// The first 6.72.187 init must already have cancelled generic work left by 6.72.186.
 ack((string)get_option(Pferdeportal_Affiliate_Router::OPTION_FULL_POOL_AUTOMATION_VERSION,'')==='6.72.187','PERF_full_pool_marked_done_187');
 ack(get_option(Pferdeportal_Affiliate_Router::OPTION_FULL_POOL_AUTOMATION_CURSOR,null)===null,'PERF_full_pool_cursor_removed');
 ack(!wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK),'PERF_full_pool_worker_cancelled');
