@@ -1,0 +1,35 @@
+name: TEMP Affiliate Live Dual Once
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-live-dual-once.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  dual-once:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read current two pages once cache-bypassed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import re, urllib.request, time
+          pat=re.compile(r'ppar-overview-wide-banner-link[^>]*href=["\']([^"\']+)["\']|href=["\']([^"\']+)["\'][^>]*ppar-overview-wide-banner-link',re.I)
+          for name,url in [
+            ("REITHELME","https://pferde-atelier.de/ausruestung/ausruestung-reiterbedarf/reithelme/"),
+            ("SCHABRACKEN","https://pferde-atelier.de/ausruestung/ausruestung-sattel/schabracken/")
+          ]:
+              u=url+"?ppar_now="+str(int(time.time()))
+              req=urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0","Cache-Control":"no-cache","Pragma":"no-cache"})
+              raw=urllib.request.urlopen(req,timeout=30).read().decode("utf-8","replace")
+              m=pat.search(raw)
+              href=((m.group(1) or m.group(2)) if m else "")
+              p=re.search(r'promoId=(\d+)',href,re.I)
+              print(name,"PROMO",p.group(1) if p else "NONE","HREF",href)
+          PY
