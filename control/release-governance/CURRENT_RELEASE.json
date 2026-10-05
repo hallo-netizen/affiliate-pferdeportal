@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 204,
+  "generation": 205,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -632,8 +632,8 @@
   },
   "execution_state": {
     "state": "PROVIDER_TOPIC_6_72_188_SOURCE_PHP_AND_ZIP_BUILD_PASS_WP_MARIADB_OPEN",
-    "authorized_next_action": "RUN_EXACT_6_72_188_WORDPRESS_MARIADB_SOURCE_AND_ZIP_GATE_WITHOUT_WORKFLOW_MUTATION",
-    "bound_user_scope_action": "Current 6.72.188 source is 27/27 bound; full PHP syntax is runner-proven 21/21 PASS and a temporary ZIP was built from the exact final source. Do not change source, banner ranking, frontend hotpaths, other providers or workflow files. Run only an exact 6.72.188 WordPress/MariaDB positive-negative source gate, build/persist the exact ZIP with fresh-unpack identity, run the same gate from that ZIP, then install/read back live.",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Run only the remaining exact 6.72.188 release gates: WordPress/MariaDB positive-negative on the bound current source, then build and persist the exact 27-file ZIP with fresh-unpack identity, run the same WordPress/MariaDB gate from that ZIP, then install it and perform the bounded ADCELL resync plus Reithelme 186 / Schabracken 193 live readback. Source PHP 21/21, 27/27 source identity and temporary ZIP construction are already proven PASS. Do not change source, banner ranking, frontend hotpaths, other providers or workflow files.",
     "completion_condition": "EXACT_6_72_188_WORDPRESS_MARIADB_SOURCE_AND_ZIP_GATES_PASS_AND_LIVE_REITHELME_186_NO_LONGER_FALLS_BACK_WHEN_322674_HAS_EXACT_PROVIDER_TOPIC_REITHELME",
     "after_completion_action": "THEN_AUDIT_ALL_PROVIDERS_AGAINST_THE_SAME_PROVIDER_NEUTRAL_IMPORT_SIGNAL_CONTRACT_WITHOUT_REOPENING_THE_PROVEN_ADCELL_FIX",
     "no_optional_detours": true,
