@@ -1,0 +1,19 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "maximum_articles": 0,
+  "maximum_articles_per_type": 0,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "article_type": "FAQ",
+      "category": "schabracken-faq",
+      "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+      "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+      "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+    }
+  ],
+  "batch_sha256": "e027ae81c5161630656a1860b7caa96d4429851d25985fda3f52c607e695a828"
+}
