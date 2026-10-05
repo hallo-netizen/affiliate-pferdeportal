@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 207,
+  "generation": 208,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.188",
-    "status": "ADCELL_GETPROMOTIONCATEGORIES_METHOD_PROVEN_PARAMETER_CONTRACT_OPEN_6_72_188_NOT_RELEASEABLE",
+    "status": "ADCELL_GETPROMOTIONCATEGORIES_METHOD_PROVEN_VALIDATION_DETAIL_READBACK_OPEN_6_72_188_NOT_RELEASEABLE",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -631,13 +631,13 @@
     }
   },
   "execution_state": {
-    "state": "ADCELL_GETPROMOTIONCATEGORIES_VALIDATION_CONTRACT_RESEARCH_OPEN",
+    "state": "ADCELL_GETPROMOTIONCATEGORIES_VALIDATION_DETAIL_READBACK_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Research and bind the exact authenticated ADCELL API v2 request contract for /affiliate/promotion/getPromotionCategories before any source edit. The method name is proven by live server behavior: getPromotionCategories returns validation error while getPromoCategories and other tested variants are undefined. Do not guess parameter names or HTTP semantics. Do not ask the user to run another probe until documentation research is exhausted. Do not change source, ranking, frontend hotpaths, AWIN, eBay, Digistore24 or Idealo.",
-    "completion_condition": "EXACT_ADCELL_GETPROMOTIONCATEGORIES_REQUIRED_PARAMETERS_AND_HTTP_CONTRACT_PROVEN_FROM_AUTHENTICATED_OFFICIAL_DOCUMENTATION_OR_EQUIVALENT_DIRECT_EVIDENCE",
+    "bound_user_scope_action": "Public documentation research is exhausted. Run exactly one bounded read-only repeat of the already-proven /affiliate/promotion/getPromotionCategories request using the same tested parameters and preserve the server's existing validation payload value from data[0]. Do not try alternative parameter names, start sync, write database state, follow tracking links, or change production source, ranking, frontend hotpaths, AWIN, eBay, Digistore24 or Idealo.",
+    "completion_condition": "ADCELL_GETPROMOTIONCATEGORIES_VALIDATION_PAYLOAD_DATA_0_CAPTURED_EXACTLY",
     "after_completion_action": "THEN_FIX_ONLY_THE_PROVEN_ADCELL_TRANSPORT_ROUTE_IN_THE_PROVIDER_ADAPTER_AND_REENTER_SOURCE_WORDPRESS_MARIADB_AND_ZIP_GATES; AFTER LIVE CLOSEOUT AUDIT_OTHER_PROVIDERS_AGAINST_PROVIDER_TOPIC_CONTRACT",
     "no_optional_detours": true,
-    "sequence": 64,
+    "sequence": 65,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672188_adcell_category_route_contract_20261005.md",
     "evidence_sha256": "2921d867c998d076556b03d403af8854de20a10dc4335a6d8ee034ec276318b4",
     "current_source_manifest_sha256": "5045724a7d546ea2e193538d586175a8ccb9449ab16d873a5e13d5fb85411c6c",
