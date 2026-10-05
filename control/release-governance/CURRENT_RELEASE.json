@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 191,
+  "generation": 192,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "1ae468e75c28d3e98f5e0ee2b28ce7371558f9108b91c58d2161fce9b1b9a1f7",
+    "manifest_sha256": "5042a415b825bebd3a5059d0994c89a61002448cfa0ff80ee4b1f6f645286cea",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,19 +36,19 @@
   },
   "active_candidate": {
     "version": "6.72.186",
-    "status": "STRICT_BEST_BANNER_TIER_ALL_CONTEXTS_NEGATIVE_PROVEN_FIX_BOUND",
+    "status": "STRICT_BEST_BANNER_TIER_SOURCE_AND_EXACT_ZIP_RED_GREEN_PASS_LIVE_READBACK_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "1ae468e75c28d3e98f5e0ee2b28ce7371558f9108b91c58d2161fce9b1b9a1f7",
+    "current_source_manifest_sha256": "5042a415b825bebd3a5059d0994c89a61002448cfa0ff80ee4b1f6f645286cea",
     "source_file_count": 27,
-    "candidate_reference_artifact_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
-    "candidate_reference_scope": "6_72_185_PRODUCTION_ZIP_SHA_13FFF3_USED_AS_NEGATIVE_BASELINE; RUN_37293474957_PROVES_ONE_EXACT_PLUS_GENERAL_FALLS_TO_GENERAL_AT_SECOND_SELECTION_ACROSS_ACTIVE_CONTEXTS; BREED_SINGLE_CAN_LOSE_EXACT_AT_FIRST_SELECTION; ZERO_FRONTEND_HTTP; FIX_NOT_YET_GREEN",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip",
-    "final_artifact_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.185.zip",
-    "handoff_artifact_bytes": 793173
+    "candidate_reference_artifact_sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
+    "candidate_reference_scope": "EXACT_6_72_185_SHA_13FFF3_RED_PROVEN_THEN_SAME_WORDPRESS_BUILT_6_72_186_GREEN; SOURCE_RUN_37295037827_139_OF_139_PLUS_21_OF_21_PLUS_26_OF_26_PLUS_PERFORMANCE_PASS; ZIP_RUN_37295977106_139_OF_139_PLUS_21_OF_21_PLUS_26_OF_26_PLUS_27_OF_27_PLUS_PHP_21_OF_21_PLUS_PERFORMANCE_PASS; LIVE_READBACK_OPEN",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip",
+    "final_artifact_sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.186.zip",
+    "handoff_artifact_bytes": 793558
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "BANNER_LIBRARY_SINGLE_TRUTH_6_72_185_VERSION_SEPARATED_RED_GREEN_PASS",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672185_version_separation_full_e2e_20261005.md",
-    "current_focus_reason": "The corrected stale-edge migration is now a distinct 6.72.185 installer and uses distinct 6.72.185 migration state/cursor/hook/result keys. Exact bad 6.72.184 -> 6.72.185 upgrade is green even when the old 6.72.184 migration state is already done. Frontend performance hotpaths remain unchanged.",
+    "current_focus": "BANNER_STRICT_BEST_RELEVANCE_TIER_6_72_186_RED_GREEN_PASS",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672186_strict_best_banner_tier_full_e2e_20261005.md",
+    "current_focus_reason": "6.72.185 allowed weaker fallback banners to remain deliverable after the best topic match was known; second-position selection could therefore leave exact and choose general. 6.72.186 keeps only the best existing banner relevance band in memory before distribution. One best banner stays fixed; multiple best banners rotate only within that band. Breed exact stored target edges now precede neutral breed fallback. Source and exact ZIP are red-green proven; real Reithelme/Schabracken readback remains open.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -124,12 +124,12 @@
       "topicless_final_fallback_required": true,
       "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION",
       "performance_recheck": {
-        "status": "PASS_6_72_185_SOURCE_AND_INSTALLED_ZIP",
-        "protected_fast_paths": "UNCHANGED",
+        "status": "PASS_6_72_186_SOURCE_AND_EXACT_ZIP",
+        "protected_fast_paths": "BODY_IDENTICAL_TO_A381AFF4_BASELINE",
         "new_frontend_db_queries": 0,
         "new_frontend_http_calls": 0,
-        "planning_only_mapping_work": true,
-        "output_object_frontend_reclassification": "REMOVED"
+        "frontend_destination_reclassification": "NONE",
+        "strict_tier_filter": "MEMORY_ONLY"
       },
       "product_path_inspiration": {
         "principle": "CANDIDATES_THEN_TECHNICAL_GATE_THEN_RELEVANCE_THEN_SELECTION_THEN_RENDER",
@@ -200,6 +200,28 @@
         "destination_library_assertions": "26_OF_26_PASS",
         "package_identity": "27_OF_27_PASS",
         "performance_hardlock": "PASS"
+      },
+      "strict_best_tier_672186": {
+        "hierarchy": [
+          "exact",
+          "extended_topic",
+          "general",
+          "technical"
+        ],
+        "rule": "ONLY_HIGHEST_AVAILABLE_BAND_DELIVERABLE",
+        "one_best_banner": "FIXED_REUSE_NO_LOWER_TIER_ESCAPE",
+        "multiple_best_banners": "ROTATE_ONLY_WITHIN_BEST_BAND",
+        "breed_exact_precedence": true,
+        "focused_negative_run": 37293474957,
+        "all_context_negative_run": 37293850326,
+        "source_positive_run": 37295037827,
+        "zip_red_green_run": 37295977106,
+        "universal_assertions": "139_OF_139_PASS",
+        "existing_banner_regression": "21_OF_21_PASS",
+        "destination_library_regression": "26_OF_26_PASS",
+        "package_identity": "27_OF_27_PASS",
+        "php_lint": "21_OF_21_PASS",
+        "frontend_http_calls": 0
       }
     },
     "awin_catalog_refresh": {
@@ -237,7 +259,7 @@
       "backend_statistics": "PROVIDER_ORIGINAL_REPORT_DATA_ONLY_NO_LOCAL_MEASUREMENT"
     },
     "overview_wide_banner_policy": {
-      "status": "6_72_185_VERSION_SEPARATED_SOURCE_AND_ZIP_PASS_LIVE_READBACK_OPEN",
+      "status": "6_72_186_STRICT_BEST_TIER_SOURCE_AND_ZIP_PASS_LIVE_READBACK_OPEN",
       "page_types": [
         "STARTSEITE",
         "KATEGORIEN_ALLE_EBENEN",
@@ -609,40 +631,32 @@
     }
   },
   "execution_state": {
-    "state": "FIX_STRICT_BEST_BANNER_TIER_6_72_186",
-    "authorized_next_action": "CHANGE_ONLY_GLOBAL_BANNER_BEST_TIER_SELECTION_AND_BREED_EXACT_PRECEDENCE; DO_NOT_CHANGE_PROTECTED_PERFORMANCE_FUNCTIONS; BUMP_TO_6_72_186; RUN_IDENTICAL_ALL_CONTEXTS_NEGATIVE_TO_POSITIVE_PLUS_MULTI_EXACT_ROTATION_PLUS_PERFORMANCE_HARDLOCK_PLUS_FULL_ZIP_REGRESSIONS",
-    "bound_user_scope_action": "For every banner content level and post type, determine the highest available relevance band first. Delivery and rotation may use only candidates inside that band. If exactly one exact/topic-best banner exists, it remains fixed and may be reused rather than falling to a weaker banner. If multiple best-tier banners exist, rotate only within that best tier. Exact stored target edges must outrank the historical breed-neutral distribution rule. No new frontend DB query, HTTP call, destination URL analysis, provider special path, or data migration.",
-    "completion_condition": "6_72_186_ALL_ACTIVE_CONTEXTS_ONE_EXACT_FIXED_AND_MULTI_EXACT_ROTATES_ONLY_INSIDE_EXACT; BREED_EXACT_PRECEDENCE_PASS; PERFORMANCE_HARDLOCK_PASS; FULL_SOURCE_AND_ZIP_REGRESSIONS_PASS",
-    "after_completion_action": "HAND_OFF_6_72_186_FOR_REAL_REITHELME_AND_SCHABRACKEN_READBACK_ONLY_AFTER_ALL_GATES_PASS",
+    "state": "CORRECTED_6_72_186_STRICT_TIER_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
+    "authorized_next_action": "INSTALL_EXACT_6_72_186_SHA_1CA526CE_ON_REAL_WORDPRESS_AND_READBACK_REITHELME_AND_SCHABRACKEN_WITH_REPEATED_REQUESTS",
+    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.186.zip SHA-256 1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae over 6.72.185. Then read back Reithelme and Schabracken repeatedly. If an exact Reithelme banner is available, no general SanoVet/Guardian/other fallback may win. With one best-tier banner it must stay fixed; with multiple best-tier banners any change must remain inside that best tier. Do not rebuild before a real evidenced 6.72.186 failure.",
+    "completion_condition": "REAL_WORDPRESS_6_72_186_REITHELME_AND_SCHABRACKEN_REPEATED_READBACK_PROVES_NO_LOWER_TIER_ESCAPE",
+    "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_FAILURE",
     "no_optional_detours": true,
-    "sequence": 61,
-    "negative_evidence": {
-      "exact_zip": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip",
-      "exact_zip_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
-      "focused_run": 37293474957,
-      "all_contexts_run": 37293850326,
-      "focused_result": "CASE_A_POSITION1_EXACT_POSITION2_GENERAL_EXPECTED_RED",
-      "all_contexts_result": "ACTIVE_VISIBLE_CONTEXTS_REPRODUCE_LOWER_TIER_ESCAPE; BREED_SINGLE_EXACT_PRECEDENCE_BROKEN",
-      "frontend_http_calls": 0
-    },
-    "performance_lock": {
-      "protected_functions_must_remain_body_identical_to_baseline": "a381aff4eb3f41754186f4bad86ce1a7e0823a29",
-      "no_new_frontend_db_queries": true,
-      "no_new_frontend_http_calls": true,
-      "no_frontend_destination_reclassification": true,
-      "no_full_pool_rescan": true
-    },
-    "authorized_change_prefixes": [
-      "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
-      "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt",
-      "AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672186.php",
-      ".github/workflows/tmp-affiliate-strict-best-tier-672186.yml",
-      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-      "release/affiliate-zentrale/artifacts/final/",
-      "release/affiliate-zentrale/evidence/",
-      "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
-      "control/release-governance/CURRENT_RELEASE.json"
-    ]
+    "sequence": 62,
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672186_strict_best_banner_tier_full_e2e_20261005.md",
+    "evidence_sha256": "6975eb481e9fe32a07e8ff9e2cbd7cb51df79657411665f91b88bea4daf6cd3d",
+    "current_source_manifest_sha256": "5042a415b825bebd3a5059d0994c89a61002448cfa0ff80ee4b1f6f645286cea",
+    "final_installer": {
+      "path": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.186.zip",
+      "sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
+      "bytes": 793558,
+      "git_blob_sha": "d6b019c7cc6680136b54aca8ed728f8ebffa200c",
+      "source_positive_run": 37295037827,
+      "zip_red_green_run": 37295977106,
+      "negative_baseline_version": "6.72.185",
+      "negative_baseline_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
+      "universal": "139_OF_139_PASS",
+      "legacy_banner": "21_OF_21_PASS",
+      "destination_library": "26_OF_26_PASS",
+      "package_files": "27_OF_27_PASS",
+      "php_lint": "21_OF_21_PASS",
+      "performance": "PASS_PROTECTED_BODIES_IDENTICAL_MEMORY_ONLY_STRICT_TIER_ZERO_FRONTEND_HTTP"
+    }
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
