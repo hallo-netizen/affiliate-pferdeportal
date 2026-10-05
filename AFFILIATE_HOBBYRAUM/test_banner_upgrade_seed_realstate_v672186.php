@@ -78,6 +78,8 @@ foreach((array)$campaignIds as $pid){
 }
 update_option('ppar_banner_library_migration_state_v672185','done',false);
 update_option('ppar_full_pool_automation_version_v1','6.72.186',false);
+update_option(Pferdeportal_Affiliate_Router::OPTION_FULL_POOL_AUTOMATION_CURSOR,123,false);
+wp_schedule_single_event(time()+300,Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK);
 
 // Product sentinels must remain byte-identical through the banner-only repair.
 $save=$rm('save_campaign_record');
