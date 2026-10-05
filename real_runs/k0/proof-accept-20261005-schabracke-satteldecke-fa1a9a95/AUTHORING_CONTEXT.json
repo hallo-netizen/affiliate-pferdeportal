@@ -1,0 +1,184 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "article_type": "FAQ",
+    "category": "schabracken-faq",
+    "plan_slot": "fa1a9a959616dfebead59102343f751a7147e9b149afaff63a01d42d7b1fa442",
+    "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+    "title": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+  },
+  "content_profile": {
+    "search_intent": "INFORMATIONAL_DIRECT_QUESTION"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_title": "Krämer – Welche Sattelunterlagen gibt es?",
+          "source_url": "https://www.kraemer.de/ratgeber/schabracken-arten"
+        },
+        {
+          "source_title": "Krämer – Ratgeber Sattelzubehör",
+          "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer"
+        },
+        {
+          "source_title": "Loesdau – Schabracken für jeden Reitstil",
+          "source_url": "https://www.loesdau.de/pferd/saettel-zubehoer/schabracken/"
+        },
+        {
+          "source_title": "Krämer – Schabracken und Satteldecken",
+          "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken"
+        }
+      ],
+      "claims": [
+        "Schabracke und Satteldecke erfüllen als Sattelunterlagen eine ähnliche Grundfunktion; der wichtigste Unterschied liegt in der Schnittform: Satteldecken folgen stärker der Form des Sattels, Schabracken sind meist rechteckiger geschnitten.",
+        "Sattelunterlagen wie Schabracken und Satteldecken schützen den Sattel vor Schweiß und Schmutz; ihre Form und ihr Material sollen zum verwendeten Sattel passen.",
+        "Eine Satteldecke ist in der Regel anatomisch und stärker an die Sattelform angepasst, während eine Schabracke weiter über den Sattel hinausragt und meist rechteckig geschnitten ist.",
+        "Unabhängig von der Bezeichnung muss die Unterlage zum Sattel passen, faltenfrei liegen und am Widerrist ausreichend frei bleiben."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was ist der Unterschied zwischen Schabracke und Satteldecke",
+      "topic": "Was ist der Unterschied zwischen Schabracke und Satteldecke?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "schabracken-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was ist der Unterschied zwischen Schabracke und Satteldecke?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_title": "Krämer – Welche Sattelunterlagen gibt es?",
+        "source_url": "https://www.kraemer.de/ratgeber/schabracken-arten",
+        "evidence_text_sha256": "363713a9b202e083ec2fd78de741d6198164774e50369e535c3e884994a80c5b",
+        "statement": "Schabracke und Satteldecke erfüllen als Sattelunterlagen eine ähnliche Grundfunktion; der wichtigste Unterschied liegt in der Schnittform: Satteldecken folgen stärker der Form des Sattels, Schabracken sind meist rechteckiger geschnitten.",
+        "evidence_text": "Schabracke und Satteldecke erfüllen als Sattelunterlagen eine ähnliche Grundfunktion; der wichtigste Unterschied liegt in der Schnittform: Satteldecken folgen stärker der Form des Sattels, Schabracken sind meist rechteckiger geschnitten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_title": "Krämer – Ratgeber Sattelzubehör",
+        "source_url": "https://www.kraemer.de/ratgeber/sattelzubehoer",
+        "evidence_text_sha256": "36ca7859862205c210bed9dc835f86f3a6c3ba75bed6fec05581214a27d4e3c9",
+        "statement": "Sattelunterlagen wie Schabracken und Satteldecken schützen den Sattel vor Schweiß und Schmutz; ihre Form und ihr Material sollen zum verwendeten Sattel passen.",
+        "evidence_text": "Sattelunterlagen wie Schabracken und Satteldecken schützen den Sattel vor Schweiß und Schmutz; ihre Form und ihr Material sollen zum verwendeten Sattel passen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_title": "Loesdau – Schabracken für jeden Reitstil",
+        "source_url": "https://www.loesdau.de/pferd/saettel-zubehoer/schabracken/",
+        "evidence_text_sha256": "d58ea54105d8fef322d30716038ed784823717bb7630a595d79e86418fd5bbe4",
+        "statement": "Eine Satteldecke ist in der Regel anatomisch und stärker an die Sattelform angepasst, während eine Schabracke weiter über den Sattel hinausragt und meist rechteckig geschnitten ist.",
+        "evidence_text": "Eine Satteldecke ist in der Regel anatomisch und stärker an die Sattelform angepasst, während eine Schabracke weiter über den Sattel hinausragt und meist rechteckig geschnitten ist.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_title": "Krämer – Schabracken und Satteldecken",
+        "source_url": "https://www.kraemer.de/Pferdebedarf-Pferdezubehoer/Schabracken-Sattelpads/Schabracken-Satteldecken",
+        "evidence_text_sha256": "3589c05910f8aec408f13f63cd7f5d5dfd68032ddcef473e129511bbc88613b2",
+        "statement": "Unabhängig von der Bezeichnung muss die Unterlage zum Sattel passen, faltenfrei liegen und am Widerrist ausreichend frei bleiben.",
+        "evidence_text": "Unabhängig von der Bezeichnung muss die Unterlage zum Sattel passen, faltenfrei liegen und am Widerrist ausreichend frei bleiben.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/ausruestung/ausruestung-sattel/schabracken/",
+        "anchor": "Schabracken",
+        "block": "answer"
+      },
+      {
+        "role": "semantic_related",
+        "href": "/ausruestung/ausruestung-sattel/satteldecken/",
+        "anchor": "Satteldecken",
+        "block": "details"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/schabracken-pflege/",
+        "anchor": "Pflege Schabracken",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/ausruestung/ausruestung-sattel/schabracken/",
+        "active": true
+      },
+      {
+        "href": "/ausruestung/ausruestung-sattel/satteldecken/",
+        "active": true
+      },
+      {
+        "href": "/category/schabracken-pflege/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "semantic_related",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "schabracken-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Schabracke",
+      "Satteldecke",
+      "Sattelunterlage",
+      "Schnittform",
+      "Sattel",
+      "Passform",
+      "Widerrist",
+      "Schutz",
+      "Material"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "EXISTING_CHECKLIST_EQUIVALENT",
+      "rationale": "Die Unterschiede lassen sich über Form, Funktion und Passform mit einer kurzen Checkliste klarer erklären als mit einer zusätzlichen Tabelle."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": [],
+    "expected_list_name": "key_answers"
+  },
+  "publish_allowed": false
+}
