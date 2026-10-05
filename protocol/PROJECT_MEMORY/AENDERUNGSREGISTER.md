@@ -409,3 +409,28 @@ REGEL:
 
 LOKALE EVIDENZ:
 251/251 V1.9.4-Baseline PASS; V1.9.5 256/256 PASS; Fresh-Source 256/256 PASS; Runtime-Parität 22/22 PASS.
+
+
+## HOBBYRAUSCH-HD001-20261005-B – Kategorien müssen inkrementell erweiterbar bleiben
+
+WAS:
+HD-001 erhält mit V1.9.6 einen echten Sparse-Extension-Vertrag. Eine spätere Ergänzung muss nur neue oder geänderte Knoten liefern; der vorhandene produktive Baum wird serverseitig aus der Lifecycle-Baseline erhalten und ergänzt.
+
+WARUM:
+Der Nutzer verlangt ausdrücklich einen dauerhaft flexiblen Kategorienbaum. Neue Hobbys, Unterseiten, Leaf-Kategorien, Magazin- oder HivePress-Zweige dürfen keinen kompletten System- oder Kategorienbaum-Neuaufbau erfordern.
+
+REGEL:
+- stable identity = concept_id;
+- sparse extension merge gegen aktuelle Baseline;
+- nicht genannte Alt-Knoten = behalten;
+- keine automatische Löschung;
+- Löschung/Retirement im Extension-Pfad = BLOCKED;
+- falsche project_id / Baseline-Hash / Parent = BLOCKED;
+- nach Merge laufen die bestehenden Hard-Gates weiter;
+- Deployment schreibt nur das tatsächliche Delta.
+
+REALTEST:
+Echte Buchbinden-Preview mit 7 Knoten + 1 synthetischer Extension-Knoten → 7 UNCHANGED + 1 ADDED, 0 RETIRED, automatic_delete=false.
+
+LOKALE EVIDENZ:
+V1.9.6 263/263 PASS; Fresh Source 263/263 PASS; Runtime Source↔Installer 23/23 byteidentisch; Installer PHP 17/17 PASS.
