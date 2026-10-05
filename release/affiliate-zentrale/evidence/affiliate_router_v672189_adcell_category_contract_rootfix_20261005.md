@@ -42,3 +42,16 @@ No banner ranking, frontend hotpath, provider-neutral topic matcher, Awin, eBay,
 - Recalculation switched to explicit Base64 file content and was verified against the runner's actual SHA256.
 - Large JSON assets beyond Base64 response limits were verified through complete raw Git-blob content with exact byte-size checks.
 - Final 27/27 manifest SHA256: `c90e0bd1de1f2c6df5b5d2afe119df9ce9b8507a8d89de4897de517e0783f264`.
+
+
+## Gate readback after byte-exact binding
+- Real GitHub runner: Category Integration Hard Baseline run `37343607016`, job `111876552707`.
+- Step `Affiliate governance check` = **PASS**. That step executes `release_guard.py governance-check` and `release_guard.py start`; therefore governance plus canonical source/manifest verification passed on the bound checkout.
+- Targeted PHP syntax check for the actually changed 6.72.189 ADCELL category-request/resync code = **PASS**.
+- A full exact 21/21 PHP lint for 6.72.189 is still **OPEN** because all automatically triggered historical affiliate workflows stop on hard-coded old version assertions before their lint step; no workflow mutation is authorized.
+- Exact-current-source temporary ZIP construction succeeded in historical ZIP workflow run `37342153135`, job `111871619465`: SHA256 `c3481450762c567e8841b9df7499da75b081fadd195d9c3047ce31a0fece4427`, size `794933` bytes.
+- That temporary ZIP was not persisted as a final artifact and its fresh-unpack identity/PHP lint/WordPress gate did not run because the next historical workflow step stops on the obsolete fixed assertion `Version: 6.72.183`.
+- No final installer or live PASS is claimed.
+
+## Exact external contract proof still required
+The transport method and required request key are proven, but a successful `getPromotionCategories?programId=10787` response has not yet been observed. Before release, one bounded read-only request must prove the returned list shape and the actual name associated with promotion category `14727`. No alternate endpoint or parameter guessing is required.
