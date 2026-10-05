@@ -1,3 +1,21 @@
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-05 – PSTE 0.57.39
+
+Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
+
+- letzter per Screenshot eindeutig sichtbarer Live-Stand: **PSTE 0.57.36**;
+- 0.57.38: PSERC-Planabdeckung lokal repariert, aber durch Journal-Inventarlücke als finaler Stand supersediert;
+- aktueller konsolidierter lokaler Kandidat: **PSTE 0.57.39**;
+- ZIP: `PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-HARDPASS.zip`;
+- SHA-256: `10a6e28e52639071ccde56d4c96f0ae3a37aae1d93bd8e2c51368f13f8e342f9`;
+- Testreport: `PSTE-0.57.39-JOURNAL-INVENTORY-CATEGORY-ROOTFIX-TESTREPORT.json`;
+- Testreport-SHA-256: `005c4a4d5c9ebf1437c0c882e5f00e19d3cea078e86c1bdb54a0e6d1b0c8105e`;
+- 1:1 Realfälle: Post 15974 `Wie alt werden Pferde?` → `Pferdegesundheit verstehen` / Journal; Post 16029 `Können Pferde schwimmen?` → `Pferdewissen & Grundlagen` / Journal;
+- regulärer Core-Fall unverändert; unbekannte Kategorie fail-closed; Extension/Core-Term-Kollision hard-block;
+- 0.57.38 PSERC-Planabdeckung bleibt byteidentisch enthalten;
+- PHP 81/81, JSON 54/54, Fresh-Unpack 136/136 byteidentisch;
+- **0.57.39 noch nicht live installiert/readback-bestätigt; keine PU-ID**;
+- isoliertes `CURRENT.zip` wurde nicht ersetzt, weil im Chat kein bytegenauer Repository-Binärsync ausgeführt wurde. Der geprüfte Installer liegt als Arbeitsartefakt vor.
+
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-05
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
