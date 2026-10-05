@@ -176,6 +176,8 @@ jobs:
               if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
               if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
               if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('hp_listing')) register_post_type('hp_listing',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
           },1);
           PHP
           git show 5f28fb69c2bd215e49c44c6e8c26ac7b8836f1bf:release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip > /tmp/bad184.zip
