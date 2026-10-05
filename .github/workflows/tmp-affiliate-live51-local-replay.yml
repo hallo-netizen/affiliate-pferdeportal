@@ -173,3 +173,83 @@ jobs:
           set -euo pipefail
           git diff --exit-code -- release/affiliate-zentrale/current/affiliate-portal-router
           echo "PASS replay changed no plugin production source"
+
+      - name: Build test-only generic final-leaf candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/leaf185
+          cp -a /tmp/live185zip/affiliate-portal-router /tmp/leaf185
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/leaf185/includes/trait-ppar-output-objects.php')
+          s=p.read_text()
+          old="""        $dest_tokens=$this->output_tokens($semantic);
+        $ranked=array();"""
+          new="""        $dest_tokens=$this->output_tokens($semantic);
+        // TEST-ONLY candidate: exact final URL leaf outranks the same token
+        // occurring only inside a containing path segment.
+        $destination_path=(string)wp_parse_url((string)($row['destination_url']??''),PHP_URL_PATH);
+        $destination_leaf=rawurldecode((string)basename(rtrim($destination_path,'/')));
+        $destination_leaf=preg_replace('/\\.[A-Za-z0-9]{1,8}$/','',$destination_leaf);
+        $destination_leaf_norm=$this->output_text(str_replace(array('-','_'),' ',$destination_leaf));
+        $ranked=array();"""
+          if old not in s: raise SystemExit('FAIL candidate insert anchor missing')
+          s=s.replace(old,new,1)
+          old2="""            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
+            $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) : count($matched)*140;"""
+          new2="""            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
+            $final_leaf_exact=$exact && $destination_leaf_norm!=='' && (
+                $destination_leaf_norm===$slug_norm || $destination_leaf_norm===$leaf_norm
+            );
+            $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) + ($final_leaf_exact?200:0) : count($matched)*140;"""
+          if old2 not in s: raise SystemExit('FAIL candidate score anchor missing')
+          s=s.replace(old2,new2,1)
+          p.write_text(s)
+          print('PASS test-only generic final-leaf candidate built')
+          PY
+          php -l /tmp/leaf185/includes/trait-ppar-output-objects.php
+
+      - name: Install fresh candidate replay environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wordpress2; CREATE DATABASE wordpress2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; GRANT ALL ON wordpress2.* TO 'wordpress'@'%'; FLUSH PRIVILEGES;"
+          rm -rf /tmp/wp-leaf51
+          mkdir -p /tmp/wp-leaf51
+          /tmp/wp core download --path=/tmp/wp-leaf51 --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-leaf51 --dbname=wordpress2 --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-leaf51 --url=http://127.0.0.1:8081 --title='Affiliate Leaf Candidate Replay' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-leaf51/wp-content/mu-plugins
+          cp /tmp/wp-live51/wp-content/mu-plugins/pferde-real-hierarchy-contract.php /tmp/wp-leaf51/wp-content/mu-plugins/
+          cp -a /tmp/leaf185 /tmp/wp-leaf51/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-leaf51
+
+      - name: Positive replay same real data on candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_live51_replay_v672185.php" --path=/tmp/wp-leaf51 | tee /tmp/live51-candidate.log
+          grep -F 'PASS raw_destination_derives_real_reithelme_page_186' /tmp/live51-candidate.log
+          grep -F 'PASS frontend_zero_http_calls' /tmp/live51-candidate.log
+          grep -F 'REAL51_REPLAY_GATE_COMPLETE' /tmp/live51-candidate.log
+          grep '^CRITICAL_REITHELME ' /tmp/live51-candidate.log
+          grep '^CRITICAL_SCHABRACKEN ' /tmp/live51-candidate.log
+          grep '^REPLAY_SUMMARY ' /tmp/live51-candidate.log
+
+      - name: Positive leaf and negative true ambiguity contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_destination_leaf_disambiguation_v672185.php" --path=/tmp/wp-leaf51 | tee /tmp/leaf-contract.log
+          grep -F 'PASS_REAL_LEAF_DISAMBIGUATION' /tmp/leaf-contract.log
+          grep -F 'PASS_TRUE_AMBIGUITY_REMAINS_BLOCKED' /tmp/leaf-contract.log
+
+      - name: Final proof production artifact untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- release/affiliate-zentrale/current/affiliate-portal-router release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
+          ACTUAL=$(sha256sum release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip | awk '{print $1}')
+          test "$ACTUAL" = '13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28'
+          echo "PASS production source and artifact byte-unchanged"
