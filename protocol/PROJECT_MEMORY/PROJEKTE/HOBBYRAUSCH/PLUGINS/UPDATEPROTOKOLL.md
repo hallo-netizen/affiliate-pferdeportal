@@ -116,3 +116,68 @@ EVIDENCE:
 
 CURRENT:
 `PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
+
+
+---
+
+## PU-20261005-003 – HD-001 Portalweite Gesamtbaum-Engine V1.10.0 (Entwicklungsstand, kein Release)
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PLUGIN:
+`Affiliate-Portal Kategorie-Workflow`
+
+ART:
+Eigenentwicklung / Hobby-Depot-Linie.
+
+FACHBÜRO:
+`SEO_KATEGORIEN`
+
+VON / AUF:
+V1.9.9 live bestätigter Content-Pilot → V1.10.0 lokale portalweite Arbeitskopie.
+
+WARUM:
+Buchbinden war nur der technische Pilot. Das Ziel ist der vollständige Hobby-Depot-Kategorienbaum aus Konzept + echtem Hobbybestand + DataForSEO, inklusive acht Hauptwelten, Content, Magazin und HivePress.
+
+ÄNDERUNG:
+- portalweite Rohkandidaten-Discovery;
+- bounded DataForSEO Overview-Batches;
+- Core-Keyword/Synonym-Dedupe;
+- canonical Seed-Auswahl;
+- evidenzbasierte Weltzuordnung über per-Hobby Suggestions;
+- exakt acht Konzeptwelten;
+- variable Concept-Batches;
+- getrennte Content-/Magazin-/HivePress-Stränge;
+- Admin-Import/Resume;
+- kein Publish während Discovery.
+
+ABHÄNGIGKEITEN / SCHNITTSTELLEN:
+Der bereits erfasste echte HD-002-Gesamtbestand soll ausschließlich read-only als Kandidatenquelle übernommen werden.
+Keine Schreibverbindung zu HD-002.
+
+POSITIVTEST:
+270/270 Altregression; Portal Discovery; World Routing; Concept Auto World; Eight Worlds E2E; Portal Scale; Admin Portal; Portal Resume jeweils PASS.
+
+NEGATIVTEST:
+Portal Negative PASS; ambige Weltzuordnung und ungültige Portalprofile fail-closed.
+
+SKALIERUNGSBELEG:
+844 synthetische Kandidaten in 2 Overview-Batches; 34 Concept-Batches bei Größe 25.
+Nur Maschinenbeweis, kein realer Hobbybestand.
+
+OFFENER BLOCKER:
+`HD001_V1100_REAL_HD002_INVENTORY_INPUT_NOT_BOUND`.
+
+RELEASE:
+KEIN RELEASE.
+Kein Upload-/Deploymentkandidat vor vollständigem realem Gesamtbestand→DataForSEO→Gesamtbaum→Frontend Positiv-/Negativ-E2E.
+
+ARTEFAKT:
+Kein isoliertes V1.10.0 `CURRENT.zip` ersetzen, solange der vollständige reale E2E fehlt.
+
+PACKAGING-HINWEIS:
+Arbeitskopie-Header = 1.10.0; `README.txt` trägt noch 1.9.6 und ist vor einem späteren Release zu bereinigen.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
