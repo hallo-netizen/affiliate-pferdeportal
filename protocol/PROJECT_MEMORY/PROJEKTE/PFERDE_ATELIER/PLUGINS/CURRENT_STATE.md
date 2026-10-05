@@ -1,3 +1,17 @@
+## TEXT-/SEO-PLUGIN-DELTA 2026-10-05
+
+Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität bleibt `../TEXT/CURRENT_STATE.md`.
+
+- Portal SEO Themenengine: letzter per Screenshot eindeutig sichtbarer Live-Stand **0.57.36**.
+- Lokaler Kandidat **0.57.38** behebt den PSERC-Editorial-Plan-Abdeckungsfehler und bestand 4472+16 lokal; **kein finaler Gesamtstand**.
+- Neu exakt belegter offener Fehler: bestehende Journal-/Magazinartikel können im allgemeinen PSTE-WordPress-Inventar Kategorie/Familie/Artikeltyp verlieren, obwohl dieselbe Extension-Kategorie im Kandidatenrouting korrekt registriert ist.
+- Reproduzierbarer Realfall: `Wie alt werden Pferde?` / WordPress Post-ID 15974; Kandidatenroute → Kategorie 1486 `Pferdegesundheit verstehen` / Journal, bestehender WordPress-Inventartreffer → `category_name=""`.
+- Rootcause: `PSTE_Snapshot::inventory()` akzeptiert nur reguläre `structure()['items']`-Kategorien; Artikeltyp-Erweiterungskategorien werden dort nicht über die vorhandene Extension-Registry/-Router-Autorität ergänzt.
+- **0.57.38 daher nicht installieren/freigeben als finalen Produktionsstand.**
+- Nächster zulässiger Pluginstand erst nach kleinstem Journal-Inventarmapping-Fix auf 0.57.38-Basis und vollständiger lokaler 1:1 Positiv-/Negativ-/Regression-Simulation.
+- Keine PU-ID für 0.57.38: kein ausgeführtes Live-Update auf 0.57.38 belegt.
+- Isoliertes `CURRENT.zip` wurde für 0.57.38 **nicht** ersetzt; wegen offenem Journal-Fehler darf es auch nicht als aktueller freigegebener Stand synchronisiert werden.
+
 ## TEXT-/SEO-PLUGIN-DELTA 2026-10-04
 
 Dieser Block ist Inventar-/Betriebsreadback; Fach-/NEXT-ACTION-Autorität für PSTE bleibt im TEXT-Bereich.
