@@ -556,3 +556,26 @@ EVIDENZ:
 
 WICHTIG:
 Der zuvor behauptete einzelne `full-e2e-positive.php`-PASS war nicht belastbar; standalone fiel er auch in der unveränderten alten V1.9.8-Quelle an der DataForSEO-Evidenzbindung durch. Dieser Scheintest wurde im V1.9.9-Abschlusslauf korrigiert und durch einen standalone grün laufenden Gesamt-E2E ersetzt.
+
+
+## HOBBYRAUSCH-HD001-20261005-H – V1.10.0 portalweite Discovery statt Einzelhobby
+
+WAS:
+HD-001 wurde lokal auf einen portalweiten Discovery-/Builder-Weg erweitert. Die Maschine kann große Rohlisten gegen DataForSEO Overview prüfen, Synonyme/Core-Keywords gruppieren, canonical Seeds bilden, die acht Konzeptwelten anhand pro-Hobby Suggestions evidenzbasiert routen und Content/Magazin/HivePress in Concept-Batches weitergeben.
+
+WARUM:
+Buchbinden war nur technischer Pilot. Das eigentliche Ziel ist der vollständige Hobby-Depot-Kategorienbaum. Die sichtbaren Namen und Hierarchien dürfen nicht aus einer statischen Hobbyliste geraten werden, sondern müssen aus Konzeptleitplanken + DataForSEO-Evidenz entstehen.
+
+REGEL:
+- Rohkandidatenliste != Taxonomie;
+- Konzept setzt Leitplanken;
+- DataForSEO entscheidet Nachfrage, Synonyme, canonical Seeds, Weltzuordnung und unterstützte Unterintentionen;
+- ambige Zuordnung bleibt BLOCKED;
+- kein Publish in der Discovery;
+- bereits erfasster realer HD-002-Gesamtbestand darf nicht durch eine neu erfundene Liste ersetzt werden.
+
+EVIDENZ:
+270/270 Regression PASS plus V1.10.0 Portal Discovery, World Routing, 8 Worlds E2E, Scale, Negative, Admin und Resume PASS. 844er Lauf ist nur Skalierungsbeweis.
+
+OFFEN:
+Realer HD-002-Gesamtbestand ist laut HD-002 Current erfasst, aber im verfügbaren Archiv derzeit nicht als vollständiger Export/Source gebunden. Echter Gesamtbaum daher noch nicht erzeugt.
