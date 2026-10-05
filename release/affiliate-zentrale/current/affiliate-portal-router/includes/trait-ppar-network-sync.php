@@ -225,17 +225,24 @@ trait PPAR_Network_Sync_Trait {
         return $this->adcell_api_v2_extract_token((string) ($response['body'] ?? ''));
     }
 
-    private function adcell_api_v2_request($path, $params = array(), $token = '') {
+    private function adcell_api_v2_request($path, $params = array(), $token = '', $method = 'GET') {
         $path = '/' . ltrim((string) $path, '/');
-        $allowed_paths = array(
-            '/affiliate/program/export',
-            '/affiliate/promotion/getPromotionTypeCsv',
-            '/affiliate/promotion/getPromotionTypeBanner',
-            '/affiliate/promotion/getPromotionTypeDeeplink',
-            '/affiliate/promotion/getPromoCategories',
+        $allowed_methods = array(
+            '/affiliate/program/export' => 'GET',
+            '/affiliate/promotion/getPromotionTypeCsv' => 'GET',
+            '/affiliate/promotion/getPromotionTypeBanner' => 'GET',
+            '/affiliate/promotion/getPromotionTypeDeeplink' => 'GET',
+            // Live 6.72.186 root cause: this endpoint rejects GET with HTTP 405.
+            // Keep the transport contract inside the ADCELL adapter; all other
+            // provider and frontend paths remain untouched.
+            '/affiliate/promotion/getPromoCategories' => 'POST',
         );
-        if (!in_array($path, $allowed_paths, true)) {
+        if (!isset($allowed_methods[$path])) {
             return new WP_Error('adcell_api_path_blocked', 'Nicht gebundener ADCELL-API-v2-Pfad wurde blockiert.');
+        }
+        $method = strtoupper(trim((string) $method));
+        if ($method !== $allowed_methods[$path]) {
+            return new WP_Error('adcell_api_method_blocked', 'Nicht gebundene ADCELL-API-v2-HTTP-Methode wurde blockiert.');
         }
         if ($token === '') {
             $token = $this->adcell_api_v2_token();
@@ -257,13 +264,22 @@ trait PPAR_Network_Sync_Trait {
             }
         }
         $query['token'] = (string) $token;
-        $url = add_query_arg($query, $this->adcell_api_v2_base_url() . ltrim($path, '/'));
-        $response = $this->api_response(wp_safe_remote_get($url, array(
+        $request_args = array(
             'timeout' => 25,
             'redirection' => 0,
             'headers' => array('Accept' => 'application/json'),
             'limit_response_size' => 4194304,
-        )));
+        );
+        $base_url = $this->adcell_api_v2_base_url() . ltrim($path, '/');
+        if ($method === 'POST') {
+            // WordPress encodes the scalar "programIds[]" field as a normal
+            // form field. No tracking URL is opened and no frontend request is added.
+            $request_args['body'] = $query;
+            $response = $this->api_response(wp_safe_remote_post($base_url, $request_args));
+        } else {
+            $url = add_query_arg($query, $base_url);
+            $response = $this->api_response(wp_safe_remote_get($url, $request_args));
+        }
         if (empty($response['ok'])) {
             return new WP_Error('adcell_api_request_failed', 'ADCELL API v2 nicht erreichbar: ' . sanitize_text_field((string) ($response['message'] ?? 'HTTP-Fehler')));
         }
@@ -423,7 +439,7 @@ trait PPAR_Network_Sync_Trait {
                 'programIds[]'=>$program_id,
                 'rows'=>$rows,
                 'page'=>$page,
-            ), $token);
+            ), $token, 'POST');
             // Einige ADCELL-Konten liefern die Werbemittelkategorien global statt
             // programmgefiltert. Dann einmal denselben dokumentierten Endpoint
             // ohne Programfilter lesen und anschliessend lokal auf programId filtern.
@@ -431,7 +447,7 @@ trait PPAR_Network_Sync_Trait {
                 $result = $this->adcell_api_v2_request('/affiliate/promotion/getPromoCategories', array(
                     'rows'=>$rows,
                     'page'=>$page,
-                ), $token);
+                ), $token, 'POST');
             }
             if (is_wp_error($result)) { return $result; }
             $data = (array)($result['data'] ?? array());
