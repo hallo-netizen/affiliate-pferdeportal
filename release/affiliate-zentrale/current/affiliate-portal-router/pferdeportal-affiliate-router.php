@@ -158,8 +158,8 @@ final class Pferdeportal_Affiliate_Router {
     const OPTION_AUTOMATION_CYCLE = 'ppar_automation_cycle_v1';
     const OPTION_FULL_POOL_AUTOMATION_VERSION = 'ppar_full_pool_automation_version_v1';
     const OPTION_FULL_POOL_AUTOMATION_CURSOR = 'ppar_full_pool_automation_cursor_v1';
-    const OPTION_BANNER_LIBRARY_MIGRATION_STATE = 'ppar_banner_library_migration_state_v672184';
-    const OPTION_BANNER_LIBRARY_MIGRATION_CURSOR = 'ppar_banner_library_migration_cursor_v672184';
+    const OPTION_BANNER_LIBRARY_MIGRATION_STATE = 'ppar_banner_library_migration_state_v672185';
+    const OPTION_BANNER_LIBRARY_MIGRATION_CURSOR = 'ppar_banner_library_migration_cursor_v672185';
     const OPTION_ASSIGNMENTS = 'ppar_assignments_v1';
     const OPTION_BANNER_DISTRIBUTION = 'ppar_banner_distribution_v1';
     const OPTION_HEALTH_SETTINGS = 'ppar_health_settings_v1';
@@ -209,7 +209,7 @@ final class Pferdeportal_Affiliate_Router {
     const ADCELL_SELF_DRIVE_TOKEN_TTL = 180;
     const ASSET_VERIFY_HOOK = 'ppar_verify_creative_assets';
     const FULL_POOL_WORKER_HOOK = 'ppar_full_pool_automation_worker_v1';
-    const BANNER_LIBRARY_MIGRATION_HOOK = 'ppar_banner_library_migration_worker_v672184';
+    const BANNER_LIBRARY_MIGRATION_HOOK = 'ppar_banner_library_migration_worker_v672185';
     const PARTNER_ANALYTICS_CRON_HOOK = 'ppar_partner_analytics_refresh_daily_v1';
     const AWIN_PROGRAMME_REFRESH_CRON_HOOK = 'ppar_awin_programme_inventory_refresh_hourly_v1';
     const HEALTH_SCHEMA_VERSION = '2.2';
@@ -327,8 +327,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
-        add_action('admin_init', array($this, 'ensure_banner_library_migration_v672184'), 33);
-        add_action(self::BANNER_LIBRARY_MIGRATION_HOOK, array($this, 'run_banner_library_migration_v672184'));
+        add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33);
+        add_action(self::BANNER_LIBRARY_MIGRATION_HOOK, array($this, 'run_banner_library_migration_v672185'));
         add_action(self::PARTNER_ANALYTICS_CRON_HOOK, array($this, 'run_partner_analytics_refresh'));
         add_action('admin_post_ppar_partner_analytics_refresh_now', array($this, 'handle_partner_analytics_refresh_now'));
         // AFF-ERR-039: recovery work is isolated to its dedicated worker.
