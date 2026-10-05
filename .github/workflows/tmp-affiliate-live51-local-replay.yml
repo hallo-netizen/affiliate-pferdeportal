@@ -6,6 +6,8 @@ on:
     paths:
       - 'AFFILIATE_HOBBYRAUM/test_banner_live51_replay_v672185.php'
       - 'AFFILIATE_HOBBYRAUM/test_banner_live_reithelme_ambiguity_probe_v672185.php'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_destination_leaf_disambiguation_v672185.php'
+      - 'AFFILIATE_HOBBYRAUM/build_test_only_leaf_candidate_v672185.py'
       - '.github/workflows/tmp-affiliate-live51-local-replay.yml'
 
 permissions:
@@ -174,40 +176,13 @@ jobs:
           git diff --exit-code -- release/affiliate-zentrale/current/affiliate-portal-router
           echo "PASS replay changed no plugin production source"
 
-      - name: Build test-only generic final-leaf candidate
+      - name: Build temporary generic leaf candidate only
         shell: bash
         run: |
           set -euo pipefail
           rm -rf /tmp/leaf185
           cp -a /tmp/live185zip/affiliate-portal-router /tmp/leaf185
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path('/tmp/leaf185/includes/trait-ppar-output-objects.php')
-          s=p.read_text()
-          old="""        $dest_tokens=$this->output_tokens($semantic);
-        $ranked=array();"""
-          new="""        $dest_tokens=$this->output_tokens($semantic);
-        // TEST-ONLY candidate: exact final URL leaf outranks the same token
-        // occurring only inside a containing path segment.
-        $destination_path=(string)wp_parse_url((string)($row['destination_url']??''),PHP_URL_PATH);
-        $destination_leaf=rawurldecode((string)basename(rtrim($destination_path,'/')));
-        $destination_leaf=preg_replace('/\\.[A-Za-z0-9]{1,8}$/','',$destination_leaf);
-        $destination_leaf_norm=$this->output_text(str_replace(array('-','_'),' ',$destination_leaf));
-        $ranked=array();"""
-          if old not in s: raise SystemExit('FAIL candidate insert anchor missing')
-          s=s.replace(old,new,1)
-          old2="""            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
-            $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) : count($matched)*140;"""
-          new2="""            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
-            $final_leaf_exact=$exact && $destination_leaf_norm!=='' && (
-                $destination_leaf_norm===$slug_norm || $destination_leaf_norm===$leaf_norm
-            );
-            $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) + ($final_leaf_exact?200:0) : count($matched)*140;"""
-          if old2 not in s: raise SystemExit('FAIL candidate score anchor missing')
-          s=s.replace(old2,new2,1)
-          p.write_text(s)
-          print('PASS test-only generic final-leaf candidate built')
-          PY
+          python3 AFFILIATE_HOBBYRAUM/build_test_only_leaf_candidate_v672185.py /tmp/leaf185
           php -l /tmp/leaf185/includes/trait-ppar-output-objects.php
 
       - name: Install fresh candidate replay environment
