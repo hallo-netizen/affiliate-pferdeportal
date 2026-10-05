@@ -1048,3 +1048,15 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 **Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672186_live_fail_guardian_rootcause_open_20261005.md`
 
 **Status:** LIVE_6_72_186_FAIL / ROOT_CAUSE_OPEN / NO_NEW_FIX_BEFORE_REAL_POOL_AND_RANK_DIAGNOSIS.
+
+### AFF-ERR-050 – Nachtrag 05.10.2026: Root Cause bewiesen, 6.72.189 Source-Fix gebunden
+
+**Nachweis:** Der reale Read-only-Kandidatenexport zeigte für Reithelme 186 und Schabracken 193 keine feste Assignment-Ursache. Der ADCELL-Banner 322674 war nur als allgemeiner Fallback materialisiert, weil zwar `promotionCategoryId=14727`, aber kein Kategoriename vorhanden war. Der zuerst angenommene API-Weg `getPromoCategories` wurde live widerlegt (HTTP 405, `undefined method`). Der reale ADCELL-Endpunkt `/affiliate/promotion/getPromotionCategories` wurde live erkannt; der exakte Validierungsfehler lautete `parameter "programId" is required`.
+
+**Gebundener Source-Fix 6.72.189:** ausschließlich ADCELL-Kategorienvertrag auf `GET /affiliate/promotion/getPromotionCategories` mit skalarem `programId` korrigiert; eigener versionsspezifischer ADCELL-Themen-Resync, damit alte `done`-States den korrigierten Import nicht unterdrücken. Keine Ranking-, Frontend-Hotpath-, AWIN-, eBay-, Digistore24- oder Idealo-Änderung.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672189_adcell_category_contract_rootfix_20261005.md`.
+
+**Autoritätshinweis:** Aktueller Status, erster Blocker und einzige NEXT ACTION stehen ausschließlich in `control/release-governance/CURRENT_RELEASE.json`. Dieser Nachtrag ist Fehlerhistorie/Nachweis, keine zweite Current-Wahrheit.
+
+**Historischer Status ersetzt durch:** ROOT_CAUSE_PROVEN / 6_72_189_SOURCE_MANIFEST_AND_GOVERNANCE_GUARD_PASS / EXTERNAL_SUCCESS_RESPONSE_AND_RELEASE_GATES_OPEN.
