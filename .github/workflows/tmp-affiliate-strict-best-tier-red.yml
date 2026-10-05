@@ -1,0 +1,71 @@
+name: TEMP Affiliate Strict Best Banner Tier RED
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-strict-best-tier-red.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_v672185.php'
+
+permissions:
+  contents: read
+
+jobs:
+  red:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact production ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
+          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
+          test "$ACTUAL" = '13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28'
+          echo "PASS exact production ZIP $ACTUAL"
+
+      - name: Install WordPress and exact ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-tier /tmp/plugin-tier
+          mkdir -p /tmp/wp-tier /tmp/plugin-tier
+          /tmp/wp core download --path=/tmp/wp-tier --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-tier --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-tier --url=http://127.0.0.1:8081 --title='Strict Banner Tier RED' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          unzip -q release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip -d /tmp/plugin-tier
+          cp -a /tmp/plugin-tier/affiliate-portal-router /tmp/wp-tier/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-tier
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS version 6.72.185\n";' --path=/tmp/wp-tier
+
+      - name: Run strict best-tier negative proof
+        shell: bash
+        run: |
+          set +e
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_v672185.php" --path=/tmp/wp-tier | tee /tmp/tier-red.log
+          RC=${PIPESTATUS[0]}
+          set -e
+          grep -F 'FAIL ONE_EXACT_position2_must_stay_exact' /tmp/tier-red.log
+          grep -F 'FAIL ONE_EXACT_general_never_enters_delivery' /tmp/tier-red.log
+          grep -F 'PASS ONE_EXACT_position1_exact' /tmp/tier-red.log
+          grep -F 'PASS FRONTEND_zero_http_calls' /tmp/tier-red.log
+          test "$RC" -ne 0
+          echo "EXPECTED_RED_STRICT_BEST_TIER_PROVEN"
