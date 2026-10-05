@@ -134,12 +134,22 @@ jobs:
           grep -F '"failures":0' /tmp/tier186.log
           grep -F 'PASS PERFORMANCE_zero_frontend_http :: http=0' /tmp/tier186.log
 
-      - name: Existing banner regression 21 of 21
+      - name: Existing banner regression 21 of 21 on fresh DB
         shell: bash
         run: |
           set -euo pipefail
+          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wordpress2; CREATE DATABASE wordpress2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; GRANT ALL ON wordpress2.* TO 'wordpress'@'%'; FLUSH PRIVILEGES;"
+          rm -rf /tmp/wp-reg
+          mkdir -p /tmp/wp-reg
+          /tmp/wp core download --path=/tmp/wp-reg --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-reg --dbname=wordpress2 --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-reg --url=http://127.0.0.1:8082 --title='Regression 186' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-reg/wp-content/mu-plugins
+          cp /tmp/wp-tier/wp-content/mu-plugins/pferde-e2e-design-contract.php /tmp/wp-reg/wp-content/mu-plugins/
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-reg/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-reg
           sed "s/6\\.72\\.185/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php >/tmp/full186.php
-          /tmp/wp eval-file /tmp/full186.php --path=/tmp/wp-tier | tee /tmp/full186.log
+          /tmp/wp eval-file /tmp/full186.php --path=/tmp/wp-reg | tee /tmp/full186.log
           grep -F 'SUMMARY passes=21 failures=0' /tmp/full186.log
 
       - name: Existing destination regression 26 of 26
@@ -147,6 +157,6 @@ jobs:
         run: |
           set -euo pipefail
           sed "s/6\\.72\\.183/6.72.186/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest186.php
-          /tmp/wp eval-file /tmp/dest186.php --path=/tmp/wp-tier | tee /tmp/dest186.log
+          /tmp/wp eval-file /tmp/dest186.php --path=/tmp/wp-reg | tee /tmp/dest186.log
           grep -F 'SUMMARY passes=26 failures=0' /tmp/dest186.log
           grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest186.log
