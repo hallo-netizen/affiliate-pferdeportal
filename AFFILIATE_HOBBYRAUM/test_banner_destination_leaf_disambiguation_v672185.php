@@ -33,3 +33,5 @@ if(!$real_ok){fwrite(STDERR,"FAIL real leaf URL did not resolve to page:186\n");
 if(!$amb_ok){fwrite(STDERR,"FAIL true ambiguity did not remain ambiguous\n");exit(1);}
 echo "PASS_REAL_LEAF_DISAMBIGUATION\n";
 echo "PASS_TRUE_AMBIGUITY_REMAINS_BLOCKED\n";
+
+// trigger live51 leaf candidate workflow
