@@ -3115,6 +3115,40 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
+     * V6.72.187 – Rootfix-Nachlauf fuer den live bewiesenen ADCELL-405-Fall.
+     * 6.72.88 ist auf bestehenden Installationen bereits "done"; deshalb braucht
+     * der korrigierte Kategorien-Transport genau einen neuen Hintergrundlauf.
+     * Kein API-Zugriff im Frontend.
+     */
+    public function maybe_upgrade_adcell_topic_metadata_v672187() {
+        $key = 'ppar_v672187_adcell_topic_resync_state';
+        $state = sanitize_key((string)get_option($key, ''));
+        if (in_array($state, array('scheduled','running','done'), true)) { return; }
+        update_option($key, 'scheduled', false);
+        if (!wp_next_scheduled('ppar_v672187_adcell_topic_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672187_adcell_topic_resync');
+        }
+    }
+
+    public function run_v672187_adcell_topic_resync() {
+        $key = 'ppar_v672187_adcell_topic_resync_state';
+        update_option($key, 'running', false);
+        $result = $this->automation_start_all_adcell_programmes();
+        if (is_wp_error($result)) {
+            update_option($key, 'retry', false);
+            if (!wp_next_scheduled('ppar_v672187_adcell_topic_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672187_adcell_topic_resync');
+            }
+            return;
+        }
+        update_option($key, 'done', false);
+        if (!wp_next_scheduled(self::ADCELL_BATCH_WORKER_HOOK)) {
+            wp_schedule_single_event(time()+1, self::ADCELL_BATCH_WORKER_HOOK);
+        }
+    }
+
+
+    /**
      * V6.72.99 RESTORE – exakter Rueckbau des von 6.72.94 geschriebenen
      * Bannerpool-Zustands. Nur Datensaetze mit dem von 6.72.94 eingefuehrten
      * Payload-Marker werden angefasst. Danach laeuft wieder der bewaehrte
