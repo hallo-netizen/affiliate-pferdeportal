@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 200,
+  "generation": 201,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "21209ec35b199b033a4aae3b4943f9c4be2b0bd609e92b88932afd9605da2b7f",
+    "manifest_sha256": "47a8383144dbc5daa56579fff41cce1f4c63a91bcfb85ab82d37f4ddf240cbfb",
     "source_file_count": 27,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -41,7 +41,7 @@
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "21209ec35b199b033a4aae3b4943f9c4be2b0bd609e92b88932afd9605da2b7f",
+    "current_source_manifest_sha256": "47a8383144dbc5daa56579fff41cce1f4c63a91bcfb85ab82d37f4ddf240cbfb",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
     "candidate_reference_scope": "6.72.186 LIVE-FAILED BASE; 6.72.187 SOURCE ROOTFIX ONLY, FINAL ZIP NOT YET BUILT",
@@ -640,7 +640,7 @@
     "sequence": 62,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672187_adcell_category_transport_rootfix_20261005.md",
     "evidence_sha256": "6975eb481e9fe32a07e8ff9e2cbd7cb51df79657411665f91b88bea4daf6cd3d",
-    "current_source_manifest_sha256": "21209ec35b199b033a4aae3b4943f9c4be2b0bd609e92b88932afd9605da2b7f",
+    "current_source_manifest_sha256": "47a8383144dbc5daa56579fff41cce1f4c63a91bcfb85ab82d37f4ddf240cbfb",
     "final_installer": null,
     "live_fail_evidence": {
       "version": "6.72.186",
