@@ -1,0 +1,90 @@
+name: TEMP Affiliate Strict Best Tier All Contexts RED
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-strict-best-tier-all-contexts-red.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672185.php'
+
+permissions:
+  contents: read
+
+jobs:
+  all-contexts-red:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact current production ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
+          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
+          test "$ACTUAL" = '13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28'
+          echo "PASS exact 6.72.185 ZIP $ACTUAL"
+
+      - name: Install exact WordPress MariaDB production simulation
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-all /tmp/plugin-all
+          mkdir -p /tmp/wp-all /tmp/plugin-all
+          /tmp/wp core download --path=/tmp/wp-all --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-all --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-all --url=http://127.0.0.1:8081 --title='All Context Banner Tier RED' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-all/wp-content/mu-plugins
+          cat >/tmp/wp-all/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          add_action('init', static function(){
+              if (!post_type_exists('uge_term')) register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('hp_listing')) register_post_type('hp_listing',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
+          },1);
+          PHP
+          unzip -q release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip -d /tmp/plugin-all
+          cp -a /tmp/plugin-all/affiliate-portal-router /tmp/wp-all/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-all
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS version 6.72.185\n";' --path=/tmp/wp-all
+
+      - name: Run all-context strict-tier negative proof
+        shell: bash
+        run: |
+          set +e
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672185.php" --path=/tmp/wp-all | tee /tmp/all-contexts-red.log
+          RC=${PIPESTATUS[0]}
+          set -e
+          grep -F 'ALL_CONTEXTS_SUMMARY' /tmp/all-contexts-red.log
+          grep -F 'ALL_CONTEXTS_FAILURES' /tmp/all-contexts-red.log
+          grep -F 'PASS ALL_CONTEXTS_zero_frontend_http' /tmp/all-contexts-red.log
+          test "$RC" -ne 0
+          echo "EXPECTED_RED_ALL_CONTEXTS_STRICT_TIER_PROVEN"
