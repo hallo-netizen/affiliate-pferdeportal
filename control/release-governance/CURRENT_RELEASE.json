@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 190,
+  "generation": 191,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,8 +35,8 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.185",
-    "status": "VERSION_SEPARATED_184_TO_185_RED_GREEN_SOURCE_AND_ZIP_FULL_E2E_PASS_LIVE_READBACK_OPEN",
+    "version": "6.72.186",
+    "status": "STRICT_BEST_BANNER_TIER_ALL_CONTEXTS_NEGATIVE_PROVEN_FIX_BOUND",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,7 +44,7 @@
     "current_source_manifest_sha256": "1ae468e75c28d3e98f5e0ee2b28ce7371558f9108b91c58d2161fce9b1b9a1f7",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
-    "candidate_reference_scope": "BAD_6_72_184_SHA_BC101_REPRODUCED; 6_72_185_DISTINCT_VERSION_AND_DISTINCT_MIGRATION_STATE; SOURCE_RUN_37278423032_PASS; ZIP_RUN_37278423041_23_OF_23_PLUS_FRESH_21_OF_21_PLUS_DESTINATION_26_OF_26_PLUS_MANIFEST_27_OF_27_PLUS_PERFORMANCE_HARDLOCK_PASS; LIVE_READBACK_OPEN",
+    "candidate_reference_scope": "6_72_185_PRODUCTION_ZIP_SHA_13FFF3_USED_AS_NEGATIVE_BASELINE; RUN_37293474957_PROVES_ONE_EXACT_PLUS_GENERAL_FALLS_TO_GENERAL_AT_SECOND_SELECTION_ACROSS_ACTIVE_CONTEXTS; BREED_SINGLE_CAN_LOSE_EXACT_AT_FIRST_SELECTION; ZERO_FRONTEND_HTTP; FIX_NOT_YET_GREEN",
     "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip",
     "final_artifact_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
     "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.185.zip",
@@ -609,26 +609,40 @@
     }
   },
   "execution_state": {
-    "state": "CORRECTED_6_72_185_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.185.zip SHA-256 13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28 over the currently installed bad 6.72.184. The 6.72.185 migration has distinct state/cursor/hook/result keys, so old 6.72.184 done state cannot suppress it. Then read back Schabracken first and representative page/category/post/glossary/breed slots.",
-    "completion_condition": "REAL_WORDPRESS_6_72_185_SCHABRACKEN_AND_REPRESENTATIVE_BANNER_READBACK_PASS",
-    "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_FAILURE",
+    "state": "FIX_STRICT_BEST_BANNER_TIER_6_72_186",
+    "authorized_next_action": "CHANGE_ONLY_GLOBAL_BANNER_BEST_TIER_SELECTION_AND_BREED_EXACT_PRECEDENCE; DO_NOT_CHANGE_PROTECTED_PERFORMANCE_FUNCTIONS; BUMP_TO_6_72_186; RUN_IDENTICAL_ALL_CONTEXTS_NEGATIVE_TO_POSITIVE_PLUS_MULTI_EXACT_ROTATION_PLUS_PERFORMANCE_HARDLOCK_PLUS_FULL_ZIP_REGRESSIONS",
+    "bound_user_scope_action": "For every banner content level and post type, determine the highest available relevance band first. Delivery and rotation may use only candidates inside that band. If exactly one exact/topic-best banner exists, it remains fixed and may be reused rather than falling to a weaker banner. If multiple best-tier banners exist, rotate only within that best tier. Exact stored target edges must outrank the historical breed-neutral distribution rule. No new frontend DB query, HTTP call, destination URL analysis, provider special path, or data migration.",
+    "completion_condition": "6_72_186_ALL_ACTIVE_CONTEXTS_ONE_EXACT_FIXED_AND_MULTI_EXACT_ROTATES_ONLY_INSIDE_EXACT; BREED_EXACT_PRECEDENCE_PASS; PERFORMANCE_HARDLOCK_PASS; FULL_SOURCE_AND_ZIP_REGRESSIONS_PASS",
+    "after_completion_action": "HAND_OFF_6_72_186_FOR_REAL_REITHELME_AND_SCHABRACKEN_READBACK_ONLY_AFTER_ALL_GATES_PASS",
     "no_optional_detours": true,
-    "sequence": 60,
-    "source_run": 37278423032,
-    "zip_run": 37278423041,
-    "source_upgrade": "23_OF_23_PASS",
-    "fresh_banner": "21_OF_21_PASS",
-    "destination_library": "26_OF_26_PASS",
-    "package_files": "27_OF_27_PASS",
-    "php_lint": "21_OF_21_PASS",
-    "performance": "PASS_NO_PROTECTED_HOTPATH_CHANGE_ZERO_NEW_FRONTEND_DB_HTTP",
-    "bad_184_sha256": "bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06",
-    "final_185_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
-    "final_185_bytes": 793173,
-    "current_source_manifest_sha256": "1ae468e75c28d3e98f5e0ee2b28ce7371558f9108b91c58d2161fce9b1b9a1f7",
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672185_version_separation_full_e2e_20261005.md"
+    "sequence": 61,
+    "negative_evidence": {
+      "exact_zip": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip",
+      "exact_zip_sha256": "13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28",
+      "focused_run": 37293474957,
+      "all_contexts_run": 37293850326,
+      "focused_result": "CASE_A_POSITION1_EXACT_POSITION2_GENERAL_EXPECTED_RED",
+      "all_contexts_result": "ACTIVE_VISIBLE_CONTEXTS_REPRODUCE_LOWER_TIER_ESCAPE; BREED_SINGLE_EXACT_PRECEDENCE_BROKEN",
+      "frontend_http_calls": 0
+    },
+    "performance_lock": {
+      "protected_functions_must_remain_body_identical_to_baseline": "a381aff4eb3f41754186f4bad86ce1a7e0823a29",
+      "no_new_frontend_db_queries": true,
+      "no_new_frontend_http_calls": true,
+      "no_frontend_destination_reclassification": true,
+      "no_full_pool_rescan": true
+    },
+    "authorized_change_prefixes": [
+      "release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php",
+      "release/affiliate-zentrale/current/affiliate-portal-router/readme.txt",
+      "AFFILIATE_HOBBYRAUM/test_banner_strict_best_tier_all_contexts_v672186.php",
+      ".github/workflows/tmp-affiliate-strict-best-tier-672186.yml",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+      "release/affiliate-zentrale/artifacts/final/",
+      "release/affiliate-zentrale/evidence/",
+      "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
+      "control/release-governance/CURRENT_RELEASE.json"
+    ]
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
