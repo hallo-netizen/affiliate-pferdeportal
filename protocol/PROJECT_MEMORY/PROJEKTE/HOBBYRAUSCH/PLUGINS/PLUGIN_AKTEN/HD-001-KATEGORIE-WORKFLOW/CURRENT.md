@@ -1,90 +1,58 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-05
-STATUS: LIVE-FEHLER REPRODUZIERT / V1.9.7 FRONTEND-ENDSTATE LOKAL HARD PASS / LIVE-UPDATE OFFEN
+STATUS: BLOCKED – WORDPRESS-HIERARCHIEÜBERSETZUNG FALSCH / V1.9.7 VERWORFEN
 
-## Reale Live-Wahrheit
+## Livebestand
 
-Aktuell beobachtet:
-- `Buchbinden` ist im Frontend sichtbar;
-- direkte Unterkategorien sind dort nicht sichtbar.
+Livebestand unverändert lassen.
 
-Damit ist der bisherige Workflow trotz technischem Write-/Readback **nicht end-to-end abgenommen**.
+Beobachtet:
+- `Buchbinden` sichtbar;
+- vorgesehene Unterstruktur nicht als echte WordPress-Hierarchie sichtbar.
 
-## Root Cause
+## Harte Ursache
 
-`Buchbinden` = WordPress-Seite.
-Direkte Kinder = WordPress-Taxonomie-Terme.
+Der Pilot übersetzt den Fachbaum derzeit so:
 
-Cross-Adapter-Parenting wurde bisher nur logisch über `_apkw_parent_concept_id` gespeichert.
-Es existierte kein persistenter Frontend-Renderer für diese Beziehung.
+`Buchbinden [page] → Einstieg/Ausrüstung/Material/Techniken & Praxis [category]`
 
-Der bisherige Readback prüfte die WordPress-Objekte und Metadaten, nicht den tatsächlichen sichtbaren Seiteninhalt.
+Der Sollbaum ist dagegen mindestens:
+
+`Fertigen [page] → Buch & Papier [page] → Buchbinden [page] → Leaf-Kategorie → Beiträge`
+
+Der Writer setzt einen nativen Parent nur bei gleichem technischen Ziel:
+- page→page = nativ;
+- category→category = nativ;
+- hp_listing_category→hp_listing_category = nativ;
+- page→category = **nicht nativ**, Term-Parent 0 + nur logische Meta-Bindung.
+
+## Weitere harte Befunde
+
+- Validator unterstützt Level 1..20.
+- Concept Builder erzeugt trotzdem nur Root-Seite + maximal 4 direkte Kategorien.
+- `MAX_CONTENT_CHILDREN_PER_TOPIC=4`.
+- Zwei Hobbys mit jeweils sichtbarem Leaf `Einstieg` werden aktuell vom APKW-Validator global blockiert.
+- Content und Magazin verwenden aktuell beide WordPress-`category`.
+- HivePress Core konfiguriert Listing-Kategorien hierarchisch; produktiver Site-Readback der Taxonomie-Eigenschaft bleibt vor Nutzung tiefer Ebenen Pflicht.
+- `Techniken & Praxis`: `&amp;` ist WordPress-Core-Speicherescaping, V1.9.4 Readback-Fix korrekt; kein aktueller Strukturblocker.
 
 ## V1.9.7
 
-Gleiche Pluginlinie, kein Zusatzplugin.
+**NICHT INSTALLIEREN.**
 
-Gezielter Fix:
-- persistenter verwalteter Kinderblock im `post_content` der Elternseite;
-- direkte Content-Kinder werden dort mit echten WordPress-Links ausgegeben;
-- HivePress-/Marketplace- und Magazin-Knoten werden ausgeschlossen;
-- redaktioneller Inhalt außerhalb des Blocks bleibt erhalten;
-- Sparse-Erweiterung ergänzt/ändert nur den Block;
-- keine automatische Löschung;
-- kein Laufzeit-Frontendfilter;
-- Block gehört zum strukturellen Readback;
-- Frontend-Mismatch → Rollback.
+Der Frontend-Linkblock wäre nur eine optische Reparatur auf einer nicht zielkonformen technischen Taxonomieübersetzung.
 
-## Harte Positiv-/Negativ-E2E
+## ERSTER BLOCKER
 
-Vor Fix:
-- Write PASS;
-- technischer Readback PASS;
-- Publish-Status PASS;
-- Frontend FAIL wegen leerem Seiteninhalt.
-
-Nach Fix mit echter Buchbinden-Topologie:
-- Einstieg sichtbar/verlinkt PASS;
-- Ausrüstung sichtbar/verlinkt PASS;
-- Material sichtbar/verlinkt PASS;
-- Techniken & Praxis sichtbar/verlinkt PASS;
-- Buchbinden Set nicht im Contentblock PASS;
-- Buchbinden Online nicht im Contentblock PASS;
-- Idempotenz PASS;
-- spätere zusätzliche Kategorie ohne Gesamtumbau PASS;
-- bestehender Seiteninhalt erhalten PASS;
-- Managed-Block-Tamper BLOCKED;
-- kaputte Marker BLOCKED;
-- Frontend-Endzustand manipuliert → Readback FAIL + Rollback PASS;
-- Rename/Delta ohne Parent-Neuaufbau PASS.
-
-Gesamtsuite:
-- 275/275 PASS;
-- Fresh Source 275/275 PASS;
-- Runtime-Parität 23/23 PASS;
-- Source PHP 17/17 PASS;
-- Installer PHP 17/17 PASS.
-
-Installer:
-`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.7_FRONTEND_ENDSTATE_HARD_PASS.zip`
-
-Installer SHA-256:
-`89790e0b12b4c72c96c8c5a9387dabc160c21707d6147e65898303eef70a0f40`
-
-Source:
-`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.7_FRONTEND_ENDSTATE_HARD_PASS.zip`
-
-Source SHA-256:
-`7d324512d2d0e89faac82be50b54bd580facb4e2eef782eba32ab0ce8378af1a`
-
-## Beleggrenze
-
-Noch kein Live-PASS für V1.9.7.
-Keine weitere Version bauen, bevor der reale Frontend-Readback dieses exakt simulierte Ergebnis bestätigt oder widerlegt.
+`HD001_WORDPRESS_HIERARCHY_TRANSLATION_MISMATCH`
 
 ## NEXT ACTION
 
-V1.9.7 installieren → bestehenden Buchbinden-Stand einmal veröffentlichen/republishen → Frontend prüfen.
+Kein weiterer Installer.
 
-PASS nur wenn Buchbinden im sichtbaren Seiteninhalt exakt die vier direkten Content-Kinder zeigt.
+Zuerst den exakten WordPress-Übersetzungsvertrag für:
+`SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE`
+plus Magazin und HivePress lokal Positiv/Negativ bis Frontend beweisen.
+
+Danach erst minimaler Codefix auf der bestehenden Pluginlinie.
