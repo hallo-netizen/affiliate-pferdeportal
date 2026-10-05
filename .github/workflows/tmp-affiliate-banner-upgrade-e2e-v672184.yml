@@ -2,7 +2,7 @@ name: TEMP Affiliate Banner Upgrade E2E 6.72.185
 
 on:
   push:
-    branches: [affiliate-release-current, affiliate-672185-version-separation]
+    branches: [affiliate-release-current]
     paths:
       - '.github/workflows/tmp-affiliate-banner-upgrade-e2e-v672184.yml'
       - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php'
