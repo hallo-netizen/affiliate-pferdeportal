@@ -1,0 +1,26 @@
+name: PSTE KISS Inspect PSERC
+on:
+  push:
+    branches: [pste-kiss-e2e-20261005]
+    paths:
+      - '.github/workflows/pste-kiss-inspect.yml'
+      - 'control/startmaster0107/runtime_packages/PSERC-FIX.zip'
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect PSERC package
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pserc && mkdir -p /tmp/pserc
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc
+          echo '=== TREE ==='
+          find /tmp/pserc -maxdepth 3 -type f | sort
+          echo '=== VERSION ==='
+          grep -R -n -E 'Version:|PSERC_VERSION|PLUGIN_VERSION|pste-v5-binding-safe' /tmp/pserc | head -80 || true
+          echo '=== BINDING FILE ==='
+          B="$(find /tmp/pserc -type f -name 'class-pserc-seo-source-binding.php' | head -1)"
+          test -n "$B"
+          sed -n '1,320p' "$B"
