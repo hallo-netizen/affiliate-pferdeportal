@@ -632,7 +632,7 @@
   },
   "execution_state": {
     "state": "CORRECTED_6_72_186_STRICT_TIER_FULL_E2E_PASS_LIVE_READBACK_REQUIRED",
-    "authorized_next_action": "INSTALL_EXACT_6_72_186_SHA_1CA526CE_ON_REAL_WORDPRESS_AND_READBACK_REITHELME_AND_SCHABRACKEN_WITH_REPEATED_REQUESTS",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
     "bound_user_scope_action": "Install exactly AFFILIATE_ZENTRALE_6.72.186.zip SHA-256 1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae over 6.72.185. Then read back Reithelme and Schabracken repeatedly. If an exact Reithelme banner is available, no general SanoVet/Guardian/other fallback may win. With one best-tier banner it must stay fixed; with multiple best-tier banners any change must remain inside that best tier. Do not rebuild before a real evidenced 6.72.186 failure.",
     "completion_condition": "REAL_WORDPRESS_6_72_186_REITHELME_AND_SCHABRACKEN_REPEATED_READBACK_PROVES_NO_LOWER_TIER_ESCAPE",
     "after_completion_action": "MARK_LIVE_PASS_OR_FIX_ONLY_FIRST_PROVEN_REAL_FAILURE",
