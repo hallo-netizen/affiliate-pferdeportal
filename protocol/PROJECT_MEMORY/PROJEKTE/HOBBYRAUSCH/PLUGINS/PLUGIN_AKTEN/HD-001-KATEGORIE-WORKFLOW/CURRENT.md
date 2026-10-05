@@ -1,14 +1,11 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-10-03
-STATUS: V1.9.4 LIVE PASS BLEIBT / NEUER HD-001-ZIELVERTRAG AKTIV / NACHFOLGER NOCH NICHT GEBAUT / SOURCE-BYTES BLOCKED
+STAND: 2026-10-05
+STATUS: V1.9.4 LIVE PASS / DATAFORSEO WORDPRESS-ANBINDUNG LIVE BEWIESEN / DIREKTER KATEGORIE-RESEARCHWEG AKTIV
 
 ## Harte Abnahmeregel
 
 **Keine Abnahme ohne dokumentierte lokale Positiv- UND Negativsimulation.**
-
-Für den neuen Zielvertrag:
-keine Abnahme ohne vollständige Positiv-/Negativ-E2E-Simulation bis zum Frontend-Endzustand.
 
 ## Live-Basis
 
@@ -24,35 +21,36 @@ Produktiver Buchbinden-Stand:
 Installer SHA:
 `85990b87f0ef35530b616df7716547cb20974d1c77ca21aa7b3e0edec723f249`.
 
-## Neues Ziel
+## DataForSEO live bewiesen
 
-Autoritative Zielquelle:
-`../../../SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
+Der Pluginweg nutzt DataForSEO direkt aus WordPress.
 
-V1.9.4 ist nur die belastbare Live-Basis. Für das neue Gesamtziel existiert noch kein belegter Nachfolgekandidat.
+Livebeleg vom 2026-09-28:
+- Verbindung PASS;
+- 4 Paid-Calls;
+- 0.06804 USD;
+- 17 Overview-Treffer;
+- 3 Suggestion-Calls mit je 50 Treffern.
+
+Livebeleg vom 2026-09-30:
+- Buchbinden Global-Coverage komplett;
+- Detailresearch komplett;
+- Spezialisierungsprüfung 5/5.
+
+Die DataForSEO-Anbindung ist damit kein offener Punkt.
 
 ## Source-Bindung
 
 Erwarteter V1.9.4-Source-SHA-256:
 `12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`.
 
-Unter `ORIGINAL/` liegen die echten V1.9.4-Source-Bytes aktuell nicht vor.
-
-## Weiterhin gültiger V1.9.4-Nachweis
-
-- alter Code reproduzierte den früheren Live-Readbackfehler wortgleich;
-- echter 7-CREATE-Buchbinden-Pfad PASS;
-- falsche Namen / doppelte Kodierung / falscher Slug / Parent / Meta bleiben BLOCKED;
-- Source 251/251 PASS;
-- Fresh Installer 251/251 PASS;
-- PHP Source 25/25;
-- PHP Installer 17/17;
-- Runtime-Parität 22/22.
-
-Diese Belege werden nicht auf den neuen Nachfolgekandidaten übertragen.
+Die Source-Bytes fehlen weiterhin in der Originalablage.
+Das blockiert ausschließlich einen sicheren Code-Umbau, nicht den bestehenden WordPress-/DataForSEO-Researchweg.
 
 ## NEXT ACTION
 
-Echte V1.9.4-Source-Bytes beschaffen/binden → SHA-256 prüfen → erst danach isolierten Nachfolgekandidaten bauen.
+Bestehenden live bewiesenen DataForSEO-Researchweg direkt für den vollständigen Hobby-Depot-Zielbaum verwenden.
 
-Kein Live-Umbau auf Basis rekonstruierter oder geratener Dateien.
+Kein neuer Pluginweg und keine neue Konzeptschleife.
+
+Erst wenn der bestehende V1.9.4-Funktionsumfang den vollständigen Hauptportal-/Magazin-/HivePress-Baum nicht erzeugen kann, wird genau diese konkrete Funktionsgrenze als technischer Blocker behandelt.
