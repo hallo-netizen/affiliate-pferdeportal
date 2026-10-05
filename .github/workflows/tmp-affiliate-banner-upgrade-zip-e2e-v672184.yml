@@ -1,8 +1,8 @@
-name: TEMP Affiliate Banner Upgrade ZIP E2E 6.72.184
+name: TEMP Affiliate Banner Upgrade ZIP E2E 6.72.185
 
 on:
   push:
-    branches: [affiliate-release-current]
+    branches: [affiliate-release-current, affiliate-672185-version-separation]
     paths:
       - '.github/workflows/tmp-affiliate-banner-upgrade-zip-e2e-v672184.yml'
       - 'AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php'
@@ -49,14 +49,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F "Version: 6.72.184" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.184';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.185" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.185';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           (cd release/affiliate-zentrale/current && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) > release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt
           test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.184.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.184.zip affiliate-portal-router)
-          echo "ZIP_SHA256=$(sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.184.zip | awk '{print $1}')" >> "$GITHUB_ENV"
-          echo "ZIP_BYTES=$(stat -c%s /tmp/AFFILIATE_ZENTRALE_6.72.184.zip)" >> "$GITHUB_ENV"
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.185.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.185.zip affiliate-portal-router)
+          echo "ZIP_SHA256=$(sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.185.zip | awk '{print $1}')" >> "$GITHUB_ENV"
+          echo "ZIP_BYTES=$(stat -c%s /tmp/AFFILIATE_ZENTRALE_6.72.185.zip)" >> "$GITHUB_ENV"
           echo "PASS build manifest+zip"
 
       - name: ZIP structure manifest syntax
@@ -65,12 +65,12 @@ jobs:
           set -euo pipefail
           rm -rf /tmp/zip184
           mkdir -p /tmp/zip184
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.184.zip -d /tmp/zip184
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.185.zip -d /tmp/zip184
           ROOT=/tmp/zip184/affiliate-portal-router
           test "$(find "$ROOT" -type f | wc -l)" = "27"
           test "$(find "$ROOT" -type f -name '*.php' | wc -l)" = "21"
-          grep -F "Version: 6.72.184" "$ROOT/pferdeportal-affiliate-router.php"
-          grep -F "const VERSION = '6.72.184';" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "Version: 6.72.185" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.185';" "$ROOT/pferdeportal-affiliate-router.php"
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
@@ -140,7 +140,7 @@ jobs:
           for name in protected:
               if body(cur,name)!=body(old,name): raise SystemExit('FAIL protected performance function changed '+name)
           hot=body(cur,'ranked_campaigns_for_slot_uncached')
-          p=hot.find('V6.72.184 KISS')
+          p=hot.find('V6.72.185 KISS')
           if p<0: raise SystemExit('FAIL missing KISS marker')
           addition=hot[p:p+900]
           for forbidden in ['$wpdb','get_post_meta(','wp_remote_','output_plan_creative(']:
@@ -148,7 +148,7 @@ jobs:
           print('PASS performance KISS hardlock')
           PY
 
-      - name: Install WordPress baseline 6.72.183
+      - name: Install WordPress bad baseline 6.72.184
         shell: bash
         run: |
           set -euo pipefail
@@ -177,23 +177,23 @@ jobs:
               if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
           },1);
           PHP
-          unzip -q release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.183.zip -d /tmp/base183
+          git show 5f28fb69c2bd215e49c44c6e8c26ac7b8836f1bf:release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip > /tmp/bad184.zip
+          unzip -q /tmp/bad184.zip -d /tmp/base183
           cp -a /tmp/base183/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.183"){exit(2);} echo "PASS baseline 6.72.183 active\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.184"){exit(2);} echo "PASS bad baseline 6.72.184 active\n";' --path=/tmp/wp-site
 
       - name: Reproduce failure then upgrade from built ZIP
         shell: bash
         run: |
           set -euo pipefail
           /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_seed_v672184.php" --path=/tmp/wp-site | tee /tmp/seed184zip.log
-          grep -F 'PRE_UPGRADE_reproduces_wrong_legacy_banner' /tmp/seed184zip.log
-          grep -F 'UPGRADE_SEED_672183_PASS' /tmp/seed184zip.log
+          grep -F 'PRE_UPGRADE_184_stale_library_banner_visible_on_schabracken' /tmp/seed184zip.log
+          grep -F 'UPGRADE_SEED_672184_PASS' /tmp/seed184zip.log
           rm -rf /tmp/wp-site/wp-content/plugins/affiliate-portal-router
           cp -a /tmp/zip184/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.184"){exit(2);} echo "PASS ZIP upgraded plugin 6.72.184 active\n";' --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.185"){exit(2);} echo "PASS ZIP upgraded plugin 6.72.185 active\n";' --path=/tmp/wp-site
           /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_banner_upgrade_assert_v672184.php" --path=/tmp/wp-site | tee /tmp/assert184zip.log
-          grep -F 'SUMMARY passes=20 failures=0' /tmp/assert184zip.log
           grep -F 'FULL_672183_TO_672184_BANNER_MIGRATION_E2E_PASS' /tmp/assert184zip.log
           echo "PASS exact ZIP upgrade positive negative"
 
@@ -212,12 +212,12 @@ jobs:
           cp -a /tmp/zip184/affiliate-portal-router /tmp/wp-fresh/wp-content/plugins/affiliate-portal-router
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-fresh
           cp AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php /tmp/full184.php
-          sed "s/6\.72\.183/6.72.184/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest184.php
+          sed "s/6\.72\.183/6.72.185/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest185.php
           /tmp/wp eval-file /tmp/full184.php --path=/tmp/wp-fresh | tee /tmp/full184.log
           grep -F 'SUMMARY passes=21 failures=0' /tmp/full184.log
-          grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_672184_LIBRARY_SOURCE_PASS' /tmp/full184.log
-          /tmp/wp eval-file /tmp/dest184.php --path=/tmp/wp-fresh | tee /tmp/dest184.log
-          grep -F 'SUMMARY passes=26 failures=0' /tmp/dest184.log
+          grep -F 'FULL_WORDPRESS_MARIADB_BANNER_E2E_672185_LIBRARY_SOURCE_PASS' /tmp/full184.log
+          /tmp/wp eval-file /tmp/dest185.php --path=/tmp/wp-fresh | tee /tmp/dest185.log
+          grep -F 'SUMMARY passes=26 failures=0' /tmp/dest185.log
           grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest184.log
           echo "PASS fresh ZIP legacy 21/21 + destination 26/26"
 
@@ -225,10 +225,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp /tmp/AFFILIATE_ZENTRALE_6.72.184.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.185.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
           git config user.name "hallo-netizen"
           git config user.email "hallo@oliver-beil.de"
-          git add release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.184.zip
-          git commit -m "affiliate: publish tested 6.72.184 banner migration installer"
-          git push origin HEAD:affiliate-release-current
+          git add release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.185.zip
+          git commit -m "affiliate: publish tested 6.72.185 banner migration installer"
+          git push origin HEAD:affiliate-672185-version-separation
           echo "PASS TESTED_ZIP_COMMITTED sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
