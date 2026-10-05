@@ -502,3 +502,32 @@ EVIDENZ:
 
 OFFEN:
 Der alte Concept Builder erzeugt weiterhin nur Root-Seite + max. 4 direkte Kinder. Kein Release vor vollständigem Builder-/DataForSEO-E2E-PASS.
+
+
+## HOBBYRAUSCH-HD001-20261005-F – Full-Hierarchy Builder und kompletter lokaler E2E HARD PASS
+
+WAS:
+Der V1.9.8-Builder wurde auf den bereits bewiesenen WordPress-Zielvertrag erweitert. Der neue Full-Hierarchy-Weg unterstützt variable Page-Ebenen, evidenzbelegte Leaf-Kategorien, getrennte Magazin-/HivePress-Stränge und behält die inkrementelle Delta-Logik.
+
+WARUM:
+Der vorherige letzte Blocker war der alte Builder `Root-Seite + max. 4 direkte Kinder`. Dieser konnte den fertigen Fachvertrag `SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE` nicht automatisch erzeugen.
+
+REGEL:
+- Legacy-Weg bleibt regressionstabil;
+- Full-Hierarchy-Weg darf 1–3 Page-Ebenen erzeugen;
+- keine feste 4-Kinder-Grenze;
+- nur evidenzbelegte Leafs;
+- nicht belegte optionale Kategorien werden weggelassen;
+- gemeinsame Strukturplanung, technisch getrennte Content-/Magazin-/HivePress-Zielstränge;
+- bestehende Knoten werden bei Erweiterungen nicht automatisch gelöscht;
+- Abnahme endet erst beim sichtbaren Frontend-Readback.
+
+EVIDENZ:
+270/270 Regression PASS; Full Builder PASS; Multi-Hobby/Flex PASS; kompletter Positiv-E2E PASS; kompletter Negativ-E2E PASS; Fresh-Unpack erneut PASS; Runtime-Parität 25/25; Installer PHP 19/19.
+
+ARTEFAKTE:
+Installer SHA-256 `60ea8d4c235805d66e6795223b1bfbd392cc0109556cfbf5631d9d0109b4585c`.
+Source SHA-256 `340af0e4927971c746d97ba2aad8bab1e7efc269c70e12d21319734e7a363c10`.
+
+GRENZE:
+Noch kein V1.9.8-Live-PASS. Nächste Aktion ist ausschließlich Installation plus realer WordPress-/Frontend-Readback.
