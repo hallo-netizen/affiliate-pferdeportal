@@ -232,10 +232,9 @@ trait PPAR_Network_Sync_Trait {
             '/affiliate/promotion/getPromotionTypeCsv' => 'GET',
             '/affiliate/promotion/getPromotionTypeBanner' => 'GET',
             '/affiliate/promotion/getPromotionTypeDeeplink' => 'GET',
-            // Live 6.72.186 root cause: this endpoint rejects GET with HTTP 405.
-            // Keep the transport contract inside the ADCELL adapter; all other
-            // provider and frontend paths remain untouched.
-            '/affiliate/promotion/getPromoCategories' => 'POST',
+            // V6.72.189 live validation: the real category method is
+            // getPromotionCategories and it is read via GET.
+            '/affiliate/promotion/getPromotionCategories' => 'GET',
         );
         if (!isset($allowed_methods[$path])) {
             return new WP_Error('adcell_api_path_blocked', 'Nicht gebundener ADCELL-API-v2-Pfad wurde blockiert.');
@@ -419,8 +418,8 @@ trait PPAR_Network_Sync_Trait {
     }
 
     /**
-     * V6.72.85 – ADCELL liefert in jedem Werbemittel promotionCategoryId.
-     * Die offizielle API-Dokumentation verweist dafuer auf getPromoCategories.
+     * V6.72.189 – ADCELL liefert in jedem Werbemittel promotionCategoryId.
+     * Live-Validierung belegt getPromotionCategories mit Pflichtparameter programId.
      * Diese Metadaten werden beim Sync gelesen, damit ein Banner fachlich nach
      * seinem echten Werbemittelthema (z.B. Reithelme) klassifiziert werden kann,
      * ohne einen Trackinglink aufzurufen und dadurch einen Fake-Klick zu erzeugen.
@@ -435,20 +434,13 @@ trait PPAR_Network_Sync_Trait {
         $out = array();
         $rows = 1000;
         for ($page = 1; $page <= 20; $page++) {
-            $result = $this->adcell_api_v2_request('/affiliate/promotion/getPromoCategories', array(
-                'programIds[]'=>$program_id,
+            // V6.72.189: live ADCELL validation proved this exact request shape:
+            // getPromotionCategories exists and requires scalar programId.
+            $result = $this->adcell_api_v2_request('/affiliate/promotion/getPromotionCategories', array(
+                'programId'=>$program_id,
                 'rows'=>$rows,
                 'page'=>$page,
-            ), $token, 'POST');
-            // Einige ADCELL-Konten liefern die Werbemittelkategorien global statt
-            // programmgefiltert. Dann einmal denselben dokumentierten Endpoint
-            // ohne Programfilter lesen und anschliessend lokal auf programId filtern.
-            if (is_wp_error($result) && $page === 1) {
-                $result = $this->adcell_api_v2_request('/affiliate/promotion/getPromoCategories', array(
-                    'rows'=>$rows,
-                    'page'=>$page,
-                ), $token, 'POST');
-            }
+            ), $token);
             if (is_wp_error($result)) { return $result; }
             $data = (array)($result['data'] ?? array());
             $items = isset($data['items']) && is_array($data['items']) ? array_values($data['items'])
