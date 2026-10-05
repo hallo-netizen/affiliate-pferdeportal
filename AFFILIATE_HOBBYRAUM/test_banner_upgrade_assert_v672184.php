@@ -2,11 +2,11 @@
 $GLOBALS['up_fail']=array(); $GLOBALS['up_pass']=array();
 function uchk($cond,$name,$detail=''){ if($cond){$GLOBALS['up_pass'][]=$name;echo "PASS $name".($detail!==''?" :: $detail":"")."\n";}else{$GLOBALS['up_fail'][]=$name.($detail!==''?" :: $detail":"");echo "FAIL $name".($detail!==''?" :: $detail":"")."\n";}}
 if(!class_exists('Pferdeportal_Affiliate_Router')){fwrite(STDERR,"FATAL plugin missing\n");exit(2);}
-if(Pferdeportal_Affiliate_Router::VERSION!=='6.72.184'){fwrite(STDERR,"FATAL assert requires 6.72.184, got ".Pferdeportal_Affiliate_Router::VERSION."\n");exit(2);}
+if(Pferdeportal_Affiliate_Router::VERSION!=='6.72.185'){fwrite(STDERR,"FATAL assert requires 6.72.185, got ".Pferdeportal_Affiliate_Router::VERSION."\n");exit(2);}
 $o=Pferdeportal_Affiliate_Router::instance();
 $rm=function($name)use($o){$m=new ReflectionMethod($o,$name);$m->setAccessible(true);return $m;};
 $call=function($name,...$args)use($rm,$o){return $rm($name)->invokeArgs($o,$args);};
-$f=get_option('ppar_v672184_upgrade_fixture',array());
+$f=get_option('ppar_v672185_upgrade_fixture',array());
 if(!is_array($f)||empty($f['sch'])){fwrite(STDERR,"FATAL fixture missing\n");exit(2);}
 global $wpdb;
 $creativeTable=$call('creative_library_table');
@@ -18,10 +18,13 @@ $render=function($id,$slot)use($rm,$o){return (string)$rm('render_affiliate_slot
 $preMigration=$render((int)$f['sch'],'product_after_category_tiles');
 uchk(strpos($preMigration,'legacy-sanovet')===false,'automatic_pool_rejects_legacy_banner_before_migration');
 uchk(strpos($preMigration,'stale-sanovet-library')!==false,'PRE_MIGRATION_stale_library_edge_reproduces_live_failure',substr(strip_tags($preMigration),0,160));
+uchk((string)get_option('ppar_banner_library_migration_state_v672184','')==='done','OLD_184_migration_state_is_done');
+uchk(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_STATE==='ppar_banner_library_migration_state_v672185','NEW_185_uses_distinct_migration_state_key');
+uchk((string)get_option(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_STATE,'')!=='done','NEW_185_not_suppressed_by_old_184_done_state');
 
 // 2) This release must NOT restart the full 4000-row product/banner pool.
 $call('ensure_full_pool_automation');
-uchk((string)get_option('ppar_full_pool_automation_version_v1','')==='6.72.184','full_pool_version_marked_without_rescan');
+uchk((string)get_option('ppar_full_pool_automation_version_v1','')==='6.72.185','full_pool_version_marked_without_rescan');
 uchk(wp_next_scheduled(Pferdeportal_Affiliate_Router::FULL_POOL_WORKER_HOOK)===false,'old_full_pool_event_cleared');
 uchk(get_option('ppar_full_pool_automation_cursor_v1',null)===null,'old_full_pool_cursor_removed');
 
@@ -29,11 +32,11 @@ uchk(get_option('ppar_full_pool_automation_cursor_v1',null)===null,'old_full_poo
 update_option(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_STATE,'running',false);
 delete_option(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_CURSOR);
 for($i=0;$i<20;$i++){
-  $call('run_banner_library_migration_v672184');
+  $call('run_banner_library_migration_v672185');
   if((string)get_option(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_STATE,'')==='done')break;
 }
 uchk((string)get_option(Pferdeportal_Affiliate_Router::OPTION_BANNER_LIBRARY_MIGRATION_STATE,'')==='done','banner_only_migration_completes');
-$result=get_option('ppar_banner_library_migration_result_v672184',array());
+$result=get_option('ppar_banner_library_migration_result_v672185',array());
 
 // 4) Real page output: relevant stored destination wins, old SanoVet disappears.
 $after=$render((int)$f['sch'],'product_after_category_tiles');
@@ -97,4 +100,4 @@ uchk($http===0,'complete_upgrade_gate_zero_remote_http','http_calls='.$http);
 
 echo "SUMMARY passes=".count($GLOBALS['up_pass'])." failures=".count($GLOBALS['up_fail'])."\n";
 if($GLOBALS['up_fail']){echo "FAILURES ".wp_json_encode($GLOBALS['up_fail'])."\n";exit(1);}
-echo "FULL_672183_TO_672184_BANNER_MIGRATION_E2E_PASS\n";
+echo "FULL_672184_TO_672185_BANNER_MIGRATION_E2E_PASS\n";
