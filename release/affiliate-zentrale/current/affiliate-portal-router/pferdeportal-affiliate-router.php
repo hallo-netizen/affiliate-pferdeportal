@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.188
+ * Version: 6.72.189
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -116,7 +116,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.188';
+    const VERSION = '6.72.189';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -325,8 +325,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30);
         add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31);
         add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
-        add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v672188'), 32);
-        add_action('ppar_v672188_adcell_topic_resync', array($this, 'run_v672188_adcell_topic_resync'));
+        add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v672189'), 32);
+        add_action('ppar_v672189_adcell_topic_resync', array($this, 'run_v672189_adcell_topic_resync'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
         add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33);
