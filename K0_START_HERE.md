@@ -3,7 +3,17 @@
 Bei `K0:start`:
 
 1. auf `konzept0-portal-neutral-20261002:K0_START_HERE.md` wechseln;
-2. **NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.**
+2. dort ausschließlich die K0-Startdatei und `K0_CURRENT_STATE.json` als K0-Einstieg verwenden;
+3. **NICHT ANTWORTEN. SOFORT INTERN PRODUZIEREN.**
+
+Für `K0:start` ausdrücklich verboten:
+- `concept_agent/START_HERE.md`;
+- `control/startmaster0107/CURRENT_STATE.json` auf `main`;
+- K8/K9/K10-Current;
+- Archive, alte Chats oder andere Fallback-Einstiege.
+
+**Falscher Einstieg = BLOCK und sofort zurück zu `konzept0-portal-neutral-20261002:K0_START_HERE.md`.**
+Nicht dort weiterlesen, keinen Status übernehmen und keinen anderen Produktionsweg starten.
 
 Keine Vorrede.
 Keine Statusmeldung.

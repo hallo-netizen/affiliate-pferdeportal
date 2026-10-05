@@ -20,3 +20,4 @@ Forbidden fallback for K0:
 This protocol file also causes the existing deterministic entrance `hardlock` PR check to execute for the router change.
 
 Restore evidence 2026-10-04: `K0_START_HERE.md` restored byte-for-byte from `b45791dc575027253db3d8d85f803ed12dc68e42`; no K0 production, rule, design, Current, or STARTMASTER change.
+Reapply evidence 2026-10-05: restore only the proven K0 wrong-entry block/return behavior in `main:K0_START_HERE.md`; no Current, workflow, engine, rule, plugin, WordPress, LT, PPM, design or architecture change.
