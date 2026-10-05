@@ -993,9 +993,9 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 
 **Korrektur:** Eigene Version 6.72.185 plus eigene 6.72.185-Migrations-State-, Cursor-, Hook- und Result-Schlüssel. Die Fachlogik des bewiesenen stale-edge-Fixes bleibt unverändert.
 
-**Negativ-/Positiv-Beweis:** Ausgangsbasis ist exakt der fehlerhafte erste 6.72.184-Installer SHA `bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`. Der Test setzt die alte 6.72.184-Migration bereits auf `done`, reproduziert den falschen SanoVet-Library-Banner auf Schabracken und führt anschließend das Upgrade auf 6.72.185 aus. Source-Run `37277975992`: 23/23 PASS. ZIP-Run `37277994704`: 23/23 Upgrade PASS, 21/21 Fresh-Banner PASS, 26/26 Ziel-URL-Library PASS, 27/27 Paketidentität, PHP 21/21, Performance-Hardlock PASS.
+**Negativ-/Positiv-Beweis:** Ausgangsbasis ist exakt der fehlerhafte erste 6.72.184-Installer SHA `bc101bd7dc06aa3ecbf085165914440e28e0b7aaefe6786d1e7db33fc7f8fe06`. Der Test setzt die alte 6.72.184-Migration bereits auf `done`, reproduziert den falschen SanoVet-Library-Banner auf Schabracken und führt anschließend das Upgrade auf 6.72.185 aus. Source-Run `37278423032`: 23/23 PASS. ZIP-Run `37278423041`: 23/23 Upgrade PASS, 21/21 Fresh-Banner PASS, 26/26 Ziel-URL-Library PASS, 27/27 Paketidentität, PHP 21/21, Performance-Hardlock PASS.
 
-**Installer:** `AFFILIATE_ZENTRALE_6.72.185.zip`, SHA-256 `a0e4c28fa28d91455e288a45d6d932c49869ab0ad80353fd606fcce8e2a14f2a`, 793173 Bytes.
+**Installer:** `AFFILIATE_ZENTRALE_6.72.185.zip`, SHA-256 `13fff3d67507d152e5368da9d7fc99028f8d26ad6d19338bb0cad1f44463fa28`, 793173 Bytes.
 
 **Nicht wiederholen:** Zwei unterschiedliche installierbare Builds dürfen niemals dieselbe Versionsnummer tragen. Ein korrigierter einmaliger Migrationslauf benötigt eine neue Versions-/State-Generation.
 
