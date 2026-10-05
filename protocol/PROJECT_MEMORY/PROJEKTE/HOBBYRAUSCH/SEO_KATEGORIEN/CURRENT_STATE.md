@@ -3,116 +3,116 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-05
-STATUS: V1.9.8 WORDPRESS-HIERARCHIEÜBERSETZUNG LOKAL HARD PASS / KEIN INSTALLER / BUILDER NOCH BLOCKER
-
-## Harte Abnahmeregel
-
-Keine Live-Abnahme ohne vollständige lokale Positiv-/Negativ-E2E-Simulation bis zum sichtbaren Frontend-Endzustand und danach realen WordPress-/Frontend-Readback.
+STATUS: V1.9.8 FULL-HIERARCHY LOCAL HARD PASS / LIVE-INSTALLATION UND REALER FRONTEND-READBACK OFFEN
 
 ## Zielvertrag
 
 `ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
 
-## Livebestand
+Ziel:
+Konzept → DataForSEO → Hauptportal + Magazin + HivePress → WordPress → Publish → sichtbares Frontend → Readback.
 
-Live unverändert lassen.
-Aktuell real beobachtet:
-- `Buchbinden` sichtbar;
-- bisherige vier Content-Unterkategorien auf der Seite nicht sichtbar.
+## Live-Wahrheit
 
-V1.9.7 bleibt verworfen und darf nicht installiert werden.
+Livebestand wurde während der lokalen E2E-Arbeit nicht verändert.
 
-## V1.9.8 lokaler Hierarchie-Prototyp
+Real zuletzt beobachtet:
+- `Buchbinden` ist sichtbar;
+- die vier Content-Leafs sind im bisherigen Live-Stand noch nicht sichtbar.
 
-Basis:
-exakte V1.9.6-Arbeitsbasis, keine neue Pluginlinie.
+V1.9.7 bleibt verworfen.
 
-### Bewiesene WordPress-Übersetzung
+## V1.9.8 – lokaler finaler Kandidat
 
-Fachbaum:
-`SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE`
+Die bisher offenen technischen Punkte sind lokal geschlossen:
 
-Technisch:
-- Page→Page bleibt native WordPress-`post_parent`-Hierarchie;
-- Page→Taxonomy erhält pro Page/Taxonomie-Grenze einen internen technischen Bridge-Term;
-- sichtbare Leaf-Terme hängen nativ unter diesem Bridge-Term;
-- die logische `parent_concept_id`-Bindung an die Seite bleibt zusätzlich erhalten;
-- der technische Bridge wird im Frontend niemals als sichtbarer Navigationspunkt ausgegeben;
-- Frontend rendert direkte veröffentlichte Page-Kinder und direkte native Leaf-Kinder des Bridge-Terms;
-- dieser sichtbare Endzustand ist Bestandteil des Deployment-Readbacks.
+- variable native Page-Hierarchie statt Root+4;
+- `Fertigen → Buch & Papier → Buchbinden` als 3-Seiten-Kette;
+- keine feste `MAX_CONTENT_CHILDREN_PER_TOPIC=4`-Grenze im Full-Hierarchy-Weg;
+- Page→Taxonomy über internen unsichtbaren Bridge-Term;
+- sichtbare Leaf-Kategorien nativ darunter;
+- wiederholbare kurze Leaf-Namen in getrennten Hobby-Kontexten;
+- gemeinsame Strukturplanung für Content, Magazin und HivePress bei technisch getrennten Zielsträngen;
+- Magazin über eigene hierarchische `journal_cat`;
+- HivePress über `hp_listing_category`;
+- Sparse-/Delta-Erweiterungen bleiben erhalten;
+- kein automatisches Löschen vorhandener Knoten;
+- Publish/Readback bis zum sichtbaren Frontend-Endzustand;
+- Idempotenz: zweiter identischer Lauf = 0 unnötige Writes.
 
-### Wiederholbare Leaf-Namen
+## Frisch geprüfte lokale Evidenz
 
-Kurze sichtbare Leafs wie `Einstieg` dürfen unter verschiedenen Hobby-Seiten erneut vorkommen, wenn:
-- die Page-Kontexte verschieden sind;
-- die technischen Slugs verschieden sind;
-- Primärkeyword/Intent-Owner verschieden bleiben.
+Reale aufgezeichnete Buchbinden-DataForSEO-Evidenz wurde im lokalen Replay verwendet; keine neuen Paid-Calls.
 
-Gleicher sichtbarer Leaf unter demselben Page-Parent bleibt BLOCKED.
-Technische Slug-Kollision bleibt BLOCKED.
+Builder:
+- Buchbinden Full-Hierarchy PASS;
+- mehrere Hobbys PASS;
+- gemeinsames `Fertigen` nur einmal;
+- `Einstieg` je Hobby konfliktfrei;
+- >4 evidenzbelegte Leafs möglich;
+- nicht belegte optionale FAQ wird nicht künstlich erzeugt.
 
-### Magazin
+Kompletter POSITIV-E2E:
+- Global Coverage PASS;
+- Detail Research PASS;
+- Spezialisierung PASS;
+- FINAL Validator PASS;
+- FINAL Evidence PASS;
+- Deployment Preflight PASS;
+- Write/Publish/technischer Readback PASS;
+- native Page-Tiefe 3 PASS;
+- Frontend-Readback PASS;
+- exakt Einstieg / Ausrüstung / Material / Techniken & Praxis sichtbar;
+- kein Bridge-/Magazin-/HivePress-Leak;
+- zweiter identischer Lauf: 0 Writes.
 
-`journal_cat` wird in derselben Pluginlinie bei Bedarf als eigene öffentliche, hierarchische Taxonomie registriert.
-Kein stilles Remap auf Content-`category`.
+Kompletter NEGATIV-E2E:
+- unbekannter Parent BLOCKED;
+- unbelegtes DataForSEO-Keyword BLOCKED;
+- doppelter Leaf unter demselben Hobby BLOCKED;
+- fehlender Marketplace-Pillar BLOCKED;
+- stilles Entfernen bestehender Knoten BLOCKED;
+- Bridge-Manipulation BLOCKED;
+- Page-Parent-Drift BLOCKED;
+- neue Kategorie ohne neue Research-Evidenz BLOCKED;
+- Mutation nach Approval invalidiert Receipt.
 
-### HivePress
+Regression/Fresh-Unpack:
+- bestehende Suite: 270/270 PASS;
+- Fresh-Source: 270/270 PASS;
+- Full-Builder-Flex PASS;
+- Full-E2E POSITIV PASS;
+- Full-E2E NEGATIV PASS;
+- Source↔Installer Runtime: 25/25 byteidentisch;
+- Installer PHP-Lint: 19/19 PASS.
 
-`hp_listing_category` bleibt eigener nativer hierarchischer Strang.
-Content-Frontend darf weder Magazin- noch HivePress-Knoten anzeigen.
+## Artefakte
 
-## Harte lokale Evidenz
+Installer:
+`AFFILIATE_PORTAL_KATEGORIE_WORKFLOW_V1.9.8_FULL_HIERARCHY_E2E_HARD_PASS.zip`
 
-Gesamtsuite aktuell:
-- 270/270 PASS;
-- bestehende Regression bleibt grün.
+SHA-256:
+`60ea8d4c235805d66e6795223b1bfbd392cc0109556cfbf5631d9d0109b4585c`
 
-Exakter Zielprojektions-Test:
-- `Fertigen → Buch & Papier → Buchbinden` als native 3-Seiten-Kette PASS;
-- `Buchbinden → Einstieg/Ausrüstung/Material/Techniken & Praxis` über nativen Taxonomie-Bridge PASS;
-- zweiter Strang `Fertigen → Textil → Nähen → Einstieg` PASS;
-- kein Cross-Hobby-Leak;
-- technische Bridges unsichtbar;
-- Magazin/HivePress getrennt;
-- Bridge-Tamper BLOCKED.
+Source:
+`QUELLCODE_KATEGORIE_WORKFLOW_V1.9.8_FULL_HIERARCHY_E2E_HARD_PASS.zip`
 
-Realer Buchbinden-Migrationstest auf Basis der echten Datei
-`HOBBY_DEPOT_BUCHBINDEN_READ_ONLY_PREVIEW_V1.json`:
-- alter Zustand exakt reproduziert: Buchbinden-Seite sichtbar, Leafs nicht sichtbar;
-- exakt 1 Content-Bridge erforderlich;
-- bestehende 4 Content-Term-IDs bleiben erhalten;
-- alle 4 werden ohne Neu-ID unter den Bridge verschoben;
-- Frontend danach PASS mit:
-  - Einstieg
-  - Ausrüstung
-  - Material
-  - Techniken & Praxis
-- `Buchbinden Set` leakt nicht;
-- `Buchbinden Online` leakt nicht;
-- technischer Bridge leakt nicht;
-- `&` wird korrekt HTML-escaped und browserseitig als `&` dargestellt.
+SHA-256:
+`340af0e4927971c746d97ba2aad8bab1e7efc269c70e12d21319734e7a363c10`
+
+## Beleggrenze
+
+V1.9.8 ist noch nicht live auf Hobby Depot installiert.
+Darum gibt es noch keinen realen WordPress-/Frontend-PASS für V1.9.8.
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_CONCEPT_BUILDER_FULL_HIERARCHY_NOT_YET_RESOLVED`
-
-Der alte Concept Builder enthält weiterhin:
-- `MAX_CONTENT_CHILDREN_PER_TOPIC=4`;
-- pro Seed nur eine Root-Seite;
-- danach direkte Kategorie-Kinder;
-- keine variable Page→Page→Page-Kette.
-
-Die Writer-/WordPress-Übersetzung ist damit lokal geklärt; der Builder erzeugt den vollständigen Zielbaum aber noch nicht automatisch.
+`HD001_V198_LIVE_INSTALL_AND_FRONTEND_READBACK_OPEN`
 
 ## NEXT ACTION
 
-Kein Installer und kein Live-Write.
+Exakt V1.9.8 über den aktuellen Kategorie-Workflow installieren; keinen Reset und keine neue Konzeptschleife.
 
-Als nächstes den bestehenden Concept Builder minimal auf den bereits bewiesenen WordPress-Zielvertrag umstellen:
-- variable 1–3 Page-Ebenen;
-- keine feste Root+4-Grenze;
-- DataForSEO-Evidenz/Intent-Ownership bleibt autoritativ;
-- Content + Magazin + HivePress gemeinsam;
-- danach kompletter lokaler DataForSEO→Builder→Research→Deploy→Frontend-Readback Positiv-/Negativlauf.
+Danach den bestehenden Buchbinden-Stand über den vorgesehenen Publish-/Republish-Weg ausführen und real prüfen.
 
-Erst danach neuer installierbarer Kandidat.
+PASS erst, wenn das echte Frontend die erwartete Hierarchie und Leafs zeigt. Bei Abweichung STOP und konkreten Live-Delta prüfen; nicht raten und nicht blind eine neue Version bauen.
