@@ -1045,6 +1045,19 @@ trait PPAR_Output_Objects_Trait {
             || substr($host, -14) === '.tarifcheck.de';
         if (!$is_tarifcheck) { return ''; }
 
+        // 6.72.195: Bei einem bewusst manuellen Tarifcheck-Import ist die
+        // vom Nutzer gesetzte Bannerfamilie die autoritative Fachzuordnung.
+        // Der Trackinglink bleibt fuer die Provisionsausgabe erhalten, muss aber
+        // nicht mehr erraten lassen, ob der importierte Stapel Kredit oder
+        // Versicherung ist. Ohne explizite Familie bleibt die bisherige sichere
+        // URL-Erkennung fail-closed aktiv.
+        $payload = json_decode((string)($row['payload'] ?? ''), true);
+        $payload = is_array($payload) ? $payload : array();
+        $manual_family = sanitize_key((string)($payload['_manual_target_family'] ?? ''));
+        if (in_array($manual_family, array('kosten','versicherung'), true)) {
+            return $manual_family;
+        }
+
         $semantic = $this->output_destination_semantic_text($row);
         if ($semantic === '') { return 'blocked'; }
         $credit = preg_match('/(^|\\s)(kredit|kredite|kreditkarte|kreditkarten|darlehen|finanzierung|baufinanzierung)(\\s|$)/u', $semantic) === 1;
