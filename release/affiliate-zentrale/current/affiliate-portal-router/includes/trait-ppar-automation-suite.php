@@ -1148,6 +1148,20 @@ trait PPAR_Automation_Suite_Trait {
     private function automation_adcell_banner_rows($program_id, $program_name, $run_uuid) {
         $items = $this->adcell_api_v2_promotion_items($program_id, 'banner');
         if (is_wp_error($items)) { return $items; }
+
+        // Basisvertrag: Werbemittelkategorien werden einmal pro Programmlauf
+        // ueber den dafuer vorgesehenen ADCELL-Endpunkt geladen. Die Bannerliste
+        // liefert promotionCategoryId, aber der Kategoriename darf nicht geraten
+        // oder aus einem selbst gebauten Titel abgeleitet werden.
+        $promotion_categories = $this->adcell_api_v2_promotion_categories($program_id);
+        if (is_wp_error($promotion_categories)) {
+            return new WP_Error(
+                'adcell_promotion_categories_unavailable',
+                'ADCELL-Werbemittelkategorien konnten nicht belastbar geladen werden; Bannerimport wird fail-closed abgebrochen.'
+            );
+        }
+        $promotion_categories = is_array($promotion_categories) ? $promotion_categories : array();
+
         // URL-Konzept: vorhandene Ziel-URLs einmal gebuendelt laden. Ein
         // unveraenderter Banner erzeugt danach keinen weiteren Ziel-URL-Abruf.
         $existing_destinations = $this->automation_adcell_existing_banner_destinations($program_id);
@@ -1159,6 +1173,16 @@ trait PPAR_Automation_Suite_Trait {
             $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
             $image = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['bannerUrl'] ?? ''));
             if ($promotion_id <= 0 || $click === '' || $image === '') { $blocked++; continue; }
+
+            // Provider-Rohdatensatz unverkuerzt als JSON mitfuehren. Er wird nur
+            // gespeichert, nicht direkt gerendert. Damit gehen unbekannte oder
+            // spaeter relevante ADCELL-Felder beim Import nicht mehr verloren.
+            $provider_raw_json = wp_json_encode($item, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if (!is_string($provider_raw_json) || $provider_raw_json === '') {
+                $blocked++;
+                continue;
+            }
+
             $external_id = 'banner-' . $promotion_id;
             $destination_url = $click;
             $destination_source = 'tracking_checked';
@@ -1174,13 +1198,9 @@ trait PPAR_Automation_Suite_Trait {
                     $destination_url = $stored_destination;
                     $destination_source = $stored_source;
                 } elseif ($stored_source === 'tracking_checked') {
-                    // Bereits einmal ohne belastbare Zielseite geprueft:
-                    // unveraenderte Tracking-URL niemals erneut abrufen.
                     $destination_url = $click;
                     $destination_source = 'tracking_checked';
                 } else {
-                    // Altbestand ohne neuen URL-Pruefstatus wird genau einmal
-                    // durch den Import-Resolver nachgezogen.
                     $existing = array();
                 }
             }
@@ -1197,28 +1217,45 @@ trait PPAR_Automation_Suite_Trait {
                     ? $resolved_source : 'tracking_checked';
             }
 
-            // Provider-Thema bleibt optionaler Zusatz. Kein separater
-            // Werbemittelkategorie-HTTP-Aufruf im Bannerimport mehr.
             $category_id = absint($item['promotionCategoryId'] ?? 0);
             $category_name = sanitize_text_field((string) ($item['promotionCategoryName'] ?? ''));
+            if ($category_name === '' && $category_id > 0 && isset($promotion_categories[$category_id])) {
+                $category_name = sanitize_text_field((string) $promotion_categories[$category_id]);
+            }
+
+            // Nur einen wirklich vom Provider gelieferten Namen als Bannername
+            // uebernehmen. Fehlt er, bleibt creative_title leer; die Bibliothek
+            // darf fuer die reine Anzeige einen neutralen Fallback erzeugen,
+            // dieser wird aber als provider_missing markiert und ist keine
+            // fachliche Aussage ueber das Motiv.
+            $provider_title = '';
+            $title_source = 'provider_missing';
+            foreach (array('bannerName','promotionName','title','name') as $provider_title_key) {
+                $candidate = sanitize_text_field((string) ($item[$provider_title_key] ?? ''));
+                if ($candidate !== '') {
+                    $provider_title = $candidate;
+                    $title_source = 'provider_' . sanitize_key($provider_title_key);
+                    break;
+                }
+            }
+
             $information = sanitize_textarea_field((string)($item['information'] ?? ''));
             $description_parts = array_filter(array($information, $category_name!=='' ? 'Werbemittelkategorie: '.$category_name : ''));
             $tag_parts = array_filter(array('ADCELL Banner', $category_name));
             $rows[] = array(
                 'creative_id'=>$external_id,
                 'creative_type'=>'banner',
-                'creative_title'=>sanitize_text_field((string) $program_name . ' Banner ' . $promotion_id . ($category_name!=='' ? ' – '.$category_name : '')),
+                'creative_title'=>$provider_title,
+                'title_source'=>$title_source,
                 'creative_description'=>sanitize_textarea_field(implode(' | ',$description_parts)),
                 'creative_tag'=>sanitize_text_field(implode(' | ',$tag_parts)),
                 'promotion_category_id'=>$category_id,
                 'promotion_category_name'=>$category_name,
-                // Providerneutraler Importvertrag: Ein Provider darf ein explizit
-                // geliefertes Werbemittel-Thema transportieren. Die zentrale
-                // Output-Logik entscheidet spaeter allein, ob es exakt zu einem
-                // realen Portalziel passt. Kein Providername steckt im Vertrag.
                 'provider_topic_id'=>$category_id > 0 ? (string)$category_id : '',
                 'provider_topic_name'=>$category_name,
                 'provider_topic_source'=>$category_name !== '' ? 'provider_promotion_category' : '',
+                'provider_raw_json'=>$provider_raw_json,
+                'provider_raw_sha256'=>hash('sha256', $provider_raw_json),
                 'image_source'=>$image,
                 'destination_url'=>$destination_url,
                 'tracking_url'=>$click,
