@@ -20,6 +20,8 @@ $kreditVers=tc_term('Kredit','kredit-versicherung',$versicherung);
 $haftVers=tc_term('Pferdehaftpflicht','pferdehaftpflicht-versicherung',$versicherung);
 $haftKosten=tc_term('Pferdehaftpflicht','pferdehaftpflicht-kosten',$kosten);
 $stromKosten=tc_term('Strom','strom-kosten',$kosten);
+$creditNamedWrongBranch=tc_term('Kredit Kosten','kredit-kosten-falsch',$versicherung);
+$insuranceNamedWrongBranch=tc_term('Versicherung','versicherung-kosten-falsch',$kosten);
 
 $portalKey=sanitize_key((string)$call('output_local_portal_key'));
 $portal=null;
@@ -73,6 +75,7 @@ tc_assert(count($creditTargets)===1,'credit_one_target',wp_json_encode($creditTa
 tc_assert((string)($creditTargets[0]['target_key']??'')==='category:'.$kreditKosten,'credit_only_kosten',wp_json_encode($creditTargets));
 tc_assert(strpos((string)($creditTargets[0]['target_label']??''),'Kosten')!==false,'credit_label_under_kosten');
 tc_assert((string)($creditTargets[0]['target_key']??'')!=='category:'.$kreditVers,'credit_not_versicherung');
+tc_assert((string)($creditTargets[0]['target_key']??'')!=='category:'.$creditNamedWrongBranch,'credit_not_wrong_branch_even_with_kosten_in_name');
 
 list($insMap,$insRow)=tc_import_and_map($call,$o,'https://www.tarifcheck.de/pferdehaftpflicht/','Tarifcheck Pferdehaftpflicht');
 $insTargets=tc_targets($insRow);
@@ -81,6 +84,17 @@ tc_assert(count($insTargets)===1,'insurance_one_target',wp_json_encode($insTarge
 tc_assert((string)($insTargets[0]['target_key']??'')==='category:'.$haftVers,'insurance_only_versicherung',wp_json_encode($insTargets));
 tc_assert(strpos((string)($insTargets[0]['target_label']??''),'Versicher')!==false,'insurance_label_under_versicherung');
 tc_assert((string)($insTargets[0]['target_key']??'')!=='category:'.$haftKosten,'insurance_not_kosten');
+tc_assert((string)($insTargets[0]['target_key']??'')!=='category:'.$insuranceNamedWrongBranch,'insurance_not_wrong_branch_even_with_versicherung_in_name');
+
+list($creditTitleTrapMap,$creditTitleTrapRow)=tc_import_and_map($call,$o,'https://www.tarifcheck.de/kredit/?proof=insurance-title','Tarifcheck Pferdehaftpflicht');
+$creditTitleTrapTargets=tc_targets($creditTitleTrapRow);
+tc_assert((int)($creditTitleTrapMap['mapped']??0)>=1,'credit_url_beats_insurance_title');
+tc_assert(count($creditTitleTrapTargets)===1 && strpos((string)($creditTitleTrapTargets[0]['target_label']??''),'Kosten')===0,'credit_url_stays_kosten_despite_title',wp_json_encode($creditTitleTrapTargets));
+
+list($insuranceTitleTrapMap,$insuranceTitleTrapRow)=tc_import_and_map($call,$o,'https://www.tarifcheck.de/pferdehaftpflicht/?proof=credit-title','Tarifcheck Kredit');
+$insuranceTitleTrapTargets=tc_targets($insuranceTitleTrapRow);
+tc_assert((int)($insuranceTitleTrapMap['mapped']??0)>=1,'insurance_url_beats_credit_title');
+tc_assert(count($insuranceTitleTrapTargets)===1 && preg_match('/^Versicher/u',(string)($insuranceTitleTrapTargets[0]['target_label']??''))===1,'insurance_url_stays_versicherung_despite_title',wp_json_encode($insuranceTitleTrapTargets));
 
 list($unknownMap,$unknownRow)=tc_import_and_map($call,$o,'https://www.tarifcheck.de/strom/','Tarifcheck Strom');
 tc_assert((int)($unknownMap['mapped']??0)===0,'unknown_tarifcheck_fail_closed',wp_json_encode(tc_targets($unknownRow)));
