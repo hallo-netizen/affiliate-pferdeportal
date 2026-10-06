@@ -1001,6 +1001,122 @@ trait PPAR_Output_Objects_Trait {
         );
     }
 
+    /**
+     * HARD RULE – automatische Banner:
+     * Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern.
+     * Diese Methode darf nur aus Import-/Workerpfaden aufgerufen werden.
+     */
+    public function output_assign_banner_targets_from_destination_once($row) {
+        if (!is_array($row) || sanitize_key((string)($row['creative_type']??'')) !== 'banner') {
+            return array('updated'=>0,'mapped'=>0,'reason'=>'not_banner');
+        }
+        $row_id=absint($row['id']??0);
+        if($row_id<=0 || !method_exists($this,'creative_library_table')) {
+            return array('updated'=>0,'mapped'=>0,'reason'=>'missing_row');
+        }
+        $source=$this->output_banner_destination_source($row);
+        if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)){
+            return array('updated'=>0,'mapped'=>0,'reason'=>'no_real_destination');
+        }
+        $destination=esc_url_raw((string)($row['destination_url']??''));
+        $semantic=$this->output_destination_semantic_text($row);
+        if($destination==='' || $semantic===''){
+            return array('updated'=>0,'mapped'=>0,'reason'=>'destination_unusable');
+        }
+
+        $existing=$this->output_banner_library_records($row);
+        $portals=$this->output_portal_registry();
+        $new_records=array();
+        $mapped=0;
+
+        foreach((array)$portals as $portal){
+            if(!is_array($portal) || empty($portal['enabled'])){continue;}
+            $portal_key=sanitize_key((string)($portal['key']??''));
+            if($portal_key===''){continue;}
+
+            // Bereits exakt fuer dieselbe Ziel-URL gespeichert => unveraendert wiederverwenden.
+            $reuse=null;
+            foreach($existing as $record){
+                if(sanitize_key((string)($record['portal_key']??''))===$portal_key
+                    && sanitize_key((string)($record['state']??''))==='mapped'
+                    && esc_url_raw((string)($record['destination_url']??''))===$destination
+                    && sanitize_text_field((string)($record['target_key']??''))!==''){
+                    $reuse=$record; break;
+                }
+            }
+            if(is_array($reuse)){
+                $new_records[]=$reuse;
+                $mapped++;
+                continue;
+            }
+
+            $targets=$this->output_portal_targets($portal);
+            if(is_wp_error($targets)){continue;}
+            $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+            $dest_tokens=$this->output_tokens($semantic);
+            $ranked=array();
+
+            foreach((array)$targets as $target){
+                if(!is_array($target)){continue;}
+                $type=sanitize_key((string)($target['type']??''));
+                if(!in_array($type,$wanted,true)){continue;}
+                $target_key=sanitize_text_field((string)($target['key']??''));
+                if($target_key===''){continue;}
+                if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
+
+                $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
+                $slug_tokens=$this->output_tokens($slug_norm);
+                $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
+                $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
+                $leaf_tokens=$this->output_tokens($leaf_norm);
+                $matched=array();
+                foreach(array_values(array_unique(array_merge($slug_tokens,$leaf_tokens))) as $tt){
+                    if(strlen($tt)<5){continue;}
+                    foreach($dest_tokens as $dt){
+                        if($dt===$tt || (strlen($dt)>=6 && strlen($tt)>=6 && (strpos($dt,$tt)!==false || strpos($tt,$dt)!==false))){
+                            $matched[$tt]=true; break;
+                        }
+                    }
+                }
+                $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
+                $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) : count($matched)*140;
+                if($score>0){$ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);}
+            }
+
+            usort($ranked,static function($a,$b){$c=(int)$b['score']<=>(int)$a['score'];if($c!==0)return $c;$c=(int)$b['matches']<=>(int)$a['matches'];if($c!==0)return $c;return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);});
+            if(!$ranked){continue;}
+            $best=$ranked[0]; $second=$ranked[1]??null;
+            $margin=(int)$best['score']-(int)($second['score']??0);
+            $accept=!empty($best['exact']) ? ($second===null || $margin>=100) : ((int)$best['score']>=140 && ($second===null || $margin>=70));
+            if(!$accept){continue;}
+
+            $target=$best['target'];
+            $new_records[]=array(
+                'portal_key'=>$portal_key,
+                'state'=>'mapped',
+                'level'=>!empty($best['exact'])?'exact':'extended',
+                'target_key'=>sanitize_text_field((string)($target['key']??'')),
+                'target_label'=>sanitize_text_field((string)($target['label']??'')),
+                'confidence'=>!empty($best['exact'])?100:80,
+                'source'=>'import_destination_url',
+                'destination_source'=>$source,
+                'destination_url'=>$destination,
+                'updated_at'=>time(),
+            );
+            $mapped++;
+        }
+
+        global $wpdb;
+        $wpdb->update($this->creative_library_table(),array(
+            'topic_status'=>$mapped>0?'auto_verified':'no_match',
+            'topic_score'=>$mapped>0?100:0,
+            'topic_targets'=>wp_json_encode($new_records,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES),
+            'classified_at'=>time(),
+        ),array('id'=>$row_id));
+
+        return array('updated'=>1,'mapped'=>$mapped,'reason'=>$mapped>0?'mapped':'no_match');
+    }
+
     private function output_banner_compatible_slots($row,$portal) {
         $matrix=$this->output_slot_matrix($portal);
         if(is_wp_error($matrix)||!is_array($matrix)){return array();}
