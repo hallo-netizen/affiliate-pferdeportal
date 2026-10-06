@@ -1,4 +1,4 @@
-name: PSTE KISS Missing Inventory
+name: PSTE KISS Current IDs
 on:
   push:
     branches: [pste-kiss-e2e-20261005]
@@ -8,25 +8,18 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Read only posts missing from bound export inventory
+      - name: Compare current public post ids only
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
           import json,urllib.request
           known=set([8873,8997,9097,9108,9120,10224,10335,10352,10353,10498,10499,10500,10669,10670,15493,15617,15618,15628,15974,16029,16064,16065,16066,16067,16068,16241,16253,16254,16327,16328,17123,17124,17125,17126,17127,17128,971939,971940,971941,971942,971943,971944,971945,972415,972425,972426,972427,972447,972448,972449,972558,972559,972560,972599,972600,972601,972602,972603,972604,972605,972606,972608,972609,972610,972611,972612,972613,972630,972631,972632,972633,972634,972635,972636,972637,972638,972639,972640,972641,972642,972643,972644])
-          base='https://pferde-atelier.de/wp-json/wp/v2'
-          req=urllib.request.Request(base+'/posts?per_page=100&status=publish&_fields=id,title,slug,categories,status',headers={'User-Agent':'Mozilla/5.0'})
+          u='https://pferde-atelier.de/wp-json/wp/v2/posts?per_page=100&status=publish&_fields=id'
+          req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
           with urllib.request.urlopen(req,timeout=30) as r: posts=json.load(r)
-          missing=[p for p in posts if int(p['id']) not in known]
-          cat_ids=sorted({int(c) for p in missing for c in p.get('categories',[])})
-          cats={}
-          if cat_ids:
-              ids=','.join(map(str,cat_ids))
-              req=urllib.request.Request(base+'/categories?per_page=100&include='+ids+'&_fields=id,name,slug,parent',headers={'User-Agent':'Mozilla/5.0'})
-              with urllib.request.urlopen(req,timeout=30) as r:
-                  for c in json.load(r): cats[int(c['id'])]=c
-          out=[{'post_id':p['id'],'title':p['title']['rendered'],'slug':p['slug'],'status':p['status'],'categories':[cats.get(int(c),{'id':c}) for c in p.get('categories',[])]} for p in missing]
-          print('MISSING_COUNT='+str(len(out)))
-          print('MISSING_POSTS='+json.dumps(out,ensure_ascii=False,separators=(',',':')))
+          ids=sorted(int(p['id']) for p in posts)
+          print('CURRENT_IDS='+','.join(map(str,ids)))
+          print('STALE_KNOWN='+','.join(map(str,sorted(known-set(ids)))))
+          print('OVERLAP_COUNT='+str(len(known&set(ids))))
           PY
