@@ -1,0 +1,154 @@
+name: TEMP Affiliate Tarifcheck Final ZIP 6.72.191
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-tarifcheck-final-v672191.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_tarifcheck_kiss_v672191.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  final-zip-wordpress-mariadb:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Build exact manifest and ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          grep -F "Version: 6.72.191" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.191';" "$ROOT/pferdeportal-affiliate-router.php"
+          (cd release/affiliate-zentrale/current && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) > release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt
+          test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.191.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.191.zip affiliate-portal-router)
+          echo "ZIP_SHA256=$(sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.191.zip | awk '{print $1}')" >> "$GITHUB_ENV"
+          echo "ZIP_BYTES=$(stat -c%s /tmp/AFFILIATE_ZENTRALE_6.72.191.zip)" >> "$GITHUB_ENV"
+          echo "MANIFEST_SHA256=$(sha256sum release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Fresh unpack byte identity and lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/final191
+          mkdir -p /tmp/final191
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.191.zip -d /tmp/final191
+          ROOT=/tmp/final191/affiliate-portal-router
+          test "$(find "$ROOT" -type f | wc -l)" = "27"
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" = "21"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('/tmp/final191')
+          expected={}
+          for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines():
+              if not line.strip(): continue
+              h,rel=line.split('  ',1); expected[rel]=h
+          files={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          assert set(files)==set(expected), (set(expected)-set(files),set(files)-set(expected))
+          bad=[p for p,h in files.items() if expected[p]!=h]
+          assert not bad,bad
+          print('PASS final ZIP 27/27 byte identity')
+          PY
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final191-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/final191-lint.log)" = "21"
+          echo "PASS final ZIP PHP lint 21/21"
+
+      - name: Install exact ZIP into fresh WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate Final 6.72.191' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          add_action('init', static function(){
+              if (!post_type_exists('uge_term')) register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('hp_listing')) register_post_type('hp_listing',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
+          },1);
+          PHP
+          /tmp/wp plugin install /tmp/AFFILIATE_ZENTRALE_6.72.191.zip --activate --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.191"){exit(2);} echo "PASS exact ZIP 6.72.191 active\n";' --path=/tmp/wp-site
+
+      - name: Exact ZIP Tarifcheck positive negative
+        shell: bash
+        run: |
+          set -euo pipefail
+          BEFORE_TABLES=$(mysql -N -h127.0.0.1 -uwordpress -pwordpress wordpress -e "SHOW TABLES" | wc -l)
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_tarifcheck_kiss_v672191.php" --path=/tmp/wp-site | tee /tmp/final191-tarifcheck.log
+          grep -F 'PASS catalog_cost_records_67' /tmp/final191-tarifcheck.log
+          grep -F 'PASS catalog_cost_unique_paths_66' /tmp/final191-tarifcheck.log
+          grep -F 'PASS credit_mapped_all_unique_cost_categories mapped=66' /tmp/final191-tarifcheck.log
+          grep -F 'PASS insurance_mapped_all_insurance_categories mapped=14' /tmp/final191-tarifcheck.log
+          grep -F 'PASS credit_url_beats_insurance_title' /tmp/final191-tarifcheck.log
+          grep -F 'PASS insurance_url_beats_credit_title' /tmp/final191-tarifcheck.log
+          grep -F 'PASS unknown_tarifcheck_fail_closed' /tmp/final191-tarifcheck.log
+          grep -F 'PASS mixed_family_fail_closed' /tmp/final191-tarifcheck.log
+          grep -F 'PASS runtime_exposes_all_cost_campaign_targets count=66' /tmp/final191-tarifcheck.log
+          grep -F 'PASS runtime_exposes_all_insurance_campaign_targets count=14' /tmp/final191-tarifcheck.log
+          grep -F 'TARIFCHECK_KISS_672191_ALL_COST_AND_INSURANCE_CATEGORIES_COMPLETE' /tmp/final191-tarifcheck.log
+          AFTER_TABLES=$(mysql -N -h127.0.0.1 -uwordpress -pwordpress wordpress -e "SHOW TABLES" | wc -l)
+          test "$BEFORE_TABLES" = "$AFTER_TABLES"
+          echo "PASS exact ZIP no new tables during Tarifcheck import/map"
+
+      - name: Publish exact tested installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.191.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.191.zip
+          git config user.name "hallo-netizen"
+          git config user.email "hallo@oliver-beil.de"
+          git add release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.191.zip
+          git commit -m "affiliate: publish tested 6.72.191 Tarifcheck installer"
+          git push origin HEAD:affiliate-release-current
+          echo "PASS FINAL_ZIP sha256=$ZIP_SHA256 bytes=$ZIP_BYTES manifest_sha256=$MANIFEST_SHA256"
