@@ -693,6 +693,18 @@ trait PPAR_Creative_Library_Trait {
                 $destination_source = 'decoded_tracking';
             }
         }
+        if ($destination_url === '' && $tracking_url !== '' && method_exists($this, 'creative_library_resolve_tracking_destination_import')) {
+            $resolved = $this->creative_library_resolve_tracking_destination_import($tracking_url);
+            if (is_array($resolved)) {
+                $resolved_url = esc_url_raw((string) ($resolved['url'] ?? ''));
+                $resolved_source = sanitize_key((string) ($resolved['source'] ?? ''));
+                if ($resolved_url !== '') {
+                    $destination_url = $resolved_url;
+                    $destination_source = in_array($resolved_source, array('decoded_tracking','resolved_redirect','tracking_checked','tracking_fallback'), true)
+                        ? $resolved_source : 'tracking_fallback';
+                }
+            }
+        }
         if ($destination_url === '') {
             $destination_url = $tracking_url;
             $destination_source = $destination_url !== '' ? 'tracking_fallback' : 'unknown';
@@ -1007,6 +1019,7 @@ trait PPAR_Creative_Library_Trait {
             $this->creative_library_redirect('failed', $parsed->get_error_message());
         }
         $counts = array('seen'=>0,'imported'=>0,'updated'=>0,'unchanged'=>0,'blocked'=>0,'failed'=>0);
+        $banner_identity_hashes = array();
         foreach ((array) $parsed['rows'] as $row) {
             $counts['seen']++;
             $creative = $this->creative_library_normalize_row($row, $parsed['mapping'], $context);
@@ -1020,11 +1033,39 @@ trait PPAR_Creative_Library_Trait {
             } else {
                 $counts['failed']++;
             }
+            if (sanitize_key((string)($creative['creative_type'] ?? '')) === 'banner'
+                && !empty($creative['identity_hash'])) {
+                $banner_identity_hashes[] = strtolower(sanitize_text_field((string)$creative['identity_hash']));
+            }
         }
+
+        // HARD RULE gilt auch fuer direkt eingefuegte Partnercodes:
+        // Import -> Ziel-URL -> feste Portalziele -> speichern.
+        // Alle betroffenen Banner werden danach in genau EINER DB-Abfrage geladen.
+        $target_mapped = 0;
+        if ($banner_identity_hashes && method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
+            global $wpdb;
+            $banner_identity_hashes = array_values(array_unique(array_filter($banner_identity_hashes, static function($hash) {
+                return (bool) preg_match('/^[a-f0-9]{64}$/', $hash);
+            })));
+            if ($banner_identity_hashes) {
+                $placeholders = implode(',', array_fill(0, count($banner_identity_hashes), '%s'));
+                $query = $wpdb->prepare(
+                    "SELECT * FROM {$this->creative_library_table()} WHERE identity_hash IN ({$placeholders})",
+                    ...$banner_identity_hashes
+                );
+                $stored_rows = $wpdb->get_results($query, ARRAY_A);
+                foreach ((array)$stored_rows as $stored_row) {
+                    $mapped = $this->output_assign_banner_targets_from_destination_once($stored_row);
+                    $target_mapped += absint($mapped['mapped'] ?? 0);
+                }
+            }
+        }
+
         if ($counts['imported'] > 0 || $counts['updated'] > 0) {
             $this->creative_library_schedule_asset_verification(10);
         }
-        $message = sprintf('%d erkannt · %d neu · %d aktualisiert · %d unverändert · %d blockiert. Bildprüfung läuft paketweise im Hintergrund.', $counts['seen'], $counts['imported'], $counts['updated'], $counts['unchanged'], $counts['blocked']);
+        $message = sprintf('%d erkannt · %d neu · %d aktualisiert · %d unverändert · %d blockiert · %d feste Zielzuordnungen gespeichert. Bildprüfung läuft paketweise im Hintergrund.', $counts['seen'], $counts['imported'], $counts['updated'], $counts['unchanged'], $counts['blocked'], $target_mapped);
         $this->creative_library_redirect('success', $message, $context);
     }
 
@@ -1573,7 +1614,7 @@ trait PPAR_Creative_Library_Trait {
             </div>
             <details class="ppar-library-panel" style="margin-top:16px">
                 <summary><strong>Sammelimport echter Provider-Werbemittel</strong></summary>
-                <p class="description">CSV, JSON, TXT mit vollständigen Bannercodes oder direkt eingefügte vollständige Codes werden gesammelt verarbeitet. Der Import nimmt noch keine Portalzuordnung vor.</p>
+                <p class="description">CSV, JSON, TXT mit vollständigen Bannercodes oder direkt eingefügte vollständige Codes werden gesammelt verarbeitet. Banner werden einmalig über ihre Ziel-URL festen Portalzielen zugeordnet; ohne sichere Zielkarte keine automatische Ausspielung.</p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="ppar_creative_library_import">
                     <?php wp_nonce_field('ppar_creative_library_import', 'ppar_creative_library_nonce'); ?>
