@@ -3407,6 +3407,169 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
+     * V6.72.195 – deterministischer Banner-Reconcile.
+     *
+     * Unterschied zu allen vorigen Reparaturen:
+     * 1. Zuerst werden ALLE automatisch erzeugten Bannerkampagnen global
+     *    stillgelegt – unabhaengig davon, ob ihr alter Creative-Metakey noch stimmt.
+     * 2. Danach werden ausschliesslich aus der aktuellen Creative-Library und
+     *    deren gespeicherter Zielkarte neue automatische Banner aktiviert.
+     * 3. Der erste Batch laeuft direkt im Backend-Request. WP-Cron ist nur noch
+     *    Fortsetzung fuer grosse Bestaende, nicht Voraussetzung fuer den Start.
+     */
+    public function maybe_reconcile_banner_state_v672195() {
+        if (self::VERSION !== '6.72.195' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $state_key = 'ppar_v672195_banner_reconcile_state';
+        $state = sanitize_key((string)get_option($state_key, ''));
+        if ($state === 'done') { return; }
+        if ($state !== 'running') {
+            delete_option('ppar_v672195_banner_reconcile_cursor');
+            delete_option('ppar_v672195_banner_reconcile_result');
+            delete_option('ppar_v672195_banner_reconcile_reset_done');
+            update_option($state_key, 'running', false);
+        }
+        // Wichtig: nicht nur schedulen. Der Backend-Aufruf fuehrt den ersten
+        // begrenzten Reconcile-Schritt selbst aus.
+        $this->run_v672195_banner_reconcile();
+    }
+
+    public function run_v672195_banner_reconcile() {
+        if (self::VERSION !== '6.72.195'
+            || !method_exists($this, 'creative_library_table')
+            || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
+            || !method_exists($this, 'creative_library_deactivate_all_automatic_banner_campaigns')) {
+            return;
+        }
+
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $state_key = 'ppar_v672195_banner_reconcile_state';
+        $cursor_key = 'ppar_v672195_banner_reconcile_cursor';
+        $result_key = 'ppar_v672195_banner_reconcile_result';
+        $reset_key = 'ppar_v672195_banner_reconcile_reset_done';
+
+        $previous = get_option($result_key, array());
+        $previous = is_array($previous) ? $previous : array();
+
+        if ((string)get_option($reset_key, '') !== 'yes') {
+            $global_deactivated = absint($this->creative_library_deactivate_all_automatic_banner_campaigns());
+            $previous['global_deactivated_auto_banners'] = absint($previous['global_deactivated_auto_banners'] ?? 0) + $global_deactivated;
+            update_option($result_key, $previous, false);
+            update_option($reset_key, 'yes', false);
+        }
+
+        $last = absint(get_option($cursor_key, 0));
+        $limit = 50;
+        $deadline = microtime(true) + 10.0;
+        $processed = 0;
+        $mapped_count = 0;
+        $replanned = 0;
+        $no_map = 0;
+        $more = false;
+
+        do {
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+                 WHERE id>%d
+                   AND creative_type='banner'
+                   AND source_status='active'
+                   AND availability_state='active'
+                 ORDER BY id ASC
+                 LIMIT %d",
+                $last,
+                $limit
+            ), ARRAY_A);
+
+            if (!is_array($rows) || !$rows) {
+                $more = false;
+                break;
+            }
+
+            foreach ($rows as $row) {
+                $row_id = absint($row['id'] ?? 0);
+                $last = max($last, $row_id);
+                $processed++;
+                if ($row_id <= 0) { continue; }
+
+                // topic_targets ist die einzige automatische Zielautoritaet.
+                // Jede abgeleitete Altkarte wird verworfen und frisch aus der
+                // aktuellen Import-/Manuellinformation aufgebaut.
+                $wpdb->update($table, array(
+                    'topic_score'=>0,
+                    'topic_targets'=>'[]',
+                    'classified_at'=>0,
+                ), array('id'=>$row_id));
+                $row['topic_score'] = 0;
+                $row['topic_targets'] = '[]';
+                $row['classified_at'] = 0;
+
+                $mapped = $this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
+                if ($mapped_n <= 0) {
+                    $no_map++;
+                    continue;
+                }
+                $mapped_count += $mapped_n;
+
+                $targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $row['topic_score'] = 100;
+                $row['classified_at'] = time();
+
+                $payload = json_decode((string)($row['payload'] ?? ''), true);
+                $payload = is_array($payload) ? $payload : array();
+                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
+                $verified = in_array($dimension_state, array('verified','mismatch'), true)
+                    && absint($row['width'] ?? 0) > 0
+                    && absint($row['height'] ?? 0) > 0;
+
+                if (!$verified) {
+                    if (method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
+                if (method_exists($this, 'output_plan_creative')) {
+                    $plan = $this->output_plan_creative($row, true);
+                    if (is_array($plan) && (absint($plan['active'] ?? 0) > 0 || absint($plan['drafts'] ?? 0) > 0)) {
+                        $replanned++;
+                    }
+                }
+            }
+
+            update_option($cursor_key, $last, false);
+            $more = count($rows) === $limit;
+        } while ($more && microtime(true) < $deadline);
+
+        $previous = get_option($result_key, array());
+        $previous = is_array($previous) ? $previous : array();
+        update_option($result_key, array_merge($previous, array(
+            'processed'=>absint($previous['processed'] ?? 0) + $processed,
+            'mapped'=>absint($previous['mapped'] ?? 0) + $mapped_count,
+            'replanned'=>absint($previous['replanned'] ?? 0) + $replanned,
+            'no_map'=>absint($previous['no_map'] ?? 0) + $no_map,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        )), false);
+
+        if ($more) {
+            if (!wp_next_scheduled('ppar_v672195_banner_reconcile')) {
+                wp_schedule_single_event(time() + 3, 'ppar_v672195_banner_reconcile');
+            }
+            return;
+        }
+
+        delete_option($cursor_key);
+        update_option($state_key, 'done', false);
+        if (method_exists($this, 'article_plan_bump_campaign_revision')) {
+            $this->article_plan_bump_campaign_revision('v672195_banner_reconcile_complete');
+        }
+    }
+
+
+    /**
      * V6.72.189 – genau ein Upgrade-Nachlauf fuer das URL-Konzept.
      * Alte 6.72.189-Kategorienzustände duerfen diesen neuen Lauf nicht
      * unterdruecken; deshalb eigener State- und Hook-Name.
