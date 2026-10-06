@@ -104,6 +104,7 @@ $ok(sanitize_key((string)($classification['target']['slug']??''))==='schabracken
 
 $plan=$call('output_plan_creative',$row,true,$portalKey);
 $ok(is_array($plan),'plan_runs',wp_json_encode($plan));
+$ok((int)($plan['blocked']??0)===0,'fixed_banner_zero_blockers',wp_json_encode($plan));
 $ok((int)($plan['active']??0)>=1,'fixed_banner_published',wp_json_encode($plan));
 
 $ids=$call('creative_library_existing_campaign_ids',$identity);
