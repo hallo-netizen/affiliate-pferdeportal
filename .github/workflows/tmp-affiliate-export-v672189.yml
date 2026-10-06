@@ -1,0 +1,40 @@
+name: TEMP Export Affiliate 6.72.189
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-export-v672189.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export-tested-installer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact committed installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip
+          ACTUAL=$(sha256sum "$ZIP" | awk '{print $1}')
+          test "$ACTUAL" = '0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94'
+          rm -rf /tmp/export189
+          mkdir -p /tmp/export189
+          unzip -q "$ZIP" -d /tmp/export189
+          grep -F 'Version: 6.72.189' /tmp/export189/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.189';" /tmp/export189/affiliate-portal-router/pferdeportal-affiliate-router.php
+          test "$(find /tmp/export189/affiliate-portal-router -type f | wc -l)" = "27"
+          echo "PASS exact committed 6.72.189 installer sha256=$ACTUAL"
+
+      - name: Upload exact tested installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: AFFILIATE_ZENTRALE_6.72.189_TESTED
+          path: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
