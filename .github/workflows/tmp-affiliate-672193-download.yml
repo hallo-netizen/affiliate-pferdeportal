@@ -1,0 +1,29 @@
+name: TEMP Affiliate 6.72.193 Download
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-672193-download.yml'
+  workflow_dispatch:
+
+jobs:
+  publish-download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact committed installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.193.zip
+          test -f "$FILE"
+          test "$(sha256sum "$FILE" | awk '{print $1}')" = "1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27"
+          test "$(stat -c%s "$FILE")" = "805229"
+      - name: Upload exact installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: AFFILIATE_ZENTRALE_6.72.193
+          path: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.193.zip
+          if-no-files-found: error
+          compression-level: 0
