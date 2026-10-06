@@ -63,5 +63,13 @@
     "Kosten-Kategorie mit sinnvoll finanzierbarer höherpreisiger Anschaffung -> TARIFRECHNER_KREDIT.",
     "Versicherungs-Kategorie oder Versicherungsthema -> TARIFRECHNER_VERSICHERUNG.",
     "Keine automatische Vermischung beider Rechnerprofile."
+  ],
+  "global_title_rules": [
+    "Kein Doppelpunkt im Titel.",
+    "Das konkrete Hauptkeyword der Zielkategorie muss natürlich im Titel vorkommen.",
+    "Der Titel muss ohne Zusatzwissen klar erkennen lassen, worum es geht.",
+    "Keine Anbieter- oder Rechnernamen im Titel.",
+    "Keine fast identischen Serientitel; Formulierung und Nutzenversprechen müssen je Kategorie variieren.",
+    "Keine unbelegten Superlative wie bester, günstigster oder billigster."
   ]
 }
