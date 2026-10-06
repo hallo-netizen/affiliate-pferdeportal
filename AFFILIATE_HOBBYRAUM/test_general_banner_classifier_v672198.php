@@ -106,7 +106,7 @@ $rows['content_schabracken']=$seed(
     'provider_explicit',
     '',
     '',
-    'category:ausruestung'
+    'category:'.$root
 );
 $rows['provider_pferdedecken']=$seed(
     'provider-pferdedecken',
@@ -154,16 +154,16 @@ $getKeys=function($mapped){
 
 $m1=$call('output_assign_banner_targets_from_destination_once',$rows['content_schabracken']);
 $k1=$getKeys($m1);
-$ok($k1===array('category:schabracken'),'content_beats_broad_destination',wp_json_encode($k1));
-$ok(!in_array('category:ausruestung',$k1,true),'stale_map_not_reused');
+$ok($k1===array('category:'.$sch),'content_beats_broad_destination',wp_json_encode($k1));
+$ok(!in_array('category:'.$root,$k1,true),'stale_map_not_reused');
 
 $m2=$call('output_assign_banner_targets_from_destination_once',$rows['provider_pferdedecken']);
 $k2=$getKeys($m2);
-$ok($k2===array('category:pferdedecken'),'provider_topic_precedence',wp_json_encode($k2));
+$ok($k2===array('category:'.$decken),'provider_topic_precedence',wp_json_encode($k2));
 
 $m3=$call('output_assign_banner_targets_from_destination_once',$rows['url_fallback']);
 $k3=$getKeys($m3);
-$ok($k3===array('category:schabracken'),'url_fallback_when_content_has_no_target',wp_json_encode($k3));
+$ok($k3===array('category:'.$sch),'url_fallback_when_content_has_no_target',wp_json_encode($k3));
 
 $m4=$call('output_assign_banner_targets_from_destination_once',$rows['ambiguous']);
 $k4=$getKeys($m4);
@@ -196,8 +196,8 @@ $r1=$fetch('content-schabracken');
 $r2=$fetch('provider-pferdedecken');
 $r4=$fetch('ambiguous');
 $r5=$fetch('no-evidence');
-$ok($storedKeys($r1)===array('category:schabracken'),'reconcile_persists_schabracken');
-$ok($storedKeys($r2)===array('category:pferdedecken'),'reconcile_persists_pferdedecken');
+$ok($storedKeys($r1)===array('category:'.$sch),'reconcile_persists_schabracken');
+$ok($storedKeys($r2)===array('category:'.$decken),'reconcile_persists_pferdedecken');
 $ok($storedKeys($r4)===array(),'reconcile_keeps_ambiguous_unmapped');
 $ok($storedKeys($r5)===array(),'reconcile_keeps_unknown_unmapped');
 
@@ -214,8 +214,8 @@ $a1=$activeTargets((string)$r1['identity_hash']);
 $a2=$activeTargets((string)$r2['identity_hash']);
 $a4=$activeTargets((string)$r4['identity_hash']);
 $a5=$activeTargets((string)$r5['identity_hash']);
-$ok($a1===array('category:schabracken'),'frontend_campaign_schabracken_active',wp_json_encode($a1));
-$ok($a2===array('category:pferdedecken'),'frontend_campaign_pferdedecken_active',wp_json_encode($a2));
+$ok($a1===array('category:'.$sch),'frontend_campaign_schabracken_active',wp_json_encode($a1));
+$ok($a2===array('category:'.$decken),'frontend_campaign_pferdedecken_active',wp_json_encode($a2));
 $ok($a4===array(),'ambiguous_creates_no_active_campaign');
 $ok($a5===array(),'unknown_creates_no_active_campaign');
 
