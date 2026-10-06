@@ -353,7 +353,7 @@ jobs:
             cd /tmp/final189
             sha256sum -c "$GITHUB_WORKSPACE/release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
           ) | tee /tmp/final189-manifest.log
-          test "$(grep -c ': OK /tmp/final189-manifest.log)" = "27"
+          test "$(grep -c ': OK' /tmp/final189-manifest.log)" = "27"
           find /tmp/final189/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final189-lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/final189-lint.log)" = "21"
           python3 - <<'PY'
