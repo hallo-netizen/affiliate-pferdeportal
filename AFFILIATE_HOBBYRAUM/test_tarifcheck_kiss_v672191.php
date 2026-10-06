@@ -159,7 +159,7 @@ foreach($insurance_ids as $slug=>$id){
     tc_assert(in_array('category:'.$id,$insKeys,true),'insurance_contains_'.$slug);
 }
 foreach($insTargets as $x){
-    $label=(string)($x['target_label']??'');
+    $label=html_entity_decode((string)($x['target_label']??''),ENT_QUOTES,'UTF-8');
     tc_assert(strpos($label,'Versicherungen & Recht')!==false,'insurance_only_real_insurance_branch',$label);
 }
 tc_assert(!in_array('category:'.$outside,$insKeys,true),'insurance_rejects_same_topic_outside_branch');
