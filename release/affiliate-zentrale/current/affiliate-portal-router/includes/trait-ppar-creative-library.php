@@ -1222,6 +1222,44 @@ trait PPAR_Creative_Library_Trait {
     }
 
 
+    /**
+     * 6.72.195 – harter Reset ausschliesslich der automatisch erzeugten
+     * Bannerprojektion. Der Reset sucht bewusst NICHT ueber Creative-Metakeys:
+     * Ein kaputter Altzustand darf nicht erst korrekt verknuepft sein muessen,
+     * damit er entfernt werden kann.
+     *
+     * Manuelle/FIXED Kampagnen und Produkte bleiben unberuehrt.
+     */
+    private function creative_library_deactivate_all_automatic_banner_campaigns() {
+        if (!function_exists('get_posts') || !method_exists($this, 'campaign_from_post') || !method_exists($this, 'save_campaign_record')) {
+            return 0;
+        }
+        $ids = get_posts(array(
+            'post_type'=>self::CAMPAIGN_POST_TYPE,
+            'post_status'=>array('publish','draft','pending','private'),
+            'posts_per_page'=>-1,
+            'fields'=>'ids',
+            'no_found_rows'=>true,
+        ));
+        $count = 0;
+        foreach ((array)$ids as $post_id) {
+            $post_id = absint($post_id);
+            if ($post_id <= 0) { continue; }
+            $campaign = $this->campaign_from_post(get_post($post_id));
+            if (!is_array($campaign)) { continue; }
+            if (sanitize_key((string)($campaign['source'] ?? '')) !== 'output_object_v4') { continue; }
+            if (sanitize_key((string)($campaign['creative_type'] ?? '')) !== 'banner') { continue; }
+            if (sanitize_key((string)($campaign['quality_manual_status'] ?? 'auto_verified')) !== 'auto_verified') { continue; }
+            if (empty($campaign['active'])) { continue; }
+            $campaign['active'] = false;
+            if ($this->save_campaign_record($campaign, $post_id)) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+
     public function creative_library_reapply_partner_profile($provider, $partner_external_id) {
         global $wpdb;
         $table = $this->creative_library_table();
