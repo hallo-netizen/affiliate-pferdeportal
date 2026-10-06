@@ -163,7 +163,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_tariff_tools_kiss_v672193.php" --path=/tmp/wp-site | tee /tmp/final194-tools.log
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_tariff_tools_regression_v672194.php" --path=/tmp/wp-site | tee /tmp/final194-tools.log
           grep -F 'PASS ordinary_content_zero_tariff_option_reads reads=0' /tmp/final194-tools.log
           grep -F 'PASS multiple_placeholders_one_option_load reads=1' /tmp/final194-tools.log
           grep -F 'PASS central_code_update_immediate' /tmp/final194-tools.log
