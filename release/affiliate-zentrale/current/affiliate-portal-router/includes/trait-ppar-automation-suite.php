@@ -3250,6 +3250,163 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     /**
+     * V6.72.194 – LIVE-KISS Zielkarten-Neuaufbau.
+     *
+     * Anders als der indirekte 6.72.190-ADCELL-Nachlauf arbeitet dieser Worker
+     * direkt auf dem bereits vorhandenen lokalen Bannerbestand:
+     * gespeicherte destination_url -> alte automatische Zielkarte verwerfen ->
+     * feste Zielkarte neu bauen -> nur bei sicherer Karte neu planen.
+     *
+     * Kein Provider-HTTP, kein Frontend-Scan, keine Produktzeilen.
+     */
+    public function maybe_rebuild_banner_target_map_v672194() {
+        if (self::VERSION !== '6.72.194' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $state_key = 'ppar_v672194_banner_target_rebuild_state';
+        $cursor_key = 'ppar_v672194_banner_target_rebuild_cursor';
+        $state = sanitize_key((string)get_option($state_key, ''));
+        if ($state === 'done') { return; }
+        if ($state !== 'running') {
+            delete_option($cursor_key);
+            delete_option('ppar_v672194_banner_target_rebuild_result');
+            update_option($state_key, 'running', false);
+        }
+        if (!wp_next_scheduled('ppar_v672194_banner_target_rebuild')) {
+            wp_schedule_single_event(time() + 1, 'ppar_v672194_banner_target_rebuild');
+        }
+    }
+
+    public function run_v672194_banner_target_rebuild() {
+        if (self::VERSION !== '6.72.194'
+            || !method_exists($this, 'creative_library_table')
+            || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
+            || !method_exists($this, 'creative_library_deactivate_automatic_output_campaigns')) {
+            return;
+        }
+
+        global $wpdb;
+        $table = $this->creative_library_table();
+        $state_key = 'ppar_v672194_banner_target_rebuild_state';
+        $cursor_key = 'ppar_v672194_banner_target_rebuild_cursor';
+        $result_key = 'ppar_v672194_banner_target_rebuild_result';
+        $cursor = absint(get_option($cursor_key, 0));
+        $limit = 50;
+        $deadline = microtime(true) + 12.0;
+        $processed = 0;
+        $mapped_count = 0;
+        $replanned = 0;
+        $deactivated = 0;
+        $no_map = 0;
+        $last = $cursor;
+        $more = false;
+
+        do {
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+                 WHERE id>%d
+                   AND creative_type='banner'
+                   AND source_status='active'
+                   AND availability_state='active'
+                 ORDER BY id ASC
+                 LIMIT %d",
+                $last,
+                $limit
+            ), ARRAY_A);
+
+            if (!is_array($rows) || !$rows) {
+                $more = false;
+                break;
+            }
+
+            foreach ($rows as $row) {
+                $row_id = absint($row['id'] ?? 0);
+                $last = max($last, $row_id);
+                $processed++;
+                if ($row_id <= 0) { continue; }
+
+                $identity = strtolower(sanitize_text_field((string)($row['identity_hash'] ?? '')));
+                if (!preg_match('/^[a-f0-9]{64}$/', $identity)) { continue; }
+
+                // Fail-closed zuerst: alte automatisch materialisierte Kampagne
+                // darf waehrend des Neuaufbaus nicht weiter auf einem alten Ziel
+                // sichtbar bleiben. Manuelle/FIXED Kampagnen bleiben unangetastet.
+                $deactivated += absint($this->creative_library_deactivate_automatic_output_campaigns($identity));
+
+                // Ausschliesslich abgeleitete automatische Zielwerte verwerfen.
+                // Manuelle Control-/FIXED-Entscheidungen liegen separat.
+                $wpdb->update($table, array(
+                    'topic_score'=>0,
+                    'topic_targets'=>'[]',
+                    'classified_at'=>0,
+                ), array('id'=>$row_id));
+                $row['topic_score'] = 0;
+                $row['topic_targets'] = '[]';
+                $row['classified_at'] = 0;
+
+                $mapped = $this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
+                if ($mapped_n <= 0) {
+                    $no_map++;
+                    continue;
+                }
+                $mapped_count += $mapped_n;
+
+                $targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $row['topic_score'] = 100;
+                $row['classified_at'] = time();
+
+                $payload = json_decode((string)($row['payload'] ?? ''), true);
+                $payload = is_array($payload) ? $payload : array();
+                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
+                $verified = in_array($dimension_state, array('verified','mismatch'), true)
+                    && absint($row['width'] ?? 0) > 0
+                    && absint($row['height'] ?? 0) > 0;
+
+                if (!$verified) {
+                    if (method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
+                if (method_exists($this, 'output_plan_creative')) {
+                    $plan = $this->output_plan_creative($row, true);
+                    if (is_array($plan) && (absint($plan['active'] ?? 0) > 0 || absint($plan['drafts'] ?? 0) > 0)) {
+                        $replanned++;
+                    }
+                }
+            }
+
+            update_option($cursor_key, $last, false);
+            $more = count($rows) === $limit;
+        } while ($more && microtime(true) < $deadline);
+
+        $previous = get_option($result_key, array());
+        $previous = is_array($previous) ? $previous : array();
+        update_option($result_key, array(
+            'processed'=>absint($previous['processed'] ?? 0) + $processed,
+            'mapped'=>absint($previous['mapped'] ?? 0) + $mapped_count,
+            'replanned'=>absint($previous['replanned'] ?? 0) + $replanned,
+            'deactivated_auto_campaigns'=>absint($previous['deactivated_auto_campaigns'] ?? 0) + $deactivated,
+            'no_map'=>absint($previous['no_map'] ?? 0) + $no_map,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        ), false);
+
+        if ($more) {
+            if (!wp_next_scheduled('ppar_v672194_banner_target_rebuild')) {
+                wp_schedule_single_event(time() + 3, 'ppar_v672194_banner_target_rebuild');
+            }
+            return;
+        }
+
+        delete_option($cursor_key);
+        update_option($state_key, 'done', false);
+    }
+
+
+    /**
      * V6.72.189 – genau ein Upgrade-Nachlauf fuer das URL-Konzept.
      * Alte 6.72.189-Kategorienzustände duerfen diesen neuen Lauf nicht
      * unterdruecken; deshalb eigener State- und Hook-Name.
