@@ -8,7 +8,7 @@ Tarifcheck wird **nicht** als neuer technischer Provider und **nicht** über ein
 
 Es gilt der bestehende interne Weg:
 
-`manuell eingefuegter Code -> Ziel-URL einmalig bestimmen -> feste Portalzielkarte speichern -> Runtime liest nur gespeicherte Zielkarte`
+`manuell eingefuegter HTML-Bannercode -> Trackinglink/Bildquelle lesen -> Ziel-URL einmalig bestimmen und prüfen -> Banner technisch prüfen -> feste Portalzielkarte speichern -> Runtime liest nur gespeicherte Zielkarte`
 
 Tarifcheck wird dabei als bestehender Direkt-/Manuellpartner geführt.
 
@@ -16,16 +16,16 @@ Tarifcheck wird dabei als bestehender Direkt-/Manuellpartner geführt.
 
 Es gibt genau diese Reihenfolge:
 
-`Code -> Trackinglink -> echte Ziel-URL -> URL-Prüfung -> Tarifart -> erlaubter Kategoriepfad -> feste Zielkarte -> speichern`
+`HTML-Code -> Trackinglink/Bildquelle -> echte Ziel-URL -> URL-Prüfung -> technische Bannerprüfung -> Tarifart -> erlaubte Zielmenge -> feste Zielkarte -> speichern`
 
 Dabei gilt:
 - Die echte Ziel-URL ist die Fachquelle für die Tarifart.
 - Titel, Alt-Text, Bannertext, Providername oder Werbemittelbezeichnung dürfen die Tarifart nicht überstimmen.
 - Die Ziel-URL wird nur beim Import/Adminlauf dekodiert bzw. einmalig aufgelöst.
 - Kredit-/Versicherungsprüfung erfolgt aus dieser Ziel-URL.
-- Erst danach wird gegen den realen hierarchischen WordPress-Kategoriepfad geprüft.
+- Erst nach erfolgreicher technischer Bannerprüfung wird gegen den realen WordPress-Kategoriebaum geprüft.
 - Nur ein Ziel unter der erlaubten Wurzel wird gespeichert.
-- Fehlt eine eindeutige Ziel-URL, Tarifart oder erlaubte Kategorie: keine Zielkarte, keine automatische Ausspielung.
+- Fehlt eine eindeutige Ziel-URL, eine erfolgreiche technische Bannerprüfung, eine eindeutige Tarifart oder eine erlaubte Kategorie: keine Zielkarte, keine automatische Ausspielung.
 - Runtime prüft weder URL noch Tarifart erneut; sie liest ausschließlich die gespeicherte Zielkarte.
 
 ## Harte Fachregel
@@ -53,12 +53,21 @@ Dabei gilt:
 
 ## Version
 
-6.72.190 bleibt bewiesene Hard-KISS-Bannerbasis, wird aber vor Live-Installation durch 6.72.191 ersetzt.
+6.72.190 bleibt die bewiesene Hard-KISS-Bannerbasis.
 
-6.72.191 ergänzt:
-1. den manuellen Direktcode-Import um denselben Zielkarten-Nachlauf;
-2. die harte Tarifcheck-Familientrennung Kosten vs. Versicherung;
-3. fail-closed für unbekannte/mehrdeutige Tarifcheck-Ziele.
+6.72.191 ergänzte den manuellen Direktcode-Weg und die Tarifcheck-Familientrennung, ordnete aber noch vor der realen Bildprüfung zu. Dieser Ablauf wurde verworfen.
+
+6.72.192 ist verbindlich:
+1. HTML-Bannercode importieren;
+2. Trackinglink/Bildquelle lesen;
+3. echte Ziel-URL ermitteln und prüfen;
+4. Bannerbild technisch prüfen;
+5. **erst danach** Kredit/Versicherung bestimmen und feste Kategorien speichern;
+6. Fehler/Unklarheit = keine Zielkarte und keine Ausspielung.
+
+WordPress/MariaDB Source-Beweis: Run `37454893550` PASS.
+Exakter Final-ZIP-Beweis: Run `37455039161` PASS.
+Finaler Installer: `AFFILIATE_ZENTRALE_6.72.192.zip`, SHA-256 `49add47f6876e78737704b3ca067bf5d931ee68a5f7448f99d8227ee57fc60d9`.
 
 ## Abnahme
 
@@ -94,3 +103,16 @@ Aktueller belegter Stand:
 - 14 konfigurierte Blattkategorien unter `Wissen > Versicherungen & Recht`.
 
 Die Runtime erhält für einen Kredit-Banner eine einzige gespeicherte Kampagne mit allen zulässigen Kosten-Zielschlüsseln. Es werden nicht dutzende Bannerkopien angelegt. Dasselbe Prinzip gilt für Versicherungsbanner mit der Versicherungs-Zielmenge.
+
+
+## Tarifrechner – bewusst später
+
+Tarifrechner/Formulare/Widgets werden **nicht** in 6.72.192 integriert und nicht als Bildbanner missbraucht.
+
+Späteres KISS-Konzept:
+- eigener Werbemitteltyp `Tarifrechner`;
+- eigener HTML-/Widget-Prüfweg;
+- eigene fachliche Zielmenge;
+- keine Vermischung mit der Bannerrotation.
+
+Bis dahin bleibt der Rechner-Strang geschlossen. 6.72.192 beendet ausschließlich die korrekte Banneraufnahme und Bannerzuordnung.
