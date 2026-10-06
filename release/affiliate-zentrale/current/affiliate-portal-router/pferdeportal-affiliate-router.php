@@ -325,8 +325,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action('init', array($this, 'ensure_partner_analytics_schedule'), 30);
         add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v67288'), 31);
         add_action('ppar_v67288_adcell_topic_resync', array($this, 'run_v67288_adcell_topic_resync'));
-        add_action('init', array($this, 'maybe_upgrade_adcell_topic_metadata_v672189'), 32);
-        add_action('ppar_v672189_adcell_topic_resync', array($this, 'run_v672189_adcell_topic_resync'));
+        add_action('init', array($this, 'maybe_upgrade_adcell_destination_url_v672189'), 32);
+        add_action('ppar_v672189_adcell_destination_url_resync', array($this, 'run_v672189_adcell_destination_url_resync'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
         add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33);
