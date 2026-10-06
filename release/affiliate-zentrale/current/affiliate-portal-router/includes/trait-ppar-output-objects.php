@@ -1107,7 +1107,14 @@ trait PPAR_Output_Objects_Trait {
         $best=$ranked[0];
         $second=$ranked[1]??null;
         if($second!==null && ((int)$best['score']-(int)$second['score'])<100){
-            return null;
+            return array(
+                'status'=>'review',
+                'confidence'=>0,
+                'reason'=>'Bannerinhalt passt zu mehreren Portalzielen; keine automatische Zuordnung.',
+                'target'=>null,
+                'alternatives'=>array($best['target'],$second['target']),
+                'source'=>'banner_content_ambiguous',
+            );
         }
 
         $target=$best['target'];
@@ -1291,6 +1298,9 @@ trait PPAR_Output_Objects_Trait {
             // 1. Konkreter Bannerinhalt/Provider-Thema hat Vorrang.
             $content=$this->output_banner_content_classification($row,$portal,$targets);
             if(is_wp_error($content)){continue;}
+            if(is_array($content) && sanitize_key((string)($content['status']??''))==='review'){
+                continue;
+            }
             if(is_array($content) && sanitize_key((string)($content['status']??''))==='ready' && is_array($content['target']??null)){
                 $target=$content['target'];
                 $target_key=sanitize_text_field((string)($target['key']??''));
