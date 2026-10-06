@@ -59,8 +59,8 @@ jobs:
         run: |
           set -euo pipefail
           ROOT=release/affiliate-zentrale/current/affiliate-portal-router
-          grep -F "add_action('admin_init', array($this, 'maybe_rebuild_banner_target_map_v672194')" "$ROOT/pferdeportal-affiliate-router.php"
-          ! grep -F "add_action('init', array($this, 'maybe_rebuild_banner_target_map_v672194')" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "maybe_rebuild_banner_target_map_v672194" "$ROOT/pferdeportal-affiliate-router.php" | grep -F "admin_init"
+          if grep -F "maybe_rebuild_banner_target_map_v672194" "$ROOT/pferdeportal-affiliate-router.php" | grep -F "add_action('init'"; then exit 1; fi
           echo "PASS rebuild scheduler is admin-only"
 
       - name: Install WordPress and plugin
