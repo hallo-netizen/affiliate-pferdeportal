@@ -1060,3 +1060,34 @@ Die frühere 6.72.181-Methodensimulation war als Abnahme unzureichend, weil Vorf
 **Autoritätshinweis:** Aktueller Status, erster Blocker und einzige NEXT ACTION stehen ausschließlich in `control/release-governance/CURRENT_RELEASE.json`. Dieser Nachtrag ist Fehlerhistorie/Nachweis, keine zweite Current-Wahrheit.
 
 **Historischer Status ersetzt durch:** ROOT_CAUSE_PROVEN / 6_72_189_SOURCE_MANIFEST_AND_GOVERNANCE_GUARD_PASS / EXTERNAL_SUCCESS_RESPONSE_AND_RELEASE_GATES_OPEN.
+
+
+### AFF-ERR-050 – Nachtrag 06.10.2026: 6.72.190 HARD-KISS-Zielkarte vollständig bewiesen
+
+**Entscheidung:** Die Zwischenwege 6.72.189 mit Provider-Thema/Kategorienmetadaten wurden als unnötig verworfen. Verbindliche Regel für automatische Banner ist jetzt ausschließlich:
+
+`Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern`
+
+Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte keine Ausspielung. Provider-Themen-Vorrang und allgemeiner Banner-Fallback sind für diesen Weg verboten.
+
+**Rootfix 6.72.190:** Zielkarten werden nach dem Importbatch einmalig aus der realen Ziel-URL erzeugt und in der bestehenden Creative-Library gespeichert. Keine neue Tabelle, keine neue Spalte, keine URL-Historie, kein Frontend-HTTP, keine neue Frontend-DB-Abfrage.
+
+**POSITIV:** WordPress/MariaDB Run `37443761578` PASS; Final-R2 Run `37444152532` PASS. Reithelme und Schabracken werden als feste Ziele gespeichert; fehlende Zielkarte fail-closed; Wiederholung erzeugt weder zusätzliche Zielrecords noch Creative-Zeilen.
+
+**Finaler Installer:** `AFFILIATE_ZENTRALE_6.72.190.zip`, SHA-256 `1a4939c91f60a7f526bc713f63719cb1cd3da88d575b7b2ec79cf063f530c1e3`.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672190_hard_kiss_banner_target_map_20261006.md`.
+
+**Status:** SOURCE/WORDPRESS_MARIADB/FINAL_ZIP PASS / MANUAL_WORDPRESS_INSTALL OPEN. Aktueller Status und NEXT ACTION ausschließlich in `control/release-governance/CURRENT_RELEASE.json`.
+
+### AFF-ERR-029 – Wiederholung 06.10.2026: freie NEXT-ACTION-Konstante erneut eingetragen und nachgeholt
+
+**Befund:** Current Generation 221 verwendete `MANUAL_WORDPRESS_INSTALL_6_72_190` als `execution_state.authorized_next_action`.
+
+**Negativbeweis:** Run `37444424717`, Schritt `Affiliate governance check`, brach mit `AFFILIATE_RELEASE_GUARD_BLOCKED:AUTHORIZED_NEXT_ACTION_INVALID` ab.
+
+**Fix:** Current Generation 222 verwendet wieder guard-konform `RUN_BOUND_RELEASE_GATES`. Der konkrete eine Arbeitsschritt bleibt ausschließlich in `bound_user_scope_action`: exakten 6.72.190-Installer manuell in WordPress installieren und den einmaligen versionsgebundenen Zielkarten-Nachlauf zulassen.
+
+**Nicht wiederholen:** Keine freie Fachaktion in `authorized_next_action` eintragen. Konkrete Fachaktion ausschließlich unter dem guard-konformen Zustandswert binden.
+
+**Status:** NACHGEHOLT; neuer Governance-PASS ist nach Current-Änderung frisch zu prüfen.
