@@ -1,0 +1,56 @@
+name: Affiliate banner import basis storage E2E
+
+on:
+  push:
+    branches:
+      - fix/banner-import-basis-20261006
+    paths:
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php'
+      - 'release/affiliate-zentrale/tests/test_adcell_banner_import_basis_e2e.php'
+      - '.github/workflows/tmp-affiliate-banner-import-basis-rerun.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  storage-e2e:
+    runs-on: ubuntu-24.04
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+      - name: PHP syntax
+        run: find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Fresh WordPress storage E2E
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-basis
+          mkdir -p /tmp/wp-basis
+          /tmp/wp core download --path=/tmp/wp-basis --force
+          /tmp/wp config create --path=/tmp/wp-basis --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-basis --url=http://127.0.0.1:8080 --title='Basis Test' --admin_user=admin --admin_password='ci-pass!' --admin_email=ci@example.test --skip-email
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-basis/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-basis
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/tests/test_adcell_banner_import_basis_e2e.php" --path=/tmp/wp-basis
