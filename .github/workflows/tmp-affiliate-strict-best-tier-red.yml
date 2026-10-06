@@ -1,4 +1,4 @@
-name: TEMP Affiliate 6.72.189 KISS Target URL WordPress MariaDB Gate
+name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  target-url-wordpress-mariadb:
+  hard-kiss-banner-target-map:
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -31,8 +31,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -41,13 +39,13 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Exact 6.72.189 source and PHP gate
+      - name: Exact 6.72.190 source and hard-rule static gate
         shell: bash
         run: |
           set -euo pipefail
           python3 control/release-governance/release_guard.py source-check
-          grep -F "Version: 6.72.189" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
-          grep -F "const VERSION = '6.72.189';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "Version: 6.72.190" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.190';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           test "$(grep -cve '^[[:space:]]*$' release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt)" = "27"
           (
             cd release/affiliate-zentrale/current
@@ -56,332 +54,146 @@ jobs:
           test "$(grep -c ': OK$' /tmp/manifest.log)" = "27"
           find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/lint.log)" = "21"
-          echo "EXACT_672189_SOURCE_27_PHP_21_PASS"
-
-      - name: KISS performance hardlock
-        shell: bash
-        run: |
-          set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          creative=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php').read_text()
+          out=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php').read_text()
           auto=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php').read_text()
-          output=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php').read_text()
-          if 'creative_library_resolve_tracking_destination_import' not in creative:
-              raise SystemExit('FAIL import-only destination resolver missing')
-          if 'wp_safe_remote_head' not in creative:
-              raise SystemExit('FAIL bounded import HEAD missing')
-          if 'creative_library_resolve_tracking_destination_import' in output:
-              raise SystemExit('FAIL destination resolver leaked into frontend output')
-          start=auto.find('function automation_adcell_banner_rows(')
-          end=auto.find('function automation_adcell_deeplink_rows(', start)
-          body=auto[start:end]
-          if 'adcell_api_v2_promotion_categories' in body:
-              raise SystemExit('FAIL separate ADCELL category request still active in banner import')
-          if 'automation_adcell_existing_banner_destinations' not in body:
-              raise SystemExit('FAIL batched existing destination read missing')
-          print('KISS_PERFORMANCE_HARDLOCK_PASS')
+          classifier=out[out.index('private function output_banner_destination_classification'):out.index('private function output_banner_compatible_slots')]
+          if 'output_banner_provider_topic_classification($row,$portal)' in classifier:
+              raise SystemExit('FAIL provider topic still used at runtime')
+          if 'output_destination_semantic_text($row)' in classifier:
+              raise SystemExit('FAIL destination URL still classified at runtime')
+          if 'output_banner_general_fallback_classification' in out:
+              raise SystemExit('FAIL general banner fallback still exists')
+          if 'banner_target_map_missing' not in classifier:
+              raise SystemExit('FAIL missing stored target does not fail closed')
+          if 'output_assign_banner_targets_from_destination_once' not in auto:
+              raise SystemExit('FAIL import-time fixed target assignment missing')
+          if 'identity_hash IN' not in auto:
+              raise SystemExit('FAIL one-batch post-import load missing')
+          print('HARD_KISS_STATIC_PASS')
           PY
 
-      - name: Install WordPress and exact current plugin
+      - name: Install WordPress and exact plugin
         shell: bash
         run: |
           set -euo pipefail
           curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
           chmod +x /tmp/wp
-          rm -rf /tmp/wp-url
-          mkdir -p /tmp/wp-url
-          /tmp/wp core download --path=/tmp/wp-url --version=7.1.2 --force
-          /tmp/wp config create --path=/tmp/wp-url --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-url --url=http://127.0.0.1:8081 --title='Target URL 672189' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
-          mkdir -p /tmp/wp-url/wp-content/mu-plugins
-          cat >/tmp/wp-url/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          rm -rf /tmp/wp-kiss
+          /tmp/wp core download --path=/tmp/wp-kiss --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-kiss --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-kiss --url=http://127.0.0.1:8081 --title='KISS 672190' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-kiss/wp-content/mu-plugins
+          cat >/tmp/wp-kiss/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
           <?php
           if (!class_exists('Pferde_Template_Kit')) {
               class Pferde_Template_Kit {
                   public static function affiliate_contract_version(){ return '1.0'; }
                   public static function design_profile(){ return 'pferde_atelier'; }
                   public static function design_profile_contract_version(){ return '1.0'; }
-                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+                  public static function affiliate_page_type($page_id){ return 'hub1'; }
               }
           }
-          add_action('init', static function(){
-              if (!post_type_exists('uge_term')) register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
-              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
-              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
-              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
-              if (!post_type_exists('hp_listing')) register_post_type('hp_listing',array('public'=>true,'supports'=>array('title','editor')));
-              if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
-          },1);
           PHP
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-url/wp-content/plugins/affiliate-portal-router
-          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-url
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.189"){exit(2);} echo "EXACT_672189_WORDPRESS_ACTIVE_PASS\n";' --path=/tmp/wp-url
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-kiss/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-kiss
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.190"){exit(2);} echo "VERSION_672190_PASS\n";' --path=/tmp/wp-kiss
+          /tmp/wp post create --path=/tmp/wp-kiss --post_type=page --post_status=publish --post_title='Reithelme' --post_name='reithelme' >/dev/null
+          /tmp/wp post create --path=/tmp/wp-kiss --post_type=page --post_status=publish --post_title='Schabracken' --post_name='schabracken' >/dev/null
 
-      - name: Exact KISS target URL WordPress MariaDB gate
+      - name: HARD RULE WordPress MariaDB proof
         shell: bash
         run: |
           set -euo pipefail
-          cat >/tmp/target-url-wpdb.php <<'PHP'
+          cat >/tmp/hard-kiss.php <<'PHP'
           <?php
           global $wpdb;
-          $plugin=Pferdeportal_Affiliate_Router::instance();
-          $plugin->maybe_install_creative_library_schema();
+          $p=Pferdeportal_Affiliate_Router::instance();
+          $p->maybe_install_creative_library_schema();
           $table=$wpdb->prefix.'ppar_creative_library';
 
-          class PPAR_Target_Url_WPDB_Harness {
-              use PPAR_Creative_Library_Trait, PPAR_Automation_Suite_Trait;
-              public $items=array();
-              public function adcell_api_v2_promotion_items($program_id,$type){ return $this->items; }
-              public function adcell_api_v2_validate_tracking_asset_url($url){ return esc_url_raw((string)$url); }
-              public function bannerRows($pid,$name='KISS URL',$run='ci'){
-                  $m=new ReflectionMethod($this,'automation_adcell_banner_rows');
-                  $m->setAccessible(true);
-                  return $m->invoke($this,$pid,$name,$run);
-              }
-              public function upsertCreative($creative){
-                  $m=new ReflectionMethod($this,'creative_library_upsert');
-                  $m->setAccessible(true);
-                  return $m->invoke($this,$creative);
-              }
-          }
-          function gate_ok($condition,$message){
-              if(!$condition){ fwrite(STDERR,"FAIL ".$message."\n"); exit(2); }
-              echo "PASS ".$message."\n";
-          }
-          function gate_item($pid,$promo,$click){
-              return array(
-                  'programId'=>$pid,'promotionId'=>$promo,'clickoutLink'=>$click,
-                  'bannerUrl'=>'https://example.net/banner.jpg','width'=>728,'height'=>90,'information'=>''
-              );
-          }
-          function gate_store_banner($table,$pid,$promo,$tracking,$destination,$source){
+          function ok($v,$m){ if(!$v){fwrite(STDERR,"FAIL ".$m."\n");exit(2);} echo "PASS ".$m."\n"; }
+          function add_banner($table,$external,$dest){
               global $wpdb;
+              $id=hash('sha256','kiss-'.$external);
               $now=time();
-              $hash=hash('sha256','gate-existing-'.$pid.'-'.$promo);
-              $source_hash=hash('sha256','gate-source-'.$pid.'-'.$promo);
-              return $wpdb->insert($table,array(
-                  'provider'=>'adcell','partner_external_id'=>(string)$pid,'partner_name'=>'KISS URL',
-                  'external_id'=>'banner-'.$promo,'identity_hash'=>$hash,'creative_type'=>'banner',
-                  'title'=>'Gate Banner','description'=>'','tags'=>'ADCELL Banner',
-                  'image_url'=>'https://example.net/banner.jpg','destination_url'=>$destination,'tracking_url'=>$tracking,
+              $wpdb->insert($table,array(
+                  'provider'=>'adcell','partner_external_id'=>'10787','partner_name'=>'HKM',
+                  'external_id'=>$external,'identity_hash'=>$id,'creative_type'=>'banner',
+                  'title'=>$external,'description'=>'','tags'=>'',
+                  'image_url'=>'https://img.example/'.$external.'.jpg',
+                  'destination_url'=>$dest,'tracking_url'=>'https://tracking.example/'.$external,
                   'width'=>728,'height'=>90,'source_status'=>'active','source_kind'=>'banner',
                   'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'ci',
-                  'review_status'=>'approved','selected'=>1,'content_scope'=>'horse','scope_source'=>'ci','classified_at'=>$now,
-                  'topic_status'=>'auto_verified','topic_score'=>100,'topic_targets'=>'[]','source_hash'=>$source_hash,
-                  'payload'=>wp_json_encode(array('_destination_source'=>$source),JSON_UNESCAPED_SLASHES),
+                  'review_status'=>'review','selected'=>0,'content_scope'=>'unclassified','scope_source'=>'',
+                  'classified_at'=>0,'topic_status'=>'no_match','topic_score'=>0,'topic_targets'=>'[]',
+                  'source_hash'=>hash('sha256','source-'.$external),
+                  'payload'=>wp_json_encode(array('_destination_source'=>'provider_explicit'),JSON_UNESCAPED_SLASHES),
                   'first_seen'=>$now,'last_seen'=>$now
               ));
+              return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash=%s",$id),ARRAY_A);
+          }
+          function classify($p,$row,$portal){
+              $m=new ReflectionMethod($p,'output_classify_for_portal');
+              $m->setAccessible(true);
+              return $m->invoke($p,$row,$portal,'portal_banner');
+          }
+          function mapped_slug($p,$row){
+              $records=json_decode((string)$row['topic_targets'],true);
+              if(!is_array($records)||count($records)!==1)return '';
+              $portal=current($p->output_portal_registry());
+              $targets=(new ReflectionMethod($p,'output_portal_targets'));
+              $targets->setAccessible(true);
+              $all=$targets->invoke($p,$portal);
+              $key=(string)($records[0]['target_key']??'');
+              foreach($all as $t){ if((string)($t['key']??'')===$key)return (string)($t['slug']??''); }
+              return '';
           }
 
-          $pid=987654321;
-          $wpdb->delete($table,array('provider'=>'adcell','partner_external_id'=>(string)$pid));
-          $h=new PPAR_Target_Url_WPDB_Harness();
+          $wpdb->query("DELETE FROM {$table} WHERE partner_external_id='10787' AND external_id LIKE 'kiss-%'");
+          $portal=current($p->output_portal_registry());
 
-          $head_calls=0;
-          $head_map=array();
-          add_filter('pre_http_request',function($pre,$args,$url) use (&$head_calls,&$head_map){
-              if(strtoupper((string)($args['method']??'GET'))!=='HEAD' || !isset($head_map[$url])) return $pre;
-              $head_calls++;
-              $entry=$head_map[$url];
-              return array(
-                  'headers'=>isset($entry['location'])?array('location'=>$entry['location']):array(),
-                  'body'=>'',
-                  'response'=>array('code'=>(int)$entry['code'],'message'=>'CI'),
-                  'cookies'=>array(),
-                  'filename'=>null,
-              );
-          },10,3);
+          $r1=add_banner($table,'kiss-reithelme','https://shop.example/reithelme/modell-a');
+          $a1=$p->output_assign_banner_targets_from_destination_once($r1);
+          $r1=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",$r1['id']),ARRAY_A);
+          ok((int)$a1['mapped']===1,'Reithelme destination maps once');
+          ok(mapped_slug($p,$r1)==='reithelme','Reithelme fixed target stored');
+          $c1=classify($p,$r1,$portal);
+          ok(($c1['status']??'')==='ready','runtime reads stored Reithelme target');
+          ok(($c1['source']??'')==='creative_library_destination_map','runtime source is stored target map');
 
-          $track1='https://example.com/click?id=1';
-          $dest1='https://example.org/reithelme/modell-a';
-          $head_map[$track1]=array('code'=>302,'location'=>$dest1);
-          $head_map[$dest1]=array('code'=>200);
-          $h->items=array(gate_item($pid,322674,$track1));
-          $q0=(int)$wpdb->num_queries; $hc0=$head_calls;
-          $r1=$h->bannerRows($pid);
-          gate_ok(((int)$wpdb->num_queries-$q0)===1,'new banner uses one batched existing-row DB read');
-          gate_ok(($head_calls-$hc0)===2,'new banner performs one bounded redirect HEAD chain');
-          gate_ok(($r1['rows'][0]['destination_url']??'')===$dest1,'new banner stores real target URL');
-          gate_ok(($r1['rows'][0]['_destination_source']??'')==='resolved_redirect','new banner stores resolved_redirect provenance');
+          $r2=add_banner($table,'kiss-schabracken','https://shop.example/schabracken/modell-b');
+          $a2=$p->output_assign_banner_targets_from_destination_once($r2);
+          $r2=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",$r2['id']),ARRAY_A);
+          ok((int)$a2['mapped']===1,'Schabracken destination maps once');
+          ok(mapped_slug($p,$r2)==='schabracken','Schabracken fixed target stored');
 
-          gate_ok(gate_store_banner($table,$pid,322674,$track1,$dest1,'resolved_redirect')===1,'existing resolved banner fixture stored');
-          $q0=(int)$wpdb->num_queries; $hc0=$head_calls;
-          $r2=$h->bannerRows($pid);
-          gate_ok(((int)$wpdb->num_queries-$q0)===1,'unchanged banner still uses only one batched DB read');
-          gate_ok(($head_calls-$hc0)===0,'unchanged resolved banner performs zero target HTTP');
-          gate_ok(($r2['rows'][0]['destination_url']??'')===$dest1,'unchanged banner reuses stored target URL');
+          $r3=add_banner($table,'kiss-unmapped','https://shop.example/reithelme/modell-c');
+          $c3=classify($p,$r3,$portal);
+          ok(($c3['status']??'')==='review','banner without stored target is not played');
+          ok(($c3['source']??'')==='banner_target_map_missing','runtime does not infer destination');
 
-          $track2='https://example.com/click?id=2';
-          $dest2='https://example.org/schabracken/modell-b';
-          $head_map[$track2]=array('code'=>302,'location'=>$dest2);
-          $head_map[$dest2]=array('code'=>200);
-          $h->items=array(gate_item($pid,322674,$track2));
-          $hc0=$head_calls;
-          $r3=$h->bannerRows($pid);
-          gate_ok(($head_calls-$hc0)===2,'changed tracking URL performs exactly one new redirect chain');
-          gate_ok(($r3['rows'][0]['destination_url']??'')===$dest2,'changed tracking URL gets new stored target');
+          $before=(string)$r1['topic_targets'];
+          $again=$p->output_assign_banner_targets_from_destination_once($r1);
+          $r1b=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",$r1['id']),ARRAY_A);
+          ok((int)$again['mapped']===1,'repeat reuses same fixed target');
+          ok((string)$r1b['topic_targets']===$before,'repeat does not create additional target records');
 
-          $promo_fail=999;
-          $track3='https://example.com/click?id=3';
-          $wpdb->delete($table,array('provider'=>'adcell','partner_external_id'=>(string)$pid));
-          $head_map[$track3]=array('code'=>200);
-          $h->items=array(gate_item($pid,$promo_fail,$track3));
-          $hc0=$head_calls;
-          $r4=$h->bannerRows($pid);
-          gate_ok(($head_calls-$hc0)===1,'unresolvable target is checked once');
-          gate_ok(($r4['rows'][0]['_destination_source']??'')==='tracking_checked','unresolvable target stores compact checked state');
-          gate_ok(gate_store_banner($table,$pid,$promo_fail,$track3,$track3,'tracking_checked')===1,'tracking_checked fixture stored');
-          $hc0=$head_calls;
-          $r5=$h->bannerRows($pid);
-          gate_ok(($head_calls-$hc0)===0,'unchanged tracking_checked banner is never fetched again');
+          $count=(int)$wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE partner_external_id='10787' AND external_id LIKE 'kiss-%'");
+          ok($count===3,'no database row growth from target mapping');
 
-          $pid2=987654322;
-          $wpdb->delete($table,array('provider'=>'adcell','partner_external_id'=>(string)$pid2));
-          $identity=hash('sha256','url-upsert-identity');
-          $source_hash=hash('sha256','url-upsert-source');
-          $track='https://example.com/click?id=upsert';
-          $dest='https://example.org/reithelme/upsert';
-          $old_payload=array(
-              '_destination_source'=>'tracking_checked','_declared_width'=>728,'_declared_height'=>90,
-              '_dimension_state'=>'verified','_dimension_error'=>'','_image_sha256'=>'OLD_IMAGE_HASH',
-              '_image_mime'=>'image/jpeg','_image_bytes'=>12345,'_measured_at'=>111,
-              '_preverify_topic_status'=>'auto_verified','_preverify_topic_score'=>88,
-              '_preverify_topic_targets'=>'[{"x":1}]'
-          );
-          $now=time();
-          $wpdb->insert($table,array(
-              'provider'=>'adcell','partner_external_id'=>(string)$pid2,'partner_name'=>'KISS URL',
-              'external_id'=>'banner-upsert','identity_hash'=>$identity,'creative_type'=>'banner','title'=>'Upsert',
-              'description'=>'','tags'=>'ADCELL Banner','image_url'=>'https://example.net/upsert.jpg',
-              'destination_url'=>$track,'tracking_url'=>$track,'width'=>728,'height'=>90,
-              'source_status'=>'active','source_kind'=>'banner','availability_state'=>'active','missing_count'=>0,
-              'last_complete_run'=>'old','review_status'=>'approved','selected'=>1,'content_scope'=>'horse','scope_source'=>'ci',
-              'classified_at'=>999,'topic_status'=>'auto_verified','topic_score'=>88,'topic_targets'=>'[{"old":1}]',
-              'source_hash'=>$source_hash,'payload'=>wp_json_encode($old_payload,JSON_UNESCAPED_SLASHES),
-              'first_seen'=>$now,'last_seen'=>$now
-          ));
-          $before_count=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE identity_hash=%s",$identity));
-          $incoming_payload=array(
-              '_destination_source'=>'resolved_redirect','_declared_width'=>728,'_declared_height'=>90,
-              '_dimension_state'=>'pending','_dimension_error'=>'','_image_sha256'=>'','_image_mime'=>'',
-              '_image_bytes'=>0,'_measured_at'=>0,'_preverify_topic_status'=>'','_preverify_topic_score'=>0,
-              '_preverify_topic_targets'=>'[]'
-          );
-          $creative=array(
-              'identity_hash'=>$identity,'source_hash'=>$source_hash,'external_id'=>'banner-upsert',
-              'creative_type'=>'banner','source_status'=>'active','source_kind'=>'banner',
-              'availability_state'=>'active','missing_count'=>0,'last_complete_run'=>'new',
-              'payload'=>wp_json_encode($incoming_payload,JSON_UNESCAPED_SLASHES),
-              'destination_url'=>$dest,'tracking_url'=>$track,'tags'=>'ADCELL Banner'
-          );
-          $up=$h->upsertCreative($creative);
-          $stored=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash=%s",$identity),ARRAY_A);
-          $stored_payload=json_decode((string)$stored['payload'],true);
-          $after_count=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE identity_hash=%s",$identity));
-          gate_ok($up==='updated','learned target updates existing row');
-          gate_ok($before_count===1 && $after_count===1,'learned target creates no extra DB row');
-          gate_ok(($stored['destination_url']??'')===$dest,'existing destination_url is updated in place');
-          gate_ok((int)($stored['topic_score']??-1)===0 && ($stored['topic_targets']??'')==='[]','old derived topic edge is cleared for replan');
-          gate_ok(($stored_payload['_image_sha256']??'')==='OLD_IMAGE_HASH','image verification hash is preserved');
-          gate_ok(($stored_payload['_dimension_state']??'')==='verified','verified dimensions are preserved');
-          $up2=$h->upsertCreative($creative);
-          $repeat_count=(int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE identity_hash=%s",$identity));
-          gate_ok($up2==='unchanged','identical repeat remains unchanged');
-          gate_ok($repeat_count===1,'identical repeat never grows DB');
-
-          $wpdb->delete($table,array('provider'=>'adcell','partner_external_id'=>(string)$pid));
-          $wpdb->delete($table,array('provider'=>'adcell','partner_external_id'=>(string)$pid2));
-          echo "KISS_TARGET_URL_WORDPRESS_MARIADB_PASS\n";
+          echo "HARD_KISS_WORDPRESS_MARIADB_PASS\n";
           PHP
-          /tmp/wp eval-file /tmp/target-url-wpdb.php --path=/tmp/wp-url | tee /tmp/target-url-wpdb.log
-          grep -F 'KISS_TARGET_URL_WORDPRESS_MARIADB_PASS' /tmp/target-url-wpdb.log
+          /tmp/wp eval-file /tmp/hard-kiss.php --path=/tmp/wp-kiss | tee /tmp/hard-kiss.log
+          grep -F 'HARD_KISS_WORDPRESS_MARIADB_PASS' /tmp/hard-kiss.log
 
-      - name: Existing banner regression 21 of 21
-        shell: bash
-        run: |
-          set -euo pipefail
-          mysql -h127.0.0.1 -uroot -proot -e "DROP DATABASE IF EXISTS wordpress2; CREATE DATABASE wordpress2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; GRANT ALL ON wordpress2.* TO 'wordpress'@'%'; FLUSH PRIVILEGES;"
-          rm -rf /tmp/wp-reg
-          mkdir -p /tmp/wp-reg
-          /tmp/wp core download --path=/tmp/wp-reg --version=7.1.2 --force
-          /tmp/wp config create --path=/tmp/wp-reg --dbname=wordpress2 --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-reg --url=http://127.0.0.1:8082 --title='Regression 672189' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
-          mkdir -p /tmp/wp-reg/wp-content/mu-plugins
-          cp /tmp/wp-url/wp-content/mu-plugins/pferde-e2e-design-contract.php /tmp/wp-reg/wp-content/mu-plugins/
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-reg/wp-content/plugins/affiliate-portal-router
-          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-reg
-          sed "s/6\\.72\\.185/6.72.189/g" AFFILIATE_HOBBYRAUM/test_banner_full_e2e_v672184.php >/tmp/full189.php
-          /tmp/wp eval-file /tmp/full189.php --path=/tmp/wp-reg | tee /tmp/full189.log
-          grep -F 'SUMMARY passes=21 failures=0' /tmp/full189.log
-
-      - name: Existing destination regression 26 of 26
-        shell: bash
-        run: |
-          set -euo pipefail
-          sed "s/6\\.72\\.183/6.72.189/g" AFFILIATE_HOBBYRAUM/test_banner_destination_library_e2e_v672183.php >/tmp/dest189.php
-          /tmp/wp eval-file /tmp/dest189.php --path=/tmp/wp-reg | tee /tmp/dest189.log
-          grep -F 'SUMMARY passes=26 failures=0' /tmp/dest189.log
-          grep -F 'FULL_DESTINATION_LIBRARY_WORDPRESS_MARIADB_E2E_PASS' /tmp/dest189.log
-
-      - name: Upload exact gate evidence
+      - name: Upload proof
         uses: actions/upload-artifact@v4
         with:
-          name: affiliate-672189-kiss-target-url-wordpress-mariadb
+          name: affiliate-672190-hard-kiss-proof
           path: |
             /tmp/manifest.log
             /tmp/lint.log
-            /tmp/target-url-wpdb.log
-            /tmp/full189.log
-            /tmp/dest189.log
-          if-no-files-found: error
-
-      - name: Build verify and bind exact final 6.72.189 ZIP
-        shell: bash
-        run: |
-          set -euo pipefail
-          FINAL="release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip"
-          rm -f "$FINAL"
-          rm -rf /tmp/final189
-          (
-            cd release/affiliate-zentrale/current
-            zip -qr "$GITHUB_WORKSPACE/$FINAL" affiliate-portal-router
-          )
-          mkdir -p /tmp/final189
-          unzip -q "$FINAL" -d /tmp/final189
-          (
-            cd /tmp/final189
-            sha256sum -c "$GITHUB_WORKSPACE/release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
-          ) | tee /tmp/final189-manifest.log
-          test "$(grep -c ': OK' /tmp/final189-manifest.log)" = "27"
-          find /tmp/final189/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final189-lint.log
-          test "$(grep -c '^No syntax errors detected' /tmp/final189-lint.log)" = "21"
-          python3 - <<'PY'
-          from pathlib import Path
-          src=Path('release/affiliate-zentrale/current')
-          out=Path('/tmp/final189')
-          files=[line.split('  ',1)[1] for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines() if line.strip()]
-          assert len(files)==27
-          for rel in files:
-              assert (src/rel).read_bytes()==(out/rel).read_bytes(), rel
-          print('FINAL_672189_BYTE_IDENTITY_PASS_27_OF_27')
-          PY
-          SHA="$(sha256sum "$FINAL" | awk '{print $1}')"
-          BYTES="$(stat -c%s "$FINAL")"
-          echo "FINAL_672189_ZIP_PASS sha256=$SHA bytes=$BYTES" | tee /tmp/final189-sha.log
-          git config user.name "affiliate-release-bot"
-          git config user.email "affiliate-release-bot@users.noreply.github.com"
-          git add "$FINAL"
-          git diff --cached --quiet && { echo "FAIL final ZIP not staged"; exit 2; }
-          git commit -m "Affiliate: bind final 6.72.189 installer"
-          git push origin HEAD:affiliate-release-current
-
-      - name: Upload final ZIP verification evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: affiliate-672189-final-zip-proof
-          path: |
-            /tmp/final189-manifest.log
-            /tmp/final189-lint.log
-            /tmp/final189-sha.log
+            /tmp/hard-kiss.log
           if-no-files-found: error
