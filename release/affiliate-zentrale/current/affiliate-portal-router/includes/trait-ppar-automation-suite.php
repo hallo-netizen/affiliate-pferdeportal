@@ -3418,7 +3418,7 @@ trait PPAR_Automation_Suite_Trait {
      *    Fortsetzung fuer grosse Bestaende, nicht Voraussetzung fuer den Start.
      */
     public function maybe_reconcile_banner_state_v672195() {
-        if (self::VERSION !== '6.72.195' || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196'), true) || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
         $state_key = 'ppar_v672195_banner_reconcile_state';
         $state = sanitize_key((string)get_option($state_key, ''));
         if ($state === 'done') { return; }
@@ -3434,7 +3434,7 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     public function run_v672195_banner_reconcile() {
-        if (self::VERSION !== '6.72.195'
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196'), true)
             || !method_exists($this, 'creative_library_table')
             || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
             || !method_exists($this, 'creative_library_deactivate_all_automatic_banner_campaigns')) {
