@@ -864,7 +864,7 @@ trait PPAR_Output_Objects_Trait {
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
         $destination_source=sanitize_key((string)($payload['_destination_source']??''));
-        if ($destination_source === 'tracking_fallback') { return ''; }
+        if (in_array($destination_source, array('tracking_fallback','tracking_checked'), true)) { return ''; }
         $url=trim((string)($row['destination_url']??''));
         if($url==='' && method_exists($this,'creative_library_destination_from_tracking')){
             $url=(string)$this->creative_library_destination_from_tracking((string)($row['tracking_url']??''));
@@ -880,7 +880,7 @@ trait PPAR_Output_Objects_Trait {
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
         $source=sanitize_key((string)($payload['_destination_source']??''));
-        if (in_array($source,array('provider_explicit','decoded_tracking','tracking_fallback','unknown'),true)) { return $source; }
+        if (in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect','tracking_fallback','tracking_checked','unknown'),true)) { return $source; }
         $destination=esc_url_raw((string)($row['destination_url']??''));
         $tracking=esc_url_raw((string)($row['tracking_url']??''));
         if ($destination!=='' && $destination!==$tracking) { return 'provider_explicit'; }
