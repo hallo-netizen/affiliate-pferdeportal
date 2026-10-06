@@ -2710,6 +2710,7 @@ trait PPAR_Automation_Suite_Trait {
     private function automation_import_rows($rows, $context) {
         $mapping = $this->creative_library_detect_mapping(array_keys((array) reset($rows)));
         $counts = array('imported'=>0,'updated'=>0,'unchanged'=>0,'blocked'=>0,'failed'=>0);
+        $banner_identity_hashes = array();
         foreach ($rows as $row) {
             if (!is_array($row)) {
                 $counts['failed']++;
@@ -2726,7 +2727,32 @@ trait PPAR_Automation_Suite_Trait {
             } else {
                 $counts['failed']++;
             }
+            if (sanitize_key((string)($normalized['creative_type']??''))==='banner'
+                && !empty($normalized['identity_hash'])) {
+                $banner_identity_hashes[] = strtolower(sanitize_text_field((string)$normalized['identity_hash']));
+            }
         }
+
+        // HARD RULE: Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern.
+        // Kein N+1: alle betroffenen Banner werden nach dem Import in EINER DB-Abfrage geladen.
+        if ($banner_identity_hashes && method_exists($this,'output_assign_banner_targets_from_destination_once')) {
+            global $wpdb;
+            $banner_identity_hashes=array_values(array_unique(array_filter($banner_identity_hashes,static function($hash){
+                return (bool) preg_match('/^[a-f0-9]{64}$/',$hash);
+            })));
+            if($banner_identity_hashes){
+                $placeholders=implode(',',array_fill(0,count($banner_identity_hashes),'%s'));
+                $query=$wpdb->prepare(
+                    "SELECT * FROM {$this->creative_library_table()} WHERE identity_hash IN ({$placeholders})",
+                    ...$banner_identity_hashes
+                );
+                $stored_rows=$wpdb->get_results($query,ARRAY_A);
+                foreach((array)$stored_rows as $stored_row){
+                    $this->output_assign_banner_targets_from_destination_once($stored_row);
+                }
+            }
+        }
+
         // Automation imports must enter the same verified asset/output pipeline as
         // manual creative imports. Otherwise Awin/ADCELL products remain stranded
         // as unverified library rows and can never reach automatic target/slot planning.
