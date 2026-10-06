@@ -1090,4 +1090,6 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 
 **Nicht wiederholen:** Keine freie Fachaktion in `authorized_next_action` eintragen. Konkrete Fachaktion ausschließlich unter dem guard-konformen Zustandswert binden.
 
-**Status:** NACHGEHOLT; neuer Governance-PASS ist nach Current-Änderung frisch zu prüfen.
+**POSITIV:** Run `37445573248`, Schritt `Affiliate governance check`: PASS auf Current Generation 222. Der spätere Workflow-Fail entsteht erst beim fremden PSTE-0.57.6-Artefakt und ist kein Affiliate-Governance-Fail.
+
+**Status:** CLOSED / NACHGEHOLT / GOVERNANCE PASS.
