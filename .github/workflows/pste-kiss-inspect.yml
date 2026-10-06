@@ -1,4 +1,4 @@
-name: PSTE KISS Current IDs
+name: PSTE KISS Full Readonly Inventory
 on:
   push:
     branches: [pste-kiss-e2e-20261005]
@@ -8,18 +8,39 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare current public post ids only
+      - name: Read titles categories and headings from public WordPress only
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import json,urllib.request
-          known=set([8873,8997,9097,9108,9120,10224,10335,10352,10353,10498,10499,10500,10669,10670,15493,15617,15618,15628,15974,16029,16064,16065,16066,16067,16068,16241,16253,16254,16327,16328,17123,17124,17125,17126,17127,17128,971939,971940,971941,971942,971943,971944,971945,972415,972425,972426,972427,972447,972448,972449,972558,972559,972560,972599,972600,972601,972602,972603,972604,972605,972606,972608,972609,972610,972611,972612,972613,972630,972631,972632,972633,972634,972635,972636,972637,972638,972639,972640,972641,972642,972643,972644])
-          u='https://pferde-atelier.de/wp-json/wp/v2/posts?per_page=100&status=publish&_fields=id'
-          req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+          import json,urllib.request,re,html,gzip,base64
+          base='https://pferde-atelier.de/wp-json/wp/v2'
+          req=urllib.request.Request(base+'/posts?per_page=100&status=publish&_fields=id,title,slug,categories,status,content',headers={'User-Agent':'Mozilla/5.0'})
           with urllib.request.urlopen(req,timeout=30) as r: posts=json.load(r)
-          ids=sorted(int(p['id']) for p in posts)
-          print('CURRENT_IDS='+','.join(map(str,ids)))
-          print('STALE_KNOWN='+','.join(map(str,sorted(known-set(ids)))))
-          print('OVERLAP_COUNT='+str(len(known&set(ids))))
+          cat_ids=sorted({int(c) for p in posts for c in p.get('categories',[])})
+          cats={}
+          for i in range(0,len(cat_ids),100):
+              ids=','.join(map(str,cat_ids[i:i+100]))
+              req=urllib.request.Request(base+'/categories?per_page=100&include='+ids+'&_fields=id,name,slug,parent',headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=30) as r:
+                  for c in json.load(r): cats[int(c['id'])]=c
+          out=[]
+          for p in posts:
+              content=(p.get('content') or {}).get('rendered','')
+              hs=[]
+              for m in re.finditer(r'<h[23][^>]*>(.*?)</h[23]>',content,re.I|re.S):
+                  t=re.sub(r'<[^>]+>',' ',m.group(1))
+                  t=html.unescape(re.sub(r'\s+',' ',t)).strip()
+                  if t: hs.append(t)
+              out.append({
+                  'post_id':int(p['id']),
+                  'title':html.unescape((p.get('title') or {}).get('rendered','')),
+                  'slug':p.get('slug',''),
+                  'status':p.get('status',''),
+                  'categories':[cats.get(int(c),{'id':int(c)}) for c in p.get('categories',[])],
+                  'headings':hs
+              })
+          raw=json.dumps(out,ensure_ascii=False,separators=(',',':')).encode()
+          print('INV_COUNT='+str(len(out)))
+          print('INV_B64='+base64.b64encode(gzip.compress(raw,9)).decode())
           PY
