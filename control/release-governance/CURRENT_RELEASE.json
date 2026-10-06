@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 217,
+  "generation": 218,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.189",
-    "status": "URL_DESTINATION_ROOTFIX_EXACT_SOURCE_TRAITS_AND_TEMP_ZIP_PASS_WORDPRESS_MARIADB_OPEN",
+    "status": "URL_DESTINATION_672189_SOURCE_MARIADB_FINAL_ZIP_PASS_LIVE_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,11 +44,11 @@
     "current_source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
-    "candidate_reference_scope": "Exact 6.72.189 URL rootfix source remains manifest-bound. 27/27 source identity PASS, PHP 21/21 PASS, exact current trait execution PASS for import reuse/change/fail-closed cases and DB upsert/storage preservation. Temporary candidate ZIP fresh-unpack 27/27 + PHP 21/21 PASS. Real WordPress/MariaDB runtime gate remains the only hard blocker; local environment lacks MariaDB/MySQL server and mysqli/pdo_mysql and has no external package/network access. No repo workflow architecture was changed.",
-    "final_artifact_ref": null,
-    "final_artifact_sha256": null,
-    "handoff_artifact_filename": null,
-    "handoff_artifact_bytes": null
+    "candidate_reference_scope": "Exact 6.72.189 KISS target-URL rootfix fully passed source 27/27, PHP 21/21, real WordPress/MariaDB target-URL persistence/performance, existing banner regression 21/21, destination-library regression 26/26, and final ZIP fresh-unpack/source byte identity 27/27. Final installer is bound. Only live install + one bounded ADCELL destination-url resync + Reithelme/Schabracken readback remain.",
+    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip",
+    "final_artifact_sha256": "0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.189.zip",
+    "handoff_artifact_bytes": 797165
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -59,9 +59,9 @@
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
     "current_focus": "ADCELL_6_72_189_IMPORT_DESTINATION_URL_ROOTFIX",
     "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
-    "current_focus_reason": "EXACT SOURCE TRAIT EXECUTION AND TEMPORARY ZIP PRE-GATES PASS. DB STORAGE CHECK CONFIRMS EXISTING ROW UPDATE ONLY, NO EXTRA ROW, VERIFIED IMAGE METADATA PRESERVED, REPEAT UNCHANGED. REAL WORDPRESS/MARIADB RUNTIME REMAINS THE ONLY HARD GATE. LOCAL EXECUTION ENVIRONMENT CANNOT PROVIDE MARIADB OR MYSQLI AND EXISTING REPO MARIADB WORKFLOWS ARE INVALID FOR THIS EXACT MANIFEST BECAUSE THEY ARE OLD-VERSION-BOUND OR MUTATE THE TEST COPY.",
+    "current_focus_reason": "KISS TARGET-URL CONTRACT FULL LOCAL/CI PASS. REAL WORDPRESS/MARIADB RUN 37439851270 PASS. FINAL INSTALLER BOUND SHA256 0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94. NO NEW TABLE/COLUMN/URL HISTORY, ZERO FRONTEND TARGET HTTP, ZERO NEW FRONTEND DB QUERY. ONLY LIVE INSTALL, ONE VERSION-BOUND ADCELL DESTINATION-URL BACKFILL, THEN PUBLIC REITHELME/SCHABRACKEN READBACK REMAIN.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "SOURCE_EXACT_LOCAL_27_OF_27_PHP_21_OF_21_PASS_WORDPRESS_MARIADB_OPEN",
+    "adcell_work_status": "FINAL_6_72_189_INSTALLER_BOUND_LIVE_INSTALL_AND_URL_RESYNC_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -159,12 +159,12 @@
         "future_banners": "NEW_OR_CHANGED_IMPORT_RESOLVE_ONCE_STORE_REUSE",
         "source_gate_run": 37219933282,
         "zip_gate_run": 37220236448,
-        "source_regression": "21_OF_21_PASS",
-        "source_destination_library": "26_OF_26_PASS",
+        "source_regression": "21_OF_21_PASS_6_72_189_RUN_37439851270",
+        "source_destination_library": "26_OF_26_PASS_6_72_189_RUN_37439851270",
         "zip_regression": "21_OF_21_PASS",
         "zip_destination_library": "26_OF_26_PASS",
-        "zip_manifest": "27_OF_27_PASS",
-        "performance": "EXACT_LOCAL_27_OF_27_PHP_21_OF_21_URL_SIM_PASS_ZERO_FRONTEND_HTTP_ZERO_NEW_FRONTEND_DB_NO_NEW_TABLE_OR_COLUMN_WORDPRESS_MARIADB_OPEN",
+        "zip_manifest": "27_OF_27_PASS_FINAL_6_72_189",
+        "performance": "PASS_REAL_WORDPRESS_MARIADB_RUN_37439851270_ZERO_FRONTEND_HTTP_ZERO_NEW_FRONTEND_DB_NO_NEW_TABLE_OR_COLUMN",
         "url_resolution_storage": "EXISTING_destination_url_PLUS_EXISTING_payload_destination_source_ONLY",
         "url_resolution_repeat_policy": "UNCHANGED_RESOLVED_OR_tracking_checked_ZERO_REMOTE_LOOKUPS"
       },
@@ -229,7 +229,7 @@
       },
       "import_url_rootfix_672189": {
         "version": "6.72.189",
-        "status": "EXACT_LOCAL_27_OF_27_PHP_21_OF_21_POSITIVE_NEGATIVE_PASS_WORDPRESS_MARIADB_OPEN",
+        "status": "REAL_WORDPRESS_MARIADB_AND_FINAL_ZIP_PASS_LIVE_OPEN",
         "new_banner_destination_http": "ONE_BOUNDED_IMPORT_PATH_MAX",
         "unchanged_resolved_banner_destination_http": 0,
         "unchanged_checked_banner_destination_http": 0,
@@ -244,7 +244,9 @@
         "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
         "historical_67288_resync": "SUPPRESSED_ON_6_72_189",
         "current_resync": "ONE_DESTINATION_URL_BACKFILL_RUN",
-        "resolved_redirect_classification": "FIXED_ACCEPTED_AS_REAL_DESTINATION"
+        "resolved_redirect_classification": "FIXED_ACCEPTED_AS_REAL_DESTINATION",
+        "wordpress_mariadb_run": 37439851270,
+        "final_installer_sha256": "0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94"
       }
     },
     "awin_catalog_refresh": {
@@ -654,17 +656,22 @@
     }
   },
   "execution_state": {
-    "state": "URL_DESTINATION_ROOTFIX_EXACT_SOURCE_TRAITS_AND_TEMP_ZIP_PASS_WORDPRESS_MARIADB_OPEN",
-    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the exact real WordPress/MariaDB positive-negative persistence/performance gate on manifest e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d using an execution environment that can run MariaDB/MySQL and mysqli/pdo_mysql without modifying the candidate source or release workflows. Verify new banner, unchanged resolved banner, changed tracking URL, tracking_checked no-repeat, resolved_redirect destination classification, existing-row upsert without storage growth, preserved image verification metadata, one batch import read, zero frontend destination HTTP/new DB query, and existing banner/provider regressions. If PASS, rebuild/bind the final ZIP from the same exact source and proceed to live install + one bounded ADCELL destination-url resync + Reithelme/Schabracken readback.",
-    "completion_condition": "EXACT_REAL_WORDPRESS_MARIADB_GATE_PASS_THEN_FINAL_EXACT_ZIP_REBUILD_FRESH_UNPACK_BYTE_IDENTITY_AND_LINT_PASS_THEN_LIVE_SINGLE_ADCELL_DESTINATION_URL_RESYNC_AND_REITHELME_SCHABRACKEN_READBACK_PASS",
+    "state": "FINAL_6_72_189_BOUND_LIVE_INSTALL_AND_SINGLE_URL_RESYNC_OPEN",
+    "authorized_next_action": "LIVE_INSTALL_AND_BOUNDED_ADCELL_DESTINATION_URL_RESYNC",
+    "bound_user_scope_action": "Install exact final installer release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip SHA256 0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94 on the existing Pferde-Atelier WordPress using the already established live installation path only. Verify live plugin version 6.72.189. Then allow exactly one version-bound ppar_v672189_adcell_destination_url_resync / ADCELL programme backfill to run. Do not add a permanent URL poller. After completion, read Reithelme and Schabracken publicly cache-bypassed and verify relevance improved; if not, stop at the first observed live defect.",
+    "completion_condition": "LIVE_6_72_189_EXACT_INSTALL_PASS_THEN_SINGLE_ADCELL_DESTINATION_URL_RESYNC_COMPLETE_THEN_PUBLIC_REITHELME_SCHABRACKEN_READBACK_PASS",
     "after_completion_action": "AFTER LIVE CLOSEOUT AUDIT OTHER PROVIDERS AGAINST THE SAME IMPORT_ONCE_STORE_REUSE DESTINATION CONTRACT WITHOUT CHANGING FRONTEND HOTPATHS",
     "no_optional_detours": true,
-    "sequence": 69,
+    "sequence": 70,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
-    "evidence_sha256": "49fe5e42ba8979cf25d02c62f1ee38cb5023d66593468e9a9b9b2c8da2d889b4",
+    "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
     "current_source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d",
-    "final_installer": null,
+    "final_installer": {
+      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip",
+      "sha256": "0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94",
+      "bytes": 797165,
+      "binding_commit": "2468cd75c49561cd721a3a118a428ff12ca984ca"
+    },
     "live_fail_evidence": {
       "version": "6.72.186",
       "screenshot": "user screenshot 2026-10-05 13:32 local shows Guardian Horse on Schabracken",
@@ -697,8 +704,8 @@
       "destination_url_resync": "ONE_VERSION_BOUND_RUN",
       "asset_reverification_on_destination_only_change": "PRESERVED_NOT_INVALIDATED",
       "full_source_php_lint": "PASS_21_OF_21",
-      "wordpress_mariadb_source": "OPEN_LOCAL_ENVIRONMENT_BLOCKED_NO_MARIADB_NO_MYSQLI",
-      "final_installer": "ABSENT",
+      "wordpress_mariadb_source": "PASS_RUN_37439851270",
+      "final_installer": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip",
       "live_readback": "OPEN",
       "exact_local_manifest_identity": "PASS_27_OF_27",
       "reference_installer_sha256": "1ca526ce92f339c678f2dc6e8775eae31355414668b8e06ed4afd561d5c15cae",
@@ -711,7 +718,15 @@
       "temporary_candidate_zip_bytes": 794957,
       "temporary_zip_fresh_unpack_identity": "PASS_27_OF_27",
       "temporary_zip_php_lint": "PASS_21_OF_21",
-      "temporary_zip_is_final_installer": false
+      "temporary_zip_is_final_installer": false,
+      "kiss_target_url_wordpress_mariadb": "PASS",
+      "existing_banner_regression": "PASS_21_OF_21",
+      "destination_library_regression": "PASS_26_OF_26",
+      "final_installer_sha256": "0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94",
+      "final_installer_bytes": 797165,
+      "final_zip_fresh_unpack_identity": "PASS_27_OF_27",
+      "final_zip_php_lint": "PASS_21_OF_21",
+      "final_zip_source_byte_identity": "PASS_27_OF_27"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/",
@@ -803,9 +818,9 @@
       "source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d"
     },
     "relevant_historical_regressions": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d"
     },
     "real_wordpress_mariadb_persistence_same_uuid": {
@@ -827,21 +842,21 @@
       "source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d"
     },
     "fresh_unpack_exact_installer": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d"
     },
     "source_zip_byte_identity": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d"
     },
     "final_sha256": {
-      "status": "OPEN",
-      "evidence_ref": null,
-      "evidence_sha256": null,
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d"
     },
     "otto_awin_automated_product_distribution": {
