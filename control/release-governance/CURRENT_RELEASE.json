@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 221,
+  "generation": 222,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,7 +58,7 @@
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
     "current_focus": "BANNER_HARD_KISS_FIXED_TARGET_MAP_6_72_190",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+    "current_focus_scope_ref": "protocol/AFFILIATE_BANNER_TARGET_URL_KISS_20261006.md",
     "current_focus_reason": "6.72.190 implements the user hard rule exactly. Reithelme and Schabracken fixed-target mapping proven on real WordPress/MariaDB. Missing stored target fails closed. No new table/column/history, no frontend HTTP or runtime mapping. Final installer bound.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_190_FINAL_INSTALLER_BOUND_MANUAL_INSTALL_OPEN",
@@ -78,14 +78,10 @@
     "productwissen_interface": "ppar_affiliate_exact_product_requirements",
     "exact_match_policy": "IDENTICAL_IDENTIFIER_OR_NO_AFFILIATE_CARD",
     "banner_distribution": {
-      "mode": "RELEVANCE_FIRST_DYNAMIC_COVERAGE",
+      "mode": "IMPORT_FIXED_TARGET_MAP_RUNTIME_STORED_ONLY",
       "unit": "PAGE_SLOT_ASSIGNMENTS_NOT_CLICKS_OR_VISITOR_IMPRESSIONS",
       "relevance_order": [
-        "TECHNICALLY_VALID",
-        "EXACT_TOPIC_MATCH",
-        "EXTENDED_TOPIC_MATCH",
-        "GENERAL_HORSE_SHOP_FALLBACK",
-        "ANY_TECHNICALLY_VALID_ACTIVE_BANNER"
+        "STORED_FIXED_TARGET_MAP_ONLY"
       ],
       "same_tier_order": [
         "LEAST_COVERED_PARTNER",
@@ -115,13 +111,13 @@
         "GLOBAL_EMERGENCY_STOP"
       ],
       "level_policy": {
-        "pages": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
-        "categories": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
-        "posts": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
-        "glossary": "EXACT_THEN_EXTENDED_THEN_GENERAL_THEN_ANY_TECHNICALLY_VALID_ACTIVE",
-        "breeds": "EXACT_STORED_EDGE_FIRST_THEN_THEME_NEUTRAL_EXISTING_STABLE_PARTNER_CREATIVE_DISTRIBUTION"
+        "pages": "STORED_FIXED_TARGET_MAP_ONLY",
+        "categories": "STORED_FIXED_TARGET_MAP_ONLY",
+        "posts": "STORED_FIXED_TARGET_MAP_ONLY",
+        "glossary": "STORED_FIXED_TARGET_MAP_ONLY",
+        "breeds": "STORED_FIXED_TARGET_MAP_ONLY"
       },
-      "topicless_final_fallback_required": true,
+      "topicless_final_fallback_required": false,
       "race_distribution_new_engine": "FORBIDDEN_REUSE_EXISTING_STABLE_DISTRIBUTION",
       "performance_recheck": {
         "status": "PASS_6_72_186_SOURCE_AND_EXACT_ZIP",
@@ -153,18 +149,18 @@
         ],
         "mapping_storage": "topic_targets_per_portal",
         "exact_and_extended_source": "REAL_OR_DECODED_OR_IMPORT_RESOLVED_DESTINATION_URL_INCLUDING_HOST",
-        "no_target_policy": "GENERAL_TECHNICALLY_VALID_FALLBACK_NO_FAKE_TOPIC",
+        "no_target_policy": "NO_STORED_FIXED_TARGET_NO_BANNER",
         "changed_destination_policy": "CLEAR_OLD_MAPPING_AND_REPLAN_WITHOUT_INVALIDATING_ASSET_VERIFICATION",
         "frontend_policy": "USE_STORED_EDGE_ONLY_FOR_OUTPUT_OBJECT_V4_NO_URL_TEXT_RECLASSIFICATION",
         "future_banners": "NEW_OR_CHANGED_IMPORT_RESOLVE_ONCE_STORE_REUSE",
         "source_gate_run": 37219933282,
         "zip_gate_run": 37220236448,
-        "source_regression": "21_OF_21_PASS_6_72_189_RUN_37439851270",
-        "source_destination_library": "26_OF_26_PASS_6_72_189_RUN_37439851270",
+        "source_regression": "HARD_KISS_WORDPRESS_MARIADB_PASS_RUN_37444152532",
+        "source_destination_library": "REITHELME_SCHABRACKEN_FIXED_TARGETS_PASS_RUN_37444152532",
         "zip_regression": "21_OF_21_PASS",
         "zip_destination_library": "26_OF_26_PASS",
-        "zip_manifest": "27_OF_27_PASS_FINAL_6_72_189",
-        "performance": "PASS_REAL_WORDPRESS_MARIADB_RUN_37439851270_ZERO_FRONTEND_HTTP_ZERO_NEW_FRONTEND_DB_NO_NEW_TABLE_OR_COLUMN",
+        "zip_manifest": "PASS_27_OF_27_FINAL_6_72_190",
+        "performance": "PASS_6_72_190_ZERO_FRONTEND_HTTP_ZERO_NEW_FRONTEND_DB_NO_NEW_TABLE_OR_COLUMN",
         "url_resolution_storage": "EXISTING_destination_url_PLUS_EXISTING_payload_destination_source_ONLY",
         "url_resolution_repeat_policy": "UNCHANGED_RESOLVED_OR_tracking_checked_ZERO_REMOTE_LOOKUPS"
       },
@@ -247,6 +243,23 @@
         "resolved_redirect_classification": "FIXED_ACCEPTED_AS_REAL_DESTINATION",
         "wordpress_mariadb_run": 37439851270,
         "final_installer_sha256": "0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94"
+      },
+      "hard_kiss_target_map_672190": {
+        "version": "6.72.190",
+        "hard_rule": "IMPORT_DESTINATION_URL_ONE_TIME_FIXED_PORTAL_TARGET_MAP_STORE",
+        "runtime": "READ_STORED_TARGET_MAP_ONLY",
+        "missing_map": "NO_BANNER",
+        "provider_topic_runtime_precedence": "FORBIDDEN",
+        "general_banner_fallback": "FORBIDDEN",
+        "new_tables": 0,
+        "new_columns": 0,
+        "url_history_storage": "NONE",
+        "frontend_http_calls_added": 0,
+        "frontend_db_queries_added": 0,
+        "import_post_batch_db_reads": "ONE_BATCH_QUERY",
+        "wordpress_mariadb_run": 37444152532,
+        "result": "PASS",
+        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672190_hard_kiss_banner_target_map_20261006.md"
       }
     },
     "awin_catalog_refresh": {
@@ -657,12 +670,12 @@
   },
   "execution_state": {
     "state": "FINAL_6_72_190_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
-    "authorized_next_action": "MANUAL_WORDPRESS_INSTALL_6_72_190",
-    "bound_user_scope_action": "Install exact final installer release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.190.zip SHA256 1a4939c91f60a7f526bc713f63719cb1cd3da88d575b7b2ec79cf063f530c1e3 manually in the existing WordPress installation. 6.72.190 then runs exactly one version-bound banner target-map resync to rebuild fixed mappings. Do not add a permanent poller or runtime mapping.",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "Install exact final installer release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.190.zip SHA256 1a4939c91f60a7f526bc713f63719cb1cd3da88d575b7b2ec79cf063f530c1e3 manually in the existing WordPress installation. This is the single current bound gate action. 6.72.190 then runs exactly one version-bound banner target-map resync to rebuild fixed mappings. Do not add a permanent poller, runtime URL mapping, provider-topic precedence, or general banner fallback.",
     "completion_condition": "MANUAL_6_72_190_INSTALL_THEN_SINGLE_VERSION_BOUND_TARGET_MAP_RESYNC_COMPLETE",
-    "after_completion_action": "AFTER LIVE CLOSEOUT AUDIT OTHER PROVIDERS AGAINST THE SAME IMPORT_ONCE_STORE_REUSE DESTINATION CONTRACT WITHOUT CHANGING FRONTEND HOTPATHS",
+    "after_completion_action": "After the manual install and the single version-bound target-map resync complete, perform only the bound live closeout/readback required by Current; do not start Tarifcheck or another provider change until this current gate is closed.",
     "no_optional_detours": true,
-    "sequence": 73,
+    "sequence": 74,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672190_hard_kiss_banner_target_map_20261006.md",
     "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
     "current_source_manifest_sha256": "c04dc0e2aa7d687404b0edad9fbcc7cbe4a367e8f916a3d2d812a08b5a0ebd45",
@@ -822,20 +835,20 @@
       "source_manifest_sha256": "c04dc0e2aa7d687404b0edad9fbcc7cbe4a367e8f916a3d2d812a08b5a0ebd45"
     },
     "fresh_unpack_exact_installer": {
-      "status": "OPEN",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672190_hard_kiss_banner_target_map_20261006.md",
       "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "c04dc0e2aa7d687404b0edad9fbcc7cbe4a367e8f916a3d2d812a08b5a0ebd45"
     },
     "source_zip_byte_identity": {
-      "status": "OPEN",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672190_hard_kiss_banner_target_map_20261006.md",
       "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "c04dc0e2aa7d687404b0edad9fbcc7cbe4a367e8f916a3d2d812a08b5a0ebd45"
     },
     "final_sha256": {
-      "status": "OPEN",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672189_import_destination_url_rootfix_20261006.md",
+      "status": "PASS",
+      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672190_hard_kiss_banner_target_map_20261006.md",
       "evidence_sha256": "76c6d4f48cf2267197c4f6f7fb0ad6480d1b4951a5b6d025feec20b2dca956b9",
       "source_manifest_sha256": "c04dc0e2aa7d687404b0edad9fbcc7cbe4a367e8f916a3d2d812a08b5a0ebd45"
     },
@@ -1088,7 +1101,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "ADCELL_6_72_189_EXACT_CONTRACT_SUCCESS_RESPONSE_THEN_FULL_RELEASE_GATES_AND_LIVE_READBACK",
+    "current_milestone": "BANNER_HARD_KISS_6_72_190_FINAL_INSTALLER_BOUND_MANUAL_WORDPRESS_INSTALL_GATE",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
