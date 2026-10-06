@@ -218,8 +218,8 @@ $a1=$activeTargets((string)$r1['identity_hash']);
 $a2=$activeTargets((string)$r2['identity_hash']);
 $a4=$activeTargets((string)$r4['identity_hash']);
 $a5=$activeTargets((string)$r5['identity_hash']);
-$ok($a1===array('category:'.$sch),'frontend_campaign_schabracken_active',wp_json_encode($a1));
-$ok($a2===array('category:'.$decken),'frontend_campaign_pferdedecken_active',wp_json_encode($a2));
+$ok($a1===array('category:schabracken'),'frontend_campaign_schabracken_active',wp_json_encode($a1));
+$ok($a2===array('category:pferdedecken'),'frontend_campaign_pferdedecken_active',wp_json_encode($a2));
 $ok($a4===array(),'ambiguous_creates_no_active_campaign');
 $ok($a5===array(),'unknown_creates_no_active_campaign');
 
