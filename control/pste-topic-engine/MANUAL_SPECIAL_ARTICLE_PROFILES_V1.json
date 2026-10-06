@@ -1,0 +1,60 @@
+{
+  "contract": "PSTE_MANUAL_SPECIAL_ARTICLE_PROFILES_V1",
+  "scope": "MANUAL_NO_DATAFORSEO_SPECIAL_ARTICLES",
+  "profiles": {
+    "TARIFRECHNER_VERSICHERUNG": {
+      "label": "Tarifrechner / Versicherung",
+      "purpose": "Kurzer themenspezifischer Ratgeber mit logisch eingebettetem zentralem Versicherungs-Tarifrechner.",
+      "length_words": {
+        "min": 500,
+        "max": 800
+      },
+      "rules": [
+        "Titel nennt das konkrete Thema, nicht 'Tarifrechner' und keinen Anbieter.",
+        "Konkretes Hauptthema/Keyword muss natürlich im Titel und mehrfach sinnvoll im Text vorkommen.",
+        "Kurze themenspezifische Einleitung; keine generische Serien-Einleitung.",
+        "Vor dem Rechner: wichtigste Auswahl-/Kosten-/Leistungskriterien.",
+        "Rechner an der logisch passenden Stelle nach der Orientierung und vor der Einordnung.",
+        "Artikel enthält ausschließlich den zentralen Affiliate-Platzhalter, niemals Widget-HTML.",
+        "Nach dem Rechner: kurze Einordnung des Ergebnisses und der wichtigsten Bedingungen.",
+        "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft; nicht Pflicht.",
+        "Keine erfundenen aktuellen Preise, Beiträge, Ersparnisse oder 'bester/günstigster'-Behauptungen.",
+        "Abschluss kurz und themenspezifisch."
+      ]
+    },
+    "KREDIT_FINANZIERUNG": {
+      "label": "Kredit / Finanzierung",
+      "purpose": "Kurzer themenspezifischer Ratgeber mit logisch eingebettetem zentralem Kreditvergleich.",
+      "length_words": {
+        "min": 500,
+        "max": 800
+      },
+      "rules": [
+        "Titel nennt die konkrete Anschaffung, nicht 'Kreditrechner' und keinen Anbieter.",
+        "Konkretes Hauptthema/Keyword muss natürlich im Titel und mehrfach sinnvoll im Text vorkommen.",
+        "Kurze themenspezifische Einleitung mit Anlass und Kostenrahmen ohne erfundene Zahlen.",
+        "Vor dem Rechner: Kaufpreis/Budget, Eigenkapital, Laufzeit, Monatsrate und Gesamtkosten passend zum Thema einordnen.",
+        "Kreditrechner nach der Orientierung und vor der Ergebnis-Einordnung platzieren.",
+        "Artikel enthält ausschließlich den zentralen Affiliate-Platzhalter, niemals Widget-HTML.",
+        "Nach dem Rechner: Rate nicht isoliert bewerten; Laufzeit, effektiven Zins und Gesamtbetrag gemeinsam betrachten.",
+        "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft; nicht Pflicht.",
+        "Keine erfundenen Zinsen, Kreditkosten oder Sparversprechen.",
+        "Abschluss kurz und themenspezifisch."
+      ]
+    }
+  },
+  "global_diversity_rules": [
+    "Kein Serienartikel darf wie eine umbenannte Kopie eines anderen wirken.",
+    "Einstieg, H2-Formulierungen, Reihenfolge der Argumente, Rechner-Überleitung und Schluss müssen zwischen Artikeln variieren.",
+    "Beispiele, Prüfpunkte und Schwerpunktsetzung werden aus der jeweiligen Kategorie abgeleitet.",
+    "Keine starre Satz- oder Absatzschablone über die Serie.",
+    "Bei mehreren Artikeln wird vor Freigabe gegen die bereits erzeugten Spezialartikel auf sprachliche und strukturelle Ähnlichkeit geprüft."
+  ],
+  "affiliate_binding": {
+    "source": "Affiliate-Zentrale -> Tarifrechner",
+    "placeholder_only": true,
+    "html_in_article": false,
+    "example_placeholder": "[affiliate_rechner id=\"...\"]"
+  },
+  "dataforseo_required": false
+}
