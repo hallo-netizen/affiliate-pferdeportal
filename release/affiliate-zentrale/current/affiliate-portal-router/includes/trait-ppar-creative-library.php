@@ -794,6 +794,11 @@ trait PPAR_Creative_Library_Trait {
             $source_payload_for_hash[sanitize_text_field((string) $key)] = sanitize_text_field((string) $value);
         }
         ksort($source_payload_for_hash);
+        // Import-resolved destination_url is derived metadata, not a new
+        // provider source payload. Keep the source hash stable so resolving a
+        // destination does not force an unnecessary image re-verification.
+        $source_destination_for_hash = in_array($destination_source, array('resolved_redirect','tracking_checked'), true)
+            ? $tracking_url : $destination_url;
         $source_fingerprint = array(
             'provider'=>$provider,
             'partner_external_id'=>$partner_external_id,
@@ -803,7 +808,7 @@ trait PPAR_Creative_Library_Trait {
             'description'=>$description,
             'tags'=>$tags,
             'image_url'=>$image_url,
-            'destination_url'=>$destination_url,
+            'destination_url'=>$source_destination_for_hash,
             'tracking_url'=>$tracking_url,
             'declared_width'=>$declared_width,
             'declared_height'=>$declared_height,
@@ -850,7 +855,7 @@ trait PPAR_Creative_Library_Trait {
         $table = $this->creative_library_table();
         $now = time();
         $existing = $wpdb->get_row($wpdb->prepare(
-            "SELECT id, source_hash, first_seen, review_status, selected, content_scope, scope_source, classified_at, payload FROM {$table} WHERE identity_hash=%s",
+            "SELECT id, source_hash, first_seen, review_status, selected, content_scope, scope_source, classified_at, payload, destination_url, tracking_url, topic_status, topic_score, topic_targets FROM {$table} WHERE identity_hash=%s",
             $creative['identity_hash']
         ), ARRAY_A);
         $data = $creative;
@@ -902,8 +907,34 @@ trait PPAR_Creative_Library_Trait {
                 if (array_key_exists('tags', $creative)) {
                     $same_source_update['tags'] = $creative['tags'];
                 }
+
+                // Ziel-URL ist absichtlich abgeleitete Import-Metadaten. Wenn
+                // sie sich bei identischer Providerquelle erstmals von einem
+                // Tracking-Fallback zu einer echten Zielseite verbessert,
+                // nur diese bestehende Zeile aktualisieren und die alte
+                // automatische Zielkante leeren. Bildnachweis/Dimensionen
+                // bleiben unangetastet; der ohnehin folgende Vollpool-Planer
+                // baut die Zielkante neu.
+                $existing_destination = esc_url_raw((string) ($existing['destination_url'] ?? ''));
+                $incoming_destination = esc_url_raw((string) ($creative['destination_url'] ?? ''));
+                $existing_payload_for_destination = json_decode((string) ($existing['payload'] ?? ''), true);
+                $incoming_payload_for_destination = json_decode((string) ($creative['payload'] ?? ''), true);
+                $existing_payload_for_destination = is_array($existing_payload_for_destination) ? $existing_payload_for_destination : array();
+                $incoming_payload_for_destination = is_array($incoming_payload_for_destination) ? $incoming_payload_for_destination : array();
+                $existing_destination_source = sanitize_key((string) ($existing_payload_for_destination['_destination_source'] ?? ''));
+                $incoming_destination_source = sanitize_key((string) ($incoming_payload_for_destination['_destination_source'] ?? ''));
+                $destination_changed = $incoming_destination !== '' && (
+                    $incoming_destination !== $existing_destination
+                    || $incoming_destination_source !== $existing_destination_source
+                );
+                if ($destination_changed) {
+                    $same_source_update['destination_url'] = $incoming_destination;
+                    $same_source_update['topic_score'] = 0;
+                    $same_source_update['topic_targets'] = '[]';
+                    $same_source_update['classified_at'] = 0;
+                }
                 $wpdb->update($table, $same_source_update, array('id'=>absint($existing['id'])));
-                return 'unchanged';
+                return $destination_changed ? 'updated' : 'unchanged';
             }
             $wpdb->update($table, $data, array('id'=>absint($existing['id'])));
             return 'updated';
