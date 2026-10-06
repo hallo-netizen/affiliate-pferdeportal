@@ -1093,3 +1093,26 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 **POSITIV:** Run `37445573248`, Schritt `Affiliate governance check`: PASS auf Current Generation 222. Der spätere Workflow-Fail entsteht erst beim fremden PSTE-0.57.6-Artefakt und ist kein Affiliate-Governance-Fail.
 
 **Status:** CLOSED / NACHGEHOLT / GOVERNANCE PASS.
+
+
+## AFF-ERR-051 — Tarifcheck zunächst gegen erfundenen Kosten-Root statt realen Kategoriebaum gedacht
+
+**Datum:** 06.10.2026.
+
+**Fehler:** Der erste 6.72.191-Ansatz behandelte „Kosten“ sinngemäß wie einen gemeinsamen Kategorieast. Die reale Portalstruktur besitzt jedoch keinen solchen Kosten-Root. Kosten sind verteilte Blattkategorien unter mehreren Hauptbereichen.
+
+**Harter Baum-Nachweis:** `ebay-portal-catalog-v2.json` enthält 67 konfigurierte Kosten-Einträge mit 67 Slugs und 66 eindeutigen Pfaden. Die Blätter liegen unter Ausrüstung, Fütterung, Stall, Transport, Weide und Wissen. Ein Weidezaungeräte-Pfad ist im Katalog doppelt mit zwei Slugs vorhanden.
+
+**Rootfix:** Tarifcheck-Kredit wird nach eindeutiger Ziel-URL-Prüfung auf die gesamte real vorhandene Kosten-Zielmenge gebunden. Ein echtes Kostenblatt muss `Kosten …` heißen und einen `…-kosten`-Slug besitzen. Es wird eine Kampagne mit mehreren festen Zielschlüsseln gespeichert, keine Bannerkopie je Kategorie.
+
+**Versicherung:** Analog ausschließlich alle 14 echten Blattkategorien im Ast `Wissen > Versicherungen & Recht`. Ein zusätzlicher realer Test deckte auf, dass WordPress den Pfad als `Versicherungen &amp; Recht` liefert; die Pfadprüfung dekodiert HTML-Entities vor der Entscheidung.
+
+**POSITIV Source:** Run `37450657203` = SUCCESS. Kredit 66/66 eindeutige Kostenpfade PASS; Versicherung 14/14 PASS; Kreuzsperren PASS; URL schlägt irreführenden Titel PASS; unbekannt/gemischt fail-closed PASS; Runtime-Zielmengen 66 und 14 PASS; keine neue Tabelle.
+
+**POSITIV exaktes ZIP:** Run `37450856670` = SUCCESS. Fresh-Unpack 27/27 Byteidentität, PHP 21/21, exaktes ZIP frisch in WordPress/MariaDB installiert, kompletter Tarifcheck Positiv-/Negativtest PASS.
+
+**Finaler Installer:** `AFFILIATE_ZENTRALE_6.72.191.zip`, SHA-256 `0987dec5826be39b99fc05a993a64149acf017445ecde0577dc3f975a13f9f5e`, 800276 Byte.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672191_tarifcheck_direct_code_kiss_20261006.md`.
+
+**Status:** ROOT_CAUSE_FIXED / SOURCE_AND_EXACT_ZIP_WORDPRESS_MARIADB_PASS / MANUAL_LIVE_INSTALL_OPEN.
