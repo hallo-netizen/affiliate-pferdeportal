@@ -213,3 +213,48 @@ Nicht importieren:
 - `redaktionsplan_read_attempted=false`, `redaktionsplan_write_attempted=false`, `publish_allowed=false`.
 - Dieser Importfehler ist nach dem aktuellen Vollregel-Blocker zu behandeln; vor einem neuen Realimport muss die dann neu erzeugte finale 16er-Datei gegen die reale Importer-Grenze positiv/negativ simuliert werden.
 - Historische article_id-/Importer-Fehler vom 2026-10-03 sind ausdrücklich zu berücksichtigen; kein weiterer Realimport auf Verdacht.
+
+## 2026-10-06 – Delta: PSTE/PSERC-Vorlauf für neue K0-Artikel
+
+### E16 – PSTE 0.57.43: Bestandsdubletten im providerfreien Recheck bereinigt
+- Live eingesetzt: Portal SEO Themenengine 0.57.43.
+- Der vorhandene Bestands-/Titelpfad wurde providerfrei erneut aufbereitet; kein Gesamtbestand-Neuaufbau und keine Provider-Abfrage.
+- Live-Endstand nach dem Recheck: 32 vollständig aufbereitete, für den PSERC-Vorlauf geeignete Themen.
+- Die zuvor erneut planbaren Bestandsfälle wie „Warum sagt man du alte Schabracke?“ wurden durch den aktiven Titel-/Bestandsabgleich aus dem produktionsfähigen Pool entfernt.
+- Dieser Punkt betrifft ausschließlich den PSTE-Vorlauf; K0-Qualitätsregeln, LanguageTool 6.8, PPM 6.7.9 und Publish-Sperre wurden nicht geändert.
+
+### E17 – PSERC 0.28.30: Snapshot ist aktuell, aber 0 Metadaten-Handoffs
+- Live-Plugin laut WordPress: 0.28.30, Build `0.28.30-pste-v5-binding-safe`.
+- Snapshotstatus: aktuell/PASS.
+- Live-Zählung: 4472 SEO-Themen gesamt, 32 geeignet, 4440 zurückgehalten, 0 Metadaten-Handoff bereit.
+- Live-Blockeraufteilung der 32:
+  - 25 × `BLOCKED_PORTAL_TOPIC_EVIDENCE`;
+  - 2 × `BLOCKED_EXISTING_CONTENT_DUPLICATE`;
+  - 2 × `HELD_UNSUPPORTED_ARTICLE_TYPE`;
+  - 1 × `BLOCKED_ASSIGNMENT_CONSISTENCY`;
+  - 1 × `REVIEW_REQUIRED_SEMANTIC_OVERLAP`;
+  - 1 × `REVIEW_REQUIRED_TARGET_KEYWORD`.
+- Damit liegt der aktuelle Durchsatzblock nach dem PSTE-Recheck im PSERC-Handoff, nicht mehr im PSTE-Bestand.
+
+### E18 – PSERC-Kompatibilitätsfix noch NICHT umgesetzt: exakte 0.28.30-Quelle fehlt im Repository
+- Im Repository liegt unter `control/startmaster0107/runtime_packages/PSERC-FIX.zip` ein altes PSERC-Paket; der darin gebundene Compiler ist 0.28.18.
+- Die live laufende Quelle 0.28.30/`0.28.30-pste-v5-binding-safe` ist im aktuell geprüften Repository nicht als editierbare/bytegenaue Pluginquelle vorhanden.
+- Deshalb wurden die diskutierten zwei Kompatibilitätswerte (`PAA_RELATED` und `PSTE_PRE_TITLE_DUPLICATE_GATE_V2_KEYWORD_OWNERSHIP`) NICHT auf Verdacht in 0.28.18 gepatcht und NICHT als Live-Fix ausgegeben.
+- Verbindliche KISS-Regel für die Fortsetzung: zuerst exakt die live 0.28.30-Quelle binden; danach nur den kleinsten belegten Kompatibilitätsdelta ändern und den kompletten Positiv-/Negativpfad lokal auf genau dieser Quelle simulieren.
+
+### E19 – K0-Portalregistry: 13 aktuelle Pferdeatelier-Kategorien ergänzt und geprüft
+- Änderung ausschließlich in der bestehenden `K0_PORTAL_REGISTRY.json`; kein Resolver, kein neuer Controller, kein neues Gate.
+- PR #517 wurde in `konzept0-portal-neutral-20261002` gemergt.
+- Merge-Commit: `5cd30e56064530f241bef1f6c5ca10371d98dca9`.
+- Exakt 13 fehlende Pferdeatelier-Slugs ergänzt; danach 30 Pferdeatelier-Einträge insgesamt, keine Duplikate, Hobby/Discgolf unverändert.
+- Zielprüfung 13/13: PASS.
+- CI auf dem Merge-Commit:
+  - K0 Hobby Discgolf acceptance Run `37428072327` = SUCCESS;
+  - K0 portal-neutral selftest Run `37428072346` = SUCCESS.
+- Diese Registry-Korrektur ist abgeschlossen. Sie erzeugt noch keinen Artikel; der vorgelagerte PSERC-Handoff bleibt der erste offene Integrationsblock.
+
+### E20 – Temporäre Inspektionsfläche ist keine Current-Autorität
+- Branch `pste-kiss-e2e-20261005` wurde ausschließlich zur read-only Prüfung von vorhandenem PSERC-Paket und Live-REST-Oberfläche verwendet.
+- Kein Merge in K0/main, keine Produktlogik- oder WordPress-Schreibänderung.
+- Ergebnisse aus dieser Inspektionsfläche dürfen nicht als zweite Current-/NEXT-ACTION-Wahrheit verwendet werden.
+
