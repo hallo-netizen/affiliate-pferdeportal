@@ -149,3 +149,30 @@ Nicht als Live-PASS behandeln, bevor mindestens:
 - reale Live-Abnahme beider explizit zugeordneten Tarifcheck-Gruppen PASS.
 
 Bis dahin release_allowed=false.
+
+
+## Finales exaktes Installer-Gate
+
+Run: `37490868184` → **SUCCESS**
+
+Getestetes Artefakt:
+
+- `release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.195.zip`
+- SHA-256: `8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf`
+- Größe: **809869 Byte**
+
+PASS im exakten ZIP:
+
+- Fresh-Unpack / Source-Byteidentität: **28/28**
+- PHP-Lint: **22/22**
+- Installation des exakt gebauten ZIP in frischem WordPress 7.1.2 + MariaDB 10.11: **PASS**
+- alter unverbundener automatischer Fütterungs-Banner wird global deaktiviert: **PASS**
+- Schabracken wird als aktuelle Zielkarte neu aufgebaut: **PASS**
+- keine aktuelle automatische Fütterungs-Kampagne im Schabracken-Fall: **PASS**
+- Tarifcheck Kreditvergleich/Kosten → ausschließlich Kosten-Kategorien: **PASS**
+- Tarifcheck Versicherungen → ausschließlich Versicherungs-Kategorien: **PASS**
+- Tarifcheck ohne explizite Gruppe und ohne sichere reale Ziel-URL: **fail-closed / PASS**
+- manuelle Banner bleiben erhalten: **PASS**
+- Produktkampagnen bleiben erhalten: **PASS**
+
+Damit sind Source und exakter Installer technisch gebunden. Offen bleibt ausschließlich die reale Live-Abnahme nach Installation von 6.72.195: Schabracken sowie beide Tarifcheck-Gruppen.
