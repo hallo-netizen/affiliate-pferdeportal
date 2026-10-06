@@ -29,6 +29,16 @@ jobs:
           sed -n '1,360p' "$B"
           echo '=== CAPABILITY CONTRACT ==='
           cat "$(find /tmp/pserc2 -type f -path '*/contracts/seo-engine-capability-binding-v2.json' | head -1)"
+          echo '=== LIVE PSERC STATIC CONTRACTS READ ONLY ==='
+          for u in \
+            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/portal-topic-evidence-gate-v1.json' \
+            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/seo-engine-capability-binding-v2.json' \
+            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json'
+          do
+            echo "URL=$u"
+            curl -fsS --max-time 30 "$u" || true
+            echo
+          done
           echo '=== LIVE REST ROUTES READ ONLY ==='
           curl -fsS --max-time 30 'https://pferde-atelier.de/wp-json/' -o /tmp/wp-rest.json
           python3 - <<'PY'
