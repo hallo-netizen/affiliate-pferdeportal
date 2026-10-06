@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.192
+ * Version: 6.72.193
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -18,6 +18,7 @@ require_once __DIR__ . '/includes/trait-ppar-network-sync.php';
 require_once __DIR__ . '/includes/trait-ppar-provider-intake.php';
 require_once __DIR__ . '/includes/trait-ppar-provider-registry.php';
 require_once __DIR__ . '/includes/trait-ppar-creative-library.php';
+require_once __DIR__ . '/includes/trait-ppar-tariff-tools.php';
 require_once __DIR__ . '/includes/trait-ppar-automation-suite.php';
 require_once __DIR__ . '/includes/trait-ppar-control-contract.php';
 require_once __DIR__ . '/includes/trait-ppar-output-objects.php';
@@ -106,6 +107,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Provider_Intake_Trait;
     use PPAR_Provider_Registry_Trait;
     use PPAR_Creative_Library_Trait;
+    use PPAR_Tariff_Tools_Trait;
     use PPAR_Automation_Suite_Trait;
     use PPAR_Control_Contract_Trait;
     use PPAR_Output_Objects_Trait;
@@ -116,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.192';
+    const VERSION = '6.72.193';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -270,6 +272,7 @@ final class Pferdeportal_Affiliate_Router {
     private function __construct() {
         $this->idealo_register_hooks();
         $this->digistore24_register_hooks();
+        $this->tariff_tools_register_hooks();
         add_action('init', array($this, 'register_campaign_post_type'), 5);
         add_action('init', array($this, 'register_shortcodes'));
         add_action('init', array($this, 'maybe_upgrade_health_checker'), 6);
@@ -1050,6 +1053,7 @@ JS;
         add_shortcode('affiliate_portal_slot', array($this, 'shortcode_affiliate_slot'));
         add_shortcode('pp_portal_overview', array($this, 'shortcode_portal_overview'));
         add_shortcode('affiliate_portal_overview', array($this, 'shortcode_portal_overview'));
+        add_shortcode('affiliate_rechner', array($this, 'shortcode_tariff_tool'));
     }
 
     public function filter_the_content($content) {
@@ -7067,6 +7071,7 @@ JS;
         add_menu_page('Affiliate-Zentrale','Affiliate-Zentrale','manage_options','affiliate-portal-zentrale',array($this,'render_dashboard_page'),'dashicons-megaphone',59);
         add_submenu_page('affiliate-portal-zentrale','Übersicht','Übersicht','manage_options','affiliate-portal-zentrale',array($this,'render_dashboard_page'));
         add_submenu_page('affiliate-portal-zentrale','Banner & Werbemittel','Banner & Werbemittel','manage_options','affiliate-portal-creative-library',array($this,'render_creative_library_page'));
+        add_submenu_page('affiliate-portal-zentrale','Tarifrechner','Tarifrechner','manage_options','affiliate-portal-tariff-tools',array($this,'render_tariff_tools_page'));
         add_submenu_page('affiliate-portal-zentrale','Ausgaben & Freigabe','Ausgaben & Freigabe','manage_options','affiliate-portal-outputs',array($this,'render_output_objects_page'));
         add_submenu_page('affiliate-portal-zentrale','Steuerung & Veto','Steuerung & Veto','manage_options','affiliate-portal-control',array($this,'render_control_page'));
         add_submenu_page('affiliate-portal-zentrale','Werbemittel','Werbemittel','manage_options','affiliate-portal-creatives',array($this,'render_creatives_page'));
