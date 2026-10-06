@@ -11,44 +11,67 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Locate PSERC 0.28.27 to 0.28.29 baselines
+      - name: List exact unrecovered live PSERC files and public readability
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
-          echo '=== TEXT REFS ==='
-          for needle in '0.28.27' '0.28.28' '0.28.29-kiss-storage-safe'; do
-            echo "NEEDLE=$needle"
-            while read -r ref; do
-              git grep -n -I -F "$needle" "$ref" -- '*.php' '*.json' '*.md' '*.txt' '*.yml' '*.yaml' 2>/dev/null | head -50 || true
-            done < <(git for-each-ref --format='%(refname)' refs/remotes/origin) | sort -u | head -300
-          done
+          curl -fsS --max-time 30 'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json' -o /tmp/binding.json
           python3 - <<'PY'
-          import io,subprocess,zipfile,re
-          needles=[b'0.28.27',b'0.28.28',b'0.28.29-kiss-storage-safe']
+          import hashlib,io,json,subprocess,zipfile,urllib.request
+          b=json.load(open('/tmp/binding.json',encoding='utf-8'))
+          req=b['required_files']
           objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
           zips=[]; seen=set()
           for line in objects:
               p=line.split(' ',1)
-              if len(p)!=2 or not p[1].lower().endswith('.zip') or p[0] in seen: continue
-              seen.add(p[0]); zips.append((p[0],p[1]))
-          print('=== ZIP SCAN ===')
-          def walk(raw,label,root,depth=0):
+              if len(p)==2 and p[1].lower().endswith('.zip') and p[0] not in seen:
+                  seen.add(p[0]); zips.append((p[0],p[1]))
+          matched=set()
+          def walk(raw,depth=0):
               try:z=zipfile.ZipFile(io.BytesIO(raw))
               except:return
               for n in z.namelist():
                   if n.endswith('/'):continue
-                  low=n.lower()
-                  if not (low.endswith(('.php','.json','.md','.txt','.yml','.yaml','.zip')) or '0.28.' in low):continue
+                  rels=[rel for rel in req if n==rel or n.endswith('/'+rel)]
+                  need=bool(rels) or (n.lower().endswith('.zip') and depth<4)
+                  if not need:continue
                   try:data=z.read(n)
                   except:continue
-                  found=[x.decode() for x in needles if x.lower() in data.lower() or x.decode().lower() in low]
-                  if found: print(f'ZIP_MATCH root={root} member={label}!{n} needles={",".join(found)} bytes={len(data)}')
-                  if low.endswith('.zip') and depth<4 and len(data)<100*1024*1024: walk(data,label+'!'+n,root,depth+1)
+                  for rel in rels:
+                      if hashlib.sha256(data).hexdigest()==req[rel]['sha256']: matched.add(rel)
+                  if n.lower().endswith('.zip') and depth<4 and len(data)<100*1024*1024: walk(data,depth+1)
           for obj,path in zips:
               try:
-                  if int(subprocess.check_output(['git','cat-file','-s',obj],text=True).strip())>150*1024*1024: continue
-                  raw=subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL)
+                  if int(subprocess.check_output(['git','cat-file','-s',obj],text=True).strip())>150*1024*1024:continue
+                  walk(subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL))
               except:continue
-              walk(raw,path,path)
+          # include plain git blobs too
+          for line in objects:
+              p=line.split(' ',1)
+              if len(p)!=2:continue
+              obj,path=p
+              rels=[rel for rel in req if path==rel or path.endswith('/'+rel)]
+              if not rels:continue
+              try:data=subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL)
+              except:continue
+              h=hashlib.sha256(data).hexdigest()
+              for rel in rels:
+                  if h==req[rel]['sha256']:matched.add(rel)
+          missing=sorted(set(req)-matched)
+          print('RECOVERED='+str(len(matched)))
+          print('MISSING='+str(len(missing)))
+          base='https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/'
+          for rel in missing:
+              meta=req[rel]
+              status='NA'; got=''; size=0
+              try:
+                  request=urllib.request.Request(base+rel,method='GET',headers={'User-Agent':'PSERC-readonly-audit'})
+                  with urllib.request.urlopen(request,timeout=15) as r:
+                      data=r.read()
+                      status=str(r.status); size=len(data); got=hashlib.sha256(data).hexdigest()
+              except Exception as e:
+                  status='ERR:'+type(e).__name__
+              exact=(got==meta['sha256'])
+              print(f'MISSING_FILE rel={rel} bytes={meta["bytes"]} sha256={meta["sha256"]} public_status={status} public_bytes={size} public_exact={str(exact).lower()} public_sha256={got}')
           PY
