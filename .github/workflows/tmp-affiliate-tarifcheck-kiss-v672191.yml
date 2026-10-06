@@ -1,0 +1,128 @@
+name: TEMP Affiliate Tarifcheck KISS 6.72.191
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-tarifcheck-kiss-v672191.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_tarifcheck_kiss_v672191.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+  workflow_dispatch:
+
+jobs:
+  wordpress-mariadb-hardtest:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Source hardlocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          grep -F "Version: 6.72.191" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.191';" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "tarifcheck_credit_all_cost_categories" "$ROOT/includes/trait-ppar-output-objects.php"
+          grep -F "_ppar_banner_target_keys" "$ROOT/includes/trait-ppar-output-objects.php"
+          grep -F "HARD RULE gilt auch fuer direkt eingefuegte Partnercodes" "$ROOT/includes/trait-ppar-creative-library.php"
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "21"
+          echo "PASS PHP lint 21/21"
+
+      - name: Category model proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('release/affiliate-zentrale/current/affiliate-portal-router/assets/ebay-portal-catalog-v2.json')
+          data=json.loads(p.read_text())
+          costs=[x for x in data['article_targets'] if str(x.get('theme','')).lower()=='kosten']
+          assert len(costs)==67, len(costs)
+          assert len({x['category_slug'] for x in costs})==67
+          assert len({x['path'] for x in costs})==66
+          assert all(str(x['category_name']).startswith('Kosten ') for x in costs)
+          assert all(str(x['category_slug']).endswith('-kosten') for x in costs)
+          hubs=sorted({x['main_hub'] for x in costs})
+          assert hubs==['Ausrüstung','Fütterung','Stall','Transport','Weide','Wissen'], hubs
+          print('PASS configured cost model 67 records / 66 unique paths across 6 main hubs')
+          PY
+
+      - name: Install WordPress and plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Tarifcheck KISS 6.72.191' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          add_action('init', static function(){
+              if (!post_type_exists('uge_term')) register_post_type('uge_term',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('uge_group')) register_taxonomy('uge_group',array('uge_term'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('pa_breed')) register_post_type('pa_breed',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('pa_breed_group')) register_taxonomy('pa_breed_group',array('pa_breed'),array('public'=>true,'hierarchical'=>true));
+              if (!post_type_exists('hp_listing')) register_post_type('hp_listing',array('public'=>true,'supports'=>array('title','editor')));
+              if (!taxonomy_exists('hp_listing_category')) register_taxonomy('hp_listing_category',array('hp_listing'),array('public'=>true,'hierarchical'=>true));
+          },1);
+          PHP
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.191"){exit(2);} echo "PASS 6.72.191 active\n";' --path=/tmp/wp-site
+
+      - name: Real WordPress MariaDB Tarifcheck positive negative
+        shell: bash
+        run: |
+          set -euo pipefail
+          BEFORE_TABLES=$(mysql -N -h127.0.0.1 -uwordpress -pwordpress wordpress -e "SHOW TABLES" | wc -l)
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_tarifcheck_kiss_v672191.php" --path=/tmp/wp-site | tee /tmp/tarifcheck.log
+          grep -F 'PASS catalog_cost_records_67' /tmp/tarifcheck.log
+          grep -F 'PASS catalog_cost_unique_paths_66' /tmp/tarifcheck.log
+          grep -F 'PASS credit_mapped_all_unique_cost_categories' /tmp/tarifcheck.log
+          grep -F 'PASS credit_has_66_fixed_cost_targets' /tmp/tarifcheck.log
+          grep -F 'PASS credit_url_beats_insurance_title' /tmp/tarifcheck.log
+          grep -F 'PASS insurance_url_beats_credit_title' /tmp/tarifcheck.log
+          grep -F 'PASS unknown_tarifcheck_fail_closed' /tmp/tarifcheck.log
+          grep -F 'PASS mixed_family_fail_closed' /tmp/tarifcheck.log
+          grep -F 'PASS runtime_exposes_all_cost_campaign_targets' /tmp/tarifcheck.log
+          grep -F 'TARIFCHECK_KISS_672191_ALL_COST_CATEGORIES_COMPLETE' /tmp/tarifcheck.log
+          AFTER_TABLES=$(mysql -N -h127.0.0.1 -uwordpress -pwordpress wordpress -e "SHOW TABLES" | wc -l)
+          test "$BEFORE_TABLES" = "$AFTER_TABLES"
+          echo "PASS no new tables during Tarifcheck import/map"
