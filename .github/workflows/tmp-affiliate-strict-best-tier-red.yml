@@ -1,4 +1,4 @@
-name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate FINAL
+name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate FINAL-R2
 
 on:
   push:
@@ -215,7 +215,7 @@ jobs:
             cd /tmp/final190
             sha256sum -c "$GITHUB_WORKSPACE/release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
           ) | tee /tmp/final190-manifest.log
-          test "$(grep -c ': OK /tmp/final190-manifest.log)" = "27"
+          test "$(grep -c 'OK' /tmp/final190-manifest.log)" = "27"
           find /tmp/final190/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final190-lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/final190-lint.log)" = "21"
           python3 - <<'PY'
