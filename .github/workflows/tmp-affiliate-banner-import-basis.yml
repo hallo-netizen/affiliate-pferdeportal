@@ -1,0 +1,56 @@
+name: Affiliate banner import basis hardtest
+
+on:
+  push:
+    branches:
+      - fix/banner-import-basis-20261006
+    paths:
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php'
+      - 'release/affiliate-zentrale/tests/test_adcell_banner_import_basis.php'
+      - '.github/workflows/tmp-affiliate-banner-import-basis.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  basis:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: PHP syntax current plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: ADCELL banner import basis regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          php release/affiliate-zentrale/tests/test_adcell_banner_import_basis.php
+
+      - name: Exact source assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php')
+          s=p.read_text()
+          a=s.index('private function automation_adcell_banner_rows')
+          b=s.index('private function automation_adcell_deeplink_rows',a)
+          x=s[a:b]
+          assert x.count('adcell_api_v2_promotion_categories($program_id)') == 1
+          assert "'provider_raw_json'=>$provider_raw_json" in x
+          assert "'provider_raw_sha256'=>hash('sha256', $provider_raw_json)" in x
+          assert "'title_source'=>$title_source" in x
+          assert "'creative_title'=>sanitize_text_field((string) $program_name . ' Banner '" not in x
+          print('PASS exact ADCELL banner import basis source assertions')
+          PY
