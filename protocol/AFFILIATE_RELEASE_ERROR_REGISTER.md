@@ -1135,3 +1135,36 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 **Finaler Installer:** `AFFILIATE_ZENTRALE_6.72.192.zip`, SHA-256 `49add47f6876e78737704b3ca067bf5d931ee68a5f7448f99d8227ee57fc60d9`, 801146 Byte.
 
 **Status:** FIXED / SOURCE_AND_EXACT_ZIP_WORDPRESS_MARIADB_PASS / MANUAL_LIVE_INSTALL_OPEN.
+
+
+## AFF-ERR-053 — 6.72.193 live: Schabracken weiter falsch + Tarifcheck nicht auswählbar
+
+**Datum:** 06.10.2026.
+
+**Live-Befund:** Nutzer hat 6.72.193 real installiert. Schabracken ist weiterhin fachlich falsch. Zusätzlich ist Tarifcheck im Werbemittel-Sammelimport unter **„Aufgenommener Partner“** nicht auswählbar.
+
+**Bewiesene UI-Ursache Tarifcheck:** `creative_library_snapshots_for_select()` enthielt keinen Tarifcheck-Snapshot. Der vorhandene Hinweis, Provider „Direktpartner“ und Partnername „Tarifcheck“ händisch einzutragen, war nur ein Workaround und keine fertige Integration.
+
+**Bewiesene Persistenzlücken für den Schabracken-Fehler:**
+1. Der 6.72.190-Resync baut bestehende lokale Banner-Zielkarten nicht direkt neu; er startet nur die ADCELL-Programmsynchronisierung.
+2. Der vorhandene Kampagnen-Finder suchte nur nach dem alten Metakey `ppar_library_identity_hash`, während aktuelle Output-Object-Kampagnen `_ppar_creative_identity_hash` speichern. Damit konnten aktuelle alte Auto-Kampagnen vom Bereinigungsweg übersehen werden.
+3. Der frühere direkte Banner-Migrationsweg aus 6.72.185 war versionshart auf 6.72.185 begrenzt und läuft unter 6.72.193 nicht.
+
+**Rootfix 6.72.194:**
+- Tarifcheck als echter auswählbarer Directpartner-Preset;
+- aktueller + Legacy-Campaign-Metakey werden erkannt;
+- einmaliger admin-/background-only lokaler Neuaufbau aller aktiven Banner-Zielkarten aus der bereits gespeicherten `destination_url`;
+- alte automatische `output_object_v4`-Kampagnen vor Neubindung fail-closed deaktivieren;
+- ohne sichere neue Zielkarte keine Reaktivierung;
+- manuelle/FIXED Kampagnen bleiben unangetastet;
+- keine Provider-HTTP-Aufrufe, kein Frontend-Scan, keine neue Tabelle/Spalte, kein Produktpool-Rebuild.
+
+**POSITIV Source:** Run `37480297999` SUCCESS. Exakt reproduzierter stale-edge Fall Fütterung -> Schabracken wird korrigiert; unbekannte URL bleibt ohne aktive Auto-Kampagne; manuelle Kampagne bleibt aktiv; Tarifcheck-Preset vorhanden.
+
+**POSITIV exaktes ZIP:** Run `37480911019` SUCCESS. Fresh-Unpack 28/28, PHP 22/22, exaktes ZIP in WordPress/MariaDB, stale-edge-Test PASS, Tarifcheck-Preset PASS, 6.72.193 Tarifrechner-Regression PASS, 6.72.192 Tarifcheck-Bannervertrag PASS.
+
+**Finaler Installer:** `AFFILIATE_ZENTRALE_6.72.194.zip`, SHA-256 `36efb30086ece987cf9a55e3ab24cb85073343b67b5f6b1b761055a0fab08d04`, 807040 Byte.
+
+**Status:** SOURCE_AND_EXACT_ZIP_FIXED / LIVE_INSTALL_AND_SCHABRACKEN_READBACK_OPEN.
+
+**Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md`.
