@@ -917,11 +917,15 @@ trait PPAR_Output_Objects_Trait {
         }
 
         $stored_campaign_targets=array();
-        $multi_source=sanitize_key((string)($record['source']??''))==='tarifcheck_credit_all_cost_categories';
+        $record_source=sanitize_key((string)($record['source']??''));
+        $multi_source=in_array($record_source,array(
+            'tarifcheck_credit_all_cost_categories',
+            'tarifcheck_insurance_all_insurance_categories',
+        ),true);
         if($multi_source){
             foreach($portal_records as $stored_record){
                 if(sanitize_key((string)($stored_record['state']??''))!=='mapped'
-                    || sanitize_key((string)($stored_record['source']??''))!=='tarifcheck_credit_all_cost_categories'){continue;}
+                    || sanitize_key((string)($stored_record['source']??''))!==$record_source){continue;}
                 $stored_target=$this->output_resolve_target_key($targets,sanitize_text_field((string)($stored_record['target_key']??'')));
                 if(!is_array($stored_target)){continue;}
                 if(method_exists($this,'control_target_gate')
@@ -937,12 +941,14 @@ trait PPAR_Output_Objects_Trait {
         return array(
             'status'=>'ready',
             'confidence'=>absint($record['confidence']??($state==='general'?1:100)),
-            'reason'=>$multi_source
+            'reason'=>$record_source==='tarifcheck_credit_all_cost_categories'
                 ? 'Gespeicherte Tarifcheck-Kredit-Zielkarte für alle Kosten-Kategorien.'
-                : ($state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.'),
+                : ($record_source==='tarifcheck_insurance_all_insurance_categories'
+                    ? 'Gespeicherte Tarifcheck-Versicherungs-Zielkarte für alle Versicherungs-Kategorien.'
+                    : ($state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.')),
             'target'=>$target,
             'alternatives'=>array(),
-            'source'=>$multi_source?'tarifcheck_credit_all_cost_categories':($state==='general'?'creative_library_general_fallback':'creative_library_destination_map'),
+            'source'=>$multi_source?$record_source:($state==='general'?'creative_library_general_fallback':'creative_library_destination_map'),
             '_ppar_destination_level'=>$level,
             '_ppar_banner_target_keys'=>array_values($stored_campaign_targets),
         );
@@ -1067,8 +1073,11 @@ trait PPAR_Output_Objects_Trait {
                 && preg_match('/-kosten$/', $slug) === 1;
         }
         if ($family === 'versicherung') {
-            // Versicherungsbanner bleiben ausschließlich im echten
-            // "Wissen > Versicherungen & Recht > ..." Kategorieast.
+            // Versicherungsbanner bleiben ausschließlich in echten Blatt-
+            // kategorien des Astes "Wissen > Versicherungen & Recht > ...".
+            if (sanitize_key((string)($target['context'] ?? '')) !== 'leaf_category') {
+                return false;
+            }
             foreach ($parts as $part) {
                 if ($part === 'versicherungen recht' || $part === 'versicherungen und recht') {
                     return true;
@@ -1132,7 +1141,7 @@ trait PPAR_Output_Objects_Trait {
                     $reuse=$record; break;
                 }
             }
-            if($tarifcheck_family!=='kosten' && is_array($reuse)){
+            if(!in_array($tarifcheck_family,array('kosten','versicherung'),true) && is_array($reuse)){
                 $new_records[]=$reuse;
                 $mapped++;
                 continue;
@@ -1142,26 +1151,32 @@ trait PPAR_Output_Objects_Trait {
             if(is_wp_error($targets)){continue;}
             $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
 
-            // Tarifcheck Kredit: nach eindeutiger URL-Familienprüfung nicht
-            // erneut semantisch auf EIN Kosten-Thema verengen. Der reale Baum
-            // enthält viele verteilte Kosten-Blätter. Alle echten Kosten-
-            // Kategorien werden als feste Zielkarte gespeichert.
-            if($tarifcheck_family==='kosten'){
+            // Tarifcheck: nach eindeutiger URL-Familienprüfung nicht erneut
+            // semantisch auf EIN Blatt verengen. Kredit geht auf alle echten
+            // Kosten-Blätter; Versicherung auf alle echten Blätter im Ast
+            // "Wissen > Versicherungen & Recht".
+            if(in_array($tarifcheck_family,array('kosten','versicherung'),true)){
+                $map_source=$tarifcheck_family==='kosten'
+                    ? 'tarifcheck_credit_all_cost_categories'
+                    : 'tarifcheck_insurance_all_insurance_categories';
+                $map_level=$tarifcheck_family==='kosten'
+                    ? 'all_cost_categories'
+                    : 'all_insurance_categories';
                 foreach((array)$targets as $target){
                     if(!is_array($target)){continue;}
                     $type=sanitize_key((string)($target['type']??''));
-                    if(!in_array($type,$wanted,true) || !$this->output_tarifcheck_target_allowed($target,'kosten')){continue;}
+                    if(!in_array($type,$wanted,true) || !$this->output_tarifcheck_target_allowed($target,$tarifcheck_family)){continue;}
                     $target_key=sanitize_text_field((string)($target['key']??''));
                     if($target_key===''){continue;}
                     if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
                     $new_records[]=array(
                         'portal_key'=>$portal_key,
                         'state'=>'mapped',
-                        'level'=>'all_cost_categories',
+                        'level'=>$map_level,
                         'target_key'=>$target_key,
                         'target_label'=>sanitize_text_field((string)($target['label']??'')),
                         'confidence'=>100,
-                        'source'=>'tarifcheck_credit_all_cost_categories',
+                        'source'=>$map_source,
                         'destination_source'=>$source,
                         'destination_url'=>$destination,
                         'updated_at'=>time(),
