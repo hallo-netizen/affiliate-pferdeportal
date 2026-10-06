@@ -36,6 +36,8 @@ Hard performance/database rules:
 9. When an existing row learns a better destination, only destination/provenance and derived topic mapping state are updated; image verification evidence remains untouched.
 10. ADCELL banner import no longer depends on a separate getPromotionCategories request. promotionCategoryId/name remain optional provider metadata if directly present in the banner response.
 11. Output runtime treats resolved_redirect as semantic evidence and tracking_checked as non-semantic fallback. No runtime URL resolution was added.
+12. The historical 6.72.88 category resync is suppressed on 6.72.189 to prevent a duplicate full ADCELL programme run on fresh installs.
+13. 6.72.189 uses its own destination-url resync state/hook, so an older category-resync done-state cannot suppress the new URL backfill.
 
 ## Local simulation
 Isolated PHP import/cache simulation executed locally on 2026-10-06.
@@ -49,15 +51,22 @@ PASS cases:
 - new unresolvable banner => exactly 1 attempt;
 - unchanged previously-unresolvable banner => 0 additional URL checks;
 - frontend context => 0 HTTP checks;
+- locally encoded destination => 0 HTTP checks;
+- failed first lookup => compact tracking_checked state;
+- unchanged failed lookup => 0 repeated HTTP checks;
+- one batched existing-banner DB read per simulated ADCELL import run;
+- historical 6.72.88 resync suppressed on 6.72.189;
 - storage shape remains existing tracking_url + destination_url + provenance only;
 - isolated PHP syntax harness PASS.
+
+Result: 16/16 PASS.
 
 The simulation is not a substitute for the full WordPress/MariaDB release gate.
 
 ## Source binding
 - version: 6.72.189
 - source file count: 27
-- source manifest SHA256: 38a02094e522ae7a565921271fe5b63c7928c433625728a8fa30009ff58b7829
+- source manifest SHA256: 9414214c15ff2d1ad1565473960aa0364473157cdbdaa4c54abcf85a563a1b95
 - final installer: absent
 - release_allowed: false
 
