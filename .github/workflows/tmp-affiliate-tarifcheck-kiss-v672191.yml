@@ -118,11 +118,14 @@ jobs:
           grep -F 'PASS credit_mapped_all_unique_cost_categories' /tmp/tarifcheck.log
           grep -F 'PASS credit_has_66_fixed_cost_targets' /tmp/tarifcheck.log
           grep -F 'PASS credit_url_beats_insurance_title' /tmp/tarifcheck.log
+          grep -F 'PASS insurance_mapped_all_insurance_categories' /tmp/tarifcheck.log
+          grep -F 'PASS insurance_has_14_fixed_targets' /tmp/tarifcheck.log
           grep -F 'PASS insurance_url_beats_credit_title' /tmp/tarifcheck.log
           grep -F 'PASS unknown_tarifcheck_fail_closed' /tmp/tarifcheck.log
           grep -F 'PASS mixed_family_fail_closed' /tmp/tarifcheck.log
           grep -F 'PASS runtime_exposes_all_cost_campaign_targets' /tmp/tarifcheck.log
-          grep -F 'TARIFCHECK_KISS_672191_ALL_COST_CATEGORIES_COMPLETE' /tmp/tarifcheck.log
+          grep -F 'PASS runtime_exposes_all_insurance_campaign_targets' /tmp/tarifcheck.log
+          grep -F 'TARIFCHECK_KISS_672191_ALL_COST_AND_INSURANCE_CATEGORIES_COMPLETE' /tmp/tarifcheck.log
           AFTER_TABLES=$(mysql -N -h127.0.0.1 -uwordpress -pwordpress wordpress -e "SHOW TABLES" | wc -l)
           test "$BEFORE_TABLES" = "$AFTER_TABLES"
           echo "PASS no new tables during Tarifcheck import/map"
