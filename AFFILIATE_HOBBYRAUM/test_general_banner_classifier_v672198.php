@@ -173,6 +173,10 @@ $m5=$call('output_assign_banner_targets_from_destination_once',$rows['no_evidenc
 $k5=$getKeys($m5);
 $ok($k5===array(),'tracking_only_no_evidence_fail_closed',wp_json_encode($k5));
 
+$pre1=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE id=%d",(int)$rows['content_schabracken']['id']),ARRAY_A);
+$prePlan1=$call('output_plan_creative',$pre1,true);
+echo "DIAG pre_plan_schabracken ".wp_json_encode($prePlan1)."\n";
+
 // Ganze Reconcile-Runde: alte Karten werden geloescht, alle aktiven Banner neu
 // bewertet und nur belastbare Treffer wieder materialisiert.
 delete_option('ppar_v672198_banner_reconcile_state');
