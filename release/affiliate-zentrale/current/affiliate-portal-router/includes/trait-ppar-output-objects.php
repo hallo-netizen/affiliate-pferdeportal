@@ -1010,6 +1010,119 @@ trait PPAR_Output_Objects_Trait {
         );
     }
 
+    /**
+     * Allgemeine automatische Banner-Fachzuordnung.
+     * Reihenfolge: explizites Provider-Thema -> konkreter Bannerinhalt.
+     * Ziel-URL wird bewusst erst spaeter als Fallback ausgewertet.
+     * Nur ein eindeutiger Treffer wird akzeptiert.
+     */
+    private function output_banner_content_classification($row,$portal,$targets=null) {
+        if(!is_array($row)){return null;}
+
+        $provider_exact=$this->output_banner_provider_topic_classification($row,$portal);
+        if(is_wp_error($provider_exact)){return $provider_exact;}
+        if(is_array($provider_exact)){return $provider_exact;}
+
+        if($targets===null){
+            $targets=$this->output_portal_targets($portal);
+            if(is_wp_error($targets)){return $targets;}
+        }
+
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+        $parts=array(
+            (string)($row['title']??''),
+            (string)($row['description']??''),
+            (string)($row['tags']??''),
+            (string)($payload['provider_topic_name']??''),
+            (string)($payload['promotion_category_name']??''),
+            (string)($payload['information']??''),
+            (string)($payload['alt_text']??''),
+            (string)($payload['banner_name']??''),
+            (string)($payload['name']??''),
+        );
+        $evidence=$this->output_text(implode(' ',array_filter($parts)));
+        if($evidence===''){return null;}
+        $evidence_tokens=array_values(array_unique($this->output_tokens($evidence)));
+        if(!$evidence_tokens){return null;}
+
+        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        $ranked=array();
+
+        foreach((array)$targets as $target){
+            if(!is_array($target)){continue;}
+            $type=sanitize_key((string)($target['type']??''));
+            if(!in_array($type,$wanted,true)){continue;}
+            $target_key=sanitize_text_field((string)($target['key']??''));
+            if($target_key===''){continue;}
+            if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
+
+            $label_parts=preg_split('/\s+>\s+/',html_entity_decode((string)($target['label']??''),ENT_QUOTES,'UTF-8'));
+            $leaf=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
+            $slug=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
+            $leaf_tokens=array_values(array_filter(array_unique($this->output_tokens($leaf)),static function($t){return strlen((string)$t)>=4;}));
+            $slug_tokens=array_values(array_filter(array_unique($this->output_tokens($slug)),static function($t){return strlen((string)$t)>=4;}));
+            if(!$leaf_tokens && !$slug_tokens){continue;}
+
+            $score=0;
+            $matched_source='';
+            $phrase_match=static function($haystack,$needle){
+                if($needle===''){return false;}
+                return preg_match('/(^|\\s)'.preg_quote($needle,'/').'(\\s|$)/u',$haystack)===1;
+            };
+
+            if($leaf!=='' && $phrase_match($evidence,$leaf)){
+                $score=1300 + min(90,absint($target['depth']??0)*10);
+                $matched_source='leaf_phrase';
+            } elseif($slug!=='' && $phrase_match($evidence,$slug)){
+                $score=1250 + min(90,absint($target['depth']??0)*10);
+                $matched_source='slug_phrase';
+            } else {
+                $leaf_complete=$leaf_tokens && !array_diff($leaf_tokens,$evidence_tokens);
+                $slug_complete=$slug_tokens && !array_diff($slug_tokens,$evidence_tokens);
+                if($leaf_complete){
+                    $score=1050 + count($leaf_tokens)*20 + min(90,absint($target['depth']??0)*10);
+                    $matched_source='leaf_tokens';
+                } elseif($slug_complete){
+                    $score=1000 + count($slug_tokens)*20 + min(90,absint($target['depth']??0)*10);
+                    $matched_source='slug_tokens';
+                } elseif(count($leaf_tokens)===1 && strlen((string)$leaf_tokens[0])>=5 && in_array($leaf_tokens[0],$evidence_tokens,true)){
+                    $score=800 + min(90,absint($target['depth']??0)*10);
+                    $matched_source='leaf_token';
+                }
+            }
+
+            if($score>0){
+                $ranked[]=array('target'=>$target,'score'=>$score,'matched_source'=>$matched_source);
+            }
+        }
+
+        usort($ranked,static function($a,$b){
+            $c=(int)$b['score']<=>(int)$a['score'];
+            if($c!==0){return $c;}
+            return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);
+        });
+        if(!$ranked){return null;}
+        $best=$ranked[0];
+        $second=$ranked[1]??null;
+        if($second!==null && ((int)$best['score']-(int)$second['score'])<100){
+            return null;
+        }
+
+        $target=$best['target'];
+        $target['_ppar_destination_match_level']='content_exact';
+        return array(
+            'status'=>'ready',
+            'confidence'=>100,
+            'reason'=>'Bannerinhalt passt eindeutig zu genau einem Portalziel.',
+            'target'=>$target,
+            'alternatives'=>array(),
+            'source'=>'banner_content_exact',
+            '_ppar_destination_level'=>'content_exact',
+        );
+    }
+
     private function output_banner_destination_classification($row,$portal) {
         // HARD RULE:
         // Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern.
@@ -1115,7 +1228,10 @@ trait PPAR_Output_Objects_Trait {
         if($row_id<=0 || !method_exists($this,'creative_library_table')) {
             return array('updated'=>0,'mapped'=>0,'reason'=>'missing_row');
         }
+
         $source=$this->output_banner_destination_source($row);
+        $destination=esc_url_raw((string)($row['destination_url']??''));
+        $semantic=$this->output_destination_semantic_text($row);
         $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
@@ -1123,21 +1239,6 @@ trait PPAR_Output_Objects_Trait {
         $manual_tarifcheck=in_array($manual_tarifcheck_family,array('kosten','versicherung'),true)
             && $tarifcheck_family===$manual_tarifcheck_family;
 
-        // 6.72.195: Ein manuell als Tarifcheck-Kredit oder -Versicherung
-        // gekennzeichneter Import braucht keine semantisch lesbare Ziel-URL.
-        // Die fachliche Gruppe wurde bereits explizit festgelegt; der originale
-        // Trackinglink bleibt nur die Ausgabeverbindung. Alle nicht expliziten
-        // Banner bleiben unverändert fail-closed und brauchen eine echte Ziel-URL.
-        if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true) && !$manual_tarifcheck){
-            return array('updated'=>0,'mapped'=>0,'reason'=>'no_real_destination');
-        }
-        $destination=esc_url_raw((string)($row['destination_url']??''));
-        $semantic=$this->output_destination_semantic_text($row);
-        if($destination==='' || ($semantic==='' && !$manual_tarifcheck)){
-            return array('updated'=>0,'mapped'=>0,'reason'=>'destination_unusable');
-        }
-
-        $existing=$this->output_banner_library_records($row);
         $portals=$this->output_portal_registry();
         $new_records=array();
         $mapped=0;
@@ -1147,39 +1248,12 @@ trait PPAR_Output_Objects_Trait {
             $portal_key=sanitize_key((string)($portal['key']??''));
             if($portal_key===''){continue;}
 
-            // Für Tarifcheck-Kredit wird die komplette Kosten-Zielmenge unten
-            // aus dem realen Zielkatalog aufgebaut; nie auf einen Alt-Einzelrecord verkürzen.
-            $reuse=null;
-            foreach($existing as $record){
-                $stored_target_key=sanitize_text_field((string)($record['target_key']??''));
-                $stored_target_type=strpos($stored_target_key, ':')!==false ? sanitize_key(strstr($stored_target_key, ':', true)) : '';
-                $stored_target=array(
-                    'type'=>$stored_target_type,
-                    'label'=>sanitize_text_field((string)($record['target_label']??'')),
-                    'slug'=>'',
-                );
-                if(sanitize_key((string)($record['portal_key']??''))===$portal_key
-                    && sanitize_key((string)($record['state']??''))==='mapped'
-                    && esc_url_raw((string)($record['destination_url']??''))===$destination
-                    && $stored_target_key!==''
-                    && $this->output_tarifcheck_target_allowed($stored_target,$tarifcheck_family)){
-                    $reuse=$record; break;
-                }
-            }
-            if(!in_array($tarifcheck_family,array('kosten','versicherung'),true) && is_array($reuse)){
-                $new_records[]=$reuse;
-                $mapped++;
-                continue;
-            }
-
             $targets=$this->output_portal_targets($portal);
             if(is_wp_error($targets)){continue;}
             $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
 
-            // Tarifcheck: nach eindeutiger URL-Familienprüfung nicht erneut
-            // semantisch auf EIN Blatt verengen. Kredit geht auf alle echten
-            // Kosten-Blätter; Versicherung auf alle echten Blätter im Ast
-            // "Wissen > Versicherungen & Recht".
+            // Tarifcheck bleibt bewusst gruppenbasiert. Eine explizit gesetzte
+            // Gruppe ist Autoritaet; unsichere Trackinglinks werden nicht geraten.
             if(in_array($tarifcheck_family,array('kosten','versicherung'),true)){
                 $map_source=$tarifcheck_family==='kosten'
                     ? 'tarifcheck_credit_all_cost_categories'
@@ -1210,15 +1284,48 @@ trait PPAR_Output_Objects_Trait {
                 }
                 continue;
             }
+            if($tarifcheck_family==='blocked'){
+                continue;
+            }
+
+            // 1. Konkreter Bannerinhalt/Provider-Thema hat Vorrang.
+            $content=$this->output_banner_content_classification($row,$portal,$targets);
+            if(is_wp_error($content)){continue;}
+            if(is_array($content) && sanitize_key((string)($content['status']??''))==='ready' && is_array($content['target']??null)){
+                $target=$content['target'];
+                $target_key=sanitize_text_field((string)($target['key']??''));
+                if($target_key!==''){
+                    $new_records[]=array(
+                        'portal_key'=>$portal_key,
+                        'state'=>'mapped',
+                        'level'=>'content_exact',
+                        'target_key'=>$target_key,
+                        'target_label'=>sanitize_text_field((string)($target['label']??'')),
+                        'confidence'=>100,
+                        'source'=>sanitize_key((string)($content['source']??'banner_content_exact')),
+                        'destination_source'=>$source,
+                        'destination_url'=>$destination,
+                        'updated_at'=>time(),
+                    );
+                    $mapped++;
+                    continue;
+                }
+            }
+
+            // 2. Ziel-URL ist nur noch Fallback und nur dann zulaessig, wenn
+            // sie wirklich belastbar ist. Alte gespeicherte Karten werden nie
+            // wiederverwendet; jede Reconcile-Runde baut aus aktuellen Daten neu.
+            if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)
+                || $destination==='' || $semantic===''){
+                continue;
+            }
 
             $dest_tokens=$this->output_tokens($semantic);
             $ranked=array();
-
             foreach((array)$targets as $target){
                 if(!is_array($target)){continue;}
                 $type=sanitize_key((string)($target['type']??''));
                 if(!in_array($type,$wanted,true)){continue;}
-                if(!$this->output_tarifcheck_target_allowed($target,$tarifcheck_family)){continue;}
                 $target_key=sanitize_text_field((string)($target['key']??''));
                 if($target_key===''){continue;}
                 if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
@@ -1242,7 +1349,11 @@ trait PPAR_Output_Objects_Trait {
                 if($score>0){$ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);}
             }
 
-            usort($ranked,static function($a,$b){$c=(int)$b['score']<=>(int)$a['score'];if($c!==0)return $c;$c=(int)$b['matches']<=>(int)$a['matches'];if($c!==0)return $c;return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);});
+            usort($ranked,static function($a,$b){
+                $c=(int)$b['score']<=>(int)$a['score']; if($c!==0)return $c;
+                $c=(int)$b['matches']<=>(int)$a['matches']; if($c!==0)return $c;
+                return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);
+            });
             if(!$ranked){continue;}
             $best=$ranked[0]; $second=$ranked[1]??null;
             $margin=(int)$best['score']-(int)($second['score']??0);
@@ -1257,7 +1368,7 @@ trait PPAR_Output_Objects_Trait {
                 'target_key'=>sanitize_text_field((string)($target['key']??'')),
                 'target_label'=>sanitize_text_field((string)($target['label']??'')),
                 'confidence'=>!empty($best['exact'])?100:80,
-                'source'=>'import_destination_url',
+                'source'=>'import_destination_url_fallback',
                 'destination_source'=>$source,
                 'destination_url'=>$destination,
                 'updated_at'=>time(),
