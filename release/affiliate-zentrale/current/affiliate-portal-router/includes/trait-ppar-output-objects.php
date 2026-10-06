@@ -1249,7 +1249,12 @@ trait PPAR_Output_Objects_Trait {
             'classified_at'=>time(),
         ),array('id'=>$row_id));
 
-        return array('updated'=>1,'mapped'=>$mapped,'reason'=>$mapped>0?'mapped':'no_match');
+        return array(
+            'updated'=>1,
+            'mapped'=>$mapped,
+            'reason'=>$mapped>0?'mapped':'no_match',
+            'targets'=>$new_records,
+        );
     }
 
     private function output_banner_compatible_slots($row,$portal) {
