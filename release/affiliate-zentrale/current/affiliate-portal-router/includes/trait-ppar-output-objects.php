@@ -1116,12 +1116,24 @@ trait PPAR_Output_Objects_Trait {
             return array('updated'=>0,'mapped'=>0,'reason'=>'missing_row');
         }
         $source=$this->output_banner_destination_source($row);
-        if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)){
+        $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+        $manual_tarifcheck_family=sanitize_key((string)($payload['_manual_target_family']??''));
+        $manual_tarifcheck=in_array($manual_tarifcheck_family,array('kosten','versicherung'),true)
+            && $tarifcheck_family===$manual_tarifcheck_family;
+
+        // 6.72.195: Ein manuell als Tarifcheck-Kredit oder -Versicherung
+        // gekennzeichneter Import braucht keine semantisch lesbare Ziel-URL.
+        // Die fachliche Gruppe wurde bereits explizit festgelegt; der originale
+        // Trackinglink bleibt nur die Ausgabeverbindung. Alle nicht expliziten
+        // Banner bleiben unverändert fail-closed und brauchen eine echte Ziel-URL.
+        if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true) && !$manual_tarifcheck){
             return array('updated'=>0,'mapped'=>0,'reason'=>'no_real_destination');
         }
         $destination=esc_url_raw((string)($row['destination_url']??''));
         $semantic=$this->output_destination_semantic_text($row);
-        if($destination==='' || $semantic===''){
+        if($destination==='' || ($semantic==='' && !$manual_tarifcheck)){
             return array('updated'=>0,'mapped'=>0,'reason'=>'destination_unusable');
         }
 
@@ -1129,7 +1141,6 @@ trait PPAR_Output_Objects_Trait {
         $portals=$this->output_portal_registry();
         $new_records=array();
         $mapped=0;
-        $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
 
         foreach((array)$portals as $portal){
             if(!is_array($portal) || empty($portal['enabled'])){continue;}
