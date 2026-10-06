@@ -3460,7 +3460,9 @@ trait PPAR_Automation_Suite_Trait {
         $state = sanitize_key((string)get_option($state_key, ''));
         if ($state === 'done') { return; }
         if ($state !== 'running') {
-            $prefix = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_';
+            $prefix = self::VERSION === '6.72.199'
+            ? 'ppar_v672199_banner_reconcile_'
+            : (self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_');
             delete_option($prefix . 'cursor');
             delete_option($prefix . 'result');
             delete_option($prefix . 'reset_done');
@@ -3472,7 +3474,7 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     public function run_v672195_banner_reconcile() {
-        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197','6.72.198'), true)
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197','6.72.198','6.72.199'), true)
             || !method_exists($this, 'creative_library_table')
             || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
             || !method_exists($this, 'creative_library_deactivate_all_automatic_banner_campaigns')) {
@@ -3604,6 +3606,141 @@ trait PPAR_Automation_Suite_Trait {
         update_option($state_key, 'done', false);
         if (method_exists($this, 'article_plan_bump_campaign_revision')) {
             $this->article_plan_bump_campaign_revision('v672195_banner_reconcile_complete');
+        }
+    }
+
+
+    /**
+     * V6.72.199 – Basis-Nachlauf fuer bestehende ADCELL-Banner.
+     *
+     * Der Importvertrag wurde korrigiert: Original-Providerdatensatz bleibt
+     * erhalten und promotionCategoryId wird ueber getPromotionCategories in
+     * den echten Kategorienamen aufgeloest. Dieser Nachlauf sorgt dafuer, dass
+     * nicht nur neue Banner davon profitieren.
+     *
+     * Ablauf:
+     * 1. alle freigegebenen ADCELL-Programme normal neu einlesen;
+     * 2. auf den Abschluss aller ADCELL-Jobs warten;
+     * 3. erst dann alte automatische Bannerkampagnen global stilllegen und
+     *    aus der frisch gespeicherten Bibliothek deterministisch neu aufbauen.
+     * Kein Provider-HTTP im Frontend.
+     */
+    public function maybe_upgrade_adcell_banner_import_basis_v672199() {
+        if (self::VERSION !== '6.72.199'
+            || !is_admin()
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+            return;
+        }
+        $state_key = 'ppar_v672199_adcell_banner_basis_state';
+        $state = sanitize_key((string) get_option($state_key, ''));
+        if ($state === 'done') {
+            return;
+        }
+        if ($state === '') {
+            delete_option('ppar_v672199_adcell_banner_basis_result');
+            update_option($state_key, 'scheduled', false);
+        }
+        if (!wp_next_scheduled('ppar_v672199_adcell_banner_basis_resync')) {
+            wp_schedule_single_event(time() + 1, 'ppar_v672199_adcell_banner_basis_resync');
+        }
+    }
+
+    private function automation_v672199_schedule_basis_resync($delay) {
+        if (!wp_next_scheduled('ppar_v672199_adcell_banner_basis_resync')) {
+            wp_schedule_single_event(time() + max(1, absint($delay)), 'ppar_v672199_adcell_banner_basis_resync');
+        }
+    }
+
+    public function run_v672199_adcell_banner_basis_resync() {
+        if (self::VERSION !== '6.72.199') {
+            return;
+        }
+
+        $state_key = 'ppar_v672199_adcell_banner_basis_state';
+        $result_key = 'ppar_v672199_adcell_banner_basis_result';
+        $state = sanitize_key((string) get_option($state_key, ''));
+        $result = get_option($result_key, array());
+        $result = is_array($result) ? $result : array();
+
+        if ($state === 'done') {
+            return;
+        }
+
+        // Portale ohne aktiven ADCELL-Zugang haben keinen Altbestand
+        // nachzuziehen. Der Release bleibt dort ohne Provideraufruf abgeschlossen.
+        $settings = method_exists($this, 'network_settings') ? $this->network_settings('adcell') : array();
+        $credentials_present = method_exists($this, 'network_credentials_present')
+            ? $this->network_credentials_present('adcell', $settings) : false;
+        $allowlist = method_exists($this, 'adcell_program_id_allowlist')
+            ? (array) $this->adcell_program_id_allowlist() : array();
+        if (empty($settings['enabled']) || !$credentials_present || !$allowlist) {
+            $result['status'] = 'skipped_no_active_adcell';
+            $result['updated_at'] = time();
+            update_option($result_key, $result, false);
+            update_option($state_key, 'done', false);
+            return;
+        }
+
+        if (in_array($state, array('', 'scheduled', 'retry'), true)) {
+            $started_at = time();
+            $result['started_at'] = $started_at;
+            $result['attempt'] = absint($result['attempt'] ?? 0) + 1;
+            $batch = $this->automation_start_all_adcell_programmes();
+            if (is_wp_error($batch)) {
+                $result['status'] = 'retry';
+                $result['error_code'] = sanitize_key((string) $batch->get_error_code());
+                $result['error_message'] = sanitize_text_field((string) $batch->get_error_message());
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'retry', false);
+                $this->automation_v672199_schedule_basis_resync(300);
+                return;
+            }
+            $result['status'] = 'waiting_jobs';
+            $result['batch'] = $batch;
+            $result['updated_at'] = time();
+            update_option($result_key, $result, false);
+            update_option($state_key, 'waiting_jobs', false);
+            if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                $this->automation_schedule_adcell_batch_worker(0);
+            }
+            $this->automation_v672199_schedule_basis_resync(10);
+            return;
+        }
+
+        if ($state === 'waiting_jobs') {
+            if (method_exists($this, 'automation_has_open_jobs') && $this->automation_has_open_jobs('adcell')) {
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+
+            // Erst nach abgeschlossenem Import darf auf Basis der neuen
+            // Providerdaten neu klassifiziert/materialisiert werden.
+            $prefix = 'ppar_v672199_banner_reconcile_';
+            foreach (array('state','cursor','result','reset_done') as $suffix) {
+                delete_option($prefix . $suffix);
+            }
+            update_option($prefix . 'state', 'running', false);
+            update_option($state_key, 'reconciling', false);
+            $state = 'reconciling';
+        }
+
+        if ($state === 'reconciling') {
+            $this->run_v672195_banner_reconcile();
+            if (sanitize_key((string) get_option('ppar_v672199_banner_reconcile_state', '')) === 'done') {
+                $result = get_option($result_key, array());
+                $result = is_array($result) ? $result : array();
+                $result['status'] = 'done';
+                $result['reconcile'] = get_option('ppar_v672199_banner_reconcile_result', array());
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'done', false);
+                return;
+            }
+            $this->automation_v672199_schedule_basis_resync(10);
         }
     }
 
