@@ -1446,6 +1446,18 @@ trait PPAR_Creative_Library_Trait {
             }
         }
 
+        // 6.72.194 KISS: Tarifcheck ist ein bewusst manuell gepflegter
+        // Direktpartner. Er muss im Import wirklich auswählbar sein und darf
+        // nicht von einem bereits vorhandenen Intake-Snapshot abhängen.
+        // Kein neuer Provideradapter: die vorhandene Direct-Logik bleibt Autorität.
+        if (!isset($out['direct:tarifcheck'])) {
+            $out['direct:tarifcheck'] = array(
+                'provider'=>'direct',
+                'external_id'=>'tarifcheck',
+                'name'=>'Tarifcheck',
+            );
+        }
+
         uasort($out, static function ($left, $right) {
             $provider_cmp = strnatcasecmp((string) ($left['provider'] ?? ''), (string) ($right['provider'] ?? ''));
             return $provider_cmp !== 0 ? $provider_cmp : strnatcasecmp((string) ($left['name'] ?? ''), (string) ($right['name'] ?? ''));
