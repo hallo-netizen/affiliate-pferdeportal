@@ -9,6 +9,13 @@ on:
       - 'release/affiliate-zentrale/tests/test_adcell_banner_import_basis.php'
       - '.github/workflows/tmp-affiliate-banner-import-basis.yml'
   workflow_dispatch:
+  pull_request:
+    branches:
+      - affiliate-release-current
+    paths:
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php'
+      - 'release/affiliate-zentrale/tests/test_adcell_banner_import_basis.php'
+      - '.github/workflows/tmp-affiliate-banner-import-basis.yml'
 
 permissions:
   contents: read
