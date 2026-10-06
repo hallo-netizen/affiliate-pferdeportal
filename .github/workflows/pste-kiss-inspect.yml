@@ -11,17 +11,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Search all Git history for current blocker evidence
+      - name: Search all refs for exact PSERC 0.28.30 package trail
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
-          echo '=== PAA_RELATED HISTORY ==='
-          git log --all -S'PAA_RELATED' --format='%H %ci %s' --name-only -- || true
-          echo '=== PAA_RELATED CURRENT REFS ==='
-          while read -r ref; do
-            git grep -n -I -F 'PAA_RELATED' "$ref" -- '*.json' '*.php' '*.py' '*.md' 2>/dev/null | head -20 || true
-          done < <(git for-each-ref --format='%(refname)' refs/remotes/origin) | sort -u | head -200
-          echo '=== 4472 / CURRENT BLOCKER HISTORY ==='
-          git log --all -S'4472' --format='%H %ci %s' --name-only -- || true
-          git log --all -S'BLOCKED_PORTAL_TOPIC_EVIDENCE' --format='%H %ci %s' --name-only -- || true
+          for needle in '0.28.30' '0.28.30-pste-v5-binding-safe' 'pste-v5-binding-safe'; do
+            echo "=== HISTORY needle=$needle ==="
+            git log --all -S"$needle" --format='%H %ci %s' --name-only -- || true
+            echo "=== CURRENT_REFS needle=$needle ==="
+            while read -r ref; do
+              git grep -n -I -F "$needle" "$ref" -- '*.json' '*.php' '*.py' '*.md' '*.yml' '*.yaml' '*.txt' 2>/dev/null | head -20 || true
+            done < <(git for-each-ref --format='%(refname)' refs/remotes/origin) | sort -u | head -400
+          done
