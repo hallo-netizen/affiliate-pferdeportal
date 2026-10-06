@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 233,
+  "generation": 234,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.195",
-    "status": "SOURCE_6_72_195_DETERMINISTIC_BANNER_RECONCILE_LOCAL_SIM_PASS_WORDPRESS_MARIADB_OPEN",
+    "status": "SOURCE_6_72_195_WORDPRESS_MARIADB_PASS_FINAL_ZIP_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,7 +44,7 @@
     "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "6.72.194 is live-disproved for Schabracken. 6.72.195 removes the structural stale-auto-campaign dependency by globally deactivating automatic output_object_v4 banner campaigns before rebuilding from current Creative-Library target maps. Tarifcheck manual groups are now explicit stored authority (Versicherungen or Kreditvergleich/Kosten) instead of being inferred from tracking URLs. Local positive/negative simulation 12/12 PASS. Exact WordPress/MariaDB and final ZIP proof remain open.",
+    "candidate_reference_scope": "6.72.194 is live-disproved for Schabracken. 6.72.195 uses a deterministic global reset of automatic output_object_v4 banner projections, then rebuilds only from current Creative-Library target maps. Tarifcheck manual groups are explicit stored authority. Local simulation PASS and real WordPress 7.1.2 + MariaDB 10.11 hardtest run 37489630643 PASS, including stale unlinked auto-banner removal, Schabracken rematerialization, explicit cost/insurance mapping, fail-closed unknown Tarifcheck, manual banner preservation, and product preservation. Final exact ZIP proof remains open.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
@@ -61,7 +61,7 @@
     "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
     "current_focus_reason": "6.72.194 live failed again for Schabracken. Root cause is structural: old automatic campaign projections could survive when historical identity linkage was missing/wrong, while Tarifcheck manual group intent was never stored and could disappear behind tracking-only URLs. 6.72.195 makes automatic campaigns disposable projections of current Creative-Library target maps and makes the manually chosen Tarifcheck family explicit authority.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_195_SOURCE_LOCAL_SIM_PASS_WORDPRESS_MARIADB_OPEN",
+    "adcell_work_status": "6_72_195_WORDPRESS_MARIADB_PASS_FINAL_ZIP_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -412,10 +412,11 @@
         "unknown_unassigned_tarifcheck": "FAIL_CLOSED_NO_TARGET_MAP_NO_BANNER",
         "local_positive_negative_simulation": "PASS_12_OF_12",
         "source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
-        "wordpress_mariadb": "OPEN",
+        "wordpress_mariadb": "PASS_RUN_37489630643",
         "final_zip": "OPEN",
         "live_readback": "OPEN",
-        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md"
+        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
+        "php_lint": "PASS_22_OF_22"
       }
     },
     "awin_catalog_refresh": {
@@ -843,10 +844,10 @@
     }
   },
   "execution_state": {
-    "state": "SOURCE_6_72_195_LOCAL_SIM_PASS_BOUND_WORDPRESS_MARIADB_GATE_OPEN",
+    "state": "SOURCE_6_72_195_WORDPRESS_MARIADB_PASS_FINAL_ZIP_GATE_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Test the exact 6.72.195 source in real WordPress/MariaDB before any installer is handed off. Required cases: stale active automatic Fütterung banner with missing/wrong identity metadata must be globally disabled; current Schabracken target must rematerialize as the only active automatic banner for that case; manual/FIXED banner and product campaigns must remain intact; existing Tarifcheck banners explicitly assigned to Versicherungen must map to all real insurance leaf categories; existing Tarifcheck banners explicitly assigned to Kreditvergleich/Kosten must map to all real cost leaf categories; unassigned tracking-only/mixed Tarifcheck must remain fail-closed. Then run PHP lint, exact source manifest check, fresh ZIP unpack/byte identity and only then bind a final installer.",
-    "completion_condition": "EXACT_6_72_195_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_PASS_PLUS_PHP_LINT_PLUS_FINAL_ZIP_IDENTITY_PASS",
+    "bound_user_scope_action": "Build the final 6.72.195 installer from the exact current 28-file source manifest, fresh-unpack it, prove byte identity for every file, run PHP lint on the unpacked installer, install that exact ZIP into fresh WordPress 7.1.2 + MariaDB 10.11, rerun the deterministic Schabracken stale-unlinked-auto-banner case and both explicit Tarifcheck group cases, then bind the tested installer SHA256. Do not hand off any ZIP before all exact-installer gates pass.",
+    "completion_condition": "EXACT_6_72_195_FINAL_ZIP_FRESH_UNPACK_BYTE_IDENTITY_PHP_LINT_AND_WORDPRESS_MARIADB_PASS",
     "after_completion_action": "Only after the exact source and exact installer both pass may 6.72.195 be installed live. Then perform read-only Schabracken and both Tarifcheck group readbacks before closing AFF-ERR-050.",
     "no_optional_detours": true,
     "sequence": 83,
@@ -859,15 +860,15 @@
       "root_cause_stale_unlinked_auto_campaign": "REPRODUCED_LOCALLY",
       "tarifcheck_group_not_first_class_stored_input": "CONFIRMED_IN_SOURCE",
       "local_positive_negative_simulation": "PASS_12_OF_12",
-      "stale_unlinked_auto_banner_reset": "PASS",
-      "manual_banner_preserved": "PASS",
-      "product_campaign_preserved": "PASS",
-      "tarifcheck_explicit_kosten": "PASS",
-      "tarifcheck_explicit_versicherung": "PASS",
-      "tarifcheck_unknown_mixed_fail_closed": "PASS",
+      "stale_unlinked_auto_banner_reset": "PASS_REAL_WORDPRESS_MARIADB",
+      "manual_banner_preserved": "PASS_REAL_WORDPRESS_MARIADB",
+      "product_campaign_preserved": "PASS_REAL_WORDPRESS_MARIADB",
+      "tarifcheck_explicit_kosten": "PASS_REAL_WORDPRESS_MARIADB",
+      "tarifcheck_explicit_versicherung": "PASS_REAL_WORDPRESS_MARIADB",
+      "tarifcheck_unknown_mixed_fail_closed": "PASS_REAL_WORDPRESS_MARIADB",
       "source_manifest_binding": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
-      "php_lint_source": "OPEN",
-      "wordpress_mariadb": "OPEN",
+      "php_lint_source": "PASS_22_OF_22_RUN_37489630643",
+      "wordpress_mariadb": "PASS_RUN_37489630643",
       "final_zip_fresh_unpack": "OPEN"
     },
     "authorized_change_prefixes": [
