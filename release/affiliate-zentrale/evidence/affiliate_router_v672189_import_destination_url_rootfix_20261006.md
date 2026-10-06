@@ -93,3 +93,44 @@ Post-fix proof:
 - URL import/performance simulation remains PASS;
 - output runtime contains no call to the import-only destination resolver;
 - new/changed URL logic remains outside frontend hotpath.
+
+
+## Exact source-trait execution
+The current 6.72.189 trait files were executed directly in an isolated PHP harness with minimal WordPress/DB stubs; no copied method bodies were used.
+
+Import path PASS:
+- one batched existing-banner read per ADCELL programme import;
+- new banner resolves and carries the real destination;
+- unchanged resolved banner performs zero destination HTTP;
+- changed tracking URL performs one new bounded redirect-resolution path;
+- first unresolvable banner becomes tracking_checked;
+- unchanged tracking_checked banner performs zero repeated destination HTTP;
+- locally encoded destination performs zero HTTP;
+- resolved_redirect provenance is carried correctly.
+
+Marker: EXACT_TRAIT_URL_IMPORT_GATE_PASS
+
+DB/upsert path PASS:
+- same provider source + newly learned real destination updates the existing row;
+- no extra row is inserted;
+- old derived topic mapping is cleared for replan;
+- destination provenance is updated;
+- verified image hash, MIME, bytes, measurement time and dimension state are preserved;
+- exact repeat returns unchanged and does not grow storage.
+
+Marker: EXACT_TRAIT_DB_UPSERT_GATE_PASS
+
+## Temporary exact candidate ZIP pre-gate
+A temporary local candidate ZIP was built from the exact manifest-bound source only to run non-WordPress packaging checks. It is NOT the final installer and is not release-authorized.
+
+- candidate filename: AFFILIATE_ZENTRALE_6.72.189_CANDIDATE.zip
+- candidate SHA256: 38750d146caa6e468a655b0022e3fb73c8fbc1c531956e430299a779517caf38
+- candidate bytes: 794957
+- fresh unpack manifest identity: PASS 27/27
+- unpacked PHP lint: PASS 21/21
+- source/ZIP file-byte identity for all manifest files: PASS 27/27
+
+## Remaining hard blocker
+The exact real WordPress/MariaDB runtime gate is still OPEN. The local execution environment has neither a MariaDB/MySQL server nor PHP mysqli/pdo_mysql and external package/network access is blocked. Existing repository MariaDB workflows are version-bound to older candidates or modify the plugin copy before testing, so they are not valid evidence for this exact 6.72.189 manifest. No workflow or release architecture was changed to work around that limitation.
+
+Release remains forbidden until the exact manifest is proven on real WordPress/MariaDB.
