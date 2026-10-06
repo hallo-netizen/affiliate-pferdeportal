@@ -29,3 +29,12 @@ jobs:
           sed -n '1,360p' "$B"
           echo '=== CAPABILITY CONTRACT ==='
           cat "$(find /tmp/pserc2 -type f -path '*/contracts/seo-engine-capability-binding-v2.json' | head -1)"
+          echo '=== LIVE REST ROUTES READ ONLY ==='
+          curl -fsS --max-time 30 'https://pferde-atelier.de/wp-json/' -o /tmp/wp-rest.json
+          python3 - <<'PY'
+          import json,re
+          d=json.load(open('/tmp/wp-rest.json',encoding='utf-8-sig'))
+          for route in sorted((d.get('routes') or {})):
+              if re.search(r'pserc|editorial|seo|plugin|diagnos|performance|topic|themen',route,re.I):
+                  print(route)
+          PY
