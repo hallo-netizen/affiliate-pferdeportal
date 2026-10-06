@@ -8,21 +8,20 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect existing public WordPress REST surface read only
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Search all Git history for current blocker evidence
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsS --max-time 30 'https://pferde-atelier.de/wp-json/' -o /tmp/wp-rest.json
-          python3 - <<'PY'
-          import json
-          d=json.load(open('/tmp/wp-rest.json',encoding='utf-8-sig'))
-          print('=== NAMESPACES ===')
-          for ns in sorted(d.get('namespaces') or []):
-              print(ns)
-          print('=== NONCORE ROUTES ===')
-          core=('wp/','oembed/','batch/','wp-site-health/','wp-block-editor/','wp/v2/')
-          for route in sorted((d.get('routes') or {})):
-              x=route.lstrip('/')
-              if not x.startswith(core):
-                  print(route)
-          PY
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+          echo '=== PAA_RELATED HISTORY ==='
+          git log --all -S'PAA_RELATED' --format='%H %ci %s' --name-only -- || true
+          echo '=== PAA_RELATED CURRENT REFS ==='
+          while read -r ref; do
+            git grep -n -I -F 'PAA_RELATED' "$ref" -- '*.json' '*.php' '*.py' '*.md' 2>/dev/null | head -20 || true
+          done < <(git for-each-ref --format='%(refname)' refs/remotes/origin) | sort -u | head -200
+          echo '=== 4472 / CURRENT BLOCKER HISTORY ==='
+          git log --all -S'4472' --format='%H %ci %s' --name-only -- || true
+          git log --all -S'BLOCKED_PORTAL_TOPIC_EVIDENCE' --format='%H %ci %s' --name-only -- || true
