@@ -1168,6 +1168,30 @@ trait PPAR_Creative_Library_Trait {
         return $count;
     }
 
+    private function creative_library_deactivate_automatic_output_campaigns($identity_hash) {
+        $count = 0;
+        foreach ($this->creative_library_existing_campaign_ids($identity_hash) as $post_id) {
+            if (!method_exists($this, 'campaign_from_post') || !method_exists($this, 'save_campaign_record') || !function_exists('get_post')) {
+                continue;
+            }
+            $campaign = $this->campaign_from_post(get_post($post_id));
+            if (!is_array($campaign)) { continue; }
+
+            // 6.72.194: Nur automatisch aus Output-Objects erzeugte Kampagnen
+            // stilllegen. Manuelle/FIXED Kampagnen und redaktionelle Sonderfälle
+            // bleiben vollständig unberührt.
+            if (sanitize_key((string)($campaign['source'] ?? '')) !== 'output_object_v4') { continue; }
+            if (sanitize_key((string)($campaign['quality_manual_status'] ?? 'auto_verified')) !== 'auto_verified') { continue; }
+            if (empty($campaign['active'])) { continue; }
+
+            $campaign['active'] = false;
+            if ($this->save_campaign_record($campaign, $post_id)) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
 
     public function creative_library_reapply_partner_profile($provider, $partner_external_id) {
         global $wpdb;
