@@ -2055,10 +2055,10 @@ trait PPAR_Automation_Suite_Trait {
                 : 'ADCELL-Programmlauf abgeschlossen: Banner/Deeplink verarbeitet; kein eindeutiges CSV-Werbemittel verfügbar.';
             $this->automation_complete_job($job, $counts, $details, $status, $message);
 
-            // V6.72.189 – Reithelm-/Themenfix: Erst NACH abgeschlossenem ADCELL-Lauf
-            // liegt die echte Werbemittelkategorie sicher in der Creative-Library.
-            // Jetzt genau einmal den Vollpool neu planen. Ein frueher 90s-Lauf kann
-            // damit keine veraltete Allgemein-Zuordnung dauerhaft konservieren.
+            // V6.72.189 URL-Konzept: Erst NACH abgeschlossenem ADCELL-Lauf
+            // liegen neu/geaendert einmalig gepruefte Ziel-URLs dauerhaft in der
+            // Creative-Library. Jetzt genau einmal den Vollpool neu planen; im
+            // Frontend wird die URL weder aufgeloest noch neu klassifiziert.
             delete_option(self::OPTION_FULL_POOL_AUTOMATION_CURSOR);
             delete_option(self::OPTION_FULL_POOL_AUTOMATION_VERSION);
             if (!wp_next_scheduled(self::FULL_POOL_WORKER_HOOK)) {
