@@ -3,7 +3,7 @@
   "scope": "MANUAL_NO_DATAFORSEO_SPECIAL_ARTICLES",
   "profiles": {
     "TARIFRECHNER_VERSICHERUNG": {
-      "label": "Versicherungs-Tarifrechner",
+      "label": "Tarifrechner Versicherung",
       "use_for": "Versicherungs-Kategorien und Versicherungsthemen",
       "purpose": "Kurzer themenspezifischer Ratgeber mit logisch eingebettetem Versicherungs-Tarifrechner.",
       "length_words": {
@@ -11,35 +11,35 @@
         "max": 800
       },
       "rules": [
-        "Titel nennt das konkrete Versicherungsthema, nicht 'Tarifrechner' und keinen Anbieter.",
-        "Konkretes Hauptthema/Keyword muss natürlich im Titel und mehrfach sinnvoll im Text vorkommen.",
-        "Kurze themenspezifische Einleitung; keine generische Serien-Einleitung.",
+        "Titel nennt das konkrete Versicherungsthema, nicht Tarifrechner und keinen Anbieter.",
+        "Hauptkeyword muss natürlich im Titel und mehrfach sinnvoll im Text vorkommen.",
+        "Kurze themenspezifische Einleitung.",
         "Vor dem Rechner: wichtigste Leistungs-, Schutz- und Auswahlkriterien.",
         "Versicherungs-Tarifrechner nach der Orientierung und vor der Ergebnis-Einordnung platzieren.",
-        "Artikel enthält ausschließlich den zentralen Affiliate-Platzhalter, niemals Widget-HTML.",
+        "Nur zentralen Affiliate-Platzhalter verwenden, niemals Widget-HTML.",
         "Nach dem Rechner: Ergebnis, Leistungen, Ausschlüsse und Bedingungen kurz einordnen.",
-        "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft; nicht Pflicht.",
-        "Keine erfundenen aktuellen Beiträge, Ersparnisse oder 'bester/günstigster'-Behauptungen.",
+        "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft.",
+        "Keine erfundenen Beiträge, Ersparnisse oder Superlative.",
         "Abschluss kurz und themenspezifisch."
       ]
     },
-    "TARIFRECHNER_KREDIT": {
-      "label": "Kredit-Tarifrechner",
-      "use_for": "Kosten-Kategorien mit sinnvoll finanzierbarer höherpreisiger Anschaffung",
-      "purpose": "Kurzer themenspezifischer Kosten-/Finanzierungsratgeber mit logisch eingebettetem Kredit-Tarifrechner.",
+    "TARIFRECHNER_KOSTEN": {
+      "label": "Tarifrechner Kosten",
+      "use_for": "Geeignete Kosten-Kategorien mit sinnvoll finanzierbarer höherpreisiger Anschaffung oder Baumaßnahme",
+      "purpose": "Kurzer themenspezifischer Kosten-/Finanzierungsratgeber mit logisch eingebettetem Kredit-/Finanzierungsrechner.",
       "length_words": {
         "min": 500,
         "max": 800
       },
       "rules": [
-        "Titel nennt die konkrete Anschaffung oder Kostenfrage, nicht 'Kreditrechner' und keinen Anbieter.",
-        "Konkretes Hauptthema/Keyword muss natürlich im Titel und mehrfach sinnvoll im Text vorkommen.",
-        "Kurze themenspezifische Einleitung zu Anschaffung und Kosten; keine generische Serien-Einleitung.",
-        "Vor dem Rechner: Budget, Eigenkapital, Laufzeit, Monatsrate und Gesamtkosten passend zum Thema einordnen.",
-        "Kredit-Tarifrechner nach der Orientierung und vor der Ergebnis-Einordnung platzieren.",
-        "Artikel enthält ausschließlich den zentralen Affiliate-Platzhalter, niemals Widget-HTML.",
-        "Nach dem Rechner: Rate nicht isoliert bewerten; Laufzeit, effektiven Zins und Gesamtbetrag gemeinsam betrachten.",
-        "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft; nicht Pflicht.",
+        "Titel nennt das konkrete Kostenthema, nicht Tarifrechner oder Kreditrechner und keinen Anbieter.",
+        "Hauptkeyword muss natürlich im Titel und mehrfach sinnvoll im Text vorkommen.",
+        "Kurze themenspezifische Einleitung zur konkreten Anschaffung oder Baumaßnahme.",
+        "Vor dem Rechner: Kostenrahmen ohne erfundene Zahlen, Budget, Eigenkapital, Laufzeit, Rate und Gesamtkosten sinnvoll einordnen.",
+        "Kredit-/Finanzierungsrechner nach der Orientierung und vor der Ergebnis-Einordnung platzieren.",
+        "Nur zentralen Affiliate-Platzhalter verwenden, niemals Widget-HTML.",
+        "Nach dem Rechner: Rate, Laufzeit, effektiven Zins und Gesamtbetrag gemeinsam einordnen.",
+        "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft.",
         "Keine erfundenen Zinsen, Kreditkosten oder Sparversprechen.",
         "Abschluss kurz und themenspezifisch."
       ]
@@ -60,9 +60,10 @@
   },
   "dataforseo_required": false,
   "routing_rules": [
-    "Kosten-Kategorie mit sinnvoll finanzierbarer höherpreisiger Anschaffung -> TARIFRECHNER_KREDIT.",
     "Versicherungs-Kategorie oder Versicherungsthema -> TARIFRECHNER_VERSICHERUNG.",
-    "Keine automatische Vermischung beider Rechnerprofile."
+    "Geeignete Kosten-Kategorie -> TARIFRECHNER_KOSTEN.",
+    "Allgemeine spätere Kredit-Beiträge mit Bannern -> eigenes zukünftiges Profil KREDIT_BANNER.",
+    "Keine Vermischung dieser drei Profile."
   ],
   "global_title_rules": [
     "Kein Doppelpunkt im Titel.",
@@ -71,5 +72,10 @@
     "Keine Anbieter- oder Rechnernamen im Titel.",
     "Keine fast identischen Serientitel; Formulierung und Nutzenversprechen müssen je Kategorie variieren.",
     "Keine unbelegten Superlative wie bester, günstigster oder billigster."
-  ]
+  ],
+  "future_profile_note": {
+    "profile": "KREDIT_BANNER",
+    "status": "LATER_NOT_YET_DEFINED",
+    "purpose": "Allgemeine Kredit-Beiträge mit Bannern; eigener Aufbau und ausdrücklich nicht mit den Tarifrechner-Profilen vermischen."
+  }
 }
