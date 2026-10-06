@@ -53,9 +53,9 @@ function seed_banner194($call,$o,$external,$dest,$title){
         'title'=>$title,
         'description'=>'',
         'tags'=>'',
-        'image_url'=>'https://example.test/'.$external.'.png',
+        'image_url'=>'https://example.com/'.$external.'.png',
         'destination_url'=>$dest,
-        'tracking_url'=>'https://tracking.example.test/'.$external,
+        'tracking_url'=>'https://example.com/track/'.$external,
         'width'=>728,
         'height'=>90,
         'source_status'=>'active',
@@ -118,8 +118,8 @@ $manual['quality_manual_status']='approved';
 $manual['assignment_mode']='page_tree';
 $manual['automation_target_keys']=array('category:fuetterung');
 $manual['placements']=array('product_after_category_tiles');
-$manual['image_url']='https://example.test/manual.png';
-$manual['url']='https://tracking.example.test/manual';
+$manual['image_url']='https://example.com/manual.png';
+$manual['url']='https://example.com/track/manual';
 $manualId=$call('save_campaign_record',$manual,0);
 update_post_meta((int)$manualId,'_ppar_creative_identity_hash',(string)$unknown['identity_hash']);
 t194((int)$manualId>0,'manual_fixed_fixture_created');
