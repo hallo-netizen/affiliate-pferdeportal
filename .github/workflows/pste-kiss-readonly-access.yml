@@ -1,0 +1,20 @@
+name: PSTE KISS Existing Readonly Access Probe
+on:
+  push:
+    branches: [pste-kiss-e2e-20261005]
+    paths:
+      - '.github/workflows/pste-kiss-readonly-access.yml'
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe existing GET-only routes without exporting data
+        shell: bash
+        run: |
+          set -euo pipefail
+          for u in             'https://pferde-atelier.de/wp-json/ai1wm/v1/capabilities'             'https://pferde-atelier.de/wp-json/ai1wm/v1/backups'             'https://pferde-atelier.de/wp-json/wp-abilities/v1/abilities'
+          do
+            code="$(curl -sS --max-time 30 -o /tmp/body -w '%{http_code}' -X GET "$u" || true)"
+            bytes="$(wc -c </tmp/body 2>/dev/null || echo 0)"
+            echo "READONLY_PROBE url=$u http=$code bytes=$bytes"
+          done
