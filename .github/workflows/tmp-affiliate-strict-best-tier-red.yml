@@ -1,4 +1,4 @@
-name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate R4
+name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate FINAL
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   hard-kiss-banner-target-map:
@@ -196,4 +196,53 @@ jobs:
             /tmp/manifest.log
             /tmp/lint.log
             /tmp/hard-kiss.log
+          if-no-files-found: error
+
+      - name: Build verify and bind exact final 6.72.190 ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          FINAL="release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.190.zip"
+          rm -f "$FINAL"
+          rm -rf /tmp/final190
+          (
+            cd release/affiliate-zentrale/current
+            zip -qr "$GITHUB_WORKSPACE/$FINAL" affiliate-portal-router
+          )
+          mkdir -p /tmp/final190
+          unzip -q "$FINAL" -d /tmp/final190
+          (
+            cd /tmp/final190
+            sha256sum -c "$GITHUB_WORKSPACE/release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
+          ) | tee /tmp/final190-manifest.log
+          test "$(grep -c ': OK /tmp/final190-manifest.log)" = "27"
+          find /tmp/final190/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final190-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/final190-lint.log)" = "21"
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path('release/affiliate-zentrale/current')
+          out=Path('/tmp/final190')
+          files=[line.split('  ',1)[1] for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines() if line.strip()]
+          assert len(files)==27
+          for rel in files:
+              assert (src/rel).read_bytes()==(out/rel).read_bytes(), rel
+          print('FINAL_672190_BYTE_IDENTITY_PASS_27_OF_27')
+          PY
+          SHA="$(sha256sum "$FINAL" | awk '{print $1}')"
+          BYTES="$(stat -c%s "$FINAL")"
+          echo "FINAL_672190_ZIP_PASS sha256=$SHA bytes=$BYTES" | tee /tmp/final190-sha.log
+          git config user.name "affiliate-release-bot"
+          git config user.email "affiliate-release-bot@users.noreply.github.com"
+          git add "$FINAL"
+          git commit -m "Affiliate: bind final 6.72.190 installer"
+          git push origin HEAD:affiliate-release-current
+
+      - name: Upload final ZIP proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-672190-final-zip-proof
+          path: |
+            /tmp/final190-manifest.log
+            /tmp/final190-lint.log
+            /tmp/final190-sha.log
           if-no-files-found: error
