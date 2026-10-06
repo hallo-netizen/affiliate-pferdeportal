@@ -82,6 +82,11 @@ foreach($cost_records as $x){
 }
 tc_assert(count($unique_paths)===66,'catalog_cost_unique_paths_66','unique='.count($unique_paths));
 
+$insurance_records=array_values(array_filter($catalog['article_targets'],static function($x){
+    return is_array($x)&&strpos((string)($x['path']??''),'Wissen > Versicherungen & Recht >')===0;
+}));
+tc_assert(count($insurance_records)===14,'catalog_insurance_records_14','count='.count($insurance_records));
+
 // 2) Den kompletten eindeutigen Kostenbaum in echter Hierarchie in WordPress nachbauen.
 $cost_ids=array();
 foreach($unique_paths as $x){
@@ -97,11 +102,14 @@ $reit=tc_term('Reiterbedarf','tc-reiterbedarf-trap',$aus);
 $not_cost=tc_term('Kredit Kosten','kredit-kosten-falsch',$reit);
 $not_cost2=tc_term('Kostenfalle','kostenfalle',$reit);
 
-// Echter Versicherungsast.
-$wissen=tc_term('Wissen','tc-wissen-insurance');
-$vr=tc_term('Versicherungen & Recht','tc-versicherungen-recht',$wissen);
-$ph=tc_term('Pferdehaftpflicht','tc-pferdehaftpflicht',$vr);
-$phfaq=tc_term('FAQ Pferdehaftpflicht','pferdehaftpflicht-faq',$ph);
+// Kompletter konfigurierter Versicherungsast.
+$insurance_ids=array();
+foreach($insurance_records as $x){
+    $slug=sanitize_key((string)$x['category_slug']);
+    $id=tc_seed_path((string)$x['path'],$slug);
+    $insurance_ids[$slug]=$id;
+}
+tc_assert(count($insurance_ids)===14,'seeded_all_insurance_leaf_categories','count='.count($insurance_ids));
 $outside=tc_term('Pferdehaftpflicht','pferdehaftpflicht-ausserhalb',$reit);
 
 $portalKey=sanitize_key((string)$call('output_local_portal_key'));
@@ -122,23 +130,33 @@ foreach($cost_ids as $slug=>$id){
 }
 tc_assert(!in_array('category:'.$not_cost,$creditKeys,true),'credit_rejects_kosten_word_wrong_leaf');
 tc_assert(!in_array('category:'.$not_cost2,$creditKeys,true),'credit_rejects_non_cost_suffix');
-tc_assert(!in_array('category:'.$phfaq,$creditKeys,true),'credit_rejects_insurance_branch');
+foreach($insurance_ids as $slug=>$id){
+    tc_assert(!in_array('category:'.$id,$creditKeys,true),'credit_rejects_insurance_'.$slug);
+}
 
 // URL schlägt Titel: Kredit bleibt Kosten trotz Versicherungs-Titel.
 list($creditTitleMap,$creditTitleRow)=tc_import_and_map($call,'https://www.tarifcheck.de/kredit/?proof=insurance-title','Tarifcheck Pferdehaftpflicht');
 tc_assert((int)($creditTitleMap['mapped']??0)===66,'credit_url_beats_insurance_title');
 
-// 4) Versicherung bleibt ausschließlich im echten Versicherungsast.
+// 4) Versicherung geht ausschließlich auf alle echten Blattkategorien im Versicherungsast.
 list($insMap,$insRow)=tc_import_and_map($call,'https://www.tarifcheck.de/pferdehaftpflicht/','Tarifcheck Pferdehaftpflicht');
 $insTargets=tc_targets($insRow);
-tc_assert((int)($insMap['mapped']??0)>=1,'insurance_mapped');
+$insKeys=array_values(array_map(static function($x){return (string)($x['target_key']??'');},$insTargets));
+tc_assert((int)($insMap['mapped']??0)===14,'insurance_mapped_all_insurance_categories','mapped='.(int)($insMap['mapped']??0));
+tc_assert(count($insTargets)===14,'insurance_has_14_fixed_targets','count='.count($insTargets));
+foreach($insurance_ids as $slug=>$id){
+    tc_assert(in_array('category:'.$id,$insKeys,true),'insurance_contains_'.$slug);
+}
 foreach($insTargets as $x){
     $label=(string)($x['target_label']??'');
     tc_assert(strpos($label,'Versicherungen & Recht')!==false,'insurance_only_real_insurance_branch',$label);
-    tc_assert((string)($x['target_key']??'')!=='category:'.$outside,'insurance_rejects_same_topic_outside_branch');
+}
+tc_assert(!in_array('category:'.$outside,$insKeys,true),'insurance_rejects_same_topic_outside_branch');
+foreach($cost_ids as $slug=>$id){
+    tc_assert(!in_array('category:'.$id,$insKeys,true),'insurance_rejects_cost_'.$slug);
 }
 list($insuranceTitleMap,$insuranceTitleRow)=tc_import_and_map($call,'https://www.tarifcheck.de/pferdehaftpflicht/?proof=credit-title','Tarifcheck Kredit');
-tc_assert((int)($insuranceTitleMap['mapped']??0)>=1,'insurance_url_beats_credit_title');
+tc_assert((int)($insuranceTitleMap['mapped']??0)===14,'insurance_url_beats_credit_title');
 
 // 5) Unbekannt / gemischt fail-closed.
 list($unknownMap,$unknownRow)=tc_import_and_map($call,'https://www.tarifcheck.de/strom/','Tarifcheck Strom');
@@ -156,5 +174,12 @@ tc_assert(count($runtimeKeys)===66,'runtime_exposes_all_cost_campaign_targets','
 foreach($unique_paths as $x){
     tc_assert(in_array('category:'.sanitize_key((string)$x['category_slug']),$runtimeKeys,true),'runtime_has_slug_'.sanitize_key((string)$x['category_slug']));
 }
+$insRuntime=$call('output_banner_destination_classification',$insRow,$portal);
+tc_assert(is_array($insRuntime)&&sanitize_key((string)($insRuntime['source']??''))==='tarifcheck_insurance_all_insurance_categories','runtime_reads_tarifcheck_insurance_map',wp_json_encode($insRuntime));
+$insRuntimeKeys=array_values(array_unique(array_filter(array_map('sanitize_text_field',(array)($insRuntime['_ppar_banner_target_keys']??array())))));
+tc_assert(count($insRuntimeKeys)===14,'runtime_exposes_all_insurance_campaign_targets','count='.count($insRuntimeKeys));
+foreach($insurance_records as $x){
+    tc_assert(in_array('category:'.sanitize_key((string)$x['category_slug']),$insRuntimeKeys,true),'runtime_has_insurance_slug_'.sanitize_key((string)$x['category_slug']));
+}
 
-echo "TARIFCHECK_KISS_672191_ALL_COST_CATEGORIES_COMPLETE\n";
+echo "TARIFCHECK_KISS_672191_ALL_COST_AND_INSURANCE_CATEGORIES_COMPLETE\n";
