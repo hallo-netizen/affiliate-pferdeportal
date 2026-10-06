@@ -2790,9 +2790,24 @@ trait PPAR_Output_Objects_Trait {
             if (is_wp_error($valid)) { $result['blocked']++; $result['errors'][$valid->get_error_code()]=$valid->get_error_message(); continue; }
             $output_types = array_values(array_intersect(array_unique(array_filter(array_map('sanitize_key', (array) ($portal['output_types'] ?? array())))), array('portal_banner','product_campaign','hivepress_listing','portal_listing')));
             $creative_type = sanitize_key((string) ($row['creative_type'] ?? 'banner'));
-            if ($creative_type === 'product') { $output_types = array_values(array_intersect($output_types, array('product_campaign'))); }
-            elseif ($creative_type === 'banner') { $output_types = array_values(array_intersect($output_types, array('portal_banner','hivepress_listing','portal_listing'))); }
-            else { $result['review']++; $result['errors']['output_type_unsupported']='Creative-Typ besitzt noch keinen bestätigten Ausgabeweg.'; continue; }
+            if ($creative_type === 'product') {
+                $output_types = array_values(array_intersect($output_types, array('product_campaign')));
+            } elseif ($creative_type === 'banner') {
+                $output_types = array_values(array_intersect($output_types, array('portal_banner','hivepress_listing','portal_listing')));
+                // KISS 6.72.197: Eine ausdrueckliche feste Banner-Zielzuordnung
+                // bedeutet genau Banner -> genau dieses Portalziel. Sie darf nicht
+                // parallel noch Listing-Ausgabetypen pruefen oder Blocker erzeugen.
+                $fixed_decision = $this->output_portal_decision((string)($portal['key'] ?? ''),(string)($row['identity_hash'] ?? ''));
+                $fixed_payload = is_array($fixed_decision['payload'] ?? null) ? $fixed_decision['payload'] : array();
+                if (sanitize_key((string)($fixed_decision['manual_status'] ?? '')) === 'approved'
+                    && sanitize_text_field((string)($fixed_payload['target_key'] ?? '')) !== '') {
+                    $output_types = in_array('portal_banner',$output_types,true) ? array('portal_banner') : array();
+                }
+            } else {
+                $result['review']++;
+                $result['errors']['output_type_unsupported']='Creative-Typ besitzt noch keinen bestätigten Ausgabeweg.';
+                continue;
+            }
             // Digistore24 is contractually banner-only. This provider-specific
             // hardlock must not alter any output path for other providers.
             if (sanitize_key((string) ($row['provider'] ?? '')) === 'digistore24') {
