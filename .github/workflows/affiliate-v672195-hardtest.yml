@@ -1,0 +1,105 @@
+name: Affiliate 6.72.195 deterministic banner hardtest
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - affiliate-release-current
+    paths:
+      - 'release/affiliate-zentrale/current/**'
+      - 'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+      - 'AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php'
+      - '.github/workflows/affiliate-v672195-hardtest.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  wordpress-mariadb-hardtest:
+    runs-on: ubuntu-24.04
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Exact source and lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          grep -F "Version: 6.72.195" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.195';" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "creative_library_deactivate_all_automatic_banner_campaigns" "$ROOT/includes/trait-ppar-creative-library.php"
+          grep -F "run_v672195_banner_reconcile" "$ROOT/includes/trait-ppar-automation-suite.php"
+          grep -F "_manual_target_family" "$ROOT/includes/trait-ppar-creative-library.php"
+          grep -F "_manual_target_family" "$ROOT/includes/trait-ppar-output-objects.php"
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "22"
+
+      - name: Install WordPress and plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Banner 6.72.195' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){
+                      return get_post_field('post_parent',$page_id) ? 'category' : 'hub1';
+                  }
+              }
+          }
+          PHP
+
+          cp -R release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+      - name: Real WordPress MariaDB positive negative proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php
+          /tmp/wp eval-file /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php --path=/tmp/wp-site | tee /tmp/v672195.log
+          grep -F "PASS unlinked_stale_auto_campaign_globally_disabled" /tmp/v672195.log
+          grep -F "PASS rebuilt_target_schabracken" /tmp/v672195.log
+          grep -F "PASS no_current_auto_campaign_fuetterung" /tmp/v672195.log
+          grep -F "PASS tarifcheck_kosten_all_cost_leaves" /tmp/v672195.log
+          grep -F "PASS tarifcheck_versicherung_all_real_leaves" /tmp/v672195.log
+          grep -F "PASS tarifcheck_tracking_without_explicit_family_blocked" /tmp/v672195.log
+          grep -F "PASS manual_campaign_preserved" /tmp/v672195.log
+          grep -F "PASS product_campaign_preserved" /tmp/v672195.log
+          grep -F "DETERMINISTIC_BANNER_RECONCILE_672195_COMPLETE" /tmp/v672195.log
