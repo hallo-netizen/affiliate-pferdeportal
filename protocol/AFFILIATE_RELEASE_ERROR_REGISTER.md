@@ -1168,3 +1168,29 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 **Status:** SOURCE_AND_EXACT_ZIP_FIXED / LIVE_INSTALL_AND_SCHABRACKEN_READBACK_OPEN.
 
 **Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md`.
+
+
+### AFF-ERR-050 – Nachtrag 06.10.2026: 6.72.195 deterministischer Reconcile + Tarifcheck-Gruppen, exakter Installer PASS
+
+**Ausgangslage:** 6.72.194 blieb live bei Schabracken falsch. Zusätzlich waren manuell importierte Tarifcheck-Banner ohne ausdrücklich gespeicherte Fachgruppe bei Tracking-only-Links nicht sicher Kategorien zuordenbar.
+
+**Struktureller Fix 6.72.195:** Alle aktiven automatisch erzeugten `output_object_v4`-Banner mit `auto_verified` werden vor dem Neuaufbau global deaktiviert, ohne Abhängigkeit von historischen Creative-Metakeys. Danach werden automatische Banner ausschließlich aus den aktuellen Creative-Library-`topic_targets` neu materialisiert. Manuelle/FIXED Banner und Produktkampagnen bleiben erhalten.
+
+**Tarifcheck:** Bestehende oder neue Tarifcheck-Banner können ausdrücklich als `Versicherungen` oder `Kreditvergleich / Kosten` gruppiert werden. Diese bewusste Gruppe wird gespeichert und ist autoritativ. Ohne explizite Gruppe und ohne sicher erkennbare reale Ziel-URL bleibt der Banner fail-closed unsichtbar.
+
+**Source WordPress/MariaDB:** Run `37489630643` PASS.
+
+**Exakter Installer:** Run `37490868184` PASS:
+- Fresh-Unpack / Source-Byteidentität 28/28;
+- PHP-Lint 22/22;
+- exaktes ZIP in frischem WordPress 7.1.2 + MariaDB 10.11 installiert;
+- stale unverbundener Fütterungs-Auto-Banner deaktiviert;
+- Schabracken korrekt neu materialisiert;
+- Tarifcheck Kosten ausschließlich Kosten-Kategorien;
+- Tarifcheck Versicherungen ausschließlich Versicherungs-Kategorien;
+- unbekannter Tracking-only-Tarifcheck ohne Gruppe fail-closed;
+- manuelle Banner und Produktkampagnen unverändert.
+
+**Installer:** `AFFILIATE_ZENTRALE_6.72.195.zip`, SHA-256 `8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf`, 809869 Byte.
+
+**Status:** SOURCE_AND_EXACT_ZIP_PASS / LIVE_INSTALL_AND_READBACK_OPEN. AFF-ERR-050 bleibt offen, bis Schabracken sowie beide Tarifcheck-Gruppen real live bestätigt sind.
