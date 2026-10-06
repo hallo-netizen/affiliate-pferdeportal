@@ -3418,14 +3418,15 @@ trait PPAR_Automation_Suite_Trait {
      *    Fortsetzung fuer grosse Bestaende, nicht Voraussetzung fuer den Start.
      */
     public function maybe_reconcile_banner_state_v672195() {
-        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197'), true) || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
-        $state_key = 'ppar_v672195_banner_reconcile_state';
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197','6.72.198'), true) || !is_admin() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+        $state_key = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_state' : 'ppar_v672195_banner_reconcile_state';
         $state = sanitize_key((string)get_option($state_key, ''));
         if ($state === 'done') { return; }
         if ($state !== 'running') {
-            delete_option('ppar_v672195_banner_reconcile_cursor');
-            delete_option('ppar_v672195_banner_reconcile_result');
-            delete_option('ppar_v672195_banner_reconcile_reset_done');
+            $prefix = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_';
+            delete_option($prefix . 'cursor');
+            delete_option($prefix . 'result');
+            delete_option($prefix . 'reset_done');
             update_option($state_key, 'running', false);
         }
         // Wichtig: nicht nur schedulen. Der Backend-Aufruf fuehrt den ersten
@@ -3434,7 +3435,7 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     public function run_v672195_banner_reconcile() {
-        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197'), true)
+        if (!in_array(self::VERSION, array('6.72.195','6.72.196','6.72.197','6.72.198'), true)
             || !method_exists($this, 'creative_library_table')
             || !method_exists($this, 'output_assign_banner_targets_from_destination_once')
             || !method_exists($this, 'creative_library_deactivate_all_automatic_banner_campaigns')) {
@@ -3443,10 +3444,11 @@ trait PPAR_Automation_Suite_Trait {
 
         global $wpdb;
         $table = $this->creative_library_table();
-        $state_key = 'ppar_v672195_banner_reconcile_state';
-        $cursor_key = 'ppar_v672195_banner_reconcile_cursor';
-        $result_key = 'ppar_v672195_banner_reconcile_result';
-        $reset_key = 'ppar_v672195_banner_reconcile_reset_done';
+        $prefix = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_';
+        $state_key = $prefix . 'state';
+        $cursor_key = $prefix . 'cursor';
+        $result_key = $prefix . 'result';
+        $reset_key = $prefix . 'reset_done';
 
         $previous = get_option($result_key, array());
         $previous = is_array($previous) ? $previous : array();
