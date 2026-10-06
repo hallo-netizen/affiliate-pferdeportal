@@ -3681,7 +3681,38 @@ trait PPAR_Automation_Suite_Trait {
             return;
         }
 
-        if (in_array($state, array('', 'scheduled', 'retry'), true)) {
+        if (in_array($state, array('', 'scheduled'), true)) {
+            // Ein beim Upgrade bereits laufender Altjob koennte seine
+            // Promotions-Stufe noch unter dem vorherigen Importvertrag begonnen
+            // haben. Deshalb erst vollstaendig auslaufen lassen und DANACH einen
+            // garantiert frischen 6.72.199-Lauf starten.
+            if (method_exists($this, 'automation_has_open_jobs') && $this->automation_has_open_jobs('adcell')) {
+                $result['status'] = 'waiting_preexisting';
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'waiting_preexisting', false);
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $state = 'retry';
+        }
+
+        if ($state === 'waiting_preexisting') {
+            if (method_exists($this, 'automation_has_open_jobs') && $this->automation_has_open_jobs('adcell')) {
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $state = 'retry';
+            update_option($state_key, 'retry', false);
+        }
+
+        if ($state === 'retry') {
             $started_at = time();
             $result['started_at'] = $started_at;
             $result['attempt'] = absint($result['attempt'] ?? 0) + 1;
@@ -3714,6 +3745,24 @@ trait PPAR_Automation_Suite_Trait {
                     $this->automation_schedule_adcell_batch_worker(0);
                 }
                 $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+
+            // Ein endgueltig fehlgeschlagener frischer Programmlauf darf keinen
+            // Reconcile auf teilweise alten Daten ausloesen.
+            global $wpdb;
+            $jobs_table = $this->automation_jobs_table();
+            $failed_jobs = absint($wpdb->get_var($wpdb->prepare(
+                "SELECT COUNT(*) FROM {$jobs_table} WHERE provider='adcell' AND created_at>=%d AND status='failed'",
+                absint($result['started_at'] ?? 0)
+            )));
+            if ($failed_jobs > 0) {
+                $result['failed_jobs'] = $failed_jobs;
+                $result['status'] = 'retry';
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'retry', false);
+                $this->automation_v672199_schedule_basis_resync(300);
                 return;
             }
 
