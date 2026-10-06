@@ -1116,3 +1116,22 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 **Evidence:** `release/affiliate-zentrale/evidence/affiliate_router_v672191_tarifcheck_direct_code_kiss_20261006.md`.
 
 **Status:** ROOT_CAUSE_FIXED / SOURCE_AND_EXACT_ZIP_WORDPRESS_MARIADB_PASS / MANUAL_LIVE_INSTALL_OPEN.
+
+
+## AFF-ERR-052 — Tarifcheck-HTML-Banner wurden in 6.72.191 vor der technischen Bildprüfung zugeordnet
+
+**Datum:** 06.10.2026.
+
+**Fehler:** 6.72.191 konnte nach dem manuellen HTML-Code-Import bereits eine feste Zielkarte speichern, obwohl die reale Bannerbildprüfung erst danach im vorhandenen Prüfbatch lief. Damit war die Reihenfolge nicht streng `prüfen -> zuordnen`.
+
+**Rootfix 6.72.192:** Direkt-/Manuellbanner, insbesondere Tarifcheck, bleiben bis zur erfolgreichen realen Bildprüfung ohne Zielkarte. Der Import ermittelt die echte Ziel-URL, speichert den Banner zunächst pending und lädt die betroffenen Banner einmal gebündelt. Erst der bestehende technische Prüfer baut nach erfolgreicher Bildprüfung die feste Zielkarte. Bei Bildfehler wird eine eventuell vorhandene Zielkarte geleert und der Banner blockiert.
+
+**Fachregel:** Kredit -> alle realen Kosten-Blätter; Versicherung -> alle 14 realen Versicherungsblätter; unbekannt/gemischt -> keine Zielkarte. URL schlägt Titel.
+
+**POSITIV Source:** Run `37454893550` SUCCESS. Vor Prüfung 0 Ziele, danach Kredit 66/66 und Versicherung 14/14; kaputtes Bild bleibt ohne Ziel; unbekannt/gemischt fail-closed; keine neue Tabelle.
+
+**POSITIV exaktes ZIP:** Run `37455039161` SUCCESS. Fresh-Unpack 27/27, PHP 21/21, frische WordPress/MariaDB-Installation, kompletter Verify-Before-Assign-Test PASS.
+
+**Finaler Installer:** `AFFILIATE_ZENTRALE_6.72.192.zip`, SHA-256 `49add47f6876e78737704b3ca067bf5d931ee68a5f7448f99d8227ee57fc60d9`, 801146 Byte.
+
+**Status:** FIXED / SOURCE_AND_EXACT_ZIP_WORDPRESS_MARIADB_PASS / MANUAL_LIVE_INSTALL_OPEN.
