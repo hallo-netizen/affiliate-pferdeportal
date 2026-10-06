@@ -898,11 +898,12 @@ trait PPAR_Output_Objects_Trait {
         if (sanitize_key((string)($row['creative_type']??''))!=='banner') { return null; }
         $portal_key=sanitize_key((string)($portal['key']??''));
         if($portal_key===''){return null;}
-        $record=null;
-        foreach($this->output_banner_library_records($row) as $candidate){
-            if(sanitize_key((string)($candidate['portal_key']??''))===$portal_key){$record=$candidate;break;}
-        }
-        if(!is_array($record)){return null;}
+        $portal_records=array_values(array_filter($this->output_banner_library_records($row),static function($candidate)use($portal_key){
+            return is_array($candidate) && sanitize_key((string)($candidate['portal_key']??''))===$portal_key;
+        }));
+        if(!$portal_records){return null;}
+
+        $record=$portal_records[0];
         $state=sanitize_key((string)($record['state']??''));
         $target_key=sanitize_text_field((string)($record['target_key']??''));
         if(!in_array($state,array('mapped','general'),true)||$target_key===''){return null;}
@@ -914,16 +915,36 @@ trait PPAR_Output_Objects_Trait {
             $gate=$this->control_target_gate($portal_key,(string)($target['key']??''));
             if(is_wp_error($gate)){return null;}
         }
+
+        $stored_campaign_targets=array();
+        $multi_source=sanitize_key((string)($record['source']??''))==='tarifcheck_credit_all_cost_categories';
+        if($multi_source){
+            foreach($portal_records as $stored_record){
+                if(sanitize_key((string)($stored_record['state']??''))!=='mapped'
+                    || sanitize_key((string)($stored_record['source']??''))!=='tarifcheck_credit_all_cost_categories'){continue;}
+                $stored_target=$this->output_resolve_target_key($targets,sanitize_text_field((string)($stored_record['target_key']??'')));
+                if(!is_array($stored_target)){continue;}
+                if(method_exists($this,'control_target_gate')
+                    && is_wp_error($this->control_target_gate($portal_key,(string)($stored_target['key']??'')))){continue;}
+                $campaign_key=$this->output_campaign_target_key($stored_target);
+                if($campaign_key!==''){$stored_campaign_targets[$campaign_key]=$campaign_key;}
+            }
+            if(!$stored_campaign_targets){return null;}
+        }
+
         if($state==='general'){$target['_ppar_general_fallback_anchor']=1;}
         $level=sanitize_key((string)($record['level']??($state==='general'?'general':'exact')));
         return array(
             'status'=>'ready',
             'confidence'=>absint($record['confidence']??($state==='general'?1:100)),
-            'reason'=>$state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.',
+            'reason'=>$multi_source
+                ? 'Gespeicherte Tarifcheck-Kredit-Zielkarte für alle Kosten-Kategorien.'
+                : ($state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.'),
             'target'=>$target,
             'alternatives'=>array(),
-            'source'=>$state==='general'?'creative_library_general_fallback':'creative_library_destination_map',
+            'source'=>$multi_source?'tarifcheck_credit_all_cost_categories':($state==='general'?'creative_library_general_fallback':'creative_library_destination_map'),
             '_ppar_destination_level'=>$level,
+            '_ppar_banner_target_keys'=>array_values($stored_campaign_targets),
         );
     }
 
@@ -1033,17 +1054,27 @@ trait PPAR_Output_Objects_Trait {
         if ($family === 'blocked' || !is_array($target)) { return false; }
         if (sanitize_key((string)($target['type'] ?? '')) !== 'category') { return false; }
 
-        // HARD RULE: Nicht irgendein Wort im Kategorienamen entscheidet,
-        // sondern der echte hierarchische Kategoriepfad. Nur dessen Wurzel
-        // darf Tarifcheck freigeben: Kredit unter Kosten, Versicherung unter
-        // Versicherungen. Ein gleichnamiges Blatt im falschen Ast bleibt zu.
         $parts = preg_split('/\s+>\s+/', (string)($target['label'] ?? ''));
-        $root = $this->output_text((string)($parts[0] ?? ''));
+        $parts = array_values(array_filter(array_map(array($this,'output_text'), (array)$parts), 'strlen'));
+        $leaf = $parts ? (string)end($parts) : '';
+        $slug = sanitize_key((string)($target['slug'] ?? ''));
+
         if ($family === 'kosten') {
-            return $root === 'kosten';
+            // Realer Pferde-Atelier-Baum: Kosten ist KEIN Root-Ast. Die
+            // Kosten-Themen sind verteilte Blattkategorien, durchgehend
+            // "Kosten ..." und ...-kosten. Beides muss stimmen.
+            return preg_match('/^kosten(?:\s|$)/u', $leaf) === 1
+                && preg_match('/-kosten$/', $slug) === 1;
         }
         if ($family === 'versicherung') {
-            return preg_match('/^versicher(?:ung|ungen)(?:\s|$)/u', $root) === 1;
+            // Versicherungsbanner bleiben ausschließlich im echten
+            // "Wissen > Versicherungen & Recht > ..." Kategorieast.
+            foreach ($parts as $part) {
+                if ($part === 'versicherungen recht' || $part === 'versicherungen und recht') {
+                    return true;
+                }
+            }
+            return false;
         }
         return false;
     }
@@ -1082,7 +1113,8 @@ trait PPAR_Output_Objects_Trait {
             $portal_key=sanitize_key((string)($portal['key']??''));
             if($portal_key===''){continue;}
 
-            // Bereits exakt fuer dieselbe Ziel-URL gespeichert => unveraendert wiederverwenden.
+            // Für Tarifcheck-Kredit wird die komplette Kosten-Zielmenge unten
+            // aus dem realen Zielkatalog aufgebaut; nie auf einen Alt-Einzelrecord verkürzen.
             $reuse=null;
             foreach($existing as $record){
                 $stored_target_key=sanitize_text_field((string)($record['target_key']??''));
@@ -1100,7 +1132,7 @@ trait PPAR_Output_Objects_Trait {
                     $reuse=$record; break;
                 }
             }
-            if(is_array($reuse)){
+            if($tarifcheck_family!=='kosten' && is_array($reuse)){
                 $new_records[]=$reuse;
                 $mapped++;
                 continue;
@@ -1109,6 +1141,36 @@ trait PPAR_Output_Objects_Trait {
             $targets=$this->output_portal_targets($portal);
             if(is_wp_error($targets)){continue;}
             $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+
+            // Tarifcheck Kredit: nach eindeutiger URL-Familienprüfung nicht
+            // erneut semantisch auf EIN Kosten-Thema verengen. Der reale Baum
+            // enthält viele verteilte Kosten-Blätter. Alle echten Kosten-
+            // Kategorien werden als feste Zielkarte gespeichert.
+            if($tarifcheck_family==='kosten'){
+                foreach((array)$targets as $target){
+                    if(!is_array($target)){continue;}
+                    $type=sanitize_key((string)($target['type']??''));
+                    if(!in_array($type,$wanted,true) || !$this->output_tarifcheck_target_allowed($target,'kosten')){continue;}
+                    $target_key=sanitize_text_field((string)($target['key']??''));
+                    if($target_key===''){continue;}
+                    if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
+                    $new_records[]=array(
+                        'portal_key'=>$portal_key,
+                        'state'=>'mapped',
+                        'level'=>'all_cost_categories',
+                        'target_key'=>$target_key,
+                        'target_label'=>sanitize_text_field((string)($target['label']??'')),
+                        'confidence'=>100,
+                        'source'=>'tarifcheck_credit_all_cost_categories',
+                        'destination_source'=>$source,
+                        'destination_url'=>$destination,
+                        'updated_at'=>time(),
+                    );
+                    $mapped++;
+                }
+                continue;
+            }
+
             $dest_tokens=$this->output_tokens($semantic);
             $ranked=array();
 
@@ -2492,9 +2554,12 @@ trait PPAR_Output_Objects_Trait {
         } else {
             $auto_placements = array();
         }
+        $stored_banner_targets=array_values(array_unique(array_filter(array_map('sanitize_text_field',(array)($classification['_ppar_banner_target_keys']??array())))));
         $campaign['automation_target_keys'] = $general_banner_fallback
             ? array()
-            : ($auto_targets ? $auto_targets : ((!empty($target['_ppar_glossary_neutral_anchor']) || !empty($target['_ppar_breed_neutral_anchor'])) ? array() : array($target_key)));
+            : ($stored_banner_targets
+                ? $stored_banner_targets
+                : ($auto_targets ? $auto_targets : ((!empty($target['_ppar_glossary_neutral_anchor']) || !empty($target['_ppar_breed_neutral_anchor'])) ? array() : array($target_key))));
         $compatible_banner_slots = array_values(array_unique(array_filter(array_map('sanitize_key',(array)($classification['_ppar_banner_compatible_slots']??array())))));
         $campaign['placements'] = ($output_type === 'portal_banner' && $compatible_banner_slots)
             ? $compatible_banner_slots
