@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 235,
+  "generation": 236,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,20 +35,20 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.195",
-    "status": "FINAL_6_72_195_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
+    "version": "6.72.196",
+    "status": "FINAL_6_72_196_TARIFCHECK_DROPDOWN_TESTED_MANUAL_INSTALL_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf",
-    "candidate_reference_scope": "6.72.194 is live-disproved for Schabracken. 6.72.195 deterministically resets all automatic output_object_v4 auto-verified banner projections and rebuilds only from current Creative-Library topic_targets. Tarifcheck manual groups are explicit stored authority. Source WordPress/MariaDB run 37489630643 PASS. Exact final ZIP run 37490868184 PASS with Fresh-Unpack 28/28, PHP 22/22, exact ZIP WordPress 7.1.2 + MariaDB 10.11, Schabracken stale-unlinked-auto reset, explicit Kosten/Versicherung mapping, fail-closed unknown Tarifcheck, manual banner preservation and product preservation. Live install/readback remains open.",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.195.zip",
-    "final_artifact_sha256": "8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.195.zip",
-    "handoff_artifact_bytes": 809869
+    "candidate_reference_artifact_sha256": "4cb42bd86374664107c076084de894422a77144ae37f996c384ff06757b2fbda",
+    "candidate_reference_scope": "6.72.196 hard-binds Tarifcheck directly into both visible Banner & Werbemittel partner dropdowns, independent of intake/snapshot state. Exact ZIP run 37493747495 SUCCESS: source PHP lint 22/22, manifest 28/28, fresh ZIP byte identity 28/28, exact ZIP installed into WordPress 7.1.2 + MariaDB 10.11, Tarifcheck rendered exactly once in import dropdown and exactly once in filter dropdown with no duplicate, and the 6.72.195 deterministic Schabracken/Tarifcheck reconcile regression remained PASS.",
+    "final_artifact_ref": "github-actions-run:37493747495/artifact:11426886461/AFFILIATE_ZENTRALE_6.72.196.zip",
+    "final_artifact_sha256": "4cb42bd86374664107c076084de894422a77144ae37f996c384ff06757b2fbda",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.196.zip",
+    "handoff_artifact_bytes": 810127
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,11 +57,11 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "LIVE_SCHABRACKEN_AND_TARIFCHECK_GROUP_READBACK_6_72_195",
+    "current_focus": "LIVE_TARIFCHECK_DROPDOWN_6_72_196_THEN_SCHABRACKEN_READBACK",
     "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
-    "current_focus_reason": "6.72.195 source and exact installer are fully hardtested. The remaining gate is real WordPress installation and read-only verification that Schabracken no longer receives stale Fütterung automation and that explicitly grouped Tarifcheck banners appear only in the intended Versicherungen or Kosten categories.",
+    "current_focus_reason": "Live 6.72.195 disproved the Tarifcheck dropdown despite snapshot injection. 6.72.196 removes that dependency by rendering Tarifcheck directly in both visible partner dropdowns. Exact WordPress/MariaDB render proof passed. Next: install exact 6.72.196 and verify Tarifcheck is visible in the dropdown; after that continue the still-open live Schabracken no-banner diagnosis.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_195_FINAL_INSTALLER_BOUND_LIVE_INSTALL_OPEN",
+    "adcell_work_status": "6_72_196_DROPDOWN_TESTED_LIVE_INSTALL_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -840,25 +840,25 @@
       "frontend_http_calls_added": 0,
       "frontend_db_queries_added": 0,
       "manual_import_post_batch_db_reads": "ONE_BATCH_QUERY",
-      "status": "SOURCE_AND_EXACT_ZIP_WORDPRESS_MARIADB_PASS_LIVE_READBACK_OPEN"
+      "status": "EXACT_ZIP_DROPDOWN_RENDER_PASS_LIVE_INSTALL_OPEN"
     }
   },
   "execution_state": {
-    "state": "FINAL_6_72_195_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
-    "authorized_next_action": "MANUAL_WORDPRESS_INSTALL_AND_LIVE_READBACK",
-    "bound_user_scope_action": "Install exactly release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.195.zip (SHA256 8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf, 809869 bytes), open the WordPress backend once so the 6.72.195 deterministic reconcile starts, then read-only verify Schabracken and both explicitly assigned Tarifcheck groups. Do not create 6.72.196 before a concrete live divergence is read back.",
-    "completion_condition": "LIVE_SCHABRACKEN_CORRECT_AND_TARIFCHECK_KOSTEN_VERSICHERUNG_VISIBLE_ONLY_IN_INTENDED_CATEGORIES",
-    "after_completion_action": "If all three live readbacks pass, close AFF-ERR-050. Only afterwards resume the separate periodic validity check for tariff-tool HTML codes.",
+    "state": "FINAL_6_72_196_TARIFCHECK_DROPDOWN_TESTED_MANUAL_INSTALL_OPEN",
+    "authorized_next_action": "MANUAL_WORDPRESS_INSTALL_AND_TARIFCHECK_DROPDOWN_READBACK",
+    "bound_user_scope_action": "Install exact AFFILIATE_ZENTRALE_6.72.196.zip (SHA256 4cb42bd86374664107c076084de894422a77144ae37f996c384ff06757b2fbda, 810127 bytes). Then open Affiliate-Zentrale -> Banner & Werbemittel and verify Tarifcheck appears in the visible partner dropdown. Do not create another version before concrete live divergence.",
+    "completion_condition": "LIVE_TARIFCHECK_VISIBLE_IN_PARTNER_DROPDOWN",
+    "after_completion_action": "Continue the still-open Schabracken no-banner live diagnosis from creative 393923 / stored target path; do not re-open the already fixed dropdown issue.",
     "no_optional_detours": true,
-    "sequence": 84,
+    "sequence": 85,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
     "evidence_sha256": null,
     "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "final_installer": {
-      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.195.zip",
-      "sha256": "8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf",
-      "bytes": 809869,
-      "exact_zip_run": 37490868184
+      "ref": "github-actions-run:37493747495/artifact:11426886461/AFFILIATE_ZENTRALE_6.72.196.zip",
+      "sha256": "4cb42bd86374664107c076084de894422a77144ae37f996c384ff06757b2fbda",
+      "bytes": 810127,
+      "exact_zip_run": 37493747495
     },
     "pre_gate_proof": {
       "live_6_72_194_schabracken": "FAIL_REPORTED_2026_10_06",
@@ -1261,7 +1261,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "LIVE_SCHABRACKEN_AND_TARIFCHECK_6_72_195_INSTALL_AND_READBACK",
+    "current_milestone": "LIVE_TARIFCHECK_DROPDOWN_6_72_196_INSTALL_AND_READBACK",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
