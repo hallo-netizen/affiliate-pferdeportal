@@ -1,4 +1,4 @@
-name: PSTE KISS Inspect Live Read Path
+name: PSTE KISS Readonly Inventory
 on:
   push:
     branches: [pste-kiss-e2e-20261005]
@@ -8,58 +8,31 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Locate existing PSTE read-only capability paths and latest recoverable source
+      - name: Read public WordPress inventory only
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
           python3 - <<'PY'
-          import io,os,re,subprocess,zipfile,hashlib
-          objs=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
-          zips=[];seen=set()
-          for line in objs:
-              p=line.split(' ',1)
-              if len(p)!=2 or not p[1].lower().endswith('.zip') or p[0] in seen: continue
-              seen.add(p[0]); zips.append((p[0],p[1]))
-          versions={}
-          patterns=re.compile(r'register_rest_route|COMPILER_READ_CAPABILITY|compiler.*capability|topic.*export|adminTopicPoolPage|reanalyzeRetainedBacklogBatch|PSTE_STORED_SOURCE_TITLE_CANDIDATE_V1',re.I)
-          def walk(raw,label,root,depth=0):
-              try:z=zipfile.ZipFile(io.BytesIO(raw))
-              except:return
-              members=z.namelist()
-              package_versions=set()
-              for n in members:
-                  if n.endswith('/'):continue
-                  low=n.lower()
-                  if not low.endswith(('.php','.json','.md','.txt','.yml','.yaml','.zip')):continue
-                  try:d=z.read(n)
-                  except:continue
-                  if low.endswith('.php'):
-                      txt=d.decode('utf-8','replace')
-                      for m in re.findall(r'(?:Version:\s*|PSTE_VERSION[^\n]*?[\'\"])(0\.\d+\.\d+)',txt,re.I):
-                          package_versions.add(m)
-                  if patterns.search(d.decode('utf-8','replace')):
-                      txt=d.decode('utf-8','replace').splitlines()
-                      idx=[i for i,x in enumerate(txt) if patterns.search(x)]
-                      if idx:
-                          print('SOURCE_HIT archive=%s member=%s bytes=%d sha256=%s'%(label,n,len(d),hashlib.sha256(d).hexdigest()))
-                          for i in idx[:40]:
-                              a=max(0,i-2);b=min(len(txt),i+5)
-                              print('SNIP L%d-L%d'%(a+1,b))
-                              for k in range(a,b): print('%05d %s'%(k+1,txt[k]))
-                  if low.endswith('.zip') and depth<4 and len(d)<100*1024*1024:
-                      walk(d,label+'!'+n,root,depth+1)
-              if package_versions:
-                  print('PACKAGE_VERSIONS archive=%s versions=%s'%(label,','.join(sorted(package_versions))))
-                  for v in package_versions: versions.setdefault(v,set()).add(label)
-          for obj,path in zips:
-              try:
-                  if int(subprocess.check_output(['git','cat-file','-s',obj],text=True).strip())>160*1024*1024:continue
-                  raw=subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL)
-              except:continue
-              walk(raw,path,obj)
-          print('VERSIONS_FOUND='+','.join(sorted(versions)))
+          import json,urllib.request
+          base='https://pferde-atelier.de/wp-json/wp/v2'
+          req=urllib.request.Request(base+'/posts?per_page=100&status=publish&_fields=id,title,slug,categories,status',headers={'User-Agent':'Mozilla/5.0'})
+          with urllib.request.urlopen(req,timeout=30) as r:
+              posts=json.load(r)
+              total=r.headers.get('X-WP-Total')
+          cat_ids=sorted({int(c) for p in posts for c in p.get('categories',[])})
+          cats={}
+          for i in range(0,len(cat_ids),100):
+              ids=','.join(map(str,cat_ids[i:i+100]))
+              if not ids: continue
+              req=urllib.request.Request(base+'/categories?per_page=100&include='+ids+'&_fields=id,name,slug,parent',headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=30) as r:
+                  for c in json.load(r): cats[int(c['id'])]=c
+          print('WP_TOTAL='+str(total))
+          print('WP_POSTS='+json.dumps([{
+              'post_id':p['id'],
+              'title':p['title']['rendered'],
+              'slug':p['slug'],
+              'status':p['status'],
+              'categories':[cats.get(int(c),{'id':c}) for c in p.get('categories',[])]
+          } for p in posts],ensure_ascii=False,separators=(',',':')))
           PY
