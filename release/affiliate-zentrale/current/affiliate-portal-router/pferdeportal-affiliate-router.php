@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.194
+ * Version: 6.72.195
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.194';
+    const VERSION = '6.72.195';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -334,6 +334,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action('ppar_v672190_banner_target_map_resync', array($this, 'run_v672190_banner_target_map_resync'));
         add_action('admin_init', array($this, 'maybe_rebuild_banner_target_map_v672194'), 34);
         add_action('ppar_v672194_banner_target_rebuild', array($this, 'run_v672194_banner_target_rebuild'));
+        add_action('admin_init', array($this, 'maybe_reconcile_banner_state_v672195'), 35);
+        add_action('ppar_v672195_banner_reconcile', array($this, 'run_v672195_banner_reconcile'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
         add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33);
