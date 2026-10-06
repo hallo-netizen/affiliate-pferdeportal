@@ -1,7 +1,7 @@
 # Affiliate Router 6.72.189 — import-only destination URL rootfix
 
 ## Status
-SOURCE_FIXED_LOCAL_IMPORT_SIM_PASS_RELEASE_GATES_OPEN
+SOURCE_FIXED_LOCAL_EXACT_RECONSTRUCTION_27_OF_27_AND_PHP_21_OF_21_PASS_WORDPRESS_MARIADB_GATE_OPEN
 
 ## User decision / KISS contract
 Banner relevance uses the real destination URL as the primary reusable signal.
@@ -66,7 +66,7 @@ The simulation is not a substitute for the full WordPress/MariaDB release gate.
 ## Source binding
 - version: 6.72.189
 - source file count: 27
-- source manifest SHA256: 9414214c15ff2d1ad1565473960aa0364473157cdbdaa4c54abcf85a563a1b95
+- source manifest SHA256: e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d
 - final installer: absent
 - release_allowed: false
 
@@ -74,3 +74,22 @@ The simulation is not a substitute for the full WordPress/MariaDB release gate.
 Run the normal bound source/WordPress/MariaDB/performance gates on this exact manifest, then exact ZIP/fresh-unpack/byte-identity gates, then live install + bounded ADCELL resync + public Reithelme/Schabracken readback.
 
 The former successful-response proof for getPromotionCategories/category 14727 is no longer a release prerequisite because that extra category request is no longer in the active ADCELL banner import path.
+
+
+## Bound-gate defect found and fixed
+During exact local reconstruction from the tested 6.72.186 installer, the URL rootfix exposed one real gate defect:
+- output_banner_destination_source() already recognized resolved_redirect;
+- output_banner_destination_classification() still accepted only provider_explicit and decoded_tracking;
+- therefore a successfully import-resolved ADCELL destination could incorrectly fall back to general instead of using the stored real destination.
+
+Fix:
+- add resolved_redirect to the existing accepted destination-source list only;
+- no new query, HTTP call, table, column, cache, hook or ranking path.
+
+Post-fix proof:
+- exact local reconstruction from tested 6.72.186 baseline plus the six current changed plugin files: PASS;
+- current manifest file list/hash verification: 27/27 PASS;
+- PHP syntax across all plugin PHP files: 21/21 PASS;
+- URL import/performance simulation remains PASS;
+- output runtime contains no call to the import-only destination resolver;
+- new/changed URL logic remains outside frontend hotpath.
