@@ -1032,9 +1032,19 @@ trait PPAR_Output_Objects_Trait {
         if ($family === '') { return true; }
         if ($family === 'blocked' || !is_array($target)) { return false; }
         if (sanitize_key((string)($target['type'] ?? '')) !== 'category') { return false; }
-        $path = $this->output_text(trim((string)($target['label'] ?? '') . ' ' . (string)($target['slug'] ?? '')));
-        if ($family === 'kosten') { return strpos($path, 'kosten') !== false; }
-        if ($family === 'versicherung') { return strpos($path, 'versicherung') !== false; }
+
+        // HARD RULE: Nicht irgendein Wort im Kategorienamen entscheidet,
+        // sondern der echte hierarchische Kategoriepfad. Nur dessen Wurzel
+        // darf Tarifcheck freigeben: Kredit unter Kosten, Versicherung unter
+        // Versicherungen. Ein gleichnamiges Blatt im falschen Ast bleibt zu.
+        $parts = preg_split('/\s+>\s+/', (string)($target['label'] ?? ''));
+        $root = $this->output_text((string)($parts[0] ?? ''));
+        if ($family === 'kosten') {
+            return $root === 'kosten';
+        }
+        if ($family === 'versicherung') {
+            return preg_match('/^versicher(?:ung|ungen)(?:\s|$)/u', $root) === 1;
+        }
         return false;
     }
 
