@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 232,
+  "generation": 233,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "7cf4c7bb1704faf87a3fefa95cf36ef7bf6bf66ddeb58b7149ecbded76edcabb",
+    "manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,20 +35,20 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.194",
-    "status": "FINAL_6_72_194_LIVE_SCHABRACKEN_REPAIR_BOUND_MANUAL_INSTALL_OPEN",
+    "version": "6.72.195",
+    "status": "SOURCE_6_72_195_DETERMINISTIC_BANNER_RECONCILE_LOCAL_SIM_PASS_WORDPRESS_MARIADB_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "7cf4c7bb1704faf87a3fefa95cf36ef7bf6bf66ddeb58b7149ecbded76edcabb",
+    "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "36efb30086ece987cf9a55e3ab24cb85073343b67b5f6b1b761055a0fab08d04",
-    "candidate_reference_scope": "6.72.193 live was disproved by the user: Schabracken remained wrong and Tarifcheck was not selectable. 6.72.194 adds the real Tarifcheck Directpartner preset and a one-time local banner target-map rebuild from stored destination_url that deactivates stale automatic output_object_v4 campaigns before rebinding. Source run 37480297999 PASS; exact ZIP run 37480911019 PASS. Live install/readback still required before AFF-ERR-050 can close.",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.194.zip",
-    "final_artifact_sha256": "36efb30086ece987cf9a55e3ab24cb85073343b67b5f6b1b761055a0fab08d04",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.194.zip",
-    "handoff_artifact_bytes": 807040
+    "candidate_reference_artifact_sha256": null,
+    "candidate_reference_scope": "6.72.194 is live-disproved for Schabracken. 6.72.195 removes the structural stale-auto-campaign dependency by globally deactivating automatic output_object_v4 banner campaigns before rebuilding from current Creative-Library target maps. Tarifcheck manual groups are now explicit stored authority (Versicherungen or Kreditvergleich/Kosten) instead of being inferred from tracking URLs. Local positive/negative simulation 12/12 PASS. Exact WordPress/MariaDB and final ZIP proof remain open.",
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null,
+    "handoff_artifact_filename": null,
+    "handoff_artifact_bytes": null
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,11 +57,11 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "LIVE_SCHABRACKEN_TARGET_REBUILD_AND_TARIFCHECK_PRESET_6_72_194_FINAL",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md",
-    "current_focus_reason": "6.72.193 is live and disproved for Schabracken; Tarifcheck was also not selectable. 6.72.194 fixes exactly those two issues. Banner URL concept remains stored-map-only at runtime; the missing piece was reliable local rebinding of existing live state and current campaign discovery. No frontend performance path is expanded.",
+    "current_focus": "DETERMINISTIC_BANNER_RECONCILE_AND_TARIFCHECK_EXPLICIT_GROUP_6_72_195",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
+    "current_focus_reason": "6.72.194 live failed again for Schabracken. Root cause is structural: old automatic campaign projections could survive when historical identity linkage was missing/wrong, while Tarifcheck manual group intent was never stored and could disappear behind tracking-only URLs. 6.72.195 makes automatic campaigns disposable projections of current Creative-Library target maps and makes the manually chosen Tarifcheck family explicit authority.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_194_FINAL_INSTALLER_BOUND_LIVE_INSTALL_OPEN",
+    "adcell_work_status": "6_72_195_SOURCE_LOCAL_SIM_PASS_WORDPRESS_MARIADB_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -387,8 +387,35 @@
         "tarifcheck_html_banner_regression": "PASS",
         "final_zip_sha256": "36efb30086ece987cf9a55e3ab24cb85073343b67b5f6b1b761055a0fab08d04",
         "final_zip_bytes": 807040,
-        "result": "SOURCE_AND_EXACT_ZIP_PASS_LIVE_OPEN",
-        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md"
+        "result": "SOURCE_AND_EXACT_ZIP_PASS_LIVE_FAIL_SCHABRACKEN",
+        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md",
+        "live_result": "FAIL_REPORTED_2026_10_06_SCHABRACKEN_STILL_WRONG"
+      },
+      "deterministic_reconcile_672195": {
+        "version": "6.72.195",
+        "live_failure_baseline": "6.72.194_INSTALLED_SCHABRACKEN_STILL_WRONG",
+        "automatic_banner_reset": "GLOBAL_SOURCE_OUTPUT_OBJECT_V4_AUTO_VERIFIED_BANNER_ONLY_NO_IDENTITY_META_REQUIRED",
+        "automatic_target_authority": "CREATIVE_LIBRARY_TOPIC_TARGETS_ONLY",
+        "derived_campaign_policy": "DISPOSABLE_REBUILD_FROM_CURRENT_AUTHORITY",
+        "first_admin_request": "RUNS_FIRST_BOUNDED_RECONCILE_BATCH_DIRECTLY",
+        "cron_role": "CONTINUATION_ONLY",
+        "products_touched": 0,
+        "manual_tarifcheck_family_authority": [
+          "versicherung",
+          "kosten"
+        ],
+        "tarifcheck_existing_banner_batch_actions": [
+          "tarifcheck_family_versicherung",
+          "tarifcheck_family_kosten",
+          "tarifcheck_family_auto"
+        ],
+        "unknown_unassigned_tarifcheck": "FAIL_CLOSED_NO_TARGET_MAP_NO_BANNER",
+        "local_positive_negative_simulation": "PASS_12_OF_12",
+        "source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
+        "wordpress_mariadb": "OPEN",
+        "final_zip": "OPEN",
+        "live_readback": "OPEN",
+        "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md"
       }
     },
     "awin_catalog_refresh": {
@@ -816,40 +843,38 @@
     }
   },
   "execution_state": {
-    "state": "FINAL_6_72_194_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
+    "state": "SOURCE_6_72_195_LOCAL_SIM_PASS_BOUND_WORDPRESS_MARIADB_GATE_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Replace the currently installed 6.72.193 with exactly release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.194.zip SHA256 36efb30086ece987cf9a55e3ab24cb85073343b67b5f6b1b761055a0fab08d04. After activation open the WordPress backend once so the admin-only one-time local banner target rebuild is scheduled. Then perform a real read-only Schabracken delivery check. Also verify Banner & Werbemittel -> Sammelimport echter Provider-Werbemittel -> Aufgenommener Partner now offers Tarifcheck. Do not declare Schabracken closed before that live readback.",
-    "completion_condition": "6_72_194_INSTALLED_TARGET_REBUILD_COMPLETE_AND_REAL_SCHABRACKEN_READBACK_PASS",
-    "after_completion_action": "If live Schabracken is correct, close AFF-ERR-050 and continue with real Tarifcheck HTML banner import. If still wrong, capture real live candidate/map state before any further source change.",
+    "bound_user_scope_action": "Test the exact 6.72.195 source in real WordPress/MariaDB before any installer is handed off. Required cases: stale active automatic Fütterung banner with missing/wrong identity metadata must be globally disabled; current Schabracken target must rematerialize as the only active automatic banner for that case; manual/FIXED banner and product campaigns must remain intact; existing Tarifcheck banners explicitly assigned to Versicherungen must map to all real insurance leaf categories; existing Tarifcheck banners explicitly assigned to Kreditvergleich/Kosten must map to all real cost leaf categories; unassigned tracking-only/mixed Tarifcheck must remain fail-closed. Then run PHP lint, exact source manifest check, fresh ZIP unpack/byte identity and only then bind a final installer.",
+    "completion_condition": "EXACT_6_72_195_WORDPRESS_MARIADB_POSITIVE_NEGATIVE_PASS_PLUS_PHP_LINT_PLUS_FINAL_ZIP_IDENTITY_PASS",
+    "after_completion_action": "Only after the exact source and exact installer both pass may 6.72.195 be installed live. Then perform read-only Schabracken and both Tarifcheck group readbacks before closing AFF-ERR-050.",
     "no_optional_detours": true,
-    "sequence": 82,
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md",
+    "sequence": 83,
+    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "7cf4c7bb1704faf87a3fefa95cf36ef7bf6bf66ddeb58b7149ecbded76edcabb",
-    "final_installer": {
-      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.194.zip",
-      "sha256": "36efb30086ece987cf9a55e3ab24cb85073343b67b5f6b1b761055a0fab08d04",
-      "bytes": 807040,
-      "binding_commit": "0f503ce5b03d37dfdf994c46373501becbc972b5"
-    },
+    "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
+    "final_installer": null,
     "pre_gate_proof": {
-      "source_wordpress_mariadb": "PASS_RUN_37480297999",
-      "tarifcheck_selectable_preset": "PASS",
-      "stale_fuetterung_to_schabracken_rebuild": "PASS",
-      "unknown_destination_fail_closed": "PASS",
-      "manual_fixed_preserved": "PASS",
-      "scheduler_admin_only": "PASS",
-      "php_lint_source": "PASS_22_OF_22",
-      "final_zip_fresh_unpack": "PASS_28_OF_28",
-      "final_zip_php_lint": "PASS_22_OF_22",
-      "exact_zip_wordpress_mariadb": "PASS_RUN_37480911019",
-      "tariff_tool_regression": "PASS",
-      "previous_tarifcheck_html_banner_contract": "PASS",
-      "no_new_tables": 0,
-      "no_new_columns": 0
+      "live_6_72_194_schabracken": "FAIL_REPORTED_2026_10_06",
+      "root_cause_stale_unlinked_auto_campaign": "REPRODUCED_LOCALLY",
+      "tarifcheck_group_not_first_class_stored_input": "CONFIRMED_IN_SOURCE",
+      "local_positive_negative_simulation": "PASS_12_OF_12",
+      "stale_unlinked_auto_banner_reset": "PASS",
+      "manual_banner_preserved": "PASS",
+      "product_campaign_preserved": "PASS",
+      "tarifcheck_explicit_kosten": "PASS",
+      "tarifcheck_explicit_versicherung": "PASS",
+      "tarifcheck_unknown_mixed_fail_closed": "PASS",
+      "source_manifest_binding": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
+      "php_lint_source": "OPEN",
+      "wordpress_mariadb": "OPEN",
+      "final_zip_fresh_unpack": "OPEN"
     },
     "authorized_change_prefixes": [
+      "release/affiliate-zentrale/current/affiliate-portal-router/",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
       "release/affiliate-zentrale/evidence/",
+      "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md"
     ]
