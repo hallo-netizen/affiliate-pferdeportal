@@ -1002,6 +1002,43 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
+     * Tarifcheck ist ein Direktpartner im bestehenden Importweg, kein neuer Provider.
+     * Produktfamilien werden nur aus der realen Ziel-URL bestimmt.
+     * - Kredit/Darlehen/Finanzierung -> ausschliesslich Kategoriepfade unter "Kosten"
+     * - Versicherung/Haftpflicht -> ausschliesslich Kategoriepfade unter "Versicherung"
+     * Unbekannte/mehrdeutige Tarifcheck-Ziele bleiben fail-closed.
+     */
+    private function output_tarifcheck_banner_family($row) {
+        if (!is_array($row)) { return ''; }
+        $partner = $this->output_text((string)($row['partner_name'] ?? ''));
+        $destination = esc_url_raw((string)($row['destination_url'] ?? ''));
+        $host = strtolower((string)wp_parse_url($destination, PHP_URL_HOST));
+        $is_tarifcheck = strpos($partner, 'tarifcheck') !== false
+            || $host === 'tarifcheck.de'
+            || substr($host, -14) === '.tarifcheck.de';
+        if (!$is_tarifcheck) { return ''; }
+
+        $semantic = $this->output_destination_semantic_text($row);
+        if ($semantic === '') { return 'blocked'; }
+        $credit = preg_match('/(^|\\s)(kredit|kredite|kreditkarte|kreditkarten|darlehen|finanzierung|baufinanzierung)(\\s|$)/u', $semantic) === 1;
+        $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|haftpflicht|pferdehaftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
+        if ($credit && !$insurance) { return 'kosten'; }
+        if ($insurance && !$credit) { return 'versicherung'; }
+        return 'blocked';
+    }
+
+    private function output_tarifcheck_target_allowed($target, $family) {
+        $family = sanitize_key((string)$family);
+        if ($family === '') { return true; }
+        if ($family === 'blocked' || !is_array($target)) { return false; }
+        if (sanitize_key((string)($target['type'] ?? '')) !== 'category') { return false; }
+        $path = $this->output_text(trim((string)($target['label'] ?? '') . ' ' . (string)($target['slug'] ?? '')));
+        if ($family === 'kosten') { return strpos($path, 'kosten') !== false; }
+        if ($family === 'versicherung') { return strpos($path, 'versicherung') !== false; }
+        return false;
+    }
+
+    /**
      * HARD RULE – automatische Banner:
      * Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern.
      * Diese Methode darf nur aus Import-/Workerpfaden aufgerufen werden.
@@ -1028,6 +1065,7 @@ trait PPAR_Output_Objects_Trait {
         $portals=$this->output_portal_registry();
         $new_records=array();
         $mapped=0;
+        $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
 
         foreach((array)$portals as $portal){
             if(!is_array($portal) || empty($portal['enabled'])){continue;}
@@ -1037,10 +1075,18 @@ trait PPAR_Output_Objects_Trait {
             // Bereits exakt fuer dieselbe Ziel-URL gespeichert => unveraendert wiederverwenden.
             $reuse=null;
             foreach($existing as $record){
+                $stored_target_key=sanitize_text_field((string)($record['target_key']??''));
+                $stored_target_type=strpos($stored_target_key, ':')!==false ? sanitize_key(strstr($stored_target_key, ':', true)) : '';
+                $stored_target=array(
+                    'type'=>$stored_target_type,
+                    'label'=>sanitize_text_field((string)($record['target_label']??'')),
+                    'slug'=>'',
+                );
                 if(sanitize_key((string)($record['portal_key']??''))===$portal_key
                     && sanitize_key((string)($record['state']??''))==='mapped'
                     && esc_url_raw((string)($record['destination_url']??''))===$destination
-                    && sanitize_text_field((string)($record['target_key']??''))!==''){
+                    && $stored_target_key!==''
+                    && $this->output_tarifcheck_target_allowed($stored_target,$tarifcheck_family)){
                     $reuse=$record; break;
                 }
             }
@@ -1060,6 +1106,7 @@ trait PPAR_Output_Objects_Trait {
                 if(!is_array($target)){continue;}
                 $type=sanitize_key((string)($target['type']??''));
                 if(!in_array($type,$wanted,true)){continue;}
+                if(!$this->output_tarifcheck_target_allowed($target,$tarifcheck_family)){continue;}
                 $target_key=sanitize_text_field((string)($target['key']??''));
                 if($target_key===''){continue;}
                 if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
