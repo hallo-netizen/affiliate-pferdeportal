@@ -49,8 +49,8 @@ $seed=function($external,$title,$description,$tags,$destination,$destinationSour
         'information'=>$description,
     );
     $row=array(
-        'provider'=>'adcell',
-        'partner_external_id'=>'999',
+        'provider'=>'direct',
+        'partner_external_id'=>'banner-test',
         'partner_name'=>'Test Partner',
         'external_id'=>$external,
         'identity_hash'=>$identity,
