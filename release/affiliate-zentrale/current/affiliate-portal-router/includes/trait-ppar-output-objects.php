@@ -984,71 +984,20 @@ trait PPAR_Output_Objects_Trait {
     }
 
     private function output_banner_destination_classification($row,$portal) {
+        // HARD RULE:
+        // Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern.
+        // Runtime darf weder Ziel-URL noch Provider-Thema neu klassifizieren.
+        // Ohne gespeicherte feste Zielzuordnung bleibt der Banner gesperrt.
         $stored=$this->output_banner_stored_destination_classification($row,$portal);
-        if(is_wp_error($stored)||is_array($stored)){return $stored;}
-        $provider_topic=$this->output_banner_provider_topic_classification($row,$portal);
-        if(is_wp_error($provider_topic)||is_array($provider_topic)){return $provider_topic;}
-        $destination_source=$this->output_banner_destination_source($row);
-        if(!in_array($destination_source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)){
-            return array('status'=>'review','confidence'=>0,'reason'=>'Keine belastbare echte Ziel-URL; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unknown');
-        }
-        $semantic=$this->output_destination_semantic_text($row);
-        if($semantic===''){
-            return array('status'=>'review','confidence'=>0,'reason'=>'Ziel-URL enthält keinen verwertbaren Themenhinweis; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unmapped');
-        }
-        $targets=$this->output_portal_targets($portal);
-        if(is_wp_error($targets)){return $targets;}
-        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
-        $portal_key=sanitize_key((string)($portal['key']??''));
-        $dest_tokens=$this->output_tokens($semantic);
-        $ranked=array();
-        foreach((array)$targets as $target){
-            if(!is_array($target)){continue;}
-            $type=sanitize_key((string)($target['type']??''));
-            if(!in_array($type,$wanted,true)){continue;}
-            if(method_exists($this,'control_target_gate')){
-                $gate=$this->control_target_gate($portal_key,(string)($target['key']??''));
-                if(is_wp_error($gate)){continue;}
-            }
-            $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
-            $slug_tokens=$this->output_tokens($slug_norm);
-            $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
-            $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
-            $leaf_tokens=$this->output_tokens($leaf_norm);
-            $matched=array();
-            foreach(array_values(array_unique(array_merge($slug_tokens,$leaf_tokens))) as $tt){
-                if(strlen($tt)<5){continue;}
-                foreach($dest_tokens as $dt){
-                    if($dt===$tt || (strlen($dt)>=6 && strlen($tt)>=6 && (strpos($dt,$tt)!==false || strpos($tt,$dt)!==false)) || substr($dt,0,6)===substr($tt,0,6)){
-                        $matched[$tt]=true;break;
-                    }
-                }
-            }
-            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
-            $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) : count($matched)*140;
-            if($score<=0){continue;}
-            $ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);
-        }
-        usort($ranked,static function($a,$b){$c=(int)$b['score']<=>(int)$a['score'];if($c!==0)return $c;$c=(int)$b['matches']<=>(int)$a['matches'];if($c!==0)return $c;return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);});
-        if(!$ranked){
-            return array('status'=>'review','confidence'=>0,'reason'=>'Ziel-URL passt zu keinem Portalziel; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unmapped');
-        }
-        $best=$ranked[0];$second=$ranked[1]??null;
-        $margin=(int)$best['score']-(int)($second['score']??0);
-        $accept=!empty($best['exact']) ? ($second===null || $margin>=100) : ((int)$best['score']>=140 && ($second===null || $margin>=70));
-        if(!$accept){
-            return array('status'=>'review','confidence'=>0,'reason'=>'Ziel-URL ist zwischen mehreren Portalzielen nicht eindeutig; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_ambiguous');
-        }
-        $target=$best['target'];
-        $target['_ppar_destination_match_level']=!empty($best['exact'])?'exact':'extended';
+        if(is_wp_error($stored)){return $stored;}
+        if(is_array($stored)){return $stored;}
         return array(
-            'status'=>'ready',
-            'confidence'=>!empty($best['exact'])?100:80,
-            'reason'=>!empty($best['exact'])?'Eindeutige Zuordnung aus echter Ziel-URL.':'Eindeutiger weiterer Themenbereich aus echter Ziel-URL.',
-            'target'=>$target,
+            'status'=>'review',
+            'confidence'=>0,
+            'reason'=>'Keine gespeicherte feste Portalziel-Zuordnung vorhanden.',
+            'target'=>null,
             'alternatives'=>array(),
-            'source'=>'banner_destination_url',
-            '_ppar_destination_level'=>!empty($best['exact'])?'exact':'extended',
+            'source'=>'banner_target_map_missing',
         );
     }
 
@@ -1061,32 +1010,6 @@ trait PPAR_Output_Objects_Trait {
             if($this->output_row_matches_slot_rule($row,$rule,'banner')){$slots[]=sanitize_key((string)$slot_id);}
         }
         return array_values(array_unique(array_filter($slots)));
-    }
-
-    private function output_banner_general_fallback_classification($row,$portal,$compatible_slots) {
-        if(!$compatible_slots){return null;}
-        $matrix=$this->output_slot_matrix($portal);
-        $targets=$this->output_portal_targets($portal);
-        if(is_wp_error($matrix)||is_wp_error($targets)||!is_array($matrix)||!is_array($targets)){return null;}
-        $portal_key=sanitize_key((string)($portal['key']??''));
-        foreach($compatible_slots as $slot_id){
-            $rule=is_array($matrix[$slot_id]??null)?$matrix[$slot_id]:array();
-            if(!$rule){continue;}
-            $types=array_map('sanitize_key',(array)($rule['target_types']??array()));
-            $contexts=array_map('sanitize_key',(array)($rule['target_contexts']??array()));
-            foreach($targets as $target){
-                if(!is_array($target)||absint($target['id']??0)<=0){continue;}
-                if($types && !in_array(sanitize_key((string)($target['type']??'')),$types,true)){continue;}
-                if($contexts && !in_array(sanitize_key((string)($target['context']??'')),$contexts,true)){continue;}
-                if(method_exists($this,'control_target_gate')&&is_wp_error($this->control_target_gate($portal_key,(string)($target['key']??'')))){continue;}
-                $target['_ppar_general_fallback_anchor']=1;
-                return array(
-                    'classification'=>array('status'=>'ready','confidence'=>1,'reason'=>'Kein eindeutiges Zielthema: allgemeiner technisch gültiger Banner-Fallback.','target'=>$target,'alternatives'=>array(),'source'=>'banner_general_fallback','_ppar_destination_level'=>'general'),
-                    'slot'=>array('slot_id'=>$slot_id,'rule'=>$rule),
-                );
-            }
-        }
-        return null;
     }
 
     private function output_store_banner_library_assignment($row,$portal,$classification,$compatible_slots) {
@@ -2595,27 +2518,9 @@ trait PPAR_Output_Objects_Trait {
                 $slot = array('slot_id'=>''); $status = sanitize_key((string) ($classification['status'] ?? 'review'));
                 if ($status === 'blocked' && sanitize_key((string) ($classification['source'] ?? '')) === 'source_state') { $status = 'blocked_source'; }
 
-                // Kein eindeutiges Zielthema ist bei Bannern kein Fehler.
-                // Nach Safety/Format wird daraus bewusst der allgemeine Pool.
-                if ($output_type === 'portal_banner' && $status === 'review'
-                    && strpos(sanitize_key((string)($classification['source']??'')),'banner_destination_') === 0) {
-                    $fallback = $this->output_banner_general_fallback_classification($row,$portal,$compatible_banner_slots);
-                    if (is_array($fallback)) {
-                        $classification = $fallback['classification'];
-                        $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
-                        $slot = is_array($fallback['slot'] ?? null) ? $fallback['slot'] : array('slot_id'=>'');
-                        $status = 'ready';
-                    }
-                }
-
                 if (in_array($output_type, array('portal_banner','product_campaign'), true) && $status === 'ready' && empty($slot['slot_id'])) {
                     $slot = $this->output_format_slot($row, $portal, $target, $output_type === 'product_campaign' ? 'product' : 'banner');
                     if (is_wp_error($slot)) { $status='blocked_format'; $classification['reason']=$slot->get_error_message(); $slot=array('slot_id'=>''); }
-                }
-
-                if ($output_type === 'portal_banner' && $status === 'ready') {
-                    $classification['_ppar_banner_compatible_slots']=$compatible_banner_slots;
-                    $this->output_store_banner_library_assignment($row,$portal,$classification,$compatible_banner_slots);
                 }
 
                 if (in_array($output_type, array('hivepress_listing','portal_listing'), true) && $status === 'ready') {
