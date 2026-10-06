@@ -45,36 +45,44 @@ jobs:
         run: |
           set -euo pipefail
           BASE=aa3bdbbae8520d6f5e9bd517be0d9325169177f8
-          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
           git cat-file -e "$BASE^{commit}"
-          CHANGED="$(git diff --name-only "$BASE"...HEAD -- "$ROOT" | sort)"
-          EXPECTED="$(printf '%s
-'             "$ROOT/includes/trait-ppar-tariff-tools.php"             "$ROOT/pferdeportal-affiliate-router.php"             "$ROOT/readme.txt" | sort)"
-          test "$CHANGED" = "$EXPECTED"
           python3 - <<'PY'
           import subprocess
           from pathlib import Path
           base='aa3bdbbae8520d6f5e9bd517be0d9325169177f8'
-          p='release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'
-          old=subprocess.check_output(['git','show',f'{base}:{p}'],text=True)
+          root='release/affiliate-zentrale/current/affiliate-portal-router'
+          changed=subprocess.check_output(
+              ['git','diff','--name-only',base+'...HEAD','--',root],text=True
+          ).splitlines()
+          expected=[
+              root+'/includes/trait-ppar-tariff-tools.php',
+              root+'/pferdeportal-affiliate-router.php',
+              root+'/readme.txt',
+          ]
+          if sorted(changed)!=sorted(expected):
+              raise SystemExit('unexpected plugin source delta: '+repr(changed))
+
+          p=root+'/pferdeportal-affiliate-router.php'
+          old=subprocess.check_output(['git','show',base+':'+p],text=True)
           cur=Path(p).read_text()
           cur=cur.replace('Version: 6.72.193','Version: 6.72.192')
           cur=cur.replace("const VERSION = '6.72.193';","const VERSION = '6.72.192';")
-          for line in [
+          lines=[
               "require_once __DIR__ . '/includes/trait-ppar-tariff-tools.php';\n",
               "    use PPAR_Tariff_Tools_Trait;\n",
               "        $this->tariff_tools_register_hooks();\n",
               "        add_shortcode('affiliate_rechner', array($this, 'shortcode_tariff_tool'));\n",
               "        add_submenu_page('affiliate-portal-zentrale','Tarifrechner','Tarifrechner','manage_options','affiliate-portal-tariff-tools',array($this,'render_tariff_tools_page'));\n",
-          ]:
+          ]
+          for line in lines:
               if line not in cur:
-                  raise SystemExit('missing expected integration line: '+line)
+                  raise SystemExit('missing expected integration line: '+repr(line))
               cur=cur.replace(line,'',1)
-          if cur != old:
+          if cur!=old:
               raise SystemExit('main plugin contains changes beyond isolated tariff-tool wiring')
           print('PASS 6.72.192 main runtime preserved outside exact tariff-tool wiring')
+          print('PASS plugin source delta limited to new tariff trait + wiring + readme')
           PY
-          echo "PASS plugin source delta limited to new tariff trait + wiring + readme"
 
       - name: Source hardlocks and lint
         shell: bash
