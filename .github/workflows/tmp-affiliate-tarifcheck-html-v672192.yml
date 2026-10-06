@@ -47,7 +47,7 @@ jobs:
           grep -F "const VERSION = '6.72.192';" "$ROOT/pferdeportal-affiliate-router.php"
           grep -F "creative_library_verify_before_assign_banner" "$ROOT/includes/trait-ppar-creative-library.php"
           grep -F "erst DANACH feste Portalziele speichern" "$ROOT/includes/trait-ppar-creative-library.php"
-          grep -F "'targets'=>$new_records" "$ROOT/includes/trait-ppar-output-objects.php"
+          grep -F "'targets'=>" "$ROOT/includes/trait-ppar-output-objects.php"
           find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
           test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "21"
           echo "PASS PHP lint 21/21"
