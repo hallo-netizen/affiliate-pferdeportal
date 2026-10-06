@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 237,
+  "generation": 238,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,20 +35,20 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.197",
-    "status": "FINAL_6_72_197_KISS_FIXED_BANNER_TESTED_MANUAL_INSTALL_OPEN",
+    "version": "6.72.198",
+    "status": "FINAL_6_72_198_GENERAL_BANNER_CLASSIFIER_TESTED_MANUAL_INSTALL_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
     "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "26ab96af81380abc569a3688ab5036c84c86a4bf33fd9d2d9e3874170d29426a",
-    "candidate_reference_scope": "6.72.197 KISS: explicit fixed banner target is authoritative. A manual fixed banner is immediately active, quality_manual_status=fixed, exact target only, match_descendants=false, excluded from automatic banner reset, and fixed banner planning is restricted to portal_banner only (zero side-output blockers). Exact ZIP run 37496952071 SUCCESS. Tarifcheck dropdown and prior deterministic Schabracken/Tarifcheck regression remain PASS.",
-    "final_artifact_ref": "github-actions-run:37496952071/artifact:11428225756/AFFILIATE_ZENTRALE_6.72.197.zip",
-    "final_artifact_sha256": "26ab96af81380abc569a3688ab5036c84c86a4bf33fd9d2d9e3874170d29426a",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.197.zip",
-    "handoff_artifact_bytes": 810567
+    "candidate_reference_artifact_sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
+    "candidate_reference_scope": "6.72.198 fixes the general banner pipeline, not one banner: current provider topic / banner title-description-tags are evaluated before destination URL fallback; stale stored target maps are never reused; ambiguous content and tracking-only unknowns fail closed; one-time 6.72.198 reconcile resets old automatic banner campaigns and rebuilds all active banner target maps from current evidence. Exact ZIP run 37501160643 SUCCESS: WordPress 7.1.2 + MariaDB 10.11, 28/28 source identity, 22/22 PHP lint, Tarifcheck dropdown, general multi-banner positive/negative classifier, frontend active Schabracken/Pferdedecken campaigns, manual fixed-target regression, deterministic reset regression.",
+    "final_artifact_ref": "github-actions-run:37501160643/artifact:11429816780/AFFILIATE_ZENTRALE_6.72.198.zip",
+    "final_artifact_sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
+    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.198.zip",
+    "handoff_artifact_bytes": 811235
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,11 +57,11 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "LIVE_KISS_FIXED_SCHABRACKEN_393923_6_72_197",
+    "current_focus": "LIVE_GENERAL_BANNER_POOL_6_72_198_INSTALL_AND_READBACK",
     "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
-    "current_focus_reason": "Live automatic inference is insufficient because procavallo creative 393923 only exposes broad machine-readable evidence (Ausrüstung) while the actual banner is Schabracken. 6.72.197 uses the existing manual fixed-target path as the hard authority and makes it durable: fixed campaign is active, exact category only, and survives automatic reset. Next live action is install 6.72.197 and bind creative 393923 once to the real Schabracken category.",
+    "current_focus_reason": "The live site currently has no automatic banners after prior reset. 6.72.198 changes the general mapping authority for every banner and forces a fresh all-banner reconcile with a new state key. Live proof must verify that multiple real banners return on the correct categories, not only Schabracken, and that ambiguous/unknown creatives remain absent rather than being misassigned.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_197_KISS_FIXED_TARGET_TESTED_LIVE_INSTALL_OPEN",
+    "adcell_work_status": "6_72_198_GENERAL_BANNER_PIPELINE_TESTED_LIVE_INSTALL_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -844,21 +844,21 @@
     }
   },
   "execution_state": {
-    "state": "FINAL_6_72_197_KISS_FIXED_BANNER_TESTED_MANUAL_INSTALL_OPEN",
-    "authorized_next_action": "MANUAL_INSTALL_6_72_197_THEN_FIXED_TARGET_393923_TO_SCHABRACKEN",
-    "bound_user_scope_action": "Install exact AFFILIATE_ZENTRALE_6.72.197.zip (SHA256 26ab96af81380abc569a3688ab5036c84c86a4bf33fd9d2d9e3874170d29426a, 810567 bytes). Then in Banner & Werbemittel select procavallo Banner 393923, choose Pferde Atelier, action 'Fachlich freigeben, Ziel/Slot fest vorgeben', fixed target Schabracken, leave slot optional/automatic, save, and verify the Schabracken frontend. No URL inference or new version before concrete live divergence.",
-    "completion_condition": "LIVE_CREATIVE_393923_VISIBLE_ON_SCHABRACKEN_WITH_EXACT_FIXED_TARGET",
-    "after_completion_action": "After Schabracken passes, assign the already imported Tarifcheck banners by explicit family: Versicherungen or Kreditvergleich/Kosten, then verify visibility only in those intended category families.",
+    "state": "FINAL_6_72_198_GENERAL_BANNER_CLASSIFIER_TESTED_MANUAL_INSTALL_OPEN",
+    "authorized_next_action": "MANUAL_INSTALL_6_72_198_THEN_OPEN_BACKEND_AND_READBACK_MULTIPLE_REAL_BANNERS",
+    "bound_user_scope_action": "Install exact AFFILIATE_ZENTRALE_6.72.198.zip (SHA256 0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043, 811235 bytes). Open WordPress backend once. 6.72.198 then globally deactivates old automatic banner campaigns, rebuilds target maps for every active banner from provider topic/banner content first and destination URL only as fallback, and replans verified banners. Read-only verify several real categories including Schabracken. Do not create 6.72.199 without a concrete live divergence.",
+    "completion_condition": "MULTIPLE_REAL_BANNERS_VISIBLE_ONLY_ON_CORRECT_CATEGORIES_AND_AMBIGUOUS_BANNERS_FAIL_CLOSED",
+    "after_completion_action": "If the general live banner pool passes, continue explicit Tarifcheck group assignment/visibility verification and then the separate tariff HTML validity monitor.",
     "no_optional_detours": true,
-    "sequence": 86,
+    "sequence": 87,
     "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
     "evidence_sha256": null,
     "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
     "final_installer": {
-      "ref": "github-actions-run:37496952071/artifact:11428225756/AFFILIATE_ZENTRALE_6.72.197.zip",
-      "sha256": "26ab96af81380abc569a3688ab5036c84c86a4bf33fd9d2d9e3874170d29426a",
-      "bytes": 810567,
-      "exact_zip_run": 37496952071
+      "ref": "github-actions-run:37501160643/artifact:11429816780/AFFILIATE_ZENTRALE_6.72.198.zip",
+      "sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
+      "bytes": 811235,
+      "exact_zip_run": 37501160643
     },
     "pre_gate_proof": {
       "live_6_72_194_schabracken": "FAIL_REPORTED_2026_10_06",
@@ -874,11 +874,12 @@
       "source_manifest_binding": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
       "php_lint_source": "PASS_22_OF_22_RUN_37489630643",
       "wordpress_mariadb": "PASS_RUN_37489630643",
-      "final_zip_fresh_unpack": "PASS_28_OF_28_RUN_37496952071",
-      "php_lint_final_zip": "PASS_22_OF_22_RUN_37496952071",
-      "exact_zip_wordpress_mariadb": "PASS_RUN_37496952071",
-      "final_installer_sha256": "26ab96af81380abc569a3688ab5036c84c86a4bf33fd9d2d9e3874170d29426a",
-      "fixed_banner_kiss": "PASS_ACTIVE_EXACT_ZERO_BLOCKERS_SURVIVES_RESET_RUN_37496952071"
+      "final_zip_fresh_unpack": "PASS_28_OF_28_RUN_37501160643",
+      "php_lint_final_zip": "PASS_22_OF_22_RUN_37501160643",
+      "exact_zip_wordpress_mariadb": "PASS_RUN_37501160643",
+      "final_installer_sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
+      "fixed_banner_kiss": "PASS_ACTIVE_EXACT_ZERO_BLOCKERS_SURVIVES_RESET_RUN_37496952071",
+      "general_banner_classifier": "PASS_CONTENT_PROVIDER_URL_PRECEDENCE_STALE_MAP_REMOVAL_AMBIGUOUS_FAIL_CLOSED_FRONTEND_CAMPAIGNS_RUN_37501160643"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
@@ -1262,7 +1263,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "LIVE_KISS_FIXED_SCHABRACKEN_393923_6_72_197",
+    "current_milestone": "LIVE_GENERAL_BANNER_POOL_6_72_198_INSTALL_AND_READBACK",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
