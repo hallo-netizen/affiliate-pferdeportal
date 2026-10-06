@@ -10,41 +10,73 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect PSERC package
+        with:
+          fetch-depth: 0
+      - name: Locate exact live PSERC 0.28.30 bytes in Git history
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/pserc /tmp/pserc2 && mkdir -p /tmp/pserc /tmp/pserc2
-          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc
-          INNER="$(find /tmp/pserc -type f -name '*.zip' | head -1)"
-          test -n "$INNER"
-          unzip -q "$INNER" -d /tmp/pserc2
-          echo '=== TREE ==='
-          find /tmp/pserc2 -maxdepth 3 -type f | sort | head -120
-          echo '=== VERSION ==='
-          grep -R -n -E 'Version:|PSERC_VERSION|PLUGIN_VERSION|pste-v5-binding-safe' /tmp/pserc2 | head -120 || true
-          echo '=== BINDING FILE ==='
-          B="$(find /tmp/pserc2 -type f -name 'class-pserc-seo-source-binding.php' | head -1)"
-          test -n "$B"
-          sed -n '1,360p' "$B"
-          echo '=== CAPABILITY CONTRACT ==='
-          cat "$(find /tmp/pserc2 -type f -path '*/contracts/seo-engine-capability-binding-v2.json' | head -1)"
-          echo '=== LIVE PSERC STATIC CONTRACTS READ ONLY ==='
-          for u in \
-            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/portal-topic-evidence-gate-v1.json' \
-            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/seo-engine-capability-binding-v2.json' \
-            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json'
-          do
-            echo "URL=$u"
-            curl -fsS --max-time 30 "$u" || true
-            echo
-          done
-          echo '=== LIVE REST ROUTES READ ONLY ==='
-          curl -fsS --max-time 30 'https://pferde-atelier.de/wp-json/' -o /tmp/wp-rest.json
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+          curl -fsS --max-time 30             'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json'             -o /tmp/pserc-live-binding.json
           python3 - <<'PY'
-          import json,re
-          d=json.load(open('/tmp/wp-rest.json',encoding='utf-8-sig'))
-          for route in sorted((d.get('routes') or {})):
-              if re.search(r'pserc|editorial|seo|plugin|diagnos|performance|topic|themen|quell|export|source',route,re.I):
-                  print(route)
+          import hashlib,json,subprocess
+          from pathlib import Path
+
+          binding=json.loads(Path('/tmp/pserc-live-binding.json').read_text(encoding='utf-8'))
+          required=binding.get('required_files') or {}
+          if binding.get('package_version')!='0.28.30' or binding.get('package_build')!='0.28.30-pste-v5-binding-safe':
+              raise SystemExit('LIVE_BINDING_VERSION_MISMATCH')
+          if len(required)!=binding.get('required_file_count'):
+              raise SystemExit('LIVE_BINDING_COUNT_MISMATCH')
+
+          objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
+          suffix_map={}
+          for rel in required:
+              suffix_map.setdefault(rel.split('/')[-1],[]).append(rel)
+
+          candidates=[]
+          for line in objects:
+              parts=line.split(' ',1)
+              if len(parts)!=2:
+                  continue
+              obj,path=parts
+              base=path.rsplit('/',1)[-1]
+              for rel in suffix_map.get(base,()):
+                  if path==rel or path.endswith('/'+rel):
+                      candidates.append((obj,path,rel))
+
+          seen=set()
+          matches={}
+          for obj,path,rel in candidates:
+              key=(obj,rel)
+              if key in seen:
+                  continue
+              seen.add(key)
+              try:
+                  raw=subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL)
+              except subprocess.CalledProcessError:
+                  continue
+              target=str((required.get(rel) or {}).get('sha256') or '')
+              if target and hashlib.sha256(raw).hexdigest()==target:
+                  matches.setdefault(rel,[]).append((obj,path,len(raw)))
+
+          print('LIVE_PACKAGE_VERSION='+str(binding.get('package_version')))
+          print('LIVE_PACKAGE_BUILD='+str(binding.get('package_build')))
+          print('LIVE_REQUIRED_COUNT='+str(len(required)))
+          print('HISTORY_MATCH_COUNT='+str(len(matches)))
+          for rel in sorted(matches):
+              for obj,path,size in matches[rel]:
+                  print(f'HISTORY_MATCH rel={rel} git_blob={obj} bytes={size} path={path}')
+
+          critical=[
+              'includes/class-pserc-portal-topic-evidence-gate.php',
+              'includes/class-pserc-seo-source-binding.php',
+              'includes/class-pserc-plan-compile-job.php',
+              'portal-seo-editorial-plan-compiler.php',
+              'contracts/portal-topic-evidence-gate-v1.json',
+              'contracts/seo-engine-capability-binding-v2.json',
+          ]
+          for rel in critical:
+              state='MATCH' if rel in matches else 'NO_MATCH'
+              print(f'CRITICAL_HISTORY_{state} rel={rel} target_sha256={(required.get(rel) or {}).get("sha256","MISSING")}')
           PY
