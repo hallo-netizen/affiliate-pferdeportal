@@ -3217,6 +3217,39 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
+     * V6.72.190 – HARD RULE Nachlauf.
+     * Import -> Ziel-URL -> einmalige feste Portalziel-Zuordnung -> speichern.
+     * Eigener Versionszustand, damit ein alter 6.72.189-done-Status den
+     * KISS-Zielkartenaufbau nicht ueberspringen kann.
+     */
+    public function maybe_upgrade_banner_target_map_v672190() {
+        $key = 'ppar_v672190_banner_target_map_resync_state';
+        $state = sanitize_key((string)get_option($key, ''));
+        if (in_array($state, array('scheduled','running','done'), true)) { return; }
+        update_option($key, 'scheduled', false);
+        if (!wp_next_scheduled('ppar_v672190_banner_target_map_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672190_banner_target_map_resync');
+        }
+    }
+
+    public function run_v672190_banner_target_map_resync() {
+        $key = 'ppar_v672190_banner_target_map_resync_state';
+        update_option($key, 'running', false);
+        $result = $this->automation_start_all_adcell_programmes();
+        if (is_wp_error($result)) {
+            update_option($key, 'retry', false);
+            if (!wp_next_scheduled('ppar_v672190_banner_target_map_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672190_banner_target_map_resync');
+            }
+            return;
+        }
+        update_option($key, 'done', false);
+        if (!wp_next_scheduled(self::ADCELL_BATCH_WORKER_HOOK)) {
+            wp_schedule_single_event(time()+1, self::ADCELL_BATCH_WORKER_HOOK);
+        }
+    }
+
+    /**
      * V6.72.189 – genau ein Upgrade-Nachlauf fuer das URL-Konzept.
      * Alte 6.72.189-Kategorienzustände duerfen diesen neuen Lauf nicht
      * unterdruecken; deshalb eigener State- und Hook-Name.
