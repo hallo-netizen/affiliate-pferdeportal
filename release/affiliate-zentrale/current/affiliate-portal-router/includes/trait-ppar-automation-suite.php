@@ -1120,14 +1120,37 @@ trait PPAR_Automation_Suite_Trait {
         return array('job_id'=>absint($wpdb->insert_id), 'job_uuid'=>$job_uuid, 'run_uuid'=>$run_uuid);
     }
 
+    /**
+     * Ein gebuendelter Import-Read fuer bereits bekannte ADCELL-Banner.
+     * Kein Frontendpfad und kein N+1: genau eine Abfrage je Programmlauf.
+     */
+    private function automation_adcell_existing_banner_destinations($program_id) {
+        global $wpdb;
+        $program_id = absint($program_id);
+        if ($program_id <= 0 || !method_exists($this, 'creative_library_table')) {
+            return array();
+        }
+        $table = $this->creative_library_table();
+        $rows = $wpdb->get_results($wpdb->prepare(
+            "SELECT external_id,destination_url,tracking_url,payload FROM {$table} WHERE provider='adcell' AND partner_external_id=%s AND creative_type='banner'",
+            (string) $program_id
+        ), ARRAY_A);
+        $out = array();
+        foreach ((array) $rows as $row) {
+            $external_id = sanitize_text_field((string) ($row['external_id'] ?? ''));
+            if ($external_id !== '') {
+                $out[$external_id] = $row;
+            }
+        }
+        return $out;
+    }
+
     private function automation_adcell_banner_rows($program_id, $program_name, $run_uuid) {
         $items = $this->adcell_api_v2_promotion_items($program_id, 'banner');
         if (is_wp_error($items)) { return $items; }
-        // Die Category-ID ist Teil jedes offiziellen Banner-Datensatzes. Den
-        // Namen holen wir einmal je Programmlauf. Schlaegt dieser Zusatzabruf
-        // fehl, bleibt der Banner-Sync fail-soft erhalten; es wird nichts geraten.
-        $category_map = method_exists($this,'adcell_api_v2_promotion_categories') ? $this->adcell_api_v2_promotion_categories($program_id) : array();
-        if (is_wp_error($category_map)) { $category_map = array(); }
+        // URL-Konzept: vorhandene Ziel-URLs einmal gebuendelt laden. Ein
+        // unveraenderter Banner erzeugt danach keinen weiteren Ziel-URL-Abruf.
+        $existing_destinations = $this->automation_adcell_existing_banner_destinations($program_id);
         $rows = array();
         $blocked = 0;
         foreach ((array) $items as $item) {
@@ -1136,13 +1159,53 @@ trait PPAR_Automation_Suite_Trait {
             $click = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['clickoutLink'] ?? ''));
             $image = $this->adcell_api_v2_validate_tracking_asset_url((string) ($item['bannerUrl'] ?? ''));
             if ($promotion_id <= 0 || $click === '' || $image === '') { $blocked++; continue; }
+            $external_id = 'banner-' . $promotion_id;
+            $destination_url = $click;
+            $destination_source = 'tracking_checked';
+            $existing = is_array($existing_destinations[$external_id] ?? null) ? $existing_destinations[$external_id] : array();
+            $same_tracking = $existing && esc_url_raw((string) ($existing['tracking_url'] ?? '')) === $click;
+            if ($same_tracking) {
+                $existing_payload = json_decode((string) ($existing['payload'] ?? ''), true);
+                $existing_payload = is_array($existing_payload) ? $existing_payload : array();
+                $stored_source = sanitize_key((string) ($existing_payload['_destination_source'] ?? ''));
+                $stored_destination = esc_url_raw((string) ($existing['destination_url'] ?? ''));
+                if ($stored_destination !== '' && $stored_destination !== $click
+                    && in_array($stored_source, array('provider_explicit','decoded_tracking','resolved_redirect'), true)) {
+                    $destination_url = $stored_destination;
+                    $destination_source = $stored_source;
+                } elseif ($stored_source === 'tracking_checked') {
+                    // Bereits einmal ohne belastbare Zielseite geprueft:
+                    // unveraenderte Tracking-URL niemals erneut abrufen.
+                    $destination_url = $click;
+                    $destination_source = 'tracking_checked';
+                } else {
+                    // Altbestand ohne neuen URL-Pruefstatus wird genau einmal
+                    // durch den Import-Resolver nachgezogen.
+                    $existing = array();
+                }
+            }
+            if (!$same_tracking || !$existing) {
+                $resolved = method_exists($this, 'creative_library_resolve_tracking_destination_import')
+                    ? $this->creative_library_resolve_tracking_destination_import($click)
+                    : array('url'=>$click,'source'=>'tracking_checked');
+                $resolved_url = esc_url_raw((string) ($resolved['url'] ?? ''));
+                $resolved_source = sanitize_key((string) ($resolved['source'] ?? 'tracking_checked'));
+                if ($resolved_url !== '') {
+                    $destination_url = $resolved_url;
+                }
+                $destination_source = in_array($resolved_source, array('decoded_tracking','resolved_redirect','tracking_checked'), true)
+                    ? $resolved_source : 'tracking_checked';
+            }
+
+            // Provider-Thema bleibt optionaler Zusatz. Kein separater
+            // Werbemittelkategorie-HTTP-Aufruf im Bannerimport mehr.
             $category_id = absint($item['promotionCategoryId'] ?? 0);
-            $category_name = $category_id > 0 ? sanitize_text_field((string)($category_map[$category_id] ?? '')) : '';
+            $category_name = sanitize_text_field((string) ($item['promotionCategoryName'] ?? ''));
             $information = sanitize_textarea_field((string)($item['information'] ?? ''));
             $description_parts = array_filter(array($information, $category_name!=='' ? 'Werbemittelkategorie: '.$category_name : ''));
             $tag_parts = array_filter(array('ADCELL Banner', $category_name));
             $rows[] = array(
-                'creative_id'=>'banner-' . $promotion_id,
+                'creative_id'=>$external_id,
                 'creative_type'=>'banner',
                 'creative_title'=>sanitize_text_field((string) $program_name . ' Banner ' . $promotion_id . ($category_name!=='' ? ' – '.$category_name : '')),
                 'creative_description'=>sanitize_textarea_field(implode(' | ',$description_parts)),
@@ -1157,8 +1220,9 @@ trait PPAR_Automation_Suite_Trait {
                 'provider_topic_name'=>$category_name,
                 'provider_topic_source'=>$category_name !== '' ? 'provider_promotion_category' : '',
                 'image_source'=>$image,
-                'destination_url'=>$click,
+                'destination_url'=>$destination_url,
                 'tracking_url'=>$click,
+                '_destination_source'=>$destination_source,
                 'width'=>absint($item['width'] ?? 0),
                 'height'=>absint($item['height'] ?? 0),
                 'status'=>'active',
