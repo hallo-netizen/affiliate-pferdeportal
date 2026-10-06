@@ -789,8 +789,25 @@ trait PPAR_Creative_Library_Trait {
             '_preverify_topic_targets'=>array(),
             '_manual_target_family'=>$manual_target_family,
         );
+
+        // Provider-Rohdaten sind Beweisdaten, kein Anzeigetext. Sie duerfen
+        // deshalb nicht durch sanitize_text_field() veraendert werden. Der
+        // ADCELL-Adapter liefert kanonisches JSON plus SHA-256; nur ein intern
+        // konsistentes Paar wird unveraendert in den Payload uebernommen.
+        $provider_raw_json = is_scalar($row['provider_raw_json'] ?? null)
+            ? (string) $row['provider_raw_json'] : '';
+        $provider_raw_sha256 = strtolower(trim((string) ($row['provider_raw_sha256'] ?? '')));
+        if ($provider_raw_json !== ''
+            && preg_match('/^[a-f0-9]{64}$/', $provider_raw_sha256)
+            && hash_equals(hash('sha256', $provider_raw_json), $provider_raw_sha256)
+            && is_array(json_decode($provider_raw_json, true))) {
+            $payload['_provider_raw_json'] = $provider_raw_json;
+            $payload['_provider_raw_sha256'] = $provider_raw_sha256;
+        }
+
         foreach ((array) $row as $key => $value) {
-            if (strpos((string) $key, '_') === 0) {
+            if (strpos((string) $key, '_') === 0
+                || in_array((string) $key, array('provider_raw_json','provider_raw_sha256'), true)) {
                 continue;
             }
             if (is_scalar($value)) {
@@ -832,7 +849,9 @@ trait PPAR_Creative_Library_Trait {
         // while the row is incorrectly treated as unchanged.
         $source_payload_for_hash = array();
         foreach ((array) $row as $key => $value) {
-            if (strpos((string) $key, '_') === 0 || !is_scalar($value)) {
+            if (strpos((string) $key, '_') === 0
+                || in_array((string) $key, array('provider_raw_json','provider_raw_sha256'), true)
+                || !is_scalar($value)) {
                 continue;
             }
             $source_payload_for_hash[sanitize_text_field((string) $key)] = sanitize_text_field((string) $value);
@@ -872,6 +891,10 @@ trait PPAR_Creative_Library_Trait {
                     'sha256',
                     wp_json_encode($provider_topic_fingerprint, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                 );
+            }
+            if (isset($payload['_provider_raw_sha256'])
+                && preg_match('/^[a-f0-9]{64}$/', (string) $payload['_provider_raw_sha256'])) {
+                $source_fingerprint['provider_raw_sha256'] = (string) $payload['_provider_raw_sha256'];
             }
         }
         if ($type === 'product') {
