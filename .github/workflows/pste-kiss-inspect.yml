@@ -175,3 +175,23 @@ jobs:
           else:
               print('BEST_ARCHIVE_COVERAGE count=0')
           PY
+
+      - name: Print byte-identical live evidence gate source
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pserc-old /tmp/pserc-old-inner
+          mkdir -p /tmp/pserc-old /tmp/pserc-old-inner
+          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc-old
+          INNER="$(find /tmp/pserc-old -type f -name '*.zip' | head -1)"
+          test -n "$INNER"
+          unzip -q "$INNER" -d /tmp/pserc-old-inner
+          GATE="$(find /tmp/pserc-old-inner -type f -name 'class-pserc-portal-topic-evidence-gate.php' | head -1)"
+          test -n "$GATE"
+          ACTUAL="$(sha256sum "$GATE" | awk '{print $1}')"
+          EXPECTED='e3bea08e92436e6006b4eb8cafdcdbb81fbd5ed6b6c340b844e095bee0d2da55'
+          [ "$ACTUAL" = "$EXPECTED" ] || { echo "GATE_HASH_MISMATCH:$ACTUAL"; exit 2; }
+          echo "LIVE_GATE_HASH_MATCH:$ACTUAL"
+          echo '=== EXACT LIVE GATE SOURCE START ==='
+          cat "$GATE"
+          echo '=== EXACT LIVE GATE SOURCE END ==='
