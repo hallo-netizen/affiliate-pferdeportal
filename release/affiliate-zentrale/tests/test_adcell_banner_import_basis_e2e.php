@@ -148,4 +148,61 @@ if (count($category_calls) !== 1) {
 }
 $ok('category_endpoint_called_once_per_programme');
 
+// Jetzt derselbe Datensatz durch den echten Bibliotheks-Import bis in MariaDB.
+$install = new ReflectionMethod($o, 'maybe_install_creative_library_schema');
+$install->setAccessible(true);
+$install->invoke($o);
+
+$import = new ReflectionMethod($o, 'automation_import_rows');
+$import->setAccessible(true);
+$counts = $import->invoke($o, $rows, array(
+    'provider'=>'adcell',
+    'partner_external_id'=>'123',
+    'partner_name'=>'procavallo',
+    'source_kind'=>'banner',
+    'run_uuid'=>'basis-run',
+));
+if ((int)($counts['imported'] ?? 0) !== 2) {
+    $fail('library_import_count_' . wp_json_encode($counts));
+}
+
+$table_method = new ReflectionMethod($o, 'creative_library_table');
+$table_method->setAccessible(true);
+$table = $table_method->invoke($o);
+global $wpdb;
+$stored = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
+    'banner-393923'
+), ARRAY_A);
+if (!is_array($stored)) {
+    $fail('stored_banner_missing');
+}
+$stored_payload = json_decode((string)($stored['payload'] ?? ''), true);
+if (!is_array($stored_payload)) {
+    $fail('stored_payload_invalid');
+}
+if ((string)($stored_payload['promotion_category_name'] ?? '') !== 'Schabracken') {
+    $fail('stored_category_name_missing');
+}
+if ((string)($stored_payload['provider_topic_name'] ?? '') !== 'Schabracken') {
+    $fail('stored_provider_topic_missing');
+}
+if ((string)($stored_payload['_provider_raw_json'] ?? '') !== (string)$first['provider_raw_json']) {
+    $fail('stored_raw_json_changed');
+}
+if ((string)($stored_payload['_provider_raw_sha256'] ?? '') !== (string)$first['provider_raw_sha256']) {
+    $fail('stored_raw_sha_changed');
+}
+if (!hash_equals(
+    hash('sha256', (string)$stored_payload['_provider_raw_json']),
+    (string)$stored_payload['_provider_raw_sha256']
+)) {
+    $fail('stored_raw_integrity_failed');
+}
+$stored_raw = json_decode((string)$stored_payload['_provider_raw_json'], true);
+if ((string)($stored_raw['customNested']['theme'] ?? '') !== 'schabracken') {
+    $fail('stored_nested_raw_lost');
+}
+$ok('full_provider_payload_reaches_library_unchanged');
+
 echo "ADCELL_BANNER_IMPORT_BASIS_E2E_COMPLETE\n";
