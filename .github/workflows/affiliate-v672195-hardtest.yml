@@ -12,7 +12,7 @@ on:
       - '.github/workflows/affiliate-v672195-hardtest.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   wordpress-mariadb-hardtest:
@@ -103,3 +103,158 @@ jobs:
           grep -F "PASS manual_campaign_preserved" /tmp/v672195.log
           grep -F "PASS product_campaign_preserved" /tmp/v672195.log
           grep -F "DETERMINISTIC_BANNER_RECONCILE_672195_COMPLETE" /tmp/v672195.log
+
+
+  final-zip-wordpress-mariadb:
+    needs: wordpress-mariadb-hardtest
+    runs-on: ubuntu-24.04
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Build exact 6.72.195 installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          grep -F "Version: 6.72.195" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.195';" "$ROOT/pferdeportal-affiliate-router.php"
+
+          (cd release/affiliate-zentrale/current && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/current-manifest.txt
+          cmp -s /tmp/current-manifest.txt release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt
+          test "$(grep -cve '^[[:space:]]*$' /tmp/current-manifest.txt)" = "28"
+
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.195.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.195.zip affiliate-portal-router)
+          ZIP_SHA256="$(sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.195.zip | awk '{print $1}')"
+          ZIP_BYTES="$(stat -c%s /tmp/AFFILIATE_ZENTRALE_6.72.195.zip)"
+          echo "ZIP_SHA256=$ZIP_SHA256" >> "$GITHUB_ENV"
+          echo "ZIP_BYTES=$ZIP_BYTES" >> "$GITHUB_ENV"
+          echo "PASS FINAL_ZIP_BUILT sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
+
+      - name: Fresh unpack 28 of 28 and PHP lint 22 of 22
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/final195
+          mkdir -p /tmp/final195
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.195.zip -d /tmp/final195
+          ROOT=/tmp/final195/affiliate-portal-router
+          test "$(find "$ROOT" -type f | wc -l)" = "28"
+          test "$(find "$ROOT" -type f -name '*.php' | wc -l)" = "22"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root=Path('/tmp/final195')
+          expected={}
+          for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines():
+              if not line.strip():
+                  continue
+              h,rel=line.split('  ',1)
+              expected[rel]=h
+          files={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+                 for p in root.rglob('*') if p.is_file()}
+          assert set(files)==set(expected),(sorted(set(expected)-set(files)),sorted(set(files)-set(expected)))
+          bad=[p for p,h in files.items() if expected[p]!=h]
+          assert not bad,bad
+          print('PASS FINAL_ZIP_BYTE_IDENTITY_28_OF_28')
+          PY
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final195-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/final195-lint.log)" = "22"
+          unzip -t /tmp/AFFILIATE_ZENTRALE_6.72.195.zip >/tmp/final195-unzip.log
+          echo "PASS FINAL_ZIP_PHP_LINT_22_OF_22"
+
+      - name: Install exact ZIP into fresh WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Banner ZIP 6.72.195' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){
+                      return get_post_field('post_parent',$page_id) ? 'category' : 'hub1';
+                  }
+              }
+          }
+          PHP
+
+          /tmp/wp plugin install /tmp/AFFILIATE_ZENTRALE_6.72.195.zip --activate --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.195"){exit(2);} echo "PASS exact ZIP 6.72.195 active\n";' --path=/tmp/wp-site
+
+      - name: Exact ZIP positive negative Schabracken and Tarifcheck proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php
+          /tmp/wp eval-file /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php --path=/tmp/wp-site | tee /tmp/v672195-zip.log
+          grep -F "PASS unlinked_stale_auto_campaign_globally_disabled" /tmp/v672195-zip.log
+          grep -F "PASS rebuilt_target_schabracken" /tmp/v672195-zip.log
+          grep -F "PASS no_current_auto_campaign_fuetterung" /tmp/v672195-zip.log
+          grep -F "PASS tarifcheck_kosten_all_cost_leaves" /tmp/v672195-zip.log
+          grep -F "PASS tarifcheck_versicherung_all_real_leaves" /tmp/v672195-zip.log
+          grep -F "PASS tarifcheck_tracking_without_explicit_family_blocked" /tmp/v672195-zip.log
+          grep -F "PASS manual_campaign_preserved" /tmp/v672195-zip.log
+          grep -F "PASS product_campaign_preserved" /tmp/v672195-zip.log
+          grep -F "DETERMINISTIC_BANNER_RECONCILE_672195_COMPLETE" /tmp/v672195-zip.log
+          echo "PASS EXACT_ZIP_WORDPRESS_MARIADB_672195"
+
+      - name: Upload exact tested installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: AFFILIATE_ZENTRALE_6.72.195
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.195.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish exact tested installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release/affiliate-zentrale/artifacts/final
+          cp /tmp/AFFILIATE_ZENTRALE_6.72.195.zip release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.195.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.195.zip
+          if git diff --cached --quiet; then
+            echo "PASS FINAL_ZIP_ALREADY_IDENTICAL sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
+          else
+            git commit -m "affiliate: publish tested 6.72.195 deterministic banner installer"
+            git push origin HEAD:affiliate-release-current
+            echo "PASS FINAL_ZIP_PUBLISHED sha256=$ZIP_SHA256 bytes=$ZIP_BYTES"
+          fi
