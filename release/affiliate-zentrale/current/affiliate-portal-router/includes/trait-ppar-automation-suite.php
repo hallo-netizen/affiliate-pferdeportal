@@ -3483,7 +3483,9 @@ trait PPAR_Automation_Suite_Trait {
 
         global $wpdb;
         $table = $this->creative_library_table();
-        $prefix = self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_';
+        $prefix = self::VERSION === '6.72.199'
+            ? 'ppar_v672199_banner_reconcile_'
+            : (self::VERSION === '6.72.198' ? 'ppar_v672198_banner_reconcile_' : 'ppar_v672195_banner_reconcile_');
         $state_key = $prefix . 'state';
         $cursor_key = $prefix . 'cursor';
         $result_key = $prefix . 'result';
