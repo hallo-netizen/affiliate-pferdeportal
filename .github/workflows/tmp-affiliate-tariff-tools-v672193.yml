@@ -1,0 +1,123 @@
+name: TEMP Affiliate Tariff Tools 6.72.193
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-tariff-tools-v672193.yml'
+      - 'AFFILIATE_HOBBYRAUM/test_tariff_tools_kiss_v672193.php'
+      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
+  workflow_dispatch:
+
+jobs:
+  wordpress-mariadb-hardtest:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Prove isolated source delta from tested 6.72.192
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=aa3bdbbae8520d6f5e9bd517be0d9325169177f8
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          git cat-file -e "$BASE^{commit}"
+          CHANGED="$(git diff --name-only "$BASE"...HEAD -- "$ROOT" | sort)"
+          EXPECTED="$(printf '%s
+'             "$ROOT/includes/trait-ppar-tariff-tools.php"             "$ROOT/pferdeportal-affiliate-router.php"             "$ROOT/readme.txt" | sort)"
+          test "$CHANGED" = "$EXPECTED"
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          base='aa3bdbbae8520d6f5e9bd517be0d9325169177f8'
+          p='release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php'
+          old=subprocess.check_output(['git','show',f'{base}:{p}'],text=True)
+          cur=Path(p).read_text()
+          cur=cur.replace('Version: 6.72.193','Version: 6.72.192')
+          cur=cur.replace("const VERSION = '6.72.193';","const VERSION = '6.72.192';")
+          for line in [
+              "require_once __DIR__ . '/includes/trait-ppar-tariff-tools.php';\n",
+              "    use PPAR_Tariff_Tools_Trait;\n",
+              "        $this->tariff_tools_register_hooks();\n",
+              "        add_shortcode('affiliate_rechner', array($this, 'shortcode_tariff_tool'));\n",
+              "        add_submenu_page('affiliate-portal-zentrale','Tarifrechner','Tarifrechner','manage_options','affiliate-portal-tariff-tools',array($this,'render_tariff_tools_page'));\n",
+          ]:
+              if line not in cur:
+                  raise SystemExit('missing expected integration line: '+line)
+              cur=cur.replace(line,'',1)
+          if cur != old:
+              raise SystemExit('main plugin contains changes beyond isolated tariff-tool wiring')
+          print('PASS 6.72.192 main runtime preserved outside exact tariff-tool wiring')
+          PY
+          echo "PASS plugin source delta limited to new tariff trait + wiring + readme"
+
+      - name: Source hardlocks and lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
+          grep -F "Version: 6.72.193" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.193';" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "ppar_tariff_tools_v1" "$ROOT/includes/trait-ppar-tariff-tools.php"
+          grep -F "affiliate_rechner" "$ROOT/includes/trait-ppar-tariff-tools.php"
+          grep -F "bewusst NICHT autoload" "$ROOT/includes/trait-ppar-tariff-tools.php"
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "22"
+          echo "PASS PHP lint 22/22"
+
+      - name: Install WordPress and plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Tariff Tools 6.72.193' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.193"){exit(2);} echo "PASS 6.72.193 active\n";' --path=/tmp/wp-site
+
+      - name: Real WordPress MariaDB tariff-tool KISS proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_tariff_tools_kiss_v672193.php" --path=/tmp/wp-site | tee /tmp/tariff193.log
+          grep -F 'PASS backend_writer_list_visible' /tmp/tariff193.log
+          grep -F 'PASS ordinary_content_zero_tariff_option_reads reads=0' /tmp/tariff193.log
+          grep -F 'PASS multiple_placeholders_one_option_load reads=1' /tmp/tariff193.log
+          grep -F 'PASS central_code_update_immediate' /tmp/tariff193.log
+          grep -F 'PASS placeholder_stable_after_rename' /tmp/tariff193.log
+          grep -F 'PASS inactive_tool_renders_empty' /tmp/tariff193.log
+          grep -F 'PASS trusted_widget_script_not_stripped' /tmp/tariff193.log
+          grep -F 'PASS no_new_table' /tmp/tariff193.log
+          grep -F 'PASS single_option_not_autoloaded' /tmp/tariff193.log
+          grep -F 'PASS article_placeholder_auto_filled_on_render' /tmp/tariff193.log
+          grep -F 'TARIFF_TOOLS_KISS_672193_COMPLETE' /tmp/tariff193.log
