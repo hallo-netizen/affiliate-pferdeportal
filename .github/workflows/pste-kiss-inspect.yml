@@ -35,6 +35,6 @@ jobs:
           import json,re
           d=json.load(open('/tmp/wp-rest.json',encoding='utf-8-sig'))
           for route in sorted((d.get('routes') or {})):
-              if re.search(r'pserc|editorial|seo|plugin|diagnos|performance|topic|themen',route,re.I):
+              if re.search(r'pserc|editorial|seo|plugin|diagnos|performance|topic|themen|quell|export|source',route,re.I):
                   print(route)
           PY
