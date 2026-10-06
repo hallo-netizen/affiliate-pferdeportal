@@ -145,7 +145,13 @@ $insKeys=array_values(array_map(static function($x){return (string)($x['target_k
 $insFamily=$call('output_tarifcheck_banner_family',$insRow);
 $allPortalTargets=$call('output_portal_targets',$portal);
 $allowedInsurance=array_values(array_filter((array)$allPortalTargets,function($t)use($call){return $call('output_tarifcheck_target_allowed',$t,'versicherung');}));
-echo "DEBUG insurance_family=".$insFamily." allowed=".count($allowedInsurance)."\n";
+echo "DEBUG insurance_family=".$insFamily." allowed=".count($allowedInsurance)." total_targets=".count((array)$allPortalTargets)."\n";
+foreach((array)$allPortalTargets as $t){
+    $label=(string)($t['label']??'');
+    if(stripos($label,'Versicher')!==false||stripos($label,'Pferdehaftpflicht')!==false){
+        echo "DEBUG insurance_candidate ".($t['type']??'')." | ".($t['context']??'')." | ".($t['slug']??'')." | ".$label."\n";
+    }
+}
 foreach(array_slice($allowedInsurance,0,20) as $t){echo "DEBUG insurance_allowed ".($t['context']??'')." | ".($t['slug']??'')." | ".($t['label']??'')."\n";}
 tc_assert((int)($insMap['mapped']??0)===14,'insurance_mapped_all_insurance_categories','mapped='.(int)($insMap['mapped']??0));
 tc_assert(count($insTargets)===14,'insurance_has_14_fixed_targets','count='.count($insTargets));
