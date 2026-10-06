@@ -87,3 +87,34 @@ Pflichtbeweise vor Installation:
 - Option nicht autoload;
 - bestehende 6.72.192 Runtimequellen außerhalb der ausdrücklich kleinen Integrationspunkte bytegleich;
 - finaler ZIP Fresh-Unpack und WordPress/MariaDB-Test.
+
+
+## Abnahmeergebnis
+
+Source WordPress/MariaDB:
+
+- Run `37471777928` = SUCCESS.
+- 6.72.192 Runtime außerhalb der exakten Tarifrechner-Verdrahtung unverändert.
+- normale Inhalte: 0 Tarifrechner-Optionszugriffe.
+- mehrere Rechner in einem Request: 1 Registry-Ladevorgang.
+- zentrale Codeänderung ohne Artikeländerung wirksam.
+- Option nicht autoload.
+- keine neue Tabelle.
+
+Exaktes Final-ZIP:
+
+- Run `37472204233` = SUCCESS.
+- Fresh-Unpack 28/28 Byteidentität.
+- PHP-Lint 22/22.
+- kompletter Tarifrechner-Test PASS.
+- kompletter 6.72.192 Tarifcheck-Bannervertrag erneut PASS.
+
+Finaler Installer:
+
+`release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.193.zip`
+
+SHA-256:
+
+`1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27`
+
+Größe: `805229 Byte`.
