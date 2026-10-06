@@ -770,6 +770,10 @@ trait PPAR_Creative_Library_Trait {
         $source_status = $this->creative_library_normalize_status($this->creative_library_mapped_value($row, $mapping, 'status'));
         // Import ist absichtlich portalneutral. Branche, Portalziel und Ausgabeform
         // werden ausschließlich im zentralen Output-Modell je Portal entschieden.
+        $manual_target_family = sanitize_key((string)($context['target_family'] ?? ''));
+        if (!in_array($manual_target_family, array('kosten','versicherung'), true)) {
+            $manual_target_family = '';
+        }
         $payload = array(
             '_declared_width'=>$declared_width,
             '_declared_height'=>$declared_height,
@@ -783,6 +787,7 @@ trait PPAR_Creative_Library_Trait {
             '_preverify_topic_status'=>'portal_pending',
             '_preverify_topic_score'=>0,
             '_preverify_topic_targets'=>array(),
+            '_manual_target_family'=>$manual_target_family,
         );
         foreach ((array) $row as $key => $value) {
             if (strpos((string) $key, '_') === 0) {
@@ -849,6 +854,7 @@ trait PPAR_Creative_Library_Trait {
             'image_url'=>$image_url,
             'destination_url'=>$source_destination_for_hash,
             'tracking_url'=>$tracking_url,
+            'manual_target_family'=>$manual_target_family,
             'declared_width'=>$declared_width,
             'declared_height'=>$declared_height,
             'source_status'=>$source_status,
@@ -1012,7 +1018,17 @@ trait PPAR_Creative_Library_Trait {
         if ($partner_name === '') {
             return new WP_Error('creative_import_partner', 'Partnername fehlt.');
         }
-        return array('provider'=>$provider,'partner_external_id'=>$partner_external_id,'partner_name'=>$partner_name);
+        $target_family = sanitize_key((string) ($source['target_family'] ?? ''));
+        $is_tarifcheck = $provider === 'direct' && strpos(remove_accents(strtolower($partner_name)), 'tarifcheck') !== false;
+        if (!$is_tarifcheck || !in_array($target_family, array('kosten','versicherung'), true)) {
+            $target_family = '';
+        }
+        return array(
+            'provider'=>$provider,
+            'partner_external_id'=>$partner_external_id,
+            'partner_name'=>$partner_name,
+            'target_family'=>$target_family,
+        );
     }
 
     public function handle_creative_library_import() {
@@ -1247,7 +1263,11 @@ trait PPAR_Creative_Library_Trait {
         $ids = array_values(array_filter(array_map('absint', (array) ($_POST['creative_ids'] ?? array()))));
         $mode = sanitize_key((string) ($_POST['selection_mode'] ?? 'selected'));
         $portal_key = sanitize_key((string) ($_POST['portal_key'] ?? ''));
-        $allowed = array('selected','unselected','plan_all','prepare_all','portal_use_auto','portal_remove_auto','portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic');
+        $allowed = array(
+            'selected','unselected','plan_all','prepare_all',
+            'tarifcheck_family_kosten','tarifcheck_family_versicherung','tarifcheck_family_auto',
+            'portal_use_auto','portal_remove_auto','portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic'
+        );
         if (!in_array($mode, $allowed, true)) {
             $mode = 'selected';
         }
@@ -1276,6 +1296,57 @@ trait PPAR_Creative_Library_Trait {
             }
             if ($mode === 'selected' || $mode === 'unselected') {
                 $wpdb->update($table, array('selected'=>$mode === 'selected' ? 1 : 0), array('id'=>$id));
+                $updated++;
+                continue;
+            }
+            if (in_array($mode, array('tarifcheck_family_kosten','tarifcheck_family_versicherung','tarifcheck_family_auto'), true)) {
+                $partner = remove_accents(strtolower((string)($row['partner_name'] ?? '')));
+                if (sanitize_key((string)($row['provider'] ?? '')) !== 'direct'
+                    || sanitize_key((string)($row['creative_type'] ?? '')) !== 'banner'
+                    || strpos($partner, 'tarifcheck') === false) {
+                    $blocked++;
+                    $errors['tarifcheck_family_invalid_creative'] = 'Die Tarifcheck-Gruppenzuordnung ist nur für Tarifcheck-Banner des Direktpartners zulässig.';
+                    continue;
+                }
+                $family = $mode === 'tarifcheck_family_kosten'
+                    ? 'kosten'
+                    : ($mode === 'tarifcheck_family_versicherung' ? 'versicherung' : '');
+                $payload = json_decode((string)($row['payload'] ?? ''), true);
+                $payload = is_array($payload) ? $payload : array();
+                $payload['_manual_target_family'] = $family;
+                $wpdb->update($table, array(
+                    'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                    'topic_score'=>0,
+                    'topic_targets'=>'[]',
+                    'classified_at'=>0,
+                ), array('id'=>$id));
+                $row['payload'] = wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $row['topic_score'] = 0;
+                $row['topic_targets'] = '[]';
+                $row['classified_at'] = 0;
+                if (method_exists($this, 'creative_library_deactivate_automatic_output_campaigns')) {
+                    $this->creative_library_deactivate_automatic_output_campaigns((string)($row['identity_hash'] ?? ''));
+                }
+                if (method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
+                    $mapped = $this->output_assign_banner_targets_from_destination_once($row);
+                    $mapped_targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                    $row['topic_targets'] = wp_json_encode($mapped_targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                    $row['topic_score'] = absint($mapped['mapped'] ?? 0) > 0 ? 100 : 0;
+                    if (absint($mapped['mapped'] ?? 0) > 0 && method_exists($this, 'output_plan_creative')) {
+                        $plan = $this->output_plan_creative($row, true);
+                        if (is_array($plan)) {
+                            $planned += absint($plan['created'] ?? 0);
+                            $drafts += absint($plan['drafts'] ?? 0);
+                            $blocked += absint($plan['blocked'] ?? 0);
+                        }
+                    }
+                }
+                // Der robuste Gesamt-Reconcile wird nach jeder manuellen
+                // Familienänderung erneut freigegeben. Dadurch kann kein alter
+                // automatischer Bannerzustand dauerhaft parallel überleben.
+                delete_option('ppar_v672195_banner_reconcile_state');
+                delete_option('ppar_v672195_banner_reconcile_cursor');
+                delete_option('ppar_v672195_banner_reconcile_reset_done');
                 $updated++;
                 continue;
             }
@@ -1716,6 +1787,7 @@ trait PPAR_Creative_Library_Trait {
                         <p><label><strong>Provider</strong><br><select id="ppar-library-provider" name="provider" required><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected((string)$default['provider'],$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select></label></p>
                         <p><label><strong>Partner-ID</strong><br><input id="ppar-library-external" type="text" name="partner_external_id" maxlength="191" value="<?php echo esc_attr($default['external_id']); ?>"></label></p>
                         <p><label><strong>Partnername</strong><br><input id="ppar-library-name" type="text" name="partner_name" required maxlength="180" value="<?php echo esc_attr($default['name']); ?>"></label></p>
+                        <p><label><strong>Tarifcheck-Zielgruppe</strong><br><select name="target_family"><option value="">Automatisch nur aus sicherer Ziel-URL</option><option value="versicherung">Versicherungen</option><option value="kosten">Kreditvergleich / Kosten</option></select></label><br><span class="description">Nur für Tarifcheck. Diese Auswahl wird als feste Fachzuordnung gespeichert und nicht aus dem Trackinglink geraten.</span></p>
                     </div><div>
                         <p><label><strong>Sammeldatei</strong><br><input type="file" name="creative_file" accept=".csv,.json,.txt"></label><br><span class="description">CSV, JSON oder TXT; maximal 20 MiB und 5.000 Werbemittel.</span></p>
                         <p><label><strong>Oder mehrere Banner-Codes gesammelt einfügen</strong><br><textarea name="creative_codes" rows="8" placeholder="Mehrere vollständige &lt;a&gt;&lt;img&gt;-Codes auf einmal"></textarea></label></p>
@@ -1742,6 +1814,11 @@ trait PPAR_Creative_Library_Trait {
                     <option value="portal_use_auto">Automatik verwenden</option>
                     <option value="portal_remove_auto">Aus Automatik entfernen</option>
                     <option value="portal_veto">Sperren</option>
+                    <optgroup label="Tarifcheck – angehakte Banner fest zuordnen">
+                        <option value="tarifcheck_family_versicherung">Tarifcheck → Versicherungen</option>
+                        <option value="tarifcheck_family_kosten">Tarifcheck → Kreditvergleich / Kosten</option>
+                        <option value="tarifcheck_family_auto">Tarifcheck → wieder automatisch aus sicherer Ziel-URL</option>
+                    </optgroup>
                     <optgroup label="Erweitert">
                         <option value="prepare_all">Nur prüfen und sichere Entwürfe vorbereiten</option>
                         <option value="plan_all">Nur prüfen, noch nichts erzeugen</option>
@@ -1767,7 +1844,7 @@ trait PPAR_Creative_Library_Trait {
                             <label><input type="checkbox" name="creative_ids[]" value="<?php echo absint($row['id']); ?>" <?php checked(!empty($row['selected'])); ?>> auswählen</label>
                             <?php if (!empty($row['image_url'])) : ?><img loading="lazy" src="<?php echo esc_url($row['image_url']); ?>" alt=""><?php endif; ?>
                             <h3><?php echo esc_html((string) $row['title']); ?></h3>
-                            <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?></p>
+                            <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?><?php if (!empty($payload['_manual_target_family'])) : ?><br><strong>Feste Tarifcheck-Gruppe:</strong> <?php echo esc_html((string)$payload['_manual_target_family'] === 'versicherung' ? 'Versicherungen' : 'Kreditvergleich / Kosten'); ?><?php endif; ?></p>
                             <?php $slot_suitability=$this->creative_library_slot_suitability_summary($row,$slot_filter,$slot_options); if($slot_suitability!==''): ?><p class="ppar-library-meta"><strong><?php echo esc_html($slot_suitability); ?></strong></p><?php endif; ?>
                             <div class="ppar-library-topic"><strong>Portalstatus</strong><br><?php echo esc_html($this->creative_library_target_summary($row)); ?></div>
                             <?php if ($portals) : foreach ($portals as $decision_portal_key => $decision_portal) : $chief_decision=$this->output_portal_decision((string)$decision_portal_key,(string)($row['identity_hash']??'')); $chief_payload=is_array($chief_decision['payload']??null)?$chief_decision['payload']:array(); ?>
