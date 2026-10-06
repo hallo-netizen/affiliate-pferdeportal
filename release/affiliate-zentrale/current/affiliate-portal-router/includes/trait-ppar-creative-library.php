@@ -591,6 +591,73 @@ trait PPAR_Creative_Library_Trait {
         return '';
     }
 
+    /**
+     * Import-only Ziel-URL-Aufloesung.
+     *
+     * Performance-Hardlock:
+     * - nie im oeffentlichen Frontend;
+     * - erst lokal dekodieren, dann nur HEAD ohne Body-Download;
+     * - hoechstens vier Redirect-Hops;
+     * - request-lokaler Speicher verhindert doppelte Pruefungen desselben Links;
+     * - Ergebnis wird spaeter in der bestehenden destination_url gespeichert.
+     */
+    private function creative_library_resolve_tracking_destination_import($tracking_url) {
+        static $request_cache = array();
+        $tracking_url = esc_url_raw((string) $tracking_url);
+        if ($tracking_url === '' || !wp_http_validate_url($tracking_url)) {
+            return array('url'=>'','source'=>'unknown');
+        }
+        $cache_key = hash('sha256', $tracking_url);
+        if (isset($request_cache[$cache_key])) {
+            return $request_cache[$cache_key];
+        }
+        $decoded = method_exists($this, 'creative_library_destination_from_tracking')
+            ? (string) $this->creative_library_destination_from_tracking($tracking_url) : '';
+        if ($decoded !== '' && $decoded !== $tracking_url) {
+            return $request_cache[$cache_key] = array('url'=>$decoded,'source'=>'decoded_tracking');
+        }
+        $import_context = (function_exists('is_admin') && is_admin())
+            || (defined('DOING_CRON') && DOING_CRON)
+            || (defined('WP_CLI') && WP_CLI)
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax());
+        if (!$import_context || !function_exists('wp_safe_remote_head')) {
+            return $request_cache[$cache_key] = array('url'=>$tracking_url,'source'=>'tracking_fallback');
+        }
+
+        $initial_host = strtolower((string) wp_parse_url($tracking_url, PHP_URL_HOST));
+        $current = $tracking_url;
+        $seen = array($current=>true);
+        for ($hop = 0; $hop < 4; $hop++) {
+            $response = wp_safe_remote_head($current, array(
+                'timeout'=>8,
+                'redirection'=>0,
+                'headers'=>array('Accept'=>'text/html,*/*;q=0.1'),
+            ));
+            if (is_wp_error($response)) {
+                break;
+            }
+            $code = absint(wp_remote_retrieve_response_code($response));
+            $location = trim((string) wp_remote_retrieve_header($response, 'location'));
+            if ($code < 300 || $code >= 400 || $location === '') {
+                break;
+            }
+            $next = esc_url_raw(html_entity_decode($location, ENT_QUOTES, 'UTF-8'));
+            if ($next === '' || !wp_http_validate_url($next)
+                || !in_array(strtolower((string) wp_parse_url($next, PHP_URL_SCHEME)), array('http','https'), true)
+                || isset($seen[$next])) {
+                break;
+            }
+            $current = $next;
+            $seen[$current] = true;
+        }
+
+        $final_host = strtolower((string) wp_parse_url($current, PHP_URL_HOST));
+        if ($current !== $tracking_url && $final_host !== '' && $initial_host !== '' && $final_host !== $initial_host) {
+            return $request_cache[$cache_key] = array('url'=>$current,'source'=>'resolved_redirect');
+        }
+        return $request_cache[$cache_key] = array('url'=>$tracking_url,'source'=>'tracking_checked');
+    }
+
     private function creative_library_normalize_row($row, $mapping, $context) {
         $provider = sanitize_key((string) ($context['provider'] ?? ''));
         $partner_external_id = preg_replace('/[^0-9A-Za-z._-]/', '', (string) ($context['partner_external_id'] ?? ''));
@@ -616,9 +683,9 @@ trait PPAR_Creative_Library_Trait {
             $tracking_url = esc_url_raw($this->creative_library_html_attr($html, 'a', 'href'));
         }
         // KISS: Die Sammelstelle unterscheidet echte Zielseiten von einem
-        // bloßen Trackinglink. Nur echte/decodierte Zielseiten dürfen später
-        // als Themenbeweis dienen. Ohne Zielseite bleibt der Banner ein
-        // allgemeiner technischer Fallback statt eine geratene Kategorie.
+        // bloßen Trackinglink. Nur echte/decodierte/einmalig beim Import
+        // aufgeloeste Zielseiten duerfen spaeter als Themenbeweis dienen.
+        $declared_destination_source = sanitize_key((string) ($row['_destination_source'] ?? ''));
         $destination_source = $destination_url !== '' ? 'provider_explicit' : '';
         if ($destination_url === '') {
             $destination_url = $this->creative_library_destination_from_tracking($tracking_url);
@@ -629,6 +696,13 @@ trait PPAR_Creative_Library_Trait {
         if ($destination_url === '') {
             $destination_url = $tracking_url;
             $destination_source = $destination_url !== '' ? 'tracking_fallback' : 'unknown';
+        }
+        if ($declared_destination_source === 'resolved_redirect'
+            && $destination_url !== '' && $destination_url !== $tracking_url) {
+            $destination_source = 'resolved_redirect';
+        } elseif ($declared_destination_source === 'tracking_checked'
+            && $destination_url !== '' && $destination_url === $tracking_url) {
+            $destination_source = 'tracking_checked';
         }
         $type = $this->creative_library_normalize_type($this->creative_library_mapped_value($row, $mapping, 'creative_type'));
         if (in_array($type, array('banner','product'), true) && $image_url === '') {
