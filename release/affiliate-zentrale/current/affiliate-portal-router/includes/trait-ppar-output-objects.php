@@ -2563,7 +2563,10 @@ trait PPAR_Output_Objects_Trait {
         $campaign['advertiser_id'] = sanitize_text_field((string) ($row['partner_external_id'] ?? ''));
         $campaign['programme_name'] = sanitize_text_field((string) ($row['partner_name'] ?? ''));
         $campaign['programme_status'] = 'active'; $campaign['programme_status_source'] = 'output_object'; $campaign['programme_status_checked_at'] = time();
-        $campaign['quality_manual_status'] = 'auto_verified'; $campaign['render_mode'] = 'image_link';
+        $manual_fixed_banner = $output_type === 'portal_banner'
+            && sanitize_key((string)($classification['source'] ?? '')) === 'manual_fixed_target';
+        $campaign['quality_manual_status'] = $manual_fixed_banner ? 'fixed' : 'auto_verified';
+        $campaign['render_mode'] = 'image_link';
         $campaign['dimensions'] = absint($row['width'] ?? 0) . 'x' . absint($row['height'] ?? 0);
         $is_ebay_campaign = sanitize_key((string) ($row['provider'] ?? '')) === 'ebay';
         $auto_ebay_business = $output_type === 'product_campaign'
@@ -2576,13 +2579,13 @@ trait PPAR_Output_Objects_Trait {
         $auto_category_banner = $this->output_auto_category_large_banner_allowed($row, $classification, $slot, $output_type);
         $auto_contract_banner = $this->output_auto_contract_banner_allowed($row, $classification, $slot, $output_type);
         $auto_product = $auto_ebay_business || $auto_otto_awin_product;
-        $auto_publish = $auto_product || $auto_contract_banner;
+        $auto_publish = $manual_fixed_banner || $auto_product || $auto_contract_banner;
         $general_banner_fallback = $output_type === 'portal_banner'
             && (!empty($target['_ppar_general_fallback_anchor'])
                 || in_array(sanitize_key((string)($classification['source']??'')),array('banner_general_fallback','creative_library_general_fallback'),true));
         $campaign['active'] = $auto_publish;
         $campaign['assignment_mode'] = $general_banner_fallback ? 'fallback' : 'page_tree';
-        $campaign['match_descendants'] = $general_banner_fallback ? false : $auto_category_banner;
+        $campaign['match_descendants'] = $manual_fixed_banner ? false : ($general_banner_fallback ? false : $auto_category_banner);
         // V6.72.89: page_id ist ausschliesslich fuer echte Seiten. Eine WordPress-
         // Kategorie-ID darf niemals als Seiten-ID gespeichert werden; sonst geht die
         // exakte category:<slug>-Bindung fuer normale Kategorien (z. B. Reithelme) verloren.
@@ -2609,9 +2612,11 @@ trait PPAR_Output_Objects_Trait {
         $campaign['placements'] = ($output_type === 'portal_banner' && $compatible_banner_slots)
             ? $compatible_banner_slots
             : ($auto_placements ? $auto_placements : array($slot_id));
-        $campaign['priority'] = $auto_ebay_business
-            ? absint($payload['ebay_quality_score'] ?? ($classification['confidence'] ?? 0))
-            : (($auto_otto_awin_product || $auto_contract_banner) ? absint($classification['confidence'] ?? 0) : absint($campaign['priority'] ?? 0));
+        $campaign['priority'] = $manual_fixed_banner
+            ? 100
+            : ($auto_ebay_business
+                ? absint($payload['ebay_quality_score'] ?? ($classification['confidence'] ?? 0))
+                : (($auto_otto_awin_product || $auto_contract_banner) ? absint($classification['confidence'] ?? 0) : absint($campaign['priority'] ?? 0)));
         $campaign['auto_topic_label'] = sanitize_text_field((string) ($target['label'] ?? '')); $campaign['auto_topic_score'] = absint($classification['confidence'] ?? 0); $campaign['auto_topic_reason'] = sanitize_text_field((string) ($classification['reason'] ?? ''));
         $campaign['label'] = $output_type === 'product_campaign'
             ? ($is_ebay_campaign ? 'eBay-Angebot · Affiliate' : ($auto_otto_awin_product ? 'OTTO-Angebot · Affiliate' : 'Produktvorschlag'))
@@ -2681,7 +2686,9 @@ trait PPAR_Output_Objects_Trait {
         } else {
             delete_post_meta($campaign_id, '_ppar_otto_awin_auto');
         }
-        $published_reason = $auto_ebay_business
+        $published_reason = $manual_fixed_banner
+            ? 'Fest zugeordneter Banner fuer das gewaehlte Portalziel aktiviert.'
+            : ($auto_ebay_business
             ? 'Verifiziertes eBay-BUSINESS-Produkt automatisch in den freigegebenen Produktslots aktiviert.'
             : ($auto_otto_awin_product
                 ? 'Verifiziertes OTTO-Produkt aus dem freigegebenen Awin-Programm automatisch für passende Produktplätze und Beiträge aktiviert.'
@@ -2689,14 +2696,16 @@ trait PPAR_Output_Objects_Trait {
                     ? 'Verifizierter Banner ohne eindeutiges Zielthema automatisch in den allgemeinen technisch gültigen Fallback-Pool aktiviert.'
                     : ($auto_category_banner
                         ? 'Verifizierter grosser Kategorie-Querbanner automatisch fuer den passendsten Themenast aktiviert.'
-                        : 'Inaktive Kampagne aus exakt verknüpftem Creative, Ziel und Designslot vorbereitet.')));
-        $decision_source = $auto_ebay_business
+                        : 'Inaktive Kampagne aus exakt verknüpftem Creative, Ziel und Designslot vorbereitet.'))));
+        $decision_source = $manual_fixed_banner
+            ? 'manual_fixed_target'
+            : ($auto_ebay_business
             ? 'ebay_verified_product_concept'
             : ($auto_otto_awin_product
                 ? 'otto_awin_verified_product'
                 : ($general_banner_fallback
                     ? 'banner_general_fallback'
-                    : ($auto_category_banner ? 'category_large_banner_v1' : (string) ($object['decision_source'] ?? 'automatic'))));
+                    : ($auto_category_banner ? 'category_large_banner_v1' : (string) ($object['decision_source'] ?? 'automatic')))));
         $wpdb->update($this->output_objects_table(), array(
             'campaign_post_id'=>$campaign_id,
             'status'=>$auto_publish ? 'published' : 'draft',
