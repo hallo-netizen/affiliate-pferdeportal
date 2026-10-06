@@ -110,12 +110,41 @@ Source-Manifest SHA-256:
 
 Source-Dateien: 28
 
+## Reale WordPress/MariaDB-Pruefung
+
+GitHub Actions Run `37489630643`: **SUCCESS**.
+
+Umgebung:
+- WordPress 7.1.2
+- MariaDB 10.11
+- PHP 8.3
+- PHP-Lint: 22/22 PASS
+
+Bewiesene Positiv-/Negativfaelle:
+- alte aktive automatische Fütterungs-Kampagne erzeugt;
+- danach beide bekannten Creative-Identity-Metakeys absichtlich entfernt;
+- globaler 6.72.195-Reconcile deaktiviert diesen unverknuepften Altbanner trotzdem;
+- aktuelle Zielkarte enthaelt danach Schabracken;
+- keine aktuelle automatische Fütterungs-Kampagne bleibt aktiv;
+- Tarifcheck Kredit/Kosten mit reinem Tracking-Fallback wird durch explizite Gruppe auf alle simulierten Kosten-Blattkategorien gelegt;
+- Tarifcheck Versicherungen mit reinem Tracking-Fallback wird durch explizite Gruppe auf alle simulierten Versicherungs-Blattkategorien gelegt;
+- Tarifcheck Tracking-only ohne explizite Gruppe bleibt fail-closed;
+- manuelle Bannerkampagne bleibt aktiv;
+- automatische Produktkampagne bleibt aktiv;
+- Reconcile endet deterministisch mit done=true.
+
+Relevante Laufwerte:
+- global_deactivated_auto_banners: 1
+- processed: 4
+- mapped: 5
+- replanned: 3
+- no_map: 1
+
 ## Noch offen
 
-Nicht als Release-PASS behandeln, bevor mindestens:
-- PHP-Lint des exakten Source-Trees PASS;
-- reale WordPress/MariaDB-Positiv-/Negativtests PASS;
+Nicht als Live-PASS behandeln, bevor mindestens:
 - Fresh-Unpack/Byteidentitaet des finalen ZIP PASS;
+- exaktes ZIP in WordPress/MariaDB erneut PASS;
 - reale Live-Abnahme Schabracken PASS;
 - reale Live-Abnahme beider explizit zugeordneten Tarifcheck-Gruppen PASS.
 
