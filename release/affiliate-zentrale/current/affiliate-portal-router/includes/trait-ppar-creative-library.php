@@ -428,6 +428,16 @@ trait PPAR_Creative_Library_Trait {
         return array(absint($evidence['width']), absint($evidence['height']));
     }
 
+    private function creative_library_verify_before_assign_banner($row) {
+        if (!is_array($row) || sanitize_key((string)($row['creative_type'] ?? '')) !== 'banner') {
+            return false;
+        }
+        $provider = sanitize_key((string)($row['provider'] ?? ''));
+        $partner = remove_accents(strtolower((string)($row['partner_name'] ?? '')));
+        return in_array($provider, array('direct','manual'), true)
+            || strpos($partner, 'tarifcheck') !== false;
+    }
+
     private function creative_library_verify_asset_row($row, $force = false, $replan = true) {
         if (!is_array($row) || empty($row['id'])) {
             return new WP_Error('creative_asset_missing', 'Werbemittel wurde nicht gefunden.');
@@ -436,6 +446,7 @@ trait PPAR_Creative_Library_Trait {
         if ($image_url === '') {
             return new WP_Error('creative_asset_image_missing', 'Bildquelle fehlt.');
         }
+        $verify_before_assign = $this->creative_library_verify_before_assign_banner($row);
         $evidence = $this->creative_library_remote_image_evidence($image_url, (bool) $force);
         $payload = json_decode((string) ($row['payload'] ?? ''), true);
         $payload = is_array($payload) ? $payload : array();
@@ -445,13 +456,18 @@ trait PPAR_Creative_Library_Trait {
             $payload['_dimension_state'] = 'failed';
             $payload['_dimension_error'] = $evidence->get_error_message();
             $payload['_measured_at'] = time();
-            $wpdb->update($table, array(
+            $failed_update = array(
                 'width'=>0,
                 'height'=>0,
                 'topic_status'=>'format_blocked',
                 'topic_score'=>0,
                 'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            ), array('id'=>absint($row['id'])));
+            );
+            if ($verify_before_assign) {
+                $failed_update['topic_targets'] = '[]';
+                $failed_update['classified_at'] = 0;
+            }
+            $wpdb->update($table, $failed_update, array('id'=>absint($row['id'])));
             return $evidence;
         }
         $width = absint($evidence['width'] ?? 0);
@@ -465,29 +481,40 @@ trait PPAR_Creative_Library_Trait {
         $payload['_image_mime'] = sanitize_text_field((string) ($evidence['mime'] ?? ''));
         $payload['_image_bytes'] = absint($evidence['bytes'] ?? 0);
         $payload['_measured_at'] = absint($evidence['measured_at'] ?? time());
-        // Der Bildprüfer bestätigt ausschließlich das Asset. Eine bereits
-        // gespeicherte Ziel-URL-Zuordnung darf dabei niemals wieder gelöscht
-        // werden. Das ist die zentrale Banner-Sammelstelle.
+
+        // 6.72.192 KISS: Direkt-/Manuellbanner (insbesondere Tarifcheck)
+        // duerfen erst NACH erfolgreicher realer Bildpruefung eine Zielkarte
+        // erhalten. Bis dahin bleibt die Karte leer.
         $topic_status = 'auto_verified';
-        $topic_score = absint($row['topic_score'] ?? 0);
-        $topic_targets = trim((string)($row['topic_targets'] ?? ''));
+        $topic_score = $verify_before_assign ? 0 : absint($row['topic_score'] ?? 0);
+        $topic_targets = $verify_before_assign ? '[]' : trim((string)($row['topic_targets'] ?? ''));
         if ($topic_targets === '') { $topic_targets = '[]'; }
-        $wpdb->update($table, array(
+        $verified_update = array(
             'width'=>$width,
             'height'=>$height,
             'topic_status'=>$topic_status,
             'topic_score'=>$topic_score,
             'topic_targets'=>$topic_targets,
             'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-        ), array('id'=>absint($row['id'])));
-        $updated = array_merge($row, array(
-            'width'=>$width,
-            'height'=>$height,
-            'topic_status'=>$topic_status,
-            'topic_score'=>$topic_score,
-            'topic_targets'=>$topic_targets,
-            'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-        ));
+        );
+        if ($verify_before_assign) {
+            $verified_update['classified_at'] = 0;
+        }
+        $wpdb->update($table, $verified_update, array('id'=>absint($row['id'])));
+        $updated = array_merge($row, $verified_update);
+
+        if ($verify_before_assign && method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
+            $mapped = $this->output_assign_banner_targets_from_destination_once($updated);
+            if (is_array($mapped)) {
+                $mapped_count = absint($mapped['mapped'] ?? 0);
+                $mapped_targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                $updated['topic_status'] = $mapped_count > 0 ? 'auto_verified' : 'no_match';
+                $updated['topic_score'] = $mapped_count > 0 ? 100 : 0;
+                $updated['topic_targets'] = wp_json_encode($mapped_targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $updated['classified_at'] = time();
+            }
+        }
+
         if ($replan && method_exists($this, 'output_plan_creative')) {
             $this->output_plan_creative($updated, true);
         }
@@ -945,6 +972,13 @@ trait PPAR_Creative_Library_Trait {
                     $same_source_update['topic_targets'] = '[]';
                     $same_source_update['classified_at'] = 0;
                 }
+                $verify_before_assign = $this->creative_library_verify_before_assign_banner($creative);
+                $incoming_dimension_state = sanitize_key((string)($incoming_payload['_dimension_state'] ?? 'pending'));
+                if ($verify_before_assign && !in_array($incoming_dimension_state, array('verified','mismatch'), true)) {
+                    $same_source_update['topic_score'] = 0;
+                    $same_source_update['topic_targets'] = '[]';
+                    $same_source_update['classified_at'] = 0;
+                }
                 $wpdb->update($table, $same_source_update, array('id'=>absint($existing['id'])));
                 return $destination_changed ? 'updated' : 'unchanged';
             }
@@ -1039,10 +1073,12 @@ trait PPAR_Creative_Library_Trait {
             }
         }
 
-        // HARD RULE gilt auch fuer direkt eingefuegte Partnercodes:
-        // Import -> Ziel-URL -> feste Portalziele -> speichern.
-        // Alle betroffenen Banner werden danach in genau EINER DB-Abfrage geladen.
+        // 6.72.192 HARD RULE fuer HTML-/Direktpartnerbanner:
+        // Import -> Ziel-URL erfassen/pruefen -> Banner technisch pruefen ->
+        // erst DANACH feste Portalziele speichern.
+        // Genau eine gebuendelte DB-Abfrage laedt die betroffenen Banner.
         $target_mapped = 0;
+        $verification_pending = 0;
         if ($banner_identity_hashes && method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
             global $wpdb;
             $banner_identity_hashes = array_values(array_unique(array_filter($banner_identity_hashes, static function($hash) {
@@ -1056,16 +1092,24 @@ trait PPAR_Creative_Library_Trait {
                 );
                 $stored_rows = $wpdb->get_results($query, ARRAY_A);
                 foreach ((array)$stored_rows as $stored_row) {
+                    $payload = json_decode((string)($stored_row['payload'] ?? ''), true);
+                    $payload = is_array($payload) ? $payload : array();
+                    $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? 'pending'));
+                    if ($this->creative_library_verify_before_assign_banner($stored_row)
+                        && !in_array($dimension_state, array('verified','mismatch'), true)) {
+                        $verification_pending++;
+                        continue;
+                    }
                     $mapped = $this->output_assign_banner_targets_from_destination_once($stored_row);
                     $target_mapped += absint($mapped['mapped'] ?? 0);
                 }
             }
         }
 
-        if ($counts['imported'] > 0 || $counts['updated'] > 0) {
+        if ($counts['imported'] > 0 || $counts['updated'] > 0 || $verification_pending > 0) {
             $this->creative_library_schedule_asset_verification(10);
         }
-        $message = sprintf('%d erkannt · %d neu · %d aktualisiert · %d unverändert · %d blockiert · %d feste Zielzuordnungen gespeichert. Bildprüfung läuft paketweise im Hintergrund.', $counts['seen'], $counts['imported'], $counts['updated'], $counts['unchanged'], $counts['blocked'], $target_mapped);
+        $message = sprintf('%d erkannt · %d neu · %d aktualisiert · %d unverändert · %d blockiert · %d Prüfung offen · %d feste Zielzuordnungen gespeichert. Neue Direkt-/Tarifcheck-Banner werden erst nach erfolgreicher technischer Prüfung zugeordnet.', $counts['seen'], $counts['imported'], $counts['updated'], $counts['unchanged'], $counts['blocked'], $verification_pending, $target_mapped);
         $this->creative_library_redirect('success', $message, $context);
     }
 
@@ -1626,6 +1670,7 @@ trait PPAR_Creative_Library_Trait {
                     </div><div>
                         <p><label><strong>Sammeldatei</strong><br><input type="file" name="creative_file" accept=".csv,.json,.txt"></label><br><span class="description">CSV, JSON oder TXT; maximal 20 MiB und 5.000 Werbemittel.</span></p>
                         <p><label><strong>Oder mehrere Banner-Codes gesammelt einfügen</strong><br><textarea name="creative_codes" rows="8" placeholder="Mehrere vollständige &lt;a&gt;&lt;img&gt;-Codes auf einmal"></textarea></label></p>
+                        <p class="description"><strong>Tarifcheck:</strong> Provider „Direktpartner“, Partnername „Tarifcheck“. Reihenfolge: HTML-Code prüfen → Ziel-URL prüfen → Bild technisch prüfen → erst danach Kosten-/Versicherungsziele speichern.</p>
                         <p><button class="button button-primary">Gesammelt importieren</button></p>
                     </div></div>
                 </form>
