@@ -989,7 +989,7 @@ trait PPAR_Output_Objects_Trait {
         $provider_topic=$this->output_banner_provider_topic_classification($row,$portal);
         if(is_wp_error($provider_topic)||is_array($provider_topic)){return $provider_topic;}
         $destination_source=$this->output_banner_destination_source($row);
-        if(!in_array($destination_source,array('provider_explicit','decoded_tracking'),true)){
+        if(!in_array($destination_source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)){
             return array('status'=>'review','confidence'=>0,'reason'=>'Keine belastbare echte Ziel-URL; allgemeiner Fallback vorgesehen.','target'=>null,'alternatives'=>array(),'source'=>'banner_destination_unknown');
         }
         $semantic=$this->output_destination_semantic_text($row);
