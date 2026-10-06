@@ -1,7 +1,7 @@
 # Affiliate Router 6.72.189 — import-only destination URL rootfix
 
 ## Status
-SOURCE_FIXED_LOCAL_EXACT_RECONSTRUCTION_27_OF_27_AND_PHP_21_OF_21_PASS_WORDPRESS_MARIADB_GATE_OPEN
+EXACT_SOURCE_WORDPRESS_MARIADB_AND_FINAL_ZIP_PASS_LIVE_INSTALL_READBACK_OPEN
 
 ## User decision / KISS contract
 Banner relevance uses the real destination URL as the primary reusable signal.
@@ -67,11 +67,13 @@ The simulation is not a substitute for the full WordPress/MariaDB release gate.
 - version: 6.72.189
 - source file count: 27
 - source manifest SHA256: e33b84d7fc651cd05adacb6f0d2c2502b5d464aca90a1f0ae6199ec925419d8d
-- final installer: absent
-- release_allowed: false
+- final installer: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip
+- final installer SHA256: 0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94
+- final installer bytes: 797165
+- release_allowed: false pending live install/readback
 
 ## Remaining gates
-Run the normal bound source/WordPress/MariaDB/performance gates on this exact manifest, then exact ZIP/fresh-unpack/byte-identity gates, then live install + bounded ADCELL resync + public Reithelme/Schabracken readback.
+Only live install + exactly one bounded ADCELL destination-url resync + public Reithelme/Schabracken readback remain.
 
 The former successful-response proof for getPromotionCategories/category 14727 is no longer a release prerequisite because that extra category request is no longer in the active ADCELL banner import path.
 
@@ -130,7 +132,31 @@ A temporary local candidate ZIP was built from the exact manifest-bound source o
 - unpacked PHP lint: PASS 21/21
 - source/ZIP file-byte identity for all manifest files: PASS 27/27
 
-## Remaining hard blocker
-The exact real WordPress/MariaDB runtime gate is still OPEN. The local execution environment has neither a MariaDB/MySQL server nor PHP mysqli/pdo_mysql and external package/network access is blocked. Existing repository MariaDB workflows are version-bound to older candidates or modify the plugin copy before testing, so they are not valid evidence for this exact 6.72.189 manifest. No workflow or release architecture was changed to work around that limitation.
+## Exact WordPress/MariaDB and final ZIP gate
+Existing temporary MariaDB runner was reused and minimally rebound to the exact 6.72.189 source. No product architecture or database schema was added.
 
-Release remains forbidden until the exact manifest is proven on real WordPress/MariaDB.
+Run 37439851270 PASS:
+- exact source manifest: 27/27 PASS;
+- PHP lint: 21/21 PASS;
+- KISS performance hardlock PASS;
+- exact target-URL WordPress/MariaDB gate PASS;
+- new banner: one bounded target-resolution path;
+- unchanged resolved banner: zero target HTTP;
+- changed tracking URL: one new bounded resolution path;
+- tracking_checked unchanged banner: zero repeated HTTP;
+- learned target updates the existing row only;
+- identical repeat does not grow the DB;
+- verified image hash/dimensions are preserved;
+- existing banner regression: 21/21 PASS;
+- existing destination-library regression: 26/26 PASS.
+
+Final installer built from the exact tested source in the same runner:
+- path: release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip
+- SHA256: 0589746569fcbec900cfae6e46ad501ea9f5a0311b04762caea3e9b2e8a60b94
+- bytes: 797165
+- fresh-unpack manifest identity: 27/27 PASS
+- fresh-unpack PHP lint: 21/21 PASS
+- source/ZIP byte identity: 27/27 PASS
+- binding commit: 2468cd75c49561cd721a3a118a428ff12ca984ca
+
+Release is still not a LIVE PASS until the exact installer is installed, one bounded ADCELL destination-url resync completes, and the two public target pages are read back.
