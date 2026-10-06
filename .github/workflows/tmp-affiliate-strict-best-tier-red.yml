@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   target-url-wordpress-mariadb:
@@ -334,4 +334,54 @@ jobs:
             /tmp/target-url-wpdb.log
             /tmp/full189.log
             /tmp/dest189.log
+          if-no-files-found: error
+
+      - name: Build verify and bind exact final 6.72.189 ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          FINAL="release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.189.zip"
+          rm -f "$FINAL"
+          rm -rf /tmp/final189
+          (
+            cd release/affiliate-zentrale/current
+            zip -qr "$GITHUB_WORKSPACE/$FINAL" affiliate-portal-router
+          )
+          mkdir -p /tmp/final189
+          unzip -q "$FINAL" -d /tmp/final189
+          (
+            cd /tmp/final189
+            sha256sum -c "$GITHUB_WORKSPACE/release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt"
+          ) | tee /tmp/final189-manifest.log
+          test "$(grep -c ': OK /tmp/final189-manifest.log)" = "27"
+          find /tmp/final189/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/final189-lint.log
+          test "$(grep -c '^No syntax errors detected' /tmp/final189-lint.log)" = "21"
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path('release/affiliate-zentrale/current')
+          out=Path('/tmp/final189')
+          files=[line.split('  ',1)[1] for line in Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt').read_text().splitlines() if line.strip()]
+          assert len(files)==27
+          for rel in files:
+              assert (src/rel).read_bytes()==(out/rel).read_bytes(), rel
+          print('FINAL_672189_BYTE_IDENTITY_PASS_27_OF_27')
+          PY
+          SHA="$(sha256sum "$FINAL" | awk '{print $1}')"
+          BYTES="$(stat -c%s "$FINAL")"
+          echo "FINAL_672189_ZIP_PASS sha256=$SHA bytes=$BYTES" | tee /tmp/final189-sha.log
+          git config user.name "affiliate-release-bot"
+          git config user.email "affiliate-release-bot@users.noreply.github.com"
+          git add "$FINAL"
+          git diff --cached --quiet && { echo "FAIL final ZIP not staged"; exit 2; }
+          git commit -m "Affiliate: bind final 6.72.189 installer"
+          git push origin HEAD:affiliate-release-current
+
+      - name: Upload final ZIP verification evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-672189-final-zip-proof
+          path: |
+            /tmp/final189-manifest.log
+            /tmp/final189-lint.log
+            /tmp/final189-sha.log
           if-no-files-found: error
