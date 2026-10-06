@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 231,
+  "generation": 232,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -58,7 +58,7 @@
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
     "current_focus": "LIVE_SCHABRACKEN_TARGET_REBUILD_AND_TARIFCHECK_PRESET_6_72_194_FINAL",
-    "current_focus_scope_ref": "protocol/AFFILIATE_TARIFF_TOOL_PLACEHOLDER_KISS_20261006.md",
+    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672194_live_schabracken_tarifcheck_preset_20261006.md",
     "current_focus_reason": "6.72.193 is live and disproved for Schabracken; Tarifcheck was also not selectable. 6.72.194 fixes exactly those two issues. Banner URL concept remains stored-map-only at runtime; the missing piece was reliable local rebinding of existing live state and current campaign discovery. No frontend performance path is expanded.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_194_FINAL_INSTALLER_BOUND_LIVE_INSTALL_OPEN",
