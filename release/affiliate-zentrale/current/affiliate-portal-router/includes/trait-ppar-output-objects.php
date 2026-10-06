@@ -1060,7 +1060,8 @@ trait PPAR_Output_Objects_Trait {
         if ($family === 'blocked' || !is_array($target)) { return false; }
         if (sanitize_key((string)($target['type'] ?? '')) !== 'category') { return false; }
 
-        $parts = preg_split('/\s+>\s+/', (string)($target['label'] ?? ''));
+        $decoded_label = html_entity_decode((string)($target['label'] ?? ''), ENT_QUOTES, 'UTF-8');
+        $parts = preg_split('/\s+>\s+/', $decoded_label);
         $parts = array_values(array_filter(array_map(array($this,'output_text'), (array)$parts), 'strlen'));
         $leaf = $parts ? (string)end($parts) : '';
         $slug = sanitize_key((string)($target['slug'] ?? ''));
