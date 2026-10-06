@@ -44,9 +44,9 @@ function seed_banner194($call,$o,$external,$dest,$title){
         '_destination_source'=>'explicit',
     );
     $row=array(
-        'provider'=>'adcell',
+        'provider'=>'direct',
         'partner_external_id'=>'194test',
-        'partner_name'=>'Testpartner',
+        'partner_name'=>'Test Direktpartner',
         'external_id'=>$external,
         'identity_hash'=>$identity,
         'creative_type'=>'banner',
