@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 228,
+  "generation": 229,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -809,7 +809,15 @@
       "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json",
       "protocol/AFFILIATE_TARIFF_TOOL_PLACEHOLDER_KISS_20261006.md"
-    ]
+    ],
+    "handoff_download": {
+      "workflow_run": 37472875881,
+      "workflow_artifact_id": 11417483743,
+      "chat_file": "AFFILIATE_ZENTRALE_6.72.193.zip",
+      "sha256": "1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27",
+      "bytes": 805229,
+      "note": "Handoff workflow only; plugin source unchanged after final binding."
+    }
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
