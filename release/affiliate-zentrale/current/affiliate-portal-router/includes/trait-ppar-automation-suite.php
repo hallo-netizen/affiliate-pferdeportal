@@ -3155,6 +3155,10 @@ trait PPAR_Automation_Suite_Trait {
      * Deshalb wird genau EIN Hintergrundlauf vorgemerkt; keine API im Frontend.
      */
     public function maybe_upgrade_adcell_topic_metadata_v67288() {
+        // Seit 6.72.189 ersetzt der neue Ziel-URL-Nachlauf diesen historischen
+        // Kategorien-Nachlauf vollstaendig. Auf Neuinstallationen darf deshalb
+        // nicht zweimal der komplette ADCELL-Bestand gestartet werden.
+        if (version_compare(self::VERSION, '6.72.189', '>=')) { return; }
         $key = 'ppar_v67288_adcell_topic_resync_state';
         $state = sanitize_key((string)get_option($key, ''));
         if (in_array($state, array('scheduled','running','done'), true)) { return; }
@@ -3165,6 +3169,7 @@ trait PPAR_Automation_Suite_Trait {
     }
 
     public function run_v67288_adcell_topic_resync() {
+        if (version_compare(self::VERSION, '6.72.189', '>=')) { return; }
         $key = 'ppar_v67288_adcell_topic_resync_state';
         update_option($key, 'running', false);
         $result = $this->automation_start_all_adcell_programmes();
@@ -3186,29 +3191,29 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
-     * V6.72.189 – Rootfix-Nachlauf fuer den live bewiesenen ADCELL-405-Fall
-     * plus providerneutrale Themenkante. 6.72.88/6.72.187 koennen auf einzelnen
-     * Installationen bereits "done" sein; deshalb braucht 6.72.189 einen eigenen Lauf.
-     * Kein API-Zugriff im Frontend.
+     * V6.72.189 – genau ein Upgrade-Nachlauf fuer das URL-Konzept.
+     * Alte 6.72.189-Kategorienzustände duerfen diesen neuen Lauf nicht
+     * unterdruecken; deshalb eigener State- und Hook-Name.
+     * Kein URL- oder Provider-HTTP im Frontend.
      */
-    public function maybe_upgrade_adcell_topic_metadata_v672189() {
-        $key = 'ppar_v672189_adcell_topic_resync_state';
+    public function maybe_upgrade_adcell_destination_url_v672189() {
+        $key = 'ppar_v672189_adcell_destination_url_resync_state';
         $state = sanitize_key((string)get_option($key, ''));
         if (in_array($state, array('scheduled','running','done'), true)) { return; }
         update_option($key, 'scheduled', false);
-        if (!wp_next_scheduled('ppar_v672189_adcell_topic_resync')) {
-            wp_schedule_single_event(time()+1, 'ppar_v672189_adcell_topic_resync');
+        if (!wp_next_scheduled('ppar_v672189_adcell_destination_url_resync')) {
+            wp_schedule_single_event(time()+1, 'ppar_v672189_adcell_destination_url_resync');
         }
     }
 
-    public function run_v672189_adcell_topic_resync() {
-        $key = 'ppar_v672189_adcell_topic_resync_state';
+    public function run_v672189_adcell_destination_url_resync() {
+        $key = 'ppar_v672189_adcell_destination_url_resync_state';
         update_option($key, 'running', false);
         $result = $this->automation_start_all_adcell_programmes();
         if (is_wp_error($result)) {
             update_option($key, 'retry', false);
-            if (!wp_next_scheduled('ppar_v672189_adcell_topic_resync')) {
-                wp_schedule_single_event(time()+300, 'ppar_v672189_adcell_topic_resync');
+            if (!wp_next_scheduled('ppar_v672189_adcell_destination_url_resync')) {
+                wp_schedule_single_event(time()+300, 'ppar_v672189_adcell_destination_url_resync');
             }
             return;
         }
