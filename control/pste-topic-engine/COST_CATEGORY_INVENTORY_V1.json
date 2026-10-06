@@ -1,0 +1,410 @@
+{
+  "contract": "PFERDE_ATELIER_COST_CATEGORY_INVENTORY_V1",
+  "purpose": "Internal shortlist basis for later calculator article planning. No article creation and no DataForSEO.",
+  "source": "portal-structure-v279.json",
+  "count": 67,
+  "categories": [
+    {
+      "id": "c5",
+      "title": "Kosten Regendecken",
+      "slug": "pferdedecken-regendecken-kosten",
+      "path": "Ausrüstung > Decken > Regendecken"
+    },
+    {
+      "id": "c10",
+      "title": "Kosten Winterdecken",
+      "slug": "pferdedecken-winterdecken-kosten",
+      "path": "Ausrüstung > Decken > Winterdecken"
+    },
+    {
+      "id": "c15",
+      "title": "Kosten Übergangsdecken",
+      "slug": "pferdedecken-uebergangsdecken-kosten",
+      "path": "Ausrüstung > Decken > Übergangsdecken"
+    },
+    {
+      "id": "c20",
+      "title": "Kosten High-Neck-Decken",
+      "slug": "pferdedecken-high-neck-decken-kosten",
+      "path": "Ausrüstung > Decken > High-Neck-Decken"
+    },
+    {
+      "id": "c29",
+      "title": "Kosten Unterdecken",
+      "slug": "pferdedecken-unterdecken-kosten",
+      "path": "Ausrüstung > Decken > Unterdecken"
+    },
+    {
+      "id": "c34",
+      "title": "Kosten Deckengurte",
+      "slug": "pferdedecken-deckengurte-kosten",
+      "path": "Ausrüstung > Deckenzubehör > Deckengurte"
+    },
+    {
+      "id": "c75",
+      "title": "Kosten Satteldecken",
+      "slug": "satteldecken-kosten",
+      "path": "Ausrüstung > Sattel & Zubehör > Satteldecken"
+    },
+    {
+      "id": "c84",
+      "title": "Kosten Sattelgurte",
+      "slug": "sattelgurte-kosten",
+      "path": "Ausrüstung > Sattel & Zubehör > Sattelgurte"
+    },
+    {
+      "id": "c101",
+      "title": "Kosten Englische Trensen",
+      "slug": "englische-trensen-kosten",
+      "path": "Ausrüstung > Trensen & Gebisse > Englische Trensen"
+    },
+    {
+      "id": "c106",
+      "title": "Kosten Gebisse",
+      "slug": "gebisse-kosten",
+      "path": "Ausrüstung > Trensen & Gebisse > Gebisse"
+    },
+    {
+      "id": "c111",
+      "title": "Kosten Gebisslose Zäumungen",
+      "slug": "gebisslose-zaeumungen-kosten",
+      "path": "Ausrüstung > Trensen & Gebisse > Gebisslose Zäumungen"
+    },
+    {
+      "id": "c128",
+      "title": "Kosten Reithelme",
+      "slug": "reithelme-kosten",
+      "path": "Ausrüstung > Reiterbedarf > Reithelme"
+    },
+    {
+      "id": "c141",
+      "title": "Kosten Sicherheitswesten",
+      "slug": "sicherheitswesten-kosten",
+      "path": "Ausrüstung > Reiterbedarf > Sicherheitswesten"
+    },
+    {
+      "id": "c146",
+      "title": "Kosten Stallbeleuchtung",
+      "slug": "stallbeleuchtung-kosten",
+      "path": "Stall > Stallklima > Stallbeleuchtung"
+    },
+    {
+      "id": "c151",
+      "title": "Kosten Frostwächter",
+      "slug": "frostwaechter-kosten",
+      "path": "Stall > Stallklima > Frostwächter"
+    },
+    {
+      "id": "c156",
+      "title": "Kosten Kameras im Stall",
+      "slug": "kameras-im-stall-kosten",
+      "path": "Stall > Stalltechnik > Kameras im Stall"
+    },
+    {
+      "id": "c165",
+      "title": "Kosten Wasserleitungen im Stall",
+      "slug": "wasserleitungen-im-stall-kosten",
+      "path": "Stall > Stallklima > Wasserleitungen im Stall"
+    },
+    {
+      "id": "c170",
+      "title": "Kosten Boxentüren",
+      "slug": "boxentueren-kosten",
+      "path": "Stall > Boxen & Türen > Boxentüren"
+    },
+    {
+      "id": "c175",
+      "title": "Kosten Boxengitter",
+      "slug": "boxengitter-kosten",
+      "path": "Stall > Boxen & Türen > Boxengitter"
+    },
+    {
+      "id": "c180",
+      "title": "Kosten Boxenmatten",
+      "slug": "boxenmatten-kosten",
+      "path": "Stall > Boxen & Türen > Boxenmatten"
+    },
+    {
+      "id": "c189",
+      "title": "Kosten Putzplatzmatten",
+      "slug": "putzplatzmatten-kosten",
+      "path": "Stall > Putzplatz > Putzplatzmatten"
+    },
+    {
+      "id": "c198",
+      "title": "Kosten Waschplatz für Pferde",
+      "slug": "waschplatz-fuer-pferde-kosten",
+      "path": "Stall > Putzplatz > Waschplatz für Pferde"
+    },
+    {
+      "id": "c207",
+      "title": "Kosten Schubkarren",
+      "slug": "schubkarren-kosten",
+      "path": "Stall > Mist & Entsorgung > Schubkarren"
+    },
+    {
+      "id": "c216",
+      "title": "Kosten Mistlagerung",
+      "slug": "mistlagerung-kosten",
+      "path": "Stall > Mist & Entsorgung > Mistlagerung"
+    },
+    {
+      "id": "c221",
+      "title": "Kosten Offenstallraufen",
+      "slug": "offenstallraufen-kosten",
+      "path": "Stall > Offenstall > Offenstallraufen"
+    },
+    {
+      "id": "c226",
+      "title": "Kosten Liegeflächen im Offenstall",
+      "slug": "liegeflaechen-im-offenstall-kosten",
+      "path": "Stall > Offenstall > Liegeflächen im Offenstall"
+    },
+    {
+      "id": "c231",
+      "title": "Kosten Offenstalltore",
+      "slug": "offenstalltore-kosten",
+      "path": "Stall > Offenstall > Offenstalltore"
+    },
+    {
+      "id": "c236",
+      "title": "Kosten Offenstall-Bodenbefestigung",
+      "slug": "offenstall-bodenbefestigung-kosten",
+      "path": "Stall > Offenstall > Offenstall-Bodenbefestigung"
+    },
+    {
+      "id": "c245",
+      "title": "Kosten Trennwände im Offenstall",
+      "slug": "trennwaende-im-offenstall-kosten",
+      "path": "Stall > Offenstall > Trennwände im Offenstall"
+    },
+    {
+      "id": "c258",
+      "title": "Kosten Windschutz für Pferde",
+      "slug": "windschutz-fuer-pferde-kosten",
+      "path": "Stall > Unterstände > Windschutz für Pferde"
+    },
+    {
+      "id": "c263",
+      "title": "Kosten Unterstand-Boden",
+      "slug": "unterstand-boden-kosten",
+      "path": "Stall > Unterstände > Unterstand-Boden"
+    },
+    {
+      "id": "c272",
+      "title": "Kosten Unterstand-Beleuchtung",
+      "slug": "unterstand-beleuchtung-kosten",
+      "path": "Stall > Unterstände > Unterstand-Beleuchtung"
+    },
+    {
+      "id": "c277",
+      "title": "Kosten Hoftraktoren",
+      "slug": "hoftraktoren-kosten",
+      "path": "Stall > Stallalltag > Hoftraktoren"
+    },
+    {
+      "id": "c282",
+      "title": "Kosten Hoflader Zubehör",
+      "slug": "hoflader-zubehoer-kosten",
+      "path": "Stall > Stallalltag > Hoflader Zubehör"
+    },
+    {
+      "id": "c287",
+      "title": "Kosten Weidezaungeräte",
+      "slug": "weidezaungeraete-kosten",
+      "path": "Weide > Zauntechnik > Weidezaungeräte"
+    },
+    {
+      "id": "c308",
+      "title": "Kosten Solar-Weidepumpen",
+      "slug": "solar-weidepumpen-kosten",
+      "path": "Weide > Weideausstattung > Solar-Weidepumpen"
+    },
+    {
+      "id": "c325",
+      "title": "Kosten Reitplatzboden",
+      "slug": "reitplatzboden-kosten",
+      "path": "Weide > Reitplatz > Reitplatzboden"
+    },
+    {
+      "id": "c330",
+      "title": "Kosten Reitplatzdrainage",
+      "slug": "reitplatzdrainage-kosten",
+      "path": "Weide > Reitplatz > Reitplatzdrainage"
+    },
+    {
+      "id": "c335",
+      "title": "Kosten Reitplatzumrandung",
+      "slug": "reitplatzumrandung-kosten",
+      "path": "Weide > Reitplatz > Reitplatzumrandung"
+    },
+    {
+      "id": "c340",
+      "title": "Kosten Reitplatzbeleuchtung",
+      "slug": "reitplatzbeleuchtung-kosten",
+      "path": "Weide > Reitplatz > Reitplatzbeleuchtung"
+    },
+    {
+      "id": "c349",
+      "title": "Kosten Reitplatzspiegel",
+      "slug": "reitplatzspiegel-kosten",
+      "path": "Weide > Reitplatz > Reitplatzspiegel"
+    },
+    {
+      "id": "c354",
+      "title": "Kosten Reitplatzplaner",
+      "slug": "reitplatzplaner-kosten",
+      "path": "Weide > Reitplatzpflege > Reitplatzplaner"
+    },
+    {
+      "id": "c359",
+      "title": "Kosten Reitplatzschleppe",
+      "slug": "reitplatzschleppe-kosten",
+      "path": "Weide > Reitplatzpflege > Reitplatzschleppe"
+    },
+    {
+      "id": "c372",
+      "title": "Kosten Reitplatzbewässerung mobil",
+      "slug": "reitplatzbewaesserung-mobil-kosten",
+      "path": "Weide > Reitplatzpflege > Reitplatzbewässerung mobil"
+    },
+    {
+      "id": "c377",
+      "title": "Kosten Weidezaungeräte",
+      "slug": "weide-zauntechnik-weidezaungeraete-kosten",
+      "path": "Weide > Zauntechnik > Weidezaungeräte"
+    },
+    {
+      "id": "c382",
+      "title": "Kosten Solar-Weidezaungeräte",
+      "slug": "solar-weidezaungeraete-kosten",
+      "path": "Weide > Zauntechnik > Solar-Weidezaungeräte"
+    },
+    {
+      "id": "c387",
+      "title": "Kosten Batterie-Weidezaungeräte",
+      "slug": "batterie-weidezaungeraete-kosten",
+      "path": "Weide > Zauntechnik > Batterie-Weidezaungeräte"
+    },
+    {
+      "id": "c392",
+      "title": "Kosten Netzgeräte für Weidezäune",
+      "slug": "netzgeraete-fuer-weidezaeune-kosten",
+      "path": "Weide > Zauntechnik > Netzgeräte für Weidezäune"
+    },
+    {
+      "id": "c437",
+      "title": "Kosten Paddockzäune",
+      "slug": "paddockzaeune-kosten",
+      "path": "Weide > Paddock > Paddockzäune"
+    },
+    {
+      "id": "c442",
+      "title": "Kosten Weidetore",
+      "slug": "weidetore-kosten",
+      "path": "Weide > Zaunzubehör > Weidetore"
+    },
+    {
+      "id": "c447",
+      "title": "Kosten Heuraufen für Weiden",
+      "slug": "heuraufen-fuer-weiden-kosten",
+      "path": "Weide > Weideausstattung > Heuraufen für Weiden"
+    },
+    {
+      "id": "c452",
+      "title": "Kosten Mobile Heuraufen",
+      "slug": "mobile-heuraufen-kosten",
+      "path": "Weide > Weideausstattung > Mobile Heuraufen"
+    },
+    {
+      "id": "c465",
+      "title": "Kosten Weidetränken",
+      "slug": "weidetraenken-kosten",
+      "path": "Weide > Weideausstattung > Weidetränken"
+    },
+    {
+      "id": "c485",
+      "title": "Kosten Frostschutz für Weidetränken",
+      "slug": "frostschutz-fuer-weidetraenken-kosten",
+      "path": "Fütterung > Frostschutz > Frostschutz für Weidetränken"
+    },
+    {
+      "id": "c962",
+      "title": "Kosten 1,5er Pferdeanhänger",
+      "slug": "1-5er-pferdeanhaenger-kosten",
+      "path": "Transport > Anhänger > 1,5er Pferdeanhänger"
+    },
+    {
+      "id": "c967",
+      "title": "Kosten 2er Pferdeanhänger",
+      "slug": "2er-pferdeanhaenger-kosten",
+      "path": "Transport > Anhänger > 2er Pferdeanhänger"
+    },
+    {
+      "id": "c972",
+      "title": "Kosten Alu-Pferdeanhänger",
+      "slug": "alu-pferdeanhaenger-kosten",
+      "path": "Transport > Anhänger > Alu-Pferdeanhänger"
+    },
+    {
+      "id": "c977",
+      "title": "Kosten Holz-Poly-Pferdeanhänger",
+      "slug": "holz-poly-pferdeanhaenger-kosten",
+      "path": "Transport > Anhänger > Holz-Poly-Pferdeanhänger"
+    },
+    {
+      "id": "c990",
+      "title": "Kosten Anhängerkameras",
+      "slug": "anhaengerkameras-kosten",
+      "path": "Transport > Zubehör > Anhängerkameras"
+    },
+    {
+      "id": "c1019",
+      "title": "Kosten Anhängerkupplungen",
+      "slug": "anhaengerkupplungen-kosten",
+      "path": "Transport > Zugfahrzeug > Anhängerkupplungen"
+    },
+    {
+      "id": "c1052",
+      "title": "Kosten Anhängerbeleuchtung",
+      "slug": "anhaengerbeleuchtung-kosten",
+      "path": "Transport > Anhängerpflege > Anhängerbeleuchtung"
+    },
+    {
+      "id": "c1081",
+      "title": "Kosten Sattelanpassung Beratung",
+      "slug": "sattelanpassung-beratung-kosten",
+      "path": "Wissen > Beratung & Partner > Sattelanpassung Beratung"
+    },
+    {
+      "id": "c1129",
+      "title": "Kosten Pferdesättel",
+      "slug": "pferdesaettel-kosten",
+      "path": "Ausrüstung > Sattel & Zubehör > Pferdesättel"
+    },
+    {
+      "id": "c1134",
+      "title": "Kosten Trensen",
+      "slug": "trensen-kosten",
+      "path": "Ausrüstung > Trensen & Gebisse > Trensen"
+    },
+    {
+      "id": "c1139",
+      "title": "Kosten Offenstallbau",
+      "slug": "offenstallbau-kosten",
+      "path": "Stall > Offenstall > Offenstallbau"
+    },
+    {
+      "id": "c1144",
+      "title": "Kosten Paddockbau",
+      "slug": "paddockbau-kosten",
+      "path": "Weide > Paddock > Paddockbau"
+    },
+    {
+      "id": "c1149",
+      "title": "Kosten Reitplatzbau",
+      "slug": "reitplatzbau-kosten",
+      "path": "Weide > Reitplatz > Reitplatzbau"
+    }
+  ]
+}
