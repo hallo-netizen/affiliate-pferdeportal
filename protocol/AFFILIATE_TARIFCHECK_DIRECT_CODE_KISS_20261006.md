@@ -30,12 +30,13 @@ Dabei gilt:
 
 ## Harte Fachregel
 
-- **Kredit / Darlehen / Finanzierung:** ausschließlich WordPress-Kategoriepfade unter **Kosten**.
-- **Versicherung / Haftpflicht:** ausschließlich WordPress-Kategoriepfade unter **Versicherung**.
+- **Kredit / Darlehen / Finanzierung:** ausschließlich in **allen real vorhandenen Kosten-Kategorien**. Im aktuellen Kategoriebaum sind Kosten keine gemeinsame Oberkategorie, sondern verteilte Blattkategorien. Zulässig sind deshalb die echten Kosten-Blätter mit sichtbarem Blattnamen `Kosten …` und Slug `…-kosten`.
+- **Versicherung / Haftpflicht:** ausschließlich in den echten Blattkategorien des Astes **Wissen > Versicherungen & Recht**.
 - Keine Kreuzzuordnung.
-- Maßgeblich ist die **echte Kategoriehierarchie**, nicht das bloße Auftauchen des Wortes „Kosten“ oder „Versicherung“ in einem Kategorienamen.
-- Ein Blatt „Kredit Kosten“ unter dem Versicherungs-Ast bleibt für Kredit gesperrt.
-- Ein Blatt „Versicherung“ unter dem Kosten-Ast bleibt für Versicherung gesperrt.
+- Maßgeblich ist der **reale aktuelle WordPress-Kategoriebaum**, nicht eine erfundene gemeinsame Kosten-Oberkategorie.
+- Kredit wird auf die gesamte echte Kosten-Zielmenge gebunden, nicht auf nur eine vermeintlich beste Kosten-Kategorie.
+- Versicherung wird auf die gesamte echte Versicherungs-Zielmenge gebunden.
+- Ein ähnlich benanntes Blatt außerhalb der erlaubten Struktur bleibt gesperrt.
 - Unbekannte oder mehrdeutige Tarifcheck-Ziel-URL: keine Zielkarte, keine automatische Ausspielung.
 - Für Tarifcheck entstehen keine automatischen Seiten-/Beitragsziele; nur Kategorieziele sind zulässig.
 
@@ -76,3 +77,20 @@ Vor Installation Pflicht:
 - Source-Manifest 27/27;
 - PHP-Lint;
 - Fresh-Unpack/Byteidentität des finalen ZIP.
+
+
+## Kategoriebaum-Prüfung
+
+Autoritative Portalstruktur geprüft:
+
+`release/affiliate-zentrale/current/affiliate-portal-router/assets/ebay-portal-catalog-v2.json`
+
+Aktueller belegter Stand:
+- 1.149 Artikelkategorien insgesamt;
+- 67 konfigurierte Kosten-Einträge;
+- 67 unterschiedliche Kosten-Slugs;
+- 66 unterschiedliche Kosten-Pfade, weil ein Weidezaungeräte-Pfad im Strukturkatalog doppelt mit zwei Slugs geführt wird;
+- Kosten-Kategorien liegen verteilt unter Ausrüstung, Fütterung, Stall, Transport, Weide und Wissen;
+- 14 konfigurierte Blattkategorien unter `Wissen > Versicherungen & Recht`.
+
+Die Runtime erhält für einen Kredit-Banner eine einzige gespeicherte Kampagne mit allen zulässigen Kosten-Zielschlüsseln. Es werden nicht dutzende Bannerkopien angelegt. Dasselbe Prinzip gilt für Versicherungsbanner mit der Versicherungs-Zielmenge.
