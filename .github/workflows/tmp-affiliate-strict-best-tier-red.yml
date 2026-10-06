@@ -1,4 +1,4 @@
-name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate R3
+name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate R4
 
 on:
   push:
@@ -135,9 +135,9 @@ jobs:
               return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$table} WHERE identity_hash=%s",$id),ARRAY_A);
           }
           function classify($p,$row,$portal){
-              $m=new ReflectionMethod($p,'output_classify_for_portal');
+              $m=new ReflectionMethod($p,'output_banner_destination_classification');
               $m->setAccessible(true);
-              return $m->invoke($p,$row,$portal,'portal_banner');
+              return $m->invoke($p,$row,$portal);
           }
           function mapped_slug($p,$row){
               $records=json_decode((string)$row['topic_targets'],true);
