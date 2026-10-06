@@ -1,4 +1,4 @@
-name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate R2
+name: TEMP Affiliate 6.72.190 HARD KISS Banner Target Map Gate R3
 
 on:
   push:
@@ -58,7 +58,7 @@ jobs:
           from pathlib import Path
           out=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-output-objects.php').read_text()
           auto=Path('release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php').read_text()
-          classifier=out[out.index('private function output_banner_destination_classification'):out.index('private function output_banner_compatible_slots')]
+          classifier=out[out.index('private function output_banner_destination_classification'):out.index('public function output_assign_banner_targets_from_destination_once')]
           if 'output_banner_provider_topic_classification($row,$portal)' in classifier:
               raise SystemExit('FAIL provider topic still used at runtime')
           if 'output_destination_semantic_text($row)' in classifier:
