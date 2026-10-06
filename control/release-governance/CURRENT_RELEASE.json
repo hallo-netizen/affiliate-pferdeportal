@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 224,
+  "generation": 225,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,8 +35,8 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.191",
-    "status": "FINAL_6_72_191_TARIFCHECK_KISS_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
+    "version": "6.72.192",
+    "status": "TARIFCHECK_HTML_CODE_VERIFY_BEFORE_ASSIGN_SOURCE_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,11 +44,11 @@
     "current_source_manifest_sha256": "b49e27e2301bb5cc8cfa92c42b2cbd41af72bc68e8136e655e24d2061b3e66bc",
     "source_file_count": 27,
     "candidate_reference_artifact_sha256": "0987dec5826be39b99fc05a993a64149acf017445ecde0577dc3f975a13f9f5e",
-    "candidate_reference_scope": "6.72.191 extends the proven 6.72.190 stored banner-target-map contract to manual/direct banner-code imports. Real category-tree proof binds Tarifcheck credit to all real cost leaf categories and Tarifcheck insurance to all real leaf categories under Wissen > Versicherungen & Recht. Source WordPress/MariaDB run 37450657203 PASS; exact final ZIP WordPress/MariaDB run 37450856670 PASS. Manual live install/readback remains open.",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.191.zip",
-    "final_artifact_sha256": "0987dec5826be39b99fc05a993a64149acf017445ecde0577dc3f975a13f9f5e",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.191.zip",
-    "handoff_artifact_bytes": 800276
+    "candidate_reference_scope": "User corrected the 6.72.191 sequence: real Tarifcheck assets are HTML banner codes and every banner must be technically verified before any category target map is stored. 6.72.192 is the minimal KISS follow-up: parse HTML code, resolve/check destination URL at import, verify banner image, then and only then store fixed cost/insurance targets. No API and no new provider.",
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null,
+    "handoff_artifact_filename": null,
+    "handoff_artifact_bytes": 0
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "TARIFCHECK_DIRECT_MANUAL_CODE_KISS_6_72_191_FINAL",
+    "current_focus": "TARIFCHECK_HTML_BANNER_IMPORT_VERIFY_BEFORE_ASSIGN_6_72_192",
     "current_focus_scope_ref": "protocol/AFFILIATE_TARIFCHECK_DIRECT_CODE_KISS_20261006.md",
-    "current_focus_reason": "Tarifcheck remains a handful of manually inserted direct-partner codes. Import resolves/decodes destination URL once, URL alone determines credit vs insurance, then the internal plugin stores the full fixed allowed category target set. Credit maps to every real Kosten leaf in the actual category tree; insurance maps only to real leaves under Wissen > Versicherungen & Recht. Runtime reads the stored map only.",
+    "current_focus_reason": "Real Tarifcheck inventory consists of a handful of HTML banner codes. Required order is strict: paste HTML code -> parse tracking/image -> resolve real destination URL -> verify banner asset -> determine Tarifcheck family from destination URL -> only then store fixed portal targets. Failed verification or unclear URL means no target map and no automatic delivery.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_191_FINAL_INSTALLER_BOUND_MANUAL_INSTALL_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -723,63 +723,27 @@
     }
   },
   "execution_state": {
-    "state": "FINAL_6_72_191_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
+    "state": "SOURCE_6_72_192_TARIFCHECK_HTML_VERIFY_BEFORE_ASSIGN_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Install exactly release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.191.zip SHA256 0987dec5826be39b99fc05a993a64149acf017445ecde0577dc3f975a13f9f5e manually in the existing WordPress installation, replacing/updating the current Affiliate-Zentrale plugin. Do not install superseded 6.72.190 first and do not change plugin source before this live gate.",
-    "completion_condition": "MANUAL_6_72_191_INSTALL_THEN_LIVE_TARGET_MAP_READBACK_COMPLETE",
-    "after_completion_action": "Perform only the bound live closeout/readback for the installed 6.72.191 target maps and category delivery. Do not start another affiliate feature before this gate is closed.",
+    "bound_user_scope_action": "Implement and hard-test 6.72.192 as a minimal change to the existing Creative Library: HTML banner codes are imported through Directpartner/Manual, real banner asset and destination URL are checked before any target map is written; only verified Tarifcheck credit maps to all real Kosten categories and only verified Tarifcheck insurance maps to the real Versicherung categories; failures remain unassigned. Then build one exact final installer for chat download.",
+    "completion_condition": "6_72_192_HTML_IMPORT_VERIFY_BEFORE_ASSIGN_WORDPRESS_MARIADB_AND_FINAL_ZIP_PASS",
+    "after_completion_action": "Provide the exact tested 6.72.192 ZIP in chat for manual WordPress installation.",
     "no_optional_detours": true,
-    "sequence": 76,
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672191_tarifcheck_direct_code_kiss_20261006.md",
+    "sequence": 77,
+    "evidence_ref": null,
     "evidence_sha256": null,
     "current_source_manifest_sha256": "b49e27e2301bb5cc8cfa92c42b2cbd41af72bc68e8136e655e24d2061b3e66bc",
-    "final_installer": {
-      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.191.zip",
-      "sha256": "0987dec5826be39b99fc05a993a64149acf017445ecde0577dc3f975a13f9f5e",
-      "bytes": 800276,
-      "binding_commit": "be83c55670c4f6c394629501262d6980afa0048f"
-    },
-    "live_fail_evidence": {
-      "version": "6.72.186",
-      "screenshot": "user screenshot 2026-10-05 13:32 local shows Guardian Horse on Schabracken",
-      "live_probe_commit": "6d54e1fa622771a9effa9e106eef97af6407e9cb",
-      "live_probe_run": 37304066825,
-      "reithelme_promo": "185797",
-      "schabracken_promo": "185797",
-      "repeated_normal_and_cache_bust": true,
-      "error_register_id": "AFF-ERR-050",
-      "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672186_live_fail_guardian_rootcause_open_20261005.md"
-    },
-    "pre_gate_proof": {
-      "source_file_count": 27,
-      "source_manifest_sha256": "b49e27e2301bb5cc8cfa92c42b2cbd41af72bc68e8136e655e24d2061b3e66bc",
-      "baseline_672190_hard_kiss": "PASS_PREVIOUS_EVIDENCE",
-      "manual_direct_code_import_target_map": "PASS_RUN_37450657203",
-      "category_tree_cost_records": 67,
-      "category_tree_cost_unique_paths": 66,
-      "tarifcheck_credit_all_cost_targets": "PASS_66_OF_66_UNIQUE_PATHS",
-      "tarifcheck_insurance_all_insurance_targets": "PASS_14_OF_14",
-      "url_overrides_misleading_title": "PASS_BOTH_DIRECTIONS",
-      "cross_family_exclusion": "PASS",
-      "unknown_destination_fail_closed": "PASS",
-      "mixed_destination_fail_closed": "PASS",
-      "runtime_stored_cost_target_keys": "PASS_66",
-      "runtime_stored_insurance_target_keys": "PASS_14",
-      "new_tables": 0,
-      "new_columns": 0,
-      "frontend_http_calls_added": 0,
-      "frontend_db_queries_added": 0,
-      "final_zip_fresh_unpack_identity": "PASS_27_OF_27",
-      "final_zip_php_lint": "PASS_21_OF_21",
-      "exact_zip_wordpress_mariadb": "PASS_RUN_37450856670",
-      "final_installer": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.191.zip",
-      "final_installer_sha256": "0987dec5826be39b99fc05a993a64149acf017445ecde0577dc3f975a13f9f5e",
-      "final_installer_bytes": 800276
-    },
+    "final_installer": null,
     "authorized_change_prefixes": [
+      "release/affiliate-zentrale/current/affiliate-portal-router/",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+      "release/affiliate-zentrale/artifacts/final/",
       "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json",
-      "protocol/AFFILIATE_TARIFCHECK_DIRECT_CODE_KISS_20261006.md"
+      "protocol/AFFILIATE_TARIFCHECK_DIRECT_CODE_KISS_20261006.md",
+      "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
+      ".github/workflows/",
+      "AFFILIATE_HOBBYRAUM/"
     ]
   },
   "branch_policy": {
@@ -1155,7 +1119,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "TARIFCHECK_6_72_191_FINAL_INSTALLER_BOUND_MANUAL_WORDPRESS_INSTALL_GATE",
+    "current_milestone": "TARIFCHECK_HTML_CODE_IMPORT_VERIFY_BEFORE_ASSIGN_6_72_192",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
