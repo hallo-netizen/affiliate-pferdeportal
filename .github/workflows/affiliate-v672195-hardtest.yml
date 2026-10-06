@@ -1,4 +1,4 @@
-name: Affiliate 6.72.196 Tarifcheck dropdown hardtest
+name: Affiliate 6.72.197 Tarifcheck dropdown hardtest
 
 on:
   workflow_dispatch:
@@ -8,6 +8,7 @@ on:
     paths:
       - 'release/affiliate-zentrale/current/**'
       - 'AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php'
+      - 'AFFILIATE_HOBBYRAUM/test_fixed_banner_target_v672197.php'
       - '.github/workflows/affiliate-v672195-hardtest.yml'
 
 permissions:
@@ -41,36 +42,36 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Build and lint exact 6.72.196 ZIP
+      - name: Build and lint exact 6.72.197 ZIP
         shell: bash
         run: |
           set -euo pipefail
           ROOT=release/affiliate-zentrale/current/affiliate-portal-router
-          grep -F "Version: 6.72.196" "$ROOT/pferdeportal-affiliate-router.php"
-          grep -F "const VERSION = '6.72.196';" "$ROOT/pferdeportal-affiliate-router.php"
-          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint196.log
-          test "$(grep -c '^No syntax errors detected' /tmp/lint196.log)" = "22"
-          (cd release/affiliate-zentrale/current && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/manifest196.txt
-          test "$(grep -cve '^[[:space:]]*$' /tmp/manifest196.txt)" = "28"
-          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.196.zip
-          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.196.zip affiliate-portal-router)
+          grep -F "Version: 6.72.197" "$ROOT/pferdeportal-affiliate-router.php"
+          grep -F "const VERSION = '6.72.197';" "$ROOT/pferdeportal-affiliate-router.php"
+          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/lint197.log
+          test "$(grep -c '^No syntax errors detected' /tmp/lint197.log)" = "22"
+          (cd release/affiliate-zentrale/current && find affiliate-portal-router -type f -print0 | sort -z | xargs -0 sha256sum) >/tmp/manifest197.txt
+          test "$(grep -cve '^[[:space:]]*$' /tmp/manifest197.txt)" = "28"
+          rm -f /tmp/AFFILIATE_ZENTRALE_6.72.197.zip
+          (cd release/affiliate-zentrale/current && zip -qr /tmp/AFFILIATE_ZENTRALE_6.72.197.zip affiliate-portal-router)
           echo "PASS SOURCE_LINT_22_OF_22"
           echo "PASS MANIFEST_28_OF_28"
-          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.196.zip
+          sha256sum /tmp/AFFILIATE_ZENTRALE_6.72.197.zip
 
       - name: Fresh unpack byte identity
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/unpack196
-          mkdir -p /tmp/unpack196
-          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.196.zip -d /tmp/unpack196
+          rm -rf /tmp/unpack197
+          mkdir -p /tmp/unpack197
+          unzip -q /tmp/AFFILIATE_ZENTRALE_6.72.197.zip -d /tmp/unpack197
           python3 - <<'PY'
           from pathlib import Path
           import hashlib
-          root=Path('/tmp/unpack196')
+          root=Path('/tmp/unpack197')
           expected={}
-          for line in Path('/tmp/manifest196.txt').read_text().splitlines():
+          for line in Path('/tmp/manifest197.txt').read_text().splitlines():
               if not line.strip():
                   continue
               h,rel=line.split('  ',1)
@@ -92,7 +93,7 @@ jobs:
           mkdir -p /tmp/wp-site
           /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
           /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Dropdown Test' --admin_user=admin --admin_password='ci-pass-196!' --admin_email=ci@example.test --skip-email
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Dropdown Test' --admin_user=admin --admin_password='ci-pass-197!' --admin_email=ci@example.test --skip-email
           mkdir -p /tmp/wp-site/wp-content/mu-plugins
           cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
           <?php
@@ -105,35 +106,47 @@ jobs:
               }
           }
           PHP
-          /tmp/wp plugin install /tmp/AFFILIATE_ZENTRALE_6.72.196.zip --activate --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.196"){exit(2);} echo "PASS EXACT_ZIP_672196_ACTIVE\n";' --path=/tmp/wp-site
+          /tmp/wp plugin install /tmp/AFFILIATE_ZENTRALE_6.72.197.zip --activate --path=/tmp/wp-site
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.197"){exit(2);} echo "PASS EXACT_ZIP_672197_ACTIVE\n";' --path=/tmp/wp-site
 
       - name: Render both partner dropdowns
         shell: bash
         run: |
           set -euo pipefail
-          /tmp/wp eval '$u=get_user_by("login","admin"); wp_set_current_user($u->ID); $_GET=array("page"=>"affiliate-portal-creative-library"); ob_start(); Pferdeportal_Affiliate_Router::instance()->render_creative_library_page(); $h=ob_get_clean(); if(!preg_match("/<select id=\"ppar-library-snapshot\"[^>]*>(.*?)<\\/select>/s",$h,$mi)){echo "FAIL import select missing\\n";exit(20);} if(!preg_match("/<select id=\"ppar-library-partner-filter\"[^>]*>(.*?)<\\/select>/s",$h,$mf)){echo "FAIL filter select missing\\n";exit(21);} $a=substr_count($mi[1],"value=\"direct:tarifcheck\""); $b=substr_count($mf[1],"value=\"tarifcheck\""); $ai=substr_count($mi[1],"Direktpartner · Tarifcheck · tarifcheck"); $bf=substr_count($mf[1],"Direktpartner · Tarifcheck · tarifcheck"); if($a!==1||$ai!==1){echo "FAIL import option=$a label=$ai\\n";exit(22);} if($b!==1||$bf!==1){echo "FAIL filter option=$b label=$bf\\n";exit(23);} echo "PASS TARIFCHECK_IMPORT_DROPDOWN_EXACTLY_ONCE\\nPASS TARIFCHECK_FILTER_DROPDOWN_EXACTLY_ONCE\\nPASS NO_TARIFCHECK_DUPLICATE\\n";' --path=/tmp/wp-site | tee /tmp/dropdown196.log
-          grep -F "PASS TARIFCHECK_IMPORT_DROPDOWN_EXACTLY_ONCE" /tmp/dropdown196.log
-          grep -F "PASS TARIFCHECK_FILTER_DROPDOWN_EXACTLY_ONCE" /tmp/dropdown196.log
-          grep -F "PASS NO_TARIFCHECK_DUPLICATE" /tmp/dropdown196.log
+          /tmp/wp eval '$u=get_user_by("login","admin"); wp_set_current_user($u->ID); $_GET=array("page"=>"affiliate-portal-creative-library"); ob_start(); Pferdeportal_Affiliate_Router::instance()->render_creative_library_page(); $h=ob_get_clean(); if(!preg_match("/<select id=\"ppar-library-snapshot\"[^>]*>(.*?)<\\/select>/s",$h,$mi)){echo "FAIL import select missing\\n";exit(20);} if(!preg_match("/<select id=\"ppar-library-partner-filter\"[^>]*>(.*?)<\\/select>/s",$h,$mf)){echo "FAIL filter select missing\\n";exit(21);} $a=substr_count($mi[1],"value=\"direct:tarifcheck\""); $b=substr_count($mf[1],"value=\"tarifcheck\""); $ai=substr_count($mi[1],"Direktpartner · Tarifcheck · tarifcheck"); $bf=substr_count($mf[1],"Direktpartner · Tarifcheck · tarifcheck"); if($a!==1||$ai!==1){echo "FAIL import option=$a label=$ai\\n";exit(22);} if($b!==1||$bf!==1){echo "FAIL filter option=$b label=$bf\\n";exit(23);} echo "PASS TARIFCHECK_IMPORT_DROPDOWN_EXACTLY_ONCE\\nPASS TARIFCHECK_FILTER_DROPDOWN_EXACTLY_ONCE\\nPASS NO_TARIFCHECK_DUPLICATE\\n";' --path=/tmp/wp-site | tee /tmp/dropdown197.log
+          grep -F "PASS TARIFCHECK_IMPORT_DROPDOWN_EXACTLY_ONCE" /tmp/dropdown197.log
+          grep -F "PASS TARIFCHECK_FILTER_DROPDOWN_EXACTLY_ONCE" /tmp/dropdown197.log
+          grep -F "PASS NO_TARIFCHECK_DUPLICATE" /tmp/dropdown197.log
+
+      - name: Prove fixed Schabracken target survives auto reset
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AFFILIATE_HOBBYRAUM/test_fixed_banner_target_v672197.php /tmp/wp-site/test_fixed_banner_target_v672197.php
+          /tmp/wp eval-file /tmp/wp-site/test_fixed_banner_target_v672197.php --path=/tmp/wp-site | tee /tmp/fixed197.log
+          grep -F "PASS fixed_banner_published" /tmp/fixed197.log
+          grep -F "PASS fixed_quality_status" /tmp/fixed197.log
+          grep -F "PASS fixed_exact_runtime_target" /tmp/fixed197.log
+          grep -F "PASS fixed_survives_auto_reset" /tmp/fixed197.log
+          grep -F "FIXED_BANNER_TARGET_672197_COMPLETE" /tmp/fixed197.log
 
       - name: Preserve deterministic banner behavior
         shell: bash
         run: |
           set -euo pipefail
-          sed "s/Pferdeportal_Affiliate_Router::VERSION==='6.72.195'/Pferdeportal_Affiliate_Router::VERSION==='6.72.196'/" AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php > /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php
-          /tmp/wp eval-file /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php --path=/tmp/wp-site | tee /tmp/reconcile196.log
-          grep -F "PASS rebuilt_target_schabracken" /tmp/reconcile196.log
-          grep -F "PASS no_current_auto_campaign_fuetterung" /tmp/reconcile196.log
-          grep -F "PASS tarifcheck_kosten_all_cost_leaves" /tmp/reconcile196.log
-          grep -F "PASS tarifcheck_versicherung_all_real_leaves" /tmp/reconcile196.log
-          grep -F "PASS tarifcheck_tracking_without_explicit_family_blocked" /tmp/reconcile196.log
-          grep -F "DETERMINISTIC_BANNER_RECONCILE_672195_COMPLETE" /tmp/reconcile196.log
+          sed "s/Pferdeportal_Affiliate_Router::VERSION==='6.72.195'/Pferdeportal_Affiliate_Router::VERSION==='6.72.197'/" AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php > /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php
+          /tmp/wp eval-file /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php --path=/tmp/wp-site | tee /tmp/reconcile197.log
+          grep -F "PASS rebuilt_target_schabracken" /tmp/reconcile197.log
+          grep -F "PASS no_current_auto_campaign_fuetterung" /tmp/reconcile197.log
+          grep -F "PASS tarifcheck_kosten_all_cost_leaves" /tmp/reconcile197.log
+          grep -F "PASS tarifcheck_versicherung_all_real_leaves" /tmp/reconcile197.log
+          grep -F "PASS tarifcheck_tracking_without_explicit_family_blocked" /tmp/reconcile197.log
+          grep -F "DETERMINISTIC_BANNER_RECONCILE_672195_COMPLETE" /tmp/reconcile197.log
           echo "PASS RECONCILE_REGRESSION"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: AFFILIATE_ZENTRALE_6.72.196
-          path: /tmp/AFFILIATE_ZENTRALE_6.72.196.zip
+          name: AFFILIATE_ZENTRALE_6.72.197
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.197.zip
           if-no-files-found: error
           retention-days: 30
