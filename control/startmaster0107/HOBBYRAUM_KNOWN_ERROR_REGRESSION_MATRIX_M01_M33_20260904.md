@@ -178,8 +178,20 @@ M38 – Current Fachworkflow production-plan version binding
 - History-Phase: aktuelles main muss M01–M37 PASS und M38 als ersten neuen FAIL liefern. In dieser Phase **kein Produktfix**.
 - Erst nach maschinellem History-Beweis darf ein separater kleinstmöglicher Produktfix genau diese Versionsbindung herstellen.
 
+
+M39 – Fresh run durable release identity collision
+- Pre-Codex-Befund auf aktuellem System-4-Weg: Der gebundene 7er-Batch besitzt bereits eine historische dauerhafte Endstempel-Ausgabe unter derselben Batch-ID. Ein neuer NEW-Lauf mit neuen Artikelbytes würde deshalb später an Replay-/Destination-Sperren kollidieren.
+- Die fachliche Batch-ID bleibt unverändert und beschreibt weiterhin exakt dieselben gebundenen Artikel/Slots.
+- Jeder neue Ausgabelauf muss zusätzlich eine eigene technische Release-ID besitzen, deterministisch aus der unveränderten Batch-ID und dem aktuellen Worker-Receipt-Hash gebildet.
+- Sichtbare/dauerhafte Release-Verzeichnisse, Recovery-Quelle und GitHub-Endstempel-Transport müssen an diese Release-ID gebunden sein; der signierte Paketinhalt muss die fachliche Batch-ID unverändert weiterführen.
+- Zwei frische Läufe desselben logischen Batches müssen unterschiedliche Release-IDs und getrennte Enddateien erhalten.
+- Manipulierte/falsche Release-ID = BLOCKED.
+- Alte Recovery-Artikel bleiben als Produktionsquelle verboten. Keine Änderung an Artikelmetadaten, Text-/Qualitäts-/SEO-/PPM-/PSERC-/PSTE-/WordPress-Regeln. Kein Publish.
+- History-Phase: aktuelles main muss M01–M38 PASS und M39 als ersten neuen FAIL liefern. Erst danach separater Produktfix.
+
+
 ## Abschlussregel
 
-HOBBYRAUM PASS nur wenn M01–M38 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
+HOBBYRAUM PASS nur wenn M01–M39 + hardlock + hardlock-base auf demselben aktuellen Hobbyraum-Head PASS sind.
 
 Danach erst Merge-Kandidat und danach kompletter frischer 1..N-E2E gegen die reale gebundene Batchgröße. Keine Reparatur während des Produktionslaufs.
