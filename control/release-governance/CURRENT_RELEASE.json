@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 229,
+  "generation": 230,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -35,8 +35,8 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.193",
-    "status": "FINAL_6_72_193_TARIFF_TOOL_KISS_BOUND_MANUAL_INSTALL_OPEN",
+    "version": "6.72.194",
+    "status": "SOURCE_6_72_194_LIVE_SCHABRACKEN_AND_TARIFCHECK_PRESET_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,11 +44,11 @@
     "current_source_manifest_sha256": "877886e4eba8c3d0336f2d93ad829f122cd3d9122d14aa94e6b17ca1462e680f",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": "1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27",
-    "candidate_reference_scope": "6.72.193 layers the central tariff-calculator placeholder registry on top of unchanged tested 6.72.192 banner logic. Source run 37471777928 PASS; exact final ZIP run 37472204233 PASS; 6.72.192 Tarifcheck HTML banner regression re-passed inside exact 6.72.193 ZIP.",
-    "final_artifact_ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.193.zip",
-    "final_artifact_sha256": "1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.193.zip",
-    "handoff_artifact_bytes": 805229
+    "candidate_reference_scope": "6.72.193 live disproved two assumptions: Tarifcheck is not selectable in the 'Aufgenommener Partner' dropdown, and the Schabracken live state remains stale despite the URL-map code. 6.72.194 must add a real Tarifcheck preset and replace the indirect 6.72.190 ADCELL resync dependency with a one-time admin/background local rebuild of active banner target maps from each stored destination_url, preserving manual control and deactivating stale automatic output_object_v4 campaigns when no valid fixed map remains.",
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null,
+    "handoff_artifact_filename": null,
+    "handoff_artifact_bytes": 0
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,9 +57,9 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "TARIFF_TOOL_PLACEHOLDER_KISS_6_72_193_FINAL",
+    "current_focus": "SCHABRACKEN_LIVE_TARGET_REBUILD_AND_TARIFCHECK_SELECTABLE_PRESET_6_72_194",
     "current_focus_scope_ref": "protocol/AFFILIATE_TARIFF_TOOL_PLACEHOLDER_KISS_20261006.md",
-    "current_focus_reason": "Tariff calculators are centrally managed, separate from banners. Admin manually defines calculator name/type and trusted HTML/widget code; plugin creates stable visible placeholder. Articles contain only the placeholder. Runtime reads the small non-autoload registry only when a calculator shortcode is rendered, once per request. Existing 6.72.192 banner/product/ranking behavior is preserved.",
+    "current_focus_reason": "User installed 6.72.193 and Schabracken is still wrong; Tarifcheck is also not selectable. Both are verified against source: Tarifcheck is only a manual name hint, not a snapshot option; the 6.72.190 resync only starts ADCELL and may leave stale target maps/campaigns. Fix only these two issues without touching performance hotpaths.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
     "adcell_work_status": "6_72_193_FINAL_INSTALLER_BOUND_MANUAL_INSTALL_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
@@ -774,50 +774,27 @@
     }
   },
   "execution_state": {
-    "state": "FINAL_6_72_193_BOUND_MANUAL_WORDPRESS_INSTALL_OPEN",
+    "state": "SOURCE_6_72_194_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Install exactly release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.193.zip SHA256 1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27 in WordPress. Do not install 6.72.192 first. After installation, real Tarifcheck HTML image-banners can be imported via Banner & Werbemittel, while calculator/widget codes are defined separately under Affiliate-Zentrale > Tarifrechner. Use only the generated placeholders in article text.",
-    "completion_condition": "6_72_193_LIVE_INSTALL_THEN_REAL_BANNER_AND_TARIFF_TOOL_READBACK",
-    "after_completion_action": "Verify the live admin Tarifrechner page, create the real calculator definitions, copy the generated placeholders, and read back one rendered article placeholder. Keep banner and tariff-tool paths separate.",
+    "bound_user_scope_action": "Implement 6.72.194 only: add selectable Tarifcheck preset in Banner & Werbemittel -> Sammelimport -> Aufgenommener Partner; add one-time admin/background local rebuild of active banner target maps from stored destination_url independent of provider HTTP; clear only derived automatic topic map fields; preserve manual decisions; deactivate stale automatic output_object_v4 campaigns when the rebuilt map is empty; replan only mapped active banners. No frontend DB/HTTP, no new table/column, no product-pool rebuild. Then prove stale Schabracken-style wrong-edge correction and exact ZIP.",
+    "completion_condition": "6_72_194_TARIFCHECK_PRESET_AND_LOCAL_BANNER_TARGET_REBUILD_PASS",
+    "after_completion_action": "Provide exact tested 6.72.194 ZIP for replacement installation and then perform live Schabracken readback before declaring AFF-ERR-050 closed.",
     "no_optional_detours": true,
-    "sequence": 80,
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672193_tariff_tools_kiss_20261006.md",
+    "sequence": 81,
+    "evidence_ref": null,
     "evidence_sha256": null,
     "current_source_manifest_sha256": "877886e4eba8c3d0336f2d93ad829f122cd3d9122d14aa94e6b17ca1462e680f",
-    "final_installer": {
-      "ref": "release/affiliate-zentrale/artifacts/final/AFFILIATE_ZENTRALE_6.72.193.zip",
-      "sha256": "1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27",
-      "bytes": 805229,
-      "binding_commit": "16fee0f1584646a13a860fdc1a2dbda2604abe83"
-    },
-    "pre_gate_proof": {
-      "source_isolated_delta": "PASS_RUN_37471777928",
-      "php_lint_source": "PASS_22_OF_22",
-      "ordinary_content_tariff_option_reads": 0,
-      "multiple_tools_registry_loads_per_request": 1,
-      "central_update_without_article_rewrite": "PASS",
-      "stable_placeholder_after_rename": "PASS",
-      "inactive_unknown_fail_closed": "PASS",
-      "no_new_tables": 0,
-      "non_autoload_option": "PASS",
-      "final_zip_fresh_unpack": "PASS_28_OF_28",
-      "final_zip_php_lint": "PASS_22_OF_22",
-      "exact_zip_tariff_tools": "PASS_RUN_37472204233",
-      "exact_zip_previous_banner_contract": "PASS_RUN_37472204233"
-    },
+    "final_installer": null,
     "authorized_change_prefixes": [
+      "release/affiliate-zentrale/current/affiliate-portal-router/",
+      "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
+      "release/affiliate-zentrale/artifacts/final/",
       "release/affiliate-zentrale/evidence/",
       "control/release-governance/CURRENT_RELEASE.json",
-      "protocol/AFFILIATE_TARIFF_TOOL_PLACEHOLDER_KISS_20261006.md"
-    ],
-    "handoff_download": {
-      "workflow_run": 37472875881,
-      "workflow_artifact_id": 11417483743,
-      "chat_file": "AFFILIATE_ZENTRALE_6.72.193.zip",
-      "sha256": "1390374ce27c5acfe0cacf1f6ef593d75142c65090b3742c73504e9e0d1d7d27",
-      "bytes": 805229,
-      "note": "Handoff workflow only; plugin source unchanged after final binding."
-    }
+      "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
+      ".github/workflows/",
+      "AFFILIATE_HOBBYRAUM/"
+    ]
   },
   "branch_policy": {
     "active_work_branch": "affiliate-release-current",
@@ -1192,7 +1169,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "TARIFF_TOOL_PLACEHOLDER_KISS_6_72_193_FINAL_INSTALLER_BOUND",
+    "current_milestone": "LIVE_SCHABRACKEN_TARGET_REBUILD_AND_TARIFCHECK_PRESET_6_72_194",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
