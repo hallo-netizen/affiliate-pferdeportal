@@ -1139,14 +1139,27 @@ trait PPAR_Creative_Library_Trait {
         if (!function_exists('get_posts') || !defined('ABSPATH')) {
             return array();
         }
-        return array_values(array_filter(array_map('absint', (array) get_posts(array(
-            'post_type'=>self::CAMPAIGN_POST_TYPE,
-            'post_status'=>array('publish','draft','pending','private'),
-            'meta_key'=>'ppar_library_identity_hash',
-            'meta_value'=>sanitize_text_field((string) $identity_hash),
-            'posts_per_page'=>20,
-            'fields'=>'ids',
-        )))));
+        $identity_hash = sanitize_text_field((string)$identity_hash);
+        if ($identity_hash === '') { return array(); }
+        $ids = array();
+
+        // Legacy- und aktueller Output-Object-Metakey. 6.72.194 muss beide
+        // verstehen, sonst kann ein aktueller automatisch materialisierter
+        // Banner beim Zielkarten-Neuaufbau nicht sicher stillgelegt werden.
+        foreach (array('ppar_library_identity_hash','_ppar_creative_identity_hash') as $meta_key) {
+            foreach ((array)get_posts(array(
+                'post_type'=>self::CAMPAIGN_POST_TYPE,
+                'post_status'=>array('publish','draft','pending','private'),
+                'meta_key'=>$meta_key,
+                'meta_value'=>$identity_hash,
+                'posts_per_page'=>50,
+                'fields'=>'ids',
+            )) as $post_id) {
+                $post_id = absint($post_id);
+                if ($post_id > 0) { $ids[$post_id] = $post_id; }
+            }
+        }
+        return array_values($ids);
     }
 
     private function creative_library_deactivate_existing_campaigns($identity_hash) {
