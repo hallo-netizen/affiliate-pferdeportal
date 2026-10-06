@@ -121,7 +121,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php
+          sed "s/Pferdeportal_Affiliate_Router::VERSION==='6.72.195'/Pferdeportal_Affiliate_Router::VERSION==='6.72.196'/" AFFILIATE_HOBBYRAUM/test_deterministic_banner_reconcile_v672195.php > /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php
           /tmp/wp eval-file /tmp/wp-site/test_deterministic_banner_reconcile_v672195.php --path=/tmp/wp-site | tee /tmp/reconcile196.log
           grep -F "PASS rebuilt_target_schabracken" /tmp/reconcile196.log
           grep -F "PASS no_current_auto_campaign_fuetterung" /tmp/reconcile196.log
