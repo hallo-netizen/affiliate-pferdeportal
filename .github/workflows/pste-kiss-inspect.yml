@@ -4,194 +4,25 @@ on:
     branches: [pste-kiss-e2e-20261005]
     paths:
       - '.github/workflows/pste-kiss-inspect.yml'
-      - 'control/startmaster0107/runtime_packages/PSERC-FIX.zip'
 jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Locate exact live PSERC 0.28.30 bytes in Git history
+      - name: Inspect existing public WordPress REST surface read only
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
-          curl -fsS --max-time 30             'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json'             -o /tmp/pserc-live-binding.json
+          curl -fsS --max-time 30 'https://pferde-atelier.de/wp-json/' -o /tmp/wp-rest.json
           python3 - <<'PY'
-          import hashlib,json,subprocess
-          from pathlib import Path
-
-          binding=json.loads(Path('/tmp/pserc-live-binding.json').read_text(encoding='utf-8'))
-          required=binding.get('required_files') or {}
-          if binding.get('package_version')!='0.28.30' or binding.get('package_build')!='0.28.30-pste-v5-binding-safe':
-              raise SystemExit('LIVE_BINDING_VERSION_MISMATCH')
-          if len(required)!=binding.get('required_file_count'):
-              raise SystemExit('LIVE_BINDING_COUNT_MISMATCH')
-
-          objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
-          suffix_map={}
-          for rel in required:
-              suffix_map.setdefault(rel.split('/')[-1],[]).append(rel)
-
-          candidates=[]
-          for line in objects:
-              parts=line.split(' ',1)
-              if len(parts)!=2:
-                  continue
-              obj,path=parts
-              base=path.rsplit('/',1)[-1]
-              for rel in suffix_map.get(base,()):
-                  if path==rel or path.endswith('/'+rel):
-                      candidates.append((obj,path,rel))
-
-          seen=set()
-          matches={}
-          for obj,path,rel in candidates:
-              key=(obj,rel)
-              if key in seen:
-                  continue
-              seen.add(key)
-              try:
-                  raw=subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL)
-              except subprocess.CalledProcessError:
-                  continue
-              target=str((required.get(rel) or {}).get('sha256') or '')
-              if target and hashlib.sha256(raw).hexdigest()==target:
-                  matches.setdefault(rel,[]).append((obj,path,len(raw)))
-
-          print('LIVE_PACKAGE_VERSION='+str(binding.get('package_version')))
-          print('LIVE_PACKAGE_BUILD='+str(binding.get('package_build')))
-          print('LIVE_REQUIRED_COUNT='+str(len(required)))
-          print('HISTORY_MATCH_COUNT='+str(len(matches)))
-          for rel in sorted(matches):
-              for obj,path,size in matches[rel]:
-                  print(f'HISTORY_MATCH rel={rel} git_blob={obj} bytes={size} path={path}')
-
-          critical=[
-              'includes/class-pserc-portal-topic-evidence-gate.php',
-              'includes/class-pserc-seo-source-binding.php',
-              'includes/class-pserc-plan-compile-job.php',
-              'portal-seo-editorial-plan-compiler.php',
-              'contracts/portal-topic-evidence-gate-v1.json',
-              'contracts/seo-engine-capability-binding-v2.json',
-          ]
-          for rel in critical:
-              state='MATCH' if rel in matches else 'NO_MATCH'
-              print(f'CRITICAL_HISTORY_{state} rel={rel} target_sha256={(required.get(rel) or {}).get("sha256","MISSING")}')
+          import json
+          d=json.load(open('/tmp/wp-rest.json',encoding='utf-8-sig'))
+          print('=== NAMESPACES ===')
+          for ns in sorted(d.get('namespaces') or []):
+              print(ns)
+          print('=== NONCORE ROUTES ===')
+          core=('wp/','oembed/','batch/','wp-site-health/','wp-block-editor/','wp/v2/')
+          for route in sorted((d.get('routes') or {})):
+              x=route.lstrip('/')
+              if not x.startswith(core):
+                  print(route)
           PY
-
-      - name: Locate exact live PSERC bytes inside historical ZIP artifacts
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -fsS --max-time 30 \
-            'https://pferde-atelier.de/wp-content/plugins/portal-seo-editorial-plan-compiler/contracts/compiler-package-binding-v1.json' \
-            -o /tmp/pserc-live-binding.json
-          python3 - <<'PY'
-          import hashlib,io,json,subprocess,zipfile
-          from pathlib import Path
-
-          binding=json.loads(Path('/tmp/pserc-live-binding.json').read_text(encoding='utf-8'))
-          required=binding.get('required_files') or {}
-          targets={rel:str(meta.get('sha256') or '') for rel,meta in required.items()}
-          critical={
-              'includes/class-pserc-portal-topic-evidence-gate.php',
-              'includes/class-pserc-seo-source-binding.php',
-              'includes/class-pserc-plan-compile-job.php',
-              'portal-seo-editorial-plan-compiler.php',
-              'contracts/portal-topic-evidence-gate-v1.json',
-              'contracts/seo-engine-capability-binding-v2.json',
-          }
-
-          lines=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
-          zips=[]
-          seen_blob=set()
-          for line in lines:
-              parts=line.split(' ',1)
-              if len(parts)!=2 or not parts[1].lower().endswith('.zip'):
-                  continue
-              obj,path=parts
-              if obj in seen_blob:
-                  continue
-              seen_blob.add(obj)
-              zips.append((obj,path))
-
-          print('HISTORICAL_UNIQUE_ZIP_BLOBS='+str(len(zips)))
-          global_matches={}
-          coverage=[]
-
-          def inspect_zip(raw,label,root_blob,root_path,depth=0,found=None):
-              if found is None: found=set()
-              try:
-                  z=zipfile.ZipFile(io.BytesIO(raw))
-              except Exception:
-                  return found
-              for name in z.namelist():
-                  if name.endswith('/'):
-                      continue
-                  low=name.lower()
-                  candidate_rels=[rel for rel in targets if name==rel or name.endswith('/'+rel)]
-                  member=None
-                  if candidate_rels or (low.endswith('.zip') and depth<3):
-                      try:
-                          member=z.read(name)
-                      except Exception:
-                          continue
-                  for rel in candidate_rels:
-                      if hashlib.sha256(member).hexdigest()==targets[rel]:
-                          found.add(rel)
-                          global_matches.setdefault(rel,[]).append((root_blob,root_path,label+'!'+name,len(member)))
-                  if low.endswith('.zip') and depth<3 and member is not None and len(member)<=80*1024*1024:
-                      inspect_zip(member,label+'!'+name,root_blob,root_path,depth+1,found)
-              return found
-
-          for idx,(obj,path) in enumerate(zips,1):
-              try:
-                  size=int(subprocess.check_output(['git','cat-file','-s',obj],text=True).strip())
-              except Exception:
-                  continue
-              if size>120*1024*1024:
-                  print(f'ZIP_SKIP_TOO_LARGE blob={obj} bytes={size} path={path}')
-                  continue
-              try:
-                  raw=subprocess.check_output(['git','cat-file','blob',obj],stderr=subprocess.DEVNULL)
-              except subprocess.CalledProcessError:
-                  continue
-              found=inspect_zip(raw,path,obj,path)
-              if found:
-                  coverage.append((len(found),obj,path,sorted(found)))
-                  print(f'ZIP_LIVE_MATCH_COVERAGE count={len(found)} blob={obj} path={path}')
-
-          print('ARCHIVE_HISTORY_MATCH_COUNT='+str(len(global_matches)))
-          for rel in sorted(global_matches):
-              for obj,path,member,size in global_matches[rel]:
-                  print(f'ARCHIVE_HISTORY_MATCH rel={rel} git_blob={obj} bytes={size} archive_path={path} member={member}')
-          for rel in sorted(critical):
-              print(f'CRITICAL_ARCHIVE_{"MATCH" if rel in global_matches else "NO_MATCH"} rel={rel} target_sha256={targets.get(rel,"MISSING")}')
-          if coverage:
-              best=max(coverage,key=lambda x:x[0])
-              print(f'BEST_ARCHIVE_COVERAGE count={best[0]} blob={best[1]} path={best[2]}')
-          else:
-              print('BEST_ARCHIVE_COVERAGE count=0')
-          PY
-
-      - name: Print byte-identical live evidence gate source
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf /tmp/pserc-old /tmp/pserc-old-inner
-          mkdir -p /tmp/pserc-old /tmp/pserc-old-inner
-          unzip -q control/startmaster0107/runtime_packages/PSERC-FIX.zip -d /tmp/pserc-old
-          INNER="$(find /tmp/pserc-old -type f -name '*.zip' | head -1)"
-          test -n "$INNER"
-          unzip -q "$INNER" -d /tmp/pserc-old-inner
-          GATE="$(find /tmp/pserc-old-inner -type f -name 'class-pserc-portal-topic-evidence-gate.php' | head -1)"
-          test -n "$GATE"
-          ACTUAL="$(sha256sum "$GATE" | awk '{print $1}')"
-          EXPECTED='e3bea08e92436e6006b4eb8cafdcdbb81fbd5ed6b6c340b844e095bee0d2da55'
-          [ "$ACTUAL" = "$EXPECTED" ] || { echo "GATE_HASH_MISMATCH:$ACTUAL"; exit 2; }
-          echo "LIVE_GATE_HASH_MATCH:$ACTUAL"
-          echo '=== EXACT LIVE GATE SOURCE START ==='
-          cat "$GATE"
-          echo '=== EXACT LIVE GATE SOURCE END ==='
