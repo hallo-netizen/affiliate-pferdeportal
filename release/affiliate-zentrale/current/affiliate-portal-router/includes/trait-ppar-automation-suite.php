@@ -1261,6 +1261,7 @@ trait PPAR_Automation_Suite_Trait {
                 'title_source'=>$title_source,
                 'creative_description'=>sanitize_textarea_field(implode(' | ',$description_parts)),
                 'creative_tag'=>sanitize_text_field(implode(' | ',$tag_parts)),
+                'information'=>$information,
                 'promotion_category_id'=>$category_id,
                 'promotion_category_name'=>$category_name,
                 'provider_topic_id'=>$category_id > 0 ? (string)$category_id : '',
