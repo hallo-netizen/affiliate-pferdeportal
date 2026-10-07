@@ -36,26 +36,27 @@
     "scope_provisional": 9,
     "scope_evidence_required": 5,
     "size_classified": 1,
-    "role_stable": 1,
+    "role_stable": 0,
     "editorial_route_partial": 1,
     "full_assessed": 0,
-    "partial": 1,
-    "evidence_required": 15,
+    "partial": 0,
+    "evidence_required": 16,
     "target_tree_writes_allowed": 0,
     "id_uniqueness_pass": 16,
     "identity_confirmed_current": 4,
-    "identity_review_required": 12
+    "identity_review_required": 12,
+    "buchbinden_v2_hub_pass": false
   },
   "model_check": {
-    "result": "PASS_FAIL_CLOSED",
+    "result": "PASS_FAIL_CLOSED__V2_CAPACITY_CORRECTION_REQUIRED",
     "findings": [
-      "The deterministic selection works and covers all eight protected worlds, all four currently known alias-bearing identities, and four previously unassessed entries.",
-      "All 16 hobby_id values are unique, but ID uniqueness is not treated as proof of final semantic hobby identity.",
-      "The four currently documented alias/canonical bindings remain stable; the other 12 candidates still require semantic identity/subform review.",
-      "No candidate was promoted from monetization alone.",
-      "Buchbinden remains a stable HOBBY_HUB from existing pilot evidence, but is PARTIAL because per-leaf article capacity and final ownership are not complete.",
+      "The deterministic selection remains valid.",
+      "All 16 hobby_id values are unique; four documented alias/canonical bindings remain stable and 12 semantic identity/subform reviews remain open.",
+      "No candidate is promoted from monetization alone.",
+      "Buchbinden is preserved as the existing V1.9.9/V1.12 baseline, but is not a V2 HOBBY_HUB PASS: real DataForSEO evidence currently supports 4/5/3/4 distinct groups in the four active leafs, while V2 requires 5-12 per lowest-level category.",
       "Treibholz sammeln remains preserved in EDITORIAL; ARTICLE_ONLY versus EDITORIAL_TOPIC is not guessed.",
-      "The master lacks content-capacity evidence for the remaining candidates, therefore the rules correctly return EVIDENCE_REQUIRED rather than inventing structure."
+      "All 16 candidates remain EVIDENCE_REQUIRED for final V2 role because per-leaf capacity and/or semantic identity/scope/ownership evidence is incomplete.",
+      "No target-tree write is allowed from Batch 001."
     ]
   },
   "entries": [
@@ -206,12 +207,42 @@
       "aliases": [
         "historische Buchbinderei"
       ],
-      "size_class": "FIT",
-      "portal_role": "HOBBY_HUB",
-      "primary_pillar": "CORE",
-      "decision_state": "PARTIAL",
-      "evidence_note": "Pilot evidence: four distinct leaf areas support FIT/HOBBY_HUB; per-leaf 5-12 article capacity and final ownership still require evidence.",
-      "id_uniqueness_check": "PASS"
+      "size_class": null,
+      "portal_role": "HOBBY_HUB_BASELINE_PRESERVED_PENDING_V2_CAPACITY",
+      "primary_pillar": "CORE_BASELINE_ONLY",
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy Buchbinden pilot remains intact. V2 classification is reopened because current real DataForSEO evidence yields 4/5/3/4 distinct groups across the four active leafs; only Ausrüstung is already inside the 5-12 target. Final ownership and follow-up DataForSEO are required.",
+      "id_uniqueness_check": "PASS",
+      "v2_hub_pass": false,
+      "leaf_capacity_evidence": {
+        "source": "BUCHBINDEN_E2E_OWNERSHIP_REALTEST_20260930.json",
+        "real_dataforseo": true,
+        "current_distinct_groups": {
+          "Einstieg": 4,
+          "Ausrüstung": 5,
+          "Material": 3,
+          "Techniken/Praxis": 4,
+          "Fragen/Probleme": 0,
+          "FAQ": 0
+        },
+        "v2_target_per_leaf": "5-12 distinct owned article intents",
+        "fit_leafs_now": [
+          "Ausrüstung"
+        ],
+        "insufficient_or_unproven_leafs": [
+          "Einstieg",
+          "Material",
+          "Techniken/Praxis",
+          "Fragen/Probleme",
+          "FAQ"
+        ],
+        "ownership_open": [
+          "kurs",
+          "workshop",
+          "online"
+        ],
+        "conclusion": "Existing live/technical pilot remains preserved, but current evidence does not yet prove a V2 HOBBY_HUB under the stricter per-leaf capacity rule."
+      }
     },
     {
       "hobby_id": "hobby:filzen",
