@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
-STAND: 2026-10-05
-STATUS: V1.9.9 LIVE CONTENT-PASS / V1.10.0 ENGINE-TESTS PASS / REALER GESAMTPORTAL-E2E BLOCKED / KEIN RELEASE
+STAND: 2026-10-07
+STATUS: V1.12.0 LOKAL FULL POS/NEG PASS ALS TECHNISCHE BASIS / NICHT LIVE ABGENOMMEN / HOBBY_MASTER V2 FACHLICH VORGESCHALTET / KEIN AKTUELLER DEPLOYMENTAUFTRAG
 
 ## Plugin
 
@@ -12,64 +12,115 @@ Name:
 `Affiliate-Portal Kategorie-Workflow`
 
 Art:
-Eigenentwicklung / Hobby-Depot-Linie.
+Eigenentwicklung / allgemeingültiger Kategorie-Workflow mit Hobby-Depot-Profil.
 
 Fachbüro:
 `SEO_KATEGORIEN`
 
-## Live
+## Letzter autoritativ bestätigter Live-Stand
 
 V1.9.9:
 Buchbinden + vier Content-Kategorien + zugeordneter Testartikel real im Frontend bestätigt.
 
-## V1.10.0 Arbeitskopie
+Für V1.12.0 existiert KEIN realer Hobby-Depot-Live-PASS.
 
-Pfad:
-`/mnt/data/hd001-v1100-work`
+## Aktuelle technische Basis
 
-Plugin-Header:
-`1.10.0`
+Plugin-Version:
+`1.12.0`
 
-Funktion:
-- portalweite Rohkandidaten-Discovery;
-- bounded DataForSEO Overview-Batches;
-- Synonym/Core-Keyword-Dedupe;
-- canonical Seeds;
-- per-Hobby DataForSEO-Suggestions für Weltzuordnung;
-- exakt 8 Konzeptwelten;
-- variable Content-Hierarchie;
-- getrennte Magazin-/HivePress-Stränge;
-- Resume ohne erneute abgeschlossene Overview-Batches;
-- kein Publish während Discovery.
+Lokales Release-Artefakt:
+`HD001_V1.12.0_FIXED_THREE_PILLAR_TARGET_TREE_POSNEG_HARDPASS.zip`
 
-Frisch ausgeführt:
-- 270/270 Legacy Regression PASS;
-- Portal Discovery PASS;
-- World Routing PASS;
-- Concept Auto World PASS;
-- Eight Worlds E2E PASS;
-- Portal Scale PASS;
-- Portal Negative PASS;
-- Admin Portal PASS;
-- Portal Resume PASS.
+SHA-256:
+`f77f676ef4e8df8d44e3cf0d1e61b52883d402924cb8d14033c24dd6645c03d1`
 
-Diese Tests beweisen die Engine, nicht den realen Gesamtbestand-Endlauf.
+Lokaler Prüfbericht:
+`HD001_V1.12.0_FINAL_LOCAL_POSNEG_REPORT.txt`
 
-## ERSTER BLOCKER
+Der ZIP-Hash wurde am 2026-10-07 erneut aus dem vorhandenen Artefakt geprüft.
+Plugin-Header und `APKW_VERSION` = `1.12.0`.
 
-`HD001_V1100_REAL_HD002_INVENTORY_INPUT_NOT_BOUND`
+## Was V1.12.0 technisch beweist
 
-HD-002 meldet autoritativ `Gesamtbestand: erfasst`, aber dieser Bestand ist für HD-001 aktuell nicht als belastbare read-only `hobby_candidates`-Quelle gebunden.
+- versioniertes 3-Säulen-Zielprofil;
+- generischer Target-Tree-Runner;
+- Soll/Ist-Sync;
+- Add / Rename / Move;
+- Merge/Alias-Unterstützung;
+- Archive/Inaktiv statt Hard Delete;
+- stabile IDs bei gleicher Objektidentität;
+- atomare Aktivierung nach Write + Readback;
+- Rollback bei Readback-Manipulation;
+- Cross-Pillar Keyword-/Intent-Kannibalisierung fail-closed;
+- UNKNOWN/NONE-Themen bleiben redaktionell erhalten;
+- Treibholz/Treibholz sammeln dedupliziert;
+- DataForSEO darf im Target-Tree-Weg Struktur nicht erzeugen/verschieben;
+- generisches Nicht-Hobby-Profil lokal validiert.
 
-## NEXT ACTION
+Lokale Evidence aus dem exakten Release-Artefakt:
+- PHP-Lint 55/55 PASS;
+- Legacy Regression 270/270 PASS;
+- V1.10 Portal-Suiten PASS;
+- realer 908/844-Gesamtlauf PASS;
+- 420/420 physische Zielobjekte Readback PASS;
+- zweiter identischer Lauf: 0 Post-/Term-Writes;
+- Add/Rename/Move mit ID-Erhalt PASS;
+- Remove→Archive PASS;
+- Rollback PASS;
+- Buchbinden-Renderer/4 Leafs/stabile IDs PASS;
+- Fresh-Unpack/ZIP-Integrität PASS.
 
-Echten HD-002-Gesamtbestand read-only exportieren/übernehmen und unverändert an V1.10.0 Portal Discovery binden.
+## Fachliche Fortschreibung NACH V1.12.0
 
-Danach kompletter realer DataForSEO→Gesamtbaum→WordPress/Frontend Positiv-/Negativ-E2E.
+Die V1.12.0-Technik bleibt Basis, aber das gebündelte Hobby-Depot-Zielprofil ist NICHT der endgültige neue Installationsbaum.
+
+Nach V1.12.0 wurde verbindlich vorgeschaltet:
+`HOBBY_MASTER V2`.
+
+Neue fachliche Regeln:
+- große bekannte Hobbys als wirtschaftliche Anker integrieren;
+- mittlere Hobbys als Rückgrat;
+- Nischen als SEO-/Longtail-Stärke;
+- großer interner Bestand, kleine sichtbare Navigation;
+- Rollen ORIENTATION_UNIVERSE / HOBBY_HUB / EDITORIAL_TOPIC / ARTICLE_ONLY / FINDER_ONLY / OUT_OF_SCOPE;
+- Größenprüfung vor Zielbaum;
+- Monetarisierung beeinflusst CORE-Priorität, nicht Erhalt;
+- DataForSEO ist SEO-Evidenz, keine Strukturautorität;
+- acht Hauptwelten sind oberste fachliche CORE-Ebene.
+
+## Bekannter V1.12-Profilfehler gegenüber der neuen Fachregel
+
+Das V1.12-Hobby-Profil modelliert:
+`core:hub (Hobbywelten) → core:world:gestalten/fertigen/...`
+
+Das ist fachlich inzwischen verworfen.
+
+Verbindlich:
+Die acht Welten sind CORE-Ebene 1.
+`Hobbywelten` ist nur Übersicht/View/Einstieg und kein Parent.
+
+Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, sondern im späteren V2-Zielbaum-Delta.
+
+## ERSTER OFFENER BLOCKER
+
+`HD001_V2_MASTER_NOT_ASSESSED_TARGET_DELTA_NOT_BUILT`
+
+Die 841 kanonischen Hobbyidentitäten sind noch nicht vollständig nach Scope, Identität/Alias, Größenklasse, Content Capacity, Publikationsrolle und 3-Säulen-Ownership bewertet.
+
+Dadurch existiert noch kein belastbares V2-Zielbaum-Delta, das die fachlich fortgeschriebene Struktur inklusive korrekter oberster Acht-Welten-Ebene abbildet.
+
+## EXAKT EINE NEXT ACTION
+
+Keine Pluginänderung und kein Deployment starten.
+
+Zuerst im Scope `SEO_KATEGORIEN` die maschinenlesbaren Bewertungsregeln auf einen kontrollierten ersten HOBBY_MASTER-V2-Batch anwenden und die Ergebnisse prüfen.
+
+Erst nach abgeschlossenem Master/Delta wird V1.12.0 technisch gegen das neue Zielprofil fortgeschrieben und erneut vollständig POS/NEG getestet.
 
 ## Release-/Artefaktgrenze
 
-Kein V1.10.0 Release und kein isoliertes `CURRENT.zip` ersetzen, solange der reale Gesamt-E2E blockiert ist.
+V1.12.0 ist lokale technische Baseline, kein aktueller Hobby-Depot-Deploymentkandidat.
 
-Lokale Packaging-Metadaten sind noch nicht releasefertig:
-`README.txt` nennt weiterhin Version 1.9.6.
+Kein Live-PASS behaupten.
+Kein altes V1.12-Profil installieren, bevor das V2-Zielbaum-Delta freigegeben und erneut vollständig getestet ist.
