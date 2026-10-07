@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.1 READ-ONLY V2-BEWERTUNG LOKAL HARD PASS / NICHT LIVE ABGENOMMEN / REALER WORDPRESS-DATAFORSEO-BATCHLAUF OFFEN / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.1 INITIALER REALER BATCH PASS / V1.12.2 READ-ONLY TIEFENPRÜFUNG LOKAL HARD PASS / REALER DEPTH-LAUF OFFEN / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -73,42 +73,68 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 
 ## Aktueller V2-Bewertungskandidat
 
+### Reale V1.12.1-Ausführung
+
+V1.12.1 wurde in Hobby Depot real ausgeführt.
+
+Ergebnis:
+- Batch 001;
+- 16 Hobbys;
+- 34 fachlich vorgeschlagene Leafs;
+- 263 vorgeschlagene Artikelintents;
+- 1 realer DataForSEO Keyword-Overview;
+- 106 / 263 exakte Keywords returned;
+- 157 exakte Seeds PENDING;
+- Kosten 0.02472 USD;
+- 0 WordPress-/HivePress-Strukturwrites;
+- Result SHA-256 `5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9`.
+
+Befund:
+Der erste Overview reicht für die vollständige V2-Content-Capacity nicht aus.
+`0 Hub-Kandidaten` ist deshalb kein endgültiger Negativbefund.
+
+### V1.12.2 – fehlende Tiefenprüfung
+
 Plugin-Version:
-`1.12.1`
+`1.12.2`
 
 Artefakt:
-`HD001_V1.12.1_HOBBY_MASTER_V2_READONLY_ASSESSMENT_HARDPASS.zip`
+`HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip`
 
 SHA-256:
-`959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d`
+`233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f`
 
 Prüfbericht:
-`HD001_V1.12.1_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.2_FINAL_LOCAL_POSNEG_REPORT.txt`
 
-Zweck:
-ausschließlich HOBBY_MASTER-V2-Bewertung im echten WordPress mit dem vorhandenen DataForSEO-Zugang.
+Prüfbericht SHA-256:
+`1e7197feb74e9b3a070a4201f79a0416f46dfef960fdab556d59f21c4cb55048`
 
-Neu:
-- eigener Backendpunkt `Kategorien → V2-Hobbybewertung`;
-- gebündelter kontrollierter Batch 001;
-- 16 Hobbys / 34 vorgeschlagene Leafs / 263 Artikelintents;
-- exakt 1 DataForSEO Keyword-Overview-Aufruf;
-- DataForSEO-Dedupe über `core_keyword`;
-- Batch-übergreifende Intent-/Ownership-Overlap-Markierung;
-- Konzeptgrenzen exakt: <4 zusammenlegen, 5–12 ideal, ab etwa 15 Teilung prüfen;
-- kleine valide Hobbys bleiben Identitäten und können gemeinsam dargestellt werden;
-- Target-Tree-Autorun deaktiviert;
-- manueller Target-Tree-Refresh blockiert;
-- 0 WordPress-/HivePress-Strukturwrites im Bewertungslauf.
+Funktion:
+- erkennt das gespeicherte V1.12.1-Ergebnis;
+- wiederholt den bereits bezahlten Gesamt-Overview NICHT;
+- ermittelt exakt 37 noch offene, bereits fachlich definierte Depth-Cluster;
+- plant exakt 37 Keyword-Ideas-Aufrufe;
+- danach exakt 1 gebündelten Keyword-Overview;
+- insgesamt exakt 38 zusätzliche DataForSEO-Aufrufe;
+- übernimmt je Cluster höchstens 15 distinct Intent/Core-Keyword-Gruppen, weil ab etwa 15 ohnehin Split-Review erreicht ist;
+- kombiniert alte und neue Evidence;
+- dedupliziert erneut per Core Keyword;
+- berechnet Batch-Ownership-Überschneidungen erneut;
+- schreibt 0 Kategorien und 0 Zielbaumobjekte.
 
 Fresh-Unpack-Test:
-- PHP-Lint 59/59 PASS;
+- PHP 62/62 PASS;
 - Legacy Regression 270/270 PASS;
 - V1.12 POS/NEG PASS;
-- realer 908/844/841-Bestand PASS;
-- V1.12.1 V2-Grenz-/Negativsuite PASS.
+- realer 908/844/841-Lauf PASS;
+- V1.12.1 Assessment Regression PASS;
+- echter hochgeladener Batch-001-Result-Readback PASS;
+- Follow-up-Plan exakt 38 Calls PASS;
+- DataForSEO-Failure fail-closed PASS;
+- 0 Strukturwrites PASS.
 
-V1.12.1 ist ausdrücklich KEIN neuer Zielbaum und kein Live-PASS.
+V1.12.2 ist weiterhin nur Bewertungskandidat, kein Zielbaum-Deployment.
 
 ## Fachliche Fortschreibung NACH V1.12.0
 
@@ -143,22 +169,24 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_WORDPRESS_DATAFORSEO_RUN_PENDING`
+`HD001_V2_BATCH001_DEPTH_DATAFORSEO_RUN_PENDING`
 
-Der read-only V2-Bewertungslauf ist technisch fertig und lokal hart geprüft.
-
-Es fehlt nur noch die echte Ausführung in Hobby Depot:
-V1.12.1 installieren → `Kategorien → V2-Hobbybewertung` → Batch 001 vorprüfen → exakt 1 DataForSEO-Aufruf bestätigen → Ergebnis-JSON herunterladen.
-
-Keine Kategorien werden geschrieben.
-Der alte V1.12-Zielbaum-Runner ist in V1.12.1 absichtlich deaktiviert.
+Der reale Initiallauf ist abgeschlossen.
+Der noch fehlende Teil ist die laut Regelvertrag 1.2 notwendige Tiefenprüfung der 37 unvollständig belegten, bereits definierten Cluster.
 
 ## EXAKT EINE NEXT ACTION
 
-Das exakte V1.12.1-Artefakt in Hobby Depot installieren und den gebündelten Batch 001 real über den vorhandenen WordPress-/DataForSEO-Zugang ausführen.
+V1.12.2 in Hobby Depot installieren und unter `Kategorien → V2-Hobbybewertung` die zusätzliche Tiefenprüfung ausführen.
 
-Danach Ergebnis fachlich gegen Regelvertrag 1.2 auswerten.
-Erst danach weitere Masterbewertung und später Zielbaum-Delta.
+Vor dem Paid Run muss das Plugin exakt anzeigen:
+- 37 Keyword-Ideas-Aufrufe;
+- 1 gebündelten Keyword-Overview;
+- 38 zusätzliche DataForSEO-Aufrufe insgesamt.
+
+Danach neues Ergebnis-JSON herunterladen und fachlich prüfen.
+
+Kein Zielbaum-Write.
+Keine WordPress-/HivePress-Kategorieänderung.
 
 ## Release-/Artefaktgrenze
 
