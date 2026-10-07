@@ -134,21 +134,57 @@ $old_row = array(
     '_source_kind'=>'banner',
     '_run_uuid'=>'old-v672198-run',
 );
-$detect = new ReflectionMethod($o, 'creative_library_detect_mapping');
-$detect->setAccessible(true);
-$mapping = $detect->invoke($o, array_keys($old_row));
-$normalize = new ReflectionMethod($o, 'creative_library_normalize_row');
-$normalize->setAccessible(true);
-$old = $normalize->invoke($o, $old_row, $mapping, array(
+$old_payload = array(
+    '_declared_width'=>728,
+    '_declared_height'=>90,
+    '_dimension_state'=>'pending',
+    '_dimension_error'=>'',
+    '_image_sha256'=>'',
+    '_image_mime'=>'',
+    '_image_bytes'=>0,
+    '_measured_at'=>0,
+    '_destination_source'=>'tracking_checked',
+    '_preverify_topic_status'=>'portal_pending',
+    '_preverify_topic_score'=>0,
+    '_preverify_topic_targets'=>array(),
+    '_manual_target_family'=>'',
+    'promotion_category_id'=>77,
+    'promotion_category_name'=>'Ausrüstung',
+    'provider_topic_id'=>'77',
+    'provider_topic_name'=>'Ausrüstung',
+    'provider_topic_source'=>'provider_promotion_category',
+);
+$old = array(
     'provider'=>'adcell',
     'partner_external_id'=>'123',
     'partner_name'=>'procavallo',
+    'external_id'=>'banner-393923',
+    'identity_hash'=>hash('sha256', 'adcell|123|banner-393923'),
+    'creative_type'=>'banner',
+    'title'=>'procavallo Banner 393923 – Ausrüstung',
+    'description'=>'Werbemittelkategorie: Ausrüstung',
+    'tags'=>'ADCELL Banner | Ausrüstung',
+    'image_url'=>'https://t.adcell.com/p/banner-schabracken',
+    'destination_url'=>'https://t.adcell.com/p/click-schabracken',
+    'tracking_url'=>'https://t.adcell.com/p/click-schabracken',
+    'width'=>0,
+    'height'=>0,
+    'source_status'=>'active',
     'source_kind'=>'banner',
-    'run_uuid'=>'old-v672198-run',
-));
-if (is_wp_error($old)) {
-    $fail('old_normalize_' . $old->get_error_message());
-}
+    'availability_state'=>'active',
+    'missing_count'=>0,
+    'last_complete_run'=>'old-v672198-run',
+    'review_status'=>'review',
+    'selected'=>0,
+    'content_scope'=>'unclassified',
+    'scope_source'=>'',
+    'classified_at'=>0,
+    'topic_status'=>'format_pending',
+    'topic_score'=>0,
+    'topic_targets'=>'[]',
+    'source_hash'=>hash('sha256', 'legacy-672198-banner-393923'),
+    'payload'=>wp_json_encode($old_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+);
 $upsert = new ReflectionMethod($o, 'creative_library_upsert');
 $upsert->setAccessible(true);
 if ($upsert->invoke($o, $old) !== 'imported') {
