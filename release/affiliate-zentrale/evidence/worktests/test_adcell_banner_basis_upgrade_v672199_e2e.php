@@ -111,6 +111,21 @@ foreach (array('maybe_install_automation_schema','maybe_install_creative_library
     $m->invoke($o);
 }
 
+// Testisolation: vorhandene Fixture-Daten aus einem vorherigen Basisgate dürfen
+// den echten 6.72.198 -> 6.72.199 Upgradefall nicht verfälschen.
+$table_method = new ReflectionMethod($o, 'creative_library_table');
+$table_method->setAccessible(true);
+$table = $table_method->invoke($o);
+global $wpdb;
+$wpdb->query($wpdb->prepare(
+    "DELETE FROM {$table} WHERE provider='adcell' AND partner_external_id=%s",
+    '123'
+));
+$jobs_method = new ReflectionMethod($o, 'automation_jobs_table');
+$jobs_method->setAccessible(true);
+$jobs_table = $jobs_method->invoke($o);
+$wpdb->query("DELETE FROM {$jobs_table} WHERE provider='adcell'");
+
 // Simuliere einen realistischen 6.72.198-Altbestand: gleiche Banner-ID,
 // aber nur die grobe Kategorie "Ausrüstung" und ohne erhaltene Provider-Rohdaten.
 $old_row = array(
@@ -236,10 +251,6 @@ if ((string)get_option('ppar_v672199_adcell_banner_basis_state','') !== 'done') 
 }
 $ok('basis_upgrade_completed_after_fresh_import');
 
-$table_method = new ReflectionMethod($o, 'creative_library_table');
-$table_method->setAccessible(true);
-$table = $table_method->invoke($o);
-global $wpdb;
 $stored = $wpdb->get_row($wpdb->prepare(
     "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
     'banner-393923'
