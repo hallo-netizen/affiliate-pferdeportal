@@ -212,6 +212,23 @@ if (count($category_calls) !== 1) {
 }
 $ok('category_endpoint_called_once_per_programme');
 
+// Reales eindeutiges Portalziel bereitstellen, damit die Reihenfolge
+// "Assetprüfung VOR Zielkarte" wirklich beobachtbar ist.
+$schabracken_term = get_term_by('slug', 'schabracken', 'category');
+if (!$schabracken_term || is_wp_error($schabracken_term)) {
+    $made = wp_insert_term('Schabracken', 'category', array('slug'=>'schabracken'));
+    if (is_wp_error($made)) {
+        $fail('schabracken_target_fixture_' . $made->get_error_code());
+    }
+    $schabracken_id = (int)$made['term_id'];
+} else {
+    $schabracken_id = (int)$schabracken_term->term_id;
+}
+if ($schabracken_id <= 0) {
+    $fail('schabracken_target_fixture_missing');
+}
+$ok('real_schabracken_target_fixture_ready');
+
 // Jetzt derselbe Datensatz durch den echten Bibliotheks-Import bis in MariaDB.
 $import = new ReflectionMethod($o, 'automation_import_rows');
 $import->setAccessible(true);
@@ -237,6 +254,14 @@ $stored_payload = json_decode((string)($stored['payload'] ?? ''), true);
 if (!is_array($stored_payload)) {
     $fail('stored_payload_invalid');
 }
+$targets_before_verify = json_decode((string)($stored['topic_targets'] ?? ''), true);
+$targets_before_verify = is_array($targets_before_verify) ? $targets_before_verify : array();
+if (count($targets_before_verify) !== 0
+    || !in_array(sanitize_key((string)($stored_payload['_dimension_state'] ?? '')), array('', 'pending'), true)) {
+    $fail('target_created_before_asset_verification');
+}
+$ok('no_target_before_real_asset_verification');
+
 if ((string)($stored_payload['promotion_category_name'] ?? '') !== 'Schabracken') {
     $fail('stored_category_name_missing');
 }
@@ -316,6 +341,22 @@ if ((int)($stored_after['width'] ?? 0) !== 1
     $fail('real_asset_measurement_not_persisted');
 }
 $ok('real_asset_bytes_dimensions_and_mismatch_persisted');
+
+$targets_after_verify = json_decode((string)($stored_after['topic_targets'] ?? ''), true);
+$targets_after_verify = is_array($targets_after_verify) ? array_values(array_filter($targets_after_verify, 'is_array')) : array();
+$target_keys_after_verify = array_values(array_map(static function($target) {
+    return (string)($target['target_key'] ?? '');
+}, $targets_after_verify));
+if (!in_array('category:' . $schabracken_id, $target_keys_after_verify, true)) {
+    $fail('schabracken_target_missing_after_asset_verification');
+}
+$target_sources_after_verify = array_values(array_unique(array_filter(array_map(static function($target) {
+    return sanitize_key((string)($target['source'] ?? ''));
+}, $targets_after_verify))));
+if (!in_array('banner_provider_topic_exact', $target_sources_after_verify, true)) {
+    $fail('provider_topic_exact_source_missing_after_verification');
+}
+$ok('asset_verification_precedes_exact_schabracken_target_assignment');
 
 // Negativfall: Kategorienbasis nicht erreichbar -> kompletter Bannerimport
 // fail-closed, kein Raten aus Titel oder Altmetadaten.
