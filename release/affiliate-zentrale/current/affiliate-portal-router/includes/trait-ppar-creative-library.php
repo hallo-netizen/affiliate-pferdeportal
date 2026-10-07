@@ -1823,19 +1823,30 @@ trait PPAR_Creative_Library_Trait {
         $args = array();
         $slot_filter = sanitize_text_field((string) ($filters['slot_filter'] ?? ''));
         $slot_options = is_array($filters['slot_options'] ?? null) ? $filters['slot_options'] : array();
-        if (!empty($filters['provider'])) {
-            $where[] = 'provider=%s';
-            $args[] = $filters['provider'];
-            // Awin product-feed rows belong to Produkte & Deals, never to the
-            // Banner-&-Werbemittel surface. Keep historical OTTO products stored;
-            // this is a view separation only, not a destructive cleanup.
-            if (sanitize_key((string) $filters['provider']) === 'awin') {
-                $where[] = "creative_type='banner'";
+        $comparison_partner = sanitize_key((string)($filters['comparison_partner'] ?? ''));
+        if ($comparison_partner !== '' && in_array($comparison_partner, array('tarifcheck','check24'), true)) {
+            // Bestehende Direktpartnerimporte koennen historisch unter "manual"
+            // oder "direct" gespeichert worden sein. Der sichtbare Partnerfilter
+            // muss den Partner filtern, nicht eine alte technische Provider-ID.
+            $where[] = "(partner_external_id=%s OR LOWER(partner_name)=%s)";
+            $args[] = $comparison_partner;
+            $args[] = $comparison_partner === 'tarifcheck' ? 'tarifcheck' : 'check24';
+            $where[] = "creative_type='banner'";
+        } else {
+            if (!empty($filters['provider'])) {
+                $where[] = 'provider=%s';
+                $args[] = $filters['provider'];
+                // Awin product-feed rows belong to Produkte & Deals, never to the
+                // Banner-&-Werbemittel surface. Keep historical OTTO products stored;
+                // this is a view separation only, not a destructive cleanup.
+                if (sanitize_key((string) $filters['provider']) === 'awin') {
+                    $where[] = "creative_type='banner'";
+                }
             }
-        }
-        if (!empty($filters['partner_external_id'])) {
-            $where[] = 'partner_external_id=%s';
-            $args[] = $filters['partner_external_id'];
+            if (!empty($filters['partner_external_id'])) {
+                $where[] = 'partner_external_id=%s';
+                $args[] = $filters['partner_external_id'];
+            }
         }
         if (!empty($filters['topic_status'])) {
             $where[] = 'topic_status=%s';
@@ -1895,9 +1906,11 @@ trait PPAR_Creative_Library_Trait {
         $snapshots = $this->creative_library_snapshots_for_select();
         $provider_filter = sanitize_text_field((string) wp_unslash($_GET['provider'] ?? ''));
         $partner_external_id = preg_replace('/[^0-9A-Za-z._-]/', '', rawurldecode((string) ($_GET['partner_external_id'] ?? '')));
+        $comparison_partner = '';
         if (in_array($provider_filter, array('direct:tarifcheck','direct:check24'), true)) {
-            $provider = 'direct';
-            $partner_external_id = $provider_filter === 'direct:tarifcheck' ? 'tarifcheck' : 'check24';
+            $comparison_partner = $provider_filter === 'direct:tarifcheck' ? 'tarifcheck' : 'check24';
+            $provider = '';
+            $partner_external_id = $comparison_partner;
         } else {
             $provider = sanitize_key($provider_filter);
         }
@@ -1911,7 +1924,7 @@ trait PPAR_Creative_Library_Trait {
         $slot_options = $this->creative_library_slot_filter_options($portals);
         $slot_filter = sanitize_text_field((string) ($_GET['slot_filter'] ?? ''));
         if ($slot_filter !== '' && !isset($slot_options[$slot_filter])) { $slot_filter = ''; }
-        $rows = $this->creative_library_query_rows(compact('provider','partner_external_id','topic_status','selected','slot_filter','slot_options'));
+        $rows = $this->creative_library_query_rows(compact('provider','partner_external_id','comparison_partner','topic_status','selected','slot_filter','slot_options'));
         $default = array('provider'=>'manual','external_id'=>'','name'=>'');
         $default_snapshot_key = '';
         if ($provider !== '' && $partner_external_id !== '' && isset($snapshots[$provider . ':' . $partner_external_id])) {
@@ -2049,7 +2062,19 @@ trait PPAR_Creative_Library_Trait {
                             <label><input type="checkbox" name="creative_ids[]" value="<?php echo absint($row['id']); ?>" <?php checked(!empty($row['selected'])); ?>> auswählen</label>
                             <?php if (!empty($row['image_url'])) : ?><img loading="lazy" src="<?php echo esc_url($row['image_url']); ?>" alt=""><?php endif; ?>
                             <h3><?php echo esc_html((string) $row['title']); ?></h3>
-                            <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?><?php if (!empty($payload['_manual_target_family'])) : ?><br><strong>Feste Vergleichsportal-Gruppe:</strong> <?php echo esc_html((string)$payload['_manual_target_family'] === 'versicherung' ? 'Versicherungen' : 'Kreditvergleich / Kosten'); ?><?php endif; ?></p>
+                            <?php
+                            $provider_category = sanitize_text_field((string)($payload['promotion_category_name'] ?? $payload['provider_topic_name'] ?? ''));
+                            $stored_target_rows = json_decode((string)($row['topic_targets'] ?? ''), true);
+                            $stored_target_rows = is_array($stored_target_rows) ? $stored_target_rows : array();
+                            if (isset($stored_target_rows['target_label'])) { $stored_target_rows = array($stored_target_rows); }
+                            $stored_target_labels = array();
+                            foreach ($stored_target_rows as $stored_target_row) {
+                                if (!is_array($stored_target_row)) { continue; }
+                                $stored_target_label = sanitize_text_field((string)($stored_target_row['target_label'] ?? ''));
+                                if ($stored_target_label !== '') { $stored_target_labels[$stored_target_label] = $stored_target_label; }
+                            }
+                            ?>
+                            <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?><?php if (!empty($payload['_manual_target_family'])) : ?><br><strong>Feste Vergleichsportal-Gruppe:</strong> <?php echo esc_html((string)$payload['_manual_target_family'] === 'versicherung' ? 'Versicherungen' : 'Kreditvergleich / Kosten'); ?><?php endif; ?><br><strong>Provider-Kategorie:</strong> <?php echo esc_html($provider_category !== '' ? $provider_category : 'keine geliefert'); ?><br><strong>Zugeordnetes Portalziel:</strong> <?php echo esc_html($stored_target_labels ? implode(' | ', array_values($stored_target_labels)) : 'keine Zuordnung'); ?></p>
                             <?php $slot_suitability=$this->creative_library_slot_suitability_summary($row,$slot_filter,$slot_options); if($slot_suitability!==''): ?><p class="ppar-library-meta"><strong><?php echo esc_html($slot_suitability); ?></strong></p><?php endif; ?>
                             <div class="ppar-library-topic"><strong>Portalstatus</strong><br><?php echo esc_html($this->creative_library_target_summary($row)); ?></div>
                             <?php if ($portals) : foreach ($portals as $decision_portal_key => $decision_portal) : $chief_decision=$this->output_portal_decision((string)$decision_portal_key,(string)($row['identity_hash']??'')); $chief_payload=is_array($chief_decision['payload']??null)?$chief_decision['payload']:array(); ?>
