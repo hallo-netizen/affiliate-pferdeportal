@@ -390,14 +390,28 @@ Verbindliche KISS-Korrektur Regeln 1.4:
 Lokaler Endreplay:
 `HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
 
-## 17. Aktueller Arbeitsweg
+## 17. Batch 001 – fachlich geschlossen
 
-1. V1.12.5 einmal real in Hobby Depot öffnen und kostenlosen Recalc-Readback erzeugen.
-2. Readback gegen den lokalen V1.12.5-Endreplay prüfen.
-3. Danach Scope/Identität/Ownership der sechs kapazitätsseitig tragfähigen, aber noch nicht final freigegebenen Hubfälle klären.
-4. Kleine Themen auf Aggregation prüfen.
-5. Master mit derselben KISS-Logik batchweise fortsetzen.
-6. Erst danach Zielbaum-Delta.
+Finale Bewertung:
+`HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`
 
-Keine weitere automatische Keyword-Ideas-Tiefenrecherche.
-Keine WordPress-/HivePress-Strukturänderung vor dem späteren Zielbaum-Delta.
+Ergebnis:
+- 7 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
+- 6 EDITORIAL_TOPIC;
+- 0 unresolved;
+- 0 Strukturwrites.
+
+Wesentliche Ownership-Grenzen sind pro Kandidat gebunden.
+
+## 18. Aktueller Arbeitsweg
+
+1. Batch 002 deterministisch als erste 16 noch nicht final bewerteten Master-Identitäten in stabiler Master-Reihenfolge ziehen.
+2. Fachlogik definiert Scope, Identität, Größenklasse, mögliche Leafs und Artikelintents.
+3. DataForSEO im Normalweg nur als gebündelter Overview-Abgleich, keine automatische Keyword-Ideas-Tiefenrecherche.
+4. Batch fachlich schließen.
+5. Master batchweise vollständig fortsetzen.
+6. Erst nach vollständiger 841er Bewertung Zielbaum-Delta erzeugen.
+7. Danach WordPress/HivePress-Sync und Frontend-Readback.
+
+Keine Strukturänderung aus einem Zwischenbatch.
