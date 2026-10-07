@@ -176,7 +176,7 @@ Solange Batch 001 nicht belastbar durch die Gates läuft, wird die 841er Gesamtb
 
 ## EXAKT EINE NEXT ACTION
 
-Für die 16 Kandidaten aus `HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json` die fehlende Scope-/Content-Capacity-/Ownership-Evidenz erzeugen und denselben Batch anschließend erneut durch `HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` laufen lassen.
+Für die 16 Kandidaten aus `HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json` exakt die in `HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST_20261007.json` gebundene fehlende Identitäts-/Scope-/Content-Capacity-/Ownership-Evidenz erzeugen und denselben Batch anschließend erneut durch `HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` laufen lassen.
 
 Dabei:
 - DataForSEO nur für SEO-/Nachfrage-/Intent-Evidenz;
