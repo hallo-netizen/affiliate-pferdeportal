@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
-  "version": "1.3",
+  "version": "1.4",
   "effective_date": "2026-10-07",
-  "status": "ACTIVE_V2_RULESET_CONCEPT_EXACT_PROVIDER_ROWS_ARE_EVIDENCE_NOT_ARTICLES",
+  "status": "ACTIVE_V2_RULESET_CONCEPT_EXACT_KISS_SUBJECT_CAPACITY_DFS_CROSSCHECK",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -476,7 +476,7 @@
       "strategic_nonseo_reason",
       "validated"
     ],
-    "validated_article_rule": "An article intent counts toward leaf capacity only when fachlich distinct AND either backed by DataForSEO intent/keyword evidence OR backed by an explicit strategic_nonseo_reason. Missing evidence does not count.",
+    "validated_article_rule": "An article intent counts toward content capacity when it is fachlich a genuinely distinct user need/search intent. DataForSEO may collapse two subject-defined intents when exact core_keyword/synonym evidence proves they are the same. A missing exact DataForSEO row does not erase the subject-defined article intent; only its SEO metrics remain pending.",
     "leaf_thresholds": {
       "4": "BORDERLINE_REVIEW",
       "0_3": "NO_STANDALONE_LEAF__AGGREGATE_OR_EDITORIAL",
@@ -491,7 +491,7 @@
       "10_plus_fit_leafs": "MACRO_SPLIT_REVIEW"
     },
     "hard_rule": "A total article count across the whole hobby is insufficient. Every proposed lowest-level category is checked separately. Under 4 is combined; 5–12 is ideal; from about 15 upward splitting is reviewed.",
-    "provider_evidence_counting_rule": "DataForSEO keyword_suggestions/keyword_ideas rows never create additional article intents. They may only validate, merge or deduplicate article intents already proposed by subject-matter logic."
+    "provider_evidence_counting_rule": "DataForSEO rows are SEO evidence only. Raw keyword_suggestions/keyword_ideas rows never create additional article intents. Missing exact keyword_overview rows never reduce the subject-defined content-capacity count to zero."
   },
   "aggregation_contract": {
     "purpose": "Preserve small valid hobbies without creating hundreds of thin taxonomy nodes.",
@@ -525,12 +525,12 @@
       "keyword_suggestions_endpoint": "/v3/dataforseo_labs/google/keyword_suggestions/live"
     },
     "workflow": [
-      "Subject logic proposes candidate leaf families and distinct article intents.",
-      "DataForSEO keyword_overview validates exact proposed article-intent seeds where available.",
-      "keyword_suggestions/keyword_ideas may be used only as supporting evidence for already proposed article intents; provider-returned rows do not increase article-intent count by themselves.",
-      "Use core_keyword, main_intent, synonyms/variants and demand to validate or collapse subject-defined intents.",
-      "Recount only validated subject-defined article intents per leaf.",
-      "Apply leaf thresholds and only then hub thresholds."
+      "Subject-matter logic proposes and counts genuinely distinct article intents inside each proposed lowest-level category.",
+      "One bundled keyword_overview cross-checks the proposed article seeds where DataForSEO returns exact evidence.",
+      "Use exact core_keyword/synonym/intent-overlap evidence to merge wording variants or duplicate subject-defined intents.",
+      "If DataForSEO omits an exact longtail seed, keep its SEO metrics PENDING but keep the fachlich distinct article intent in the content-capacity count.",
+      "keyword_suggestions/keyword_ideas are optional targeted review evidence only. They are not an automatic content-capacity stage and their raw rows never increase article count.",
+      "Apply the leaf and hub thresholds to the deduplicated subject-defined intent count."
     ],
     "may_confirm": [
       "primary_keyword",
@@ -553,14 +553,16 @@
       "CORE_promotion",
       "deletion"
     ],
-    "fail_closed": "Without a real DataForSEO response, SEO validation fields stay PENDING_DFS. No synthetic search volume or keyword evidence may be invented.",
-    "hard_counting_rule": "Provider rows are evidence, not new content nodes. One subject-defined article intent can count at most once; two subject-defined intents sharing the same validated core_keyword count once."
+    "fail_closed": "If a real DataForSEO request itself fails, the SEO cross-check remains BLOCKED/PENDING and no SEO metrics are invented. If the request succeeds but omits an individual longtail row, do not invent its SEO metrics and do not delete the fachlich distinct subject-defined article intent.",
+    "hard_counting_rule": "Subject-matter logic owns content-capacity counting. One subject-defined article intent counts at most once. Exact DataForSEO core_keyword/synonym evidence may merge duplicates; provider rows may never create articles, and provider omission may never erase a fachlich distinct article.",
+    "automatic_depth_research": false,
+    "depth_research_rule": "Disabled in the normal V2 assessment path. Use keyword_ideas/keyword_suggestions only for a later explicit targeted review when a specific unresolved semantic question actually requires it."
   },
   "assessment_sequence_v2": [
     "A_SCOPE",
     "B_IDENTITY",
-    "C_PROPOSE_LEAF_AND_ARTICLE_INTENTS",
-    "C1_DATAFORSEO_VALIDATE_AND_DEDUP",
+    "C_PROPOSE_AND_COUNT_DISTINCT_ARTICLE_INTENTS",
+    "C1_DATAFORSEO_OVERVIEW_CROSSCHECK_AND_DEDUP",
     "C2_RECOUNT_EACH_LOWEST_LEVEL_CATEGORY",
     "C3_AGGREGATION_REVIEW_FOR_THIN_VALID_TOPICS",
     "D_PORTAL_ROLE",
