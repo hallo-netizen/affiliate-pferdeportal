@@ -113,6 +113,22 @@ if (!is_array($stored)
 }
 $ok('manual_check24_banner_stored_in_creative_library');
 
+$stored_payload = json_decode((string)($stored['payload'] ?? ''), true);
+$stored_payload = is_array($stored_payload) ? $stored_payload : array();
+$stored_payload['_manual_target_family'] = 'kosten';
+$stored['payload'] = wp_json_encode($stored_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$family_m = new ReflectionMethod($o, 'output_tarifcheck_banner_family');
+$family_m->setAccessible(true);
+if ($family_m->invoke($o, $stored) !== 'kosten') {
+    $fail('check24_manual_family_not_supported');
+}
+$partner_m = new ReflectionMethod($o, 'output_comparison_banner_partner');
+$partner_m->setAccessible(true);
+if ($partner_m->invoke($o, $stored) !== 'check24') {
+    $fail('check24_comparison_partner_not_detected');
+}
+$ok('check24_uses_existing_comparison_family_path');
+
 $admins = get_users(array('role'=>'administrator','number'=>1));
 if (!$admins) {
     $uid = wp_create_user('banner-gate-admin', 'ci-banner-gate-pass!', 'banner-gate@example.test');
@@ -132,6 +148,7 @@ foreach (array(
     'value="direct:check24"',
     '>CHECK24</option>',
     'Banner händisch einfügen',
+    'Vergleichsportal-Zielgruppe',
     'name="manual_banner_image_url"',
     'name="manual_banner_tracking_url"',
     'name="manual_banner_destination_url"'
