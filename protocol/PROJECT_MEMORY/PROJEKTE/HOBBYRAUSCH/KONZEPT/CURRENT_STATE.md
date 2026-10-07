@@ -162,7 +162,7 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
+`HD001_V2_BATCH001_HD001_ASSESSMENT_RUN_NOT_BOUND`
 
 Die fachliche Vorprüfung des 16er Batches ist fertig.
 Für endgültige Leaf-Zahlen fehlt der reale DataForSEO-Abgleich.
