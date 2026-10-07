@@ -1,6 +1,6 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_RESULT",
-  "version": "1.0",
+  "version": "1.1",
   "effective_date": "2026-10-07",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
@@ -338,5 +338,22 @@
       "evidence_note": "Master contains no final scope/world/content-capacity evidence; fail closed.",
       "id_uniqueness_check": "PASS"
     }
-  ]
+  ],
+  "status": "HISTORICAL_PRE_REAL_EVIDENCE_RESULT__SUPERSEDED_FOR_CAPACITY_BY_RULES_1_4_REPLAY",
+  "authority_note": "Retained for provenance of the first fail-closed assessment. Do not use its capacity/role conclusions as current. Current Batch-001 capacity result is HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md under rules 1.4.",
+  "superseded_capacity_result": {
+    "rules_version": "1.4",
+    "plugin_version": "1.12.5",
+    "replay": "HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md",
+    "summary": {
+      "candidate_count": 16,
+      "ideal_leaf_count": 34,
+      "hobby_hub_candidates": 1,
+      "editorial_topic_candidates": 1,
+      "aggregation_reviews": 5,
+      "macro_reviews": 3,
+      "evidence_required": 6,
+      "target_tree_writes_allowed": 0
+    }
+  }
 }
