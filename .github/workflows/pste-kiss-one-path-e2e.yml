@@ -1,0 +1,192 @@
+name: PSTE KISS One Path E2E Audit
+on:
+  push:
+    branches: [pste-kiss-e2e-20261005]
+    paths:
+      - '.github/workflows/pste-kiss-one-path-e2e.yml'
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch all refs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+          echo "HEAD=$(git rev-parse HEAD)"
+      - name: Existing potential against current live inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, urllib.request, html
+          from pathlib import Path
+          q=json.loads(Path('proof/pste-kiss-existing-material/PSTE_EXISTING_MATERIAL_REENTRY_110.json').read_text())
+          assert q['counts']['reentry_candidates']==110
+          posts=[]
+          page=1
+          while True:
+              u=f'https://pferde-atelier.de/wp-json/wp/v2/posts?per_page=100&page={page}&status=publish&_fields=id,title,slug,categories,status'
+              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=30) as r:
+                      rows=json.load(r)
+              except Exception as e:
+                  if page>1 and ('400' in str(e) or 'rest_post_invalid_page_number' in str(e)): break
+                  raise
+              if not rows: break
+              posts += rows
+              if len(rows)<100: break
+              page += 1
+          live={html.unescape((p.get('title') or {}).get('rendered','')).strip().casefold():p for p in posts}
+          def complete(c):
+              b=c.get('binding') or {}
+              m=b.get('mode')
+              if m=='CONFIRM_EXISTING_FAMILY': return bool(b.get('family_name') and b.get('family_key'))
+              if m=='BIND_EXISTING_FAMILY': return bool(b.get('family_name') and b.get('family_key') and b.get('portal_path'))
+              if m=='BIND_EXISTING_ARTICLE_TYPE': return bool(b.get('article_type') and b.get('category_id') and b.get('category_name'))
+              return False
+          reasons={}
+          eligible=[]
+          for c in q['candidates']:
+              reason='REENTRY_ALLOWED'
+              if c.get('dataforseo_required') is not False: reason='BLOCK_DATAFORSEO_SHORT_PATH_CONTRACT'
+              elif c.get('new_external_research_required') is not False: reason='BLOCK_EXTERNAL_RESEARCH_REQUIRED'
+              elif c.get('editorial_title','').strip().casefold() in live: reason='BLOCK_EXISTING_CONTENT_DUPLICATE'
+              elif not complete(c): reason='BLOCK_BINDING_INCOMPLETE'
+              reasons[reason]=reasons.get(reason,0)+1
+              if reason=='REENTRY_ALLOWED': eligible.append(c)
+          print('LIVE_POST_COUNT='+str(len(posts)))
+          print('EXISTING_POTENTIAL_TOTAL=110')
+          for k in sorted(reasons): print(k+'='+str(reasons[k]))
+          print('EXISTING_READY_FOR_NORMAL_REENTRY='+str(len(eligible)))
+          print('DATAFORSEO_CALLS=0')
+          print('FULL_BACKLOG_REBUILD=0')
+          print('FIRST_READY='+eligible[0]['editorial_title'] if eligible else 'FIRST_READY=')
+          print('LAST_READY='+eligible[-1]['editorial_title'] if eligible else 'LAST_READY=')
+          PY
+      - name: Recover exact manual finance titles from repository history
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import io, subprocess, zipfile, re, json
+          phrase='finanzieren und die Kosten realistisch planen'
+          objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
+          found=set()
+          def inspect(data,label,depth=0):
+              if depth>4 or len(data)>150*1024*1024:return
+              try:
+                  txt=data.decode('utf-8',errors='ignore')
+                  for m in re.finditer(r'[^\n\r\"\']{0,100}finanzieren und die Kosten realistisch planen[^\n\r\"\']{0,30}',txt,re.I):
+                      s=' '.join(m.group(0).split())
+                      if 10 < len(s) < 220: found.add(s)
+                  for m in re.finditer(r'[\"\']([^\"\'\n\r]{3,180}finanzieren[^\"\'\n\r]{0,120})[\"\']',txt,re.I):
+                      s=' '.join(m.group(1).split())
+                      if phrase.lower() in s.lower(): found.add(s)
+              except: pass
+              try:z=zipfile.ZipFile(io.BytesIO(data))
+              except:return
+              for n in z.namelist():
+                  if n.endswith('/'):continue
+                  try:b=z.read(n)
+                  except:continue
+                  if len(b)>150*1024*1024:continue
+                  low=n.lower()
+                  if low.endswith(('.php','.json','.md','.txt','.py','.zip')): inspect(b,label+'!'+n,depth+1)
+          seen=set()
+          for line in objects:
+              p=line.split(' ',1)
+              if len(p)!=2 or p[0] in seen: continue
+              seen.add(p[0]); path=p[1].lower()
+              if not path.endswith(('.zip','.json','.md','.txt','.php','.py')): continue
+              try:
+                  size=int(subprocess.check_output(['git','cat-file','-s',p[0]],text=True).strip())
+                  if size>150*1024*1024:continue
+                  raw=subprocess.check_output(['git','cat-file','blob',p[0]],stderr=subprocess.DEVNULL)
+              except:continue
+              if phrase.encode() in raw or path.endswith('.zip'): inspect(raw,p[1])
+          vals=sorted(found)
+          print('MANUAL_FINANCE_MATCHES='+str(len(vals)))
+          for i,s in enumerate(vals[:100],1): print(f'MANUAL_{i:02d}={s}')
+          PY
+      - name: Locate exact PSERC 0.28.30 source or package in all history
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import io, subprocess, zipfile, hashlib
+          needle=b'0.28.30-pste-v5-binding-safe'
+          objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True,errors='replace').splitlines()
+          hits=[]
+          gate_hits=[]
+          def walk(data,label,root,depth=0,container_sha=''):
+              if depth>5 or len(data)>180*1024*1024:return
+              if needle in data:
+                  hits.append((root,label,len(data),hashlib.sha256(data).hexdigest()))
+              try:z=zipfile.ZipFile(io.BytesIO(data))
+              except:return
+              names=z.namelist()
+              # If this archive carries the exact build string, inspect its gate.
+              archive_exact=False
+              for n in names:
+                  if n.endswith('/'): continue
+                  try:b=z.read(n)
+                  except:continue
+                  if needle in b: archive_exact=True
+              if archive_exact:
+                  for n in names:
+                      if n.endswith('class-pserc-portal-topic-evidence-gate.php'):
+                          b=z.read(n)
+                          gate_hits.append((root,label,n,len(b),hashlib.sha256(b).hexdigest(),b.decode('utf-8',errors='ignore')))
+              for n in names:
+                  if n.lower().endswith('.zip'):
+                      try:b=z.read(n)
+                      except:continue
+                      walk(b,label+'!'+n,root,depth+1,hashlib.sha256(data).hexdigest())
+          seen=set()
+          for line in objects:
+              p=line.split(' ',1)
+              if len(p)!=2 or p[0] in seen: continue
+              seen.add(p[0]); path=p[1].lower()
+              if not path.endswith(('.zip','.php','.json','.md','.txt','.py')): continue
+              try:
+                  size=int(subprocess.check_output(['git','cat-file','-s',p[0]],text=True).strip())
+                  if size>180*1024*1024:continue
+                  raw=subprocess.check_output(['git','cat-file','blob',p[0]],stderr=subprocess.DEVNULL)
+              except:continue
+              if needle in raw or path.endswith('.zip'): walk(raw,p[1],p[0])
+          print('PSERC_02830_MATCHES='+str(len(hits)))
+          for h in hits[:30]: print('PSERC_MATCH='+' | '.join(map(str,h[:4])))
+          print('PSERC_02830_GATE_MATCHES='+str(len(gate_hits)))
+          for root,label,n,size,sha,txt in gate_hits[:10]:
+              print(f'PSERC_GATE root={root} archive={label} member={n} bytes={size} sha256={sha}')
+              for token in ['PAA_RELATED','RELATED_SEARCH','PSTE_PRE_TITLE_DUPLICATE_GATE_V2_KEYWORD_OWNERSHIP']:
+                  print(f'GATE_TOKEN {token} count={txt.count(token)}')
+          PY
+      - name: Prove one normal production interface
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import ast, json
+          from pathlib import Path
+          p=Path('concept_agent/konzept8_verbot/engine/k8_intake_bridge.py')
+          s=p.read_text()
+          assert 'EXACT_FIELDS = ("title", "target_keyword", "category", "article_type", "plan_slot")' in s
+          snap=json.loads(Path('concept_agent/current/PSERC_METADATA_SNAPSHOT.json').read_text())
+          assert snap['hard_rules']['metadata_handoff_exact_scalar_fields']==['title','target_keyword','category','article_type','plan_slot']
+          batch=snap['next_textmachine_metadata_batch']
+          assert batch['contract']=='PSERC_TEXTMACHINE_METADATA_BATCH_V2'
+          assert batch['status']=='READY_FOR_TEXTMACHINE_METADATA_INTAKE'
+          for item in batch['items']:
+              assert set(item)=={'title','target_keyword','category','article_type','plan_slot'}
+          print('NORMAL_PRODUCTION_INTERFACE=PASS')
+          print('EXACT_FIELDS=title,target_keyword,category,article_type,plan_slot')
+          print('PSTE_WORK_ROUTE_REQUIRED=0')
+          print('PSTE_WORK_BATCH_STORE_REQUIRED=0')
+          print('DATAFORSEO_FIELD_REQUIRED=0')
+          PY
