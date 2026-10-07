@@ -18,6 +18,7 @@ Dieses Dokument ist nur Navigation. Dynamischer Status, Blocker und NEXT ACTION 
 
 ## Zielquellen
 
+- `protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md` — aktueller fachlicher Zielvertrag für die Banner-Importbasis
 - `protocol/AFFILIATE_RELEASE_AUTOMATIC_CREATIVE_LIFECYCLE_SCOPE_20260918.md`
 - Fachregister `WERBEPLATZ_REGISTER.md`
 - Fachkonzept `KONZEPT_AUTOMATIK_LIFECYCLE_20260918.md`
