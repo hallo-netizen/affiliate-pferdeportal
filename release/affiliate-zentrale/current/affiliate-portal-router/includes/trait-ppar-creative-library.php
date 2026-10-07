@@ -1217,7 +1217,13 @@ trait PPAR_Creative_Library_Trait {
             'ppar_message' => rawurlencode(sanitize_text_field((string) $message)),
         );
         if (!empty($context['provider'])) {
-            $args['provider'] = sanitize_key($context['provider']);
+            $context_provider = sanitize_key((string)$context['provider']);
+            $context_partner = sanitize_key((string)($context['partner_external_id'] ?? ''));
+            if ($context_provider === 'direct' && in_array($context_partner, array('tarifcheck','check24'), true)) {
+                $args['provider'] = 'direct:' . $context_partner;
+            } else {
+                $args['provider'] = $context_provider;
+            }
         }
         if (!empty($context['partner_external_id'])) {
             $args['partner_external_id'] = rawurlencode((string) $context['partner_external_id']);
@@ -1909,7 +1915,7 @@ trait PPAR_Creative_Library_Trait {
                 <div class="ppar-library-kpi"><span>Blockiert</span><strong><?php echo absint($counts['no_match'] + $counts['blocked'] + $counts['format_blocked']); ?></strong></div>
             </div>
             <details class="ppar-library-panel" style="margin-top:16px">
-                <summary><strong>Sammelimport echter Provider-Werbemittel</strong></summary>
+                <summary><strong>Banner importieren / händisch einfügen</strong></summary>
                 <p class="description">CSV, JSON, TXT mit vollständigen Bannercodes oder direkt eingefügte vollständige Codes werden gesammelt verarbeitet. Banner werden einmalig über ihre Ziel-URL festen Portalzielen zugeordnet; ohne sichere Zielkarte keine automatische Ausspielung.</p>
                 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="ppar_creative_library_import">
