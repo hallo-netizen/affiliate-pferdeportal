@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
-  "version": "1.1",
+  "version": "1.2",
   "effective_date": "2026-10-07",
-  "status": "ACTIVE_V2_RULESET_LEAF_CAPACITY_AND_AGGREGATION_BOUND",
+  "status": "ACTIVE_V2_RULESET_CONCEPT_EXACT_LEAF_CAPACITY_AND_AGGREGATION_BOUND",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -185,13 +185,13 @@
           "when": {
             "distinct_intents_max": 3
           },
-          "result": "NO_LEAF_CATEGORY"
+          "result": "NO_LEAF_CATEGORY__COMBINE_OR_EDITORIAL"
         },
         {
           "when": {
             "distinct_intents": 4
           },
-          "result": "LEAF_EXCEPTION_REVIEW"
+          "result": "BORDERLINE_REVIEW"
         },
         {
           "when": {
@@ -203,30 +203,30 @@
         {
           "when": {
             "distinct_intents_min": 13,
-            "distinct_intents_max": 15
+            "distinct_intents_max": 14
           },
-          "result": "LEAF_SPLIT_REVIEW"
+          "result": "ABOVE_IDEAL_REVIEW"
         },
         {
           "when": {
-            "distinct_intents_min": 16
+            "distinct_intents_min": 15
           },
-          "result": "LEAF_SPLIT_REQUIRED"
+          "result": "LEAF_SPLIT_REVIEW"
         }
       ],
       "hub_rules": [
         {
           "when": {
-            "viable_leaf_categories_max": 2
+            "viable_fit_leaf_categories_max": 2
           },
           "result": {
-            "size_class": "MICRO"
+            "size_class": "MICRO_OR_EDITORIAL_REVIEW"
           }
         },
         {
           "when": {
-            "viable_leaf_categories_min": 3,
-            "viable_leaf_categories_max": 6
+            "viable_fit_leaf_categories_min": 3,
+            "viable_fit_leaf_categories_max": 6
           },
           "result": {
             "size_class": "FIT"
@@ -234,25 +234,26 @@
         },
         {
           "when": {
-            "viable_leaf_categories_min": 7,
-            "viable_leaf_categories_max": 8
+            "viable_fit_leaf_categories_min": 7,
+            "viable_fit_leaf_categories_max": 9
           },
           "result": {
             "decision_state": "EVIDENCE_REQUIRED",
-            "review": "MACRO_OR_SPLIT_REVIEW"
+            "review": "ABOVE_TYPICAL_HUB_REVIEW"
           }
         },
         {
           "when": {
-            "viable_leaf_categories_min": 9
+            "viable_fit_leaf_categories_min": 10
           },
           "result": {
-            "size_class": "MACRO"
+            "size_class": "MACRO",
+            "review": "SPLIT_REVIEW"
           }
         }
       ],
       "macro_overrides": [
-        "more_than_8_durable_leaf_categories",
+        "around_10_or_more_coherent_leaf_areas",
         "multiple_distinct_activity_identities",
         "would_behave_like_own_portal"
       ],
@@ -477,19 +478,19 @@
     ],
     "validated_article_rule": "An article intent counts toward leaf capacity only when fachlich distinct AND either backed by DataForSEO intent/keyword evidence OR backed by an explicit strategic_nonseo_reason. Missing evidence does not count.",
     "leaf_thresholds": {
-      "4": "LEAF_EXCEPTION_REVIEW",
+      "4": "BORDERLINE_REVIEW",
       "0_3": "NO_STANDALONE_LEAF__AGGREGATE_OR_EDITORIAL",
       "5_12": "LEAF_FIT",
-      "13_15": "LEAF_SPLIT_REVIEW",
-      "16_plus": "LEAF_SPLIT_REQUIRED"
+      "13_14": "ABOVE_IDEAL_REVIEW",
+      "15_plus": "LEAF_SPLIT_REVIEW"
     },
     "hub_thresholds": {
       "0_2_fit_leafs": "NO_HOBBY_HUB__EDITORIAL_OR_FINDER_REVIEW",
       "3_6_fit_leafs": "HOBBY_HUB_FIT",
-      "7_8_fit_leafs": "MACRO_OR_SPLIT_REVIEW",
-      "9_plus_fit_leafs": "MACRO_SPLIT_REQUIRED"
+      "7_9_fit_leafs": "ABOVE_TYPICAL_HUB_REVIEW",
+      "10_plus_fit_leafs": "MACRO_SPLIT_REVIEW"
     },
-    "hard_rule": "A total article count across the whole hobby is insufficient. Every proposed lowest-level category is checked separately."
+    "hard_rule": "A total article count across the whole hobby is insufficient. Every proposed lowest-level category is checked separately. Under 4 is combined; 5–12 is ideal; from about 15 upward splitting is reviewed."
   },
   "aggregation_contract": {
     "purpose": "Preserve small valid hobbies without creating hundreds of thin taxonomy nodes.",
