@@ -122,7 +122,7 @@ zu groß; würde wie ein eigenes Portal funktionieren.
 Leaf-Kategorie:
 - 5–12 Beiträge Ziel;
 - 4 nur Ausnahme;
-- 13–15 zwingende Split-Prüfung;
+- 13–14 zwingende Split-Prüfung;
 - >15 nur mit expliziter Ausnahme.
 
 Hobby-Hub:
@@ -340,8 +340,8 @@ Jede unterste Kategorie wird einzeln geprüft:
 - 0–3 distinct Artikelintents → keine eigene Leaf-Kategorie;
 - 4 → Ausnahmeprüfung;
 - 5–12 → Zielbereich;
-- 13–15 → Split-Prüfung;
-- 16+ → Split erforderlich.
+- 13–14 → Split-Prüfung;
+- ab etwa 15 → Split erforderlich.
 
 Nur echte verschiedene Nutzer-/Suchintents zählen.
 Synonyme und Formulierungsvarianten zählen nicht mehrfach.
