@@ -4052,32 +4052,25 @@ JS;
             }
         }
 
-        // KISS-Hardlock: Automatisch aus der Creative-Library materialisierte
-        // Banner besitzen bereits ihre gespeicherte Zielkante. Diese Zielkante
-        // entscheidet abschliessend ueber die fachliche Eligibility im Frontend.
-        // Kein passendes gespeichertes Ziel = kein automatischer Kandidat.
-        // Keine URL-/Text-Neuklassifikation, keine DB-Abfrage, kein HTTP.
-        $library_banner = $required_creative_type === 'banner'
-            && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
-        if ($library_banner) {
-            if (is_array($automation_rank)) { return $automation_rank; }
-            // Ein ausdruecklich in der Creative-Library als allgemein gespeicherter
-            // Banner ist selbst eine bewusste Zuordnung und darf als Portal-
-            // Fallback liefern. Ein Banner mit konkreter, aber hier unpassender
-            // Zielkante bleibt dagegen fail-closed.
-            if ($mode === 'fallback') {
-                return array('specificity'=>100,'matches'=>1,'reason'=>'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.');
-            }
-            return null;
-        }
-
-        // Historische neutrale Rassenverteilung bleibt nur fuer nicht aus der
-        // Creative-Library stammende Banner erhalten. Output-Object-Banner sind
-        // bereits oben strikt an ihre gespeicherte Zielkante gebunden.
+        // Kein exakter Rassentreffer: bestehende neutrale Verteilung bleibt als
+        // letzte Rassenregel erhalten. Keine zweite Verteilungsmaschine.
         if ($required_creative_type === 'banner' && in_array($slot_type, array(
             'breed_single_banner','breed_single_desktop_banner','breed_single_mobile_banner','breed_overview_banner'
         ), true)) {
             return array('specificity'=>5,'matches'=>0,'reason'=>'Pferderassen ohne exakte Zielkante: themenneutrale stabile Bannerverteilung.');
+        }
+
+        // KISS: Automatisch aus der Creative-Library materialisierte Banner
+        // besitzen bereits ihre gespeicherte Zielkante. Im Frontend wird diese
+        // nicht noch einmal aus URL/Titel/Partnertext erraten.
+        $library_banner = $required_creative_type === 'banner'
+            && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
+        if ($library_banner) {
+            if (is_array($automation_rank)) { return $automation_rank; }
+            if ($mode === 'fallback') {
+                return array('specificity'=>100,'matches'=>1,'reason'=>'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.');
+            }
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Gespeicherte Banner-Zielkante passt hier nicht; technisch gueltiger letzter Fallback.');
         }
 
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
