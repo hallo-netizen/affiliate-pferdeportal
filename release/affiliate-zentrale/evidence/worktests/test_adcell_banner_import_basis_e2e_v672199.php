@@ -92,10 +92,10 @@ add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls, $p
     }
     if ($url === 'https://t.adcell.com/p/click-resolve-schabracken') {
         return $reply('', 302, array(
-            'location'=>'https://shop.example.test/schabracken/',
+            'location'=>'https://example.com/schabracken/',
         ));
     }
-    if ($url === 'https://shop.example.test/schabracken/') {
+    if ($url === 'https://example.com/schabracken/') {
         return $reply('', 200);
     }
     if (strpos($url, 'https://t.adcell.com/p/') === 0) {
@@ -259,7 +259,7 @@ $resolved_payload = json_decode((string)($resolved_stored['payload'] ?? ''), tru
 if (!is_array($resolved_stored)
     || !is_array($resolved_payload)
     || (string)($resolved_stored['tracking_url'] ?? '') !== 'https://t.adcell.com/p/click-resolve-schabracken'
-    || (string)($resolved_stored['destination_url'] ?? '') !== 'https://shop.example.test/schabracken/'
+    || (string)($resolved_stored['destination_url'] ?? '') !== 'https://example.com/schabracken/'
     || sanitize_key((string)($resolved_payload['_destination_source'] ?? '')) !== 'resolved_redirect') {
     $fail('real_destination_redirect_and_provenance_not_persisted tracking='
         . (string)($resolved_stored['tracking_url'] ?? '<missing>')
