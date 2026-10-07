@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-07
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG GEBUNDEN / BATCH 001 AUSGEFÜHRT / NOCH KEINE GESAMTBEWERTUNG
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.1 PRO LEAF + ZUSAMMENFASSUNG / BATCH-001-FACHVORPRÜFUNG FERTIG / DATAFORSEO-ABGLEICH OFFEN / NOCH KEINE GESAMTBEWERTUNG
 
 ## Datenartefakt
 
@@ -74,6 +74,8 @@ Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, 
 - Batch 001: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
 - Research Intake: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
 - vorbereitetes Master-Intake-Delta: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
+- Fachvorprüfung: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
+- DataForSEO-Request: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
 
 Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
 Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
@@ -81,6 +83,7 @@ Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 
 ## Nächster Schritt
 
-Fehlende Scope-/Content-Capacity-/Ownership-Evidenz für Batch 001 erzeugen und den identischen Batch danach erneut auswerten.
+Den vorbereiteten DataForSEO-Request für Batch 001 real ausführen.
+Danach jede unterste Kategorie separat auf 5–12 distinct, eindeutig zugeordnete Artikelintents prüfen und kleine valide Themen bei Bedarf auf gemeinsame Darstellung/Cluster prüfen.
 
 Keine direkte WordPress-Synchronisierung und kein Zielbaum-Delta vor belastbarer Rollen-/Ownership-Prüfung.
