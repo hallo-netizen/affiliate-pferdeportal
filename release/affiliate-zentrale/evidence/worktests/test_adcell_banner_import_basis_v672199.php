@@ -4,7 +4,7 @@
  * No WordPress bootstrap required: source-contract assertions only.
  */
 
-$root = dirname(__DIR__) . '/current/affiliate-portal-router';
+$root = dirname(__DIR__, 2) . '/current/affiliate-portal-router';
 $auto = (string) file_get_contents($root . '/includes/trait-ppar-automation-suite.php');
 
 $errors = array();
