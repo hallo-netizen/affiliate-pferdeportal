@@ -1,0 +1,139 @@
+name: TEMP Affiliate 6.72.199 Final Gate
+
+on:
+  push:
+    branches: [affiliate-release-current]
+    paths:
+      - '.github/workflows/tmp-affiliate-v672199-final.yml'
+      - 'release/affiliate-zentrale/current/**'
+      - 'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+      - 'release/affiliate-zentrale/evidence/worktests/**'
+
+permissions:
+  contents: read
+
+jobs:
+  final-gate:
+    runs-on: ubuntu-24.04
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: wordpress
+          MARIADB_USER: wordpress
+          MARIADB_PASSWORD: wordpress
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          coverage: none
+
+      - name: Guard and PHP lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 control/release-governance/release_guard.py governance-check
+          python3 control/release-governance/release_guard.py source-check
+          python3 control/release-governance/release_guard.py start --branch affiliate-release-current
+          find release/affiliate-zentrale/current/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Install exact current plugin into fresh WordPress
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x /tmp/wp
+          rm -rf /tmp/wp-site
+          mkdir -p /tmp/wp-site
+          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Affiliate 6.72.199 Final Gate' --admin_user=admin --admin_password='ci-pass-199!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-site/wp-content/plugins
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
+          mkdir -p /tmp/wp-site/wp-content/mu-plugins
+          cat >/tmp/wp-site/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return get_post_field('post_parent',$page_id) ? 'category' : 'hub1'; }
+              }
+          }
+          PHP
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
+
+      - name: Run exact five-test basis gate
+        shell: bash
+        env:
+          WP_CLI: /tmp/wp
+          PPAR_REAL_PROVIDER_GATE: '1'
+          PPAR_ADCELL_USERNAME: ${{ secrets.PPAR_ADCELL_USERNAME }}
+          PPAR_ADCELL_PASSWORD: ${{ secrets.PPAR_ADCELL_PASSWORD }}
+          PPAR_ADCELL_PROGRAM_IDS: ${{ secrets.PPAR_ADCELL_PROGRAM_IDS }}
+        run: |
+          set -euo pipefail
+          bash release/affiliate-zentrale/evidence/worktests/run_banner_import_basis_v672199.sh /tmp/wp-site
+
+      - name: Existing banner regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          php AFFILIATE_HOBBYRAUM/test_banner_distribution_behavior.php
+
+      - name: Build exact installer and fresh-unpack verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP=/tmp/AFFILIATE_ZENTRALE_6.72.199.zip
+          rm -f "$ZIP"
+          (cd release/affiliate-zentrale/current && zip -qr "$ZIP" affiliate-portal-router)
+          unzip -t "$ZIP"
+          rm -rf /tmp/final-unpack
+          mkdir -p /tmp/final-unpack
+          unzip -q "$ZIP" -d /tmp/final-unpack
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          repo=Path('.')
+          manifest=repo/'release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt'
+          unpack=Path('/tmp/final-unpack')
+          expected={}
+          for raw in manifest.read_text(encoding='utf-8').splitlines():
+              if not raw.strip(): continue
+              digest,rel=raw.split(None,1)
+              expected[rel.strip()]=digest
+          actual={}
+          for p in unpack.rglob('*'):
+              if p.is_file():
+                  actual[p.relative_to(unpack).as_posix()]=hashlib.sha256(p.read_bytes()).hexdigest()
+          if set(actual)!=set(expected):
+              raise SystemExit('FAIL installer_file_list')
+          bad=[r for r,h in expected.items() if actual.get(r)!=h]
+          if bad:
+              raise SystemExit('FAIL installer_hash '+','.join(sorted(bad)))
+          print(f'PASS INSTALLER_BYTE_IDENTITY_{len(expected)}_OF_{len(expected)}')
+          PY
+          find /tmp/final-unpack/affiliate-portal-router -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          sha256sum "$ZIP"
+          stat -c%s "$ZIP"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AFFILIATE_ZENTRALE_6.72.199
+          path: /tmp/AFFILIATE_ZENTRALE_6.72.199.zip
+          if-no-files-found: error
+          retention-days: 30
