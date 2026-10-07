@@ -4061,7 +4061,7 @@ JS;
             && sanitize_key((string)($campaign['source']??'')) === 'output_object_v4';
         if ($library_banner) {
             if (is_array($automation_rank)) { return $automation_rank; }
-            // Ein ausdrücklich in der Creative-Library als allgemein gespeicherter
+            // Ein ausdruecklich in der Creative-Library als allgemein gespeicherter
             // Banner ist selbst eine bewusste Zuordnung und darf als Portal-
             // Fallback liefern. Ein Banner mit konkreter, aber hier unpassender
             // Zielkante bleibt dagegen fail-closed.
