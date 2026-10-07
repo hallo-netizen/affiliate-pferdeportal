@@ -1,0 +1,199 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_009_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_009_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:murmelbahnbau",
+      "canonical_name": "Murmelbahnbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Canonical owner for building marble/ball tracks: layout, slopes, modules, switches, lifts and tuning."
+    },
+    {
+      "hobby_id": "hobby:kugelbahnen",
+      "canonical_name": "Kugelbahnen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:murmelbahnbau",
+      "natural_world": "fertigen",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "Same underlying hobby as Murmelbahnbau; preserve source term but do not create a second SEO owner."
+    },
+    {
+      "hobby_id": "hobby:mechanische-automaten",
+      "canonical_name": "mechanische Automaten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns automata mechanisms, cams/gears/linkages, structures, motion sequences and finishing."
+    },
+    {
+      "hobby_id": "hobby:automatenfiguren",
+      "canonical_name": "Automatenfiguren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns figure/character-focused automata; generic mechanisms remain with mechanische Automaten."
+    },
+    {
+      "hobby_id": "hobby:kinetic-art",
+      "canonical_name": "Kinetic Art",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns art driven by motion, balance, wind/motors, mechanisms and installation/composition."
+    },
+    {
+      "hobby_id": "hobby:miniatur-kirmes",
+      "canonical_name": "Miniatur-Kirmes",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns fairground miniatures, rides, lighting, scenery and operation/display."
+    },
+    {
+      "hobby_id": "hobby:funktionsmodelle",
+      "canonical_name": "Funktionsmodelle",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic orientation to functional models; model machines, RC models and specific functional model types keep their own intents."
+    },
+    {
+      "hobby_id": "hobby:schmieden",
+      "canonical_name": "Schmieden",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns general forging, forge setup, tools, stock preparation, shaping, heat treatment and finishing. Artistic forging keeps its design-specific intents."
+    },
+    {
+      "hobby_id": "hobby:kunstschmieden",
+      "canonical_name": "Kunstschmieden",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns decorative/artistic forged forms, scrolls, texture, composition and architectural objects; generic forging basics remain with Schmieden."
+    },
+    {
+      "hobby_id": "hobby:messingarbeiten",
+      "canonical_name": "Messingarbeiten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns brass-specific cutting, forming, joining, surface finishing and project work."
+    },
+    {
+      "hobby_id": "hobby:kupfertreiben",
+      "canonical_name": "Kupfertreiben",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns repoussé/raising/chasing-style copper forming, tools, annealing and finishing."
+    },
+    {
+      "hobby_id": "hobby:zinngieen",
+      "canonical_name": "Zinngießen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns small-scale tin casting and mold/project specifics; generic metal casting remains with Metallgießen."
+    },
+    {
+      "hobby_id": "hobby:metallgieen",
+      "canonical_name": "Metallgießen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic metal-casting orientation. Sandguss, Schmuckguss and material-specific casting keep specific ownership."
+    },
+    {
+      "hobby_id": "hobby:sandguss",
+      "canonical_name": "Sandguss",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns sand molds, patterns, gating, pouring and casting cleanup."
+    },
+    {
+      "hobby_id": "hobby:schmuckguss",
+      "canonical_name": "Schmuckguss",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns jewelry-specific wax/model preparation, investment/molds, casting and finishing."
+    },
+    {
+      "hobby_id": "hobby:silberschmieden",
+      "canonical_name": "Silberschmieden",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns silver fabrication, forming, soldering, setting/basic construction and finishing."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 10,
+    "orientation_universe": 2,
+    "editorial_topic": 2,
+    "alias_only": 1,
+    "seo_enrichment_pending": 15,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 009 to ledger and generate the next batch."
+}
