@@ -1314,11 +1314,19 @@ trait PPAR_Output_Objects_Trait {
         $slug = sanitize_key((string)($target['slug'] ?? ''));
 
         if ($family === 'kosten') {
-            // Realer Pferde-Atelier-Baum: Kosten ist KEIN Root-Ast. Die
-            // Kosten-Themen sind verteilte Blattkategorien, durchgehend
-            // "Kosten ..." und ...-kosten. Beides muss stimmen.
-            return preg_match('/^kosten(?:\s|$)/u', $leaf) === 1
-                && preg_match('/-kosten$/', $slug) === 1;
+            // KISS: "Kosten" ist kein eigener Root-Ast, sondern kommt als
+            // verteilte Blattkategorie in verschiedenen Fachstraengen vor.
+            // Deshalb reicht genau ein strukturelles Merkmal: echte Blattkategorie
+            // + "kosten" im Blatt/Pfad ODER im Slug. Keine Prefix+Suffix-Doppelhuerde.
+            if (sanitize_key((string)($target['context'] ?? '')) !== 'leaf_category') {
+                return false;
+            }
+            foreach ($parts as $part) {
+                if (preg_match('/(^|\s)kosten(\s|$)/u', $part) === 1) {
+                    return true;
+                }
+            }
+            return strpos($slug, 'kosten') !== false;
         }
         if ($family === 'versicherung') {
             // Versicherungsbanner bleiben ausschließlich in echten Blatt-
