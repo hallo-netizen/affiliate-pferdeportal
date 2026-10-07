@@ -782,3 +782,32 @@ HD-001 V1.12.4, automatische Zero-Cost-Neuauswertung des gespeicherten V1.12.3-E
 
 OFFEN:
 Nur reale Neuauswertung in Hobby Depot; keine weitere DataForSEO-Recherche.
+
+
+## HOBBYRAUSCH-HD001-20261007-O – Root Cause geschlossen: Content Capacity ≠ Provider-Zeilen
+
+WAS:
+Die gesamte Batch-001-Fehlerkette wurde gegen Konzept und echtes V1.12.3-Ergebnis erneut durchgeprüft.
+
+ROOT CAUSE:
+Die fachliche Frage „Wie viele eigenständige Beiträge trägt die unterste Kategorie?“ war schrittweise mit DataForSEO-Zeilen verwechselt worden.
+
+VERBINDLICHE KISS-REGEL:
+- Fachlogik zählt eigenständige Artikelintents.
+- DataForSEO prüft Nachfrage, Synonyme, Core Keywords und Intent-Überschneidung.
+- DataForSEO darf fachliche Dubletten zusammenführen.
+- Fehlende exakte Longtail-Zeile entfernt keinen fachlich eigenständigen Intent.
+- Provider-Rohzeilen erzeugen keine neuen Artikel.
+- automatische Keyword-Ideas-Tiefenrecherche ist im Normalweg nicht erforderlich.
+
+UMSETZUNG:
+Regelvertrag 1.4 + HD-001 V1.12.5.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
+
+ERGEBNIS:
+Der echte gespeicherte Batch wurde ohne neue Calls/Kosten/Writes lokal bis zum Endergebnis neu gerechnet und hart getestet.
+
+OFFEN:
+Nur noch ein einmaliger realer WordPress-Readback desselben V1.12.5-Endstands.
