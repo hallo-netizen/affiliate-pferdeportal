@@ -1,0 +1,196 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_012_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_012_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:modellblumen",
+      "canonical_name": "Modellblumen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns miniature/model-scale flower making; full-size artificial flower craft stays with Kunstblumenbau."
+    },
+    {
+      "hobby_id": "hobby:polymer-clay",
+      "canonical_name": "Polymer Clay",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns polymer-clay conditioning, sculpting, baking, surface effects and finishing."
+    },
+    {
+      "hobby_id": "hobby:cold-porcelain",
+      "canonical_name": "Cold Porcelain",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns cold-porcelain modeling, mixing/conditioning, forming, drying and coloring/sealing."
+    },
+    {
+      "hobby_id": "hobby:topfern",
+      "canonical_name": "Töpfern",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns general pottery: clay prep, handbuilding/wheel, drying, firing, basic glaze and studio workflow. Raku/glaze-specialist intents remain separate."
+    },
+    {
+      "hobby_id": "hobby:raku",
+      "canonical_name": "Raku",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns raku-specific clay/glaze choices, firing, reduction and finishing."
+    },
+    {
+      "hobby_id": "hobby:keramikglasuren",
+      "canonical_name": "Keramikglasuren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns glaze formulation/use, application, test tiles, firing behavior and defects."
+    },
+    {
+      "hobby_id": "hobby:mosaik",
+      "canonical_name": "Mosaik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns mosaic design, tesserae, cutting, substrates/adhesives, grouting and finishing."
+    },
+    {
+      "hobby_id": "hobby:mikromosaik",
+      "canonical_name": "Mikromosaik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns miniature-scale mosaic materials, micro-tesserae, precision placement and finishing."
+    },
+    {
+      "hobby_id": "hobby:glasmalerei",
+      "canonical_name": "Glasmalerei",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns painting/enameling on glass, surface prep, paints, firing/non-fired systems and finishing."
+    },
+    {
+      "hobby_id": "hobby:tiffanyglas",
+      "canonical_name": "Tiffanyglas",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns copper-foil stained glass design, cutting/grinding, foiling, soldering and patina/finishing."
+    },
+    {
+      "hobby_id": "hobby:glasperlen-drehen",
+      "canonical_name": "Glasperlen drehen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns lampworked glass beads, torch setup, glass handling, shaping, decoration and annealing."
+    },
+    {
+      "hobby_id": "hobby:glasfusing",
+      "canonical_name": "Glasfusing",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns fused-glass design, compatibility, kiln schedules, layering, slumping and finishing."
+    },
+    {
+      "hobby_id": "hobby:glasblasen",
+      "canonical_name": "Glasblasen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns glassblowing studio practice, gathers, shaping, tools, annealing and basic forms."
+    },
+    {
+      "hobby_id": "hobby:glasgravur",
+      "canonical_name": "Glasgravur",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns engraved glass design, rotary/hand tools, techniques and finishing."
+    },
+    {
+      "hobby_id": "hobby:glasschliff",
+      "canonical_name": "Glasschliff",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns cutting/grinding/polishing glass edges and surfaces, abrasives and finishing."
+    },
+    {
+      "hobby_id": "hobby:spiegelgravur",
+      "canonical_name": "Spiegelgravur",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns engraving specifically on mirrors/coated glass; generic glass engraving stays with Glasgravur."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 14,
+    "editorial_topic": 2,
+    "seo_enrichment_pending": 16,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 012 to ledger and continue."
+}
