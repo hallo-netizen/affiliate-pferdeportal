@@ -1,0 +1,445 @@
+{
+  "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "ACTIVE_PILOT_RULESET",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841,
+    "research_queue_entries": 19
+  },
+  "protected_architecture": {
+    "top_worlds": [
+      "gestalten",
+      "fertigen",
+      "technik",
+      "forschen",
+      "pflanzen",
+      "tiere",
+      "bewegen",
+      "sammeln"
+    ],
+    "top_worlds_are_core_level_1": true,
+    "hobbywelten_is_view_only": true,
+    "pillars": [
+      "CORE",
+      "EDITORIAL",
+      "DIRECTORY"
+    ],
+    "dataforseo_may_define_structure": false
+  },
+  "output_contract": {
+    "portal_roles": [
+      "ORIENTATION_UNIVERSE",
+      "HOBBY_HUB",
+      "EDITORIAL_TOPIC",
+      "ARTICLE_ONLY",
+      "FINDER_ONLY",
+      "OUT_OF_SCOPE"
+    ],
+    "size_classes": [
+      "MICRO",
+      "FIT",
+      "MACRO"
+    ],
+    "primary_pillars": [
+      "CORE",
+      "EDITORIAL",
+      "FINDER",
+      "NONE"
+    ],
+    "decision_states": [
+      "ASSESSED",
+      "PARTIAL",
+      "EVIDENCE_REQUIRED",
+      "SCOPE_REVIEW",
+      "OUT_OF_SCOPE"
+    ],
+    "rule": "No field may be inferred from monetization or SEO demand alone. Missing required evidence produces EVIDENCE_REQUIRED, never a guessed value."
+  },
+  "gates": [
+    {
+      "order": 1,
+      "id": "A_SCOPE",
+      "required_inputs": [
+        "active_repeatable_leisure_practice",
+        "teachable_or_practicable_core",
+        "natural_world"
+      ],
+      "rules": [
+        {
+          "priority": 1,
+          "when": {
+            "explicit_out_of_scope_evidence": true
+          },
+          "result": {
+            "scope_status": "OUT_OF_SCOPE",
+            "decision_state": "OUT_OF_SCOPE"
+          }
+        },
+        {
+          "priority": 2,
+          "when": {
+            "natural_world_not_in_protected_worlds": true
+          },
+          "result": {
+            "scope_status": "SCOPE_REVIEW",
+            "decision_state": "SCOPE_REVIEW"
+          }
+        },
+        {
+          "priority": 3,
+          "when": {
+            "all_required_inputs_true": true,
+            "natural_world_in_protected_worlds": true
+          },
+          "result": {
+            "scope_status": "IN_SCOPE"
+          }
+        },
+        {
+          "priority": 4,
+          "when": {
+            "master_scope_status": "IN_SCOPE_PROVISIONAL",
+            "natural_world_in_protected_worlds": true
+          },
+          "result": {
+            "scope_status": "IN_SCOPE_PROVISIONAL"
+          },
+          "note": "Legacy evidence may pass the candidate into later gates but does not become final scope evidence by itself."
+        },
+        {
+          "priority": 5,
+          "when": {
+            "required_input_missing": true
+          },
+          "result": {
+            "scope_status": "UNASSESSED",
+            "decision_state": "EVIDENCE_REQUIRED"
+          }
+        }
+      ],
+      "hard_rule": "Never invent a ninth world and never force a candidate into an unnatural world."
+    },
+    {
+      "order": 2,
+      "id": "B_IDENTITY",
+      "required_inputs": [
+        "hobby_id_or_research_key",
+        "canonical_name",
+        "aliases"
+      ],
+      "rules": [
+        {
+          "priority": 1,
+          "when": {
+            "canonical_or_alias_collision_with_existing_identity": true
+          },
+          "result": {
+            "identity_action": "MERGE_OR_ALIAS_REVIEW",
+            "new_hobby_id_allowed": false
+          }
+        },
+        {
+          "priority": 2,
+          "when": {
+            "existing_master_identity_unique": true
+          },
+          "result": {
+            "identity_action": "KEEP_STABLE_ID"
+          }
+        },
+        {
+          "priority": 3,
+          "when": {
+            "research_candidate_no_collision": true,
+            "scope_status": "IN_SCOPE"
+          },
+          "result": {
+            "identity_action": "NEW_PROVISIONAL_ID_ALLOWED"
+          },
+          "note": "Create no publishable node; only add a provisional master identity."
+        },
+        {
+          "priority": 4,
+          "when": {
+            "research_candidate_scope_not_final": true
+          },
+          "result": {
+            "identity_action": "HOLD_IN_RESEARCH_QUEUE"
+          }
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "id": "C_CONTENT_CAPACITY",
+      "required_inputs": [
+        "distinct_intents",
+        "viable_leaf_categories",
+        "estimated_articles"
+      ],
+      "leaf_rules": [
+        {
+          "when": {
+            "distinct_intents_max": 3
+          },
+          "result": "NO_LEAF_CATEGORY"
+        },
+        {
+          "when": {
+            "distinct_intents": 4
+          },
+          "result": "LEAF_EXCEPTION_REVIEW"
+        },
+        {
+          "when": {
+            "distinct_intents_min": 5,
+            "distinct_intents_max": 12
+          },
+          "result": "LEAF_FIT"
+        },
+        {
+          "when": {
+            "distinct_intents_min": 13,
+            "distinct_intents_max": 15
+          },
+          "result": "LEAF_SPLIT_REVIEW"
+        },
+        {
+          "when": {
+            "distinct_intents_min": 16
+          },
+          "result": "LEAF_SPLIT_REQUIRED"
+        }
+      ],
+      "hub_rules": [
+        {
+          "when": {
+            "viable_leaf_categories_max": 2
+          },
+          "result": {
+            "size_class": "MICRO"
+          }
+        },
+        {
+          "when": {
+            "viable_leaf_categories_min": 3,
+            "viable_leaf_categories_max": 6
+          },
+          "result": {
+            "size_class": "FIT"
+          }
+        },
+        {
+          "when": {
+            "viable_leaf_categories_min": 7,
+            "viable_leaf_categories_max": 8
+          },
+          "result": {
+            "decision_state": "EVIDENCE_REQUIRED",
+            "review": "MACRO_OR_SPLIT_REVIEW"
+          }
+        },
+        {
+          "when": {
+            "viable_leaf_categories_min": 9
+          },
+          "result": {
+            "size_class": "MACRO"
+          }
+        }
+      ],
+      "macro_overrides": [
+        "more_than_8_durable_leaf_categories",
+        "multiple_distinct_activity_identities",
+        "would_behave_like_own_portal"
+      ],
+      "missing_evidence_result": {
+        "decision_state": "EVIDENCE_REQUIRED"
+      },
+      "hard_rule": "Article or leaf counts are counts of distinct user/search intents, not wording variants."
+    },
+    {
+      "order": 4,
+      "id": "D_PORTAL_ROLE",
+      "rules": [
+        {
+          "when": {
+            "scope_status": "OUT_OF_SCOPE"
+          },
+          "result": {
+            "portal_role": "OUT_OF_SCOPE",
+            "primary_pillar": "NONE"
+          }
+        },
+        {
+          "when": {
+            "scope_status": "IN_SCOPE",
+            "size_class": "FIT",
+            "viable_leaf_categories_min": 3,
+            "viable_leaf_categories_max": 6,
+            "ownership_clear": true
+          },
+          "result": {
+            "portal_role": "HOBBY_HUB",
+            "primary_pillar": "CORE"
+          }
+        },
+        {
+          "when": {
+            "scope_status": "IN_SCOPE",
+            "size_class": "MACRO",
+            "decomposes_into_multiple_hobby_units": true,
+            "orientation_page_nonredundant": true,
+            "ownership_clear": true
+          },
+          "result": {
+            "portal_role": "ORIENTATION_UNIVERSE",
+            "primary_pillar": "CORE"
+          }
+        },
+        {
+          "when": {
+            "scope_status": "IN_SCOPE",
+            "size_class": "MICRO",
+            "estimated_articles_min": 5,
+            "ownership_clear": true
+          },
+          "result": {
+            "portal_role": "EDITORIAL_TOPIC",
+            "primary_pillar": "EDITORIAL"
+          }
+        },
+        {
+          "when": {
+            "scope_status": "IN_SCOPE",
+            "size_class": "MICRO",
+            "estimated_articles_min": 1,
+            "estimated_articles_max": 4,
+            "ownership_clear": true
+          },
+          "result": {
+            "portal_role": "ARTICLE_ONLY",
+            "primary_pillar": "EDITORIAL"
+          }
+        },
+        {
+          "when": {
+            "scope_status": "IN_SCOPE",
+            "size_class": "MICRO",
+            "estimated_articles": 0
+          },
+          "result": {
+            "portal_role": "FINDER_ONLY",
+            "primary_pillar": "FINDER"
+          }
+        },
+        {
+          "when": {
+            "required_role_input_missing": true
+          },
+          "result": {
+            "decision_state": "EVIDENCE_REQUIRED"
+          }
+        }
+      ],
+      "hard_rule": "DIRECT or ASSISTED monetization may raise priority/prominence but is never sufficient to create HOBBY_HUB or ORIENTATION_UNIVERSE."
+    },
+    {
+      "order": 5,
+      "id": "E_ECONOMICS",
+      "rules": [
+        {
+          "when": {
+            "monetization_fit_in": [
+              "DIRECT",
+              "ASSISTED"
+            ]
+          },
+          "result": {
+            "commercial_priority": "ELIGIBLE_FOR_PROMINENCE"
+          }
+        },
+        {
+          "when": {
+            "monetization_fit_in": [
+              "NONE",
+              "UNKNOWN"
+            ]
+          },
+          "result": {
+            "commercial_priority": "NO_AUTO_PROMOTION",
+            "retention": "KEEP_IF_SCOPE_VALID"
+          }
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "id": "F_OWNERSHIP",
+      "required_inputs": [
+        "primary_intents",
+        "existing_owner_map"
+      ],
+      "rules": [
+        {
+          "when": {
+            "primary_intent_owner_conflict": true
+          },
+          "result": {
+            "decision_state": "EVIDENCE_REQUIRED",
+            "publish_allowed": false
+          }
+        },
+        {
+          "when": {
+            "primary_intent_owner_conflict": false
+          },
+          "result": {
+            "ownership_clear": true
+          }
+        }
+      ],
+      "hard_rule": "Exactly one SEO owner per primary intent across CORE, EDITORIAL and DIRECTORY. Other pillars may relate/filter/link only."
+    }
+  ],
+  "research_queue_intake": {
+    "counted_in_current_841": false,
+    "sequence": [
+      "A_SCOPE",
+      "B_IDENTITY",
+      "C_CONTENT_CAPACITY",
+      "D_PORTAL_ROLE",
+      "E_ECONOMICS",
+      "F_OWNERSHIP"
+    ],
+    "create_master_identity_only_when": [
+      "scope_status == IN_SCOPE",
+      "identity_action == NEW_PROVISIONAL_ID_ALLOWED"
+    ],
+    "provisional_entry_defaults": {
+      "retention": "KEEP",
+      "assessment_status": "PENDING",
+      "monetization_fit": "UNKNOWN",
+      "structural_role": "UNASSESSED",
+      "publication_role": "UNASSESSED"
+    },
+    "hard_rule": "expected_world and initial_size_hypothesis are hypotheses only. They may select what to research but may not become final structure without gate evidence."
+  },
+  "batch_001_selection": {
+    "order": "stable and reproducible",
+    "steps": [
+      "For each protected world in protected_architecture.top_worlds, select lexicographically first hobby_id with scope_status=IN_SCOPE_PROVISIONAL.",
+      "Add every current master entry with at least one alias.",
+      "Add lexicographically first four hobby_id values with scope_status=UNASSESSED.",
+      "Deduplicate by hobby_id preserving first occurrence."
+    ],
+    "expected_count": 16
+  },
+  "promotion_gate": {
+    "to_assessed": "All required gates for the chosen portal_role have evidence and ownership is clear.",
+    "to_target_tree": "assessment_status=ASSESSED only. PARTIAL, EVIDENCE_REQUIRED and SCOPE_REVIEW never create/alter target-tree nodes."
+  }
+}
