@@ -19,9 +19,12 @@ command -v "$WP_CLI" >/dev/null 2>&1 || [ -x "$WP_CLI" ] || fail "WP-CLI fehlt: 
 
 cd "$REPO_ROOT"
 
+CURRENT_BRANCH="$(git branch --show-current 2>/dev/null || true)"
+[ "$CURRENT_BRANCH" = "affiliate-release-current" ] || fail "falscher Git-Branch: ${CURRENT_BRANCH:-none}"
+
 python3 control/release-governance/release_guard.py governance-check
 python3 control/release-governance/release_guard.py source-check
-python3 control/release-governance/release_guard.py start --branch affiliate-release-current
+python3 control/release-governance/release_guard.py start --branch "$CURRENT_BRANCH"
 
 php release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php
 
