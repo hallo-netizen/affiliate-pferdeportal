@@ -45,10 +45,11 @@ trait PPAR_Control_Contract_Trait {
         );
     }
 
-    private function control_prime_portal_decision_cache($portal_key) {
+    private function control_prime_portal_decision_cache($portal_key, $force_readonly = false) {
         $portal_key = sanitize_key((string) $portal_key);
-        if ($portal_key === '' || !$this->control_request_local_read_cache_allowed()) { return false; }
+        if ($portal_key === '') { return false; }
         if (!empty($this->control_decision_portal_cache_loaded[$portal_key])) { return true; }
+        if (!$force_readonly && !$this->control_request_local_read_cache_allowed()) { return false; }
         global $wpdb;
         $rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$this->control_decisions_table()} WHERE portal_key=%s", $portal_key), ARRAY_A);
         if (!is_array($rows)) { return false; }
