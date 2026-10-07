@@ -286,16 +286,16 @@ Ergebnis:
 Ausführung/Evidence:
 `HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
 
-Befund:
+Aktueller Befund nach Regeln 1.4 und V1.12.5-Real-Result-Replay:
 - 16/16 hobby_id-Werte eindeutig;
-- 4 aktuelle Alias-/Kanonikbindungen bestätigt;
-- 12 semantische Identitäts-/Unterformprüfungen bleiben offen;
-- 2 Scope-Fälle durch Pilot fachlich bestätigt;
-- 9 weitere nur provisional gebunden;
-- 5 benötigen Scope-Evidenz;
-- nur Buchbinden besitzt bereits genug Größen-/Pilot-Evidenz für FIT + HOBBY_HUB;
-- Treibholz sammeln bleibt sicher EDITORIAL, aber ARTICLE_ONLY vs. EDITORIAL_TOPIC bleibt offen;
-- übrige Kandidaten bleiben wegen fehlender Content-Capacity-Evidenz fail-closed.
+- 4 aktuelle Alias-/Kanonikbindungen stabil;
+- fachliche Content Capacity ist nicht mehr an das Vorhandensein jeder einzelnen exakten DataForSEO-Longtail-Zeile gebunden;
+- 34 vorgeschlagene Leafs liegen nach fachlicher Intent-Zählung im Idealbereich;
+- Buchbinden = vollständiger HOBBY_HUB_CANDIDATE;
+- Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen und Wabikusa liegen kapazitätsseitig im typischen Hubbereich, bleiben aber wegen Scope-/Identitätsprüfung EVIDENCE_REQUIRED;
+- Treibholz sammeln = EDITORIAL_TOPIC_CANDIDATE;
+- 3D-Druck, Amateurastronomie und Filzen = MACRO_REVIEW;
+- fünf kleine/spezielle Themen = AGGREGATION_REVIEW.
 
 Kein Zielbaum-Write aus Batch 001.
 
@@ -321,14 +321,13 @@ Es ist KEIN Zielbaum-Delta und erzeugt keinen WordPress-/HivePress-/Frontend-Kno
 
 ## 13. Nächster Arbeitsblock
 
-1. Fehlende Scope-/Content-Capacity-/Ownership-Evidenz für Batch 001 erzeugen.
-2. Batch 001 erneut durch die gebundenen Regeln laufen lassen.
-3. Nur `ASSESSED`-Fälle dürfen anschließend in die Gesamtbewertung einfließen.
-4. Parallel die Research Queue kontrolliert durch Gate A/B führen; keine Blind-Promotion.
-5. Danach Master batchweise fortsetzen.
-6. Erst nach belastbarer Gesamtbewertung V1.12-Zielbaum als Delta aktualisieren.
+1. Genau einen realen V1.12.5-Readback des bereits vollständig lokal geprüften Batch-001-Endstands erzeugen.
+2. Danach offene Scope-/Identitäts-/Ownership-Fälle klären; Content Capacity selbst ist für die fachlich vorgeschlagenen Intents nach Regeln 1.4 berechnet.
+3. Nur belastbar bewertete Fälle dürfen in die Gesamtbewertung einfließen.
+4. Danach Master batchweise mit derselben stabilen KISS-Logik fortsetzen.
+5. Erst nach belastbarer Gesamtbewertung den Zielbaum als Delta aktualisieren.
 
-Damit wird weder aus Monetarisierung noch aus Bekanntheit eine Taxonomie erfunden.
+Damit wird weder aus Monetarisierung noch aus DataForSEO-Rohzeilen eine Taxonomie erfunden.
 
 
 ## 14. Nachgeholte Leaf-Kapazitätsregel
@@ -349,7 +348,7 @@ Synonyme und Formulierungsvarianten zählen nicht mehrfach.
 Ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs.
 
 Maschinenlesbar gebunden in:
-`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` Version 1.2.
+`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` Version 1.4.
 
 ## 15. Zusammenfassung kleiner valider Hobbys
 
@@ -372,35 +371,33 @@ Eine neue Zwischenkategorie darf erst im späteren Gesamt-Zielbaum-Delta entsteh
 Fachvorprüfung:
 `HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
 
-Sie enthält:
-- mögliche Leaf-/Artikelintents;
-- Macro-/Split-Kandidaten;
-- mögliche Zusammenfassungen kleiner Themen;
-- keine erfundenen SEO-Zahlen.
+Sie definiert die fachlichen Leaf-/Artikelkandidaten.
 
-DataForSEO-Request:
-`HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
+Reale DataForSEO-Evidence ist inzwischen vorhanden:
+- 39 historische Provider-Aufrufe;
+- ca. 0.9738 USD historische Kosten;
+- 0 Strukturwrites.
 
-Realer vorhandener Buchbinden-Befund:
-- Einstieg = 4 distinct Gruppen;
-- Ausrüstung = 5;
-- Material = 3;
-- Techniken/Praxis = 4;
-- Fragen/Probleme = 0;
-- FAQ = 0.
+Die Tiefenläufe haben gezeigt, warum DataForSEO-Rohzeilen NICHT als Artikel gezählt werden dürfen.
 
-Damit bleibt der bestehende Pilot erhalten, ist nach der neuen V2-Regel aber noch kein endgültiger HOBBY_HUB-PASS.
+Verbindliche KISS-Korrektur Regeln 1.4:
+- Fachlogik zählt eigenständige Artikelintents;
+- DataForSEO reichert an und dedupliziert;
+- fehlende exakte Longtail-Zeilen löschen keinen fachlich eigenständigen Artikelintent;
+- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen keine Artikel;
+- automatische Depth-Recherche ist kein Normalweg.
 
-Für die übrigen Batch-001-Kandidaten fehlen im geprüften Bestand reale passende DataForSEO-Ergebnisse.
-Keine Schätzung.
+Lokaler Endreplay:
+`HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
 
 ## 17. Aktueller Arbeitsweg
 
-1. vorbereiteten Batch-001-Request real über DataForSEO ausführen;
-2. Synonyme/Varianten deduplizieren;
-3. Ownership über CORE / EDITORIAL / DIRECTORY prüfen;
-4. jede Leaf-Kategorie separat zählen;
-5. bei dünnen validen Hobbys Aggregation prüfen;
-6. Batch 001 erneut bewerten;
-7. erst bei stabilem Regelverhalten die Gesamtbewertung fortsetzen;
-8. erst danach Zielbaum-Delta.
+1. V1.12.5 einmal real in Hobby Depot öffnen und kostenlosen Recalc-Readback erzeugen.
+2. Readback gegen den lokalen V1.12.5-Endreplay prüfen.
+3. Danach Scope/Identität/Ownership der sechs kapazitätsseitig tragfähigen, aber noch nicht final freigegebenen Hubfälle klären.
+4. Kleine Themen auf Aggregation prüfen.
+5. Master mit derselben KISS-Logik batchweise fortsetzen.
+6. Erst danach Zielbaum-Delta.
+
+Keine weitere automatische Keyword-Ideas-Tiefenrecherche.
+Keine WordPress-/HivePress-Strukturänderung vor dem späteren Zielbaum-Delta.
