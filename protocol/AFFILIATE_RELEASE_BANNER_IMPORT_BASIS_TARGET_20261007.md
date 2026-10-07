@@ -110,3 +110,52 @@ Zusätzlich ausdrücklich vom Nutzer gebunden:
 
 
 - Tarifcheck und CHECK24 dürfen denselben bestehenden Direktpartner-Familienweg für **Versicherungen** bzw. **Kreditvergleich/Kosten** benutzen. Die Partneridentität bleibt getrennt; es wird kein CHECK24-API-Vertrag erfunden.
+
+## 9. Verbindlicher KISS-Bannervertrag – Zuordnung, Format, Verteilung, Lebenszyklus
+
+Nach erfolgreicher Importbasis gilt für die Bannerverarbeitung genau ein einfacher Vertrag:
+
+1. **Tiefstes belastbares Ziel**
+   - Jeder Banner wird beim Import/Reconcile genau der tiefsten belastbar bestimmbaren Portal-Kategorie zugeordnet.
+   - Evidenzreihenfolge: reale/aufgelöste Ziel-URL -> echte Provider-Kategorie -> echter Bannername/-text.
+   - Mehrdeutigkeit wird nicht geraten.
+   - Für die gewählte Kategorie wird der vollständige Elternpfad desselben Strangs gespeichert.
+
+2. **Ausspielung nur im eigenen Strang**
+   - Ein zugeordneter Banner darf auf seiner tiefsten Kategorie und auf den gespeicherten Elternkategorien desselben Strangs erscheinen.
+   - Er darf nicht in fachfremde Seitenzweige ausweichen.
+   - Die Frontend-Runtime klassifiziert nicht neu; sie liest ausschließlich die gespeicherte Ziel-/Pfadkarte.
+
+3. **Format vor Verteilung**
+   - Zuerst muss der Banner den verbindlichen Slot-/Formatvertrag erfüllen; erst danach darf er in Auswahl oder Verteilung gelangen.
+   - Für Glossar-Einzelartikel gilt weiterhin:
+     - Desktop: Verhältnis 0,50 bis 1,50, Mindestbreite 310 px, max. 1,10 Upscale;
+     - Mobil: Verhältnis 2,50 bis 12,00, Mindestbreite 300 px, max. 1,10 Upscale.
+   - Unbekannte oder nur angenommene Maße sind kein Formatbeweis.
+
+4. **Fallback-Verteilung**
+   - Gibt es für ein Ziel keinen spezifisch passenden Banner, wird nur aus dem technisch und formatlich zulässigen allgemeinen aktiven Bannerbestand verteilt.
+   - Die Verteilung muss stabil und gleichmäßig sein; nicht überall darf derselbe Banner gewinnen.
+   - Bestehende deterministische Partner-/Creative-Verteilung wird wiederverwendet. Keine zweite Verteilungsmaschine.
+
+5. **Vergleichsrechner**
+   - Kredit-/Kreditvergleich-Banner werden auf **alle realen Kosten-Blattkategorien** gebunden.
+   - „Kosten“ ist kein eigener Root-Ast. Maßgeblich ist: echte Blattkategorie und „Kosten“ im realen Kategorienpfad oder Slug.
+   - Versicherungsbanner werden auf **alle realen Versicherungs-Blattkategorien** des vorgesehenen Versicherungsbereichs gebunden.
+   - Tarifcheck und CHECK24 verwenden dafür denselben fachlichen Familienvertrag bei getrennter Partneridentität.
+
+6. **Regelmäßiger Bestandabgleich**
+   - Neue Banner werden über die bestehende Provider-Automation eingelesen, technisch geprüft und anschließend zugeordnet.
+   - Nicht mehr gelieferte Banner werden nicht sofort gelöscht: erster vollständiger Fehlzyklus = Quarantäne, zweiter vollständiger Fehlzyklus = `inactive_missing` und automatische Kampagne deaktivieren.
+   - Manuelle FIXED-Entscheidungen bleiben getrennt erhalten.
+
+7. **Performance-/Datenbank-Hardlock**
+   - Kein Provider-HTTP im Frontend.
+   - Keine neue Frontend-DB-Abfrage für Zielbestimmung oder Verteilung.
+   - Keine Ziel-/Text-/URL-Neuklassifikation im Frontend.
+   - Reconcile ausschließlich im Hintergrund in kleinen Batches mit hartem Zeitdeckel.
+   - Keine neue Tabelle oder zweite Bannerarchitektur, solange die vorhandene Creative Library und gespeicherte Zielkarte ausreichen.
+
+Kurzform:
+`Import -> technisch prüfen -> tiefstes Ziel bestimmen -> Elternpfad speichern -> Format prüfen -> passende Banner wählen -> sonst stabil verteilen -> Bestand regelmäßig nachziehen`.
+
