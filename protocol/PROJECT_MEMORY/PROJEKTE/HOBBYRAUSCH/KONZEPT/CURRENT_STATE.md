@@ -67,7 +67,7 @@ Mögliche Rollen:
 Leaf-Kategorie:
 - Ziel 5–12 Beiträge;
 - 4 nur begründete Ausnahme;
-- 13–15 Split-Prüfung;
+- 13–14 Split-Prüfung;
 - >15 nur explizite Ausnahme.
 
 Hobby-Hub:
