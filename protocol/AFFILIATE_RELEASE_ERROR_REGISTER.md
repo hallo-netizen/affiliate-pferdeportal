@@ -1223,7 +1223,7 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 - `promotionCategoryId` über den belegten `getPromotionCategories(programId)`-Weg zum Kategorienamen auflösen;
 - nur echte Provider-Titelfelder verwenden; fehlender Titel bleibt als `provider_missing` gekennzeichnet;
 - Altbestand erst durch frischen echten ADCELL-Import ersetzen und erst danach reconciliieren;
-- neue Basis-/Upgrade-Tests liegen unter `release/affiliate-zentrale/tests/`.
+- neue Basis-/Upgrade-Tests liegen unter `release/affiliate-zentrale/evidence/worktests/`.
 
 **HARD STATUS:** Diese 6.72.199-Testdateien sind committed, aber am aktuellen Head existiert **kein ausgeführter Check-Run/PASS-Nachweis**. `CURRENT_SOURCE_SHA256.txt` und `CURRENT_RELEASE.json` waren beim Frischecheck noch auf 6.72.198 gebunden. Deshalb: **6.72.199 = WORKING / NICHT ABGENOMMEN / KEIN INSTALLER / NICHT LIVE INSTALLIEREN.**
 
