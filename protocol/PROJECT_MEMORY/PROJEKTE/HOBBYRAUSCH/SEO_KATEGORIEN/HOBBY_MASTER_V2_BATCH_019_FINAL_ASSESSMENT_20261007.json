@@ -1,0 +1,197 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_019_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_019_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:fossilienpraparation",
+      "canonical_name": "Fossilienpräparation",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns cleaning, mechanical/chemical preparation, stabilization and presentation of fossils."
+    },
+    {
+      "hobby_id": "hobby:bernstein-suchen",
+      "canonical_name": "Bernstein suchen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns recreational amber hunting, conditions/locations, identification and find handling."
+    },
+    {
+      "hobby_id": "hobby:meteoriten-suchen",
+      "canonical_name": "Meteoriten suchen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns field meteorite hunting, site research, search methods, identification and documentation."
+    },
+    {
+      "hobby_id": "hobby:mikrometeoriten-sammeln",
+      "canonical_name": "Mikrometeoriten sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns collecting/separating suspected micrometeorites, microscopy, identification and cataloging."
+    },
+    {
+      "hobby_id": "hobby:strandgut-sammeln",
+      "canonical_name": "Strandgut sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic beachcombing/strand-find orientation. Seeglas, Treibholz, Muscheln and other concrete find types keep specific owners."
+    },
+    {
+      "hobby_id": "hobby:seeglas-sammeln",
+      "canonical_name": "Seeglas sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns sea-glass hunting, identification, grading, cleaning, storage/display and responsible collecting."
+    },
+    {
+      "hobby_id": "hobby:muscheln-sammeln",
+      "canonical_name": "Muscheln sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns shell collecting, identification, ethical/legal collection, cleaning and display."
+    },
+    {
+      "hobby_id": "hobby:mineralien-sammeln",
+      "canonical_name": "Mineralien sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns mineral specimen collecting, identification, cataloging, storage/display and collection strategy."
+    },
+    {
+      "hobby_id": "hobby:kristalle-sammeln",
+      "canonical_name": "Kristalle sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns crystal-focused collecting/display; broader specimen ownership remains with Mineralien sammeln."
+    },
+    {
+      "hobby_id": "hobby:gesteine-sammeln",
+      "canonical_name": "Gesteine sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns rock collecting, field identification, classification, labeling and storage/display."
+    },
+    {
+      "hobby_id": "hobby:sand-sammeln",
+      "canonical_name": "Sand sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns sand specimen collection, locality documentation, drying, storage and visual/microscopic comparison."
+    },
+    {
+      "hobby_id": "hobby:bodenproben-sammeln",
+      "canonical_name": "Bodenproben sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns soil-sample collecting/documentation as a niche collection/science practice; analytical soil testing remains separate."
+    },
+    {
+      "hobby_id": "hobby:fossilien-sammeln",
+      "canonical_name": "Fossilien sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns fossil collections, identification, cataloging, storage/display and acquisition/field integration."
+    },
+    {
+      "hobby_id": "hobby:federn-sammeln",
+      "canonical_name": "Federn sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns lawful/ethical feather specimen documentation and collection where permitted; bird observation remains separate."
+    },
+    {
+      "hobby_id": "hobby:zapfen-sammeln",
+      "canonical_name": "Zapfen sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns cone collecting/identification/display as a small nature-find topic."
+    },
+    {
+      "hobby_id": "hobby:samen-sammeln",
+      "canonical_name": "Samen sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns seed specimen collecting as a collection topic; seed saving for propagation remains with Saatguterhaltung."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 9,
+    "orientation_universe": 1,
+    "editorial_topic": 6,
+    "seo_enrichment_pending": 16,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 019 to ledger and continue."
+}
