@@ -579,3 +579,39 @@ EVIDENZ:
 
 OFFEN:
 Realer HD-002-Gesamtbestand ist laut HD-002 Current erfasst, aber im verfügbaren Archiv derzeit nicht als vollständiger Export/Source gebunden. Echter Gesamtbaum daher noch nicht erzeugt.
+
+## HOBBYRAUSCH-HD001-20261007-I – Hobby-Master V2 integriert Breite, Monetarisierung und Portalgrenze
+
+WAS:
+Das Hobby-Depot-Konzept wurde nach V1.12 um eine vorgeschaltete Größen-/Rollen- und Portfolioebene erweitert.
+
+WARUM:
+Der bisherige Bestand war wirtschaftlich zu stark auf Nischen ausgerichtet; gleichzeitig würde das bloße Hinzufügen aller bekannten Hobbys Navigation und SEO-Architektur explodieren lassen.
+
+VERBINDLICHE REGEL:
+- drei Säulen bleiben: CORE / EDITORIAL / DIRECTORY;
+- acht Welten bleiben geschützt und bilden die oberste fachliche CORE-Ebene;
+- `Hobbywelten` ist nur Übersicht/View, nicht Parent der acht Welten;
+- große bekannte Hobbys dienen als wirtschaftliche Anker;
+- mittlere Hobbys bilden das Rückgrat;
+- Nischen bleiben als SEO-/Longtail-Stärke erhalten;
+- diese Klassen sind Eigenschaften/Präsentationsrollen, keine Parallel-Taxonomie;
+- großer interner Hobbybestand ist erlaubt, sichtbare Navigation bleibt klein;
+- vor dem Zielbaum entscheidet der HOBBY_MASTER V2 über Scope, Identität/Alias, Größe, Content Capacity und Publikationsrolle;
+- mögliche Rollen: ORIENTATION_UNIVERSE / HOBBY_HUB / EDITORIAL_TOPIC / ARTICLE_ONLY / FINDER_ONLY / OUT_OF_SCOPE;
+- Leaf-Ziel 5–12 Beiträge, Hobby-Hub-Ziel 3–6 tragfähige Leafs;
+- Monetarisierung beeinflusst CORE-Priorität, aber löscht keine validen Themen;
+- DataForSEO liefert Keyword-/Nachfrage-/Longtail-Evidenz, bestimmt aber weder Hauptwelt noch Parent noch structural_role;
+- alle drei Säulen, Hobbyfinder, Suche und kuratierte Views referenzieren dieselben kanonischen Identitäten;
+- pro Primärintent genau ein SEO-Owner.
+
+INTEGRATION:
+Der vorhandene V1.12-Zielbaum bleibt technische Baseline. Er wird nicht komplett neu erfunden, sondern nach abgeschlossener Masterbewertung per Delta fortgeschrieben.
+
+KORREKTUR:
+Die V1.12-Beziehung `Hobbywelten → acht Welten` ist als fachliche Hierarchie verworfen. Im nächsten Zielbaum-Delta stehen die acht Welten auf CORE-Ebene 1.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/KONZEPT/HOBBY_GROESSEN_ROLLENMODELL_20261007.md`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_INTEGRATION_20261007.md`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_PILOT_20261007.md`
