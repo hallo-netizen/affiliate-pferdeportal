@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 GESAMTPFAD LOKAL HARD PASS / EINMALIGER LIVE-READBACK OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 REALER EXPORT WAR STALE V1.12.3 / V1.12.6 EXPORT-HÄRTUNG LOKAL PASS / NEUER REALER EXPORT OFFEN
 
 ## Rolle
 
@@ -218,21 +218,21 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_V125_SINGLE_LIVE_READBACK_PENDING`
+`HD001_V2_BATCH001_V126_REAL_EXPORT_READBACK_PENDING`
 
-Kein weiterer Research-/DataForSEO-Schritt ist offen.
+Die Fach-/DataForSEO-Logik bleibt unverändert Regeln 1.4.
 
-Der komplette Batch-001-Pfad ist gegen das Konzept lokal bis zum Endergebnis geprüft.
+Der neue reale Download nach V1.12.5 war nachweislich noch das alte V1.12.3-Ergebnis. Ursache war ausschließlich der Exportweg: Recalc beim Seitenrendern, aber nicht im Download-Handler.
+
+V1.12.6 macht den Download selbst fail-closed und recalculiert den gespeicherten Altstand vor dem Export ohne Provider-Aufruf.
 
 ## EXAKT EINE NEXT ACTION
 
-Einmal HD-001 V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
+V1.12.6 installieren und direkt `Ergebnis als JSON herunterladen` klicken.
 
-Das vorhandene Ergebnis wird ohne Provider-Aufruf nach Regelvertrag 1.4 neu berechnet.
-
-Danach das Ergebnis-JSON einmal readback-prüfen.
+Danach genau dieses JSON readback-prüfen.
 
 Noch NICHT:
 - Zielbaum synchronisieren;
 - Kategorien schreiben;
-- neue Keyword-Ideas-Recherche starten.
+- neue DataForSEO-Recherche starten.
