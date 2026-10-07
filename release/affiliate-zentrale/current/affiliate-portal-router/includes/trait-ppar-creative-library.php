@@ -1195,8 +1195,11 @@ trait PPAR_Creative_Library_Trait {
                     $payload = json_decode((string)($stored_row['payload'] ?? ''), true);
                     $payload = is_array($payload) ? $payload : array();
                     $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? 'pending'));
+                    $asset_verified = in_array($dimension_state, array('verified','mismatch'), true)
+                        && absint($stored_row['width'] ?? 0) > 0
+                        && absint($stored_row['height'] ?? 0) > 0;
                     if ($this->creative_library_verify_before_assign_banner($stored_row)
-                        && !in_array($dimension_state, array('verified','mismatch'), true)) {
+                        && !$asset_verified) {
                         $verification_pending++;
                         continue;
                     }
@@ -1209,7 +1212,7 @@ trait PPAR_Creative_Library_Trait {
         if ($counts['imported'] > 0 || $counts['updated'] > 0 || $verification_pending > 0) {
             $this->creative_library_schedule_asset_verification(10);
         }
-        $message = sprintf('%d erkannt · %d neu · %d aktualisiert · %d unverändert · %d blockiert · %d Prüfung offen · %d feste Zielzuordnungen gespeichert. Neue Direkt-/Vergleichsportal-Banner werden erst nach erfolgreicher technischer Prüfung zugeordnet.', $counts['seen'], $counts['imported'], $counts['updated'], $counts['unchanged'], $counts['blocked'], $verification_pending, $target_mapped);
+        $message = sprintf('%d erkannt · %d neu · %d aktualisiert · %d unverändert · %d blockiert · %d Prüfung offen · %d feste Zielzuordnungen gespeichert. Neue Banner werden erst nach erfolgreicher technischer Prüfung zugeordnet.', $counts['seen'], $counts['imported'], $counts['updated'], $counts['unchanged'], $counts['blocked'], $verification_pending, $target_mapped);
         $this->creative_library_redirect('success', $message, $context);
     }
 
