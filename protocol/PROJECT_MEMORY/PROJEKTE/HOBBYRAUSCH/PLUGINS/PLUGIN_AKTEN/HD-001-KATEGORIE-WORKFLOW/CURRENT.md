@@ -111,7 +111,7 @@ Der maschinenlesbare Bewertungsvertrag ist inzwischen gebunden und der kontrolli
 Ergebnis:
 - 16 Identitäten geprüft;
 - 0 Zielbaum-Writes freigegeben;
-- 15 Fälle benötigen noch Scope-, Content-Capacity- oder Ownership-Evidenz;
+- 15 Fälle benötigen noch Identitäts-, Scope-, Content-Capacity- oder Ownership-Evidenz;
 - Buchbinden bleibt fachlich HOBBY_HUB, aber die neue vollständige V2-Abnahme ist noch nicht abgeschlossen.
 
 Dadurch existiert weiterhin kein belastbares V2-Zielbaum-Delta.
