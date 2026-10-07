@@ -2,7 +2,7 @@
   "contract": "HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST",
   "version": "1.0",
   "effective_date": "2026-10-07",
-  "status": "READY__LIVE_EXECUTION_BLOCKED_NO_BOUND_DATAFORSEO_ACCESS_PATH_IN_CHAT",
+  "status": "READY_FOR_HD001_WORDPRESS_EXECUTION",
   "source_preflight": "HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json",
   "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.1",
   "market": {
@@ -1350,5 +1350,14 @@
     "Recount each leaf and apply 0-3/4/5-12/13-15/16+ thresholds.",
     "For thin valid hobbies, test aggregation candidates without merging canonical hobby identities."
   ],
-  "blocker": "No authenticated live DataForSEO execution surface is bound to this chat. Existing WordPress client expects credentials from wp-config or WordPress options; no credentials are exposed or guessed."
+  "blocker": "The DataForSEO transport itself is NOT blocked. The remaining work is to bind this V2 batch request to an HD-001 read-only assessment run in WordPress.",
+  "execution_path": {
+    "plugin": "HD-001 / Affiliate-Portal Kategorie-Workflow",
+    "runtime": "WordPress admin",
+    "dataforseo_client": "APKW_DataForSEO",
+    "credentials": "existing WordPress/wp-config or WordPress option credentials",
+    "mode": "READ_ONLY_V2_ASSESSMENT",
+    "structure_writes": false,
+    "wordpress_sync": false
+  }
 }
