@@ -116,11 +116,11 @@ Zielbereich:
 - 5 bis 12 eigenständige Beiträge.
 
 Regeln:
-- 0–3 belastbare Beiträge: KEINE eigene Kategorie;
-- 4 Beiträge: nur mit begründeter Ausnahme;
-- 5–12 Beiträge: Zielbereich;
-- 13–15 Beiträge: Split-Prüfung zwingend;
-- mehr als 15 Beiträge: nicht ohne explizite Ausnahme in einer Leaf-Kategorie belassen.
+- unter 4 belastbare Beiträge: zusammenlegen / KEINE eigene Kategorie;
+- 4 Beiträge: Grenzfall, nur mit begründeter Ausnahme;
+- 5–12 Beiträge: idealer Zielbereich;
+- 13–14 Beiträge: oberhalb des Idealbereichs; keine automatische Teilung;
+- ab etwa 15 Beiträgen: prüfen, ob zwei echte Themenbereiche entstehen; nur bei fachlich sauberer Trennlinie teilen.
 
 Ein Beitrag muss einen eigenständigen Such-/Nutzerintent besitzen.
 Varianten desselben Intents zählen nicht als künstliche Mehrfachbeiträge.
@@ -131,9 +131,9 @@ Zielbereich:
 
 Regeln:
 - weniger als 3 tragfähige Leaf-Kategorien: Hobby-Hub kritisch prüfen; häufig Magazin/Artikel;
-- 3–6: Zielbereich;
-- 7–8: Split-/Macro-Prüfung;
-- mehr als 8: Thema gilt grundsätzlich als zu groß für einen einzelnen Hobby-Hub und muss als ORIENTATION_UNIVERSE oder mehrere Hobby-Einheiten gedacht werden.
+- 3–6: typischer Zielbereich;
+- 7–9: oberhalb des typischen Bereichs; prüfen, aber nicht automatisch zerlegen;
+- ab etwa 10 eigenständigen Unterbereichen: Macro-/Split-Prüfung; nur bei echten eigenständigen Hobby-Einheiten zerlegen.
 
 Diese Grenzen sind Strukturregeln, keine Aufforderung zu künstlicher Symmetrie.
 
