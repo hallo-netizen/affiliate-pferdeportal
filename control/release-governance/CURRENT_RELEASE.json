@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 251,
+  "generation": 252,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.199",
-    "status": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_PERFORMANCE_BOUND",
+    "status": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_GUARDS_PASS",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -49,7 +49,7 @@
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_28_FILES_BANNER_FIRST_MAX5_NO_FULLSORT",
+    "source_binding_status": "MANIFEST_28_FILES_KISS_FIX_GOVERNANCE_SOURCE_TREE_START_PASS",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -870,13 +870,13 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_PERFORMANCE_BOUND",
+    "state": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_GUARDS_PASS",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the existing bound guards against this exact 28-file KISS source. No new architecture, no ranking changes, no batch-size increase. After guards pass, continue through the already existing five-test runner when the real ADCELL test environment is available.",
+    "bound_user_scope_action": "KISS source fix is complete and bound. Do not add more banner architecture or ranking logic. Next only run the already existing five-test WordPress/MariaDB runner when the real ADCELL test environment is available; then complete the existing regression and installer gates.",
     "completion_condition": "FIVE_TEST_RUNNER_PASS_ON_EXACT_28_FILE_SOURCE_WITH_REAL_ADCELL_PROVIDER_DATA",
     "after_completion_action": "Run the complete existing Affiliate regression against the exact same source. Only after total regression passes may installer/fresh-unpack/final SHA gates begin.",
     "no_optional_detours": true,
-    "sequence": 99,
+    "sequence": 100,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
     "evidence_ref": null,
@@ -895,10 +895,10 @@
       "check_runs_at_pre_sync_head": "NONE",
       "installer_6_72_199": "DOES_NOT_EXIST_NOT_AUTHORIZED",
       "direct_partner_ui_6_72_199": "TARIFCHECK_CHECK24_MANUAL_BANNER_CHECK24_66_COST_14_INSURANCE_VERIFY_BEFORE_ASSIGN_CONTRACT_COMMITTED_NOT_EXECUTED",
-      "guard_status": "PASS_CURRENT_HEAD_GOVERNANCE_START_RUN_37601209084_AND_37601208763_SOURCE_RUN_37601208789",
-      "governance_check": "PASS_RUN_37601208763_AND_37601209084",
-      "start_guard": "PASS_RUN_37601208763_AFFILIATE_RELEASE_START_PASS",
-      "source_check": "PASS_RUN_37601208789_AFFILIATE_RELEASE_SOURCE_PASS",
+      "guard_status": "PASS_RUN_37603268216_BEFORE_HISTORICAL_6_72_171_ASSERT",
+      "governance_check": "PASS_RUN_37603268216",
+      "start_guard": "PASS_RUN_37603268216",
+      "source_check": "PASS_RUN_37603268216",
       "wordpress_mariadb_runner": "VERSION_NEUTRAL_FIVE_TEST_RUNNER_COMMITTED_READY_REAL_DB_AND_REAL_ADCELL_EXECUTION_OPEN",
       "frontend_provider_http_hardlock": "STATIC_CONTRACT_COMMITTED_NOT_YET_EXECUTED_ON_REBOUND_SOURCE",
       "verify_before_assign": "SOURCE_BOUND_GUARDS_PASS_AUTOMATION_IMPORT_RECONCILE_UPGRADE_STATE_MANUAL_FAMILY_ALL_ASSET_FIRST",
@@ -907,7 +907,8 @@
       "failed_asset_retry": "SOURCE_FIXED_LATER_PROVIDER_REIMPORT_REOPENS_FAILED_ASSET_TO_PENDING_TEST_COMMITTED",
       "kiss_banner_priority": "SOURCE_COMMITTED_TWO_SMALL_QUERIES_BANNERS_FIRST_PRODUCTS_FILL_FREE_SLOTS_MAX5",
       "check24_runtime_multi_target": "SOURCE_COMMITTED_CHECK24_66_14_STORED_MAP_SOURCES_RECOGNIZED",
-      "performance_contract": "MAX5_UNCHANGED_NO_MIXED_FULLSORT_NO_FRONTEND_HTTP_NO_NEW_RANKING_LAYER"
+      "performance_contract": "MAX5_UNCHANGED_NO_MIXED_FULLSORT_NO_FRONTEND_HTTP_NO_NEW_RANKING_LAYER",
+      "tree_check": "PASS_RUN_37603268216"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
