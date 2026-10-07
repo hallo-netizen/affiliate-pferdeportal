@@ -181,3 +181,70 @@ Arbeitskopie-Header = 1.10.0; `README.txt` trägt noch 1.9.6 und ist vor einem s
 
 CURRENT:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+---
+
+## PU-20261007-004 – HD-001 V1.12.0 Target-Tree-Basis + V2-Fachfortschreibung
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PLUGIN:
+`Affiliate-Portal Kategorie-Workflow`
+
+ART:
+Eigenentwicklung / allgemeingültiger Workflow mit Projektprofil.
+
+FACHBÜRO:
+`SEO_KATEGORIEN`
+
+VON / AUF:
+V1.11.x dynamische Strukturentwicklung → V1.12.0 versionierter Target-Tree-Weg.
+
+WARUM:
+Die dynamische Strukturerfindung erzeugte fachlich falsche/instabile Ergebnisse, u. a. fehlendes Monetarisierungs-Gate, unzureichende Alias-/Dublettenbehandlung und unvollständige drei Säulen. V1.12 trennt fachlichen Zielbaum und technische Synchronisierung.
+
+ÄNDERUNG:
+- versioniertes Projektprofil;
+- generischer CORE/EDITORIAL/DIRECTORY-Target-Tree;
+- DataForSEO im neuen Weg nur für Keyword-/SEO-Anreicherung, nicht als Strukturautorität;
+- globale Cross-Pillar-Ownership;
+- Add/Rename/Move/Merge/Archive per Soll/Ist;
+- stabile IDs;
+- atomare Aktivierung nach Readback;
+- Rollback;
+- UNKNOWN/NONE bleibt redaktionell erhalten.
+
+RELEASE-ARTEFAKT:
+`HD001_V1.12.0_FIXED_THREE_PILLAR_TARGET_TREE_POSNEG_HARDPASS.zip`
+
+SHA-256:
+`f77f676ef4e8df8d44e3cf0d1e61b52883d402924cb8d14033c24dd6645c03d1`
+
+POSITIVTEST:
+- PHP 55/55;
+- Legacy 270/270;
+- Portal-Suiten PASS;
+- realer 908/844-Lauf PASS;
+- 420/420 physische Zielobjekte Readback;
+- Idempotenz;
+- Add/Rename/Move mit ID-Erhalt;
+- Buchbinden-Pilot stabil.
+
+NEGATIVTEST:
+- Cross-Pillar Keyword-/Intent-Kannibalisierung BLOCKED;
+- UNKNOWN→CORE ohne Regel BLOCKED;
+- Verlust nicht monetarisierbarer Themen BLOCKED;
+- Readback-Tamper → Rollback PASS.
+
+LIVE-GRENZE:
+V1.12.0 NICHT live abgenommen.
+
+FACHFORTSCHREIBUNG NACH DEM TECHNISCHEN PASS:
+HOBBY_MASTER V2 wurde vorgeschaltet. Große bekannte Hobbys werden als wirtschaftliche Anker integriert, Nischen bleiben als Longtail erhalten, Größen-/Rollenlogik entscheidet die Publikationsebene. Acht Welten bleiben Hauptstruktur und sind oberste CORE-Ebene. `Hobbywelten` ist nur View/Einstieg.
+
+FOLGE:
+Das im V1.12-ZIP enthaltene Hobby-Depot-Profil ist keine aktuelle Installationsfreigabe. Erst HOBBY_MASTER-V2-Bewertung → Zielbaum-Delta → erneuter kompletter POS/NEG-Test.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
