@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: BATCH 001 REALER V1.12.1 OVERVIEW PASS / V1.12.2 DEPTH TIMEOUT LIVE ERKANNT / V1.12.3 RESUMABLE DEPTH LOKAL HARD PASS / 38-CALL-LAUF NOCH OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: BATCH 001 REALER V1.12.3 DEPTH-LAUF ABGESCHLOSSEN / FREMDTREFFER-ZÄHLFEHLER ERKANNT / REGELN 1.3 / V1.12.4 ZERO-COST-NEUAUSWERTUNG LOKAL HARD PASS / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -97,7 +97,7 @@ Batch 001:
 
 ## V2-Korrektur: jede unterste Kategorie einzeln prüfen
 
-Verbindlich seit Regelversion 1.2:
+Verbindlich seit Regelversion 1.3:
 - Gesamtzahl der Artikel eines Hobbys reicht NICHT;
 - jede unterste Kategorie muss separat 5–12 echte, unterschiedliche Artikelintents tragen;
 - 0–3 = keine eigene Leaf-Kategorie;
@@ -173,90 +173,81 @@ Treibholz + Treibholz sammeln = eine Identität.
 Pro primärem Intent genau ein SEO-Owner.
 Andere Säulen dürfen Relation/Filter/Verweis sein, keine konkurrierende Zielseite.
 
-## Technischer V1.12/V1.12.1/V1.12.2/V1.12.3-Stand
+## Technischer V1.12.0–V1.12.4-Stand
 
-V1.12.0 bleibt die technische Zielbaum-Baseline.
+V1.12.0 bleibt technische Zielbaum-Baseline.
 
-V1.12.1 wurde real in Hobby Depot ausgeführt:
-- Batch 001 = 16 Hobbys / 34 vorgeschlagene Leafs / 263 Artikelintents;
-- 1 echter DataForSEO Keyword-Overview-Aufruf;
-- Kosten 0.02472 USD;
-- DataForSEO returned 106 / 263 exakte Keywords;
-- 157 exakte Seeds blieben PENDING;
-- 0 WordPress-Strukturwrites;
-- Result SHA-256 `5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9`.
+Realer Batch 001:
+- V1.12.1 initialer Overview: 263 fachlich vorgeschlagene Artikelintents, 106 exakte Provider-Zeilen;
+- V1.12.3 Tiefenlauf vollständig abgeschlossen;
+- insgesamt 39 DataForSEO-Aufrufe;
+- Gesamtkosten ca. 0.9738 USD;
+- weiterhin 0 WordPress-/HivePress-Strukturwrites.
 
-Wichtig:
-`0 Hub-Kandidaten` aus diesem Zwischenresultat ist KEIN belastbares fachliches Negativergebnis.
-Der Regelvertrag 1.2 verlangt nach der fachlichen Kandidatenbildung zusätzlich DataForSEO Suggestions/Ideas zur Tiefenprüfung und erst danach die endgültige Leaf-Zählung.
+Dabei wurde ein Auswertungsfehler sichtbar:
+V1.12.3 zählte rohe Keyword-Ideas-Gruppen als zusätzliche Artikelintents.
+Dadurch konnten fachfremde Provider-Treffer die Leaf-Kapazität künstlich aufblasen.
 
-Realer Befund:
-`HOBBY_MASTER_V2_BATCH_001_REAL_RESULT_20261007.md`
+Korrektur in Regelvertrag 1.3:
+- Fachlogik definiert die Artikelintents;
+- DataForSEO liefert nur Evidenz für diese bereits definierten Intents;
+- Provider-Zeilen erzeugen keine neuen Artikel;
+- gleiche Core-Keywords zählen weiterhin nur einmal.
 
-Maschinenlesbarer Follow-up-Plan:
-`HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
+HD-001 V1.12.4 korrigiert ausschließlich die vorhandene Auswertung:
+- keine neuen DataForSEO-Aufrufe;
+- keine neuen Kosten;
+- vorhandene COMPLETE-Tiefendaten werden automatisch neu ausgewertet;
+- ein Depth-Treffer kann nur einen bereits vorhandenen PENDING-Artikelintent bestätigen;
+- unpassende Provider-Treffer bleiben Roh-Evidenz und zählen nicht;
+- 0 Strukturwrites.
 
-V1.12.2 hat den fachlich richtigen 38-Call-Depth-Plan umgesetzt, aber alle 38 Calls in einem einzigen WordPress-Request ausgeführt. Das führte live zum Timeout.
-
-Dafür wurde HD-001 V1.12.3 gebaut:
-- derselbe gespeicherte V1.12.1-Ausgangsstand;
-- dieselben 37 fachlich definierten Cluster;
-- dieselben 37 Keyword-Ideas + 1 finaler Overview = 38 zusätzliche Calls;
-- aber automatisch in kleinen Requests;
-- maximal 2 Keyword-Ideas-Aufrufe pro HTTP-Request;
-- finaler Overview immer in eigenem Request;
-- Fortschritt nach JEDEM erfolgreichen kostenpflichtigen Call gespeichert;
-- Seiten-/PHP-Timeout verliert bereits bezahlte Evidence nicht;
-- Wiederaufruf setzt automatisch am gespeicherten Cursor fort;
-- keine erneute Kostenbestätigung beim Fortsetzen;
-- weiterhin 0 Strukturwrites.
-
-Lokales V1.12.3-Artefakt:
-`HD001_V1.12.3_V2_DATAFORSEO_RESUMABLE_TIMEOUTSAFE_HARDPASS.zip`
+Lokales Artefakt:
+`HD001_V1.12.4_V2_RELEVANCE_RECALC_ZERO_COST_HARDPASS.zip`
 
 SHA-256:
-`bcb33caa3f481661654460db21cc1d407eb020124e85ab5941094f89ce2827a3`
+`5ceffaa03eda90b45a235cf844ff2ddae3bef553f2a61f4ec32ea38eefcf75f6`
 
 Prüfbericht:
-`HD001_V1.12.3_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.4_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 Prüfbericht SHA-256:
-`4b04319e0efc78d128af0d23141eff83751ed38256b9acdc81a8b9ef4977165e`
+`6b8938a5a5b46b1876a564f69f26f60048963e1fc1e5edbd879b7531bc643bb3`
 
 Fresh-Unpack:
-- PHP 64/64 PASS;
-- Legacy 270/270 PASS;
-- V1.12 POS/NEG PASS;
-- realer 908/844/841-Test PASS;
-- V1.12.1 + V1.12.2 Regression PASS;
-- kompletter 38-Call-Depth-Lauf in 20 begrenzten HTTP-Schritten PASS;
-- simulierter Timeout nach einem bezahlten Call: Checkpoint bleibt erhalten PASS;
-- Resume startet am gespeicherten Cursor PASS;
+- PHP 66/66 PASS;
+- Legacy Regression 270/270 PASS;
+- Fremdkeyword-/Relevanztest PASS;
+- realer V1.12.3-Result-Replay PASS;
+- 0 zusätzliche Provider-Calls PASS;
+- 0 zusätzliche Provider-Kosten PASS;
 - 0 Strukturwrites PASS.
+
+Realer Result-Replay nach Korrektur:
+- 541 gespeicherte Depth-Gruppen geprüft;
+- 2 davon bestätigen tatsächlich bisher PENDING fachlich definierte Artikelintents;
+- 539 erzeugen keinen zusätzlichen Artikel;
+- Batch-Summary danach: 0 Hub-Kandidaten / 1 Editorial-Thema / 5 Aggregation-Reviews / 3 Macro-Reviews / 7 Evidence-Required;
+- ideale Leafs: 2;
+- Zielbaum-Writes weiterhin 0.
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_RESUMABLE_DEPTH_RUN_PENDING`
+`HD001_V2_BATCH001_V124_ZERO_COST_RECALC_PENDING`
 
-Der erste reale DataForSEO-Lauf ist abgeschlossen.
-Er hat 106 von 263 exakten Seeds zurückgeliefert und damit die vorgesehene zweite Evidenzstufe ausgelöst.
-
-Offen ist ausschließlich die read-only Tiefenprüfung der 37 noch offenen, fachlich bereits definierten Cluster.
+Der kostenpflichtige DataForSEO-Teil ist abgeschlossen.
+Offen ist nur die korrigierte Neuauswertung derselben bereits gespeicherten Daten.
 
 ## EXAKT EINE NEXT ACTION
 
-HD-001 V1.12.3 in Hobby Depot installieren und die Tiefenprüfung EINMAL starten.
+HD-001 V1.12.4 in Hobby Depot installieren und einmal `Kategorien → V2-Hobbybewertung` öffnen.
 
-Danach arbeitet sie automatisch in kleinen gespeicherten Paketen weiter.
-Bei Unterbrechung genügt Seite erneut öffnen; der gespeicherte Stand wird fortgesetzt.
+Die Neuauswertung läuft beim Öffnen automatisch:
+- 0 DataForSEO-Aufrufe;
+- 0 neue Kosten;
+- 0 Kategorien-/Zielbaum-Writes.
 
-Gesamtumfang bleibt unverändert:
-- 37 Keyword-Ideas-Aufrufe;
-- 1 abschließender Keyword-Overview;
-- 38 zusätzliche DataForSEO-Aufrufe.
-
-Danach das neue Ergebnis-JSON herunterladen und fachlich bewerten.
+Danach das neu heruntergeladene Ergebnis-JSON prüfen.
 
 Noch kein Zielbaum-Delta.
 Noch kein Kategorien-Sync.
-Noch kein alter V1.12-Zielbaum-Refresh.
