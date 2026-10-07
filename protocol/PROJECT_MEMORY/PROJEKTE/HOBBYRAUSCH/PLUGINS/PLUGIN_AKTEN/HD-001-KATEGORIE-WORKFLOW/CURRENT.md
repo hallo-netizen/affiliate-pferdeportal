@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.1 INITIALER REALER BATCH PASS / V1.12.2 READ-ONLY TIEFENPRÜFUNG LOKAL HARD PASS / REALER DEPTH-LAUF OFFEN / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.1 INITIALER REALER BATCH PASS / V1.12.2 LIVE-TIMEOUT ERKANNT / V1.12.3 RESUMABLE DEPTH LOKAL HARD PASS / REALER RESUME-LAUF OFFEN / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -93,48 +93,60 @@ Befund:
 Der erste Overview reicht für die vollständige V2-Content-Capacity nicht aus.
 `0 Hub-Kandidaten` ist deshalb kein endgültiger Negativbefund.
 
-### V1.12.2 – fehlende Tiefenprüfung
+### V1.12.2 – fachlich richtiger, technisch zu langer Depth-Request
+
+V1.12.2 plante korrekt:
+- 37 Keyword-Ideas-Aufrufe;
+- 1 finalen Keyword-Overview;
+- insgesamt 38 zusätzliche Calls;
+- 0 Strukturwrites.
+
+Live zeigte sich jedoch:
+alle 38 Calls liefen in EINEM WordPress-Request.
+Das führt zum Timeout und ist als Bedienweg verworfen.
+
+### V1.12.3 – resumable / timeout-sicher
 
 Plugin-Version:
-`1.12.2`
+`1.12.3`
 
 Artefakt:
-`HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip`
+`HD001_V1.12.3_V2_DATAFORSEO_RESUMABLE_TIMEOUTSAFE_HARDPASS.zip`
 
 SHA-256:
-`233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f`
+`bcb33caa3f481661654460db21cc1d407eb020124e85ab5941094f89ce2827a3`
 
 Prüfbericht:
-`HD001_V1.12.2_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.3_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 Prüfbericht SHA-256:
-`1e7197feb74e9b3a070a4201f79a0416f46dfef960fdab556d59f21c4cb55048`
+`4b04319e0efc78d128af0d23141eff83751ed38256b9acdc81a8b9ef4977165e`
 
-Funktion:
-- erkennt das gespeicherte V1.12.1-Ergebnis;
-- wiederholt den bereits bezahlten Gesamt-Overview NICHT;
-- ermittelt exakt 37 noch offene, bereits fachlich definierte Depth-Cluster;
-- plant exakt 37 Keyword-Ideas-Aufrufe;
-- danach exakt 1 gebündelten Keyword-Overview;
-- insgesamt exakt 38 zusätzliche DataForSEO-Aufrufe;
-- übernimmt je Cluster höchstens 15 distinct Intent/Core-Keyword-Gruppen, weil ab etwa 15 ohnehin Split-Review erreicht ist;
-- kombiniert alte und neue Evidence;
-- dedupliziert erneut per Core Keyword;
-- berechnet Batch-Ownership-Überschneidungen erneut;
-- schreibt 0 Kategorien und 0 Zielbaumobjekte.
+Verhalten:
+- einmalige Kostenbestätigung;
+- danach automatische Fortsetzung über kleine AJAX-Requests;
+- maximal 2 Keyword-Ideas-Calls pro HTTP-Request;
+- finaler Overview immer eigener Request;
+- Checkpoint nach JEDEM erfolgreichen bezahlten Call;
+- Browser-/PHP-Timeout verliert bereits bezahlte Evidence nicht;
+- erneutes Öffnen setzt am gespeicherten Cursor fort;
+- Providerfehler bleibt fail-closed und rückt den fehlgeschlagenen Cluster nicht weiter;
+- keine neue Kostenbestätigung beim Resume;
+- Gesamtplan bleibt 37 Ideas + 1 Overview = 38 Calls;
+- 0 WordPress-/HivePress-Strukturwrites.
 
-Fresh-Unpack-Test:
-- PHP 62/62 PASS;
-- Legacy Regression 270/270 PASS;
+Fresh-Unpack:
+- PHP 64/64 PASS;
+- Legacy 270/270 PASS;
 - V1.12 POS/NEG PASS;
 - realer 908/844/841-Lauf PASS;
-- V1.12.1 Assessment Regression PASS;
-- echter hochgeladener Batch-001-Result-Readback PASS;
-- Follow-up-Plan exakt 38 Calls PASS;
-- DataForSEO-Failure fail-closed PASS;
+- V1.12.1 / V1.12.2 Regression PASS;
+- voller 38-Call-Depth-Lauf in 20 begrenzten HTTP-Schritten PASS;
+- simulierter Provider-Timeout nach erstem bezahltem Call: Checkpoint PASS;
+- Resume ab gespeichertem Cursor PASS;
 - 0 Strukturwrites PASS.
 
-V1.12.2 ist weiterhin nur Bewertungskandidat, kein Zielbaum-Deployment.
+V1.12.3 ist weiterhin nur Bewertungskandidat, kein Zielbaum-Deployment.
 
 ## Fachliche Fortschreibung NACH V1.12.0
 
@@ -169,19 +181,20 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_DEPTH_DATAFORSEO_RUN_PENDING`
+`HD001_V2_BATCH001_RESUMABLE_DEPTH_RUN_PENDING`
 
 Der reale Initiallauf ist abgeschlossen.
 Der noch fehlende Teil ist die laut Regelvertrag 1.2 notwendige Tiefenprüfung der 37 unvollständig belegten, bereits definierten Cluster.
 
 ## EXAKT EINE NEXT ACTION
 
-V1.12.2 in Hobby Depot installieren und unter `Kategorien → V2-Hobbybewertung` die zusätzliche Tiefenprüfung ausführen.
+V1.12.3 in Hobby Depot installieren und die Tiefenprüfung einmal starten.
 
-Vor dem Paid Run muss das Plugin exakt anzeigen:
-- 37 Keyword-Ideas-Aufrufe;
-- 1 gebündelten Keyword-Overview;
-- 38 zusätzliche DataForSEO-Aufrufe insgesamt.
+Danach läuft sie automatisch in kleinen gespeicherten Paketen.
+Bei Timeout/Browser-Unterbrechung Seite erneut öffnen; das Plugin setzt am gespeicherten Stand fort.
+
+Gesamtumfang bleibt:
+37 Keyword Ideas + 1 finaler Overview = 38 Calls.
 
 Danach neues Ergebnis-JSON herunterladen und fachlich prüfen.
 
