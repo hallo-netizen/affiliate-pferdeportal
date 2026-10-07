@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 REALER EXPORT WAR STALE V1.12.3 / V1.12.6 EXPORT-HÄRTUNG LOKAL PASS / NEUER REALER EXPORT OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / V1.12.6 REALER EXPORT PASS / CONTENT-CAPACITY TECHNISCH BESTÄTIGT / SCOPE-IDENTITÄT-OWNERSHIP OFFEN
 
 ## Rolle
 
@@ -218,21 +218,20 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_V126_REAL_EXPORT_READBACK_PENDING`
+`HD001_V2_BATCH001_SCOPE_IDENTITY_OWNERSHIP_REVIEW_PENDING`
 
-Die Fach-/DataForSEO-Logik bleibt unverändert Regeln 1.4.
+Der technische Bewertungsweg ist jetzt real bestätigt.
 
-Der neue reale Download nach V1.12.5 war nachweislich noch das alte V1.12.3-Ergebnis. Ursache war ausschließlich der Exportweg: Recalc beim Seitenrendern, aber nicht im Download-Handler.
-
-V1.12.6 macht den Download selbst fail-closed und recalculiert den gespeicherten Altstand vor dem Export ohne Provider-Aufruf.
+Aktuelles Batch-001-Bild:
+- Buchbinden = HOBBY_HUB_CANDIDATE;
+- Treibholz sammeln = EDITORIAL_TOPIC_CANDIDATE;
+- Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa = kapazitätsseitig TYPICAL_FIT, aber Scope/Identität noch nicht final;
+- 3D-Druck, Amateurastronomie, Filzen = MACRO_REVIEW;
+- alte Brettspiele, Air-Dry Clay, Airbrush-Modellbau, Alabasterschnitzen, Algenkultur = AGGREGATION_REVIEW.
 
 ## EXAKT EINE NEXT ACTION
 
-V1.12.6 installieren und direkt `Ergebnis als JSON herunterladen` klicken.
+Zuerst die sechs kapazitätsseitig tragfähigen Hubfälle fachlich gegen bestehende Master-Identitäten und SEO-Ownership abgrenzen.
 
-Danach genau dieses JSON readback-prüfen.
-
-Noch NICHT:
-- Zielbaum synchronisieren;
-- Kategorien schreiben;
-- neue DataForSEO-Recherche starten.
+Keine weitere automatische DataForSEO-Tiefenrecherche.
+Noch keine Strukturänderung.
