@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST",
-  "version": "1.1",
+  "version": "1.2",
   "effective_date": "2026-10-07",
-  "status": "READY_FOR_HD001_V121_WORDPRESS_EXECUTION",
+  "status": "INITIAL_REAL_RUN_COMPLETE__DEPTH_FOLLOWUP_BOUND",
   "source_preflight": "HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json",
   "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.2",
   "market": {
@@ -78,7 +78,7 @@
     "Apply concept-exact thresholds: under 4 combine/no leaf; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split.",
     "For thin valid hobbies, test aggregation candidates without merging canonical hobby identities."
   ],
-  "blocker": "No DataForSEO transport blocker remains. V1.12.1 is locally ready; the real read-only WordPress/DataForSEO execution of Batch 001 is pending.",
+  "blocker": "Initial real overview is complete. Exactly 38 additional read-only DataForSEO calls are pending for the 37 unresolved predefined depth clusters.",
   "execution_path": {
     "plugin": "HD-001 / Affiliate-Portal Kategorie-Workflow",
     "plugin_version": "1.12.1",
@@ -90,5 +90,20 @@
     "mode": "READ_ONLY_V2_ASSESSMENT",
     "structure_writes": false,
     "wordpress_sync": false
+  },
+  "real_initial_result": {
+    "result_sha256": "5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9",
+    "paid_calls": 1,
+    "cost_usd": 0.02472,
+    "keyword_count": 263,
+    "returned_count": 106,
+    "pending_exact_seeds": 157,
+    "wordpress_structure_writes": 0
+  },
+  "followup_plan": "HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json",
+  "followup_plugin": {
+    "version": "1.12.2",
+    "artifact": "HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip",
+    "sha256": "233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f"
   }
 }
