@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST",
-  "version": "1.2",
+  "version": "1.3",
   "effective_date": "2026-10-07",
-  "status": "READY_FOR_HD001_V121_WORDPRESS_DATAFORSEO_RUN",
+  "status": "INITIAL_REAL_EVIDENCE_PARTIAL__DEPTH_RUN_PENDING",
   "source_result": "HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json",
   "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.2",
   "invariants": [
@@ -1101,9 +1101,15 @@
     "canonical_identity_must_be_preserved_when_grouped": true
   },
   "plugin_candidate": {
-    "version": "1.12.1",
-    "artifact": "HD001_V1.12.1_HOBBY_MASTER_V2_READONLY_ASSESSMENT_HARDPASS.zip",
-    "sha256": "959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d",
+    "version": "1.12.2",
+    "artifact": "HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip",
+    "sha256": "233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f",
     "writes_structure": false
-  }
+  },
+  "real_initial_result": {
+    "result_sha256": "5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9",
+    "returned_exact_rows": 106,
+    "pending_exact_seeds": 157
+  },
+  "depth_plan": "HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json"
 }
