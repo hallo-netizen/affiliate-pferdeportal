@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 257,
+  "generation": 258,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.199",
-    "status": "WORKING_6_72_199_LIVE_CATEGORY_AND_TARIFCHECK_FILTER_ROOTFIX_BOUND",
+    "status": "WORKING_6_72_199_LIVE_CATEGORY_FILTER_ROOTFIX_SOURCE_BOUND_PLUGIN_NOT_BUILT",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,12 +44,12 @@
     "current_source_manifest_sha256": "a51ef1236e8caa530493b65cc0c0e7c9c553f147a55745f4924f643b1b6ee844",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "Live screenshot proved two remaining defects after prior candidate: existing 6.72.199 banner inventory was not re-reconciled because maybe_reconcile_banner_state_v672195 excluded 6.72.199 at its admin entry, and the Tarifcheck view needed partner-identity filtering compatible with historical imports. Rootfix: one-time post-basis 6.72.199 reconcile using the existing runner, robust Tarifcheck/CHECK24 partner filter, and visible provider category plus stored portal target on each card. No ranking architecture change, no frontend HTTP, no batch-size change.",
+    "candidate_reference_scope": "Live screenshot after the prior 6.72.199 candidate proved the core user-visible defects remained: no correct category assignment was visible/usable for banners and the Tarifcheck filter did not behave as required. Delta inspection found a concrete source defect: the admin entry for the existing banner reconcile excluded 6.72.199 although the reconcile runner itself allowed it, so existing live banner inventory could remain on stale/empty target maps. Rootfix source now enables one bounded post-basis 6.72.199 reconcile, broadens Tarifcheck/CHECK24 filtering to partner identity for legacy rows, and shows provider category plus stored portal target on each card. This source is manifest-bound but has NOT yet been packaged or live-proven.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_28_FILES_LIVE_CATEGORY_RECONCILE_AND_TARIFCHECK_FILTER_ROOTFIX",
+    "source_binding_status": "MANIFEST_28_FILES_ROOTFIX_SOURCE_BOUND_NO_NEW_ARTIFACT_NO_NEW_PASS",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -66,11 +66,11 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "KISS_BANNER_VERIFICATION_PRIORITY_AND_CHECK24_STORED_MAP_RUNTIME",
+    "current_focus": "LIVE_BANNER_CATEGORY_RECONCILE_AND_TARIFCHECK_FILTER_ROOTFIX",
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "current_focus_reason": "Fix the actual operational path with minimum change: banners must not sit behind large product queues, and CHECK24 multi-target maps must be consumed correctly. Preserve all existing performance concepts.",
+    "current_focus_reason": "User live screenshot disproved the prior candidate. Fix only the two visible failures: existing banner category/target assignment and Tarifcheck filtering. No new architecture, no test detours, no performance rollback.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_199_CANDIDATE_INSTALLER_INTERNAL_GATES_PASS_REAL_ADCELL_PROVIDER_GATE_ONLY_OPEN",
+    "adcell_work_status": "6_72_199_ROOTFIX_SOURCE_BOUND_NOT_PACKAGED_NOT_LIVE_PROVEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -870,19 +870,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_199_LIVE_CATEGORY_AND_TARIFCHECK_FILTER_ROOTFIX_BOUND",
+    "state": "WORKING_6_72_199_ROOTFIX_SOURCE_BOUND_BUILD_PLUGIN_NEXT",
     "authorized_next_action": "BUILD_ROOTFIX_PLUGIN",
-    "bound_user_scope_action": "Build the exact manifest-bound 6.72.199 plugin ZIP for the user. Do not add tests or architecture. The next live check is visual/functional: Tarifcheck filter returns Tarifcheck banners and existing banners show provider category plus stored portal target after the one-time reconcile.",
-    "completion_condition": "REAL_ADCELL_PROVIDER_GATE_PASS_ON_EXACT_MANIFEST_SOURCE_THEN_BIND_EXISTING_CANDIDATE_INSTALLER_AS_FINAL_AND_RUN_RELEASE_CHECK",
-    "after_completion_action": "If the real ADCELL provider gate PASSes and the source manifest is unchanged, reuse run 37606358698 and its bound evidence; do not repeat the internal WordPress/MariaDB, regression, installer or byte-identity tests. Bind the already built candidate installer as final artifact and run release-check. If the real gate FAILs, fix only that first concrete failure and rerun only evidence made stale by that fix.",
+    "bound_user_scope_action": "Build exactly one installable ZIP from the current manifest-bound 6.72.199 rootfix source. No new tests, no new workflow, no ranking/target/performance redesign. Do not claim PASS. After packaging, the next live check is limited to the two reported failures: existing banners receive/show their stored category/portal target after the one-time reconcile, and the Tarifcheck filter shows Tarifcheck partner banners.",
+    "completion_condition": "ROOTFIX_PLUGIN_ZIP_BUILT_FROM_EXACT_MANIFEST_A51EF1236E8CAA530493B65CC0C0E7C9C553F147A55745F4924F643B1B6EE844",
+    "after_completion_action": "Install that exact rootfix ZIP on the live Pferde-Atelier site and check only the two user-reported failures. If either still fails, inspect only that first live failure. If both pass, then return to the remaining release gates from Current; do not revive old hypotheses.",
     "no_optional_detours": true,
-    "sequence": 105,
+    "sequence": 106,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-056",
     "evidence_ref": null,
     "evidence_sha256": null,
     "current_source_manifest_sha256": "a51ef1236e8caa530493b65cc0c0e7c9c553f147a55745f4924f643b1b6ee844",
-    "current_source_binding": "MANIFEST_28_FILES_LIVE_CATEGORY_AND_FILTER_ROOTFIX",
+    "current_source_binding": "MANIFEST_28_FILES_ROOTFIX_SOURCE_ONLY_NO_CURRENT_PASS",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -919,7 +919,15 @@
       "installer_byte_identity": "PASS_28_OF_28_RUN_37606358698",
       "candidate_installer_sha256": "dba7441a02821385ed723c031000f390f05c5c17e33a9a5f9e2e388281c3393b",
       "candidate_installer_bytes": 816205,
-      "pass_reuse": "RUN_37606358698_REUSE_WHILE_SOURCE_MANIFEST_UNCHANGED_NO_REDUNDANT_RERUNS"
+      "pass_reuse": "RUN_37606358698_REUSE_WHILE_SOURCE_MANIFEST_UNCHANGED_NO_REDUNDANT_RERUNS",
+      "live_prior_candidate": "FAIL_USER_SCREENSHOT_2026_10_07_CATEGORY_ASSIGNMENT_AND_TARIFCHECK_FILTER",
+      "rootfix_delta": "SOURCE_CHANGED_AUTOMATION_SUITE_AND_CREATIVE_LIBRARY_ONLY",
+      "rootfix_reconcile_defect": "PROVEN_SOURCE_ENTRY_EXCLUDED_6_72_199_WHILE_RUNNER_ALLOWED_6_72_199",
+      "rootfix_filter_change": "SOURCE_CHANGED_PARTNER_IDENTITY_FILTER_FOR_TARIFCHECK_CHECK24_LEGACY_COMPATIBILITY_NOT_YET_LIVE_PROVEN",
+      "rootfix_card_visibility": "SOURCE_CHANGED_SHOW_PROVIDER_CATEGORY_AND_STORED_PORTAL_TARGET_NOT_YET_LIVE_PROVEN",
+      "previous_internal_candidate_run": "RUN_37606358698_HISTORICAL_PASS_FOR_OLD_MANIFEST_85554B..._STALE_AFTER_ROOTFIX_SOURCE_CHANGE",
+      "current_rootfix_tests": "NOT_RUN_BY_USER_INSTRUCTION_KISS_NO_TEST_DETOUR",
+      "current_rootfix_plugin": "NOT_BUILT"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
@@ -931,7 +939,7 @@
       "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
       "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md"
     ],
-    "pass_reuse_policy": "HASH_IDENTICAL_PASS_REUSE_REQUIRED_NO_REDUNDANT_TESTS",
+    "pass_reuse_policy": "OLD_PASS_NOT_REUSABLE_AFTER_SOURCE_CHANGE; NO_REDUNDANT_TESTS; CURRENT_ROOTFIX_REQUIRES_ONLY_THE_BOUND_BUILD_THEN_TWO_LIVE_CHECKS",
     "release_gate_matrix_policy": "required_release_gates is a proof matrix, not a list of independent NEXT ACTIONS. Follow only authorized_next_action/bound_user_scope_action. Do not fan out OPEN/STALE historical matrix entries into separate tests."
   },
   "branch_policy": {
