@@ -73,6 +73,14 @@ $ok('manual_missing_title_marked_non_evidence');
 $install = new ReflectionMethod($o, 'maybe_install_creative_library_schema');
 $install->setAccessible(true);
 $install->invoke($o);
+$table_m = new ReflectionMethod($o, 'creative_library_table');
+$table_m->setAccessible(true);
+$table = $table_m->invoke($o);
+global $wpdb;
+$wpdb->query($wpdb->prepare(
+    "DELETE FROM {$table} WHERE provider='direct' AND partner_external_id=%s",
+    'check24'
+));
 $detect = new ReflectionMethod($o, 'creative_library_detect_mapping');
 $detect->setAccessible(true);
 $mapping = $detect->invoke($o, array_keys($manual));
@@ -94,10 +102,6 @@ $result = $upsert->invoke($o, $creative);
 if (!in_array($result, array('imported','updated','unchanged'), true)) {
     $fail('manual_upsert_' . $result);
 }
-$table_m = new ReflectionMethod($o, 'creative_library_table');
-$table_m->setAccessible(true);
-$table = $table_m->invoke($o);
-global $wpdb;
 $stored = $wpdb->get_row($wpdb->prepare(
     "SELECT * FROM {$table} WHERE provider='direct' AND partner_external_id='check24' AND external_id=%s",
     'check24-test-01'
@@ -109,11 +113,32 @@ if (!is_array($stored)
 }
 $ok('manual_check24_banner_stored_in_creative_library');
 
-$source = (string) file_get_contents(dirname(__DIR__, 2) . '/current/affiliate-portal-router/includes/trait-ppar-creative-library.php');
-foreach (array('value="direct:tarifcheck"', 'value="direct:check24"', 'Banner händisch einfügen', 'name="manual_banner_image_url"', 'name="manual_banner_tracking_url"') as $needle) {
-    if (strpos($source, $needle) === false) {
-        $fail('ui_missing_' . md5($needle));
+$admins = get_users(array('role'=>'administrator','number'=>1));
+if (!$admins) {
+    $uid = wp_create_user('banner-gate-admin', 'ci-banner-gate-pass!', 'banner-gate@example.test');
+    if (is_wp_error($uid)) { $fail('admin_fixture_create'); }
+    $user = new WP_User($uid);
+    $user->set_role('administrator');
+    $admins = array($user);
+}
+wp_set_current_user(absint($admins[0]->ID));
+$_GET = array('page'=>'affiliate-portal-creative-library');
+ob_start();
+$o->render_creative_library_page();
+$html = ob_get_clean();
+foreach (array(
+    'value="direct:tarifcheck"',
+    '>Tarifcheck</option>',
+    'value="direct:check24"',
+    '>CHECK24</option>',
+    'Banner händisch einfügen',
+    'name="manual_banner_image_url"',
+    'name="manual_banner_tracking_url"',
+    'name="manual_banner_destination_url"'
+) as $needle) {
+    if (strpos($html, $needle) === false) {
+        $fail('rendered_ui_missing_' . md5($needle));
     }
 }
-$ok('backend_ui_contains_tarifcheck_check24_and_manual_banner_form');
+$ok('rendered_backend_ui_contains_tarifcheck_check24_and_manual_banner_form');
 echo "DIRECT_PARTNER_MANUAL_BANNER_V672199_E2E_COMPLETE\n";
