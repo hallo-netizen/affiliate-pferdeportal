@@ -3726,34 +3726,39 @@ trait PPAR_Automation_Suite_Trait {
      * - nur Banner ohne jede belastbare Zuordnung verlieren ihre alte Automatik.
      */
     public function maybe_rebuild_banner_kiss_v672201() {
-        if (self::VERSION !== '6.72.201' || !is_admin()
+        if (self::VERSION !== '6.72.202' || !is_admin()
             || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
 
-        $state_key='ppar_v672201_banner_kiss_state';
+        // 6.72.202 PERFORMANCE-KISS:
+        // Adminseiten duerfen keinerlei Bannerarbeit ausfuehren. Sie markieren
+        // nur den Hintergrundlauf und kehren sofort zurueck.
+        $state_key='ppar_v672202_banner_kiss_state';
         $state=sanitize_key((string)get_option($state_key,''));
         if($state==='done'){return;}
         if($state!=='running'){
-            delete_option('ppar_v672201_banner_kiss_cursor');
-            delete_option('ppar_v672201_banner_kiss_result');
+            delete_option('ppar_v672202_banner_kiss_cursor');
+            delete_option('ppar_v672202_banner_kiss_result');
             update_option($state_key,'running',false);
         }
-        $this->run_v672201_banner_kiss_reconcile();
+        if(!wp_next_scheduled('ppar_v672202_banner_kiss_reconcile')){
+            wp_schedule_single_event(time()+2,'ppar_v672202_banner_kiss_reconcile');
+        }
     }
 
     public function run_v672201_banner_kiss_reconcile() {
-        if (self::VERSION !== '6.72.201'
+        if (self::VERSION !== '6.72.202'
             || !method_exists($this,'creative_library_table')
             || !method_exists($this,'output_assign_banner_targets_from_destination_once')
             || !method_exists($this,'output_plan_creative')) { return; }
 
         global $wpdb;
         $table=$this->creative_library_table();
-        $state_key='ppar_v672201_banner_kiss_state';
-        $cursor_key='ppar_v672201_banner_kiss_cursor';
-        $result_key='ppar_v672201_banner_kiss_result';
+        $state_key='ppar_v672202_banner_kiss_state';
+        $cursor_key='ppar_v672202_banner_kiss_cursor';
+        $result_key='ppar_v672202_banner_kiss_result';
         $last=absint(get_option($cursor_key,0));
-        $limit=50;
-        $deadline=microtime(true)+8.0;
+        $limit=5;
+        $deadline=microtime(true)+3.0;
         $processed=0; $mapped_count=0; $replanned=0; $no_map=0; $more=false;
 
         do {
@@ -3770,6 +3775,13 @@ trait PPAR_Automation_Suite_Trait {
             if(!is_array($rows) || !$rows){$more=false;break;}
 
             foreach($rows as $row){
+                // Harter Worker-Zeitdeckel: nie einen langen Monsterlauf bauen.
+                // Mindestens ein Datensatz darf fertig werden; danach ggf. sauber
+                // im naechsten kleinen Hintergrundlauf fortsetzen.
+                if($processed>0 && microtime(true)>=$deadline){
+                    $more=true;
+                    break;
+                }
                 $row_id=absint($row['id']??0);
                 $last=max($last,$row_id);
                 $processed++;
@@ -3815,8 +3827,8 @@ trait PPAR_Automation_Suite_Trait {
             }
 
             update_option($cursor_key,$last,false);
-            $more=count($rows)===$limit;
-        } while($more && microtime(true)<$deadline);
+            $more=$more || count($rows)===$limit;
+        } while(false);
 
         $previous=get_option($result_key,array());
         $previous=is_array($previous)?$previous:array();
@@ -3831,8 +3843,8 @@ trait PPAR_Automation_Suite_Trait {
         ),false);
 
         if($more){
-            if(!wp_next_scheduled('ppar_v672201_banner_kiss_reconcile')){
-                wp_schedule_single_event(time()+3,'ppar_v672201_banner_kiss_reconcile');
+            if(!wp_next_scheduled('ppar_v672202_banner_kiss_reconcile')){
+                wp_schedule_single_event(time()+5,'ppar_v672202_banner_kiss_reconcile');
             }
             return;
         }
@@ -3840,7 +3852,7 @@ trait PPAR_Automation_Suite_Trait {
         delete_option($cursor_key);
         update_option($state_key,'done',false);
         if(method_exists($this,'article_plan_bump_campaign_revision')){
-            $this->article_plan_bump_campaign_revision('v672201_banner_kiss_complete');
+            $this->article_plan_bump_campaign_revision('v672202_banner_kiss_complete');
         }
     }
 
