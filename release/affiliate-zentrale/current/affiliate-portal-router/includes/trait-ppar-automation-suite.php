@@ -3786,8 +3786,43 @@ trait PPAR_Automation_Suite_Trait {
                 return;
             }
 
-            // Erst nach abgeschlossenem Import darf auf Basis der neuen
-            // Providerdaten neu klassifiziert/materialisiert werden.
+            // Der frische Providerimport allein reicht nicht: Nach Zielvertrag
+            // muessen neue/pending Assets zuerst technisch geprueft sein.
+            if (method_exists($this, 'automation_has_pending_adcell_assets')
+                && $this->automation_has_pending_adcell_assets()) {
+                $result['status'] = 'waiting_assets';
+                $result['updated_at'] = time();
+                update_option($result_key, $result, false);
+                update_option($state_key, 'waiting_assets', false);
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $state = 'ready_reconcile';
+            update_option($state_key, 'ready_reconcile', false);
+        }
+
+        if ($state === 'waiting_assets') {
+            if (method_exists($this, 'automation_has_pending_adcell_assets')
+                && $this->automation_has_pending_adcell_assets()) {
+                if (method_exists($this, 'automation_schedule_adcell_batch_worker')) {
+                    $this->automation_schedule_adcell_batch_worker(0);
+                }
+                $this->automation_v672199_schedule_basis_resync(10);
+                return;
+            }
+            $result['status'] = 'assets_complete';
+            $result['updated_at'] = time();
+            update_option($result_key, $result, false);
+            $state = 'ready_reconcile';
+            update_option($state_key, 'ready_reconcile', false);
+        }
+
+        if ($state === 'ready_reconcile') {
+            // Erst nach abgeschlossenem Providerimport UND abgeschlossener
+            // technischer Assetpruefung darf neu klassifiziert/materialisiert werden.
             $prefix = 'ppar_v672199_banner_reconcile_';
             foreach (array('state','cursor','result','reset_done') as $suffix) {
                 delete_option($prefix . $suffix);
