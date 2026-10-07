@@ -4072,7 +4072,9 @@ JS;
             if ($mode === 'fallback') {
                 return array('specificity'=>5,'matches'=>0,'reason'=>'Kein spezifischer Treffer: formatgeeigneter allgemeiner Verteilungspool.');
             }
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Kein spezifischer Treffer: formatgeeigneter Banner-Verteilungspool.');
+            // Spezifisch zugeordnete Banner bleiben strikt in ihrem gespeicherten
+            // Zielstrang. Kein technischer Rueckfall in fachfremde Kategorien.
+            return null;
         }
 
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
