@@ -1312,3 +1312,33 @@ Der statische ADCELL-Basistest bindet zusätzlich den Frontend-Hardlock: neuer B
 **Verbleibender erster Blocker:** Es fehlt weiterhin der reale Lauf dieses Runners in einer WordPress/MariaDB-Umgebung. Der aktuell verfügbare lokale Ausführungscontainer besitzt weder MariaDB/Docker noch WordPress/WP-CLI und hat keinen GitHub-Netzzugriff; die bestehenden GitHub-Actions bleiben versionshart historisch gebunden. Daher weiterhin **kein PASS**, kein ZIP und keine Live-Installation.
 
 **Status:** RUNNER_PREPARED / TEST_CONTRACT_HARDENED / REAL_WORDPRESS_MARIADB_EXECUTION_HOST_OPEN / NO_RELEASE.
+
+
+### AFF-ERR-054 – Nachtrag 07.10.2026: Verify-before-Assign-Reihenfolge war in 6.72.199 noch nicht global
+
+**Frischer Quellbefund:** Trotz vollständigerer Providerbasis war die im neuen Zielvertrag festgelegte Reihenfolge noch nicht überall umgesetzt. Drei reale Pfade konnten eine feste Banner-Zielkarte erzeugen, bevor die technische Bildprüfung abgeschlossen war:
+
+1. `automation_import_rows()` konnte nach dem automatischen Providerimport sofort `output_assign_banner_targets_from_destination_once()` aufrufen.
+2. `run_v672195_banner_reconcile()`, der vom 6.72.199-Basisnachlauf wiederverwendet wird, baute die Zielkarte vor der Prüfung von `_dimension_state`, Breite und Höhe.
+3. Die manuelle Tarifcheck/CHECK24-Gruppenaktion konnte nach Setzen von Kosten/Versicherung ebenfalls sofort Zielkarten erzeugen.
+
+Damit war der Zielvertrag **„Providerbasis → Ziel-URL-Provenienz → technische Assetprüfung → erst danach Zielzuordnung“** noch nicht vollständig erfüllt.
+
+**6.72.199-Korrektur:**
+- `creative_library_verify_before_assign_banner()` gilt jetzt für **jeden Banner**, nicht nur Direkt-/Manuellbanner.
+- Automatikimport erzeugt für pending/unverifizierte Banner keine Zielkarte; verifiziert bedeutet Zustand `verified|mismatch` **und** reale Breite/Höhe > 0.
+- Der globale Reconcile prüft die Asset-Evidence vor jeder Zielzuordnung.
+- Der 6.72.199-Upgradezustand besitzt jetzt `waiting_assets -> ready_reconcile -> reconciling` und wartet nach dem frischen Providerlauf auf die technische Assetprüfung.
+- Manuelle Tarifcheck/CHECK24-Familienwahl speichert die Familie, erzeugt aber bei pending Asset noch keine Zielkarte.
+- Terminal fehlgeschlagene Bilder werden aus den Pending-Schleifen ausgeschlossen und bleiben fail-closed.
+
+**Testhärtung:**
+- ADCELL-Basis-E2E: reales Schabracken-Ziel vorhanden, trotzdem **0 Ziele vor Bildprüfung**; nach erfolgreicher Bildprüfung erst exaktes Schabracken-Ziel aus Provider-Kategorie.
+- Upgrade-E2E: frischer Providerjob -> `waiting_assets` -> reale Bildbytes/Assetprüfung -> erst danach Reconcile/`done`.
+- CHECK24-E2E: 0 Ziele vor Prüfung; danach 66 Kostenpfade bzw. 14 Versicherungsblätter; kaputtes Bild ohne Ziel.
+- Statischer Basisvertrag sperrt alle drei Umgehungswege und Frontend-Provider-HTTP.
+- Provider-Rohdatenprüfung wurde auf vollständige Wert-/Typgleichheit inklusive unbekannter verschachtelter Felder gehärtet.
+
+**Noch kein PASS:** Die korrigierte Source muss nach neuer Manifestbindung erneut durch Governance/Source/Start und danach durch den realen WordPress/MariaDB-Runner. Kein Installer vorher.
+
+**Status:** ROOT_CAUSE_DEEPENED / VERIFY_BEFORE_ASSIGN_SOURCE_FIXED / MANIFEST_REBOUND / GUARDS_AND_REAL_DB_GATE_OPEN.
