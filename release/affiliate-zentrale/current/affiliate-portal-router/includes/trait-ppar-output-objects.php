@@ -1014,41 +1014,50 @@ trait PPAR_Output_Objects_Trait {
         $evidence=$this->output_text((string)$evidence);
         if($evidence===''){return null;}
 
-        $evidence_tokens=array_values(array_unique($this->output_tokens($evidence)));
-        if(!$evidence_tokens){return null;}
+        $stop=array_flip(array('und','oder','mit','fuer','fur','von','der','die','das','ein','eine','im','in','am','auf'));
+        $evidence_words=array_values(array_filter(array_unique(preg_split('/\\s+/', $evidence)),static function($word) use ($stop){
+            $word=(string)$word;
+            return strlen($word)>=3 && !isset($stop[$word]);
+        }));
+        if(!$evidence_words){return null;}
 
         $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
         $portal_key=sanitize_key((string)($portal['key']??''));
         $matches=array();
 
-        $set_supported=function($words) use ($evidence_tokens) {
-            $stop=array_flip(array('und','oder','mit','fuer','fur','von','der','die','das','ein','eine','im','in','am','auf'));
+        $set_supported=function($words) use ($evidence_words,$stop) {
             $words=array_values(array_filter(array_unique((array)$words),static function($word) use ($stop){
                 $word=(string)$word;
                 return strlen($word)>=3 && !isset($stop[$word]);
             }));
             if(!$words){return 0;}
 
+            $available=$evidence_words;
             $exact_matches=0;
             foreach($words as $word){
-                $supported=false;
-                foreach($this->output_tokens((string)$word) as $variant){
-                    if(in_array($variant,$evidence_tokens,true)){
-                        $supported=true;
+                $matched_index=null;
+                $target_variants=$this->output_tokens((string)$word);
+
+                foreach($available as $index=>$evidence_word){
+                    if(array_intersect($target_variants,$this->output_tokens((string)$evidence_word))){
+                        $matched_index=$index;
                         $exact_matches++;
                         break;
                     }
                 }
-                if(!$supported && strlen((string)$word)>=6){
-                    foreach($evidence_tokens as $token){
-                        if(strlen((string)$token)>=6
-                            && strpos((string)$token,(string)$word)===0){
-                            $supported=true;
+
+                if($matched_index===null && strlen((string)$word)>=6){
+                    foreach($available as $index=>$evidence_word){
+                        if(strlen((string)$evidence_word)>=6
+                            && strpos((string)$evidence_word,(string)$word)===0){
+                            $matched_index=$index;
                             break;
                         }
                     }
                 }
-                if(!$supported){return 0;}
+
+                if($matched_index===null){return 0;}
+                unset($available[$matched_index]);
             }
             return count($words)*10+$exact_matches;
         };
