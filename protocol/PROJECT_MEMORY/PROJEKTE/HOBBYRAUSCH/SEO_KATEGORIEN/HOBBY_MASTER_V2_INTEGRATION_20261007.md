@@ -245,23 +245,85 @@ DataForSEO darf dabei Felder anreichern:
 
 Es darf structural_role und parent nicht selbst ändern.
 
-## 10. Nächster Arbeitsblock
+## 10. Maschinenlesbarer Bewertungsvertrag
 
-Nicht sofort alle 841 Kandidaten vollredaktionell manuell bewerten.
+Verbindliche Regeldatei:
+`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
 
-Stattdessen:
+Sie trennt jetzt eindeutig:
+- Portal-Scope;
+- Identität/Alias;
+- Content Capacity;
+- Größenklasse;
+- Portalrolle;
+- wirtschaftliche Priorität;
+- säulenübergreifende Ownership.
 
-1. Master technisch validieren;
-2. Bewertungsregeln maschinenlesbar machen;
-3. Pilot-Sample aus fünf Typen:
-   - starker bestehender Hub: Buchbinden;
-   - große bekannte Erweiterung: Fotografie;
-   - Macro-Grenze: Garten;
-   - kleine Nische: Treibholz sammeln;
-   - Scope-Grenzfall: Musizieren;
-4. Pilot durch Scope + Größe + Content Capacity + Monetarisierung + 3-Säulen-Routing laufen lassen;
-5. Regeln korrigieren;
-6. danach Batch-Bewertung des Gesamtbestands;
-7. erst dann V1.12-Zielbaum als Delta aktualisieren.
+Fail-closed-Regel:
+Fehlende Evidenz erzeugt `EVIDENCE_REQUIRED`.
+Monetarisierung oder SEO-Nachfrage allein dürfen niemals eine Strukturrolle erzeugen.
 
-Damit wird nicht erneut ein kompletter Baum auf Verdacht gebaut.
+Die sechs Portalrollen bleiben:
+- ORIENTATION_UNIVERSE;
+- HOBBY_HUB;
+- EDITORIAL_TOPIC;
+- ARTICLE_ONLY;
+- FINDER_ONLY;
+- OUT_OF_SCOPE.
+
+## 11. Kontrollierter Batch 001
+
+Der erste Master-Batch ist nicht mehr frei wählbar, sondern reproduzierbar definiert:
+
+1. je geschützter Welt die lexikographisch erste bereits `IN_SCOPE_PROVISIONAL` gebundene hobby_id;
+2. alle Master-Einträge mit Alias;
+3. die ersten vier `UNASSESSED`-hobby_id lexikographisch;
+4. danach Deduplizierung bei stabiler Reihenfolge.
+
+Ergebnis:
+16 Kandidaten.
+
+Ausführung/Evidence:
+`HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
+
+Befund:
+- 16/16 Identitäten stabil;
+- 2 Scope-Fälle durch Pilot fachlich bestätigt;
+- 9 weitere nur provisional gebunden;
+- 5 benötigen Scope-Evidenz;
+- nur Buchbinden besitzt bereits genug Größen-/Pilot-Evidenz für FIT + HOBBY_HUB;
+- Treibholz sammeln bleibt sicher EDITORIAL, aber ARTICLE_ONLY vs. EDITORIAL_TOPIC bleibt offen;
+- übrige Kandidaten bleiben wegen fehlender Content-Capacity-Evidenz fail-closed.
+
+Kein Zielbaum-Write aus Batch 001.
+
+## 12. Research-Queue-Intake
+
+Die 19 wirtschaftlich/bekanntheitsseitig wichtigen Ergänzungen sind ausdrücklich NICHT Bestandteil der bisherigen 841 Master-Identitäten.
+
+Maschinenlesbarer Intake:
+`HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
+
+Aktueller Check:
+- 19 Kandidaten geprüft;
+- 0 exakte/current-Alias-Kollisionen gegen die 841 Identitäten;
+- 17 bleiben bis Scope-Evidenz in der Research Queue;
+- Angeln bleibt bewusster Scope-Review;
+- Fotografie ist durch den vorhandenen Pilotbefund als IN_SCOPE / Welt Gestalten belegt und für eine provisorische Master-Identität bereit.
+
+Vorbereitetes Intake-Delta:
+`HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
+
+Dieses Delta ist ausschließlich Master-Intake.
+Es ist KEIN Zielbaum-Delta und erzeugt keinen WordPress-/HivePress-/Frontend-Knoten.
+
+## 13. Nächster Arbeitsblock
+
+1. Fehlende Scope-/Content-Capacity-/Ownership-Evidenz für Batch 001 erzeugen.
+2. Batch 001 erneut durch die gebundenen Regeln laufen lassen.
+3. Nur `ASSESSED`-Fälle dürfen anschließend in die Gesamtbewertung einfließen.
+4. Parallel die Research Queue kontrolliert durch Gate A/B führen; keine Blind-Promotion.
+5. Danach Master batchweise fortsetzen.
+6. Erst nach belastbarer Gesamtbewertung V1.12-Zielbaum als Delta aktualisieren.
+
+Damit wird weder aus Monetarisierung noch aus Bekanntheit eine Taxonomie erfunden.
