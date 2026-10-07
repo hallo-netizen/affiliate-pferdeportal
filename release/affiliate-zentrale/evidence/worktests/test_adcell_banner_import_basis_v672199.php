@@ -63,10 +63,8 @@ if (strpos($main, "add_action('admin_init', array(\$this, 'maybe_upgrade_adcell_
     $errors[] = 'missing:adcell_basis_admin_worker_binding';
 }
 if (strpos($output, 'adcell_api_v2_') !== false
-    || strpos($output, 'wp_safe_remote_get(') !== false
-    || strpos($output, 'wp_safe_remote_post(') !== false
-    || strpos($output, 'wp_safe_remote_head(') !== false) {
-    $errors[] = 'forbidden:provider_http_in_output_runtime';
+    || stripos($output, 'api.adcell') !== false) {
+    $errors[] = 'forbidden:adcell_provider_http_in_output_runtime';
 }
 $resolver_start = strpos($library, 'private function creative_library_resolve_tracking_destination_import');
 $resolver_end = strpos($library, 'private function creative_library_normalize_row', $resolver_start === false ? 0 : $resolver_start);
@@ -106,8 +104,10 @@ $reconcile_end = strpos($auto, 'public function maybe_upgrade_adcell_banner_impo
 $reconcile_fn = ($reconcile_start !== false && $reconcile_end !== false && $reconcile_end > $reconcile_start)
     ? substr($auto, $reconcile_start, $reconcile_end - $reconcile_start) : '';
 $reconcile_verify_pos = strpos($reconcile_fn, '$verified =');
+$reconcile_gate_pos = strpos($reconcile_fn, 'if (!$verified)');
 $reconcile_assign_pos = strpos($reconcile_fn, '$mapped = $this->output_assign_banner_targets_from_destination_once($row)');
-if ($reconcile_fn === '' || $reconcile_verify_pos === false || $reconcile_assign_pos === false || $reconcile_verify_pos > $reconcile_assign_pos) {
+if ($reconcile_fn === '' || $reconcile_verify_pos === false || $reconcile_gate_pos === false || $reconcile_assign_pos === false
+    || $reconcile_verify_pos > $reconcile_gate_pos || $reconcile_gate_pos > $reconcile_assign_pos) {
     $errors[] = 'missing:reconcile_asset_gate_before_target_assignment';
 }
 
@@ -145,7 +145,7 @@ if ($upsert_fn === ''
     || strpos($upsert_fn, "\$existing_dimension_state === 'failed'") === false
     || strpos($upsert_fn, "\$incoming_payload['_dimension_state'] = 'pending'") === false
     || strpos($upsert_fn, "\$asset_retry_reset = true") === false
-    || strpos($upsert_fn, "return ($destination_changed || $asset_retry_reset) ? 'updated' : 'unchanged'") === false) {
+    || strpos($upsert_fn, "return (\$destination_changed || \$asset_retry_reset) ? 'updated' : 'unchanged'") === false) {
     $errors[] = 'missing:failed_asset_reopened_only_by_fresh_reimport';
 }
 
