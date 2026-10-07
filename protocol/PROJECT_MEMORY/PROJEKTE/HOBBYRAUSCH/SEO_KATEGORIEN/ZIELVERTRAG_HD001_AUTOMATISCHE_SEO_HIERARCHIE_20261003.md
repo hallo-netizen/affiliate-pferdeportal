@@ -2,8 +2,8 @@
 
 STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 2.2
-ERSETZT: Fassung 2.1 vom 2026-10-07; davor Fassung 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.3
+ERSETZT: Fassung 2.2 vom 2026-10-07; davor Fassung 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -86,17 +86,17 @@ Ein echtes Hobby außerhalb der natürlichen Acht-Welten-Passung wird als SCOPE_
 ## Größenvertrag
 
 Leaf-Kategorie:
-- 0–3 tragfähige Beitragsintentionen: keine eigene Kategorie;
-- 4: nur begründete Ausnahme;
-- 5–12: Zielbereich;
-- 13–14: zwingende Split-Prüfung;
-- >15: nur explizite Ausnahme.
+- unter 4 tragfähige Beitragsintentionen: zusammenlegen / keine eigene Kategorie;
+- 4: Grenzfall, nur begründete Ausnahme;
+- 5–12: idealer Zielbereich;
+- 13–14: oberhalb des Idealbereichs; keine automatische Teilung;
+- ab etwa 15: prüfen, ob zwei echte Themenbereiche entstehen; nur dann teilen.
 
 Hobby-Hub:
 - <3 tragfähige Leafs: Hub kritisch prüfen;
-- 3–6: Zielbereich;
-- 7–8: Split-/Macro-Prüfung;
-- >8: grundsätzlich ORIENTATION_UNIVERSE / Aufteilung in mehrere Hobby-Einheiten.
+- 3–6: typischer Zielbereich;
+- 7–9: oberhalb des typischen Bereichs; prüfen, aber nicht automatisch zerlegen;
+- ab etwa 10 eigenständigen Unterbereichen: Macro-/Split-Prüfung.
 
 Die Zahlen sind Prüfgrenzen, keine Aufforderung zu künstlicher Symmetrie.
 
@@ -105,11 +105,11 @@ Die Zahlen sind Prüfgrenzen, keine Aufforderung zu künstlicher Symmetrie.
 Die Content-Capacity wird NICHT nur für ein Hobby insgesamt geprüft.
 
 Jede unterste Kategorie muss separat tragfähig sein:
-- 0–3 eigenständige Beitragsintentionen: keine eigene Leaf-Kategorie;
-- 4: begründete Ausnahme;
-- 5–12: Zielbereich;
-- 13–14: Split-Prüfung;
-- ab etwa 15: Split erforderlich.
+- unter 4 eigenständige Beitragsintentionen: zusammenlegen / keine eigene Leaf-Kategorie;
+- 4: Grenzfall;
+- 5–12: idealer Zielbereich;
+- 13–14: oberhalb des Idealbereichs; keine automatische Teilung;
+- ab etwa 15: Teilung prüfen; nur bei echter fachlicher Trennlinie teilen.
 
 Ein Beitrag zählt nur bei eigenständigem Nutzer-/Suchintent.
 Synonyme und bloße Formulierungsvarianten zählen nicht mehrfach.
