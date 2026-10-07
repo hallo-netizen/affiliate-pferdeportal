@@ -208,16 +208,25 @@ jobs:
             -H 'User-Agent: Mozilla/5.0 AFF-ERR-057-readonly' \
             -o /tmp/aff057-token.json
           curl -fsSL --get 'https://pferde-atelier.de/wp-json/wp/v2/posts' \
-            --data-urlencode 'search=affiliate_rechner id="kredit"' \
+            --data-urlencode 'search="[affiliate_rechner id="kredit"]"' \
             --data-urlencode 'per_page=100' \
             --data-urlencode 'status=publish' \
             --data-urlencode '_fields=id,slug,link' \
             -H 'User-Agent: Mozilla/5.0 AFF-ERR-057-readonly' \
             -o /tmp/aff057-kredit.json
+          curl -fsSL --get 'https://pferde-atelier.de/wp-json/wp/v2/posts' \
+            --data-urlencode 'search="[affiliate_rechner id="aff057-falsch"]"' \
+            --data-urlencode 'per_page=100' \
+            --data-urlencode 'status=publish' \
+            --data-urlencode '_fields=id,slug,link' \
+            -H 'User-Agent: Mozilla/5.0 AFF-ERR-057-readonly' \
+            -o /tmp/aff057-falsch.json
           python3 - <<'PY'
           import json
           exact=json.load(open('/tmp/aff057-kredit.json'))
-          print('LIVE_KREDIT_ID_SEARCH_COUNT',len(exact))
+          wrong=json.load(open('/tmp/aff057-falsch.json'))
+          print('LIVE_KREDIT_EXACT_PHRASE_COUNT',len(exact))
+          print('LIVE_WRONG_ID_EXACT_PHRASE_COUNT',len(wrong))
           rows=json.load(open('/tmp/aff057-token.json'))
           print('LIVE_RAW_SHORTCODE_SEARCH_COUNT',len(rows))
           for row in rows:
