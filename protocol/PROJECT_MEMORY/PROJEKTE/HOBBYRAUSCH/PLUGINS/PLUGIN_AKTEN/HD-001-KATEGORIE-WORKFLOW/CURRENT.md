@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.3 REALER DEPTH-LAUF KOMPLETT / FREMDTREFFER-ZÄHLFEHLER ERKANNT / V1.12.4 ZERO-COST-RECALC LOKAL HARD PASS / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.3 ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 KISS-GESAMTPFAD LOKAL HARD PASS / EINMALIGER LIVE-READBACK OFFEN / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -74,50 +74,85 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 ## Aktueller V2-Bewertungskandidat
 
 Plugin-Version:
-`1.12.4`
+`1.12.5`
 
 Artefakt:
-`HD001_V1.12.4_V2_RELEVANCE_RECALC_ZERO_COST_HARDPASS.zip`
+`HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip`
 
 SHA-256:
-`5ceffaa03eda90b45a235cf844ff2ddae3bef553f2a61f4ec32ea38eefcf75f6`
+`68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
 
 Prüfbericht:
-`HD001_V1.12.4_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.5_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 Prüfbericht SHA-256:
-`6b8938a5a5b46b1876a564f69f26f60048963e1fc1e5edbd879b7531bc643bb3`
+`8a6768b4222dd086f3ff124579684feeed6f11f45f268d5596631de326002075`
 
-Zweck:
-bereits bezahltes V1.12.3-Ergebnis korrekt neu auswerten.
+### Was V1.12.5 fachlich korrigiert
 
-KISS-Regel:
-- Artikelintents kommen aus der Fachlogik;
-- DataForSEO bestätigt/vereinigt/dedupliziert;
-- Keyword-Ideas-Rohzeilen erzeugen keine zusätzlichen Artikel;
-- nur passende Depth-Treffer dürfen einen bereits vorhandenen PENDING-Intent bestätigen;
-- keine neuen Provider-Aufrufe;
-- keine neuen Kosten;
-- keine Strukturwrites.
+Content Capacity ist wieder KISS:
 
-Realer Result-Replay:
-- 541 gespeicherte Depth-Gruppen;
-- 2 echte Matches auf bisher PENDING fachliche Artikelintents;
-- 539 Rohgruppen zählen NICHT als neue Artikel;
-- DataForSEO-Calls bleiben 39;
-- Kosten bleiben ca. 0.9738 USD;
-- Zielbaum-Writes bleiben 0.
+- Fachlogik definiert die eigenständigen Artikelintents.
+- Diese Intents werden pro unterster Kategorie gezählt.
+- DataForSEO dient als SEO-Abgleich.
+- Exaktes Core-Keyword-/Synonym-Evidence darf Dubletten zusammenführen.
+- Eine fehlende exakte Longtail-Zeile löscht keinen fachlich eigenständigen Artikelintent.
+- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen niemals zusätzliche Artikel.
+- der automatische 38-Call-Depth-Weg ist deaktiviert.
 
-Fresh-Unpack:
-- PHP 66/66 PASS;
-- Legacy 270/270 PASS;
-- Relevanz-/Fremdkeywordtest PASS;
-- realer V1.12.3-Result-Replay PASS;
-- 0 neue Calls PASS;
-- 0 neue Kosten PASS;
-- 0 Strukturwrites PASS.
+### Realer Evidence-Stand
 
-V1.12.4 ist weiterhin nur Bewertungskandidat.
+Die echte V1.12.3-Datei enthält:
+- 39 historische DataForSEO-Aufrufe;
+- Kosten ca. 0.9738 USD;
+- 0 Strukturwrites.
+
+V1.12.5 benutzt diese vorhandene Evidence nur noch korrekt und startet beim Recalc keine neuen Provider-Aufrufe.
+
+### Lokaler Replay des echten Ergebnisses
+
+- Kandidaten: 16
+- ideale Leafs: 34
+- HOBBY_HUB_CANDIDATE: 1
+- EDITORIAL_TOPIC_CANDIDATE: 1
+- AGGREGATION_REVIEW: 5
+- MACRO_REVIEW: 3
+- EVIDENCE_REQUIRED: 6
+- Zielbaum-Writes: 0
+
+Kapazitätsseitig typischer Hubbereich:
+- Airbrush: 5 ideale Leafs
+- Bean-to-Bar-Schokolade: 6
+- Aeroponik: 4
+- Ameisenhaltung: 6
+- 3D-Bogenschießen: 5
+- Wabikusa: 4
+
+Diese sechs bleiben wegen Scope-/Identitätsprüfung noch EVIDENCE_REQUIRED.
+
+Buchbinden:
+- 4 ideale Leafs;
+- 5 / 6 / 6 / 6 fachlich eigenständige Intents;
+- HOBBY_HUB_CANDIDATE.
+
+### Hardtest
+
+- PHP Source 68/68 PASS;
+- Legacy Regression 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Lauf PASS;
+- V1.12.1 Assessment Regression PASS;
+- echter V1.12.3-Result-Replay PASS;
+- fehlende exakte Provider-Zeilen blockieren fachlich tragfähige Leafs nicht PASS;
+- exact core_keyword Dedupe PASS;
+- Provider-Rohzeilen erzeugen 0 Artikel PASS;
+- automatische Depth-Recherche = 0 Calls PASS;
+- 0 neue Provider-Kosten PASS;
+- 0 Strukturwrites PASS;
+- Recalc idempotent PASS;
+- Fresh Release PHP 31/31 PASS.
+
+V1.12.5 ist weiterhin read-only Bewertungskandidat, kein Zielbaum-Deployment.
 
 ## Fachliche Fortschreibung NACH V1.12.0
 
@@ -152,23 +187,30 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_V124_ZERO_COST_RECALC_PENDING`
+`HD001_V2_BATCH001_V125_SINGLE_LIVE_READBACK_PENDING`
 
-Die DataForSEO-Recherche ist komplett.
-Offen ist nur die korrigierte Neuberechnung derselben gespeicherten Evidence.
+Kein DataForSEO-Research-Schritt ist mehr offen.
+
+Der gesamte Batch-001-Weg wurde mit der echten gespeicherten Evidence lokal bis zum Endzustand geprüft.
 
 ## EXAKT EINE NEXT ACTION
 
-V1.12.4 in Hobby Depot installieren und einmal `Kategorien → V2-Hobbybewertung` öffnen.
+Einmal V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
 
-Die Seite korrigiert das gespeicherte COMPLETE-Ergebnis automatisch:
-0 Calls / 0 neue Kosten / 0 Strukturwrites.
+Das vorhandene Ergebnis muss automatisch und kostenlos nach Regelvertrag 1.4 neu berechnet werden.
 
-Danach neues Ergebnis-JSON herunterladen und fachlich prüfen.
+Erwarteter Readback:
+- 0 neue DataForSEO-Aufrufe;
+- 0 neue Kosten;
+- 0 Strukturwrites;
+- Plugin 1.12.5;
+- korrigierte Batch-Summary wie im lokalen Replay.
+
+Danach Ergebnis-JSON einmal prüfen.
 
 ## Release-/Artefaktgrenze
 
-V1.12.0 bleibt lokale technische Zielbaum-Baseline. V1.12.1 ist der aktuelle read-only Bewertungskandidat und darf installiert werden, um Batch 001 real mit DataForSEO zu prüfen; er ist kein Zielbaum-Deploymentkandidat.
+V1.12.0 bleibt lokale technische Zielbaum-Baseline. V1.12.5 ist der aktuelle read-only Bewertungskandidat für genau einen realen Readback. Er ist kein Zielbaum-Deploymentkandidat.
 
 Isolierte Artefaktpflicht:
 `PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
