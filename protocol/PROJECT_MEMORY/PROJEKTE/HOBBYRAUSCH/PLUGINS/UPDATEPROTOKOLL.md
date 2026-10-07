@@ -458,3 +458,52 @@ V1.12.2 in Hobby Depot installieren und die angezeigte 38-Call-Tiefenprüfung au
 
 CURRENT:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+
+---
+
+## PU-20261007-009 – HD-001 V1.12.3 timeout-sichere resumable Tiefenprüfung
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PROBLEM:
+V1.12.2 führte die fachlich korrekten 38 zusätzlichen DataForSEO-Aufrufe in einem einzigen WordPress-Request aus.
+Live kam es dadurch zum Timeout.
+
+KORREKTUR:
+V1.12.3 ändert NICHT das Konzept und NICHT den 38-Call-Plan.
+Geändert wird ausschließlich die Ausführung:
+- einmalige Kostenbestätigung;
+- danach automatische AJAX-Fortsetzung;
+- maximal 2 Keyword-Ideas-Aufrufe pro HTTP-Request;
+- finaler Overview eigener Request;
+- Checkpoint nach jedem erfolgreichen Paid Call;
+- Timeout/Browserabbruch verliert keine bereits bezahlte Evidence;
+- Reload setzt automatisch am gespeicherten Cursor fort;
+- keine erneute Kostenbestätigung beim Resume;
+- Providerfehler fail-closed;
+- 0 Strukturwrites.
+
+ARTEFAKT:
+`HD001_V1.12.3_V2_DATAFORSEO_RESUMABLE_TIMEOUTSAFE_HARDPASS.zip`
+SHA-256:
+`bcb33caa3f481661654460db21cc1d407eb020124e85ab5941094f89ce2827a3`
+
+PRÜFBERICHT:
+`HD001_V1.12.3_FINAL_LOCAL_POSNEG_REPORT.txt`
+SHA-256:
+`4b04319e0efc78d128af0d23141eff83751ed38256b9acdc81a8b9ef4977165e`
+
+TEST:
+- PHP 64/64 PASS;
+- Legacy 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Test PASS;
+- V1.12.1/V1.12.2 Regression PASS;
+- 38 Calls in 20 begrenzten HTTP-Schritten PASS;
+- Timeout-Checkpoint + Resume PASS;
+- 0 Strukturwrites PASS.
+
+NEXT:
+V1.12.3 installieren und die Tiefenprüfung einmal starten.
