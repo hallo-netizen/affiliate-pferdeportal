@@ -1,16 +1,14 @@
-name: TEMP Affiliate Tariff Tools 6.72.193
+name: TEMP Affiliate AFF-ERR-057 Calculator Article Render
 
 on:
   push:
     branches: [affiliate-release-current]
     paths:
       - '.github/workflows/tmp-affiliate-tariff-tools-v672193.yml'
-      - 'AFFILIATE_HOBBYRAUM/test_tariff_tools_kiss_v672193.php'
-      - 'release/affiliate-zentrale/current/affiliate-portal-router/**'
   workflow_dispatch:
 
 jobs:
-  wordpress-mariadb-hardtest:
+  wordpress-mariadb-calculator-render:
     runs-on: ubuntu-latest
     services:
       mariadb:
@@ -30,8 +28,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -40,92 +36,120 @@ jobs:
           extensions: mysqli
           coverage: none
 
-      - name: Prove isolated source delta from tested 6.72.192
+      - name: Install exact current WordPress plugin
         shell: bash
         run: |
           set -euo pipefail
-          BASE=aa3bdbbae8520d6f5e9bd517be0d9325169177f8
-          git cat-file -e "$BASE^{commit}"
-          python3 - <<'PY'
-          import subprocess
-          from pathlib import Path
-          base='aa3bdbbae8520d6f5e9bd517be0d9325169177f8'
-          root='release/affiliate-zentrale/current/affiliate-portal-router'
-          changed=subprocess.check_output(
-              ['git','diff','--name-only',base+'...HEAD','--',root],text=True
-          ).splitlines()
-          expected=[
-              root+'/includes/trait-ppar-tariff-tools.php',
-              root+'/pferdeportal-affiliate-router.php',
-              root+'/readme.txt',
-          ]
-          if sorted(changed)!=sorted(expected):
-              raise SystemExit('unexpected plugin source delta: '+repr(changed))
-
-          p=root+'/pferdeportal-affiliate-router.php'
-          old=subprocess.check_output(['git','show',base+':'+p],text=True)
-          cur=Path(p).read_text()
-          cur=cur.replace('Version: 6.72.193','Version: 6.72.192')
-          cur=cur.replace("const VERSION = '6.72.193';","const VERSION = '6.72.192';")
-          lines=[
-              "require_once __DIR__ . '/includes/trait-ppar-tariff-tools.php';\n",
-              "    use PPAR_Tariff_Tools_Trait;\n",
-              "        $this->tariff_tools_register_hooks();\n",
-              "        add_shortcode('affiliate_rechner', array($this, 'shortcode_tariff_tool'));\n",
-              "        add_submenu_page('affiliate-portal-zentrale','Tarifrechner','Tarifrechner','manage_options','affiliate-portal-tariff-tools',array($this,'render_tariff_tools_page'));\n",
-          ]
-          for line in lines:
-              if line not in cur:
-                  raise SystemExit('missing expected integration line: '+repr(line))
-              cur=cur.replace(line,'',1)
-          if cur!=old:
-              raise SystemExit('main plugin contains changes beyond isolated tariff-tool wiring')
-          print('PASS 6.72.192 main runtime preserved outside exact tariff-tool wiring')
-          print('PASS plugin source delta limited to new tariff trait + wiring + readme')
-          PY
-
-      - name: Source hardlocks and lint
-        shell: bash
-        run: |
-          set -euo pipefail
-          ROOT=release/affiliate-zentrale/current/affiliate-portal-router
-          grep -F "Version: 6.72.193" "$ROOT/pferdeportal-affiliate-router.php"
-          grep -F "const VERSION = '6.72.193';" "$ROOT/pferdeportal-affiliate-router.php"
-          grep -F "ppar_tariff_tools_v1" "$ROOT/includes/trait-ppar-tariff-tools.php"
-          grep -F "affiliate_rechner" "$ROOT/includes/trait-ppar-tariff-tools.php"
-          grep -F "bewusst NICHT autoload" "$ROOT/includes/trait-ppar-tariff-tools.php"
-          find "$ROOT" -type f -name '*.php' -print0 | xargs -0 -n1 php -l | tee /tmp/php-lint.log
-          test "$(grep -c '^No syntax errors detected' /tmp/php-lint.log)" = "22"
-          echo "PASS PHP lint 22/22"
-
-      - name: Install WordPress and plugin
-        shell: bash
-        run: |
-          set -euo pipefail
+          python3 control/release-governance/release_guard.py source-check
+          grep -F "Version: 6.72.203" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
+          grep -F "const VERSION = '6.72.203';" release/affiliate-zentrale/current/affiliate-portal-router/pferdeportal-affiliate-router.php
           curl -fsSL -o /tmp/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
           chmod +x /tmp/wp
-          rm -rf /tmp/wp-site
-          mkdir -p /tmp/wp-site
-          /tmp/wp core download --path=/tmp/wp-site --version=7.1.2 --force
-          /tmp/wp config create --path=/tmp/wp-site --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
-          /tmp/wp core install --path=/tmp/wp-site --url=http://127.0.0.1:8080 --title='Tariff Tools 6.72.193' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
-          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-site/wp-content/plugins/affiliate-portal-router
-          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
-          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.193"){exit(2);} echo "PASS 6.72.193 active\n";' --path=/tmp/wp-site
+          rm -rf /tmp/wp-aff057
+          /tmp/wp core download --path=/tmp/wp-aff057 --version=7.1.2 --force
+          /tmp/wp config create --path=/tmp/wp-aff057 --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=127.0.0.1:3306 --skip-check
+          /tmp/wp core install --path=/tmp/wp-aff057 --url=http://127.0.0.1:8081 --title='AFF ERR 057' --admin_user=admin --admin_password='ci-password-123!' --admin_email=ci@example.test --skip-email
+          mkdir -p /tmp/wp-aff057/wp-content/mu-plugins
+          cat >/tmp/wp-aff057/wp-content/mu-plugins/pferde-e2e-design-contract.php <<'PHP'
+          <?php
+          if (!class_exists('Pferde_Template_Kit')) {
+              class Pferde_Template_Kit {
+                  public static function affiliate_contract_version(){ return '1.0'; }
+                  public static function design_profile(){ return 'pferde_atelier'; }
+                  public static function design_profile_contract_version(){ return '1.0'; }
+                  public static function affiliate_page_type($page_id){ return 'category'; }
+              }
+          }
+          PHP
+          cp -a release/affiliate-zentrale/current/affiliate-portal-router /tmp/wp-aff057/wp-content/plugins/affiliate-portal-router
+          /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-aff057
+          /tmp/wp eval 'if(Pferdeportal_Affiliate_Router::VERSION!=="6.72.203"){fwrite(STDERR,"FAIL wrong_plugin_version\n");exit(2);} echo "PASS exact_current_6_72_203\n";' --path=/tmp/wp-aff057
 
-      - name: Real WordPress MariaDB tariff-tool KISS proof
+      - name: AFF-ERR-057 exact four-stage render proof
         shell: bash
         run: |
           set -euo pipefail
-          /tmp/wp eval-file "$GITHUB_WORKSPACE/AFFILIATE_HOBBYRAUM/test_tariff_tools_kiss_v672193.php" --path=/tmp/wp-site | tee /tmp/tariff193.log
-          grep -F 'PASS backend_writer_list_visible' /tmp/tariff193.log
-          grep -F 'PASS ordinary_content_zero_tariff_option_reads reads=0' /tmp/tariff193.log
-          grep -F 'PASS multiple_placeholders_one_option_load reads=1' /tmp/tariff193.log
-          grep -F 'PASS central_code_update_immediate' /tmp/tariff193.log
-          grep -F 'PASS placeholder_stable_after_rename' /tmp/tariff193.log
-          grep -F 'PASS inactive_tool_renders_empty' /tmp/tariff193.log
-          grep -F 'PASS trusted_widget_script_not_stripped' /tmp/tariff193.log
-          grep -F 'PASS no_new_table' /tmp/tariff193.log
-          grep -F 'PASS single_option_not_autoloaded' /tmp/tariff193.log
-          grep -F 'PASS article_placeholder_auto_filled_on_render' /tmp/tariff193.log
-          grep -F 'TARIFF_TOOLS_KISS_672193_COMPLETE' /tmp/tariff193.log
+          cat >/tmp/aff-err-057.php <<'PHP'
+          <?php
+          function aff057_fail($stage,$detail=''){
+              fwrite(STDERR,"FAIL stage_".$stage.($detail!==''?' '.$detail:'')."\n");
+              exit(2);
+          }
+          function aff057_pass($stage,$detail=''){
+              echo "PASS stage_".$stage.($detail!==''?' '.$detail:'')."\n";
+          }
+
+          $router=Pferdeportal_Affiliate_Router::instance();
+          $id='aff057-test';
+          $marker='AFF057_RENDER_MARKER';
+          $html='<div class="aff057-calculator">'.$marker.'</div><script>window.aff057=true;</script>';
+
+          // 1) Shortcode registered.
+          if (!shortcode_exists('affiliate_rechner')) {
+              aff057_fail('1_shortcode_registered');
+          }
+          aff057_pass('1_shortcode_registered');
+
+          // 2) Exact ID exists, active, non-empty HTML in the real central option.
+          $now=time();
+          update_option('ppar_tariff_tools_v1', array(
+              $id => array(
+                  'id'=>$id,
+                  'name'=>'AFF057 Test',
+                  'html'=>$html,
+                  'active'=>1,
+                  'created_at'=>$now,
+                  'updated_at'=>$now,
+              ),
+          ), false);
+          $rp=new ReflectionProperty($router,'tariff_tools_request_cache');
+          $rp->setAccessible(true);
+          $rp->setValue($router,null);
+          $stored=get_option('ppar_tariff_tools_v1',array());
+          if (empty($stored[$id]) || empty($stored[$id]['active']) || trim((string)($stored[$id]['html']??''))==='') {
+              aff057_fail('2_id_active_html_present');
+          }
+          aff057_pass('2_id_active_html_present');
+
+          // 3) Callback itself returns the central HTML.
+          $callback=$router->shortcode_tariff_tool(array('id'=>$id));
+          if (strpos((string)$callback,$marker)===false) {
+              aff057_fail('3_shortcode_callback_returns_html','callback='.base64_encode((string)$callback));
+          }
+          aff057_pass('3_shortcode_callback_returns_html');
+
+          // 4) A real classic post through the complete the_content chain contains it.
+          $post_id=wp_insert_post(array(
+              'post_type'=>'post',
+              'post_status'=>'publish',
+              'post_title'=>'AFF057 Calculator Render',
+              'post_content'=>'<p>Vorher</p>[affiliate_rechner id="'.$id.'"]<p>Nachher</p>',
+          ),true);
+          if (is_wp_error($post_id) || !$post_id) {
+              aff057_fail('4_final_article_html_contains_calculator','post_create');
+          }
+
+          global $wp_query, $wp_the_query, $post;
+          $wp_query=new WP_Query(array('p'=>(int)$post_id,'post_type'=>'post'));
+          $wp_the_query=$wp_query;
+          if (!$wp_query->have_posts()) {
+              aff057_fail('4_final_article_html_contains_calculator','query_no_post');
+          }
+          $wp_query->the_post();
+          $raw=(string)get_post_field('post_content',$post_id);
+          $final=(string)apply_filters('the_content',$raw);
+          if (strpos($final,$marker)===false) {
+              aff057_fail(
+                  '4_final_article_html_contains_calculator',
+                  'is_singular='.(is_singular('post')?'1':'0').
+                  ' in_loop='.(in_the_loop()?'1':'0').
+                  ' main='.(is_main_query()?'1':'0').
+                  ' do_shortcode_priority='.var_export(has_filter('the_content','do_shortcode'),true).
+                  ' final='.base64_encode($final)
+              );
+          }
+          aff057_pass('4_final_article_html_contains_calculator');
+          echo "AFF_ERR_057_FOCUSED_WORDPRESS_MARIADB_PASS\n";
+          PHP
+          /tmp/wp eval-file /tmp/aff-err-057.php --path=/tmp/wp-aff057 | tee /tmp/aff-err-057.log
+          grep -F 'AFF_ERR_057_FOCUSED_WORDPRESS_MARIADB_PASS' /tmp/aff-err-057.log
