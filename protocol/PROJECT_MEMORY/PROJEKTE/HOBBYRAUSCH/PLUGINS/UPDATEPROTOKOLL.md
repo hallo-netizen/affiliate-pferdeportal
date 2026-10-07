@@ -532,3 +532,66 @@ SHA-256:
 
 TEST:
 PHP 66/66 PASS; Legacy 270/270 PASS; Fremdkeyword-Test PASS; realer Result-Replay PASS; 0 neue Calls/Kosten/Writes PASS.
+
+
+---
+
+## PU-20261007-011 – HD-001 V1.12.5 KISS Content Capacity / kein automatischer Depth-Weg
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+PROBLEM:
+Die Fehlerkette V1.12.1–V1.12.4 band Content Capacity weiterhin zu stark an einzelne DataForSEO-Longtail-Treffer bzw. an Keyword-Ideas-Tiefendaten.
+
+ROOT CAUSE:
+Content Capacity und SEO-Evidenz wurden vermischt.
+
+KORREKTUR:
+- Fachlogik definiert und zählt eigenständige Artikelintents pro unterster Kategorie.
+- DataForSEO reichert diese Intents an.
+- Exaktes Core-Keyword-/Synonym-Evidence darf Dubletten zusammenführen.
+- Eine fehlende exakte DataForSEO-Zeile löscht keinen fachlich eigenständigen Intent.
+- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen keine neuen Artikel.
+- automatische Depth-Recherche ist im Normalweg deaktiviert.
+- bestehende reale DataForSEO-Evidence wird kostenlos neu ausgewertet.
+
+ARTEFAKT:
+`HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip`
+
+SHA-256:
+`68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
+
+PRÜFBERICHT:
+`HD001_V1.12.5_FINAL_LOCAL_POSNEG_REPORT.txt`
+
+SHA-256:
+`8a6768b4222dd086f3ff124579684feeed6f11f45f268d5596631de326002075`
+
+REAL-RESULT-REPLAY:
+- 16 Kandidaten;
+- 34 ideale Leafs;
+- 1 HOBBY_HUB_CANDIDATE;
+- 1 EDITORIAL_TOPIC_CANDIDATE;
+- 5 AGGREGATION_REVIEW;
+- 3 MACRO_REVIEW;
+- 6 EVIDENCE_REQUIRED;
+- 0 Zielbaum-Writes.
+
+TEST:
+- PHP Source 68/68 PASS;
+- Legacy 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Test PASS;
+- V1.12.1 Regression PASS;
+- echter V1.12.3-Result-Replay PASS;
+- Missing-Provider-Row-Negativtest PASS;
+- Exact-Core-Keyword-Dedupe PASS;
+- automatische Depth-Recherche 0 Calls PASS;
+- 0 neue Kosten PASS;
+- 0 Strukturwrites PASS;
+- Recalc idempotent PASS;
+- Fresh Release PHP 31/31 PASS.
+
+NEXT:
+Genau ein realer WordPress-Readback mit V1.12.5. Keine weitere DataForSEO-Recherche.
