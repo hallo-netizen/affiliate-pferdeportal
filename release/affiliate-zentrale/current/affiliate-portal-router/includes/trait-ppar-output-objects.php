@@ -1152,28 +1152,31 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
-     * Tarifcheck ist ein Direktpartner im bestehenden Importweg, kein neuer Provider.
-     * Produktfamilien werden nur aus der realen Ziel-URL bestimmt.
-     * - Kredit/Darlehen/Finanzierung -> ausschliesslich Kategoriepfade unter "Kosten"
-     * - Versicherung/Haftpflicht -> ausschliesslich Kategoriepfade unter "Versicherung"
-     * Unbekannte/mehrdeutige Tarifcheck-Ziele bleiben fail-closed.
+     * Tarifcheck und CHECK24 sind Direktpartner im bestehenden Importweg, keine
+     * neuen Provideradapter. Produktfamilien werden aus echter Ziel-URL oder
+     * einer ausdruecklich gesetzten manuellen Familie bestimmt.
      */
-    private function output_tarifcheck_banner_family($row) {
+    private function output_comparison_banner_partner($row) {
         if (!is_array($row)) { return ''; }
         $partner = $this->output_text((string)($row['partner_name'] ?? ''));
         $destination = esc_url_raw((string)($row['destination_url'] ?? ''));
         $host = strtolower((string)wp_parse_url($destination, PHP_URL_HOST));
-        $is_tarifcheck = strpos($partner, 'tarifcheck') !== false
+        if (strpos($partner, 'tarifcheck') !== false
             || $host === 'tarifcheck.de'
-            || substr($host, -14) === '.tarifcheck.de';
-        if (!$is_tarifcheck) { return ''; }
+            || substr($host, -14) === '.tarifcheck.de') {
+            return 'tarifcheck';
+        }
+        if (strpos($partner, 'check24') !== false
+            || $host === 'check24.de'
+            || substr($host, -11) === '.check24.de') {
+            return 'check24';
+        }
+        return '';
+    }
 
-        // 6.72.195: Bei einem bewusst manuellen Tarifcheck-Import ist die
-        // vom Nutzer gesetzte Bannerfamilie die autoritative Fachzuordnung.
-        // Der Trackinglink bleibt fuer die Provisionsausgabe erhalten, muss aber
-        // nicht mehr erraten lassen, ob der importierte Stapel Kredit oder
-        // Versicherung ist. Ohne explizite Familie bleibt die bisherige sichere
-        // URL-Erkennung fail-closed aktiv.
+    private function output_tarifcheck_banner_family($row) {
+        if ($this->output_comparison_banner_partner($row) === '') { return ''; }
+
         $payload = json_decode((string)($row['payload'] ?? ''), true);
         $payload = is_array($payload) ? $payload : array();
         $manual_family = sanitize_key((string)($payload['_manual_target_family'] ?? ''));
@@ -1242,6 +1245,7 @@ trait PPAR_Output_Objects_Trait {
         $source=$this->output_banner_destination_source($row);
         $destination=esc_url_raw((string)($row['destination_url']??''));
         $semantic=$this->output_destination_semantic_text($row);
+        $comparison_partner=$this->output_comparison_banner_partner($row);
         $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
@@ -1262,12 +1266,12 @@ trait PPAR_Output_Objects_Trait {
             if(is_wp_error($targets)){continue;}
             $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
 
-            // Tarifcheck bleibt bewusst gruppenbasiert. Eine explizit gesetzte
+            // Vergleichsportale bleiben bewusst gruppenbasiert. Eine explizit gesetzte
             // Gruppe ist Autoritaet; unsichere Trackinglinks werden nicht geraten.
             if(in_array($tarifcheck_family,array('kosten','versicherung'),true)){
-                $map_source=$tarifcheck_family==='kosten'
-                    ? 'tarifcheck_credit_all_cost_categories'
-                    : 'tarifcheck_insurance_all_insurance_categories';
+                $map_source=$comparison_partner==='check24'
+                    ? ($tarifcheck_family==='kosten' ? 'check24_credit_all_cost_categories' : 'check24_insurance_all_insurance_categories')
+                    : ($tarifcheck_family==='kosten' ? 'tarifcheck_credit_all_cost_categories' : 'tarifcheck_insurance_all_insurance_categories');
                 $map_level=$tarifcheck_family==='kosten'
                     ? 'all_cost_categories'
                     : 'all_insurance_categories';
