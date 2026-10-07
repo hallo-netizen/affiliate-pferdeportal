@@ -142,9 +142,9 @@ $upsert_end = strpos($library, 'private function creative_library_import_body', 
 $upsert_fn = ($upsert_start !== false && $upsert_end !== false && $upsert_end > $upsert_start)
     ? substr($library, $upsert_start, $upsert_end - $upsert_start) : '';
 if ($upsert_fn === ''
-    || strpos($upsert_fn, "$existing_dimension_state === 'failed'") === false
-    || strpos($upsert_fn, "$incoming_payload['_dimension_state'] = 'pending'") === false
-    || strpos($upsert_fn, "$asset_retry_reset = true") === false
+    || strpos($upsert_fn, "\$existing_dimension_state === 'failed'") === false
+    || strpos($upsert_fn, "\$incoming_payload['_dimension_state'] = 'pending'") === false
+    || strpos($upsert_fn, "\$asset_retry_reset = true") === false
     || strpos($upsert_fn, "return ($destination_changed || $asset_retry_reset) ? 'updated' : 'unchanged'") === false) {
     $errors[] = 'missing:failed_asset_reopened_only_by_fresh_reimport';
 }
