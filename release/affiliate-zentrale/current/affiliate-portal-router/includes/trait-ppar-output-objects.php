@@ -1040,8 +1040,7 @@ trait PPAR_Output_Objects_Trait {
                 if(!$supported && strlen((string)$word)>=6){
                     foreach($evidence_tokens as $token){
                         if(strlen((string)$token)>=6
-                            && (strpos((string)$token,(string)$word)!==false
-                                || strpos((string)$word,(string)$token)!==false)){
+                            && strpos((string)$token,(string)$word)===0){
                             $supported=true;
                             break;
                         }
