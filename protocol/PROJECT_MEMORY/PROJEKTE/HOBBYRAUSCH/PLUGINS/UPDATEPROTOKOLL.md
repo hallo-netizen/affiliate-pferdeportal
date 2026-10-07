@@ -507,3 +507,28 @@ TEST:
 
 NEXT:
 V1.12.3 installieren und die Tiefenprüfung einmal starten.
+
+
+---
+
+## PU-20261007-010 – HD-001 V1.12.4 Zero-Cost-Relevanz-Neuauswertung
+
+PROBLEM:
+V1.12.3 zählte rohe Keyword-Ideas-Gruppen als zusätzliche Artikelintents. Dadurch konnten fachfremde Treffer die Content-Capacity aufblasen.
+
+KORREKTUR:
+- Fachlogik definiert die Artikelintents.
+- DataForSEO-Rohzeilen dürfen nur bereits definierte PENDING-Intents bestätigen.
+- Provider-Zeilen erzeugen keine neuen Artikel.
+- Bestehende V1.12.3-Daten werden automatisch neu ausgewertet.
+- 0 neue DataForSEO-Aufrufe.
+- 0 neue Kosten.
+- 0 Strukturwrites.
+
+ARTEFAKT:
+`HD001_V1.12.4_V2_RELEVANCE_RECALC_ZERO_COST_HARDPASS.zip`
+SHA-256:
+`5ceffaa03eda90b45a235cf844ff2ddae3bef553f2a61f4ec32ea38eefcf75f6`
+
+TEST:
+PHP 66/66 PASS; Legacy 270/270 PASS; Fremdkeyword-Test PASS; realer Result-Replay PASS; 0 neue Calls/Kosten/Writes PASS.
