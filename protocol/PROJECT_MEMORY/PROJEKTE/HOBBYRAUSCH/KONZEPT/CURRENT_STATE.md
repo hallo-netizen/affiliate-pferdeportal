@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-BEWERTUNGSVERTRAG GEBUNDEN / BATCH 001 AUSGEFÜHRT / EVIDENZLÜCKEN OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.1 PRO LEAF + ZUSAMMENFASSUNG GEBUNDEN / BATCH-001-FACHVORPRÜFUNG FERTIG / DATAFORSEO-ABGLEICH OFFEN
 
 ## Rolle
 
@@ -126,11 +126,23 @@ Batch 001 bestätigt:
 - vier aktuelle Alias-/Kanonikbindungen bleiben stabil;
 - zwölf Kandidaten benötigen noch semantische Identitäts-/Unterformprüfung;
 - Monetarisierung erzeugt keine automatische CORE-Promotion;
-- der Hauptengpass ist jetzt Identitäts-/Content-Capacity-/Scope-/Ownership-Evidenz, nicht mehr die Regeldefinition.
+- der Hauptengpass ist jetzt der echte DataForSEO-Abgleich der vorgeschlagenen Artikelintents plus Ownership; die Regeldefinition ist nachgezogen.
+
+## Nachprüfung gegen das vollständige Konzept
+
+Nachgezogen:
+- nicht die Gesamtzahl eines Hobbys zählt, sondern jede unterste Kategorie einzeln;
+- Ziel pro unterster Kategorie: 5–12 eigenständige Artikelintents;
+- kleine valide Hobbys dürfen in stärkeren Übersichts-/Leaf-/Magazinstrukturen zusammengefasst werden, ohne ihre Hobby-Identität zu verlieren;
+- neue Zwischenkategorien werden erst im späteren Gesamt-Delta gebaut;
+- DataForSEO validiert Nachfrage, Synonyme und Intent-Trennung, erzeugt aber keine Struktur.
+
+Konzeptaudit:
+`../SEO_KATEGORIEN/HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
 
 ## Pilotbefund
 
-- Buchbinden → HOBBY_HUB bleibt stabil;
+- Buchbinden → bestehender Live-/Technikpilot bleibt stabil; endgültiger V2-HOBBY_HUB-PASS ist wegen der strengeren 5–12-pro-Leaf-Regel wieder offen;
 - Fotografie → Macro-/Orientation-Prüfung statt Riesenhub;
 - Garten → kein einzelner Vollhub;
 - Treibholz sammeln → EDITORIAL erhalten, kein unbelegter CORE-Hub;
@@ -150,14 +162,18 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
+`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
 
-Der erste 16er Batch ist ausgeführt, aber 15 Fälle benötigen noch Evidenz für mindestens einen entscheidenden Gate-Bereich.
-Damit ist noch keine 841er Massenbewertung freigegeben.
+Die fachliche Vorprüfung des 16er Batches ist fertig.
+Für endgültige Leaf-Zahlen fehlt der reale DataForSEO-Abgleich.
+
+Buchbinden zeigt bereits, warum das nötig ist:
+vorhandene echte Evidence ergibt in den vier aktiven Leafs 4 / 5 / 3 / 4 distinct Intent-Gruppen.
+Damit ist der alte Pilot weiterhin gültig, aber die neue V2-Hub-Abnahme noch offen.
 
 ## EXAKT EINE NEXT ACTION
 
-Die fehlende Identitäts-/Scope-/Content-Capacity-/Ownership-Evidenz für den gebundenen Batch 001 erzeugen und denselben Batch anschließend erneut durch den maschinenlesbaren Bewertungsvertrag laufen lassen.
+Den vorbereiteten Batch-001-DataForSEO-Request über den bestehenden authentifizierten Hobby-Depot-Weg ausführen und danach jede Leaf-Kategorie neu zählen, Ownership prüfen und kleine Themen auf sinnvolle Zusammenfassung prüfen.
 
 Noch NICHT:
 - WordPress synchronisieren;
