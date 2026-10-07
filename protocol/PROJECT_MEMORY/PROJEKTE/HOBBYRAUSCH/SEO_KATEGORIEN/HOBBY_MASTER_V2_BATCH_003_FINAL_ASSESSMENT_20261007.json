@@ -1,0 +1,465 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_003_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_003_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841
+  },
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. Structural assessment uses subject-matter capacity; consolidated DataForSEO enrichment follows the full structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:drohnenbau",
+      "canonical_name": "Drohnenbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "leaf_plan": [
+        [
+          "Einstieg & Planung",
+          6
+        ],
+        [
+          "Rahmen & Mechanik",
+          6
+        ],
+        [
+          "Antrieb & Energie",
+          7
+        ],
+        [
+          "Elektronik & Flight Controller",
+          8
+        ],
+        [
+          "Aufbau, Test & Tuning",
+          7
+        ]
+      ],
+      "ownership": "Owns building/configuring drones as a maker practice. FPV-specific flying systems, racing and photography keep their own intents."
+    },
+    {
+      "hobby_id": "hobby:fpv-drohnen",
+      "canonical_name": "FPV-Drohnen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "leaf_plan": [
+        [
+          "Einstieg & System",
+          6
+        ],
+        [
+          "Video, Kamera & Goggles",
+          7
+        ],
+        [
+          "Funk & Steuerung",
+          6
+        ],
+        [
+          "Build & Setup",
+          8
+        ],
+        [
+          "Fliegen & Sicherheit",
+          6
+        ]
+      ],
+      "ownership": "Owns general FPV-drone setup and flying. Competitive racing belongs to FPV-Racing; generic drone construction belongs to Drohnenbau."
+    },
+    {
+      "hobby_id": "hobby:fpv-racing",
+      "canonical_name": "FPV-Racing",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "bewegen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "leaf_plan": [
+        [
+          "Racer-Setup",
+          6
+        ],
+        [
+          "Tuning & Performance",
+          7
+        ],
+        [
+          "Strecken & Gates",
+          5
+        ],
+        [
+          "Flugtraining",
+          6
+        ],
+        [
+          "Rennen & Regeln",
+          5
+        ]
+      ],
+      "ownership": "Owns competitive FPV racing, race setup, track practice and race-specific tuning. Generic FPV operation stays with FPV-Drohnen."
+    },
+    {
+      "hobby_id": "hobby:drohnenfotografie",
+      "canonical_name": "Drohnenfotografie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Ausrüstung & Setup",
+          6
+        ],
+        [
+          "Kamera & Belichtung",
+          7
+        ],
+        [
+          "Flugplanung & Aufnahme",
+          6
+        ],
+        [
+          "Bildgestaltung & Bearbeitung",
+          7
+        ]
+      ],
+      "ownership": "Owns photographic image-making with drones. Generic drone operation/building stays with the drone identities; generic photography stays with Fotografie."
+    },
+    {
+      "hobby_id": "hobby:drone-soccer",
+      "canonical_name": "Drone Soccer",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "bewegen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "topic_capacity": 8,
+      "ownership": "Owns the niche team sport using protected competition drones. Generic drone construction and FPV operation remain separate."
+    },
+    {
+      "hobby_id": "hobby:rc-crawling",
+      "canonical_name": "RC-Crawling",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "leaf_plan": [
+        [
+          "Einstieg & Fahrzeugwahl",
+          6
+        ],
+        [
+          "Fahrwerk & Geometrie",
+          7
+        ],
+        [
+          "Reifen, Felgen & Grip",
+          6
+        ],
+        [
+          "Antrieb & Elektronik",
+          7
+        ],
+        [
+          "Fahrtechnik & Gelände",
+          6
+        ]
+      ],
+      "ownership": "Owns technical crawling and off-road obstacle driving. Scale-focused realism stays with Scale-Crawling."
+    },
+    {
+      "hobby_id": "hobby:scale-crawling",
+      "canonical_name": "Scale-Crawling",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "topic_capacity": 8,
+      "ownership": "Owns scale realism, scale accessories and realistic trail presentation within crawling. Performance-oriented generic crawling stays with RC-Crawling."
+    },
+    {
+      "hobby_id": "hobby:rc-baumaschinen",
+      "canonical_name": "RC-Baumaschinen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Modelle & Einstieg",
+          6
+        ],
+        [
+          "Hydraulik & Mechanik",
+          7
+        ],
+        [
+          "Elektronik & Steuerung",
+          6
+        ],
+        [
+          "Betrieb, Parcours & Wartung",
+          7
+        ]
+      ],
+      "ownership": "Owns radio-controlled construction machinery and functional model operation."
+    },
+    {
+      "hobby_id": "hobby:rc-lkw",
+      "canonical_name": "RC-LKW",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Einstieg & Chassis",
+          6
+        ],
+        [
+          "Antrieb & Lenkung",
+          6
+        ],
+        [
+          "Elektronik, Licht & Sound",
+          7
+        ],
+        [
+          "Aufbau, Scale & Betrieb",
+          7
+        ]
+      ],
+      "ownership": "Owns radio-controlled truck building, scale outfitting and operation."
+    },
+    {
+      "hobby_id": "hobby:rc-panzer",
+      "canonical_name": "RC-Panzer",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Modelle & Maßstäbe",
+          5
+        ],
+        [
+          "Fahrwerk & Antrieb",
+          6
+        ],
+        [
+          "Turm, Funktionen & Elektronik",
+          7
+        ],
+        [
+          "Scale, Wartung & Betrieb",
+          6
+        ]
+      ],
+      "ownership": "Owns radio-controlled tank models as functional model-building practice; historical subject matter is context, not a separate owner."
+    },
+    {
+      "hobby_id": "hobby:rc-boote",
+      "canonical_name": "RC-Boote",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic RC-boat orientation. RC-Segelboote and RC-U-Boote keep specific identities; other powered/scale boat variants may later receive their own owners if justified."
+    },
+    {
+      "hobby_id": "hobby:rc-segelboote",
+      "canonical_name": "RC-Segelboote",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Einstieg & Bootswahl",
+          5
+        ],
+        [
+          "Rigg & Segel",
+          6
+        ],
+        [
+          "RC-Technik & Trimmung",
+          6
+        ],
+        [
+          "Segeln, Regatta & Wartung",
+          7
+        ]
+      ],
+      "ownership": "Owns sail-powered RC boats and sailing-specific setup/operation."
+    },
+    {
+      "hobby_id": "hobby:rc-u-boote",
+      "canonical_name": "RC-U-Boote",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Einstieg & Bauformen",
+          5
+        ],
+        [
+          "Tauchtechnik & Ballast",
+          7
+        ],
+        [
+          "Antrieb, RC & Dichtigkeit",
+          7
+        ],
+        [
+          "Test, Betrieb & Wartung",
+          6
+        ]
+      ],
+      "ownership": "Owns radio-controlled submarines and their diving/sealing/control technology."
+    },
+    {
+      "hobby_id": "hobby:rc-flugzeuge",
+      "canonical_name": "RC-Flugzeuge",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "leaf_plan": [
+        [
+          "Einstieg & Flugzeugwahl",
+          6
+        ],
+        [
+          "Antrieb & Energie",
+          7
+        ],
+        [
+          "Fernsteuerung & Elektronik",
+          6
+        ],
+        [
+          "Bau, Schwerpunkt & Setup",
+          8
+        ],
+        [
+          "Fliegen, Training & Wartung",
+          7
+        ]
+      ],
+      "ownership": "Owns generic powered RC-airplane basics and operation. Glider-specific intents stay with RC-Segelflug."
+    },
+    {
+      "hobby_id": "hobby:rc-segelflug",
+      "canonical_name": "RC-Segelflug",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "leaf_plan": [
+        [
+          "Seglerwahl & Einstieg",
+          5
+        ],
+        [
+          "Thermik & Hangflug",
+          6
+        ],
+        [
+          "Startarten & Antrieb",
+          6
+        ],
+        [
+          "Trimmung, Flugtechnik & Wartung",
+          7
+        ]
+      ],
+      "ownership": "Owns sailplane-specific RC flight, thermals, slope soaring and glider setup."
+    },
+    {
+      "hobby_id": "hobby:rc-helikopter",
+      "canonical_name": "RC-Helikopter",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "leaf_plan": [
+        [
+          "Einstieg & Heliwahl",
+          6
+        ],
+        [
+          "Mechanik & Rotorkopf",
+          7
+        ],
+        [
+          "Elektronik & Flybarless",
+          7
+        ],
+        [
+          "Setup & Trimmung",
+          6
+        ],
+        [
+          "Flugtraining & Wartung",
+          7
+        ]
+      ],
+      "ownership": "Owns radio-controlled helicopters, helicopter-specific mechanics, setup and flight training."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 12,
+    "orientation_universe": 1,
+    "editorial_topic": 3,
+    "article_only": 0,
+    "finder_only": 0,
+    "out_of_scope": 0,
+    "unresolved": 0,
+    "seo_enrichment_pending": 16,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 003 to the assessment ledger and generate Batch 004 from the next 16 final-unassessed master identities."
+}
