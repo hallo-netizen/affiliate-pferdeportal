@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / REGELN 1.4 KISS / V1.12.5 LIVE-READBACK WAR STALE V1.12.3-EXPORT / V1.12.6 STALE-EXPORT-FAILCLOSED LOKAL HARD PASS / NEUER REALER EXPORT OFFEN / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.6 READ-ONLY V2-BEWERTUNG REAL PASS / EXPORT-GATE GESCHLOSSEN / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -160,21 +160,23 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_V126_REAL_EXPORT_READBACK_PENDING`
+Kein technischer Plugin-Blocker für Batch 001.
 
-Kein DataForSEO-Research-Schritt ist offen.
+V1.12.6 ist real bestätigt:
+- Recalc COMPLETE;
+- 0 neue Provider-Aufrufe;
+- 0 neue Kosten;
+- 0 Strukturwrites;
+- Export liefert den korrigierten Stand.
 
-Offen ist nur noch der reale Export-Nachweis des gehärteten V1.12.6-Download-Gates.
+Der offene Punkt liegt jetzt fachlich außerhalb des Plugin-Gates:
+`HD001_V2_BATCH001_SCOPE_IDENTITY_OWNERSHIP_REVIEW_PENDING`.
 
 ## EXAKT EINE NEXT ACTION
 
-V1.12.6 installieren und direkt `Ergebnis als JSON herunterladen` klicken.
+Keine weitere Plugin-Änderung.
 
-Kein Reset.
-Kein DataForSEO.
-Keine Tiefenprüfung.
-
-Der Export selbst muss das alte Ergebnis kostenlos neu berechnen.
+Fachprüfung der sechs EVIDENCE_REQUIRED-Hubfälle fortsetzen.
 
 ## Release-/Artefaktgrenze
 
