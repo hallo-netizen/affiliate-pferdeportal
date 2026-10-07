@@ -2,8 +2,8 @@
 
 STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 2.1
-ERSETZT: Fassung 2.0 vom 2026-10-07; davor Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.2
+ERSETZT: Fassung 2.1 vom 2026-10-07; davor Fassung 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -89,7 +89,7 @@ Leaf-Kategorie:
 - 0–3 tragfähige Beitragsintentionen: keine eigene Kategorie;
 - 4: nur begründete Ausnahme;
 - 5–12: Zielbereich;
-- 13–15: zwingende Split-Prüfung;
+- 13–14: zwingende Split-Prüfung;
 - >15: nur explizite Ausnahme.
 
 Hobby-Hub:
@@ -108,8 +108,8 @@ Jede unterste Kategorie muss separat tragfähig sein:
 - 0–3 eigenständige Beitragsintentionen: keine eigene Leaf-Kategorie;
 - 4: begründete Ausnahme;
 - 5–12: Zielbereich;
-- 13–15: Split-Prüfung;
-- 16+: Split erforderlich.
+- 13–14: Split-Prüfung;
+- ab etwa 15: Split erforderlich.
 
 Ein Beitrag zählt nur bei eigenständigem Nutzer-/Suchintent.
 Synonyme und bloße Formulierungsvarianten zählen nicht mehrfach.
