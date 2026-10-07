@@ -45,7 +45,8 @@ if (is_wp_error($manual)) {
 }
 if (($manual['creative_id'] ?? '') !== 'check24-test-01'
     || ($manual['tracking_url'] ?? '') !== 'https://tracking.example.test/check24'
-    || ($manual['destination_url'] ?? '') !== 'https://www.check24.de/') {
+    || ($manual['destination_url'] ?? '') !== 'https://www.check24.de/'
+    || ($manual['title_source'] ?? '') !== 'manual_user') {
     $fail('manual_row_fields');
 }
 $ok('manual_banner_row_built');
@@ -58,6 +59,16 @@ if (!is_wp_error($invalid) || $invalid->get_error_code() !== 'manual_banner_trac
     $fail('manual_missing_tracking_not_blocked');
 }
 $ok('manual_banner_missing_tracking_fails_closed');
+
+$untitled = $manual_m->invoke($o, array(
+    'manual_banner_external_id'=>'check24-test-no-title',
+    'manual_banner_image_url'=>'https://cdn.example.test/check24-banner-no-title.png',
+    'manual_banner_tracking_url'=>'https://tracking.example.test/check24-no-title',
+));
+if (is_wp_error($untitled) || ($untitled['title_source'] ?? '') !== 'manual_missing') {
+    $fail('manual_missing_title_provenance');
+}
+$ok('manual_missing_title_marked_non_evidence');
 
 $install = new ReflectionMethod($o, 'maybe_install_creative_library_schema');
 $install->setAccessible(true);
