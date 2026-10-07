@@ -1,0 +1,38 @@
+{
+  "contract": "HOBBY_MASTER_V2_INTAKE_DELTA",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "READY_NOT_MATERIALIZED_IN_SOURCE_MASTER",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries_before": 841
+  },
+  "operations": [
+    {
+      "op": "ADD_PROVISIONAL_IDENTITY",
+      "research_key": "research:01",
+      "proposed_hobby_id": "hobby:fotografie",
+      "canonical_name": "Fotografie",
+      "aliases": [],
+      "evidence": {
+        "scope_status": "IN_SCOPE",
+        "natural_world": "gestalten",
+        "source": "HOBBY_MASTER_V2_PILOT_20261007.md",
+        "size_status": "MACRO_REVIEW",
+        "portal_role": "UNASSESSED",
+        "primary_pillar": "UNASSESSED"
+      },
+      "defaults": {
+        "retention": "KEEP",
+        "monetization_fit": "UNKNOWN",
+        "structural_role": "UNASSESSED",
+        "publication_role": "UNASSESSED",
+        "assessment_status": "PENDING"
+      },
+      "publish_allowed": false
+    }
+  ],
+  "canonical_entries_after_materialization": 842,
+  "hard_rule": "This is a master-intake delta only. It is not a target-tree delta and creates no WordPress, HivePress or frontend node."
+}
