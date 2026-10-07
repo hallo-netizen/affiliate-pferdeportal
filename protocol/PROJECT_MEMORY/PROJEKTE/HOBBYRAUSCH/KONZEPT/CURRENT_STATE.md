@@ -122,12 +122,15 @@ Damit ist die frühere Lücke zwischen Konzeptregel und tatsächlicher maschinen
 Wichtig:
 Fehlende Evidenz führt zu `EVIDENCE_REQUIRED`, nicht zu einer geratenen Rollen- oder Weltzuordnung.
 
-Batch 001 bestätigt:
+Batch 001 bestätigt nach dem V1.12.5-KISS-Replay:
 - ID-Eindeutigkeit funktioniert;
-- vier aktuelle Alias-/Kanonikbindungen bleiben stabil;
-- zwölf Kandidaten benötigen noch semantische Identitäts-/Unterformprüfung;
+- aktuelle Alias-/Kanonikbindungen bleiben stabil;
 - Monetarisierung erzeugt keine automatische CORE-Promotion;
-- der Hauptengpass ist jetzt der echte DataForSEO-Abgleich der vorgeschlagenen Artikelintents plus Ownership; die Regeldefinition ist nachgezogen.
+- Content Capacity kann fachlich stabil pro unterster Kategorie berechnet werden;
+- DataForSEO ist Abgleich/Dedupe, nicht Content-Erzeuger;
+- sechs kapazitätsseitig tragfähige Hubfälle brauchen noch Scope-/Identitätsprüfung;
+- Buchbinden ist im Testbatch vollständiger HOBBY_HUB_CANDIDATE;
+- der nächste fachliche Engpass ist Scope/Identität/Ownership, nicht weitere DataForSEO-Tiefenrecherche.
 
 ## Nachprüfung gegen das vollständige Konzept
 
