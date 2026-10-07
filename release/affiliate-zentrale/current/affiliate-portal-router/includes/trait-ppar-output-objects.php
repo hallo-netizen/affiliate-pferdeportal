@@ -3056,6 +3056,9 @@ trait PPAR_Output_Objects_Trait {
                 $compatible_banner_slots = $output_type === 'portal_banner'
                     ? $this->output_banner_compatible_slots($row,$portal)
                     : array();
+                if ($output_type === 'portal_banner' && $compatible_banner_slots) {
+                    $classification['_ppar_banner_compatible_slots'] = $compatible_banner_slots;
+                }
 
                 $target = is_array($classification['target'] ?? null) ? $classification['target'] : array();
                 $slot = array('slot_id'=>''); $status = sanitize_key((string) ($classification['status'] ?? 'review'));
