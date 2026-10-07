@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN",
-  "version": "1.0",
+  "version": "1.1",
   "effective_date": "2026-10-07",
-  "status": "READY_FOR_HD001_V1_12_2_WORDPRESS_DEPTH_RUN",
+  "status": "HISTORICAL_EXECUTED__SUPERSEDED_BY_RULES_1_4_KISS",
   "source_result": {
     "contract": "APKW_HOBBY_MASTER_V2_ASSESSMENT_RESULT_V1",
     "version": "1.0",
@@ -20,7 +20,7 @@
     "cost_usd": 0.02472,
     "wordpress_structure_writes": 0
   },
-  "reason": "The exact keyword_overview stage does not complete the active ruleset's required SEO-depth evidence. Missing exact rows remain PENDING and are not negative structural evidence.",
+  "reason": "Historical plan retained for provenance only. Under rules 1.4, subject-matter logic defines content capacity; DataForSEO cross-checks and may deduplicate but raw depth rows neither create nor delete article intents.",
   "followup": {
     "plugin_version": "1.12.2",
     "reuse_prior_paid_overview": true,
@@ -44,5 +44,21 @@
     "Recount each lowest-level category separately.",
     "Recalculate batch ownership overlaps.",
     "Never create, rename, move or delete WordPress/HivePress structure."
-  ]
+  ],
+  "historical_outcome": {
+    "executed": true,
+    "plugin_version": "1.12.3",
+    "paid_calls_depth": 38,
+    "total_historical_paid_calls_including_initial_overview": 39,
+    "total_historical_cost_usd": 0.9738000000000004,
+    "structure_writes": 0,
+    "lesson": "Raw keyword_ideas rows are not article intents and automatic depth research is not required for normal content-capacity counting."
+  },
+  "superseded_by": {
+    "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+    "plugin_version": "1.12.5",
+    "artifact": "HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip",
+    "normal_path_automatic_depth_research": false,
+    "new_provider_calls_for_recalc": 0
+  }
 }
