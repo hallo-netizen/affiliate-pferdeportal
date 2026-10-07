@@ -108,3 +108,5 @@ Zusätzlich ausdrücklich vom Nutzer gebunden:
 - Der händische Import benutzt dieselbe Creative Library, dieselbe technische Bildprüfung und dieselben gespeicherten Zielzuordnungen wie andere Banner.
 - Diese Bedienerweiterung ändert **keine** Ranking-/Zuordnungsregel und hebt das offene Importbasis-Gate nicht auf.
 
+
+- Tarifcheck und CHECK24 dürfen denselben bestehenden Direktpartner-Familienweg für **Versicherungen** bzw. **Kreditvergleich/Kosten** benutzen. Die Partneridentität bleibt getrennt; es wird kein CHECK24-API-Vertrag erfunden.
