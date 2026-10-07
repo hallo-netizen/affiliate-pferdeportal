@@ -797,12 +797,20 @@ trait PPAR_Creative_Library_Trait {
         $provider_raw_json = is_scalar($row['provider_raw_json'] ?? null)
             ? (string) $row['provider_raw_json'] : '';
         $provider_raw_sha256 = strtolower(trim((string) ($row['provider_raw_sha256'] ?? '')));
+        $provider_raw_valid = false;
         if ($provider_raw_json !== ''
             && preg_match('/^[a-f0-9]{64}$/', $provider_raw_sha256)
             && hash_equals(hash('sha256', $provider_raw_json), $provider_raw_sha256)
             && is_array(json_decode($provider_raw_json, true))) {
             $payload['_provider_raw_json'] = $provider_raw_json;
             $payload['_provider_raw_sha256'] = $provider_raw_sha256;
+            $provider_raw_valid = true;
+        }
+        if ($provider === 'adcell' && $type === 'banner' && !$provider_raw_valid) {
+            return new WP_Error(
+                'creative_import_provider_raw',
+                'ADCELL-Banner ohne vollständigen und integritätsgeprüften Provider-Rohdatensatz wird fail-closed blockiert.'
+            );
         }
 
         foreach ((array) $row as $key => $value) {
@@ -1031,6 +1039,42 @@ trait PPAR_Creative_Library_Trait {
         return $this->creative_library_parse_csv($body, 5000);
     }
 
+    private function creative_library_manual_banner_row($source) {
+        $image_url = esc_url_raw((string) wp_unslash($source['manual_banner_image_url'] ?? ''));
+        $tracking_url = esc_url_raw((string) wp_unslash($source['manual_banner_tracking_url'] ?? ''));
+        $destination_url = esc_url_raw((string) wp_unslash($source['manual_banner_destination_url'] ?? ''));
+        if ($image_url === '' || !wp_http_validate_url($image_url)) {
+            return new WP_Error('manual_banner_image', 'Für einen händischen Banner ist eine gültige Bild-URL erforderlich.');
+        }
+        if ($tracking_url === '' || !wp_http_validate_url($tracking_url)) {
+            return new WP_Error('manual_banner_tracking', 'Für einen händischen Banner ist ein gültiger Tracking-Link erforderlich.');
+        }
+        if ($destination_url !== '' && !wp_http_validate_url($destination_url)) {
+            return new WP_Error('manual_banner_destination', 'Die optionale Ziel-URL ist ungültig.');
+        }
+        $title = sanitize_text_field((string) wp_unslash($source['manual_banner_title'] ?? ''));
+        $description = sanitize_textarea_field((string) wp_unslash($source['manual_banner_description'] ?? ''));
+        $tags = sanitize_text_field((string) wp_unslash($source['manual_banner_tags'] ?? ''));
+        $external_id = preg_replace('/[^0-9A-Za-z._-]/', '', (string) wp_unslash($source['manual_banner_external_id'] ?? ''));
+        if ($external_id === '') {
+            $external_id = 'manual-' . substr(hash('sha256', $image_url . '|' . $tracking_url . '|' . $destination_url), 0, 24);
+        }
+        return array(
+            'creative_id'=>$external_id,
+            'creative_type'=>'banner',
+            'creative_title'=>$title,
+            'creative_description'=>$description,
+            'creative_tag'=>$tags,
+            'image_source'=>$image_url,
+            'destination_url'=>$destination_url,
+            'tracking_url'=>$tracking_url,
+            'width'=>absint($source['manual_banner_width'] ?? 0),
+            'height'=>absint($source['manual_banner_height'] ?? 0),
+            'status'=>'active',
+            '_source_kind'=>'manual_banner',
+        );
+    }
+
     private function creative_library_partner_context($source) {
         $provider = sanitize_key((string) ($source['provider'] ?? 'awin'));
         $partner_external_id = preg_replace('/[^0-9A-Za-z._-]/', '', (string) ($source['partner_external_id'] ?? ''));
@@ -1063,33 +1107,46 @@ trait PPAR_Creative_Library_Trait {
         if (is_wp_error($context)) {
             $this->creative_library_redirect('failed', $context->get_error_message());
         }
-        $paste = trim((string) wp_unslash($_POST['creative_codes'] ?? ''));
-        $body = '';
-        $extension = '';
-        $paste_mode = false;
-        if ($paste !== '') {
-            $body = $paste;
-            $extension = 'txt';
-            $paste_mode = true;
-        } elseif (!empty($_FILES['creative_file']['tmp_name'])) {
-            $file = $_FILES['creative_file'];
-            if (!empty($file['error']) || !is_uploaded_file($file['tmp_name'])) {
-                $this->creative_library_redirect('failed', 'Dateiupload fehlgeschlagen.');
+        $import_mode = sanitize_key((string) wp_unslash($_POST['import_mode'] ?? 'bulk'));
+        if ($import_mode === 'manual_banner') {
+            $manual_row = $this->creative_library_manual_banner_row($_POST);
+            if (is_wp_error($manual_row)) {
+                $this->creative_library_redirect('failed', $manual_row->get_error_message(), $context);
             }
-            if ((int) $file['size'] <= 0 || (int) $file['size'] > 20971520) {
-                $this->creative_library_redirect('failed', 'Die Datei muss zwischen 1 Byte und 20 MiB groß sein.');
-            }
-            $extension = strtolower(pathinfo((string) $file['name'], PATHINFO_EXTENSION));
-            if (!in_array($extension, $this->creative_library_allowed_upload_extensions(), true)) {
-                $this->creative_library_redirect('failed', 'Nur CSV, JSON oder TXT sind zulässig.');
-            }
-            $body = (string) file_get_contents($file['tmp_name']);
+            $parsed = array(
+                'rows'=>array($manual_row),
+                'mapping'=>$this->creative_library_detect_mapping(array_keys($manual_row)),
+                'format'=>'manual_banner',
+            );
         } else {
-            $this->creative_library_redirect('failed', 'Bitte eine Sammeldatei hochladen oder Banner-Codes einfügen.');
-        }
-        $parsed = $this->creative_library_import_body($body, $extension, $paste_mode);
-        if (is_wp_error($parsed)) {
-            $this->creative_library_redirect('failed', $parsed->get_error_message());
+            $paste = trim((string) wp_unslash($_POST['creative_codes'] ?? ''));
+            $body = '';
+            $extension = '';
+            $paste_mode = false;
+            if ($paste !== '') {
+                $body = $paste;
+                $extension = 'txt';
+                $paste_mode = true;
+            } elseif (!empty($_FILES['creative_file']['tmp_name'])) {
+                $file = $_FILES['creative_file'];
+                if (!empty($file['error']) || !is_uploaded_file($file['tmp_name'])) {
+                    $this->creative_library_redirect('failed', 'Dateiupload fehlgeschlagen.');
+                }
+                if ((int) $file['size'] <= 0 || (int) $file['size'] > 20971520) {
+                    $this->creative_library_redirect('failed', 'Die Datei muss zwischen 1 Byte und 20 MiB groß sein.');
+                }
+                $extension = strtolower(pathinfo((string) $file['name'], PATHINFO_EXTENSION));
+                if (!in_array($extension, $this->creative_library_allowed_upload_extensions(), true)) {
+                    $this->creative_library_redirect('failed', 'Nur CSV, JSON oder TXT sind zulässig.');
+                }
+                $body = (string) file_get_contents($file['tmp_name']);
+            } else {
+                $this->creative_library_redirect('failed', 'Bitte eine Sammeldatei hochladen, Banner-Codes einfügen oder den händischen Banner-Import verwenden.');
+            }
+            $parsed = $this->creative_library_import_body($body, $extension, $paste_mode);
+            if (is_wp_error($parsed)) {
+                $this->creative_library_redirect('failed', $parsed->get_error_message());
+            }
         }
         $counts = array('seen'=>0,'imported'=>0,'updated'=>0,'unchanged'=>0,'blocked'=>0,'failed'=>0);
         $banner_identity_hashes = array();
@@ -1626,6 +1683,13 @@ trait PPAR_Creative_Library_Trait {
                 'name'=>'Tarifcheck',
             );
         }
+        if (!isset($out['direct:check24'])) {
+            $out['direct:check24'] = array(
+                'provider'=>'direct',
+                'external_id'=>'check24',
+                'name'=>'CHECK24',
+            );
+        }
 
         uasort($out, static function ($left, $right) {
             $provider_cmp = strnatcasecmp((string) ($left['provider'] ?? ''), (string) ($right['provider'] ?? ''));
@@ -1767,8 +1831,14 @@ trait PPAR_Creative_Library_Trait {
             wp_die('Keine Berechtigung.');
         }
         $snapshots = $this->creative_library_snapshots_for_select();
-        $provider = sanitize_key((string) ($_GET['provider'] ?? ''));
+        $provider_filter = sanitize_text_field((string) wp_unslash($_GET['provider'] ?? ''));
         $partner_external_id = preg_replace('/[^0-9A-Za-z._-]/', '', rawurldecode((string) ($_GET['partner_external_id'] ?? '')));
+        if (in_array($provider_filter, array('direct:tarifcheck','direct:check24'), true)) {
+            $provider = 'direct';
+            $partner_external_id = $provider_filter === 'direct:tarifcheck' ? 'tarifcheck' : 'check24';
+        } else {
+            $provider = sanitize_key($provider_filter);
+        }
         $topic_status = sanitize_key((string) ($_GET['topic_status'] ?? ''));
         $selected = !empty($_GET['selected']);
         $counts = $this->creative_library_count_rows();
@@ -1844,7 +1914,7 @@ trait PPAR_Creative_Library_Trait {
                     <input type="hidden" name="action" value="ppar_creative_library_import">
                     <?php wp_nonce_field('ppar_creative_library_import', 'ppar_creative_library_nonce'); ?>
                     <div class="ppar-library-import"><div>
-                        <p><label><strong>Aufgenommener Partner</strong><br><select id="ppar-library-snapshot"><option value="" <?php selected($default_snapshot_key, ''); ?>>Manuell eingeben</option><option value="direct:tarifcheck" <?php selected($default_snapshot_key, 'direct:tarifcheck'); ?> data-provider="direct" data-external="tarifcheck" data-name="Tarifcheck">Direktpartner · Tarifcheck · tarifcheck</option><?php foreach ($snapshots as $key => $snapshot) : if ((string)$key === 'direct:tarifcheck') continue; ?><option value="<?php echo esc_attr($key); ?>" <?php selected($default_snapshot_key, (string) $key); ?> data-provider="<?php echo esc_attr($snapshot['provider']); ?>" data-external="<?php echo esc_attr($snapshot['external_id']); ?>" data-name="<?php echo esc_attr($snapshot['name']); ?>"><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . $snapshot['name'] . ($snapshot['external_id'] !== '' ? ' · ' . $snapshot['external_id'] : '')); ?></option><?php endforeach; ?></select></label></p>
+                        <p><label><strong>Aufgenommener Partner</strong><br><select id="ppar-library-snapshot"><option value="" <?php selected($default_snapshot_key, ''); ?>>Manuell eingeben</option><option value="direct:tarifcheck" <?php selected($default_snapshot_key, 'direct:tarifcheck'); ?> data-provider="direct" data-external="tarifcheck" data-name="Tarifcheck">Direktpartner · Tarifcheck · tarifcheck</option><option value="direct:check24" <?php selected($default_snapshot_key, 'direct:check24'); ?> data-provider="direct" data-external="check24" data-name="CHECK24">Direktpartner · CHECK24 · check24</option><?php foreach ($snapshots as $key => $snapshot) : if (in_array((string)$key, array('direct:tarifcheck','direct:check24'), true)) continue; ?><option value="<?php echo esc_attr($key); ?>" <?php selected($default_snapshot_key, (string) $key); ?> data-provider="<?php echo esc_attr($snapshot['provider']); ?>" data-external="<?php echo esc_attr($snapshot['external_id']); ?>" data-name="<?php echo esc_attr($snapshot['name']); ?>"><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . $snapshot['name'] . ($snapshot['external_id'] !== '' ? ' · ' . $snapshot['external_id'] : '')); ?></option><?php endforeach; ?></select></label></p>
                         <p><label><strong>Provider</strong><br><select id="ppar-library-provider" name="provider" required><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected((string)$default['provider'],$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select></label></p>
                         <p><label><strong>Partner-ID</strong><br><input id="ppar-library-external" type="text" name="partner_external_id" maxlength="191" value="<?php echo esc_attr($default['external_id']); ?>"></label></p>
                         <p><label><strong>Partnername</strong><br><input id="ppar-library-name" type="text" name="partner_name" required maxlength="180" value="<?php echo esc_attr($default['name']); ?>"></label></p>
@@ -1852,15 +1922,27 @@ trait PPAR_Creative_Library_Trait {
                     </div><div>
                         <p><label><strong>Sammeldatei</strong><br><input type="file" name="creative_file" accept=".csv,.json,.txt"></label><br><span class="description">CSV, JSON oder TXT; maximal 20 MiB und 5.000 Werbemittel.</span></p>
                         <p><label><strong>Oder mehrere Banner-Codes gesammelt einfügen</strong><br><textarea name="creative_codes" rows="8" placeholder="Mehrere vollständige &lt;a&gt;&lt;img&gt;-Codes auf einmal"></textarea></label></p>
-                        <p class="description"><strong>Tarifcheck:</strong> Provider „Direktpartner“, Partnername „Tarifcheck“. Reihenfolge: HTML-Code prüfen → Ziel-URL prüfen → Bild technisch prüfen → erst danach Kosten-/Versicherungsziele speichern.</p>
-                        <p><button class="button button-primary">Gesammelt importieren</button></p>
+                        <p class="description"><strong>Tarifcheck:</strong> als Direktpartner auswählbar. <strong>CHECK24:</strong> ebenfalls als Direktpartner auswählbar. Es wird keine nicht belegte API vorausgesetzt; reale Banner können per Code oder händisch erfasst werden.</p>
+                        <p><button class="button button-primary" name="import_mode" value="bulk">Gesammelt importieren</button></p>
+                        <hr>
+                        <h3>Banner händisch einfügen</h3>
+                        <p class="description">Für einzelne Banner ohne Sammeldatei. Bild-URL und Tracking-Link sind Pflicht; Ziel-URL, Titel und Maße können zusätzlich angegeben werden.</p>
+                        <p><label><strong>Banner-ID (optional)</strong><br><input type="text" name="manual_banner_external_id" maxlength="191" placeholder="z. B. check24-pferdehalter-01"></label></p>
+                        <p><label><strong>Titel (optional)</strong><br><input type="text" name="manual_banner_title" maxlength="180"></label></p>
+                        <p><label><strong>Bild-URL</strong><br><input type="url" name="manual_banner_image_url" placeholder="https://…"></label></p>
+                        <p><label><strong>Tracking-Link</strong><br><input type="url" name="manual_banner_tracking_url" placeholder="https://…"></label></p>
+                        <p><label><strong>Reale Ziel-URL (optional)</strong><br><input type="url" name="manual_banner_destination_url" placeholder="https://…"></label></p>
+                        <p><label><strong>Beschreibung (optional)</strong><br><textarea name="manual_banner_description" rows="3"></textarea></label></p>
+                        <p><label><strong>Tags/Kategorie (optional)</strong><br><input type="text" name="manual_banner_tags"></label></p>
+                        <p><label><strong>Breite</strong><br><input type="number" min="0" name="manual_banner_width" style="width:120px"></label> <label><strong>Höhe</strong><br><input type="number" min="0" name="manual_banner_height" style="width:120px"></label></p>
+                        <p><button class="button button-primary" name="import_mode" value="manual_banner">Banner händisch speichern</button></p>
                     </div></div>
                 </form>
                 <script>document.addEventListener('DOMContentLoaded',function(){var s=document.getElementById('ppar-library-snapshot');if(!s)return;s.addEventListener('change',function(){var o=s.options[s.selectedIndex];if(!o||!o.value)return;document.getElementById('ppar-library-provider').value=o.dataset.provider||'';document.getElementById('ppar-library-external').value=o.dataset.external||'';document.getElementById('ppar-library-name').value=o.dataset.name||'';});});</script>
             </details>
             <form method="get" style="margin-top:18px"><input type="hidden" name="page" value="affiliate-portal-creative-library">
-                <select name="provider"><option value="">Alle Provider</option><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected($provider,$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select>
-                <select id="ppar-library-partner-filter" name="partner_external_id"><option value="">Alle Partner</option><?php if($provider==='' || $provider==='direct'): ?><option value="tarifcheck" <?php selected($partner_external_id,'tarifcheck'); ?> data-provider="direct">Direktpartner · Tarifcheck · tarifcheck</option><?php endif; ?><?php foreach($snapshots as $snapshot_key=>$snapshot): if((string)$snapshot_key==='direct:tarifcheck') continue; if($provider!=='' && (string)$snapshot['provider']!==$provider) continue; ?><option value="<?php echo esc_attr((string)$snapshot['external_id']); ?>" <?php selected($partner_external_id,(string)$snapshot['external_id']); ?> data-provider="<?php echo esc_attr((string)$snapshot['provider']); ?>"><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . (string)$snapshot['name'] . ((string)$snapshot['external_id']!=='' ? ' · ' . (string)$snapshot['external_id'] : '')); ?></option><?php endforeach; ?><?php if($partner_external_id!=='' && $partner_external_id!=='tarifcheck' && !array_filter($snapshots,static function($snapshot) use ($partner_external_id){ return (string)($snapshot['external_id']??'')===$partner_external_id; })): ?><option value="<?php echo esc_attr($partner_external_id); ?>" selected><?php echo esc_html('Partner-ID ' . $partner_external_id); ?></option><?php endif; ?></select>
+                <select name="provider"><option value="">Alle Provider</option><option value="direct:tarifcheck" <?php selected($provider_filter,'direct:tarifcheck'); ?>>Tarifcheck</option><option value="direct:check24" <?php selected($provider_filter,'direct:check24'); ?>>CHECK24</option><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected($provider_filter,$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select>
+                <select id="ppar-library-partner-filter" name="partner_external_id"><option value="">Alle Partner</option><?php if($provider==='' || $provider==='direct'): ?><option value="tarifcheck" <?php selected($partner_external_id,'tarifcheck'); ?> data-provider="direct">Direktpartner · Tarifcheck · tarifcheck</option><option value="check24" <?php selected($partner_external_id,'check24'); ?> data-provider="direct">Direktpartner · CHECK24 · check24</option><?php endif; ?><?php foreach($snapshots as $snapshot_key=>$snapshot): if(in_array((string)$snapshot_key,array('direct:tarifcheck','direct:check24'),true)) continue; if($provider!=='' && (string)$snapshot['provider']!==$provider) continue; ?><option value="<?php echo esc_attr((string)$snapshot['external_id']); ?>" <?php selected($partner_external_id,(string)$snapshot['external_id']); ?> data-provider="<?php echo esc_attr((string)$snapshot['provider']); ?>"><?php echo esc_html($this->provider_label((string)$snapshot['provider']) . ' · ' . (string)$snapshot['name'] . ((string)$snapshot['external_id']!=='' ? ' · ' . (string)$snapshot['external_id'] : '')); ?></option><?php endforeach; ?><?php if($partner_external_id!=='' && $partner_external_id!=='tarifcheck' && !array_filter($snapshots,static function($snapshot) use ($partner_external_id){ return (string)($snapshot['external_id']??'')===$partner_external_id; })): ?><option value="<?php echo esc_attr($partner_external_id); ?>" selected><?php echo esc_html('Partner-ID ' . $partner_external_id); ?></option><?php endif; ?></select>
                 <select name="slot_filter"><option value="">Alle Werbeplätze</option><?php foreach($slot_options as $slot_filter_key=>$slot_filter_option): ?><option value="<?php echo esc_attr($slot_filter_key); ?>" <?php selected($slot_filter,$slot_filter_key); ?>><?php echo esc_html((string)($slot_filter_option['label'] ?? $slot_filter_key)); ?></option><?php endforeach; ?></select>
                 <select name="topic_status"><option value="">Alle technischen Zustände</option><option value="format_pending" <?php selected($topic_status,'format_pending'); ?>>Bildprüfung offen</option><option value="auto_verified" <?php selected($topic_status,'auto_verified'); ?>>Bild geprüft</option><option value="format_blocked" <?php selected($topic_status,'format_blocked'); ?>>Bild/Format blockiert</option></select>
                 <label><input type="checkbox" name="selected" value="1" <?php checked($selected); ?>> nur ausgewählte</label>
