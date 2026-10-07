@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 239,
+  "generation": 240,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "d59260897b6cfdd211eb28994d7fecde9a3b3831576b2447151edd8c1d36fd43",
+    "manifest_sha256": "b39aa305d31aa4391e6c258e339504a9b4eb890c71c37299ba46c962ca90f550",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,20 +36,20 @@
   },
   "active_candidate": {
     "version": "6.72.199",
-    "status": "WORKING_6_72_199_ADCELL_BANNER_IMPORT_BASIS_SOURCE_UNBOUND_TESTS_OPEN",
+    "status": "WORKING_6_72_199_ADCELL_BANNER_IMPORT_BASIS_SOURCE_BOUND_GUARD_AND_TESTS_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "d59260897b6cfdd211eb28994d7fecde9a3b3831576b2447151edd8c1d36fd43",
+    "current_source_manifest_sha256": "b39aa305d31aa4391e6c258e339504a9b4eb890c71c37299ba46c962ca90f550",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "Current committed 6.72.199 work-in-progress addresses the proven ADCELL banner import-basis defect: preserve the complete provider banner object with SHA-256 provenance, resolve promotionCategoryId through the proven getPromotionCategories(programId) contract, never invent a provider title, and refresh existing ADCELL banners before reconcile. The committed source has NOT yet been rebound into CURRENT_SOURCE_SHA256.txt and the 6.72.199 worktests have NOT yet been executed. No PASS and no installer.",
+    "candidate_reference_scope": "Current committed 6.72.199 work-in-progress addresses the proven ADCELL banner import-basis defect: preserve the complete provider banner object with SHA-256 provenance, resolve promotionCategoryId through the proven getPromotionCategories(programId) contract, never invent a provider title, and refresh existing ADCELL banners before reconcile. CURRENT_SOURCE_SHA256.txt has now been regenerated for the exact 28-file 6.72.199 canonical plugin tree. release_guard execution and the 6.72.199 WordPress/MariaDB worktests are still OPEN. No PASS and no installer.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "STALE_MANIFEST_ROWS_STILL_6_72_198_FIRST_BLOCKER",
+    "source_binding_status": "MANIFEST_REGENERATED_28_FILES_GUARD_EXECUTION_OPEN",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -70,7 +70,7 @@
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "current_focus_reason": "6.72.198 passed controlled WordPress/MariaDB fixtures but failed live after installation. Source review then proved that the ADCELL banner import could synthesize semantic-looking titles and did not preserve the complete provider banner object. The user explicitly requires the basis to be fixed before any further assignment/ranking rules. 6.72.199 source work exists but is not source-manifest-bound and has no executed PASS evidence.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_199_IMPORT_BASIS_SOURCE_COMMITTED_MANIFEST_STALE_TESTS_OPEN",
+    "adcell_work_status": "6_72_199_IMPORT_BASIS_SOURCE_MANIFEST_BOUND_GUARD_AND_TESTS_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -442,7 +442,7 @@
           "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php"
         ],
         "worktest_status": "COMMITTED_NOT_EXECUTED",
-        "source_manifest_status": "STALE_6_72_198_ROWS"
+        "source_manifest_status": "BOUND_28_FILES_GUARD_EXECUTION_OPEN"
       }
     },
     "awin_catalog_refresh": {
@@ -870,19 +870,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_199_ADCELL_BANNER_IMPORT_BASIS_SOURCE_UNBOUND_TESTS_OPEN",
+    "state": "WORKING_6_72_199_ADCELL_BANNER_IMPORT_BASIS_SOURCE_BOUND_GUARD_AND_TESTS_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "FIRST ERROR ONLY: regenerate release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt from the exact committed 6.72.199 canonical plugin tree, bind the new manifest SHA in CURRENT_RELEASE.json, then run release_guard governance-check + source-check/start. Stop at the first failure. Do NOT build/install a ZIP and do NOT change ranking/target logic. Only after source binding passes may the three committed 6.72.199 basis worktests be executed in the real WordPress/MariaDB harness.",
-    "completion_condition": "EXACT_6_72_199_SOURCE_MANIFEST_BOUND_AND_RELEASE_GUARD_SOURCE_PASS_THEN_BASIS_WORKTESTS_EXECUTED_POSITIVE_NEGATIVE",
-    "after_completion_action": "Run the three bound 6.72.199 banner-import-basis worktests in WordPress/MariaDB and then the existing full Affiliate regression. No installer/live request until the whole required test chain passes.",
+    "bound_user_scope_action": "Run the bound release guard first: governance-check, source-check, and start for branch affiliate-release-current; stop at the first failure. If and only if those pass, execute the three committed 6.72.199 banner-import-basis worktests from release/affiliate-zentrale/evidence/worktests/ in the real WordPress/MariaDB harness, including the 6.72.198-old-row upgrade case. Do NOT build/install a ZIP and do NOT change ranking/target logic.",
+    "completion_condition": "RELEASE_GUARD_GOVERNANCE_SOURCE_START_PASS_AND_ALL_THREE_6_72_199_BASIS_WORKTESTS_PASS_WITH_WORDPRESS_MARIADB",
+    "after_completion_action": "Only after the basis gate passes, run the existing complete Affiliate regression against the exact same source. Build no installer until that total regression is green.",
     "no_optional_detours": true,
     "sequence": 88,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
     "evidence_ref": null,
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "d59260897b6cfdd211eb28994d7fecde9a3b3831576b2447151edd8c1d36fd43",
-    "current_source_binding": "STALE_ROWS_FIRST_BLOCKER",
+    "current_source_manifest_sha256": "b39aa305d31aa4391e6c258e339504a9b4eb890c71c37299ba46c962ca90f550",
+    "current_source_binding": "MANIFEST_REGENERATED_28_FILES_GUARD_EXECUTION_OPEN",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -890,8 +890,8 @@
       "local_6_72_198": "PASS_RUN_37501160643_BUT_NOT_LIVE_PROOF",
       "import_basis_defect": "PROVEN_IN_PRE_6_72_199_SOURCE",
       "source_6_72_199": "COMMITTED_WORKING",
-      "source_manifest_6_72_199": "NOT_REGENERATED_STILL_6_72_198_ROWS",
-      "basis_worktests_6_72_199": "COMMITTED_NOT_EXECUTED",
+      "source_manifest_6_72_199": "REGENERATED_28_FILES_SHA256_B39AA305D31AA4391E6C258E339504A9B4EB890C71C37299BA46C962CA90F550",
+      "basis_worktests_6_72_199": "COMMITTED_IN_ALLOWED_EVIDENCE_WORKTESTS_NOT_EXECUTED",
       "check_runs_at_pre_sync_head": "NONE",
       "installer_6_72_199": "DOES_NOT_EXIST_NOT_AUTHORIZED"
     },
