@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 238,
+  "generation": 239,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
+    "manifest_sha256": "d59260897b6cfdd211eb28994d7fecde9a3b3831576b2447151edd8c1d36fd43",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -35,20 +35,29 @@
     "authority": "HISTORICAL_EVIDENCE_ONLY"
   },
   "active_candidate": {
-    "version": "6.72.198",
-    "status": "FINAL_6_72_198_GENERAL_BANNER_CLASSIFIER_TESTED_MANUAL_INSTALL_OPEN",
+    "version": "6.72.199",
+    "status": "WORKING_6_72_199_ADCELL_BANNER_IMPORT_BASIS_SOURCE_UNBOUND_TESTS_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
+    "current_source_manifest_sha256": "d59260897b6cfdd211eb28994d7fecde9a3b3831576b2447151edd8c1d36fd43",
     "source_file_count": 28,
-    "candidate_reference_artifact_sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
-    "candidate_reference_scope": "6.72.198 fixes the general banner pipeline, not one banner: current provider topic / banner title-description-tags are evaluated before destination URL fallback; stale stored target maps are never reused; ambiguous content and tracking-only unknowns fail closed; one-time 6.72.198 reconcile resets old automatic banner campaigns and rebuilds all active banner target maps from current evidence. Exact ZIP run 37501160643 SUCCESS: WordPress 7.1.2 + MariaDB 10.11, 28/28 source identity, 22/22 PHP lint, Tarifcheck dropdown, general multi-banner positive/negative classifier, frontend active Schabracken/Pferdedecken campaigns, manual fixed-target regression, deterministic reset regression.",
-    "final_artifact_ref": "github-actions-run:37501160643/artifact:11429816780/AFFILIATE_ZENTRALE_6.72.198.zip",
-    "final_artifact_sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
-    "handoff_artifact_filename": "AFFILIATE_ZENTRALE_6.72.198.zip",
-    "handoff_artifact_bytes": 811235
+    "candidate_reference_artifact_sha256": null,
+    "candidate_reference_scope": "Current committed 6.72.199 work-in-progress addresses the proven ADCELL banner import-basis defect: preserve the complete provider banner object with SHA-256 provenance, resolve promotionCategoryId through the proven getPromotionCategories(programId) contract, never invent a provider title, and refresh existing ADCELL banners before reconcile. The committed source has NOT yet been rebound into CURRENT_SOURCE_SHA256.txt and the 6.72.199 worktests have NOT yet been executed. No PASS and no installer.",
+    "final_artifact_ref": null,
+    "final_artifact_sha256": null,
+    "handoff_artifact_filename": null,
+    "handoff_artifact_bytes": null,
+    "source_binding_status": "STALE_MANIFEST_ROWS_STILL_6_72_198_FIRST_BLOCKER",
+    "last_tested_artifact": {
+      "version": "6.72.198",
+      "run": 37501160643,
+      "sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
+      "bytes": 811235,
+      "local_result": "PASS",
+      "live_result": "FAIL_USER_REPORTED_NO_BANNER_AFTER_INSTALL"
+    }
   },
   "user_scope_lock": {
     "status": "ACTIVE",
@@ -57,11 +66,11 @@
     "transport_provider": "AWIN",
     "logical_product_source": "OTTO",
     "digistore24": "DEFERRED_AND_NON_BLOCKING",
-    "current_focus": "LIVE_GENERAL_BANNER_POOL_6_72_198_INSTALL_AND_READBACK",
-    "current_focus_scope_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
-    "current_focus_reason": "The live site currently has no automatic banners after prior reset. 6.72.198 changes the general mapping authority for every banner and forces a fresh all-banner reconcile with a new state key. Live proof must verify that multiple real banners return on the correct categories, not only Schabracken, and that ambiguous/unknown creatives remain absent rather than being misassigned.",
+    "current_focus": "ADCELL_BANNER_IMPORT_BASIS_6_72_199_BIND_AND_TEST",
+    "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
+    "current_focus_reason": "6.72.198 passed controlled WordPress/MariaDB fixtures but failed live after installation. Source review then proved that the ADCELL banner import could synthesize semantic-looking titles and did not preserve the complete provider banner object. The user explicitly requires the basis to be fixed before any further assignment/ranking rules. 6.72.199 source work exists but is not source-manifest-bound and has no executed PASS evidence.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_198_GENERAL_BANNER_PIPELINE_TESTED_LIVE_INSTALL_OPEN",
+    "adcell_work_status": "6_72_199_IMPORT_BASIS_SOURCE_COMMITTED_MANIFEST_STALE_TESTS_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -417,6 +426,23 @@
         "live_readback": "OPEN",
         "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
         "php_lint": "PASS_22_OF_22"
+      },
+      "import_evidence_policy": "BASIS_FIRST_COMPLETE_PROVIDER_RAW_PLUS_DESTINATION_PROVENANCE_THEN_STORED_FIXED_TARGET_MAP",
+      "runtime_target_policy": "STORED_FIXED_TARGET_MAP_ONLY_NO_FRONTEND_RECLASSIFICATION",
+      "basis_first_672199": {
+        "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
+        "provider_raw_payload": "PRESERVE_COMPLETE_JSON_WITH_SHA256",
+        "synthetic_provider_title": "FORBIDDEN_AS_SEMANTIC_EVIDENCE",
+        "provider_category": "RESOLVE_ID_VIA_PROVEN_GET_PROMOTION_CATEGORIES_PROGRAM_ID",
+        "destination_url": "VALID_EVIDENCE_NOT_EXCLUSIVE",
+        "old_inventory": "FRESH_PROVIDER_REIMPORT_BEFORE_RECONCILE",
+        "worktests": [
+          "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php",
+          "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php",
+          "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php"
+        ],
+        "worktest_status": "COMMITTED_NOT_EXECUTED",
+        "source_manifest_status": "STALE_6_72_198_ROWS"
       }
     },
     "awin_catalog_refresh": {
@@ -844,42 +870,30 @@
     }
   },
   "execution_state": {
-    "state": "FINAL_6_72_198_GENERAL_BANNER_CLASSIFIER_TESTED_MANUAL_INSTALL_OPEN",
-    "authorized_next_action": "MANUAL_INSTALL_6_72_198_THEN_OPEN_BACKEND_AND_READBACK_MULTIPLE_REAL_BANNERS",
-    "bound_user_scope_action": "Install exact AFFILIATE_ZENTRALE_6.72.198.zip (SHA256 0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043, 811235 bytes). Open WordPress backend once. 6.72.198 then globally deactivates old automatic banner campaigns, rebuilds target maps for every active banner from provider topic/banner content first and destination URL only as fallback, and replans verified banners. Read-only verify several real categories including Schabracken. Do not create 6.72.199 without a concrete live divergence.",
-    "completion_condition": "MULTIPLE_REAL_BANNERS_VISIBLE_ONLY_ON_CORRECT_CATEGORIES_AND_AMBIGUOUS_BANNERS_FAIL_CLOSED",
-    "after_completion_action": "If the general live banner pool passes, continue explicit Tarifcheck group assignment/visibility verification and then the separate tariff HTML validity monitor.",
+    "state": "WORKING_6_72_199_ADCELL_BANNER_IMPORT_BASIS_SOURCE_UNBOUND_TESTS_OPEN",
+    "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
+    "bound_user_scope_action": "FIRST ERROR ONLY: regenerate release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt from the exact committed 6.72.199 canonical plugin tree, bind the new manifest SHA in CURRENT_RELEASE.json, then run release_guard governance-check + source-check/start. Stop at the first failure. Do NOT build/install a ZIP and do NOT change ranking/target logic. Only after source binding passes may the three committed 6.72.199 basis worktests be executed in the real WordPress/MariaDB harness.",
+    "completion_condition": "EXACT_6_72_199_SOURCE_MANIFEST_BOUND_AND_RELEASE_GUARD_SOURCE_PASS_THEN_BASIS_WORKTESTS_EXECUTED_POSITIVE_NEGATIVE",
+    "after_completion_action": "Run the three bound 6.72.199 banner-import-basis worktests in WordPress/MariaDB and then the existing full Affiliate regression. No installer/live request until the whole required test chain passes.",
     "no_optional_detours": true,
-    "sequence": 87,
-    "evidence_ref": "release/affiliate-zentrale/evidence/affiliate_router_v672195_deterministic_banner_reconcile_20261006.md",
+    "sequence": 88,
+    "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
+    "evidence_ref": null,
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
-    "final_installer": {
-      "ref": "github-actions-run:37501160643/artifact:11429816780/AFFILIATE_ZENTRALE_6.72.198.zip",
-      "sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
-      "bytes": 811235,
-      "exact_zip_run": 37501160643
-    },
+    "current_source_manifest_sha256": "d59260897b6cfdd211eb28994d7fecde9a3b3831576b2447151edd8c1d36fd43",
+    "current_source_binding": "STALE_ROWS_FIRST_BLOCKER",
+    "final_installer": null,
     "pre_gate_proof": {
-      "live_6_72_194_schabracken": "FAIL_REPORTED_2026_10_06",
-      "root_cause_stale_unlinked_auto_campaign": "REPRODUCED_LOCALLY",
-      "tarifcheck_group_not_first_class_stored_input": "CONFIRMED_IN_SOURCE",
-      "local_positive_negative_simulation": "PASS_12_OF_12",
-      "stale_unlinked_auto_banner_reset": "PASS_REAL_WORDPRESS_MARIADB",
-      "manual_banner_preserved": "PASS_REAL_WORDPRESS_MARIADB",
-      "product_campaign_preserved": "PASS_REAL_WORDPRESS_MARIADB",
-      "tarifcheck_explicit_kosten": "PASS_REAL_WORDPRESS_MARIADB",
-      "tarifcheck_explicit_versicherung": "PASS_REAL_WORDPRESS_MARIADB",
-      "tarifcheck_unknown_mixed_fail_closed": "PASS_REAL_WORDPRESS_MARIADB",
-      "source_manifest_binding": "7e9cf15d9ff9b066343f78d7e20524b1d2b01d6f31d4d96e59eb6b4183612da5",
-      "php_lint_source": "PASS_22_OF_22_RUN_37489630643",
-      "wordpress_mariadb": "PASS_RUN_37489630643",
-      "final_zip_fresh_unpack": "PASS_28_OF_28_RUN_37501160643",
-      "php_lint_final_zip": "PASS_22_OF_22_RUN_37501160643",
-      "exact_zip_wordpress_mariadb": "PASS_RUN_37501160643",
-      "final_installer_sha256": "0316cfebc7f6d3acd552ec964d1448d15997391d516e74d09f86980a9eb63043",
-      "fixed_banner_kiss": "PASS_ACTIVE_EXACT_ZERO_BLOCKERS_SURVIVES_RESET_RUN_37496952071",
-      "general_banner_classifier": "PASS_CONTENT_PROVIDER_URL_PRECEDENCE_STALE_MAP_REMOVAL_AMBIGUOUS_FAIL_CLOSED_FRONTEND_CAMPAIGNS_RUN_37501160643"
+      "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
+      "live_6_72_198_schabracken": "FAIL_USER_REPORTED_NO_BANNER",
+      "local_6_72_198": "PASS_RUN_37501160643_BUT_NOT_LIVE_PROOF",
+      "import_basis_defect": "PROVEN_IN_PRE_6_72_199_SOURCE",
+      "source_6_72_199": "COMMITTED_WORKING",
+      "source_manifest_6_72_199": "NOT_REGENERATED_STILL_6_72_198_ROWS",
+      "basis_worktests_6_72_199": "COMMITTED_NOT_EXECUTED",
+      "check_runs_at_pre_sync_head": "NONE",
+      "installer_6_72_199": "DOES_NOT_EXIST_NOT_AUTHORIZED"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
@@ -887,7 +901,9 @@
       "release/affiliate-zentrale/evidence/",
       "release/affiliate-zentrale/artifacts/final/",
       "control/release-governance/CURRENT_RELEASE.json",
-      "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md"
+      "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md",
+      "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
+      "protocol/AFFILIATE_RELEASE_MASTER_CURRENT.md"
     ]
   },
   "branch_policy": {
@@ -1263,7 +1279,7 @@
   },
   "objective_control": {
     "north_star": "STABLE_END_TO_END_AFFILIATE_WORKFLOW_WITH_REAL_WORDPRESS_MARIADB_RELEASE_PROOF",
-    "current_milestone": "LIVE_GENERAL_BANNER_POOL_6_72_198_INSTALL_AND_READBACK",
+    "current_milestone": "ADCELL_BANNER_IMPORT_BASIS_6_72_199_BIND_AND_TEST",
     "max_parallel_workstreams": 1,
     "microfix_policy": "ONLY_IF_REQUIRED_BY_CURRENT_FAILED_BOUND_GATE",
     "new_version_policy": "FORBIDDEN_UNLESS_CURRENT_BOUND_GATE_REQUIRES_CODE_CHANGE",
