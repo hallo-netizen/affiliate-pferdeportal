@@ -1488,3 +1488,26 @@ Unverändert:
 **Erster offener Schritt:** exakt ein installierbares ZIP aus diesem manifestgebundenen Rootfix-Source bauen.
 
 **Status:** LIVE_FAILURE_CONFIRMED / ROOTFIX_SOURCE_BOUND / PLUGIN_NOT_BUILT / NO_PASS / BUILD_ROOTFIX_PLUGIN_NEXT.
+
+### AFF-ERR-056 – Nachtrag 07.10.2026: struktureller Runtime-Fallback als weiterer Root Cause bewiesen und KISS geschlossen
+
+**Belegter Widerspruch:** Der aktuelle Zielvertrag verlangte bereits `STORED_FIXED_TARGET_MAP_ONLY`, `NO_STORED_FIXED_TARGET_NO_BANNER` und keinen themenlosen Pflichtfallback. Trotzdem lieferte `campaign_match_rank()` automatische Creative-Library-/`output_object_v4`-Banner bei einer **nicht passenden gespeicherten Zielkante** weiterhin als allgemeinen bzw. technischen Fallback aus. Bei Pferderassen lag zusätzlich die themenneutrale Regel vor diesem Fail-Closed-Gate.
+
+Damit konnte ein durch Reconcile korrekt von Schabracken auf Fütterung zurückgesetzter Altbanner anschließend auf Schabracken **weiterhin als technischer Fallback Kandidat bleiben**. Das erklärt, warum mehrere lokale Zuordnungs-/Reconcile-Fixes das sichtbare Gesamtproblem nicht zuverlässig beenden konnten.
+
+**KISS-Rootfix:** Für automatische `output_object_v4`-Banner gilt jetzt im Frontend ausschließlich:
+- gespeicherte Zielkante passt -> Kandidat;
+- gespeicherte Zielkante passt nicht oder fehlt -> `null` / kein Kandidat;
+- erst danach arbeitet die vorhandene Verteilung.
+
+Manuelle/FIXED-Ausnahmen bleiben im vorhandenen Vorrangpfad unangetastet.
+
+**Performance-Hardlock geprüft:** Keine neue DB-Abfrage, kein Frontend-HTTP, keine URL-/Text-Neuklassifikation. `banner_distribution_reorder_candidates()`, `banner_distribution_stable_index()`, `ranked_campaigns_for_slot()` und `render_banner()` sind gegenüber dem unmittelbar vorherigen Rootfix-Source bytegleich.
+
+**Regression:** Der bestehende 6.72.199-Basisvertrag enthält jetzt ausdrücklich den Guard, dass Creative-Library-Banner ohne passenden gespeicherten Target-Match nicht über allgemeinen/technischen Fallback wieder in den Pool gelangen und dass dieses Gate vor der historischen neutralen Rassenregel liegt.
+
+**Source-Bindung:** Manifest SHA-256 `31fb24c02b38d5d91b7a59a5b2d5bc50047edb7e0e6459e9a381f7861974ed8c`, 28 Plugin-Dateien. Current Generation 259.
+
+**Governance-Nachholung:** Der vorherige Current-Wert `BUILD_ROOTFIX_PLUGIN` war laut `release_guard.py` kein zulässiger `authorized_next_action`. Current verwendet wieder `RUN_BOUND_RELEASE_GATES`; die konkrete Fachaktion steht in `bound_user_scope_action`.
+
+**Status:** ROOT_CAUSE_PROVEN / STORED_TARGET_ELIGIBILITY_KISS_FIXED / PERFORMANCE_FAST_PATHS_PRESERVED / SOURCE_MANIFEST_BOUND / CURRENT_GATES_OPEN / NO_ZIP_YET.
