@@ -58,8 +58,8 @@ if (strpos($output, "title_evidence") === false
 
 // Frontend-Hardlock: Der neue Basisnachlauf ist ausschließlich admin-/workergebunden.
 // Die öffentliche Output-Schicht darf niemals direkt ADCELL-Provider-HTTP aufrufen.
-if (strpos($main, "add_action('admin_init', array($this, 'maybe_upgrade_adcell_banner_import_basis_v672199')") === false
-    || strpos($main, "add_action('ppar_v672199_adcell_banner_basis_resync', array($this, 'run_v672199_adcell_banner_basis_resync')") === false) {
+if (strpos($main, "add_action('admin_init', array(\$this, 'maybe_upgrade_adcell_banner_import_basis_v672199')") === false
+    || strpos($main, "add_action('ppar_v672199_adcell_banner_basis_resync', array(\$this, 'run_v672199_adcell_banner_basis_resync')") === false) {
     $errors[] = 'missing:adcell_basis_admin_worker_binding';
 }
 if (strpos($output, 'adcell_api_v2_') !== false
