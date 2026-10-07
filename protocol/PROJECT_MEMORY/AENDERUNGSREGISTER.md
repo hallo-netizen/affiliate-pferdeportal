@@ -1,6 +1,6 @@
 # ÄNDERUNGS- UND ERKLÄRUNGSREGISTER
 
-STAND: 2026-10-03
+STAND: 2026-10-07
 
 Zweck: **Was wurde geändert – und warum?**
 
@@ -615,3 +615,35 @@ BELEG:
 `PROJEKTE/HOBBYRAUSCH/KONZEPT/HOBBY_GROESSEN_ROLLENMODELL_20261007.md`
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_INTEGRATION_20261007.md`
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_PILOT_20261007.md`
+
+
+## HOBBYRAUSCH-HD001-20261007-J – Maschinenlesbarer V2-Bewertungsvertrag + kontrollierter Batch 001
+
+WAS:
+Die bislang nur konzeptionell beschriebenen V2-Gates wurden als eindeutiger maschinenlesbarer Bewertungsvertrag gebunden. Zusätzlich wurde ein reproduzierbarer 16er-Masterbatch definiert und ausgeführt sowie die 19er-Research-Queue über ein eigenes Intake-Gate getrennt.
+
+WARUM:
+Die frühere NEXT ACTION verlangte eine maschinelle Batch-Bewertung, obwohl Auswahl, Fail-closed-Verhalten, Rollenentscheidung und Research-Queue-Aufnahme noch nicht eindeutig genug definiert waren. Dadurch hätte ein Folgechat erneut Ermessensentscheidungen erfinden müssen.
+
+REGEL:
+- fehlende Evidenz = EVIDENCE_REQUIRED, niemals Schätzung;
+- DIRECT/ASSISTED erzeugt keine Strukturrolle;
+- Batch 001 wird deterministisch gewählt;
+- Research Queue gehört nicht automatisch zu den 841 Master-Identitäten;
+- neue Research-Identität erst nach Scope + Identitätsgate;
+- nur ASSESSED darf später Zielbaum schreiben.
+
+ERGEBNIS:
+- Batch 001 = 16 Identitäten;
+- 16/16 Identitätsgate PASS;
+- 0 Zielbaum-Writes zulässig;
+- Buchbinden bleibt HOBBY_HUB aus vorhandener Pilotevidenz;
+- Treibholz sammeln bleibt EDITORIAL erhalten, Unterrolle noch evidenzabhängig;
+- 19 Research-Kandidaten ohne aktuelle Namens-/Alias-Kollision;
+- Fotografie als erstes provisorisches Master-Intake-Delta vorbereitet.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
