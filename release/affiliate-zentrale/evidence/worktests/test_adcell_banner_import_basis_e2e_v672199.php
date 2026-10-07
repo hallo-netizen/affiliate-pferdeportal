@@ -140,6 +140,40 @@ if ((string)($second['creative_title'] ?? '') !== 'Original Provider Bannername'
 }
 $ok('real_provider_banner_name_preserved');
 
+// Fail-closed: ein ADCELL-Banner darf ohne belastbaren Rohdatensatz oder mit
+// manipuliertem SHA nicht einmal normalisiert/importiert werden.
+$detect = new ReflectionMethod($o, 'creative_library_detect_mapping');
+$detect->setAccessible(true);
+$normalize = new ReflectionMethod($o, 'creative_library_normalize_row');
+$normalize->setAccessible(true);
+$tampered = $first;
+$tampered['provider_raw_sha256'] = str_repeat('0', 64);
+$mapping = $detect->invoke($o, array_keys($tampered));
+$bad = $normalize->invoke($o, $tampered, $mapping, array(
+    'provider'=>'adcell',
+    'partner_external_id'=>'123',
+    'partner_name'=>'procavallo',
+    'source_kind'=>'banner',
+    'run_uuid'=>'basis-run-tampered',
+));
+if (!is_wp_error($bad) || $bad->get_error_code() !== 'creative_import_provider_raw') {
+    $fail('tampered_provider_raw_not_blocked');
+}
+$missing = $first;
+unset($missing['provider_raw_json'], $missing['provider_raw_sha256']);
+$mapping = $detect->invoke($o, array_keys($missing));
+$bad = $normalize->invoke($o, $missing, $mapping, array(
+    'provider'=>'adcell',
+    'partner_external_id'=>'123',
+    'partner_name'=>'procavallo',
+    'source_kind'=>'banner',
+    'run_uuid'=>'basis-run-missing',
+));
+if (!is_wp_error($bad) || $bad->get_error_code() !== 'creative_import_provider_raw') {
+    $fail('missing_provider_raw_not_blocked');
+}
+$ok('missing_or_tampered_provider_raw_fails_closed');
+
 $category_calls = array_values(array_filter($http_calls, static function($line) {
     return strpos($line, '/affiliate/promotion/getPromotionCategories') !== false;
 }));
@@ -186,6 +220,9 @@ if ((string)($stored_payload['promotion_category_name'] ?? '') !== 'Schabracken'
 }
 if ((string)($stored_payload['provider_topic_name'] ?? '') !== 'Schabracken') {
     $fail('stored_provider_topic_missing');
+}
+if ((string)($stored_payload['title_source'] ?? '') !== 'provider_missing') {
+    $fail('stored_title_provenance_missing');
 }
 if ((string)($stored_payload['_provider_raw_json'] ?? '') !== (string)$first['provider_raw_json']) {
     $fail('stored_raw_json_changed');
