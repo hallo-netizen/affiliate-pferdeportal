@@ -725,3 +725,41 @@ BELEG:
 
 OFFEN:
 Nur der reale Batch-001-DataForSEO-Lauf in Hobby Depot.
+
+
+## HOBBYRAUSCH-HD001-20261007-M – Reales Batch-001-Ergebnis ausgewertet / fehlende DataForSEO-Tiefenstufe geschlossen
+
+WAS:
+Der echte V1.12.1-WordPress/DataForSEO-Lauf wurde ausgewertet.
+263 exakte Artikel-Seeds wurden angefragt, DataForSEO lieferte 106 Overview-Zeilen zurück; 157 blieben offen.
+
+WARUM:
+Der Zwischenbefund `0 Hub-Kandidaten` war dadurch nicht belastbar.
+Regelvertrag 1.2 verlangt nach der fachlichen Leaf-/Artikelkandidatenbildung zusätzliche Suggestions/Ideas zur Tiefenprüfung.
+V1.12.1 hatte diese zweite Stufe noch nicht umgesetzt.
+
+KORREKTUR:
+HD-001 V1.12.2:
+- verwendet das vorhandene Resultat weiter;
+- 37 offene fachlich definierte Cluster;
+- 37 Keyword Ideas;
+- 1 finaler Overview;
+- 38 zusätzliche Calls;
+- max. 15 distinct Intentgruppen je Cluster;
+- erneute Dedupe/Ownership;
+- 0 Strukturwrites.
+
+WICHTIG:
+Die 157 fehlenden exakten Overview-Zeilen werden weder positiv noch negativ erfunden.
+DataForSEO bleibt Evidenz und erzeugt keine Taxonomie.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_REAL_RESULT_20261007.md`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
+
+ARTEFAKT:
+`HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip`
+SHA-256 `233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f`.
+
+OFFEN:
+Nur der reale 38-Call-Tiefenlauf in Hobby Depot.
