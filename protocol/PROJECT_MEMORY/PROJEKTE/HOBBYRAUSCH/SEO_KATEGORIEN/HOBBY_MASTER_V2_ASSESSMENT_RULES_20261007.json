@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
-  "version": "1.0",
+  "version": "1.1",
   "effective_date": "2026-10-07",
-  "status": "ACTIVE_PILOT_RULESET",
+  "status": "ACTIVE_V2_RULESET_LEAF_CAPACITY_AND_AGGREGATION_BOUND",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -345,7 +345,24 @@
           }
         }
       ],
-      "hard_rule": "DIRECT or ASSISTED monetization may raise priority/prominence but is never sufficient to create HOBBY_HUB or ORIENTATION_UNIVERSE."
+      "hard_rule": "Monetization cannot create a portal role. HOBBY_HUB requires per-leaf capacity proof; a hobby-wide total is not enough.",
+      "hard_requirements": {
+        "HOBBY_HUB": [
+          "scope_status == IN_SCOPE",
+          "semantic_identity_confirmed == true",
+          "all_counted_leafs individually satisfy leaf_capacity_contract",
+          "fit_leaf_count between 3 and 6",
+          "ownership_clear == true"
+        ],
+        "ORIENTATION_UNIVERSE": [
+          "scope_status == IN_SCOPE",
+          "semantic_identity_confirmed == true",
+          "topic is demonstrably MACRO",
+          "decomposes into multiple coherent hobby units",
+          "orientation page is nonredundant",
+          "ownership_clear == true"
+        ]
+      }
     },
     {
       "order": 5,
@@ -439,7 +456,112 @@
     "expected_count": 16
   },
   "promotion_gate": {
-    "to_assessed": "All required gates for the chosen portal_role have evidence and ownership is clear.",
+    "to_assessed": "All required gates for the chosen portal_role have evidence. For HOBBY_HUB, every lowest-level category must be capacity-validated and ownership must be clear.",
     "to_target_tree": "assessment_status=ASSESSED only. PARTIAL, EVIDENCE_REQUIRED and SCOPE_REVIEW never create/alter target-tree nodes."
-  }
+  },
+  "leaf_capacity_contract": {
+    "purpose": "A HOBBY_HUB is only structurally viable when its lowest category level itself carries enough distinct article intents.",
+    "candidate_generation": "Leaf families and article intents are proposed by subject-matter logic first. DataForSEO may validate demand/intent separation but may not invent the taxonomy.",
+    "article_intent_rule": "One counted article = one genuinely distinct user/search intent. Wording variants, synonyms and near-duplicate questions count once.",
+    "validation_fields_per_article_intent": [
+      "intent_id",
+      "working_title",
+      "user_need",
+      "fachlich_distinct_from",
+      "dataforseo_keywords",
+      "dataforseo_main_intent",
+      "dataforseo_core_keyword",
+      "dataforseo_search_volume",
+      "strategic_nonseo_reason",
+      "validated"
+    ],
+    "validated_article_rule": "An article intent counts toward leaf capacity only when fachlich distinct AND either backed by DataForSEO intent/keyword evidence OR backed by an explicit strategic_nonseo_reason. Missing evidence does not count.",
+    "leaf_thresholds": {
+      "4": "LEAF_EXCEPTION_REVIEW",
+      "0_3": "NO_STANDALONE_LEAF__AGGREGATE_OR_EDITORIAL",
+      "5_12": "LEAF_FIT",
+      "13_15": "LEAF_SPLIT_REVIEW",
+      "16_plus": "LEAF_SPLIT_REQUIRED"
+    },
+    "hub_thresholds": {
+      "0_2_fit_leafs": "NO_HOBBY_HUB__EDITORIAL_OR_FINDER_REVIEW",
+      "3_6_fit_leafs": "HOBBY_HUB_FIT",
+      "7_8_fit_leafs": "MACRO_OR_SPLIT_REVIEW",
+      "9_plus_fit_leafs": "MACRO_SPLIT_REQUIRED"
+    },
+    "hard_rule": "A total article count across the whole hobby is insufficient. Every proposed lowest-level category is checked separately."
+  },
+  "aggregation_contract": {
+    "purpose": "Preserve small valid hobbies without creating hundreds of thin taxonomy nodes.",
+    "identity_rule": "Canonical hobby identities are never merged merely because they are small. Aggregation concerns presentation/content structure, not hobby identity.",
+    "eligible_when": [
+      "candidate is IN_SCOPE",
+      "candidate does not support a standalone HOBBY_HUB or standalone leaf",
+      "related candidates share a natural existing world/topic family",
+      "combined content can form a coherent user-facing summary/leaf/editorial cluster",
+      "ownership remains unique and cannibalization is controlled"
+    ],
+    "aggregation_types": [
+      "EXISTING_PARENT_SUMMARY",
+      "SHARED_LEAF_CATEGORY",
+      "EDITORIAL_CLUSTER"
+    ],
+    "combined_capacity_rule": "A shared lowest-level category must itself satisfy the same 5-12 validated-article target. Under 4 remains too thin; 13+ triggers split review.",
+    "example_from_concept": "Small Naturfunde identities such as Treibholz, Seeglas or Muscheln may remain separate identities but be surfaced through a stronger shared Naturfunde summary/editorial structure instead of separate thin hubs.",
+    "create_new_structural_group_rule": "Do not create a new intermediate taxonomy node during candidate assessment. Record AGGREGATION_CANDIDATE first; create/alter structure only in the later full target-tree delta after the assessed population proves the need.",
+    "dataforseo_role": "Use keyword/core-keyword/intent overlap to test whether candidates belong together or would cannibalize. DataForSEO may not name or create the group."
+  },
+  "dataforseo_evidence_contract": {
+    "provider": "DataForSEO",
+    "market": {
+      "location_name": "Germany",
+      "language_code": "de"
+    },
+    "existing_client_contract": {
+      "keyword_ideas_endpoint": "/v3/dataforseo_labs/google/keyword_ideas/live",
+      "keyword_overview_endpoint": "/v3/dataforseo_labs/google/keyword_overview/live",
+      "keyword_suggestions_endpoint": "/v3/dataforseo_labs/google/keyword_suggestions/live"
+    },
+    "workflow": [
+      "Subject logic proposes candidate leaf families and distinct article intents.",
+      "Run keyword_suggestions/keyword_ideas for the hobby and proposed leaf/article seeds.",
+      "Run keyword_overview on the deduplicated candidate keywords.",
+      "Use core_keyword, main_intent, synonyms/variants, longtail depth and demand to collapse duplicates and confirm distinct intent space.",
+      "Recount validated article intents per leaf.",
+      "Apply leaf thresholds and only then hub thresholds."
+    ],
+    "may_confirm": [
+      "primary_keyword",
+      "synonyms",
+      "search_volume",
+      "demand_band",
+      "main_intent",
+      "core_keyword",
+      "longtail_depth",
+      "intent_overlap",
+      "cannibalization_risk"
+    ],
+    "may_not_decide": [
+      "portal_scope",
+      "natural_world",
+      "parent",
+      "leaf_family_name",
+      "structural_role",
+      "publication_role",
+      "CORE_promotion",
+      "deletion"
+    ],
+    "fail_closed": "Without a real DataForSEO response, SEO validation fields stay PENDING_DFS. No synthetic search volume or keyword evidence may be invented."
+  },
+  "assessment_sequence_v2": [
+    "A_SCOPE",
+    "B_IDENTITY",
+    "C_PROPOSE_LEAF_AND_ARTICLE_INTENTS",
+    "C1_DATAFORSEO_VALIDATE_AND_DEDUP",
+    "C2_RECOUNT_EACH_LOWEST_LEVEL_CATEGORY",
+    "C3_AGGREGATION_REVIEW_FOR_THIN_VALID_TOPICS",
+    "D_PORTAL_ROLE",
+    "E_ECONOMICS",
+    "F_OWNERSHIP"
+  ]
 }
