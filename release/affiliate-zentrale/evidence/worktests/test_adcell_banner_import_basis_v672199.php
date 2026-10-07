@@ -137,6 +137,18 @@ if ($selection_fn === '' || $selection_verify_pos === false || $selection_assign
     $errors[] = 'missing:manual_family_asset_gate_before_target_assignment';
 }
 
+$upsert_start = strpos($library, 'private function creative_library_upsert');
+$upsert_end = strpos($library, 'private function creative_library_import_body', $upsert_start === false ? 0 : $upsert_start);
+$upsert_fn = ($upsert_start !== false && $upsert_end !== false && $upsert_end > $upsert_start)
+    ? substr($library, $upsert_start, $upsert_end - $upsert_start) : '';
+if ($upsert_fn === ''
+    || strpos($upsert_fn, "$existing_dimension_state === 'failed'") === false
+    || strpos($upsert_fn, "$incoming_payload['_dimension_state'] = 'pending'") === false
+    || strpos($upsert_fn, "$asset_retry_reset = true") === false
+    || strpos($upsert_fn, "return ($destination_changed || $asset_retry_reset) ? 'updated' : 'unchanged'") === false) {
+    $errors[] = 'missing:failed_asset_reopened_only_by_fresh_reimport';
+}
+
 if ($errors) {
     fwrite(STDERR, "ADCELL_BANNER_IMPORT_BASIS_FAIL\n" . implode("\n", $errors) . "\n");
     exit(1);
@@ -153,4 +165,5 @@ echo "PASS destination resolver is guarded to import/background contexts\n";
 echo "PASS every banner path verifies the asset before target assignment\n";
 echo "PASS 6.72.199 basis resync waits for asset verification before reconcile\n";
 echo "PASS failed assets stay fail-closed without endless pending loop\n";
+echo "PASS later provider reimport reopens a failed asset for a new technical check\n";
 echo "ADCELL_BANNER_IMPORT_BASIS_COMPLETE\n";
