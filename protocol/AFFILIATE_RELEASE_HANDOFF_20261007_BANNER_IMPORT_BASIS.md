@@ -29,6 +29,9 @@ Kern: **Importbasis zuerst vollständig und beweisbar machen; vor bestandenem Ba
 - `release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php`
 - `release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php`
 - `release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php`
+- `release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php`
+
+Zusätzlich im aktuellen Arbeitsstand: Tarifcheck + CHECK24 als direkt auswählbare Direktpartner sowie ein händischer Einzelbanner-Import. CHECK24 besitzt dabei ausdrücklich keinen erfundenen API-Weg.
 
 Die Existenz dieser Dateien ist **kein PASS**. Teststatus ausschließlich aus `CURRENT_RELEASE.json` und echter Evidence übernehmen.
 
