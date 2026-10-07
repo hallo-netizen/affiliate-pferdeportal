@@ -2894,7 +2894,7 @@ trait PPAR_Automation_Suite_Trait {
         global $wpdb;
         $table = $this->creative_library_table();
         $rows = $wpdb->get_results($wpdb->prepare(
-            "SELECT id, missing_count FROM {$table} WHERE provider=%s AND partner_external_id=%s AND source_kind=%s AND last_complete_run<>%s",
+            "SELECT id, missing_count, identity_hash, creative_type FROM {$table} WHERE provider=%s AND partner_external_id=%s AND source_kind=%s AND last_complete_run<>%s",
             sanitize_key($provider), sanitize_text_field($partner_external_id), sanitize_key($source_kind), sanitize_text_field($run_uuid)
         ), ARRAY_A);
         foreach ($rows as $row) {
@@ -2904,6 +2904,18 @@ trait PPAR_Automation_Suite_Trait {
                 'availability_state'=>$missing >= 2 ? 'inactive_missing' : 'quarantine_missing',
                 'selected'=>0,
             ), array('id'=>absint($row['id'])));
+
+            // Erst nach dem zweiten vollstaendigen Fehlen gilt das Creative als
+            // bestaetigt nicht mehr verfuegbar. Dann nur seine automatische
+            // Bannerkampagne deaktivieren; manuelle FIXED-Kampagnen bleiben.
+            if($missing>=2
+                && sanitize_key((string)($row['creative_type']??''))==='banner'
+                && method_exists($this,'creative_library_deactivate_automatic_output_campaigns')){
+                $identity=strtolower(sanitize_text_field((string)($row['identity_hash']??'')));
+                if(preg_match('/^[a-f0-9]{64}$/',$identity)){
+                    $this->creative_library_deactivate_automatic_output_campaigns($identity);
+                }
+            }
         }
     }
 
@@ -3700,6 +3712,135 @@ trait PPAR_Automation_Suite_Trait {
         update_option($state_key, 'done', false);
         if (method_exists($this, 'article_plan_bump_campaign_revision')) {
             $this->article_plan_bump_campaign_revision('v672195_banner_reconcile_complete');
+        }
+    }
+
+
+    /**
+     * V6.72.201 KISS-Bannervertrag.
+     *
+     * Bestandsumbau in kleinen Batches, ohne globales Abschalten:
+     * - tiefstes belastbares Ziel + Elternpfad neu speichern;
+     * - bestehende Formatregeln bleiben Autoritaet;
+     * - neue Ausgabe zuerst materialisieren, alte wird danach atomar ersetzt;
+     * - nur Banner ohne jede belastbare Zuordnung verlieren ihre alte Automatik.
+     */
+    public function maybe_rebuild_banner_kiss_v672201() {
+        if (self::VERSION !== '6.72.201' || !is_admin()
+            || (function_exists('wp_doing_ajax') && wp_doing_ajax())) { return; }
+
+        $state_key='ppar_v672201_banner_kiss_state';
+        $state=sanitize_key((string)get_option($state_key,''));
+        if($state==='done'){return;}
+        if($state!=='running'){
+            delete_option('ppar_v672201_banner_kiss_cursor');
+            delete_option('ppar_v672201_banner_kiss_result');
+            update_option($state_key,'running',false);
+        }
+        $this->run_v672201_banner_kiss_reconcile();
+    }
+
+    public function run_v672201_banner_kiss_reconcile() {
+        if (self::VERSION !== '6.72.201'
+            || !method_exists($this,'creative_library_table')
+            || !method_exists($this,'output_assign_banner_targets_from_destination_once')
+            || !method_exists($this,'output_plan_creative')) { return; }
+
+        global $wpdb;
+        $table=$this->creative_library_table();
+        $state_key='ppar_v672201_banner_kiss_state';
+        $cursor_key='ppar_v672201_banner_kiss_cursor';
+        $result_key='ppar_v672201_banner_kiss_result';
+        $last=absint(get_option($cursor_key,0));
+        $limit=50;
+        $deadline=microtime(true)+8.0;
+        $processed=0; $mapped_count=0; $replanned=0; $no_map=0; $more=false;
+
+        do {
+            $rows=$wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+                 WHERE id>%d
+                   AND creative_type='banner'
+                   AND source_status='active'
+                   AND availability_state='active'
+                 ORDER BY id ASC
+                 LIMIT %d",
+                $last,$limit
+            ),ARRAY_A);
+            if(!is_array($rows) || !$rows){$more=false;break;}
+
+            foreach($rows as $row){
+                $row_id=absint($row['id']??0);
+                $last=max($last,$row_id);
+                $processed++;
+                if($row_id<=0){continue;}
+
+                $payload=json_decode((string)($row['payload']??''),true);
+                $payload=is_array($payload)?$payload:array();
+                $dimension_state=sanitize_key((string)($payload['_dimension_state']??''));
+                $verified=in_array($dimension_state,array('verified','mismatch'),true)
+                    && absint($row['width']??0)>0
+                    && absint($row['height']??0)>0;
+                if(!$verified){
+                    if($dimension_state!=='failed' && method_exists($this,'creative_library_schedule_asset_verification')){
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
+                $mapped=$this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n=absint(is_array($mapped)?($mapped['mapped']??0):0);
+                if($mapped_n<=0){
+                    $no_map++;
+                    if(method_exists($this,'creative_library_deactivate_automatic_output_campaigns')){
+                        $identity=strtolower(sanitize_text_field((string)($row['identity_hash']??'')));
+                        if(preg_match('/^[a-f0-9]{64}$/',$identity)){
+                            $this->creative_library_deactivate_automatic_output_campaigns($identity);
+                        }
+                    }
+                    continue;
+                }
+
+                $mapped_count+=$mapped_n;
+                $targets=is_array($mapped['targets']??null)?$mapped['targets']:array();
+                $row['topic_targets']=wp_json_encode($targets,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                $row['topic_score']=100;
+                $row['topic_status']='auto_verified';
+                $row['classified_at']=time();
+
+                $plan=$this->output_plan_creative($row,true);
+                if(is_array($plan) && (absint($plan['active']??0)>0 || absint($plan['drafts']??0)>0)){
+                    $replanned++;
+                }
+            }
+
+            update_option($cursor_key,$last,false);
+            $more=count($rows)===$limit;
+        } while($more && microtime(true)<$deadline);
+
+        $previous=get_option($result_key,array());
+        $previous=is_array($previous)?$previous:array();
+        update_option($result_key,array(
+            'processed'=>absint($previous['processed']??0)+$processed,
+            'mapped'=>absint($previous['mapped']??0)+$mapped_count,
+            'replanned'=>absint($previous['replanned']??0)+$replanned,
+            'no_map'=>absint($previous['no_map']??0)+$no_map,
+            'cursor'=>$last,
+            'updated_at'=>time(),
+            'done'=>!$more,
+        ),false);
+
+        if($more){
+            if(!wp_next_scheduled('ppar_v672201_banner_kiss_reconcile')){
+                wp_schedule_single_event(time()+3,'ppar_v672201_banner_kiss_reconcile');
+            }
+            return;
+        }
+
+        delete_option($cursor_key);
+        update_option($state_key,'done',false);
+        if(method_exists($this,'article_plan_bump_campaign_revision')){
+            $this->article_plan_bump_campaign_revision('v672201_banner_kiss_complete');
         }
     }
 
