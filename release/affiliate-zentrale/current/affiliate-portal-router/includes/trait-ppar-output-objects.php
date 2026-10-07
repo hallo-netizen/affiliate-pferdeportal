@@ -1034,10 +1034,6 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
-     * Letzte Evidenzstufe fuer Banner: Name/Beschreibung/Tags.
-     * Ziel-URL und Provider-Kategorie werden davor separat ausgewertet.
-     */
-    /**
      * Einziger semantischer Banner-Matcher.
      *
      * Er arbeitet nur mit bereits geladenen Portalzielen und vorhandener Evidenz:
@@ -1059,8 +1055,10 @@ trait PPAR_Output_Objects_Trait {
         $matches=array();
 
         $set_supported=function($words) use ($evidence_tokens) {
-            $words=array_values(array_filter(array_unique((array)$words),static function($word){
-                return strlen((string)$word)>=4;
+            $stop=array_flip(array('und','oder','mit','fuer','fur','von','der','die','das','ein','eine','im','in','am','auf'));
+            $words=array_values(array_filter(array_unique((array)$words),static function($word) use ($stop){
+                $word=(string)$word;
+                return strlen($word)>=3 && !isset($stop[$word]);
             }));
             if(!$words){return 0;}
 
