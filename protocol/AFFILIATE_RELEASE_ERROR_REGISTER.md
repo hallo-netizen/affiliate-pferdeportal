@@ -1264,3 +1264,27 @@ Current Generation 240 verwendet wieder den zulässigen Zustand `RUN_BOUND_RELEA
 
 **Status:** CLOSED / NACHGEHOLT.
 
+
+
+## AFF-ERR-055 — 6.72.199 Basis-Worktests vorhanden, aber kein zulässiger versionsneutraler WordPress/MariaDB-Ausführungsweg
+
+**Datum:** 07.10.2026.
+
+**Befund:** Der exakt gebundene 6.72.199-Source-Stand besteht die Release-Governance und Source-Bindung. Für die vier aktuellen Worktests existiert im Repository jedoch kein versionsneutraler Affiliate-Runner, der den aktuellen Source-Tree in WordPress/MariaDB installiert und Dateien aus `release/affiliate-zentrale/evidence/worktests/` ausführt.
+
+**Belegte Guards am final gebundenen Stand:** Current Generation 243 / Manifest SHA-256 `0f1c3f467d43ef742795929e02f82d3c64aec05c483bdb13bd6127b6179dbbff`.
+- Run `37595536094`: Schritt `Affiliate governance check` PASS. Dieser Schritt führt `governance-check` und `start --branch affiliate-release-current` aus; `start` enthält erneut Source-Check.
+- Run `37595536117`: `source-check` gibt `AFFILIATE_RELEASE_SOURCE_PASS` aus. Der Workflow stoppt erst anschließend an seiner historischen festen Prüfung `Version: 6.72.170`.
+- Run `37595536101`: vorhandener Gesamt-Release-Workflow ist ebenfalls historisch auf 6.72.171 gebunden und stoppt vor seinen WordPress/MariaDB-Schritten.
+
+**Vollständige Runner-Prüfung:** Die vorhandenen Affiliate-Workflows auf `affiliate-release-current` wurden gegen ihre Trigger und ersten Ausführungsschritte geprüft. Die WordPress/MariaDB-Läufe sind versionsspezifisch auf historische Kandidaten 6.72.170–6.72.198 gebunden. Auf `main` existiert kein zusätzlicher generischer Affiliate-Worktest-Runner. Es existiert auch kein Issue-/PR-/repository_dispatch- oder workflow_call-Weg, der die vier aktuellen Worktests versionsneutral übernimmt.
+
+**Warum kein Workaround gebaut wird:** Eine Änderung unter `.github/workflows/**` ist im aktuell gebundenen Affiliate-Arbeitsweg ausdrücklich verboten. Genau ein solcher Trigger-Nebenschritt wurde bereits als Fehler dokumentiert und zurückgenommen. Alte Versionsprüfungen durch Fake-Kommentare, Versionsstrings oder andere Umgehungen zu täuschen wäre kein belastbarer Test und ist verboten.
+
+**Offene vier Pflicht-Worktests:**
+- `release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php`
+- `release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php`
+- `release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php`
+- `release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php`
+
+**Status:** FIRST_REAL_BLOCKER / GUARDS_PASS / WORDPRESS_MARIADB_EXECUTION_PATH_MISSING / NO_ZIP / NO_RELEASE.
