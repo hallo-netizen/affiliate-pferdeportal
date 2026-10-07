@@ -1021,25 +1021,33 @@ trait PPAR_Output_Objects_Trait {
         }));
         if(!$evidence_words){return null;}
 
+        $evidence_terms=array();
+        foreach($evidence_words as $word){
+            $evidence_terms[]=array(
+                'word'=>(string)$word,
+                'tokens'=>$this->output_tokens((string)$word),
+            );
+        }
+
         $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
         $portal_key=sanitize_key((string)($portal['key']??''));
         $matches=array();
 
-        $set_supported=function($words) use ($evidence_words,$stop) {
+        $set_supported=function($words) use ($evidence_terms,$stop) {
             $words=array_values(array_filter(array_unique((array)$words),static function($word) use ($stop){
                 $word=(string)$word;
                 return strlen($word)>=3 && !isset($stop[$word]);
             }));
             if(!$words){return 0;}
 
-            $available=$evidence_words;
+            $available=$evidence_terms;
             $exact_matches=0;
             foreach($words as $word){
                 $matched_index=null;
                 $target_variants=$this->output_tokens((string)$word);
 
-                foreach($available as $index=>$evidence_word){
-                    if(array_intersect($target_variants,$this->output_tokens((string)$evidence_word))){
+                foreach($available as $index=>$evidence_term){
+                    if(array_intersect($target_variants,(array)($evidence_term['tokens']??array()))){
                         $matched_index=$index;
                         $exact_matches++;
                         break;
@@ -1047,9 +1055,10 @@ trait PPAR_Output_Objects_Trait {
                 }
 
                 if($matched_index===null && strlen((string)$word)>=6){
-                    foreach($available as $index=>$evidence_word){
-                        if(strlen((string)$evidence_word)>=6
-                            && strpos((string)$evidence_word,(string)$word)===0){
+                    foreach($available as $index=>$evidence_term){
+                        $evidence_word=(string)($evidence_term['word']??'');
+                        if(strlen($evidence_word)>=6
+                            && strpos($evidence_word,(string)$word)===0){
                             $matched_index=$index;
                             break;
                         }
