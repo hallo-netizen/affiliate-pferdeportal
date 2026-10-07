@@ -676,11 +676,25 @@ trait PPAR_Creative_Library_Trait {
                 'redirection'=>0,
                 'headers'=>array('Accept'=>'text/html,*/*;q=0.1'),
             ));
-            if (is_wp_error($response)) {
-                break;
+            $code = is_wp_error($response) ? 0 : absint(wp_remote_retrieve_response_code($response));
+            $location = is_wp_error($response) ? '' : trim((string) wp_remote_retrieve_header($response, 'location'));
+
+            // Einige Tracking-Endpunkte (u. a. ADCELL) liefern den eigentlichen
+            // Redirect erst auf GET, nicht auf HEAD. Nur im bereits geschuetzten
+            // Import-/Workerpfad deshalb einmal klein nachfassen; nie Frontend.
+            if (($code < 300 || $code >= 400 || $location === '')
+                && function_exists('wp_safe_remote_get')) {
+                $response = wp_safe_remote_get($current, array(
+                    'timeout'=>8,
+                    'redirection'=>0,
+                    'limit_response_size'=>2048,
+                    'headers'=>array('Accept'=>'text/html,*/*;q=0.1'),
+                ));
+                if (!is_wp_error($response)) {
+                    $code = absint(wp_remote_retrieve_response_code($response));
+                    $location = trim((string) wp_remote_retrieve_header($response, 'location'));
+                }
             }
-            $code = absint(wp_remote_retrieve_response_code($response));
-            $location = trim((string) wp_remote_retrieve_header($response, 'location'));
             if ($code < 300 || $code >= 400 || $location === '') {
                 break;
             }
