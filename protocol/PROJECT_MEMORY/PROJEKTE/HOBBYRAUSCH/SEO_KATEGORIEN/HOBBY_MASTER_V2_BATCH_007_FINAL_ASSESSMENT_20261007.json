@@ -1,0 +1,197 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_007_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_007_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:schiffsmodellbau",
+      "canonical_name": "Schiffsmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns ship-model construction, hulls, superstructures, fittings, propulsion/static variants and finishing."
+    },
+    {
+      "hobby_id": "hobby:flugzeugmodellbau",
+      "canonical_name": "Flugzeugmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns aircraft-model construction, airframes, materials, detailing, finishing and display/functional variants; RC flight operation remains with RC-Flugzeuge."
+    },
+    {
+      "hobby_id": "hobby:automodellbau",
+      "canonical_name": "Automodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns scale car-model building, kits, bodywork, detailing, painting and display."
+    },
+    {
+      "hobby_id": "hobby:militarmodellbau",
+      "canonical_name": "Militärmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns military scale-model construction, vehicles/figures, weathering, markings and scenes; historical research is supporting context."
+    },
+    {
+      "hobby_id": "hobby:sci-fi-modellbau",
+      "canonical_name": "Sci-Fi-Modellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns science-fiction model kits/scratchbuilds, surfaces, lighting and finishing."
+    },
+    {
+      "hobby_id": "hobby:fantasy-miniaturen",
+      "canonical_name": "Fantasy-Miniaturen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns fantasy miniature collecting/preparation, basing, painting and display. Generic painting technique remains with Miniaturen bemalen."
+    },
+    {
+      "hobby_id": "hobby:tabletop-miniaturen",
+      "canonical_name": "Tabletop-Miniaturen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns tabletop miniatures as gaming/model objects: assembly, basing, army/project organization and tabletop-specific presentation."
+    },
+    {
+      "hobby_id": "hobby:miniaturen-bemalen",
+      "canonical_name": "Miniaturen bemalen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns genre-neutral miniature-painting technique, paints, brushes/airbrush, shading/highlights and finishing."
+    },
+    {
+      "hobby_id": "hobby:miniaturhauser",
+      "canonical_name": "Miniaturhäuser",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns constructing standalone miniature houses/buildings, structure, interiors, finishes and details."
+    },
+    {
+      "hobby_id": "hobby:puppenhauser",
+      "canonical_name": "Puppenhäuser",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns dollhouse scales, shells/rooms, furniture, electrics, decoration and restoration."
+    },
+    {
+      "hobby_id": "hobby:book-nooks",
+      "canonical_name": "Book Nooks",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns shelf-insert miniature scenes, boxes, forced perspective, lighting and detailing."
+    },
+    {
+      "hobby_id": "hobby:miniaturbibliotheken",
+      "canonical_name": "Miniaturbibliotheken",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns library/book-specific miniature scenes. Generic miniature-world construction stays with Miniaturwelten/Book Nooks."
+    },
+    {
+      "hobby_id": "hobby:miniaturgarten",
+      "canonical_name": "Miniaturgärten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns living miniature gardens, containers, hardscape, plant selection and care."
+    },
+    {
+      "hobby_id": "hobby:feengarten",
+      "canonical_name": "Feengärten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns fairy-themed miniature-garden styling and accessories; generic living miniature-garden practice stays with Miniaturgärten."
+    },
+    {
+      "hobby_id": "hobby:bonsai-landschaften",
+      "canonical_name": "Bonsai-Landschaften",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns landscape compositions centered on bonsai/miniature trees; generic bonsai cultivation stays with Bonsai."
+    },
+    {
+      "hobby_id": "hobby:terrarium-landschaftsbau",
+      "canonical_name": "Terrarium-Landschaftsbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns terrarium hardscape/backgrounds, substrate layout, planting integration and visual composition; animal husbandry remains with Terraristik."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 12,
+    "orientation_universe": 0,
+    "editorial_topic": 4,
+    "seo_enrichment_pending": 16,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 007 to ledger and generate the next batch."
+}
