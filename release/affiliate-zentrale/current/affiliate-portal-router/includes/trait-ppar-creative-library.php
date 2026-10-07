@@ -1063,6 +1063,7 @@ trait PPAR_Creative_Library_Trait {
             'creative_id'=>$external_id,
             'creative_type'=>'banner',
             'creative_title'=>$title,
+            'title_source'=>$title !== '' ? 'manual_user' : 'manual_missing',
             'creative_description'=>$description,
             'creative_tag'=>$tags,
             'image_source'=>$image_url,
