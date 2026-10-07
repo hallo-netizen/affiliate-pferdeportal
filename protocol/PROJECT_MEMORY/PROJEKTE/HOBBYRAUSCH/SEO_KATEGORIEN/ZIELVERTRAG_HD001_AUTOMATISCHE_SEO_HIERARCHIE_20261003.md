@@ -1,108 +1,228 @@
-# ZV-HOBBYRAUSCH-HD001-001 – AUTOMATISCHE DATAFORSEO-SEO-HIERARCHIE BIS FRONTEND
+# ZV-HOBBYRAUSCH-HD001-001 – INTEGRIERTE HOBBY-ARCHITEKTUR BIS FRONTEND
 
-STAND: 2026-10-03
+STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 1.0
+FASSUNG: 2.0
+ERSETZT: Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
 HOBBYRAUSCH / SEO_KATEGORIEN / HD-001 Kategorie-Workflow.
 
-## Ausgangsstand
-
-- V1.9.4 bleibt der produktiv installierte und readback-verifizierte Live-Basisstand.
-- Der produktive Buchbinden-Pilot bleibt bestehen und wird nicht zurückgerollt.
-- Dieser Zielvertrag erklärt V1.9.4 ausdrücklich NICHT zum neuen Ziel-PASS.
-- Für den neuen Zielrahmen ist noch kein V1.9.5-/Nachfolgekandidat belegt.
-
-Fachlicher Planungsinput:
-`campus/hobbyfinder/konzept-und-ideen/KATEGORIEPLUGIN_HANDOFF.md`
-auf Commit
-`df54718078ab699783c495d2d79221006b7ca4fe`
-(PR #358, Planungsquelle; keine Current-Autorität).
-
 ## Verbindliches Endziel
 
-Bestehendes Hobby-Depot-Konzept
-→ DataForSEO
-→ automatisch erzeugte SEO-Hierarchie
-→ Hauptportal + Magazin + HivePress
-→ WordPress
-→ Veröffentlichung
+Zentraler Hobbybestand
+→ HOBBY_MASTER V2
+→ Scope-/Identitäts-/Größen-/Rollenprüfung
+→ integrierter 3-Säulen-Zielbaum
+→ DataForSEO-SEO-Anreicherung
+→ globale Intent-/Keyword-Ownership-Prüfung
+→ WordPress/HivePress Soll/Ist-Sync
 → sichtbare Frontend-Navigation
 → Readback.
 
-## Rollen
+Kein bestehender produktiver Bestand darf dabei ungeprüft verloren gehen.
 
-Das Konzept bestimmt Geschäftslogik, Nutzerwege und Strukturprinzip.
+## Unveränderte Grundarchitektur
 
-DataForSEO bestimmt innerhalb dieser Grenzen die konkreten sichtbaren Bezeichnungen und die hierarchische Einordnung nach unten.
+Drei Säulen:
+- CORE = Hauptportal;
+- EDITORIAL = Magazin;
+- DIRECTORY = HivePress / Anbieter.
 
-DataForSEO muss insbesondere unterscheiden:
-- Synonyme und Dubletten;
-- Unterformen;
-- eigenständige Suchräume;
-- Search Intent;
-- Parent-/Child-Beziehungen;
-- Kannibalisierung und eindeutiges Ownership.
+Acht geschützte Hauptwelten:
+Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln.
 
-Ein Parent darf nicht allein wegen höheren Suchvolumens gewählt werden. Die Bezeichnung muss semantisch und nach Suchintention zu den darunterliegenden Clustern passen.
+### Harte Ebenenregel
+
+Die acht Hauptwelten sind die oberste fachliche CORE-Ebene.
+
+`Hobbywelten` darf als Übersichts-/Einstiegsseite oder kuratierte View existieren, ist aber KEIN fachlicher Parent der acht Hauptwelten.
+
+Falsch:
+`Hobbywelten → Gestalten/Fertigen/…`
+
+Richtig:
+`Gestalten/Fertigen/…` = oberste CORE-Ebene;
+`Hobbywelten` = zusätzliche Ansicht / Einstieg auf dieselben kanonischen Knoten.
+
+Beliebte Hobbys, ungewöhnliche Hobbys, zuhause, günstig usw. sind ebenfalls Views/Filter/kuratierte Einstiege und erzeugen keine zweite Taxonomie.
+
+## Geschäfts- und Portallogik
+
+Hobby Depot ist weder reines Nischenportal noch beliebiges Hobby-Lexikon.
+
+Portfolioziel:
+- große bekannte Hobbys = wirtschaftliche Anker;
+- mittlere Hobbys = stabiles Rückgrat;
+- ungewöhnliche/Nischenhobbys = SEO-Longtail + Differenzierung.
+
+Großer interner Bestand ist erlaubt.
+Die sichtbare Navigation bleibt bewusst klein.
+
+Das Ziel ist NICHT „mehr Kategorien“, sondern für jedes Thema die richtige Ebene und Rolle.
+
+## Portalgrenze und Rollen
+
+Ein Kandidat wird fachlich geprüft auf:
+- aktive/wiederholbare Freizeitpraxis;
+- erlern-/vertiefbaren Tätigkeitsschwerpunkt;
+- natürliche Passung zu einer der acht Welten;
+- klare Identität/Aliaslage;
+- beherrschbare Größe;
+- Content Capacity;
+- wirtschaftliche bzw. strategische Rolle.
+
+Mögliche Rollen:
+- ORIENTATION_UNIVERSE;
+- HOBBY_HUB;
+- EDITORIAL_TOPIC;
+- ARTICLE_ONLY;
+- FINDER_ONLY;
+- OUT_OF_SCOPE.
+
+Ein echtes Hobby außerhalb der natürlichen Acht-Welten-Passung wird als SCOPE_REVIEW behandelt. Es erzeugt nicht automatisch eine neue Hauptwelt.
+
+## Größenvertrag
+
+Leaf-Kategorie:
+- 0–3 tragfähige Beitragsintentionen: keine eigene Kategorie;
+- 4: nur begründete Ausnahme;
+- 5–12: Zielbereich;
+- 13–15: zwingende Split-Prüfung;
+- >15: nur explizite Ausnahme.
+
+Hobby-Hub:
+- <3 tragfähige Leafs: Hub kritisch prüfen;
+- 3–6: Zielbereich;
+- 7–8: Split-/Macro-Prüfung;
+- >8: grundsätzlich ORIENTATION_UNIVERSE / Aufteilung in mehrere Hobby-Einheiten.
+
+Die Zahlen sind Prüfgrenzen, keine Aufforderung zu künstlicher Symmetrie.
+
+## Monetarisierung
+
+Monetarisierung entscheidet NICHT über Behalten oder Löschen eines gültigen Hobbys.
+
+Sie beeinflusst:
+- CORE-Priorität;
+- kommerzielle Tiefe;
+- Sichtbarkeit;
+- HivePress-Verknüpfung.
+
+DIRECT / ASSISTED + ausreichende Contenttiefe
+→ starker HOBBY_HUB-Kandidat.
+
+NONE / UNKNOWN + SEO-/Inspirationswert
+→ EDITORIAL_TOPIC / ARTICLE_ONLY / FINDER_ONLY.
+
+Nicht monetarisierbare valide Themen bleiben erhalten.
+
+## DataForSEO-Vertrag
+
+DataForSEO ist KEINE Strukturautorität.
+
+DataForSEO darf belegen bzw. auswählen:
+- Nachfrageband;
+- Primärkeyword;
+- Synonyme;
+- Longtail-Tiefe;
+- Keyword-/Intent-Überschneidung;
+- Suchnachfrage innerhalb fachlich bereits definierter Kandidaten.
+
+DataForSEO darf NICHT selbst bestimmen:
+- Hauptwelt;
+- Parent;
+- structural_role;
+- neue Zwischenkategorie;
+- Promotion eines Themas in CORE.
+
+Fachlogik bestimmt WAS ein Thema ist und WO es strukturell lebt.
+SEO-Daten zeigen WIE VIEL Nachfrage/Intenttiefe dafür belegt ist.
 
 ## Strukturprinzip
 
-Grundform:
+Grundform des Hauptportals bleibt variabel:
 `SEITE → SEITE → SEITE → KATEGORIE → BEITRÄGE`.
 
-Die Tiefe darf nicht künstlich mit inhaltsleeren Ebenen gefüllt werden. Der Workflow muss echte variable Mehr-Ebenen-Strukturen verarbeiten können und darf nicht auf „Root + vier direkte Kinder“ begrenzt bleiben.
+Nicht jeder Ast benötigt jede Ebene.
+Keine inhaltsleeren Ebenen.
+Keine Kategorie unter Kategorie.
 
-Im selben Gesamtprozess:
-- Hauptportal / Hobbywelten;
-- Magazin / Journal;
-- HivePress / Anbieterkategorien.
+Die V2-Rollenlogik liegt VOR dem Zielbaum:
+`Rohliste → HOBBY_MASTER V2 → Bewertung → Zielbaum-Delta`.
 
-Der Hobbyfinder bleibt vom SEO-Kategorienbaum getrennt. Er benötigt für die spätere Verknüpfung nur eine stabile Hobby-Identität.
+Der vorhandene V1.12-Zielbaum ist Baseline, aber nicht automatisch finaler Installationsbaum.
 
-## Automatik
+## Integration der drei Säulen
 
-Der Normalweg ist vollautomatisch.
+Alle drei Säulen verwenden dieselbe stabile Themen-/Hobbyidentität.
 
-Menschliche Sichtfreigaben dürfen nicht als zwingende Standardstufe des neuen Normalwegs vorausgesetzt werden. Ein manueller Eingriff bleibt nur als bewusster Ausnahme-/Override-Weg zulässig.
+CORE:
+systematischer Hobby-Hub / Orientierung.
 
-Unsichere oder widersprüchliche Evidenz darf nicht geraten werden. Der Lauf muss in solchen Fällen fail-closed stoppen.
+EDITORIAL:
+Inspiration, kleine Themen, Longtails, Situationen, Vergleiche.
+
+DIRECTORY:
+Anbieter-, Kurs-, Vereins-, Werkstatt-, Shop- und Service-Intents.
+
+Ein Thema darf in mehreren Säulen referenziert werden, aber pro primärem Suchintent gibt es genau EINEN SEO-Owner.
+
+Keine Säule baut eine konkurrierende Kopie desselben Hobbys.
+
+## Flexible Änderungen
+
+Stable identity = `hobby_id/node_id`.
+
+Unterstützt werden:
+- Add;
+- Rename;
+- Move;
+- Merge/Alias;
+- Archive/Demotion;
+- spätere Promotion.
+
+Bestehende IDs bleiben bei gleicher Objektidentität erhalten.
+Kein Hard-Delete als Normalweg.
 
 ## WordPress- und Frontend-Ziel
 
-Erfolg bedeutet nicht nur erzeugte WordPress-Objekte.
-
-Erforderlich sind:
+Erfolg bedeutet:
 - korrekte Seiten und Taxonomien;
-- veröffentlichter statt bloß als Draft angelegter Zielbestand;
-- erzeugte sichtbare Frontend-Navigation;
 - korrekte Parent-/Child-Beziehungen;
+- veröffentlichter Zielbestand nur nach vollständiger Prüfung;
+- sichtbare Frontend-Navigation;
+- acht Hauptwelten auf oberster CORE-Ebene;
+- keine zweite Hobbywelten-Parentebene;
+- korrekte Magazin-/HivePress-Integration;
 - Readback des WordPress- und Frontend-Endzustands.
+
+Aktive Revision erst nach vollständigem Write + Readback umschalten.
 
 ## Harte Abnahme
 
-Kein Ziel-PASS ohne vollständige lokale Positiv- UND Negativ-E2E-Simulation bis zum Frontend-Endzustand.
-
-Die Negativstrecke muss mindestens nachweisen, dass falsche Synonymzusammenführung, falscher Parent, reine Volumenentscheidung, Kannibalisierung, Strukturdrift, manipulierte Plan-/Readback-Daten, fehlende Navigation und unzulässiger Publish-Zustand fail-closed blockieren.
-
-Zusätzlich zu prüfen:
+Kein Ziel-PASS ohne:
+- vollständige lokale POSITIVE UND NEGATIVE E2E-Simulation;
+- realen relevanten Request-/Admin-/Resume-Pfad;
 - Idempotenz;
 - Drift-Erkennung;
 - Rollback;
-- wiederholter Readback;
-- kein Verlust des bestehenden V1.9.4-Livebestands.
+- Add/Move/Rename/Merge/Archive;
+- Alias-/Dublettenprüfung;
+- Cross-Pillar Keyword-/Intent-Kannibalisierung;
+- Schutz nicht monetarisierbarer valider Themen;
+- Nachweis, dass DataForSEO keine Struktur erzeugt/verschiebt;
+- Nachweis der obersten Acht-Welten-Ebene;
+- WordPress-/Frontend-Readback.
 
-Nach lokaler Abnahme bleibt ein realer WordPress-/Frontend-Readback für den produktiven Endzustand erforderlich.
+Lokaler PASS ist kein Live-PASS.
+Live-PASS erst nach echtem produktivem WordPress-/Frontend-Readback.
 
-## Technische Startbedingung
+## Aktuelle Integrationsgrenze
 
-Die technische Weiterentwicklung darf nur auf der exakt gebundenen V1.9.4-Quelle erfolgen.
+Die acht Welten und die bestehende Zwischenstruktur werden im ersten V2-Integrationslauf geschützt.
+Zuerst wird der HOBBY_MASTER bewertet.
+Erst danach wird ein begründetes Delta zum V1.12-Zielbaum erzeugt.
 
-Erwarteter Source-SHA-256:
-`12dcce406d842bd7b8a6cde5af6a54dff2a4bbff3e27528c04231898a8f02e01`.
-
-Ob diese Startbedingung aktuell erfüllt ist, wird **nicht** in diesem Zielvertrag als dynamischer Status geführt.
-Dafür gilt ausschließlich die zuständige Current-Autorität:
-`CURRENT_STATE.md` bzw. die HD-001-Plugin-Current.
+Keine direkte WordPress-Synchronisierung aus einem unbewerteten Master.
