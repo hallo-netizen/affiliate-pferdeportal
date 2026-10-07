@@ -358,6 +358,75 @@ if (!in_array('banner_provider_topic_exact', $target_sources_after_verify, true)
 }
 $ok('asset_verification_precedes_exact_schabracken_target_assignment');
 
+// Ein technischer Fehler bleibt innerhalb des Laufs terminal. Ein SPAETERER
+// echter Provider-Reimport desselben unveraenderten Banners muss den Assetcheck
+// aber erneut oeffnen; sonst waere ein temporaerer Bildfehler dauerhaft.
+$failed_payload = $payload_after;
+$failed_payload['_dimension_state'] = 'failed';
+$failed_payload['_dimension_error'] = 'temporary provider image failure';
+$failed_payload['_image_sha256'] = '';
+$failed_payload['_image_mime'] = '';
+$failed_payload['_image_bytes'] = 0;
+$failed_payload['_measured_at'] = time();
+$wpdb->update($table, array(
+    'width'=>0,
+    'height'=>0,
+    'topic_status'=>'format_blocked',
+    'topic_score'=>0,
+    'topic_targets'=>wp_json_encode(array(array(
+        'portal_key'=>'stale',
+        'state'=>'mapped',
+        'target_key'=>'category:' . $schabracken_id,
+        'source'=>'stale_should_be_removed',
+    ))),
+    'classified_at'=>time(),
+    'payload'=>wp_json_encode($failed_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+), array('id'=>(int)$stored_after['id']));
+
+$retry_counts = $import->invoke($o, $rows, array(
+    'provider'=>'adcell',
+    'partner_external_id'=>'123',
+    'partner_name'=>'procavallo',
+    'source_kind'=>'banner',
+    'run_uuid'=>'basis-run-later-reimport',
+));
+if ((int)($retry_counts['updated'] ?? 0) < 1) {
+    $fail('failed_asset_same_source_reimport_not_marked_updated_' . wp_json_encode($retry_counts));
+}
+$retry_row = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
+    'banner-393923'
+), ARRAY_A);
+$retry_payload = json_decode((string)($retry_row['payload'] ?? ''), true);
+$retry_targets = json_decode((string)($retry_row['topic_targets'] ?? ''), true);
+if (!is_array($retry_payload)
+    || sanitize_key((string)($retry_payload['_dimension_state'] ?? '')) !== 'pending'
+    || (string)($retry_payload['_dimension_error'] ?? '') !== ''
+    || (int)($retry_row['width'] ?? 0) !== 0
+    || (int)($retry_row['height'] ?? 0) !== 0
+    || sanitize_key((string)($retry_row['topic_status'] ?? '')) !== 'format_pending'
+    || (is_array($retry_targets) && count($retry_targets) !== 0)) {
+    $fail('failed_asset_not_reopened_pending_fail_closed_on_fresh_reimport');
+}
+$ok('fresh_provider_reimport_reopens_failed_asset_without_restoring_targets');
+
+$verified_retry = $verify->invoke($o, $retry_row, true, false);
+if (is_wp_error($verified_retry)) {
+    $fail('retry_asset_verification_' . $verified_retry->get_error_code());
+}
+$retry_after = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
+    'banner-393923'
+), ARRAY_A);
+$retry_after_targets = json_decode((string)($retry_after['topic_targets'] ?? ''), true);
+$retry_after_keys = is_array($retry_after_targets) ? array_values(array_map(static function($target) {
+    return (string)($target['target_key'] ?? '');
+}, array_filter($retry_after_targets, 'is_array'))) : array();
+if (!in_array('category:' . $schabracken_id, $retry_after_keys, true)) {
+    $fail('reopened_asset_not_remapped_after_successful_retry_verification');
+}
+$ok('reopened_asset_maps_again_only_after_successful_retry_verification');
+
 // Negativfall: Kategorienbasis nicht erreichbar -> kompletter Bannerimport
 // fail-closed, kein Raten aus Titel oder Altmetadaten.
 add_filter('pre_http_request', function($pre, $args, $url) {
