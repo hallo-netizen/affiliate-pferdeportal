@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: BATCH 001 REALER V1.12.3 DEPTH-LAUF ABGESCHLOSSEN / FREMDTREFFER-ZÄHLFEHLER ERKANNT / REGELN 1.3 / V1.12.4 ZERO-COST-NEUAUSWERTUNG LOKAL HARD PASS / KEIN ZIELBAUM-WRITE
+STATUS: BATCH 001 ECHTE DATAFORSEO-DATEN VOLLSTÄNDIG VORHANDEN / REGELN 1.4 KISS / V1.12.5 GESAMTER BATCH-PFAD LOKAL HARD PASS / EINMALIGER LIVE-READBACK OFFEN / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -97,7 +97,7 @@ Batch 001:
 
 ## V2-Korrektur: jede unterste Kategorie einzeln prüfen
 
-Verbindlich seit Regelversion 1.3:
+Verbindlich seit Regelversion 1.4:
 - Gesamtzahl der Artikel eines Hobbys reicht NICHT;
 - jede unterste Kategorie muss separat 5–12 echte, unterschiedliche Artikelintents tragen;
 - 0–3 = keine eigene Leaf-Kategorie;
@@ -173,81 +173,116 @@ Treibholz + Treibholz sammeln = eine Identität.
 Pro primärem Intent genau ein SEO-Owner.
 Andere Säulen dürfen Relation/Filter/Verweis sein, keine konkurrierende Zielseite.
 
-## Technischer V1.12.0–V1.12.4-Stand
+## Technischer V1.12.0–V1.12.5-Stand
 
-V1.12.0 bleibt technische Zielbaum-Baseline.
+Die komplette Fehlerkette des Testbatches wurde bis zum Ende geprüft.
 
-Realer Batch 001:
-- V1.12.1 initialer Overview: 263 fachlich vorgeschlagene Artikelintents, 106 exakte Provider-Zeilen;
-- V1.12.3 Tiefenlauf vollständig abgeschlossen;
-- insgesamt 39 DataForSEO-Aufrufe;
-- Gesamtkosten ca. 0.9738 USD;
-- weiterhin 0 WordPress-/HivePress-Strukturwrites.
+Reale Datenbasis:
+- 16 Hobbys;
+- 34 fachlich vorgeschlagene unterste Kategorien;
+- 263 fachlich vorgeschlagene Artikelintents;
+- historisch 39 echte DataForSEO-Aufrufe;
+- historische Kosten ca. 0.9738 USD;
+- 0 WordPress-/HivePress-Strukturwrites.
 
-Dabei wurde ein Auswertungsfehler sichtbar:
-V1.12.3 zählte rohe Keyword-Ideas-Gruppen als zusätzliche Artikelintents.
-Dadurch konnten fachfremde Provider-Treffer die Leaf-Kapazität künstlich aufblasen.
+Die zuletzt hochgeladene Ergebnisdatei ist weiterhin ein V1.12.3-Ergebnis.
+Sie ist bytegleich mit dem bereits geprüften V1.12.3-Ergebnis und enthält daher noch NICHT die spätere KISS-Neuberechnung.
 
-Korrektur in Regelvertrag 1.3:
-- Fachlogik definiert die Artikelintents;
-- DataForSEO liefert nur Evidenz für diese bereits definierten Intents;
-- Provider-Zeilen erzeugen keine neuen Artikel;
-- gleiche Core-Keywords zählen weiterhin nur einmal.
+### Ursache der bisherigen Schleife
 
-HD-001 V1.12.4 korrigiert ausschließlich die vorhandene Auswertung:
-- keine neuen DataForSEO-Aufrufe;
-- keine neuen Kosten;
-- vorhandene COMPLETE-Tiefendaten werden automatisch neu ausgewertet;
-- ein Depth-Treffer kann nur einen bereits vorhandenen PENDING-Artikelintent bestätigen;
-- unpassende Provider-Treffer bleiben Roh-Evidenz und zählen nicht;
-- 0 Strukturwrites.
+V1.12.1:
+fehlende exakte Longtail-Zeilen wurden zu stark als fehlende Content Capacity behandelt.
 
-Lokales Artefakt:
-`HD001_V1.12.4_V2_RELEVANCE_RECALC_ZERO_COST_HARDPASS.zip`
+V1.12.2/V1.12.3:
+Keyword-Ideas-Treffer wurden zur Tiefenmessung verwendet; dadurch konnten Provider-Rohzeilen Content Capacity künstlich erzeugen.
+
+V1.12.4:
+Rohzeilen erzeugten zwar keine neuen Artikel mehr, aber fachlich definierte Artikelintents wurden weiterhin zu stark von einem lexikalischen DataForSEO-Treffer abhängig gemacht.
+
+### Verbindliche KISS-Lösung ab Regeln 1.4 / HD-001 V1.12.5
+
+- Fachlogik definiert und zählt eigenständige Artikelintents.
+- Jede unterste Kategorie wird separat auf diese fachlich unterschiedlichen Intents geprüft.
+- DataForSEO ist der SEO-Abgleich.
+- Exaktes Core-Keyword-/Synonym-Evidence darf fachliche Dubletten zusammenführen.
+- Fehlt für einen fachlich eigenständigen Longtail eine exakte Provider-Zeile, bleiben nur seine SEO-Metriken offen; der Artikelintent bleibt bestehen.
+- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen niemals zusätzliche Artikel.
+- automatische Tiefenrecherche ist im Normalweg deaktiviert.
+
+Damit ist der kostenpflichtige 38-Call-Depth-Weg NICHT mehr Bestandteil des Normalwegs.
+
+### V1.12.5 – vollständiger lokaler Endtest
+
+Artefakt:
+`HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip`
 
 SHA-256:
-`5ceffaa03eda90b45a235cf844ff2ddae3bef553f2a61f4ec32ea38eefcf75f6`
+`68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
 
 Prüfbericht:
-`HD001_V1.12.4_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.5_FINAL_LOCAL_POSNEG_REPORT.txt`
 
-Prüfbericht SHA-256:
-`6b8938a5a5b46b1876a564f69f26f60048963e1fc1e5edbd879b7531bc643bb3`
+SHA-256:
+`8a6768b4222dd086f3ff124579684feeed6f11f45f268d5596631de326002075`
 
-Fresh-Unpack:
-- PHP 66/66 PASS;
+Fresh-/Regressionstest:
+- PHP Source 68/68 PASS;
 - Legacy Regression 270/270 PASS;
-- Fremdkeyword-/Relevanztest PASS;
-- realer V1.12.3-Result-Replay PASS;
-- 0 zusätzliche Provider-Calls PASS;
-- 0 zusätzliche Provider-Kosten PASS;
-- 0 Strukturwrites PASS.
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Bestand PASS;
+- V1.12.1 Assessment Regression PASS;
+- echtes V1.12.3-Ergebnis lokal neu ausgewertet PASS;
+- fehlende 14/15 exakte Provider-Zeilen löschen einen fachlich sauberen 3-Leaf-Hub NICHT PASS;
+- exaktes DataForSEO-Core-Keyword kann 5 fachliche Seeds korrekt auf 4 deduplizieren PASS;
+- Provider-/Depth-Rohzeilen erzeugen 0 zusätzliche Artikel PASS;
+- automatische Depth-Recherche = 0 Calls PASS;
+- 0 neue Provider-Kosten PASS;
+- 0 Strukturwrites PASS;
+- Neuberechnung idempotent PASS;
+- Fresh Release PHP 31/31 PASS.
 
-Realer Result-Replay nach Korrektur:
-- 541 gespeicherte Depth-Gruppen geprüft;
-- 2 davon bestätigen tatsächlich bisher PENDING fachlich definierte Artikelintents;
-- 539 erzeugen keinen zusätzlichen Artikel;
-- Batch-Summary danach: 0 Hub-Kandidaten / 1 Editorial-Thema / 5 Aggregation-Reviews / 3 Macro-Reviews / 7 Evidence-Required;
-- ideale Leafs: 2;
-- Zielbaum-Writes weiterhin 0.
+Lokaler Replay des echten Batch-001-Ergebnisses:
+- 34 ideale Leafs;
+- 1 HOBBY_HUB_CANDIDATE;
+- 1 EDITORIAL_TOPIC_CANDIDATE;
+- 5 AGGREGATION_REVIEW;
+- 3 MACRO_REVIEW;
+- 6 EVIDENCE_REQUIRED;
+- 0 Zielbaum-Writes.
+
+Kapazitätsseitig im typischen Hubbereich, aber noch mit Scope-/Identitätsprüfung:
+Airbrush 5 Leafs, Bean-to-Bar-Schokolade 6, Aeroponik 4, Ameisenhaltung 6, 3D-Bogenschießen 5, Wabikusa 4.
+
+Buchbinden ist im kontrollierten Batch der vollständige HOBBY_HUB_CANDIDATE:
+4 ideale Leafs mit 5 / 6 / 6 / 6 fachlich eigenständigen Artikelintents.
+
+Beleg:
+`HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_V124_ZERO_COST_RECALC_PENDING`
+`HD001_V2_BATCH001_V125_SINGLE_LIVE_READBACK_PENDING`
 
-Der kostenpflichtige DataForSEO-Teil ist abgeschlossen.
-Offen ist nur die korrigierte Neuauswertung derselben bereits gespeicherten Daten.
+Es gibt keinen offenen DataForSEO-Rechercheblocker mehr.
+
+Der komplette Batch-001-Weg ist mit der echten gespeicherten DataForSEO-Evidence lokal bis zum Endergebnis durchsimuliert und hart getestet.
+
+Offen ist nur der einmalige reale WordPress-Readback des exakt getesteten V1.12.5-Artefakts.
 
 ## EXAKT EINE NEXT ACTION
 
-HD-001 V1.12.4 in Hobby Depot installieren und einmal `Kategorien → V2-Hobbybewertung` öffnen.
+Einmal HD-001 V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
 
-Die Neuauswertung läuft beim Öffnen automatisch:
-- 0 DataForSEO-Aufrufe;
-- 0 neue Kosten;
-- 0 Kategorien-/Zielbaum-Writes.
+V1.12.5 muss das vorhandene gespeicherte Ergebnis automatisch nach Regeln 1.4 neu berechnen.
 
-Danach das neu heruntergeladene Ergebnis-JSON prüfen.
+Erwartung:
+- 0 neue DataForSEO-Aufrufe;
+- 0 neue DataForSEO-Kosten;
+- 0 Strukturwrites;
+- Result-Version 1.4 / Plugin 1.12.5;
+- dieselbe fachliche Batch-Summary wie im lokalen Real-Result-Replay.
+
+Danach Ergebnis-JSON einmal herunterladen und readback-prüfen.
 
 Noch kein Zielbaum-Delta.
 Noch kein Kategorien-Sync.
