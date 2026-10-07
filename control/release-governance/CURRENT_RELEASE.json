@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 246,
+  "generation": 247,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.199",
-    "status": "WORKING_6_72_199_VERIFY_BEFORE_ASSIGN_SOURCE_BOUND_GUARDS_OPEN",
+    "status": "BLOCKED_6_72_199_REAL_WORDPRESS_MARIADB_RUNNER_EXECUTION_OPEN",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,12 +44,12 @@
     "current_source_manifest_sha256": "bc318339e6737ac5c359ced50dc00816b2e9bafa55f0c6dd75fa09945db5a0be",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "Exact 6.72.199 source now fixes the remaining basis-order defect: every banner path requires technical asset verification before any stored target assignment; automatic import, global reconcile, 6.72.199 fresh-provider resync, and manual Tarifcheck/CHECK24 family actions all obey verify-before-assign. Failed assets remain terminal fail-closed. Worktests are hardened for zero targets before verification, provider raw value/type identity, CHECK24 66/14 target groups, and fresh-upgrade waiting_assets sequencing. Source manifest rebound to exact 28-file tree. Guards must rerun; no installer.",
+    "candidate_reference_scope": "Exact verify-before-assign 6.72.199 source is manifest-bound and guards PASS. Current source PHP syntax is also proven by the exact-local A-B workflow before its historical 6.72.171 version assertion. The hardened version-neutral runner and four worktests are committed. Remaining first blocker: execute that runner on a real WordPress/MariaDB host against the exact 28-file source. No ZIP and no release.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_REGENERATED_28_FILES_VERIFY_BEFORE_ASSIGN_GUARDS_OPEN",
+    "source_binding_status": "MANIFEST_28_FILES_GUARDS_AND_SOURCE_PHP_LINT_PASS_REAL_DB_RUN_OPEN",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -70,7 +70,7 @@
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "current_focus_reason": "The user explicitly added three requirements while the 6.72.199 basis gate is still open: Tarifcheck must be directly selectable in the shown backend filter, CHECK24 must be available as a Direct partner without inventing an unproven API contract, and individual banners must be insertable manually. These UI/intake additions do not alter ranking. During review, two target-contract gaps were also fixed: corrupt/missing ADCELL raw provider evidence now fails closed, and provider_missing display fallback titles are excluded from banner classification evidence.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_199_VERIFY_BEFORE_ASSIGN_SOURCE_MANIFEST_BOUND_GUARDS_OPEN",
+    "adcell_work_status": "6_72_199_VERIFY_BEFORE_ASSIGN_GUARDS_PHP_LINT_PASS_REAL_WORDPRESS_MARIADB_RUN_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -870,19 +870,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_199_VERIFY_BEFORE_ASSIGN_SOURCE_BOUND_GUARDS_OPEN",
+    "state": "BLOCKED_6_72_199_REAL_WORDPRESS_MARIADB_RUNNER_EXECUTION_OPEN",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the bound release guard against this exact 28-file 6.72.199 source: governance-check, source-check, and start for branch affiliate-release-current; stop at the first real failure. If and only if those pass, run release/affiliate-zentrale/evidence/worktests/run_banner_import_basis_v672199.sh on a real WordPress/MariaDB host containing the exact manifest-bound plugin. Do not build/install a ZIP and do not change ranking/target logic.",
-    "completion_condition": "EXACT_VERIFY_BEFORE_ASSIGN_SOURCE_GUARDS_PASS_AND_VERSION_NEUTRAL_RUNNER_ALL_FOUR_WORKTESTS_PASS",
-    "after_completion_action": "Only after the complete basis/direct-partner runner passes, execute the existing full Affiliate regression against the exact same source. Build no installer until total regression is green.",
+    "bound_user_scope_action": "Execute release/affiliate-zentrale/evidence/worktests/run_banner_import_basis_v672199.sh on a real WordPress/MariaDB host containing the exact 28-file manifest-bound 6.72.199 plugin. Stop at the first failure. Do not build/install a ZIP and do not change banner ranking/target logic.",
+    "completion_condition": "VERSION_NEUTRAL_RUNNER_COMPLETE_WITH_ALL_FOUR_6_72_199_WORKTESTS_PASS_ON_EXACT_28_FILE_SOURCE",
+    "after_completion_action": "Run the complete Affiliate regression against the same exact source. Only after that total regression passes may installer/fresh-unpack/final SHA gates begin.",
     "no_optional_detours": true,
-    "sequence": 94,
+    "sequence": 95,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-055",
     "evidence_ref": null,
     "evidence_sha256": null,
     "current_source_manifest_sha256": "bc318339e6737ac5c359ced50dc00816b2e9bafa55f0c6dd75fa09945db5a0be",
-    "current_source_binding": "MANIFEST_REGENERATED_28_FILES_VERIFY_BEFORE_ASSIGN_GUARDS_OPEN",
+    "current_source_binding": "MANIFEST_28_FILES_GUARDS_AND_SOURCE_PHP_LINT_PASS",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -895,13 +895,14 @@
       "check_runs_at_pre_sync_head": "NONE",
       "installer_6_72_199": "DOES_NOT_EXIST_NOT_AUTHORIZED",
       "direct_partner_ui_6_72_199": "TARIFCHECK_CHECK24_MANUAL_BANNER_CHECK24_66_COST_14_INSURANCE_VERIFY_BEFORE_ASSIGN_CONTRACT_COMMITTED_NOT_EXECUTED",
-      "guard_status": "RERUN_REQUIRED_AFTER_VERIFY_BEFORE_ASSIGN_SOURCE_CHANGE",
-      "governance_check": "OPEN_REBOUND_SOURCE",
-      "start_guard": "OPEN_REBOUND_SOURCE",
-      "source_check": "OPEN_REBOUND_SOURCE",
-      "wordpress_mariadb_runner": "VERSION_NEUTRAL_RUNNER_PREPARED_REAL_DB_EXECUTION_PENDING",
+      "guard_status": "PASS_GOVERNANCE_START_RUN_37599926822_SOURCE_RUN_37599926759",
+      "governance_check": "PASS_RUN_37599926822",
+      "start_guard": "PASS_RUN_37599926822",
+      "source_check": "PASS_RUN_37599926759_AFFILIATE_RELEASE_SOURCE_PASS",
+      "wordpress_mariadb_runner": "VERSION_NEUTRAL_RUNNER_COMMITTED_REAL_DB_EXECUTION_OPEN",
       "frontend_provider_http_hardlock": "STATIC_CONTRACT_COMMITTED_NOT_YET_EXECUTED_ON_REBOUND_SOURCE",
-      "verify_before_assign": "SOURCE_FIXED_AUTOMATION_IMPORT_RECONCILE_UPGRADE_STATE_MANUAL_FAMILY_TESTS_HARDENED_GUARDS_OPEN"
+      "verify_before_assign": "SOURCE_BOUND_GUARDS_PASS_AUTOMATION_IMPORT_RECONCILE_UPGRADE_STATE_MANUAL_FAMILY_ALL_ASSET_FIRST",
+      "source_php_syntax": "PASS_RUN_37599592962_EXACT_CURRENT_SOURCE_LINT_COMPLETED_BEFORE_HISTORICAL_VERSION_ASSERT"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
