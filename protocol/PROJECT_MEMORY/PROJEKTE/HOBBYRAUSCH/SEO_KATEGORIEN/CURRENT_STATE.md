@@ -184,7 +184,7 @@ Die V2-Größen-/Rollenlogik liegt zeitlich danach und das V1.12-Hobby-Profil en
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
+`HD001_V2_BATCH001_HD001_ASSESSMENT_RUN_NOT_BOUND`
 
 Die fachliche Vorprüfung für alle 16 Testhobbys ist vorbereitet.
 Die echten Leaf-Zahlen dürfen aber erst nach realem DataForSEO-Abgleich festgeschrieben werden.
@@ -196,8 +196,8 @@ Bereits real belegt:
 Für die übrigen Testhobbys liegen keine belastbaren aktuellen DataForSEO-Ergebnisse im geprüften Bestand vor.
 
 Der exakte Request ist vorbereitet.
-In diesem Chat ist jedoch kein authentifizierter DataForSEO-/Hobby-Depot-WordPress-Ausführungsweg gebunden.
-Deshalb werden keine SEO-Zahlen erfunden und kein anderer SEO-Dienst als Ersatz benutzt.
+Der DataForSEO-Zugang ist Bestandteil des bestehenden HD-001-WordPress-Plugins. Der externe Zugang ist daher KEIN Blocker.
+Offen ist ausschließlich die Bindung des neuen V2-Batch-Requests an einen read-only Bewertungsmodus in HD-001. Dieser Modus nutzt den vorhandenen APKW_DataForSEO-Client und die bereits in WordPress hinterlegten Zugangsdaten.
 
 ## EXAKT EINE NEXT ACTION
 
