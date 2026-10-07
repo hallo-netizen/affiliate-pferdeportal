@@ -76,17 +76,57 @@ jobs:
           PHP
           /tmp/wp plugin activate affiliate-portal-router --path=/tmp/wp-site
 
-      - name: Run exact five-test basis gate
+      - name: Run four executable WordPress MariaDB basis gates
         shell: bash
         env:
           WP_CLI: /tmp/wp
+        run: |
+          set -euo pipefail
+          php -l release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php >/dev/null
+          php -l release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php >/dev/null
+          php -l release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php >/dev/null
+          php -l release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php >/dev/null
+          php -l release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_real_provider_v672199.php >/dev/null
+          echo "PASS worktest_php_syntax_5_of_5"
+          php release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php
+          /tmp/wp eval 'if (!class_exists("Pferdeportal_Affiliate_Router") || Pferdeportal_Affiliate_Router::VERSION !== "6.72.199") { exit(2); } echo "PASS exact_6_72_199_plugin_loaded\\n";' --path=/tmp/wp-site
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          manifest=Path('release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt')
+          installed=Path('/tmp/wp-site/wp-content/plugins/affiliate-portal-router')
+          expected={}
+          for raw in manifest.read_text(encoding='utf-8').splitlines():
+              if not raw.strip(): continue
+              digest,rel=raw.split(None,1)
+              expected[rel.strip()]=digest
+          actual={}
+          for path in installed.rglob('*'):
+              if path.is_file():
+                  rel='affiliate-portal-router/'+path.relative_to(installed).as_posix()
+                  actual[rel]=hashlib.sha256(path.read_bytes()).hexdigest()
+          assert set(actual)==set(expected), 'installed file list'
+          assert all(actual[k]==v for k,v in expected.items()), 'installed byte identity'
+          print(f'PASS installed_plugin_byte_identity_{len(expected)}_of_{len(expected)}')
+          PY
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php" --path=/tmp/wp-site
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php" --path=/tmp/wp-site
+          /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php" --path=/tmp/wp-site
+
+      - name: Real ADCELL provider gate when credentials exist
+        shell: bash
+        env:
           PPAR_REAL_PROVIDER_GATE: '1'
           PPAR_ADCELL_USERNAME: ${{ secrets.PPAR_ADCELL_USERNAME }}
           PPAR_ADCELL_PASSWORD: ${{ secrets.PPAR_ADCELL_PASSWORD }}
           PPAR_ADCELL_PROGRAM_IDS: ${{ secrets.PPAR_ADCELL_PROGRAM_IDS }}
         run: |
           set -euo pipefail
-          bash release/affiliate-zentrale/evidence/worktests/run_banner_import_basis_v672199.sh /tmp/wp-site
+          if [ -n "$PPAR_ADCELL_USERNAME" ] && [ -n "$PPAR_ADCELL_PASSWORD" ] && [ -n "$PPAR_ADCELL_PROGRAM_IDS" ]; then
+            /tmp/wp eval-file "$GITHUB_WORKSPACE/release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_real_provider_v672199.php" --path=/tmp/wp-site
+          else
+            echo "REAL_ADCELL_PROVIDER_GATE_NOT_EXECUTED_CREDENTIALS_NOT_AVAILABLE"
+          fi
 
       - name: Existing banner regression
         shell: bash
