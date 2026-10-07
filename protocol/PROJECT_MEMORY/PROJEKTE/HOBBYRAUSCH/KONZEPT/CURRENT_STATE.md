@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.2 KONZEPTEXAKT / REALER V1.12.1-BATCH AUSGEFÜHRT / V1.12.2 LIVE-TIMEOUT ERKANNT / V1.12.3 RESUMABLE DEPTH LOKAL PASS
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.3 / REALER DATAFORSEO-BATCH KOMPLETT / V1.12.3 FREMDTREFFER-ZÄHLFEHLER ERKANNT / V1.12.4 ZERO-COST-NEUAUSWERTUNG LOKAL PASS
 
 ## Rolle
 
@@ -136,7 +136,7 @@ Nachgezogen:
 - Ziel pro unterster Kategorie: 5–12 eigenständige Artikelintents;
 - kleine valide Hobbys dürfen in stärkeren Übersichts-/Leaf-/Magazinstrukturen zusammengefasst werden, ohne ihre Hobby-Identität zu verlieren;
 - neue Zwischenkategorien werden erst im späteren Gesamt-Delta gebaut;
-- DataForSEO validiert Nachfrage, Synonyme und Intent-Trennung, erzeugt aber keine Struktur.
+- DataForSEO validiert Nachfrage, Synonyme und Intent-Trennung, erzeugt aber weder Struktur noch zusätzliche Artikelintents.
 
 Konzeptaudit:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
@@ -164,6 +164,22 @@ HD-001 V1.12.3 setzt genau diese fehlende zweite Evidenzstufe timeout-sicher um:
 
 Keine Struktur wird dabei erzeugt.
 
+## KISS-Korrektur nach realem Tiefenlauf
+
+Der reale V1.12.3-Tiefenlauf ist abgeschlossen.
+
+Dabei wurde sichtbar:
+Keyword-Ideas-Rohzeilen wurden technisch als zusätzliche Artikelintents gezählt.
+Das widerspricht dem Konzept.
+
+Verbindlich ab Regelvertrag 1.3:
+- Fachlogik definiert Leaf und Artikelintents;
+- DataForSEO bestätigt/vereinigt/dedupliziert diese Intents;
+- DataForSEO-Rohzeilen dürfen die Artikelzahl niemals selbst erhöhen.
+
+V1.12.4 wertet ausschließlich die bereits bezahlten Daten neu aus.
+Keine neue Recherche und keine neuen Kosten.
+
 ## Pilotbefund
 
 - Buchbinden → bestehender Live-/Technikpilot bleibt stabil; endgültiger V2-HOBBY_HUB-PASS ist wegen der strengeren 5–12-pro-Leaf-Regel wieder offen;
@@ -186,19 +202,19 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_RESUMABLE_DEPTH_RUN_PENDING`
+`HD001_V2_BATCH001_V124_ZERO_COST_RECALC_PENDING`
 
-Der initiale reale Batch ist abgeschlossen.
-Offen ist nur noch die im Konzept vorgesehene Tiefenevidenz für die unvollständig belegten Leaf-/Themenräume.
+Die komplette DataForSEO-Recherche ist vorhanden.
+Offen ist nur die korrigierte, kostenlose Neuauswertung derselben Daten.
 
 ## EXAKT EINE NEXT ACTION
 
-HD-001 V1.12.3 installieren und die Tiefenprüfung einmal starten. Sie arbeitet danach automatisch in kleinen gespeicherten Paketen weiter; bei Unterbrechung wird am gespeicherten Stand fortgesetzt.
+HD-001 V1.12.4 installieren und einmal die Seite `Kategorien → V2-Hobbybewertung` öffnen.
 
-Danach das neue Ergebnis gegen Regelvertrag 1.2 prüfen.
+Die Neuauswertung erfolgt automatisch und ohne DataForSEO-Aufruf.
+Danach das neue Ergebnis-JSON prüfen.
 
 Noch NICHT:
 - Zielbaum synchronisieren;
-- WordPress-Kategorien aus dem Batch schreiben;
-- V1.12-Zielprofil refreshen;
-- fehlende DataForSEO-Zeilen als negatives Struktururteil behandeln.
+- Kategorien schreiben;
+- aus Provider-Rohzeilen neue Artikel ableiten.
