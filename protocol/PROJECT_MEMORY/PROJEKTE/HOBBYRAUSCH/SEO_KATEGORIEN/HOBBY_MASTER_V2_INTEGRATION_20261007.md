@@ -122,13 +122,13 @@ zu groß; würde wie ein eigenes Portal funktionieren.
 Leaf-Kategorie:
 - 5–12 Beiträge Ziel;
 - 4 nur Ausnahme;
-- 13–14 zwingende Split-Prüfung;
-- >15 nur mit expliziter Ausnahme.
+- 13–14 oberhalb des Idealbereichs; keine automatische Teilung;
+- ab etwa 15 Teilung fachlich prüfen.
 
 Hobby-Hub:
 - 3–6 tragfähige Leafs Ziel;
-- 7–8 Split-/Macro-Prüfung;
-- >8 grundsätzlich Macro/Split.
+- 7–9 oberhalb des typischen Hubbereichs; prüfen, aber nicht automatisch zerlegen;
+- ab etwa 10 eigenständigen Unterbereichen Macro-/Split-Prüfung.
 
 ### Gate E – wirtschaftliche Rolle
 
@@ -340,8 +340,8 @@ Jede unterste Kategorie wird einzeln geprüft:
 - 0–3 distinct Artikelintents → keine eigene Leaf-Kategorie;
 - 4 → Ausnahmeprüfung;
 - 5–12 → Zielbereich;
-- 13–14 → Split-Prüfung;
-- ab etwa 15 → Split erforderlich.
+- 13–14 → oberhalb des Idealbereichs, keine automatische Teilung;
+- ab etwa 15 → Teilung prüfen.
 
 Nur echte verschiedene Nutzer-/Suchintents zählen.
 Synonyme und Formulierungsvarianten zählen nicht mehrfach.
@@ -349,7 +349,7 @@ Synonyme und Formulierungsvarianten zählen nicht mehrfach.
 Ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs.
 
 Maschinenlesbar gebunden in:
-`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` Version 1.1.
+`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` Version 1.2.
 
 ## 15. Zusammenfassung kleiner valider Hobbys
 
