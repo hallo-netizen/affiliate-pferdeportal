@@ -1,8 +1,8 @@
 {
   "contract": "HOBBY_MASTER_V2_ASSESSMENT_RULES",
-  "version": "1.2",
+  "version": "1.3",
   "effective_date": "2026-10-07",
-  "status": "ACTIVE_V2_RULESET_CONCEPT_EXACT_LEAF_CAPACITY_AND_AGGREGATION_BOUND",
+  "status": "ACTIVE_V2_RULESET_CONCEPT_EXACT_PROVIDER_ROWS_ARE_EVIDENCE_NOT_ARTICLES",
   "source_master": {
     "revision": "HD-HOBBY-MASTER-V2-20261007",
     "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
@@ -490,7 +490,8 @@
       "7_9_fit_leafs": "ABOVE_TYPICAL_HUB_REVIEW",
       "10_plus_fit_leafs": "MACRO_SPLIT_REVIEW"
     },
-    "hard_rule": "A total article count across the whole hobby is insufficient. Every proposed lowest-level category is checked separately. Under 4 is combined; 5–12 is ideal; from about 15 upward splitting is reviewed."
+    "hard_rule": "A total article count across the whole hobby is insufficient. Every proposed lowest-level category is checked separately. Under 4 is combined; 5–12 is ideal; from about 15 upward splitting is reviewed.",
+    "provider_evidence_counting_rule": "DataForSEO keyword_suggestions/keyword_ideas rows never create additional article intents. They may only validate, merge or deduplicate article intents already proposed by subject-matter logic."
   },
   "aggregation_contract": {
     "purpose": "Preserve small valid hobbies without creating hundreds of thin taxonomy nodes.",
@@ -525,10 +526,10 @@
     },
     "workflow": [
       "Subject logic proposes candidate leaf families and distinct article intents.",
-      "Run keyword_suggestions/keyword_ideas for the hobby and proposed leaf/article seeds.",
-      "Run keyword_overview on the deduplicated candidate keywords.",
-      "Use core_keyword, main_intent, synonyms/variants, longtail depth and demand to collapse duplicates and confirm distinct intent space.",
-      "Recount validated article intents per leaf.",
+      "DataForSEO keyword_overview validates exact proposed article-intent seeds where available.",
+      "keyword_suggestions/keyword_ideas may be used only as supporting evidence for already proposed article intents; provider-returned rows do not increase article-intent count by themselves.",
+      "Use core_keyword, main_intent, synonyms/variants and demand to validate or collapse subject-defined intents.",
+      "Recount only validated subject-defined article intents per leaf.",
       "Apply leaf thresholds and only then hub thresholds."
     ],
     "may_confirm": [
@@ -552,7 +553,8 @@
       "CORE_promotion",
       "deletion"
     ],
-    "fail_closed": "Without a real DataForSEO response, SEO validation fields stay PENDING_DFS. No synthetic search volume or keyword evidence may be invented."
+    "fail_closed": "Without a real DataForSEO response, SEO validation fields stay PENDING_DFS. No synthetic search volume or keyword evidence may be invented.",
+    "hard_counting_rule": "Provider rows are evidence, not new content nodes. One subject-defined article intent can count at most once; two subject-defined intents sharing the same validated core_keyword count once."
   },
   "assessment_sequence_v2": [
     "A_SCOPE",
