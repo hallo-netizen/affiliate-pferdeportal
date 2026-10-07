@@ -1,0 +1,197 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_008_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_008_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:paludarien",
+      "canonical_name": "Paludarien",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns combined land/water enclosure planning, hardscape, water section, planting and operation."
+    },
+    {
+      "hobby_id": "hobby:riparien",
+      "canonical_name": "Riparien",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns riparium-specific emergent shoreline layouts; broader planted aquatic design stays with Aquascaping/Paludarien."
+    },
+    {
+      "hobby_id": "hobby:aquascaping",
+      "canonical_name": "Aquascaping",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns aquarium landscape design, hardscape, plants, layout styles, lighting/CO2 and maintenance."
+    },
+    {
+      "hobby_id": "hobby:nano-aquascaping",
+      "canonical_name": "Nano-Aquascaping",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns aquascaping in very small aquariums and its scale-specific constraints; generic aquascaping stays with Aquascaping."
+    },
+    {
+      "hobby_id": "hobby:mossarien",
+      "canonical_name": "Mossarien",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns moss-focused enclosed/open displays, substrates, humidity/light and care."
+    },
+    {
+      "hobby_id": "hobby:flaschengarten",
+      "canonical_name": "Flaschengärten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns bottle/terrarium gardens, vessel setup, substrates, plants and closed-system maintenance."
+    },
+    {
+      "hobby_id": "hobby:geschlossene-okosysteme",
+      "canonical_name": "geschlossene Ökosysteme",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "forschen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic closed-ecosystem orientation. Flaschengärten, Biosphären bauen and other concrete implementations keep specific ownership."
+    },
+    {
+      "hobby_id": "hobby:biospharen-bauen",
+      "canonical_name": "Biosphären bauen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "forschen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns designing and building self-contained miniature biosphere/closed-ecosystem experiments."
+    },
+    {
+      "hobby_id": "hobby:modellraketen",
+      "canonical_name": "Modellraketen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns hobby model-rocket airframes, motors, recovery, launch setup and flight preparation within legal/safety limits."
+    },
+    {
+      "hobby_id": "hobby:wasserraketen",
+      "canonical_name": "Wasserraketen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns water-rocket construction, pressure systems, launchers, aerodynamics and recovery."
+    },
+    {
+      "hobby_id": "hobby:papiermodellbau",
+      "canonical_name": "Papiermodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns printed/cut/fold paper model construction, reinforcement, shaping, assembly and finishing."
+    },
+    {
+      "hobby_id": "hobby:kartonmodellbau",
+      "canonical_name": "Kartonmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns heavier card/cardboard-specific construction methods. Generic paper-model ownership stays with Papiermodellbau."
+    },
+    {
+      "hobby_id": "hobby:holzmodellbau",
+      "canonical_name": "Holzmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns model construction primarily from wood, cutting/shaping, joinery, finishing and detailing."
+    },
+    {
+      "hobby_id": "hobby:metallmodellbau",
+      "canonical_name": "Metallmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns model construction primarily from metal, forming, soldering/brazing, machining and finishing."
+    },
+    {
+      "hobby_id": "hobby:lego-technik-custom-builds",
+      "canonical_name": "LEGO-Technik-Custom-Builds",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns custom functional builds using LEGO Technic-compatible systems, mechanisms, gearing, pneumatics and powered functions."
+    },
+    {
+      "hobby_id": "hobby:klemmbaustein-mocs",
+      "canonical_name": "Klemmbaustein-MOCs",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns original custom brick-model design, planning, structure, parts selection and presentation across compatible building-brick systems."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 12,
+    "orientation_universe": 1,
+    "editorial_topic": 3,
+    "seo_enrichment_pending": 16,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 008 to ledger and generate the next batch."
+}
