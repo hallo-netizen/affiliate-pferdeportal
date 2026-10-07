@@ -1046,7 +1046,7 @@ trait PPAR_Output_Objects_Trait {
         }
 
         if(!$matches){return null;}
-        usort($matches,static function($a,$b){return (int)$b['depth']=>(int)$a['depth'];});
+        usort($matches,static function($a,$b){return (int)$b['depth']<=>(int)$a['depth'];});
         if(isset($matches[1]) && (int)$matches[0]['depth']===(int)$matches[1]['depth']){return null;}
         $target=$matches[0]['target'];
         $target['_ppar_destination_match_level']='exact';
