@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: V1.12 TECHNISCHE BASIS VORHANDEN / HOBBY_MASTER V2 VORGESCHALTET / ACHT WELTEN ALS CORE-EBENE 1 FEST / GESAMTBEWERTUNG OFFEN / KEIN NEUER LIVE-RELEASE
+STATUS: V1.12 TECHNISCHE BASIS VORHANDEN / V2-BEWERTUNGSVERTRAG GEBUNDEN / BATCH 001 AUSGEFÜHRT / EVIDENZLÜCKEN OFFEN / KEIN NEUER LIVE-RELEASE
 
 ## Ziel
 
@@ -65,8 +65,35 @@ Bestand:
 - 286 DIRECT;
 - 43 ASSISTED;
 - 512 UNKNOWN und weiterhin erhalten.
+- zusätzlich 19 Research-Queue-Kandidaten, noch NICHT Teil der 841 Identitäten;
+- davon Fotografie durch Pilotbefund für provisorischen Master-Intake vorbereitet, aber noch kein Zielbaumknoten.
 
 Die Rohliste ist Candidate Pool/Provenienz, keine Taxonomie.
+
+## Maschinenlesbare V2-Bewertung
+
+Regelvertrag:
+`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
+
+Kontrollierter erster Lauf:
+`HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
+
+Research-Queue-Intake:
+`HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
+
+Vorbereitetes Master-Intake-Delta:
+`HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
+
+Batch 001:
+- 16 reproduzierbar ausgewählte Master-Identitäten;
+- 16/16 Identitätsgate PASS;
+- 2 Scope-Fälle fachlich bestätigt;
+- 9 Scope-Fälle nur provisional;
+- 5 Scope-Fälle benötigen Evidenz;
+- Buchbinden = FIT / HOBBY_HUB aus vorhandener Pilotevidenz, aber noch PARTIAL wegen offener Leaf-/Ownership-Evidenz;
+- Treibholz sammeln = IN_SCOPE / Sammeln / EDITORIAL, aber ARTICLE_ONLY vs. EDITORIAL_TOPIC noch offen;
+- keine automatische Promotion aus DIRECT/ASSISTED;
+- 0 Zielbaum-Writes zulässig.
 
 ## Rollen- und Größenlogik
 
@@ -135,25 +162,28 @@ Die V2-Größen-/Rollenlogik liegt zeitlich danach und das V1.12-Hobby-Profil en
 
 ## ERSTER OFFENER BLOCKER
 
-Die 841 kanonischen Kandidaten sind noch nicht vollständig nach:
-- Scope;
-- Identität/Alias;
-- Größenklasse;
-- Content Capacity;
-- Publikationsrolle;
-- 3-Säulen-Ownership
+`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
 
-bewertet.
+Der Bewertungsvertrag ist jetzt eindeutig gebunden und Batch 001 ist real ausgeführt.
 
-Ohne diese Bewertung gibt es kein belastbares V2-Zielbaum-Delta.
+Der aktuelle Blocker ist nicht mehr die fehlende Regeldefinition, sondern fehlende Evidenz:
+- 15/16 Batch-Fälle sind noch nicht vollständig bewertet;
+- Content Capacity fehlt für fast alle;
+- finale Ownership fehlt;
+- bei fünf Kandidaten fehlt bereits belastbare Scope-/Weltevidenz.
+
+Solange Batch 001 nicht belastbar durch die Gates läuft, wird die 841er Gesamtbewertung nicht gestartet.
 
 ## EXAKT EINE NEXT ACTION
 
-Die maschinenlesbaren Bewertungsregeln auf einen kontrollierten ersten HOBBY_MASTER-Batch anwenden und die Ergebnisse gegen das Rollen-/Größenmodell prüfen.
+Für die 16 Kandidaten aus `HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json` die fehlende Scope-/Content-Capacity-/Ownership-Evidenz erzeugen und denselben Batch anschließend erneut durch `HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` laufen lassen.
 
-Erst danach:
-- Fehlklassifikationen korrigieren;
-- Gesamtmaster batchweise bewerten;
-- V1.12-Zielbaum als Delta fortschreiben;
-- die acht Welten auf CORE-Ebene 1 korrigieren;
-- danach Plugin-/WordPress-Sync erneut komplett POS/NEG testen.
+Dabei:
+- DataForSEO nur für SEO-/Nachfrage-/Intent-Evidenz;
+- keine Struktur aus Suchvolumen ableiten;
+- keine unbekannten Werte schätzen;
+- nur vollständig belegte `ASSESSED`-Fälle freigeben.
+
+Noch keine Pluginänderung.
+Noch kein WordPress-Sync.
+Noch kein V1.12-Deployment.
