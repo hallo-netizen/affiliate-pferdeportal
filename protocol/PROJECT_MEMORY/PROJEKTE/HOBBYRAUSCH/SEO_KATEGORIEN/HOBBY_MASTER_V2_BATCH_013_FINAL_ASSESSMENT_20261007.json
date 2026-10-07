@@ -8,192 +8,188 @@
   "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
   "decisions": [
     {
-      "hobby_id": "hobby:steinschleifen",
-      "canonical_name": "Steinschleifen",
+      "hobby_id": "hobby:knopfe-herstellen",
+      "canonical_name": "Knöpfe herstellen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns handmade button materials, forming, holes/shanks, decoration and finishing."
+    },
+    {
+      "hobby_id": "hobby:handspinnen",
+      "canonical_name": "Handspinnen",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Canonical German owner for general lapidary stone cutting/grinding/polishing. Gem-specific faceting may remain with Edelsteinschleifen."
+      "ownership": "Owns fiber prep, spindle/wheel spinning, drafting, twist, plying and finishing yarn."
     },
     {
-      "hobby_id": "hobby:mineralienschleifen",
-      "canonical_name": "Mineralienschleifen",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "ALIAS_OF",
-      "canonical_hobby_id": "hobby:steinschleifen",
-      "natural_world": "fertigen",
-      "size_class": "DUPLICATE_ALIAS",
-      "publication_role": "ALIAS_ONLY",
-      "viable_leaf_categories": 0,
-      "ownership": "Same general stone/mineral lapidary practice; retain source term without a second SEO owner."
-    },
-    {
-      "hobby_id": "hobby:edelsteinschleifen",
-      "canonical_name": "Edelsteinschleifen",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
-      "ownership": "Owns gemstone-specific shaping/faceting/cabochons, orientation, polishing and evaluation."
-    },
-    {
-      "hobby_id": "hobby:lapidary",
-      "canonical_name": "Lapidary",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "ALIAS_OF",
-      "canonical_hobby_id": "hobby:steinschleifen",
-      "natural_world": "fertigen",
-      "size_class": "DUPLICATE_ALIAS",
-      "publication_role": "ALIAS_ONLY",
-      "viable_leaf_categories": 0,
-      "ownership": "English umbrella term for the same lapidary practice; German portal uses Steinschleifen as canonical owner."
-    },
-    {
-      "hobby_id": "hobby:steinpolieren",
-      "canonical_name": "Steinpolieren",
+      "hobby_id": "hobby:spinnrad",
+      "canonical_name": "Spinnrad",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "fertigen",
       "size_class": "MICRO",
       "publication_role": "EDITORIAL_TOPIC",
       "viable_leaf_categories": 0,
-      "ownership": "Owns focused hand/machine polishing of stones; broader shaping remains with Steinschleifen."
+      "ownership": "Owns spinning-wheel selection/setup/maintenance and wheel-specific technique; generic yarn spinning stays with Handspinnen."
     },
     {
-      "hobby_id": "hobby:rock-tumbling",
-      "canonical_name": "Rock Tumbling",
+      "hobby_id": "hobby:weben",
+      "canonical_name": "Weben",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic weaving orientation; Brettchenweben, Sprang, Tapisserie and other concrete structures retain specific owners."
+    },
+    {
+      "hobby_id": "hobby:brettchenweben",
+      "canonical_name": "Brettchenweben",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns rotary/vibratory tumbling, grit stages, loads, polishing and troubleshooting."
+      "ownership": "Owns tablet setup/threading, turning sequences, patterns and finishing."
     },
     {
-      "hobby_id": "hobby:specksteinschnitzen",
-      "canonical_name": "Specksteinschnitzen",
+      "hobby_id": "hobby:sprang",
+      "canonical_name": "Sprang",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns soapstone selection, sawing/rasping, carving, sanding and polishing."
+      "ownership": "Owns sprang frames, interlinking/interlacing structures, shaping and finishing."
     },
     {
-      "hobby_id": "hobby:kintsugi",
-      "canonical_name": "Kintsugi",
+      "hobby_id": "hobby:nadelbinden",
+      "canonical_name": "Nadelbinden",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns ceramic repair aesthetics, joins, lacquer/adhesive systems, metallic finishing and care."
+      "ownership": "Owns nålebinding needles/yarn, stitch families, joining/shaping and finishing."
     },
     {
-      "hobby_id": "hobby:urushi-lackkunst",
-      "canonical_name": "Urushi-Lackkunst",
+      "hobby_id": "hobby:english-paper-piecing",
+      "canonical_name": "English Paper Piecing",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
+      "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns urushi lacquer preparation/application, layers, curing, decoration and finishing."
+      "ownership": "Owns template preparation, fabric basting, hand joining, shapes and finishing."
     },
     {
-      "hobby_id": "hobby:goldlegen",
-      "canonical_name": "Goldlegen",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "ALIAS_OF",
-      "canonical_hobby_id": "hobby:vergolden",
-      "natural_world": "gestalten",
-      "size_class": "DUPLICATE_ALIAS",
-      "publication_role": "ALIAS_ONLY",
-      "viable_leaf_categories": 0,
-      "ownership": "Same gilding practice; Vergolden is the canonical German owner."
-    },
-    {
-      "hobby_id": "hobby:vergolden",
-      "canonical_name": "Vergolden",
+      "hobby_id": "hobby:quilten",
+      "canonical_name": "Quilten",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns quilt planning, piecing, batting/backing, quilting, binding and finishing."
+    },
+    {
+      "hobby_id": "hobby:punch-needle",
+      "canonical_name": "Punch Needle",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns gilding surfaces, grounds/sizes, leaf application, burnishing and protection."
+      "ownership": "Owns punch-needle tools, fabric/yarn, loop control, patterns and finishing."
     },
     {
-      "hobby_id": "hobby:pyrographie",
-      "canonical_name": "Pyrographie",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "ALIAS_OF",
-      "canonical_hobby_id": "hobby:brandmalerei",
-      "natural_world": "gestalten",
-      "size_class": "DUPLICATE_ALIAS",
-      "publication_role": "ALIAS_ONLY",
-      "viable_leaf_categories": 0,
-      "ownership": "International term for Brandmalerei; one canonical SEO owner only."
-    },
-    {
-      "hobby_id": "hobby:brandmalerei",
-      "canonical_name": "Brandmalerei",
+      "hobby_id": "hobby:tufting",
+      "canonical_name": "Tufting",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
+      "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns pyrography tools, temperature, line/shading technique, materials and finishing."
+      "ownership": "Owns tufting guns/frames, yarn/fabric, design transfer, pile work and backing/finishing."
     },
     {
-      "hobby_id": "hobby:pinstriping",
-      "canonical_name": "Pinstriping",
+      "hobby_id": "hobby:nadelfilzen",
+      "canonical_name": "Nadelfilzen",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
-      "ownership": "Owns pinstriping brushes/paint, line control, layouts, symmetry and surface finishing."
-    },
-    {
-      "hobby_id": "hobby:lettering",
-      "canonical_name": "Lettering",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
+      "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns hand lettering styles, tools, construction, composition and finished pieces."
+      "ownership": "Owns needle-felting fibers, needles, 2D/3D shaping, details and finishing."
     },
     {
-      "hobby_id": "hobby:schildermalerei",
-      "canonical_name": "Schildermalerei",
+      "hobby_id": "hobby:nassfilzen",
+      "canonical_name": "Nassfilzen",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
+      "natural_world": "fertigen",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns traditional sign painting, layout, alphabets, brushes/paint, substrates and finishing."
+      "ownership": "Owns wet-felting fibers, soap/water, layout, rolling/full­ing, shaping and finishing."
+    },
+    {
+      "hobby_id": "hobby:teppichknupfen",
+      "canonical_name": "Teppichknüpfen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns rug-knotting frames/warps, knot types, pattern transfer, pile cutting and finishing."
+    },
+    {
+      "hobby_id": "hobby:tapisserie",
+      "canonical_name": "Tapisserie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns tapestry weaving, cartoon/design, warping, color weft, joins and finishing."
+    },
+    {
+      "hobby_id": "hobby:perlenweben",
+      "canonical_name": "Perlenweben",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns bead looms/off-loom weaving, bead selection, patterns, tension and finishing."
     }
   ],
   "final_summary": {
     "assessed": 16,
-    "hobby_hub": 10,
+    "hobby_hub": 14,
+    "orientation_universe": 1,
     "editorial_topic": 1,
-    "alias_only": 3,
-    "seo_enrichment_pending": 13,
+    "seo_enrichment_pending": 16,
     "unresolved": 0,
     "target_tree_writes_allowed": 0
   },
