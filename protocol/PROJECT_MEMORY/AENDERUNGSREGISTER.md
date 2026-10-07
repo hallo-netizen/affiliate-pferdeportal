@@ -687,3 +687,41 @@ BELEG:
 
 NÄCHSTER FACHLICHER SCHRITT:
 Den vorbereiteten Batch-001-DataForSEO-Request real ausführen und danach Leaf-Zählung, Ownership und Aggregation neu berechnen.
+
+
+## HOBBYRAUSCH-HD001-20261007-L – Konzeptgrenzen exakt korrigiert + V1.12.1 WordPress-Bewertung
+
+WAS:
+Die komplette V2-Umsetzung wurde erneut gegen den ursprünglichen Konzepttext geprüft. Dabei wurde die in Vorgang K zu streng formulierte Split-Regel korrigiert und der V2-Bewertungslauf direkt in HD-001/WordPress umgesetzt.
+
+WARUM:
+Das Konzept sagt nicht `13–15 zwingend splitten / 16+ splitten`.
+Es sagt: unter 4 zusammenlegen, ideal etwa 5–12, ab etwa 15 prüfen, ob eine echte Teilung sinnvoll ist.
+Eine automatische Teilung hätte wieder Struktur erfunden.
+
+VERBINDLICH:
+- unter 4 = zusammenlegen / keine eigene Leaf-Kategorie;
+- 4 = Grenzfall;
+- 5–12 = ideal;
+- 13–14 = oberhalb ideal, keine automatische Teilung;
+- ab etwa 15 = Teilung prüfen, nur bei echter fachlicher Trennlinie;
+- Hobby-Hub typischerweise 3–6 Leafs;
+- 7–9 = oberhalb typisch, prüfen;
+- ab etwa 10 eigenständigen Unterbereichen = Macro-/Split-Prüfung.
+
+TECHNISCHE UMSETZUNG:
+HD-001 V1.12.1 führt Batch 001 read-only im WordPress-Backend aus und benutzt den vorhandenen DataForSEO-Zugang.
+Der alte V1.12-Zielbaum darf dabei nicht geschrieben werden.
+
+BELEG:
+- Artefakt SHA-256 `959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d`;
+- Prüfbericht SHA-256 `3f34f58d0d7d35d0ac290e2926ac706f5fd6ff84e5a314d6ecde554204c89ac2`;
+- PHP 59/59;
+- Legacy 270/270;
+- V1.12 POS/NEG;
+- realer 908/844/841-Test;
+- V1.12.1 V2-Grenz-/Negativtests;
+- 0 Strukturwrites.
+
+OFFEN:
+Nur der reale Batch-001-DataForSEO-Lauf in Hobby Depot.
