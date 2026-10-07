@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 263,
+  "generation": 264,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "c1338ff41cd31782106bdb753b0644ebfe1377b49acb3f17227b8ad03f56d2ed",
+    "manifest_sha256": "4244d75b81a82ab508fc2acdb6690e938386e6e8728311af8b4b30cb01527a50",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -70,7 +70,7 @@
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "current_focus_reason": "Implement the already agreed simple banner contract without further architecture: deepest reliable category once at import/reconcile, store its parent path, hard format selection before delivery, stable distribution only when no specific match exists, and regular source refresh/retirement in existing background jobs.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_201_KISS_BANNER_BOUND_ZIP_BUILT_LIVE_OPEN",
+    "adcell_work_status": "6_72_202_KISS_PERFORMANCE_ZIP_BUILT_LIVE_OPEN",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
