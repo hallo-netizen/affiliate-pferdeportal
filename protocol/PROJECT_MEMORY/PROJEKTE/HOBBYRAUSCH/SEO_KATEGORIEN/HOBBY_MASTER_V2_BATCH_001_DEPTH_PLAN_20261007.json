@@ -1,1 +1,48 @@
-PLACEHOLDER
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "READY_FOR_HD001_V1_12_2_WORDPRESS_DEPTH_RUN",
+  "source_result": {
+    "contract": "APKW_HOBBY_MASTER_V2_ASSESSMENT_RESULT_V1",
+    "version": "1.0",
+    "plugin_version": "1.12.1",
+    "batch_id": "001",
+    "result_sha256": "5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9",
+    "input_sha256": "17f0e235e3ef6045684b49b6eeadee1744f988c2167cb42ce5b53a106f3e5e0c",
+    "source_master_sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7"
+  },
+  "real_initial_run": {
+    "proposed_article_intents": 263,
+    "returned_exact_overview_rows": 106,
+    "pending_exact_seeds": 157,
+    "paid_calls": 1,
+    "cost_usd": 0.02472,
+    "wordpress_structure_writes": 0
+  },
+  "reason": "The exact keyword_overview stage does not complete the active ruleset's required SEO-depth evidence. Missing exact rows remain PENDING and are not negative structural evidence.",
+  "followup": {
+    "plugin_version": "1.12.2",
+    "reuse_prior_paid_overview": true,
+    "open_depth_clusters": 37,
+    "keyword_ideas_calls": 37,
+    "final_keyword_overview_calls": 1,
+    "total_additional_paid_calls": 38,
+    "ideas_limit_per_cluster": 100,
+    "max_distinct_groups_retained_per_cluster": 15,
+    "cluster_selection": "Only predefined leaf/topic candidates whose current confirmed distinct depth is below the role threshold and that still contain pending exact-seed evidence.",
+    "no_new_taxonomy": true,
+    "structure_writes": false,
+    "target_tree_write_allowed": false
+  },
+  "postprocess": [
+    "Run keyword_ideas inside each already defined leaf/topic cluster.",
+    "Deduplicate candidate depth by core_keyword, otherwise normalized keyword.",
+    "Retain at most 15 distinct groups per cluster because 15 already reaches SPLIT_REVIEW.",
+    "Run one final bundled keyword_overview over retained evidence keywords.",
+    "Merge prior exact evidence with depth evidence and deduplicate again.",
+    "Recount each lowest-level category separately.",
+    "Recalculate batch ownership overlaps.",
+    "Never create, rename, move or delete WordPress/HivePress structure."
+  ]
+}
