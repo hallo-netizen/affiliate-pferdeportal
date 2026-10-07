@@ -1,16 +1,17 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST",
-  "version": "1.3",
+  "version": "1.4",
   "effective_date": "2026-10-07",
-  "status": "INITIAL_REAL_EVIDENCE_PARTIAL__DEPTH_RUN_PENDING",
+  "status": "REAL_PROVIDER_EVIDENCE_PRESENT__KISS_RECALC_READY",
   "source_result": "HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json",
-  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.2",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
   "invariants": [
     "Eight worlds remain CORE level 1.",
     "Hobbywelten remains view only.",
     "No valid hobby is deleted for weak monetization.",
-    "DataForSEO confirms SEO evidence only and never authors structural taxonomy.",
-    "No guessed values: missing evidence remains EVIDENCE_REQUIRED."
+    "Subject-matter logic defines content capacity.",
+    "DataForSEO is SEO/demand/dedupe evidence only and never authors taxonomy or additional article intents.",
+    "Missing exact provider longtail rows leave SEO metrics pending but do not erase fachlich distinct article intents."
   ],
   "batch_size": 16,
   "requests": [
@@ -52,10 +53,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -117,10 +119,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -182,10 +185,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -247,10 +251,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -312,10 +317,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -377,10 +383,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -442,10 +449,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -507,10 +515,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -577,10 +586,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -640,10 +650,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -716,10 +727,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -779,10 +791,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -847,10 +860,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -917,10 +931,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -987,10 +1002,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -1057,10 +1073,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
-          "Collapse synonyms and wording variants.",
-          "Apply cross-pillar ownership before counting an intent.",
-          "Count each lowest-level category separately.",
+          "Count genuinely distinct subject-defined article intents per lowest category.",
+          "Use real DataForSEO overview/core_keyword/synonym evidence to enrich and deduplicate where available.",
+          "Do not remove a subject-defined distinct intent merely because its exact longtail row is absent.",
+          "Do not add article intents from keyword_ideas/keyword_suggestions raw rows.",
+          "Apply cross-pillar ownership.",
           "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
@@ -1101,9 +1118,10 @@
     "canonical_identity_must_be_preserved_when_grouped": true
   },
   "plugin_candidate": {
-    "version": "1.12.2",
-    "artifact": "HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip",
-    "sha256": "233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f",
+    "version": "1.12.5",
+    "artifact": "HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip",
+    "sha256": "68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9",
+    "new_provider_calls_on_existing_result": 0,
     "writes_structure": false
   },
   "real_initial_result": {
@@ -1111,5 +1129,7 @@
     "returned_exact_rows": 106,
     "pending_exact_seeds": 157
   },
-  "depth_plan": "HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json"
+  "depth_plan": "HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json",
+  "depth_plan_status": "HISTORICAL_ONLY_NOT_NORMAL_PATH",
+  "next_action": "Single real WordPress readback of the zero-cost V1.12.5 recalculation."
 }
