@@ -1,0 +1,291 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_001_RESULT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7"
+  },
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json",
+  "selection": {
+    "method": "rules.batch_001_selection",
+    "expected_count": 16,
+    "actual_count": 16,
+    "pass": true,
+    "hobby_ids": [
+      "hobby:airbrush",
+      "hobby:bean-to-bar-schokolade",
+      "hobby:3d-druck",
+      "hobby:amateurastronomie",
+      "hobby:aeroponik",
+      "hobby:ameisenhaltung",
+      "hobby:3d-bogenschieen",
+      "hobby:alte-brettspiele",
+      "hobby:wabikusa",
+      "hobby:buchbinden",
+      "hobby:filzen",
+      "hobby:treibholz-sammeln",
+      "hobby:air-dry-clay",
+      "hobby:airbrush-modellbau",
+      "hobby:alabasterschnitzen",
+      "hobby:algenkultur"
+    ]
+  },
+  "results_summary": {
+    "identity_pass": 16,
+    "scope_confirmed": 2,
+    "scope_provisional": 9,
+    "scope_evidence_required": 5,
+    "size_classified": 1,
+    "role_stable": 1,
+    "editorial_route_partial": 1,
+    "full_assessed": 0,
+    "partial": 1,
+    "evidence_required": 15,
+    "target_tree_writes_allowed": 0
+  },
+  "model_check": {
+    "result": "PASS_FAIL_CLOSED",
+    "findings": [
+      "The deterministic selection works and covers all eight protected worlds, all four alias-bearing identities, and four previously unassessed entries.",
+      "No candidate was promoted from monetization alone.",
+      "Buchbinden remains a stable HOBBY_HUB from existing pilot evidence, but is PARTIAL because per-leaf article capacity and final ownership are not complete.",
+      "Treibholz sammeln remains preserved in EDITORIAL; ARTICLE_ONLY versus EDITORIAL_TOPIC is not guessed.",
+      "The master lacks content-capacity evidence for the remaining candidates, therefore the rules correctly return EVIDENCE_REQUIRED rather than inventing structure."
+    ]
+  },
+  "entries": [
+    {
+      "hobby_id": "hobby:airbrush",
+      "canonical_name": "Airbrush",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "gestalten",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:bean-to-bar-schokolade",
+      "canonical_name": "Bean-to-Bar-Schokolade",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "fertigen",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "technik",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:amateurastronomie",
+      "canonical_name": "Amateurastronomie",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "forschen",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:aeroponik",
+      "canonical_name": "Aeroponik",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "pflanzen",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:ameisenhaltung",
+      "canonical_name": "Ameisenhaltung",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "tiere",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "bewegen",
+      "monetization_fit": "DIRECT",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:alte-brettspiele",
+      "canonical_name": "alte Brettspiele",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "sammeln",
+      "monetization_fit": "ASSISTED",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:wabikusa",
+      "canonical_name": "Wabikusa",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "UNASSESSED",
+      "natural_world": null,
+      "monetization_fit": "UNKNOWN",
+      "aliases": [
+        "Wabi-Kusa"
+      ],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Master contains no final scope/world/content-capacity evidence; fail closed."
+    },
+    {
+      "hobby_id": "hobby:buchbinden",
+      "canonical_name": "Buchbinden",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE",
+      "natural_world": "fertigen",
+      "monetization_fit": "DIRECT",
+      "aliases": [
+        "historische Buchbinderei"
+      ],
+      "size_class": "FIT",
+      "portal_role": "HOBBY_HUB",
+      "primary_pillar": "CORE",
+      "decision_state": "PARTIAL",
+      "evidence_note": "Pilot evidence: four distinct leaf areas support FIT/HOBBY_HUB; per-leaf 5-12 article capacity and final ownership still require evidence."
+    },
+    {
+      "hobby_id": "hobby:filzen",
+      "canonical_name": "Filzen",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE_PROVISIONAL",
+      "natural_world": "fertigen",
+      "monetization_fit": "DIRECT",
+      "aliases": [
+        "Tierhaarfilzen"
+      ],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Legacy V1.12 scope/world evidence is sufficient only for provisional continuation. Size/content capacity/role/ownership are not present in the master."
+    },
+    {
+      "hobby_id": "hobby:treibholz-sammeln",
+      "canonical_name": "Treibholz sammeln",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "IN_SCOPE",
+      "natural_world": "sammeln",
+      "monetization_fit": "UNKNOWN",
+      "aliases": [
+        "Treibholz"
+      ],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": "EDITORIAL",
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Pilot evidence confirms IN_SCOPE, world=sammeln and EDITORIAL route; ARTICLE_ONLY vs EDITORIAL_TOPIC remains evidence-dependent and MICRO is only a review hypothesis."
+    },
+    {
+      "hobby_id": "hobby:air-dry-clay",
+      "canonical_name": "Air-Dry Clay",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "UNASSESSED",
+      "natural_world": null,
+      "monetization_fit": "UNKNOWN",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Master contains no final scope/world/content-capacity evidence; fail closed."
+    },
+    {
+      "hobby_id": "hobby:airbrush-modellbau",
+      "canonical_name": "Airbrush-Modellbau",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "UNASSESSED",
+      "natural_world": null,
+      "monetization_fit": "UNKNOWN",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Master contains no final scope/world/content-capacity evidence; fail closed."
+    },
+    {
+      "hobby_id": "hobby:alabasterschnitzen",
+      "canonical_name": "Alabasterschnitzen",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "UNASSESSED",
+      "natural_world": null,
+      "monetization_fit": "UNKNOWN",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Master contains no final scope/world/content-capacity evidence; fail closed."
+    },
+    {
+      "hobby_id": "hobby:algenkultur",
+      "canonical_name": "Algenkultur",
+      "identity_gate": "PASS_STABLE_ID",
+      "scope_status": "UNASSESSED",
+      "natural_world": null,
+      "monetization_fit": "UNKNOWN",
+      "aliases": [],
+      "size_class": null,
+      "portal_role": null,
+      "primary_pillar": null,
+      "decision_state": "EVIDENCE_REQUIRED",
+      "evidence_note": "Master contains no final scope/world/content-capacity evidence; fail closed."
+    }
+  ]
+}
