@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: V1.12 TECHNISCHE BASIS VORHANDEN / V2-BEWERTUNGSVERTRAG GEBUNDEN / BATCH 001 AUSGEFÜHRT / EVIDENZLÜCKEN OFFEN / KEIN NEUER LIVE-RELEASE
+STATUS: V1.12 TECHNISCHE BASIS VORHANDEN / V2-REGELN 1.1 PRO LEAF + ZUSAMMENFASSUNG GEBUNDEN / BATCH-001-FACHVORPRÜFUNG FERTIG / DATAFORSEO-LIVEABGLEICH OFFEN / KEIN LIVE-RELEASE
 
 ## Ziel
 
@@ -90,10 +90,32 @@ Batch 001:
 - 2 Scope-Fälle fachlich bestätigt;
 - 9 Scope-Fälle nur provisional;
 - 5 Scope-Fälle benötigen Evidenz;
-- Buchbinden = FIT / HOBBY_HUB aus vorhandener Pilotevidenz, aber noch PARTIAL wegen offener Leaf-/Ownership-Evidenz;
+- Buchbinden = bestehender Live-/Technikpilot bleibt erhalten, aber V2-Hub-PASS wieder OFFEN: echte DataForSEO-Evidence liefert aktuell 4 / 5 / 3 / 4 distinct Intent-Gruppen in den vier aktiven Leafs; nur Ausrüstung liegt bereits im V2-Ziel 5–12;
 - Treibholz sammeln = IN_SCOPE / Sammeln / EDITORIAL, aber ARTICLE_ONLY vs. EDITORIAL_TOPIC noch offen;
 - keine automatische Promotion aus DIRECT/ASSISTED;
 - 0 Zielbaum-Writes zulässig.
+
+## V2-Korrektur: jede unterste Kategorie einzeln prüfen
+
+Verbindlich seit Regelversion 1.1:
+- Gesamtzahl der Artikel eines Hobbys reicht NICHT;
+- jede unterste Kategorie muss separat 5–12 echte, unterschiedliche Artikelintents tragen;
+- 0–3 = keine eigene Leaf-Kategorie;
+- 4 = Ausnahmeprüfung;
+- 13–15 = Split-Prüfung;
+- 16+ = Split erforderlich.
+
+Kleine valide Hobbys dürfen gemeinsam über Übersichten, gemeinsame Leafs oder Magazin-Cluster sichtbar werden.
+Ihre kanonischen Hobby-Identitäten bleiben trotzdem getrennt.
+
+Fachvorprüfung:
+`HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
+
+DataForSEO-Auftrag:
+`HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
+
+Konzeptaudit:
+`HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
 
 ## Rollen- und Größenlogik
 
@@ -162,28 +184,33 @@ Die V2-Größen-/Rollenlogik liegt zeitlich danach und das V1.12-Hobby-Profil en
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
+`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
 
-Der Bewertungsvertrag ist jetzt eindeutig gebunden und Batch 001 ist real ausgeführt.
+Die fachliche Vorprüfung für alle 16 Testhobbys ist vorbereitet.
+Die echten Leaf-Zahlen dürfen aber erst nach realem DataForSEO-Abgleich festgeschrieben werden.
 
-Der aktuelle Blocker ist nicht mehr die fehlende Regeldefinition, sondern fehlende Evidenz:
-- 15/16 Batch-Fälle sind noch nicht vollständig bewertet;
-- Content Capacity fehlt für fast alle;
-- finale Ownership fehlt;
-- bei fünf Kandidaten fehlt bereits belastbare Scope-/Weltevidenz.
+Bereits real belegt:
+- Buchbinden besitzt vorhandene echte DataForSEO-Evidence;
+- diese reicht nach der strengeren V2-Regel noch NICHT für einen endgültigen Hub-PASS.
 
-Solange Batch 001 nicht belastbar durch die Gates läuft, wird die 841er Gesamtbewertung nicht gestartet.
+Für die übrigen Testhobbys liegen keine belastbaren aktuellen DataForSEO-Ergebnisse im geprüften Bestand vor.
+
+Der exakte Request ist vorbereitet.
+In diesem Chat ist jedoch kein authentifizierter DataForSEO-/Hobby-Depot-WordPress-Ausführungsweg gebunden.
+Deshalb werden keine SEO-Zahlen erfunden und kein anderer SEO-Dienst als Ersatz benutzt.
 
 ## EXAKT EINE NEXT ACTION
 
-Für die 16 Kandidaten aus `HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json` exakt die in `HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST_20261007.json` gebundene fehlende Identitäts-/Scope-/Content-Capacity-/Ownership-Evidenz erzeugen und denselben Batch anschließend erneut durch `HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` laufen lassen.
+`HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json` über den bestehenden authentifizierten Hobby-Depot-DataForSEO-Weg ausführen.
 
-Dabei:
-- DataForSEO nur für SEO-/Nachfrage-/Intent-Evidenz;
-- keine Struktur aus Suchvolumen ableiten;
-- keine unbekannten Werte schätzen;
-- nur vollständig belegte `ASSESSED`-Fälle freigeben.
+Danach:
+- Synonyme und doppelte Intents zusammenführen;
+- CORE / EDITORIAL / DIRECTORY Ownership prüfen;
+- jede unterste Kategorie separat neu zählen;
+- kleine valide Themen auf sinnvolle Zusammenfassung prüfen;
+- denselben 16er Batch erneut durch Regelversion 1.1 laufen lassen.
 
 Noch keine Pluginänderung.
+Noch kein Zielbaum-Delta.
 Noch kein WordPress-Sync.
 Noch kein V1.12-Deployment.
