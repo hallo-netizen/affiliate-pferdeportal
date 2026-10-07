@@ -523,15 +523,17 @@ trait PPAR_Creative_Library_Trait {
     }
 
     /**
-     * Kleine, wiederaufnehmbare Prüfeinheit: höchstens fünf Bilder pro Lauf,
-     * keine blockierende Wartefunktion und kein Partner-Monsterlauf. Der nächste Lauf wird nur geplant,
-     * wenn noch tatsächlich ungeprüfte Assets vorhanden sind.
+     * Kleine, wiederaufnehmbare Prüfeinheit: höchstens fünf Bilder pro Lauf.
+     * Banner werden vor Produktbildern geprüft, damit ein großer Produktbestand
+     * neue Banner nicht stundenlang blockiert. Keine blockierende Wartefunktion
+     * und kein Partner-Monsterlauf. Der nächste Lauf wird nur geplant, wenn noch
+     * tatsächlich ungeprüfte Assets vorhanden sind.
      */
     public function run_creative_asset_verification_batch() {
         $this->maybe_install_creative_library_schema();
         global $wpdb;
         $table = $this->creative_library_table();
-        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY id ASC LIMIT 5", ARRAY_A);
+        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY CASE WHEN creative_type='banner' THEN 0 ELSE 1 END ASC, id ASC LIMIT 5", ARRAY_A);
         foreach ((array) $rows as $row) {
             $this->creative_library_verify_asset_row($row, false, true);
         }
