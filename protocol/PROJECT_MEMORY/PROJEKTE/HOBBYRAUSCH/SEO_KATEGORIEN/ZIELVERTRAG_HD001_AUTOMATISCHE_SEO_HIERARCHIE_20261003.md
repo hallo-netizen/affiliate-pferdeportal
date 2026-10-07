@@ -2,8 +2,8 @@
 
 STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 2.3
-ERSETZT: Fassung 2.2 vom 2026-10-07; davor Fassung 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.4
+ERSETZT: Fassung 2.3 vom 2026-10-07; davor Fassung 2.2 / 2.1 / 2.0 vom 2026-10-07 und Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -164,6 +164,22 @@ DataForSEO darf NICHT selbst bestimmen:
 
 Fachlogik bestimmt WAS ein Thema ist und WO es strukturell lebt.
 SEO-Daten zeigen WIE VIEL Nachfrage/Intenttiefe dafür belegt ist.
+
+### KISS-Regel für Content Capacity
+
+Die Anzahl möglicher Artikel wird fachlich bestimmt.
+
+Verbindlich:
+- Fachlogik definiert die eigenständigen Nutzer-/Suchintents einer untersten Kategorie;
+- diese fachlich unterschiedlichen Intents bilden die Content Capacity;
+- DataForSEO reichert sie mit Nachfrage, Primärkeyword, Synonymen, Core Keyword und Intent-Überschneidung an;
+- exaktes Core-Keyword-/Synonym-Evidence darf zwei fachlich vorgeschlagene Intents als Dublette zusammenführen;
+- wenn DataForSEO für einen fachlich eigenständigen Longtail keine exakte Zeile liefert, bleiben dessen SEO-Metriken offen, aber der Artikelintent wird NICHT gelöscht;
+- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen umgekehrt niemals zusätzliche Artikelintents;
+- automatische Keyword-Ideas-Tiefenrecherche ist kein Pflichtschritt des Normalwegs.
+
+Kurz:
+**Fachlogik zählt den möglichen Content; DataForSEO prüft und dedupliziert SEO-seitig.**
 
 ## Strukturprinzip
 
