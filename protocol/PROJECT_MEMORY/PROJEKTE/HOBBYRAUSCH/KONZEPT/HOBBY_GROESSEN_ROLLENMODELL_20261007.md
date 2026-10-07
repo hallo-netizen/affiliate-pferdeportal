@@ -137,6 +137,26 @@ Regeln:
 
 Diese Grenzen sind Strukturregeln, keine Aufforderung zu künstlicher Symmetrie.
 
+## 4A. Zusammenfassung kleiner valider Themen
+
+Kleine valide Hobbys dürfen zusammen sichtbar gemacht werden, wenn jedes für sich keine tragfähige Kategorie-/Hubstruktur rechtfertigt.
+
+Dabei gilt zwingend:
+- die kanonischen Hobby-Identitäten bleiben getrennt;
+- keine hobby_id wird nur wegen geringer Größe gelöscht oder mit einer anderen verschmolzen;
+- die Zusammenfassung betrifft Darstellung und Content-Struktur;
+- möglich sind bestehende Übersichts-/Parentseiten, gemeinsame Leaf-Kategorien oder redaktionelle Cluster;
+- eine gemeinsame unterste Kategorie muss selbst wieder genügend Substanz tragen;
+- Ziel auch dort: 5–12 eigenständige Beitragsintentionen;
+- neue Zwischenkategorien werden erst nach der Gesamtbewertung im Zielbaum-Delta erzeugt.
+
+Beispielprinzip:
+Kleine Naturfund-Themen wie Treibholz, Seeglas oder Muscheln können als getrennte Hobby-/Themenidentitäten erhalten bleiben und trotzdem gemeinsam über eine starke Naturfunde-/Strandfunde-Struktur erschlossen werden.
+
+Wichtig:
+Zusammenfassung darf nicht zu Keyword-/Intent-Kannibalisierung führen.
+Pro primärem Intent bleibt genau ein SEO-Owner.
+
 ## 5. Dominanz und Bekanntheit
 
 Bekanntheit, Suchvolumen und wirtschaftliche Stärke erzeugen KEINE zweite Taxonomie.
