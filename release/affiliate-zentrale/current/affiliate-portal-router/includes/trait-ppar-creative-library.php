@@ -533,7 +533,20 @@ trait PPAR_Creative_Library_Trait {
         $this->maybe_install_creative_library_schema();
         global $wpdb;
         $table = $this->creative_library_table();
-        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY CASE WHEN creative_type='banner' THEN 0 ELSE 1 END ASC, id ASC LIMIT 5", ARRAY_A);
+        // Performance-KISS: insgesamt weiter maximal 5 Assets pro Lauf.
+        // Zuerst nur Banner holen; freie Plaetze danach mit Produkten auffuellen.
+        // So gibt es weder einen Vollsort ueber Banner+Produkte noch Banner-
+        // Starvation hinter einem grossen Produktbestand.
+        $pending_sql = "image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')";
+        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE creative_type='banner' AND {$pending_sql} ORDER BY id ASC LIMIT 5", ARRAY_A);
+        $free_slots = max(0, 5 - count((array)$rows));
+        if ($free_slots > 0) {
+            $product_rows = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM {$table} WHERE creative_type='product' AND {$pending_sql} ORDER BY id ASC LIMIT %d", $free_slots),
+                ARRAY_A
+            );
+            $rows = array_merge((array)$rows, (array)$product_rows);
+        }
         foreach ((array) $rows as $row) {
             $this->creative_library_verify_asset_row($row, false, true);
         }
