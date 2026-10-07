@@ -272,7 +272,9 @@ Die V2-Current verlangte bereits eine maschinenlesbare Masterbewertung, aber Aus
 
 BATCH-ERGEBNIS:
 - 16 Kandidaten;
-- 16/16 Identitätsgate PASS;
+- 16/16 ID-Eindeutigkeit PASS;
+- 4 aktuelle Alias-/Kanonikbindungen bestätigt;
+- 12 semantische Identitäts-/Unterformprüfungen offen;
 - 0 Zielbaum-Writes;
 - 15 Fälle mit fehlender Evidenz;
 - Buchbinden fachlich weiter HOBBY_HUB, V2-Gesamtabnahme dennoch offen.
