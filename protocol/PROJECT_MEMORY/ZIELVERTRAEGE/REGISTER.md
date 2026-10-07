@@ -322,7 +322,7 @@ STATUS:
 AKTIV
 
 FASSUNG:
-2.1 / 2026-10-07
+2.2 / 2026-10-07
 
 HAUPTQUELLE:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
@@ -331,7 +331,7 @@ VERANTWORTLICHER BEREICH:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/`
 
 PASS-BEDINGUNG:
-Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Maßgeblich sind insbesondere HOBBY_MASTER-V2-Bewertung vor dem Zielbaum, acht Hauptwelten als oberste CORE-Ebene, Drei-Säulen-Integration, 5–12 distinct Beitragsintentionen pro unterster Kategorie, Erhalt kleiner Hobby-Identitäten bei möglicher gemeinsamer Darstellung, DataForSEO nur als SEO-/Nachfrageevidenz, säulenübergreifende Ownership, Soll/Ist-Sync, Frontend-Readback sowie vollständige lokale Positiv-/Negativ-E2E-Simulation.
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Maßgeblich sind insbesondere HOBBY_MASTER-V2-Bewertung vor dem Zielbaum, acht Hauptwelten als oberste CORE-Ebene, Drei-Säulen-Integration, unter 4 zusammenlegen, ideal etwa 5–12 distinct Beitragsintentionen pro unterster Kategorie, ab etwa 15 Teilung prüfen, Erhalt kleiner Hobby-Identitäten bei möglicher gemeinsamer Darstellung, DataForSEO nur als SEO-/Nachfrageevidenz, säulenübergreifende Ownership, Soll/Ist-Sync, Frontend-Readback sowie vollständige lokale Positiv-/Negativ-E2E-Simulation.
 
 NACHFOLGER:
 keiner belegt.
