@@ -195,3 +195,22 @@ jobs:
                   'markers':markers,'rendered_len':len(rendered)
               },ensure_ascii=False))
           PY
+
+      - name: AFF-ERR-057 live shortcode token search
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --get 'https://pferde-atelier.de/wp-json/wp/v2/posts' \
+            --data-urlencode 'search=affiliate_rechner' \
+            --data-urlencode 'per_page=100' \
+            --data-urlencode 'status=publish' \
+            --data-urlencode '_fields=id,slug,link,title,date' \
+            -H 'User-Agent: Mozilla/5.0 AFF-ERR-057-readonly' \
+            -o /tmp/aff057-token.json
+          python3 - <<'PY'
+          import json
+          rows=json.load(open('/tmp/aff057-token.json'))
+          print('LIVE_RAW_SHORTCODE_SEARCH_COUNT',len(rows))
+          for row in rows:
+              print('LIVE_RAW_SHORTCODE_POST',row.get('id'),row.get('slug'),row.get('link'))
+          PY
