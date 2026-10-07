@@ -1,0 +1,731 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "READY_FOR_EVIDENCE_COLLECTION",
+  "source_result": "HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json",
+  "invariants": [
+    "Eight worlds remain CORE level 1.",
+    "Hobbywelten remains view only.",
+    "No valid hobby is deleted for weak monetization.",
+    "DataForSEO confirms SEO evidence only and never authors structural taxonomy.",
+    "No guessed values: missing evidence remains EVIDENCE_REQUIRED."
+  ],
+  "batch_size": 16,
+  "requests": [
+    {
+      "hobby_id": "hobby:airbrush",
+      "canonical_name": "Airbrush",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:bean-to-bar-schokolade",
+      "canonical_name": "Bean-to-Bar-Schokolade",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:amateurastronomie",
+      "canonical_name": "Amateurastronomie",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:aeroponik",
+      "canonical_name": "Aeroponik",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:ameisenhaltung",
+      "canonical_name": "Ameisenhaltung",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:alte-brettspiele",
+      "canonical_name": "alte Brettspiele",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:wabikusa",
+      "canonical_name": "Wabikusa",
+      "scope_evidence": {
+        "required": true,
+        "prove": [
+          "active_or_repeatable_leisure_practice",
+          "teachable_or_practicable_activity_core",
+          "natural_world_from_existing_eight_without_forcing"
+        ],
+        "source_rule": "Use subject-matter evidence. Search-volume data must not decide world or scope."
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:buchbinden",
+      "canonical_name": "Buchbinden",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:filzen",
+      "canonical_name": "Filzen",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:treibholz-sammeln",
+      "canonical_name": "Treibholz sammeln",
+      "scope_evidence": {
+        "required": false,
+        "status": "LEGACY_PROVISIONAL_OR_PILOT_EVIDENCE_ALREADY_PRESENT"
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:air-dry-clay",
+      "canonical_name": "Air-Dry Clay",
+      "scope_evidence": {
+        "required": true,
+        "prove": [
+          "active_or_repeatable_leisure_practice",
+          "teachable_or_practicable_activity_core",
+          "natural_world_from_existing_eight_without_forcing"
+        ],
+        "source_rule": "Use subject-matter evidence. Search-volume data must not decide world or scope."
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:airbrush-modellbau",
+      "canonical_name": "Airbrush-Modellbau",
+      "scope_evidence": {
+        "required": true,
+        "prove": [
+          "active_or_repeatable_leisure_practice",
+          "teachable_or_practicable_activity_core",
+          "natural_world_from_existing_eight_without_forcing"
+        ],
+        "source_rule": "Use subject-matter evidence. Search-volume data must not decide world or scope."
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:alabasterschnitzen",
+      "canonical_name": "Alabasterschnitzen",
+      "scope_evidence": {
+        "required": true,
+        "prove": [
+          "active_or_repeatable_leisure_practice",
+          "teachable_or_practicable_activity_core",
+          "natural_world_from_existing_eight_without_forcing"
+        ],
+        "source_rule": "Use subject-matter evidence. Search-volume data must not decide world or scope."
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    },
+    {
+      "hobby_id": "hobby:algenkultur",
+      "canonical_name": "Algenkultur",
+      "scope_evidence": {
+        "required": true,
+        "prove": [
+          "active_or_repeatable_leisure_practice",
+          "teachable_or_practicable_activity_core",
+          "natural_world_from_existing_eight_without_forcing"
+        ],
+        "source_rule": "Use subject-matter evidence. Search-volume data must not decide world or scope."
+      },
+      "content_capacity": {
+        "required": true,
+        "produce": {
+          "candidate_distinct_intents": "semantic/fachlich derived candidate intents",
+          "viable_leaf_categories": "group only genuinely different durable intent families",
+          "estimated_articles": "count distinct article intents, not wording variants",
+          "macro_flags": [
+            "multiple_distinct_activity_identities",
+            "would_behave_like_own_portal"
+          ]
+        },
+        "seo_confirmation": {
+          "provider_role": "DataForSEO SEO evidence only",
+          "allowed": [
+            "demand_band",
+            "primary_keyword",
+            "synonyms",
+            "longtail_depth",
+            "intent_overlap"
+          ],
+          "forbidden": [
+            "invent_main_world",
+            "invent_parent",
+            "invent_leaf_family",
+            "set_portal_role",
+            "promote_to_core"
+          ]
+        }
+      },
+      "ownership": {
+        "required": true,
+        "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
+        "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
+      },
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+    }
+  ]
+}
