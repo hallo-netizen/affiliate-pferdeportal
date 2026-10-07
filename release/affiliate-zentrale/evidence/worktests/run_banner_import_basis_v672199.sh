@@ -31,11 +31,12 @@ php_tests=(
   "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php"
   "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php"
   "release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php"
+  "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_real_provider_v672199.php"
 )
 for php_test in "${php_tests[@]}"; do
   php -l "$php_test" >/dev/null
 done
-echo "PASS worktest_php_syntax_4_of_4"
+echo "PASS worktest_php_syntax_5_of_5"
 
 php release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php
 
@@ -95,6 +96,7 @@ tests=(
   "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php"
   "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php"
   "release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php"
+  "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_real_provider_v672199.php"
 )
 
 for test_file in "${tests[@]}"; do
@@ -102,4 +104,4 @@ for test_file in "${tests[@]}"; do
   "$WP_CLI" eval-file "$REPO_ROOT/$test_file" --path="$WP_PATH"
 done
 
-echo "AFFILIATE_6_72_199_BANNER_IMPORT_BASIS_WORDPRESS_MARIADB_COMPLETE"
+echo "AFFILIATE_6_72_199_BANNER_IMPORT_BASIS_WORDPRESS_MARIADB_AND_REAL_PROVIDER_COMPLETE"
