@@ -3393,6 +3393,24 @@ trait PPAR_Automation_Suite_Trait {
                 $row['topic_targets'] = '[]';
                 $row['classified_at'] = 0;
 
+                // 6.72.199 Basisvertrag: Reconcile darf eine Zielkarte
+                // nicht vor der technischen Bildprüfung erzeugen. Pending/fehlgeschlagene
+                // Assets bleiben nach dem globalen Reset ohne Ziel und ohne Kampagne.
+                $payload = json_decode((string)($row['payload'] ?? ''), true);
+                $payload = is_array($payload) ? $payload : array();
+                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
+                $verified = in_array($dimension_state, array('verified','mismatch'), true)
+                    && absint($row['width'] ?? 0) > 0
+                    && absint($row['height'] ?? 0) > 0;
+
+                if (!$verified) {
+                    if ($dimension_state !== 'failed'
+                        && method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(5);
+                    }
+                    continue;
+                }
+
                 $mapped = $this->output_assign_banner_targets_from_destination_once($row);
                 $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
                 if ($mapped_n <= 0) {
@@ -3405,20 +3423,6 @@ trait PPAR_Automation_Suite_Trait {
                 $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                 $row['topic_score'] = 100;
                 $row['classified_at'] = time();
-
-                $payload = json_decode((string)($row['payload'] ?? ''), true);
-                $payload = is_array($payload) ? $payload : array();
-                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
-                $verified = in_array($dimension_state, array('verified','mismatch'), true)
-                    && absint($row['width'] ?? 0) > 0
-                    && absint($row['height'] ?? 0) > 0;
-
-                if (!$verified) {
-                    if (method_exists($this, 'creative_library_schedule_asset_verification')) {
-                        $this->creative_library_schedule_asset_verification(5);
-                    }
-                    continue;
-                }
 
                 if (method_exists($this, 'output_plan_creative')) {
                     $plan = $this->output_plan_creative($row, true);
