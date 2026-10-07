@@ -8,7 +8,7 @@ Dieses Register enthält nur Fehler-ID/Bereich, groben Status und genau einen We
 
 ## CAMPUS-ARCHITEKTUR
 Bereich: CAMPUS / ARCHITEKTUR  
-Status: AKTIV / Details ausschließlich aus der autoritativen Originalquelle  
+Status: AKTIV / V1.12.3 REALER DEPTH-LAUF KOMPLETT / FREMDTREFFER-ZÄHLFEHLER ERKANNT / V1.12.4 ZERO-COST-RECALC LOKAL HARD PASS / LIVE-NEUAUSWERTUNG OFFEN / KEIN ZIELBAUM-WRITE
 Autoritative Fehlerquelle: `protocol/PROJECT_MEMORY/BAUCONTAINER/ARCHITEKTUR_FEHLERKISTE.md`
 
 ## TEXT-M01-M39
