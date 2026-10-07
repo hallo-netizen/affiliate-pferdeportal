@@ -287,7 +287,9 @@ Ausführung/Evidence:
 `HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
 
 Befund:
-- 16/16 Identitäten stabil;
+- 16/16 hobby_id-Werte eindeutig;
+- 4 aktuelle Alias-/Kanonikbindungen bestätigt;
+- 12 semantische Identitäts-/Unterformprüfungen bleiben offen;
 - 2 Scope-Fälle durch Pilot fachlich bestätigt;
 - 9 weitere nur provisional gebunden;
 - 5 benötigen Scope-Evidenz;
