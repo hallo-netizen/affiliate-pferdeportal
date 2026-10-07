@@ -1,0 +1,703 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "SUBJECT_PREFLIGHT_COMPLETE__DFS_REQUIRED_FOR_FINAL_COUNTS",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.1",
+  "source_master_sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+  "method": {
+    "statement": "This file proposes subject-matter leaf/article candidates and aggregation candidates. It does not claim final SEO validation.",
+    "no_guess_rule": "All final numeric leaf counts remain PENDING_DFS unless real DataForSEO evidence already exists.",
+    "aggregation_rule": "Small valid hobbies remain canonical identities; grouping changes presentation/content structure only."
+  },
+  "candidates": [
+    {
+      "hobby_id": "hobby:airbrush",
+      "name": "Airbrush",
+      "hypothesis": "HOBBY_HUB_CANDIDATE",
+      "identity_note": "Distinct general technique; Airbrush-Modellbau must remain a separate application/ownership review, not be double-owned.",
+      "leafs": [
+        {
+          "leaf_candidate": "Einstieg & Grundlagen",
+          "candidate_article_intents": [
+            "Airbrush für Anfänger",
+            "erste Airbrush-Übungen",
+            "Luftdruck richtig einstellen",
+            "Spritzabstand und Farbmenge",
+            "Airbrush-Arbeitsplatz einrichten",
+            "Sicher arbeiten und Sprühnebel vermeiden"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Ausrüstung",
+          "candidate_article_intents": [
+            "Airbrush-Pistole auswählen",
+            "Double Action vs Single Action",
+            "Düsengröße und Nadel wählen",
+            "Kompressor auswählen",
+            "Drucktank und Wasserabscheider",
+            "Absauganlage/Sprühkabine",
+            "Schläuche Adapter und Anschlüsse"
+          ],
+          "candidate_count": 7,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Farben & Medien",
+          "candidate_article_intents": [
+            "Airbrush-Farben auswählen",
+            "Acrylfarbe verdünnen",
+            "Primer mit Airbrush",
+            "Klarlack mit Airbrush",
+            "Farbe für verschiedene Untergründe",
+            "Farbmischung und Konsistenz"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Techniken & Gestaltung",
+          "candidate_article_intents": [
+            "Linien sprühen",
+            "Punkte sprühen",
+            "weiche Verläufe",
+            "Schablonen einsetzen",
+            "Maskieren",
+            "Freehand-Airbrush",
+            "Flächen gleichmäßig lackieren",
+            "Texturen und Effekte"
+          ],
+          "candidate_count": 8,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Reinigung & Fehler",
+          "candidate_article_intents": [
+            "Airbrush richtig reinigen",
+            "Düse reinigen",
+            "Nadel reinigen und wechseln",
+            "Airbrush spuckt Farbe",
+            "Airbrush verstopft",
+            "unregelmäßiges Spritzbild",
+            "Undichtigkeit beheben",
+            "Pistole lagern und warten"
+          ],
+          "candidate_count": 8,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        }
+      ],
+      "aggregation_candidate": null
+    },
+    {
+      "hobby_id": "hobby:bean-to-bar-schokolade",
+      "name": "Bean-to-Bar-Schokolade",
+      "hypothesis": "HOBBY_HUB_CANDIDATE",
+      "leafs": [
+        {
+          "leaf_candidate": "Kakao & Rohware",
+          "candidate_article_intents": [
+            "Kakaobohnen auswählen",
+            "Kakao-Herkunft und Sorten",
+            "fermentierte Bohnen beurteilen",
+            "Rohkakao lagern",
+            "Kakaonibs verwenden"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Rösten & Schälen",
+          "candidate_article_intents": [
+            "Kakaobohnen rösten",
+            "Röstprofile vergleichen",
+            "Bohnen nach dem Rösten brechen",
+            "Kakaobohnen schälen",
+            "Winnowing zuhause"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Mahlen & Melangieren",
+          "candidate_article_intents": [
+            "Kakaonibs mahlen",
+            "Melangeur auswählen",
+            "Melangierdauer",
+            "Partikelgröße und Mundgefühl",
+            "Conchieren zuhause",
+            "Temperatur beim Melangieren"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Rezeptur & Zutaten",
+          "candidate_article_intents": [
+            "Kakaoanteil berechnen",
+            "Zuckeranteil bestimmen",
+            "Kakaobutter ergänzen",
+            "Milchschokolade bean to bar",
+            "Gewürze und Zutaten",
+            "Single-Origin-Rezept entwickeln"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Temperieren & Formen",
+          "candidate_article_intents": [
+            "Schokolade temperieren",
+            "Temperierkurve verstehen",
+            "Schokolade in Formen gießen",
+            "Luftblasen vermeiden",
+            "Tafeln ausformen",
+            "Glanz und Snap verbessern"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Fehler & Qualität",
+          "candidate_article_intents": [
+            "Schokolade wird grau",
+            "Schokolade wird körnig",
+            "Schokolade ist zu dick",
+            "Schokolade schmilzt zu weich",
+            "Bean-to-Bar-Schokolade lagern",
+            "Schokolade sensorisch verkosten"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        }
+      ]
+    },
+    {
+      "hobby_id": "hobby:3d-druck",
+      "name": "3D-Druck",
+      "hypothesis": "MACRO_ORIENTATION_REVIEW",
+      "identity_note": "Current master already contains Resin-3D-Druck, 3D-Scanning and CAD as separate identities. Generic 3D-Druck must not absorb them without identity/ownership review.",
+      "split_candidates": [
+        "FDM-3D-Druck als mögliche konkrete Einheit",
+        "Resin-3D-Druck bleibt separate vorhandene Identität",
+        "CAD und 3D-Scanning bleiben separate vorhandene Identitäten"
+      ],
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:amateurastronomie",
+      "name": "Amateurastronomie",
+      "hypothesis": "MACRO_ORIENTATION_REVIEW",
+      "identity_note": "Current master contains Teleskop-Astronomie, Astrofotografie, Sonnenbeobachtung, Radioastronomie, Meteorbeobachtung and other separate identities.",
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:aeroponik",
+      "name": "Aeroponik",
+      "hypothesis": "HOBBY_HUB_OR_EDITORIAL_REVIEW",
+      "identity_note": "Must remain distinct from Hydroponik/Hydrokultur/Indoor-Growing; current V1.12 world binding is only provisional.",
+      "leafs": [
+        {
+          "leaf_candidate": "Einstieg & System",
+          "candidate_article_intents": [
+            "Aeroponik Funktionsprinzip",
+            "Aeroponik-System planen",
+            "Low Pressure vs High Pressure Aeroponik",
+            "Wurzelkammer bauen",
+            "Behälter und Leitungen dimensionieren"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Düsen, Pumpe & Bewässerung",
+          "candidate_article_intents": [
+            "Aeroponik-Düsen auswählen",
+            "Pumpe dimensionieren",
+            "Sprühintervalle einstellen",
+            "Düsenverstopfung vermeiden",
+            "Filterung im Aeroponik-System",
+            "Bewässerungsfehler erkennen"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Nährlösung & Wasser",
+          "candidate_article_intents": [
+            "Nährlösung für Aeroponik",
+            "pH in Aeroponik",
+            "EC in Aeroponik",
+            "Wassertemperatur kontrollieren",
+            "Nährlösung wechseln",
+            "Nährstoffmangel erkennen"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Pflanzen & Betrieb",
+          "candidate_article_intents": [
+            "Pflanzen für Aeroponik",
+            "Stecklinge aeroponisch bewurzeln",
+            "Wurzelgesundheit",
+            "Licht für Aeroponik",
+            "System reinigen und desinfizieren",
+            "Stromausfall und Pumpenausfall absichern"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        }
+      ]
+    },
+    {
+      "hobby_id": "hobby:ameisenhaltung",
+      "name": "Ameisenhaltung",
+      "hypothesis": "HOBBY_HUB_CANDIDATE",
+      "leafs": [
+        {
+          "leaf_candidate": "Einstieg & Arten",
+          "candidate_article_intents": [
+            "Ameisenhaltung für Anfänger",
+            "geeignete Einsteigerarten",
+            "einheimische vs exotische Arten",
+            "Ameisenkönigin gründen lassen",
+            "Koloniegröße planen",
+            "Ameisen kaufen oder finden"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Formicarium & Nest",
+          "candidate_article_intents": [
+            "Formicarium auswählen",
+            "Nestarten vergleichen",
+            "Arena einrichten",
+            "Feuchtigkeit im Nest",
+            "Temperatur im Formicarium",
+            "Formicariengröße anpassen"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Futter & Wasser",
+          "candidate_article_intents": [
+            "Ameisen füttern",
+            "Proteinfütterung",
+            "Kohlenhydrate/Zuckerwasser",
+            "Trinkwasser anbieten",
+            "Futtertiere sicher verwenden",
+            "Futterreste entfernen"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Winterruhe & Klima",
+          "candidate_article_intents": [
+            "Winterruhe bei Ameisen",
+            "Ameisen überwintern",
+            "Temperatur absenken",
+            "Feuchtigkeit im Winter",
+            "exotische Arten ohne Winterruhe"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Kolonie & Pflege",
+          "candidate_article_intents": [
+            "Kolonieentwicklung beobachten",
+            "Brutstadien erkennen",
+            "Umzug ins größere Nest",
+            "Stress vermeiden",
+            "Hygiene im Formicarium",
+            "Schimmel im Nest"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Ausbruchsschutz & Probleme",
+          "candidate_article_intents": [
+            "Ausbruchsschutz anwenden",
+            "PTFE vs Öl als Ausbruchsschutz",
+            "Ameisen brechen aus",
+            "Milben bei Ameisen",
+            "Königin stirbt",
+            "Arbeiterinnen sterben"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        }
+      ]
+    },
+    {
+      "hobby_id": "hobby:3d-bogenschieen",
+      "name": "3D-Bogenschießen",
+      "hypothesis": "HOBBY_HUB_OR_SUBDISCIPLINE_REVIEW",
+      "identity_note": "Must be separated from general Bogenschießen/traditionelles Bogenschießen. Existing master treats all as separate identities.",
+      "leafs": [
+        {
+          "leaf_candidate": "Einstieg & Parcours",
+          "candidate_article_intents": [
+            "3D-Bogenschießen für Anfänger",
+            "3D-Parcours Ablauf",
+            "3D-Ziele und Killzonen",
+            "Parcours-Etikette",
+            "Entfernungen auf dem 3D-Parcours",
+            "erster 3D-Parcours"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Bogen & Ausrüstung",
+          "candidate_article_intents": [
+            "Bogen für 3D auswählen",
+            "Recurve fürs 3D",
+            "Langbogen fürs 3D",
+            "Compound fürs 3D",
+            "Armschutz und Fingerschutz",
+            "Köcher fürs Gelände",
+            "Outdoor-Kleidung fürs 3D"
+          ],
+          "candidate_count": 7,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Pfeile & Abstimmung",
+          "candidate_article_intents": [
+            "Pfeile fürs 3D auswählen",
+            "Spine bestimmen",
+            "Pfeillänge bestimmen",
+            "Feldspitzen wählen",
+            "Pfeile tunen",
+            "verlorene Pfeile finden"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Technik & Training",
+          "candidate_article_intents": [
+            "Schussablauf trainieren",
+            "Entfernung schätzen",
+            "bergauf und bergab schießen",
+            "unbekannte Distanzen trainieren",
+            "Stand im Gelände",
+            "Trefferbilder verbessern"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Regeln & Wertung",
+          "candidate_article_intents": [
+            "3D-Wertung verstehen",
+            "Pflöcke und Bogenklassen",
+            "Turnierregeln vergleichen",
+            "Scorecard führen",
+            "Turnier vorbereiten"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        }
+      ]
+    },
+    {
+      "hobby_id": "hobby:alte-brettspiele",
+      "name": "alte Brettspiele",
+      "hypothesis": "EDITORIAL_TOPIC_OR_SHARED_COLLECTION_CLUSTER",
+      "aggregation_candidate": {
+        "family": "Spiele sammeln / Brettspiel-Sammlungen",
+        "type": "EDITORIAL_CLUSTER",
+        "reason": "One collecting niche; no evidence for 3-6 standalone leaf categories."
+      },
+      "article_intents": [
+        "alte Brettspiele sammeln",
+        "alte Brettspiele identifizieren",
+        "Wert alter Brettspiele bestimmen",
+        "Vollständigkeit prüfen",
+        "alte Brettspiele lagern",
+        "Spielmaterial reinigen",
+        "alte Brettspiele restaurieren",
+        "alte Brettspiele kaufen"
+      ],
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:wabikusa",
+      "name": "Wabikusa",
+      "hypothesis": "HOBBY_HUB_OR_EDITORIAL_REVIEW",
+      "leafs": [
+        {
+          "leaf_candidate": "Einstieg & Aufbau",
+          "candidate_article_intents": [
+            "Wabi Kusa selber machen",
+            "Wabi-Kusa-Ball herstellen",
+            "Wabi Kusa in Schale anlegen",
+            "Wabi Kusa im Glas anlegen",
+            "Wabi Kusa für Anfänger"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Substrat & Gefäß",
+          "candidate_article_intents": [
+            "Soil für Wabi Kusa",
+            "Substratball formen",
+            "Gefäß für Wabi Kusa",
+            "Wasserstand einstellen",
+            "Hardscape im Wabi Kusa"
+          ],
+          "candidate_count": 5,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Pflanzen & Gestaltung",
+          "candidate_article_intents": [
+            "Pflanzen für Wabi Kusa",
+            "emers gezogene Pflanzen",
+            "Aquarienpflanzen umstellen",
+            "Moose für Wabi Kusa",
+            "Wabi Kusa gestalten",
+            "Pflanzen kombinieren"
+          ],
+          "candidate_count": 6,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        },
+        {
+          "leaf_candidate": "Licht & Pflege",
+          "candidate_article_intents": [
+            "Wabi Kusa beleuchten",
+            "Luftfeuchtigkeit einstellen",
+            "Wabi Kusa besprühen",
+            "Wabi Kusa düngen",
+            "Wabi Kusa schneiden",
+            "Schimmel vermeiden",
+            "Pflanzen trocknen aus"
+          ],
+          "candidate_count": 7,
+          "dfs_validated_count": null,
+          "status": "PENDING_DFS"
+        }
+      ]
+    },
+    {
+      "hobby_id": "hobby:buchbinden",
+      "name": "Buchbinden",
+      "hypothesis": "EXISTING_HUB_BASELINE__V2_CAPACITY_RECHECK",
+      "real_dataforseo_evidence": true,
+      "actual_current_dfs_counts": {
+        "Einstieg": 4,
+        "Ausrüstung": 5,
+        "Material": 3,
+        "Techniken/Praxis": 4,
+        "Fragen/Probleme": 0,
+        "FAQ": 0
+      },
+      "v2_result": "NOT_YET_V2_HUB_PASS",
+      "ownership_warning": "Kurs/Workshop/Online intents may belong to DIRECTORY/other owner and cannot automatically count toward CORE Einstieg.",
+      "required_followup": {
+        "Einstieg": [
+          "buchbinden für anfänger",
+          "buchbinden grundlagen",
+          "buchbinden erste schritte",
+          "buchbinden kosten"
+        ],
+        "Material": [
+          "buchbinderpappe",
+          "buchbinderleinen",
+          "buchbinderleim",
+          "buchbindegarn",
+          "kapitalband buchbinden"
+        ],
+        "Techniken/Praxis": [
+          "koptische bindung",
+          "fadenheftung",
+          "klebebindung selber machen",
+          "leporello binden",
+          "hardcover selber binden",
+          "buchblock binden"
+        ]
+      },
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:filzen",
+      "name": "Filzen",
+      "hypothesis": "ORIENTATION_OR_SUMMARY_REVIEW",
+      "identity_note": "Nadelfilzen and Nassfilzen already exist as separate master identities. Generic Filzen should not silently own both as duplicate hobby pages.",
+      "aggregation_candidate": {
+        "family": "Filzen",
+        "type": "EXISTING_PARENT_SUMMARY",
+        "reason": "Likely summary/orientation over separate concrete filting practices plus shared material/tool content."
+      },
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:treibholz-sammeln",
+      "name": "Treibholz sammeln",
+      "hypothesis": "EDITORIAL_TOPIC_OR_SHARED_NATURFUNDE_CLUSTER",
+      "aggregation_candidate": {
+        "family": "Naturfunde / Strandfunde",
+        "type": "EDITORIAL_CLUSTER",
+        "related_master_topics": [
+          "Strandgut sammeln",
+          "Seeglas sammeln",
+          "Muscheln sammeln",
+          "Sand sammeln",
+          "Federn sammeln",
+          "Zapfen sammeln"
+        ],
+        "reason": "Concept explicitly allows small valid niches to remain as identities while sharing a stronger summary/editorial structure."
+      },
+      "article_intents": [
+        "Treibholz finden und sammeln",
+        "Treibholz reinigen",
+        "Treibholz trocknen",
+        "Treibholz lagern",
+        "Treibholz bearbeiten",
+        "Treibholz bestimmen und auswählen",
+        "Regeln beim Sammeln am Strand"
+      ],
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:air-dry-clay",
+      "name": "Air-Dry Clay",
+      "hypothesis": "EDITORIAL_TOPIC_OR_SHARED_CLAY_CLUSTER",
+      "identity_note": "Material-based practice; must be distinguished from Polymer Clay and Cold Porcelain before standalone hobby status.",
+      "aggregation_candidate": {
+        "family": "Modellieren mit lufttrocknenden Massen",
+        "type": "EDITORIAL_CLUSTER",
+        "related_master_topics": [
+          "Polymer Clay",
+          "Cold Porcelain"
+        ],
+        "reason": "Potential shared content family; do not merge identities."
+      },
+      "article_intents": [
+        "Air-Dry Clay für Anfänger",
+        "lufttrocknende Modelliermasse formen",
+        "Air-Dry Clay trocknen",
+        "Risse vermeiden",
+        "Air-Dry Clay schleifen",
+        "Air-Dry Clay bemalen",
+        "Air-Dry Clay versiegeln",
+        "Air-Dry Clay kleben und reparieren"
+      ],
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:airbrush-modellbau",
+      "name": "Airbrush-Modellbau",
+      "hypothesis": "ARTICLE_OR_EDITORIAL_APPLICATION_TOPIC",
+      "identity_note": "Cross-topic application of Airbrush and Modellbau; high cannibalization risk if published as a separate hub.",
+      "aggregation_candidate": {
+        "family": "Airbrush-Anwendungen / Modellbau-Lackierung",
+        "type": "EDITORIAL_CLUSTER",
+        "related_master_topics": [
+          "Airbrush"
+        ],
+        "reason": "Keep as separate candidate identity but likely publish under one primary owner, not a duplicate hub."
+      },
+      "article_intents": [
+        "Airbrush im Modellbau für Anfänger",
+        "Modelle grundieren",
+        "Airbrush-Farben für Modellbau",
+        "Modelle maskieren",
+        "Tarnmuster airbrushen",
+        "Klarlack auf Modellen",
+        "Airbrush bei Kleinteilen",
+        "Airbrush nach Modellfarben reinigen"
+      ],
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:alabasterschnitzen",
+      "name": "Alabasterschnitzen",
+      "hypothesis": "EDITORIAL_TOPIC_OR_SHARED_STONE_CARVING_CLUSTER",
+      "aggregation_candidate": {
+        "family": "Steinschnitzen",
+        "type": "EDITORIAL_CLUSTER",
+        "related_master_topics": [
+          "Specksteinschnitzen",
+          "Schnitzen"
+        ],
+        "reason": "Material-specific carving niche; likely too narrow for a full hub unless DFS proves more depth."
+      },
+      "article_intents": [
+        "Alabaster zum Schnitzen auswählen",
+        "Werkzeug für Alabaster",
+        "Alabaster sägen",
+        "Alabaster raspeln und formen",
+        "Alabaster schnitzen",
+        "Alabaster schleifen",
+        "Alabaster polieren",
+        "Staubschutz beim Alabasterschnitzen"
+      ],
+      "leafs": []
+    },
+    {
+      "hobby_id": "hobby:algenkultur",
+      "name": "Algenkultur",
+      "hypothesis": "SCOPE_AND_EDITORIAL_REVIEW",
+      "identity_note": "Could be scientific/aquaristic cultivation practice rather than broad standalone hobby; must not be promoted from list presence alone.",
+      "aggregation_candidate": {
+        "family": "Mikrokulturen / aquatische Kulturen",
+        "type": "EDITORIAL_CLUSTER",
+        "related_master_topics": [
+          "Planktonbeobachtung",
+          "Gewässermikroskopie"
+        ],
+        "reason": "Only a review candidate; final family depends on actual practice and intent evidence."
+      },
+      "article_intents": [
+        "Mikroalgen-Kultur starten",
+        "Kulturgefäß auswählen",
+        "Licht für Mikroalgen",
+        "Nährmedium für Mikroalgen",
+        "Algenkultur belüften",
+        "Kontamination erkennen",
+        "Algenkultur ernten",
+        "Algenkultur weiterführen"
+      ],
+      "leafs": []
+    }
+  ]
+}
