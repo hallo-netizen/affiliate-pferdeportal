@@ -1,10 +1,10 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST",
-  "version": "1.0",
+  "version": "1.1",
   "effective_date": "2026-10-07",
-  "status": "READY_FOR_IDENTITY_SCOPE_CONTENT_OWNERSHIP_EVIDENCE",
+  "status": "READY_FOR_PER_LEAF_DATAFORSEO_VALIDATION__LIVE_ACCESS_BLOCKED",
   "source_result": "HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json",
-  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.1",
   "invariants": [
     "Eight worlds remain CORE level 1.",
     "Hobbywelten remains view only.",
@@ -48,7 +48,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -64,6 +73,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -100,7 +113,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -116,6 +138,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -152,7 +178,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -168,6 +203,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -204,7 +243,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -220,6 +268,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -256,7 +308,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -272,6 +333,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -308,7 +373,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -324,6 +398,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -360,7 +438,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -376,6 +463,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -412,7 +503,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -428,6 +528,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -469,7 +573,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -483,6 +596,10 @@
         "prove": [
           "current_canonical_alias_binding_remains_valid"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -519,7 +636,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -533,6 +659,23 @@
         "prove": [
           "current_canonical_alias_binding_remains_valid"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
+      },
+      "existing_real_dataforseo": {
+        "source": "BUCHBINDEN_E2E_OWNERSHIP_REALTEST_20260930.json",
+        "current_distinct_group_counts": {
+          "Einstieg": 4,
+          "Ausrüstung": 5,
+          "Material": 3,
+          "Techniken/Praxis": 4,
+          "Fragen/Probleme": 0,
+          "FAQ": 0
+        },
+        "conclusion": "NOT_YET_V2_HUB_PASS",
+        "reason": "Only Ausrüstung currently reaches the V2 5-12 target; follow-up DataForSEO + ownership review is required."
       }
     },
     {
@@ -569,7 +712,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -583,6 +735,10 @@
         "prove": [
           "current_canonical_alias_binding_remains_valid"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -619,7 +775,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -633,6 +798,10 @@
         "prove": [
           "current_canonical_alias_binding_remains_valid"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -674,7 +843,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -690,6 +868,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -731,7 +913,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -747,6 +938,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -788,7 +983,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -804,6 +1008,10 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     },
     {
@@ -845,7 +1053,16 @@
             "set_portal_role",
             "promote_to_core"
           ]
-        }
+        },
+        "per_lowest_category": true,
+        "validation_steps": [
+          "Start from the subject-proposed leaf/article candidates.",
+          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Collapse synonyms and wording variants.",
+          "Apply cross-pillar ownership before counting an intent.",
+          "Count each lowest-level category separately.",
+          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+        ]
       },
       "ownership": {
         "required": true,
@@ -861,7 +1078,24 @@
           "not_only_alias_synonym",
           "not_only_subform_of_existing_master_identity"
         ]
+      },
+      "aggregation_review": {
+        "required_if_standalone_capacity_fails": true,
+        "rule": "Keep the hobby identity. Test coherent shared summary/leaf/editorial grouping with related identities; do not create a structural node until the later full target-tree delta."
       }
     }
-  ]
+  ],
+  "dataforseo_request": "HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json",
+  "subject_preflight": "HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json",
+  "global_requirements": {
+    "per_leaf_capacity": true,
+    "target_articles_per_lowest_category": "5-12 distinct owned article intents",
+    "under_4": "NO_STANDALONE_LEAF__AGGREGATE_OR_EDITORIAL",
+    "four": "EXCEPTION_REVIEW",
+    "thirteen_to_fifteen": "SPLIT_REVIEW",
+    "sixteen_plus": "SPLIT_REQUIRED",
+    "total_hobby_article_count_is_not_sufficient": true,
+    "aggregation_review_for_small_valid_hobbies": true,
+    "canonical_identity_must_be_preserved_when_grouped": true
+  }
 }
