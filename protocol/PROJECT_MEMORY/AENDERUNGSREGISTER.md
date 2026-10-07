@@ -649,3 +649,41 @@ BELEG:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
+
+
+## HOBBYRAUSCH-HD001-20261007-K – V2 pro Leaf prüfen + kleine Themen zusammenfassen
+
+WAS:
+Das vollständige überarbeitete Hobby-Depot-Konzept wurde erneut gegen den aktuellen Arbeitsstand geprüft. Zwei Punkte wurden im maschinenlesbaren Bewertungsweg nachgezogen:
+1. Content Capacity wird pro unterster Kategorie geprüft, nicht nur als Gesamtzahl eines Hobbys.
+2. Kleine valide Hobbys dürfen gemeinsam dargestellt werden, ohne ihre kanonische Identität zu verlieren.
+
+WARUM:
+Das Konzept verlangt 5–12 eigenständige Beiträge pro unterster Kategorie. Außerdem sollen Nischen erhalten bleiben, ohne hunderte dünne Kategorien zu erzeugen.
+
+REGEL:
+- 0–3 distinct Artikelintents = keine eigene Leaf-Kategorie;
+- 4 = Ausnahmeprüfung;
+- 5–12 = Zielbereich;
+- 13–15 = Split-Prüfung;
+- 16+ = Split erforderlich;
+- ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs;
+- Synonyme/Formulierungsvarianten zählen nicht mehrfach;
+- kleine valide Hobbys können über Übersichten, gemeinsame Leafs oder redaktionelle Cluster zusammen sichtbar werden;
+- hobby_id/Identität bleibt dabei getrennt;
+- DataForSEO validiert Nachfrage/Intenttiefe, erzeugt aber keine Struktur.
+
+KORREKTUR ZU VORGANG J:
+Die Aussage „Buchbinden bleibt HOBBY_HUB“ war als bestehende Baseline richtig, aber als neuer V2-PASS zu stark.
+Vorhandene reale DataForSEO-Evidence belegt aktuell:
+Einstieg 4 / Ausrüstung 5 / Material 3 / Techniken-Praxis 4 distinct Gruppen.
+Damit bleibt der bestehende Pilot erhalten, der endgültige V2-Hub-PASS ist aber offen.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
+
+NÄCHSTER FACHLICHER SCHRITT:
+Den vorbereiteten Batch-001-DataForSEO-Request real ausführen und danach Leaf-Zählung, Ownership und Aggregation neu berechnen.
