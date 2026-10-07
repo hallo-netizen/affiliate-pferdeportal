@@ -1010,54 +1010,26 @@ trait PPAR_Output_Objects_Trait {
      * oder fehlende Metadaten fallen unverändert auf die bestehende
      * Ziel-URL-/Fallback-Logik zurueck.
      */
-    private function output_banner_provider_topic_classification($row,$portal) {
+    private function output_banner_provider_topic_classification($row,$portal,$targets=null) {
+        if(!is_array($row)){return null;}
+        if($targets===null){
+            $targets=$this->output_portal_targets($portal);
+            if(is_wp_error($targets)){return $targets;}
+        }
+
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
         $topic_name=sanitize_text_field((string)($payload['provider_topic_name']??''));
         $topic_source=sanitize_key((string)($payload['provider_topic_source']??''));
-        if($topic_name===''||$topic_source===''){return null;}
-        $topic_norm=$this->output_text($topic_name);
-        if($topic_norm===''){return null;}
-        $topic_tokens=array_values(array_filter($this->output_tokens($topic_norm),static function($t){return strlen((string)$t)>=4;}));
-        if(!$topic_tokens){return null;}
+        if($topic_name==='' || $topic_source===''){return null;}
 
-        $targets=$this->output_portal_targets($portal);
-        if(is_wp_error($targets)){return $targets;}
-        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
-        $portal_key=sanitize_key((string)($portal['key']??''));
-        $matches=array();
-
-        foreach((array)$targets as $target){
-            if(!is_array($target)){continue;}
-            $type=sanitize_key((string)($target['type']??''));
-            if(!in_array($type,$wanted,true)){continue;}
-            $target_key=sanitize_text_field((string)($target['key']??''));
-            if($target_key===''){continue;}
-            if(method_exists($this,'control_target_gate')){
-                $gate=$this->control_target_gate($portal_key,$target_key);
-                if(is_wp_error($gate)){continue;}
-            }
-            $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
-            $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
-            $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
-            $target_tokens=array_values(array_unique(array_merge($this->output_tokens($slug_norm),$this->output_tokens($leaf_norm))));
-            if(!$target_tokens || array_diff($topic_tokens,$target_tokens)){continue;}
-            $matches[]=array('target'=>$target,'depth'=>absint($target['depth']??0));
-        }
-
-        if(!$matches){return null;}
-        usort($matches,static function($a,$b){return (int)$b['depth']<=>(int)$a['depth'];});
-        if(isset($matches[1]) && (int)$matches[0]['depth']===(int)$matches[1]['depth']){return null;}
-        $target=$matches[0]['target'];
-        $target['_ppar_destination_match_level']='exact';
-        return array(
-            'status'=>'ready',
-            'confidence'=>100,
-            'reason'=>'Explizites Provider-Werbemittelthema passt exakt und eindeutig zu einem Portalziel.',
-            'target'=>$target,
-            'alternatives'=>array(),
-            'source'=>'banner_provider_topic_exact',
-            '_ppar_destination_level'=>'exact',
+        return $this->output_banner_evidence_target_classification(
+            $topic_name,
+            $portal,
+            $targets,
+            'banner_provider_topic',
+            'exact',
+            'Echte Provider-Kategorie passt eindeutig zum tiefsten belastbaren Portalziel.'
         );
     }
 
@@ -1065,9 +1037,118 @@ trait PPAR_Output_Objects_Trait {
      * Letzte Evidenzstufe fuer Banner: Name/Beschreibung/Tags.
      * Ziel-URL und Provider-Kategorie werden davor separat ausgewertet.
      */
+    /**
+     * Einziger semantischer Banner-Matcher.
+     *
+     * Er arbeitet nur mit bereits geladenen Portalzielen und vorhandener Evidenz:
+     * keine DB-Abfrage, kein HTTP, kein Frontend-Reclassify.
+     * Ein Ziel gilt nur dann als belastbar, wenn seine komplette Blatt-/Slug-
+     * Bedeutung in der aktuellen Evidenzstufe enthalten ist. Bei Gleichstand
+     * wird nicht geraten.
+     */
+    private function output_banner_evidence_target_classification($evidence,$portal,$targets,$source,$level,$reason) {
+        if(!is_array($portal) || !is_array($targets)){return null;}
+        $evidence=$this->output_text((string)$evidence);
+        if($evidence===''){return null;}
+
+        $evidence_tokens=array_values(array_unique($this->output_tokens($evidence)));
+        if(!$evidence_tokens){return null;}
+
+        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        $matches=array();
+
+        $set_supported=function($words) use ($evidence_tokens) {
+            $words=array_values(array_filter(array_unique((array)$words),static function($word){
+                return strlen((string)$word)>=4;
+            }));
+            if(!$words){return 0;}
+
+            foreach($words as $word){
+                $supported=false;
+                foreach($this->output_tokens((string)$word) as $variant){
+                    if(in_array($variant,$evidence_tokens,true)){
+                        $supported=true;
+                        break;
+                    }
+                }
+                if(!$supported && strlen((string)$word)>=6){
+                    foreach($evidence_tokens as $token){
+                        if(strlen((string)$token)>=6
+                            && (strpos((string)$token,(string)$word)!==false
+                                || strpos((string)$word,(string)$token)!==false)){
+                            $supported=true;
+                            break;
+                        }
+                    }
+                }
+                if(!$supported){return 0;}
+            }
+            return count($words);
+        };
+
+        foreach($targets as $target){
+            if(!is_array($target)){continue;}
+            $type=sanitize_key((string)($target['type']??''));
+            if(!in_array($type,$wanted,true)){continue;}
+
+            $target_key=sanitize_text_field((string)($target['key']??''));
+            if($target_key===''){continue;}
+            if(method_exists($this,'control_target_gate')
+                && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
+
+            $label_parts=preg_split('/\s+>\s+/',html_entity_decode((string)($target['label']??''),ENT_QUOTES,'UTF-8'));
+            $leaf=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
+            $slug=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
+
+            $leaf_words=preg_split('/\s+/', $leaf);
+            $slug_words=preg_split('/\s+/', $slug);
+            $specificity=max($set_supported($leaf_words),$set_supported($slug_words));
+            if($specificity<=0){continue;}
+
+            $matches[]=array(
+                'target'=>$target,
+                'specificity'=>$specificity,
+                'depth'=>absint($target['depth']??0),
+            );
+        }
+
+        if(!$matches){return null;}
+
+        usort($matches,static function($a,$b){
+            $c=(int)$b['specificity']<=>(int)$a['specificity'];
+            if($c!==0){return $c;}
+            return (int)$b['depth']<=>(int)$a['depth'];
+        });
+
+        $best=$matches[0];
+        $second=$matches[1]??null;
+        if($second!==null && (int)$best['specificity']===(int)$second['specificity']){
+            return array(
+                'status'=>'review',
+                'confidence'=>0,
+                'reason'=>'Evidenz passt gleich stark zu mehreren Portalzielen; keine automatische Zuordnung.',
+                'target'=>null,
+                'alternatives'=>array($best['target'],$second['target']),
+                'source'=>sanitize_key((string)$source).'_ambiguous',
+            );
+        }
+
+        $target=$best['target'];
+        $target['_ppar_destination_match_level']=sanitize_key((string)$level);
+        return array(
+            'status'=>'ready',
+            'confidence'=>100,
+            'reason'=>(string)$reason,
+            'target'=>$target,
+            'alternatives'=>array(),
+            'source'=>sanitize_key((string)$source),
+            '_ppar_destination_level'=>sanitize_key((string)$level),
+        );
+    }
+
     private function output_banner_content_classification($row,$portal,$targets=null) {
         if(!is_array($row)){return null;}
-
         if($targets===null){
             $targets=$this->output_portal_targets($portal);
             if(is_wp_error($targets)){return $targets;}
@@ -1076,168 +1157,44 @@ trait PPAR_Output_Objects_Trait {
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
         $title_source=sanitize_key((string)($payload['title_source']??''));
-        $title_evidence=in_array($title_source,array('provider_missing','manual_missing'),true)
+        $real_title=in_array($title_source,array('provider_missing','manual_missing'),true)
             ? '' : (string)($row['title']??'');
-        $parts=array(
-            $title_evidence,
+
+        $evidence=implode(' ',array_filter(array(
+            $real_title,
             (string)($row['description']??''),
             (string)($row['tags']??''),
-            (string)($payload['provider_topic_name']??''),
-            (string)($payload['promotion_category_name']??''),
             (string)($payload['information']??''),
             (string)($payload['alt_text']??''),
             (string)($payload['banner_name']??''),
             (string)($payload['name']??''),
-        );
-        $evidence=$this->output_text(implode(' ',array_filter($parts)));
-        if($evidence===''){return null;}
-        $evidence_tokens=array_values(array_unique($this->output_tokens($evidence)));
-        if(!$evidence_tokens){return null;}
+        )));
 
-        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
-        $portal_key=sanitize_key((string)($portal['key']??''));
-        $ranked=array();
-
-        foreach((array)$targets as $target){
-            if(!is_array($target)){continue;}
-            $type=sanitize_key((string)($target['type']??''));
-            if(!in_array($type,$wanted,true)){continue;}
-            $target_key=sanitize_text_field((string)($target['key']??''));
-            if($target_key===''){continue;}
-            if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
-
-            $label_parts=preg_split('/\s+>\s+/',html_entity_decode((string)($target['label']??''),ENT_QUOTES,'UTF-8'));
-            $leaf=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
-            $slug=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
-            $leaf_tokens=array_values(array_filter(array_unique($this->output_tokens($leaf)),static function($t){return strlen((string)$t)>=4;}));
-            $slug_tokens=array_values(array_filter(array_unique($this->output_tokens($slug)),static function($t){return strlen((string)$t)>=4;}));
-            if(!$leaf_tokens && !$slug_tokens){continue;}
-
-            $score=0;
-            $matched_source='';
-            $phrase_match=static function($haystack,$needle){
-                if($needle===''){return false;}
-                return preg_match('/(^|\\s)'.preg_quote($needle,'/').'(\\s|$)/u',$haystack)===1;
-            };
-
-            if($leaf!=='' && $phrase_match($evidence,$leaf)){
-                $score=1300 + min(90,absint($target['depth']??0)*10);
-                $matched_source='leaf_phrase';
-            } elseif($slug!=='' && $phrase_match($evidence,$slug)){
-                $score=1250 + min(90,absint($target['depth']??0)*10);
-                $matched_source='slug_phrase';
-            } else {
-                $leaf_complete=$leaf_tokens && !array_diff($leaf_tokens,$evidence_tokens);
-                $slug_complete=$slug_tokens && !array_diff($slug_tokens,$evidence_tokens);
-                if($leaf_complete){
-                    $score=1050 + count($leaf_tokens)*20 + min(90,absint($target['depth']??0)*10);
-                    $matched_source='leaf_tokens';
-                } elseif($slug_complete){
-                    $score=1000 + count($slug_tokens)*20 + min(90,absint($target['depth']??0)*10);
-                    $matched_source='slug_tokens';
-                } elseif(count($leaf_tokens)===1 && strlen((string)$leaf_tokens[0])>=5 && in_array($leaf_tokens[0],$evidence_tokens,true)){
-                    $score=800 + min(90,absint($target['depth']??0)*10);
-                    $matched_source='leaf_token';
-                }
-            }
-
-            if($score>0){
-                $ranked[]=array('target'=>$target,'score'=>$score,'matched_source'=>$matched_source);
-            }
-        }
-
-        usort($ranked,static function($a,$b){
-            $c=(int)$b['score']<=>(int)$a['score'];
-            if($c!==0){return $c;}
-            return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);
-        });
-        if(!$ranked){return null;}
-        $best=$ranked[0];
-        $second=$ranked[1]??null;
-        if($second!==null && ((int)$best['score']-(int)$second['score'])<100){
-            return array(
-                'status'=>'review',
-                'confidence'=>0,
-                'reason'=>'Bannerinhalt passt zu mehreren Portalzielen; keine automatische Zuordnung.',
-                'target'=>null,
-                'alternatives'=>array($best['target'],$second['target']),
-                'source'=>'banner_content_ambiguous',
-            );
-        }
-
-        $target=$best['target'];
-        $target['_ppar_destination_match_level']='content_exact';
-        return array(
-            'status'=>'ready',
-            'confidence'=>100,
-            'reason'=>'Bannerinhalt passt eindeutig zu genau einem Portalziel.',
-            'target'=>$target,
-            'alternatives'=>array(),
-            'source'=>'banner_content_exact',
-            '_ppar_destination_level'=>'content_exact',
+        return $this->output_banner_evidence_target_classification(
+            $evidence,
+            $portal,
+            $targets,
+            'banner_content',
+            'content_exact',
+            'Echter Bannername/-text passt eindeutig zum tiefsten belastbaren Portalziel.'
         );
     }
 
     private function output_banner_destination_url_classification($row,$portal,$targets) {
         if(!is_array($row) || !is_array($targets)){return null;}
+
         $source=$this->output_banner_destination_source($row);
         $destination=esc_url_raw((string)($row['destination_url']??''));
-        $semantic=$this->output_destination_semantic_text($row);
         if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)
-            || $destination==='' || $semantic===''){return null;}
+            || $destination===''){return null;}
 
-        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
-        $portal_key=sanitize_key((string)($portal['key']??''));
-        $dest_tokens=$this->output_tokens($semantic);
-        $ranked=array();
-
-        foreach($targets as $target){
-            if(!is_array($target)){continue;}
-            $type=sanitize_key((string)($target['type']??''));
-            if(!in_array($type,$wanted,true)){continue;}
-            $target_key=sanitize_text_field((string)($target['key']??''));
-            if($target_key===''){continue;}
-            if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
-
-            $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
-            $slug_tokens=$this->output_tokens($slug_norm);
-            $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
-            $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
-            $leaf_tokens=$this->output_tokens($leaf_norm);
-            $matched=array();
-            foreach(array_values(array_unique(array_merge($slug_tokens,$leaf_tokens))) as $tt){
-                if(strlen($tt)<4){continue;}
-                foreach($dest_tokens as $dt){
-                    if($dt===$tt || (strlen($dt)>=6 && strlen($tt)>=6 && (strpos($dt,$tt)!==false || strpos($tt,$dt)!==false))){
-                        $matched[$tt]=true; break;
-                    }
-                }
-            }
-            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
-            $score=$exact ? 1000 + min(200,absint($target['depth']??0)*20) : count($matched)*140 + min(90,absint($target['depth']??0)*10);
-            if($score>0){$ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);}
-        }
-
-        usort($ranked,static function($a,$b){
-            $c=(int)$b['score']<=>(int)$a['score']; if($c!==0)return $c;
-            $c=(int)$b['matches']<=>(int)$a['matches']; if($c!==0)return $c;
-            return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);
-        });
-        if(!$ranked){return null;}
-        $best=$ranked[0]; $second=$ranked[1]??null;
-        $margin=(int)$best['score']-(int)($second['score']??0);
-        $accept=!empty($best['exact']) ? ($second===null || $margin>=100) : ((int)$best['score']>=140 && ($second===null || $margin>=70));
-        if(!$accept){return null;}
-
-        $target=$best['target'];
-        return array(
-            'status'=>'ready',
-            'confidence'=>!empty($best['exact'])?100:80,
-            'reason'=>'Echte Ziel-URL passt eindeutig zum tiefsten belastbaren Portalziel.',
-            'target'=>$target,
-            'alternatives'=>array(),
-            'source'=>'import_destination_url',
-            '_ppar_destination_level'=>!empty($best['exact'])?'exact':'extended',
+        return $this->output_banner_evidence_target_classification(
+            $this->output_destination_semantic_text($row),
+            $portal,
+            $targets,
+            'import_destination_url',
+            'exact',
+            'Echte Ziel-URL passt eindeutig zum tiefsten belastbaren Portalziel.'
         );
     }
 
@@ -1409,7 +1366,6 @@ trait PPAR_Output_Objects_Trait {
         }
 
         $destination=esc_url_raw((string)($row['destination_url']??''));
-        $semantic=$this->output_destination_semantic_text($row);
         $comparison_partner=$this->output_comparison_banner_partner($row);
         $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
         $portals=$this->output_portal_registry();
@@ -1469,7 +1425,7 @@ trait PPAR_Output_Objects_Trait {
             if(is_wp_error($classification)){continue;}
 
             if(!is_array($classification)){
-                $classification=$this->output_banner_provider_topic_classification($row,$portal);
+                $classification=$this->output_banner_provider_topic_classification($row,$portal,$targets);
                 if(is_wp_error($classification)){continue;}
             }
 
