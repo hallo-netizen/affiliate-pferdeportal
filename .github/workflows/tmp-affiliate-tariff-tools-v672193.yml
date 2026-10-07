@@ -232,3 +232,17 @@ jobs:
           for row in rows:
               print('LIVE_RAW_SHORTCODE_POST',row.get('id'),row.get('slug'),row.get('link'))
           PY
+      - name: AFF-ERR-057 live plugin version readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://pferde-atelier.de/reitplatzbau-finanzieren-und-das-gesamtprojekt-solide-planen/?aff057_version_probe=1'
+          curl -fsSL -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "$URL" -o /tmp/aff057-page.html
+          python3 - <<'PY'
+          import re
+          raw=open('/tmp/aff057-page.html',encoding='utf-8',errors='replace').read()
+          versions=sorted(set(re.findall(r'affiliate-portal-router/[^"\x27 >]+[?&]ver=([0-9.]+)',raw,re.I)))
+          print('LIVE_AFFILIATE_PLUGIN_ASSET_VERSIONS',versions)
+          print('LIVE_PAGE_HAS_AFFILIATE_RECHNER_LITERAL', 'affiliate_rechner' in raw)
+          PY
+
