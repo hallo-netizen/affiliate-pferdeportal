@@ -1511,3 +1511,39 @@ Manuelle/FIXED-Ausnahmen bleiben im vorhandenen Vorrangpfad unangetastet.
 **Governance-Nachholung:** Der vorherige Current-Wert `BUILD_ROOTFIX_PLUGIN` war laut `release_guard.py` kein zulässiger `authorized_next_action`. Current verwendet wieder `RUN_BOUND_RELEASE_GATES`; die konkrete Fachaktion steht in `bound_user_scope_action`.
 
 **Status:** ROOT_CAUSE_PROVEN / STORED_TARGET_ELIGIBILITY_KISS_FIXED / PERFORMANCE_FAST_PATHS_PRESERVED / SOURCE_MANIFEST_BOUND / CURRENT_GATES_OPEN / NO_ZIP_YET.
+
+### AFF-ERR-056 – Nachtrag 07.10.2026: 6.72.201 verursachte Backend-Timeout; 6.72.202 korrigiert Performance- und Kostenregel
+
+**Live-Fehler 6.72.201:** Der 6.72.201-KISS-Reconcile wurde über `admin_init` nicht nur gestartet, sondern verarbeitete Banner synchron im Backend-Request. Mit bis zu 50 Bannern und einem mehrsekündigen Laufzeitfenster konnte dadurch das WordPress-Backend massiv verlangsamt werden und in einen Gateway-Timeout laufen. Das widerspricht dem Performance-/Datenbankvertrag.
+
+**Root Cause im Source:** `maybe_rebuild_banner_kiss_v672201()` führte den Reconcile direkt im Admin-Request aus. Der Hintergrundworker existierte, wurde aber nicht als alleiniger Ausführungsweg benutzt.
+
+**6.72.202-Korrektur:**
+- Admin-Request markiert den Reconcile nur noch als laufend und plant einen einzelnen Hintergrundevent.
+- Keine Bannerverarbeitung mehr synchron im Backend.
+- Hintergrundworker verarbeitet maximal 5 aktive Banner pro Lauf.
+- Harter Laufzeitdeckel: 3 Sekunden; danach Fortsetzung im nächsten kleinen Hintergrundlauf.
+- Kein zusätzlicher Frontend-HTTP-Pfad und keine neue Frontend-DB-Abfrage.
+
+**Zweiter belegter Fehler – Kostenregel:** Die frühere Tarifcheck/CHECK24-Kostenprüfung verlangte gleichzeitig ein Namensmuster `Kosten ...` und einen `...-kosten`-Slug. Das war fachlich zu eng und entsprach nicht der Nutzerregel „Kreditrechner auf alle realen Kosten-Kategorien“.
+
+**6.72.202-Korrektur:** Für Kredit/Kosten gilt jetzt ausschließlich:
+- Ziel ist eine reale `leaf_category`;
+- `kosten` kommt irgendwo im realen Kategorienpfad oder im Slug vor.
+Damit gibt es keinen künstlichen Prefix+Suffix-Doppelzwang mehr.
+
+**Unverändert gebunden:**
+- tiefstes belastbares Bannerziel + Elternpfad;
+- Ziel-Evidenz: Ziel-URL -> Provider-Kategorie -> echter Bannertext;
+- Formatprüfung vor Auswahl/Verteilung;
+- Glossar Desktop 0,50–1,50 / min. 310 px; Mobil 2,50–12,00 / min. 300 px;
+- stabile Verteilung innerhalb des zulässigen Fallback-Pools;
+- regelmäßiger Providerabgleich; erster Fehllauf Quarantäne, zweiter Fehllauf `inactive_missing` + automatische Kampagne aus;
+- Versicherung -> alle realen Versicherungs-Blattkategorien.
+
+**Versionsfehler nachgezogen:** Ein inhaltlich neuer Installationsstand darf keine bereits verwendete Pluginversionsnummer wiederverwenden. Der aktuelle Kandidat ist deshalb fortlaufend **6.72.202**.
+
+**Aktueller Prüfstatus:** Source und ZIP sind gebunden; ZIP-Integrität ist dokumentiert. 6.72.202 ist **nicht final freigegeben**. Live-Readback/gebundene Release-Gates sind offen und bleiben die einzige nächste operative Prüfung.
+
+**Status:** ROOT_CAUSE_PROVEN / 6_72_202_SOURCE_AND_ZIP_BOUND / PERFORMANCE_KISS_FIXED / KOSTEN_RULE_FIXED / LIVE_READBACK_OPEN / NO_FINAL_RELEASE.
+
