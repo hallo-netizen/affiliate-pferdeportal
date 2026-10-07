@@ -1001,18 +1001,6 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
-     * Providerneutraler Banner-Themenvertrag.
-     *
-     * Nur ein vom Provider explizit geliefertes Werbemittel-Thema darf hier
-     * wirken. Es wird nicht frei semantisch geraten: Nur wenn der normalisierte
-     * Themenname exakt zu genau EINEM erlaubten realen Portalziel (Slug oder
-     * Blattbezeichnung) passt, entsteht eine exakte Zielkante. Mehrdeutigkeit
-     * oder fehlende Metadaten fallen unverändert auf die bestehende
-     * Ziel-URL-/Fallback-Logik zurueck.
-     */
-
-
-    /**
      * Einziger semantischer Banner-Matcher.
      *
      * Er arbeitet nur mit bereits geladenen Portalzielen und vorhandener Evidenz:
