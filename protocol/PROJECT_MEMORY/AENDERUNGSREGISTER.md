@@ -635,7 +635,9 @@ REGEL:
 
 ERGEBNIS:
 - Batch 001 = 16 Identitäten;
-- 16/16 Identitätsgate PASS;
+- 16/16 ID-Eindeutigkeit PASS;
+- 4 aktuelle Alias-/Kanonikbindungen bestätigt;
+- 12 semantische Identitäts-/Unterformprüfungen offen;
 - 0 Zielbaum-Writes zulässig;
 - Buchbinden bleibt HOBBY_HUB aus vorhandener Pilotevidenz;
 - Treibholz sammeln bleibt EDITORIAL erhalten, Unterrolle noch evidenzabhängig;
