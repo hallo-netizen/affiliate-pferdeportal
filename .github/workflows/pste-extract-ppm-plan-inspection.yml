@@ -1,0 +1,60 @@
+name: PSTE extract PPM plan inspection
+
+on:
+  push:
+    branches: [pste-kiss-e2e-20261005]
+    paths:
+      - '.github/workflows/pste-extract-ppm-plan-inspection.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pste-kiss-e2e-20261005
+      - name: Extract exact PPM 6.7.9 inspection sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import zipfile, pathlib, json
+          zpath=pathlib.Path('control/startmaster0107/runtime_packages/PORTAL_PRODUCTION_MACHINE_V6.7.9_SIGNED_ARTICLE_TYPE_EXTENSION_ROOTFIX_FINAL.zip')
+          out=pathlib.Path('control/pste-topic-engine/inspection')
+          out.mkdir(parents=True,exist_ok=True)
+          with zipfile.ZipFile(zpath) as z:
+              names=z.namelist()
+              wanted={}
+              for n in names:
+                  low=n.lower()
+                  if low.endswith('contracts/canonical-complete-editorial-plan-v1.json'):
+                      wanted['PPM679_CANONICAL_PLAN_INSPECTION.json']=n
+                  if low.endswith('contracts/normal-draft-release-v1.json'):
+                      wanted['PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json']=n
+                  if low.endswith('.php'):
+                      data=z.read(n)
+                      if b'PPM679_Editorial_Plan_Runtime_Gate' in data:
+                          wanted['PPM679_EDITORIAL_PLAN_RUNTIME_GATE_INSPECTION.php']=n
+              if set(wanted) != {
+                  'PPM679_CANONICAL_PLAN_INSPECTION.json',
+                  'PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json',
+                  'PPM679_EDITORIAL_PLAN_RUNTIME_GATE_INSPECTION.php'
+              }:
+                  raise SystemExit('required inspection files not uniquely found: '+json.dumps(wanted,ensure_ascii=False))
+              for dest,src in wanted.items():
+                  (out/dest).write_bytes(z.read(src))
+              (out/'PPM679_INSPECTION_SOURCE_MAP.json').write_text(json.dumps(wanted,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit inspection extracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add control/pste-topic-engine/inspection
+          git diff --cached --quiet && exit 0
+          git commit -m "inspection: extract exact PPM 6.7.9 plan and runtime gate [skip ci]"
+          git push origin HEAD:pste-kiss-e2e-20261005
