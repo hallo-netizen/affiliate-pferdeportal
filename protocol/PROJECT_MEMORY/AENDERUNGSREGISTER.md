@@ -811,3 +811,25 @@ Der echte gespeicherte Batch wurde ohne neue Calls/Kosten/Writes lokal bis zum E
 
 OFFEN:
 Nur noch ein einmaliger realer WordPress-Readback desselben V1.12.5-Endstands.
+
+
+## HOBBYRAUSCH-HD001-20261007-P – stale Export als letzter technischer Restfehler geschlossen
+
+WAS:
+Der reale nach V1.12.5 heruntergeladene JSON-Readback war nachweislich weiterhin das alte V1.12.3-Ergebnis.
+
+WARUM:
+Die KISS-Neuberechnung hing am Rendern der Bewertungsseite. Der Download selbst war nicht fail-closed.
+
+ÄNDERUNG:
+HD-001 V1.12.6 macht den Download zum finalen Recalc-Gate:
+Altstand wird vor Export kostenlos neu berechnet und gespeichert; bei Fehler wird blockiert.
+
+NICHT GEÄNDERT:
+Regeln 1.4, DataForSEO-Fachrolle, Zielbaum, Taxonomie, WordPress-/HivePress-Struktur.
+
+BELEG:
+`PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V126_STALE_EXPORT_READBACK_20261007.md`
+
+NEXT:
+Einmal real mit V1.12.6 exportieren und JSON readback-prüfen.
