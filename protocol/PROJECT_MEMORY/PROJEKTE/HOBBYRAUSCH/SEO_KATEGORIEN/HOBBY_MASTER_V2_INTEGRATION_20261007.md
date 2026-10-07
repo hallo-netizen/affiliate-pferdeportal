@@ -329,3 +329,78 @@ Es ist KEIN Zielbaum-Delta und erzeugt keinen WordPress-/HivePress-/Frontend-Kno
 6. Erst nach belastbarer Gesamtbewertung V1.12-Zielbaum als Delta aktualisieren.
 
 Damit wird weder aus Monetarisierung noch aus Bekanntheit eine Taxonomie erfunden.
+
+
+## 14. Nachgeholte Leaf-Kapazitätsregel
+
+Das vollständige Konzept verlangt ausdrücklich:
+Nicht die Gesamtzahl möglicher Hobbyartikel entscheidet über einen Hub.
+
+Jede unterste Kategorie wird einzeln geprüft:
+- 0–3 distinct Artikelintents → keine eigene Leaf-Kategorie;
+- 4 → Ausnahmeprüfung;
+- 5–12 → Zielbereich;
+- 13–15 → Split-Prüfung;
+- 16+ → Split erforderlich.
+
+Nur echte verschiedene Nutzer-/Suchintents zählen.
+Synonyme und Formulierungsvarianten zählen nicht mehrfach.
+
+Ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs.
+
+Maschinenlesbar gebunden in:
+`HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json` Version 1.1.
+
+## 15. Zusammenfassung kleiner valider Hobbys
+
+Ein kleines Hobby wird nicht gelöscht und seine hobby_id wird nicht mit anderen Identitäten verschmolzen.
+
+Wenn es allein keine tragfähige SEO-Struktur ergibt, darf es zusammen mit fachlich verwandten kleinen Hobbys über:
+- bestehende Übersichts-/Parentseiten;
+- gemeinsame unterste Kategorien;
+- redaktionelle Cluster
+
+sichtbar gemacht werden.
+
+Die gemeinsame unterste Kategorie muss selbst wieder die 5–12-Regel erfüllen.
+
+Im Kandidatenlauf wird nur `AGGREGATION_CANDIDATE` markiert.
+Eine neue Zwischenkategorie darf erst im späteren Gesamt-Zielbaum-Delta entstehen, wenn der vollständig bewertete Bestand sie belegt.
+
+## 16. Batch 001 – Fachvorprüfung und DataForSEO-Abgleich
+
+Fachvorprüfung:
+`HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
+
+Sie enthält:
+- mögliche Leaf-/Artikelintents;
+- Macro-/Split-Kandidaten;
+- mögliche Zusammenfassungen kleiner Themen;
+- keine erfundenen SEO-Zahlen.
+
+DataForSEO-Request:
+`HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
+
+Realer vorhandener Buchbinden-Befund:
+- Einstieg = 4 distinct Gruppen;
+- Ausrüstung = 5;
+- Material = 3;
+- Techniken/Praxis = 4;
+- Fragen/Probleme = 0;
+- FAQ = 0.
+
+Damit bleibt der bestehende Pilot erhalten, ist nach der neuen V2-Regel aber noch kein endgültiger HOBBY_HUB-PASS.
+
+Für die übrigen Batch-001-Kandidaten fehlen im geprüften Bestand reale passende DataForSEO-Ergebnisse.
+Keine Schätzung.
+
+## 17. Aktueller Arbeitsweg
+
+1. vorbereiteten Batch-001-Request real über DataForSEO ausführen;
+2. Synonyme/Varianten deduplizieren;
+3. Ownership über CORE / EDITORIAL / DIRECTORY prüfen;
+4. jede Leaf-Kategorie separat zählen;
+5. bei dünnen validen Hobbys Aggregation prüfen;
+6. Batch 001 erneut bewerten;
+7. erst bei stabilem Regelverhalten die Gesamtbewertung fortsetzen;
+8. erst danach Zielbaum-Delta.
