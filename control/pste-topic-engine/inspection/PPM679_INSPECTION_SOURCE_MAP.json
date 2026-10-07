@@ -1,0 +1,5 @@
+{
+  "PPM679_EDITORIAL_PLAN_RUNTIME_GATE_INSPECTION.php": "portal-production-machine/tests/test-v38-editorial-plan-journal-dedup.php",
+  "PPM679_CANONICAL_PLAN_INSPECTION.json": "portal-production-machine/contracts/canonical-complete-editorial-plan-v1.json",
+  "PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json": "portal-production-machine/contracts/normal-draft-release-v1.json"
+}

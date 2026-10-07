@@ -1,0 +1,111 @@
+{
+  "contract": "NORMAL_DRAFT_RELEASE_SCOPE_V1",
+  "version": "1.1.0",
+  "created_at": "2026-07-31T09:20:00Z",
+  "scope_mode": "REUSABLE_NORMAL_DRAFT_1_TO_4",
+  "allowed_article_types": [
+    "FAQ",
+    "Beratung",
+    "Vergleich",
+    "Pflege",
+    "Journal"
+  ],
+  "minimum_articles": 1,
+  "maximum_articles": 4,
+  "maximum_articles_per_type": 1,
+  "wissen_allowed": true,
+  "publish_allowed": false,
+  "global_article_type_flags_may_change": false,
+  "canonical_articles_must_be_pre_researched": true,
+  "plugin_text_generation_allowed": false,
+  "existing_content_update_allowed": false,
+  "existing_content_delete_allowed": false,
+  "action_contexts": [
+    "normal_plan_preflight",
+    "normal_plan_pre_accept",
+    "normal_plan_accept",
+    "normal_bootstrap",
+    "normal_generation",
+    "normal_check_only",
+    "normal_draft_create",
+    "normal_draft_readback",
+    "normal_handoff_readback",
+    "normal_admin_runtime_exception"
+  ],
+  "type_bindings": {
+    "FAQ": {
+      "production_allowed": false,
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "definition_hash": "ffeb6140e694095418ce875bac2978d0bd3da9ed224bd62e45fab7c191dd88ee",
+      "evidence_hash": "0f965b2173910559c598d30dbc73fd3b7ef84978ae8c7998a313302291c19eb2"
+    },
+    "Beratung": {
+      "production_allowed": false,
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "definition_hash": "c258983d66c4fd0233fd56aa10384eca5fd6ce0c72775461842020d3e9a1ca69",
+      "evidence_hash": "c48d4e67ada0de41fbd524a0b58faf03f5b73832e398385379c9237c261b1bdc"
+    },
+    "Vergleich": {
+      "production_allowed": false,
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "definition_hash": "e930ef71ac412ef2292e4676c2d385177f3975d7feb573f7cf23342e1e6937fb",
+      "evidence_hash": "f489ef864448c9c0e129b3364cc5479bcc46798aabffab18709e04ea414d48cf"
+    },
+    "Pflege": {
+      "production_allowed": false,
+      "certification_status": "WAVE2_QUARANTINE_PENDING_RECERTIFICATION",
+      "definition_hash": "3ca24b73dc062455b6fb7b689e1301fe642649bacc0a78513fa56e0846d1458f",
+      "evidence_hash": "c0f65f8312f0b5f579ef7ecefbe19e746207ad2a261992429a3642e872f7fb99"
+    },
+    "Journal": {
+      "production_allowed": true,
+      "certification_status": "SIGNED_NORMAL_DRAFT_RELEASE_ACTIVE",
+      "definition_hash": "c5c5af30d026038f24fcf61ae6b044f5d3fb0838ab32741deae8110e15801da0",
+      "evidence_hash": "df29af80e888995849e3e5c004e6256740d118cf2b63a97baaa6bf4e1c39cc56"
+    }
+  },
+  "protected_quality_hashes": {
+    "contracts/article-type-templates.json": "dc79a6d7d30fba2f7f13c80d35bf4d137669f2b3469d7bc28a5d0873858f192f",
+    "contracts/content-validation-contract-v2.json": "364e8ebe98fa26edd81c993bc2eb12b8ff2f760ec448720184b1bacac46d8bff",
+    "contracts/content-structure-language-gate-v2.json": "756f71aa98e683b050b37fab228463569219f558729525c33c0ee0ae190e1d72",
+    "contracts/gold-core-binding-v1.json": "68a4cd33b7b6fab7e2830f056d2e46e1952c91fecf65dfda9dd73abef09a1f92",
+    "contracts/gold-core-tolerances-v1.json": "240f58ee99afc43dad5258260d761e6d71f68632c943eec1d01bae187e779732",
+    "contracts/known-error-gate-v1.json": "95d499bba933a6951d72739ceac21ba669ce4a329f387df12b61722bb3742ea0",
+    "contracts/review-matrix-schema-v1.json": "7b65ea5de5f536fbe6ee2c21c58b79a83597adebda3c74fb527e978f41c60003",
+    "contracts/table-contract-v1.json": "1ab3e892c37e5a48517519afcccbf8ec01b9f08da141eef93d577acd456756c7",
+    "includes/content-generator.php": "589b1003414d1df921c37cc91f170869950d47a496770776a0ebde43bd47ea59",
+    "includes/content-validator.php": "1fbf730b85e1d51ede18a6ad55500c94c161a15085bc54e2fce4ee4c18892687",
+    "includes/content-structure-language-gate.php": "233c6edeb784686ed6f83b85c4f4dc6e4808942737afda75d36ed75e18c4d58b",
+    "includes/known-error-gate.php": "c4cce86164f40c36a363571922c50c61c432a543053c8c6a0cedc5077ad37eb5",
+    "includes/gold-core-validator.php": "f2b17cda21390efa5def65622ab595b7652ed2d7ba65bc759be6d657a424cb61",
+    "includes/editorial-review-engine.php": "4744751841f47cf1988db930cfb6163c57709cd5c989898b964ffae182e1e410",
+    "includes/review-matrix-validator.php": "372a319582493bd6c697a4b5e7563e7771b06bb9fe56236a9f32652341dd301a",
+    "includes/three-type-local-content-validator.php": "98608b7763b14157af3836dd5754c296d43f26330d7c5e3671865d227fc42285",
+    "includes/wordpress-link-target-validator.php": "e81f683dd5a3db5431f858fa2fbc663174f797d884b03690f36b62cd55caa379",
+    "includes/category-assignment-validator.php": "4f775753746a430e94fa89124286ec9f9b288063b70d77f7d1e2cb7fb800b094",
+    "includes/category-hierarchy-validator.php": "761256caced6d846076e416bda94497881f896991e11ca670fe1589a11317ad8",
+    "includes/portal-wp-structure-validator.php": "a16138b4ec29472185db2f8fba88329691337ab9f63016f9d3091f3da46ef474",
+    "includes/rendered-dom-validator.php": "188da235882fdff9706523802671cf5a550bf142bcc4cdb1f209b8032806fbbf",
+    "includes/stateful-write-gate.php": "e8c146e55dddce6a089161db20b132e9691c044aa14a8c65cb99dc60ebac194f",
+    "includes/production-wave-governor.php": "26f53cb8e08bef611ce58f5152a8dc7b96835cd1b9c8db56bb7d281f6b4103de"
+  },
+  "journal_scope_policy": {
+    "normal_affiliate_draft_requires_live_journal_snapshot": false,
+    "journal_or_wissen_candidate_requires_live_journal_snapshot": true,
+    "journal_registry_structural_validation_required_for_all_runs": true,
+    "cross_block_duplicate_control_including_wissen_required_for_all_runs": true,
+    "journal_mismatch_must_remain_visible_and_fail_closed_for_journal_or_wissen": true
+  },
+  "journal_draft_release_allowed": true,
+  "journal_release_policy": {
+    "external_article_type": "Journal",
+    "legacy_internal_article_type": "Wissen",
+    "canonical_existing_ids_preserved": true,
+    "journal_category_count": 9,
+    "journal_slot_count": 45,
+    "runtime_term_ids_must_not_be_hardcoded": true,
+    "validation_contract_required": "SECTION_REQUIREMENTS_V1",
+    "publish_allowed": false
+  },
+  "contract_self_sha256": "a40d82ffab0f49002ea6a0bf67013235577e6b2253ce9a4acd3b64965241fc66"
+}
