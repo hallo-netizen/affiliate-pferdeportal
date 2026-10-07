@@ -102,8 +102,8 @@ Verbindlich seit Regelversion 1.1:
 - jede unterste Kategorie muss separat 5–12 echte, unterschiedliche Artikelintents tragen;
 - 0–3 = keine eigene Leaf-Kategorie;
 - 4 = Ausnahmeprüfung;
-- 13–15 = Split-Prüfung;
-- 16+ = Split erforderlich.
+- 13–14 = Split-Prüfung;
+- ab etwa 15 = Split erforderlich.
 
 Kleine valide Hobbys dürfen gemeinsam über Übersichten, gemeinsame Leafs oder Magazin-Cluster sichtbar werden.
 Ihre kanonischen Hobby-Identitäten bleiben trotzdem getrennt.
@@ -130,7 +130,7 @@ Publikationsrollen:
 Leaf:
 - 5–12 Ziel;
 - 4 Ausnahme;
-- 13–15 Split-Prüfung;
+- 13–14 Split-Prüfung;
 - >15 nur explizite Ausnahme.
 
 Hobby-Hub:
