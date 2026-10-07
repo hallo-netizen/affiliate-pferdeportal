@@ -144,28 +144,19 @@ Nachgezogen:
 Konzeptaudit:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
 
-## Reales Batch-001-Ergebnis
+## Reales Batch-001-Ergebnis – historische Evidence
 
-Der erste echte WordPress-/DataForSEO-Lauf ist erfolgt.
-
-Ergebnis:
+Der echte WordPress-/DataForSEO-Lauf wurde ausgeführt und bleibt als Evidence erhalten:
 - 263 fachlich vorgeschlagene Artikelintents;
-- 106 exakte Keyword-Overview-Zeilen von DataForSEO;
-- 157 exakte Seeds ohne Overview-Zeile;
+- 106 exakte Keyword-Overview-Zeilen im ersten Aufruf;
+- anschließend historische Depth-Aufrufe;
+- insgesamt 39 Provider-Aufrufe;
+- ca. 0.9738 USD historische Kosten;
 - 0 Strukturwrites.
 
 Wichtig:
-Die 157 fehlenden Zeilen sind KEIN Beweis, dass diese Inhalte nicht existieren.
-Nach Regelvertrag 1.2 ist der exakte Overview nur eine Evidenzstufe.
-Die noch offenen, bereits fachlich definierten Leaf-/Themenräume müssen anschließend mit Keyword Ideas/Suggestions auf echte Intenttiefe geprüft werden.
-
-Daraus folgt:
-Das Zwischenresultat `0 Hub-Kandidaten` darf nicht als endgültige Portalentscheidung verwendet werden.
-
-HD-001 V1.12.3 setzt genau diese fehlende zweite Evidenzstufe timeout-sicher um:
-37 offene Cluster → 37 Keyword-Ideas-Aufrufe → 1 abschließender gebündelter Overview → erneute Zählung/Dedupe/Ownership.
-
-Keine Struktur wird dabei erzeugt.
+Die damaligen Zwischenbewertungen aus V1.12.1–V1.12.4 sind durch die KISS-Regel 1.4 für Content Capacity fachlich überholt.
+Sie bleiben nur Fehler-/Evidence-Historie und dürfen nicht als aktueller Rollenbefund verwendet werden.
 
 ## KISS-Korrektur nach vollständiger Fehlerkettenprüfung
 
