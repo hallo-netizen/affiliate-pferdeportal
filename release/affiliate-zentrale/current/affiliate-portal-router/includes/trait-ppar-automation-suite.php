@@ -3139,6 +3139,18 @@ trait PPAR_Automation_Suite_Trait {
             if ($post_type === 'post') {
                 $available[] = 'category:' . $slug;
                 $available[] = 'journal:' . $slug;
+                // KISS: Die Portalstruktur bildet redaktionelle Kategorien als
+                // <produkt-slug>-<thema> ab. So kann ein auf die Produktseite
+                // gemappter Banner auch im zugehörigen Artikel erscheinen,
+                // ohne DB-Abfrage, JSON-Lookup oder Textklassifikation im Frontend.
+                foreach ($wanted as $wanted_key) {
+                    if (!preg_match('/^page:([a-z0-9_-]+)$/', (string)$wanted_key, $m)) { continue; }
+                    $product_slug = sanitize_key((string)$m[1]);
+                    if ($product_slug !== ''
+                        && ($slug === $product_slug || strpos($slug, $product_slug . '-') === 0)) {
+                        $available[] = 'page:' . $product_slug;
+                    }
+                }
             } elseif ($post_type === 'hp_listing') {
                 $available[] = 'market:' . $slug;
             } elseif ($post_type === 'uge_term') {
