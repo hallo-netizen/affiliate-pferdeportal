@@ -99,6 +99,13 @@ add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls) {
             'data'=>array('items'=>array(),'total'=>array('numberItems'=>0)),
         )));
     }
+    if ($url === 'https://t.adcell.com/p/banner-schabracken') {
+        $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl+0iAAAAAASUVORK5CYII=');
+        return $reply($png, 200, array(
+            'content-type'=>'image/png',
+            'content-length'=>strlen($png),
+        ));
+    }
     if (strpos($url, 'https://t.adcell.com/p/') === 0) {
         return $reply('', 200);
     }
@@ -244,6 +251,48 @@ if ($has_open->invoke($o, 'adcell')) {
 }
 $ok('fresh_672199_adcell_job_completed');
 
+// Nach dem frischen Providerlauf muss 6.72.199 auf die technische
+// Assetprüfung warten. Reconcile/Done vor diesem Punkt wäre Vertragsbruch.
+$upgrade->invoke($o);
+if ((string)get_option('ppar_v672199_adcell_banner_basis_state','') !== 'waiting_assets') {
+    $fail('basis_did_not_wait_for_assets_' . (string)get_option('ppar_v672199_adcell_banner_basis_state',''));
+}
+$pending_banner = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
+    'banner-393923'
+), ARRAY_A);
+$pending_payload = json_decode((string)($pending_banner['payload'] ?? ''), true);
+$pending_targets = json_decode((string)($pending_banner['topic_targets'] ?? ''), true);
+if (!is_array($pending_banner)
+    || !is_array($pending_payload)
+    || sanitize_key((string)($pending_payload['_dimension_state'] ?? '')) !== 'pending'
+    || (is_array($pending_targets) && count($pending_targets) !== 0)) {
+    $fail('fresh_banner_not_pending_without_targets_before_asset_check');
+}
+$ok('basis_waits_with_zero_targets_before_asset_verification');
+
+$verify_batch = new ReflectionMethod($o, 'automation_verify_adcell_asset_batch');
+$verify_batch->setAccessible(true);
+if ((int)$verify_batch->invoke($o, 5) < 1) {
+    $fail('adcell_asset_batch_did_not_process_banner');
+}
+$has_pending_assets = new ReflectionMethod($o, 'automation_has_pending_adcell_assets');
+$has_pending_assets->setAccessible(true);
+if ($has_pending_assets->invoke($o)) {
+    $fail('adcell_assets_still_pending_after_real_image_check');
+}
+$verified_banner = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
+    'banner-393923'
+), ARRAY_A);
+$verified_payload = json_decode((string)($verified_banner['payload'] ?? ''), true);
+if (!is_array($verified_payload)
+    || !in_array(sanitize_key((string)($verified_payload['_dimension_state'] ?? '')), array('verified','mismatch'), true)
+    || (string)($verified_payload['_image_sha256'] ?? '') === '') {
+    $fail('fresh_banner_asset_not_verified');
+}
+$ok('fresh_provider_banner_asset_verified_before_reconcile');
+
 $upgrade->invoke($o);
 if ((string)get_option('ppar_v672199_adcell_banner_basis_state','') !== 'done') {
     // Ein grosser Reconcile kann mehrere Batches brauchen; im Fixture ist es
@@ -254,7 +303,7 @@ if ((string)get_option('ppar_v672199_adcell_banner_basis_state','') !== 'done') 
 if ((string)get_option('ppar_v672199_adcell_banner_basis_state','') !== 'done') {
     $fail('basis_upgrade_not_done_' . (string)get_option('ppar_v672199_adcell_banner_basis_state',''));
 }
-$ok('basis_upgrade_completed_after_fresh_import');
+$ok('basis_upgrade_completed_only_after_fresh_import_and_asset_verification');
 
 $stored = $wpdb->get_row($wpdb->prepare(
     "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
