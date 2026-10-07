@@ -2,93 +2,152 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-05
-STATUS: V1.9.9 CONTENT-PILOT LIVE PASS / V1.10.0 ENGINE-TESTS PASS / REALER GESAMTPORTAL-E2E BLOCKED / KEIN RELEASE
+STAND: 2026-10-07
+STATUS: 3-SÄULEN-ZIELBAUM V1.12 ALS BASIS VORHANDEN / HOBBY_MASTER V2 VORGESCHALTET / GESAMTBEWERTUNG OFFEN / KEIN NEUER LIVE-RELEASE
 
-## Zielautorität
+## Ziel
 
-`ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
+Konzept + zentraler Hobbybestand → Scope-/Größen-/Rollenprüfung → 8 geschützte Hauptwelten → variable Seitenhierarchie + Content-Kategorien + Magazin + HivePress → globale Ownership-Prüfung → WordPress/HivePress Soll/Ist-Sync → Readback.
 
-Ziel unverändert:
-Konzept + echter Hobbybestand + DataForSEO → 8 Hauptwelten → variable Seitenhierarchie + Content-Kategorien + Magazin + HivePress → WordPress Publish → sichtbares Frontend → Readback → spätere Delta-Erweiterung.
+## Geschützte Grundstruktur
 
-## Belastbarer Live-Stand
-
-V1.9.9 Content-Pilot real bestätigt:
-- Buchbinden sichtbar;
-- Einstieg / Ausrüstung / Material / Techniken & Praxis sichtbar;
-- ein veröffentlichter Testartikel ist über die vier Kategorien im Frontend sichtbar.
-
-Livebestand nicht zurückrollen.
-
-## V1.10.0 Arbeitsstand
-
-Lokale Arbeitskopie:
-`/mnt/data/hd001-v1100-work`
-
-Plugin-Header:
-`1.10.0`
-
-Frisch am 2026-10-05 erneut ausgeführt:
-- Legacy Regression: 270/270 PASS;
-- Portal Discovery PASS;
-- World Routing PASS;
-- Concept Auto World PASS;
-- Eight Worlds E2E PASS;
-- Portal Scale PASS;
-- Portal Negative PASS;
-- Admin Portal PASS;
-- Portal Resume PASS.
-
-Bewiesen ist damit die Maschine, nicht der reale Gesamtportal-Endlauf.
-
-Skalierungsfixture:
-844 synthetische Rohkandidaten, 2 Overview-Batches, 34 Concept-Batches bei Batchgröße 25.
-
-Acht getestete Konzeptwelten:
+Acht Hauptwelten:
 Gestalten / Fertigen / Technik / Forschen / Pflanzen / Tiere / Bewegen / Sammeln.
 
-## Konzept/DataForSEO-Vertrag
+Drei Säulen:
+- CORE = Hauptportal;
+- EDITORIAL = Magazin;
+- DIRECTORY = HivePress/Anbieter.
 
-Konzept setzt Leitplanken.
-DataForSEO entscheidet innerhalb dieser Leitplanken:
-- Nachfrage;
-- Synonyme/Core-Keyword-Gruppen;
-- canonical Hobby-Seeds;
-- evidenzbasierte Weltzuordnung;
-- tragfähige Unterintentionen/Leafs;
-- Marketplace-/Magazin-Evidenz.
+Die acht Welten werden im ersten neuen Integrationslauf nicht neu erfunden.
 
-Rohliste ist keine Taxonomie.
-Ambige Evidenz bleibt fail-closed.
+## Neuer vorgeschalteter Hobby-Master
+
+Persistente Bewertungsbasis:
+`/hobby rausch/HOBBY_DEPOT_HOBBY_MASTER_V2_20261007.json`
+
+Current-Zeiger:
+`../KONZEPT/VORARBEITEN_HOBBYFINDER/HOBBY_MASTER_V2_CURRENT.md`
+
+Bestand:
+- 908 Rohzeilen;
+- 844 exakte Namen;
+- 841 kanonische Identitäten nach aktuellen Alias-Merges;
+- 329 bestehende V1.12-Monetarisierungs-/CORE-Regeln migriert;
+- 286 DIRECT;
+- 43 ASSISTED;
+- 512 UNKNOWN und weiterhin erhalten.
+
+Die Rohliste ist weiterhin nur Provenienz/Candidate Pool und keine Taxonomie.
+
+## Neue Rollen- und Größenlogik
+
+Mögliche Publikationsrollen:
+- ORIENTATION_UNIVERSE;
+- HOBBY_HUB;
+- EDITORIAL_TOPIC;
+- ARTICLE_ONLY;
+- FINDER_ONLY;
+- OUT_OF_SCOPE.
+
+Leaf-Kategorie:
+- 5–12 Beiträge Ziel;
+- 4 nur Ausnahme;
+- 13–15 Split-Prüfung;
+- >15 nur explizite Ausnahme.
+
+Hobby-Hub:
+- 3–6 tragfähige Leafs Ziel;
+- 7–8 Split-/Macro-Prüfung;
+- >8 grundsätzlich Macro/Split.
+
+## DataForSEO-Vertrag
+
+DataForSEO darf:
+- Nachfrageband;
+- Primärkeyword;
+- Synonyme;
+- Longtail-Tiefe;
+- Keyword-/Intent-Überschneidung
+
+belegen.
+
+DataForSEO darf NICHT:
+- Hauptwelt;
+- Parent;
+- structural_role;
+- neue Zwischenkategorie
+
+selbst bestimmen.
+
+SEO-Evidenz unterstützt die Größenprüfung, ist aber keine Taxonomieautorität.
+
+## Monetarisierung
+
+Monetarisierung beeinflusst CORE-Priorität und kommerzielle Tiefe.
+
+Nicht monetarisierbare gültige Hobbys werden NICHT gelöscht.
+Sie bleiben EDITORIAL-/ARTICLE-/FINDER-Kandidaten.
+
+## Dubletten und Ownership
+
+Prüfung gilt gemeinsam über CORE / EDITORIAL / DIRECTORY.
+
+Beispiel:
+Treibholz und Treibholz sammeln = eine Identität.
+
+Pro primärem Intent genau ein SEO-Owner.
+Andere Säulen dürfen Relation/Filter/Verweis sein, keine konkurrierende Zielseite.
+
+## V1.12-Status
+
+Das vorhandene `HD001_V1.12.0_HOBBY_DEPOT_TARGET_PROFILE.json` bleibt wichtige Basis:
+- 3-Säulen-Struktur;
+- 8 Welten;
+- Magazinstruktur;
+- HivePress-Struktur;
+- Aliasgruppen;
+- 329 Monetarisierungs-/CORE-Regeln.
+
+Aber:
+Die neue Größen-/Rollenlogik liegt zeitlich danach.
+
+Daher darf das vorhandene V1.12-Zielprofil NICHT ungeprüft als endgültiger neuer Livebaum behandelt werden.
+Es muss aus dem bewerteten HOBBY_MASTER per Delta fortgeschrieben werden.
+
+Der gespeicherte `HD001_CURRENT_INSTALL.zip` bleibt bis dahin der vorherige belastbare Installationsstand; kein neuer Live-Release aus der neuen Konzeptfortschreibung.
+
+## Pilot
+
+Geprüfte Regeltypen:
+- Buchbinden → stabiler HOBBY_HUB;
+- Fotografie → Macro-/Orientation-Research statt Riesenhub;
+- Garten → kein Vollhub;
+- Treibholz sammeln → Magazin erhalten / kein unbelegter CORE-Hub;
+- Musizieren → Scope-Review statt erzwungener Weltzuordnung.
+
+Referenz:
+`HOBBY_MASTER_V2_PILOT_20261007.md`
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V1100_REAL_HD002_INVENTORY_INPUT_NOT_BOUND`
+Die 841 kanonischen Kandidaten sind noch nicht vollständig nach:
+- Scope;
+- Identität/Alias;
+- Größenklasse;
+- Content Capacity;
+- Publikationsrolle;
+- 3-Säulen-Ownership
 
-Der autoritative HD-002-Stand sagt:
-`Gesamtbestand: erfasst`.
-
-Für HD-001 liegt dieser reale Bestand aktuell jedoch nicht als belastbar gebundene read-only Kandidatenquelle vor.
-Weder manuelle Rekonstruktion noch synthetische Ersatzliste ist zulässig.
+bewertet.
 
 ## EXAKT EINE NEXT ACTION
 
-Den bereits erfassten echten HD-002-Gesamtbestand **read-only** exportieren/übernehmen und unverändert als `hobby_candidates`-Eingang an V1.10.0 Portal Discovery binden.
+Bewertungsregeln maschinenlesbar auf den HOBBY_MASTER anwenden und einen kontrollierten Batch erzeugen.
 
-Danach in einem vollständigen realen lokalen Lauf:
-echter Gesamtbestand → DataForSEO Overview → Synonym-/Demand-Filter → per-Hobby Suggestions → 8-Welten-Routing → Content + Magazin + HivePress → WordPress/Frontend-Simulation → Positiv-/Negativ-E2E.
-
-Erst bei diesem Gesamt-PASS darf ein V1.10.x Release-/Uploadkandidat entstehen.
-
-## NICHT ANFASSEN
-
-- keinen neuen Gesamtbestand erfassen;
-- keine Hobbyliste aus Chatgedächtnis bauen;
-- V1.9.9-Livebestand nicht zurückrollen;
-- keinen Live-Publish aus V1.10.0 vor vollständigem realem E2E.
-
-## Packaging-Hinweis
-
-Arbeitskopie ist noch kein Release.
-`README.txt` nennt noch Version 1.9.6 und muss erst im späteren Release-/Packaging-Schritt bereinigt werden.
+Danach:
+- Verteilung prüfen;
+- Fehlklassifikationen korrigieren;
+- erst dann vollständigen Master bewerten;
+- anschließend V1.12-Zielbaum als DELTA neu generieren;
+- erst danach Plugin-/WordPress-Sync.
