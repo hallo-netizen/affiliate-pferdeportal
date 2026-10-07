@@ -1242,3 +1242,25 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 
 **Status:** REPEATED / CURRENT_CORRECTION_REQUIRED.
 
+### AFF-ERR-054 – Nachholung 07.10.2026: Source-/Current-Bindung hergestellt, Basis-Gate bleibt offen
+
+Der 6.72.199-Arbeitsstand wurde nach dem Frischecheck technisch nachgezogen:
+
+- `CURRENT_SOURCE_SHA256.txt` für den exakten aktuellen 28-Dateien-Pluginbaum regeneriert;
+- Manifest-SHA-256: `b39aa305d31aa4391e6c258e339504a9b4eb890c71c37299ba46c962ca90f550`;
+- `CURRENT_RELEASE.json` auf Generation 240 / Active Candidate 6.72.199 / `release_allowed=false` aktualisiert;
+- `authorized_next_action` wieder guard-konform auf `RUN_BOUND_RELEASE_GATES` gesetzt;
+- die drei noch **nicht ausgeführten** 6.72.199-Basis-Worktests liegen im erlaubten Evidence-Worktest-Pfad;
+- der unerlaubte temporäre Kommentar in `.github/workflows/tmp-affiliate-live-schabracken-readonly.yml` wurde zurückgenommen; gegenüber dem letzten gebundenen 6.72.198-Stand bleibt dort kein Delta.
+
+**Noch offen:** Release-Guard tatsächlich ausführen; anschließend die drei 6.72.199-Basis-Worktests in WordPress/MariaDB. Bis dahin kein PASS, kein ZIP, keine Live-Installation.
+
+**Status:** OPEN / SOURCE_MANIFEST_AND_CURRENT_SYNCED / GUARD_AND_BASIS_TESTS_OPEN.
+
+
+### AFF-ERR-029 – Nachholung 07.10.2026
+
+Current Generation 240 verwendet wieder den zulässigen Zustand `RUN_BOUND_RELEASE_GATES`. Die konkrete Fachaktion steht ausschließlich in `bound_user_scope_action`.
+
+**Status:** CLOSED / NACHGEHOLT.
+
