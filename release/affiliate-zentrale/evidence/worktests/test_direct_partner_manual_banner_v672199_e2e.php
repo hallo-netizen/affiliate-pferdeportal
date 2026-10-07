@@ -348,7 +348,9 @@ if (count($targets_of($broken_row)) !== 0
 $ok('check24_broken_image_fail_closed_without_target');
 
 // Runtime darf nur die bereits gespeicherte Zielkarte lesen.
-$portal_key = sanitize_key((string)(new ReflectionMethod($o, 'output_local_portal_key'))->invoke($o));
+$portal_key_m = new ReflectionMethod($o, 'output_local_portal_key');
+$portal_key_m->setAccessible(true);
+$portal_key = sanitize_key((string)$portal_key_m->invoke($o));
 $registry_m = new ReflectionMethod($o, 'output_portal_registry');
 $registry_m->setAccessible(true);
 $portal = null;
