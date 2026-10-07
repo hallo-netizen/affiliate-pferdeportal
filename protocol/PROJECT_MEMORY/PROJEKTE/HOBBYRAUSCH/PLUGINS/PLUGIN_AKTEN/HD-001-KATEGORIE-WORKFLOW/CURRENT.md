@@ -122,5 +122,10 @@ Erst nach abgeschlossenem Master/Delta wird V1.12.0 technisch gegen das neue Zie
 
 V1.12.0 ist lokale technische Baseline, kein aktueller Hobby-Depot-Deploymentkandidat.
 
+Isolierte Artefaktpflicht:
+`PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
+
+Der exakte V1.12-ZIP-Hash ist verifiziert, aber `CURRENT.zip` wurde in diesem Abschlusslauf NICHT ersetzt, weil der aktive GitHub-Toolpfad keinen direkten Binärtransfer aus dem lokalen Container bereitstellt. Kein Ersatzartefakt erfinden.
+
 Kein Live-PASS behaupten.
 Kein altes V1.12-Profil installieren, bevor das V2-Zielbaum-Delta freigegeben und erneut vollständig getestet ist.
