@@ -1,7 +1,7 @@
 # HD-001 – ISOLIERTES PLUGINARTEFAKT – MANIFEST
 
 STAND: 2026-10-07
-STATUS: V1.12.3 RESUMABLE DEPTH-KANDIDAT LOKAL VERIFIZIERT / GITHUB-CURRENT.zip BINARY_SYNC_BLOCKED
+STATUS: V1.12.4 ZERO-COST-RECALC LOKAL VERIFIZIERT / GITHUB-CURRENT.zip BINARY_SYNC_BLOCKED
 
 PLUGIN-ID:
 `HD-001-KATEGORIE-WORKFLOW`
@@ -10,19 +10,19 @@ NAME:
 `Affiliate-Portal Kategorie-Workflow`
 
 NEUESTE LOKAL VERIFIZIERTE TECHNISCHE BASIS:
-`1.12.3` (resumable read-only V2-Tiefenprüfung; V1.12.0 bleibt Zielbaum-Baseline)
+`1.12.4` (zero-cost V2-Relevanz-Neuauswertung; V1.12.0 bleibt Zielbaum-Baseline)
 
 GEPRÜFTES ARTEFAKT:
 `HD001_V1.12.3_V2_DATAFORSEO_RESUMABLE_TIMEOUTSAFE_HARDPASS.zip`
 
 SHA-256:
-`bcb33caa3f481661654460db21cc1d407eb020124e85ab5941094f89ce2827a3`
+`5ceffaa03eda90b45a235cf844ff2ddae3bef553f2a61f4ec32ea38eefcf75f6`
 
 PRÜFBERICHT:
 `HD001_V1.12.3_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 PRÜFBERICHT SHA-256:
-`4b04319e0efc78d128af0d23141eff83751ed38256b9acdc81a8b9ef4977165e`
+`6b8938a5a5b46b1876a564f69f26f60048963e1fc1e5edbd879b7531bc643bb3`
 
 PRÜFSTATUS:
 - V1.12.1 realer Initial-Batch ausgeführt: 1 Overview / 106 von 263 returned / 0 Strukturwrites;
@@ -50,3 +50,21 @@ AUTORITATIVE PLUGIN-WAHRHEIT:
 `../../PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
 
 Dieses Manifest ist nur Artefaktstatus, keine zweite Current-Wahrheit.
+
+
+## V1.12.4 KISS-Korrektur
+
+Der reale V1.12.3-Lauf ist bezahlt und abgeschlossen.
+V1.12.4 macht keine neue Provider-Recherche.
+
+Es korrigiert ausschließlich die Zählung:
+DataForSEO-Depth-Rohzeilen dürfen keine neuen Artikelintents erzeugen.
+Sie dürfen nur bereits fachlich definierte PENDING-Intents bestätigen.
+
+Fresh-Unpack:
+- PHP 66/66 PASS;
+- Legacy 270/270 PASS;
+- realer Result-Replay PASS;
+- 0 neue Calls;
+- 0 neue Kosten;
+- 0 Strukturwrites.
