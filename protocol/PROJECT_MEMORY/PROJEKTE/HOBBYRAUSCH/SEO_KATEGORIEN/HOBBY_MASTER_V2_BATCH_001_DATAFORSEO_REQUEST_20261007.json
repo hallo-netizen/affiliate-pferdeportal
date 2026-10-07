@@ -1,10 +1,10 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST",
-  "version": "1.2",
+  "version": "1.3",
   "effective_date": "2026-10-07",
-  "status": "INITIAL_REAL_RUN_COMPLETE__DEPTH_FOLLOWUP_BOUND",
+  "status": "REAL_PROVIDER_EVIDENCE_COMPLETE__NO_AUTOMATIC_DEPTH_FOLLOWUP",
   "source_preflight": "HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json",
-  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.2",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
   "market": {
     "location_name": "Germany",
     "language_code": "de"
@@ -23,26 +23,28 @@
     "credentials_source": "WordPress wp-config constants or WordPress options; credentials are not stored in this contract."
   },
   "hard_rules": [
-    "Do not infer search volume, intent or core_keyword when no real DataForSEO response exists.",
-    "DataForSEO validates SEO evidence only. It may not decide world, parent, leaf family, portal role, CORE promotion or deletion.",
-    "Leaf capacity counts only deduplicated, genuinely distinct article intents after ownership review.",
-    "A lowest-level category must be evaluated separately; total hobby-wide article count is insufficient."
+    "Subject-matter logic defines genuinely distinct article intents and content capacity.",
+    "DataForSEO validates SEO evidence and may collapse duplicate subject-defined intents via exact core_keyword/synonym evidence.",
+    "Missing exact DataForSEO longtail rows do not erase fachlich distinct article intents; only their SEO metrics remain pending.",
+    "Raw keyword_ideas/keyword_suggestions rows never create additional article intents.",
+    "DataForSEO may not decide world, parent, leaf family, portal role, CORE promotion or deletion.",
+    "A lowest-level category is evaluated separately; hobby-wide totals are insufficient."
   ],
   "request_plan": {
     "bundled_batch": "batch_001",
     "candidates": 16,
     "proposed_lowest_categories": 34,
     "proposed_article_intents": 263,
-    "provider_calls": [
+    "normal_path_provider_calls": [
       {
         "method": "keyword_overview",
         "keyword_count": 263,
         "batches": 1
       }
     ],
-    "keyword_ideas_calls": 0,
-    "keyword_suggestions_calls": 0,
-    "rationale": "Subject logic already proposes leaf/article candidates. DataForSEO validates and deduplicates SEO intent evidence only."
+    "automatic_keyword_ideas_calls": 0,
+    "automatic_keyword_suggestions_calls": 0,
+    "rationale": "KISS: subject logic defines capacity; one overview cross-check enriches/deduplicates. Automatic depth research is not part of the normal path."
   },
   "existing_reusable_evidence": {
     "hobby:buchbinden": {
@@ -70,24 +72,24 @@
     "source_last_updated"
   ],
   "postprocess": [
-    "Collapse synonyms/near-duplicates by core_keyword + semantic equivalence.",
-    "Do not count wording variants twice.",
-    "Map validated intents back only to the subject-proposed leaf candidates.",
-    "Run cross-pillar ownership check before counting an intent toward CORE leaf capacity.",
-    "Count each lowest-level category separately.",
-    "Apply concept-exact thresholds: under 4 combine/no leaf; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split.",
-    "For thin valid hobbies, test aggregation candidates without merging canonical hobby identities."
+    "Count subject-defined genuinely distinct article intents per lowest-level category.",
+    "Collapse exact synonyms/duplicates when real core_keyword/synonym evidence proves equivalence.",
+    "Do not remove a fachlich distinct article intent merely because DataForSEO omitted an exact longtail row.",
+    "Do not create article intents from provider raw rows.",
+    "Apply cross-pillar ownership checks.",
+    "Apply concept thresholds: under 4 combine/no leaf; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split.",
+    "For thin valid hobbies, test aggregation without merging canonical hobby identities."
   ],
-  "blocker": "Initial real overview is complete. Exactly 38 additional read-only DataForSEO calls are pending for the 37 unresolved predefined depth clusters.",
+  "blocker": null,
   "execution_path": {
     "plugin": "HD-001 / Affiliate-Portal Kategorie-Workflow",
-    "plugin_version": "1.12.1",
-    "artifact": "HD001_V1.12.1_HOBBY_MASTER_V2_READONLY_ASSESSMENT_HARDPASS.zip",
-    "artifact_sha256": "959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d",
+    "plugin_version": "1.12.5",
+    "artifact": "HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip",
+    "artifact_sha256": "68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9",
     "runtime": "WordPress admin → Kategorien → V2-Hobbybewertung",
     "dataforseo_client": "APKW_DataForSEO",
-    "credentials": "existing WordPress/wp-config or WordPress option credentials",
     "mode": "READ_ONLY_V2_ASSESSMENT",
+    "new_provider_calls_on_existing_result": 0,
     "structure_writes": false,
     "wordpress_sync": false
   },
@@ -105,5 +107,7 @@
     "version": "1.12.2",
     "artifact": "HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip",
     "sha256": "233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f"
-  }
+  },
+  "followup_plan_status": "SUPERSEDED_AS_NORMAL_PATH",
+  "followup_reason": "Historical depth data is retained as evidence history, but automatic keyword-ideas depth research is not needed for content-capacity counting under rules 1.4."
 }
