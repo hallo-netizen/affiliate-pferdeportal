@@ -338,6 +338,8 @@ final class Pferdeportal_Affiliate_Router {
         add_action('ppar_v672195_banner_reconcile', array($this, 'run_v672195_banner_reconcile'));
         add_action('admin_init', array($this, 'maybe_upgrade_adcell_banner_import_basis_v672199'), 36);
         add_action('ppar_v672199_adcell_banner_basis_resync', array($this, 'run_v672199_adcell_banner_basis_resync'));
+        add_action('admin_init', array($this, 'maybe_rebuild_banner_kiss_v672201'), 37);
+        add_action('ppar_v672201_banner_kiss_reconcile', array($this, 'run_v672201_banner_kiss_reconcile'));
         add_action(self::ASSET_VERIFY_HOOK, array($this, 'run_creative_asset_verification_batch'));
         add_action(self::FULL_POOL_WORKER_HOOK, array($this, 'run_full_pool_automation_worker'));
         add_action('admin_init', array($this, 'ensure_banner_library_migration_v672185'), 33);
