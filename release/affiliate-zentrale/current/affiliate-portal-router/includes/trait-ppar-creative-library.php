@@ -1455,7 +1455,19 @@ trait PPAR_Creative_Library_Trait {
                 if (method_exists($this, 'creative_library_deactivate_automatic_output_campaigns')) {
                     $this->creative_library_deactivate_automatic_output_campaigns((string)($row['identity_hash'] ?? ''));
                 }
-                if (method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
+                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
+                $asset_verified = in_array($dimension_state, array('verified','mismatch'), true)
+                    && absint($row['width'] ?? 0) > 0
+                    && absint($row['height'] ?? 0) > 0;
+                if (!$asset_verified) {
+                    // Familienwahl ist gespeichert, aber fachliche Zielkarte erst
+                    // nach technischer Bildprüfung. Der Verifier übernimmt danach
+                    // Zuordnung und Planung aus derselben gespeicherten Familie.
+                    if ($dimension_state !== 'failed'
+                        && method_exists($this, 'creative_library_schedule_asset_verification')) {
+                        $this->creative_library_schedule_asset_verification(1);
+                    }
+                } elseif (method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
                     $mapped = $this->output_assign_banner_targets_from_destination_once($row);
                     $mapped_targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
                     $row['topic_targets'] = wp_json_encode($mapped_targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
