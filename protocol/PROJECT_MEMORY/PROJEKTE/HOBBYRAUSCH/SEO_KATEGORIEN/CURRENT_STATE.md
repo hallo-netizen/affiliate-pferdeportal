@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: BATCH 001 REALER V1.12.1 OVERVIEW PASS / 106 VON 263 EXAKTEN SEEDS BELEGT / V1.12.2 TIEFENPRÜFUNG LOKAL HARD PASS / 38 ZUSÄTZLICHE DATAFORSEO-CALLS OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: BATCH 001 REALER V1.12.1 OVERVIEW PASS / V1.12.2 DEPTH TIMEOUT LIVE ERKANNT / V1.12.3 RESUMABLE DEPTH LOKAL HARD PASS / 38-CALL-LAUF NOCH OFFEN / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -173,7 +173,7 @@ Treibholz + Treibholz sammeln = eine Identität.
 Pro primärem Intent genau ein SEO-Owner.
 Andere Säulen dürfen Relation/Filter/Verweis sein, keine konkurrierende Zielseite.
 
-## Technischer V1.12/V1.12.1/V1.12.2-Stand
+## Technischer V1.12/V1.12.1/V1.12.2/V1.12.3-Stand
 
 V1.12.0 bleibt die technische Zielbaum-Baseline.
 
@@ -196,38 +196,47 @@ Realer Befund:
 Maschinenlesbarer Follow-up-Plan:
 `HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
 
-Dafür wurde HD-001 V1.12.2 gebaut:
-- gespeicherten V1.12.1-Lauf weiterverwenden, kein erneuter Gesamt-Overview;
-- exakt 37 offene bereits definierte Leaf-/Themencluster;
-- 37 Keyword-Ideas-Aufrufe;
-- danach 1 gebündelter Keyword-Overview;
-- exakt 38 zusätzliche DataForSEO-Aufrufe;
-- höchstens 15 distinct Intent/Core-Keyword-Gruppen pro Cluster nötig;
-- erneute Dedupe + Batch-Ownership-Prüfung;
-- 0 Strukturwrites.
+V1.12.2 hat den fachlich richtigen 38-Call-Depth-Plan umgesetzt, aber alle 38 Calls in einem einzigen WordPress-Request ausgeführt. Das führte live zum Timeout.
 
-Lokales V1.12.2-Artefakt:
-`HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip`
+Dafür wurde HD-001 V1.12.3 gebaut:
+- derselbe gespeicherte V1.12.1-Ausgangsstand;
+- dieselben 37 fachlich definierten Cluster;
+- dieselben 37 Keyword-Ideas + 1 finaler Overview = 38 zusätzliche Calls;
+- aber automatisch in kleinen Requests;
+- maximal 2 Keyword-Ideas-Aufrufe pro HTTP-Request;
+- finaler Overview immer in eigenem Request;
+- Fortschritt nach JEDEM erfolgreichen kostenpflichtigen Call gespeichert;
+- Seiten-/PHP-Timeout verliert bereits bezahlte Evidence nicht;
+- Wiederaufruf setzt automatisch am gespeicherten Cursor fort;
+- keine erneute Kostenbestätigung beim Fortsetzen;
+- weiterhin 0 Strukturwrites.
+
+Lokales V1.12.3-Artefakt:
+`HD001_V1.12.3_V2_DATAFORSEO_RESUMABLE_TIMEOUTSAFE_HARDPASS.zip`
 
 SHA-256:
-`233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f`
+`bcb33caa3f481661654460db21cc1d407eb020124e85ab5941094f89ce2827a3`
 
 Prüfbericht:
-`HD001_V1.12.2_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.3_FINAL_LOCAL_POSNEG_REPORT.txt`
+
+Prüfbericht SHA-256:
+`4b04319e0efc78d128af0d23141eff83751ed38256b9acdc81a8b9ef4977165e`
 
 Fresh-Unpack:
-- PHP 62/62 PASS;
+- PHP 64/64 PASS;
 - Legacy 270/270 PASS;
 - V1.12 POS/NEG PASS;
 - realer 908/844/841-Test PASS;
-- V1.12.1 Assessment Regression PASS;
-- V1.12.2 Real-Result-Follow-up-Plan = exakt 38 Calls PASS;
-- DataForSEO-Failure fail-closed PASS;
+- V1.12.1 + V1.12.2 Regression PASS;
+- kompletter 38-Call-Depth-Lauf in 20 begrenzten HTTP-Schritten PASS;
+- simulierter Timeout nach einem bezahlten Call: Checkpoint bleibt erhalten PASS;
+- Resume startet am gespeicherten Cursor PASS;
 - 0 Strukturwrites PASS.
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_DEPTH_DATAFORSEO_RUN_PENDING`
+`HD001_V2_BATCH001_RESUMABLE_DEPTH_RUN_PENDING`
 
 Der erste reale DataForSEO-Lauf ist abgeschlossen.
 Er hat 106 von 263 exakten Seeds zurückgeliefert und damit die vorgesehene zweite Evidenzstufe ausgelöst.
@@ -236,14 +245,17 @@ Offen ist ausschließlich die read-only Tiefenprüfung der 37 noch offenen, fach
 
 ## EXAKT EINE NEXT ACTION
 
-HD-001 V1.12.2 in Hobby Depot installieren und unter `Kategorien → V2-Hobbybewertung` die gespeicherte Batch-001-Tiefenprüfung ausführen.
+HD-001 V1.12.3 in Hobby Depot installieren und die Tiefenprüfung EINMAL starten.
 
-Das Plugin muss vorher exakt anzeigen:
+Danach arbeitet sie automatisch in kleinen gespeicherten Paketen weiter.
+Bei Unterbrechung genügt Seite erneut öffnen; der gespeicherte Stand wird fortgesetzt.
+
+Gesamtumfang bleibt unverändert:
 - 37 Keyword-Ideas-Aufrufe;
-- 1 abschließenden Keyword-Overview;
-- insgesamt 38 zusätzliche DataForSEO-Aufrufe.
+- 1 abschließender Keyword-Overview;
+- 38 zusätzliche DataForSEO-Aufrufe.
 
-Danach das neue Ergebnis-JSON herunterladen und erst dieses Ergebnis fachlich bewerten.
+Danach das neue Ergebnis-JSON herunterladen und fachlich bewerten.
 
 Noch kein Zielbaum-Delta.
 Noch kein Kategorien-Sync.
