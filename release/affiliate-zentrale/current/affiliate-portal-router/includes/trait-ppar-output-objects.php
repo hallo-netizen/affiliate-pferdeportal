@@ -1185,6 +1185,9 @@ trait PPAR_Output_Objects_Trait {
             'reason'=>'Echter Bannername/-text passt eindeutig zum tiefsten belastbaren Portalziel.',
         );
 
+        $best=null;
+        $best_path=array();
+
         foreach($tiers as $tier){
             $classification=$this->output_banner_evidence_target_classification(
                 (string)($tier['evidence']??''),
@@ -1194,9 +1197,39 @@ trait PPAR_Output_Objects_Trait {
                 (string)($tier['level']??'exact'),
                 (string)($tier['reason']??'')
             );
-            if(is_array($classification)){return $classification;}
+            if(!is_array($classification)){continue;}
+
+            // Eine mehrdeutige staerkere Evidenz bleibt fail-closed.
+            // Eine spaetere, schwaechere Mehrdeutigkeit verwirft dagegen keinen
+            // bereits belastbaren Treffer.
+            if(sanitize_key((string)($classification['status']??''))!=='ready'
+                || !is_array($classification['target']??null)){
+                if($best===null){return $classification;}
+                continue;
+            }
+
+            $target=$classification['target'];
+            $parts=preg_split('/\\s+>\\s+/',html_entity_decode((string)($target['label']??''),ENT_QUOTES,'UTF-8'));
+            $path=array_values(array_filter(array_map(array($this,'output_text'),(array)$parts),'strlen'));
+
+            if($best===null){
+                $best=$classification;
+                $best_path=$path;
+                continue;
+            }
+
+            // Schwaechere Evidenz darf den staerkeren Treffer nur innerhalb
+            // desselben Strangs praezisieren. Beispiel:
+            // /ausruestung/ -> Schabracken -> Pflege Schabracken.
+            if($best_path && $path
+                && count($path)>count($best_path)
+                && array_slice($path,0,count($best_path))===$best_path){
+                $best=$classification;
+                $best_path=$path;
+            }
         }
-        return null;
+
+        return $best;
     }
 
 
