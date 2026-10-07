@@ -41,7 +41,13 @@
         "Nach dem Rechner: Rate, Laufzeit, effektiven Zins und Gesamtbetrag gemeinsam einordnen.",
         "Tabelle oder Liste nur wenn sie dem konkreten Thema hilft.",
         "Keine erfundenen Zinsen, Kreditkosten oder Sparversprechen.",
-        "Abschluss kurz und themenspezifisch."
+        "Abschluss kurz und themenspezifisch.",
+        "Zwischenüberschriften müssen zum konkreten Thema passen und innerhalb eines Mehrartikel-Batches individuell formuliert werden; keine wiederkehrende H2-Serienschablone.",
+        "Nach dem Rechner folgt bevorzugt eine kurze individuelle Zwischenüberschrift zur Einordnung der Finanzierung.",
+        "Danach die wichtigsten Prüfpunkte möglichst kompakt zusammenfassen; eine Aufzählung ist bevorzugt, wenn sie dem konkreten Thema wirklich hilft.",
+        "Die Zusammenfassung nach dem Rechner soll typischerweise Rate, Laufzeit, effektiven Zins, Gesamtbetrag sowie themenspezifische Zusatzpunkte abdecken, ohne erfundene Zahlen.",
+        "Interne Links nur semantisch passend einsetzen; in der Regel 1 bis 2 Links pro Artikel.",
+        "Der Linktext eines internen Links entspricht dem generischen Begriff der verlinkten Zielkategorie selbst; keine künstlichen SEO-Anker und keine allgemeinen Linktexte wie hier oder mehr erfahren."
       ]
     }
   },
@@ -50,7 +56,9 @@
     "Einstieg, H2-Formulierungen, Reihenfolge der Argumente, Rechner-Überleitung und Schluss müssen zwischen Artikeln variieren.",
     "Beispiele, Prüfpunkte und Schwerpunktsetzung werden aus der jeweiligen Kategorie abgeleitet.",
     "Keine starre Satz- oder Absatzschablone über die Serie.",
-    "Bei mehreren Artikeln wird vor Freigabe gegen die bereits erzeugten Spezialartikel auf sprachliche und strukturelle Ähnlichkeit geprüft."
+    "Bei mehreren Artikeln wird vor Freigabe gegen die bereits erzeugten Spezialartikel auf sprachliche und strukturelle Ähnlichkeit geprüft.",
+    "Jeder Artikel eines Mehrartikel-Batches erhält eine eigenständige Formulierung sowie individuelle Haupt- und Zwischenüberschriften.",
+    "Für den aktuellen 16-Artikel-Finanzierungsbatch müssen alle 16 Texte sprachlich und strukturell voneinander unterscheidbar sein."
   ],
   "affiliate_binding": {
     "source": "Affiliate-Zentrale -> Tarifrechner",
@@ -77,5 +85,18 @@
     "profile": "KREDIT_BANNER",
     "status": "LATER_NOT_YET_DEFINED",
     "purpose": "Allgemeine Kredit-Beiträge mit Bannern; eigener Aufbau und ausdrücklich nicht mit den Tarifrechner-Profilen vermischen."
+  },
+  "current_batch_binding": {
+    "batch_name": "FINANZIERUNG_KOSTEN_16_CHAT_SHORT_PATH",
+    "item_count": 16,
+    "profile": "TARIFRECHNER_KOSTEN",
+    "rules": [
+      "16 von 16 Artikeln individuell formulieren.",
+      "16 von 16 Artikeln mit individuellen Haupt- und Zwischenüberschriften versehen.",
+      "Aufzählungen nur einsetzen, wenn sie inhaltlich sinnvoll sind; bevorzugte Position ist die kompakte Zusammenfassung nach dem Rechner.",
+      "Interne Links semantisch passend setzen; Linktext ist exakt der generische Begriff der Zielkategorie."
+    ],
+    "production_authority": false,
+    "note": "Arbeitsbindung des aktuellen Chat-Kurzwegs; keine Current-Autorität."
   }
 }
