@@ -1194,3 +1194,51 @@ Runtime liest nur noch die gespeicherte Zielkarte. Ohne gespeicherte Zielkarte k
 **Installer:** `AFFILIATE_ZENTRALE_6.72.195.zip`, SHA-256 `8594193622dd6e4af55128da3279e1c1623ae1188f43b1c4fa6ca4008c608ccf`, 809869 Byte.
 
 **Status:** SOURCE_AND_EXACT_ZIP_PASS / LIVE_INSTALL_AND_READBACK_OPEN. AFF-ERR-050 bleibt offen, bis Schabracken sowie beide Tarifcheck-Gruppen real live bestätigt sind.
+
+## AFF-ERR-054 — 6.72.195–6.72.198 reparierten nachgelagerte Bannerlogik, obwohl die ADCELL-Importbasis verlustbehaftet blieb
+
+**Datum:** 07.10.2026.
+
+**Realer Anlass / LIVE:** Nach der lokal vollständig grünen 6.72.198 wurde die Version real installiert; die WordPress-Pluginliste bestätigte `Affiliate-Zentrale (Portal-kompatibel) Version 6.72.198`. Der Nutzer meldete danach auf Schabracken weiterhin **kein Banner**. Damit ist der lokale 6.72.198-Fixture-PASS kein Live-PASS.
+
+**Belegter Basisfehler im Sourcepfad vor 6.72.199:** `automation_adcell_banner_rows()` übernahm nur ausgewählte ADCELL-Felder und erzeugte bei fehlendem Providertitel selbst einen semantisch wirkenden Titel nach dem Muster `<Partner> Banner <ID> – <Kategorie>`. Beispiel aus dem untersuchten Pfad: `procavallo Banner 393923 – Ausrüstung`. Verschachtelte oder unbekannte Originalfelder des Provider-Bannerobjekts wurden nicht vollständig bis in die Creative Library konserviert. Damit arbeitete jede nachgelagerte Klassifikation auf einer potenziell beschnittenen und teilweise synthetischen Datenbasis.
+
+**Warum die vorherigen Versuche nicht als Basislösung gelten:**
+- **6.72.195:** globaler deterministischer Reconcile beseitigte stale Auto-Kampagnen und baute aus vorhandenen Zielkarten neu auf; er reparierte nicht die Qualität/Vollständigkeit der importierten Providerbasis.
+- **6.72.196:** Tarifcheck wurde im Dropdown hart gebunden; das betrifft UI/Erreichbarkeit, nicht den ADCELL-Banner-Rohdatenvertrag.
+- **6.72.197:** manuelle FIXED-Zielzuordnung wurde robust gemacht. Der Nutzer lehnte dies zu Recht als Systemlösung für automatische Banner ab; es ist nur ein manueller Ausnahmeweg.
+- **6.72.198:** allgemeine Klassifikation wurde verbessert und Run `37501160643` bestand WordPress/MariaDB, Fresh-Unpack, Tarifcheck-Dropdown sowie positive/negative Banner-Fixtures. Diese Tests erzeugten jedoch kontrollierte Testdaten und bewiesen nicht, dass der reale ADCELL-Import alle tatsächlich verfügbaren Providerinformationen verlustfrei in dieselbe Entscheidungsbasis einspeist.
+
+**Weitere Fehlversuche / falsche Diagnoserichtungen in diesem Chat:**
+- Die Existenz einer historischen Root-Kopie der Affiliate-Zentrale wurde zunächst als mögliche Live-Ursache überbewertet. Die reale WordPress-Pluginliste belegte anschließend Version 6.72.198 aktiv; diese Hypothese ist als Live-Ursache nicht belegt.
+- PHP-OPcache/IONOS/Server wurde ohne belastbare Evidence als mögliche Erklärung genannt. Dieser Verdacht ist **nicht belegt** und darf nicht als Ursache weitergetragen werden.
+- Der Nutzer wurde unnötig zum WordPress-Plugin-Datei-Editor geschickt, obwohl die betreffende Source selbst geprüft werden konnte.
+- „Tarifrechner“/„Tarifcheck im Dropdown“ wurde zeitweise falsch als WordPress-Menüpunkt interpretiert. Diese Interpretation war falsch.
+- Ein Read-only-Workflow wurde durch eine Änderung unter `.github/workflows/` zu triggern versucht. Die Änderung war für den gebundenen Affiliate-Arbeitsweg ein unzulässiger Nebenschritt; sie wurde am 07.10.2026 wieder zurückgenommen. Die damaligen Läufe lieferten keinen verwendbaren Live-Nachweis.
+
+**Gebundene Zielkorrektur:** `protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md`. Erst vollständige, integritätsgebundene Provider-Rohdatenbasis beweisen; danach Zuordnungslogik. Ziel-URL bleibt belastbare Evidenz, aber nicht exklusiv. Runtime bleibt gespeicherte-Zielkarte-only.
+
+**Aktueller Source-Delta 6.72.199 — NO PASS:** Im kanonischen Tree ist bereits ein 6.72.199-Arbeitsstand committed:
+- vollständiges ADCELL-Bannerobjekt als kanonisches JSON + SHA-256 mitführen/speichern;
+- `promotionCategoryId` über den belegten `getPromotionCategories(programId)`-Weg zum Kategorienamen auflösen;
+- nur echte Provider-Titelfelder verwenden; fehlender Titel bleibt als `provider_missing` gekennzeichnet;
+- Altbestand erst durch frischen echten ADCELL-Import ersetzen und erst danach reconciliieren;
+- neue Basis-/Upgrade-Tests liegen unter `release/affiliate-zentrale/tests/`.
+
+**HARD STATUS:** Diese 6.72.199-Testdateien sind committed, aber am aktuellen Head existiert **kein ausgeführter Check-Run/PASS-Nachweis**. `CURRENT_SOURCE_SHA256.txt` und `CURRENT_RELEASE.json` waren beim Frischecheck noch auf 6.72.198 gebunden. Deshalb: **6.72.199 = WORKING / NICHT ABGENOMMEN / KEIN INSTALLER / NICHT LIVE INSTALLIEREN.**
+
+**Nicht wiederholen:** Kein weiterer Ranking-, Target-, Reconcile-, UI-, Server- oder Einzelbanner-Fix, bevor die Importbasis sourcegebunden und im echten WordPress/MariaDB-Basis-E2E positiv und negativ bestanden ist.
+
+**Status:** OPEN / FIRST_BLOCKER_SOURCE_BINDING_AND_BASIS_GATE.
+
+
+### AFF-ERR-029 – Wiederholung 07.10.2026: freie NEXT-ACTION-Konstante in Current Generation 238 erneut verwendet
+
+**Befund:** `control/release-governance/CURRENT_RELEASE.json` Generation 238 enthält als `execution_state.authorized_next_action` den freien Wert `MANUAL_INSTALL_6_72_198_THEN_OPEN_BACKEND_AND_READBACK_MULTIPLE_REAL_BANNERS`.
+
+**Belegter Governance-Vertrag:** `release_guard.py` akzeptiert dort ausschließlich `COMMIT_EXACT_V6638_21_FILE_SOURCE_TO_CANONICAL_ROOT`, `RUN_BOUND_RELEASE_GATES` oder `FINALIZE_RELEASE`. Der Fehler war bereits am 06.10. unter AFF-ERR-029 dokumentiert und wurde trotzdem wieder eingeführt.
+
+**Korrekturregel:** Current muss für den offenen Arbeitsblock wieder `RUN_BOUND_RELEASE_GATES` verwenden. Die konkrete Fachaktion steht ausschließlich in `bound_user_scope_action`.
+
+**Status:** REPEATED / CURRENT_CORRECTION_REQUIRED.
+
