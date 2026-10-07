@@ -419,6 +419,40 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
+     * KISS-Bannerpfad: ein Banner wird auf das tiefste Ziel gemappt.
+     * Fuer die Ausspielung wird genau dieses Ziel plus seine echten Eltern
+     * desselben Zieltyps gespeichert. Keine Frontend-Baumabfrage.
+     */
+    private function output_banner_target_path_keys($target,$targets,$portal_key='') {
+        if(!is_array($target) || !is_array($targets)){return array();}
+        $type=sanitize_key((string)($target['type']??''));
+        $label=html_entity_decode((string)($target['label']??''),ENT_QUOTES,'UTF-8');
+        $parts=array_values(array_filter(array_map(array($this,'output_text'),preg_split('/\s+>\s+/',$label)),'strlen'));
+        $ranked=array();
+
+        foreach($targets as $candidate){
+            if(!is_array($candidate) || sanitize_key((string)($candidate['type']??''))!==$type){continue;}
+            $key=$this->output_campaign_target_key($candidate);
+            if($key===''){continue;}
+            if($portal_key!=='' && method_exists($this,'control_target_gate')
+                && is_wp_error($this->control_target_gate($portal_key,(string)($candidate['key']??'')))){continue;}
+
+            $candidate_label=html_entity_decode((string)($candidate['label']??''),ENT_QUOTES,'UTF-8');
+            $candidate_parts=array_values(array_filter(array_map(array($this,'output_text'),preg_split('/\s+>\s+/',$candidate_label)),'strlen'));
+            if(!$parts || !$candidate_parts || count($candidate_parts)>count($parts)){continue;}
+            if(array_slice($parts,0,count($candidate_parts))!==$candidate_parts){continue;}
+            $ranked[]=array('key'=>$key,'depth'=>absint($candidate['depth']??count($candidate_parts)));
+        }
+
+        usort($ranked,static function($a,$b){return (int)$b['depth']<=>(int)$a['depth'];});
+        $out=array();
+        foreach($ranked as $row){$out[(string)$row['key']]=(string)$row['key'];}
+        $direct=$this->output_campaign_target_key($target);
+        if($direct!=='' && !isset($out[$direct])){$out=array($direct=>$direct)+$out;}
+        return array_values($out);
+    }
+
+    /**
      * Resolve a target key only when it maps to exactly one real target.
      * Exact stored keys win. Slug aliases are accepted only when unique across
      * the current real target set, so hierarchical duplicate slugs fail closed.
@@ -978,6 +1012,8 @@ trait PPAR_Output_Objects_Trait {
         if($topic_name===''||$topic_source===''){return null;}
         $topic_norm=$this->output_text($topic_name);
         if($topic_norm===''){return null;}
+        $topic_tokens=array_values(array_filter($this->output_tokens($topic_norm),static function($t){return strlen((string)$t)>=4;}));
+        if(!$topic_tokens){return null;}
 
         $targets=$this->output_portal_targets($portal);
         if(is_wp_error($targets)){return $targets;}
@@ -998,12 +1034,15 @@ trait PPAR_Output_Objects_Trait {
             $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
             $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
             $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
-            if($topic_norm!==$slug_norm&&$topic_norm!==$leaf_norm){continue;}
-            $matches[$target_key]=$target;
+            $target_tokens=array_values(array_unique(array_merge($this->output_tokens($slug_norm),$this->output_tokens($leaf_norm))));
+            if(!$target_tokens || array_diff($topic_tokens,$target_tokens)){continue;}
+            $matches[]=array('target'=>$target,'depth'=>absint($target['depth']??0));
         }
 
-        if(count($matches)!==1){return null;}
-        $target=reset($matches);
+        if(!$matches){return null;}
+        usort($matches,static function($a,$b){return (int)$b['depth']=>(int)$a['depth'];});
+        if(isset($matches[1]) && (int)$matches[0]['depth']===(int)$matches[1]['depth']){return null;}
+        $target=$matches[0]['target'];
         $target['_ppar_destination_match_level']='exact';
         return array(
             'status'=>'ready',
@@ -1017,17 +1056,11 @@ trait PPAR_Output_Objects_Trait {
     }
 
     /**
-     * Allgemeine automatische Banner-Fachzuordnung.
-     * Reihenfolge: explizites Provider-Thema -> konkreter Bannerinhalt.
-     * Ziel-URL wird bewusst erst spaeter als Fallback ausgewertet.
-     * Nur ein eindeutiger Treffer wird akzeptiert.
+     * Letzte Evidenzstufe fuer Banner: Name/Beschreibung/Tags.
+     * Ziel-URL und Provider-Kategorie werden davor separat ausgewertet.
      */
     private function output_banner_content_classification($row,$portal,$targets=null) {
         if(!is_array($row)){return null;}
-
-        $provider_exact=$this->output_banner_provider_topic_classification($row,$portal);
-        if(is_wp_error($provider_exact)){return $provider_exact;}
-        if(is_array($provider_exact)){return $provider_exact;}
 
         if($targets===null){
             $targets=$this->output_portal_targets($portal);
@@ -1136,6 +1169,69 @@ trait PPAR_Output_Objects_Trait {
             'alternatives'=>array(),
             'source'=>'banner_content_exact',
             '_ppar_destination_level'=>'content_exact',
+        );
+    }
+
+    private function output_banner_destination_url_classification($row,$portal,$targets) {
+        if(!is_array($row) || !is_array($targets)){return null;}
+        $source=$this->output_banner_destination_source($row);
+        $destination=esc_url_raw((string)($row['destination_url']??''));
+        $semantic=$this->output_destination_semantic_text($row);
+        if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)
+            || $destination==='' || $semantic===''){return null;}
+
+        $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
+        $portal_key=sanitize_key((string)($portal['key']??''));
+        $dest_tokens=$this->output_tokens($semantic);
+        $ranked=array();
+
+        foreach($targets as $target){
+            if(!is_array($target)){continue;}
+            $type=sanitize_key((string)($target['type']??''));
+            if(!in_array($type,$wanted,true)){continue;}
+            $target_key=sanitize_text_field((string)($target['key']??''));
+            if($target_key===''){continue;}
+            if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
+
+            $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
+            $slug_tokens=$this->output_tokens($slug_norm);
+            $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
+            $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
+            $leaf_tokens=$this->output_tokens($leaf_norm);
+            $matched=array();
+            foreach(array_values(array_unique(array_merge($slug_tokens,$leaf_tokens))) as $tt){
+                if(strlen($tt)<4){continue;}
+                foreach($dest_tokens as $dt){
+                    if($dt===$tt || (strlen($dt)>=6 && strlen($tt)>=6 && (strpos($dt,$tt)!==false || strpos($tt,$dt)!==false))){
+                        $matched[$tt]=true; break;
+                    }
+                }
+            }
+            $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
+            $score=$exact ? 1000 + min(200,absint($target['depth']??0)*20) : count($matched)*140 + min(90,absint($target['depth']??0)*10);
+            if($score>0){$ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);}
+        }
+
+        usort($ranked,static function($a,$b){
+            $c=(int)$b['score']<=>(int)$a['score']; if($c!==0)return $c;
+            $c=(int)$b['matches']<=>(int)$a['matches']; if($c!==0)return $c;
+            return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);
+        });
+        if(!$ranked){return null;}
+        $best=$ranked[0]; $second=$ranked[1]??null;
+        $margin=(int)$best['score']-(int)($second['score']??0);
+        $accept=!empty($best['exact']) ? ($second===null || $margin>=100) : ((int)$best['score']>=140 && ($second===null || $margin>=70));
+        if(!$accept){return null;}
+
+        $target=$best['target'];
+        return array(
+            'status'=>'ready',
+            'confidence'=>!empty($best['exact'])?100:80,
+            'reason'=>'Echte Ziel-URL passt eindeutig zum tiefsten belastbaren Portalziel.',
+            'target'=>$target,
+            'alternatives'=>array(),
+            'source'=>'import_destination_url',
+            '_ppar_destination_level'=>!empty($best['exact'])?'exact':'extended',
         );
     }
 
