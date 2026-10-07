@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Affiliate-Zentrale (Portal-kompatibel)
  * Description: Zentrale, allgemeingültige Verwaltung und automatische Zuordnung von Affiliate-Kampagnen für Portal-Slots. Das Designplugin bleibt getrennt.
- * Version: 6.72.200
+ * Version: 6.72.201
  * Author: OpenAI
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -118,7 +118,7 @@ final class Pferdeportal_Affiliate_Router {
     use PPAR_Idealo_Trait;
     use PPAR_Digistore24_Trait;
     use PPAR_Housekeeping_Trait;
-    const VERSION = '6.72.200';
+    const VERSION = '6.72.201';
     const EBAY_RUNTIME_BUILD = '6.63.8-self-driven-canonical-orchestrator-rootfix-20260829';
     const CONTRACT_VERSION = '1.0';
     const PROVIDER_CONTRACT_VERSION = '2.0';
@@ -3703,7 +3703,7 @@ JS;
         // V6.72.82: Auch Inline-Banner in normalen Einzelartikeln duerfen nicht
         // auf der historischen 728x90-Fallbackannahme beruhen. Format/Resolution
         // muessen real belegt sein, damit der Niedrigbannerfilter belastbar bleibt.
-        if ($width <= 0 || $height <= 0 || (sanitize_key((string)$slot_type) === 'post_inline_banner' && $dimension_source === 'fallback')) { return false; }
+        if ($width <= 0 || $height <= 0 || $dimension_source === 'fallback') { return false; }
         $ratio = $width / $height;
         if ($ratio < (float) ($rule['ratio_min'] ?? 0) || $ratio > (float) ($rule['ratio_max'] ?? 999)) { return false; }
         $scale = max(
@@ -4068,9 +4068,9 @@ JS;
         if ($library_banner) {
             if (is_array($automation_rank)) { return $automation_rank; }
             if ($mode === 'fallback') {
-                return array('specificity'=>100,'matches'=>1,'reason'=>'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.');
+                return array('specificity'=>5,'matches'=>0,'reason'=>'Kein spezifischer Treffer: formatgeeigneter allgemeiner Verteilungspool.');
             }
-            return array('specificity'=>5,'matches'=>0,'reason'=>'Gespeicherte Banner-Zielkante passt hier nicht; technisch gueltiger letzter Fallback.');
+            return array('specificity'=>5,'matches'=>0,'reason'=>'Kein spezifischer Treffer: formatgeeigneter Banner-Verteilungspool.');
         }
 
         $destination_rank = $this->banner_destination_semantic_rank($campaign, $context);
