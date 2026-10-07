@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 LOKAL FULL POS/NEG PASS ALS TECHNISCHE BASIS / NICHT LIVE ABGENOMMEN / V2-REGELVERTRAG + BATCH 001 GEBUNDEN / EVIDENZLÜCKEN VOR ZIELBAUM / KEIN DEPLOYMENTAUFTRAG
+STATUS: V1.12.0 LOKAL FULL POS/NEG PASS ALS TECHNISCHE BASIS / NICHT LIVE ABGENOMMEN / V2-REGELN 1.1 PRO LEAF + ZUSAMMENFASSUNG GEBUNDEN / DATAFORSEO-BATCHABGLEICH OFFEN / KEIN DEPLOYMENTAUFTRAG
 
 ## Plugin
 
@@ -104,23 +104,26 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
+`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
 
-Der maschinenlesbare Bewertungsvertrag ist inzwischen gebunden und der kontrollierte Batch 001 wurde ausgeführt.
+Die V2-Fachregeln wurden gegen das vollständige Konzept nachgeschärft:
+- 5–12 distinct Artikelintents müssen pro unterster Kategorie belegt sein;
+- kleine valide Hobbys dürfen fachlich sinnvoll zusammengefasst werden, ihre Identität bleibt getrennt;
+- DataForSEO bleibt reine SEO-/Intent-Evidenz.
 
-Ergebnis:
-- 16 Identitäten geprüft;
-- 0 Zielbaum-Writes freigegeben;
-- 15 Fälle benötigen noch Identitäts-, Scope-, Content-Capacity- oder Ownership-Evidenz;
-- Buchbinden bleibt fachlich HOBBY_HUB, aber die neue vollständige V2-Abnahme ist noch nicht abgeschlossen.
+Batch 001 ist fachlich vorbereitet.
+Ein exakter DataForSEO-Request ist gebunden.
 
-Dadurch existiert weiterhin kein belastbares V2-Zielbaum-Delta.
+Der vorhandene reale Buchbinden-DataForSEO-Befund ergibt aktuell 4 / 5 / 3 / 4 distinct Gruppen in den vier aktiven Leafs.
+Damit bleibt Buchbinden als bestehender Live-/Technikpilot unangetastet, ist aber nach V2 noch kein finaler Hub-PASS.
+
+Für die übrigen Batch-Fälle fehlt der reale DataForSEO-Abgleich.
 
 ## EXAKT EINE NEXT ACTION
 
 Keine Pluginänderung und kein Deployment starten.
 
-Zuerst im Scope `SEO_KATEGORIEN` die fehlende Evidenz für den fest gebundenen Batch 001 erzeugen und denselben Batch erneut durch den V2-Bewertungsvertrag laufen lassen.
+Zuerst im Scope `SEO_KATEGORIEN` den vorbereiteten Batch-001-DataForSEO-Request über den bestehenden authentifizierten Hobby-Depot-Weg ausführen und danach Leaf-Kapazität, Ownership und mögliche Zusammenfassung erneut bewerten.
 
 Erst nach abgeschlossener Masterbewertung und Zielbaum-Delta wird V1.12.0 technisch gegen das neue Zielprofil fortgeschrieben und erneut vollständig POS/NEG getestet.
 
