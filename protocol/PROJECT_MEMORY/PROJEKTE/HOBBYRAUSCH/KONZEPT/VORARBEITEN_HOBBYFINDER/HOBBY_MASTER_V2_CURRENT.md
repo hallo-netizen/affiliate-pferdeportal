@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-07
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 REAL-RESULT-REPLAY LOKAL PASS / EINMALIGER LIVE-READBACK OFFEN / NOCH KEINE GESAMTBEWERTUNG
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / V1.12.6 REALER READBACK PASS / BATCH 001 FACHLICH GESCHLOSSEN / 16 VON 841 BEWERTET / BATCH 002 VORBEREITUNG NÄCHSTER SCHRITT
 
 ## Datenartefakt
 
@@ -78,24 +78,31 @@ Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, 
 - DataForSEO-Request: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
 - realer Initialbefund: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_REAL_RESULT_20261007.md`
 - KISS-Endreplay des echten Ergebnisses: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
+- realer V1.12.6-Readback: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V126_REAL_READBACK_20261007.md`
+- finale fachliche Batch-001-Bewertung: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`
 - Depth-Plan: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
-- WordPress-Bewertungskandidat: HD-001 V1.12.5 / SHA-256 `68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
+- WordPress-Bewertungskandidat: HD-001 V1.12.6 / SHA-256 `788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
 
 Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
 Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 0 Zielbaum-Writes sind aus dem Batch aktuell zulässig.
 
+## Batch 001 – final
+
+16/16 Kandidaten fachlich geschlossen:
+- 7 HOBBY_HUB;
+- 3 ORIENTATION_UNIVERSE;
+- 6 EDITORIAL_TOPIC;
+- 0 unresolved;
+- 0 Zielbaum-Writes.
+
+Keine weitere DataForSEO-Tiefenrecherche.
+
 ## Nächster Schritt
 
-Einmal HD-001 V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
+Batch 002 deterministisch aus dem 841er Master ziehen und mit derselben KISS-Logik vorbereiten.
 
-Keine weitere DataForSEO-Recherche:
-- 0 neue Provider-Aufrufe;
-- 0 neue Kosten;
-- vorhandene Evidence wird nur nach Regelvertrag 1.4 neu gerechnet;
-- 0 Strukturwrites.
+Auswahlregel:
+erste 16 noch nicht durch einen finalen Batch bewerteten kanonischen Identitäten in stabiler Master-Reihenfolge.
 
-Danach das Ergebnis-JSON einmal als realen Readback prüfen.
-
-Der 841er Master wird erst nach diesem Readback mit derselben stabilen Bewertungslogik weiterbearbeitet.
 Noch kein Zielbaum-Delta und kein WordPress-Kategoriesync.
