@@ -64,7 +64,7 @@ add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls, $p
                         'promotionId'=>393924,
                         'promotionCategoryId'=>77,
                         'bannerName'=>'Original Provider Bannername',
-                        'clickoutLink'=>'https://t.adcell.com/p/click-schabracken-2',
+                        'clickoutLink'=>'https://t.adcell.com/p/click-resolve-schabracken',
                         'bannerUrl'=>'https://t.adcell.com/p/banner-schabracken-2',
                         'width'=>300,
                         'height'=>250,
@@ -89,6 +89,14 @@ add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls, $p
                 'total'=>array('numberItems'=>1),
             ),
         )));
+    }
+    if ($url === 'https://t.adcell.com/p/click-resolve-schabracken') {
+        return $reply('', 302, array(
+            'location'=>'https://shop.example.test/schabracken/',
+        ));
+    }
+    if ($url === 'https://shop.example.test/schabracken/') {
+        return $reply('', 200);
     }
     if (strpos($url, 'https://t.adcell.com/p/') === 0) {
         return $reply('', 200);
@@ -242,6 +250,24 @@ $counts = $import->invoke($o, $rows, array(
 if ((int)($counts['imported'] ?? 0) !== 2) {
     $fail('library_import_count_' . wp_json_encode($counts));
 }
+
+$resolved_stored = $wpdb->get_row($wpdb->prepare(
+    "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
+    'banner-393924'
+), ARRAY_A);
+$resolved_payload = json_decode((string)($resolved_stored['payload'] ?? ''), true);
+if (!is_array($resolved_stored)
+    || !is_array($resolved_payload)
+    || (string)($resolved_stored['tracking_url'] ?? '') !== 'https://t.adcell.com/p/click-resolve-schabracken'
+    || (string)($resolved_stored['destination_url'] ?? '') !== 'https://shop.example.test/schabracken/'
+    || sanitize_key((string)($resolved_payload['_destination_source'] ?? '')) !== 'resolved_redirect') {
+    $fail('real_destination_redirect_and_provenance_not_persisted');
+}
+$resolved_targets_before = json_decode((string)($resolved_stored['topic_targets'] ?? ''), true);
+if (is_array($resolved_targets_before) && count($resolved_targets_before) !== 0) {
+    $fail('resolved_destination_created_target_before_asset_verification');
+}
+$ok('tracking_redirect_resolved_once_and_real_destination_provenance_persisted');
 
 $stored = $wpdb->get_row($wpdb->prepare(
     "SELECT * FROM {$table} WHERE provider='adcell' AND partner_external_id='123' AND external_id=%s",
