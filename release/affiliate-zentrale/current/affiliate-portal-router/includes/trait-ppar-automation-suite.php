@@ -580,7 +580,7 @@ trait PPAR_Automation_Suite_Trait {
         global $wpdb;
         $table = $this->creative_library_table();
         return (bool) $wpdb->get_var(
-            "SELECT id FROM {$table} WHERE provider='adcell' AND creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') LIMIT 1"
+            "SELECT id FROM {$table} WHERE provider='adcell' AND creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') LIMIT 1"
         );
     }
 
@@ -592,7 +592,7 @@ trait PPAR_Automation_Suite_Trait {
         $table = $this->creative_library_table();
         $limit = max(1, min(10, absint($limit)));
         $rows = $wpdb->get_results(
-            "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY id ASC LIMIT {$limit}",
+            "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY id ASC LIMIT {$limit}",
             ARRAY_A
         );
         $processed = 0;
@@ -2770,8 +2770,13 @@ trait PPAR_Automation_Suite_Trait {
             }
         }
 
-        // HARD RULE: Import -> Ziel-URL -> einmalige Zuordnung zu festen Portalzielen -> speichern.
-        // Kein N+1: alle betroffenen Banner werden nach dem Import in EINER DB-Abfrage geladen.
+        // 6.72.199 HARD RULE:
+        // Import -> Ziel-URL/Providerbasis speichern -> Asset technisch prüfen
+        // -> ERST DANACH feste Portalziele speichern.
+        // Bereits verifizierte, bytegleiche Assets dürfen ihre vorhandene
+        // technische Evidence wiederverwenden. Neue/pending Banner bleiben
+        // bis zum Asset-Worker ohne Zielkarte.
+        // Kein N+1: alle betroffenen Banner werden in EINER DB-Abfrage geladen.
         if ($banner_identity_hashes && method_exists($this,'output_assign_banner_targets_from_destination_once')) {
             global $wpdb;
             $banner_identity_hashes=array_values(array_unique(array_filter($banner_identity_hashes,static function($hash){
@@ -2785,6 +2790,15 @@ trait PPAR_Automation_Suite_Trait {
                 );
                 $stored_rows=$wpdb->get_results($query,ARRAY_A);
                 foreach((array)$stored_rows as $stored_row){
+                    $payload=json_decode((string)($stored_row['payload']??''),true);
+                    $payload=is_array($payload)?$payload:array();
+                    $dimension_state=sanitize_key((string)($payload['_dimension_state']??'pending'));
+                    $requires_verification=method_exists($this,'creative_library_verify_before_assign_banner')
+                        && $this->creative_library_verify_before_assign_banner($stored_row);
+                    if($requires_verification
+                        && !in_array($dimension_state,array('verified','mismatch'),true)){
+                        continue;
+                    }
                     $this->output_assign_banner_targets_from_destination_once($stored_row);
                 }
             }
