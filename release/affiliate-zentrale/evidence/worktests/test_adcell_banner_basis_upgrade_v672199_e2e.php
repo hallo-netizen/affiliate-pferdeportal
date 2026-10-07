@@ -68,7 +68,12 @@ add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls) {
                     'width'=>728,
                     'height'=>90,
                     'information'=>'Individueller Schabracken Designer',
-                    'customNested'=>array('theme'=>'schabracken','source'=>'provider'),
+                    'customNested'=>array(
+                        'theme'=>'schabracken',
+                        'source'=>'provider',
+                        'future'=>array('enabled'=>true,'weight'=>'7.50'),
+                    ),
+                    'futureUnknown'=>array('level1'=>array('level2'=>array('value'=>42))),
                 )),
                 'total'=>array('numberItems'=>1),
             ),
@@ -272,10 +277,13 @@ if ($raw_json === '' || !hash_equals(hash('sha256', $raw_json), $raw_sha)) {
     $fail('provider_raw_not_persisted_after_upgrade');
 }
 $raw = json_decode($raw_json, true);
-if ((string)($raw['customNested']['theme'] ?? '') !== 'schabracken') {
-    $fail('provider_nested_raw_missing_after_upgrade');
+if ((string)($raw['customNested']['theme'] ?? '') !== 'schabracken'
+    || ($raw['customNested']['future']['enabled'] ?? null) !== true
+    || (string)($raw['customNested']['future']['weight'] ?? '') !== '7.50'
+    || (int)($raw['futureUnknown']['level1']['level2']['value'] ?? 0) !== 42) {
+    $fail('provider_nested_or_future_raw_missing_after_upgrade');
 }
-$ok('old_banner_replaced_with_complete_current_provider_evidence');
+$ok('old_banner_replaced_with_complete_current_provider_evidence_including_unknown_nested_fields');
 
 $category_calls = array_values(array_filter($http_calls, static function($line) {
     return strpos($line, '/affiliate/promotion/getPromotionCategories') !== false;
