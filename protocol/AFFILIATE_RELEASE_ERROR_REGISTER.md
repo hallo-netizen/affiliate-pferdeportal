@@ -1547,3 +1547,38 @@ Damit gibt es keinen künstlichen Prefix+Suffix-Doppelzwang mehr.
 
 **Status:** ROOT_CAUSE_PROVEN / 6_72_202_SOURCE_AND_ZIP_BOUND / PERFORMANCE_KISS_FIXED / KOSTEN_RULE_FIXED / LIVE_READBACK_OPEN / NO_FINAL_RELEASE.
 
+## AFF-ERR-057 — 07.10.2026: Vergleichsrechner mit korrekter ID wird im Beitrag nicht angezeigt
+
+**Auslöser:** Nutzerkorrektur im laufenden 6.72.203-Arbeitsstrang. Der offene Fehler betrifft ausdrücklich **nicht Schabracken/Bannerzuordnung**, sondern einen Vergleichs-/Tarifrechner in einem Beitrag: Der Beitrag enthält nach Nutzerangabe die korrekte Rechner-ID, der Rechner wird im Artikel trotzdem nicht angezeigt.
+
+### Frischer Quellenbefund
+
+Der kanonische Source enthält weiterhin den seit 6.72.193 vorgesehenen KISS-Weg:
+- Shortcode `affiliate_rechner` ist auf `shortcode_tariff_tool()` registriert.
+- Die zentrale Rechnerliste liegt in der vorhandenen nicht-autoloadenden Option `ppar_tariff_tools_v1`.
+- Der Renderer gibt nur dann HTML aus, wenn die bereinigte ID existiert, der Rechner aktiv ist und sein HTML-Code nicht leer ist.
+- Der historische 6.72.193-Test `AFFILIATE_HOBBYRAUM/test_tariff_tools_kiss_v672193.php` beweist direkte `do_shortcode()`-Ausgabe für aktive bekannte IDs, einschließlich Script-/Iframe-Code.
+- Dieser historische Test beweist **nicht** die heute gemeldete reale Kette eines klassischen Beitrags durch den vollständigen `the_content`-Renderpfad.
+
+### Falscher Zwischenweg korrigiert
+
+Die unmittelbar vor der Nutzerkorrektur vorgenommenen Änderungen
+- `0c157ccff7f2eed197a56d1fcee5774f90cb1a25` – zusätzliche Banner-Slot-Weitergabe,
+- `2821c521e1725f601451ef18760c3d49731e4c69` – Produktseiten-Banner auf redaktionelle Post-Kategorien,
+- `b2ad9a4b1079429516251978b1d64414740cfef5` – `affiliate_rechner` blockiert normale Auto-Banner im Artikel,
+
+adressieren die gemeldete Rechner-Nichtanzeige nicht belastbar. Insbesondere kann das bloße Unterdrücken eines Auto-Banners keinen fehlenden Rechner rendern.
+
+Diese drei fachfremden Source-Deltas werden deshalb aus dem kanonischen Source zurückgenommen. Der 6.72.203-Banner-KISS-Stand vor dieser Fehlinterpretation bleibt erhalten.
+
+### Erster echter Blocker
+
+Die erste fehlerhafte Stufe der Rechner-Renderkette ist **noch nicht belegt**. Nicht raten.
+
+Genau einmal zu prüfen:
+`Shortcode registriert -> exakte ID vorhanden/aktiv/HTML nicht leer -> Shortcode-Callback liefert HTML -> finaler the_content-Artikel enthält Rechner`.
+
+Erst am ersten belegten FAIL wird geändert. Banner-Zuordnung, Schabracken, Kategorie-Mapping und Ranking sind für diesen Fehler nicht automatisch beteiligt.
+
+**Status:** LIVE_USER_FAILURE_CONFIRMED / PRIOR_BANNER_DELTA_REVERTED / ROOT_CAUSE_OPEN / ONE_FOCUSED_ARTICLE_RENDER_REPRO_NEXT / NO_RELEASE.
+

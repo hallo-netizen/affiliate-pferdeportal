@@ -159,3 +159,18 @@ Nach erfolgreicher Importbasis gilt für die Bannerverarbeitung genau ein einfac
 Kurzform:
 `Import -> technisch prüfen -> tiefstes Ziel bestimmen -> Elternpfad speichern -> Format prüfen -> passende Banner wählen -> sonst stabil verteilen -> Bestand regelmäßig nachziehen`.
 
+## 10. Verbindlicher KISS-Vertrag – Tarifrechner/Widget im Beitrag
+
+Dieser Punkt ist fachlich getrennt von der Banner-Zuordnung.
+
+- Ein Rechner wird zentral unter `Affiliate-Zentrale -> Tarifrechner` mit stabiler ID, aktiv/inaktiv und vertrauenswürdigem HTML-/Widget-Code verwaltet.
+- Der Beitrag enthält ausschließlich den stabilen Platzhalter `[affiliate_rechner id="<id>"]`.
+- Eine gültige ID bedeutet: derselbe Schlüssel existiert in der zentralen Rechnerliste, der Rechner ist aktiv und sein gespeicherter HTML-/Widget-Code ist nicht leer.
+- Bei einem normalen klassischen Beitrag muss WordPress diesen Platzhalter beim Rendern durch genau den aktuell zentral gespeicherten Rechnercode ersetzen.
+- Umbenennen ändert die stabile ID nicht. Inaktiv, gelöscht, unbekannt oder leer bleibt fail-closed mit leerer Rechnerausgabe.
+- Die Sichtbarkeit des Rechners hängt **nicht** von Banner-Zielkarte, Banner-Kategorie, Banner-Ranking oder Banner-Reconcile ab. Ein Bannerfix ist kein Ersatz für einen funktionierenden Rechner-Shortcode.
+- KISS/Performance: keine neue Tabelle, keine Artikelmutation, kein Provider-HTTP; die bestehende nicht-autoloadende Rechneroption und der Request-Cache bleiben der einzige Speicher-/Leseweg.
+
+Kurzform:
+`zentraler Rechner -> stabile ID -> Platzhalter im Beitrag -> Shortcode rendert zentralen Code`.
+
