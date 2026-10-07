@@ -248,3 +248,43 @@ Das im V1.12-ZIP enthaltene Hobby-Depot-Profil ist keine aktuelle Installationsf
 
 CURRENT:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+
+---
+
+## PU-20261007-005 – HD-001 V2-Bewertungsgate vor Pluginfortschreibung
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Fach-/Integrationsfortschreibung, KEINE Plugin-Codeänderung.
+
+WARUM:
+Die V2-Current verlangte bereits eine maschinenlesbare Masterbewertung, aber Auswahl, Fail-closed-Entscheidung und Research-Queue-Intake waren noch nicht eindeutig genug gebunden.
+
+ÄNDERUNG:
+- maschinenlesbarer Bewertungsvertrag angelegt;
+- reproduzierbaren Batch 001 definiert und ausgeführt;
+- 19er Research Queue separat durch Identitäts-/Intake-Prüfung geführt;
+- erstes provisorisches Master-Intake-Delta für Fotografie vorbereitet;
+- Plugin- und Deployment-Gate bleibt geschlossen.
+
+BATCH-ERGEBNIS:
+- 16 Kandidaten;
+- 16/16 Identitätsgate PASS;
+- 0 Zielbaum-Writes;
+- 15 Fälle mit fehlender Evidenz;
+- Buchbinden fachlich weiter HOBBY_HUB, V2-Gesamtabnahme dennoch offen.
+
+NEUER BLOCKER:
+`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
+
+PLUGIN-CODE:
+UNVERÄNDERT V1.12.0.
+
+LIVE:
+UNVERÄNDERT kein V1.12-Live-PASS und kein Deploymentauftrag.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
