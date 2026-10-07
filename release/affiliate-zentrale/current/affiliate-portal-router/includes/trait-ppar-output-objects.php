@@ -958,19 +958,25 @@ trait PPAR_Output_Objects_Trait {
             'check24_credit_all_cost_categories',
             'check24_insurance_all_insurance_categories',
         ),true);
-        if($multi_source){
-            foreach($portal_records as $stored_record){
-                if(sanitize_key((string)($stored_record['state']??''))!=='mapped'
-                    || sanitize_key((string)($stored_record['source']??''))!==$record_source){continue;}
-                $stored_target=$this->output_resolve_target_key($targets,sanitize_text_field((string)($stored_record['target_key']??'')));
-                if(!is_array($stored_target)){continue;}
-                if(method_exists($this,'control_target_gate')
-                    && is_wp_error($this->control_target_gate($portal_key,(string)($stored_target['key']??'')))){continue;}
-                $campaign_key=$this->output_campaign_target_key($stored_target);
+
+        $records_for_path=$multi_source ? $portal_records : array($record);
+        foreach($records_for_path as $stored_record){
+            if(!is_array($stored_record) || sanitize_key((string)($stored_record['state']??''))!=='mapped'){continue;}
+            if($multi_source && sanitize_key((string)($stored_record['source']??''))!==$record_source){continue;}
+            $stored_target=$this->output_resolve_target_key($targets,sanitize_text_field((string)($stored_record['target_key']??'')));
+            if(!is_array($stored_target)){continue;}
+            if(method_exists($this,'control_target_gate')
+                && is_wp_error($this->control_target_gate($portal_key,(string)($stored_target['key']??'')))){continue;}
+
+            $path_keys=array_values(array_unique(array_filter(array_map('sanitize_text_field',(array)($stored_record['path_target_keys']??array())))));
+            if(!$path_keys){
+                $path_keys=$this->output_banner_target_path_keys($stored_target,$targets,$portal_key);
+            }
+            foreach($path_keys as $campaign_key){
                 if($campaign_key!==''){$stored_campaign_targets[$campaign_key]=$campaign_key;}
             }
-            if(!$stored_campaign_targets){return null;}
         }
+        if($state==='mapped' && !$stored_campaign_targets){return null;}
 
         if($state==='general'){$target['_ppar_general_fallback_anchor']=1;}
         $level=sanitize_key((string)($record['level']??($state==='general'?'general':'exact')));
