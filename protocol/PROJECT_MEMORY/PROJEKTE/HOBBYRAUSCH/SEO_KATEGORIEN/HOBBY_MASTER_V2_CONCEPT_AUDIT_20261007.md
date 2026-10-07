@@ -54,13 +54,15 @@ Strukturänderungen kommen erst im späteren Gesamt-Delta.
 
 ## DataForSEO-Vertrag
 
-Reihenfolge:
-1. Fachlogik schlägt mögliche Leaf-Bereiche und echte Artikelintents vor.
-2. DataForSEO prüft Nachfrage, Synonyme, Core-Keywords, Longtailtiefe und Intent-Überschneidung.
-3. Dubletten/Formulierungsvarianten werden entfernt.
-4. Ownership über CORE / EDITORIAL / DIRECTORY wird geprüft.
-5. Danach wird jede Leaf-Kategorie neu gezählt.
-6. Erst dann wird Hobby-Hub / Editorial / Article / Finder / Macro entschieden.
+Verbindlicher KISS-Weg nach vollständiger Realprüfung:
+
+1. Fachlogik schlägt mögliche Leaf-Bereiche und echte eigenständige Artikelintents vor.
+2. Diese fachlich unterschiedlichen Intents bilden die Content Capacity.
+3. DataForSEO prüft Nachfrage, Primärkeyword, Synonyme, Core Keyword und Intent-Überschneidung.
+4. Exaktes DataForSEO-Evidence darf zwei fachliche Intents als Dublette zusammenführen.
+5. Wenn DataForSEO für einen fachlich eigenständigen Longtail keine exakte Zeile liefert, bleiben nur dessen SEO-Metriken offen; der Artikelintent bleibt bestehen.
+6. Keyword-Ideas-/Suggestions-Rohzeilen erzeugen keine zusätzlichen Artikelintents.
+7. Danach wird jede Leaf-Kategorie nach den Konzeptgrenzen bewertet.
 
 DataForSEO darf NICHT bestimmen:
 - Hauptwelt;
@@ -70,69 +72,100 @@ DataForSEO darf NICHT bestimmen:
 - CORE-Promotion;
 - Löschung.
 
-## Korrektur unseres bisherigen Batch-001-Stands
+Automatische Keyword-Ideas-Tiefenrecherche ist im Normalweg nicht erforderlich.
 
-Der erste 16er Batch bleibt als Testbatch bestehen.
+## Vollständige Fehlerkettenprüfung Batch 001
 
-Die bisherige Bewertung war an zwei Stellen zu grob:
-1. Content Capacity wurde noch nicht hart genug PRO UNTERSTER KATEGORIE geprüft.
-2. Zusammenfassung kleiner verwandter Hobbys war noch nicht ausdrücklich als eigener Prüfweg gebunden.
+Realer Ausgang:
+- 16 Hobbys;
+- 34 vorgeschlagene Leafs;
+- 263 fachlich vorgeschlagene Artikelintents;
+- 39 historische DataForSEO-Aufrufe;
+- ca. 0.9738 USD historische Kosten;
+- 0 Strukturwrites.
 
-Beides ist jetzt in Regelvertrag V1.1 nachgezogen.
+Gefundene Fehlerkette:
+- V1.12.1: fehlende exakte Provider-Zeile wurde zu stark als fehlender Content interpretiert;
+- V1.12.2/V1.12.3: Keyword-Ideas-Rohzeilen wurden fälschlich zur Content Capacity addiert;
+- V1.12.4: Rohzeilen addierten keine Artikel mehr, aber ein fachlicher Intent blieb noch zu stark von lexikalischem Provider-Match abhängig.
 
-## Buchbinden – reale DataForSEO-Evidence
+Root Cause:
+**Content Capacity und SEO-Evidenz wurden vermischt.**
 
-Vorhandene echte DataForSEO-Evidence:
-- Einstieg: 4 distinct Gruppen;
-- Ausrüstung: 5;
-- Material: 3;
-- Techniken/Praxis: 4;
-- Fragen/Probleme: 0;
-- FAQ: 0.
+Korrektur:
+Regelvertrag 1.4 + HD-001 V1.12.5.
 
-Folge:
-Der bestehende Buchbinden-Live-/Technikpilot bleibt unverändert erhalten.
-Aber nach der neuen V2-Regel ist Buchbinden NOCH KEIN endgültiger V2-HOBBY_HUB-PASS.
+## V1.12.5 – Real-Result-Replay
 
-Nur Ausrüstung liegt bereits im Zielbereich 5–12.
-Für Einstieg, Material und Techniken/Praxis sind Follow-up-Intents + echter DataForSEO-Abgleich nötig.
-Zusätzlich müssen Kurs/Workshop/Online-Intents auf DIRECTORY-/CORE-Ownership geprüft werden.
+Die echte gespeicherte V1.12.3-Datei wurde lokal mit V1.12.5 ohne neue Provider-Aufrufe neu ausgewertet.
 
-## Batch-001 Fachvorprüfung
+Ergebnis:
+- 34 ideale Leafs;
+- 1 HOBBY_HUB_CANDIDATE;
+- 1 EDITORIAL_TOPIC_CANDIDATE;
+- 5 AGGREGATION_REVIEW;
+- 3 MACRO_REVIEW;
+- 6 EVIDENCE_REQUIRED;
+- 0 Zielbaum-Writes.
 
-Erzeugt:
-`HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
+Kapazitätsseitig typischer Hubbereich:
+- Airbrush: 5 Leafs;
+- Bean-to-Bar-Schokolade: 6;
+- Aeroponik: 4;
+- Ameisenhaltung: 6;
+- 3D-Bogenschießen: 5;
+- Wabikusa: 4.
 
-Darin:
-- mögliche Leaf-/Artikelintents für tragfähige Hub-Kandidaten;
-- Macro-/Split-Hinweise für 3D-Druck und Amateurastronomie;
-- Zusammenfassungs-/Editorial-Kandidaten für kleine Themen;
-- keinerlei erfundene DataForSEO-Zahlen.
+Diese sechs sind noch nicht final publizierbar, weil Scope/Identität/Ownership getrennt geprüft werden müssen.
 
-## DataForSEO-Ausführung
+Buchbinden:
+- 4 ideale Leafs;
+- 5 / 6 / 6 / 6 eigenständige Artikelintents;
+- HOBBY_HUB_CANDIDATE.
 
-Exakter Request vorbereitet:
-`HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
+Macro:
+- 3D-Druck;
+- Amateurastronomie;
+- Filzen.
 
-Der bestehende DataForSEO-Client und seine echten Endpunkte sind belegt.
-Die Zugangsdaten liegen laut bestehendem Client in WordPress/wp-config bzw. WordPress-Optionen und werden nicht in Campusdateien gespeichert.
+Editorial:
+- Treibholz sammeln.
 
-Aktuell ist in diesem Chat kein authentifizierter DataForSEO-/Hobby-Depot-WordPress-Ausführungsweg gebunden.
+Aggregation:
+- alte Brettspiele;
+- Air-Dry Clay;
+- Airbrush-Modellbau;
+- Alabasterschnitzen;
+- Algenkultur.
 
-Deshalb:
-- Buchbinden: vorhandene echte Evidence wird wiederverwendet;
-- übrige Kandidaten: DataForSEO-Zahlen bleiben PENDING;
-- keine Ersatzdaten und keine Schätzung.
+Beleg:
+`HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
+
+## Hardtest
+
+V1.12.5:
+- PHP Source 68/68 PASS;
+- Legacy 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Lauf PASS;
+- V1.12.1 Assessment Regression PASS;
+- echter V1.12.3-Result-Replay PASS;
+- Missing-Provider-Row-Negativtest PASS;
+- Exact-Core-Keyword-Dedupe PASS;
+- automatische Depth-Recherche = 0 Calls PASS;
+- 0 neue Kosten PASS;
+- 0 Strukturwrites PASS;
+- Recalc idempotent PASS;
+- Fresh Release PHP 31/31 PASS.
 
 ## Ergebnis
 
 Konzept: konsistent.
 
-Arbeitsstand: korrigiert.
+Root Cause der wiederholten DataForSEO-Schleife: geschlossen.
 
-Erster echter offener Punkt:
-den vorbereiteten Batch-001-DataForSEO-Request über den vorhandenen authentifizierten DataForSEO-Weg ausführen und danach die Leaf-Zählung/Ownership erneut rechnen.
+Noch offen:
+nur ein realer WordPress-Readback des exakt getesteten V1.12.5-Recalc-Ergebnisses.
 
-Noch keine Pluginänderung.
 Noch kein Zielbaum-Delta.
 Noch kein WordPress-Sync.
