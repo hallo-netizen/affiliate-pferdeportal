@@ -8,186 +8,187 @@
   "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
   "decisions": [
     {
-      "hobby_id": "hobby:maskenbau",
-      "canonical_name": "Maskenbau",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
-      "ownership": "Owns mask design, bases/forms, materials, sculpting/build, straps/wearability and finishing."
-    },
-    {
-      "hobby_id": "hobby:epoxidharzkunst",
-      "canonical_name": "Epoxidharzkunst",
+      "hobby_id": "hobby:kupferstich",
+      "canonical_name": "Kupferstich",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns artistic epoxy-resin work, pigments/inclusions, molds/surfaces, bubbles/curing and finishing."
+      "ownership": "Owns copperplate engraving, plate preparation, burins, inking/wiping, printing and edition workflow."
     },
     {
-      "hobby_id": "hobby:resin-casting",
-      "canonical_name": "Resin Casting",
+      "hobby_id": "hobby:radierung",
+      "canonical_name": "Radierung",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
+      "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns mold-based resin casting, mold prep, casting systems, pressure/vacuum, demolding and finishing."
+      "ownership": "Owns etching grounds, drawing/biting, aquatint-related basics, inking and printing."
     },
     {
-      "hobby_id": "hobby:jesmonite",
-      "canonical_name": "Jesmonite",
+      "hobby_id": "hobby:siebdruck",
+      "canonical_name": "Siebdruck",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
+      "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
-      "ownership": "Owns Jesmonite-specific mixing, molds, pigments/terrazzo effects and finishing/sealing."
+      "viable_leaf_categories": 5,
+      "ownership": "Owns screen preparation, stencils/emulsion, inks, registration, printing and cleanup."
     },
     {
-      "hobby_id": "hobby:betonkunst",
-      "canonical_name": "Betonkunst",
+      "hobby_id": "hobby:cyanotypie",
+      "canonical_name": "Cyanotypie",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns decorative concrete casting/sculpture, mixes, molds, pigments and finishing."
+      "ownership": "Owns cyanotype chemistry, coating, exposure, washing/toning and printing on suitable media."
     },
     {
-      "hobby_id": "hobby:betonmobel",
-      "canonical_name": "Betonmöbel",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
-      "ownership": "Owns functional concrete furniture, reinforcement/forms, casting, surfaces and assembly."
-    },
-    {
-      "hobby_id": "hobby:gipskunst",
-      "canonical_name": "Gipskunst",
+      "hobby_id": "hobby:anthotypie",
+      "canonical_name": "Anthotypie",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns plaster casting/sculpting, molds, coloring, sanding and finishing."
+      "ownership": "Owns plant-pigment anthotype preparation, coating, long exposure and preservation."
     },
     {
-      "hobby_id": "hobby:kerzengieen",
-      "canonical_name": "Kerzengießen",
+      "hobby_id": "hobby:chlorophyll-printing",
+      "canonical_name": "Chlorophyll Printing",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
-      "ownership": "Owns candle waxes, wicks, molds/containers, fragrance/color and burn testing."
-    },
-    {
-      "hobby_id": "hobby:seifenherstellung",
-      "canonical_name": "Seifenherstellung",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 5,
-      "ownership": "Owns hobby soapmaking processes, recipes, additives, molds, curing and troubleshooting."
-    },
-    {
-      "hobby_id": "hobby:naturseife",
-      "canonical_name": "Naturseife",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
+      "natural_world": "gestalten",
       "size_class": "MICRO",
       "publication_role": "EDITORIAL_TOPIC",
       "viable_leaf_categories": 0,
-      "ownership": "Owns natural-soap ingredient/formulation emphasis; generic soapmaking stays with Seifenherstellung."
+      "ownership": "Owns direct image exposure on leaves/chlorophyll as a niche photographic-print process."
     },
     {
-      "hobby_id": "hobby:kosmetik-selbst-herstellen",
-      "canonical_name": "Kosmetik selbst herstellen",
+      "hobby_id": "hobby:traditionelle-fotodruckverfahren",
+      "canonical_name": "traditionelle Fotodruckverfahren",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
+      "natural_world": "gestalten",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns orientation across historical/alternative photographic print processes; Cyanotypie, Anthotypie and other concrete processes keep specific owners."
+    },
+    {
+      "hobby_id": "hobby:dunkelkammerfotografie",
+      "canonical_name": "Dunkelkammerfotografie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns DIY cosmetic formulation, emulsions, balms, hygiene, packaging and stability basics."
+      "ownership": "Owns analog darkroom development/printing, enlargers, chemistry, exposure/control and workflow."
     },
     {
-      "hobby_id": "hobby:parfumherstellung",
-      "canonical_name": "Parfümherstellung",
+      "hobby_id": "hobby:nassplattenfotografie",
+      "canonical_name": "Nassplattenfotografie",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
+      "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 5,
-      "ownership": "Owns perfume composition, materials, accords, dilution, maturation and evaluation."
+      "ownership": "Owns wet-plate collodion preparation, coating/sensitizing, exposure, development and varnishing."
     },
     {
-      "hobby_id": "hobby:raucherstabchen-herstellen",
-      "canonical_name": "Räucherstäbchen herstellen",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
-      "ownership": "Owns incense-stick dough/binders, fragrance materials, forming, drying and burn behavior."
-    },
-    {
-      "hobby_id": "hobby:rauchermischungen",
-      "canonical_name": "Räuchermischungen",
-      "scope_status": "IN_SCOPE",
-      "identity_status": "CONFIRMED",
-      "natural_world": "fertigen",
-      "size_class": "FIT",
-      "publication_role": "HOBBY_HUB",
-      "viable_leaf_categories": 4,
-      "ownership": "Owns loose incense blend composition, resins/herbs/woods, ratios, storage and burning methods."
-    },
-    {
-      "hobby_id": "hobby:papierblumen",
-      "canonical_name": "Papierblumen",
+      "hobby_id": "hobby:lochkamerafotografie",
+      "canonical_name": "Lochkamerafotografie",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
       "natural_world": "gestalten",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns paper flower patterns, shaping, stems/assembly and coloring/finishing."
+      "ownership": "Owns pinhole camera design/use, exposure, materials and image-making."
     },
     {
-      "hobby_id": "hobby:kunstblumenbau",
-      "canonical_name": "Kunstblumenbau",
+      "hobby_id": "hobby:kamerabau",
+      "canonical_name": "Kamerabau",
       "scope_status": "IN_SCOPE",
       "identity_status": "CONFIRMED",
-      "natural_world": "gestalten",
+      "natural_world": "technik",
       "size_class": "FIT",
       "publication_role": "HOBBY_HUB",
       "viable_leaf_categories": 4,
-      "ownership": "Owns artificial flower construction across fabric/foam/other materials, shaping, assembly and finishing."
+      "ownership": "Owns DIY camera bodies, shutters/apertures, film/sensor positioning and testing."
+    },
+    {
+      "hobby_id": "hobby:schnitzen",
+      "canonical_name": "Schnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic carving orientation. Löffelschnitzen, Grünholzschnitzen, Reliefschnitzen and material-specific carving keep specific ownership."
+    },
+    {
+      "hobby_id": "hobby:loffelschnitzen",
+      "canonical_name": "Löffelschnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns spoon blanks, axe/knife work, hollowing, drying and finishing."
+    },
+    {
+      "hobby_id": "hobby:grunholzschnitzen",
+      "canonical_name": "Grünholzschnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns carving fresh wood, material selection, roughing, drying control, knife/axe technique and finishing."
+    },
+    {
+      "hobby_id": "hobby:reliefschnitzen",
+      "canonical_name": "Reliefschnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns relief design transfer, depth planning, carving tools, layering and finishing."
+    },
+    {
+      "hobby_id": "hobby:intarsien",
+      "canonical_name": "Intarsien",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns veneer/material selection, pattern cutting, fitting, gluing, flattening and finishing."
     }
   ],
   "final_summary": {
     "assessed": 16,
-    "hobby_hub": 15,
-    "editorial_topic": 1,
+    "hobby_hub": 12,
+    "orientation_universe": 2,
+    "editorial_topic": 2,
     "seo_enrichment_pending": 16,
     "unresolved": 0,
     "target_tree_writes_allowed": 0
