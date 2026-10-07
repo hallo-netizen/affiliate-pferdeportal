@@ -428,14 +428,15 @@ trait PPAR_Creative_Library_Trait {
         return array(absint($evidence['width']), absint($evidence['height']));
     }
 
+    /**
+     * 6.72.199 Basisvertrag: Jede Banner-Zielkarte entsteht erst NACH
+     * erfolgreicher technischer Assetprüfung. Provider-/Direkt-/Manuellwege
+     * benutzen damit dieselbe Reihenfolge; die fachliche Zuordnungslogik selbst
+     * bleibt unverändert.
+     */
     private function creative_library_verify_before_assign_banner($row) {
-        if (!is_array($row) || sanitize_key((string)($row['creative_type'] ?? '')) !== 'banner') {
-            return false;
-        }
-        $provider = sanitize_key((string)($row['provider'] ?? ''));
-        $partner = remove_accents(strtolower((string)($row['partner_name'] ?? '')));
-        return in_array($provider, array('direct','manual'), true)
-            || strpos($partner, 'tarifcheck') !== false;
+        return is_array($row)
+            && sanitize_key((string)($row['creative_type'] ?? '')) === 'banner';
     }
 
     private function creative_library_verify_asset_row($row, $force = false, $replan = true) {
@@ -530,11 +531,11 @@ trait PPAR_Creative_Library_Trait {
         $this->maybe_install_creative_library_schema();
         global $wpdb;
         $table = $this->creative_library_table();
-        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY id ASC LIMIT 5", ARRAY_A);
+        $rows = $wpdb->get_results("SELECT * FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY id ASC LIMIT 5", ARRAY_A);
         foreach ((array) $rows as $row) {
             $this->creative_library_verify_asset_row($row, false, true);
         }
-        $remaining = absint($wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')"));
+        $remaining = absint($wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')"));
         if ($remaining > 0) {
             $this->creative_library_schedule_asset_verification(20);
         } elseif (!empty($rows) && method_exists($this, 'article_plan_bump_campaign_revision')) {
