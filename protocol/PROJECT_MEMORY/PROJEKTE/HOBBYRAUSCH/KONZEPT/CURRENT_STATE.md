@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.2 KONZEPTEXAKT / ERSTER REALER V1.12.1-BATCH AUSGEFÜHRT / V1.12.2 TIEFENEVIDENZ LOKAL PASS / REALER DEPTH-LAUF OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.2 KONZEPTEXAKT / REALER V1.12.1-BATCH AUSGEFÜHRT / V1.12.2 LIVE-TIMEOUT ERKANNT / V1.12.3 RESUMABLE DEPTH LOKAL PASS
 
 ## Rolle
 
@@ -159,7 +159,7 @@ Die noch offenen, bereits fachlich definierten Leaf-/Themenräume müssen anschl
 Daraus folgt:
 Das Zwischenresultat `0 Hub-Kandidaten` darf nicht als endgültige Portalentscheidung verwendet werden.
 
-HD-001 V1.12.2 setzt genau diese fehlende zweite Evidenzstufe um:
+HD-001 V1.12.3 setzt genau diese fehlende zweite Evidenzstufe timeout-sicher um:
 37 offene Cluster → 37 Keyword-Ideas-Aufrufe → 1 abschließender gebündelter Overview → erneute Zählung/Dedupe/Ownership.
 
 Keine Struktur wird dabei erzeugt.
@@ -186,14 +186,14 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_DEPTH_DATAFORSEO_RUN_PENDING`
+`HD001_V2_BATCH001_RESUMABLE_DEPTH_RUN_PENDING`
 
 Der initiale reale Batch ist abgeschlossen.
 Offen ist nur noch die im Konzept vorgesehene Tiefenevidenz für die unvollständig belegten Leaf-/Themenräume.
 
 ## EXAKT EINE NEXT ACTION
 
-HD-001 V1.12.2 installieren und den gespeicherten Batch 001 im WordPress-Backend mit exakt 38 zusätzlichen DataForSEO-Aufrufen vertiefen.
+HD-001 V1.12.3 installieren und die Tiefenprüfung einmal starten. Sie arbeitet danach automatisch in kleinen gespeicherten Paketen weiter; bei Unterbrechung wird am gespeicherten Stand fortgesetzt.
 
 Danach das neue Ergebnis gegen Regelvertrag 1.2 prüfen.
 
