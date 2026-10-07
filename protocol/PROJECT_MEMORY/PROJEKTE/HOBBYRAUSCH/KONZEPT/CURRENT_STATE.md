@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / HOBBY_MASTER V2 AKTIVE BEWERTUNGSBASIS / PORTFOLIO- UND EBENENLOGIK NACHGEZOGEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-BEWERTUNGSVERTRAG GEBUNDEN / BATCH 001 AUSGEFÜHRT / EVIDENZLÜCKEN OFFEN
 
 ## Rolle
 
@@ -95,7 +95,10 @@ Bestand:
 - 329 bestehende V1.12-Monetarisierungs-/CORE-Regeln übernommen;
 - 286 DIRECT;
 - 43 ASSISTED;
-- 512 UNKNOWN, aber weiterhin erhalten.
+- 512 UNKNOWN, aber weiterhin erhalten;
+- zusätzlich 19 Research-Queue-Kandidaten außerhalb der 841 aktuellen Identitäten;
+- 0 Namens-/Alias-Kollisionen im aktuellen Intake-Check;
+- Fotografie ist durch den Pilotbefund für eine provisorische Master-Aufnahme vorbereitet.
 
 ## Neue bekannte Hobby-Kandidaten
 
@@ -104,6 +107,25 @@ Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, 
 
 Nicht automatisch publizieren.
 Sie durchlaufen dieselben Scope-/Größen-/Rollen-Gates wie die bisherigen Nischen.
+
+## Maschinenlesbare Umsetzung
+
+Gebunden:
+- `../SEO_KATEGORIEN/HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
+- `../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
+- `../SEO_KATEGORIEN/HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
+- `../SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
+
+Damit ist die frühere Lücke zwischen Konzeptregel und tatsächlicher maschinenlesbarer Entscheidung geschlossen.
+
+Wichtig:
+Fehlende Evidenz führt zu `EVIDENCE_REQUIRED`, nicht zu einer geratenen Rollen- oder Weltzuordnung.
+
+Batch 001 bestätigt:
+- Identitätslogik funktioniert;
+- Aliasfälle bleiben stabil;
+- Monetarisierung erzeugt keine automatische CORE-Promotion;
+- der Hauptengpass ist jetzt Content-Capacity-/Scope-/Ownership-Evidenz, nicht mehr die Regeldefinition.
 
 ## Pilotbefund
 
@@ -127,14 +149,18 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-Die 841 kanonischen Kandidaten sind noch nicht vollständig nach Scope, Identität/Alias, Größenklasse, Content Capacity, Publikationsrolle und 3-Säulen-Ownership bewertet.
+`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
+
+Der erste 16er Batch ist ausgeführt, aber 15 Fälle benötigen noch Evidenz für mindestens einen entscheidenden Gate-Bereich.
+Damit ist noch keine 841er Massenbewertung freigegeben.
 
 ## EXAKT EINE NEXT ACTION
 
-Die maschinenlesbaren Bewertungsregeln kontrolliert auf einen ersten HOBBY_MASTER-Batch anwenden und die Klassifikationsverteilung/Fehlklassifikationen prüfen.
+Die fehlende Scope-/Content-Capacity-/Ownership-Evidenz für den gebundenen Batch 001 erzeugen und denselben Batch anschließend erneut durch den maschinenlesbaren Bewertungsvertrag laufen lassen.
 
 Noch NICHT:
 - WordPress synchronisieren;
 - V1.12-Zielprofil live installieren;
+- Zielbaum-Delta bauen;
 - acht Welten neu erfinden;
 - Hobbywelten als Parent der acht Welten verwenden.
