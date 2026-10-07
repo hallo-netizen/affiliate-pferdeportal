@@ -1342,3 +1342,28 @@ Damit war der Zielvertrag **„Providerbasis → Ziel-URL-Provenienz → technis
 **Noch kein PASS:** Die korrigierte Source muss nach neuer Manifestbindung erneut durch Governance/Source/Start und danach durch den realen WordPress/MariaDB-Runner. Kein Installer vorher.
 
 **Status:** ROOT_CAUSE_DEEPENED / VERIFY_BEFORE_ASSIGN_SOURCE_FIXED / MANIFEST_REBOUND / GUARDS_AND_REAL_DB_GATE_OPEN.
+
+
+### AFF-ERR-054 – Nachtrag 07.10.2026: Fixture-Beweis reicht nicht, echter ADCELL-Gate gebunden
+
+**Zielvertragsprüfung:** Der Basisvertrag verbietet ausdrücklich, eine lokale Fixture-Abnahme als Beweis für reale Providerdaten zu verwenden. Die bisherigen 6.72.199-E2E-Fixtures beweisen Mechanik, Fail-closed-Verhalten und WordPress/MariaDB-Persistenz, aber nicht, dass ein tatsächlich von ADCELL gelieferter Banner vollständig durch denselben Weg läuft.
+
+**Korrektur:** Neuer Pflichtgate:
+`release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_real_provider_v672199.php`
+
+Er ist absichtlich nur für einen isolierten WordPress/MariaDB-Testhost bestimmt und:
+- verweigert die Ausführung auf `pferde-atelier.de`;
+- benötigt explizit `PPAR_REAL_PROVIDER_GATE=1`;
+- nimmt ADCELL-Benutzer/Passwort und Programm-IDs ausschließlich aus Umgebungsvariablen;
+- ruft den echten ADCELL-Programm-/Bannerweg ohne HTTP-Fixture auf;
+- vergleicht das vom API-Adapter gelieferte reale Bannerobjekt wert- und typgleich mit dem als Roh-JSON gebundenen Objekt plus SHA-256;
+- importiert genau diesen echten Banner über den normalen Creative-Library-Weg;
+- prüft Kategorie-ID/-Name, echte Titelherkunft, Tracking-/Ziel-URL-Provenienz und 0 Zielkarten vor Assetprüfung;
+- lädt die reale Bildquelle und prüft echte Maße, Bildbytes und SHA;
+- kapselt Testdaten und Zugangsdaten in einer DB-Transaktion und rollt sie zurück.
+
+Der versionsneutrale Sammelrunner verlangt diesen realen Provider-Gate jetzt zwingend als **5. Test**. Ohne echte Credentials/Programm-IDs gibt es absichtlich kein Gesamt-PASS.
+
+**Zusatzkorrektur Retry:** Ein innerhalb eines Laufs fehlgeschlagenes Bild bleibt terminal fail-closed. Ein späterer echter Provider-Reimport desselben unveränderten Banners setzt ausschließlich die technische Asset-Evidence erneut auf `pending`, damit ein temporärer Bildfehler nicht dauerhaft festgeschrieben wird. Erfolgreich verifizierte identische Assets werden weiterhin wiederverwendet.
+
+**Status:** REAL_PROVIDER_GATE_REQUIRED / FIXTURE_ONLY_PASS_FORBIDDEN / FAILED_ASSET_REIMPORT_RETRY_FIXED / GUARDS_OPEN.
