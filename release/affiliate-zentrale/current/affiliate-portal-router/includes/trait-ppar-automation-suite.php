@@ -4140,6 +4140,10 @@ trait PPAR_Automation_Suite_Trait {
 
 
     /**
+     * V6.72.201 RESTORE – dieselbe enge Konsistenzreparatur mit frischem Marker.
+     * Sie reaktiviert nur weiterhin published Ausgabeobjekte mit weiterhin
+     * aktiver/gültiger Bannerquelle; manuelle Sperren bleiben unangetastet.
+     *
      * V6.72.100 RESTORE – nur einen nachweislich widerspruechlichen Zustand
      * reparieren: Ausgabeobjekt ist weiterhin published, die dazu gehoerende
      * materialisierte Bannerkampagne aber inactive. 6.72.94 konnte genau diesen
@@ -4147,7 +4151,7 @@ trait PPAR_Automation_Suite_Trait {
      * Ziel/Slot/Creative werden NICHT neu klassifiziert oder verschoben.
      */
     public function maybe_restore_published_banner_campaign_consistency_v672100() {
-        $done_key='ppar_v672100_published_banner_consistency_done';
+        $done_key='ppar_v672201_published_banner_consistency_done';
         if ((string)get_option($done_key,'')==='done') { return; }
         if (!method_exists($this,'output_objects_table') || !method_exists($this,'creative_library_table')
             || !method_exists($this,'output_campaign_by_post_id') || !method_exists($this,'save_campaign_record')) { return; }
