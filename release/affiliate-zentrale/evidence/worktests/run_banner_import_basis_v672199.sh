@@ -26,6 +26,17 @@ python3 control/release-governance/release_guard.py governance-check
 python3 control/release-governance/release_guard.py source-check
 python3 control/release-governance/release_guard.py start --branch "$CURRENT_BRANCH"
 
+php_tests=(
+  "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php"
+  "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_e2e_v672199.php"
+  "release/affiliate-zentrale/evidence/worktests/test_adcell_banner_basis_upgrade_v672199_e2e.php"
+  "release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php"
+)
+for php_test in "${php_tests[@]}"; do
+  php -l "$php_test" >/dev/null
+done
+echo "PASS worktest_php_syntax_4_of_4"
+
 php release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_v672199.php
 
 "$WP_CLI" eval '
