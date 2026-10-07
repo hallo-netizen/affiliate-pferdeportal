@@ -261,7 +261,10 @@ if (!is_array($resolved_stored)
     || (string)($resolved_stored['tracking_url'] ?? '') !== 'https://t.adcell.com/p/click-resolve-schabracken'
     || (string)($resolved_stored['destination_url'] ?? '') !== 'https://shop.example.test/schabracken/'
     || sanitize_key((string)($resolved_payload['_destination_source'] ?? '')) !== 'resolved_redirect') {
-    $fail('real_destination_redirect_and_provenance_not_persisted');
+    $fail('real_destination_redirect_and_provenance_not_persisted tracking='
+        . (string)($resolved_stored['tracking_url'] ?? '<missing>')
+        . ' destination=' . (string)($resolved_stored['destination_url'] ?? '<missing>')
+        . ' source=' . (string)($resolved_payload['_destination_source'] ?? '<missing>'));
 }
 $resolved_targets_before = json_decode((string)($resolved_stored['topic_targets'] ?? ''), true);
 if (is_array($resolved_targets_before) && count($resolved_targets_before) !== 0) {
