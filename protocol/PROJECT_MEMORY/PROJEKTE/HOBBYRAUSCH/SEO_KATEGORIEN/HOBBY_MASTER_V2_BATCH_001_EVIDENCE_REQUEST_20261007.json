@@ -2,7 +2,7 @@
   "contract": "HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST",
   "version": "1.0",
   "effective_date": "2026-10-07",
-  "status": "READY_FOR_EVIDENCE_COLLECTION",
+  "status": "READY_FOR_IDENTITY_SCOPE_CONTENT_OWNERSHIP_EVIDENCE",
   "source_result": "HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json",
   "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json",
   "invariants": [
@@ -55,7 +55,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:bean-to-bar-schokolade",
@@ -98,7 +107,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:3d-druck",
@@ -141,7 +159,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:amateurastronomie",
@@ -184,7 +211,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:aeroponik",
@@ -227,7 +263,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:ameisenhaltung",
@@ -270,7 +315,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:3d-bogenschieen",
@@ -313,7 +367,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:alte-brettspiele",
@@ -356,7 +419,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:wabikusa",
@@ -404,7 +476,14 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": false,
+        "current_status": "PASS_CURRENT_CANONICAL_ALIAS_BINDING",
+        "prove": [
+          "current_canonical_alias_binding_remains_valid"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:buchbinden",
@@ -447,7 +526,14 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": false,
+        "current_status": "PASS_CURRENT_CANONICAL_ALIAS_BINDING",
+        "prove": [
+          "current_canonical_alias_binding_remains_valid"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:filzen",
@@ -490,7 +576,14 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": false,
+        "current_status": "PASS_CURRENT_CANONICAL_ALIAS_BINDING",
+        "prove": [
+          "current_canonical_alias_binding_remains_valid"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:treibholz-sammeln",
@@ -533,7 +626,14 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": false,
+        "current_status": "PASS_CURRENT_CANONICAL_ALIAS_BINDING",
+        "prove": [
+          "current_canonical_alias_binding_remains_valid"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:air-dry-clay",
@@ -581,7 +681,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:airbrush-modellbau",
@@ -629,7 +738,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:alabasterschnitzen",
@@ -677,7 +795,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     },
     {
       "hobby_id": "hobby:algenkultur",
@@ -725,7 +852,16 @@
         "check": "Compare every proposed primary intent against current CORE/EDITORIAL/DIRECTORY owner map.",
         "pass_condition": "Exactly one primary SEO owner per intent; other pillars relation/filter/link only."
       },
-      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result."
+      "rerun_rule": "After evidence is attached, rerun unchanged HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json. Do not manually override a rule result.",
+      "identity": {
+        "required": true,
+        "current_status": "REVIEW_REQUIRED_SEMANTIC_IDENTITY",
+        "prove": [
+          "distinct_real_activity_identity",
+          "not_only_alias_synonym",
+          "not_only_subform_of_existing_master_identity"
+        ]
+      }
     }
   ]
 }
