@@ -1010,28 +1010,7 @@ trait PPAR_Output_Objects_Trait {
      * oder fehlende Metadaten fallen unverändert auf die bestehende
      * Ziel-URL-/Fallback-Logik zurueck.
      */
-    private function output_banner_provider_topic_classification($row,$portal,$targets=null) {
-        if(!is_array($row)){return null;}
-        if($targets===null){
-            $targets=$this->output_portal_targets($portal);
-            if(is_wp_error($targets)){return $targets;}
-        }
 
-        $payload=json_decode((string)($row['payload']??''),true);
-        $payload=is_array($payload)?$payload:array();
-        $topic_name=sanitize_text_field((string)($payload['provider_topic_name']??''));
-        $topic_source=sanitize_key((string)($payload['provider_topic_source']??''));
-        if($topic_name==='' || $topic_source===''){return null;}
-
-        return $this->output_banner_evidence_target_classification(
-            $topic_name,
-            $portal,
-            $targets,
-            'banner_provider_topic',
-            'exact',
-            'Echte Provider-Kategorie passt eindeutig zum tiefsten belastbaren Portalziel.'
-        );
-    }
 
     /**
      * Einziger semantischer Banner-Matcher.
@@ -1145,56 +1124,77 @@ trait PPAR_Output_Objects_Trait {
         );
     }
 
-    private function output_banner_content_classification($row,$portal,$targets=null) {
-        if(!is_array($row)){return null;}
-        if($targets===null){
-            $targets=$this->output_portal_targets($portal);
-            if(is_wp_error($targets)){return $targets;}
-        }
+    /**
+     * Einziger Import-/Reconcile-Weg fuer normale Banner:
+     * Ziel-URL -> Provider-Kategorie -> echter Bannertext.
+     * Die erste belastbare oder mehrdeutige Evidenzstufe entscheidet;
+     * mehrdeutig bleibt fail-closed.
+     */
+    private function output_banner_import_classification($row,$portal,$targets) {
+        if(!is_array($row) || !is_array($portal) || !is_array($targets)){return null;}
 
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
+        $tiers=array();
+
+        $destination_source=$this->output_banner_destination_source($row);
+        $destination=esc_url_raw((string)($row['destination_url']??''));
+        if(in_array($destination_source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)
+            && $destination!==''){
+            $tiers[]=array(
+                'evidence'=>$this->output_destination_semantic_text($row),
+                'source'=>'import_destination_url',
+                'level'=>'exact',
+                'reason'=>'Echte Ziel-URL passt eindeutig zum tiefsten belastbaren Portalziel.',
+            );
+        }
+
+        $topic_name=sanitize_text_field((string)($payload['provider_topic_name']??''));
+        $topic_source=sanitize_key((string)($payload['provider_topic_source']??''));
+        if($topic_name!=='' && $topic_source!==''){
+            $tiers[]=array(
+                'evidence'=>$topic_name,
+                'source'=>'banner_provider_topic',
+                'level'=>'exact',
+                'reason'=>'Echte Provider-Kategorie passt eindeutig zum tiefsten belastbaren Portalziel.',
+            );
+        }
+
         $title_source=sanitize_key((string)($payload['title_source']??''));
         $real_title=in_array($title_source,array('provider_missing','manual_missing'),true)
             ? '' : (string)($row['title']??'');
-
-        $evidence=implode(' ',array_filter(array(
-            $real_title,
-            (string)($row['description']??''),
-            (string)($row['tags']??''),
-            (string)($payload['information']??''),
-            (string)($payload['alt_text']??''),
-            (string)($payload['banner_name']??''),
-            (string)($payload['name']??''),
-        )));
-
-        return $this->output_banner_evidence_target_classification(
-            $evidence,
-            $portal,
-            $targets,
-            'banner_content',
-            'content_exact',
-            'Echter Bannername/-text passt eindeutig zum tiefsten belastbaren Portalziel.'
+        $tiers[]=array(
+            'evidence'=>implode(' ',array_filter(array(
+                $real_title,
+                (string)($row['description']??''),
+                (string)($row['tags']??''),
+                (string)($payload['information']??''),
+                (string)($payload['alt_text']??''),
+                (string)($payload['banner_name']??''),
+                (string)($payload['name']??''),
+            ))),
+            'source'=>'banner_content',
+            'level'=>'content_exact',
+            'reason'=>'Echter Bannername/-text passt eindeutig zum tiefsten belastbaren Portalziel.',
         );
+
+        foreach($tiers as $tier){
+            $classification=$this->output_banner_evidence_target_classification(
+                (string)($tier['evidence']??''),
+                $portal,
+                $targets,
+                (string)($tier['source']??''),
+                (string)($tier['level']??'exact'),
+                (string)($tier['reason']??'')
+            );
+            if(is_array($classification)){return $classification;}
+        }
+        return null;
     }
 
-    private function output_banner_destination_url_classification($row,$portal,$targets) {
-        if(!is_array($row) || !is_array($targets)){return null;}
 
-        $source=$this->output_banner_destination_source($row);
-        $destination=esc_url_raw((string)($row['destination_url']??''));
-        if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)
-            || $destination===''){return null;}
 
-        return $this->output_banner_evidence_target_classification(
-            $this->output_destination_semantic_text($row),
-            $portal,
-            $targets,
-            'import_destination_url',
-            'exact',
-            'Echte Ziel-URL passt eindeutig zum tiefsten belastbaren Portalziel.'
-        );
-    }
+
 
     private function output_banner_destination_classification($row,$portal) {
         // HARD RULE:
@@ -1419,18 +1419,7 @@ trait PPAR_Output_Objects_Trait {
             // KISS-Evidenzreihenfolge:
             // 1. echte Ziel-URL, 2. Provider-Kategorie, 3. Bannername/-text.
             // Jede Stufe liefert genau EIN tiefstes belastbares Ziel.
-            $classification=$this->output_banner_destination_url_classification($row,$portal,$targets);
-            if(is_wp_error($classification)){continue;}
-
-            if(!is_array($classification)){
-                $classification=$this->output_banner_provider_topic_classification($row,$portal,$targets);
-                if(is_wp_error($classification)){continue;}
-            }
-
-            if(!is_array($classification)){
-                $classification=$this->output_banner_content_classification($row,$portal,$targets);
-                if(is_wp_error($classification)){continue;}
-            }
+            $classification=$this->output_banner_import_classification($row,$portal,$targets);
 
             if(!is_array($classification)
                 || sanitize_key((string)($classification['status']??''))!=='ready'
