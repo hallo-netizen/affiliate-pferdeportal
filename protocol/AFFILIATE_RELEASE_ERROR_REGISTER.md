@@ -1580,5 +1580,24 @@ Genau einmal zu prüfen:
 
 Erst am ersten belegten FAIL wird geändert. Banner-Zuordnung, Schabracken, Kategorie-Mapping und Ranking sind für diesen Fehler nicht automatisch beteiligt.
 
-**Status:** LIVE_USER_FAILURE_CONFIRMED / PRIOR_BANNER_DELTA_REVERTED / ROOT_CAUSE_OPEN / ONE_FOCUSED_ARTICLE_RENDER_REPRO_NEXT / NO_RELEASE.
+**Status:** CURRENT_RENDER_PATH_PASS / LIVE_SHORTCODE_AND_ID_PROVEN / LIVE_CENTRAL_CALCULATOR_RECORD_INVALID_PROVEN / EXACT_RECORD_SUBSTATE_READBACK_NEXT / NO_RELEASE.
 
+
+
+### AFF-ERR-057 Nachholbefund 07.10.2026
+
+Fokussierter WordPress/MariaDB-Rendernachweis: Run 37677771944 = PASS in allen vier Stufen.
+
+Live-Readback: Run 37679085019.
+- 16 veröffentlichte Finanzierungsbeiträge.
+- Exakt `[affiliate_rechner id="kredit"]`: 16 Treffer.
+- Falsche Kontroll-ID: 0 Treffer.
+- Rechner fehlt im finalen Live-HTML.
+- Live-Plugin: 6.72.202.
+- Tarifrechner-Renderer 6.72.202 und 6.72.203: identisch.
+
+Erster bewiesener Live-FAIL: zentraler Datensatz `kredit` erfüllt die Gültigkeitsbedingung nicht. Offen ist nur noch, ob er fehlt, inaktiv ist oder leeren HTML-/Widget-Code enthält.
+
+Evidence: `release/affiliate-zentrale/evidence/affiliate_err_057_calculator_live_root_cause_20261007.md`.
+
+NEXT ACTION: authentifizierter Readback von `ppar_tariff_tools_v1['kredit']`; genau den fehlenden Zustand korrigieren; danach denselben Live-Artikel erneut rendern. Kein Source-Fix.
