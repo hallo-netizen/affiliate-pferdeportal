@@ -3,36 +3,50 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / GRÖSSEN- UND ROLLENMODELL EINGEFÜHRT / HOBBY_MASTER V2 AKTIVE BEWERTUNGSBASIS
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / HOBBY_MASTER V2 AKTIVE BEWERTUNGSBASIS / PORTFOLIO- UND EBENENLOGIK NACHGEZOGEN
 
 ## Rolle
 
 Einzige aktuelle Zustandsautorität des Scopes `HOBBYRAUSCH_KONZEPT`.
 
-## Unveränderte Grundarchitektur
+## Aktueller belastbarer Stand
 
 Marke:
 **Hobby Depot**
 
 Drei Säulen:
-- Hauptportal / CORE;
-- Magazin / EDITORIAL;
-- HivePress / DIRECTORY.
+- CORE = Hauptportal;
+- EDITORIAL = Magazin;
+- DIRECTORY = HivePress / Anbieter.
 
-Acht Hauptwelten:
+Acht geschützte Hauptwelten:
 **Gestalten · Fertigen · Technik · Forschen · Pflanzen · Tiere · Bewegen · Sammeln**
 
-Diese acht Welten bleiben im ersten Integrationslauf geschützt.
+### Harte Ebenenregel
 
-Zwei zentrale Nutzerwege:
-1. Nutzer kennt sein Hobby bereits und sucht Einstieg, Ausrüstung, Kosten, Material, Techniken und Vertiefung.
-2. Nutzer sucht Inspiration und gelangt über Magazin/Hobbyfinder zu passenden Hobbys.
+Die acht Hauptwelten sind die oberste fachliche CORE-Ebene.
 
-## Neue verbindliche Portalgrenze
+`Hobbywelten` ist nur Übersichts-/Einstiegsseite bzw. View und NICHT Parent der acht Hauptwelten.
 
-Hobby Depot ist nicht "alles, was Menschen in ihrer Freizeit tun".
+Beliebte Hobbys, ungewöhnlich, zuhause, günstig usw. sind ebenfalls Views/Filter/kuratierte Einstiege, keine zweite Taxonomie.
 
-Ein Thema wird nur dann regulär aufgenommen, wenn es:
+## Portfolioziel
+
+Hobby Depot soll wirtschaftlich breiter werden, ohne zum beliebigen Massenportal zu explodieren.
+
+Integrierte Mischung:
+- große bekannte Hobbys = wirtschaftliche Anker;
+- mittlere Hobbys = stabiles Rückgrat;
+- Nischen-/ungewöhnliche Hobbys = SEO-Longtail + Differenzierung.
+
+Diese Klassen verändern nicht die kanonische Identität und erzeugen keine Parallelstruktur.
+
+Großer interner Hobbybestand ist erlaubt.
+Die sichtbare Navigation bleibt klein und selektiv.
+
+## Portalgrenze
+
+Ein Thema wird regulär aufgenommen, wenn es:
 - aktive/wiederholbare Freizeitpraxis ist;
 - erlern-/vertiefbaren Tätigkeitsschwerpunkt besitzt;
 - natürlich in eine der acht Welten passt;
@@ -40,9 +54,7 @@ Ein Thema wird nur dann regulär aufgenommen, wenn es:
 
 Ein echtes Hobby außerhalb dieser natürlichen Passung erzeugt nicht automatisch eine neunte Welt.
 
-## Neue Rollenlogik
-
-Nicht jedes Thema bekommt einen eigenen Hub.
+## Rollen- und Größenlogik
 
 Mögliche Rollen:
 - ORIENTATION_UNIVERSE;
@@ -52,27 +64,25 @@ Mögliche Rollen:
 - FINDER_ONLY;
 - OUT_OF_SCOPE.
 
-Monetarisierung entscheidet nicht über Behalten/Löschen.
-Nicht monetarisierbare gültige Themen bleiben für Magazin/SEO/Finder erhalten.
-
-## Größenregeln
-
 Leaf-Kategorie:
 - Ziel 5–12 Beiträge;
 - 4 nur begründete Ausnahme;
-- 13–15 zwingende Split-Prüfung;
+- 13–15 Split-Prüfung;
 - >15 nur explizite Ausnahme.
 
 Hobby-Hub:
 - Ziel 3–6 tragfähige Leaf-Kategorien;
 - 7–8 Split-/Macro-Prüfung;
-- >8 grundsätzlich Macro/Split statt einzelner Hub.
+- >8 grundsätzlich Macro/Split.
+
+Monetarisierung entscheidet nicht über Behalten/Löschen.
+Nicht monetarisierbare gültige Themen bleiben für Magazin/SEO/Finder erhalten.
 
 ## Zentrale Hobby-Sammelstelle
 
 Rohliste bleibt unveränderte Provenienzquelle.
 
-Neue aktive Bewertungsbasis:
+Aktive Bewertungsbasis:
 `/hobby rausch/HOBBY_DEPOT_HOBBY_MASTER_V2_20261007.json`
 
 Current-Zeiger:
@@ -89,18 +99,18 @@ Bestand:
 
 ## Neue bekannte Hobby-Kandidaten
 
-Breite/bekannte Hobbys werden nicht blind publiziert, sondern zuerst als Research Queue geprüft.
-
-Erste Queue:
+Research Queue:
 Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, Wandern, Radfahren, Camping, Schwimmen, Klettern, Bouldern, Gärtnern, Gemüseanbau, Briefmarken sammeln, Angeln, Plane Spotting.
+
+Nicht automatisch publizieren.
+Sie durchlaufen dieselben Scope-/Größen-/Rollen-Gates wie die bisherigen Nischen.
 
 ## Pilotbefund
 
-Pilotfälle:
 - Buchbinden → HOBBY_HUB bleibt stabil;
 - Fotografie → Macro-/Orientation-Prüfung statt Riesenhub;
 - Garten → kein einzelner Vollhub;
-- Treibholz sammeln → im Magazin erhalten, kein CORE-Hub ohne tragfähige Evidenz;
+- Treibholz sammeln → EDITORIAL erhalten, kein unbelegter CORE-Hub;
 - Musizieren → Scope-Review statt erzwungener Weltzuordnung.
 
 ## Autoritative Konzeptdateien
@@ -111,21 +121,20 @@ Pilotfälle:
 
 ## Technische Abgrenzung
 
-Pluginversionen, Live-Status und technische Releasefragen bleiben ausschließlich in:
-- `PLUGINS/PLUGIN_AKTEN/<PLUGIN-ID>/CURRENT.md`;
+Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich aus:
+- `PLUGINS/PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`;
 - `SEO_KATEGORIEN/CURRENT_STATE.md`.
 
 ## Erster offener Blocker
 
-Die 841 kanonischen Kandidaten sind noch nicht vollständig nach Scope, Größenklasse, Content Capacity und Publikationsrolle bewertet.
+Die 841 kanonischen Kandidaten sind noch nicht vollständig nach Scope, Identität/Alias, Größenklasse, Content Capacity, Publikationsrolle und 3-Säulen-Ownership bewertet.
 
 ## EXAKT EINE NEXT ACTION
 
-Die Bewertungsregeln aus dem Größen-/Rollenmodell maschinenlesbar auf den HOBBY_MASTER anwenden und zunächst kontrolliert als Batch auswerten.
+Die maschinenlesbaren Bewertungsregeln kontrolliert auf einen ersten HOBBY_MASTER-Batch anwenden und die Klassifikationsverteilung/Fehlklassifikationen prüfen.
 
-Dabei:
-- acht Welten schützen;
-- bestehende Zwischenstruktur zunächst schützen;
-- keine direkte WordPress-Synchronisierung;
-- keine Massenfreigabe;
-- erst nach Rollen-/Ownership-Prüfung Zielbaum-Delta erzeugen.
+Noch NICHT:
+- WordPress synchronisieren;
+- V1.12-Zielprofil live installieren;
+- acht Welten neu erfinden;
+- Hobbywelten als Parent der acht Welten verwenden.
