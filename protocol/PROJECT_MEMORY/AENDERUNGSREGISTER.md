@@ -763,3 +763,22 @@ SHA-256 `233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f`.
 
 OFFEN:
 Nur der reale 38-Call-Tiefenlauf in Hobby Depot.
+
+
+## HOBBYRAUSCH-HD001-20261007-N – DataForSEO-Rohzeilen sind Evidenz, keine neuen Artikel
+
+WAS:
+Nach dem realen V1.12.3-Lauf wurde die Zähllogik korrigiert.
+
+WARUM:
+Fachfremde Keyword-Ideas-Treffer wurden als zusätzliche Artikel gezählt. Das widersprach der V2-Regel, dass Fachlogik die Artikelintents vorgibt und DataForSEO nur validiert/dedupliziert.
+
+VERBINDLICH:
+Provider-Rohzeilen erhöhen niemals selbst die Artikelanzahl.
+Sie dürfen nur einen bereits vorhandenen fachlich definierten Artikelintent bestätigen oder mit anderen per Core-Keyword zusammenführen.
+
+UMSETZUNG:
+HD-001 V1.12.4, automatische Zero-Cost-Neuauswertung des gespeicherten V1.12.3-Ergebnisses.
+
+OFFEN:
+Nur reale Neuauswertung in Hobby Depot; keine weitere DataForSEO-Recherche.
