@@ -66,6 +66,31 @@ if (strpos($output, 'adcell_api_v2_') !== false
     || stripos($output, 'api.adcell') !== false) {
     $errors[] = 'forbidden:adcell_provider_http_in_output_runtime';
 }
+
+// Runtime-Hardlock: Automatische Creative-Library-Banner duerfen nur dann
+// Kandidaten sein, wenn ihre bereits gespeicherte Zielkante zum Kontext passt.
+// Ein unpassender/fehlender Target-Match darf weder als allgemeiner noch als
+// technischer Fallback wieder in den automatischen Pool gelangen.
+$rank_start = strpos($main, 'private function campaign_match_rank');
+$rank_end = strpos($main, 'private function slot_required_creative_type', $rank_start === false ? 0 : $rank_start);
+$rank_fn = ($rank_start !== false && $rank_end !== false && $rank_end > $rank_start)
+    ? substr($main, $rank_start, $rank_end - $rank_start) : '';
+$library_gate_pos = strpos($rank_fn, "\$library_banner =");
+$breed_fallback_pos = strpos($rank_fn, "Pferderassen ohne exakte Zielkante");
+if ($rank_fn === ''
+    || $library_gate_pos === false
+    || strpos($rank_fn, "sanitize_key((string)(\$campaign['source']??'')) === 'output_object_v4'", $library_gate_pos) === false
+    || strpos($rank_fn, 'if (is_array($automation_rank)) { return $automation_rank; }', $library_gate_pos) === false
+    || strpos($rank_fn, 'return null;', $library_gate_pos) === false
+    || ($breed_fallback_pos !== false && $library_gate_pos > $breed_fallback_pos)) {
+    $errors[] = 'missing:stored_target_match_is_automatic_banner_eligibility_gate';
+}
+$library_gate_end = $breed_fallback_pos !== false ? $breed_fallback_pos : strlen($rank_fn);
+$library_gate = $library_gate_pos !== false ? substr($rank_fn, $library_gate_pos, max(0, $library_gate_end - $library_gate_pos)) : '';
+if (strpos($library_gate, 'Gespeicherter allgemeiner Banner-Fallback') !== false
+    || strpos($library_gate, 'technisch gueltiger letzter Fallback') !== false) {
+    $errors[] = 'forbidden:library_banner_wrong_target_fallback';
+}
 $resolver_start = strpos($library, 'private function creative_library_resolve_tracking_destination_import');
 $resolver_end = strpos($library, 'private function creative_library_normalize_row', $resolver_start === false ? 0 : $resolver_start);
 $resolver = ($resolver_start !== false && $resolver_end !== false && $resolver_end > $resolver_start)
@@ -161,6 +186,7 @@ echo "PASS synthetic banner title no longer used as provider evidence\n";
 echo "PASS missing or corrupt ADCELL raw provider basis is fail-closed\n";
 echo "PASS synthetic display fallback is excluded from banner evidence\n";
 echo "PASS ADCELL basis sync is admin-worker bound and output runtime contains no provider HTTP\n";
+echo "PASS automatic Creative-Library banners require a matching stored target before distribution\n";
 echo "PASS destination resolver is guarded to import/background contexts\n";
 echo "PASS every banner path verifies the asset before target assignment\n";
 echo "PASS 6.72.199 basis resync waits for asset verification before reconcile\n";
