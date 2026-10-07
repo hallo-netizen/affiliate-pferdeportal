@@ -112,6 +112,17 @@ foreach ($program_ids as $program_id) {
     }
 
     foreach ($rows as $row) {
+        // Der Kategorien-Pflichtnachweis muss einen echten Banner verwenden,
+        // fuer den ADCELL tatsaechlich eine Kategorie-ID liefert UND der
+        // belegte Kategorienendpunkt den Namen aufloest. Ein zufaelliger
+        // kategorieloser erster Banner darf den Real-Provider-Gate nicht
+        // falsch negativ machen.
+        $row_category_id = absint($row['promotion_category_id'] ?? 0);
+        $row_category_name = trim((string)($row['promotion_category_name'] ?? ''));
+        if ($row_category_id <= 0 || $row_category_name === '') {
+            continue;
+        }
+
         $raw_json = (string)($row['provider_raw_json'] ?? '');
         $decoded = json_decode($raw_json, true);
         if (!is_array($decoded)) {
@@ -124,16 +135,18 @@ foreach ($program_ids as $program_id) {
                 $chosen_partner = $partner_name;
                 $chosen_row = $row;
                 $chosen_raw = $raw_item;
-                break 2;
+                // Erster geeigneter realer Kategorien-Banner genuegt fuer den
+                // Basisbeweis; keine weiteren Provideraufrufe noetig.
+                break 3;
             }
         }
     }
 }
 
 if ($chosen_program <= 0 || !is_array($chosen_row) || !is_array($chosen_raw)) {
-    $fail('no_importable_real_adcell_banner_found_in_configured_programs');
+    $fail('no_real_adcell_banner_with_resolved_category_found_in_configured_programs');
 }
-$ok('real_adcell_banner_received_from_configured_provider');
+$ok('real_adcell_banner_with_resolved_category_received_from_configured_provider');
 
 $raw_json = (string)($chosen_row['provider_raw_json'] ?? '');
 $raw_sha = strtolower((string)($chosen_row['provider_raw_sha256'] ?? ''));
@@ -198,7 +211,25 @@ if ((string)($payload['_provider_raw_json'] ?? '') !== $raw_json
     || (string)($payload['promotion_category_name'] ?? '') !== $category_name) {
     $fail('real_provider_evidence_changed_before_library');
 }
-$ok('real_provider_evidence_reaches_creative_library_unchanged');
+
+$expected_external_id = sanitize_text_field((string)($chosen_row['creative_id'] ?? ''));
+$expected_image = esc_url_raw((string)($chosen_row['image_source'] ?? ''));
+$expected_title_source = sanitize_key((string)($chosen_row['title_source'] ?? ''));
+$expected_information = sanitize_text_field((string)($chosen_row['information'] ?? ''));
+if ((string)($stored['provider'] ?? '') !== 'adcell'
+    || (string)($stored['partner_external_id'] ?? '') !== (string)$chosen_program
+    || (string)($stored['partner_name'] ?? '') !== $chosen_partner
+    || (string)($stored['external_id'] ?? '') !== $expected_external_id
+    || $expected_image === ''
+    || esc_url_raw((string)($stored['image_url'] ?? '')) !== $expected_image
+    || sanitize_key((string)($payload['title_source'] ?? '')) !== $expected_title_source) {
+    $fail('real_provider_identity_image_or_title_provenance_changed_before_library');
+}
+if ($expected_information !== ''
+    && sanitize_text_field((string)($payload['information'] ?? '')) !== $expected_information) {
+    $fail('real_provider_information_not_preserved_in_library_payload');
+}
+$ok('real_provider_identity_raw_category_image_title_and_information_reach_library');
 
 $tracking = esc_url_raw((string)($stored['tracking_url'] ?? ''));
 $destination = esc_url_raw((string)($stored['destination_url'] ?? ''));
