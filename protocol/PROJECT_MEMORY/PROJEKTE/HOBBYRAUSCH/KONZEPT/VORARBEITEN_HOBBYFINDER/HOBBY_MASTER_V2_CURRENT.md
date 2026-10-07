@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-07
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.2 KONZEPTEXAKT / V1.12.1 REALER INITIAL-BATCH AUSGEFÜHRT / V1.12.2 DEPTH-READ-ONLY LOKAL PASS / REALER DEPTH-LAUF OFFEN / NOCH KEINE GESAMTBEWERTUNG
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 REAL-RESULT-REPLAY LOKAL PASS / EINMALIGER LIVE-READBACK OFFEN / NOCH KEINE GESAMTBEWERTUNG
 
 ## Datenartefakt
 
@@ -77,8 +77,9 @@ Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, 
 - Fachvorprüfung: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
 - DataForSEO-Request: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
 - realer Initialbefund: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_REAL_RESULT_20261007.md`
+- KISS-Endreplay des echten Ergebnisses: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
 - Depth-Plan: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
-- WordPress-Bewertungskandidat: HD-001 V1.12.1 / SHA-256 `959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d`
+- WordPress-Bewertungskandidat: HD-001 V1.12.5 / SHA-256 `68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
 
 Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
 Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
@@ -86,13 +87,15 @@ Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 
 ## Nächster Schritt
 
-HD-001 V1.12.2 in Hobby Depot installieren und die gespeicherte Batch-001-Tiefenprüfung ausführen.
+Einmal HD-001 V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
 
-Der reale Initiallauf ist bereits erledigt:
-263 exakte Seeds → 106 Overview-Zeilen → 157 PENDING.
+Keine weitere DataForSEO-Recherche:
+- 0 neue Provider-Aufrufe;
+- 0 neue Kosten;
+- vorhandene Evidence wird nur nach Regelvertrag 1.4 neu gerechnet;
+- 0 Strukturwrites.
 
-Der nächste Lauf vertieft nur die 37 offenen fachlich definierten Cluster:
-37 Keyword Ideas + 1 finaler Overview = exakt 38 zusätzliche Calls.
+Danach das Ergebnis-JSON einmal als realen Readback prüfen.
 
-Danach neues Ergebnis-JSON auswerten.
-Keine WordPress-Kategoriensynchronisierung und kein Zielbaum-Delta vor belastbarer Rollen-/Ownership-Prüfung.
+Der 841er Master wird erst nach diesem Readback mit derselben stabilen Bewertungslogik weiterbearbeitet.
+Noch kein Zielbaum-Delta und kein WordPress-Kategoriesync.
