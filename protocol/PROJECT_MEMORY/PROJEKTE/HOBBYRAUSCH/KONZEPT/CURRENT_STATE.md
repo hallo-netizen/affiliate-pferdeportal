@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.1 PRO LEAF + ZUSAMMENFASSUNG GEBUNDEN / BATCH-001-FACHVORPRÜFUNG FERTIG / DATAFORSEO-ABGLEICH OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.2 KONZEPTEXAKT / V1.12.1 READ-ONLY WORDPRESS-BEWERTUNG LOKAL PASS / REALER DATAFORSEO-BATCHLAUF OFFEN
 
 ## Rolle
 
@@ -65,15 +65,16 @@ Mögliche Rollen:
 - OUT_OF_SCOPE.
 
 Leaf-Kategorie:
-- Ziel 5–12 Beiträge;
-- 4 nur begründete Ausnahme;
-- 13–14 Split-Prüfung;
-- >15 nur explizite Ausnahme.
+- unter 4 zusammenlegen / keine eigene Leaf-Kategorie;
+- 4 Grenzfall;
+- ideal etwa 5–12 Beiträge;
+- 13–14 oberhalb des Idealbereichs / prüfen;
+- ab etwa 15 Teilung prüfen.
 
 Hobby-Hub:
-- Ziel 3–6 tragfähige Leaf-Kategorien;
-- 7–8 Split-/Macro-Prüfung;
-- >8 grundsätzlich Macro/Split.
+- typischer Zielbereich 3–6 tragfähige Leaf-Kategorien;
+- 7–9 oberhalb des typischen Bereichs / prüfen;
+- ab etwa 10 Macro-/Split-Prüfung.
 
 Monetarisierung entscheidet nicht über Behalten/Löschen.
 Nicht monetarisierbare gültige Themen bleiben für Magazin/SEO/Finder erhalten.
@@ -162,22 +163,22 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_HD001_ASSESSMENT_RUN_NOT_BOUND`
+`HD001_V2_BATCH001_WORDPRESS_DATAFORSEO_RUN_PENDING`
 
-Die fachliche Vorprüfung des 16er Batches ist fertig.
-Für endgültige Leaf-Zahlen fehlt der reale DataForSEO-Abgleich.
+Der Pluginweg ist umgesetzt:
+HD-001 V1.12.1 besitzt jetzt einen eigenen read-only V2-Bewertungslauf im WordPress-Backend.
 
-Buchbinden zeigt bereits, warum das nötig ist:
-vorhandene echte Evidence ergibt in den vier aktiven Leafs 4 / 5 / 3 / 4 distinct Intent-Gruppen.
-Damit ist der alte Pilot weiterhin gültig, aber die neue V2-Hub-Abnahme noch offen.
+Er prüft den kontrollierten 16er Batch mit dem bestehenden DataForSEO-Zugang.
+Der Lauf schreibt keine Kategorien.
 
 ## EXAKT EINE NEXT ACTION
 
-Den vorbereiteten Batch-001-DataForSEO-Request über den bestehenden authentifizierten Hobby-Depot-Weg ausführen und danach jede Leaf-Kategorie neu zählen, Ownership prüfen und kleine Themen auf sinnvolle Zusammenfassung prüfen.
+V1.12.1 in Hobby Depot installieren und den gebündelten Batch 001 unter `Kategorien → V2-Hobbybewertung` real ausführen.
+
+Danach das Ergebnis gegen Regelvertrag 1.2 prüfen und erst dann die weitere Masterbewertung fortsetzen.
 
 Noch NICHT:
-- WordPress synchronisieren;
-- V1.12-Zielprofil live installieren;
-- Zielbaum-Delta bauen;
-- acht Welten neu erfinden;
+- Zielbaum synchronisieren;
+- alten V1.12-Zielbaum installieren/refreshen;
+- WordPress-Kategorien aus dem Batch schreiben;
 - Hobbywelten als Parent der acht Welten verwenden.
