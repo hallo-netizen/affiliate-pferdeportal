@@ -591,10 +591,22 @@ trait PPAR_Automation_Suite_Trait {
         global $wpdb;
         $table = $this->creative_library_table();
         $limit = max(1, min(10, absint($limit)));
+        $pending_sql = "image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%')";
         $rows = $wpdb->get_results(
-            "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type IN ('banner','product') AND image_url<>'' AND source_status='active' AND availability_state='active' AND payload NOT LIKE '%\"_dimension_state\":\"failed\"%' AND (width=0 OR height=0 OR payload LIKE '%\"_dimension_state\":\"pending\"%') ORDER BY id ASC LIMIT {$limit}",
+            "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type='banner' AND {$pending_sql} ORDER BY id ASC LIMIT {$limit}",
             ARRAY_A
         );
+        $free_slots = max(0, $limit - count((array)$rows));
+        if ($free_slots > 0) {
+            $product_rows = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE provider='adcell' AND creative_type='product' AND {$pending_sql} ORDER BY id ASC LIMIT %d",
+                    $free_slots
+                ),
+                ARRAY_A
+            );
+            $rows = array_merge((array)$rows, (array)$product_rows);
+        }
         $processed = 0;
         foreach ((array) $rows as $row) {
             $this->creative_library_verify_asset_row($row, false, true);
@@ -3566,19 +3578,6 @@ trait PPAR_Automation_Suite_Trait {
                 $row['topic_targets'] = '[]';
                 $row['classified_at'] = 0;
 
-                $mapped = $this->output_assign_banner_targets_from_destination_once($row);
-                $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
-                if ($mapped_n <= 0) {
-                    $no_map++;
-                    continue;
-                }
-                $mapped_count += $mapped_n;
-
-                $targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
-                $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                $row['topic_score'] = 100;
-                $row['classified_at'] = time();
-
                 $payload = json_decode((string)($row['payload'] ?? ''), true);
                 $payload = is_array($payload) ? $payload : array();
                 $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
@@ -3592,6 +3591,21 @@ trait PPAR_Automation_Suite_Trait {
                     }
                     continue;
                 }
+
+                // KISS-Hardlock: feste Zielkarte erst nach erfolgreicher
+                // technischer Bildprüfung schreiben.
+                $mapped = $this->output_assign_banner_targets_from_destination_once($row);
+                $mapped_n = absint(is_array($mapped) ? ($mapped['mapped'] ?? 0) : 0);
+                if ($mapped_n <= 0) {
+                    $no_map++;
+                    continue;
+                }
+                $mapped_count += $mapped_n;
+
+                $targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
+                $row['topic_targets'] = wp_json_encode($targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $row['topic_score'] = 100;
+                $row['classified_at'] = time();
 
                 if (method_exists($this, 'output_plan_creative')) {
                     $plan = $this->output_plan_creative($row, true);
