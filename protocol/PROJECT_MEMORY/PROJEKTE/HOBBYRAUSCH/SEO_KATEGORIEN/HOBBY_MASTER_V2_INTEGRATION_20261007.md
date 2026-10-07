@@ -57,6 +57,11 @@ Nicht neu erfinden:
 - Drei-Säulen-Modell;
 - bestehende V1.12-Zwischenstruktur.
 
+Harte Korrektur zur Ebenenlage:
+- die acht Hauptwelten sind oberste fachliche CORE-Ebene;
+- `Hobbywelten` ist Übersicht/View und KEIN Parent dieser acht Welten;
+- das spätere V2-Zielbaum-Delta muss die V1.12-Baselinebeziehung `core:hub → core:world:...` korrigieren, ohne die acht Welten selbst neu zu erfinden.
+
 Diese Knoten sind im ersten Durchlauf BASELINE_PROTECTED.
 
 Geändert wird zuerst nur:
