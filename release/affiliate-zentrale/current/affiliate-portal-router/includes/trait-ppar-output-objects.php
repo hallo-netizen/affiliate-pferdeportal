@@ -1422,6 +1422,7 @@ trait PPAR_Output_Objects_Trait {
                         'level'=>$map_level,
                         'target_key'=>$target_key,
                         'target_label'=>sanitize_text_field((string)($target['label']??'')),
+                        'path_target_keys'=>$this->output_banner_target_path_keys($target,$targets,$portal_key),
                         'confidence'=>100,
                         'source'=>$map_source,
                         'destination_source'=>$source,
@@ -1436,90 +1437,41 @@ trait PPAR_Output_Objects_Trait {
                 continue;
             }
 
-            // 1. Konkreter Bannerinhalt/Provider-Thema hat Vorrang.
-            $content=$this->output_banner_content_classification($row,$portal,$targets);
-            if(is_wp_error($content)){continue;}
-            if(is_array($content) && sanitize_key((string)($content['status']??''))==='review'){
-                continue;
-            }
-            if(is_array($content) && sanitize_key((string)($content['status']??''))==='ready' && is_array($content['target']??null)){
-                $target=$content['target'];
-                $target_key=sanitize_text_field((string)($target['key']??''));
-                if($target_key!==''){
-                    $new_records[]=array(
-                        'portal_key'=>$portal_key,
-                        'state'=>'mapped',
-                        'level'=>'content_exact',
-                        'target_key'=>$target_key,
-                        'target_label'=>sanitize_text_field((string)($target['label']??'')),
-                        'confidence'=>100,
-                        'source'=>sanitize_key((string)($content['source']??'banner_content_exact')),
-                        'destination_source'=>$source,
-                        'destination_url'=>$destination,
-                        'updated_at'=>time(),
-                    );
-                    $mapped++;
-                    continue;
-                }
+            // KISS-Evidenzreihenfolge:
+            // 1. echte Ziel-URL, 2. Provider-Kategorie, 3. Bannername/-text.
+            // Jede Stufe liefert genau EIN tiefstes belastbares Ziel.
+            $classification=$this->output_banner_destination_url_classification($row,$portal,$targets);
+            if(is_wp_error($classification)){continue;}
+
+            if(!is_array($classification)){
+                $classification=$this->output_banner_provider_topic_classification($row,$portal);
+                if(is_wp_error($classification)){continue;}
             }
 
-            // 2. Ziel-URL ist nur noch Fallback und nur dann zulaessig, wenn
-            // sie wirklich belastbar ist. Alte gespeicherte Karten werden nie
-            // wiederverwendet; jede Reconcile-Runde baut aus aktuellen Daten neu.
-            if(!in_array($source,array('provider_explicit','decoded_tracking','resolved_redirect'),true)
-                || $destination==='' || $semantic===''){
+            if(!is_array($classification)){
+                $classification=$this->output_banner_content_classification($row,$portal,$targets);
+                if(is_wp_error($classification)){continue;}
+            }
+
+            if(!is_array($classification)
+                || sanitize_key((string)($classification['status']??''))!=='ready'
+                || !is_array($classification['target']??null)){
                 continue;
             }
 
-            $dest_tokens=$this->output_tokens($semantic);
-            $ranked=array();
-            foreach((array)$targets as $target){
-                if(!is_array($target)){continue;}
-                $type=sanitize_key((string)($target['type']??''));
-                if(!in_array($type,$wanted,true)){continue;}
-                $target_key=sanitize_text_field((string)($target['key']??''));
-                if($target_key===''){continue;}
-                if(method_exists($this,'control_target_gate') && is_wp_error($this->control_target_gate($portal_key,$target_key))){continue;}
+            $target=$classification['target'];
+            $target_key=sanitize_text_field((string)($target['key']??''));
+            if($target_key===''){continue;}
 
-                $slug_norm=$this->output_text(str_replace(array('-','_'),' ',(string)($target['slug']??'')));
-                $slug_tokens=$this->output_tokens($slug_norm);
-                $label_parts=preg_split('/\s+>\s+/',(string)($target['label']??''));
-                $leaf_norm=$this->output_text($label_parts?end($label_parts):(string)($target['label']??''));
-                $leaf_tokens=$this->output_tokens($leaf_norm);
-                $matched=array();
-                foreach(array_values(array_unique(array_merge($slug_tokens,$leaf_tokens))) as $tt){
-                    if(strlen($tt)<5){continue;}
-                    foreach($dest_tokens as $dt){
-                        if($dt===$tt || (strlen($dt)>=6 && strlen($tt)>=6 && (strpos($dt,$tt)!==false || strpos($tt,$dt)!==false))){
-                            $matched[$tt]=true; break;
-                        }
-                    }
-                }
-                $exact=$slug_tokens && !array_diff($slug_tokens,array_keys($matched));
-                $score=$exact ? 1000 + min(90,absint($target['depth']??0)*10) : count($matched)*140;
-                if($score>0){$ranked[]=array('target'=>$target,'score'=>$score,'matches'=>count($matched),'exact'=>$exact);}
-            }
-
-            usort($ranked,static function($a,$b){
-                $c=(int)$b['score']<=>(int)$a['score']; if($c!==0)return $c;
-                $c=(int)$b['matches']<=>(int)$a['matches']; if($c!==0)return $c;
-                return absint($b['target']['depth']??0)<=>absint($a['target']['depth']??0);
-            });
-            if(!$ranked){continue;}
-            $best=$ranked[0]; $second=$ranked[1]??null;
-            $margin=(int)$best['score']-(int)($second['score']??0);
-            $accept=!empty($best['exact']) ? ($second===null || $margin>=100) : ((int)$best['score']>=140 && ($second===null || $margin>=70));
-            if(!$accept){continue;}
-
-            $target=$best['target'];
             $new_records[]=array(
                 'portal_key'=>$portal_key,
                 'state'=>'mapped',
-                'level'=>!empty($best['exact'])?'exact':'extended',
-                'target_key'=>sanitize_text_field((string)($target['key']??'')),
+                'level'=>sanitize_key((string)($classification['_ppar_destination_level']??'exact')),
+                'target_key'=>$target_key,
                 'target_label'=>sanitize_text_field((string)($target['label']??'')),
-                'confidence'=>!empty($best['exact'])?100:80,
-                'source'=>'import_destination_url_fallback',
+                'path_target_keys'=>$this->output_banner_target_path_keys($target,$targets,$portal_key),
+                'confidence'=>absint($classification['confidence']??100),
+                'source'=>sanitize_key((string)($classification['source']??'banner_auto_target')),
                 'destination_source'=>$source,
                 'destination_url'=>$destination,
                 'updated_at'=>time(),
