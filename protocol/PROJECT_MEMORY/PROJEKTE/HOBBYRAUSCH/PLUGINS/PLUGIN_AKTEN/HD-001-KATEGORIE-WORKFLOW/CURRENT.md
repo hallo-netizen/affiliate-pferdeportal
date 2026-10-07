@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 LOKAL FULL POS/NEG PASS ALS TECHNISCHE BASIS / NICHT LIVE ABGENOMMEN / HOBBY_MASTER V2 FACHLICH VORGESCHALTET / KEIN AKTUELLER DEPLOYMENTAUFTRAG
+STATUS: V1.12.0 LOKAL FULL POS/NEG PASS ALS TECHNISCHE BASIS / NICHT LIVE ABGENOMMEN / V2-REGELVERTRAG + BATCH 001 GEBUNDEN / EVIDENZLÜCKEN VOR ZIELBAUM / KEIN DEPLOYMENTAUFTRAG
 
 ## Plugin
 
@@ -104,19 +104,25 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_MASTER_NOT_ASSESSED_TARGET_DELTA_NOT_BUILT`
+`HD001_V2_BATCH001_EVIDENCE_INCOMPLETE_MASTER_NOT_ASSESSED`
 
-Die 841 kanonischen Hobbyidentitäten sind noch nicht vollständig nach Scope, Identität/Alias, Größenklasse, Content Capacity, Publikationsrolle und 3-Säulen-Ownership bewertet.
+Der maschinenlesbare Bewertungsvertrag ist inzwischen gebunden und der kontrollierte Batch 001 wurde ausgeführt.
 
-Dadurch existiert noch kein belastbares V2-Zielbaum-Delta, das die fachlich fortgeschriebene Struktur inklusive korrekter oberster Acht-Welten-Ebene abbildet.
+Ergebnis:
+- 16 Identitäten geprüft;
+- 0 Zielbaum-Writes freigegeben;
+- 15 Fälle benötigen noch Scope-, Content-Capacity- oder Ownership-Evidenz;
+- Buchbinden bleibt fachlich HOBBY_HUB, aber die neue vollständige V2-Abnahme ist noch nicht abgeschlossen.
+
+Dadurch existiert weiterhin kein belastbares V2-Zielbaum-Delta.
 
 ## EXAKT EINE NEXT ACTION
 
 Keine Pluginänderung und kein Deployment starten.
 
-Zuerst im Scope `SEO_KATEGORIEN` die maschinenlesbaren Bewertungsregeln auf einen kontrollierten ersten HOBBY_MASTER-V2-Batch anwenden und die Ergebnisse prüfen.
+Zuerst im Scope `SEO_KATEGORIEN` die fehlende Evidenz für den fest gebundenen Batch 001 erzeugen und denselben Batch erneut durch den V2-Bewertungsvertrag laufen lassen.
 
-Erst nach abgeschlossenem Master/Delta wird V1.12.0 technisch gegen das neue Zielprofil fortgeschrieben und erneut vollständig POS/NEG getestet.
+Erst nach abgeschlossener Masterbewertung und Zielbaum-Delta wird V1.12.0 technisch gegen das neue Zielprofil fortgeschrieben und erneut vollständig POS/NEG getestet.
 
 ## Release-/Artefaktgrenze
 
