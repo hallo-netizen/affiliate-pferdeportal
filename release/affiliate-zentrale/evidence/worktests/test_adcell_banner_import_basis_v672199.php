@@ -79,6 +79,64 @@ if ($resolver === ''
     $errors[] = 'missing:destination_resolution_import_context_guard';
 }
 
+// Reihenfolge-Hardlock: Für JEDEN Banner muss technische Asset-Evidence
+// vor der ersten festen Zielkarte stehen.
+$verify_gate_start = strpos($library, 'private function creative_library_verify_before_assign_banner');
+$verify_gate_end = strpos($library, 'private function creative_library_verify_asset_row', $verify_gate_start === false ? 0 : $verify_gate_start);
+$verify_gate = ($verify_gate_start !== false && $verify_gate_end !== false && $verify_gate_end > $verify_gate_start)
+    ? substr($library, $verify_gate_start, $verify_gate_end - $verify_gate_start) : '';
+if ($verify_gate === ''
+    || strpos($verify_gate, "creative_type'] ?? '')) === 'banner'") === false
+    || strpos($verify_gate, "array('direct','manual')") !== false) {
+    $errors[] = 'missing:all_banners_verify_before_assign';
+}
+
+$import_start = strpos($auto, 'private function automation_import_rows');
+$import_end = strpos($auto, 'private function automation_merge_counts', $import_start === false ? 0 : $import_start);
+$import_fn = ($import_start !== false && $import_end !== false && $import_end > $import_start)
+    ? substr($auto, $import_start, $import_end - $import_start) : '';
+$import_verify_pos = strpos($import_fn, '$dimension_state=');
+$import_assign_pos = strpos($import_fn, 'output_assign_banner_targets_from_destination_once($stored_row)');
+if ($import_fn === '' || $import_verify_pos === false || $import_assign_pos === false || $import_verify_pos > $import_assign_pos) {
+    $errors[] = 'missing:automation_asset_gate_before_target_assignment';
+}
+
+$reconcile_start = strpos($auto, 'public function run_v672195_banner_reconcile');
+$reconcile_end = strpos($auto, 'public function maybe_upgrade_adcell_banner_import_basis_v672199', $reconcile_start === false ? 0 : $reconcile_start);
+$reconcile_fn = ($reconcile_start !== false && $reconcile_end !== false && $reconcile_end > $reconcile_start)
+    ? substr($auto, $reconcile_start, $reconcile_end - $reconcile_start) : '';
+$reconcile_verify_pos = strpos($reconcile_fn, '$verified =');
+$reconcile_assign_pos = strpos($reconcile_fn, '$mapped = $this->output_assign_banner_targets_from_destination_once($row)');
+if ($reconcile_fn === '' || $reconcile_verify_pos === false || $reconcile_assign_pos === false || $reconcile_verify_pos > $reconcile_assign_pos) {
+    $errors[] = 'missing:reconcile_asset_gate_before_target_assignment';
+}
+
+$resync_start = strpos($auto, 'public function run_v672199_adcell_banner_basis_resync');
+$resync_end = strpos($auto, 'public function maybe_upgrade_adcell_destination_url_v672189', $resync_start === false ? 0 : $resync_start);
+$resync_fn = ($resync_start !== false && $resync_end !== false && $resync_end > $resync_start)
+    ? substr($auto, $resync_start, $resync_end - $resync_start) : '';
+if ($resync_fn === ''
+    || strpos($resync_fn, "'waiting_assets'") === false
+    || strpos($resync_fn, 'automation_has_pending_adcell_assets()') === false
+    || strpos($resync_fn, "'ready_reconcile'") === false) {
+    $errors[] = 'missing:basis_resync_waits_for_assets';
+}
+
+if (strpos($library, 'payload NOT LIKE \'%\"_dimension_state\":\"failed\"%\'') === false
+    || strpos($auto, 'payload NOT LIKE \'%\"_dimension_state\":\"failed\"%\'') === false) {
+    $errors[] = 'missing:failed_assets_are_terminal_not_pending_forever';
+}
+
+$selection_start = strpos($library, 'public function handle_creative_library_selection');
+$selection_end = strpos($library, 'private function creative_library_slot_filter_options', $selection_start === false ? 0 : $selection_start);
+$selection_fn = ($selection_start !== false && $selection_end !== false && $selection_end > $selection_start)
+    ? substr($library, $selection_start, $selection_end - $selection_start) : '';
+$selection_verify_pos = strpos($selection_fn, '$asset_verified =');
+$selection_assign_pos = strpos($selection_fn, 'output_assign_banner_targets_from_destination_once($row)');
+if ($selection_fn === '' || $selection_verify_pos === false || $selection_assign_pos === false || $selection_verify_pos > $selection_assign_pos) {
+    $errors[] = 'missing:manual_family_asset_gate_before_target_assignment';
+}
+
 if ($errors) {
     fwrite(STDERR, "ADCELL_BANNER_IMPORT_BASIS_FAIL\n" . implode("\n", $errors) . "\n");
     exit(1);
@@ -92,4 +150,7 @@ echo "PASS missing or corrupt ADCELL raw provider basis is fail-closed\n";
 echo "PASS synthetic display fallback is excluded from banner evidence\n";
 echo "PASS ADCELL basis sync is admin-worker bound and output runtime contains no provider HTTP\n";
 echo "PASS destination resolver is guarded to import/background contexts\n";
+echo "PASS every banner path verifies the asset before target assignment\n";
+echo "PASS 6.72.199 basis resync waits for asset verification before reconcile\n";
+echo "PASS failed assets stay fail-closed without endless pending loop\n";
 echo "ADCELL_BANNER_IMPORT_BASIS_COMPLETE\n";
