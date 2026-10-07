@@ -27,26 +27,30 @@ jobs:
           out.mkdir(parents=True,exist_ok=True)
           with zipfile.ZipFile(zpath) as z:
               names=z.namelist()
-              wanted={}
+              copied={}
+              exact_suffixes={
+                  'PPM679_CANONICAL_PLAN_INSPECTION.json':'contracts/canonical-complete-editorial-plan-v1.json',
+                  'PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json':'contracts/normal-draft-release-v1.json',
+                  'PPM679_PRODUCTION_PLAN_V4_INSPECTION.json':'contracts/production-plan-v4.json',
+                  'PPM679_PRODUCTION_PLAN_V5_INSPECTION.json':'contracts/production-plan-v5.json',
+                  'PPM679_EDITORIAL_PLAN_REGISTRY_INSPECTION.php':'includes/editorial-plan-registry.php',
+              }
+              for dest,suffix in exact_suffixes.items():
+                  hits=[n for n in names if n.lower().endswith(suffix.lower())]
+                  if len(hits)!=1:
+                      raise SystemExit(f'{dest}: expected 1 hit, got {hits}')
+                  (out/dest).write_bytes(z.read(hits[0])); copied[dest]=hits[0]
+              class_hits=[]
               for n in names:
-                  low=n.lower()
-                  if low.endswith('contracts/canonical-complete-editorial-plan-v1.json'):
-                      wanted['PPM679_CANONICAL_PLAN_INSPECTION.json']=n
-                  if low.endswith('contracts/normal-draft-release-v1.json'):
-                      wanted['PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json']=n
-                  if low.endswith('.php'):
-                      data=z.read(n)
-                      if b'PPM679_Editorial_Plan_Runtime_Gate' in data:
-                          wanted['PPM679_EDITORIAL_PLAN_RUNTIME_GATE_INSPECTION.php']=n
-              if set(wanted) != {
-                  'PPM679_CANONICAL_PLAN_INSPECTION.json',
-                  'PPM679_NORMAL_DRAFT_RELEASE_INSPECTION.json',
-                  'PPM679_EDITORIAL_PLAN_RUNTIME_GATE_INSPECTION.php'
-              }:
-                  raise SystemExit('required inspection files not uniquely found: '+json.dumps(wanted,ensure_ascii=False))
-              for dest,src in wanted.items():
-                  (out/dest).write_bytes(z.read(src))
-              (out/'PPM679_INSPECTION_SOURCE_MAP.json').write_text(json.dumps(wanted,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                  if not n.lower().endswith('.php'): continue
+                  data=z.read(n)
+                  if b'class PPM679_Editorial_Plan_Runtime_Gate' in data:
+                      class_hits.append((n,data))
+              if len(class_hits)!=1:
+                  raise SystemExit('runtime gate class hits='+json.dumps([n for n,_ in class_hits]))
+              (out/'PPM679_EDITORIAL_PLAN_RUNTIME_GATE_CLASS_INSPECTION.php').write_bytes(class_hits[0][1])
+              copied['PPM679_EDITORIAL_PLAN_RUNTIME_GATE_CLASS_INSPECTION.php']=class_hits[0][0]
+              (out/'PPM679_INSPECTION_SOURCE_MAP.json').write_text(json.dumps(copied,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
       - name: Commit inspection extracts
         shell: bash
@@ -56,5 +60,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add control/pste-topic-engine/inspection
           git diff --cached --quiet && exit 0
-          git commit -m "inspection: extract exact PPM 6.7.9 plan and runtime gate [skip ci]"
+          git commit -m "inspection: extract exact PPM 6.7.9 registry and runtime gate [skip ci]"
           git push origin HEAD:pste-kiss-e2e-20261005
