@@ -23,13 +23,13 @@ Bestätigt:
 Ein Hobby-Hub wird nicht anhand einer Gesamtzahl von Artikeln freigegeben.
 
 Jede unterste Kategorie wird einzeln geprüft:
-- 0–3 eigenständige Beiträge: keine eigene Leaf-Kategorie;
-- 4: Ausnahmeprüfung;
-- 5–12: Zielbereich;
-- 13–14: Split-Prüfung;
-- ab etwa 15: Split erforderlich.
+- unter 4 eigenständige Beiträge: zusammenlegen / keine eigene Leaf-Kategorie;
+- 4: Grenzfall;
+- 5–12: idealer Zielbereich;
+- 13–14: oberhalb des Idealbereichs; keine automatische Teilung;
+- ab etwa 15: Teilung prüfen, nicht automatisch erzwingen.
 
-Ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs.
+Ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs; ab etwa 10 eigenständigen Unterbereichen folgt eine Macro-/Split-Prüfung.
 
 Ein Beitrag zählt nur einmal pro echtem Nutzer-/Suchintent.
 Synonyme und bloße Formulierungsvarianten werden zusammengeführt.
