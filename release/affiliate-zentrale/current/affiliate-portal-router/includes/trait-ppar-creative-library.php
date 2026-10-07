@@ -800,10 +800,6 @@ trait PPAR_Creative_Library_Trait {
         $source_status = $this->creative_library_normalize_status($this->creative_library_mapped_value($row, $mapping, 'status'));
         // Import ist absichtlich portalneutral. Branche, Portalziel und Ausgabeform
         // werden ausschließlich im zentralen Output-Modell je Portal entschieden.
-        $manual_target_family = sanitize_key((string)($context['target_family'] ?? ''));
-        if (!in_array($manual_target_family, array('kosten','versicherung'), true)) {
-            $manual_target_family = '';
-        }
         $payload = array(
             '_declared_width'=>$declared_width,
             '_declared_height'=>$declared_height,
@@ -817,7 +813,6 @@ trait PPAR_Creative_Library_Trait {
             '_preverify_topic_status'=>'portal_pending',
             '_preverify_topic_score'=>0,
             '_preverify_topic_targets'=>array(),
-            '_manual_target_family'=>$manual_target_family,
         );
 
         // Provider-Rohdaten sind Beweisdaten, kein Anzeigetext. Sie duerfen
@@ -1473,69 +1468,6 @@ trait PPAR_Creative_Library_Trait {
             }
             if ($mode === 'selected' || $mode === 'unselected') {
                 $wpdb->update($table, array('selected'=>$mode === 'selected' ? 1 : 0), array('id'=>$id));
-                $updated++;
-                continue;
-            }
-            if (in_array($mode, array('tarifcheck_family_kosten','tarifcheck_family_versicherung','tarifcheck_family_auto'), true)) {
-                $partner = remove_accents(strtolower((string)($row['partner_name'] ?? '')));
-                if (sanitize_key((string)($row['provider'] ?? '')) !== 'direct'
-                    || sanitize_key((string)($row['creative_type'] ?? '')) !== 'banner'
-                    || (strpos($partner, 'tarifcheck') === false && strpos($partner, 'check24') === false)) {
-                    $blocked++;
-                    $errors['tarifcheck_family_invalid_creative'] = 'Die Vergleichsportal-Gruppenzuordnung ist nur für Tarifcheck- oder CHECK24-Banner des Direktpartners zulässig.';
-                    continue;
-                }
-                $family = $mode === 'tarifcheck_family_kosten'
-                    ? 'kosten'
-                    : ($mode === 'tarifcheck_family_versicherung' ? 'versicherung' : '');
-                $payload = json_decode((string)($row['payload'] ?? ''), true);
-                $payload = is_array($payload) ? $payload : array();
-                $payload['_manual_target_family'] = $family;
-                $wpdb->update($table, array(
-                    'payload'=>wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                    'topic_score'=>0,
-                    'topic_targets'=>'[]',
-                    'classified_at'=>0,
-                ), array('id'=>$id));
-                $row['payload'] = wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                $row['topic_score'] = 0;
-                $row['topic_targets'] = '[]';
-                $row['classified_at'] = 0;
-                if (method_exists($this, 'creative_library_deactivate_automatic_output_campaigns')) {
-                    $this->creative_library_deactivate_automatic_output_campaigns((string)($row['identity_hash'] ?? ''));
-                }
-                $dimension_state = sanitize_key((string)($payload['_dimension_state'] ?? ''));
-                $asset_verified = in_array($dimension_state, array('verified','mismatch'), true)
-                    && absint($row['width'] ?? 0) > 0
-                    && absint($row['height'] ?? 0) > 0;
-                if (!$asset_verified) {
-                    // Familienwahl ist gespeichert, aber fachliche Zielkarte erst
-                    // nach technischer Bildprüfung. Der Verifier übernimmt danach
-                    // Zuordnung und Planung aus derselben gespeicherten Familie.
-                    if ($dimension_state !== 'failed'
-                        && method_exists($this, 'creative_library_schedule_asset_verification')) {
-                        $this->creative_library_schedule_asset_verification(1);
-                    }
-                } elseif (method_exists($this, 'output_assign_banner_targets_from_destination_once')) {
-                    $mapped = $this->output_assign_banner_targets_from_destination_once($row);
-                    $mapped_targets = is_array($mapped['targets'] ?? null) ? $mapped['targets'] : array();
-                    $row['topic_targets'] = wp_json_encode($mapped_targets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                    $row['topic_score'] = absint($mapped['mapped'] ?? 0) > 0 ? 100 : 0;
-                    if (absint($mapped['mapped'] ?? 0) > 0 && method_exists($this, 'output_plan_creative')) {
-                        $plan = $this->output_plan_creative($row, true);
-                        if (is_array($plan)) {
-                            $planned += absint($plan['created'] ?? 0);
-                            $drafts += absint($plan['drafts'] ?? 0);
-                            $blocked += absint($plan['blocked'] ?? 0);
-                        }
-                    }
-                }
-                // Der robuste Gesamt-Reconcile wird nach jeder manuellen
-                // Familienänderung erneut freigegeben. Dadurch kann kein alter
-                // automatischer Bannerzustand dauerhaft parallel überleben.
-                delete_option('ppar_v672195_banner_reconcile_state');
-                delete_option('ppar_v672195_banner_reconcile_cursor');
-                delete_option('ppar_v672195_banner_reconcile_reset_done');
                 $updated++;
                 continue;
             }
