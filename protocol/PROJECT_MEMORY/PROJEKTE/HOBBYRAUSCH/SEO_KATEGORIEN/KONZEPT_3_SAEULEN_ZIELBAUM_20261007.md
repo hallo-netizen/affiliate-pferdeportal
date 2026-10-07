@@ -27,7 +27,26 @@ DataForSEO darf NICHT:
 - HivePress-Struktur erfinden;
 - aus einer Keywordphrase automatisch einen sichtbaren Kategorienamen machen.
 
-## 2. Drei Säulen
+## 2. Allgemeingültige Engine / Projektprofil
+
+Die technische Engine darf keine Hobby-Depot-Fachbegriffe voraussetzen.
+
+Sie kennt nur drei konfigurierbare Rollen:
+- CORE = fachlicher/kommerzieller Hauptbereich;
+- EDITORIAL = Magazin/Journal/SEO-/Inspirationsbereich;
+- DIRECTORY = Anbieter/Kurse/Dienstleistungen/Verzeichnis.
+
+Ein Projektprofil liefert dazu lediglich die projektspezifischen Namen, Bäume, Tiefenregeln und Routingregeln. Hobby Depot ist ein solches Profil; Gaumen Atelier oder jedes andere Thema kann ein anderes Profil verwenden, ohne die Engine umzubauen.
+
+Die Engine muss daher können:
+- beliebige Root- und Zwischenknoten aus einem versionierten Zielbaum übernehmen;
+- beliebige projektspezifische Rollenbezeichnungen anzeigen;
+- Add / Move / Rename / Merge / Archive / Delete per Soll/Ist-Diff;
+- projektübergreifend dieselbe Dubletten-/Intent-/Keyword-Ownership-Logik anwenden;
+- Monetarisierungsregeln als Projektregel auswerten, ohne Themen zu verlieren;
+- DataForSEO ausschließlich als Keyword-/SEO-Evidenzadapter verwenden, niemals als Strukturautorität.
+
+## 3. Drei Säulen – Hobby-Depot-Profil
 
 ### Säule A – Hauptportal / Hobbywelten
 Zweck: bekannte Hobbys, Wissen, Ausrüstung, Produkte.
@@ -130,7 +149,7 @@ Sammeln:
 
 Keine starre universelle Maximalzahl direkter Kinder wird erfunden. Die Ebene muss übersichtlich und logisch bleiben. Ein zu breiter Ast wird fachlich geteilt; ein zu dünner Ast wird nicht künstlich aufgefüllt.
 
-## 3. Hobby-Ebene / Content-Kategorien
+## 4. Hobby-Ebene / Content-Kategorien
 
 Ein Hobby ist ein stabiler eigener Knoten mit eigener hobby_id.
 
@@ -149,7 +168,7 @@ Darunter werden nur tatsächlich benötigte Content-Kategorien geführt. Prüfbe
 Nicht jeder Prüfbereich wird automatisch angelegt.
 Keyword ≠ Kategorie.
 
-## 4. Monetarisierungs-Gate
+## 5. Monetarisierungs-Gate
 
 Ein Hobby darf nur als eigenständiges Hauptportal-Hobby veröffentlicht werden, wenn:
 - monetization_fit = DIRECT oder ASSISTED;
@@ -166,13 +185,13 @@ Erlaubte Pfade:
 
 NONE oder UNKNOWN dürfen NICHT in das Hauptportal promoviert werden.
 
-Sie können – falls redaktionell sinnvoll – im Magazin vorkommen.
+Sie werden NICHT verworfen. Jeder fachlich gültige Kandidat bleibt im zentralen Bestand erhalten. Wenn kein DIRECT/ASSISTED-Fit vorliegt, gehört sein veröffentlichbarer SEO-/Inspirationsraum grundsätzlich in die redaktionelle Säule (Magazin/Journal) oder bleibt dort als geplanter redaktioneller Kandidat erhalten. Monetarisierung entscheidet damit über die SÄULE, nicht über das Behalten oder Löschen des Themas.
 
 Beispiel:
 Treibholz und Treibholz sammeln werden zuerst zu EINER hobby_id zusammengeführt.
 Ohne belegten DIRECT/ASSISTED-Fit darf dieser Datensatz nicht als Hauptportal-Hobby unter Sammeln erscheinen.
 
-## 5. Säule B – Magazin
+## 6. Säule B – Magazin
 
 Zweck: Inspiration, Hobbywahl, Situationen, Saison, ungewöhnliche/kleine Themen, Trends und Longtails.
 
@@ -205,7 +224,7 @@ Magazin → Hobbyfinder/Hobby → Hauptportal → Ausrüstung/Produkte/Anbieter.
 
 Das Magazin besitzt keine Kopie des Hauptportalbaums.
 
-## 6. Säule C – HivePress / Anbieter
+## 7. Säule C – HivePress / Anbieter
 
 HivePress ist eine eigene Anbieterstruktur und KEINE Kopie des Content-Baums.
 
@@ -224,7 +243,7 @@ Die hobby_id ist Verbindung, aber erzeugt keine zweite SEO-Hobbyseite in HivePre
 
 Eine HivePress-Kategorie wird nur aktiviert, wenn reale Anbieter-/Kurs-/Dienstleistungsnutzung vorgesehen ist.
 
-## 7. Globale Dubletten- und Kannibalisierungsregel
+## 8. Globale Dubletten- und Kannibalisierungsregel
 
 Die Prüfung gilt GEMEINSAM über:
 - Hauptportal;
@@ -247,7 +266,7 @@ Exakte Primärkeyword-Dubletten über zwei Säulen sind BLOCKED.
 Semantisch gleiche Intentionen über zwei Säulen sind BLOCKED.
 Eine andere Säule darf denselben Hobbybegriff nur als Relation/Filter/Verweis benutzen, nicht als konkurrierende SEO-Zielseite.
 
-## 8. DataForSEO-Rolle
+## 9. DataForSEO-Rolle
 
 Für jeden bereits definierten Strukturknoten gibt es:
 - display_name = kurzer Navigationsname;
@@ -263,7 +282,7 @@ primary_keyword: Outdoor Hobbys
 
 Ein langer Suchbegriff darf niemals automatisch zum Menünamen werden.
 
-## 9. Flexible Änderungen
+## 10. Flexible Änderungen
 
 Die Struktur ist versioniert, aber nicht starr.
 
@@ -279,7 +298,7 @@ Jeder Knoten besitzt stabile node_id/hobby_id.
 
 WordPress wird immer per Soll/Ist-Diff synchronisiert.
 
-## 10. Sichtbarkeit / atomarer Import
+## 11. Sichtbarkeit / atomarer Import
 
 Ein halbfertiger Baum darf nicht minutenlang öffentlich sichtbar sein.
 
@@ -294,7 +313,7 @@ Ablauf:
 Bei Fehler:
 Rollback bzw. alte sichtbare Revision bleibt aktiv.
 
-## 11. Abnahme
+## 12. Abnahme
 
 Kein PASS ohne:
 - Hauptportal-Struktur;
