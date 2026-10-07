@@ -2,8 +2,8 @@
 
 STAND: 2026-10-07
 STATUS: AKTIV
-FASSUNG: 2.0
-ERSETZT: Fassung 1.0 vom 2026-10-03
+FASSUNG: 2.1
+ERSETZT: Fassung 2.0 vom 2026-10-07; davor Fassung 1.0 vom 2026-10-03
 
 ## Geltungsbereich
 
@@ -99,6 +99,31 @@ Hobby-Hub:
 - >8: grundsätzlich ORIENTATION_UNIVERSE / Aufteilung in mehrere Hobby-Einheiten.
 
 Die Zahlen sind Prüfgrenzen, keine Aufforderung zu künstlicher Symmetrie.
+
+## Verbindliche Leaf-Kapazität und Zusammenfassung
+
+Die Content-Capacity wird NICHT nur für ein Hobby insgesamt geprüft.
+
+Jede unterste Kategorie muss separat tragfähig sein:
+- 0–3 eigenständige Beitragsintentionen: keine eigene Leaf-Kategorie;
+- 4: begründete Ausnahme;
+- 5–12: Zielbereich;
+- 13–15: Split-Prüfung;
+- 16+: Split erforderlich.
+
+Ein Beitrag zählt nur bei eigenständigem Nutzer-/Suchintent.
+Synonyme und bloße Formulierungsvarianten zählen nicht mehrfach.
+
+Kleine valide Hobbys bleiben als eigene kanonische Identitäten erhalten.
+Wenn sie allein keine tragfähige Struktur besitzen, dürfen sie über fachlich passende:
+- Übersichts-/Parentseiten;
+- gemeinsame Leaf-Kategorien;
+- redaktionelle Cluster
+
+zusammen sichtbar gemacht werden.
+
+Diese Zusammenfassung darf die Hobby-Identitäten nicht verschmelzen.
+Neue strukturelle Gruppen werden erst im späteren Gesamt-Zielbaum-Delta erzeugt, wenn der bewertete Gesamtbestand sie belegt.
 
 ## Monetarisierung
 
