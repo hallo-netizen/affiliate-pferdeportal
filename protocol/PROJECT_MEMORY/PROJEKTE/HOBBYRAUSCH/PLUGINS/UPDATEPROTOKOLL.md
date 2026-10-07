@@ -595,3 +595,43 @@ TEST:
 
 NEXT:
 Genau ein realer WordPress-Readback mit V1.12.5. Keine weitere DataForSEO-Recherche.
+
+
+---
+
+## PU-20261007-012 – HD-001 V1.12.6 stale Export fail-closed
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+REALER BEFUND:
+Der nach V1.12.5 hochgeladene Download war bytegleich mit dem alten V1.12.3-Ergebnis:
+`086456f70d8896c51a97a27f7dcdc29906ad90534f9322aa6f1f5a7b519d69ae`.
+
+ROOT CAUSE:
+V1.12.5 recalculierte Altresultate nur beim Rendern der Adminseite. Der Download-Handler selbst exportierte `last_result()` ohne Recalc.
+
+FIX:
+V1.12.6 recalculiert vor jedem Export fail-closed, falls die KISS-Neuberechnung noch nicht gespeichert ist.
+
+SICHERHEIT:
+- 0 Provider-Aufrufe;
+- 0 neue Provider-Kosten;
+- 0 Strukturwrites;
+- Recalc-Fehler blockiert den Download statt stale JSON auszugeben.
+
+ARTEFAKT:
+`HD001_V1.12.6_STALE_EXPORT_FAILCLOSED_HARDPASS.zip`
+
+SHA-256:
+`788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
+
+TEST:
+- PHP 31/31 PASS;
+- ZIP PASS;
+- exakte reale stale Datei direkt über Download-Handler → 34 ideale Leafs / 1 Hub-Kandidat PASS;
+- idempotenter zweiter Export PASS;
+- fehlendes Ergebnis BLOCKED PASS.
+
+NEXT:
+Ein realer Export-Readback mit V1.12.6.
