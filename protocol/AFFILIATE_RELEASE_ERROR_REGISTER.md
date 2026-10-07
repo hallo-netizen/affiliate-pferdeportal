@@ -1405,3 +1405,86 @@ Im erfolgreichen Candidate-Lauf `37606358698` wurde dieser Gate ausdrücklich ni
 - Bei PASS den vorhandenen Candidate-Installer als final binden und `release-check` ausführen.
 
 **Status:** INTERNAL_PASS / CANDIDATE_INSTALLER_READY / REAL_ADCELL_PROVIDER_GATE_ONLY_OPEN / NO_RELEASE_YET.
+
+
+## AFF-ERR-056 – 07.10.2026: Live-Kernfehler trotz 6.72.199-Candidate – bestehende Banner bleiben ohne korrekte Kategorie / Tarifcheck-Filter unzuverlässig
+
+**Auslöser:** Nutzer-Live-Screenshot nach Installation des bisherigen 6.72.199-Candidate. Der Kernfehler war weiterhin sichtbar:
+- Banner wie Schabracken zeigten keine belastbare korrekte Kategorie-/Portalziel-Zuordnung.
+- Tarifcheck war als Filter vorhanden, lieferte aber nicht zuverlässig nur die Tarifcheck-Banner.
+
+**Wichtig:** Damit ist der frühere interne Candidate-PASS von Run `37606358698` für den aktuellen Rootfix-Source **stale**. Er bleibt Historie/Evidence für den alten Manifeststand, ist aber kein PASS für den neuen Source.
+
+### Frischer Delta-Befund – konkret belegter Sourcefehler
+
+Der vorhandene Reconcile-Runner `run_v672195_banner_reconcile()` erlaubte Version `6.72.199`.
+
+Sein automatischer Admin-Einstieg `maybe_reconcile_banner_state_v672195()` erlaubte dagegen nur:
+`6.72.195`, `6.72.196`, `6.72.197`, `6.72.198`.
+
+Damit konnte der allgemeine einmalige Bestands-Reconcile in 6.72.199 **nicht über seinen normalen Admin-Einstieg starten**. Bereits vorhandene/verifizierte Live-Banner konnten dadurch mit alten/leeren `topic_targets` stehenbleiben, obwohl der neuere Zuordnungscode vorhanden war.
+
+Das ist ein konkreter Sourcefehler und kein Hoster-/Cache-/Frontendproblem.
+
+### Rootfix im aktuellen Source
+
+Betroffene Source-Dateien:
+
+- `release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-automation-suite.php`
+- `release/affiliate-zentrale/current/affiliate-portal-router/includes/trait-ppar-creative-library.php`
+
+Änderungen:
+
+1. 6.72.199 erhält nach abgeschlossenem ADCELL-Basislauf genau **einen** frischen Bestands-Reconcile über den bereits vorhandenen Runner.
+2. Keine neue Reconcile-Architektur, kein neuer Dauerworker.
+3. Tarifcheck/CHECK24-Filter wird an der Partneridentität festgemacht und kann damit auch historische Direkt-/Manuellimporte erfassen; dieser Teil ist **noch nicht live bewiesen**.
+4. Kartenoberfläche zeigt nun explizit:
+   - Provider-Kategorie;
+   - tatsächlich gespeichertes Portalziel.
+   Dadurch ist sofort sichtbar, ob Importbasis oder Zielzuordnung fehlt.
+
+### Analyse der bisherigen Lösungswege – was nicht erneut gemacht werden darf
+
+1. **6.72.198 lokaler PASS war kein Live-Beweis.**
+   Der Nutzer meldete weiterhin keinen Schabracken-Banner. Lokale Fixtures hatten den realen bestehenden Live-Bestand nicht ausreichend abgebildet.
+
+2. **Provider-Rohdaten/Kategorie-Erhalt allein war notwendig, aber nicht ausreichend.**
+   6.72.199 konnte neue Providerdaten sauberer speichern, aber das löst alte Live-Zeilen nicht, wenn der Bestands-Reconcile gar nicht läuft.
+
+3. **Verify-before-Assign war ein gültiger Sicherheitsfix, aber nicht der Live-Kernfix.**
+   Er verhindert falsche Zielkarten vor Bildprüfung; er erzeugt aber keine Kategorie für Bestandsbanner, wenn der Reconcile-Einstieg nicht ausgeführt wird.
+
+4. **Banner-vor-Produkte in der Bildprüfung war ein Performance-/Wartezeitfix, nicht der Kategorie-Rootfix.**
+   Diese Änderung darf nicht wieder als Lösung für fehlende fachliche Zielzuordnung behandelt werden.
+
+5. **Real-ADCELL-Gate wurde zu früh als einziger verbleibender Blocker behandelt.**
+   Der spätere Live-Screenshot hat bewiesen, dass bereits vor diesem Gate ein sichtbarer Funktionsfehler im aktuellen Bestand offen war.
+
+6. **Dropdown vorhanden != Filter funktioniert.**
+   Das bloße Vorhandensein von „Tarifcheck“ im UI beweist keine korrekte Datenfilterung. Der neue partnerbasierte Filter ist Source-seitig umgesetzt, aber noch nicht live belegt.
+
+7. **Keine weitere Prüforgie.**
+   Kein neuer Workflow, kein neues Testgerüst, keine neue Ranking-/Target-Architektur, solange der nächste Schritt lediglich das gebundene Rootfix-ZIP ist.
+
+### Performance-Hardlock
+
+Unverändert:
+- maximal 5 technische Assetprüfungen pro Lauf;
+- Banner zuerst;
+- nur freie PrüfsLOTS mit Produkten auffüllen;
+- kein Frontend-HTTP;
+- keine neue Ranking-/Target-Schicht;
+- keine Änderung der festen Banner-/Produktplätze.
+
+### Aktueller Status
+
+- Current: Generation 258.
+- Source-Manifest-SHA-256: `a51ef1236e8caa530493b65cc0c0e7c9c553f147a55745f4924f643b1b6ee844`.
+- Rootfix-Source: gebunden.
+- Neues Rootfix-ZIP: **noch nicht gebaut**.
+- Neuer Rootfix-PASS: **nicht vorhanden**.
+- Live-Beweis für Rootfix: **nicht vorhanden**.
+
+**Erster offener Schritt:** exakt ein installierbares ZIP aus diesem manifestgebundenen Rootfix-Source bauen.
+
+**Status:** LIVE_FAILURE_CONFIRMED / ROOTFIX_SOURCE_BOUND / PLUGIN_NOT_BUILT / NO_PASS / BUILD_ROOTFIX_PLUGIN_NEXT.
