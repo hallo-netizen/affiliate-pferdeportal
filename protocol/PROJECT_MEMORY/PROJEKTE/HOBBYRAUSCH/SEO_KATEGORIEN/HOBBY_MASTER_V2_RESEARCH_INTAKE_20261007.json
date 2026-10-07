@@ -1,0 +1,216 @@
+{
+  "contract": "HOBBY_MASTER_V2_RESEARCH_QUEUE_INTAKE",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "current_master_identities": 841
+  },
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json",
+  "collision_check": {
+    "checked_candidates": 19,
+    "exact_or_current_alias_collisions": 0,
+    "pass": true
+  },
+  "summary": {
+    "research_candidates": 19,
+    "ready_for_provisional_master_intake": 1,
+    "hold_for_scope_evidence": 17,
+    "hold_for_scope_review": 1,
+    "note": "The 19 research candidates are not part of the current 841 identities until Gate A and Gate B permit intake."
+  },
+  "candidates": [
+    {
+      "research_key": "research:01",
+      "name": "Fotografie",
+      "expected_world": "gestalten",
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "PILOT_SCOPE_CONFIRMED",
+      "proposed_hobby_id": "hobby:fotografie",
+      "intake_decision": "READY_FOR_PROVISIONAL_MASTER_INTAKE"
+    },
+    {
+      "research_key": "research:02",
+      "name": "Malen",
+      "expected_world": "gestalten",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:03",
+      "name": "Zeichnen",
+      "expected_world": "gestalten",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:04",
+      "name": "Nähen",
+      "expected_world": "fertigen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:05",
+      "name": "Stricken",
+      "expected_world": "fertigen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:06",
+      "name": "Häkeln",
+      "expected_world": "fertigen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:07",
+      "name": "Holzwerken",
+      "expected_world": "fertigen",
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:08",
+      "name": "Heimwerken",
+      "expected_world": "fertigen",
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:09",
+      "name": "Wandern",
+      "expected_world": "bewegen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:10",
+      "name": "Radfahren",
+      "expected_world": "bewegen",
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:11",
+      "name": "Camping",
+      "expected_world": "bewegen",
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:12",
+      "name": "Schwimmen",
+      "expected_world": "bewegen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:13",
+      "name": "Klettern",
+      "expected_world": "bewegen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:14",
+      "name": "Bouldern",
+      "expected_world": "bewegen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:15",
+      "name": "Gärtnern",
+      "expected_world": "pflanzen",
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:16",
+      "name": "Gemüseanbau",
+      "expected_world": "pflanzen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:17",
+      "name": "Briefmarken sammeln",
+      "expected_world": "sammeln",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    },
+    {
+      "research_key": "research:18",
+      "name": "Angeln",
+      "expected_world": null,
+      "initial_size_hypothesis": "MACRO_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "SCOPE_REVIEW",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_REVIEW"
+    },
+    {
+      "research_key": "research:19",
+      "name": "Plane Spotting",
+      "expected_world": "forschen",
+      "initial_size_hypothesis": "HUB_REVIEW",
+      "collision_against_841_master": "NONE_EXACT_OR_ALIAS_AFTER_CURRENT_NORMALIZATION",
+      "scope_evidence": "HYPOTHESIS_ONLY",
+      "proposed_hobby_id": null,
+      "intake_decision": "HOLD_FOR_SCOPE_EVIDENCE"
+    }
+  ],
+  "hard_rule": "No research candidate becomes a publishable CORE node by intake. A provisional identity remains PENDING until size, content capacity, role and ownership are assessed."
+}
