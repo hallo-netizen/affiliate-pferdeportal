@@ -26,8 +26,8 @@ Jede unterste Kategorie wird einzeln geprüft:
 - 0–3 eigenständige Beiträge: keine eigene Leaf-Kategorie;
 - 4: Ausnahmeprüfung;
 - 5–12: Zielbereich;
-- 13–15: Split-Prüfung;
-- 16+: Split erforderlich.
+- 13–14: Split-Prüfung;
+- ab etwa 15: Split erforderlich.
 
 Ein Hobby-Hub benötigt typischerweise 3–6 tragfähige Leafs.
 
