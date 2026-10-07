@@ -1,0 +1,197 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_006_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_006_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:hifi-selbstbau",
+      "canonical_name": "HiFi-Selbstbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Generic DIY HiFi orientation; Lautsprecherbau, Röhrenverstärker bauen and other concrete audio-build practices retain specific ownership."
+    },
+    {
+      "hobby_id": "hobby:plattenspieler-restaurieren",
+      "canonical_name": "Plattenspieler restaurieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns diagnosis, mechanics, electronics, tonearm/cartridge setup and cosmetic restoration of record players."
+    },
+    {
+      "hobby_id": "hobby:uhren-reparieren",
+      "canonical_name": "Uhren reparieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns diagnosis, disassembly, cleaning, lubrication, regulation and repair of watches/clocks as a hobby; making new mechanical watches remains separate."
+    },
+    {
+      "hobby_id": "hobby:mechanische-uhren-bauen",
+      "canonical_name": "mechanische Uhren bauen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns designing/assembling mechanical watches/clocks, movements, cases, dials and regulation; repair-specific work remains with Uhren reparieren."
+    },
+    {
+      "hobby_id": "hobby:taschenlampen-modding",
+      "canonical_name": "Taschenlampen-Modding",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns flashlight-specific LED, driver, optics, battery and thermal modifications."
+    },
+    {
+      "hobby_id": "hobby:taschenrechner-sammeln-restaurieren",
+      "canonical_name": "Taschenrechner sammeln/restaurieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns collecting, identifying, valuing, repairing and preserving vintage calculators."
+    },
+    {
+      "hobby_id": "hobby:alte-kameras-reparieren",
+      "canonical_name": "alte Kameras reparieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns mechanical/electronic repair and restoration of vintage cameras. Photography use/collecting remains with its respective owners."
+    },
+    {
+      "hobby_id": "hobby:alte-radios-restaurieren",
+      "canonical_name": "alte Radios restaurieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns diagnosis, electrical restoration, cabinet work and safe operation of vintage radios."
+    },
+    {
+      "hobby_id": "hobby:spielautomaten-restaurieren",
+      "canonical_name": "Spielautomaten restaurieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns restoration of arcade/coin-operated machines, electronics, mechanisms, cabinets and controls; gambling-service intents are not part of the portal role."
+    },
+    {
+      "hobby_id": "hobby:flipper-restaurieren",
+      "canonical_name": "Flipper restaurieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns pinball-machine restoration, playfield/cabinet work, mechanics, electronics and setup."
+    },
+    {
+      "hobby_id": "hobby:modellbau",
+      "canonical_name": "Modellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic model-building orientation. Schiffs-, Flugzeug-, Auto-, Militär-, Architektur- and other concrete model-building identities own their specifics."
+    },
+    {
+      "hobby_id": "hobby:modellbahn",
+      "canonical_name": "Modellbahn",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns model-railway system planning, track, rolling stock, control, operations and maintenance. Scenery-specific construction remains with Modelleisenbahn-Landschaftsbau."
+    },
+    {
+      "hobby_id": "hobby:modelleisenbahn-landschaftsbau",
+      "canonical_name": "Modelleisenbahn-Landschaftsbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns scenery, terrain, vegetation, structures and scene composition specifically for model railways."
+    },
+    {
+      "hobby_id": "hobby:dioramenbau",
+      "canonical_name": "Dioramenbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns planning, terrain, structures, figures/vehicles, composition and finishing of dioramas."
+    },
+    {
+      "hobby_id": "hobby:miniaturwelten",
+      "canonical_name": "Miniaturwelten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns creative self-contained miniature scenes/worlds. Specific forms such as Book Nooks, miniature gardens and dollhouses keep their own intents."
+    },
+    {
+      "hobby_id": "hobby:architekturmodellbau",
+      "canonical_name": "Architekturmodellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns architectural models, scales, plans, materials, structures and presentation/finishing."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 13,
+    "orientation_universe": 2,
+    "editorial_topic": 1,
+    "unresolved": 0,
+    "seo_enrichment_pending": 16,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 006 to ledger and generate Batch 007."
+}
