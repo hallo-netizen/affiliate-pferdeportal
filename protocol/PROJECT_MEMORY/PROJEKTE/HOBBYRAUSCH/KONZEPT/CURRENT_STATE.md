@@ -122,10 +122,11 @@ Wichtig:
 Fehlende Evidenz führt zu `EVIDENCE_REQUIRED`, nicht zu einer geratenen Rollen- oder Weltzuordnung.
 
 Batch 001 bestätigt:
-- Identitätslogik funktioniert;
-- Aliasfälle bleiben stabil;
+- ID-Eindeutigkeit funktioniert;
+- vier aktuelle Alias-/Kanonikbindungen bleiben stabil;
+- zwölf Kandidaten benötigen noch semantische Identitäts-/Unterformprüfung;
 - Monetarisierung erzeugt keine automatische CORE-Promotion;
-- der Hauptengpass ist jetzt Content-Capacity-/Scope-/Ownership-Evidenz, nicht mehr die Regeldefinition.
+- der Hauptengpass ist jetzt Identitäts-/Content-Capacity-/Scope-/Ownership-Evidenz, nicht mehr die Regeldefinition.
 
 ## Pilotbefund
 
