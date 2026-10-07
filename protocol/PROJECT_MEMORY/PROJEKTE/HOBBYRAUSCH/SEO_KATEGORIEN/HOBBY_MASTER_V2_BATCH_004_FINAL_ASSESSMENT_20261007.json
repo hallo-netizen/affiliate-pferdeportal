@@ -1,0 +1,202 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_004_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_004_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:rc-drift",
+      "canonical_name": "RC-Drift",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns drift-specific chassis setup, steering geometry, tires/surfaces and driving technique. Generic RC-car racing stays separate."
+    },
+    {
+      "hobby_id": "hobby:rc-offroad",
+      "canonical_name": "RC-Offroad",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns off-road RC vehicles, suspension, tires, terrain setup and off-road driving. Crawling/trial and formal racing keep their specific intents."
+    },
+    {
+      "hobby_id": "hobby:rc-trial",
+      "canonical_name": "RC-Trial",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "RC-Crawling / Gelände-Wettbewerbe",
+      "ownership": "Owns trial-specific gates, scoring and competition setup. Generic crawling remains with RC-Crawling."
+    },
+    {
+      "hobby_id": "hobby:rc-rennsport",
+      "canonical_name": "RC-Rennsport",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic RC-racing orientation across classes. Specific disciplines such as FPV-Racing and vehicle-specific race classes keep their own owners."
+    },
+    {
+      "hobby_id": "hobby:modell-dampfmaschinen",
+      "canonical_name": "Modell-Dampfmaschinen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns small/model steam-engine building, boilers, mechanics, operation and maintenance."
+    },
+    {
+      "hobby_id": "hobby:stirlingmotoren",
+      "canonical_name": "Stirlingmotoren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns hobby Stirling-engine principles, model construction, heat sources and tuning. Generic model-machine construction remains separate."
+    },
+    {
+      "hobby_id": "hobby:modellmotorenbau",
+      "canonical_name": "Modellmotorenbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns building functional model engines and their machining, ignition/fuel systems, testing and tuning."
+    },
+    {
+      "hobby_id": "hobby:modellmaschinenbau",
+      "canonical_name": "Modellmaschinenbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic orientation for functional miniature machines. Steam engines, Stirling engines and model engines retain specific owners."
+    },
+    {
+      "hobby_id": "hobby:mini-cnc",
+      "canonical_name": "Mini-CNC",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "CNC-Fräsen / Desktop-Fertigung",
+      "ownership": "Owns compact/desktop CNC-specific selection, setup and limitations. Generic CNC machining belongs to CNC-Fräsen."
+    },
+    {
+      "hobby_id": "hobby:cnc-frasen",
+      "canonical_name": "CNC-Fräsen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns hobby CNC milling, machine setup, tooling, workholding, CAM workflow and machining practice."
+    },
+    {
+      "hobby_id": "hobby:lasercutting",
+      "canonical_name": "Lasercutting",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns laser-cutting-specific machines, materials, vector preparation, cutting parameters and safety. Engraving-specific work stays with Lasergravieren."
+    },
+    {
+      "hobby_id": "hobby:lasergravieren",
+      "canonical_name": "Lasergravieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns engraving-specific laser setup, materials, image/vector preparation and engraving parameters. Cutting-specific intents stay with Lasercutting."
+    },
+    {
+      "hobby_id": "hobby:resin-3d-druck",
+      "canonical_name": "Resin-3D-Druck",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns resin/SLA/MSLA-specific printing, resins, supports, washing/curing and troubleshooting. Generic 3D-print orientation remains with 3D-Druck."
+    },
+    {
+      "hobby_id": "hobby:3d-scanning",
+      "canonical_name": "3D-Scanning",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns hobby 3D scanning, capture, calibration, mesh cleanup and scan-to-model workflow."
+    },
+    {
+      "hobby_id": "hobby:cad-als-hobby",
+      "canonical_name": "CAD als Hobby",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns hobby CAD modeling, sketches/constraints, parametric modeling, assemblies and export workflows. Machine-specific production remains with 3D printing/CNC."
+    },
+    {
+      "hobby_id": "hobby:heimautomatisierung",
+      "canonical_name": "Heimautomatisierung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns automation logic, sensors/actuators, protocols, controllers, energy and automation scenarios in the home. Device-hacking/DIY build emphasis may be owned by Smart-Home-Basteln."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 12,
+    "orientation_universe": 2,
+    "editorial_topic": 2,
+    "article_only": 0,
+    "finder_only": 0,
+    "out_of_scope": 0,
+    "unresolved": 0,
+    "seo_enrichment_pending": 16,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 004 to ledger and generate Batch 005."
+}
