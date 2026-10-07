@@ -1029,11 +1029,13 @@ trait PPAR_Output_Objects_Trait {
             }));
             if(!$words){return 0;}
 
+            $exact_matches=0;
             foreach($words as $word){
                 $supported=false;
                 foreach($this->output_tokens((string)$word) as $variant){
                     if(in_array($variant,$evidence_tokens,true)){
                         $supported=true;
+                        $exact_matches++;
                         break;
                     }
                 }
@@ -1048,7 +1050,7 @@ trait PPAR_Output_Objects_Trait {
                 }
                 if(!$supported){return 0;}
             }
-            return count($words);
+            return count($words)*10+$exact_matches;
         };
 
         foreach($targets as $target){
