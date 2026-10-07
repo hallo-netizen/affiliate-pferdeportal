@@ -104,7 +104,7 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
+`HD001_V2_BATCH001_HD001_ASSESSMENT_RUN_NOT_BOUND`
 
 Die V2-Fachregeln wurden gegen das vollständige Konzept nachgeschärft:
 - 5–12 distinct Artikelintents müssen pro unterster Kategorie belegt sein;
@@ -123,7 +123,7 @@ Für die übrigen Batch-Fälle fehlt der reale DataForSEO-Abgleich.
 
 Keine Pluginänderung und kein Deployment starten.
 
-Zuerst im Scope `SEO_KATEGORIEN` den vorbereiteten Batch-001-DataForSEO-Request über den bestehenden authentifizierten Hobby-Depot-Weg ausführen und danach Leaf-Kapazität, Ownership und mögliche Zusammenfassung erneut bewerten.
+Zuerst im Scope `SEO_KATEGORIEN` den vorbereiteten Batch-001-DataForSEO-Request im HD-001-WordPress-Plugin als read-only V2-Bewertungslauf ausführen und danach Leaf-Kapazität, Ownership und mögliche Zusammenfassung erneut bewerten.
 
 Erst nach abgeschlossener Masterbewertung und Zielbaum-Delta wird V1.12.0 technisch gegen das neue Zielprofil fortgeschrieben und erneut vollständig POS/NEG getestet.
 
