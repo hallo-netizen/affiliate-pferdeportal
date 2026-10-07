@@ -392,3 +392,69 @@ V1.12.1 in Hobby Depot installieren und Batch 001 real im WordPress-Backend ausf
 
 CURRENT:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+
+---
+
+## PU-20261007-008 – HD-001 V1.12.2 DataForSEO-Tiefenprüfung nach realem Batch 001
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+V1.12.1 initialer read-only Overview-Lauf → V1.12.2 read-only Tiefenprüfung.
+
+REALER AUSGANGSBEFUND:
+- 16 Hobbys / 34 Leafs / 263 Artikelintents;
+- 1 echter Keyword-Overview;
+- 106 / 263 exakte Keywords returned;
+- 157 exakte Seeds PENDING;
+- Kosten 0.02472 USD;
+- 0 Strukturwrites;
+- Result SHA-256 `5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9`.
+
+FEHLER IN V1.12.1:
+Der exakte Overview wurde technisch als vollständige Evidenzstufe behandelt.
+Dadurch entstand `0 Hub-Kandidaten`, obwohl Regelvertrag 1.2 anschließend Suggestions/Ideas zur Tiefenprüfung verlangt.
+Fehlende exakte Overview-Zeilen sind kein belastbarer Negativbeleg.
+
+V1.12.2:
+- verwendet den gespeicherten V1.12.1-Lauf weiter;
+- wiederholt den bezahlten Gesamt-Overview nicht;
+- 37 offene fachlich definierte Cluster;
+- 37 Keyword-Ideas-Aufrufe;
+- 1 abschließender gebündelter Keyword-Overview;
+- exakt 38 zusätzliche Calls;
+- max. 15 distinct Gruppen je Cluster;
+- erneute Core-Keyword-Dedupe;
+- erneute Batch-Ownership-Prüfung;
+- 0 Strukturwrites.
+
+ARTEFAKT:
+`HD001_V1.12.2_V2_DATAFORSEO_DEPTH_READONLY_HARDPASS.zip`
+
+SHA-256:
+`233f3b5a71f6080d98e8748795cedb0b684c5e1a16407ec509919fa3d1f7e17f`
+
+PRÜFBERICHT:
+`HD001_V1.12.2_FINAL_LOCAL_POSNEG_REPORT.txt`
+
+PRÜFBERICHT SHA-256:
+`1e7197feb74e9b3a070a4201f79a0416f46dfef960fdab556d59f21c4cb55048`
+
+TEST:
+- Fresh PHP 62/62 PASS;
+- Legacy 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Test PASS;
+- V1.12.1 Assessment Regression PASS;
+- realer Batch-001-Result-Readback PASS;
+- exakt 38 Follow-up-Calls im Preflight PASS;
+- Provider-Ausfall fail-closed PASS;
+- 0 Strukturwrites PASS.
+
+NEXT:
+V1.12.2 in Hobby Depot installieren und die angezeigte 38-Call-Tiefenprüfung ausführen.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
