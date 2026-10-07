@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.2 KONZEPTEXAKT / V1.12.1 READ-ONLY WORDPRESS-BEWERTUNG LOKAL PASS / REALER DATAFORSEO-BATCHLAUF OFFEN
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.2 KONZEPTEXAKT / ERSTER REALER V1.12.1-BATCH AUSGEFÜHRT / V1.12.2 TIEFENEVIDENZ LOKAL PASS / REALER DEPTH-LAUF OFFEN
 
 ## Rolle
 
@@ -141,6 +141,29 @@ Nachgezogen:
 Konzeptaudit:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
 
+## Reales Batch-001-Ergebnis
+
+Der erste echte WordPress-/DataForSEO-Lauf ist erfolgt.
+
+Ergebnis:
+- 263 fachlich vorgeschlagene Artikelintents;
+- 106 exakte Keyword-Overview-Zeilen von DataForSEO;
+- 157 exakte Seeds ohne Overview-Zeile;
+- 0 Strukturwrites.
+
+Wichtig:
+Die 157 fehlenden Zeilen sind KEIN Beweis, dass diese Inhalte nicht existieren.
+Nach Regelvertrag 1.2 ist der exakte Overview nur eine Evidenzstufe.
+Die noch offenen, bereits fachlich definierten Leaf-/Themenräume müssen anschließend mit Keyword Ideas/Suggestions auf echte Intenttiefe geprüft werden.
+
+Daraus folgt:
+Das Zwischenresultat `0 Hub-Kandidaten` darf nicht als endgültige Portalentscheidung verwendet werden.
+
+HD-001 V1.12.2 setzt genau diese fehlende zweite Evidenzstufe um:
+37 offene Cluster → 37 Keyword-Ideas-Aufrufe → 1 abschließender gebündelter Overview → erneute Zählung/Dedupe/Ownership.
+
+Keine Struktur wird dabei erzeugt.
+
 ## Pilotbefund
 
 - Buchbinden → bestehender Live-/Technikpilot bleibt stabil; endgültiger V2-HOBBY_HUB-PASS ist wegen der strengeren 5–12-pro-Leaf-Regel wieder offen;
@@ -163,22 +186,19 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_WORDPRESS_DATAFORSEO_RUN_PENDING`
+`HD001_V2_BATCH001_DEPTH_DATAFORSEO_RUN_PENDING`
 
-Der Pluginweg ist umgesetzt:
-HD-001 V1.12.1 besitzt jetzt einen eigenen read-only V2-Bewertungslauf im WordPress-Backend.
-
-Er prüft den kontrollierten 16er Batch mit dem bestehenden DataForSEO-Zugang.
-Der Lauf schreibt keine Kategorien.
+Der initiale reale Batch ist abgeschlossen.
+Offen ist nur noch die im Konzept vorgesehene Tiefenevidenz für die unvollständig belegten Leaf-/Themenräume.
 
 ## EXAKT EINE NEXT ACTION
 
-V1.12.1 in Hobby Depot installieren und den gebündelten Batch 001 unter `Kategorien → V2-Hobbybewertung` real ausführen.
+HD-001 V1.12.2 installieren und den gespeicherten Batch 001 im WordPress-Backend mit exakt 38 zusätzlichen DataForSEO-Aufrufen vertiefen.
 
-Danach das Ergebnis gegen Regelvertrag 1.2 prüfen und erst dann die weitere Masterbewertung fortsetzen.
+Danach das neue Ergebnis gegen Regelvertrag 1.2 prüfen.
 
 Noch NICHT:
 - Zielbaum synchronisieren;
-- alten V1.12-Zielbaum installieren/refreshen;
 - WordPress-Kategorien aus dem Batch schreiben;
-- Hobbywelten als Parent der acht Welten verwenden.
+- V1.12-Zielprofil refreshen;
+- fehlende DataForSEO-Zeilen als negatives Struktururteil behandeln.
