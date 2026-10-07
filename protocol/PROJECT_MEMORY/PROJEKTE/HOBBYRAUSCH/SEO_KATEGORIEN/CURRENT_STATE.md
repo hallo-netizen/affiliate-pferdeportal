@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: REGELN 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 LIVE-READBACK WAR STALE V1.12.3-EXPORT / ROOT CAUSE GEFUNDEN / V1.12.6 STALE-EXPORT-FAILCLOSED LOKAL HARD PASS / NEUER REALER EXPORT OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: REGELN 1.4 KISS / V1.12.6 REALER EXPORT-READBACK PASS / BATCH 001 TECHNISCH GESCHLOSSEN / FACHLICHE SCOPE-IDENTITÄTS-OWNERSHIP-PRÜFUNG OFFEN / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -259,29 +259,28 @@ Beleg:
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_V126_REAL_EXPORT_READBACK_PENDING`
+`HD001_V2_BATCH001_SCOPE_IDENTITY_OWNERSHIP_REVIEW_PENDING`
 
-Der fachliche KISS-Recalc selbst ist lokal mit der echten gespeicherten Datei vollständig PASS.
-
-Offen ist nur noch der reale Export-Nachweis des gehärteten Download-Gates.
-
-## EXAKT EINE NEXT ACTION
-
-HD-001 V1.12.6 in Hobby Depot installieren und direkt `Ergebnis als JSON herunterladen` klicken.
-
-Kein DataForSEO starten.
-Kein Reset.
-Keine Tiefenprüfung nötig.
-
-Der Download selbst muss jetzt:
-- Plugin-Version 1.12.6 ausgeben;
+Der V1.12.6-Exportweg ist real bestätigt:
+- Plugin-Version 1.12.6;
 - 34 ideale Leafs;
 - 1 Hub-Kandidat;
 - 0 neue Provider-Aufrufe;
 - 0 neue Kosten;
 - 0 Strukturwrites.
 
-Danach genau dieses JSON readback-prüfen.
+Beleg:
+`HOBBY_MASTER_V2_BATCH_001_V126_REAL_READBACK_20261007.md`
 
+Offen ist jetzt nur noch die fachliche Bewertung:
+- sechs kapazitätsseitig tragfähige Hubfälle: Scope/Identität/Ownership;
+- danach 3 Macro-Reviews und 5 Aggregation-Reviews.
+
+## EXAKT EINE NEXT ACTION
+
+Die sechs EVIDENCE_REQUIRED-Hubfälle fachlich gegen Master, bestehende Nachbaridentitäten und Ownership prüfen:
+Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen, Wabikusa.
+
+Keine neue DataForSEO-Tiefenrecherche.
 Noch kein Zielbaum-Delta.
 Noch kein Kategorien-Sync.
