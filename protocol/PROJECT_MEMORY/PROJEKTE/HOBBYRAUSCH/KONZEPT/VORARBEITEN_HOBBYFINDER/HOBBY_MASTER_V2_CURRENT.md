@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-07
-STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.2 KONZEPTEXAKT / V1.12.1 READ-ONLY BEWERTUNG LOKAL PASS / REALER WORDPRESS-DATAFORSEO-BATCHLAUF OFFEN / NOCH KEINE GESAMTBEWERTUNG
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG 1.2 KONZEPTEXAKT / V1.12.1 REALER INITIAL-BATCH AUSGEFÜHRT / V1.12.2 DEPTH-READ-ONLY LOKAL PASS / REALER DEPTH-LAUF OFFEN / NOCH KEINE GESAMTBEWERTUNG
 
 ## Datenartefakt
 
@@ -76,6 +76,8 @@ Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, 
 - vorbereitetes Master-Intake-Delta: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
 - Fachvorprüfung: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
 - DataForSEO-Request: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
+- realer Initialbefund: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_REAL_RESULT_20261007.md`
+- Depth-Plan: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
 - WordPress-Bewertungskandidat: HD-001 V1.12.1 / SHA-256 `959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d`
 
 Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
@@ -84,12 +86,13 @@ Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
 
 ## Nächster Schritt
 
-Das exakte HD-001 V1.12.1-ZIP in Hobby Depot installieren und unter `Kategorien → V2-Hobbybewertung` den gebündelten Batch 001 real ausführen.
+HD-001 V1.12.2 in Hobby Depot installieren und die gespeicherte Batch-001-Tiefenprüfung ausführen.
 
-Der Lauf:
-- nutzt den vorhandenen WordPress-/DataForSEO-Zugang;
-- plant exakt 1 Keyword-Overview-Aufruf für 263 vorbereitete Artikelintents;
-- schreibt 0 Kategorien/Zielbaumobjekte.
+Der reale Initiallauf ist bereits erledigt:
+263 exakte Seeds → 106 Overview-Zeilen → 157 PENDING.
 
-Danach das Ergebnis-JSON gegen Regelvertrag 1.2 auswerten.
-Keine direkte WordPress-Kategoriensynchronisierung und kein Zielbaum-Delta vor belastbarer Rollen-/Ownership-Prüfung.
+Der nächste Lauf vertieft nur die 37 offenen fachlich definierten Cluster:
+37 Keyword Ideas + 1 finaler Overview = exakt 38 zusätzliche Calls.
+
+Danach neues Ergebnis-JSON auswerten.
+Keine WordPress-Kategoriensynchronisierung und kein Zielbaum-Delta vor belastbarer Rollen-/Ownership-Prüfung.
