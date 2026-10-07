@@ -95,3 +95,16 @@ Kein PASS nur aus Codeansicht oder aus vorhandenen Testdateien.
 - Keine neue Version nur zur Symptomjagd.
 - Kein Hoster-/OPcache-/Serververdacht ohne Beleg.
 - Kein weiterer Nutzer-Klickauftrag, bevor die eigene Source-/Testseite vollständig geprüft wurde.
+
+
+## 8. Bedienanforderungen – Tarifcheck, CHECK24 und händischer Bannerimport
+
+Zusätzlich ausdrücklich vom Nutzer gebunden:
+
+- **Tarifcheck** muss im Backend als eigener auswählbarer Direktpartner sichtbar sein, nicht nur indirekt über „Direktpartner“.
+- **CHECK24** muss ebenfalls als eigener auswählbarer Direktpartner verfügbar sein.
+- Für CHECK24 wird ohne belegten API-Vertrag **keine API erfunden**. Reale CHECK24-Banner werden über den bestehenden Direktpartner-/Manuellweg aufgenommen.
+- Einzelne Banner müssen ohne Sammeldatei händisch erfasst werden können. Pflicht: reale Bild-URL und Tracking-Link. Optional: reale Ziel-URL, Titel, Beschreibung/Tags, Provider-ID sowie Breite/Höhe.
+- Der händische Import benutzt dieselbe Creative Library, dieselbe technische Bildprüfung und dieselben gespeicherten Zielzuordnungen wie andere Banner.
+- Diese Bedienerweiterung ändert **keine** Ranking-/Zuordnungsregel und hebt das offene Importbasis-Gate nicht auf.
+
