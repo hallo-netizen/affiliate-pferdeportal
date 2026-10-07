@@ -2795,8 +2795,10 @@ trait PPAR_Automation_Suite_Trait {
                     $dimension_state=sanitize_key((string)($payload['_dimension_state']??'pending'));
                     $requires_verification=method_exists($this,'creative_library_verify_before_assign_banner')
                         && $this->creative_library_verify_before_assign_banner($stored_row);
-                    if($requires_verification
-                        && !in_array($dimension_state,array('verified','mismatch'),true)){
+                    $asset_verified=in_array($dimension_state,array('verified','mismatch'),true)
+                        && absint($stored_row['width']??0)>0
+                        && absint($stored_row['height']??0)>0;
+                    if($requires_verification && !$asset_verified){
                         continue;
                     }
                     $this->output_assign_banner_targets_from_destination_once($stored_row);
