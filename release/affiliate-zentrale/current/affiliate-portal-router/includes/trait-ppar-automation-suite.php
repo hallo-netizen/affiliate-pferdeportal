@@ -3501,7 +3501,7 @@ trait PPAR_Automation_Suite_Trait {
             if (sanitize_key((string)get_option('ppar_v672199_adcell_banner_basis_state', '')) !== 'done') {
                 return;
             }
-            $repair_key = 'ppar_v672199_category_reconcile_rootfix_done';
+            $repair_key = 'ppar_v672199_destination_target_rootfix_done';
             if ((string)get_option($repair_key, '') === 'yes') {
                 return;
             }
