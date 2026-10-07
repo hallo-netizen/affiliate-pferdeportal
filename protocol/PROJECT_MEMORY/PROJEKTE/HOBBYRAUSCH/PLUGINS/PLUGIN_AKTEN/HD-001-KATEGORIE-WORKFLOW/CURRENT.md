@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.3 ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 KISS-GESAMTPFAD LOKAL HARD PASS / EINMALIGER LIVE-READBACK OFFEN / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / REGELN 1.4 KISS / V1.12.5 LIVE-READBACK WAR STALE V1.12.3-EXPORT / V1.12.6 STALE-EXPORT-FAILCLOSED LOKAL HARD PASS / NEUER REALER EXPORT OFFEN / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -74,85 +74,58 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 ## Aktueller V2-Bewertungskandidat
 
 Plugin-Version:
-`1.12.5`
+`1.12.6`
 
 Artefakt:
-`HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip`
+`HD001_V1.12.6_STALE_EXPORT_FAILCLOSED_HARDPASS.zip`
 
 SHA-256:
-`68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
+`788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
 
 Prüfbericht:
-`HD001_V1.12.5_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.6_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 Prüfbericht SHA-256:
-`8a6768b4222dd086f3ff124579684feeed6f11f45f268d5596631de326002075`
+`c9442f08b722e93a24fee697cec09d77e67f1ad9cd23cda9067a5185e90b042e`
 
-### Was V1.12.5 fachlich korrigiert
+Zweck:
+stale gespeicherte V1.12.3-Ergebnisse beim Export selbst fail-closed auf die KISS-Regel 1.4 neu berechnen.
 
-Content Capacity ist wieder KISS:
+Realer Readback vor Fix:
+- hochgeladene Datei trägt weiterhin plugin_version 1.12.3;
+- SHA-256 = `086456f70d8896c51a97a27f7dcdc29906ad90534f9322aa6f1f5a7b519d69ae`;
+- damit kein V1.12.5-Recalc-Result, sondern der alte gespeicherte Stand.
 
-- Fachlogik definiert die eigenständigen Artikelintents.
-- Diese Intents werden pro unterster Kategorie gezählt.
-- DataForSEO dient als SEO-Abgleich.
-- Exaktes Core-Keyword-/Synonym-Evidence darf Dubletten zusammenführen.
-- Eine fehlende exakte Longtail-Zeile löscht keinen fachlich eigenständigen Artikelintent.
-- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen niemals zusätzliche Artikel.
-- der automatische 38-Call-Depth-Weg ist deaktiviert.
+Root Cause:
+V1.12.5 recalculierte nur beim Rendern der Adminseite; der Download-Handler exportierte ungeprüft `last_result()`.
 
-### Realer Evidence-Stand
-
-Die echte V1.12.3-Datei enthält:
-- 39 historische DataForSEO-Aufrufe;
-- Kosten ca. 0.9738 USD;
+V1.12.6:
+- Download-Gate recalculiert bei altem Ergebnis selbst;
+- speichert das korrigierte Ergebnis;
+- exportiert erst danach;
+- bei Recalc-Fehler BLOCKED statt stale JSON;
+- 0 Provider-Aufrufe;
+- 0 neue Kosten;
 - 0 Strukturwrites.
 
-V1.12.5 benutzt diese vorhandene Evidence nur noch korrekt und startet beim Recalc keine neuen Provider-Aufrufe.
+Lokaler direkter Download-Replay mit exakt der realen stale Datei:
+- plugin_version 1.12.6;
+- 34 ideale Leafs;
+- 1 HOBBY_HUB_CANDIDATE;
+- 1 EDITORIAL_TOPIC_CANDIDATE;
+- 5 AGGREGATION_REVIEW;
+- 3 MACRO_REVIEW;
+- 6 EVIDENCE_REQUIRED;
+- 0 Zielbaum-Writes.
 
-### Lokaler Replay des echten Ergebnisses
+Tests:
+- PHP 31/31 PASS;
+- ZIP-Integrität PASS;
+- realer stale-Result-Download-Replay PASS;
+- idempotenter zweiter Download PASS;
+- kein Ergebnis → BLOCKED PASS.
 
-- Kandidaten: 16
-- ideale Leafs: 34
-- HOBBY_HUB_CANDIDATE: 1
-- EDITORIAL_TOPIC_CANDIDATE: 1
-- AGGREGATION_REVIEW: 5
-- MACRO_REVIEW: 3
-- EVIDENCE_REQUIRED: 6
-- Zielbaum-Writes: 0
-
-Kapazitätsseitig typischer Hubbereich:
-- Airbrush: 5 ideale Leafs
-- Bean-to-Bar-Schokolade: 6
-- Aeroponik: 4
-- Ameisenhaltung: 6
-- 3D-Bogenschießen: 5
-- Wabikusa: 4
-
-Diese sechs bleiben wegen Scope-/Identitätsprüfung noch EVIDENCE_REQUIRED.
-
-Buchbinden:
-- 4 ideale Leafs;
-- 5 / 6 / 6 / 6 fachlich eigenständige Intents;
-- HOBBY_HUB_CANDIDATE.
-
-### Hardtest
-
-- PHP Source 68/68 PASS;
-- Legacy Regression 270/270 PASS;
-- V1.12 POS/NEG PASS;
-- realer 908/844/841-Lauf PASS;
-- V1.12.1 Assessment Regression PASS;
-- echter V1.12.3-Result-Replay PASS;
-- fehlende exakte Provider-Zeilen blockieren fachlich tragfähige Leafs nicht PASS;
-- exact core_keyword Dedupe PASS;
-- Provider-Rohzeilen erzeugen 0 Artikel PASS;
-- automatische Depth-Recherche = 0 Calls PASS;
-- 0 neue Provider-Kosten PASS;
-- 0 Strukturwrites PASS;
-- Recalc idempotent PASS;
-- Fresh Release PHP 31/31 PASS.
-
-V1.12.5 ist weiterhin read-only Bewertungskandidat, kein Zielbaum-Deployment.
+V1.12.6 bleibt read-only Bewertungskandidat, kein Zielbaum-Deployment.
 
 ## Fachliche Fortschreibung NACH V1.12.0
 
@@ -187,30 +160,25 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_V125_SINGLE_LIVE_READBACK_PENDING`
+`HD001_V2_BATCH001_V126_REAL_EXPORT_READBACK_PENDING`
 
-Kein DataForSEO-Research-Schritt ist mehr offen.
+Kein DataForSEO-Research-Schritt ist offen.
 
-Der gesamte Batch-001-Weg wurde mit der echten gespeicherten Evidence lokal bis zum Endzustand geprüft.
+Offen ist nur noch der reale Export-Nachweis des gehärteten V1.12.6-Download-Gates.
 
 ## EXAKT EINE NEXT ACTION
 
-Einmal V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
+V1.12.6 installieren und direkt `Ergebnis als JSON herunterladen` klicken.
 
-Das vorhandene Ergebnis muss automatisch und kostenlos nach Regelvertrag 1.4 neu berechnet werden.
+Kein Reset.
+Kein DataForSEO.
+Keine Tiefenprüfung.
 
-Erwarteter Readback:
-- 0 neue DataForSEO-Aufrufe;
-- 0 neue Kosten;
-- 0 Strukturwrites;
-- Plugin 1.12.5;
-- korrigierte Batch-Summary wie im lokalen Replay.
-
-Danach Ergebnis-JSON einmal prüfen.
+Der Export selbst muss das alte Ergebnis kostenlos neu berechnen.
 
 ## Release-/Artefaktgrenze
 
-V1.12.0 bleibt lokale technische Zielbaum-Baseline. V1.12.5 ist der aktuelle read-only Bewertungskandidat für genau einen realen Readback. Er ist kein Zielbaum-Deploymentkandidat.
+V1.12.0 bleibt lokale technische Zielbaum-Baseline. V1.12.6 ist der aktuelle read-only Bewertungskandidat für genau einen realen Export-Readback. Er ist kein Zielbaum-Deploymentkandidat.
 
 Isolierte Artefaktpflicht:
 `PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
