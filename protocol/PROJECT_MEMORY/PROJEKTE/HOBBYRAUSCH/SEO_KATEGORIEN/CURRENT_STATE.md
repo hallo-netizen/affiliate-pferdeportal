@@ -84,14 +84,14 @@ Research-Queue-Intake:
 Vorbereitetes Master-Intake-Delta:
 `HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
 
-Batch 001:
+Batch 001 – aktueller V1.12.5-Replay:
 - 16 reproduzierbar ausgewählte Master-Identitäten;
-- 16/16 ID-Eindeutigkeit PASS; davon 4 aktuelle Alias-/Kanonikbindungen bestätigt, 12 semantische Identitätsprüfungen offen;
-- 2 Scope-Fälle fachlich bestätigt;
-- 9 Scope-Fälle nur provisional;
-- 5 Scope-Fälle benötigen Evidenz;
-- Buchbinden = bestehender Live-/Technikpilot bleibt erhalten, aber V2-Hub-PASS wieder OFFEN: echte DataForSEO-Evidence liefert aktuell 4 / 5 / 3 / 4 distinct Intent-Gruppen in den vier aktiven Leafs; nur Ausrüstung liegt bereits im V2-Ziel 5–12;
-- Treibholz sammeln = IN_SCOPE / Sammeln / EDITORIAL, aber ARTICLE_ONLY vs. EDITORIAL_TOPIC noch offen;
+- 34 ideale Leafs;
+- Buchbinden = HOBBY_HUB_CANDIDATE mit 4 idealen Leafs und 5 / 6 / 6 / 6 fachlich eigenständigen Artikelintents;
+- Airbrush, Bean-to-Bar-Schokolade, Aeroponik, Ameisenhaltung, 3D-Bogenschießen und Wabikusa = kapazitätsseitig typischer Hubbereich, aber Scope/Identität noch offen;
+- 3D-Druck, Amateurastronomie und Filzen = MACRO_REVIEW;
+- Treibholz sammeln = EDITORIAL_TOPIC_CANDIDATE;
+- fünf kleine/spezielle Themen = AGGREGATION_REVIEW;
 - keine automatische Promotion aus DIRECT/ASSISTED;
 - 0 Zielbaum-Writes zulässig.
 
