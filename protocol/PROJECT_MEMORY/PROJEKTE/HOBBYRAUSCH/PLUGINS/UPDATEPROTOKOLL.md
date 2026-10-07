@@ -290,3 +290,43 @@ UNVERÄNDERT kein V1.12-Live-PASS und kein Deploymentauftrag.
 
 CURRENT:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+
+---
+
+## PU-20261007-006 – HD-001 V2-Fachgate pro Leaf / DataForSEO-Abgleich vorbereitet
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+ART:
+Fach-/Integrationsfortschreibung, KEINE Plugin-Codeänderung.
+
+WARUM:
+Die vollständige Konzeptnachprüfung zeigte, dass Batch 001 die Content Capacity noch zu grob betrachtete. Verbindlich ist die Prüfung jeder untersten Kategorie auf 5–12 distinct Artikelintents. Zusätzlich muss die Zusammenfassung kleiner valider Hobbys ausdrücklich unterstützt werden.
+
+ÄNDERUNG AUSSERHALB DES PLUGIN-CODES:
+- Bewertungsregeln auf V1.1 fortgeschrieben;
+- per-Leaf-Capacity gebunden;
+- Aggregation kleiner Themen ohne Identitätsverlust gebunden;
+- fachliche Batch-001-Vorprüfung erzeugt;
+- exakten DataForSEO-Request für Batch 001 vorbereitet;
+- bestehenden Buchbinden-DataForSEO-Befund gegen V2 neu bewertet.
+
+KORREKTUR ZU PU-20261007-005:
+Buchbinden bleibt als bestehender Live-/Technikpilot erhalten.
+Es ist aber NOCH KEIN endgültiger V2-HOBBY_HUB-PASS.
+Reale vorhandene Evidence:
+Einstieg 4 / Ausrüstung 5 / Material 3 / Techniken-Praxis 4 distinct Gruppen.
+
+NEUER BLOCKER:
+`HD001_V2_BATCH001_DATAFORSEO_LIVE_VALIDATION_PENDING`
+
+PLUGIN-CODE:
+UNVERÄNDERT V1.12.0.
+
+LIVE:
+UNVERÄNDERT kein V1.12-Live-PASS und kein Deploymentauftrag.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
