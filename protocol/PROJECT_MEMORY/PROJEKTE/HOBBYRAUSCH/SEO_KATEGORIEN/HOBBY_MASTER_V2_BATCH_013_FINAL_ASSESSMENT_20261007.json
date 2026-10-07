@@ -1,0 +1,201 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_013_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_013_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:steinschleifen",
+      "canonical_name": "Steinschleifen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Canonical German owner for general lapidary stone cutting/grinding/polishing. Gem-specific faceting may remain with Edelsteinschleifen."
+    },
+    {
+      "hobby_id": "hobby:mineralienschleifen",
+      "canonical_name": "Mineralienschleifen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:steinschleifen",
+      "natural_world": "fertigen",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "Same general stone/mineral lapidary practice; retain source term without a second SEO owner."
+    },
+    {
+      "hobby_id": "hobby:edelsteinschleifen",
+      "canonical_name": "Edelsteinschleifen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns gemstone-specific shaping/faceting/cabochons, orientation, polishing and evaluation."
+    },
+    {
+      "hobby_id": "hobby:lapidary",
+      "canonical_name": "Lapidary",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:steinschleifen",
+      "natural_world": "fertigen",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "English umbrella term for the same lapidary practice; German portal uses Steinschleifen as canonical owner."
+    },
+    {
+      "hobby_id": "hobby:steinpolieren",
+      "canonical_name": "Steinpolieren",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns focused hand/machine polishing of stones; broader shaping remains with Steinschleifen."
+    },
+    {
+      "hobby_id": "hobby:rock-tumbling",
+      "canonical_name": "Rock Tumbling",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns rotary/vibratory tumbling, grit stages, loads, polishing and troubleshooting."
+    },
+    {
+      "hobby_id": "hobby:specksteinschnitzen",
+      "canonical_name": "Specksteinschnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns soapstone selection, sawing/rasping, carving, sanding and polishing."
+    },
+    {
+      "hobby_id": "hobby:kintsugi",
+      "canonical_name": "Kintsugi",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns ceramic repair aesthetics, joins, lacquer/adhesive systems, metallic finishing and care."
+    },
+    {
+      "hobby_id": "hobby:urushi-lackkunst",
+      "canonical_name": "Urushi-Lackkunst",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns urushi lacquer preparation/application, layers, curing, decoration and finishing."
+    },
+    {
+      "hobby_id": "hobby:goldlegen",
+      "canonical_name": "Goldlegen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:vergolden",
+      "natural_world": "gestalten",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "Same gilding practice; Vergolden is the canonical German owner."
+    },
+    {
+      "hobby_id": "hobby:vergolden",
+      "canonical_name": "Vergolden",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns gilding surfaces, grounds/sizes, leaf application, burnishing and protection."
+    },
+    {
+      "hobby_id": "hobby:pyrographie",
+      "canonical_name": "Pyrographie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:brandmalerei",
+      "natural_world": "gestalten",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "International term for Brandmalerei; one canonical SEO owner only."
+    },
+    {
+      "hobby_id": "hobby:brandmalerei",
+      "canonical_name": "Brandmalerei",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns pyrography tools, temperature, line/shading technique, materials and finishing."
+    },
+    {
+      "hobby_id": "hobby:pinstriping",
+      "canonical_name": "Pinstriping",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns pinstriping brushes/paint, line control, layouts, symmetry and surface finishing."
+    },
+    {
+      "hobby_id": "hobby:lettering",
+      "canonical_name": "Lettering",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns hand lettering styles, tools, construction, composition and finished pieces."
+    },
+    {
+      "hobby_id": "hobby:schildermalerei",
+      "canonical_name": "Schildermalerei",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns traditional sign painting, layout, alphabets, brushes/paint, substrates and finishing."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 10,
+    "editorial_topic": 1,
+    "alias_only": 3,
+    "seo_enrichment_pending": 13,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 013 to ledger and continue."
+}
