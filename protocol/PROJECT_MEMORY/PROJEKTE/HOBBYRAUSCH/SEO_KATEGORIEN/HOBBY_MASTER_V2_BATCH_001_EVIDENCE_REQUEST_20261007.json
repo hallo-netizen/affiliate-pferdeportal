@@ -1,10 +1,10 @@
 {
   "contract": "HOBBY_MASTER_V2_BATCH_001_EVIDENCE_REQUEST",
-  "version": "1.1",
+  "version": "1.2",
   "effective_date": "2026-10-07",
-  "status": "READY_FOR_PER_LEAF_DATAFORSEO_VALIDATION__LIVE_ACCESS_BLOCKED",
+  "status": "READY_FOR_HD001_V121_WORDPRESS_DATAFORSEO_RUN",
   "source_result": "HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json",
-  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.1",
+  "rules": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.2",
   "invariants": [
     "Eight worlds remain CORE level 1.",
     "Hobbywelten remains view only.",
@@ -52,11 +52,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -117,11 +117,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -182,11 +182,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -247,11 +247,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -312,11 +312,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -377,11 +377,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -442,11 +442,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -507,11 +507,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -577,11 +577,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -640,11 +640,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -716,11 +716,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -779,11 +779,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -847,11 +847,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -917,11 +917,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -987,11 +987,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -1057,11 +1057,11 @@
         "per_lowest_category": true,
         "validation_steps": [
           "Start from the subject-proposed leaf/article candidates.",
-          "Validate keywords/intents with real DataForSEO Germany/de.",
+          "Validate the bundled candidate intents with real DataForSEO Germany/de through HD-001 V1.12.1.",
           "Collapse synonyms and wording variants.",
           "Apply cross-pillar ownership before counting an intent.",
           "Count each lowest-level category separately.",
-          "Apply 0-3 / 4 / 5-12 / 13-15 / 16+ thresholds."
+          "Apply concept thresholds: under 4 combine; 4 borderline; 5-12 ideal; 13-14 above ideal without automatic split; from about 15 review a real split."
         ]
       },
       "ownership": {
@@ -1085,17 +1085,25 @@
       }
     }
   ],
-  "dataforseo_request": "HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json",
+  "dataforseo_request": "HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json@1.1",
   "subject_preflight": "HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json",
   "global_requirements": {
     "per_leaf_capacity": true,
-    "target_articles_per_lowest_category": "5-12 distinct owned article intents",
-    "under_4": "NO_STANDALONE_LEAF__AGGREGATE_OR_EDITORIAL",
-    "four": "EXCEPTION_REVIEW",
-    "thirteen_to_fifteen": "SPLIT_REVIEW",
-    "sixteen_plus": "SPLIT_REQUIRED",
+    "concept_thresholds": {
+      "under_4": "COMBINE_OR_NO_STANDALONE_CATEGORY",
+      "four": "BORDERLINE_REVIEW",
+      "5_12": "IDEAL",
+      "13_14": "ABOVE_IDEAL_NO_AUTOMATIC_SPLIT",
+      "about_15_plus": "REVIEW_REAL_SPLIT"
+    },
     "total_hobby_article_count_is_not_sufficient": true,
     "aggregation_review_for_small_valid_hobbies": true,
     "canonical_identity_must_be_preserved_when_grouped": true
+  },
+  "plugin_candidate": {
+    "version": "1.12.1",
+    "artifact": "HD001_V1.12.1_HOBBY_MASTER_V2_READONLY_ASSESSMENT_HARDPASS.zip",
+    "sha256": "959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d",
+    "writes_structure": false
   }
 }
