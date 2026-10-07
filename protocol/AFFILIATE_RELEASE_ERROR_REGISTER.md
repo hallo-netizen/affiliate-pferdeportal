@@ -1367,3 +1367,41 @@ Der versionsneutrale Sammelrunner verlangt diesen realen Provider-Gate jetzt zwi
 **Zusatzkorrektur Retry:** Ein innerhalb eines Laufs fehlgeschlagenes Bild bleibt terminal fail-closed. Ein späterer echter Provider-Reimport desselben unveränderten Banners setzt ausschließlich die technische Asset-Evidence erneut auf `pending`, damit ein temporärer Bildfehler nicht dauerhaft festgeschrieben wird. Erfolgreich verifizierte identische Assets werden weiterhin wiederverwendet.
 
 **Status:** REAL_PROVIDER_GATE_REQUIRED / FIXTURE_ONLY_PASS_FORBIDDEN / FAILED_ASSET_REIMPORT_RETRY_FIXED / GUARDS_OPEN.
+
+
+### AFF-ERR-055 – Abschlussnachtrag 07.10.2026: Ausführungsweg geschlossen
+
+Der frühere Runner-/WordPress-/MariaDB-Blocker ist **geschlossen**.
+
+Beleg:
+- Run `37606358698` hat auf dem manifestgebundenen 6.72.199-Source die internen Gates erfolgreich ausgeführt.
+- Frische WordPress-/MariaDB-Installation: PASS.
+- installierter Pluginbaum: 28/28 byteidentisch zum Source-Manifest.
+- statischer Basisvertrag, mocked ADCELL E2E, Upgrade-E2E, Tarifcheck/CHECK24/manueller Banner-E2E: PASS.
+- bestehende Bannerregression: PASS.
+- Candidate-Installer gebaut, Fresh-Unpack/Byteidentität: PASS.
+- Evidence: `release/affiliate-zentrale/evidence/affiliate_router_v672199_internal_candidate_gate_20261007.md`.
+
+**Status:** CLOSED_AS_EXECUTION_BLOCKER / INTERNAL_GATES_PASS.
+
+### AFF-ERR-054 – Aktueller Abschlussstand 07.10.2026: nur echter ADCELL-Provider-Gate offen
+
+Der technische 6.72.199-Fix ist intern durch die gebundenen WordPress/MariaDB-Gates belegt. Der Candidate-Installer
+`AFFILIATE_ZENTRALE_6.72.199.zip` wurde aus exakt diesem Source gebaut und byteidentisch geprüft.
+
+**Noch offen ist ausschließlich der externe Real-Provider-Nachweis:** Der Test
+`release/affiliate-zentrale/evidence/worktests/test_adcell_banner_import_basis_real_provider_v672199.php`
+muss mit echten ADCELL-Zugangsdaten und Programm-IDs auf einem isolierten Testhost laufen.
+
+Im erfolgreichen Candidate-Lauf `37606358698` wurde dieser Gate ausdrücklich nicht ausgeführt, weil
+`PPAR_ADCELL_USERNAME`, `PPAR_ADCELL_PASSWORD` und `PPAR_ADCELL_PROGRAM_IDS` nicht vorhanden waren.
+
+**KISS-Hardlock für den nächsten Chat:**
+- Bereits grüne, hash-identisch gebundene Tests **nicht wiederholen**.
+- Keine neuen Tests „zur Sicherheit“ erfinden.
+- Keine neue Banner-, Ranking-, Target- oder Performancearchitektur bauen.
+- Nur den echten ADCELL-Provider-Gate ausführen.
+- Bei FAIL nur den ersten konkret belegten Fehler beheben.
+- Bei PASS den vorhandenen Candidate-Installer als final binden und `release-check` ausführen.
+
+**Status:** INTERNAL_PASS / CANDIDATE_INSTALLER_READY / REAL_ADCELL_PROVIDER_GATE_ONLY_OPEN / NO_RELEASE_YET.
