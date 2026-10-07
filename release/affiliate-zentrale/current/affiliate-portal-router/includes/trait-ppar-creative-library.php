@@ -960,24 +960,45 @@ trait PPAR_Creative_Library_Trait {
                     'missing_count'=>0,
                     'last_complete_run'=>$creative['last_complete_run'],
                 );
+                $asset_retry_reset = false;
                 if (array_key_exists('payload', $creative)) {
                     $existing_payload = json_decode((string)($existing['payload'] ?? ''), true);
                     $incoming_payload = json_decode((string)$creative['payload'], true);
                     $existing_payload = is_array($existing_payload) ? $existing_payload : array();
                     $incoming_payload = is_array($incoming_payload) ? $incoming_payload : array();
-                    // The source hash includes the image URL. Therefore an equal
-                    // source hash means an already verified asset still refers to
-                    // the same bytes/source. Refresh classifier/policy-derived
-                    // fields, but never downgrade verified image evidence back to
-                    // the new creative's initial pending/0x0 state.
+                    // Gleiches Providerobjekt + gleiches Bild darf eine bereits
+                    // erfolgreiche technische Evidence wiederverwenden. Ein
+                    // frueherer terminaler Bildfehler darf dagegen NICHT fuer
+                    // immer konserviert werden: Erst ein spaeterer echter
+                    // Provider-Reimport oeffnet genau dieses Asset erneut auf
+                    // pending. Innerhalb desselben Laufs bleibt failed terminal.
+                    $existing_dimension_state = sanitize_key((string)($existing_payload['_dimension_state'] ?? ''));
+                    $preserve_asset_evidence = in_array($existing_dimension_state, array('verified','mismatch'), true);
                     foreach (array(
-                        '_declared_width','_declared_height','_dimension_state','_dimension_error',
-                        '_image_sha256','_image_mime','_image_bytes','_measured_at',
+                        '_declared_width','_declared_height',
                         '_preverify_topic_status','_preverify_topic_score','_preverify_topic_targets'
                     ) as $runtime_key) {
                         if (array_key_exists($runtime_key, $existing_payload)) {
                             $incoming_payload[$runtime_key] = $existing_payload[$runtime_key];
                         }
+                    }
+                    if ($preserve_asset_evidence) {
+                        foreach (array(
+                            '_dimension_state','_dimension_error',
+                            '_image_sha256','_image_mime','_image_bytes','_measured_at'
+                        ) as $runtime_key) {
+                            if (array_key_exists($runtime_key, $existing_payload)) {
+                                $incoming_payload[$runtime_key] = $existing_payload[$runtime_key];
+                            }
+                        }
+                    } elseif ($existing_dimension_state === 'failed') {
+                        $incoming_payload['_dimension_state'] = 'pending';
+                        $incoming_payload['_dimension_error'] = '';
+                        $incoming_payload['_image_sha256'] = '';
+                        $incoming_payload['_image_mime'] = '';
+                        $incoming_payload['_image_bytes'] = 0;
+                        $incoming_payload['_measured_at'] = 0;
+                        $asset_retry_reset = true;
                     }
                     $same_source_update['payload'] = wp_json_encode($incoming_payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                 }
@@ -1013,12 +1034,13 @@ trait PPAR_Creative_Library_Trait {
                 $verify_before_assign = $this->creative_library_verify_before_assign_banner($creative);
                 $incoming_dimension_state = sanitize_key((string)($incoming_payload['_dimension_state'] ?? 'pending'));
                 if ($verify_before_assign && !in_array($incoming_dimension_state, array('verified','mismatch'), true)) {
+                    $same_source_update['topic_status'] = 'format_pending';
                     $same_source_update['topic_score'] = 0;
                     $same_source_update['topic_targets'] = '[]';
                     $same_source_update['classified_at'] = 0;
                 }
                 $wpdb->update($table, $same_source_update, array('id'=>absint($existing['id'])));
-                return $destination_changed ? 'updated' : 'unchanged';
+                return ($destination_changed || $asset_retry_reset) ? 'updated' : 'unchanged';
             }
             $wpdb->update($table, $data, array('id'=>absint($existing['id'])));
             return 'updated';
