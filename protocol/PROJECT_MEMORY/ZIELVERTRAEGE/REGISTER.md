@@ -310,10 +310,10 @@ NACHFOLGER:
 keiner belegt.
 
 
-## ZV-HOBBYRAUSCH-HD001-001 – Automatische DataForSEO-SEO-Hierarchie bis Frontend
+## ZV-HOBBYRAUSCH-HD001-001 – Integrierte Hobby-Architektur bis Frontend
 
 TITEL:
-HOBBYRAUSCH HD-001 – AUTOMATISCHE DATAFORSEO-SEO-HIERARCHIE BIS FRONTEND
+HOBBYRAUSCH HD-001 – INTEGRIERTE HOBBY-ARCHITEKTUR BIS FRONTEND
 
 GELTUNGSBEREICH:
 HOBBYRAUSCH / SEO_KATEGORIEN / HD-001
@@ -322,7 +322,7 @@ STATUS:
 AKTIV
 
 FASSUNG:
-1.0 / 2026-10-03
+2.0 / 2026-10-07
 
 HAUPTQUELLE:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/ZIELVERTRAG_HD001_AUTOMATISCHE_SEO_HIERARCHIE_20261003.md`
@@ -331,7 +331,8 @@ VERANTWORTLICHER BEREICH:
 `PROJEKTE/HOBBYRAUSCH/SEO_KATEGORIEN/`
 
 PASS-BEDINGUNG:
-Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Insbesondere DataForSEO-gesteuerte sichtbare Namen und Mehr-Ebenen-Hierarchie, Hauptportal + Magazin + HivePress, WordPress-Publish, sichtbare Frontend-Navigation, Readback sowie vollständige lokale Positiv-/Negativ-E2E-Simulation.
+Nicht hier dupliziert. Vollständig aus der Hauptquelle lesen. Maßgeblich sind insbesondere HOBBY_MASTER-V2-Bewertung vor dem Zielbaum, acht Hauptwelten als oberste CORE-Ebene, Drei-Säulen-Integration, DataForSEO nur als SEO-/Nachfrageevidenz, säulenübergreifende Ownership, Soll/Ist-Sync, Frontend-Readback sowie vollständige lokale Positiv-/Negativ-E2E-Simulation.
 
 NACHFOLGER:
 keiner belegt.
+
