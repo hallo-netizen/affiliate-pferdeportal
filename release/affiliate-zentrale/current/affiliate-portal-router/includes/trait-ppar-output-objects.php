@@ -718,7 +718,7 @@ trait PPAR_Output_Objects_Trait {
             // Kleine, sprachneutrale Normalisierung plus konservative deutsche
             // Flexionsvarianten. Dadurch werden z. B. "Versicherungen" und
             // "Versicherung" vergleichbar, ohne eine Branchenliste einzubauen.
-            foreach (array('ern','en','er','es','e','n','s') as $suffix) {
+            foreach (array('ungen','ung','ern','en','er','es','e','n','s') as $suffix) {
                 if (strlen($token) >= 7 + strlen($suffix) && substr($token, -strlen($suffix)) === $suffix) {
                     $root = substr($token, 0, -strlen($suffix));
                     if (strlen($root) >= 5 && !isset($stop[$root])) {
@@ -1248,13 +1248,39 @@ trait PPAR_Output_Objects_Trait {
             return array('updated'=>0,'mapped'=>0,'reason'=>'missing_row');
         }
 
+        global $wpdb;
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+
+        // Altbestand mit nur geprueftem Trackinglink: im ohnehin laufenden
+        // Import/Reconcile genau einmal bis zur echten Landingpage aufloesen.
+        // Kein Frontend-HTTP, keine neue Runtime-Abfrage.
         $source=$this->output_banner_destination_source($row);
+        if(in_array($source,array('tracking_checked','tracking_fallback'),true)
+            && method_exists($this,'creative_library_resolve_tracking_destination_import')){
+            $tracking=esc_url_raw((string)($row['tracking_url']??''));
+            if($tracking!==''){
+                $resolved=$this->creative_library_resolve_tracking_destination_import($tracking);
+                $resolved_url=is_array($resolved)?esc_url_raw((string)($resolved['url']??'')):'';
+                $resolved_source=is_array($resolved)?sanitize_key((string)($resolved['source']??'')):'';
+                if($resolved_url!=='' && $resolved_url!==$tracking
+                    && in_array($resolved_source,array('decoded_tracking','resolved_redirect'),true)){
+                    $payload['_destination_source']=$resolved_source;
+                    $row['destination_url']=$resolved_url;
+                    $row['payload']=wp_json_encode($payload,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                    $wpdb->update($this->creative_library_table(),array(
+                        'destination_url'=>$resolved_url,
+                        'payload'=>$row['payload'],
+                    ),array('id'=>$row_id));
+                    $source=$resolved_source;
+                }
+            }
+        }
+
         $destination=esc_url_raw((string)($row['destination_url']??''));
         $semantic=$this->output_destination_semantic_text($row);
         $comparison_partner=$this->output_comparison_banner_partner($row);
         $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
-        $payload=json_decode((string)($row['payload']??''),true);
-        $payload=is_array($payload)?$payload:array();
         $manual_tarifcheck_family=sanitize_key((string)($payload['_manual_target_family']??''));
         $manual_tarifcheck=in_array($manual_tarifcheck_family,array('kosten','versicherung'),true)
             && $tarifcheck_family===$manual_tarifcheck_family;
