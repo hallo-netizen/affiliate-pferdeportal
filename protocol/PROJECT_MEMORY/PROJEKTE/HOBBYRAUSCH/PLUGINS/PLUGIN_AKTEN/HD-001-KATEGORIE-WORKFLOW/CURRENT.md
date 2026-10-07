@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 LOKAL FULL POS/NEG PASS ALS TECHNISCHE BASIS / NICHT LIVE ABGENOMMEN / V2-REGELN 1.1 PRO LEAF + ZUSAMMENFASSUNG GEBUNDEN / DATAFORSEO-BATCHABGLEICH OFFEN / KEIN DEPLOYMENTAUFTRAG
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.1 READ-ONLY V2-BEWERTUNG LOKAL HARD PASS / NICHT LIVE ABGENOMMEN / REALER WORDPRESS-DATAFORSEO-BATCHLAUF OFFEN / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -71,6 +71,45 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 - Buchbinden-Renderer/4 Leafs/stabile IDs PASS;
 - Fresh-Unpack/ZIP-Integrität PASS.
 
+## Aktueller V2-Bewertungskandidat
+
+Plugin-Version:
+`1.12.1`
+
+Artefakt:
+`HD001_V1.12.1_HOBBY_MASTER_V2_READONLY_ASSESSMENT_HARDPASS.zip`
+
+SHA-256:
+`959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d`
+
+Prüfbericht:
+`HD001_V1.12.1_FINAL_LOCAL_POSNEG_REPORT.txt`
+
+Zweck:
+ausschließlich HOBBY_MASTER-V2-Bewertung im echten WordPress mit dem vorhandenen DataForSEO-Zugang.
+
+Neu:
+- eigener Backendpunkt `Kategorien → V2-Hobbybewertung`;
+- gebündelter kontrollierter Batch 001;
+- 16 Hobbys / 34 vorgeschlagene Leafs / 263 Artikelintents;
+- exakt 1 DataForSEO Keyword-Overview-Aufruf;
+- DataForSEO-Dedupe über `core_keyword`;
+- Batch-übergreifende Intent-/Ownership-Overlap-Markierung;
+- Konzeptgrenzen exakt: <4 zusammenlegen, 5–12 ideal, ab etwa 15 Teilung prüfen;
+- kleine valide Hobbys bleiben Identitäten und können gemeinsam dargestellt werden;
+- Target-Tree-Autorun deaktiviert;
+- manueller Target-Tree-Refresh blockiert;
+- 0 WordPress-/HivePress-Strukturwrites im Bewertungslauf.
+
+Fresh-Unpack-Test:
+- PHP-Lint 59/59 PASS;
+- Legacy Regression 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Bestand PASS;
+- V1.12.1 V2-Grenz-/Negativsuite PASS.
+
+V1.12.1 ist ausdrücklich KEIN neuer Zielbaum und kein Live-PASS.
+
 ## Fachliche Fortschreibung NACH V1.12.0
 
 Die V1.12.0-Technik bleibt Basis, aber das gebündelte Hobby-Depot-Zielprofil ist NICHT der endgültige neue Installationsbaum.
@@ -104,32 +143,26 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_HD001_ASSESSMENT_RUN_NOT_BOUND`
+`HD001_V2_BATCH001_WORDPRESS_DATAFORSEO_RUN_PENDING`
 
-Die V2-Fachregeln wurden gegen das vollständige Konzept nachgeschärft:
-- 5–12 distinct Artikelintents müssen pro unterster Kategorie belegt sein;
-- kleine valide Hobbys dürfen fachlich sinnvoll zusammengefasst werden, ihre Identität bleibt getrennt;
-- DataForSEO bleibt reine SEO-/Intent-Evidenz.
+Der read-only V2-Bewertungslauf ist technisch fertig und lokal hart geprüft.
 
-Batch 001 ist fachlich vorbereitet.
-Ein exakter DataForSEO-Request ist gebunden.
+Es fehlt nur noch die echte Ausführung in Hobby Depot:
+V1.12.1 installieren → `Kategorien → V2-Hobbybewertung` → Batch 001 vorprüfen → exakt 1 DataForSEO-Aufruf bestätigen → Ergebnis-JSON herunterladen.
 
-Der vorhandene reale Buchbinden-DataForSEO-Befund ergibt aktuell 4 / 5 / 3 / 4 distinct Gruppen in den vier aktiven Leafs.
-Damit bleibt Buchbinden als bestehender Live-/Technikpilot unangetastet, ist aber nach V2 noch kein finaler Hub-PASS.
-
-Für die übrigen Batch-Fälle fehlt der reale DataForSEO-Abgleich.
+Keine Kategorien werden geschrieben.
+Der alte V1.12-Zielbaum-Runner ist in V1.12.1 absichtlich deaktiviert.
 
 ## EXAKT EINE NEXT ACTION
 
-Keine Pluginänderung und kein Deployment starten.
+Das exakte V1.12.1-Artefakt in Hobby Depot installieren und den gebündelten Batch 001 real über den vorhandenen WordPress-/DataForSEO-Zugang ausführen.
 
-Zuerst im Scope `SEO_KATEGORIEN` den vorbereiteten Batch-001-DataForSEO-Request im HD-001-WordPress-Plugin als read-only V2-Bewertungslauf ausführen und danach Leaf-Kapazität, Ownership und mögliche Zusammenfassung erneut bewerten.
-
-Erst nach abgeschlossener Masterbewertung und Zielbaum-Delta wird V1.12.0 technisch gegen das neue Zielprofil fortgeschrieben und erneut vollständig POS/NEG getestet.
+Danach Ergebnis fachlich gegen Regelvertrag 1.2 auswerten.
+Erst danach weitere Masterbewertung und später Zielbaum-Delta.
 
 ## Release-/Artefaktgrenze
 
-V1.12.0 ist lokale technische Baseline, kein aktueller Hobby-Depot-Deploymentkandidat.
+V1.12.0 bleibt lokale technische Zielbaum-Baseline. V1.12.1 ist der aktuelle read-only Bewertungskandidat und darf installiert werden, um Batch 001 real mit DataForSEO zu prüfen; er ist kein Zielbaum-Deploymentkandidat.
 
 Isolierte Artefaktpflicht:
 `PLUGINS/ISOLIERTE_PLUGINS/HD-001-KATEGORIE-WORKFLOW/MANIFEST.md`
