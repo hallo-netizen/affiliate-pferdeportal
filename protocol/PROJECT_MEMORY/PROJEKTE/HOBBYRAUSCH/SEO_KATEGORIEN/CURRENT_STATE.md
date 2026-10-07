@@ -86,7 +86,7 @@ Vorbereitetes Master-Intake-Delta:
 
 Batch 001:
 - 16 reproduzierbar ausgewählte Master-Identitäten;
-- 16/16 Identitätsgate PASS;
+- 16/16 ID-Eindeutigkeit PASS; davon 4 aktuelle Alias-/Kanonikbindungen bestätigt, 12 semantische Identitätsprüfungen offen;
 - 2 Scope-Fälle fachlich bestätigt;
 - 9 Scope-Fälle nur provisional;
 - 5 Scope-Fälle benötigen Evidenz;
