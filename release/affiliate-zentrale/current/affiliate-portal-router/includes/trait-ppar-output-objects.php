@@ -1384,10 +1384,19 @@ trait PPAR_Output_Objects_Trait {
 
             $targets=$this->output_portal_targets($portal);
             if(is_wp_error($targets)){continue;}
+
+            // KISS/DB: Banner-Zuordnung prueft viele Ziele, aber die manuellen
+            // Zielentscheidungen werden pro Portal genau einmal read-only geladen.
+            // Danach liest control_target_gate() nur noch den Request-Cache.
+            if(method_exists($this,'control_prime_portal_decision_cache')){
+                $this->control_prime_portal_decision_cache($portal_key,true);
+            }
+
             $wanted=array_values(array_filter(array_map('sanitize_key',(array)($portal['banner_target_types']??array('page','category')))));
 
-            // Vergleichsportale bleiben bewusst gruppenbasiert. Eine explizit gesetzte
-            // Gruppe ist Autoritaet; unsichere Trackinglinks werden nicht geraten.
+            // Die zwei vereinbarten Vergleichsfamilien bleiben die einzigen
+            // Mehrziel-Faelle: Kredit -> alle Kosten-Blaetter, Versicherung -> alle
+            // Versicherungs-Blaetter. Die Familie selbst wird automatisch aus Evidenz bestimmt.
             if(in_array($tarifcheck_family,array('kosten','versicherung'),true)){
                 $map_source=$comparison_partner==='check24'
                     ? ($tarifcheck_family==='kosten' ? 'check24_credit_all_cost_categories' : 'check24_insurance_all_insurance_categories')
