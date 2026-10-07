@@ -32,8 +32,8 @@ $manual_m->setAccessible(true);
 $manual = $manual_m->invoke($o, array(
     'manual_banner_external_id'=>'check24-test-01',
     'manual_banner_title'=>'CHECK24 Testbanner',
-    'manual_banner_image_url'=>'https://cdn.example.test/check24-banner.png',
-    'manual_banner_tracking_url'=>'https://tracking.example.test/check24',
+    'manual_banner_image_url'=>'https://example.com/check24-banner.png',
+    'manual_banner_tracking_url'=>'https://example.com/tracking/check24',
     'manual_banner_destination_url'=>'https://www.check24.de/',
     'manual_banner_description'=>'Manuell hinterlegter Testbanner',
     'manual_banner_tags'=>'CHECK24',
@@ -44,7 +44,7 @@ if (is_wp_error($manual)) {
     $fail('manual_row_' . $manual->get_error_code());
 }
 if (($manual['creative_id'] ?? '') !== 'check24-test-01'
-    || ($manual['tracking_url'] ?? '') !== 'https://tracking.example.test/check24'
+    || ($manual['tracking_url'] ?? '') !== 'https://example.com/tracking/check24'
     || ($manual['destination_url'] ?? '') !== 'https://www.check24.de/'
     || ($manual['title_source'] ?? '') !== 'manual_user') {
     $fail('manual_row_fields');
@@ -52,7 +52,7 @@ if (($manual['creative_id'] ?? '') !== 'check24-test-01'
 $ok('manual_banner_row_built');
 
 $invalid = $manual_m->invoke($o, array(
-    'manual_banner_image_url'=>'https://cdn.example.test/check24-banner.png',
+    'manual_banner_image_url'=>'https://example.com/check24-banner.png',
     'manual_banner_tracking_url'=>'',
 ));
 if (!is_wp_error($invalid) || $invalid->get_error_code() !== 'manual_banner_tracking') {
@@ -62,8 +62,8 @@ $ok('manual_banner_missing_tracking_fails_closed');
 
 $untitled = $manual_m->invoke($o, array(
     'manual_banner_external_id'=>'check24-test-no-title',
-    'manual_banner_image_url'=>'https://cdn.example.test/check24-banner-no-title.png',
-    'manual_banner_tracking_url'=>'https://tracking.example.test/check24-no-title',
+    'manual_banner_image_url'=>'https://example.com/check24-banner-no-title.png',
+    'manual_banner_tracking_url'=>'https://example.com/tracking/check24-no-title',
 ));
 if (is_wp_error($untitled) || ($untitled['title_source'] ?? '') !== 'manual_missing') {
     $fail('manual_missing_title_provenance');
@@ -188,7 +188,7 @@ $ok('wordpress_real_comparison_target_tree_seeded');
 
 $png = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl+0iAAAAAASUVORK5CYII=');
 add_filter('pre_http_request', static function($pre, $args, $url) use ($png) {
-    if (strpos((string)$url, 'https://cdn.example.test/check24-') === 0) {
+    if (strpos((string)$url, 'https://example.com/check24-') === 0) {
         if (strpos((string)$url, 'broken') !== false) {
             return new WP_Error('check24_image_broken', 'simulated broken CHECK24 image');
         }
@@ -213,8 +213,8 @@ $build_check24 = static function($external, $destination, $family, $image_suffix
     $raw = $manual_m->invoke($o, array(
         'manual_banner_external_id'=>$external,
         'manual_banner_title'=>'CHECK24 ' . ucfirst($family),
-        'manual_banner_image_url'=>'https://cdn.example.test/check24-' . $image_suffix . '.png',
-        'manual_banner_tracking_url'=>'https://tracking.example.test/' . $external,
+        'manual_banner_image_url'=>'https://example.com/check24-' . $image_suffix . '.png',
+        'manual_banner_tracking_url'=>'https://example.com/tracking/' . $external,
         'manual_banner_destination_url'=>$destination,
         'manual_banner_width'=>1,
         'manual_banner_height'=>1,
