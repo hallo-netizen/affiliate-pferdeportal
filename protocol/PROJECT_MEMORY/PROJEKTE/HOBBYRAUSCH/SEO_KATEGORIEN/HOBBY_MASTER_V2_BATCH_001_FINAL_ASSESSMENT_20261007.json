@@ -1,0 +1,225 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_001_FACHLICH_CLOSED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "source_master": {
+    "revision": "HD-HOBBY-MASTER-V2-20261007",
+    "sha256": "a4cae906ce4f9fefcc805b8c83fc746859d508d32f3e2f981f01f6d26f7353b7",
+    "canonical_entries": 841
+  },
+  "real_readback": {
+    "plugin_version": "1.12.6",
+    "result_version": "1.3",
+    "result_sha256": "2b1da6a48ac30b7120426779cb4a06da28ad9fc4c2675a986e9bcd744b16df35",
+    "candidate_count": 16,
+    "ideal_leaf_count": 34,
+    "provider_calls_added_by_recalc": 0,
+    "provider_cost_added_usd": 0,
+    "wordpress_structure_writes": 0
+  },
+  "hard_decision_rules": [
+    "Canonical identities are preserved unless a real alias/duplicate is proven.",
+    "One primary SEO owner per intent.",
+    "Application/subdiscipline pages may exist without duplicating the generic parent intent.",
+    "Provider raw rows do not create article intents.",
+    "No target-tree write before the full 841-entry assessment is complete."
+  ],
+  "decisions": [
+    {
+      "hobby_id": "hobby:airbrush",
+      "canonical_name": "Airbrush",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Airbrush owns generic technique, equipment, colors, maintenance and practice. Model-specific application intents belong to Airbrush-Modellbau; the Airbrush hub links to them instead of duplicating them."
+    },
+    {
+      "hobby_id": "hobby:bean-to-bar-schokolade",
+      "canonical_name": "Bean-to-Bar-Schokolade",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns the end-to-end bean-to-bar process from cocoa raw material through roasting, refining, recipe development and finished bars. Generic chocolate/praline intents remain separate owners; bean-to-bar pages must keep explicit process context."
+    },
+    {
+      "hobby_id": "hobby:3d-druck",
+      "canonical_name": "3D-Druck",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "technik",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns the generic 3D-printing orientation intent. Resin-3D-Druck, 3D-Scanning and CAD keep their own canonical identities and specific intents; a future FDM unit requires its own assessment."
+    },
+    {
+      "hobby_id": "hobby:amateurastronomie",
+      "canonical_name": "Amateurastronomie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "forschen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns the generic amateur-astronomy orientation intent. Teleskop-Astronomie, Astrofotografie, Sonnenbeobachtung, Radioastronomie, Meteorbeobachtung and other concrete disciplines own their specific intents."
+    },
+    {
+      "hobby_id": "hobby:aeroponik",
+      "canonical_name": "Aeroponik",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns aeroponics-specific systems, misting/nozzles, root chamber, aeroponic nutrient/water management and aeroponic plant operation. Generic hydroponics, hydroculture and indoor-growing intents stay with those identities."
+    },
+    {
+      "hobby_id": "hobby:ameisenhaltung",
+      "canonical_name": "Ameisenhaltung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "tiere",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns ant husbandry, species, colony care, feeding, winter rest, climate and operational formicarium use. Construction-focused DIY intents belong to Formicarienbau; generic terrarium intents remain outside."
+    },
+    {
+      "hobby_id": "hobby:3d-bogenschieen",
+      "canonical_name": "3D-Bogenschießen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "bewegen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns 3D-parcours, 3D targets/scoring, terrain shooting, unknown-distance practice and equipment choices explicitly in 3D context. Generic archery basics/equipment belong to Bogenschießen; traditional-style intents belong to traditionelles Bogenschießen."
+    },
+    {
+      "hobby_id": "hobby:alte-brettspiele",
+      "canonical_name": "alte Brettspiele",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Spiele sammeln / Brettspiel-Sammlungen",
+      "ownership": "Owns collecting, identifying, valuing, preserving and restoring old/vintage board games. Generic board-game play/reviews do not belong here."
+    },
+    {
+      "hobby_id": "hobby:wabikusa",
+      "canonical_name": "Wabikusa",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns Wabi-Kusa balls/containers, substrate, emersed aquatic-plant arrangements and their humidity/light/care. Aquascaping owns submerged aquarium layouts; Kokedama and Kusamono remain distinct plant practices."
+    },
+    {
+      "hobby_id": "hobby:buchbinden",
+      "canonical_name": "Buchbinden",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns bookbinding craft, materials, tools and binding techniques. Course/provider/service intents belong to DIRECTORY and do not count as CORE article ownership."
+    },
+    {
+      "hobby_id": "hobby:filzen",
+      "canonical_name": "Filzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns the generic filting orientation intent. Nadelfilzen and Nassfilzen keep separate canonical identities and specific practice intents."
+    },
+    {
+      "hobby_id": "hobby:treibholz-sammeln",
+      "canonical_name": "Treibholz sammeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Naturfunde / Strandfunde",
+      "ownership": "Owns finding, selecting, cleaning, drying, storing and lawful collecting of driftwood. Related natural finds keep their own identities."
+    },
+    {
+      "hobby_id": "hobby:air-dry-clay",
+      "canonical_name": "Air-Dry Clay",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Modellieren mit lufttrocknenden Massen",
+      "ownership": "Owns air-dry-clay-specific handling, drying, crack prevention, sanding, painting, sealing and repair. Polymer Clay and Cold Porcelain remain separate identities."
+    },
+    {
+      "hobby_id": "hobby:airbrush-modellbau",
+      "canonical_name": "Airbrush-Modellbau",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Airbrush-Anwendungen / Modellbau-Lackierung",
+      "ownership": "Owns model-specific airbrush application intents. Generic Airbrush technique/equipment stays with the Airbrush hub; no duplicate generic Airbrush hub is created."
+    },
+    {
+      "hobby_id": "hobby:alabasterschnitzen",
+      "canonical_name": "Alabasterschnitzen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Steinschnitzen",
+      "ownership": "Owns alabaster-specific material selection, shaping, sanding, polishing and safety. Generic carving and other stone materials stay with their own identities."
+    },
+    {
+      "hobby_id": "hobby:algenkultur",
+      "canonical_name": "Algenkultur",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "pflanzen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "aggregation_family": "Mikrokulturen / aquatische Kulturen",
+      "ownership": "Owns active microalgae/algae cultivation practice. Observation/microscopy intents remain with Planktonbeobachtung and Gewässermikroskopie."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 7,
+    "orientation_universe": 3,
+    "editorial_topic": 6,
+    "article_only": 0,
+    "finder_only": 0,
+    "out_of_scope": 0,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Continue the 841-entry master in deterministic batches using the same rules; no target-tree delta until the complete master assessment is finished."
+}
