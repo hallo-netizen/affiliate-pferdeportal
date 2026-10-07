@@ -156,7 +156,7 @@ Damit ist noch keine 841er Massenbewertung freigegeben.
 
 ## EXAKT EINE NEXT ACTION
 
-Die fehlende Scope-/Content-Capacity-/Ownership-Evidenz für den gebundenen Batch 001 erzeugen und denselben Batch anschließend erneut durch den maschinenlesbaren Bewertungsvertrag laufen lassen.
+Die fehlende Identitäts-/Scope-/Content-Capacity-/Ownership-Evidenz für den gebundenen Batch 001 erzeugen und denselben Batch anschließend erneut durch den maschinenlesbaren Bewertungsvertrag laufen lassen.
 
 Noch NICHT:
 - WordPress synchronisieren;
