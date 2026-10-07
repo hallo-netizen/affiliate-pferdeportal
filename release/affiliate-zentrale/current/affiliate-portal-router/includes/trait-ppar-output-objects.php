@@ -921,6 +921,8 @@ trait PPAR_Output_Objects_Trait {
         $multi_source=in_array($record_source,array(
             'tarifcheck_credit_all_cost_categories',
             'tarifcheck_insurance_all_insurance_categories',
+            'check24_credit_all_cost_categories',
+            'check24_insurance_all_insurance_categories',
         ),true);
         if($multi_source){
             foreach($portal_records as $stored_record){
@@ -945,7 +947,11 @@ trait PPAR_Output_Objects_Trait {
                 ? 'Gespeicherte Tarifcheck-Kredit-Zielkarte für alle Kosten-Kategorien.'
                 : ($record_source==='tarifcheck_insurance_all_insurance_categories'
                     ? 'Gespeicherte Tarifcheck-Versicherungs-Zielkarte für alle Versicherungs-Kategorien.'
-                    : ($state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.')),
+                    : ($record_source==='check24_credit_all_cost_categories'
+                        ? 'Gespeicherte CHECK24-Kredit-Zielkarte für alle Kosten-Kategorien.'
+                        : ($record_source==='check24_insurance_all_insurance_categories'
+                            ? 'Gespeicherte CHECK24-Versicherungs-Zielkarte für alle Versicherungs-Kategorien.'
+                            : ($state==='general'?'Gespeicherter allgemeiner Banner-Fallback aus der Creative-Library.':'Gespeicherte Ziel-URL-Zuordnung aus der Creative-Library.')))),
             'target'=>$target,
             'alternatives'=>array(),
             'source'=>$multi_source?$record_source:($state==='general'?'creative_library_general_fallback':'creative_library_destination_map'),
