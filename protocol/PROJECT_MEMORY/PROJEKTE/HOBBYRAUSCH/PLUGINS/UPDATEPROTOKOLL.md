@@ -330,3 +330,65 @@ UNVERÄNDERT kein V1.12-Live-PASS und kein Deploymentauftrag.
 
 CURRENT:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
+
+
+---
+
+## PU-20261007-007 – HD-001 V1.12.1 read-only HOBBY_MASTER-V2-Bewertung
+
+PLUGIN-ID:
+`HD-001-KATEGORIE-WORKFLOW`
+
+VON / AUF:
+V1.12.0 Zielbaum-Baseline → V1.12.1 read-only Bewertungskandidat.
+
+WARUM:
+DataForSEO gehört bereits in den bestehenden WordPress-Pluginweg. Die neue HOBBY_MASTER-V2-Bewertung musste deshalb in HD-001 selbst eingebunden werden, ohne den fachlich überholten V1.12-Zielbaum zu schreiben.
+
+KORREKTUR ZU PU-20261007-006:
+Die dort notierte harte Staffel `13–15 Split / 16+ erforderlich` war eine Zwischeninterpretation und NICHT vom Konzept gedeckt.
+Verbindlich ist:
+- unter 4 zusammenlegen;
+- 4 Grenzfall;
+- 5–12 ideal;
+- 13–14 oberhalb ideal, keine automatische Teilung;
+- ab etwa 15 Teilung fachlich prüfen;
+- Hobby-Hub typischerweise 3–6 Leafs; ab etwa 10 eigenständigen Unterbereichen Macro-/Split-Prüfung.
+
+UMSETZUNG:
+- WordPress-Unterseite `Kategorien → V2-Hobbybewertung`;
+- Batch 001 eingebunden: 16 Hobbys / 34 vorgeschlagene Leafs / 263 Artikelintents;
+- genau 1 DataForSEO Keyword-Overview-Aufruf geplant;
+- DataForSEO dient nur Evidenz/Dedupe;
+- Cross-Hobby-/Ownership-Overlap wird markiert;
+- 0 Strukturwrites;
+- Target-Tree-Autorun und manueller Target-Tree-Refresh in diesem Kandidaten deaktiviert.
+
+ARTEFAKT:
+`HD001_V1.12.1_HOBBY_MASTER_V2_READONLY_ASSESSMENT_HARDPASS.zip`
+
+SHA-256:
+`959bc80217aac9b90ac107e6b315908b084704d09777ae9be990c2825245d33d`
+
+PRÜFBERICHT:
+`HD001_V1.12.1_FINAL_LOCAL_POSNEG_REPORT.txt`
+SHA-256:
+`3f34f58d0d7d35d0ac290e2926ac706f5fd6ff84e5a314d6ecde554204c89ac2`
+
+TEST:
+- PHP 59/59 PASS;
+- Legacy Regression 270/270 PASS;
+- V1.12 POS/NEG PASS;
+- realer 908/844/841-Lauf PASS;
+- V1.12.1 Grenz-/Negativtests PASS;
+- 0 Strukturwrites PASS.
+
+LIVE-GRENZE:
+Noch kein realer Hobby-Depot-DataForSEO-Batchlauf.
+Kein Zielbaum-Deployment.
+
+NEXT:
+V1.12.1 in Hobby Depot installieren und Batch 001 real im WordPress-Backend ausführen.
+
+CURRENT:
+`PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
