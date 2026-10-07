@@ -1030,8 +1030,10 @@ trait PPAR_Output_Objects_Trait {
 
         $payload=json_decode((string)($row['payload']??''),true);
         $payload=is_array($payload)?$payload:array();
+        $title_evidence=sanitize_key((string)($payload['title_source']??''))==='provider_missing'
+            ? '' : (string)($row['title']??'');
         $parts=array(
-            (string)($row['title']??''),
+            $title_evidence,
             (string)($row['description']??''),
             (string)($row['tags']??''),
             (string)($payload['provider_topic_name']??''),
@@ -1445,8 +1447,12 @@ trait PPAR_Output_Objects_Trait {
     }
 
     private function output_creative_specific_text($row) {
+        $payload=json_decode((string)($row['payload']??''),true);
+        $payload=is_array($payload)?$payload:array();
+        $title_evidence=sanitize_key((string)($payload['title_source']??''))==='provider_missing'
+            ? '' : (string)($row['title']??'');
         return implode(' ', array_filter(array(
-            (string) ($row['title'] ?? ''),
+            $title_evidence,
             (string) ($row['description'] ?? ''),
             (string) ($row['tags'] ?? ''),
             (string) ($row['destination_url'] ?? ''),
