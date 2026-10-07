@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.3 / REALER DATAFORSEO-BATCH KOMPLETT / V1.12.3 FREMDTREFFER-ZÄHLFEHLER ERKANNT / V1.12.4 ZERO-COST-NEUAUSWERTUNG LOKAL PASS
+STATUS: 3-SÄULEN-GRUNDKONZEPT FEST / V2-REGELN 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 GESAMTPFAD LOKAL HARD PASS / EINMALIGER LIVE-READBACK OFFEN
 
 ## Rolle
 
@@ -136,7 +136,7 @@ Nachgezogen:
 - Ziel pro unterster Kategorie: 5–12 eigenständige Artikelintents;
 - kleine valide Hobbys dürfen in stärkeren Übersichts-/Leaf-/Magazinstrukturen zusammengefasst werden, ohne ihre Hobby-Identität zu verlieren;
 - neue Zwischenkategorien werden erst im späteren Gesamt-Delta gebaut;
-- DataForSEO validiert Nachfrage, Synonyme und Intent-Trennung, erzeugt aber weder Struktur noch zusätzliche Artikelintents.
+- Fachlogik definiert und zählt die eigenständigen Artikelintents; DataForSEO validiert Nachfrage, Synonyme, Core-Keywords und Intent-Überschneidung, kann Dubletten zusammenführen, erzeugt aber weder Struktur noch zusätzliche Artikelintents und löscht keinen fachlich eigenständigen Intent nur wegen einer fehlenden exakten Longtail-Zeile.
 
 Konzeptaudit:
 `../SEO_KATEGORIEN/HOBBY_MASTER_V2_CONCEPT_AUDIT_20261007.md`
@@ -164,21 +164,43 @@ HD-001 V1.12.3 setzt genau diese fehlende zweite Evidenzstufe timeout-sicher um:
 
 Keine Struktur wird dabei erzeugt.
 
-## KISS-Korrektur nach realem Tiefenlauf
+## KISS-Korrektur nach vollständiger Fehlerkettenprüfung
 
-Der reale V1.12.3-Tiefenlauf ist abgeschlossen.
+Die reale DataForSEO-Evidence ist vollständig vorhanden.
 
-Dabei wurde sichtbar:
-Keyword-Ideas-Rohzeilen wurden technisch als zusätzliche Artikelintents gezählt.
-Das widerspricht dem Konzept.
+Die wiederholte technische Schleife hatte drei aufeinanderfolgende Fehlinterpretationen:
+- fehlende exakte DataForSEO-Zeile wurde zu stark als fehlender Content behandelt;
+- danach wurden Keyword-Ideas-Rohzeilen fälschlich als zusätzliche Artikel gezählt;
+- anschließend wurden fachlich definierte Artikel noch zu stark von einem lexikalischen Provider-Match abhängig gemacht.
 
-Verbindlich ab Regelvertrag 1.3:
-- Fachlogik definiert Leaf und Artikelintents;
-- DataForSEO bestätigt/vereinigt/dedupliziert diese Intents;
-- DataForSEO-Rohzeilen dürfen die Artikelzahl niemals selbst erhöhen.
+Verbindlich ab Regelvertrag 1.4:
 
-V1.12.4 wertet ausschließlich die bereits bezahlten Daten neu aus.
-Keine neue Recherche und keine neuen Kosten.
+1. **Fachlogik bestimmt die Content Capacity.**
+   Gezählt werden fachlich eigenständige Nutzer-/Suchintents pro unterster Kategorie.
+
+2. **DataForSEO ist der Abgleich.**
+   Es liefert Nachfrage, Primärkeyword, Synonyme, Core Keyword und Intent-Überschneidung.
+
+3. **DataForSEO darf deduplizieren.**
+   Wenn zwei fachliche Seeds nach echter Core-Keyword-/Synonym-Evidence dasselbe meinen, zählen sie einmal.
+
+4. **Fehlende exakte Longtail-Zeile löscht keinen Artikelintent.**
+   Nur dessen SEO-Metriken bleiben offen.
+
+5. **Provider-Rohzeilen erzeugen keine Artikel.**
+   Keyword Ideas/Suggestions sind im Normalweg keine automatische Content-Capacity-Stufe.
+
+Damit entspricht der Ablauf wieder dem Grundprinzip:
+**fachlich prüfen, wie viele Einzelbeiträge die unterste Kategorie trägt → DataForSEO abgleichen → danach Rolle/Größe entscheiden.**
+
+Der vollständige reale Batch wurde mit V1.12.5 lokal neu gerechnet:
+- 34 ideale Leafs;
+- Buchbinden = vollständiger HOBBY_HUB_CANDIDATE;
+- sechs weitere Hobbys liegen kapazitätsseitig im typischen Hubbereich, benötigen aber noch Scope-/Identitätsfreigabe;
+- drei Macro-Reviews;
+- ein Editorial-Thema;
+- fünf Aggregation-Reviews;
+- 0 Strukturwrites.
 
 ## Pilotbefund
 
@@ -202,19 +224,21 @@ Pluginversionen, technische Release-/Teststände und Live-Status ausschließlich
 
 ## Erster offener Blocker
 
-`HD001_V2_BATCH001_V124_ZERO_COST_RECALC_PENDING`
+`HD001_V2_BATCH001_V125_SINGLE_LIVE_READBACK_PENDING`
 
-Die komplette DataForSEO-Recherche ist vorhanden.
-Offen ist nur die korrigierte, kostenlose Neuauswertung derselben Daten.
+Kein weiterer Research-/DataForSEO-Schritt ist offen.
+
+Der komplette Batch-001-Pfad ist gegen das Konzept lokal bis zum Endergebnis geprüft.
 
 ## EXAKT EINE NEXT ACTION
 
-HD-001 V1.12.4 installieren und einmal die Seite `Kategorien → V2-Hobbybewertung` öffnen.
+Einmal HD-001 V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
 
-Die Neuauswertung erfolgt automatisch und ohne DataForSEO-Aufruf.
-Danach das neue Ergebnis-JSON prüfen.
+Das vorhandene Ergebnis wird ohne Provider-Aufruf nach Regelvertrag 1.4 neu berechnet.
+
+Danach das Ergebnis-JSON einmal readback-prüfen.
 
 Noch NICHT:
 - Zielbaum synchronisieren;
 - Kategorien schreiben;
-- aus Provider-Rohzeilen neue Artikel ableiten.
+- neue Keyword-Ideas-Recherche starten.
