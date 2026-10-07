@@ -1,7 +1,7 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-07
-STATUS: AKTIVE BEWERTUNGSBASIS / NOCH KEINE GESAMTBEWERTUNG
+STATUS: AKTIVE BEWERTUNGSBASIS / REGELVERTRAG GEBUNDEN / BATCH 001 AUSGEFÜHRT / NOCH KEINE GESAMTBEWERTUNG
 
 ## Datenartefakt
 
@@ -26,7 +26,10 @@ Schema:
 - davon 286 DIRECT;
 - 43 ASSISTED;
 - 512 derzeit monetarisierungsseitig UNKNOWN;
-- UNKNOWN bleibt erhalten und wird nicht gelöscht.
+- UNKNOWN bleibt erhalten und wird nicht gelöscht;
+- 19 Research-Queue-Kandidaten liegen zusätzlich außerhalb der 841 aktuellen Identitäten;
+- Intake-Check: 0 exakte/current-Alias-Kollisionen;
+- Fotografie ist als erstes provisorisches Intake-Delta vorbereitet, aber noch nicht in das Quellartefakt materialisiert.
 
 ## Rollenmodell
 
@@ -65,7 +68,19 @@ Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, 
 - `SEO_KATEGORIEN/HOBBY_MASTER_V2_INTEGRATION_20261007.md`
 - `SEO_KATEGORIEN/HOBBY_MASTER_V2_PILOT_20261007.md`
 
+## Bewertungsartefakte
+
+- Regeln: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
+- Batch 001: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
+- Research Intake: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
+- vorbereitetes Master-Intake-Delta: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
+
+Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
+Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
+0 Zielbaum-Writes sind aus dem Batch aktuell zulässig.
+
 ## Nächster Schritt
 
-Maschinenlesbare Bewertungsregeln auf den Master anwenden, zuerst als kontrollierter Batch.
-Keine direkte WordPress-Synchronisierung vor abgeschlossener Rollen-/Ownership-Prüfung.
+Fehlende Scope-/Content-Capacity-/Ownership-Evidenz für Batch 001 erzeugen und den identischen Batch danach erneut auswerten.
+
+Keine direkte WordPress-Synchronisierung und kein Zielbaum-Delta vor belastbarer Rollen-/Ownership-Prüfung.
