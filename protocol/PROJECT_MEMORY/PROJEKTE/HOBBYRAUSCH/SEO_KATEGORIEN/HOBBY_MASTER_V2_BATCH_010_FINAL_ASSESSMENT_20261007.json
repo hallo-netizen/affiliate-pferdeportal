@@ -1,0 +1,199 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_010_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_010_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:schmuckherstellung",
+      "canonical_name": "Schmuckherstellung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MACRO",
+      "publication_role": "ORIENTATION_UNIVERSE",
+      "viable_leaf_categories": null,
+      "ownership": "Owns generic jewelry-making orientation. Wire jewelry, casting, silversmithing, beading and other concrete techniques keep specific intents."
+    },
+    {
+      "hobby_id": "hobby:drahtschmuck",
+      "canonical_name": "Drahtschmuck",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns wire-based jewelry techniques, wire selection, forming, wrapping, connections and finishing."
+    },
+    {
+      "hobby_id": "hobby:chainmail",
+      "canonical_name": "Chainmail",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:kettenhemdflechten",
+      "natural_world": "fertigen",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "English/source term for the same chainmail-weaving practice; Kettenhemdflechten is the German canonical owner."
+    },
+    {
+      "hobby_id": "hobby:kettenhemdflechten",
+      "canonical_name": "Kettenhemdflechten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns maille ring patterns, ring selection, tools, assembly and finishing."
+    },
+    {
+      "hobby_id": "hobby:lederarbeiten",
+      "canonical_name": "Lederarbeiten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns general leathercraft: leather selection, cutting, stitching, edges, hardware and finishing. Specialized saddlery/embossing retain specific intents."
+    },
+    {
+      "hobby_id": "hobby:lederpragen",
+      "canonical_name": "Lederprägen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns tooling/stamping/embossing patterns and finishes on leather; generic leather construction stays with Lederarbeiten."
+    },
+    {
+      "hobby_id": "hobby:sattlerarbeiten",
+      "canonical_name": "Sattlerarbeiten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns saddlery-specific heavy leatherwork, straps/tack, stitching, hardware and repair/construction."
+    },
+    {
+      "hobby_id": "hobby:papierherstellung",
+      "canonical_name": "Papierherstellung",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns handmade paper from fibers/pulp through sheet forming, pressing, drying and surface treatment."
+    },
+    {
+      "hobby_id": "hobby:marmorpapier",
+      "canonical_name": "Marmorpapier",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns paper marbling baths, colors, patterns, paper preparation and finishing."
+    },
+    {
+      "hobby_id": "hobby:papierschopfen",
+      "canonical_name": "Papierschöpfen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns sheet-forming/papermaking technique as a focused practice under handmade Papierherstellung."
+    },
+    {
+      "hobby_id": "hobby:kalligrafie",
+      "canonical_name": "Kalligrafie",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 6,
+      "ownership": "Owns calligraphy tools, scripts, stroke technique, layout, inks/paper and practice projects."
+    },
+    {
+      "hobby_id": "hobby:federkiel-schreiben",
+      "canonical_name": "Federkiel-Schreiben",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns writing/calligraphy with quills, quill preparation and historical technique; broader lettering stays with Kalligrafie."
+    },
+    {
+      "hobby_id": "hobby:siegel-herstellen",
+      "canonical_name": "Siegel herstellen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "fertigen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns making seal matrices/stamps, designs, carving/engraving, handles and impressions."
+    },
+    {
+      "hobby_id": "hobby:wachssiegel",
+      "canonical_name": "Wachssiegel",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns wax selection, melting, stamping, color/effects and decorative sealing; making the seal tool itself stays with Siegel herstellen."
+    },
+    {
+      "hobby_id": "hobby:linolschnitt",
+      "canonical_name": "Linolschnitt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns linoleum print design, carving, inks, printing, registration and multi-color work."
+    },
+    {
+      "hobby_id": "hobby:holzschnitt",
+      "canonical_name": "Holzschnitt",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns woodblock print design, carving, block preparation, inking/printing and multi-block work."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 10,
+    "orientation_universe": 1,
+    "editorial_topic": 4,
+    "alias_only": 1,
+    "seo_enrichment_pending": 15,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 010 to ledger and generate the next batch."
+}
