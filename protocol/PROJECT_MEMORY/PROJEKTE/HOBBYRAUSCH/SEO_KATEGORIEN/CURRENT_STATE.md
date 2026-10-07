@@ -3,7 +3,7 @@
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
 STAND: 2026-10-07
-STATUS: BATCH 001 ECHTE DATAFORSEO-DATEN VOLLSTÄNDIG VORHANDEN / REGELN 1.4 KISS / V1.12.5 GESAMTER BATCH-PFAD LOKAL HARD PASS / EINMALIGER LIVE-READBACK OFFEN / KEIN ZIELBAUM-WRITE
+STATUS: REGELN 1.4 KISS / ECHTE DATAFORSEO-EVIDENCE VORHANDEN / V1.12.5 LIVE-READBACK WAR STALE V1.12.3-EXPORT / ROOT CAUSE GEFUNDEN / V1.12.6 STALE-EXPORT-FAILCLOSED LOKAL HARD PASS / NEUER REALER EXPORT OFFEN / KEIN ZIELBAUM-WRITE
 
 ## Ziel
 
@@ -173,116 +173,115 @@ Treibholz + Treibholz sammeln = eine Identität.
 Pro primärem Intent genau ein SEO-Owner.
 Andere Säulen dürfen Relation/Filter/Verweis sein, keine konkurrierende Zielseite.
 
-## Technischer V1.12.0–V1.12.5-Stand
+## Technischer V1.12.0–V1.12.6-Stand
 
-Die komplette Fehlerkette des Testbatches wurde bis zum Ende geprüft.
+Die komplette Batch-001-Fehlerkette wurde weitergeführt.
 
-Reale Datenbasis:
-- 16 Hobbys;
-- 34 fachlich vorgeschlagene unterste Kategorien;
-- 263 fachlich vorgeschlagene Artikelintents;
-- historisch 39 echte DataForSEO-Aufrufe;
-- historische Kosten ca. 0.9738 USD;
-- 0 WordPress-/HivePress-Strukturwrites.
+### Reale hochgeladene Readback-Datei nach V1.12.5
 
-Die zuletzt hochgeladene Ergebnisdatei ist weiterhin ein V1.12.3-Ergebnis.
-Sie ist bytegleich mit dem bereits geprüften V1.12.3-Ergebnis und enthält daher noch NICHT die spätere KISS-Neuberechnung.
+`hobby-master-v2-assessment-20261007-190209-utc.json`
 
-### Ursache der bisherigen Schleife
+SHA-256:
+`086456f70d8896c51a97a27f7dcdc29906ad90534f9322aa6f1f5a7b519d69ae`
 
-V1.12.1:
-fehlende exakte Longtail-Zeilen wurden zu stark als fehlende Content Capacity behandelt.
+Interne Metadaten:
+- plugin_version = 1.12.3;
+- result version = 1.1;
+- generated_at_utc = 2026-10-07T18:02:17+00:00;
+- DataForSEO paid_calls = 39;
+- Kosten ca. 0.9738 USD;
+- Strukturwrites = 0;
+- Summary = 0 Hub-Kandidaten / 2 ideale Leafs.
 
-V1.12.2/V1.12.3:
-Keyword-Ideas-Treffer wurden zur Tiefenmessung verwendet; dadurch konnten Provider-Rohzeilen Content Capacity künstlich erzeugen.
+Damit ist bewiesen:
+Der Download war KEIN neuer V1.12.5-Recalc-Readback, sondern bytegleich das alte gespeicherte V1.12.3-Ergebnis.
 
-V1.12.4:
-Rohzeilen erzeugten zwar keine neuen Artikel mehr, aber fachlich definierte Artikelintents wurden weiterhin zu stark von einem lexikalischen DataForSEO-Treffer abhängig gemacht.
+### Root Cause
 
-### Verbindliche KISS-Lösung ab Regeln 1.4 / HD-001 V1.12.5
+V1.12.5 führte die kostenlose KISS-Neuberechnung nur beim Rendern der V2-Adminseite aus.
 
-- Fachlogik definiert und zählt eigenständige Artikelintents.
-- Jede unterste Kategorie wird separat auf diese fachlich unterschiedlichen Intents geprüft.
-- DataForSEO ist der SEO-Abgleich.
-- Exaktes Core-Keyword-/Synonym-Evidence darf fachliche Dubletten zusammenführen.
-- Fehlt für einen fachlich eigenständigen Longtail eine exakte Provider-Zeile, bleiben nur seine SEO-Metriken offen; der Artikelintent bleibt bestehen.
-- Keyword-Ideas-/Suggestions-Rohzeilen erzeugen niemals zusätzliche Artikel.
-- automatische Tiefenrecherche ist im Normalweg deaktiviert.
+Der Download-Handler selbst exportierte lediglich `last_result()`.
 
-Damit ist der kostenpflichtige 38-Call-Depth-Weg NICHT mehr Bestandteil des Normalwegs.
+Folge:
+Ein alter Browser-Tab bzw. ein direkter Download nach Plugin-Update konnte weiterhin den unveränderten V1.12.3-Stand ausliefern.
 
-### V1.12.5 – vollständiger lokaler Endtest
+### V1.12.6 – KISS-Fix
+
+Der Download ist jetzt selbst die letzte fail-closed Grenze:
+
+1. gespeichertes Ergebnis laden;
+2. fehlt `capacity_recalculation.version = 1.0`, kostenlose KISS-Neuberechnung ausführen;
+3. neues Ergebnis speichern;
+4. erst danach exportieren;
+5. bei Fehler: Download BLOCKED statt altes JSON.
+
+Kein DataForSEO-Aufruf.
+Keine neuen Kosten.
+Keine Strukturwrites.
 
 Artefakt:
-`HD001_V1.12.5_KISS_CONTENT_CAPACITY_ZERO_DEPTH_HARDPASS.zip`
+`HD001_V1.12.6_STALE_EXPORT_FAILCLOSED_HARDPASS.zip`
 
 SHA-256:
-`68d521a9835bcbf2b2658dd0bd8d0a5163e6e1d656bf51855e20f830958a7af9`
+`788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
 
 Prüfbericht:
-`HD001_V1.12.5_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.6_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 SHA-256:
-`8a6768b4222dd086f3ff124579684feeed6f11f45f268d5596631de326002075`
+`c9442f08b722e93a24fee697cec09d77e67f1ad9cd23cda9067a5185e90b042e`
 
-Fresh-/Regressionstest:
-- PHP Source 68/68 PASS;
-- Legacy Regression 270/270 PASS;
-- V1.12 POS/NEG PASS;
-- realer 908/844/841-Bestand PASS;
-- V1.12.1 Assessment Regression PASS;
-- echtes V1.12.3-Ergebnis lokal neu ausgewertet PASS;
-- fehlende 14/15 exakte Provider-Zeilen löschen einen fachlich sauberen 3-Leaf-Hub NICHT PASS;
-- exaktes DataForSEO-Core-Keyword kann 5 fachliche Seeds korrekt auf 4 deduplizieren PASS;
-- Provider-/Depth-Rohzeilen erzeugen 0 zusätzliche Artikel PASS;
-- automatische Depth-Recherche = 0 Calls PASS;
-- 0 neue Provider-Kosten PASS;
-- 0 Strukturwrites PASS;
-- Neuberechnung idempotent PASS;
-- Fresh Release PHP 31/31 PASS.
+### Harte lokale Prüfung mit exakt der realen stale Datei
 
-Lokaler Replay des echten Batch-001-Ergebnisses:
+Direkter V1.12.6-Download-Replay:
+- plugin_version 1.12.6;
+- 16 Kandidaten;
 - 34 ideale Leafs;
 - 1 HOBBY_HUB_CANDIDATE;
 - 1 EDITORIAL_TOPIC_CANDIDATE;
 - 5 AGGREGATION_REVIEW;
 - 3 MACRO_REVIEW;
 - 6 EVIDENCE_REQUIRED;
-- 0 Zielbaum-Writes.
+- 0 Zielbaum-Writes;
+- 0 Provider-Calls hinzugefügt;
+- 0 Provider-Kosten hinzugefügt;
+- 0 WordPress-Strukturwrites.
 
-Kapazitätsseitig im typischen Hubbereich, aber noch mit Scope-/Identitätsprüfung:
-Airbrush 5 Leafs, Bean-to-Bar-Schokolade 6, Aeroponik 4, Ameisenhaltung 6, 3D-Bogenschießen 5, Wabikusa 4.
-
-Buchbinden ist im kontrollierten Batch der vollständige HOBBY_HUB_CANDIDATE:
-4 ideale Leafs mit 5 / 6 / 6 / 6 fachlich eigenständigen Artikelintents.
+Zusätzlich:
+- PHP-Lint 31/31 PASS;
+- ZIP-Integrität PASS;
+- idempotenter zweiter Download PASS;
+- kein gespeichertes Ergebnis → BLOCKED PASS;
+- Delta gegen V1.12.5 nur Header/README/Admin-Export-Gate/Kommentar.
 
 Beleg:
-`HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
+`HOBBY_MASTER_V2_BATCH_001_V126_STALE_EXPORT_READBACK_20261007.md`
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_V125_SINGLE_LIVE_READBACK_PENDING`
+`HD001_V2_BATCH001_V126_REAL_EXPORT_READBACK_PENDING`
 
-Es gibt keinen offenen DataForSEO-Rechercheblocker mehr.
+Der fachliche KISS-Recalc selbst ist lokal mit der echten gespeicherten Datei vollständig PASS.
 
-Der komplette Batch-001-Weg ist mit der echten gespeicherten DataForSEO-Evidence lokal bis zum Endergebnis durchsimuliert und hart getestet.
-
-Offen ist nur der einmalige reale WordPress-Readback des exakt getesteten V1.12.5-Artefakts.
+Offen ist nur noch der reale Export-Nachweis des gehärteten Download-Gates.
 
 ## EXAKT EINE NEXT ACTION
 
-Einmal HD-001 V1.12.5 in Hobby Depot installieren und `Kategorien → V2-Hobbybewertung` öffnen.
+HD-001 V1.12.6 in Hobby Depot installieren und direkt `Ergebnis als JSON herunterladen` klicken.
 
-V1.12.5 muss das vorhandene gespeicherte Ergebnis automatisch nach Regeln 1.4 neu berechnen.
+Kein DataForSEO starten.
+Kein Reset.
+Keine Tiefenprüfung nötig.
 
-Erwartung:
-- 0 neue DataForSEO-Aufrufe;
-- 0 neue DataForSEO-Kosten;
-- 0 Strukturwrites;
-- Result-Version 1.4 / Plugin 1.12.5;
-- dieselbe fachliche Batch-Summary wie im lokalen Real-Result-Replay.
+Der Download selbst muss jetzt:
+- Plugin-Version 1.12.6 ausgeben;
+- 34 ideale Leafs;
+- 1 Hub-Kandidat;
+- 0 neue Provider-Aufrufe;
+- 0 neue Kosten;
+- 0 Strukturwrites.
 
-Danach Ergebnis-JSON einmal herunterladen und readback-prüfen.
+Danach genau dieses JSON readback-prüfen.
 
 Noch kein Zielbaum-Delta.
 Noch kein Kategorien-Sync.
