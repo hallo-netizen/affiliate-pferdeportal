@@ -2,32 +2,37 @@
 
 <!-- CAMPUS_CURRENT_AUTHORITY_V1 -->
 
-STAND: 2026-10-05
-STATUS: HD-001 V1.9.9 LIVE CONTENT-PASS / V1.10.0 ENGINE-TESTS PASS ABER KEIN RELEASE / HD-002 PARALLEL-UPGRADE PAUSIERT
+STAND: 2026-10-07
+STATUS: HD-001 V1.12.0 LOKAL TECHNISCH PASS / FACHLICH V2-MASTER VORGESCHALTET / KEIN NEUER LIVE-RELEASE
 
 ## HD-001
 
 Einzige Plugin-Wahrheit:
 `PLUGIN_AKTEN/HD-001-KATEGORIE-WORKFLOW/CURRENT.md`
 
-Live:
-V1.9.9 Content-Pilot real bestätigt.
+Letzter autoritativ bestätigter Live-Content-Pass:
+V1.9.9 Buchbinden-Pilot.
 
-Entwicklung:
-V1.10.0 portalweite Engine lokal auf Maschinenebene positiv/negativ geprüft.
+Neueste technische Basis:
+V1.12.0 lokal vollständig POS/NEG geprüft.
 
-Aktueller Blocker und NEXT ACTION ausschließlich aus der HD-001-Plugin-Current.
+Kein V1.12.0-Live-PASS.
 
-Kein isoliertes V1.10.0 `CURRENT.zip`, solange der reale Gesamtportal-E2E nicht abgeschlossen ist.
+Die nach V1.12 eingeführte HOBBY_MASTER-V2-Größen-/Rollenlogik ist fachlich vorgeschaltet.
+Das alte V1.12-Hobby-Profil darf deshalb nicht ungeprüft deployed werden.
+
+Aktueller Blocker und NEXT ACTION ausschließlich aus der HD-001-Plugin-Current bzw. für die aktive Facharbeit aus `SEO_KATEGORIEN/CURRENT_STATE.md`.
 
 ## HD-002
 
 Einzige Plugin-Wahrheit:
 `PLUGIN_AKTEN/HD-002-TEXT-SEO/CURRENT.md`
 
-Der bereits erfasste Gesamtbestand bleibt bestehen.
-Kein neuer Gesamtbestand und kein paralleler Research-Neustart.
+Nicht Teil der aktuellen Kategorie-NEXT-ACTION.
 
 ## NEXT ACTION
 
-Für die aktuelle Kategoriearbeit ausschließlich der NEXT ACTION der HD-001-Plugin-Current folgen.
+Für die aktuelle Kategoriearbeit:
+`SEO_KATEGORIEN/START_HERE.md → AUTORITAETSPLAN → SEO_KATEGORIEN/CURRENT_STATE.md`
+
+Dort exakt die eine NEXT ACTION ausführen.
