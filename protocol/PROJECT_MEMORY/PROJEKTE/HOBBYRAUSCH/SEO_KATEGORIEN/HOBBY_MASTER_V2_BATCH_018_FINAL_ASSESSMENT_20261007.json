@@ -1,0 +1,198 @@
+{
+  "contract": "HOBBY_MASTER_V2_BATCH_018_FINAL_ASSESSMENT",
+  "version": "1.0",
+  "effective_date": "2026-10-07",
+  "status": "BATCH_018_FACHLICH_CLOSED__SEO_ENRICHMENT_DEFERRED__NO_TARGET_TREE_WRITE",
+  "rules_version": "HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json@1.4",
+  "selection_rule": "First 16 canonical source-master identities not present in the final-assessment ledger, in stable source order.",
+  "provider_policy": "No per-batch provider call. DataForSEO enrichment is consolidated after structural assessment.",
+  "decisions": [
+    {
+      "hobby_id": "hobby:dioramenmalerei",
+      "canonical_name": "Dioramenmalerei",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns painting/weathering specifically in diorama scenes; generic diorama construction and miniature painting remain separate."
+    },
+    {
+      "hobby_id": "hobby:murals-im-miniaturformat",
+      "canonical_name": "Murals im Miniaturformat",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns miniature mural/wall-painting applications within models/dioramas."
+    },
+    {
+      "hobby_id": "hobby:sandkunst",
+      "canonical_name": "Sandkunst",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns colored/kinetic/decorative sand art, materials, layering/forming and preservation."
+    },
+    {
+      "hobby_id": "hobby:sandbilder",
+      "canonical_name": "Sandbilder",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns flat/picture-based sand compositions; broader sand art remains with Sandkunst."
+    },
+    {
+      "hobby_id": "hobby:salzkunst",
+      "canonical_name": "Salzkunst",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns decorative art using colored/crystallized salt as the primary medium."
+    },
+    {
+      "hobby_id": "hobby:kristallzucht",
+      "canonical_name": "Kristallzucht",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "forschen",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Owns hobby crystal growing, solutions, nucleation/seeding, growth control and preservation."
+    },
+    {
+      "hobby_id": "hobby:bismut-kristalle-zuchten",
+      "canonical_name": "Bismut-Kristalle züchten",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "forschen",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns bismuth-specific melting/crystallization and oxide-color effects; generic crystal growing stays with Kristallzucht."
+    },
+    {
+      "hobby_id": "hobby:dorodango",
+      "canonical_name": "Dorodango",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns soil selection, forming, drying, polishing and finish of hikaru dorodango."
+    },
+    {
+      "hobby_id": "hobby:seifenblasenkunst",
+      "canonical_name": "Seifenblasenkunst",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "gestalten",
+      "size_class": "MICRO",
+      "publication_role": "EDITORIAL_TOPIC",
+      "viable_leaf_categories": 0,
+      "ownership": "Owns artistic/performative bubble solutions, tools, shapes and presentation."
+    },
+    {
+      "hobby_id": "hobby:metalldetektion",
+      "canonical_name": "Metalldetektion",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 5,
+      "ownership": "Canonical owner for recreational metal detecting: detectors, settings, search technique, target recovery and find handling."
+    },
+    {
+      "hobby_id": "hobby:sondeln",
+      "canonical_name": "Sondeln",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "ALIAS_OF",
+      "canonical_hobby_id": "hobby:metalldetektion",
+      "natural_world": "sammeln",
+      "size_class": "DUPLICATE_ALIAS",
+      "publication_role": "ALIAS_ONLY",
+      "viable_leaf_categories": 0,
+      "ownership": "Common German term for recreational metal detecting; one SEO owner."
+    },
+    {
+      "hobby_id": "hobby:magnetfischen",
+      "canonical_name": "Magnetfischen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns magnet/rope setup, search locations, retrieval technique and responsible find handling."
+    },
+    {
+      "hobby_id": "hobby:goldwaschen",
+      "canonical_name": "Goldwaschen",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns recreational placer prospecting, pans/classifiers, reading sediment and processing concentrates."
+    },
+    {
+      "hobby_id": "hobby:edelsteinsuche",
+      "canonical_name": "Edelsteinsuche",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns field searching for gemstones, locations/geology basics, tools and find identification."
+    },
+    {
+      "hobby_id": "hobby:mineraliensuche",
+      "canonical_name": "Mineraliensuche",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns field mineral hunting, locality research, tools, extraction/collecting and identification."
+    },
+    {
+      "hobby_id": "hobby:fossiliensuche",
+      "canonical_name": "Fossiliensuche",
+      "scope_status": "IN_SCOPE",
+      "identity_status": "CONFIRMED",
+      "natural_world": "sammeln",
+      "size_class": "FIT",
+      "publication_role": "HOBBY_HUB",
+      "viable_leaf_categories": 4,
+      "ownership": "Owns field fossil hunting, strata/localities, tools, extraction and initial identification."
+    }
+  ],
+  "final_summary": {
+    "assessed": 16,
+    "hobby_hub": 7,
+    "editorial_topic": 6,
+    "alias_only": 1,
+    "seo_enrichment_pending": 15,
+    "unresolved": 0,
+    "target_tree_writes_allowed": 0
+  },
+  "next_action": "Append Batch 018 to ledger and continue."
+}
