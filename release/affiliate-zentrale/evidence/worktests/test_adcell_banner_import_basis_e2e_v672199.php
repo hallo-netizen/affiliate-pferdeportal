@@ -11,8 +11,32 @@ update_option('ppar_network_adcell_v1', array(
 ), false);
 update_option('ppar_adcell_program_id_allowlist_v1', array(123), false);
 
+$provider_banner_fixture = array(
+    'programId'=>123,
+    'promotionId'=>393923,
+    'promotionCategoryId'=>77,
+    'clickoutLink'=>'https://t.adcell.com/p/click-schabracken',
+    'bannerUrl'=>'https://t.adcell.com/p/banner-schabracken',
+    'width'=>728,
+    'height'=>90,
+    'information'=>'Individueller Schabracken Designer',
+    'customNested'=>array(
+        'theme'=>'schabracken',
+        'source'=>'provider',
+        'flags'=>array(true, false, null),
+        'limits'=>array('min'=>0, 'max'=>'12.50'),
+    ),
+    'futureUnknown'=>array(
+        'deep'=>array(
+            'list'=>array(
+                array('x'=>1, 'enabled'=>true),
+                array('x'=>2, 'enabled'=>false),
+            ),
+        ),
+    ),
+);
 $http_calls = array();
-add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls) {
+add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls, $provider_banner_fixture) {
     $method = strtoupper((string)($args['method'] ?? 'GET'));
     $http_calls[] = $method . ' ' . $url;
 
@@ -34,17 +58,7 @@ add_filter('pre_http_request', function($pre, $args, $url) use (&$http_calls) {
             'status'=>200,
             'data'=>array(
                 'items'=>array(
-                    array(
-                        'programId'=>123,
-                        'promotionId'=>393923,
-                        'promotionCategoryId'=>77,
-                        'clickoutLink'=>'https://t.adcell.com/p/click-schabracken',
-                        'bannerUrl'=>'https://t.adcell.com/p/banner-schabracken',
-                        'width'=>728,
-                        'height'=>90,
-                        'information'=>'Individueller Schabracken Designer',
-                        'customNested'=>array('theme'=>'schabracken','source'=>'provider'),
-                    ),
+                    $provider_banner_fixture,
                     array(
                         'programId'=>123,
                         'promotionId'=>393924,
@@ -136,17 +150,18 @@ if ((string)($first['creative_title'] ?? 'x') !== ''
 }
 $ok('no_synthetic_provider_title');
 
-$raw = json_decode((string)($first['provider_raw_json'] ?? ''), true);
+$raw_json = (string)($first['provider_raw_json'] ?? '');
+$expected_raw_json = wp_json_encode($provider_banner_fixture, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$raw = json_decode($raw_json, true);
 if (!is_array($raw)
-    || (int)($raw['promotionId'] ?? 0) !== 393923
-    || (string)($raw['information'] ?? '') !== 'Individueller Schabracken Designer'
-    || (string)($raw['customNested']['theme'] ?? '') !== 'schabracken') {
-    $fail('raw_provider_payload_not_preserved');
+    || $raw !== $provider_banner_fixture
+    || $raw_json !== $expected_raw_json) {
+    $fail('raw_provider_payload_not_value_and_type_identical');
 }
-if (!hash_equals(hash('sha256', (string)$first['provider_raw_json']), (string)($first['provider_raw_sha256'] ?? ''))) {
+if (!hash_equals(hash('sha256', $raw_json), (string)($first['provider_raw_sha256'] ?? ''))) {
     $fail('raw_provider_payload_hash_mismatch');
 }
-$ok('full_provider_payload_preserved_with_hash');
+$ok('full_provider_payload_value_and_type_identical_with_hash');
 
 $second = $rows[1];
 if ((string)($second['creative_title'] ?? '') !== 'Original Provider Bannername'
@@ -260,10 +275,12 @@ if (!hash_equals(
     $fail('stored_raw_integrity_failed');
 }
 $stored_raw = json_decode((string)$stored_payload['_provider_raw_json'], true);
-if ((string)($stored_raw['customNested']['theme'] ?? '') !== 'schabracken') {
-    $fail('stored_nested_raw_lost');
+if (!is_array($stored_raw)
+    || $stored_raw !== $provider_banner_fixture
+    || (string)$stored_payload['_provider_raw_json'] !== $expected_raw_json) {
+    $fail('stored_full_provider_object_changed_or_lost');
 }
-$ok('full_provider_payload_reaches_library_unchanged');
+$ok('full_provider_payload_reaches_library_value_and_type_identical');
 
 // Technische Bildprüfung: reales Bildbytes-Fixture erzwingt gemessene 1x1 Pixel.
 // Providerangaben 728x90 bleiben als deklarierte Werte erhalten und werden als
