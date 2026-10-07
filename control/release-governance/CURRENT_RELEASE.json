@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 243,
+  "generation": 244,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -36,7 +36,7 @@
   },
   "active_candidate": {
     "version": "6.72.199",
-    "status": "WORKING_6_72_199_COMPLETE_CHECK24_DIRECT_PARTNER_GUARD_RERUN_OPEN",
+    "status": "BLOCKED_6_72_199_WORDPRESS_MARIADB_WORKTEST_EXECUTION_PATH_MISSING",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
@@ -44,12 +44,12 @@
     "current_source_manifest_sha256": "0f1c3f467d43ef742795929e02f82d3c64aec05c483bdb13bd6127b6179dbbff",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "Complete 6.72.199 source now includes the hardened ADCELL import basis, explicit Tarifcheck and CHECK24 Direct-partner selection, manual single-banner intake, non-evidence fallback-title provenance, and CHECK24 support through the existing safe comparison-family controls for Versicherungen and Kreditvergleich/Kosten without inventing an API. Manifest rebound after the final source changes. Exact guards must rerun; four WordPress/MariaDB worktests remain open. No installer.",
+    "candidate_reference_scope": "Exact 6.72.199 source is manifest-bound and release guards PASS. The four strengthened basis/direct-partner worktests remain unexecuted because the repository has no allowed version-neutral Affiliate WordPress/MariaDB runner; all existing Affiliate DB workflows are hard-bound to historical 6.72.170-6.72.198 candidates and stop before the current tests. Workflow modification remains forbidden by the bound governance. No ZIP and no release.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_REGENERATED_28_FILES_GUARD_RERUN_OPEN",
+    "source_binding_status": "MANIFEST_28_FILES_GUARDS_PASS_WORKTEST_RUNNER_BLOCKED",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -70,7 +70,7 @@
     "current_focus_scope_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "current_focus_reason": "The user explicitly added three requirements while the 6.72.199 basis gate is still open: Tarifcheck must be directly selectable in the shown backend filter, CHECK24 must be available as a Direct partner without inventing an unproven API contract, and individual banners must be insertable manually. These UI/intake additions do not alter ranking. During review, two target-contract gaps were also fixed: corrupt/missing ADCELL raw provider evidence now fails closed, and provider_missing display fallback titles are excluded from banner classification evidence.",
     "otto_work_status": "PAUSED_UNRESOLVED_NOT_PASSED_NOT_REPLACED",
-    "adcell_work_status": "6_72_199_COMPLETE_CHECK24_DIRECT_PARTNER_SOURCE_MANIFEST_BOUND_GUARD_RERUN_OPEN",
+    "adcell_work_status": "6_72_199_GUARDS_PASS_WORDPRESS_MARIADB_WORKTEST_EXECUTION_PATH_BLOCKED_AFF_ERR_055",
     "product_feed_policy": "OTTO_14336_AWIN_CREATE_A_FEED_PORTAL_FILTERED_PLUS_LOCAL_PRE_UPSERT_RELEVANCE_GATE",
     "automatic_distribution": [
       "CATEGORY_PRODUCT_RANK_1_2_3",
@@ -870,15 +870,15 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_199_COMPLETE_CHECK24_DIRECT_PARTNER_GUARD_RERUN_OPEN",
+    "state": "BLOCKED_6_72_199_WORDPRESS_MARIADB_WORKTEST_EXECUTION_PATH_MISSING",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the bound release guard against this exact final 6.72.199 source: governance-check, source-check, and start for branch affiliate-release-current; stop at the first real failure. If and only if those pass, execute the four isolated 6.72.199 worktests in a real WordPress/MariaDB harness. Do NOT build/install a ZIP and do NOT change ranking/target logic.",
-    "completion_condition": "EXACT_FINAL_6_72_199_GUARDS_PASS_AND_ALL_FOUR_ISOLATED_WORDPRESS_MARIADB_WORKTESTS_PASS",
+    "bound_user_scope_action": "Execute the four committed 6.72.199 worktests in a real WordPress/MariaDB harness against the exact manifest-bound source. Current repository automation cannot perform this because every available Affiliate WordPress/MariaDB workflow is hard-bound to an older version and .github/workflows changes are forbidden. Do not bypass old version checks, do not build/install a ZIP, and do not change banner ranking/target logic.",
+    "completion_condition": "ALL_FOUR_6_72_199_WORDPRESS_MARIADB_WORKTESTS_PASS_ON_EXACT_MANIFEST_SOURCE",
     "after_completion_action": "Only after the basis/direct-partner gate passes, run the existing complete Affiliate regression against the exact same source. Build no installer until that total regression is green.",
     "no_optional_detours": true,
-    "sequence": 91,
+    "sequence": 92,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
-    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
+    "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-055",
     "evidence_ref": null,
     "evidence_sha256": null,
     "current_source_manifest_sha256": "0f1c3f467d43ef742795929e02f82d3c64aec05c483bdb13bd6127b6179dbbff",
@@ -895,7 +895,11 @@
       "check_runs_at_pre_sync_head": "NONE",
       "installer_6_72_199": "DOES_NOT_EXIST_NOT_AUTHORIZED",
       "direct_partner_ui_6_72_199": "TARIFCHECK_CHECK24_MANUAL_SINGLE_BANNER_AND_COMPARISON_FAMILY_SOURCE_COMMITTED_NOT_YET_WORDPRESS_MARIADB_TESTED",
-      "guard_status": "RERUN_REQUIRED_AFTER_FINAL_CHECK24_SOURCE_CHANGE"
+      "guard_status": "PASS_GOVERNANCE_START_RUN_37595536094_SOURCE_RUN_37595536117",
+      "governance_check": "PASS_RUN_37595536094",
+      "start_guard": "PASS_RUN_37595536094",
+      "source_check": "PASS_RUN_37595536117_AFFILIATE_RELEASE_SOURCE_PASS",
+      "wordpress_mariadb_runner": "BLOCKED_AFF_ERR_055_NO_ALLOWED_VERSION_NEUTRAL_RUNNER"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
