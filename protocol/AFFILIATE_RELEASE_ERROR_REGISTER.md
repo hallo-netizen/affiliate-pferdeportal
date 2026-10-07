@@ -1288,3 +1288,27 @@ Current Generation 240 verwendet wieder den zulässigen Zustand `RUN_BOUND_RELEA
 - `release/affiliate-zentrale/evidence/worktests/test_direct_partner_manual_banner_v672199_e2e.php`
 
 **Status:** FIRST_REAL_BLOCKER / GUARDS_PASS / WORDPRESS_MARIADB_EXECUTION_PATH_MISSING / NO_ZIP / NO_RELEASE.
+
+
+### AFF-ERR-055 – Nachtrag 07.10.2026: versionsneutraler Worktest-Runner jetzt vorhanden
+
+**Korrektur des Blockers:** Der Teil „kein zulässiger versionsneutraler Runner vorhanden“ ist nach weiterer Arbeit nicht mehr aktuell. Unter dem erlaubten Worktest-Bereich existiert jetzt:
+
+`release/affiliate-zentrale/evidence/worktests/run_banner_import_basis_v672199.sh`
+
+Der Runner:
+- verlangt exakt Branch `affiliate-release-current`;
+- führt `governance-check`, `source-check` und `start` aus;
+- lintet alle vier 6.72.199-Pflichttests;
+- führt den statischen Basisvertrag aus;
+- prüft im WordPress-Harness die aktive Pluginversion 6.72.199;
+- vergleicht den installierten Pluginbaum bytegenau mit allen 28 Manifestdateien;
+- führt anschließend die drei WordPress/MariaDB-E2E-Tests nacheinander aus und stoppt beim ersten Fehler.
+
+Der Directpartner-Test wurde zugleich gehärtet: CHECK24 wird nicht mehr nur als Dropdown-/Speicherfall geprüft. Er beweist nun denselben Verify-before-Assign-Vertrag wie Tarifcheck: vor technischer Bildprüfung 0 Ziele; nach erfolgreicher Prüfung 66 reale Kostenpfade bzw. 14 echte Versicherungsblätter; kaputtes Bild bleibt fail-closed ohne Ziel; Runtime liest ausschließlich die gespeicherten CHECK24-Zielkarten.
+
+Der statische ADCELL-Basistest bindet zusätzlich den Frontend-Hardlock: neuer Basisnachlauf admin-/workergebunden; Output-Runtime ohne direkten Provider-HTTP; Ziel-URL-Auflösung nur in Import-/Background-Kontexten.
+
+**Verbleibender erster Blocker:** Es fehlt weiterhin der reale Lauf dieses Runners in einer WordPress/MariaDB-Umgebung. Der aktuell verfügbare lokale Ausführungscontainer besitzt weder MariaDB/Docker noch WordPress/WP-CLI und hat keinen GitHub-Netzzugriff; die bestehenden GitHub-Actions bleiben versionshart historisch gebunden. Daher weiterhin **kein PASS**, kein ZIP und keine Live-Installation.
+
+**Status:** RUNNER_PREPARED / TEST_CONTRACT_HARDENED / REAL_WORDPRESS_MARIADB_EXECUTION_HOST_OPEN / NO_RELEASE.
