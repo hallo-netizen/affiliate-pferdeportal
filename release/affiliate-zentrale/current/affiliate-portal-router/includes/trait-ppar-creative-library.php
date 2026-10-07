@@ -1138,13 +1138,9 @@ trait PPAR_Creative_Library_Trait {
         if ($partner_name === '') {
             return new WP_Error('creative_import_partner', 'Partnername fehlt.');
         }
-        $target_family = sanitize_key((string) ($source['target_family'] ?? ''));
-        $partner_key = remove_accents(strtolower($partner_name));
-        $is_comparison_direct = $provider === 'direct'
-            && (strpos($partner_key, 'tarifcheck') !== false || strpos($partner_key, 'check24') !== false);
-        if (!$is_comparison_direct || !in_array($target_family, array('kosten','versicherung'), true)) {
-            $target_family = '';
-        }
+        // Zielgruppe wird nicht mehr manuell im Import gesetzt. Die fachliche
+        // Zuordnung erfolgt fuer alle Banner automatisch aus den realen Evidenzen.
+        $target_family = '';
         return array(
             'provider'=>$provider,
             'partner_external_id'=>$partner_external_id,
@@ -1447,7 +1443,6 @@ trait PPAR_Creative_Library_Trait {
         $portal_key = sanitize_key((string) ($_POST['portal_key'] ?? ''));
         $allowed = array(
             'selected','unselected','plan_all','prepare_all',
-            'tarifcheck_family_kosten','tarifcheck_family_versicherung','tarifcheck_family_auto',
             'portal_use_auto','portal_remove_auto','portal_approve','portal_approve_fixed','portal_review','portal_veto','portal_automatic'
         );
         if (!in_array($mode, $allowed, true)) {
@@ -2007,8 +2002,7 @@ trait PPAR_Creative_Library_Trait {
                         <p><label><strong>Provider</strong><br><select id="ppar-library-provider" name="provider" required><?php foreach($provider_registry as $provider_key=>$provider_def): ?><option value="<?php echo esc_attr($provider_key); ?>" <?php selected((string)$default['provider'],$provider_key); ?>><?php echo esc_html((string)$provider_def['label']); ?></option><?php endforeach; ?></select></label></p>
                         <p><label><strong>Partner-ID</strong><br><input id="ppar-library-external" type="text" name="partner_external_id" maxlength="191" value="<?php echo esc_attr($default['external_id']); ?>"></label></p>
                         <p><label><strong>Partnername</strong><br><input id="ppar-library-name" type="text" name="partner_name" required maxlength="180" value="<?php echo esc_attr($default['name']); ?>"></label></p>
-                        <p><label><strong>Vergleichsportal-Zielgruppe</strong><br><select name="target_family"><option value="">Automatisch nur aus sicherer Ziel-URL</option><option value="versicherung">Versicherungen</option><option value="kosten">Kreditvergleich / Kosten</option></select></label><br><span class="description">Für Tarifcheck und CHECK24. Diese Auswahl wird als feste Fachzuordnung gespeichert und nicht aus dem Trackinglink geraten.</span></p>
-                    </div><div>
+                     </div><div>
                         <p><label><strong>Sammeldatei</strong><br><input type="file" name="creative_file" accept=".csv,.json,.txt"></label><br><span class="description">CSV, JSON oder TXT; maximal 20 MiB und 5.000 Werbemittel.</span></p>
                         <p><label><strong>Oder mehrere Banner-Codes gesammelt einfügen</strong><br><textarea name="creative_codes" rows="8" placeholder="Mehrere vollständige &lt;a&gt;&lt;img&gt;-Codes auf einmal"></textarea></label></p>
                         <p class="description"><strong>Tarifcheck:</strong> als Direktpartner auswählbar. <strong>CHECK24:</strong> ebenfalls als Direktpartner auswählbar. Es wird keine nicht belegte API vorausgesetzt; reale Banner können per Code oder händisch erfasst werden.</p>
@@ -2046,12 +2040,7 @@ trait PPAR_Creative_Library_Trait {
                     <option value="portal_use_auto">Automatik verwenden</option>
                     <option value="portal_remove_auto">Aus Automatik entfernen</option>
                     <option value="portal_veto">Sperren</option>
-                    <optgroup label="Tarifcheck / CHECK24 – angehakte Banner fest zuordnen">
-                        <option value="tarifcheck_family_versicherung">Vergleichsportal → Versicherungen</option>
-                        <option value="tarifcheck_family_kosten">Vergleichsportal → Kreditvergleich / Kosten</option>
-                        <option value="tarifcheck_family_auto">Vergleichsportal → wieder automatisch aus sicherer Ziel-URL</option>
-                    </optgroup>
-                    <optgroup label="Erweitert">
+                     <optgroup label="Erweitert">
                         <option value="prepare_all">Nur prüfen und sichere Entwürfe vorbereiten</option>
                         <option value="plan_all">Nur prüfen, noch nichts erzeugen</option>
                         <option value="portal_approve">Fachlich freigeben, Ziel und Slot automatisch</option>
@@ -2088,7 +2077,7 @@ trait PPAR_Creative_Library_Trait {
                                 if ($stored_target_label !== '') { $stored_target_labels[$stored_target_label] = $stored_target_label; }
                             }
                             ?>
-                            <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?><?php if (!empty($payload['_manual_target_family'])) : ?><br><strong>Feste Vergleichsportal-Gruppe:</strong> <?php echo esc_html((string)$payload['_manual_target_family'] === 'versicherung' ? 'Versicherungen' : 'Kreditvergleich / Kosten'); ?><?php endif; ?><br><strong>Provider-Kategorie:</strong> <?php echo esc_html($provider_category !== '' ? $provider_category : 'keine geliefert'); ?><br><strong>Zugeordnetes Portalziel:</strong> <?php echo esc_html($stored_target_labels ? implode(' | ', array_values($stored_target_labels)) : 'keine Zuordnung'); ?></p>
+                            <p class="ppar-library-meta"><?php echo esc_html($this->provider_label((string)$row['provider']) . ' · ' . (string) $row['partner_name']); ?><br><?php echo $row['width'] && $row['height'] ? absint($row['width']) . ' × ' . absint($row['height']) . ' px' : 'Reale Bildmaße noch nicht verifiziert'; ?> · <?php echo esc_html((string) ($payload['_dimension_state'] ?? 'pending')); ?><br><strong>Provider-Kategorie:</strong> <?php echo esc_html($provider_category !== '' ? $provider_category : 'keine geliefert'); ?><br><strong>Zugeordnetes Portalziel:</strong> <?php echo esc_html($stored_target_labels ? implode(' | ', array_values($stored_target_labels)) : 'keine Zuordnung'); ?></p>
                             <?php $slot_suitability=$this->creative_library_slot_suitability_summary($row,$slot_filter,$slot_options); if($slot_suitability!==''): ?><p class="ppar-library-meta"><strong><?php echo esc_html($slot_suitability); ?></strong></p><?php endif; ?>
                             <div class="ppar-library-topic"><strong>Portalstatus</strong><br><?php echo esc_html($this->creative_library_target_summary($row)); ?></div>
                             <?php if ($portals) : foreach ($portals as $decision_portal_key => $decision_portal) : $chief_decision=$this->output_portal_decision((string)$decision_portal_key,(string)($row['identity_hash']??'')); $chief_payload=is_array($chief_decision['payload']??null)?$chief_decision['payload']:array(); ?>
