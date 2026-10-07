@@ -1,7 +1,7 @@
 # HD-001 – KATEGORIE-WORKFLOW – CURRENT
 
 STAND: 2026-10-07
-STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.1 INITIALER REALER BATCH PASS / V1.12.2 LIVE-TIMEOUT ERKANNT / V1.12.3 RESUMABLE DEPTH LOKAL HARD PASS / REALER RESUME-LAUF OFFEN / KEIN ZIELBAUM-DEPLOYMENT
+STATUS: V1.12.0 ZIELBAUM-BASELINE PASS / V1.12.3 REALER DEPTH-LAUF KOMPLETT / FREMDTREFFER-ZÄHLFEHLER ERKANNT / V1.12.4 ZERO-COST-RECALC LOKAL HARD PASS / KEIN ZIELBAUM-DEPLOYMENT
 
 ## Plugin
 
@@ -73,80 +73,51 @@ Lokale Evidence aus dem exakten Release-Artefakt:
 
 ## Aktueller V2-Bewertungskandidat
 
-### Reale V1.12.1-Ausführung
-
-V1.12.1 wurde in Hobby Depot real ausgeführt.
-
-Ergebnis:
-- Batch 001;
-- 16 Hobbys;
-- 34 fachlich vorgeschlagene Leafs;
-- 263 vorgeschlagene Artikelintents;
-- 1 realer DataForSEO Keyword-Overview;
-- 106 / 263 exakte Keywords returned;
-- 157 exakte Seeds PENDING;
-- Kosten 0.02472 USD;
-- 0 WordPress-/HivePress-Strukturwrites;
-- Result SHA-256 `5857319ea29c2477159c9eddefe691e7a6e5fdb0d0c8161314f75b1474b51fe9`.
-
-Befund:
-Der erste Overview reicht für die vollständige V2-Content-Capacity nicht aus.
-`0 Hub-Kandidaten` ist deshalb kein endgültiger Negativbefund.
-
-### V1.12.2 – fachlich richtiger, technisch zu langer Depth-Request
-
-V1.12.2 plante korrekt:
-- 37 Keyword-Ideas-Aufrufe;
-- 1 finalen Keyword-Overview;
-- insgesamt 38 zusätzliche Calls;
-- 0 Strukturwrites.
-
-Live zeigte sich jedoch:
-alle 38 Calls liefen in EINEM WordPress-Request.
-Das führt zum Timeout und ist als Bedienweg verworfen.
-
-### V1.12.3 – resumable / timeout-sicher
-
 Plugin-Version:
-`1.12.3`
+`1.12.4`
 
 Artefakt:
-`HD001_V1.12.3_V2_DATAFORSEO_RESUMABLE_TIMEOUTSAFE_HARDPASS.zip`
+`HD001_V1.12.4_V2_RELEVANCE_RECALC_ZERO_COST_HARDPASS.zip`
 
 SHA-256:
-`bcb33caa3f481661654460db21cc1d407eb020124e85ab5941094f89ce2827a3`
+`5ceffaa03eda90b45a235cf844ff2ddae3bef553f2a61f4ec32ea38eefcf75f6`
 
 Prüfbericht:
-`HD001_V1.12.3_FINAL_LOCAL_POSNEG_REPORT.txt`
+`HD001_V1.12.4_FINAL_LOCAL_POSNEG_REPORT.txt`
 
 Prüfbericht SHA-256:
-`4b04319e0efc78d128af0d23141eff83751ed38256b9acdc81a8b9ef4977165e`
+`6b8938a5a5b46b1876a564f69f26f60048963e1fc1e5edbd879b7531bc643bb3`
 
-Verhalten:
-- einmalige Kostenbestätigung;
-- danach automatische Fortsetzung über kleine AJAX-Requests;
-- maximal 2 Keyword-Ideas-Calls pro HTTP-Request;
-- finaler Overview immer eigener Request;
-- Checkpoint nach JEDEM erfolgreichen bezahlten Call;
-- Browser-/PHP-Timeout verliert bereits bezahlte Evidence nicht;
-- erneutes Öffnen setzt am gespeicherten Cursor fort;
-- Providerfehler bleibt fail-closed und rückt den fehlgeschlagenen Cluster nicht weiter;
-- keine neue Kostenbestätigung beim Resume;
-- Gesamtplan bleibt 37 Ideas + 1 Overview = 38 Calls;
-- 0 WordPress-/HivePress-Strukturwrites.
+Zweck:
+bereits bezahltes V1.12.3-Ergebnis korrekt neu auswerten.
+
+KISS-Regel:
+- Artikelintents kommen aus der Fachlogik;
+- DataForSEO bestätigt/vereinigt/dedupliziert;
+- Keyword-Ideas-Rohzeilen erzeugen keine zusätzlichen Artikel;
+- nur passende Depth-Treffer dürfen einen bereits vorhandenen PENDING-Intent bestätigen;
+- keine neuen Provider-Aufrufe;
+- keine neuen Kosten;
+- keine Strukturwrites.
+
+Realer Result-Replay:
+- 541 gespeicherte Depth-Gruppen;
+- 2 echte Matches auf bisher PENDING fachliche Artikelintents;
+- 539 Rohgruppen zählen NICHT als neue Artikel;
+- DataForSEO-Calls bleiben 39;
+- Kosten bleiben ca. 0.9738 USD;
+- Zielbaum-Writes bleiben 0.
 
 Fresh-Unpack:
-- PHP 64/64 PASS;
+- PHP 66/66 PASS;
 - Legacy 270/270 PASS;
-- V1.12 POS/NEG PASS;
-- realer 908/844/841-Lauf PASS;
-- V1.12.1 / V1.12.2 Regression PASS;
-- voller 38-Call-Depth-Lauf in 20 begrenzten HTTP-Schritten PASS;
-- simulierter Provider-Timeout nach erstem bezahltem Call: Checkpoint PASS;
-- Resume ab gespeichertem Cursor PASS;
+- Relevanz-/Fremdkeywordtest PASS;
+- realer V1.12.3-Result-Replay PASS;
+- 0 neue Calls PASS;
+- 0 neue Kosten PASS;
 - 0 Strukturwrites PASS.
 
-V1.12.3 ist weiterhin nur Bewertungskandidat, kein Zielbaum-Deployment.
+V1.12.4 ist weiterhin nur Bewertungskandidat.
 
 ## Fachliche Fortschreibung NACH V1.12.0
 
@@ -181,25 +152,19 @@ Dieser Fehler wird NICHT durch manuelles Patchen des alten Livebaums gelöst, so
 
 ## ERSTER OFFENER BLOCKER
 
-`HD001_V2_BATCH001_RESUMABLE_DEPTH_RUN_PENDING`
+`HD001_V2_BATCH001_V124_ZERO_COST_RECALC_PENDING`
 
-Der reale Initiallauf ist abgeschlossen.
-Der noch fehlende Teil ist die laut Regelvertrag 1.2 notwendige Tiefenprüfung der 37 unvollständig belegten, bereits definierten Cluster.
+Die DataForSEO-Recherche ist komplett.
+Offen ist nur die korrigierte Neuberechnung derselben gespeicherten Evidence.
 
 ## EXAKT EINE NEXT ACTION
 
-V1.12.3 in Hobby Depot installieren und die Tiefenprüfung einmal starten.
+V1.12.4 in Hobby Depot installieren und einmal `Kategorien → V2-Hobbybewertung` öffnen.
 
-Danach läuft sie automatisch in kleinen gespeicherten Paketen.
-Bei Timeout/Browser-Unterbrechung Seite erneut öffnen; das Plugin setzt am gespeicherten Stand fort.
-
-Gesamtumfang bleibt:
-37 Keyword Ideas + 1 finaler Overview = 38 Calls.
+Die Seite korrigiert das gespeicherte COMPLETE-Ergebnis automatisch:
+0 Calls / 0 neue Kosten / 0 Strukturwrites.
 
 Danach neues Ergebnis-JSON herunterladen und fachlich prüfen.
-
-Kein Zielbaum-Write.
-Keine WordPress-/HivePress-Kategorieänderung.
 
 ## Release-/Artefaktgrenze
 
