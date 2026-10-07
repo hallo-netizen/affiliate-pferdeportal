@@ -1997,6 +1997,13 @@ JS;
             return $content;
         }
         $raw_post_content = (string) get_post_field('post_content', $post_id);
+        // KISS: Ein ausdrücklich gesetzter Vergleichsrechner ist die
+        // autoritative Affiliate-Ausgabe dieses Beitrags. Der Shortcode wurde
+        // von WordPress bereits gerendert; hier darf kein normaler Auto-Banner
+        // zusätzlich oder an seiner Stelle eingeplant werden.
+        if (has_shortcode($raw_post_content, 'affiliate_rechner')) {
+            return $content;
+        }
         if (has_shortcode($raw_post_content, 'pp_affiliate_slot') || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
             return $content;
         }
@@ -2024,9 +2031,12 @@ JS;
             return $content;
         }
 
-        // Wenn der Beitrag bereits bewusst Slots enthält, keine Auto-Dopplung erzwingen.
+        // Wenn der Beitrag bereits bewusst einen Rechner oder Slot enthält,
+        // keine automatische Banner-Ausgabe darüberlegen.
         $raw_post_content = (string) get_post_field('post_content', $post_id);
-        if (has_shortcode($raw_post_content, 'pp_affiliate_slot') || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
+        if (has_shortcode($raw_post_content, 'affiliate_rechner')
+            || has_shortcode($raw_post_content, 'pp_affiliate_slot')
+            || has_shortcode($raw_post_content, 'affiliate_portal_slot')) {
             return $content;
         }
 
