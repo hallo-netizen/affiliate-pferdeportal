@@ -1287,17 +1287,38 @@ trait PPAR_Output_Objects_Trait {
 
         $payload = json_decode((string)($row['payload'] ?? ''), true);
         $payload = is_array($payload) ? $payload : array();
-        $manual_family = sanitize_key((string)($payload['_manual_target_family'] ?? ''));
-        if (in_array($manual_family, array('kosten','versicherung'), true)) {
-            return $manual_family;
-        }
+        $title_source = sanitize_key((string)($payload['title_source'] ?? ''));
+        $real_title = in_array($title_source, array('provider_missing','manual_missing'), true)
+            ? '' : (string)($row['title'] ?? '');
 
-        $semantic = $this->output_destination_semantic_text($row);
-        if ($semantic === '') { return 'blocked'; }
-        $credit = preg_match('/(^|\\s)(kredit|kredite|kreditkarte|kreditkarten|darlehen|finanzierung|baufinanzierung)(\\s|$)/u', $semantic) === 1;
-        $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|haftpflicht|pferdehaftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
-        if ($credit && !$insurance) { return 'kosten'; }
-        if ($insurance && !$credit) { return 'versicherung'; }
+        // Ein einziger automatischer Evidenzweg, genau in Vertragsreihenfolge:
+        // 1. echte Ziel-URL, 2. echte Provider-Kategorie, 3. echter Bannertext.
+        // Keine manuelle Vergleichsportal-Gruppe und kein Raten bei Widerspruch.
+        $tiers = array(
+            $this->output_destination_semantic_text($row),
+            implode(' ', array_filter(array(
+                (string)($payload['provider_topic_name'] ?? ''),
+                (string)($payload['promotion_category_name'] ?? ''),
+            ))),
+            implode(' ', array_filter(array(
+                $real_title,
+                (string)($row['description'] ?? ''),
+                (string)($row['tags'] ?? ''),
+                (string)($payload['information'] ?? ''),
+                (string)($payload['banner_name'] ?? ''),
+                (string)($payload['name'] ?? ''),
+            ))),
+        );
+
+        foreach ($tiers as $tier) {
+            $semantic = $this->output_text((string)$tier);
+            if ($semantic === '') { continue; }
+            $credit = preg_match('/(^|\\s)(kredit|kredite|kreditvergleich|kreditrechner|kreditkarte|kreditkarten|darlehen|finanzierung|baufinanzierung)(\\s|$)/u', $semantic) === 1;
+            $insurance = preg_match('/(^|\\s)(versicherung|versicherungen|versicherungsvergleich|haftpflicht|pferdehaftpflicht|tierhalterhaftpflicht)(\\s|$)/u', $semantic) === 1;
+            if ($credit && !$insurance) { return 'kosten'; }
+            if ($insurance && !$credit) { return 'versicherung'; }
+            if ($credit && $insurance) { return 'blocked'; }
+        }
         return 'blocked';
     }
 
@@ -1391,10 +1412,6 @@ trait PPAR_Output_Objects_Trait {
         $semantic=$this->output_destination_semantic_text($row);
         $comparison_partner=$this->output_comparison_banner_partner($row);
         $tarifcheck_family=$this->output_tarifcheck_banner_family($row);
-        $manual_tarifcheck_family=sanitize_key((string)($payload['_manual_target_family']??''));
-        $manual_tarifcheck=in_array($manual_tarifcheck_family,array('kosten','versicherung'),true)
-            && $tarifcheck_family===$manual_tarifcheck_family;
-
         $portals=$this->output_portal_registry();
         $new_records=array();
         $mapped=0;
