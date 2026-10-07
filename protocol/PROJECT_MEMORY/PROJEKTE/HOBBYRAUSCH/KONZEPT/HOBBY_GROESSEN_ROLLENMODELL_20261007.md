@@ -22,6 +22,30 @@ Unverändert bleiben:
 Die bestehenden acht Hauptwelten gelten für den ersten Integrationslauf als GESCHÜTZT.
 Auch die aktuelle Zwischenstruktur wird zunächst als Baseline geschützt und nur dann marginal angepasst, wenn die neue Größenprüfung einen echten Überlastungs- oder Leerlaufbefund zeigt.
 
+### Harte Ebenenregel
+Die acht Hauptwelten sind die oberste fachliche Ebene des CORE-Hauptportals.
+
+`Hobbywelten` ist ausschließlich Übersichts-/Einstiegsseite bzw. View auf diese acht Welten und darf NICHT deren struktureller Parent sein.
+
+Damit gilt:
+- Gestalten / Fertigen / Technik / Forschen / Pflanzen / Tiere / Bewegen / Sammeln = Ebene 1;
+- Hobbywelten = zusätzlicher Einstieg, keine zusätzliche Taxonomieebene;
+- Beliebte Hobbys, ungewöhnlich, zuhause, günstig usw. = Views/Filter/kuratierte Einstiege, keine zweite Taxonomie.
+
+### Portfolio- und Integrationsziel
+Hobby Depot soll wirtschaftlich breiter werden, ohne zum beliebigen Massenlexikon zu explodieren.
+
+Integrierte Mischung:
+- große bekannte Hobbys = wirtschaftliche Anker;
+- mittlere Hobbys = stabiles Rückgrat;
+- Nischen-/ungewöhnliche Hobbys = SEO-Longtail und Differenzierung.
+
+Diese Klassen erzeugen KEINE parallelen Baumäste. Sie sind Eigenschaften/Präsentationsrollen derselben kanonischen Hobbyidentitäten.
+
+Der interne Hobbybestand darf groß sein.
+Die sichtbare Navigation bleibt klein und selektiv.
+Integration bedeutet: Hauptportal, Magazin, Hobbyfinder, Suche, kuratierte Views und HivePress referenzieren dieselben stabilen Hobby-/Themen-IDs statt konkurrierende Kopien zu erzeugen.
+
 ## 2. Neue Portalgrenze
 
 Hobby Depot ist NICHT "alles, was Menschen in ihrer Freizeit tun".
