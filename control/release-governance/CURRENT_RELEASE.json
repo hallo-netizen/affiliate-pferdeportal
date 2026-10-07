@@ -1,6 +1,6 @@
 {
   "contract": "PFERDE_ATELIER_AFFILIATE_RELEASE_GOVERNANCE_V4",
-  "generation": 250,
+  "generation": 251,
   "mode": "ENFORCED",
   "workstream": "AFFILIATE_ZENTRALE",
   "source_authority": {
@@ -8,7 +8,7 @@
     "container_root": "release/affiliate-zentrale/current",
     "plugin_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "manifest_sha256": "f5e39718487ad8130350d34629a904ba1c0a0798f62d29f5499d5661782acab0",
+    "manifest_sha256": "9e07fad88a31c53a708ac3e0ba64339a39c52e80719a0724a6445cc59777c874",
     "source_file_count": 28,
     "reconstruction": "FORBIDDEN",
     "generator_role": "NONE",
@@ -36,20 +36,20 @@
   },
   "active_candidate": {
     "version": "6.72.199",
-    "status": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_SOURCE_BOUND",
+    "status": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_PERFORMANCE_BOUND",
     "release_allowed": false,
     "source_container_root": "release/affiliate-zentrale/current",
     "source_root": "release/affiliate-zentrale/current/affiliate-portal-router",
     "current_source_manifest_ref": "release/affiliate-zentrale/CURRENT_SOURCE_SHA256.txt",
-    "current_source_manifest_sha256": "f5e39718487ad8130350d34629a904ba1c0a0798f62d29f5499d5661782acab0",
+    "current_source_manifest_sha256": "9e07fad88a31c53a708ac3e0ba64339a39c52e80719a0724a6445cc59777c874",
     "source_file_count": 28,
     "candidate_reference_artifact_sha256": null,
-    "candidate_reference_scope": "KISS source fix: the existing five-asset verification batch is retained unchanged in size, but banner assets are processed before products so large product inventories cannot starve banner verification. After verification the existing one-time stored target assignment remains unchanged. CHECK24 stored multi-target maps are now read with the same existing multi-target runtime contract as Tarifcheck. No frontend HTTP, no new ranking layer, no batch-size increase, no performance rollback.",
+    "candidate_reference_scope": "Final KISS operational fix: asset verification still processes at most five items per run. It first selects pending banners, then fills only unused slots with products. This prevents banner starvation behind large product inventories without increasing batch size or introducing a full mixed sort. Existing verify-then-single-assignment flow remains unchanged. CHECK24 stored multi-target runtime support remains bound.",
     "final_artifact_ref": null,
     "final_artifact_sha256": null,
     "handoff_artifact_filename": null,
     "handoff_artifact_bytes": null,
-    "source_binding_status": "MANIFEST_REGENERATED_28_FILES_KISS_BANNER_PRIORITY_AND_CHECK24_RUNTIME",
+    "source_binding_status": "MANIFEST_28_FILES_BANNER_FIRST_MAX5_NO_FULLSORT",
     "last_tested_artifact": {
       "version": "6.72.198",
       "run": 37501160643,
@@ -870,19 +870,19 @@
     }
   },
   "execution_state": {
-    "state": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_SOURCE_BOUND",
+    "state": "WORKING_6_72_199_KISS_BANNER_PATH_FIXED_PERFORMANCE_BOUND",
     "authorized_next_action": "RUN_BOUND_RELEASE_GATES",
-    "bound_user_scope_action": "Run the existing bound guards against the exact KISS-fixed 28-file source. Do not add new architecture or ranking logic. If guards pass, continue with the existing five-test runner when real ADCELL credentials/test host are available. No performance rollback.",
+    "bound_user_scope_action": "Run the existing bound guards against this exact 28-file KISS source. No new architecture, no ranking changes, no batch-size increase. After guards pass, continue through the already existing five-test runner when the real ADCELL test environment is available.",
     "completion_condition": "FIVE_TEST_RUNNER_PASS_ON_EXACT_28_FILE_SOURCE_WITH_REAL_ADCELL_PROVIDER_DATA",
     "after_completion_action": "Run the complete existing Affiliate regression against the exact same source. Only after total regression passes may installer/fresh-unpack/final SHA gates begin.",
     "no_optional_detours": true,
-    "sequence": 98,
+    "sequence": 99,
     "target_contract_ref": "protocol/AFFILIATE_RELEASE_BANNER_IMPORT_BASIS_TARGET_20261007.md",
     "error_ref": "protocol/AFFILIATE_RELEASE_ERROR_REGISTER.md#aff-err-054",
     "evidence_ref": null,
     "evidence_sha256": null,
-    "current_source_manifest_sha256": "f5e39718487ad8130350d34629a904ba1c0a0798f62d29f5499d5661782acab0",
-    "current_source_binding": "MANIFEST_REGENERATED_28_FILES_KISS_BANNER_PRIORITY_AND_CHECK24_RUNTIME",
+    "current_source_manifest_sha256": "9e07fad88a31c53a708ac3e0ba64339a39c52e80719a0724a6445cc59777c874",
+    "current_source_binding": "MANIFEST_28_FILES_BANNER_FIRST_MAX5_NO_FULLSORT",
     "final_installer": null,
     "pre_gate_proof": {
       "live_6_72_198_plugin_version": "USER_CONFIRMED_ACTIVE_6_72_198",
@@ -905,9 +905,9 @@
       "source_php_syntax": "PASS_RUN_37600399839_AFTER_LATEST_PLUGIN_SOURCE_CHANGE_BEFORE_HISTORICAL_6_72_171_ASSERT; NO_LATER_PLUGIN_PHP_CHANGE",
       "real_provider_gate": "REQUIRED_READY_NOT_EXECUTED_NO_REPOSITORY_WORKFLOW_BINDS_ADCELL_SECRETS",
       "failed_asset_retry": "SOURCE_FIXED_LATER_PROVIDER_REIMPORT_REOPENS_FAILED_ASSET_TO_PENDING_TEST_COMMITTED",
-      "kiss_banner_priority": "SOURCE_COMMITTED_LIMIT_5_UNCHANGED_BANNERS_BEFORE_PRODUCTS",
+      "kiss_banner_priority": "SOURCE_COMMITTED_TWO_SMALL_QUERIES_BANNERS_FIRST_PRODUCTS_FILL_FREE_SLOTS_MAX5",
       "check24_runtime_multi_target": "SOURCE_COMMITTED_CHECK24_66_14_STORED_MAP_SOURCES_RECOGNIZED",
-      "performance_contract": "NO_FRONTEND_HTTP_NO_BATCH_SIZE_INCREASE_NO_NEW_RANKING_LAYER"
+      "performance_contract": "MAX5_UNCHANGED_NO_MIXED_FULLSORT_NO_FRONTEND_HTTP_NO_NEW_RANKING_LAYER"
     },
     "authorized_change_prefixes": [
       "release/affiliate-zentrale/current/affiliate-portal-router/",
