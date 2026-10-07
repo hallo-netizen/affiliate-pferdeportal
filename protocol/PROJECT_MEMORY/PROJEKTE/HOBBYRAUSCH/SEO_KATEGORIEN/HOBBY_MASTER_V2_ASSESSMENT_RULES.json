@@ -1,0 +1,169 @@
+{
+  "format": "hobby-master-assessment-rules",
+  "schema_version": "1.0",
+  "revision": "HD-HM2-RULES-20261007",
+  "protected_architecture": {
+    "worlds": [
+      "gestalten",
+      "fertigen",
+      "technik",
+      "forschen",
+      "pflanzen",
+      "tiere",
+      "bewegen",
+      "sammeln"
+    ],
+    "world_change_policy": "BLOCKED_WITHOUT_EXPLICIT_CONCEPT_REVISION",
+    "intermediate_tree_first_pass": "BASELINE_PROTECTED",
+    "pillars": [
+      "core",
+      "editorial",
+      "directory"
+    ]
+  },
+  "decision_order": [
+    "scope",
+    "identity",
+    "size",
+    "content_capacity",
+    "economics",
+    "pillar_role",
+    "ownership"
+  ],
+  "scope": {
+    "required": [
+      "active_or_repeatable_leisure_practice",
+      "learnable_practicable_or_deepenable_activity_core",
+      "natural_fit_into_exactly_one_existing_world"
+    ],
+    "forced_world_fit_result": "SCOPE_REVIEW",
+    "no_ninth_world_automatically": true,
+    "outcomes": [
+      "IN_SCOPE",
+      "SCOPE_REVIEW",
+      "OUT_OF_SCOPE"
+    ]
+  },
+  "identity": {
+    "merge_checks": [
+      "exact_duplicate",
+      "alias",
+      "synonym",
+      "same_real_activity"
+    ],
+    "stable_id_required": true,
+    "variants_may_be_child_or_article": true
+  },
+  "size": {
+    "outcomes": [
+      "MICRO",
+      "FIT",
+      "MACRO",
+      "UNASSESSED"
+    ],
+    "macro_signals": [
+      "more_than_8_durable_leaf_categories",
+      "multiple_distinct_activity_identities",
+      "would_behave_like_own_portal"
+    ],
+    "micro_default": "NO_HUB_WITHOUT_CONTENT_CAPACITY"
+  },
+  "leaf_category": {
+    "target_articles_min": 5,
+    "target_articles_max": 12,
+    "minimum_with_exception": 4,
+    "split_review_min": 13,
+    "split_review_max": 15,
+    "above_15": "BLOCK_UNLESS_EXPLICIT_EXCEPTION",
+    "distinct_intent_required": true
+  },
+  "hobby_hub": {
+    "target_leaf_categories_min": 3,
+    "target_leaf_categories_max": 6,
+    "split_review_min": 7,
+    "split_review_max": 8,
+    "above_8": "ORIENTATION_UNIVERSE_OR_SPLIT",
+    "no_artificial_symmetry": true
+  },
+  "publication_roles": [
+    "ORIENTATION_UNIVERSE",
+    "HOBBY_HUB",
+    "EDITORIAL_TOPIC",
+    "ARTICLE_ONLY",
+    "FINDER_ONLY",
+    "OUT_OF_SCOPE"
+  ],
+  "economics": {
+    "monetization_values": [
+      "DIRECT",
+      "ASSISTED",
+      "NONE",
+      "UNKNOWN"
+    ],
+    "direct_or_assisted_effect": "CORE_PRIORITY_IF_SIZE_AND_CONTENT_PASS",
+    "none_or_unknown_effect": "RETAIN_AND_ROUTE_EDITORIAL_ARTICLE_OR_FINDER",
+    "never_delete_valid_hobby_for_monetization": true
+  },
+  "seo": {
+    "dataforseo_may_set": [
+      "demand_band",
+      "primary_keyword",
+      "synonyms",
+      "longtail_depth",
+      "intent_overlap_evidence"
+    ],
+    "dataforseo_may_not_set": [
+      "natural_world",
+      "parent_id",
+      "structural_role",
+      "intermediate_category"
+    ],
+    "role": "EVIDENCE_NOT_TAXONOMY_AUTHORITY"
+  },
+  "pillar_routing": {
+    "core": [
+      "HOBBY_HUB",
+      "ORIENTATION_UNIVERSE"
+    ],
+    "editorial": [
+      "EDITORIAL_TOPIC",
+      "ARTICLE_ONLY"
+    ],
+    "finder": [
+      "FINDER_ONLY",
+      "HOBBY_HUB",
+      "EDITORIAL_TOPIC",
+      "ARTICLE_ONLY"
+    ],
+    "directory_relation_only": true
+  },
+  "ownership": {
+    "one_primary_intent_one_seo_owner": true,
+    "applies_across": [
+      "core",
+      "editorial",
+      "directory"
+    ],
+    "exact_primary_keyword_duplicate": "BLOCKED",
+    "same_primary_intent_duplicate": "BLOCKED",
+    "relation_or_filter_without_seo_owner": "ALLOWED"
+  },
+  "visibility": {
+    "prominence_is_not_taxonomy": true,
+    "allowed_views": [
+      "popular",
+      "recommended",
+      "unusual",
+      "home",
+      "outdoor",
+      "cheap",
+      "seasonal"
+    ],
+    "views_must_reference_canonical_owner": true
+  },
+  "safety": {
+    "unassessed_auto_publish": false,
+    "no_mass_tree_write_before_full_assessment": true,
+    "target_tree_changes_must_be_delta": true
+  }
+}
