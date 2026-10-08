@@ -1,0 +1,79 @@
+{
+  "contract": "HD001_GLOBAL_CORE_359_RULE16_FINAL_AUDIT",
+  "version": "1.0",
+  "date": "2026-10-08",
+  "status": "PASS__CORE_359_COMPLETE__VISIBLE_HUB_LEVEL_COMPLETE__TARGET_PROFILE_BUILD_PENDING",
+  "authority": {
+    "target_contract": "2.6",
+    "assessment_rules": "1.6",
+    "world_intermediate_target": "HD001_BALANCED_WORLD_INTERMEDIATE_TARGET_20261008.json"
+  },
+  "current_core_input": {
+    "count": 359
+  },
+  "role_result": {
+    "decided": 359,
+    "missing_count": 0,
+    "missing": [],
+    "hobby_hub": 279,
+    "orientation_universe": 53,
+    "editorial_topic": 22,
+    "alias_only": 5,
+    "final_core_identity_pages": 332,
+    "current_core_demotions_to_editorial": 22,
+    "current_core_alias_consolidations": 5
+  },
+  "visible_structure": {
+    "worlds": 8,
+    "intermediate_nodes": 65,
+    "intermediate_counts_by_world": [
+      7,
+      10,
+      11,
+      5,
+      9,
+      7,
+      8,
+      8
+    ],
+    "hobby_hubs_expected": 279,
+    "hobby_hubs_with_visible_content_layer": 279,
+    "visible_content_categories": 1292,
+    "all_existing_levels_visible": true,
+    "drilldown": "WELT → optional existing ZWISCHENBEREICH → HOBBY_HUB → CONTENT-KATEGORIE → BEITRÄGE"
+  },
+  "content_layer_evidence": {
+    "historical_rule16_reconstructions": {
+      "hubs": 84,
+      "categories": 397
+    },
+    "global_198_recheck_blocks": {
+      "hubs": 154,
+      "categories": 696,
+      "files": [
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_GESTALTEN_GENUSS_20261008.json",
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_ASTRONOMIE_MIKROSKOPIE_20261008.json",
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_WETTER_NATUR_MESSEN_20261008.json",
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_PFLANZEN_20261008.json",
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_TIERE_20261008.json",
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_BEWEGEN_20261008.json",
+        "HD001_GLOBAL_CORE_RECHECK_RULE16_SAMMELN_20261008.json"
+      ]
+    },
+    "remaining_batch001_003_and_expansion19": {
+      "hubs": 41,
+      "categories": 199,
+      "file": "HD001_REMAINING_41_HUBS_RULE16_VISIBLE_LEAF_MATERIALIZATION_20261008.json"
+    }
+  },
+  "validation": {
+    "all_359_decided": true,
+    "all_hobby_hubs_have_visible_content_layer": true,
+    "hub_leaf_count_rule": "3-6",
+    "leaf_intent_capacity_rule": "5-12 ideal",
+    "capacity_violations": 0,
+    "wordpress_writes": 0,
+    "plugin_changes": 0
+  },
+  "next_action": "Build one new fachliches Sollprofil from this final audit and the 65-node world/intermediate target. Do not modify/install/sync any plugin and do not write WordPress before the Sollprofil itself passes a full structural audit."
+}
