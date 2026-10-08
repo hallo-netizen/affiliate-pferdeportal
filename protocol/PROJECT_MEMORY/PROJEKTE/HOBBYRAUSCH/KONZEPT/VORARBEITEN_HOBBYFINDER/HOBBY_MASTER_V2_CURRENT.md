@@ -1,9 +1,14 @@
 # HOBBY DEPOT – HOBBY MASTER V2 – CURRENT DATA POINTER
 
 STAND: 2026-10-08
-STATUS: AKTIVES 841ER INVENTAR / REGELN 1.5 PRAKTISCH / BATCH 001–003 NUR KALIBRIERUNG / BATCH 004+ GESTRICHEN / 340 CORE + 501 FINDER-EDITORIAL / V1.13.1 FINALZIEL LOKAL PASS / LIVE-DRYRUN OFFEN
+STATUS: DATENZEIGER / KEINE CURRENT-AUTORITÄT / 841ER QUELLMASTER NOCH UNVERÄNDERT / 19 EXPANSION-ANKER FINAL BEWERTET / MASTER- UND TARGET-DELTA AUSSTEHEND / KEIN LIVE-SYNC
 
-## Datenartefakt
+WICHTIG:
+Dieser Text ist nur ein Datenzeiger.
+Autoritative Fachwahrheit:
+`../../SEO_KATEGORIEN/CURRENT_STATE.md`
+
+## Quellmaster
 
 Persistente Ablage:
 `/hobby rausch/HOBBY_DEPOT_HOBBY_MASTER_V2_20261007.json`
@@ -17,32 +22,17 @@ Format:
 Schema:
 `2.0-draft`
 
-## Bestand
-
+Aktueller unveränderter Quellbestand:
 - 908 Rohzeilen;
 - 844 exakte unterschiedliche Namen;
-- 841 kanonische Identitäten nach aktuell bekannten Alias-Zusammenführungen;
-- 329 vorhandene V1.12-Monetarisierungs-/CORE-Regeln übernommen;
-- davon 286 DIRECT;
+- 841 kanonische Identitäten;
+- 329 übernommene V1.12-Monetarisierungs-/CORE-Regeln;
+- 286 DIRECT;
 - 43 ASSISTED;
-- 512 derzeit monetarisierungsseitig UNKNOWN;
-- UNKNOWN bleibt erhalten und wird nicht gelöscht;
-- 19 Research-Queue-Kandidaten liegen zusätzlich außerhalb der 841 aktuellen Identitäten;
-- Intake-Check: 0 exakte/current-Alias-Kollisionen;
-- Fotografie ist als erstes provisorisches Intake-Delta vorbereitet, aber noch nicht in das Quellartefakt materialisiert.
+- 512 UNKNOWN.
 
-## Rollenmodell
-
-Mögliche spätere Publikationsrollen:
-- ORIENTATION_UNIVERSE
-- HOBBY_HUB
-- EDITORIAL_TOPIC
-- ARTICLE_ONLY
-- FINDER_ONLY
-- OUT_OF_SCOPE
-
-Aktuell ist der Großteil bewusst `UNASSESSED`.
-Keine Massenfreigabe aus dem Master ableiten.
+Die 19 Expansion-Kandidaten liegen noch außerhalb dieser 841 Identitäten.
+Sie werden erst mit dem jetzt anstehenden Master-/Target-Delta materialisiert.
 
 ## Geschützte Architektur
 
@@ -55,78 +45,56 @@ Keine Massenfreigabe aus dem Master ableiten.
 - Bewegen
 - Sammeln
 
-Diese acht Welten bleiben im ersten Integrationslauf geschützt.
+Keine neunte Welt.
+Keine Blind-Promotion.
+Keine DataForSEO-Strukturerfindung.
 
-## Neue Research Queue
+## Finale 19er-Bewertung
 
-Bekannte/breite Hobby-Kandidaten werden zunächst nur geprüft, nicht automatisch publiziert:
-Fotografie, Malen, Zeichnen, Nähen, Stricken, Häkeln, Holzwerken, Heimwerken, Wandern, Radfahren, Camping, Schwimmen, Klettern, Bouldern, Gärtnern, Gemüseanbau, Briefmarken sammeln, Angeln, Plane Spotting.
+Beleg:
+`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_EXPANSION_ANCHORS_19_FINAL_ASSESSMENT_20261008.json`
 
-## Autoritative Konzeptreferenzen
+Ergebnis:
+- 19/19 IN_SCOPE;
+- 0 exakte/current-Alias-Kollisionen;
+- 12 HOBBY_HUB;
+- 7 ORIENTATION_UNIVERSE;
+- 19 strukturell CORE-fähig;
+- Monetarisierung bleibt bei allen 19 bis zu echtem Provider-Match UNKNOWN;
+- keine WordPress-Content-Kategorien wurden durch die Capacity-Prüfung erzeugt.
 
-- `KONZEPT/HOBBY_GROESSEN_ROLLENMODELL_20261007.md`
-- `SEO_KATEGORIEN/HOBBY_MASTER_V2_INTEGRATION_20261007.md`
-- `SEO_KATEGORIEN/HOBBY_MASTER_V2_PILOT_20261007.md`
+ORIENTATION_UNIVERSE:
+Fotografie, Holzwerken, Radfahren, Camping, Klettern, Gärtnern, Angeln.
 
-## Bewertungsartefakte
+HOBBY_HUB:
+Malen, Zeichnen, Nähen, Stricken, Häkeln, Heimwerken, Wandern, Schwimmen, Bouldern, Gemüseanbau, Briefmarken sammeln, Plane Spotting.
 
-- Regeln: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_ASSESSMENT_RULES_20261007.json`
-- Batch 001: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_RESULTS_20261007.json`
-- Research Intake: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_RESEARCH_INTAKE_20261007.json`
-- vorbereitetes Master-Intake-Delta: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_INTAKE_DELTA_001_20261007.json`
-- Fachvorprüfung: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_SUBJECT_PREFLIGHT_20261007.json`
-- DataForSEO-Request: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DATAFORSEO_REQUEST_20261007.json`
-- realer Initialbefund: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_REAL_RESULT_20261007.md`
-- KISS-Endreplay des echten Ergebnisses: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V125_KISS_REPLAY_20261007.md`
-- realer V1.12.6-Readback: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_V126_REAL_READBACK_20261007.md`
-- finale fachliche Batch-001-Bewertung: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_FINAL_ASSESSMENT_20261007.json`
-- Depth-Plan: `../../SEO_KATEGORIEN/HOBBY_MASTER_V2_BATCH_001_DEPTH_PLAN_20261007.json`
-- WordPress-Bewertungskandidat: HD-001 V1.12.6 / SHA-256 `788b49529216555cba8cd74aae2a3a469f5f386e7ea2dc3d0449555910d55dca`
+## Aktueller lokal getesteter Plugin-/Zielstand
 
-Batch 001 enthält reproduzierbar 16 aktuelle Master-Identitäten.
-Kein Kandidat wurde aus Monetarisierung allein strukturell hochgestuft.
-0 Zielbaum-Writes sind aus dem Batch aktuell zulässig.
-
-## Produktionsstatus
-
-Die 841 kanonischen Identitäten bleiben vollständig erhalten.
-
-Sie werden nicht mehr einzeln durch weitere 16er-Batches geschickt.
-
-Batch 001–003:
-- 48 Identitäten detailliert geprüft;
-- dienen nur als Kalibrierung;
-- keine weitere Batchserie.
-
-Finale praktische Zuordnung:
+V1.14.0 bleibt bis zum neuen Delta der letzte lokal vollständig getestete Stand:
+- 841 Identitäten;
 - 340 CORE;
 - 501 Finder/Editorial;
-- 12 kalibrierte CORE-Promotionen;
-- 1 kalibrierte CORE-Demotion.
+- 59 aktive Zwischenbereiche;
+- 446 Logikknoten;
+- 437 physische Zielobjekte;
+- 410 Pages;
+- 96 Header-Navigationseinträge.
 
-Finales Zielprofil:
-`/hobby rausch/HD001_V1.13.1_PRACTICAL_TARGET_PROFILE_20261008.json`
+Artefakt:
+`HD001_V1.14.0_STRUCTURE_NAV_MAGAZIN_FULL_POSNEG_HARDPASS.zip`
 
-Profil SHA-256:
-`f5c6d9e5be7ee6184c50ded9db40549f4b1e2d2a8c29672f4eb7aa172ea8e014`
+Artefakt SHA-256:
+`87246ecd24b1facc5c3b80c0e3593b2a0bd9391143ef6f190d6786ecfa62cda3`
 
-Finaler Audit:
-`../../SEO_KATEGORIEN/HOBBY_MASTER_V2_PRACTICAL_FINAL_TARGET_AUDIT_20261008.json`
+Zielprofil SHA-256:
+`6dda22c63fb23593b2eee8d8fbc067e9f732430cad70d5c0576bca40b95a474c`
 
-Zielbaum:
-- 103 Basis-Logikknoten;
-- 440 aufgelöste Logikknoten;
-- 431 physische Zielobjekte;
-- 8 Welten sind CORE-Roots;
-- Hobbywelten ist View, kein Parent.
+## EXAKT EINE NEXT ACTION
 
-## Nächster Schritt
+Die 19 final bewerteten Entscheidungen als begründetes Master-/Target-Delta materialisieren und daraus genau einen neuen V1.14-Finalkandidaten bauen.
 
-Kein Batch 004.
+Danach:
+kompletter lokaler POSITIV + NEGATIV E2E → bei vollständigem PASS Live-Dry-Run → erst danach kontrollierter Live-Sync.
 
-Einziger offener Schritt:
-V1.13.1 real installieren und unter Kategorien den Finalen Zielbaum öffnen und den finalen Delta-Dry-Run ausführen.
-
-0 DataForSEO.
-0 Strukturwrites im Dry-Run.
-Erst den Live-Dry-Run prüfen, dann genau einen Sync.
+Kein Live-Sync vorher.
